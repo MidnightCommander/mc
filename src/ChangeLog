@@ -1,3 +1,8 @@
+2003-02-23  Pavel Roskin  <proski@gnu.org>
+
+	* key.c (init_key_x11): Don't try to use X11 if DISPLAY is not
+	set in the environment.
+
 2003-02-22  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* key.c: Add support for dynamic loading of libX11.

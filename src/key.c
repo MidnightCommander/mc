@@ -259,7 +259,7 @@ static Bool (*func_XQueryPointer) (Display *, Window, Window *, Window *,
 				   unsigned int *);
 
 static GModule *x11_module;
-#endif /* HAVE_GMODULE */
+#endif				/* HAVE_GMODULE */
 
 static Display *x11_display;
 static Window x11_window;
@@ -269,7 +269,12 @@ init_key_x11 (void)
 {
 #ifdef HAVE_GMODULE
     gchar *x11_module_fname;
+#endif				/* HAVE_GMODULE */
 
+    if (!getenv ("DISPLAY"))
+	return;
+
+#ifdef HAVE_GMODULE
     x11_module_fname = g_module_build_path (NULL, "X11");
 
     if (!x11_module_fname)
