@@ -689,7 +689,8 @@ static int read_header (struct tarfs_archive *archive, int tard)
             inode->mode |= S_IFBLK;
         } else if (header->header.linkflag == LF_FIFO) {
             inode->mode |= S_IFIFO;
-        }
+        } else 
+	    inode->mode |= S_IFREG;
 
 	inode->rdev = 0;
 	if (!strcmp (header->header.magic, TMAGIC)) {
