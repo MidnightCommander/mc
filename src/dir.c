@@ -524,7 +524,7 @@ if_link_is_exe (char *directory, file_entry *file)
     struct stat b;
     char *full_name;
 
-    full_name = g_concat_dir_and_file (directory, file->fname);
+    full_name = concat_dir_and_file (directory, file->fname);
     
     if (S_ISLNK (file->buf.st_mode)) {
 	full_name = concat_dir_and_file (directory, file->fname);

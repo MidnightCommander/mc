@@ -268,6 +268,43 @@ run_cmd (void)
 }
 
 static void
+gnome_exit (void)
+{
+	GtkWidget *w;
+	int v;
+	
+	w = gnome_message_box_new (
+		_("Notice that if you choose to terminate the file manager, you will\n"
+		  "also terminate the GNOME desktop handler.\n\n"
+		  "Are you sure you want to quit?"),
+		GNOME_MESSAGE_BOX_WARNING,
+		GNOME_STOCK_BUTTON_YES,
+		GNOME_STOCK_BUTTON_NO,
+		NULL);
+	v = gnome_dialog_run (GNOME_DIALOG (w));
+	if (v != 0)
+		return;
+
+	w = gnome_message_box_new (
+		N_("The file manager and the desktop handler are now terminating\n\n"
+		   "If you want to start up again the desktop handler or the file manager\n"
+		   "you can launch it from the Panel, or you can run the UNIX command `gmc'\n\n"
+		   "Press OK to terminate the application, or cancel to continue using it."),
+		GNOME_MESSAGE_BOX_INFO,
+		GNOME_STOCK_BUTTON_OK,
+		GNOME_STOCK_BUTTON_CANCEL,
+		NULL);
+	v = gnome_dialog_run (GNOME_DIALOG (w));
+	if (v == 0){
+		/*
+		 * We do not want to be restarted by the session manager now
+		 */
+		gnome_client_set_restart_style (session_client, GNOME_RESTART_NEVER);
+		gmc_do_quit ();
+	}
+}
+
+static void
 do_desktop_rescan_devices (void)
 {
 	desktop_reload_icons (FALSE, 0, 0);
@@ -356,6 +393,9 @@ GnomeUIInfo gnome_panel_commands_menu [] = {
 #ifdef WITH_BACKGROUND
 	GNOMEUIINFO_ITEM_NONE( N_("_Background jobs..."),   N_("List of background operations"), jobs_cmd ),
 #endif
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_ITEM_STOCK (N_("Exit"), N_("Terminates the file manager and the desktop"),
+				gnome_exit, GNOME_STOCK_PIXMAP_QUIT),
         GNOMEUIINFO_END
 };
 
@@ -374,13 +414,22 @@ GnomeUIInfo gnome_panel_desktop_menu [] = {
 	GNOMEUIINFO_END
 };
 
-#define GNOME_PANEL_MENU_DESKTOP_INDEX 5
-GnomeUIInfo gnome_panel_menu [] = {
+GnomeUIInfo gnome_panel_menu_with_desktop [] = {
         GNOMEUIINFO_MENU_FILE_TREE(gnome_panel_file_menu),
         GNOMEUIINFO_MENU_EDIT_TREE(gnome_panel_edit_menu),
         GNOMEUIINFO_SUBTREE(N_("_Layout"),gnome_panel_layout_menu),
         GNOMEUIINFO_SUBTREE(N_("_Commands"),gnome_panel_commands_menu),
 	GNOMEUIINFO_SUBTREE(N_("_Desktop"), gnome_panel_desktop_menu),
+	GNOMEUIINFO_SUBTREE(N_("_Help"), gnome_panel_about_menu),
+        GNOMEUIINFO_END
+};
+
+GnomeUIInfo gnome_panel_menu_without_desktop [] = {
+        GNOMEUIINFO_MENU_FILE_TREE(gnome_panel_file_menu),
+        GNOMEUIINFO_MENU_EDIT_TREE(gnome_panel_edit_menu),
+        GNOMEUIINFO_SUBTREE(N_("_Layout"),gnome_panel_layout_menu),
+        GNOMEUIINFO_SUBTREE(N_("_Commands"),gnome_panel_commands_menu),
+	GNOMEUIINFO_SUBTREE(N_("_Help"), gnome_panel_about_menu),
         GNOMEUIINFO_END
 };
 
@@ -535,16 +584,20 @@ create_container (Dlg_head *h, char *name, char *geometry)
 	gnome_app_set_contents (GNOME_APP (app), vbox);
 
 	if (desktop_wm_is_gnome_compliant == 1)
-		gnome_panel_menu [GNOME_PANEL_MENU_DESKTOP_INDEX].type = GNOME_APP_UI_ENDOFINFO;
+		gnome_app_create_menus_with_data (GNOME_APP (app), gnome_panel_menu_without_desktop, panel);
+	else
+		gnome_app_create_menus_with_data (GNOME_APP (app), gnome_panel_menu_with_desktop, panel);
 	
-	gnome_app_create_menus_with_data (GNOME_APP (app), gnome_panel_menu, panel);
 	create_new_menu (GNOME_APP (app), panel);
 
 	panel->ministatus = GNOME_APPBAR(gnome_appbar_new(FALSE, TRUE, GNOME_PREFERENCES_NEVER));
 	gnome_app_set_statusbar(GNOME_APP (app), GTK_WIDGET(panel->ministatus));
 
-	gnome_app_install_menu_hints (GNOME_APP (app), gnome_panel_menu);
-
+	if (desktop_wm_is_gnome_compliant)
+		gnome_app_install_menu_hints (GNOME_APP (app), gnome_panel_menu_without_desktop);
+	else
+		gnome_app_install_menu_hints (GNOME_APP (app), gnome_panel_menu_with_desktop);
+	
 	gtk_signal_connect (GTK_OBJECT (app),
 			    "enter_notify_event",
 			    GTK_SIGNAL_FUNC (panel_enter_event),

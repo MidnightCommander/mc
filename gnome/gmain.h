@@ -48,5 +48,8 @@ struct gmc_color_pairs_s {
 	GdkColor *fore, *back;
 };
 
+void gmc_do_quit (void);
+extern GnomeClient *session_client;
+
 extern struct gmc_color_pairs_s gmc_color_pairs [];
 #endif

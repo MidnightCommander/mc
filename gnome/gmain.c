@@ -54,6 +54,9 @@ Dlg_head *desktop_dlg;
 
 int run_desktop = 1;
 
+/* Session client */
+GnomeClient *session_client;
+
 /* Used during argument processing */
 extern int finish_program;
 
@@ -551,15 +554,21 @@ create_panels (void)
 	desktop_destroy ();
 }
 
-static void
-session_die (void)
+void
+gmc_do_quit (void)
 {
-	extern int quit;
-	
 	/* FIXME: This wont get us out from a dialog box */
 	gtk_main_quit ();
 	quit = 1;
 	dlg_stop (desktop_dlg);
+}
+
+static void
+session_die (void)
+{
+	extern int quit;
+
+	gmc_do_quit ();
 }
 
 /*
@@ -615,14 +624,14 @@ session_save_state (GnomeClient *client, gint phase, GnomeRestartStyle save_styl
 void
 session_management_setup (char *name)
 {
-	GnomeClient *client;
+	session_client = gnome_master_client ();
 
-	client = gnome_master_client ();
-	if (client){
-		gnome_client_set_restart_style (client, finish_program?GNOME_RESTART_NEVER:GNOME_RESTART_IMMEDIATELY);
-		gtk_signal_connect (GTK_OBJECT (client), "save_yourself",
+	if (session_client){
+		gnome_client_set_restart_style (session_client,
+						finish_program ? GNOME_RESTART_NEVER : GNOME_RESTART_IMMEDIATELY);
+		gtk_signal_connect (GTK_OBJECT (session_client), "save_yourself",
 				    GTK_SIGNAL_FUNC (session_save_state), name);
-		gtk_signal_connect (GTK_OBJECT (client), "die",
+		gtk_signal_connect (GTK_OBJECT (session_client), "die",
 				    GTK_SIGNAL_FUNC (session_die), NULL);
 	}
 }
