@@ -64,7 +64,6 @@ int socketpair(int, int, int, int fd[2]);
 static int parent_fd;
 
 #define MAXCALLARGS 4		/* Number of arguments supported */
-#define mymsg "Desde el hijo\n\r"
 
 struct TaskList *task_list = NULL;
 
@@ -145,9 +144,6 @@ do_background (struct FileOpContext *ctx, char *info)
 	    while (dup2 (nullfd, 2) == -1 && errno == EINTR);
 	}
 
-	/* To make it obvious if it fails, there is a bug report on this */
-	write (2, mymsg, sizeof (mymsg));
-	write (1, mymsg, sizeof (mymsg));
 	return 0;
     } else {
 	close (comm[1]);

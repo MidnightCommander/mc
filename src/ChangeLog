@@ -1,5 +1,7 @@
 2003-10-25  Pavel Roskin  <proski@gnu.org>
 
+	* background.c: Remove mymsg.
+
 	* util.c (msglen): Constify first argument.
 	* wtools.c (query_dialog): Constify string argments.
 	(create_message): New function, forked from message().
