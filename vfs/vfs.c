@@ -60,12 +60,7 @@
 extern int get_other_type (void);
 
 int vfs_timeout = 60; /* VFS timeout in seconds */
-int vfs_flags =       /* Flags */
-#ifdef VFS_STANDALONE
-                0;
-#else
-                FL_ALWAYS_MAGIC;
-#endif
+int vfs_flags = 0;    /* Flags */
 
 extern int cd_symlinks; /* Defined in main.c */
 
@@ -141,11 +136,15 @@ vfs *vfs_type_from_op (char *path)
 int path_magic( char *path )
 {
     int res;
+    struct stat buf;
 
-    res = !strncmp( path, "/#/", 3 );
-    if (res)
-        path[1] = '/';
-    return res || (vfs_flags & FL_ALWAYS_MAGIC);
+    if (vfs_flags & FL_ALWAYS_MAGIC)
+        return 1;
+
+    if (!stat(path, &buf))
+        return 0;
+
+    return 1;
 }
 
 /*
@@ -159,7 +158,7 @@ vfs *vfs_split (char *path, char **inpath, char **op)
     char *slash;
     vfs *ret;
     
-    if (!semi)
+    if (!semi || !path_magic(path))
 	return NULL;
     slash = strchr (semi, '/');
     *semi = 0;
@@ -190,7 +189,7 @@ vfs_rosplit (char *path)
     char *slash;
     vfs *ret;
     
-    if (!semi)
+    if (!semi || !path_magic(path))
 	return NULL;
     slash = strchr (semi, '/');
     *semi = 0;
