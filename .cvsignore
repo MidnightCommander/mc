@@ -1,9 +1,11 @@
 *.cache
+*.tar.gz
 ABOUT-NLS
 Make.common
 Makefile
 Makefile.in
 aclocal.m4
+config
 config.guess
 config.h
 config.h.in

@@ -14,6 +14,9 @@ test -z "$srcdir" && srcdir=.
 (
 cd $srcdir
 
+# This cache is not reliable yet.
+rm -rf autom4te.cache
+
 # Ensure that gettext is reasonably new.
 gettext_ver=`$GETTEXTIZE --version | sed -n '1s/^.* //p'`
 
@@ -37,6 +40,10 @@ mkdir gettext.m4
 for i in $m4files; do
   cp -f $fromdir/$i gettext.m4
 done
+
+if test ! -d config; then
+  mkdir config || exit 1
+fi
 
 $ACLOCAL -I gettext.m4 $ACLOCAL_FLAGS || \
   $ACLOCAL $ACLOCAL_FLAGS || \

@@ -6,7 +6,7 @@ SUBDIRS = intl po vfs slang edit src lib doc syntax pc
 
 EXTRA_DIST =	FAQ INSTALL.FAST MAINTAINERS \
 		README.PC README.QNX README.smbfs \
-		extraconf.h depcomp
+		extraconf.h
 
 noinst_DATA = mc.spec
 

@@ -1,3 +1,12 @@
+2001-09-12  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Use three-argument form of AC_INIT.  Use
+	AC_CONFIG_AUX_DIR.  Remove some unused or implied macros.
+	* Makefile.am (EXTRA_DIST): Remove "depcomp" - this workaround
+	is not needed if AC_CONFIG_AUX_DIR is used.
+	* vfs/Make-mc.in: Adjust mkinstalldirs location.
+	* autogen.sh: Create "config" and remove "autom4te.cache".
+
 2001-09-11  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/Syntax: New file, extracted from edit/syntax.c.

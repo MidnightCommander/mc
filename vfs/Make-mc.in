@@ -9,7 +9,7 @@ SHELL = @SHELL@
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
 VPATH = @srcdir@
-mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+mkinstalldirs = $(SHELL) $(top_srcdir)/config/mkinstalldirs
 top_builddir = ..
 
 # Installation target directories & other installation stuff
