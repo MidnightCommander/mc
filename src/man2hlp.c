@@ -578,10 +578,9 @@ handle_command (char *buffer)
 	return;
     } else {
 	/* Other commands are ignored */
-	/* There is no memmove on some systems */
 	char warn_str[BUFFER_SIZE];
-	strcpy (warn_str, "Warning: unsupported command ");
-	strncat (warn_str, buffer, sizeof (warn_str));
+	g_snprintf (warn_str, sizeof (warn_str),
+		    "Warning: unsupported command %s", buffer);
 	print_error (warn_str);
 	return;
     }
@@ -610,7 +609,8 @@ handle_link (char *buffer)
 	/* Bold text or italics text */
 	if (buffer[0] == '.' && (buffer[1] == 'I' || buffer[1] == 'B'))
 	    for (buffer += 2; *buffer == ' ' || *buffer == '\t'; buffer++);
-	strcpy (old, buffer);
+	strncpy (old, buffer, sizeof (old) - 1);
+	old[sizeof (old) - 1] = 0;
 	link_flag = 3;
 	break;
     case 3:
