@@ -211,9 +211,14 @@ VFSHDRS = 			\
 
 VFSOBJS = $(NONETFILES) @NETFILES@
 
-EXTFS_MISC  = README extfs.ini unarj.diff
-EXTFS_CONST = a rpm hp48 mailfs patchfs sfs.ini trpm rpms uarj
+# Files to install and distribute, but not filters
+EXTFS_MISC  = README extfs.ini unarj.diff sfs.ini
 
+# Filters that don't need adaptation to the local system
+EXTFS_CONST = a apt audio deba debd dpkg hp48 mailfs patchfs rpm \
+	rpms trpm uarj
+
+# Filters that need adaptation to the local system - source files
 EXTFS_IN    = 			\
 	deb.in 			\
 	lslR.in 		\
@@ -226,12 +231,9 @@ EXTFS_IN    = 			\
 	uha.in			\
 	uzip.in
 
+# Filters that need adaptation to the local system - files to install
 EXTFS_OUT = 			\
-	apt			\
 	deb 			\
-	deba			\
-	debd			\
-	dpkg			\
 	lslR 			\
 	ucpio 			\
 	urar 			\
@@ -328,6 +330,9 @@ distclean:
 	-$(RMF) $(srcdir)/*~ $(srcdir)/mcserv $(srcdir)/*.o $(srcdir)/a.out
 	-$(RMF) $(srcdir)/core $(srcdir)/libvfs-mc.a $(srcdir)/libvfs.so
 	-$(RMF) $(srcdir)/mad.c $(srcdir)/mad.h
+	for I in $(EXTFS_OUT) ; do \
+	    $(RMF) $(builddir)/vfs/extfs/$$I; \
+	done
 	-if test $(srcdir) = .; then $(MAKE) realclean; fi
 	-$(RMF) $(srcdir)/Makefile
 

@@ -1,5 +1,9 @@
 2000-08-02  Pavel Roskin  <proski@gnu.org>
 
+	* Make-mc.in: Filters apt, audio, deba, debd and dpkg are now
+	distributed. Added some comments to prevent future errors.
+	"make distclean" now cleans generated filters.
+
 	* samba/configure.in: Fixed sloppy output. The fix also sent to
 	the Samba team.
 
