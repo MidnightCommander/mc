@@ -3995,7 +3995,7 @@ msgstr ""
 
 #: vfs/direntry.c:301
 #, c-format
-msgid "Dir cache expired for %s"
+msgid "Directory cache expired for %s"
 msgstr "Up³yn±³ czas przechowywania %s w cache katalogów"
 
 #: vfs/direntry.c:787

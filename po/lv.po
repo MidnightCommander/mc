@@ -4022,7 +4022,7 @@ msgstr ""
 
 #: vfs/direntry.c:301
 #, c-format
-msgid "Dir cache expired for %s"
+msgid "Directory cache expired for %s"
 msgstr "Direktorija keðs priekð %s izbeidzâs"
 
 #: vfs/direntry.c:787

@@ -3999,7 +3999,7 @@ msgstr ""
 
 #: vfs/direntry.c:301
 #, c-format
-msgid "Dir cache expired for %s"
+msgid "Directory cache expired for %s"
 msgstr "%s의 디렉토리 캐쉬 만료됨"
 
 #: vfs/direntry.c:787

@@ -4018,7 +4018,7 @@ msgstr ""
 
 #: vfs/direntry.c:301
 #, c-format
-msgid "Dir cache expired for %s"
+msgid "Directory cache expired for %s"
 msgstr "Adresáøová ke¹ %s vypr¹ela"
 
 #: vfs/direntry.c:787

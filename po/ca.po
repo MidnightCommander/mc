@@ -4030,7 +4030,7 @@ msgstr ""
 
 #: vfs/direntry.c:301
 #, c-format
-msgid "Dir cache expired for %s"
+msgid "Directory cache expired for %s"
 msgstr "El directori de la memòria cau ha caducat per %s"
 
 #: vfs/direntry.c:787
