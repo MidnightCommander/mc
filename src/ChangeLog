@@ -1,5 +1,8 @@
 2002-09-20  Pavel Roskin  <proski@gnu.org>
 
+	* mouse.h: Define events for the mouse wheel.
+	* key.c (xmouse_get_event): Recognize mouse wheel events.
+
 	* command.c: (command_insert): New function - insert quoted
 	text into the command line.
 	* main.c: Use command_insert() instead of stuff().  This ensures

@@ -73,6 +73,10 @@ void disable_mouse (void);
 #define MOU_ENDLOOP   0x02
 #define MOU_LOCK      0x04
 
+/* Mouse wheel events.  GPM doesn't seem to support them yet.  */
+#define GPM_B_UP        8
+#define GPM_B_DOWN     16
+
 #ifdef HAVE_LIBGPM
 
 /* GPM specific mouse support definitions */
