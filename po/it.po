@@ -1,13 +1,16 @@
 # mc it.po
-# Copyright (C) 1998 Free Software Foundation, Inc.
-# Giuliano Natali <natali@stone.trew.it> 1998,
-# Marco Ciampa <marco@mc.ismaa.it> 1999.
+# Copyright (C) 1999 Free Software Foundation, Inc.
+# Giuliano Natali <natali@stone.trew.it>, 1998.
 #
-
 msgid ""
 msgstr ""
 "POT-Creation-Date: 1999-02-08 08:12-0500\n"
-"Content-Type: text/plain; charset=\n"
+"PO-Revision-Date: 1999-06-24 15:22+1\n"
+"Last-Translator: Marco Ciampa <marco@mc.ismaa.it>\n"
+"Language-Team: Marco Ciampa <marco@mc.ismaa.it>\n"
+"MIME-Version: 1.0\n"
+#"Content-Type: text/plain; charset=iso-8859-1\n"
+#"Content-Transfer-Encoding: 8bit\n"
 
 #: edit/edit_key_translator.c:121
 msgid " Emacs key: "
@@ -77,7 +80,7 @@ msgstr "Ignora maiuscole/minuscole."
 
 #: gnome/gcmd.c:219 src/chmod.c:150 src/screen.c:425
 msgid "Name"
-msgstr "Nome"
+msgstr "Nome file"
 
 #: gnome/gcmd.c:226
 #, fuzzy
@@ -176,6 +179,9 @@ msgid ""
 "For example:\n"
 "*.gif will show just gif images"
 msgstr ""
+"Inserisci qui un filtro per i files nella vista pannello.\n"
+"\n"
+"Per esempio:\n" 
 
 #: gnome/gcmd.c:604
 msgid "Enter a Regular Expression to filter files in the panel view."
@@ -207,7 +213,7 @@ msgstr "Cestino"
 #: gnome/gdesktop.c:1549
 #, fuzzy
 msgid "Home directory"
-msgstr "directory home"
+msgstr "Directory home"
 
 #: gnome/gdesktop.c:1554
 #, c-format
@@ -236,7 +242,8 @@ msgstr "Il file esiste"
 msgid ""
 "Some of the files you are trying to copy already exist in the destination "
 "folder."
-msgstr "Alcuni file che stai cercando di copiare esistono già nella dir di "
+msgstr ""
+"Alcuni file che stai cercando di copiare esistono già nella dir di "
 "destinazione."
 
 #: gnome/gdialogs.c:361
@@ -256,32 +263,32 @@ msgstr "Sovrascrivi"
 #: gnome/gdialogs.c:387
 #, fuzzy
 msgid "Older files."
-msgstr "Tutti i files"
+msgstr "File più vecchi."
 
 #: gnome/gdialogs.c:393
 #, fuzzy
 msgid "Files only if size differs."
-msgstr " se dimensione diversa"
+msgstr "Solo se la dimensione è diversa."
 
 #: gnome/gdialogs.c:399
 #, fuzzy
 msgid "All files."
-msgstr "Tutti i files"
+msgstr "Tutti i files."
 
 #: gnome/gdialogs.c:448
 #, fuzzy
 msgid "File Exists"
-msgstr " Il file esiste "
+msgstr "Il file esiste"
 
 #: gnome/gdialogs.c:454
 #, fuzzy, c-format
 msgid "The target file already exists: %s"
-msgstr " Il file `%s' esiste!"
+msgstr " Il file destinazione `%s' esiste già!"
 
 #: gnome/gdialogs.c:461
 #, fuzzy
 msgid "Replace it?"
-msgstr " Sostituisci "
+msgstr "Sostituisci?"
 
 #: gnome/gdialogs.c:532 gtkedit/editwidget.c:1064 src/file.c:784
 #: src/screen.c:2288 src/screen.c:2318 src/tree.c:1024
@@ -290,16 +297,16 @@ msgstr "Copia"
 
 #: gnome/gdialogs.c:535 gtkedit/editwidget.c:1065
 msgid "Move"
-msgstr "Muovi"
+msgstr "Sposta"
 
 #: gnome/gdialogs.c:552
 #, fuzzy
 msgid "Destination"
-msgstr "Animazione"
+msgstr "Destinazione"
 
 #: gnome/gdialogs.c:556
 msgid "Find Destination Folder"
-msgstr "Trova la dir di destinazione"
+msgstr "Cerca la dir di destinazione"
 
 #: gnome/gdialogs.c:561
 #, fuzzy
@@ -314,23 +321,25 @@ msgstr "Opzioni Avanzate"
 #: gnome/gdialogs.c:585
 #, fuzzy
 msgid "Preserve symlinks"
-msgstr "Mantieni il link simbolico"
+msgstr "Mantieni link simbolici"
 
 #: gnome/gdialogs.c:595
 #, fuzzy
 msgid "Follow links."
-msgstr "Segui i Link"
+msgstr "Segui i Link."
 
 #: gnome/gdialogs.c:600
 msgid ""
 "Selecting this will copy the files that symlinks point to instead of just "
 "copying the link."
 msgstr ""
+"Impostando questo copierà i file puntati dai collegamenti simbolici invece"
+"che semplicemente copiare il collegamento."
 
 #: gnome/gdialogs.c:604
 #, fuzzy
 msgid "Preserve file attributes."
-msgstr "preserva &Attributi"
+msgstr "Preserva attributi dei file."
 
 #: gnome/gdialogs.c:608
 msgid "Preserves the permissions and the UID/GID if possible"
@@ -348,17 +357,17 @@ msgstr "Se impostato, questo copierà le dir ricorsivamente"
 #: gnome/gdialogs.c:733
 #, fuzzy
 msgid "Move Progress"
-msgstr "Muovi"
+msgstr "Stato Spostamento"
 
 #: gnome/gdialogs.c:736
 #, fuzzy
 msgid "Copy Progress"
-msgstr "Copia"
+msgstr "Stato Copia"
 
 #: gnome/gdialogs.c:739
 #, fuzzy
 msgid "Delete Progress"
-msgstr "Cancellazione"
+msgstr "Stato Cancellazione"
 
 #: gnome/gdialogs.c:784
 #, fuzzy
@@ -373,22 +382,22 @@ msgstr " è "
 #: gnome/gdialogs.c:791
 #, fuzzy
 msgid " Done."
-msgstr "Nessuno"
+msgstr "Fatto."
 
 #: gnome/gdnd.c:51
 #, fuzzy
 msgid "_Move here"
-msgstr " Muovi qui"
+msgstr "_Sposta qui"
 
 #: gnome/gdnd.c:52
 #, fuzzy
 msgid "_Copy here"
-msgstr " Copia qui"
+msgstr "_Copia qui"
 
 #: gnome/gdnd.c:53
 #, fuzzy
 msgid "_Link here"
-msgstr " Collega qui"
+msgstr "_Collega qui"
 
 #: gnome/gdnd.c:55
 #, fuzzy
@@ -402,8 +411,8 @@ msgid ""
 "Could not stat %s\n"
 "%s"
 msgstr ""
-" Non riesco a verificare il file %s \n"
-" %s "
+"Non riesco a verificare il file %s\n"
+"%s"
 
 #: gnome/gicon.c:83 gnome/gtools.c:50
 msgid "Error"
@@ -411,42 +420,42 @@ msgstr "Errore"
 
 #: gnome/gicon.c:83
 msgid "Default set of icons not found, check your installation"
-msgstr ""
+msgstr "Non trovo le icone di default, controlla l'istallazione"
 
 #: gnome/glayout.c:274
 #, fuzzy
 msgid "Enter command to run"
-msgstr " Linea: "
+msgstr "Immetti comando da eseguire "
 
 #: gnome/glayout.c:284
 #, fuzzy
 msgid "_Terminal"
-msgstr "Nuovo terminale"
+msgstr "_Terminale"
 
 #: gnome/glayout.c:284
 msgid "Launch a new terminal in the current directory"
-msgstr ""
+msgstr "Esegui un nuovo terminale nella directory corrente"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
 #: gnome/glayout.c:286
 #, fuzzy
 msgid "_Directory..."
-msgstr "directory"
+msgstr "_Directory..."
 
 #: gnome/glayout.c:286
 #, fuzzy
 msgid "Creates a new directory"
-msgstr "Crea nuova directory"
+msgstr "Crea una nuova directory"
 
 #: gnome/glayout.c:292
 #, fuzzy
 msgid "New _Window"
-msgstr "Apre un nuovo pannello"
+msgstr "Nuova _Finestra"
 
 #: gnome/glayout.c:292
 #, fuzzy
 msgid "Opens a new window"
-msgstr "Apre un nuovo pannello"
+msgstr "Apre una nuova finestra"
 
 #. We want to make a new menu entry here...
 #. For example:
@@ -464,18 +473,18 @@ msgstr "Nuovo\tC-n"
 #: gnome/glayout.c:304
 #, fuzzy
 msgid "_Open"
-msgstr "Apri"
+msgstr "_Apri"
 
 #: gnome/glayout.c:304
 #, fuzzy
 msgid "Opens the selected files"
-msgstr "Recupera file rimossi"
+msgstr "Apri i file selezionati"
 
 #. { GNOME_APP_UI_ITEM, N_("Open _FTP site"),     N_("Opens an FTP site"), ftplink_cmd },
 #: gnome/glayout.c:306
 #, fuzzy
 msgid "_Copy..."
-msgstr "Copia..."
+msgstr "_Copia..."
 
 #: gnome/glayout.c:306
 msgid "Copy files"
@@ -484,7 +493,7 @@ msgstr "Copia files"
 #: gnome/glayout.c:307
 #, fuzzy
 msgid "_Delete..."
-msgstr "Elimina..."
+msgstr "_Elimina..."
 
 #: gnome/glayout.c:307
 msgid "Delete files from disk"
@@ -493,25 +502,25 @@ msgstr "Rimuove i files dal disco"
 #: gnome/glayout.c:308
 #, fuzzy
 msgid "_Move..."
-msgstr "Rinomina/muovi..."
+msgstr "_Sposta..."
 
 #: gnome/glayout.c:308
 msgid "Rename or move files"
-msgstr "Rinomina o muove files"
+msgstr "Rinomina o sposta files"
 
 #: gnome/glayout.c:310
 msgid "C_lose"
-msgstr ""
+msgstr "C_iudi"
 
 #: gnome/glayout.c:310
 #, fuzzy
 msgid "Close this panel"
-msgstr "Confronta pannelli"
+msgstr "Chiudi questo pannello"
 
 #: gnome/glayout.c:317
 #, fuzzy
 msgid "Select _All"
-msgstr " Seleziona tutto"
+msgstr "Selezion_a tutto"
 
 #: gnome/glayout.c:317
 msgid "Select all files in the current Panel"
@@ -520,7 +529,7 @@ msgstr "Seleziona tutti i file nel Pannello corrente"
 #: gnome/glayout.c:318
 #, fuzzy
 msgid "_Select Files..."
-msgstr "Seleziona file..."
+msgstr "_Seleziona file..."
 
 #: gnome/glayout.c:318
 #, fuzzy
@@ -539,7 +548,7 @@ msgstr "Inverti selezione files"
 #: gnome/glayout.c:321
 #, fuzzy
 msgid "_Rescan Directory"
-msgstr "Aggiorna contenuto directory"
+msgstr "_Aggiorna contenuto directory"
 
 #: gnome/glayout.c:321
 msgid "Rescan the directory contents"
@@ -548,7 +557,7 @@ msgstr "Aggiorna contenuto directory"
 #: gnome/glayout.c:328
 #, fuzzy
 msgid "Icon View"
-msgstr "Icona"
+msgstr "Icona Vista"
 
 #: gnome/glayout.c:329
 msgid "Partial View"
@@ -566,16 +575,16 @@ msgstr "Vista Configurabile"
 #: gnome/glayout.c:337
 #, fuzzy
 msgid "_Sort By..."
-msgstr "Ordinato per..."
+msgstr "_Ordinato per..."
 
 #: gnome/glayout.c:337
 msgid "Confirmation settings"
-msgstr "Opzioni conferma"
+msgstr "Opzioni conferme"
 
 #: gnome/glayout.c:338
 #, fuzzy
 msgid "_Filter View..."
-msgstr "Vista Filtrata.."
+msgstr "Vista _Filtrata.."
 
 #: gnome/glayout.c:338
 msgid "Global option settings"
@@ -584,7 +593,7 @@ msgstr "Opzioni globali"
 #: gnome/glayout.c:345
 #, fuzzy
 msgid "_Find File..."
-msgstr "Trova file"
+msgstr "Trova _File"
 
 #: gnome/glayout.c:345
 msgid "Locate files on disk"
@@ -594,17 +603,17 @@ msgstr "Cerca files su disco"
 #: gnome/glayout.c:349
 #, fuzzy
 msgid "_Run Command..."
-msgstr "Comandi"
+msgstr "Esegui Comando..."
 
 #: gnome/glayout.c:349
 #, fuzzy
 msgid "Runs a command"
-msgstr " Comando chown "
+msgstr "Esegui un Comando"
 
 #: gnome/glayout.c:351
 #, fuzzy
 msgid "_Run Command in panel..."
-msgstr "Confronta pannelli"
+msgstr "Esegui comando in pannello"
 
 #: gnome/glayout.c:351
 msgid "Run a command and put the results in a panel"
@@ -613,26 +622,26 @@ msgstr "Esegui un comando e metti il risultato in un pannello"
 #: gnome/glayout.c:354
 #, fuzzy
 msgid "_Active VFS list..."
-msgstr "Lista dei VFS attivi"
+msgstr "Lista VFS _Attivi..."
 
 #: gnome/glayout.c:354
 msgid "List of active virtual file systems"
-msgstr "Lista di VFS attivi"
+msgstr "Lista di File Systems Virtuali attivi"
 
 #: gnome/glayout.c:361
 #, fuzzy
 msgid "_Background jobs..."
-msgstr "Processi in background"
+msgstr "Processi in _Background"
 
 #: gnome/glayout.c:361
 msgid "List of background operations"
-msgstr "Lista dei processi "
+msgstr "Elenco dei processi in background"
 
 #. GNOMEUIINFO_HELP ("midnight-commander"),
 #: gnome/glayout.c:369
 #, fuzzy
 msgid "_About"
-msgstr "About"
+msgstr "_About"
 
 #: gnome/glayout.c:369
 msgid "Information on this program"
@@ -641,27 +650,27 @@ msgstr "Informazioni su questo programma"
 #: gnome/glayout.c:375 gnome/gview.c:323
 #, fuzzy
 msgid "_File"
-msgstr "File"
+msgstr "_File"
 
 #: gnome/glayout.c:376
 #, fuzzy
 msgid "_Edit"
-msgstr "Modif"
+msgstr "_Modifica"
 
 #: gnome/glayout.c:377
 #, fuzzy
 msgid "_Layout"
-msgstr "Layout"
+msgstr "Aspetto"
 
 #: gnome/glayout.c:378
 #, fuzzy
 msgid "_Commands"
-msgstr "Comandi"
+msgstr "_Comandi"
 
 #: gnome/glayout.c:379
 #, fuzzy
 msgid "_Help"
-msgstr "Aiuto"
+msgstr "_Aiuto"
 
 #: gnome/glayout.c:474
 #, fuzzy
@@ -670,7 +679,7 @@ msgstr "directory"
 
 #: gnome/gpopup.c:222 gnome/gpopup.c:223
 msgid "Properties"
-msgstr "Proprieta'"
+msgstr "Proprietà"
 
 #: gnome/gpopup.c:225 gnome/gpopup.c:226
 msgid "Open"
@@ -686,11 +695,11 @@ msgstr "Vista"
 
 #: gnome/gpopup.c:229
 msgid "View unfiltered"
-msgstr ""
+msgstr "Vista non filtrata"
 
 #: gnome/gpopup.c:230 src/screen.c:2287 src/screen.c:2317 src/view.c:1968
 msgid "Edit"
-msgstr "Modif"
+msgstr "Modifica"
 
 #: gnome/gpopup.c:232
 msgid "Link..."
@@ -702,11 +711,11 @@ msgstr "Link simbolici"
 
 #: gnome/gpopup.c:234
 msgid "Edit symlink..."
-msgstr "Modifica link simbolici"
+msgstr "Modifica coll. simbolici"
 
 #: gnome/gpopup.c:241 gnome/gpopup.c:252
 msgid "Move/rename..."
-msgstr ""
+msgstr "Sposta/rinomina"
 
 #: gnome/gpopup.c:242 gnome/gpopup.c:253
 msgid "Copy..."
@@ -725,53 +734,53 @@ msgstr "mostra files di backup"
 #: gnome/gprefs.c:100
 #, fuzzy
 msgid "Show hidden files"
-msgstr "mostra file nascosti"
+msgstr "Mostra file nascosti"
 
 #: gnome/gprefs.c:104
 #, fuzzy
 msgid "Mix files and directories"
-msgstr "files/directoryes"
+msgstr "Mescola files e directory"
 
 #: gnome/gprefs.c:108
 #, fuzzy
 msgid "Use shell patterns instead of regular expressions"
-msgstr " Espressione regolare errata "
+msgstr "Usa pattern della shell invece di espr. regolare"
 
 #: gnome/gprefs.c:117
 msgid "Confirm when deleting file"
-msgstr ""
+msgstr "Conferma cancellazione file"
 
 #: gnome/gprefs.c:121
 #, fuzzy
 msgid "Confirm when overwriting files"
-msgstr " conferma sovrascrittura "
+msgstr "Conferma sovrascrittura file"
 
 #: gnome/gprefs.c:125
 #, fuzzy
 msgid "Confirm when executing files"
-msgstr "Opzioni conferma"
+msgstr "Conferma opzioni in esecuzione"
 
 #: gnome/gprefs.c:129
 msgid "Show progress while operations are being performed"
-msgstr ""
+msgstr "Mostra andamento mentre le operazioni sono attive"
 
 #: gnome/gprefs.c:138
 msgid "VFS Timeout :"
-msgstr ""
+msgstr "Timeout VFS:"
 
 #: gnome/gprefs.c:139 gnome/gprefs.c:164
 msgid "Seconds"
-msgstr ""
+msgstr "Secondi"
 
 #: gnome/gprefs.c:142
 #, fuzzy
 msgid "Anonymous FTP password :"
-msgstr "password ftp anonimo:"
+msgstr "Password FTP anonimo:"
 
 #: gnome/gprefs.c:146
 #, fuzzy
 msgid "Always use FTP proxy"
-msgstr "usa sempre ftp proxy"
+msgstr "Usa sempre FTP proxy"
 
 #: gnome/gprefs.c:155
 #, fuzzy
@@ -780,12 +789,12 @@ msgstr "&Visualizzazione rapida dir"
 
 #: gnome/gprefs.c:159
 msgid "Compute totals before copying files"
-msgstr ""
+msgstr "Calcola totali prima di copiare i files"
 
 #: gnome/gprefs.c:163
 #, fuzzy
 msgid "FTP directory cache timeout :"
-msgstr "Timeout della cache del ftpfs:"
+msgstr "Timeout directory cache FTP:"
 
 #: gnome/gprefs.c:167
 msgid "Allow customization of icons in icon view"
@@ -1078,7 +1087,7 @@ msgstr "Posizione:"
 #: src/boxes.c:894 src/filegui.c:807 src/find.c:151 src/layout.c:369
 #: src/option.c:144 src/wtools.c:289 src/wtools.c:561
 msgid "&Ok"
-msgstr "&Accetta"
+msgstr "&Ok"
 
 #: gnome/gview.c:119 src/view.c:683
 #, c-format
@@ -1107,7 +1116,7 @@ msgstr "Vai alla linea specificata"
 #: gnome/gview.c:292
 #, fuzzy
 msgid "_Monitor file"
-msgstr "Monitorizza file"
+msgstr "_Monitorizza file"
 
 #: gnome/gview.c:292
 msgid "Monitor file growing"
@@ -1133,22 +1142,22 @@ msgstr ""
 #: gnome/gview.c:315
 #, fuzzy
 msgid "_Formatted"
-msgstr "Formattato"
+msgstr "_Formattato"
 
 #: gnome/gview.c:317
 #, fuzzy
 msgid "_Hex"
-msgstr "Hex"
+msgstr "_Hex"
 
 #: gnome/gview.c:324
 #, fuzzy
 msgid "_Search"
-msgstr "Cerca"
+msgstr "_Cerca"
 
 #: gnome/gview.c:325
 #, fuzzy
 msgid "_Mode"
-msgstr "Modo"
+msgstr "_Modo"
 
 #: gnome/gwidget.c:90
 msgid "ok"
@@ -1156,7 +1165,7 @@ msgstr "accetta"
 
 #: gnome/gwidget.c:92
 msgid "cancel"
-msgstr "Annulla"
+msgstr "annulla"
 
 #: gnome/gwidget.c:94
 msgid "help"
@@ -1716,11 +1725,11 @@ msgstr " Errore di sintassi nel file %s alla linea %d "
 #: src/view.c:404 src/wtools.c:111 src/wtools.c:386 src/wtools.c:559
 #: src/wtools.c:640
 msgid "&Cancel"
-msgstr "Annulla"
+msgstr "&Annulla"
 
 #: src/achown.c:72 src/chmod.c:115 src/chown.c:80
 msgid "&Set"
-msgstr "Modifica"
+msgstr "&Modifica"
 
 #: src/achown.c:73
 msgid "S&kip"
@@ -1728,11 +1737,11 @@ msgstr "&Salta"
 
 #: src/achown.c:74 src/chmod.c:119 src/chown.c:83
 msgid "Set &all"
-msgstr "Modifica Tutti"
+msgstr "Modifica &Tutti"
 
 #: src/achown.c:362 src/achown.c:369
 msgid "owner"
-msgstr "propriet."
+msgstr "propr."
 
 #: src/achown.c:364 src/achown.c:371
 msgid "group"
@@ -1744,7 +1753,7 @@ msgstr "altri"
 
 #: src/achown.c:374
 msgid "On"
-msgstr "On"
+msgstr "Su"
 
 #: src/achown.c:376
 msgid "Flag"
@@ -1826,19 +1835,19 @@ msgstr ""
 
 #: src/boxes.c:63
 msgid " Listing mode "
-msgstr " Modalita' visualizzazione "
+msgstr " Modalità visualizzazione "
 
 #: src/boxes.c:68
 msgid "&Full file list"
-msgstr "Lista completa"
+msgstr "Lista &Completa"
 
 #: src/boxes.c:69
 msgid "&Brief file list"
-msgstr "Lista breve"
+msgstr "Lista &Breve"
 
 #: src/boxes.c:70
 msgid "&Long file list"
-msgstr "Lista lunga"
+msgstr "Lista &Lunga"
 
 #: src/boxes.c:71
 msgid "&User defined:"
@@ -1866,23 +1875,23 @@ msgstr "controlla maiuscole/minuscole"
 
 #: src/boxes.c:282
 msgid "Sort order"
-msgstr "Modalita' Ordinamento"
+msgstr "Modalità Ordinamento"
 
 #: src/boxes.c:381
 msgid " confirm &Exit "
-msgstr " conferma Uscita"
+msgstr " Conferma &Uscita"
 
 #: src/boxes.c:383
 msgid " confirm e&Xecute "
-msgstr " conferma esegui "
+msgstr " Conferma &Esecuzione "
 
 #: src/boxes.c:385
 msgid " confirm o&Verwrite "
-msgstr " conferma so&Vrascrittura "
+msgstr " Conferma &Sovrascrittura "
 
 #: src/boxes.c:387
 msgid " confirm &Delete "
-msgstr " conferma eliminazione "
+msgstr " Conferma &Cancellazione "
 
 #: src/boxes.c:393
 msgid " Confirmation "
@@ -1918,7 +1927,7 @@ msgstr "sec"
 
 #: src/boxes.c:657
 msgid "ftpfs directory cache timeout:"
-msgstr "Timeout della cache del ftpfs:"
+msgstr "Timeout cache directory ftpfs:"
 
 #: src/boxes.c:661
 msgid "ftp anonymous password:"
@@ -2045,7 +2054,7 @@ msgstr "Permessi (ottali)"
 
 #: src/chmod.c:154
 msgid "Owner name"
-msgstr "Nome propriet."
+msgstr "Nome proprietario"
 
 #: src/chmod.c:156
 msgid "Group name"
@@ -2065,7 +2074,7 @@ msgstr " File "
 
 #: src/chmod.c:169
 msgid "Use SPACE to change"
-msgstr "Usa Barra Spazio per cambiare"
+msgstr "BARRA SPAZIO per cambiare"
 
 #: src/chmod.c:171
 msgid "an option, ARROW KEYS"
@@ -2097,7 +2106,7 @@ msgstr "Setta &gruppi"
 
 #: src/chown.c:112
 msgid " Name "
-msgstr " Nome "
+msgstr " Nome file "
 
 #: src/chown.c:114
 msgid " Owner name "
@@ -2121,12 +2130,12 @@ msgstr " Nome utente "
 
 #: src/chown.c:192
 msgid "<Unknown user>"
-msgstr "<Utente sconosciuto>"
+msgstr "<Utente ignoto>"
 
 #. add fields for unknown names (numbers)
 #: src/chown.c:193
 msgid "<Unknown group>"
-msgstr "<Gruppo sconosciuto>"
+msgstr "<Gruppo ignoto>"
 
 #: src/chown.c:261
 msgid " I can't run the Chown command on an extfs "
@@ -3096,7 +3105,7 @@ msgstr "preserva &Attributi"
 #. &op_preserve
 #: src/filegui.c:775
 msgid "follow &Links"
-msgstr "Segui i Link"
+msgstr "Segui i &Link"
 
 #. &file_mask_op_follow_links
 #: src/filegui.c:777
@@ -3142,15 +3151,15 @@ msgstr "&Chdir"
 
 #: src/find.c:118
 msgid "&Again"
-msgstr "&Otra vez"
+msgstr "&Ripeti"
 
 #: src/find.c:119
 msgid "&Quit"
-msgstr "&Terminar"
+msgstr "&Uscire"
 
 #: src/find.c:120 src/panelize.c:89
 msgid "Pane&lize"
-msgstr "Pane&lizar"
+msgstr "Panne&lizzare"
 
 #: src/find.c:121
 msgid "&View - F3"
@@ -3162,11 +3171,11 @@ msgstr "&Modifica - F4"
 
 #: src/find.c:150
 msgid "Start at:"
-msgstr "Inizia:"
+msgstr "Inizia a:"
 
 #: src/find.c:150
 msgid "Filename:"
-msgstr "File:"
+msgstr "Nome file:"
 
 #: src/find.c:150
 msgid "Content: "
@@ -3470,7 +3479,7 @@ msgstr "Midnight Commander %s"
 
 #: src/info.c:112
 msgid "Free nodes %d (%d%%) of %d"
-msgstr "Nodi liberi %d (%d%%) su %d"
+msgstr "Nodi liberi: %d(%d%%) su %d"
 
 #: src/info.c:118
 msgid "No node information"
@@ -3478,20 +3487,20 @@ msgstr "Nessuna info sui nodi"
 
 #: src/info.c:123
 msgid "Free space "
-msgstr "Spazio libero "
+msgstr "Spazio:"
 
 #: src/info.c:125
 msgid " (%d%%) of "
-msgstr " (%d%%) di "
+msgstr "(%d%%) di "
 
 #: src/info.c:129
 msgid "No space information"
-msgstr "Nessuna info sullo spazio a disposizione"
+msgstr "Nessuna info sullo spazio libero"
 
 #: src/info.c:133
 #, c-format
 msgid "Type:      %s "
-msgstr "Tipo:      %s"
+msgstr "Tipo:       %s"
 
 #: src/info.c:133
 msgid "non-local vfs"
@@ -3510,7 +3519,7 @@ msgstr "Filesystem: %s"
 #: src/info.c:148
 #, c-format
 msgid "Accessed:  %s"
-msgstr "Aperto: %d"
+msgstr "Aperto:     %s"
 
 #: src/info.c:152
 #, c-format
@@ -3520,11 +3529,11 @@ msgstr "Modificato: %s"
 #: src/info.c:156
 #, c-format
 msgid "Created:   %s"
-msgstr "Creato:    %s"
+msgstr "Creato:     %s"
 
 #: src/info.c:169
 msgid "Size:      "
-msgstr "Dimensione:"
+msgstr "Dimensione: "
 
 #: src/info.c:172
 #, c-format
@@ -3534,31 +3543,31 @@ msgstr " (%d blocchi)"
 #: src/info.c:178
 #, c-format
 msgid "Owner:     %s/%s"
-msgstr "Proprietario:     %s/%s"
+msgstr "Propriet.:  %s/%s"
 
 #: src/info.c:183
 #, c-format
 msgid "Links:     %d"
-msgstr "Links:     %d"
+msgstr "Links:      %d"
 
 #: src/info.c:187
 #, c-format
 msgid "Mode:      %s (%04o)"
-msgstr "Modalita':      %s (%04o)"
+msgstr "Permessi:   %s (%04o)"
 
 #: src/info.c:192
 #, c-format
 msgid "Location:  %Xh:%Xh"
-msgstr "Posizione:     %Xh:%Xh"
+msgstr "Posizione:  %Xh:%Xh"
 
 #: src/info.c:198
 #, c-format
 msgid "File:       %s"
-msgstr "File:      %s"
+msgstr "File: %s"
 
 #: src/info.c:202
 msgid "File:       None"
-msgstr "File:     nessuno"
+msgstr "File: nessuno"
 
 #: src/layout.c:158
 msgid "&Vertical"
@@ -3728,15 +3737,15 @@ msgstr "Premi un tasto per continuare..."
 
 #: src/main.c:791
 msgid " The shell is already running a command "
-msgstr " La shell sta eseguendo un comando "
+msgstr " La shell sta già eseguendo un comando "
 
 #: src/main.c:1196 src/main.c:1217
 msgid "&Listing mode..."
-msgstr "&Visualizzazione..."
+msgstr "&Modalità vista..."
 
 #: src/main.c:1197 src/main.c:1218
 msgid "&Quick view     C-x q"
-msgstr "&Vista rapida   C-x q"
+msgstr "&Vista rapida    C-x q"
 
 #: src/main.c:1198 src/main.c:1219
 msgid "&Info           C-x i"
@@ -3744,7 +3753,7 @@ msgstr "&Informazioni    C-x i"
 
 #: src/main.c:1201 src/main.c:1222
 msgid "&Sort order..."
-msgstr "&Ordina..."
+msgstr "&Ordina per..."
 
 #: src/main.c:1203 src/main.c:1224
 msgid "&Filter..."
@@ -3752,11 +3761,11 @@ msgstr "&Filtro"
 
 #: src/main.c:1206 src/main.c:1227
 msgid "&Network link..."
-msgstr "&Connessione remota..."
+msgstr "&Connessione rete..."
 
 #: src/main.c:1207 src/main.c:1228
 msgid "FT&P link..."
-msgstr "Connessione FTP..."
+msgstr "Connessione FT&P..."
 
 #: src/main.c:1211 src/main.c:1232
 msgid "&Drive...       M-d"
@@ -3764,7 +3773,7 @@ msgstr "&Disco...    M-d"
 
 #: src/main.c:1213 src/main.c:1234
 msgid "&Rescan         C-r"
-msgstr "&Aggiorna     C-r"
+msgstr "&Ri-leggi        C-r"
 
 #: src/main.c:1238
 msgid "&User menu          F2"
@@ -3797,15 +3806,15 @@ msgstr "&Permessi           C-x c"
 
 #: src/main.c:1246
 msgid "&Link            C-x l"
-msgstr "&Link               C-x l"
+msgstr "Co&Llegamento       C-x l"
 
 #: src/main.c:1247
 msgid "&SymLink         C-x s"
-msgstr "Link &Simbolico     C-x s"
+msgstr "Colleg. &Simbolico  C-x s"
 
 #: src/main.c:1248
 msgid "edit s&Ymlink  C-x C-s"
-msgstr "Modifica s&Ymlink   C-x C-s"
+msgstr "Modifica C. Sim&B.  C-x C-s"
 
 #: src/main.c:1249
 msgid "ch&Own           C-x o"
@@ -3821,15 +3830,15 @@ msgstr "&Rinomina/Sposta       F6"
 
 #: src/main.c:1253
 msgid "&Mkdir              F7"
-msgstr "&Crea directory        F7"
+msgstr "Crea director&Y        F7"
 
 #: src/main.c:1254
 msgid "&Delete             F8"
-msgstr "Cance&Lla              F8"
+msgstr "Ca&Ncella              F8"
 
 #: src/main.c:1255
 msgid "&Quick cd          M-c"
-msgstr "Cambia dir veloce     M-c"
+msgstr "Cambia &Dir veloce    M-c"
 
 #: src/main.c:1257
 msgid "select &Group      M-+"
@@ -3845,51 +3854,51 @@ msgstr "Inver&Ti selezione    M-*"
 
 #: src/main.c:1261
 msgid "e&Xit              F10"
-msgstr "E&Sci                 F10"
+msgstr "&Esci                 F10"
 
 #: src/main.c:1271
 msgid "&Directory tree"
-msgstr "Ramo &Directory"
+msgstr "&Albero directory"
 
 #: src/main.c:1273
 msgid "&Find file            M-?"
-msgstr "Cerca &File           M-?"
+msgstr "&Trova File                 M-?"
 
 #: src/main.c:1274
 msgid "s&Wap panels          C-u"
-msgstr "Scam&Bia pannelli     C-u"
+msgstr "Scambia &Pannelli           C-u"
 
 #: src/main.c:1275
 msgid "switch &Panels on/off C-o"
-msgstr "Attiva/disattiva pannelli C-o"
+msgstr "Attiva/disattiva pan&Nelli  C-o"
 
 #: src/main.c:1276
 msgid "&Compare directories  C-x d"
-msgstr "&Confronta directory  C-x d"
+msgstr "&Confronta directory        C-x d"
 
 #: src/main.c:1277
 msgid "e&Xternal panelize    C-x !"
-msgstr "Visualizza su un programma esterno C-x !"
+msgstr "&Usa visualizzatore esterno C-x !"
 
 #: src/main.c:1278
 msgid "show directory s&Izes"
-msgstr "Mostra d&Imensione dir"
+msgstr "Mostra &Dimensione directory"
 
 #: src/main.c:1280
 msgid "command &History"
-msgstr "S&Torico comandi"
+msgstr "&Storico comandi"
 
 #: src/main.c:1281
 msgid "di&Rectory hotlist    C-\\"
-msgstr "di&Rectory hotlist    C-\\"
+msgstr "Directory &Visitate         C-\\"
 
 #: src/main.c:1283
 msgid "&Active VFS list      C-x a"
-msgstr "Lista VFS &Attivi     C-x a "
+msgstr "&Lista VFS attivi           C-x a "
 
 #: src/main.c:1286
 msgid "&Background jobs      C-x j"
-msgstr "Processsi in &Background C-x j"
+msgstr "Processsi in &Background    C-x j"
 
 #: src/main.c:1290
 msgid "&Undelete files (ext2fs only)"
@@ -3913,15 +3922,15 @@ msgstr "&Configurazione..."
 
 #: src/main.c:1302
 msgid "&Layout..."
-msgstr "&Layout..."
+msgstr "&Aspetto..."
 
 #: src/main.c:1303
 msgid "c&Onfirmation..."
-msgstr "c&Onferma..."
+msgstr "C&Onferme..."
 
 #: src/main.c:1304
 msgid "&Display bits..."
-msgstr "Mostra bits..."
+msgstr "&Mostra bits..."
 
 #: src/main.c:1306
 msgid "learn &Keys..."
@@ -3938,7 +3947,7 @@ msgstr "&Salva configurazione"
 #: src/main.c:1328 src/main.c:1330
 #, fuzzy
 msgid " &Left "
-msgstr " Si&Nistra "
+msgstr " &Sinistra "
 
 #: src/main.c:1330
 #, fuzzy
@@ -3963,7 +3972,7 @@ msgstr " &Opzioni "
 #: src/main.c:1337 src/main.c:1339
 #, fuzzy
 msgid " &Right "
-msgstr " Dest&Ro "
+msgstr " &Destra "
 
 #: src/main.c:1339
 #, fuzzy
@@ -4108,11 +4117,11 @@ msgstr "&Patterns della shell"
 
 #: src/option.c:90
 msgid "Compute &Totals"
-msgstr ""
+msgstr "Calcola &Totali"
 
 #: src/option.c:91
 msgid "&Verbose operation"
-msgstr "Operazioni dettagliate"
+msgstr "Operazioni &Dettagliate"
 
 #: src/option.c:92
 msgid "&Fast dir reload"
@@ -4128,23 +4137,23 @@ msgstr "Menu a cascata"
 
 #: src/option.c:95
 msgid "ma&Rk moves down"
-msgstr "Evidenzia: muove cursore giu'"
+msgstr "Cursore in basso mentre seleziona"
 
 #: src/option.c:96
 msgid "show &Hidden files"
-msgstr "mostra file nascosti"
+msgstr "Mostra file nascosti"
 
 #: src/option.c:97
 msgid "show &Backup files"
-msgstr "mostra files di backup"
+msgstr "Mostra files di &Backup"
 
 #: src/option.c:104
 msgid "&Never"
-msgstr "Mai"
+msgstr "&Mai"
 
 #: src/option.c:105
 msgid "on dumb &Terminals"
-msgstr "solo su terminali stupidi."
+msgstr "Solo su &Terminali stupidi."
 
 #: src/option.c:106
 msgid "alwa&Ys"
@@ -4854,22 +4863,24 @@ msgstr "La maschera di destinazione e' errata"
 
 #: vfs/mcfs.c:321
 msgid " Too many open connections "
-msgstr ""
+msgstr " Troppe connessioni aperte "
 
 #: vfs/tar.c:84 vfs/tar.c:101
 #, fuzzy, c-format
 msgid ""
 "Couldn't open tar archive\n"
 "%s"
-msgstr "Non posso aprire la pipe %s\n"
+msgstr ""
+"Non posso aprire l'archivio tar\n"
+"%s"
 
 #: vfs/tar.c:284
 msgid "Unexpected EOF on archive file"
-msgstr ""
+msgstr "Inatteso EOF in file archivio"
 
 #: vfs/tar.c:339 vfs/tar.c:346
 msgid "Inconsistent tar archive"
-msgstr ""
+msgstr "Archivio tar inconsistente"
 
 #: vfs/tar.c:411
 #, c-format
@@ -4878,6 +4889,8 @@ msgid ""
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
+"Hmm,...\n"
+"non sembra un archivio tar."
 
 #~ msgid " Word wrap "
 #~ msgstr "word wrap "
