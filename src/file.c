@@ -489,11 +489,12 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 
     mc_refresh ();
 
-    while (mc_stat (dst_path, &sb2) == 0){
+ retry_dst_stat:
+    if (mc_stat (dst_path, &sb2) == 0){
 	if (S_ISDIR (sb2.st_mode)){
 	    return_status = file_error (_(" Cannot overwrite directory \"%s\" \n %s "), dst_path);
 	    if (return_status == FILE_RETRY)
-		continue;
+		goto retry_dst_stat;
 	    return return_status;
 	}
 	dst_exists = 1;
@@ -501,10 +502,9 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 
     while ((* ctx->stat_func) (src_path, &sb)) {
 	return_status = file_error (_(" Cannot stat source file \"%s\" \n %s "), src_path);
-	if (return_status == FILE_RETRY)
-	    continue;
-	return return_status;
-    } 
+	if (return_status != FILE_RETRY)
+	    return return_status;
+    }
 
     if (dst_exists){
 	    /* .ado: For OS/2 or NT: no st_ino exists, it is better to just try to
