@@ -71,7 +71,7 @@
 #  endif
 #endif /* MC_OS2 */
 
-#include "..\VERSION"
+#include "VERSION"
 
 #ifndef pc_system
 #   define pc_system
@@ -92,9 +92,19 @@
 #define STDC_HEADERS
 #define HAVE_STDLIB_H
 #define HAVE_STRING_H
+
+#ifndef MC_NT
+/* glib for Win32 provides its own dirent */
 #define HAVE_DIRENT_H
+#endif
+
 #define HAVE_LIMITS_H
+
+#if defined (__MINGW32__) || defined (_MSC_VER)
+#define HAVE_SYS_UTIME_H
+#else
 #define HAVE_UTIME_H
+#endif
 
 #define HAVE_MEMSET
 #define HAVE_MEMCHR
@@ -139,8 +149,6 @@ typedef int pid_t;
 #endif /* __MINGW32__ */
 
 #ifdef _MSC_VER
-
-#pragma include_alias(<utime.h>, <sys/utime.h>)
 
 #define INLINE
 #define inline
