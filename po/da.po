@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
 "POT-Creation-Date: 2000-07-27 13:03+0200\n"
-"PO-Revision-Date: 2001-01-03 23:37+01:00\n"
+"PO-Revision-Date: 2001-01-13 23:37+01:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -511,6 +511,10 @@ msgstr "Skrivebord"
 #: gnome/gdesktop-init.c:146
 msgid "Home directory"
 msgstr "Hjemmemappe"
+
+#: gnome/gdesktop-init.c:158
+msgid "Trash"
+msgstr "Papirkurv"
 
 #: gnome/gdialogs.c:60
 msgid "To: "
@@ -1823,6 +1827,10 @@ msgstr "Brugermenuen er kun tilgængelig i mcedit startet fra mc"
 #: gtkedit/edit.c:2792 gtkedit/editcmd.c:2940
 msgid "Error trying to stat file:"
 msgstr " Fejl under stat af fil:"
+
+#: gtkedit/editcmd.c:168 src/cmd.c:1206 src/tree.c:654 src/view.c:1821
+msgid "mc.hlp"
+msgstr "mc.hlp"
 
 #: gtkedit/editcmd.c:305
 msgid " Error writing to pipe: "
