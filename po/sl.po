@@ -10,7 +10,7 @@ msgstr ""
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-2\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #. The file-name is printed after the ':'
@@ -55,7 +55,7 @@ msgid ""
 " Increase edit.h:MAXBUF and recompile the editor. "
 msgstr ""
 " \n"
-" Poveèajte edit.h:MAXBUF in na novo prevedite urejevalnik. "
+" PoveÄajte edit.h:MAXBUF in na novo prevedite urejevalnik. "
 
 #: edit/edit.c:2538
 msgid "User menu available only in mcedit invoked from mc"
@@ -77,7 +77,7 @@ msgstr "&V redu"
 
 #: edit/edit_key_translator.c:135
 msgid " Emacs key: "
-msgstr " Emacs kljuè: "
+msgstr " Emacs kljuÄ: "
 
 #: edit/edit_key_translator.c:147 edit/edit_key_translator.c:172
 msgid " Execute Macro "
@@ -86,7 +86,7 @@ msgstr " Izvedi makro "
 #: edit/edit_key_translator.c:147 edit/edit_key_translator.c:172
 #: edit/editcmd.c:628
 msgid " Press macro hotkey: "
-msgstr " Pritisni vroèo tipko za makro: "
+msgstr " Pritisni vroÄo tipko za makro: "
 
 #: edit/edit_key_translator.c:168
 msgid " Insert Literal "
@@ -127,7 +127,7 @@ msgstr "Delaj varnostne kopije -->"
 #: src/option.c:136 src/panelize.c:73 src/view.c:398 src/wtools.c:101
 #: src/wtools.c:352 src/wtools.c:520
 msgid "&Cancel"
-msgstr "&Preklièi"
+msgstr "&PrekliÄi"
 
 #: edit/editcmd.c:339
 msgid "Extension:"
@@ -135,7 +135,7 @@ msgstr "Pripona:"
 
 #: edit/editcmd.c:345
 msgid " Edit Save Mode "
-msgstr " Uredi Shranjevalni Naèin"
+msgstr " Uredi Shranjevalni NaÄin"
 
 #: edit/editcmd.c:410
 msgid " Save As "
@@ -153,17 +153,17 @@ msgstr " Opozorilo "
 
 #: edit/editcmd.c:425
 msgid " A file already exists with this name. "
-msgstr " Datoteka s tem imenom ¾e obstaja. "
+msgstr " Datoteka s tem imenom Å¾e obstaja. "
 
 #. Push buttons to over-write the current file, or cancel the operation
 #: edit/editcmd.c:427
 msgid "Overwrite"
-msgstr "Prepi¹i"
+msgstr "PrepiÅ¡i"
 
 #: edit/editcmd.c:427 edit/editcmd.c:492 edit/editcmd.c:689 edit/editcmd.c:713
 #: edit/editcmd.c:738 edit/editcmd.c:885
 msgid "Cancel"
-msgstr "Preklièi"
+msgstr "PrekliÄi"
 
 #: edit/editcmd.c:445
 msgid " Save as "
@@ -176,12 +176,12 @@ msgstr " Napaka ob poskusu shranjenja datoteke. "
 #. This heads the delete macro error dialog box
 #: edit/editcmd.c:547 edit/editcmd.c:555 edit/editcmd.c:580
 msgid " Delete macro "
-msgstr " Zbri¹i makro "
+msgstr " ZbriÅ¡i makro "
 
 #. 'Open' = load temp file
 #: edit/editcmd.c:549
 msgid " Error trying to open temp file "
-msgstr " Napaka ob poskusu odprtja zaèasne datoteke "
+msgstr " Napaka ob poskusu odprtja zaÄasne datoteke "
 
 #. 'Open' = load temp file
 #: edit/editcmd.c:557 edit/editcmd.c:618 edit/editcmd.c:675
@@ -200,7 +200,7 @@ msgstr " Makro "
 #. Input line for a single key press follows the ':'
 #: edit/editcmd.c:599
 msgid " Press the macro's new hotkey: "
-msgstr " Pritisnite makrovo novo vroèo tipko:"
+msgstr " Pritisnite makrovo novo vroÄo tipko:"
 
 #. This heads the 'Save Macro' dialog box
 #: edit/editcmd.c:618
@@ -209,12 +209,12 @@ msgstr " Shrani makro"
 
 #: edit/editcmd.c:627
 msgid " Delete Macro "
-msgstr " Zbri¹i makro "
+msgstr " ZbriÅ¡i makro "
 
 #. This heads the 'Load Macro' dialog box
 #: edit/editcmd.c:674
 msgid " Load macro "
-msgstr " Nalo¾i makro "
+msgstr " NaloÅ¾i makro "
 
 #: edit/editcmd.c:687
 msgid " Confirm save file? : "
@@ -235,7 +235,7 @@ msgid ""
 " Continue discards these changes. "
 msgstr ""
 " Trenutno besedilo je bilo spremenjeno, a ne shranjeno. \n"
-" Z Nadaljuj bodo te spremembe zavr¾ene. "
+" Z Nadaljuj bodo te spremembe zavrÅ¾ene. "
 
 #: edit/editcmd.c:713 edit/editcmd.c:738 edit/editcmd.c:885
 msgid "Continue"
@@ -243,11 +243,11 @@ msgstr "Nadaljuj"
 
 #: edit/editcmd.c:744
 msgid " Load "
-msgstr " Nalo¾i "
+msgstr " NaloÅ¾i "
 
 #: edit/editcmd.c:885 edit/editcmd.c:983
 msgid " Block is large, you may not be able to undo this action. "
-msgstr " Blok je velik, tega dejanja ne bo mogoèe razveljaviti. "
+msgstr " Blok je velik, tega dejanja ne bo mogoÄe razveljaviti. "
 
 #: edit/editcmd.c:983
 msgid " Continue "
@@ -255,7 +255,7 @@ msgstr " Nadaljuj "
 
 #: edit/editcmd.c:983
 msgid " Cancel "
-msgstr " Preklièi "
+msgstr " PrekliÄi "
 
 #: edit/editcmd.c:1035
 msgid "o&Ne"
@@ -267,7 +267,7 @@ msgstr "&Vse"
 
 #: edit/editcmd.c:1039 src/file.c:2076 src/filegui.c:248
 msgid "&Skip"
-msgstr "Pre&skoèi"
+msgstr "Pre&skoÄi"
 
 #: edit/editcmd.c:1041
 msgid "&Replace"
@@ -307,7 +307,7 @@ msgstr "&Le cele besede"
 
 #: edit/editcmd.c:1105 edit/editcmd.c:1182 src/find.c:147
 msgid "case &Sensitive"
-msgstr "ra&Zlikuj velike in male èrke"
+msgstr "ra&Zlikuj velike in male Ärke"
 
 #: edit/editcmd.c:1109
 msgid " Enter replacement argument order eg. 3,2,1,4 "
@@ -337,7 +337,7 @@ msgstr " Iskanje "
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
 msgstr ""
-" Neveljaven regularni izraz, ali scanf izraz s prevelikim ¹tevilom pretvorb "
+" Neveljaven regularni izraz, ali scanf izraz s prevelikim Å¡tevilom pretvorb "
 
 #. "Invalid regexp string or scanf string"
 #: edit/editcmd.c:1771
@@ -360,7 +360,7 @@ msgstr " %d najdb, %d dodanih zaznamkov"
 
 #: edit/editcmd.c:1925
 msgid " Quit "
-msgstr " Konèaj "
+msgstr " KonÄaj "
 
 #: edit/editcmd.c:1925
 msgid " File was modified, Save with exit? "
@@ -368,7 +368,7 @@ msgstr " Datoteka je bila spremenjena. Shranim ob izhodu? "
 
 #: edit/editcmd.c:1925
 msgid "Cancel quit"
-msgstr "Preklièi izhod"
+msgstr "PrekliÄi izhod"
 
 #: edit/editcmd.c:1925 src/cmd.c:223 src/file.c:1775 src/file.c:2134
 #: src/filegui.c:563 src/hotlist.c:1012 src/main.c:774 src/screen.c:1988
@@ -384,7 +384,7 @@ msgstr "&Ne"
 
 #: edit/editcmd.c:2032
 msgid " Copy to clipboard "
-msgstr " Kopiraj na odlo¾i¹èe "
+msgstr " Kopiraj na odloÅ¾iÅ¡Äe "
 
 #: edit/editcmd.c:2032 edit/editcmd.c:2045
 msgid " Unable to save to file. "
@@ -392,7 +392,7 @@ msgstr " Ne morem shraniti v datoteko. "
 
 #: edit/editcmd.c:2045
 msgid " Cut to clipboard "
-msgstr " Izre¾i in postavi na odlo¾i¹èe "
+msgstr " IzreÅ¾i in postavi na odloÅ¾iÅ¡Äe "
 
 #: edit/editcmd.c:2065 src/view.c:1837
 msgid " Goto line "
@@ -400,7 +400,7 @@ msgstr " Pojdi v vrstico "
 
 #: edit/editcmd.c:2065
 msgid " Enter line: "
-msgstr " Vpi¹i vrstico: "
+msgstr " VpiÅ¡i vrstico: "
 
 #: edit/editcmd.c:2084 edit/editcmd.c:2097
 msgid " Save Block "
@@ -424,16 +424,16 @@ msgstr " Sortiraj blok"
 
 #: edit/editcmd.c:2139 edit/editcmd.c:2223
 msgid " You must first highlight a block of text. "
-msgstr " Najprej morate oznaèiti blok besedila. "
+msgstr " Najprej morate oznaÄiti blok besedila. "
 
 #: edit/editcmd.c:2146
 msgid " Run Sort "
-msgstr " Po¾eni sortiranje "
+msgstr " PoÅ¾eni sortiranje "
 
 #: edit/editcmd.c:2147
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr ""
-" Vnesite mo¾nosti sortiranja (poglejte strani man), loèite jih s presledki: "
+" Vnesite moÅ¾nosti sortiranja (poglejte strani man), loÄite jih s presledki: "
 
 #: edit/editcmd.c:2158 edit/editcmd.c:2163
 msgid " Sort "
@@ -445,7 +445,7 @@ msgstr " Napaka ob poskusu izvedbe ukaza sort"
 
 #: edit/editcmd.c:2164
 msgid " Sort returned non-zero: "
-msgstr " Program sort je vrnil nenièelno vrednost: "
+msgstr " Program sort je vrnil neniÄelno vrednost: "
 
 #: edit/editcmd.c:2197
 msgid "Error create script:"
@@ -473,7 +473,7 @@ msgstr "Napaka ob poskusu poizvedbe stanja datoteke:"
 
 #: edit/editcmd.c:2334
 msgid " Mail "
-msgstr " Po¹ta "
+msgstr " PoÅ¡ta "
 
 #: edit/editcmd.c:2345
 msgid " Copies to"
@@ -497,7 +497,7 @@ msgstr " Lomi vrstice ob besedah "
 
 #: edit/editmenu.c:56
 msgid " Enter line length, 0 for off: "
-msgstr " Vnesite dol¾ino vrstice, 0 za izklop: "
+msgstr " Vnesite dolÅ¾ino vrstice, 0 za izklop: "
 
 #: edit/editmenu.c:67
 msgid " About "
@@ -516,11 +516,11 @@ msgstr ""
 "\n"
 "                Cooledit  v3.11.5\n"
 "\n"
-"       Avtorske pravice pridr¾ane (C) 1996\n"
+"       Avtorske pravice pridrÅ¾ane (C) 1996\n"
 "          Fundacija za prosto programje\n"
 "\n"
 "       Uporabniku prijazen urejevalnik besedil\n"
-"           za Polnoènega poveljnika.\n"
+"           za PolnoÄnega poveljnika.\n"
 
 #: edit/editmenu.c:120 edit/editmenu.c:139
 msgid "&Open file..."
@@ -568,15 +568,15 @@ msgstr "kopiraj v &datoteko..."
 
 #: edit/editmenu.c:158 edit/editmenu.c:175
 msgid "&Toggle Mark       F3"
-msgstr "&Preklopi oznaèbo  F3"
+msgstr "&Preklopi oznaÄbo  F3"
 
 #: edit/editmenu.c:159 edit/editmenu.c:176
 msgid "&Mark Columns    S-F3"
-msgstr "&Oznaèi stolpce  S-F3"
+msgstr "&OznaÄi stolpce  S-F3"
 
 #: edit/editmenu.c:161 edit/editmenu.c:178
 msgid "toggle &Ins/overw Ins"
-msgstr "preklopi naèin &Pisanja "
+msgstr "preklopi naÄin &Pisanja "
 
 #: edit/editmenu.c:163 edit/editmenu.c:180
 msgid "&Copy              F5"
@@ -588,7 +588,7 @@ msgstr "&Prestavi          F6"
 
 #: edit/editmenu.c:165 edit/editmenu.c:182
 msgid "&Delete            F8"
-msgstr "&Zbri¹i            F8"
+msgstr "&ZbriÅ¡i            F8"
 
 #: edit/editmenu.c:167 edit/editmenu.c:184
 msgid "&Undo             C-u"
@@ -596,7 +596,7 @@ msgstr "&Razveljavi       C-u"
 
 #: edit/editmenu.c:169 edit/editmenu.c:186
 msgid "&Beginning     C-PgUp"
-msgstr "&Zaèetek       C-PgUp"
+msgstr "&ZaÄetek       C-PgUp"
 
 #: edit/editmenu.c:170 edit/editmenu.c:187
 msgid "&End           C-PgDn"
@@ -608,7 +608,7 @@ msgstr "&Iskanje...        F7"
 
 #: edit/editmenu.c:193 edit/editmenu.c:200
 msgid "search &Again     F17"
-msgstr "I¹èi znov&A       F17"
+msgstr "IÅ¡Äi znov&A       F17"
 
 #: edit/editmenu.c:194 edit/editmenu.c:201
 msgid "&Replace...        F4"
@@ -632,11 +632,11 @@ msgstr "&Obnovi zaslon"
 
 #: edit/editmenu.c:213 edit/editmenu.c:236
 msgid "&Start record macro      C-r"
-msgstr "&Zaèni snemanje makra     C-r"
+msgstr "&ZaÄni snemanje makra     C-r"
 
 #: edit/editmenu.c:214 edit/editmenu.c:237
 msgid "&Finish record macro...  C-r"
-msgstr "&Konèaj snemanje makra   C-r"
+msgstr "&KonÄaj snemanje makra   C-r"
 
 #: edit/editmenu.c:215
 msgid "&Execute macro...   C-a, KEY"
@@ -644,11 +644,11 @@ msgstr "&Izvedi makro... C-a, TIPKA"
 
 #: edit/editmenu.c:216 edit/editmenu.c:239
 msgid "delete macr&O...            "
-msgstr "zbri¹i makr&O...            "
+msgstr "zbriÅ¡i makr&O...            "
 
 #: edit/editmenu.c:218 edit/editmenu.c:241
 msgid "insert &Date/time           "
-msgstr "vstavi &Datum/èas           "
+msgstr "vstavi &Datum/Äas           "
 
 #: edit/editmenu.c:220 edit/editmenu.c:243
 msgid "format p&Aragraph        M-p"
@@ -656,7 +656,7 @@ msgstr "formatiraj &Odstavek      M-p"
 
 #: edit/editmenu.c:221
 msgid "'ispell' s&Pell check    C-p"
-msgstr "'ispell' è&Rkovalnik      C-p"
+msgstr "'ispell' Ä&Rkovalnik      C-p"
 
 #: edit/editmenu.c:222 edit/editmenu.c:245
 msgid "sor&T...                 M-t"
@@ -668,7 +668,7 @@ msgstr "&Zunanji formater        F19"
 
 #: edit/editmenu.c:224 edit/editmenu.c:247
 msgid "&Mail...                    "
-msgstr "&Po¹lji...                    "
+msgstr "&PoÅ¡lji...                    "
 
 #: edit/editmenu.c:238
 msgid "&Execute macro... C-x e, KEY"
@@ -676,15 +676,15 @@ msgstr "&Izvedi makro.  C-x e, TIPKA"
 
 #: edit/editmenu.c:244
 msgid "'ispell' s&Pell check    M-$"
-msgstr "'ispell' è&Rkovalnik     M-$"
+msgstr "'ispell' Ä&Rkovalnik     M-$"
 
 #: edit/editmenu.c:254 edit/editmenu.c:263
 msgid "&General...  "
-msgstr "&Splo¹no...  "
+msgstr "&SploÅ¡no...  "
 
 #: edit/editmenu.c:255 edit/editmenu.c:264
 msgid "&Save mode..."
-msgstr "naèin &Shranjevanja..."
+msgstr "naÄin &Shranjevanja..."
 
 #: edit/editmenu.c:257 edit/editmenu.c:266 src/main.c:1217
 msgid "&Layout..."
@@ -701,7 +701,7 @@ msgstr " Uredi "
 
 #: edit/editmenu.c:278 edit/editmenu.c:287
 msgid " Sear/Repl "
-msgstr " I¹èi/Zame"
+msgstr " IÅ¡Äi/Zame"
 
 #: edit/editmenu.c:279 edit/editmenu.c:288
 msgid " Command "
@@ -709,7 +709,7 @@ msgstr " Ukaz "
 
 #: edit/editmenu.c:280 edit/editmenu.c:289
 msgid " Options "
-msgstr " Mo¾nosti "
+msgstr " MoÅ¾nosti "
 
 #: edit/editoptions.c:36
 msgid "Intuitive"
@@ -725,7 +725,7 @@ msgstr "Brez"
 
 #: edit/editoptions.c:39
 msgid "Dynamic paragraphing"
-msgstr "Dinamièni odstavki"
+msgstr "DinamiÄni odstavki"
 
 #: edit/editoptions.c:39
 msgid "Type writer wrap"
@@ -734,7 +734,7 @@ msgstr "Prevoj tipkalnega stroja"
 #. 2
 #: edit/editoptions.c:72
 msgid "Word wrap line length : "
-msgstr "Dol¾ina vrstice za prevoj : "
+msgstr "DolÅ¾ina vrstice za prevoj : "
 
 #. 4
 #: edit/editoptions.c:78
@@ -763,17 +763,17 @@ msgstr "ente&R samodejno zamika"
 #. 10
 #: edit/editoptions.c:101
 msgid "&Backspace through tabs"
-msgstr "&Vraèalka skozi tabulatorje"
+msgstr "&VraÄalka skozi tabulatorje"
 
 #. 11
 #: edit/editoptions.c:104
 msgid "&Fake half tabs"
-msgstr "&Ponaredi poloviène tabulatorje"
+msgstr "&Ponaredi poloviÄne tabulatorje"
 
 #. 13
 #: edit/editoptions.c:110
 msgid "Wrap mode"
-msgstr "Naèin zavijanja"
+msgstr "NaÄin zavijanja"
 
 #. 15
 #: edit/editoptions.c:116
@@ -782,12 +782,12 @@ msgstr "Emulacija tipk"
 
 #: edit/editoptions.c:157
 msgid " Editor options "
-msgstr " Mo¾nosti urejevalnika"
+msgstr " MoÅ¾nosti urejevalnika"
 
 #: edit/editwidget.c:235 src/help.c:811 src/main.c:1539 src/screen.c:2222
 #: src/tree.c:1018 src/view.c:2010
 msgid "Help"
-msgstr "Pomoè"
+msgstr "PomoÄ"
 
 #: edit/editwidget.c:237
 msgid "Mark"
@@ -811,7 +811,7 @@ msgstr "Iskanje"
 
 #: edit/editwidget.c:242 src/screen.c:2229
 msgid "Delete"
-msgstr "Zbri¹i"
+msgstr "ZbriÅ¡i"
 
 #: edit/editwidget.c:244 src/main.c:1541
 msgid "PullDn"
@@ -820,11 +820,11 @@ msgstr "Potegni Dol"
 #: edit/editwidget.c:245 src/help.c:823 src/main.c:1542 src/view.c:2012
 #: src/view.c:2034
 msgid "Quit"
-msgstr "Konèaj"
+msgstr "KonÄaj"
 
 #: edit/syntax.c:997 edit/syntax.c:1002
 msgid " Load syntax file "
-msgstr " Nalo¾i datoteko s sintakso"
+msgstr " NaloÅ¾i datoteko s sintakso"
 
 #: edit/syntax.c:997
 msgid " File access error "
@@ -857,7 +857,7 @@ msgstr "&Nastavi"
 
 #: pc/chmod.c:122 src/chmod.c:109
 msgid "C&lear marked"
-msgstr "&Poèisti oznaèeno"
+msgstr "&PoÄisti oznaÄeno"
 
 #: pc/chmod.c:125 src/chmod.c:110
 msgid "S&et marked"
@@ -865,7 +865,7 @@ msgstr "&Nastavi oznako"
 
 #: pc/chmod.c:128 src/chmod.c:111
 msgid "&Marked all"
-msgstr "&Oznaèi vse"
+msgstr "&OznaÄi vse"
 
 #: pc/chmod.c:131 src/achown.c:74 src/chmod.c:112 src/chown.c:80
 msgid "Set &all"
@@ -877,7 +877,7 @@ msgstr "Imenu"
 
 #: pc/chmod.c:159 src/chmod.c:139
 msgid "Permissions (Octal)"
-msgstr "Dovoljenja (osmi¹ko)"
+msgstr "Dovoljenja (osmiÅ¡ko)"
 
 #: pc/chmod.c:161 src/chmod.c:141
 msgid "Owner name"
@@ -901,15 +901,15 @@ msgstr "Uporabite PRESLEDNICO za spremembo"
 
 #: pc/chmod.c:178 src/chmod.c:158
 msgid "an option, ARROW KEYS"
-msgstr "mo¾nosti, SMERNE TIPKE"
+msgstr "moÅ¾nosti, SMERNE TIPKE"
 
 #: pc/chmod.c:180 src/chmod.c:160
 msgid "to move between options"
-msgstr "za premik med mo¾nostmi"
+msgstr "za premik med moÅ¾nostmi"
 
 #: pc/chmod.c:182 src/chmod.c:162
 msgid "and T or INS to mark"
-msgstr "in T ali INS za oznaèitev"
+msgstr "in T ali INS za oznaÄitev"
 
 #: pc/chmod.c:235
 msgid "[Chmod]"
@@ -929,7 +929,7 @@ msgstr "neznan"
 
 #: src/achown.c:73
 msgid "S&kip"
-msgstr "Pres&koèi"
+msgstr "Pres&koÄi"
 
 #: src/achown.c:343 src/achown.c:350
 msgid "owner"
@@ -953,7 +953,7 @@ msgstr "Zastavica"
 
 #: src/achown.c:359
 msgid "Mode"
-msgstr "Naèin"
+msgstr "NaÄin"
 
 #: src/achown.c:364
 #, c-format
@@ -971,7 +971,7 @@ msgid ""
 " Couldn't chmod \"%s\" \n"
 " %s "
 msgstr ""
-" Nisem mogel doloèiti naèina \"%s\" \n"
+" Nisem mogel doloÄiti naÄina \"%s\" \n"
 " %s "
 
 #: src/achown.c:612 src/achown.c:627 src/achown.c:673 src/chown.c:216
@@ -981,7 +981,7 @@ msgid ""
 " Couldn't chown \"%s\" \n"
 " %s "
 msgstr ""
-" Nisem mogel doloèiti lastni¹tva \"%s\" \n"
+" Nisem mogel doloÄiti lastniÅ¡tva \"%s\" \n"
 " %s "
 
 #: src/background.c:178
@@ -1009,12 +1009,12 @@ msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
 msgstr ""
-" Proces v ozadju nam je poslal pro¹njo za veè argumentov \n"
-" kot smo jih zmo¾ni urediti. \n"
+" Proces v ozadju nam je poslal proÅ¡njo za veÄ argumentov \n"
+" kot smo jih zmoÅ¾ni urediti. \n"
 
 #: src/boxes.c:71
 msgid " Listing mode "
-msgstr " Seznamski naèin "
+msgstr " Seznamski naÄin "
 
 #: src/boxes.c:76
 msgid "&Full file list"
@@ -1038,11 +1038,11 @@ msgstr "&Ikonski pogled"
 
 #: src/boxes.c:143
 msgid "user &Mini status"
-msgstr "uporabni¹ko &Mini stanje"
+msgstr "uporabniÅ¡ko &Mini stanje"
 
 #: src/boxes.c:192
 msgid "Listing mode"
-msgstr "Seznamski naèin"
+msgstr "Seznamski naÄin"
 
 #: src/boxes.c:280
 msgid "&Reverse"
@@ -1050,7 +1050,7 @@ msgstr "&Obrnjeno"
 
 #: src/boxes.c:281
 msgid "case sensi&tive"
-msgstr "razlikuj velike in male èrke"
+msgstr "razlikuj velike in male Ärke"
 
 #: src/boxes.c:282
 msgid "Sort order"
@@ -1094,7 +1094,7 @@ msgstr "P&olni 8 bitni vhod"
 
 #: src/boxes.c:479 src/boxes.c:600
 msgid " Display bits "
-msgstr " Ka¾i bite "
+msgstr " KaÅ¾i bite "
 
 #: src/boxes.c:584 src/selcodepage.c:49
 msgid "Other 8 bit"
@@ -1118,7 +1118,7 @@ msgstr "sek"
 
 #: src/boxes.c:764
 msgid "ftpfs directory cache timeout:"
-msgstr "Èasovna omejitev za predpomnilnik ftpfs imenikov:"
+msgstr "ÄŒasovna omejitev za predpomnilnik ftpfs imenikov:"
 
 #: src/boxes.c:768
 msgid "ftp anonymous password:"
@@ -1126,11 +1126,11 @@ msgstr "geslo za anonimni ftp:"
 
 #: src/boxes.c:775
 msgid "Timeout for freeing VFSs:"
-msgstr "Èasovna omejitev za sprostitev VFS-jev:"
+msgstr "ÄŒasovna omejitev za sprostitev VFS-jev:"
 
 #: src/boxes.c:781
 msgid " Virtual File System Setting "
-msgstr " Nastavitve Navideznega Datoteènega Sistema (VFS)"
+msgstr " Nastavitve Navideznega DatoteÄnega Sistema (VFS)"
 
 #: src/boxes.c:840
 msgid "Quick cd"
@@ -1151,11 +1151,11 @@ msgstr "Ime simbolne povezave:"
 
 #: src/boxes.c:892
 msgid "Existing filename (filename symlink will point to):"
-msgstr "Ime obstojeèe datoteke (tja bo simbolna povezava kazala):"
+msgstr "Ime obstojeÄe datoteke (tja bo simbolna povezava kazala):"
 
 #: src/boxes.c:921
 msgid "Running "
-msgstr "Teèe "
+msgstr "TeÄe "
 
 #: src/boxes.c:922 src/find.c:720
 msgid "Stopped"
@@ -1183,7 +1183,7 @@ msgstr "Domena:"
 
 #: src/boxes.c:1055
 msgid "Username:"
-msgstr "Uporabni¹ko ime:"
+msgstr "UporabniÅ¡ko ime:"
 
 #: src/boxes.c:1055
 msgid "Password: "
@@ -1282,7 +1282,7 @@ msgstr " Chown ukaz "
 
 #: src/chown.c:122
 msgid " User name "
-msgstr " Uporabni¹ko ime "
+msgstr " UporabniÅ¡ko ime "
 
 #: src/chown.c:185
 msgid "<Unknown user>"
@@ -1304,7 +1304,7 @@ msgstr " CD "
 
 #: src/cmd.c:222
 msgid "Files tagged, want to cd?"
-msgstr "Datoteke oznaèene, ¾elite spremeniti imenik"
+msgstr "Datoteke oznaÄene, Å¾elite spremeniti imenik"
 
 #: src/cmd.c:228 src/cmd.c:714 src/cmd.c:733
 msgid "Could not change directory"
@@ -1332,7 +1332,7 @@ msgstr "Ustvari nov Imenik"
 
 #: src/cmd.c:362
 msgid " Enter directory name:"
-msgstr " Vpi¹ite ime imenika:"
+msgstr " VpiÅ¡ite ime imenika:"
 
 #: src/cmd.c:422
 msgid " Filter "
@@ -1348,11 +1348,11 @@ msgstr " Izberi "
 
 #: src/cmd.c:518 src/cmd.c:569 src/find.c:269
 msgid "  Malformed regular expression  "
-msgstr "  Napaèno formuliran regularni izraz  "
+msgstr "  NapaÄno formuliran regularni izraz  "
 
 #: src/cmd.c:542
 msgid " Unselect "
-msgstr " Preklièi izbor "
+msgstr " PrekliÄi izbor "
 
 #: src/cmd.c:615
 msgid "Extension file edit"
@@ -1360,7 +1360,7 @@ msgstr "Uredi datoteko s priponami"
 
 #: src/cmd.c:616
 msgid " Which extension file you want to edit? "
-msgstr " Katero datoteko s priponami ¾elite urejati? "
+msgstr " Katero datoteko s priponami Å¾elite urejati? "
 
 #: src/cmd.c:617 src/cmd.c:643
 msgid "&User"
@@ -1376,7 +1376,7 @@ msgstr "Urejanje datoteke s sintakso"
 
 #: src/cmd.c:642
 msgid " Which syntax file you want to edit? "
-msgstr " Katero datoteko s sintakso ¾elite urejati? "
+msgstr " Katero datoteko s sintakso Å¾elite urejati? "
 
 #: src/cmd.c:668
 msgid " Menu edit "
@@ -1384,7 +1384,7 @@ msgstr " Urejanje menujev"
 
 #: src/cmd.c:669
 msgid " Which menu file will you edit ? "
-msgstr " Katero datoteko z menuji ¾elite urejati?"
+msgstr " Katero datoteko z menuji Å¾elite urejati?"
 
 #: src/cmd.c:671
 msgid "&Local"
@@ -1416,7 +1416,7 @@ msgstr "&Popolno"
 
 #: src/cmd.c:870
 msgid " Both panels should be on the listing view mode to use this command "
-msgstr "Oba pulta morata biti v seznamskem naèinu za uporabo tega ukaza"
+msgstr "Oba pulta morata biti v seznamskem naÄinu za uporabo tega ukaza"
 
 #: src/cmd.c:884
 msgid " The command history is empty "
@@ -1436,11 +1436,11 @@ msgstr ""
 
 #: src/cmd.c:963
 msgid "Type `exit' to return to the Midnight Commander"
-msgstr "Napi¹ite `exit' za vrnitev v Polnoènega poveljnika"
+msgstr "NapiÅ¡ite `exit' za vrnitev v PolnoÄnega poveljnika"
 
 #: src/cmd.c:1008 src/cmd.c:1010
 msgid " Link "
-msgstr " Pove¾i "
+msgstr " PoveÅ¾i "
 
 #: src/cmd.c:1009 src/cmd.c:1123 src/file.c:1613
 msgid " to:"
@@ -1459,7 +1459,7 @@ msgstr " simbolna povezava: %s"
 #: src/cmd.c:1081
 #, c-format
 msgid " Symlink `%s' points to: "
-msgstr " Simbolna povezava `%s' ka¾e na: "
+msgstr " Simbolna povezava `%s' kaÅ¾e na: "
 
 #: src/cmd.c:1086
 msgid " Edit symlink "
@@ -1482,20 +1482,20 @@ msgstr "`%s' ni simbolna povezava"
 
 #: src/cmd.c:1123
 msgid " Link symbolically "
-msgstr " Pove¾i simbolno"
+msgstr " PoveÅ¾i simbolno"
 
 #: src/cmd.c:1124
 msgid " Relative symlink "
-msgstr " Relativna simbolièna povezava"
+msgstr " Relativna simboliÄna povezava"
 
 #: src/cmd.c:1135
 #, c-format
 msgid " relative symlink: %s "
-msgstr " relativna simbolièna povezava: %s "
+msgstr " relativna simboliÄna povezava: %s "
 
 #: src/cmd.c:1261
 msgid " Enter machine name (F1 for details): "
-msgstr " Vnesite ime raèunalnika (F1 za podrobnosti):"
+msgstr " Vnesite ime raÄunalnika (F1 za podrobnosti):"
 
 #: src/cmd.c:1288
 #, c-format
@@ -1504,29 +1504,29 @@ msgstr " Nisem mogel iti v imenik %s"
 
 #: src/cmd.c:1295 src/widget.c:1083
 msgid " Link to a remote machine "
-msgstr " Pove¾i se z oddaljenim raèunalnikom"
+msgstr " PoveÅ¾i se z oddaljenim raÄunalnikom"
 
 #: src/cmd.c:1301 src/widget.c:1084
 msgid " FTP to machine "
-msgstr " FTP dostop do raèunalnika"
+msgstr " FTP dostop do raÄunalnika"
 
 #: src/cmd.c:1307 src/widget.c:1085
 msgid " SMB link to machine "
-msgstr " SMB povezava do raèunalnika"
+msgstr " SMB povezava do raÄunalnika"
 
 #: src/cmd.c:1317
 msgid " Socket source routing setup "
-msgstr " Nastavitev usmerjanja vtièev z izvora"
+msgstr " Nastavitev usmerjanja vtiÄev z izvora"
 
 #: src/cmd.c:1318
 msgid " Enter host name to use as a source routing hop: "
 msgstr ""
-" Vpi¹ite ime raèunalnika, ki naj ga uporabim za preskok pri usmerjanju z "
+" VpiÅ¡ite ime raÄunalnika, ki naj ga uporabim za preskok pri usmerjanju z "
 "izvora: "
 
 #: src/cmd.c:1326
 msgid " Host name "
-msgstr " Ime raèunalnika "
+msgstr " Ime raÄunalnika "
 
 #: src/cmd.c:1326
 msgid " Error while looking up IP address "
@@ -1534,7 +1534,7 @@ msgstr " Napaka ob poizkusu poizvedbe IP naslova"
 
 #: src/cmd.c:1337
 msgid " Undelete files on an ext2 file system "
-msgstr " Odbri¹i datoteke na ext2 datoteènem sistemu"
+msgstr " OdbriÅ¡i datoteke na ext2 datoteÄnem sistemu"
 
 #: src/cmd.c:1338
 msgid ""
@@ -1563,7 +1563,7 @@ msgstr ""
 
 #: src/command.c:198
 msgid " You can not execute commands on non-local filesystems"
-msgstr " Ukaze lahko izvr¹ujete le na krajevnem datoteènem sistemu"
+msgstr " Ukaze lahko izvrÅ¡ujete le na krajevnem datoteÄnem sistemu"
 
 #: src/dialog.c:55
 msgid ""
@@ -1577,7 +1577,7 @@ msgstr ""
 "\n"
 "\n"
 "\n"
-" napaka ob osve¾itvi sklada (podkoraèitev)!\n"
+" napaka ob osveÅ¾itvi sklada (podkoraÄitev)!\n"
 "\n"
 "\n"
 
@@ -1595,15 +1595,15 @@ msgstr "&Pripona"
 
 #: src/dir.c:56
 msgid "&Modify time"
-msgstr "Èas &Modifikacije"
+msgstr "ÄŒas &Modifikacije"
 
 #: src/dir.c:57
 msgid "&Access time"
-msgstr "èas &Dostopa"
+msgstr "Äas &Dostopa"
 
 #: src/dir.c:58
 msgid "&Change time"
-msgstr "Èas &Spremembe"
+msgstr "ÄŒas &Spremembe"
 
 #: src/dir.c:59
 msgid "&Size"
@@ -1616,7 +1616,7 @@ msgstr "&Inode"
 #. New sort orders
 #: src/dir.c:63
 msgid "&Type"
-msgstr "&Naèin"
+msgstr "&NaÄin"
 
 #: src/dir.c:64
 msgid "&Links"
@@ -1649,7 +1649,7 @@ msgid ""
 " Cannot create temporary command file \n"
 " %s "
 msgstr ""
-" Ne morem ustvariti zaèasne ukazne datoteke \n"
+" Ne morem ustvariti zaÄasne ukazne datoteke \n"
 " %s "
 
 #: src/ext.c:154 src/user.c:573
@@ -1662,7 +1662,7 @@ msgstr " napaka v datoteki"
 
 #: src/ext.c:397
 msgid "Format of the "
-msgstr "Naèin zapisa v "
+msgstr "NaÄin zapisa v "
 
 #: src/ext.c:399
 msgid ""
@@ -1671,10 +1671,10 @@ msgid ""
 "failed. Please fetch a fresh new copy from the\n"
 "Midnight Commander package."
 msgstr ""
-"Datoteka mc.ext je bila z razlièico 3.0\n"
+"Datoteka mc.ext je bila z razliÄico 3.0\n"
 "spremenjena. Zdi se, da namestitev\n"
-"ni uspela. Prosim pridobite si sve¾o novo kopijo iz\n"
-"paketa Polnoènega poveljnika oz. v pimeru."
+"ni uspela. Prosim pridobite si sveÅ¾o novo kopijo iz\n"
+"paketa PolnoÄnega poveljnika oz. v pimeru."
 
 #: src/ext.c:413
 msgid " file error "
@@ -1682,7 +1682,7 @@ msgstr " napaka v datoteki "
 
 #: src/ext.c:414
 msgid "Format of the ~/"
-msgstr "Naèin zapisa ~/"
+msgstr "NaÄin zapisa ~/"
 
 #: src/ext.c:414
 msgid ""
@@ -1691,7 +1691,7 @@ msgid ""
 "copy it from "
 msgstr ""
 " datoteka je bila spremenjena\n"
-"z razlièico 3.0. Lahko jo skopirate \n"
+"z razliÄico 3.0. Lahko jo skopirate \n"
 "iz"
 
 #: src/ext.c:416
@@ -1716,15 +1716,15 @@ msgstr " Prestavi "
 
 #: src/file.c:145 src/tree.c:755
 msgid " Delete "
-msgstr " Zbri¹i "
+msgstr " ZbriÅ¡i "
 
 #: src/file.c:230
 msgid " Invalid target mask "
-msgstr " Napaèna maska cilja "
+msgstr " NapaÄna maska cilja "
 
 #: src/file.c:328
 msgid " Could not make the hardlink "
-msgstr " Nisem mogel ustvariti moène povezave"
+msgstr " Nisem mogel ustvariti moÄne povezave"
 
 #: src/file.c:370
 #, c-format
@@ -1741,10 +1741,10 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" Ne morem ustvariti stabilnih simbolnih povezav preko oddaljenih datoteènih "
+" Ne morem ustvariti stabilnih simbolnih povezav preko oddaljenih datoteÄnih "
 "sistemov: \n"
 "\n"
-" Mo¾nost Stabilnih simbolnih povezav bo izkljuèena "
+" MoÅ¾nost Stabilnih simbolnih povezav bo izkljuÄena "
 
 #: src/file.c:428
 #, c-format
@@ -1793,7 +1793,7 @@ msgid ""
 " Cannot chown target file \"%s\" \n"
 " %s "
 msgstr ""
-" Ne morem spremeniti lastni¹tva cilje datoteke \"%s\" \n"
+" Ne morem spremeniti lastniÅ¡tva cilje datoteke \"%s\" \n"
 " %s "
 
 #: src/file.c:570 src/file.c:796
@@ -1802,7 +1802,7 @@ msgid ""
 " Cannot chmod target file \"%s\" \n"
 " %s "
 msgstr ""
-" Ne morem spremeniti naèina ciljne datoteke \"%s\" \n"
+" Ne morem spremeniti naÄina ciljne datoteke \"%s\" \n"
 " %s "
 
 #: src/file.c:582
@@ -1816,7 +1816,7 @@ msgstr ""
 
 #: src/file.c:592
 msgid " Reget failed, about to overwrite file "
-msgstr " Nadaljnevanje nalaganja neuspe¹no, sedaj bom datoteko prepisal "
+msgstr " Nadaljnevanje nalaganja neuspeÅ¡no, sedaj bom datoteko prepisal "
 
 #: src/file.c:598
 #, c-format
@@ -1887,15 +1887,15 @@ msgstr ""
 
 #: src/file.c:770
 msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Datoteka je bila prene¹ena nepopolno. Naj ostane?"
+msgstr "Datoteka je bila preneÅ¡ena nepopolno. Naj ostane?"
 
 #: src/file.c:771
 msgid "&Delete"
-msgstr "&Zbri¹i"
+msgstr "&ZbriÅ¡i"
 
 #: src/file.c:771 src/hotlist.c:1410
 msgid "&Keep"
-msgstr "&Obdr¾i"
+msgstr "&ObdrÅ¾i"
 
 #: src/file.c:837
 #, c-format
@@ -1922,7 +1922,7 @@ msgid ""
 " Cannot copy cyclic symbolic link \n"
 " `%s' "
 msgstr ""
-" Ne morem kopirati cikliène simbolne povezave \n"
+" Ne morem kopirati cikliÄne simbolne povezave \n"
 " `%s' "
 
 #: src/file.c:901 src/file.c:1924
@@ -1949,7 +1949,7 @@ msgid ""
 " Cannot chown target directory \"%s\" \n"
 " %s "
 msgstr ""
-" Ne morem doloèiti lastni¹tva ciljega imenika \"%s\" \n"
+" Ne morem doloÄiti lastniÅ¡tva ciljega imenika \"%s\" \n"
 " %s "
 
 #. Source doesn't exist
@@ -2051,7 +2051,7 @@ msgstr "1Prestavi"
 
 #: src/file.c:1592
 msgid "1Delete"
-msgstr "1Zbri¹i"
+msgstr "1ZbriÅ¡i"
 
 #.
 #. * These are formats for building a prompt. Parts encoded as follows:
@@ -2128,7 +2128,7 @@ msgid ""
 msgstr ""
 "\n"
 "   Imenik ni prazen.   \n"
-"   Naj ga zbri¹em rekurzivno? "
+"   Naj ga zbriÅ¡em rekurzivno? "
 
 #: src/file.c:2128
 msgid ""
@@ -2138,11 +2138,11 @@ msgid ""
 msgstr ""
 "\n"
 "   Proces iz ozadja: Imenik ni prazen \n"
-"   Naj ga zbri¹em rekurzivno? "
+"   Naj ga zbriÅ¡em rekurzivno? "
 
 #: src/file.c:2129
 msgid " Delete: "
-msgstr " Zbri¹i: "
+msgstr " ZbriÅ¡i: "
 
 #: src/file.c:2135
 msgid "a&ll"
@@ -2154,7 +2154,7 @@ msgstr "br&Ez"
 
 #: src/file.c:2145
 msgid " Type 'yes' if you REALLY want to delete "
-msgstr " Vpi¹ite 'yes', èe RESNIÈNO ¾elite zbrisati "
+msgstr " VpiÅ¡ite 'yes', Äe RESNIÄŒNO Å¾elite zbrisati "
 
 #: src/file.c:2147
 msgid "all the directories "
@@ -2179,7 +2179,7 @@ msgstr "da"
 #: src/filegui.c:348
 #, c-format
 msgid "ETA %d:%02d.%02d"
-msgstr "Èas do konca %d:%02d.%02d"
+msgstr "ÄŒas do konca %d:%02d.%02d"
 
 #: src/filegui.c:370
 #, c-format
@@ -2202,7 +2202,7 @@ msgstr "Datoteka"
 
 #: src/filegui.c:419
 msgid "Count"
-msgstr "©tevec"
+msgstr "Å tevec"
 
 #: src/filegui.c:440
 msgid "Bytes"
@@ -2218,24 +2218,24 @@ msgstr "Cilj"
 
 #: src/filegui.c:518
 msgid "Deleting"
-msgstr "Bri¹em"
+msgstr "BriÅ¡em"
 
 #: src/filegui.c:550
 #, c-format
 msgid "Target file \"%s\" already exists!"
-msgstr "Ciljna datoteka \"%s\" ¾e obstaja!"
+msgstr "Ciljna datoteka \"%s\" Å¾e obstaja!"
 
 #: src/filegui.c:553
 msgid "if &Size differs"
-msgstr "èe se &Velikost razlikuje"
+msgstr "Äe se &Velikost razlikuje"
 
 #: src/filegui.c:556
 msgid "&Update"
-msgstr "&Osve¾i"
+msgstr "&OsveÅ¾i"
 
 #: src/filegui.c:558
 msgid "Overwrite all targets?"
-msgstr "Prepi¹i vse cilje?"
+msgstr "PrepiÅ¡i vse cilje?"
 
 #: src/filegui.c:560
 msgid "&Reget"
@@ -2247,7 +2247,7 @@ msgstr "&Dodaj"
 
 #: src/filegui.c:564
 msgid "Overwrite this target?"
-msgstr "Prepi¹i ta cilj"
+msgstr "PrepiÅ¡i ta cilj"
 
 #: src/filegui.c:566
 #, c-format
@@ -2297,7 +2297,7 @@ msgstr "&Stabilne simbolne povezave"
 #. &file_mask_stable_symlinks
 #: src/filegui.c:800
 msgid "&Dive into subdir if exists"
-msgstr "&Potopi se v podimenik, èe obstaja"
+msgstr "&Potopi se v podimenik, Äe obstaja"
 
 #: src/filegui.c:960
 #, c-format
@@ -2310,7 +2310,7 @@ msgstr ""
 
 #: src/find.c:107
 msgid "&Suspend"
-msgstr "&Izkljuèi"
+msgstr "&IzkljuÄi"
 
 #: src/find.c:108
 msgid "Con&tinue"
@@ -2326,7 +2326,7 @@ msgstr "&Znova"
 
 #: src/find.c:111
 msgid "&Quit"
-msgstr "&Konèaj"
+msgstr "&KonÄaj"
 
 #: src/find.c:112 src/panelize.c:76
 msgid "Pane&lize"
@@ -2342,7 +2342,7 @@ msgstr "&Uredi - F4"
 
 #: src/find.c:153
 msgid "Start at:"
-msgstr "Zaèni pri:"
+msgstr "ZaÄni pri:"
 
 #: src/find.c:153
 msgid "Filename:"
@@ -2358,49 +2358,49 @@ msgstr "&Drevo"
 
 #: src/find.c:208
 msgid "Find File"
-msgstr "Poi¹èi datoteko"
+msgstr "PoiÅ¡Äi datoteko"
 
 #: src/find.c:451
 #, c-format
 msgid "Grepping in %s"
-msgstr "I¹èem v %s"
+msgstr "IÅ¡Äem v %s"
 
 #: src/find.c:522
 msgid "Finished"
-msgstr "Konèano"
+msgstr "KonÄano"
 
 #: src/find.c:546 src/view.c:1463
 #, c-format
 msgid "Searching %s"
-msgstr "I¹èem %s"
+msgstr "IÅ¡Äem %s"
 
 #: src/find.c:720 src/find.c:816
 msgid "Searching"
-msgstr "I¹èem"
+msgstr "IÅ¡Äem"
 
 #: src/find.c:791
 msgid "Find file"
-msgstr "Poi¹èi datoteko"
+msgstr "PoiÅ¡Äi datoteko"
 
 #: src/help.c:275
 msgid ""
 " Help file format error\n"
 ""
 msgstr ""
-" Napaka v naèinu zapisa datoteke s pomoèjo\n"
+" Napaka v naÄinu zapisa datoteke s pomoÄjo\n"
 ""
 
 #: src/help.c:314
 msgid " Internal bug: Double start of link area "
-msgstr " Notranja napaka: Dvojni zaèetek povezav"
+msgstr " Notranja napaka: Dvojni zaÄetek povezav"
 
 #: src/help.c:568
 msgid " Cannot find node [Contents] in help file "
-msgstr " V datoteki s pomoèjo nisem na¹el vozli¹è [vsebine]"
+msgstr " V datoteki s pomoÄjo nisem naÅ¡el vozliÅ¡Ä [vsebine]"
 
 #: src/help.c:737
 msgid " Help "
-msgstr " Pomoè "
+msgstr " PomoÄ "
 
 #: src/help.c:768 src/user.c:683
 #, c-format
@@ -2414,7 +2414,7 @@ msgstr ""
 #: src/help.c:779
 #, c-format
 msgid " Cannot find node %s in help file "
-msgstr " V datoteki s pomoèjo ne najdem vozli¹èa %s"
+msgstr " V datoteki s pomoÄjo ne najdem vozliÅ¡Äa %s"
 
 #: src/help.c:813
 msgid "Index"
@@ -2470,7 +2470,7 @@ msgstr "Dejavni VFS imeniki"
 
 #: src/hotlist.c:587
 msgid "Directory hotlist"
-msgstr " Vroèa lista imenikov"
+msgstr " VroÄa lista imenikov"
 
 #: src/hotlist.c:604
 msgid " Directory path "
@@ -2488,7 +2488,7 @@ msgstr "Prestavljam %s"
 
 #: src/hotlist.c:869
 msgid "New hotlist entry"
-msgstr "Nov vpis v vroè seznam"
+msgstr "Nov vpis v vroÄ seznam"
 
 #: src/hotlist.c:869
 msgid "Directory label"
@@ -2500,7 +2500,7 @@ msgstr "Pot imenika"
 
 #: src/hotlist.c:950
 msgid " New hotlist group "
-msgstr " Nova skupina v vroèem seznamu"
+msgstr " Nova skupina v vroÄem seznamu"
 
 #: src/hotlist.c:950
 msgid "Name of new group"
@@ -2513,7 +2513,7 @@ msgstr "Oznaka za \"%s\":"
 
 #: src/hotlist.c:969
 msgid " Add to hotlist "
-msgstr " Dodaj na vroèi seznam"
+msgstr " Dodaj na vroÄi seznam"
 
 #: src/hotlist.c:1006
 msgid " Remove: "
@@ -2535,15 +2535,15 @@ msgstr " Vrhnja skupina "
 
 #: src/hotlist.c:1383 src/hotlist.c:1431
 msgid "MC was unable to write ~/"
-msgstr "Polnoèni Poveljnik ni mogel zapisati ~/"
+msgstr "PolnoÄni Poveljnik ni mogel zapisati ~/"
 
 #: src/hotlist.c:1384
 msgid " file, your old hotlist entries were not deleted"
-msgstr " datoteke, va¹i stari vpisi v vroèi seznam niso bili zbrisani"
+msgstr " datoteke, vaÅ¡i stari vpisi v vroÄi seznam niso bili zbrisani"
 
 #: src/hotlist.c:1386 src/hotlist.c:1409 src/hotlist.c:1434
 msgid " Hotlist Load "
-msgstr " Nalo¾i vroèi seznam"
+msgstr " NaloÅ¾i vroÄi seznam"
 
 #: src/hotlist.c:1398
 msgid "You have ~/"
@@ -2555,7 +2555,7 @@ msgstr " datoteko in [Hotlist] sekcijo v  ~/"
 
 #: src/hotlist.c:1399
 msgid "Your ~/"
-msgstr "Va¹ ~/"
+msgstr "VaÅ¡ ~/"
 
 #: src/hotlist.c:1399
 msgid " most probably was created\n"
@@ -2566,7 +2566,7 @@ msgid ""
 "by an earlier development version of MC\n"
 "and is more actual than ~/"
 msgstr ""
-"s strani starej¹e razvojne razlièice Polnoènega poveljnika\n"
+"s strani starejÅ¡e razvojne razliÄice PolnoÄnega poveljnika\n"
 "in je bolj aktualen kot ~/"
 
 #: src/hotlist.c:1401
@@ -2585,7 +2585,7 @@ msgid ""
 msgstr ""
 "Lahko izbirate med\n"
 "\n"
-"  Odstrani - odstranite stare vpise v vroèi seznam ~/"
+"  Odstrani - odstranite stare vpise v vroÄi seznam ~/"
 
 #: src/hotlist.c:1404
 msgid ""
@@ -2593,13 +2593,13 @@ msgid ""
 "           the same question next time\n"
 "  Merge  - add old entries to hotlist as group \"Entries from ~/"
 msgstr ""
-"  Ohrani - ohranite va¹e tare vpise; enako vpra¹anje vam \n"
-"           bo zastavljeno prihodnjiè\n"
-"  Zdru¾i  - dodajte stare vnose v vroèi seznam kot skup¹ino \"Vnosi iz ~/"
+"  Ohrani - ohranite vaÅ¡e tare vpise; enako vpraÅ¡anje vam \n"
+"           bo zastavljeno prihodnjiÄ\n"
+"  ZdruÅ¾i  - dodajte stare vnose v vroÄi seznam kot skupÅ¡ino \"Vnosi iz ~/"
 
 #: src/hotlist.c:1410
 msgid "&Merge"
-msgstr "&Zdru¾i"
+msgstr "&ZdruÅ¾i"
 
 #: src/hotlist.c:1422
 msgid " Entries from ~/"
@@ -2607,12 +2607,12 @@ msgstr " Vnosi iz ~/"
 
 #: src/hotlist.c:1432
 msgid " file your old hotlist entries were not deleted"
-msgstr " datoteke, va¹i stari vpisi v vroèi seznam niso bili zbrisani"
+msgstr " datoteke, vaÅ¡i stari vpisi v vroÄi seznam niso bili zbrisani"
 
 #: src/info.c:75
 #, c-format
 msgid "Midnight Commander %s"
-msgstr "Polnoèni Poveljnik %s"
+msgstr "PolnoÄni Poveljnik %s"
 
 #. This printf pattern string is used as a reference for size
 #: src/info.c:100
@@ -2645,7 +2645,7 @@ msgstr "Vrsta:     %s "
 
 #: src/info.c:133
 msgid "non-local vfs"
-msgstr "ne-krajeven navidezni datoteèni sistem (vfs)"
+msgstr "ne-krajeven navidezni datoteÄni sistem (vfs)"
 
 #: src/info.c:139
 #, c-format
@@ -2655,7 +2655,7 @@ msgstr "Naprava:   %s"
 #: src/info.c:143
 #, c-format
 msgid "Filesystem: %s"
-msgstr "Datoteèni sistem: %s"
+msgstr "DatoteÄni sistem: %s"
 
 #: src/info.c:148
 #, c-format
@@ -2700,7 +2700,7 @@ msgstr "Povezave:  %d"
 #: src/info.c:189
 #, c-format
 msgid "Mode:      %s (%04o)"
-msgstr "Naèin:     %s (%04o)"
+msgstr "NaÄin:     %s (%04o)"
 
 #: src/info.c:194
 #, c-format
@@ -2713,7 +2713,7 @@ msgstr "Datoteka:   Brez"
 
 #: src/layout.c:155
 msgid "&Vertical"
-msgstr "&Navpièno"
+msgstr "&NavpiÄno"
 
 #: src/layout.c:156
 msgid "&Horizontal"
@@ -2737,7 +2737,7 @@ msgstr "ukazna &Vrstica"
 
 #: src/layout.c:171
 msgid "show &Mini status"
-msgstr "ka¾i &Mini stanje"
+msgstr "kaÅ¾i &Mini stanje"
 
 #: src/layout.c:172
 msgid "menu&Bar visible"
@@ -2786,11 +2786,11 @@ msgstr "Postavitev"
 
 #: src/learn.c:74
 msgid " Learn keys "
-msgstr " Nauèi se tipk"
+msgstr " NauÄi se tipk"
 
 #: src/learn.c:91
 msgid " Teach me a key "
-msgstr " Nauèi me tipke "
+msgstr " NauÄi me tipke "
 
 #: src/learn.c:92
 #, c-format
@@ -2805,13 +2805,13 @@ msgid ""
 "and wait as well."
 msgstr ""
 "Prosim pritisnite %s\n"
-"in poèakajte dokler to sporoèilo ne izgine.\n"
+"in poÄakajte dokler to sporoÄilo ne izgine.\n"
 "\n"
 "Nato jo pritisnite znova, da vidite ali se pojavi V redu\n"
 "zraven njenega gumba.\n"
 "\n"
-"Èe ¾elite ven, pritisnite tipko Escape\n"
-"in prav tako poèakajte."
+"ÄŒe Å¾elite ven, pritisnite tipko Escape\n"
+"in prav tako poÄakajte."
 
 #: src/learn.c:126
 msgid " Cannot accept this key "
@@ -2831,8 +2831,8 @@ msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
 msgstr ""
-"Ka¾e, da vse va¹e tipke ¾e dobro delujejo.\n"
-"To je odlièno."
+"KaÅ¾e, da vse vaÅ¡e tipke Å¾e dobro delujejo.\n"
+"To je odliÄno."
 
 #: src/learn.c:183
 msgid "&Discard"
@@ -2843,25 +2843,25 @@ msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
 msgstr ""
-"Odlièno! Imate popolno terminalsko zbirko podatkov\n"
-"Vse va¹e tipke delujejo dobro."
+"OdliÄno! Imate popolno terminalsko zbirko podatkov\n"
+"Vse vaÅ¡e tipke delujejo dobro."
 
 #: src/learn.c:271
 msgid "Learn keys"
-msgstr "Nauèi se tipk"
+msgstr "NauÄi se tipk"
 
 #: src/learn.c:304
 msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr "Pritisnite vse tipke omenjene tu. Ko ste konèali preverite"
+msgstr "Pritisnite vse tipke omenjene tu. Ko ste konÄali preverite"
 
 #: src/learn.c:306
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "katere tipke niso oznaèene z V redu. Pritisnite preslednico na"
+msgstr "katere tipke niso oznaÄene z V redu. Pritisnite preslednico na"
 
 #: src/learn.c:308
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr ""
-"manjkajoèi tipki ali jo kliknite z mi¹ko, da jo definirate. Okoli se "
+"manjkajoÄi tipki ali jo kliknite z miÅ¡ko, da jo definirate. Okoli se "
 "premikate s Tabulatorjem."
 
 #: src/main.c:625
@@ -2873,7 +2873,7 @@ msgid ""
 msgstr ""
 " Poveljnik ne more iti v imenik za katerega\n"
 " podlupina trdi, da ste v njem.  Morda ste zbrisali \n"
-" va¹ delavni imenik ali pa ste si dali dodatna \n"
+" vaÅ¡ delavni imenik ali pa ste si dali dodatna \n"
 " dostopna dovoljenja z ukazom \"su\"? "
 
 #: src/main.c:697
@@ -2882,15 +2882,15 @@ msgstr "Pritisnite katerokoli tipko za nadaljevanje..."
 
 #: src/main.c:745
 msgid " The shell is already running a command "
-msgstr " Lupina ¾e izvaja ukaz "
+msgstr " Lupina Å¾e izvaja ukaz "
 
 #: src/main.c:772 src/screen.c:1986
 msgid " The Midnight Commander "
-msgstr " Polnoèni Poveljnik"
+msgstr " PolnoÄni Poveljnik"
 
 #: src/main.c:773
 msgid " Do you really want to quit the Midnight Commander? "
-msgstr " Zares ¾elite zapreti Polnoènega poveljnika? "
+msgstr " Zares Å¾elite zapreti PolnoÄnega poveljnika? "
 
 #: src/main.c:1089
 msgid " Listing format edit "
@@ -2899,11 +2899,11 @@ msgstr " Uredi obliko izpisa seznama"
 #: src/main.c:1089
 #, c-format
 msgid " New mode is \"%s\" "
-msgstr " Nov naèin je \"%s\" "
+msgstr " Nov naÄin je \"%s\" "
 
 #: src/main.c:1096 src/main.c:1122
 msgid "&Listing mode..."
-msgstr "&Seznamski naèin..."
+msgstr "&Seznamski naÄin..."
 
 #: src/main.c:1097 src/main.c:1123
 msgid "&Quick view     C-x q"
@@ -2923,7 +2923,7 @@ msgstr "&Filter..."
 
 #: src/main.c:1107 src/main.c:1133
 msgid "&Network link..."
-msgstr "&Mre¾na povezava..."
+msgstr "&MreÅ¾na povezava..."
 
 #: src/main.c:1109 src/main.c:1135
 msgid "FT&P link..."
@@ -2939,7 +2939,7 @@ msgstr "&Pogon...       M-d"
 
 #: src/main.c:1118 src/main.c:1144
 msgid "&Rescan         C-r"
-msgstr "&Osve¾i         C-r"
+msgstr "&OsveÅ¾i         C-r"
 
 #: src/main.c:1148
 msgid "&User menu          F2"
@@ -2999,7 +2999,7 @@ msgstr "Ustvari &Imenik     F7"
 
 #: src/main.c:1164
 msgid "&Delete             F8"
-msgstr "&Zbri¹i             F8"
+msgstr "&ZbriÅ¡i             F8"
 
 #: src/main.c:1165
 msgid "&Quick cd          M-c"
@@ -3031,7 +3031,7 @@ msgstr "&Drevo imenikov"
 
 #: src/main.c:1180
 msgid "&Find file            M-?"
-msgstr "&Poi¹èi datoteko      M-?"
+msgstr "&PoiÅ¡Äi datoteko      M-?"
 
 #: src/main.c:1181
 msgid "s&Wap panels          C-u"
@@ -3051,7 +3051,7 @@ msgstr "&V pult od zunaj      C-x !"
 
 #: src/main.c:1185
 msgid "show directory s&Izes"
-msgstr "ka¾i velikosti &Imenikov"
+msgstr "kaÅ¾i velikosti &Imenikov"
 
 #: src/main.c:1187
 msgid "command &History"
@@ -3059,7 +3059,7 @@ msgstr "zgodovina &Ukazov"
 
 #: src/main.c:1188
 msgid "di&Rectory hotlist    C-\\"
-msgstr "v&Roè seznam imenikov  C-\\"
+msgstr "v&RoÄ seznam imenikov  C-\\"
 
 #: src/main.c:1190
 msgid "&Active VFS list      C-x a"
@@ -3075,7 +3075,7 @@ msgstr "Posli v &Ozadju       C-x j"
 
 #: src/main.c:1198
 msgid "&Undelete files (ext2fs only)"
-msgstr "&Odbri¹i datoteke (samo ext2fs)"
+msgstr "&OdbriÅ¡i datoteke (samo ext2fs)"
 
 #: src/main.c:1201
 msgid "&Listing format edit"
@@ -3107,15 +3107,15 @@ msgstr "&Potrditev..."
 
 #: src/main.c:1219
 msgid "&Display bits..."
-msgstr "&Ka¾i bite..."
+msgstr "&KaÅ¾i bite..."
 
 #: src/main.c:1221
 msgid "learn &Keys..."
-msgstr "nauèi se &Tipk..."
+msgstr "nauÄi se &Tipk..."
 
 #: src/main.c:1224
 msgid "&Virtual FS..."
-msgstr "&Navidezni Datoteèni Sistem..."
+msgstr "&Navidezni DatoteÄni Sistem..."
 
 #: src/main.c:1227
 msgid "&Save setup"
@@ -3139,7 +3139,7 @@ msgstr " &Ukaz "
 
 #: src/main.c:1241
 msgid " &Options "
-msgstr " &Mo¾nosti "
+msgstr " &MoÅ¾nosti "
 
 #: src/main.c:1242
 msgid " &Below "
@@ -3160,9 +3160,9 @@ msgid ""
 " manual reload of the directory. See the man page for   \n"
 " the details.                                           "
 msgstr ""
-" Uporaba hitrega osve¾evanja imenikov lahko poka¾e   \n"
-" napaèno vsebino imenika. V tem primeru boste morali \n"
-" roèno osve¾iti imenik. Poglejte si priroènik (man)  \n"
+" Uporaba hitrega osveÅ¾evanja imenikov lahko pokaÅ¾e   \n"
+" napaÄno vsebino imenika. V tem primeru boste morali \n"
+" roÄno osveÅ¾iti imenik. Poglejte si priroÄnik (man)  \n"
 " za podrobnosti.                                     "
 
 #: src/main.c:1540 src/screen.c:2223
@@ -3175,7 +3175,7 @@ msgstr "TERM okoljska spremenljivka ni nastavljena!\n"
 
 #: src/main.c:1776
 msgid "Thank you for using GNU Midnight Commander"
-msgstr "Hvala, ker ste uporabljali Polnoènega poveljnika GNU"
+msgstr "Hvala, ker ste uporabljali PolnoÄnega poveljnika GNU"
 
 #: src/main.c:2222
 msgid ""
@@ -3191,15 +3191,15 @@ msgstr ""
 
 #: src/main.c:2225
 msgid "-a, --stickchars   Force use of +, -, | for line drawing.\n"
-msgstr "-a, --stickchars   Prisili uporabo +, -, | za risanje èrt.\n"
+msgstr "-a, --stickchars   Prisili uporabo +, -, | za risanje Ärt.\n"
 
 #: src/main.c:2227
 msgid "-b, --nocolor      Force black and white display.\n"
-msgstr "-b, --nocolor      Prisili èrnobel prikaz.\n"
+msgstr "-b, --nocolor      Prisili Ärnobel prikaz.\n"
 
 #: src/main.c:2229
 msgid "-B, --background   [DEVEL-ONLY: Debug the background code]\n"
-msgstr "-B, --background   [SAMO-RAZVOJ: Razhro¹èuj kodo ozadja]\n"
+msgstr "-B, --background   [SAMO-RAZVOJ: RazhroÅ¡Äuj kodo ozadja]\n"
 
 #: src/main.c:2231
 msgid ""
@@ -3207,13 +3207,13 @@ msgid ""
 "-C, --colors       Specify colors (use --help-colors to get a list).\n"
 "-d, --nomouse      Disable mouse support.\n"
 msgstr ""
-"-c, --color        Prisili barvni naèin.\n"
-"-C, --colors       Doloèi barve (uporabi --help-colors za seznam).\n"
-"-d, --nomouse      Izkljuèi podporo za mi¹ko\n"
+"-c, --color        Prisili barvni naÄin.\n"
+"-C, --colors       DoloÄi barve (uporabi --help-colors za seznam).\n"
+"-d, --nomouse      IzkljuÄi podporo za miÅ¡ko\n"
 
 #: src/main.c:2235
 msgid "-e, --edit         Startup the internal editor.\n"
-msgstr "-e, --edit        Za¾eni notranji urejevalnik.\n"
+msgstr "-e, --edit        ZaÅ¾eni notranji urejevalnik.\n"
 
 #: src/main.c:2237
 msgid ""
@@ -3223,28 +3223,28 @@ msgid ""
 "termcap\n"
 "                   default.\n"
 msgstr ""
-"-f, --libdir       Izpi¹i nastavljene poti.\n"
-"-h, --help         Poka¾i to sporoèilo s pomoèjo.\n"
+"-f, --libdir       IzpiÅ¡i nastavljene poti.\n"
+"-h, --help         PokaÅ¾i to sporoÄilo s pomoÄjo.\n"
 "-k, --resetsoft    Ponastavi mehketipke (samo HP terminali) na njihove "
 "terminfo/termcap\n"
 "                   privzete nastavitve.\n"
 
 #: src/main.c:2242
 msgid "-l, --ftplog file  Log ftpfs commands to the file.\n"
-msgstr "-l, --ftplog file  Pi¹i dnevnik ukazov ftpfs v datoteko.\n"
+msgstr "-l, --ftplog file  PiÅ¡i dnevnik ukazov ftpfs v datoteko.\n"
 
 #: src/main.c:2245
 msgid "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
 msgstr ""
-"-M, --memory dato  [SAMO-RAZVOJ: Pi¹i dnevnik sporoèil MAD v datoteko.]\n"
+"-M, --memory dato  [SAMO-RAZVOJ: PiÅ¡i dnevnik sporoÄil MAD v datoteko.]\n"
 
 #: src/main.c:2247
 msgid ""
 "-P, --printwd      At exit, print the last working directory.\n"
 "-s, --slow         Disables verbose operation (for slow terminals).\n"
 msgstr ""
-"-P, --printwd      Ob izhodu, izpi¹i zadnji delavni imenik.\n"
-"-s, --slow         Ikljuèi podrobno obve¹èanje (za poèasne terminale).\n"
+"-P, --printwd      Ob izhodu, izpiÅ¡i zadnji delavni imenik.\n"
+"-s, --slow         IkljuÄi podrobno obveÅ¡Äanje (za poÄasne terminale).\n"
 
 #: src/main.c:2250
 msgid "-t, --termcap      Activate support for the TERMCAP variable.\n"
@@ -3263,8 +3263,8 @@ msgid ""
 "-U, --subshell     Force the concurrent subshell mode.\n"
 "-r, --forceexec    Force subshell execution.\n"
 msgstr ""
-"-u, --nosubshell   Izkljuèi hkratni podlupinski naèin.\n"
-"-U, --subshell     Prisili hkratni podlupinski naèin.\n"
+"-u, --nosubshell   IzkljuÄi hkratni podlupinski naÄin.\n"
+"-U, --subshell     Prisili hkratni podlupinski naÄin.\n"
 "-r, --forceexec    Prisili izvajanje v podlupini.\n"
 
 #: src/main.c:2260
@@ -3274,11 +3274,11 @@ msgid ""
 "-x, --xterm        Force xterm mouse support and screen save/restore.\n"
 "+number            number it is the start line number of file for `mcedit'.\n"
 msgstr ""
-"-v, --view fname   Po¾eni v poglednem naèinu.\n"
-"-V, --version      Poroèilo o razlièici in nastavitvah.\n"
-"-x, --xterm        Prisili xterm podporo za mi¹ko in shranjevanje/"
+"-v, --view fname   PoÅ¾eni v poglednem naÄinu.\n"
+"-V, --version      PoroÄilo o razliÄici in nastavitvah.\n"
+"-x, --xterm        Prisili xterm podporo za miÅ¡ko in shranjevanje/"
 "obnavljanje zaslona.\n"
-"+¹tevilka          ©tevilka je zaèetna vrstica datoteke za `mcedit'.\n"
+"+Å¡tevilka          Å tevilka je zaÄetna vrstica datoteke za `mcedit'.\n"
 
 #: src/main.c:2264
 msgid ""
@@ -3287,7 +3287,7 @@ msgid ""
 "to mc-devel@gnome.org\n"
 msgstr ""
 "\n"
-"Prosimo po¹ljite poroèila o hro¹èih (vkljuèite izpis `mc -V')\n"
+"Prosimo poÅ¡ljite poroÄila o hroÅ¡Äih (vkljuÄite izpis `mc -V')\n"
 "na mc-devel@gnome.org\n"
 
 #: src/main.c:2279
@@ -3310,11 +3310,11 @@ msgid ""
 "   brightcyan, lightgray and white\n"
 "\n"
 msgstr ""
-"--colors KLJUÈNABESEDA={SPREDAJ},{ZADAJ}\n"
+"--colors KLJUÄŒNABESEDA={SPREDAJ},{ZADAJ}\n"
 "\n"
-"{SPREDAJ} in {ZADAJ} sta lahko izpu¹èeni in uporabljene bodo privzete\n"
+"{SPREDAJ} in {ZADAJ} sta lahko izpuÅ¡Äeni in uporabljene bodo privzete\n"
 "\n"
-"Kljuène besede:\n"
+"KljuÄne besede:\n"
 "   Global:       errors, reverse, gauge, input\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus\n"
@@ -3331,26 +3331,26 @@ msgstr ""
 #: src/main.c:2328
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
-msgstr "Imenik s knji¾nicami za Polnoènega poveljnika: %s\n"
+msgstr "Imenik s knjiÅ¾nicami za PolnoÄnega poveljnika: %s\n"
 
 #: src/main.c:2342
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
-"Mo¾nost -m je zastarela. Prosim poglejte pod \"Ka¾i bite\"... v menuju "
-"\"Mo¾nosti\"\n"
+"MoÅ¾nost -m je zastarela. Prosim poglejte pod \"KaÅ¾i bite\"... v menuju "
+"\"MoÅ¾nosti\"\n"
 
 #: src/main.c:2383
 msgid "Use to debug the background code"
-msgstr "Uporabi za razhro¹èevanje kod ozadja"
+msgstr "Uporabi za razhroÅ¡Äevanje kod ozadja"
 
 #: src/main.c:2389
 msgid "Request to run in color mode"
-msgstr "Pro¹nja za izvajanje v barvnem naèinu"
+msgstr "ProÅ¡nja za izvajanje v barvnem naÄinu"
 
 #: src/main.c:2391
 msgid "Specifies a color configuration"
-msgstr "Doloèi nastavitve barv"
+msgstr "DoloÄi nastavitve barv"
 
 #: src/main.c:2395
 msgid "Edits one file"
@@ -3358,15 +3358,15 @@ msgstr "Urejuje eno datoteko"
 
 #: src/main.c:2399
 msgid "Displays this help message"
-msgstr "Poka¾e to sporoèilo s pomoèjo"
+msgstr "PokaÅ¾e to sporoÄilo s pomoÄjo"
 
 #: src/main.c:2401
 msgid "Displays a help screen on how to change the color scheme"
-msgstr "Poka¾e poroèilo s pomoèjo o menjavi barvne sheme"
+msgstr "PokaÅ¾e poroÄilo s pomoÄjo o menjavi barvne sheme"
 
 #: src/main.c:2404
 msgid "Log ftp dialog to specified file"
-msgstr "Pi¹i dnevnik ftp dialogov v doloèeno datoteko"
+msgstr "PiÅ¡i dnevnik ftp dialogov v doloÄeno datoteko"
 
 #: src/main.c:2411
 msgid "Obsolete"
@@ -3374,19 +3374,19 @@ msgstr "Zastarelo"
 
 #: src/main.c:2413
 msgid "Requests to run in black and white"
-msgstr "Pro¹nja za izvajanje v èrnobelem naèinu"
+msgstr "ProÅ¡nja za izvajanje v Ärnobelem naÄinu"
 
 #: src/main.c:2415
 msgid "Disable mouse support in text version"
-msgstr "Ikljuèi podporo za mi¹ko v tekstovni razlièici"
+msgstr "IkljuÄi podporo za miÅ¡ko v tekstovni razliÄici"
 
 #: src/main.c:2418
 msgid "Disables subshell support"
-msgstr "Izkljuèi podporo za podlupine"
+msgstr "IzkljuÄi podporo za podlupine"
 
 #: src/main.c:2422
 msgid "Prints working directory at program exit"
-msgstr "Izpi¹e delavni imenik ob izhodu iz programa"
+msgstr "IzpiÅ¡e delavni imenik ob izhodu iz programa"
 
 #: src/main.c:2424
 msgid "Resets soft keys on HP terminals"
@@ -3394,7 +3394,7 @@ msgstr "Ponastavi mehke tipke na HP terminalih"
 
 #: src/main.c:2426
 msgid "To run on slow terminals"
-msgstr "Za poganjanje na poèasnih terminalih"
+msgstr "Za poganjanje na poÄasnih terminalih"
 
 #: src/main.c:2429
 msgid "Use stickchars to draw"
@@ -3406,15 +3406,15 @@ msgstr "Vklopi podporo za podlupino (privzeto)"
 
 #: src/main.c:2437
 msgid "Tries to use termcap instead of terminfo"
-msgstr "Posku¹a uporabiti termcap namesto terminfa"
+msgstr "PoskuÅ¡a uporabiti termcap namesto terminfa"
 
 #: src/main.c:2440
 msgid "Displays the current version"
-msgstr "Poka¾e trenutno razlièico"
+msgstr "PokaÅ¾e trenutno razliÄico"
 
 #: src/main.c:2442
 msgid "Launches the file viewer on a file"
-msgstr "Za¾ene pogled datoteke"
+msgstr "ZaÅ¾ene pogled datoteke"
 
 #: src/main.c:2444
 msgid "Forces xterm features"
@@ -3425,9 +3425,9 @@ msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
-"Nisem mogel odpreti tty linije. Polnoènega morate pognati brez -P "
+"Nisem mogel odpreti tty linije. PolnoÄnega morate pognati brez -P "
 "zastavice.\n"
-"Na nekaterih sistemih ¾elite pognati # `which mc`\n"
+"Na nekaterih sistemih Å¾elite pognati # `which mc`\n"
 
 #: src/main.c:2699
 msgid " Notice "
@@ -3439,7 +3439,7 @@ msgid ""
 " are now stored in the ~/.mc directory, the \n"
 " files have been moved now\n"
 msgstr ""
-" Datoteke z nastavitvami Polnoènega poveljnika\n"
+" Datoteke z nastavitvami PolnoÄnega poveljnika\n"
 " so sedaj shranjene v imeniku ~/.mc \n"
 " daatoteke so bile prestavljene\n"
 
@@ -3461,11 +3461,11 @@ msgstr "premikanje kot v l&Znx-u"
 
 #: src/option.c:76
 msgid "rotatin&G dash"
-msgstr "vrteèa &Palièka"
+msgstr "vrteÄa &PaliÄka"
 
 #: src/option.c:77
 msgid "co&Mplete: show all"
-msgstr "popol&No: ka¾i vse"
+msgstr "popol&No: kaÅ¾i vse"
 
 #: src/option.c:78
 msgid "&Use internal view"
@@ -3489,15 +3489,15 @@ msgstr "vzorci &Lupine"
 
 #: src/option.c:83
 msgid "Compute &Totals"
-msgstr "Izraèunaj vso&Te"
+msgstr "IzraÄunaj vso&Te"
 
 #: src/option.c:84
 msgid "&Verbose operation"
-msgstr "&Podrobno obve¹èanje"
+msgstr "&Podrobno obveÅ¡Äanje"
 
 #: src/option.c:85
 msgid "&Fast dir reload"
-msgstr "&Hitro osve¾evanje imenikov"
+msgstr "&Hitro osveÅ¾evanje imenikov"
 
 #: src/option.c:86
 msgid "mi&X all files"
@@ -3509,15 +3509,15 @@ msgstr "&Spustni menuji"
 
 #: src/option.c:88
 msgid "ma&Rk moves down"
-msgstr "&oznaèba premakne navzdol"
+msgstr "&oznaÄba premakne navzdol"
 
 #: src/option.c:89
 msgid "show &Hidden files"
-msgstr "ka¾i skrite datoteke"
+msgstr "kaÅ¾i skrite datoteke"
 
 #: src/option.c:90
 msgid "show &Backup files"
-msgstr "ka¾i varnostne kopije datotek"
+msgstr "kaÅ¾i varnostne kopije datotek"
 
 #: src/option.c:97
 msgid "&Never"
@@ -3574,7 +3574,7 @@ msgstr " Dodaj v pult od zunaj "
 
 #: src/panelize.c:245
 msgid " Enter command label: "
-msgstr " Vnesite oznèbo ukaza: "
+msgstr " Vnesite oznÄbo ukaza: "
 
 #: src/panelize.c:284 src/user.c:665
 msgid " Oops... "
@@ -3588,15 +3588,15 @@ msgstr ""
 
 #: src/panelize.c:334
 msgid "Find rejects after patching"
-msgstr "Poi¹èi zavrnjene po patchingu"
+msgstr "PoiÅ¡Äi zavrnjene po patchingu"
 
 #: src/panelize.c:335
 msgid "Find *.orig after patching"
-msgstr "Poi¹èi *.orig po patchanju"
+msgstr "PoiÅ¡Äi *.orig po patchanju"
 
 #: src/panelize.c:336
 msgid "Find SUID and SGID programs"
-msgstr "Poi¹èi SUID in SGID programe"
+msgstr "PoiÅ¡Äi SUID in SGID programe"
 
 #: src/panelize.c:387
 msgid "Cannot invoke command."
@@ -3604,15 +3604,15 @@ msgstr "Ne morem izvesti ukaza."
 
 #: src/panelize.c:442
 msgid "Pipe close failed"
-msgstr "Zaprtje cevi neuspe¹no"
+msgstr "Zaprtje cevi neuspeÅ¡no"
 
 #: src/popthelp.c:31
 msgid "Show this help message"
-msgstr "Poka¾i to sporoèilo s pomoèjo"
+msgstr "PokaÅ¾i to sporoÄilo s pomoÄjo"
 
 #: src/popthelp.c:32
 msgid "Display brief usage message"
-msgstr "Poka¾i skraj¹ano sporoèilo o uporabi"
+msgstr "PokaÅ¾i skrajÅ¡ano sporoÄilo o uporabi"
 
 #: src/screen.c:180
 msgid "UP--DIR"
@@ -3632,15 +3632,15 @@ msgstr "Velikosti"
 
 #: src/screen.c:401
 msgid "MTime"
-msgstr "MÈas"
+msgstr "MÄŒas"
 
 #: src/screen.c:402
 msgid "ATime"
-msgstr "DÈas"
+msgstr "DÄŒas"
 
 #: src/screen.c:403
 msgid "CTime"
-msgstr "SÈas"
+msgstr "SÄŒas"
 
 #: src/screen.c:404
 msgid "Permission"
@@ -3686,24 +3686,24 @@ msgstr "%s bajtov v %d datotekah"
 
 #: src/screen.c:668
 msgid "<readlink failed>"
-msgstr "<branje povezave neuspe¹no>"
+msgstr "<branje povezave neuspeÅ¡no>"
 
 #: src/screen.c:1262
 msgid "Unknown tag on display format: "
-msgstr "Neznana oznaèba v opisu naèina prikaza: "
+msgstr "Neznana oznaÄba v opisu naÄina prikaza: "
 
 #: src/screen.c:1388
 msgid "User suplied format looks invalid, reverting to default."
 msgstr ""
-"Formatiranje podano s strani uporabnika izgleda napaèno, uporabljam privzeto."
+"Formatiranje podano s strani uporabnika izgleda napaÄno, uporabljam privzeto."
 
 #: src/screen.c:1987
 msgid " Do you really want to execute? "
-msgstr " Zares ¾elite pognati?"
+msgstr " Zares Å¾elite pognati?"
 
 #: src/screen.c:2001
 msgid " No action taken "
-msgstr " Izr¹eno ni bilo nobeno dejanje"
+msgstr " IzrÅ¡eno ni bilo nobeno dejanje"
 
 #: src/screen.c:2214 src/tree.c:876
 #, c-format
@@ -3743,8 +3743,8 @@ msgid ""
 "Midnight Commander was compiled without iconv support,\n"
 "so charsets recoding feature is not available!"
 msgstr ""
-"Polnoèni poveljnik je bil preveden brez podpore za iconv\n"
-"zato mo¾nost pretvorbe med nabori znakov ni na voljo!"
+"PolnoÄni poveljnik je bil preveden brez podpore za iconv\n"
+"zato moÅ¾nost pretvorbe med nabori znakov ni na voljo!"
 
 #: src/selcodepage.c:93
 msgid ""
@@ -3752,8 +3752,8 @@ msgid ""
 "Setup / Display Bits dialog!\n"
 "Do not forget to save options."
 msgstr ""
-"Za uporabo te mo¾nosti izberite va¹ nabor znakov\n"
-"v dialogu \"Nastavitve / Ka¾i bite\"!\n"
+"Za uporabo te moÅ¾nosti izberite vaÅ¡ nabor znakov\n"
+"v dialogu \"Nastavitve / KaÅ¾i bite\"!\n"
 "Ne pozabite shraniti nastavitev."
 
 #: src/slint.c:196
@@ -3772,7 +3772,7 @@ msgstr "Ne morem odpreti poimenovane cevi %s\n"
 
 #: src/subshell.c:719
 msgid " The shell is still active. Quit anyway? "
-msgstr " Lupina je ¹e vedno dejavna. Konèaj vseeno? "
+msgstr " Lupina je Å¡e vedno dejavna. KonÄaj vseeno? "
 
 #: src/subshell.c:745
 msgid " There are stopped jobs."
@@ -3780,7 +3780,7 @@ msgstr " Obstajajo ustavljeni posli."
 
 #: src/subshell.c:746
 msgid " Quit anyway? "
-msgstr " Zakljuèi vseeno? "
+msgstr " ZakljuÄi vseeno? "
 
 #: src/subshell.c:859
 #, c-format
@@ -3789,7 +3789,7 @@ msgstr "Opozorilo: Nisem mogel iti v imenik %s.\n"
 
 #: src/textconf.c:10
 msgid "Virtual File System: tarfs, extfs"
-msgstr "Navidtezni Datoteèni sistem (VFS): tarfs, extfs"
+msgstr "Navidtezni DatoteÄni sistem (VFS): tarfs, extfs"
 
 #: src/textconf.c:12
 msgid ", ftpfs"
@@ -3821,11 +3821,11 @@ msgstr "Z vgrajenim urejevalnikom\n"
 
 #: src/textconf.c:39
 msgid "Using system-installed S-Lang library"
-msgstr "Uporabljam sistemsko name¹èeno knji¾nico S-Lang"
+msgstr "Uporabljam sistemsko nameÅ¡Äeno knjiÅ¾nico S-Lang"
 
 #: src/textconf.c:41
 msgid "Using included S-Lang library"
-msgstr "Uporabljam vkljuèeno knji¾nico S-Lang"
+msgstr "Uporabljam vkljuÄeno knjiÅ¾nico S-Lang"
 
 #: src/textconf.c:47
 msgid "with terminfo database"
@@ -3841,15 +3841,15 @@ msgstr "z neznano zbirko podatkov o terminalih"
 
 #: src/textconf.c:55
 msgid "Using the ncurses library"
-msgstr "Uporabljam knji¾nico ncurses"
+msgstr "Uporabljam knjiÅ¾nico ncurses"
 
 #: src/textconf.c:57
 msgid "Using old curses library"
-msgstr "Uporabljam staro knji¾nico ncruses"
+msgstr "Uporabljam staro knjiÅ¾nico ncruses"
 
 #: src/textconf.c:64
 msgid "With optional subshell support"
-msgstr "Z mo¾nostjo podpore podlupine"
+msgstr "Z moÅ¾nostjo podpore podlupine"
 
 #: src/textconf.c:66
 msgid "With subshell support as default"
@@ -3861,11 +3861,11 @@ msgstr "S podporo operacijam v ozadju\n"
 
 #: src/textconf.c:76
 msgid "With mouse support on xterm and Linux console\n"
-msgstr "S podporo za mi¹ko v programu xterm in konzoli Linux\n"
+msgstr "S podporo za miÅ¡ko v programu xterm in konzoli Linux\n"
 
 #: src/textconf.c:78
 msgid "With mouse support on xterm\n"
-msgstr "S podporo za mi¹ko v programu xterm\n"
+msgstr "S podporo za miÅ¡ko v programu xterm\n"
 
 #: src/textconf.c:82
 msgid "With support for X11 events\n"
@@ -3877,12 +3877,12 @@ msgstr "Z mednarodno podporo\n"
 
 #: src/textconf.c:90
 msgid "With multiple codepages support\n"
-msgstr "Z podporo veèim naborom znakov\n"
+msgstr "Z podporo veÄim naborom znakov\n"
 
 #: src/textconf.c:101
 #, c-format
 msgid "GNU Midnight Commander %s\n"
-msgstr "Polnoèni poveljnik GNU %s\n"
+msgstr "PolnoÄni poveljnik GNU %s\n"
 
 #: src/tree.c:195
 #, c-format
@@ -3919,19 +3919,19 @@ msgstr " Cilj ni imenik"
 #: src/tree.c:754
 #, c-format
 msgid "  Delete %s?  "
-msgstr "  Zbri¹i %s?"
+msgstr "  ZbriÅ¡i %s?"
 
 #: src/tree.c:786
 msgid "Static"
-msgstr "Statièna"
+msgstr "StatiÄna"
 
 #: src/tree.c:786
 msgid "Dynamc"
-msgstr "Dinamièna"
+msgstr "DinamiÄna"
 
 #: src/tree.c:1020
 msgid "Rescan"
-msgstr "Osve¾i"
+msgstr "OsveÅ¾i"
 
 #: src/tree.c:1022
 msgid "Forget"
@@ -3952,7 +3952,7 @@ msgstr ""
 
 #: src/user.c:134
 msgid " Format error on file Extensions File "
-msgstr " Napaèno formatiranje v datoteki s priponami "
+msgstr " NapaÄno formatiranje v datoteki s priponami "
 
 #: src/user.c:135
 #, c-format
@@ -3967,11 +3967,11 @@ msgstr " Makro %%var nima spremenljivke "
 #: src/user.c:279
 #, c-format
 msgid " Invalid shell pattern definition \"%c\". "
-msgstr " Napaèna doloèitev vzorca lupine \"%c\". "
+msgstr " NapaÄna doloÄitev vzorca lupine \"%c\". "
 
 #: src/user.c:432
 msgid " Debug "
-msgstr " Razhro¹èevanje "
+msgstr " RazhroÅ¡Äevanje "
 
 #: src/user.c:441
 msgid " ERROR: "
@@ -3979,11 +3979,11 @@ msgstr " NAPAKA: "
 
 #: src/user.c:445
 msgid " True:  "
-msgstr " Resnièno: "
+msgstr " ResniÄno: "
 
 #: src/user.c:447
 msgid " False: "
-msgstr " Neresnièno: "
+msgstr " NeresniÄno: "
 
 #: src/user.c:642
 msgid " Warning -- ignoring file "
@@ -3996,7 +3996,7 @@ msgid ""
 "Using it may compromise your security"
 msgstr ""
 "Lastnik datoteke %s niste vi in ni pisljiva za vse.\n"
-"Njena uporaba lahko o¹ibi varnost sistema"
+"Njena uporaba lahko oÅ¡ibi varnost sistema"
 
 #: src/user.c:666
 msgid " I can't run programs while logged on a non local directory "
@@ -4028,11 +4028,11 @@ msgstr "%b %e  %Y"
 
 #: src/utilunix.c:363
 msgid " Pipe failed "
-msgstr " Cev neuspe¹na "
+msgstr " Cev neuspeÅ¡na "
 
 #: src/utilunix.c:367
 msgid " Dup failed "
-msgstr " Podvojitev neuspe¹na"
+msgstr " Podvojitev neuspeÅ¡na"
 
 #: src/view.c:395
 msgid ""
@@ -4052,7 +4052,7 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"je bila spremenjena, ¾elite shraniti spremembe?\n"
+"je bila spremenjena, Å¾elite shraniti spremembe?\n"
 
 #: src/view.c:398
 msgid " Save changes "
@@ -4081,7 +4081,7 @@ msgstr ""
 
 #: src/view.c:553
 msgid " Cannot view: not a regular file "
-msgstr " Pogled ni mogoè: ni obièajna datoteka "
+msgstr " Pogled ni mogoÄ: ni obiÄajna datoteka "
 
 #: src/view.c:560
 #, c-format
@@ -4122,7 +4122,7 @@ msgstr " Iskan niz ni bil najden "
 
 #: src/view.c:1662
 msgid "Invalid hex search expression"
-msgstr "Neveljaven ¹estnajsti¹ki iskalni izraz"
+msgstr "Neveljaven Å¡estnajstiÅ¡ki iskalni izraz"
 
 #: src/view.c:1713
 msgid " Invalid regular expression "
@@ -4134,8 +4134,8 @@ msgid ""
 " The current line number is %d.\n"
 " Enter the new line number:"
 msgstr ""
-" ©tevilka trenutne vrstice je %d.\n"
-" Vpi¹ite novo ¹tevilko vrstice:"
+" Å tevilka trenutne vrstice je %d.\n"
+" VpiÅ¡ite novo Å¡tevilko vrstice:"
 
 #: src/view.c:1857
 #, c-format
@@ -4144,7 +4144,7 @@ msgid ""
 " Enter the new address:"
 msgstr ""
 " Trenutni naslov je 0x%lx.\n"
-" Vpi¹ite nov naslov:"
+" VpiÅ¡ite nov naslov:"
 
 #: src/view.c:1859
 msgid " Goto Address "
@@ -4160,7 +4160,7 @@ msgstr "Ascii"
 
 #: src/view.c:2013
 msgid "Hex"
-msgstr "©estnajsti¹ko"
+msgstr "Å estnajstiÅ¡ko"
 
 #: src/view.c:2014
 msgid "Goto"
@@ -4200,7 +4200,7 @@ msgstr "Direktno"
 
 #: src/view.c:2028
 msgid "Parse"
-msgstr "Razèleni"
+msgstr "RazÄleni"
 
 #: src/view.c:2032
 msgid "Unform"
@@ -4298,7 +4298,7 @@ msgstr "Funkcijska tipka 20"
 
 #: src/win.c:208
 msgid "Backspace key"
-msgstr "Vraèalka"
+msgstr "VraÄalka"
 
 #: src/win.c:209
 msgid "End key"
@@ -4306,19 +4306,19 @@ msgstr "Tipka End"
 
 #: src/win.c:210
 msgid "Up arrow key"
-msgstr "Pu¹cia navzgor"
+msgstr "PuÅ¡cia navzgor"
 
 #: src/win.c:211
 msgid "Down arrow key"
-msgstr "Pu¹èica navzgor"
+msgstr "PuÅ¡Äica navzgor"
 
 #: src/win.c:212
 msgid "Left arrow key"
-msgstr "Pu¹èica levo"
+msgstr "PuÅ¡Äica levo"
 
 #: src/win.c:213
 msgid "Right arrow key"
-msgstr "Pu¹èica desno"
+msgstr "PuÅ¡Äica desno"
 
 #: src/win.c:214
 msgid "Home key"
@@ -4342,72 +4342,72 @@ msgstr "Tipka Delete"
 
 #: src/win.c:219
 msgid "Completion/M-tab"
-msgstr "Dokonèaj/tabulator"
+msgstr "DokonÄaj/tabulator"
 
 #: src/win.c:220
 msgid "+ on keypad"
-msgstr "+ na ¹tevilèni tipkovnici"
+msgstr "+ na Å¡tevilÄni tipkovnici"
 
 #: src/win.c:221
 msgid "- on keypad"
-msgstr "- na ¹tevilèni tipkovnici"
+msgstr "- na Å¡tevilÄni tipkovnici"
 
 #: src/win.c:222
 msgid "* on keypad"
-msgstr "* na ¹tevilèni tipkovnici"
+msgstr "* na Å¡tevilÄni tipkovnici"
 
 #. From here on, these won't be shown in Learn keys (no space)
 #: src/win.c:224
 msgid "Left arrow keypad"
-msgstr "Pu¹èica levo na ¹tevilèni tipkovnici"
+msgstr "PuÅ¡Äica levo na Å¡tevilÄni tipkovnici"
 
 #: src/win.c:225
 msgid "Right arrow keypad"
-msgstr "Pu¹èica desno na ¹tevilèni tipkovnici"
+msgstr "PuÅ¡Äica desno na Å¡tevilÄni tipkovnici"
 
 #: src/win.c:226
 msgid "Up arrow keypad"
-msgstr "Pu¹èica gor na ¹tevilèni tipkovnici"
+msgstr "PuÅ¡Äica gor na Å¡tevilÄni tipkovnici"
 
 #: src/win.c:227
 msgid "Down arrow keypad"
-msgstr "Pu¹èica dol na ¹tevilèni tipkovnici"
+msgstr "PuÅ¡Äica dol na Å¡tevilÄni tipkovnici"
 
 #: src/win.c:228
 msgid "Home on keypad"
-msgstr "Tipka Home na ¹tevilèni tipkovnici"
+msgstr "Tipka Home na Å¡tevilÄni tipkovnici"
 
 #: src/win.c:229
 msgid "End on keypad"
-msgstr "Tipka End na ¹tevilèni tipkovnici"
+msgstr "Tipka End na Å¡tevilÄni tipkovnici"
 
 #: src/win.c:230
 msgid "Page Down keypad"
-msgstr "Tipka Page Down na ¹tevilèni tipkovnici"
+msgstr "Tipka Page Down na Å¡tevilÄni tipkovnici"
 
 #: src/win.c:231
 msgid "Page Up keypad"
-msgstr "Tipka Page Up na ¹tevilèni tipkovnici"
+msgstr "Tipka Page Up na Å¡tevilÄni tipkovnici"
 
 #: src/win.c:232
 msgid "Insert on keypad"
-msgstr "Tipka Insert na ¹tevilèni tipkovnici"
+msgstr "Tipka Insert na Å¡tevilÄni tipkovnici"
 
 #: src/win.c:233
 msgid "Delete on keypad"
-msgstr "Tipka Delete na ¹tevilèni tipkovnici"
+msgstr "Tipka Delete na Å¡tevilÄni tipkovnici"
 
 #: src/win.c:234
 msgid "Enter on keypad"
-msgstr "Enter na ¹tevilèni tipkovnici"
+msgstr "Enter na Å¡tevilÄni tipkovnici"
 
 #: src/win.c:235
 msgid "Slash on keypad"
-msgstr "Po¹evnica na ¹tevilèni tipkovnici"
+msgstr "PoÅ¡evnica na Å¡tevilÄni tipkovnici"
 
 #: src/win.c:236
 msgid "NumLock on keypad"
-msgstr "NumLock na ¹tevilèni tipkovnici"
+msgstr "NumLock na Å¡tevilÄni tipkovnici"
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
@@ -4450,7 +4450,7 @@ msgid ""
 "in cpio archive\n"
 "%s"
 msgstr ""
-"Nekonsistentne moène povezave \n"
+"Nekonsistentne moÄne povezave \n"
 "%s\n"
 "v cpio archivu\n"
 "%s"
@@ -4470,7 +4470,7 @@ msgid ""
 "Unexpected end of file\n"
 "%s"
 msgstr ""
-"Neprièakovan konec datoteke\n"
+"NepriÄakovan konec datoteke\n"
 "%s"
 
 #: vfs/direntry.c:301
@@ -4480,7 +4480,7 @@ msgstr "Predpomnilnik imenikaje potekel za %s"
 
 #: vfs/direntry.c:818
 msgid "Starting linear transfer..."
-msgstr "Zaèenjam linearen prenos..."
+msgstr "ZaÄenjam linearen prenos..."
 
 #: vfs/direntry.c:963
 msgid "Getting file"
@@ -4506,7 +4506,7 @@ msgstr "fish: Prekinjam povezavo z %s"
 
 #: vfs/fish.c:226
 msgid "fish: Waiting for initial line..."
-msgstr "fish: Èakam na inicializacijsko vrstico..."
+msgstr "fish: ÄŒakam na inicializacijsko vrstico..."
 
 #: vfs/fish.c:236
 msgid "Sorry, we can not do password authenticated connections for now."
@@ -4519,15 +4519,15 @@ msgstr " fish: Geslo je potrebno za"
 
 #: vfs/fish.c:250
 msgid "fish: Sending password..."
-msgstr "fish: Po¹iljam geslo..."
+msgstr "fish: PoÅ¡iljam geslo..."
 
 #: vfs/fish.c:256
 msgid "fish: Sending initial line..."
-msgstr "fish: Po¹iljam inicializacijsko vrstico..."
+msgstr "fish: PoÅ¡iljam inicializacijsko vrstico..."
 
 #: vfs/fish.c:266
 msgid "fish: Handshaking version..."
-msgstr "fish: Rovanje razlièic..."
+msgstr "fish: Rovanje razliÄic..."
 
 #: vfs/fish.c:270
 msgid "fish: Setting up current directory..."
@@ -4551,11 +4551,11 @@ msgstr "fish: neuspel"
 #: vfs/fish.c:485
 #, c-format
 msgid "fish: store %s: sending command..."
-msgstr "fish: shranjujem %s: po¹iljnam ukaz..."
+msgstr "fish: shranjujem %s: poÅ¡iljnam ukaz..."
 
 #: vfs/fish.c:513
 msgid "fish: Local read failed, sending zeros"
-msgstr "fish: Krajevno branje ni uspelo, po¹iljam nule"
+msgstr "fish: Krajevno branje ni uspelo, poÅ¡iljam nule"
 
 #: vfs/fish.c:525
 #, c-format
@@ -4572,11 +4572,11 @@ msgstr "Prekinjam prenos..."
 
 #: vfs/fish.c:583
 msgid "Error reported after abort."
-msgstr "Napaka sporoèena po prekinitvi."
+msgstr "Napaka sporoÄena po prekinitvi."
 
 #: vfs/fish.c:585
 msgid "Aborted transfer would be successful."
-msgstr "Prekinjen prenos bi bil uspe¹en."
+msgstr "Prekinjen prenos bi bil uspeÅ¡en."
 
 #: vfs/ftpfs.c:346
 #, c-format
@@ -4593,11 +4593,11 @@ msgstr " Posrednik: Potrebno je geslo za"
 
 #: vfs/ftpfs.c:459
 msgid "ftpfs: sending proxy login name"
-msgstr "ftpfs: po¹iljam uporabni¹ko ime posredniku"
+msgstr "ftpfs: poÅ¡iljam uporabniÅ¡ko ime posredniku"
 
 #: vfs/ftpfs.c:463
 msgid "ftpfs: sending proxy user password"
-msgstr "ftpfS: po¹iljam geslo posredniku"
+msgstr "ftpfS: poÅ¡iljam geslo posredniku"
 
 #: vfs/ftpfs.c:467
 msgid "ftpfs: proxy authentication succeeded"
@@ -4610,11 +4610,11 @@ msgstr "ftpfs: povezan z %s"
 
 #: vfs/ftpfs.c:488
 msgid "ftpfs: sending login name"
-msgstr "ftpfs: po¹iljam ime za prijavo"
+msgstr "ftpfs: poÅ¡iljam ime za prijavo"
 
 #: vfs/ftpfs.c:493
 msgid "ftpfs: sending user password"
-msgstr "ftpfs: po¹iljam uporabnikovo geslo"
+msgstr "ftpfs: poÅ¡iljam uporabnikovo geslo"
 
 #: vfs/ftpfs.c:498
 msgid "ftpfs: logged in"
@@ -4623,7 +4623,7 @@ msgstr "ftpfs: prijavljen sem"
 #: vfs/ftpfs.c:513
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: Napaèna prijava za uporabnika %s "
+msgstr "ftpfs: NapaÄna prijava za uporabnika %s "
 
 #: vfs/ftpfs.c:545
 #, c-format
@@ -4650,16 +4650,16 @@ msgstr "ftpfs: uporabnik je prekinil povezavo"
 #: vfs/ftpfs.c:725
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: povezava do stre¾nika ni bila uspe¹na: %s"
+msgstr "ftpfs: povezava do streÅ¾nika ni bila uspeÅ¡na: %s"
 
 #: vfs/ftpfs.c:766
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "Èakam na nov poizkus... %d (Control-C za preklic)"
+msgstr "ÄŒakam na nov poizkus... %d (Control-C za preklic)"
 
 #: vfs/ftpfs.c:958
 msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: ne morem nastaviti pasivnega naèina"
+msgstr "ftpfs: ne morem nastaviti pasivnega naÄina"
 
 #: vfs/ftpfs.c:1030
 msgid "ftpfs: aborting transfer."
@@ -4705,7 +4705,7 @@ msgstr "ftpfs: ni uspel"
 
 #: vfs/ftpfs.c:1355
 msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "ftpfs: spodletel; ni veè mo¾nih re¹itev"
+msgstr "ftpfs: spodletel; ni veÄ moÅ¾nih reÅ¡itev"
 
 #: vfs/ftpfs.c:1419
 msgid "ftpfs: storing file %lu (%lu)"
@@ -4716,8 +4716,8 @@ msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
 msgstr ""
-"~/.netrc datoteka nima pravilnega naèina.\n"
-"Odstranite geslo ali popravite naèin."
+"~/.netrc datoteka nima pravilnega naÄina.\n"
+"Odstranite geslo ali popravite naÄin."
 
 #: vfs/mcfs.c:151 vfs/mcfs.c:173 vfs/mcfs.c:199
 msgid " MCFS "
@@ -4725,7 +4725,7 @@ msgstr " MCFS "
 
 #: vfs/mcfs.c:151
 msgid " The server does not support this version "
-msgstr " Stre¾nik ne podpira te razlièice "
+msgstr " StreÅ¾nik ne podpira te razliÄice "
 
 #: vfs/mcfs.c:168
 msgid ""
@@ -4733,7 +4733,7 @@ msgid ""
 " you need a password to log in, but the information may \n"
 " not be safe on the remote side.  Continue? \n"
 msgstr ""
-" Oddaljeni stre¾nik ne teèe na sistemskih vratih \n"
+" Oddaljeni streÅ¾nik ne teÄe na sistemskih vratih \n"
 " za prijavo potrebujete geslo, a podatki \n"
 " na oddaljeni strani niso nujno varni.  Nadaljuj? \n"
 
@@ -4747,7 +4747,7 @@ msgstr " Ne "
 
 #: vfs/mcfs.c:173
 msgid " The remote server is running on strange port. Giving up.\n"
-msgstr " Oddaljeni stre¾nik deluje na èudnih vratih. Odnehuje.\n"
+msgstr " Oddaljeni streÅ¾nik deluje na Äudnih vratih. Odnehuje.\n"
 
 #: vfs/mcfs.c:185
 msgid " MCFS Password required "
@@ -4765,16 +4765,16 @@ msgstr " Nisem mogel poizvedeti za imenom gostitelja: %s "
 #: vfs/mcfs.c:248
 #, c-format
 msgid " Cannot create socket: %s "
-msgstr " Ne morem ustvariti vtièa: %s "
+msgstr " Ne morem ustvariti vtiÄa: %s "
 
 #: vfs/mcfs.c:254
 #, c-format
 msgid " Cannot connect to server: %s "
-msgstr " Ne morem se povezati s stre¾nikom: %s "
+msgstr " Ne morem se povezati s streÅ¾nikom: %s "
 
 #: vfs/mcfs.c:320
 msgid " Too many open connections "
-msgstr " Preveè odprtih povezav "
+msgstr " PreveÄ odprtih povezav "
 
 #: vfs/sfs.c:330
 #, c-format
@@ -4805,7 +4805,7 @@ msgstr ""
 
 #: vfs/smbfs.c:1118
 msgid " Authentication failed "
-msgstr " Avtentifikacija je bila neuspe¹na "
+msgstr " Avtentifikacija je bila neuspeÅ¡na "
 
 #: vfs/smbfs.c:1611
 #, c-format
@@ -4815,7 +4815,7 @@ msgstr " %s ustvarja imenik %s "
 #: vfs/smbfs.c:1634
 #, c-format
 msgid " %s rmdir'ing %s "
-msgstr " %s bri¹e imenik %s "
+msgstr " %s briÅ¡e imenik %s "
 
 #: vfs/smbfs.c:1738 vfs/smbfs.c:1758
 #, c-format
@@ -4843,7 +4843,7 @@ msgstr ""
 
 #: vfs/tar.c:281
 msgid "Unexpected EOF on archive file"
-msgstr "Neprièakovan EOF (konec vrstice) v datoteki arhiva"
+msgstr "NepriÄakovan EOF (konec vrstice) v datoteki arhiva"
 
 #: vfs/tar.c:333 vfs/tar.c:340
 msgid "Inconsistent tar archive"
@@ -4880,7 +4880,7 @@ msgstr " open_inode_scan: %d "
 #: vfs/undelfs.c:195
 #, c-format
 msgid " while starting inode scan %d "
-msgstr " ob prièetku inode osve¾evanja %d "
+msgstr " ob priÄetku inode osveÅ¾evanja %d "
 
 #: vfs/undelfs.c:202
 #, c-format
@@ -4899,7 +4899,7 @@ msgstr " zmanjkalo je pomnilnika ob realokaciji seznama "
 #: vfs/undelfs.c:244
 #, c-format
 msgid " while doing inode scan %d "
-msgstr " med osve¾evanjem inodov %d "
+msgstr " med osveÅ¾evanjem inodov %d "
 
 #: vfs/undelfs.c:268
 msgid " Ext2lib error "
@@ -4920,7 +4920,7 @@ msgid ""
 " Could not load inode bitmap from: \n"
 " %s \n"
 msgstr ""
-" Nisem mogel nalo¾iti inode slike iz: \n"
+" Nisem mogel naloÅ¾iti inode slike iz: \n"
 " %s \n"
 
 #: vfs/undelfs.c:304
@@ -4938,7 +4938,7 @@ msgstr ""
 
 #: vfs/undelfs.c:313
 msgid "undelfs: done."
-msgstr "undelfs: konèano."
+msgstr "undelfs: konÄano."
 
 #: vfs/undelfs.c:316
 msgid "undelfs: failure"
@@ -4946,7 +4946,7 @@ msgstr "undelfs: napaka"
 
 #: vfs/undelfs.c:340
 msgid " vfs_info is not fs! "
-msgstr " vfs_info ni datoteèni sistem! "
+msgstr " vfs_info ni datoteÄni sistem! "
 
 #: vfs/undelfs.c:396 vfs/undelfs.c:580
 msgid " You have to chdir to extract files first "
@@ -4967,15 +4967,15 @@ msgstr "Spremembe v datoteki izgubljene"
 
 #: vfs/vfs.c:1827
 msgid "Could not parse:"
-msgstr "Nisem mogel razèleniti:"
+msgstr "Nisem mogel razÄleniti:"
 
 #: vfs/vfs.c:1829
 msgid "More parsing errors will be ignored."
-msgstr "Nadalnje napake pri razèlenitvi bodo ignorirane."
+msgstr "Nadalnje napake pri razÄlenitvi bodo ignorirane."
 
 #: vfs/vfs.c:1829
 msgid "(sorry)"
-msgstr "(¾al)"
+msgstr "(Å¾al)"
 
 #: vfs/vfs.c:1840
 msgid "Internal error:"
@@ -4983,11 +4983,11 @@ msgstr "Interna napaka:"
 
 #: vfs/vfs.c:1850
 msgid "%s: %s: %s %3d%% (%lu bytes transfered)"
-msgstr "%s: %s: %s %3d%% (%lu prene¹enih bajtov)"
+msgstr "%s: %s: %s %3d%% (%lu preneÅ¡enih bajtov)"
 
 #: vfs/vfs.c:1851
 msgid "%s: %s: %s %lu bytes transfered"
-msgstr "%s: %s: %s %lu prene¹enih bajtov"
+msgstr "%s: %s: %s %lu preneÅ¡enih bajtov"
 
 #~ msgid "%o %f \"%s\"%e"
 #~ msgstr "%o %f \"%s\"%e"
@@ -5002,13 +5002,13 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Ne"
 
 #~ msgid " Find/read "
-#~ msgstr " Poi¹èi/beri"
+#~ msgstr " PoiÅ¡Äi/beri"
 
 #~ msgid " Problem reading from child "
 #~ msgstr " Napaka ob branju iz otroka "
 
 #~ msgid "-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
-#~ msgstr "-X, --dbgsubshell  [SAMO-RAZVOJ: Razhro¹èuj podlupino].\n"
+#~ msgstr "-X, --dbgsubshell  [SAMO-RAZVOJ: RazhroÅ¡Äuj podlupino].\n"
 
 #~ msgid " Cannot open file \""
 #~ msgstr " Ne morem odpreti datoteke \""
@@ -5029,7 +5029,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ "Ne morem pognati\n"
 #~ "\"%s\".\n"
 #~ "\n"
-#~ "Prosim preverite, ali ka¾e na veljaven ukaz."
+#~ "Prosim preverite, ali kaÅ¾e na veljaven ukaz."
 
 #~ msgid ""
 #~ "\".\n"
@@ -5039,7 +5039,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr ""
 #~ "\".\n"
 #~ "\n"
-#~ "Èe ¾elite to popraviti, vzemite urejevalnik tipov mime v Kontrolnem "
+#~ "ÄŒe Å¾elite to popraviti, vzemite urejevalnik tipov mime v Kontrolnem "
 #~ "centeru GNOME in uredite privzeto dejanje za %s tip \"%s\"."
 
 #~ msgid ""
@@ -5050,7 +5050,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr ""
 #~ "\".\n"
 #~ "\n"
-#~ "Èe ¾elite to popraviti, nastavite lastnosti te datoteke in nastavite "
+#~ "ÄŒe Å¾elite to popraviti, nastavite lastnosti te datoteke in nastavite "
 #~ "privzeto dejanje za %s."
 
 #~ msgid ""
@@ -5077,22 +5077,22 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr " Nisem mogel pognati terminala"
 
 #~ msgid "The Midnight Commander Team"
-#~ msgstr "Skupina Polnoènega poveljnika"
+#~ msgstr "Skupina PolnoÄnega poveljnika"
 
 #~ msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
-#~ msgstr "poroèila o hro¹èih: http://bugs.gnome.org ali uporabite gnome-bug"
+#~ msgstr "poroÄila o hroÅ¡Äih: http://bugs.gnome.org ali uporabite gnome-bug"
 
 #~ msgid "GNU Midnight Commander"
-#~ msgstr "Polnoèni poveljnik GNU"
+#~ msgstr "PolnoÄni poveljnik GNU"
 
 #~ msgid "The GNOME edition of the Midnight Commander file manager."
-#~ msgstr "GNOME izvedba upravljalnika datotek Polnoèni poveljnik."
+#~ msgstr "GNOME izvedba upravljalnika datotek PolnoÄni poveljnik."
 
 #~ msgid "Sort By"
 #~ msgstr "Sortiraj po"
 
 #~ msgid "Ignore case sensitivity."
-#~ msgstr "Ne razlikuj velikih in malih èrk."
+#~ msgstr "Ne razlikuj velikih in malih Ärk."
 
 #~ msgid "Sort files by "
 #~ msgstr "Sortiraj datoteke po"
@@ -5101,13 +5101,13 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Vrsti datoteke"
 
 #~ msgid "Time Last Accessed"
-#~ msgstr "Èasu zadnjega dostopa"
+#~ msgstr "ÄŒasu zadnjega dostopa"
 
 #~ msgid "Time Last Modified"
-#~ msgstr "Èasu zadnje modifikacije"
+#~ msgstr "ÄŒasu zadnje modifikacije"
 
 #~ msgid "Time Last Changed"
-#~ msgstr "Èasu zadnje spremembe"
+#~ msgstr "ÄŒasu zadnje spremembe"
 
 #~ msgid "Reverse the order."
 #~ msgstr "Obrni vrstni red."
@@ -5119,10 +5119,10 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Vnesite oznako za ukaz:"
 
 #~ msgid "Find all core files"
-#~ msgstr "Poi¹èi vse core datoteke"
+#~ msgstr "PoiÅ¡Äi vse core datoteke"
 
 #~ msgid "Run Command"
-#~ msgstr "Po¾eni ukaz"
+#~ msgstr "PoÅ¾eni ukaz"
 
 #~ msgid "Preset Commands"
 #~ msgstr "Predstavi ukaze"
@@ -5134,16 +5134,16 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Odstrani"
 
 #~ msgid "Run this Command"
-#~ msgstr "Po¾eni ta ukaz"
+#~ msgstr "PoÅ¾eni ta ukaz"
 
 #~ msgid "Command: "
 #~ msgstr "Ukaz: "
 
 #~ msgid "Set Filter"
-#~ msgstr "Doloèi filter"
+#~ msgstr "DoloÄi filter"
 
 #~ msgid "Show all files"
-#~ msgstr "Ka¾i vse datoteke"
+#~ msgstr "KaÅ¾i vse datoteke"
 
 #~ msgid ""
 #~ "Enter a filter here for files in the panel view.\n"
@@ -5193,34 +5193,34 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Vnesite URL:"
 
 #~ msgid "Access Time"
-#~ msgstr "Èas dostopa"
+#~ msgstr "ÄŒas dostopa"
 
 #~ msgid "Creation Time"
-#~ msgstr "Èas nastanka"
+#~ msgstr "ÄŒas nastanka"
 
 #~ msgid "Group ID"
 #~ msgstr "ID skupine"
 
 #~ msgid "Inode Number"
-#~ msgstr "©tevilka inoda"
+#~ msgstr "Å tevilka inoda"
 
 #~ msgid "Modification Time"
-#~ msgstr "Èas modifikacije"
+#~ msgstr "ÄŒas modifikacije"
 
 #~ msgid "Number of Hard Links"
-#~ msgstr "©tevilo moènih povezav"
+#~ msgstr "Å tevilo moÄnih povezav"
 
 #~ msgid "Size (short)"
 #~ msgstr "Velikost (kratko)"
 
 #~ msgid "Type"
-#~ msgstr "Naèin"
+#~ msgstr "NaÄin"
 
 #~ msgid "User ID"
 #~ msgstr "Uporabnikov ID"
 
 #~ msgid "Possible Columns"
-#~ msgstr "Mo¾ni stolpci"
+#~ msgstr "MoÅ¾ni stolpci"
 
 #~ msgid "Displayed Columns"
 #~ msgstr "Prikazani stolpci"
@@ -5229,7 +5229,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Prikrojen pogled"
 
 #~ msgid "Home directory"
-#~ msgstr "Domaèi imenik"
+#~ msgstr "DomaÄi imenik"
 
 #~ msgid "Trash"
 #~ msgstr "Smeti"
@@ -5241,7 +5241,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Samodejna postavitev ikon"
 
 #~ msgid "Snap icons to grid"
-#~ msgstr "Ikone naj skaèejo do mre¾e"
+#~ msgstr "Ikone naj skaÄejo do mreÅ¾e"
 
 #~ msgid "Use shaped icons"
 #~ msgstr "Uporabi obrezane ikone"
@@ -5276,7 +5276,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr ""
 #~ "Ne morem najti datoteke:\n"
 #~ "background-properties-capplet\n"
-#~ "v va¹i poti.\n"
+#~ "v vaÅ¡i poti.\n"
 #~ "\n"
 #~ "Ne morem nastaviti ozadja."
 
@@ -5284,7 +5284,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "_Terminal"
 
 #~ msgid "Launch a new terminal in the current directory"
-#~ msgstr "Po¾eni nov terminal v trenutnem imeniku"
+#~ msgstr "PoÅ¾eni nov terminal v trenutnem imeniku"
 
 #~ msgid "_Directory..."
 #~ msgstr "_Imenik..."
@@ -5314,28 +5314,28 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Po veliko_sti"
 
 #~ msgid "By Time Last _Accessed"
-#~ msgstr "Po èasu zadnjeg_a dostopa"
+#~ msgstr "Po Äasu zadnjeg_a dostopa"
 
 #~ msgid "By Time Last _Modified"
-#~ msgstr "Po èasu zadnje _modifikacije"
+#~ msgstr "Po Äasu zadnje _modifikacije"
 
 #~ msgid "By Time Last _Changed"
-#~ msgstr "Po èasu zadnje _spremembe"
+#~ msgstr "Po Äasu zadnje _spremembe"
 
 #~ msgid "_Arrange Icons"
 #~ msgstr "_Uredi ikone"
 
 #~ msgid "_Tidy Icons"
-#~ msgstr "_Poèisti ikone"
+#~ msgstr "_PoÄisti ikone"
 
 #~ msgid "Create _New Window"
 #~ msgstr "Ustvari _novo okno"
 
 #~ msgid "Rescan _Desktop Directory"
-#~ msgstr "Osve¾i namizni i_menik"
+#~ msgstr "OsveÅ¾i namizni i_menik"
 
 #~ msgid "Rescan De_vices"
-#~ msgstr "Osve¾i napra_ve"
+#~ msgstr "OsveÅ¾i napra_ve"
 
 #~ msgid "Recreate Default _Icons"
 #~ msgstr "Znova ustvari privzete _ikone"
@@ -5353,7 +5353,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Kopiram iz: "
 
 #~ msgid "Deleting file: "
-#~ msgstr "Bri¹em datoteko: "
+#~ msgstr "BriÅ¡em datoteko: "
 
 #~ msgid "Files Exist"
 #~ msgstr "Datoteke obstajajo"
@@ -5362,23 +5362,23 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ "Some of the files you are trying to copy already exist in the destination "
 #~ "folder.  Please select the action to be performed."
 #~ msgstr ""
-#~ "Nekatere datoteke, ki jih ¾elite prekopirati ¾e obstajajov ciljni mapi.  "
+#~ "Nekatere datoteke, ki jih Å¾elite prekopirati Å¾e obstajajov ciljni mapi.  "
 #~ "Prosim izberite dejanje, ki naj se izvede."
 
 #~ msgid "Prompt me before overwriting any file."
-#~ msgstr "Vpra¹aj me pred prepisovanjem katerkoli datoteke."
+#~ msgstr "VpraÅ¡aj me pred prepisovanjem katerkoli datoteke."
 
 #~ msgid "Don't overwrite any files."
-#~ msgstr "Ne prepi¹i nobene datoteke."
+#~ msgstr "Ne prepiÅ¡i nobene datoteke."
 
 #~ msgid "Overwrite:"
-#~ msgstr "Prepi¹i:"
+#~ msgstr "PrepiÅ¡i:"
 
 #~ msgid "Older files."
-#~ msgstr "Starej¹e datoteke."
+#~ msgstr "StarejÅ¡e datoteke."
 
 #~ msgid "Files only if size differs."
-#~ msgstr "Datoteke le, èe se velikost razlikuje."
+#~ msgstr "Datoteke le, Äe se velikost razlikuje."
 
 #~ msgid "All files."
 #~ msgstr "Vse datoteke."
@@ -5387,7 +5387,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Datoteka obstaja"
 
 #~ msgid "The target file already exists: %s"
-#~ msgstr "Ciljna datoteka ¾e obstja: %s"
+#~ msgstr "Ciljna datoteka Å¾e obstja: %s"
 
 #~ msgid "Replace it?"
 #~ msgstr "Zamenjaj jo?"
@@ -5396,7 +5396,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Cilj"
 
 #~ msgid "Find Destination Folder"
-#~ msgstr "Poi¹èi ciljno mapo"
+#~ msgstr "PoiÅ¡Äi ciljno mapo"
 
 #~ msgid "Copy as a background process"
 #~ msgstr "Kopiraj kot proces v ozadju"
@@ -5414,20 +5414,20 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ "Selecting this will copy the files that symlinks point to instead of just "
 #~ "copying the link."
 #~ msgstr ""
-#~ "Èe izberete to, se bodo kopirale datoteke na katere ka¾ejo simbolne "
+#~ "ÄŒe izberete to, se bodo kopirale datoteke na katere kaÅ¾ejo simbolne "
 #~ "povezave namesto kopiranja povezav samih."
 
 #~ msgid "Preserve file attributes."
 #~ msgstr "Ohrani atribute datotek."
 
 #~ msgid "Preserves the permissions and the UID/GID if possible"
-#~ msgstr "Ohrani dovoljenja in UID/GID, èe je mo¾no"
+#~ msgstr "Ohrani dovoljenja in UID/GID, Äe je moÅ¾no"
 
 #~ msgid "Recursively copy subdirectories."
 #~ msgstr "Rekurzivno kopiraj podimenike."
 
 #~ msgid "If set, this will copy the directories recursively"
-#~ msgstr "Èe je nastavljeno, bodo podimeniki rekurzivno kopirani"
+#~ msgstr "ÄŒe je nastavljeno, bodo podimeniki rekurzivno kopirani"
 
 #~ msgid ""
 #~ "%s\n"
@@ -5436,7 +5436,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr ""
 #~ "%s\n"
 #~ "\n"
-#~ "Imenik ni prazen. Naj ga zbri¹em rekurzivno?"
+#~ "Imenik ni prazen. Naj ga zbriÅ¡em rekurzivno?"
 
 #~ msgid "Do the same for the rest"
 #~ msgstr "Stori enako za ostale"
@@ -5472,10 +5472,10 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "_Kopiraj sem"
 
 #~ msgid "_Link here"
-#~ msgstr "P_ove¾i sem"
+#~ msgstr "P_oveÅ¾i sem"
 
 #~ msgid "Cancel drag"
-#~ msgstr "Preklièi spust"
+#~ msgstr "PrekliÄi spust"
 
 #~ msgid ""
 #~ "Could not stat %s\n"
@@ -5485,13 +5485,13 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ "%s"
 
 #~ msgid "Case sensitive"
-#~ msgstr "Razlikuj velike in male èrke"
+#~ msgstr "Razlikuj velike in male Ärke"
 
 #~ msgid "Suspend"
-#~ msgstr "Izkljuèi"
+#~ msgstr "IzkljuÄi"
 
 #~ msgid "Restart"
-#~ msgstr "Znova za¾eni"
+#~ msgstr "Znova zaÅ¾eni"
 
 #~ msgid "Change to this directory"
 #~ msgstr "Pojdi v ta imenik"
@@ -5506,7 +5506,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Uredi to datoteko"
 
 #~ msgid "Send the results to a Panel"
-#~ msgstr "Po¹lji rezultate v pult"
+#~ msgstr "PoÅ¡lji rezultate v pult"
 
 #~ msgid "Default set of icons not found, check your installation"
 #~ msgstr "Privzete ikone niso bile najdene, preverite svojo namestitev"
@@ -5521,19 +5521,19 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "_Hitri pogled"
 
 #~ msgid "Switch view to show just file name and type"
-#~ msgstr "Preklopi pogled, da ka¾e le ime in vrsto datoteke"
+#~ msgstr "Preklopi pogled, da kaÅ¾e le ime in vrsto datoteke"
 
 #~ msgid "_Detailed View"
 #~ msgstr "Po_drobni pogled"
 
 #~ msgid "Switch view to show detailed file statistics"
-#~ msgstr "Preklopi pogled, da ka¾e podrobno stanje datotek"
+#~ msgstr "Preklopi pogled, da kaÅ¾e podrobno stanje datotek"
 
 #~ msgid "_Custom View"
 #~ msgstr "P_rikrojen pogled"
 
 #~ msgid "Switch view to show user-defined statistics"
-#~ msgstr "Preklopi pogled, da ka¾e uporabni¹ko prikrojeno stanje"
+#~ msgstr "Preklopi pogled, da kaÅ¾e uporabniÅ¡ko prikrojeno stanje"
 
 #~ msgid "Icons"
 #~ msgstr "Ikone"
@@ -5548,7 +5548,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Prikrojeno"
 
 #~ msgid "Enter command to run"
-#~ msgstr "Vpi¹ite ukaz, ki naj se po¾ene"
+#~ msgstr "VpiÅ¡ite ukaz, ki naj se poÅ¾ene"
 
 #~ msgid ""
 #~ "Notice that if you choose to terminate the file manager, you will\n"
@@ -5556,10 +5556,10 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ "\n"
 #~ "Are you sure you want to exit?"
 #~ msgstr ""
-#~ "Èe boste izbrali ugasnili upravljalnik datotek, boste\n"
+#~ "ÄŒe boste izbrali ugasnili upravljalnik datotek, boste\n"
 #~ "prav tako ugasnili GNOME upravljalnik namizja.\n"
 #~ "\n"
-#~ "Ste preprièani da ¾elite izhod?"
+#~ "Ste prepriÄani da Å¾elite izhod?"
 
 #~ msgid ""
 #~ "The file manager and the desktop handler are now terminating\n"
@@ -5569,12 +5569,12 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ "\n"
 #~ "Press OK to terminate the application, or cancel to continue using it."
 #~ msgstr ""
-#~ "Upravljalnik datotek in upravljalnik namizja se sedaj uga¹ata\n"
+#~ "Upravljalnik datotek in upravljalnik namizja se sedaj ugaÅ¡ata\n"
 #~ "\n"
-#~ "Èe ¾elite znova pognati enega ali drugega\n"
-#~ "jih lahko za¾enete iz pulta ali pa po¾enete UNIX ukaz `gmc'\n"
+#~ "ÄŒe Å¾elite znova pognati enega ali drugega\n"
+#~ "jih lahko zaÅ¾enete iz pulta ali pa poÅ¾enete UNIX ukaz `gmc'\n"
 #~ "\n"
-#~ "Pritisnite \"V redu\" za ugasnitev programa ali \"preklièi\" za "
+#~ "Pritisnite \"V redu\" za ugasnitev programa ali \"prekliÄi\" za "
 #~ "nadaljevanje."
 
 #~ msgid "_File..."
@@ -5590,10 +5590,10 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Kopiraj datoteke"
 
 #~ msgid "_Delete..."
-#~ msgstr "_Zbri¹i..."
+#~ msgstr "_ZbriÅ¡i..."
 
 #~ msgid "Delete files"
-#~ msgstr "Zbri¹i datoteke"
+#~ msgstr "ZbriÅ¡i datoteke"
 
 #~ msgid "_Move..."
 #~ msgstr "_Prestavi..."
@@ -5602,10 +5602,10 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Preimenuj ali prestavi datoteke"
 
 #~ msgid "Show directory sizes"
-#~ msgstr "Ka¾i velikosti imenikov"
+#~ msgstr "KaÅ¾i velikosti imenikov"
 
 #~ msgid "Shows the disk space used by each directory"
-#~ msgstr "Ka¾e porabo diskovnega prostora s strani vsakega imenika"
+#~ msgstr "KaÅ¾e porabo diskovnega prostora s strani vsakega imenika"
 
 #~ msgid "Close window"
 #~ msgstr "Zapri okno"
@@ -5635,10 +5635,10 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Iskanje za datoteko v trenutnem pultu"
 
 #~ msgid "_Rescan Directory"
-#~ msgstr "P_rei¹èi imenik"
+#~ msgstr "P_reiÅ¡Äi imenik"
 
 #~ msgid "Rescan the directory contents"
-#~ msgstr "Osve¾i vsebino imenika"
+#~ msgstr "OsveÅ¾i vsebino imenika"
 
 #~ msgid "_Sort By..."
 #~ msgstr "_Sortiraj po..."
@@ -5653,10 +5653,10 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Nastavitve filtriranja imen datotek"
 
 #~ msgid "_Find File..."
-#~ msgstr "_Poi¹èi datoteko..."
+#~ msgstr "_PoiÅ¡Äi datoteko..."
 
 #~ msgid "Locate files on disk"
-#~ msgstr "Poi¹èi datoteke na disku"
+#~ msgstr "PoiÅ¡Äi datoteke na disku"
 
 #~ msgid "_Edit mime types..."
 #~ msgstr "_Uredi tipe mime..."
@@ -5665,16 +5665,16 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Uredi povezave tipov MIME"
 
 #~ msgid "_Run Command..."
-#~ msgstr "_Po¾eni ukaz..."
+#~ msgstr "_PoÅ¾eni ukaz..."
 
 #~ msgid "Runs a command"
-#~ msgstr "Po¾ene ukaz"
+#~ msgstr "PoÅ¾ene ukaz"
 
 #~ msgid "_Run Command in panel..."
-#~ msgstr "_Po¾eni ukaz v pultu..."
+#~ msgstr "_PoÅ¾eni ukaz v pultu..."
 
 #~ msgid "Run a command and put the results in a panel"
-#~ msgstr "Po¾eni ukaz in podaj rezultate v pultu"
+#~ msgstr "PoÅ¾eni ukaz in podaj rezultate v pultu"
 
 #~ msgid "_Background jobs..."
 #~ msgstr "Posli v _ozadju..."
@@ -5701,10 +5701,10 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Namizje"
 
 #~ msgid "_Help"
-#~ msgstr "_Pomoè"
+#~ msgstr "_PomoÄ"
 
 #~ msgid "Don't show this window again"
-#~ msgstr "Tega okna ne ka¾i veè"
+#~ msgstr "Tega okna ne kaÅ¾i veÄ"
 
 #~ msgid ""
 #~ "You are running the GNOME File Manager as root.\n"
@@ -5716,10 +5716,10 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr ""
 #~ "Upravljalnik datotek GNOME poganjate kot superuporabnik (root).\n"
 #~ "\n"
-#~ "Èe niste pazljivi lahko po¹kodujete sistem in Upravljalnik datotek GNOME "
-#~ "vam tega ne bo prepreèil.\n"
-#~ "Navodila za dodajanje neprivilegiranih uporabni¹kih raèunov najdete v "
-#~ "priroèniku.\n"
+#~ "ÄŒe niste pazljivi lahko poÅ¡kodujete sistem in Upravljalnik datotek GNOME "
+#~ "vam tega ne bo prepreÄil.\n"
+#~ "Navodila za dodajanje neprivilegiranih uporabniÅ¡kih raÄunov najdete v "
+#~ "priroÄniku.\n"
 
 #~ msgid "Could not contact the file manager\n"
 #~ msgstr "Ne morem vzpostaviti stika z upravljalnikom datotek\n"
@@ -5737,19 +5737,19 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "IMENIK"
 
 #~ msgid "Rescan the specified directory"
-#~ msgstr "Osve¾i izbran imenik"
+#~ msgstr "OsveÅ¾i izbran imenik"
 
 #~ msgid "Rescan the desktop icons"
-#~ msgstr "Osve¾i ikone namizja"
+#~ msgstr "OsveÅ¾i ikone namizja"
 
 #~ msgid "Rescan the desktop device icons"
-#~ msgstr "Osve¾i ikone naprav namizja"
+#~ msgstr "OsveÅ¾i ikone naprav namizja"
 
 #~ msgid "Arrange the desktop icons"
 #~ msgstr "Uredi ikone namizja"
 
 #~ msgid "name | type | size | atime | mtime | ctime"
-#~ msgstr "ime | vrsta  | velikost | dèas | mèas | sèas"
+#~ msgstr "ime | vrsta  | velikost | dÄas | mÄas | sÄas"
 
 #~ msgid "Close windows whose directories cannot be reached"
 #~ msgstr "Zapri okna, katerih imeniki niso dostopni"
@@ -5804,7 +5804,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Vrsta datoteke: blokovna naprava"
 
 #~ msgid "File Type: Socket"
-#~ msgstr "Vrsta datoteke: vtiè"
+#~ msgstr "Vrsta datoteke: vtiÄ"
 
 #~ msgid "File Type: FIFO"
 #~ msgstr "Vrsta datoteke: FIFO"
@@ -5834,10 +5834,10 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "%a, %d %b %Y,  %I:%M:%S %p"
 
 #~ msgid "Last Modified on: "
-#~ msgstr "Zadnjiè modificirana: "
+#~ msgstr "ZadnjiÄ modificirana: "
 
 #~ msgid "Last Accessed on: "
-#~ msgstr "Zadnjiè dostopana: "
+#~ msgstr "ZadnjiÄ dostopana: "
 
 #~ msgid "URL:"
 #~ msgstr "URL:"
@@ -5849,7 +5849,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Dejanje ob spustitvi"
 
 #~ msgid "Use default Drop Action options"
-#~ msgstr "Uporabi privzete mo¾nosti dejanje za spust"
+#~ msgstr "Uporabi privzete moÅ¾nosti dejanje za spust"
 
 #~ msgid "Use default View options"
 #~ msgstr "Uporabi privzeto dejanje Pogled"
@@ -5888,7 +5888,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Dovoljenja datoteke"
 
 #~ msgid "Current mode: "
-#~ msgstr "Trenutni naèin: "
+#~ msgstr "Trenutni naÄin: "
 
 #~ msgid "Write"
 #~ msgstr "Pisljiva"
@@ -5918,7 +5918,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "<Neznan> (%d)"
 
 #~ msgid "File ownership"
-#~ msgstr "Lastni¹tvo datoteke"
+#~ msgstr "LastniÅ¡tvo datoteke"
 
 #~ msgid "URL"
 #~ msgstr "URL"
@@ -5927,7 +5927,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Stanje"
 
 #~ msgid "Options"
-#~ msgstr "Mo¾nosti"
+#~ msgstr "MoÅ¾nosti"
 
 #~ msgid "Permissions"
 #~ msgstr "Dovoljenja"
@@ -5936,13 +5936,13 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr " Lastnosti"
 
 #~ msgid "You entered an invalid username"
-#~ msgstr "Vpisali ste napaèno uporabni¹ko ime"
+#~ msgstr "Vpisali ste napaÄno uporabniÅ¡ko ime"
 
 #~ msgid "You entered an invalid group name"
-#~ msgstr "Vpisali ste napaèno ime skupine"
+#~ msgstr "Vpisali ste napaÄno ime skupine"
 
 #~ msgid "You must rename your file to something"
-#~ msgstr "Preimenovati morate va¹o datoteko v nekaj"
+#~ msgstr "Preimenovati morate vaÅ¡o datoteko v nekaj"
 
 #~ msgid "You cannot rename a file to something containing a '/' character"
 #~ msgstr "Datoteke ne morete preimenovati v nekaj, kar vsebuje znak '/'"
@@ -5951,13 +5951,13 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Izberite program s katerim naj se \"%s\" odpre."
 
 #~ msgid "Select a file to run with"
-#~ msgstr "Izberite datoteko s katero naj se po¾ene"
+#~ msgstr "Izberite datoteko s katero naj se poÅ¾ene"
 
 #~ msgid "Applications"
 #~ msgstr "Programi"
 
 #~ msgid "Program to run"
-#~ msgstr "Program, ki naj se po¾ene"
+#~ msgstr "Program, ki naj se poÅ¾ene"
 
 #~ msgid "Mount device"
 #~ msgstr "Priklopi napravo"
@@ -5987,7 +5987,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Prestavi..."
 
 #~ msgid "Hard Link..."
-#~ msgstr "Moèna povezava..."
+#~ msgstr "MoÄna povezava..."
 
 #~ msgid "Symlink..."
 #~ msgstr "Simbolna povezava..."
@@ -5999,10 +5999,10 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Lastnosti..."
 
 #~ msgid "Show backup files"
-#~ msgstr "Ka¾i varnostne kopije datotek"
+#~ msgstr "KaÅ¾i varnostne kopije datotek"
 
 #~ msgid "Show hidden files"
-#~ msgstr "Ka¾i skrite datoteke"
+#~ msgstr "KaÅ¾i skrite datoteke"
 
 #~ msgid "Mix files and directories"
 #~ msgstr "Obravnavaj datoteke in imenike enako"
@@ -6023,10 +6023,10 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Potrditev ob zagonu datotek"
 
 #~ msgid "Show progress while operations are being performed"
-#~ msgstr "Ka¾i napredek medtem, ko se operacije izvajajo"
+#~ msgstr "KaÅ¾i napredek medtem, ko se operacije izvajajo"
 
 #~ msgid "VFS Timeout:"
-#~ msgstr "Èasovna omejitev za VFS:"
+#~ msgstr "ÄŒasovna omejitev za VFS:"
 
 #~ msgid "Seconds"
 #~ msgstr "Sekund"
@@ -6038,13 +6038,13 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Vedno uporabi posrednika za FTP"
 
 #~ msgid "Fast directory reload"
-#~ msgstr "Hitro osve¾evanje imenikov"
+#~ msgstr "Hitro osveÅ¾evanje imenikov"
 
 #~ msgid "Compute totals before copying files"
-#~ msgstr "Izraèunaj skupne velikosti pred kopiranjem datotek"
+#~ msgstr "IzraÄunaj skupne velikosti pred kopiranjem datotek"
 
 #~ msgid "FTP directory cache timeout :"
-#~ msgstr "Èasovna omejitev za predpomnilnik FTP imenika :"
+#~ msgstr "ÄŒasovna omejitev za predpomnilnik FTP imenika :"
 
 #~ msgid "Allow customization of icons in icon view"
 #~ msgstr "Dovoli prikrojene ikone v ikonskem pogledu"
@@ -6065,7 +6065,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Nastavitve"
 
 #~ msgid "Reloads the current directory"
-#~ msgstr "Osve¾i trenutni imenik"
+#~ msgstr "OsveÅ¾i trenutni imenik"
 
 #~ msgid "New _Directory..."
 #~ msgstr "Nov _imenik..."
@@ -6080,13 +6080,13 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Sprazni smeti"
 
 #~ msgid "Search: %s"
-#~ msgstr "I¹èi: %s"
+#~ msgstr "IÅ¡Äi: %s"
 
 #~ msgid "Copy directory"
 #~ msgstr "Kopiraj imenik"
 
 #~ msgid "Delete directory"
-#~ msgstr "Zbri¹i imenik"
+#~ msgstr "ZbriÅ¡i imenik"
 
 #~ msgid "Rename or move directory"
 #~ msgstr "Preimenuj ali prestavi imenik"
@@ -6110,13 +6110,13 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Pojdi na naslednji imenik"
 
 #~ msgid "Rescan the current directory"
-#~ msgstr "Znova osve¾i trenutni imenik"
+#~ msgstr "Znova osveÅ¾i trenutni imenik"
 
 #~ msgid "Home"
 #~ msgstr "Dom"
 
 #~ msgid "Go to your home directory"
-#~ msgstr "Pojdi v va¹ domaèi imenik"
+#~ msgstr "Pojdi v vaÅ¡ domaÄi imenik"
 
 #~ msgid "Location:"
 #~ msgstr "Lokacija:"
@@ -6128,13 +6128,13 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "_Pojdi v vrstico"
 
 #~ msgid "Jump to a specified line number"
-#~ msgstr "Pojdi v doloèeno ¹tevilko vrstice"
+#~ msgstr "Pojdi v doloÄeno Å¡tevilko vrstice"
 
 #~ msgid "_Monitor file"
 #~ msgstr "_Spremljaj datoteko"
 
 #~ msgid "Monitor file growing"
-#~ msgstr "Spremljaj nara¹èanje datoteke"
+#~ msgstr "Spremljaj naraÅ¡Äanje datoteke"
 
 #~ msgid "Regexp search"
 #~ msgstr "Iskanje z regularnim izrazom"
@@ -6149,13 +6149,13 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Prevoj besedila"
 
 #~ msgid "_Parsed view"
-#~ msgstr "_Razèlenjen pogled"
+#~ msgstr "_RazÄlenjen pogled"
 
 #~ msgid "_Formatted"
 #~ msgstr "_Formatiran"
 
 #~ msgid "_Hex"
-#~ msgstr "_©estnajsti¹ko"
+#~ msgstr "_Å estnajstiÅ¡ko"
 
 #~ msgid "_Search"
 #~ msgstr "_Iskanje"
@@ -6164,10 +6164,10 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "v redu"
 
 #~ msgid "cancel"
-#~ msgstr "preklièi"
+#~ msgstr "prekliÄi"
 
 #~ msgid "help"
-#~ msgstr "pomoè"
+#~ msgstr "pomoÄ"
 
 #~ msgid "exit"
 #~ msgstr "izhod"
@@ -6186,7 +6186,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ "(not \\1, \\2 like sed) then use \"Enter...order\""
 #~ msgstr ""
 #~ "Vnesete lahko regularne izraze %s\n"
-#~ "(ne \\1, \\2 kot sed) nato pa uporabite \"Vpi¹i ... vrstni red\""
+#~ "(ne \\1, \\2 kot sed) nato pa uporabite \"VpiÅ¡i ... vrstni red\""
 
 #~ msgid " Enter argument (or substring) order : "
 #~ msgstr " Vnesite vrstni red argumentov (ali podnizov) : "
@@ -6196,13 +6196,13 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ "format specifiers or regexp substrings, eg 3,1,2"
 #~ msgstr ""
 #~ "Vnesite vrstni red zamenjav scanf\n"
-#~ "doloèilnikov naèina izpisa ali regularnih izrazov, npr.: 3,1,2"
+#~ "doloÄilnikov naÄina izpisa ali regularnih izrazov, npr.: 3,1,2"
 
 #~ msgid " Whole words only "
 #~ msgstr " Le cele besede "
 
 #~ msgid " Case sensitive "
-#~ msgstr " Razlikuj velike in male èrke "
+#~ msgstr " Razlikuj velike in male Ärke "
 
 #~ msgid " Regular expression "
 #~ msgstr " Regularni izraz "
@@ -6211,20 +6211,20 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ "See the regex man page for how\n"
 #~ "to compose a regular expression"
 #~ msgstr ""
-#~ "Poglejte si priroènik o regularnih izrazih (man regex), \n"
+#~ "Poglejte si priroÄnik o regularnih izrazih (man regex), \n"
 #~ "za navodila kako narediti regularni izraz"
 
 #~ msgid " Backwards "
 #~ msgstr " Nazaj "
 
 #~ msgid "Warning: Searching backward can be slow"
-#~ msgstr "Opozorilo: iskanje nazaj je lahko poèasno"
+#~ msgstr "Opozorilo: iskanje nazaj je lahko poÄasno"
 
 #~ msgid " Prompt on replace "
 #~ msgstr " Potrdimo ob zamenjavi "
 
 #~ msgid "Ask before making each replacement"
-#~ msgstr "Vpra¹aj preden izvr¹i¹ zamenjavo "
+#~ msgstr "VpraÅ¡aj preden izvrÅ¡iÅ¡ zamenjavo "
 
 #~ msgid " Replace all "
 #~ msgstr " Zamenjaj vse "
@@ -6246,10 +6246,10 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ "see the scanf man page"
 #~ msgstr ""
 #~ "Dovoli vpis C formatnega zniza,\n"
-#~ "poglejte si priroènik o scanf (man scanf)"
+#~ "poglejte si priroÄnik o scanf (man scanf)"
 
 #~ msgid "Begin search, Enter"
-#~ msgstr "Zaèni iskanje, Enter"
+#~ msgstr "ZaÄni iskanje, Enter"
 
 #~ msgid "Abort this dialog, Esc"
 #~ msgstr "Zavrni ta dialog, Esc"
@@ -6258,7 +6258,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Zamenjaj"
 
 #~ msgid "Skip"
-#~ msgstr "Preskoèi"
+#~ msgstr "PreskoÄi"
 
 #~ msgid "Replace all"
 #~ msgstr "Zamenjaj vse"
@@ -6274,7 +6274,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ " Shranim ob izhodu? "
 
 #~ msgid " &Cancel quit "
-#~ msgstr " &Preklièi izhod "
+#~ msgstr " &PrekliÄi izhod "
 
 #~ msgid " &Yes "
 #~ msgstr " &Da "
@@ -6304,10 +6304,10 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Operacije nad diski in iskanje/indeksiranje datotek"
 
 #~ msgid "Toggle mark\tF3"
-#~ msgstr "Preklopi oznaèbo\tF3"
+#~ msgstr "Preklopi oznaÄbo\tF3"
 
 #~ msgid "Toggle mark columns\tC-b"
-#~ msgstr "Preklopi oznaèbo stolpcev\tC-b"
+#~ msgstr "Preklopi oznaÄbo stolpcev\tC-b"
 
 #~ msgid "Toggle book mark\tC-M-Ins"
 #~ msgstr "Preklopi zaznamek\tC-M-Ins"
@@ -6319,10 +6319,10 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Zaznamek naprej\tC-M-Down"
 
 #~ msgid "Flush book marks"
-#~ msgstr "Zbri¹i zaznamke"
+#~ msgstr "ZbriÅ¡i zaznamke"
 
 #~ msgid "Toggle insert/overwrite\tIns"
-#~ msgstr "preklopi naèin &Pisanja\tIns"
+#~ msgstr "preklopi naÄin &Pisanja\tIns"
 
 #~ msgid "Copy block to cursor\tF5"
 #~ msgstr "Kopiraj blok na kazalc\tF5"
@@ -6331,34 +6331,34 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Premakni blok na kazalec\tF6"
 
 #~ msgid "Delete block\tF8/C-Del"
-#~ msgstr "Zbri¹i blok\tF8/C-Del"
+#~ msgstr "ZbriÅ¡i blok\tF8/C-Del"
 
 #~ msgid "Copy block to clipbrd\tC-Ins"
-#~ msgstr "Kopiraj blok na odlo¾.\tC-Ins"
+#~ msgstr "Kopiraj blok na odloÅ¾.\tC-Ins"
 
 #~ msgid "Cut block to clipbrd\tS-Del"
-#~ msgstr "Izre¾i blok na odlo¾.\tS-Del"
+#~ msgstr "IzreÅ¾i blok na odloÅ¾.\tS-Del"
 
 #~ msgid "Paste block from clipbrd\tS-Ins"
-#~ msgstr "Prilepi blok iz odlo¾. \tS-Ins"
+#~ msgstr "Prilepi blok iz odloÅ¾. \tS-Ins"
 
 #~ msgid "Selection history\tM-Ins"
-#~ msgstr "Zgodovina oznaèenega\tM-Ins"
+#~ msgstr "Zgodovina oznaÄenega\tM-Ins"
 
 #~ msgid "Undo\tC-BackSpace"
-#~ msgstr "Razveljavi\tC-Vraèalka"
+#~ msgstr "Razveljavi\tC-VraÄalka"
 
 #~ msgid "Manipulating blocks of text"
 #~ msgstr "Manipuliranje z bloki besedila"
 
 #~ msgid " Srch/Replce "
-#~ msgstr " I¹èi/Zamenjaj "
+#~ msgstr " IÅ¡Äi/Zamenjaj "
 
 #~ msgid "Search...\tF7"
-#~ msgstr "I¹èi...\tF7"
+#~ msgstr "IÅ¡Äi...\tF7"
 
 #~ msgid "Search again\tF17"
-#~ msgstr "I¹èi znova\tF17"
+#~ msgstr "IÅ¡Äi znova\tF17"
 
 #~ msgid "Replace...\tF4"
 #~ msgstr "Zamenjaj...\tF4"
@@ -6367,7 +6367,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Zamenjaj znova\tF14"
 
 #~ msgid "Search for and replace text"
-#~ msgstr "I¹èi za in zamenjaj besedilo"
+#~ msgstr "IÅ¡Äi za in zamenjaj besedilo"
 
 #~ msgid "Goto line...\tM-l"
 #~ msgstr "Pojdi v vrstico...\tM-l"
@@ -6376,19 +6376,19 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Pojdi na zaklepaj\tM-b"
 
 #~ msgid "Start record macro\tC-r"
-#~ msgstr "Zaèni snemanje makra\tC-r"
+#~ msgstr "ZaÄni snemanje makra\tC-r"
 
 #~ msgid "Finish record macro...\tC-r"
-#~ msgstr "Konèaj snemanje makra...\tC-r"
+#~ msgstr "KonÄaj snemanje makra...\tC-r"
 
 #~ msgid "Execute macro...\tC-a, KEY"
 #~ msgstr "Izvedi makro...\tC-a, TIPKA"
 
 #~ msgid "Delete macro...\t"
-#~ msgstr "Zbri¹i makro...\t"
+#~ msgstr "ZbriÅ¡i makro...\t"
 
 #~ msgid "Insert date/time\tC-d"
-#~ msgstr "Vstavi datum/èas\tC-d"
+#~ msgstr "Vstavi datum/Äas\tC-d"
 
 #~ msgid "Format paragraph\tM-p"
 #~ msgstr "Formatiraj odstavek\tM-p"
@@ -6406,26 +6406,26 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr " Vpnesi ime datoteke: "
 
 #~ msgid "The Quick Brown Fox Jumps Over The Lazy Dog"
-#~ msgstr "Pi¹kur molèe grabi fi¾ol iz dna cezijeve hoste"
+#~ msgstr "PiÅ¡kur molÄe grabi fiÅ¾ol iz dna cezijeve hoste"
 
 #~ msgid ""
 #~ "gtkedit.c: HOME environment variable not set and no passwd entry - "
 #~ "aborting\n"
 #~ msgstr ""
 #~ "gtkedit.c: HOME okoljska spremenljivka ni nastavljena in ni gesla - "
-#~ "konèujem\n"
+#~ "konÄujem\n"
 
 #~ msgid "Interactive help browser"
-#~ msgstr "Interaktivni brskalnik pomoèi"
+#~ msgstr "Interaktivni brskalnik pomoÄi"
 
 #~ msgid "Save to current file name"
 #~ msgstr "Shrani v trentno datoteko"
 
 #~ msgid "Toggle In/Off invisible marker to highlight text"
-#~ msgstr "Vklopi/Izklopi nevidni oznaènik za osvetljevanje besedila"
+#~ msgstr "Vklopi/Izklopi nevidni oznaÄnik za osvetljevanje besedila"
 
 #~ msgid "Find and replace strings/regular expressions"
-#~ msgstr "Poi¹èi in zamenjaj nize/regularne izraze"
+#~ msgstr "PoiÅ¡Äi in zamenjaj nize/regularne izraze"
 
 #~ msgid "Copy highlighted block to cursor position"
 #~ msgstr "Kopiraj osvetljen blok na pozicijo kazalca"
@@ -6434,13 +6434,13 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Premakni osvetljen blok na pozicijo kazalca"
 
 #~ msgid "Find"
-#~ msgstr "Poi¹èi"
+#~ msgstr "PoiÅ¡Äi"
 
 #~ msgid "Find strings/regular expressions"
-#~ msgstr "Poi¹èi nize/regularne izraze"
+#~ msgstr "PoiÅ¡Äi nize/regularne izraze"
 
 #~ msgid "Delete highlighted text"
-#~ msgstr "Zbri¹i osvetljeno besedilo"
+#~ msgstr "ZbriÅ¡i osvetljeno besedilo"
 
 #~ msgid "Pull down menu"
 #~ msgstr "Spustni menu"
@@ -6449,7 +6449,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Zapusti urejevalnik"
 
 #~ msgid "Clear the edit buffer"
-#~ msgstr "Poèisti urejevalni¹ki medpomnilnik"
+#~ msgstr "PoÄisti urejevalniÅ¡ki medpomnilnik"
 
 #~ msgid "Insert File"
 #~ msgstr "Vstavi datoteko"
@@ -6464,10 +6464,10 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "kopiraj blok v datoteko"
 
 #~ msgid "Search/Replace"
-#~ msgstr "I¹èi/Zamenjaj"
+#~ msgstr "IÅ¡Äi/Zamenjaj"
 
 #~ msgid " Spelling Message "
-#~ msgstr " Sporoèilo Èrkovalnika "
+#~ msgstr " SporoÄilo ÄŒrkovalnika "
 
 #~ msgid ""
 #~ " Fail trying to open ispell program. \n"
@@ -6475,8 +6475,8 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ " Alternatively, disable spell checking from the Options menu. "
 #~ msgstr ""
 #~ " Napaka ob poskusu zagona programa ispell. \n"
-#~ " Preverite, da je v va¹i poti in, da deluje z -a mo¾nostjo. \n"
-#~ " Lahko pa tudi izkljuèite preverjanje èrkovanja v menuju Nastavitve. "
+#~ " Preverite, da je v vaÅ¡i poti in, da deluje z -a moÅ¾nostjo. \n"
+#~ " Lahko pa tudi izkljuÄite preverjanje Ärkovanja v menuju Nastavitve. "
 
 #~ msgid ""
 #~ " Fail trying to open ispell pipes. \n"
@@ -6484,8 +6484,8 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ " Alternatively, disable spell checking from the Options menu. "
 #~ msgstr ""
 #~ " Napaka ob poskusu odprtja ispell cevi. \n"
-#~ " Preverite, da je v va¹i poti in, da deluje z -a mo¾nostjo. \n"
-#~ " Lahko pa tudi izkljuèite preverjanje èrkovanja v menuju Nastavitve. "
+#~ " Preverite, da je v vaÅ¡i poti in, da deluje z -a moÅ¾nostjo. \n"
+#~ " Lahko pa tudi izkljuÄite preverjanje Ärkovanja v menuju Nastavitve. "
 
 #~ msgid ""
 #~ " Fail trying to read ispell pipes. \n"
@@ -6493,8 +6493,8 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ " Alternatively, disable spell checking from the Options menu. "
 #~ msgstr ""
 #~ " Napaka ob poskusu branja iz ispell cevi. \n"
-#~ " Preverite, da je v va¹i poti in, da deluje z -a mo¾nostjo. \n"
-#~ " Lahko pa tudi izkljuèite preverjanje èrkovanja v menuju Nastavitve. "
+#~ " Preverite, da je v vaÅ¡i poti in, da deluje z -a moÅ¾nostjo. \n"
+#~ " Lahko pa tudi izkljuÄite preverjanje Ärkovanja v menuju Nastavitve. "
 
 #~ msgid ""
 #~ " Error reading from ispell. \n"
@@ -6504,16 +6504,16 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ " Program bo znova zagnan. "
 
 #~ msgid " Load Syntax Rules "
-#~ msgstr " Nalo¾i sintaktièna pravila"
+#~ msgstr " NaloÅ¾i sintaktiÄna pravila"
 
 #~ msgid ""
 #~ " Your syntax rule file is outdated \n"
 #~ " A new rule file is being installed. \n"
 #~ " Your old rule file has been saved with a .OLD extension. "
 #~ msgstr ""
-#~ " Va¹a datoteka s sintaktiènimi pravili je zastarala \n"
-#~ " Nova pravila se name¹èajo. \n"
-#~ " Va¹a stara pravila bodo shranjena s pripono .OLD. "
+#~ " VaÅ¡a datoteka s sintaktiÄnimi pravili je zastarala \n"
+#~ " Nova pravila se nameÅ¡Äajo. \n"
+#~ " VaÅ¡a stara pravila bodo shranjena s pripono .OLD. "
 
 #~ msgid "Using default locale"
 #~ msgstr "Uporabljam privzete lokalizacijske nastavitve"
@@ -6522,10 +6522,10 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Uporabljam 'locale' \"%s\" (iz okoljske spremenljivke %s)"
 
 #~ msgid "Hotlist is now kept in file ~/"
-#~ msgstr "Vroèi seznam je sedaj v datoteki ~/"
+#~ msgstr "VroÄi seznam je sedaj v datoteki ~/"
 
 #~ msgid "MC will load hotlist from ~/"
-#~ msgstr "Polnoèni Poveljnik bo nalo¾il vroèi seznam iz  ~/"
+#~ msgstr "PolnoÄni Poveljnik bo naloÅ¾il vroÄi seznam iz  ~/"
 
 #~ msgid "and then delete [Hotlist] section there"
 #~ msgstr "in nato zbrisal [Hotlist] sekcijo tam"
@@ -6543,43 +6543,43 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "GEOMETRIJA"
 
 #~ msgid "No windows opened at startup"
-#~ msgstr "Ob prièetku ni odprtih oken"
+#~ msgstr "Ob priÄetku ni odprtih oken"
 
 #~ msgid "No desktop icons"
 #~ msgstr "Ni namiznih ikon"
 
 #~ msgid "Look more like traditional gmc"
-#~ msgstr "Izgleda bolj kot tradicionalni GNOME Polnoèni Poveljnik"
+#~ msgstr "Izgleda bolj kot tradicionalni GNOME PolnoÄni Poveljnik"
 
 #~ msgid "Display the directory that holds the .links startup files and exit"
-#~ msgstr "Izpi¹i imenik, ki vsebuje .links zaèetne datoteke in konèaj"
+#~ msgstr "IzpiÅ¡i imenik, ki vsebuje .links zaÄetne datoteke in konÄaj"
 
 #~ msgid "Cannot load %s/%s"
-#~ msgstr "Ne morem nalo¾iti %s/%s"
+#~ msgstr "Ne morem naloÅ¾iti %s/%s"
 
 #~ msgid "Edition: "
 #~ msgstr "Edicija: "
 
 #~ msgid "text mode"
-#~ msgstr "besedilni naèin"
+#~ msgstr "besedilni naÄin"
 
 #~ msgid " with X11 support to read modifiers"
 #~ msgstr " z X11 podporo za branje sprememb"
 
 #~ msgid "Searching for `%s'"
-#~ msgstr "I¹èem za `%s'"
+#~ msgstr "IÅ¡Äem za `%s'"
 
 #~ msgid " Direntry warning "
 #~ msgstr " Opozorilo 'direntry'"
 
 #~ msgid "Super ino_usage is %d, memory leak"
-#~ msgstr "Super ino_usage je %d, pu¹èanje pomnilnika"
+#~ msgstr "Super ino_usage je %d, puÅ¡Äanje pomnilnika"
 
 #~ msgid "Super has want_stale set"
 #~ msgstr "Super ima nastavljen want_stale"
 
 #~ msgid "Copyright (C) 1998 The Free Software Foundation"
-#~ msgstr "Avtorske pravice pridr¾ane (C) 1998 Fundacija za prosto programje"
+#~ msgstr "Avtorske pravice pridrÅ¾ane (C) 1998 Fundacija za prosto programje"
 
 #~ msgid "Open _new window"
 #~ msgstr "Odpri _novo okno"
@@ -6597,10 +6597,10 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "_Ikonski pogled"
 
 #~ msgid "Display _tree view"
-#~ msgstr " Ka¾i _drevesni pogled "
+#~ msgstr " KaÅ¾i _drevesni pogled "
 
 #~ msgid "_About the Midnight Commander..."
-#~ msgstr " _O Polnoènem poveljniku..."
+#~ msgstr " _O PolnoÄnem poveljniku..."
 
 #~ msgid "_File"
 #~ msgstr "_Datoteka"
@@ -6609,7 +6609,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "_Pogled"
 
 #~ msgid "&Open/load...     C-o"
-#~ msgstr "&Odpri/nalo¾i...  C-o"
+#~ msgstr "&Odpri/naloÅ¾i...  C-o"
 
 #~ msgid " I can't run the Advanced Chown command on an extfs "
 #~ msgstr " Ne morem pognati Naprednega Chown ukaza na extfs"
@@ -6641,7 +6641,7 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 
 #~ msgid " Can't execute commands on a Virtual File System directory "
 #~ msgstr ""
-#~ " Ne morem poganjati ukazov na imenuku Navideznega Datoteènega Sistema "
+#~ " Ne morem poganjati ukazov na imenuku Navideznega DatoteÄnega Sistema "
 #~ "(VFS)"
 
 #~ msgid " Internal error: get_file \n"
@@ -6657,16 +6657,16 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "."
 
 #~ msgid "Global option settings"
-#~ msgstr "Nastavitve globalnih mo¾nosti"
+#~ msgstr "Nastavitve globalnih moÅ¾nosti"
 
 #~ msgid "mc.hlp"
-#~ msgstr "mc.pomoè"
+#~ msgstr "mc.pomoÄ"
 
 #~ msgid "Replc"
 #~ msgstr "Zamen"
 
 #~ msgid "Dlete"
-#~ msgstr "Bri¹i"
+#~ msgstr "BriÅ¡i"
 
 #~ msgid ""
 #~ " Can't generate unique filename \n"
@@ -6697,10 +6697,10 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Protokol prenosa datotek (ftp)"
 
 #~ msgid "Midnight Commander's private remote filesystem"
-#~ msgstr "Privatni oddaljen datoteèni sistem Polnoènega poveljnika"
+#~ msgstr "Privatni oddaljen datoteÄni sistem PolnoÄnega poveljnika"
 
 #~ msgid "Undelete filesystem for ext2"
-#~ msgstr "Odbrisljiv datoteèni sistem za ext2"
+#~ msgstr "Odbrisljiv datoteÄni sistem za ext2"
 
 #~ msgid "Filename"
 #~ msgstr "Ime datoteke"
@@ -6715,13 +6715,13 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Uporabi terminal"
 
 #~ msgid "File mode (permissions)"
-#~ msgstr "Naèin datoteke (dovoljenja)"
+#~ msgstr "NaÄin datoteke (dovoljenja)"
 
 #~ msgid "<Unknown>"
 #~ msgstr "<Neznan>"
 
 #~ msgid "General"
-#~ msgstr "Splo¹no"
+#~ msgstr "SploÅ¡no"
 
 #~ msgid "Title"
 #~ msgstr "Naziv"
@@ -6730,10 +6730,10 @@ msgstr "%s: %s: %s %lu prene¹enih bajtov"
 #~ msgstr "Izberi ikono"
 
 #~ msgid "key '%d 0': "
-#~ msgstr "kljuè '%d 0': "
+#~ msgstr "kljuÄ '%d 0': "
 
 #~ msgid "Usage: fixhlp <width> <tocname>\n"
-#~ msgstr "Uporaba: fixhlp <¹irina> <naslov_kazala>\n"
+#~ msgstr "Uporaba: fixhlp <Å¡irina> <naslov_kazala>\n"
 
 #~ msgid "fixhlp: Cannot open toc for writing"
 #~ msgstr "fixhlp: Ne morem odpreti stvarnega kazala za pisanje"
