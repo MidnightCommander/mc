@@ -1,3 +1,8 @@
+2002-12-12  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* extfs/urar.in: rar lists directories after files, so sort "list"
+	command output by names to prevent duplications.
+
 2002-12-12  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/urar.in: Strengthen quoting.  Don't use full path to rar

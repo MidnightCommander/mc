@@ -95,7 +95,9 @@ cmd="$1"
 shift
 
 case "$cmd" in
-  list)    mcrarfs_list    "$@" ;;
+  list)    mcrarfs_list    "$@" | sort +9 ;; # rar lists directories
+					     # after files, so sort names
+					     # to prevent duplication
   rm)      mcrarfs_rm      "$@" ;;
   rmdir)   mcrarfs_rm      "$@" ;;
   mkdir)   mcrarfs_mkdir   "$@" ;;
