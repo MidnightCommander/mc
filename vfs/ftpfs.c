@@ -1729,6 +1729,13 @@ static struct vfs_s_data ftp_data = {
 };
 
 static void
+ftpfs_done (vfs *me)
+{
+    g_free (ftpfs_anonymous_passwd);
+    g_free (ftpfs_proxy_host);
+}
+
+static void
 ftpfs_fill_names (vfs *me, void (*func)(char *))
 {
     struct vfs_s_super * super = ftp_data.supers;
@@ -1750,7 +1757,7 @@ vfs vfs_ftpfs_ops = {
     &ftp_data,	/* data */
     0,		/* errno */
     NULL,	/* init */
-    NULL,	/* done */
+    ftpfs_done,	/* done */
     ftpfs_fill_names,
     NULL,
 

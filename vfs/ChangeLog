@@ -1,3 +1,8 @@
+2003-06-05  Pavel Roskin  <proski@gnu.org>
+
+	* ftpfs.c (ftpfs_done): New function.  Free ftpfs_proxy_host and
+	ftpfs_anonymous_passwd.
+
 2003-05-30  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/trpm: Fix compatibility with the secure temporary
