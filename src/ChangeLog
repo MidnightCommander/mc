@@ -1,5 +1,15 @@
 2001-07-06  Pavel Roskin  <proski@gnu.org>
 
+	* cons.saver.c: New variable console_minor. Eliminate variables
+	len and vcs_name.
+	(check_file): Set console_minor to the minor device number of
+	the console. Disallow /dev/tty0.
+	(detect_console): Don't parse tty_name, instead make sure that
+	it corresponds to console_minor. Check console first. Fallback
+	to /dev/vcc/a* if /dev/vcsa* cannot be opened.
+	(save_console): Use console_minor.
+	(restore_console): Likewise.
+
 	* cons.saver.c (check_file): Eliminate using text messages to
 	indicate errors. Improve debug messages.
 	(detect_console): Likewise.

@@ -64,11 +64,10 @@ static signed char console_flag = -1;
    */
 static int console_fd = -1;
 static char *tty_name;
-static int len;
+static int console_minor = 0;
 static char *buffer = NULL;
 static int buffer_size = 0;
 static int columns, rows;
-static char vcs_name [128];
 static int vcs_fd;
 
 static void dwrite (int fd, char *buffer)
@@ -138,8 +137,9 @@ static int check_file (char *filename, int check_console)
 		break;
 	    }
 
-	    /* Minor number must be below 64 */
-	    if ((stat_buf.st_rdev & 0x00ff) > 63){
+	    /* Minor number must be between 1 and 63 */
+	    console_minor = (int) (stat_buf.st_rdev & 0x00ff);
+	    if (console_minor < 1 || console_minor > 63){
 		break;
 	    }
 
@@ -162,26 +162,44 @@ static int check_file (char *filename, int check_console)
    creating a security hole */
 static int detect_console (void)
 {
-    int  xlen;
-    
-    /* Must be console */
-    /* Handle the case for /dev/tty?? and /dev/vc/??  */
-    if (tty_name[len-5] == 't' || tty_name[len-5] == 'v')
-	xlen = len - 1;
-    else
-	xlen = len;
+    char console_name [16];
+    static char vcs_name [16];
 
-    /* General: /dev/ttyn  and /dev/vc/n  */
-    if (tty_name[xlen - 5] != '/' ||
-	! (strncmp(tty_name+xlen-4,"tty",3) == 0 ||
-	   strncmp(tty_name+xlen-4,"vc/",3) == 0) ||
-	!isdigit(tty_name[xlen - 1]) ||
-	!isdigit(tty_name[len - 1]))
+    /* Must be console */
+    console_fd = check_file (tty_name, 1);
+    if (console_fd == -1)
 	return -1;
 
-    snprintf (vcs_name, sizeof (vcs_name), "/dev/vcsa%s", tty_name + xlen - 1);
+    /*
+     * Only allow /dev/ttyMINOR and /dev/vc/MINOR where MINOR is the minor
+     * device number of the console, set in check_file()
+     */
+    switch (tty_name[5])
+    {
+	case 'v':
+	    snprintf (console_name, sizeof (console_name), "/dev/vc/%d",
+		      console_minor);
+	    if (strncmp (console_name, tty_name, sizeof (console_name)) != 0)
+		return -1;
+	    break;
+	case 't':
+	    snprintf (console_name, sizeof (console_name), "/dev/tty%d",
+		      console_minor);
+	    if (strncmp (console_name, tty_name, sizeof (console_name)) != 0)
+		return -1;
+	    break;
+	default:
+	    return -1;
+    }
+
+    snprintf (vcs_name, sizeof (vcs_name), "/dev/vcsa%d", console_minor);
     vcs_fd = check_file (vcs_name, 0);
-    console_fd = check_file (tty_name, 1);
+
+    /* Try devfs name */
+    if (vcs_fd == -1) {
+	snprintf (vcs_name, sizeof (vcs_name), "/dev/vcc/a%d", console_minor);
+	vcs_fd = check_file (vcs_name, 0);
+    }
 
 #ifdef DEBUG
     fprintf (stderr, "vcs_fd = %d console_fd = %d\r\n", vcs_fd, console_fd);
@@ -190,9 +208,6 @@ static int detect_console (void)
     if (vcs_fd != -1){
 	console_flag = 3;
     }
-
-    if (console_fd == -1)
-	return -1;
 
     return 0;
 }
@@ -203,7 +218,7 @@ static void save_console (void)
 
     if (!console_flag)
 	return;
-    buffer [1] = tty_name [len-1] - '0';
+    buffer [1] = console_minor;
     if (console_flag >= 2){
 	/* Linux >= 1.1.67 */
 	/* Get screen contents and cursor position */
@@ -256,7 +271,7 @@ static void restore_console (void)
 	/* Linux >= 1.1.67 */
 	/* Restore screen contents and cursor position */
 	buffer [0] = 9;
-	buffer [1] = tty_name [len-1] - '0';
+	buffer [1] = console_minor;
 	ioctl (console_fd, TIOCLINUX, buffer);
     }
     if (console_flag == 3){
@@ -357,7 +372,6 @@ int main (int argc, char **argv)
     
     /* Check that the argument is a legal console */
     tty_name = argv [1];
-    len = strlen(tty_name);
 
     if (detect_console () == -1){
 	/* Not a console -> no need for privileges */
