@@ -192,9 +192,9 @@ string_file_name (file_entry *fe, int len)
     return buffer;
 }
 
-static inline int ilog10(dev_t n)
+static inline unsigned int ilog10(dev_t n)
 {
-    int digits = 0;
+    unsigned int digits = 0;
     do {
 	digits++, n /= 10;
     } while (n != 0);
@@ -205,8 +205,8 @@ static void format_device_number (char *buf, size_t bufsize, dev_t dev)
 {
     dev_t major_dev = major(dev);
     dev_t minor_dev = minor(dev);
-    int major_digits = ilog10(major_dev);
-    int minor_digits = ilog10(minor_dev);
+    unsigned int major_digits = ilog10(major_dev);
+    unsigned int minor_digits = ilog10(minor_dev);
 
     g_assert(bufsize >= 1);
     if (major_digits + 1 + minor_digits + 1 <= bufsize) {

@@ -1,3 +1,8 @@
+2005-02-23  Roland Illig  <roland.illig@gmx.de>
+
+	* screen.c: Changed the return type of ilog10 to unsigned int
+	and adjusted some variables in format_device_number.
+
 2005-02-22  Roland Illig  <roland.illig@gmx.de>
 
 	* unixcompat.h: Added missing parenthesis to the minor() macro.
