@@ -2783,7 +2783,13 @@ static struct argp mc_argp_parser = {
 	argp_options, parse_an_arg, N_("[this dir] [other dir]"), NULL, NULL, NULL, NULL
 };
 
-#else 
+#else
+
+#include <glib.h>
+
+char *cmdline_geometry = NULL;
+int   nowindows = 0;
+char **directory_list = NULL;
 
 static struct poptOption argumentTable[] = {
 #ifdef WITH_BACKGROUND
@@ -2799,7 +2805,9 @@ static struct poptOption argumentTable[] = {
 #endif
     { "edit", 		'e', POPT_ARG_STRING, 	&edit_one_file, 	 0 },
 
+#ifndef HAVE_GNOME
     { "help", 		'h', POPT_ARG_NONE, 	NULL, 			 'h' },
+#endif
     { "help-colors",	'H', POPT_ARG_NONE, 	NULL, 			 'H' },
 #ifdef USE_NETCODE
     { "ftplog", 	'l', POPT_ARG_STRING, 	NULL, 			 'l' },
@@ -2827,6 +2835,10 @@ static struct poptOption argumentTable[] = {
     { "version", 	'V', 			POPT_ARG_NONE, NULL,      'V'},
     { "view", 		'v', 			POPT_ARG_STRING, &view_one_file, 0 },
     { "xterm", 		'x', 			POPT_ARG_NONE, &force_xterm, 0},
+#ifdef HAVE_GNOME
+    { "geometry", '\0', POPT_ARG_STRING, &cmdline_geometry, 0, N_("Geometry for the window"), N_("GEOMETRY")},
+    {"nowindows", '\0', POPT_ARG_NONE, &nowindows, 0, N_("No windows opened at startup"), NULL},
+#endif
 
     { NULL, 		0,			0, NULL, 0 }
 };
@@ -2838,7 +2850,12 @@ handle_args (int argc, char *argv [])
     int    c;
     poptContext   optCon;
 
+#ifdef HAVE_GNOME
+    gnome_init_with_popt_table ("gmc", VERSION, argc, argv, argumentTable, 0, &optCon);
+    /* poptResetContext(optCon); */
+#else
     optCon = poptGetContext ("mc", argc, argv, argumentTable, 0);
+#endif
 
 #ifdef USE_TERMCAP
     SLtt_Try_Termcap = 1;
@@ -2884,6 +2901,8 @@ handle_args (int argc, char *argv [])
 	        other_dir = strdup (tmp);
 	}
     }
+
+
     poptFreeContext(optCon);
 }
 #endif
@@ -2986,7 +3005,9 @@ int main (int argc, char *argv [])
 		view_one_file = "";
 	}
     }
-    gnome_init ("gmc", &mc_argp_parser, argc, argv, 0, NULL);
+
+    handle_args(argc, argv);
+
     session_management_setup (argv [0]);
     probably_finish_program ();
 #endif
