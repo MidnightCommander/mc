@@ -571,13 +571,6 @@ static int cpio_read(void *fh, char *buffer, int count)
     return count;
 }
 
-static int cpio_ungetlocalcopy(struct vfs_class *me, char *path, char *local, int has_changed)
-{
-/* We do just nothing. (We are read only and do not need to free local,
-   since it will be freed when tar archive will be freed */
-    return 0;
-}
-
 static int cpio_fh_open(struct vfs_class *me, struct vfs_s_fh *fh, int flags, int mode)
 {
     if ((flags & O_ACCMODE) != O_RDONLY) ERRNOR (EROFS, -1);
@@ -603,6 +596,5 @@ init_cpiofs (void)
     vfs_cpiofs_ops.read = cpio_read;
     vfs_cpiofs_ops.write = NULL;
     vfs_cpiofs_ops.setctl = NULL;
-    vfs_cpiofs_ops.ungetlocalcopy = cpio_ungetlocalcopy;
     vfs_register_class (&vfs_cpiofs_ops);
 }

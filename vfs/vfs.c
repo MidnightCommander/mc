@@ -1079,31 +1079,35 @@ mc_getlocalcopy (const char *pathname)
 }
 
 int
-mc_def_ungetlocalcopy (struct vfs_class *vfs, char *filename, char *local, int has_changed)
-{	/* Dijkstra probably hates me... But he should teach me how to do this nicely. */
+mc_def_ungetlocalcopy (struct vfs_class *vfs, char *filename, char *local,
+		       int has_changed)
+{
     int fdin = -1, fdout = -1, i;
-    if (has_changed){
-        char buffer [8192];
-    
-        fdin = open (local, O_RDONLY);
-        if (fdin == -1)
+    if (has_changed) {
+	char buffer[8192];
+
+	if (!vfs->write)
 	    goto failed;
-        fdout = mc_open (filename, O_WRONLY | O_TRUNC);
-        if (fdout == -1)
+
+	fdin = open (local, O_RDONLY);
+	if (fdin == -1)
 	    goto failed;
-	while ((i = read (fdin, buffer, sizeof (buffer))) > 0){
+	fdout = mc_open (filename, O_WRONLY | O_TRUNC);
+	if (fdout == -1)
+	    goto failed;
+	while ((i = read (fdin, buffer, sizeof (buffer))) > 0) {
 	    if (mc_write (fdout, buffer, i) != i)
 		goto failed;
 	}
 	if (i == -1)
 	    goto failed;
 
-        if (close (fdin)==-1) {
+	if (close (fdin) == -1) {
 	    fdin = -1;
 	    goto failed;
 	}
 	fdin = -1;
-        if (mc_close (fdout)==-1) {
+	if (mc_close (fdout) == -1) {
 	    fdout = -1;
 	    goto failed;
 	}
@@ -1112,10 +1116,12 @@ mc_def_ungetlocalcopy (struct vfs_class *vfs, char *filename, char *local, int h
     g_free (local);
     return 0;
 
- failed:
+  failed:
     message (1, _("Changes to file lost"), filename);
-    if (fdout!=-1) mc_close(fdout);
-    if (fdin!=-1) close(fdin);
+    if (fdout != -1)
+	mc_close (fdout);
+    if (fdin != -1)
+	close (fdin);
     unlink (local);
     g_free (local);
     return -1;

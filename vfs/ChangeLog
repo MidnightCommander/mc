@@ -1,3 +1,10 @@
+2003-10-27  Pavel Roskin  <proski@gnu.org>
+
+	* cpio.c (cpio_ungetlocalcopy): Remove.
+	* tar.c (tar_ungetlocalcopy): Likewise.
+	* vfs.c (mc_def_ungetlocalcopy): Add support for read-only
+	filesystems.
+
 2003-10-26  Pavel Roskin  <proski@gnu.org>
 
 	* direntry.c (vfs_s_find_inode): Only allow search from root.

@@ -607,14 +607,6 @@ static int tar_read (void *fh, char *buffer, int count)
     return count;
 }
 
-static int tar_ungetlocalcopy (struct vfs_class *me, char *path, char *local, int has_changed)
-{
-/* We do just nothing. (We are read only and do not need to free local,
-   since it will be freed when tar archive will be freed */
-/* We have to report error if file has changed */
-    ERRNOR (EROFS, -has_changed);
-}
-
 static int tar_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags, int mode)
 {
     if ((flags & O_ACCMODE) != O_RDONLY) ERRNOR (EROFS, -1);
@@ -639,7 +631,6 @@ init_tarfs (void)
     vfs_tarfs_ops.data = &tarfs_subclass;
     vfs_tarfs_ops.read = tar_read;
     vfs_tarfs_ops.write = NULL;
-    vfs_tarfs_ops.ungetlocalcopy = tar_ungetlocalcopy;
     vfs_tarfs_ops.setctl = NULL;
     vfs_register_class (&vfs_tarfs_ops);
 }
