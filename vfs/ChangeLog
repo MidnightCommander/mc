@@ -1,3 +1,8 @@
+Fri Jan  8 20:03:36 1999  Andrej Borsenkow <borsenkow.msk@sni.de>
+
+	* vfs.c (vfs_parse_filedate): I forgot to set got_year in one place 
+	(where YY-MM-DD is parsed).
+
 Thu Jan  7 06:24:25 1999  Andrej Borsenkow <borsenkow.msk@sni.de>
 
 	* vfs.c (vfs_parse_filedate): If the date is less than 6 months 

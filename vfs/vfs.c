@@ -1479,6 +1479,7 @@ int vfs_parse_filedate(int idx, time_t *t)
             if (tim.tm_year < 70)
                 tim.tm_year += 100;
             extfs_format_date = 1;
+	    got_year = 1;
         } else
             return 0;
     }
@@ -1512,7 +1513,7 @@ int vfs_parse_filedate(int idx, time_t *t)
 	 current_mon < tim.tm_mon &&
 	 tim.tm_mon - current_mon >= 6)
 
-	 tim.tm_year -= 1;
+	 tim.tm_year--;
 
     if ((*t = mktime(&tim)) ==-1)
         *t = 0;
