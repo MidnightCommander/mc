@@ -1,5 +1,10 @@
 2002-12-27  Pavel Roskin  <proski@gnu.org>
 
+	* key.c (correct_key_code): Don't call get_modifier() for normal
+	characters - they only should get modifiers from sequences
+	tables.  This fixes entering characters with AltGr.
+	Reported by David Martín <dmartina@excite.com>
+
 	* view.c (max_dirt_limit): Make global to match view.h.
 	* setup.c (options): Actually save max_dirt_limit, which is
 	documented as a "special setting".

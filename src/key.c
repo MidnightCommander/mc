@@ -466,8 +466,13 @@ correct_key_code (int code)
     unsigned int c = code & ~KEY_M_MASK;	/* code without modifier */
     unsigned int mod = code & KEY_M_MASK;	/* modifier */
 
-    /* Add key modifiers directly from X11 or OS */
-    mod |= get_modifier ();
+    /*
+     * Add key modifiers directly from X11 or OS.
+     * Ordinary characters only get modifiers from sequences.
+     */
+    if (c < 32 || c >= 256) {
+	mod |= get_modifier ();
+    }
 
     /* This is needed if the newline is reported as carriage return */
     if (c == '\r')
@@ -495,11 +500,6 @@ correct_key_code (int code)
      */
     if (c < 32 && c != ESC_CHAR && c != '\t' && c != '\n') {
 	mod |= KEY_M_CTRL;
-    }
-
-    /* Remove Shift and Ctrl information from ordinary characters */
-    if (c >= 32 && c < 256) {
-	mod &= ~(KEY_M_SHIFT | KEY_M_CTRL);
     }
 
     /* Convert Shift+Fn to F(n+10) */
