@@ -13,5 +13,7 @@ EXTRA_DIST =	BUGS FAQ INSTALL.FAST MAINTAINERS \
 		create_vcs \
 		$(GNOME_M4_FILES)
 
+noinst_DATA = mc.spec
+
 dist-hook:
 	cp mc.spec $(distdir)

@@ -1,5 +1,13 @@
 2000-09-23  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.am: mc.spec included to noinst_DATA so that "make all"
+	updates it when needed.
+	* mc.spec.in: Include translations with mc, not gmc. Run
+	chkconfig --del in %preun, not %postun. --without-debug not
+	needed. /etc/X11/wmconfig not needed. /etc/pam.d/mcserv shouldn't
+	be executable. New files in %{prefix}/lib/mc/ - translated hints,
+	editor files.
+
 	* doc-gnome/C/Makefile.am: Fixed *clean targets. Use temporary
 	directory for document processing. Comment changes. gmc.ps and
 	gmc.pdf now generated from gmc.dvi.

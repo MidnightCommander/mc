@@ -50,7 +50,6 @@ Midnight file system (currently, only the Midnight Commander file manager).
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure \
 	--prefix=%{prefix} --with-included-slang \
 	--with-gnome \
-	--without-debug \
         --sysconfdir=/etc
 
 if [ "$SMP" != "" ]; then
@@ -63,16 +62,15 @@ fi
 %install
 echo $RPM_BUILD_ROOT
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,profile.d,X11/wmconfig}
+install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,profile.d}
 
 
 make prefix=$RPM_BUILD_ROOT%{prefix} sysconfdir=$RPM_BUILD_ROOT/etc install
 (cd icons; make prefix=$RPM_BUILD_ROOT%{prefix} install_icons)
 install lib/mcserv.init $RPM_BUILD_ROOT/etc/rc.d/init.d/mcserv
 
-install lib/mcserv.pamd $RPM_BUILD_ROOT/etc/pam.d/mcserv
+install -m 644 lib/mcserv.pamd $RPM_BUILD_ROOT/etc/pam.d/mcserv
 install lib/{mc.sh,mc.csh} $RPM_BUILD_ROOT/etc/profile.d
-install lib/mc.global $RPM_BUILD_ROOT/etc
 
 
 # clean up this setuid problem for now
@@ -84,7 +82,7 @@ rm -rf $RPM_BUILD_ROOT
 %post   -n mcserv
 /sbin/chkconfig --add mcserv
 
-%postun -n mcserv
+%preun  -n mcserv
 /sbin/chkconfig --del mcserv
 
 %files
@@ -94,20 +92,22 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/bin/mc
 %{prefix}/bin/mcedit
 %{prefix}/bin/mcmfmt
-%{prefix}/lib/mc/mc.ext
-%{prefix}/lib/mc/mc.hint
-%{prefix}/lib/mc/mc.hlp
-%{prefix}/lib/mc/mc.lib
-%{prefix}/lib/mc/mc.menu
+%{prefix}/lib/mc/cedit.menu
+%{prefix}/lib/mc/edit.indent.rc
+%{prefix}/lib/mc/mc.*
 %{prefix}/lib/mc/bin/cons.saver
 %{prefix}/lib/mc/extfs/*
 %{prefix}/lib/mc/syntax/*
 %{prefix}/lib/mc/term/*
 %{prefix}/man/man1/*
+%{prefix}/share/locale/*
 %config /etc/profile.d/*
 %config /etc/mc.global
 %dir %{prefix}/lib/mc
 %dir %{prefix}/lib/mc/bin
+%dir %{prefix}/lib/mc/extfs
+%dir %{prefix}/lib/mc/syntax
+%dir %{prefix}/lib/mc/term
 
 %files -n mcserv
 %defattr(-, root, root)
@@ -121,17 +121,28 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root)
 %{prefix}/bin/gmc
 %{prefix}/bin/plain-gmc
-%{prefix}/share/idl/*
+# %{prefix}/bin/gmc-client ?
 %{prefix}/lib/mc/layout
 %{prefix}/lib/mc/mc-gnome.ext
-%{prefix}/share/pixmaps/mc/*
-%{prefix}/share/mime-info/mc.keys
 %{prefix}/share/gnome/help/gmc/*
-%{prefix}/share/locale/*
+%{prefix}/share/idl/*
+%{prefix}/share/mime-info/mc.keys
+%{prefix}/share/pixmaps/mc/*
 %config /etc/CORBA/servers/*
 %dir %{prefix}/lib/mc/desktop-scripts
+%dir %{prefix}/share/gnome/help/gmc
+# %dir %{prefix}/share/mc/templates ?
+%dir %{prefix}/share/pixmaps/mc
 
 %changelog
+* Sat Sep 23 2000 Pavel Roskin <proski@gnu.org>
+- Include translations with mc, not gmc
+- chkconfig --del in %preun, not %postun
+- --without-debug not needed
+- /etc/X11/wmconfig not needed
+- /etc/pam.d/mcserv shouldn't be executable
+- New files in %{prefix}/lib/mc/ - translated hints, editor files
+
 * Thu Sep 09 1999 Elliot Lee <sopwith@redhat.com>
 - Include .idl files in the package.
 
