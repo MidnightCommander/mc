@@ -1,5 +1,10 @@
 2002-10-04  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.am: Don't link mcserv with glib.  It's unreasonable
+	to require a glib port for embedded systems mcserv may run on.
+	* mcserv.c: Replace all glib calls with standard libc calls.
+	* tcputil.c (rpc_get): Likewise.
+
 	* mcserv.c (get_client): Don't try to find the address family
 	from the hostname.  Always use AF_INET, because everything else
 	is unsupported.

@@ -178,15 +178,18 @@ rpc_get (int sock, ...)
 		}
 	    if (len > 128 * 1024)
 		abort ();
-	    text = g_new0 (char, len + 1);
+
+	    /* Don't use glib functions here - this code is used by mcserv */
+	    text = malloc (len + 1);
 	    if (socket_read_block (sock, text, len) == 0) {
-		g_free (text);
+		free (text);
 		va_end (ap);
 		return 0;
 	    }
+	    text[len] = '\0';
+
 	    str_dest = va_arg (ap, char **);
 	    *str_dest = text;
-	    text[len] = '\0';
 	    break;
 
 	case RPC_BLOCK:

@@ -92,6 +92,10 @@ extern char *crypt (const char *, const char *);
 #include "mcfs.h"
 #include "tcputil.h"
 
+/* replacement for g_free() from glib */
+#undef g_free
+#define g_free(x) do {if (x) free (x);} while (0)
+
 /* The socket from which we accept commands */
 int msock;
 
@@ -185,7 +189,7 @@ do_read (void)
     void *data;
 
     rpc_get (msock, RPC_INT, &handle, RPC_INT, &count, RPC_END);
-    data = g_malloc (count);
+    data = malloc (count);
     if (!data) {
 	send_status (-1, ENOMEM);
 	return;
@@ -300,7 +304,7 @@ send_time (int sock, time_t time)
 	long ltime = (long) time;
 	char buf[BUF_SMALL];
 
-	g_snprintf (buf, sizeof (buf), "%lx", ltime);
+	snprintf (buf, sizeof (buf), "%lx", ltime);
 	rpc_send (msock, RPC_STRING, buf, RPC_END);
     }
 }
@@ -460,7 +464,6 @@ do_readdir (void)
     struct dirent *dirent;
     struct stat st;
     int handle, n;
-    char *fname = 0;
 
     rpc_get (msock, RPC_INT, &handle, RPC_END);
 
@@ -473,15 +476,20 @@ do_readdir (void)
     handle--;
 
     while ((dirent = readdir (mcfs_DIR.dirs[handle]))) {
+	int fname_len;
+	char *fname;
 	int length = NLENGTH (dirent);
 
 	rpc_send (msock, RPC_INT, length, RPC_END);
 	rpc_send (msock, RPC_BLOCK, length, dirent->d_name, RPC_END);
-	fname = g_strconcat (mcfs_DIR.names[handle],
-			     PATH_SEP_STR, dirent->d_name, NULL);
+	fname_len =
+	    strlen (mcfs_DIR.names[handle]) + strlen (dirent->d_name) + 2;
+	fname = malloc (fname_len);
+	snprintf (fname, fname_len, "%s/%s", mcfs_DIR.names[handle],
+		  dirent->d_name);
 	n = lstat (fname, &st);
-	send_status (n, errno);
 	g_free (fname);
+	send_status (n, errno);
 	if (n >= 0)
 	    send_stat_info (&st);
     }
@@ -712,7 +720,8 @@ mc_pam_conversation (int messages, const struct pam_message **msg,
     struct user_pass *up = appdata_ptr;
     int status;
 
-    r = g_new (struct pam_response, messages);
+    r = (struct pam_response *) malloc (sizeof (struct pam_response) *
+					messages);
     if (!r)
 	return PAM_CONV_ERR;
     *resp = r;
@@ -721,12 +730,12 @@ mc_pam_conversation (int messages, const struct pam_message **msg,
 	switch ((*msg)->msg_style) {
 
 	case PAM_PROMPT_ECHO_ON:
-	    r->resp = g_strdup (up->username);
+	    r->resp = strdup (up->username);
 	    r->resp_retcode = PAM_SUCCESS;
 	    break;
 
 	case PAM_PROMPT_ECHO_OFF:
-	    r->resp = g_strdup (up->password);
+	    r->resp = strdup (up->password);
 	    r->resp_retcode = PAM_SUCCESS;
 	    break;
 
@@ -927,9 +936,9 @@ do_auth (char *username, char *password)
 	return 0;
 
     if (this->pw_dir[strlen (this->pw_dir) - 1] == '/')
-	home_dir = g_strdup (this->pw_dir);
+	home_dir = strdup (this->pw_dir);
     else {
-	home_dir = g_malloc (strlen (this->pw_dir) + 2);
+	home_dir = malloc (strlen (this->pw_dir) + 2);
 	if (home_dir) {
 	    strcpy (home_dir, this->pw_dir);
 	    strcat (home_dir, "/");
