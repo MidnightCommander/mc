@@ -356,7 +356,7 @@ static void clear_link_areas (void)
     inside_link_area = 0;
 }
 
-static void show (Dlg_head *h, char *paint_start)
+static void help_show (Dlg_head *h, char *paint_start)
 {
     char *p;
     int  col, line, c;
@@ -570,7 +570,7 @@ help_index_cmd (Dlg_head * h)
     help_callback (h, 0, DLG_DRAW);
 }
 
-static void quit_cmd (void *x)
+static void help_quit_cmd (void *x)
 {
     dlg_stop ((Dlg_head *)x);
 }
@@ -731,7 +731,7 @@ static int help_callback (struct Dlg_head *h, int id, int msg)
     switch (msg){
     case DLG_DRAW:
 	common_dialog_repaint (h);
-	show (h, currentpoint);
+	help_show (h, currentpoint);
 	break;
 
     case DLG_KEY:
@@ -822,7 +822,7 @@ interactive_display (char *filename, char *node)
     define_label (whelp, 7, "", 0);
     define_label (whelp, 8, "", 0);
     define_label (whelp, 9, "", 0);
-    define_label_data (whelp, 10, _("Quit"), quit_cmd, whelp);
+    define_label_data (whelp, 10, _("Quit"), help_quit_cmd, whelp);
 
     run_dlg (whelp);
     interactive_display_finish ();

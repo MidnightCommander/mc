@@ -187,7 +187,7 @@ static int chmod_callback (Dlg_head *h, int Par, int Msg)
     return 0;
 }
 
-Dlg_head *
+static Dlg_head *
 init_chmod (void)
 {
     int i;

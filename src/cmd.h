@@ -72,7 +72,6 @@ int check_for_default(char *default_file, char *file);
 void info_cmd (void);
 void tree_cmd (void);
 void listing_cmd (void);
-void sort_cmd (void);
 void switch_to_listing (int panel_index);
 void quick_cmd_no_menu (void);
 void info_cmd_no_menu (void);

@@ -1,5 +1,11 @@
 2002-11-12  Pavel Roskin  <proski@gnu.org>
 
+	* chmod.c (init_chmod): Make static.
+	* help.c (quit_cmd): Rename to help_quit_cmd().
+	(show): Rename to help_show().
+	* main.c (quit_cmd): Make static.  Return void, not int.
+	(sort_cmd): Make static.
+
 	* dlg.c (send_message_to): Remove, use send_message() instead.
 	(send_message): Make inline, remove Dlg_head argument.  Change
 	all callers.

@@ -638,11 +638,10 @@ quit_cmd_internal (int quiet)
     return quit;
 }
 
-int
+static void
 quit_cmd (void)
 {
     quit_cmd_internal (0);
-    return quit;
 }
 
 int
@@ -906,7 +905,7 @@ maybe_cd (int char_code, int move_up_dir)
     return 0;
 }
 
-void
+static void
 sort_cmd (void)
 {
     WPanel *p;
@@ -1025,7 +1024,7 @@ static menu_entry FileMenu[] = {
     {' ', N_("u&Nselect group    M-\\"), 'N', unselect_cmd},
     {' ', N_("reverse selec&Tion M-*"), 'T', reverse_selection_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("e&Xit              F10"), 'X', (callfn) quit_cmd}
+    {' ', N_("e&Xit              F10"), 'X', quit_cmd}
 };
 
 static menu_entry CmdMenu[] = {
@@ -1415,11 +1414,11 @@ init_labels (void)
     define_label (midnight_dlg, 1, _("Help"), help_cmd);
     define_label (midnight_dlg, 2, _("Menu"), user_file_menu_cmd);
     define_label (midnight_dlg, 9, _("PullDn"), menu_cmd);
-    define_label (midnight_dlg, 10, _("Quit"), (voidfn) quit_cmd);
+    define_label (midnight_dlg, 10, _("Quit"), quit_cmd);
 }
 
 static const key_map ctl_x_map[] = {
-    {XCTRL ('c'), (callfn) quit_cmd},
+    {XCTRL ('c'), quit_cmd},
     {'d', compare_dirs_cmd},
 #ifdef USE_VFS
     {'a', reselect_vfs},
