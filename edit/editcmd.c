@@ -1185,10 +1185,12 @@ edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 #ifdef HAVE_CHARSET
     char *msg = _(" Replace with: ");
 
-    quick_widgets[5].text = catstrs (msg, replace_text, 0);
-
-    if (*replace_text)
-	convert_to_display (quick_widgets[5].text + strlen (msg));
+    if (*replace_text) {
+	int msg_len = strlen (msg);
+	msg = catstrs (msg, replace_text, 0);
+	convert_to_display (msg + msg_len);
+    }
+    quick_widgets[5].text = msg;
 #else
     quick_widgets[5].text = catstrs (_ (" Replace with: "), replace_text, 0);
 #endif /* !HAVE_CHARSET */
