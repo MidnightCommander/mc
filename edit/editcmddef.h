@@ -2,7 +2,7 @@
 #define __EDIT_CMD_DEF_H
 
 /*  in the distant future, keyboards will be invented with a
-    seperate key for each one of these commands   *sigh*      */
+    separate key for each one of these commands   *sigh*      */
 
 /* cursor movements */
 #define CK_No_Command 		-1
