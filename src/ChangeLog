@@ -1,4 +1,6 @@
-Thu Sep 17 19:12:25 1998  Pavel Roskin <pavel_roskin@geocities.com>
+Fri Sep 18 13:11:29 1998  Pavel Roskin <pavel_roskin@geocities.com>
+
+	* src/hotlist.c: Harmless memory leak fixed
 
 	* xv/Makefile.in, xv/xvmain.c, xv/xvscreen.c: Minor fixes to
 	make compilation of the XV port possible (currently without

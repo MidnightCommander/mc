@@ -260,6 +260,8 @@ static void fill_listbox (void)
 		else
 		    listbox_add_item (l_hotlist, 0, 0, current->label, current);
 	    break;
+	default:
+	    break;
 	}
 	current = current->next;
     }
@@ -1608,6 +1610,8 @@ void done_hotlist (void)
     hotlist = current_group = 0;
     l_hotlist = 0;
     current_group = 0;
+    if (tkn_buf)
+        free (tkn_buf);
 }
 
 
