@@ -1,5 +1,7 @@
 2001-06-29  Pavel Roskin  <proski@gnu.org>
 
+	* ABOUT-NLS: Update to the version from gettext-0.10.38.
+
 	* Make.common.in (XCPPFLAGS): Don't add -I$(top_srcdir) - it's
 	now done in configure. Move -I.. to the beginning.
 	* Makefile.am (SUBDIRS): Move intl po to the beginning, since
