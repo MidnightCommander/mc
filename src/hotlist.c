@@ -267,19 +267,20 @@ static void add_name_to_list (char *path)
 }
 #endif /* !USE_VFS */
 
-static int hotlist_button_callback (int action)
+static int
+hotlist_button_callback (int action)
 {
     switch (action) {
     case B_MOVE:
 	{
-	    struct hotlist  *saved = current_group;
-	    struct hotlist  *item;
-	    struct hotlist  *moveto_item = 0;
-	    struct hotlist  *moveto_group = 0;
-	    int             ret;
+	    struct hotlist *saved = current_group;
+	    struct hotlist *item;
+	    struct hotlist *moveto_item = 0;
+	    struct hotlist *moveto_group = 0;
+	    int ret;
 
 	    if (!l_hotlist->current)
-		return 0;		/* empty group - nothing to do */
+		return MSG_NOT_HANDLED;	/* empty group - nothing to do */
 	    item = l_hotlist->current->data;
 	    hotlist_state.moving = 1;
 	    init_movelist (LIST_MOVELIST, item);
@@ -292,9 +293,9 @@ static int hotlist_button_callback (int action)
 	    destroy_dlg (movelist_dlg);
 	    current_group = saved;
 	    if (ret == B_CANCEL)
-		return 0;
+		return MSG_NOT_HANDLED;
 	    if (moveto_item == item)
-		return 0;		/* If we insert/append a before/after a
+		return MSG_NOT_HANDLED;	/* If we insert/append a before/after a
 					   it hardly changes anything ;) */
 	    unlink_entry (item);
 	    listbox_remove_current (l_hotlist, 1);
@@ -314,104 +315,105 @@ static int hotlist_button_callback (int action)
 		else {
 		    item->next = moveto_item->next;
 		    moveto_item->next = item;
-		}
-	    else if (moveto_group->head == moveto_item) {
-		    moveto_group->head = item;
-		    item->next = moveto_item;
-		} else {
-		    struct hotlist *p = moveto_group->head;
+	    } else if (moveto_group->head == moveto_item) {
+		moveto_group->head = item;
+		item->next = moveto_item;
+	    } else {
+		struct hotlist *p = moveto_group->head;
 
-		    while (p->next != moveto_item)
-			p = p->next;
-		    item->next = p->next;
-		    p->next = item;
-		}
+		while (p->next != moveto_item)
+		    p = p->next;
+		item->next = p->next;
+		p->next = item;
+	    }
 	    listbox_remove_list (l_hotlist);
 	    fill_listbox ();
 	    repaint_screen ();
 	    hotlist_state.modified = 1;
-	    return 0;
+	    return MSG_NOT_HANDLED;
 	    break;
 	}
     case B_REMOVE:
 	if (l_hotlist->current && l_hotlist->current->data)
 	    remove_from_hotlist (l_hotlist->current->data);
-	return 0;
+	return MSG_NOT_HANDLED;
 	break;
 
     case B_NEW_GROUP:
 	add_new_group_cmd ();
-	return 0;
+	return MSG_NOT_HANDLED;
 	break;
 
     case B_ADD_CURRENT:
 	add2hotlist_cmd ();
-	return 0;
+	return MSG_NOT_HANDLED;
 	break;
 
     case B_NEW_ENTRY:
 	add_new_entry_cmd ();
-	return 0;
+	return MSG_NOT_HANDLED;
 	break;
 
     case B_ENTER:
 	{
-	WListbox *list = hotlist_state.moving ? l_movelist : l_hotlist;
-	if (list->current){
-	    if (list->current->data) {
-		struct hotlist *hlp = (struct hotlist*) list->current->data;
-		if (hlp->type == HL_TYPE_ENTRY)
-		    return 1;
-		else {
-		    listbox_remove_list (list);
-		    current_group = hlp;
-		    fill_listbox ();
-		    return 0;
-		}
-	    } else
-		return 1;
-	}
+	    WListbox *list = hotlist_state.moving ? l_movelist : l_hotlist;
+	    if (list->current) {
+		if (list->current->data) {
+		    struct hotlist *hlp =
+			(struct hotlist *) list->current->data;
+		    if (hlp->type == HL_TYPE_ENTRY)
+			return MSG_HANDLED;
+		    else {
+			listbox_remove_list (list);
+			current_group = hlp;
+			fill_listbox ();
+			return MSG_NOT_HANDLED;
+		    }
+		} else
+		    return MSG_HANDLED;
+	    }
 	}
 	/* Fall through if list empty - just go up */
 
     case B_UP_GROUP:
 	{
-	WListbox *list = hotlist_state.moving ? l_movelist : l_hotlist;
-	listbox_remove_list (list);
-	current_group = current_group->up;
-	fill_listbox ();
-	return 0;
-	break;
+	    WListbox *list = hotlist_state.moving ? l_movelist : l_hotlist;
+	    listbox_remove_list (list);
+	    current_group = current_group->up;
+	    fill_listbox ();
+	    return MSG_NOT_HANDLED;
+	    break;
 	}
 
 #ifdef	USE_VFS
     case B_FREE_ALL_VFS:
-    	vfs_expire (1);
+	vfs_expire (1);
 	/* fall through */
 
     case B_REFRESH_VFS:
 	listbox_remove_list (l_hotlist);
 	listbox_add_item (l_hotlist, 0, 0, home_dir, 0);
 	vfs_fill_names (add_name_to_list);
-	return 0;
-#endif	/* USE_VFS */
+	return MSG_NOT_HANDLED;
+#endif				/* USE_VFS */
 
     default:
-	return 1;
+	return MSG_HANDLED;
 	break;
 
     }
 }
 
-static int hotlist_callback (Dlg_head * h, int Par, int Msg)
+static cb_ret_t
+hotlist_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 {
-    switch (Msg) {
+    switch (msg) {
     case DLG_DRAW:
 	hotlist_refresh (h);
-	break;
+	return MSG_HANDLED;
 
     case DLG_UNHANDLED_KEY:
-	switch (Par) {
+	switch (parm) {
 	case KEY_M_CTRL | '\n':
 	    goto l1;
 	case '\n':
@@ -421,44 +423,43 @@ static int hotlist_callback (Dlg_head * h, int Par, int Msg)
 		h->ret_value = B_ENTER;
 		dlg_stop (h);
 	    };
-	    return 1;
+	    return MSG_HANDLED;
 	    break;
 	case KEY_LEFT:
-	    if (hotlist_state.type != LIST_VFSLIST )
-    		return !hotlist_button_callback (B_UP_GROUP);
+	    if (hotlist_state.type != LIST_VFSLIST)
+		return !hotlist_button_callback (B_UP_GROUP);
 	    else
-		return 0;
+		return MSG_NOT_HANDLED;
 	    break;
 	case KEY_DC:
 	    if (!hotlist_state.moving) {
 		hotlist_button_callback (B_REMOVE);
-		return 1;
+		return MSG_HANDLED;
 	    }
 	    break;
-l1:
-	case ALT('\n'):
-	case ALT('\r'):
-	    if (!hotlist_state.moving)
-	    {
-    		if (l_hotlist->current){
+	  l1:
+	case ALT ('\n'):
+	case ALT ('\r'):
+	    if (!hotlist_state.moving) {
+		if (l_hotlist->current) {
 		    if (l_hotlist->current->data) {
-			struct hotlist *hlp = (struct hotlist*) l_hotlist->current->data;
+			struct hotlist *hlp =
+			    (struct hotlist *) l_hotlist->current->data;
 			if (hlp->type == HL_TYPE_ENTRY) {
-			    char *tmp = g_strconcat ( "cd ", hlp->directory, NULL);
+			    char *tmp =
+				g_strconcat ("cd ", hlp->directory, NULL);
 			    stuff (cmdline, tmp, 0);
 			    g_free (tmp);
 			    dlg_stop (h);
 			    h->ret_value = B_CANCEL;
-			    return 1;
-		        }
+			    return MSG_HANDLED;
+			}
 		    }
 		}
 	    }
-	    return 1; /* ignore key */
-	default:
-	    return 0;
+	    return MSG_HANDLED;	/* ignore key */
 	}
-	break;
+	return MSG_NOT_HANDLED;
 
     case DLG_POST_KEY:
 	if (hotlist_state.moving)
@@ -471,9 +472,11 @@ l1:
     case DLG_INIT:
 	attrset (MENU_ENTRY_COLOR);
 	update_path_name ();
-	break;
+	return MSG_HANDLED;
+
+    default:
+	return default_dlg_callback (h, msg, parm);
     }
-    return 0;
 }
 
 static int l_call (WListbox *list)

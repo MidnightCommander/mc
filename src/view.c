@@ -2608,15 +2608,17 @@ view_adjust_size (Dlg_head *h)
 }
 
 /* Callback for the view dialog */
-static int
-view_dialog_callback (Dlg_head *h, int id, int msg)
+static cb_ret_t
+view_dialog_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 {
     switch (msg) {
     case DLG_RESIZE:
 	view_adjust_size (h);
 	return MSG_HANDLED;
+
+    default:
+	return default_dlg_callback (h, msg, parm);
     }
-    return default_dlg_callback (h, id, msg);
 }
 
 /* Real view only */

@@ -149,36 +149,39 @@ static void chmod_refresh (Dlg_head *h)
     addstr (_(" File "));
 }
 
-static int chmod_callback (Dlg_head *h, int Par, int Msg)
+static cb_ret_t
+chmod_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 {
-    char buffer [BUF_TINY];
-    
-    switch (Msg) {
+    char buffer[BUF_TINY];
+
+    switch (msg) {
     case DLG_ACTION:
-	if (Par >= BUTTONS - single_set * 2){
-	    c_stat ^= check_perm[Par - BUTTONS + single_set * 2].mode;
+	if (parm >= BUTTONS - single_set * 2) {
+	    c_stat ^= check_perm[parm - BUTTONS + single_set * 2].mode;
 	    g_snprintf (buffer, sizeof (buffer), "%o", c_stat);
 	    label_set_text (statl, buffer);
 	    chmod_toggle_select (h);
 	    mode_change = 1;
 	}
-	break;
+	return MSG_HANDLED;
 
     case DLG_KEY:
-	if ((Par == 'T' || Par == 't' || Par == KEY_IC) &&
-	    h->current->dlg_id >= BUTTONS - single_set * 2) {
+	if ((parm == 'T' || parm == 't' || parm == KEY_IC)
+	    && h->current->dlg_id >= BUTTONS - single_set * 2) {
 	    chmod_toggle_select (h);
-	    if (Par == KEY_IC)
+	    if (parm == KEY_IC)
 		dlg_one_down (h);
-	    return 1;
+	    return MSG_HANDLED;
 	}
-	break;
+	return MSG_NOT_HANDLED;
 
     case DLG_DRAW:
 	chmod_refresh (h);
-	break;
+	return MSG_HANDLED;
+
+    default:
+	return default_dlg_callback (h, msg, parm);
     }
-    return 0;
 }
 
 static Dlg_head *

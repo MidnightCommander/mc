@@ -107,9 +107,10 @@ static char *pause_options [3] = {
 #define RX X_MARGIN
 #define OX (first_width + X_MARGIN + X_PANE_GAP)
 
-static int configure_callback (struct Dlg_head *h, int Id, int Msg)
+static cb_ret_t
+configure_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 {
-    switch (Msg) {
+    switch (msg) {
     case DLG_DRAW:
 	common_dialog_repaint (h);
 
@@ -125,13 +126,15 @@ static int configure_callback (struct Dlg_head *h, int Id, int Msg)
 	addstr (title2);
 	dlg_move (h, PY, PX+1);
 	addstr (title1);
-	break;
+	return MSG_HANDLED;
 
     case DLG_END:
-	r_but = Id;
-	break;
+	r_but = parm;
+	return MSG_HANDLED;
+
+    default:
+	return default_dlg_callback (h, msg, parm);
     }
-    return 0;
 }
 
 /* Create the "Configure options" dialog */

@@ -235,20 +235,21 @@ message (int error, char *header, const char *text, ...)
 
 /* {{{ Quick dialog routines */
 
-static int quick_callback (struct Dlg_head *h, int id, int Msg)
+static cb_ret_t
+quick_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 {
-    switch (Msg){
-    case DLG_DRAW:
-	common_dialog_repaint (h);
-	break;
+    switch (msg) {
     case DLG_KEY:
-	if (id == '\n'){
+	if (parm == '\n') {
 	    h->ret_value = B_ENTER;
 	    dlg_stop (h);
-	    break;
+	    return MSG_HANDLED;
 	}
+	return MSG_NOT_HANDLED;
+
+    default:
+	return default_dlg_callback (h, msg, parm);
     }
-    return 0;
 }
 
 #define I18N(x) (do_int && *x ? (x = _(x)): x)

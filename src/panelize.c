@@ -93,24 +93,26 @@ update_command (void)
     }
 }
 
-static int
-panelize_callback (Dlg_head * h, int Par, int Msg)
+static cb_ret_t
+panelize_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 {
-    switch (Msg) {
+    switch (msg) {
     case DLG_DRAW:
 	common_dialog_repaint (h);
 	attrset (COLOR_NORMAL);
 	draw_box (h, UY, UX, h->lines - 10, h->cols - 10);
-	break;
+	return MSG_HANDLED;
 
     case DLG_POST_KEY:
 	/* fall */
     case DLG_INIT:
 	attrset (MENU_ENTRY_COLOR);
 	update_command ();
-	break;
+	return MSG_HANDLED;
+
+    default:
+	return default_dlg_callback (h, msg, parm);
     }
-    return 0;
 }
 
 static void

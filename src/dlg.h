@@ -61,7 +61,7 @@ typedef enum {
 
 /* Dialog callback */
 struct Dlg_head;
-typedef int (*dlg_cb_fn)(struct Dlg_head *h, int Par, int Msg);
+typedef cb_ret_t (*dlg_cb_fn)(struct Dlg_head *h, dlg_msg_t msg, int parm);
 
 typedef struct Dlg_head {
 
@@ -170,7 +170,7 @@ void init_widget (Widget *w, int y, int x, int lines, int cols,
 		  mouse_h mouse_handler);
 
 /* Default callback for dialogs */
-int default_dlg_callback  (Dlg_head *h, int id, int msg);
+cb_ret_t default_dlg_callback (Dlg_head *h, dlg_msg_t msg, int parm);
 
 /* Default callback for widgets */
 int default_proc          (int Msg, int Par);

@@ -110,24 +110,24 @@ static int inc_flag_pos (int f_pos)
 {
     if (flag_pos == 10) {
 	flag_pos = 0;
-	return 0;
+	return MSG_NOT_HANDLED;
     }
     flag_pos++;
     if (!(flag_pos % 3) || f_pos > 2)
-	return 0;
-    return 1;
+	return MSG_NOT_HANDLED;
+    return MSG_HANDLED;
 }
 
-static int dec_flag_pos (int f_pos)
+static cb_ret_t dec_flag_pos (int f_pos)
 {
     if (!flag_pos) {
 	flag_pos = 10;
-	return 0;
+	return MSG_NOT_HANDLED;
     }
     flag_pos--;
     if (!((flag_pos + 1) % 3) || f_pos > 2)
-	return 0;
-    return 1;
+	return MSG_NOT_HANDLED;
+    return MSG_HANDLED;
 }
 
 static void set_perm_by_flags (char *s, int f_p)
@@ -217,22 +217,21 @@ static void update_mode (Dlg_head * h)
     send_message (h->current->widget, WIDGET_FOCUS, 0);
 }
 
-static int chl_callback (Dlg_head * h, int Par, int Msg)
+static cb_ret_t
+chl_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 {
-    switch (Msg) {
-    case DLG_DRAW:
-	common_dialog_repaint (h);
-	break;
-	
+    switch (msg) {
     case DLG_KEY:
-	switch (Par) {
+	switch (parm) {
 	case KEY_LEFT:
 	case KEY_RIGHT:
-	    h->ret_value = Par;
+	    h->ret_value = parm;
 	    dlg_stop (h);
 	}
+
+    default:
+	return default_dlg_callback (h, msg, parm);
     }
-    return 0;
 }
 
 static void
@@ -388,20 +387,21 @@ static void b_setpos (int f_pos) {
 	b_att[f_pos]->hotpos = (flag_pos % 3);
 }
 
-static int advanced_chown_callback (Dlg_head * h, int Par, int Msg)
+static cb_ret_t
+advanced_chown_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 {
     int i = 0, f_pos = BUTTONS - h->current->dlg_id - single_set - 1;
 
-    switch (Msg) {
+    switch (msg) {
     case DLG_DRAW:
 	chown_refresh ();
 	chown_info_update ();
-	return 1;
-	
+	return MSG_HANDLED;
+
     case DLG_POST_KEY:
 	if (f_pos < 3)
-		b_setpos (f_pos);
-	break;
+	    b_setpos (f_pos);
+	return MSG_HANDLED;
 
     case DLG_FOCUS:
 	if (f_pos < 3) {
@@ -410,78 +410,81 @@ static int advanced_chown_callback (Dlg_head * h, int Par, int Msg)
 	    b_setpos (f_pos);
 	} else if (f_pos < 5)
 	    flag_pos = f_pos + 6;
-	break;
+	return MSG_HANDLED;
 
     case DLG_KEY:
-	switch (Par) {
-	    
-	case XCTRL('b'):
+	switch (parm) {
+
+	case XCTRL ('b'):
 	case KEY_LEFT:
 	    if (f_pos < 5)
 		return (dec_flag_pos (f_pos));
 	    break;
-	    
-	case XCTRL('f'):
+
+	case XCTRL ('f'):
 	case KEY_RIGHT:
 	    if (f_pos < 5)
 		return (inc_flag_pos (f_pos));
 	    break;
-	    
+
 	case ' ':
 	    if (f_pos < 3)
-		return 1;
+		return MSG_HANDLED;
 	    break;
-	    
+
 	case '\n':
 	case KEY_ENTER:
 	    if (f_pos <= 2 || f_pos >= 5)
 		break;
 	    do_enter_key (h, f_pos);
-	    return 1;
-	    
+	    return MSG_HANDLED;
+
 	case ALT ('x'):
 	    i++;
-	    
+
 	case ALT ('w'):
 	    i++;
-	    
+
 	case ALT ('r'):
-	    Par = i + 3;
+	    parm = i + 3;
 	    for (i = 0; i < 3; i++)
-		ch_flags[i * 3 + Par - 3] = (x_toggle & (1 << Par)) ? '-' : '+';
-	    x_toggle ^= (1 << Par);
+		ch_flags[i * 3 + parm - 3] =
+		    (x_toggle & (1 << parm)) ? '-' : '+';
+	    x_toggle ^= (1 << parm);
 	    update_mode (h);
 	    dlg_broadcast_msg (h, WIDGET_DRAW, 0);
 	    send_message (h->current->widget, WIDGET_FOCUS, 0);
 	    break;
-	    
+
 	case XCTRL ('x'):
 	    i++;
-	    
+
 	case XCTRL ('w'):
 	    i++;
-	    
+
 	case XCTRL ('r'):
-	    Par = i;
+	    parm = i;
 	    for (i = 0; i < 3; i++)
-		ch_flags[i * 3 + Par] = (x_toggle & (1 << Par)) ? '-' : '+';
-	    x_toggle ^= (1 << Par);
+		ch_flags[i * 3 + parm] =
+		    (x_toggle & (1 << parm)) ? '-' : '+';
+	    x_toggle ^= (1 << parm);
 	    update_mode (h);
 	    dlg_broadcast_msg (h, WIDGET_DRAW, 0);
 	    send_message (h->current->widget, WIDGET_FOCUS, 0);
 	    break;
-	    
+
 	case 'x':
 	    i++;
-	    
+
 	case 'w':
 	    i++;
-	    
+
 	case 'r':
 	    if (f_pos > 2)
 		break;
-	    flag_pos = f_pos * 3 + i;	/* (strchr(ch_perm,Par)-ch_perm); */
-	    if (((WButton *) h->current->widget)->text[(flag_pos % 3)] == '-')
+	    flag_pos = f_pos * 3 + i;	/* (strchr(ch_perm,parm)-ch_perm); */
+	    if (((WButton *) h->current->widget)->text[(flag_pos % 3)] ==
+		'-')
 		ch_flags[flag_pos] = '+';
 	    else
 		ch_flags[flag_pos] = '-';
@@ -490,10 +493,10 @@ static int advanced_chown_callback (Dlg_head * h, int Par, int Msg)
 
 	case '4':
 	    i++;
-	    
+
 	case '2':
 	    i++;
-	    
+
 	case '1':
 	    if (f_pos > 2)
 		break;
@@ -501,29 +504,32 @@ static int advanced_chown_callback (Dlg_head * h, int Par, int Msg)
 	    ch_flags[flag_pos] = '=';
 	    update_mode (h);
 	    break;
-	    
+
 	case '-':
 	    if (f_pos > 2)
 		break;
-	    
+
 	case '*':
-	    if (Par == '*')
-		Par = '=';
-	    
+	    if (parm == '*')
+		parm = '=';
+
 	case '=':
 	case '+':
 	    if (f_pos > 4)
 		break;
-	    ch_flags[flag_pos] = Par;
+	    ch_flags[flag_pos] = parm;
 	    update_mode (h);
 	    advanced_chown_callback (h, KEY_RIGHT, DLG_KEY);
-	    if (flag_pos>8 || !(flag_pos%3)) dlg_one_down (h);
+	    if (flag_pos > 8 || !(flag_pos % 3))
+		dlg_one_down (h);
 
 	    break;
 	}
-	return 0;
+	return MSG_NOT_HANDLED;
+
+    default:
+	return default_dlg_callback (h, msg, parm);
     }
-    return 0;
 }
 
 static void

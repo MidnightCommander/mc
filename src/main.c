@@ -1477,8 +1477,8 @@ done_mc_profile (void)
     free_profiles ();
 }
 
-static int
-midnight_callback (struct Dlg_head *h, int id, int msg)
+static cb_ret_t
+midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 {
     int i;
 
@@ -1496,32 +1496,32 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	if (ctl_x_map_enabled) {
 	    ctl_x_map_enabled = 0;
 	    for (i = 0; ctl_x_map[i].key_code; i++)
-		if (id == ctl_x_map[i].key_code) {
-		    (*ctl_x_map[i].fn) (id);
+		if (parm == ctl_x_map[i].key_code) {
+		    (*ctl_x_map[i].fn) (parm);
 		    return MSG_HANDLED;
 		}
 	}
 
 	/* FIXME: should handle all menu shortcuts before this point */
 	if (the_menubar->active)
-	    break;
+	    return MSG_NOT_HANDLED;
 
-	if (id == KEY_F (10)) {
+	if (parm == KEY_F (10)) {
 	    quit_cmd ();
 	    return MSG_HANDLED;
 	}
 
-	if (id == '\t')
+	if (parm == '\t')
 	    free_completions (cmdline);
 
-	if (id == '\n' && cmdline->buffer[0]) {
-	    send_message ((Widget *) cmdline, WIDGET_KEY, id);
+	if (parm == '\n' && cmdline->buffer[0]) {
+	    send_message ((Widget *) cmdline, WIDGET_KEY, parm);
 	    return MSG_HANDLED;
 	}
 
 	/* Ctrl-Enter and Alt-Enter */
-	if (((id & ~(KEY_M_CTRL | KEY_M_ALT)) == '\n')
-	    && (id & (KEY_M_CTRL | KEY_M_ALT))) {
+	if (((parm & ~(KEY_M_CTRL | KEY_M_ALT)) == '\n')
+	    && (parm & (KEY_M_CTRL | KEY_M_ALT))) {
 	    copy_prog_name ();
 	    return MSG_HANDLED;
 	}
@@ -1530,17 +1530,17 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	    && !quote && !cpanel->searching) {
 	    if (!only_leading_plus_minus) {
 		/* Special treatement, since the input line will eat them */
-		if (id == '+') {
+		if (parm == '+') {
 		    select_cmd ();
 		    return MSG_HANDLED;
 		}
 
-		if (id == '\\' || id == '-') {
+		if (parm == '\\' || parm == '-') {
 		    unselect_cmd ();
 		    return MSG_HANDLED;
 		}
 
-		if (id == '*') {
+		if (parm == '*') {
 		    reverse_selection_cmd ();
 		    return MSG_HANDLED;
 		}
@@ -1549,50 +1549,50 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 		 * first char on input line
 		 */
 
-		if (id == '+') {
+		if (parm == '+') {
 		    select_cmd ();
 		    return MSG_HANDLED;
 		}
 
-		if (id == '\\' || id == '-') {
+		if (parm == '\\' || parm == '-') {
 		    unselect_cmd ();
 		    return MSG_HANDLED;
 		}
 
-		if (id == '*') {
+		if (parm == '*') {
 		    reverse_selection_cmd ();
 		    return MSG_HANDLED;
 		}
 	    }
 	}
-	break;
+	return MSG_NOT_HANDLED;
 
     case DLG_HOTKEY_HANDLED:
 	if ((get_current_type () == view_listing) && cpanel->searching) {
 	    cpanel->searching = 0;
 	    panel_update_contents (cpanel);
 	}
-	break;
+	return MSG_HANDLED;
 
     case DLG_UNHANDLED_KEY:
 	if (command_prompt) {
 	    int v;
 
-	    v = send_message ((Widget *) cmdline, WIDGET_KEY, id);
+	    v = send_message ((Widget *) cmdline, WIDGET_KEY, parm);
 	    if (v)
 		return v;
 	}
 	if (ctl_x_map_enabled) {
 	    ctl_x_map_enabled = 0;
 	    for (i = 0; ctl_x_map[i].key_code; i++)
-		if (id == ctl_x_map[i].key_code) {
-		    (*ctl_x_map[i].fn) (id);
+		if (parm == ctl_x_map[i].key_code) {
+		    (*ctl_x_map[i].fn) (parm);
 		    return MSG_HANDLED;
 		}
 	} else {
 	    for (i = 0; default_map[i].key_code; i++) {
-		if (id == default_map[i].key_code) {
-		    (*default_map[i].fn) (id);
+		if (parm == default_map[i].key_code) {
+		    (*default_map[i].fn) (parm);
 		    return MSG_HANDLED;
 		}
 	    }
@@ -1607,8 +1607,9 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 				   1, LINES - keybar_visible - 1);
 	return MSG_HANDLED;
 
+    default:
+	return default_dlg_callback (h, msg, parm);
     }
-    return default_dlg_callback (h, id, msg);
 }
 
 #define xtoolkit_panel_setup()

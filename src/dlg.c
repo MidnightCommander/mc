@@ -191,7 +191,7 @@ common_dialog_repaint (struct Dlg_head *h)
 }
 
 /* Default dialog callback */
-int default_dlg_callback (Dlg_head *h, int id, int msg)
+cb_ret_t default_dlg_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 {
     if (msg == DLG_DRAW && h->color) {
 	common_dialog_repaint (h);
@@ -348,7 +348,7 @@ int dlg_focus (Dlg_head *h)
         return 0;
 
     if (send_message (h->current->widget, WIDGET_FOCUS, 0)){
-	(*h->callback) (h, h->current->dlg_id, DLG_FOCUS);
+	(*h->callback) (h, DLG_FOCUS, h->current->dlg_id);
 	return 1;
     }
     return 0;
@@ -361,7 +361,7 @@ dlg_unfocus (Dlg_head *h)
         return 0;
 
     if (send_message (h->current->widget, WIDGET_UNFOCUS, 0)){
-	(*h->callback) (h, h->current->dlg_id, DLG_UNFOCUS);
+	(*h->callback) (h, DLG_UNFOCUS, h->current->dlg_id);
 	return 1;
     }
     return 0;
@@ -500,7 +500,7 @@ void update_cursor (Dlg_head *h)
  */
 void dlg_redraw (Dlg_head *h)
 {
-    (h->callback)(h, 0, DLG_DRAW);
+    (h->callback)(h, DLG_DRAW, 0);
 
     dlg_broadcast_msg (h, WIDGET_DRAW, 1);
 
@@ -645,14 +645,14 @@ dlg_key_event (Dlg_head *h, int d_key)
     } else {
 
 	/* first can dlg_callback handle the key */
-	handled = (*h->callback) (h, d_key, DLG_KEY);
+	handled = (*h->callback) (h, DLG_KEY, d_key);
 
 	/* next try the hotkey */
 	if (!handled)
 	    handled = dlg_try_hotkey (h, d_key);
 
 	if (handled)
-	    (*h->callback) (h, 0, DLG_HOTKEY_HANDLED);
+	    (*h->callback) (h, DLG_HOTKEY_HANDLED, 0);
 
 	/* not used - then try widget_callback */
 	if (!handled)
@@ -660,11 +660,11 @@ dlg_key_event (Dlg_head *h, int d_key)
 
 	/* not used- try to use the unhandled case */
 	if (!handled)
-	    handled = (*h->callback) (h, d_key, DLG_UNHANDLED_KEY);
+	    handled = (*h->callback) (h, DLG_UNHANDLED_KEY, d_key);
 
 	if (!handled)
 	    dialog_handle_key (h, d_key);
-	(*h->callback) (h, d_key, DLG_POST_KEY);
+	(*h->callback) (h, DLG_POST_KEY, d_key);
 
 	return handled;
     }
@@ -716,7 +716,7 @@ void init_dlg (Dlg_head *h)
     int refresh_mode;
 
     /* Initialize dialog manager and widgets */
-    (*h->callback) (h, 0, DLG_INIT);
+    (*h->callback) (h, DLG_INIT, 0);
     dlg_broadcast_msg (h, WIDGET_INIT, 0);
 
     if (h->x == 0 && h->y == 0 && h->cols == COLS && h->lines == LINES)
@@ -755,7 +755,7 @@ void init_dlg (Dlg_head *h)
 void dlg_run_done (Dlg_head *h)
 {
     if (h->current)
-	(*h->callback) (h, h->current->dlg_id, DLG_END);
+	(*h->callback) (h, DLG_END, h->current->dlg_id);
 
     current_dlg = (Dlg_head *) h->previous_dialog;
 }
@@ -791,7 +791,7 @@ frontend_run_dlg (Dlg_head *h)
 		execute_hooks (idle_hook);
 
 	    while ((h->flags & DLG_WANT_IDLE) && is_idle ())
-		(*h->callback) (h, 0, DLG_IDLE);
+		(*h->callback) (h, DLG_IDLE, 0);
 
 	    /* Allow terminating the dialog from the idle handler */
 	    if (!h->running)
@@ -807,7 +807,7 @@ frontend_run_dlg (Dlg_head *h)
 	dlg_process_event (h, d_key, &event);
 
 	if (!h->running)
-	    (*h->callback) (h, 0, DLG_VALIDATE);
+	    (*h->callback) (h, DLG_VALIDATE, 0);
     }
 }
 

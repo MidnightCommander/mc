@@ -130,15 +130,17 @@ next_file (void)
     return cpanel->dir.list[current_file].fname;
 }
 
-static int
-chown_callback (Dlg_head * h, int Par, int Msg)
+static cb_ret_t
+chown_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 {
-    switch (Msg) {
+    switch (msg) {
     case DLG_DRAW:
 	chown_refresh (h);
-	break;
+	return MSG_HANDLED;
+
+    default:
+	return default_dlg_callback (h, msg, parm);
     }
-    return 0;
 }
 
 static Dlg_head *

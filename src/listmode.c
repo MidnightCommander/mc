@@ -158,17 +158,18 @@ bremove_cback (int action)
     return 0;
 }
 
-static int
-listmode_callback (Dlg_head *h, int Par, int Msg)
+static cb_ret_t
+listmode_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 {
-    switch (Msg) {
+    switch (msg) {
 
     case DLG_DRAW:
 	listmode_refresh (h);
-	break;
+	return MSG_HANDLED;
 
+    default:
+	return default_dlg_callback (h, msg, parm);
     }
-    return 0;
 }
 
 static Dlg_head *

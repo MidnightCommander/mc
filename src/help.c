@@ -90,7 +90,7 @@ typedef struct Link_Area {
 static Link_Area *link_area = NULL;
 static int inside_link_area = 0;
 
-static int help_callback (struct Dlg_head *h, int id, int msg);
+static cb_ret_t help_callback (struct Dlg_head *h, dlg_msg_t, int parm);
 
 #ifdef HAS_ACS_AS_PCCHARS
 static const struct {
@@ -483,7 +483,7 @@ static int help_event (Gpm_Event *event, Widget *w)
 	if (history_ptr < 0)
 	    history_ptr = HISTORY_SIZE-1;
 	
-	help_callback (w->parent, 0, DLG_DRAW);
+	help_callback (w->parent, DLG_DRAW, 0);
 	return 0;
     }
 
@@ -529,7 +529,7 @@ static int help_event (Gpm_Event *event, Widget *w)
     }
 
     /* Show the new node */
-    help_callback (w->parent, 0, DLG_DRAW);
+    help_callback (w->parent, DLG_DRAW, 0);
 
     return 0;
 }
@@ -543,7 +543,7 @@ help_help_cmd (Dlg_head *h)
     history [history_ptr].link = selected_item;
     currentpoint = startpoint = search_string (data, "[How to use help]") + 1;
     selected_item = NULL;
-    help_callback (h, 0, DLG_DRAW);
+    help_callback (h, DLG_DRAW, 0);
 }
 
 static void
@@ -563,7 +563,7 @@ help_index_cmd (Dlg_head * h)
 
     currentpoint = startpoint = new_item + 1;
     selected_item = NULL;
-    help_callback (h, 0, DLG_DRAW);
+    help_callback (h, DLG_DRAW, 0);
 }
 
 static void help_quit_cmd (void *x)
@@ -579,7 +579,7 @@ static void prev_node_cmd (Dlg_head *h)
     if (history_ptr < 0)
 	history_ptr = HISTORY_SIZE-1;
     
-    help_callback (h, 0, DLG_DRAW);
+    help_callback (h, DLG_DRAW, 0);
 }
 
 static int md_callback (Widget *w, int msg, int par)
@@ -597,7 +597,8 @@ static Widget *mousedispatch_new (int y, int x, int yl, int xl)
     return w;
 }
 
-static int help_handle_key (struct Dlg_head *h, int c)
+static cb_ret_t
+help_handle_key (struct Dlg_head *h, int c)
 {
     char *new_item;
 
@@ -715,25 +716,28 @@ static int help_handle_key (struct Dlg_head *h, int c)
 	break;
 
     default:
-	return 0;
+	return MSG_NOT_HANDLED;
 	    
     }
-    help_callback (h, 0, DLG_DRAW);
-    return 1;
+    help_callback (h, DLG_DRAW, 0);
+    return MSG_HANDLED;
 }
 
-static int help_callback (struct Dlg_head *h, int id, int msg)
+static cb_ret_t
+help_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 {
-    switch (msg){
+    switch (msg) {
     case DLG_DRAW:
 	common_dialog_repaint (h);
 	help_show (h, currentpoint);
-	break;
+	return MSG_HANDLED;
 
     case DLG_KEY:
-	return help_handle_key (h, id);
+	return help_handle_key (h, parm);
+
+    default:
+	return default_dlg_callback (h, msg, parm);
     }
-    return 0;
 }
 
 static void

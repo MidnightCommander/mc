@@ -264,9 +264,10 @@ static int bminus_cback (int action)
     return 0;
 }
 
-static int layout_callback (struct Dlg_head *h, int Id, int Msg)
+static cb_ret_t
+layout_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 {
-    switch (Msg){
+    switch (msg) {
     case DLG_DRAW:
     	/*When repainting the whole dialog (e.g. with C-l) we have to
     	  update everything*/
@@ -301,7 +302,7 @@ static int layout_callback (struct Dlg_head *h, int Id, int Msg)
 		printw ("%02d", _output_lines);
 	    }
 	}
-	break;
+	return MSG_HANDLED;
 
     case DLG_POST_KEY:
 	_filetype_mode = check_options [8].widget->state & C_BOOL;
@@ -343,12 +344,11 @@ static int layout_callback (struct Dlg_head *h, int Id, int Msg)
 		printw ("%02d", _output_lines);
 	    }
 	}
-	break;
+	return MSG_HANDLED;
 
-    case DLG_END:
-	break;
+    default:
+	return default_dlg_callback (h, msg, parm);
     }
-    return 0;
 }
 
 static void init_layout (void)

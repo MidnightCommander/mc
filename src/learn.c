@@ -207,16 +207,20 @@ learn_check_key (int c)
     return 0;
 }
 
-static int learn_callback (Dlg_head * h, int Par, int Msg)
+static cb_ret_t
+learn_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 {
-    switch (Msg) {
+    switch (msg) {
     case DLG_DRAW:
 	common_dialog_repaint (h);
-	break;
+	return MSG_HANDLED;
+
     case DLG_KEY:
-    	return learn_check_key (Par);
+	return learn_check_key (parm);
+
+    default:
+	return default_dlg_callback (h, msg, parm);
     }
-    return 0;
 }
 
 static void

@@ -807,16 +807,12 @@ static int insert_text (WInput *in, char *text, int len)
     return len != 0;
 }
 
-static int
-query_callback (Dlg_head * h, int Par, int Msg)
+static cb_ret_t
+query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 {
-    switch (Msg) {
-    case DLG_DRAW:
-	common_dialog_repaint (h);
-	break;
-
+    switch (msg) {
     case DLG_KEY:
-	switch (Par) {
+	switch (parm) {
 	case KEY_LEFT:
 	case KEY_RIGHT:
 	    h->ret_value = 0;
@@ -838,7 +834,7 @@ query_callback (Dlg_head * h, int Par, int Msg)
 			 end - start - 1)) {
 			listbox_select_entry ((WListbox *) (h->current->
 							    widget), e1);
-			handle_char (input, Par);
+			handle_char (input, parm);
 			end--;
 			send_message (h->current->widget, WIDGET_DRAW, 0);
 			break;
@@ -849,8 +845,8 @@ query_callback (Dlg_head * h, int Par, int Msg)
 	    return 1;
 
 	default:
-	    if (Par > 0xff || !is_printable (Par)) {
-		if (is_in_input_map (input, Par) == 2) {
+	    if (parm > 0xff || !is_printable (parm)) {
+		if (is_in_input_map (input, parm) == 2) {
 		    if (end == min_end)
 			return 1;
 		    h->ret_value = B_USER;	/* This means we want to refill the
@@ -869,13 +865,13 @@ query_callback (Dlg_head * h, int Par, int Msg)
 		do {
 		    if (!strncmp
 			(input->buffer + start, e1->text, end - start)) {
-			if (e1->text[end - start] == Par) {
+			if (e1->text[end - start] == parm) {
 			    if (need_redraw) {
 				register int c1, c2, si;
 
 				for (si = end - start + 1;
-				     (c1 = last_text[si]) &&
-				     (c2 = e1->text[si]); si++)
+				     (c1 = last_text[si])
+				     && (c2 = e1->text[si]); si++)
 				    if (c1 != c2)
 					break;
 				if (low > si)
@@ -902,11 +898,13 @@ query_callback (Dlg_head * h, int Par, int Msg)
 		    dlg_stop (h);
 		}
 	    }
-	    return 1;
+	    return MSG_HANDLED;
 	}
 	break;
+
+    default:
+	return default_dlg_callback (h, msg, parm);
     }
-    return 0;
 }
 
 #define DO_INSERTION 1

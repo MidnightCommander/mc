@@ -123,12 +123,12 @@ static int case_sensitive = 1;
  * Callback for the parameter dialog.
  * Validate regex, prevent closing the dialog if it's invalid.
  */
-static int
-find_parm_callback (struct Dlg_head *h, int id, int Msg)
+static cb_ret_t
+find_parm_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 {
     int flags;
 
-    switch (Msg) {
+    switch (msg) {
     case DLG_VALIDATE:
 	if ((h->ret_value != B_ENTER) || !in_with->buffer[0])
 	    return MSG_HANDLED;
@@ -144,8 +144,10 @@ find_parm_callback (struct Dlg_head *h, int id, int Msg)
 	    h->running = 1;	/* Don't stop the dialog */
 	}
 	return MSG_HANDLED;
+
+    default:
+	return default_dlg_callback (h, msg, parm);
     }
-    return default_dlg_callback (h, id, Msg);
 }
 
 /*
@@ -696,29 +698,27 @@ view_edit_currently_selected_file (int unparsed_view, int edit)
     return MSG_HANDLED;
 }
 
-static int
-find_callback (struct Dlg_head *h, int id, int Msg)
+static cb_ret_t
+find_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 {
-    switch (Msg){
-    case DLG_DRAW:
-        common_dialog_repaint (h);
-	break;
-
+    switch (msg) {
     case DLG_KEY:
-	if (id == KEY_F(3) || id == KEY_F(13)){
-	    int unparsed_view = (id == KEY_F(13));
+	if (parm == KEY_F (3) || parm == KEY_F (13)) {
+	    int unparsed_view = (parm == KEY_F (13));
 	    return view_edit_currently_selected_file (unparsed_view, 0);
 	}
-	if (id == KEY_F(4)){
+	if (parm == KEY_F (4)) {
 	    return view_edit_currently_selected_file (0, 1);
-	 }
-	 return MSG_NOT_HANDLED;
+	}
+	return MSG_NOT_HANDLED;
 
-     case DLG_IDLE:
-	 do_search (h);
-	 break;
-     }
-     return 0;
+    case DLG_IDLE:
+	do_search (h);
+	return MSG_HANDLED;
+
+    default:
+	return default_dlg_callback (h, msg, parm);
+    }
 }
 
 /* Handles the Stop/Start button in the find window */

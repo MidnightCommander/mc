@@ -526,16 +526,17 @@ edit_save_as_cmd (WEdit *edit)
 
 /* {{{ Macro stuff starts here */
 
-static int
-raw_callback (struct Dlg_head *h, int key, int Msg)
+static cb_ret_t
+raw_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 {
-    switch (Msg) {
+    switch (msg) {
     case DLG_KEY:
 	h->running = 0;
-	h->ret_value = key;
+	h->ret_value = parm;
 	return MSG_HANDLED;
+    default:
+	return default_dlg_callback (h, msg, parm);
     }
-    return default_dlg_callback (h, key, Msg);;
 }
 
 /* gets a raw key from the keyboard. Passing cancel = 1 draws

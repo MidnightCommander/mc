@@ -81,51 +81,51 @@ static char *displays [LIST_TYPES] = {
 
 static int user_hotkey = 'u';
 
-static int
-display_callback (struct Dlg_head *h, int id, int Msg)
+static cb_ret_t
+display_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 {
-    switch (Msg){
-    case DLG_DRAW:
-	common_dialog_repaint (h);
-	break;
-
+    switch (msg) {
     case DLG_UNFOCUS:
-	if((WRadio *) h->current->widget == my_radio){
-	    assign_text (status, displays_status [my_radio->sel]);
+	if ((WRadio *) h->current->widget == my_radio) {
+	    assign_text (status, displays_status[my_radio->sel]);
 	    input_set_point (status, 0);
 	}
-	break;
-	
+	return MSG_HANDLED;
+
     case DLG_KEY:
-	if (id == '\n'){
-	    if((WRadio *) h->current->widget == my_radio){
-		assign_text (status, displays_status [my_radio->sel]);
+	if (parm == '\n') {
+	    if ((WRadio *) h->current->widget == my_radio) {
+		assign_text (status, displays_status[my_radio->sel]);
 		dlg_stop (h);
-		break;
+		return MSG_HANDLED;
 	    }
-	    
-	    if ((WInput *) h->current->widget == user){
+
+	    if ((WInput *) h->current->widget == user) {
 		h->ret_value = B_USER + 6;
 		dlg_stop (h);
-		break;
+		return MSG_HANDLED;
 	    }
-	
-	    if ((WInput *) h->current->widget == status){
+
+	    if ((WInput *) h->current->widget == status) {
 		h->ret_value = B_USER + 7;
 		dlg_stop (h);
-		break;
+		return MSG_HANDLED;
 	    }
 	}
 
-	if (tolower(id) == user_hotkey && h->current->widget != (Widget *) user
-	    && h->current->widget != (Widget *) status){
+	if (tolower (parm) == user_hotkey
+	    && h->current->widget != (Widget *) user
+	    && h->current->widget != (Widget *) status) {
 	    my_radio->sel = 3;
-	    dlg_select_widget (h, my_radio); /* force redraw */
+	    dlg_select_widget (h, my_radio);	/* force redraw */
 	    dlg_select_widget (h, user);
 	    return MSG_HANDLED;
 	}
+	return MSG_NOT_HANDLED;
+
+    default:
+	return default_dlg_callback (h, msg, parm);
     }
-    return MSG_NOT_HANDLED;
 }
 
 static void
@@ -637,24 +637,22 @@ display_bits_box (void)
 #define TREE_Y 20
 #define TREE_X 60
 
-static int
-tree_callback (struct Dlg_head *h, int id, int msg)
+static cb_ret_t
+tree_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 {
-    switch (msg){
+    switch (msg) {
 
     case DLG_POST_KEY:
 	/* The enter key will be processed by the tree widget */
-	if (id == '\n') {
+	if (parm == '\n') {
 	    h->ret_value = B_ENTER;
 	    dlg_stop (h);
 	}
 	return MSG_HANDLED;
 	
-    case DLG_DRAW:
-	common_dialog_repaint (h);
-	break;
+    default:
+	return default_dlg_callback (h, msg, parm);
     }
-    return MSG_NOT_HANDLED;
 }
 
 /* Show tree in a box, not on a panel */
