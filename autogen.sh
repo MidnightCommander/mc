@@ -33,8 +33,8 @@ gettext_ver=`$GETTEXTIZE --version | \
   sed '2,$d;			# remove all but the first line
        s/.* //;			# take text after the last space
        s/-.*//;			# strip "-pre" or "-rc" at the end
-       s/\([^.]\+\)/0\1/g;	# prepend 0 to every token
-       s/0\([^.][^.]\)/\1/g;	# trim 0 from long lokens
+       s/\([^.][^.]*\)/0\1/g;	# prepend 0 to every token
+       s/0\([^.][^.]\)/\1/g;	# trim 0 from long tokens
        s/\.//g;			# remove dots
        '`
 

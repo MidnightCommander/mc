@@ -1,3 +1,8 @@
+2003-02-03  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* autogen.sh: Fix unportable "+" sed regexp in gettext_ver
+	calculation.  Reported by vlad@geekizoid.com.
+
 2003-01-31  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/nroff.syntax: Make colors more compatible with the
