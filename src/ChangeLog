@@ -10,15 +10,139 @@
 	line wrapping. (move_backward2_textmode_wrap): The special case
 	of moving some lines up in text mode with line wrapping enabled.
 
-2004-18-19  Roland Illig  <roland.illig@gmx.de>
+2004-08-19  Roland Illig  <roland.illig@gmx.de>
 
 	* util.h: Added the function free_after for easier handling
 	of dynamically allocated strings.
 
-2004-18-19  Roland Illig  <roland.illig@gmx.de>
+2004-08-19  Roland Illig  <roland.illig@gmx.de>
 
 	* util.c: Added the function str_replace, which replaces
 	all occurences of a character in a string.
+
+2004-08-16  Roland Illig  <roland.illig@gmx.de>
+
+	* achown.c (apply_advanced_chowns): Added explicit cast
+	(uid_t) -1 and (gid_t) -1, as on most systems uid_t and gid_t
+	are unsigned. This avoids a GCC warning about comparison
+	between types differing in signedness. No functional changes.
+
+	* background.c (background_attention): Replaced int with ssize_t
+	to correctly handle calls to POSIX read(). No other functional
+	changes.
+
+	* boxes.c: const'ified some declarations. Now using the
+	NULL_QuickWidget macro to mark the end of arrays of QuickWidgets.
+	No functional changes.
+
+	* chown.c: Added missing initializers. No functional changes.
+
+	* color.c (configure_colors_string): Using size_t for variables
+	indexing arrays. (get_color): likewise. (init_colors): likewise.
+	No functional changes.
+
+	* command.c: Using size_t for variables indexing arrays.
+	(command_insert): Changed the type of the second parameter to
+	const char *, as it is not modified inside the function.
+	(do_cd_command): Added a comment about quoting the argument to
+	the internal "cd" command. No functional changes.
+
+	* complete.c: TODO
+
+	* dialog.c (create_dlg): Made the parameters help_ctx and title
+	const. No functional changes.
+	
+	* execute.c (execute_with_vfs_arg): Applied necessary changes to
+	the new mc_ungetlocalcopy.
+
+	* ext.c: Applied necessary changes to the new mc_ungetlocalcopy.
+
+	* file.c: Needs the implementation details of the vfs, so include
+	"../vfs/vfs-impl.h". Adjusted some data types to size_t and const
+	char *. No functional changes.
+	
+	* filegui.c: Now using NULL_QuickWidget as initializer.
+	No functional changes.
+
+	* find.c: Added const modifier for text of buttons. No functional
+	changes.
+
+	* global.h: New macro const_cast to indicate places where a const
+	is casted away but ideally shouldn't.
+
+	* hotlist.c: Type changes to size_t and const char *. No functional
+	changes.
+
+	* info.c (info_show_info): Explicitly casted st.st_blocks to avoid
+	invalid typed argument for printf. Changed a literal 0xffffffff to
+	-1 to fit into the type with which it is compared. No functional
+	changes.
+
+	* key.c: Added a const modifier. No functional changes.
+
+	* layout.c: Added const modifiers and changed int to size_t where
+	appropriate. No functional changes.
+
+	* main.c: Added explicit initializers to global variables. Replaced
+	the initializer 0 by NULL for pointers. Removed the (unused)
+	parameter for keyboard-mapped functions. (version): Renamed to
+	show_version to avoid name conflicts with equally-named variables.
+	Added missing initializers for popt arguments.
+
+	* main.h: Fixed the FIXME near the key_callback typedef.
+	(vfs_print_message): Added a const modifier to the msg parameter.
+
+	* menu.c (create_menu): Avoided a GCC warning concerning the
+	comparison of unsigned and signed expressions. No functional changes.
+
+	* mountlist.c: Replaced (char *) 0 by NULL. No functional changes.
+
+	* options.c: Made PAUSE_OPTIONS look uniformly. Added const modifier
+	where appropriate. No functional changes.
+
+	* popthelp.c: Added missing initializers. No functional changes.
+
+	* profile.c (profile_clean_section): Added const modifier to
+	parameter appname. No functional changes.
+
+	* screen.c (string_file_name): Replaced int by size_t.
+	(string_file_perm_octal): Changed output format to long octal, because
+	there might be more than 16 significant bits. Added the specialized
+	function type panel_key_callback and added wrapper functions for
+	functions that don't ordinarily take a WPanel * argument.
+
+	* slint.c (SLang_getkey2): Replaced memcpy by memmove, as src and
+	dest are overlapping. Changed an int to a size_t.
+
+	* subshell.c (check_sid): Added prototype to the definition.
+	Removed unnecessary casts from void * to char *.
+	Fixed a format string bug (changed %s to %d for a file descriptor).
+
+	* textconf.c (version): Renamed to show_version to avoid name
+	conflicts with variables.
+
+	* tree.c: Added an own callback function type that takes a WTree *
+	as first parameter and adjusted the calling functions.
+
+	* util.c (str_replace): replaces all occurences of a character by
+	another character. Modifies the given string in-place.
+	(x_basename): Now returns a const char * instead of a char *.
+
+	* util.h (free_after): Frees its second argument after evaluating
+	both arguments. See util.h for usage.
+
+	* utilunix.c (tilde_expand): Now using g_strdup instead of g_malloc
+	+ strncpy.
+
+	* widget.c: Added the const modifier for strings in many places.
+
+	* wtools.c: Added the const modifier for strings in many places.
+
+	* view.c: Replaced various occurences of int, long and unsigned long
+	(all meaning the same) by the newly created offset_type to have
+	a uniform look. (move_backward2): Simplified the function to be
+	more readable. Outsourced the hardest case into
+	move_backward2_textmode_wrap and left it with the old code.
 
 2004-08-19  Pavel Shirshov  <pavelsh@mail.ru>
 
