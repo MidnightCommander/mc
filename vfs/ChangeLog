@@ -1,3 +1,7 @@
+2001-08-23  Pavel Roskin  <proski@gnu.org>
+
+	* fish.c: Remove useless semicolons after functions.
+
 2001-08-19  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.c (vfs_parse_ls_lga): Warning fix if st_nlink is unsigned.

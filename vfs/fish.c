@@ -680,10 +680,10 @@ static int fish_##name (vfs *me, char *path1, char *path2) \
 #define XTEST if (bucket1 != bucket2) { ERRNOR (EXDEV, -1); }
 FISH_OP(rename, XTEST, "#RENAME /%s /%s\n"
 		       "mv \"/%s\" \"/%s\" 2>/dev/null\n"
-		       "echo '### 000'" );
+		       "echo '### 000'" )
 FISH_OP(link,   XTEST, "#LINK /%s /%s\n"
 		       "ln \"/%s\" \"/%s\" 2>/dev/null\n"
-		       "echo '### 000'" );
+		       "echo '### 000'" )
 
 static int fish_symlink (vfs *me, char *setto, char *path)
 {
