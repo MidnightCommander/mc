@@ -774,6 +774,10 @@ static int fish_rmdir (vfs *me, char *path)
 
 static int fish_fh_open (vfs *me, vfs_s_fh *fh, int flags, int mode)
 {
+    /* File will be written only, so no need to retrieve it */
+    if (((flags & O_WRONLY) == O_WRONLY) && !(flags & (O_RDONLY|O_RDWR))){
+	return 0;
+    }
     if (!fh->ino->localname)
 	if (vfs_s_retrieve_file (me, fh->ino)==-1)
 	    return -1;

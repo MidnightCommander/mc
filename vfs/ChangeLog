@@ -1,3 +1,8 @@
+2002-05-21  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* fish.c (fish_fh_open): Don't retrieve file if it is
+	opened for writting only.
+
 2002-05-17  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* xdirentry.h (vfs_s_super): Add control_connection_buzy
