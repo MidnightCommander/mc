@@ -541,7 +541,10 @@ void init_subshell (void)
 	goto write_it;
 
 	case TCSH:
-	g_snprintf (precmd, sizeof (precmd), "alias precmd 'echo $cwd:q >>%s;kill -STOP $$'\n", tcsh_fifo);
+	g_snprintf (precmd, sizeof (precmd),
+		    "set echo_style=both;"
+		    "alias precmd 'echo $cwd:q >>%s;kill -STOP $$'\n",
+		    tcsh_fifo);
 
 	write_it:
 	write (subshell_pty, precmd, strlen (precmd));

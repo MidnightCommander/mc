@@ -1,5 +1,9 @@
 2001-07-12  Pavel Roskin  <proski@gnu.org>
 
+	* subshell.c (init_subshell): Run "set echo_style=both" at
+	startup to ensure that echo in tcsh understands octal numbers.
+	Reported by Francis Kwok <francis.kwok@alcatel.com>
+
 	* Makefile.in (OURLIBS): Merge with ...
 	(LIBS): ... this. Add @LIBICONV@.
 	Reported by Libor Motyèka <l_motycka@ortex.cz>
