@@ -408,7 +408,7 @@ generate_actions_box (GnomeFilePropertyDialog *fp_dlg)
 	gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
 
 	/* we do open first */
-	fp_dlg->open_label = gtk_label_new ("Open");
+	fp_dlg->open_label = gtk_label_new (_("Open"));
 	gtk_misc_set_alignment (GTK_MISC (fp_dlg->open_label), 0.0, 0.5);
 	gtk_misc_set_padding (GTK_MISC (fp_dlg->open_label), 2, 0);
 	gtk_table_attach_defaults (GTK_TABLE (table),
@@ -1091,16 +1091,16 @@ apply_metadata_change (GnomeFilePropertyDialog *fpd)
 		text = gtk_entry_get_text (GTK_ENTRY (fpd->open_entry));
 		if (text && text[0])
 			gnome_metadata_set (fpd->file_name,
-					    "fm_open",
+					    "fm-open",
 					    strlen (text) + 1,
 					    text);
 		else
 			gnome_metadata_remove (fpd->file_name,
-					       "fm_open");
+					       "fm-open");
 	} else {
 		if (fpd->fm_open)
 			gnome_metadata_remove (fpd->file_name,
-					       "fm_open");
+					       "fm-open");
 	}
 	if (fpd->executable) {
 		if (!GTK_TOGGLE_BUTTON (fpd->prop1_cbox)->active) {

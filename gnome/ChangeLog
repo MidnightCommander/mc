@@ -1,5 +1,14 @@
 1999-02-03  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gdesktop.c (desktop_icon_info_open): Use gmc_open_filename
+	instead of the stuff that goes trough a file_entry as we loose the
+	full pathname.
+
+	* gnome-file-property-dialog.c (generate_actions_box): Tag "open"
+	for translation
+	(apply_metadata_change): Use fm-open instead of fm_open for the
+	metadata keys.
+
 	* gscreen.c (panel_file_list_configure_contents): Make the icon on
 	the type column be displayed.
 	(panel_file_list_select_row): Removed dead code.

@@ -800,7 +800,7 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 	if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe))
 		new_panel_at (filename);
 	else
-		do_enter_on_file_entry (fe);
+		gmc_open_filename (filename);
 
 	file_entry_free (fe);
 }
