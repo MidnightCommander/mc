@@ -1,3 +1,7 @@
+2002-03-08  Pavel Roskin  <proski@gnu.org>
+
+	* doc/Makefile.am (EXTRA_DIST): Distribute doc/ru/mc.1.
+
 2002-03-04  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* configure.in (AC_CONFIG_FILES): Add doc/ru/mc.1.
