@@ -1,3 +1,7 @@
+2003-02-21  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* doc/ru/mc.1.in (Layout): Translate 'Xterm window title' option.
+
 2003-02-20  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Move list of all translations ...
