@@ -1,3 +1,11 @@
+2002-01-29  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* ftpfs.c (reconnect): New function to restore closed connection.
+	(command): Use reconnect if EPIPE received.
+	(dir_load): Eliminate recursion.
+	(login_server): Constify netrcpass parameter.
+	(is_same_dir): Constify path parameter.
+
 2002-01-24  Pavel Roskin  <proski@gnu.org>
 
 	* cpio.c: Don't include glib.h directly.

@@ -160,6 +160,8 @@ static char *ftpfs_get_current_directory (vfs *me, vfs_s_super *super);
 static int ftpfs_chdir_internal (vfs *me, vfs_s_super *super, char *remote_path);
 static int command (vfs *me, vfs_s_super *super, int wait_reply, char *fmt, ...)
     __attribute__ ((format (printf, 4, 5)));
+static int ftpfs_open_socket (vfs *me, vfs_s_super *super);
+static int login_server (vfs *me, vfs_s_super *super, const char *netrcpass);
 
 static char *
 translate_path (vfs *me, vfs_s_super *super, const char *remote_path)
@@ -263,6 +265,24 @@ get_reply (vfs *me, int sock, char *string_buf, int string_len)
 }
 
 static int
+reconnect (vfs *me, vfs_s_super *super)
+{
+    int sock = ftpfs_open_socket (me, super);
+    if (sock != -1){
+	char *cwdir = SUP.cwdir;
+	close (SUP.sock);
+	SUP.sock = sock;
+	SUP.cwdir = NULL;
+	if (login_server (me, super, SUP.password)){
+	    sock = ftpfs_chdir_internal (me, super, cwdir);
+	    g_free (cwdir);
+	    return sock == COMPLETE;
+	}
+    }
+    return 0;
+}
+
+static int
 command (vfs *me, vfs_s_super *super, int wait_reply, char *fmt, ...)
 {
     va_list ap;
@@ -290,17 +310,27 @@ command (vfs *me, vfs_s_super *super, int wait_reply, char *fmt, ...)
     got_sigpipe = 0;
     enable_interrupt_key ();
     status = write (SUP.sock, str, status + 2);
-    g_free (str);
     
     if (status < 0){
 	code = 421;
 
-	if (errno == EPIPE){
+	if (errno == EPIPE){		/* Remote server has closed connection */
+	    static int level = 0;	/* login_server() use command() */
+	    if (level == 0){  
+		level = 1;
+		status = reconnect (me, super);
+		level = 0;
+		if (status && write (SUP.sock, str, status + 2) > 0)
+		    goto ok;
+	    }
 	    got_sigpipe = 1;
 	}
+	g_free (str);
 	disable_interrupt_key ();
 	return TRANSIENT;
     }
+  ok:
+    g_free (str);
     disable_interrupt_key ();
     
     if (wait_reply)
@@ -345,7 +375,7 @@ changetype (vfs *me, vfs_s_super *super, int binary)
 
 /* This routine logs the user in */
 static int 
-login_server (vfs *me, vfs_s_super *super, char *netrcpass)
+login_server (vfs *me, vfs_s_super *super, const char *netrcpass)
 {
 #if defined(HSC_PROXY)
     char *proxypass, *proxyname;
@@ -1179,7 +1209,7 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
     char buffer[BUF_8K];
     
     int cd_first = (strchr (remote_path, ' ') != NULL) || ftpfs_first_cd_then_ls || (SUP.strict == RFC_STRICT);
-
+again:
     print_vfs_message(_("ftpfs: Reading FTP directory %s... %s%s"), remote_path,
 		      SUP.strict == RFC_STRICT ? _("(strict rfc959)") : "",
 		      cd_first ? _("(chdir first)") : "");
@@ -1313,8 +1343,11 @@ fallback:
     if (SUP.strict == RFC_AUTODETECT) {
         /* It's our first attempt to get a directory listing from this
 	server (UNIX style LIST command) */
-        SUP.strict = RFC_STRICT;
-	return dir_load (me, dir, remote_path);
+	SUP.strict = RFC_STRICT;
+	/* I hate goto, but recursive call needs another 8K on stack */
+	/* return dir_load (me, dir, remote_path); */
+	cd_first = 1;
+	goto again;
     }
     print_vfs_message(_("ftpfs: failed; nowhere to fallback to"));
     ERRNOR(-1, EACCES);
@@ -1543,7 +1576,7 @@ static int ftpfs_unlink (vfs *me, char *path)
 
 /* Return true if path is the same directoy as the one we are on now */
 static int
-is_same_dir (vfs *me, vfs_s_super *super, char *path)
+is_same_dir (vfs *me, vfs_s_super *super, const char *path)
 {
     if (!SUP.cwdir)
 	return 0;
