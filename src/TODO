@@ -3,9 +3,6 @@ Before 4.6.0-pre2
 
 Don't allow stdout and stderr from extfs scripts pollute the screen.
 
-Consider applying a patch from PLD to make M-o propagate the current
-directory to the other panel.
-
 ncurses 5.2 turns off keypad under heavy load on xterm.  Check if
 anything can be done about it.
 
