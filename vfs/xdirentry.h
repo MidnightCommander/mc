@@ -185,8 +185,6 @@ void         vfs_s_add_dots          (vfs *me, vfs_s_inode *dir,
 				      vfs_s_inode *parent);
 vfs_s_entry *vfs_s_generate_entry    (vfs *me, char *name,
 				      struct vfs_s_inode *parent, mode_t mode);
-vfs_s_entry *vfs_s_automake          (vfs *me, vfs_s_inode *dir, char *path,
-				      int flags);
 vfs_s_entry *vfs_s_find_entry_tree   (vfs *me, vfs_s_inode *root, char *path,
 				      int follow, int flags);
 vfs_s_entry *vfs_s_find_entry_linear (vfs *me, vfs_s_inode *root, char *path,
@@ -194,24 +192,14 @@ vfs_s_entry *vfs_s_find_entry_linear (vfs *me, vfs_s_inode *root, char *path,
 vfs_s_inode *vfs_s_find_inode        (vfs *me, vfs_s_inode *root, char *path,
 				      int follow, int flags);
 vfs_s_inode *vfs_s_find_root         (vfs *me, vfs_s_entry *entry);
-vfs_s_entry *vfs_s_resolve_symlink   (vfs *me,  vfs_s_entry *entry, char *path,
-				      int follow);
-
-/* superblock games */
-vfs_s_super *vfs_s_new_super         (vfs *me);
-void vfs_s_free_super                (vfs *me, vfs_s_super *super); 
 
 /* outside interface */
 char *vfs_s_get_path_mangle          (vfs *me, char *inname, vfs_s_super **archive,
-				      int flags);
-char *vfs_s_get_path                 (vfs *me, char *inname, vfs_s_super **archive,
 				      int flags);
 void  vfs_s_invalidate               (vfs *me, vfs_s_super *super);
 char *vfs_s_fullpath                 (vfs *me, vfs_s_inode *ino);
 
 /* readdir & friends */
-vfs_s_super *vfs_s_super_from_path   (vfs *me, char *name);
-vfs_s_inode *vfs_s_inode_from_path   (vfs *me, char *name, int flags);
 void *vfs_s_opendir (vfs *me, char *dirname);
 void *vfs_s_readdir (void *data);
 int vfs_s_telldir (void *data);

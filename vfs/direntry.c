@@ -34,6 +34,9 @@
 
 static volatile int total_inodes = 0, total_entries = 0;
 
+static vfs_s_entry *vfs_s_resolve_symlink (vfs * me, vfs_s_entry * entry,
+					   char *path, int follow);
+
 vfs_s_inode *
 vfs_s_new_inode (vfs *me, vfs_s_super *super, struct stat *initstat)
 {
@@ -193,7 +196,7 @@ vfs_s_generate_entry (vfs *me, char *name, struct vfs_s_inode *parent, mode_t mo
 }
 
 /* We were asked to create entries automagically */
-vfs_s_entry *
+static vfs_s_entry *
 vfs_s_automake (vfs *me, vfs_s_inode *dir, char *path, int flags)
 {
     struct vfs_s_entry *res;
@@ -340,7 +343,7 @@ vfs_s_find_inode (vfs *me, vfs_s_inode *root, char *path, int follow, int flags)
     return ent->ino;
 }
 
-vfs_s_entry *
+static vfs_s_entry *
 vfs_s_resolve_symlink (vfs *me, vfs_s_entry *entry, char *path, int follow)
 {
     char buf[MC_MAXPATHLEN], *linkname;
@@ -398,7 +401,7 @@ vfs_s_resolve_symlink (vfs *me, vfs_s_entry *entry, char *path, int follow)
 /* Ook, these were functions around directory entries / inodes */
 /* -------------------------------- superblock games -------------------------- */
 
-vfs_s_super *
+static vfs_s_super *
 vfs_s_new_super (vfs *me)
 {
     vfs_s_super *super;
@@ -419,7 +422,7 @@ vfs_s_insert_super (vfs *me, vfs_s_super *super)
     MEDATA->supers = super;
 } 
 
-void
+static void
 vfs_s_free_super (vfs *me, vfs_s_super *super)
 {
     if (super->root){
@@ -518,7 +521,7 @@ return_success:
     return local;
 }
 
-char *
+static char *
 vfs_s_get_path (vfs *me, char *inname, struct vfs_s_super **archive, int flags)
 {
     char *buf = g_strdup( inname );
@@ -557,16 +560,7 @@ vfs_s_fullpath (vfs *me, vfs_s_inode *ino)
 /* Support of archives */
 /* ------------------------ readdir & friends ----------------------------- */
 
-vfs_s_super *vfs_s_super_from_path (vfs *me, char *name)
-{
-    struct vfs_s_super *super;
-
-    if (!vfs_s_get_path_mangle (me, name, &super, 0))
-	return NULL;
-    return super;
-}
-
-vfs_s_inode *
+static vfs_s_inode *
 vfs_s_inode_from_path (vfs *me, char *name, int flags)
 {
     struct vfs_s_super *super;
