@@ -1,3 +1,7 @@
+1999-09-23	Jorge Godoy	<godoy@conectiva.com.br>
+
+	* configure.in: Added pt_BR to ALL_LINGUAS
+
 1999-09-22  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* lib/mc.sh.in, mc.csh.in: renamed from mc.sh resp. mc.csh. Adapt
