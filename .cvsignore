@@ -16,6 +16,7 @@ configure
 gettext.m4
 intl
 install-sh
+m4
 mc.spec
 missing
 mkinstalldirs
