@@ -316,10 +316,12 @@ void
 do_sort (dir_list *list, sortfn *sort, int top, int reverse_f, int case_sensitive_f)
 {
     int i;
+    int dot_dot_found = 0;
     file_entry tmp_fe;
 
     for (i = 0; i < top + 1; i++) {             /* put ".." first in list */
 	if (!strcmp (list->list [i].fname, "..")) {
+	    dot_dot_found = 1;
             if (i > 0) {                        /* swap [i] and [0] */
                 memcpy (&tmp_fe, &(list->list [0]), sizeof (file_entry));
                 memcpy (&(list->list [0]), &(list->list [i]), sizeof (file_entry));
@@ -331,7 +333,8 @@ do_sort (dir_list *list, sortfn *sort, int top, int reverse_f, int case_sensitiv
 
     reverse = reverse_f ? -1 : 1;
     case_sensitive = case_sensitive_f;
-    qsort (&(list->list) [1], top, sizeof (file_entry), sort);
+    qsort (&(list->list) [dot_dot_found],
+	   top + 1 - dot_dot_found, sizeof (file_entry), sort);
 }
 
 void
