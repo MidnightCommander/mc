@@ -1665,6 +1665,8 @@ int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 	return B_SKIP_REPLACE;
     if (!strcmp (s, "Replace"))
 	return B_ENTER;
+    /* Shouldn't ever reach this point */
+    return B_CANCEL;
 }
 
 #else
