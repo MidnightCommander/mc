@@ -1,3 +1,8 @@
+2003-08-29  Pavel Roskin  <proski@gnu.org>
+
+	* ftpfs.c (initconn): Use more portable initialization.
+	* xdirentry.h: Use safer definition of ERRNOR.
+
 2003-08-18  Oskar Liljeblad  <oskar@osk.mine.nu>
 
 	* extfs/uzip.in: Fix error in parsing size of files over 9999999

@@ -250,11 +250,7 @@ int vfs_s_get_line_interruptible (vfs *me, char *buffer, int size, int fd);
 /* misc */
 int vfs_s_retrieve_file (vfs *me, struct vfs_s_inode *ino);
 
-#if 0
 #define ERRNOR(a, b) do { me->verrno = a; return b; } while (0)
-#else
-#define ERRNOR(a, b) { me->verrno = a; return b; }
-#endif
 
 #define MEDATA ((struct vfs_s_data *) me->data)
 

@@ -922,7 +922,8 @@ static int
 initconn (vfs *me, vfs_s_super *super)
 {
     struct sockaddr_in data_addr;
-    int data, len = sizeof(data_addr);
+    int data;
+    int len = sizeof(data_addr);
     struct protoent *pe;
 
     pe = getprotobyname ("tcp");
