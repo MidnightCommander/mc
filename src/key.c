@@ -56,6 +56,10 @@
 #    include <sys/ioctl.h>
 #endif
 
+#ifdef __QNXNTO__
+#	include <sys/dcmd_chr.h>
+#endif
+
 #define GET_TIME(tv)    (gettimeofday(&tv, (struct timezone *)NULL))
 #define DIF_TIME(t1,t2) ((t2.tv_sec -t1.tv_sec) *1000+ \
 			 (t2.tv_usec-t1.tv_usec)/1000)
@@ -1092,6 +1096,9 @@ static int
 get_modifier (void)
 {
     int result = 0;
+#ifdef __QNXNTO__
+    int mod_status, shift_ext_status;
+#endif
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
     if (x11_window) {
@@ -1106,7 +1113,7 @@ get_modifier (void)
 #else
 	XQueryPointer (x11_display, x11_window, &root, &child, &root_x,
 		       &root_y, &win_x, &win_y, &mask);
-#endif /* HAVE_GMODULE */
+#endif				/* HAVE_GMODULE */
 
 	if (mask & ShiftMask)
 	    result |= KEY_M_SHIFT;
@@ -1114,6 +1121,22 @@ get_modifier (void)
 	    result |= KEY_M_CTRL;
 	return result;
     }
+#endif
+#ifdef __QNXNTO__
+    /* This code doesn't work under Photon */
+    if (devctl
+	(fileno (stdin), DCMD_CHR_LINESTATUS, &mod_status, sizeof (int),
+	 NULL) == -1)
+	return 0;
+    shift_ext_status = mod_status & 0xffffff00UL;
+    mod_status &= 0x7f;
+    if (mod_status & _LINESTATUS_CON_ALT)
+	result |= KEY_M_ALT;
+    if (mod_status & _LINESTATUS_CON_CTRL)
+	result |= KEY_M_CTRL;
+    if ((mod_status & _LINESTATUS_CON_SHIFT)
+	|| (shift_ext_status & 0x00000800UL))
+	result |= KEY_M_SHIFT;
 #endif
 #ifdef __linux__
     {

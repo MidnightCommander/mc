@@ -1,3 +1,7 @@
+2003-02-23  Dmitry Alexeyev  <dmi_a@qnx.org.ru>
+
+	* key.c (get_modifier): Add support for QNX Neutrino console.
+
 2003-02-23  Pavel Roskin  <proski@gnu.org>
 
 	* key.c (init_key_x11): Don't try to use X11 if DISPLAY is not
