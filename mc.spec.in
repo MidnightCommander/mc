@@ -1,3 +1,9 @@
+# Conditional build:
+#
+# _with_ncurses		- use ncurses
+# _with_included_slang	- use included S-Lang library
+# _with_charset		- enable experimental code for charset conversion
+
 # Note that this is NOT a relocatable package
 %define ver     @VERSION@
 %define  RELEASE 1
@@ -14,7 +20,9 @@ Source0:   ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/mc-%{PACKAGE_V
 URL:       http://www.gnome.org/mc/
 BuildRoot: /var/tmp/mc-%{PACKAGE_VERSION}-root
 Prereq:    /sbin/chkconfig
-BuildPrereq: glib-devel, slang-devel
+BuildRequires: glib-devel
+%{!?_with_included_slang:BuildRequires: slang-devel}
+%{?_with_ncurses:BuildRequires: ncurses-devel}
 
 %description
 Midnight Commander is a visual shell much like a file manager, only with way
@@ -29,14 +37,11 @@ files, and poke into RPMs for specific files.  :-)
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure \
 	--prefix=%{_prefix} \
 	--mandir=%{_mandir} \
-        --sysconfdir=/etc
+%{?_with_ncurses: --with-ncurses} \
+%{?_with_included_slang: --with-included-slang} \
+%{?_with_charset: --enable-charset}
 
-if [ "$SMP" != "" ]; then
-  (make "MAKE=make -k -j $SMP"; exit 0)
-  make
-else
-  make
-fi
+make
 
 %install
 echo $RPM_BUILD_ROOT
@@ -73,7 +78,7 @@ rm -rf $RPM_BUILD_ROOT
 %config %{_prefix}/lib/mc/mc.ext
 %config %{_prefix}/lib/mc/mc.lib
 %config %{_prefix}/lib/mc/mc.menu
-%config %{_prefix}/lib/mc/mc.charsets
+%{?_with_charset: %config %{_prefix}/lib/mc/mc.charsets}
 %{_prefix}/lib/mc/mc.hint*
 %{_prefix}/lib/mc/mc.hlp*
 %{_prefix}/lib/mc/syntax/*
@@ -83,6 +88,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/lib/mc/syntax
 
 %changelog
+* Tue Aug 20 2002 Pavel Roskin <proski@gnu.org>
+- Support conditional builds.
+
 * Tue Aug 20 2002 Andrew V. Samoilov <sav@bcs.zp.ua>
 - Add /usr/lib/mc/mc.charsets.
 - Add %{_mandir}/*/man1/*.
