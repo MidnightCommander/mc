@@ -1,3 +1,8 @@
+2004-11-08  Pavel S. Shirshov  <me@pavelsh.pp.ru>
+
+	* vfs.c (vfs_prefix_to_class): Avoid last class (localfs) that would
+	accept any prefix.
+
 2004-11-04 Mike Gorchak <mike@malva.ua>
 
         * cpio.c (cpio_create_entry): Added initial support for the Special

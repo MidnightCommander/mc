@@ -154,7 +154,8 @@ vfs_prefix_to_class (char *prefix)
 {
     struct vfs_class *vfs;
 
-    for (vfs = vfs_list; vfs; vfs = vfs->next) {
+    /* Avoid last class (localfs) that would accept any prefix */
+    for (vfs = vfs_list; vfs->next; vfs = vfs->next) {
 	if (vfs->which) {
 	    if ((*vfs->which) (vfs, prefix) == -1)
 		continue;
