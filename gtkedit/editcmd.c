@@ -261,15 +261,27 @@ int edit_save_file (WEdit * edit, const char *filename)
 
     savename = (char *) strdup ((char *) filename);
 
-    if ((fd = open (savename, O_WRONLY)) == -1) {
-	this_save_mode = 0;	/* the file does not exists yet, so no safe save or backup necessary */
+    if (vfs_file_is_local (filename)) {
+	if ((fd = open (savename, O_WRONLY)) == -1) {
+	    /*
+	     * The file does not exists yet, so no safe save or
+	     * backup are necessary.
+	     */
+	    this_save_mode = 0;
+	} else {
+	    close (fd);
+	    this_save_mode = option_save_mode;
+	}
     } else {
-	close (fd);
-	this_save_mode = option_save_mode;
+	/*
+	 * FIXME - rename is not impemented in VFS, so only
+	 * quick save is possible.
+	 */
+	this_save_mode = 0;
     }
 
     if (this_save_mode > 0) {
-	char *savedir, *slashpos;
+	char *savedir, *slashpos, *saveprefix;
 	savedir = (char *) strdup (".");
 	slashpos = strrchr (filename, '/');
 	if (slashpos) {
@@ -279,10 +291,17 @@ int edit_save_file (WEdit * edit, const char *filename)
 	}
 	if (savename)
 	    free (savename);
-	savename = (char *) tempnam (savedir, "cooledit");
+	saveprefix = concat_dir_and_file (savedir, "cooledit");
+	fd = mc_mkstemps(&savename, saveprefix, NULL);
+	g_free (saveprefix);
 	free (savedir);
 	if (!savename)
 	    return 0;
+	/*
+	 * Close for now because it needs to be reopened by
+	 * VFS-aware mc_open() and MY_O_TEXT should be used.
+	 */
+	close (fd);
     }
 
     if ((fd = open (savename, O_CREAT | O_WRONLY | O_TRUNC | MY_O_TEXT,

@@ -1,3 +1,9 @@
+2001-08-01  Pavel Roskin  <proski@gnu.org>
+
+	* editcmd.c (edit_save_file): Temporarily disable safe save
+	and backups on remote VFS because it doesn't work.  Use
+	mc_mkstemps() instead of tempnam().
+
 2001-07-29  Pavel Roskin  <proski@gnu.org>
 
 	* syntax.c (syntax_text): Add support for S-Lang.
