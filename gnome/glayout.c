@@ -621,10 +621,14 @@ create_new_menu (GnomeApp *app, WPanel *panel)
 	gchar *file, *file2;
 	gint pos;
 	GtkWidget *shell;
+	GList *child_list;
 
 	shell = gnome_panel_new_menu[0].widget->parent;
 
 	file = gnome_unconditional_datadir_file ("mc/templates");
+
+	child_list = gtk_container_children (GTK_CONTAINER (shell));
+	pos = g_list_length (child_list);
 	pos = create_new_menu_from (file, shell, pos);
 
 	file2 = gnome_datadir_file ("mc/templates");

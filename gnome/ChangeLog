@@ -1,3 +1,8 @@
+2001-07-25  Pavel Roskin  <proski@gnu.org>
+
+	* glayout.c (create_new_menu): Calculate last position in the
+	menu before using it.
+
 2001-07-24  Pavel Roskin  <proski@gnu.org>
 
 	* gutil.c: Remove broken child management.
