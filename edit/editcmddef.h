@@ -54,6 +54,7 @@
 #define CK_Find_Again		302
 #define CK_Replace		303
 #define CK_Replace_Again	304
+#define CK_Complete_Word	305
 
 /* debugger commands */
 #define CK_Debug_Start		350

@@ -2485,6 +2485,9 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
     case CK_Replace_Again:
 	edit_replace_cmd (edit, 1);
 	break;
+    case CK_Complete_Word:
+	edit_complete_word_cmd (edit);
+	break;
 
     case CK_Exit:
 	edit_quit_cmd (edit);
@@ -2598,6 +2601,7 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
     case CK_Find_Again:
     case CK_Replace:
     case CK_Replace_Again:
+    case CK_Complete_Word:
 	edit->prev_col = edit_get_col (edit);
 	return 1;
 	break;

@@ -266,6 +266,7 @@ void edit_push_markers (WEdit * edit);
 void edit_quit_cmd (WEdit * edit);
 void edit_replace_cmd (WEdit * edit, int again);
 void edit_search_cmd (WEdit * edit, int again);
+void edit_complete_word_cmd (WEdit * edit);
 int edit_save_block (WEdit * edit, const char *filename, long start, long finish);
 int edit_save_block_cmd (WEdit * edit);
 int edit_insert_file_cmd (WEdit * edit);

@@ -2382,3 +2382,253 @@ void edit_mail_dialog (WEdit * edit)
 	pipe_mail (edit, mail_to_last, mail_subject_last, mail_cc_last);
     }
 }
+
+
+/*******************/
+/* Word Completion */
+/*******************/
+
+
+/* find first character of current word */
+static int edit_find_word_start (WEdit *edit, long *word_start, int *word_len)
+{
+    int i, c, last;
+    
+/* return if at begin of file */
+    if (edit->curs1 <= 0)
+	return 0;
+
+    c = (unsigned char) edit_get_byte (edit, edit->curs1 - 1);
+/* return if not at end or in word */
+    if (isspace (c) || !(isalnum (c) || c == '_'))
+	return 0; 
+
+/* search start of word to be completed */
+    for (i = 2;; i++) {
+/* return if at begin of file */
+	if (edit->curs1 - i < 0) 
+	    return 0;
+	    
+	last = c;
+	c = (unsigned char) edit_get_byte (edit, edit->curs1 - i);
+
+	if (!(isalnum (c) || c == '_')) {
+/* return if word starts with digit */
+	    if (isdigit (last))
+		return 0;
+
+	    *word_start = edit->curs1 - (i - 1); /* start found */
+	    *word_len = i - 1;
+	    break;
+	}
+    }
+/* success */
+    return 1;
+}
+
+
+/* (re)set search parameters to the given values */
+static void edit_set_search_parameters (int rs, int rb, int rr, int rw, int rc)
+{
+    replace_scanf = rs;
+    replace_backwards = rb;
+    replace_regexp = rr;
+    replace_whole = rw;
+    replace_case = rc;
+}
+
+
+unsigned int MAX_WORD_COMPLETIONS = 100; /* in listbox */
+unsigned int compl_dlg_h; /* completion dialog height */
+unsigned int compl_dlg_w; /* completion dialog width */
+
+
+/* collect the possible completions */ 
+static int edit_collect_completions (WEdit *edit, long start, 
+    int word_len, char *match_expr, struct selection *compl, int *num)
+{
+    int len, max_len = 0, i, skip;
+    char *bufpos;
+    
+/* collect max MAX_WORD_COMPLETIONS completions */
+    while (*num < MAX_WORD_COMPLETIONS) {
+/* get next match */
+	start = edit_find (start - 1, (unsigned char *) match_expr, &len, 
+	    edit->last_byte, (int (*)(void *, long)) edit_get_byte, 
+	    (void *) edit, 0);
+
+/* not matched */
+	if (start < 0)
+	    break;
+	
+/* add matched completion if not yet added */
+	bufpos = &edit->buffers1[start >> S_EDIT_BUF_SIZE][start & M_EDIT_BUF_SIZE];
+	skip = 0;
+	for (i = 0; i < *num; i++) {
+	    if (strncmp (&compl[i].text[word_len], &bufpos[word_len], 
+		max (len, compl[i].len) - word_len) == 0) {
+		skip = 1;
+		break; /* skip it, already added */
+	    }
+	}
+	if (skip)
+	    continue;
+
+	compl[*num].text = CMalloc (len + 1);
+	compl[*num].len = len;
+	for (i = 0; i < len; i++)
+	    compl[*num].text[i] = *(bufpos + i);
+	compl[*num].text[i] = '\0';
+	(*num)++;
+	
+/* note the maximal length needed for the completion dialog */
+	if (len > max_len)
+	    max_len = len;
+    }
+    return max_len; 
+}
+
+
+/* completion dialog callback */
+static int compl_callback (Dlg_head *h, int key, int Msg)
+{
+    switch (Msg) {
+    case DLG_DRAW:
+	attrset (COLOR_NORMAL);
+	dlg_erase (h);
+	draw_box (h, 0, 0, compl_dlg_h, compl_dlg_w);
+	break;
+    }
+    return 0;
+}
+
+
+static int compllist_callback (void *data)
+{
+    return 0;
+}
+
+
+/* let the user select its preferred completion */
+void edit_completion_dialog (WEdit *edit, int max_len, int word_len, 
+    struct selection *compl, int num_compl)
+{
+    int start_x, start_y, offset, i;
+    char *curr = NULL;
+    Dlg_head *compl_dlg;
+    WListbox *compl_list;
+    	    
+/* calculate the dialog metrics */
+    compl_dlg_h = num_compl + 2;
+    compl_dlg_w = max_len + 4;
+    start_x = edit->curs_col + edit->start_col - (compl_dlg_w / 2);
+    start_y = edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET + 1;
+
+    if (start_x < 0) 
+        start_x = 0;
+    if (compl_dlg_w > COLS) 
+        compl_dlg_w = COLS;
+    if (compl_dlg_h > LINES - 2) 
+        compl_dlg_h = LINES - 2;
+
+    offset = start_x + compl_dlg_w - COLS;
+    if (offset > 0)
+        start_x -= offset;
+    offset = start_y + compl_dlg_h - LINES;
+    if (offset > 0)
+        start_y -= (offset + 1);
+
+/* create the dialog */    
+    compl_dlg = create_dlg (start_y, start_x, compl_dlg_h, compl_dlg_w,
+	dialog_colors, compl_callback, "[Word Completion]", "complete_word", 
+	DLG_NONE);
+	    
+/* create the listbox */
+    compl_list = listbox_new (1, 1, compl_dlg_w - 2, compl_dlg_h - 2, 0, 
+	compllist_callback, NULL);
+	
+/* add the dialog */
+    add_widget (compl_dlg, compl_list);
+
+/* fill the listbox with the completions */
+    for (i = 0; i < num_compl; i++)
+        listbox_add_item (compl_list, 0, 0, compl[i].text, NULL);
+    	    
+/* pop up the dialog */
+    run_dlg (compl_dlg);
+
+/* apply the choosen completion */
+    if (compl_dlg->ret_value == B_ENTER) {
+    	listbox_get_current (compl_list, &curr, NULL);
+	if (curr)
+	    for (curr += word_len; *curr; curr++)
+		edit_insert (edit, *curr);
+    }
+
+/* destroy dialog before return */
+    destroy_dlg (compl_dlg);
+}
+
+
+/* complete current word using regular expression search */
+/* backwards beginning at current cursor position        */
+void edit_complete_word_cmd (WEdit *edit)
+{
+    int word_len = 0, i, num_compl = 0, max_len;
+    long word_start = 0;
+    char *bufpos;
+    char match_expr[MAX_REPL_LEN];
+    struct selection compl[MAX_WORD_COMPLETIONS]; /* completions */
+    
+/* don't want to disturb another search */
+    int old_rs = replace_scanf;
+    int old_rb = replace_backwards;
+    int old_rr = replace_regexp;
+    int old_rw = replace_whole;
+    int old_rc = replace_case;
+
+/* search start of word to be completed */
+    if (!edit_find_word_start (edit, &word_start, &word_len))
+	return;
+
+/* prepare match expression */
+    bufpos = &edit->buffers1[word_start >> S_EDIT_BUF_SIZE]
+			    [word_start & M_EDIT_BUF_SIZE];
+    strncpy (match_expr, bufpos, word_len);
+    match_expr[word_len] = '\0';
+    strcat (match_expr, "[a-zA-Z_0-9]+");
+    
+/* init search: backward, regexp, whole word, case sensitive */
+    edit_set_search_parameters (0, 1, 1, 1, 1);
+
+/* collect the possible completions              */
+/* start search from curs1 down to begin of file */
+    max_len = edit_collect_completions (edit, word_start, word_len, 
+	match_expr, (struct selection *) &compl, &num_compl);
+
+    if (num_compl > 0) {
+/* insert completed word if there is only one match */
+	if (num_compl == 1) {
+	    for (i = word_len; i < compl[0].len; i++)
+		edit_insert (edit, *(compl[0].text + i));
+	} 
+/* more than one possible completion => ask the user */
+	else {
+/* !!! usually only a beep is expected and when <ALT-TAB> is !!! */
+/* !!! pressed again the selection dialog pops up, but that  !!! */
+/* !!! seems to require a further internal state	     !!! */
+	    /*beep ();*/
+    
+/* let the user select the preferred completion */
+	    edit_completion_dialog (edit, max_len, word_len, 
+		(struct selection *) &compl, num_compl);
+	}
+    }
+    
+/* release memory before return */
+    for (i = 0; i < num_compl; i++)
+        free (compl[i].text);
+
+/* restore search parameters */
+    edit_set_search_parameters (old_rs, old_rb, old_rr, old_rw, old_rc);
+}

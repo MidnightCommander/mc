@@ -1,3 +1,12 @@
+2002-01-21  Matthias Urban  <murban@cs.uni-magdeburg.de>
+
+	* edit.c: Add support for CK_Complete_Word event.
+	* editcmddef.h: Likewise.
+	* edit_key_translator.c (cooledit_key_map): Bind Alt-Tab to
+	CK_Complete_Word.
+	(emacs_key_map): Likewise.
+	* editcmd.c: Implement word completion.
+
 2002-01-21  Pavel Roskin  <proski@gnu.org>
 
 	* editmenu.c (CmdMenuEmacs): Add mail command without shortcut.
