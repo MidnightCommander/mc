@@ -43,7 +43,6 @@
 #define UX		4
 #define UY		3
 
-#define BX		25
 #define BY		UY + 17
 
 #define ROWS		13
@@ -53,10 +52,11 @@
 
 struct {
     int ret_cmd, flags, y, x;
+	unsigned int hotkey;
     char *text;
 } learn_but[BUTTONS] = {
-    { B_CANCEL, NORMAL_BUTTON, 0, 14, N_("&Cancel") },
-    { B_ENTER, DEFPUSH_BUTTON, 0,  0, N_("&Save") }
+    { B_CANCEL, NORMAL_BUTTON, 0, 39, 'C', N_("&Cancel") },
+    { B_ENTER, DEFPUSH_BUTTON, 0, 25, 'S', N_("&Save") }
 };
 
 static Dlg_head *learn_dlg;
@@ -70,6 +70,7 @@ static learnkey *learnkeys = NULL;
 static int learn_total;
 static int learnok;
 static int learnchanged;
+static char* learn_title = N_(" Learn keys ");
 
 #ifndef HAVE_X
 static void learn_refresh (void)
@@ -77,11 +78,11 @@ static void learn_refresh (void)
     attrset (COLOR_NORMAL);
     dlg_erase (learn_dlg);
     
-    draw_box (learn_dlg, 1, 2, 21, 73);
+    draw_box (learn_dlg, 1, 2, learn_dlg->lines - 2, learn_dlg->cols - 4);
     
     attrset (COLOR_HOT_NORMAL);
-    dlg_move (learn_dlg, 1, (72 - 12) / 2);
-    addstr (" Learn keys ");
+    dlg_move (learn_dlg, 1, (learn_dlg->cols - strlen (learn_title)) / 2);
+    addstr (learn_title);
 }
 #endif
 
@@ -171,13 +172,13 @@ static int learn_check_key (int c)
 	        if (learnok >= learn_total) {
 	            learn_dlg->ret_value = B_CANCEL;
 	            if (learnchanged) {
-	                if (query_dialog (_(" Learn keys "), 
+	                if (query_dialog (learn_title, 
 			    _("It seems that all your keys already\n"
 			      "work fine. That's great."),
 	                    1, 2, _("&Save"), _("&Discard")) == 0)
 	                    learn_dlg->ret_value = B_ENTER;
 	            } else {
-	            	message (1, _(" Learn keys "),
+	            	message (1, learn_title,
 			_("Great! You have a complete terminal database!\n"
 			  "All your keys work well."));
 	            }
@@ -200,14 +201,18 @@ static int learn_check_key (int c)
         case 'k':
             dlg_one_up (learn_dlg);
             return 1;
-        case 's':
-        case 'S':
-        case 'c':
-        case 'C':
-            /* Prevent from disappearing if a non-defined sequence is pressed
-               and contains s or c. Use ALT('s') or ALT('c'). */
-            return 1;
     }    
+
+    /* Prevent from disappearing if a non-defined sequence is pressed
+       and contains s or c. Use ALT('s') or ALT('c'). */
+	if (c < 255 && isalpha(c))
+	{
+		c = toupper(c);
+		for (i = 0; i < BUTTONS; i++)
+			if (c == learn_but [i].hotkey)
+				return 1;
+	}
+
     return 0;
 }
 
@@ -228,15 +233,39 @@ static void init_learn (void)
     int x, y, i, j;
     key_code_name_t *key;
     char buffer [22];
+	static int i18n_flag = 0;
 
     do_refresh ();
+
+#ifdef ENABLE_NLS
+	if (!i18n_flag)
+	{
+		char* cp;
+		
+		learn_but [0].text = _(learn_but [0].text);
+		learn_but [0].x = 78 / 2 + 4;
+
+		learn_but [1].text = _(learn_but [1].text);
+		learn_but [1].x = 78 / 2 - (strlen (learn_but [1].text) + 9);
+
+		for (i = 0; i < BUTTONS; i++)
+		{
+			cp = strchr(learn_but [i].text, '&');
+			if (cp != NULL && *++cp != '\0')
+				learn_but [i].hotkey = toupper(*cp);
+		}
+
+		learn_title = _(learn_title);
+		i18n_flag = 1;
+	}
+#endif /* ENABLE_NLS */
 
     learn_dlg = create_dlg (0, 0, 23, 78, dialog_colors,
 			      learn_callback, "[Learn keys]", "Learn keys",
 			      DLG_CENTER);
     x_set_dialog_title (learn_dlg, _("Learn keys"));
 
-#define XTRACT(i) BY+learn_but[i].y, BX+learn_but[i].x, learn_but[i].ret_cmd, learn_but[i].flags, _(learn_but[i].text), 0, 0, NULL
+#define XTRACT(i) BY+learn_but[i].y, learn_but[i].x, learn_but[i].ret_cmd, learn_but[i].flags, _(learn_but[i].text), 0, 0, NULL
 
     for (i = 0; i < BUTTONS; i++)
 	add_widget (learn_dlg, button_new (XTRACT (i)));

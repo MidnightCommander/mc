@@ -65,11 +65,11 @@ extern int verbose;		/* Should be in a more sensible header file */
 
 /* Size of the find parameters window */
 #define FIND_Y 12
-#define FIND_X 50
+static int FIND_X = 50;
 
 /* Size of the find window */
 #define FIND2_Y LINES-4
-#define FIND2_X COLS-16
+static int FIND2_X = 64;
 
 #ifdef HAVE_X
 #   define FIND2_X_USE 35
@@ -116,6 +116,21 @@ typedef struct dir_stack {
 
 dir_stack *dir_stack_base = 0;
 
+static struct {
+	char* text;
+	int len;	/* length including space and brackets */
+	int x;
+} fbuts [] = {
+	{ N_("&Suspend"),   11, 29 },
+	{ N_("&Continue"),  12, 29 },
+	{ N_("&Chdir"),     11, 3  },
+	{ N_("&Again"),     9,  17 },
+	{ N_("&Quit"),      8,  43 },
+	{ N_("Pane&lize"),  12, 3  },
+	{ N_("&View - F3"), 13, 20 },
+	{ N_("&Edit - F4"), 13, 38 }
+};
+
 /*
  * find_parameters: gets information from the user
  *
@@ -139,6 +154,48 @@ find_parameters (char **start_dir, char **pattern, char **content)
     static char *in_start_dir = NULL;
     static char *in_start_name = NULL;
 
+	static char* labs[] = {N_("Start at:"), N_("Filename:"), N_("Content: ")};
+	static char* buts[] = {N_("&Ok"), N_("&Tree"), N_("&Cancel")};
+	static int ilen = 30, istart = 14;
+	static int b0 = 3, b1 = 16, b2 = 36;
+
+#ifdef ENABLE_NLS
+	static int i18n_flag = 0;
+	
+	if (!i18n_flag)
+	{
+		register int i = sizeof(labs)/sizeof(labs[0]);
+		int l1, maxlen = 0;
+		
+		while (i--)
+		{
+			l1 = strlen (labs [i] = _(labs [i]));
+			if (l1 > maxlen)
+				maxlen = l1;
+		}
+		i = maxlen + ilen + 7;
+		if (i > FIND_X)
+			FIND_X = i;
+		
+		for (i = sizeof(buts)/sizeof(buts[0]), l1 = 0; i--; )
+		{
+			l1 += strlen (buts [i] = _(buts [i]));
+		}
+		l1 += 21;
+		if (l1 > FIND_X)
+			FIND_X = l1;
+
+		ilen = FIND_X - 7 - maxlen; /* for the case of very long buttons :) */
+		istart = FIND_X - 3 - ilen;
+		
+		b1 = b0 + strlen(buts[0]) + 7;
+		b2 = FIND_X - (strlen(buts[2]) + 6);
+		
+		i18n_flag = 1;
+	}
+	
+#endif /* ENABLE_NLS */
+
 find_par_start:
     if (!in_start_dir)
 	in_start_dir = strdup (".");
@@ -152,28 +209,25 @@ find_par_start:
 			   DLG_CENTER | DLG_GRID);
     x_set_dialog_title (find_dlg, _("Find File"));
 
-    add_widgetl (find_dlg, button_new (9, 36, B_CANCEL, NORMAL_BUTTON,
-	_("&Cancel"), 0 ,0, "cancel"), XV_WLAY_RIGHTOF);
-    add_widgetl (find_dlg, button_new (9, 16, B_TREE, NORMAL_BUTTON,
-	_("&Tree"), 0, 0, "tree"), XV_WLAY_RIGHTOF);
-    add_widgetl (find_dlg, button_new (9, 4, B_ENTER, DEFPUSH_BUTTON,
-	_("&Ok"), 0, 0, "ok"), XV_WLAY_CENTERROW);
+	add_widgetl (find_dlg, button_new (9, b2, B_CANCEL, NORMAL_BUTTON,
+		buts[2], 0 ,0, "cancel"), XV_WLAY_RIGHTOF);
+	add_widgetl (find_dlg, button_new (9, b1, B_TREE, NORMAL_BUTTON,
+		buts[1], 0, 0, "tree"), XV_WLAY_RIGHTOF);
+	add_widgetl (find_dlg, button_new (9, b0, B_ENTER, DEFPUSH_BUTTON,
+		buts[0], 0, 0, "ok"), XV_WLAY_CENTERROW);
 
-    in_with  = input_new (7, 14, INPUT_COLOR, 30, in_contents, "content");
+	in_with  = input_new (7, istart, INPUT_COLOR, ilen,	in_contents, "content");
     add_widgetl (find_dlg, in_with, XV_WLAY_BELOWOF);
 
-    in_name  = input_new (5, 14, INPUT_COLOR, 30, in_start_name, "name");
+	in_name  = input_new (5, istart, INPUT_COLOR, ilen, in_start_name, "name");
     add_widgetl (find_dlg, in_name, XV_WLAY_BELOWOF);
 
-    in_start = input_new (3, 14, INPUT_COLOR, 30, in_start_dir, "start");
+	in_start = input_new (3, istart, INPUT_COLOR, ilen,	in_start_dir, "start");
     add_widgetl (find_dlg, in_start, XV_WLAY_NEXTCOLUMN);
 
-    add_widgetl (find_dlg, label_new (7, 3, _("Content: "), "label-cont"),
-	XV_WLAY_BELOWOF);
-    add_widgetl (find_dlg, label_new (5, 3, _("Filename:"), "label-file"),
-	XV_WLAY_BELOWOF);
-    add_widgetl (find_dlg, label_new (3, 3, _("Start at:"), "label-start"),
-	XV_WLAY_NEXTCOLUMN);
+	add_widgetl (find_dlg, label_new (7, 3, labs[2], "label-cont"), XV_WLAY_BELOWOF);
+	add_widgetl (find_dlg, label_new (5, 3, labs[1], "label-file"), XV_WLAY_BELOWOF);
+	add_widgetl (find_dlg, label_new (3, 3, labs[0], "label-start"), XV_WLAY_NEXTCOLUMN);
 
     run_dlg (find_dlg);
     if (find_dlg->ret_value == B_CANCEL)
@@ -601,13 +655,12 @@ find_callback (struct Dlg_head *h, int id, int Msg)
 static int
 start_stop (int button, void *extra)
 {
-    char *button_labels [2] = { "Stop", "Start" };
     running = is_start;
     set_idle_proc (find_dlg, running);
     is_start = !is_start;
 
     label_set_text (status_label, is_start ? _("Stopped") : _("Searching"));
-    button_set_text (stop_button, _(button_labels [is_start]));
+    button_set_text (stop_button, fbuts [is_start].text);
 
     return 0;
 }
@@ -651,27 +704,77 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
     int return_value = 0;
     char *dir;
     char *dir_tmp, *file_tmp;
+
+#ifdef ENABLE_NLS
+	static int i18n_flag = 0;
+	if (!i18n_flag)
+	{
+		register int i = sizeof (fbuts) / sizeof (fbuts[0]);
+		while (i--)
+			fbuts [i].len = strlen (fbuts [i].text = _(fbuts [i].text)) + 3;
+		fbuts [2].len += 2; /* DEFPUSH_BUTTON */
+		i18n_flag = 1;
+	}
+#endif /* ENABLE_NLS */
+
+	/*
+	 * Dynamically place buttons centered within current window size
+	 */
+	{
+		int l0 = max (fbuts[0].len, fbuts[1].len);
+		int l1 = fbuts[2].len + fbuts[3].len + l0 + fbuts[4].len;
+		int l2 = fbuts[5].len + fbuts[6].len + fbuts[7].len;
+		int r1, r2;
+		
+		FIND2_X = COLS - 16;
+
+		/* Check, if both button rows fit within FIND2_X */
+		if (l1 + 9 > FIND2_X) FIND2_X = l1 + 9;
+		if (l2 + 8 > FIND2_X) FIND2_X = l2 + 8;
+
+		/* compute amount of space between buttons for each row */
+		r1 = (FIND2_X - 4 - l1) % 5;
+		l1 = (FIND2_X - 4 - l1) / 5;
+		r2 = (FIND2_X - 4 - l2) % 4;
+		l2 = (FIND2_X - 4 - l2) / 4;
+
+		/* ...and finally, place buttons */
+		fbuts [2].x = 2 + r1/2 + l1;
+		fbuts [3].x = fbuts [2].x + fbuts [2].len + l1;
+		fbuts [0].x = fbuts [3].x + fbuts [3].len + l1;
+		fbuts [4].x = fbuts [0].x + l0 + l1;
+		fbuts [5].x = 2 + r2/2 + l2;
+		fbuts [6].x = fbuts [5].x + fbuts [5].len + l2;
+		fbuts [7].x = fbuts [6].x + fbuts [6].len + l2;
+	}
     
     find_dlg = create_dlg (0, 0, FIND2_Y, FIND2_X, dialog_colors,
 			   find_callback, "[Find File]", "mfind", DLG_CENTER | DLG_GRID);
     
     x_set_dialog_title (find_dlg, _("Find file"));
 
-    add_widgetl (find_dlg,
-    button_new (FIND2_Y-3, 32, B_VIEW, NORMAL_BUTTON, _("&Edit - F4"), find_do_edit_file, find_dlg, "button-edit"), 0);
-    add_widgetl (find_dlg,
-    button_new (FIND2_Y-3, 17, B_VIEW, NORMAL_BUTTON, _("&View - F3"), find_do_view_file, find_dlg, "button-view"), 0);
-    add_widgetl (find_dlg,
-	button_new (FIND2_Y-3, 3, B_PANELIZE, NORMAL_BUTTON, _("Pane&lize"), 0, 0, "button-panelize"),
-	XV_WLAY_CENTERROW);
-    add_widgetl (find_dlg, button_new (FIND2_Y-4, 37, B_CANCEL, NORMAL_BUTTON, _("&Quit"), 0, 0, "button-quit"), 
-        XV_WLAY_RIGHTOF);
-    stop_button = button_new (FIND2_Y-4, 27, B_STOP, NORMAL_BUTTON, _("&Stop"), start_stop, find_dlg, "start-stop");
-    add_widgetl (find_dlg, stop_button, XV_WLAY_RIGHTOF);
-    add_widgetl (find_dlg, button_new (FIND2_Y-4, 16, B_AGAIN, NORMAL_BUTTON, _("&Again"), 0, 0, "button-again"),
-        XV_WLAY_RIGHTOF);
-    add_widgetl (find_dlg, button_new (FIND2_Y-4, 3, B_ENTER, DEFPUSH_BUTTON, _("&Chdir"), 0, 0, "button-chdir"),
-        XV_WLAY_CENTERROW);
+	add_widgetl (find_dlg,
+		button_new (FIND2_Y-3, fbuts[7].x, B_VIEW, NORMAL_BUTTON, 
+			fbuts[7].text, find_do_edit_file, find_dlg, "button-edit"), 0);
+	add_widgetl (find_dlg,
+		button_new (FIND2_Y-3, fbuts[6].x, B_VIEW, NORMAL_BUTTON,
+			fbuts[6].text, find_do_view_file, find_dlg, "button-view"), 0);
+	add_widgetl (find_dlg,
+		button_new (FIND2_Y-3, fbuts[5].x, B_PANELIZE, NORMAL_BUTTON,
+			fbuts[5].text, 0, 0, "button-panelize"), XV_WLAY_CENTERROW);
+
+	add_widgetl (find_dlg,
+		button_new (FIND2_Y-4, fbuts[4].x, B_CANCEL, NORMAL_BUTTON,
+			fbuts[4].text, 0, 0, "button-quit"), XV_WLAY_RIGHTOF);
+    stop_button = button_new (FIND2_Y-4, fbuts[0].x, B_STOP, NORMAL_BUTTON,
+		fbuts[0].text, start_stop, find_dlg, "start-stop");
+	add_widgetl (find_dlg, stop_button, XV_WLAY_RIGHTOF);
+	add_widgetl (find_dlg,
+		button_new (FIND2_Y-4, fbuts[3].x, B_AGAIN, NORMAL_BUTTON, 
+			fbuts[3].text, 0, 0, "button-again"), XV_WLAY_RIGHTOF);
+	add_widgetl (find_dlg, 
+		button_new (FIND2_Y-4, fbuts[2].x, B_ENTER, DEFPUSH_BUTTON,
+			fbuts[2].text, 0, 0, "button-chdir"), XV_WLAY_CENTERROW);
 
     status_label = label_new (FIND2_Y-6, 4, _("Searching"), "label-search");
     add_widgetl (find_dlg, status_label, XV_WLAY_BELOWOF);

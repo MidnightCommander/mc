@@ -562,7 +562,7 @@ int get_key_code (int no_delay)
 	    else {
 	        if (parent != NULL && parent->action == MCKEY_ESCAPE) {
 	            /* This is just to save a lot of define_sequences */
-	            if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
+	            if (isalpha(c)
 			|| (c == '\n') || (c == '\t') || (c == XCTRL('h'))
 			|| (c == KEY_BACKSPACE) || (c == '!') || (c == '\r')
 			|| c == 127 || c == '+' || c == '-' || c == '\\' 

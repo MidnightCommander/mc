@@ -1,11 +1,11 @@
 
 [display-Widget-cancel-button]
 geometry=4,10,1,1
-flags=ew
+flags=
 
 [display-Widget-ok-button]
 geometry=2,10,1,1
-flags=ew
+flags=
 
 [display-Frame-Frame-0]
 geometry=0,0,6,5
@@ -581,7 +581,7 @@ flags=w
 
 [sort-Widget-cancel-button]
 geometry=4,2,1,1
-flags=
+flags=ew
 
 [sort-Widget-radio-1]
 geometry=1,1,1,6

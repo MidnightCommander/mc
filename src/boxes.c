@@ -473,6 +473,43 @@ void display_bits_box ()
 {
     int current_mode;
 
+#ifdef ENABLE_NLS
+	static int i18n_flag = 0;
+	if (!i18n_flag)
+	{
+		register int i;
+		int l1, maxlen = 0;
+		for (i = 0; i < 3; i++)
+		{
+			display_widgets [i].text = _(display_widgets[i].text);
+			display_bits_str [i] = _(display_bits_str [i]);
+			l1 = strlen (display_bits_str [i]);
+			if (l1 > maxlen)
+				maxlen = l1;
+		}
+		l1 = strlen (display_widgets [2].text);
+		if (l1 > maxlen)
+			maxlen = l1;
+		
+
+		display_bits.xlen = (maxlen + 5) * 6 / 4;
+
+		/* See above confirm_box */
+		l1 = strlen (display_widgets [0].text) + 3;
+		i = strlen (display_widgets [1].text) + 5;
+		if (i > l1)
+			l1 = i;
+
+		i = (l1 + 3) * 6 / 2;
+		if (i > display_bits.xlen)
+			display_bits.xlen = i;
+
+		display_bits.title = _(display_bits.title);
+		i18n_flag = display_bits.i18n = 1;
+	}
+
+#endif /* ENABLE_NLS */
+
     if (full_eight_bits)
 	current_mode = 0;
     else if (eight_bit_clean)

@@ -215,12 +215,29 @@ button_len (const char *text, unsigned int flags)
 #endif
 }
 
+/*
+ * Assuming that button text is malloc'ed, we may safely change it
+ * (as opposed to statically allocated); from other hand, excluding &
+ * and shifting data past it to the left results to one unused byte.
+ * This does not harm though :)
+ */
+void
+button_scan_hotkey(WButton* b)
+{
+	char* cp = strchr(b->text,'&');
+    if (cp != NULL && cp[1] != '\0')
+	{
+		strcpy(cp, cp+1);
+		b->hotkey = tolower(*cp);
+		b->hotpos = cp - b->text;
+	}
+}
+
 WButton *
 button_new (int y, int x, int action, int flags, char *text, 
 	    int (*callback)(int, void *), void *callback_data, char *tkname)
 {
     WButton *b = xmalloc (sizeof (WButton), "new_button");
-    char *s, *t;
 
     init_widget (&b->widget, y, x, 1, button_len (text, flags),
 		 (callback_fn) button_callback,
@@ -235,21 +252,8 @@ button_new (int y, int x, int action, int flags, char *text,
     widget_want_hotkey (b->widget, 1);
     b->hotkey = 0;
     b->hotpos = -1;
-    
-    /* Scan for the hotkey */
-    for (s = text, t = b->text; *s; s++, t++){
-	if (*s != '&'){
-	    *t = *s;
-	    continue;
-	}
-	s++;
-	*t = *s;
-	if (*s){
-	    b->hotkey = tolower (*s);
-	    b->hotpos = t - b->text;
-	}
-    }    
-    *t = 0;
+
+    button_scan_hotkey(b);
     return b;
 }
 
@@ -259,8 +263,9 @@ button_set_text (WButton *b, char *text)
     free (b->text);
     b->text = strdup (text);
     b->widget.cols = button_len (text, b->flags);
+    button_scan_hotkey(b);
 #ifdef HAVE_X
-    x_button_set (b, text);
+    x_button_set (b, b->text);
 #else
     dlg_redraw (b->widget.parent);
 #endif

@@ -260,12 +260,15 @@ x_create_input (Dlg_head *h, widget_data parent, WInput *in)
 void
 x_update_input (WInput *in)
 {
-	GnomeEntry *gnome_entry = GNOME_ENTRY (in->widget.wdata);
-	GtkEntry   *entry = GTK_ENTRY (gnome_entry_gtk_entry (gnome_entry));
-	
+	GnomeEntry *gnome_entry;
+	GtkEntry   *entry;
+
 	/* If the widget has not been initialized yet (done by WIDGET_INIT) */
-	if (!entry)
+	if (!in->widget.wdata)
 		return;
+	
+	gnome_entry = GNOME_ENTRY (in->widget.wdata);
+	entry = GTK_ENTRY (gnome_entry_gtk_entry (gnome_entry));
 	
 	gtk_entry_set_text (entry, in->buffer);
 	gtk_entry_set_position (entry, in->point);

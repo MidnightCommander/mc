@@ -595,8 +595,8 @@ static int dlg_try_hotkey (Dlg_head *h, int d_key)
     
     /* If it's an alt key, send the message */
     c = d_key & ~ALT(0);
-    if (d_key & ALT(0) && c >= 'A' && c <= 'z')
-	d_key = c;
+    if (d_key & ALT(0) && c < 255 && isalpha(c))
+	d_key = tolower(c);
 
 #ifdef _OS_NT
 	/* .ado: fix problem with file_permission under Win95 */

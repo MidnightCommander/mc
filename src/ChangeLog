@@ -1,3 +1,18 @@
+Wed Apr  8 11:15:29 1998 Alex Tkachenko <alex@bcs.zp.ua>
+
+	* src/find.c: changes to find_parameters/find_file i18n.
+
+	* src/widget.c: new function introduced, button_scan_hotkey();
+	button_new() and button_set_text() fixed to use mentioned function.
+	
+	* src/key.[ch], src/dlg.c: changes to make recognition of ESC char as 
+	ALT(c) possible for 8-bit chars. (By replacing 'A'/'Z' comparisons with
+	call to isalpha() in the way proposed by Norbert).
+
+	* src/boxes.c: changes to display box i18n
+	
+	* src/learn.c: changes to learn key dialog i18n
+
 1998-04-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* main.c (update_one_panel_widget): New routine: Updates a panel

@@ -52,7 +52,7 @@ int is_abort_char (int c);
 int is_quit_char (int c);
 
 #define XCTRL(x) ((x) & 31)
-#define ALT(x) (0x200 | (x))
+#define ALT(x) (0x200 | (unsigned int)(x))
 
 /* To define sequences and return codes */
 #define MCKEY_NOACTION	0
