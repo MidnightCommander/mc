@@ -1607,7 +1607,7 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
     num_cols = vfs_split_text (p);
 
     s->st_nlink = atol (columns [0]);
-    if (s->st_nlink <= 0)
+    if (s->st_nlink < 0)
         goto error;
 
     if (!is_num (1))

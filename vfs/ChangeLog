@@ -1,3 +1,8 @@
+1999-03-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* vfs.c (vfs_parse_ls_lga): Handle stupid servers that send n_link
+	set to zero.
+
 1999-03-11  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* vfs.h: Make it compile in AIX.  Boy do those guys polute the
