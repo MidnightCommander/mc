@@ -308,10 +308,9 @@ check_hardlinks (char *src_name, char *dst_name, struct stat *pstat)
     struct stat link_stat;
     char *p;
 
-#if 1				/* What will happen if we kill this line? mc_link() will fail on this and it is right behavior... */
-    if (vfs_file_is_ftp (src_name) || vfs_file_is_smb (src_name))
+    if (vfs_file_class_flags (src_name) & VFSF_NOLINKS)
 	return 0;
-#endif
+
     for (lp = linklist; lp != NULL; lp = lp->next)
 	if (lp->vfs == my_vfs && lp->ino == ino && lp->dev == dev) {
 	    if (!mc_stat (lp->name, &link_stat) && link_stat.st_ino == ino
