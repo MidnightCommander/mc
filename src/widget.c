@@ -187,10 +187,8 @@ button_len (const char *text, unsigned int flags)
 }
 
 /*
- * Assuming that button text is malloc'ed, we may safely change it
- * (as opposed to statically allocated); from other hand, excluding &
- * and shifting data past it to the left results to one unused byte.
- * This does not harm though :)
+ * Locate the hotkey and remove it from the button text.  Assuming that
+ * the button text is g_malloc()ed, we can safely change and shorten it.
  */
 static void
 button_scan_hotkey(WButton* b)
