@@ -1,3 +1,12 @@
+2001-07-19  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Comment changes.  Remove rules for programs -
+	they were only used in obsolete frontends.  Don't ever use %view
+	without commands - it's slower and loses user settings, e.g.
+	hex mode.  Put shared libraries before man pages and read.me
+	before .me macros so that they match correctly.  Use nm for
+	shared libraries.  Add rules for StarOffice and AbiWord.
+
 2001-07-14  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Bump version to 4.5.54a.

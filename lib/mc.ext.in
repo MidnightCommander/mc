@@ -12,10 +12,10 @@
 #          i.e. matches all the files *desc . Example: .tar matches *.tar;
 #          if it doesn't start with a dot, it matches only a file of that name)
 #
-#    regex (desc is a regular expression)
+#    regex (desc is an extended regular expression)
 #          Please note that we are using the GNU regex library and thus
 #          \| matches the literal | and | has special meaning (or) and
-#          () have special meaning and \( \) are standing for literal ( ).
+#          () have special meaning and \( \) stand for literal ( ).
 #
 #    type  (file matches this if `file %f` matches regular expression desc
 #          (the filename: part from `file %f` is removed))
@@ -26,7 +26,7 @@
 #
 #    default (matches any file no matter what desc is)
 #
-# Other lines should start with a space or tab and should be of the format:
+# Other lines should start with a space or tab and should be in the format:
 #
 # keyword=commandNL (with no spaces around =), where keyword should be: 
 #
@@ -34,7 +34,7 @@
 #
 #    View (F3), Edit (F4), Drop (user drops some files on it) or any other
 #
-#    user defined name (those will be listed in the extension dependent pop-up
+#    user defined name (those will be listed in the extension dependent popup
 #    menu). This is not implemented yet for the text edition but will be
 #    implemented some day so feel free to add useful actions here.
 #
@@ -66,37 +66,34 @@
 # But you shouldn't have to use it in this file.)
 #
 #
-# %cd -> the rest is not command, but a path which will mc cd internally
-#       into (cd wouldn't work, since it is a child process, and %cd handles 
-#       even the vfs names
+# %cd -> the rest is a path mc should change into (cd won't work, since it's
+#	a child process).  %cd handles even vfs names.
 #
 # %view -> the command you type will be piped into mc's internal file viewer
 #	if you type only the %view and no command, viewer will load %f file
 #	instead (i.e. no piping, so it is different to %view cat %f)
 #	%view may be directly followed by {} with a list of any of
-#	ascii (Ascii mode), hex (Hex mode), nroff (c\bc color highlighting)
-#	and unformatted (not highlighting nroff sequences) separated by
-#	spaces.
+#	ascii (Ascii mode), hex (Hex mode), nroff (color highlighting for
+#	text using backspace for bold and underscore) and unform
+#	(no highlighting for nroff sequences) separated by commas.
 #
-# %var -> You use it like this: %var{ENV-VAR:default}.  This macro will expand
-#       to the value of the ENV-VAR variable in the environement if it is set
+# %var -> You use it like this: %var{VAR:default}.  This macro will expand
+#       to the value of the VAR variable in the environment if it's set
 #       otherwise the value in default will be used.  This is similar to
-#       the Bourne shell ${VAR-def} construct.  We use it so that the extension
-#       file could be used unchanged under some shells that may use different
-#       methods of doing this
+#       the Bourne shell ${VAR-default} construct.
 #
 # %q -> will be replaced with a list of files user dropped on it
 #	with full pathnames (only applicable in the Drop command).
 #
-# Target are evaluted from top to bottom (order is thus important).
+# Rules are applied from top to bottom, thus the order is important.
 # If some actions are missing, search continues as if this target didn't
 # match (i.e. if a file matches the first and second entry and View action
 # is missing in the first one, then on pressing F3 the View action from
 # the second entry will be used. default should catch all the actions.
 #
-# Any handy entries you develop for you are always welcome, if it has
-# wider usage than on one system. You can send your modifications to
-# via email to mc-devel@gnome.org
+# Any new entries you develop for you are always welcome if they are
+# useful on more than one system.  You can send your modifications
+# by e-mail to mc-devel@gnome.org
 
 
 ### Changes ###
@@ -119,61 +116,17 @@
 # Maybe:	Open/XOpen/GOpen/KOpen/... for Console/X/GNOME/KDE/etc.
 
 
-### Programs ###
-
-shell/rm
-	Open=if test ! -d ~/.trash; then mkdir ~/.trash; fi; I=%{Enter file to be safely deleted}; if test -n "$I"; then mv -f -b -V numbered %q ~/.trash; fi
-	Drop=if test ! -d ~/.trash; then mkdir ~/.trash; fi; mv -f -b -V numbered %q ~/.trash
-	Flush=rm -rf ~/.trash
-	Title=Safe delete
-
-shell/lpr
-	Open=lpr %{Enter file(s) to print}
-	Drop=lpr %q
-	Print=lpr %{Enter file(s) to print}
-
-shell/gzip
-	Open=gzip %{Enter file to gzip}
-	Drop=gzip %q
-
-shell/bzip
-	Open=bzip %{Enter file to bzip}
-	Drop=bzip %q
-
-shell/bzip2
-	Open=bzip2 %{Enter file to bzip}
-	Drop=bzip2 %q
-
-shell/gunzip
-	Open=gunzip %{Enter file to gunzip}
-	Drop=gunzip %q
-
-shell/bunzip
-	Open=bunzip %{Enter file to bunzip}
-	Drop=bunzip %q
-
-shell/bunzip2
-	Open=bunzip2 %{Enter file to bunzip}
-	Drop=bunzip2 %q
-
-shell/gdb
-	Open=gdb
-	Drop=gdb %q
-
-
 ### Sources ###
 
 # C
 shell/.c
 	Open=%var{EDITOR:vi} %f
-	View=%view{ascii}
 	Compile=%var{CC:cc} -O -c %f
 	Link=%var{CC:cc} -O -o %d/`basename %f .c` %f
 
 # Fortran
 shell/.f
 	Open=%var{EDITOR:vi} %f
-	View=%view{ascii}
 	Compile=f77 -O -c %f
 	Compile and Link=f77 -O %f
 	
@@ -197,7 +150,6 @@ shell/.s
 # C++
 regex/\.(C|cc)$
 	Open=%var{EDITOR:vi} %f
-	View=%view{ascii}
 	Compile=c++ -O -c %f
 	Link=c++ -O -o %d/`basename %f .c` %f
 
@@ -214,11 +166,20 @@ shell/.info
 	Open=info --directory %d -f %p
 
 # Manual page
+# Exception - .so libraries are not manual pages
+regex/\.(so|so\.[0-9\.]*)$
+	View=%view{ascii} nm %f
+
 regex/(([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|n)|\.man)$
 	Open=nroff @TROFFASCII@ @MANDOC@ %f | %var{PAGER:more}
 	View=%view{ascii,nroff} nroff @TROFFASCII@ @MANDOC@ %f
 
 # Troff with me macros.
+# Exception - "read.me" is not a nroff file.
+shell/read.me
+	Open=
+	View=
+
 shell/.me
 	Open=nroff @TROFFASCII@ -me %f | %var{PAGER:more}
 	View=%view{ascii,nroff} nroff @TROFFASCII@ -me %f
@@ -240,8 +201,6 @@ regex/([^0-9]|^[^\.]*)\.([1-9][a-z]?|n)\.bz$
 regex/([^0-9]|^[^\.]*)\.([1-9][a-z]?|n)\.bz2$
 	Open=bzip2 -dc %f | nroff @TROFFASCII@ @MANDOC@ | %var{PAGER:more}
 	View=%view{ascii,nroff} bzip2 -dc %f | nroff @TROFFASCII@ @MANDOC@
-
-regex/(read\.?me$|README)
 
 
 ### Images ###
@@ -343,6 +302,14 @@ regex/\.([Hh]tml?|HTML?)$
 	Run with AppletViewer=appletviewer %f
 	View with @X11_WWW@=@X11_WWW@ file://%f
 
+# StarOffice and OpenOffice
+shell/.sdw
+	Open=soffice %f
+
+# AbiWord
+shell/.abw
+	Open=abiword %f
+
 # Microsoft Word Document
 regex/\.([Dd]o[ct]|DO[CT]|[Ww]ri|WRI)$
 	View=%view{ascii} catdoc -w %f || word2x -f text %f - || strings %f
@@ -396,7 +363,6 @@ shell/Imakefile
 # Executables
 type/\ executable
 	Open=./%f
-	View=%view
 	Drop=%f %q
 	Execute in XTerm=xterm -e %f &
 	View Required Libraries=%view{ascii} ldd %f
@@ -529,14 +495,9 @@ regex/\.s?a$
 	#Open=%view{ascii} ar tv %f
 	View=%view{ascii} nm %f
 
-# .so libraries are not manual pages
-regex/\.(so|so\.[0-9\.]*)$
-	View=%view{hex}
-
 # ls-lR
 regex/(^|\.)ls-?lR$
 	Open=%cd %p#lslR
-	View=%view{ascii}
 regex/(^|\.)ls-?lR\.(g?z|Z)$
 	Open=%cd %p#lslR
 	View=%view{ascii} gunzip -c %f
@@ -588,7 +549,7 @@ directory/^.*$
 # Default target for anything not described above
 default/*
 	Open=
-	View=%view{ascii}
+	View=
 	Drop=
 	Title=%p
 
