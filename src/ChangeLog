@@ -1,4 +1,9 @@
-2005-02-12  Jindrich Novy <jnovy@redhat.com>
+2005-02-12  Roland Illig  <roland.illig@gmx.de>
+
+	* info.c (info_show_info): Casted st_mode to unsigned to avoid
+	compiler warning on Solaris 9 (st_mode is unsigned long there).
+
+2005-02-12  Jindrich Novy  <jnovy@redhat.com>
 
 	* vfs.c (vfs_translate_url): Add support for smb://, sh://,
 	ssh:// and mc:// filesystem requests. Introduced separate table

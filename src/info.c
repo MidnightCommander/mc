@@ -181,7 +181,7 @@ info_show_info (struct WInfo *info)
     case 5:
 	widget_move (&info->widget, 5, 3);
 	printw (const_cast(char *, _("Mode:      %s (%04o)")),
-		string_perm (st.st_mode), st.st_mode & 07777);
+		string_perm (st.st_mode), (unsigned) st.st_mode & 07777);
 	
     case 4:
 	widget_move (&info->widget, 4, 3);
