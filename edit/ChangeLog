@@ -1,3 +1,8 @@
+2004-10-11  Leonard den Ottolander  <leonard * den ottolander nl>
+
+	* editcmd.c (regexp_error): Small text fix. 
+	  (edit_search_cmd): Likewise.
+
 2004-09-26  Roland Illig  <roland.illig@gmx.de>
 
 	* editcmd.c (edit_ext_cmd): Revoked my last change.

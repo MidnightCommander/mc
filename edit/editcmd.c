@@ -1736,7 +1736,7 @@ err:
 static void regexp_error (WEdit *edit)
 {
 /* "Error: Syntax error in regular expression, or scanf expression contained too many %'s */
-    edit_error_dialog (_("Error"), _(" Invalid regular expression, or scanf expression with to many conversions "));
+    edit_error_dialog (_("Error"), _(" Invalid regular expression, or scanf expression with too many conversions "));
 }
 
 /* call with edit = 0 before shutdown to close memory leaks */
@@ -2053,7 +2053,7 @@ void edit_search_cmd (WEdit * edit, int again)
 		}
 		if (found) {
 /* in response to number of bookmarks added because of string being found %d times */
-		    message (0, _("Search"), _(" %d finds made, %d bookmarks added "), found, books);
+		    message (0, _("Search"), _(" %d items found, %d bookmarks added "), found, books);
 		} else {
 		    edit_error_dialog (_ ("Search"), _ (" Search string not found "));
 		}
