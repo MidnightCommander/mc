@@ -1,3 +1,11 @@
+2001-10-19  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/sh.syntax: Highlight reserved words inside backticks.
+	Use the same wholechars settings for reserved words and
+	commands.  Recognize more words.  Recognize function definitions
+	without "function" or without "()".  Use brightmagenta instead
+	of brightblue.
+
 2001-10-18  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: When checking for "nroff -mandoc" support, don't

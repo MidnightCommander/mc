@@ -1,19 +1,5 @@
 
 context default
-    keyword whole for yellow/24
-    keyword whole in yellow/24
-    keyword whole do yellow/24
-    keyword whole done yellow/24
-    keyword whole select yellow/24
-    keyword whole case yellow/24
-    keyword whole esac yellow/24
-    keyword whole if yellow/24
-    keyword whole then yellow/24
-    keyword whole elif yellow/24
-    keyword whole else yellow/24
-    keyword whole fi yellow/24
-    keyword whole while yellow/24
-    keyword whole until yellow/24
     keyword ;; brightred/18
     keyword \\@ brightred/18
     keyword \\$ brightred/18
@@ -45,10 +31,31 @@ context default
 
     keyword $ brightgreen/16
 
-    keyword wholeleft linestart function*() brightblue/11
+    keyword wholeleft linestart function*() brightmagenta/23
+    keyword wholeleft linestart function\[\s\]+ brightmagenta/23
+    keyword wholeright +() brightmagenta/23
 
 wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
+
+    keyword whole break yellow/24
+    keyword whole case yellow/24
+    keyword whole continue yellow/24
+    keyword whole done yellow/24
+    keyword whole do yellow/24
+    keyword whole elif yellow/24
+    keyword whole else yellow/24
+    keyword whole esac yellow/24
+    keyword whole exit yellow/24
+    keyword whole fi yellow/24
+    keyword whole for yellow/24
+    keyword whole if yellow/24
+    keyword whole in yellow/24
+    keyword whole return yellow/24
+    keyword whole select yellow/24
+    keyword whole then yellow/24
+    keyword whole until yellow/24
+    keyword whole while yellow/24
 
     keyword whole arch cyan/14
     keyword whole ash cyan/14
@@ -59,6 +66,7 @@ wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.
     keyword whole bg_restore cyan/14
     keyword whole bsh cyan/14
     keyword whole cat cyan/14
+    keyword whole cd cyan/14
     keyword whole chgrp cyan/14
     keyword whole chmod cyan/14
     keyword whole chown cyan/14
@@ -75,6 +83,7 @@ wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.
     keyword whole echo cyan/14
     keyword whole ed cyan/14
     keyword whole egrep cyan/14
+    keyword whole eval cyan/14
     keyword whole ex cyan/14
     keyword whole false cyan/14
     keyword whole fgrep cyan/14
@@ -114,8 +123,10 @@ wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.
     keyword whole rmdir cyan/14
     keyword whole rpm cyan/14
     keyword whole sed cyan/14
+    keyword whole set cyan/14
     keyword whole setserial cyan/14
     keyword whole sh cyan/14
+    keyword whole shift cyan/14
     keyword whole sleep cyan/14
     keyword whole sort cyan/14
     keyword whole stty cyan/14
@@ -124,6 +135,7 @@ wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.
     keyword whole taper cyan/14
     keyword whole tar cyan/14
     keyword whole tcsh cyan/14
+    keyword whole test cyan/14
     keyword whole touch cyan/14
     keyword whole true cyan/14
     keyword whole umount cyan/14
@@ -200,6 +212,25 @@ context exclusive ` ` white/26 black/0
 wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
+    keyword whole break yellow/24
+    keyword whole case yellow/24
+    keyword whole continue yellow/24
+    keyword whole done yellow/24
+    keyword whole do yellow/24
+    keyword whole elif yellow/24
+    keyword whole else yellow/24
+    keyword whole esac yellow/24
+    keyword whole exit yellow/24
+    keyword whole fi yellow/24
+    keyword whole for yellow/24
+    keyword whole if yellow/24
+    keyword whole in yellow/24
+    keyword whole return yellow/24
+    keyword whole select yellow/24
+    keyword whole then yellow/24
+    keyword whole until yellow/24
+    keyword whole while yellow/24
+
     keyword whole arch cyan/14
     keyword whole ash cyan/14
     keyword whole awk cyan/14
@@ -209,6 +240,7 @@ wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.
     keyword whole bg_restore cyan/14
     keyword whole bsh cyan/14
     keyword whole cat cyan/14
+    keyword whole cd cyan/14
     keyword whole chgrp cyan/14
     keyword whole chmod cyan/14
     keyword whole chown cyan/14
@@ -225,6 +257,7 @@ wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.
     keyword whole echo cyan/14
     keyword whole ed cyan/14
     keyword whole egrep cyan/14
+    keyword whole eval cyan/14
     keyword whole ex cyan/14
     keyword whole false cyan/14
     keyword whole fgrep cyan/14
@@ -264,8 +297,10 @@ wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.
     keyword whole rmdir cyan/14
     keyword whole rpm cyan/14
     keyword whole sed cyan/14
+    keyword whole set cyan/14
     keyword whole setserial cyan/14
     keyword whole sh cyan/14
+    keyword whole shift cyan/14
     keyword whole sleep cyan/14
     keyword whole sort cyan/14
     keyword whole stty cyan/14
@@ -274,6 +309,7 @@ wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.
     keyword whole taper cyan/14
     keyword whole tar cyan/14
     keyword whole tcsh cyan/14
+    keyword whole test cyan/14
     keyword whole touch cyan/14
     keyword whole true cyan/14
     keyword whole umount cyan/14
