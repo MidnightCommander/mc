@@ -94,7 +94,15 @@ xtoolkit_init (int *argc, char *argv [])
 {
 	LINES = 40;
 	COLS = 80;
-	
+
+	printf (
+		"The GNOME file manager is going trough a massive code\n"
+		"rewrite, so many problems are known to exist due to a major\n"
+		"code design shift.\n\n"
+		"Yes, we know there are lots of problems in the current code\n"
+		"so dont even report them, when the major design has finished\n"
+		"I will remove this notice\n");
+
 /*	gnome_init ("gmc", NULL, *argc, argv, 0, NULL); */
 	gmc_color_init ();
 	/* FIXME: Maybe this should return something from gnome_init() */
