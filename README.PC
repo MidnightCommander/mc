@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------
 Support for Windows is broken since GNU Midnight Commander started using
 glib.  If you want to revive the project, it may be your last chance. 
-If nobody volonteers, all the code for the native Windows port will be
+If nobody volunteers, all the code for the native Windows port will be
 removed from the project.
 ------------------------------------------------------------------------
 
@@ -45,7 +45,7 @@ MinGW:  http://www.mingw.org/
 
 MinGW is also included with Cygwin (http://www.cygwin.com/).
 
-Cygwin envirinment is so close to UNIX, that it's possible to compile
+Cygwin environment is so close to UNIX, that it's possible to compile
 GNU Midnight Commander in the same way as it's done in UNIX (see file
 INSTALL for details).  However, you should realize that you would get a
 UNIX program that has no idea about drives, Windows-style permissions
