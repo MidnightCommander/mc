@@ -1,3 +1,17 @@
+1999-04-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (click_proxy_motion): Terminate rubberbanding if the
+	event mask does not contain GDK_BUTTON1_MASK.  There is a race
+	condition where we will not get the button release event if we
+	manage to grab the server in the button_press handler before the
+	window manager proxies the button release to us.
+	(perform_release): New function to terminate rubberbanding; this
+	used to be in click_proxy_button_release().  Also, update the drag
+	selection based on the last known mouse position, not on the
+	current one (which is not meaningful if the race condition
+	mentioned above kicks in).
+	(click_proxy_button_release): Use perform_release().
+
 1999-04-19  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdialogs.c (file_op_context_create_ui): Handle the "close"

@@ -2649,6 +2649,22 @@ click_proxy_button_press (GtkWidget *widget, GdkEventButton *event, gpointer dat
 	return FALSE;
 }
 
+/* Terminates rubberbanding when the button is released.  This is shared by the
+ * button_release handler and the motion_notify handler.
+ */
+static void
+perform_release (guint32 time)
+{
+	draw_rubberband (click_current_x, click_current_y);
+	gdk_pointer_ungrab (time);
+	click_dragging = FALSE;
+
+	update_drag_selection (click_current_x, click_current_y);
+
+	XUngrabServer (GDK_DISPLAY ());
+	gdk_flush ();
+}
+
 /* Handles button releases on the root window via the click_proxy_gdk_window */
 static gint
 click_proxy_button_release (GtkWidget *widget, GdkEventButton *event, gpointer data)
@@ -2656,15 +2672,7 @@ click_proxy_button_release (GtkWidget *widget, GdkEventButton *event, gpointer d
 	if (!click_dragging || event->button != 1)
 		return FALSE;
 
-	draw_rubberband (click_current_x, click_current_y);
-	gdk_pointer_ungrab (event->time);
-	click_dragging = FALSE;
-
-	update_drag_selection (event->x, event->y);
-
-	XUngrabServer (GDK_DISPLAY ());
-	gdk_flush ();
-
+	perform_release (event->time);
 	return TRUE;
 }
 
@@ -2674,6 +2682,17 @@ click_proxy_motion (GtkWidget *widget, GdkEventMotion *event, gpointer data)
 {
 	if (!click_dragging)
 		return FALSE;
+
+	/* There exists the following race condition.  If in the button_press
+	 * handler we manage to grab the server before the window manager can
+	 * proxy the button release to us, then we wil not get the release
+	 * event.  So we have to check the event mask and fake a release by
+	 * hand.
+	 */
+	if (!(event->state & GDK_BUTTON1_MASK)) {
+		perform_release (event->time);
+		return TRUE;
+	}
 
 	draw_rubberband (click_current_x, click_current_y);
 	draw_rubberband (event->x, event->y);
