@@ -4318,10 +4318,10 @@ msgstr ""
 #: vfs/smbfs.c:576
 #, c-format
 msgid ""
-" smbfs_reconnect to %s failed\n"
+" reconnect to %s failed\n"
 " "
 msgstr ""
-" riconnessione smbfs a %s fallita\n"
+" riconnessione a %s fallita\n"
 " "
 
 #: vfs/smbfs.c:1120

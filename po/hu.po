@@ -4435,10 +4435,10 @@ msgstr ""
 #: vfs/smbfs.c:576
 #, c-format
 msgid ""
-" smbfs_reconnect to %s failed\n"
+" reconnect to %s failed\n"
 " "
 msgstr ""
-" Nem sikerült újrakapcsolódni (smbfs_reconnect) a(z) \n"
+" Nem sikerült újrakapcsolódni (reconnect) a(z) \n"
 " \"%s\" géphez. \n"
 " "
 

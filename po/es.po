@@ -4308,7 +4308,7 @@ msgstr ""
 #: vfs/smbfs.c:576
 #, c-format
 msgid ""
-" smbfs_reconnect to %s failed\n"
+" reconnect to %s failed\n"
 " "
 msgstr ""
 " falló la reconexión con %s\n"
