@@ -275,3 +275,24 @@ widgets.  Some widgets also have user callbacks.
 To create your own widget, use init_widget().  In this case, you must
 provide a callback function.  Please note that it's not the same as the
 user callback in some widgets.
+
+
+PROGRAMMING TIPS
+================
+
+const: For every function taking a string argument, decide whether you
+	(as a user of the function) would expect that the string is modi-
+	fied by the function. If not, declare the string argument as
+	"const char *". If your implementation needs to modify the string,
+	use g_strdup to create a local copy.
+
+g_strlcpy: Whenever you use this function, be sure to add "glib-compat.h"
+	to the included headers. This is because in glib-1.2 there is
+	no such function.
+
+size_t: This data type is suitable for expressing sizes of memory or the
+	length of strings. This type is unsigned, so you need not check
+	if the value is >= 0.
+
+strncpy: Don't use this function in newly created code. It is slow, insecure
+	and hard to use. A much better alternative is g_strlcpy (see there).

@@ -1,3 +1,8 @@
+2004-09-02  Roland Illig  <roland.illig@gmx.de>
+
+	* HACKING: Added a section "Programming Tips" which lists mistakes
+	that have been done once and should never be repeated.
+
 2004-08-29  Roland Illig  <roland.illig@gmx.de>
 
 	* m4/ri-gcc-warnings.m4: Now handles only the last --enable or
