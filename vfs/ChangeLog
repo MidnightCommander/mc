@@ -1,5 +1,6 @@
 2004-10-17  Roland Illig  <roland.illig@gmx.de>
 
+	* extfs/audio.in: Fix quoting issues.
 	* extfs/hp48.in: Fix quoting issues.
 
 	From Leonard den Ottolander.

@@ -16,7 +16,7 @@ audiofs_list ()
 {
     DATE=`date +"%b %d %H:%M"`
     echo "-r--r--r-- 1 0 0 0 $DATE CDDB"
-    cdparanoia -Q -d $1 2>&1 | grep '^[ 0-9][ 0-9][ 0-9]\.' | while read A B C
+    cdparanoia -Q -d "$1" 2>&1 | grep '^[ 0-9][ 0-9][ 0-9]\.' | while read A B C
     do
 	A=`echo $A | sed -e 's/\.//' -e 's/^\(.\)$/0\1/'`
 	SIZE=`expr 44 + $B \* 2352`
@@ -27,15 +27,15 @@ audiofs_list ()
 audiofs_copyout ()
 {
     if [ "$2" == "CDDB" ]; then
-        DISCID=`cd-discid $1 | tr " " "+"`
+        DISCID=`cd-discid "$1" | tr " " "+"`
 	if [ -z "$DISCID" ]; then
 	    exit 1
 	fi
-        RESPONSE=`wget -q -T $CDDB_TIMEOUT -O - "$CDDB_SERVER/~cddb/cddb.cgi?cmd=cddb+query+$DISCID&$CDDB_HANDSHAKE" | tee $3 | @AWK@ '/^200/ { print $2,$3; }'`
+        RESPONSE=`wget -q -T $CDDB_TIMEOUT -O - "$CDDB_SERVER/~cddb/cddb.cgi?cmd=cddb+query+$DISCID&$CDDB_HANDSHAKE" | tee "$3" | @AWK@ '/^200/ { print $2,$3; }'`
 	wget -q -T $CDDB_TIMEOUT -O - "$CDDB_SERVER/~cddb/cddb.cgi?cmd=cddb+read+$RESPONSE&$CDDB_HANDSHAKE" | grep -v "^#" >> $3
     else
-        TRACK=`echo $2 | sed 's/track-0*//' | sed 's/\.wav//'`
-        cdparanoia -q -d $1 $TRACK $3 >/dev/null
+        TRACK=`echo "$2" | sed 's/track-0*//' | sed 's/\.wav//'`
+        cdparanoia -q -d "$1" $TRACK "$3" >/dev/null
     fi
 }
 
@@ -47,7 +47,7 @@ else
 fi
 
 case "$1" in
-  list) audiofs_list $BASE; exit 0;;
-  copyout) audiofs_copyout $BASE $3 $4; exit 0;;
+  list) audiofs_list "$BASE"; exit 0;;
+  copyout) audiofs_copyout "$BASE" "$3" "$4"; exit 0;;
 esac
 exit 1
