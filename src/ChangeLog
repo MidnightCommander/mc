@@ -1,3 +1,11 @@
+2000-11-16  Andrew V. Samoilov <sav@bcs.zp.ua>
+
+	* cons.saver.c (check_file): close fd on error. There was a bug, which 
+	allowed luser to write '\0' char to any symlinkable file in Linux 
+	system which don't ensure that fd's 0, 1, and 2 are open on startup 
+	of a SUID/SGID binary.
+	Based on patch from bugtrack by Maurycy Prodeus <z33d@ETH-SECURITY.NET>.
+
 2000-11-14  Andrew V. Samoilov <sav@bcs.zp.ua>
 
 	* layout.c (print_vfs_message): format string vulnerability fixed

@@ -42,6 +42,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>	/* For isdigit() */
+#include <string.h>
 typedef struct WINDOW WINDOW;
 #include "cons.saver.h"
 
@@ -116,39 +117,43 @@ int check_file (char *filename, int check_console, char **msg)
     if (fd == -1)
 	return -1;
     
-    if (fstat (fd, &stat_buf) == -1)
-	return -1;
+    do {
+	if (fstat (fd, &stat_buf) == -1)
+	    break;
 
-    /* Must be character device */
-    if (!S_ISCHR (stat_buf.st_mode)){
-	*msg = "Not a character device";
-	return -1;
-    }
+	/* Must be character device */
+	if (!S_ISCHR (stat_buf.st_mode)){
+	    *msg = "Not a character device";
+	    break;
+	}
 
 #ifdef DEBUG
-    fprintf (stderr, "Device: %x\n", stat_buf.st_rdev);
+	fprintf (stderr, "Device: %x\n", stat_buf.st_rdev);
 #endif
-    if (check_console){
-	/* Second time: must be console */
-	if ((stat_buf.st_rdev & 0xff00) != 0x0400){
-	    *msg = "Not a console";
-	    return -1;
+	if (check_console){
+	    /* Second time: must be console */
+	    if ((stat_buf.st_rdev & 0xff00) != 0x0400){
+		*msg = "Not a console";
+		break;
+	    }
+
+	    if ((stat_buf.st_rdev & 0x00ff) > 63){
+		*msg = "Minor device number too big";
+		break;
+	    }
+
+	    /* Must be owned by the user */
+	    if (stat_buf.st_uid != getuid ()){
+		*msg = "Not a owner";
+		break;
+	    }
 	}
-    
-	if ((stat_buf.st_rdev & 0x00ff) > 63){
-	    *msg = "Minor device number too big";
-	    return -1;
-	}
-	
-	/* Must be owned by the user */
-	if (stat_buf.st_uid != getuid ()){
-	    *msg = "Not a owner";
-	    return -1;
-	}
-    }
-    
     /* Everything seems to be okay */
-    return fd;
+	return fd;
+    } while (0);
+
+    close (fd);
+    return -1;
 }
 
 /* Detect console */
