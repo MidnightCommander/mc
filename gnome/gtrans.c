@@ -10,14 +10,18 @@
 #include "gdesktop.h"
 #include "gcache.h"
 #include <gdk/gdkx.h>
+
 /* The spacing between the cute little icon and the text */
 #define SPACING 2
 
-int want_transparent = 0;
 
-/*
- * Most of this code was yanked from the gtktooltips module in Gtk+.
- * I have tweaked it a bit for MC's purposes - Federico
+int want_transparent_icons = 1;
+int want_transparent_text = 0;
+
+
+/* Most of the word-wrapping code was yanked from the gtktooltips
+ * module in Gtk+.  I have tweaked it a bit for MC's purposes
+ * - Federico
  */
 
 struct text_info {
@@ -178,7 +182,7 @@ set_window_text (GtkWidget *window, GdkImlibImage *im, char *text)
 	GdkBitmap *im_mask;
 	struct text_info *ti;
 	GdkColor color;
-	GdkGC *gc;
+	GdkGC *p_gc, *m_gc;
 	int width, height;
 
 	ti = layout_text (window, text);
@@ -186,59 +190,132 @@ set_window_text (GtkWidget *window, GdkImlibImage *im, char *text)
 	width = MAX (ti->width, im->rgb_width);
 	height = im->rgb_height + SPACING + ti->height;
 
-	/* pixmap */
+	/* Create pixmap, mask, and gc's */
 
 	pixmap = gdk_pixmap_new (window->window, width, height, gdk_imlib_get_visual ()->depth);
-
-	gc = gdk_gc_new (pixmap);
-
-	gdk_color_white (gdk_imlib_get_colormap (), &color);
-	gdk_gc_set_foreground (gc, &color);
-	gdk_draw_rectangle (pixmap, gc, TRUE, 0, 0, width, height);
-
-	im_pixmap = gdk_imlib_move_image (im);
-	gdk_window_copy_area (pixmap, gc,
-			      (width - im->rgb_width) / 2,
-			      0,
-			      im_pixmap,
-			      0, 0,
-			      im->rgb_width, im->rgb_height);
-	gdk_imlib_free_pixmap (im_pixmap);
-
-	/* mask */
-
 	mask = gdk_pixmap_new (window->window, width, height, 1);
 
-	gc = gdk_gc_new (mask);
+	p_gc = gdk_gc_new (pixmap);
+	m_gc = gdk_gc_new (mask);
+
+	/* Fill mask with transparent */
 
 	color.pixel = 0;
-	gdk_gc_set_foreground (gc, &color);
-	gdk_draw_rectangle (mask, gc, TRUE, 0, 0, width, height);
+	gdk_gc_set_foreground (m_gc, &color);
+	gdk_draw_rectangle (mask,
+			    m_gc,
+			    TRUE,
+			    0, 0,
+			    width, height);
 
+	/* Icon */
+
+	im_pixmap = gdk_imlib_move_image (im);
 	im_mask = gdk_imlib_move_mask (im);
+
+	if (!want_transparent_icons) {
+		/* black background */
+
+		gdk_color_black (gdk_imlib_get_colormap (), &color);
+		gdk_gc_set_foreground (p_gc, &color);
+		gdk_draw_rectangle (pixmap,
+				    p_gc,
+				    TRUE,
+				    (width - im->rgb_width) / 2,
+				    0,
+				    im->rgb_width,
+				    im->rgb_height);
+
+		/* opaque mask */
+
+		color.pixel = 1;
+		gdk_gc_set_foreground (m_gc, &color);
+		gdk_draw_rectangle (mask,
+				    m_gc,
+				    TRUE,
+				    (width - im->rgb_width) / 2,
+				    0,
+				    im->rgb_width,
+				    im->rgb_height);
+	} else if (im_mask)
+		gdk_draw_pixmap (mask,
+				 m_gc,
+				 im_mask,
+				 0, 0,
+				 (width - im->rgb_width) / 2,
+				 0,
+				 im->rgb_width,
+				 im->rgb_height);
+
 	if (im_mask) {
-		gdk_window_copy_area (mask, gc,
-				      (width - im->rgb_width) / 2,
-				      0,
-				      im_mask,
-				      0, 0,
-				      im->rgb_width, im->rgb_height);
+		gdk_gc_set_clip_mask (p_gc, im_mask);
+		gdk_gc_set_clip_origin (p_gc, (width - im->rgb_width) / 2, 0);
+	}
+
+	gdk_draw_pixmap (pixmap,
+			 p_gc,
+			 im_pixmap,
+			 0, 0,
+			 (width - im->rgb_width) / 2,
+			 0,
+			 im->rgb_width,
+			 im->rgb_height);
+
+	if (im_mask) {
+		gdk_gc_set_clip_mask (p_gc, NULL);
 		gdk_imlib_free_bitmap (im_mask);
 	}
+
+	gdk_imlib_free_pixmap (im_pixmap);
 	
-	color.pixel = 1;
-	gdk_gc_set_foreground (gc, &color);
-	paint_text (ti, mask, gc,
+	/* Text */
+
+	if (!want_transparent_text) {
+		/* black background */
+
+		gdk_color_black (gdk_imlib_get_colormap (), &color);
+		gdk_gc_set_foreground (p_gc, &color);
+		gdk_draw_rectangle (pixmap,
+				    p_gc,
+				    TRUE,
+				    (width - ti->width) / 2,
+				    im->rgb_height + SPACING,
+				    ti->width,
+				    ti->height);
+
+		/* opaque mask */
+
+		color.pixel = 1;
+		gdk_gc_set_foreground (m_gc, &color);
+		gdk_draw_rectangle (mask,
+				    m_gc,
+				    TRUE,
+				    (width - ti->width) / 2,
+				    im->rgb_height + SPACING,
+				    ti->width,
+				    ti->height);
+	} else {
+		color.pixel = 1;
+		gdk_gc_set_foreground (m_gc, &color);
+		paint_text (ti, mask, m_gc,
+			    (width - ti->width) / 2,
+			    im->rgb_height + SPACING);
+	}
+	
+	gdk_color_white (gdk_imlib_get_colormap (), &color);
+	gdk_gc_set_foreground (p_gc, &color);
+	paint_text (ti, pixmap, p_gc,
 		    (width - ti->width) / 2,
 		    im->rgb_height + SPACING);
 
-	gdk_gc_destroy (gc);
-
-	/* set contents */
+	/* Set contents of window */
 
 	gtk_widget_set_usize (window, width, height);
 	gdk_window_set_back_pixmap (window->window, pixmap, FALSE);
 	gdk_window_shape_combine_mask (window->window, mask, 0, 0);
+
+	gdk_gc_destroy (p_gc);
+	gdk_gc_destroy (m_gc);
 
 	gdk_pixmap_unref (pixmap);
 	gdk_pixmap_unref (mask);

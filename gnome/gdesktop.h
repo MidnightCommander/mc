@@ -33,6 +33,10 @@ typedef struct {
 
 
 /* gtrans.c */
+
+extern int want_transparent_icons;
+extern int want_transparent_text;
+
 GtkWidget *create_transparent_text_window (char *file, char *text, int extra_events);
 GtkWidget *make_transparent_window (char *file);
 

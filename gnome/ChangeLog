@@ -1,3 +1,14 @@
+1998-04-14  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.h: Added extern declarations for the
+	want_transparent_icons and want_transparent_text variables.
+
+	* gtrans.c (set_window_text): Now we use the new global variables
+	want_transparent_icons and want_transparent_text to decide how to
+	paint the pixmap and mask.  The want_transparent_* variables can
+	thus be configured for the smartness/speed of your X server when
+	using shaped windows.
+
 Fri Apr 12 02:40:41 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* gwidget.c (x_create_input): return 1 if the widget has been 
