@@ -115,7 +115,7 @@ ICONS = 			\
 #
 # These objects are made from sources in ../src
 #
-OOBJS = dlg.o screen.o widget.o wtools.o boxes.o		\
+OOBJS = dlg.o screen.o widget.o wtools.o			\
 	file.o find.o dialog.o key.o view.o			\
 	panelize.o hotlist.o background.o dir.o util.o		\
 	win.o color.o profile.o user.o ext.o setup.o		\

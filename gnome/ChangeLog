@@ -1,5 +1,7 @@
 2001-05-29  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.in: Don't use boxes.o.
+
 	* gcmd.c (gnome_listing_cmd): Remove, it unused.
 	(gnome_compare_panels): Likewise.
 
