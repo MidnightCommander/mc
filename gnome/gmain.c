@@ -568,7 +568,7 @@ session_management_setup (char *name)
 {
 	GnomeClient *client;
 	
-	client = gnome_client_new_default ();
+	client = gnome_master_client ();
 	if (client){
 		gtk_signal_connect (GTK_OBJECT (client), "save_yourself",
 				    GTK_SIGNAL_FUNC (session_save_state), name);

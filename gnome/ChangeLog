@@ -1,3 +1,8 @@
+1998-07-04  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
+
+	* gmain.c (session_management_setup): Replaced
+ 	'gnome_client_new_default' with 'gnome_master_client'.
+
 1998-06-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gwidget.c (x_update_input): The previous hack was not
