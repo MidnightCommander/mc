@@ -1,3 +1,9 @@
+2002-09-18  Pavel Roskin  <proski@gnu.org>
+
+	* cmd.c (other_symlink_cmd): Remove, this function is
+	undocumented and poorly implemented.
+	* main.c: Remove call to other_symlink_cmd() on C-x C-l.
+
 2002-09-16  Pavel Roskin  <proski@gnu.org>
 
 	* wtools.c (real_input_dialog_help): Trim spaces from the label

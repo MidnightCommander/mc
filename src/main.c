@@ -1421,7 +1421,6 @@ static const key_map ctl_x_map [] = {
     { 'r',          copy_current_readlink },
     { XCTRL('r'),   copy_other_readlink },
     { 'l',          link_cmd },
-    { XCTRL('l'),   other_symlink_cmd },
     { 's',          symlink_cmd },
     { XCTRL('s'),   edit_symlink_cmd },
 #endif /* !NATIVE_WIN32 */

@@ -1124,47 +1124,6 @@ void edit_symlink_cmd (void)
 		 selection (cpanel)->fname);
     }
 }
-
-void
-other_symlink_cmd (void)
-{
-    char *dest, *q, *p, *r, *s, *t;
-
-    if (get_other_type () != view_listing)
-	return;
-
-    if (!strcmp (selection (opanel)->fname, ".."))
-	return;
-    p = concat_dir_and_file (cpanel->cwd, selection (cpanel)->fname);
-    r = concat_dir_and_file (opanel->cwd, selection (cpanel)->fname);
-
-    q = g_strdup_printf (_("Link symbolically %s to:"),
-			 name_trunc (p, 32));
-    dest = input_expand_dialog (_(" Relative symlink "), q, r);
-    if (dest) {
-	if (*dest) {
-	    t = strrchr (dest, PATH_SEP);
-	    if (t) {
-		t[1] = 0;
-		s = diff_two_paths (dest, p);
-		t[1] = PATH_SEP;
-		if (s) {
-		    save_cwds_stat ();
-		    if (-1 == mc_symlink (dest, s))
-			message (1, MSG_ERROR, _(" relative symlink: %s "),
-				 unix_error_string (errno));
-		    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-		    repaint_screen ();
-		    g_free (s);
-		}
-	    }
-	}
-	g_free (dest);
-    }
-    g_free (q);
-    g_free (p);
-    g_free (r);
-}
 #endif /* !NATIVE_WIN32 */
 
 void help_cmd (void)

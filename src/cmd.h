@@ -49,7 +49,6 @@ void tree_cmd (void);
 void link_cmd (void);
 void symlink_cmd (void);
 void edit_symlink_cmd (void);
-void other_symlink_cmd (void);
 void reverse_selection_cmd_panel (WPanel *);
 void unselect_cmd_panel (WPanel *);
 void select_cmd_panel (WPanel *);
