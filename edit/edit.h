@@ -235,7 +235,7 @@ void edit_paste_from_X_buf_cmd (WEdit * edit);
 
 void edit_paste_from_history (WEdit *edit);
 
-void edit_split_filename (WEdit * edit, const char *name);
+void edit_set_filename (WEdit *edit, const char *name);
 
 void edit_load_syntax (WEdit * edit, char **names, char *type);
 void edit_free_syntax_rules (WEdit * edit);

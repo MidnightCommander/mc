@@ -398,11 +398,14 @@ void menu_save_mode_cmd (void)
     memcpy ((char *) &option_backup_ext_int, str_result, strlen (option_backup_ext));
 }
 
-void edit_split_filename (WEdit * edit, const char *f)
+void
+edit_set_filename (WEdit *edit, const char *f)
 {
     if (edit->filename)
-	free (edit->filename);
-    edit->filename = (char *) strdup (f);
+	g_free (edit->filename);
+    if (!f)
+	f = "";
+    edit->filename = (char *) g_strdup (f);
 }
 
 /* Here we want to warn the users of overwriting an existing file,
@@ -442,7 +445,7 @@ edit_save_as_cmd (WEdit *edit)
 		}
 	    }
 	    if (edit_save_file (edit, exp)) {
-		edit_split_filename (edit, exp);
+		edit_set_filename (edit, exp);
 		g_free (exp);
 		edit->modified = 0;
 		edit->delete_file = 0;
@@ -735,7 +738,7 @@ edit_load_file_from_filename (WEdit * edit, char *exp)
 {
     if (!edit_reload (edit, exp))
 	return 1;
-    edit_split_filename (edit, exp);
+    edit_set_filename (edit, exp);
     edit->modified = 0;
     return 0;
 }

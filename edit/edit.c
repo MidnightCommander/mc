@@ -521,11 +521,7 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
 	}
     }
     edit->force |= REDRAW_PAGE;
-    if (filename) {
-	edit_split_filename (edit, filename);
-    } else {
-	edit->filename = (char *) strdup ("");
-    }
+    edit_set_filename (edit, filename);
     edit->stack_size = START_STACK_SIZE;
     edit->stack_size_mask = START_STACK_SIZE - 1;
     edit->undo_stack = malloc ((edit->stack_size + 10) * sizeof (long));
@@ -586,8 +582,7 @@ edit_clean (WEdit *edit)
 
     if (edit->undo_stack)
 	free (edit->undo_stack);
-    if (edit->filename)
-	free (edit->filename);
+    g_free (edit->filename);
 
     edit_purge_widget (edit);
 

@@ -1,3 +1,8 @@
+2002-12-14  Pavel Roskin  <proski@gnu.org>
+
+	* editcmd.c (edit_split_filename): Rename to edit_set_filename,
+	use g_malloc() and g_free() on edit->filename.
+
 2002-12-08  Pavel Roskin  <proski@gnu.org>
 
 	* edit.c (edit_open_file): Remove "text" and "text_size"
