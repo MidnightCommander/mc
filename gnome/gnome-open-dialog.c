@@ -27,6 +27,7 @@ static void gnome_open_dialog_init		   (GnomeOpenDialog *open_dialog);
 static void gnome_open_dialog_class_init           (GnomeOpenDialogClass *klass);
 static void gnome_open_dialog_destroy              (GtkObject *object);
 static void gnome_open_dialog_generate_tree_helper (GtkCTree *ctree, GtkCTreeNode *parent, GNode *node);
+static GSList *get_presorted_from(char *dir);
 static void gnome_open_dialog_destroy_func         (GtkCTree *ctree, GtkCTreeNode *node, gpointer data);
 
 static GnomeDialogClass *parent_class = NULL;
@@ -102,6 +103,83 @@ gnome_open_dialog_init (GnomeOpenDialog *open_dialog)
   
 }
 /* Private internal functions */
+/* this will help order our tree */
+static gchar *
+strip_name_from_gde (GnomeDesktopEntry *gde,
+		     gboolean fname)
+{
+	gchar *retval = NULL;
+	gchar *ptr;
+
+	if (gde == NULL)
+		return NULL;
+	if (!fname)
+		return (g_strdup (gde->name));
+
+	if (strcmp (basename (gde->location), ".directory")) {
+		return g_strdup (basename(gde->location));
+	}
+
+	ptr = strrchr (gde->location, '/');
+	if (ptr)
+		ptr--;
+	while (ptr && ptr != gde->location && *ptr != '/') {
+		ptr--;
+	}
+	if (ptr) {
+		retval = g_strdup (ptr +1);
+		ptr = strrchr (retval, '/');
+		if (ptr)
+			ptr[0] = '\000';
+	}
+	return retval;
+}
+static void
+insert_node_custom (GSList *order,
+		    GNode *sorted_list,
+		    GNode *node,
+		    gchar *name)
+{
+	/* This little insertion sort is pretty ugly, but I guess
+	 * it works.  It'd be good to move this information into
+	 * Gnome-libs, somewhere...
+	 */
+	GNode *temp_node;
+	gchar *fname;
+	gchar *fname2;
+
+	g_return_if_fail (sorted_list != NULL);
+
+	temp_node = sorted_list->children;
+	while (order) {
+		if (!strcmp ((gchar *) order->data, basename (name))) {
+			if (temp_node)
+				g_node_insert_before (sorted_list, temp_node, node);
+			else
+				g_node_append (sorted_list, node);
+			return;
+		}
+		if (temp_node) {
+			fname = strip_name_from_gde ((GnomeDesktopEntry *) temp_node->data, TRUE);
+			if (fname && !strcmp (fname, (gchar *) order->data)) {
+				temp_node = temp_node->next;
+			}
+			g_free (fname);
+		}
+		order = order->next;
+	}
+	fname2 = strip_name_from_gde (node->data, FALSE);
+	for (;temp_node;temp_node = temp_node->next) {
+		fname = strip_name_from_gde (temp_node->data, FALSE);
+		if (fname && fname2 && strcmp (fname2, fname) < 0) {
+			g_node_insert_before (sorted_list, temp_node, node);
+			return;
+		}
+		g_free (fname);
+	}
+	g_free (fname2);
+	g_node_append (sorted_list, node);
+}
 /* Stolen from gnomecc:tree.c */
 static GNode *
 read_directory (gchar *directory)
@@ -109,13 +187,16 @@ read_directory (gchar *directory)
         DIR *parent_dir;
         struct dirent *child_dir;
         struct stat filedata;
+	GSList *order;
         GNode *retval = g_node_new(NULL);
-
+	GNode *new_node;
+	
         parent_dir = opendir (directory);
         if (parent_dir == NULL)
                 return NULL;
-
+	order = get_presorted_from (directory);
         while ((child_dir = readdir (parent_dir)) != NULL) {
+		new_node = NULL;
                 if (child_dir->d_name[0] != '.') {
 
                         /* we check to see if it is interesting. */
@@ -127,37 +208,32 @@ read_directory (gchar *directory)
                                 gchar* test;
                                 if (S_ISDIR (filedata.st_mode)) {
                                         /* it might be interesting... */
-                                        GNode *next_dir = read_directory (name->str);
-                                        if (next_dir)
+                                        new_node = read_directory (name->str);
+                                        if (new_node) 
                                                 /* it is interesting!!! */
-                                                g_node_prepend (retval, next_dir);
+                                                insert_node_custom (order, retval, new_node, name->str);
+/*						g_node_prepend (retval, new_node);*/
                                 }
-                                test = rindex(child_dir->d_name, '.');
+                                test = strrchr(child_dir->d_name, '.');
                                 if (test && !strcmp (".desktop", test)) {
                                         /* it's a .desktop file -- it's interesting for sure! */
-                                        GNode *new_node = g_node_new (gnome_desktop_entry_load (name->str));
-                                        g_node_prepend (retval, new_node);
+                                        new_node = g_node_new (gnome_desktop_entry_load (name->str));
+					insert_node_custom (order, retval, new_node, name->str);
+/*					g_node_prepend (retval, new_node);*/
                                 }
                         }
                         g_string_free (name, TRUE);
-                }
-                else if (!strcmp (child_dir->d_name, ".directory")) {
+                } else if (!strcmp (child_dir->d_name, ".directory")) {
                         GString *name = g_string_new (directory);
                         g_string_append (name, "/.directory");
                         retval->data = gnome_desktop_entry_load (name->str);
                         g_string_free (name, TRUE);
                 }
         }
-#if 0
-        if (!retval->data) {
-                /* no .directory file.  Well, I guess we abort.  */
-                /* FIXME: i guess we should free memory now... */
-                return NULL;
-        }
-#endif
         if (retval->children == NULL) {
                 if (retval->data)
                         gnome_desktop_entry_free (retval->data);
+		g_node_destroy (retval);
                 return NULL;
         }
         return retval;
@@ -212,6 +288,29 @@ gnome_open_dialog_generate_tree_helper (GtkCTree *ctree, GtkCTreeNode *parent, G
                         gtk_ctree_expand_recursive (ctree, child);
 */
 	}
+}
+
+/* Stolen from gnome-core/panel/menu.c */
+static GSList *
+get_presorted_from(char *dir)
+{
+	char buf[PATH_MAX+1];
+	GSList *list = NULL;
+	char *fname = g_concat_dir_and_file(dir,".order");
+	FILE *fp = fopen(fname,"r");
+	
+	if(!fp) {
+		g_free(fname);
+		return NULL;
+	}
+	while(fgets(buf,PATH_MAX+1,fp)!=NULL) {
+		char *p = strchr(buf,'\n');
+		if(p) *p = '\0';
+		list = g_slist_prepend(list,g_strdup(buf));
+	}
+	fclose(fp);
+	g_free(fname);
+	return g_slist_reverse(list);
 }
 static void
 gnome_open_dialog_selected_row_callback (GtkWidget *widget, GtkCTreeNode *node, gint column, gpointer *data)
@@ -293,7 +392,6 @@ gnome_open_dialog_new (gchar *file_name)
 	/* Watch me do something evil... (-: */
 	label_string = 	gnome_unconditional_libdir_file ("");
 	strcpy (label_string + strlen (label_string) - 4, "bin");
-	g_print ("%s\n", label_string);
 	
 	gnome_file_entry_set_default_path (GNOME_FILE_ENTRY (dialog->entry),
 					   label_string);

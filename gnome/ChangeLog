@@ -1,3 +1,7 @@
+1999-03-16  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-open-dialog.c (read_directory): We now honor .order files.
+
 1999-03-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gicon.c (get_icon_set): Use iset->filename (which is a
