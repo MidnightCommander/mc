@@ -1586,7 +1586,7 @@ msgstr "Data di &Accesso"
 
 #: src/dir.c:58
 msgid "&Change time"
-msgstr "Modifica data"
+msgstr "Data di Cambiamento"
 
 #: src/dir.c:59
 msgid "&Size"
