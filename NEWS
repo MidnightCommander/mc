@@ -8,6 +8,8 @@ Changes made after 4.6.0-pre1.
 - Experimental support for glib 2.0.x has been added (use --with-glib2).
 - Mouse wheel is supported in the internal editor in xterm and
   compatible terminals.
+- mc now complies with the Filesystem Hierarchy Standard and uses
+  @prefix@/share/mc for the data files.
 
 
 Version 4.6.0-pre1.
