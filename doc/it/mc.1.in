@@ -302,7 +302,7 @@ sul file corrente o sui file marcati.
 Crea un collegamento.
 .PP
 .B C-x s.
-Crea un collegamento simbolico .
+Crea un collegamento simbolico.
 .PP
 .B C-x i.
 Imposta la modalità della visualizzazione dell'altro pannello a informazioni.
@@ -1013,8 +1013,7 @@ o finire con una '/'.
 .B De-seleziona gruppo (\\\\)
 .PP
 Usata per deselezionare un gruppo di file. E' l'opposto di del comando
-.I "Seleziona gruppo"
- .
+.IR "Seleziona gruppo" .
 .PP
 .B Uscita (F10, Maiusc-F10)
 .PP
@@ -1280,7 +1279,7 @@ dall'elenco e non servirà ribatterlo nuovamente.
 .\"NODE "    Hotlist"
 .SH "    Directory Favorite"
 Il comando Directory favorite mostra le etichette delle directory nell'elenco
-delle favorite. Il The Midnight Commander andrà alla directory corrispondente
+delle favorite. Il Midnight Commander andrà alla directory corrispondente
 all'etichetta selezionata. Dalla finestra delle favorite si possono rimuovere
 etichette/directory già create ed aggiungerne di nuove. Per aggiungere 
 velocemente nuove directory basta usare il comando Aggiungi alle favorite 
@@ -1312,8 +1311,8 @@ parolachiave può essere:
 .PP
 .I shell
 .IP
-(allora descrizione è qualsiasi estensione (no caratteri jolly), cioè corrisponde a tutti i file 
-*descrizione . Esempio: .tar corrisponde a *.tar)
+(allora descrizione è qualsiasi estensione (no caratteri jolly), 
+cioè corrisponde a tutti i file *descrizione. Esempio: .tar corrisponde a *.tar)
 .PP
 .I regex
 .IP
@@ -1594,14 +1593,13 @@ un file (sia con C-t che con il tasto Ins).
 Quando quest'opzione è abilitata, la discesa dei menu sarà attivata non appena
 si preme il tasto
 .BR F9 .
-Altrimenti si avrà solo il titolo del menu e si dovrà attivare il menu con
+Altrimenti si otterrà solo il titolo del menu e si dovrà attivare il menu con
 i tasti freccia o con i tasti di selezione rapida.
-E' raccomanda se si sta usando i tasti di selezione rapida.
+E' raccomandata se si sta usando i tasti di selezione rapida.
 .PP
 .I Mescola tutti i file.
 Se quest'opzione è abilitata, tutti i file e directory vengono mostrati
 mescolati insieme, Se l'opzione è spenta, le directory (e i collegamenti a
-directory) vengono mostrati all'inizio dell'elenco e gli altri file più
 sotto.
 .PP
 .I Aggiornamento rapido directory.
@@ -1766,9 +1764,9 @@ dello schermo
 .\"Listing Mode..."
 valide per l'utente che usa il Midnight Commander 
 sono evidenziati con il colore definito con la parolachiave
-.I selezionata
- . Se l'evidenziazione del tipo di file è abilitata, i file vengono colorati a seconda
-del tipo (per esempio directory, file core, eseguibili, ...). 
+.IR selezionata . 
+Se l'evidenziazione del tipo di file è abilitata, i file vengono colorati 
+a seconda del tipo (per esempio directory, file core, eseguibili, ...). 
 .PP
 Se l'opzione 
 .I Mostra mini-stato
@@ -1871,8 +1869,7 @@ File System FTP
 mantiene l'elenco della directory che scarica dal server ftp
 in una cache. Il tempo di scadenza della cache è configurabile
 con l'opzione 
-.I Scadenza cache directory ftpfs
- .  
+.IR Scadenza cache directory ftpfs .  
 Un valore basso per quest'opzione può rallentare ogni operazione sul
 file system ftp perché ogni operazione è accompagnata da una
 richiesta al server ftp.
@@ -2105,10 +2102,9 @@ Questa macro non funziona ancora sulla riga di comando.
 Se la variabile di ambiente 
 .I ENV
 non è impostata, la sostituzione prenderà
-.I default
- . Altrimenti, verrà sostituito il valore di 
-.I ENV
- .
+.IR default . 
+Altrimenti, verrà sostituito il valore di 
+.IR ENV .
 .PP
 .\"NODE "  The subshell support"
 .SH "  Supporto alla subshell"
@@ -2937,8 +2933,8 @@ o la sezione Color nel file di inizializzazione.
 .PP
 Nella sezione Color, la mappa dei colori predefinita viene caricata 
 dalla variabile 
-.I base_color 
- . Si può specificare una mappa colori alternativa per un terminale
+.IR base_color . 
+Si può specificare una mappa colori alternativa per un terminale
 usando il nome del terminale come chiave nella sezione. Esempio:
 .PP
 .nf
