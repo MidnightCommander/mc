@@ -1,5 +1,8 @@
 2002-12-19  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c (chdir_other_panel): Use do_panel_cd() on the
+	opposite panel instead of changing the current panel twice.
+
 	* main.c (make_panels_dirty): Preserve the cursor position.
 
 2002-12-18  Tomas Styblo  <tripie@cpan.org>

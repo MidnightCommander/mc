@@ -1993,9 +1993,7 @@ chdir_other_panel (WPanel *panel)
 	set_display_type (get_other_index (), view_listing);
     }
 
-    change_panel ();
-    do_cd (panel->cwd, cd_exact);
-    change_panel ();
+    do_panel_cd (opanel, cpanel->cwd, cd_exact);
 
     /* try to select current filename on the other panel */
     if (!panel->is_panelized) {
