@@ -697,7 +697,7 @@ directory_history_add (struct WPanel *panel, char *s)
     text = g_strdup (s);
     strip_password (s, 1);
 
-    panel->dir_history = g_list_append (panel->dir_history, text);
+    panel->dir_history = list_append_unique (panel->dir_history, text);
 }
 
 /*

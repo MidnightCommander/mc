@@ -1079,7 +1079,7 @@ push_history (WInput *in, char *text)
 	    strip_password (t, 1);
     }
 
-    in->history = g_list_append (in->history, t);
+    in->history = list_append_unique (in->history, t);
     in->need_push = 0;
 
     return 2;

@@ -1,5 +1,10 @@
 2003-02-18  Pavel Roskin  <proski@gnu.org>
 
+	* util.c (list_append_unique): New function - add text to GList
+	and remove duplicates.
+	* main.c (directory_history_add): Use list_append_unique().
+	* widget.c (push_history): Likewise.
+
 	* panel.h: Convert directory history to GList.
 	* widget.h: Convert input history to GList.
 	Adjust all dependencies.

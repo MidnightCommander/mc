@@ -1163,6 +1163,25 @@ concat_dir_and_file (const char *dir, const char *file)
 	return  g_strconcat (dir, PATH_SEP_STR, file, NULL);
 }
 
+
+/* Append text to GList, remove all entries with the same text */
+GList *
+list_append_unique (GList *list, char *text)
+{
+    GList *link, *newlink;
+
+    link = g_list_first (list);
+    while (link) {
+	newlink = g_list_next (link);
+	if (!strcmp ((char *) link->data, text))
+	    list = g_list_remove_link (list, link);
+	link = newlink;
+    }
+
+    return g_list_append (list, text);
+}
+
+
 /* Following code heavily borrows from libiberty, mkstemps.c */
 
 /* Number of attempts to create a temporary file */

@@ -125,6 +125,7 @@ void execute_hooks (Hook *hook_list);
 void delete_hook (Hook **hook_list, void (*hook_fn)(void *));
 int hook_present (Hook *hook_list, void (*hook_fn)(void *));
 
+GList *list_append_unique (GList *list, char *text);
 
 /* Position saving and restoring */
 
