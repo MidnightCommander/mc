@@ -2961,7 +2961,7 @@ int set_maxfiles(int requested_max)
 #endif
 }
 
-
+#if 0
 /*****************************************************************
  splits out the last subkey of a key
  *****************************************************************/  
@@ -3013,3 +3013,4 @@ BOOL reg_split_key(char *full_keyname, uint32 *reg_type, char *key_name)
 
 	return True;
 }
+#endif

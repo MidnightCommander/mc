@@ -5,6 +5,8 @@
 	(cli_printjob_del): Commented out.
 	(cli_print_queue): Ditto.
 	* samba/lib/system.c (sys_waitpid): Ditto.
+	* samba/lib/util.c (reg_split_key): Ditto.
+	(reg_get_subkey): Ditto.
 
 2002-07-29  Andrew V. Samoilov  <kai@cmail.ru>
 
