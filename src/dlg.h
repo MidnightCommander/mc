@@ -132,9 +132,6 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 		      int (*callback) (struct Dlg_head *, int, int),
 		      char *help_ctx, const char *title, int flags);
 
-/* Set title - this function should go away */
-void x_set_dialog_title (Dlg_head *h, const char *title);
-
 
 /* The flags: */
 #define DLG_BACKWARD    32	/* Tab order is reverse to the index order */

@@ -962,15 +962,3 @@ int dlg_select_nth_widget (Dlg_head *h, int n)
     return dlg_select_widget (h, w->widget);
 }
 
-/* Set dialog title.  This function should be eliminated.  */
-void
-x_set_dialog_title (Dlg_head * h, const char *title)
-{
-    char *t;
-
-    g_free (h->title);
-    t = g_strstrip (g_strdup (title));
-    h->title = g_strconcat (" ", t, " ", NULL);
-    g_free (t);
-}
-

@@ -440,9 +440,7 @@ static void init_layout (void)
 
     layout_dlg = create_dlg (0, 0, 15, first_width + second_width + 9, 
 		dialog_colors, layout_callback,
-		"[Layout]", "layout", DLG_CENTER);
-			     
-    x_set_dialog_title (layout_dlg, _("Layout"));
+		"[Layout]", _("Layout"), DLG_CENTER);
 
     add_widget (layout_dlg,
 		button_new (BY, b3, B_CANCEL, NORMAL_BUTTON, cancel_button, 0, 0, "c"));

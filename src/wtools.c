@@ -76,8 +76,7 @@ Listbox *create_listbox_window (int cols, int lines, char *title, char *help)
 
     /* Create components */
     listbox->dlg = create_dlg (ypos, xpos, lines+6, cols+4, dialog_colors,
-			       NULL, help, "listbox", DLG_CENTER);
-    x_set_dialog_title (listbox->dlg, title);	       
+			       NULL, help, title, DLG_CENTER);
     
     listbox->list = listbox_new (2, 2, cols, lines, listbox_finish, 0, "li");
 
@@ -154,8 +153,7 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 
     /* prepare dialog */
     query_dlg = create_dlg (ypos, xpos, lines, cols, query_colors, NULL,
-			    "[QueryBox]", "query", DLG_BACKWARD);
-    x_set_dialog_title (query_dlg, header);
+			    "[QueryBox]", header, DLG_BACKWARD);
 
     if (count > 0){
 
@@ -333,13 +331,11 @@ int quick_dialog_skip (QuickDialog *qd, int nskip)
     
     if (qd->xpos == -1)
         dd = create_dlg (0, 0, qd->ylen, qd->xlen, dialog_colors, quick_callback,
-		         qd->help, qd->class, DLG_CENTER | DLG_TRYUP);
+		         qd->help, qd->title, DLG_CENTER | DLG_TRYUP);
     else
         dd = create_dlg (qd->ypos, qd->xpos, qd->ylen, qd->xlen, dialog_colors, 
                          quick_callback,
-		         qd->help, qd->class, DLG_NONE);
-
-    x_set_dialog_title (dd, qd->title);
+		         qd->help, qd->title, DLG_NONE);
     
     /* We pass this to the callback */
     dd->cols  = qd->xlen;

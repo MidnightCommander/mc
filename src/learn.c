@@ -256,9 +256,8 @@ static void init_learn (void)
     do_refresh ();
 
     learn_dlg = create_dlg (0, 0, 23, 78, dialog_colors,
-			      learn_callback, "[Learn keys]", "Learn keys",
-			      DLG_CENTER);
-    x_set_dialog_title (learn_dlg, _("Learn keys"));
+			      learn_callback, "[Learn keys]",
+			      _("Learn keys"), DLG_CENTER);
 
 #define XTRACT(i) BY+learn_but[i].y, learn_but[i].x, learn_but[i].ret_cmd, learn_but[i].flags, _(learn_but[i].text), 0, 0, NULL
 

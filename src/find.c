@@ -196,9 +196,7 @@ find_par_start:
 	in_contents = g_strdup ("");
     
     find_dlg = create_dlg (0, 0, FIND_Y, FIND_X, dialog_colors, NULL,
-			   "[Find File]", "findfile", DLG_CENTER);
-
-    x_set_dialog_title (find_dlg, _("Find File"));
+			   "[Find File]", _("Find File"), DLG_CENTER);
 
 	add_widget (find_dlg, button_new (11, b2, B_CANCEL, NORMAL_BUTTON,
 		buts[2], 0 ,0, "cancel"));
@@ -779,9 +777,7 @@ setup_gui (void)
 	}
     
     find_dlg = create_dlg (0, 0, FIND2_Y, FIND2_X, dialog_colors,
-			   find_callback, "[Find File]", "mfind", DLG_CENTER);
-    
-    x_set_dialog_title (find_dlg, _("Find file"));
+			   find_callback, "[Find File]", _("Find file"), DLG_CENTER);
 
 	add_widget (find_dlg,
 		button_new (FIND2_Y-3, fbuts[7].x, B_VIEW, NORMAL_BUTTON, 

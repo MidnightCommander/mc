@@ -166,8 +166,7 @@ init_listmode (char *oldlistformat)
 
     listmode_dlg =
 	create_dlg (0, 0, 22, 74, dialog_colors, listmode_callback,
-		    listmode_section, "listmode", DLG_CENTER);
-    x_set_dialog_title (listmode_dlg, "Listing format edit");
+		    listmode_section, "Listing format edit", DLG_CENTER);
 
 #define XTRACT(i) BY+listmode_but[i].y, BX+listmode_but[i].x, listmode_but[i].ret_cmd, listmode_but[i].flags, listmode_but[i].text, 0, 0, NULL
 

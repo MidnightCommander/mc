@@ -191,9 +191,7 @@ static void init_configure (void)
 
     conf_dlg = create_dlg (0, 0, 20, first_width + second_width + 9,
 		dialog_colors, configure_callback, "[Configuration]",
-		"option", DLG_CENTER);
-
-    x_set_dialog_title (conf_dlg, _("Configure options"));
+		_("Configure options"), DLG_CENTER);
 
     add_widget (conf_dlg,
 	button_new (BY, b3, B_CANCEL, NORMAL_BUTTON,
