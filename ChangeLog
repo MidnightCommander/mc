@@ -1,7 +1,7 @@
 2004-09-17 Dmitry Alexeyev <dmi_a@qnx.org.ru> 
 
-	* makefile.syntax.diff: adds define and ended keyrowrds
-	* perl.syntax.diff: adds break keyword
+	* syntax/makefile.syntax.diff: adds define and ended keyrowrds
+	* syntax/perl.syntax.diff: adds break keyword
 
 2004-09-10  Jakub Jelinek  <jakub@redhat.com>
 
