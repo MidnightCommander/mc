@@ -1,3 +1,10 @@
+2004-10-17  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* undelfs.c (undelfs_open): Use g_try_malloc() instead
+	of g_malloc().
+
+	* smbfs.c (smbfs_send): Don't account negative "ret".
+
 2004-10-16  Roland Illig  <roland.illig@gmx.de>
 
 	* tar.c (tar_read_header): Fixed handling of filenames starting

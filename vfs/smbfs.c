@@ -602,9 +602,11 @@ smbfs_send(struct cli_state *cli)
 
 	while (nwritten < len) {
 		ret = write_socket(cli->fd, cli->outbuf+nwritten, len - nwritten);
-		if (ret <= 0 && errno == EPIPE)
+		if (ret <= 0) {
+		    if (errno == EPIPE)
 			return False;
-		nwritten += ret;
+		} else
+		    nwritten += ret;
 	}
 	
 	return True;

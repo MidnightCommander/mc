@@ -423,13 +423,13 @@ undelfs_open (struct vfs_class *me, const char *fname, int flags, int mode)
 	    continue;
 
 	/* Found: setup all the structures needed by read */
-	p = g_new (undelfs_file, 1);
+	p = (undelfs_file *) g_try_malloc (((gsize) sizeof (undelfs_file)));
 	if (!p) {
 	    g_free (file);
 	    g_free (f);
 	    return 0;
 	}
-	p->buf = g_malloc (fs->blocksize);
+	p->buf = g_try_malloc (fs->blocksize);
 	if (!p->buf) {
 	    g_free (p);
 	    g_free (file);
