@@ -702,38 +702,6 @@ int exit_subshell (void)
 	quit = !query_dialog (_(" Warning "), _(" The shell is still active. Quit anyway? "),
 			      0, 2, _("&Yes"), _("&No"));
 
-#if AIX_TCSH_CODE_BELOW_IS_IT_FIXED
-    /* New Test code */
-    else
-    {
-	if (subshell_type == TCSH)
-	    g_snprintf (pty_buffer, pty_buffer_size, " echo -n Jobs:>/tmp/mc.pipe.%d;jobs>/tmp/"
-		     "mc.pipe.%d;kill -STOP $$\n", getpid (), getpid ());
-	else
-	    g_snprintf (pty_buffer, pty_buffer_size, " echo -n Jobs:>&%d;jobs>&%d;kill -STOP $$\n",
-		     subshell_pipe[WRITE], subshell_pipe[WRITE]);
-	write (subshell_pty, pty_buffer, strlen (pty_buffer));
-
-#ifndef HAVE_GRANTPT  /* FIXME */
-	if (subshell_type == ZSH)
-	    /* Here we have to drain the shell output, because zsh does a  */
-	    /* tcsetattr(SHTTY, TCSADRAIN...) which will block if we don't */
-	    read (subshell_pty, pty_buffer, pty_buffer_size);
-#endif
-
-	/* TCSH + AIX hang here, fix this before removing the ifdef above */
-	if (read (subshell_pipe[READ], pty_buffer, pty_buffer_size) == 5)
-	    quit = TRUE;
-	else
-	    quit = !query_dialog (_(" Warning "), _(" There are stopped jobs.")
-				  _(" Quit anyway? "), 0, 2, _("&Yes"), _("&No"));
-
-	synchronize ();
-	subshell_state = RUNNING_COMMAND;
-	feed_subshell (QUIETLY, FALSE);  /* Drain the shell output (again) */
-    }
-#endif
-
     if (quit && subshell_type == TCSH)
     {
 	/* We abuse of pty_buffer here, but it doesn't matter at this stage */
