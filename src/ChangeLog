@@ -1,3 +1,11 @@
+Mon Oct  5 19:59:56 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* main.c (translate_url_to_new_syntax): Translate ftp:// to an
+	absolute path instead of a relative path (fix to "hotlist" bug 
+	reported by Andrej). This means we drop the "return to last dir" 
+	feature for ftpfs (when leaving ftpfs with ".." returns to the
+	directory visited before entering the ftpfs).
+
 Sat Oct  3 00:54:23 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* gtkedit/Makefile.in (EDITOBJS): removed one wrong \\ (line 

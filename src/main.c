@@ -907,13 +907,13 @@ directory_history_add (WPanel * panel, char *s)
 }
 
 /* Translate ftp://user:password@host/directory to 
-              #ftp:user:password@host/directory.
+              /#ftp:user:password@host/directory.
  */
 static char *
 translate_url_to_new_syntax (const char *p)
 {
     if (strncmp (p, "ftp://", 6) == 0)
-        return copy_strings ("#ftp:", p + 6, 0);
+        return copy_strings ("/#ftp:", p + 6, 0);
     else
         return strdup (p);
 }
