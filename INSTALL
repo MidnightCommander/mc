@@ -146,6 +146,22 @@ incomplete, use `configure --help' to get the full list):
      the internal viewer and editor and converting it on the fly.  The
      implementation of this option is currently incomplete.
 
+`--disable-background'
+     This option disables support for background operations.  Background
+     operations allow to perform some tasks such as copying files in a
+     separate background process.  Any messages from the background
+     process are forwarded to the foreground process.  More advanced
+     dialogs cannot be forwarded yet, so the background process uses the
+     default.  Background code is known to be less stable than the rest
+     of the code, so you may want to disable it at the compile time.
+
+`--disable-netcode'
+     This option disables support for networked virtual filesystems.
+     It's primarily used by developers to make sure that the code would
+     compile and run on operating systems that lack POSIX compatible
+     network support.  But you can use it is you know that you won't be
+     accessing remote filesystems from GNU Midnight Commander.
+
 You may also tell configure which screen library you want to use with
 the Midnight Commander.  The configure script will use S-Lang as
 default, and prefers an already installed S-Lang library over the
