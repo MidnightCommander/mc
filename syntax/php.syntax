@@ -1,19 +1,29 @@
 # PHP syntax file
 
-# 2001-09-17  Max Schedriviy  <max@tavrida.net>
+# 2002-06-01  Max Schedriviy  <max@humgat.org>
+#	* many corrections from previous version
+
+# 2001-09-17  Max Schedriviy  <max@humgat.org>
 #	* completely rewritten
 
 # Old version:
 #	kludges by Stephen Perez ;)
 #	(comment highlighting modifications (a la Emacs) by Paul Sheer) */
 
-context default 
+context default
+
+######################
+# Control srtuctures
+
     keyword whole break brightmagenta/24
     keyword whole case brightmagenta/24
     keyword whole class brightmagenta/24
     keyword whole continue brightmagenta/24
+    keyword whole declare brightmagenta/24
     keyword whole default brightmagenta/24
+    keyword whole define brightmagenta/24
     keyword whole do brightmagenta/24
+    keyword whole echo brightmagenta/24
     keyword whole else brightmagenta/24
     keyword whole elseif brightmagenta/24
     keyword whole endif brightmagenta/24
@@ -21,239 +31,274 @@ context default
     keyword whole extends brightmagenta/24
     keyword whole false brightmagenta/24
     keyword whole for brightmagenta/24
+    keyword whole foreach brightmagenta/24
     keyword whole function brightmagenta/24
     keyword whole global brightmagenta/24
     keyword whole if brightmagenta/24
     keyword whole include brightmagenta/24
+    keyword whole include_once brightmagenta/24
     keyword whole new brightmagenta/24
     keyword whole require brightmagenta/24
+    keyword whole require_once brightmagenta/24
     keyword whole return brightmagenta/24
+    keyword whole static brightmagenta/24
     keyword whole switch brightmagenta/24
     keyword whole true brightmagenta/24
     keyword whole while brightmagenta/24
 
-    keyword whole var white/24
 
-    keyword whole Abs yellow/24
-    keyword whole Acos yellow/24
-    keyword whole AddSlashes yellow/24
-    keyword whole apache_look_uri yellow/24
-    keyword whole apache_note yellow/24
+#############
+# Functions
+
+    keyword whole ADONewConnection yellow/24
+    keyword whole Execute yellow/24
+    keyword whole FetchNextObject yellow/24
+    keyword whole PConnect yellow/24
+    keyword whole abs yellow/24
+    keyword whole acos yellow/24
+    keyword whole acosh yellow/24
+    keyword whole addcslashes yellow/24
+    keyword whole addslashes yellow/24
     keyword whole array yellow/24
+    keyword whole array_count_values yellow/24
+    keyword whole array_diff yellow/24
+    keyword whole array_filter yellow/24
+    keyword whole array_flip yellow/24
+    keyword whole array_intersect yellow/24
+    keyword whole array_key_exists yellow/24
     keyword whole array_keys yellow/24
+    keyword whole array_map yellow/24
     keyword whole array_merge yellow/24
+    keyword whole array_merge_recursive yellow/24
+    keyword whole array_multisort yellow/24
+    keyword whole array_pad yellow/24
     keyword whole array_pop yellow/24
     keyword whole array_push yellow/24
+    keyword whole array_rand yellow/24
+    keyword whole array_reduce yellow/24
+    keyword whole array_reverse yellow/24
+    keyword whole array_search yellow/24
     keyword whole array_shift yellow/24
     keyword whole array_slice yellow/24
     keyword whole array_splice yellow/24
+    keyword whole array_sum yellow/24
+    keyword whole array_unique yellow/24
     keyword whole array_unshift yellow/24
     keyword whole array_values yellow/24
     keyword whole array_walk yellow/24
     keyword whole arsort yellow/24
-    keyword whole Asin yellow/24
+    keyword whole asin yellow/24
+    keyword whole asinh yellow/24
     keyword whole asort yellow/24
-    keyword whole aspell_check yellow/24
-    keyword whole aspell_check-raw yellow/24
-    keyword whole aspell_new yellow/24
-    keyword whole aspell_suggest yellow/24
-    keyword whole Atan yellow/24
-    keyword whole Atan2 yellow/24
+    keyword whole assert yellow/24
+    keyword whole assert_options yellow/24
+    keyword whole atan yellow/24
+    keyword whole atan2 yellow/24
+    keyword whole atanh yellow/24
     keyword whole base64_decode yellow/24
     keyword whole base64_encode yellow/24
-    keyword whole basename yellow/24
     keyword whole base_convert yellow/24
-    keyword whole bcadd yellow/24
-    keyword whole bccomp yellow/24
-    keyword whole bcdiv yellow/24
-    keyword whole bcmod yellow/24
-    keyword whole bcmul yellow/24
-    keyword whole bcpow yellow/24
-    keyword whole bcscale yellow/24
-    keyword whole bcsqrt yellow/24
-    keyword whole bcsub yellow/24
+    keyword whole basename yellow/24
+    keyword whole ber_free yellow/24
     keyword whole bin2hex yellow/24
-    keyword whole BinDec yellow/24
-    keyword whole case-folded yellow/24
-    keyword whole case-folding yellow/24
-    keyword whole Ceil yellow/24
+    keyword whole bindec yellow/24
+    keyword whole bindtextdomain yellow/24
+    keyword whole bzclose yellow/24
+    keyword whole bzcompress yellow/24
+    keyword whole bzdecompress yellow/24
+    keyword whole bzerrno yellow/24
+    keyword whole bzerror yellow/24
+    keyword whole bzerrstr yellow/24
+    keyword whole bzflush yellow/24
+    keyword whole bzopen yellow/24
+    keyword whole bzread yellow/24
+    keyword whole bzwrite yellow/24
+    keyword whole call_user_func yellow/24
+    keyword whole call_user_func_array yellow/24
+    keyword whole call_user_method yellow/24
+    keyword whole call_user_method_array yellow/24
+    keyword whole ceil yellow/24
     keyword whole chdir yellow/24
     keyword whole checkdate yellow/24
     keyword whole checkdnsrr yellow/24
     keyword whole chgrp yellow/24
     keyword whole chmod yellow/24
-    keyword whole Chop yellow/24
+    keyword whole chop yellow/24
     keyword whole chown yellow/24
-    keyword whole Chr yellow/24
+    keyword whole chr yellow/24
+    keyword whole chroot yellow/24
     keyword whole chunk_split yellow/24
     keyword whole clearstatcache yellow/24
     keyword whole closedir yellow/24
     keyword whole closelog yellow/24
     keyword whole compact yellow/24
     keyword whole configurationfile yellow/24
-    keyword whole connection_aborted yellow/24
-    keyword whole connection_status yellow/24
-    keyword whole connection_timeout yellow/24
+    keyword whole constant yellow/24
     keyword whole convert_cyr_string yellow/24
     keyword whole copy yellow/24
-    keyword whole Cos yellow/24
+    keyword whole cos yellow/24
+    keyword whole cosh yellow/24
     keyword whole count yellow/24
+    keyword whole count_chars yellow/24
     keyword whole crypt yellow/24
+    keyword whole curl_close yellow/24
+    keyword whole curl_errno yellow/24
+    keyword whole curl_error yellow/24
+    keyword whole curl_exec yellow/24
+    keyword whole curl_getinfo yellow/24
+    keyword whole curl_init yellow/24
+    keyword whole curl_setopt yellow/24
+    keyword whole curl_version yellow/24
     keyword whole current yellow/24
     keyword whole date yellow/24
-    keyword whole dbase_add_record yellow/24
-    keyword whole dbase_close yellow/24
-    keyword whole dbase_create yellow/24
-    keyword whole dbase_delete_record yellow/24
-    keyword whole dbase_get_record yellow/24
-    keyword whole dbase_get_record_with_names yellow/24
-    keyword whole dbase_numfields yellow/24
-    keyword whole dbase_numrecords yellow/24
-    keyword whole dbase_open yellow/24
-    keyword whole dbase_pack yellow/24
-    keyword whole dbase_replace_record yellow/24
-    keyword whole dba_close yellow/24
-    keyword whole dba_delete yellow/24
-    keyword whole dba_exists yellow/24
-    keyword whole dba_fetch yellow/24
-    keyword whole dba_firstkey yellow/24
-    keyword whole dba_insert yellow/24
-    keyword whole dba_key yellow/24
-    keyword whole dba_open yellow/24
-    keyword whole dba_optimize yellow/24
-    keyword whole dba_popen yellow/24
-    keyword whole dba_replace yellow/24
-    keyword whole dba_sync yellow/24
-    keyword whole dblist yellow/24
-    keyword whole dbmclose yellow/24
-    keyword whole dbmdelete yellow/24
-    keyword whole dbmexists yellow/24
-    keyword whole dbmfetch yellow/24
-    keyword whole dbmfirstkey yellow/24
-    keyword whole dbminsert yellow/24
-    keyword whole dbmkey yellow/24
-    keyword whole dbmopen yellow/24
-    keyword whole dbmreplace yellow/24
+    keyword whole dcgettext yellow/24
     keyword whole debugger_off yellow/24
     keyword whole debugger_on yellow/24
-    keyword whole DecBin yellow/24
-    keyword whole DecHex yellow/24
-    keyword whole DecOct yellow/24
+    keyword whole decbin yellow/24
+    keyword whole dechex yellow/24
+    keyword whole decoct yellow/24
+    keyword whole define_syslog_variables yellow/24
+    keyword whole defined yellow/24
+    keyword whole deg2rad yellow/24
     keyword whole delete yellow/24
+    keyword whole dgettext yellow/24
     keyword whole die yellow/24
     keyword whole dirname yellow/24
+    keyword whole disk_free_space yellow/24
+    keyword whole disk_total_space yellow/24
     keyword whole diskfreespace yellow/24
     keyword whole dl yellow/24
+    keyword whole dotnet_load yellow/24
     keyword whole doubleval yellow/24
     keyword whole each yellow/24
     keyword whole easter_date yellow/24
     keyword whole easter_days yellow/24
-    keyword whole echo yellow/24
     keyword whole empty yellow/24
     keyword whole end yellow/24
     keyword whole ereg yellow/24
+    keyword whole ereg_replace yellow/24
     keyword whole eregi yellow/24
     keyword whole eregi_replace yellow/24
-    keyword whole ereg_replace yellow/24
-    keyword whole error_log yellow/24
     keyword whole error_log yellow/24
     keyword whole error_reporting yellow/24
+    keyword whole escapeshellarg yellow/24
     keyword whole escapeshellcmd yellow/24
     keyword whole eval yellow/24
     keyword whole exec yellow/24
     keyword whole exit yellow/24
-    keyword whole Exp yellow/24
+    keyword whole exp yellow/24
     keyword whole explode yellow/24
+    keyword whole expm1 yellow/24
     keyword whole extension_dir yellow/24
     keyword whole extension_loaded yellow/24
     keyword whole extract yellow/24
-    keyword whole E_CORE_ERROR yellow/24
-    keyword whole E_CORE_WARNING yellow/24
-    keyword whole E_ERROR yellow/24
-    keyword whole E_NOTICE yellow/24
-    keyword whole E_PARSE yellow/24
-    keyword whole E_WARNING yellow/24
+    keyword whole ezmlm_hash yellow/24
     keyword whole fclose yellow/24
-    keyword whole fdf_close yellow/24
-    keyword whole fdf_create yellow/24
-    keyword whole fdf_get_file yellow/24
-    keyword whole fdf_get_status yellow/24
-    keyword whole fdf_get_value yellow/24
-    keyword whole fdf_open yellow/24
-    keyword whole fdf_save yellow/24
-    keyword whole fdf_set_ap yellow/24
-    keyword whole fdf_set_file yellow/24
-    keyword whole fdf_set_status yellow/24
-    keyword whole fdf_set_value yellow/24
-    keyword whole fdf__field_name yellow/24
+    keyword whole fd_isset yellow/24
+    keyword whole fd_set yellow/24
     keyword whole feof yellow/24
+    keyword whole fflush yellow/24
     keyword whole fgetc yellow/24
     keyword whole fgetcsv yellow/24
     keyword whole fgets yellow/24
     keyword whole fgetss yellow/24
     keyword whole file yellow/24
+    keyword whole file_exists yellow/24
     keyword whole fileatime yellow/24
     keyword whole filectime yellow/24
     keyword whole filegro yellow/24
+    keyword whole filegroup yellow/24
     keyword whole fileinode yellow/24
     keyword whole filemtime yellow/24
     keyword whole fileowner yellow/24
     keyword whole fileperms yellow/24
-    keyword whole filepro yellow/24
-    keyword whole filepro_fieldcount yellow/24
-    keyword whole filepro_fieldname yellow/24
-    keyword whole filepro_fieldtype yellow/24
-    keyword whole filepro_fieldwidth yellow/24
-    keyword whole filepro_retrieve yellow/24
-    keyword whole filepro_rowcount yellow/24
     keyword whole filesize yellow/24
     keyword whole filetype yellow/24
-    keyword whole file_exists yellow/24
     keyword whole flock yellow/24
-    keyword whole Floor yellow/24
+    keyword whole floor yellow/24
     keyword whole flush yellow/24
     keyword whole fopen yellow/24
+    keyword whole fopenstream yellow/24
     keyword whole fpassthru yellow/24
     keyword whole fputs yellow/24
     keyword whole fread yellow/24
-    keyword whole FreeType yellow/24
-    keyword whole FrenchToJD yellow/24
+    keyword whole freetype yellow/24
+    keyword whole frenchtojd yellow/24
+    keyword whole fribidi_log2vis yellow/24
+    keyword whole fscanf yellow/24
     keyword whole fseek yellow/24
     keyword whole fsockopen yellow/24
     keyword whole ftell yellow/24
+    keyword whole ftp_cdup yellow/24
+    keyword whole ftp_chdir yellow/24
+    keyword whole ftp_connect yellow/24
+    keyword whole ftp_delete yellow/24
+    keyword whole ftp_exec yellow/24
+    keyword whole ftp_fget yellow/24
+    keyword whole ftp_fput yellow/24
+    keyword whole ftp_get yellow/24
+    keyword whole ftp_login yellow/24
+    keyword whole ftp_mdtm yellow/24
+    keyword whole ftp_mkdir yellow/24
+    keyword whole ftp_nlist yellow/24
+    keyword whole ftp_pasv yellow/24
+    keyword whole ftp_put yellow/24
+    keyword whole ftp_pwd yellow/24
+    keyword whole ftp_quit yellow/24
+    keyword whole ftp_rawlist yellow/24
+    keyword whole ftp_rename yellow/24
+    keyword whole ftp_rmdir yellow/24
+    keyword whole ftp_site yellow/24
+    keyword whole ftp_size yellow/24
+    keyword whole ftp_systype yellow/24
     keyword whole function_exists yellow/24
     keyword whole fwrite yellow/24
+    keyword whole get_all_headers yellow/24
+    keyword whole get_browser yellow/24
+    keyword whole get_cfg_var yellow/24
+    keyword whole get_current_user yellow/24
+    keyword whole get_html_translation_table yellow/24
+    keyword whole get_magic_quotes_gpc yellow/24
+    keyword whole get_magic_quotes_runtime yellow/24
+    keyword whole get_meta_tags yellow/24
     keyword whole getallheaders yellow/24
+    keyword whole getcwd yellow/24
     keyword whole getdate yellow/24
+    keyword whole getdir yellow/24
     keyword whole getenv yellow/24
     keyword whole gethostbyaddr yellow/24
     keyword whole gethostbyname yellow/24
     keyword whole gethostbynamel yellow/24
-    keyword whole GetImageSize yellow/24
+    keyword whole getimagesize yellow/24
     keyword whole getlastmod yellow/24
     keyword whole getmxrr yellow/24
+    keyword whole getmygid yellow/24
     keyword whole getmyinode yellow/24
     keyword whole getmypid yellow/24
     keyword whole getmyuid yellow/24
+    keyword whole getprotobyname yellow/24
+    keyword whole getprotobynumber yellow/24
     keyword whole getrandmax yellow/24
     keyword whole getrusage yellow/24
+    keyword whole getservbyname yellow/24
+    keyword whole getservbyport yellow/24
+    keyword whole gettext yellow/24
     keyword whole gettimeofday yellow/24
     keyword whole gettype yellow/24
-    keyword whole get_cfg_var yellow/24
-    keyword whole get_current_user yellow/24
-    keyword whole get_magic_quotes_gpc yellow/24
-    keyword whole get_magic_quotes_runtime yellow/24
-    keyword whole get_meta_tags yellow/24
     keyword whole gmdate yellow/24
     keyword whole gmmktime yellow/24
     keyword whole gmstrftime yellow/24
-    keyword whole GregorianToJD yellow/24
+    keyword whole gregoriantojd yellow/24
     keyword whole gzclose yellow/24
+    keyword whole gzcompress yellow/24
+    keyword whole gzdeflate yellow/24
+    keyword whole gzencode yellow/24
     keyword whole gzeof yellow/24
     keyword whole gzfile yellow/24
     keyword whole gzgetc yellow/24
     keyword whole gzgets yellow/24
     keyword whole gzgetss yellow/24
+    keyword whole gzinflate yellow/24
     keyword whole gzopen yellow/24
     keyword whole gzpassthru yellow/24
     keyword whole gzputs yellow/24
@@ -261,422 +306,194 @@ context default
     keyword whole gzrewind yellow/24
     keyword whole gzseek yellow/24
     keyword whole gztell yellow/24
+    keyword whole gzuncompress yellow/24
     keyword whole gzwrite yellow/24
     keyword whole header yellow/24
-    keyword whole HexDec yellow/24
+    keyword whole headers_sent yellow/24
+    keyword whole hebrev yellow/24
+    keyword whole hebrevc yellow/24
+    keyword whole hexdec yellow/24
+    keyword whole highlight_file yellow/24
+    keyword whole highlight_string yellow/24
     keyword whole htmlentities yellow/24
     keyword whole htmlspecialchars yellow/24
-    keyword whole hw_Children yellow/24
-    keyword whole hw_ChildrenObj yellow/24
-    keyword whole hw_Close yellow/24
-    keyword whole hw_Connect yellow/24
-    keyword whole hw_Cp yellow/24
-    keyword whole hw_Deleteobject yellow/24
-    keyword whole hw_DocByAnchor yellow/24
-    keyword whole hw_DocByAnchorObj yellow/24
-    keyword whole hw_DocumentAttributes yellow/24
-    keyword whole hw_DocumentBodyTag yellow/24
-    keyword whole hw_DocumentContent yellow/24
-    keyword whole hw_DocumentSetContent yellow/24
-    keyword whole hw_DocumentSize yellow/24
-    keyword whole hw_EditText yellow/24
-    keyword whole hw_Error yellow/24
-    keyword whole hw_ErrorMsg yellow/24
-    keyword whole hw_Free_Document yellow/24
-    keyword whole hw_GetAnchors yellow/24
-    keyword whole hw_GetAnchorsObj yellow/24
-    keyword whole hw_GetAndLock yellow/24
-    keyword whole hw_GetChildColl yellow/24
-    keyword whole hw_GetChildCollObj yellow/24
-    keyword whole hw_GetChildDocColl yellow/24
-    keyword whole hw_GetChildDocCollObj yellow/24
-    keyword whole hw_GetObject yellow/24
-    keyword whole hw_GetObjectByQuery yellow/24
-    keyword whole hw_GetObjectByQueryColl yellow/24
-    keyword whole hw_GetObjectByQueryCollObj yellow/24
-    keyword whole hw_GetObjectByQueryObj yellow/24
-    keyword whole hw_GetParents yellow/24
-    keyword whole hw_GetParentsObj yellow/24
-    keyword whole hw_GetRemote yellow/24
-    keyword whole hw_GetRemoteChildren yellow/24
-    keyword whole hw_GetSrcByDestObj yellow/24
-    keyword whole hw_GetText yellow/24
-    keyword whole hw_Identify yellow/24
-    keyword whole hw_InCollections yellow/24
-    keyword whole hw_Info yellow/24
-    keyword whole hw_InsColl yellow/24
-    keyword whole hw_InsDoc yellow/24
-    keyword whole hw_InsertDocument yellow/24
-    keyword whole hw_InsertObject yellow/24
-    keyword whole hw_Modifyobject yellow/24
-    keyword whole hw_Mv yellow/24
-    keyword whole hw_New_Document yellow/24
-    keyword whole hw_Objrec2Array yellow/24
-    keyword whole hw_OutputDocument yellow/24
-    keyword whole hw_pConnect yellow/24
-    keyword whole hw_PipeDocument yellow/24
-    keyword whole hw_Root yellow/24
-    keyword whole hw_Unlock yellow/24
-    keyword whole hw_Username yellow/24
-    keyword whole hw_Who yellow/24
-    keyword whole ibase_bind yellow/24
-    keyword whole ibase_close yellow/24
-    keyword whole ibase_connect yellow/24
-    keyword whole ibase_execute yellow/24
-    keyword whole ibase_fetch_row yellow/24
-    keyword whole ibase_free_query yellow/24
-    keyword whole ibase_free_result yellow/24
-    keyword whole ibase_pconnect yellow/24
-    keyword whole ibase_prepare yellow/24
-    keyword whole ibase_query yellow/24
-    keyword whole ibase_timefmt yellow/24
-    keyword whole icap_close yellow/24
-    keyword whole icap_delete_event yellow/24
-    keyword whole icap_fetch_event yellow/24
-    keyword whole icap_list_alarms yellow/24
-    keyword whole icap_list_events yellow/24
-    keyword whole icap_open yellow/24
-    keyword whole icap_snooze yellow/24
-    keyword whole icap_store_event yellow/24
-    keyword whole ifxus_close_slob yellow/24
-    keyword whole ifxus_create_slob yellow/24
-    keyword whole ifxus_open_slob yellow/24
-    keyword whole ifxus_read_slob yellow/24
-    keyword whole ifxus_seek_slob yellow/24
-    keyword whole ifxus_tell_slob yellow/24
-    keyword whole ifxus_write_slob yellow/24
-    keyword whole ifx_affected_rows yellow/24
-    keyword whole ifx_blobinfile_mode yellow/24
-    keyword whole ifx_byteasvarchar yellow/24
-    keyword whole ifx_close yellow/24
-    keyword whole ifx_connect yellow/24
-    keyword whole ifx_copy_blob yellow/24
-    keyword whole ifx_create_blob yellow/24
-    keyword whole ifx_create_char yellow/24
-    keyword whole ifx_date_blob yellow/24
-    keyword whole ifx_date_char yellow/24
-    keyword whole ifx_do yellow/24
-    keyword whole ifx_error yellow/24
-    keyword whole ifx_errormsg yellow/24
-    keyword whole ifx_fetch_row yellow/24
-    keyword whole ifx_fieldproperties yellow/24
-    keyword whole ifx_fieldtypes yellow/24
-    keyword whole ifx_free_blob yellow/24
-    keyword whole ifx_free_char yellow/24
-    keyword whole ifx_free_result yellow/24
-    keyword whole ifx_free_slob yellow/24
-    keyword whole ifx_getsqlca yellow/24
-    keyword whole ifx_get_blob yellow/24
-    keyword whole ifx_get_char yellow/24
-    keyword whole ifx_htmltbl_result yellow/24
-    keyword whole ifx_nullformat yellow/24
-    keyword whole ifx_num_fields yellow/24
-    keyword whole ifx_num_rows yellow/24
-    keyword whole ifx_pconnect yellow/24
-    keyword whole ifx_prepare yellow/24
-    keyword whole ifx_query yellow/24
-    keyword whole ifx_textasvarchar yellow/24
+    keyword whole hypot yellow/24
+    keyword whole iconv_get_encoding yellow/24
+    keyword whole iconv_set_encoding yellow/24
     keyword whole ignore_user_abort yellow/24
-    keyword whole ImageArc yellow/24
-    keyword whole ImageChar yellow/24
-    keyword whole ImageChar yellow/24
-    keyword whole ImageColorAllocate yellow/24
-    keyword whole ImageColorAt yellow/24
-    keyword whole ImageColorClosest yellow/24
-    keyword whole ImageColorExact yellow/24
-    keyword whole ImageColorResolve yellow/24
-    keyword whole ImageColorSet yellow/24
-    keyword whole ImageColorsForIndex yellow/24
-    keyword whole ImageColorsTotal yellow/24
-    keyword whole ImageColorTransparent yellow/24
-    keyword whole ImageCopyResized yellow/24
-    keyword whole ImageCreate yellow/24
-    keyword whole ImageCreateFromGif yellow/24
-    keyword whole ImageDashedLine yellow/24
-    keyword whole ImageDestroy yellow/24
-    keyword whole ImageFill yellow/24
-    keyword whole ImageFilledPolygon yellow/24
-    keyword whole ImageFilledRectangle yellow/24
-    keyword whole ImageFillToBorder yellow/24
-    keyword whole ImageFontHeight yellow/24
-    keyword whole ImageFontWidth yellow/24
-    keyword whole ImageGif yellow/24
-    keyword whole ImageInterlace yellow/24
-    keyword whole ImageLine yellow/24
-    keyword whole ImageLoadFont yellow/24
-    keyword whole ImagePolygon yellow/24
-    keyword whole ImagePSBBox yellow/24
-    keyword whole ImagePSEncodeFont yellow/24
-    keyword whole ImagePSFreeFont yellow/24
-    keyword whole ImagePSLoadFont yellow/24
-    keyword whole ImagePSText yellow/24
-    keyword whole ImageRectangle yellow/24
-    keyword whole ImageSetPixel yellow/24
-    keyword whole ImageString yellow/24
-    keyword whole ImageString yellow/24
-    keyword whole ImageSX yellow/24
-    keyword whole ImageSY yellow/24
-    keyword whole ImageTTFBBox yellow/24
-    keyword whole ImageTTFText yellow/24
+    keyword whole image2wbmp yellow/24
+    keyword whole imagealphablending yellow/24
+    keyword whole imagearc yellow/24
+    keyword whole imagechar yellow/24
+    keyword whole imagecharup yellow/24
+    keyword whole imagecolorallocate yellow/24
+    keyword whole imagecolorat yellow/24
+    keyword whole imagecolorclosest yellow/24
+    keyword whole imagecolorclosestalpha yellow/24
+    keyword whole imagecolorclosesthwb yellow/24
+    keyword whole imagecolordeallocate yellow/24
+    keyword whole imagecolorexact yellow/24
+    keyword whole imagecolorexactalpha yellow/24
+    keyword whole imagecolorresolve yellow/24
+    keyword whole imagecolorresolvealpha yellow/24
+    keyword whole imagecolorset yellow/24
+    keyword whole imagecolorsforindex yellow/24
+    keyword whole imagecolorstotal yellow/24
+    keyword whole imagecolortransparent yellow/24
+    keyword whole imagecopy yellow/24
+    keyword whole imagecopymerge yellow/24
+    keyword whole imagecopymergegray yellow/24
+    keyword whole imagecopyresampled yellow/24
+    keyword whole imagecopyresized yellow/24
+    keyword whole imagecreate yellow/24
+    keyword whole imagecreatefromgd yellow/24
+    keyword whole imagecreatefromgd2 yellow/24
+    keyword whole imagecreatefromgd2part yellow/24
+    keyword whole imagecreatefromgif yellow/24
+    keyword whole imagecreatefromjpeg yellow/24
+    keyword whole imagecreatefrompng yellow/24
+    keyword whole imagecreatefromstring yellow/24
+    keyword whole imagecreatefromwbmp yellow/24
+    keyword whole imagecreatefromxbm yellow/24
+    keyword whole imagecreatefromxpm yellow/24
+    keyword whole imagecreatetruecolor yellow/24
+    keyword whole imagedashedline yellow/24
+    keyword whole imagedestroy yellow/24
+    keyword whole imageellipse yellow/24
+    keyword whole imagefill yellow/24
+    keyword whole imagefilledarc yellow/24
+    keyword whole imagefilledellipse yellow/24
+    keyword whole imagefilledpolygon yellow/24
+    keyword whole imagefilledrectangle yellow/24
+    keyword whole imagefilltoborder yellow/24
+    keyword whole imagefontheight yellow/24
+    keyword whole imagefontwidth yellow/24
+    keyword whole imageftbbox yellow/24
+    keyword whole imagefttext yellow/24
+    keyword whole imagegammacorrect yellow/24
+    keyword whole imagegd yellow/24
+    keyword whole imagegd2 yellow/24
+    keyword whole imagegif yellow/24
+    keyword whole imageinterlace yellow/24
+    keyword whole imagejpeg yellow/24
+    keyword whole imageline yellow/24
+    keyword whole imageloadfont yellow/24
+    keyword whole imagepalettecopy yellow/24
+    keyword whole imagepng yellow/24
+    keyword whole imagepolygon yellow/24
+    keyword whole imagepsbbox yellow/24
+    keyword whole imagepscopyfont yellow/24
+    keyword whole imagepsencodefont yellow/24
+    keyword whole imagepsextendfont yellow/24
+    keyword whole imagepsfreefont yellow/24
+    keyword whole imagepsloadfont yellow/24
+    keyword whole imagepsslantfont yellow/24
+    keyword whole imagepstext yellow/24
+    keyword whole imagerectangle yellow/24
+    keyword whole imagesetbrush yellow/24
+    keyword whole imagesetpixel yellow/24
+    keyword whole imagesetstyle yellow/24
+    keyword whole imagesetthickness yellow/24
+    keyword whole imagesettile yellow/24
+    keyword whole imagestring yellow/24
+    keyword whole imagestringup yellow/24
+    keyword whole imagesx yellow/24
+    keyword whole imagesy yellow/24
+    keyword whole imagetruecolortopalette yellow/24
+    keyword whole imagettfbbox yellow/24
+    keyword whole imagettftext yellow/24
+    keyword whole imagetypes yellow/24
+    keyword whole imagewbmp yellow/24
     keyword whole implode yellow/24
-    keyword whole intval yellow/24
+    keyword whole import_request_variables yellow/24
     keyword whole in_array yellow/24
+    keyword whole ini_get yellow/24
+    keyword whole ini_restore yellow/24
+    keyword whole ini_set yellow/24
+    keyword whole intval yellow/24
+    keyword whole ip2long yellow/24
+    keyword whole iptcembed yellow/24
     keyword whole iptcparse yellow/24
-    keyword whole isset yellow/24
     keyword whole is_array yellow/24
+    keyword whole is_bool yellow/24
+    keyword whole is_callable yellow/24
     keyword whole is_dir yellow/24
     keyword whole is_double yellow/24
     keyword whole is_executable yellow/24
-    keyword whole is_file yellow/24
-    keyword whole is_float yellow/24
-    keyword whole is_int yellow/24
-    keyword whole is_integer yellow/24
     keyword whole is_link yellow/24
     keyword whole is_long yellow/24
+    keyword whole is_null yellow/24
+    keyword whole is_numeric yellow/24
     keyword whole is_object yellow/24
-    keyword whole is_readable yellow/24
-    keyword whole is_real yellow/24
+    keyword whole is_resource yellow/24
+    keyword whole is_scalar yellow/24
     keyword whole is_string yellow/24
-    keyword whole is_writeable yellow/24
-    keyword whole JDDayOfWeek yellow/24
-    keyword whole JDMonthName yellow/24
-    keyword whole JDToFrench yellow/24
-    keyword whole JDToGregorian yellow/24
-    keyword whole JDToJewish yellow/24
-    keyword whole JDToJulian yellow/24
-    keyword whole JewishToJD yellow/24
+    keyword whole is_uploaded_file yellow/24
+    keyword whole is_writable yellow/24
+    keyword whole isset yellow/24
+    keyword whole java_last_exception_clear yellow/24
+    keyword whole java_last_exception_get yellow/24
+    keyword whole jddayofweek yellow/24
+    keyword whole jdmonthname yellow/24
+    keyword whole jdtofrench yellow/24
+    keyword whole jdtogregorian yellow/24
+    keyword whole jdtojewish yellow/24
+    keyword whole jdtojulian yellow/24
+    keyword whole jdtounix yellow/24
+    keyword whole jewishtojd yellow/24
     keyword whole join yellow/24
-    keyword whole JulianToJD yellow/24
+    keyword whole jpeg2wbmp yellow/24
+    keyword whole juliantojd yellow/24
     keyword whole key yellow/24
+    keyword whole krsort yellow/24
     keyword whole ksort yellow/24
-    keyword whole ldap_add yellow/24
-    keyword whole ldap_bind yellow/24
-    keyword whole ldap_close yellow/24
-    keyword whole ldap_connect yellow/24
-    keyword whole ldap_count_entries yellow/24
-    keyword whole ldap_delete yellow/24
-    keyword whole ldap_dn2ufn yellow/24
-    keyword whole ldap_explode_dn yellow/24
-    keyword whole ldap_first_attribute yellow/24
-    keyword whole ldap_first_entry yellow/24
-    keyword whole ldap_free_result yellow/24
-    keyword whole ldap_get_attributes yellow/24
-    keyword whole ldap_get_dn yellow/24
-    keyword whole ldap_get_entries yellow/24
-    keyword whole ldap_get_values yellow/24
-    keyword whole ldap_list yellow/24
-    keyword whole ldap_modify yellow/24
-    keyword whole ldap_mod_add yellow/24
-    keyword whole ldap_mod_del yellow/24
-    keyword whole ldap_mod_replace yellow/24
-    keyword whole ldap_read yellow/24
-    keyword whole ldap_search yellow/24
-    keyword whole ldap_unbind yellow/24
-    keyword whole ldap__attribute yellow/24
-    keyword whole ldap__entry yellow/24
+    keyword whole lcg_value yellow/24
     keyword whole leak yellow/24
+    keyword whole levenshtein yellow/24
     keyword whole link yellow/24
     keyword whole linkinfo yellow/24
     keyword whole list yellow/24
-    keyword whole Log yellow/24
-    keyword whole Log10 yellow/24
+    keyword whole localeconv yellow/24
+    keyword whole localtime yellow/24
+    keyword whole log yellow/24
+    keyword whole log10 yellow/24
+    keyword whole log1p yellow/24
+    keyword whole long2ip yellow/24
     keyword whole lstat yellow/24
     keyword whole ltrim yellow/24
     keyword whole magic_quotes_gpc yellow/24
     keyword whole magic_quotes_runtime yellow/24
     keyword whole mail yellow/24
+    keyword whole mail yellow/24
+    keyword whole mailparse_determine_best_xfer_encoding yellow/24
+    keyword whole mailparse_msg_create yellow/24
+    keyword whole mailparse_msg_extract yellow/24
+    keyword whole mailparse_msg_extract_file yellow/24
+    keyword whole mailparse_msg_extract_part yellow/24
+    keyword whole mailparse_msg_extract_part_file yellow/24
+    keyword whole mailparse_msg_find yellow/24
+    keyword whole mailparse_msg_free yellow/24
+    keyword whole mailparse_msg_get_part yellow/24
+    keyword whole mailparse_msg_get_part_data yellow/24
+    keyword whole mailparse_msg_get_structure yellow/24
+    keyword whole mailparse_msg_getinfo yellow/24
+    keyword whole mailparse_msg_getstructure yellow/24
+    keyword whole mailparse_msg_parse yellow/24
+    keyword whole mailparse_msg_parse_file yellow/24
+    keyword whole mailparse_rfc822_parse_addresses yellow/24
+    keyword whole mailparse_stream_encode yellow/24
     keyword whole max yellow/24
-    keyword whole mcrypt_cbc yellow/24
-    keyword whole mcrypt_cfb yellow/24
-    keyword whole mcrypt_create_iv yellow/24
-    keyword whole mcrypt_ecb yellow/24
-    keyword whole mcrypt_get_block_size yellow/24
-    keyword whole mcrypt_get_cipher_name yellow/24
-    keyword whole mcrypt_get_key_size yellow/24
-    keyword whole mcrypt_ofb yellow/24
     keyword whole md5 yellow/24
-    keyword whole mhash yellow/24
-    keyword whole mhash_count yellow/24
-    keyword whole mhash_get_block_size yellow/24
-    keyword whole mhash_get_hash_name yellow/24
+    keyword whole mdecrypt_generic yellow/24
+    keyword whole metaphone yellow/24
     keyword whole microtime yellow/24
     keyword whole min yellow/24
+    keyword whole ming_setCubicThreshold yellow/24
+    keyword whole ming_setScale yellow/24
     keyword whole mkdir yellow/24
     keyword whole mktime yellow/24
-    keyword whole Ord yellow/24
-    keyword whole pack yellow/24
-    keyword whole parse_str yellow/24
-    keyword whole parse_url yellow/24
-    keyword whole passthru yellow/24
-    keyword whole pclose yellow/24
-    keyword whole phpinfo yellow/24
-    keyword whole phpversion yellow/24
-    keyword whole PHP_OS yellow/24
-    keyword whole PHP_VERSION yellow/24
-    keyword whole pi yellow/24
-    keyword whole popen yellow/24
-    keyword whole pos yellow/24
-    keyword whole pow yellow/24
-    keyword whole preg_grep yellow/24
-    keyword whole preg_match yellow/24
-    keyword whole preg_match_all yellow/24
-    keyword whole preg_quote yellow/24
-    keyword whole preg_replace yellow/24
-    keyword whole preg_split yellow/24
-    keyword whole prev yellow/24
-    keyword whole print yellow/24
-    keyword whole printf yellow/24
-    keyword whole putenv yellow/24
-    keyword whole quoted_printable_decode yellow/24
-    keyword whole QuoteMeta yellow/24
-    keyword whole rand yellow/24
-    keyword whole range yellow/24
-    keyword whole rawurldecode yellow/24
-    keyword whole rawurlencode yellow/24
-    keyword whole readdir yellow/24
-    keyword whole readfile yellow/24
-    keyword whole readgzfile yellow/24
-    keyword whole readlink yellow/24
-    keyword whole register_shutdown_function yellow/24
-    keyword whole rename yellow/24
-    keyword whole reset yellow/24
-    keyword whole rewind yellow/24
-    keyword whole rewinddir yellow/24
-    keyword whole rmdir yellow/24
-    keyword whole round yellow/24
-    keyword whole rsort yellow/24
-    keyword whole sem_acquire yellow/24
-    keyword whole sem_get yellow/24
-    keyword whole sem_release yellow/24
-    keyword whole serialize yellow/24
-    keyword whole session_decode yellow/24
-    keyword whole session_destroy yellow/24
-    keyword whole session_encode yellow/24
-    keyword whole session_id yellow/24
-    keyword whole session_is_registered yellow/24
-    keyword whole session_module_name yellow/24
-    keyword whole session_name yellow/24
-    keyword whole session_register yellow/24
-    keyword whole session_save_path yellow/24
-    keyword whole session_start yellow/24
-    keyword whole session_unregister yellow/24
-    keyword whole setcookie yellow/24
-    keyword whole setlocale yellow/24
-    keyword whole settype yellow/24
-    keyword whole set_file_buffer yellow/24
-    keyword whole set_magic_quotes_runtime yellow/24
-    keyword whole set_socket_blocking yellow/24
-    keyword whole set_time_limit yellow/24
-    keyword whole shm_attach yellow/24
-    keyword whole shm_detach yellow/24
-    keyword whole shm_get_var yellow/24
-    keyword whole shm_put_var yellow/24
-    keyword whole shm_remove yellow/24
-    keyword whole shm_remove_var yellow/24
-    keyword whole shuffle yellow/24
-    keyword whole similar_text yellow/24
-    keyword whole Sin yellow/24
-    keyword whole sizeof yellow/24
-    keyword whole sleep yellow/24
-    keyword whole snmpget yellow/24
-    keyword whole snmpset yellow/24
-    keyword whole snmpwalk yellow/24
-    keyword whole snmpwalkoid yellow/24
-    keyword whole snmp_get_quick_print yellow/24
-    keyword whole snmp_set_quick_print yellow/24
-    keyword whole solid_close yellow/24
-    keyword whole solid_connect yellow/24
-    keyword whole solid_exec yellow/24
-    keyword whole solid_fetchrow yellow/24
-    keyword whole solid_fieldname yellow/24
-    keyword whole solid_fieldnum yellow/24
-    keyword whole solid_freeresult yellow/24
-    keyword whole solid_numfields yellow/24
-    keyword whole solid_numrows yellow/24
-    keyword whole solid_result yellow/24
-    keyword whole sort yellow/24
-    keyword whole soundex yellow/24
-    keyword whole split yellow/24
-    keyword whole sprintf yellow/24
-    keyword whole sql_regcase yellow/24
-    keyword whole Sqrt yellow/24
-    keyword whole srand yellow/24
-    keyword whole stat yellow/24
-    keyword whole strchr yellow/24
-    keyword whole strcmp yellow/24
-    keyword whole strcspn yellow/24
-    keyword whole strftime yellow/24
-    keyword whole StripSlashes yellow/24
-    keyword whole strip_tags yellow/24
-    keyword whole strlen yellow/24
-    keyword whole strpos yellow/24
-    keyword whole strrchr yellow/24
-    keyword whole strrev yellow/24
-    keyword whole strrpos yellow/24
-    keyword whole strspn yellow/24
-    keyword whole strstr yellow/24
-    keyword whole strtok yellow/24
-    keyword whole strtolower yellow/24
-    keyword whole strtoupper yellow/24
-    keyword whole strtr yellow/24
-    keyword whole strval yellow/24
-    keyword whole str_replace yellow/24
-    keyword whole substr yellow/24
-    keyword whole sybase_affected_rows yellow/24
-    keyword whole sybase_close yellow/24
-    keyword whole sybase_connect yellow/24
-    keyword whole sybase_data_seek yellow/24
-    keyword whole sybase_fetch_array yellow/24
-    keyword whole sybase_fetch_field yellow/24
-    keyword whole sybase_fetch_object yellow/24
-    keyword whole sybase_fetch_row yellow/24
-    keyword whole sybase_field_seek yellow/24
-    keyword whole sybase_free_result yellow/24
-    keyword whole sybase_num_fields yellow/24
-    keyword whole sybase_num_rows yellow/24
-    keyword whole sybase_pconnect yellow/24
-    keyword whole sybase_query yellow/24
-    keyword whole sybase_result yellow/24
-    keyword whole sybase_select_db yellow/24
-    keyword whole symlink yellow/24
-    keyword whole syslog yellow/24
-    keyword whole system yellow/24
-    keyword whole Tan yellow/24
-    keyword whole targetencoding yellow/24
-    keyword whole tempnam yellow/24
-    keyword whole time yellow/24
-    keyword whole touch yellow/24
-    keyword whole trim yellow/24
-    keyword whole Typejuggling yellow/24
-    keyword whole uasort yellow/24
-    keyword whole ucfirst yellow/24
-    keyword whole ucwords yellow/24
-    keyword whole uksort yellow/24
-    keyword whole umask yellow/24
-    keyword whole uniqid yellow/24
-    keyword whole unlink yellow/24
-    keyword whole unpack yellow/24
-    keyword whole unserialize yellow/24
-    keyword whole unset yellow/24
-    keyword whole urldecode yellow/24
-    keyword whole urlencode yellow/24
-    keyword whole usleep yellow/24
-    keyword whole usort yellow/24
-    keyword whole utf8_decode yellow/24
-    keyword whole utf8_encode yellow/24
-    keyword whole virtual yellow/24
-    keyword whole yp_ yellow/24
-    keyword whole yp_errno yellow/24
-    keyword whole yp_err_string yellow/24
-    keyword whole yp_first yellow/24
-    keyword whole yp_get_default_domain yellow/24
-    keyword whole yp_master yellow/24
-    keyword whole yp_match yellow/24
-    keyword whole yp_order yellow/24
-
-    keyword whole __FILE__ brightred/24
-    keyword whole __LINE__ brightred/24
-
+    keyword whole move_uploaded_file yellow/24
+    keyword whole my_drawtext yellow/24
     keyword whole mysql_affected_rows yellow/24
     keyword whole mysql_close yellow/24
     keyword whole mysql_connect yellow/24
@@ -686,7 +503,9 @@ context default
     keyword whole mysql_drop_db yellow/24
     keyword whole mysql_errno yellow/24
     keyword whole mysql_error yellow/24
+    keyword whole mysql_escape_string yellow/24
     keyword whole mysql_fetch_array yellow/24
+    keyword whole mysql_fetch_assoc yellow/24
     keyword whole mysql_fetch_field yellow/24
     keyword whole mysql_fetch_lengths yellow/24
     keyword whole mysql_fetch_object yellow/24
@@ -698,6 +517,10 @@ context default
     keyword whole mysql_field_table yellow/24
     keyword whole mysql_field_type yellow/24
     keyword whole mysql_free_result yellow/24
+    keyword whole mysql_get_client_info yellow/24
+    keyword whole mysql_get_host_info yellow/24
+    keyword whole mysql_get_proto_info yellow/24
+    keyword whole mysql_get_server_info yellow/24
     keyword whole mysql_insert_id yellow/24
     keyword whole mysql_list_dbs yellow/24
     keyword whole mysql_list_fields yellow/24
@@ -709,74 +532,146 @@ context default
     keyword whole mysql_result yellow/24
     keyword whole mysql_select_db yellow/24
     keyword whole mysql_tablename yellow/24
+    keyword whole mysql_unbuffered_query yellow/24
+    keyword whole natcasesort yellow/24
+    keyword whole natsort yellow/24
     keyword whole next yellow/24
+    keyword whole nl2br yellow/24
+    keyword whole nl_langinfo yellow/24
+    keyword whole number_format yellow/24
+    keyword whole octdec yellow/24
+    keyword whole opendir yellow/24
+    keyword whole openlog yellow/24
+    keyword whole ora_bind yellow/24
+    keyword whole ora_close yellow/24
+    keyword whole ora_columnname yellow/24
+    keyword whole ora_columnsize yellow/24
+    keyword whole ora_columntype yellow/24
+    keyword whole ora_commit yellow/24
+    keyword whole ora_commitoff yellow/24
+    keyword whole ora_commiton yellow/24
+    keyword whole ora_do yellow/24
+    keyword whole ora_error yellow/24
+    keyword whole ora_errorcode yellow/24
+    keyword whole ora_exec yellow/24
+    keyword whole ora_fetch yellow/24
+    keyword whole ora_fetch_into yellow/24
+    keyword whole ora_getcolumn yellow/24
+    keyword whole ora_logoff yellow/24
+    keyword whole ora_logon yellow/24
+    keyword whole ora_numcols yellow/24
+    keyword whole ora_numrows yellow/24
+    keyword whole ora_open yellow/24
+    keyword whole ora_parse yellow/24
+    keyword whole ora_plogon yellow/24
+    keyword whole ora_rollback yellow/24
+    keyword whole ord yellow/24
+    keyword whole pack yellow/24
+    keyword whole parse_ini_file yellow/24
+    keyword whole parse_str yellow/24
+    keyword whole parse_url yellow/24
+    keyword whole passthru yellow/24
+    keyword whole pathinfo yellow/24
+    keyword whole pclose yellow/24
+    keyword whole pcntl_fork yellow/24
+    keyword whole pcntl_fork	 yellow/24
+    keyword whole pcntl_signal yellow/24
+    keyword whole pcntl_waitpid yellow/24
+    keyword whole pcntl_wexitstatus yellow/24
+    keyword whole pcntl_wifexited yellow/24
+    keyword whole pcntl_wifsignaled yellow/24
+    keyword whole pcntl_wifstopped yellow/24
+    keyword whole pcntl_wstopsig yellow/24
+    keyword whole pcntl_wtermsig yellow/24
     keyword whole pdf_add_annotation yellow/24
-    keyword whole PDF_add_outline yellow/24
-    keyword whole PDF_arc yellow/24
-    keyword whole PDF_begin_page yellow/24
-    keyword whole PDF_circle yellow/24
-    keyword whole PDF_clip yellow/24
-    keyword whole PDF_close yellow/24
-    keyword whole PDF_closepath yellow/24
-    keyword whole PDF_closepath_fill_stroke yellow/24
-    keyword whole PDF_closepath_stroke yellow/24
-    keyword whole PDF_close_image yellow/24
-    keyword whole PDF_continue_text yellow/24
-    keyword whole PDF_curveto yellow/24
-    keyword whole PDF_endpath yellow/24
-    keyword whole PDF_end_page yellow/24
-    keyword whole PDF_execute_image yellow/24
-    keyword whole PDF_fill yellow/24
-    keyword whole PDF_fill_stroke yellow/24
-    keyword whole PDF_get_info yellow/24
-    keyword whole PDF_lineto yellow/24
-    keyword whole PDF_moveto yellow/24
-    keyword whole PDF_open yellow/24
-    keyword whole PDF_open_gif yellow/24
-    keyword whole PDF_open_jpeg yellow/24
-    keyword whole PDF_open_memory_image yellow/24
-    keyword whole PDF_place_image yellow/24
-    keyword whole PDF_put_image yellow/24
-    keyword whole PDF_rect yellow/24
-    keyword whole PDF_restore yellow/24
-    keyword whole PDF_rotate yellow/24
-    keyword whole PDF_save yellow/24
-    keyword whole PDF_scale yellow/24
-    keyword whole PDF_setdash yellow/24
-    keyword whole PDF_setflat yellow/24
-    keyword whole PDF_setgray yellow/24
-    keyword whole PDF_setgray_fill yellow/24
-    keyword whole PDF_setgray_stroke yellow/24
-    keyword whole PDF_setlinecap yellow/24
-    keyword whole PDF_setlinejoin yellow/24
-    keyword whole PDF_setlinewidth yellow/24
-    keyword whole PDF_setmiterlimit yellow/24
-    keyword whole PDF_setrgbcolor yellow/24
-    keyword whole PDF_setrgbcolor_fill yellow/24
-    keyword whole PDF_setrgbcolor_stroke yellow/24
-    keyword whole PDF_set_char_spacing yellow/24
-    keyword whole PDF_set_duration yellow/24
-    keyword whole PDF_set_font yellow/24
-    keyword whole PDF_set_horiz_scaling yellow/24
-    keyword whole PDF_set_info_author yellow/24
-    keyword whole PDF_set_info_creator yellow/24
-    keyword whole PDF_set_info_keywords yellow/24
-    keyword whole PDF_set_info_subject yellow/24
-    keyword whole PDF_set_info_title yellow/24
-    keyword whole PDF_set_leading yellow/24
-    keyword whole PDF_set_text_matrix yellow/24
-    keyword whole PDF_set_text_pos yellow/24
-    keyword whole PDF_set_text_rendering yellow/24
-    keyword whole PDF_set_text_rise yellow/24
-    keyword whole PDF_set_transition yellow/24
-    keyword whole PDF_set_word_spacing yellow/24
-    keyword whole PDF_show yellow/24
-    keyword whole PDF_show_xy yellow/24
-    keyword whole PDF_stringwidth yellow/24
-    keyword whole PDF_stroke yellow/24
-    keyword whole PDF_translate yellow/24
+    keyword whole pdf_add_bookmark yellow/24
+    keyword whole pdf_add_launchlink yellow/24
+    keyword whole pdf_add_locallink yellow/24
+    keyword whole pdf_add_note yellow/24
+    keyword whole pdf_add_pdflink yellow/24
+    keyword whole pdf_add_thumbnail yellow/24
+    keyword whole pdf_add_weblink yellow/24
+    keyword whole pdf_arc yellow/24
+    keyword whole pdf_arcn yellow/24
+    keyword whole pdf_attach_file yellow/24
+    keyword whole pdf_begin_page yellow/24
+    keyword whole pdf_begin_pattern yellow/24
+    keyword whole pdf_begin_template yellow/24
+    keyword whole pdf_circle yellow/24
+    keyword whole pdf_clip yellow/24
+    keyword whole pdf_close yellow/24
+    keyword whole pdf_close_image yellow/24
+    keyword whole pdf_close_pdi yellow/24
+    keyword whole pdf_close_pdi_page yellow/24
+    keyword whole pdf_closepath yellow/24
+    keyword whole pdf_closepath_fill_stroke yellow/24
+    keyword whole pdf_closepath_stroke yellow/24
+    keyword whole pdf_concat yellow/24
+    keyword whole pdf_continue_text yellow/24
+    keyword whole pdf_curveto yellow/24
+    keyword whole pdf_delete yellow/24
+    keyword whole pdf_end_page yellow/24
+    keyword whole pdf_end_pattern yellow/24
+    keyword whole pdf_end_template yellow/24
+    keyword whole pdf_endpath yellow/24
+    keyword whole pdf_fill yellow/24
+    keyword whole pdf_fill_stroke yellow/24
+    keyword whole pdf_findfont yellow/24
+    keyword whole pdf_get_buffer yellow/24
+    keyword whole pdf_get_parameter yellow/24
+    keyword whole pdf_get_pdi_parameter yellow/24
+    keyword whole pdf_get_pdi_value yellow/24
+    keyword whole pdf_get_value yellow/24
+    keyword whole pdf_initgraphics yellow/24
+    keyword whole pdf_lineto yellow/24
+    keyword whole pdf_makespotcolor yellow/24
+    keyword whole pdf_moveto yellow/24
+    keyword whole pdf_new yellow/24
+    keyword whole pdf_open_ccitt yellow/24
+    keyword whole pdf_open_file yellow/24
+    keyword whole pdf_open_image yellow/24
+    keyword whole pdf_open_image_file yellow/24
+    keyword whole pdf_open_memory_image yellow/24
+    keyword whole pdf_open_pdi yellow/24
+    keyword whole pdf_open_pdi_page yellow/24
+    keyword whole pdf_place_image yellow/24
+    keyword whole pdf_place_pdi_page yellow/24
+    keyword whole pdf_rect yellow/24
+    keyword whole pdf_restore yellow/24
+    keyword whole pdf_rotate yellow/24
+    keyword whole pdf_save yellow/24
+    keyword whole pdf_scale yellow/24
+    keyword whole pdf_set_border_color yellow/24
+    keyword whole pdf_set_border_dash yellow/24
+    keyword whole pdf_set_border_style yellow/24
+    keyword whole pdf_set_info yellow/24
+    keyword whole pdf_set_parameter yellow/24
+    keyword whole pdf_set_text_pos yellow/24
+    keyword whole pdf_set_value yellow/24
+    keyword whole pdf_setcolor yellow/24
+    keyword whole pdf_setdash yellow/24
+    keyword whole pdf_setflat yellow/24
+    keyword whole pdf_setfont yellow/24
+    keyword whole pdf_setgray yellow/24
+    keyword whole pdf_setgray_fill yellow/24
+    keyword whole pdf_setgray_stroke yellow/24
+    keyword whole pdf_setlinecap yellow/24
+    keyword whole pdf_setlinejoin yellow/24
+    keyword whole pdf_setlinewidth yellow/24
+    keyword whole pdf_setmatrix yellow/24
+    keyword whole pdf_setmiterlimit yellow/24
+    keyword whole pdf_setpolydash yellow/24
+    keyword whole pdf_setrgbcolor yellow/24
+    keyword whole pdf_setrgbcolor_fill yellow/24
+    keyword whole pdf_setrgbcolor_stroke yellow/24
+    keyword whole pdf_show yellow/24
+    keyword whole pdf_show_boxed yellow/24
+    keyword whole pdf_show_xy yellow/24
+    keyword whole pdf_skew yellow/24
+    keyword whole pdf_stringwidth yellow/24
+    keyword whole pdf_stroke yellow/24
+    keyword whole pdf_translate yellow/24
     keyword whole pg_Close yellow/24
-    keyword whole pg_cmdTles yellow/24
     keyword whole pg_Connect yellow/24
     keyword whole pg_DBname yellow/24
     keyword whole pg_ErrorMessage yellow/24
@@ -793,69 +688,374 @@ context default
     keyword whole pg_FreeResult yellow/24
     keyword whole pg_GetLastOid yellow/24
     keyword whole pg_Host yellow/24
-    keyword whole pg_loclose yellow/24
-    keyword whole pg_locreate yellow/24
-    keyword whole pg_loopen yellow/24
-    keyword whole pg_loread yellow/24
-    keyword whole pg_loreadall yellow/24
-    keyword whole pg_lounlink yellow/24
-    keyword whole pg_lowrite yellow/24
     keyword whole pg_NumFields yellow/24
     keyword whole pg_NumRows yellow/24
     keyword whole pg_Options yellow/24
-    keyword whole pg_pConnect yellow/24
     keyword whole pg_Port yellow/24
     keyword whole pg_Result yellow/24
+    keyword whole pg_client_encoding yellow/24
+    keyword whole pg_close yellow/24
+    keyword whole pg_cmdTles yellow/24
+    keyword whole pg_cmdtuples yellow/24
+    keyword whole pg_connect yellow/24
+    keyword whole pg_dbname yellow/24
+    keyword whole pg_end_copy yellow/24
+    keyword whole pg_errormessage yellow/24
+    keyword whole pg_exec yellow/24
+    keyword whole pg_fetch_array yellow/24
+    keyword whole pg_fetch_object yellow/24
+    keyword whole pg_fetch_row yellow/24
+    keyword whole pg_fieldisnull yellow/24
+    keyword whole pg_fieldname yellow/24
+    keyword whole pg_fieldnum yellow/24
+    keyword whole pg_fieldprtlen yellow/24
+    keyword whole pg_fieldsize yellow/24
+    keyword whole pg_fieldtype yellow/24
+    keyword whole pg_freeresult yellow/24
+    keyword whole pg_getlastoid yellow/24
+    keyword whole pg_host yellow/24
+    keyword whole pg_last_notice yellow/24
+    keyword whole pg_loclose yellow/24
+    keyword whole pg_locreate yellow/24
+    keyword whole pg_loexport yellow/24
+    keyword whole pg_loimport yellow/24
+    keyword whole pg_lolseek yellow/24
+    keyword whole pg_loopen yellow/24
+    keyword whole pg_loread yellow/24
+    keyword whole pg_loreadall yellow/24
+    keyword whole pg_lotell yellow/24
+    keyword whole pg_lounlink yellow/24
+    keyword whole pg_lowrite yellow/24
+    keyword whole pg_numfields yellow/24
+    keyword whole pg_numrows yellow/24
+    keyword whole pg_options yellow/24
+    keyword whole pg_pConnect yellow/24
+    keyword whole pg_pconnect yellow/24
+    keyword whole pg_port yellow/24
+    keyword whole pg_put_line yellow/24
+    keyword whole pg_result yellow/24
+    keyword whole pg_set_client_encoding yellow/24
+    keyword whole pg_trace yellow/24
     keyword whole pg_tty yellow/24
-    keyword whole vm_addalias yellow/24
-    keyword whole vm_adduser yellow/24
-    keyword whole vm_delalias yellow/24
-    keyword whole vm_deluser yellow/24
-    keyword whole vm_passwd yellow/24
+    keyword whole pg_untrace yellow/24
+    keyword whole php_egg_logo_guid yellow/24
+    keyword whole php_logo_guid yellow/24
+    keyword whole php_sapi_name yellow/24
+    keyword whole php_uname yellow/24
+    keyword whole phpcredits yellow/24
+    keyword whole phpinfo yellow/24
+    keyword whole phpversion yellow/24
+    keyword whole pi yellow/24
+    keyword whole png2wbmp yellow/24
+    keyword whole popen yellow/24
+    keyword whole pos yellow/24
+    keyword whole pow yellow/24
+    keyword whole preg_grep yellow/24
+    keyword whole preg_match yellow/24
+    keyword whole preg_match_all yellow/24
+    keyword whole preg_quote yellow/24
+    keyword whole preg_replace yellow/24
+    keyword whole preg_replace_callback yellow/24
+    keyword whole preg_split yellow/24
+    keyword whole prev yellow/24
+    keyword whole print yellow/24
+    keyword whole print_r yellow/24
+    keyword whole printf yellow/24
+    keyword whole putenv yellow/24
+    keyword whole qdom_error yellow/24
+    keyword whole qdom_tree yellow/24
+    keyword whole quoted_printable_decode yellow/24
+    keyword whole quotemeta yellow/24
+    keyword whole rad2deg yellow/24
+    keyword whole rand yellow/24
+    keyword whole range yellow/24
+    keyword whole rawurldecode yellow/24
+    keyword whole rawurlencode yellow/24
+    keyword whole read_exif_data yellow/24
+    keyword whole readdir yellow/24
+    keyword whole readfile yellow/24
+    keyword whole readgzfile yellow/24
+    keyword whole readline yellow/24
+    keyword whole readlink yellow/24
+    keyword whole realpath yellow/24
+    keyword whole recode_file yellow/24
+    keyword whole recode_string yellow/24
+    keyword whole register_shutdown_function yellow/24
+    keyword whole register_tick_function yellow/24
+    keyword whole rename yellow/24
+    keyword whole reset yellow/24
+    keyword whole rewind yellow/24
+    keyword whole rewinddir yellow/24
+    keyword whole rmdir yellow/24
+    keyword whole round yellow/24
+    keyword whole rsort yellow/24
+    keyword whole select yellow/24
+    keyword whole sem_acquire yellow/24
+    keyword whole sem_get yellow/24
+    keyword whole sem_release yellow/24
+    keyword whole sem_remove yellow/24
+    keyword whole serialize yellow/24
+    keyword whole session_cache_limiter yellow/24
+    keyword whole session_decode yellow/24
+    keyword whole session_destroy yellow/24
+    keyword whole session_encode yellow/24
+    keyword whole session_get_cookie_params yellow/24
+    keyword whole session_id yellow/24
+    keyword whole session_is_registered yellow/24
+    keyword whole session_module_name yellow/24
+    keyword whole session_name yellow/24
+    keyword whole session_register yellow/24
+    keyword whole session_save_path yellow/24
+    keyword whole session_set_cookie_params yellow/24
+    keyword whole session_set_save_handler yellow/24
+    keyword whole session_start yellow/24
+    keyword whole session_unregister yellow/24
+    keyword whole session_unset yellow/24
+    keyword whole session_write_close yellow/24
+    keyword whole set_file_buffer yellow/24
+    keyword whole set_magic_quotes_runtime yellow/24
+    keyword whole set_socket_blocking yellow/24
+    keyword whole set_time_limit yellow/24
+    keyword whole setcookie yellow/24
+    keyword whole setlocale yellow/24
+    keyword whole settype yellow/24
+    keyword whole shell_exec yellow/24
+    keyword whole shuffle yellow/24
+    keyword whole similar_text yellow/24
+    keyword whole sin yellow/24
+    keyword whole sinh yellow/24
+    keyword whole sizeof yellow/24
+    keyword whole sleep yellow/24
+    keyword whole snmp_get_quick_print yellow/24
+    keyword whole snmp_set_quick_print yellow/24
+    keyword whole snmpget yellow/24
+    keyword whole snmprealwalk yellow/24
+    keyword whole snmpset yellow/24
+    keyword whole snmpwalk yellow/24
+    keyword whole snmpwalkoid yellow/24
+    keyword whole sort yellow/24
+    keyword whole soundex yellow/24
+    keyword whole split yellow/24
+    keyword whole spliti yellow/24
+    keyword whole sprintf yellow/24
+    keyword whole sql_regcase yellow/24
+    keyword whole sqrt yellow/24
+    keyword whole srand yellow/24
+    keyword whole sscanf yellow/24
+    keyword whole stat yellow/24
+    keyword whole str_pad yellow/24
+    keyword whole str_repeat yellow/24
+    keyword whole str_replace yellow/24
+    keyword whole strchr yellow/24
+    keyword whole strcmp yellow/24
+    keyword whole strcoll yellow/24
+    keyword whole strcspn yellow/24
+    keyword whole strftime yellow/24
+    keyword whole strip_tags yellow/24
+    keyword whole stripcslashes yellow/24
+    keyword whole stripslashes yellow/24
+    keyword whole stristr yellow/24
+    keyword whole strlen yellow/24
+    keyword whole strnatcasecmp yellow/24
+    keyword whole strnatcmp yellow/24
+    keyword whole strpos yellow/24
+    keyword whole strrchr yellow/24
+    keyword whole strrev yellow/24
+    keyword whole strrpos yellow/24
+    keyword whole strspn yellow/24
+    keyword whole strstr yellow/24
+    keyword whole strtok yellow/24
+    keyword whole strtolower yellow/24
+    keyword whole strtotime yellow/24
+    keyword whole strtoupper yellow/24
+    keyword whole strtr yellow/24
+    keyword whole strval yellow/24
+    keyword whole substr yellow/24
+    keyword whole substr_count yellow/24
+    keyword whole substr_replace yellow/24
+    keyword whole symlink yellow/24
+    keyword whole syslog yellow/24
+    keyword whole system yellow/24
+    keyword whole tan yellow/24
+    keyword whole tanh yellow/24
+    keyword whole targetencoding yellow/24
+    keyword whole tempnam yellow/24
+    keyword whole textdomain yellow/24
+    keyword whole time yellow/24
+    keyword whole toggle_short_open_tag yellow/24
+    keyword whole touch yellow/24
+    keyword whole trim yellow/24
+    keyword whole uasort yellow/24
+    keyword whole ucfirst yellow/24
+    keyword whole ucwords yellow/24
+    keyword whole uksort yellow/24
+    keyword whole umask yellow/24
+    keyword whole uniqid yellow/24
+    keyword whole unixtojd yellow/24
+    keyword whole unlink yellow/24
+    keyword whole unpack yellow/24
+    keyword whole unregister_tick_function yellow/24
+    keyword whole unserialize yellow/24
+    keyword whole unset yellow/24
+    keyword whole urldecode yellow/24
+    keyword whole urlencode yellow/24
+    keyword whole user_printf yellow/24
+    keyword whole user_sprintf yellow/24
+    keyword whole usleep yellow/24
+    keyword whole usort yellow/24
+    keyword whole utf8_decode yellow/24
+    keyword whole utf8_encode yellow/24
+    keyword whole var_dump yellow/24
+    keyword whole version_compare yellow/24
+    keyword whole virtual yellow/24
+    keyword whole vprintf yellow/24
+    keyword whole vsprintf yellow/24
+    keyword whole wordwrap yellow/24
     keyword whole xml_error_string yellow/24
     keyword whole xml_get_current_byte_index yellow/24
     keyword whole xml_get_current_column_number yellow/24
     keyword whole xml_get_current_line_number yellow/24
     keyword whole xml_get_error_code yellow/24
     keyword whole xml_parse yellow/24
+    keyword whole xml_parse_into_struct yellow/24
     keyword whole xml_parser_create yellow/24
+    keyword whole xml_parser_create_ns yellow/24
     keyword whole xml_parser_free yellow/24
     keyword whole xml_parser_get_option yellow/24
     keyword whole xml_parser_set_option yellow/24
     keyword whole xml_set_character_data_handler yellow/24
     keyword whole xml_set_default_handler yellow/24
     keyword whole xml_set_element_handler yellow/24
+    keyword whole xml_set_end_namespace_decl_handler yellow/24
     keyword whole xml_set_external_entity_ref_handler yellow/24
     keyword whole xml_set_notation_decl_handler yellow/24
+    keyword whole xml_set_object yellow/24
     keyword whole xml_set_processing_instruction_handler yellow/24
+    keyword whole xml_set_start_namespace_decl_handler yellow/24
     keyword whole xml_set_unparsed_entity_decl_handler yellow/24
+    keyword whole xmldoc yellow/24
+    keyword whole xmldocfile yellow/24
+    keyword whole xmltree yellow/24
+    keyword whole zip_close yellow/24
+    keyword whole zip_entry_close yellow/24
+    keyword whole zip_entry_compressedsize yellow/24
+    keyword whole zip_entry_compressionmethod yellow/24
+    keyword whole zip_entry_filesize yellow/24
+    keyword whole zip_entry_name yellow/24
+    keyword whole zip_entry_open yellow/24
+    keyword whole zip_entry_read yellow/24
+    keyword whole zip_open yellow/24
+    keyword whole zip_read yellow/24
+    
+########################
+# predefined constants
+    
+# core
+    keyword whole PHP_VERSION white/24
+    keyword whole PHP_OS white/24
+    keyword whole DEFAULT_INCLUDE_PATH white/24
+    keyword whole PEAR_INSTALL_DIR white/24
+    keyword whole PEAR_EXTENSION_DIR white/24
+    keyword whole PHP_EXTENSION_DIR white/24
+    keyword whole PHP_BINDIR white/24
+    keyword whole PHP_LIBDIR white/24
+    keyword whole PHP_DATADIR white/24
+    keyword whole PHP_SYSCONFDIR white/24
+    keyword whole PHP_LOCALSTATEDIR white/24
+    keyword whole PHP_CONFIG_FILE_PATH white/24
+    keyword whole PHP_OUTPUT_HANDLER_START white/24
+    keyword whole PHP_OUTPUT_HANDLER_CONT white/24
+    keyword whole PHP_OUTPUT_HANDLER_END white/24
+    keyword whole E_ERROR white/24
+    keyword whole E_WARNING white/24
+    keyword whole E_PARSE white/24
+    keyword whole E_NOTICE white/24
+    keyword whole E_CORE_ERROR white/24
+    keyword whole E_CORE_WARNING white/24
+    keyword whole E_COMPILE_ERROR white/24
+    keyword whole E_COMPILE_WARNING white/24
+    keyword whole E_USER_ERROR white/24
+    keyword whole E_USER_WARNING white/24
+    keyword whole E_USER_NOTICE white/24
+    keyword whole E_ALL white/24
+
+# gd
+    keyword whole IMG_GIF white/24
+    keyword whole IMG_JPG white/24
+    keyword whole IMG_JPEG white/24
+    keyword whole IMG_PNG white/24
+    keyword whole IMG_XPM white/24
+    keyword whole IMG_COLOR_TILED white/24
+    keyword whole IMG_COLOR_STYLED white/24
+    keyword whole IMG_COLOR_BRUSHED white/24
+    keyword whole IMG_COLOR_STYLEDBRUSHED white/24
+    keyword whole IMG_COLOR_TRANSPARENT white/24
+    keyword whole IMG_ARC_ROUNDED white/24
+    keyword whole IMG_ARC_PIE white/24
+    keyword whole IMG_ARC_CHORD white/24
+    keyword whole IMG_ARC_NOFILL white/24
+    keyword whole IMG_ARC_EDGED white/24
+
+# pcre
+    keyword whole PREG_PATTERN_ORDER white/24
+    keyword whole PREG_SET_ORDER white/24
+    keyword whole PREG_SPLIT_NO_EMPTY white/24
+    keyword whole PREG_SPLIT_DELIM_CAPTURE white/24
+    keyword whole PREG_GREP_INVERT white/24
+
+# session
+    keyword whole SID white/24
+
+# zlib
+    keyword whole FORCE_GZIP white/24
+    keyword whole FORCE_DEFLATE white/24
+
+
+####################################
+# expressions, operators and other
+
+    keyword whole var white/24
+    keyword whole as white/24
+    keyword whole and white/24
+    keyword whole or white/24
+
+    keyword whole __FILE__ brightred/24
+    keyword whole __LINE__ brightred/24
+
+    keyword whole parent brightmagenta/24
+    keyword whole $this brightmagenta/24
+
+    keyword wholeright $+ brightgreen/16
+
+    keyword " green/22
+
+    keyword '*' brightgreen/22
 
     keyword /\* brown/22
     keyword \*/ brown/22
+    keyword // brown/22
 
     keyword <?php white/22
     keyword <? white/22
     keyword ?> white/22
-
-    keyword '\\\{"abtnvfr\}' brightgreen/16
-    keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen/16
-    keyword '\\'' brightgreen/16
-    keyword '\\\\' brightgreen/16
-    keyword '\\0' brightgreen/16
-    keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' brightgreen/16
-
-    keyword wholeright $+ brightgreen/16
+    keyword <html cyan/22
+    keyword <HTML cyan/22
+    keyword <doctype cyan/22
+    keyword <DOCTYPE cyan/22
 
     keyword > white/24
     keyword < white/24
     keyword \+ white/24
     keyword - white/24
     keyword \* white/24
-#    keyword / yellow/24
+    keyword / white/24
     keyword % white/24
     keyword = white/24
     keyword != white/24
     keyword == white/24
+    keyword & white/24
+    keyword | white/24
+    keyword :: white/24
     keyword { brightcyan/14
     keyword } brightcyan/14
     keyword ( brightcyan/15
@@ -865,21 +1065,27 @@ context default
     keyword , brightcyan/14
     keyword : brightcyan/14
     keyword ; brightmagenta/19
-    keyword #define\[\t\s\]\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\]\[\t\s\]0x\[0123456789abcdefABCDEF\] brightred/18
 
 context exclusive ?> <? cyan/22
-    spellcheck
+    keyword whole &*; brightgreen/16
+context exclusive <html <? cyan/22
+    keyword whole &*; brightgreen/16
+context exclusive <HTML <? cyan/22
+    keyword whole &*; brightgreen/16
+context exclusive <doctype <? cyan/22
+    keyword whole &*; brightgreen/16
+context exclusive <DOCTYPE <? cyan/22
+    keyword whole &*; brightgreen/16
 
 context exclusive /\* \*/ brown/22
     spellcheck
-
-context // \n brown/22
+context exclusive // \n brown/22
     spellcheck
 
 context linestart # \n brown/18
     spellcheck
 
-context " " green/6
+context exclusive " " green/6
     spellcheck
     keyword \\" brightgreen/16
     keyword \\\n brightgreen/16

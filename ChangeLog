@@ -1,3 +1,7 @@
+2002-06-04  Max Schedriviy  <max@humgat.org>
+
+	* syntax/php.syntax: New version.
+
 2002-05-23  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* NEWS: Mention ftpfs/fish uploading changes and new configure
