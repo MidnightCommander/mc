@@ -1,8 +1,6 @@
 Before 4.6.0-pre2
 =================
 
-get_byte() in view.c produces warnings in Valgrind.
-
 ncurses 5.2 turns off keypad under heavy load on xterm.  Check if
 anything can be done about it.
 
@@ -17,6 +15,10 @@ Before 4.6.0
 ============
 
 Contact all translators to update translations.
+
+Portability testing.
+
+Testing in Valgrind.
 
 
 Before 4.6.1
