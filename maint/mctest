@@ -38,9 +38,14 @@ make distcheck enable_largefile=no enable_nls=no with_vfs=no \
      with_gpm_mouse=no with_subshell=no with_edit=no with_ext2undel=no \
      with_screen=ncurses >test3.out 2>test3.err
 
+echo "Checking the configuration with minimal code coverage + editor"
+make distcheck enable_largefile=no enable_nls=no with_vfs=no \
+     with_gpm_mouse=no with_subshell=no with_ext2undel=no \
+     with_screen=ncurses >test4.out 2>test4.err
+
 echo "Checking the configuration with experimental and rarely used options"
 make distcheck with_screen=mcslang with_termcap=yes \
-     with_mmap=no with_subshell=optional >test4.out 2>test4.err
+     with_mmap=no with_subshell=optional >test5.out 2>test5.err
 
 if test -x /usr/bin/rpmbuild; then
 	echo "Building RPM package"
