@@ -1,5 +1,11 @@
 2001-08-24  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Remove support for curses libraries other than
+	ncurses.
+	* acinclude.m4: Likewise.
+	* FAQ: Remove everything about UNIX curses.
+	* INSTALL: Likewise.
+
 	* configure.in: Enable large file support by default.
 	* NEWS: Mention it.
 	* INSTALL: Document it.  Minor fixes.

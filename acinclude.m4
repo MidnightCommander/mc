@@ -613,38 +613,6 @@ fi
 rm -f conftest*]
 )
 
-AC_DEFUN([AC_USE_SUNOS_CURSES], [
-	search_ncurses=false
-	screen_manager="SunOS 4.x /usr/5include curses"
-	AC_MSG_RESULT([Using SunOS 4.x /usr/5include curses])
-	AC_DEFINE(USE_SUNOS_CURSES)
-	AC_DEFINE(NO_COLOR_CURSES)
-	AC_DEFINE(USE_SYSV_CURSES)
-	CPPFLAGS="$CPPFLAGS -I/usr/5include"
-	XCURSES="xcurses.o /usr/5lib/libcurses.a /usr/5lib/libtermcap.a"
-	AC_MSG_RESULT([Please note that some screen refreshs may fail])
-	AC_MSG_WARN([Reconsider using Slang])
-])
-
-AC_DEFUN([AC_USE_OSF1_CURSES], [
-       AC_MSG_RESULT([Using OSF1 curses])
-       search_ncurses=false
-       screen_manager="OSF1 curses"
-       AC_DEFINE(NO_COLOR_CURSES)
-       AC_DEFINE(USE_SYSV_CURSES)
-       XCURSES="xcurses.o"
-       LIBS="$LIBS -lcurses"
-])
-
-AC_DEFUN([AC_USE_SYSV_CURSES], [
-	AC_MSG_RESULT([Using SysV curses])
-	AC_DEFINE(USE_SYSV_CURSES)
-	XCURSES=""
-	search_ncurses=false
-	screen_manager="SysV/curses"
-	LIBS="$LIBS -lcurses"
-])
-
 AC_DEFUN([AC_USE_TERMINFO], [
 	AC_DEFINE(SLANG_TERMINFO)
 	AC_MSG_RESULT([Using SLang screen manager/terminfo])

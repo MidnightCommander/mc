@@ -172,9 +172,6 @@ better than everything else),
      example, if you have installed ncurses under /gnu/lib and
      /gnu/include, you specify: --with-ncurses=/gnu
 
-Support for traditional UNIX curses (not ncurses) is obsolete and will be 
-removed.
-
    Run `configure --help' to see the full list of options.
 
    On systems that require unusual options for compilation or linking
@@ -343,18 +340,11 @@ Midnight Commander.  The included library is very stable and has been
 used for years without problems.  You shouldn't expect any problems
 porting S-Lang to your platform.
 
-Another possibility is to download and install ncurses on your OS. The
-Midnight Commander can use ncurses as well as the display engine. However,
-you may encounter minor differences, for instance, you will be unable to
-force the color mode by giving the "-c" switch to GNU Midnight Commander.
-
-As the last resort, you may try to use the curses library supplied with
-your OS. Beware that some systems, e.g. SystemV Release 4, include the
-curses library with bugs critical to GNU Midnight Commander. You may try
-to recompile all your source code with the symbol BUGGY_CURSES defined,
-i.e.
-
-make clean; make CFLAGS="-g -O -DBUGGY_CURSES"
+Another possibility is to download and install ncurses on your OS.
+GNU Midnight Commander can use ncurses as well as the display engine.
+However, you may encounter minor differences, for instance, you will
+be unable to force the color mode by giving the "-c" switch to GNU
+Midnight Commander.
 
 
 Obtaining the missing pieces of GNU Midnight Commander
@@ -402,19 +392,3 @@ And the GNU Compiler Collection may be obtained from the following sites:
 ftp://gcc.gnu.org/pub/gcc/releases/
 ftp://ftp.gnu.org/gnu/gcc/
 http://gcc.gnu.org/mirrors.html
-
-Unsupported, deprecated and possibly broken options to configure:
------------------------------------------------------------------
-`--with-vcurses[=directory]'
-     Use this flag to force GNU Midnight Commander to use a SystemV
-     type curses, the optional directory specifies where the compiler 
-     should look for the include files.
-
-`--with-sunos-curses'
-     You use this flag on SunOS machines if you want to force using
-     SunOS 4.x curses.
-
-`--with-bsd-curses'
-     If you don't want to use ncurses and are using an Ultrix box, you
-     can use this switch.  Be aware that ncurses is a better option
-     than the curses included in Ultrix.

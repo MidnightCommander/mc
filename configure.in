@@ -308,51 +308,6 @@ search_ncurses=false
 XCURSES=""
 AC_SUBST(XCURSES)
 
-dnl AC_ARG_WITH(bsd-curses,
-dnl [--with-bsd-curses         Used to compile with bsd curses, not very fancy],
-dnl 	[search_ncurses=false
-dnl	screen_manager="Ultrix/cursesX"
-dnl	case $host_os in
-dnl	ultrix*)
-dnl	    THIS_CURSES=cursesX
-dnl	    ;;
-dnl	*)
-dnl	    THIS_CURSES=curses
-dnl	    ;;
-dnl	esac
-dnl
-dnl	LIBS="$LIBS -l$THIS_CURSES -ltermcap"
-dnl	AC_DEFINE(USE_BSD_CURSES)
-dnl	XCURSES="xcurses.o"
-dnl	AC_MSG_RESULT([Please note that some screen refreshs may fail])
-dnl	AC_MSG_WARN([Use of the bsdcurses extension has some])
-dnl	AC_MSG_WARN([display/input problems.])
-dnl	AC_MSG_WARN([Reconsider using xcurses])
-dnl])
-
-AC_ARG_WITH(sunos-curses,
-	[--with-sunos-curses        Used to force SunOS 4.x curses],[
-	if test x$withval = xyes; then
-		AC_USE_SUNOS_CURSES
-	fi
-])
-
-AC_ARG_WITH(osf1-curses,
-	[--with-osf1-curses	   Used to force OSF/1 curses],[
-	if test x$withval = xyes; then
-		AC_USE_OSF1_CURSES
-	fi
-])
-
-AC_ARG_WITH(vcurses,
-	[--with-vcurses[=incdir]    Used to force SysV curses],
-	[if test x$withval = xyes; then :
-        else
-		CPPFLAGS="$CPPFLAGS -I$withval"
-	fi
-	AC_USE_SYSV_CURSES
-])
-
 mouse_lib="xterm only"
 LGPM=""
 case $host_os in
@@ -714,38 +669,9 @@ then
 
     AC_NCURSES(/usr/include/ncurses, curses.h, -lncurses, -I/usr/include/ncurses -DRENAMED_NCURSES, "renamed ncurses on /usr/include/ncurses")
 
-    dnl
-    dnl We couldn't find ncurses, try SysV curses
-    dnl
-    if $search_ncurses 
-    then
-        AC_EGREP_HEADER(init_color, /usr/include/curses.h,
-	    AC_USE_SYSV_CURSES)
-	AC_EGREP_CPP(USE_NCURSES,[
-#include <curses.h>
-#ifdef __NCURSES_H
-#undef USE_NCURSES
-USE_NCURSES
-#endif
-],[
-	CPPFLAGS="$CPPFLAGS -DRENAMED_NCURSES"
-        AC_DEFINE(USE_NCURSES)
-        search_ncurses=false
-        screen_manager="ncurses installed as curses"
-])
-    fi
-
-    dnl
-    dnl Try SunOS 4.x /usr/5{lib,include} ncurses
-    dnl The flags USE_SUNOS_CURSES, USE_BSD_CURSES and BUGGY_CURSES
-    dnl should be replaced by a more fine grained selection routine
-    dnl
     if $search_ncurses
     then
-	if test -f /usr/5include/curses.h
-	then
-	    AC_USE_SUNOS_CURSES
-        fi
+	:
     else
         # check for ncurses version, to properly ifdef mouse-fix
 	AC_MSG_CHECKING([for ncurses version])
