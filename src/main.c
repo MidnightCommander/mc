@@ -117,9 +117,6 @@ WMenu *the_menubar;
 /* Pointers to the selected and unselected panel */
 WPanel *current_panel = NULL;
 
-/* Set when we want use advanced chmod command instead of chmod and/or chown */
-int advanced_chfns = 0;
-
 /* Set when main loop should be terminated */
 volatile int quit = 0;
 

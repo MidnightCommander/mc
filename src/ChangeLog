@@ -1,5 +1,8 @@
 2002-09-13  Pavel Roskin  <proski@gnu.org>
 
+	* main.c: Remove advanced_chfns variable.  Adjust all
+	dependencies.
+
 	* option.c: Make "Configure options" dialog more flexible,
 	readjust layout.  Remove "advanced chown" option - it's unused.
 

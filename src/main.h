@@ -61,7 +61,6 @@ extern int confirm_view_dir;
 extern int fast_refresh;
 extern int navigate_with_arrows;
 extern int force_ugly_line_drawing;
-extern int advanced_chfns;
 extern int drop_menus;
 extern int cd_symlinks;
 extern int show_all_if_ambiguous;

@@ -177,7 +177,6 @@ static const struct {
     { "mouse_move_pages_viewer", &mouse_move_pages_viewer },
     { "fast_refresh", &fast_refresh },
     { "navigate_with_arrows", &navigate_with_arrows },
-    { "advanced_chown", &advanced_chfns },
     { "drop_menus", &drop_menus },
     { "wrap_mode",  &global_wrap_mode},
     { "old_esc_mode", &old_esc_mode },

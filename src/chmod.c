@@ -381,19 +381,3 @@ void chmod_cmd (void)
     chmod_done ();
 }
 
-void ch1_cmd (int id)
-{
-  if (advanced_chfns)
-      chown_advanced_cmd ();
-  else
-      chmod_cmd ();
-}
-
-void ch2_cmd (int id)
-{
-  if (advanced_chfns)
-      chown_advanced_cmd ();
-  else
-      chown_cmd ();
-}
-
