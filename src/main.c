@@ -2426,18 +2426,18 @@ sigchld_handler_no_subshell (int sig)
     pid = waitpid (cons_saver_pid, &status, WUNTRACED | WNOHANG);
     
     if (pid == cons_saver_pid){
-	/* {{{ Someone has stopped or killed cons.saver; restart it */
 
-#  ifdef SIGTSTP
+#ifdef SIGTSTP
 	if (WIFSTOPPED (status))
+	    /* Someone has stopped cons.saver - restart it */
 	    kill (pid, SIGCONT);
 	else
-#  endif
+#endif /* SIGTSTP */
 	{
+	    /* cons.saver has died - disable confole saving */
 	    handle_console (CONSOLE_DONE);
-	    handle_console (CONSOLE_INIT);
+	    console_flag = 0;
 	}
-	/* }}} */
     }
 #endif /* linux || __linux__ */
 

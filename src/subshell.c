@@ -897,22 +897,19 @@ void sigchld_handler (int sig)
     pid = waitpid (cons_saver_pid, &status, WUNTRACED | WNOHANG);
     
     if (pid == cons_saver_pid) {
-	/* {{{ Someone has stopped or killed cons.saver; restart it */
 
 #  ifdef SIGTSTP
 	if (WIFSTOPPED (status))
+	    /* Someone has stopped cons.saver - restart it */
 	    kill (pid, SIGCONT);
 	else
 #  endif
 	{
+	    /* cons.saver has died - disable confole saving */
 	    handle_console (CONSOLE_DONE);
-	    handle_console (CONSOLE_INIT);
-	    /* Ought to do: if (in_subshell) handle_console (CONSOLE_SAVE)
-	       Can't do this without adding a new variable `in_subshell';
-	       it hardly seems to be worth the trouble. */
+	    console_flag = 0;
 	}
 
-	/* }}} */
     }
 #endif /* linux || __linux__ */
     /* If we get here, some other child exited; ignore it */
