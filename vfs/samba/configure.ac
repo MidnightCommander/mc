@@ -71,7 +71,6 @@ AC_TYPE_MODE_T
 AC_TYPE_OFF_T
 AC_TYPE_SIZE_T
 AC_TYPE_PID_T
-AC_STRUCT_ST_RDEV
 AC_CHECK_TYPE(ino_t,unsigned)
 AC_CHECK_TYPE(loff_t,off_t)
 AC_CHECK_TYPE(offset_t,off_t)
@@ -142,7 +141,7 @@ fi
 
 AC_CHECK_FUNCS(waitpid getcwd strdup strtoul strerror chown chmod)
 AC_CHECK_FUNCS(fstat strchr utime utimes getrlimit fsync bzero memset)
-AC_CHECK_FUNCS(memmove vsnprintf snprintf setsid glob strpbrk pipe crypt16 getauthuid)
+AC_CHECK_FUNCS(memmove vsnprintf snprintf setsid glob pipe crypt16 getauthuid)
 AC_CHECK_FUNCS(strftime sigprocmask sigblock sigaction innetgr setnetgrent getnetgrent endnetgrent)
 AC_CHECK_FUNCS(initgroups select rdchk getgrnam pathconf)
 AC_CHECK_FUNCS(setpriv setgidx setuidx setgroups mktime rename ftruncate)
