@@ -17,11 +17,11 @@
 #    	 endif
 #    else
          /* Stubs that do something close enough.  */
-#    	 define textdomain(String) (String)
+#    	 define textdomain(String)
 #    	 define gettext(String) (String)
 #    	 define dgettext(Domain,Message) (Message)
 #    	 define dcgettext(Domain,Message,Type) (Message)
-#    	 define bindtextdomain(Domain,Directory) (Domain)
+#    	 define bindtextdomain(Domain,Directory)
 #    	 define _(String) (String)
 #    	 define N_(String) (String)
 #    endif

@@ -79,9 +79,9 @@
 #endif /* SCO_FLAVOR */
 #include <time.h>
 #include <utime.h>
+#include "global.h"
 #include "eregex.h"
 #include "dialog.h"
-#include "global.h"
 #include "setup.h"
 /* Needed by query_replace */
 #include "color.h"

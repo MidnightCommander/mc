@@ -68,7 +68,6 @@
 #endif 
 
 #include <errno.h>
-#include "tty.h"
 #include <ctype.h>
 #include <string.h>
 #ifdef HAVE_UNISTD_H
@@ -82,8 +81,9 @@
 #endif /* SCO_FLAVOR */
 #include <time.h>
 #include <utime.h>
-#include "eregex.h"
 #include "global.h"
+#include "tty.h"
+#include "eregex.h"
 #include "setup.h"
 #include "dialog.h"
 /* Needed by query_replace */
@@ -812,6 +812,7 @@ static QuickWidget fmd_widgets [] = {
 void
 fmd_init_i18n (int force)
 {
+#ifdef ENABLE_NLS
 	static int initialized = FALSE;
 	register int i;
 	int len;
@@ -819,7 +820,6 @@ fmd_init_i18n (int force)
 	if (initialized && !force)
 		return;
 
-#ifdef ENABLE_NLS
 	for (i = sizeof (op_names) / sizeof (op_names[0]); i--;)
 		op_names [i] = _(op_names [i]);
 
@@ -873,9 +873,9 @@ fmd_init_i18n (int force)
 			fmd_widgets [FMDI2].hotkey_pos = fmd_xlen - 6;
 	}
 #undef chkbox_xpos
-#endif /* ENABLE_NLS */
 
 	initialized = TRUE;
+#endif /* !ENABLE_NLS */
 }
 
 char *

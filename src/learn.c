@@ -232,11 +232,9 @@ static void init_learn (void)
     int x, y, i, j;
     key_code_name_t *key;
     char buffer [BUF_TINY];
-	static int i18n_flag = 0;
-
-    do_refresh ();
 
 #ifdef ENABLE_NLS
+	static int i18n_flag = 0;
 	if (!i18n_flag)
 	{
 		char* cp;
@@ -258,6 +256,8 @@ static void init_learn (void)
 		i18n_flag = 1;
 	}
 #endif /* ENABLE_NLS */
+
+    do_refresh ();
 
     learn_dlg = create_dlg (0, 0, 23, 78, dialog_colors,
 			      learn_callback, "[Learn keys]", "Learn keys",
