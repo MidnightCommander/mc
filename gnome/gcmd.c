@@ -541,3 +541,10 @@ gnome_select_all_cmd (GtkWidget *widget, WPanel *panel)
 	paint_panel (panel);
 	do_refresh ();
 }
+void
+gnome_filter_cmd (GtkWidget *widget, WPanel *panel)
+{
+	GtkWidget *filter_dlg;
+	GtkWidget *entry;
+	
+}	

@@ -2255,43 +2255,26 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gnome_dock_add_item (GNOME_DOCK(GNOME_APP (panel->xwindow)->dock),
 			     GNOME_DOCK_ITEM (dock), GNOME_DOCK_TOP, 1, 0, 0, FALSE);
 	gtk_widget_show_all (dock);
-
-
-	/*
-	 * ministatus
-	 */
-	panel->ministatus = GNOME_APPBAR(gnome_appbar_new(FALSE, TRUE, GNOME_PREFERENCES_USER));
-	gnome_app_set_statusbar(GNOME_APP (panel->xwindow), GTK_WIDGET(panel->ministatus));
-#if 0
-	panel->ministatus = gtk_label_new (" "); /* was a cliplabel */
-	gtk_widget_set_usize (panel->ministatus, 0, -1);
-	gtk_misc_set_alignment (GTK_MISC (panel->ministatus), 0.0, 0.0);
-	gtk_misc_set_padding (GTK_MISC (panel->ministatus), 3, 0);
-	gtk_widget_show (panel->ministatus);
-	gtk_label_set_justify (GTK_LABEL (panel->ministatus), GTK_JUSTIFY_LEFT);
-	/*
-	 * The statusbar
-	 * This status bar now holds the  ministatus.
-	 */
-
-	frame = gtk_frame_new (NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
-	gtk_container_set_border_width (GTK_CONTAINER (frame), 0);
-
-	panel->status = gtk_label_new (""); /* used to be a cliplabel */
-
-
-	/* we set up the status_bar */
-	gtk_misc_set_alignment (GTK_MISC (panel->status), 0.0, 0.5);
-	gtk_misc_set_padding (GTK_MISC (panel->status), 3, 0);
-	gtk_container_add (GTK_CONTAINER (frame), panel->ministatus);
-	gtk_label_set_justify (GTK_LABEL (panel->status), GTK_JUSTIFY_LEFT);
-	gtk_widget_show_all (frame);
-
-#endif 
-
 	panel->view_table = gtk_table_new (1, 1, 0);
 	gtk_widget_show (panel->view_table);
+
+
+	/*
+	 * The status bar.
+	 */
+	panel->ministatus = GNOME_APPBAR(gnome_appbar_new(FALSE, TRUE, GNOME_PREFERENCES_NEVER));
+	gnome_app_set_statusbar(GNOME_APP (panel->xwindow), GTK_WIDGET(panel->ministatus));
+	ministatus_box = gtk_frame_new (NULL);
+	gtk_frame_set_shadow_type (GTK_FRAME(ministatus_box), GTK_SHADOW_IN);
+      
+	panel->status = gtk_label_new (_("Show all Files"));
+	gtk_misc_set_alignment (GTK_MISC (panel->status), 0.0, 0.0);
+      
+	gtk_box_pack_start (GTK_BOX (panel->ministatus), ministatus_box, FALSE, FALSE, 0);
+	gtk_container_add (GTK_CONTAINER(ministatus_box), panel->status);
+      
+	gtk_widget_show (ministatus_box);
+	gtk_widget_show (panel->status);
 
 	/*
 	 * Put the icon list and the file listing in a nice frame
@@ -2342,8 +2325,8 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_table_attach (GTK_TABLE (panel->table), frame, 0, 1, 3, 4,
 			  GTK_EXPAND | GTK_FILL,
 			  0, 0, 0);
-#endif
 
+#endif
 	/* Ultra nasty hack: pull the vbox from wdata */
 	vbox =  GTK_WIDGET (panel->widget.wdata);
 

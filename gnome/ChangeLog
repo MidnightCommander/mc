@@ -1,5 +1,10 @@
 1999-01-07  Jonathan Blandford  <jrb@redhat.com>
 
+	* glayout.c: use the function below.
+
+	* gcmd.c (gnome_filter_cmd): New function (or a sorry excuse for
+	one, anyway...)
+
 	* gscreen.c (x_create_panel): now uses gnome-appbar instead of the
 	old, psuedo status bar.
 
