@@ -349,23 +349,9 @@ void user_menu (WEdit *edit);
 #define edit_get_save_file(d,f,h) input_dialog (h, " Enter file name: ", f)
 #define CMalloc(x) malloc(x)
      
-#define set_error_msg(s) edit_init_error_msg = strdup(s)
-
-#ifdef _EDIT_C
-
-#define edit_error_dialog(h,s) set_error_msg(s)
-char *edit_init_error_msg = NULL;
-
-#else				/* ! _EDIT_C */
-
 #define edit_error_dialog(h,s) query_dialog (h, s, 0, 1, _("&Dismiss"))
+
 #define edit_message_dialog(h,s) query_dialog (h, s, 0, 1, _("&Ok"))
-extern char *edit_init_error_msg;
-
-#endif				/* ! _EDIT_C */
-
-
-#define get_error_msg(s) edit_init_error_msg
 #define edit_query_dialog2(h,t,a,b) query_dialog(h,t,0,2,a,b)
 #define edit_query_dialog3(h,t,a,b,c) query_dialog(h,t,0,3,a,b,c)
 #define edit_query_dialog4(h,t,a,b,c,d) query_dialog(h,t,0,4,a,b,c,d)
@@ -384,72 +370,6 @@ extern char *home_dir;
 #endif
 #endif
 
-#ifdef _EDIT_C
-
-struct selection selection =
-{0, 0};
-int current_selection = 0;
-/* Note: selection.text = selection_history[current_selection].text */
-struct selection selection_history[NUM_SELECTION_HISTORY] =
-{
-    {0, 0},
-    {0, 0},
-    {0, 0},
-    {0, 0},
-    {0, 0},
-    {0, 0},
-    {0, 0},
-    {0, 0},
-    {0, 0},
-    {0, 0}
-};
-
-/*
-   what editor are we going to emulate? one of EDIT_KEY_EMULATION_NORMAL
-   or EDIT_KEY_EMULATION_EMACS
- */
-int edit_key_emulation = EDIT_KEY_EMULATION_NORMAL;
-
-int option_word_wrap_line_length = 72;
-int option_typewriter_wrap = 0;
-int option_auto_para_formatting = 0;
-int option_international_characters = 0;
-int option_tab_spacing = 8;
-int option_fill_tabs_with_spaces = 0;
-int option_return_does_auto_indent = 1;
-int option_backspace_through_tabs = 0;
-int option_fake_half_tabs = 1;
-int option_save_mode = 0;
-int option_backup_ext_int = -1;
-int option_find_bracket = 1;
-int option_max_undo = 32768;
-
-int option_editor_fg_normal = 26;
-int option_editor_fg_bold = 8;
-int option_editor_fg_italic = 10;
-
-int option_edit_right_extreme = 0;
-int option_edit_left_extreme = 0;
-int option_edit_top_extreme = 0;
-int option_edit_bottom_extreme = 0;
-
-int option_editor_bg_normal = 1;
-int option_editor_bg_abnormal = 0;
-int option_editor_bg_marked = 2;
-int option_editor_bg_marked_abnormal = 9;
-int option_editor_bg_highlighted = 12;
-int option_editor_fg_cursor = 18;
-
-char *option_whole_chars_search = "0123456789abcdefghijklmnopqrstuvwxyz_";
-char *option_chars_move_whole_word = "!=&|<>^~ !:;, !'!`!.?!\"!( !) !Aa0 !+-*/= |<> ![ !] !\\#! ";
-char *option_backup_ext = "~";
-
-#else				/* ! _EDIT_C */
-
-extern struct selection selection;
-extern struct selection selection_history[];
-extern int current_selection;
-
 /*
    what editor are we going to emulate? one of EDIT_KEY_EMULATION_NORMAL
    or EDIT_KEY_EMULATION_EMACS
@@ -460,7 +380,6 @@ extern WEdit *wedit;
 extern int option_word_wrap_line_length;
 extern int option_typewriter_wrap;
 extern int option_auto_para_formatting;
-extern int option_international_characters;
 extern int option_tab_spacing;
 extern int option_fill_tabs_with_spaces;
 extern int option_return_does_auto_indent;
@@ -468,30 +387,16 @@ extern int option_backspace_through_tabs;
 extern int option_fake_half_tabs;
 extern int option_save_mode;
 extern int option_backup_ext_int;
-extern int option_find_bracket;
 extern int option_max_undo;
-
-extern int option_editor_fg_normal;
-extern int option_editor_fg_bold;
-extern int option_editor_fg_italic;
 
 extern int option_edit_right_extreme;
 extern int option_edit_left_extreme;
 extern int option_edit_top_extreme;
 extern int option_edit_bottom_extreme;
 
-extern int option_editor_bg_normal;
-extern int option_editor_bg_abnormal;
-extern int option_editor_bg_marked;
-extern int option_editor_bg_marked_abnormal;
-extern int option_editor_bg_highlighted;
-extern int option_editor_fg_cursor;
-
 extern char *option_whole_chars_search;
-extern char *option_chars_move_whole_word;
 extern char *option_backup_ext;
 
 extern int edit_confirm_save;
 
-#endif				/* ! _EDIT_C */
 #endif 				/* __EDIT_H */

@@ -22,8 +22,6 @@
    02111-1307, USA.
 */
 
-#define _EDIT_C THIS_IS
-
 #include <config.h>
 #if defined(NEEDS_IO_H)
 #    include <io.h>
@@ -36,7 +34,51 @@
 #include "src/selcodepage.h"
 #endif
 
-extern char *edit_one_file;
+/*
+   what editor are we going to emulate? one of EDIT_KEY_EMULATION_NORMAL
+   or EDIT_KEY_EMULATION_EMACS
+ */
+int edit_key_emulation = EDIT_KEY_EMULATION_NORMAL;
+
+int option_word_wrap_line_length = 72;
+int option_typewriter_wrap = 0;
+int option_auto_para_formatting = 0;
+int option_tab_spacing = 8;
+int option_fill_tabs_with_spaces = 0;
+int option_return_does_auto_indent = 1;
+int option_backspace_through_tabs = 0;
+int option_fake_half_tabs = 1;
+int option_save_mode = 0;
+int option_backup_ext_int = -1;
+int option_max_undo = 32768;
+
+int option_edit_right_extreme = 0;
+int option_edit_left_extreme = 0;
+int option_edit_top_extreme = 0;
+int option_edit_bottom_extreme = 0;
+
+char *option_whole_chars_search = "0123456789abcdefghijklmnopqrstuvwxyz_";
+char *option_backup_ext = "~";
+
+static struct selection selection = {0, 0};
+static int current_selection = 0;
+/* Note: selection.text = selection_history[current_selection].text */
+static struct selection selection_history[NUM_SELECTION_HISTORY] =
+{
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0}
+};
+
+static char *option_chars_move_whole_word =
+    "!=&|<>^~ !:;, !'!`!.?!\"!( !) !Aa0 !+-*/= |<> ![ !] !\\#! ";
 
 /*
  *
@@ -2043,12 +2085,10 @@ static long last_bracket = -1;
 
 static void edit_find_bracket (WEdit * edit)
 {
-    if (option_find_bracket) {
-	edit->bracket = edit_get_bracket (edit, 1, 10000);
-	if (last_bracket != edit->bracket)
-	    edit->force |= REDRAW_PAGE;
-	last_bracket = edit->bracket;
-    }
+    edit->bracket = edit_get_bracket (edit, 1, 10000);
+    if (last_bracket != edit->bracket)
+	edit->force |= REDRAW_PAGE;
+    last_bracket = edit->bracket;
 }
 
 static void edit_goto_matching_bracket (WEdit *edit)

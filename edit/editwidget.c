@@ -118,7 +118,6 @@ int edit (const char *_file, int line)
 	text = "";
 
     if (!(wedit = edit_init (NULL, LINES - 2, COLS, _file, text, "", 0))) {
-	message (1, _ (" Error "), get_error_msg (""));
 	return 0;
     }
     wedit->macro_i = -1;
