@@ -445,7 +445,8 @@ static int quick_callback (struct Dlg_head *h, int id, int Msg)
     return 0;
 }
 
-#define I18N(x) (do_int? (x = _(x)) : x)
+#define I18N(x) (do_int && *x ? (x = _(x)): x)
+
 int quick_dialog_skip (QuickDialog *qd, int nskip)
 {
     Dlg_head *dd;
@@ -461,7 +462,8 @@ int quick_dialog_skip (QuickDialog *qd, int nskip)
     if (!qd->i18n){
 	qd->i18n = 1;
 	do_int = 1;
-	qd->title = _(qd->title);
+	if (*qd->title)
+	    qd->title = _(qd->title);
     } else
 	do_int = 0;
     

@@ -1,3 +1,7 @@
+1998-03-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* wtools.c (quick_dialog_skip): Do not i18n any string that is empty.
+
 Wed Mar 25 19:05:31 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* view.c (view_done): Set monitor off before deleting the view
