@@ -22,11 +22,11 @@ my $parsedates = eval 'require Date::Parse';
 # regular expressions
 my $unified_header=qr/^--- .*\n\+\+\+ .*\n@@ .* @@.*\n$/;
 my $unified_extract=qr/^--- ([^\s]+).*\n\+\+\+ ([^\s]+)\s*([^\t\n]*)/;
-my $unified_contents=qr/^([+\- \n]|@@ .* @@)/;
+my $unified_contents=qr/^([+\-\\ \n]|@@ .* @@)/;
 
 my $context_header=qr/^\*\*\* .*\n--- .*\n\*{15}\n$/;
 my $context_extract=qr/^\*\*\* ([^\s]+).*\n--- ([^\s]+)\s*([^\t\n]*)/;
-my $context_contents=qr/^([!+\- \n]|-{3} .* -{4}|\*{3} .* \*{4}|\*{15})/;
+my $context_contents=qr/^([!+\-\\ \n]|-{3} .* -{4}|\*{3} .* \*{4}|\*{15})/;
 
 my $ls_extract_id=qr/^[^\s]+\s+[^\s]+\s+([^\s]+)\s+([^\s]+)/;
 my $basename=qr|^(.*/)*([^/]+)$|;

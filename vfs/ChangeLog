@@ -1,3 +1,8 @@
+2003-03-24  Adam Byrtek  <alpha@debian.org>
+
+	* extfs/patchfs.in: Treat '\ No newline at end of file' line
+	as valid diff contents.
+
 2003-03-14  Lorinczy Zsigmond  <lzsiga@mail.ahiv.hu>
 
 	* ftpfs.c (login_server): Ask user for account if the server
