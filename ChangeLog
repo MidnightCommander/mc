@@ -1,5 +1,7 @@
 2001-05-18  Pavel Roskin  <proski@gnu.org>
 
+	* create_vcs: Remove.
+
 	* INSTALL: Update download locations for MC, rxvt, gpm, ncurses.
 	Add download location for glib.
 	* mc.spec.in: Likewise.
