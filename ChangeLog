@@ -1,3 +1,7 @@
+Mon Feb  1 01:28:19 1999  Timur Bakeyev  <mc@bat.ru>
+
+	* configure.in: Add check against setuid() and setreuid() functions.
+
 Fri Jan 29 22:55:56 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* slang/slang.h: renamed to slang-mc.h
