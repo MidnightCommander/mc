@@ -2000,11 +2000,13 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	if (id == '\t')
 	    free_completions (input_w (cmdline));
 
+#ifndef HAVE_X
 	/* On Linux, we can tell the difference */
 	if (id == '\n' && ctrl_pressed ()){
 	    copy_prog_name ();
 	    return MSG_HANDLED;
 	}
+#endif /* HAVE_X */
 
 	if (id == '\n' && input_w (cmdline)->buffer [0]){
 	    send_message_to (h, (Widget *) cmdline, WIDGET_KEY, id);
@@ -3042,19 +3044,17 @@ main (int argc, char *argv [])
 #ifdef HAVE_SLANG
     SLtt_Ignore_Beep = 1;
 #endif
-#endif
     
     /* NOTE: This has to be called before slang_init or whatever routine
        calls any define_sequence */
     init_key ();
 
-#if defined (HAVE_TEXTMODE_X11_SUPPORT) && !defined (HAVE_X)
+#ifdef HAVE_TEXTMODE_X11_SUPPORT
     init_textmode_x11_support ();
 #endif
 
-#ifndef HAVE_GNOME
     handle_args (argc, argv);
-#endif
+#endif /* HAVE_X */
     
     /* Used to report the last working directory at program end */
     if (print_last_wd){
@@ -3099,19 +3099,23 @@ main (int argc, char *argv [])
     
     compatibility_move_mc_files ();
     
-#   ifdef HAVE_X
+#ifdef HAVE_X
     /* We need this, since ncurses endwin () doesn't restore the signals */
+    /* Very strange comment given that ifdef HAVE_X stands here since
+       revision 1.1 - Pavel Roskin */
     save_stop_handler ();
-#   endif
+
+#else /* !HAVE_X */
 
     /* Must be done before init_subshell, to set up the terminal size: */
     /* FIXME: Should be removed and LINES and COLS computed on subshell */
-#   ifdef HAVE_SLANG
+#ifdef HAVE_SLANG
     slang_init ();
-#   endif
+#endif
     /* NOTE: This call has to be after slang_init. It's the small part from
     the previous init_key which had to be moved after the call of slang_init */ 
     init_key_input_fd ();
+#endif /* !HAVE_X */
 
     load_setup ();
 

@@ -1290,7 +1290,7 @@ backward_word (WInput *in)
     in->point = p - in->buffer;
 }
 
-#ifdef __linux__
+#if defined(__linux__) && !defined(HAVE_X)
 static void
 key_left (WInput *in)
 {

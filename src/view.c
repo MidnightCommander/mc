@@ -2368,13 +2368,13 @@ real_view_event (Gpm_Event *event, void *x)
 /* }}} */
 /* {{{ Window creation, destruction and a driver stub for real view */
 
+#ifndef PORT_WANTS_VIEW
 static int
 view_mode_callback (struct Dlg_head *h, int id, int msg)
 {
     return default_dlg_callback (h, id, msg);
 }
 
-#ifndef PORT_WANTS_VIEW
 void
 view_adjust_size (Dlg_head *h)
 {

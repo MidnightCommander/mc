@@ -191,11 +191,13 @@ static const struct {
     { "confirm_execute", &confirm_execute },
     { "confirm_exit", &confirm_exit },
     { "safe_delete", &know_not_what_am_i_doing },
+#ifndef HAVE_X
     { "mouse_repeat_rate", &mou_auto_repeat },
     { "double_click_speed", &double_click_speed },
     { "eight_bit_clean", &eight_bit_clean },
     { "full_eight_bits", &full_eight_bits },
     { "use_8th_bit_as_meta", &use_8th_bit_as_meta },
+#endif
     { "confirm_view_dir", &confirm_view_dir },
     { "mouse_move_pages", &mouse_move_pages },
     { "mouse_move_pages_viewer", &mouse_move_pages_viewer },
@@ -204,8 +206,8 @@ static const struct {
     { "advanced_chown", &advanced_chfns },
     { "drop_menus", &drop_menus },
     { "wrap_mode",  &global_wrap_mode},
+#ifndef HAVE_X
     { "old_esc_mode", &old_esc_mode },
-#ifndef HAVE_GNOME
     { "cd_symlinks", &cd_symlinks },
 #endif
     { "show_all_if_ambiguous", &show_all_if_ambiguous },
@@ -372,6 +374,7 @@ save_configure (void)
     g_free (profile);
 }
 
+#ifndef PORT_HAS_SAVE_PANEL_TYPES
 static void
 panel_save_type (char *section, int type)
 {
@@ -385,7 +388,6 @@ panel_save_type (char *section, int type)
 	}
 }
 
-#ifndef PORT_HAS_SAVE_PANEL_TYPES
 void
 save_panel_types ()
 {
@@ -662,6 +664,7 @@ void done_setup (void)
 /*    directory_history_free (); */
 }
 
+#ifndef HAVE_X
 static void
 load_keys_from_section (char *terminal, char *profile_name)
 {
@@ -705,3 +708,4 @@ void load_key_defs (void)
     free_profile_name (libfile);
     g_free (libfile);
 }
+#endif

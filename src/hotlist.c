@@ -411,8 +411,10 @@ static int hotlist_callback (Dlg_head * h, int Par, int Msg)
     case DLG_UNHANDLED_KEY:
 	switch (Par) {
 	case '\n':
+#ifndef HAVE_X    
 	    if (ctrl_pressed())
 		goto l1;
+#endif	
 	case KEY_ENTER:
 	case KEY_RIGHT:
 	    if (hotlist_button_callback (B_ENTER, 0)) {

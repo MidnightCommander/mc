@@ -1,5 +1,13 @@
 2001-06-01  Pavel Roskin  <proski@gnu.org>
 
+	* hotlist.c [HAVE_X]: Don't use ctrl_pressed().
+	* widget.c [HAVE_X]: Likewise.
+	* main.c [HAVE_X]: Likewise. Don't call init_key() and
+	init_key_input_fd().
+	* setup.c [HAVE_X]: Remove some variables that make no sence
+	for the GNOME edition. Eliminate save_panel_types().
+	* view.c [!PORT_WANTS_VIEW]: Eliminate view_mode_callback().
+
 	* view.c [HAVE_X]: Define is_idle() to 1. Warning fix.
 
 	* file.c (copy_file_file): Initialize src_uid, src_gid, src_mode
