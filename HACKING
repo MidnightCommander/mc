@@ -289,6 +289,8 @@ http://bugs.debian.org/mc
 	The bug tracking system for Debian, a package collection mainly
 	for GNU/Linux and the Hurd.
 
+http://bugzilla.redhat.com/bugzilla/buglist.cgi?component=mc
+	Bugs reported in Redhat Linux.
 
 http://savannah.gnu.org/patch/?group=mc
 	Patches reported in the GNU Savannah project.
