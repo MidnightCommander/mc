@@ -5,6 +5,9 @@
  * Author: Federico Mena <federico@nuclecu.unam.mx>
  */
 
+#include <grp.h>
+#include <pwd.h>
+#include <sys/types.h>
 #include <gnome.h>
 #include "gprop.h"
 
@@ -235,10 +238,31 @@ perm_owner_new (char *owner)
 {
 	GtkWidget *gentry;
 	GtkWidget *entry;
-
-	/* FIXME: this should be a nice pull-down list of user names, as in achown.c */
+	GtkWidget *list;
+	struct passwd *passwd;
+	int i, sel;
 
 	gentry = gnome_entry_new ("gprop_perm_owner");
+
+	list = GTK_COMBO (gentry)->list;
+
+	/* We can't use 0 as the intial element because the gnome entry may already
+	 * have loaded some history from a file.
+	 */
+
+	i = g_list_length (GTK_LIST (list)->children);
+	sel = i;
+
+	gnome_entry_append_history (GNOME_ENTRY (gentry), FALSE, "<Unknown>");
+
+	for (setpwent (); (passwd = getpwent ()) != NULL; i++) {
+		gnome_entry_append_history (GNOME_ENTRY (gentry), FALSE, passwd->pw_name);
+		if (strcmp (passwd->pw_name, owner) == 0)
+			sel = i;
+	}
+
+	gtk_list_select_item (GTK_LIST (list), sel);
+
 	entry = gnome_entry_gtk_entry (GNOME_ENTRY (gentry));
 	gtk_entry_set_text (GTK_ENTRY (entry), owner);
 
@@ -250,10 +274,30 @@ perm_group_new (char *group)
 {
 	GtkWidget *gentry;
 	GtkWidget *entry;
-
-	/* FIXME: this should be a nice pull-down list of group names, as in achown.c */
+	GtkWidget *list;
+	struct group *grp;
+	int i, sel;
 
 	gentry = gnome_entry_new ("gprop_perm_group");
+	gnome_entry_append_history (GNOME_ENTRY (gentry), FALSE, "<Unknown>");
+
+	list = GTK_COMBO (gentry)->list;
+
+	/* We can't use 0 as the intial element because the gnome entry may already
+	 * have loaded some history from a file.
+	 */
+
+	i = g_list_length (GTK_LIST (list)->children);
+	sel = i;
+
+	for (setgrent (); (grp = getgrent ()) != NULL; i++) {
+		gnome_entry_append_history (GNOME_ENTRY (gentry), FALSE, grp->gr_name);
+		if (strcmp (grp->gr_name, group) == 0)
+			sel = i;
+	}
+
+	gtk_list_select_item (GTK_LIST (list), sel);
+
 	entry = gnome_entry_gtk_entry (GNOME_ENTRY (gentry));
 	gtk_entry_set_text (GTK_ENTRY (entry), group);
 

@@ -1,5 +1,9 @@
 1998-03-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gprop.c (perm_group_new):
+	(perm_owner_new): Fill the combo lists with users and groups,
+	respectively.
+
 	* gprop.h: New files gprop.[ch].  These create the property pages
 	for desktop entries.
 

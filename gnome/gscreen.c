@@ -483,7 +483,7 @@ test_it (void)
 	gtk_widget_show (window);
 
 	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-	gpp = gprop_perm_new (0, "yomero", "migrupo");
+	gpp = gprop_perm_new (0, "yomero", "gnome");
 	gtk_container_add (GTK_CONTAINER (window), gpp->top);
 	gtk_widget_show (gpp->top);
 	gtk_widget_show (window);
