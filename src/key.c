@@ -230,6 +230,16 @@ static key_define_t xterm_key_defines [] = {
     { KEY_M_CTRL  | KEY_IC,    ESC_STR "[2;5~", MCKEY_NOACTION },
     { KEY_M_CTRL  | KEY_DC,    ESC_STR "[3;5~", MCKEY_NOACTION },
 
+    /* xterm (by Thomas Dickey) keys with modifiers */
+    { KEY_M_SHIFT | KEY_UP,    ESC_STR "[1;2A", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_DOWN,  ESC_STR "[1;2B", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_RIGHT, ESC_STR "[1;2C", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_LEFT,  ESC_STR "[1;2D", MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_HOME,  ESC_STR "[1;5H", MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_END,   ESC_STR "[1;5F", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_HOME,  ESC_STR "[1;2H", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_END,   ESC_STR "[1;2F", MCKEY_NOACTION },
+
     /* rxvt keys with modifiers */
     { KEY_M_SHIFT | KEY_UP,    ESC_STR "[a",  MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_DOWN,  ESC_STR "[b",  MCKEY_NOACTION },

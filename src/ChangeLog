@@ -1,3 +1,8 @@
+2003-07-23  Pavel Roskin  <proski@gnu.org>
+
+	* key.c (xterm_key_defines): Add more sequences for xterm-179 by
+	Thomas E. Dickey.
+
 2003-07-21  Pavel Roskin  <proski@gnu.org>
 
 	* subshell.c (pty_open_master) [HAVE_GRANTPT]: Prefer
