@@ -51,8 +51,9 @@ int desktop_arr_rows = FALSE;
 /* The computed name of the user's desktop directory */
 char *desktop_directory;
 
-/* Layout information:  number of rows/columns for the layout slots, and the array of slots.  Each
- * slot is an integer that specifies the number of icons that belong to that slot.
+/* Layout information:  number of rows/columns for the layout slots, and the
+ * array of slots.  Each slot is an integer that specifies the number of icons
+ * that belong to that slot.
  */
 static int layout_screen_width;
 static int layout_screen_height;
@@ -129,9 +130,10 @@ static int click_current_y;
 static int click_dragging;
 
 
-static DesktopIconInfo *desktop_icon_info_new (char *filename, char *url, char *caption, int xpos, int ypos);
+static DesktopIconInfo *desktop_icon_info_new (char *filename, char *url, char *caption,
+					       int xpos, int ypos);
 
-static GHashTable *infos_hash;
+static GHashTable *icon_hash;
 
 
 /* Convenience function to figure out the slot corresponding to an (x, y) position */
@@ -147,16 +149,17 @@ get_slot_from_pos (int x, int y, int *u, int *v)
 	*v = CLAMP (vv, 0, layout_rows - 1);
 }
 
-static void swap(int *a, int *b) {
+/* Swaps two integer variables */
+static void
+swap (int *a, int *b)
+{
 	int tmp;
-		
-	g_return_if_fail(a != NULL);
-	g_return_if_fail(b != NULL);
 
 	tmp = *a;
 	*a = *b;
 	*b = tmp;
 }
+
 /* Looks for a free slot in the layout_slots array and returns the coordinates
  * that coorespond to it.  "Free" means it either has zero icons in it, or it
  * has the minimum number of icons of all the slots.  Returns the number of
@@ -168,35 +171,46 @@ auto_pos (int sx, int ex, int sy, int ey, int *slot)
 	int min, min_slot;
 	int x, y;
 	int val;
-	int xinc = 1, yinc = 1;
+	int xinc, yinc;
 	int r, b;
 
-	min = l_slots(sx, sy).num_icons;
+	min = l_slots (sx, sy).num_icons;
 	min_slot = sx * layout_rows + sy;
-	
+	xinc = yinc = 1;
+
 	if (desktop_arr_rows) {
 		swap (&ex, &ey);
 		swap (&sx, &sy);
 	}
-			
-/*	if (desktop_arr_r2l) swap (&sx, &ex);
-	if (desktop_arr_b2t) swap (&sy, &ey);*/
-	if (desktop_arr_r2l) xinc = -1;
-	if (desktop_arr_b2t) yinc = -1;
-	
-	if (desktop_arr_rows) swap (&xinc, &yinc);
-	
+
+#if 0
+	if (desktop_arr_r2l)
+		swap (&sx, &ex);
+
+	if (desktop_arr_b2t)
+		swap (&sy, &ey);
+#endif
+	if (desktop_arr_r2l)
+		xinc = -1;
+
+	if (desktop_arr_b2t)
+		yinc = -1;
+
+	if (desktop_arr_rows)
+		swap (&xinc, &yinc);
+
 	r = desktop_arr_r2l;
 	b = desktop_arr_b2t;
 
-	if (desktop_arr_rows) swap (&r, &b);
+	if (desktop_arr_rows)
+		swap (&r, &b);
 
-	for (x = sx; (r ? (x >= ex) : (x <= ex));x += xinc) {
-		for (y = sy;(b ? (y >= ey) : (y <= ey)); y += yinc) {
+	for (x = sx; (r ? (x >= ex) : (x <= ex)); x += xinc) {
+		for (y = sy; (b ? (y >= ey) : (y <= ey)); y += yinc) {
 			if (desktop_arr_rows)
-				val = l_slots(y, x).num_icons;
+				val = l_slots (y, x).num_icons;
 			else
-				val = l_slots(x, y).num_icons;
+				val = l_slots (x, y).num_icons;
 
 			if (val < min || val == 0) {
 				min = val;
@@ -208,9 +222,11 @@ auto_pos (int sx, int ex, int sy, int ey, int *slot)
 					break;
 			}
 		}
-		if (val == 0) break;
+
+		if (val == 0)
+			break;
 	}
-		
+
 	*slot = min_slot;
 	return min;
 }
@@ -219,18 +235,34 @@ auto_pos (int sx, int ex, int sy, int ey, int *slot)
 static void
 get_icon_auto_pos (int *x, int *y)
 {
-	int val1, val2;
-	int slot1, slot2;
+	int val1;
+	int slot1;
 	int slot;
 	int sx, sy, ex, ey;
 
-/*	get_slot_from_pos (*x, *y, &sx, &sy);*/
-/* FIXME funky stuff going on with the efficient positioning thingy */
-		if (desktop_arr_r2l) sx = layout_cols - 1; else sx = 0;
-		if (desktop_arr_b2t) sy = layout_rows - 1; else sy = 0;
+#if 0
+	get_slot_from_pos (*x, *y, &sx, &sy);
+#endif
+	/* FIXME funky stuff going on with the efficient positioning thingy */
+	if (desktop_arr_r2l)
+		sx = layout_cols - 1;
+	else
+		sx = 0;
 
-	if (desktop_arr_r2l) ex = 0; else ex = layout_cols - 1;
-	if (desktop_arr_b2t) ey = 0; else ey = layout_rows - 1;
+	if (desktop_arr_b2t)
+		sy = layout_rows - 1;
+	else
+		sy = 0;
+
+	if (desktop_arr_r2l)
+		ex = 0;
+	else
+		ex = layout_cols - 1;
+
+	if (desktop_arr_b2t)
+		ey = 0;
+	else
+		ey = layout_rows - 1;
 
 	/* Look forwards until the end of the grid.  If we could not find an
 	 * empty spot, find the second best.
@@ -239,17 +271,27 @@ get_icon_auto_pos (int *x, int *y)
 	val1 = auto_pos (sx, ex, sy, ey, &slot1);
 
 	slot = slot1;
-/*	to be used at a later date:
- *	if (val1 == 0)
+
+#if 0
+	/* to be used at a later date */
+	if (val1 == 0)
 		slot = slot1;
 	else {
-		if (desktop_arr_r2l) sx = layout_cols - 1; else sx = 0;
-		if (desktop_arr_b2t) sy = layout_rows - 1; else sy = 0;
-		
+		if (desktop_arr_r2l)
+			sx = layout_cols - 1;
+		else
+			sx = 0;
+
+		if (desktop_arr_b2t)
+			sy = layout_rows - 1;
+		else
+			sy = 0;
+
 		val2 = auto_pos (sx, ex, sy, ey, &slot2);
 		if (val2 < val1)
 			slot = slot2;
-	}*/
+	}
+#endif
 
 	*x = (slot / layout_rows) * DESKTOP_SNAP_X;
 	*y = (slot % layout_rows) * DESKTOP_SNAP_Y;
@@ -358,6 +400,8 @@ desktop_icon_info_destroy (DesktopIconInfo *dii)
 
 	gtk_widget_destroy (dii->dicon);
 	remove_from_slot (dii);
+
+	g_hash_table_remove (icon_hash, dii->filename);
 
 	g_free (dii->url);
 	g_free (dii->filename);
@@ -542,10 +586,13 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 
 			fau = g_new0 (file_and_url_t, 1);
 			fau->filename = g_strdup (dirent->d_name);
+
 			if (desktop_url)
-				fau->url      = g_strdup (desktop_url);
+				fau->url = g_strdup (desktop_url);
+
 			if (caption)
 				fau->caption  = g_strdup (caption);
+
 			need_position_list = g_slist_prepend (need_position_list, fau);
 		}
 
@@ -664,36 +711,35 @@ static WPanel *create_panel_from_desktop(); /* Fwd decl */
 static void free_panel_from_desktop(WPanel *panel);
 
 /* Perform automatic arrangement of the desktop icons */
-void
+static void
 desktop_arrange_icons (SortType type)
 {
 	WPanel *panel;
-	sortfn *sfn = NULL;
+	sortfn *sfn;
 	DesktopIconInfo *dii;
 	int i;
 	dir_list dir;
 	int xpos, ypos;
 
 	panel = create_panel_from_desktop ();
-	sfn = sort_get_func_from_type(type);
-	g_return_if_fail(sfn != NULL);
-	
-	do_sort(&panel->dir, sfn, panel->count - 1, FALSE, FALSE);
+	sfn = sort_get_func_from_type (type);
+	g_assert (sfn != NULL);
+
+	do_sort (&panel->dir, sfn, panel->count - 1, FALSE, FALSE);
 	dir = panel->dir;
-	g_return_if_fail(dir.list != NULL);
-	
+	g_assert (dir.list != NULL);
+
 	for (i = 0; i < dir.size; i++)
-		remove_from_slot (desktop_icon_info_get_by_filename(
-				dir.list[i].fname));
+		remove_from_slot (desktop_icon_info_get_by_filename (dir.list[i].fname));
 
 	for (i = 0; i < dir.size; i++) {
-		dii = desktop_icon_info_get_by_filename(dir.list[i].fname);	
+		dii = desktop_icon_info_get_by_filename (dir.list[i].fname);
 		xpos = ypos = 0;
 		get_icon_auto_pos (&xpos, &ypos);
 		desktop_icon_info_place (dii, xpos, ypos);
 	}
-	
-	free_panel_from_desktop(panel);
+
+	free_panel_from_desktop (panel);
 }
 
 /* Unselects all the desktop icons except the one in exclude */
@@ -947,8 +993,11 @@ text_changed (GnomeIconTextItem *iti, gpointer data)
 
 			/* Set the new name */
 
+			g_hash_table_remove (icon_hash, dii->filename);
 			g_free (dii->filename);
+
 			dii->filename = g_strdup (new_name);
+			g_hash_table_insert (icon_hash, dii->filename, dii);
 			set_icon_wmclass (dii);
 
 			desktop_reload_icons (FALSE, 0, 0);
@@ -1512,8 +1561,8 @@ DesktopIconInfo *
 desktop_icon_info_get_by_filename (char *filename)
 {
 	g_return_val_if_fail (filename != NULL, NULL);
-	
-	return g_hash_table_lookup(infos_hash, filename);
+
+	return g_hash_table_lookup (icon_hash, filename);
 }
 
 /* Used to execute the popup menu for desktop icons */
@@ -2136,12 +2185,11 @@ desktop_icon_info_new (char *filename, char *url, char *caption, int xpos, int y
 	setup_icon_dnd_dest (dii);
 
 	/* Place the icon and append it to the list */
-
 	desktop_icon_info_place (dii, xpos, ypos);
 
-	/* Lookup for filename */
-	g_hash_table_insert(infos_hash, dii->filename, dii);
-			
+	/* Put into icon hash table */
+	g_hash_table_insert (icon_hash, dii->filename, dii);
+
 	return dii;
 }
 
@@ -2310,7 +2358,7 @@ setup_motif_dnd_proxy (guint32 xid, GdkWindow *proxy_window)
 	info.protocol_style = 5; /* XmDRAG_DYNAMIC */
 	info.proxy_window = proxy_xid;
 	info.num_drop_sites = 0;
-	info.total_size = sizeof(info);
+	info.total_size = sizeof (info);
 
 	XChangeProperty (gdk_display, xid,
 			 receiver_info_atom,
@@ -2473,40 +2521,43 @@ find_click_proxy_window (void)
 	return proxy_gdk_window;
 }
 
-/* Callback for arranging the icons on the desktop */
-/* These are all NOT static because glayout.c calls them too */
-
-void
+/* Callback for arranging icons by name */
+static void
 handle_arrange_icons_name (GtkWidget *widget, gpointer data)
 {
 	desktop_arrange_icons (SORT_NAME);
 }
 
-void
+/* Callback for arranging icons by file type */
+static void
 handle_arrange_icons_type (GtkWidget *widget, gpointer data)
 {
 	desktop_arrange_icons (SORT_EXTENSION);
 }
 
-void
+/* Callback for arranging icons by file size */
+static void
 handle_arrange_icons_size (GtkWidget *widget, gpointer data)
 {
 	desktop_arrange_icons (SORT_SIZE);
 }
 
-void
+/* Callback for arranging icons by access time */
+static void
 handle_arrange_icons_access (GtkWidget *widget, gpointer data)
 {
 	desktop_arrange_icons (SORT_ACCESS);
 }
 
-void
+/* Callback for arranging icons by modification time */
+static void
 handle_arrange_icons_mod (GtkWidget *widget, gpointer data)
 {
 	desktop_arrange_icons (SORT_MODIFY);
 }
 
-void
+/* Callback for arranging icons by change time */
+static void
 handle_arrange_icons_change (GtkWidget *widget, gpointer data)
 {
 	desktop_arrange_icons (SORT_CHANGE);
@@ -2519,13 +2570,12 @@ handle_new_window (GtkWidget *widget, gpointer data)
 	new_panel_at (gnome_user_home_dir);
 }
 
+/* Rescans the mountable devices in the desktop and re-creates their icons */
 void
 desktop_rescan_devices (void)
 {
 	desktop_cleanup_devices ();
-
 	gdesktop_init ();
-
 	desktop_reload_icons (FALSE, 0, 0);
 }
 
@@ -2581,71 +2631,79 @@ new_terminal (GtkWidget *widget, gpointer data)
 }
 
 static GnomeUIInfo gnome_panel_new_menu [] = {
-	GNOMEUIINFO_ITEM_NONE(N_("_Terminal"), N_("Launch a new terminal in the current directory"), new_terminal),
+	GNOMEUIINFO_ITEM_NONE (N_("_Terminal"), N_("Launch a new terminal in the current directory"), new_terminal),
 	/* If this ever changes, make sure you update create_new_menu accordingly. */
-	GNOMEUIINFO_ITEM_NONE( N_("_Directory..."), N_("Creates a new directory"), gnome_mkdir_cmd ),
-	GNOMEUIINFO_ITEM_NONE( N_("URL L_ink..."),  N_("Creates a new URL link"), gnome_new_link ),
-	GNOMEUIINFO_ITEM_NONE( N_("_Launcher..."), N_("Creates a new launcher"), gnome_new_launcher ),
+	GNOMEUIINFO_ITEM_NONE (N_("_Directory..."), N_("Creates a new directory"), gnome_mkdir_cmd),
+	GNOMEUIINFO_ITEM_NONE (N_("URL L_ink..."),  N_("Creates a new URL link"), gnome_new_link),
+	GNOMEUIINFO_ITEM_NONE (N_("_Launcher..."), N_("Creates a new launcher"), gnome_new_launcher),
 	GNOMEUIINFO_END
 };
 
-/* Ack. gnome_popup_menu's marshaller overrides the user_data. So
- * instead of having a single nice function using that, we have to have
- * many functions. That sucks. */
-
-GnomeUIInfo arrange_icons_items[] = {
-	GNOMEUIINFO_ITEM_NONE (N_("By Name"), NULL, handle_arrange_icons_name),
-	GNOMEUIINFO_ITEM_NONE (N_("By File Type"), NULL, handle_arrange_icons_type),
-	GNOMEUIINFO_ITEM_NONE (N_("By Size"), NULL, handle_arrange_icons_size),
-	GNOMEUIINFO_ITEM_NONE (N_("By Time Last Accessed"), NULL, handle_arrange_icons_access),
-	GNOMEUIINFO_ITEM_NONE (N_("By Time Last Modified"), NULL, handle_arrange_icons_mod),
-	GNOMEUIINFO_ITEM_NONE (N_("By Time Last Changed"), NULL, handle_arrange_icons_change),
+/* Menu items for arranging the desktop icons */
+GnomeUIInfo desktop_arrange_icons_items[] = {
+	GNOMEUIINFO_ITEM_NONE (N_("By _Name"), NULL, handle_arrange_icons_name),
+	GNOMEUIINFO_ITEM_NONE (N_("By File _Type"), NULL, handle_arrange_icons_type),
+	GNOMEUIINFO_ITEM_NONE (N_("By _Size"), NULL, handle_arrange_icons_size),
+	GNOMEUIINFO_ITEM_NONE (N_("By Time Last _Accessed"), NULL, handle_arrange_icons_access),
+	GNOMEUIINFO_ITEM_NONE (N_("By Time Last _Modified"), NULL, handle_arrange_icons_mod),
+	GNOMEUIINFO_ITEM_NONE (N_("By Time Last _Changed"), NULL, handle_arrange_icons_change),
 	GNOMEUIINFO_END
 };
 
 /* The popup menu for the desktop */
 GnomeUIInfo desktop_popup_items[] = {
-	GNOMEUIINFO_MENU_NEW_SUBTREE(gnome_panel_new_menu),
+	GNOMEUIINFO_MENU_NEW_SUBTREE (gnome_panel_new_menu),
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_SUBTREE(N_("Arrange Icons..."), arrange_icons_items),
-	GNOMEUIINFO_ITEM_NONE (N_("Create New Window"), NULL, handle_new_window),
+	GNOMEUIINFO_SUBTREE (N_("_Arrange Icons"), desktop_arrange_icons_items),
+	GNOMEUIINFO_ITEM_NONE (N_("Create _New Window"), NULL, handle_new_window),
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_ITEM_NONE (N_("Recreate Desktop Shortcuts"), NULL, handle_rescan_devices),
-	GNOMEUIINFO_ITEM_NONE (N_("Rescan Desktop"), NULL, handle_rescan_desktop),
-	GNOMEUIINFO_ITEM_NONE (N_("Configure Background Image"), NULL, set_background_image),
+	GNOMEUIINFO_ITEM_NONE (N_("Recreate Desktop _Shortcuts"), NULL, handle_rescan_devices),
+	GNOMEUIINFO_ITEM_NONE (N_("Rescan _Desktop"), NULL, handle_rescan_desktop),
+	GNOMEUIINFO_ITEM_NONE (N_("Configure _Background Image"), NULL, set_background_image),
 	GNOMEUIINFO_END
 };
 
-static GList* strip_tearoff_menu(GnomeUIInfo *infos) {
+static int
+strip_tearoff_menu_item (GnomeUIInfo *infos)
+{
 	GtkWidget *shell;
 	GList *child_list;
-	g_return_if_fail(infos != NULL);
-	
+	int n;
+
+	g_assert (infos != NULL);
+
 	shell = infos[0].widget->parent;
 	child_list = gtk_container_children (GTK_CONTAINER (shell));
-	if (GTK_IS_TEAROFF_MENU_ITEM (child_list->data))
+	n = g_list_length (child_list);
+
+	if (child_list && GTK_IS_TEAROFF_MENU_ITEM (child_list->data)) {
+		n--;
+		gtk_widget_destroy (GTK_WIDGET (child_list->data));
+#if 0
 		gtk_widget_hide (GTK_WIDGET (child_list->data));
-	return child_list;
+#endif
+	}
+
+	return n;
 }
-	
+
 /* Executes the popup menu for the desktop */
 static void
 desktop_popup (GdkEventButton *event)
 {
 	GtkWidget *shell;
 	GtkWidget *popup;
-	GList *child_list;
 	gchar *file, *file2;
 	WPanel *panel;
 	gint i;
 
+	/* Create the menu and then strip the tearoff menu items, sigh... */
+
 	popup = gnome_popup_menu_new (desktop_popup_items);
-	/* First thing we want to do is strip off the STUPID tear off menu... S-: */
-	strip_tearoff_menu(arrange_icons_items);
-	child_list = strip_tearoff_menu(gnome_panel_new_menu);
+
+	strip_tearoff_menu_item (desktop_arrange_icons_items);
+	i = strip_tearoff_menu_item (gnome_panel_new_menu);
 	shell = gnome_panel_new_menu[0].widget->parent;
-	i = g_list_length (child_list);
-	g_list_free (child_list);
 	file = gnome_unconditional_datadir_file ("mc/templates");
 	i = create_new_menu_from (file, shell, i);
 	file2 = gnome_datadir_file ("mc/templates");
@@ -3091,8 +3149,8 @@ setup_desktop_clicks (void)
 void
 desktop_init (void)
 {
-	infos_hash = g_hash_table_new(g_str_hash, g_str_equal);
-	
+	icon_hash = g_hash_table_new (g_str_hash, g_str_equal);
+
 	gdnd_init ();
 	gicon_init ();
 	create_layout_info ();
@@ -3139,7 +3197,7 @@ desktop_destroy (void)
 	gtk_widget_destroy (proxy_invisible);
 	XDeleteProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (), gdk_atom_intern ("XdndProxy", FALSE));
 
-	g_hash_table_destroy(infos_hash);
+	g_hash_table_destroy (icon_hash);
 }
 
 void

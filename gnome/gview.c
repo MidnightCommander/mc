@@ -133,7 +133,7 @@ view_status (WView *view, gboolean update_gui)
 	char buffer [80];
 	
 	if (view->hex_mode)
-		g_snprintf (buffer, sizeof (buffer), _("Offset 0x%08x"), view->edit_cursor);
+		g_snprintf (buffer, sizeof (buffer), _("Offset 0x%08lx"), view->edit_cursor);
 	else
 		g_snprintf (buffer, sizeof (buffer), _("Col %d"), -view->start_col);
 	if (strcmp (buffer, GTK_LABEL (view->gtk_offset)->label))

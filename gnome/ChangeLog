@@ -1,3 +1,42 @@
+1999-08-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gscreen.c (editing_icon_list): New function to figure out
+	whether an icon in the icon list is being edited.  This is a
+	FANTASTICALLY UGLY HACK, but we cannot add new functions to the
+	icon list at this point as it would break forwards compatibility.
+	Sigh.  BUGFIX: GNOME bug tracker #382, #1065.
+
+	* glayout.c (gnome_panel_desktop_menu): Added some underline
+	accelerators.
+
+	* gdesktop.c (desktop_arrange_icons_items): Renamed to the desktop
+	namespace.  Added underline accelerators.
+	(handle_arrange_icons_name): Made static.
+	(handle_arrange_icons_type): Likewise.
+	(handle_arrange_icons_size): Likewise.
+	(handle_arrange_icons_access): Likewise.
+	(handle_arrange_icons_mod): Likewise.
+	(handle_arrange_icons_change): Likewise.
+	(desktop_arrange_icons): Made static.
+	(strip_tearoff_menu_item): Made it return the number of items in
+	the menu, not the list of children.
+	(desktop_icon_info_destroy): Remove the icon from the icon hash
+	table.
+	(text_changed): Update the icon hash table information.
+
+	* gdesktop.h: Cleaned up some unused prototypes.
+
+	* gview.c (view_status): Use the correct g_snprintf() format
+	argument.
+
+	* gcmd.c (sort_get_func_from_type): Indented according to the MC
+	conventions.  People, *PLEASE* follow the Gnome Programming
+	Guidelines, especially when modifying existing code.
+
+	* gdesktop.c (swap): Likewise.
+	(auto_pos): Likewise.
+	(get_icon_auto_pos): Likewise.
+
 1999-08-08  Richard Hestilow  <hestgray@ionet.net>
 
 	* gcmd.[ch]
@@ -9,13 +48,13 @@
 	there are now 3 options (Right to Left, Bottom to Top, Rows instead
 	of Columns) controlling layout positioning. (Located in the "Desktop"
 	Preferences tab)
-	
+
 1999-08-08  David Martin <dmartina@usa.net>
 
 	* gaction.c (mainly gmc_unable_to_execute_dlg): Moved g_strconcat
 	to g_strdup_printf, to get compact strings and make coherent
 	translations. Translate atomic actions (open, edit, view) when
-	calling this function. 
+	calling this function.
 
 1999-08-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -27,10 +66,10 @@
 
 1999-08-06  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* gconf.h (PORT_STATIC_IN_STRING_FILE_XTIME): new port specific 
-	feature. The Gnome edition first calls all string_file functions 
-	and then uses the return values of these functions. This needs 
-	some static buffers in string_file_[acm]time. Therefore additional 
+	* gconf.h (PORT_STATIC_IN_STRING_FILE_XTIME): new port specific
+	feature. The Gnome edition first calls all string_file functions
+	and then uses the return values of these functions. This needs
+	some static buffers in string_file_[acm]time. Therefore additional
 	static buffers in string_file_[acm]time are needed.
 
 1999-08-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
@@ -50,7 +89,7 @@
 1999-08-01  David Martin <dmartina@usa.net>
 
 	* gcmd.c (gnome_about_cmd): Change strings in gmc "about" to
-	static as they only translated once. 
+	static as they only translated once.
 
 1999-08-01    <jrb@redhat.com>
 
@@ -66,7 +105,7 @@
 	* gnome-file-property-dialog.c (perm_group_new): the return values
 	from the group functions in libc return pointers to static buffers
 	in the library.  Duplicate all return values and free them at the
-	end. 
+	end.
 
 1999-07-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -95,8 +134,8 @@
 
 1999-06-24  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* gmc-chargrid.c (update_strip): Paint every character with the 
-	assigned fore and background color instead of using the colors of 
+	* gmc-chargrid.c (update_strip): Paint every character with the
+	assigned fore and background color instead of using the colors of
 	the first character for the whole line.
 
 1999-06-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
@@ -110,7 +149,7 @@
 	* gmain.c (non_corba_create_panels): Use parameter for startup
 	directory (use the this_dir external directory for this).
 	(create_panels): Pass this_dsir to non_corba_create_panels and
-	corba_create_window. 
+	corba_create_window.
 
 1999-06-22  David Martin <dmartina@usa.net>
 
@@ -186,7 +225,7 @@
 1999-06-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop-icon.c (desktop_icon_select): Show the
-	dicon->background. 
+	dicon->background.
 	(desktop_icon_init): Initialize backgorund as a rectangle that
 	fills all of the space used by the icon.
 
@@ -194,7 +233,7 @@
 
 	* glayout.c (gnome_panel_about_menu): Hooked up the new help
 	  file in the menu.
-	  
+
 1999-05-29  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gprefs.c (create_prop_int): Translate this label too.
@@ -206,11 +245,11 @@
 1999-05-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (panel_tree_button_press): Beginning of context menu
-	on tree. 
+	on tree.
 
 	* gtkdtree.c (gtk_dtree_load_path): Comment out the phantom code.
 	Need to review this code.  Lets fix the problem Federico needs
-	solved now. 
+	solved now.
 
 1999-05-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -289,7 +328,7 @@
 
 1999-04-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* mc.keys.in.in: Merge the application/tex values. 
+	* mc.keys.in.in: Merge the application/tex values.
 
 1999-04-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -361,7 +400,7 @@
 
 1999-04-12  Tuomas Kuosmanen  <tigert@gimp.org>
 
-	* glayout.c: Changed the stock icon for File->Delete to 
+	* glayout.c: Changed the stock icon for File->Delete to
 	GNOME_STOCK_PIXMAP_TRASH (the trashcan)
 
 1999-04-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
@@ -378,7 +417,7 @@
 1999-04-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gmount.c (is_block_device_mountable): Allow root to mount
-	devices. 
+	devices.
 
 1999-04-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -420,7 +459,7 @@
 
 1999-04-08  Jonathan Blandford  <jrb@redhat.com>
 
-	* gaction.c (gmc_unable_to_execute_dlg): 
+	* gaction.c (gmc_unable_to_execute_dlg):
 	now actions do the right thing (TM).
 
 1999-04-07  Owen Taylor  <otaylor@redhat.com>
@@ -430,7 +469,7 @@
 
 1999-04-06  Jonathan Blandford  <jrb@redhat.com>
 
-	* gscreen.c: make sure that we bring up an open_with if 
+	* gscreen.c: make sure that we bring up an open_with if
 	open it.
 
 	* gcmd.c (gnome_select): new selection dialog.
@@ -451,7 +490,7 @@
 1999-04-06  David Martin <dmartina@usa.net>
 
 	* gcmd.c: marked message for translation.
-	
+
 1999-04-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gmetadata.c (gmeta_del_icon_pos): New function to delete the
@@ -609,7 +648,7 @@
 	* gdesktop-init.c (desktop_load_init_from): New file that loads
 	new configuration files from the installation directory.
 
-	* gdesktop.c: Drop all the reload code from there, put it above. 
+	* gdesktop.c: Drop all the reload code from there, put it above.
 
 	* gpopup2.c (create_mime_actions): Attach to the menu, not the uiinfo.
 
@@ -630,12 +669,12 @@
 	Weninger <max@takefive.co.at>
 
 	* gcmd.c (dentry_apply_callback): new function.
-	(gnome_new_launcher): We can now create new 
+	(gnome_new_launcher): We can now create new
 
 1999-03-19  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gpopup2.c (create_mime_actions): Free full_name, just once, not
-	once per action.  
+	once per action.
 
 1999-03-19  Paul Raines <raines@slac.stanford.edu>
 
@@ -646,7 +685,7 @@
 1999-03-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_icon_info_open): Fix condition.  Should not
-	open a new panel if it fails to mount the device. 
+	open a new panel if it fails to mount the device.
 
 Thu Mar 18 14:59:12 1999  Timur Bakeyev  <mc@bat.ru>
 
@@ -748,7 +787,7 @@ Mon Mar 15 17:09:37 1999  Gregory McLean  <gregm@comstar.net>
 1999-03-11  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gpopup2.c: Sigh.  It happened again.  More features killed by
-	the merge.  
+	the merge.
 
 	If a file does not have any metadata/mime way of viewing it, the
 	viewer will always work.
@@ -872,7 +911,7 @@ Mon Mar 15 17:09:37 1999  Gregory McLean  <gregm@comstar.net>
 	panel, always allow edition of the icon image.
 
 1999-03-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
-	
+
 	* gdialogs.c: Support ui->ctx to be NULL, as file.c will set this
 	to NULL for background operations.
 
@@ -893,7 +932,7 @@ Mon Mar 15 17:09:37 1999  Gregory McLean  <gregm@comstar.net>
 	* gmain.c (session_save_state): Add call to gnome_config_sync().
 
 	* gutil.c (my_system_get_child_pid): reset SIGPIPE to a sensible
-	value. 
+	value.
 	(my_system_get_child_pid): Close also stdin/stdout/stderr
 
 	* gdesktop.c (is_mountable): Allow user-nfs devices to be mounted
@@ -940,10 +979,10 @@ Mon Mar 15 17:09:37 1999  Gregory McLean  <gregm@comstar.net>
 	So, no need to kill the tearoff menus in gmc now.
 
 	* gmount.c (is_block_device_mountable): compare the device name
-	here. 
-	
-	(get_mountable_devices): Do not stop scanning devices. 	
-	
+	here.
+
+	(get_mountable_devices): Do not stop scanning devices.
+
 	* gview.c (scrollbar_moved): Call view update here, with
 	update_gui = FALSE.
 
@@ -978,11 +1017,11 @@ Mon Mar 15 17:09:37 1999  Gregory McLean  <gregm@comstar.net>
 1999-02-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gmount.c (desktop_cleanup_devices): Export this routine now and
-	call it from gdeskop instead of overloading gmount_setup_devices. 
+	call it from gdeskop instead of overloading gmount_setup_devices.
 
 	* gprint.c: Sample file, it uses an externally provided program
 	(not in 1.0 so far) to setup printer devices.
-	
+
 	* gmount.c (gmount_setup_devices): No longer cleans up here.
 
 	* gicon.c (gicon_get_filename_for_icon): Return const char *, this
@@ -992,14 +1031,14 @@ Mon Mar 15 17:09:37 1999  Gregory McLean  <gregm@comstar.net>
 	* gnome-file-property-dialog.c (apply_metadata_change): Always set
 	the name of the icon to the new value, as the entry will always
 	match the imlib image anyways (due to the fixes I did to const
-	correctness). 
+	correctness).
 	(generate_icon_sel): Do not free the value.  We do not own this
-	return value. 
+	return value.
 
 	* gdesktop.c (is_mountable): NULL terminate string returned from
-	readlink.  Yes guys, readlink does not NULL terminate things. 
+	readlink.  Yes guys, readlink does not NULL terminate things.
 	(do_mount_umount): ditto.
-	
+
 	* gnome-file-property-dialog.c (init_metadata): ditto
 
 Tue Feb 23 17:41:45 1999  George Lebl  <jirka@5z.com>
@@ -1028,7 +1067,7 @@ Tue Feb 23 17:41:45 1999  George Lebl  <jirka@5z.com>
 
 	* gwidget.c (x_create_input): Hook to the changed signal and sync
 	the input with our view of the entry.  This fixes the paste bug
-	reported. 
+	reported.
 
 Tue Feb 23 01:57:22 1999  George Lebl  <jirka@5z.com>
 
@@ -1140,25 +1179,25 @@ Tue Feb 23 01:57:22 1999  George Lebl  <jirka@5z.com>
 	* gdesktop.c (reload_desktop_icons): Load the information provided
 	on the .desktop file for the desktop icon information: icon
 	filename and text to be displayed.pwd
-	
 
-	* gpopup.c (create_actions): Add ejectable 
+
+	* gpopup.c (create_actions): Add ejectable
 
 	* gdesktop.c (do_eject): Add eject command.
- 
+
 1999-02-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gpopup.c (create_actions): Add support for mountable icons.
 
 	* gdesktop.c (try_to_mount): Add an option to automatically mount
-	links on the desktop that point to devices. 
+	links on the desktop that point to devices.
 	(is_mountable): Returns true if a pathname is mountable.
 
 	* glayout.c: Add the dirsizes command here.
 
 	* gmount.c: New file.  Implements support routines for
 	mount/umount.
-	
+
 1999-02-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* i-symlink.png: Flipped the image around, since we are putting
@@ -1212,7 +1251,7 @@ Tue Feb 23 01:57:22 1999  George Lebl  <jirka@5z.com>
 	command to execute (used internally).
 
 	* gaction.c (gmc_edit_filename): Support for the GNOME editor
-	environment properties. 
+	environment properties.
 
 	* gdesktop.c (create_desktop_dir): Support GNOME_DESKTOP_DIR
 	variable to configure the desktop directory.
@@ -1260,13 +1299,13 @@ Tue Feb 23 01:57:22 1999  George Lebl  <jirka@5z.com>
 	due to having the "file-must-exist" bit turned on.
 
 	* gnome-file-property-dialog.c (apply_metadata_change): Metadata
-	rename the file.  
+	rename the file.
 
 	Change fpd->file_name to point to the new name so that any
 	metadat changes take effect on the new name, not the old name.
 
 	Test return value from move_file_file.
-	
+
 	(init_metadata): Fixed typo.
 
 1999-02-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
@@ -1320,7 +1359,7 @@ Tue Feb 23 01:57:22 1999  George Lebl  <jirka@5z.com>
 1999-02-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gaction.c (gmc_open_filename): Add support for running .desktop
-	files. 
+	files.
 	Made const correct.
 	(gmc_view): Made const correct.
 
@@ -1426,11 +1465,11 @@ Sun Feb  7 05:29:17 1999  Timur Bakeyev <mc@bat.ru>
 	we don't need this in GNOME. Changed the order of linking - libgtkedit
 	require libgnomeui.a, so swap $(LDFLAGS) and $(EXTRALIBS). The same for
 	corba edition.
-	
+
 	gdnd.c, gmetadata.c, gpopup2.c, gtools.c: Adde #include "global.h" or
 	move it before #include <gnome.h> to avoid warnings about redefining
 	MIN, MAX nad RE_DUP_MAX. More clean compiling.
-	
+
 	* gpopup2.h: New file - to avoid errors during "make distcheck". What
 	it is for, really?
 
@@ -1503,8 +1542,8 @@ Sun Feb  7 05:29:17 1999  Timur Bakeyev <mc@bat.ru>
 	(gicon_init): Load the url image.
 
 	* gdesktop.c (desktop_icon_info_new): Use an URL image for
-	desktop-urls.   Use the url as the caption for those icons. 
-	
+	desktop-urls.   Use the url as the caption for those icons.
+
 1999-02-04  Jonathan Blandford  <jrb@redhat.com>
 
 	* gprefs.c (caching_and_optimization_props): wording changes
@@ -1513,7 +1552,7 @@ Sun Feb  7 05:29:17 1999  Timur Bakeyev <mc@bat.ru>
 
 	* gdesktop.c (desktop_icon_info_open): Run "execute" if the file
 	is an executable.  I forgot that gmc_open does not test for
-	executable-ness. 
+	executable-ness.
 
 1999-02-04  Jonathan Blandford  <jrb@redhat.com>
 
@@ -1540,7 +1579,7 @@ Sun Feb  7 05:29:17 1999  Timur Bakeyev <mc@bat.ru>
 	the type column be displayed.
 	(panel_file_list_select_row): Removed dead code.
 	(panel_file_list_press_row): Select the row before calling
-	gpopup_do_popup. 
+	gpopup_do_popup.
 
 1999-02-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -1593,7 +1632,7 @@ Sun Feb  7 05:29:17 1999  Timur Bakeyev <mc@bat.ru>
 
 	* gnome-file-property-dialog.c (icon_sel_callback): Fix the
 	conditional here.
-	
+
 1999-02-01  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_drag_motion): If the user is dragging a
@@ -1655,7 +1694,7 @@ Sun Jan 31 19:42:47 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	* gnome-file-property-dialog.h (struct _GnomeFilePropertyDialog):
 	Now make open field mandatory and icon selection optional.
 	* gnome-file-property-dialog.c: as above
-	
+
 	* gpopup.c (panel_action_properties): only allow setting images if
 	we_can_afford_the_speed.
 
@@ -1672,9 +1711,9 @@ Sun Jan 31 19:42:47 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 Thu Jan 28 02:15:48 1999  Timur Bakeyev <mc@bat.ru>
 
 	* gdialogs.c: fixed "regexp.h" -> "eregexp.h" conversion.
-	
+
 	* oldnd.c: Replaced copy_strings() with g_strconcat().
-	
+
 1999-01-26  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gscreen.c (panel_clist_motion): Stop the emission of the
@@ -1688,7 +1727,7 @@ Thu Jan 28 02:15:48 1999  Timur Bakeyev <mc@bat.ru>
 
 Wed Jan 27 03:14:46 1999  Timur Bakeyev <mc@bat.ru>
 
-	* Converted memory managment to Glib - where it wasn't done. Now we 
+	* Converted memory managment to Glib - where it wasn't done. Now we
 	use g_new()/g_malloc()/g_strdup()/g_free() routings. copy_strings() re-
 	placed by g_strconcat(), and sprintf() by g_snprintf(). Some other,
 	minor changes.
@@ -1719,7 +1758,7 @@ Wed Jan 27 03:14:46 1999  Timur Bakeyev <mc@bat.ru>
 
 1999-01-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* gtkdtree.c (gtk_dtree_select_row): This should be also protected 
+	* gtkdtree.c (gtk_dtree_select_row): This should be also protected
 	against async notifications.
 
 1999-01-25  Federico Mena Quintero  <federico@nuclecu.unam.mx>
@@ -1751,7 +1790,7 @@ Wed Jan 27 03:14:46 1999  Timur Bakeyev <mc@bat.ru>
 	* gtkdtree.c (gtk_dtree_load_path): Keep track of when we are
 	loading the tree (and thus we do not care about async
 	notifications to the tree state changes) and when we are done (and
-	thus, we care about the async treestore structure notifications). 
+	thus, we care about the async treestore structure notifications).
 
 1999-01-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -1761,17 +1800,17 @@ Wed Jan 27 03:14:46 1999  Timur Bakeyev <mc@bat.ru>
 	(gnome_filter_cmd): ditto.
 
 	* gdialogs.c (file_progress_query_replace_policy): Set Window's
-	position to GTK_WIN_POS_MOUSE. 
+	position to GTK_WIN_POS_MOUSE.
 	(file_progress_real_query_replace): ditto.
 	(file_mask_dialog): ditto.
 
 	* gdialogs.c: Tag the strings for localization.  Remove debugging
-	messages. 
+	messages.
 
 	* gmain.c (gmc_window_setup_from_panel): Helper routine used to
 	set the GTK_WIN_POS_MOUSE on a window and set the parent with
 	gnome_dialog_set_parent (iff you have the WPanel * pointer to the
-	parent). 
+	parent).
 
 	* gtools.c (query_dialog): Set the window position to GTK_WIN_POS_MOUSE.
 
@@ -1874,7 +1913,7 @@ Wed Jan 27 03:14:46 1999  Timur Bakeyev <mc@bat.ru>
 	* gicon.h (gicon_image_to_name): Added prototype for
 	gicon_image_to_name().
 
-	* gicon.c (gicon_get_icon_for_file): 
+	* gicon.c (gicon_get_icon_for_file):
 	(gicon_get_icon_for_file_speed): Added a "directory" argument.
 	It is needed because the file_entry structure only contains the
 	pruned filename, and we need the complete name for the metadata
@@ -1999,10 +2038,10 @@ Wed Jan 27 03:14:46 1999  Timur Bakeyev <mc@bat.ru>
 	register themselves with it.
 
 1999-01-13  bertrand <Bertrand.Guiheneuf@inria.fr>
-	
+
         * gdialogs.c
-	* gwidget.c: 
-	* gprop.c: 
+	* gwidget.c:
+	* gprop.c:
 	s/gtk_toggle_button_state/gtk_toggle_button_active
 
 1999-01-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
@@ -2038,7 +2077,7 @@ Wed Jan 27 03:14:46 1999  Timur Bakeyev <mc@bat.ru>
 	command.  Add Mkdir command.  Use standard key definitions.
 
 	* gview.c: Use new standard keybindings
-	
+
 	* gtkdtree.c: Now it uses the treestore code.
 
 	* treestore.c: New file format which includes the scan status of
@@ -2079,12 +2118,12 @@ Wed Jan 27 03:14:46 1999  Timur Bakeyev <mc@bat.ru>
 	* gscreen.c (panel_icon_list_select_icon): Remove debugging message.
 
 	* glayout.c: Add a create directory option.
-	
+
 1999-01-07  Jonathan Blandford  <jrb@redhat.com>
 
 	* gcmd.c (gnome_filter_cmd): now it works!  It's even sorta
 	useful.  I'm so psyched... (:
-	
+
 
 1999-01-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -2138,7 +2177,7 @@ Wed Jan 27 03:14:46 1999  Timur Bakeyev <mc@bat.ru>
 1999-01-05  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_icon_drop_uri_list): Implement
-	drops-on-executable. 
+	drops-on-executable.
 
 	* gmetadata.c, gaction.c, gdesktop.c, gicon.c: Use g_free instead
 	of free to follow the convention in gnome-metadata.c
@@ -2146,11 +2185,11 @@ Wed Jan 27 03:14:46 1999  Timur Bakeyev <mc@bat.ru>
 	* gtools.c (query_dialog): Fix the new version of this.  It was
 	overwriting memory all over.
 
-	* gdialogs.c (): Use GNOME stock;  Fill in some FIXME strings. 
+	* gdialogs.c (): Use GNOME stock;  Fill in some FIXME strings.
 	(file_progress_real_query_replace): Use the formatted
-	message. 
+	message.
 
-	Change the inlined N_( for _( in various places. 
+	Change the inlined N_( for _( in various places.
 	(cancel_cb): Cancel button now cancels a copy or move operation.
 
 	* gtools.c (query_dialog): Remove the hotkey indicator in the
@@ -2191,13 +2230,13 @@ Wed Jan 27 03:14:46 1999  Timur Bakeyev <mc@bat.ru>
 	calling a routine that somehow got dropped during some recent
 	changes).
 
-	* gtools.c (query_dialog): Simplified.  
+	* gtools.c (query_dialog): Simplified.
 
 1999-01-02  Jonathan Blandford  <jrb@redhat.com>
 
 	* gcmd.c (gnome_sort_cmd): pretified
 	(gnome_select_all_cmd): New command -- selects all files (in
-	theory). 
+	theory).
 
 	* glayout.c: rearrange the edit menu some.
 
@@ -2222,10 +2261,10 @@ Wed Jan 27 03:14:46 1999  Timur Bakeyev <mc@bat.ru>
 
 	* gwidget.c (x_create_listbox): Temporary hack
 
-	* gmetadata.c (gmeta_get_icon_pos): Fixed the memory leak here. 
+	* gmetadata.c (gmeta_get_icon_pos): Fixed the memory leak here.
 
 	* gicon.c (gicon_get_icon_for_file): Actually return a value
-	here. 
+	here.
 
 1999-01-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -2266,7 +2305,7 @@ Wed Jan 27 03:14:46 1999  Timur Bakeyev <mc@bat.ru>
 	* gmain.c (create_panels): Register corba server here.
 
 	* gcorba.c: Fix a servant declaration to point to the correct
-	vepv. 
+	vepv.
 
 1998-12-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -2291,7 +2330,7 @@ Wed Jan 27 03:14:46 1999  Timur Bakeyev <mc@bat.ru>
 1998-12-29  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_icon_delete): New function, used for
-	dicon_delete. 
+	dicon_delete.
 	(load_desktop_icons): Implemented the incremental reloading of
 	desktop icons.  This should make the code much nicer.
 	(reload_desktop_icons): Call x_flush_events to force a display at
@@ -2299,17 +2338,17 @@ Wed Jan 27 03:14:46 1999  Timur Bakeyev <mc@bat.ru>
 
 	* gpopup.c (dicon_delete): Implement this operation.
 	(desktop_icon_execute): Use the existing implementation for
-	launching desktop icons instead of a new hacked up version 
+	launching desktop icons instead of a new hacked up version
 
 	(desktop_icon_actions): Until copy/move is implemented, do not
 	even list them to the user.
 
 	* gdesktop.c (create_desktop_dir): No trashcan setup until it
-	works. 
+	works.
 
 	* gscren.c (panel_widget_motion): Use button 2 for dragging and
-	asking. 
-	
+	asking.
+
 
 	* gscreen.c (panel_create_file_list): Use a notebook instead of
 	the hack I was using before for switching the panel contents.
@@ -2322,8 +2361,8 @@ Wed Jan 27 03:14:46 1999  Timur Bakeyev <mc@bat.ru>
 
 Tue Dec 29 16:55:24 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* gmain.c: According to the man page the color keyword for executable 
-	files 	is `executable' and not `execute' -- changed. 
+	* gmain.c: According to the man page the color keyword for executable
+	files 	is `executable' and not `execute' -- changed.
 
 1998-12-28  Jonathan Blandford  <jrb@redhat.com>
 
@@ -2346,12 +2385,12 @@ Thu Dec 24 18:38:45 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 Mon Dec 21 22:33:07 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* layout: Deleted obsolete widgets from the Virtual FS configuration
-	dialog. 
+	dialog.
 
 1998-12-17  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (panel_icon_list_select_icon): Show the popup menu on
-	button release here.  This is what makes most sense. 
+	button release here.  This is what makes most sense.
 	(panel_widget_motion): Drags with button 3 now produce a popup
 	dialog box that asks
 
@@ -2359,7 +2398,7 @@ Mon Dec 21 22:33:07 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* gdialogs.c (create_op_win): Remove second spurious packing.
 	(create_op_win): OP_MOVE uses the same stuff OP_COPY does.  Fix
-	this. 
+	this.
 	(file_progress_show_target): More compliant to the original
 	functions.
 	(file_progress_show_source): More compliant to the original
@@ -2371,7 +2410,7 @@ Tue Dec 15 10:51:12 1998  Gregory McLean <gregm@comstar.net>
 
 	* gdesktop-icon.c : Attach a desktop_icon wmclass to the desktop
 	icons to allow even more wizardry with the desktop icons, mainly
-	to exclude them from window lists, don't decorate them, skip 
+	to exclude them from window lists, don't decorate them, skip
 	desktops and other boring stuff.
 
 1998-12-14  Sven Neumann  <sven@gimp.org>
@@ -2407,7 +2446,7 @@ Tue Dec 15 10:51:12 1998  Gregory McLean <gregm@comstar.net>
 	* gscreen.c (panel_tree_drag_motion): Doubled timeout
 	for autoexpand - reducing opening unwanted directories.
 
-	* gscreen.c (tree_drag_open_directory): Use 
+	* gscreen.c (tree_drag_open_directory): Use
 	gtk_ctree_expand() not gtk_ctree_expand_recursive,
 	which increases confusion and could be
 	_vvveeerrrryyyy_ expensive. (/afs ?)

@@ -10,7 +10,6 @@
 #define GDESKTOP_H
 
 #include "dir.h"
-#include "gcmd.h"
 
 
 /* Snap granularity for desktop icons -- maybe these should be calculated in
@@ -33,7 +32,8 @@ extern int desktop_arr_b2t; /* Arrange from bottom to top */
 extern int desktop_arr_rows; /* Arrange in rows instead of columns */
 extern char *desktop_directory;
 
-extern GnomeUIInfo arrange_icons_items[];
+/* Menu items for arranging the desktop icons */
+extern GnomeUIInfo desktop_arrange_icons_items[];
 
 /* Initializes the desktop -- init DnD, load the default desktop icons, etc. */
 void desktop_init (void);
@@ -68,10 +68,6 @@ gboolean    is_mountable (char *filename, file_entry *fe, int *is_mounted, char 
 gboolean    is_ejectable (char *filename);
 gboolean    do_mount_umount (char *filename, gboolean is_mount);
 gboolean    do_eject (char *filename);
-
-void handle_arrange_icons(GtkWidget *widget, gpointer data); 
-/* Used from two places so no longer static ^^ */
-void desktop_arrange_icons (SortType type);
 
 void desktop_rescan_devices (void);
 void desktop_reload_icons (int user_pos, int xpos, int ypos);

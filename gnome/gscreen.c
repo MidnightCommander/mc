@@ -1467,6 +1467,21 @@ file_list_popup (GdkEventButton *event, WPanel *panel)
 }
 
 
+/* Returns whether an icon in the icon list is being edited.  FIXME:  This
+ * function uses a fantastically ugly hack to figure this out.  It would be
+ * saner to have a function provided by the icon list widget to do it, but we
+ * can't break forwards compatibility at this point.  It would be even saner to
+ * have a good DnD API for the icon list.
+ */
+static int
+editing_icon_list (GnomeIconList *gil)
+{
+	GnomeCanvasItem *item;
+
+	item = GNOME_CANVAS (gil)->focused_item;
+	return (item && GNOME_IS_ICON_TEXT_ITEM (item) && GNOME_ICON_TEXT_ITEM (item)->editing);
+}
+
 /*
  * Strategy for activaing the drags from the icon-list:
  *
@@ -1481,6 +1496,9 @@ panel_icon_list_button_press (GtkWidget *widget, GdkEventButton *event, WPanel *
 {
 	GnomeIconList *gil = GNOME_ICON_LIST (widget);
 	int icon;
+
+	if (editing_icon_list (gil))
+		return FALSE;
 
 	if (event->type != GDK_BUTTON_PRESS)
 		return FALSE;

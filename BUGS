@@ -1,7 +1,7 @@
 Bugzilla: 3436
 
 bugs.gnome.org:
-  Important: 382, 1006, 1035/1412/1416, 1414, 1549, 1796
+  Important: 1006, 1035/1412/1416, 1414, 1549, 1796
   Major cosmetic: 272/875, 487, 825, 845, 1845, 899, 923, 1072/1336,
 		  1299, 1415, 1457, 1545, 1559, 1582, 1656, 1758, 1789
   Minor cosmetic: 55/208, 115, 308, 383, 398, 449, 479, 597, 781,
@@ -9,13 +9,6 @@ bugs.gnome.org:
 		  1468, 1508, 1750
   Non-essential or feature: 779?, 448, 1133, 1121, 1122, 1251
   Look at bug yourself: 1613, 1458, 1773
-
-  382: Steps to reproduce: Start editing a file label.
-			   Drag as if to select part of the label
-			   text.
-			   gmc will fall over very soon afterwards.
-			   (e.g. if you try to select the same icon
-			   once or twice)
 
   1006: Try going to 'ftp://ftp.cs.cuc.edu/' and then clicking on the
         root window. I think the pointer grab stays around or

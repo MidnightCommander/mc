@@ -32,9 +32,9 @@ gnome_listing_cmd (GtkWidget *widget, WPanel *panel)
 {
 	int   view_type, use_msformat;
 	char  *user, *status;
-	
+
 	view_type = display_box (panel, &user, &status, &use_msformat, get_current_index ());
-	
+
 	if (view_type == -1)
 		return;
 
@@ -56,7 +56,7 @@ gnome_open_terminal_with_cmd (const char *command)
 {
 	char *p;
 	int quote_all = 0;
-		
+
 	if (!(p = gnome_is_program_in_path ("gnome-terminal"))){
 		if (!(p = gnome_is_program_in_path ("dtterm")))
 			if (!(p = gnome_is_program_in_path ("nxterm")))
@@ -104,12 +104,12 @@ gnome_about_cmd (void)
 
 	if (!translated){
 		int i;
-		
+
 		for (i = 0; authors [i]; i++)
 			authors [i] = _(authors [i]);
 		translated = TRUE;
 	}
-	
+
         about = gnome_about_new (_("GNU Midnight Commander"), VERSION,
 				 "Copyright 1994-1999 the Free Software Foundation",
 				 authors,
@@ -237,34 +237,44 @@ sort_callback (GtkWidget *menu_item, GtkWidget *cbox1)
 		gtk_widget_set_sensitive (cbox1, FALSE);
 }
 
-
+/* Returns a sort function based on its type */
 sortfn *
-sort_get_func_from_type (SortType type) {
+sort_get_func_from_type (SortType type)
+{
 	sortfn *sfn = NULL;
-	
+
 	switch (type) {
-		case SORT_NAME:
-			sfn = (sortfn *) sort_name;
-			break;
-		case SORT_EXTENSION:
-			sfn = (sortfn *) sort_ext;
-			break;
-		case SORT_ACCESS:
-			sfn = (sortfn *) sort_atime;
-			break;
-		case SORT_MODIFY:
-			sfn = (sortfn *) sort_time;
-			break;
-		case SORT_CHANGE:
-			sfn = (sortfn *) sort_ctime;
-			break;
-		case SORT_SIZE:
-			sfn = (sortfn *) sort_size;
-			break;
+	case SORT_NAME:
+		sfn = (sortfn *) sort_name;
+		break;
+
+	case SORT_EXTENSION:
+		sfn = (sortfn *) sort_ext;
+		break;
+
+	case SORT_ACCESS:
+		sfn = (sortfn *) sort_atime;
+		break;
+
+	case SORT_MODIFY:
+		sfn = (sortfn *) sort_time;
+		break;
+
+	case SORT_CHANGE:
+		sfn = (sortfn *) sort_ctime;
+		break;
+
+	case SORT_SIZE:
+		sfn = (sortfn *) sort_size;
+		break;
+
+	default:
+		g_assert_not_reached ();
 	}
+
 	return sfn;
 }
-	
+
 void
 gnome_sort_cmd (GtkWidget *widget, WPanel *panel)
 {
@@ -276,10 +286,10 @@ gnome_sort_cmd (GtkWidget *widget, WPanel *panel)
 	GtkWidget *cbox1, *cbox2;
 	sortfn *sfn = NULL;
 
-	sort_box = gnome_dialog_new (_("Sort By"), GNOME_STOCK_BUTTON_OK, 
+	sort_box = gnome_dialog_new (_("Sort By"), GNOME_STOCK_BUTTON_OK,
 				     GNOME_STOCK_BUTTON_CANCEL, NULL);
 	gmc_window_setup_from_panel (GNOME_DIALOG (sort_box), panel);
-	
+
 	/* we define this up here so we can pass it in to our callback */
 	cbox1 = gtk_check_button_new_with_label (_("Ignore case sensitivity."));
 	hbox = gtk_hbox_new (FALSE, 0);
@@ -295,7 +305,7 @@ gnome_sort_cmd (GtkWidget *widget, WPanel *panel)
 	gtk_object_set_data (GTK_OBJECT (menu_item), "SORT_ORDER_CODE", (gpointer) SORT_NAME);
 	gtk_signal_connect (GTK_OBJECT (menu_item), "activate",
 				   GTK_SIGNAL_FUNC (sort_callback), cbox1);
-	
+
         menu_item = gtk_menu_item_new_with_label ( _("File Type"));
         gtk_menu_append (GTK_MENU (menu), menu_item);
 	gtk_object_set_data (GTK_OBJECT (menu_item), "SORT_ORDER_CODE", (gpointer) SORT_EXTENSION);
@@ -329,7 +339,7 @@ gnome_sort_cmd (GtkWidget *widget, WPanel *panel)
 	gtk_widget_show_all (menu);
         gtk_option_menu_set_menu (GTK_OPTION_MENU (omenu), menu);
 
-	
+
 	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (cbox1), panel->case_sensitive);
 	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (sort_box)->vbox),
 			    cbox1, FALSE, FALSE, 0);
@@ -380,8 +390,8 @@ get_nickname (gchar *text)
 	GtkWidget *label;
 	gchar *retval = NULL;
 	int destroy;
-	
-	dlg = gnome_dialog_new (_("Enter name."), GNOME_STOCK_BUTTON_OK, 
+
+	dlg = gnome_dialog_new (_("Enter name."), GNOME_STOCK_BUTTON_OK,
 				GNOME_STOCK_BUTTON_CANCEL, NULL);
 	gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_MOUSE);
 	entry = gtk_entry_new ();
@@ -408,7 +418,7 @@ get_nickname (gchar *text)
 	if (destroy)
 		gtk_widget_destroy (dlg);
 
-	return retval;	
+	return retval;
 }
 
 static void
@@ -490,7 +500,7 @@ load_settings (GtkCList *clist)
 	gint i = 0;
 
 	profile_keys = profile_init_iterator (panelize_section, profile_name);
-    
+
 	if (!profile_keys){
 		insert_tab[0] = _("Find all core files");
 		i = gtk_clist_insert (clist, i, insert_tab);
@@ -536,14 +546,14 @@ gnome_external_panelize (GtkWidget *widget, WPanel *panel)
 	gint i;
 	gchar *row_data;
 	int destroy;
-	
+
 	data = g_new0 (ep_dlg_data, 1);
 	data->setting_text = FALSE;
 	data->selected = -1;
-	data->ep_dlg = gnome_dialog_new (_("Run Command"), GNOME_STOCK_BUTTON_OK, 
+	data->ep_dlg = gnome_dialog_new (_("Run Command"), GNOME_STOCK_BUTTON_OK,
 				   GNOME_STOCK_BUTTON_CANCEL, NULL);
 	gtk_window_set_position (GTK_WINDOW (data->ep_dlg), GTK_WIN_POS_MOUSE);
-	
+
 				/* Frame 1 */
 	frame = gtk_frame_new (_("Preset Commands"));
 	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (data->ep_dlg)->vbox),
@@ -587,7 +597,7 @@ gnome_external_panelize (GtkWidget *widget, WPanel *panel)
 	gtk_widget_show_all (GNOME_DIALOG (data->ep_dlg)->vbox);
 
 	destroy = TRUE;
-	
+
 	switch (gnome_dialog_run (GNOME_DIALOG (data->ep_dlg))) {
 	case 0:
 		gtk_widget_hide (data->ep_dlg);
@@ -659,7 +669,7 @@ gnome_filter_cmd (GtkWidget *widget, WPanel *panel)
 	GtkWidget *label;
 	gchar *text1, *text2, *text3;
 
-	filter_dlg = gnome_dialog_new (_("Set Filter"), GNOME_STOCK_BUTTON_OK, 
+	filter_dlg = gnome_dialog_new (_("Set Filter"), GNOME_STOCK_BUTTON_OK,
 				       GNOME_STOCK_BUTTON_CANCEL, NULL);
 	gtk_window_set_position (GTK_WINDOW (filter_dlg), GTK_WIN_POS_MOUSE);
 	if (easy_patterns) {
@@ -679,7 +689,7 @@ gnome_filter_cmd (GtkWidget *widget, WPanel *panel)
 	}
 	entry = gnome_entry_new (text1);
 	gnome_entry_load_history (GNOME_ENTRY (entry));
-	
+
 	if (text2) {
 		gtk_entry_set_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (entry))), text2);
 		gnome_entry_prepend_history (GNOME_ENTRY (entry), FALSE, text3);
@@ -692,7 +702,7 @@ gnome_filter_cmd (GtkWidget *widget, WPanel *panel)
 		label = gtk_label_new (_("Enter a Regular Expression to filter files in the panel view."));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
 	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-	
+
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (filter_dlg)->vbox), label, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (filter_dlg)->vbox), entry, FALSE, FALSE, 0);
@@ -717,7 +727,7 @@ gnome_filter_cmd (GtkWidget *widget, WPanel *panel)
 			gtk_label_set_text (GTK_LABEL (panel->status), _("Show all files"));
 		} else
 			gtk_label_set_text (GTK_LABEL (panel->status), panel->filter);
-		
+
 		gnome_entry_save_history (GNOME_ENTRY (entry));
 		x_filter_changed (panel);
 		reread_cmd ();
@@ -759,7 +769,7 @@ gnome_open_files (GtkWidget *widget, WPanel *panel)
 	}
 #endif
 	g_list_free (later);
-	   
+
 }
 
 void
@@ -782,7 +792,7 @@ dentry_apply_callback(GtkWidget *widget, int page, gpointer data)
 
 	if (page != -1)
 		return;
-	
+
 	g_return_if_fail(data!=NULL);
 	g_return_if_fail(GNOME_IS_DENTRY_EDIT(data));
 	dentry = gnome_dentry_get_dentry(GNOME_DENTRY_EDIT(data));
@@ -838,8 +848,8 @@ gnome_select (GtkWidget *widget, WPanel *panel)
     GtkWidget *entry;
     GtkWidget *label;
     int run;
-    
-    select_dialog = gnome_dialog_new (_("Select File"), GNOME_STOCK_BUTTON_OK, 
+
+    select_dialog = gnome_dialog_new (_("Select File"), GNOME_STOCK_BUTTON_OK,
 				      GNOME_STOCK_BUTTON_CANCEL, NULL);
     gtk_window_set_position (GTK_WINDOW (select_dialog), GTK_WIN_POS_MOUSE);
     entry = gnome_entry_new ("mc_select");
@@ -850,10 +860,10 @@ gnome_select (GtkWidget *widget, WPanel *panel)
 	    label = gtk_label_new (_("Enter a filter here to select files in the panel view with.\n\nFor example:\n*.png will select all png images"));
     else
 	    label = gtk_label_new (_("Enter a regular expression here to select files in the panel view with."));
-    
+
     gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
     gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-    
+
     gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
     gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (select_dialog)->vbox), label, FALSE, FALSE, 0);
     gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (select_dialog)->vbox), entry, FALSE, FALSE, 0);
@@ -866,7 +876,7 @@ gnome_select (GtkWidget *widget, WPanel *panel)
     }
     if (run != -1)
 	    gtk_widget_destroy (select_dialog);
-    
+
     if ((reg_exp == NULL) || (*reg_exp == '\000')) {
 	    g_free (reg_exp);
 	    return;
@@ -927,7 +937,7 @@ set_cursor_normal (WPanel *panel)
 
 	if (is_a_desktop_panel (panel))
 		return;
-	
+
 	cursor = gdk_cursor_new (GDK_TOP_LEFT_ARROW);
 	gdk_window_set_cursor (GTK_WIDGET (panel->xwindow)->window, cursor);
 	gdk_cursor_destroy (cursor);
@@ -944,7 +954,7 @@ gnome_new_link (GtkWidget *widget, WPanel *panel)
 				   _("Enter the URL:"), "");
 	if (!url)
 		return;
-	
+
 	template = g_concat_dir_and_file (desktop_directory, "urlXXXXXX");
 
 	if (mktemp (template)) {

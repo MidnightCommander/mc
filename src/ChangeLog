@@ -1,3 +1,7 @@
+1999-08-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* ext.c: Added missing include file.
+
 1999-08-08  David Martin <dmartina@usa.net>
 
 	* menu.c: (create_menu): Adjust "#ifdef ENABLE_NLS" so that menus
