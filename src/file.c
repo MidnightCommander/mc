@@ -454,32 +454,32 @@ progress_update_one (FileOpContext *ctx,
 }
 
 int
-copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_overwrite,
-		off_t *progress_count, double *progress_bytes, 
-                int is_toplevel_file)
+copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
+		int ask_overwrite, off_t *progress_count,
+		double *progress_bytes, int is_toplevel_file)
 {
 #ifndef NATIVE_WIN32
-    uid_t src_uid = (uid_t) -1;
-    gid_t src_gid = (gid_t) -1;
-#endif /* !NATIVE_WIN32 */
+    uid_t src_uid = (uid_t) - 1;
+    gid_t src_gid = (gid_t) - 1;
+#endif				/* !NATIVE_WIN32 */
     char *buf = NULL;
-    int  buf_size = BUF_8K;
-    int  src_desc, dest_desc = 0;
-    int  n_read, n_written;
-    int  src_mode = 0;		/* The mode of the source file */
+    int buf_size = BUF_8K;
+    int src_desc, dest_desc = 0;
+    int n_read, n_written;
+    int src_mode = 0;		/* The mode of the source file */
     struct stat sb, sb2;
     struct utimbuf utb;
-    int  dst_exists = 0, appending = 0;
+    int dst_exists = 0, appending = 0;
     off_t n_read_total = 0, file_size = -1;
-    int  return_status, temp_status;
+    int return_status, temp_status;
     struct timeval tv_transfer_start;
 
     /* bitmask used to remember which resourses we should release on return 
-       A single goto label is much easier to handle than a bunch of gotos ;-). */ 
+       A single goto label is much easier to handle than a bunch of gotos ;-). */
     unsigned resources = 0;
 
     /* FIXME: We should not be using global variables! */
-    ctx->do_reget = 0; 
+    ctx->do_reget = 0;
     return_status = FILE_RETRY;
 
     if (file_progress_show_source (ctx, src_path) == FILE_ABORT ||
@@ -488,10 +488,12 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 
     mc_refresh ();
 
- retry_dst_stat:
-    if (mc_stat (dst_path, &sb2) == 0){
-	if (S_ISDIR (sb2.st_mode)){
-	    return_status = file_error (_(" Cannot overwrite directory \"%s\" \n %s "), dst_path);
+  retry_dst_stat:
+    if (mc_stat (dst_path, &sb2) == 0) {
+	if (S_ISDIR (sb2.st_mode)) {
+	    return_status =
+		file_error (_(" Cannot overwrite directory \"%s\" \n %s "),
+			    dst_path);
 	    if (return_status == FILE_RETRY)
 		goto retry_dst_stat;
 	    return return_status;
@@ -499,86 +501,105 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 	dst_exists = 1;
     }
 
-    while ((* ctx->stat_func) (src_path, &sb)) {
-	return_status = file_error (_(" Cannot stat source file \"%s\" \n %s "), src_path);
+    while ((*ctx->stat_func) (src_path, &sb)) {
+	return_status =
+	    file_error (_(" Cannot stat source file \"%s\" \n %s "),
+			src_path);
 	if (return_status != FILE_RETRY)
 	    return return_status;
     }
 
-    if (dst_exists){
-	    /* .ado: For Win32: no st_ino exists, it is better to just try to
-	     * overwrite the target file
-	     */
+    if (dst_exists) {
+	/* .ado: For Win32: no st_ino exists, it is better to just try to
+	 * overwrite the target file
+	 */
 #ifndef NATIVE_WIN32
 	/* Destination already exists */
-	if (sb.st_dev == sb2.st_dev && sb.st_ino == sb2.st_ino){
-	    message_3s (1, MSG_ERROR, _(" `%s' and `%s' are the same file. "), src_path, dst_path);
+	if (sb.st_dev == sb2.st_dev && sb.st_ino == sb2.st_ino) {
+	    message_3s (1, MSG_ERROR,
+			_(" `%s' and `%s' are the same file. "), src_path,
+			dst_path);
 	    do_refresh ();
 	    return FILE_SKIP;
 	}
-#endif /* !NATIVE_WIN32 */
+#endif				/* !NATIVE_WIN32 */
 
 	/* Should we replace destination? */
-	if (ask_overwrite){
+	if (ask_overwrite) {
 	    ctx->do_reget = 0;
 	    return_status = query_replace (ctx, dst_path, &sb, &sb2);
 	    if (return_status != FILE_CONT)
-	        return return_status;
+		return return_status;
 	}
     }
 
     if (!ctx->do_append) {
-       /* .ado: OS2 and NT don't have hardlinks */
-#ifndef NATIVE_WIN32    
-        /* Check the hardlinks */
-        if (!ctx->follow_links && sb.st_nlink > 1 && 
-	     check_hardlinks (src_path, dst_path, &sb) == 1){
-    	    /* We have made a hardlink - no more processing is necessary */
-    	    return return_status;
-        }
+	/* .ado: OS2 and NT don't have hardlinks */
+#ifndef NATIVE_WIN32
+	/* Check the hardlinks */
+	if (!ctx->follow_links && sb.st_nlink > 1 &&
+	    check_hardlinks (src_path, dst_path, &sb) == 1) {
+	    /* We have made a hardlink - no more processing is necessary */
+	    return return_status;
+	}
 
-        if (S_ISLNK (sb.st_mode)) {
+	if (S_ISLNK (sb.st_mode)) {
 	    int retval;
 
 	    retval = make_symlink (ctx, src_path, dst_path);
 	    return retval;
 	}
+#endif				/* !NATIVE_WIN32 */
 
-#endif /* !NATIVE_WIN32 */
-
-        if (S_ISCHR (sb.st_mode) || S_ISBLK (sb.st_mode) || S_ISFIFO (sb.st_mode)
-            || S_ISSOCK (sb.st_mode)){
-            while (mc_mknod (dst_path, sb.st_mode & ctx->umask_kill, sb.st_rdev) < 0){
-	        return_status = file_error (_(" Cannot create special file \"%s\" \n %s "), dst_path);
-	        if (return_status == FILE_RETRY)
+	if (S_ISCHR (sb.st_mode) || S_ISBLK (sb.st_mode)
+	    || S_ISFIFO (sb.st_mode)
+	    || S_ISSOCK (sb.st_mode)) {
+	    while (mc_mknod
+		   (dst_path, sb.st_mode & ctx->umask_kill,
+		    sb.st_rdev) < 0) {
+		return_status =
+		    file_error (_
+				(" Cannot create special file \"%s\" \n %s "),
+				dst_path);
+		if (return_status == FILE_RETRY)
 		    continue;
 		return return_status;
 	    }
 	    /* Success */
 
 #ifndef NATIVE_WIN32
-	    while (ctx->preserve_uidgid && mc_chown (dst_path, sb.st_uid, sb.st_gid)){
-		temp_status = file_error (_(" Cannot chown target file \"%s\" \n %s "), dst_path);
+	    while (ctx->preserve_uidgid
+		   && mc_chown (dst_path, sb.st_uid, sb.st_gid)) {
+		temp_status =
+		    file_error (_
+				(" Cannot chown target file \"%s\" \n %s "),
+				dst_path);
 		if (temp_status == FILE_RETRY)
 		    continue;
 		return temp_status;
 	    }
-#endif /* !NATIVE_WIN32 */
+#endif				/* !NATIVE_WIN32 */
 	    while (ctx->preserve &&
-		(mc_chmod (dst_path, sb.st_mode & ctx->umask_kill) < 0)){
-		temp_status = file_error (_(" Cannot chmod target file \"%s\" \n %s "), dst_path);
+		   (mc_chmod (dst_path, sb.st_mode & ctx->umask_kill) <
+		    0)) {
+		temp_status =
+		    file_error (_
+				(" Cannot chmod target file \"%s\" \n %s "),
+				dst_path);
 		if (temp_status == FILE_RETRY)
 		    continue;
 		return temp_status;
 	    }
 	    return FILE_CONT;
-        }
+	}
     }
 
     gettimeofday (&tv_transfer_start, (struct timezone *) NULL);
 
-    while ((src_desc = mc_open (src_path, O_RDONLY | O_LINEAR)) < 0){
-	return_status = file_error (_(" Cannot open source file \"%s\" \n %s "), src_path);
+    while ((src_desc = mc_open (src_path, O_RDONLY | O_LINEAR)) < 0) {
+	return_status =
+	    file_error (_(" Cannot open source file \"%s\" \n %s "),
+			src_path);
 	if (return_status == FILE_RETRY)
 	    continue;
 	ctx->do_append = 0;
@@ -586,15 +607,18 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
     }
 
     resources |= 1;
-    if (ctx->do_reget){
-        if (mc_lseek (src_desc, ctx->do_reget, SEEK_SET) != ctx->do_reget){
-	    message_1s (1, _(" Warning "), _(" Reget failed, about to overwrite file "));
+    if (ctx->do_reget) {
+	if (mc_lseek (src_desc, ctx->do_reget, SEEK_SET) != ctx->do_reget) {
+	    message_1s (1, _(" Warning "),
+			_(" Reget failed, about to overwrite file "));
 	    ctx->do_reget = ctx->do_append = 0;
 	}
     }
 
-    while (mc_fstat (src_desc, &sb)){
-        return_status = file_error (_(" Cannot fstat source file \"%s\" \n %s "), src_path);
+    while (mc_fstat (src_desc, &sb)) {
+	return_status =
+	    file_error (_(" Cannot fstat source file \"%s\" \n %s "),
+			src_path);
 	if (return_status == FILE_RETRY)
 	    continue;
 	ctx->do_append = 0;
@@ -604,7 +628,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 #ifndef NATIVE_WIN32
     src_uid = sb.st_uid;
     src_gid = sb.st_gid;
-#endif /* !NATIVE_WIN32 */
+#endif				/* !NATIVE_WIN32 */
     utb.actime = sb.st_atime;
     utb.modtime = sb.st_mtime;
     file_size = sb.st_size;
@@ -613,23 +637,30 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
        do not create a security hole.  FIXME: You have security hole
        here, btw. Imagine copying to /tmp and symlink attack :-( */
 
-    while ((dest_desc = mc_open (dst_path, O_WRONLY | 
-      (ctx->do_append ? O_APPEND : (O_CREAT | O_TRUNC)), 0600)) < 0){
-        return_status = file_error (_(" Cannot create target file \"%s\" \n %s "), dst_path);
+    while ((dest_desc = mc_open (dst_path, O_WRONLY |
+				 (ctx->
+				  do_append ? O_APPEND : (O_CREAT |
+							  O_TRUNC)),
+				 0600)) < 0) {
+	return_status =
+	    file_error (_(" Cannot create target file \"%s\" \n %s "),
+			dst_path);
 	if (return_status == FILE_RETRY)
 	    continue;
 	ctx->do_append = 0;
 	goto ret;
     }
-    resources |= 2; /* dst_path exists/dst_path opened */
-    resources |= 4; /* remove short file */
+    resources |= 2;		/* dst_path exists/dst_path opened */
+    resources |= 4;		/* remove short file */
 
     appending = ctx->do_append;
     ctx->do_append = 0;
 
     /* Find out the optimal buffer size.  */
-    while (mc_fstat (dest_desc, &sb)){
-        return_status = file_error (_(" Cannot fstat target file \"%s\" \n %s "), dst_path);
+    while (mc_fstat (dest_desc, &sb)) {
+	return_status =
+	    file_error (_(" Cannot fstat target file \"%s\" \n %s "),
+			dst_path);
 	if (return_status == FILE_RETRY)
 	    continue;
 	goto ret;
@@ -648,59 +679,64 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 
     {
 	struct timeval tv_current, tv_last_update, tv_last_input;
-        int    secs, update_secs;
-	long   dt;
-	char   *stalled_msg;
+	int secs, update_secs;
+	long dt;
+	char *stalled_msg;
 
 	tv_last_update = tv_transfer_start;
 
-        for (;;){
- /* src_read */
+	for (;;) {
+	    /* src_read */
 	    if (mc_ctl (src_desc, MCCTL_IS_NOTREADY, 0))
-	        n_read = -1;
+		n_read = -1;
 	    else
-	        while ((n_read = mc_read (src_desc, buf, buf_size))<0){
-		    return_status = file_error(_(" Cannot read source file \"%s\" \n %s "), src_path);
+		while ((n_read = mc_read (src_desc, buf, buf_size)) < 0) {
+		    return_status =
+			file_error (_
+				    (" Cannot read source file \"%s\" \n %s "),
+				    src_path);
 		    if (return_status == FILE_RETRY)
-		        continue;
+			continue;
 		    goto ret;
 		}
 	    if (n_read == 0)
-	        break;
+		break;
 
 	    gettimeofday (&tv_current, NULL);
 
-	    if (n_read>0){
-	        n_read_total += n_read;
+	    if (n_read > 0) {
+		n_read_total += n_read;
 
 		/* Windows NT ftp servers report that files have no
 		 * permissions: -------, so if we happen to have actually
 		 * read something, we should fix the permissions.
 		 */
-		if (!(src_mode &
-		      ((S_IRUSR|S_IWUSR|S_IXUSR)    /* user */
-		       |(S_IXOTH|S_IWOTH|S_IROTH)  /* other */
-		       |(S_IXGRP|S_IWGRP|S_IRGRP)))) /* group */
-		    src_mode = S_IRUSR|S_IWUSR|S_IROTH|S_IRGRP;
+		if (!(src_mode & ((S_IRUSR | S_IWUSR | S_IXUSR)	/* user */
+				  |(S_IXOTH | S_IWOTH | S_IROTH)	/* other */
+				  |(S_IXGRP | S_IWGRP | S_IRGRP))))	/* group */
+		    src_mode = S_IRUSR | S_IWUSR | S_IROTH | S_IRGRP;
 		gettimeofday (&tv_last_input, NULL);
 
- /* dst_write */
-		while ((n_written = mc_write (dest_desc, buf, n_read)) < n_read){
-		    if (n_written>0){
-		        n_read -= n_written;
+		/* dst_write */
+		while ((n_written =
+			mc_write (dest_desc, buf, n_read)) < n_read) {
+		    if (n_written > 0) {
+			n_read -= n_written;
 			continue;
 		    }
-		    return_status = file_error(_(" Cannot write target file \"%s\" \n %s "),
-					       dst_path);
+		    return_status =
+			file_error (_
+				    (" Cannot write target file \"%s\" \n %s "),
+				    dst_path);
 		    if (return_status == FILE_RETRY)
-		        continue;
+			continue;
 		    goto ret;
 		}
 	    }
 
 	    /* 1. Update rotating dash after some time (hardcoded to 2 seconds) */
 	    secs = (tv_current.tv_sec - tv_last_update.tv_sec);
-	    if (secs > 2){
+	    if (secs > 2) {
 		rotate_dash ();
 		tv_last_update = tv_current;
 	    }
@@ -708,46 +744,56 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 	    /* 2. Check for a stalled condition */
 	    update_secs = (tv_current.tv_sec - tv_last_input.tv_sec);
 	    stalled_msg = "";
-	    if (update_secs > 4){
+	    if (update_secs > 4) {
 		stalled_msg = _("(stalled)");
 	    }
 
 	    /* 3. Compute ETA */
-	    if (secs > 2){
+	    if (secs > 2) {
 		dt = (tv_current.tv_sec - tv_transfer_start.tv_sec);
 
-		if (n_read_total){
-		    ctx->eta_secs = ((dt / (double) n_read_total) * file_size) - dt;
+		if (n_read_total) {
+		    ctx->eta_secs =
+			((dt / (double) n_read_total) * file_size) - dt;
 		    ctx->bps = n_read_total / ((dt < 1) ? 1 : dt);
 		} else
 		    ctx->eta_secs = 0.0;
 	    }
 
 	    /* 4. Compute BPS rate */
-	    if (secs > 2){
-		ctx->bps_time = (tv_current.tv_sec - tv_transfer_start.tv_sec);
+	    if (secs > 2) {
+		ctx->bps_time =
+		    (tv_current.tv_sec - tv_transfer_start.tv_sec);
 		if (ctx->bps_time < 1)
 		    ctx->bps_time = 1;
 		ctx->bps = n_read_total / ctx->bps_time;
 	    }
 
 	    file_progress_set_stalled_label (ctx, stalled_msg);
-	    file_progress_show_bytes (ctx, *progress_bytes + n_read_total, ctx->progress_bytes);
-	    return_status = file_progress_show (ctx, n_read_total, file_size);
+	    return_status =
+		file_progress_show_bytes (ctx,
+					  *progress_bytes + n_read_total,
+					  ctx->progress_bytes);
+	    if (return_status == FILE_CONT) {
+		return_status =
+		    file_progress_show (ctx, n_read_total, file_size);
+	    }
 	    mc_refresh ();
 	    if (return_status != FILE_CONT)
-	        goto ret;
-        }
+		goto ret;
+	}
     }
 
-    resources &= ~4; /* copy successful, don't remove target file */
+    resources &= ~4;		/* copy successful, don't remove target file */
 
- ret:
+  ret:
     if (buf)
 	g_free (buf);
 
-    while ((resources & 1) && mc_close (src_desc) < 0){
-	temp_status = file_error (_(" Cannot close source file \"%s\" \n %s "), src_path);
+    while ((resources & 1) && mc_close (src_desc) < 0) {
+	temp_status =
+	    file_error (_(" Cannot close source file \"%s\" \n %s "),
+			src_path);
 	if (temp_status == FILE_RETRY)
 	    continue;
 	if (temp_status == FILE_ABORT)
@@ -755,45 +801,52 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 	break;
     }
 
-    while ((resources & 2) && mc_close (dest_desc) < 0){
-	temp_status = file_error (_(" Cannot close target file \"%s\" \n %s "), dst_path);
+    while ((resources & 2) && mc_close (dest_desc) < 0) {
+	temp_status =
+	    file_error (_(" Cannot close target file \"%s\" \n %s "),
+			dst_path);
 	if (temp_status == FILE_RETRY)
 	    continue;
 	return_status = temp_status;
 	break;
     }
 
-    if (resources & 4){
-        /* Remove short file */
-        int result;
-        result = query_dialog (_("Copy"), _("Incomplete file was retrieved. Keep it?"),
-			       D_ERROR, 2, _("&Delete"), _("&Keep"));
+    if (resources & 4) {
+	/* Remove short file */
+	int result;
+	result =
+	    query_dialog (_("Copy"),
+			  _("Incomplete file was retrieved. Keep it?"),
+			  D_ERROR, 2, _("&Delete"), _("&Keep"));
 	if (!result)
 	    mc_unlink (dst_path);
-    } else if (resources & (2|8)){
-        /* no short file and destination file exists */
-#ifndef NATIVE_WIN32 
-	if (!appending && ctx->preserve_uidgid){
-    	    while (mc_chown (dst_path, src_uid, src_gid)){
+    } else if (resources & (2 | 8)) {
+	/* no short file and destination file exists */
+#ifndef NATIVE_WIN32
+	if (!appending && ctx->preserve_uidgid) {
+	    while (mc_chown (dst_path, src_uid, src_gid)) {
 		temp_status = file_error
-	    	    (_(" Cannot chown target file \"%s\" \n %s "), dst_path);
+		    (_(" Cannot chown target file \"%s\" \n %s "),
+		     dst_path);
 		if (temp_status == FILE_RETRY)
-	    	    continue;
+		    continue;
 		return_status = temp_status;
 		break;
-    	    }
+	    }
 	}
-#endif /* !NATIVE_WIN32 */
+#endif				/* !NATIVE_WIN32 */
 
-     /*
-      * .ado: according to the XPG4 standard, the file must be closed before
-      * chmod can be invoked
-      */
-	if (!appending && ctx->preserve){
-	    while (mc_chmod (dst_path, src_mode & ctx->umask_kill)){
-		temp_status = file_error (
-		    _(" Cannot chmod target file \"%s\" \n %s "), dst_path);
-		if (temp_status != FILE_RETRY){
+	/*
+	 * .ado: according to the XPG4 standard, the file must be closed before
+	 * chmod can be invoked
+	 */
+	if (!appending && ctx->preserve) {
+	    while (mc_chmod (dst_path, src_mode & ctx->umask_kill)) {
+		temp_status =
+		    file_error (_
+				(" Cannot chmod target file \"%s\" \n %s "),
+				dst_path);
+		if (temp_status != FILE_RETRY) {
 		    return_status = temp_status;
 		    break;
 		}
@@ -803,8 +856,9 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
     }
 
     if (return_status == FILE_CONT)
-        return_status = progress_update_one (ctx, progress_count, progress_bytes,
-					     file_size, is_toplevel_file);
+	return_status =
+	    progress_update_one (ctx, progress_count, progress_bytes,
+				 file_size, is_toplevel_file);
 
     return return_status;
 }

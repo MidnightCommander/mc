@@ -1,3 +1,9 @@
+2002-09-26  Pavel Roskin  <proski@gnu.org>
+
+	* file.c (copy_file_file): Fix event handling - check the result
+	of file_progress_show_bytes().
+	From Jindrich Makovicka <makovick@kmlinux.fjfi.cvut.cz>
+
 2002-09-25  Pavel Roskin  <proski@gnu.org>
 
 	* subshell.c (pty_open_master) [IS_AIX]: Open /dev/ptc, not
