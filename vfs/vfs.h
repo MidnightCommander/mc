@@ -10,7 +10,7 @@
 #include "src/mad.h"
 #endif
 
-#if !defined(SCO_FLAVOR) || !defined(_SYS_SELECT_H)
+#if !defined(SCO_FLAVOR) || !defined(_SYS_SELECT_H) || defined(IS_AIX)
 #	include <sys/time.h>	/* alex: this redefines struct timeval */
 #endif /* SCO_FLAVOR */
 
