@@ -41,8 +41,8 @@ servers.
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure \
 	--prefix=%{_prefix} \
 	--mandir=%{_mandir} \
-%{?_with_ncurses: --with-ncurses} \
-%{?_with_included_slang: --with-included-slang} \
+%{?_with_ncurses: --with-screen=ncurses} \
+%{?_with_included_slang: --with-screen=mcslang} \
 %{?_with_charset: --enable-charset}
 
 make
@@ -94,6 +94,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/share/mc/term
 
 %changelog
+* Sun Sep 29 2002 Pavel Roskin <proski@gnu.org>
+- Use --with-screen instead of --with-ncurses and --with-included-slang.
+
 * Mon Sep 23 2002 Andrew V. Samoilov <sav@bcs.zp.ua>
 - Restore %config for %{_prefix}/share/mc/mc.charsets.
 - Restore %{_prefix}/share/mc/edit.spell.rc.
