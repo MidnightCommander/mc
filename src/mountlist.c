@@ -313,7 +313,7 @@ read_filesystem_list (int need_fs_type, int all_fs)
 	struct fs_data fsd;
 
 	while ((val = getmnt (&offset, &fsd, sizeof (fsd), NOSTAT_MANY,
-			      (char *) 0)) > 0) {
+			      NULL)) > 0) {
 	    me = (struct mount_entry *) malloc (sizeof (struct mount_entry));
 	    me->me_devname = strdup (fsd.fd_req.devname);
 	    me->me_mountdir = strdup (fsd.fd_req.path);
