@@ -1,5 +1,8 @@
 2004-03-07  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
+	* utilvfs.c (vfs_parse_ls_lga): Handle device without whitespace(s)
+	between major and minor.
+
 	* direntry.c (vfs_s_resolve_symlink): Check vfs_s_fullpath()
 	return value to avoid NULL dereference.
 	Reported by wwp <subscript@free.fr>.

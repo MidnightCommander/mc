@@ -748,12 +748,17 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename,
     if (S_ISCHR (s->st_mode) || S_ISBLK (s->st_mode)) {
 	int maj, min;
 
-	if (!is_num (idx2) || sscanf (columns[idx2], " %d,", &maj) != 1)
-	    goto error;
+	/* Corner case: there is no whitespace(s) between maj & min */
+	if (!is_num (idx2) && idx2 == 2) {
+	    if (!is_num (++idx2) || sscanf (columns[idx2], " %d,%d", &min, &min) != 2)
+		goto error;
+	} else {
+	    if (!is_num (idx2) || sscanf (columns[idx2], " %d,", &maj) != 1)
+		goto error;
 
-	if (!is_num (++idx2) || sscanf (columns[idx2], " %d", &min) != 1)
-	    goto error;
-
+	    if (!is_num (++idx2) || sscanf (columns[idx2], " %d", &min) != 1)
+		goto error;
+	}
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
 	s->st_rdev = ((maj & 0xff) << 8) | (min & 0xffff00ff);
 #endif
