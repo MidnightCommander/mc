@@ -1072,7 +1072,7 @@ pty_open_slave (const char *pty_name)
 #if defined (I_FIND) && defined (I_PUSH)
     if (!ioctl (pty_slave, I_FIND, "ptem"))
 	if (ioctl (pty_slave, I_PUSH, "ptem") == -1) {
-	    fprintf (stderr, "ioctl (%s, I_PUSH, \"ptem\") failed: %s\r\n",
+	    fprintf (stderr, "ioctl (%d, I_PUSH, \"ptem\") failed: %s\r\n",
 		     pty_slave, unix_error_string (errno));
 	    close (pty_slave);
 	    return -1;
@@ -1081,7 +1081,7 @@ pty_open_slave (const char *pty_name)
     if (!ioctl (pty_slave, I_FIND, "ldterm"))
 	if (ioctl (pty_slave, I_PUSH, "ldterm") == -1) {
 	    fprintf (stderr,
-		     "ioctl (%s, I_PUSH, \"ldterm\") failed: %s\r\n",
+		     "ioctl (%d, I_PUSH, \"ldterm\") failed: %s\r\n",
 		     pty_slave, unix_error_string (errno));
 	    close (pty_slave);
 	    return -1;
@@ -1090,7 +1090,7 @@ pty_open_slave (const char *pty_name)
     if (!ioctl (pty_slave, I_FIND, "ttcompat"))
 	if (ioctl (pty_slave, I_PUSH, "ttcompat") == -1) {
 	    fprintf (stderr,
-		     "ioctl (%s, I_PUSH, \"ttcompat\") failed: %s\r\n",
+		     "ioctl (%d, I_PUSH, \"ttcompat\") failed: %s\r\n",
 		     pty_slave, unix_error_string (errno));
 	    close (pty_slave);
 	    return -1;
