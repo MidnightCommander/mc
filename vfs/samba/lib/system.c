@@ -385,22 +385,6 @@ int sys_chown(const char *fname,uid_t uid,gid_t gid)
 #endif
 }
 
-/*******************************************************************
-os/2 also doesn't have chroot
-********************************************************************/
-int sys_chroot(const char *dname)
-{
-#ifndef HAVE_CHROOT
-	static int done;
-	if (!done) {
-		DEBUG(1,("WARNING: no chroot!\n"));
-		done=1;
-	}
-#else
-	return(chroot(dname));
-#endif
-}
-
 /**************************************************************************
 A wrapper for gethostbyname() that tries avoids looking up hostnames 
 in the root domain, which can cause dial-on-demand links to come up for no

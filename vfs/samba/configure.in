@@ -6,7 +6,6 @@ AC_PREFIX_DEFAULT(/usr/local/samba)
 
 dnl Unique-to-Samba variables we'll be playing with.
 AC_SUBST(SHELL)
-AC_SUBST(RUNPROG)
 AC_SUBST(MPROGS)
 AC_SUBST(LDSHFLAGS)
 AC_SUBST(HOST_OS)
@@ -160,15 +159,7 @@ if test x"$ac_cv_func_connect" = x"no"; then
     fi
 fi
 
-# Check if we have execl, if not we need to compile smbrun.
-AC_CHECK_FUNCS(execl)
-if test x"$ac_cv_func_execl" = x"no"; then
-    RUNPROG="bin/smbrun"
-else
-    RUNPROG=""
-fi
-
-AC_CHECK_FUNCS(waitpid getcwd strdup strtoul strerror chown chmod chroot)
+AC_CHECK_FUNCS(waitpid getcwd strdup strtoul strerror chown chmod)
 AC_CHECK_FUNCS(fstat strchr utime utimes getrlimit fsync bzero memset)
 AC_CHECK_FUNCS(memmove vsnprintf snprintf setsid glob strpbrk pipe crypt16 getauthuid)
 AC_CHECK_FUNCS(strftime sigprocmask sigblock sigaction innetgr setnetgrent getnetgrent endnetgrent)
@@ -708,24 +699,6 @@ AC_ARG_WITH(ssl,
 
 
 #################################################
-# check for syslog logging
-AC_MSG_CHECKING([whether to use syslog logging])
-AC_ARG_WITH(syslog,
-[  --with-syslog     Include experimental SYSLOG support
-  --without-syslog  Don't include SYSLOG support (default)],
-[ case "$withval" in
-  yes)
-    AC_MSG_RESULT(yes)
-    AC_DEFINE(WITH_SYSLOG)
-    ;;
-  *)
-    AC_MSG_RESULT(no)
-    ;;
-  esac ],
-  AC_MSG_RESULT(no)
-)
-
-#################################################
 # set private directory location
 AC_ARG_WITH(privatedir,
 [  --with-privatedir=DIR     Where to put smbpasswd ($ac_default_prefix/private)],
@@ -767,6 +740,42 @@ AC_ARG_WITH(lockdir,
    AC_SUBST(lockdir)]
 )
 
+#################################################
+# set configuration directory location
+configdir="\$(LIBDIR)"
+AC_ARG_WITH(configdir,
+[  --with-configdir=DIR    Where to put configuration files (\$libdir)],
+[ case "$withval" in
+  yes|no)
+  #
+  # Just in case anybody does it
+  #
+    AC_MSG_WARN([--with-configdir called without argument - will use default])
+  ;;
+  * )
+    configdir="$withval"
+    ;;
+  esac]
+)
+
+
+#################################################
+# set codepage directory location
+codepagedir="\$(LIBDIR)/codepages"
+AC_ARG_WITH(codepagedir,
+[  --with-codepagedir=DIR  Where to put codepage files (\$libdir/codepages)],
+[ case "$withval" in
+  yes|no)
+  #
+  # Just in case anybody does it
+  #
+    AC_MSG_WARN([--with-codepagedir called without argument - will use default])
+  ;;
+  * )
+    codepagedir="$withval"
+    ;;
+  esac])
+
 AC_MSG_CHECKING([configure summary])
 AC_TRY_RUN([#include "${srcdir-.}/tests/summary.c"],
            AC_MSG_RESULT(OK);,
@@ -775,5 +784,7 @@ AC_TRY_RUN([#include "${srcdir-.}/tests/summary.c"],
 
 builddir=`pwd`
 AC_SUBST(builddir)
+AC_SUBST(configdir)
+AC_SUBST(codepagedir)
 
 AC_OUTPUT([include/stamp-h Makefile])

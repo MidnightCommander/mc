@@ -1,3 +1,13 @@
+2001-11-13  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* samba/lib/system.c (sys_chroot): Removed.
+	* samba/configure.in: Remove RUNPROG.  Don't check 
+	for chroot and execl functions.
+	Remove syslog logging support.
+	Add --with-codepagedir and --with-configdir from samba 2.2.2.
+
+	* samba/Makefile.in: Use configdir and codepagedir.
+
 2001-11-08  Pavel Roskin  <proski@gnu.org>
 
 	* Make-mc.in (SAMBA_DIST): Remove lib/getsmbpass.c.
@@ -7,7 +17,7 @@
 	* smbfs.c (smbfs_add_dots): New function. Insert a "." and ".."
 	entries into the linked list.
 	(smbfs_loaddir): Call smbfs_add_dots for shares or servers.
-	(smbfs_get_free_bucket): Eliminate utime.
+	(smbfs_get_free_bucket): Eliminate time.
 	(fake_share_stat): Make path const.
 
 	* samba/configure.in: Don't check whether getpass

@@ -38,8 +38,8 @@ INSTALLPERMS = 0755
 # or in smb.conf (see smb.conf(5))
 SMBLOGFILE = $(VARDIR)/log.smb
 NMBLOGFILE = $(VARDIR)/log.nmb
-CONFIGFILE = $(LIBDIR)/smb.conf
-LMHOSTSFILE = $(LIBDIR)/lmhosts
+CONFIGFILE = @configdir@/smb.conf
+LMHOSTSFILE = @configdir@/lmhosts
 DRIVERFILE = $(LIBDIR)/printers.def
 PASSWD_PROGRAM = /bin/passwd
 # This is where smbpasswd et al go
@@ -51,7 +51,7 @@ SMB_PASSWD_FILE = $(PRIVATEDIR)/smbpasswd
 LOCKDIR = @lockdir@
 
 # The directory where code page definition files go
-CODEPAGEDIR = $(LIBDIR)/codepages
+CODEPAGEDIR = @codepagedir@
 
 # The current codepage definition list.
 CODEPAGELIST= 437 737 850 852 861 932 866 949 950 936
