@@ -6131,7 +6131,7 @@ msgstr "ftpfs: échec de l'abandon"
 
 #: vfs/ftpfs.c:1159 vfs/ftpfs.c:1329
 msgid "ftpfs: CWD failed."
-msgstr "ftpfs: échec de CWD.
+msgstr "ftpfs: échec de CWD."
 
 #: vfs/ftpfs.c:1169 vfs/ftpfs.c:1176
 msgid "ftpfs: couldn't resolve symlink"
