@@ -229,7 +229,9 @@ static FILE *open_archive (int fstype, char *name, struct archive **pparc)
     if (tmp)
 	g_free (tmp);
     g_free (mc_extfsdir);
+    open_error_pipe ();
     result = popen (cmd, "r");
+    close_error_pipe (1, NULL);
     g_free (cmd);
     if (result == NULL) {
         if (local_name != NULL && uses_archive)
@@ -563,6 +565,38 @@ static char *get_archive_name (struct archive *archive)
 	return archive_name;
 }
 
+/* Don't pass localname as NULL */
+static int
+extfs_cmd (const char *extfs_cmd, struct archive *archive,
+	   struct entry *entry, const char *localname)
+{
+    char *file;
+    char *quoted_file;
+    char *archive_name;
+    char *mc_extfsdir;
+    char *cmd;
+    int retval;
+
+    file = get_path_from_entry (entry);
+    quoted_file = name_quote (file, 0);
+    g_free (file);
+    archive_name = name_quote (get_archive_name (archive), 0);
+
+    mc_extfsdir = concat_dir_and_file (mc_home, "extfs" PATH_SEP_STR);
+    cmd = g_strconcat (mc_extfsdir, extfs_prefixes[archive->fstype],
+		       extfs_cmd, archive_name, " ", quoted_file, " ",
+		       localname, NULL);
+    g_free (quoted_file);
+    g_free (mc_extfsdir);
+    g_free (archive_name);
+
+    open_error_pipe ();
+    retval = my_system (EXECUTE_AS_SHELL, shell, cmd);
+    g_free (cmd);
+    close_error_pipe (1, NULL);
+    return retval;
+}
+
 static void extfs_run (char *file)
 {
     struct archive *archive;
@@ -590,7 +624,6 @@ static void *extfs_open (vfs *me, char *file, int flags, int mode)
     struct pseudofile *extfs_info;
     struct archive *archive;
     char *q;
-    char *mc_extfsdir;
     struct entry *entry;
     int local_handle;
     int created = 0;
@@ -607,42 +640,28 @@ static void *extfs_open (vfs *me, char *file, int flags, int mode)
     	return NULL;
     if ((entry = my_resolve_symlinks (entry)) == NULL)
 	return NULL;
+
     if (S_ISDIR (entry->inode->mode)) ERRNOR (EISDIR, NULL);
+
     if (entry->inode->local_filename == NULL) {
-        char *cmd;
-	char *archive_name, *p;
-        
-	{
-	    int handle;
-	    handle = mc_mkstemps (&entry->inode->local_filename, "extfs", NULL);
 
-	    if (handle == -1)
-		return NULL;
-	    close(handle);
+	int handle;
+	handle = mc_mkstemps (&entry->inode->local_filename, "extfs", NULL);
+
+	if (handle == -1)
+	    return NULL;
+	close (handle);
+
+	if (extfs_cmd
+	    (" copyout ", archive, entry, entry->inode->local_filename)
+	    && !created) {
+	    free (entry->inode->local_filename);
+	    entry->inode->local_filename = NULL;
+	    my_errno = EIO;
+	    return NULL;
 	}
-	p = get_path_from_entry (entry);
-	q = name_quote (p, 0);
-	g_free (p);
-	archive_name = name_quote (get_archive_name (archive), 0);
-
-        mc_extfsdir = concat_dir_and_file (mc_home, "extfs/");
-        cmd = g_strconcat (mc_extfsdir, extfs_prefixes [archive->fstype],
-                             " copyout ", 
-                            archive_name, 
-                            " ", q, " ", entry->inode->local_filename, NULL);
-	g_free (q);
-	g_free (mc_extfsdir);
-	g_free (archive_name);
-        if (my_system (EXECUTE_AS_SHELL, shell, cmd) && !created){
-            free (entry->inode->local_filename);
-            entry->inode->local_filename = NULL;
-            g_free (cmd);
-            my_errno = EIO;
-            return NULL;
-        }
-        g_free (cmd);
     }
-    
+
     local_handle = open (entry->inode->local_filename, NO_LINEAR(flags),
 			 mode);
     if (local_handle == -1) ERRNOR (EIO, NULL);
@@ -675,42 +694,21 @@ static int extfs_close (void *data)
     close (file->local_handle);
 
     /* Commit the file if it has changed */
-    if (file->has_changed){
-	struct archive *archive;
-	char   *archive_name, *file_name;
-	char   *cmd;
-	char   *mc_extfsdir;
-	char   *p;
-	
-	archive = file->archive;
-	archive_name = name_quote (get_archive_name (archive), 0);
-	p = get_path_from_entry (file->entry);
-	file_name = name_quote (p, 0);
-	g_free (p);
-	
-	mc_extfsdir = concat_dir_and_file (mc_home, "extfs/");
-	cmd = g_strconcat (mc_extfsdir,
-			    extfs_prefixes [archive->fstype],
-			    " copyin ", archive_name, " ",
-			    file_name, " ",
-			    file->entry->inode->local_filename, NULL);
-	g_free (archive_name);
-	g_free (file_name);
-	g_free (mc_extfsdir);
-	if (my_system (EXECUTE_AS_SHELL, shell, cmd))
+    if (file->has_changed) {
+	if (extfs_cmd (" copyin ", file->archive, file->entry,
+		       file->entry->inode->local_filename))
 	    errno_code = EIO;
-	g_free (cmd);
 	{
 	    struct stat file_status;
-	    if (stat(file->entry->inode->local_filename,&file_status) != 0)
-    		errno_code = EIO;
+	    if (stat (file->entry->inode->local_filename, &file_status) != 0)
+		errno_code = EIO;
 	    else
 		file->entry->inode->size = file_status.st_size;
 	}
 
 	file->entry->inode->mtime = time (NULL);
     }
-    
+
     file->archive->fd_usage--;
     if (!file->archive->fd_usage) {
         struct vfs_stamping *parent;
@@ -1012,10 +1010,7 @@ static int extfs_unlink (vfs *me, char *file)
 {
     struct archive *archive;
     char *q;
-    char *mc_extfsdir;
     struct entry *entry;
-    char *cmd;
-    char *archive_name, *p;
 
     if ((q = get_path_mangle (file, &archive, 0, 0)) == NULL)
 	return -1;
@@ -1026,23 +1021,10 @@ static int extfs_unlink (vfs *me, char *file)
 	return -1;
     if (S_ISDIR (entry->inode->mode)) ERRNOR (EISDIR, -1);
 
-    p = get_path_from_entry (entry);
-    q = name_quote (p, 0);
-    g_free (p);
-    archive_name = name_quote (get_archive_name (archive), 0);
-
-    mc_extfsdir = concat_dir_and_file (mc_home, "extfs/");
-    cmd = g_strconcat (mc_extfsdir, extfs_prefixes [archive->fstype],
-		       " rm ",  archive_name, " ", q, NULL);
-    g_free (q);
-    g_free (mc_extfsdir);
-    g_free (archive_name);
-    if (my_system (EXECUTE_AS_SHELL, shell, cmd)){
-        g_free (cmd);
+    if (extfs_cmd (" rm ", archive, entry, "")){
         my_errno = EIO;
         return -1;
     }
-    g_free (cmd);
     remove_entry (entry);
 
     return 0;
@@ -1052,10 +1034,7 @@ static int extfs_mkdir (vfs *me, char *path, mode_t mode)
 {
     struct archive *archive;
     char *q;
-    char *mc_extfsdir;
     struct entry *entry;
-    char *cmd;
-    char *archive_name, *p;
 
     if ((q = get_path_mangle (path, &archive, 0, 0)) == NULL)
 	return -1;
@@ -1068,24 +1047,11 @@ static int extfs_mkdir (vfs *me, char *path, mode_t mode)
 	return -1;
     if (!S_ISDIR (entry->inode->mode)) ERRNOR (ENOTDIR, -1);
 
-    p = get_path_from_entry (entry);
-    q = name_quote (p, 0);
-    g_free (p);
-    archive_name = name_quote (get_archive_name (archive), 0);
-
-    mc_extfsdir = concat_dir_and_file (mc_home, "extfs/");
-    cmd = g_strconcat (mc_extfsdir, extfs_prefixes [archive->fstype],
-		       " mkdir ",  archive_name, " ", q, NULL);
-    g_free (q);
-    g_free (mc_extfsdir);
-    g_free (archive_name);
-    if (my_system (EXECUTE_AS_SHELL, shell, cmd)){
-	g_free (cmd);
+    if (extfs_cmd (" mkdir ", archive, entry, "")){
 	my_errno = EIO;
 	remove_entry (entry);
 	return -1;
     }
-    g_free (cmd);
 
     return 0;
 }
@@ -1094,10 +1060,7 @@ static int extfs_rmdir (vfs *me, char *path)
 {
     struct archive *archive;
     char *q;
-    char *mc_extfsdir;
     struct entry *entry;
-    char *cmd;
-    char *archive_name, *p;
 
     if ((q = get_path_mangle (path, &archive, 0, 0)) == NULL)
 	return -1;
@@ -1108,23 +1071,10 @@ static int extfs_rmdir (vfs *me, char *path)
 	return -1;
     if (!S_ISDIR (entry->inode->mode)) ERRNOR (ENOTDIR, -1);
 
-    p = get_path_from_entry (entry);
-    q = name_quote (p, 0);
-    g_free (p);
-    archive_name = name_quote (get_archive_name (archive), 0);
-
-    mc_extfsdir = concat_dir_and_file (mc_home, "extfs/");
-    cmd = g_strconcat (mc_extfsdir, extfs_prefixes [archive->fstype],
-		       " rmdir ",  archive_name, " ", q, NULL);
-    g_free (q);
-    g_free (mc_extfsdir);
-    g_free (archive_name);
-    if (my_system (EXECUTE_AS_SHELL, shell, cmd)){
-        g_free (cmd);
+    if (extfs_cmd (" rmdir ", archive, entry, "")){
         my_errno = EIO;
         return -1;
     }
-    g_free (cmd);
     remove_entry (entry);
 
     return 0;
