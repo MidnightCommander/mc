@@ -1089,6 +1089,25 @@ panel_clist_scroll (gpointer data)
 	return TRUE;
 }
 
+/* Convenience function to return whether we are on a valid drop area in a
+ * GtkCList.
+ */
+static int
+can_drop_on_clist (WPanel *panel, int x, int y)
+{
+	GtkCList *clist;
+	int border_width;
+
+	clist = CLIST_FROM_SW (panel->list);
+
+	border_width = GTK_CONTAINER (clist)->border_width;
+
+	if (y < border_width + clist->column_title_area.y + clist->column_title_area.height)
+		return FALSE;
+	else
+		return TRUE;
+}
+
 /* Callback used for drag motion events over the clist.  We set up
  * auto-scrolling and validate the drop to present the user with the correct
  * feedback.
@@ -1105,8 +1124,7 @@ panel_clist_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gin
 
 	panel = data;
 
-	if (context->dest_window != GTK_CLIST (widget)->clist_window) {
-		printf ("squick\n");
+	if (!can_drop_on_clist (panel, x, y)) {
 		gdk_drag_status (context, 0, time);
 		return TRUE;
 	}

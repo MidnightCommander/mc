@@ -1,3 +1,9 @@
+1999-03-08  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gscreen.c (can_drop_on_clist): New function to figure out if the
+	user is trying to drop on a valid region of a GtkCList.  It sucks
+	to have to poke into its internal geometry, though.
+
 1999-03-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-file-property-dialog.c (apply_metadata_change): only set
