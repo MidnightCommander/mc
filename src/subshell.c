@@ -66,15 +66,13 @@
 #   define WIFEXITED(stat_val) (((stat_val) & 255) == 0)
 #endif
 
-#ifdef HAVE_GRANTPT
-#   include <stropts.h> /* For I_PUSH			      */
-#else
-#   include <grp.h>	/* For the group struct & getgrnam()  */
-#endif
+#ifdef HAVE_STROPTS_H
+#   include <stropts.h> /* For I_PUSH */
+#endif /* HAVE_STROPTS_H */
 
-#ifdef SCO_FLAVOR
+#ifdef HAVE_GRP_H
 #   include <grp.h>	/* For the group struct & getgrnam()  */
-#endif /* SCO_FLAVOR */
+#endif /* HAVE_GRP_H */
 
 #ifdef __QNX__
 #   include <unix.h>	/* exec*() from <process.h> */
