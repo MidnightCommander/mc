@@ -760,8 +760,9 @@ vfs/extfs/uha
 vfs/extfs/urar
 vfs/extfs/uzoo
 
-doc/mc.1 doc/mcedit.1 doc/mcserv.8 doc/ru/mc.1 doc/ru/Makefile
-
+doc/mc.1 doc/mcedit.1 doc/mcserv.8
+doc/ru/mc.1 doc/ru/Makefile
+doc/es/mc.1 doc/es/Makefile
 
 intl/Makefile po/Makefile.in
 ])

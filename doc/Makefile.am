@@ -1,4 +1,4 @@
-SUBDIRS = ru
+SUBDIRS = ru es
 
 if MCSERV_INSTALL
 man_MANS = mc.1 mcedit.1 mcserv.8
