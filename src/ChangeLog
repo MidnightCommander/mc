@@ -1,5 +1,8 @@
 2001-11-14  Pavel Roskin  <proski@gnu.org>
 
+	* panelize.c (do_external_panelize): Re-sort the panel according
+	to the current settings.
+
 	* find.c (do_find): Re-sort the panel according to the current
 	settings when doing panelizing.
 

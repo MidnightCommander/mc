@@ -448,5 +448,6 @@ void do_external_panelize (char *command)
 	message (0, _("External panelize"), _("Pipe close failed"));
     close_error_pipe (0, 0);
     try_to_select (cpanel, NULL);
+    panel_re_sort (cpanel);
     paint_panel (cpanel);
 }
