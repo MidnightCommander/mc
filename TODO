@@ -4,9 +4,6 @@ Before 4.6.1
 Broken pipe warning when viewing large *.tar.gz files.  Warnings should
 be shown before the viewer is started if possible.
 
-Crash when opening tar archives with links on the top level pointing
-inside a directory.
-
 Tilde not expanded in copy and move dialogs.
 
 
@@ -65,8 +62,6 @@ window title.
 real_input_dialog_help() shouldn't use translated strings in the section
 names in .mc/history.  Right now, mc writes separate history sections
 for different locales.  Only input history is affected.
-
-Hard links in cpio archives have 0 length.
 
 Add "Ignore" and "Ignore all" buttons when reporting permission
 problems.
