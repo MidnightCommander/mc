@@ -9,14 +9,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.0a\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-26 12:31-0500\n"
-"PO-Revision-Date: 2004-01-07 17:31+0100\n"
+"POT-Creation-Date: 2004-01-28 14:49+0100\n"
+"PO-Revision-Date: 2004-02-05 08:33+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>,<it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: edit/edit.c:146 edit/edit.c:277 edit/edit.c:285 edit/edit.c:333
 #: edit/edit.c:348 edit/edit.c:359 edit/edit.c:375 edit/edit.c:2665
@@ -53,19 +53,6 @@ msgstr " File troppo grande: "
 msgid "Macro recursion is too deep"
 msgstr "La ricorsione macro è troppo profonda"
 
-#: edit/edit.h:262
-msgid "&Dismiss"
-msgstr "&Chiudi"
-
-#: edit/edit.h:264 edit/editcmd.c:382 edit/editcmd.c:1228 edit/editcmd.c:1310
-#: edit/editcmd.c:2569 edit/editmenu.c:37 edit/editoptions.c:71
-#: src/boxes.c:139 src/boxes.c:276 src/boxes.c:372 src/boxes.c:464
-#: src/boxes.c:590 src/boxes.c:713 src/boxes.c:835 src/boxes.c:945
-#: src/boxes.c:1013 src/filegui.c:761 src/find.c:184 src/layout.c:348
-#: src/option.c:113 src/subshell.c:323 src/view.c:2107 src/wtools.c:441
-msgid "&OK"
-msgstr "&OK"
-
 #: edit/editcmd.c:45 edit/editcmd.c:46
 msgid " Enter file name: "
 msgstr " Inserire nome file: "
@@ -101,6 +88,16 @@ msgstr "Fai i salvataggi -->"
 #: src/wtools.c:46 src/wtools.c:439
 msgid "&Cancel"
 msgstr "&Annulla"
+
+#: edit/editcmd.c:382 edit/editcmd.c:1228 edit/editcmd.c:1310
+#: edit/editcmd.c:2569 edit/edit.h:264 edit/editmenu.c:37
+#: edit/editoptions.c:71 src/boxes.c:139 src/boxes.c:276 src/boxes.c:372
+#: src/boxes.c:464 src/boxes.c:590 src/boxes.c:713 src/boxes.c:835
+#: src/boxes.c:945 src/boxes.c:1013 src/filegui.c:761 src/find.c:184
+#: src/layout.c:348 src/option.c:113 src/subshell.c:323 src/view.c:2107
+#: src/wtools.c:441
+msgid "&OK"
+msgstr "&OK"
 
 #: edit/editcmd.c:386
 msgid "Extension:"
@@ -445,6 +442,10 @@ msgstr " A"
 #: edit/editcmd.c:2583
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <soggetto> -c <cc> <a>"
+
+#: edit/edit.h:262
+msgid "&Dismiss"
+msgstr "&Chiudi"
 
 #: edit/editkeys.c:180
 msgid " Emacs key: "
@@ -1538,12 +1539,10 @@ msgid "Cannot read directory contents"
 msgstr "Impossibile leggere il contenuto della directory"
 
 #: src/execute.c:133 src/utilunix.c:380
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Premi un tasto per continuare..."
 
 #: src/execute.c:235
-#, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Premi `exit' per tornare a Midnight Commander"
 
@@ -2019,7 +2018,7 @@ msgstr " Elimina: "
 
 #: src/file.c:2210 src/filegui.c:517
 msgid "Non&e"
-msgstr "nessun&o"
+msgstr "Nessun&o"
 
 #: src/filegui.c:322
 #, c-format
@@ -2072,7 +2071,7 @@ msgstr " Il file \"%s\" esiste già!"
 
 #: src/filegui.c:516
 msgid "If &size differs"
-msgstr "solo se la dimensione è &diversa"
+msgstr "Solo se la dimensione è &diversa"
 
 #: src/filegui.c:518
 msgid "&Update"
@@ -3228,7 +3227,6 @@ msgid "ARG"
 msgstr "ARG"
 
 #: src/popthelp.c:179
-#, c-format
 msgid "Usage:"
 msgstr "Uso:"
 
@@ -3442,7 +3440,6 @@ msgid "With multiple codepages support\n"
 msgstr "Con supporto codepages multiple\n"
 
 #: src/textconf.c:121
-#, c-format
 msgid "Virtual File System:"
 msgstr " File System Virtuale:"
 
@@ -3594,7 +3591,6 @@ msgid "Temporary files will be created in %s\n"
 msgstr "I file temporanei verranno creati in %s\n"
 
 #: src/utilunix.c:376
-#, c-format
 msgid "Temporary files will not be created\n"
 msgstr "I file temporanei non verranno creati\n"
 
