@@ -41,9 +41,6 @@ o  This code is distributed under the GNU General Public License and
    of how the dialog manager functions are used.  For a more complete
    example, take a look at the main.c file.
 
-   Take a look at the FILES file in the doc/ directory.  It has a
-   roadmap of the files that make up the Midnight Commander.
-
    The file util.c has a lot of utility functions.  Get familiar with
    them, they are very simple. 
 

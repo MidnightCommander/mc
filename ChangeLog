@@ -1,5 +1,9 @@
 2001-08-10  Pavel Roskin  <proski@gnu.org>
 
+	* doc/LSM: Remove, it's outdated.
+	* doc/FILES: Likewise.
+	* doc/DEVEL: Remove information about FILES.
+
 	* FAQ: Eliminate all broken URLs on the MC site.
 	From Frederic L. W. Meunier <0@pervalidus.net>
 
