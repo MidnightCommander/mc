@@ -1123,7 +1123,7 @@ msgstr "Filen skapades den: "
 #: gnome/gnome-file-property-dialog.c:290
 #: gnome/gnome-file-property-dialog.c:299
 msgid "%a, %b %d %Y,  %I:%M:%S %p"
-msgstr "%a %d %b %Y  %H:%M:%S""
+msgstr "%a %d %b %Y  %H:%M:%S"
 
 #: gnome/gnome-file-property-dialog.c:286
 msgid "Last Modified on: "
