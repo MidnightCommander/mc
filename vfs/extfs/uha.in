@@ -2,14 +2,15 @@
 #
 # It is the uhafs Valery Kornienkov vlk@st.simbirsk.su 2:5051/30@fidonet
 # ver 0.1 Thu Apr  6 12:05:08 2000
+#
+# Tested with HA 0.999.  Source of ha can be found at
+# ftp://ftp.ibiblio.org/pub/Linux/utils/compress/
 
-HA=ha # for HA 0.999 Copyright (c) 1995 Harri Hirvola
-      # Source: ftp://ftp.ibiblio.org/pub/Linux/utils/compress/ha0999p-linux.tar.gz
+HA=ha
 
 mchafs_list ()
 {
- eval $HA lf "$1" 2>/dev/null |@AWK@ -v uid=${UID-0} '
-{ date="JanFebMarAprMayJunJulAugSepOctNovDec" }
+    $HA lf "$1" 2>/dev/null | @AWK@ -v uid=${UID-0} '
 /^===========/ {next}
 {
  if ($5="%" && $8~/DIR|ASC|HSC|CPY/) {
@@ -22,9 +23,8 @@ mchafs_list ()
    path=$2
    getline
    if ($1~/^d.*/) next
-   printf "%s %s %-8d %-8d %8d %3s %2d %4d %s:%s %s%s\n",\
-   $1,1,0,0,filesize, substr(date,(a[2]-1)*3+1,3),a[3],a[1],t[1],t[2],\
-   path,filename
+   printf "%s %s %-8d %-8d %8d %s-%s-%s %s:%s %s%s\n",\
+   $1,1,0,0,filesize,a[3],a[2],a[1],t[1],t[2],path,filename
   }
 }'
 }
@@ -35,8 +35,8 @@ mchafs_copyout ()
     mkdir $TMPDIR || exit 1
     cd $TMPDIR
 
-    eval $HA xy "$1" "$2" >/dev/null 2>&1
-    mv -f "$2" "$3"
+    $HA xyq "$1" "$2" >/dev/null
+    cat "$2" > "$3"
 
     cd /
     rm -rf $TMPDIR

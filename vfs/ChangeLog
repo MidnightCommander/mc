@@ -1,5 +1,10 @@
 2002-12-13  Pavel Roskin  <proski@gnu.org>
 
+	* extfs/uha.in (mchafs_list): Don't parse the month, use
+	DD-MM-YYYY output.
+	(mchafs_copyout): Use cat, not mv, because the files can be on
+	different filesystems.  Use "q" and don't suppress stderr.
+
 	* extfs/ulha.in: Don't suppress stderr.
 
 	* extfs/uzoo.in: Always use "q" option to avoid processing junk.
