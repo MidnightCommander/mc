@@ -7,6 +7,8 @@
 2005-02-08  Roland Illig  <roland.illig@gmx.de>
 
 	* edit.h: Reformatted #definitions.
+	* editcmd.c: Explicitly declared unused variables to make gcc
+	quiet.
 
 2005-02-07  Roland Illig  <roland.illig@gmx.de>
 

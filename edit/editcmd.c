@@ -619,6 +619,8 @@ edit_delete_macro (WEdit * edit, int k)
     FILE *f, *g;
     int s, i, n, j = 0;
 
+    (void) edit;
+
     if (saved_macros_loaded)
 	if ((j = macro_exists (k)) < 0)
 	    return 0;
@@ -711,6 +713,8 @@ int edit_load_macro_cmd (WEdit * edit, struct macro macro[], int *n, int k)
 {
     FILE *f;
     int s, i = 0, found = 0;
+
+    (void) edit;
 
     if (saved_macros_loaded)
 	if (macro_exists (k) < 0)
@@ -1251,6 +1255,8 @@ edit_replace_dialog (WEdit * edit, const char *search_default,
 	 0, 0},
 	 NULL_QuickWidget};
 
+    (void) edit;
+
     quick_widgets[2].result = &treplace_scanf;
     quick_widgets[3].result = &treplace_all;
     quick_widgets[4].result = &treplace_prompt;
@@ -1321,6 +1327,8 @@ edit_search_dialog (WEdit * edit, char **search_text)
 	 0, 0},
 	 NULL_QuickWidget};
 
+    (void) edit;
+
     quick_widgets[2].result = &treplace_scanf;
     quick_widgets[3].result = &treplace_backwards;
     quick_widgets[4].result = &treplace_regexp;
@@ -1365,7 +1373,7 @@ static long sargs[NUM_REPL_ARGS][256 / sizeof (long)];
 /* This function is a modification of mc-3.2.10/src/view.c:regexp_view_search() */
 /* returns -3 on error in pattern, -1 on not found, found_len = 0 if either */
 static int
-string_regexp_search (char *pattern, char *string, int len, int match_type,
+string_regexp_search (char *pattern, char *string, int match_type,
 		      int match_bol, int icase, int *found_len, void *d)
 {
     static regex_t r;
@@ -1501,7 +1509,7 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 
 		buf = mbuf;
 		while (q) {
-		    found_start = string_regexp_search ((char *) exp, (char *) buf, q, match_normal, match_bol, !replace_case, len, d);
+		    found_start = string_regexp_search ((char *) exp, (char *) buf, match_normal, match_bol, !replace_case, len, d);
 
 		    if (found_start <= -2) {	/* regcomp/regexec error */
 			*len = 0;
@@ -1733,6 +1741,7 @@ err:
 
 static void regexp_error (WEdit *edit)
 {
+    (void) edit;
     edit_error_dialog (_("Error"), _(" Invalid regular expression, or scanf expression with too many conversions "));
 }
 
@@ -2217,6 +2226,8 @@ static int edit_save_block_to_clip_file (WEdit * edit, long start, long finish)
 
 void edit_paste_from_history (WEdit *edit)
 {
+    (void) edit;
+    edit_error_dialog (_(" Error "), _(" This function is not implemented. "));
 }
 
 int edit_copy_to_X_buf_cmd (WEdit * edit)
