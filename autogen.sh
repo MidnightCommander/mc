@@ -19,7 +19,7 @@ test -z "$srcdir" && srcdir=.
 # Some shells don't propagate "set -e" to subshells.
 set -e
 
-cd $srcdir
+cd "$srcdir"
 
 # The autoconf cache (version after 2.52) is not reliable yet.
 rm -rf autom4te.cache vfs/samba/autom4te.cache
@@ -40,14 +40,19 @@ gettext_ver=`$GETTEXTIZE --version | \
        s/\(......\).*/\1/;	# leave only 6 leading digits
        '`
 
-if test $gettext_ver -lt 01038; then
+if test -z "$gettext_ver"; then
+  echo "Cannot determine version of gettext" 2>&1
+  exit 1
+fi
+
+if test "$gettext_ver" -lt 01038; then
   echo "Don't use gettext older than 0.10.38" 2>&1
   exit 1
 fi
 
 rm -rf intl
-if test $gettext_ver -ge 01100; then
-  if test $gettext_ver -lt 01105; then
+if test "$gettext_ver" -ge 01100; then
+  if test "$gettext_ver" -lt 01105; then
     echo "Upgrade gettext to at least 0.11.5 or downgrade to 0.10.40" 2>&1
     exit 1
   fi
