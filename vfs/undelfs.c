@@ -141,14 +141,14 @@ undelfs_get_path (const char *dirname, char **fsname, char **file)
 
 	    *file = g_strdup (p+1);
 	    tmp = g_strndup (dirname, p - dirname);
-	    *fsname = g_strconcat ("/dev/", tmp, NULL);
+	    *fsname = g_strconcat ("/dev/", tmp, (char *) NULL);
 	    g_free (tmp);
 	    return;
 	}
 	p--;
     }
     *file = g_strdup ("");
-    *fsname = g_strconcat ("/dev/", dirname, NULL);
+    *fsname = g_strconcat ("/dev/", dirname, (char *) NULL);
     return;
 }
 

@@ -1,3 +1,16 @@
+2004-09-24  Roland Illig  <roland.illig@gmx.de>
+
+	* cpio.c: Replaced NULL with (char *) NULL. Likewise for 0, where
+	NULL was meant.
+	* direntry.c: Likewise.
+	* extfs.c: Likewise.
+	* fish.c: Likewise.
+	* ftpfs.c: Likewise.
+	* mcfs.c: Likewise.
+	* tar.c: Likewise.
+	* undelfs.c: Likewise.
+	* vfs.c: Likewise.
+
 2004-09-23  Roland Illig  <roland.illig@gmx.de>
 
 	* cpio.c (cpio_read_bin_head): Replaced GUINT16_SWAP_LE_BE with

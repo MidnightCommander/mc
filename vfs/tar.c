@@ -221,7 +221,7 @@ tar_open_archive_int (struct vfs_class *me, const char *name,
     if (type != COMPRESSION_NONE) {
 	char *s;
 	mc_close (result);
-	s = g_strconcat (archive->name, decompress_extension (type), NULL);
+	s = g_strconcat (archive->name, decompress_extension (type), (char *) NULL);
 	result = mc_open (s, O_RDONLY);
 	if (result == -1)
 	    message (1, MSG_ERROR, _("Cannot open tar archive\n%s"), s);

@@ -540,7 +540,7 @@ vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino)
 	    ino = ino->ent->dir;
 	    if (ino == ino->super->root)
 		break;
-	    newpath = g_strconcat (ino->ent->name, "/", path, NULL);
+	    newpath = g_strconcat (ino->ent->name, "/", path, (char *) NULL);
 	    g_free (path);
 	    path = newpath;
 	}
@@ -552,7 +552,7 @@ vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino)
 	return g_strdup (ino->ent->name);
 
     return g_strconcat (ino->ent->dir->ent->name, PATH_SEP_STR,
-			ino->ent->name, NULL);
+			ino->ent->name, (char *) NULL);
 }
 
 /* Support of archives */

@@ -160,7 +160,7 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super,
 	char *s;
 
 	mc_close (fd);
-	s = g_strconcat (name, decompress_extension (type), NULL);
+	s = g_strconcat (name, decompress_extension (type), (char *) NULL);
 	if ((fd = mc_open (s, O_RDONLY)) == -1) {
 	    message (1, MSG_ERROR, _("Cannot open cpio archive\n%s"), s);
 	    g_free (s);

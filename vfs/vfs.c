@@ -978,7 +978,7 @@ char *
 vfs_translate_url (const char *url)
 {
     if (strncmp (url, "ftp://", 6) == 0)
-	return g_strconcat ("/#ftp:", url + 6, NULL);
+	return g_strconcat ("/#ftp:", url + 6, (char *) NULL);
     else if (strncmp (url, "a:", 2) == 0)
 	return g_strdup ("/#a");
     else

@@ -100,7 +100,7 @@ mcfs_fill_names (struct vfs_class *me, fill_names_f func)
 	if (mcfs_connections[i].host == 0)
 	    continue;
 	name = g_strconcat ("/#mc:", mcfs_connections[i].user,
-			    "@", mcfs_connections[i].host, NULL);
+			    "@", mcfs_connections[i].host, (char *) NULL);
 	(*func) (name);
 	g_free (name);
     }

@@ -113,7 +113,7 @@ extfs_fill_names (struct vfs_class *me, fill_names_f func)
     while (a) {
 	name =
 	    g_strconcat (a->name ? a->name : "", "#",
-			 extfs_prefixes[a->fstype], NULL);
+			 extfs_prefixes[a->fstype], (char *) NULL);
 	(*func) (name);
 	g_free (name);
 	a = a->next;
@@ -240,7 +240,7 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
     mc_extfsdir = concat_dir_and_file (mc_home, "extfs" PATH_SEP_STR);
     cmd =
 	g_strconcat (mc_extfsdir, extfs_prefixes[fstype], " list ",
-		     local_name ? local_name : tmp, NULL);
+		     local_name ? local_name : tmp, (char *) NULL);
     if (tmp)
 	g_free (tmp);
     g_free (mc_extfsdir);
@@ -621,7 +621,7 @@ extfs_cmd (const char *extfs_cmd, struct archive *archive,
     mc_extfsdir = concat_dir_and_file (mc_home, "extfs" PATH_SEP_STR);
     cmd = g_strconcat (mc_extfsdir, extfs_prefixes[archive->fstype],
 		       extfs_cmd, archive_name, " ", quoted_file, " ",
-		       quoted_localname, NULL);
+		       quoted_localname, (char *) NULL);
     g_free (quoted_file);
     g_free (quoted_localname);
     g_free (mc_extfsdir);
@@ -649,7 +649,7 @@ extfs_run (const char *file)
     archive_name = name_quote (extfs_get_archive_name (archive), 0);
     mc_extfsdir = concat_dir_and_file (mc_home, "extfs" PATH_SEP_STR);
     cmd = g_strconcat (mc_extfsdir, extfs_prefixes[archive->fstype],
-		       " run ", archive_name, " ", q, NULL);
+		       " run ", archive_name, " ", q, (char *) NULL);
     g_free (mc_extfsdir);
     g_free (archive_name);
     g_free (q);

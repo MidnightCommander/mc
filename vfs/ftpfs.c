@@ -439,7 +439,7 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super,
     if (!anon || MEDATA->logfile)
 	pass = op;
     else {
-	pass = g_strconcat ("-", op, NULL);
+	pass = g_strconcat ("-", op, (char *) NULL);
 	wipe_password (op);
     }
 
@@ -1661,7 +1661,7 @@ ftpfs_fill_names (struct vfs_class *me, fill_names_f func)
     char *name;
     
     while (super){
-	name = g_strconcat ("/#ftp:", SUP.user, "@", SUP.host, "/", SUP.cwdir, NULL);
+	name = g_strconcat ("/#ftp:", SUP.user, "@", SUP.host, "/", SUP.cwdir, (char *) NULL);
 	(*func)(name);
 	g_free (name);
 	super = super->next;

@@ -201,7 +201,7 @@ fish_pipeopen(struct vfs_s_super *super, const char *path, const char *argv[])
 static char *fish_getcwd(struct vfs_class *me, struct vfs_s_super *super)
 {
     if (fish_command (me, super, WANT_STRING, "#PWD\npwd; echo '### 200'\n") == COMPLETE)
-        return  g_strconcat (reply_str, "/", NULL);
+        return  g_strconcat (reply_str, "/", (char *) NULL);
     ERRNOR (EIO, NULL);
 }
 
@@ -247,7 +247,7 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 	    if (!SUP.password) {
 		char *p, *op;
 		p = g_strconcat (_(" fish: Password required for "),
-				 SUP.user, " ", NULL);
+				 SUP.user, " ", (char *) NULL);
 		op = vfs_get_password (p);
 		g_free (p);
 		if (op == NULL)
@@ -291,7 +291,7 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
     print_vfs_message (_("fish: Connected, home %s."), SUP.cwdir);
 #if 0
     super->name =
-	g_strconcat ("/#sh:", SUP.user, "@", SUP.host, "/", NULL);
+	g_strconcat ("/#sh:", SUP.user, "@", SUP.host, "/", (char *) NULL);
 #endif
     super->name = g_strdup (PATH_SEP_STR);
 
@@ -876,7 +876,7 @@ fish_fill_names (struct vfs_class *me, fill_names_f func)
 	}
 
 	name = g_strconcat ("/#sh:", SUP.user, "@", SUP.host, flags,
-			    "/", SUP.cwdir, NULL);
+			    "/", SUP.cwdir, (char *) NULL);
 	(*func)(name);
 	g_free (name);
 	super = super->next;
