@@ -32,6 +32,7 @@
 #define FL_FOLLOW 1
 #define FL_DIR 4
 
+/* Single virtual file - high level */
 struct vfs_s_entry {
     struct vfs_s_entry **prevp, *next;
     struct vfs_s_inode *dir;	/* Directory we are in - needed for invalidating directory when file in it changes */
@@ -39,19 +40,19 @@ struct vfs_s_entry {
     struct vfs_s_inode *ino;	/* ... and its inode */
 };
 
+/* Single virtual file - low level */
 struct vfs_s_inode {
+    struct vfs_s_entry *ent;
     struct vfs_s_entry *subdir;
     struct vfs_s_super *super;
     struct stat st;		/* Parameters of this inode */
     char *linkname;		/* Symlink's contents */
     char *localname;		/* Filename of local file, if we have one */
-
-    struct vfs_s_entry *ent;	/* ftp needs this backpointer; don't use if you can avoid it */
-
     struct timeval timestamp;
     long data_offset;
 };
 
+/* Single connection or archive */
 struct vfs_s_super {
     struct vfs_s_super **prevp, *next;
     struct vfs_class *me;
@@ -98,6 +99,7 @@ struct vfs_s_super {
     } u;
 };
 
+/* Data associated with an open file */
 struct vfs_s_fh {
     struct vfs_s_inode *ino;
     long pos;			/* This is for module's use */
@@ -114,6 +116,10 @@ struct vfs_s_fh {
     } u;
 };
 
+/*
+ * One of our subclasses (tar, cpio, fish, ftpfs) with data and methods.
+ * Extension of vfs_class.  Stored in the data field of vfs_class.
+ */
 struct vfs_s_data {
     struct vfs_s_super *supers;
     int inode_counter;
