@@ -22,8 +22,8 @@ if $XZIPINFO 2>&1 | grep ZipInfo >/dev/null; then
 # Zipinfo prints errors on stdout. Check mode and time to skip them.
 /^[^a-z\-]/ { next }
 ($9 ~ /:/) {
-split($0,a,":")
-nam = substr(a[2],4)
+nam=$0
+sub(/^[^:]+:[^ 	]+[ 	]+/, "", nam)
 if ($1 ~ /^l/ ) {
     arrow=" -> "
     linkname=""

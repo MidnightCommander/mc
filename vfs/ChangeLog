@@ -1,3 +1,8 @@
+2001-03-01  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/uzip.in (mczipfs_list): Allow filenames with colons.
+	Reported by Christian Gennerat.
+
 2001-02-28  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* vfs.c (mc_def_ungetlocalcopy): Cleanup of error handling.
