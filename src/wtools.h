@@ -53,21 +53,6 @@ typedef struct {
 int quick_dialog (QuickDialog *qd);
 int quick_dialog_skip (QuickDialog *qd, int nskip);
 
-/* Choosers */
-
-#define CHOOSE_EDITABLE  1
-#define CHOOSE_BROWSE    0
-
-/* Chooser dialog boxes */
-typedef struct {
-    Dlg_head *dialog;
-    WListbox *listbox;
-} Chooser;
-
-Chooser *new_chooser (int lines, int cols, char *help, int flags);
-int run_chooser (Chooser *c);
-void destroy_chooser (Chooser *c);
-
 /* The input dialogs */
 
 /* Pass this as def_text to request a password */

@@ -232,63 +232,6 @@ Dlg_head *message (int error, char *header, const char *text, ...)
 }
 /* }}} */
 
-/* {{{ The chooser routines */
-
-static int  remove_callback (int i, void *data)
-{
-    Chooser *c = (Chooser *) data;
-    
-    listbox_remove_current (c->listbox, 0);
-
-    dlg_select_widget (c->dialog, c->listbox);
-    dlg_select_nth_widget (c->dialog, 0);
-    
-    /* Return: do not abort dialog */
-    return 0;
-}
-
-Chooser *new_chooser (int lines, int cols, char *help, int flags)
-{
-    Chooser  *c;
-    int      button_lines;
-
-    c =g_new (Chooser, 1);
-    c->dialog = create_dlg (0, 0, lines, cols, dialog_colors, NULL,
-			    help, "chooser", DLG_CENTER);
-    
-    c->dialog->lines = lines;
-    c->dialog->cols  = cols;
-    
-    button_lines = flags & CHOOSE_EDITABLE ? 3 : 0;
-    
-    c->listbox = listbox_new (1, 1, cols-2, lines-button_lines,
-			   listbox_finish, 0, "listbox");
-    
-    if (button_lines){
-	add_widget (c->dialog, button_new (lines-button_lines+1,
-				20, B_ENTER, DEFPUSH_BUTTON, _("&Remove"),
-				remove_callback, c, "button-remove"));
-	add_widget (c->dialog, button_new (lines-button_lines+1,
-				    4, B_CANCEL, NORMAL_BUTTON, _("&Cancel"),
-				    0, 0, "button-cancel"));
-    }		    
-    add_widget (c->dialog, c->listbox);
-    return c;
-}
-
-int run_chooser (Chooser *c)
-{
-    run_dlg (c->dialog);
-    return c->dialog->ret_value;
-}
-
-void destroy_chooser (Chooser *c)
-{
-    destroy_dlg (c->dialog);
-}
-
-/* }}} */
-
 /* {{{ Quick dialog routines */
 
 static int quick_callback (struct Dlg_head *h, int id, int Msg)
