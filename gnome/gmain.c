@@ -139,7 +139,7 @@ dialog_key_pressed (GtkWidget *win, GdkEventKey *event, Dlg_head *h)
 	if (w && GNOME_IS_ICON_LIST (w)){
 		GnomeCanvas *c = GNOME_CANVAS (w);
 
-		if (GNOME_IS_ICON_TEXT_ITEM (c->focused_item)){
+		if (c->focused_item && GNOME_IS_ICON_TEXT_ITEM (c->focused_item)){
 			GnomeIconTextItem *i = GNOME_ICON_TEXT_ITEM (c->focused_item);
 
 			if (i->editing)
