@@ -1,3 +1,7 @@
+Sun May 31 13:22:09 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* Makefile.in: use @LIBVFS@ when referring to libvfs-mc.a
+
 Thu May 14 02:03:57 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* Makefile.in (EXTRALIBS): add @LINTL@

@@ -70,10 +70,10 @@ mx:	@LIBVFS@ $(OBJS) @LIBSLANG@ @LIBEDIT_A@ gui.tcl
 gui.tcl: $(GUIS)
 	for i in $(GUIS); do cat $(srcdir)/$$i; done > gui.tcl
 
-libvfs.a:
-	cd ../vfs; $(MAKE) libvfs.a
-@PCENTRULE@	-$(RMF) libvfs.a
-@PCENTRULE@	$(LN_S) ../vfs/libvfs.a .
+@LIBVFS@:
+	cd ../vfs; $(MAKE) @LIBVFS@
+@PCENTRULE@	-$(RMF) @LIBVFS@
+@PCENTRULE@	$(LN_S) ../vfs/@LIBVFS@ .
 
 libmcslang.a:
 	cd ../slang; $(MAKE) libmcslang.a
@@ -112,7 +112,7 @@ TAGS: $(TKSRCS)
 	etags $(TKSRCS)
 
 clean:
-	$(RMF) @tkmc@ *.o core a.out mx libvfs.a libedit.a libmcslang.a
+	$(RMF) @tkmc@ *.o core a.out mx @LIBVFS@ libedit.a libmcslang.a
 
 realclean: clean
 	$(RMF) .depend
