@@ -5967,7 +5967,7 @@ msgstr " Выйти все-таки? "
 #: src/subshell.c:785
 #, c-format
 msgid "Warning: Couldn't change to %s.\n"
-msgstr "Внимание: Невозможно изменить в %s. \n"
+msgstr "Внимание: Невозможно перейти в %s. \n"
 
 #: src/tree.c:192
 #, c-format
@@ -6804,7 +6804,7 @@ msgstr "ftpfs: запись файла %d (%d)"
 
 #. This is place of next pointer
 #: vfs/ftpfs.c:1683
-msgid "File Tranfer Protocol (ftp)"
+msgid "File Transfer Protocol (ftp)"
 msgstr ""
 
 #: vfs/ftpfs.c:1796
@@ -6856,7 +6856,7 @@ msgstr " Неверный пароль "
 #: vfs/mcfs.c:235
 #, c-format
 msgid " Can't locate hostname: %s "
-msgstr " Невозможно определить имя хоста: %s"
+msgstr " Невозможно определить имя машины: %s"
 
 #: vfs/mcfs.c:253
 #, c-format
