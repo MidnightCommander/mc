@@ -25,23 +25,6 @@ the need to embed this logic into configure.in.
 # endif
 #endif
 
-#ifdef __os2__
-#    define OS2_NT 1
-#    define S_ISFIFO(x) 0
-
-#    define NEEDS_IO_H
-#    define NEEDS_DRIVE_H
-#    define NEEDS_FCNTL_H
-#    define HAS_NO_GRP_PWD_H
-#    define HAS_NO_TERMIOS_H
-#    define HAS_NO_SYS_PARAM_H
-#    define HAS_NO_SYS_IOCTL_H
-
-#    define USE_O_TEXT
-#    define HAS_ACS_AS_PCCHARS
-#    define NEEDS_CR_LF_TRANSLATION
-#endif
-
 #ifdef _OS_NT
 #    define OS2_NT 1
 #endif
