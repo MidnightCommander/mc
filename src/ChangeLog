@@ -1,3 +1,8 @@
+Wed Sep 23 14:06:44 1998  Pavel Machek <pavel@atrey.karlin.mff.cuni.cz>
+
+	* src/file.c: Made file.c use new O_LINEAR mode (so copying from
+ 	ftp works nicely, again)
+
 Fri Sep 18 14:15:43 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* src/mad.c: All messages are sent to stderr and terminate with \r\n

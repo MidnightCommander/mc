@@ -528,10 +528,12 @@ file_eta_show ()
     if (!showing_eta)
 	return;
     
-    eta_hours = eta_secs / (60 * 60);
-    eta_mins  = (eta_secs - (eta_hours * 60 * 60)) / 60;
-    eta_s     = eta_secs - ((eta_hours * 60 * 60) + eta_mins * 60 );
-    sprintf (eta_buffer, "ETA %d:%02d.%02d", eta_hours, eta_mins, eta_s);
+    if (eta_secs > 0.5) {
+        eta_hours = eta_secs / (60 * 60);
+	eta_mins  = (eta_secs - (eta_hours * 60 * 60)) / 60;
+	eta_s     = eta_secs - ((eta_hours * 60 * 60) + eta_mins * 60 );
+	sprintf (eta_buffer, "ETA %d:%02d.%02d", eta_hours, eta_mins, eta_s);
+    } else *eta_buffer = 0;
     label_set_text (eta_label, eta_buffer);
 }
 
@@ -543,13 +545,13 @@ file_bps_show ()
     if (!showing_bps)
 	return;
 
-    if (bps > 1024){
-	    if (bps > 1024*1024){
-		    sprintf (bps_buffer, "%.2f MBS", bps / (1024*1024.0));
-	    } else
-		    sprintf (bps_buffer, "%.2f KBS", bps / 1024.0);
-    } else 
-	    sprintf (bps_buffer, "%ld BPS", bps);
+    if (bps > 1024*1024){
+        sprintf (bps_buffer, "%.2f MB/s", bps / (1024*1024.0));
+    } else if (bps > 1024){
+        sprintf (bps_buffer, "%.2f KB/s", bps / 1024.0);
+    } else if (bps > 1){
+        sprintf (bps_buffer, "%ld B/s", bps);
+    } else *bps_buffer = 0;
     label_set_text (bps_label, bps_buffer);
 }
 
@@ -889,19 +891,16 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
 #endif
     char *buf = 0;
     int  buf_size = 8*1024;
-    int  dest_desc = 0;
-    int  source_desc;
-    int  n_read;
-    int  n_written;
+    int  src_desc, dest_desc = 0;
+    int  n_read, n_written;
     int  src_mode;		/* The mode of the source file */
     struct stat sb, sb2;
     struct utimbuf utb;
-    int  dst_exists = 0;
-    long n_read_total = 0;
-    long file_size;
+    int  dst_exists = 0, appending = 0;
+    long n_read_total = 0, file_size;
     int  return_status, temp_status;
-    int do_remote_copy = 0;
-    int appending = 0;
+    struct timeval tv_transfer_start;
+
     /* bitmask used to remember which resourses we should release on return 
        A single goto label is much easier to handle than a bunch of gotos ;-). */ 
     unsigned resources = 0; 
@@ -1014,8 +1013,11 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
     if (!do_append && !vfs_file_is_local (src_path) && vfs_file_is_local (dst_path)){
 	mc_setctl (src_path, MCCTL_SETREMOTECOPY, dst_path);
     }
+
+    gettimeofday (&tv_transfer_start, (struct timezone *) NULL);
+
  retry_src_open:
-    if ((source_desc = mc_open (src_path, O_RDONLY)) < 0){
+    if ((src_desc = mc_open (src_path, O_RDONLY | O_LINEAR)) < 0){
 	return_status = file_error
 	    (_(" Cannot open source file \"%s\" \n %s "), src_path);
 	if (return_status == FILE_RETRY)
@@ -1025,32 +1027,15 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
     }
 
     resources |= 1;
-    do_remote_copy = mc_ctl (source_desc, MCCTL_ISREMOTECOPY, 0);
     
-    if (!do_remote_copy) {
  retry_src_fstat:
-        if (mc_fstat (source_desc, &sb)){
-	    return_status = file_error
-	        (_(" Cannot fstat source file \"%s\" \n %s "), src_path);
-	    if (return_status == FILE_RETRY)
-	        goto retry_src_fstat;
-	    do_append = 0;
-            goto ret;
-        }
-#if 0	
-    /* Im not sure if we can delete this. sb is already filled by 
-    (*xstat)() - Norbert. */
-    } else {
- retry_src_rstat:
-        if (mc_stat (src_path, &sb)){
-	    return_status = file_error
-	        (_(" Cannot stat source file \"%s\" \n %s "), src_path);
-	    if (return_status == FILE_RETRY)
-	        goto retry_src_rstat;
-	    do_append = 0;
-            goto ret;
-        }
-#endif    
+    if (mc_fstat (src_desc, &sb)){
+        return_status = file_error
+	    (_(" Cannot fstat source file \"%s\" \n %s "), src_path);
+	if (return_status == FILE_RETRY)
+	    goto retry_src_fstat;
+	do_append = 0;
+	goto ret;
     }
     src_mode = sb.st_mode;
 #ifndef OS2_NT
@@ -1064,115 +1049,71 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
     /* Create the new regular file with small permissions initially,
        do not create a security hole.  */
 
-    if (!do_remote_copy) {
  retry_dst_open:
-        if ((do_append && 
-            (dest_desc = mc_open (dst_path, O_WRONLY | O_APPEND)) < 0) ||
-            (!do_append &&
-            (dest_desc = mc_open (dst_path, O_WRONLY | O_CREAT | O_TRUNC, 0600)) < 0)) {
-	    return_status = file_error
-	        (_(" Cannot create target file \"%s\" \n %s "), dst_path);
-	    if (return_status == FILE_RETRY)
-	        goto retry_dst_open;
-	    do_append = 0;
-	    goto ret;
-        }
-	resources |= 2; /* dst_path exists/dst_path opened */
-	resources |= 4; /* remove short file */
+    if ((do_append && 
+	 (dest_desc = mc_open (dst_path, O_WRONLY | O_APPEND)) < 0) ||
+	(!do_append &&
+	 (dest_desc = mc_open (dst_path, O_WRONLY | O_CREAT | O_TRUNC, 0600)) < 0)) {
+        return_status = file_error
+	    (_(" Cannot create target file \"%s\" \n %s "), dst_path);
+	if (return_status == FILE_RETRY)
+	    goto retry_dst_open;
+	do_append = 0;
+	goto ret;
     }
+    resources |= 2; /* dst_path exists/dst_path opened */
+    resources |= 4; /* remove short file */
+
     appending = do_append;
     do_append = 0;
 
-    if (!do_remote_copy) {
  retry_dst_fstat:
-        /* Find out the optimal buffer size.  */
-        if (mc_fstat (dest_desc, &sb)){
-	    return_status = file_error
-	        (_(" Cannot fstat target file \"%s\" \n %s "), dst_path);
-	    if (return_status == FILE_RETRY)
-	        goto retry_dst_fstat;
-	    goto ret;
-        }
-        buf_size = 8*1024;
-
-        buf = (char *) xmalloc (buf_size, "copy_file_file");
+    /* Find out the optimal buffer size.  */
+    if (mc_fstat (dest_desc, &sb)){
+        return_status = file_error
+	    (_(" Cannot fstat target file \"%s\" \n %s "), dst_path);
+	if (return_status == FILE_RETRY)
+	    goto retry_dst_fstat;
+	goto ret;
     }
+    buf_size = 8*1024;
 
+    buf = (char *) xmalloc (buf_size, "copy_file_file");
+
+
+    eta_secs = 0.0;
+    bps = 0;
     return_status = show_file_progress (0, file_size);
     mc_refresh ();
     if (return_status != FILE_CONT)
 	goto ret;
 
-    if (!do_remote_copy){
-        for (;;){
-    retry_src_read:
-	    n_read = mc_read (source_desc, buf, buf_size);
-	    if (n_read < 0){
-	        return_status = file_error
-		    (_(" Cannot read source file \"%s\" \n %s "), src_path);
-	        if (return_status == FILE_RETRY)
-		    goto retry_src_read;
-	        goto ret;
-	    }
-	    if (n_read == 0)
-	        break;
-
-	    n_read_total += n_read;
-
-    retry_dst_write:
-	    n_written = mc_write (dest_desc, buf, n_read);
-	    if (n_written < n_read){
-	        return_status = file_error
-		    (_(" Cannot write target file \"%s\" \n %s "), dst_path);
-	        if (return_status == FILE_RETRY)
-		    goto retry_dst_write;
-	        goto ret;
-	    }
-	    return_status = show_file_progress (n_read_total, file_size);
-	    mc_refresh ();
-	    if (return_status != FILE_CONT)
-	        goto ret;
-        }
-    } else {
-	struct timeval tv_current;
-	struct timeval tv_transfer_start;
-	struct timeval tv_last_update;
-	struct timeval tv_last_input;
+    {
+	struct timeval tv_current, tv_last_update, tv_last_input;
         int    i, size, secs, update_secs;
 	long   dt;
 	char   *stalled_msg;
-	
-	gettimeofday (&tv_transfer_start, (struct timezone *) NULL);
+
 	tv_last_update = tv_transfer_start;
-	eta_secs = 0.0;
-	
-        for (i = 1; i;) {
-            switch (size = mc_ctl (source_desc, MCCTL_REMOTECOPYCHUNK, 8192)) {
-                case MCERR_TARGETOPEN:
-		    message_1s (1, MSG_ERROR, _(" Can't open target file "));
+      
+        for (;;){
+ /* src_read */
+	    if (mc_ctl (src_desc, MCCTL_IS_NOTREADY, 0))
+	        n_read = -1;
+	    else
+	        while ((n_read = mc_read (src_desc, buf, buf_size))<0){
+		    return_status = file_error(_(" Cannot read source file \"%s\" \n %s "), src_path);
+		    if (return_status == FILE_RETRY)
+		        continue;
 		    goto ret;
-                case MCERR_READ:
-		    goto ret;
-                case MCERR_WRITE:
-		    message_1s (1, MSG_ERROR, _(" Can't write to local target file "));
-		    goto ret;
-	        case MCERR_DATA_ON_STDIN:
-		    break;
-                case MCERR_FINISH:
-                    resources |= 8;  
-                    i = 0;
-                    break;
-            }
+		}
+	    if (n_read == 0)
+	        break;
 
-            /* the first time we reach this line the target file has been created 
-	       or truncated and we actually have a short target file.
-	       Do we really want to delete the target file when the ftp transfer
-	       fails? If we don't delete it we would be able to use reget later.
-               (Norbert) */
-	    resources |= 4; /* remove short file */
+	    gettimeofday (&tv_current, NULL);
 
-	    if (i && size != MCERR_DATA_ON_STDIN){
-		n_read_total += size;
+	    if (n_read>0) {
+	        n_read_total += n_read;
 
 		/* Windows NT ftp servers report that files have no
 		 * permissions: -------, so if we happen to have actually
@@ -1183,11 +1124,20 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
 		       |(S_IXOTH|S_IWOTH|S_IROTH)  /* other */
 		       |(S_IXGRP|S_IWGRP|S_IRGRP)))) /* group */
 		    src_mode = S_IRUSR|S_IWUSR|S_IROTH|S_IRGRP;
-		
 		gettimeofday (&tv_last_input, NULL);
+
+ /* dst_write */
+		while ((n_written = mc_write (dest_desc, buf, n_read)) < n_read){
+		    if (n_written>0) {
+		        n_read -= n_written;
+			continue;
+		    }
+		    return_status = file_error(_(" Cannot write target file \"%s\" \n %s "), dst_path);
+		    if (return_status == FILE_RETRY)
+		        continue;
+		    goto ret;
+		}
 	    }
-	    /* Timed operations: */
-	    gettimeofday (&tv_current, NULL);
 
 	    /* 1. Update rotating dash after some time (hardcoded to 2 seconds) */
 	    secs = (tv_current.tv_sec - tv_last_update.tv_sec);
@@ -1204,7 +1154,7 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
 	    }
 
 	    /* 3. Compute ETA */
-	    if (secs > 2 || eta_secs == 0.0){
+	    if (secs > 2){
 		dt = (tv_current.tv_sec - tv_transfer_start.tv_sec);
 		
 		if (n_read_total){
@@ -1230,6 +1180,7 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
 	        goto ret;
         }
     }
+   
     resources &= ~4; /* copy successful, don't remove target file */
 
 ret:
@@ -1237,7 +1188,7 @@ ret:
 	free (buf);
 	
  retry_src_close:
-    if ((resources & 1) && mc_close (source_desc) < 0){
+    if ((resources & 1) && mc_close (src_desc) < 0){
 	temp_status = file_error
 	    (_(" Cannot close source file \"%s\" \n %s "), src_path);
 	if (temp_status == FILE_RETRY)
@@ -1258,9 +1209,6 @@ ret:
     if (resources & 4) {
         /* Remove short file */
 	mc_unlink (dst_path);
-	if (do_remote_copy) {
-    	    mc_ctl (source_desc, MCCTL_FINISHREMOTE, -1);
-	}
     } else if (resources & (2|8)) {
         /* no short file and destination file exists */
 #ifndef OS2_NT 
@@ -2410,7 +2358,7 @@ panel_operate (void *source_panel, int operation, char *thedefault)
 #endif
     /* Initialize things */
     /* We turn on ETA display if the source is an ftp file system */
-    create_op_win (operation, vfs_file_is_ftp (panel->cwd));
+    create_op_win (operation, 1);
     ftpfs_hint_reread (0);
     
     /* Now, let's do the job */
