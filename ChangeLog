@@ -1,3 +1,7 @@
+2003-03-07  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Add --with-glib-static option.
+
 2003-03-06  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/spec.syntax: Add BuildArch.

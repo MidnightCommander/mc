@@ -89,6 +89,11 @@ incomplete, use `configure --help' to get the full list):
      flag for testing or if you want to use the binary on systems that
      don't have glib 2.0.x installed.
 
+`--with-glib-static'
+     Force linking against glib statically.  This option is intended for
+     building binaries for distribution purposes and may not work on
+     some operating systems.
+
 `--with-mmap', `--without-mmap'
      Force using or not using the mmap function.  It is currently used
      in the internal viewer.  `--with-mmap' may be useful on some

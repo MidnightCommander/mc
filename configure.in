@@ -28,6 +28,9 @@ dnl
 AC_ARG_WITH(glib12, 
 	[  --with-glib12            Force using glib 1.2.x [[no]]])
 
+AC_ARG_WITH([glib_static],
+	    [  --with-glib-static       Link glib statically [[no]]])
+
 glib_found=no
 if test "x$with_glib12" != "xyes"; then
 	PKG_CHECK_MODULES(GLIB, [glib-2.0], [glib_found=yes], [:])
@@ -56,8 +59,10 @@ GNU Midnight Commander requires glib 1.2.6 or above.])])
 	GMODULE_LIBS="$GLIB_LIBS"
 	GLIB_CFLAGS="$save_GLIB_CFLAGS"
 	GLIB_LIBS="$save_GLIB_LIBS"
+	GLIB_LIBDIR="`$GLIB_CONFIG --exec-prefix`/lib"
 else
 	PKG_CHECK_MODULES(GMODULE, [gmodule-2.0], [gmodule_found=yes])
+	GLIB_LIBDIR="`$PKG_CONFIG --variable=libdir glib-2.0`"
 fi
 
 if test "x$gmodule_found" = "xyes" ; then
@@ -253,6 +258,40 @@ else
 	      [Define to enable getting events from X Window System])
     textmode_x11_support="yes"
 fi
+
+dnl
+dnl Try to find static libraries for glib and gmodule.
+dnl
+if test x$with_glib_static = xyes; then
+    new_GLIB_LIBS=
+    for i in $GLIB_LIBS; do
+	case x$i in
+	x-lglib*)
+	    lib=glib ;;
+	x-lgmodule*)
+	    lib=gmodule ;;
+	*)
+	    lib=
+	    add="$i" ;;
+	esac
+
+	if test -n "$lib"; then
+	    lib1=`echo $i | sed 's/^-l//'`
+	    if test -f "$GLIB_LIBDIR/lib${lib1}.a"; then
+		add="$GLIB_LIBDIR/lib${lib1}.a"
+	    else
+		if test -f "$GLIB_LIBDIR/lib${lib}.a"; then
+		    add="$GLIB_LIBDIR/lib${lib}.a"
+		else
+		    AC_MSG_ERROR([Cannot find static $lib])
+		fi
+	    fi
+	fi
+	new_GLIB_LIBS="$new_GLIB_LIBS $add"
+    done
+    GLIB_LIBS="$new_GLIB_LIBS"
+fi
+
 
 dnl
 dnl Network related functions
