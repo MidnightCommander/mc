@@ -166,7 +166,7 @@ vfs_s_entry *vfs_s_find_entry_linear (vfs *me, vfs_s_inode *root, char *path,
 vfs_s_inode *vfs_s_find_inode        (vfs *me, vfs_s_inode *root, char *path,
 				      int follow, int flags);
 vfs_s_inode *vfs_s_find_root         (vfs *me, vfs_s_entry *entry);
-vfs_s_entry *vfs_s_resolve_symlink   (vfs *me,  vfs_s_entry *entry,
+vfs_s_entry *vfs_s_resolve_symlink   (vfs *me,  vfs_s_entry *entry, char *path,
 				      int follow);
 
 /* superblock games */

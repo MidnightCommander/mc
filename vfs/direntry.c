@@ -212,10 +212,15 @@ vfs_s_entry *vfs_s_find_entry_tree(vfs *me, vfs_s_inode *root, char *path, int f
     unsigned int pseg;
     vfs_s_entry* ent = NULL;
     int found;
+    char *p;
+    p = strdup (path);
 
     while(1) {
 	for(pseg = 0; path[pseg] == DIR_SEP_CHAR; pseg++);
-	if(!path[pseg]) return ent;
+	if(!path[pseg]) {
+	    free (p);
+	    return ent;
+	}
 	path += pseg;
 
 	for(pseg = 0; path[pseg] && path[pseg] != DIR_SEP_CHAR; pseg++);
@@ -230,7 +235,10 @@ vfs_s_entry *vfs_s_find_entry_tree(vfs *me, vfs_s_inode *root, char *path, int f
 	    ent = vfs_s_automake(me, root, path, flags);
 	if (!ent) ERRNOR (ENOENT, NULL);
 	path += pseg;
-	if (!vfs_s_resolve_symlink(me, ent, follow)) return NULL;
+	if (!vfs_s_resolve_symlink(me, ent, p, follow)) {
+	    free (p);
+	    return NULL;
+	}
 	root = ent->ino;
     }
 }
@@ -316,15 +324,8 @@ vfs_s_inode *vfs_s_find_inode(vfs *me, vfs_s_inode *root, char *path, int follow
     return ent->ino;
 }
 
-vfs_s_inode *vfs_s_find_root(vfs *me, vfs_s_entry *entry)
+vfs_s_entry *vfs_s_resolve_symlink (vfs *me, vfs_s_entry *entry, char *path, int follow)
 {
-    vfs_die("Implement me");
-    return NULL;
-}
-
-vfs_s_entry *vfs_s_resolve_symlink (vfs *me, vfs_s_entry *entry, int follow)
-{
-    vfs_s_inode *dir;
     if (follow == LINK_NO_FOLLOW)
 	return entry;
     if (follow == 0)
@@ -334,12 +335,24 @@ vfs_s_entry *vfs_s_resolve_symlink (vfs *me, vfs_s_entry *entry, int follow)
     if (!S_ISLNK(entry->ino->st.st_mode))
 	return entry;
 
-    /* We have to handle "/" by ourself; "." and ".." have
-       corresponding entries, so there's no problem with them.
-       FIXME: no longer true */
-    if (*entry->ino->linkname == '/') dir = vfs_s_find_root(me, entry); 
-    else dir = entry->dir;
-    return (MEDATA->find_entry) (me, dir, entry->ino->linkname, follow-1, 0);
+    if (*entry->ino->linkname != '/')
+	return (MEDATA->find_entry) (me, entry->dir, entry->ino->linkname, follow - 1, 0);
+    else {
+/* convert the linkname to relative linkname with some leading ../ */
+	char linkname[MC_MAXPATHLEN] = "", *p, *q;
+	for (p = path, q = entry->ino->linkname + 1; *p == *q; p++, q++);
+	while (*(--q) != '/');
+	q++;
+	for (;; p++) {
+	    p = strchr (p, '/');
+	    if (!p) {
+		strcat (linkname, q);
+		break;
+	    }
+	    strcat (linkname, "../");
+	}
+	return (MEDATA->find_entry) (me, entry->dir, linkname, follow - 1, 0);
+    }
 }
 
 /* Ook, these were functions around direcory entries / inodes */
