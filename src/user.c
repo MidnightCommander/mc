@@ -17,9 +17,8 @@
 
 #include <config.h>
 #include <stdio.h>
-#ifdef __os2__
+#ifdef OS2_NT
 #    include <io.h>
-#    include <sys/stat.h>
 #endif
 #include "tty.h"
 #include <stdlib.h>	/* For free() */

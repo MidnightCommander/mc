@@ -52,7 +52,6 @@ enum {
 #    define A_NORMAL    0x00
 #endif
 
-#define ACS_MAP(x) '*'
 #define COLOR_PAIR(x) x
 #define ERR -1
 #define TRUE 1
