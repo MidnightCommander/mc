@@ -1805,8 +1805,6 @@ click_proxy_property_notify (GtkWidget *widget, GdkEventProperty *event, gpointe
 
 	setup_desktop_click_proxy_window ();
 
-	printf ("Property changed on the root window and I have a new proxy\n");
-
 	return TRUE;
 }
 
