@@ -1,5 +1,8 @@
 2002-01-21  Pavel Roskin  <proski@gnu.org>
 
+	* global.h [!HAVE_SYS_TIME_H]: Provide a replacement for struct
+	timeval.
+
 	* findme.c: Respect HAVE_UNISTD_H.
 	* popt.c: Likewise.
 

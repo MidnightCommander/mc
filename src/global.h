@@ -31,6 +31,13 @@
 #  endif
 #endif
 
+#ifndef HAVE_SYS_TIME_H
+struct timeval {
+    long int tv_sec;  /* seconds */
+    long int tv_usec; /* microseconds */
+};
+#endif /* !HAVE_SYS_TIME_H */
+
 #ifdef HAVE_UTIME_H
 #  include <utime.h>
 #elif defined(HAVE_SYS_UTIME_H)
