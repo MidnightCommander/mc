@@ -168,11 +168,11 @@ vfs_strip_suffix_from_filename (char *filename)
         if (vfs->which){
 	    if ((*vfs->which) (vfs, semi + 1) == -1)
 		continue;
-	    *semi = NULL; /* Found valid suffix */
+	    *semi = '\0'; /* Found valid suffix */
 	    return p;
 	}
 	if (!strncmp (semi + 1, vfs->prefix, strlen (vfs->prefix))) {
-	    *semi = NULL; /* Found valid suffix */
+	    *semi = '\0'; /* Found valid suffix */
 	    return p;
         }
     }

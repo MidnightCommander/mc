@@ -1,3 +1,14 @@
+Sun Jan 31 19:49:00 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* hotlist.c (add_new_entry_input, add_new_group_input): Make the
+	quick_widget arrays static and various changes needed because they
+	are now static. add_widgets_i18n recalculates button positions 
+	which get lost when the quick_widget arrays are non static.
+
+	* screen.c (to_buffer): nul terminate string when using strncpy
+
+	* setup.c: Save and restore new option ftpfs_first_cd_then_ls.
+
 1999-01-31  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* file.c (panel_operate_generate_prompt): Removed the cmd_buf

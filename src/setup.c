@@ -61,6 +61,7 @@ extern int use_netrc;
 extern int ftpfs_retry_seconds;
 extern int ftpfs_use_passive_connections;
 extern int ftpfs_use_unix_list_options;
+extern int ftpfs_first_cd_then_ls;
 #endif
 
 /* "$Id$" */
@@ -223,6 +224,7 @@ static struct {
     { "ftpfs_always_use_proxy", &ftpfs_always_use_proxy },
     { "ftpfs_use_passive_connections", &ftpfs_use_passive_connections },
     { "ftpfs_use_unix_list_options", &ftpfs_use_unix_list_options },
+    { "ftpfs_first_cd_then_ls", &ftpfs_first_cd_then_ls },
 #endif
 #endif
 #ifdef USE_INTERNAL_EDIT

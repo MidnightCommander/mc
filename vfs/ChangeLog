@@ -1,3 +1,45 @@
+Sun Jan 31 20:04:13 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* vfs.c (vfs_strip_suffix_from_filename): Whoever replaces every 
+	occurance of 0 with NULL should stop this stupidy. And replacing
+	'\0' with NULL is plan wrong!!. Reverted this replacement.
+
+	* ftpfs.c (load_no_proxy_list): ditto
+
+Sun Jan 31 19:57:24 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* ftpfs.c (insert_dot): New function. Insert a "." into the linked
+	list. Stat'ing the root directory of a ftpfs fails if the dot is
+	missing.
+
+	(retrieve_dir): insert "." into the linked list if the ftp server
+	haven't send it.
+
+Sun Jan 31 19:50:24 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+	
+	* The following changes make ftpfs work with a remote AmiTCP
+	server are the result of somehow longish EMail debugging session. I 
+	don't know any public server of this kind but I was told the
+	combination Unix/Amiga boxes are often used in intranets. 
+
+	* ftpfs.c (translate_path): New function. Translate a Unix path, 
+	i.e. MC's internal path representation (e.g. /somedir/somefile) to 
+	a path valid for the remote server. Every path transfered to the
+	remote server has to be mangled by this function right prior to
+	sending it. Currently only Amiga ftp servers are handled in a
+	special manner.
+
+	* ftpfs.c (various places): use translate_path
+
+	* ftpfs.c (login_server): Assume we have to mangle pathnames if
+	the greatings string from the server contains the word Amiga. If
+	this assumption is wrong I have to find another way to turn on
+	path translation.
+	
+	* ftpfs.c (ftpfs_get_current_directory): Prepend a leading slash
+	if it is missing. MC needs it as seperator between hostname and
+	path in its internal url representation.
+
 1999-01-26  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* vfs.c (vfs_parse_ls_lga): attempt to correctly work against

@@ -1,3 +1,22 @@
+Fri Jan 29 22:55:56 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* slang/slang.h: renamed to slang-mc.h
+
+	* slang/Makefile.in: delete slang.h on "make clean"
+
+	* configure.in: link slang/slang-mc.h to slang/slang.h when the 
+	included slang is used. Problem was that MC's slang.h was used
+	when we compiled with an already installed SLang and the systems
+	header file were included with <slang/slang.h>.
+	Unfortunatly I can't use AC_LINK_FILES to make the links because
+	if we needn't make any links AC_LINK_FILES makes a link from 
+	srcdir to top_builddir (builddir != srcdir).
+
+	Temporary add $LGPM to $LIBS when checking for the resizeterm
+	and keyok functions (ncurses might be linked against GPM).
+
+	Substitude PACKAGE (intl/Makefile makes use of it)
+
 Wed Jan 27 03:34:44 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* gtkedit/edit.h: including of <malloc.h> and <stdlib.h> swaped by

@@ -106,6 +106,9 @@ int ftpfs_use_passive_connections = 1;
  */
 int ftpfs_use_unix_list_options = 1;
 
+/* First "CWD <path>", then "LIST -la ." */
+int ftpfs_first_cd_then_ls;
+
 /* Use the ~/.netrc */
 int use_netrc = 1;
 
@@ -151,6 +154,56 @@ static int      get_line                    (int sock, char *buf, int buf_len,
 					     char term);
 static char    *get_path                    (struct connection **bucket,
 					     char *path);
+
+/* char *translate_path (struct ftpfs_connection *bucket, char *remote_path)
+   Translate a Unix path, i.e. MC's internal path representation (e.g. 
+   /somedir/somefile) to a path valid for the remote server. Every path 
+   transfered to the remote server has to be mangled by this function 
+   right prior to sending it.
+   Currently only Amiga ftp servers are handled in a special manner.
+   
+   When the remote server is an amiga:
+   a) strip leading slash if necesarry
+   b) replace first occurance of ":/" with ":"
+   c) strip trailing "/."
+ */
+
+static char *
+translate_path (struct connection *bucket, char *remote_path)
+{
+    char *p;
+    static char buf[255]; /* No one ever needs more ;-).
+                             Actually I consider this static a bug 
+                             -- Norbert */
+    
+    if (!bucket->remote_is_amiga || strlen (remote_path) >= sizeof (buf) - 1)
+	return remote_path;
+    else {
+	if (logfile) {
+	    fprintf (logfile, "MC -- translate_path: %s\n", remote_path);
+	    fflush (logfile);
+	}
+
+        if (*remote_path == '/' && remote_path[1] == '\0')
+	    return "."; /* Don't change "/" into "", e.g. "CWD " would be
+                           invalid. */
+
+	/* strip leading slash */
+	if (*remote_path == '/')
+	    strcpy (buf, remote_path + 1);
+	else
+	    strcpy (buf, remote_path);
+
+	/* replace first occurance of ":/" with ":" */
+	if ((p = strchr (buf, ':')) && *(p + 1) == '/')
+	    strcpy (p + 1, p + 2);
+
+	/* strip trailing "/." */
+	if ((p = strrchr (buf, '/')) && *(p + 1) == '.' && *(p + 2) == '\0')
+	    *p = '\0';
+	return buf;
+    }
+}
 
 /* Extract the hostname and username from the path */
 
@@ -307,6 +360,7 @@ login_server (struct connection *bucket, char *netrcpass)
     char *op;
     char *name;			/* login user name */
     int  anon = 0;
+    char reply_string[255];
 
     bucket->isbinary = TYPE_UNKNOWN;    
     if (netrcpass)
@@ -369,7 +423,13 @@ login_server (struct connection *bucket, char *netrcpass)
     } else 
 	name = g_strdup (quser (bucket));
     
-    if (get_reply (qsock (bucket), NULL, 0) == COMPLETE) {
+    if (get_reply (qsock(bucket), reply_string, sizeof (reply_string) - 1) == COMPLETE) {
+	g_strup (reply_string);
+	bucket->remote_is_amiga = strstr (reply_string, "AMIGA") != 0;
+	if (logfile) {
+	    fprintf (logfile, "MC -- remote_is_amiga =  %d\n", bucket->remote_is_amiga);
+	    fflush (logfile);
+	}
 #if defined(HSC_PROXY)
 	if (qproxy (bucket)){
 	    print_vfs_message ("ftpfs: sending proxy login name");
@@ -496,7 +556,7 @@ load_no_proxy_list ()
 	    if (p == s)
 		continue;
 
-	    *p = NULL;
+	    *p = '\0';
 	    
 	    np = g_new (struct no_proxy_entry, 1);
 	    np->domain = g_strdup (s);
@@ -689,6 +749,7 @@ open_command_connection (char *host, char *user, int port, char *netrcpass)
     bucket->use_source_route = source_route;
     bucket->strict_rfc959_list_cmd = !ftpfs_use_unix_list_options;
     bucket->isbinary = TYPE_UNKNOWN;
+    bucket->remote_is_amiga = 0;
 
     /* We do not want to use the passive if we are using proxies */
     if (bucket->use_proxy)
@@ -843,8 +904,18 @@ ftpfs_get_current_directory (struct connection *bucket)
 		            *bufq++ = '/';
 		            *bufq = 0;
 		        }
-		        return g_strdup (bufp);
-		    } else ERRNOR (EIO, NULL);
+			if (*bufp == '/')
+			    return g_strdup (bufp);
+			else {
+			    /* If the remote server is an Amiga a leading slash
+			       might be missing. MC needs it because it is used
+			       as seperator between hostname and path internally. */
+			    return g_strconcat( "/", bufp, 0);
+			}
+		    } else {
+			my_errno = EIO;
+			return NULL;
+		    }
 		}
 	    }
     }
@@ -963,7 +1034,8 @@ open_data_connection (struct connection *bucket, char *cmd, char *remote,
 	    return -1;
     }
     if (remote)
-        j = command (bucket, WAIT_REPLY, "%s %s", cmd, remote);
+        j = command (bucket, WAIT_REPLY, "%s %s", cmd, 
+		translate_path (bucket, remote));
     else
     	j = command (bucket, WAIT_REPLY, "%s", cmd);
     if (j != PRELIM)
@@ -1170,6 +1242,36 @@ get_path (struct connection **bucket, char *path)
     return s_get_path (bucket, path, "/#ftp:");
 }
 
+/* Inserts an entry for "." into the linked list. Ignore any errors
+   because "." isn't important (as fas as you don't try to save a
+   file in the root dir of the ftp server).
+   Actually the dot is needed when stating the root directory, e.g.
+   mc_stat ("/ftp#localhost", &buf). Down the call tree _get_file_entry
+   gets called with filename = "/" which will be transformed into "."
+   before searching for a fileentry. Whithout "." in the linked list
+   this search fails.  -- Norbert. */
+static void
+insert_dot (struct linklist *file_list, struct connection *bucket)
+{
+    struct direntry *fe;
+    static char buffer[] = "drwxrwxrwx   1 0        0            1024 Jan  1  1970 .";
+
+    fe = malloc(sizeof(struct direntry));
+    if (fe == NULL)
+	return;
+    if (vfs_parse_ls_lga (buffer, &fe->s, &fe->name, &fe->linkname)) {
+	fe->freshly_created = 0;
+	fe->count = 1;
+	fe->local_filename = fe->remote_filename = NULL;
+	fe->l_stat = NULL;
+	fe->bucket = bucket;
+	(fe->s).st_ino = bucket->__inode_counter++;
+
+	if (!linklist_insert(file_list, fe))
+	    free(fe);
+    } else
+	free (fe);
+}
 
 static struct dir *
 retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
@@ -1183,6 +1285,7 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
     char buffer[8192];
     struct dir *dcache;
     int got_intr = 0;
+    int dot_found = 0;
     int has_spaces = (strchr (remote_path, ' ') != NULL);
 
     canonicalize_pathname (remote_path);
@@ -1214,12 +1317,16 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
         print_vfs_message("ftpfs: Reading FTP directory %s... (don't use UNIX ls options)", remote_path);
     else
         print_vfs_message("ftpfs: Reading FTP directory %s...", remote_path);
-    if (has_spaces || bucket->strict_rfc959_list_cmd) 
-        if (ftpfs_chdir_internal (bucket, remote_path) != COMPLETE) {
+    if (has_spaces || bucket->strict_rfc959_list_cmd || ftpfs_first_cd_then_ls) {
+        char *p;
+    
+        p = translate_path (bucket, remote_path);
+        if (ftpfs_chdir_internal (bucket, p) != COMPLETE) {
             my_errno = ENOENT;
 	    print_vfs_message("ftpfs: CWD failed.");
 	    return NULL;
         }
+    }
 
     file_list = linklist_init();
     if (file_list == NULL)
@@ -1240,11 +1347,16 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
 
     if (bucket->strict_rfc959_list_cmd == 1) 
         sock = open_data_connection (bucket, "LIST", 0, TYPE_ASCII, 0);
-    else if (has_spaces)
+    else if (has_spaces || ftpfs_first_cd_then_ls)
         sock = open_data_connection (bucket, "LIST -la", ".", TYPE_ASCII, 0);
     else {
-	char *path = g_strconcat (remote_path, PATH_SEP_STR, ".", NULL);
-	sock = open_data_connection (bucket, "LIST -la", path, TYPE_ASCII, 0);
+	/* Trailing "/." is necessary if remote_path is a symlink
+           but don't generate "//." */
+	char *path = g_strconcat (remote_path, 
+			remote_path[1] == '\0' ? "" : PATH_SEP_STR, 
+			".", (char *) 0);
+
+        sock = open_data_connection (bucket, "LIST -la", path, TYPE_ASCII, 0);
 	g_free (path);
     }
 
@@ -1291,6 +1403,8 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
 	    goto error_1;
 	}
         if (vfs_parse_ls_lga (buffer, &fe->s, &fe->name, &fe->linkname)) {
+	    if (strcmp (fe->name, ".") == 0)
+		dot_found = 1;
 	    fe->count = 1;
 	    fe->local_filename = fe->remote_filename = NULL;
 	    fe->l_stat = NULL;
@@ -1324,8 +1438,13 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
     }
     close_this_sock(fp, sock);
     disable_interrupt_key();
-    if ( (get_reply (qsock (bucket), NULL, 0) != COMPLETE) || (file_list->next == file_list))
+    if ((get_reply (qsock (bucket), NULL, 0) != COMPLETE) || 
+        (file_list->next == file_list))
         goto fallback;
+
+    if (!dot_found)
+	insert_dot (file_list, bucket);
+
     if (!linklist_insert(qdcache(bucket), dcache)) {
 	my_errno = ENOMEM;
         goto error_3;
@@ -1522,14 +1641,15 @@ int ftpfs_ctl (void *data, int ctlop, int arg)
 static int
 send_ftp_command(char *filename, char *cmd, int flags)
 {
-    char *remote_path;
+    char *remote_path, *p;
     struct connection *bucket;
     int r;
     int flush_directory_cache = (flags & OPT_FLUSH) && (normal_flush > 0);
 
     if (!(remote_path = get_path(&bucket, filename)))
 	return -1;
-    r = command (bucket, WAIT_REPLY, cmd, remote_path);
+    p = translate_path (bucket, remote_path);
+    r = command (bucket, WAIT_REPLY, cmd, p);
     g_free(remote_path);
     vfs_add_noncurrent_stamps (&vfs_ftpfs_ops, (vfsid) bucket, NULL);
     if (flags & OPT_IGNORE_ERROR)
@@ -1614,11 +1734,14 @@ static int
 ftpfs_chdir_internal (struct connection *bucket ,char *remote_path)
 {
     int r;
+    char *p;
     
     if (!bucket->cwd_defered && is_same_dir (remote_path, bucket))
 	return COMPLETE;
 
-    r = command (bucket, WAIT_REPLY, "CWD %s", remote_path);
+    p = translate_path (bucket, remote_path);
+    r = command (bucket, WAIT_REPLY, "CWD %s", p);
+
     if (r != COMPLETE) {
 	my_errno = EIO;
     } else {

@@ -55,6 +55,7 @@ struct connection {
     int result_pending;
     int use_source_route;
     int use_passive_connection;
+    int remote_is_amiga;       /* No leading slash allowed for AmiTCP (Amiga) */
     int isbinary;
     int cwd_defered;  /* current_directory was changed but CWD command hasn't
                          been sent yet */

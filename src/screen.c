@@ -477,6 +477,7 @@ to_buffer (char *dest, int just_mode, int len, char *txt)
 	    *dest++ = ' ';
 	strncpy (dest, txt, len);
 	dest += txtlen;
+	*dest = 0;
     }
     return dest;
 }

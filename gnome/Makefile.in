@@ -284,7 +284,7 @@ install_mx: all
 	$(mcsrcdir)/xmkdir $(DESTDIR)$(datadir)/mime-info
 	$(INSTALL_DATA) mc.keys $(DESTDIR)$(datadir)/mime-info
 	$(mcsrcdir)/xmkdir $(DESTDIR)$(corbadir)
-	$(INSTALL_DATA) gmc.gnorba $(DESTDIR)$(corbadir)
+	$(INSTALL_DATA) $(srcdir)/gmc.gnorba $(DESTDIR)$(corbadir)
 
 uninstall: 
 	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)gmc

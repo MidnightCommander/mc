@@ -9,6 +9,7 @@ VERSION=4.5.9
 AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
 AC_DEFINE_UNQUOTED(VERSION, "$VERSION")
 AC_SUBST(VERSION)
+AC_SUBST(PACKAGE)
 
 dnl This is path where we're looking for headers in addition to /usr/include
 dnl and whatever cpp defaults to.
@@ -819,12 +820,16 @@ AC_DEFUN(AC_WITH_SLANG,
 	    LSLANG="-lslang"
 	    screen_manager="SLang (using system-installed library)"
 	    AC_MSG_RESULT(Using system installed SLang library)
+	    rm slang/slang.h
 	else
 	    MCCPPFLAGS="$MCCPPFLAGS -I\$(slangdir)"
     	    LIBSLANG="libmcslang.a"
 	    screen_manager="SLang"
 	    LSLANG="-lmcslang"
+	    CPPFLAGS="$CPPFLAGS -I../slang"
 	    fastdepslang=fastdepslang
+	    rm slang/slang.h
+	    ln -s ../$srcdir/slang/slang-mc.h slang/slang.h
 	fi
 	if $slang_check_lib
 	then
@@ -1071,7 +1076,14 @@ changequote([,])dnl
 	esac
     fi
 fi
+
+dnl Ncurses may be linked against libgpm. Change LIBS temporary for
+dnl check for resizeterm and keyok.
+dnl
+SAVED_LIBS="$LIBS"
+LIBS="$LIBS $LGPM"
 AC_CHECK_FUNCS(resizeterm keyok)
+LIBS="$SAVED_LIBS"
 
 if test "x$screen_manager" = "xunknown"; then
     AC_WITH_SLANG
