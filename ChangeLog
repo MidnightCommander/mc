@@ -3,7 +3,7 @@
 	* syntax/Syntax: Known Delphi/Kylix source file extensions
 	supported (*.dpr, *.inc).
 	* syntax/pascal.syntax: Many new (Delphi/Kylix) keywords added.
-	Special highlighting of CVS macros.  Understands single-line
+	Special highlighting for CVS keywords.  Understands single-line
 	comments (//).
 
 2002-01-24  Alexander Shopov  <al_shopov@web.bg>
