@@ -1267,7 +1267,7 @@ All lines starting with # or empty lines are thrown away.
 .PP
 Lines starting in the first column should have following format:
 .PP
-.I keyword/descNL,
+.IR keyword/desc ,
 i.e. everything after
 .I keyword/
 until new line is
@@ -1295,7 +1295,7 @@ keyword can be:
 .PP
 Other lines should start with a space or tab and should be of the format:
 .PP
-.I keyword=commandNL
+.I keyword=command
 (with no spaces around =), where
 .I keyword
 should be:

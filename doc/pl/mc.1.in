@@ -1077,7 +1077,7 @@ Wszystkie linie zaczynaj±ce siê od #, lub puste, nie s± brane pod uwagê.
 .PP
 Linie zaczynaj±ce siê od pierwszej kolumny powinny mieæ nastêpuj±cy format:
 .PP
-.IR "s³owo kluczowe/wzorzecNL" ,
+.IR "s³owo kluczowe/wzorzec" ,
 tj. wszystko po
 .I s³owie kluczowym/
 dopóki now± lini± nie jest
@@ -1106,7 +1106,7 @@ s³owami kluczowymi mog± byæ:
 Inne linie powinny zaczynaæ siê od spacji lub tabulacji i powinny
 mieæ one nastêpuj±cy format:
 .PP
-.I s³owo kluczowe=komendaNL
+.I s³owo kluczowe=komenda
 (bez spacji przy znaku =), gdzie
 .I s³owem kluczowym
 powinno byæ:

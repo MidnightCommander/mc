@@ -1352,7 +1352,7 @@ tekinthetõ.
 A sorok az elsõ rovatban látható formátumnak megfelelõen
 kezdõdnek:
 .PP
-.I kulcsszó/descNL,
+.IR kulcsszó/desc ,
 pl. akármi a
 .I kulcsszó/
 után úgy, hogy a sor vége karakter elõtt a
@@ -1383,7 +1383,7 @@ függetlenül)
 A többi sor kezdõdhet szóközzel, vagy tabulátorral,
 a formátumuk pedig a következõ:
 .PP
-.I keyword=commandNL
+.I keyword=command
 (szóközt nem szabad az egyenlõségjel mellé
 írni), ahol a
 .I kulcsszó

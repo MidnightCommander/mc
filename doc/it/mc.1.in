@@ -1300,7 +1300,7 @@ Tutte le righe che iniziano per # vengono ignorate.
 .PP
 Le righe che cominciano dalla prima colonna devono avere il seguente formato:
 .PP
-.I parolachiave/descrizioneNL,
+.IR parolachiave/descrizione ,
 i.e. qualsiasi cosa dopo
 .I parolachiave/
 fino al fine riga è 
@@ -1328,7 +1328,7 @@ cioè corrisponde a tutti i file *descrizione. Esempio: .tar corrisponde a *.tar)
 .PP
 Le altre linee devono cominciare con uno spazio o una tabulazione e devono essere nel formato:
 .PP
-.I parolachiave=comandoNL
+.I parolachiave=comando
 (senza spazi intorno a =), dove
 .I parolachiave
 deve essere: 
