@@ -384,7 +384,7 @@ GnomeUIInfo gnome_panel_commands_menu [] = {
 	GNOMEUIINFO_ITEM_NONE(N_("_Run Command in panel..."),N_("Run a command and put the results in a panel"), gnome_external_panelize),
 
 #ifdef USE_VFS					  
-	GNOMEUIINFO_ITEM_NONE(N_("_Active VFS list..."),N_("List of active virtual file systems"), reselect_vfs),
+/*	GNOMEUIINFO_ITEM_NONE(N_("_Active VFS list..."),N_("List of active virtual file systems"), reselect_vfs), */
 #endif
 #ifdef USE_EXT2FSLIB
 	/*does this do anything?*/
