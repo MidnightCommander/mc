@@ -1,9 +1,6 @@
 Before 4.6.1
 ============
 
-Add an argument to regexp_match() to force POSIX regex instead of
-changing easy_patterns in ext.c.
-
 Cannot spell check unsaved files in the editor.
 
 Dynamic loading for libgpm, libext2fs.
@@ -92,8 +89,7 @@ Search in the viewer should have an option for case sensitive search.
 Make "Find File" dialog more responsive.  Keep state in a structure and
 preserve it when the search is suspended.
 
-Lock files in the editor to prevent opening them more than once.  Warn
-user when opening locked file.
+Locks for compressed files are not removed.
 
 Use KDGKBENT ioctl on Linux console to find the mapping for shifted
 functional keys.  Two mappings are widely used (Shift-F1 = F11 and
