@@ -69,12 +69,6 @@ extern int finish_program;
 /* Whether the gmc server was present or not */
 int corba_have_server = FALSE;
 
-/* This is only used by the editor, so we provide a dummy implementation */
-void
-try_alloc_color_pair (char *str, char *str2)
-{
-}
-
 void
 init_pair (int index, GdkColor *fore, GdkColor *back)
 {

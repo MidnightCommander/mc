@@ -1,3 +1,7 @@
+2001-06-14  Pavel Roskin  <proski@gnu.org>
+
+	* gmain.c (try_alloc_color_pair): Remove.
+
 2001-06-11  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* gmain.c (x_set_dialog_title): title constified.
