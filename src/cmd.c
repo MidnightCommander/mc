@@ -1442,13 +1442,23 @@ configure_panel_listing (WPanel *p, int view_type, int use_msformat, char *user,
 void
 info_cmd_no_menu (void)
 {
-    set_display_type (cpanel == left_panel ? 1 : 0, view_info);
+    if (get_display_type (0) == view_info)
+	set_display_type (0, view_listing);
+    else if (get_display_type (1) == view_info)
+	set_display_type (1, view_listing);
+    else
+	set_display_type (cpanel == left_panel ? 1 : 0, view_info);
 }
 
 void
 quick_cmd_no_menu (void)
 {
-    set_display_type (cpanel == left_panel ? 1 : 0, view_quick);
+    if (get_display_type (0) == view_quick)
+	set_display_type (0, view_listing);
+    else if (get_display_type (1) == view_quick)
+	set_display_type (1, view_listing);
+    else
+	set_display_type (cpanel == left_panel ? 1 : 0, view_quick);
 }
 
 void
