@@ -476,6 +476,7 @@ context default
     keyword ) brightcyan
     keyword , brightcyan
     keyword ; brightcyan
+    keyword . white
 
 # MySQL comment
 context linestart # \n brown
@@ -490,3 +491,7 @@ context exclusive /\* \*/ brown
 
 context ' ' green
 context " " green
+
+# Beckticks are used to escape reserved words in MySQL
+context ` ` cyan
+    keyword . white
