@@ -80,7 +80,6 @@ typedef struct key_def {
 static key_def *keys = 0;
 
 static int input_fd;
-static fd_set select_set;
 static int disabled_channels = 0; /* Disable channels checking */
 static int xgetch_second (void);
 
@@ -674,18 +673,19 @@ extern int max_dirt_limit;
 /* Also takes care of generated mouse events */
 /* Returns EV_MOUSE if it is a mouse event */
 /* Returns EV_NONE  if non-blocking or interrupt set and nothing was done */
-int get_event (Gpm_Event *event, int redo_event, int block)
+int
+get_event (Gpm_Event * event, int redo_event, int block)
 {
     int c;
-    static int flag;			/* Return value from select */
+    static int flag;		/* Return value from select */
 #ifdef HAVE_LIBGPM
-    static Gpm_Event ev;		/* Mouse event */
+    static Gpm_Event ev;	/* Mouse event */
 #endif
     struct timeval timeout;
     struct timeval *time_addr = NULL;
     static int dirty = 3;
 
-    if ((dirty == 3) || is_idle ()){
+    if ((dirty == 3) || is_idle ()) {
 	mc_refresh ();
 	doupdate ();
 	dirty = 1;
@@ -693,12 +693,12 @@ int get_event (Gpm_Event *event, int redo_event, int block)
 	dirty++;
 
     vfs_timeout_handler ();
-    
+
     /* Ok, we use (event->x < 0) to signal that the event does not contain
        a suitable position for the mouse, so we can't use show_mouse_pointer
        on it.
-    */
-    if (event->x > 0){
+     */
+    if (event->x > 0) {
 	show_mouse_pointer (event->x, event->y);
 	if (!redo_event)
 	    event->x = -1;
@@ -706,102 +706,102 @@ int get_event (Gpm_Event *event, int redo_event, int block)
 
     /* Repeat if using mouse */
     while (mouse_enabled && !pending_keys) {
-	if (mouse_enabled) {
-	    int maxfdp;
-	    FD_ZERO (&select_set);
-	    FD_SET  (input_fd, &select_set);
-	    maxfdp = max (add_selects (&select_set), input_fd);
+	int maxfdp;
+	fd_set select_set;
+
+	FD_ZERO (&select_set);
+	FD_SET (input_fd, &select_set);
+	maxfdp = max (add_selects (&select_set), input_fd);
 
 #ifdef HAVE_LIBGPM
-	    if (gpm_fd == -1) {
-		/* Connection to gpm broken, possibly gpm has died */
-		mouse_enabled = 0;
-		use_mouse_p = MOUSE_NONE;
-	    }
-	    if (mouse_enabled && use_mouse_p == MOUSE_GPM) {
-		FD_SET (gpm_fd, &select_set);
-		maxfdp = max (maxfdp, gpm_fd);
-	    }
+	if (gpm_fd == -1) {
+	    /* Connection to gpm broken, possibly gpm has died */
+	    mouse_enabled = 0;
+	    use_mouse_p = MOUSE_NONE;
+	    break;
+	}
+	if (use_mouse_p == MOUSE_GPM) {
+	    FD_SET (gpm_fd, &select_set);
+	    maxfdp = max (maxfdp, gpm_fd);
+	}
 #endif
 
-	    if (redo_event){
-	        timeout.tv_usec = mou_auto_repeat * 1000;
-		timeout.tv_sec = 0;
+	if (redo_event) {
+	    timeout.tv_usec = mou_auto_repeat * 1000;
+	    timeout.tv_sec = 0;
 
-		time_addr = &timeout;
-	    } else {
-		int seconds;
-		
-		if ((seconds = vfs_timeouts ())){
-		    /* the timeout could be improved and actually be
-		     * the number of seconds until the next vfs entry
-		     * timeouts in the stamp list.
-		     */
+	    time_addr = &timeout;
+	} else {
+	    int seconds;
 
-		    timeout.tv_sec = seconds;
-		    timeout.tv_usec = 0;
-		    time_addr = &timeout;
-		} else
-		    time_addr = NULL;
-	    }
+	    if ((seconds = vfs_timeouts ())) {
+		/* the timeout could be improved and actually be
+		 * the number of seconds until the next vfs entry
+		 * timeouts in the stamp list.
+		 */
 
-	    if (!block){
-		time_addr = &timeout;
-		timeout.tv_sec = 0;
+		timeout.tv_sec = seconds;
 		timeout.tv_usec = 0;
-	    }
-	    enable_interrupt_key ();
-	    flag = select (maxfdp + 1, &select_set, NULL, NULL, time_addr);
-	    disable_interrupt_key ();
-	    
-	    /* select timed out: it could be for any of the following reasons:
-	     * redo_event -> it was because of the MOU_REPEAT handler
-	     * !block     -> we did not block in the select call
-	     * else       -> 10 second timeout to check the vfs status.
-	     */
-	    if (flag == 0){
-		if (redo_event)
-		    return EV_MOUSE;
-		if (!block)
-		    return EV_NONE;
-		vfs_timeout_handler ();
-	    }
-	    if (flag == -1 && errno == EINTR)
-		return EV_NONE;
-
-	    check_selects (&select_set);
-	    
-	    if (FD_ISSET (input_fd, &select_set))
-	        break;
+		time_addr = &timeout;
+	    } else
+		time_addr = NULL;
 	}
+
+	if (!block) {
+	    time_addr = &timeout;
+	    timeout.tv_sec = 0;
+	    timeout.tv_usec = 0;
+	}
+	enable_interrupt_key ();
+	flag = select (maxfdp + 1, &select_set, NULL, NULL, time_addr);
+	disable_interrupt_key ();
+
+	/* select timed out: it could be for any of the following reasons:
+	 * redo_event -> it was because of the MOU_REPEAT handler
+	 * !block     -> we did not block in the select call
+	 * else       -> 10 second timeout to check the vfs status.
+	 */
+	if (flag == 0) {
+	    if (redo_event)
+		return EV_MOUSE;
+	    if (!block)
+		return EV_NONE;
+	    vfs_timeout_handler ();
+	}
+	if (flag == -1 && errno == EINTR)
+	    return EV_NONE;
+
+	check_selects (&select_set);
+
+	if (FD_ISSET (input_fd, &select_set))
+	    break;
 #ifdef HAVE_LIBGPM
-	if (mouse_enabled && use_mouse_p == MOUSE_GPM
-			  && FD_ISSET (gpm_fd, &select_set)) {
+	if (use_mouse_p == MOUSE_GPM && FD_ISSET (gpm_fd, &select_set)) {
 	    Gpm_GetEvent (&ev);
 	    Gpm_FitEvent (&ev);
 	    *event = ev;
 	    return EV_MOUSE;
 	}
-#endif /* !HAVE_LIBGPM */
+#endif				/* !HAVE_LIBGPM */
     }
 #ifndef HAVE_SLANG
-    flag = is_wintouched(stdscr);
+    flag = is_wintouched (stdscr);
     untouchwin (stdscr);
-#endif /* !HAVE_SLANG */
-    c = block ? getch_with_delay () : get_key_code(1);
+#endif				/* !HAVE_SLANG */
+    c = block ? getch_with_delay () : get_key_code (1);
 
 #ifndef HAVE_SLANG
     if (flag)
-        touchwin (stdscr);
-#endif /* !HAVE_SLANG */
-    
+	touchwin (stdscr);
+#endif				/* !HAVE_SLANG */
+
     if (c == MCKEY_MOUSE
 #ifdef KEY_MOUSE
-			 || c == KEY_MOUSE
-#endif /* KEY_MOUSE */
-					  ) {
+	|| c == KEY_MOUSE
+#endif				/* KEY_MOUSE */
+	) {
 	/* Mouse event */
-        xmouse_get_event (event);
+	xmouse_get_event (event);
 	if (event->type)
 	    return EV_MOUSE;
 	else
