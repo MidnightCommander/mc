@@ -1684,7 +1684,7 @@ init_xterm_support (void)
 #endif
 
      /* -1 means invalid capability, shouldn't happen, but let's make it 0 */
-    if ((int) xmouse_seq == -1) {
+    if ((long) xmouse_seq == -1) {
 	xmouse_seq = NULL;
     }
 

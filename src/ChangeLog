@@ -1,3 +1,9 @@
+2002-02-20  Pavel Roskin  <proski@gnu.org>
+
+	* background.c (background_attention): Cast pointer to long
+	instead of int because it's unsafe of 64-bit systems.
+	* main.c (init_xterm_support): Likewise.
+
 2002-02-18  Pavel Roskin  <proski@gnu.org>
 
 	* utilunix.c (canonicalize_pathname) [__QNX__]: Fix detection

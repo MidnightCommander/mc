@@ -285,7 +285,7 @@ background_attention (int fd, void *closure)
     }
 
     /* If the routine is zero, then the child is telling us that he is dying */
-    if ((int) routine == MSG_CHILD_EXITING){
+    if ((long) routine == MSG_CHILD_EXITING){
 	unregister_task_running (ctx->pid, fd);
 	waitpid (ctx->pid, &status, 0);
 	return 0;
