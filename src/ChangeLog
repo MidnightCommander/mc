@@ -1,3 +1,9 @@
+2003-11-26  Pavel Roskin  <proski@gnu.org>
+
+	* dialog.c (dlg_replace_widget): Use dlg_select_widget().
+	(select_a_widget): Rename to select_other_widget(), factorize
+	most code from dlg_one_up() and dlg_one_down().
+
 2003-11-24  Pavel Roskin  <proski@gnu.org>
 
 	* complete.c (check_is_cd): Simplify logic, use isspace().

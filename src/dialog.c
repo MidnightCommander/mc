@@ -346,19 +346,6 @@ dlg_unfocus (Dlg_head *h)
     return 0;
 }
 
-static void
-select_a_widget (Dlg_head *h, int down)
-{
-    if (!h->current)
-	return;
-
-    do {
-	if (down)
-	    h->current = h->current->next;
-	else
-	    h->current = h->current->prev;
-    } while (!dlg_focus (h));
-}
 
 /* Return true if the windows overlap */
 int dlg_overlap (Widget *a, Widget *b)
@@ -369,6 +356,52 @@ int dlg_overlap (Widget *a, Widget *b)
 	|| (a->y >= b->y + b->lines))
 	return 0;
     return 1;
+}
+
+
+/*
+ * Try to select another widget.  If forward is set, follow tab order.
+ * Otherwise go to the previous widget.
+ */
+static void
+select_other_widget (Dlg_head *h, int forward)
+{
+    Widget *old;
+
+    old = h->current;
+    if (!old)
+	return;
+
+    if (!dlg_unfocus (h))
+	return;
+
+    do {
+	if (forward)
+	    h->current = h->current->next;
+	else
+	    h->current = h->current->prev;
+    } while (!dlg_focus (h));
+
+    if (dlg_overlap (old, h->current)) {
+	send_message (h->current, WIDGET_DRAW, 0);
+	send_message (h->current, WIDGET_FOCUS, 0);
+    }
+}
+
+
+/* Try to select previous widget in the tab order */
+void
+dlg_one_up (Dlg_head *h)
+{
+    select_other_widget (h, 0);
+}
+
+
+/* Try to select next widget in the tab order */
+void
+dlg_one_down (Dlg_head *h)
+{
+    select_other_widget (h, 1);
 }
 
 
@@ -417,44 +450,6 @@ dlg_select_by_id (Dlg_head *h, int id)
 
     if (w_found)
 	dlg_select_widget(h, w_found);
-}
-
-void dlg_one_up (Dlg_head *h)
-{
-    Widget *old;
-
-    old = h->current;
-
-    if (!old)
-        return;
-
-    /* If it accepts unFOCUSion */
-    if (!dlg_unfocus(h))
-	return;
-
-    select_a_widget (h, 0);
-    if (dlg_overlap (old, h->current)){
-	send_message (h->current, WIDGET_DRAW, 0);
-	send_message (h->current, WIDGET_FOCUS, 0);
-    }
-}
-
-void dlg_one_down (Dlg_head *h)
-{
-    Widget *old;
-
-    old = h->current;
-    if (!old)
-        return;
-
-    if (!dlg_unfocus (h))
-	return;
-
-    select_a_widget (h, 1);
-    if (dlg_overlap (old, h->current)){
-	send_message (h->current, WIDGET_DRAW, 0);
-	send_message (h->current, WIDGET_FOCUS, 0);
-    }
 }
 
 int dlg_select_widget (Dlg_head *h, void *w)
@@ -859,11 +854,8 @@ dlg_replace_widget (Dlg_head *h, Widget *old_w, Widget *new_w)
     send_message (old_w, WIDGET_DESTROY, 0);
     send_message (new_w, WIDGET_INIT, 0);
 
-    if (should_focus) {
-	if (!dlg_focus (h)) {
-	    select_a_widget (h, 1);
-	}
-    }
+    if (should_focus)
+	dlg_select_widget (h, new_w);
 
     send_message (new_w, WIDGET_DRAW, 0);
 }
