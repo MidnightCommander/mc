@@ -166,6 +166,12 @@ typedef struct {
     int timer_id;
     int drag_motion_x;
     int drag_motion_y;
+
+    /* The highlighted row in the tree for drag and drop */
+    int drag_tree_row;
+    int drag_tree_timeout_id;
+    file_entry *drag_tree_fe;
+
     void *panel_listbox;	/* container for the list */
     int is_a_desktop_panel;
 #endif

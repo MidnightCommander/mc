@@ -997,6 +997,7 @@ panel_new (char *panel_name)
     panel->status_format    = 0;    
     panel->format_modified  = 1;
 #ifdef HAVE_GNOME
+    panel->drag_tree_row = -1;
     panel->is_a_desktop_panel = FALSE;
     panel->id = panel_id++;
 #endif

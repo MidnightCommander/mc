@@ -1,3 +1,11 @@
+1999-04-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* panel.h (WPanel): Added a drag_tree_row field to the WPanel
+	structure.  This is used to keep track of the highlighted row in
+	the tree for drag and drop.  Also, added drag_tree_timeout_id to
+	hold the node expand timeout.  Also, added drag_tree_fe to hold
+	the file_entry for the currently highlighted row in the tree.
+
 1999-04-13  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* utilunix.c (my_system): Set up default signal handlers for childs.

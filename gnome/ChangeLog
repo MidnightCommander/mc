@@ -1,4 +1,20 @@
-1999-04-15    <jrb@redhat.com>
+1999-04-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gscreen.c (panel_setup_drag_scroll): Made it not return
+	anything, since scrolling is independent from any other
+	prelighting actions.
+	(panel_tree_drag_begin): Do not print debugging message.
+	(panel_drag_data_get): Assert that we were requested a valid data
+	type.
+	(panel_create_tree_view): Only specify GTK_DEST_DEFAULT_DROP for
+	the tree, since we want to present the correct feedback when the
+	user is hovering over the blank area in the tree.
+	(panel_build_selected_file_list): Made it return char *.
+	(panel_tree_drag_end): Free dtree->drag_dir, not dtree->current_path.
+	(tree_drag_open_directory): Use panel->drag_tree_node instead of
+	the coordinates hack.
+
+1999-04-15  Jonathan Blandford  <jrb@redhat.com>
 
 	* gaction.c (gmc_unable_to_execute_dlg): really ugly hack to set label.
 	(gmc_unable_to_execute_dlg): oops. forgot this.

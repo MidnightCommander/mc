@@ -46,6 +46,11 @@ int tree_panel_visible = -1;
 #include "link.xpm"
 #include "dev.xpm"
 
+/* Timeout for auto-scroll on drag */
+#define SCROLL_TIMEOUT 100
+
+/* Timeout for opening a tree branch on drag */
+#define TREE_OPEN_TIMEOUT 1000
 
 /* This is used to initialize our pixmaps */
 static int pixmaps_ready;
@@ -577,7 +582,12 @@ panel_create_pixmaps (void)
 typedef gboolean (*desirable_fn)(WPanel *p, int x, int y);
 typedef gboolean (*scroll_fn)(gpointer data);
 
-static gboolean
+/* Sets up a timer to scroll a panel component when something is being dragged
+ * over it.  The `desirable' function should return whether it is desirable to
+ * scroll at the specified coordinates; and the `scroll' function should
+ * actually scroll the view.
+ */
+static void
 panel_setup_drag_scroll (WPanel *panel, int x, int y, desirable_fn desirable, scroll_fn scroll)
 {
 	panel_cancel_drag_scroll (panel);
@@ -585,12 +595,8 @@ panel_setup_drag_scroll (WPanel *panel, int x, int y, desirable_fn desirable, sc
 	panel->drag_motion_x = x;
 	panel->drag_motion_y = y;
 
-	if ((* desirable) (panel, x, y)) {
-		panel->timer_id = gtk_timeout_add (60, scroll, panel);
-		return TRUE;
-	}
-
-	return FALSE;
+	if ((* desirable) (panel, x, y))
+		panel->timer_id = gtk_timeout_add (SCROLL_TIMEOUT, scroll, panel);
 }
 
 static void
@@ -635,10 +641,8 @@ panel_file_list_configure (WPanel *panel, GtkWidget *sw, GtkWidget *file_list)
 	}
 }
 
-/*
- * Creates an uri list to be transfered during a drop operation.
- */
-static void *
+/* Creates an URI list to be transferred during a drop operation */
+static char *
 panel_build_selected_file_list (WPanel *panel, int *file_list_len)
 {
 	if (panel->marked){
@@ -653,7 +657,9 @@ panel_build_selected_file_list (WPanel *panel, int *file_list_len)
 		total_len = 0;
 		for (i = 0; i < panel->count; i++)
 			if (panel->dir.list [i].f.marked)
-				total_len += (filelen + cwdlen + panel->dir.list [i].fnamelen + seplen);
+				total_len += (filelen + cwdlen
+					      + panel->dir.list [i].fnamelen
+					      + seplen);
 
 		total_len++;
 		data = copy = g_malloc (total_len+1);
@@ -720,6 +726,9 @@ panel_drag_data_get (GtkWidget        *widget,
 		}
 		gnome_uri_list_free_strings (files);
 		break;
+
+	default:
+		g_assert_not_reached ();
 	}
 
 	g_free (data);
@@ -886,7 +895,6 @@ panel_tree_drag_data_received (GtkWidget          *widget,
 	node = gtk_ctree_node_nth (GTK_CTREE (dtree), row);
 	if (!node)
 		return;
-	gtk_ctree_expand_recursive (GTK_CTREE (dtree), node);
 
 	path = gtk_dtree_get_row_path (dtree, node, 0);
 	fe = file_entry_from_file (path);
@@ -1103,10 +1111,11 @@ panel_clist_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gin
  * Invoked when the dragged object has left our region
  */
 static void
-panel_clist_drag_leave (GtkWidget *widget, GdkDragContext *ctx, guint time, void *data)
+panel_clist_drag_leave (GtkWidget *widget, GdkDragContext *context, guint time, gpointer data)
 {
-	WPanel *panel = data;
+	WPanel *panel;
 
+	panel = data;
 	panel_cancel_drag_scroll (panel);
 }
 
@@ -1216,7 +1225,7 @@ panel_icon_list_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x,
  * Invoked when the dragged object has left our region
  */
 static void
-panel_icon_list_drag_leave (GtkWidget *widget, GdkDragContext *ctx, guint time, void *data)
+panel_icon_list_drag_leave (GtkWidget *widget, GdkDragContext *context, guint time, gpointer data)
 {
 	WPanel *panel = data;
 
@@ -1906,6 +1915,59 @@ panel_tree_scan_end (GtkWidget *widget, gpointer data)
 	set_cursor (data, GDK_TOP_LEFT_ARROW);
 }
 
+/* Callback for the drag_begin signal of the tree */
+static void
+panel_tree_drag_begin (GtkWidget *widget, GdkDragContext *context, gpointer data)
+{
+	GtkDTree *dtree;
+	WPanel *panel;
+
+	dtree = GTK_DTREE (widget);
+	panel = data;
+
+	panel->dragging = TRUE;
+	dtree->drag_dir = g_strdup (dtree->current_path);
+}
+
+/* Callback for the drag_end signal of the tree */
+static void
+panel_tree_drag_end (GtkWidget *widget, GdkDragContext *context, gpointer data)
+{
+	GtkDTree *dtree;
+	WPanel *panel;
+
+	dtree = GTK_DTREE (widget);
+	panel = data;
+
+	panel->dragging = FALSE;
+	g_free (dtree->drag_dir);
+	dtree->drag_dir = NULL;
+}
+
+/* Callback for the drag_data_get signal of the tree */
+static void
+panel_tree_drag_data_get (GtkWidget *widget, GdkDragContext *context,
+			  GtkSelectionData *selection_data, guint info, guint time, gpointer data)
+{
+	GtkDTree *dtree;
+	char *str;
+
+	dtree = GTK_DTREE (widget);
+
+	switch (info){
+	case TARGET_URI_LIST:
+	case TARGET_TEXT_PLAIN:
+		str = g_strconcat ("file:", dtree->drag_dir, NULL);
+		gtk_selection_data_set (selection_data, selection_data->target, 8,
+					str, strlen (str) + 1);
+		break;
+
+	default:
+		/* FIXME: handle TARGET_URL */
+		break;
+	}
+}
+
 /**
  * tree_drag_open_directory:
  *
@@ -1915,67 +1977,26 @@ panel_tree_scan_end (GtkWidget *widget, gpointer data)
 static gint
 tree_drag_open_directory (gpointer data)
 {
-	WPanel *panel = data;
-	GtkDTree *dtree = GTK_DTREE (panel->tree);
+	WPanel *panel;
+	GtkDTree *dtree;
 	GtkCTreeNode *node;
 	int row, col;
-	int r;
+	int on_row;
 
-	r = gtk_clist_get_selection_info (
-		GTK_CLIST (panel->tree),
-		panel->drag_motion_x,
-		panel->drag_motion_y,
-		&row, &col);
+	panel = data;
+	dtree = GTK_DTREE (panel->tree);
 
-	if (!r)
-		return FALSE;
-
-	node = gtk_ctree_node_nth (GTK_CTREE (panel->tree), row);
-	if (!node)
-		return FALSE;
+	node = gtk_ctree_node_nth (GTK_CTREE (panel->tree), panel->drag_tree_row);
+	g_assert (node != NULL);
 
 	if (!GTK_CTREE_ROW (node)->expanded)
 		dtree->auto_expanded_nodes = g_list_append (dtree->auto_expanded_nodes, node);
+
 	gtk_ctree_expand (GTK_CTREE (panel->tree), node);
 
 	return FALSE;
 }
 
-/**
- * panel_tree_scrolling_is_desirable:
- *
- * If the cursor is in a position close to either edge (top or bottom)
- * and there is possible to scroll the window, this routine returns
- * true.
- */
-static gboolean
-panel_tree_scrolling_is_desirable (WPanel *panel, int x, int y)
-{
-	GtkDTree *dtree = GTK_DTREE (panel->tree);
-	GtkAdjustment *va;
-
-	va = scrolled_window_get_vadjustment (panel->tree_scrolled_window);
-
-	if (y < 10){
-		if (va->value > va->lower)
-			return TRUE;
-	} else {
-		if (y > (GTK_WIDGET (dtree)->allocation.height - 10)){
-			if (va->value < va->upper - va->page_size)
-				return TRUE;
-		}
-	}
-
-	return FALSE;
-}
-
-/**
- * panel_tree_scrolling_is_desirable:
- *
- * Give a node of the tree, this panel checks to see if we've
- * auto-expanded any rows that aren't parents of this node,
- * and, if so, collapses them back.
- */
 static void
 panel_tree_check_auto_expand (WPanel *panel, GtkCTreeNode *current)
 {
@@ -2043,10 +2064,34 @@ panel_tree_check_auto_expand (WPanel *panel, GtkCTreeNode *current)
 }
 
 /**
- * panel_tree_scroll:
+ * panel_tree_scrolling_is_desirable:
  *
- * Timer callback invoked to scroll the tree window
+ * If the cursor is in a position close to either edge (top or bottom)
+ * and there is possible to scroll the window, this routine returns
+ * true.
  */
+static gboolean
+panel_tree_scrolling_is_desirable (WPanel *panel, int x, int y)
+{
+	GtkDTree *dtree = GTK_DTREE (panel->tree);
+	GtkAdjustment *va;
+
+	va = scrolled_window_get_vadjustment (panel->tree_scrolled_window);
+
+	if (y < 10) {
+		if (va->value > va->lower)
+			return TRUE;
+	} else {
+		if (y > (GTK_WIDGET (dtree)->allocation.height - 10)){
+			if (va->value < va->upper - va->page_size)
+				return TRUE;
+		}
+	}
+
+	return FALSE;
+}
+
+/* Timer callback to scroll the tree */
 static gboolean
 panel_tree_scroll (gpointer data)
 {
@@ -2073,109 +2118,133 @@ panel_tree_scroll (gpointer data)
 	return TRUE;
 }
 
-/**
- * panel_tree_drag_motion:
- *
- * This routine is invoked by GTK+ when an item is being dragged on
- * top of our widget.  We setup a timed function that will open the
- * Tree node
+/* Callback for the drag_motion signal of the tree.  We set up a timer to
+ * automatically open nodes if the user hovers over them.
  */
 static gboolean
-panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *ctx, int x, int y, guint time, void *data)
+panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *context, int x, int y, guint time,
+			gpointer data)
 {
-	WPanel *panel = data;
-	int r, row, col;
+	GtkDTree *dtree;
+	WPanel *panel;
+	int on_row, row, col;
+	GdkDragAction action;
+	GtkWidget *source_widget;
+	char *row_path;
+	int on_drag_row;
+	char *parent_dir, *p;
 
-	if (panel_setup_drag_scroll (panel, x, y, panel_tree_scrolling_is_desirable, panel_tree_scroll))
-		return TRUE;
+	dtree = GTK_DTREE (widget);
+	panel = data;
 
-	r = gtk_clist_get_selection_info (
-		GTK_CLIST (widget), x, y, &row, &col);
+	panel_setup_drag_scroll (panel, x, y,
+				 panel_tree_scrolling_is_desirable,
+				 panel_tree_scroll);
 
-	if (r) {
-		GtkCTreeNode *current;
-		current = gtk_ctree_node_nth (GTK_CTREE (widget), row);
-		panel_tree_check_auto_expand (panel, current);
-		GTK_DTREE (widget)->internal = TRUE;
-		gtk_clist_select_row (GTK_CLIST (widget), row, 0);
-		GTK_DTREE (widget)->internal = FALSE;
+	on_row = gtk_clist_get_selection_info (GTK_CLIST (widget), x, y, &row, &col);
+
+	/* Remove the auto-expansion timeout if we are on the blank area of the
+	 * tree or on a row different from the previous one.
+	 */
+	if ((!on_row || row != panel->drag_tree_row) && panel->drag_tree_timeout_id != 0) {
+		gtk_timeout_remove (panel->drag_tree_timeout_id);
+		panel->drag_tree_timeout_id = 0;
+
+		if (panel->drag_tree_fe) {
+			file_entry_free (panel->drag_tree_fe);
+			panel->drag_tree_fe = NULL;
+		}
+	}
+
+	action = 0;
+
+	if (on_row) {
+		row_path = gtk_dtree_get_row_path (dtree,
+						   gtk_ctree_node_nth (GTK_CTREE (dtree), row),
+						   0);
+
+		if (row != panel->drag_tree_row) {
+			/* Highlight the row by selecting it */
+#if 0
+			panel_tree_check_auto_expand (GTK_CTREE (widget), row);
+#endif
+			dtree->internal = TRUE;
+			gtk_clist_select_row (GTK_CLIST (widget), row, 0);
+			dtree->internal = FALSE;
+
+			/* Create the file entry to validate drops */
+
+			panel->drag_tree_fe = file_entry_from_file (row_path);
+
+			/* Install the timeout handler for auto-expansion */
+
+			panel->drag_tree_timeout_id = gtk_timeout_add (TREE_OPEN_TIMEOUT,
+								       tree_drag_open_directory,
+								       panel);
+			panel->drag_tree_row = row;
+		}
+
+		/* Compute the parent directory of the file entry */
+
+		parent_dir = g_strdup (row_path);
+		p = strrchr (parent_dir, PATH_SEP);
+		g_assert (p != NULL);
+		p[1] = 0;
+
+		/* Validate the action */
+
+		gdnd_find_panel_by_drag_context (context, &source_widget);
+
+		/* If this tree is the drag source, see if the user is trying to
+		 * drop on the row being dragged.  Otherwise, consider all rows
+		 * as not selected.
+		 */
+		if (source_widget == widget) {
+			g_assert (dtree->drag_dir != NULL);
+			on_drag_row = strcmp (row_path, dtree->drag_dir) == 0;
+		} else
+			on_drag_row = FALSE;
+			
+		action = gdnd_validate_action (context,
+					       FALSE,
+					       source_widget != NULL,
+					       source_widget == widget,
+					       parent_dir,
+					       panel->drag_tree_fe,
+					       on_drag_row);
+
+		g_free (parent_dir);
+		g_free (row_path);
 	} else
-		panel_tree_check_auto_expand (panel, NULL);
-	panel->timer_id = gtk_timeout_add (400, tree_drag_open_directory, data);
+		panel->drag_tree_row = -1;
+
+	gdk_drag_status (context, action, time);
 	return TRUE;
 }
 
-/**
- * panel_tree_drag_leave:
- *
- * Invoked by GTK+ when the dragging cursor has abandoned our widget.
- * We kill any pending timers.
+/* Callback for the drag_leave signal of the tree.  We deactivate the timeout for
+ * automatic branch expansion.
  */
 static void
-panel_tree_drag_leave (GtkWidget *widget, GdkDragContext *ctx, guint time, void *data)
+panel_tree_drag_leave (GtkWidget *widget, GdkDragContext *context, guint time, gpointer data)
 {
-	WPanel *panel = data;
+	WPanel *panel;
 
-	if (panel->timer_id != -1){
-		gtk_timeout_remove (panel->timer_id);
-		panel->timer_id = -1;
+	panel = data;
+
+	panel_cancel_drag_scroll (panel);
+
+	if (panel->drag_tree_timeout_id != 0) {
+		gtk_timeout_remove (panel->drag_tree_timeout_id);
+		panel->drag_tree_timeout_id = 0;
 	}
-	panel_tree_check_auto_expand (panel, NULL);
-}
 
-/**
- * panel_tree_drag_begin:
- *
- * callback invoked when the drag action starts from the Tree
- */
-static void
-panel_tree_drag_begin (GtkWidget *widget, GdkDragContext *context, WPanel *panel)
-{
-	GtkDTree *dtree = GTK_DTREE (widget);
-
-	panel->dragging = 1;
-	dtree->drag_dir = g_strdup (dtree->current_path);
-	printf ("This is the directory being dragged: %s\n", dtree->current_path);
-
-}
-
-/**
- * panel_tree_drag_end:
- *
- * callback invoked when the drag action initiated by the tree finishes.
- */
-static void
-panel_tree_drag_end (GtkWidget *widget, GdkDragContext *context, WPanel *panel)
-{
-	GtkDTree *dtree = GTK_DTREE (widget);
-
-	panel->dragging = 0;
-	g_free (dtree->current_path);
-	dtree->current_path = NULL;
-}
-
-/**
- * panel_tree_drag_data_get:
- *
- * Invoked when the tree is required to provide the dragged data
- */
-static void
-panel_tree_drag_data_get (GtkWidget *widget, GdkDragContext *context,
-			  GtkSelectionData *selection_data, guint info,
-			  guint32 time)
-{
-	GtkDTree *dtree = GTK_DTREE (widget);
-	char *data;
-
-	switch (info){
-	case TARGET_URI_LIST:
-	case TARGET_TEXT_PLAIN:
-		data = g_strconcat ("file:", dtree->drag_dir, NULL);
-		gtk_selection_data_set (
-			selection_data, selection_data->target, 8,
-			data, strlen (data)+1);
-		break;
+	if (panel->drag_tree_fe) {
+		file_entry_free (panel->drag_tree_fe);
+		panel->drag_tree_fe = NULL;
 	}
+
+	panel->drag_tree_row = -1;
 }
 
 /**
@@ -2194,6 +2263,8 @@ panel_create_tree_view (WPanel *panel)
         gtk_ctree_set_expander_style (GTK_CTREE (tree), GTK_CTREE_EXPANDER_SQUARE);
         gtk_ctree_set_indent (GTK_CTREE (tree), 10);
 
+	/* DTree signals */
+
 	gtk_signal_connect (GTK_OBJECT (tree), "directory_changed",
 			    (GtkSignalFunc) panel_chdir, panel);
 	gtk_signal_connect (GTK_OBJECT (tree), "scan_begin",
@@ -2201,17 +2272,13 @@ panel_create_tree_view (WPanel *panel)
 	gtk_signal_connect (GTK_OBJECT (tree), "scan_end",
 			    (GtkSignalFunc) panel_tree_scan_end, panel);
 
-	gtk_drag_dest_set (GTK_WIDGET (tree), GTK_DEST_DEFAULT_ALL,
-			   drop_types, ELEMENTS (drop_types),
-			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
+	/* Set up drag source */
 
-	/*
-	 * Drag and drop signals.
-	 */
+	gtk_drag_source_set (GTK_WIDGET (tree), GDK_BUTTON1_MASK | GDK_BUTTON2_MASK,
+			     drag_types, ELEMENTS (drag_types),
+			     (GDK_ACTION_LINK | GDK_ACTION_MOVE | GDK_ACTION_COPY
+			      | GDK_ACTION_ASK | GDK_ACTION_DEFAULT));
 
-	/* Data has been dropped signal handler */
-	gtk_signal_connect (GTK_OBJECT (tree), "drag_data_received",
-			    GTK_SIGNAL_FUNC (panel_tree_drag_data_received), panel);
 	gtk_signal_connect (GTK_OBJECT (tree), "drag_begin",
 			    GTK_SIGNAL_FUNC (panel_tree_drag_begin), panel);
 	gtk_signal_connect (GTK_OBJECT (tree), "drag_end",
@@ -2219,16 +2286,19 @@ panel_create_tree_view (WPanel *panel)
 	gtk_signal_connect (GTK_OBJECT (tree), "drag_data_get",
 			    GTK_SIGNAL_FUNC (panel_tree_drag_data_get), panel);
 
-	/* Make directories draggable */
-	gtk_drag_source_set (GTK_WIDGET (tree), GDK_BUTTON1_MASK | GDK_BUTTON2_MASK,
-			     drag_types, ELEMENTS (drag_types),
-			     GDK_ACTION_LINK | GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_ASK | GDK_ACTION_DEFAULT);
+	/* Set up drag destination */
 
-	/* Mouse is being moved over ourselves */
+	gtk_drag_dest_set (GTK_WIDGET (tree),
+			   GTK_DEST_DEFAULT_DROP,
+			   drop_types, ELEMENTS (drop_types),
+			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
+
 	gtk_signal_connect (GTK_OBJECT (tree), "drag_motion",
 			    GTK_SIGNAL_FUNC (panel_tree_drag_motion), panel);
 	gtk_signal_connect (GTK_OBJECT (tree), "drag_leave",
 			    GTK_SIGNAL_FUNC (panel_tree_drag_leave), panel);
+	gtk_signal_connect (GTK_OBJECT (tree), "drag_data_received",
+			    GTK_SIGNAL_FUNC (panel_tree_drag_data_received), panel);
 
 	return tree;
 }
