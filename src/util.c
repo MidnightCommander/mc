@@ -65,6 +65,8 @@
 #  include <sys/ioctl.h>
 #endif
 
+#include <glib.h>	/* For funny new functions */
+
 #include "fs.h"
 #include "mountlist.h"
 
@@ -198,6 +200,8 @@ name_quote (const char *s, int quote_percent)
 	    case ')':
 	    case '[':
 	    case ']':
+	    case '{':
+	    case '}':
 	    case '"':
 	    case '!':
 	    case '&':
