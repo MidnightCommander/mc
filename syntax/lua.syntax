@@ -1,0 +1,222 @@
+#
+# LUA Scripting Language syntax highlight
+# // Mike Gorchak <lestat@i.com.ua>
+#
+
+context default lightgray
+
+# keywords
+    keyword whole and white
+    keyword whole break white
+    keyword whole do white
+    keyword whole else white
+    keyword whole elseif white
+    keyword whole end white
+    keyword whole false white
+    keyword whole for white
+    keyword whole function white
+    keyword whole if white
+    keyword whole in white
+    keyword whole local white
+    keyword whole nil white
+    keyword whole not white
+    keyword whole or white
+    keyword whole repeat white
+    keyword whole return white
+    keyword whole then white
+    keyword whole true white
+    keyword whole until white
+    keyword whole while white
+
+# Comments
+    keyword -- brown
+    keyword ]] brown
+
+# Operators
+    keyword ( white
+    keyword ) white
+    keyword { white
+    keyword } white
+    keyword [ white
+    keyword ] white
+    keyword . white
+    keyword , white
+    keyword ; white
+    keyword : white
+    keyword .. white
+    keyword ... white
+    keyword = white
+    keyword == white
+    keyword ~= white
+    keyword <= white
+    keyword => white
+    keyword > white
+    keyword < white
+    keyword \+ white
+    keyword - white
+    keyword \* white
+    keyword / white
+    keyword ^ white
+
+
+# Library Functions
+    # basiclib
+    keyword whole error yellow
+    keyword whole getmetatable yellow
+    keyword whole setmetatable yellow
+    keyword whole getfenv yellow
+    keyword whole setfenv yellow
+    keyword whole next yellow
+    keyword whole ipairs yellow
+    keyword whole pairs yellow
+    keyword whole print yellow
+    keyword whole tonumber yellow
+    keyword whole tostring yellow
+    keyword whole type yellow
+    keyword whole assert yellow
+    keyword whole unpack yellow
+    keyword whole rawequal yellow
+    keyword whole rawget yellow
+    keyword whole rawset yellow
+    keyword whole pcall yellow
+    keyword whole xpcall yellow
+    keyword whole collectgarbage yellow
+    keyword whole gcinfo yellow
+    keyword whole loadfile yellow
+    keyword whole dofile yellow
+    keyword whole loadstring yellow
+    keyword whole require yellow
+    keyword whole coroutine.create yellow
+    keyword whole coroutine.wrap yellow
+    keyword whole coroutine.resume yellow
+    keyword whole coroutine.yield yellow
+    keyword whole coroutine.status yellow
+
+    # stringlib
+    keyword whole string.len yellow
+    keyword whole string.sub yellow
+    keyword whole string.lower yellow
+    keyword whole string.upper yellow
+    keyword whole string.char yellow
+    keyword whole string.rep yellow
+    keyword whole string.byte yellow
+    keyword whole string.format yellow
+    keyword whole string.dump yellow
+    keyword whole string.find yellow
+    keyword whole string.gfind yellow
+    keyword whole string.gsub yellow
+
+    # tablelib
+    keyword whole table.concat yellow
+    keyword whole table.foreach yellow
+    keyword whole table.foreachi yellow
+    keyword whole table.getn yellow
+    keyword whole table.setn yellow
+    keyword whole table.sort yellow
+    keyword whole table.insert yellow
+    keyword whole table.remove yellow
+
+    # mathlib
+    keyword whole math.abs yellow
+    keyword whole math.sin yellow
+    keyword whole math.cos yellow
+    keyword whole math.tan yellow
+    keyword whole math.asin yellow
+    keyword whole math.acos yellow
+    keyword whole math.atan yellow
+    keyword whole math.atan2 yellow
+    keyword whole math.ceil yellow
+    keyword whole math.floor yellow
+    keyword whole math.mod yellow
+    keyword whole math.frexp yellow
+    keyword whole math.ldexp yellow
+    keyword whole math.sqrt yellow
+    keyword whole math.min yellow
+    keyword whole math.max yellow
+    keyword whole math.log yellow
+    keyword whole math.log10 yellow
+    keyword whole math.exp yellow
+    keyword whole math.deg yellow
+    keyword whole math.pow yellow
+    keyword whole math.rad yellow
+    keyword whole math.random yellow
+    keyword whole math.randomseed yellow
+
+    # iolib
+    keyword whole io.input yellow
+    keyword whole io.output yellow
+    keyword whole io.lines yellow
+    keyword whole io.close yellow
+    keyword whole io.flush yellow
+    keyword whole io.open yellow
+    keyword whole io.popen yellow
+    keyword whole io.read yellow
+    keyword whole io.tmpfile yellow
+    keyword whole io.type yellow
+    keyword whole io.write yellow
+    
+    # filelib
+    keyword whole file.flush yellow
+    keyword whole file.read yellow
+    keyword whole file.lines yellow
+    keyword whole file.seek yellow
+    keyword whole file.write yellow
+    keyword whole file.close yellow
+    keyword whole file.__gc yellow
+    keyword whole file.__tostring yellow
+
+    # syslib
+    keyword whole os.clock yellow
+    keyword whole os.date yellow
+    keyword whole os.difftime yellow
+    keyword whole os.execute yellow
+    keyword whole os.exit yellow
+    keyword whole os.getenv yellow
+    keyword whole os.remove yellow
+    keyword whole os.rename yellow
+    keyword whole os.setlocale yellow
+    keyword whole os.time yellow
+    keyword whole os.tmpname yellow
+
+    # debuglib
+    keyword whole debug.getlocal yellow
+    keyword whole debug.getinfo yellow
+    keyword whole debug.gethook yellow
+    keyword whole debug.getupvalue yellow
+    keyword whole debug.sethook yellow
+    keyword whole debug.setlocal yellow
+    keyword whole debug.setupvalue yellow
+    keyword whole debug.debug yellow
+    keyword whole debug.traceback yellow
+
+
+# Global Variables
+    keyword whole _VERSION brightmagenta
+    keyword whole _G brightmagenta
+
+
+# Comments
+context exclusive --[[ ]] brown
+    spellcheck
+
+context exclusive -- \n brown
+    spellcheck
+
+
+# Strings
+context " " brightgreen
+    # can't find good color for the patterns highlight.
+    keyword %a brightgreen
+    keyword %c brightgreen
+    keyword %d brightgreen
+    keyword %l brightgreen
+    keyword %p brightgreen
+    keyword %s brightgreen
+    keyword %u brightgreen
+    keyword %w brightgreen
+    keyword %x brightgreen
+    keyword %z brightgreen
+    spellcheck
+
+context ' ' brightgreen
+    spellcheck

@@ -11,11 +11,13 @@ SYNTAXFILES =			\
 	eiffel.syntax		\
 	fortran.syntax		\
 	html.syntax		\
+	idl.syntax		\
 	java.syntax		\
 	js.syntax		\
 	latex.syntax		\
 	lisp.syntax		\
 	lsm.syntax		\
+	lua.syntax		\
 	m4.syntax		\
 	mail.syntax		\
 	makefile.syntax		\
