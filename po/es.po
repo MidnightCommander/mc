@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.0\n"
-"POT-Creation-Date: 2003-05-06 10:27+0200\n"
-"PO-Revision-Date: 2003-05-06 11:00+0100\n"
+"POT-Creation-Date: 2003-08-11 17:02+0200\n"
+"PO-Revision-Date: 2003-08-11 17:08+0200\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,55 +15,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Report-Msgid-Bugs-To: \n"
 
-#: edit/edit.c:151 edit/edit.c:282 edit/edit.c:290 edit/edit.c:338
-#: edit/edit.c:353 edit/edit.c:364 edit/edit.c:380 edit/edit.c:2693
-#: edit/editcmd.c:265 edit/editcmd.c:273 edit/editcmd.c:1694 src/wtools.c:132
-#: vfs/vfs.c:1832
+#: edit/edit.c:150 edit/edit.c:281 edit/edit.c:289 edit/edit.c:337
+#: edit/edit.c:352 edit/edit.c:363 edit/edit.c:379 edit/edit.c:2703
+#: edit/editcmd.c:272 edit/editcmd.c:280 edit/editcmd.c:1707 src/wtools.c:132
+#: vfs/vfs.c:1840
 msgid "Error"
 msgstr "Error"
 
-#: edit/edit.c:154 edit/edit.c:341
+#: edit/edit.c:153 edit/edit.c:340
 msgid " Cannot open file for reading: "
 msgstr " Imposible abrir el archivo para lectura: "
 
-#: edit/edit.c:284
+#: edit/edit.c:283
 msgid " Error reading from pipe: "
 msgstr " Error al leer en tubería: "
 
-#: edit/edit.c:293
+#: edit/edit.c:292
 msgid " Cannot open pipe for reading: "
 msgstr " Imposible abrir tubería para lectura: "
 
-#: edit/edit.c:356
+#: edit/edit.c:355
 msgid " Cannot get size/permissions info for file: "
 msgstr " Imposible obtener tamaño/permisos del archivo: "
 
-#: edit/edit.c:365
+#: edit/edit.c:364
 msgid " Not an ordinary file: "
 msgstr " No es un archivo normal: "
 
-#: edit/edit.c:381
+#: edit/edit.c:380
 msgid " File is too large: "
 msgstr " El archivo es demasiado grande: "
 
-#: edit/edit.c:2559
-msgid "User menu available only in mcedit invoked from mc"
-msgstr "Menú de usuario sólo disponible en mcedit invocado desde mc"
-
-#: edit/edit.c:2693
+#: edit/edit.c:2703
 msgid "Macro recursion is too deep"
 msgstr "La macro es demasiado recursiva"
 
-#: edit/edit.h:279
+#: edit/edit.h:280
 msgid "&Dismiss"
 msgstr "&Ignorar"
 
-#: edit/edit.h:281 edit/editcmd.c:365 edit/editcmd.c:1203 edit/editcmd.c:1285
-#: edit/editcmd.c:2523 edit/editmenu.c:37 edit/editoptions.c:71
+#: edit/edit.h:282 edit/editcmd.c:372 edit/editcmd.c:1216 edit/editcmd.c:1298
+#: edit/editcmd.c:2570 edit/editmenu.c:37 edit/editoptions.c:71
 #: src/boxes.c:138 src/boxes.c:275 src/boxes.c:373 src/boxes.c:465
 #: src/boxes.c:588 src/boxes.c:712 src/boxes.c:939 src/boxes.c:1008
 #: src/filegui.c:781 src/find.c:177 src/layout.c:360 src/option.c:145
-#: src/subshell.c:323 src/view.c:2146 src/wtools.c:398
+#: src/subshell.c:323 src/view.c:2142 src/wtools.c:398
 msgid "&OK"
 msgstr "&Aceptar"
 
@@ -71,120 +67,120 @@ msgstr "&Aceptar"
 msgid " Enter file name: "
 msgstr " Teclee el nombre del archivo: "
 
-#: edit/editcmd.c:266
+#: edit/editcmd.c:273
 msgid " Error writing to pipe: "
 msgstr " Error al escribir en tubería: "
 
-#: edit/editcmd.c:276
+#: edit/editcmd.c:283
 msgid " Cannot open pipe for writing: "
 msgstr " Imposible abrir tubería para escritura: "
 
-#: edit/editcmd.c:358
+#: edit/editcmd.c:365
 msgid "Quick save "
 msgstr "Guardar rápido "
 
-#: edit/editcmd.c:359
+#: edit/editcmd.c:366
 msgid "Safe save "
 msgstr "Guardar seguro "
 
-#: edit/editcmd.c:360
+#: edit/editcmd.c:367
 msgid "Do backups -->"
 msgstr "Dejar copias->"
 
-#: edit/editcmd.c:363 edit/editcmd.c:1144 edit/editcmd.c:1201
-#: edit/editcmd.c:1283 edit/editcmd.c:2521 edit/editoptions.c:68
+#: edit/editcmd.c:370 edit/editcmd.c:1157 edit/editcmd.c:1214
+#: edit/editcmd.c:1296 edit/editcmd.c:2568 edit/editoptions.c:68
 #: src/achown.c:69 src/boxes.c:139 src/boxes.c:276 src/boxes.c:371
 #: src/boxes.c:463 src/boxes.c:585 src/boxes.c:710 src/boxes.c:1008
-#: src/chmod.c:97 src/chown.c:74 src/cmd.c:900 src/filegui.c:763
-#: src/find.c:177 src/hotlist.c:117 src/hotlist.c:500 src/hotlist.c:810
-#: src/hotlist.c:906 src/layout.c:361 src/learn.c:60 src/option.c:146
-#: src/panelize.c:70 src/view.c:476 src/view.c:2143 src/wtools.c:57
+#: src/chmod.c:97 src/chown.c:74 src/cmd.c:857 src/filegui.c:763
+#: src/find.c:177 src/hotlist.c:122 src/hotlist.c:521 src/hotlist.c:831
+#: src/hotlist.c:927 src/layout.c:361 src/learn.c:60 src/option.c:146
+#: src/panelize.c:70 src/view.c:472 src/view.c:2139 src/wtools.c:57
 #: src/wtools.c:396
 msgid "&Cancel"
 msgstr "&Cancelar"
 
-#: edit/editcmd.c:369
+#: edit/editcmd.c:376
 msgid "Extension:"
 msgstr "Extensión:"
 
-#: edit/editcmd.c:375
+#: edit/editcmd.c:382
 msgid " Edit Save Mode "
 msgstr " Modo de guardar "
 
-#: edit/editcmd.c:442 edit/editcmd.c:501
+#: edit/editcmd.c:455 edit/editcmd.c:514
 msgid " Save As "
 msgstr " Guardar como "
 
-#: edit/editcmd.c:459 edit/editcmd.c:779 edit/editcmd.c:816 edit/editcmd.c:975
-#: edit/editcmd.c:1088 src/file.c:623 src/help.c:319 src/main.c:463
+#: edit/editcmd.c:472 edit/editcmd.c:792 edit/editcmd.c:829 edit/editcmd.c:988
+#: edit/editcmd.c:1101 src/file.c:612 src/help.c:319 src/main.c:437
 #: src/screen.c:1391 src/screen.c:1970 src/selcodepage.c:106
-#: src/subshell.c:319 src/subshell.c:653 src/utilunix.c:401 src/utilunix.c:405
-#: src/utilunix.c:427 src/utilunix.c:479 vfs/mcfs.c:139
+#: src/subshell.c:319 src/subshell.c:653 src/utilunix.c:398 src/utilunix.c:402
+#: src/utilunix.c:424 src/utilunix.c:476 vfs/mcfs.c:139
 msgid "Warning"
 msgstr "¡ Atención !"
 
-#: edit/editcmd.c:460
+#: edit/editcmd.c:473
 msgid " A file already exists with this name. "
 msgstr " Ya existe un archivo con ese nombre. "
 
-#: edit/editcmd.c:461
+#: edit/editcmd.c:474
 msgid "Overwrite"
 msgstr "Sobrescribir"
 
-#: edit/editcmd.c:461 edit/editcmd.c:542 edit/editcmd.c:744 edit/editcmd.c:779
-#: edit/editcmd.c:819 edit/editcmd.c:978 edit/editcmd.c:1091
+#: edit/editcmd.c:474 edit/editcmd.c:555 edit/editcmd.c:757 edit/editcmd.c:792
+#: edit/editcmd.c:832 edit/editcmd.c:991 edit/editcmd.c:1104
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: edit/editcmd.c:503 edit/editcmd.c:2266 src/view.c:475
+#: edit/editcmd.c:516 edit/editcmd.c:2281 src/view.c:471
 msgid " Cannot save file. "
 msgstr " Imposible guardar el archivo. "
 
-#: edit/editcmd.c:602 edit/editcmd.c:610 edit/editcmd.c:635 edit/editcmd.c:682
+#: edit/editcmd.c:615 edit/editcmd.c:623 edit/editcmd.c:648 edit/editcmd.c:695
 msgid " Delete macro "
 msgstr " Eliminar macro "
 
-#: edit/editcmd.c:604
+#: edit/editcmd.c:617
 msgid " Cannot open temp file "
 msgstr " Imposible abrir el archivo temporal "
 
-#: edit/editcmd.c:612 edit/editcmd.c:673 edit/editcmd.c:730
+#: edit/editcmd.c:625 edit/editcmd.c:686 edit/editcmd.c:743
 msgid " Cannot open macro file "
 msgstr " Imposible abrir el archivo de macros "
 
-#: edit/editcmd.c:636
+#: edit/editcmd.c:649
 msgid " Cannot overwrite macro file "
 msgstr " Imposible sobrescribir el archivo de macros "
 
-#: edit/editcmd.c:652 edit/editcmd.c:673
+#: edit/editcmd.c:665 edit/editcmd.c:686
 msgid " Save macro "
 msgstr " Guardar macro "
 
-#: edit/editcmd.c:654
+#: edit/editcmd.c:667
 msgid " Press the macro's new hotkey: "
 msgstr " Presione la nueva tecla para el macro: "
 
-#: edit/editcmd.c:683 edit/editkeys.c:231 edit/editkeys.c:261
+#: edit/editcmd.c:696 edit/editkeys.c:195 edit/editkeys.c:225
 msgid " Press macro hotkey: "
 msgstr " Pulse la tecla de macro: "
 
-#: edit/editcmd.c:729
+#: edit/editcmd.c:742
 msgid " Load macro "
 msgstr " Cargar macro "
 
-#: edit/editcmd.c:742
+#: edit/editcmd.c:755
 msgid " Confirm save file? : "
 msgstr " Guardar el archivo: "
 
-#: edit/editcmd.c:744 src/view.c:474
+#: edit/editcmd.c:757 src/view.c:470
 msgid " Save file "
 msgstr " Guardar archivo "
 
-#: edit/editcmd.c:744 edit/editwidget.c:283 src/view.c:2259
+#: edit/editcmd.c:757 edit/editwidget.c:285 src/view.c:2255
 msgid "Save"
 msgstr "Guardar"
 
-#: edit/editcmd.c:779 edit/editcmd.c:817
+#: edit/editcmd.c:792 edit/editcmd.c:830
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
@@ -192,258 +188,274 @@ msgstr ""
 " El texto actual ha sido modificado y no ha sido guardado \n"
 " Continuar descartará estos cambios. "
 
-#: edit/editcmd.c:779 edit/editcmd.c:818 edit/editcmd.c:978
-#: edit/editcmd.c:1091
+#: edit/editcmd.c:792 edit/editcmd.c:831 edit/editcmd.c:991
+#: edit/editcmd.c:1104
 msgid "Continue"
 msgstr "Continuar"
 
-#: edit/editcmd.c:825
+#: edit/editcmd.c:838
 msgid " Load "
 msgstr " Cargar "
 
-#: edit/editcmd.c:977 edit/editcmd.c:1090
+#: edit/editcmd.c:990 edit/editcmd.c:1103
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " El bloque es enorme, quizás no se pueda deshacer esta acción. "
 
-#: edit/editcmd.c:1146
+#: edit/editcmd.c:1159
 msgid "O&ne"
 msgstr "sólo u&No"
 
-#: edit/editcmd.c:1148 src/file.c:2240 src/filegui.c:539
+#: edit/editcmd.c:1161 src/file.c:2219 src/filegui.c:539
 msgid "A&ll"
 msgstr "&Todos"
 
-#: edit/editcmd.c:1150 src/file.c:2177 src/filegui.c:227
+#: edit/editcmd.c:1163 src/file.c:2156 src/filegui.c:227
 msgid "&Skip"
 msgstr "&Saltar"
 
-#: edit/editcmd.c:1152
+#: edit/editcmd.c:1165
 msgid "&Replace"
 msgstr "&Reemplazar"
 
-#: edit/editcmd.c:1159 edit/editcmd.c:1166
+#: edit/editcmd.c:1172 edit/editcmd.c:1179
 msgid " Replace with: "
 msgstr " Reemplazar con: "
 
-#: edit/editcmd.c:1171
+#: edit/editcmd.c:1184
 msgid " Confirm replace "
 msgstr " Confirmar cambios "
 
-#: edit/editcmd.c:1205 edit/editcmd.c:1287
+#: edit/editcmd.c:1218 edit/editcmd.c:1300
 msgid "scanf &Expression"
 msgstr "&Expresión scanf"
 
-#: edit/editcmd.c:1207
+#: edit/editcmd.c:1220
 msgid "replace &All"
 msgstr "reemplazar &Todos"
 
-#: edit/editcmd.c:1209
+#: edit/editcmd.c:1222
 msgid "pr&Ompt on replace"
 msgstr "c&Onfirmar cambios"
 
-#: edit/editcmd.c:1211 edit/editcmd.c:1289 src/view.c:2149
+#: edit/editcmd.c:1224 edit/editcmd.c:1302 src/view.c:2145
 msgid "&Backwards"
 msgstr "&Hacia atrás"
 
-#: edit/editcmd.c:1213 edit/editcmd.c:1291
+#: edit/editcmd.c:1226 edit/editcmd.c:1304
 msgid "&Regular expression"
 msgstr "expresión &Regular"
 
-#: edit/editcmd.c:1215 edit/editcmd.c:1293
+#: edit/editcmd.c:1228 edit/editcmd.c:1306
 msgid "&Whole words only"
 msgstr "&Sólo palabras completas"
 
-#: edit/editcmd.c:1217 edit/editcmd.c:1295 src/find.c:169
+#: edit/editcmd.c:1230 edit/editcmd.c:1308 src/find.c:169
 msgid "case &Sensitive"
 msgstr "distinguir ma&Yúsculas"
 
-#: edit/editcmd.c:1221
+#: edit/editcmd.c:1234
 msgid " Enter replacement argument order eg. 3,2,1,4 "
 msgstr " Teclee el orden de los argumentos, p. ej. 3,2,1,4 "
 
-#: edit/editcmd.c:1225
+#: edit/editcmd.c:1238
 msgid " Enter replacement string:"
 msgstr " Teclee el cambio a realizar:"
 
-#: edit/editcmd.c:1229 edit/editcmd.c:1299 src/view.c:2154
+#: edit/editcmd.c:1242 edit/editcmd.c:1312 src/view.c:2150
 msgid " Enter search string:"
 msgstr " Teclee el texto a buscar:"
 
-#: edit/editcmd.c:1248 edit/editcmd.c:1900 edit/editcmd.c:1924
+#: edit/editcmd.c:1261 edit/editcmd.c:1913 edit/editcmd.c:1937
 msgid " Replace "
 msgstr " Reemplazar "
 
-#: edit/editcmd.c:1313 edit/editcmd.c:2011 edit/editcmd.c:2013
-#: edit/editcmd.c:2041 edit/editwidget.c:288 src/view.c:1631 src/view.c:1710
-#: src/view.c:1863 src/view.c:1875 src/view.c:2099 src/view.c:2152
-#: src/view.c:2159 src/view.c:2269
+#: edit/editcmd.c:1326 edit/editcmd.c:2024 edit/editcmd.c:2026
+#: edit/editcmd.c:2054 edit/editwidget.c:290 src/view.c:1627 src/view.c:1706
+#: src/view.c:1859 src/view.c:1871 src/view.c:2095 src/view.c:2148
+#: src/view.c:2155 src/view.c:2265
 msgid "Search"
 msgstr "Buscar"
 
-#: edit/editcmd.c:1694
+#: edit/editcmd.c:1707
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
 msgstr ""
 " La expresión regular es inválida o la expresión scanf tiene demasiadas "
 "conversiones "
 
-#: edit/editcmd.c:1902
+#: edit/editcmd.c:1915
 msgid " Error in replacement format string. "
 msgstr " Error en cadena de formato al reemplazar. "
 
-#: edit/editcmd.c:1932
+#: edit/editcmd.c:1945
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld reemplazos hechos. "
 
-#: edit/editcmd.c:1935 edit/editcmd.c:2013 edit/editcmd.c:2041 src/view.c:1710
-#: src/view.c:1875
+#: edit/editcmd.c:1948 edit/editcmd.c:2026 edit/editcmd.c:2054 src/view.c:1706
+#: src/view.c:1871
 msgid " Search string not found "
 msgstr " La cadena buscada no ha sido encontrada "
 
-#: edit/editcmd.c:2011
+#: edit/editcmd.c:2024
 #, c-format
 msgid " %d finds made, %d bookmarks added "
 msgstr " %d coincidencias, %d marcadores colocados "
 
-#: edit/editcmd.c:2059 edit/editwidget.c:292 src/help.c:825 src/main.c:1419
-#: src/view.c:491 src/view.c:2254 src/view.c:2279
+#: edit/editcmd.c:2076 edit/editwidget.c:293 src/help.c:821 src/main.c:1226
+#: src/view.c:487 src/view.c:2250 src/view.c:2275
 msgid "Quit"
 msgstr "Salir"
 
-#: edit/editcmd.c:2059 src/view.c:492
+#: edit/editcmd.c:2076 src/view.c:488
 msgid " File was modified, Save with exit? "
 msgstr " El archivo fue modificado. ¿Desea guardarlo al salir? "
 
-#: edit/editcmd.c:2059 src/view.c:493
+#: edit/editcmd.c:2077 src/view.c:489
 msgid "Cancel quit"
 msgstr "Cancelar salida"
 
-#: edit/editcmd.c:2059 src/cmd.c:242 src/file.c:1858 src/file.c:2239
-#: src/filegui.c:544 src/hotlist.c:1029 src/main.c:627 src/screen.c:1958
-#: src/subshell.c:654 src/tree.c:765 src/view.c:493 vfs/mcfs.c:144
+#: edit/editcmd.c:2077 src/cmd.c:199 src/file.c:1837 src/file.c:2218
+#: src/filegui.c:544 src/hotlist.c:1050 src/main.c:484 src/screen.c:1958
+#: src/subshell.c:654 src/tree.c:765 src/view.c:489 vfs/mcfs.c:144
 msgid "&Yes"
 msgstr "&Sí"
 
-#: edit/editcmd.c:2059 src/cmd.c:242 src/file.c:1858 src/file.c:2239
-#: src/filegui.c:543 src/hotlist.c:1029 src/main.c:627 src/screen.c:1959
-#: src/subshell.c:654 src/tree.c:765 src/view.c:493 vfs/mcfs.c:144
+#: edit/editcmd.c:2077 src/cmd.c:199 src/file.c:1837 src/file.c:2218
+#: src/filegui.c:543 src/hotlist.c:1050 src/main.c:484 src/screen.c:1959
+#: src/subshell.c:654 src/tree.c:765 src/view.c:489 vfs/mcfs.c:144
 msgid "&No"
 msgstr "&No"
 
-#: edit/editcmd.c:2175
+#: edit/editcmd.c:2190
 msgid " Copy to clipboard "
 msgstr " Copiar al portapapeles "
 
-#: edit/editcmd.c:2175 edit/editcmd.c:2188
+#: edit/editcmd.c:2190 edit/editcmd.c:2203
 msgid " Unable to save to file. "
 msgstr " No pude guardar el archivo. "
 
-#: edit/editcmd.c:2188
+#: edit/editcmd.c:2203
 msgid " Cut to clipboard "
 msgstr " Cortar al portapapeles "
 
-#: edit/editcmd.c:2216 src/view.c:2044
+#: edit/editcmd.c:2231 src/view.c:2040
 msgid " Goto line "
 msgstr " Ir a la línea "
 
-#: edit/editcmd.c:2216
+#: edit/editcmd.c:2231
 msgid " Enter line: "
 msgstr " Línea: "
 
-#: edit/editcmd.c:2251 edit/editcmd.c:2264
+#: edit/editcmd.c:2266 edit/editcmd.c:2279
 msgid " Save Block "
 msgstr " Guardar bloque "
 
-#: edit/editcmd.c:2280 edit/editcmd.c:2293
+#: edit/editcmd.c:2295 edit/editcmd.c:2308
 msgid " Insert File "
 msgstr " Insertar archivo "
 
-#: edit/editcmd.c:2295
+#: edit/editcmd.c:2310
 msgid " Cannot insert file. "
 msgstr " Imposible insertar el archivo "
 
-#: edit/editcmd.c:2312
+#: edit/editcmd.c:2327
 msgid " Sort block "
 msgstr " Ordenar bloque de texto "
 
-#: edit/editcmd.c:2312 edit/editcmd.c:2406
+#: edit/editcmd.c:2327 edit/editcmd.c:2453
 msgid " You must first highlight a block of text. "
 msgstr " Es necesario tener un bloque seleccionado "
 
-#: edit/editcmd.c:2319
+#: edit/editcmd.c:2334
 msgid " Run Sort "
 msgstr " Ordenar bloque de texto "
 
-#: edit/editcmd.c:2320
+#: edit/editcmd.c:2335
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr " Opciones para \"sort\" (ver manual), separadas por espacios: "
 
-#: edit/editcmd.c:2331 edit/editcmd.c:2336
+#: edit/editcmd.c:2346 edit/editcmd.c:2351
 msgid " Sort "
 msgstr " Ordenar "
 
-#: edit/editcmd.c:2332
+#: edit/editcmd.c:2347
 msgid " Cannot execute sort command "
 msgstr " Imposible ejecutar \"sort\" "
 
-#: edit/editcmd.c:2337
+#: edit/editcmd.c:2352
 msgid " Sort returned non-zero: "
 msgstr " \"sort\" devolvió un error: "
 
-#: edit/editcmd.c:2374
+#: edit/editcmd.c:2376
+msgid "Paste output of external command"
+msgstr "Pegar desde otro programa"
+
+#: edit/editcmd.c:2377
+msgid "Enter shell command(s):"
+msgstr "Orden a ejecutar:"
+
+#: edit/editcmd.c:2386
+msgid "External command"
+msgstr "Programa externo"
+
+#: edit/editcmd.c:2387
+msgid "Cannot execute command"
+msgstr "Imposible ejecutar la orden"
+
+#: edit/editcmd.c:2421
 msgid "Error creating script:"
 msgstr "Error al crear guión:"
 
-#: edit/editcmd.c:2382
+#: edit/editcmd.c:2429
 msgid "Error reading script:"
 msgstr "Error al leer guión:"
 
-#: edit/editcmd.c:2391
+#: edit/editcmd.c:2438
 msgid "Error closing script:"
 msgstr "Error al cerrar guión:"
 
-#: edit/editcmd.c:2397
+#: edit/editcmd.c:2444
 msgid "Script created:"
 msgstr "Guión creado:"
 
-#: edit/editcmd.c:2404
+#: edit/editcmd.c:2451
 msgid "Process block"
 msgstr "Procesar bloque"
 
-#: edit/editcmd.c:2516
+#: edit/editcmd.c:2563
 msgid " Mail "
 msgstr " Correo "
 
-#: edit/editcmd.c:2527
+#: edit/editcmd.c:2574
 msgid " Copies to"
 msgstr " Cursar Copias a"
 
-#: edit/editcmd.c:2531
+#: edit/editcmd.c:2578
 msgid " Subject"
 msgstr " Tema"
 
-#: edit/editcmd.c:2535
+#: edit/editcmd.c:2582
 msgid " To"
 msgstr " Para"
 
-#: edit/editcmd.c:2537
+#: edit/editcmd.c:2584
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <tema> -c <cc> <para>"
 
-#: edit/editkeys.c:216
+#: edit/editkeys.c:180
 msgid " Emacs key: "
 msgstr " Tecla Emacs: "
 
-#: edit/editkeys.c:230 edit/editkeys.c:261
+#: edit/editkeys.c:194 edit/editkeys.c:225
 msgid " Execute Macro "
 msgstr " Ejecutar macro "
 
-#: edit/editkeys.c:253
+#: edit/editkeys.c:217
 msgid " Insert Literal "
 msgstr " Insertar literalmente "
 
-#: edit/editkeys.c:254
+#: edit/editkeys.c:218
 msgid " Press any key: "
 msgstr " Presione cualquier tecla: "
 
@@ -492,191 +504,195 @@ msgstr ""
 "       Un editor de texto amigable escrito\n"
 "           para el Midnight Commander.\n"
 
-#: edit/editmenu.c:275 edit/editmenu.c:293
+#: edit/editmenu.c:281 edit/editmenu.c:299
 msgid "&Open file..."
 msgstr "abrir archiv&O..."
 
-#: edit/editmenu.c:276
+#: edit/editmenu.c:282
 msgid "&New              C-n"
 msgstr "&Nuevo                   C-n"
 
-#: edit/editmenu.c:278 edit/editmenu.c:296
+#: edit/editmenu.c:284 edit/editmenu.c:302
 msgid "&Save              F2"
 msgstr "&Guardar                  F2"
 
-#: edit/editmenu.c:279 edit/editmenu.c:297
+#: edit/editmenu.c:285 edit/editmenu.c:303
 msgid "Save &as...       F12"
 msgstr "guar&Dar como...         F12"
 
-#: edit/editmenu.c:281 edit/editmenu.c:299
+#: edit/editmenu.c:287 edit/editmenu.c:305
 msgid "&Insert file...   F15"
 msgstr "&Insertar archivo...     F15"
 
-#: edit/editmenu.c:282
+#: edit/editmenu.c:288
 msgid "Copy to &file...  C-f"
 msgstr "co&Piar a un archivo.... C-f"
 
-#: edit/editmenu.c:284 edit/editmenu.c:302
+#: edit/editmenu.c:290 edit/editmenu.c:308
 msgid "&User menu...     F11"
 msgstr "menú de &Usuario         F11"
 
-#: edit/editmenu.c:286 edit/editmenu.c:304
+#: edit/editmenu.c:292 edit/editmenu.c:310
 msgid "A&bout...            "
 msgstr "&Acerca de..."
 
-#: edit/editmenu.c:288 edit/editmenu.c:306
+#: edit/editmenu.c:294 edit/editmenu.c:312
 msgid "&Quit             F10"
 msgstr "&Salir                   F10"
 
-#: edit/editmenu.c:294
+#: edit/editmenu.c:300
 msgid "&New            C-x k"
 msgstr "&Nuevo                 C-x k"
 
-#: edit/editmenu.c:300
+#: edit/editmenu.c:306
 msgid "Copy to &file...     "
 msgstr "co&Piar a un archivo..."
 
-#: edit/editmenu.c:311
+#: edit/editmenu.c:317
 msgid "&Toggle Mark       F3"
 msgstr "i&Nicio/fin de marca        F3"
 
-#: edit/editmenu.c:312
+#: edit/editmenu.c:318
 msgid "&Mark Columns    S-F3"
 msgstr "marcar c&Olumnas          S-F3"
 
-#: edit/editmenu.c:314
+#: edit/editmenu.c:320
 msgid "Toggle &ins/overw Ins"
 msgstr "activar &Inserción         Ins"
 
-#: edit/editmenu.c:316
+#: edit/editmenu.c:322
 msgid "&Copy              F5"
 msgstr "&Copiar                     F5"
 
-#: edit/editmenu.c:317
+#: edit/editmenu.c:323
 msgid "&Move              F6"
 msgstr "&Mover                      F6"
 
-#: edit/editmenu.c:318
+#: edit/editmenu.c:324
 msgid "&Delete            F8"
 msgstr "&Borrar                     F8"
 
-#: edit/editmenu.c:320
+#: edit/editmenu.c:326
 msgid "&Undo             C-u"
 msgstr "&Deshacer                  C-u"
 
-#: edit/editmenu.c:322
+#: edit/editmenu.c:328
 msgid "&Beginning     C-PgUp"
 msgstr "&Principio del archivo  C-RePg"
 
-#: edit/editmenu.c:323
+#: edit/editmenu.c:329
 msgid "&End           C-PgDn"
 msgstr "&Fin del archivo        C-AvPg"
 
-#: edit/editmenu.c:330
+#: edit/editmenu.c:336
 msgid "&Search...         F7"
 msgstr "&Buscar...          F7"
 
-#: edit/editmenu.c:331
+#: edit/editmenu.c:337
 msgid "Search &again     F17"
 msgstr "buscar &Siguiente  F17"
 
-#: edit/editmenu.c:332
+#: edit/editmenu.c:338
 msgid "&Replace...        F4"
 msgstr "&Reemplazar...      F4"
 
-#: edit/editmenu.c:339 edit/editmenu.c:362
+#: edit/editmenu.c:345 edit/editmenu.c:369
 msgid "&Go to line...            M-l"
 msgstr "&Ir a la línea...                  M-l"
 
-#: edit/editmenu.c:340 edit/editmenu.c:363
+#: edit/editmenu.c:346 edit/editmenu.c:370
 msgid "Go to matching &bracket   M-b"
 msgstr "buscar pare&Ja del operador        M-b"
 
-#: edit/editmenu.c:342 edit/editmenu.c:365
+#: edit/editmenu.c:348 edit/editmenu.c:372
 msgid "Insert &literal...       C-q"
 msgstr "insertar &Literalmente...          C-q"
 
-#: edit/editmenu.c:344 edit/editmenu.c:367
+#: edit/editmenu.c:350 edit/editmenu.c:374
 msgid "&Refresh screen          C-l"
 msgstr "&Refrescar la pantalla             C-l"
 
-#: edit/editmenu.c:346 edit/editmenu.c:369
+#: edit/editmenu.c:352 edit/editmenu.c:376
 msgid "&Start record macro      C-r"
 msgstr "iniciar grabación de &Macro        C-r"
 
-#: edit/editmenu.c:347 edit/editmenu.c:370
+#: edit/editmenu.c:353 edit/editmenu.c:377
 msgid "&Finish record macro...  C-r"
 msgstr "&Terminar grabación de macro...    C-r"
 
-#: edit/editmenu.c:348
+#: edit/editmenu.c:354
 msgid "&Execute macro...   C-a, KEY"
 msgstr "&Ejecutar macro             C-a, TECLA"
 
-#: edit/editmenu.c:349 edit/editmenu.c:372
+#: edit/editmenu.c:355 edit/editmenu.c:379
 msgid "Delete macr&o...            "
 msgstr "&Borrar macro..."
 
-#: edit/editmenu.c:351 edit/editmenu.c:374
+#: edit/editmenu.c:357 edit/editmenu.c:381
 msgid "Insert &date/time           "
 msgstr "insertar &Fecha y hora"
 
-#: edit/editmenu.c:353 edit/editmenu.c:376
+#: edit/editmenu.c:359 edit/editmenu.c:383
 msgid "Format p&aragraph        M-p"
 msgstr "dar formato al &Párrafo            M-p"
 
-#: edit/editmenu.c:354
+#: edit/editmenu.c:360
 msgid "'ispell' s&pell check    C-p"
 msgstr "corregir orto&Grafía con \"ispell\"  C-p"
 
-#: edit/editmenu.c:355 edit/editmenu.c:378
+#: edit/editmenu.c:361 edit/editmenu.c:385
 msgid "Sor&t...                 M-t"
 msgstr "&Ordenar bloque de texto...        M-t"
 
-#: edit/editmenu.c:356 edit/editmenu.c:379
+#: edit/editmenu.c:362 edit/editmenu.c:386
+msgid "Paste o&utput of...      M-u"
+msgstr "peg&Ar desde otro programa...      M-u"
+
+#: edit/editmenu.c:363 edit/editmenu.c:387
 msgid "E&xternal Formatter      F19"
 msgstr "dar formato e&Xterno               F19"
 
-#: edit/editmenu.c:357 edit/editmenu.c:380
+#: edit/editmenu.c:364 edit/editmenu.c:388
 msgid "&Mail...                    "
-msgstr "c&Orreo... "
+msgstr "&Correo... "
 
-#: edit/editmenu.c:371
+#: edit/editmenu.c:378
 msgid "&Execute macro... C-x e, KEY"
 msgstr "&Ejecutar macro...        C-x e, TECLA"
 
-#: edit/editmenu.c:377
+#: edit/editmenu.c:384
 msgid "'ispell' s&pell check    M-$"
 msgstr "\"ispell\" &Corrige ortografía     M-$"
 
-#: edit/editmenu.c:385
+#: edit/editmenu.c:393
 msgid "&General...  "
 msgstr "&General..."
 
-#: edit/editmenu.c:386
+#: edit/editmenu.c:394
 msgid "&Save mode..."
 msgstr "&Modo de guardar..."
 
-#: edit/editmenu.c:388 src/main.c:1080
+#: edit/editmenu.c:395 src/main.c:927
 msgid "learn &Keys..."
 msgstr "redefinir &Teclas..."
 
-#: edit/editmenu.c:400 edit/editmenu.c:414 src/chmod.c:149 src/chown.c:121
+#: edit/editmenu.c:406 edit/editmenu.c:420 src/chmod.c:149 src/chown.c:121
 msgid " File "
 msgstr " Archivo "
 
-#: edit/editmenu.c:402 edit/editmenu.c:416
+#: edit/editmenu.c:408 edit/editmenu.c:422
 msgid " Edit "
 msgstr " Edición "
 
-#: edit/editmenu.c:404 edit/editmenu.c:418
+#: edit/editmenu.c:410 edit/editmenu.c:424
 msgid " Sear/Repl "
 msgstr " Buscar/Reemplazar "
 
-#: edit/editmenu.c:406 edit/editmenu.c:420
+#: edit/editmenu.c:412 edit/editmenu.c:426
 msgid " Command "
 msgstr " Comando "
 
-#: edit/editmenu.c:408 edit/editmenu.c:422
+#: edit/editmenu.c:414 edit/editmenu.c:428
 msgid " Options "
 msgstr " Opciones "
 
@@ -748,32 +764,32 @@ msgstr "Emulación de teclas"
 msgid " Editor options "
 msgstr " Opciones del editor "
 
-#: edit/editwidget.c:282 src/help.c:792 src/help.c:813 src/main.c:1416
-#: src/screen.c:2185 src/tree.c:1029 src/view.c:2252
+#: edit/editwidget.c:284 src/help.c:788 src/help.c:809 src/main.c:1223
+#: src/screen.c:2186 src/tree.c:1031 src/view.c:2248
 msgid "Help"
 msgstr "Ayuda"
 
-#: edit/editwidget.c:284
+#: edit/editwidget.c:286
 msgid "Mark"
 msgstr "Marcar"
 
-#: edit/editwidget.c:285
+#: edit/editwidget.c:287
 msgid "Replac"
 msgstr "Reempl"
 
-#: edit/editwidget.c:286 src/file.c:829 src/screen.c:2189 src/tree.c:1034
+#: edit/editwidget.c:288 src/file.c:816 src/screen.c:2190 src/tree.c:1036
 msgid "Copy"
 msgstr "Copiar"
 
-#: edit/editwidget.c:287
+#: edit/editwidget.c:289
 msgid "Move"
 msgstr "Mover"
 
-#: edit/editwidget.c:289 src/screen.c:2192
+#: edit/editwidget.c:291 src/screen.c:2193
 msgid "Delete"
 msgstr "Borrar"
 
-#: edit/editwidget.c:291 src/main.c:1418
+#: edit/editwidget.c:292 src/main.c:1225
 msgid "PullDn"
 msgstr "Menú"
 
@@ -781,7 +797,7 @@ msgstr "Menú"
 msgid " Load syntax file "
 msgstr " Cargar archivo de sintaxis "
 
-#: edit/syntax.c:1090 src/help.c:763 src/user.c:700
+#: edit/syntax.c:1090 src/help.c:759 src/user.c:699
 #, c-format
 msgid ""
 " Cannot open file %s \n"
@@ -864,7 +880,7 @@ msgstr ""
 msgid "Background process:"
 msgstr "Procesos en 2º plano"
 
-#: src/background.c:275 src/file.c:2175
+#: src/background.c:275 src/file.c:2154
 msgid " Background process error "
 msgstr " Error en un proceso en 2º plano"
 
@@ -940,7 +956,7 @@ msgstr " confirmar s&Obrescritura "
 msgid " confirm &Delete "
 msgstr " confirmar e&Liminación "
 
-#: src/boxes.c:388 src/cmd.c:241
+#: src/boxes.c:388 src/cmd.c:198
 msgid " Confirmation "
 msgstr " Confirmación "
 
@@ -1060,7 +1076,7 @@ msgstr "Dominio:"
 msgid "Username:"
 msgstr "Usuario:"
 
-#: src/boxes.c:1007 vfs/vfs.c:1867
+#: src/boxes.c:1007 vfs/vfs.c:1875
 msgid "Password:"
 msgstr "Contraseña:"
 
@@ -1069,7 +1085,7 @@ msgstr "Contraseña:"
 msgid "Password for \\\\%s\\%s"
 msgstr " Contraseña para \\\\%s\\%s "
 
-#: src/charsets.c:51 vfs/extfs.c:1302 vfs/sfs.c:307
+#: src/charsets.c:51 vfs/extfs.c:1299 vfs/sfs.c:308
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Atención: no se encuentra el archivo %s\n"
@@ -1139,7 +1155,7 @@ msgstr "* a &Poner"
 msgid "&Marked all"
 msgstr "* t&Odos"
 
-#: src/chmod.c:127 src/screen.c:406
+#: src/chmod.c:127 src/screen.c:403
 msgid "Name"
 msgstr "Nombre"
 
@@ -1219,136 +1235,131 @@ msgstr "<desconocido>"
 msgid "<Unknown group>"
 msgstr "<desconocido>"
 
-#: src/cmd.c:111
-#, c-format
-msgid " Cannot fetch a local copy of %s "
-msgstr " Imposible obtener una copia local de \"%s\" "
-
-#: src/cmd.c:241
+#: src/cmd.c:198
 msgid "Files tagged, want to cd?"
 msgstr " Hay archivos marcados. ¿Quiere cambiar de directorio?"
 
-#: src/cmd.c:247 src/cmd.c:709 src/cmd.c:771 src/main.c:852 src/screen.c:1931
+#: src/cmd.c:204 src/cmd.c:666 src/cmd.c:728 src/main.c:709 src/screen.c:1931
 msgid "Cannot change directory"
 msgstr "Imposible cambiar de directorio"
 
-#: src/cmd.c:280
+#: src/cmd.c:237
 msgid " View file "
 msgstr " Ver archivo "
 
-#: src/cmd.c:280
+#: src/cmd.c:237
 msgid " Filename:"
 msgstr " Nombre de archivo:"
 
-#: src/cmd.c:302
+#: src/cmd.c:259
 msgid " Filtered view "
 msgstr " Ejecutar y ver "
 
-#: src/cmd.c:303
+#: src/cmd.c:260
 msgid " Filter command and arguments:"
 msgstr " Orden a ejecutar y argumentos:"
 
-#: src/cmd.c:402
+#: src/cmd.c:359
 msgid "Create a new Directory"
 msgstr " Crear directorio "
 
-#: src/cmd.c:403
+#: src/cmd.c:360
 msgid " Enter directory name:"
 msgstr " Teclee el nombre del directorio: "
 
-#: src/cmd.c:464
+#: src/cmd.c:421
 msgid " Filter "
 msgstr " Filtro "
 
-#: src/cmd.c:465
+#: src/cmd.c:422
 msgid " Set expression for filtering filenames"
 msgstr " Teclee la expresión para filtrar nombres de archivo"
 
-#: src/cmd.c:519
+#: src/cmd.c:476
 msgid " Select "
 msgstr " Seleccionar grupo "
 
-#: src/cmd.c:547 src/cmd.c:593 src/find.c:142
+#: src/cmd.c:504 src/cmd.c:550 src/find.c:142
 msgid "  Malformed regular expression  "
 msgstr " La expresión regular es errónea "
 
-#: src/cmd.c:566
+#: src/cmd.c:523
 msgid " Unselect "
 msgstr " De-seleccionar grupo "
 
-#: src/cmd.c:635
+#: src/cmd.c:592
 msgid "Extension file edit"
 msgstr " Editar el archivo de extensiones "
 
-#: src/cmd.c:636
+#: src/cmd.c:593
 msgid " Which extension file you want to edit? "
 msgstr " ¿Qué archivo de extensión desea editar? "
 
-#: src/cmd.c:637 src/cmd.c:740
+#: src/cmd.c:594 src/cmd.c:697
 msgid "&User"
 msgstr "&Usuario"
 
-#: src/cmd.c:637 src/cmd.c:666 src/cmd.c:740
+#: src/cmd.c:594 src/cmd.c:623 src/cmd.c:697
 msgid "&System Wide"
 msgstr "&Sistema"
 
-#: src/cmd.c:663
+#: src/cmd.c:620
 msgid " Menu edit "
 msgstr " Editar archivo de menú "
 
-#: src/cmd.c:664
+#: src/cmd.c:621
 msgid " Which menu file do you want to edit? "
 msgstr " ¿Qué archivo de menú desea editar?"
 
-#: src/cmd.c:666
+#: src/cmd.c:623
 msgid "&Local"
 msgstr "&Local"
 
-#: src/cmd.c:666
+#: src/cmd.c:623
 msgid "&Home"
 msgstr "&Usuario"
 
-#: src/cmd.c:738
+#: src/cmd.c:695
 msgid "Syntax file edit"
 msgstr " Editar archivo de sintaxis "
 
-#: src/cmd.c:739
+#: src/cmd.c:696
 msgid " Which syntax file you want to edit? "
 msgstr " ¿Qué archivo de sintaxis desea editar? "
 
-#: src/cmd.c:898
+#: src/cmd.c:855
 msgid " Compare directories "
 msgstr " Comparar directorios "
 
-#: src/cmd.c:899
+#: src/cmd.c:856
 msgid " Select compare method: "
 msgstr " Seleccione el método de comparación: "
 
-#: src/cmd.c:899
+#: src/cmd.c:856
 msgid "&Quick"
 msgstr "&Rápido"
 
-#: src/cmd.c:900
+#: src/cmd.c:857
 msgid "&Size only"
 msgstr "sólo &Tamaño"
 
-#: src/cmd.c:900
+#: src/cmd.c:857
 msgid "&Thorough"
 msgstr "&Completo"
 
-#: src/cmd.c:915
+#: src/cmd.c:872
 msgid " Both panels should be in the listing mode to use this command "
 msgstr " Ambos paneles deben estar en modo listado para usar esta función "
 
-#: src/cmd.c:931
+#: src/cmd.c:888
 msgid " The command history is empty "
 msgstr " La historia de órdenes está vacía "
 
-#: src/cmd.c:935
+#: src/cmd.c:892
 msgid " Command history "
 msgstr " Historia de órdenes "
 
-#: src/cmd.c:974
+#: src/cmd.c:928
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
@@ -1356,99 +1367,95 @@ msgstr ""
 " No se está usando ni xterm ni la consola Linux; \n"
 " los paneles no pueden ser ocultados. "
 
-#: src/cmd.c:1008
-msgid "Type `exit' to return to the Midnight Commander"
-msgstr "Teclee \"exit\" para regresar al Midnight Commander"
-
-#: src/cmd.c:1058
+#: src/cmd.c:942
 #, c-format
 msgid "Link %s to:"
 msgstr "Crear enlace a %s como:"
 
-#: src/cmd.c:1059
+#: src/cmd.c:943
 msgid " Link "
 msgstr " Crear enlace "
 
-#: src/cmd.c:1069
+#: src/cmd.c:953
 #, c-format
 msgid " link: %s "
 msgstr " enlace: %s"
 
-#: src/cmd.c:1097
+#: src/cmd.c:981
 #, c-format
 msgid " symlink: %s "
 msgstr " enlace simbólico: %s "
 
-#: src/cmd.c:1131
+#: src/cmd.c:1015
 #, c-format
 msgid " Symlink `%s' points to: "
 msgstr " El enlace simbólico '%s' apunta a: "
 
-#: src/cmd.c:1136
+#: src/cmd.c:1020
 msgid " Edit symlink "
 msgstr " Editar enlace simbólico "
 
-#: src/cmd.c:1141
+#: src/cmd.c:1025
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr " edite enlace simbólico, imposible borrar %s: %s "
 
-#: src/cmd.c:1145
+#: src/cmd.c:1029
 #, c-format
 msgid " edit symlink: %s "
 msgstr " editar enlace simbólico: %s "
 
-#: src/cmd.c:1156
+#: src/cmd.c:1040
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "'%s' no es un enlace simbólico"
 
-#: src/cmd.c:1285
+#: src/cmd.c:1152
 #, c-format
 msgid " Cannot chdir to %s "
 msgstr " Imposible cambiar al directorio %s "
 
-#: src/cmd.c:1294
+#: src/cmd.c:1161
 msgid " Enter machine name (F1 for details): "
 msgstr " Teclee el nombre de la máquina (F1 para más detalles): "
 
-#: src/cmd.c:1299 src/widget.c:1046
+#: src/cmd.c:1166 src/widget.c:1047
 msgid " Link to a remote machine "
 msgstr " Conexión por red "
 
-#: src/cmd.c:1306 src/widget.c:1047
+#: src/cmd.c:1173 src/widget.c:1048
 msgid " FTP to machine "
 msgstr " Conexión por FTP "
 
-#: src/cmd.c:1312
+#: src/cmd.c:1179
 msgid " Shell link to machine "
 msgstr " Conexión por shell "
 
-#: src/cmd.c:1319 src/widget.c:1048
+#: src/cmd.c:1186 src/widget.c:1049
 msgid " SMB link to machine "
 msgstr " Conexión por SMB "
 
-#: src/cmd.c:1330
+#: src/cmd.c:1197
 msgid " Socket source routing setup "
 msgstr " Configuración del ruteo específico "
 
-#: src/cmd.c:1331
+#: src/cmd.c:1198
 msgid " Enter host name to use as a source routing hop: "
 msgstr " Teclee el nombre de la máquina que será la intermediaria: "
 
-#: src/cmd.c:1339
+#: src/cmd.c:1206
 msgid " Host name "
 msgstr " Nombre de la máquina "
 
-#: src/cmd.c:1339
+#: src/cmd.c:1206
 msgid " Error while looking up IP address "
 msgstr " Error al buscar la dirección IP "
 
-#: src/cmd.c:1350
+#: src/cmd.c:1217
 msgid " Undelete files on an ext2 file system "
 msgstr " Recuperar archivos de un sistema de archivos ext2 "
 
-#: src/cmd.c:1351
+#: src/cmd.c:1218
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -1456,15 +1463,15 @@ msgstr ""
 " Introduzca el dispositivo (sin /dev/) donde quiere\n"
 "  recuperar archivos: (F1 para más detalles)"
 
-#: src/cmd.c:1401
+#: src/cmd.c:1268
 msgid " Setup saved to ~/"
 msgstr " Configuración almacenada en ~/"
 
-#: src/cmd.c:1403
+#: src/cmd.c:1270
 msgid " Setup "
 msgstr " Configuración "
 
-#: src/command.c:167 src/screen.c:2176 src/tree.c:885
+#: src/command.c:168 src/screen.c:2177 src/tree.c:885
 #, c-format
 msgid ""
 " Cannot chdir to \"%s\" \n"
@@ -1473,11 +1480,11 @@ msgstr ""
 " Imposible cambiar al directorio \"%s\" \n"
 " %s "
 
-#: src/command.c:198 src/user.c:683
+#: src/command.c:199 src/user.c:682
 msgid " Cannot execute commands on non-local filesystems"
 msgstr " Imposible ejecutar comandos desde directorios no locales "
 
-#: src/command.c:207 src/main.c:586
+#: src/command.c:208 src/execute.c:182
 msgid " The shell is already running a command "
 msgstr " El shell ya está ejecutando un comando "
 
@@ -1557,7 +1564,20 @@ msgstr "&Grupo"
 msgid "Cannot read directory contents"
 msgstr "Imposible leer directorio"
 
-#: src/ext.c:106 src/user.c:568
+#: src/execute.c:132 src/utilunix.c:377
+msgid "Press any key to continue..."
+msgstr "Presione cualquier tecla para continuar..."
+
+#: src/execute.c:234
+msgid "Type `exit' to return to the Midnight Commander"
+msgstr "Teclee \"exit\" para regresar al Midnight Commander"
+
+#: src/execute.c:342
+#, c-format
+msgid " Cannot fetch a local copy of %s "
+msgstr " Imposible obtener una copia local de \"%s\" "
+
+#: src/ext.c:106 src/user.c:567
 #, c-format
 msgid ""
 " Cannot create temporary command file \n"
@@ -1566,19 +1586,19 @@ msgstr ""
 " Imposible crear el archivo temporal para comandos \n"
 " %s "
 
-#: src/ext.c:119 src/user.c:589
+#: src/ext.c:119 src/user.c:588
 msgid " Parameter "
 msgstr "Parámetro"
 
-#: src/ext.c:525 src/ext.c:544
+#: src/ext.c:526 src/ext.c:545
 msgid " file error "
 msgstr " error de archivo "
 
-#: src/ext.c:527 src/ext.c:546
+#: src/ext.c:528 src/ext.c:547
 msgid "Format of the "
 msgstr "Formato del "
 
-#: src/ext.c:528
+#: src/ext.c:529
 msgid ""
 "mc.ext file has changed\n"
 "with version 3.0. It seems that installation\n"
@@ -1590,7 +1610,7 @@ msgstr ""
 "de conseguir una copia intacta con el paquete del\n"
 "Midnight Commander."
 
-#: src/ext.c:547
+#: src/ext.c:548
 msgid ""
 " file has changed\n"
 "with version 3.0. You may want either to\n"
@@ -1599,7 +1619,7 @@ msgstr ""
 " archivo ha cambiado\n"
 "con la versión 3.0. Posiblemente quiera copiarlo de "
 
-#: src/ext.c:550
+#: src/ext.c:551
 msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
@@ -1607,7 +1627,7 @@ msgstr ""
 "mc.ext o usar\n"
 "ese archivo como referencia.\n"
 
-#: src/ext.c:553
+#: src/ext.c:554
 msgid "mc.ext will be used for this moment."
 msgstr "mc.ext será usado para este momento."
 
@@ -1660,7 +1680,7 @@ msgstr ""
 " Imposible crear el enlace simbólico destino \"%s\" \n"
 " %s "
 
-#: src/file.c:507
+#: src/file.c:506
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1669,7 +1689,7 @@ msgstr ""
 " Imposible sobrescribir el directorio \"%s\" \n"
 " %s "
 
-#: src/file.c:518
+#: src/file.c:517
 #, c-format
 msgid ""
 " Cannot stat source file \"%s\" \n"
@@ -1678,12 +1698,12 @@ msgstr ""
 " Imposible identificar el archivo origen \"%s\" \n"
 " %s "
 
-#: src/file.c:532 src/file.c:1148
+#: src/file.c:527 src/file.c:1128
 #, c-format
 msgid " `%s' and `%s' are the same file "
 msgstr " \"%s\" y \"%s\" son el mismo archivo "
 
-#: src/file.c:574
+#: src/file.c:565
 #, c-format
 msgid ""
 " Cannot create special file \"%s\" \n"
@@ -1692,7 +1712,7 @@ msgstr ""
 " Imposible crear el archivo especial \"%s\" \n"
 " %s "
 
-#: src/file.c:587 src/file.c:840
+#: src/file.c:577 src/file.c:826
 #, c-format
 msgid ""
 " Cannot chown target file \"%s\" \n"
@@ -1701,7 +1721,7 @@ msgstr ""
 " Imposible cambiar el dueño del archivo destino: \"%s\" \n"
 " %s "
 
-#: src/file.c:599 src/file.c:858
+#: src/file.c:588 src/file.c:843
 #, c-format
 msgid ""
 " Cannot chmod target file \"%s\" \n"
@@ -1710,7 +1730,7 @@ msgstr ""
 " Imposible cambiar los permisos del archivo destino \"%s\" \n"
 " %s "
 
-#: src/file.c:613
+#: src/file.c:602
 #, c-format
 msgid ""
 " Cannot open source file \"%s\" \n"
@@ -1719,11 +1739,11 @@ msgstr ""
 " Imposible abrir el archivo fuente \"%s\" \n"
 " %s"
 
-#: src/file.c:624
+#: src/file.c:613
 msgid " Reget failed, about to overwrite file "
 msgstr " Falló el reintento, se va a sobrescribir el archivo "
 
-#: src/file.c:631
+#: src/file.c:620
 #, c-format
 msgid ""
 " Cannot fstat source file \"%s\" \n"
@@ -1732,7 +1752,7 @@ msgstr ""
 " Imposible identificar el archivo origen \"%s\" \n"
 " %s "
 
-#: src/file.c:657
+#: src/file.c:644
 #, c-format
 msgid ""
 " Cannot create target file \"%s\" \n"
@@ -1741,7 +1761,7 @@ msgstr ""
 " Imposible crear el archivo destino \"%s\" \n"
 " %s "
 
-#: src/file.c:672
+#: src/file.c:659
 #, c-format
 msgid ""
 " Cannot fstat target file \"%s\" \n"
@@ -1750,7 +1770,7 @@ msgstr ""
 " Imposible identificar el archivo destino \"%s\" \n"
 " %s"
 
-#: src/file.c:706
+#: src/file.c:693
 #, c-format
 msgid ""
 " Cannot read source file \"%s\" \n"
@@ -1759,7 +1779,7 @@ msgstr ""
 " Imposible leer el archivo origen \"%s\" \n"
 " %s"
 
-#: src/file.c:741
+#: src/file.c:728
 #, c-format
 msgid ""
 " Cannot write target file \"%s\" \n"
@@ -1768,11 +1788,11 @@ msgstr ""
 " Imposible escribir el archivo destino \"%s\" \n"
 " %s"
 
-#: src/file.c:759
+#: src/file.c:746
 msgid "(stalled)"
 msgstr "(bloqueado)"
 
-#: src/file.c:806
+#: src/file.c:793
 #, c-format
 msgid ""
 " Cannot close source file \"%s\" \n"
@@ -1781,7 +1801,7 @@ msgstr ""
 " Imposible cerrar el archivo origen \"%s\" \n"
 " %s"
 
-#: src/file.c:817
+#: src/file.c:804
 #, c-format
 msgid ""
 " Cannot close target file \"%s\" \n"
@@ -1790,19 +1810,19 @@ msgstr ""
 " Imposible cerrar el archivo destino \"%s\" \n"
 " %s"
 
-#: src/file.c:830
+#: src/file.c:817
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "El archivo está incompleto. ¿Desea conservarlo?"
 
-#: src/file.c:831
+#: src/file.c:818
 msgid "&Delete"
 msgstr "&Borrar"
 
-#: src/file.c:831
+#: src/file.c:818
 msgid "&Keep"
 msgstr "&Mantener"
 
-#: src/file.c:901
+#: src/file.c:886
 #, c-format
 msgid ""
 " Cannot stat source directory \"%s\" \n"
@@ -1811,7 +1831,7 @@ msgstr ""
 " Imposible identificar el directorio de origen \"%s\" \n"
 " %s"
 
-#: src/file.c:928
+#: src/file.c:913
 #, c-format
 msgid ""
 " Source directory \"%s\" is not a directory \n"
@@ -1820,7 +1840,7 @@ msgstr ""
 " El directorio fuente \"%s\" no es un directorio \n"
 " %s "
 
-#: src/file.c:938
+#: src/file.c:923
 #, c-format
 msgid ""
 " Cannot copy cyclic symbolic link \n"
@@ -1829,7 +1849,7 @@ msgstr ""
 " Imposible copiar un enlace simbólico cíclico \n"
 " \"%s\" "
 
-#: src/file.c:973 src/file.c:2014 src/tree.c:705
+#: src/file.c:958 src/file.c:1993 src/tree.c:705
 #, c-format
 msgid ""
 " Destination \"%s\" must be a directory \n"
@@ -1838,7 +1858,7 @@ msgstr ""
 " El destino \"%s\" debe ser un directorio \n"
 " %s "
 
-#: src/file.c:1003
+#: src/file.c:988
 #, c-format
 msgid ""
 " Cannot create target directory \"%s\" \n"
@@ -1847,7 +1867,7 @@ msgstr ""
 " Imposible crear el directorio destino \"%s\" \n"
 " %s "
 
-#: src/file.c:1023
+#: src/file.c:1007
 #, c-format
 msgid ""
 " Cannot chown target directory \"%s\" \n"
@@ -1856,7 +1876,7 @@ msgstr ""
 " Imposible cambiar los permisos del directorio destino \"%s\"\n"
 " %s "
 
-#: src/file.c:1126
+#: src/file.c:1109
 #, c-format
 msgid ""
 " Cannot stat file \"%s\" \n"
@@ -1865,12 +1885,12 @@ msgstr ""
 " Imposible identificar el archivo \"%s\" \n"
 " %s "
 
-#: src/file.c:1155
+#: src/file.c:1135
 #, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Imposible sobrescribir el directorio \"%s\" "
 
-#: src/file.c:1190
+#: src/file.c:1170
 #, c-format
 msgid ""
 " Cannot move file \"%s\" to \"%s\" \n"
@@ -1879,7 +1899,7 @@ msgstr ""
 " Imposible mover el archivo \"%s\" a \"%s\" \n"
 " %s "
 
-#: src/file.c:1214
+#: src/file.c:1194
 #, c-format
 msgid ""
 " Cannot remove file \"%s\" \n"
@@ -1888,22 +1908,22 @@ msgstr ""
 " Imposible borrar el archivo \"%s\" \n"
 " %s"
 
-#: src/file.c:1266
+#: src/file.c:1246
 #, c-format
 msgid " `%s' and `%s' are the same directory "
 msgstr " \"%s\" y \"%s\" son el mismo directorio "
 
-#: src/file.c:1286
+#: src/file.c:1265
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
 msgstr " Imposible sobrescribir el directorio \"%s\" %s "
 
-#: src/file.c:1290
+#: src/file.c:1269
 #, c-format
 msgid " Cannot overwrite file \"%s\" %s "
 msgstr " Imposible sobrescribir el archivo \"%s\" %s "
 
-#: src/file.c:1316
+#: src/file.c:1295
 #, c-format
 msgid ""
 " Cannot move directory \"%s\" to \"%s\" \n"
@@ -1912,7 +1932,7 @@ msgstr ""
 " Imposible mover el directorio \"%s\" a \"%s\" \n"
 " %s "
 
-#: src/file.c:1386
+#: src/file.c:1365
 #, c-format
 msgid ""
 " Cannot delete file \"%s\" \n"
@@ -1921,7 +1941,7 @@ msgstr ""
 " Imposible borrar el archivo \"%s\" \n"
 " %s "
 
-#: src/file.c:1446 src/file.c:1515 src/file.c:1543
+#: src/file.c:1425 src/file.c:1494 src/file.c:1522
 #, c-format
 msgid ""
 " Cannot remove directory \"%s\" \n"
@@ -1930,73 +1950,73 @@ msgstr ""
 " Imposible eliminar el directorio \"%s\" \n"
 " %s "
 
-#: src/file.c:1688
+#: src/file.c:1667
 msgid "1Copy"
 msgstr "1Copiar"
 
-#: src/file.c:1688
+#: src/file.c:1667
 msgid "1Move"
 msgstr "1Mover"
 
-#: src/file.c:1688
+#: src/file.c:1667
 msgid "1Delete"
 msgstr "1¿Borrar"
 
-#: src/file.c:1703
+#: src/file.c:1682
 #, no-c-format
 msgid "%o %f \"%s\"%m"
 msgstr "%o %f \"%s\"%m"
 
-#: src/file.c:1705
+#: src/file.c:1684
 #, no-c-format
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-#: src/file.c:1707 vfs/fish.c:545
+#: src/file.c:1686 vfs/fish.c:539
 msgid "file"
 msgstr "archivo"
 
-#: src/file.c:1707
+#: src/file.c:1686
 msgid "files"
 msgstr "archivos"
 
-#: src/file.c:1707
+#: src/file.c:1686
 msgid "directory"
 msgstr "directorio"
 
-#: src/file.c:1707
+#: src/file.c:1686
 msgid "directories"
 msgstr "directorios"
 
-#: src/file.c:1708
+#: src/file.c:1687
 msgid "files/directories"
 msgstr "archivos/directorios"
 
-#: src/file.c:1708
+#: src/file.c:1687
 msgid " with source mask:"
 msgstr " aplicando la máscara:"
 
-#: src/file.c:1708
+#: src/file.c:1687
 msgid " to:"
 msgstr " a: "
 
-#: src/file.c:1842
+#: src/file.c:1821
 msgid " Cannot operate on \"..\"! "
 msgstr " ¡Imposible operar sobre \"..\"! "
 
-#: src/file.c:1906
+#: src/file.c:1885
 msgid " Sorry, I could not put the job in background "
 msgstr " Lo siento, no pude poner la tarea en 2º plano "
 
-#: src/file.c:2177 src/view.c:476
+#: src/file.c:2156 src/view.c:472
 msgid "&Retry"
 msgstr "&Reintentar"
 
-#: src/file.c:2178 src/file.c:2241 src/filegui.c:224 src/filegui.c:535
+#: src/file.c:2157 src/file.c:2220 src/filegui.c:224 src/filegui.c:535
 msgid "&Abort"
 msgstr "&Abortar"
 
-#: src/file.c:2230
+#: src/file.c:2209
 msgid ""
 "\n"
 "   Directory not empty.   \n"
@@ -2006,7 +2026,7 @@ msgstr ""
 " El directorio no está vacío.\n"
 " ¿Desea borrarlo recursivamente? "
 
-#: src/file.c:2232
+#: src/file.c:2211
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
@@ -2016,11 +2036,11 @@ msgstr ""
 " Proceso en 2º plano: El directorio no está vacío.\n"
 " ¿Desea borrarlo recursivamente? "
 
-#: src/file.c:2234
+#: src/file.c:2213
 msgid " Delete: "
 msgstr " Borrar: "
 
-#: src/file.c:2240 src/filegui.c:537
+#: src/file.c:2219 src/filegui.c:537
 msgid "Non&e"
 msgstr "nin&Guno"
 
@@ -2196,7 +2216,7 @@ msgstr "Archivos:"
 msgid "Content: "
 msgstr "Contenido: "
 
-#: src/find.c:177 src/main.c:956 src/main.c:983
+#: src/find.c:177 src/main.c:813 src/main.c:837
 msgid "&Tree"
 msgstr "ár&Bol"
 
@@ -2213,7 +2233,7 @@ msgstr "Buscando en %s"
 msgid "Finished"
 msgstr "Terminado"
 
-#: src/find.c:562 src/view.c:1631
+#: src/find.c:562 src/view.c:1627
 #, c-format
 msgid "Searching %s"
 msgstr "Buscando %s"
@@ -2230,114 +2250,122 @@ msgstr " Error en el formato del archivo de ayuda\n"
 msgid " Internal bug: Double start of link area "
 msgstr " Error interno: Doble inicio de enlace"
 
-#: src/help.c:559 src/help.c:777
+#: src/help.c:555 src/help.c:773
 #, c-format
 msgid " Cannot find node %s in help file "
 msgstr " Imposible encontrar el nodo %s en el archivo de ayuda "
 
-#: src/help.c:815
+#: src/help.c:811
 msgid "Index"
 msgstr "Índice"
 
-#: src/help.c:817
+#: src/help.c:813
 msgid "Prev"
 msgstr "Volver"
 
-#: src/hotlist.c:111
+#: src/hotlist.c:116
 msgid "&Move"
 msgstr "&Mover"
 
-#: src/hotlist.c:112 src/panelize.c:72
+#: src/hotlist.c:117 src/panelize.c:72
 msgid "&Remove"
 msgstr "&Quitar"
 
-#: src/hotlist.c:113 src/hotlist.c:814 src/hotlist.c:910
+#: src/hotlist.c:118 src/hotlist.c:835 src/hotlist.c:931
 msgid "&Append"
 msgstr "&Añadir al final"
 
-#: src/hotlist.c:114 src/hotlist.c:812 src/hotlist.c:908
+#: src/hotlist.c:119 src/hotlist.c:833 src/hotlist.c:929
 msgid "&Insert"
 msgstr "&Insertar"
 
-#: src/hotlist.c:115
+#: src/hotlist.c:120
 msgid "New &Entry"
 msgstr "&Nuevo"
 
-#: src/hotlist.c:116
+#: src/hotlist.c:121
 msgid "New &Group"
 msgstr "nuevo &Grupo"
 
-#: src/hotlist.c:118
+#: src/hotlist.c:123
 msgid "&Up"
 msgstr "arri&Ba"
 
-#: src/hotlist.c:119
+#: src/hotlist.c:124
 msgid "&Add current"
 msgstr "aña&Dir actual"
 
-#: src/hotlist.c:120
+#: src/hotlist.c:126
+msgid "&Refresh"
+msgstr "actualiza&R"
+
+#: src/hotlist.c:127
+msgid "Fr&ee VFSs now"
+msgstr "&Liberar VFS ahora"
+
+#: src/hotlist.c:129
 msgid "Change &To"
 msgstr "camb&Iar a"
 
-#: src/hotlist.c:168
+#: src/hotlist.c:177
 msgid "Subgroup - press ENTER to see list"
 msgstr "Subgrupo - presione ENTER para ver la lista"
 
-#: src/hotlist.c:586
+#: src/hotlist.c:607
 msgid "Active VFS directories"
 msgstr " Directorios virtuales (VFS) activos "
 
-#: src/hotlist.c:589
+#: src/hotlist.c:610
 msgid "Directory hotlist"
 msgstr " Favoritos "
 
-#: src/hotlist.c:618
+#: src/hotlist.c:639
 msgid " Directory path "
 msgstr " Ruta "
 
-#: src/hotlist.c:621 src/hotlist.c:671
+#: src/hotlist.c:642 src/hotlist.c:692
 msgid " Directory label "
 msgstr " Etiqueta del directorio "
 
-#: src/hotlist.c:646
+#: src/hotlist.c:667
 #, c-format
 msgid "Moving %s"
 msgstr "Moviendo %s"
 
-#: src/hotlist.c:887
+#: src/hotlist.c:908
 msgid "New hotlist entry"
 msgstr " Nuevo "
 
-#: src/hotlist.c:887
+#: src/hotlist.c:908
 msgid "Directory label"
 msgstr " Etiqueta:"
 
-#: src/hotlist.c:887
+#: src/hotlist.c:908
 msgid "Directory path"
 msgstr " Ruta:"
 
-#: src/hotlist.c:967
+#: src/hotlist.c:988
 msgid " New hotlist group "
 msgstr " Nuevo grupo "
 
-#: src/hotlist.c:967
+#: src/hotlist.c:988
 msgid "Name of new group"
 msgstr " Nombre del nuevo grupo:"
 
-#: src/hotlist.c:982
+#: src/hotlist.c:1003
 #, c-format
 msgid "Label for \"%s\":"
 msgstr " Etiqueta para \"%s\":"
 
-#: src/hotlist.c:986
+#: src/hotlist.c:1007
 msgid " Add to hotlist "
 msgstr " Añadir actual "
 
-#: src/hotlist.c:1023
+#: src/hotlist.c:1044
 msgid " Remove: "
 msgstr " Eliminar: "
 
-#: src/hotlist.c:1027
+#: src/hotlist.c:1048
 msgid ""
 "\n"
 " Group not empty.\n"
@@ -2347,19 +2375,19 @@ msgstr ""
 "El grupo no está vacío.\n"
 "¿Desea eliminarlo?"
 
-#: src/hotlist.c:1370
+#: src/hotlist.c:1391
 msgid " Top level group "
 msgstr " Grupo principal "
 
-#: src/hotlist.c:1393
+#: src/hotlist.c:1414
 msgid "MC was unable to write ~/"
 msgstr " MC no pudo escribir al archivo ~/"
 
-#: src/hotlist.c:1394
+#: src/hotlist.c:1415
 msgid " file, your old hotlist entries were not deleted"
 msgstr " la lista de favoritos antigua no fue borrada"
 
-#: src/hotlist.c:1396
+#: src/hotlist.c:1417
 msgid " Hotlist Load "
 msgstr " Cargar favoritos "
 
@@ -2368,99 +2396,99 @@ msgstr " Cargar favoritos "
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
 
-#: src/info.c:99
+#: src/info.c:91
 #, c-format
 msgid "File:       %s"
 msgstr "Archivo:     %s"
 
-#: src/info.c:111
+#: src/info.c:103
 #, c-format
 msgid "Free nodes: %d (%d%%) of %d"
 msgstr " y %d (%d%%) de %d inodos"
 
-#: src/info.c:117
+#: src/info.c:109
 msgid "No node information"
 msgstr "Sin información sobre inodos"
 
-#: src/info.c:125
+#: src/info.c:117
 #, c-format
 msgid "Free space: %s (%d%%) of %s"
 msgstr "Disponible %s (%d%%) de %s"
 
-#: src/info.c:128
+#: src/info.c:121
 msgid "No space information"
 msgstr "Espacio libre desconocido"
 
-#: src/info.c:132
+#: src/info.c:125
 #, c-format
 msgid "Type:      %s "
 msgstr "  Tipo:     %s"
 
-#: src/info.c:132
+#: src/info.c:125
 msgid "non-local vfs"
 msgstr "VFS no-local"
 
-#: src/info.c:138
+#: src/info.c:131
 #, c-format
 msgid "Device:    %s"
 msgstr "  Origen:   %s"
 
-#: src/info.c:142
+#: src/info.c:135
 #, c-format
 msgid "Filesystem: %s"
 msgstr "Sistema en  %s"
 
-#: src/info.c:147
+#: src/info.c:140
 #, c-format
 msgid "Accessed:  %s"
 msgstr "Accedido:   %s"
 
-#: src/info.c:151
+#: src/info.c:144
 #, c-format
 msgid "Modified:  %s"
 msgstr "Modificado: %s"
 
-#: src/info.c:155
+#: src/info.c:148
 #, c-format
 msgid "Created:   %s"
 msgstr "Cambiado:   %s"
 
-#: src/info.c:170
+#: src/info.c:163
 #, c-format
 msgid "Size:      %s"
 msgstr "Tamaño:     %s"
 
-#: src/info.c:173
+#: src/info.c:166
 #, c-format
 msgid " (%d block)"
 msgstr " (%d bloque)"
 
-#: src/info.c:173
+#: src/info.c:166
 #, c-format
 msgid " (%d blocks)"
 msgstr " (%d bloques)"
 
-#: src/info.c:179
+#: src/info.c:172
 #, c-format
 msgid "Owner:     %s/%s"
 msgstr "Dueño:      %s/%s"
 
-#: src/info.c:184
+#: src/info.c:177
 #, c-format
 msgid "Links:     %d"
 msgstr "Nº enlaces: %d"
 
-#: src/info.c:188
+#: src/info.c:181
 #, c-format
 msgid "Mode:      %s (%04o)"
 msgstr "Modo:       %s (%04o)"
 
-#: src/info.c:193
+#: src/info.c:186
 #, c-format
 msgid "Location:  %Xh:%Xh"
 msgstr "Ubicado:    %Xh:%Xh"
 
-#: src/info.c:203
+#: src/info.c:196
 msgid "File:       None"
 msgstr "Archivo:     Ninguno"
 
@@ -2607,7 +2635,7 @@ msgstr "redefinirla, pulse la barra espaciadora o haga clic con el ratón"
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "en ella. Use el tabulador para moverse."
 
-#: src/main.c:464
+#: src/main.c:438
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -2619,280 +2647,268 @@ msgstr ""
 " ¿Acaso borró usted el directorio o se dio otros \n"
 " permisos con el comando \"su\"?"
 
-#: src/main.c:538 src/utilunix.c:380
-msgid "Press any key to continue..."
-msgstr "Presione cualquier tecla para continuar..."
-
-#: src/main.c:625 src/screen.c:1957
+#: src/main.c:482 src/screen.c:1957
 msgid " The Midnight Commander "
 msgstr " The Midnight Commander "
 
-#: src/main.c:626
+#: src/main.c:483
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr " ¿Desea realmente salir del Midnight Commander? "
 
-#: src/main.c:945
+#: src/main.c:802
 msgid " Listing format edit "
 msgstr " Edición del formato de listado "
 
-#: src/main.c:945
+#: src/main.c:802
 #, c-format
 msgid " New mode is \"%s\" "
 msgstr " El nuevo modo es \"%s\" "
 
-#: src/main.c:953 src/main.c:980
+#: src/main.c:810 src/main.c:834
 msgid "&Listing mode..."
 msgstr "&Listado..."
 
-#: src/main.c:954 src/main.c:981
+#: src/main.c:811 src/main.c:835
 msgid "&Quick view     C-x q"
 msgstr "&Vista rápida      C-x q"
 
-#: src/main.c:955 src/main.c:982
+#: src/main.c:812 src/main.c:836
 msgid "&Info           C-x i"
 msgstr "&Información       C-x i"
 
-#: src/main.c:958 src/main.c:985
+#: src/main.c:815 src/main.c:839
 msgid "&Sort order..."
 msgstr "&Ordenar..."
 
-#: src/main.c:960 src/main.c:987
+#: src/main.c:817 src/main.c:841
 msgid "&Filter..."
 msgstr "&Filtro..."
 
-#: src/main.c:964 src/main.c:991
+#: src/main.c:821 src/main.c:845
 msgid "&Network link..."
 msgstr "&Conexión por red..."
 
-#: src/main.c:966 src/main.c:993
+#: src/main.c:823 src/main.c:847
 msgid "FT&P link..."
 msgstr "conexión por FT&P..."
 
-#: src/main.c:967 src/main.c:994
+#: src/main.c:824 src/main.c:848
 msgid "S&hell link..."
 msgstr "conexión por s&Hell..."
 
-#: src/main.c:969 src/main.c:996
+#: src/main.c:826 src/main.c:850
 msgid "SM&B link..."
 msgstr "conexión por &SMB..."
 
-#: src/main.c:974 src/main.c:1001
-msgid "&Drive...       M-d"
-msgstr "&Disco...            M-d"
-
-#: src/main.c:976 src/main.c:1003
+#: src/main.c:830 src/main.c:854
 msgid "&Rescan         C-r"
 msgstr "actualiza&R          C-r"
 
-#: src/main.c:1007
+#: src/main.c:858
 msgid "&User menu          F2"
 msgstr "me&Nú de usuario               F2"
 
-#: src/main.c:1008
+#: src/main.c:859
 msgid "&View               F3"
 msgstr "&Ver                           F3"
 
-#: src/main.c:1009
+#: src/main.c:860
 msgid "Vie&w file...         "
 msgstr "ver arc&Hivo..."
 
-#: src/main.c:1010
+#: src/main.c:861
 msgid "&Filtered view     M-!"
 msgstr "e&Jecutar y ver...            M-!"
 
-#: src/main.c:1011
+#: src/main.c:862
 msgid "&Edit               F4"
 msgstr "&Editar                        F4"
 
-#: src/main.c:1012
+#: src/main.c:863
 msgid "&Copy               F5"
 msgstr "&Copiar...                     F5"
 
-#: src/main.c:1013
+#: src/main.c:864
 msgid "c&Hmod           C-x c"
 msgstr "cambiar &Permisos...        C-x c"
 
-#: src/main.c:1015
+#: src/main.c:865
 msgid "&Link            C-x l"
 msgstr "crear en&Lace...            C-x l"
 
-#: src/main.c:1016
+#: src/main.c:866
 msgid "&SymLink         C-x s"
 msgstr "crear enlace &Simbólico...  C-x s"
 
-#: src/main.c:1017
+#: src/main.c:867
 msgid "edit s&Ymlink  C-x C-s"
 msgstr "edi&Tar enlace simbólico  C-x C-s"
 
-#: src/main.c:1018
+#: src/main.c:868
 msgid "ch&Own           C-x o"
 msgstr "cambiar dueñ&O...           C-x o"
 
-#: src/main.c:1019
+#: src/main.c:869
 msgid "&Advanced chown       "
 msgstr "c&Ambiar dueño y permisos..."
 
-#: src/main.c:1021
+#: src/main.c:870
 msgid "&Rename/Move        F6"
 msgstr "&Renombrar/mover...            F6"
 
-#: src/main.c:1022
+#: src/main.c:871
 msgid "&Mkdir              F7"
 msgstr "crear &Directorio...           F7"
 
-#: src/main.c:1023
+#: src/main.c:872
 msgid "&Delete             F8"
 msgstr "&Borrar                        F8"
 
-#: src/main.c:1024
+#: src/main.c:873
 msgid "&Quick cd          M-c"
 msgstr "ca&Mbiar directorio...        M-c"
 
-#: src/main.c:1026
+#: src/main.c:875
 msgid "select &Group      M-+"
 msgstr "seleccionar &Grupo...         M-+"
 
-#: src/main.c:1027
+#: src/main.c:876
 msgid "u&Nselect group    M-\\"
 msgstr "de-seleccionar gr&Upo...      M-\\"
 
-#: src/main.c:1028
+#: src/main.c:877
 msgid "reverse selec&Tion M-*"
 msgstr "&Invertir la selección        M-*"
 
-#: src/main.c:1030
+#: src/main.c:879
 msgid "e&Xit              F10"
 msgstr "sali&R                        F10"
 
-#: src/main.c:1038
+#: src/main.c:887
 msgid "&Directory tree"
 msgstr "árbol de &Directorios"
 
-#: src/main.c:1039
+#: src/main.c:888
 msgid "&Find file            M-?"
 msgstr "&Buscar archivos...                M-?"
 
-#: src/main.c:1040
+#: src/main.c:889
 msgid "s&Wap panels          C-u"
 msgstr "&Intercambiar paneles              C-u"
 
-#: src/main.c:1041
+#: src/main.c:890
 msgid "switch &Panels on/off C-o"
 msgstr "&Activar/desactivar paneles        C-o"
 
-#: src/main.c:1042
+#: src/main.c:891
 msgid "&Compare directories  C-x d"
 msgstr "&Comparar directorios...         C-x d"
 
-#: src/main.c:1043
+#: src/main.c:892
 msgid "e&Xternal panelize    C-x !"
 msgstr "búsquedas e&Xternas...           C-x !"
 
-#: src/main.c:1044
+#: src/main.c:893
 msgid "show directory s&Izes"
 msgstr "mostrar &Tamaños de los directorios"
 
-#: src/main.c:1046
+#: src/main.c:895
 msgid "command &History"
 msgstr "&Historia de órdenes"
 
-#: src/main.c:1047
+#: src/main.c:896
 msgid "di&Rectory hotlist    C-\\"
 msgstr "&Favoritos...                      C-\\"
 
-#: src/main.c:1049
+#: src/main.c:898
 msgid "&Active VFS list      C-x a"
 msgstr "directorios virtuales (&VFS)...  C-x a"
 
-#: src/main.c:1050
-msgid "Fr&ee VFSs now"
-msgstr "&Liberar VFS ahora"
-
-#: src/main.c:1053
+#: src/main.c:901
 msgid "&Background jobs      C-x j"
 msgstr "&Procesos en 2º plano...         C-x j"
 
-#: src/main.c:1057
+#: src/main.c:905
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Recuperar archivos (ext2fs)..."
 
-#: src/main.c:1060
+#: src/main.c:908
 msgid "&Listing format edit"
 msgstr "edición del formato de &Listado"
 
-#: src/main.c:1065
+#: src/main.c:913
 msgid "Edit &extension file"
 msgstr "&Editar el archivo de extensiones..."
 
-#: src/main.c:1066
+#: src/main.c:914
 msgid "Edit &menu file"
 msgstr "editar archivo de &Menú..."
 
-#: src/main.c:1068
+#: src/main.c:916
 msgid "Edit edi&tor menu file"
 msgstr "editar me&Nú del editor..."
 
-#: src/main.c:1069
+#: src/main.c:917
 msgid "Edit &syntax file"
 msgstr "editar archivo de &Sintaxis..."
 
-#: src/main.c:1075
+#: src/main.c:923
 msgid "&Configuration..."
 msgstr "&Configuración..."
 
-#: src/main.c:1076
+#: src/main.c:924
 msgid "&Layout..."
 msgstr "&Presentación..."
 
-#: src/main.c:1077
+#: src/main.c:925
 msgid "c&Onfirmation..."
 msgstr "c&Onfirmación..."
 
-#: src/main.c:1078
+#: src/main.c:926
 msgid "&Display bits..."
 msgstr "&Juego de caracteres..."
 
-#: src/main.c:1083
+#: src/main.c:929
 msgid "&Virtual FS..."
 msgstr "sistema de archivos &Virtual (VFS)..."
 
-#: src/main.c:1086
+#: src/main.c:932
 msgid "&Save setup"
 msgstr "&Guardar configuración"
 
-#: src/main.c:1097
+#: src/main.c:943
 msgid " &Above "
 msgstr " a&Rriba "
 
-#: src/main.c:1097
+#: src/main.c:943
 msgid " &Left "
 msgstr " &Izquierdo "
 
-#: src/main.c:1101
+#: src/main.c:947
 msgid " &File "
 msgstr " &Archivo "
 
-#: src/main.c:1104
+#: src/main.c:950
 msgid " &Command "
 msgstr " &Utilidades "
 
-#: src/main.c:1107
+#: src/main.c:953
 msgid " &Options "
 msgstr " &Opciones "
 
-#: src/main.c:1110
+#: src/main.c:956
 msgid " &Below "
 msgstr " a&Bajo "
 
-#: src/main.c:1110
+#: src/main.c:956
 msgid " &Right "
 msgstr " &Derecho "
 
-#: src/main.c:1153
+#: src/main.c:999
 msgid " Information "
 msgstr " Información "
 
-#: src/main.c:1155
+#: src/main.c:1001
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -2904,32 +2920,32 @@ msgstr ""
 " caso use C-r para obligar al programa a actualizar los datos.\n"
 " Lea la página de manual para mayor información.             "
 
-#: src/main.c:1417 src/screen.c:2186
+#: src/main.c:1224 src/screen.c:2187
 msgid "Menu"
 msgstr "Menú"
 
-#: src/main.c:1557
+#: src/main.c:1361
 msgid "The TERM environment variable is unset!\n"
 msgstr "¡La variable de entorno TERM está sin definir!\n"
 
-#: src/main.c:1877 src/textconf.c:116
+#: src/main.c:1674 src/textconf.c:116
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/main.c:2129
+#: src/main.c:1885
 msgid "[flags] [this_dir] [other_panel_dir]\n"
 msgstr "[OPCIONES] [DIRECTORIO] [SEGUNDO_DIRECTORIO]\n"
 
-#: src/main.c:2133
+#: src/main.c:1889
 msgid "+number"
 msgstr "+número"
 
-#: src/main.c:2134
+#: src/main.c:1890
 msgid "Set initial line number for the internal editor"
 msgstr "Línea de comienzo al abrir archivo con editor interno"
 
-#: src/main.c:2136
+#: src/main.c:1892
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2939,7 +2955,7 @@ msgstr ""
 "Si detecta algún fallo puede comunicarlo a mc-devel@gnome.org\n"
 "incluyendo la descripción obtenida con `mc -V'.\n"
 
-#: src/main.c:2151
+#: src/main.c:1907
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2979,95 +2995,95 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2226
+#: src/main.c:1982
 msgid "Use to debug the background code"
 msgstr "Se usa para depurar código de 2º plano"
 
-#: src/main.c:2229
+#: src/main.c:1985
 msgid "Request to run in color mode"
 msgstr "Solicitar la ejecución en color"
 
-#: src/main.c:2231
+#: src/main.c:1987
 msgid "Specifies a color configuration"
 msgstr "Indicar una configuración de colores"
 
-#: src/main.c:2235
+#: src/main.c:1991
 msgid "Edits one file"
 msgstr "Editar un archivo"
 
-#: src/main.c:2239
+#: src/main.c:1995
 msgid "Displays this help message"
 msgstr "Mostrar este mensaje de ayuda"
 
-#: src/main.c:2241
+#: src/main.c:1997
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Mostrar ayuda sobre cómo cambiar colores"
 
-#: src/main.c:2244
+#: src/main.c:2000
 msgid "Log ftp dialog to specified file"
 msgstr "Registrar diálogos ftp en un archivo"
 
-#: src/main.c:2247
+#: src/main.c:2003
 msgid "Set debug level"
 msgstr "Fijar el nivel de depuración"
 
-#: src/main.c:2251
+#: src/main.c:2007
 msgid "Print data directory"
 msgstr "Mostrar directorio de datos"
 
-#: src/main.c:2253
+#: src/main.c:2009
 msgid "Requests to run in black and white"
 msgstr "Solicitar ejecución en blanco y negro"
 
-#: src/main.c:2255
+#: src/main.c:2011
 msgid "Disable mouse support in text version"
 msgstr "Desactivar ratón en la versión texto"
 
-#: src/main.c:2258
+#: src/main.c:2014
 msgid "Disables subshell support"
 msgstr "Desactivar el uso de subshell"
 
-#: src/main.c:2261
+#: src/main.c:2017
 msgid "Print last working directory to specified file"
 msgstr "Guardar el nombre del directorio en un archivo"
 
-#: src/main.c:2263
+#: src/main.c:2019
 msgid "Resets soft keys on HP terminals"
 msgstr "Restablecer teclas en terminales HP"
 
-#: src/main.c:2265
+#: src/main.c:2021
 msgid "To run on slow terminals"
 msgstr "Para ejecutar en terminales lentos"
 
-#: src/main.c:2268
+#: src/main.c:2023
 msgid "Use stickchars to draw"
 msgstr "Usar caracteres simples para recuadros"
 
-#: src/main.c:2272
+#: src/main.c:2026
 msgid "Enables subshell support (default)"
 msgstr "Activar uso de subshell (por defecto)"
 
-#: src/main.c:2276
+#: src/main.c:2030
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Intentar utilizar termcap en vez de terminfo"
 
-#: src/main.c:2279
+#: src/main.c:2033
 msgid "Displays the current version"
 msgstr "Mostrar el número de versión"
 
-#: src/main.c:2281
+#: src/main.c:2035
 msgid "Launches the file viewer on a file"
 msgstr "Abrir un archivo con el visor"
 
-#: src/main.c:2283
+#: src/main.c:2037
 msgid "Forces xterm features"
 msgstr "Utilizar las posibilidades de xterm"
 
-#: src/main.c:2500
+#: src/main.c:2250
 msgid " Notice "
 msgstr " Aviso "
 
-#: src/main.c:2501
+#: src/main.c:2251
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -3178,7 +3194,7 @@ msgstr "Configuración"
 msgid "&Add new"
 msgstr "&Añadir nuevo..."
 
-#: src/panelize.c:160 src/panelize.c:423
+#: src/panelize.c:160 src/panelize.c:419
 msgid "External panelize"
 msgstr "Búsquedas externas"
 
@@ -3218,7 +3234,7 @@ msgstr "Buscar programas con SUID y SGID"
 msgid "Cannot invoke command."
 msgstr "Imposible invocar el comando."
 
-#: src/panelize.c:423
+#: src/panelize.c:419
 msgid "Pipe close failed"
 msgstr "Fallo al cerrar la tubería"
 
@@ -3250,77 +3266,77 @@ msgstr "ARG"
 msgid "Usage:"
 msgstr "Modo de empleo:"
 
-#: src/screen.c:202
+#: src/screen.c:199
 msgid "UP--DIR"
 msgstr "DIR-ANT"
 
-#: src/screen.c:223
+#: src/screen.c:220
 msgid "SYMLINK"
 msgstr "ENLACE"
 
-#: src/screen.c:227
+#: src/screen.c:224
 msgid "SUB-DIR"
 msgstr "SUB-DIR"
 
-#: src/screen.c:407 src/screen.c:408
+#: src/screen.c:404 src/screen.c:405
 msgid "Size"
 msgstr "Tamaño"
 
-#: src/screen.c:410
+#: src/screen.c:407
 msgid "MTime"
 msgstr "FechaMod"
 
-#: src/screen.c:411
+#: src/screen.c:408
 msgid "ATime"
 msgstr "FechaAcc"
 
-#: src/screen.c:412
+#: src/screen.c:409
 msgid "CTime"
 msgstr "FechaCmb"
 
-#: src/screen.c:413
+#: src/screen.c:410
 msgid "Permission"
 msgstr "Permisos"
 
-#: src/screen.c:414
+#: src/screen.c:411
 msgid "Perm"
 msgstr "Perm"
 
-#: src/screen.c:415
+#: src/screen.c:412
 msgid "Nl"
 msgstr "Ne"
 
-#: src/screen.c:416
+#: src/screen.c:413
 msgid "Inode"
 msgstr "Inodo"
 
-#: src/screen.c:417
+#: src/screen.c:414
 msgid "UID"
 msgstr "UID"
 
-#: src/screen.c:418
+#: src/screen.c:415
 msgid "GID"
 msgstr "GID"
 
-#: src/screen.c:419
+#: src/screen.c:416
 msgid "Owner"
 msgstr "Dueño"
 
-#: src/screen.c:420
+#: src/screen.c:417
 msgid "Group"
 msgstr "Grupo"
 
-#: src/screen.c:656
+#: src/screen.c:653
 #, c-format
 msgid "%s bytes in %d file"
 msgstr "%s bytes en %d archivo"
 
-#: src/screen.c:656
+#: src/screen.c:653
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s bytes en %d archivos"
 
-#: src/screen.c:682
+#: src/screen.c:679
 msgid "<readlink failed>"
 msgstr "<readlink falló>"
 
@@ -3340,19 +3356,19 @@ msgstr " ¿Realmente quiere ejecutar?"
 msgid " No action taken "
 msgstr " No se tomó ninguna medida "
 
-#: src/screen.c:2187
+#: src/screen.c:2188
 msgid "View"
 msgstr "Ver"
 
-#: src/screen.c:2188 src/view.c:2265
+#: src/screen.c:2189 src/view.c:2261
 msgid "Edit"
 msgstr "Editar"
 
-#: src/screen.c:2190 src/tree.c:1036
+#: src/screen.c:2191 src/tree.c:1038
 msgid "RenMov"
 msgstr "RenMov"
 
-#: src/screen.c:2191 src/tree.c:1040
+#: src/screen.c:2192 src/tree.c:1042
 msgid "Mkdir"
 msgstr "Mkdir"
 
@@ -3402,7 +3418,7 @@ msgstr "Imposible abrir la tubería con nombre %s\n"
 msgid " The shell is still active. Quit anyway? "
 msgstr " El shell todavía está activo. ¿Terminar de todas maneras?"
 
-#: src/subshell.c:789
+#: src/subshell.c:790
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Cuidado: Imposible cambiar a %s.\n"
@@ -3508,19 +3524,19 @@ msgstr "Estát"
 msgid "Dynamc"
 msgstr "Dinám"
 
-#: src/tree.c:1030
+#: src/tree.c:1032
 msgid "Rescan"
 msgstr "Revisar"
 
-#: src/tree.c:1032
+#: src/tree.c:1034
 msgid "Forget"
 msgstr "Olvidar"
 
-#: src/tree.c:1045
+#: src/tree.c:1047
 msgid "Rmdir"
 msgstr "Borrar"
 
-#: src/treestore.c:352
+#: src/treestore.c:342
 #, c-format
 msgid ""
 "Cannot write to the %s file:\n"
@@ -3529,41 +3545,41 @@ msgstr ""
 "Imposible escribir al archivo %s:\n"
 "%s\n"
 
-#: src/user.c:134
+#: src/user.c:135
 msgid " Format error on file Extensions File "
 msgstr " Error de formato en el Archivo de Extensiones "
 
-#: src/user.c:135
+#: src/user.c:136
 #, c-format
 msgid " The %%var macro has no default "
 msgstr " La macro %%var no tiene valor predeterminado "
 
-#: src/user.c:136
+#: src/user.c:137
 #, c-format
 msgid " The %%var macro has no variable "
 msgstr " La macro %%var no contiene variables "
 
-#: src/user.c:448
+#: src/user.c:449
 msgid " Debug "
 msgstr " Depurar "
 
-#: src/user.c:457
+#: src/user.c:458
 msgid " ERROR: "
 msgstr " ERROR: "
 
-#: src/user.c:461
+#: src/user.c:462
 msgid " True:  "
 msgstr " Verdadero: "
 
-#: src/user.c:463
+#: src/user.c:464
 msgid " False: "
 msgstr " Falso: "
 
-#: src/user.c:658
+#: src/user.c:657
 msgid " Warning -- ignoring file "
 msgstr " Cuidado -- ignorando el archivo "
 
-#: src/user.c:659
+#: src/user.c:658
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
@@ -3572,12 +3588,12 @@ msgstr ""
 " El archivo \"%s\" no pertenece a Ud. ni a root, ni tiene permiso\n"
 " global de escritura. Usarlo podría comprometer su seguridad."
 
-#: src/user.c:781
+#: src/user.c:780
 #, c-format
 msgid " No suitable entries found in %s "
 msgstr " No se encuentran entradas apropiadas en %s "
 
-#: src/user.c:787
+#: src/user.c:786
 msgid " User menu "
 msgstr " Menú de usuario "
 
@@ -3589,56 +3605,56 @@ msgstr "%e %b %H:%M"
 msgid "%b %e  %Y"
 msgstr "%e %b  %Y"
 
-#: src/utilunix.c:333
+#: src/utilunix.c:330
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s no es un directorio\n"
 
-#: src/utilunix.c:335
+#: src/utilunix.c:332
 #, c-format
 msgid "Directory %s is not owned by you\n"
 msgstr "El directorio %s es de propiedad ajena\n"
 
-#: src/utilunix.c:338
+#: src/utilunix.c:335
 #, c-format
 msgid "Cannot set correct permissions for directory %s\n"
 msgstr "Imposible dar permisos adecuados al directorio %s\n"
 
-#: src/utilunix.c:343
+#: src/utilunix.c:340
 #, c-format
 msgid "Cannot create temporary directory %s: %s\n"
 msgstr "Imposible crear directorio temporal %s: %s\n"
 
-#: src/utilunix.c:373
+#: src/utilunix.c:370
 #, c-format
 msgid "Temporary files will be created in %s\n"
 msgstr "Los archivos temporales se ubicarán en %s\n"
 
-#: src/utilunix.c:376
+#: src/utilunix.c:373
 msgid "Temporary files will not be created\n"
 msgstr "No se crearán archivos temporales\n"
 
-#: src/utilunix.c:401
+#: src/utilunix.c:398
 msgid " Pipe failed "
 msgstr " Fallo en la tubería "
 
-#: src/utilunix.c:405
+#: src/utilunix.c:402
 msgid " Dup failed "
 msgstr " Dup falló "
 
-#: src/view.c:537
+#: src/view.c:533
 msgid " Cannot spawn child program "
 msgstr " Imposible ejecutar el proceso hijo "
 
-#: src/view.c:548
+#: src/view.c:544
 msgid "Empty output from child filter"
 msgstr "Salida del filtro vacía"
 
-#: src/view.c:554
+#: src/view.c:550
 msgid " Cannot open file "
 msgstr " Imposible abrir el archivo "
 
-#: src/view.c:654
+#: src/view.c:650
 #, c-format
 msgid ""
 " Cannot open \"%s\"\n"
@@ -3647,7 +3663,7 @@ msgstr ""
 " Imposible abrir \"%s\"\n"
 " %s "
 
-#: src/view.c:663
+#: src/view.c:659
 #, c-format
 msgid ""
 " Cannot stat \"%s\"\n"
@@ -3656,45 +3672,45 @@ msgstr ""
 " Imposible identificar \"%s\"\n"
 " %s "
 
-#: src/view.c:672
+#: src/view.c:668
 msgid " Cannot view: not a regular file "
 msgstr ""
 " Imposible ver: \n"
 " no es un archivo ordinario "
 
-#: src/view.c:812
+#: src/view.c:808
 #, c-format
 msgid "File: %s"
 msgstr "Archivo: %s"
 
-#: src/view.c:827
+#: src/view.c:823
 #, c-format
 msgid "Offset 0x%08x"
 msgstr "Offset 0x%08x"
 
-#: src/view.c:829
+#: src/view.c:825
 #, c-format
 msgid "Col %d"
 msgstr "Col %d"
 
-#: src/view.c:833
+#: src/view.c:829
 #, c-format
 msgid "%s bytes"
 msgstr "%s bytes"
 
-#: src/view.c:838
+#: src/view.c:834
 msgid "  [grow]"
 msgstr "  [crece]"
 
-#: src/view.c:1863
+#: src/view.c:1859
 msgid "Invalid hex search expression"
 msgstr " Expresión regular hexadecimal inválida "
 
-#: src/view.c:1917
+#: src/view.c:1913
 msgid " Invalid regular expression "
 msgstr " Expresión regular inválida "
 
-#: src/view.c:2042
+#: src/view.c:2038
 #, c-format
 msgid ""
 " The current line number is %d.\n"
@@ -3703,7 +3719,7 @@ msgstr ""
 " La línea actual es la número %d\n"
 " Teclee el número de línea a buscar:"
 
-#: src/view.c:2065
+#: src/view.c:2061
 #, c-format
 msgid ""
 " The current address is 0x%lx.\n"
@@ -3712,67 +3728,67 @@ msgstr ""
 " La posición actual es 0x%lx.\n"
 " Teclee la posición a buscar:"
 
-#: src/view.c:2067
+#: src/view.c:2063
 msgid " Goto Address "
 msgstr " Ir a posición "
 
-#: src/view.c:2099
+#: src/view.c:2095
 msgid " Enter regexp:"
 msgstr " Teclee la expresión regular:"
 
-#: src/view.c:2255
+#: src/view.c:2251
 msgid "Ascii"
 msgstr "Ascii"
 
-#: src/view.c:2255
+#: src/view.c:2251
 msgid "Hex"
 msgstr "Hex"
 
-#: src/view.c:2257
+#: src/view.c:2253
 msgid "Goto"
 msgstr "Ir a"
 
-#: src/view.c:2257
+#: src/view.c:2253
 msgid "Line"
 msgstr "Línea"
 
-#: src/view.c:2259
+#: src/view.c:2255
 msgid "RxSrch"
 msgstr "BúsqRx"
 
-#: src/view.c:2264
+#: src/view.c:2260
 msgid "EdText"
 msgstr "EdTexto"
 
-#: src/view.c:2264
+#: src/view.c:2260
 msgid "EdHex"
 msgstr "EdHex"
 
-#: src/view.c:2266
+#: src/view.c:2262
 msgid "UnWrap"
 msgstr "Desple"
 
-#: src/view.c:2266
+#: src/view.c:2262
 msgid "Wrap"
 msgstr "Plegar"
 
-#: src/view.c:2269
+#: src/view.c:2265
 msgid "HxSrch"
 msgstr "BúsqHx"
 
-#: src/view.c:2272
+#: src/view.c:2268
 msgid "Raw"
 msgstr "Crudo"
 
-#: src/view.c:2272
+#: src/view.c:2268
 msgid "Parse"
 msgstr "Procesado"
 
-#: src/view.c:2277
+#: src/view.c:2273
 msgid "Unform"
 msgstr "SinForm"
 
-#: src/view.c:2277
+#: src/view.c:2273
 msgid "Format"
 msgstr "Formato"
 
@@ -3780,195 +3796,195 @@ msgstr "Formato"
 msgid " History "
 msgstr " Historia "
 
-#: src/win.c:119
+#: src/win.c:121
 msgid "Function key 1"
 msgstr "Tecla F1"
 
-#: src/win.c:120
+#: src/win.c:122
 msgid "Function key 2"
 msgstr "Tecla F2"
 
-#: src/win.c:121
+#: src/win.c:123
 msgid "Function key 3"
 msgstr "Tecla F3"
 
-#: src/win.c:122
+#: src/win.c:124
 msgid "Function key 4"
 msgstr "Tecla F4"
 
-#: src/win.c:123
+#: src/win.c:125
 msgid "Function key 5"
 msgstr "Tecla F5"
 
-#: src/win.c:124
+#: src/win.c:126
 msgid "Function key 6"
 msgstr "Tecla F6"
 
-#: src/win.c:125
+#: src/win.c:127
 msgid "Function key 7"
 msgstr "Tecla F7"
 
-#: src/win.c:126
+#: src/win.c:128
 msgid "Function key 8"
 msgstr "Tecla F8"
 
-#: src/win.c:127
+#: src/win.c:129
 msgid "Function key 9"
 msgstr "Tecla F9"
 
-#: src/win.c:128
+#: src/win.c:130
 msgid "Function key 10"
 msgstr "Tecla F10"
 
-#: src/win.c:129
+#: src/win.c:131
 msgid "Function key 11"
 msgstr "Tecla F11"
 
-#: src/win.c:130
+#: src/win.c:132
 msgid "Function key 12"
 msgstr "Tecla F12"
 
-#: src/win.c:131
+#: src/win.c:133
 msgid "Function key 13"
 msgstr "Tecla F13"
 
-#: src/win.c:132
+#: src/win.c:134
 msgid "Function key 14"
 msgstr "Tecla F14"
 
-#: src/win.c:133
+#: src/win.c:135
 msgid "Function key 15"
 msgstr "Tecla F15"
 
-#: src/win.c:134
+#: src/win.c:136
 msgid "Function key 16"
 msgstr "Tecla F16"
 
-#: src/win.c:135
+#: src/win.c:137
 msgid "Function key 17"
 msgstr "Tecla F17"
 
-#: src/win.c:136
+#: src/win.c:138
 msgid "Function key 18"
 msgstr "Tecla F18"
 
-#: src/win.c:137
+#: src/win.c:139
 msgid "Function key 19"
 msgstr "Tecla F19"
 
-#: src/win.c:138
+#: src/win.c:140
 msgid "Function key 20"
 msgstr "Tecla F20"
 
-#: src/win.c:139
+#: src/win.c:141
 msgid "Backspace key"
 msgstr "Tecla Borrar"
 
-#: src/win.c:140
+#: src/win.c:142
 msgid "End key"
 msgstr "Tecla Fin"
 
-#: src/win.c:141
+#: src/win.c:143
 msgid "Up arrow key"
 msgstr "Flecha arriba"
 
-#: src/win.c:142
+#: src/win.c:144
 msgid "Down arrow key"
 msgstr "Flecha abajo"
 
-#: src/win.c:143
+#: src/win.c:145
 msgid "Left arrow key"
 msgstr "Flecha izquierda"
 
-#: src/win.c:144
+#: src/win.c:146
 msgid "Right arrow key"
 msgstr "Flecha derecha"
 
-#: src/win.c:145
+#: src/win.c:147
 msgid "Home key"
 msgstr "Tecla Inicio"
 
-#: src/win.c:146
+#: src/win.c:148
 msgid "Page Down key"
 msgstr "Avanzar Página"
 
-#: src/win.c:147
+#: src/win.c:149
 msgid "Page Up key"
 msgstr "Retrasar Página"
 
-#: src/win.c:148
+#: src/win.c:150
 msgid "Insert key"
 msgstr "Tecla Insertar"
 
-#: src/win.c:149
+#: src/win.c:151
 msgid "Delete key"
 msgstr "Tecla Eliminar"
 
-#: src/win.c:150
+#: src/win.c:152
 msgid "Completion/M-tab"
 msgstr "Completar/M-Tab"
 
-#: src/win.c:151
+#: src/win.c:153
 msgid "+ on keypad"
 msgstr "+ en el pad"
 
-#: src/win.c:152
+#: src/win.c:154
 msgid "- on keypad"
 msgstr "- en el pad"
 
-#: src/win.c:153
+#: src/win.c:155
 msgid "* on keypad"
 msgstr "* en el pad"
 
-#: src/win.c:155
+#: src/win.c:157
 msgid "Left arrow keypad"
 msgstr "Flecha izquierda, pad"
 
-#: src/win.c:156
+#: src/win.c:158
 msgid "Right arrow keypad"
 msgstr "Flecha derecha, pad"
 
-#: src/win.c:157
+#: src/win.c:159
 msgid "Up arrow keypad"
 msgstr "Flecha arriba, pad"
 
-#: src/win.c:158
+#: src/win.c:160
 msgid "Down arrow keypad"
 msgstr "Flecha abajo, pad"
 
-#: src/win.c:159
+#: src/win.c:161
 msgid "Home on keypad"
 msgstr "Inicio, pad"
 
-#: src/win.c:160
+#: src/win.c:162
 msgid "End on keypad"
 msgstr "Fin, pad"
 
-#: src/win.c:161
+#: src/win.c:163
 msgid "Page Down keypad"
 msgstr "Página abajo, pad"
 
-#: src/win.c:162
+#: src/win.c:164
 msgid "Page Up keypad"
 msgstr "Página arriba, pad"
 
-#: src/win.c:163
+#: src/win.c:165
 msgid "Insert on keypad"
 msgstr "Ins, pad"
 
-#: src/win.c:164
+#: src/win.c:166
 msgid "Delete on keypad"
 msgstr "Eliminar, pad"
 
-#: src/win.c:165
+#: src/win.c:167
 msgid "Enter on keypad"
 msgstr "Intro, pad"
 
-#: src/win.c:166
+#: src/win.c:168
 msgid "Slash on keypad"
 msgstr "Diagonal, pad"
 
-#: src/win.c:167
+#: src/win.c:169
 msgid "NumLock on keypad"
 msgstr "Bloquea números, pad"
 
@@ -4095,12 +4111,12 @@ msgstr "fish: Conectado, inicio en %s"
 msgid "fish: Reading directory %s..."
 msgstr "fish: Leyendo el directorio %s..."
 
-#: vfs/fish.c:455 vfs/ftpfs.c:1345 vfs/undelfs.c:310
+#: vfs/fish.c:455 vfs/ftpfs.c:1355 vfs/undelfs.c:310
 #, c-format
 msgid "%s: done."
 msgstr "%s: hecho."
 
-#: vfs/fish.c:460 vfs/ftpfs.c:1297 vfs/undelfs.c:313
+#: vfs/fish.c:460 vfs/ftpfs.c:1307 vfs/undelfs.c:313
 #, c-format
 msgid "%s: failure"
 msgstr "%s: fallo"
@@ -4110,154 +4126,154 @@ msgstr "%s: fallo"
 msgid "fish: store %s: sending command..."
 msgstr "fish: guardar %s: enviando comando..."
 
-#: vfs/fish.c:532
+#: vfs/fish.c:526
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Fallo de lectura local, enviando ceros"
 
-#: vfs/fish.c:544
+#: vfs/fish.c:538
 #, c-format
 msgid "fish: storing %s %d (%lu)"
 msgstr "fish: guardando %s %d (%lu)"
 
-#: vfs/fish.c:545
+#: vfs/fish.c:539
 msgid "zeros"
 msgstr "ceros"
 
-#: vfs/fish.c:598
+#: vfs/fish.c:592
 msgid "Aborting transfer..."
 msgstr "Abortando transferencia."
 
-#: vfs/fish.c:607
+#: vfs/fish.c:601
 msgid "Error reported after abort."
 msgstr "Error denunciado tras abortar."
 
-#: vfs/fish.c:609
+#: vfs/fish.c:603
 msgid "Aborted transfer would be successful."
 msgstr "Abortada transferencia con éxito."
 
-#: vfs/ftpfs.c:378
+#: vfs/ftpfs.c:382
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: Desconectando de %s"
 
-#: vfs/ftpfs.c:431
+#: vfs/ftpfs.c:435
 msgid " FTP: Password required for "
 msgstr " FTP: Contraseña requerida para "
 
-#: vfs/ftpfs.c:469
+#: vfs/ftpfs.c:473
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: Enviando nombre de usuario"
 
-#: vfs/ftpfs.c:474
+#: vfs/ftpfs.c:477
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: Enviando contraseña de usuario"
 
-#: vfs/ftpfs.c:480
+#: vfs/ftpfs.c:483
 #, c-format
 msgid "FTP: Account required for user %s"
 msgstr "FTP: Cuenta requerida para usuario %s"
 
-#: vfs/ftpfs.c:482
+#: vfs/ftpfs.c:485
 msgid "Account:"
 msgstr "Cuenta:"
 
-#: vfs/ftpfs.c:486
+#: vfs/ftpfs.c:489
 msgid "ftpfs: sending user account"
 msgstr "ftpfs: Enviando cuenta de usuario"
 
-#: vfs/ftpfs.c:495
+#: vfs/ftpfs.c:498
 msgid "ftpfs: logged in"
 msgstr "ftpfs: Autorizados"
 
-#: vfs/ftpfs.c:510
+#: vfs/ftpfs.c:512
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: denegada autorización al usuario %s"
 
-#: vfs/ftpfs.c:543
+#: vfs/ftpfs.c:545
 #, c-format
 msgid " Cannot set source routing (%s)"
 msgstr " Imposible prefijar la ruta (%s)"
 
-#: vfs/ftpfs.c:665
+#: vfs/ftpfs.c:667
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Nombre de máquina incorrecto"
 
-#: vfs/ftpfs.c:683
+#: vfs/ftpfs.c:685
 msgid "ftpfs: Invalid host address."
 msgstr "ftpfs: Dirección de máquina incorrecta"
 
-#: vfs/ftpfs.c:706
+#: vfs/ftpfs.c:708
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: Estableciendo conexión con %s"
 
-#: vfs/ftpfs.c:716
+#: vfs/ftpfs.c:718
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: Conexión abortada por el usuario"
 
-#: vfs/ftpfs.c:718
+#: vfs/ftpfs.c:720
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: Conexión al servidor fracasó: %s"
 
-#: vfs/ftpfs.c:759
+#: vfs/ftpfs.c:761
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Esperando antes de insistir... %d (Ctrl-C para cancelar)"
 
-#: vfs/ftpfs.c:942
+#: vfs/ftpfs.c:946
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: Imposible aplicar el \"modo pasivo\""
 
-#: vfs/ftpfs.c:1016
+#: vfs/ftpfs.c:1025
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: Abortando transferencia."
 
-#: vfs/ftpfs.c:1018
+#: vfs/ftpfs.c:1027
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: Error al abortar: %s"
 
-#: vfs/ftpfs.c:1026
+#: vfs/ftpfs.c:1035
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: Aborto fracasado"
 
-#: vfs/ftpfs.c:1129 vfs/ftpfs.c:1234
+#: vfs/ftpfs.c:1139 vfs/ftpfs.c:1244
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: Fallo al ejecutar CWD"
 
-#: vfs/ftpfs.c:1139 vfs/ftpfs.c:1146
+#: vfs/ftpfs.c:1149 vfs/ftpfs.c:1156
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: Imposible resolver el enlace simbólico"
 
-#: vfs/ftpfs.c:1197
+#: vfs/ftpfs.c:1207
 msgid "Resolving symlink..."
 msgstr "Resolviendo enlace simbólico..."
 
-#: vfs/ftpfs.c:1222
+#: vfs/ftpfs.c:1232
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: Leyendo vía FTP el directorio %s... %s%s"
 
-#: vfs/ftpfs.c:1223
+#: vfs/ftpfs.c:1233
 msgid "(strict rfc959)"
 msgstr "(rfc959)"
 
-#: vfs/ftpfs.c:1224
+#: vfs/ftpfs.c:1234
 msgid "(chdir first)"
 msgstr "(chdir)"
 
-#: vfs/ftpfs.c:1358
+#: vfs/ftpfs.c:1368
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: Falló; no hay dónde replegarse"
 
-#: vfs/ftpfs.c:1423
+#: vfs/ftpfs.c:1433
 #, c-format
 msgid "ftpfs: storing file %lu (%lu)"
 msgstr "ftpfs: Guardando archivo %lu (%lu)"
 
-#: vfs/ftpfs.c:1880
+#: vfs/ftpfs.c:1905
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -4310,7 +4326,7 @@ msgstr " Imposible conectar con servidor: %s "
 msgid " Too many open connections "
 msgstr " Demasiadas conexiones en curso "
 
-#: vfs/sfs.c:335
+#: vfs/sfs.c:336
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
@@ -4319,7 +4335,7 @@ msgstr ""
 "Atención: Línea no válida en %s:\n"
 "%s\n"
 
-#: vfs/sfs.c:347
+#: vfs/sfs.c:348
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
@@ -4482,28 +4498,28 @@ msgstr " Tiene que ir al directorio antes de extraer archivos "
 msgid " while iterating over blocks "
 msgstr " al iterar entre bloques "
 
-#: vfs/vfs.c:1158
+#: vfs/vfs.c:1166
 msgid "Changes to file lost"
 msgstr "Los cambios del archivo se han perdido"
 
-#: vfs/vfs.c:1830
+#: vfs/vfs.c:1838
 msgid "Cannot parse:"
 msgstr "Imposible analizar:"
 
-#: vfs/vfs.c:1832
+#: vfs/vfs.c:1840
 msgid "More parsing errors will be ignored."
 msgstr "El resto de errores de análisis serán ignorados."
 
-#: vfs/vfs.c:1842
+#: vfs/vfs.c:1850
 msgid "Internal error:"
 msgstr "Error interno:"
 
-#: vfs/vfs.c:1852
+#: vfs/vfs.c:1860
 #, c-format
 msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu bytes transferidos)"
 
-#: vfs/vfs.c:1853
+#: vfs/vfs.c:1861
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu bytes transferidos"
