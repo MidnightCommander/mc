@@ -1,6 +1,9 @@
 #! /bin/sh
 # Run this to generate all the initial makefiles, etc.
 
+# Don't ignore errors.
+set -e
+
 # Make it possible to specify path in the environment
 : ${AUTOCONF=autoconf}
 : ${AUTOHEADER=autoheader}
@@ -13,13 +16,16 @@ srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
 (
+# Some shells don't propagate "set -e" to subshells.
+set -e
+
 cd $srcdir
 
 # The autoconf cache (version after 2.52) is not reliable yet.
 rm -rf autom4te.cache vfs/samba/autom4te.cache
 
 if test ! -d config; then
-  mkdir config || exit 1
+  mkdir config
 fi
 
 # Ensure that gettext is reasonably new.
@@ -35,9 +41,9 @@ if test $gettext_ver -ge 01100; then
     echo "Upgrage gettext to at least 0.11.5 or downgrade to 0.10.40" 2>&1
     exit 1
   fi
-  $AUTOPOINT || exit 1
+  $AUTOPOINT
 else
-  $GETTEXTIZE --copy --force || exit 1
+  $GETTEXTIZE --copy --force
   if test -e po/ChangeLog~; then
     rm -f po/ChangeLog
     mv po/ChangeLog~ po/ChangeLog
@@ -49,7 +55,7 @@ ACLOCAL_INCLUDES="-I m4"
 # Some old version of GNU build tools fail to set error codes.
 # Check that they generate some of the files they should.
 
-$ACLOCAL $ACLOCAL_INCLUDES $ACLOCAL_FLAGS || exit 1
+$ACLOCAL $ACLOCAL_INCLUDES $ACLOCAL_FLAGS
 test -f aclocal.m4 || \
   { echo "aclocal failed to generate aclocal.m4" 2>&1; exit 1; }
 
@@ -62,19 +68,19 @@ test -f configure || \
   { echo "autoconf failed to generate configure" 2>&1; exit 1; }
 
 # Workaround for Automake 1.5 to ensure that depcomp is distributed.
-$AUTOMAKE -a src/Makefile || exit 1
-$AUTOMAKE -a || exit 1
+$AUTOMAKE -a src/Makefile
+$AUTOMAKE -a
 test -f Makefile.in || \
   { echo "automake failed to generate Makefile.in" 2>&1; exit 1; }
 
-cd vfs/samba || exit 1
+cd vfs/samba
 date -u >include/stamp-h.in
 
-$AUTOHEADER || exit 1
+$AUTOHEADER
 test -f include/config.h.in || \
   { echo "autoheader failed to generate vfs/samba/include/config.h.in" 2>&1; exit 1; }
 
-$AUTOCONF || exit 1
+$AUTOCONF
 test -f configure || \
   { echo "autoconf failed to generate vfs/samba/configure" 2>&1; exit 1; }
 ) || exit 1
