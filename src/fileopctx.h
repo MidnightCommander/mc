@@ -115,7 +115,7 @@ FileOpContext *file_op_context_new (FileOperation op);
 void file_op_context_destroy (FileOpContext *ctx);
 
 
-extern char *op_names [3];
+extern const char *op_names [3];
 
 typedef enum {
 	FILE_CONT,

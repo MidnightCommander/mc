@@ -28,7 +28,7 @@
 #include "global.h"
 
 static char *
-get_absolute_name (char *file)
+get_absolute_name (const char *file)
 {
     char dir[MC_MAXPATHLEN];
 
@@ -70,9 +70,10 @@ my_mkdir_rec (char *s, mode_t mode)
 }
 
 int
-my_mkdir (char *s, mode_t mode)
+my_mkdir (const char *s, mode_t mode)
 {
     int result;
+    char *my_s;
 
     result = mc_mkdir (s, mode);
     if (result) {
@@ -82,21 +83,22 @@ my_mkdir (char *s, mode_t mode)
 	g_free (p);
     }
     if (result == 0) {
-	s = get_absolute_name (s);
+	my_s = get_absolute_name (s);
 
 #ifdef FIXME
-	tree_add_entry (tree, s);
+	tree_add_entry (tree, my_s);
 #endif
 
-	g_free (s);
+	g_free (my_s);
     }
     return result;
 }
 
 int
-my_rmdir (char *s)
+my_rmdir (const char *s)
 {
     int result;
+    char *my_s;
 #ifdef FIXME
     WTree *tree = 0;
 #endif
@@ -104,13 +106,13 @@ my_rmdir (char *s)
     /* FIXME: Should receive a Wtree! */
     result = mc_rmdir (s);
     if (result == 0) {
-	s = get_absolute_name (s);
+	my_s = get_absolute_name (s);
 
 #ifdef FIXME
-	tree_remove_entry (tree, s);
+	tree_remove_entry (tree, my_s);
 #endif
 
-	g_free (s);
+	g_free (my_s);
     }
     return result;
 }

@@ -173,15 +173,15 @@ find_parameters (char **start_dir, char **pattern, char **content)
 {
     int return_value;
     char *temp_dir;
-    static char *case_label = N_("case &Sensitive");
+    static const char *case_label = N_("case &Sensitive");
 
     static char *in_contents = NULL;
     static char *in_start_dir = NULL;
     static char *in_start_name = NULL;
 
-    static char *labs[] =
+    static const char *labs[] =
 	{ N_("Start at:"), N_("Filename:"), N_("Content: ") };
-    static char *buts[] = { N_("&OK"), N_("&Tree"), N_("&Cancel") };
+    static const char *buts[] = { N_("&OK"), N_("&Tree"), N_("&Cancel") };
     static int ilen = 30, istart = 14;
     static int b0 = 3, b1 = 16, b2 = 36;
 
@@ -611,7 +611,7 @@ do_search (struct Dlg_head *h)
     count++;
     if (!(count & 31)){
 	/* For nice updating */
-	char *rotating_dash = "|/-\\";
+	const char *rotating_dash = "|/-\\";
 
 	if (verbose){
 	    pos = (pos + 1) % 4;

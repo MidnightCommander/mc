@@ -96,7 +96,7 @@ typedef struct {
     /* Query replace dialog */
 
     Dlg_head *replace_dlg;
-    char *replace_filename;
+    const char *replace_filename;
     int replace_result;
     struct stat *s_stat, *d_stat;
 } FileOpContextUI;
@@ -171,8 +171,8 @@ file_op_context_create_ui (FileOpContext *ctx, int with_eta)
     int x_size;
     int minus;
     int eta_offset;
-    char *sixty;
-    char *fifteen;
+    const char *sixty;
+    const char *fifteen;
 
     g_return_if_fail (ctx != NULL);
     g_return_if_fail (ctx->ui == NULL);
@@ -506,7 +506,7 @@ file_progress_show_deleting (FileOpContext *ctx, const char *s)
  *   alex
  */
 static struct {
-    char *text;
+    const char *text;
     int ypos, xpos;
     int value;			/* 0 for labels */
 } rd_widgets[] = {
