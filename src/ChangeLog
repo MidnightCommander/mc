@@ -1,3 +1,8 @@
+2002-03-04  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* file.c (copy_file_file): Chmod destination only if
+	ctx->preserve is on.  Eliminate gotos.
+
 2002-03-01  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* Makefile.am (mc.hlp.ru): New rule to compile translated

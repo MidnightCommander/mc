@@ -489,12 +489,11 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 
     mc_refresh ();
 
- retry_dst_stat:
-    if (mc_stat (dst_path, &sb2) == 0){
+    while (mc_stat (dst_path, &sb2) == 0){
 	if (S_ISDIR (sb2.st_mode)){
 	    return_status = file_error (_(" Cannot overwrite directory \"%s\" \n %s "), dst_path);
 	    if (return_status == FILE_RETRY)
-		goto retry_dst_stat;
+		continue;
 	    return return_status;
 	}
 	dst_exists = 1;
@@ -791,16 +790,17 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
       * .ado: according to the XPG4 standard, the file must be closed before
       * chmod can be invoked
       */
-    retry_dst_chmod:
-	if (!appending && mc_chmod (dst_path, src_mode & ctx->umask_kill)){
-	    temp_status = file_error (_(" Cannot chmod target file \"%s\" \n %s "), dst_path);
-	    if (temp_status == FILE_RETRY)
-		goto retry_dst_chmod;
-	    return_status = temp_status;
-	}
-
-	if (!appending && ctx->preserve)
+	if (!appending && ctx->preserve){
+	    while (mc_chmod (dst_path, src_mode & ctx->umask_kill)){
+		temp_status = file_error (
+		    _(" Cannot chmod target file \"%s\" \n %s "), dst_path);
+		if (temp_status != FILE_RETRY){
+		    return_status = temp_status;
+		    break;
+		}
+	    }
 	    mc_utime (dst_path, &utb);
+	}
     }
 
     if (return_status == FILE_CONT)
