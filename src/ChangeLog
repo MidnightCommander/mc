@@ -1,3 +1,11 @@
+2001-07-31  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.in: Move most logic around gindex.pl into gindex.pl.
+	Don't use maintainer-only rules since mc.hlp won't be removed
+	now if perl is missing or gindex.pl fails.
+	* gindex.pl: Run man2hlp internally.  Use files given as
+	arguments instead of stdin and stdout.
+
 2001-07-30  Pavel Roskin  <proski@gnu.org>
 
 	* mad.c: Don't use g_calloc - it's missing in glib 1.2.x.

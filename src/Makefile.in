@@ -90,13 +90,10 @@ man2hlp: man2hlp.o
 mcmfmt: mfmt.o
 	$(CC) $(LDFLAGS) mfmt.o -o mcmfmt 
 
-$(srcdir)/mc.hlp: @MAINT@ $(docdir)/mc.1.in $(mcsrclibdir)/xnc.hlp $(srcdir)/gindex.pl man2hlp.c
-@MAINT@	$(MAKE) man2hlp
-@MAINT@	- ./man2hlp 58 $(docdir)/mc.1.in | cat - $(mcsrclibdir)/xnc.hlp | \
-@MAINT@	perl $(srcdir)/gindex.pl > $(srcdir)/mc.hlp.tmp && \
-@MAINT@	mv -f $(srcdir)/mc.hlp.tmp $(srcdir)/mc.hlp; \
-@MAINT@	rm -f $(srcdir)/mc.hlp.tmp; \
-@MAINT@	touch $(srcdir)/mc.hlp
+$(srcdir)/mc.hlp: $(docdir)/mc.1.in $(mcsrclibdir)/xnc.hlp $(srcdir)/gindex.pl man2hlp.c
+	- $(MAKE) man2hlp
+	- perl $(srcdir)/gindex.pl $(docdir)/mc.1.in $(mcsrclibdir)/xnc.hlp $(srcdir)/mc.hlp
+	- touch $(srcdir)/mc.hlp
 
 mc.html: $(docdir)/mc.1.in man2hlp
 	./man2hlp 0 $(docdir)/mc.1.in > body.html

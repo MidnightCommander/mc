@@ -3,7 +3,24 @@
 # the warranty are quite big, we leave them at the end of the help file,
 # the index will be consulted quite frequently, so we put it at the beginning. 
 
-@help_file = <>;
+if ($#ARGV != 2) {
+    die "Three arguments required";
+}
+
+$man_file = "$ARGV[0]";
+$tmpl_file = "$ARGV[1]";
+$out_file = "$ARGV[2]";
+
+$help_width = 58;
+
+open (HELP1, "./man2hlp $help_width $man_file |") or
+    die "Cannot open read output of man2hlp: $!\n";;
+@help_file = <HELP1>;
+close (HELP1);
+
+open (HELP2, "< $tmpl_file") or die "Cannot open $tmpl_file: $!\n";
+push @help_file, <HELP2>;
+close (HELP2);
 
 foreach $line (@help_file){
     if ($line =~ /\x04\[(.*)\]/ && $line !~ /\x04\[main\]/){
@@ -12,15 +29,22 @@ foreach $line (@help_file){
     }
 }
 
-print "\x04[Contents]\nTopics:\n\n";
+unlink ("$out_file");
+if (-e "$out_file") {
+    die "Cannot remove $out_file\n";
+}
+
+open (OUTPUT, "> $out_file") or die "Cannot open $out_file: $!\n";
+
+print OUTPUT "\x04[Contents]\nTopics:\n\n";
 foreach $node (@nodes){
     if (length $node){
 	$node =~ m/^( *)(.*)$/;
-	printf ("  %s\x01 %s \x02%s\x03", $1, $2, $2);
+	printf OUTPUT ("  %s\x01 %s \x02%s\x03", $1, $2, $2);
     }
-    print "\n";
+    print OUTPUT "\n";
 }
-#foreach $line (@help_file){
-#    $line =~ s/%NEW_NODE%/\004/g;
-#}
-print @help_file;
+
+print OUTPUT @help_file;
+
+close (OUTPUT);
