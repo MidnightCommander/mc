@@ -1942,7 +1942,7 @@ do_enter_on_file_entry (file_entry *fe)
     }
 
     /* Try associated command */
-    p = regex_command (fe->fname, "Open", NULL, 0);
+    p = regex_command (fe->fname, "Open", 0);
     if (p && (strcmp (p, "Success") == 0))
 	return 1;
 

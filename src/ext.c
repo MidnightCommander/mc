@@ -63,43 +63,8 @@ flush_extension_file (void)
 
 typedef char *(*quote_func_t)(const char *name, int i);
 
-static char *
-quote_block (quote_func_t quote_func, char **quoting_block)
-{
-	char **p;
-	char *result;
-	char *tail;
-	int tail_index;
-	int current_len;
-
-	result = NULL;
-	current_len = 0;
-	tail_index = 0;
-
-	for (p = quoting_block; *p; p++) {
-		int temp_len;
-		char *temp;
-
-		temp = quote_func (*p, FALSE);
-		temp_len = strlen (temp);
-
-		current_len += temp_len + 2;
-		result = g_realloc (result, current_len);
-		tail = result + tail_index;
-
-		strcpy (tail, temp);
-		tail[temp_len] = ' ';
-		tail[temp_len + 1] = '\0';
-		tail_index += temp_len + 1;
-
-		g_free (temp);
-	}
-
-	return result;
-}
-
-void
-exec_extension (const char *filename, const char *data, char **drops, int *move_dir, int start_line, int needs_term)
+static void
+exec_extension (const char *filename, const char *data, int *move_dir, int start_line, int needs_term)
 {
     char *file_name;
     int  cmd_file_fd;
@@ -212,8 +177,6 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
 			} else {
 			    text = (*quote_func) (filename, 0);
 			}
-		    } else if (*data == 'q') {
-			text = quote_block (quote_func, drops);
 		    } else
 		        text = expand_format (NULL, *data, !is_cd);
 		    if (!is_cd)
@@ -313,10 +276,8 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
 #   define FILE_CMD "file "
 #endif
 
-/* The second argument is action, i.e. Open, View, Edit, Drop, or NULL if
+/* The second argument is action, i.e. Open, View, Edit, or NULL if
  * we want regex_command to return a list of all user defined actions.
- * Third argument is space separated list of dropped files (for actions
- * other then Drop it should be NULL);
  *
  * This function returns:
  *
@@ -326,15 +287,10 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
  * If action == NULL, it returns NULL if there are no user defined commands
  * or an allocated space separated list of user defined Actions.
  *
- * If action == "Icon", we are doing again something special. We return
- * icon name and we set the variable regex_command_title to Title for
- * that icon.
- *
  * If action == "View" then a parameter is checked in the form of "View:%d",
  * if the value for %d exists, then the viewer is started up at that line number.
  */
-char *regex_command_title = NULL;
-char *regex_command (char *filename, char *action, char **drops, int *move_dir)
+char *regex_command (char *filename, char *action, int *move_dir)
 {
     char *p, *q, *r, c;
     int  file_len = strlen (filename);
@@ -423,10 +379,6 @@ file as an example of how to write it.\n\
     }
     mc_stat (filename, &mystat);
 
-    if (regex_command_title){
-	g_free (regex_command_title);
-	regex_command_title = NULL;
-    }
     old_patterns = easy_patterns;
     easy_patterns = 0; /* Real regular expressions are needed :) */
     include_target = NULL;
@@ -606,10 +558,7 @@ match_file_output:
     	                if (strcmp (p, "Open") &&
     	                    strcmp (p, "View") &&
     	                    strcmp (p, "Edit") &&
-    	                    strcmp (p, "Drop") &&
-    	                    strcmp (p, "Icon") &&
-			    strcmp (p, "Include") &&
-    	                    strcmp (p, "Title")) {
+			    strcmp (p, "Include")) {
     	                    /* I.e. this is a name of a user defined action */
     	                        static char *q;
 
@@ -622,24 +571,6 @@ match_file_output:
     	                        q = strchr (q, 0);
     	                }
     	                *r = c;
-    	            } else if (!strcmp (action, "Icon")) {
-    	                if (!strcmp (p, "Icon") && to_return == NULL) {
-    	            	    *r = c;
-    	            	    c = *q;
-    	            	    *q = 0;
-    	                    to_return = g_strdup (r + 1);
-    	                } else if (!strcmp (p, "Title") && regex_command_title == NULL) {
-    	            	    *r = c;
-    	            	    c = *q;
-    	            	    *q = 0;
-    	                    regex_command_title = g_strdup (r + 1);
-    	                } else {
-    	                    *r = c;
-    	                    c = *q;
-    	                }
-    	                *q = c;
-    	                if (to_return != NULL && regex_command_title != NULL)
-    	                    break;
     	            } else if (!strcmp (action, p)) {
     	                *r = c;
     	                for (p = r + 1; *p == ' ' || *p == '\t'; p++)
@@ -656,7 +587,7 @@ match_file_output:
     	                if (p < q) {
 			    char *filename_copy = g_strdup (filename);
 
-			    exec_extension (filename_copy, r + 1, drops, move_dir, view_at_line_number, 0);
+			    exec_extension (filename_copy, r + 1, move_dir, view_at_line_number, 0);
 			    g_free (filename_copy);
 
     	                    to_return = "Success";

@@ -153,7 +153,7 @@ int view_file_at_line (char *filename, int plain_view, int internal, int start_l
 	else
 	    strcpy (view_entry, "View");
 	
-	if (!regex_command (filename, view_entry, NULL, &move_dir)){
+	if (!regex_command (filename, view_entry, &move_dir)){
 	    view (0, filename, &move_dir, start_line);
 	    repaint_screen ();
 	}
@@ -317,7 +317,7 @@ do_edit (const char *what)
 void edit_cmd (WPanel *panel)
 {
     panel = get_a_panel(panel);
-    if (!regex_command (selection (panel)->fname, "Edit", NULL, 0))
+    if (!regex_command (selection (panel)->fname, "Edit", 0))
         do_edit (selection (panel)->fname);
 }
 
