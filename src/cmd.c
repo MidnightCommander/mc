@@ -1495,6 +1495,8 @@ info_cmd (void)
 void
 quick_view_cmd (void)
 {
+    if (get_panel_widget (MENU_PANEL_IDX) == cpanel)
+	change_panel ();
     set_display_type (MENU_PANEL_IDX, view_quick);
 }
 #endif

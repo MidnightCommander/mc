@@ -384,8 +384,8 @@ switch_metadata_box (GnomeFilePropertyDialog *fp_dlg)
 	}
 
 	if (fp_dlg->executable) {
-		gtk_label_set_text (GTK_LABEL (fp_dlg->prop1_label), "Drop Action");
-		gtk_label_set_text (GTK_LABEL (GTK_BIN (fp_dlg->prop1_cbox)->child), "Use default Drop Action options");
+		gtk_label_set_text (GTK_LABEL (fp_dlg->prop1_label), _("Drop Action"));
+		gtk_label_set_text (GTK_LABEL (GTK_BIN (fp_dlg->prop1_cbox)->child), _("Use default Drop Action options"));
 		if (fp_dlg->drop_target) {
 			gtk_toggle_button_set_active ( GTK_TOGGLE_BUTTON  (fp_dlg->prop1_cbox), FALSE);
 			gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop1_entry), fp_dlg->drop_target);

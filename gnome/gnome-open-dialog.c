@@ -380,8 +380,8 @@ gnome_open_dialog_new (gchar *file_name)
 	dialog = gtk_type_new (gnome_open_dialog_get_type ());
 
 	/* the first label */
-	label_string = g_strconcat (_("Select an application to open \""),
-				    file_name, "\" with.", NULL);
+	label_string = g_strdup_printf (
+	    _("Select an application to open \"%s\" with."),file_name);
 	label = gtk_label_new (label_string);
 	gtk_widget_set_usize (label, 300, -1);
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);

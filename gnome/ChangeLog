@@ -1,3 +1,16 @@
+1999-06-22  David Martin <dmartina@usa.net>
+
+	* gnome-file-property-dialog.c (switch_metadata_box): Tag some
+	strings for localization.
+
+	* gnome-open-dialog.c (gnome_open_dialog_new): Don't assemble
+	label_string from seperate strings (makes it easier to translate).
+
+1999-06-22  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* gview.c (viewer_size_changed): Update internal viewer state used
+	in hex mode.
+
 1999-06-17  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (set_icon_wmclass): New function to set the wmclass

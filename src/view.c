@@ -564,15 +564,23 @@ do_view_init (WView *view, char *_command, char *_file, int start_line)
         int fd;
 
 	if ((fd = mc_open(_file, O_RDONLY)) == -1) {
-	    message (1, MSG_ERROR, _(" Can't open \"%s\"\n %s "),
+            char tmp[BUF_MEDIUM];
+	    g_snprintf (tmp, sizeof (tmp), 
+                        _(" Can't open \"%s\"\n %s "),
 			_file, unix_error_string (errno));
-	    return -1;
+	    view->filename = g_strdup (_file);
+            error = set_view_init_error (view, tmp);
+	    goto finish;
 	}
 	if (mc_fstat (fd, &view->s) == -1) {
-	    message (1, MSG_ERROR, _(" Can't open \"%s\"\n %s "),
+            char tmp[BUF_MEDIUM];
+	    g_snprintf (tmp, sizeof (tmp), 
+                        _(" Can't stat \"%s\"\n %s "),
 			_file, unix_error_string (errno));
 	    mc_close(fd);
-	    return -1;
+	    view->filename = g_strdup (_file);
+            error = set_view_init_error (view, tmp);
+	    goto finish;
 	}
 
 	if (_file[0] && view->viewer_magic_flag && (is_gunzipable (fd, &type)) != 0)
@@ -587,6 +595,7 @@ do_view_init (WView *view, char *_command, char *_file, int start_line)
     else
 	error = load_view_file (view, view->filename);
 
+finish:
     if (error){
 	if (!view->have_frame){
 	    message (1, MSG_ERROR, error);
@@ -608,6 +617,7 @@ do_view_init (WView *view, char *_command, char *_file, int start_line)
     /* Special case: The data points to the error message */
     if (error){
 	view->data = error;
+        view->file = -1;
 	view->s.st_size = view->bytes_read = strlen (view->data);
     }
     view->last_byte = view->first + view->s.st_size;
@@ -863,11 +873,11 @@ display (WView *view)
 	
 	/* Start of text column */
         int text_start = width - view->bytes_per_line - 1 + frame_shift;
-	
+
         for (;row < height && from < view->last_byte; row++){
             /* Print the hex offset */
             g_snprintf (hex_buff, sizeof (hex_buff), "%05X", (int) (from - view->first));
-	    widget_move (view, row, frame_shift);
+	    view_gotoyx (view, row, frame_shift);
             view_add_string (view, hex_buff);
 	    
             /* Hex dump starts from column seven */
@@ -919,18 +929,22 @@ display (WView *view)
                     /* Hex numbers are printed in the groups of four */
                     /* Groups are separated by a vline */
 
+                    view_gotoyx (view, row, col-1);
                     view_add_character (view, ' ');
+                    view_gotoyx (view, row, col);
                     view_add_one_vline ();
-		    view_gotoyx (view, row, col + 1);
                     col += 2;
                     
                     if (boldflag && from==view->search_start+view->found_len-1)
                     	view_set_color (view, BOLD_COLOR);
 		    
                 }
-                if (boldflag && from < view->search_start + view->found_len - 1 
-                    && bytes != view->bytes_per_line - 1)
-                    view_add_character (view, ' ');
+                if (boldflag && 
+                    from < view->search_start + view->found_len - 1 &&
+                    bytes != view->bytes_per_line - 1) {
+		        view_gotoyx (view, row, col);
+                        view_add_character (view, ' ');
+                }
 		
                 /* Print the corresponding ascii character */
 		view_gotoyx (view, row, text_start + bytes);

@@ -36,6 +36,7 @@ static void
 viewer_size_changed (GtkWidget *widget, guint cols, guint lines, WView *view)
 {
 	widget_set_size (&view->widget, 0, 0, lines, cols);
+	view_update_bytes_per_line (view);
 	dlg_redraw (view->widget.parent);
 }
 

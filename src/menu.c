@@ -229,10 +229,16 @@ static void menubar_drop (WMenu *menubar, int selected)
 static void menubar_execute (WMenu *menubar, int entry)
 {
     const Menu menu = menubar->menu [menubar->selected];
+    const callfn call_back = menu->entries [entry].call_back;
     
     is_right = menubar->selected != 0;
-    (*menu->entries [entry].call_back)(0);
+
+    /* This used to be the other way round, i.e. first callback and 
+       then menubar_finish. The new order (hack?) is needed to make 
+       change_panel () work which is used in quick_view_cmd () -- Norbert
+    */
     menubar_finish (menubar);
+    (*call_back)(0);
 }
 
 static void menubar_move (WMenu *menubar, int step)

@@ -1243,17 +1243,17 @@ struct _TbItems {
 
 static TbItems tb_items[] =
 {
-    {"F1", "Help", "Interactive help browser", GNOME_STOCK_MENU_BLANK, 0, NULL},
-    {"F2", "Save", "Save to current file name", GNOME_STOCK_MENU_SAVE, gtk_edit_save_file, NULL},
-    {"F3", "Mark", "Toggle In/Off invisible marker to highlight text", GNOME_STOCK_MENU_BLANK, gtk_edit_toggle_mark, NULL},
-    {"F4", "Replc", "Find and replace strings/regular expressions", GNOME_STOCK_MENU_SRCHRPL, gtk_edit_replace, NULL},
-    {"F5", "Copy", "Copy highlighted block to cursor postition", GNOME_STOCK_MENU_COPY, gtk_edit_copy, NULL},
+    {"F1", N_("Help"), N_("Interactive help browser"), GNOME_STOCK_MENU_BLANK, 0, NULL},
+    {"F2", N_("Save"), N_("Save to current file name"), GNOME_STOCK_MENU_SAVE, gtk_edit_save_file, NULL},
+    {"F3", N_("Mark"), N_("Toggle In/Off invisible marker to highlight text"), GNOME_STOCK_MENU_BLANK, gtk_edit_toggle_mark, NULL},
+    {"F4", N_("Replc"), N_("Find and replace strings/regular expressions"), GNOME_STOCK_MENU_SRCHRPL, gtk_edit_replace, NULL},
+    {"F5", N_("Copy"), N_("Copy highlighted block to cursor position"), GNOME_STOCK_MENU_COPY, gtk_edit_copy, NULL},
 
-    {"F6", "Move", "Copy highlighted block to cursor postition", GNOME_STOCK_MENU_BLANK, gtk_edit_move, NULL},
-    {"F7", "Find", "Find strings/regular expressions", GNOME_STOCK_MENU_SEARCH, gtk_edit_search, NULL},
-    {"F8", "Dlete", "Delete highlighted text", GNOME_STOCK_MENU_BLANK, gtk_edit_delete, NULL},
-    {"F9", "Menu", "Pull down menu", GNOME_STOCK_MENU_BLANK, /* gtk_edit_menu*/ 0, NULL},
-    {"F10", "Quit", "Exit editor", GNOME_STOCK_MENU_QUIT, gtk_edit_quit, NULL},
+    {"F6", N_("Move"), N_("Move highlighted block to cursor position"), GNOME_STOCK_MENU_BLANK, gtk_edit_move, NULL},
+    {"F7", N_("Find"), N_("Find strings/regular expressions"), GNOME_STOCK_MENU_SEARCH, gtk_edit_search, NULL},
+    {"F8", N_("Dlete"), N_("Delete highlighted text"), GNOME_STOCK_MENU_BLANK, gtk_edit_delete, NULL},
+    {"F9", N_("Menu"), N_("Pull down menu"), GNOME_STOCK_MENU_BLANK, /* gtk_edit_menu*/ 0, NULL},
+    {"F10", N_("Quit"), N_("Exit editor"), GNOME_STOCK_MENU_QUIT, gtk_edit_quit, NULL},
     {0, 0, 0, 0, 0, 0}
 };
 
@@ -1264,8 +1264,8 @@ static GtkWidget *create_toolbar (GtkWidget * window, GtkEdit * edit)
     toolbar = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
     for (t = &tb_items[0]; t->text; t++) {
 	t->widget = gtk_toolbar_append_item (GTK_TOOLBAR (toolbar),
-					     t->text,
-					     t->tooltip,
+					     _(t->text),
+					     _(t->tooltip),
 					     0,
 			     gnome_stock_pixmap_widget (window, t->icon),
 					     t->cb,

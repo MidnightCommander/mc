@@ -1,3 +1,22 @@
+1999-06-22  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* cmd.c (quick_view_cmd): Change panel when the file we want to
+	view isn't in the current panel (prevents a "file not found"
+	error). 
+
+	* menu.c (menubar_execute): De-activate the menubar previous to
+	invoking the callback. This is needed to make change_panel in
+	quick_view_cmd work (the activated menubar doesn't allow unfocus,
+	i.e. dlg_one_down|up don't change anything).
+
+	* view.c (do_view_init): improved error handling w.r.t quick view
+	(mc used to dump core when the file to view couldn't be opened). 
+
+1999-06-22  David Martin <dmartina@usa.net>
+
+	* view.c (display): added view_gotoxy's in order to make the gnome
+	edition operational in hex mode.
+
 Fri Jun 18 11:29:56 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* user.c (user_menu_cmd): Allow national characters as hotkeys. 
