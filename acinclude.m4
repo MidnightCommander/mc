@@ -244,45 +244,6 @@ AC_MSG_RESULT([$av_struct_linger])
 ])
 
 
-
-dnl
-dnl Check for size of d_name dirent member
-dnl
-AC_DEFUN([AC_SHORT_D_NAME_LEN], [
-AC_MSG_CHECKING([filename fits on dirent.d_name])
-AC_CACHE_VAL(ac_cv_dnamesize, [
-OCFLAGS="$CFLAGS"
-CFLAGS="$CFLAGS -I$srcdir"
-AC_TRY_RUN([
-#include <src/fs.h>
-
-int main ()
-{
-   struct dirent ddd;
-
-   if (sizeof (ddd.d_name) < 12)
-	return 0;
-   else
-   	return 1; 
-}
-
-],[
-    ac_cv_dnamesize="no"
-], [
-    ac_cv_dnamesize="yes"
-], [
-# Cannot find out, so assume no
-    ac_cv_dnamesize="no"
-])
-CFLAGS="$OCFLAGS"
-])
-if test x$ac_cv_dnamesize = xno; then
-    AC_DEFINE(NEED_EXTRA_DIRENT_BUFFER, 1,
-	      [Define if using `struct dirent' can overwrite stack])
-fi
-AC_MSG_RESULT([$ac_cv_dnamesize])
-])
-
 dnl
 dnl Filesystem information detection
 dnl
