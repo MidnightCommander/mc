@@ -1062,7 +1062,7 @@ trova file
 permette di cercare un file specifico. Il comando "Scambia pannelli"
 scambia il contenuto dei due pannelli directory.
 .PP
-Il comando "Attiva/disattiva pannelli" mostra il risultato dell'ultimo
+Il comando "attiva/disattiva pannelli" mostra il risultato dell'ultimo
 comando shell. Quest'ultimo funziona solo su xterm e sulle console Linux e
 SCO.
 .PP
