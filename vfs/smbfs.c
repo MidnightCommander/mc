@@ -355,12 +355,22 @@ static int
 smbfs_close (void *data)
 {
     smbfs_handle *info = (smbfs_handle *) data;
-	DEBUG(3, ("smbfs_close(fnum:%d)\n", info->fnum));
-/* if imlementing archive_level:	add rname to smbfs_handle
+    DEBUG (3, ("smbfs_close(fnum:%d)\n", info->fnum));
+
+    /* FIXME: Why too different cli have the same outbuf
+     * if file is copied to share
+     */
+    if (info->cli->outbuf == NULL) {
+	my_errno = EINVAL;
+	return -1;
+    }
+#if 0
+    /* if imlementing archive_level:    add rname to smbfs_handle */
     if (archive_level >= 2 && (inf->attr & aARCH)) {
-        cli_setatr(info->cli, rname, info->attr & ~(uint16)aARCH, 0);
-    }	*/
-	return (cli_close(info->cli, info->fnum) == True) ? 0 : -1;
+	cli_setatr (info->cli, rname, info->attr & ~(uint16) aARCH, 0);
+    }
+#endif
+    return (cli_close (info->cli, info->fnum) == True) ? 0 : -1;
 }
 
 static int

@@ -1,3 +1,8 @@
+2002-09-02  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* smbfs.c (smbfs_close): Return -1 if cli->outbuf is NULL and
+	set my_errno to EINVAL - temporary fix.  Reformat function.
+
 2002-09-01  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* samba/param/loadparm.c: Add global_scope variable.
