@@ -1,3 +1,8 @@
+2001-09-03  Pavel Roskin  <proski@gnu.org>
+
+	* color.c: Remove unused code.
+	* color.h: Likewise.
+
 2001-09-02  Pavel Roskin  <proski@gnu.org>
 
 	* key.c: Remove support for BUGGY_CURSES.

@@ -16,13 +16,12 @@
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
 #include <config.h>
-#include "tty.h"
 #include <stdio.h>
 #include <string.h>
 #include "global.h"
+#include "tty.h"
 #include "setup.h"		/* For the externs */
 #include "color.h"
-#include "x.h"
 
 /* "$Id$" */
 
@@ -39,19 +38,12 @@ int dialog_colors [4];
 
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
 
-
-
-#ifdef HAVE_GNOME
-#	 define  CTYPE GdkColor *
-void init_pair (int, CTYPE, CTYPE);
+#ifdef HAVE_SLANG
+#   define CTYPE char *
 #else
-#	  ifdef HAVE_SLANG
-#	      define CTYPE char *
-#	  else
-#	      define CTYPE int
-#	      define color_map_fg(n) (color_map[n].fg % COLORS)
-#	      define color_map_bg(n) (color_map[n].bg % COLORS)
-#	  endif
+#   define CTYPE int
+#   define color_map_fg(n) (color_map[n].fg % COLORS)
+#   define color_map_bg(n) (color_map[n].bg % COLORS)
 #endif
 
 struct colorpair {
@@ -120,7 +112,6 @@ struct color_table_s {
 };
 
 
-#ifndef HAVE_X
 static struct color_table_s const color_table [] = {
     { "black",         COLOR_BLACK   },
     { "gray",          COLOR_BLACK   | A_BOLD },
@@ -140,18 +131,14 @@ static struct color_table_s const color_table [] = {
     { "white",         COLOR_WHITE   | A_BOLD },
     { "default",       0 } /* hack for transparent background */
 };
-#endif /* !HAVE_X */
 
-#ifdef HAVE_GNOME
-void get_color (char *cpp, CTYPE *colp);
+#ifdef HAVE_SLANG
+#   define color_value(i) color_table [i].name
+#   define color_name(i)  color_table [i].name
 #else
-#   ifdef HAVE_SLANG
-#    	define color_value(i) color_table [i].name
-#    	define color_name(i)  color_table [i].name
-#    else
-#    	define color_value(i) color_table [i].value
-#    	define color_name(i)  color_table [i].name
-#    endif
+#   define color_value(i) color_table [i].value
+#   define color_name(i)  color_table [i].name
+#endif
 
 static void get_color (char *cpp, CTYPE *colp)
 {
@@ -164,7 +151,6 @@ static void get_color (char *cpp, CTYPE *colp)
 	}
     }
 }
-#endif /* HAVE_GNOME */
 
 static void get_two_colors (char **cpp, struct colorpair *colorpairp)
 {
@@ -193,7 +179,7 @@ static void get_two_colors (char **cpp, struct colorpair *colorpairp)
     get_color (*cpp, state ? &colorpairp->bg : &colorpairp->fg);
 }
 
-void configure_colors_string (char *the_color_string)
+static void configure_colors_string (char *the_color_string)
 {
     char *color_string, *p;
     int  i, found;
@@ -256,20 +242,6 @@ load_dialog_colors (void)
     dialog_colors [3] = COLOR_HOT_FOCUS;
 }
 
-#ifdef HAVE_X
-void
-init_colors (void)
-{
-	int i;
-	
-	use_colors = 1;
-	configure_colors ();
-	for (i = 0; i < ELEMENTS (color_map); i++) 
-            if (color_map [i].name)
-                init_pair (i+1, color_map_fg(i), color_map_bg(i));
-	load_dialog_colors ();
-}
-#else
 void init_colors (void)
 {
     int i;
@@ -281,9 +253,7 @@ void init_colors (void)
     }
 
     if (use_colors){
-#ifndef HAVE_X
 	start_color ();
-#endif
 	configure_colors ();
 
 #ifndef HAVE_SLANG
@@ -293,7 +263,7 @@ void init_colors (void)
 		     "Too many defined colors, resize MAX_PAIRS on color.c");
 	    exit (1);
 	}
-#endif
+#endif /* !HAVE_SLANG */
 
 	if (use_colors) {
 #ifdef HAVE_SLANG
@@ -305,10 +275,10 @@ void init_colors (void)
 	     * document this feature.
 	     */
 	    SLtt_set_color (DEFAULT_COLOR_INDEX, NULL, "default", "default");
-#elif defined(USE_NCURSES)
+#else
 	    /* Always white on black */
 	    init_pair(DEFAULT_COLOR_INDEX, COLOR_WHITE, COLOR_BLACK);
-#endif
+#endif /* !HAVE_SLANG */
 	}
 
 	for (i = 0; i < ELEMENTS (color_map); i++){
@@ -324,16 +294,8 @@ void init_colors (void)
 	     * later, to set the attribute with the colors.
 	     */
 	     attr_pairs [i+1] = color_map [i].fg & A_BOLD;
-#endif
+#endif /* !HAVE_SLANG */
 	}
     }
     load_dialog_colors ();
 }
-#endif
-
-void toggle_color_mode (void)
-{
-    if (hascolors)
-	use_colors = !use_colors;
-}
-

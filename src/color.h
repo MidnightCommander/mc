@@ -2,25 +2,19 @@
 #define __COLOR_H
 
 void init_colors (void);
-void toggle_color_mode (void);
-void configure_colors_string (char *color_string);
 
 extern int hascolors;
 extern int use_colors;
 extern int disable_colors;
 
 extern int attr_pairs [];
-#ifdef HAVE_GNOME
-#   define MY_COLOR_PAIR(x) x
-#   define PORT_COLOR(co,bw) co
+#ifdef HAVE_SLANG
+#   define MY_COLOR_PAIR(x) COLOR_PAIR(x)
 #else
-#   ifdef HAVE_SLANG
-#       define MY_COLOR_PAIR(x) COLOR_PAIR(x)
-#   else
-#       define MY_COLOR_PAIR(x) (COLOR_PAIR(x) | attr_pairs [x])
-#   endif
-#define PORT_COLOR(co,bw) (use_colors?co:bw)
+#   define MY_COLOR_PAIR(x) (COLOR_PAIR(x) | attr_pairs [x])
 #endif
+
+#define PORT_COLOR(co,bw) (use_colors?co:bw)
 
 /* Beware! When using Slang with color, not all the indexes are free.
    See myslang.h (A_*) */
