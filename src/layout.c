@@ -860,6 +860,7 @@ void rotate_dash (void)
     if (pos >= sizeof (rotating_dash)-1)
 	pos = 0;
     move (0, COLS-1);
+    attrset (NORMAL_COLOR);
     addch (rotating_dash [pos]);
     mc_refresh ();
     pos++;

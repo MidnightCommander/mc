@@ -1,3 +1,7 @@
+2003-12-24  Pavel Roskin  <proski@gnu.org>
+
+	* layout.c (rotate_dash): Set color before printing the dash.
+
 2003-12-01  Pavel Roskin  <proski@gnu.org>
 
 	* command.c (examine_cd): Add tilde expansion.
