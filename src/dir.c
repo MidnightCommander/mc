@@ -91,7 +91,8 @@ typedef enum {
     STRCOLL_TEST	
 } strcoll_status;
 
-int string_sortcomp (char *str1, char *str2)
+static int
+string_sortcomp (char *str1, char *str2)
 {
     static strcoll_status use_strcoll = STRCOLL_TEST;
 

@@ -1,5 +1,7 @@
 2001-08-12  Pavel Roskin  <proski@gnu.org>
 
+	* dir.c (string_sortcomp) [HAVE_STRCOLL]: Make static.
+
 	* cmd.c (guess_message_value): Typo - replace "LC_MESSAGE" with
 	"LC_MESSAGES".
 
