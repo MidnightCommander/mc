@@ -2894,11 +2894,11 @@ Esempi:
 .SH "Colori"
 Il Midnight Commander tenta di stabilire se il terminale corrente
 supporta i colori usando il database dei terminali e il nome del
-terminale corrente. Capita che possa sbagliarsi, così si può essere
+terminale corrente. Càpita che possa sbagliarsi, perciò si può essere
 costretti a forzare la modalità a colori o a disabilitarla usando
 rispettivamente le opzioni -c e -b.
 .PP
-Se il programma è compilato con il manager dei schermo Slang invece
+Se il programma è compilato con il manager dello schermo Slang invece
 che ncurses, controllerà se è impostata anche la variabile
 .B COLORTERM,
 con lo stesso effetto dell'opzione -c.
