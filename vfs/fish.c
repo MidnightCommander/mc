@@ -311,8 +311,7 @@ fish_open_archive (struct vfs_class *me, struct vfs_s_super *super,
     p = vfs_split_url (strchr (op, ':') + 1, &host, &user, &flags,
 		       &password, 0, URL_NOSLASH);
 
-    if (p)
-	g_free (p);
+    g_free (p);
 
     SUP.host = host;
     SUP.user = user;
@@ -335,8 +334,7 @@ fish_archive_same (struct vfs_class *me, struct vfs_s_super *super,
     op = vfs_split_url (strchr (op, ':') + 1, &host, &user, &flags, 0, 0,
 			URL_NOSLASH);
 
-    if (op)
-	g_free (op);
+    g_free (op);
 
     flags = ((strcmp (host, SUP.host) == 0)
 	     && (strcmp (user, SUP.user) == 0) && (flags == SUP.flags));

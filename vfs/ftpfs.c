@@ -242,8 +242,7 @@ ftpfs_split_url(char *path, char **host, char **user, int *port, char **pass)
 	g_free (new_user);
     }
 
-    if (p)
-	g_free (p);
+    g_free (p);
 }
 
 /* Returns a reply code, check /usr/include/arpa/ftp.h for possible values */

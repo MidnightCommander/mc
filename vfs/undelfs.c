@@ -94,14 +94,11 @@ undelfs_shutdown (void)
     if (fs)
 	ext2fs_close (fs);
     fs = NULL;
-    if (ext2_fname)
-	g_free (ext2_fname);
+    g_free (ext2_fname);
     ext2_fname = NULL;
-    if (delarray)
-        g_free (delarray);
+    g_free (delarray);
     delarray = NULL;
-    if (block_buf)
-	g_free (block_buf);
+    g_free (block_buf);
     block_buf = NULL;
 }
 

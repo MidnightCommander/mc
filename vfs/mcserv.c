@@ -418,8 +418,7 @@ close_handle (int handle)
 	mcfs_DIR.used--;
     if (mcfs_DIR.dirs[handle])
 	closedir (mcfs_DIR.dirs[handle]);
-    if (mcfs_DIR.names[handle])
-	g_free (mcfs_DIR.names[handle]);
+    g_free (mcfs_DIR.names[handle]);
     mcfs_DIR.dirs[handle] = 0;
     mcfs_DIR.names[handle] = 0;
 }

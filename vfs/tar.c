@@ -418,8 +418,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
 	longp = ((header->header.linkflag == LF_LONGNAME)
 		 ? &next_long_name : &next_long_link);
 
-	if (*longp)
-	    g_free (*longp);
+	g_free (*longp);
 	bp = *longp = g_malloc (*h_size + 1);
 
 	for (size = *h_size; size > 0; size -= written) {

@@ -101,8 +101,7 @@ local_closedir (void *data)
     int i;
 
     i = closedir (* (DIR **) data);
-    if (data)
-	g_free (data);
+    g_free (data);
     return i;
 }
 

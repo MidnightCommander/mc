@@ -111,10 +111,8 @@ vfs_s_free_entry (struct vfs_class *me, struct vfs_s_entry *ent)
 	    ent->next->prevp = ent->prevp;
     }
 
-    if (ent->name){
-	g_free (ent->name);
-	ent->name = NULL;
-    }
+    g_free (ent->name);
+    ent->name = NULL;
 	
     if (ent->ino){
 	ent->ino->ent = NULL;

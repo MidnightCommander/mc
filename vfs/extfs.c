@@ -207,8 +207,7 @@ static void extfs_free_archive (struct archive *archive)
             archive->local_stat.st_mtime != my.st_mtime);
         g_free(archive->local_name);
     }
-    if (archive->name)
-	g_free (archive->name);
+    g_free (archive->name);
     g_free (archive);
 }
 
@@ -241,8 +240,7 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
     cmd =
 	g_strconcat (mc_extfsdir, extfs_prefixes[fstype], " list ",
 		     local_name ? local_name : tmp, (char *) NULL);
-    if (tmp)
-	g_free (tmp);
+    g_free (tmp);
     g_free (mc_extfsdir);
     open_error_pipe ();
     result = popen (cmd, "r");
@@ -409,8 +407,7 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
 	    }
 	  read_extfs_continue:
 	    g_free (current_file_name);
-	    if (current_link_name != NULL)
-		g_free (current_link_name);
+	    g_free (current_link_name);
 	}
     }
 
@@ -1190,8 +1187,7 @@ static void extfs_remove_entry (struct entry *e)
             unlink (e->inode->local_filename);
             free (e->inode->local_filename);
         }
-        if (e->inode->linkname != NULL)
-            g_free (e->inode->linkname);
+        g_free (e->inode->linkname);
         g_free (e->inode);
     }
 
@@ -1213,8 +1209,7 @@ static void extfs_free_entry (struct entry *e)
             unlink (e->inode->local_filename);
             free (e->inode->local_filename);
         }
-        if (e->inode->linkname != NULL)
-            g_free (e->inode->linkname);
+        g_free (e->inode->linkname);
         g_free (e->inode);
     }
     if (e->next_in_dir != NULL)

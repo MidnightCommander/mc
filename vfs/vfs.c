@@ -949,8 +949,7 @@ vfs_shut (void)
 
     vfs_gc_done ();
 
-    if (current_dir)
-	g_free (current_dir);
+    g_free (current_dir);
 
     for (vfs = vfs_list; vfs; vfs = vfs->next)
 	if (vfs->done)

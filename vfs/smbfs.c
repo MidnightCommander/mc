@@ -1006,7 +1006,7 @@ smbfs_free_bucket (smbfs_connection *bucket)
 	g_free (bucket->domain);
 	g_free (bucket->user);
 	wipe_password (bucket->password);
-	if (bucket->home) g_free (bucket->home);
+	g_free (bucket->home);
 	memset (bucket, 0, sizeof (smbfs_connection));
 }
 
