@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#! @PERL@
 #
 # Written by Fernando Alegre <alegre@debian.org> 1996
 #

@@ -1,4 +1,4 @@
-#! /usr/bin/perl -w
+#! @PERL@ -w
 #
 # External filesystem for mc, using mtools
 # Written Ludek Brukner <lubr@barco.cz>, 1997

@@ -1,35 +1,50 @@
 extfsdir = $(pkgdatadir)/extfs
 
-# Files to install and distribute, but not filters
+# Files to install and distribute other than extfs scripts
 EXTFS_MISC  = README extfs.ini unarj.diff sfs.ini
 
-# Filters that don't need adaptation to the local system
-EXTFS_CONST = a apt deba debd dpkg hp48 mailfs patchfs rpm bpp \
-	rpms trpm uarj
+# Scripts hat don't need adaptation to the local system
+EXTFS_CONST = bpp hp48 rpm trpm uarj
 
-# Filters that need adaptation to the local system - source files
+# Scripts that need adaptation to the local system - source files
 EXTFS_IN    = 			\
+	a.in			\
+	apt.in			\
 	audio.in		\
-	deb.in 			\
-	lslR.in 		\
-	urar.in 		\
-	uzip.in 		\
-	uzoo.in 		\
-	uar.in 			\
-	ulha.in 		\
-	uha.in
+	deb.in			\
+	deba.in			\
+	debd.in			\
+	dpkg.in			\
+	lslR.in			\
+	mailfs.in		\
+	patchfs.in		\
+	rpms.in			\
+	uar.in			\
+	uha.in			\
+	ulha.in			\
+	urar.in			\
+	uzip.in			\
+	uzoo.in
 
-# Filters that need adaptation to the local system - files to install
+# Scripts that need adaptation to the local system - files to install
 EXTFS_OUT = 			\
+	a			\
+	apt			\
 	audio			\
-	deb 			\
-	lslR 			\
-	urar 			\
-	uzip 			\
-	uzoo 			\
-	uar 			\
-	ulha 			\
-	uha
+	deb			\
+	deba			\
+	debd			\
+	dpkg			\
+	lslR			\
+	mailfs			\
+	patchfs			\
+	rpms			\
+	uar			\
+	uha			\
+	ulha			\
+	urar			\
+	uzip			\
+	uzoo
 
 if USE_VFS
 extfs_DATA = $(EXTFS_MISC)

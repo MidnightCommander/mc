@@ -1,4 +1,4 @@
-#! /usr/bin/perl
+#! @PERL@
 #
 # Written by Balazs Nagy (julian7@kva.hu) 1998
 # locale bugfix by Michal Svec (rebel@penguin.cz) 2000

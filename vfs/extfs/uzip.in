@@ -1,4 +1,4 @@
-#! /usr/bin/perl -w
+#! @PERL@ -w
 #
 # zip file archive Virtual File System for Midnight Commander
 # Version 1.4.0 (2001-08-07).

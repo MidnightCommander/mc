@@ -1,4 +1,4 @@
-#! /usr/bin/perl
+#! @PERL@
 #
 # 1999 (c) Piotr Roszatycki <dexter@debian.org>
 # This software is under GNU license

@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#! @PERL@ -w
 
 # MC extfs for (possibly compressed) Berkeley style mailbox files
 # Peter Daum <gator@cs.tu-berlin.de> (Jan 1998, mc-4.1.24)
