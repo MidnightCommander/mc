@@ -1494,7 +1494,10 @@ long edit_find (long search_start, unsigned char *exp, int *len, long last_byte,
 
 /* this function uses the sprintf command to do a vprintf */
 /* it takes pointers to arguments instead of the arguments themselves */
-int sprintf_p (char *str, const char *fmt,...)
+static int sprintf_p (char *str, const char *fmt,...)
+    __attribute__ ((format (printf, 2, 3)));
+
+static int sprintf_p (char *str, const char *fmt,...)
 {
     va_list ap;
     int n;

@@ -1,5 +1,8 @@
 2001-10-20  Pavel Roskin  <proski@gnu.org>
 
+	* editcmd.c (sprintf_p): Declare with the printf attribute.
+	Make static.
+
 	* edit.h: Declare edit_printf() with the printf attribute.
 
 2001-10-18  Pavel Roskin  <proski@gnu.org>
