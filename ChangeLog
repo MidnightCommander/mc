@@ -1,3 +1,9 @@
+2001-10-18  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: When checking for "nroff -mandoc" support, don't
+	use /dev/null as input file, use stdin.  Some versions of nroff
+	(e.g. groff-1.16.1) don't accept special files.
+
 2001-10-14  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.ext.in: Treat Makefile.PL as a Perl program, not as a

@@ -335,7 +335,7 @@ AC_CHECK_PROG(HAVE_nroff, nroff, true, false)
 if $HAVE_nroff; then
     AC_MSG_CHECKING([for manual formatting macros])
     AC_CACHE_VAL(ac_cv_mandoc, [
-    nroff -mandoc < /dev/null > /dev/null 2>&1 /dev/null
+    nroff -mandoc < /dev/null > /dev/null 2>&1
     if test $? = 0
     then
 	ac_cv_mandoc=-mandoc
