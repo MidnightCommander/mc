@@ -2429,7 +2429,7 @@ limit of sixteen megabytes and edits binary files flawlessly.
 .PP
 The features it presently supports are: Block
 copy, move, delete, cut and paste;
-.I "key for key undo";
+.IR "key for key undo" ;
 pull-down menus; file insertion; macro definition; regular expression
 search and replace (and our own scanf-printf search and
 replace); shift-arrow MSW-MAC text highlighting (for the
