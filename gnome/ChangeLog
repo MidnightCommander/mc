@@ -1,3 +1,8 @@
+2000-04-18  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* gcmd.c (gnome_open_terminal_with_cmd): Allow translating of
+	error message.
+
 2000-04-04  Jacob and Miguee, The Debugging Machines <debugging_machines@helixcode.com>
 
 	* gdesktop.c (click_proxy_button_press): Federico should make sure

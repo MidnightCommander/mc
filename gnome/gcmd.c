@@ -82,7 +82,7 @@ gnome_open_terminal_with_cmd (const char *command)
 
 		g_free (p);
 	} else
-		message (1, MSG_ERROR, " Could not start a terminal ");
+		message (1, MSG_ERROR, _(" Could not start a terminal "));
 }
 
 void
