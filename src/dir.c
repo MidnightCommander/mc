@@ -576,7 +576,7 @@ do_reload_dir (char *path, dir_list *list, sortfn *sort, int count,
     int i, status, link_to_dir, stale_link;
     struct stat st;
     int marked_cnt;
-    GHashTable *marked_files = g_hash_table_new (g_str_hash, g_str_equal);
+    GHashTable *marked_files;
 
     tree_store_start_check_cwd ();
     dirp = mc_opendir (".");
@@ -587,6 +587,7 @@ do_reload_dir (char *path, dir_list *list, sortfn *sort, int count,
 	return set_zero_dir (list);
     }
 
+    marked_files = g_hash_table_new (g_str_hash, g_str_equal);
     alloc_dir_copy (list->size);
     for (marked_cnt = i = 0; i < count; i++) {
 	dir_copy.list[i].fnamelen = list->list[i].fnamelen;
@@ -603,7 +604,7 @@ do_reload_dir (char *path, dir_list *list, sortfn *sort, int count,
 	}
     }
 
-    for (dp = mc_readdir (dirp); dp; dp = mc_readdir (dirp)) {
+    while ((dp = mc_readdir (dirp))) {
 	status =
 	    handle_dirent (list, filter, dp, &st, next_free, &link_to_dir,
 			   &stale_link);
@@ -622,6 +623,7 @@ do_reload_dir (char *path, dir_list *list, sortfn *sort, int count,
 	       clean_dir (&dir_copy, count);
 	     */
 	    tree_store_end_check ();
+	    g_hash_table_destroy (marked_files);
 	    return next_free;
 	}
 
