@@ -1,6 +1,11 @@
-2000-04-06  Timur bakeyev  <mc@bat.ru>
+2000-04-14  Timur Bakeyev  <mc@bat.ru>
 
-	* syntax.c: Wery dirty fix to allow compilation of mceditor on ncurses
+	* syntax/perl.syntax: According to Tomasz Wegrzanovski <maniek@beer.com>
+	added 'and', 'or', 'not', 'for' keywords.
+
+2000-04-06  Timur Bakeyev  <mc@bat.ru>
+
+	* syntax.c: Wery dirty fix to allow compilation of mcedit on ncurses
 	based systems. Hope, this will make FreeBSD midc maintainer to enable
 	build-in editor by default. Still, syntax highlighting is disabled.
 	Need to port...

@@ -109,6 +109,9 @@ context default
     keyword \\" brightred/18
     keyword \\' brightred/18
 
+    keyword whole and magenta/23
+    keyword whole or magenta/23
+    keyword whole not magenta/23
     keyword whole do magenta/23
     keyword whole if magenta/23
     keyword whole until magenta/23
@@ -117,6 +120,7 @@ context default
     keyword whole unless magenta/23
     keyword whole while magenta/23
     keyword whole foreach magenta/23
+    keyword whole for magenta/23
     keyword whole goto magenta/23
     keyword whole last magenta/23
     keyword whole next magenta/23
