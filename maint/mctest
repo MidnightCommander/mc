@@ -1,32 +1,41 @@
 #!/bin/sh
 
-# This is a testsuite for GNU Midnight Commander.
+# This is the testsuite for GNU Midnight Commander.
 # Maintainer doing the release must ensure that this testsuite passes.
 
 set -e
 
-# Bootstrap from CVS
+echo "Checking the documentation"
+maint/doctest
+
+echo "Bootstraping from CVS"
 ./autogen.sh >test-autogen.out 2>test-autogen.err
+
+echo "Checking configure"
+bash -n configure 2>test-configure.err
+
+echo "Making everything in the source directory"
 make all >test0.out 2>test0.err
 
-# Default configuration
+echo "Checking the default configuration"
 make distcheck >test1.out 2>test1.err
 
-# Maximal code coverage
+echo "Checking the configuration with maximal code coverage"
 make distcheck with_screen=mcslang enable_charset=yes with_samba=yes \
      with_tm_x_support=yes with_mcfs=yes with_included_gettext=yes \
      >test2.out 2>test2.err
 
-# Minimal code coverage
+echo "Checking the configuration with minimal code coverage"
 make distcheck enable_largefile=no enable_nls=no with_vfs=no \
      with_gpm_mouse=no with_subshell=no with_edit=no with_ext2undel=no \
      with_screen=ncurses >test3.out 2>test3.err
 
-# Experimental and rarely used options
+echo "Checking the configuration with experimental and rarely used options"
 make distcheck with_glib2=yes with_screen=mcslang with_termcap=yes \
      with_mmap=no with_subshell=optional >test4.out 2>test4.err
 
 if test -x /usr/bin/rpmbuild; then
+	echo "Building RPM package"
 	/usr/bin/rpmbuild -ta mc-*.tar.gz >test-rpm.out 2>test-rpm.err
 else
 	echo "rpmbuild not found"
