@@ -34,6 +34,7 @@
 #include "src/color.h"		/* dialog_colors */
 #include "src/tty.h"		/* LINES */
 #include "src/widget.h"		/* listbox_new() */
+#include "src/layout.h"		/* clr_scr() */
 #include "src/main.h"		/* mc_home */
 #include "src/help.h"		/* interactive_display() */
 #include "src/key.h"		/* XCTRL */
