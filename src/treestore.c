@@ -597,7 +597,7 @@ tree_store_start_check (char *path)
 	if (!current){
 		struct stat s;
 
-		if (stat (path, &s) == -1)
+		if (mc_stat (path, &s) == -1)
 			return NULL;
 
 		if (!S_ISDIR (s.st_mode))
@@ -687,7 +687,7 @@ tree_store_rescan (char *dir)
 				continue;
 
 			full_name = concat_dir_and_file (dir, dp->d_name);
-			if (lstat (full_name, &buf) != -1){
+			if (mc_lstat (full_name, &buf) != -1){
 				if (S_ISDIR (buf.st_mode))
 					tree_store_mark_checked (dp->d_name);
 			}

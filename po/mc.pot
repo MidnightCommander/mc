@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-01-20 05:41-0500\n"
+"POT-Creation-Date: 1999-01-20 15:07-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2681,7 +2681,7 @@ msgstr ""
 msgid "Enter extra arguments:"
 msgstr ""
 
-#: gnome/gdesktop.c:355 gnome/gdesktop.c:1412
+#: gnome/gdesktop.c:355 gnome/gdesktop.c:1414
 msgid "Warning"
 msgstr ""
 
@@ -2690,16 +2690,16 @@ msgstr ""
 msgid "Could not open %s; will not have initial desktop icons"
 msgstr ""
 
-#: gnome/gdesktop.c:1378
+#: gnome/gdesktop.c:1380
 msgid "Trashcan"
 msgstr ""
 
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop.c:1408
+#: gnome/gdesktop.c:1410
 msgid "Home directory"
 msgstr ""
 
-#: gnome/gdesktop.c:1413
+#: gnome/gdesktop.c:1415
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial desktop icons."
 msgstr ""

@@ -1,3 +1,8 @@
+1999-01-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* treestore.c (tree_store_start_check): Use mc_stat(), not stat().
+	(tree_store_rescan): Use mc_lstat(), not lstat().
+
 Tue Jan 19 05:28:04 1999  Timur Bakeyev <mc@bat.ru>
 
 	* ext.c, filenot.c, main.c, screen.c, treestore.c: add missed #include's
