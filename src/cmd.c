@@ -169,9 +169,7 @@ int view_file_at_line (char *filename, int plain_view, int internal, int start_l
     }
     if (internal){
 #ifdef HAVE_GNOME
-	if (!gmc_view (filename, start_line)){
-	    view (0, filename, &move_dir, start_line);
-	}
+	gmc_view (filename, start_line);
 #else
 	char view_entry [BUF_TINY];
 
