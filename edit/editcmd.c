@@ -2246,10 +2246,12 @@ edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
 	 * Arguments:
 	 *   $1 - name of the edited file (to check its extention etc).
 	 *   $2 - file containing the current block.
-	 *   $3 - file where error messages should be put.
+	 *   $3 - file where error messages should be put
+	 *        (for compatibility with old scripts).
 	 */
 	system (catstrs (" ", home_dir, EDIT_DIR, shell_cmd, " ",
-			 edit->filename, " ", home_dir, BLOCK_FILE, NULL));
+			 edit->filename, " ", home_dir, BLOCK_FILE,
+			 " /dev/null", NULL));
 
     } else {
 	/*
