@@ -1,3 +1,8 @@
+2002-02-14  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* doc/mc.1.in (FILES): Use MC_LIBDIR instead of MCHOME.
+	Fix location of configuration files.
+
 2002-02-05  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Don't use defunct ncurses_version.

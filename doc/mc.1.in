@@ -3108,8 +3108,8 @@ and unused keys everywhere).
 .SH "FILES"
 .PP
 The program will retrieve all of its information relative to the
-MCHOME environment variable, if this variable is not set, then it will
-fall back to the @prefix@ directory.
+MC_LIBDIR environment variable, if this variable is not set, then it will
+fall back to the @prefix@/lib/mc directory.
 .PP
 @prefix@/lib/mc/mc.hlp
 .IP
