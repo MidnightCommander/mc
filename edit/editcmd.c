@@ -2510,9 +2510,7 @@ static int compl_callback (Dlg_head *h, int key, int Msg)
 {
     switch (Msg) {
     case DLG_DRAW:
-	attrset (COLOR_NORMAL);
-	dlg_erase (h);
-	draw_box (h, 0, 0, compl_dlg_h, compl_dlg_w);
+	common_dialog_repaint (h);
 	break;
     }
     return 0;

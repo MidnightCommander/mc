@@ -1,5 +1,7 @@
 2002-08-22  Pavel Roskin  <proski@gnu.org>
 
+	* editcmd.c (compl_callback): Use common_dialog_repaint().
+
 	* editcmd.c (raw_callback): Use standard common_dialog_repaint()
 	to handle DLG_DRAW.
 
