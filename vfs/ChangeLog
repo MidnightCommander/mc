@@ -1,3 +1,8 @@
+2005-01-19  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* ftpfs.c (ftpfs_file_store): Make sure we write() all read() data.
+	Check fstat() return value.
+
 2005-01-07  Roland Illig <roland.illig@gmx.de>
 
 	* extfs/urar.in: Fixed some quoting issues.
@@ -103,11 +108,12 @@
 2004-10-29  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* extfs/iso9660.in (mcisofs_list): Fix regular expression for stripping
-	of file name. Use autotools macro for awk instead full path.
+	of file name. Use autotools macro for awk instead of full path.
 
 2004-10-28  Leonard den Ottolander  <leonard * den ottolander nl>
 
-	* extfs/iso9660.in (mcisofs_list): Fix stripping of file name in awk code.
+	* extfs/iso9660.in (mcisofs_list): Fix stripping of file name
+	in awk code.
 
 2004-10-28  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
@@ -120,7 +126,7 @@
 
 2004-10-27  Leonard den Ottolander  <leonard * den ottolander nl>
 
-	* tar.c tar_read_header(): q should not point to a static string.
+	* tar.c (tar_read_header): q should not point to a static string.
 	Canonicalize q.
 
 	* extfs/iso9660.in: Fix quoting issues.
@@ -200,7 +206,7 @@
 
 2004-10-05  Miroslav Rudisin  <miero+gnu@atrey.karlin.mff.cuni.cz>
 
-	* utilvfs.c(vfs_split_url): Add support for '@' in username.
+	* utilvfs.c (vfs_split_url): Add support for '@' in username.
 
 2004-09-27  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
@@ -217,12 +223,13 @@
 
 	* ftpfs.c (ftpfs_find_machine): Added const qualifier.
 	* mcserv.c (do_auth): Likewise.
-	* utilvfs.c (is_month): Likewise. (is_time): Likewise.
+	* utilvfs.c (is_month): Likewise.
+	(is_time): Likewise.
 	(is_week): Likewise.
 	* vfs.c (_vfs_get_class): Added const qualifier.
 	(vfs_prefix_to_class): Added a string length parameter to
-	reduce the use of g_strdup. (vfs_split): Changes due to the
-	new string length parameter.
+	reduce the use of g_strdup().
+	(vfs_split): Changes due to the new string length parameter.
 
 2004-09-25  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 

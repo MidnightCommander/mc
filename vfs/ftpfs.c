@@ -1292,10 +1292,11 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
 }
 
 static int
-ftpfs_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *localname)
+ftpfs_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name,
+		  char *localname)
 {
-    int h, sock, n;
-    off_t total;
+    int h, sock, n_read, n_written;
+    off_t n_stored;
 #ifdef HAVE_STRUCT_LINGER_L_LINGER
     struct linger li;
 #else
@@ -1303,69 +1304,71 @@ ftpfs_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *lo
 #endif
     char buffer[8192];
     struct stat s;
+    char  *w_buf;
     struct vfs_s_super *super = FH_SUPER;
 
-    h = open(localname, O_RDONLY);
+    h = open (localname, O_RDONLY);
     if (h == -1)
-	    ERRNOR (EIO, -1);
-    fstat(h, &s);
-    sock = ftpfs_open_data_connection(me, super, fh->u.ftp.append ? "APPE" : "STOR", name, TYPE_BINARY, 0);
-    if (sock < 0) {
-	close(h);
+	ERRNOR (EIO, -1);
+    sock =
+	ftpfs_open_data_connection (me, super,
+				    fh->u.ftp.append ? "APPE" : "STOR", name,
+				    TYPE_BINARY, 0);
+    if (sock < 0 || fstat (h, &s) == -1) {
+	close (h);
 	return -1;
     }
 #ifdef HAVE_STRUCT_LINGER_L_LINGER
     li.l_onoff = 1;
     li.l_linger = 120;
-    setsockopt(sock, SOL_SOCKET, SO_LINGER, (char *) &li, sizeof(li));
+    setsockopt (sock, SOL_SOCKET, SO_LINGER, (char *) &li, sizeof (li));
 #else
-    setsockopt(sock, SOL_SOCKET, SO_LINGER, &flag_one, sizeof (flag_one));
+    setsockopt (sock, SOL_SOCKET, SO_LINGER, &flag_one, sizeof (flag_one));
 #endif
-    total = 0;
-    
-    enable_interrupt_key();
+    n_stored = 0;
+
+    enable_interrupt_key ();
     while (1) {
-	while ((n = read(h, buffer, sizeof(buffer))) < 0) {
+	while ((n_read = read (h, buffer, sizeof (buffer))) == -1) {
 	    if (errno == EINTR) {
-		if (got_interrupt()) {
+		if (got_interrupt ()) {
 		    ftpfs_errno = EINTR;
 		    goto error_return;
-		}
-		else
+		} else
 		    continue;
 	    }
 	    ftpfs_errno = errno;
 	    goto error_return;
 	}
-	if (n == 0)
+	if (n_read == 0)
 	    break;
-    	while (write(sock, buffer, n) < 0) {
-	    if (errno == EINTR) {
-		if (got_interrupt()) {
-		    ftpfs_errno = EINTR;
-		    goto error_return;
-		}
-		else 
+	n_stored += n_read;
+	w_buf = buffer;
+	while ((n_written = write (sock, w_buf, n_read)) != n_read) {
+	    if (n_written == -1) {
+		if (errno == EINTR && !got_interrupt ()) {
 		    continue;
+		}
+		ftpfs_errno = errno;
+		goto error_return;
 	    }
-	    ftpfs_errno = errno;
-	    goto error_return;
+	    w_buf += n_written;
+	    n_read -= n_written;
 	}
-	total += n;
-	print_vfs_message(_("ftpfs: storing file %lu (%lu)"),
-			  (unsigned long) total, (unsigned long) s.st_size);
+	print_vfs_message (_("ftpfs: storing file %lu (%lu)"),
+			   (unsigned long) n_stored, (unsigned long) s.st_size);
     }
-    disable_interrupt_key();
-    close(sock);
-    close(h);
+    disable_interrupt_key ();
+    close (sock);
+    close (h);
     if (ftpfs_get_reply (me, SUP.sock, NULL, 0) != COMPLETE)
-	    ERRNOR (EIO, -1);
+	ERRNOR (EIO, -1);
     return 0;
-error_return:
-    disable_interrupt_key();
-    close(sock);
-    close(h);
-    ftpfs_get_reply(me, SUP.sock, NULL, 0);
+  error_return:
+    disable_interrupt_key ();
+    close (sock);
+    close (h);
+    ftpfs_get_reply (me, SUP.sock, NULL, 0);
     return -1;
 }
 
