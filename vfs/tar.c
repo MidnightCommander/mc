@@ -410,16 +410,23 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
 	char *bp, *data;
 	int size, written;
 
+	if (h_size > MC_MAXPATHLEN) {
+	    message (1, MSG_ERROR, _("Inconsistent tar archive"));
+	    return STATUS_BADCHECKSUM;
+	}
+
 	longp = ((header->header.linkflag == LF_LONGNAME)
 		 ? &next_long_name : &next_long_link);
 
 	if (*longp)
 	    g_free (*longp);
-	bp = *longp = g_malloc (*h_size);
+	bp = *longp = g_malloc (*h_size + 1);
 
 	for (size = *h_size; size > 0; size -= written) {
 	    data = tar_get_next_record (archive, tard)->charptr;
 	    if (data == NULL) {
+		g_free (*longp);
+		*longp = NULL;
 		message (1, MSG_ERROR,
 			 _("Unexpected EOF on archive file"));
 		return STATUS_BADCHECKSUM;
@@ -431,10 +438,14 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
 	    memcpy (bp, data, written);
 	    bp += written;
 	}
-#if 0
-	if (*h_size > 1)
-	    bp[*h_size - 1] = 0;	/* just to make sure */
-#endif
+
+	if (bp - *longp == MC_MAXPATHLEN && bp[-1] != '\0') {
+	    g_free (*longp);
+	    *longp = NULL;
+	    message (1, MSG_ERROR, _("Inconsistent tar archive"));
+	    return STATUS_BADCHECKSUM;
+	}
+	*bp = 0;
 	goto recurse;
     } else {
 	struct stat st;

@@ -978,7 +978,7 @@ extfs_readlink (struct vfs_class *me, const char *path, char *buf, int size)
 {
     struct archive *archive;
     char *q;
-    int i;
+    size_t len;
     struct entry *entry;
     char *mpath = g_strdup(path);
     int result = -1;
@@ -992,11 +992,9 @@ extfs_readlink (struct vfs_class *me, const char *path, char *buf, int size)
     	me->verrno = EINVAL;
     	goto cleanup;
     }
-    if (size < (i = strlen (entry->inode->linkname))) {
-	i = size;
-    }
-    strncpy (buf, entry->inode->linkname, i);
-    result = i;
+    len = strlen (entry->inode->linkname);
+    result = len > (size - 1) ? size - 1 : len;
+    g_strlcpy (buf, entry->inode->linkname, result + 1);
 cleanup:
     g_free (mpath);
     return result;

@@ -1,3 +1,21 @@
+2004-09-02  Pavel S. Shirshov  <pavelsh@mail.ru>
+
+	* direntry.c (vfs_s_readlink): Use g_strlcpy instead strncpy.
+	* ftpfs.c (ftpfs_get_reply): Use g_strlcpy instead strncpy.
+	* extfs.c (extfs_readlink): Fix return value. Use g_strlcpy
+	instead strncpy.
+	* mcfs.c (mcfs_readlink): Fix return value. Use g_strlcpy
+	instead strncpy.
+	* tar.c (tar_read_header): Add additional check for consistency.
+	Fix memory leak.
+	* cpio.c (cpio_defer_find): Remove recursion.
+	(cpio_free_archive): Fix memory leak.
+	(cpio_read_bin_head): Use union for simplicity using of header
+	structure. Add additional check for consistency.
+	(cpio_read_oldc_head): Add additional check for consistency.
+
+	Based on patches from Jakub Jelinek  <jakub@redhat.com>
+
 2004-09-01  Pavel S. Shirshov  <pavelsh@mail.ru>
 
 	* fish.c (fish_get_reply): Use g_strlcpy instead

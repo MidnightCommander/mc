@@ -686,8 +686,7 @@ vfs_s_readlink (struct vfs_class *me, const char *path, char *buf, int size)
     if (ino->linkname == NULL)
 	ERRNOR (EFAULT, -1);
 
-    strncpy (buf, ino->linkname, size);
-    *(buf+size-1) = 0;
+    g_strlcpy (buf, ino->linkname, size);
     return strlen (buf);
 }
 

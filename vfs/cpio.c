@@ -102,10 +102,9 @@ static int cpio_read(void *fh, char *buffer, int count);
 static struct defer_inode *
 cpio_defer_find (struct defer_inode *l, struct defer_inode *i)
 {
-    if (!l)
-	return NULL;
-    return l->inumber == i->inumber
-	&& l->device == i->device ? l : cpio_defer_find (l->next, i);
+    while (l && (l->inumber != i->inumber || l->device != i->device))
+	l = l->next;
+    return l;
 }
 
 static int cpio_skip_padding(struct vfs_s_super *super)
@@ -127,8 +126,15 @@ static int cpio_skip_padding(struct vfs_s_super *super)
 
 static void cpio_free_archive(struct vfs_class *me, struct vfs_s_super *super)
 {
+    struct defer_inode *l, *lnext;
     if(super->u.arch.fd != -1)
 	mc_close(super->u.arch.fd);
+	super->u.arch.fd = -1;
+    for (l = super->u.arch.deferred; l; l = lnext) {
+	lnext = l->next;
+	g_free (l);
+    }
+    super->u.arch.deferred = NULL;
 }
 
 static int
@@ -247,26 +253,35 @@ static int cpio_find_head(struct vfs_class *me, struct vfs_s_super *super)
 #define HEAD_LENGTH (26)
 static int cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *super)
 {
-    struct old_cpio_header buf;
+    union {
+	struct old_cpio_header buf;
+	short shorts[HEAD_LENGTH >> 1];
+    } u;
     int len;
     char *name;
     struct stat st;
 
-    if((len = mc_read(super->u.arch.fd, (char *)&buf, HEAD_LENGTH)) < HEAD_LENGTH)
+    if((len = mc_read(super->u.arch.fd, (char *)&u.buf, HEAD_LENGTH)) < HEAD_LENGTH)
 	return STATUS_EOF;
     CPIO_POS(super) += len;
     if(super->u.arch.type == CPIO_BINRE) {
 	int i;
 	for(i = 0; i < (HEAD_LENGTH >> 1); i++)
-	    ((short *)&buf)[i] = GUINT16_SWAP_LE_BE(((short *)&buf)[i]);
+	    u.shorts[i] = GUINT16_SWAP_LE_BE(u.shorts[i]);
     }
-    g_assert(buf.c_magic == 070707);
+    g_assert(u.buf.c_magic == 070707);
 
-    name = g_malloc(buf.c_namesize);
-    if((len = mc_read(super->u.arch.fd, name, buf.c_namesize)) < buf.c_namesize) {
+    if (u.buf.c_namesize == 0 || u.buf.c_namesize > MC_MAXPATHLEN) {
+	message (1, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"), 
+		super->name);
+	return STATUS_FAIL;
+    }
+    name = g_malloc(u.buf.c_namesize);
+    if((len = mc_read(super->u.arch.fd, name, u.buf.c_namesize)) < u.buf.c_namesize) {
 	g_free(name);
 	return STATUS_EOF;
     }
+    name[u.buf.c_namesize - 1] = '\0';
     CPIO_POS(super) += len;
     cpio_skip_padding(super);
 
@@ -275,15 +290,15 @@ static int cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *super)
 	return STATUS_TRAIL;
     }
 
-    st.st_dev = buf.c_dev;
-    st.st_ino = buf.c_ino;
-    st.st_mode = buf.c_mode;
-    st.st_nlink = buf.c_nlink;
-    st.st_uid = buf.c_uid;
-    st.st_gid = buf.c_gid;
-    st.st_rdev = buf.c_rdev;
-    st.st_size = (buf.c_filesizes[0] << 16) | buf.c_filesizes[1];
-    st.st_atime = st.st_mtime = st.st_ctime = (buf.c_mtimes[0] << 16) | buf.c_mtimes[1];
+    st.st_dev = u.buf.c_dev;
+    st.st_ino = u.buf.c_ino;
+    st.st_mode = u.buf.c_mode;
+    st.st_nlink = u.buf.c_nlink;
+    st.st_uid = u.buf.c_uid;
+    st.st_gid = u.buf.c_gid;
+    st.st_rdev = u.buf.c_rdev;
+    st.st_size = (u.buf.c_filesizes[0] << 16) | u.buf.c_filesizes[1];
+    st.st_atime = st.st_mtime = st.st_ctime = (u.buf.c_mtimes[0] << 16) | u.buf.c_mtimes[1];
 
     return cpio_create_entry(me, super, &st, name);
 }
@@ -307,16 +322,23 @@ static int cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *super)
 	      &hd.c_dev, &hd.c_ino, &hd.c_mode, &hd.c_uid, &hd.c_gid,
 	      &hd.c_nlink, &hd.c_rdev, &hd.c_mtime,
 	      &hd.c_namesize, &hd.c_filesize) < 10) {
-	message (1, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"), super->name);
+	message (1, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"),
+		    super->name);
 	return STATUS_FAIL;
     }
 
+    if (hd.c_namesize == 0 || hd.c_namesize > MC_MAXPATHLEN) {
+	message (1, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"),
+		    super->name);
+	return STATUS_FAIL;
+    }
     name = g_malloc(hd.c_namesize);
     if((len = mc_read(super->u.arch.fd, name, hd.c_namesize)) == -1 ||
        (unsigned long) len < hd.c_namesize) {
 	g_free (name);
 	return STATUS_EOF;
     }
+    name[hd.c_namesize - 1] = '\0';
     CPIO_POS(super) +=  len;
     cpio_skip_padding(super);
 
@@ -367,12 +389,19 @@ static int cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *super)
        (super->u.arch.type == CPIO_CRC && hd.c_magic != 070702))
 	return STATUS_FAIL;
 
+    if (hd.c_namesize == 0 || hd.c_namesize > MC_MAXPATHLEN) {
+	message (1, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"),
+		    super->name);
+	return STATUS_FAIL;
+    }
+
     name = g_malloc(hd.c_namesize);
     if((len = mc_read(super->u.arch.fd, name, hd.c_namesize)) != -1 &&
        (unsigned long) len < hd.c_namesize) {
 	g_free (name);
 	return STATUS_EOF;
     }
+    name[hd.c_namesize - 1] = '\0';
     CPIO_POS(super) += len;
     cpio_skip_padding(super);
 
@@ -435,7 +464,8 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super,
 			 ("Inconsistent hardlinks of\n%s\nin cpio archive\n%s"),
 			 name, super->name);
 		inode = NULL;
-	    }
+	    } else if (!inode->st.st_size)
+		inode->st.st_size = st->st_size;
 	}
     }
 

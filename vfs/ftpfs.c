@@ -262,10 +262,8 @@ ftpfs_get_reply (struct vfs_class *me, int sock, char *string_buf, int string_le
 	}
 	switch (sscanf(answer, "%d", &code)){
 	    case 0:
-	        if (string_buf) {
-		    strncpy (string_buf, answer, string_len - 1);
-		    *(string_buf + string_len - 1) = 0;
-		}
+	        if (string_buf) 
+		    g_strlcpy (string_buf, answer, string_len);
 	        code = 500;
 	        return 5;
 	    case 1:
@@ -282,10 +280,8 @@ ftpfs_get_reply (struct vfs_class *me, int sock, char *string_buf, int string_le
 			    break;
 		    }
 		}
-	        if (string_buf){
-		    strncpy (string_buf, answer, string_len - 1);
-		    *(string_buf + string_len - 1) = 0;
-		}
+	        if (string_buf)
+		    g_strlcpy (string_buf, answer, string_len);
 		return code / 100;
 	}
     }
