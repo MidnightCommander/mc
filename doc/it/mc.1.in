@@ -1950,7 +1950,7 @@ le possa fare:
 .PP
 .I Sostituzione della tilde 
 La (~) verrà sostituita con la vostra directory home e se si appende
-un nome utente dopo la tilde allora verrà sostituita con la directory
+un nome utente dopo la tilde, allora verrà sostituita con la directory
 di login dell'utente indicato.
 .PP
 Per esempio, ~ospite è la directory home dell'utente ospite, mentre
@@ -1994,70 +1994,70 @@ Le macro sono:
 .PP
 .I "%i"
 .IP
-The indent of blank space, equal the cursor column
-position. For edit menu only.
+Indentazione di spazi, uguale alla colonna della
+posizione del cursore. Solo per la modifica menu.
 .PP
 .I "%y"
 .IP
-The syntax type of current file. For edit menu only.
+Il tipo di sintassi del file corrente. Solo per la modifica menu.
 .PP
 .I "%k"
 .IP
-The block file name.
+Il nome file di blocco.
 .PP
 .I "%e"
 .IP
-The error file name.
+Il nome file di errore.
 .PP
 .I "%m"
 .IP
-The current menu name.
+Il nome menu corrente.
 .PP
 .I "%f"
 and
 .I "%p"
 .IP
-The current file name.
+Il nome file corrente.
 .PP
 .I "%x"
 .IP
-The extension of current file name.
+L'estensione del file corrente.
 .PP
 .I "%b"
 .IP
-The current file name without extension.
+Il nome del file corrente ma senza estensione.
 .PP
 .I "%d"
 .IP
-The current directory name.
+In nome della directory corrente.
 .PP
 .I "%F"
 .IP
-The current file in the unselected panel.
+Il file corrente nel pannello non selezionato.
 .PP
 .I "%D"
 .IP
-The directory name of the unselected panel.
+La directory corrente nel pannello non selezionato.
 .PP
 .I "%t"
 .IP
-The currently tagged files.
+I file attualmente marcati.
 .PP
 .I "%T"
 .IP
-The tagged files in the unselected panel.
+I file attualmente marcati nel pannello non selezionato.
 .PP
 .I "%u"
-and
+e
 .I "%U"
 .IP
-Similar to the %t and %T macros, but in addition the files are
-untagged. You can use this macro only once per menu file entry or
-extension file entry, because next time there will be no tagged
-files.
+Simili alle macro %t e %T, in aggiunta i file vengono deselezionati.
+E' possibile usare questa macro solo una volta per voce di menu file
+o per voce di file estensione, dato che la volta successiva non ci
+saranno file marcati.
 .PP
 .I "%s"
-and
+e
 .I "%S"
 .IP
 The selected files: The tagged files if there are any. Otherwise the
