@@ -193,10 +193,10 @@ mx: checklinks
 	touch mx
 
 gmc: @LIBVFS@ $(OBJS) $(NORMALOBJS) @LIBSLANG@ libgtkedit.a
-	$(CC) $(LDFLAGS) -o gmc $(NORMALOBJS) $(OBJS) -L../vfs -L../slang -L../gtkedit $(EXTRALIBS) $(LIBS) 
+	$(CC) -o gmc $(NORMALOBJS) $(OBJS) $(LDFLAGS) -L../vfs -L../slang -L../gtkedit $(EXTRALIBS) $(LIBS) 
 
 corba-gmc: @LIBVFS@ $(OBJS) $(CORBAOBJS) @LIBSLANG@ libgtkedit.a
-	$(CC) $(CORBA_LDFLAGS) -o corba-gmc $(CORBAOBJS) $(OBJS) -L../vfs -L../slang -L../gtkedit $(EXTRALIBS) $(LIBS) 
+	$(CC) -o corba-gmc $(CORBAOBJS) $(OBJS) $(CORBA_LDFLAGS) -L../vfs -L../slang -L../gtkedit $(EXTRALIBS) $(LIBS) 
 
 mc.keys: mc.keys.in Makefile
 	sed -e 's^\@icondir\@^$(icondir)^g' < mc.keys.in > mc.keys.tmp \
