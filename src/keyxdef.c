@@ -42,7 +42,6 @@
 #include "key.h"
 #include "tty.h"
 
-
 #ifdef __QNX__
 
 /* select implementation: use QNX/term interface */

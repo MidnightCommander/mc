@@ -181,6 +181,7 @@ static FILE *open_extfs_archive (int fstype, char *name, struct extfs_archive **
     FILE *result;
     mode_t mode;
     char *cmd;
+    char *mc_extfsdir;
     struct stat mystat;
     struct extfs_archive *current_archive;
     struct extfs_entry *root_entry;
@@ -206,12 +207,14 @@ static FILE *open_extfs_archive (int fstype, char *name, struct extfs_archive **
     }
 #endif
     
-    cmd = copy_strings (LIBDIR "extfs/", extfs_prefixes [fstype], 
+    mc_extfsdir = concat_dir_and_file (mc_home, "extfs/");
+    cmd = copy_strings (mc_extfsdir, extfs_prefixes [fstype], 
                         " list ", local_name ? local_name : tmp, 0);
     if (tmp)
 	free (tmp);
     result = popen (cmd, "r");
     free (cmd);
+    free (mc_extfsdir);
     if (result == NULL) {
         if (local_name != NULL && uses_archive)
             mc_ungetlocalcopy (name, local_name, 0);
@@ -555,15 +558,17 @@ static char *get_archive_name (struct extfs_archive *archive)
 void extfs_run (char *file)
 {
     struct extfs_archive *archive;
-    char *p, *q, *cmd, *archive_name;
+    char *p, *q, *cmd, *archive_name, *mc_extfsdir;
 
     if ((p = extfs_get_path (file, &archive, 0, 0)) == NULL)
 	return;
     q = name_quote (p, 0);
     
     archive_name = name_quote (get_archive_name(archive), 0);
-    cmd = copy_strings (LIBDIR "extfs/", extfs_prefixes [archive->fstype], 
+    mc_extfsdir = concat_dir_and_file (mc_home, "extfs/");
+    cmd = copy_strings (mc_extfsdir, extfs_prefixes [archive->fstype], 
                         " run ", archive_name, " ", q, 0);
+    free (mc_extfsdir);
     free (archive_name);
     free (q);
 #ifndef VFS_STANDALONE
@@ -603,8 +608,10 @@ static void *extfs_open (char *file, int flags, int mode)
 	q = name_quote (p, 0);
 	free (p);
 	archive_name = name_quote (get_archive_name (archive), 0);
-        cmd = copy_strings (LIBDIR "extfs/", extfs_prefixes [archive->fstype], 
-                            " copyout ", 
+
+        mc_extfsdir = concat_dir_and_file (mc_home, "extfs/");
+        cmd = copy_strings (mc_extfsdir, extfs_prefixes [archive->fstype],
+                             " copyout ", 
                             archive_name, 
                             " ", q, " ", entry->inode->local_filename, 0);
 	free (q);
@@ -613,10 +620,12 @@ static void *extfs_open (char *file, int flags, int mode)
             free (entry->inode->local_filename);
             entry->inode->local_filename = NULL;
             free (cmd);
+	    free (mc_extfsdir);
             extfserrno = EIO;
             return NULL;
         }
         free (cmd);
+	free (mc_extfsdir);
     }
     
     local_handle = open (entry->inode->local_filename, flags, mode);
@@ -657,6 +666,7 @@ static int extfs_close (void *data)
 	struct extfs_archive *archive;
 	char   *archive_name, *file_name;
 	char   *cmd;
+	char   *mc_extfsdir;
 	char   *p;
 	
 	archive = file->archive;
@@ -665,7 +675,8 @@ static int extfs_close (void *data)
 	file_name = name_quote (p, 0);
 	free (p);
 	
-	cmd = copy_strings (LIBDIR "extfs/",
+	mc_extfsdir = concat_dir_and_file (mc_home, "extfs/");
+	cmd = copy_strings (mc_extfsdir,
 			    extfs_prefixes [archive->fstype],
 			    " copyin ", archive_name, " ",
 			    file_name, " ",
@@ -675,6 +686,7 @@ static int extfs_close (void *data)
 	if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID, shell, cmd))
 	    errno_code = EIO;
 	free (cmd);
+	free (mc_extfsdir);
         {
           struct stat file_status;
           if( stat(file->entry->inode->local_filename,&file_status) != 0 )
@@ -993,7 +1005,13 @@ vfs extfs_vfs_ops =
 #include "../src/profile.h"
 void extfs_init (void)
 {
-    FILE *cfg = fopen( LIBDIR "extfs/extfs.ini", "r" );
+    FILE *cfg;
+    char *mc_extfsini;
+
+    mc_extfsini = concat_dir_and_file (mc_home, "extfs/extfs.ini");
+    cfg = fopen (mc_extfsini, "r");
+    free (mc_extfsini);
+
     if (!cfg) {
         fprintf( stderr, "Warning: " LIBDIR "extfs/extfs.ini not found\n" );
         return;

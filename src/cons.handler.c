@@ -38,6 +38,7 @@ signed char console_flag = 0;
 #include "util.h"
 #include "win.h"
 #include "cons.saver.h"
+#include "main.h"
 
 static int pipefd1 [2] = {-1, -1}, pipefd2 [2] = {-1, -1};
 
@@ -93,6 +94,7 @@ void show_console_contents (int starty, unsigned char begin_line, unsigned char 
 void handle_console (unsigned char action)
 {
     char *tty_name;
+    char *mc_conssaver;
     int status;
 
     switch (action){
@@ -145,7 +147,8 @@ void handle_console (unsigned char action)
 	    close (2);
 	    open ("/dev/null", O_WRONLY);
 	    /* Exec the console save/restore handler */
-	    execl (LIBDIR "bin/cons.saver", "cons.saver", tty_name, NULL);
+	    mc_conssaver = concat_dir_and_file (mc_home, "bin/cons.saver");
+	    execl (mc_conssaver, "cons.saver", tty_name, NULL);
 	    /* Exec failed */
 	    console_flag = 0;
 	    write (1, &console_flag, 1);

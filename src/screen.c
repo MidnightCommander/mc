@@ -1622,7 +1622,7 @@ do_move_up (WPanel *panel)
     select_item (panel);
 }
 
-static int
+static void
 move_rel (WPanel *panel, int rel)
 {
     unselect_item (panel);

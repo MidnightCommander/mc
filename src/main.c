@@ -2351,6 +2351,8 @@ void
 OS_Setup ()
 {
     char   *termvalue;
+    char   *mc_libdir;
+	
     termvalue = getenv ("TERM");
     if (!termvalue){
 	fprintf (stderr, _("The TERM environment variable is unset!\n"));
@@ -2374,8 +2376,13 @@ OS_Setup ()
     sprintf (control_file, CONTROL_FILE, getpid ());
     my_putenv ("MC_CONTROL_FILE", control_file);
     
-    /* This is the directory, where MC was installed, on Unix this always is LIBDIR */
-    mc_home = strdup(LIBDIR);
+    /* This is the directory, where MC was installed, on Unix this is LIBDIR */
+    /* and can be overriden by the MC_LIBDIR environment variable */
+    if ((mc_libdir = getenv ("MC_LIBDIR")) != NULL) {
+	mc_home = strdup(mc_libdir);
+    } else {
+	mc_home = strdup(LIBDIR);
+    }
 }
 
 static void
@@ -2972,12 +2979,12 @@ int main (int argc, char *argv [])
     bindtextdomain ("mc", LOCALEDIR);
     textdomain ("mc");
 
-    vfs_init ();
-
     /* Initialize list of all user group for timur_clr_mode */
     init_groups ();
     
     OS_Setup ();
+
+    vfs_init ();
 
 #ifdef HAVE_X
     /* NOTE: This call has to be before any our argument handling :) */

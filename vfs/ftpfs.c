@@ -57,6 +57,7 @@
 #include "../src/mad.h"
 #include "../src/setup.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
+#include "../src/main.h"
 #include <netdb.h>		/* struct hostent */
 #include <sys/socket.h>		/* AF_INET */
 #include <netinet/in.h>		/* struct in_addr */
@@ -619,13 +620,15 @@ load_no_proxy_list ()
     FILE	*npf;
     int		c;
     char	*p;
+    char 	*mc_file;
     static int	loaded;
 
     if (loaded)
 	return;
 
-    if (exist_file (LIBDIR "mc.no_proxy") &&
-	(npf = fopen (LIBDIR "mc.no_proxy", "r"))) {
+    mc_file = concat_dir_and_file (mc_home, "mc.no_proxy");
+    if (exist_file (mc_file) &&
+	(npf = fopen (mc_file, "r"))) {
 	while (fgets (s, 258, npf) || !(feof (npf) || ferror (npf))) {
 	    if (!(p = strchr (s, '\n'))) {	/* skip bogus entries */ 
 		while ((c = getc (npf)) != EOF && c != '\n')
@@ -652,6 +655,7 @@ load_no_proxy_list ()
 	fclose (npf);
 	loaded = 1;
     }
+    free (mc_file);
 }
 
 static int
