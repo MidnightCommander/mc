@@ -1,6 +1,10 @@
 Before 4.6.0-pre2
 =================
 
+Restore shadow password support in mcserv.
+
+get_byte() in view.c produces warnings in Valgrind.
+
 Don't allow stdout and stderr from extfs scripts pollute the screen.
 
 ncurses 5.2 turns off keypad under heavy load on xterm.  Check if
