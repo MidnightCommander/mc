@@ -22,6 +22,7 @@
 #include <config.h>
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>
 #endif
@@ -608,17 +609,28 @@ completion_matches (char *text, CompletionFunction entry_function)
     return match_list;
 }
 
+/* Check if directory completion is needed */
 static int
-check_is_cd (char *text, int start, int flags)
+check_is_cd (const char *text, int start, int flags)
 {
-    char *p, *q = text + start;
-    	    
-    for (p = text; *p && p < q && (*p == ' ' || *p == '\t'); p++);
-    if (((flags & INPUT_COMPLETE_COMMANDS) && 
-        !strncmp (p, "cd", 2) && (p [2] == ' ' || p [2] == '\t') && 
-        p + 2 < q) ||
-        (flags & INPUT_COMPLETE_CD))
-        return 1;
+    const unsigned char *p, *q;
+
+    if (flags & INPUT_COMPLETE_CD)
+	return 1;
+
+    if (!(flags & INPUT_COMPLETE_COMMANDS))
+	return 0;
+
+    /* Skip initial spaces */
+    p = text;
+    q = text + start;
+    while (p < q && *p && isspace (*p))
+	p++;
+
+    /* Check if the command is "cd" and the cursor is after it */
+    if (p[0] == 'c' && p[1] == 'd' && isspace (p[2]) && (p + 2 < q))
+	return 1;
+
     return 0;
 }
 
