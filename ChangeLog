@@ -1,3 +1,9 @@
+2001-08-21  Pavel Roskin  <proski@gnu.org>
+
+	* autogen.sh: Fall back to aclocal without "-I gettext.m4" in
+	case it already has gettext macros elsewhere and doesn't like
+	duplicates (i.e. it's aclocal from Automake-1.4).
+
 2001-08-20  Pavel Roskin  <proski@gnu.org>
 
 	* AUTHORS: Updated.

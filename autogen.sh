@@ -41,7 +41,9 @@ for i in $m4files; do
   cp -f $fromdir/$i gettext.m4
 done
 
-$ACLOCAL -I macros -I gettext.m4 $ACLOCAL_FLAGS || exit 1
+$ACLOCAL -I macros -I gettext.m4 $ACLOCAL_FLAGS || \
+  $ACLOCAL -I macros $ACLOCAL_FLAGS || \
+  exit 1
 $AUTOHEADER || exit 1
 $AUTOCONF || exit 1
 $AUTOMAKE -a || exit 1
