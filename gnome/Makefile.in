@@ -111,7 +111,8 @@ CORBAOBJS = 			\
 	main-corba.o		\
 	gcorba.o		\
 	FileManager-impl.o	\
-	FileManager-skels.o
+	FileManager-skels.o	\
+	FileManager-common.o
 
 OBJS = 			\
 	$(LOBJS) 	\
@@ -159,10 +160,12 @@ CORBA_SOURCES = 		\
 $(CORBA_GENERATED): $(rootdir)/idl/FileManager.idl
 	orbit-idl `gnome-config --cflags idl` $(rootdir)/idl/FileManager.idl
 
+$(CORBA_SOURCES): $(CORBA_GENERATED)
+
 FileManager-impl.c: FileManager.h
 
 DISTGNOME = \
-	Makefile.in gnome.TODO layout gmc.gnorba 	\
+	Makefile.in gnome.TODO layout FileManager.goad	\
 	$(PIXMAPS) $(ICONS) $(GNOMESRCS) $(GNOMEHDRS) 	\
 	$(CORBA_SOURCES)
 
@@ -185,7 +188,7 @@ mx: @LIBVFS@ $(OBJS) $(NORMALOBJS) @LIBSLANG@ libgtkedit.a
 	touch mx
 
 corba-gmc: @LIBVFS@ $(OBJS) $(CORBAOBJS) @LIBSLANG@ libgtkedit.a
-	$(CC) $(CORBA_LDFLAGS) -o gmc $(CORBAOBJS) $(OBJS) -L../vfs -L../slang -L../gtkedit $(EXTRALIBS) $(LIBS) 
+	$(CC) $(CORBA_LDFLAGS) -o corba-gmc $(CORBAOBJS) $(OBJS) -L../vfs -L../slang -L../gtkedit $(EXTRALIBS) $(LIBS) 
 
 mc.metadata: mc.metadata.in Makefile
 	sed -e 's^\@icondir\@^$(icondir)^g' < $(srcdir)/mc.metadata.in > mc.metadata.tmp \

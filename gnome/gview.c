@@ -230,38 +230,38 @@ gview_status (WView *view)
 	return s;
 }
 
-void
+static void
 gview_quit (GtkWidget *widget, WView *view)
 {
 	dlg_run_done (view->widget.parent);
 	destroy_dlg (view->widget.parent);
 }
 
-void
+static void
 gnome_normal_search_cmd (GtkWidget *widget, WView *view)
 {
 	normal_search_cmd (view);
 }
 
-void
+static void
 gnome_regexp_search_cmd (GtkWidget *widget, WView *view)
 {
 	regexp_search_cmd (view);
 }
 
-void
+static void
 gnome_continue_search (GtkWidget *widget, WView *view)
 {
 	continue_search (view);
 }
 
-void
+static void
 gnome_goto_line (GtkWidget *widget, WView *view)
 {
 	goto_line (view);
 }
 
-void
+static void
 gnome_toggle_wrap (GtkWidget *widget, WView *view)
 {
 	toggle_wrap_mode (view);
