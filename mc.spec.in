@@ -23,7 +23,6 @@ Group:     Applications/File
 Source0:   ftp://ftp.ibiblio.org/pub/Linux/utils/file/managers/mc/mc-%{ver}.tar.gz
 URL:       http://www.ibiblio.org/mc/
 BuildRoot: /var/tmp/mc-%{PACKAGE_VERSION}-root
-Prereq:    /sbin/chkconfig
 BuildRequires: glib-devel
 %{!?_with_included_slang:%{!?_with_ncurses:BuildRequires: slang-devel}}
 %{?_with_ncurses:BuildRequires: ncurses-devel}
@@ -101,6 +100,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/share/mc/term
 
 %changelog
+* Sun Feb 16 2003 Pavel Roskin <proski@gnu.org>
+- Remove obsolete dependency on /sbin/chkconfig.
+
 * Tue Dec 24 2002 Pavel Roskin <proski@gnu.org>
 - Work around bug in rpm 4.1 that expands defines in comments.
 - Handle --without-x.
