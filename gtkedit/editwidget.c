@@ -36,6 +36,7 @@
 #endif
 
 #ifndef MIDNIGHT
+#include "xdnd.h"
 
 extern int EditExposeRedraw;
 CWidget *wedit = 0;
