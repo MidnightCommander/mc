@@ -1,3 +1,9 @@
+2000-02-18  Paul Sheer <psheer@obsidian.co.za>
+
+	* gtkedit/*.[ch], edit.c et al: updates to reflect
+	cooledit-3.13.0. See CVS commits and cooledit ChangeLog
+	for details.
+
 2000-02-10  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* setup.c (load_setup): remove duplicate loading of anonymous
