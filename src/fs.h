@@ -27,12 +27,12 @@
 #   define S_ISSOCK(x) (((x) & S_IFMT) == S_IFSOCK)
 #endif
 
-#ifndef S_IFFIFO
-#   define S_IFFIFO 0
+#ifndef S_IFIFO
+#   define S_IFIFO 0
 #endif
 
 #ifndef S_ISFIFO
-#   define S_ISFIFO(x) (((x) & S_IFMT) == S_IFFIFO)
+#   define S_ISFIFO(x) (((x) & S_IFMT) == S_IFIFO)
 #endif
 
 #ifndef S_IFCHR
