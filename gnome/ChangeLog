@@ -1,3 +1,9 @@
+1999-02-25 Owen Taylor  <otaylor@redhat.com>
+
+	* gprefs.c gcustom-layout.[ch]: Add a new page to
+	the preferences dialog to allow the user to change
+	the columns in the custom view.
+
 1999-02-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gmount.c (desktop_cleanup_devices): Export this routine now and

@@ -14,6 +14,7 @@
 #include "panelize.h"
 #include "dialog.h"
 #include "layout.h"
+#include "gcustom-layout.h"
 #include "../vfs/vfs.h"
 #include "gprefs.h"
 
@@ -63,6 +64,8 @@ typedef struct
         WPanel *panel;
         GtkWidget *prop_box;
         PrefsPage *prefs_pages;
+	GCustomLayout *custom_layout;
+	gint custom_layout_page;
 } PrefsDlg;
 
 
@@ -256,7 +259,9 @@ apply_page_changes (PrefsDlg *dlg, gint pagenum)
 static void
 apply_callback (GtkWidget *prop_box, gint pagenum, PrefsDlg *dlg) 
 {
-        if (pagenum != -1) {
+	if (pagenum == dlg->custom_layout_page) {
+		custom_layout_apply (dlg->custom_layout);
+	} else if (pagenum != -1) {
                 apply_page_changes (dlg, pagenum);
         } else {
 		/* FIXME: can be optimized.  Only if some of the
@@ -453,6 +458,10 @@ create_prop_box (PrefsDlg *dlg)
                 i++;
                 cur_page = &(dlg->prefs_pages [i]);
         }
+
+	dlg->custom_layout = custom_layout_create_page (GNOME_PROPERTY_BOX (dlg->prop_box), 
+							dlg->panel);
+	dlg->custom_layout_page = i;
 
         gtk_signal_connect (GTK_OBJECT (dlg->prop_box), "apply",
                             GTK_SIGNAL_FUNC (apply_callback), dlg);
