@@ -14,8 +14,8 @@ test -z "$srcdir" && srcdir=.
 (
 cd $srcdir
 
-# This cache is not reliable yet.
-rm -rf autom4te.cache
+# The autoconf cache (version after 2.52) is not reliable yet.
+rm -rf autom4te.cache vfs/samba/autom4te.cache
 
 # Ensure that gettext is reasonably new.
 gettext_ver=`$GETTEXTIZE --version | sed -n '1s/^.* //p'`
