@@ -28,6 +28,7 @@
 #include <sys/types.h>
 #include <sys/param.h>
 #include <sys/stat.h>
+#include <ctype.h>
 #include "tty.h"
 #include "mad.h"
 #include "util.h"	/* Needed for the externs and convert_controls */
