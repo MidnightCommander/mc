@@ -761,6 +761,16 @@ change_panel (void)
     dlg_one_down (midnight_dlg);
 }
 
+/* Stop MC main dialog and the current dialog if it exists.
+ * Needed to provide fast exit from MC viewer or editor on shell exit */
+static void stop_dialogs (void)
+{
+    midnight_dlg->running = 0;
+    if (current_dlg) {
+	current_dlg->running = 0;
+    }
+}
+
 static int
 quit_cmd_internal (int quiet)
 {
@@ -777,11 +787,11 @@ quit_cmd_internal (int quiet)
     if (q){
 #ifdef HAVE_SUBSHELL_SUPPORT
 	if (!use_subshell)
-	    midnight_dlg->running = 0;
+	    stop_dialogs ();
 	else
 	    if ((q = exit_subshell ()))
 #endif
-		midnight_dlg->running = 0;
+		stop_dialogs ();
     }
     if (q)
         quit |= 1;
