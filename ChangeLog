@@ -1,5 +1,7 @@
 2000-08-15  Pavel Roskin  <proski@gnu.org>
 
+	* lib/cedit.menu: Added. This file has been missing
+
 	* lib/Makefile.in: Install mc.sh and mc.csh in $(suppbindir) only
 
 2000-08-08  Pavel Roskin  <proski@gnu.org>
