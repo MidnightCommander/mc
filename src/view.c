@@ -205,6 +205,7 @@ view_done (WView *view)
     default_hex_mode = view->hex_mode;
     default_nroff_flag = view->viewer_nroff_flag;
     default_magic_flag = view->viewer_magic_flag;
+    global_wrap_mode   = view->wrap_mode;
 }
 
 static void view_hook (void *);
