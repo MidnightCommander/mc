@@ -1,5 +1,18 @@
 2001-07-26  Pavel Roskin  <proski@gnu.org>
 
+	* gfind.c (get_list_info): Get row number as argument.  Return
+	boolean - FALSE if cannot find the row.  Calculate line number.
+	Change all callers.
+	(find_do_view_edit): Simplify.  Get line number as argument.
+	(find_do_view): Close the dialog because it's modal and prevents
+	user from interacting with other windows.
+	(find_do_edit): Likewise.
+	(setup_gui): Enable panelize button.  Improve look.
+	(find_panelize): New function.  Implement panelize.
+	(find_file): Add support for view, edit and panelize commands.
+	(do_find): Likewise.  Simplify.
+	(add_to_list): Block "select_row" signal until data is set.
+
 	* gfind.c (GFindDlg): Add last_dir_row field for the last
 	directory row.
 	(add_to_list): Last argument is now boolean, FALSE for files,

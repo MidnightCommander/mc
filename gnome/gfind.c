@@ -28,6 +28,8 @@
 #include <sys/param.h>
 #include <fcntl.h>
 #include <ctype.h>
+
+#define DIR_H_INCLUDE_HANDLE_DIRENT 1
 #include "tty.h"
 #include "x.h"
 #include "global.h"
@@ -43,8 +45,8 @@ enum {
 	B_STOP = B_USER + 1,
 	B_AGAIN,
 	B_PANELIZE,
-	B_TREE,
-	B_VIEW
+	B_VIEW,
+	B_EDIT
 };
 
 /* A list of directories to be ignores, separated with ':' */
@@ -81,7 +83,8 @@ typedef struct {
 static char *add_to_list(GFindDlg *head, char *text, gboolean is_dir);
 static void stop_idle(GFindDlg *head);
 static void status_update(GFindDlg *head, char *text);
-static void get_list_info(GFindDlg *head, char **file, char **dir);
+static gboolean get_list_info(GFindDlg *head, int row,
+			      char **file, char **dir, int *line);
 
 /*
  * find_parameters: gets information from the user
@@ -486,18 +489,10 @@ static void init_find_vars(GFindDlg *head)
 }
 
 static void
-find_do_view_edit(GFindDlg *head, int unparsed_view, int edit, char *dir, char *file)
+find_do_view_edit(int unparsed_view, int mode, char *dir, char *filename, int line)
 {
-	char *fullname, *filename;
-	int line;
+	char *fullname;
 
-	if (head->content_pattern) {
-		filename = strchr(file + 4, ':') + 1;
-		line = atoi(file + 4);
-	} else {
-		filename = file + 4;
-		line = 0;
-	}
 	if (dir[0] == '.' && dir[1] == 0)
 		fullname = g_strdup(filename);
 	else if (dir[0] == '.' && dir[1] == PATH_SEP)
@@ -505,7 +500,7 @@ find_do_view_edit(GFindDlg *head, int unparsed_view, int edit, char *dir, char *
 	else
 		fullname = concat_dir_and_file(dir, filename);
 
-	if (edit)
+	if (mode == B_EDIT)
 		do_edit_at_line(fullname, line);
 	else
 		view_file_at_line(fullname, unparsed_view, use_internal_view, line);
@@ -562,20 +557,14 @@ static void find_start_stop(GtkWidget *widget, GFindDlg *head)
 
 static void find_do_view(GtkWidget *widget, GFindDlg *head)
 {
-	char *file, *dir;
-
-	get_list_info(head, &file, &dir);
-
-	find_do_view_edit(head, 0, 0, dir, file);
+	head->stop = B_VIEW;
+	gtk_main_quit();
 }
 
 static void find_do_edit(GtkWidget *widget, GFindDlg *head)
 {
-	char *file, *dir;
-
-	get_list_info(head, &file, &dir);
-
-	find_do_view_edit(head, 0, 1, dir, file);
+	head->stop = B_EDIT;
+	gtk_main_quit();
 }
 
 static void find_destroy(GtkWidget *widget, GFindDlg *head)
@@ -610,10 +599,6 @@ static void setup_gui(GFindDlg *head)
 	gtk_box_pack_start(GTK_BOX(box1), head->g_change, 0, 1, 0);
 	gtk_box_pack_start(GTK_BOX(box1), head->g_again, 0, 1, 0);
 	gtk_box_pack_start(GTK_BOX(box1), head->g_start_stop, 0, 1, 0);
-
-/*	RECOONECT	_("Panelize contents"), */
-/*		_("View"),
-		_("Edit"), */
 
 	sw = gtk_scrolled_window_new(NULL, NULL);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(sw), GTK_POLICY_NEVER,
@@ -656,9 +641,10 @@ static void setup_gui(GFindDlg *head)
 	gtk_widget_set_sensitive(head->g_view, FALSE);
 	gtk_widget_set_sensitive(head->g_edit, FALSE);
 	gtk_widget_set_sensitive(head->g_change, FALSE);
-	box2 = gtk_hbox_new(1, GNOME_PAD + GNOME_PAD);
-	gtk_box_pack_start(GTK_BOX(box2), head->g_view, 0, 0, 0);
-	gtk_box_pack_start(GTK_BOX(box2), head->g_edit, 0, 0, 0);
+	box2 = gtk_hbox_new(TRUE, GNOME_PAD);
+	gtk_box_pack_start(GTK_BOX(box2), head->g_view, 0, 1, 0);
+	gtk_box_pack_start(GTK_BOX(box2), head->g_edit, 0, 1, 0);
+	gtk_box_pack_start(GTK_BOX(box2), head->g_panelize, 0, 1, 0);
 
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(head->g_find_dlg)->vbox),
 			   box1, TRUE, TRUE, GNOME_PAD_SMALL);
@@ -667,7 +653,7 @@ static void setup_gui(GFindDlg *head)
 
 	head->g_status_label = gtk_label_new(_("Searching"));
 	gtk_misc_set_alignment(GTK_MISC(head->g_status_label), 0.0, 0.5);
-	box3 = gtk_hbox_new(1, GNOME_PAD);
+	box3 = gtk_hbox_new(TRUE, GNOME_PAD);
 	gtk_container_add(GTK_CONTAINER(box3), head->g_status_label);
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(head->g_find_dlg)->vbox),
 			   box3, TRUE, TRUE, GNOME_PAD_SMALL);
@@ -723,6 +709,8 @@ static char *add_to_list(GFindDlg *head, char *text, gboolean is_dir)
 
 	texts[0] = text;
 
+	gtk_signal_handler_block_by_func (GTK_OBJECT (head->g_clist),
+					  GTK_SIGNAL_FUNC(select_row), head);
 	row = gtk_clist_append(GTK_CLIST(head->g_clist), texts);
 
 	/* Record parent row (or -1 for directories) in the item data.  */
@@ -734,6 +722,8 @@ static char *add_to_list(GFindDlg *head, char *text, gboolean is_dir)
 	}
 
 	gtk_clist_set_row_data(GTK_CLIST(head->g_clist), row, (void *) data);
+	gtk_signal_handler_unblock_by_func (GTK_OBJECT (head->g_clist),
+					    GTK_SIGNAL_FUNC(select_row), head);
 
 	if (gtk_clist_row_is_visible(GTK_CLIST(head->g_clist), row)
 			!= GTK_VISIBILITY_FULL) {
@@ -743,17 +733,21 @@ static char *add_to_list(GFindDlg *head, char *text, gboolean is_dir)
 	return text;
 }
 
-static void get_list_info(GFindDlg *head, char **file, char **dir)
+static gboolean get_list_info(GFindDlg *head, int row,
+			      char **file, char **dir, int *line)
 {
 	int p_row;
 
-	if (head->current_row == -1)
+	if (!gtk_clist_get_text(GTK_CLIST(head->g_clist), row, 0, file)) {
+		/* No text - invalid row */
 		*file = *dir = NULL;
+		return FALSE;
+	}
 
-	p_row = (int) gtk_clist_get_row_data(GTK_CLIST(head->g_clist),
-					     head->current_row);
-	gtk_clist_get_text(GTK_CLIST(head->g_clist),
-			   head->current_row, 0, file);
+	/* Get parent row from the item data */
+	p_row = (int) gtk_clist_get_row_data(GTK_CLIST(head->g_clist), row);
+
+	*line = 0;
 
 	if (p_row == -1) {
 		/* No parent row - it's a directory */
@@ -761,11 +755,84 @@ static void get_list_info(GFindDlg *head, char **file, char **dir)
 		*file = NULL;
 	} else {
 		gtk_clist_get_text(GTK_CLIST(head->g_clist), p_row, 0, dir);
+		*file += 4; /* skip spaces */
+		if (head->content_pattern) {
+			*line = atoi(*file);
+			*file = strchr(*file, ':') + 1;
+		}
+	}
+	return TRUE;
+}
+
+static void find_panelize (GFindDlg *head, char *start_dir)
+{
+	int status, link_to_dir, stalled_link;
+	int next_free = 0;
+	int i = 0;
+	struct stat buf;
+	char *dir, *name, *filename;
+	int line;
+	dir_list *list = &cpanel->dir;
+
+	while (1) {
+		if (!get_list_info(head, i++, &filename, &dir, &line)) {
+			break; /* Nonexistent row reached */
+		}
+
+		if (dir [0] == '.' && dir [1] == 0)
+			name = g_strdup (filename);
+		else if (dir [0] == '.' && dir [1] == PATH_SEP)
+			name = concat_dir_and_file (dir + 2, filename);
+		else
+			name = concat_dir_and_file (dir, filename);
+
+		status = handle_path (list, name, &buf, next_free,
+				      &link_to_dir, &stalled_link);
+		if (status == 0) {
+			g_free (name);
+			continue;
+		}
+
+		if (status == -1) {
+			g_free (name);
+			break;
+		}
+
+		/* don't add files more than once to the panel */
+		if (head->content_pattern && next_free > 0){
+			if (strcmp (list->list [next_free-1].fname, name) == 0) {
+				g_free (name);
+				continue;
+			}
+		}
+
+		if (!next_free) /* first turn i.e. clean old list */
+	    		panel_clean_dir (cpanel);
+		list->list [next_free].fnamelen = strlen (name);
+		list->list [next_free].fname = name;
+		file_mark (cpanel, next_free, 0);
+		list->list [next_free].f.link_to_dir = link_to_dir;
+		list->list [next_free].f.stalled_link = stalled_link;
+		list->list [next_free].f.dir_size_computed = 0;
+		list->list [next_free].buf = buf;
+		next_free++;
+	}
+
+	if (next_free){
+		cpanel->count = next_free;
+		cpanel->is_panelized = 1;
+
+		if (start_dir [0] == PATH_SEP){
+			strcpy (cpanel->cwd, PATH_SEP_STR);
+			chdir (PATH_SEP_STR);
+		}
 	}
 }
 
-static int find_file(char *start_dir, char *pattern, char *content, char **dirname,
-		     char **filename)
+
+static int
+find_file(char *start_dir, char *pattern, char *content, char **dirname,
+	  char **filename, int *line)
 {
 	GFindDlg *head;
 	int return_value = 0;
@@ -788,13 +855,18 @@ static int find_file(char *start_dir, char *pattern, char *content, char **dirna
 	while ((dir = pop_directory(head)) != NULL)
 		g_free(dir);
 
-	if (return_value == B_ENTER || return_value == B_PANELIZE) {
-		get_list_info(head, &file_tmp, &dir_tmp);
-
+	switch (return_value) {
+	case B_ENTER:
+	case B_VIEW:
+	case B_EDIT:
+		get_list_info(head, head->current_row,
+			      &file_tmp, &dir_tmp, line);
 		if (dir_tmp)
 			*dirname = g_strdup(dir_tmp);
 		if (file_tmp)
 			*filename = g_strdup(file_tmp);
+	case B_PANELIZE:
+		find_panelize(head, start_dir);
 	}
 
 	kill_gui(head);
@@ -812,55 +884,50 @@ void do_find(void)
 {
 	char *start_dir, *pattern, *content;
 	char *filename, *dirname;
-	int v, dir_and_file_set;
+	int line;
+	int v;
 
 	while (1) {
 		if (!find_parameters(&start_dir, &pattern, &content))
 			break;
 
 		dirname = filename = NULL;
-		v = find_file(start_dir, pattern, content, &dirname, &filename);
+		v = find_file(start_dir, pattern, content,
+			      &dirname, &filename, &line);
+
 		g_free(start_dir);
 		g_free(pattern);
+		g_free(content);
 
 		if (v == B_ENTER) {
-			if (dirname || filename) {
-				if (dirname) {
-					do_cd(dirname, cd_exact);
-					if (filename)
-						try_to_select(cpanel,
-							      filename +
-							      (content
-							       ? (strchr
-								  (filename + 4,
-								   ':') - filename +
-								  1) : 4));
-				} else if (filename)
-					do_cd(filename, cd_exact);
-				paint_panel(cpanel);
-				select_item(cpanel);
+			if (dirname) {
+				do_cd(dirname, cd_exact);
 			}
-			if (dirname)
-				g_free(dirname);
 			if (filename)
-				g_free(filename);
+				try_to_select(cpanel, filename);
+			paint_panel(cpanel);
+			select_item(cpanel);
+			g_free(dirname);
+			g_free(filename);
 			break;
 		}
-		if (content)
-			g_free(content);
-		dir_and_file_set = dirname && filename;
-		if (dirname)
+
+		if (v == B_VIEW || v == B_EDIT) {
+			find_do_view_edit(0, v, dirname, filename, line);
 			g_free(dirname);
-		if (filename)
 			g_free(filename);
+			break;
+		}
+
+		g_free(dirname);
+		g_free(filename);
+
 		if (v == B_CANCEL || v == B_EXIT)
 			break;
 
 		if (v == B_PANELIZE) {
-			if (dir_and_file_set) {
-				try_to_select(cpanel, NULL);
-				paint_panel(cpanel);
-			}
+			try_to_select(cpanel, NULL);
+			paint_panel(cpanel);
 			break;
 		}
 	}
