@@ -1086,7 +1086,7 @@ static menu_entry OptMenu[] = {
 
 #define menu_entries(x) sizeof(x)/sizeof(menu_entry)
 
-static Menu MenuBar[5];
+static Menu *MenuBar[5];
 
 void
 init_menu (void)

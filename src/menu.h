@@ -16,7 +16,7 @@ typedef struct {
     callfn call_back;
 } menu_entry;
 
-typedef struct {
+typedef struct Menu {
     char   *name;
     int    count;
     int    max_entry_len;
@@ -25,8 +25,7 @@ typedef struct {
     menu_entry *entries;
     int    start_x;		/* position relative to menubar start */
     char   *help_node;
-} sMenu;
-typedef sMenu *Menu;
+} Menu;
 
 extern int menubar_visible;
 
@@ -36,7 +35,7 @@ typedef struct WMenu {
 
     int    active;		/* If the menubar is in use */
     int    dropped;		/* If the menubar has dropped */
-    Menu   *menu;		/* The actual menus */
+    Menu   **menu;		/* The actual menus */
     int    items;
     int    selected;		/* Selected menu on the top bar */
     int    subsel;		/* Selected entry on the submenu */
@@ -44,12 +43,11 @@ typedef struct WMenu {
     int    previous_selection;	/* Selected widget before activating menu */
 } WMenu;
 
-Menu   create_menu     (char *name, menu_entry *entries, int count,
+Menu  *create_menu     (char *name, menu_entry *entries, int count,
 			char *help_node);
-void   destroy_menu    (Menu menu);
-WMenu *menubar_new     (int y, int x, int cols, Menu menu [], int items);
-void   menubar_arrange (WMenu* menubar);
-int    menubar_event   (Gpm_Event *event, WMenu *menubar);
+void   destroy_menu    (Menu *menu);
+WMenu *menubar_new     (int y, int x, int cols, Menu *menu[], int items);
+void   menubar_arrange (WMenu *menubar);
 
 #endif /* __MENU_H */
 

@@ -1,3 +1,9 @@
+2002-11-12  Pavel Roskin  <proski@gnu.org>
+
+	* menu.h: Remove "*" from the definition of the type "Menu"
+	for consistency with other types.  Change all dependencies.
+	(menubar_event): Make static.
+
 2002-11-12  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* view.c (get_line_at): Use g_strreverse() instead of

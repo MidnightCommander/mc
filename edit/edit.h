@@ -166,8 +166,8 @@ struct context_rule {
     struct key_word **keyword;
 };
 
-int edit_drop_hotkey_menu (WEdit * e, int key);
-void edit_menu_cmd (WEdit * e);
+int edit_drop_hotkey_menu (WEdit *e, int key);
+void edit_menu_cmd (WEdit *e);
 void edit_init_menu_emacs (void);
 void edit_init_menu_normal (void);
 void edit_done_menu (void);
@@ -347,7 +347,7 @@ extern char *home_dir;
  */
 extern int edit_key_emulation;
 extern WEdit *wedit;
-extern Menu EditMenuBar[];
+extern Menu *EditMenuBar[];
 extern WMenu *edit_menubar;
 
 extern int option_word_wrap_line_length;

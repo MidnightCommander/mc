@@ -34,7 +34,8 @@
 extern int is_right;
 int menubar_visible = 1;	/* This is the new default */
 
-static void menu_scan_hotkey(Menu menu)
+static void
+menu_scan_hotkey(Menu *menu)
 {
     char* cp = strchr (menu->name, '&');
 
@@ -46,12 +47,13 @@ static void menu_scan_hotkey(Menu menu)
 	menu->hotkey = 0;
 }
 
-Menu create_menu (char *name, menu_entry *entries, int count, char *help_node)
+Menu *
+create_menu (char *name, menu_entry *entries, int count, char *help_node)
 {
-    Menu menu;
+    Menu *menu;
     char *cp;
 
-    menu = (Menu) g_malloc (sizeof (*menu));
+    menu = (Menu *) g_malloc (sizeof (*menu));
     menu->count = count;
     menu->max_entry_len = 20;
     menu->entries = entries;
@@ -91,7 +93,7 @@ static void menubar_drop_compute (WMenu *menubar)
 
 static void menubar_paint_idx (WMenu *menubar, int idx, int color)
 {
-    const Menu menu = menubar->menu [menubar->selected];
+    const Menu *menu = menubar->menu [menubar->selected];
     const int y = 2 + idx;
 	int x = menubar-> menu[menubar->selected]->start_x;
 
@@ -227,7 +229,7 @@ static void menubar_drop (WMenu *menubar, int selected)
 
 static void menubar_execute (WMenu *menubar, int entry)
 {
-    const Menu menu = menubar->menu [menubar->selected];
+    const Menu *menu = menubar->menu [menubar->selected];
     const callfn call_back = menu->entries [entry].call_back;
     
     is_right = menubar->selected != 0;
@@ -243,7 +245,7 @@ static void menubar_execute (WMenu *menubar, int entry)
 
 static void menubar_move (WMenu *menubar, int step)
 {
-    const Menu menu = menubar->menu [menubar->selected];
+    const Menu *menu = menubar->menu [menubar->selected];
 
     menubar_paint_idx (menubar, menubar->subsel, MENU_ENTRY_COLOR);
     do {
@@ -297,7 +299,7 @@ static int menubar_handle_key (WMenu *menubar, int key)
     if (!menubar->dropped){
 	const int items = menubar->items;
 	for (i = 0; i < items; i++){
-	    const Menu menu = menubar->menu [i];
+	    const Menu *menu = menubar->menu [i];
 
 	    if (menu->hotkey == key){
 		menubar_drop (menubar, i);
@@ -312,7 +314,7 @@ static int menubar_handle_key (WMenu *menubar, int key)
 	return 1;
     } else {
 	const int selected = menubar->selected;
-	const Menu menu = menubar->menu [selected];
+	const Menu *menu = menubar->menu [selected];
 	const int items = menu->count;
 	
 	for (i = 0; i < items; i++){
@@ -389,7 +391,7 @@ static int menubar_callback (Dlg_head *h, WMenu *menubar, int msg, int par)
     return default_proc (h, msg, par);
 }
 
-int
+static int
 menubar_event    (Gpm_Event *event, WMenu *menubar)
 {
     int was_active;
@@ -529,14 +531,14 @@ menubar_arrange(WMenu* menubar)
 }
 
 void
-destroy_menu (Menu menu)
+destroy_menu (Menu *menu)
 {
     g_free (menu->name);
     g_free (menu->help_node);
     g_free (menu);
 }
 
-WMenu *menubar_new (int y, int x, int cols, Menu menu [], int items)
+WMenu *menubar_new (int y, int x, int cols, Menu *menu [], int items)
 {
     WMenu *menubar = g_new0 (WMenu, 1); /* FIXME: subsel used w/o being set */
    

@@ -105,15 +105,14 @@ edit_event (WEdit * edit, Gpm_Event * event, int *result)
 }
 
 
-int menubar_event (Gpm_Event * event, WMenu * menubar);		/* menu.c */
-
-int edit_mouse_event (Gpm_Event * event, void *x)
+int
+edit_mouse_event (Gpm_Event *event, void *x)
 {
     int result;
     if (edit_event ((WEdit *) x, event, &result))
 	return result;
     else
-	return menubar_event (event, edit_menubar);
+	return (*edit_menubar->widget.mouse) (event, edit_menubar);
 }
 
 static void

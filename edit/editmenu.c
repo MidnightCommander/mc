@@ -260,7 +260,7 @@ static menu_entry OptMenuEmacs[] =
 
 #define menu_entries(x) sizeof(x)/sizeof(menu_entry)
 
-Menu EditMenuBar[N_menus];
+Menu *EditMenuBar[N_menus];
 
 void edit_init_menu_normal (void)
 {
