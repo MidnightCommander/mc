@@ -22,8 +22,6 @@ Before 4.6.2
 
 Hide the passwords when displaying mcvfs path names.
 
-Untaring files with # in name fails. 
-
 Broken pipe warning when viewing large *.tar.gz files.  Warnings should
 be shown before the viewer is started if possible.
 
