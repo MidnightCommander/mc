@@ -380,7 +380,7 @@ static QuickWidget conf_widgets [] = {
       10, 0, &my_overwrite, 0, "ov" },
 { quick_checkbox, 1, 13, 3, CONFY, N_(" confirm &Delete "),
       9, 0, &my_delete, 0, "de" },
-{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+NULL_QuickWidget
 };
 
 static QuickDialog confirmation =
@@ -467,7 +467,7 @@ static QuickWidget display_widgets [] = {
       0, 0, &new_meta, 0, "u" },
 { quick_radio,    4, DISPX, 3, DISPY, "", 3, 0,
       &new_mode, display_bits_str, "r" },
-{ 0,              0, 0, 0, 0, 0,  0, 0, 0, 0, 0 }
+NULL_QuickWidget
 };
 
 static QuickDialog display_bits =
@@ -738,7 +738,7 @@ static QuickWidget confvfs_widgets [] = {
       "input-timo-vfs" },
 { quick_label,    4,  VFSX, 3, VFSY, N_("Timeout for freeing VFSs:"), 
       0, 0, 0, 0, "label-vfs" },
-{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+NULL_QuickWidget
 };
 
 static QuickDialog confvfs_dlg =
@@ -790,7 +790,7 @@ cd_dialog (void)
     QuickWidget quick_widgets [] = {
 	{ quick_input,  6, 57, 2, 0, "", 50, 0, 0, 0, "input" },
 	{ quick_label,  3, 57, 2, 0, "",  0, 0, 0, 0, "label" },
-	{ 0 }
+	NULL_QuickWidget
     };
     char *my_str;
     int len;
@@ -840,7 +840,7 @@ symlink_dialog (char *existing, char *new, char **ret_existing,
 	{quick_label, 4, 80, 2, 8,
 	 N_("Existing filename (filename symlink will point to):"), 0, 0,
 	 0, 0, NULL},
-	{0}
+	NULL_QuickWidget
     };
 
     Quick_input.xlen = 64;
