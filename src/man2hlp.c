@@ -21,11 +21,6 @@
 #include <stdarg.h>
 #include <string.h>
 
-#include <fcntl.h>		/* O_RDONLY, O_WRONLY */
-#ifdef HAVE_UNISTD_H
-#   include <unistd.h>
-#endif
-
 #include "help.h"
 
 #define BUFFER_SIZE 256
@@ -54,21 +49,25 @@ static struct node {
 } nodes, *cnode;
 
 /* Report error in input */
-static void print_error (char *message)
+static void
+print_error (char *message)
 {
-    fprintf (stderr, "man2hlp: %s in file \"%s\" at row %d\n", message, filename, in_row);
+    fprintf (stderr, "man2hlp: %s in file \"%s\" at row %d\n", message,
+	     filename, in_row);
 }
 
 /* Change output line */
-static void newline (void)
+static void
+newline (void)
 {
-    out_row ++;
+    out_row++;
     col = 0;
-    printf("\n");
+    printf ("\n");
 }
 
 /* Calculate the length of string */
-static int string_len (char *buffer)
+static int
+string_len (char *buffer)
 {
     static int anchor_flag = 0;	/* Flag: Inside hypertext anchor name */
     static int link_flag = 0;	/* Flag: Inside hypertext link target name */
@@ -76,32 +75,31 @@ static int string_len (char *buffer)
     int c;			/* Current character */
     int len = 0;		/* Result: the length of the string */
 
-    while (*(buffer))
-    {
+    while (*(buffer)) {
 	c = *buffer++;
-	if (c == CHAR_LINK_POINTER) 
+	if (c == CHAR_LINK_POINTER)
 	    link_flag = 1;	/* Link target name starts */
 	else if (c == CHAR_LINK_END)
 	    link_flag = 0;	/* Link target name ends */
-	else if (c == CHAR_NODE_END){
+	else if (c == CHAR_NODE_END) {
 	    /* Node anchor name starts */
 	    anchor_flag = 1;
 	    /* Ugly hack to prevent loss of one space */
-	    len ++;
+	    len++;
 	}
 	/* Don't add control characters to the length */
 	if (c >= 0 && c < 32)
 	    continue;
 	/* Attempt to handle backslash quoting */
-	if (c == '\\' && !backslash_flag){
+	if (c == '\\' && !backslash_flag) {
 	    backslash_flag = 1;
 	    continue;
 	}
 	backslash_flag = 0;
 	/* Increase length if not inside anchor name or link target name */
 	if (!anchor_flag && !link_flag)
-	    len ++;
-	if (anchor_flag && c == ']'){
+	    len++;
+	if (anchor_flag && c == ']') {
 	    /* Node anchor name ends */
 	    anchor_flag = 0;
 	}
@@ -110,21 +108,22 @@ static int string_len (char *buffer)
 }
 
 /* Output the string */
-static void print_string (char *buffer)
+static void
+print_string (char *buffer)
 {
-    int len;		/* The length of current word */
-    int c;		/* Current character */
+    int len;			/* The length of current word */
+    int c;			/* Current character */
     int backslash_flag = 0;
 
     /* Skipping lines? */
     if (skip_flag)
 	return;
     /* Copying verbatim? */
-    if (verbatim_flag){
+    if (verbatim_flag) {
 	/* Attempt to handle backslash quoting */
-	while (*(buffer)){
+	while (*(buffer)) {
 	    c = *buffer++;
-	    if (c == '\\' && !backslash_flag){
+	    if (c == '\\' && !backslash_flag) {
 		backslash_flag = 1;
 		continue;
 	    }
@@ -135,23 +134,22 @@ static void print_string (char *buffer)
 	/* Split into words */
 	buffer = strtok (buffer, " \t\n");
 	/* Repeat for each word */
-	while (buffer){
-	    /* Skip empty strings */  
-	    if (*(buffer)){
+	while (buffer) {
+	    /* Skip empty strings */
+	    if (*(buffer)) {
 		len = string_len (buffer);
 		/* Change the line if about to break the right margin */
 		if (col + len >= width)
 		    newline ();
 		/* Words are separated by spaces */
-		if (col > 0){
+		if (col > 0) {
 		    printf (" ");
-		    col ++;
+		    col++;
 		}
 		/* Attempt to handle backslash quoting */
-		while (*(buffer))
-		{
+		while (*(buffer)) {
 		    c = *buffer++;
-		    if (c == '\\' && !backslash_flag){
+		    if (c == '\\' && !backslash_flag) {
 			backslash_flag = 1;
 			continue;
 		    }
@@ -163,15 +161,16 @@ static void print_string (char *buffer)
 	    }
 	    /* Get the next word */
 	    buffer = strtok (NULL, " \t\n");
-	} /* while */
+	}			/* while */
     }
 }
 
 /* Like print_string but with printf-like syntax */
-static void printf_string (char *format, ...)
+static void
+printf_string (char *format, ...)
 {
     va_list args;
-    char buffer [BUFFER_SIZE];
+    char buffer[BUFFER_SIZE];
 
     va_start (args, format);
     vsprintf (buffer, format, args);
@@ -180,113 +179,111 @@ static void printf_string (char *format, ...)
 }
 
 /* Handle all the roff dot commands */
-static void handle_command (char *buffer)
+static void
+handle_command (char *buffer)
 {
     int len, heading_level;
 
     /* Get the command name */
     strtok (buffer, " \t");
-    if ((strcmp (buffer, ".SH") == 0) || (strcmp (buffer, ".\\\"NODE") == 0)){
+    if ((strcmp (buffer, ".SH") == 0)
+	|| (strcmp (buffer, ".\\\"NODE") == 0)) {
 	int SH = (strcmp (buffer, ".SH") == 0);
 	/* If we already skipped a section, don't skip another */
-	if (skip_flag == 2){
+	if (skip_flag == 2) {
 	    skip_flag = 0;
 	}
 	/* Get the command parameters */
 	buffer = strtok (NULL, "");
-	if (buffer == NULL){
+	if (buffer == NULL) {
 	    print_error ("Syntax error: .SH: no title");
 	    return;
 	} else {
 	    /* Remove quotes */
-	    if (buffer[0] == '"'){
-		buffer ++;
+	    if (buffer[0] == '"') {
+		buffer++;
 		len = strlen (buffer);
-		if (buffer[len-1] == '"'){
-		    len --;
+		if (buffer[len - 1] == '"') {
+		    len--;
 		    buffer[len] = 0;
 		}
 	    }
 	    /* Calculate heading level */
 	    heading_level = 0;
-	    while (buffer [heading_level] == ' ')
-		heading_level ++;
+	    while (buffer[heading_level] == ' ')
+		heading_level++;
 	    /* Heading level must be even */
 	    if (heading_level & 1)
 		print_error ("Syntax error: .SH: odd heading level");
-	    if (no_split_flag){
+	    if (no_split_flag) {
 		/* Don't start a new section */
 		newline ();
 		print_string (buffer);
 		newline ();
 		newline ();
 		no_split_flag = 0;
-	    }
-	    else if (skip_flag){
+	    } else if (skip_flag) {
 		/* Skipping title and marking text for skipping */
 		skip_flag = 2;
-	    }
-	    else {
-		if (!SH || !node){
-		/* Start a new section */
-		  if (!output)
-		    printf ("%c[%s]", CHAR_NODE_END, buffer);
-		  else {
-		    printf ("%c[%s]", CHAR_NODE_END, buffer + heading_level);
-		    if (!cnode){
-			cnode = &nodes;
-			cnode->next = NULL;
-		    } else {
-			cnode->next = malloc (sizeof (nodes));
-			cnode = cnode->next;
+	    } else {
+		if (!SH || !node) {
+		    /* Start a new section */
+		    if (!output)
+			printf ("%c[%s]", CHAR_NODE_END, buffer);
+		    else {
+			printf ("%c[%s]", CHAR_NODE_END,
+				buffer + heading_level);
+			if (!cnode) {
+			    cnode = &nodes;
+			    cnode->next = NULL;
+			} else {
+			    cnode->next = malloc (sizeof (nodes));
+			    cnode = cnode->next;
+			}
+			cnode->node = strdup (buffer);
+			cnode->lname = NULL;
 		    }
-		    cnode->node = strdup (buffer);
-		    cnode->lname = NULL;
-		  }
-		    col ++;
+		    col++;
 		    newline ();
 		}
-		if (SH){
+		if (SH) {
 		    if (output)
-		    /* print_string() strtok()es buffer, so */
+			/* print_string() strtok()es buffer, so */
 			cnode->lname = strdup (buffer + heading_level);
 		    print_string (buffer + heading_level);
 		    newline ();
 		    newline ();
 		}
-	    } /* Start new section */
-	} /* Has parameters */
+	    }			/* Start new section */
+	}			/* Has parameters */
 	node = !SH;
     } /* Command .SH */
-    else if (strcmp (buffer, ".\\\"DONT_SPLIT\"") == 0){
+    else if (strcmp (buffer, ".\\\"DONT_SPLIT\"") == 0) {
 	no_split_flag = 1;
-    }
-    else if (strcmp (buffer, ".\\\"SKIP_SECTION\"") == 0){
+    } else if (strcmp (buffer, ".\\\"SKIP_SECTION\"") == 0) {
 	skip_flag = 1;
-    }
-    else if (strcmp (buffer, ".\\\"LINK2\"") == 0){
+    } else if (strcmp (buffer, ".\\\"LINK2\"") == 0) {
 	/* Next two input lines form a link */
 	link_flag = 2;
-    }
-    else if (strcmp (buffer, ".PP") == 0){
+    } else if (strcmp (buffer, ".PP") == 0) {
 	/* End of paragraph */
-	if (col > 0) newline();
+	if (col > 0)
+	    newline ();
 	newline ();
-    }
-    else if (strcmp (buffer, ".nf") == 0){
+    } else if (strcmp (buffer, ".nf") == 0) {
 	/* Following input lines are to be handled verbatim */
 	verbatim_flag = 1;
-	if (col > 0) newline ();
-    }
-    else if (strcmp (buffer, ".I") == 0 || strcmp (buffer, ".B") == 0){
+	if (col > 0)
+	    newline ();
+    } else if (strcmp (buffer, ".I") == 0 || strcmp (buffer, ".B") == 0) {
 	/* Bold text or italics text */
-	char type = buffer [1];
+	char type = buffer[1];
 	char *p;
-	char *w = buffer; 
+	char *w = buffer;
 	int backslash_flag = 0;
 
 	buffer = strtok (NULL, "");
-	if (buffer == NULL){
+	if (buffer == NULL) {
 	    print_error ("Syntax error: .I / .B: no text");
 	    return;
 	}
@@ -294,8 +291,8 @@ static void handle_command (char *buffer)
 	*w = (type == 'I') ? CHAR_ITALIC_ON : CHAR_BOLD_ON;
 
 	/* Attempt to handle backslash quoting */
-	for (p = buffer, buffer = w++; *p; p++){
-	    if (*p == '\\' && !backslash_flag){
+	for (p = buffer, buffer = w++; *p; p++) {
+	    if (*p == '\\' && !backslash_flag) {
 		backslash_flag = 1;
 		continue;
 	    }
@@ -306,19 +303,19 @@ static void handle_command (char *buffer)
 	*w++ = CHAR_BOLD_OFF;
 	*w = 0;
 	print_string (buffer);
-    }
-    else if (strcmp (buffer, ".TP") == 0){
+    } else if (strcmp (buffer, ".TP") == 0) {
 	/* End of paragraph? */
-	if (col > 0) newline ();
+	if (col > 0)
+	    newline ();
 	newline ();
-    }
-    else if (strcmp (buffer, ".\\\"TOPICS") == 0){
-	if (out_row > 1){
-	    print_error ("Syntax error: .\\\"TOPICS must be first command");
+    } else if (strcmp (buffer, ".\\\"TOPICS") == 0) {
+	if (out_row > 1) {
+	    print_error
+		("Syntax error: .\\\"TOPICS must be first command");
 	    return;
 	}
 	buffer = strtok (NULL, "");
-	if (buffer == NULL){
+	if (buffer == NULL) {
 	    print_error ("Syntax error: .\\\"TOPICS: no text");
 	    return;
 	}
@@ -326,62 +323,64 @@ static void handle_command (char *buffer)
 	    Topics = strdup (buffer);
 	else
 	    printf ("%s\n", buffer);
-    }
-    else {
+    } else {
 	/* Other commands are ignored */
     }
 }
 
-static void handle_link (char *buffer)
+static void
+handle_link (char *buffer)
 {
-    static char old [80];
+    static char old[80];
     int len;
 
-    switch (link_flag){
+    switch (link_flag) {
     case 1:
 	/* Old format link, not supported */
 	break;
     case 2:
 	/* First part of new format link */
 	/* Bold text or italics text */
-	if (buffer [0] == '.' && (buffer [1] == 'I' || buffer [1] == 'B'))
-	    for (buffer += 2; *buffer == ' ' || *buffer == '\t'; buffer++)
-		;
+	if (buffer[0] == '.' && (buffer[1] == 'I' || buffer[1] == 'B'))
+	    for (buffer += 2; *buffer == ' ' || *buffer == '\t'; buffer++);
 	strcpy (old, buffer);
 	link_flag = 3;
 	break;
     case 3:
 	/* Second part of new format link */
-	if (buffer [0] == '.')
+	if (buffer[0] == '.')
 	    buffer++;
-	if (buffer [0] == '\\')
+	if (buffer[0] == '\\')
 	    buffer++;
-	if (buffer [0] == '"')
+	if (buffer[0] == '"')
 	    buffer++;
 	len = strlen (buffer);
-	if (len && buffer [len-1] == '"'){
-	    buffer [--len] = 0;
+	if (len && buffer[len - 1] == '"') {
+	    buffer[--len] = 0;
 	}
-	printf_string ("%c%s%c%s%c\n", CHAR_LINK_START, old, CHAR_LINK_POINTER, buffer, CHAR_LINK_END);
+	printf_string ("%c%s%c%s%c\n", CHAR_LINK_START, old,
+		       CHAR_LINK_POINTER, buffer, CHAR_LINK_END);
 	link_flag = 0;
 	break;
     }
 }
 
-int main (int argc, char **argv)
+int
+main (int argc, char **argv)
 {
     int len;			/* Length of input line */
     FILE *file;			/* Input file */
-    char buffer2 [BUFFER_SIZE];	/* Temp input line */
+    FILE *fout;			/* Output file */
+    char buffer2[BUFFER_SIZE];	/* Temp input line */
     char *buffer = buffer2;	/* Input line */
     char *node = NULL;
 
-    int file_fd;
-    long contents_beginning, file_end;
+    long cont_start, file_end;
 
     /* Validity check for arguments */
-    if ((argc != 3 && argc != 5) || ((width = atoi (argv[1])) <= 10)){
-	fprintf (stderr, "Usage: man2hlp <width> <file.man> [template_file helpfile]\n");
+    if ((argc != 3 && argc != 5) || ((width = atoi (argv[1])) <= 10)) {
+	fprintf (stderr,
+		 "Usage: man2hlp <width> <file.man> [template_file helpfile]\n");
 	return 3;
     }
 
@@ -391,53 +390,50 @@ int main (int argc, char **argv)
     /* Open the input file */
     filename = argv[2];
     file = fopen (filename, "r");
-    if (file == NULL){
+    if (file == NULL) {
 	sprintf (buffer, "man2hlp: Cannot open file \"%s\"", filename);
 	perror (buffer);
 	return 3;
     }
 
-    if (argc == 5 && freopen (argv [4], "w", stdout) == NULL){
+    if (argc == 5 && freopen (argv[4], "w", stdout) == NULL) {
 	sprintf (buffer, "man2hlp: Cannot open file \"%s\"", argv[4]);
 	perror (buffer);
 	return 3;
     }
 
     /* Repeat for each input line */
-    while (!feof (file)){
+    while (!feof (file)) {
 	/* Read a line */
-	if (!fgets (buffer2, BUFFER_SIZE, file)){
+	if (!fgets (buffer2, BUFFER_SIZE, file)) {
 	    break;
 	}
-	if (buffer2 [0] == '\\' && buffer2 [1] == '&')
+	if (buffer2[0] == '\\' && buffer2[1] == '&')
 	    buffer = buffer2 + 2;
 	else
 	    buffer = buffer2;
-	in_row ++;
+	in_row++;
 	len = strlen (buffer);
 	/* Remove terminating newline */
-	if (buffer [len-1] == '\n')
-	{
-	    len --;
-	    buffer [len] = 0;
+	if (buffer[len - 1] == '\n') {
+	    len--;
+	    buffer[len] = 0;
 	}
-	if (verbatim_flag){
+	if (verbatim_flag) {
 	    /* Copy the line verbatim */
-	    if (strcmp (buffer, ".fi") == 0){
+	    if (strcmp (buffer, ".fi") == 0) {
 		verbatim_flag = 0;
 	    } else {
 		print_string (buffer);
 		newline ();
 	    }
-	}
-	else if (link_flag)
+	} else if (link_flag)
 	    /* The line is a link */
 	    handle_link (buffer);
 	else if (buffer[0] == '.')
 	    /* The line is a roff command */
 	    handle_command (buffer);
-	else
-	{
+	else {
 	    /* A normal line, just output it */
 	    print_string (buffer);
 	}
@@ -453,19 +449,19 @@ int main (int argc, char **argv)
     /* Open the template file */
     filename = argv[3];
     file = fopen (filename, "r");
-    if (file == NULL){
+    if (file == NULL) {
 	sprintf (buffer, "man2hlp: Cannot open file \"%s\"", filename);
 	perror (buffer);
 	return 3;
     }
     /* Repeat for each input line */
-    while (!feof (file)){
+    while (!feof (file)) {
 	/* Read a line */
-	if (!fgets (buffer2, BUFFER_SIZE, file)){
+	if (!fgets (buffer2, BUFFER_SIZE, file)) {
 	    break;
 	}
-	if (node){
-	    if (*buffer2 && *buffer2 != '\n'){
+	if (node) {
+	    if (*buffer2 && *buffer2 != '\n') {
 		cnode->lname = strdup (buffer2);
 		node = strchr (cnode->lname, '\n');
 		if (node)
@@ -473,43 +469,43 @@ int main (int argc, char **argv)
 	    }
 	    node = NULL;
 	} else {
-	node = strchr (buffer, CHAR_NODE_END);
-	if (node && (node[1] == '[')){
-	    char *p = strrchr (node, ']');
-	    if (p && strncmp (node+2, "main", 4) == 0 && node[6] == ']') {
-		node = 0;
-	    } else {
-		if (!cnode){
-		    cnode = &nodes;
-		    cnode->next = NULL;
+	    node = strchr (buffer, CHAR_NODE_END);
+	    if (node && (node[1] == '[')) {
+		char *p = strrchr (node, ']');
+		if (p && strncmp (node + 2, "main", 4) == 0
+		    && node[6] == ']') {
+		    node = 0;
 		} else {
-		    cnode->next = malloc (sizeof (nodes));
-		    cnode = cnode->next;
+		    if (!cnode) {
+			cnode = &nodes;
+			cnode->next = NULL;
+		    } else {
+			cnode->next = malloc (sizeof (nodes));
+			cnode = cnode->next;
+		    }
+		    cnode->node = strdup (node + 2);
+		    cnode->node[p - node - 2] = 0;
+		    cnode->lname = NULL;
 		}
-		cnode->node = strdup (node + 2);
-		cnode->node [p - node - 2] = 0;
-		cnode->lname = NULL;
-	    }
-	} else
-	    node = NULL;
+	    } else
+		node = NULL;
 	}
 	fputs (buffer, stdout);
     }
 
-    contents_beginning = ftell (stdout);
+    cont_start = ftell (stdout);
     printf ("\004[Contents]\n%s\n\n", Topics);
 
-    for (cnode = &nodes; cnode && cnode->node; cnode = cnode->next){
+    for (cnode = &nodes; cnode && cnode->node; cnode = cnode->next) {
 	char *node = cnode->node;
 	int heading_level = 0;
-	while (*node == ' '){
+	while (*node == ' ') {
 	    heading_level++;
 	    node++;
 	}
 	if (*node)
-	    printf ("  %*s\001 %s \002%s\003", heading_level, "", 
-		    cnode->lname ? cnode->lname : node,
-		    node);
+	    printf ("  %*s\001 %s \002%s\003", heading_level, "",
+		    cnode->lname ? cnode->lname : node, node);
 	printf ("\n");
 
 	free (cnode->node);
@@ -523,17 +519,48 @@ int main (int argc, char **argv)
     fclose (file);
 
     Topics = malloc (file_end);
-    file_fd = open (output, O_RDONLY);
-    if (file_fd == -1)
+    if (!Topics)
+	return 1;
+
+    fout = fopen (output, "r");
+    if (!fout) {
 	perror (output);
-    if (read (file_fd, Topics, file_end) != file_end)
+	return 1;
+    }
+
+    if (fread (Topics, 1, file_end, fout) != file_end) {
 	perror (output);
-    if (close (file_fd) == -1)
+	return 1;
+    }
+
+    if (fclose (fout) != 0) {
 	perror (output);
-    file_fd = open (output, O_WRONLY);
-    write (file_fd, Topics + contents_beginning, file_end - contents_beginning);
-    write (file_fd, Topics, contents_beginning);
-    close (file_fd);
+	return 1;
+    }
+
+    fout = fopen (output, "w");
+    if (!fout) {
+	perror (output);
+	return 1;
+    }
+
+    if (fwrite (Topics + cont_start, 1, file_end - cont_start, fout) !=
+	file_end - cont_start) {
+	perror (output);
+	return 1;
+    }
+
+    if (fwrite (Topics, 1, cont_start, fout) != cont_start) {
+	perror (output);
+	return 1;
+    }
+
+    free (Topics);
+
+    if (fclose (fout) != 0) {
+	perror (output);
+	return 1;
+    }
 
     return 0;
 }

@@ -1,5 +1,8 @@
 2002-07-30  Pavel Roskin  <proski@gnu.org>
 
+	* man2hlp.c (main): Use only stream I/O.  Fix checks for error
+	conditions.  Reformat the whole file.
+
 	* man2hlp.c: Avoid the need to use gindex.pl.
 	From Andrew V. Samoilov <sav@bcs.zp.ua>
 	* Makefile.am: Use man2hlp directly.
