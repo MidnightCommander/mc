@@ -1,3 +1,9 @@
+2001-11-01  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* samba/smblib/pwd_cache.c (pwd_read): Commented out.
+	* samba/Makefile.in (SAMBAFILES): Remove lib/getsmbpass.o.
+	* samba/lib/getsmbpass.c: Removed.
+
 2001-10-30  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* smbfs.c: Include <config.h> before everything else.

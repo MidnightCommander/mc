@@ -98,7 +98,6 @@ SAMBAFILES=			\
 	lib/md4.o 	\
 	lib/doscalls.o 	\
 	lib/util_unistr.o 	\
-	lib/getsmbpass.o 	\
 	lib/interface.o 	\
 	lib/netmask.o 	\
 	libsmb/clientgen.o 	\

@@ -61,6 +61,7 @@ void pwd_obfuscate_key(struct pwd_info *pwd, uint32 int_key, char *str_key)
 {
 }
 
+#if 0
 /****************************************************************************
 reads a password
 ****************************************************************************/
@@ -86,6 +87,7 @@ void pwd_read(struct pwd_info *pwd, char *passwd_report, BOOL do_encrypt)
 		pwd_set_cleartext(pwd, user_pass);
 	}
 }
+#endif
 
 /****************************************************************************
  stores a cleartext password
