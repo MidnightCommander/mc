@@ -733,7 +733,7 @@ int edit_new_cmd (WEdit * edit)
 static int
 edit_load_file_from_filename (WEdit * edit, char *exp)
 {
-    if (!edit_reload (edit, exp, 0, 0))
+    if (!edit_reload (edit, exp))
 	return 1;
     edit_split_filename (edit, exp);
     edit->modified = 0;

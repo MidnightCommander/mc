@@ -1,5 +1,8 @@
 2002-12-08  Pavel Roskin  <proski@gnu.org>
 
+	* edit.c (edit_open_file): Remove "text" and "text_size"
+	arguments.  Adjust all callers.
+
 	* edit.c (edit_move_to_column): Remove, use
 	edit_move_to_prev_col() instead.
 

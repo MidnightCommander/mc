@@ -382,11 +382,11 @@ check_file_access (WEdit *edit, const char *filename, struct stat *st)
 
 /* returns 1 on error */
 static int
-edit_open_file (WEdit * edit, const char *filename, const char *text, unsigned long text_size)
+edit_open_file (WEdit *edit, const char *filename)
 {
     struct stat st;
-    if (text) {
-	edit->last_byte = text_size;
+    if (!filename || !*filename) {
+	edit->last_byte = 0;
 	filename = 0;
     } else {
 	int r;
@@ -400,10 +400,9 @@ edit_open_file (WEdit * edit, const char *filename, const char *text, unsigned l
 /* going to read the file into the buffer later byte by byte */
 	edit->last_byte = 0;
 	filename = 0;
-	text = "";
 #endif
     }
-    return init_dynamic_edit_buffers (edit, filename, text);
+    return init_dynamic_edit_buffers (edit, filename, "");
 }
 
 /* Restore saved cursor position in the file */
@@ -461,7 +460,7 @@ edit_purge_widget (WEdit *edit)
  */
 WEdit *
 edit_init (WEdit *edit, int lines, int columns, const char *filename,
-	   const char *text, unsigned long text_size, long line)
+	   long line)
 {
     int to_free = 0;
     int use_filter = 0;
@@ -507,7 +506,7 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
 #ifdef CR_LF_TRANSLATION
 	use_filter = 1;
 #endif
-	if (edit_open_file (edit, filename, text, text_size)) {
+	if (edit_open_file (edit, filename)) {
 /* edit_load_file already gives an error message */
 	    if (to_free)
 		g_free (edit);
@@ -515,7 +514,7 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
 	}
     } else {
 	use_filter = 1;
-	if (edit_open_file (edit, 0, "", 0)) {
+	if (edit_open_file (edit, 0)) {
 	    if (to_free)
 		g_free (edit);
 	    return 0;
@@ -607,13 +606,14 @@ int edit_renew (WEdit * edit)
     int retval = 1;
 
     edit_clean (edit);
-    if (!edit_init (edit, lines, columns, 0, "", 0, 0))
+    if (!edit_init (edit, lines, columns, "", 0))
 	retval = 0;
     return retval;
 }
 
 /* returns 1 on success, if returns 0, the edit struct would have been free'd */
-int edit_reload (WEdit * edit, const char *filename, const char *text, unsigned long text_size)
+int
+edit_reload (WEdit *edit, const char *filename)
 {
     WEdit *e;
     int lines = edit->num_widget_lines;
@@ -622,7 +622,7 @@ int edit_reload (WEdit * edit, const char *filename, const char *text, unsigned 
     memset (e, 0, sizeof (WEdit));
     e->widget = edit->widget;
     e->macro_i = -1;
-    if (!edit_init (e, lines, columns, filename, text, text_size, 0)) {
+    if (!edit_init (e, lines, columns, filename, 0)) {
 	g_free (e);
 	return 0;
     }

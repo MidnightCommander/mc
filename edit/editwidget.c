@@ -156,7 +156,6 @@ edit (const char *_file, int line)
 {
     static int made_directory = 0;
     int framed = 0;
-    char *text = 0;
     Dlg_head *edit_dlg;
     WButtonBar *edit_bar;
 
@@ -170,15 +169,8 @@ edit (const char *_file, int line)
 	mkdir (catstrs (home_dir, EDIT_DIR, 0), 0700);
 	made_directory = 1;
     }
-    if (_file) {
-	if (!(*_file)) {
-	    _file = 0;
-	    text = "";
-	}
-    } else
-	text = "";
 
-    if (!(wedit = edit_init (NULL, LINES - 2, COLS, _file, text, 0, line))) {
+    if (!(wedit = edit_init (NULL, LINES - 2, COLS, _file, line))) {
 	return 0;
     }
     wedit->macro_i = -1;
