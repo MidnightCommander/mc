@@ -356,7 +356,7 @@ va_dcl
      * note that not all DEBUG(0, ...) calls are
      * necessarily errors
      */
-    static int priority_map[] = { 
+    static int const priority_map[] = { 
       LOG_ERR,     /* 0 */
       LOG_WARNING, /* 1 */
       LOG_NOTICE,  /* 2 */

@@ -1550,6 +1550,7 @@ BOOL mask_match(char *str, char *regexp, int case_sig,BOOL trans2)
   return matched;
 }
 
+#if 0
 /****************************************************************************
 become a daemon, discarding the controlling terminal
 ****************************************************************************/
@@ -1593,6 +1594,7 @@ BOOL yesno(char *p)
 
   return(False);
 }
+#endif
 
 /****************************************************************************
 set the length of a file from a filedescriptor.

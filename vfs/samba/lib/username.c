@@ -31,7 +31,7 @@ get a users home directory.
 ****************************************************************************/
 char *get_home_dir(char *user)
 {
-  static struct passwd *pass;
+  struct passwd *pass;
 
   pass = Get_Pwnam(user, False);
 

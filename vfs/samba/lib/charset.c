@@ -30,7 +30,7 @@ extern int DEBUGLEVEL;
 
 #if !defined(KANJI)
 /* lower->upper mapping for IBM Code Page 850 - MS-DOS Latin 1 */
-unsigned char cp_850[][4] = {
+unsigned char const cp_850[][4] = {
 /* dec col/row oct hex  description */
 /* 133  08/05  205  85  a grave */
 /* 183  11/07  267  B7  A grave */ 	{0x85,0xB7,1,1},
@@ -98,7 +98,7 @@ unsigned char cp_850[][4] = {
 };
 #else /* KANJI */ 
 /* lower->upper mapping for IBM Code Page 932 - MS-DOS Japanese SJIS */
-unsigned char cp_932[][4] = {
+unsigned char const cp_932[][4] = {
   {0,0,0,0}
 };
 #endif /* KANJI */
@@ -182,7 +182,7 @@ void charset_initialise(void)
 load the client codepage.
 ****************************************************************************/
 
-typedef unsigned char (*codepage_p)[4];
+typedef const unsigned char (*codepage_p)[4];
 
 static codepage_p load_client_codepage( int client_codepage )
 {

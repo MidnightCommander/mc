@@ -6,6 +6,14 @@
 	(login_server): Constify netrcpass parameter.
 	(is_same_dir): Constify path parameter.
 
+	* samba/lib/charset.c (cp_850): Make const array.
+	(cp_932): Ditto.
+	(codepage_p): Likewise.
+	* samba/lib/debug.c (priority_map): Make const array.
+	* samba/lib/username.c (get_home_dir): Make pass auto.
+	* samba/lib/util.c (become_daemon): Commented out.
+	(yesno): Likewise.
+
 2002-01-24  Pavel Roskin  <proski@gnu.org>
 
 	* cpio.c: Don't include glib.h directly.
