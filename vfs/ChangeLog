@@ -1,5 +1,8 @@
 2001-01-02  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.am: Add *clean-local targets to take care of the
+	samba directory.
+
 	* samba/configure.in: Use explicit AC_CONFIG_AUX_DIR because
 	this setting is not inherited from the top-level configure.
 

@@ -55,6 +55,21 @@ dist-hook:
 	  cp -p $(srcdir)/samba/$$I $(distdir)/samba/$$I || exit 1; \
 	done
 
+mostlyclean-local:
+	if test -f samba/Makefile; then \
+	  (cd samba && $(MAKE) mostlyclean) \
+	else :; fi
+
+clean-local:
+	if test -f samba/Makefile; then \
+	  (cd samba && $(MAKE) clean) \
+	else :; fi
+
+distclean-local:
+	if test -f samba/Makefile; then \
+	  (cd samba && $(MAKE) distclean) \
+	else :; fi
+
 if USE_VFS
 noinst_LIBRARIES = libvfs-mc.a
 else
