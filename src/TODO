@@ -1,7 +1,16 @@
 Before 4.6.0-pre2
 =================
 
-Totals are not calculated when operating on a single directory.
+Don't allow stdout and stderr from extfs scripts pollute the screen.
+
+Add minimal UTF-8 support on Red Hat 8.0 to fix the frames or disable
+support for S-Lang library compiled with UTF-8 support.
+
+REGRESSION: Cursor position in the editor is incorrect when a substring
+is found and there are control characters on the left in the same
+string.
+
+REGRESSION: Allow minimal functionality on read-only filesystems.
 
 When using included S-Lang, don't fill empty areas with spaces (' '),
 because they are copied to the buffer when doing cut and paste.
@@ -29,6 +38,8 @@ ftp and fish with home != '/' - readjust directory to the home.
 
 Before 4.6.0
 ============
+
+Totals are not calculated when operating on a single directory.
 
 Add support for mouse wheel with gpm.
 
