@@ -697,6 +697,14 @@ drop_on_launch_entry (GtkWidget *widget, GdkEventDropDataAvailable *event, deskt
 }
 
 static void
+desktop_create_dentries_at_drop_site (GdkEventDropDataAvailable *event)
+{
+	/* Nothing yet: should create the .desktop files with the location
+	 * at event->coords
+	 */
+}
+
+static void
 url_dropped (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di)
 {
 	char *p;
@@ -709,6 +717,7 @@ url_dropped (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t
 		is_directory = strcasecmp (di->dentry->type, "directory") == 0;
 	else {
 		drop_on_directory (event, desktop_directory, 1);
+		desktop_create_dentries_at_drop_site (event);
 		desktop_reload (desktop_directory);
 		return;
 	}
@@ -1079,33 +1088,7 @@ desktop_icon_properties (GtkWidget *widget, desktop_icon_t *di)
 static void
 desktop_icon_context_popup (GdkEventButton *event, desktop_icon_t *di)
 {
-	static GtkWidget *menu;
-	GtkWidget *item;
-
-	menu = gtk_menu_new ();
-
-	/* We connect_object_after to the items so that we can destroy
-         * the menu at the proper time.
-	 */
-
 	file_popup (event, NULL, di, 0, di->dentry->exec [0]);
-#if 0
-	item = gtk_menu_item_new_with_label (_("Properties"));
-	gtk_signal_connect (GTK_OBJECT (item), "activate", GTK_SIGNAL_FUNC (icon_properties), di);
-	gtk_signal_connect_object_after (GTK_OBJECT (item), "activate",
-					 GTK_SIGNAL_FUNC (gtk_widget_destroy), GTK_OBJECT (menu));
-	gtk_menu_append (GTK_MENU (menu), item);
-	gtk_widget_show (item);
-
-	item = gtk_menu_item_new_with_label (_("Delete"));
-	gtk_signal_connect (GTK_OBJECT (item), "activate", GTK_SIGNAL_FUNC (icon_delete), di);
-	gtk_signal_connect_object_after (GTK_OBJECT (item), "activate",
-					 GTK_SIGNAL_FUNC (gtk_widget_destroy), GTK_OBJECT (menu));
-	gtk_menu_append (GTK_MENU (menu), item);
-	gtk_widget_show (item);
-
-	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, 0, NULL, 3, event->time);
-#endif
 }
 
 char *root_drop_types [] = {
@@ -1243,7 +1226,7 @@ desktop_create_launch_entry (char *desktop_file, char *pathname, char *short_nam
 	dentry = xmalloc (sizeof (GnomeDesktopEntry), "launch_entry");
 	memset (dentry, 0, sizeof (GnomeDesktopEntry));
 	
-	dentry->name     = short_name;
+	dentry->name     = g_strdup (short_name);
 	dentry->exec     = (char **) malloc (2 * sizeof (char *));
 	dentry->exec[0]  = g_strdup (pathname);
 	dentry->exec[1]  = NULL;

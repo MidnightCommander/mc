@@ -1,3 +1,10 @@
+1998-05-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gdesktop.c (desktop_create_directory_entry): Fix, make a
+	g_strdup copy of the name. Fixes bug report #78.
+	(desktop_icon_context_popup): Simplified this routine as we are
+	using file_popup now anyways.
+
 1998-05-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* glayout.c: Move the New window menu entry from ``Window'' to
