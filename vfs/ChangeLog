@@ -1,3 +1,8 @@
+2002-07-26  Pavel Roskin  <proski@gnu.org>
+
+	* direntry.c (vfs_s_find_entry_linear): Canonicalize path before
+	searching.
+
 2002-07-25  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* xdirentry.h (vfs_s_fh.u.fish): Add append field.
@@ -8,7 +13,7 @@
 	* mcserv.c [HAVE_MAD]: Include "../src/mad.c" at the end of
 	file to fix compilation.
 	(main): Add mad_init() and mad_finalize().
-	
+
 2002-07-19  Pavel Roskin  <proski@gnu.org>
 
 	* ftpfs.c: Don't use SUP.home, use SUP.cwdir.

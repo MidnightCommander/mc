@@ -282,6 +282,8 @@ vfs_s_find_entry_linear (vfs *me, vfs_s_inode *root, char *path, int follow, int
     if (root->super->root != root)
         vfs_die ("We have to use _real_ root. Always. Sorry." );
 
+    canonicalize_pathname (path);
+
     if (!(flags & FL_DIR)){
 	char *dirname, *name, *save;
 	vfs_s_inode *ino;
