@@ -1862,7 +1862,7 @@ do_search (WPanel *panel, int c_code)
     int found;
 
     l = strlen (panel->search_buffer);
-    if (l && (c_code == 8 || c_code == 0177 || c_code == KEY_BACKSPACE))
+    if (l && (c_code == KEY_BACKSPACE))
 	panel->search_buffer[--l] = 0;
     else {
 	if (c_code && l < sizeof (panel->search_buffer)) {
@@ -2135,7 +2135,7 @@ panel_key (WPanel *panel, int key)
     }
 
     /* Do not eat characters not meant for the panel below ' ' (e.g. C-l). */
-    if ((key >= ' '&& key <= 255) || key == 8 || key == KEY_BACKSPACE) {
+    if ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE) {
 	if (panel->searching){
 	    do_search (panel, key);
 	    return 1;

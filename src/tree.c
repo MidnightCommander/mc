@@ -600,7 +600,7 @@ static void tree_do_search (WTree *tree, int key)
     int l;
 
     l = strlen (tree->search_buffer);
-    if (l && (key == 8 || key == 0177 || key == KEY_BACKSPACE))
+    if (l && (key == KEY_BACKSPACE))
 	tree->search_buffer [--l] = 0;
     else {
 	if (key && l < sizeof (tree->search_buffer)){
@@ -976,7 +976,7 @@ tree_key (WTree *tree, int key)
     }
 
     /* Do not eat characters not meant for the tree below ' ' (e.g. C-l). */
-    if ((key >= ' '&& key <= 255) || key == 8 || key == KEY_BACKSPACE) {
+    if ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE) {
 	if (tree->searching){
 	    tree_do_search (tree, key);
 	    show_tree (tree);

@@ -568,6 +568,23 @@ correct_key_code (int code)
 	mod |= KEY_M_CTRL;
     }
 
+    /* Unrecognized 0177 is delete (preserve Ctrl) */
+    if (c == 0177) {
+	c = KEY_BACKSPACE;
+    }
+
+    /* Unrecognized Ctrl-d is delete */
+    if (c == (31 & 'd')) {
+	c = KEY_DC;
+	mod &= ~KEY_M_CTRL;
+    }
+
+    /* Unrecognized Ctrl-h is backspace */
+    if (c == (31 & 'h')) {
+	c = KEY_BACKSPACE;
+	mod &= ~KEY_M_CTRL;
+    }
+
     /* Convert Shift+Fn to F(n+10) */
     if (c >= KEY_F (1) && c <= KEY_F (10) && (mod & KEY_M_SHIFT)) {
 	c += 10;
@@ -732,13 +749,13 @@ int get_key_code (int no_delay)
 	        if (parent != NULL && parent->action == MCKEY_ESCAPE) {
 	            /* This is just to save a lot of define_sequences */
 	            if (isalpha(c)
-			|| (c == '\n') || (c == '\t') || (c == XCTRL('h'))
+			|| (c == '\n') || (c == '\t') || (c == (31 & 'h'))
 			|| (c == KEY_BACKSPACE) || (c == '!') || (c == '\r')
-			|| c == 127 || c == '+' || c == '-' || c == '\\' 
+			|| c == 0177 || c == '+' || c == '-' || c == '\\' 
 			|| c == '?')
 			c = ALT(c);
 		    else if (isdigit(c))
-	                c = KEY_F (c-'0');
+	                c = KEY_F (c - '0');
 		    else if (c == ' ')
 			c = ESC_CHAR;
 		    pending_keys = seq_append = NULL;

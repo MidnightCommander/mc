@@ -830,9 +830,7 @@ query_callback (Dlg_head * h, int Par, int Msg)
 	    dlg_stop (h);
 	    return 1;
 
-	case 0177:
 	case KEY_BACKSPACE:
-	case XCTRL ('h'):
 	    if (end == min_end) {
 		h->ret_value = 0;
 		dlg_stop (h);

@@ -1413,15 +1413,10 @@ static const struct {
     { ALT('f'),           forward_word },
 		          
     /* Editing */         
-    { 0177,               backward_delete },
     { KEY_BACKSPACE,      backward_delete },
-    { XCTRL('h'),         backward_delete },
     { KEY_DC,             delete_char },
-    { XCTRL('d'),         delete_char },
     { ALT('d'),           kill_word },
     { ALT(KEY_BACKSPACE), back_kill_word },
-    { ALT(XCTRL('h')),    back_kill_word },
-    { ALT(127),           back_kill_word },
     
     /* Region manipulation */
     { 0,              	  set_mark },

@@ -1,5 +1,9 @@
 2003-03-10  Pavel Roskin  <proski@gnu.org>
 
+	* key.c (correct_key_code): Convert unrecognized 0177, Ctrl-h
+	and Ctrl-d into Delete and Backspace.  Remove all references to
+	those keys in other files.
+
 	* key.c (get_modifier) [__QNXNTO__]: Remove incorrect check for
 	the existance of libph.so.1.
 

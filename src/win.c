@@ -70,9 +70,7 @@ int check_movement_keys (int c, int additional, int page_size, void *data,
     if (additional)
         switch (c){
 	case 'b':  
-	case XCTRL('h'):
 	case KEY_BACKSPACE:
-	case 0177:
 	    (*backfn)(data, page_size-1);
 	    return 1;
 	case ' ':
