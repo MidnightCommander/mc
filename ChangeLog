@@ -1,3 +1,8 @@
+2002-10-31  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Displaying the install paths is too problematic
+	to implement properly.  Remove this code.
+
 2002-10-29  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.ext.in: Rename TROFFASCII to MAN_FLAGS.

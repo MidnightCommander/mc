@@ -603,13 +603,6 @@ po/Makefile.in
 
 AC_OUTPUT
 
-# Expand $bindir and $datadir to show the user.
-# Two levels of expansion should be enough.
-bindir_msg=`eval echo "$bindir"`
-bindir_msg=`eval echo "$bindir_msg"`
-datadir_msg=`eval echo "$datadir"`
-datadir_msg=`eval echo "$datadir_msg"`
-
 echo "
 Configuration:
 
@@ -624,6 +617,4 @@ Configuration:
   X11 events support:         ${textmode_x11_support}
   With subshell support:      ${subshell}
   Internal editor:            ${edit_msg}
-  Install path for binaries:  ${bindir_msg}
-  Install path for data:      ${datadir_msg}
 "
