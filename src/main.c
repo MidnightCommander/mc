@@ -1246,6 +1246,7 @@ static menu_entry RightMenu [] = {
 static menu_entry FileMenu [] = {
     { ' ', N_("&User menu          F2"), 'U', user_menu_cmd },
     { ' ', N_("&View               F3"), 'V', view_cmd },
+    { ' ', N_("Vie&w file...         "), 'W', view_file_cmd },
     { ' ', N_("&Filtered view     M-!"), 'F', filtered_view_cmd },
     { ' ', N_("&Edit               F4"), 'E', edit_cmd },
     { ' ', N_("&Copy               F5"), 'C', copy_cmd },
