@@ -678,7 +678,7 @@ display_mini_info (WPanel *panel)
 	    printw ("-> %-*s", panel->widget.cols - 5,
 		     name_trunc (link_target, panel->widget.cols - 5));
 	} else
-	    addstr (_("<readlink failed>"));
+	    printw ("%-*s", panel->widget.cols - 2, _("<readlink failed>"));
 	return;
     }
 
