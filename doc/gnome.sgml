@@ -1,0 +1,96 @@
+<!doctype book PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
+]>
+<book>
+  <bookinfo>
+    <title>Gnome Midnight Commander Documentation</title>
+    <authorgroup>
+      <author>
+	<firstname>Gregory</firstname>
+	<surname>McLean</surname>
+	<affiliation>
+	  <address>
+            <email>gregm@comstar.net</email>
+          </address>
+	</affiliation>
+      </author>
+    </authorgroup>
+    <copyright>
+      <year>1998</year>
+      <holder>The GNOME Project - Gregory A. McLean</holder>
+    </copyright>
+    <legalnotice>
+      <para>This documentation is free software; you can redistribute
+        it and/or modify it under the terms of the GNU General Public
+        License as published by the Free Software Foundation; either
+        version 2 of the License, or (at your option) any later
+        version.</para>
+
+      <para>This program is distributed in the hope that it will be
+        useful, but WITHOUT ANY WARRANTY; without even the implied
+        warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+        PURPOSE.  See the GNU General Public License for more
+        details.</para>
+
+      <para>You should have received a copy of the GNU General Public
+        License along with this program; if not, write to the Free
+        Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+        MA 02111-1307 USA</para>
+
+      <para>For more details see the file COPYING that should have 
+        been included in this distribution of the Gnome Midnight Commander.
+      </para>
+    </legalnotice>
+  </bookinfo>
+  <toc></toc>
+  <chapter id="intro">
+    <title>Introduction</title>
+    <sect1 id="whatis">
+      <title>What is the Gnome Midnight Commander</title>
+      <para>
+       The Gnome Midnight Commander (gmc) is the latest incarnation of the GNU
+       Midnight Commander. It is a directory browser/file manager for 
+       Unix-like operating systems.</para>
+    </sect1>
+    <sect1 id="thisdoc">
+      <title>About this document</title>
+      <para>This document is intended to explain the Gnome specific features
+      of the Gnome Midnight Commander.</para>
+    </sect1>
+  </chapter>
+
+  <chapter id="wmclass">
+    <title>Window Manager Classes</title>
+    <sect1 id="wmclass-intro">
+      <title>Introduction</title>
+      <para>This chapter describes the various window manager classes that have
+       been set on the windows and dialogs that gmc uses. It is intended to aid
+       you in customizing your enviornment.</para>
+      <para>Where possible we have provided some example window manager 
+       configuration file snippets.</para>
+    </sect1>
+    <sect1 id="classes">
+      <title>The classes</title>
+      <para>On all the desktop icons that gmc uses and displays the following
+      window manager classes have been set on them.</para>
+      <itemizedlist>
+	<listitem>
+	  <para>gmc</para>
+	</listitem>
+	<listitem>
+	  <para>desktop_icon</para>
+	</listitem>
+      </itemizedlist>
+      <para>Some window managers do not understand either the Gnome window
+      manager hints or the Motif window manager hints. They end up making
+      a terrible mess of the desktop icons. To work around this problem
+      you can do the following.</para>
+      <itemizedlist>
+	<listitem>
+	  <para>FVWM and variants</para>
+	  <para>Style "desktop_icon"    MinimalDecoration, CirculateSkip</para>
+	</listitem>
+      </itemizedlist>
+    </sect1>
+  </chapter>
+</book>
+
