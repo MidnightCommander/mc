@@ -126,7 +126,7 @@ int file_op_compute_totals = 1;
 int know_not_what_am_i_doing = 0;
 
 /* mapping operations into names */
-char *operation_names [] = { _("Copy"), _("Move"), _("Delete") };
+char *operation_names [] = { N_("Copy"), N_("Move"), N_("Delete") };
 
 /* This is a hard link cache */
 struct link {

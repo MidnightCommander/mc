@@ -1,3 +1,7 @@
+1999-01-18  Arturo Espinosa  <arturo@nuclecu.unam.mx>
+
+	* file.c: Use N_ instead of _ for some of miguel's last tags.
+
 1999-01-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* file.c: Tag some more strings for localization.
