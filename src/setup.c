@@ -299,7 +299,7 @@ panel_save_type (char *section, int type)
 	}
 }
 
-void
+static void
 save_panel_types (void)
 {
     int type;

@@ -8,7 +8,6 @@ void load_setup (void);
 void save_setup (void);
 void done_setup (void);
 void load_key_defs (void);
-void save_panel_types (void);
 char *load_anon_passwd (void);
 
 struct WPanel;
