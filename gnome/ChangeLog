@@ -1,5 +1,10 @@
 1998-10-28  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* Makefile.in: Fixed for gdesktop-icon.
+
+	* gdesktop-icon.[ch]: Renamed from desktop-icon.[ch], per Miguel's
+	request.
+
 	* desktop-icon.c (reshape): Position the icon text item correctly.
 
 1998-10-27  Federico Mena Quintero  <federico@nuclecu.unam.mx>

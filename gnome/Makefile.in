@@ -15,7 +15,7 @@ INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
 
 GNOMESRCS = 		\
-	desktop-icon.c	\
+	gdesktop-icon.c	\
 	gkey.c 		\
 	gmain.c 	\
 	gscreen.c 	\
@@ -38,7 +38,7 @@ GNOMESRCS = 		\
 	gblist.c
 
 GNOMEHDRS = 		\
-	desktop-icon.h	\
+	gdesktop-icon.h	\
 	gmain.h 	\
 	gscreen.h	\
 	gwidget.h 	\
@@ -79,7 +79,7 @@ OOBJS = main.o dlg.o screen.o widget.o wtools.o info.o boxes.o \
 	option.o cmd.o utilunix.o popt.o xslint.o
 
 OBJS = $(LOBJS) $(OOBJS) \
-	desktop-icon.o	\
+	gdesktop-icon.o	\
 	gkey.o 		\
 	gmain.o 	\
 	gscreen.o 	\
