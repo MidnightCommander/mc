@@ -1471,7 +1471,7 @@ select_item (WPanel *panel)
        top file to decent values before calling select_item, I could
        forget it someday, so it's better to do the actual fitting here */
 
-    if (panel->top_file < 0){
+    if (panel->top_file < 0) {
 	repaint = 1;
 	panel->top_file = 0;
     }
@@ -1479,35 +1479,38 @@ select_item (WPanel *panel)
     if (panel->selected < 0)
 	panel->selected = 0;
 
-    if (panel->selected > panel->count-1)
+    if (panel->selected > panel->count - 1)
 	panel->selected = panel->count - 1;
 
-    if (panel->top_file > panel->count-1){
+    if (panel->top_file > panel->count - 1) {
 	repaint = 1;
-	panel->top_file = panel->count-1;
+	panel->top_file = panel->count - 1;
     }
 
-    if ((panel->count - panel->top_file) < items){
+    if ((panel->count - panel->top_file) < items) {
 	repaint = 1;
 	panel->top_file = panel->count - items;
 	if (panel->top_file < 0)
 	    panel->top_file = 0;
     }
 
-    if (panel->selected < panel->top_file){
+    if (panel->selected < panel->top_file) {
 	repaint = 1;
 	panel->top_file = panel->selected;
     }
 
-    if ((panel->selected - panel->top_file) >= items){
+    if ((panel->selected - panel->top_file) >= items) {
 	repaint = 1;
 	panel->top_file = panel->selected - items + 1;
     }
 
     if (repaint)
 	paint_panel (panel);
-    else
-	repaint_file (panel, panel->selected, 1, 2*selection (panel)->f.marked+1, 0);
+    else {
+	if (panel->active)
+	    repaint_file (panel, panel->selected, 1,
+			  2 * selection (panel)->f.marked + 1, 0);
+    }
 
     display_mini_info (panel);
 
@@ -1992,6 +1995,11 @@ chdir_other_panel (WPanel *panel)
     change_panel ();
     do_cd (panel->cwd, cd_exact);
     change_panel ();
+
+    /* try to select current filename on the other panel */
+    if (!panel->is_panelized) {
+	try_to_select (other_panel, selection (panel)->fname);
+    }
 }
 
 static void
