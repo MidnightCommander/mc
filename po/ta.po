@@ -280,7 +280,7 @@ msgstr "§¾Î"
 
 #: edit/editcmd.c:1653
 msgid ""
-" Invalid regular expression, or scanf expression with to many conversions "
+" Invalid regular expression, or scanf expression with too many conversions "
 msgstr " º¡¾¡Ã½ §¸¡¨Å À¢¨ÆÂ¡ÉÐ, «øÄÐ scanf §¸¡¨ÅÂ¢ø «¾¢¸Á¡É Á¡üÈí¸û "
 
 #: edit/editcmd.c:1861
@@ -299,7 +299,7 @@ msgstr ""
 
 #: edit/editcmd.c:1970
 #, c-format
-msgid " %d finds made, %d bookmarks added "
+msgid " %d items found, %d bookmarks added "
 msgstr " %d ¸ñÎÀ¢Êì¸ô Àð¼É, %d Òò¾¸ÌÈ¢¸û §º÷ì¸ôÀð¼É "
 
 #: edit/editcmd.c:2018 edit/editwidget.c:292 src/help.c:825 src/main.c:1422
@@ -1722,7 +1722,7 @@ msgstr ""
 #: src/file.c:927
 #, c-format
 msgid ""
-" Source directory \"%s\" is not a directory \n"
+" Source \"%s\" is not a directory \n"
 " %s "
 msgstr ""
 

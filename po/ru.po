@@ -285,7 +285,7 @@ msgstr "Поиск"
 
 #: edit/editcmd.c:1719
 msgid ""
-" Invalid regular expression, or scanf expression with to many conversions "
+" Invalid regular expression, or scanf expression with too many conversions "
 msgstr ""
 " Неверное регулярное выражение или в scanf-формате много преобразований"
 
@@ -305,7 +305,7 @@ msgstr " Искомая строка не найдена "
 
 #: edit/editcmd.c:2036
 #, c-format
-msgid " %d finds made, %d bookmarks added "
+msgid " %d items found, %d bookmarks added "
 msgstr " %d найдено, %d закладок добавлено "
 
 #: edit/editcmd.c:2088 edit/editwidget.c:296 src/help.c:826 src/main.c:1208
@@ -1807,7 +1807,7 @@ msgstr ""
 #: src/file.c:900
 #, c-format
 msgid ""
-" Source directory \"%s\" is not a directory \n"
+" Source \"%s\" is not a directory \n"
 " %s "
 msgstr ""
 " Исходный каталог \"%s\" каталогом не является \n"

@@ -285,7 +285,7 @@ msgstr "Sök"
 
 #: edit/editcmd.c:1653
 msgid ""
-" Invalid regular expression, or scanf expression with to many conversions "
+" Invalid regular expression, or scanf expression with too many conversions "
 msgstr ""
 " Ogiltigt reguljärt uttryck, eller scanfuttryck med för många konverteringar "
 
@@ -305,7 +305,7 @@ msgstr " Söksträngen kunde inte hittas "
 
 #: edit/editcmd.c:1970
 #, c-format
-msgid " %d finds made, %d bookmarks added "
+msgid " %d items found, %d bookmarks added "
 msgstr " %d sökningar gjorda, %d bokmärken tillagda"
 
 # ?
@@ -1809,7 +1809,7 @@ msgstr ""
 #: src/file.c:927
 #, c-format
 msgid ""
-" Source directory \"%s\" is not a directory \n"
+" Source \"%s\" is not a directory \n"
 " %s "
 msgstr ""
 " Källkatalogen \"%s\" är inte en katalog \n"

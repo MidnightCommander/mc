@@ -280,7 +280,7 @@ msgstr "Meklçt"
 
 #: edit/editcmd.c:1653
 msgid ""
-" Invalid regular expression, or scanf expression with to many conversions "
+" Invalid regular expression, or scanf expression with too many conversions "
 msgstr ""
 " Nepareiza regulârâ izteiksme vai scanf izteiksme ar pârâk daudzâm "
 "konversijâm "
@@ -301,7 +301,7 @@ msgstr " Meklçjamâ rinda nav atrasta "
 
 #: edit/editcmd.c:1970
 #, c-format
-msgid " %d finds made, %d bookmarks added "
+msgid " %d items found, %d bookmarks added "
 msgstr " %d meklçjumi izdarît, %d grâmatzîmes pievienotas"
 
 #: edit/editcmd.c:2018 edit/editwidget.c:292 src/help.c:825 src/main.c:1422
@@ -1793,7 +1793,7 @@ msgstr ""
 #: src/file.c:927
 #, c-format
 msgid ""
-" Source directory \"%s\" is not a directory \n"
+" Source \"%s\" is not a directory \n"
 " %s "
 msgstr ""
 " Avota direktorijs \"%s\" nav direktorijs \n"

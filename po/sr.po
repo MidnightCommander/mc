@@ -279,7 +279,7 @@ msgstr "Тражи"
 
 #: edit/editcmd.c:1709
 msgid ""
-" Invalid regular expression, or scanf expression with to many conversions "
+" Invalid regular expression, or scanf expression with too many conversions "
 msgstr ""
 " Регуларни израз је неисправан или је израз за `scanf' са превише претварања "
 
@@ -299,7 +299,7 @@ msgstr " Тражена ниска није нађена "
 
 #: edit/editcmd.c:2026
 #, c-format
-msgid " %d finds made, %d bookmarks added "
+msgid " %d items found, %d bookmarks added "
 msgstr " Нађено %d, додано %d обележивача "
 
 #: edit/editcmd.c:2078 edit/editwidget.c:296 src/help.c:827 src/main.c:1234
@@ -1834,7 +1834,7 @@ msgstr ""
 #: src/file.c:913
 #, c-format
 msgid ""
-" Source directory \"%s\" is not a directory \n"
+" Source \"%s\" is not a directory \n"
 " %s "
 msgstr ""
 " Изворни директоријум `%s' није директоријум \n"

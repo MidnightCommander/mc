@@ -282,7 +282,7 @@ msgstr "Cerca"
 
 #: edit/editcmd.c:1653
 msgid ""
-" Invalid regular expression, or scanf expression with to many conversions "
+" Invalid regular expression, or scanf expression with too many conversions "
 msgstr ""
 " Expressió habitual no vàlida, o expressió scanf amb massa conversions "
 
@@ -302,7 +302,7 @@ msgstr " No s'ha trobat la cadena "
 
 #: edit/editcmd.c:1970
 #, c-format
-msgid " %d finds made, %d bookmarks added "
+msgid " %d items found, %d bookmarks added "
 msgstr "S'han trobat %d resultats, s'han afegit %d marcadors"
 
 #: edit/editcmd.c:2018 edit/editwidget.c:292 src/help.c:825 src/main.c:1422
@@ -1796,7 +1796,7 @@ msgstr ""
 #: src/file.c:927
 #, c-format
 msgid ""
-" Source directory \"%s\" is not a directory \n"
+" Source \"%s\" is not a directory \n"
 " %s "
 msgstr ""
 " El directori origen \"%s\" no és un directori \n"

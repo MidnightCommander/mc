@@ -280,7 +280,7 @@ msgstr "Hľadať"
 
 #: edit/editcmd.c:1653
 msgid ""
-" Invalid regular expression, or scanf expression with to many conversions "
+" Invalid regular expression, or scanf expression with too many conversions "
 msgstr " Nesprávny výraz, alebo scanf výraz s mnohými zmenami "
 
 #: edit/editcmd.c:1861
@@ -299,7 +299,7 @@ msgstr " Hľadaný reťazec nebol nájdený "
 
 #: edit/editcmd.c:1970
 #, c-format
-msgid " %d finds made, %d bookmarks added "
+msgid " %d items found, %d bookmarks added "
 msgstr " %d nájdených, %d pridaných záložiek "
 
 #: edit/editcmd.c:2018 edit/editwidget.c:292 src/help.c:825 src/main.c:1422
@@ -1784,7 +1784,7 @@ msgstr ""
 #: src/file.c:927
 #, c-format
 msgid ""
-" Source directory \"%s\" is not a directory \n"
+" Source \"%s\" is not a directory \n"
 " %s "
 msgstr ""
 " Zdrojový adresár \"%s\" nie je adresárom \n"

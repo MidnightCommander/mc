@@ -278,7 +278,7 @@ msgstr "Paieška"
 
 #: edit/editcmd.c:1709
 msgid ""
-" Invalid regular expression, or scanf expression with to many conversions "
+" Invalid regular expression, or scanf expression with too many conversions "
 msgstr ""
 " Klaida reguliarioje išraiškoje, arba „scanf“ išraiška turi per daug "
 "konvertavimų "
@@ -299,7 +299,7 @@ msgstr " Ieškoma eilutė nerasta "
 
 #: edit/editcmd.c:2026
 #, c-format
-msgid " %d finds made, %d bookmarks added "
+msgid " %d items found, %d bookmarks added "
 msgstr " surasta %d, pridėta %d žymų  "
 
 #: edit/editcmd.c:2078 edit/editwidget.c:296 src/help.c:827 src/main.c:1233
@@ -1819,7 +1819,7 @@ msgstr ""
 #: src/file.c:913
 #, c-format
 msgid ""
-" Source directory \"%s\" is not a directory \n"
+" Source \"%s\" is not a directory \n"
 " %s "
 msgstr ""
 

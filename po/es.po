@@ -278,7 +278,7 @@ msgstr "Buscar"
 
 #: edit/editcmd.c:1719
 msgid ""
-" Invalid regular expression, or scanf expression with to many conversions "
+" Invalid regular expression, or scanf expression with too many conversions "
 msgstr ""
 " La expresión regular es inválida o la expresión scanf tiene demasiadas "
 "conversiones "
@@ -299,7 +299,7 @@ msgstr " La cadena buscada no ha sido encontrada "
 
 #: edit/editcmd.c:2036
 #, c-format
-msgid " %d finds made, %d bookmarks added "
+msgid " %d items found, %d bookmarks added "
 msgstr " %d coincidencias, %d marcadores colocados "
 
 #: edit/editcmd.c:2088 edit/editwidget.c:296 src/help.c:826 src/main.c:1208
@@ -1800,7 +1800,7 @@ msgstr ""
 #: src/file.c:900
 #, c-format
 msgid ""
-" Source directory \"%s\" is not a directory \n"
+" Source \"%s\" is not a directory \n"
 " %s "
 msgstr ""
 " El directorio fuente \"%s\" no es un directorio \n"
