@@ -1,3 +1,11 @@
+2002-07-16  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Remove handling of executables.  They should
+	be handled internally for "pause after run" to work.
+
+	* syntax/Syntax: Associate *.itcl with tcl.syntax.
+	* syntax/tcl.syntax: Add itcl keywords, other improvements.
+
 2002-07-15  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Don't check for strcasecmp(), strncasecmp() and

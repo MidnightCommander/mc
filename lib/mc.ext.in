@@ -371,14 +371,6 @@ shell/Imakefile
 regex/^Makefile.(PL|pl)$
 	Open=%var{PERL:perl} %f
 
-# Executables
-type/\ executable
-	Open=./%f
-	Drop=%f %q
-	Execute in XTerm=xterm -e %f &
-	View Required Libraries=%view{ascii} ldd %f
-	Strip binary=strip %f
-
 # dbf
 regex/\.(dbf|DBF)$
        Open=%view{ascii} dbview %f
