@@ -1,5 +1,8 @@
 2003-10-27  Pavel Roskin  <proski@gnu.org>
 
+	* utilunix.c: Move mc_doublepopen() and mc_doublepclose() ...
+	* ext.c: ... where they are used.
+
 	* slint.c (mc_refresh): Revert last change - it breaks screen
 	restoring on rxvt.
 

@@ -111,9 +111,6 @@ enum {
 int get_compression_type (int fd);
 const char *decompress_extension (int type);
 
-int mc_doublepopen (int inhandle, int inlen, pid_t *tp, char *command, ...);
-int mc_doublepclose (int pipehandle, pid_t pid);
-
 /* Hook functions */
 
 typedef struct hook {

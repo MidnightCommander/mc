@@ -321,6 +321,126 @@ get_file_type_local (char *filename, char *buf, int buflen)
 
 
 #ifdef FILE_STDIN
+static struct sigaction ignore, save_intr, save_quit, save_stop;
+
+/* INHANDLE is a result of some mc_open call to any vfs, this function
+   returns a normal handle (to be used with read) of a pipe for reading
+   of the output of COMMAND with arguments ... (must include argv[0] as
+   well) which gets as its input at most INLEN bytes from the INHANDLE
+   using mc_read. You have to call mc_doublepclose to close the returned
+   handle afterwards. If INLEN is -1, we read as much as we can :) */
+static int
+mc_doublepopen (int inhandle, int inlen, pid_t *the_pid, char *command,
+		...)
+{
+    int pipe0[2], pipe1[2];
+    pid_t pid;
+
+#define closepipes() close(pipe0[0]);close(pipe0[1]);close(pipe1[0]);close(pipe1[1])
+
+    pipe (pipe0);
+    pipe (pipe1);
+    ignore.sa_handler = SIG_IGN;
+    sigemptyset (&ignore.sa_mask);
+    ignore.sa_flags = 0;
+
+    sigaction (SIGINT, &ignore, &save_intr);
+    sigaction (SIGQUIT, &ignore, &save_quit);
+    sigaction (SIGTSTP, &startup_handler, &save_stop);
+
+    switch (pid = fork ()) {
+    case -1:
+	closepipes ();
+	return -1;
+    case 0:{
+	    sigaction (SIGINT, &save_intr, NULL);
+	    sigaction (SIGQUIT, &save_quit, NULL);
+	    switch (pid = fork ()) {
+	    case -1:
+		closepipes ();
+		_exit (1);
+	    case 0:{
+#define MAXARGS 16
+		    int argno;
+		    char *args[MAXARGS];
+		    va_list ap;
+		    int nulldevice;
+
+		    nulldevice = open ("/dev/null", O_WRONLY);
+		    close (0);
+		    dup (pipe0[0]);
+		    close (1);
+		    dup (pipe1[1]);
+		    close (2);
+		    dup (nulldevice);
+		    close (nulldevice);
+		    closepipes ();
+		    va_start (ap, command);
+		    argno = 0;
+		    while ((args[argno++] = va_arg (ap, char *)) != NULL)
+			if (argno == (MAXARGS - 1)) {
+			    args[argno] = NULL;
+			    break;
+			}
+		    va_end (ap);
+		    execvp (command, args);
+
+		    /* If we are here exec has failed */
+		    _exit (0);
+		}
+	    default:
+		{
+		    char buffer[8192];
+		    int i;
+
+		    close (pipe0[0]);
+		    close (pipe1[0]);
+		    close (pipe1[1]);
+		    while ((i =
+			    mc_read (inhandle, buffer,
+				     (inlen == -1 || inlen > 8192)
+				     ? 8192 : inlen)) > 0) {
+			write (pipe0[1], buffer, i);
+			if (inlen != -1) {
+			    inlen -= i;
+			    if (!inlen)
+				break;
+			}
+		    }
+		    close (inhandle);
+		    close (pipe0[1]);
+		    while (waitpid (pid, &i, 0) < 0)
+			if (errno != EINTR)
+			    break;
+
+		    _exit (i);
+		}
+	    }
+	}
+    default:
+	*the_pid = pid;
+	break;
+    }
+    close (pipe0[0]);
+    close (pipe0[1]);
+    close (pipe1[1]);
+    return pipe1[0];
+}
+
+static int
+mc_doublepclose (int pipe, pid_t pid)
+{
+    int status = 0;
+
+    close (pipe);
+    waitpid (pid, &status, 0);
+    sigaction (SIGINT, &save_intr, NULL);
+    sigaction (SIGQUIT, &save_quit, NULL);
+    sigaction (SIGTSTP, &save_stop, NULL);
+
+    return status;
+}
+
 /*
  * Read file through VFS and feed is to the "file" command.
  * Return 1 if the data is valid, 0 otherwise, -1 for fatal errors.
