@@ -983,7 +983,6 @@ do_mount_umount (char *filename, gboolean is_mount)
 	static char *umount_command;
 	char *op;
 	char *buffer;
-	int count;
 	
 	if (is_mount){
 		if (!mount_command)
@@ -1070,8 +1069,8 @@ do_eject (char *filename)
 
 	device = mount_point_to_device (filename);
 	if (!device)
-		return;
-	
+		return FALSE;
+
 	command = g_strconcat (eject_command, " ", device, NULL);
 	open_error_pipe ();
 	f = popen (command, "r");
@@ -1109,18 +1108,32 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 	file_entry *fe;
 	int is_mounted;
 	char *point;
-	int launch = FALSE;
+	int launch;
+	GdkCursor *cursor;
 
-	if (dii->url){
+	filename = NULL;
+	fe = NULL;
+	launch = FALSE;
+
+	/* Set the cursor to wait */
+
+	cursor = gdk_cursor_new (GDK_WATCH);
+	gdk_window_set_cursor (dii->dicon->window, cursor);
+	gdk_cursor_destroy (cursor);
+	gdk_flush ();
+
+	/* Open the icon */
+
+	if (dii->url) {
 		gnome_url_show (dii->url);
-		return;
+		goto out;
 	}
-	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
 
+	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
 	fe = file_entry_from_file (filename);
 	if (!fe){
 		message (1, _("Error"), "I could not fetch the information from the file");
-		return;
+		goto out;
 	}
 
 	if (is_mountable (filename, fe, &is_mounted, &point)){
@@ -1143,13 +1156,13 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 			if (gnome_metadata_get (filename,"fm-open", &size, &buf) == 0){
 				g_free (buf);
 				gmc_open_filename (filename, NULL);
-				return;
+				goto out;
 			}
 
 			if (gnome_metadata_get (filename, "open", &size, &buf) == 0){
 				g_free (buf);
 				gmc_open_filename (filename, NULL);
-				return;
+				goto out;
 			}
 
 			if (is_exe (fe->buf.st_mode) && if_link_is_exe (desktop_directory, fe)){
@@ -1169,8 +1182,20 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 		}
 	}
 
-	file_entry_free (fe);
-	g_free (filename);
+ out:
+
+	if (fe)
+		file_entry_free (fe);
+
+	if (filename)
+		g_free (filename);
+
+	/* Reset the cursor */
+
+	cursor = gdk_cursor_new (GDK_TOP_LEFT_ARROW);
+	gdk_window_set_cursor (dii->dicon->window, cursor);
+	gdk_cursor_destroy (cursor);
+	gdk_flush ();
 }
 
 void

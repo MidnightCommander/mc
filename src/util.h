@@ -37,6 +37,7 @@ char *diff_two_paths (char *first, char *second);
 int  set_nonblocking (int fd);
 
 char *x_basename (char *s);
+char *g_readlink (char *path);
 
 extern int align_extensions;
 

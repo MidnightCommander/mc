@@ -1,3 +1,9 @@
+1999-03-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (desktop_icon_info_open): Set the cursor to a watch
+	while the icon is being opened.  Also, fixed memory leaks.
+	(do_eject): Added a missing return value.
+
 1999-03-11  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gmount.c (setup_devices): Use new tigert icon.

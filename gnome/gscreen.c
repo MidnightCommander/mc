@@ -1934,6 +1934,7 @@ set_cursor (WPanel *panel, GdkCursorType type)
 	cursor = gdk_cursor_new (type);
 	gdk_window_set_cursor (GTK_WIDGET (panel->xwindow)->window, cursor);
 	gdk_cursor_destroy (cursor);
+	gdk_flush ();
 }
 
 static void
