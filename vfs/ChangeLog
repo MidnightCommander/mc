@@ -1,3 +1,16 @@
+2001-04-09  Andrew V. Samoilov <sav@bcs.zp.ua>
+
+	* samba/includes/proto.h, samba/libsmb/nterr.c (get_nt_error): return
+	NULL when appropriative error message can't be found as it is expected
+	in cli_errstr(). Return type changed to const char *
+
+	* smbfs.c (smbfs_fill_names): implemented
+
+	(smbfs_stat): unneeded g_strdup/g_free calls removed
+	(smbfs_loaddir): memory leaking fixed
+
+	* samba/libsmb/clientgen.c (rap_errmap, prots): constified
+
 2001-04-06  Pavel Roskin  <proski@gnu.org>
 
 	* Make-mc.in: Use a single variable SAMBA_DIST to hold all

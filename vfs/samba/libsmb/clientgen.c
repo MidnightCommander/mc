@@ -88,7 +88,7 @@ struct
 {
   int err;
   char *message;
-} rap_errmap[] =
+} const rap_errmap[] =
 {
   {5,    "User has insufficient privilege" },
   {86,   "The specified password is invalid" },
@@ -142,7 +142,7 @@ char *cli_errstr(struct cli_state *cli)
 
 	if (nt_rpc_error)
 	{
-		char *nt_msg = get_nt_error_msg(nt_rpc_error);
+		const char *nt_msg = get_nt_error_msg(nt_rpc_error);
 
 		if (nt_msg == NULL)
 		{
@@ -672,7 +672,7 @@ static  struct {
     int prot;
     char *name;
   }
-prots[] = 
+const prots[] = 
     {
       {PROTOCOL_CORE,"PC NETWORK PROGRAM 1.0"},
       {PROTOCOL_COREPLUS,"MICROSOFT NETWORKS 1.03"},
