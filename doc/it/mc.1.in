@@ -38,19 +38,18 @@ Disabilita l'uso dei caratteri grafici per il disegno delle linee.
 Forza la visualizzazione in bianco e nero.
 .TP
 .I "\-c"
-Forza la modalità colore, prego vedere la sezione 
+Forza la modalità colore, prego consultare la sezione 
 .\"LINK2"
 Colori
 .\"Colors"
-per informazioni aggiuntive.
+per ulteriori informazioni.
 .TP
 .I "\-C arg"
 Usato per specificare un set di colori differente a riga di comando.
 Il formato di arg è documentato nella sezione
 .\"LINK2"
-Colori
+Colori.
 .\"Colors"
-\&.
 .TP
 .I "\-d"
 Disabilita il supporto mouse.
@@ -192,7 +191,7 @@ funziona anche nel
 .\"LINK2"
 Visualizzatore dell'Aiuto
 .\"Contents"
-e nal 
+e nell' 
 .\"LINK2"
 Albero Directory.
 .\"Directory Tree"
@@ -203,8 +202,7 @@ può essere cambiata in valori differenti modificando il file
 \&~/.mc/ini
 .\"Save Setup"
 e cambiando il parametro
-.I mouse_repeat_rate
-\&.
+.IR mouse_repeat_rate.
 .PP
 Se il Commander sta funzionando con il supporto mouse, si può saltarlo
 ed ottenere il funzionamento del mouse normale (taglia e incolla di testo)
@@ -468,7 +466,7 @@ premere '>' con il mouse.
 .B M-S-h, M-H
 Mostra lo storico directory, equivalente a premere 'v' con il mouse.
 .PP
-.\"NODE "  Shell a Riga di Comando"
+.\"NODE "  Shell Command Line"
 .SH "  Shell a riga di comando"
 Questa sezione elenca i tasti utili ad evitare troppe battiture
 nell'immissione dei comandi.
@@ -501,11 +499,11 @@ Il comando di inserimento letterale serve per inserire caratteri che
 sarebbero altrimenti interpretati dal Midnight Commander (come il simbolo '+')
 .PP
 .B M-p, M-n.
-Use these keys to browse through the command history. M-p takes you
-to the last entry, M-n takes you to the next one.
+Usa questi tasti per navigare attraverso lo storico comandi. M-p va alla voce
+precedente, M-n va alla successiva.
 .PP
 .B M-h.
-Displays the history for the current input line. 
+Mostra lo storico per la riga di ingresso corrente.
 .PP
 .\"NODE "  General Movement Keys"
 .SH "  Tasti Generali di Movimento"
@@ -514,8 +512,8 @@ usano un codice comune per gestire il movimento. Per questa ragione essi
 accettano esattamente gli stessi tasti. Ogniuno di questi però accetta anche
 altri tasti indipendenti.
 .PP
-Altre parti del Midnight Commander usano alcuni degli stessi tasti di
-movimento, perciò questa sezione può applicarsi anche a quelle sezioni.
+Diverse parti del Midnight Commander usano gli stessi tasti di
+movimento, questa sezione riguarda quelle parti.
 .PP
 .B Su, C-p.
 Si sposta di una linea indietro.
@@ -535,7 +533,7 @@ Si sposta all'inizio.
 .B Fine, C1.
 Si sposta alla fine.
 .PP
-Il visualizzatore dell'aiuto accetta i seguenti tasti in aggiunta a quelli
+Il visualizzatore dell'aiuto accetta i seguenti tasti, in aggiunta a quelli
 menzionati sopra:
 .PP
 .B b, C-b, C-h, Backspace, Canc.
@@ -601,7 +599,7 @@ inserisce il contenuto del kill buffer.
 elimina il testo dal cursore alla fine della linea.
 .PP
 .B M-p, M-n
-Usa questi tasti per navigare attraverso lo storico dei comandi. M-p 
+usa questi tasti per navigare attraverso lo storico dei comandi. M-p 
 posiziona sull'ultima voce, M-n posiziona sulla seguente.
 .PP
 .B M-C-h, M-Backspace
@@ -1049,7 +1047,7 @@ comando interno cd.
 .\"The cd internal command"
 .PP
 .\"NODE "  Command Menu"
-.SH "  Menu Commando"
+.SH "  Menu Comando"
 Il comando
 .\"LINK2"
 Albero directory
@@ -1126,9 +1124,8 @@ E' possibile utilizzare i tasti seguenti:
 .PP
 Sono accettati i
 .\"LINK2"
-Tasti Generali di movimento 
+Tasti Generali di movimento.
 .\"General Movement Keys"
- .
 .PP
 .B Invio.
 Nell'albero directory, esce dall'albero della directory e lo cambia
@@ -1297,9 +1294,8 @@ richiedendo l'etichetta per identificarla.
 Questo rende più veloce il cd verso directory usate spesso. Considera l'uso della
 variabile CDPATH come descritto in
 .\"LINK2"
-comando cd interno 
+comando cd interno.
 .\"The cd internal command"
- .
 .PP
 .\"NODE "    Extension File Edit"
 .SH "    Modifica File Estensioni"
@@ -2633,9 +2629,9 @@ dell'opzione
 .I Completamento: visualizza tutto
 nella finestra
 .\"LINK2"
-Configurazione
+Configurazione.
 .\"Configuration"
- . Se è abilitata, un elenco di tutte le possibilità viene mostrato vicino 
+Se è abilitata, un elenco di tutte le possibilità viene mostrato vicino 
 alla posizione corrente per poter selezionare con i tasti freccia e
 .B Invio
 la voce corretta. Si può anche battere le prime lettere nelle quali le varie
@@ -3189,10 +3185,10 @@ bs	      backspace
 home          tasto inizio
 end           tasto fine
 up            tasto freccia in su
-down          tasto freccia in giu
+down          tasto freccia in giù
 left          tasto freccia a sinistra
 right         tasto freccia a destra
-pgdn          tasto pagina in giu
+pgdn          tasto pagina in giù
 pgup          tasto pagina in su
 insert        tasto inserimento
 delete        tasto cancellazione
