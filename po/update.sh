@@ -40,7 +40,7 @@ elif [ "x$1" = "x" ]; then
 echo "Building the $PACKAGE.pot ..."
 
 xgettext --default-domain=$PACKAGE --directory=.. \
-  --add-comments --keyword=_ --keyword=N_ \
+  --add-comments=TRANSLATORS: --keyword=_ --keyword=N_ \
   --files-from=./POTFILES.in \
 && test ! -f $PACKAGE.po \
    || ( rm -f ./$PACKAGE.pot \
@@ -51,7 +51,7 @@ else
 if [ -s $1.po ]; then
 
 xgettext --default-domain=$PACKAGE --directory=.. \
-  --add-comments --keyword=_ --keyword=N_ \
+  --add-comments=TRANSLATORS: --keyword=_ --keyword=N_ \
   --files-from=./POTFILES.in \
 && test ! -f $PACKAGE.po \
    || ( rm -f ./PACKAGE.pot \

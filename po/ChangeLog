@@ -1,3 +1,9 @@
+2002-10-14  Pavel Roskin  <proski@gnu.org>
+
+	* update.pl: Use --add-comments=TRANSLATORS:, not just
+	--add-comments for compatibility with Makefile from gettext.
+	* update.sh: Likewise.
+
 2002-10-07  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* ru.po: Replace 0x96 with OK due to problems with xterm.

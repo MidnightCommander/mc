@@ -47,7 +47,7 @@ if ($LANG=~/^-(.)*/){
         print "Building the $PACKAGE.pot ...";
 
         $b="xgettext --default-domain\=$PACKAGE --directory\=\.\."
-          ." --add-comments --keyword\=\_ --keyword\=N\_"
+          ." --add-comments=TRANSLATORS: --keyword\=\_ --keyword\=N\_"
           ." --files-from\=\.\/POTFILES\.in ";
         $b1="test \! -f $PACKAGE\.po \|\| \( rm -f \.\/$PACKAGE\.pot "
            ."&& mv $PACKAGE\.po \.\/$PACKAGE\.pot \)";
@@ -133,7 +133,7 @@ elsif(-s "$LANG.po"){
     print "Building the $PACKAGE.pot ...";
 
     $c="xgettext --default-domain\=$PACKAGE --directory\=\.\."
-      ." --add-comments --keyword\=\_ --keyword\=N\_"
+      ." --add-comments=TRANSLATORS: --keyword\=\_ --keyword\=N\_"
       ." --files-from\=\.\/POTFILES\.in ";  
     $c1="test \! -f $PACKAGE\.po \|\| \( rm -f \.\/$PACKAGE\.pot "
        ."&& mv $PACKAGE\.po \.\/$PACKAGE\.pot \)";
