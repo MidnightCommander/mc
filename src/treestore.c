@@ -48,6 +48,8 @@
 #ifdef NEEDS_IO_H
 #   include <io.h>
 #endif
+#include "profile.h"
+#include "setup.h"
 
 #define TREE_SIGNATURE "Midnight Commander TreeStore v 2.0"
 
@@ -687,6 +689,35 @@ tree_store_end_check (void)
 	tree_store_set_freeze (FALSE);
 }
 
+gboolean
+should_skip_directory (char *dir)
+{
+	static GList *special_dirs, *l;
+	static int loaded;
+	
+	if (loaded == 0){
+		char *token;
+		char *buffer = g_malloc (4096);
+		char *s;
+
+		loaded = 1;
+		setup_init ();
+		GetPrivateProfileString ("Special dirs", "list",
+					 "/afs,/coda,/:,/...,/net", buffer, 4096, profile_name);
+		s = buffer;
+		while ((token = strtok (s, ",")) != NULL){
+			special_dirs = g_list_prepend (special_dirs, g_strdup (token));
+			s = NULL;
+		}
+	}
+
+	for (l = special_dirs; l; l = l->next){
+		if (strcmp (dir, l->data) == 0)
+			return TRUE;
+	}
+	return FALSE;
+}
+
 tree_entry *
 tree_store_rescan (char *dir)
 {
@@ -695,11 +726,18 @@ tree_store_rescan (char *dir)
 	struct stat buf;
 	tree_entry *entry;
 
+	if (should_skip_directory (dir)){
+		entry = tree_store_add_entry (dir);
+		entry->scanned = 1;
+		
+		return entry;
+	}
+
 	entry = tree_store_start_check (dir);
 
 	if (!entry)
 		return NULL;
-	
+
 	dirp = mc_opendir (dir);
 	if (dirp){
 		for (dp = mc_readdir (dirp); dp; dp = mc_readdir (dirp)){

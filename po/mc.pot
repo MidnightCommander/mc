@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-02-15 21:59-0600\n"
+"POT-Creation-Date: 1999-02-16 20:51-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -173,42 +173,61 @@ msgstr ""
 msgid "Enter a Regular Expression to filter files in the panel view."
 msgstr ""
 
-#: gnome/gcmd.c:675 gnome/gpopup.c:49
+#: gnome/gcmd.c:675 gnome/gpopup.c:51
 msgid " Open with..."
 msgstr ""
 
-#: gnome/gcmd.c:676 gnome/gpopup.c:50
+#: gnome/gcmd.c:676 gnome/gpopup.c:52
 msgid "Enter extra arguments:"
 msgstr ""
 
-#: gnome/gdesktop.c:375 gnome/gdesktop.c:1604
+#: gnome/gdesktop.c:376 gnome/gdesktop.c:1796
 msgid "Warning"
 msgstr ""
 
-#: gnome/gdesktop.c:376
+#: gnome/gdesktop.c:377
 #, c-format
 msgid "Could not open %s; will not have desktop icons"
 msgstr ""
 
-#: gnome/gdesktop.c:1567
+#: gnome/gdesktop.c:913
+msgid "While running the mount/umount command"
+msgstr ""
+
+#: gnome/gdesktop.c:1675
 msgid "Trashcan"
 msgstr ""
 
+#: gnome/gdesktop.c:1713
+#, c-format
+msgid "floppy %d"
+msgstr ""
+
+#: gnome/gdesktop.c:1716
+#, c-format
+msgid "disk %d"
+msgstr ""
+
+#: gnome/gdesktop.c:1719
+#, c-format
+msgid "device %d"
+msgstr ""
+
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop.c:1600
+#: gnome/gdesktop.c:1792
 msgid "Home directory"
 msgstr ""
 
-#: gnome/gdesktop.c:1605
+#: gnome/gdesktop.c:1797
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial desktop icons."
 msgstr ""
 
-#: gnome/gdesktop.c:1911
+#: gnome/gdesktop.c:2105
 msgid "Arrange Icons"
 msgstr ""
 
-#: gnome/gdesktop.c:1912
+#: gnome/gdesktop.c:2106
 msgid "Rescan Desktop"
 msgstr ""
 
@@ -374,12 +393,12 @@ msgid ""
 "%s"
 msgstr ""
 
-#: gnome/gicon.c:86 gnome/gtools.c:50
+#: gnome/gicon.c:154 gnome/gtools.c:52
 msgid "Error"
 msgstr ""
 
-#: gnome/gicon.c:86
-msgid "Default set of icons not found, check your installation"
+#: gnome/gicon.c:154
+msgid "Default set of icons not found, please check your installation"
 msgstr ""
 
 #: gnome/glayout.c:274
@@ -428,168 +447,192 @@ msgstr ""
 msgid "Rename or move files"
 msgstr ""
 
-#: gnome/glayout.c:316
+#: gnome/glayout.c:311
+msgid "Show directory sizes"
+msgstr ""
+
+#: gnome/glayout.c:311
+msgid "Shows the disk space used by each directory"
+msgstr ""
+
+#: gnome/glayout.c:318
 msgid "Select _All"
 msgstr ""
 
-#: gnome/glayout.c:316
+#: gnome/glayout.c:318
 msgid "Select all files in the current Panel"
 msgstr ""
 
-#: gnome/glayout.c:318
+#: gnome/glayout.c:320
 msgid "_Select Files..."
 msgstr ""
 
-#: gnome/glayout.c:318
+#: gnome/glayout.c:320
 msgid "Select a group of files"
 msgstr ""
 
-#: gnome/glayout.c:319
+#: gnome/glayout.c:321
 msgid "_Invert Selection"
 msgstr ""
 
-#: gnome/glayout.c:319
+#: gnome/glayout.c:321
 msgid "Reverses the list of tagged files"
 msgstr ""
 
-#: gnome/glayout.c:321
+#: gnome/glayout.c:323
 msgid "_Rescan Directory"
 msgstr ""
 
-#: gnome/glayout.c:321
+#: gnome/glayout.c:323
 msgid "Rescan the directory contents"
 msgstr ""
 
-#: gnome/glayout.c:328
+#: gnome/glayout.c:330
 msgid "Icon View"
 msgstr ""
 
-#: gnome/glayout.c:329
+#: gnome/glayout.c:331
 msgid "Partial View"
 msgstr ""
 
-#: gnome/glayout.c:330
+#: gnome/glayout.c:332
 msgid "Full View"
 msgstr ""
 
-#: gnome/glayout.c:331
+#: gnome/glayout.c:333
 msgid "Custom View"
 msgstr ""
 
-#: gnome/glayout.c:336
+#: gnome/glayout.c:338
 msgid "_Sort By..."
 msgstr ""
 
-#: gnome/glayout.c:336
+#: gnome/glayout.c:338
 msgid "Confirmation settings"
 msgstr ""
 
-#: gnome/glayout.c:337
+#: gnome/glayout.c:339
 msgid "_Filter View..."
 msgstr ""
 
-#: gnome/glayout.c:337
+#: gnome/glayout.c:339
 msgid "Global option settings"
 msgstr ""
 
-#: gnome/glayout.c:344
+#: gnome/glayout.c:346
 msgid "_Find File..."
 msgstr ""
 
-#: gnome/glayout.c:344
+#: gnome/glayout.c:346
 msgid "Locate files on disk"
 msgstr ""
 
 #. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
-#: gnome/glayout.c:347
+#: gnome/glayout.c:349
 msgid "_Run Command..."
 msgstr ""
 
-#: gnome/glayout.c:347
+#: gnome/glayout.c:349
 msgid "Runs a command"
 msgstr ""
 
-#: gnome/glayout.c:349
+#: gnome/glayout.c:351
 msgid "_Run Command in panel..."
 msgstr ""
 
-#: gnome/glayout.c:349
+#: gnome/glayout.c:351
 msgid "Run a command and put the results in a panel"
 msgstr ""
 
-#: gnome/glayout.c:352
+#: gnome/glayout.c:354
 msgid "_Active VFS list..."
 msgstr ""
 
-#: gnome/glayout.c:352
+#: gnome/glayout.c:354
 msgid "List of active virtual file systems"
 msgstr ""
 
-#: gnome/glayout.c:359
+#: gnome/glayout.c:361
 msgid "_Background jobs..."
 msgstr ""
 
-#: gnome/glayout.c:359
+#: gnome/glayout.c:361
 msgid "List of background operations"
 msgstr ""
 
-#: gnome/glayout.c:374
+#: gnome/glayout.c:364
+msgid "Recreate desktop devices"
+msgstr ""
+
+#: gnome/glayout.c:364
+msgid "Recreates the devices shown on the desktop"
+msgstr ""
+
+#: gnome/glayout.c:378
 msgid "_Layout"
 msgstr ""
 
-#: gnome/glayout.c:375
+#: gnome/glayout.c:379
 msgid "_Commands"
 msgstr ""
 
-#: gnome/glayout.c:472
+#: gnome/glayout.c:476
 msgid "File/New/Directory..."
 msgstr ""
 
-#: gnome/gpopup.c:226 gnome/gpopup.c:227
+#: gnome/gpopup.c:246 gnome/gpopup.c:247
 msgid "Properties"
 msgstr ""
 
-#: gnome/gpopup.c:229 gnome/gpopup.c:230
+#: gnome/gpopup.c:248
+msgid "Mount device"
+msgstr ""
+
+#: gnome/gpopup.c:249
+msgid "Unmount device"
+msgstr ""
+
+#: gnome/gpopup.c:251 gnome/gpopup.c:252
 msgid "Open"
 msgstr ""
 
-#: gnome/gpopup.c:231
+#: gnome/gpopup.c:253
 msgid "Open with"
 msgstr ""
 
-#: gnome/gpopup.c:232 src/screen.c:2287 src/screen.c:2317
+#: gnome/gpopup.c:254 src/screen.c:2287 src/screen.c:2317
 msgid "View"
 msgstr ""
 
-#: gnome/gpopup.c:233
+#: gnome/gpopup.c:255
 msgid "View unfiltered"
 msgstr ""
 
-#: gnome/gpopup.c:234 src/screen.c:2288 src/screen.c:2318 src/view.c:1996
+#: gnome/gpopup.c:256 src/screen.c:2288 src/screen.c:2318 src/view.c:1996
 msgid "Edit"
 msgstr ""
 
-#: gnome/gpopup.c:236
+#: gnome/gpopup.c:258
 msgid "Link..."
 msgstr ""
 
-#: gnome/gpopup.c:237
+#: gnome/gpopup.c:259
 msgid "Symlink..."
 msgstr ""
 
-#: gnome/gpopup.c:238
+#: gnome/gpopup.c:260
 msgid "Edit symlink..."
 msgstr ""
 
-#: gnome/gpopup.c:245 gnome/gpopup.c:256
+#: gnome/gpopup.c:267 gnome/gpopup.c:278
 msgid "Move/rename..."
 msgstr ""
 
-#: gnome/gpopup.c:246 gnome/gpopup.c:257
+#: gnome/gpopup.c:268 gnome/gpopup.c:279
 msgid "Copy..."
 msgstr ""
 
-#: gnome/gpopup.c:247 gnome/gpopup.c:259 gtkedit/editwidget.c:1067
+#: gnome/gpopup.c:269 gnome/gpopup.c:281 gtkedit/editwidget.c:1067
 #: src/screen.c:2292 src/screen.c:2322
 msgid "Delete"
 msgstr ""
@@ -946,7 +989,7 @@ msgstr ""
 msgid "Location:"
 msgstr ""
 
-#: gnome/gtools.c:104 src/boxes.c:138 src/boxes.c:278 src/boxes.c:378
+#: gnome/gtools.c:110 src/boxes.c:138 src/boxes.c:278 src/boxes.c:378
 #: src/boxes.c:466 src/boxes.c:646 src/boxes.c:728 src/boxes.c:783
 #: src/boxes.c:897 src/filegui.c:807 src/find.c:171 src/layout.c:369
 #: src/option.c:144 src/wtools.c:289 src/wtools.c:561
@@ -1509,36 +1552,40 @@ msgstr ""
 msgid "&Dismiss"
 msgstr ""
 
-#: gtkedit/gtkedit.c:110
+#: gtkedit/gtkedit.c:66
+msgid " Enter file name: "
+msgstr ""
+
+#: gtkedit/gtkedit.c:111
 msgid "The Quick Brown Fox Jumps Over The Lazy Dog"
 msgstr ""
 
-#: gtkedit/gtkedit.c:801
+#: gtkedit/gtkedit.c:802
 msgid ""
 "gtkedit.c: HOME environment variable not set and no passwd entry - aborting\n"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1289
+#: gtkedit/gtkedit.c:1290
 msgid "Clear the edit buffer"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1294
+#: gtkedit/gtkedit.c:1295
 msgid "Insert File"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1294
+#: gtkedit/gtkedit.c:1295
 msgid "Insert text from a file"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1296
+#: gtkedit/gtkedit.c:1297
 msgid "Copy to file"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1296
+#: gtkedit/gtkedit.c:1297
 msgid "copy a block to a file"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1336
+#: gtkedit/gtkedit.c:1337
 msgid "Search/Replace"
 msgstr ""
 
@@ -4089,7 +4136,7 @@ msgstr ""
 msgid "Rmdir"
 msgstr ""
 
-#: src/treestore.c:354
+#: src/treestore.c:356
 #, c-format
 msgid ""
 "Can't write to the %s file:\n"

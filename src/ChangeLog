@@ -1,3 +1,11 @@
+1999-02-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* treestore.c (tree_store_rescan): Add code to skip scanning
+	specially slow directories (/afs, /coda, /...).  It is of course,
+	configurable. 
+
+	* setup.c: Export the profile_name setup routine.
+
 Tue Feb 16 21:21:32 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* popt.c: Compilation fix: on systems without setreuid use setuid.

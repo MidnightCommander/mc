@@ -495,16 +495,16 @@ do_load_string (char *s, char *ss, char *def)
     return p;
 }
 
-void
-load_setup (void)
+char *
+setup_init (void)
 {
     static char *buffer;
     char   *profile;
     char   *inifile;
-    int    i;
-#ifdef USE_NETCODE
-    extern char *ftpfs_proxy_host;
-#endif
+
+    if (profile_name)
+	    return profile_name;
+    
     buffer = concat_dir_and_file (home_dir, PROFILE_NAME);
     inifile = concat_dir_and_file (mc_home, "mc.ini");
     if (exist_file (buffer)){
@@ -519,6 +519,20 @@ load_setup (void)
     
     profile_name = profile;
 
+    return profile;
+}
+
+void
+load_setup (void)
+{
+    char *profile;
+    
+    int    i;
+#ifdef USE_NETCODE
+    extern char *ftpfs_proxy_host;
+#endif
+
+    profile = setup_init ();
     /* Load integer boolean options */
     for (i = 0; options [i].opt_name; i++)
 	*options [i].opt_addr =
@@ -536,6 +550,8 @@ load_setup (void)
 	startup_left_mode = view_listing;
     
     if (!other_dir){
+	char *buffer;
+	
 	buffer = (char*) g_malloc (MC_MAXPATHLEN);
 	load_string ("Dirs", "other_dir", ".", buffer,
 			     MC_MAXPATHLEN);
