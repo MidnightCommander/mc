@@ -647,7 +647,8 @@ mc_get_current_wd (char *buffer, int size)
 {
     const char *cwd = mc_return_cwd();
 
-    strncpy (buffer, cwd, size);
+    strncpy (buffer, cwd, size - 1);
+    buffer [size - 1] = 0;
     return buffer;
 }
 
@@ -1729,6 +1730,7 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
         goto error;
     /* Use resulting time value */
     s->st_atime = s->st_ctime = s->st_mtime;
+    /* s->st_dev and s->st_ino must be initialized by vfs_s_new_inode () */
 #ifdef HAVE_ST_BLKSIZE
     s->st_blksize = 512;
 #endif
