@@ -627,8 +627,8 @@ apply_mode_change (GnomeFilePropertyDialog *fpd)
 	gchar *new_mode;
 	gtk_label_get (GTK_LABEL (fpd->mode_label), &new_mode);
 	if (strcmp (new_mode, fpd->mode_name)) {
-		g_print ("changed mode:%d:\n", (mode_t) atoi (new_mode));
-		mc_chmod (fpd->file_name, (mode_t) atoi (new_mode));
+		g_print ("changed mode:%d:\n", (mode_t) strtol(new_mode, (char **)NULL, 8));
+		mc_chmod (fpd->file_name, (mode_t) strtol(new_mode, (char **)NULL, 8));
 		return 1;
 	}
 	return 0;

@@ -1,5 +1,8 @@
 1999-01-21  Jonathan Blandford  <jrb@redhat.com>
 
+	* gnome-file-property-dialog.c (apply_uid_group_change): uh, lets
+	do this in Octal. (:
+
 	* glayout.c: comment out compare panels.
 
 	* gnome-file-property-dialog.h: new file.  This is a new widget
