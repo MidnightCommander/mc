@@ -1,5 +1,7 @@
 1999-02-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gscreen.c (toolbar): Added a "rescan" button.
+
 	* gprefs.c (create_prop_box): Make the preferences dialog modal.
 	Also, set the window title and set the window's parent.
 	Removed some unused functions.

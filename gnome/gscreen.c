@@ -2335,10 +2335,19 @@ do_switch_to_custom_listing (GtkWidget *widget, WPanel *panel)
 }
 
 static void
+rescan_panel (GtkWidget *widget, gpointer data)
+{
+	reread_cmd ();
+}
+
+static void
 go_home (GtkWidget *widget, WPanel *panel)
 {
 	do_panel_cd (panel, "~", cd_exact);
 }
+
+/* View mode radio buttons for toolbar */
+
 static GnomeUIInfo viewbar[] = {
 	{ GNOME_APP_UI_ITEM, N_("Icon"), N_("Switch view to an Icon view"), do_switch_to_iconic, NULL, NULL, \
 		GNOME_APP_PIXMAP_DATA, listing_iconic_xpm, 0, (GdkModifierType) 0, NULL },
@@ -2350,6 +2359,9 @@ static GnomeUIInfo viewbar[] = {
 		GNOME_APP_PIXMAP_DATA, listing_custom_xpm, 0, (GdkModifierType) 0, NULL },
 	GNOMEUIINFO_END
 };
+
+/* The toolbar */
+
 static GnomeUIInfo toolbar[] = {
 	GNOMEUIINFO_ITEM_STOCK (N_("Back"), N_("Go to the previously visited directory"),
 				panel_back, GNOME_STOCK_PIXMAP_BACK),
@@ -2357,6 +2369,9 @@ static GnomeUIInfo toolbar[] = {
 				panel_up, GNOME_STOCK_PIXMAP_UP),
 	GNOMEUIINFO_ITEM_STOCK (N_("Forward"), N_("Go to the next directory"),
 				panel_fwd, GNOME_STOCK_PIXMAP_FORWARD),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_ITEM_STOCK (N_("Rescan"), N_("Rescan the current directory"),
+				rescan_panel, GNOME_STOCK_PIXMAP_REFRESH),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_STOCK (N_("Home"), N_("Go to your home directory"),
 				go_home, GNOME_STOCK_PIXMAP_HOME),
