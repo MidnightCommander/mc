@@ -19,22 +19,22 @@
 static void
 desktop_load_init_from (const char *file)
 {
+	char *key;
+	char *file_and_section;
+	char *title, *type;
+
 	void *iterator_handle;
 	char *config_path = g_strconcat ("=", file, "=", NULL);
 
 	iterator_handle = gnome_config_init_iterator_sections (config_path);
 
+	iterator_handle = gnome_config_iterator_next (
+		iterator_handle, &key, NULL);
+
 	do {
-		char *key;
-		char *file_and_section;
-		char *title, *type;
-
-		/* Get next section name */
-		iterator_handle = gnome_config_iterator_next (
-			iterator_handle, &key, NULL);
-
 		/* Now access the values in the section */
 		file_and_section = g_strconcat (config_path, "/", key, "/", NULL);
+
 		gnome_config_push_prefix (file_and_section);
 		title = gnome_config_get_translated_string ("title=None");
 		type = gnome_config_get_string ("type=url");
@@ -71,6 +71,11 @@ desktop_load_init_from (const char *file)
 		g_free (title);
 		g_free (file_and_section);
 		gnome_config_pop_prefix ();
+		
+		/* Get next section name */
+		iterator_handle = gnome_config_iterator_next (
+			iterator_handle, &key, NULL);
+
 	} while (iterator_handle);
 
 	g_free (config_path);

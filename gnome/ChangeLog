@@ -1,3 +1,8 @@
+2000-05-24  Arik Devens <arik@helixcode.com> and Ian Peters <itp@helixcode.com>
+
+	* gdesktop-init.c (desktop_load_init_from): don't crash on 
+	recreating icons, iterating over NULL pointer.
+
 2000-05-15 Andrew Post <apost@cbmi.upmc.edu>
 
 	* gdesktop.c (get_icon_snap_pos): Icons no longer count themselves
