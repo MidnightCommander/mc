@@ -442,7 +442,7 @@ GnomeUIInfo gnome_panel_commands_menu [] = {
 
 
 GnomeUIInfo gnome_panel_about_menu [] = {
-/*	GNOMEUIINFO_HELP ("midnight-commander"), */
+	GNOMEUIINFO_HELP ("gmc"),
 	GNOMEUIINFO_MENU_ABOUT_ITEM(gnome_about_cmd, NULL),
 	GNOMEUIINFO_END
 };
