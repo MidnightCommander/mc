@@ -2362,12 +2362,6 @@ real_view_event (Gpm_Event *event, void *x)
 /* }}} */
 /* {{{ Window creation, destruction and a driver stub for real view */
 
-static int
-view_mode_callback (struct Dlg_head *h, int id, int msg)
-{
-    return default_dlg_callback (h, id, msg);
-}
-
 void
 view_adjust_size (Dlg_head *h)
 {
@@ -2397,7 +2391,7 @@ view (char *_command, const char *_file, int *move_dir_p, int start_line)
 
     /* Create dialog and widgets, put them on the dialog */
     our_dlg =
-	create_dlg (0, 0, LINES, COLS, NULL, view_mode_callback,
+	create_dlg (0, 0, LINES, COLS, NULL, NULL,
 		    "[Internal File Viewer]", NULL, DLG_NONE);
 
     view_dlg = our_dlg;
