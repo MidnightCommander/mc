@@ -1,3 +1,8 @@
+2003-09-11  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* slerr.c (SLang_doerror): Fix possible off-by-one error.
+	* sltermin.c (_SLtt_tigetent): Likewise.
+
 2002-11-28  Pavel Roskin  <proski@gnu.org>
 
 	* sldisply.c: Fix for the previous patch.  Only swap colors if

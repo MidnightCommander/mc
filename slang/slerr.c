@@ -78,24 +78,25 @@ void SLang_doerror (char *error)
    else
      {
 	char *sle = "S-Lang Error: ";
-	unsigned int len;
-	char *fmt;
+	unsigned int len = 0;
+	char *fmt = "%s%s%s";
 
 	str = get_error_string ();
 
-	fmt = "%s%s%s";
 	if ((error == NULL) || (*error == 0))
 	  error = "";
 	else if (SLang_Error == SL_UNKNOWN_ERROR)
 	  /* Do not display an unknown error message if error is non-NULL */
 	  str = "";
-	else
+	else {
 	  fmt = "%s%s: %s";
+	  len = 2;	/* ": " */
+	}
 
-	len = strlen (sle) + strlen (str) + strlen(error) + 1;
+	len += strlen (sle) + strlen (str) + strlen(error) + 1 /* trailing 0 */;
 
 	err = err_buf;
-	if (len >= sizeof (err_buf))
+	if (len > sizeof (err_buf))
 	  {
 	     if (NULL == (malloced_err_buf = SLmalloc (len)))
 	       err = NULL;
