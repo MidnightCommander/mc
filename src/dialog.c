@@ -21,8 +21,8 @@
 #include <stdarg.h>
 #include <sys/types.h>
 #include <string.h>
-#include "x.h"
 #include "global.h"
+#include "x.h"
 #include "dialog.h"
 #include "color.h"
 #include "win.h"
