@@ -1,3 +1,9 @@
+2002-11-28  Pavel Roskin  <proski@gnu.org>
+
+	* color.c (mc_init_pair) [HAVE_SLANG]: Pass "default", not NULL
+	to SLtt_set_color() - it fixes transparency with the latest
+	versions of S-Lang.  Treat foreground like background.
+
 2002-11-20  Pavel Roskin  <proski@gnu.org>
 
 	* main.c: Eliminate finish_program variable - mc can now exit

@@ -121,7 +121,7 @@ static struct color_table_s const color_table [] = {
     { "brightcyan",    COLOR_CYAN    | A_BOLD },
     { "lightgray",     COLOR_WHITE },
     { "white",         COLOR_WHITE   | A_BOLD },
-    { "default",       0 } /* hack for transparent background */
+    { "default",       0 } /* default color of the terminal */
 };
 
 #ifdef HAVE_SLANG
@@ -321,10 +321,11 @@ static struct colors_avail {
 void
 mc_init_pair (int index, CTYPE foreground, CTYPE background)
 {
-    /* hack for transparent background for Eterm, rxvt or else */
-    if (background && !strcmp (background, "default"))
-       background = NULL;
-    /* if foreground is default, I guess we should use normal fore-color. */
+    if (!background)
+	background = "default";
+
+    if (!foreground)
+	foreground = "default";
 
     SLtt_set_color (index, "", foreground, background);
     if (index > max_index)
