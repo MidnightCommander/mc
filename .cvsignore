@@ -16,4 +16,5 @@ mcfn_install
 missing
 mkinstalldirs
 stamp-h
+stamp-h?
 stamp-h.in
