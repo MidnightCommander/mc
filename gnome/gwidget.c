@@ -197,7 +197,6 @@ int
 x_create_radio (Dlg_head *h, widget_data parent, WRadio *r)
 {
 	GtkWidget *w, *vbox;
-	GSList *group;
 	int i;
 
         vbox = gtk_vbox_new (0, 0);
@@ -206,11 +205,10 @@ x_create_radio (Dlg_head *h, widget_data parent, WRadio *r)
 		
 		if (i == 0){
 			w = gtk_radio_button_new_with_label (NULL, text);
-			group = gtk_radio_button_group (GTK_RADIO_BUTTON (w));
 			r->first_gtk_radio = w;
-		} else {
-			w = gtk_radio_button_new_with_label (group, text);
-		}
+		} else
+			w = gtk_radio_button_new_with_label_from_widget (r->first_gtk_radio, text);
+
 		g_free (text);
 		gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (w), (i == r->sel));
 		gtk_signal_connect (GTK_OBJECT (w), "toggled", GTK_SIGNAL_FUNC (radio_toggle), r);
