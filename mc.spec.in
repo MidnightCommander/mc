@@ -121,6 +121,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root)
 %{prefix}/bin/gmc
 %{prefix}/bin/plain-gmc
+%{prefix}/share/idl/*
 %{prefix}/lib/mc/layout
 %{prefix}/lib/mc/mc-gnome.ext
 %{prefix}/share/pixmaps/mc/*
@@ -131,6 +132,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{prefix}/lib/mc/desktop-scripts
 
 %changelog
+* Thu Sep 09 1999 Elliot Lee <sopwith@redhat.com>
+- Include .idl files in the package.
+
 * Sat Sep 04 1999 Gregory McLean <gregm@comstar.net>
 - Added a build prereq so that rpms get built with documentation ;)
 
