@@ -37,6 +37,7 @@ enum panel_display_enum {
 #define J_CENTER	3
 
 #define IS_FIT(x)	((x) & 0x0004)
+#define MAKE_FIT(x)	((x) | 0x0004)
 #define HIDE_FIT(x)	((x) & 0x0003)
 
 #define J_LEFT_FIT	5

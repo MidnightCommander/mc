@@ -174,23 +174,29 @@ name_quote (const char *s, int quote_percent)
 	    case '\r':
 	    case '\n':
 	    case '\t':
-	    case '$':
+	    case '"':
+	    case ':':
+	    case ';':
+	    case ' ':
 	    case '?':
-	    case '*':
-	    case '(':
-	    case ')':
+	    case '|':
 	    case '[':
 	    case ']':
 	    case '{':
 	    case '}':
 	    case '<':
 	    case '>':
-	    case '"':
-	    case '!':
-	    case '&':
-	    case '#':
 	    case '`':
-	    case ' ':
+	    case '~':
+	    case '!':
+	    case '@':
+	    case '#':
+	    case '$':
+	    case '^':
+	    case '&':
+	    case '*':
+	    case '(':
+	    case ')':
 		*d++ = '\\';
 	}
 	*d = *s;

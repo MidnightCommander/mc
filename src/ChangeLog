@@ -1,3 +1,11 @@
+Thu Mar 18 16:09:09 1999  Timur Bakeyev  <mc@bat.ru>
+
+	* panel.h, screen.c: Add an ability to center justify fields in
+	panel, in addition to left and right justificatin. Just for fun.
+	Try =name in user format.
+
+	* util.c (name_quote): Quote "~@^|;:". Hope, that's all :)
+
 1999-03-17  Jonathan Blandford  <jrb@redhat.com>
 
 	* main.c (main): Put in a warning when run as root.

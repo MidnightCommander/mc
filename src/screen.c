@@ -1221,9 +1221,21 @@ parse_display_format (WPanel *panel, char *format, char **error, int isstatus, i
 	
 	format = skip_separators (format);
 
-	if (*format == '<' || *format == '>'){
+	if (strchr ("<=>", *format)){
 	    set_justify = 1;
-	    justify = *format == '<' ? J_LEFT : J_RIGHT;
+	    switch (*format)
+		{
+		case '<':
+		    justify = J_LEFT;
+		    break;
+		case '=':
+		    justify = J_CENTER;
+		    break;
+		case '>':
+		default:
+		    justify = J_RIGHT;
+		    break;
+		}
 	    format = skip_separators (format+1);
 	} else
 	    set_justify = 0;
@@ -1248,12 +1260,14 @@ parse_display_format (WPanel *panel, char *format, char **error, int isstatus, i
 		    darr->title = "";
             darr->id                  = formats [i].id;
 	    darr->expand              = formats [i].expands;
+	    darr->just_mode 	      = formats [i].default_just;
 	    
 	    if (set_justify)
-		darr->just_mode = justify;
-	    else
-		darr->just_mode = formats [i].default_just;
-
+		if (IS_FIT(darr->just_mode))
+		    darr->just_mode = MAKE_FIT(justify);
+		else
+		    darr->just_mode = justify;
+		
 	    found = 1;
 
 	    format = skip_separators (format);
