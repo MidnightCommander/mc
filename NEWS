@@ -16,6 +16,8 @@ Changes made after 4.6.0-pre1.
 - Screen library is now selected by the option --with-screen.
 - Included S-Lang library has been updated to version 1.4.5.
 - Fixed viewing and editing files on mcfs.
+- When using support for setting the last working directory of mc in the
+  parent shell, "mc" is now an alias in all shells, not a function.
 
 
 Version 4.6.0-pre1.
