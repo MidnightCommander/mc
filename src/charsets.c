@@ -27,7 +27,7 @@ int load_codepages_list()
     char * default_codepage = NULL;
 
     strcpy ( buf, mc_home );
-    strcat ( buf, "/mc.charsets" );
+    strcat ( buf, "/" CHARSETS_INDEX );
     if ( !( f = fopen( buf, "r" ) ) )
 	return -1;
 
@@ -104,7 +104,7 @@ static char translate_character( iconv_t cd, char c )
     char outbuf[4], *obuf;
     size_t ibuflen, obuflen, count;
 
-    char *ibuf = &c; 
+    const char *ibuf = &c; 
     obuf = outbuf;
     ibuflen = 1; obuflen = 4;
 
@@ -126,17 +126,14 @@ char errbuf[255];
 char* init_printable_table( int cpdisplay )
 {
     int i;
-    uchar ch;
+    uchar ch = (cpdisplay == CP_ASCII) ? 0 : 1;
 
     /* Fill printable characters table */
     for (i=0; i<=127; ++i)
 	printable[i] = (i > 31 && i != 127);
 
-    ch = (cpdisplay == CP_ASCII) ? 0 : 1;
-
     for (i=128; i<=255; ++i) {
 	printable[i] = 1;
-	printable[i] = (i > 31 && i != 127);
     }
 
     return NULL;
@@ -155,7 +152,6 @@ char* init_translation_table( int cpsource, int cpdisplay )
 	for (i=0; i<=255; ++i) {
 	    conv_displ[i] = i;
 	    conv_input[i] = i;
-	    printable[i] = (i > 31 && i != 127);
 	}
 	return NULL;
     }
@@ -163,7 +159,6 @@ char* init_translation_table( int cpsource, int cpdisplay )
     for (i=0; i<=127; ++i) {
 	conv_displ[i] = i;
 	conv_input[i] = i;
-	printable[i] = (i > 31 && i != 127);
     }
 
     cpsour = codepages[ cpsource ].id;
@@ -193,7 +188,6 @@ char* init_translation_table( int cpsource, int cpdisplay )
     for (i=128; i<=255; ++i) {
 	ch = translate_character( cd, i );
 	conv_input[i] = (ch == UNKNCHAR) ? i : ch;
-	printable[i] = 1;
     }
 
     iconv_close( cd );

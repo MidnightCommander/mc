@@ -1,3 +1,15 @@
+2001-06-07  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* charsets.h: Define CHARSETS_INDEX without leading LIBDIR.
+
+	* charsets.c (translate_character): Warning fix.
+	(init_translation_table): Don't deal with printable.
+	This one is initialized by init_printable_table ().
+	(load_codepages_list): Use CHARSETS_INDEX.
+
+	* selcodepage.c (do_select_codepage): Messages marked for i18n.
+	* setup.c (load_setup): Eliminate errbuf. Fix error message.
+
 2001-06-07  Pavel Roskin  <proski@gnu.org>
 
 	* setup.c (load_setup): Call init_printable_table() and

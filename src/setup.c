@@ -639,9 +639,7 @@ load_setup (void)
 
 #ifdef HAVE_CHARSET
     if ( load_codepages_list() <= 0 ) {
-	char errmsg[256];
-	sprintf( errmsg, _("Can't load %s"), CHARSETS_INDEX );
-	message( 1, MSG_ERROR, "%s", errmsg );
+	message( 1, MSG_ERROR, _("Can't load %s/%s"), mc_home, CHARSETS_INDEX );
     } else {
 	char cpname[128];
 	load_string( "Misc", "display_codepage", "",
@@ -708,10 +706,11 @@ load_keys_from_section (char *terminal, char *profile_name)
     while (profile_keys){
 	profile_keys = profile_iterator_next (profile_keys, &key, &value);
 	key_code = lookup_key (key);
-	valcopy = convert_controls (value);
-	if (key_code)
+	if (key_code){
+	    valcopy = convert_controls (value);
 	    define_sequence (key_code, valcopy, MCKEY_NOACTION);
-	g_free (valcopy);
+	    g_free (valcopy);
+	}
     }
     g_free (section_name);
     return;

@@ -4,7 +4,7 @@
 
 #define UNKNCHAR '\001'
 
-#define CHARSETS_INDEX LIBDIR "mc.charsets"
+#define CHARSETS_INDEX "mc.charsets"
 
 typedef unsigned char uchar;
 
