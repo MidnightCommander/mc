@@ -225,7 +225,7 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
 		    } else if (*data == 'q') {
 			text = quote_block (quote_func, drops);
 		    } else
-		        text = expand_format (*data, !is_cd);
+		        text = expand_format (NULL, *data, !is_cd);
 		    if (!is_cd)
 		        fputs (text, cmd_file);
 		    else {

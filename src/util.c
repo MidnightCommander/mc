@@ -74,7 +74,6 @@
 #include "global.h"
 #include "x.h"
 #include "profile.h"
-#include "user.h"		/* expand_format */
 #include "main.h"		/* mc_home */
 #include "cmd.h"		/* guess_message_value */
 #include "../vfs/vfs.h"
@@ -798,30 +797,6 @@ void my_putenv (char *name, char *data)
     /* WARNING: NEVER FREE THE full VARIABLE!!!!!!!!!!!!!!!!!!!!!!!! */
     /* It is used by putenv. Freeing it will corrupt the environment */
 }
-
-#if 0
-static void my_putenv_expand (char *name, char macro_code)
-{
-    char *data;
-
-    data = expand_format (macro_code);
-    my_putenv (name, data);
-    g_free (data);
-}
-
-/* Puts some status information in to the environment so that
-   processes to be executed can access it. */
-static void prepare_environment (void)
-{
-    my_putenv_expand ("MC_CURRENT_DIR", 'd');
-    my_putenv_expand ("MC_OTHER_DIR", 'D');
-    my_putenv_expand ("MC_CURRENT_FILE", 'f');
-    my_putenv_expand ("MC_OTHER_FILE", 'F');
-    my_putenv_expand ("MC_CURRENT_TAGGED", 't');
-    my_putenv_expand ("MC_OTHER_TAGGED", 'T');
-    /* MC_CONTROL_FILE has been added to environment on startup */
-}
-#endif
 #endif /* VFS_STANDALONE */
 
 char *unix_error_string (int error_num)

@@ -9,7 +9,7 @@
 #endif
 
 void user_menu_cmd (WEdit *edit_widget);
-char *expand_format (char, int);
+char *expand_format (WEdit *edit_widget, char c, int quote);
 int check_format_view (const char *);
 int check_format_var (const char *, char **);
 int check_format_cd (const char *);

@@ -1,5 +1,10 @@
 2001-07-23  Pavel Roskin  <proski@gnu.org>
 
+	* user.c: Eliminate static variable s_editwidget.  Pass
+	edit_widget as argument.  All callers changed.
+	(expand_format): Fix expansion of %n and %b for the editor.
+	* util.c: Remove dead code.
+
 	* setup.c (load_keys_from_section): Give terminal-specific
 	settings preference over settings from [terminal:general].
 

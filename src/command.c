@@ -205,7 +205,7 @@ static int enter (WCommand *cmdline)
 	    for (i = j = 0; i < strlen (cmd); i ++){
 		if (cmd [i] == '%'){
 		    i ++;
-		    s = expand_format (cmd [i], 1);
+		    s = expand_format (NULL, cmd [i], 1);
 		    command = g_realloc (command, strlen (command) + strlen (s)
 				       + strlen (cmd) - i + 1);
 		    strcat (command, s);

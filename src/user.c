@@ -54,7 +54,6 @@
 static int debug_flag = 0;
 static int debug_error = 0;
 #endif /* !HAVE_X */
-static WEdit *s_editwidget;
 static char *menu = NULL;
 
 /* Formats defined:
@@ -178,7 +177,7 @@ strip_ext(char *ss)
     return ss;
 }
 
-char *expand_format (char c, int quote)
+char *expand_format (WEdit *edit_widget, char c, int quote)
 {
     WPanel *panel;
     char *(*quote_func)(const char *, int);
@@ -208,24 +207,33 @@ char *expand_format (char c, int quote)
     switch (c){
     case 'f': 
     case 'p': return (*quote_func) (fname, 0);
-    case 'b': return strip_ext((*quote_func) (fname, 0));
     case 'x': return (*quote_func) (extension(fname), 0);
     case 'd': return (*quote_func) (panel->cwd, 0);
     case 'i': /* indent equal number cursor position in line */
-        if (s_editwidget)
-	        return g_strnfill (s_editwidget->curs_col, ' ');
+        if (edit_widget)
+	        return g_strnfill (edit_widget->curs_col, ' ');
         break;
     case 'y': /* syntax type */
-        if (s_editwidget && s_editwidget->syntax_type)
-	        return g_strdup (s_editwidget->syntax_type);
+        if (edit_widget && edit_widget->syntax_type)
+	        return g_strdup (edit_widget->syntax_type);
         break;
     case 'e': /* error file name */
-    case 'k': /* block file name */ {
-	char *file = g_strconcat (home_dir, (c == 'e') ? ERROR_FILE : BLOCK_FILE, NULL);
-	fname = (*quote_func) (file, 0);
-	g_free (file);
-	return fname;
+    case 'b': /* block file name / strip extension */ {
+	if (edit_widget) {
+	    char *file = g_strconcat (home_dir,
+				      (c == 'e') ? ERROR_FILE : BLOCK_FILE,
+				      NULL);
+	    fname = (*quote_func) (file, 0);
+	    g_free (file);
+	    return fname;
+	} else if (c == 'e') {
+	    return strip_ext((*quote_func) (fname, 0));
+	}
     }
+    case 'n': /* strip extension in editor */
+	if (edit_widget)
+	    return strip_ext((*quote_func) (fname, 0));
+	break;
     case 'm': /* menu file name */
 	if (menu)
 	    return (*quote_func) (menu, 0);
@@ -344,7 +352,7 @@ static int test_type (WPanel *panel, char *arg)
 
 /* Calculates the truth value of the next condition starting from
    p. Returns the point after condition. */
-static char *test_condition (char *p, int *condition)
+static char *test_condition (WEdit *edit_widget, char *p, int *condition)
 {
     WPanel *panel;
     char arg [256];
@@ -366,7 +374,7 @@ static char *test_condition (char *p, int *condition)
 
 	switch (*p++){
 	case '!':
-	    p = test_condition (p, condition);
+	    p = test_condition (edit_widget, p, condition);
 	    *condition = ! *condition;
 	    p--;
 	    break;
@@ -375,10 +383,10 @@ static char *test_condition (char *p, int *condition)
 	    *condition = panel && regexp_match (arg, panel->dir.list [panel->selected].fname, match_file);
 	    break;
 	case 'y': /* syntax pattern */
-            if (s_editwidget && s_editwidget->syntax_type) {
+            if (edit_widget && edit_widget->syntax_type) {
 	        p = extract_arg (p, arg);
 	        *condition = panel &&
-                    regexp_match (arg, s_editwidget->syntax_type, match_normal);
+                    regexp_match (arg, edit_widget->syntax_type, match_normal);
 	    }
                 break;
 	case 'd':
@@ -462,7 +470,7 @@ debug_out (char *start, char *end, int cond)
 
 /* Calculates the truth value of one lineful of conditions. Returns
    the point just before the end of line. */
-static char *test_line (char *p, int *result)
+static char *test_line (WEdit *edit_widget, char *p, int *result)
 {
     int condition;
     char operator;
@@ -490,7 +498,7 @@ static char *test_line (char *p, int *result)
 	condition = 1;	/* True by default */
 
 	debug_start = p;
-	p = test_condition (p, &condition);
+	p = test_condition (edit_widget, p, &condition);
 	debug_end = p;
 	/* Add one debug statement */
 	debug_out (debug_start, debug_end, condition);
@@ -525,7 +533,7 @@ static char *test_line (char *p, int *result)
 
 /* FIXME: recode this routine on version 3.0, it could be cleaner */
 static void
-execute_menu_command (char *commands)
+execute_menu_command (WEdit *edit_widget, char *commands)
 {
     FILE *cmd_file;
     int  cmd_file_fd;
@@ -598,7 +606,7 @@ execute_menu_command (char *commands)
 	    if (*commands == '{')
 		parameter = prompt;
 	    else{
-		char *text = expand_format (*commands, do_quote);
+		char *text = expand_format (edit_widget, *commands, do_quote);
 		fputs (text, cmd_file);
 		g_free (text);
 	    }
@@ -658,7 +666,6 @@ void user_menu_cmd (WEdit *edit_widget)
     int  col, i, accept_entry = 1;
     int  selected, old_patterns;
     Listbox *listbox;
-    s_editwidget = edit_widget;
     
     if (!vfs_current_is_local ()){
 	message (1, _(" Oops... "),
@@ -716,23 +723,23 @@ void user_menu_cmd (WEdit *edit_widget)
 	    } else if (*p == '+'){
 		if (*(p+1) == '='){
 		    /* Combined adding and default */
-		    p = test_line (p, &accept_entry);
+		    p = test_line (edit_widget, p, &accept_entry);
 		    if (selected == 0 && accept_entry)
 			selected = menu_lines;
 		} else {
 		    /* A condition for adding the entry */
-		    p = test_line (p, &accept_entry);
+		    p = test_line (edit_widget, p, &accept_entry);
 		}
 	    } else if (*p == '='){
 		if (*(p+1) == '+'){
 		    /* Combined adding and default */
-		    p = test_line (p, &accept_entry);
+		    p = test_line (edit_widget, p, &accept_entry);
 		    if (selected == 0 && accept_entry)
 			selected = menu_lines;
 		} else {
 		    /* A condition for making the entry default */
 		    i = 1;
-		    p = test_line (p, &i);
+		    p = test_line (edit_widget, p, &i);
 		    if (selected == 0 && i)
 			selected = menu_lines;
 		}
@@ -780,7 +787,7 @@ void user_menu_cmd (WEdit *edit_widget)
     
     selected = run_listbox (listbox);
     if (selected >= 0)
-	execute_menu_command (entries [selected]);
+	execute_menu_command (edit_widget, entries [selected]);
 
     do_refresh ();
     }
