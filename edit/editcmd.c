@@ -618,7 +618,7 @@ void edit_delete_macro_cmd (WEdit * edit)
 {
     int command;
 
-    command = edit_raw_key_query (_ (" Delete Macro "),
+    command = edit_raw_key_query (_ (" Delete macro "),
 				  _ (" Press macro hotkey: "), 1);
 
     if (!command)
