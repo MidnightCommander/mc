@@ -1,5 +1,11 @@
 2002-12-11  Adam Byrtek  <alpha@debian.org>
 
+	* extfs/apt.in: Add 1 to the month number.  Perl localtime()
+	uses range 0..11 while extfs expects range 1..12.
+	* extfs/deba.in: Likewise.
+	* extfs/debd.in: Likewise.
+	* extfs/dpkg.in: Likewise.
+
 	* extfs/audio: Move ...
 	* extfs/audio.in: ... here.  Add CDDB support.
 	* extfs/Makefile.am: Adjust for the above.
