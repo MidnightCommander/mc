@@ -12,7 +12,7 @@ CDDB_SERVER="http://freedb.freedb.org"
 CDDB_HANDSHAKE="hello=user+localhost+mc+1.0&proto=1"
 CDDB_TIMEOUT=20 # in seconds
 
-audiofs_list ()
+audiofs_list()
 {
     DATE=`date +"%b %d %H:%M"`
     echo "-r--r--r-- 1 0 0 0 $DATE CDDB"
@@ -24,7 +24,7 @@ audiofs_list ()
     done
 }
 
-audiofs_copyout ()
+audiofs_copyout()
 {
     if [ "$2" == "CDDB" ]; then
         DISCID=`cd-discid "$1" | tr " " "+"`
@@ -32,7 +32,7 @@ audiofs_copyout ()
 	    exit 1
 	fi
         RESPONSE=`wget -q -T $CDDB_TIMEOUT -O - "$CDDB_SERVER/~cddb/cddb.cgi?cmd=cddb+query+$DISCID&$CDDB_HANDSHAKE" | tee "$3" | @AWK@ '/^200/ { print $2,$3; }'`
-	wget -q -T $CDDB_TIMEOUT -O - "$CDDB_SERVER/~cddb/cddb.cgi?cmd=cddb+read+$RESPONSE&$CDDB_HANDSHAKE" | grep -v "^#" >> $3
+	wget -q -T $CDDB_TIMEOUT -O - "$CDDB_SERVER/~cddb/cddb.cgi?cmd=cddb+read+$RESPONSE&$CDDB_HANDSHAKE" | grep -v "^#" >> "$3"
     else
         TRACK=`echo "$2" | sed 's/track-0*//' | sed 's/\.wav//'`
         cdparanoia -q -d "$1" $TRACK "$3" >/dev/null
@@ -41,9 +41,9 @@ audiofs_copyout ()
 
 if [ ! -b "$2" ]
 then
-    BASE=/dev/cdrom
+    BASE="/dev/cdrom"
 else
-    BASE=$2
+    BASE="$2"
 fi
 
 case "$1" in

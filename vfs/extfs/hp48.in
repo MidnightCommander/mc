@@ -26,13 +26,13 @@ KERMIT="kermit -l /dev/ttyS1 -b 9600"
 
 hp48_cmd()
 {
-$KERMIT -C "SET EXIT WARNING OFF,REMOTE $*,QUIT"
+$KERMIT -C "SET EXIT WARNING OFF,REMOTE $@,QUIT"
 }
 
 hp48_cd()
 {
 (echo SET EXIT WARNING OFF;echo REMOTE HOST HOME
-for HP48_DIR in `echo "$*" | tr '/' ' '`;do
+for HP48_DIR in `echo "$1" | tr '/' ' '`;do
   if [ "x$HP48_DIR" != "x." ];then echo REMOTE HOST "$HP48_DIR"; fi
 done
 echo QUIT)| $KERMIT -B >/dev/null
@@ -79,20 +79,20 @@ hp48_list()
 LC_ALL=C
 export LC_ALL
 
-case $1 in
+case "$1" in
 list) HP48_CDIR=
     hp48_cmd HOST HOME >/dev/null
     hp48_list
     exit 0;;
 copyout)
-    cd `dirname "$4"`
-    hp48_cd `dirname "$3"`
-    $KERMIT -B -g `basename "$3"` -a "$4" >/dev/null
+    cd "`dirname "$4"`"
+    hp48_cd "`dirname "$3"`"
+    $KERMIT -B -g "`basename "$3"`" -a "$4" >/dev/null
     exit 0;;
 copyin) 
-    cd `dirname "$4"`
-    hp48_cd `dirname "$3"`
-    $KERMIT -B -s "$4" -a `basename "$3"` >/dev/null
+    cd "`dirname "$4"`"
+    hp48_cd "`dirname "$3"`"
+    $KERMIT -B -s "$4" -a "`basename "$3"`" >/dev/null
     exit 0;;
 esac
 exit 1

@@ -1,5 +1,12 @@
 2004-10-18  Roland Illig  <roland.illig@gmx.de>
 
+	* extfs/audio.in: Fix even more quoting issues.
+	* extfs/hp48.in: Likewise.
+
+	Patch from q# <eth0 o2 pl>.
+
+2004-10-18  Roland Illig  <roland.illig@gmx.de>
+
 	* extfs/uar.in: Improve filename quoting. Add error messages.
 
 2004-10-17  Roland Illig  <roland.illig@gmx.de>
