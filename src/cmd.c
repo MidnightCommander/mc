@@ -475,7 +475,7 @@ void reverse_selection_cmd (void)
     paint_panel (cpanel);
 }
 
-void select_cmd (void)
+void select_cmd_panel (WPanel *panel)
 {
     char *reg_exp, *reg_exp_t;
     int i;
@@ -498,31 +498,36 @@ void select_cmd (void)
         reg_exp_t [strlen(reg_exp_t) - 1] = 0;
     }
 
-    for (i = 0; i < cpanel->count; i++){
-        if (!strcmp( cpanel->dir.list [i].fname, ".."))
+    for (i = 0; i < panel->count; i++){
+        if (!strcmp (panel->dir.list [i].fname, ".."))
             continue;
-	if (S_ISDIR (cpanel->dir.list [i].buf.st_mode)){
+	if (S_ISDIR (panel->dir.list [i].buf.st_mode)){
 	    if (!dirflag)
                 continue;
         } else {
             if (dirflag)
                 continue;
 	}
-	c = regexp_match (reg_exp_t, cpanel->dir.list [i].fname, match_file);
+	c = regexp_match (reg_exp_t, panel->dir.list [i].fname, match_file);
 	if (c == -1){
 	    message (1, " Error ", "  Malformed regular expression  ");
 	    free (reg_exp);
 	    return;
 	}
 	if (c){
-	    do_file_mark (cpanel, i, 1);
+	    do_file_mark (panel, i, 1);
 	}
     }
-    paint_panel (cpanel);
+    paint_panel (panel);
     free (reg_exp);
 }
 
-void unselect_cmd (void)
+void select_cmd (void)
+{
+	select_cmd_panel (cpanel);
+}
+
+void unselect_cmd_panel (WPanel *panel)
 {
     char *reg_exp, *reg_exp_t;
     int i;
@@ -544,28 +549,33 @@ void unselect_cmd (void)
         dirflag = 1;
         reg_exp_t [strlen(reg_exp_t) - 1] = 0;
     }
-    for (i = 0; i < cpanel->count; i++){
-        if (!strcmp( cpanel->dir.list [i].fname, "..")) 
+    for (i = 0; i < panel->count; i++){
+        if (!strcmp (panel->dir.list [i].fname, "..")) 
             continue;
-	if (S_ISDIR (cpanel->dir.list [i].buf.st_mode)){
+	if (S_ISDIR (panel->dir.list [i].buf.st_mode)){
 	    if (!dirflag)
 	        continue;
         } else {
             if (dirflag)
                 continue;
         }
-	c = regexp_match (reg_exp_t, cpanel->dir.list [i].fname, match_file);
+	c = regexp_match (reg_exp_t, panel->dir.list [i].fname, match_file);
 	if (c == -1){
 	    message (1, " Error ", "  Malformed regular expression  ");
 	    free (reg_exp);
 	    return;
 	}
 	if (c){
-	    do_file_mark (cpanel, i, 0);
+	    do_file_mark (panel, i, 0);
 	}
     }
-    paint_panel (cpanel);
+    paint_panel (panel);
     free (reg_exp);
+}
+
+void unselect_cmd (void)
+{
+	unselect_cmd_panel (cpanel);
 }
 
 /* Check if the file exists */

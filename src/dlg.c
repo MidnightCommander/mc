@@ -631,8 +631,11 @@ void dlg_key_event (Dlg_head *h, int d_key)
     int handled;
     
     /* TAB used to cycle */
-    if (!h->raw && d_key == '\t')
-	dlg_one_down (h);
+    if (!h->raw && (d_key == '\t' || d_key == KEY_BACKTAB))
+	if (d_key == '\t')
+	    dlg_one_down (h);
+        else
+	    dlg_one_up (h);
     else {
 	
 	/* first can dlg_callback handle the key */

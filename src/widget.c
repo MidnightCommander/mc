@@ -62,6 +62,10 @@
 #   define x_destroy_cmd(w)
 #endif
 
+#ifndef HAVE_GNOME
+#   define x_radio_focus_item(r)
+#endif
+
 static int button_event (Gpm_Event *event, WButton *b);
 
 int quote = 0;
@@ -152,7 +156,11 @@ button_callback (Dlg_head *h, WButton *b, int Msg, int Par)
 	    widget_move (&b->widget, 0, b->hotpos+off);
 	    addch (b->text [b->hotpos]);
         }
-	return 1;	                                      
+	if (Msg == WIDGET_FOCUS)
+	    break;
+	else
+	    return 1;
+	break;
 #endif	
 #endif /* !HAVE_XVIEW */
     }	
@@ -302,6 +310,7 @@ radio_callback (Dlg_head *h, WRadio *r, int Msg, int Par)
 	case KEY_LEFT:
 	    if (r->pos > 0){
 		r->pos--;
+		x_radio_focus_item (r);
 		return 1;
 	    }
 	    return 0;
@@ -310,21 +319,17 @@ radio_callback (Dlg_head *h, WRadio *r, int Msg, int Par)
 	case KEY_RIGHT:
 	    if (r->count - 1 > r->pos) {
 		r->pos++;
+		x_radio_focus_item (r);
 		return 1;
 	    }
 	}
 	return 0;
-	
-#ifdef HAVE_TK
-	/* We manage a group of widgets, while Tk manages independent
-	 * ones, so we have to do the focusing manually
-	 */
+
+#ifdef HAVE_X
     case WIDGET_FOCUS:
     case WIDGET_CURSOR:
-	tk_evalf ("focus %s.%d", (char *)(r->widget.wdata)+1, r->pos);
-	/* Do not call default_proc: we did the tk focus command */
-	return 1;
-
+	    x_radio_focus_item (r);
+	    return 1;
 #endif
 #endif
 	

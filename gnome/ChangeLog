@@ -1,3 +1,19 @@
+Tue Mar 10 23:46:29 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* glayout.c 
+
+	* gscreen.c (x_adjust_top_file): We no longer adjust the top
+	displayed filename.
+	
+	(panel_build_selected_file_list): Fix for the transfered data.
+	
+	(panel_drop_data_available): Now drop support uses the new
+	coords.x and coords.y fields from the DropDataAvailableEvent to
+	find out which directory receives the drop.
+
+	* glayout.c: added: configure_box, configure_vfs
+	(get_other_type): Return the correct value.
+	
 1998-03-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gscreen.c (panel_file_list_size_allocate_hook): Now we
@@ -17,17 +33,6 @@
 	* gwidget.c (x_create_input): Cast entry to GTK_OBJECT.
 
 	* gkey.c (find_select_closure_callback): Fix = -> == typo.
-
-Tue Mar 10 14:01:47 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
-
-	* gscreen.c (x_adjust_top_file): We no longer adjust the top
-	displayed filename.
-	
-	(panel_build_selected_file_list): Fix for the transfered data.
-	
-	(panel_drop_data_available): Now drop support uses the new
-	coords.x and coords.y fields from the DropDataAvailableEvent to
-	find out which directory receives the drop.
 
 Tue Mar 10 00:10:32 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 

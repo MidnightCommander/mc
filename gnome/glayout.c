@@ -1,3 +1,4 @@
+#include <config.h>
 #include "x.h"
 #include <stdio.h>
 #include <sys/stat.h>
@@ -6,6 +7,7 @@
 #include "gscreen.h"
 #include "main.h"
 #include "cmd.h"
+#include "boxes.h"
 
 #define UNDEFINED_INDEX -1
 
@@ -123,8 +125,7 @@ get_current_type (void)
 int
 get_other_type (void)
 {
-    /* FIXME: This is returning CURRENT panel */
-    return view_nothing;
+	return other_panel_ptr ? view_listing : view_nothing;
 }
 
 int
@@ -165,7 +166,7 @@ gnome_listing_cmd (GtkWidget *widget, WPanel *panel)
 	int   view_type, use_msformat;
 	char  *user, *status;
 	
-	view_type = display_box (panel, &user, &status, &use_msformat, index);
+	view_type = display_box (panel, &user, &status, &use_msformat, get_current_index ());
 	
 	if (view_type == -1)
 		return;
@@ -179,15 +180,19 @@ GnomeUIInfo gnome_panel_filemenu [] = {
 	{ GNOME_APP_UI_ITEM, "Network link...", NULL, netlink_cmd },
 	{ GNOME_APP_UI_ITEM, "FTP link...",     NULL, ftplink_cmd },
 	{ GNOME_APP_UI_ITEM, "Display mode...", NULL, gnome_listing_cmd },
-	{ GNOME_APP_UI_ITEM, "Sort order...",   NULL, NULL },
-	{ GNOME_APP_UI_ITEM, "Filter...",       NULL, NULL },
-	{ GNOME_APP_UI_ITEM, "Rescan",          NULL, NULL },
+	{ GNOME_APP_UI_ITEM, "Sort order...",   NULL, sort_cmd },
+	{ GNOME_APP_UI_ITEM, "Filter...",       NULL, filter_cmd },
+	{ GNOME_APP_UI_ITEM, "Rescan",          NULL, reread_cmd },
 	{ GNOME_APP_UI_ITEM, "Find",            NULL, find_cmd },
 	{ GNOME_APP_UI_ITEM, "Hotlist",         NULL, quick_chdir_cmd },
 #ifdef USE_VFS
 	{ GNOME_APP_UI_ITEM, "Active VFS",      NULL, reselect_vfs },
 #endif
+	{ GNOME_APP_UI_ITEM, "Confirmation",    NULL, confirm_box },
 	{ GNOME_APP_UI_ITEM, "Options",         NULL, configure_box },
+	{ GNOME_APP_UI_ITEM, "Virtual FS",      NULL, configure_vfs },
+	{ GNOME_APP_UI_ITEM, "Save setup",      NULL, save_setup_cmd },
+	{ GNOME_APP_UI_ITEM, "Mkdir",           NULL, mkdir_cmd },
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 

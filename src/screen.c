@@ -112,6 +112,18 @@ int panel_event (Gpm_Event *event, WPanel *panel);
 #define llines(p) (p->widget.lines)
 #endif
 
+#ifdef PORT_NOT_FOCUS_SELECT_ITEM
+#   define focus_select_item(x)
+#else
+#   define focus_select_item(x) select_item(x)
+#endif
+
+#ifdef PORT_NOT_UNFOCUS_UNSELECT_ITEM
+#    define unfocus_unselect_item(x)
+#else
+#    define unfocus_unselect_item(x) unselect_item(x)
+#endif
+
 #ifdef HAVE_X
 #   define set_colors(x)
 #else
@@ -2042,6 +2054,15 @@ static key_map panel_keymap [] = {
     { XCTRL('t'), mark_file },
     { ALT('o'),   chdir_other_panel },
     { ALT('l'),   chdir_to_readlink },
+    
+#ifdef HAVE_GNOME
+    { '+',        select_cmd },
+    { '\\',       unselect_cmd },
+    { '-',        unselect_cmd },
+    { XCTRL('r'), reread_cmd },
+    { ALT('o'),   view_other_cmd },
+#endif
+    
 #ifndef HAVE_X
     { KEY_DC,     delete_cmd},
 #endif
@@ -2135,7 +2156,7 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
 	    subshell_chdir (panel->cwd);
 	    
 	show_dir (panel);
-	select_item (panel);
+	focus_select_item (panel);
 #ifndef HAVE_X	
 	define_label (h, (Widget *)panel, 1, "Help", help_cmd);
 	define_label (h, (Widget *)panel, 2, "Menu", user_menu_cmd);
@@ -2157,7 +2178,7 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
 	}
 #ifdef HAVE_X	
 	show_dir (panel);
-	unselect_item (panel);
+	unfocus_unselect_item (panel);
 	panel->active = 0;
 #else
 	panel->active = 0;

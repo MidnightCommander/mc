@@ -155,6 +155,12 @@ tk_radio_callback (ClientData cd, Tcl_Interp *interp, int argc, char *argv [])
     return TCL_OK;
 }
 
+void
+x_radio_focus_item (WRadio *r)
+{
+    tk_evalf ("focus %s.%d", (char *)(r->widget.wdata)+1, r->pos);
+}
+
 int
 x_create_radio (Dlg_head *h, widget_data parent, WRadio *r)
 {

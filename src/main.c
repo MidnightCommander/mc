@@ -1068,7 +1068,7 @@ set_sort_to (WPanel *p, sortfn *sort_order)
     do_re_sort (p);
 }
 
-static void
+void
 sort_cmd (void)
 {
     WPanel  *p;

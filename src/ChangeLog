@@ -1,3 +1,14 @@
+Tue Mar 10 20:41:45 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* cmd.c (unselect_cmd_panel, select_cmd_panel): To avoid races on
+	the X11 version, these routines now take a panel argument at
+	invocation time. 
+
+	* widget.c (radio_callback): Call x_radio_focus for FOCUS/UNFOCUS
+	events. 
+	(button_callback): Fallback to default_msg on WIDGET_FOCUS
+	messages. 
+
 1998-03-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* xslint.c (getch): Added missing "return".

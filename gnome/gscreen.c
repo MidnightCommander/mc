@@ -331,6 +331,7 @@ static struct {
 	{ "Copy...",         (context_menu_callback) copy_cmd },
 	{ "Rename/move..",   (context_menu_callback) ren_cmd },
 	{ "Delete...",       (context_menu_callback) delete_cmd },
+	{ "Link...",         (context_menu_callback) link_cmd },
 	{ NULL, NULL },
 };
 	
@@ -448,6 +449,7 @@ internal_select_item (GtkWidget *file_list, WPanel *panel, int row)
 {
 	unselect_item (panel);
 	panel->selected = row;
+
 	gtk_signal_handler_block_by_data (GTK_OBJECT (file_list), panel);
 	printf ("Selecttionando\n");
 	select_item (panel);
@@ -786,7 +788,6 @@ panel_create_file_list (WPanel *panel)
 	gtk_signal_connect_after (GTK_OBJECT (file_list), "size_allocate",
 				  GTK_SIGNAL_FUNC (panel_file_list_size_allocate_hook),
 				  panel);
-
 	gtk_signal_connect (GTK_OBJECT (file_list), "realize",
 			    GTK_SIGNAL_FUNC (panel_realized),
 			    panel);
