@@ -29,8 +29,7 @@ NONETFILES = 			\
 	names.o			\
 	tar.o			\
 	sfs.o			\
-	vfs.o			\
-	@undelfs_o@
+	vfs.o @undelfs_o@
 
 VFSSRCS = \
 	container.c 		\
