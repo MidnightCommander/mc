@@ -1,3 +1,7 @@
+2004-08-26  Roland Illig  <roland.illig@gmx.de>
+
+	* vfs.c (mc_chdir): Fixed memory leak.
+
 2004-08-22  Leonard den Ottolander  <leonard * den ottolander nl>
 
 	* vfs/extfs/a.in: Quote parameters to calls to system/open that spawn

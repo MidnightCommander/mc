@@ -678,8 +678,10 @@ mc_chdir (const char *path)
 
     new_dir = vfs_canon (path);
     new_vfs = vfs_get_class (new_dir);
-    if (!new_vfs->chdir)
+    if (!new_vfs->chdir) {
+    	g_free (new_dir);
 	return -1;
+    }
 
     result = (*new_vfs->chdir) (new_vfs, new_dir);
 
