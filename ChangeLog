@@ -1,5 +1,9 @@
 2001-07-10  Pavel Roskin  <proski@gnu.org>
 
+	* edit/edit_key_translator.c (cooledit_key_map): Bind
+	Ctrl-Shift-Up and Ctrl-Shift-Down to scroll with highlight.
+	From Steef Boerrigter <sxmboer@sci.kun.nl>
+
 	* edit/Makefile.in: Make edit.o depend on edit_key_translator.c.
 	* edit/edit_key_translator.c (cooledit_key_map): Add support
 	for bracket matching on Alt-B.

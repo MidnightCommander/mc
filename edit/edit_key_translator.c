@@ -201,6 +201,12 @@
 	case KEY_RIGHT:
 	    command = CK_Word_Right_Highlight;
 	    goto fin;
+	case KEY_UP:
+	    command = CK_Scroll_Up_Highlight;
+	    goto fin;
+	case KEY_DOWN:
+	    command = CK_Scroll_Down_Highlight;
+	    goto fin;
 	}
     }
     if ((x_state & SHIFT_PRESSED) && !(x_state & CONTROL_PRESSED)) {
