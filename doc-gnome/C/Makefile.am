@@ -8,7 +8,7 @@ noinst_SCRIPTS = mkhtml
 
 SGML_FILES = gmc.sgml
 
-EXTRA_DIST = topic.dat $(SGML_FILES)
+EXTRA_DIST = topic.dat genindex.sgml $(SGML_FILES) $(noinst_SCRIPTS)
 
 MOSTLYCLEANFILES = *.tex *.log *.aux
 CLEANFILES = gmc.dvi gmc.ps gmc.pdf gmc.rtf
@@ -32,29 +32,13 @@ dvi-local: gmc.dvi
 
 # "make distcheck" (automake-1.4a) requires that *.dvi are created in
 # the build directory, since the source directory is read-only.
-# However, db2dvi (docbook-3.1) doesn't allow redirecting the output.
-# So let's copy gmc.sgml to a temp directory. Now *.dvi goes to ".",
-# but *.rtf remains in "tmp", so let's try to copy it from "tmp" -
-# maybe future versions of docbook will be more consistent.
 gmc.dvi: $(srcdir)/gmc.sgml
-	mkdir tmpdvi
-	cp -f $(srcdir)/gmc.sgml tmpdvi
-	db2dvi tmpdvi/gmc.sgml
-	if test -f tmpdvi/gmc.dvi; then \
-	  mv -f tmpdvi/gmc.dvi gmc.dvi; \
-	else :; fi
-	rm -rf tmpdvi
+	(cd figs && $(MAKE) eps)
+	db2dvi $(srcdir)/gmc.sgml
 
 gmc.rtf: $(srcdir)/gmc.sgml
-	mkdir tmprtf
-	cp -f $(srcdir)/gmc.sgml tmprtf
-	db2rtf tmprtf/gmc.sgml
-	if test -f tmprtf/gmc.rtf; then \
-	  mv -f tmprtf/gmc.rtf gmc.rtf; \
-	else :; fi
-	rm -rf tmprtf
+	db2rtf $(srcdir)/gmc.sgml
 
-# FIXME: for gmc.ps and gmc.pdf we also need to convert *.png to *.eps
 gmc.ps: gmc.dvi
 	dvips gmc.dvi -o gmc.ps
 

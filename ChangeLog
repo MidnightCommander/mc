@@ -1,5 +1,11 @@
 2001-05-20  Pavel Roskin  <proski@gnu.org>
 
+	* doc-gnome/C/Makefile.am: Distribute mkhtml and genindex.sgml.
+	Create figs/*.eps if needed. Simplify rules for gmc.dvi and
+	gmc.rtf - DocBook 4.1 doesn't try to write to $(srcdir).
+	* doc-gnome/C/figs/Makefile.am: Add support for converting from
+	PNG to EPS.
+
 	* Makefile.am (EXTRA_DIST): Remove create_vcs.
 	* doc/FILES: Likewise. Typo fix.
 

@@ -17,3 +17,18 @@ DISTFIGS = \
 	rubberband.png
 
 EXTRA_DIST = $(DISTFIGS)
+
+CLEANFILES = *.eps
+
+SUFFIXES = .png .eps
+
+CONVERT = convert
+CONVERT_FLAGS = -geometry 50%x50%
+
+.png.eps:
+	$(CONVERT) $(CONVERT_FLAGS) $< $@
+
+eps:
+	for fig in $(DISTFIGS); do \
+	  $(MAKE) `echo $$fig | sed 's/\.png$$/.eps/'` || exit 1; \
+	done
