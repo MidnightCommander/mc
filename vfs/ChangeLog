@@ -1,3 +1,16 @@
+Sun Jan 31 20:51:17 1999  Alexander Savelyev <fano@vcom.kiev.ua>
+
+	* mcserv.c (do_auth): mcserv never auth properly on bsdi.
+	(mc/vfs/mcserv.c do_auth() on bsdi we must use setuid() not
+	setreuid()).
+
+	* tcputil.c: use correct signal handler (void func(int)) on BSDI
+
+Sun Jan 31 20:41:00 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* mcserv.c (do_link): Removed duplicate invokation of link. Thanks 
+	to Grzegorz Makarewicz <mak@mikroplan.com.pl> for spotting this.
+	
 Sun Jan 31 20:04:13 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* vfs.c (vfs_strip_suffix_from_filename): Whoever replaces every 

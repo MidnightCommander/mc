@@ -581,7 +581,7 @@ void do_link (void)
     
     rpc_get (msock, RPC_STRING, &f1, RPC_STRING, &f2, RPC_END);
     status = link (f1, f2);
-    send_status (link (f1, f2), errno);
+    send_status (status, errno);
     g_free (f1); g_free (f2);
 }
 
@@ -912,7 +912,7 @@ do_auth (char *username, char *password)
 #endif
 #endif    
 
-#ifndef BSD
+#if !defined(BSD) || defined(__bsdi__)
     if (setuid (this->pw_uid))
 #else
     if (setreuid (this->pw_uid, this->pw_uid))

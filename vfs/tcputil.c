@@ -239,8 +239,8 @@ void rpc_add_get_callback (int sock, void (*cback)(int))
     sock_callbacks = new;
 }
 
-#if defined(IS_AIX) || defined(linux) || defined(SCO_FLAVOR) || defined(__QNX__) \
-    || defined(__FreeBSD__)
+#if defined(IS_AIX) || defined(linux) || defined(SCO_FLAVOR) \
+    || defined(__QNX__) || defined(__FreeBSD__) || defined(__bsdi__)
 static void sig_pipe (int unused)
 #else
 static void sig_pipe (void)
