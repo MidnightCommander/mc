@@ -850,7 +850,6 @@ load_transparent_image (char *base)
 	char *f = concat_dir_and_file (ICONDIR, base);
 	GtkWidget *w;
 
-	printf ("Loading: %s\n", f);
 	w = make_transparent_window (f);
 	g_free (f);
 	return w;
