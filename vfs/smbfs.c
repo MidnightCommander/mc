@@ -295,7 +295,7 @@ smbfs_init (struct vfs_class * me)
     if (!get_myname (myhostname, NULL))
 	DEBUG (0, ("Failed to get my hostname.\n"));
 
-    if (!lp_load (servicesf, True, False, False))
+    if (!lp_load (const_cast(char *, servicesf), True, False, False))
 	DEBUG (0, ("Cannot load %s - run testparm to debug it\n", servicesf));
 
     codepage_initialise (lp_client_code_page ());
