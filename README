@@ -1,5 +1,3 @@
--*-Text-*-
-
 Contents:
 ---------
   Requirements
@@ -13,7 +11,7 @@ Contents:
   Reporting problems.
 
 This version of the Midnight Commander comes with two interfaces: a
-graphical one for the GNOME desktop (http://www.gnome.org) and a text
+graphical one for the GNOME desktop (http://www.gnome.org/) and a text
 mode interface (the same old user interface we have had for a long
 time). 
 
@@ -25,7 +23,7 @@ Requirements
 ------------
 
 To compile the GNU Midnight Commander you need at least to have a copy
-of the glib library, this library is available in ftp://ftp.gtk.org/pub/gtk.
+of the GLib library, available at ftp://ftp.gtk.org/pub/gtk/.
 
 GNOME edition requirements
 --------------------------
@@ -33,26 +31,25 @@ GNOME edition requirements
 Optionally, if you want to compile the GNOME edition, you need to
 install the GNOME libraries and its dependencies.
 
-The GNOME libraries are available in:
+The GNOME libraries are available at
 
-    ftp://ftp.gnome.org/pub/GNOME/sources/gnome-libs
-
+ftp://ftp.gnome.org/pub/GNOME/stable/sources/gnome-libs/
 
 Features
 --------
 
 This is version 4 of the Midnight Commander, a free Norton Commander
-Clone with many useful features. The Midnight Commander comes with
+clone with many useful features. The Midnight Commander comes with
 mouse support on xterms and optionally on the Linux console.
 
 The Midnight Commander is a directory browsing tool which bears a
 certain remote resemblance to John Socha's Norton Commander for DOS.
 It is feature packed:
 
-	o Built in Virtual File System: manipulate remote files
-	  systems through the FTP protocol or Midnight Commander's own
-	  mcfs protocol.  Browse tar, compressed tar files, RPM, zip,
-	  cpio, lha and rar files with a single click.
+	o Built in Virtual File System: manipulate remote file systems
+          through the FTP protocol or Midnight Commander's own mcfs
+          protocol.  Browse tar, compressed tar, RPM, zip, cpio, lha and
+          rar files with a single click.
 
 	o All of the Midnight Commander operations work with the
 	  virtual file system, enabling you to do complex tasks.
@@ -80,8 +77,7 @@ It is feature packed:
 	  tcsh and zsh to provide you with all of the facilities
 	  available in your shell.
 
-	o Find file command can now search inside the contents of
-	  files.
+	o Find file command can now search for the file contents.
 
 	o Background operations allows you to copy or move files from
 	  any virtual file system while you do other tasks (i.e., you
@@ -89,11 +85,10 @@ It is feature packed:
 
 	o Proxy support with our ftpfs.
 
-	o Linux file recovery: If you are using Linux system, you can
-	  recover deleted files from an ext2fs partition with the
-	  undelete file system.  This is a low level file recovery
-	  function that will recover files deleted by any program in
-	  Linux.
+	o Linux file recovery: If you are using Linux, you can recover
+	  deleted files from an ext2fs partition with the undelete file
+	  system.  This is a low level file recovery function that will
+	  recover files deleted by any program on Linux.
 
 	  Please note that the undelete file system can only recover
 	  12 file system blocks if the file was deleted with a kernel
@@ -163,7 +158,7 @@ o Tab changes the current panel.
 o All input lines have emacs-like key-bindings (command history is
   accessed through the M-p and M-n keys).
 
-o The panels accept C-n, C-p for browsing the panel (like in emacs).
+o The panels accept C-n, C-p for browsing the panel (like in Emacs).
 
 o M-Enter copies the currently selected file name to the input line.
 
@@ -184,20 +179,16 @@ although it's not as nice as the groff printed manual page :-)
 Where you may obtain the Midnight Commander
 -------------------------------------------
 
-You can download the latest version of the Midnight Commander by
-anonymous FTP at ftp.gnome.org in the directory /pub/GNOME/sources/mc.  
-Please note that this is a very busy site; use a mirror if possible.
+You can download the latest version of the Midnight Commander at
 
-European mirrors of both version 3.1 and alpha versions are available
-at sunsite.mff.cuni.cz in the directory /GNU/mc and at ftp.teuto.de in
-the directory /lmb/mc.
+ftp://ftp.gnome.org/pub/GNOME/stable/sources/mc/
 
 
 Reporting problems
 ------------------
 
-Please, send a detailed description of your problem to the
-mc-devel@gnome.org address.
+Please, send a detailed description of your problem to
+mc-devel@gnome.org.
 
 Include the version of the program, the operating system that you are
 using, the compiler and compiler flags used to compile the program (if
