@@ -2824,8 +2824,8 @@ akarod készíteni a következõ parancsot használd:
 nincs erre szükséged, mert a Midnight Commander 
 automatikusan frissíti ezt.
 
-Helyi felhasználó által definiált menü. Ha ez a fájl
-létezik, ezt használja a home, vagy rendszerszintû
+./.mc.menu Helyi felhasználó által definiált menü. Ha ez a
+fájl létezik, ezt használja a home, vagy rendszerszintû
 alkalmazás menü helyett.
 
 [AVAILABILITY]
