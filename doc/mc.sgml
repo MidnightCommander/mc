@@ -2323,7 +2323,8 @@ menusel, menuhot, menuhotsel, gauge; the dialog colors
 are: dnormal, dfocus, dhotnormal, dhotfocus;  Help colors
 are: helpnormal, helpitalic, helpbold, helplink,
 helpslink;  Viewer color is: viewunderline; Special highlighting mode: 
-executable, directory, link, device, special.
+executable, directory, link, device, special; Editor colors
+are: editnormal, editbold, editmarked.
 
 The dialog boxes use the following colors: <em/dnormal/ is
 used for the normal text, <em/dfocus/ is the color used for the
