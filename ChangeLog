@@ -1,5 +1,8 @@
 2001-03-02  Pavel Roskin  <proski@gnu.org>
 
+	* aclocal.m4 (MC_HPUX_PROG_CC_STDC): Remove, it's obsolete.
+	* configure.in: Use AC_PROG_CC_STDC instead.
+
 	* lib/mc.ext.in: Recognize files ending by `.lslR' and `.ls-lR'.
 	Suggested by Christian Gennerat.
 
