@@ -1,6 +1,6 @@
 SUBDIRS = es hu it pl ru
 
-if MCSERV_INSTALL
+if USE_MCFS
 man_MANS = mc.1 mcedit.1 mcserv.8
 else
 man_MANS = mc.1 mcedit.1

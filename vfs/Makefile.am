@@ -92,12 +92,8 @@ else
 libvfs_mc_a_SOURCES = $(NONETFILES)
 endif
 
-if MCSERV_INSTALL
+if USE_MCFS
 sbin_PROGRAMS = mcserv
-else
-if USE_VFS
-noinst_PROGRAMS = mcserv
-endif
 endif
 
 mcserv_SOURCES = mcserv.c tcputil.c

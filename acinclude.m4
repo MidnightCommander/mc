@@ -98,7 +98,8 @@ AC_DEFUN([MC_WITH_VFS],[
 	[  --with-mcfs              Support mc-specific networking file system [[no]]],
 	[if test "x$withval" != "xno"; then
 	    AC_DEFINE(WITH_MCFS, 1, [Define to enable mc-specific networking file system])
-            vfs_flags="$vfs_flags, mcfs"
+	    vfs_flags="$vfs_flags, mcfs"
+	    use_mcfs=yes
 	fi]
       )
       vfs_flags="$vfs_flags, ftpfs, fish"

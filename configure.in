@@ -245,15 +245,8 @@ have to use that instead of gettimeofday])])
 
 MC_VFS_CHECKS
 
-dnl
-dnl Install mcserv only if explicitly enabled
-dnl
-AC_ARG_ENABLE([mcserv-install],
-	      [  --enable-mcserv-install  Install mcserv - Midnight Commander file server [[no]]])
-
 vfs_type="normal"
-if test $use_vfs = yes
-then
+if test x$use_vfs = xyes; then
 	AC_MSG_NOTICE([enabling VFS code])
 	vfs_type="Midnight Commander Virtual File System"
 fi
@@ -666,8 +659,7 @@ AM_CONDITIONAL(USE_VFS, [test "x$use_vfs" = xyes])
 AM_CONDITIONAL(USE_VFS_NET, [test x"$use_net_code" = xtrue])
 AM_CONDITIONAL(USE_UNDEL_FS, [test -n "$undelfs_o"])
 AM_CONDITIONAL(USE_SAMBA_FS, [test -n "$SAMBAFILES"])
-AM_CONDITIONAL(MCSERV_INSTALL,
-	       [test "x$enable_mcserv_install$mcserv" = xyesmcserv])
+AM_CONDITIONAL(USE_MCFS, [test -n "$use_mcfs"])
 AM_CONDITIONAL(INCLUDED_SLANG,
 	       [test "x$slang_use_system_installed_lib" = xfalse])
 AM_CONDITIONAL(CHARSET, [test -n "$have_charset"])

@@ -103,6 +103,8 @@ the directory base where you installed the gpm package.
 
 `--with-hsc'
      Compiles support for HSC firewall into the ftp virtual file system.
+     Use this option with caution - it disables support for normal FTP
+     proxies.
 
 `--with-mmap', `--without-mmap'
      Force using or not using the mmap function.  It is currently used
@@ -129,6 +131,13 @@ the directory base where you installed the gpm package.
      file access.  If you specify this option you will not get the
      transparent tar File system manipulation as well nor the
      networked Midnight Commander file system.
+
+`--with-mcfs'
+     This option enables mcfs - a non-standard remote filesystem
+     designed specifically for the Midnight Commander.  It also enables
+     a server for that filesystem, mcserv.  Please note that the
+     implementation of mcfs is not optimized for speed.  There may be
+     security issues with mcserv - don't run it if you don't need it.
 
 `--disable-largefile'
      This option disables support for large files (2 gigabytes and more)
