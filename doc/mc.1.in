@@ -1490,10 +1490,10 @@ the Midnight Commander.
 .PP
 The
 .\"LINK2"
-Display bits
-.\"Display bits"
-command pops up a dialog from which you may select which characters is your
-terminal able to display.
+Layout
+.\"Layout"
+command pops up a dialog from which you specify a bunch of options how mc
+looks like on the screen.
 .PP
 The
 .\"LINK2"
@@ -1501,6 +1501,13 @@ Confirmation
 .\"Confirmation"
 command pops up a dialog from which you specify which actions you want to
 confirm.
+.PP
+The
+.\"LINK2"
+Display bits
+.\"Display bits"
+command pops up a dialog from which you may select which characters is your
+terminal able to display.
 .PP
 The
 .\"LINK2"
@@ -1514,13 +1521,6 @@ The
 Virtual FS
 .\"Virtual FS"
 command pops up a dialog from which you specify some VFS related options.
-.PP
-The
-.\"LINK2"
-Layout
-.\"Layout"
-command pops up a dialog from which you specify a bunch of options how mc
-looks like on the screen.
 .PP
 The
 .\"LINK2"

@@ -1508,10 +1508,10 @@ Midnight Commander.
 .PP
 El comando
 .\"LINK2"
-bits de despliegue
-.\"Display bits"
-sobreimpresiona un diálogo desde el que podemos seleccionar qué caracteres es
-capaz de visualizar nuestro terminal.
+Disposición
+.\"Layout"
+Sobreimpresiona un diálogo desde el cual podemos especificar unas cuantas opciones de cómo mc
+se presenta en pantalla.
 .PP
 El comando
 .\"LINK2"
@@ -1519,6 +1519,13 @@ Confirmación
 .\"Confirmation"
 Sobreimpresiona un diálogo desde el cual podemos especificar que acciones queremos
 confirmadas antes de ser realizadas.
+.PP
+El comando
+.\"LINK2"
+bits de despliegue
+.\"Display bits"
+sobreimpresiona un diálogo desde el que podemos seleccionar qué caracteres es
+capaz de visualizar nuestro terminal.
 .PP
 El comando
 .\"LINK2"
@@ -1533,13 +1540,6 @@ Opciones del VFS
 .\"Virtual FS"
 Sobreimpresiona un diálogo desde el cual podemos especificar algunas opciones relacionadas
 con VFS (Sistema de Ficheros Virtual).
-.PP
-El comando
-.\"LINK2"
-Disposición
-.\"Layout"
-Sobreimpresiona un diálogo desde el cual podemos especificar unas cuantas opciones de cómo mc
-se presenta en pantalla.
 .PP
 El comando
 .\"LINK2"
