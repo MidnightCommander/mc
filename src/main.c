@@ -1856,7 +1856,7 @@ print_mc_usage (poptContext ctx, FILE *stream)
 	   ("\n"
 	    "Please send any bug reports (including the output of `mc -V')\n"
 	    "to mc-devel@gnome.org\n"), stream);
-    version (0);
+    show_version (0);
 }
 
 static void
@@ -1888,7 +1888,7 @@ process_args (poptContext ctx, int c, const char *option_arg)
 {
     switch (c) {
     case 'V':
-	version (1);
+	show_version (1);
 	exit (0);
 	break;
 

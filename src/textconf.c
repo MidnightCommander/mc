@@ -109,7 +109,7 @@ static const char *const features[] = {
 };
 
 void
-version (int verbose)
+show_version (int verbose)
 {
     int i;
 
