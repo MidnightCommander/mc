@@ -881,7 +881,7 @@ task_cb (int action, void *ignored)
 	sig   = SIGCONT;
 	tl->state = Task_Running;
     } else if (action == B_KILL){
-	sig = SIGINT;
+	sig = SIGKILL;
     }
     
     if (sig == SIGINT)

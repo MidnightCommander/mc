@@ -85,11 +85,11 @@ realclean: clean
 # and cleaning source links.
 distclean:
 	rm -f $(srcdir)/*~ $(srcdir)/config.cache $(srcdir)/config.h
-	rm -f $(srcdir)/config.log $(srcdir)/config.status 
 	rm -f $(srcdir)/mcfn_install
 	@for I in $(alldirs); do cd $$I; $(MAKE) $@ || exit 1; cd ..; done
 	rm -f $(srcdir)/Makefile $(srcdir)/Make.common
 	rm -f lib/mc.ext mcfn_install vfs/extfs/ftplist vfs/extfs/zip vfs/extfs/zoo vfs/extfs/lslR vfs/extfs/lha vfs/extfs/cpio vfs/extfs/deb vfs/extfs/rar
+	rm -f $(srcdir)/config.log $(srcdir)/config.status 
 
 distdirs:
 	mkdir ../mc-$(VERSION); \
