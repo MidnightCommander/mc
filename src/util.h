@@ -155,6 +155,7 @@ enum {
 
 long int is_gunzipable (int fd, int *type);
 char *decompress_command (int type);
+char *decompress_extension (int type);
 void decompress_command_and_arg (int type, char **cmd, char **flags);
 
 int mc_doublepopen (int inhandle, int inlen, pid_t *tp, char *command, ...);
