@@ -7,7 +7,7 @@
 #include "file.h"
 #include "filegui.h"
 #include "fileopctx.h"
-#include "regex.h"
+#include "eregex.h"
 #include "../vfs/vfs.h"
 
 enum {

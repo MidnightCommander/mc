@@ -953,7 +953,7 @@ remove_directory (char *path)
 		
 		if (know_not_what_am_i_doing)
 			query_set_sel (1);
-		buffer = copy_strings (_("Do you want to delete "), path, "?", NULL);
+		buffer = g_strconcat (_("Do you want to delete "), path, "?", NULL);
 		i = query_dialog (_("Delete"), buffer,
 				  D_ERROR, 2, _("&Yes"), _("&No"));
 		g_free (buffer);
@@ -1655,7 +1655,7 @@ desktop_setup_icon (char *filename, char *full_pathname, GdkPoint **desired_posi
 		} else {
 			char *desktop_version;
 			
-			desktop_version = copy_strings (full_pathname, ".desktop", NULL);
+			desktop_version = g_strconcat (full_pathname, ".desktop", NULL);
 			if (!exist_file (desktop_version) && !desktop_pathname_loaded (full_pathname))
 				desktop_create_launch_entry (desktop_version, full_pathname, filename, desired_position);
 			g_free (desktop_version);
