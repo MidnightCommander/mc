@@ -1,3 +1,8 @@
+2000-09-30  Pavel Roskin  <proski@gnu.org>
+
+	* libgettext.h: Removed, shouldn't be here.
+	* Makefile.in: Adjusted to remove libgettext.h
+
 2000-09-15  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* editcmd.c (edit_delete_macro, edit_(load|save)_macro_cmd): don't
