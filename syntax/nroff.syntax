@@ -201,29 +201,29 @@ context default
     keyword whole linestart .l cyan
     keyword whole linestart .i cyan
 
-context exclusive linestart .SH \n brightred
-    keyword \\fB*\\fP magenta
-    keyword \\fI*\\fP yellow
+context exclusive linestart .SH \n white
+    keyword \\fB*\\fP yellow
+    keyword \\fI*\\fP brightred
     spellcheck
-context exclusive linestart .TH \n brightred
-    keyword \\fB*\\fP magenta
-    keyword \\fI*\\fP yellow
+context exclusive linestart .TH \n white
+    keyword \\fB*\\fP yellow
+    keyword \\fI*\\fP brightred
     spellcheck
-context exclusive linestart .B \n magenta
-    keyword \\fI*\\fP yellow
+context exclusive linestart .B \n yellow
+    keyword \\fI*\\fP brightred
     spellcheck
-context exclusive linestart .I \n yellow
-    keyword \\fB*\\fP magenta
+context exclusive linestart .I \n brightred
+    keyword \\fB*\\fP yellow
     spellcheck
 context exclusive whole linestart .nf linestart .fi green
-    keyword \\fB*\\fP magenta
-    keyword \\fI*\\fP yellow
+    keyword \\fB*\\fP yellow
+    keyword \\fI*\\fP brightred
     spellcheck
 
 # font changes should end in a \fP
-context exclusive \\fB \\f\{PR\} magenta
+context exclusive \\fB \\f\{PR\} yellow
     spellcheck
-context exclusive \\fI \\f\{PR\} yellow
+context exclusive \\fI \\f\{PR\} brightred
     spellcheck
 context linestart .\\" \n brown
     spellcheck
