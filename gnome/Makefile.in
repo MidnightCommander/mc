@@ -119,7 +119,6 @@ OOBJS = dlg.o screen.o widget.o wtools.o			\
 	file.o find.o dialog.o view.o				\
 	panelize.o background.o dir.o util.o			\
 	win.o color.o profile.o user.o ext.o setup.o		\
-	fsusage.o mountlist.o					\
 	regex.o complete.o command.o				\
 	cmd.o utilunix.o xslint.o filenot.o			\
 	fileopctx.o treestore.o mad.o

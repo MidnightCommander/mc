@@ -44,7 +44,6 @@ int gmc_open_filename (char *fname, GList *args);
 int gmc_edit (char *fname);
 int gmc_can_view_file (char *filename);
 int gmc_view (char *filename, int start_line);
-void x_show_info (WInfo *info, struct my_statfs *s, struct stat *b);
 void x_create_info (Dlg_head *h, widget_data parent, WInfo *info);
 void gnome_check_super_user (void);
 gint create_new_menu_from (char *file, GtkWidget *shell, gint pos);

@@ -1,3 +1,8 @@
+2001-06-18  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.in (OOBJS): Remove fsusage.o and mountlist.o.
+	* gmain.h: Remove dead declaration of x_show_info().
+
 2001-06-15  Pavel Roskin  <proski@gnu.org>
 
 	* gtkflist.c: Include <stdlib.h> for abs().
