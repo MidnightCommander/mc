@@ -1943,7 +1943,6 @@ Commander controllerà l'estensione del file selezionato con ciò
 che trova nel
 .\"LINK2"
 File Estensioni.
-Extensions File.
 .\"Extension File Edit"
 Se viene trovata una corrispondenza, verrà eseguito il codice associato.
 Verrà eseguita una semplice 
