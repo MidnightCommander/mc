@@ -1300,7 +1300,7 @@ msgstr "Merevlemez: %d"
 #: gnome/gmount.c:467
 #, c-format
 msgid "NFS dir %s"
-msgstr "NFS könyvtár: %d"
+msgstr "NFS könyvtár: %s"
 
 # gnome/gmount.c:471
 #: gnome/gmount.c:471
@@ -2033,7 +2033,7 @@ msgstr "Oszlop: %d"
 #: gnome/gview.c:142 src/view.c:736
 #, c-format
 msgid "%s bytes"
-msgstr "%a bájt"
+msgstr "%s bájt"
 
 # gnome/gview.c:306
 #: gnome/gview.c:306
@@ -5281,14 +5281,14 @@ msgstr "1törlése"
 #: src/file.c:1695
 #, c-format
 msgid "%o %f \"%s\"%m"
-msgstr "\"%s\" nevû %f %o%m"
+msgstr "%o %f \"%s\"%m"
 
 # pl.: 44 kijelölt könyvtár törlése?
 # (Copy, Move, Delete)
 #: src/file.c:1696
 #, c-format
 msgid "%o %d %f%m"
-msgstr "%d kijelölt %f %o%m"
+msgstr "%o %d %f%m"
 
 # src/file.c:1698
 #: src/file.c:1698
