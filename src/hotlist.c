@@ -973,7 +973,7 @@ static int add_new_group_input (char *header, char *label, char **result)
     
     Quick_input.widgets = quick_widgets;
     if ((ret = quick_dialog (&Quick_input)) != B_CANCEL){
-	*result = *(quick_widgets [3].str_result);
+	*result = my_str;
 	return ret;
     } else
 	return 0;

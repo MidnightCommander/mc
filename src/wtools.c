@@ -200,7 +200,7 @@ do_create_message (int flags, const char *title, const char *text)
     Dlg_head *d;
 
     /* Add empty lines before and after the message */
-    p = g_strdup_printf ("\n%s\n", text);
+    p = g_strconcat ("\n", text, "\n", NULL);
     query_dialog (title, p, flags, 0);
     d = last_query_dlg;
     init_dlg (d);
@@ -253,7 +253,7 @@ fg_message (int flags, const char *title, const char *text)
 static void
 bg_message (int dummy, int *flags, char *title, const char *text)
 {
-    title = g_strdup_printf ("%s %s", _("Background process:"), title);
+    title = g_strconcat (_("Background process:"), " ", title, NULL);
     fg_message (*flags, title, text);
     g_free (title);
 }
