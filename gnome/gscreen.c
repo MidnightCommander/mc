@@ -1436,7 +1436,7 @@ panel_icon_list_button_press (GtkWidget *widget, GdkEventButton *event, WPanel *
 			gpopup_do_popup2 ((GdkEventButton *) event, panel, NULL, FALSE);
 			return TRUE;
 		}
-	} else if (event->button == 1)
+	} else if (event->button != 3)
 		panel->maybe_start_drag = event->button;
 
 	panel->click_x = event->x;

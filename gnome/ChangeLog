@@ -1,3 +1,8 @@
+1999-02-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gscreen.c (panel_icon_list_button_press): Fixed "=" -> "!="
+	typo.
+
 1999-02-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gaction.c (gmc_open_filename): Add support for running .desktop
