@@ -643,24 +643,26 @@ setup_panels (void)
 	int minimum;
 	if (output_lines < 0)
 	    output_lines = 0;
-	height = LINES - keybar_visible - command_prompt - menubar_visible
-	    - output_lines - message_visible;
+	height =
+	    LINES - keybar_visible - command_prompt - menubar_visible -
+	    output_lines - message_visible;
 	minimum = MINHEIGHT * (1 + horizontal_split);
 	if (height < minimum) {
 	    output_lines -= minimum - height;
 	    height = minimum;
 	}
     } else {
-	height = LINES - menubar_visible - command_prompt -
-	    keybar_visible - message_visible;
+	height =
+	    LINES - menubar_visible - command_prompt - keybar_visible -
+	    message_visible;
     }
     check_split ();
     start_y = menubar_visible;
 
     /* The column computing is defered until panel_do_cols */
     if (horizontal_split) {
-	widget_set_size (panels[0].widget, start_y, 0,
-			 first_panel_size, 0);
+	widget_set_size (panels[0].widget, start_y, 0, first_panel_size,
+			 0);
 
 	widget_set_size (panels[1].widget, start_y + first_panel_size, 0,
 			 height - first_panel_size, 0);
@@ -698,18 +700,19 @@ setup_panels (void)
 
     /* Output window */
     if (console_flag && output_lines) {
-	output_start_y = LINES - command_prompt - keybar_visible -
-	    output_lines;
+	output_start_y =
+	    LINES - command_prompt - keybar_visible - output_lines;
 	show_console_contents (output_start_y,
 			       LINES - output_lines - keybar_visible - 1,
 			       LINES - keybar_visible - 1);
     }
-    if (message_visible)
+    if (message_visible) {
 	widget_set_size (&the_hint->widget, height + start_y, 0, 1, COLS);
-    else
+	set_hintbar ("");	/* clean up the line */
+	load_hint ();
+    } else
 	widget_set_size (&the_hint->widget, 0, 0, 0, 0);
 
-    load_hint ();
     update_xterm_title_path ();
 }
 

@@ -1,4 +1,9 @@
-2002-12-21  Adam Byrtek  <alpha@debian.org>
+2002-12-26  Pavel Roskin  <proski@gnu.org>
+
+	* layout.c (setup_panels): Clean the hint bar if it's enabled.
+	Bug reported by Adam Byrtek <alpha@debian.org>
+
+2002-12-26  Adam Byrtek  <alpha@debian.org>
 
 	* main.c (update_xterm_title_path): New function, display
 	current path in the xterm window title.
