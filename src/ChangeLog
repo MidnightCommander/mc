@@ -1,3 +1,10 @@
+2002-01-30  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* file.c (recursive_erase): Use mc_closedir() if mc_lstat()
+	fails.  Eliminate goto.
+	(erase_dir): Eliminate goto.
+	(erase_dir_iff_empty): Likewise.
+
 2002-01-29  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* dir.c (handle_dirent): Use MSG_ERROR.

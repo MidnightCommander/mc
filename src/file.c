@@ -145,9 +145,6 @@ char *op_names [3] = {
 	N_(" Delete ")
 };
 
-static int recursive_erase (FileOpContext *ctx, char *s,
-			    off_t *progress_count, double *progress_bytes);
-
 /* }}} */
 
 static int query_replace (FileOpContext *ctx, char *destname,
@@ -1260,7 +1257,7 @@ move_dir_dir (FileOpContext *ctx, char *s, char *d,
 
  ret:
    g_free (destdir);
-    for ( ; erase_list; ){
+    while (erase_list){
        lp = erase_list;
        erase_list = erase_list->next;
       g_free (lp);
@@ -1325,7 +1322,8 @@ recursive_erase (FileOpContext *ctx, char *s, off_t *progress_count, double *pro
 	    continue;
 	path = concat_dir_and_file (s, next->d_name);
    	if (mc_lstat (path, &buf)){
-	   g_free (path);
+	    g_free (path);
+	    mc_closedir (reading);
 	    return 1;
 	} 
 	if (S_ISDIR (buf.st_mode))
@@ -1341,12 +1339,11 @@ recursive_erase (FileOpContext *ctx, char *s, off_t *progress_count, double *pro
     if (file_progress_show_deleting (ctx, s) == FILE_ABORT)
 	return FILE_ABORT;
     mc_refresh ();
- retry_rmdir:
-    if (my_rmdir (s)){
+
+    while (my_rmdir (s)){
 	return_status = file_error (_(" Cannot remove directory \"%s\" \n %s "), s);
-	if (return_status == FILE_RETRY)
-	    goto retry_rmdir;
-	return return_status;
+	if (return_status != FILE_RETRY)
+	    return return_status;
     }
 
     return FILE_CONT;
@@ -1408,13 +1405,10 @@ erase_dir (FileOpContext *ctx, char *s, off_t *progress_count, double *progress_
 	    return error;
     }
 
- retry_rmdir:
-    error = my_rmdir (s);
-    if (error == -1){
+    while (my_rmdir (s) == -1){
 	error = file_error (_(" Cannot remove directory \"%s\" \n %s "), s);
-	if (error == FILE_RETRY)
-	    goto retry_rmdir;
-	return error;
+	if (error != FILE_RETRY)
+	    return error;
     }
 
     return FILE_CONT;
@@ -1438,13 +1432,10 @@ erase_dir_iff_empty (FileOpContext *ctx, char *s)
     if (1 != check_dir_is_empty (s)) /* not empty or error */
 	return FILE_CONT;
 
- retry_rmdir:
-    error = my_rmdir (s);
-    if (error){
+    while (my_rmdir (s)){
 	error = file_error (_(" Cannot remove directory \"%s\" \n %s "), s);
-	if (error == FILE_RETRY)
-	    goto retry_rmdir;
-	return error;
+	if (error != FILE_RETRY)
+	    return error;
     }
 
     return FILE_CONT;
