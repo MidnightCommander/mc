@@ -22,9 +22,9 @@
 #endif
 #include <sys/types.h>
 #include <signal.h>
+#include <stdio.h>
 
 #ifdef SCO_FLAVOR
-#include <stdio.h>
 #include <sys/types.h>
 #include <sys/vid.h>
 #include <sys/console.h>
@@ -35,14 +35,7 @@
 
 #ifdef __FreeBSD__
 #include <sys/consio.h>
-#include <sys/errno.h>
-#include <sys/fcntl.h>
 #include <sys/ioctl.h>
-#include <stdarg.h>
-#include <stdio.h>
-#include <syslog.h>
-#include <unistd.h>
-#include <osreldate.h>
 #endif				/* __FreeBSD__ */
 
 #include "global.h"
@@ -395,11 +388,6 @@ show_console_contents_sco (int starty, unsigned char begin_line,
 
 static struct scrshot screen_shot;
 static struct vid_info screen_info;
-/*
- * Color indexes returned by SCRSHOT differ from that ones VT220 accepts.
- * color_map defines mapping from SCRSHOT colors to VT220.
- */
-static int color_map[8] = { 0, 4, 2, 6, 1, 5, 3, 7 };
 
 static void
 console_init (void)
@@ -424,6 +412,11 @@ console_init (void)
 static void
 set_attr (unsigned attr)
 {
+    /*
+     * Convert color indices returned by SCRSHOT (red=4, green=2, blue=1)
+     * to indices for ANSI sequences (red=1, green=2, blue=4).
+     */
+    static const int color_map[8] = { 0, 4, 2, 6, 1, 5, 3, 7 };
     char cmd[17];
     int bc, tc;
 
@@ -525,21 +518,19 @@ static void
 show_console_contents_freebsd (int starty, unsigned char begin_line,
 			       unsigned char end_line)
 {
-    int i, first, last;
+    int col, line;
+    char c;
 
     if (!console_flag)
 	return;
 
-    cursor_to (0, starty);
-
-    first = starty * screen_info.mv_csz;
-    last = first + (end_line - begin_line + 1) * screen_info.mv_csz - 1;
-    for (i = first; i <= last; ++i) {
-	set_attr ((screen_shot.buf[i] >> 8) & 0xFF);
-	putc (screen_shot.buf[i] & 0xFF, stdout);
+    for (line = begin_line; line <= end_line; line++) {
+	move (starty + line - begin_line, 0);
+        for (col = 0; col < min (COLS, screen_info.mv_csz); col++) {
+	    c = screen_shot.buf[line * screen_info.mv_csz + col] & 0xFF;
+	    addch (c);
+	}
     }
-
-    fflush (stdout);
 }
 
 static void
@@ -563,7 +554,7 @@ handle_console_freebsd (unsigned char action)
 	break;
     }
 }
-#endif				/* SCO_FLAVOR */
+#endif				/* __FreeBSD__ */
 
 void
 show_console_contents (int starty, unsigned char begin_line,

@@ -1,3 +1,9 @@
+2003-03-05  Pavel Roskin  <proski@gnu.org>
+
+	* cons.handler.c (show_console_contents_freebsd): Rewrite
+	to use screen library (S-Lang or ncurses).  Direct output is
+	unreliable when the screen library is active.
+
 2003-03-03  Pavel Roskin  <proski@gnu.org>
 
 	* profile.c (load): Fix reading keys immediately after comments.
