@@ -2606,7 +2606,7 @@ jelenjenek meg akkor, ha a kiemelés engedélyezve van (lásd a
 és a könyvtárak szimbolikus linkjeihez használatos;
 executable a futtatható fájlokhoz; link a szimbolikus
 linkekhez, amelyekk még létezõek, és nem könyvtárra mutató
-linkek; stalledlink az elvesztett szimbolikus linkekhez;
+linkek; stalelink az elvesztett szimbolikus linkekhez;
 device - karakter és blokk eszközökhöz; special a
 speciális fájlokhoz, mint pl.FIFO-k és az IPC socket-ek;
 core a core fájlokhoz.

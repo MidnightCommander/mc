@@ -3010,7 +3010,7 @@ per il file eseguibili;
 .I link
 viene usata per i collegamenti simbolici che non sono nè interrotti
 nè connessi a directory;
-.I stalledlink
+.I stalelink
 usata per collegamenti simbolici interrotti;
 .I device
 - dispositivi a caratteri e blocchi;
