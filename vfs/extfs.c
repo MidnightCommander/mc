@@ -37,6 +37,7 @@
 #include "utilvfs.h"
 #include "../src/execute.h"	/* For shell_execute */
 #include "vfs.h"
+#include "vfs-impl.h"
 #include "gc.h"		/* vfs_rmstamp */
 
 #undef ERRNOR

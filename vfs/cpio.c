@@ -20,6 +20,7 @@
 #include <config.h>
 #include <errno.h>
 #include "utilvfs.h"
+#include "vfs-impl.h"
 #include "gc.h"		/* vfs_rmstamp */
 #include "xdirentry.h"
 

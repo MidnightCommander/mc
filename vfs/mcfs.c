@@ -51,6 +51,7 @@
 #include "utilvfs.h"
 
 #include "vfs.h"
+#include "vfs-impl.h"
 #include "mcfs.h"
 #include "mcfsutil.h"
 #include "tcputil.h"

@@ -43,6 +43,7 @@
 
 #include "xdirentry.h"
 #include "vfs.h"
+#include "vfs-impl.h"
 #include "gc.h"		/* vfs_stamp_create */
 #include "tcputil.h"
 

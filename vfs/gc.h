@@ -1,6 +1,8 @@
 #ifndef __GC_H
 #define __GC_H
 
+#include "vfs-impl.h"
+
 struct vfs_stamping {
     struct vfs_class *v;
     vfsid id;

@@ -32,6 +32,7 @@
 #include <ctype.h>		/* is_digit() */
 
 #include "utilvfs.h"
+#include "vfs-impl.h"
 #include "gc.h"
 #include "vfs.h"
 

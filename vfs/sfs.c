@@ -22,6 +22,7 @@
 #include "utilvfs.h"
 
 #include "vfs.h"
+#include "vfs-impl.h"
 #include "gc.h"		/* vfs_stamp_create */
 #include "local.h"
 #include "../src/execute.h"	/* EXECUTE_AS_SHELL */

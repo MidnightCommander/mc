@@ -1,6 +1,8 @@
 #ifndef _VFS_LOCAL_H_
 #define _VFS_LOCAL_H_
 
+#include "vfs-impl.h"
+
 extern int local_close (void *data);
 extern int local_read (void *data, char *buffer, int count);
 extern int local_fstat (void *data, struct stat *buf);

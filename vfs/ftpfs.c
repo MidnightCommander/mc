@@ -72,6 +72,7 @@ What to do with this?
 
 #include "xdirentry.h"
 #include "vfs.h"
+#include "vfs-impl.h"
 #include "gc.h"		/* vfs_stamp_create */
 #include "tcputil.h"
 #include "../src/setup.h"	/* for load_anon_passwd */
