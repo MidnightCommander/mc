@@ -639,10 +639,17 @@ panel_configure_file_list (WPanel *panel, GtkWidget *sw, GtkWidget *file_list)
 			continue;
 
 		/* Set desired justification */
-		if (format->just_mode == J_LEFT)
-			just = GTK_JUSTIFY_LEFT;
-		else
-			just = GTK_JUSTIFY_RIGHT;
+		switch (HIDE_FIT(format->just_mode)){
+		case J_LEFT:
+		    just = GTK_JUSTIFY_LEFT;
+		    break;
+		case J_RIGHT:
+		    just = GTK_JUSTIFY_RIGHT;
+		    break;
+		case J_CENTER:
+		    just = GTK_JUSTIFY_CENTER;
+		    break;    
+		}
 
 		gtk_clist_set_column_justification (GTK_CLIST (file_list), i, just);
 		i++;

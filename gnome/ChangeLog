@@ -1,3 +1,8 @@
+Mon Feb  1 00:49:18 1999  Timur Bakeyev <mc@bat.ru>
+
+	* gscreen.c (panel_configure_file_list): Add central justification,
+	as we got it (useless, imho :)
+
 Sun Jan 31 19:42:47 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* Makefile.in (install_mx): make it work with srcdir != builddir
