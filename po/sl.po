@@ -1480,7 +1480,7 @@ msgstr "Splo¹no"
 
 #: gnome/gprop.c:505
 msgid "Title"
-msgstr "Naslov"
+msgstr "Naziv"
 
 #: gnome/gprop.c:535
 msgid "Select icon"
@@ -4596,7 +4596,7 @@ msgstr "Izkljuèi"
 
 #: src/find.c:717
 msgid "Restart"
-msgstr "Ponoven zagon"
+msgstr "Zaèni znova"
 
 #: src/find.c:719 src/find.c:821 src/find.c:960 src/find.c:1056
 msgid "Searching"
