@@ -82,9 +82,6 @@ install -m 644 lib/mcserv.pamd $RPM_BUILD_ROOT/etc/pam.d/mcserv
 install lib/{mc.sh,mc.csh} $RPM_BUILD_ROOT/etc/profile.d
 
 
-# clean up this setuid problem for now
-chmod 755 $RPM_BUILD_ROOT%{prefix}/lib/mc/bin/cons.saver
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 

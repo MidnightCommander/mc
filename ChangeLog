@@ -1,5 +1,9 @@
 2001-01-13  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Simplified handling of cons.saver.
+	* src/Makefile.in: Likewise. Don't install cons.saver setuid.
+	* mc.spec.in: Remove a workaround for the above.
+
 	* configure.in: Use AC_CANONICAL_HOST - "target" is meaningless
 	for MC. Don't rely on the output of uname - use $host_os.
 

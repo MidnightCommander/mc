@@ -870,16 +870,12 @@ fi
 dnl
 dnl The variables used for expanding the auto saver.
 dnl
-saver=""
-saver_target=""
-vcs=""
+cons_saver=""
 install_saver="no"
 PAMLIBS=""
 case $host_os in
 linux*)
-    saver="install.saver"
-    saver_target="cons.saver"
-    vcs="install.create_vcs"
+    cons_saver="cons.saver"
     install_saver="yes"
 
     dnl
@@ -891,9 +887,7 @@ linux*)
     ],[],[-ldl])
     ;;
 esac
-AC_SUBST(saver_target)
-AC_SUBST(saver)
-AC_SUBST(vcs)
+AC_SUBST(cons_saver)
 AC_SUBST(PAMLIBS)
 
 dnl
