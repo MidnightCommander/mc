@@ -628,8 +628,8 @@ static void apply_advanced_chowns (struct stat *sf)
 	message (1, MSG_ERROR, _(" Cannot chmod \"%s\" \n %s "),
 		 fname, unix_error_string (errno));
     /* call mc_chown only, if mc_chmod didn't fail */
-    else if (mc_chown (fname, (ch_flags[9] == '+') ? sf->st_uid : -1,
-		       (ch_flags[10] == '+') ? sf->st_gid : -1) == -1)
+    else if (mc_chown (fname, (ch_flags[9] == '+') ? sf->st_uid : (uid_t) -1,
+		       (ch_flags[10] == '+') ? sf->st_gid : (gid_t) -1) == -1)
 	message (1, MSG_ERROR, _(" Cannot chown \"%s\" \n %s "),
 		 fname, unix_error_string (errno));
     do_file_mark (current_panel, current_file, 0);
@@ -644,7 +644,8 @@ static void apply_advanced_chowns (struct stat *sf)
 	    message (1, MSG_ERROR, _(" Cannot chmod \"%s\" \n %s "),
 		     fname, unix_error_string (errno));
 	/* call mc_chown only, if mc_chmod didn't fail */
-	else if (mc_chown (fname, (ch_flags[9] == '+') ? a_uid : -1, (ch_flags[10] == '+') ? a_gid : -1) == -1)
+	else if (mc_chown (fname, (ch_flags[9] == '+') ? a_uid : (uid_t) -1,
+	                   (ch_flags[10] == '+') ? a_gid : (gid_t) -1) == -1)
 	    message (1, MSG_ERROR, _(" Cannot chown \"%s\" \n %s "),
 		     fname, unix_error_string (errno));
 
@@ -690,7 +691,8 @@ chown_advanced_cmd (void)
 		message (1, MSG_ERROR, _(" Cannot chmod \"%s\" \n %s "),
 			 fname, unix_error_string (errno));
 	    /* call mc_chown only, if mc_chmod didn't fail */
-	    else if (mc_chown (fname, (ch_flags[9] == '+') ? sf_stat->st_uid : -1, (ch_flags[10] == '+') ? sf_stat->st_gid : -1) == -1)
+	    else if (mc_chown (fname, (ch_flags[9] == '+') ? sf_stat->st_uid : (uid_t) -1,
+	                       (ch_flags[10] == '+') ? sf_stat->st_gid : (gid_t) -1) == -1)
 		message (1, MSG_ERROR, _(" Cannot chown \"%s\" \n %s "),
 			 fname, unix_error_string (errno));
 	    break;
