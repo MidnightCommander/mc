@@ -100,6 +100,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc FAQ COPYING NEWS README
 %{prefix}/bin/mc
 %{prefix}/bin/mcedit
+%{prefix}/bin/mcview
 %{prefix}/lib/mc/bin/cons.saver
 %{prefix}/lib/mc/term/*
 %{prefix}/man/man1/*
@@ -146,6 +147,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{prefix}/share/pixmaps/mc
 
 %changelog
+* Thu Jan 11 2001 Pavel Roskin <proski@gnu.org>
+- Include mcview.
+
 * Mon Oct 23 2000 Pavel Roskin <proski@gnu.org>
 - Allow mcserv.8 to be gzipped.
 
