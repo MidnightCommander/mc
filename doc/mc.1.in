@@ -77,7 +77,7 @@ mc ()
 tcsh users:
 alias mc 'setenv MC `@prefix@/bin/mc -P \!*`; cd $MC; unsetenv MC'
 .fi
-.TP
+
 I know the bash function could be shorter for zsh and bash but the
 backquotes on bash won't accept your suspension the program with
 C-z. The temporary file is created in the private directory ~/.mc/tmp 
@@ -676,9 +676,10 @@ displays the file name.
 displays the file size.
 .PP
 .B bsize,
-is an alternative form of the <bf/size/ format. It
-displays the size of the files and for directories it just shows
-SUB-DIR or UP--DIR.
+is an alternative form of the
+.B size
+format. It displays the size of the files and for directories it just
+shows SUB-DIR or UP--DIR.
 .PP
 .B type,
 displays a one character field type.  This character is a superset of what
@@ -705,6 +706,7 @@ an octal value with the current permission bits of the file.
 .PP
 .B nlink,
 the number of links to the file.
+.PP
 .B ngid,
 the GID (numeric).
 .PP
@@ -2722,7 +2724,7 @@ into a special directory which name is in the following
 format:
 .PP
 .nf
-/#sh:[user@]machine[:options];/[remote-dir];</em>
+/#sh:[user@]machine[:options]/[remote-dir]
 .fi
 The, 
 .I user, 
