@@ -276,8 +276,10 @@ WindowFactory_close_invalid_windows (PortableServer_Servant servant,
 	 * fails, then we destroy the panel's window.
 	 */
 
-	for (l = containers; l; l = l->next) {
+	l = containers;
+	while (l) {
 		pc = l->data;
+		l = l->next;
 
 		if (mc_chdir (pc->panel->cwd) != 0)
 			gnome_close_panel (GTK_WIDGET (pc->panel->xwindow), pc->panel);

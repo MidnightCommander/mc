@@ -1,5 +1,10 @@
 1999-09-09  Federico Mena Quintero  <federico@redhat.com>
 
+	* gcorba.c (WindowFactory_close_invalid_windows): Doh.  Walk the
+	list properly, since it may change as we delete windows.
+
+1999-09-09  Federico Mena Quintero  <federico@redhat.com>
+
 	* gmc-client.c: New file.  This is a small program to which you
 	can pass arguments to call the GMC CORBA interface for you.  You
 	can do stuff like create a directory window, rescan the desktop,
