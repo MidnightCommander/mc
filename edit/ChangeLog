@@ -1,3 +1,8 @@
+2002-08-31  Pavel Roskin  <proski@gnu.org>
+
+	* editwidget.c (edit): Avoid passing an uninitialized color
+	array to create_dlg() - pass NULL instead.
+
 2002-08-27  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* editcmd.c (edit_printf): Use g_vsnprintf() instead of sprintf().

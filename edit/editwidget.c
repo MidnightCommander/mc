@@ -90,18 +90,19 @@ int edit_mouse_event (Gpm_Event * event, void *x)
 	return menubar_event (event, edit_menubar);
 }
 
-int edit (const char *_file, int line)
+int
+edit (const char *_file, int line)
 {
     static int made_directory = 0;
     int framed = 0;
-    int midnight_colors[4];
     char *text = 0;
     WButtonBar *edit_bar;
 
     if (option_backup_ext_int != -1) {
 	option_backup_ext = malloc (sizeof (int) + 1);
 	option_backup_ext[sizeof (int)] = '\0';
-	memcpy (option_backup_ext, (char *) &option_backup_ext_int, sizeof (int));
+	memcpy (option_backup_ext, (char *) &option_backup_ext_int,
+		sizeof (int));
     }
     if (!made_directory) {
 	mkdir (catstrs (home_dir, EDIT_DIR, 0), 0700);
@@ -121,14 +122,12 @@ int edit (const char *_file, int line)
     wedit->macro_i = -1;
 
     /* Create a new dialog and add it widgets to it */
-    edit_dlg = create_dlg (0, 0, LINES, COLS, midnight_colors,
-			   edit_mode_callback, "[Internal File Editor]",
-			   "edit",
-			   DLG_WANT_TAB);
+    edit_dlg =
+	create_dlg (0, 0, LINES, COLS, NULL, edit_mode_callback,
+		    "[Internal File Editor]", "edit", DLG_WANT_TAB);
 
     init_widget (&(wedit->widget), 0, 0, LINES - 1, COLS,
-		 (callback_fn) edit_callback,
-		 (destroy_fn) edit_clean,
+		 (callback_fn) edit_callback, (destroy_fn) edit_clean,
 		 (mouse_h) edit_mouse_event, 0);
 
     widget_want_cursor (wedit->widget, 1);
