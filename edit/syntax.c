@@ -401,11 +401,12 @@ static int read_one_line (char **line, FILE * f)
 #else
     p = syntax_malloc (len);
 #endif
+    errno = 0;
     for (;;) {
 	c = fgetc (f);
+	if (errno == EINTR)
+	    continue;
 	if (c == EOF) {
-	    if (errno == EINTR)
-		continue;
 	    r = 0;
 	    break;
 	} else if (c == '\n') {

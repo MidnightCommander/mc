@@ -1,3 +1,8 @@
+2001-12-21  Pavel Roskin  <proski@gnu.org>
+
+	* syntax.c (read_one_line): Clear errno before using it.  Don't
+	use the result of fgetc() if errno is EINTR.
+
 2001-11-28  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* syntax.c (apply_rules_going_right): Fix crash for lines like
