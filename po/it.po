@@ -312,7 +312,7 @@ msgstr "controllare &Maiuscole/minuscole"
 
 #: edit/editcmd.c:1110
 msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Ordine dell'argomento di sostituzione es. 3,2,1,4 "
+msgstr " Inserire ordine di sostituzione argomenti es. 3,2,1,4 "
 
 #: edit/editcmd.c:1114
 msgid " Enter replacement string:"
