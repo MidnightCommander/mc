@@ -104,9 +104,6 @@ extern char *shell;
 /* directory specified on command line for startup */
 extern char *this_dir;
 
-void clr_scr (void);
-void restore_console (void);
-
 enum cd_enum {
     cd_parse_command,
     cd_exact

@@ -56,7 +56,7 @@ SRCS =	achown.c achown.h background.c background.h boxes.c boxes.h	\
 	option.h panel.h panelize.c panelize.h poptalloca.h popt.c	\
 	poptconfig.c popt.h popthelp.c poptint.h poptparse.c profile.c	\
 	profile.h regex.c rxvt.c screen.c setup.c setup.h slint.c	\
-	subshell.c subshell.h terms.c text.c textconf.c textconf.h	\
+	subshell.c subshell.h terms.c textconf.c textconf.h		\
 	tree.c tree.h treestore.c treestore.h tty.h user.c user.h	\
 	util.c util.h utilunix.c view.c view.h widget.c widget.h	\
 	win.c win.h wtools.c wtools.h

@@ -105,7 +105,7 @@ do_execute (const char *shell, const char *command, int flags)
     save_cwds_stat ();
     pre_exec ();
     if (console_flag)
-	restore_console ();
+	handle_console (CONSOLE_RESTORE);
 
     if (!use_subshell && !(flags & EXECUTE_INTERNAL && command)) {
 	printf ("%s%s%s\n", last_paused ? "\r\n" : "", prompt, command);
@@ -222,7 +222,7 @@ toggle_panels (void)
     do_exit_ca_mode ();
     mc_raw_mode ();
     if (console_flag)
-	restore_console ();
+	handle_console (CONSOLE_RESTORE);
 
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (use_subshell) {
@@ -283,7 +283,7 @@ do_suspend_cmd (void)
     pre_exec ();
 
     if (console_flag && !use_subshell)
-	restore_console ();
+	handle_console (CONSOLE_RESTORE);
 
 #ifdef SIGTSTP
     {

@@ -25,6 +25,9 @@ Widget *get_panel_widget (int index);
 
 void set_hintbar (char *str);
 
+/* Clear screen */
+void clr_scr (void);
+
 extern int winch_flag;
 extern int equal_split;
 extern int first_panel_size;

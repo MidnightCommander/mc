@@ -466,12 +466,6 @@ do_update_prompt (void)
 #endif				/* HAVE_SUBSHELL_SUPPORT */
 
 void
-restore_console (void)
-{
-    handle_console (CONSOLE_RESTORE);
-}
-
-void
 change_panel (void)
 {
     free_completions (cmdline);
@@ -2369,7 +2363,7 @@ main (int argc, char *argv[])
 #endif
 
     if (console_flag && !(quit & SUBSHELL_EXIT))
-	restore_console ();
+	handle_console (CONSOLE_RESTORE);
     if (alternate_plus_minus)
 	numeric_keypad_mode ();
 

@@ -610,6 +610,15 @@ void init_curses (void)
 #endif /* ! HAVE_SLANG */
 
 void
+clr_scr (void)
+{
+    standend ();
+    dlg_erase (midnight_dlg);
+    mc_refresh ();
+    doupdate ();
+}
+
+void
 done_screen ()
 {
     if (!(quit & SUBSHELL_EXIT))

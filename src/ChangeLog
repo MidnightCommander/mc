@@ -1,5 +1,10 @@
 2003-06-22  Pavel Roskin  <proski@gnu.org>
 
+	* text.c: Eliminate.  Move colors to color.c and clr_scr() to
+	layout.c.
+	* main.c (restore_console): Eliminate, use handle_console().
+	* Makefile.am: Remove text.c.
+
 	* execute.c: New file with all functions for execution and
 	toggling panels not specific to subshell.
 	* execute.h: Corresponding header.

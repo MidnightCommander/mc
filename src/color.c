@@ -124,6 +124,40 @@ static struct color_table_s const color_table [] = {
     { "default",       0 } /* default color of the terminal */
 };
 
+static char *default_colors =
+"normal=lightgray,blue:"
+"selected=black,cyan:"
+"marked=yellow,blue:"
+"markselect=yellow,cyan:"
+"errors=white,red:"
+"menu=white,cyan:"
+"reverse=black,lightgray:"
+"dnormal=black,lightgray:"
+"dfocus=black,cyan:"
+"dhotnormal=blue,lightgray:"
+"dhotfocus=blue,cyan:"
+"viewunderline=brightred,blue:"
+"menuhot=yellow,cyan:"
+"menusel=white,black:"
+"menuhotsel=yellow,black:"
+"helpnormal=black,lightgray:"
+"helpitalic=red,lightgray:"
+"helpbold=blue,lightgray:"
+"helplink=black,cyan:"
+"helpslink=yellow,blue:"
+"gauge=white,black:"
+"input=black,cyan:"
+"directory=white,blue:"
+"executable=brightgreen,blue:"
+"link=lightgray,blue:"
+"stalelink=brightred,blue:"
+"device=brightmagenta,blue:"
+"core=red,blue:"
+"special=black,blue:"
+"editnormal=lightgray,blue:"
+"editbold=yellow,blue:"
+"editmarked=black,cyan";
+
 #ifdef HAVE_SLANG
 #   define color_value(i) color_table [i].name
 #   define color_name(i)  color_table [i].name
@@ -211,9 +245,8 @@ static void configure_colors_string (char *the_color_string)
 static void configure_colors (void)
 {
     extern char *command_line_colors;
-    extern char *default_edition_colors;
     
-    configure_colors_string (default_edition_colors);
+    configure_colors_string (default_colors);
     configure_colors_string (setup_color_string);
     configure_colors_string (term_color_string);
     configure_colors_string (getenv ("MC_COLOR_TABLE"));
