@@ -428,50 +428,44 @@ static char *test_condition (WEdit *edit_widget, char *p, int *condition)
 static void
 debug_out (char *start, char *end, int cond)
 {
-    static char msg [256];
+    static char *msg;
     int len;
 
     if (start == NULL && end == NULL){
-	if (cond == 0){
-	    /* Init */
-	    msg [0] = 0;
-	} else {
-	    /* Show output */
-	    if (!debug_flag)
-		return;
+	/* Show output */
+	if (debug_flag && msg) {
 	    len = strlen (msg);
 	    if (len)
 		msg [len - 1] = 0;
 	    message (0, _(" Debug "), "%s", msg);
-	    debug_flag = 0;
+
 	}
+	debug_flag = 0;
+	g_free (msg);
+	msg = NULL;
     } else {
+	char *type, *p;
+
 	/* Save debug info for later output */
 	if (!debug_flag)
 	    return;
 	/* Save the result of the condition */
 	if (debug_error){
-	    strcat (msg, _(" ERROR: "));
+	    type = _(" ERROR: ");
 	    debug_error = 0;
 	}
 	else if (cond)
-	    strcat (msg, _(" True:  "));
+	    type = _(" True:  ");
 	else
-	    strcat (msg, _(" False: "));
-	/* Copy condition statement */
-	len = strlen (msg);
-	if (end == NULL){
-	    /* Copy one character */
-	    msg [len] = *start;
-	    msg [len + 1] = 0;
-	} else {
-	    /* Copy many characters */
-	    while (start < end){
-		msg [len++] = *start++;
-	    }
-	    msg [len] = 0;
-	}
-	strcat (msg, " \n");
+	    type = _(" False: ");
+	/* This is for debugging, don't need to be super efficient.  */
+	if (end == NULL)
+	    p = g_strdup_printf ("%s%s%c \n", msg ? msg : "", type, *start);
+	else
+	    p = g_strdup_printf ("%s%s%.*s \n", msg ? msg : "", type,
+			(int) (end - start), start);
+	g_free (msg);
+	msg = p;
     }
 }
 
@@ -483,8 +477,6 @@ static char *test_line (WEdit *edit_widget, char *p, int *result)
     char operator;
     char *debug_start, *debug_end;
 
-    /* Init debugger */
-    debug_out (NULL, NULL, 0);
     /* Repeat till end of line */
     while (*p && *p != '\n') {
         /* support quote space .mnu */

@@ -1243,10 +1243,8 @@ copy_region (WInput *in, int x_first, int x_last)
     
     if (kill_buffer)
 	g_free (kill_buffer);
-    
-    kill_buffer = g_malloc (last-first + 1);
-    strncpy (kill_buffer, in->buffer+first, last-first);
-    kill_buffer [last-first] = 0;
+
+    kill_buffer = g_strndup(in->buffer+first,last-first);
 }
 
 static void
@@ -1254,10 +1252,11 @@ delete_region (WInput *in, int x_first, int x_last)
 {
    int first = min (x_first, x_last);
    int last  = max (x_first, x_last);
+   size_t len = strlen (&in->buffer [last]) + 1;
 
    in->point = first;
    in->mark  = first;
-   strcpy (&in->buffer [first], &in->buffer [last]);
+   memmove (&in->buffer [first], &in->buffer [last], len);
    in->need_push = 1;
 }
 

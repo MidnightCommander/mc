@@ -590,9 +590,7 @@ completion_matches (char *text, CompletionFunction entry_function)
 	    }
 	    matches = i;
             match_list [matches + 1] = NULL;
-	    match_list[0] = g_malloc (low + 1);
-	    strncpy (match_list[0], match_list[1], low);
-	    match_list[0][low] = 0;
+	    match_list[0] = g_strndup(match_list[1], low);
 	}
     } else {				/* There were no matches. */
         g_free (match_list);
