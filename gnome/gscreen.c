@@ -264,6 +264,8 @@ panel_file_list_configure_contents (GtkWidget *file_list, WPanel *panel, int mai
 	} else
 		extra_space = expand_space = 0;
 
+	panel->estimated_total = total_columns;
+	
 	/* If we dont have enough space, shorten the fields */
 	if (used_columns > total_columns){
 		expand_space = 0;
@@ -564,7 +566,6 @@ panel_file_list_compute_lines (GtkCList *file_list, WPanel *panel, int height)
 static void
 panel_file_list_size_allocate_hook (GtkWidget *file_list, GtkAllocation *allocation, WPanel *panel)
 {
-	printf ("%d %d\n", allocation->width, allocation->height);
 	gtk_signal_handler_block_by_data (GTK_OBJECT (file_list), panel);
 	panel_file_list_configure_contents (file_list, panel, allocation->width, allocation->height);
 	gtk_signal_handler_unblock_by_data (GTK_OBJECT (file_list), panel);
@@ -1077,6 +1078,62 @@ show_filter_popup (GtkWidget *button, gpointer data)
 			GDK_CURRENT_TIME);
 }
 
+void
+display_mini_info (WPanel *panel)
+{
+	GtkLabel *label = GTK_LABEL (panel->ministatus);
+	
+	if (panel->searching){
+		char *str = copy_strings ("Search: ", panel->search_buffer, NULL);
+		
+		gtk_label_set (label, str);
+		free (str);
+		return;
+	}
+
+	if (panel->marked){
+		char buffer [120];
+		
+		sprintf (buffer, " %s bytes in %d files%s",
+			 size_trunc_sep (panel->total), panel->marked,
+			 panel->marked == 1 ? "" : "s");
+		
+		gtk_label_set (label, buffer);
+	}
+
+	if (S_ISLNK (panel->dir.list [panel->selected].buf.st_mode)){
+		char *link, link_target [MC_MAXPATHLEN];
+		int  len;
+		
+		link = concat_dir_and_file (panel->cwd, panel->dir.list [panel->selected].fname);
+		len = mc_readlink (link, link_target, MC_MAXPATHLEN);
+		free (link);
+		
+		if (len > 0){
+			char *str;
+
+			link_target [len] = 0;
+			str = copy_strings ("-> ", link_target, NULL);
+			gtk_label_set (label, str);
+			free (str);
+		} else 
+			gtk_label_set (label, "<readlink failed>");
+		return;
+	}
+
+	if (panel->estimated_total){
+		int  len = panel->estimated_total;
+		char *buffer;
+
+		buffer = xmalloc (len + 2, "display_mini_info");
+		format_file (buffer, panel, panel->selected, panel->estimated_total-2, 0, 1);
+		buffer [len] = 0;
+		gtk_label_set (label, buffer);
+
+		free (buffer);
+	}
+}
+
 static GtkWidget *
 panel_create_filter (Dlg_head *h, WPanel *panel, GtkWidget **filter_w)
 {
@@ -1138,28 +1195,27 @@ void
 x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
 	GtkWidget *status_line, *filter, *statusbar, *vbox;
+	GtkWidget *ministatus_align;
 
 	panel->table = gtk_table_new (2, 1, 0);
-	gtk_widget_show (panel->table);
 	
 	panel->list  = panel_create_file_list (panel);
-	gtk_widget_show (panel->list);
 
 	panel->current_dir = panel_create_cwd (panel);
-	gtk_widget_show (panel->current_dir);
 
 	filter = panel_create_filter (h, panel, (GtkWidget **) &panel->filter_w);
-	gtk_widget_show (filter);
 
+	/* ministatus */
+	ministatus_align = gtk_alignment_new (0.0, 0.0, 1.0, 1.0);
 	panel->ministatus = gtk_label_new ("");
+	gtk_container_add (GTK_CONTAINER (ministatus_align), panel->ministatus);
+	
 	status_line = gtk_hbox_new (0, 0);
-	gtk_widget_show (status_line);
 	
 	gtk_box_pack_start (GTK_BOX (status_line), panel->current_dir, 1, 1, 0);
 	gtk_box_pack_end   (GTK_BOX (status_line), filter, 0, 0, 0);
 
 	panel->status = statusbar = gtk_label_new ("");
-	gtk_widget_show (statusbar);
 	
 	gtk_table_attach (GTK_TABLE (panel->table), panel->list, 0, 1, 1, 2,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK, 
@@ -1169,14 +1225,14 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_table_attach (GTK_TABLE (panel->table), status_line, 0, 1, 0, 1,
 			  GTK_EXPAND | GTK_FILL, GTK_SHRINK, 0, 0);
 
-	gtk_table_attach (GTK_TABLE (panel->table), panel->ministatus, 0, 1, 2, 3,
-			  GTK_EXPAND | GTK_FILL,
+	gtk_table_attach (GTK_TABLE (panel->table), ministatus_align, 0, 1, 2, 3,
+			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0, 0);
+	
 	gtk_table_attach (GTK_TABLE (panel->table), statusbar, 0, 1, 3, 4,
 			  GTK_EXPAND | GTK_FILL,
 			  0, 0, 0);
 	
-	gtk_widget_show (panel->table);
 
 	/* Ultra nasty hack: pull the vbox from wdata */
 	vbox =  GTK_WIDGET (panel->widget.wdata);
@@ -1185,7 +1241,9 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	
 	/* Now, insert our table in our parent */
 	gtk_container_add (GTK_CONTAINER (vbox), panel->table);
-	
+
+	gtk_widget_show_all (panel->table);
+			     
 	if (!pixmaps_ready){
 		if (!GTK_WIDGET_REALIZED (panel->list))
 			gtk_widget_realize (panel->list);
@@ -1196,6 +1254,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	 * filter input line
 	 */
 	panel->widget.options |= W_WANT_CURSOR;
+	panel->estimated_total = 0;
 }
 
 void

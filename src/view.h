@@ -97,6 +97,7 @@ typedef struct {
     void *gtk_bytes;		/* bytes */
     void *gtk_flags;		/* flags (growing) */
     void *gtk_percent;		/* percent */
+    void *sadj;			/* scrollbar adjustment */
 #endif
 	
     int  move_dir;		/* return value from widget:  

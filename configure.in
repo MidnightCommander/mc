@@ -657,20 +657,17 @@ dnl Check for Gnome
 dnl
 gmc=""
 gmcdep=""
-if test x$no_x != xyes; then
-    AC_ARG_WITH(gnome,[--with-gnome               Compile the GNOME edition],[
-    if test x$withval = xyes; then
+AC_SUBST(insticons)
+GNOME_INIT_HOOK([
 	gmc=gmc
  	gmcdep=gmcdep
 	insticons=install_icons
-	AC_SUBST(insticons)
 	if test x"$xvers" = xnone; then
 	    xvers="Gnome"
 	else
 	    xvers="Gnome+$xvers"
 	fi
-    fi])
-fi
+])
 AC_SUBST(gmc)
 AC_SUBST(gmcdep)
 

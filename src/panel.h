@@ -116,6 +116,8 @@ typedef struct {
     void *filter_w;
     void *status;
     void *ministatus;
+
+    int estimated_total; 
 #endif
 } WPanel;
 

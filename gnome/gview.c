@@ -72,6 +72,7 @@ view_percent (WView *view, int p)
 
     sprintf (buffer, "%3d%%", percent);
     gtk_label_set (GTK_LABEL (view->gtk_percent), buffer);
+
 }
 
 void
@@ -300,7 +301,7 @@ int
 view (char *_command, char *_file, int *move_dir_p, int start_line)
 {
 	Dlg_head  *our_dlg;
-	GtkWidget *toplevel, *status;
+	GtkWidget *toplevel, *status, *scrollbar;
 	GtkVBox   *vbox;
 	WView *wview;
 	int   midnight_colors [4];
@@ -327,6 +328,8 @@ view (char *_command, char *_file, int *move_dir_p, int start_line)
 	error = view_init (wview, _command, _file, start_line);
 	if (move_dir_p)
 		*move_dir_p = 0;
+
+	scrollbar = gtk_vscrollbar_new (sadj);
 	
 	/* Please note that if you add another widget,
 	 * you have to modify view_adjust_size to

@@ -507,16 +507,25 @@ format_file (char *dest, WPanel *panel, int file_index, int width, int attr, int
 	color = NORMAL_COLOR;
     for (format = home; format; format = format->next){
 	if (format->string_fn){
+	    int len;
+	    
 	    if (empty_line)
 		txt = " ";
 	    else
 		txt = (*format->string_fn)(fe, format->field_len);
 
 	    old_pos = cdest;
-	    cdest = to_buffer (cdest, format->just_mode, format->field_len, txt);
-	    length += format->field_len;
 
-#ifndef HAVE_X
+	    len = format->field_len;
+	    if (len + length > width)
+		len = width - length;
+	    cdest = to_buffer (cdest, format->just_mode, len, txt);
+	    length += len;
+
+#ifdef HAVE_X
+	    if (length == width)
+		    break;
+#else
             /* What shall we do? Will we color each line according to
 	     * the file type? Any suggestions to mc@timur.kazan.su
 	     */
@@ -601,10 +610,10 @@ repaint_file (WPanel *panel, int file_index, int mv, int attr, int isstatus)
 }
 #endif
 
+#ifndef PORT_HAS_DISPLAY_MINI_INFO
 void
 display_mini_info (WPanel *panel)
 {
-#ifndef HAVE_X
     if (!show_mini_info)
 	return;
     
@@ -659,8 +668,8 @@ display_mini_info (WPanel *panel)
     /* Default behaviour */
     repaint_file (panel, panel->selected, 0, STATUS, 1);
     return;
-#endif
 }
+#endif
 
 #ifndef HAVE_X
 void

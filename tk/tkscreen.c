@@ -554,3 +554,9 @@ panel_update_cols (Widget *widget, int frame_size)
 {
 	/* nothing */
 }
+
+void
+display_mini_info (WPanel *panel)
+{
+	/* FIXME: implement */
+}

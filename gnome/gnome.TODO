@@ -2,7 +2,6 @@ All:
 - Intenrationalization
 - It crashes
 - It leaks objects.
-- It does not object to leaks.
 - argp handling.
 - Session management
 
@@ -12,7 +11,6 @@ Desktop:
 
 Panels:
 - Global bindings (some shortcuts are not implemented)
-- Mini-info panel display
 - Finish regular property pages
 - Add a nifty toolbar
 - Split view.
