@@ -23,12 +23,8 @@
 
 @TOP@
 
-#undef PACKAGE
-#undef VERSION
-
 /* Always defined */
 #undef D_INO_IN_DIRENT
-#undef IS_AIX
 #undef MOUNTED_FREAD
 #undef MOUNTED_FREAD_FSTYP
 #undef MOUNTED_GETFSSTAT
@@ -51,15 +47,6 @@
 /* Define nlink_t if your system does not provide it */
 #undef nlink_t
 
-/* Does the file command accepts the -L option */
-#undef FILE_L
-
-/* Does the file command work well with - option for stdin? */
-#undef FILE_STDIN
-
-/* Does the grep command work well with - option for stdin? */
-#undef GREP_STDIN
-
 /* Is the program using the GPM library? */
 #undef HAVE_LIBGPM
 
@@ -72,16 +59,8 @@
 /* Is the program using a system-installed slang library? */
 #undef HAVE_SYSTEM_SLANG
 
-/* Define if the slang.h header file is inside a directory slang
-** in the standard directories
-*/
-#undef SLANG_H_INSIDE_SLANG_DIR
-
 /* Does the program have subshell support? */
 #undef HAVE_SUBSHELL_SUPPORT
-
-/* If you don't have gcc, define this */
-#undef OLD_TOOLS 
 
 /* Found some version of curses that we're going to use */
 #undef HAS_CURSES
@@ -122,9 +101,6 @@
 /* If you have socket and the rest of the net functions use this */
 #undef USE_NETCODE
 
-/* If defined, use .netrc for FTP connections */
-#undef USE_NETRC 
-
 /* If your operating system does not have enough space for a file name
  * in a struct dirent, then define this
  */
@@ -157,17 +133,11 @@
 /* Define if you have isascii */
 #undef HAVE_ISASCII
 
-/* Define if you want to use the HSC firewall */
-#undef HSC_PROXY
-
 /* Define if your system uses PAM for auth stuff */
 #undef HAVE_PAM
 
 /* Define if you have the pmap_getmaps function */
 #undef HAVE_PMAP_GETMAPS
-
-/* Define if you have the <sys/select.h> header file.  */
-#undef HAVE_SYS_SELECT_H
 
 /* Define if you have the get_process_stats function and have to use that instead of gettimeofday  */
 #undef HAVE_GET_PROCESS_STATS

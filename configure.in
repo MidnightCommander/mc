@@ -163,7 +163,7 @@ AC_EGREP_CPP(yes,
 yes
 #endif
 ], [
-AC_DEFINE(IS_AIX)
+AC_DEFINE(IS_AIX, 1, [Define if compiling for AIX])
 AC_MSG_RESULT(yes)
 ], [AC_MSG_RESULT(no)])
 
@@ -380,7 +380,8 @@ AC_ARG_WITH(ncurses,
 AC_ARG_WITH(hsc,
         [--with-hsc               Compile with support for the HSC firewall],
         [if test x$withval = xyes; then
-                AC_DEFINE(HSC_PROXY)
+                AC_DEFINE(HSC_PROXY, 1,
+			  [Define if you want to use the HSC firewall])
         fi
 ])
 
@@ -499,7 +500,8 @@ EOF
     ]])
 
     if test x$ac_cv_filestdin = xyes; then
-	AC_DEFINE(FILE_STDIN)
+	AC_DEFINE(FILE_STDIN, 1,
+		  [Define if the file command accepts - for stdin])
     fi
     filestdin=$ac_cv_filestdin
     AC_MSG_RESULT([$filestdin])
@@ -519,7 +521,7 @@ else
 fi
 ])
 if test x$ac_cv_filel = xyes; then
-    AC_DEFINE(FILE_L)
+    AC_DEFINE(FILE_L, 1, [Define if the file command accepts the -L option])
 fi
 filel=$ac_cv_filel
 AC_MSG_RESULT([$filel])
@@ -538,7 +540,7 @@ AC_CACHE_VAL(ac_cv_grep_stdin, [
     fi
 ])
 if test x$ac_cv_grep_stdin = xyes; then
-    AC_DEFINE(GREP_STDIN)
+    AC_DEFINE(GREP_STDIN, 1, [Define if the grep command accepts - for stdin])
 fi
 AC_MSG_RESULT([$ac_cv_grep_stdin])
 
@@ -574,14 +576,6 @@ AC_ARG_WITH(subshell,
 ])
 AC_MSG_RESULT([$result])
 subshell="$result"
-
-dnl
-dnl Check for GCC
-dnl
-if test x$GCC = x
-then
-	AC_DEFINE(OLD_TOOLS)
-fi
 
 dnl
 dnl Memory Allocation Debugger
@@ -645,7 +639,6 @@ AC_CHECK_LIB(slang,SLang_init_tty,
 	     then
 		 slang_use_system_installed_lib=true
 		 slang_check_lib=false
-	         AC_DEFINE(SLANG_H_INSIDE_SLANG_DIR)
 	     fi
 	fi
 ])
@@ -710,7 +703,8 @@ AC_SUBST(LEDIT)
 AC_ARG_WITH(netrc,
 	[--with-netrc               Compile with ftp .netrc support],[
 	if test x$withval = xyes; then
-		AC_DEFINE(USE_NETRC)
+		AC_DEFINE(USE_NETRC, 1,
+			  [Define to use .netrc for FTP connections])
 		AC_MSG_RESULT([ftpfs will have .netrc parsing code])
 	fi
 ])
