@@ -316,6 +316,14 @@ int main (int argc, char **argv)
     char *error;
     unsigned char action = 0;
 
+    /*
+     * Make sure Stderr points to a valid place
+     */
+    close (2);
+    stderr_fd = open ("/dev/tty", O_RDWR);
+    if (strderr_fd != 2)
+	    dup2 (strderr_fd, 2);
+    
     if (argc != 2){
 	/* Wrong number of arguments */
 

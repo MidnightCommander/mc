@@ -1,3 +1,7 @@
+1998-11-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* cons.saver.c (main): Make sure stderr is always valid.
+
 Wed Nov 25 22:16:19 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* cmd.c (dirsizes_cmd): Quote characters with a special meaning
