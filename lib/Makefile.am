@@ -14,7 +14,6 @@ noinst_DATA = \
 	ncurses.h 		\
 	mcserv.init 		\
 	mcserv.pamd 		\
-	mc.ext.in.qnx.diff 	\
 	mc.global
 
 noinst_SCRIPTS = tdiff
