@@ -49,7 +49,7 @@ Menu *
 create_menu (const char *name, menu_entry *entries, int count, const char *help_node)
 {
     Menu *menu;
-    char *cp;
+    const char *cp;
 
     menu = (Menu *) g_malloc (sizeof (*menu));
     menu->count = count;

@@ -145,7 +145,7 @@ display_init (int radio_sel, char *init_text, int _check_status,
 
     if (!i18n_displays_flag) {
 	int i, l, maxlen = 0;
-	char *cp;
+	const char *cp;
 
 	display_title = _(display_title);
 	for (i = 0; i < LIST_TYPES; i++) {

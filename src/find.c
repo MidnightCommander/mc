@@ -709,7 +709,8 @@ init_find_vars (void)
 static void
 find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
 {
-    char *fullname, *filename;
+    char *fullname;
+    const char *filename;
     int line;
     
     if (content_pattern){
@@ -944,7 +945,7 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,
 
 	for (i = 0; entry && i < find_list->count;
 	     entry = entry->next, i++) {
-	    char *filename;
+	    const char *filename;
 
 	    if (!entry->text || !entry->data)
 		continue;

@@ -2,7 +2,23 @@
 
 	* view.c (display): Recognize "+\bo" as a list item in nroff mode.
 	Display "_\b_" correctly in both colors.
+
 	* view.c (hex_search): Added const qualifier.
+	* boxes.c (display_unit): Likewise.
+	* file.c (check_hardlinks): Likewise.
+	* find.c (find_do_view_edit): Likewise. (find_file): Likewise.
+	* global.h (home_dir): Likewise.
+	* main.c (get_parent_dir_name): Likewise. (init_xterm_support):
+	Likewise. (OS_Setup): Likewise.
+	* menu.c (create_menu): Likewise.
+	* mountlist.c (xatoi): Likewise. (read_filesystem_list): Likewise.
+	* poptconfig.c (poptReadDefaultConfig): Likewise.
+	* popthelp.c (showHelpIntro): Likewise.
+	* rxvt.c (look_for_rxvt_extensions): Likewise.
+	* slint.c (has_colors): Likewise.
+	* subshell.c (check_sid): Likewise.
+	* user.c (check_format_var): Likewise.
+	* widget.c (radio_callback): Likewise.
 
 2004-09-25  Pavel Shirshov  <pavelsh@mail.ru>
 

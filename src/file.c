@@ -296,7 +296,7 @@ check_hardlinks (const char *src_name, const char *dst_name, struct stat *pstat)
     ino_t ino = pstat->st_ino;
     dev_t dev = pstat->st_dev;
     struct stat link_stat;
-    char *p;
+    const char *p;
 
     if (vfs_file_class_flags (src_name) & VFSF_NOLINKS)
 	return 0;
@@ -321,12 +321,13 @@ check_hardlinks (const char *src_name, const char *dst_name, struct stat *pstat)
     lp = (struct link *) g_malloc (sizeof (struct link) + strlen (src_name)
 				   + strlen (dst_name) + 1);
     if (lp) {
+    	char *lpdstname;
 	lp->vfs = my_vfs;
 	lp->ino = ino;
 	lp->dev = dev;
 	strcpy (lp->name, src_name);
-	p = strchr (lp->name, 0) + 1;
-	strcpy (p, dst_name);
+	lpdstname = lp->name + strlen(lp->name) + 1;
+	strcpy (lpdstname, dst_name);
 	lp->next = linklist;
 	linklist = lp;
     }

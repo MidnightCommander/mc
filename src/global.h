@@ -157,7 +157,7 @@ struct timeval {
 #include "vfsdummy.h"
 #endif
 
-extern char *home_dir;
+extern const char *home_dir;
 
 #ifdef min
 #undef min

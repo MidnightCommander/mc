@@ -230,7 +230,7 @@ Dlg_head *midnight_dlg;
 int update_prompt = 0;
 
 /* The home directory */
-char *home_dir = NULL;
+const char *home_dir = NULL;
 
 /* The value of the other directory, only used when loading the setup */
 char *other_dir = NULL;
@@ -544,10 +544,10 @@ directory_history_add (struct WPanel *panel, const char *dir)
  *
  *  You do _NOT_ want to add any vfs aware code here. <pavel@ucw.cz>
  */
-static char *
+static const char *
 get_parent_dir_name (const char *cwd, const char *lwd)
 {
-    char *p;
+    const char *p;
     if (strlen (lwd) > strlen (cwd))
 	if ((p = strrchr (lwd, PATH_SEP)) && !strncmp (cwd, lwd, p - lwd)) {
 	    return (p + 1);
@@ -1333,7 +1333,7 @@ setup_pre (void)
 static void
 init_xterm_support (void)
 {
-    char *termvalue;
+    const char *termvalue;
 #ifdef HAVE_SLANG
     char *term_entry;
 #endif
@@ -1346,7 +1346,7 @@ init_xterm_support (void)
 
     /* Check mouse capabilities */
 #ifdef HAVE_SLANG
-    term_entry = SLtt_tigetent (termvalue);
+    term_entry = SLtt_tigetent (const_cast(char *, termvalue));
     xmouse_seq = SLtt_tigetstr ("Km", &term_entry);
 #else
     xmouse_seq = tigetstr ("kmous");
@@ -1763,7 +1763,7 @@ do_nc (void)
 static void
 OS_Setup (void)
 {
-    char *mc_libdir;
+    const char *mc_libdir;
     shell = getenv ("SHELL");
     if (!shell || !*shell) {
         struct passwd *pwd;

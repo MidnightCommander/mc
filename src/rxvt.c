@@ -33,7 +33,7 @@ static int rxvt_extensions = 0;
 int look_for_rxvt_extensions (void)
 {
     static int been_called = 0;
-    char *e;
+    const char *e;
     if (!been_called) {
 	rxvt_extensions = 0;
 	e = getenv ("RXVT_EXT");

@@ -116,7 +116,7 @@ int check_format_var (const char *p, char **v)
 {
     const char *q = p;
     char *var_name;
-    char *value;
+    const char *value;
     const char *dots = 0;
     
     *v = 0;

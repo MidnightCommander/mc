@@ -126,7 +126,8 @@ int poptReadConfigFile(poptContext con, const char * fn) {
 }
 
 int poptReadDefaultConfig(poptContext con, int useEnv) {
-    char * fn, * home;
+    char *fn;
+    const char* home;
     int rc;
 
     if (!con->appName) return 0;

@@ -298,7 +298,7 @@ static int
 check_sid (void)
 {
     pid_t my_sid, old_sid;
-    char *sid_str;
+    const char *sid_str;
     int r;
 
     sid_str = getenv ("MC_SID");

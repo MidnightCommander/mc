@@ -359,7 +359,7 @@ vline (int character, int len)
 
 int has_colors (void)
 {
-    char *terminal = getenv ("TERM");
+    const char *terminal = getenv ("TERM");
     char *cts = color_terminal_string, *s;
     size_t i;
 

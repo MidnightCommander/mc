@@ -174,7 +174,7 @@ static void singleTableHelp(FILE * f, const struct poptOption * table,
 
 static int showHelpIntro(poptContext con, FILE * f) {
     int len = 6;
-    char * fn;
+    const char * fn;
 
     fprintf(f, _("Usage:"));
     if (!(con->flags & POPT_CONTEXT_KEEP_FIRST)) {

@@ -150,7 +150,7 @@ static struct mount_entry *mount_list = NULL;
    No prefix (like '0x') or suffix (like 'h') is expected to be
    part of CP. */
 
-static int xatoi (char *cp)
+static int xatoi (const char *cp)
 {
     int val;
 
@@ -242,7 +242,7 @@ read_filesystem_list (int need_fs_type, int all_fs)
     {
 	struct mntent *mnt;
 	FILE *fp;
-	char *devopt;
+	const char *devopt;
 
 	fp = setmntent (MOUNTED, "r");
 	if (fp == NULL)
