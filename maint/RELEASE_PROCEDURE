@@ -14,7 +14,7 @@ significant changes have been done since the previous release.
 Make sure that all significant user-visible changes are in the NEWS
 file.  Group changes by topics to improve readability.
 
-Update configure.in with the new version.
+Update configure.ac with the new version.
 
 Make sure that maint/mctest covers most features of the current code and
 run it in a clean working directory.
@@ -33,4 +33,4 @@ Change the homepage to mention the new version.
 
 Announce the release in both mailing lists.
 
-Bump the version in configure.in.
+Bump the version in configure.ac.

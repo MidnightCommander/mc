@@ -51,9 +51,9 @@ fi
 # Remove old tarballs and build the new one
 rm -f "mc*.tar.gz"
 MCVERSION=`date "+%Y-%m-%d-%H" --utc`
-cp -f configure.in configure.in.cvs
+cp -f configure.ac configure.ac.cvs
 sed "s/AM_INIT_AUTOMAKE([^)]*)/AM_INIT_AUTOMAKE(mc, $MCVERSION)/" \
-  configure.in.cvs >configure.in
+  configure.ac.cvs >configure.ac
 ./autogen.sh
 make all
 make distcheck
