@@ -1,5 +1,11 @@
 2001-02-09  Pavel Roskin  <proski@gnu.org>
 
+	* samba/configure.in: More useless stuff removed.
+	* samba/Makefile.in: Likewise.
+	* Make-mc.in: Remove samba/smbwrapper directory.
+	* samba/smbwrapper/smbw.h: Remove.
+	* samba/include/includes.h: Don't include smbw.h.
+
 	* samba/configure.in: Don't check for things that are unused.
 	Remove support for building shared libraries.
 	* samba/Makefile.in: Remove support for shared libraries and

@@ -10,7 +10,7 @@ top_builddir = ..
 
 @MCF@
 
-SAMBA_INCLUDES = -I$(srcdir)/samba/ubiqx -I$(srcdir)/samba/smbwrapper
+SAMBA_INCLUDES = -I$(srcdir)/samba/ubiqx
 
 CFLAGS   = $(XCFLAGS)
 CPPFLAGS = $(XCPPFLAGS) -I. $(SAMBA_INCLUDES)
@@ -134,9 +134,6 @@ SAMBA_DIST_LIBSMB =		\
 SAMBA_DIST_PARAM =		\
 	loadparm.c		\
 	params.c
-
-SAMBA_DIST_SMBWRAPPER =		\
-	smbw.h
 
 SAMBA_DIST_TESTS =		\
 	README			\
@@ -308,7 +305,6 @@ distdir:
 	mkdir $(distdir)/samba/lib
 	mkdir $(distdir)/samba/libsmb
 	mkdir $(distdir)/samba/param
-	mkdir $(distdir)/samba/smbwrapper
 	mkdir $(distdir)/samba/tests
 	mkdir $(distdir)/samba/ubiqx
 	for I in $(SAMBA_DIST_TOPLEVEL); do \
@@ -325,9 +321,6 @@ distdir:
 	  || exit 1; done
 	for I in $(SAMBA_DIST_PARAM); do \
 	  cp -p $(srcdir)/samba/param/$$I $(distdir)/samba/param \
-	  || exit 1; done
-	for I in $(SAMBA_DIST_SMBWRAPPER); do \
-	  cp -p $(srcdir)/samba/smbwrapper/$$I $(distdir)/samba/smbwrapper \
 	  || exit 1; done
 	for I in $(SAMBA_DIST_TESTS); do \
 	  cp -p $(srcdir)/samba/tests/$$I $(distdir)/samba/tests \
