@@ -48,7 +48,7 @@ per ulteriori informazioni.
 Usato per specificare un set di colori differente a riga di comando.
 Il formato di arg è documentato nella sezione
 .\"LINK2"
-Colori.
+Colori\&.
 .\"Colors"
 .TP
 .I "\-d"
@@ -121,7 +121,7 @@ Per default, la seconda linea dal fondo è la riga di comando,
 mentre quella in basso mostra le etichette dei tasti funzione.
 La riga più in alto è la
 .\"LINK2"
-riga dei menu.
+riga dei menu\&.
 .\"Menu Bar"
 La barra dei menu può essere invisibile, ma compare se clicchi la
 riga più in alto con il mouse o se premi il tasto F9.
@@ -134,7 +134,7 @@ Copia usano la directory del pannello non selezionato come valore
 predefinito di destinazione (ma si richiede sempre una conferma prima).
 Per informazioni aggiuntive, vedere le sezioni sui 
 .\"LINK2"
-Pannelli Directory,
+Pannelli Directory\&,
 .\"Directory Panels"
 i
 .\"LINK2"
@@ -142,7 +142,7 @@ Menu Sinistro e Destro
 .\"Left and Right Menus"
 e
 .\"LINK2"
-Menu File.
+Menu File\&.
 .\"File Menu"
 .PP
 E' possibile eseguire comandi di sistema dal Midnight Commander 
@@ -193,7 +193,7 @@ Visualizzatore dell'Aiuto
 .\"Contents"
 e nell' 
 .\"LINK2"
-Albero Directory.
+Albero Directory\&.
 .\"Directory Tree"
 .PP
 L'auto ripetizione predefinita per il mouse è di 400 millisecondi. Questa
@@ -202,7 +202,7 @@ può essere cambiata in valori differenti modificando il file
 \&~/.mc/ini
 .\"Save Setup"
 e cambiando il parametro
-.IR mouse_repeat_rate.
+.IR mouse_repeat_rate .
 .PP
 Se il Commander sta funzionando con il supporto mouse, si può saltarlo
 ed ottenere il funzionamento del mouse normale (taglia e incolla di testo)
@@ -277,7 +277,7 @@ se la selezione è un file eseguibile allora esso viene eseguito.
 Per ultimo, se l'estensione del file selezionato corrisponde ad una
 delle estensioni presenti nel
 .\"LINK2"
-file estensioni,
+file estensioni\&,
 .\"Extension File Edit"
 il comando corrispondente viene eseguito.
 .PP
@@ -313,31 +313,31 @@ Imposta la modalità della visualizzazione dell'altro pannello a vista rapida.
 .B C-x !.
 Esegue il comando
 .\"LINK2"
-Pannellizza comando.
+Pannellizza comando\&.
 .\"External panelize"
 .PP
 .B C-x h
 Esegue il comando
 .\"LINK2"
-aggiungi directory alla lista directory favorite.
+aggiungi directory alla lista directory favorite\&.
 .\"Hotlist"
 .PP
 .B M-!,
 Esegue il comando Vista filtrata, descritto in
 .\"LINK2"
-Vista filtrata.
+Vista filtrata\&.
 .\"Internal File Viewer"
 .PP
 .B M-?,
 Esegui il comando
 .\"LINK2"
-Trova file.
+Trova file\&.
 .\"Find File"
 .PP
 .B M-c,
 Mostra la finestra
 .\"LINK2"
-cambia dir veloce.
+cambia dir veloce\&.
 .\"Quick cd"
 .PP
 .B C-o,
@@ -359,7 +359,7 @@ Questa sezione elenca i tasti che operano sui pannelli directory.
 Se si desidera sapere come cambiare la visualizzazione dei pannelli,
 date un'occhiata alla sezione su
 .\"LINK2"
-Menu Sinistro e Destro.
+Menu Sinistro e Destro\&.
 .\"Left and Right Menus"
 .PP
 .B Tab, C-i.
@@ -439,7 +439,7 @@ Sposta la barra di selezione di una pagina in basso.
 .B pagina-su, M-v.
 Sposta la barra di selezione di una pagina in alto.
 .PP
-.B M-o,
+.B M-o.
 Se l'altro pannello è un elenco e si è su una directory nel
 pannello corrente, allora il contenuto dell'altro pannello viene
 impostato al contenuto della directory correntemente selezionata
@@ -447,19 +447,19 @@ impostato al contenuto della directory correntemente selezionata
 dell'altro pannello viene impostato sulla directory madre della 
 dir corrente.
 .PP
-.B C-PaginaSu, C-PaginaGiù
+.B C-PaginaSu, C-PaginaGiù.
 Solo quando si esegue in console Linux: rispettivamente cambia 
 directory a ".." e alla directory correntemente selezionata.
 .PP
-.B M-y
+.B M-y.
 Sposta la directory precedente nello storico, equivalente a 
 premere '<' con il mouse.
 .PP
-.B M-u
+.B M-u.
 Sposta la directory successiva nello storico, equivalente a 
 premere '>' con il mouse.
 .PP
-.B M-S-h, M-H
+.B M-S-h, M-H.
 Mostra lo storico directory, equivalente a premere 'v' con il mouse.
 .PP
 .\"NODE "  Shell Command Line"
@@ -560,10 +560,10 @@ sposta il cursore all'inizio della linea.
 .B C-e
 sposta il cursore alla fine della linea
 .PP
-.B C-b, move-left
+.B C-b, freccia-sinistra
 sposta il cursore di una posizione a sinistra.
 .PP
-.B C-f, move-right
+.B C-f, freccia-destra
 sposta il cursore di una posizione a destra.
 .PP
 .B M-f
@@ -575,7 +575,7 @@ sposta il cursore di una parola indietro.
 .B C-h, backspace
 cancella il carattere precedente.
 .PP
-.B C-d, Delete
+.B C-d, Canc
 cancella il carattere nel punto (sopra il cursore).
 .PP
 .B C-@
@@ -791,9 +791,9 @@ e se possibile informazioni circa il file system corrente.
 .B "Albero" 
 La vista ad albero è abbastanza simile al comando
 .\"LINK2"
-albero directory
+albero directory\&.
 .\"Directory Tree"
- . Vedere la sezione corrispondente per maggiori informazioni.
+Vedere la sezione corrispondente per maggiori informazioni.
 .TP 
 .B "Vista rapida"
 In questa modalità il pannello si imposta come un
@@ -857,7 +857,7 @@ Il file menu comprende i comandi seguenti (tasti veloci tra parentesi):
 Invoca il visualizzatore incorporato di ipertesti per l'aiuto. 
 All'interno del
 .\"LINK2"
-visualizzatore aiuto,
+visualizzatore aiuto\&,
 .\"Contents"
 è possibile usare il tasto tab per selezionare il successivo collegamento
 e il tasto invio per seguirlo. I tasti Barra spaziatrice e Backspace vengono
@@ -868,7 +868,7 @@ nuovamente per ottenere la lista completa dei tasti accettati.
 .PP
 Invoca il
 .\"LINK2"
-menu utente.
+menu utente\&.
 .\"Menu File Edit"
 Il menu utente fornisce un modo semplice per dare agli utenti un menu ed
 aggiungere nuove funzionalità al Midnight Commander.
@@ -918,7 +918,7 @@ sulla maschera sorgente (che sarà normalmente * o ^\\(.*\\)$ a seconda
 dell'impostazione di 'modelli della shell') o sui caratteri jolly sulla destinazione
 vedere
 .\"LINK2"
-Maschera copia/rinomina.
+Maschera copia/rinomina\&.
 .\"Mask Copy/Rename"
 .PP
 In alcuni sistemi è possibile eseguire la copia in background cliccando
@@ -1036,7 +1036,7 @@ l'immissione degli stessi argomenti che si darebbero al comando
 a riga di comando. Questo ha le stesse caratteristiche già presenti nel
 comando
 .\"LINK2"
-comando interno cd.
+comando interno cd\&.
 .\"The cd internal command"
 .PP
 .\"NODE "  Command Menu"
@@ -1117,7 +1117,7 @@ E' possibile utilizzare i tasti seguenti:
 .PP
 Sono accettati i
 .\"LINK2"
-Tasti Generali di movimento.
+Tasti Generali di movimento\&.
 .\"General Movement Keys"
 .PP
 .B Invio.
@@ -1186,9 +1186,8 @@ Esce dalla rappresentazione ad albero. Non cambia directory.
 Il mouse è supportato. Un doppio click si comporta come premere Invio.
 Vedere anche la sezione
 .\"LINK2"
-supporto mouse
+supporto mouse\&.
 .\"Mouse Support"
- .
 .PP
 .\"NODE "    Find File"
 .SH "    Trova File"
@@ -1196,9 +1195,8 @@ Il comando Trova file domanda prima la directory di inizio per la
 ricerca ed il nome del file da cercare. Premendo il tasto albero
 puoi selezionare la directory di partenza dall'
 .\"LINK2"
-albero directory
+albero directory\&.
 .\"Directory Tree"
- . 
 .PP
 Il campo contenuo accetta espressioni regolari simili a egrep(1). Ciò
 significa che è necessario proteggere i caratteri con significati speciali per
@@ -1288,7 +1286,7 @@ richiedendo l'etichetta per identificarla.
 Questo rende più veloce il cd verso directory usate spesso. Considera l'uso della
 variabile CDPATH come descritto in
 .\"LINK2"
-comando cd interno.
+comando cd interno\&.
 .\"The cd internal command"
 .PP
 .\"NODE "    Extension File Edit"
@@ -1343,7 +1341,7 @@ deve essere:
 .I command
 è qualsiasi comando shell di una riga, con la semplice
 .\"LINK2"
-sostituzione macro.
+sostituzione macro\&.
 .\"Macro Substitution"
 .PP
 Gli obiettivi sono valutati dalla cima al fondo (l'ordine perciò è 
@@ -1383,7 +1381,7 @@ vengono copiate in un file temporaneo nella directory temporanea (normalmente
 normali costrutti shell nei menu. Prima dell'esecuzione del codice del menu
 ha luogo una semplice sostituzione di macro. Per ulteriori informazioni vedere
 .\"LINK2"
-sostituzioni macro.
+sostituzione macro\&.
 .\"Macro Substitution"
 .PP
 Ecco un esempio di un file mc.menu:
@@ -1667,7 +1665,7 @@ Se non nessun editor è specificato, verrà usato
 .BR vi .
 Vedere la sezione
 .\"LINK2"
-editor di file interno.
+editor di file interno\&.
 .\"Internal File Editor"
 .PP
 .I Usa il visualizzatore interno.
@@ -1679,7 +1677,7 @@ Se il visualizzatore non è definito, verrà usato il comando
 .BR view .
 Vedere sezione
 .\"LINK2"
-visualizzatore file interno.
+visualizzatore file interno\&.
 .\"Internal File Viewer"
 .PP
 .I Completamento: visualizza tutto
@@ -1744,7 +1742,7 @@ e i
 .I tipi di file
 siano evidenziati con speciali
 .\"LINK2"
-Colori.
+Colori\&.
 .\"Colors"
 Se l'evidenziazione dei permessi è abilitata, i campi
 .I permessi
@@ -1814,9 +1812,8 @@ definizioni dei tasti che già funzionavano correttamente non vengono salvate.
 .SH "    FS Virtuale "
 Quest'opzione permette di controllare l'impostazione della cache informazioni del
 .\"LINK2"
-File System Virtuale
+File System Virtuale\&.
 .\"Virtual File System"
- .
 .PP
 Il Midnight Commander tiene in memoria le informazioni
 relative ad alcuni dei file system virtuali per accelerare
@@ -1886,13 +1883,12 @@ Il comando
 crea il file ~/.mc/ini salvando le impostazioni correnti 
 dei menu
 .\"LINK2"
-Sinistre, Destra
+Sinistra, Destra
 .\"Left and Right Menus"
 e
 .\"LINK2"
-Opzioni
+Opzioni\&.
 .\"Options Menu"
- .
 .PP
 Se si attiva l'opzione
 .I autosalva configurazione
@@ -1918,7 +1914,7 @@ Se si preme Invio su di un file che non è eseguibile, il Midnight
 Commander controllerà l'estensione del file selezionato con ciò 
 che trova nel
 .\"LINK2"
-File Estensioni.
+File Estensioni\&.
 .\"Extension File Edit"
 Se viene trovata una corrispondenza, verrà eseguito il codice associato.
 Verrà eseguita una semplice 
@@ -1969,11 +1965,11 @@ parte nel file system (per esempio cd linux vi porterà in
 .PP
 Quando si accede ad un
 .\"LINK2"
-menu utente, 
+menu utente\&,
 .\"Menu File Edit"
 o si esegue un
 .\"LINK2"
-comando dipendente dall'estensione,
+comando dipendente dall'estensione\&,
 .\"Extension File Edit"
 o si esegue un comando dalla riga di ingresso,
 viene eseguita una semplice sostituzione di macro.
@@ -2002,7 +1998,7 @@ Nome del file di errore.
 Nome del menu corrente.
 .PP
 .I "%f"
-and
+e
 .I "%p"
 .IP
 Nome del file corrente.
@@ -2056,7 +2052,7 @@ Questa è una macro speciale usata per cambiare la directory corrente
 alla directory specificata di fronte ad essa. Usata principalmente 
 come interfaccia al
 .\"LINK2"
-File System Virtuale.
+File System Virtuale\&.
 .\"Virtual File System"
 .PP
 .I "%view"
@@ -2478,7 +2474,7 @@ Abilita/disabilita il righello.
 E' anche possibile istruire il visualizzatore su come mostrare un file,
 vedere la sezione
 .\"LINK2"
-Editor File Estensioni
+Editor File Estensioni\&.
 .\"Extension File Edit"
 .\"NODE "Internal File Editor"
 .SH "Editor di File Interno"
@@ -2609,7 +2605,7 @@ dell'opzione
 .I Completamento: visualizza tutto
 nella finestra
 .\"LINK2"
-Configurazione.
+Configurazione\&.
 .\"Configuration"
 Se è abilitata, un elenco di tutte le possibilità viene mostrato vicino 
 alla posizione corrente per poter selezionare con i tasti freccia e
@@ -2698,17 +2694,16 @@ in modo che il Midnight Commander usi una connessione proxy per fare il
 trasferimento ftp.
 E' possibile definire la connessione proxy nella finestra di dialogo
 .\"LINK2"
-Impostazione File System Virtuale (VFS)
+Impostazione File System Virtuale (VFS)\&.
 .\"Virtual FS"
- .  
 .PP
 Un'altra opzione da impostare è
 .I Usa sempre ftp proxy
 nella finestra di dialogo
 .\"LINK2"
-Impostazione File System Virtuale (VFS)
+Impostazione File System Virtuale (VFS)\&.
 .\"Virtual FS"
- . Quest'ultima configurerà il programma in modo da utilizzare
+Quest'ultima configurerà il programma in modo da utilizzare
 sempre la connessione proxy. Se questa variabile è impostata, il programma
 farà due cose: consulterà il file @prefix@/share/mc/mc.no_proxy per
 le linee contenenti nomi di macchine locali (se il nome macchina comincia
@@ -2724,9 +2719,9 @@ file di inizializzazione.
 Il Midnight Commander mantiene gli elenchi delle directory in una cache.
 Il tempo di validità della cache è configurabile nella finestra di dialogo
 .\"LINK2"
-Impostazione File System Virtuale (VFS)
+Impostazione File System Virtuale (VFS)\&.
 .\"Virtual FS"
- . Ciò ha come effetto che anche se si fanno dei cambiamenti alla directory,
+Ciò ha come effetto che anche se si fanno dei cambiamenti alla directory,
 questi non verranno riflessi nell'elenco della directory fino a che non
 si forzi una rilettura della cache con il tasto C-r. Questa è una 
 caratteristica voluta (se si pensa che sia un difetto, si pensi al caso 
@@ -2993,7 +2988,7 @@ I colori speciali di evidenziazione determinano come i file
 vengono visualizzati quando l'evidenziazione dei file è 
 abilitata (vedere sezione 
 .\"LINK2"
-Aspetto).
+Aspetto\&).
 .\"Layout
 .I directory
 usata per directory o collegamenti simbolici a directory;
@@ -3128,7 +3123,7 @@ pannello.
 Se questa variabile è abilitata (valore predefinito) userà il comando
 file per trovare delle corrispondenze sui tipi di file elencati nel file
 .\"LINK2"
-mc.ext .
+mc.ext\&.
 .\"Extension File Edit"
 .PP
 .I xterm_mode
@@ -3218,7 +3213,7 @@ Attualmente vengono caricate solo le
 .\"LINK2"
 impostazioni del terminale
 .\"Terminal databases"
-da mc.lib .
+da mc.lib.
 .PP
 ~/.mc/ini
 .IP
@@ -3307,7 +3302,7 @@ Vedere il file TODO nella distribuzione per informazioni su
 quello che rimane ancora da fare.
 .PP
 Se si vuole fare un rapporto di un problema nel programma, prego spedire
-un messaggio di post a questo indirizzo: mc-devel@gnome.org.
+un messaggio di posta a questo indirizzo: mc-devel@gnome.org.
 .PP
 Nel rapporto è necessario fornire una descrizione dettagliata del baco, 
 la versione del programma (mc -v mostra quest'informazione), il sistema 
