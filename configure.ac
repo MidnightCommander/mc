@@ -552,7 +552,9 @@ fi
 
 if test x"$USE_MAINTAINER_MODE" = x"yes"; then
     if test x"${enable_gcc_warnings+set}" != x"set"; then
-        CFLAGS="-Wall $CFLAGS"
+        if test x"${GCC}" = x"yes"; then
+            CFLAGS="-Wall $CFLAGS"
+        fi
     fi
 fi
 
