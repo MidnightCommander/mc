@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
-"POT-Creation-Date: 2000-11-11 14:08+0100\n"
+"POT-Creation-Date: 2000-11-13 19:36+0100\n"
 "PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -1620,7 +1620,7 @@ msgstr "Lokacija:"
 #: gtkedit/editcmd.c:1327 gtkedit/editcmd.c:3022 gtkedit/editoptions.c:69
 #: src/boxes.c:138 src/boxes.c:278 src/boxes.c:378 src/boxes.c:466
 #: src/boxes.c:646 src/boxes.c:728 src/boxes.c:783 src/boxes.c:898
-#: src/filegui.c:839 src/find.c:171 src/layout.c:370 src/option.c:143
+#: src/filegui.c:839 src/find.c:171 src/layout.c:375 src/option.c:143
 #: src/wtools.c:289 src/wtools.c:563 vfs/smbfs.c:117
 msgid "&Ok"
 msgstr "&V redu"
@@ -1842,7 +1842,7 @@ msgstr "Delaj varnostne kopije -->"
 #: src/boxes.c:464 src/boxes.c:644 src/boxes.c:727 src/boxes.c:781
 #: src/chmod.c:114 src/chown.c:79 src/cmd.c:861 src/filegui.c:822
 #: src/find.c:171 src/hotlist.c:138 src/hotlist.c:801 src/hotlist.c:898
-#: src/layout.c:371 src/learn.c:59 src/option.c:144 src/panelize.c:86
+#: src/layout.c:376 src/learn.c:59 src/option.c:144 src/panelize.c:86
 #: src/view.c:406 src/wtools.c:111 src/wtools.c:386 src/wtools.c:561
 #: vfs/smbfs.c:117
 msgid "&Cancel"
@@ -2555,7 +2555,7 @@ msgstr "&Splo¹no...  "
 msgid "&Save mode..."
 msgstr "naèin &Shranjevanja..."
 
-#: gtkedit/editmenu.c:264 gtkedit/editmenu.c:273 src/main.c:1367
+#: gtkedit/editmenu.c:264 gtkedit/editmenu.c:273 src/main.c:1369
 msgid "&Layout..."
 msgstr "&Postavitev..."
 
@@ -2820,7 +2820,7 @@ msgid "Error initialising editor.\n"
 msgstr "Napaka ob inicializaciji urejevalnika.\n"
 
 #: gtkedit/editwidget.c:1137 gtkedit/gtkedit.c:1248 src/help.c:806
-#: src/main.c:1733 src/screen.c:2393 src/screen.c:2423 src/tree.c:1008
+#: src/main.c:1735 src/screen.c:2393 src/screen.c:2423 src/tree.c:1008
 #: src/view.c:2070
 msgid "Help"
 msgstr "Pomoè"
@@ -2833,13 +2833,13 @@ msgstr "Oznaka"
 msgid "Replac"
 msgstr "Zamenj"
 
-#: gtkedit/editwidget.c:1146 src/main.c:1735
+#: gtkedit/editwidget.c:1146 src/main.c:1737
 msgid "PullDn"
 msgstr "Potegni Dol"
 
 #. gtk_edit_menu
 #: gtkedit/editwidget.c:1147 gtkedit/gtkedit.c:1258 src/help.c:818
-#: src/main.c:1736 src/view.c:2072 src/view.c:2094
+#: src/main.c:1738 src/view.c:2072 src/view.c:2094
 msgid "Quit"
 msgstr "Konèaj"
 
@@ -2906,7 +2906,7 @@ msgstr "Bri¹i"
 msgid "Delete highlighted text"
 msgstr "Zbri¹i osvetljeno besedilo"
 
-#: gtkedit/gtkedit.c:1257 src/main.c:1734 src/screen.c:2394 src/screen.c:2424
+#: gtkedit/gtkedit.c:1257 src/main.c:1736 src/screen.c:2394 src/screen.c:2424
 msgid "Menu"
 msgstr "Menu"
 
@@ -5027,32 +5027,32 @@ msgstr "_dovoljenja"
 msgid "&File types"
 msgstr "&Vrste datotek"
 
-#: src/layout.c:372 src/learn.c:60 src/learn.c:179 src/option.c:145
+#: src/layout.c:377 src/learn.c:60 src/learn.c:179 src/option.c:145
 msgid "&Save"
 msgstr "&Shrani"
 
 #. length of line with '<' '>' buttons
-#: src/layout.c:380
+#: src/layout.c:385
 msgid " Layout "
 msgstr " Postavitev "
 
-#: src/layout.c:381
+#: src/layout.c:386
 msgid " Panel split "
 msgstr " Razdelitev pulta"
 
-#: src/layout.c:382
+#: src/layout.c:387
 msgid " Highlight... "
 msgstr " Poudari... "
 
-#: src/layout.c:383 src/option.c:156
+#: src/layout.c:388 src/option.c:156
 msgid " Other options "
 msgstr " Ostale nastavitve "
 
-#: src/layout.c:384
+#: src/layout.c:389
 msgid "output lines"
 msgstr "vrstic izhoda"
 
-#: src/layout.c:451
+#: src/layout.c:456
 msgid "Layout"
 msgstr "Postavitev"
 
@@ -5163,6 +5163,15 @@ msgstr " Polnoèni Poveljnik"
 #: src/main.c:868
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr " Zares ¾elite zapreti Polnoènega Poveljnika? "
+
+#: src/main.c:1236
+msgid " Listing format edit "
+msgstr " Uredi obliko izpisa seznama"
+
+#: src/main.c:1236
+#, c-format
+msgid " New mode is \"%s\" "
+msgstr " Nov naèin je \"%s\" "
 
 #: src/main.c:1248 src/main.c:1272
 msgid "&Listing mode..."
@@ -5348,67 +5357,67 @@ msgstr "uredi datoteko s &Priponami"
 msgid "&Menu file edit"
 msgstr "uredi datoteko z &Menuji"
 
-#: src/main.c:1361
+#: src/main.c:1362
 msgid "Menu edi&Tor edit"
 msgstr "Uredi &Urejevalnik menujev"
 
-#: src/main.c:1366
+#: src/main.c:1368
 msgid "&Configuration..."
 msgstr "&Nastavitve..."
 
-#: src/main.c:1368
+#: src/main.c:1370
 msgid "c&Onfirmation..."
 msgstr "&Potrditev..."
 
-#: src/main.c:1369
+#: src/main.c:1371
 msgid "&Display bits..."
 msgstr "&Ka¾i bite..."
 
-#: src/main.c:1371
+#: src/main.c:1373
 msgid "learn &Keys..."
 msgstr "nauèi se &Tipk..."
 
-#: src/main.c:1374
+#: src/main.c:1376
 msgid "&Virtual FS..."
 msgstr "&Navidezni Datoteèni Sistem..."
 
-#: src/main.c:1377
+#: src/main.c:1379
 msgid "&Save setup"
 msgstr "&Shrani nastavitve"
 
-#: src/main.c:1393 src/main.c:1395
+#: src/main.c:1395 src/main.c:1397
 msgid " &Left "
 msgstr " &Levo "
 
-#: src/main.c:1395
+#: src/main.c:1397
 msgid " &Above "
 msgstr " &Zgoraj "
 
-#: src/main.c:1398
+#: src/main.c:1400
 msgid " &File "
 msgstr " &Datoteka "
 
-#: src/main.c:1399
+#: src/main.c:1401
 msgid " &Command "
 msgstr " &Ukaz "
 
-#: src/main.c:1400
+#: src/main.c:1402
 msgid " &Options "
 msgstr " &Mo¾nosti "
 
-#: src/main.c:1402 src/main.c:1404
+#: src/main.c:1404 src/main.c:1406
 msgid " &Right "
 msgstr " &Desno "
 
-#: src/main.c:1404
+#: src/main.c:1406
 msgid " &Below "
 msgstr " &Pod "
 
-#: src/main.c:1459
+#: src/main.c:1461
 msgid " Information "
 msgstr " Obvestilo "
 
-#: src/main.c:1460
+#: src/main.c:1462
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -5420,15 +5429,15 @@ msgstr ""
 " roèno osve¾iti imenik. Poglejte si priroènik (man)  \n"
 " za podrobnosti.                                     "
 
-#: src/main.c:1941
+#: src/main.c:1943
 msgid "Thank you for using GNU Midnight Commander"
 msgstr "Hvala, ker ste uporabljali GNU Polnoènega Poveljnika"
 
-#: src/main.c:2374
+#: src/main.c:2376
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM okolijska spremenljivka ni nastavljena!\n"
 
-#: src/main.c:2481
+#: src/main.c:2483
 msgid ""
 "Usage is:\n"
 "\n"
@@ -5440,19 +5449,19 @@ msgstr ""
 "mc [zastavice] [ta_imenik] [imenik_drugega_pulta]\n"
 "\n"
 
-#: src/main.c:2484
+#: src/main.c:2486
 msgid "-a, --stickchars   Force use of +, -, | for line drawing.\n"
 msgstr "-a, --stickchars   Prisili uporabo +, -, | za risanje èrt.\n"
 
-#: src/main.c:2486
+#: src/main.c:2488
 msgid "-b, --nocolor      Force black and white display.\n"
 msgstr "-b, --nocolor      Prisili èrnobel prikaz.\n"
 
-#: src/main.c:2488
+#: src/main.c:2490
 msgid "-B, --background   [DEVEL-ONLY: Debug the background code]\n"
 msgstr "-B, --background   [SAMO-RAZVOJ: Razhro¹èuj kodo ozadja]\n"
 
-#: src/main.c:2490
+#: src/main.c:2492
 msgid ""
 "-c, --color        Force color mode.\n"
 "-C, --colors       Specify colors (use --help-colors to get a list).\n"
@@ -5462,11 +5471,11 @@ msgstr ""
 "-C, --colors       Doloèi barve (uporabi --help-colors za seznam).\n"
 "-d, --nomouse      Izkljuèi podporo za mi¹ko\n"
 
-#: src/main.c:2494
+#: src/main.c:2496
 msgid "-e, --edit         Startup the internal editor.\n"
 msgstr "-e, --edit        Za¾eni notranji urejevalnik.\n"
 
-#: src/main.c:2496
+#: src/main.c:2498
 msgid ""
 "-f, --libdir       Print configured paths.\n"
 "-h, --help         Shows this help message.\n"
@@ -5480,16 +5489,16 @@ msgstr ""
 "terminfo/termcap\n"
 "                   privzete nastavitve.\n"
 
-#: src/main.c:2501
+#: src/main.c:2503
 msgid "-l, --ftplog file  Log ftpfs commands to the file.\n"
 msgstr "-l, --ftplog file  Pi¹i dnevnik ftpfs ukazov v datoteko.\n"
 
-#: src/main.c:2504
+#: src/main.c:2506
 msgid "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
 msgstr ""
 "-M, --memory dato  [SAMO-RAZVOJ: Pi¹i dnevnik MAD sporoèil v datoteko.]\n"
 
-#: src/main.c:2506
+#: src/main.c:2508
 msgid ""
 "-P, --printwd      At exit, print the last working directory.\n"
 "-s, --slow         Disables verbose operation (for slow terminals).\n"
@@ -5497,18 +5506,18 @@ msgstr ""
 "-P, --printwd      Ob izhodu, izpi¹i zadnji delovni imenik.\n"
 "-s, --slow         Ikljuèi podrobno obve¹èanje (za poèasne terminale).\n"
 
-#: src/main.c:2509
+#: src/main.c:2511
 msgid "-t, --termcap      Activate support for the TERMCAP variable.\n"
 msgstr "-t, --termcap      Aktiviraj podporo za TERMCAP spremenljivko.\n"
 
-#: src/main.c:2512
+#: src/main.c:2514
 msgid ""
 "-S, --createcmdile Create command file to set default directory upon exit.\n"
 msgstr ""
 "-S, --createcmdile Ustvari datoteko z ukazi, ki nastavi privzet imenik ob "
 "izhodu.\n"
 
-#: src/main.c:2515
+#: src/main.c:2517
 msgid ""
 "-u, --nosubshell   Disable the concurrent subshell mode.\n"
 "-U, --subshell     Force the concurrent subshell mode.\n"
@@ -5518,7 +5527,7 @@ msgstr ""
 "-U, --subshell     Prisili hkratni podlupinski naèin.\n"
 "-r, --forceexec    Prisili izvajanje v podlupini.\n"
 
-#: src/main.c:2519
+#: src/main.c:2521
 msgid ""
 "-v, --view fname   Start up into the viewer mode.\n"
 "-V, --version      Report version and configuration options.\n"
@@ -5531,11 +5540,11 @@ msgstr ""
 "shranjevanje/obnavljanje zaslona.\n"
 "+¹tevilka          ©tevilka je zaèetna vrstica datoteke za `mcedit'.\n"
 
-#: src/main.c:2524
+#: src/main.c:2526
 msgid "-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
 msgstr "-X, --dbgsubshell  [SAMO-RAZVOJ: Razhro¹èuj podlupino].\n"
 
-#: src/main.c:2526
+#: src/main.c:2528
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -5545,7 +5554,7 @@ msgstr ""
 "Prosimo po¹ljite poroèila o hro¹èih (vkljuèite izpis `mc -V')\n"
 "na mc-bugs@nuclecu.unam.mx\n"
 
-#: src/main.c:2542
+#: src/main.c:2544
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -5583,122 +5592,122 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2594
+#: src/main.c:2596
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr "Imenik s knji¾nicami za Polnoènega Poveljnika: %s\n"
 
-#: src/main.c:2608
+#: src/main.c:2610
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
 "Mo¾nost -m je zastarela. Prosim poglejte pod ka¾i bite... v menuju Mo¾nosti\n"
 
-#: src/main.c:2685
+#: src/main.c:2687
 msgid "Use to debug the background code"
 msgstr "Uporabi za razhro¹èevanje kod ozadja"
 
-#: src/main.c:2691
+#: src/main.c:2693
 msgid "Request to run in color mode"
 msgstr "Pro¹nja za izvajanje v barvnem naèinu"
 
-#: src/main.c:2693
+#: src/main.c:2695
 msgid "Specifies a color configuration"
 msgstr "Doloèi nastavitve barv"
 
-#: src/main.c:2698
+#: src/main.c:2700
 msgid "Edits one file"
 msgstr "Urejuje eno datoteko"
 
-#: src/main.c:2702
+#: src/main.c:2704
 msgid "Displays this help message"
 msgstr "Poka¾e to sporoèilo s pomoèjo"
 
-#: src/main.c:2705
+#: src/main.c:2707
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Poka¾e poroèilo s pomoèjo o menjavi barvne sheme"
 
-#: src/main.c:2708
+#: src/main.c:2710
 msgid "Log ftp dialog to specified file"
 msgstr "Pi¹i dnevnik ftp dialogov v doloèeno datoteko"
 
-#: src/main.c:2715
+#: src/main.c:2717
 msgid "Obsolete"
 msgstr "Zastarelo"
 
-#: src/main.c:2717
+#: src/main.c:2719
 msgid "Requests to run in black and white"
 msgstr "Pro¹nja za izvajanje v èrnobelem naèinu"
 
-#: src/main.c:2719
+#: src/main.c:2721
 msgid "Disable mouse support in text version"
 msgstr "Ikljuèi podporo za mi¹ko v tekstovni razlièici"
 
-#: src/main.c:2722
+#: src/main.c:2724
 msgid "Disables subshell support"
 msgstr "Izkljuèi podporo za podlupine"
 
-#: src/main.c:2726
+#: src/main.c:2728
 msgid "Prints working directory at program exit"
 msgstr "Izpi¹e delavni imenik ob izhodu iz programa"
 
-#: src/main.c:2728
+#: src/main.c:2730
 msgid "Resets soft keys on HP terminals"
 msgstr "Ponastavi mehke tipke na HP terminalih"
 
-#: src/main.c:2730
+#: src/main.c:2732
 msgid "To run on slow terminals"
 msgstr "Za poganjanje na poèasnih terminalih"
 
-#: src/main.c:2733
+#: src/main.c:2735
 msgid "Use stickchars to draw"
 msgstr "Uporabi lepljive znake za risanje"
 
-#: src/main.c:2737
+#: src/main.c:2739
 msgid "Enables subshell support (default)"
 msgstr "Vklopi podporo za podlupino (privzeto)"
 
-#: src/main.c:2742
+#: src/main.c:2744
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Posku¹a uporabiti termcap namesto terminfa"
 
-#: src/main.c:2746
+#: src/main.c:2748
 msgid "Displays the current version"
 msgstr "Poka¾e trenutno razlièico"
 
-#: src/main.c:2748
+#: src/main.c:2750
 msgid "Launches the file viewer on a file"
 msgstr "Za¾ene pogled datoteke"
 
-#: src/main.c:2750
+#: src/main.c:2752
 msgid "Forces xterm features"
 msgstr "Prisili uporabo xterm dodatkov"
 
-#: src/main.c:2752
+#: src/main.c:2754
 msgid "Geometry for the window"
 msgstr "Geometrija okna"
 
-#: src/main.c:2752
+#: src/main.c:2754
 msgid "GEOMETRY"
 msgstr "GEOMETRIJA"
 
-#: src/main.c:2753
+#: src/main.c:2755
 msgid "No windows opened at startup"
 msgstr "Ob prièetku ni odprtih oken"
 
-#: src/main.c:2754
+#: src/main.c:2756
 msgid "No desktop icons"
 msgstr "Ni namiznih ikon"
 
-#: src/main.c:2755
+#: src/main.c:2757
 msgid "Look more like traditional gmc"
 msgstr "Izgleda bolj kot tradicionalni GNOME Polnoèni Poveljnik"
 
-#: src/main.c:2757
+#: src/main.c:2759
 msgid "Display the directory that holds the .links startup files and exit"
 msgstr "Izpi¹i imenik, ki vsebuje .links zaèetne datoteke in konèaj"
 
-#: src/main.c:3073
+#: src/main.c:3077
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -5707,11 +5716,11 @@ msgstr ""
 "zastavice.\n"
 "Na nekaterih sistemih ¾elite pognati # `which mc`\n"
 
-#: src/main.c:3151
+#: src/main.c:3155
 msgid " Notice "
 msgstr " Opomba "
 
-#: src/main.c:3152
+#: src/main.c:3156
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
