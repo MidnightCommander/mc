@@ -1,6 +1,8 @@
 /* Man page to help file converter
    Copyright (C) 1994, 1995 Janne Kukonlehto
-   
+		 2002  Andrew V. Samoilov
+		 2002  Pavel Roskin
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
@@ -40,6 +42,8 @@ static int node = 0;		/* Flag: This line is an original ".SH" */
 
 static const char *c_out;	/* Output filename */
 static FILE *f_out;		/* Output file */
+
+static const char *c_in;	/* Current input filename */
 
 static char *topics = NULL;
 
@@ -112,7 +116,7 @@ static void
 print_error (const char *message)
 {
     fprintf (stderr, "man2hlp: %s in file \"%s\" at row %d\n", message,
-	     c_out, in_row);
+	     c_in, in_row);
 }
 
 /* Do fopen(), exit if it fails */
@@ -256,7 +260,7 @@ print_string (char *buffer)
 
 /* Like print_string but with printf-like syntax */
 static void
-printf_string (char *format, ...)
+printf_string (const char *format, ...)
 {
     va_list args;
     char buffer[BUFFER_SIZE];
@@ -349,7 +353,8 @@ handle_command (char *buffer)
     } else if (strcmp (buffer, ".\\\"LINK2\"") == 0) {
 	/* Next two input lines form a link */
 	link_flag = 2;
-    } else if (strcmp (buffer, ".PP") == 0) {
+    } else if ((strcmp (buffer, ".PP") == 0) || (strcmp (buffer, ".P") == 0)
+	       || (strcmp (buffer, ".LP") == 0)) {
 	/* End of paragraph */
 	if (col > 0)
 	    newline ();
@@ -387,15 +392,14 @@ handle_command (char *buffer)
 	*w++ = CHAR_BOLD_OFF;
 	*w = 0;
 	print_string (buffer);
-    } else if (strcmp (buffer, ".TP") == 0) {
+    } else if ((strcmp (buffer, ".TP") == 0) || (strcmp (buffer, ".IP") == 0)) {
 	/* End of paragraph? */
 	if (col > 0)
 	    newline ();
 	newline ();
     } else if (strcmp (buffer, ".\\\"TOPICS") == 0) {
 	if (out_row > 1) {
-	    print_error
-		("Syntax error: .\\\"TOPICS must be first command");
+	    print_error ("Syntax error: .\\\"TOPICS must be first command");
 	    return;
 	}
 	buffer = strtok (NULL, "");
@@ -413,8 +417,21 @@ handle_command (char *buffer)
 	    }
 	}
 	topics = strdup (buffer);
+    } else if (strcmp (buffer, ".br") == 0) {
+	if (col)
+	    newline ();
+    } else if (strncmp (buffer, ".\\\"", 3) == 0) {
+	/* Comment */
+    } else if (strcmp (buffer, ".TH") == 0) {
+	/* Title header */
     } else {
 	/* Other commands are ignored */
+	/* There is no memmove on some systems */
+	char buf[BUFFER_SIZE];
+	strcpy (buf, "Unsupported command ");
+	strcat (buf, buffer);
+	print_error (buf);
+	return;
     }
 }
 
@@ -483,6 +500,7 @@ main (int argc, char **argv)
     /* First stage - process the manual, write to the output file */
     f_man = fopen_check (c_man, "r");
     f_out = fopen_check (c_out, "w");
+    c_in = c_man;
 
     /* Repeat for each input line */
     while (!feof (f_man)) {
@@ -532,6 +550,7 @@ main (int argc, char **argv)
 
     /* Second stage - process the template file */
     f_tmpl = fopen_check (c_tmpl, "r");
+    c_in = c_tmpl;
 
     /* Repeat for each input line */
     while (!feof (f_tmpl)) {
