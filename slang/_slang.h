@@ -13,6 +13,7 @@
 #include <string.h>
 #include <glib.h>
 
+#include "slang-mc.h"
 #include "jdmacros.h"
 
 #ifdef VMS

@@ -1,3 +1,11 @@
+2001-12-21  Pavel Roskin  <proski@gnu.org>
+
+	* _slang.h: Include slang-mc.h.
+	* slang-mc.h: Add protection against using with system installed
+	S-Lang library.
+	* sl*.c: Only include _slang.h, but not slang.h to avoid making
+	symlinks.
+
 2001-09-04  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.am (AM_CFLAGS): Remove CFLAGS, don't use substituted

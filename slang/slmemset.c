@@ -16,7 +16,6 @@
 #include <stdio.h>
 
 
-#include "slang.h"
 #include "_slang.h"
 
 void SLmemset(char *p, char space, int n)

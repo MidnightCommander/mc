@@ -14,7 +14,6 @@
 #include "config.h"
 
 #include <stdio.h>
-#include "slang.h"
 #include "_slang.h"
 
 char *SLmemcpy(char *s1, char *s2, int n)

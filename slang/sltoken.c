@@ -31,7 +31,6 @@
 # include <stdlib.h>
 #endif
 #include <string.h>
-#include "slang.h"
 #include "_slang.h"
 
 /* There are non-zeros at positions "\t %()*,/:;[]{}" */

@@ -107,7 +107,6 @@
 #endif
 
 #include <errno.h>
-#include "slang.h"
 #include "_slang.h"
 
 #ifdef HAVE_STDLIB_H

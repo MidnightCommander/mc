@@ -8,7 +8,6 @@
 #include "config.h"
 
 #include <stdio.h>
-#include "slang.h"
 #include "_slang.h"
 
 unsigned int SLang_Input_Buffer_Len = 0;

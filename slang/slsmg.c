@@ -11,7 +11,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "slang.h"
 #include "_slang.h"
 
 typedef struct Screen_Type

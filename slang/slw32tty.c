@@ -11,7 +11,6 @@
 #include <windows.h>
 #include <winbase.h>
 
-#include "slang.h"
 #include "_slang.h"
 
 #ifdef __cplusplus

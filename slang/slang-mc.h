@@ -8,6 +8,11 @@
  * License or the Perl Artistic License.
  */
 #define SLANG_VERSION 9938
+
+#ifdef HAVE_SYSTEM_SLANG 
+ #error "This file must not be used with system installed S-Lang library"
+#endif
+
 /*{{{ System Dependent Macros and Typedefs */
 
 #if defined(__WATCOMC__) && !defined(__QNX__)

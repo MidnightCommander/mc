@@ -9,7 +9,6 @@
 
 #include <stdio.h>
 
-#include "slang.h"
 #include "_slang.h"
 
 #define INCL_BASE

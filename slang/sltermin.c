@@ -17,7 +17,6 @@
 #endif
 
 #ifndef USE_SETUPTERM
-#include "slang.h"
 #include "_slang.h"
 
 /*

@@ -13,7 +13,6 @@
 
 #include <errno.h>
 
-#include "slang.h"
 #include "_slang.h"
 
 /* This function will cause system calls to be restarted after signal if possible */

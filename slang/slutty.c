@@ -67,7 +67,6 @@
 #endif
 
 
-#include "slang.h"
 #include "_slang.h"
 
 int SLang_TT_Read_FD = -1;

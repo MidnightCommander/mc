@@ -17,7 +17,6 @@
 # include <stdlib.h>
 #endif
 
-#include "slang.h"
 #include "_slang.h"
 
 void (*SLang_Error_Routine)(char *);
