@@ -728,18 +728,6 @@ vfs_canon (const char *path)
     if (!path)
 	vfs_die("Cannot canonicalize NULL");
 
-    /* Tilde expansion */
-    if (*path == '~'){ 
-    	char *local, *result;
-
-    	local = tilde_expand (path);
-	if (local){
-	    result = vfs_canon (local);
-	    g_free (local);
-	    return result;
-	}
-    }
-
     /* Relative to current directory */
     if (*path != PATH_SEP){ 
     	char *local, *result;

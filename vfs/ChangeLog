@@ -1,3 +1,9 @@
+2003-09-23  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.c (vfs_canon): Remove tilde expansion.  mc_chdir() should
+	act like chdir() of localfs, which doesn't expand tilde.
+	Reported by Doncho Gunchev <mr700@globalnet.bg>
+
 2003-09-22  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.c (mc_get_current_wd): Use g_strlcpy() to avoid unneeded
