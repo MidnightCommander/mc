@@ -473,6 +473,7 @@ update_one_panel_widget (WPanel *panel, int force_update, char *current_file)
 	free (current_file);
 }
 
+#ifndef PORT_HAS_UPDATE_PANELS
 void
 update_one_panel (int which, int force_update, char *current_file)
 {
@@ -494,14 +495,14 @@ update_one_panel (int which, int force_update, char *current_file)
  * will not reload the other panel.
 */
 void
-update_panels (int force_update, char *current_file, char *other_file)
+update_panels (int force_update, char *current_file)
 {
     int reload_other = !(force_update & UP_ONLY_CURRENT);
     WPanel *panel;
 
     update_one_panel (get_current_index (), force_update, current_file);
     if (reload_other)
-	update_one_panel (get_other_index (), force_update, other_file);
+	update_one_panel (get_other_index (), force_update, UP_KEEPSEL);
 
     if (get_current_type () == view_listing)
 	panel = (WPanel *) get_panel_widget (get_current_index ());
@@ -510,6 +511,7 @@ update_panels (int force_update, char *current_file, char *other_file)
 
     mc_chdir (panel->cwd);
 }
+#endif
 
 #ifdef WANT_PARSE
 static void select_by_index (WPanel *panel, int i);
@@ -787,7 +789,7 @@ do_execute (const char *shell, const char *command, int flags)
 	}
 #endif
 
-    update_panels (UP_OPTIMIZE, UP_KEEPSEL, UP_KEEPSEL);
+    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     
     parse_control_file ();
 #ifndef __os2__
@@ -1417,21 +1419,21 @@ void
 toggle_mix_all_files (void)
 {
     mix_all_files = !mix_all_files;
-    update_panels (UP_RELOAD, UP_KEEPSEL, UP_KEEPSEL);
+    update_panels (UP_RELOAD, UP_KEEPSEL);
 }
 
 void
 toggle_show_backup (void)
 {
     show_backups = !show_backups;
-    update_panels (UP_RELOAD, UP_KEEPSEL, UP_KEEPSEL);
+    update_panels (UP_RELOAD, UP_KEEPSEL);
 }
 
 void
 toggle_show_hidden (void)
 {
     show_dot_files = !show_dot_files;
-    update_panels (UP_RELOAD, UP_KEEPSEL, UP_KEEPSEL);
+    update_panels (UP_RELOAD, UP_KEEPSEL);
 }
 
 void
@@ -1661,7 +1663,7 @@ void suspend_cmd (void)
 {
     save_cwds_stat ();
     do_suspend_cmd ();
-    update_panels (UP_OPTIMIZE, UP_KEEPSEL, UP_KEEPSEL);
+    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     do_refresh ();
 }
 

@@ -1,3 +1,12 @@
+1998-04-29  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* main.c (update_panels): Great API simplification.  update_panels
+	only cares about the contents of the current panel, every other
+	panel keeps the current selection (this was the behaviour
+	anyways). 
+
+	update_panels can be provided in a per-port fashion as well. 
+
 Wed Apr 29 03:06:09 1998  Paul Sheer  <psheer@obsidian.co.za>
 
 	* syntax.c: some optimisations, as well as support for

@@ -122,7 +122,7 @@ typedef struct {
     key_callback fn;
 } key_map;
 
-void update_panels (int force_update, char *current_file, char *other_file);
+void update_panels (int force_update, char *current_file);
 void create_panels (void);
 void repaint_screen (void);
 void outrefresh_screen (void);
@@ -179,8 +179,9 @@ extern Dlg_head *midnight_dlg;
  * has included panel.h
  */
 #ifdef __PANEL_H
-void directory_history_add (WPanel *panel, char *s);
-int  do_panel_cd           (WPanel *panel, char *new_dir, enum cd_enum cd_type);
+void directory_history_add   (WPanel *panel, char *s);
+int  do_panel_cd             (WPanel *panel, char *new_dir, enum cd_enum cd_type);
+void update_one_panel_widget (WPanel *panel, int force_update, char *current_file);
 #endif
 
 #endif

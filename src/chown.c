@@ -213,7 +213,7 @@ static void init_chown (void)
 void chown_done (void)
 {
     if (need_update)
-	update_panels (UP_OPTIMIZE, UP_KEEPSEL, UP_KEEPSEL);
+	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();
 }
 

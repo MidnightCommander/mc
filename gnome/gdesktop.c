@@ -789,6 +789,30 @@ desktop_release_desktop_icon_t (desktop_icon_t *di)
 	free (di);
 }
 
+static int
+remove_directory (char *path)
+{
+	int i;
+
+	if (confirm_delete){
+		char *buffer;
+		
+		if (know_not_what_am_i_doing)
+			query_set_sel (1);
+		buffer = copy_strings (_("Do you want to delete "), path, "?", NULL);
+		i = query_dialog (_("Delete"), buffer,
+				  D_ERROR, 2, _("&Yes"), _("&No"));
+		free (buffer);
+		if (i != 0)
+			return 0;
+	}
+	create_op_win (OP_DELETE, 0);
+	erase_dir (path);
+	destroy_op_win ();
+	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+	return 1;
+}
+
 /*
  * Removes an icon from the desktop and kills the ~/desktop file associated with it
  */
@@ -797,7 +821,26 @@ desktop_icon_remove (desktop_icon_t *di)
 {
 	desktop_icons = g_list_remove (desktop_icons, di);
 
-	mc_unlink (di->pathname);
+	if (di->dentry == NULL){
+		/* launch entry */
+		mc_unlink (di->pathname);
+	} else {
+		/* a .destop file or a directory */
+		/* Remove the .desktop */
+		mc_unlink (di->dentry->location);
+		
+		if (strcmp (di->dentry->type, "Directory") == 0){
+			struct stat s;
+
+			if (mc_lstat (di->dentry->exec, &s) == 0){
+				if (S_ISLNK (s.st_mode))
+					mc_unlink (di->dentry->exec);
+				else 
+					if (!remove_directory (di->dentry->exec))
+						return;
+			}
+		}
+	}
 	desktop_release_desktop_icon_t (di);
 }
 

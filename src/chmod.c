@@ -277,7 +277,7 @@ int stat_file (char *filename, struct stat *st)
 static void chmod_done (void)
 {
     if (need_update)
-	update_panels (UP_OPTIMIZE, UP_KEEPSEL, UP_KEEPSEL);
+	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();
 }
 

@@ -52,6 +52,7 @@ ICONS = 				\
 	$(srcdir)/directory-ok.xpm	\
 	$(srcdir)/directory.xpm		\
 	$(srcdir)/multi.xpm		\
+	$(srcdir)/multi-ok.png		\
 	$(srcdir)/multi-ok.xpm
 
 #

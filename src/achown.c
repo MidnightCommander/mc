@@ -581,7 +581,7 @@ void chown_advanced_done (void)
 {
     free (sf_stat);
     if (need_update)
-	update_panels (UP_OPTIMIZE, UP_KEEPSEL, UP_KEEPSEL);
+	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();
 }
 

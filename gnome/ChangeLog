@@ -1,3 +1,10 @@
+1998-04-29  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gdesktop.c: Finish desktop_icon_remove implementation. 
+
+	* glayout.c (update_panels): GNOME specific Implementation of the
+	update_panels routine. 
+
 Tue Apr 28 06:52:24 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* gcmd.c (gnome_open_terminal): Changed my_system(1,...) to

@@ -704,7 +704,7 @@ static void hotlist_done (void)
 {
     destroy_dlg (hotlist_dlg);
     if (0)
-	update_panels (UP_OPTIMIZE, UP_KEEPSEL, UP_KEEPSEL);
+	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();
 }
 

@@ -845,11 +845,12 @@ panel_artificial_drag_start (GtkCList *window, GdkEventMotion *event)
 }
 
 static GtkWidget *
-load_transparent_xpm (char *base)
+load_transparent_image (char *base)
 {
 	char *f = concat_dir_and_file (ICONDIR, base);
 	GtkWidget *w;
-	
+
+	printf ("Loading: %s\n", f);
 	w = make_transparent_window (f);
 	g_free (f);
 	return w;
@@ -866,16 +867,16 @@ panel_realized (GtkWidget *file_list, WPanel *panel)
 	GdkPoint hotspot = { 5, 5 };
 
 	if (!drag_directory)
-		drag_directory = load_transparent_xpm ("directory-ok.xpm");
+		drag_directory = load_transparent_image ("directory-ok.xpm");
 	
 	if (!drag_directory_ok)
-		drag_directory_ok = load_transparent_xpm ("directory.xpm");
+		drag_directory_ok = load_transparent_image ("directory.xpm");
 	
 	if (!drag_multiple)
-		drag_multiple = load_transparent_xpm ("multi.xpm");
+		drag_multiple = load_transparent_image ("multi.xpm");
 	
 	if (!drag_multiple_ok)
-		drag_multiple_ok = load_transparent_xpm ("multi-ok.xpm");
+		drag_multiple_ok = load_transparent_image ("multi-ok.png");
 
 	if (drag_directory && drag_directory_ok)
 		gdk_dnd_set_drag_shape (drag_directory->window, &hotspot,

@@ -447,4 +447,26 @@ setup_panels (void)
 	load_hint ();
 }
 
+/*
+ * GNOME's implementation of the update_panels routine
+ */
+void
+update_panels (int force_update, char *current_file)
+{
+	int reload_others = !(force_update & UP_ONLY_CURRENT);
+	GList *p;
+	
+	update_one_panel_widget (cpanel, force_update, current_file);
 
+	if (reload_others){
+		for (p = containers; p; p = p->next){
+			PanelContainer *pc = p->data;
+			
+			if (p->data == current_panel_ptr)
+				continue;
+			
+			update_one_panel_widget (pc->panel, force_update, UP_KEEPSEL);
+		}
+	}
+	mc_chdir (cpanel->cwd);
+}

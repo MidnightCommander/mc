@@ -113,7 +113,7 @@
      * i386-*-linux1.x, 2.x
      * alpha-linux-linux2
      * sparc-linux-linux2.x
-     * sparc65-linux-linux2.1
+     * sparc64-linux-linux2.1
      * mips-sgi-irix5.x, 6.x
      * mips-dec-ultrix4.3
      * rs6000-ibm-aix3.2.5

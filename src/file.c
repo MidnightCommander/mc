@@ -2096,13 +2096,13 @@ panel_operate (void *source_panel, int operation, char *thedefault)
     /* Generate confirmation prompt */
     
     if (!only_one){
-	sprintf (cmd_buf, "%s%d %s%s ", op_names [operation], panel->marked,
+	sprintf (cmd_buf, "%s%d %s%s ", _(op_names [operation]), panel->marked,
 		 (panel->marked == panel->dirs_marked) ? _("directories") :
 		 (panel->dirs_marked) ? _("files/directories") : _("files"),
 		 (operation == OP_DELETE) ? "?" : _(" with source mask:"));
     } else {
 	source = get_file (panel, &src_stat);
-	sprintf (cmd_buf,"%s%s \"%s\"%s ", op_names [operation],
+	sprintf (cmd_buf,"%s%s \"%s\"%s ", _(op_names [operation]),
 	         S_ISDIR (src_stat.st_mode) ? _("directory") : _("file"),
 		 name_trunc (source, S_ISDIR (src_stat.st_mode) ? 23 : 28),
 		 (operation == OP_DELETE) ? "?" : _(" with source mask:"));
@@ -2112,7 +2112,7 @@ panel_operate (void *source_panel, int operation, char *thedefault)
     if (operation == OP_DELETE && confirm_delete){
         if (know_not_what_am_i_doing)
 	    query_set_sel (1);
-	i = query_dialog (op_names [operation], cmd_buf,
+	i = query_dialog (_(op_names [operation]), cmd_buf,
 			  D_ERROR, 2, _("&Yes"), _("&No"));
 	if (i != 0)
 	    return 0;

@@ -339,7 +339,7 @@ void copy_cmd (void)
 {
     save_cwds_stat ();
     if (panel_operate (cpanel, OP_COPY, NULL)){
-	update_panels (UP_OPTIMIZE, UP_KEEPSEL, UP_KEEPSEL);
+	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
 }
@@ -348,7 +348,7 @@ void ren_cmd (void)
 {
     save_cwds_stat ();
     if (panel_operate (cpanel, OP_MOVE, NULL)){
-	update_panels (UP_OPTIMIZE, UP_KEEPSEL, UP_KEEPSEL);
+	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
 }
@@ -357,7 +357,7 @@ void copymove_cmd_with_default (int copy, char *thedefault)
 {
     save_cwds_stat ();
     if (panel_operate (cpanel, copy ? OP_COPY : OP_MOVE, thedefault)){
-	update_panels (UP_OPTIMIZE, UP_KEEPSEL, UP_KEEPSEL);
+	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
 }
@@ -374,7 +374,7 @@ void mkdir_cmd (WPanel *panel)
 
     save_cwds_stat ();
     if (my_mkdir (dir, 0777) == 0){
-	update_panels (UP_OPTIMIZE, dir, UP_KEEPSEL);
+	update_panels (UP_OPTIMIZE, dir);
 	repaint_screen ();
 	select_item (cpanel);
 	free (dir);
@@ -389,7 +389,7 @@ void delete_cmd (void)
     save_cwds_stat ();
 
     if (panel_operate (cpanel, OP_DELETE, NULL)){
-	update_panels (UP_OPTIMIZE, UP_KEEPSEL, UP_KEEPSEL);
+	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
 }
@@ -451,7 +451,7 @@ void reread_cmd (void)
     else
 	flag = UP_ONLY_CURRENT;
 	
-    update_panels (UP_RELOAD|flag, UP_KEEPSEL, UP_KEEPSEL);
+    update_panels (UP_RELOAD|flag, UP_KEEPSEL);
     repaint_screen ();
 }
 
@@ -1058,7 +1058,7 @@ do_link (int symbolic_link, char *fname)
 	}
     }
     free (dest);
-    update_panels (UP_OPTIMIZE, UP_KEEPSEL, UP_KEEPSEL);
+    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();
 }
 
@@ -1090,7 +1090,7 @@ void edit_symlink_cmd (void)
 		    if (-1 == mc_symlink (dest, p))
 		        message (1, MSG_ERROR, _(" edit symlink: %s "),
 				 unix_error_string (errno));
-		    update_panels (UP_OPTIMIZE, UP_KEEPSEL, UP_KEEPSEL);
+		    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 		    repaint_screen ();
 		}
 		free (dest);
@@ -1126,7 +1126,7 @@ void other_symlink_cmd (void)
 		    if (-1 == mc_symlink (dest, s))
 		        message (1, MSG_ERROR, _(" relative symlink: %s "),
 				 unix_error_string (errno));
-		    update_panels (UP_OPTIMIZE, UP_KEEPSEL, UP_KEEPSEL);
+		    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 		    repaint_screen ();
 		    free (s);
 		}

@@ -140,3 +140,329 @@ OPEN ISSUES:
   of an empty one?
 - The text in a lot of text entries disappears as soon as I start typing
   in them.
+
+Havoc Pennington comments:
+
+From hp@pobox.com  Mon Apr 27 14:41:01 1998
+Return-Path: <hp@pobox.com>
+Date: Mon, 27 Apr 1998 14:40:32 -0500 (CDT)
+From: Havoc Pennington <hp@pobox.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+To: miguel@nuclecu.unam.mx
+Subject: gmc wish list stuff
+X-Mailer: VM 6.34 under Emacs 19.34.1
+
+
+Hi Miguel,
+
+I was playing with gmc and took some notes as ideas came to me. I also
+tried to come up with an easier-to-use menu structure, that's at the
+end.
+
+I know a patch would be better but maybe some of these ideas are
+useful. :) 
+
+Havoc
+
+=========================================
+
+General:
+===================
+
+When I drag across the list view, it doesn't redraw underneath the drag.
+
+Tooltips would be nice throughout
+
+All the dialogs should be GnomeDialogs.
+
+What if the "Filter" drop down had a "Pattern" option, which caused the
+text entry to appear? As it is, some frightening patterns can appear
+in that text entry; maybe better off hidden unless the user chooses
+"Pattern"?
+*.(awk|sed|lex|l|y|sh|idl|pl|py|am|in|f|el|bas|pas|java|sl|p|m4|tcl|pov) 
+is a good way to scare the newbies. :)
+
+Maybe it'd work like this: when "Pattern" is chosen, you see the text
+entry with contents based on the last active filter; otherwise a label
+with the English name of the filter, e.g. "Image files." That way
+there's constant feedback on what's being viewed.
+
+Apparent bug related to this, I have two panels open, and in one of
+them choosing a filter from the dropdown doesn't put anything in the
+entry.
+
+It would be neat if a description of the highlighted menu item
+appeared in the status bar. I'd like to see that as a GnomeApp feature.
+
+Another neat thing would be info on the selected file in the status
+bar; e.g. the file type, or eventually files might have comments
+stored in meta-info.
+
+I like the idea of hints in the status bar, but many of them don't
+seem to apply to the Gnome version of mc.
+
+Could some of the more confusing menu items (e.g. any that require
+shell patterns or typing in commands) be moved to an "Advanced" menu?
+Or just made optional?
+
+Lots of the dialogs have funny looking capital letters to mark
+accelerators; should use underlines or something instead.
+
+Throughout, when asking for a filename (e.g. on copy or move) there
+should be a "browse" button to pop up a file selection dialog.
+
+File menu:
+===============
+
+"Open Terminal" fails silently because rxvt is in the wrong place;
+Should pop up a dialog asking where it is.
+
+"Mkdir" should be called "New Directory."
+
+"Rename/Move" should be separate menu items; Rename should result in a 
+much simpler dialog.
+
+Maybe call "Select" "Select by Pattern..."? Makes it less surprising when
+the dialog comes up.
+
+I'm thinking all the "Select" stuff belongs on an "Edit" menu.
+
+History doesn't seem to work in many of the GnomeEntry widgets?
+
+The move, rename, etc. stuff should be on the Commands menu, maybe?
+
+Panel menu:
+===============
+
+Call it the "Window" menu?
+
+"Display Mode" seems confusing; how about "Detail Level"?
+
+Dialog is called "Listing Mode," menu item "Display Mode." Should be
+consistent.
+
+It isn't clear what full, brief, long file list means; the stuff in
+the entries is cryptic; what's "user mini status"? I think a submenu
+would be more appropriate here, something like:
+
+Detail Level -> Most
+                Normal
+                Least
+
+Then put the more advanced options in a page of a global
+"Preferences..." dialog.
+
+"Sort Order" could be "Sort By" instead, and again a submenu might be
+nicer than a dialog. 
+
+e.g. Sort By -> Name
+                Date/Time
+                Size
+
+etc. That way you can rapidly go up to the menu and change it, skipping the 
+dialog.
+
+I think the drop-down filter menu and entry are adequate; no reason to have a
+"Filter" menu item here too. Just adds clutter.
+
+"Network Link" says "F1 for details" but F1 does nothing when I press it.
+
+Commands menu:
+=================
+
+"Find" should be "Find file"?
+The Find dialog could be a lot nicer. It should also be a separate find-files
+app or a gnome-libs widget, I think. Other apps might want to use it.
+
+"Hotlist" should be "Bookmarks"? More familiar name. Consistent with
+Help Browser. Also, where do the bookmarks show up? Should they be on
+a submenu here? Should be consistent with whatever the Help browser
+does.
+
+"Compare panels" and "External panelize" need renaming. It's very
+unclear what they do. See my reworked menu structure below for an 
+idea on "compare panels" using a submenu.
+
+Maybe "External Panelize" can be configured elsewhere, and then the 
+menu can have a submenu with only the preconfigured options?
+
+"Active VFS list"? What does it do?
+
+It isn't clear to me what the "Commands" have in common. Seems like
+most of them belong on the "Panel" menu, or in preferences.
+
+Options menu:
+================
+
+Maybe this menu could be removed, and all of its dialogs made into
+pages of a single notebook found under "Preferences..." on the File or
+Edit menu (whatever the Gnome standard is).
+
+Failing that, it should be called "Preferences" rather than "Options."
+
+Desktop menu:
+=================
+
+It would make sense to me if this menu were next to the "Panel"
+("Window") menu, since the two are related by opposition. I'd say
+these two should be the last two items (except Help).
+
+Help menu: 
+=============
+
+Should be right justified. Maybe a "Gnome Help" option to lauch the
+browser pointed at the main Gnome Help Index?
+
+Popup context menu:
+==============
+
+"Open With" could have a submenu with suggested applications to use.
+
+There isn't a clear difference between the submenu specific to the
+filename, and the main menu. e.g., why are link and symlink on the
+submenu, but copy is on the main menu?
+
+Link and symlink seem like Advanced items to me, but a "Create Link"
+item that made a .desktop file (or whatever gets decided on for
+meta-info) would be nice.
+
+Menus Revisited
+===============
+
+Here's an attempt to work out a complete menu structure from
+scratch. It changes things more radically than the above suggestions.
+Items are listed in order.
+
+File ->
+	New Window
+ 	Open Terminal
+	-------------
+	New ->
+		Directory
+		Text File
+		Image
+		[ ... etc., user configurable. ]
+	-------------
+	Close This Window
+	Exit File Manager
+
+Edit ->	[Should be consistent with other Gnome apps, right now there's no 
+	 standard I don't think?]
+	Select By Pattern  [ An optional "advanced" item ]
+	Select All
+	Unselect all
+	Reverse Selection
+	----------------
+	File Properties...
+	----------------
+	Preferences...          [ gmc big prefs notebook, maybe on File menu? ]
+
+Commands -> [ This menu has commands that apply to selected files ]
+	Open
+	Open With ->
+		[ Options that make sense for selected file ]
+		Custom...     [ pops up text entry for command ]
+	View
+	View Raw [ An "advanced" command, optionally
+	 	   not visible ]
+	----------
+	Copy...      [ Copy, move, rename would have simplified dialogs -
+	Move...        just ask where to, use the selection rather 
+	Rename...      than asking for a pattern ]
+	Delete
+	----------      [ These two should be optional "advanced" items ]
+	Move by Pattern... [ The more complex dialog asking for a pattern ]
+	Copy by Pattern... [ ditto ]
+			
+
+Window ->
+	Find Files...
+	Detail Level -> Most
+			Normal
+			Least
+			[... etc. make this menu configurable?]
+	Sort By      -> Name
+			Date/Time
+			[... etc. make this menu configurable?]
+	Rescan Directory
+	-------------------
+	Scan FTP Directory...
+	Scan Network Directory...
+	-------------------				
+	Special Listing -> 	SUID Root 
+				Patching Rejects
+				[... etc., whatever user has configured.]
+	------------------
+	Compare To -> 
+		 	[ Menu item for each other window ]
+
+Desktop ->
+	Arrange Icons
+	Properties...   [ launch desktop-properties app ]
+	[More to come, I'm sure.]
+
+Help ->
+	About...	
+	File Manager Manual
+	Gnome Help
+
+Popup menu for file foo.bar ->
+	[ Quick shortcuts should be first; e.g. "Use as Wallpaper", etc. ]
+	-------------
+	foo.bar ->
+		[ Everything on the "Commands" menu ]
+	Properties...
+
+
+Rationale:
+
+File menu has the traditional stuff. Close, Exit, and New.
+Edit menu has the standard Gnome edit menu stuff, when that's decided on.
+  (Preferences... is in either File or Edit, whatever becomes standard).
+  Has "File Properties..." because that seems consistent with e.g. gtt.
+Commands menu has operations on the selected (pre-existing) file.
+ Would also make sense to have "Edit Properties..." here instead of 
+ "File Properties..." on the edit menu. 
+Window menu has operations that potentially change what's in the window or
+ how it's viewed.
+Desktop menu has operations on the desktop.
+Help menu has help.
+
+The "Options" menu isn't needed, because it's all in "Preferences..."
+
+Popup menu has the "Commands" menu as submenu of the file name; seems
+intuitive, because "Commands" are operations on the particular file
+name. Quick context-sensitive commands like "Use As Wallpaper" are 
+first because they'll be used most. "Properties..." is also there, since
+it may be more convenient here than on the "Edit" menu.
+
+
+Preferences...
+===============
+
+The Preferences dialog would have the following tabs:
+
+General: general options, from current Options->Options
+Virtual File System: from Options->Virtual FS [advanced config]
+Confirmation: from Options->Confirmation
+New Menu: what to put on the File->New submenu
+Detail Level: listing mode config, including what goes on Window->Detail Level
+Sort By: config for the Window->Sort By menu
+Bookmarks: config for bookmarks
+File Types: config available actions for different file types. Much like
+            the Netscape preferences for this. [advanced config]
+
+Probably I'm leaving something out. The "Advanced" tabs could be somehow
+marked as advanced (e.g. as in Netscape), or hidden by default.
+
+
+
+
+
+
+
+
+
+
