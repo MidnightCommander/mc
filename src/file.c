@@ -570,7 +570,6 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 		return temp_status;
 	    }
 #endif /* !OS2_NT */
-#ifndef __os2__
 	    while (ctx->preserve &&
 		(mc_chmod (dst_path, sb.st_mode & ctx->umask_kill) < 0)){
 		temp_status = file_error (_(" Cannot chmod target file \"%s\" \n %s "), dst_path);
@@ -578,7 +577,6 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 		    continue;
 		return temp_status;
 	    }
-#endif /* !__os2__ */ 
 	    return FILE_CONT;
         }
     }
@@ -829,11 +827,7 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 	      off_t *progress_count,
 	      double *progress_bytes)
 {
-#ifdef __os2__
-    DIR    *next;
-#else
     struct dirent *next;
-#endif /* !__os2__ */
     struct stat   buf, cbuf;
     DIR    *reading;
     char   *path, *mdpath, *dest_file, *dest_dir;
@@ -1018,19 +1012,10 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 	    }
 	}
 
-#ifdef __os2__
-	/* The OS/2 mc_readdir returns a block of memory DIR
-	 * next should be freed: .ado
-	 */
-	if (!next)
-		g_free (next);
-#endif /* __os2__ */
        g_free (path);
     }
     mc_closedir (reading);
 
-    /* .ado: Directories can not have permission set in OS/2 */
-#ifndef __os2__
     if (ctx->preserve){
 	mc_chmod (dest_dir, cbuf.st_mode & ctx->umask_kill);
 	utb.actime = cbuf.st_atime;
@@ -1038,7 +1023,6 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 	mc_utime(dest_dir, &utb);
     }
 
-#endif /* !__os2__ */
 ret:
    g_free (dest_dir);
    g_free (parent_dirs);
@@ -1351,11 +1335,6 @@ recursive_erase (FileOpContext *ctx, char *s, off_t *progress_count, double *pro
 	else
 	    return_status = erase_file (ctx, path, progress_count, progress_bytes, 0);
 	g_free (path);
-	/* .ado: OS/2 returns a block of memory DIR to next and must be freed */
-#ifdef __os2__
-	if (!next)
-	   g_free (next);
-#endif /* __os2__ */
     }
     mc_closedir (reading);
     if (return_status != FILE_CONT)

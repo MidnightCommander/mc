@@ -26,13 +26,6 @@
 #    include <windows.h>
 #endif
 
-#ifdef __os2__
-#    define INCL_DOS
-#    define INCL_DOSFILEMGR
-#    define INCL_DOSERRORS
-#    include <os2.h>
-#endif
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -99,9 +92,7 @@
 #include "cmd.h"		/* Normal commands */
 #include "hotlist.h"
 #include "panelize.h"
-#ifndef __os2__
-#    include "learn.h"
-#endif
+#include "learn.h"
 #include "listmode.h"
 #include "background.h"
 #include "ext.h"	/* For flush_extension_file() */
@@ -700,9 +691,7 @@ do_execute (const char *shell, const char *command, int flags)
     if (console_flag)
 	restore_console ();
 
-#ifndef __os2__
     unlink (control_file);
-#endif
     if (!use_subshell && !(flags & EXECUTE_INTERNAL && command)) {
 	printf ("%s%s%s\n", last_paused ? "\r\n":"", prompt, command);
 	last_paused = 0;
@@ -760,9 +749,7 @@ do_execute (const char *shell, const char *command, int flags)
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     
     parse_control_file ();
-#ifndef __os2__
     unlink (control_file);
-#endif
     do_refresh ();
     use_dash (TRUE);
 }
@@ -2145,40 +2132,6 @@ init_sigfatals (void)
 }
 
 
-#elif defined (__os2__)
-/* OS/2 Version */
-#   define CONTROL_FILE "\\mc.%d.control"
-char control_file [sizeof (CONTROL_FILE) + 8];
-
-void
-OS_Setup (void)
-{
-    /* .ado: This does not work:  */
-    /* DosSMSetTitle ((PSZ) "This is my app");  */
-    /* In DEF: IMPORTS
-                 DosSMSetTitle = SESMGR.DOSSMSETTITLE */
-    shell = getenv ("COMSPEC");
-    if (!shell || !*shell)
-	shell = get_default_shell ();
-
-    mc_home = get_mc_lib_dir ();
-}
-
-static void
-sigchld_handler_no_subshell (int sig)
-{
-}
-
-void
-init_sigchld (void)
-{
-}
-
-void
-init_sigfatals (void)
-{
-	/* Nothing to be done on the OS/2, Windows/NT */
-}
 #else
 
 /* Unix version */
@@ -2274,7 +2227,7 @@ init_sigchld (void)
     }
 }	
 
-#endif /* _OS_NT, __os2__, UNIX */
+#endif /* _OS_NT, UNIX */
 
 static void
 print_mc_usage (void)
