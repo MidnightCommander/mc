@@ -9,19 +9,19 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.0a\n"
-"POT-Creation-Date: 2004-01-07 17:35+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-01-26 12:31-0500\n"
 "PO-Revision-Date: 2004-01-07 17:31+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>,<it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: edit/edit.c:146 edit/edit.c:277 edit/edit.c:285 edit/edit.c:333
 #: edit/edit.c:348 edit/edit.c:359 edit/edit.c:375 edit/edit.c:2665
 #: edit/editcmd.c:282 edit/editcmd.c:290 edit/editcmd.c:1719 src/wtools.c:120
-#: src/wtools.c:275
+#: src/wtools.c:275 vfs/utilvfs.c:839
 msgid "Error"
 msgstr "Errore"
 
@@ -61,7 +61,7 @@ msgstr "&Chiudi"
 #: edit/editcmd.c:2569 edit/editmenu.c:37 edit/editoptions.c:71
 #: src/boxes.c:139 src/boxes.c:276 src/boxes.c:372 src/boxes.c:464
 #: src/boxes.c:590 src/boxes.c:713 src/boxes.c:835 src/boxes.c:945
-#: src/boxes.c:1013 src/filegui.c:763 src/find.c:184 src/layout.c:348
+#: src/boxes.c:1013 src/filegui.c:761 src/find.c:184 src/layout.c:348
 #: src/option.c:113 src/subshell.c:323 src/view.c:2107 src/wtools.c:441
 msgid "&OK"
 msgstr "&OK"
@@ -95,7 +95,7 @@ msgstr "Fai i salvataggi -->"
 #: src/achown.c:68 src/boxes.c:140 src/boxes.c:277 src/boxes.c:370
 #: src/boxes.c:462 src/boxes.c:588 src/boxes.c:711 src/boxes.c:833
 #: src/boxes.c:1013 src/chmod.c:96 src/chown.c:72 src/cmd.c:856
-#: src/filegui.c:745 src/find.c:184 src/hotlist.c:121 src/hotlist.c:523
+#: src/filegui.c:743 src/find.c:184 src/hotlist.c:121 src/hotlist.c:523
 #: src/hotlist.c:830 src/hotlist.c:926 src/layout.c:349 src/learn.c:58
 #: src/option.c:114 src/panelize.c:66 src/view.c:441 src/view.c:2104
 #: src/wtools.c:46 src/wtools.c:439
@@ -208,11 +208,11 @@ msgstr " Il blocco è grande, potresti non riuscire ad annullare l'azione. "
 msgid "O&ne"
 msgstr "&Nome"
 
-#: edit/editcmd.c:1173 src/file.c:2210 src/filegui.c:521
+#: edit/editcmd.c:1173 src/file.c:2210 src/filegui.c:519
 msgid "A&ll"
 msgstr "&Tutti"
 
-#: edit/editcmd.c:1175 src/file.c:2147 src/filegui.c:210
+#: edit/editcmd.c:1175 src/file.c:2147 src/filegui.c:211
 msgid "&Skip"
 msgstr "&Salta"
 
@@ -319,13 +319,13 @@ msgid "Cancel quit"
 msgstr "Annulla l'uscita"
 
 #: edit/editcmd.c:2089 src/cmd.c:195 src/file.c:1837 src/file.c:2209
-#: src/filegui.c:526 src/hotlist.c:1049 src/main.c:471 src/screen.c:1952
+#: src/filegui.c:524 src/hotlist.c:1049 src/main.c:471 src/screen.c:1952
 #: src/subshell.c:654 src/tree.c:708 src/view.c:458 vfs/mcfs.c:143
 msgid "&Yes"
 msgstr " &Si"
 
 #: edit/editcmd.c:2089 src/cmd.c:195 src/file.c:1837 src/file.c:2209
-#: src/filegui.c:525 src/hotlist.c:1049 src/main.c:471 src/screen.c:1953
+#: src/filegui.c:523 src/hotlist.c:1049 src/main.c:471 src/screen.c:1953
 #: src/subshell.c:654 src/tree.c:708 src/view.c:458 vfs/mcfs.c:143
 msgid "&No"
 msgstr "&No"
@@ -800,7 +800,7 @@ msgstr "Menu"
 msgid " Load syntax file "
 msgstr " Carica file sintassi "
 
-#: edit/syntax.c:1101 src/help.c:764 src/user.c:711
+#: edit/syntax.c:1101 src/help.c:764 src/user.c:712
 #, c-format
 msgid ""
 " Cannot open file %s \n"
@@ -1075,7 +1075,7 @@ msgstr "Dominio:"
 msgid "Username:"
 msgstr "Nome utente:"
 
-#: src/boxes.c:1012
+#: src/boxes.c:1012 vfs/utilvfs.c:857
 msgid "Password:"
 msgstr "Password:"
 
@@ -1469,7 +1469,7 @@ msgstr ""
 " Non posso entrare in `%s' \n"
 " %s "
 
-#: src/command.c:210 src/user.c:694
+#: src/command.c:210 src/user.c:695
 msgid " Cannot execute commands on non-local filesystems"
 msgstr " Non è possibile eseguire comandi su filesystem non locali "
 
@@ -1538,10 +1538,12 @@ msgid "Cannot read directory contents"
 msgstr "Impossibile leggere il contenuto della directory"
 
 #: src/execute.c:133 src/utilunix.c:380
+#, c-format
 msgid "Press any key to continue..."
 msgstr "Premi un tasto per continuare..."
 
 #: src/execute.c:235
+#, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Premi `exit' per tornare a Midnight Commander"
 
@@ -1559,7 +1561,7 @@ msgstr ""
 "Non posso creare file comandi temporaneo \n"
 " %s "
 
-#: src/ext.c:119 src/user.c:589
+#: src/ext.c:119 src/user.c:590
 msgid " Parameter "
 msgstr " Parametro "
 
@@ -1987,7 +1989,7 @@ msgstr " Spiacente, non posso mettere il programma in background "
 msgid "&Retry"
 msgstr "&Riprova"
 
-#: src/file.c:2148 src/file.c:2211 src/filegui.c:207 src/filegui.c:517
+#: src/file.c:2148 src/file.c:2211 src/filegui.c:208 src/filegui.c:515
 msgid "&Abort"
 msgstr "&Esci"
 
@@ -2015,130 +2017,130 @@ msgstr ""
 msgid " Delete: "
 msgstr " Elimina: "
 
-#: src/file.c:2210 src/filegui.c:519
+#: src/file.c:2210 src/filegui.c:517
 msgid "Non&e"
 msgstr "nessun&o"
 
-#: src/filegui.c:324
+#: src/filegui.c:322
 #, c-format
 msgid "ETA %d:%02d.%02d"
 msgstr "ETA %d:%02d.%02d"
 
-#: src/filegui.c:347
+#: src/filegui.c:345
 #, c-format
 msgid "%.2f MB/s"
 msgstr "%.2f MB/s"
 
-#: src/filegui.c:350
+#: src/filegui.c:348
 #, c-format
 msgid "%.2f KB/s"
 msgstr "%.2f KB/s"
 
-#: src/filegui.c:353
+#: src/filegui.c:351
 #, c-format
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-#: src/filegui.c:376
+#: src/filegui.c:374
 msgid "File"
 msgstr "File"
 
-#: src/filegui.c:399
+#: src/filegui.c:397
 msgid "Count"
 msgstr "Totale"
 
-#: src/filegui.c:420
+#: src/filegui.c:418
 msgid "Bytes"
 msgstr "Byte"
 
-#: src/filegui.c:453
+#: src/filegui.c:451
 msgid "Source"
 msgstr "Sorgente"
 
-#: src/filegui.c:476
+#: src/filegui.c:474
 msgid "Target"
 msgstr "Destinaz"
 
-#: src/filegui.c:498
+#: src/filegui.c:496
 msgid "Deleting"
 msgstr "Sto eliminando"
 
-#: src/filegui.c:516
+#: src/filegui.c:514
 #, c-format
 msgid "Target file \"%s\" already exists!"
 msgstr " Il file \"%s\" esiste già!"
 
-#: src/filegui.c:518
+#: src/filegui.c:516
 msgid "If &size differs"
 msgstr "solo se la dimensione è &diversa"
 
-#: src/filegui.c:520
+#: src/filegui.c:518
 msgid "&Update"
 msgstr "&Aggiorna"
 
-#: src/filegui.c:522
+#: src/filegui.c:520
 msgid "Overwrite all targets?"
 msgstr "Sovrascrivo tutto?"
 
-#: src/filegui.c:523
+#: src/filegui.c:521
 msgid "&Reget"
 msgstr "&Riprendi"
 
-#: src/filegui.c:524
+#: src/filegui.c:522
 msgid "A&ppend"
 msgstr "Atta&cca"
 
-#: src/filegui.c:527
+#: src/filegui.c:525
 msgid "Overwrite this target?"
 msgstr "Sovrascrivo questo file?"
 
-#: src/filegui.c:528
+#: src/filegui.c:526
 #, c-format
 msgid "Target date: %s, size %d"
 msgstr "Data destinazione: %s, dimensione %d"
 
-#: src/filegui.c:529
+#: src/filegui.c:527
 #, c-format
 msgid "Source date: %s, size %d"
 msgstr "Data sorgente: %s, dimensione %d"
 
-#: src/filegui.c:604
+#: src/filegui.c:602
 msgid " File exists "
 msgstr " Il file esiste "
 
-#: src/filegui.c:606
+#: src/filegui.c:604
 msgid " Background process: File exists "
 msgstr " Processo in background: il file esiste "
 
-#: src/filegui.c:728
+#: src/filegui.c:726
 msgid "preserve &Attributes"
 msgstr "Preserva gli &attributi"
 
-#: src/filegui.c:730
+#: src/filegui.c:728
 msgid "follow &Links"
 msgstr "Segue i co&llegamenti"
 
-#: src/filegui.c:732
+#: src/filegui.c:730
 msgid "to:"
 msgstr "a:"
 
-#: src/filegui.c:733
+#: src/filegui.c:731
 msgid "&Using shell patterns"
 msgstr "&Usa i modelli della shell"
 
-#: src/filegui.c:754
+#: src/filegui.c:752
 msgid "&Background"
 msgstr "&Background"
 
-#: src/filegui.c:764
+#: src/filegui.c:762
 msgid "&Stable Symlinks"
 msgstr "Link simbolici &stabili"
 
-#: src/filegui.c:766
+#: src/filegui.c:764
 msgid "&Dive into subdir if exists"
 msgstr "In una sotto&dir se esiste già"
 
-#: src/filegui.c:938
+#: src/filegui.c:936
 #, c-format
 msgid ""
 "Invalid source pattern `%s' \n"
@@ -2900,19 +2902,19 @@ msgstr "La variabile TERM non è definita!\n"
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/main.c:1848
+#: src/main.c:1849
 msgid "[flags] [this_dir] [other_panel_dir]\n"
 msgstr "[flag] [questa_dir] [altra_dir_pannello]\n"
 
-#: src/main.c:1852
+#: src/main.c:1853
 msgid "+number"
 msgstr "+numero"
 
-#: src/main.c:1853
+#: src/main.c:1854
 msgid "Set initial line number for the internal editor"
 msgstr "Imposta numero di riga iniziale per l'editor interno"
 
-#: src/main.c:1855
+#: src/main.c:1856
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2922,7 +2924,7 @@ msgstr ""
 "Prego spedire rapporti su bug (inclusa l'uscita di `mc -V')\n"
 "a mc-devel@gnome.org\n"
 
-#: src/main.c:1870
+#: src/main.c:1871
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2962,91 +2964,91 @@ msgstr ""
 "   brightcyan, lightgray e white\n"
 "\n"
 
-#: src/main.c:1945
+#: src/main.c:1946
 msgid "Displays this help message"
 msgstr "Mostra questo messaggio di aiuto"
 
-#: src/main.c:1947
+#: src/main.c:1948
 msgid "Displays the current version"
 msgstr "Visualizza la versione corrente"
 
-#: src/main.c:1951
+#: src/main.c:1952
 msgid "Forces xterm features"
 msgstr "Forza il comportamento xterm"
 
-#: src/main.c:1953
+#: src/main.c:1954
 msgid "Disable mouse support in text version"
 msgstr "Disabilita il supporto del mouse nella modalità testo"
 
-#: src/main.c:1956
+#: src/main.c:1957
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Prova a usare termcap invece di terminfo"
 
-#: src/main.c:1959
+#: src/main.c:1960
 msgid "Resets soft keys on HP terminals"
 msgstr "Ripristina i tasti soft nei terminali HP"
 
-#: src/main.c:1961
+#: src/main.c:1962
 msgid "To run on slow terminals"
 msgstr "Per funzionare su terminali lenti"
 
-#: src/main.c:1963
+#: src/main.c:1964
 msgid "Use stickchars to draw"
 msgstr "Usa caratteri semigrafici"
 
-#: src/main.c:1967
+#: src/main.c:1968
 msgid "Requests to run in black and white"
 msgstr "Richiede l'esecuzione in bianco e nero"
 
-#: src/main.c:1969
+#: src/main.c:1970
 msgid "Request to run in color mode"
 msgstr "Richiede l'esecuzione a colori"
 
-#: src/main.c:1971
+#: src/main.c:1972
 msgid "Specifies a color configuration"
 msgstr "Specifica la configurazione dei colori"
 
-#: src/main.c:1973
+#: src/main.c:1974
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Mostra un messaggio di aiuto su come cambiare lo schema dei colori"
 
-#: src/main.c:1978
+#: src/main.c:1979
 msgid "Log ftp dialog to specified file"
 msgstr "Annota i messaggi dell'ftp in un file specificato"
 
-#: src/main.c:1981
+#: src/main.c:1982
 msgid "Set debug level"
 msgstr "Imposta livello di debug"
 
-#: src/main.c:1987
+#: src/main.c:1988
 msgid "Print data directory"
 msgstr "Stampa dati directory"
 
-#: src/main.c:1989
+#: src/main.c:1990
 msgid "Print last working directory to specified file"
 msgstr "Stampa l'ultima directory corrente nel file specificato"
 
-#: src/main.c:1994
+#: src/main.c:1995
 msgid "Enables subshell support (default)"
 msgstr "Abilita il supporto subshell (predefinito)"
 
-#: src/main.c:1996
+#: src/main.c:1997
 msgid "Disables subshell support"
 msgstr "Disabilita il supporto delle subshell"
 
-#: src/main.c:2001
+#: src/main.c:2002
 msgid "Launches the file viewer on a file"
 msgstr "Esegue il visualizzatore per un file"
 
-#: src/main.c:2004
+#: src/main.c:2005
 msgid "Edits one file"
 msgstr "Modifica un file"
 
-#: src/main.c:2218
+#: src/main.c:2219
 msgid " Notice "
 msgstr " Avviso "
 
-#: src/main.c:2219
+#: src/main.c:2220
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -3226,6 +3228,7 @@ msgid "ARG"
 msgstr "ARG"
 
 #: src/popthelp.c:179
+#, c-format
 msgid "Usage:"
 msgstr "Uso:"
 
@@ -3439,6 +3442,7 @@ msgid "With multiple codepages support\n"
 msgstr "Con supporto codepages multiple\n"
 
 #: src/textconf.c:121
+#, c-format
 msgid "Virtual File System:"
 msgstr " File System Virtuale:"
 
@@ -3534,11 +3538,11 @@ msgstr " Vero: "
 msgid " False: "
 msgstr " Falso: "
 
-#: src/user.c:669
+#: src/user.c:670
 msgid " Warning -- ignoring file "
 msgstr " Attenzione -- ignoro il file "
 
-#: src/user.c:670
+#: src/user.c:671
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
@@ -3547,12 +3551,12 @@ msgstr ""
 " Il file `%s' non appartiene a root o a Voi o è scrivibile da tutti\n"
 " Il suo uso potrebbe compromettere la Vostra sicurezza."
 
-#: src/user.c:792
+#: src/user.c:793
 #, c-format
 msgid " No suitable entries found in %s "
 msgstr " Non trovo voci appropriate in %s "
 
-#: src/user.c:798
+#: src/user.c:799
 msgid " User menu "
 msgstr " Menu utente "
 
@@ -3590,6 +3594,7 @@ msgid "Temporary files will be created in %s\n"
 msgstr "I file temporanei verranno creati in %s\n"
 
 #: src/utilunix.c:376
+#, c-format
 msgid "Temporary files will not be created\n"
 msgstr "I file temporanei non verranno creati\n"
 
@@ -4463,6 +4468,18 @@ msgstr " Devi prima fare chdir per estrarre i file "
 #: vfs/undelfs.c:539
 msgid " while iterating over blocks "
 msgstr " durante l'iterazione sui blocchi "
+
+#: vfs/utilvfs.c:836
+msgid "Cannot parse:"
+msgstr "Non riesco ad analizzare:"
+
+#: vfs/utilvfs.c:840
+msgid "More parsing errors will be ignored."
+msgstr "Più errori di analisi saranno ignorati."
+
+#: vfs/utilvfs.c:850
+msgid "Internal error:"
+msgstr " Errore interno:"
 
 #: vfs/vfs.c:880
 msgid "Changes to file lost"
