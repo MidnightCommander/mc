@@ -88,7 +88,8 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 
 	g_list_foreach (list, (GFunc) pack_button, dialog->action_area);
 	g_list_free (list);
-	
+
+	gtk_box_set_homogeneous (GTK_BOX (dialog->action_area), TRUE);
 	gtk_widget_show (GTK_WIDGET (dialog));
 
 	if (flags & D_INSERT){
