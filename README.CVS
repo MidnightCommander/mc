@@ -19,11 +19,10 @@ to `autogen.sh' are passed to `configure'.  Then run `make' as usually.
 The distribution tarball is created by the command `make distcheck'. 
 This command can take a while.
 
-Tools currently used for snapshots:
+Currently snapshots are made on Debian unstable and use the versions of
+the tools from the unstable repository.  Yes, the rpm packages are made
+on Debian as well.
 
-Autoconf 2.57
-Automake 1.7.7
-
-The version of gettext doesn't affect the snapshot because the
+Note that the version of gettext doesn't affect the snapshot because the
 distributed files are installed by gettext from archives for the version
 used in the AM_GNU_GETTEXT_VERSION macro, which is 0.11.5.
