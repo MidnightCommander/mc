@@ -313,7 +313,7 @@ void
 copy_cmd (void)
 {
     save_cwds_stat ();
-    if (panel_operate (cpanel, OP_COPY, NULL, TRUE)) {
+    if (panel_operate (cpanel, OP_COPY, 0)) {
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
@@ -323,7 +323,7 @@ copy_cmd (void)
 void ren_cmd (void)
 {
     save_cwds_stat ();
-    if (panel_operate (cpanel, OP_MOVE, NULL, TRUE)){
+    if (panel_operate (cpanel, OP_MOVE, 0)){
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
@@ -333,7 +333,7 @@ void ren_cmd (void)
 void copy_cmd_local (void)
 {
     save_cwds_stat ();
-    if (panel_operate (cpanel, OP_COPY, selection (cpanel)->fname, TRUE)){
+    if (panel_operate (cpanel, OP_COPY, 1)){
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
@@ -343,7 +343,7 @@ void copy_cmd_local (void)
 void ren_cmd_local (void)
 {
     save_cwds_stat ();
-    if (panel_operate (cpanel, OP_MOVE, selection (cpanel)->fname, TRUE)){
+    if (panel_operate (cpanel, OP_MOVE, 1)){
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
@@ -384,7 +384,7 @@ void delete_cmd (void)
 {
     save_cwds_stat ();
 
-    if (panel_operate (cpanel, OP_DELETE, NULL, TRUE)){
+    if (panel_operate (cpanel, OP_DELETE, 0)){
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }

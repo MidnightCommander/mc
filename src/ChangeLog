@@ -1,3 +1,11 @@
+2003-08-18  Pavel Roskin  <proski@gnu.org>
+
+	* file.c (panel_operate_generate_prompt): Remove source
+	calculation, it doesn't belong here.
+	(panel_operate): Change arguments: drop ask_user and thedefault,
+	introduce force_single.  force_single changes default to the
+	current file and ignores selection.  Adjust all dependencies.  
+
 2003-08-17  Pavel Roskin  <proski@gnu.org>
 
 	* dir.h (file_entry): Rename "buf" to "st".  Adjust all

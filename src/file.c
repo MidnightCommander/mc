@@ -1531,7 +1531,10 @@ erase_dir_iff_empty (FileOpContext *ctx, char *s)
 
 /* {{{ Panel operate routines */
 
-/* Returns currently selected file or the first marked file if there is one */
+/*
+ * Return currently selected entry name or the name of the first marked
+ * entry if there is one.
+ */
 static char *
 panel_get_file (WPanel *panel, struct stat *stat_buf)
 {
@@ -1687,15 +1690,21 @@ static char *prompt_parts[] = {
     N_("files/directories"), N_(" with source mask:"), N_(" to:")
 };
 
-static char *
-panel_operate_generate_prompt (WPanel *panel, int operation, int only_one,
-			       struct stat *src_stat)
+/*
+ * Generate user prompt for panel operation.
+ * single_source is the name if the source entry or NULL for multiple
+ * entries.
+ * src_stat is only used when single_source is not NULL.
+ */
+static void
+panel_operate_generate_prompt (const WPanel *panel, const int operation,
+			       const char *single_source,
+			       const struct stat *src_stat)
 {
     register char *sp, *cp;
     register int i;
     char format_string[BUF_MEDIUM];
     char *dp = format_string;
-    char *source = NULL;
 
 #ifdef ENABLE_NLS
     static int i18n_flag = 0;
@@ -1714,10 +1723,7 @@ panel_operate_generate_prompt (WPanel *panel, int operation, int only_one,
     }
 #endif				/* ENABLE_NLS */
 
-    sp = only_one ? one_format : many_format;
-
-    if (only_one)
-	source = panel_get_file (panel, src_stat);
+    sp = single_source ? one_format : many_format;
 
     while (*sp) {
 	switch (*sp) {
@@ -1734,9 +1740,10 @@ panel_operate_generate_prompt (WPanel *panel, int operation, int only_one,
 		cp = operation == OP_DELETE ? "?" : prompt_parts[6];
 		break;
 	    case 'f':
-		if (only_one) {
-		    cp = S_ISDIR (src_stat->st_mode) ?
-			prompt_parts[2] : prompt_parts[0];
+		if (single_source) {
+		    cp = S_ISDIR (src_stat->
+				  st_mode) ? prompt_parts[2] :
+			prompt_parts[0];
 		} else {
 		    cp = (panel->marked == panel->dirs_marked)
 			? prompt_parts[3]
@@ -1759,10 +1766,10 @@ panel_operate_generate_prompt (WPanel *panel, int operation, int only_one,
     }
     *dp = '\0';
 
-    if (only_one) {
+    if (single_source) {
 	i = fmd_xlen - strlen (format_string) - 4;
 	g_snprintf (cmd_buf, sizeof (cmd_buf), format_string,
-		    name_trunc (source, i));
+		    name_trunc (single_source, i));
     } else {
 	g_snprintf (cmd_buf, sizeof (cmd_buf), format_string,
 		    panel->marked);
@@ -1772,8 +1779,6 @@ panel_operate_generate_prompt (WPanel *panel, int operation, int only_one,
 	    fmd_init_i18n (TRUE);	/* to recalculate positions of child widgets */
 	}
     }
-
-    return source;
 }
 
 /**
@@ -1784,10 +1789,13 @@ panel_operate_generate_prompt (WPanel *panel, int operation, int only_one,
  *
  * Returns 1 if did change the directory
  * structure, Returns 0 if user aborted
+ *
+ * force_single forces operation on the current entry and affects
+ * default destination.  Current filename is used as default.
  */
 int
 panel_operate (void *source_panel, FileOperation operation,
-	       char *thedefault, int ask_user)
+	       int force_single)
 {
     WPanel *panel = source_panel;
 #ifdef WITH_FULL_PATHS
@@ -1799,8 +1807,8 @@ panel_operate (void *source_panel, FileOperation operation,
     char *dest = NULL;
     char *temp = NULL;
     char *save_cwd = NULL, *save_dest = NULL;
-    int only_one = (get_current_type () == view_tree)
-	|| (panel->marked <= 1);
+    int single_entry = (get_current_type () == view_tree)
+	|| (panel->marked <= 1) || force_single;
     struct stat src_stat, dst_stat;
     int i, value;
     FileOpContext *ctx;
@@ -1809,67 +1817,64 @@ panel_operate (void *source_panel, FileOperation operation,
     double bytes = 0;
 
     int dst_result;
-    int do_bg;			/* do background operation? */
+    int do_bg = 0;		/* do background operation? */
 
-    ctx = file_op_context_new ();
-
-    do_bg = 0;
     free_linklist (&linklist);
     free_linklist (&dest_dirs);
-    if (get_current_type () == view_listing)
-	if (!panel->marked && !strcmp (selection (panel)->fname, "..")) {
-	    message (1, MSG_ERROR, _(" Cannot operate on \"..\"! "));
-	    file_op_context_destroy (ctx);
-	    return 0;
+
+    if (single_entry) {
+	if (force_single) {
+	    source = selection (panel)->fname;
+	    src_stat = selection (panel)->st;
+	} else {
+	    source = panel_get_file (panel, &src_stat);
 	}
 
+	if (!strcmp (source, "..")) {
+	    message (1, MSG_ERROR, _(" Cannot operate on \"..\"! "));
+	    return 0;
+	}
+    }
+
     /* Generate confirmation prompt */
-    source =
-	panel_operate_generate_prompt (panel, operation, only_one,
-				       &src_stat);
+    panel_operate_generate_prompt (panel, operation, source, &src_stat);
+
+    ctx = file_op_context_new ();
 
     /* Show confirmation dialog */
     if (operation == OP_DELETE && confirm_delete) {
 	if (safe_delete)
 	    query_set_sel (1);
 
-	i = query_dialog (_(op_names[operation]), cmd_buf,
-			  D_ERROR, 2, _("&Yes"), _("&No"));
+	i = query_dialog (_(op_names[operation]), cmd_buf, D_ERROR, 2,
+			  _("&Yes"), _("&No"));
 
 	if (i != 0) {
 	    file_op_context_destroy (ctx);
 	    return 0;
 	}
     } else if (operation != OP_DELETE) {
-	if (ask_user) {
-	    char *dest_dir;
+	char *dest_dir;
 
-	    if (thedefault != NULL)
-		dest_dir = thedefault;
-	    else if (get_other_type () == view_listing)
-		dest_dir = opanel->cwd;
-	    else
-		dest_dir = panel->cwd;
+	/* Forced single operations default to the original name */
+	if (force_single)
+	    dest_dir = source;
+	else if (get_other_type () == view_listing)
+	    dest_dir = opanel->cwd;
+	else
+	    dest_dir = panel->cwd;
 
-	    dest =
-		file_mask_dialog (ctx, operation, cmd_buf, dest_dir,
-				  only_one, &do_bg);
-	    if (!dest) {
-		file_op_context_destroy (ctx);
-		return 0;
-	    }
-	    if (!*dest) {
-		file_op_context_destroy (ctx);
-		g_free (dest);
-		return 0;
-	    }
-	} else {
-	    char *all = "^\\(.*\\)$";
-
-	    re_compile_pattern (all, strlen (all), &ctx->rx);
-	    ctx->dest_mask = g_strdup ("*");
-	    do_bg = FALSE;
-	    dest = g_strdup (thedefault);
+	dest =
+	    file_mask_dialog (ctx, operation, cmd_buf, dest_dir,
+			      single_entry, &do_bg);
+	if (!dest) {
+	    file_op_context_destroy (ctx);
+	    return 0;
+	}
+	if (!*dest) {
+	    file_op_context_destroy (ctx);
+	    g_free (dest);
+	    return 0;
 	}
     }
 #ifdef WITH_BACKGROUND
@@ -1916,7 +1921,7 @@ panel_operate (void *source_panel, FileOperation operation,
 	file_op_context_create_ui (ctx, operation, 1);
 
     /* This code is only called by the tree and panel code */
-    if (only_one) {
+    if (single_entry) {
 	/* We now have ETA in all cases */
 
 	/* One file: FIXME mc_chdir will take user out of any vfs */
@@ -1980,7 +1985,7 @@ panel_operate (void *source_panel, FileOperation operation,
 	    }
 	}			/* Copy or move operation */
 
-	if (value == FILE_CONT)
+	if ((value == FILE_CONT) && !force_single)
 	    unmark_files (panel);
     } else {
 	/* Many files */
@@ -2043,7 +2048,7 @@ panel_operate (void *source_panel, FileOperation operation,
 		    switch (operation) {
 		    case OP_COPY:
 			/*
-			 * we use file_mask_op_follow_links only with OP_COPY,
+			 * we use file_mask_op_follow_links only with OP_COPY
 			 */
 			(*ctx->stat_func) (source_with_path, &src_stat);
 			if (S_ISDIR (src_stat.st_mode))
@@ -2098,7 +2103,7 @@ panel_operate (void *source_panel, FileOperation operation,
 
 	    mc_refresh ();
 	}			/* Loop for every file */
-    }				/* Many files */
+    }				/* Many entries */
   clean_up:
     /* Clean up */
 
