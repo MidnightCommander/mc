@@ -598,6 +598,13 @@ load_keys_from_section (const char *terminal, const char *profile_name)
     g_free (section_name);
     while (profile_keys){
 	profile_keys = profile_iterator_next (profile_keys, &key, &value);
+
+	/* copy=other causes all keys from [terminal:other] to be loaded.  */
+	if (g_strcasecmp (key, "copy") == 0) {
+	    load_keys_from_section (value, profile_name);
+	    continue;
+	}
+
 	key_code = lookup_key (key);
 	if (key_code){
 	    valcopy = convert_controls (value);

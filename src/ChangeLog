@@ -4,6 +4,15 @@
 	to fit into memory.
 	(load_view_file): Fix avoid mmaping just part of a >=4GB file 
 	on 32-bit arches.
+        
+	* setup.c (load_keys_from_section): Handle "copy".
+	gnome-terminal started using TERM=gnome instead of TERM=xterm,
+	so does rxvt etc.
+	Instead of making mc.lib really huge and hard to edit
+	by repeating same keys for every xterm alternative,
+	I have added a special key "copy", with argument name of terminal.
+	mc will in this case read the keys from the referenced terminal's
+	keys from the same file as well.
 
 2004-09-04  Jakub Jelinek  <jakub@redhat.com>
 
