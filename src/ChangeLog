@@ -1,5 +1,7 @@
 2002-12-24  Pavel Roskin  <proski@gnu.org>
 
+	* key.c (is_idle): Check for input on input_fd and gpm_fd.
+
 	* main.c (init_xterm_support): Revert last change, it doesn't
 	free all S-Lang memory anyways, but creates portability issues.
 

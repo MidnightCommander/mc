@@ -1000,22 +1000,30 @@ application_keypad_mode (void)
 }
 
 
-/* A function to check if we're idle.
-   Currently checks only for key presses.
-   We could also check the mouse. */
-int is_idle (void)
+/*
+ * Check if we are idle, i.e. there are no pending keyboard or mouse
+ * events.  Return 1 is idle, 0 is there are pending events.
+ */
+int
+is_idle (void)
 {
-    /* Check for incoming key presses     *
-     * If there are any we say we're busy */
-
+    int maxfdp;
     fd_set select_set;
     struct timeval timeout;
+
     FD_ZERO (&select_set);
-    FD_SET (0, &select_set);
+    FD_SET (input_fd, &select_set);
+    maxfdp = input_fd;
+#ifdef HAVE_LIBGPM
+    if (use_mouse_p == MOUSE_GPM && mouse_enabled && gpm_fd != -1) {
+	FD_SET (gpm_fd, &select_set);
+	maxfdp = max (maxfdp, gpm_fd);
+    }
+#endif
     timeout.tv_sec = 0;
     timeout.tv_usec = 0;
-    select (1, &select_set, 0, 0, &timeout);
-    return ! FD_ISSET (0, &select_set);
+    select (maxfdp, &select_set, 0, 0, &timeout);
+    return !FD_ISSET (0, &select_set);
 }
 
 
