@@ -142,9 +142,9 @@ static int height;
 #define BY      12
 
 #define B_2LEFT B_USER
-#define B_2RIGHT B_USER + 1
-#define B_PLUS B_USER + 2
-#define B_MINUS B_USER + 3
+#define B_2RIGHT (B_USER + 1)
+#define B_PLUS (B_USER + 2)
+#define B_MINUS (B_USER + 3)
 
 static Dlg_head *layout_dlg;
 

@@ -1147,9 +1147,9 @@ int edit_block_delete_cmd (WEdit * edit)
 #define REPLACE_DLG_HEIGHT 15
 #define CONFIRM_DLG_WIDTH 79
 #define CONFIRM_DLG_HEIGTH 6
-#define B_REPLACE_ALL B_USER+1
-#define B_REPLACE_ONE B_USER+2
-#define B_SKIP_REPLACE B_USER+3
+#define B_REPLACE_ALL (B_USER+1)
+#define B_REPLACE_ONE (B_USER+2)
+#define B_SKIP_REPLACE (B_USER+3)
 
 static int
 edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)

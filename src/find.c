@@ -50,10 +50,10 @@
 static int FIND_X = 50;
 
 /* Size of the find window */
-#define FIND2_Y LINES-4
+#define FIND2_Y (LINES - 4)
 
 static int FIND2_X = 64;
-#define FIND2_X_USE FIND2_X-20
+#define FIND2_X_USE (FIND2_X - 20)
 
 /* A couple of extra messages we need */
 enum {

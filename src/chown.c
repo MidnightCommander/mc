@@ -59,8 +59,8 @@
 #define BUTTONS		5
 
 #define B_SETALL        B_USER
-#define B_SETUSR        B_USER + 1
-#define B_SETGRP        B_USER + 2
+#define B_SETUSR        (B_USER + 1)
+#define B_SETGRP        (B_USER + 2)
 
 static int need_update, end_chown;
 static int current_file;

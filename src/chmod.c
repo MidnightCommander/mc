@@ -56,9 +56,9 @@ static int single_set;
 #define BUTTONS		6
 
 #define B_MARKED	B_USER
-#define B_ALL		B_USER+1
-#define B_SETMRK        B_USER+2
-#define B_CLRMRK        B_USER+3
+#define B_ALL		(B_USER+1)
+#define B_SETMRK        (B_USER+2)
+#define B_CLRMRK        (B_USER+3)
 
 static int mode_change, need_update;
 static int c_file, end_chmod;

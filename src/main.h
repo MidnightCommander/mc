@@ -15,7 +15,7 @@ enum {
 #define UP_RELOAD   1
 #define UP_ONLY_CURRENT  2
 
-#define UP_KEEPSEL (char *) -1
+#define UP_KEEPSEL ((char *) -1)
 
 extern int quote;
 extern volatile int quit;

@@ -855,9 +855,9 @@ symlink_dialog (char *existing, char *new, char **ret_existing, char **ret_new)
 }
 
 #ifdef WITH_BACKGROUND
-#define B_STOP   B_USER+1
-#define B_RESUME B_USER+2
-#define B_KILL   B_USER+3
+#define B_STOP   (B_USER+1)
+#define B_RESUME (B_USER+2)
+#define B_KILL   (B_USER+3)
 
 static int JOBS_X = 60;
 #define JOBS_Y 15

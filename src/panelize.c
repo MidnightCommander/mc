@@ -55,7 +55,7 @@
 #define BUTTONS		4
 #define LABELS          3
 #define B_ADD		B_USER
-#define B_REMOVE        B_USER + 1
+#define B_REMOVE        (B_USER + 1)
 
 static WListbox *l_panelize;
 static Dlg_head *panelize_dlg;

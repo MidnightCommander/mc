@@ -55,7 +55,7 @@
 #define UY		2
 
 #define BX		UX
-#define BY		LINES-6
+#define BY		(LINES - 6)
 
 #define BUTTONS		(sizeof(hotlist_but)/sizeof(struct _hotlist_but))
 #define LABELS          3

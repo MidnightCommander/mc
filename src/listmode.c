@@ -54,7 +54,7 @@
 #define BY		18
 
 #define B_ADD		B_USER
-#define B_REMOVE        B_USER + 1
+#define B_REMOVE        (B_USER + 1)
 
 static WListbox *l_listmode;
 
@@ -80,7 +80,7 @@ struct listmode_button {
 };
 
 #define B_PLUS B_USER
-#define B_MINUS B_USER+1
+#define B_MINUS (B_USER+1)
 
 struct listmode_label {
     int y, x;

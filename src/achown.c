@@ -52,13 +52,13 @@
 #define BUTTONS		9
 
 #define B_SETALL        B_USER
-#define B_SKIP          B_USER + 1
+#define B_SKIP          (B_USER + 1)
 
-#define B_OWN           B_USER + 3
-#define B_GRP           B_USER + 4
-#define B_OTH           B_USER + 5
-#define B_OUSER         B_USER + 6
-#define B_OGROUP        B_USER + 7
+#define B_OWN           (B_USER + 3)
+#define B_GRP           (B_USER + 4)
+#define B_OTH           (B_USER + 5)
+#define B_OUSER         (B_USER + 6)
+#define B_OGROUP        (B_USER + 7)
 
 static struct Dlg_head *ch_dlg;
 
