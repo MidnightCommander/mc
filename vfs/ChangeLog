@@ -1,3 +1,18 @@
+Mon Nov 23 21:19:43 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* ftpfs.c (resolve_symlink_with_ls_options): that's resolve_symlinks
+	we used up to release 4.1.35. It uses LIST -lLa to get symlink stats.
+
+	(resolve_symlink_without_ls_options): that's resolve_symlinks
+	we used in release 4.1.36 and 4.5.[01]. It gets symlink stats from the
+	directory cache fetching directories if necessary. We got some 
+	complaints about slower ftpfs in the above releases. Now this methode
+	is no longer the default methode to resolve symbolic links. It is still
+	needed for ftp servers which don't understand the LIST -lLa command.
+	
+	(resolve_symlink): Dispatch between the two methods to
+	resolve symlinks.
+
 Sat Nov 21 21:38:08 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* vfs.c (vfs_parse_ls_lga): corrected stupid bug in parse_ls_lga,

@@ -1010,14 +1010,12 @@ my_abort (struct connection *bucket, int dsock)
 }
 
 static void
-resolve_symlink(struct connection *bucket, struct dir *dir)
+resolve_symlink_without_ls_options(struct connection *bucket, struct dir *dir)
 {
     struct linklist *flist;
     struct direntry *fe, *fel;
     char tmp[MC_MAXPATHLEN];
     
-    print_vfs_message("Resolving symlink...");
-
     dir->symlink_status = FTPFS_RESOLVING_SYMLINKS;
     for (flist = dir->file_list->next; flist != dir->file_list; flist = flist->next) {
         /* flist->data->l_stat is alread initialized with 0 */
@@ -1070,7 +1068,90 @@ resolve_symlink(struct connection *bucket, struct dir *dir)
         }
     }
     dir->symlink_status = FTPFS_RESOLVED_SYMLINKS;
+}
 
+static void
+resolve_symlink_with_ls_options(struct connection *bucket, struct dir *dir)
+{
+    char  buffer[2048] = "", *filename;
+    int sock;
+    FILE *fp;
+    struct stat s;
+    struct linklist *flist;
+    struct direntry *fe;
+    
+    dir->symlink_status = FTPFS_RESOLVED_SYMLINKS;
+    if (strchr (dir->remote_path, ' ')) {
+        if (ftpfs_chdir_internal (bucket, dir->remote_path) != COMPLETE) {
+            print_vfs_message("ftpfs: CWD failed.");
+	    return;
+        }
+        sock = open_data_connection (bucket, "LIST -lLa", ".", TYPE_ASCII, 0);
+    }
+    else
+        sock = open_data_connection (bucket, "LIST -lLa", 
+                                     dir->remote_path, TYPE_ASCII, 0);
+
+    if (sock == -1) {
+	print_vfs_message("ftpfs: couldn't resolve symlink");
+	return;
+    }
+    
+    fp = fdopen(sock, "r");
+    if (fp == NULL) {
+	close(sock);
+	print_vfs_message("ftpfs: couldn't resolve symlink");
+	return;
+    }
+    enable_interrupt_key();
+    flist = dir->file_list->next;
+    while (1) {
+	do {
+	    if (flist == dir->file_list)
+		goto done;
+	    fe = flist->data;
+	    flist = flist->next;
+	} while (!S_ISLNK(fe->s.st_mode));
+	while (1) {
+	    if (fgets (buffer, sizeof (buffer), fp) == NULL)
+		goto done;
+	    if (logfile){
+		fputs (buffer, logfile);
+	        fflush (logfile);
+	    }
+	    if (vfs_parse_ls_lga (buffer, &s, &filename, NULL)) {
+		int r = strcmp(fe->name, filename);
+		free(filename);
+		if (r == 0) {
+		    fe->l_stat = xmalloc(sizeof(struct stat), 
+					 "resolve_symlink: struct stat");
+		    if (fe->l_stat == NULL)
+			goto done;
+		    *fe->l_stat = s;
+                    (*fe->l_stat).st_ino = bucket->__inode_counter++;
+		    break;
+		}
+		if (r < 0)
+		    break;
+	    }
+	}
+    }
+done:
+    while (fgets(buffer, sizeof(buffer), fp) != NULL);
+    disable_interrupt_key();
+    fclose(fp);
+    get_reply(qsock(bucket), NULL, 0);
+}
+
+static void
+resolve_symlink(struct connection *bucket, struct dir *dir)
+{
+    print_vfs_message("Resolving symlink...");
+
+    if (bucket->strict_rfc959_list_cmd) 
+	resolve_symlink_without_ls_options(bucket, dir);
+    else
+        resolve_symlink_with_ls_options(bucket, dir);
 }
 
 
