@@ -4,16 +4,10 @@
 #include "dir.h"
 #include "panel.h"
 #include "gscreen.h"
+#include "main.h"
 #include "cmd.h"
 
-typedef struct {
-	int splitted;
-	
-	WPanel *panel;
-	
-	enum view_modes other_display;
-	Widget *other;
-} PanelContainer;
+#define UNDEFINED_INDEX -1
 
 GList *containers = 0;
 
@@ -64,7 +58,7 @@ get_other_index (void)
 		if (p->data == other_panel_ptr)
 			return i;
 	}
-	return -1;
+	return UNDEFINED_INDEX;
 }
 
 void
@@ -92,9 +86,27 @@ set_new_current_panel (WPanel *panel)
 }
 
 void
-print_vfs_message (char *msg)
+set_hintbar (char *str)
 {
+	g_panel_contents *gp;
+
+	gp = (g_panel_contents *) current_panel_ptr->panel->widget.wdata;
+	gtk_label_set (GTK_LABEL (gp->status), str);
+}
+
+void
+print_vfs_message (char *msg, ...)
+{
+	va_list ap;
+	char str [256];
 	
+	va_start(ap, msg);
+	vsprintf(str, msg, ap);
+	va_end(ap);
+	if (midnight_shutdown)
+		return;
+	
+	set_hintbar(str);
 }
 
 void
@@ -105,7 +117,7 @@ rotate_dash (void)
 int
 get_current_type (void)
 {
-	return current_panel_ptr->panel->list_type;
+	return view_listing;
 }
 
 
@@ -121,6 +133,9 @@ get_display_type (int index)
 {
 	GList *p;
 
+	if (index == UNDEFINED_INDEX)
+		return -1;
+	
 	p = g_list_nth (containers, index);
 	if (p)
 		return ((PanelContainer *)p->data)->panel->list_type;
@@ -182,7 +197,7 @@ GnomeUIInfo gnome_panel_filemenu [] = {
 };
 
 GnomeUIInfo gnome_panel_menu [] = {
-	{ GNOME_APP_UI_SUBTREE, "File", NULL, &gnome_panel_filemenu },
+	{ GNOME_APP_UI_SUBTREE, "This is a temporal menu, it will go away", NULL, &gnome_panel_filemenu },
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 
@@ -272,12 +287,4 @@ setup_panels (void)
 	load_hint ();
 }
 
-void
-set_hintbar (char *str)
-{
-	g_panel_contents *gp;
-
-	gp = (g_panel_contents *) current_panel_ptr->panel->widget.wdata;
-	gtk_label_set (GTK_LABEL (gp->status), str);
-}
 

@@ -326,7 +326,7 @@ void edit_cmd_new (WPanel *panel)
 void copy_cmd (void)
 {
     save_cwds_stat ();
-    if (panel_operate (OP_COPY, NULL)){
+    if (panel_operate (cpanel, OP_COPY, NULL)){
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL, UP_KEEPSEL);
 	repaint_screen ();
     }
@@ -335,7 +335,7 @@ void copy_cmd (void)
 void ren_cmd (void)
 {
     save_cwds_stat ();
-    if (panel_operate (OP_MOVE, NULL)){
+    if (panel_operate (cpanel, OP_MOVE, NULL)){
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL, UP_KEEPSEL);
 	repaint_screen ();
     }
@@ -344,7 +344,7 @@ void ren_cmd (void)
 void copymove_cmd_with_default (int copy, char *thedefault)
 {
     save_cwds_stat ();
-    if (panel_operate (copy ? OP_COPY : OP_MOVE, thedefault)){
+    if (panel_operate (cpanel, copy ? OP_COPY : OP_MOVE, thedefault)){
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL, UP_KEEPSEL);
 	repaint_screen ();
     }
@@ -376,7 +376,7 @@ void delete_cmd (void)
 {
     save_cwds_stat ();
 
-    if (panel_operate (OP_DELETE, NULL)){
+    if (panel_operate (cpanel, OP_DELETE, NULL)){
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL, UP_KEEPSEL);
 	repaint_screen ();
     }

@@ -281,10 +281,10 @@ static WLabel *stalled_label;
 
 /* {{{ File progress display routines */
 
+#ifndef HAVE_X
 static int
 check_buttons (void)
 {
-#ifndef HAVE_X
     int c;
     Gpm_Event event;
 
@@ -303,28 +303,48 @@ check_buttons (void)
     default:
 	return FILE_CONT;
     }
-
+}
 #else
+
 #ifdef HAVE_TK
+static int
+check_buttons (void)
+{
     tk_dispatch_all ();
-#endif
-#ifdef HAVE_XVIEW
-    xv_dispatch_something ();
-#endif
     if (op_dlg->running)
         return FILE_CONT;
-#    ifdef ZERO
-/*FIXME: I think FRAME_CMD kills the dialog whenever we click a button, so that is
-    why this is ifdefed*/
-    else if (op_dlg->ret_value == B_CANCEL)
-        return FILE_ABORT;
-    else
-    	return op_dlg->ret_value;
-#    else
-    return FILE_ABORT;
-#    endif    	
-#endif
 }
+#endif /* HAVE_TK */
+
+#ifdef HAVE_XVIEW
+static int
+check_buttons (void)
+{
+    xv_dispatch_something ();
+    if (op_dlg->running)
+        return FILE_CONT;
+}
+#endif /* HAVE_XVIEW */
+
+#ifdef HAVE_GNOME
+#include <gtk/gtk.h>
+static int
+check_buttons (void)
+{
+    while (gtk_events_pending ())
+	gtk_main_iteration ();
+    
+    if (op_dlg->running)
+        return FILE_CONT;
+
+    if (op_dlg->ret_value == B_CANCEL)
+	return FILE_ABORT;
+    else
+	return op_dlg->ret_value;
+}
+#endif /* HAVE_GNOME */
+
+#endif /* HAVE_X */
 
 static int
 op_win_callback (struct Dlg_head *h, int id, int msg)
@@ -890,7 +910,6 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
     /* bitmask used to remember which resourses we should release on return 
        A single goto label is much easier to handle than a bunch of gotos ;-). */ 
     unsigned resources = 0; 
-
 
     return_status = FILE_RETRY;
 
@@ -1495,7 +1514,7 @@ ret:
 
 /* {{{ Move routines */
 
-static int
+int
 move_file_file (char *s, char *d)
 {
     struct stat src_stats, dst_stats;
@@ -1846,11 +1865,11 @@ erase_dir_iff_empty (char *s)
 
 /* Returns currently selected file or the first marked file if there is one */
 static char *
-get_file (struct stat *stat_buf)
+get_file (WPanel *panel, struct stat *stat_buf)
 {
     int i;
-    WPanel *panel;
-    
+
+    /* No problem with Gnome, as get_current_type never returns view_tree there */
     if (get_current_type () == view_tree){
 	WTree *tree = (WTree *)get_panel_widget (get_current_index ());
 	
@@ -1858,8 +1877,6 @@ get_file (struct stat *stat_buf)
 	return tree->selected_ptr->name;
     } 
 
-    panel = cpanel;
-    
     if (panel->marked){
 	for (i = 0; i < panel->count; i++)
 	    if (panel->dir.list [i].f.marked){
@@ -2051,8 +2068,9 @@ ask_file_mask:
 /* Returns 1 if did change the directory structure,
    Returns 0 if user aborted */
 int
-panel_operate (int operation, char *thedefault)
+panel_operate (void *source_panel, int operation, char *thedefault)
 {
+    WPanel *panel = source_panel;
 #ifdef WITH_FULL_PATHS
     char *source_with_path = NULL;
 #else
@@ -2061,20 +2079,20 @@ panel_operate (int operation, char *thedefault)
     char *source = NULL;
     char *dest = NULL;
     char *temp = NULL;
-    int only_one = (get_current_type () == view_tree) || (cpanel->marked <= 1);
+    int only_one = (get_current_type () == view_tree) || (panel->marked <= 1);
     struct stat src_stat, dst_stat;
     int i, value;
     long marked, total;
     long count = 0, bytes = 0;
     int  dst_result;
     int  do_bg;			/* do background operation? */
-    
+
     do_bg = 0;
     rx.buffer = NULL;
     free_linklist (&linklist);
     free_linklist (&dest_dirs);
     if (get_current_type () == view_listing)
-	if (!cpanel->marked && !strcmp (selection (cpanel)->fname, "..")){
+	if (!panel->marked && !strcmp (selection (panel)->fname, "..")){
 	    message (1, " Error ", " Can't operate on \"..\"! ");
 	    return 0;
 	}
@@ -2085,12 +2103,12 @@ panel_operate (int operation, char *thedefault)
     /* Generate confirmation prompt */
     
     if (!only_one){
-	sprintf (cmd_buf, "%s%d %s%s ", op_names [operation], cpanel->marked,
-		 (cpanel->marked == cpanel->dirs_marked) ? "directories" :
-		 (cpanel->dirs_marked) ? "files/directories" : "files",
+	sprintf (cmd_buf, "%s%d %s%s ", op_names [operation], panel->marked,
+		 (panel->marked == panel->dirs_marked) ? "directories" :
+		 (panel->dirs_marked) ? "files/directories" : "files",
 		 (operation == OP_DELETE) ? "?" : " with source mask:");
     } else {
-	source = get_file (&src_stat);
+	source = get_file (panel, &src_stat);
 	sprintf (cmd_buf,"%s%s \"%s\"%s ", op_names [operation],
 	         S_ISDIR (src_stat.st_mode) ? "directory" : "file",
 		 name_trunc (source, S_ISDIR (src_stat.st_mode) ? 23 : 28),
@@ -2113,7 +2131,7 @@ panel_operate (int operation, char *thedefault)
 	else if (get_other_type () == view_listing)
 	    dest_dir = opanel->cwd;
 	else
-	    dest_dir = cpanel->cwd;
+	    dest_dir = panel->cwd;
 
 	rx.buffer = (char *) xmalloc (MC_MAXPATHLEN, "mask copying");
 	rx.allocated = MC_MAXPATHLEN;
@@ -2135,14 +2153,14 @@ panel_operate (int operation, char *thedefault)
     if (do_bg){
 	int v;
 	
-	v = do_background (copy_strings (operation_names [operation], ": ", cpanel->cwd, 0));
+	v = do_background (copy_strings (operation_names [operation], ": ", panel->cwd, 0));
 	if (v == -1){
 	    message (1, " Error ", " Sorry, I could not put the job in background ");
 	}
 
 	/* If we are the parent */
 	if (v == 1){
-	    vfs_force_expire (cpanel->cwd);
+	    vfs_force_expire (panel->cwd);
 	    vfs_force_expire (dest);
 	    return 0;
 	}
@@ -2150,7 +2168,7 @@ panel_operate (int operation, char *thedefault)
 #endif
     /* Initialize things */
     /* We turn on ETA display if the source is an ftp file system */
-    create_op_win (operation, vfs_file_is_ftp (cpanel->cwd));
+    create_op_win (operation, vfs_file_is_ftp (panel->cwd));
     ftpfs_hint_reread (0);
     
     /* Now, let's do the job */
@@ -2162,7 +2180,7 @@ panel_operate (int operation, char *thedefault)
 	
 	/* The source and src_stat variables have been initialized before */
 #ifdef WITH_FULL_PATHS
-	source_with_path = concat_dir_and_file (cpanel->cwd, source);
+	source_with_path = concat_dir_and_file (panel->cwd, source);
 #endif
 	
 	if (operation == OP_DELETE){
@@ -2206,7 +2224,7 @@ panel_operate (int operation, char *thedefault)
 	} /* Copy or move operation */
 
 	if (value == FILE_CONT)
-	    unmark_files (cpanel);
+	    unmark_files (panel);
 
     } else {
 	/* Many files */
@@ -2223,19 +2241,19 @@ panel_operate (int operation, char *thedefault)
 	}
 
 	/* Initialize variables for progress bars */
-	marked = cpanel->marked;
-	total = cpanel->total;
+	marked = panel->marked;
+	total = panel->total;
 
 	/* Loop for every file */
-	for (i = 0; i < cpanel->count; i++){
-	    if (!cpanel->dir.list [i].f.marked)
+	for (i = 0; i < panel->count; i++){
+	    if (!panel->dir.list [i].f.marked)
 		continue;	/* Skip the unmarked ones */
-	    source = cpanel->dir.list [i].fname;
-	    src_stat = cpanel->dir.list [i].buf;	/* Inefficient, should we use pointers? */
+	    source = panel->dir.list [i].fname;
+	    src_stat = panel->dir.list [i].buf;	/* Inefficient, should we use pointers? */
 #ifdef WITH_FULL_PATHS
 	    if (source_with_path)
 	    	free (source_with_path);
-	    source_with_path = concat_dir_and_file (cpanel->cwd, source);
+	    source_with_path = concat_dir_and_file (panel->cwd, source);
 #endif
 	    if (operation == OP_DELETE){
 		/* Delete operation */
@@ -2280,7 +2298,7 @@ panel_operate (int operation, char *thedefault)
 	    if (value == FILE_ABORT)
 		goto clean_up;
 	    if (value == FILE_CONT){
-		do_file_mark (cpanel, i, 0);
+		do_file_mark (panel, i, 0);
 	    }
 	    count ++;
 	    if (show_count_progress (count, marked) == FILE_ABORT)
@@ -2417,56 +2435,56 @@ init_replace (enum OperationMode mode)
 #define X_TRUNC 52
 #endif
     sprintf (buffer, format, name_trunc (replace_filename, X_TRUNC - strlen (format)));
-    add_widgetl (replace_dlg, label_new (3, 5, buffer, NULL), XV_WLAY_CENTERROW);
+    add_widgetl (replace_dlg, label_new (3, 5, buffer, "target-e"), XV_WLAY_CENTERROW);
     
     add_widgetl (replace_dlg,
 		button_new (BY + 3, 25, REPLACE_ABORT, NORMAL_BUTTON, "&Abort",
-		0, 0, NULL), XV_WLAY_CENTERROW);
+		0, 0, "abort"), XV_WLAY_CENTERROW);
     
     tk_new_frame (replace_dlg, "a.");
     add_widgetl (replace_dlg,
 		 button_new (BY + 1, 28, REPLACE_SIZE, NORMAL_BUTTON, "if &Size differs",
-			     0, 0, NULL), XV_WLAY_RIGHTOF);
+			     0, 0, "if-size"), XV_WLAY_RIGHTOF);
     add_widgetl (replace_dlg,
 		 button_new (BY, 47, REPLACE_NEVER, NORMAL_BUTTON, "non&E",
-		 0, 0, NULL), XV_WLAY_RIGHTOF);
+		 0, 0, "none"), XV_WLAY_RIGHTOF);
     add_widgetl (replace_dlg,
 		button_new (BY, 36, REPLACE_UPDATE, NORMAL_BUTTON, "&Update",
-		0, 0, NULL), XV_WLAY_RIGHTOF);
+		0, 0, "update"), XV_WLAY_RIGHTOF);
     add_widgetl (replace_dlg,
 		button_new (BY, 28, REPLACE_ALWAYS, NORMAL_BUTTON, "al&L",
-		0, 0, NULL), XV_WLAY_RIGHTOF);
+		0, 0, "all"), XV_WLAY_RIGHTOF);
 
-    add_widgetl (replace_dlg, label_new (BY, 5, "Overwrite all targets?", NULL),
+    add_widgetl (replace_dlg, label_new (BY, 5, "Overwrite all targets?", "over-label"),
 	        XV_WLAY_CENTERROW);        
 
     /* "this target..." widgets */
     tk_new_frame (replace_dlg, "p.");
     if (!S_ISDIR (d_stat->st_mode)){
-	if (do_reget == -1 && d_stat->st_size && s_stat->st_size > d_stat->st_size)
+	if ((do_reget == -1 && d_stat->st_size && s_stat->st_size > d_stat->st_size))
 	    add_widgetl (replace_dlg,
 			 button_new (BY - 1, 28, REPLACE_REGET, NORMAL_BUTTON,
-				     "&Reget", 0, 0, NULL), XV_WLAY_RIGHTOF);
+				     "&Reget", 0, 0, "reget"), XV_WLAY_RIGHTOF);
         add_widgetl (replace_dlg,
 		    button_new (BY - 2, 45, REPLACE_APPEND, NORMAL_BUTTON, "ap&Pend",
-		    0, 0, NULL), XV_WLAY_RIGHTOF);
+		    0, 0, "append"), XV_WLAY_RIGHTOF);
     }
     add_widgetl (replace_dlg,
 		button_new (BY - 2, 37, REPLACE_NO, NORMAL_BUTTON, "&No",
-		0, 0, NULL), XV_WLAY_RIGHTOF);
+		0, 0, "no"), XV_WLAY_RIGHTOF);
     add_widgetl (replace_dlg,
 		button_new (BY - 2, 28, REPLACE_YES, NORMAL_BUTTON, "&Yes",
-		0, 0, NULL), XV_WLAY_RIGHTOF);
-    add_widgetl (replace_dlg, label_new (BY-2,5, "Overwrite this target?", NULL),
+		0, 0, "yes"), XV_WLAY_RIGHTOF);
+    add_widgetl (replace_dlg, label_new (BY-2,5, "Overwrite this target?", "overlab"),
 		 XV_WLAY_CENTERROW);
     
     tk_new_frame (replace_dlg, "i.");
     sprintf (buffer, "Target date: %s, size %d",
 	     file_date (d_stat->st_mtime), (int) d_stat->st_size);
-    add_widgetl (replace_dlg, label_new (6, 5, buffer, NULL), XV_WLAY_CENTERROW);
+    add_widgetl (replace_dlg, label_new (6, 5, buffer, "target-date"), XV_WLAY_CENTERROW);
     sprintf (buffer, "Source date: %s, size %d",
 	     file_date (s_stat->st_mtime), (int) s_stat->st_size);
-    add_widgetl (replace_dlg, label_new (5, 5, buffer, NULL), XV_WLAY_CENTERROW);
+    add_widgetl (replace_dlg, label_new (5, 5, buffer, "source-date"), XV_WLAY_CENTERROW);
     tk_end_frame ();
 }
 

@@ -34,9 +34,6 @@ gbutton_callback (GtkWidget *w, void *data)
 	Dlg_head *h = (Dlg_head *) b->widget.parent;
 	int stop = 0;
 
-	if (1)
-		return;
-	
 	if (b->callback)
 		stop = (*b->callback)(b->action, b->callback_data);
 	
@@ -51,10 +48,12 @@ int
 x_create_button (Dlg_head *h, widget_data parent, WButton *b)
 {
 	GtkWidget *button;
-
+	int tag;
+		
 	button = gtk_button_new_with_label (b->text);
 	gtk_widget_show (button);
-	gtk_signal_connect (GTK_OBJECT(button), "clicked", (GtkSignalFunc) gbutton_callback, b);
+	tag = gtk_signal_connect (GTK_OBJECT(button), "clicked", (GtkSignalFunc) gbutton_callback, b);
+	gtk_object_set_data (GTK_OBJECT (button), "click-signal-tag", (void *) tag);
 	b->widget.wdata = (widget_data) button;
 	
 	return 1;
@@ -169,7 +168,11 @@ x_create_label (Dlg_head *g, widget_data parent, WLabel *l)
 {
 	GtkWidget *label;
 
-	label = gtk_label_new (l->text);
+	/* Tempo-hack */
+	if (*l->text == 0)
+		label = gtk_label_new (l->widget.tkname);
+	else
+		label = gtk_label_new (l->text);
 	gtk_widget_show (label);
 	l->widget.wdata = (widget_data) label;
 
@@ -205,6 +208,7 @@ x_create_gauge (Dlg_head *h, widget_data parent, WGauge *g)
 	GtkWidget *pbar;
 
 	pbar = gtk_progress_bar_new ();
+	gtk_widget_show (pbar);
 	g->widget.wdata = (widget_data) pbar;
 
 	return 1;

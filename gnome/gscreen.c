@@ -307,7 +307,22 @@ panel_action_view_unfiltered (GtkWidget *widget, WPanel *panel)
 	view_simple_cmd (panel);
 }
 
-typedef void (*context_menu_callback) (GtkWidget *, WPanel *);
+void
+panel_action_copy (GtkWidget *widget, WPanel *panel)
+{
+}
+
+void
+panel_action_rename (GtkWidget *widget, WPanel *panel)
+{
+}
+
+void
+panel_action_delete (GtkWidget *widget, WPanel *panel)
+{
+}
+
+typedef void (*context_menu_callback)(GtkWidget *, WPanel *);
 	
 static struct {
 	char *text;

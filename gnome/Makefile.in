@@ -123,6 +123,7 @@ install_:
 
 install_gmc: all 
 	$(INSTALL_PROGRAM) gmc $(DESTDIR)$(bindir)/$(binprefix)gmc
+	$(INSTALL_DATA) layout $(DESTDIR)$(libdir)
 
 uninstall: 
 	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)gmc

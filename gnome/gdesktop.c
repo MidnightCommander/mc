@@ -14,6 +14,9 @@
 #include "main.h"
 #include "file.h"
 #include "global.h"
+#include "panel.h"
+#include "gscreen.h"
+#include <gdk/gdkx.h>
 
 /* Types of desktop icons:
  *
@@ -195,6 +198,103 @@ get_operation (int x, int y)
 	return operation_value;
 }
 
+/* Used by check_window_id_in_one_panel and find_panel_owning_window_id for finding
+ * the panel that contains the specified window id (used to figure where the drag
+ * started)
+ */
+static WPanel *temp_panel;
+
+static void
+check_window_id_in_one_panel (gpointer data, gpointer user_data)
+{
+	PanelContainer *pc    = (PanelContainer *) data;
+	int id                = (int) user_data;
+	WPanel *panel         = pc->panel;
+	g_panel_contents *gpc = (g_panel_contents *) panel->widget.wdata;
+	GtkCList *clist       = GTK_CLIST (gpc->list);
+	GdkWindowPrivate  *gdk_wp;
+
+	gdk_wp = (GdkWindowPrivate *) clist->clist_window;
+	if (gdk_wp->xwindow == id){
+		temp_panel = panel;
+		return;
+	}
+
+	gdk_wp = (GdkWindowPrivate *) GTK_WIDGET (clist)->window;
+	
+	if (gdk_wp->xwindow == id){
+		temp_panel = panel;
+		return;
+	}
+}
+
+static WPanel *
+find_panel_owning_window_id (int id)
+{
+	temp_panel = NULL;
+	g_list_foreach (containers, check_window_id_in_one_panel, (gpointer) id);
+	return temp_panel;
+}
+
+static void make_symlinks (WPanel *source_panel, char *target_dir);
+
+static void
+perform_drop_on_panel (WPanel *source_panel, int operation, char *dest)
+{
+	switch (operation){
+	case OPER_COPY:
+		panel_operate (source_panel, OP_COPY, dest);
+		break;
+		
+	case OPER_MOVE:
+		panel_operate (source_panel, OP_MOVE, dest);
+		break;
+		
+	case OPER_LINK:
+		make_symlinks (source_panel, dest);
+		break;
+	}
+}
+
+static void
+perform_drop_manually (int operation, GdkEventDropDataAvailable *event, char *dest)
+{
+	int count = event->data_numbytes;
+	char *p   = event->data;
+	int len;
+
+	do {
+		char *tmpf;
+		
+		len = 1 + strlen (event->data);
+		count -= len;
+		
+		switch (operation){
+		case OPER_COPY:
+			create_op_win (OP_COPY, 0);
+			file_mask_defaults ();
+			tmpf = concat_dir_and_file (dest, x_basename (p));
+			copy_file_file (p, tmpf, 1);
+			free (tmpf);
+			destroy_op_win ();
+			break;
+			
+		case OPER_MOVE:
+			create_op_win (OP_MOVE, 0);
+			file_mask_defaults ();
+			tmpf = concat_dir_and_file (dest, x_basename (p));
+			move_file_file (p, tmpf);
+			free (tmpf);
+			destroy_op_win ();
+			break;
+
+			
+		}
+		p += len;
+	} while (count > 0);
+	
+}
+
 static void
 drop_cb (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di)
 {
@@ -205,12 +305,19 @@ drop_cb (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di
 	int operation;
 
 	if (is_directory){
+		WPanel *source_panel;
 		int x, y;
 
 		gdk_window_get_pointer (NULL, &x, &y, NULL);
 		operation = get_operation (x, y);
 
-		printf ("Operación: %d\n", operation);
+		source_panel = find_panel_owning_window_id (event->requestor);
+		
+		if (source_panel)
+			perform_drop_on_panel (source_panel, operation, di->dentry->exec);
+		else
+			perform_drop_manually (operation, event, di->dentry->exec);
+		return;
 	}
 		
 	count = event->data_numbytes;
@@ -470,6 +577,12 @@ desktop_load (char *desktop_dir)
 		
 		free (full);
 	}
+}
+
+static void
+make_symlinks (WPanel *source_panel, char *target_dir)
+{
+	printf ("weee! you are right, creating symbolic links by dnd is still not working\n");
 }
 
 static void

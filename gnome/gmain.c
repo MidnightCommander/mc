@@ -18,6 +18,7 @@
 #include "global.h"
 #include "dir.h"
 #include "panel.h"
+#include "gscreen.h"
 #include "tty.h"		/* for KEY_BACKSPACE */
 #include "command.h"
 
@@ -132,7 +133,7 @@ xtoolkit_create_dialog (Dlg_head *h, int flags)
 	win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 	h->grided = flags;
 	if (!(flags & DLG_NO_TED)){
-		ted = gtk_ted_new (h->name);
+		ted = gtk_ted_new_layout (h->name, LIBDIR "/layout");
 		gtk_container_add (GTK_CONTAINER (win), ted);
 		gtk_widget_show (ted);
 		
@@ -177,7 +178,15 @@ x_panel_container_show (widget_data wdata)
 void
 x_focus_widget (Widget_Item *p)
 {
-	gtk_widget_grab_focus (GTK_WIDGET (p->widget->wdata));
+	/* Ok, ultra hack again: the top-level containers dont have regular
+	 * widgets in p->widget->wdata, but a g_panel_contents in there
+	 */
+	if (((void *)p->widget->callback) == ((void *)panel_callback)){
+		g_panel_contents *g = (g_panel_contents *) p->widget->wdata;
+
+		gtk_widget_grab_focus (GTK_WIDGET (g->list));
+	} else 
+		gtk_widget_grab_focus (GTK_WIDGET (p->widget->wdata));
 }
 
 void
@@ -205,10 +214,9 @@ x_init_dlg (Dlg_head *h)
 			p = p->next;
 		} while (p != first);
 		gtk_ted_prepare (ted);
-		gtk_grab_add (GTK_WIDGET (ted));
+		gtk_grab_add (GTK_WIDGET (ted)); 
 
 		gtk_widget_show (GTK_WIDGET (h->wdata));
-		
 	}
 }
 
@@ -216,6 +224,8 @@ x_init_dlg (Dlg_head *h)
 void
 x_destroy_dlg (Dlg_head *h)
 {
+	printf ("me llaman!\n");
+	gtk_grab_remove (GTK_WIDGET (GTK_BIN (h->wdata)->child));
 	gtk_widget_destroy (GTK_WIDGET(h->wdata));
 }
 

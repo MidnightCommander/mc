@@ -8,6 +8,7 @@ extern int verbose;
 extern int know_not_what_am_i_doing;
 
 int copy_file_file (char *s, char *d, int ask_overwrite);
+int move_file_file (char *s, char *d);
 int erase_dir (char *s);
 int erase_dir_iff_empty (char *s);
 int move_dir_dir (char *s, char *d);
@@ -15,7 +16,7 @@ int move_dir_dir (char *s, char *d);
 void create_op_win (int op, int with_eta);
 void destroy_op_win (void);
 void refresh_op_win (void);
-int panel_operate (int op, char *thedefault);
+int panel_operate (void *source_panel, int op, char *thedefault);
 void file_mask_defaults (void);
 
 extern int dive_into_subdirs;

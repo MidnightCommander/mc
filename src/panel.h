@@ -217,5 +217,6 @@ void x_panel_select_item (WPanel *panel, int index, int val);
 void x_select_item (WPanel *panel);
 void x_unselect_item (WPanel *panel);
 sortfn *get_sort_fn (char *name);
+int panel_callback (Dlg_head *h, WPanel *panel, int msg, int par);
 
 #endif	/* __PANEL_H */
