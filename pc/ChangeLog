@@ -1,3 +1,8 @@
+2001-11-28  Franco Bez  <franco.bez@web.de>
+
+	* chmod.c: Fix includes for cross-compiler.  Add gettext N_()
+	and _() calls.
+
 2001-11-28  Pavel Roskin  <proski@gnu.org>
 
 	* regex.c: Add temporarily to fix the build.
