@@ -82,8 +82,8 @@
 #include "main.h"		/* the_hint */
 #include "wtools.h"		/* QuickDialog */
 #include "panel.h"		/* cpanel */
-#include "filegui.h"
 #include "fileopctx.h"		/* FILE_CONT */
+#include "filegui.h"
 #include "key.h"		/* get_event */
 
 /* }}} */
