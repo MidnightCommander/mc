@@ -326,32 +326,41 @@ int edit_save_file (WEdit * edit, const char *filename)
  */
 void menu_save_mode_cmd (void)
 {
-#define DLG_X 36
+#define DLG_X 38
 #define DLG_Y 10
     static char *str_result;
     static int save_mode_new;
     static char *str[] =
     {
-	"Quick save ",
-	"Safe save ",
-	"Do backups -->"};
+	N_("Quick save "),
+	N_("Safe save "),
+	N_("Do backups -->")};
     static QuickWidget widgets[] =
     {
-	{quick_button, 18, DLG_X, 7, DLG_Y, "&Cancel", 0,
+	{quick_button, 20, DLG_X, 7, DLG_Y, N_("&Cancel"), 0,
 	 B_CANCEL, 0, 0, XV_WLAY_DONTCARE, "c"},
-	{quick_button, 6, DLG_X, 7, DLG_Y, "&Ok", 0,
+	{quick_button, 6, DLG_X, 7, DLG_Y, N_("&Ok"), 0,
 	 B_ENTER, 0, 0, XV_WLAY_DONTCARE, "o"},
-	{quick_input, 23, DLG_X, 5, DLG_Y, 0, 9,
+	{quick_input, 24, DLG_X, 5, DLG_Y, 0, 10,
 	 0, 0, &str_result, XV_WLAY_DONTCARE, "i"},
-	{quick_label, 22, DLG_X, 4, DLG_Y, "Extension:", 0,
+	{quick_label, 24, DLG_X, 4, DLG_Y, N_("Extension:"), 0,
 	 0, 0, 0, XV_WLAY_DONTCARE, "savemext"},
 	{quick_radio, 4, DLG_X, 3, DLG_Y, "", 3,
 	 0, &save_mode_new, str, XV_WLAY_DONTCARE, "t"},
 	{0}};
     static QuickDialog dialog =
 /* NLS ? */
-    {DLG_X, DLG_Y, -1, -1, " Edit Save Mode ", "[Edit Save Mode]",
+    {DLG_X, DLG_Y, -1, -1, N_(" Edit Save Mode "), "[Edit Save Mode]",
      "esm", widgets};
+    static int i18n_flag;
+
+    if (!i18n_flag) {
+        int i;
+        
+        for (i = 0; i < 3; i++ )
+            str[i] = _(str[i]);
+        i18n_flag = 1;
+    }
 
     widgets[2].text = option_backup_ext;
     widgets[4].value = option_save_mode;
@@ -1110,7 +1119,9 @@ int edit_block_delete_cmd (WEdit * edit)
 #ifdef MIDNIGHT
 
 #define INPUT_INDEX 9
+#define SEARCH_DLG_WIDTH 58
 #define SEARCH_DLG_HEIGHT 10
+#define REPLACE_DLG_WIDTH 58
 #define REPLACE_DLG_HEIGHT 15
 #define B_REPLACE_ALL B_USER+1
 #define B_SKIP_REPLACE B_USER+2
@@ -1167,35 +1178,35 @@ void edit_replace_dialog (WEdit * edit, char **search_text, char **replace_text,
     char *targ_order;
     QuickWidget quick_widgets[] =
     {
-	{quick_button, 6, 10, 12, REPLACE_DLG_HEIGHT, "&Cancel", 0, B_CANCEL, 0,
+	{quick_button, 6, 10, 12, REPLACE_DLG_HEIGHT, N_("&Cancel"), 0, B_CANCEL, 0,
 	 0, XV_WLAY_DONTCARE, NULL},
-	{quick_button, 2, 10, 12, REPLACE_DLG_HEIGHT, "&Ok", 0, B_ENTER, 0,
+	{quick_button, 2, 10, 12, REPLACE_DLG_HEIGHT, N_("&Ok"), 0, B_ENTER, 0,
 	 0, XV_WLAY_DONTCARE, NULL},
-	{quick_checkbox, 25, 50, 11, REPLACE_DLG_HEIGHT, "Scanf &expression", 0, 0,
+	{quick_checkbox, 33, REPLACE_DLG_WIDTH, 11, REPLACE_DLG_HEIGHT, N_("scanf &Expression"), 0, 0,
 	 0, 0, XV_WLAY_DONTCARE, NULL},
-	{quick_checkbox, 25, 50, 10, REPLACE_DLG_HEIGHT, "Replace &all", 0, 0,
+	{quick_checkbox, 33, REPLACE_DLG_WIDTH, 10, REPLACE_DLG_HEIGHT, N_("replace &All"), 0, 0,
 	 0, 0, XV_WLAY_DONTCARE, NULL},
-	{quick_checkbox, 25, 50, 9, REPLACE_DLG_HEIGHT, "Pr&ompt on replace", 0, 0,
+	{quick_checkbox, 33, REPLACE_DLG_WIDTH, 9, REPLACE_DLG_HEIGHT, N_("pr&Ompt on replace"), 0, 0,
 	 0, 0, XV_WLAY_DONTCARE, NULL},
-	{quick_checkbox, 4, 50, 11, REPLACE_DLG_HEIGHT, "&Backwards", 0, 0, 
+	{quick_checkbox, 4, REPLACE_DLG_WIDTH, 11, REPLACE_DLG_HEIGHT, N_("&Backwards"), 0, 0,
 	 0, 0, XV_WLAY_DONTCARE, NULL},
-	{quick_checkbox, 4, 50, 10, REPLACE_DLG_HEIGHT, "&Regular exprssn", 0, 0,
+	{quick_checkbox, 4, REPLACE_DLG_WIDTH, 10, REPLACE_DLG_HEIGHT, N_("&Regular expression"), 0, 0,
 	 0, 0, XV_WLAY_DONTCARE, NULL},
-	{quick_checkbox, 4, 50, 9, REPLACE_DLG_HEIGHT, "&Whole words only", 0, 0,
+	{quick_checkbox, 4, REPLACE_DLG_WIDTH, 9, REPLACE_DLG_HEIGHT, N_("&Whole words only"), 0, 0,
 	 0, 0, XV_WLAY_DONTCARE, NULL},
-	{quick_checkbox, 4, 50, 8, REPLACE_DLG_HEIGHT, "Case &sensitive", 0, 0,
+	{quick_checkbox, 4, REPLACE_DLG_WIDTH, 8, REPLACE_DLG_HEIGHT, N_("case &Sensitive"), 0, 0,
 	 0, 0, XV_WLAY_DONTCARE, NULL},
-	{quick_input,    3, 50, 7, REPLACE_DLG_HEIGHT, "", 44, 0, 0,
+	{quick_input,    3, REPLACE_DLG_WIDTH, 7, REPLACE_DLG_HEIGHT, "", 52, 0, 0,
 	 0, XV_WLAY_BELOWCLOSE, "edit-argord"},
-	{quick_label, 2, 50, 6, REPLACE_DLG_HEIGHT, " Enter replacement argument order eg. 3,2,1,4 ", 0, 0,
+	{quick_label, 2, REPLACE_DLG_WIDTH, 6, REPLACE_DLG_HEIGHT, N_(" Enter replacement argument order eg. 3,2,1,4 "), 0, 0,
 	 0, 0, XV_WLAY_DONTCARE, 0},
-	{quick_input, 3, 50, 5, REPLACE_DLG_HEIGHT, "", 44, 0, 0,
+	{quick_input, 3, REPLACE_DLG_WIDTH, 5, REPLACE_DLG_HEIGHT, "", 52, 0, 0,
 	 0, XV_WLAY_BELOWCLOSE, "edit-replace"},
-	{quick_label, 2, 50, 4, REPLACE_DLG_HEIGHT, " Enter replacement string", 0, 0, 0,
+	{quick_label, 2, REPLACE_DLG_WIDTH, 4, REPLACE_DLG_HEIGHT, N_(" Enter replacement string:"), 0, 0, 0,
 	 0, XV_WLAY_DONTCARE, 0},
-	{quick_input, 3, 50, 3, REPLACE_DLG_HEIGHT, "", 44, 0, 0,
+	{quick_input, 3, REPLACE_DLG_WIDTH, 3, REPLACE_DLG_HEIGHT, "", 52, 0, 0,
 	 0, XV_WLAY_BELOWCLOSE, "edit-search"},
-	{quick_label, 2, 50, 2, REPLACE_DLG_HEIGHT, " Enter search string", 0, 0, 0,
+	{quick_label, 2, REPLACE_DLG_WIDTH, 2, REPLACE_DLG_HEIGHT, N_(" Enter search string:"), 0, 0, 0,
 	 0, XV_WLAY_DONTCARE, 0},
 	{0}};
 
@@ -1214,7 +1225,7 @@ void edit_replace_dialog (WEdit * edit, char **search_text, char **replace_text,
     quick_widgets[13].text = *search_text;
     {
 	QuickDialog Quick_input =
-	{50, REPLACE_DLG_HEIGHT, -1, 0, N_(" Replace "),
+	{REPLACE_DLG_WIDTH, REPLACE_DLG_HEIGHT, -1, 0, N_(" Replace "),
 	 "[Input Line Keys]", "quick_input", 0 /*quick_widgets */ };
 
 	Quick_input.widgets = quick_widgets;
@@ -1252,23 +1263,23 @@ void edit_search_dialog (WEdit * edit, char **search_text)
     char *tsearch_text;
     QuickWidget quick_widgets[] =
     {
-	{quick_button, 6, 10, 7, SEARCH_DLG_HEIGHT, "&Cancel", 0, B_CANCEL, 0,
+	{quick_button, 6, 10, 7, SEARCH_DLG_HEIGHT, N_("&Cancel"), 0, B_CANCEL, 0,
 	 0, XV_WLAY_DONTCARE, NULL},
-	{quick_button, 2, 10, 7, SEARCH_DLG_HEIGHT, "&Ok", 0, B_ENTER, 0,
+	{quick_button, 2, 10, 7, SEARCH_DLG_HEIGHT, N_("&Ok"), 0, B_ENTER, 0,
 	 0, XV_WLAY_DONTCARE, NULL},
-	{quick_checkbox, 25, 50, 6, SEARCH_DLG_HEIGHT, "Scanf &expression", 0, 0,
+	{quick_checkbox, 33, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("scanf &Expression"), 0, 0,
 	 0, 0, XV_WLAY_DONTCARE, NULL },
-	{quick_checkbox, 25, 50, 5, SEARCH_DLG_HEIGHT, "&Backwards", 0, 0,
+	{quick_checkbox, 33, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("&Backwards"), 0, 0,
 	 0, 0, XV_WLAY_DONTCARE, NULL},
-	{quick_checkbox, 4, 50, 6, SEARCH_DLG_HEIGHT, "&Regular exprssn", 0, 0,
+	{quick_checkbox, 4, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("&Regular expression"), 0, 0,
 	 0, 0, XV_WLAY_DONTCARE, NULL},
-	{quick_checkbox, 4, 50, 5, SEARCH_DLG_HEIGHT, "&Whole words only", 0, 0,
+	{quick_checkbox, 4, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("&Whole words only"), 0, 0,
 	 0, 0, XV_WLAY_DONTCARE, NULL},
-	{quick_checkbox, 4, 50, 4, SEARCH_DLG_HEIGHT, "Case &sensitive", 0, 0,
+	{quick_checkbox, 4, SEARCH_DLG_WIDTH, 4, SEARCH_DLG_HEIGHT, N_("case &Sensitive"), 0, 0,
 	 0, 0, XV_WLAY_DONTCARE, NULL},
-	{quick_input, 3, 50, 3, SEARCH_DLG_HEIGHT, "", 44, 0, 0,
+	{quick_input, 3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT, "", 52, 0, 0,
 	 0, XV_WLAY_BELOWCLOSE, "edit-search"},
-	{quick_label, 2, 50, 2, SEARCH_DLG_HEIGHT, " Enter search string", 0, 0, 0,
+	{quick_label, 2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_(" Enter search string:"), 0, 0, 0,
 	 0, XV_WLAY_DONTCARE, 0},
 	{0}};
 
@@ -1282,7 +1293,7 @@ void edit_search_dialog (WEdit * edit, char **search_text)
 
     {
 	QuickDialog Quick_input =
-	{50, SEARCH_DLG_HEIGHT, -1, 0, N_(" Search "),
+	{SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT, -1, 0, N_(" Search "),
 	 "[Input Line Keys]", "quick_input", 0 /*quick_widgets */ };
 
 	Quick_input.widgets = quick_widgets;

@@ -1,3 +1,14 @@
+Fri Feb 26 22:06:51 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* gtkedit/editcmd.c (menu_save_mode_cmd): translate strings for
+	radio buttons on first pass.
+
+Fri Feb 26 21:45:30 1999  David Martin <dmartina@usa.net>
+
+	* gtkedit/editcmd.c: Mark strings in the search and replace
+	dialogs for translation. Resized these dialogs to let the messages
+	fit. 
+
 1999-02-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtkedit/editwidget.c (selection_send): Use the proper type for
