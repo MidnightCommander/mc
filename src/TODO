@@ -28,6 +28,8 @@ ftp and fish with home != '/' - readjust directory to the home.
 Check compatibility with new gpm.  Excessive warnings on Mandrake 9.0
 have been reported.
 
+Allow modifiers for keys in mc.lib, like "shift-up".
+
 
 Before 4.6.0
 ============
@@ -69,8 +71,6 @@ Scan more packages for patches, check Red Hat and Ximian Bugzilla.
 
 Allow colors to be defined in the mc.lib file.  Make it possible to
 avoid using a superlong line to redefine all colors.
-
-Allow modifiers for keys in mc.lib, like "shift-up".
 
 
 After 4.6.1 on 4.6.x branch
