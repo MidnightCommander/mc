@@ -23,8 +23,8 @@ while (1) {
 	last unless $next_line;
 	$line = $next_line;
 	$next_line = <MAP>;
-	next unless ($line =~ /^[A-Za-z_][A-Za-z0-9_]*  +[^ ]+\.o$/ or
-		     $line =~ /^[A-Za-z_][A-Za-z0-9_]*  +[^ ]+\.a\([^ ]+\.o\)$/);
+	next unless ($line =~ m{^[A-Za-z_][A-Za-z0-9_]*  +[^ /][^ ]+\.o$} or
+		     $line =~ m{^[A-Za-z_][A-Za-z0-9_]*  +[^ ]+\.a\([^ ]+\.o\)$});
 	if (!$next_line or ($next_line !~ /^ /)) {
 		print $line;
 	}
