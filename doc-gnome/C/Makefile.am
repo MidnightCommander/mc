@@ -1,14 +1,13 @@
 SUBDIRS = figs
 
-gmc_helpdir = $(datadir)/gnome/help/gmc/C
-
-gmc_help_DATA = index.html topic.dat
-
 noinst_SCRIPTS = mkhtml
 
 SGML_FILES = gmc.sgml
 
-EXTRA_DIST = topic.dat $(SGML_FILES) $(noinst_SCRIPTS)
+if GNOME
+gmc_helpdir = $(datadir)/gnome/help/gmc/C
+
+gmc_help_DATA = index.html topic.dat
 
 MOSTLYCLEANFILES = *.tex *.log *.aux
 CLEANFILES = gmc.dvi gmc.ps gmc.pdf gmc.rtf
@@ -44,3 +43,6 @@ gmc.ps: gmc.dvi
 
 gmc.pdf: gmc.dvi
 	dvipdf gmc.dvi gmc.pdf
+endif
+
+EXTRA_DIST = topic.dat $(SGML_FILES) $(noinst_SCRIPTS)

@@ -1,5 +1,3 @@
-icondir = $(datadir)/pixmaps/mc
-
 ALLICONS =						\
 	gnome-image-bmp.png				\
 	gnome-image-generic.png				\
@@ -80,6 +78,7 @@ ALLICONS =						\
 	gnome-image-x-xfig.png
 
 if GNOME
+icondir = $(datadir)/pixmaps/mc
 icon_DATA = $(ALLICONS)
 else
 icon_DATA =

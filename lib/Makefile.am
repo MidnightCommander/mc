@@ -1,5 +1,4 @@
 mclibdir   = $(libdir)/mc
-desktopdir = $(mclibdir)/desktop-scripts
 suppbindir = $(mclibdir)/bin
 tidir      = $(mclibdir)/term
 confdir    = $(sysconfdir)
@@ -27,8 +26,13 @@ noinst_SCRIPTS = tdiff
 
 conf_DATA = mc.global
 suppbin_SCRIPTS = mc.csh mc.sh
-desktop_DATA = startup.links README.desktop
 ti_DATA = README.xterm linux.ti xterm.ad xterm.ti ansi.ti vt100.ti xterm.tcap
+
+DESKTOP_FILES = startup.links README.desktop
+if GNOME
+desktopdir = $(mclibdir)/desktop-scripts
+desktop_DATA = $(DESKTOP_FILES)
+endif
 
 mclib_DATA = $(LIBFILES_CONST) $(LIBFILES_ADD) $(LIBFILES_OUT) $(LOCALIZED_HELP)
 
@@ -36,8 +40,8 @@ mclib_DATA = $(LIBFILES_CONST) $(LIBFILES_ADD) $(LIBFILES_OUT) $(LOCALIZED_HELP)
 EXTRA_DIST = \
 	$(LIBFILES_CONST) \
 	$(LOCALIZED_HELP) \
+	$(DESKTOP_FILES) \
 	$(conf_DATA) \
-	$(desktop_DATA) \
 	$(ti_DATA) \
 	$(noinst_DATA) \
 	$(noinst_SCRIPTS) \

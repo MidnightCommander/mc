@@ -1,6 +1,8 @@
+if GNOME
 gmc_helpfigdir = $(datadir)/gnome/help/gmc/C/figs
 
 gmc_helpfig_DATA = $(DISTFIGS)
+endif
 
 DISTFIGS = \
 	fileprops.png \
