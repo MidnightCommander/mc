@@ -182,11 +182,11 @@ void edit_scroll_screen_over_cursor (WEdit * edit)
 
 #define edit_move(x,y) widget_move(edit, y, x);
 
-/* Set colorpair without interpreting S-Lang "emulated attributes" */
+/* Set colorpair by index, don't interpret S-Lang "emulated attributes" */
 #ifdef HAVE_SLANG
 #define lowlevel_set_color(x) SLsmg_set_color(x & 0x7F)
 #else
-#define lowlevel_set_color(x) attrset(x)
+#define lowlevel_set_color(x) attrset(MY_COLOR_PAIR(color))
 #endif
 
 static void print_to_widget (WEdit * edit, long row, int start_col, float start_col_real, long end_col, unsigned int line[])

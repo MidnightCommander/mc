@@ -1,5 +1,9 @@
 2002-07-14  Pavel Roskin  <proski@gnu.org>
 
+	* edit.h [!HAVE_SLANG]: Enable syntax highlighting.
+	* editdraw.c [!HAVE_SLANG]: Respect attributes for color pairs
+	by using MY_COLOR_PAIR macro.
+
 	* edit.h (struct key_word): Remove unused "bg" field, rename
 	"fg" to	"color", since it keeps all color information.
 	* syntax.c (edit_get_syntax_color): Replace "fg" and "bg"

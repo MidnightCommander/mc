@@ -23,9 +23,7 @@
 #ifndef __EDIT_H
 #define __EDIT_H
 
-#ifdef HAVE_SLANG
-#    define HAVE_SYNTAXH 1
-#endif
+#define HAVE_SYNTAXH 1
 
 #include <stdio.h>
 #include <stdarg.h>
