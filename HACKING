@@ -331,7 +331,7 @@ g_free: g_free handles NULL argument too, no need for the comparison.
 	Right way:
 	    g_free (old_dir);
 
-g_strdup: If you use g_strdup to create a local copy of a string, use
+g_strdup: When you use g_strdup to create a local copy of a string, use
 	the following pattern to keep the reference.
 
 	char * const pathref = g_strdup(argument);
@@ -344,6 +344,15 @@ g_strdup: If you use g_strdup to create a local copy of a string, use
 g_strlcpy: Whenever you use this function, be sure to add "glibcompat.h"
 	to the included headers. This is because in glib-1.2 there is
 	no such function.
+
+NULL: When you pass NULL as an argument of a varargs function, cast the
+	NULL to the appropriate data type. If a system #defines NULL to
+	be 0 (at least NetBSD and OpenBSD do), and the sizes of int and
+	a pointer are different, the argument will be passed as int 0,
+	not as a pointer.
+
+	example:
+	char *path = g_strconcat("dir", "/", "file", (char *) NULL);
 
 size_t: This data type is suitable for expressing sizes of memory or the
 	length of strings. This type is unsigned, so you need not check

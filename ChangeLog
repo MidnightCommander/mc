@@ -1,3 +1,8 @@
+2004-09-24  Roland Illig  <roland.illig@gmx.de>
+
+	* HACKING (Programming tips): added a tip concerning the NULL
+	pointer in varargs function calls.
+
 2004-09-22  Roland Illig  <roland.illig@gmx.de>
 
 	* HACKING: added advice for using g_strdup for a modifiable
