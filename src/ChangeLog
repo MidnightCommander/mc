@@ -1,5 +1,14 @@
 2000-04-06  Timur Bakeyev  <mc@bat.ru>
 
+	* widget.c ([forward|backward]_word): Changed logic of moving - now,
+	it skips only spaces+punct OR alnum. Reason to do it so - deleting lines
+	like "lynx http://www.gnome.org", where "lynx http:" part was erased
+	in one operation. That's nasty, IMHO. Made this a separate commit, so,
+	if it seriously breaks compatability it's easy to revert it. Still hope,
+	nobody'll do that.
+	
+2000-04-06  Timur Bakeyev  <mc@bat.ru>
+
 	* file.c, widget.[ch]: Fixed long existing problems with filenames
 	and input widgets, then char is greater than 128. They were processed
 	incorrectly. As usual, char != unsigned char problem.

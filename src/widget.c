@@ -1286,11 +1286,16 @@ static void
 forward_word (WInput *in)
 {
     unsigned char *p = in->buffer+in->point;
-
-    while (*p && (isspace (*p) || ispunct (*p)))
-	p++;
-    while (*p && isalnum (*p))
-	p++;
+    
+    /* We really want to delete either words or separators */
+    if(isspace (*p) || ispunct (*p)) {
+	while (*p && (isspace (*p) || ispunct (*p)))
+	    p++;
+    }
+    else if(isalnum (*p)) {
+	while (*p && isalnum (*p))
+	    p++;
+    }
     in->point = p - in->buffer;
 }
 
@@ -1299,10 +1304,15 @@ backward_word (WInput *in)
 {
     unsigned char *p = in->buffer+in->point;
 
-    while (p-1 > in->buffer-1 && (isspace (*(p-1)) || ispunct (*(p-1))))
-	p--;
-    while (p-1 > in->buffer-1 && isalnum (*(p-1)))
-	p--;
+    /* We really want to delete either words or separators */
+    if(p-1 > in->buffer-1 && (isspace (*(p-1)) || ispunct (*(p-1)))) {
+	while (p-1 > in->buffer-1 && (isspace (*(p-1)) || ispunct (*(p-1))))
+	    p--;
+    }
+    else if(p-1 > in->buffer-1 && isalnum (*(p-1))) {
+	while (p-1 > in->buffer-1 && isalnum (*(p-1)))
+	    p--;
+    }
     in->point = p - in->buffer;
 }
 
