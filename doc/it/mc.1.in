@@ -664,100 +664,100 @@ modalità). La modalità lunga è simile a quella del comando
 Se si sceglie il formato definibile dall'utente, è necessario specificare 
 il formato della vista.
 .PP
-The user display format must start with a panel size specifier.  This
-may be "half" or "full", and they specify a half screen panel and a
-full screen panel respectively.
+Il formato definibile dall'utente deve cominciare con una specifica 
+dell'ampiezza del pannello. Questa può essere "half" o "full", che descrive
+un pannello di mezza grandezza o completa rispettivamente.
 .PP
-After the panel size, you may specify the two columns mode on the
-panel, this is done by adding the number "2" to the user format
-string. 
+Dopo l'ampiezza del pannello, è possibile specificare la modalità a
+due colonne aggiungendo il numero "2" alla stringa di formato.
 .PP
-After this you add the name of the fields with an optional size
-specifier.  This are the available fields you may display:
+Dopodichè si aggiunge il nome dei campi con una specifica di ampiezza
+opzionale. Questi sono i campi disponibile per la visualizzazione:
 .PP
 .B name,
-displays the file name.
+mostra il nome del file.
 .PP
 .B size,
-displays the file size.
+mostra l'ampiezza del file.
 .PP
 .B bsize,
-is an alternative form of the
+è una forma alternativa del formato
 .B size
-format. It displays the size of the files and for directories it just
-shows SUB-DIR or UP--DIR.
+. Mostra l'ampiezza del file e per le directory mostra solo 
+SUB-DIR o UP--DIR.
 .PP
 .B type,
-displays a one character field type.  This character is similar to
-what is displayed by ls with the -F flag -
+mostra un campo di un carattere. Questo carattere è simile a quello
+mostrato dal comando ls con la flag -F -
 .B *
-for executable files,
+per i file eseguibili,
 .B /
-for directories,
+per le directory,
 .B @
-for links,
+per i collegamenti,
 .B =
-for sockets,
+per i socket,
 .B -
-for character devices,
+per i dispositivi a carattere,
 .B +
-for block devices,
+per i dispositivi a blocchi,
 .B |
-for pipes,
+per le pipe,
 .B ~
-for symbolic links to directories and
+per i collegamenti simbolici a directory e 
 .B !
-for stalled symlinks (links that point nowhere).
+per i collegamenti simbolici stallati (che non puntano a niente).
 .PP
 .B mtime,
-file's last modification time.
+la data dell'ultima modifica al file.
 .PP
 .B atime,
-file's last access time.
+la data dell'ultimo accesso al file.
 .PP
 .B ctime,
-file's creation time.
+la data della creazione del file.
 .PP
 .B perm,
-a string representing the current permission bits of the file.
+una stringa che rappresenta i bit dei permessi del file.
 .PP
 .B mode,
-an octal value with the current permission bits of the file.
+un valore ottale con i permessi correnti del file.
 .PP
 .B nlink,
-the number of links to the file.
+il numero dei collegamenti al file.
 .PP
 .B ngid,
-the GID (numeric).
+il GID (numerico).
 .PP
 .B nuid,
-the UID (numeric).
+l'UID (numerico).
 .PP
 .B owner,
-the owner of the file.
+il proprietario del file.
 .PP
 .B group,
-the group of the file.
+il gruppo del file.
 .PP
 .B inode,
-the inode of the file.
+l'inode del file.
 .PP
-Also you may use these field names for arranging the display:
+Puoi usare ache questi campi per sistemare la visualizzazione:
 .PP
 .B space,
-a space in the display format.
+uno spazio nel formato visualizzazione.
 .PP
 .B mark,
-An asterisk if the file is tagged, a space if it's not.
+Un asterico se il file è marcato, uno spazio se non lo è.
 .PP
 .B |,
-This character is used to add a vertical line to the display format.
+Questo carattere viene utilizzato per aggiungere una linea verticale
+al formato di visualizzazione.
 .PP
-To force one field to a fixed size (a size specifier), you just add
-a ':' and then the number of characters you want the field to have, if
-the number is followed by the symbol '+', then the size specifies the
-minimum field size, if the program finds out that there is more space
-on the screen, it will then expand this field.
+Per forzare un campo ad un'ampiezza fissa (una specifica di ampiezza)
+basta semplicemente aggiungere un ':' ed il numero dei caratteri che
+si vuole che il campo abbia; e se il numero è seguito dal simbolo '+',
+allora la specifica definisce l'ampiezza minima e se il programma
+trova che serve più spazio sullo schermo, espanderà il campo.
 .PP
 For example, the 
 .B Full
