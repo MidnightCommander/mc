@@ -1,3 +1,8 @@
+2004-12-28  Dmitry Butskoj  <buc@odusz.so-cdu.ru>
+
+	* fish.c (fish_linear_abort): Fix bug with FISH vfs. It freezes MC on
+	transfer abort.
+
 2004-12-27  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* extfs.c (extfs_generate_entry): Initialize inode->last_in_subdir.

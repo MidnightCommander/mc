@@ -619,9 +619,11 @@ fish_linear_abort (struct vfs_class *me, struct vfs_s_fh *fh)
     print_vfs_message( _("Aborting transfer...") );
     do {
 	n = MIN(8192, fh->u.fish.total - fh->u.fish.got);
-	if (n)
+	if (n) {
 	    if ((n = read(SUP.sockr, buffer, n)) < 0)
 	        return;
+	    fh->u.fish.got += n;
+	}
     } while (n);
 
     if (fish_get_reply (me, SUP.sockr, NULL, 0) != COMPLETE)
