@@ -1723,12 +1723,10 @@ init_labels (Widget *paneletc)
     define_label (midnight_dlg, paneletc, 9, _("PullDn"), menu_cmd);
     define_label (midnight_dlg, paneletc, 10, _("Quit"), (voidfn) quit_cmd);
 }
-#endif /* !HAVE_GNOME */
 
 static const key_map ctl_x_map [] = {
     { XCTRL('c'),   (callfn) quit_cmd },
     { 'd',          compare_dirs_cmd },
-#ifndef HAVE_GNOME
 #ifdef USE_VFS
     { 'a',          reselect_vfs },
 #endif /* USE_VFS */
@@ -1737,23 +1735,18 @@ static const key_map ctl_x_map [] = {
     { 't',          copy_current_tagged },
     { XCTRL('t'),   copy_other_tagged },
     { 'c',          chmod_cmd },
-#endif /* !HAVE_GNOME */
 #ifndef OS2_NT
-#ifndef HAVE_GNOME
     { 'o',          chown_cmd },
     { 'r',          copy_current_readlink },
     { XCTRL('r'),   copy_other_readlink },
-#endif /* !HAVE_GNOME */
     { 'l',          link_cmd },
     { XCTRL('l'),   other_symlink_cmd },
     { 's',          symlink_cmd },
     { XCTRL('s'),   edit_symlink_cmd },
 #endif /* !OS2_NT */
-#ifndef HAVE_GNOME
     { 'i',          info_cmd_no_menu },
     { 'q',          quick_cmd_no_menu },
     { 'h',          add2hotlist_cmd },
-#endif /* !HAVE_GNOME */
     { '!',          external_panelize },
 #if defined(WITH_BACKGROUND) && !defined(HAVE_GNOME)
     { 'j',          jobs_cmd },
@@ -1770,6 +1763,7 @@ static void ctl_x_cmd (int ignore)
 {
 	ctl_x_map_enabled = 1;
 }
+#endif /* !HAVE_GNOME */
 
 static void nothing (void)
 {
@@ -1812,10 +1806,10 @@ static const key_map default_map [] = {
 
     /* View output */
     { XCTRL('o'), view_other_cmd },
-#endif
     
     /* Control-X keybindings */
     { XCTRL('x'), ctl_x_cmd },
+#endif /* !HAVE_X */
 
     /* Trap dlg's exit commands */
     { ESC_CHAR,   nothing },
@@ -1979,6 +1973,7 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	return MSG_HANDLED;
 	
     case DLG_KEY:
+#ifndef HAVE_X
 	if (ctl_x_map_enabled){
 		ctl_x_map_enabled = 0;
 		for (i = 0; ctl_x_map [i].key_code; i++)
@@ -1988,7 +1983,6 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 			}
 	}
 	    
-#ifndef HAVE_X
 	/* FIXME: should handle all menu shortcuts before this point */
 	if (the_menubar->active)
 	    break;
@@ -2068,15 +2062,16 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	    if (v)
 		return v;
 	}
-#endif /* !HAVE_X */
-	if (ctl_x_map_enabled){
+	if (ctl_x_map_enabled) {
 		ctl_x_map_enabled = 0;
 		for (i = 0; ctl_x_map [i].key_code; i++)
 			if (id == ctl_x_map [i].key_code){
 				(*ctl_x_map [i].fn)(id);
 				return MSG_HANDLED;
 			}
-	} else {
+	} else
+#endif /* !HAVE_X */
+	{
 		for (i = 0; default_map [i].key_code; i++){
 			if (id == default_map [i].key_code){
 				(*default_map [i].fn)(id);
