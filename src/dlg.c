@@ -59,6 +59,15 @@ Hook *idle_hook = 0;
 #   define x_dialog_stop(d)
 #endif
 
+#ifdef HAVE_X
+void widget_erase (Widget *w)
+{
+}
+
+void dlg_erase (Dlg_head *h)
+{
+}
+#else
 static void slow_box (Dlg_head *h, int y, int x, int ys, int xs)
 {
     move (h->y+y, h->x+x);
@@ -130,6 +139,7 @@ void dlg_erase (Dlg_head *h)
 	}
     }
 }
+#endif /* HAVE_X */
 
 void init_widget (Widget *w, int y, int x, int lines, int cols,
 		  int (*callback)(Dlg_head *, void *, int, int),
@@ -216,10 +226,13 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 {
     Dlg_head *new_d;
 
+#ifndef HAVE_X
     if (flags & DLG_CENTER){
 	y1 = (LINES-lines)/2;
 	x1 = (COLS-cols)/2;
     }
+#endif
+    
     if ((flags & DLG_TRYUP) && (y1 > 3))
 	y1 -= 2;
 
@@ -607,7 +620,8 @@ static INLINE void dialog_handle_key (Dlg_head *h, int d_key)
     case XCTRL('z'):
 	suspend_cmd ();
 	/* Fall through */
-	    
+
+#ifndef HAVE_X
     case XCTRL('l'):
 #ifndef HAVE_SLANG
 	/* Use this if the refreshes fail */
@@ -618,6 +632,7 @@ static INLINE void dialog_handle_key (Dlg_head *h, int d_key)
 #endif
 	mc_refresh ();
 	doupdate ();
+#endif
 	break;
 	
     case '\n':
@@ -784,10 +799,15 @@ void init_dlg (Dlg_head *h)
     (*h->callback) (h, 0, DLG_INIT);
     dlg_broadcast_msg (h, WIDGET_INIT, 0);
 
+#ifdef HAVE_X
+    refresh_mode = REFRESH_COVERS_PART;
+#else
     if (h->x == 0 && h->y == 0 && h->cols == COLS && h->lines == LINES)
 	refresh_mode = REFRESH_COVERS_ALL;
     else
 	refresh_mode = REFRESH_COVERS_PART;
+    
+#endif
     push_refresh (dlg_refresh, h, refresh_mode);
     h->refresh_pushed = 1;
     

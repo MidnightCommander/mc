@@ -9,7 +9,7 @@ CPPFLAGS = $(XCPPFLAGS) -I$(vfsdir) -I$(slangdir) -DHAVE_X -DHAVE_GNOME @GNOME_I
 LDFLAGS = $(XLDFLAGS) @GNOME_LIBDIR@ @GNOMEUI_LIBS@
 DEFS = $(XDEFS)
 LIBS = @X_EXTRA_LIBS@ -lX11 @X_PRE_LIBS@ $(XLIBS) $(XLIB) @TERMNET@
-EXTRALIBS = @LVFS@ @LSLANG@ -lgtkedit @LINTL@
+EXTRALIBS = @LVFS@ -lgtkedit @LINTL@
 INSTALL = @INSTALL@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
@@ -36,6 +36,7 @@ GNOMESRCS = 		\
 	gdialogs.c	\
 	gscreen.c 	\
 	gtools.c 	\
+	gtkdtree.c	\
 	gtree.c		\
 	gutil.c		\
 	gview.c		\
@@ -58,6 +59,7 @@ GNOMEHDRS = 		\
 	gprop.h		\
 	gdialogs.h	\
 	gscreen.h	\
+	gtkree.h	\
 	gtree.h		\
 	gwidget.h
 
@@ -82,12 +84,12 @@ LOBJS = mad.o
 # These objects from ../src do depend on HAVE_GNOME
 #
 OOBJS = main.o dlg.o screen.o widget.o wtools.o info.o boxes.o \
-	file.o find.o dialog.o help.o key.o chmod.o chown.o view.o \
-	panelize.o hotlist.o listmode.o background.o dir.o util.o \
-	win.o color.o profile.o user.o ext.o setup.o tree.o \
+	file.o find.o dialog.o key.o chmod.o chown.o view.o \
+	panelize.o hotlist.o background.o dir.o util.o \
+	win.o color.o profile.o user.o ext.o setup.o \
 	subshell.o terms.o achown.o fsusage.o mountlist.o \
 	@XCURSES@ @REGEX_O@ complete.o command.o \
-	option.o cmd.o utilunix.o xslint.o gdialogs.o
+	option.o cmd.o utilunix.o xslint.o filegui.o filenot.o 
 
 OBJS = $(LOBJS) $(OOBJS) \
 	gblist.o	\
@@ -96,6 +98,7 @@ OBJS = $(LOBJS) $(OOBJS) \
 	gcmd.o		\
 	gdesktop-icon.o	\
 	gdesktop.o 	\
+	gdialogs.o	\
 	gdnd.o		\
 	ghelp.o 	\
 	ginfo.o 	\
@@ -113,6 +116,7 @@ OBJS = $(LOBJS) $(OOBJS) \
 	gtree.o		\
 	gutil.o 	\
 	gview.o		\
+	gtkdtree.o	\
 	gwidget.o
 
 #
@@ -178,10 +182,6 @@ cleansourcelinks:
 
 check:
 	@echo no tests are supplied.
-
-cross:
-	$(MAKE) CC=gcc-linux CPP="gcc-linux -E" \
-	CPPFLAGS="$(CPPFLAGS) -I/usr/local/lib/gcc-lib/i386-linux-linux/include/ncurses "
 
 TAGS: $(GNOMESRCS)
 	etags $(GNOMESRCS)

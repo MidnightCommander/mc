@@ -530,10 +530,12 @@ void display_bits_box ()
 
     eight_bit_clean = new_mode < 2;
     full_eight_bits = new_mode == 0;
+#ifndef HAVE_X
 #ifndef HAVE_SLANG
     meta (stdscr, eight_bit_clean);
 #else
     SLsmg_Display_Eight_Bit = full_eight_bits ? 128 : 160;
+#endif
 #endif
     use_8th_bit_as_meta = !new_meta;
 }
@@ -562,6 +564,7 @@ static int tree_callback (struct Dlg_head *h, int id, int msg)
     return MSG_NOT_HANDLED;
 }
 
+#ifndef HAVE_GNOME
 char *tree (char *current_dir)
 {
     WTree    *mytree;
@@ -591,6 +594,8 @@ char *tree (char *current_dir)
     destroy_dlg (dlg);
     return val;
 }
+#endif
+
 #ifndef USE_VFS
 #ifdef USE_NETCODE
 #undef USE_NETCODE

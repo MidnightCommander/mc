@@ -220,12 +220,14 @@ dnl
 AC_CHECK_HEADERS(sys/select.h)
 
 dnl
-dnl On SCO, crypt is on libcrypt.a
+dnl On SCO and some SVR4, crypt is on libcrypt.a
 dnl         grantpt in  libpt.a
 dnl
+LCRYPT=""
 AC_CHECK_FUNCS(crypt, , [
-    AC_CHECK_LIB(crypt, crypt, LIBS="$LIBS -lcrypt",[
-	AC_CHECK_LIB(crypt_i, crypt, LIBS="$LIBS -lcrypt_i")])])
+    AC_CHECK_LIB(crypt, crypt, LCRYPT="-lcrypt",[
+	AC_CHECK_LIB(crypt_i, crypt, LCRYPT="-lcrypt_i")])])
+AC_SUBST(LCRYPT)
 
 dnl This is the correct version
 dnl AC_CHECK_FUNCS(grantpt, , AC_CHECK_LIB(pt, grantpt))
@@ -518,6 +520,7 @@ AC_ARG_WITH(vcurses,
 )
 
 mouse_lib="xterm only"
+LGPM=""
 AC_ARG_WITH(gpm-mouse, 
 	[--with-gpm-mouse[=base-dir]  Compile with gpm mouse support],[
 	if test x$withval != xno
@@ -529,13 +532,13 @@ AC_ARG_WITH(gpm-mouse,
 		fi
 		AC_DEFINE(HAVE_LIBGPM)
 		mouse_lib="GPM and xterm"
-		LIBS="$LIBS -lgpm"
+		LGPM="-lgpm"
 	fi
 	],[
 	AC_CHECK_LIB(gpm, Gpm_Repeat,[
 		AC_DEFINE(HAVE_LIBGPM)
 		mouse_lib="GPM and xterm"
-		LIBS="$LIBS -lgpm"],[
+		LGPM="-lgpm"],[
 		if test $system = Linux
 		then 
 			AC_MSG_WARN("libgpm.a is missing or older than 0.18")
@@ -543,6 +546,7 @@ AC_ARG_WITH(gpm-mouse,
 		], $LIBS)
 	]
 )
+AC_SUBST(LGPM)
 
 AC_ARG_WITH(ncurses,
 	[--with-ncurses[=base-dir]    Compile with ncurses/locate base dir],
@@ -1029,7 +1033,7 @@ AC_DEFUN(AC_WITH_SLANG,
 	if $slang_use_system_installed_lib
 	then
 	    AC_DEFINE(HAVE_SYSTEM_SLANG)
-	    LIBS="$LIBS -lslang"
+	    LSLANG="-lslang"
 	    screen_manager="SLang (using system-installed library)"
 	    AC_MSG_RESULT(Using system installed SLang library)
 	else

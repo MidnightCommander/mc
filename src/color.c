@@ -251,7 +251,6 @@ init_colors (void)
 	int i;
 	
 	use_colors = 1;
-	start_color ();
 	configure_colors ();
 	for (i = 0; i < ELEMENTS (color_map); i++)
 	    init_pair (i+1, color_map_fg(i), color_map_bg(i));
@@ -269,7 +268,9 @@ void init_colors (void)
     }
 
     if (use_colors){
+#ifndef HAVE_X
 	start_color ();
+#endif
 	configure_colors ();
 
 #ifndef HAVE_SLANG

@@ -708,9 +708,11 @@ void quick_chdir_cmd (void)
     if (!target)
 	return;
 
+#ifndef HAVE_GNOME
     if (get_current_type () == view_tree)
 	tree_chdir (the_tree, target);
     else
+#endif
         if (!do_cd (target, cd_exact))
 	    message (1, MSG_ERROR, _("Could not change directory") );
     free (target);
@@ -944,8 +946,10 @@ view_other_cmd (void)
 	reset_shell_mode ();
 	noecho ();
 #endif
+#ifndef HAVE_X
 	keypad(stdscr, FALSE);
 	endwin ();
+#endif
 	if (!status_using_ncurses)
 	    do_exit_ca_mode ();
 	mc_raw_mode ();
@@ -973,9 +977,9 @@ view_other_cmd (void)
 	if (!status_using_ncurses)
 	    do_enter_ca_mode ();
 
+#ifndef HAVE_X	
 	reset_prog_mode ();
 	keypad(stdscr, TRUE);
-#ifndef HAVE_X	
 	if (use_mouse_p)
 	    init_mouse ();
         if (alternate_plus_minus)
@@ -993,8 +997,10 @@ view_other_cmd (void)
 				       LINES-keybar_visible-1);
 	}
 #endif
+#ifndef HAVE_X
         touchwin (stdscr);
-
+#endif
+	
 	/* prevent screen flash when user did 'exit' or 'logout' within
 	   subshell */
 	if (!quit)

@@ -3,6 +3,10 @@
 int got_interrupt (void);
 void mc_refresh (void);
 
+#ifdef HAVE_X
+#include "xtty.h"
+#else /* HAVE_X */
+
 #ifdef HAVE_SLANG
 #   include "myslang.h"
 
@@ -139,3 +143,4 @@ int init_pair (int, int, int);
 #define KEY_KP_SUBTRACT	4002
 #define KEY_KP_MULTIPLY	4003
 
+#endif /* HAVE_X */

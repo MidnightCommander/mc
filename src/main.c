@@ -131,7 +131,7 @@
 #include "../vfs/vfs.h"
 #include "../vfs/extfs.h"
 
-
+#include <glib.h>
 #include "popt.h"
 
 /* "$Id$" */
@@ -289,6 +289,12 @@ char *home_dir;
 /* The value of the other directory, only used when loading the setup */
 char *other_dir = 0;
 char *this_dir = 0;
+
+/* If this is true, then when browsing the tree the other window will
+ * automatically reload it's directory with the contents of the currently
+ * selected directory.
+ */
+int xtree_mode = 0;
 
 /* If true, then print on stdout the last directory we were at */
 static int print_last_wd = 0;
@@ -1161,6 +1167,7 @@ sort_cmd (void)
     do_re_sort (p);
 }
 
+#ifndef HAVE_GNOME
 static void
 tree_box (void)
 {
@@ -1172,6 +1179,7 @@ tree_box (void)
 	free (sel_dir);
     }
 }
+#endif
 
 #if SOMEDAY_WE_WILL_FINISH_THIS_CODE
 static void
@@ -1264,7 +1272,9 @@ static menu_entry CmdMenu [] = {
      * as a panel still has some problems, I have not yet finished
      * the WTree widget port, sorry.
      */
+#ifndef HAVE_GNOME
     { ' ', N_("&Directory tree"),               'D', tree_box },
+#endif
     { ' ', N_("&Find file            M-?"),     'F', find_cmd },
 #ifndef HAVE_XVIEW    
     { ' ', N_("s&Wap panels          C-u"),     'W', swap_cmd },
@@ -2407,61 +2417,6 @@ sigchld_handler_no_subshell (int sig)
 #endif /* ! HAVE_X  */
 }
 
-#if 0
-void
-mc_fatal_signal (int signum)
-{
-    volatile int x;
-    char     cmd;
-    pid_t    pid;
-    char     *args [4] = { "gdb", NULL, NULL, NULL };
-    char     pid [20];
-
-    sprintf (buf, "%d", getpid ());
-    fprintf (stderr,
-	     "Midnight Commander fatal error, PID=%d\n"
-	     "What to do: [e]xit, [s]tack trace, [a]ttach to process\n", getpid ());
-
-    read (1, &cmd, 1);
-    if (cmd == 'a'){
-	for (x = 1; x;)
-	    ;
-    }
-    if (cmd == 's'){
-	args [1] = program_name;
-	args [2] = buf;
-	pid = fork ();
-	if (pid == -1){
-	    fprintf (stderr, "Could not fork, exiting\n");
-	    exit (0);
-	}
-	if (pid == 0){
-	    stack_trace (args);
-	} else {
-	    while (1)
-		;
-	}
-    }
-    exit (0);
-}
-
-void
-init_sigfatals (void)
-{
-    struct sigaction sa;
-
-    sa.sa_hanlder = mc_fatal_signal;
-    sa.sa_mask    = 0;
-    sa.sa_flags   = 0;
-    
-    sigaction (SIGSEGV, &sa, NULL);
-    sigaction (SIGBUS,  &sa, NULL);
-    sigaction (SIGFPE,  &sa, NULL);
-}
-#else
-#define init_sigfatals() 
-#endif
-
 void
 init_sigchld (void)
 {
@@ -2486,11 +2441,12 @@ init_sigchld (void)
 
 #endif /* _OS_NT, __os2__, UNIX */
 
+#ifndef HAVE_X
 #if defined(HAVE_SLANG) && !defined(OS2_NT)
     extern int SLtt_Try_Termcap;
 #endif
+#endif
 
-#ifndef PORT_WANTS_ARGP
 static void
 print_mc_usage (void)
 {
@@ -2540,7 +2496,6 @@ print_mc_usage (void)
 #endif
     );
 }
-#endif /* PORT_WANTS_ARGP */
 
 static void
 print_color_usage (void)
@@ -2660,133 +2615,6 @@ process_args (int c, char *option_arg)
     }
 }
 
-#ifdef PORT_WANTS_ARGP
-static struct argp_option argp_options [] = {
-#ifdef WITH_BACKGROUND
-    { "background",	'B', NULL, 0, N_("[DEVEL-ONLY: Debug the background code]"), 0 },
-#endif
-#if defined(HAVE_SLANG) && defined(OS2_NT)
-    { "createcmdfile",	'S', "CMDFILE", , 0, N_("Create command file to set default directory upon exit."), 1 },
-#endif			     
-    { "color",          'c', NULL, 0, N_("Force color mode."), 0 },
-    { "colors", 	'C', "COLORS", 0, N_("Specify colors (use --help-colors to get a list)."), 1 },
-#ifdef HAVE_SUBSHELL_SUPPORT
-    { "dbgsubshell", 	'X', NULL, 0, N_("[DEVEL-ONLY: Debug the subshell]"), 0 },
-#endif
-    { "edit", 		'e', "EDIT", 0, N_("Startup the internal editor."), 1 },
-    { "help", 		'h', NULL, 0, N_("Shows this help message."), 0 },
-    { "help-colors",	'H', NULL, 0, N_("Help on how to specify colors."), 0 },
-#ifdef USE_NETCODE
-    { "ftplog", 	'l', "FTPLOG", 0, N_("Log ftpfs commands to the file."), 1 },
-#endif
-    { "libdir", 	'f', NULL, 0, N_("Prints out the configured paths."), 0 },
-    { NULL, 		'm', NULL, OPTION_HIDDEN, NULL, 0 },
-    { "nocolor", 	'b', NULL, 0, N_("Force black and white display."), 0 },
-    { "nomouse", 	'd', NULL, 0, N_("Disable mouse support."), 0 },
-#ifdef HAVE_SUBSHELL_SUPPORT
-    { "subshell", 	'U', NULL, 0, N_("Force the concurrent subshell mode"), 0 },
-    { "nosubshell", 	'u', NULL, 0, N_("Disable the concurrent subshell mode."), 0 },
-    { "forceexec", 	'r', NULL, 0, N_("Force subshell execution."), 0 },
-#endif
-    { "printwd", 	'P', NULL, 0, N_("At exit, print the last working directory."), 0 },
-    { "resetsoft", 	'k', NULL, 0, N_("Reset softkeys (HP terminals only) to their terminfo/termcap default."), 0},
-    { "slow",           's', NULL, 0, N_("Disables verbose operation (for slow terminals)."), 0 },
-#if defined(HAVE_SLANG) && !defined(OS2_NT)
-    { "stickchars",	'a', NULL, 0, N_("Use simple symbols for line drawing."), 0 },
-#endif
-#ifdef HAVE_SUBSHELL_SUPPORT
-#endif
-#if defined(HAVE_SLANG) && !defined(OS2_NT)
-    { "termcap", 	't', NULL, 0, N_("Activate support for the TERMCAP variable."), 0 },
-#endif
-    { "version", 	'V', NULL, 0, N_("Report version and configuration options."), 0 },
-    { "view", 		'v', NULL, 0, N_("Start up into the viewer mode."), 0 },
-    { "xterm", 		'x', NULL, 0, N_("Force xterm mouse support and screen save/restore"), 0 },
-    { "geometry",       GEOMETRY_KEY,  "GEOMETRY", 0, N_("Geometry for the window"), 0 },
-    { "nowindows",      NOWIN_KEY, NULL, 0, N_("No windows opened at startup"), 0 },
-    { NULL, 		0,   NULL, 0, NULL },
-};
-
-GList *directory_list = 0;
-GList *geometry_list  = 0;
-int   nowindows;
-
-static error_t
-parse_an_arg (int key, char *arg, struct argp_state *state)
-{
-	switch (key){
-#ifdef WITH_BACKGROUND
-	case 'B':
-	    background_wait = 1;
-	    return 0;
-#endif
-	case 'b':
-	    disable_colors = 1;
-	    return 0;
-	    
-	case 'P':
-	    print_last_wd = 1;
-	    return 0;
-	    
-	case 'k':
-	    reset_hp_softkeys = 1;
-	    return 0;
-
-	case 's':
-	    slow_terminal = 1;
-	    return 0;
-
-	case 'a':
-	    force_ugly_line_drawing = 1;
-	    return 0;
-
-	case 'x':
-	    force_xterm = 1;
-	    return 0;
-	    
-#if defined(HAVE_SLANG) && !defined(OS2_NT)
-	case 't':
-	    SLtt_Try_Termcap = 1;
-	    return 0;
-#endif
-
-	case GEOMETRY_KEY:
-	    geometry_list = g_list_append (geometry_list, arg);
-	    return 0;
-
-	case NOWIN_KEY:
-	    nowindows = 1;
-	    
-	case ARGP_KEY_ARG:
-	    break;
-
-	case ARGP_KEY_INIT:
-	case ARGP_KEY_FINI:
-	    return 0;
-	    
-	default:
-	    process_args (key, arg);
-	}
-
-	if (arg){
-	    if (edit_one_file)
-		edit_one_file = strdup (arg);
-	    else if (view_one_file)
-		view_one_file = strdup (arg);
-	    else 
-	        directory_list = g_list_append (directory_list, arg);
-	}
-	return 0;
-}
-
-static struct argp mc_argp_parser = {
-	argp_options, parse_an_arg, N_("[this dir] [other dir]"), NULL, NULL, NULL, NULL
-};
-
-#else
-
-#include <glib.h>
-
 char *cmdline_geometry = NULL;
 int   nowindows = 0;
 char **directory_list = NULL;
@@ -2829,8 +2657,10 @@ static struct poptOption argumentTable[] = {
 #ifdef HAVE_SUBSHELL_SUPPORT
     { "subshell", 	'U', POPT_ARG_NONE, 	NULL, 			  'U' },
 #endif
+#if !defined(HAVE_X)
 #if defined(HAVE_SLANG) && !defined(OS2_NT)
     { "termcap", 	't', 0, 		&SLtt_Try_Termcap, 	  0 },
+#endif
 #endif
     { "version", 	'V', 			POPT_ARG_NONE, NULL,      'V'},
     { "view", 		'v', 			POPT_ARG_STRING, &view_one_file, 0 },
@@ -2857,10 +2687,12 @@ handle_args (int argc, char *argv [])
     optCon = poptGetContext ("mc", argc, argv, argumentTable, 0);
 #endif
 
+#ifndef HAVE_X
 #ifdef USE_TERMCAP
     SLtt_Try_Termcap = 1;
 #endif
-
+#endif
+    
     while ((c = poptGetNextOpt (optCon)) > 0) {
 	option_arg = poptGetOptArg(optCon);
 
@@ -2905,7 +2737,6 @@ handle_args (int argc, char *argv [])
 
     poptFreeContext(optCon);
 }
-#endif
 
 /*
  * The compatibility_move_mc_files routine is intended to
@@ -3016,11 +2847,13 @@ int main (int argc, char *argv [])
 	exit (1);
 #endif /* HAVE_X */
 
-    
+
+#ifndef HAVE_X
 #ifdef HAVE_SLANG
     SLtt_Ignore_Beep = 1;
 #endif
-
+#endif
+    
     /* NOTE: This has to be called before slang_init or whatever routine
        calls any define_sequence */
     init_key ();
@@ -3069,7 +2902,6 @@ int main (int argc, char *argv [])
     
     /* Install the SIGCHLD handler; must be done before init_subshell() */
     init_sigchld ();
-    init_sigfatals ();
     
     /* This variable is used by the subshell */
     home_dir = getenv ("HOME");

@@ -68,12 +68,6 @@ extern int command_prompt;
 /* Specifies the display mode: 1d or 2d */
 int tree_navigation_flag;
 
-/* If this is true, then when browsing the tree the other window will
- * automatically reload it's directory with the contents of the currently
- * selected directory.
- */
-int xtree_mode = 0;
-
 /* Forwards */
 static int tree_callback (Dlg_head *h, WTree *tree, int msg, int par);
 #define tcallback (callback_fn) tree_callback
@@ -950,6 +944,11 @@ void tree_chdir (WTree *tree, char *dir)
     }
 }
 
+void sync_tree (char *path)
+{
+    tree_chdir (the_tree, path);
+}
+
 /* Handle mouse click */
 void tree_event (WTree *tree, int y)
 {
@@ -1509,87 +1508,5 @@ WTree *tree_new (int is_panel, int y, int x, int lines, int cols)
     return tree;
 }
 
-static char *get_absolute_name (char *file)
-{
-    char dir [MC_MAXPATHLEN];
-
-    if (file [0] == PATH_SEP)
-	return strdup (file);
-    mc_get_current_wd (dir, MC_MAXPATHLEN);
-    return get_full_name (dir, file);
-}
-
-static int my_mkdir_rec (char *s, mode_t mode)
-{
-    char *p, *q;
-    int result;
-    
-    if (!mc_mkdir (s, mode))
-        return 0;
-
-    /* FIXME: should check instead if s is at the root of that filesystem */
-    if (!vfs_file_is_local (s))
-	return -1;
-    if (!strcmp (s, PATH_SEP_STR))
-        return ENOTDIR;
-    p = concat_dir_and_file (s, "..");
-    q = vfs_canon (p);
-    free (p);
-    if (!(result = my_mkdir_rec (q, mode))) {
-    	result = mc_mkdir (s, mode);
-    } 
-    free (q);
-    return result;
-}
-
-int my_mkdir (char *s, mode_t mode)
-{
-    int result;
-#if FIXME    
-    WTree *tree = 0;
-#endif    
-
-    result = mc_mkdir (s, mode);
-#ifdef OS2_NT
-    /* .ado: it will be disabled in OS/2 and NT */
-    /* otherwise crash if directory already exists. */
-    return result;
-#endif
-    if (result) {
-        char *p = vfs_canon (s);
-        
-        result = my_mkdir_rec (p, mode);
-        free (p);
-    }
-    if (result == 0){
-	s = get_absolute_name (s);
-#if FIXME
-	/* FIXME: Should receive a Wtree! */
-
-	tree_add_entry (tree, s);
-#endif
-	free (s);
-    }
-    return result;
-}
-
-int my_rmdir (char *s)
-{
-    int result;
-#if FIXME    
-    WTree *tree = 0;
-#endif    
-
-    /* FIXME: Should receive a Wtree! */
-    result = mc_rmdir (s);
-    if (result == 0){
-	s = get_absolute_name (s);
-#if FIXME
-	tree_remove_entry (tree, s);
-#endif
-	free (s);
-    }
-    return result;
-}
 
 

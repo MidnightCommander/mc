@@ -41,6 +41,10 @@
 #   include "tkinfo.h"
 #endif
 
+#ifndef VERSION
+#   define VERSION "undefined"
+#endif
+
 /* Have we called the init_my_statfs routine? */
 static int initialized;
 struct my_statfs myfs_stats;
@@ -50,6 +54,7 @@ static int info_event (Gpm_Event *event, WInfo *info)
     return 0;
 }
 
+#ifndef HAVE_X
 static void info_box (Dlg_head *h, WInfo *info)
 {
     standend ();
@@ -59,9 +64,6 @@ static void info_box (Dlg_head *h, WInfo *info)
     draw_double_box (h, info->widget.y,  info->widget.x,
 	             info->widget.lines, info->widget.cols);
 }
-
-#ifndef VERSION
-#   define VERSION "undefined"
 #endif
 
 void info_show_info (WInfo *info)

@@ -142,6 +142,11 @@ view_add_character (WView *view, int c)
 }
 
 void
+view_add_one_vline ()
+{
+}
+
+void
 view_add_string (WView *view, char *s)
 {
 	gmc_char_grid_put_string ((GmcCharGrid *)(view->widget.wdata),

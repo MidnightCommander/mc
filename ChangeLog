@@ -1,3 +1,8 @@
+1998-12-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* configure.in (slang_use_system_installed_lib): Define slang
+	here, to avoid having this on LIBS.
+
 1998-11-26  Herbert Valerio Riedel  <hvr@hvrlab.ml.org>
 
 	* gtkedit.c: changed occurence of 'va_list *ap' to 'va_list ap'

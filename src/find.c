@@ -231,9 +231,14 @@ find_par_start:
 	add_widgetl (find_dlg, label_new (3, 3, labs[0], "label-start"), XV_WLAY_NEXTCOLUMN);
 
     run_dlg (find_dlg);
-    if (find_dlg->ret_value == B_CANCEL)
+
+    switch (find_dlg->ret_value){
+    case B_CANCEL:
 	return_value = 0;
-    else if (find_dlg->ret_value == B_TREE){
+	break;
+
+#ifndef HAVE_GNOME
+    case B_TREE:
 	temp_dir = strdup (in_start->buffer);
 	destroy_dlg (find_dlg);
 	free (in_start_dir);
@@ -248,7 +253,10 @@ find_par_start:
 	    in_start_dir = temp_dir;
 	/* Warning: Dreadful goto */
 	goto find_par_start;
-    } else {
+	break;
+#endif
+	
+    default:
 	return_value = 1;
 	*start_dir = strdup (in_start->buffer);
 	*pattern   = strdup (in_name->buffer);

@@ -858,9 +858,11 @@ static int query_callback (Dlg_head * h, int Par, int Msg)
 {
     switch (Msg) {
     	case DLG_DRAW:
+#ifndef HAVE_X
     	    attrset (COLOR_NORMAL);
 	    dlg_erase (h);
     	    draw_box (h, 0, 0, query_height, query_width);
+#endif
     	    break;
     	    
     	case DLG_KEY:

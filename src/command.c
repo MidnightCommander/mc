@@ -149,23 +149,23 @@ void do_cd_command (char *cmd)
 
     if (get_current_type () == view_tree){
 	if (cmd [0] == 0){
-	    tree_chdir (the_tree, home_dir);
+	    sync_tree (home_dir);
 	} else if (strcmp (cmd+3, "..") == 0){
 	    char *dir = cpanel->cwd;
 	    int len = strlen (dir);
 	    while (len && dir [--len] != PATH_SEP);
 	    dir [len] = 0;
 	    if (len)
-		tree_chdir (the_tree, dir);
+		sync_tree (dir);
 	    else
-		tree_chdir (the_tree, PATH_SEP_STR);
+		sync_tree (PATH_SEP_STR);
 	} else if (cmd [3] == PATH_SEP){
-	    tree_chdir (the_tree, cmd+3);
+	    sync_tree (cmd+3);
 	} else {
 	    char *old = cpanel->cwd;
 	    char *new;
 	    new = concat_dir_and_file (old, cmd+3);
-	    tree_chdir (the_tree, new);
+	    sync_tree (new);
 	    free (new);
 	}
     } else

@@ -138,6 +138,7 @@ button_callback (Dlg_head *h, WButton *b, int Msg, int Par)
     case WIDGET_UNFOCUS:
     case WIDGET_FOCUS:
     case WIDGET_DRAW:
+#ifndef HAVE_X
 	if (Msg==WIDGET_UNFOCUS) 
 	    b->selected = 0;
 	else if (Msg==WIDGET_FOCUS) 
@@ -174,6 +175,7 @@ button_callback (Dlg_head *h, WButton *b, int Msg, int Par)
 	    widget_move (&b->widget, 0, b->hotpos+off);
 	    addch ((unsigned char)b->text [b->hotpos]);
         }
+#endif /* HAVE_X */
 	if (Msg == WIDGET_FOCUS)
 	    break;
 	else
@@ -788,6 +790,7 @@ gauge_new (int y, int x, int shown, int max, int current, char *tkname)
 #define should_show_history_button(in) \
 	    (in->history && in->field_len > HISTORY_BUTTON_WIDTH * 2 + 1 && in->widget.parent)
 
+#ifndef HAVE_X
 static void draw_history_button (WInput * in)
 {
     char c;
@@ -814,7 +817,8 @@ static void draw_history_button (WInput * in)
     addch (c);
 #endif
 }
- 
+#endif
+
 /* }}} history button */
 
 
@@ -1748,6 +1752,13 @@ input_new (int y, int x, int color, int len, char *def_text, char *tkname)
  */
 static int listbox_cdiff (WLEntry *s, WLEntry *e);
 
+#ifdef HAVE_X
+static void
+listbox_draw (WListbox *l, Dlg_head *h, int focused)
+{
+	/* nothing */
+}
+#else
 static void
 listbox_drawscroll (WListbox *l)
 {
@@ -1829,6 +1840,7 @@ listbox_draw (WListbox *l, Dlg_head *h, int focused)
     attrset (normalc);
     listbox_drawscroll (l);
 }
+#endif /* HAVE_X */
 
 /* Returns the number of items between s and e,
    must be on the same linked list */

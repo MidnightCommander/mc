@@ -245,12 +245,16 @@ int default_dlg_callback  (Dlg_head *h, int id, int msg);
 int std_callback          (Dlg_head *h, int Msg, int Par);
 int default_proc          (Dlg_head *h, int Msg, int Par);
 
+#ifdef HAVE_X
+#define widget_move(w,y,x)
+#define dlg_move(h,y,x)
+#else
 #define real_widget_move(w, _y, _x) move((w)->y + _y, (w)->x + _x)
 #define dlg_move(h, _y, _x) move(((Dlg_head *) h)->y + _y, \
 			     ((Dlg_head *) h)->x + _x)
 
 #define widget_move(w,y,x) real_widget_move((Widget*)w,y,x)
-
+#endif
 
 extern Dlg_head *current_dlg;
 extern Hook *idle_hook;

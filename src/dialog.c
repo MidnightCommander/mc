@@ -90,17 +90,4 @@ void do_refresh (void)
     }
 }
 
-/* Poor man's window puts, it doesn't handle auto-wrap */
-void my_wputs (int y, int x, char *text)
-{
-    char p;
-
-    move (y, x);
-    while ((p = *text++) != 0){
-	if (p == '\n')
-	    move (++y, x);
-	else 
-	    addch ((unsigned char)p);
-    }
-}
 

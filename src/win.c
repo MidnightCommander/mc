@@ -47,6 +47,7 @@ typedef struct Fkey_Table_List {
 
 static Fkey_Table_List *fkey_table_list = NULL;
 
+#ifndef HAVE_X
 /* Width of output is always seven characters */
 void sprint_bytesize (char *buffer, int size, int scale)
 {
@@ -71,6 +72,7 @@ void print_bytesize (int size, int scale)
     sprint_bytesize (buffer, size, scale);
     printw (buffer);
 }
+#endif
 
 /* Return values: 0 = not a fkey, other = was a fkey */
 int check_fkeys (int c)
@@ -184,6 +186,15 @@ int check_movement_keys (int c, int additional, int page_size, void *data,
     return 0;
 }
 
+#ifdef HAVE_X
+void mc_raw_mode (void)
+{
+}
+
+void mc_noraw_mode (void)
+{
+}
+#else
 void mc_raw_mode (void)
 {
     raw ();
@@ -193,6 +204,7 @@ void mc_noraw_mode (void)
 {
     noraw ();
 }
+#endif
 
 /* Classification routines */
 int is_abort_char (int c)

@@ -155,6 +155,7 @@ delete_format (format_e *format)
      }
 }
 
+#ifndef HAVE_X
 /* This code relies on the default justification!!! */
 void
 add_permission_string (char *dest, int width, file_entry *fe, int attr, int color, int is_octal)
@@ -185,6 +186,7 @@ add_permission_string (char *dest, int width, file_entry *fe, int attr, int colo
 	addch (dest[i]);
     }
 }
+#endif /* HAVE_X */
 
 int
 file_entry_color (file_entry *fe)

@@ -676,13 +676,13 @@ static int getch_with_delay (void)
 
 extern int max_dirt_limit;
 
+#ifndef HAVE_X
 /* Returns a character read from stdin with appropriate interpretation */
 /* Also takes care of generated mouse events */
 /* Returns EV_MOUSE if it is a mouse event */
 /* Returns EV_NONE  if non-blocking or interrupt set and nothing was done */
 int get_event (Gpm_Event *event, int redo_event, int block)
 {
-#ifndef HAVE_X
     int c;
     static int flag;			/* Return value from select */
 #ifdef HAVE_LIBGPM
@@ -791,9 +791,8 @@ int get_event (Gpm_Event *event, int redo_event, int block)
     flag = is_wintouched(stdscr);
     untouchwin (stdscr);
 #   endif
-
     c = block ? getch_with_delay () : get_key_code(1);
-    
+
 #   ifndef HAVE_SLANG
     if (flag)
         touchwin (stdscr);
@@ -805,10 +804,14 @@ int get_event (Gpm_Event *event, int redo_event, int block)
     }
 
     return c;
-#else
-    return EV_NONE;
-#endif /* HAVE_X */
 }
+#else
+/* X11 version of the get_event routine */
+int get_event (Gpm_Event *event, int redo_event, int block)
+{
+    return EV_NONE;
+}
+#endif
 
 #ifndef PORT_HAS_GETCH
 /* Returns a key press, mouse events are discarded */
@@ -822,7 +825,6 @@ int mi_getch ()
 	;
     return key;
 }
-#endif
 
 int xgetch_second (void)
 {
@@ -848,6 +850,7 @@ int xgetch_second (void)
 #endif
     return c;
 }
+#endif
 
 #ifndef HAVE_X
 void learn_store_key (char *buffer, char **p, int c)

@@ -28,7 +28,7 @@
 #include "dialog.h"
 #include "gdesktop.h"
 #include "gdnd.h"
-#include "gtree.h"
+#include "gtkdtree.h"
 #include "gpageprop.h"
 #include "gpopup.h"
 #include "gcliplabel.h"
@@ -443,7 +443,8 @@ panel_file_list_configure_contents (GtkWidget *sw, WPanel *panel, int main_width
 	} else
 		extra_space = expand_space = 0;
 
-	/* Hack: the default mini-info display only gets displayed
+	/*
+	 * Hack: the default mini-info display only gets displayed
 	 * if panel->estimated_total is not zero, ie, if this has been
 	 * initialized for the first time.
 	 */
@@ -507,6 +508,7 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 		case 1:
 			if (!(event->button.state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK)))
 				break;
+
 			/* fallback if shift-click is pressed */
 			do_file_mark_range (panel, row, current_selection);
 			break;
@@ -824,6 +826,26 @@ panel_clist_drag_data_received (GtkWidget          *widget,
 	panel_update_contents (panel);
 }
 
+/**
+ * panel_tree_drag_data_received:
+ *
+ * Invoked on the target side when a drop has been received in the Tree
+ */
+static void
+panel_tree_drag_data_received (GtkWidget          *widget,
+			       GdkDragContext     *context,
+			       gint                x,
+			       gint                y,
+			       GtkSelectionData   *selection_data,
+			       guint               info,
+			       guint32             time,
+			       WPanel              *panel)
+{
+	GtkDTree *dtree = GTK_DTREE (widget);
+
+	printf ("Drop received on tree\n");
+}
+
 #ifdef OLD_DND
 /*
  * Handler for text/plain and url:ALL drag types
@@ -1118,9 +1140,10 @@ panel_create_file_list (WPanel *panel)
 	gtk_signal_connect (GTK_OBJECT (file_list), "drag_data_received",
 			    GTK_SIGNAL_FUNC (panel_clist_drag_data_received), panel);
 
-	/* These implement our drag-start activation code.  We need to manually activate the drag as
-	 * the DnD code in Gtk+ will make the scrollbars in the CList activate drags when they are
-	 * moved.
+	/* These implement our drag-start activation code.  We need to
+	 * manually activate the drag as the DnD code in Gtk+ will
+	 * make the scrollbars in the CList activate drags when they
+	 * are moved.
 	 */
 	gtk_signal_connect (GTK_OBJECT (file_list), "button_press_event",
 			    GTK_SIGNAL_FUNC (panel_clist_button_press), panel);
@@ -1681,6 +1704,38 @@ panel_create_filter (Dlg_head *h, WPanel *panel, void **filter_w)
 	return fhbox;
 }
 
+/* Signal handler for DTree's "directory_changed" signal */
+static void
+panel_chdir (GtkDTree *dtree, char *path, WPanel *panel)
+{
+	do_panel_cd (panel, path, cd_exact);
+}
+
+/** 
+ * panel_create_tree_view:
+ *
+ * Create and initializes the GtkDTree widget for being used in the
+ * Panel
+ */
+static GtkWidget *
+panel_create_tree_view (WPanel *panel)
+{
+	GtkWidget *tree;
+
+	tree = gtk_dtree_new ();
+	gtk_signal_connect (GTK_OBJECT (tree), "directory_changed",
+			    GTK_SIGNAL_FUNC (panel_chdir), panel);
+
+	gtk_drag_dest_set (GTK_WIDGET (tree), GTK_DEST_DEFAULT_ALL,
+			   drop_types, ELEMENTS (drop_types),
+			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
+	
+	gtk_signal_connect (GTK_OBJECT (tree), "drag_data_received",
+			    GTK_SIGNAL_FUNC (panel_tree_drag_data_received), panel);
+			    
+	return tree;
+}
+
 static void
 panel_back (GtkWidget *button, WPanel *panel)
 {
@@ -1697,13 +1752,6 @@ static void
 panel_up (GtkWidget *button, WPanel *panel)
 {
 	do_panel_cd (panel, "..", cd_exact);
-}
-
-/* Signal handler for DTree's "directory_changed" signal */
-static void
-panel_chdir (GtkDTree *dtree, char *path, WPanel *panel)
-{
-	do_panel_cd (panel, path, cd_exact);
 }
 
 static GtkWidget *
@@ -1771,9 +1819,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_scrolled_window_set_policy (
 		GTK_SCROLLED_WINDOW (tree_scrolled_window),
 		GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	panel->tree = gtk_dtree_new ();
-	gtk_signal_connect (GTK_OBJECT (panel->tree), "directory_changed",
-			    GTK_SIGNAL_FUNC (panel_chdir), panel);
+	panel->tree = panel_create_tree_view (panel);
 	gtk_container_add (GTK_CONTAINER (tree_scrolled_window), panel->tree);
 	gtk_widget_show_all (tree_scrolled_window);
 	

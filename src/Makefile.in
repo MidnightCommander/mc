@@ -10,7 +10,7 @@ CPPFLAGS = $(XCPPFLAGS) -DREGEX_MALLOC
 LDFLAGS  = $(XLDFLAGS)
 DEFS     = $(XDEFS)
 LIBS     = $(XLIBS) @TERMNET@ $(XLIB) @TERMNET@
-OURLIBS  = @LVFS@ @LSLANG@ @LEDIT@ @LINTL@
+OURLIBS  = @LVFS@ @LSLANG@ @LEDIT@ @LGPM@ @LINTL@
 INSTALL  = @INSTALL@
 
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -25,7 +25,7 @@ SRCS =	dir.c util.c main.c screen.c dialog.c key.c keyxdef.c menu.c	\
 	complete.c slint.c command.c cmd.c panelize.c learn.c		\
 	listmode.c utilunix.c background.c rxvt.c			\
 	text.c popt.c findme.c poptparse.c poptconfig.c popthelp.c	\
-	filegui.c
+	filegui.c filenot.c
 
 HDRS =	color.h file.h mouse.h user.h dialog.h find.h main.h		\
 	util.h dir.h global.h menu.h panel.h win.h mem.h		\
@@ -35,7 +35,7 @@ HDRS =	color.h file.h mouse.h user.h dialog.h find.h main.h		\
 	hotlist.h layout.h fsusage.h mountlist.h regex.h complete.h	\
 	myslang.h command.h cmd.h tty.h fs.h panelize.h achown.h	\
 	learn.h listmode.h features.inc background.h			\
-	x.h textconf.h i18n.h findme.h popt.h filegui.h
+	x.h textconf.h i18n.h findme.h popt.h filegui.h keys.h xtty.h
 
 OBJS =	dir.o util.o screen.o dialog.o key.o keyxdef.o menu.o		\
 	file.o win.o color.o help.o find.o profile.o user.o view.o	\
@@ -45,7 +45,7 @@ OBJS =	dir.o util.o screen.o dialog.o key.o keyxdef.o menu.o		\
 	mountlist.o @XCURSES@ @REGEX_O@ complete.o slint.o command.o	\
 	cmd.o main.o panelize.o learn.o listmode.o utilunix.o		\
 	background.o rxvt.o text.o popt.o findme.o poptparse.o		\
-	poptconfig.o popthelp.o filegui.o
+	poptconfig.o popthelp.o filegui.o filenot.o
 
 #
 # Distribution variables
@@ -95,10 +95,6 @@ libedit.a:
 	cd ../edit; $(MAKE) libedit.a
 @PCENTRULE@	-$(RMF) libedit.a
 @PCENTRULE@	$(LN_S) ../edit/libedit.a .
-
-cross:
-	$(MAKE) CC=gcc-linux CPP="gcc-linux -E" \
-	CPPFLAGS="$(CPPFLAGS) -I/usr/local/lib/gcc-lib/i386-linux-linux/include/ncurses "
 
 $(srcdir)/mc.hlp: $(docdir)/mc.1.in $(mclibdir)/xnc.hlp $(srcdir)/gindex.pl
 	$(MAKE) man2hlp

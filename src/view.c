@@ -728,6 +728,7 @@ view_display_clean (WView *view, int height, int width)
 }
 
 #define view_add_character(view,c) addch (c)
+#define view_add_one_vline()       one_vline()
 #define view_add_string(view,s)    addstr (s)
 #define view_gotoyx(v,r,c)    widget_move (v,r,c)
 #endif
@@ -881,9 +882,9 @@ display (WView *view)
 		    
                     /* Hex numbers are printed in the groups of four */
                     /* Groups are separated by a vline */
-		    
+
                     view_add_character (view, ' ');
-                    one_vline ();
+                    view_add_one_vline ();
 		    view_gotoyx (view, row, col + 1);
                     col += 2;
                     

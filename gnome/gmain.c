@@ -92,9 +92,6 @@ gmc_color_init (void)
 int
 xtoolkit_init (int *argc, char *argv [])
 {
-	LINES = 40;
-	COLS = 80;
-
 	printf (
 		"The GNOME file manager is going trough a massive code\n"
 		"rewrite, so many problems are known to exist due to a major\n"
@@ -106,6 +103,18 @@ xtoolkit_init (int *argc, char *argv [])
 	gmc_color_init ();
 
 	return 0;
+}
+
+void
+interactive_display (char *filename, char *node)
+{
+	/* FIXME: Implement gnome version */
+}
+
+int
+beep (void)
+{
+	gdk_beep ();
 }
 
 int

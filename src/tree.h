@@ -59,6 +59,8 @@ void tree_move_to_child (WTree *tree);
 void tree_move_to_top (WTree *tree);
 void tree_move_to_bottom (WTree *tree);
 
+void sync_tee (char *pathname);
+
 extern int tree_navigation_flag;
 extern int xtree_mode;
 

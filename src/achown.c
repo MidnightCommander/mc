@@ -182,6 +182,15 @@ static umode_t get_mode ()
     return m;
 }
 
+#ifdef HAVE_X
+static void update_mode (Dlg_head *h)
+{
+}
+static void print_flags (void)
+{
+}
+
+#else
 static void print_flags (void)
 {
     int i;
@@ -225,6 +234,7 @@ static void update_mode (Dlg_head * h)
     printw ("%12o", get_mode ());
     send_message (h, h->current->widget, WIDGET_FOCUS, 0);
 }
+#endif /* HAVE_X */
 
 static int l_call (void *data)
 {
@@ -235,9 +245,11 @@ static int chl_callback (Dlg_head * h, int Par, int Msg)
 {
     switch (Msg) {
     case DLG_DRAW:
+#ifndef HAVE_X
 	attrset (COLOR_NORMAL);
 	dlg_erase (h);
 	draw_box (h, 0, 0, 13, 17);
+#endif
 	break;
 	
     case DLG_KEY:
@@ -339,6 +351,7 @@ static void do_enter_key (Dlg_head *h, int f_pos)
     } while (chl_end);
 }
 
+#ifndef HAVE_X
 static void chown_refresh (void)
 {
     attrset (COLOR_NORMAL);
@@ -395,6 +408,7 @@ static void chown_info_update ()
     set_perm (b_att[1]->text, sf_stat->st_mode >> 3);
     set_perm (b_att[2]->text, sf_stat->st_mode);
 }
+#endif
 
 static void b_setpos (int f_pos) {
 	b_att[0]->hotpos=-1;
@@ -409,8 +423,10 @@ static int advanced_chown_callback (Dlg_head * h, int Par, int Msg)
 
     switch (Msg) {
     case DLG_DRAW:
+#ifndef HAVE_X
 	chown_refresh ();
 	chown_info_update ();
+#endif
 	return 1;
 	
     case DLG_POST_KEY:
@@ -671,8 +687,10 @@ void chown_advanced_cmd (void)
 	}
 	ch_cmode = sf_stat->st_mode;
 
+#ifndef HAVE_X
 	chown_refresh ();
-
+#endif
+	
 	get_ownership ();
 
 	/* game can begin */
