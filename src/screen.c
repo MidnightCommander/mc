@@ -793,9 +793,10 @@ paint_panel (WPanel *panel)
 static void
 do_select (WPanel *panel, int i)
 {
-    if (i != panel->selected){
-        panel->selected = i;
-	panel->top_file = panel->selected - (panel->widget.lines-2)/2;
+    if (i != panel->selected) {
+	panel->dirty = 1;
+	panel->selected = i;
+	panel->top_file = panel->selected - (panel->widget.lines - 2) / 2;
 	if (panel->top_file < 0)
 	    panel->top_file = 0;
     }

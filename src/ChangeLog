@@ -1,5 +1,7 @@
 2002-11-17  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c (do_select): Mark panel as dirty.
+
 	* boxes.c (init_disp_bits_box): Make static.
 
 2002-11-15  Pavel Roskin  <proski@gnu.org>
