@@ -1,3 +1,8 @@
+2002-09-24  Pavel Roskin  <proski@gnu.org>
+
+	* view.c (display): Fix wrapping of tabs.
+	Reported by Arpad Biro <biro_arpad@yahoo.com>
+
 2002-09-23  Pavel Roskin  <proski@gnu.org>
 
 	* dlg.h: New message DLG_RESIZE.

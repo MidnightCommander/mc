@@ -969,7 +969,7 @@ display (WView * view)
 	    get_byte (view, from);
 	for (; row < height && from < view->last_byte; from++) {
 	    c = get_byte (view, from);
-	    if ((c == '\n') || (col == width && view->wrap_mode)) {
+	    if ((c == '\n') || (col >= width && view->wrap_mode)) {
 		col = frame_shift;
 		row++;
 		if (c == '\n' || row >= height)
