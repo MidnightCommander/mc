@@ -10,6 +10,7 @@ gnome/gdnd.c
 gnome/gicon.c
 gnome/glayout.c
 gnome/gmain.c
+gnome/gmc-window.c
 gnome/gmount.c
 gnome/gnome-file-property-dialog.c
 gnome/gnome-open-dialog.c
