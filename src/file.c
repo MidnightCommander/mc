@@ -2233,8 +2233,9 @@ real_query_recursive (FileOpContext *ctx, enum OperationMode mode, char *s)
 		confirm = input_dialog (
 		    mode == Foreground ? _(" Recursive Delete ")
 		    : _(" Background process: Recursive Delete "),
-		    text, _("no"));
+		    text, NULL);
 		do_refresh ();
+		/* TRANSLATORS: user types this text to confirm deletion */
 		if (!confirm || strcmp (confirm, _("yes")))
 		    ctx->recursive_result = RECURSIVE_NEVER;
 		g_free (confirm);

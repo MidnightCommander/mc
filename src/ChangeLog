@@ -1,5 +1,8 @@
 2002-10-21  Pavel Roskin  <proski@gnu.org>
 
+	* file.c (real_query_recursive): Default to empty string, not to
+	"no" when asking to enter "yes".  Add note for translators.
+
 	* cmd.c (do_view_cmd): When asking confirmation, correctly
 	interpret closing the dialog by escape.
 
