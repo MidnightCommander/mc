@@ -2800,8 +2800,9 @@ Examples:
 .fi
 .\"NODE "  EXTernal File System"
 .SH "  EXTernal File System"
-'extfs' allows to integrate numerous features and file types into GNU
-Midnight Commander in an easy way, by writing scripts.
+.B extfs
+allows to integrate numerous features and file types into GNU Midnight
+Commander in an easy way, by writing scripts.
 .PP
 Extfs filesystems can be divided into two categories:
 .PP
