@@ -17,6 +17,10 @@ cd $srcdir
 # The autoconf cache (version after 2.52) is not reliable yet.
 rm -rf autom4te.cache vfs/samba/autom4te.cache
 
+if test ! -d config; then
+  mkdir config || exit 1
+fi
+
 # Ensure that gettext is reasonably new.
 gettext_ver=`$GETTEXTIZE --version | sed -n '1s/\.//g;1s/.* //;1s/^\(...\)$/\100/;1s/^\(...\)\(.\)$/\10\2/;1p'`
 if test $gettext_ver -lt 01038; then
@@ -63,10 +67,6 @@ else
     rm -f po/ChangeLog
     mv po/ChangeLog~ po/ChangeLog
   fi
-fi
-
-if test ! -d config; then
-  mkdir config || exit 1
 fi
 
 rm -f aclocal.m4
