@@ -1,5 +1,8 @@
 2002-12-26  Pavel Roskin  <proski@gnu.org>
 
+	* utilunix.c (mc_tmpdir): Check temporary directory more
+	carefully.  Report problems and ask user to acknowledge them.
+
 	* main.c (midnight_callback): Fix the last change, so that plain
 	Enter is not affected.
 

@@ -306,11 +306,15 @@ char *tilde_expand (const char *directory)
 const char *
 mc_tmpdir (void)
 {
-    static char tmpdir[64];
+    static char buffer[64];
+    static const char *tmpdir;
     const char *sys_tmp;
     struct passwd *pwd;
+    struct stat st;
+    const char *error = NULL;
 
-    if (*tmpdir)
+    /* Check if already initialized */
+    if (tmpdir)
 	return tmpdir;
 
     sys_tmp = getenv ("TMPDIR");
@@ -319,19 +323,62 @@ mc_tmpdir (void)
     }
 
     pwd = getpwuid (getuid ());
-    g_snprintf (tmpdir, sizeof (tmpdir), "%s/mc-%s", sys_tmp,
+    g_snprintf (buffer, sizeof (buffer), "%s/mc-%s", sys_tmp,
 		pwd->pw_name);
-    canonicalize_pathname (tmpdir);
+    canonicalize_pathname (buffer);
 
-    if (chmod (tmpdir, S_IRWXU) != 0 && errno == ENOENT) {
-	/* Need to create directory. */
-	if (mkdir (tmpdir, S_IRWXU) != 0) {
+    if (lstat (buffer, &st) == 0) {
+	/* Sanity check for existing directory */
+	if (!S_ISDIR (st.st_mode))
+	    error = _("%s is not a directory\n");
+	else if (st.st_uid != getuid ())
+	    error = _("Directory %s is not owned by you\n");
+	else if (((st.st_mode & 0777) != 0700)
+		 && (chmod (buffer, 0700) != 0))
+	    error = _("Cannot set correct permissions for directory %s\n");
+    } else {
+	/* Need to create directory */
+	if (mkdir (buffer, S_IRWXU) != 0) {
 	    fprintf (stderr,
 		     _("Cannot create temporary directory %s: %s\n"),
-		     tmpdir, unix_error_string (errno));
-	    strncpy (tmpdir, sys_tmp, sizeof (tmpdir) - 1);
-	    tmpdir [sizeof (tmpdir) - 1] = 0;
+		     buffer, unix_error_string (errno));
+	    error = "";
 	}
+    }
+
+    if (!error) {
+	tmpdir = buffer;
+    } else {
+	int test_fd;
+	char *test_fn;
+	int fallback_ok = 0;
+
+	if (*error)
+	    fprintf (stderr, error, buffer);
+
+	/* Test if sys_tmp is suitable for temporary files */
+	tmpdir = sys_tmp;
+	test_fd = mc_mkstemps (&test_fn, "mctest", NULL);
+	if (test_fd != -1) {
+	    close (test_fd);
+	    test_fd = open (test_fn, O_RDONLY);
+	    if (test_fd != -1) {
+		close (test_fd);
+		unlink (test_fn);
+		fallback_ok = 1;
+	    }
+	}
+
+	if (fallback_ok) {
+	    fprintf (stderr, _("Temporary files will be created in %s\n"),
+		     sys_tmp);
+	} else {
+	    fprintf (stderr, _("Temporary files will not be created\n"));
+	    tmpdir = "/dev/null/";
+	}
+
+	fprintf (stderr, "%s\n", _("Press any key to continue..."));
+	getc (stdin);
     }
 
     return tmpdir;
