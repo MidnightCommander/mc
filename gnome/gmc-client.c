@@ -226,7 +226,7 @@ main (int argc, char **argv)
 	poptContext ctx;
 	CORBA_Environment ev;
 	CORBA_ORB orb;
-	int result;
+	int result = FALSE;
 
 	bindtextdomain ("gmc-client", LOCALEDIR);
 	textdomain ("gmc-client");
