@@ -1,3 +1,7 @@
+Fri Jul 31 09:04:35 1998  Pavel Roskin <pavel.roskin@escoft.co.uk>
+
+	* syntax.c: makefile* will be highlighted as Makefile*
+
 1998-07-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* main.c (translated_mc_chdir): Quick hack to make the old

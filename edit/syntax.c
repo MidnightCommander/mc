@@ -1408,7 +1408,7 @@ char *syntax_text =
 "\n"
 "\n"
 "###############################################################################\n"
-"file .\\*Makefile[\\\\\\.a-z]\\*$ Makefile\n"
+"file .\\*[Mm]akefile[\\\\\\.a-z]\\*$ Makefile\n"
 "\n"
 "context default\n"
 "    keyword $(*) yellow/24\n"
