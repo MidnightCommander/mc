@@ -93,14 +93,14 @@ application/x-gzip:
 	icon-filename=@icondir@/gnome-compressed.png
 
 application/x-tex:
-	icon-filename=@icondir@/tex.xpm
+	icon-filename=@icondir@/gnome-tex.png
 
 application/postscript:
 	open=gv %f
 	icon-filename=@icondir@/gnome-application-postscript.png
 
 application/x-object-file:
-	icon-filename=@icondir@/o.xpm
+	icon-filename=@icondir@/gnome-objectfile.png
 
 application/x-shared-library:
 	fm-view=%view{hex}
@@ -219,5 +219,5 @@ video/x-ms-video:
 image/*:
 	icon-filename=@icondir@/gnome-image-generic.png
 
-text.*:
-	icon-filename=@icondir@/text.xpm
+text/*:
+	icon-filename=@icondir@/gnome-textfile.png

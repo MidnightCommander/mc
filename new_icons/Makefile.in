@@ -47,7 +47,10 @@ ALLICONS =						\
 	gnome-package.png				\
 	gnome-compressed.png				\
 	gnome-core.png					\
-	gnome-manpage.png
+	gnome-manpage.png				\
+	gnome-objectfile.png				\
+	gnome-textfile.png				\
+	gnome-tex.png
 
 all:
 
