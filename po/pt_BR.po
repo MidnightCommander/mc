@@ -4830,12 +4830,12 @@ msgstr " Falha na autenticação"
 
 #: vfs/smbfs.c:1575
 #, c-format
-msgid " %s mkdir'ing %s "
+msgid " Error %s creating directory %s "
 msgstr " %s executando mkdir em %s "
 
 #: vfs/smbfs.c:1598
 #, c-format
-msgid " %s rmdir'ing %s "
+msgid " Error %s removing directory %s "
 msgstr " %s executando rmdir em %s "
 
 #: vfs/smbfs.c:1702 vfs/smbfs.c:1722

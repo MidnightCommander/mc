@@ -4793,12 +4793,12 @@ msgstr " Uwierzytelnienie nie powiod³o siê "
 
 #: vfs/smbfs.c:1
 #, c-format
-msgid " %s mkdir'ing %s "
+msgid " Error %s creating directory %s "
 msgstr " %s przy tworzeniu katalogu %s "
 
 #: vfs/smbfs.c:1
 #, c-format
-msgid " %s rmdir'ing %s "
+msgid " Error %s removing directory %s "
 msgstr " %s przy usuwaniu katalogu %s "
 
 #: vfs/smbfs.c:1 vfs/smbfs.c:1

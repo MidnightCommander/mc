@@ -4782,12 +4782,12 @@ msgstr " Tanıtma Bacarılmadı "
 
 #: vfs/smbfs.c:1575
 #, c-format
-msgid " %s mkdir'ing %s "
+msgid " Error %s creating directory %s "
 msgstr " %s %s qovluğunu yaradır "
 
 #: vfs/smbfs.c:1598
 #, c-format
-msgid " %s rmdir'ing %s "
+msgid " Error %s removing directory %s "
 msgstr " %s %s qovluğunu silir "
 
 #: vfs/smbfs.c:1702 vfs/smbfs.c:1722

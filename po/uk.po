@@ -4770,12 +4770,12 @@ msgstr " Зб╕й авторизац╕╖ "
 
 #: vfs/smbfs.c:1575
 #, c-format
-msgid " %s mkdir'ing %s "
+msgid " Error %s creating directory %s "
 msgstr " %s створення каталога %s "
 
 #: vfs/smbfs.c:1598
 #, c-format
-msgid " %s rmdir'ing %s "
+msgid " Error %s removing directory %s "
 msgstr " %s видаля╓ каталог %s "
 
 #: vfs/smbfs.c:1702 vfs/smbfs.c:1722

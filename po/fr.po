@@ -4800,12 +4800,12 @@ msgstr " Échec de l'authentification "
 
 #: vfs/smbfs.c:1575
 #, c-format
-msgid " %s mkdir'ing %s "
+msgid " Error %s creating directory %s "
 msgstr " %s création du répertoire %s "
 
 #: vfs/smbfs.c:1598
 #, c-format
-msgid " %s rmdir'ing %s "
+msgid " Error %s removing directory %s "
 msgstr " %s destruction du répertoire %s "
 
 #: vfs/smbfs.c:1702 vfs/smbfs.c:1722

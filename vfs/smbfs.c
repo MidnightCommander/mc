@@ -1582,7 +1582,7 @@ smbfs_mkdir (vfs *me, char *path, mode_t mode)
 
 	if (!cli_mkdir(sc->cli, path)) {
 		my_errno = cli_error(sc->cli, NULL, &err, NULL);
-		message_3s (1, MSG_ERROR, _(" %s mkdir'ing %s "), 
+		message_3s (1, MSG_ERROR, _(" Error %s creating directory %s "), 
 			cli_errstr(sc->cli), CNV_LANG(path));
 		g_free (path);
 		return -1;
@@ -1605,7 +1605,7 @@ smbfs_rmdir (vfs *me, char *path)
 
 	if (!cli_rmdir(sc->cli, path)) {
 		my_errno = cli_error(sc->cli, NULL, &err, NULL);
-		message_3s (1, MSG_ERROR, _(" %s rmdir'ing %s "), 
+		message_3s (1, MSG_ERROR, _(" Error %s removing directory %s "), 
 			cli_errstr(sc->cli), CNV_LANG(path));
 		g_free (path);
 		return -1;
