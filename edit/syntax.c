@@ -656,7 +656,8 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
 
     r = edit->rules = g_malloc0 (MAX_CONTEXTS * sizeof (struct context_rule *));
 
-    defines = g_tree_new ((GCompareFunc) strcmp);
+    if (!defines)
+	defines = g_tree_new ((GCompareFunc) strcmp);
 
     for (;;) {
 	char **a;
@@ -927,7 +928,7 @@ edit_read_syntax_file (WEdit * edit, char **names, const char *syntax_file,
 		       const char *editor_file, const char *first_line,
 		       const char *type)
 {
-    FILE *f;
+    FILE *f, *g = NULL;
     regex_t r;
     regmatch_t pmatch[1];
     char *args[1024], *l = 0;
@@ -936,6 +937,7 @@ edit_read_syntax_file (WEdit * edit, char **names, const char *syntax_file,
     int result = 0;
     int count = 0;
     char *lib_file;
+    int found = 0;
 
     f = fopen (syntax_file, "r");
     if (!f){
@@ -954,11 +956,21 @@ edit_read_syntax_file (WEdit * edit, char **names, const char *syntax_file,
 	get_args (l, args, &argc);
 	if (!args[0])
 	    continue;
+/* Looking for `include ...` lines before first `file ...` ones */
+	if (!found && !strcmp (args[0], "include")) {
+	    if (g)
+		continue;
+	    if (!args[1] || !(g = open_include_file (args[1]))) {
+		result = line;
+		break;
+	    }
+	    goto found_type;
+	}
 /* looking for `file ...' lines only */
 	if (strcmp (args[0], "file")) {
-	    free_args (args);
 	    continue;
 	}
+	found = 1;
 /* must have two args or report error */
 	if (!args[1] || !args[2]) {
 	    result = line;
@@ -994,7 +1006,7 @@ edit_read_syntax_file (WEdit * edit, char **names, const char *syntax_file,
 	    if (q) {
 		int line_error;
 	      found_type:
-		line_error = edit_read_syntax_rules (edit, f, args);
+		line_error = edit_read_syntax_rules (edit, g ? g : f, args);
 		if (line_error) {
 		    if (!error_file_name)	/* an included file */
 			result = line + line_error;
@@ -1004,18 +1016,21 @@ edit_read_syntax_file (WEdit * edit, char **names, const char *syntax_file,
 		    syntax_g_free (edit->syntax_type);
 		    edit->syntax_type = g_strdup (args[2]);
 /* if there are no rules then turn off syntax highlighting for speed */
-		    if (!edit->rules[1])
+		    if (!g && !edit->rules[1])
 			if (!edit->rules[0]->keyword[1] && !edit->rules[0]->spelling) {
 			    edit_free_syntax_rules (edit);
 			    break;
 			}
 		}
-		break;
+		if (g) {
+		    fclose (g);
+		    g = NULL;
+		} else {
+		    break;
+		}
 	    }
 	}
-	free_args (args);
     }
-    free_args (args);
     syntax_g_free (l);
     fclose (f);
     return result;

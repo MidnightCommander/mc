@@ -1,5 +1,10 @@
 2003-03-03  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
+	* syntax.c (edit_read_syntax_rules): Check for list of defines
+	is already initialized.
+	(edit_read_syntax_file): Process `include ...` before first
+	`file ...`, so color definitions can be stored separately.
+
 	* syntax.c (subst_defines): New function to substitute defines.
 	(this_try_alloc_color_pair): Move color substitution ...
 	(edit_read_syntax_rules): ... here.  Use subst_defines() to
