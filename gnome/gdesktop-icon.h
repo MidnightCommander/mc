@@ -10,9 +10,13 @@
 
 #include <libgnome/gnome-defs.h>
 #include <gtk/gtkwindow.h>
+#include <libgnomeui/gnome-canvas.h>
 #include <libgnomeui/gnome-icon-text.h>
 
 BEGIN_GNOME_DECLS
+
+
+#define DESKTOP_ICON_FONT "-*-helvetica-medium-r-normal--10-*-*-*-p-*-*-*"
 
 
 #define TYPE_DESKTOP_ICON            (desktop_icon_get_type ())
@@ -33,7 +37,10 @@ struct _DesktopIcon {
 	GnomeCanvasItem *icon;		/* The item that contains the icon */
 	GnomeCanvasItem *text;		/* The item that contains the editable text */
 
-	int width, height;		/* Size of the window */
+	int width, height;		/* Total size of the window */
+
+	int w_changed_id;		/* Signal connection ID for "width_changed" from the icon text item */
+	int h_changed_id;		/* Signal connection ID for "height_changed" from the icon text item */
 };
 
 struct _DesktopIconClass {

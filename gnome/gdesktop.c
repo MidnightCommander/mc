@@ -5,10 +5,10 @@
  * Author: Miguel de Icaza (miguel@gnu.org)
  */
 #include <config.h>
-#include "fs.h"
 #include <gnome.h>
-#include "util.h"
+#include "desktop-icon.h"
 #include "gdesktop.h"
+#include "fs.h"
 #include "../vfs/vfs.h"
 #include <string.h>
 #include "mad.h"
@@ -125,18 +125,23 @@ snap_to (desktop_icon_t *di, int absolute, int x, int y)
 static void
 get_icon_screen_x_y (desktop_icon_t *di, int *x, int *y)
 {
+	int w, h;
+
+	w = DESKTOP_ICON (di->widget)->width;
+	h = DESKTOP_ICON (di->widget)->height;
+
 	if (di->grid_x != -1){
 		*x = di->grid_x * SNAP_X;
 		*y = di->grid_y * SNAP_Y;
 		
-		*x = *x + (SNAP_X - di->widget->requisition.width)/2;
+		*x = *x + (SNAP_X - w) / 2;
 		if (*x < 0)
 			*x = 0;
 		
-		if (di->widget->requisition.height > SNAP_Y)
-			*y = *y + (SNAP_Y - di->widget->requisition.height)/2;
+		if (h > SNAP_Y)
+			*y = *y + (SNAP_Y - h) / 2;
 		else
-			*y = *y + (SNAP_Y - di->widget->requisition.height);
+			*y = *y + (SNAP_Y - h);
 	} else {
 		*x = di->x;
 		*y = di->y;
@@ -961,51 +966,38 @@ desktop_icon_delete (GtkWidget *widget, desktop_icon_t *di)
 	desktop_icon_remove (di);
 }
 
-static void
-lower_window(GtkWidget *widget)
-{
-  /* Note: Lowering the window has the problem of getting into a loop of
-   * flashing bitmaps on the desktop.  Do not enable this feature
-   */
-  /* gdk_window_lower(widget->window); */
- 
-}
-
 GtkWidget *
-my_create_transparent_text_window (char *file, char *text)
+create_desktop_icon (char *file, char *text)
 {
 	GtkWidget *w;
-	int events = GDK_BUTTON_PRESS_MASK | GDK_BUTTON1_MOTION_MASK | GDK_EXPOSURE_MASK;
-	
-	w = create_transparent_text_window (file, text, events);
-	if (!w){
-		static char *default_pix;
 
-		if (!default_pix){
-			default_pix = gnome_unconditional_pixmap_file ("launcher-program.png");
-		}
-		w = create_transparent_text_window (default_pix, text, events);
-		if (!w)
-			return NULL;
+	if (g_file_exists (file))
+		w = desktop_icon_new (file, text);
+	else {
+		static char *default_image;
+
+		if (!default_image)
+			default_image = gnome_unconditional_pixmap_file ("launcher-program.png");
+
+		if (g_file_exists (default_image))
+			w = desktop_icon_new (default_image, text);
+		else
+			w = NULL;
 	}
-#if 0
-	/* Useless, really, we need to use the WM hints */
-	gtk_signal_connect(GTK_OBJECT(w), "expose_event",
-			   lower_window, NULL);
-#endif
+
 	return w;
 }
 
 static GtkWidget *
-get_transparent_window_for_dentry (GnomeDesktopEntry *dentry)
+get_desktop_icon_for_dentry (GnomeDesktopEntry *dentry)
 {
-	GtkWidget *window;
+	GtkWidget *dicon;
 	char *icon_label;
 
 	icon_label = dentry->name ? dentry->name : x_basename (dentry->exec[0]);
 
 	if (dentry->icon)
-		window = my_create_transparent_text_window (dentry->icon, icon_label);
+		dicon = create_desktop_icon (dentry->icon, icon_label);
 	else {
 		static char *default_icon_path;
 		static char exists;
@@ -1017,18 +1009,18 @@ get_transparent_window_for_dentry (GnomeDesktopEntry *dentry)
 		}
 
 		if (exists)
-			window = my_create_transparent_text_window (default_icon_path, icon_label);
+			dicon = create_desktop_icon (default_icon_path, icon_label);
 		else {
-			window = gtk_window_new (GTK_WINDOW_POPUP);
-			gtk_widget_set_usize (window, 20, 20);
+			dicon = gtk_window_new (GTK_WINDOW_POPUP);
+			gtk_widget_set_usize (dicon, 20, 20);
 		}
 	}
 
-	return window;
+	return dicon;
 }
 
 static GtkWidget *
-get_transparent_window_for_di (desktop_icon_t *di)
+get_desktop_icon_for_di (desktop_icon_t *di)
 {
 	GtkWidget *window;
 	char *icon_label, *icon;
@@ -1036,7 +1028,7 @@ get_transparent_window_for_di (desktop_icon_t *di)
 	icon_label = x_basename (di->pathname);
 
 	icon = get_desktop_icon (di->pathname);
-	window = my_create_transparent_text_window (icon, icon_label);
+	window = create_desktop_icon (icon, icon_label);
 	g_free (icon);
 	return window;
 }
@@ -1101,18 +1093,17 @@ desktop_icon_properties (GtkWidget *widget, desktop_icon_t *di)
 		gtk_widget_destroy (di->widget);
 
 		if (di->dentry)
-			di->widget = get_transparent_window_for_dentry (di->dentry);
+			di->widget = get_desktop_icon_for_dentry (di->dentry);
 		else
-			di->widget = get_transparent_window_for_di (di);
+			di->widget = get_desktop_icon_for_di (di);
 
-		if (icons_snap_to_grid && di->grid_x != -1){
-			gtk_widget_size_request (di->widget, &di->widget->requisition);
+		if (icons_snap_to_grid && di->grid_x != -1)
 			get_icon_screen_x_y (di, &di->x, &di->y);
-		}
+
 		gtk_widget_set_uposition (di->widget, di->x, di->y);
-		
+
 		post_setup_desktop_icon (di, 1);
-		
+
 		if (di->dentry)
 			gnome_desktop_entry_save (di->dentry);
 	}
@@ -1135,17 +1126,17 @@ char *root_drop_types [] = {
 static void
 desktop_load_from_dentry (GnomeDesktopEntry *dentry)
 {
-	GtkWidget *window;
+	GtkWidget *dicon;
 	desktop_icon_t *di;
 
-	window = get_transparent_window_for_dentry (dentry);
+	dicon = get_desktop_icon_for_dentry (dentry);
 
-	if (!window)
+	if (!dicon)
 		return;
 
 	di = xmalloc (sizeof (desktop_icon_t), "desktop_load_entry");
 	di->dentry   = dentry;
-	di->widget   = window;
+	di->widget   = dicon;
 	di->pathname = dentry->location;
 
 	desktop_icons = g_list_prepend (desktop_icons, di);
@@ -1269,7 +1260,7 @@ static void
 desktop_create_launch_entry (char *desktop_file, char *pathname, char *short_name, GdkPoint **pos)
 {
 	GnomeDesktopEntry *dentry;
-	GtkWidget *window;
+	GtkWidget *dicon;
 	desktop_icon_t *di;
 	char *icon;
 	struct stat s;
@@ -1293,14 +1284,14 @@ desktop_create_launch_entry (char *desktop_file, char *pathname, char *short_nam
 	gnome_desktop_entry_save (dentry);
 	desktop_load_from_dentry (dentry);
 #if 0
-	window = my_create_transparent_text_window (icon, x_basename (pathname));
+	dicon = create_desktop_icon (icon, x_basename (pathname));
 	g_free (icon);
-	if (!window)
+	if (!dicon)
 		return;
 	
 	di = xmalloc (sizeof (desktop_icon_t), "dcle");
 	di->dentry = NULL;
-	di->widget = window;
+	di->widget = dicon;
 	di->pathname = strdup (pathname);
 
 	desktop_icon_set_position (di);
@@ -1309,13 +1300,13 @@ desktop_create_launch_entry (char *desktop_file, char *pathname, char *short_nam
 	desktop_icons = g_list_prepend (desktop_icons, (gpointer) di);
 
 	/* Double clicking executes the command, single clicking brings up context menu */
-	gtk_signal_connect (GTK_OBJECT (window), "button_press_event", GTK_SIGNAL_FUNC (desktop_file_exec), di);
-	gtk_widget_realize (window);
+	gtk_signal_connect (GTK_OBJECT (dicon), "button_press_event", GTK_SIGNAL_FUNC (desktop_file_exec), di);
+	gtk_widget_realize (dicon);
 	
-	gtk_signal_connect (GTK_OBJECT (window), "drop_data_available_event",
+	gtk_signal_connect (GTK_OBJECT (dicon), "drop_data_available_event",
 			    GTK_SIGNAL_FUNC (drop_on_launch_entry), di);
 
-	gtk_widget_dnd_drop_set (window, TRUE, drop_types, ELEMENTS (drop_types), FALSE);
+	gtk_widget_dnd_drop_set (dicon, TRUE, drop_types, ELEMENTS (drop_types), FALSE);
 #endif
 }
 

@@ -18,6 +18,7 @@ int want_transparent_icons = 1;
 int want_transparent_text = 0;
 
 
+#if 0
 static void
 set_window_text (GtkWidget *window, GdkImlibImage *im, char *text)
 {
@@ -228,6 +229,7 @@ create_transparent_text_window (char *file, char *text, int extra_events)
 #endif
 	return win;
 }
+#endif
 
 GtkWidget *
 make_transparent_window (char *file)

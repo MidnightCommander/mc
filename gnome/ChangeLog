@@ -1,3 +1,21 @@
+1998-10-21  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (create_desktop_icon): Renamed from
+	my_create_transparent_text_window.  Now uses the DesktopIcon
+	widget for its work.
+	(get_desktop_icon_for_dentry): Renamed from
+	get_transparent_window_for_dentry.  Uses the DesktopIcon widget.
+	(get_desktop_icon_for_di): Renamed from
+	get_transparent_window_for_di.
+	(desktop_icon_properties): Do not size_request the icon, since now
+	we can get its dimensions directly from the DesktopIcon structure.
+
+	* desktop-icon.[ch]: New file that takes care of desktop icons.
+	It provides the spiffy widget that is used for them.
+
+	* Makefile.in: Added desktop-icon.[ch] to the list of sources.
+	MC should use Automake, I think.
+
 1998-10-21  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (panel_create_icon_display): Small size adjustment.
