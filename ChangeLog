@@ -1,3 +1,8 @@
+1999-02-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* new_icons/Makefile.in (ALLICONS): Added Tigert's new icons for
+	PS and EPS files.  Thanks, Tigert!
+
 1999-02-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* configure.in (CCOPTS): Drop the prefix auto-detection.  

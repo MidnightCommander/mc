@@ -36,7 +36,8 @@ enum {
 	F_NOTDIR	= 1 << 4,	/* Applies to non-directories */
 	F_DICON		= 1 << 5,	/* Applies only to desktop icons */
 	F_NOTDEV	= 1 << 6,	/* Applies to non-devices only (ie. reg, lnk, dir) */
-	F_ADVANCED	= 1 << 7        /* Only appears in advanced mode */
+	F_ADVANCED	= 1 << 7,	/* Only appears in advanced mode */
+	F_ACTIONS	= 1 << 8	/* Special marker for the position of MIME actions */
 };
 
 /* typedefs */
@@ -47,7 +48,6 @@ struct action {
 };
 
 /* Multiple File commands */
-static void panel_action_open_with (GtkWidget *widget, WPanel *panel);
 static void handle_open (GtkWidget *widget, WPanel *panel);
 static void handle_view (GtkWidget *widget, WPanel *panel);
 static void handle_view_unfiltered (GtkWidget *widget, WPanel *panel);
@@ -75,9 +75,10 @@ extern int we_can_afford_the_speed;
 static struct action file_actions[] = {
 	{ N_("Open"),			F_NOTDEV,				handle_open },
 	{ "",				F_NOTDEV,				NULL },
+	{ "",				F_ACTIONS,				NULL },
 	{ N_("Open with..."),		F_REGULAR | F_SINGLE, 			handle_open_with },
 	{ N_("View"),			F_REGULAR | F_SINGLE, 			handle_view },
-	{ N_("View Unfiltered"),	F_REGULAR | F_ADVANCED | F_SINGLE,	handle_view_unfiltered },  
+	{ N_("View Unfiltered"),	F_REGULAR | F_ADVANCED | F_SINGLE,	handle_view_unfiltered },
 	{ N_("Edit"),			F_REGULAR | F_SINGLE, 			handle_edit },
 	{ "",				F_REGULAR | F_SINGLE, 			NULL },
 	{ N_("Copy..."),		F_ALL, 					handle_copy },
@@ -309,27 +310,12 @@ gpopup_do_popup2 (GdkEventButton *event, WPanel *panel)
 }
 
 static void
-panel_action_open_with (GtkWidget *widget, WPanel *panel)
-{
-	char *command;
-	
-	command = input_expand_dialog (_(" Open with..."),
-				       _("Enter extra arguments:"),
-				       panel->dir.list [panel->selected].fname);
-	if (!command)
-		return;
-
-	execute (command);
-	g_free (command);
-}
-
-static void
 handle_open (GtkWidget *widget, WPanel *panel)
 {
 	if (do_enter (panel))
 		return;
 
-	panel_action_open_with (widget, panel);
+	handle_open_with (widget, panel);
 }
 
 static void
@@ -373,14 +359,13 @@ static void
 handle_properties (GtkWidget *widget, WPanel *panel)
 {
 	gint retval;
-	file_entry *fe = &panel->dir.list [panel->selected];
-	char *full_name = concat_dir_and_file (panel->cwd, fe->fname);
+	file_entry *fe;
+	char *full_name;
 	GtkWidget *dlg;
 
-#if 0
-	if (item_properties (GTK_WIDGET (CLIST_FROM_SW (panel->list)), full_name, NULL) != 0)
-		reread_cmd ();
-#endif
+	fe = &panel->dir.list [panel->selected];
+	full_name = concat_dir_and_file (panel->cwd, fe->fname);
+
 	dlg = gnome_file_property_dialog_new (full_name, we_can_afford_the_speed);
 	gnome_dialog_set_parent (GNOME_DIALOG (dlg),
 				 GTK_WINDOW (gtk_widget_get_toplevel (panel->ministatus)));
@@ -399,7 +384,7 @@ handle_open_with (GtkWidget *widget, WPanel *panel)
 {
 	char *command;
 
-	command = input_expand_dialog (_(" Open with..."),
+	command = input_expand_dialog (_("Open with"),
 				       _("Enter extra arguments:"),
 				       panel->dir.list [panel->selected].fname);
 	if (!command)
@@ -429,28 +414,7 @@ handle_edit_symlink (GtkWidget *widget, WPanel *panel)
 }
 
 static void
-handle_display_properties (GtkWidget *widget, WPanel *panel)
-{
-	/* FIXME */
-	g_warning ("FIXME: implement popup_handle_display_properties()");
-}
-
-static void
 handle_rescan (GtkWidget *widget, WPanel *panel)
 {
 	reread_cmd ();
-}
-
-static void
-handle_arrange_icons (GtkWidget *widget, WPanel *panel)
-{
-	/* FIXME */
-	g_warning ("FIXME: implement popup_handle_arrange_icons()");
-}
-
-static void
-handle_logout (GtkWidget *widget, WPanel *panel)
-{
-	/* FIXME */
-	g_warning ("FIXME: implement popup_handle_logout()");
 }

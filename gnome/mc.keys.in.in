@@ -97,7 +97,7 @@ application/x-tex:
 
 application/postscript:
 	open=gv %f
-	icon-filename=@icondir@/postscript.xpm
+	icon-filename=@icondir@/gnome-application-postscript.png
 
 application/x-object-file:
 	icon-filename=@icondir@/o.xpm

@@ -1,3 +1,11 @@
+1999-02-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* mc.metadata.in: Added a regexp for EPS files.
+
+	* mc.keys.in.in: Use Tigert's new icon for Postscript files.
+	Possible FIXME: are there different MIME types for PS and EPS
+	files?
+
 1999-02-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop-icon.c (set_icon): Do not destroy the image if it is

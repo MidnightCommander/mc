@@ -77,6 +77,7 @@ regex: \.m(es)$
 	icon-filename=@icondir@/man.xpm
 
 regex: \.ps$
-	icon-filename=@icondir@/postscript.xpm
+	icon-filename=@icondir@/gnome-application-postscript.png
 
-	
+regex: \.eps$
+	icon-filename=@icondir@/gnome-application-encapsulated-postscript.png

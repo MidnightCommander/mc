@@ -13,37 +13,39 @@ INSTALL_DATA = @INSTALL_DATA@
 #
 
 DISTICONS = Makefile.in $(ALLICONS)
-ALLICONS = 				\
-	gnome-image-bmp.png		\
-	gnome-image-generic.png		\
-	gnome-image-gif.png		\
-	gnome-image-ief.png		\
-	gnome-image-jpeg.png		\
-	gnome-image-pbm.png		\
-	gnome-image-pgm.png		\
-	gnome-image-png.png		\
-	gnome-image-pnm.png		\
-	gnome-image-ppm.png		\
-	gnome-image-ras.png		\
-	gnome-image-rgb.png		\
-	gnome-image-tga.png		\
-	gnome-image-tiff.png		\
-	gnome-image-xbm.png		\
-	gnome-image-xpm.png		\
-	gnome-image-xwd.png		\
-	gnome-pack-deb.png		\
-	gnome-pack-rpm.png		\
-	gnome-video-mpeg.png		\
-	gnome-video-quicktime.png 	\
-	gnome-video-x-msvideo.png 	\
-	gnome-text-html.png		\
-	gnome-http-url.png		\
-	gnome-image-generic.png		\
-	gnome-application-x-c-header.png	\
-	gnome-application-x-c-source.png	\
-	gnome-application-x-cc-source.png \
-	gnome-package.png		\
-	gnome-compressed.png		\
+ALLICONS =						\
+	gnome-image-bmp.png				\
+	gnome-image-generic.png				\
+	gnome-image-gif.png				\
+	gnome-image-ief.png				\
+	gnome-image-jpeg.png				\
+	gnome-image-pbm.png				\
+	gnome-image-pgm.png				\
+	gnome-image-png.png				\
+	gnome-image-pnm.png				\
+	gnome-image-ppm.png				\
+	gnome-image-ras.png				\
+	gnome-image-rgb.png				\
+	gnome-image-tga.png				\
+	gnome-image-tiff.png				\
+	gnome-image-xbm.png				\
+	gnome-image-xpm.png				\
+	gnome-image-xwd.png				\
+	gnome-pack-deb.png				\
+	gnome-pack-rpm.png				\
+	gnome-video-mpeg.png				\
+	gnome-video-quicktime.png			\
+	gnome-video-x-msvideo.png			\
+	gnome-text-html.png				\
+	gnome-http-url.png				\
+	gnome-image-generic.png				\
+	gnome-application-encapsulated_postscript.png	\
+	gnome-application-postscript.png		\
+	gnome-application-x-c-header.png		\
+	gnome-application-x-c-source.png		\
+	gnome-application-x-cc-source.png		\
+	gnome-package.png				\
+	gnome-compressed.png				\
 	gnome-core.png
 
 all:
