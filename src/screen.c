@@ -54,7 +54,7 @@
 #include "../vfs/extfs.h"
 #include <glib.h>
 
-#if defined(OS2_NT)
+#ifdef NEEDS_DRIVE_H
 # include "drive.h"
 #endif
 

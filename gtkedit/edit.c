@@ -21,9 +21,11 @@
 #define _EDIT_C THIS_IS
 
 #include <config.h>
-#if defined(OS2_NT)
+#if defined(NEEDS_IO_H)
 #    include <io.h>
-#    include <fcntl.h>
+#endif
+#include <fcntl.h>
+#ifdef NEEDS_CR_LF_TRANSLATION
 #    define CR_LF_TRANSLATION
 #endif
 #include "edit.h"

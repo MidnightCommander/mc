@@ -39,7 +39,7 @@
 #include <fcntl.h>		/* open, O_RDWR */
 #include <errno.h>
 
-#ifdef OS2_NT
+#ifdef NEEDS_IO_H
 #   include <io.h>
 #endif
 

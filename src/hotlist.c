@@ -41,10 +41,11 @@
 #	include <sys/timeb.h>	/* alex: for struct timeb, used in time.h */
 #endif /* SCO_FLAVOR */
 #include <time.h>
-#ifndef OS2_NT
+#ifndef HAS_NO_GRP_PWD_H
 #    include <grp.h>
 #    include <pwd.h>
-#else
+#endif
+#ifdef NEEDS_IO_H
 #    include <io.h>
 #endif
 #include "tty.h"

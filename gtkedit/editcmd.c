@@ -21,7 +21,7 @@
 /* #define PIPE_BLOCKS_SO_READ_BYTE_BY_BYTE */
 
 #include <config.h>
-#ifdef OS2_NT
+#ifdef NEEDS_IO_H
 #include <io.h>
 #include <fcntl.h>
 #endif

@@ -22,7 +22,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <stdlib.h>
-#ifdef __os2__
+#ifdef NEEDS_IO_H
 # include <io.h>
 #endif
 

@@ -96,7 +96,7 @@ static int inside_link_area = 0;
 
 static int help_callback (struct Dlg_head *h, int id, int msg);
 
-#ifdef OS2_NT
+#ifdef HAS_ACS_AS_PCCHARS
 struct {
     int acscode;
     int pccode;

@@ -33,7 +33,7 @@
 #ifdef HAVE_SYS_WAIT_H
 #   include <sys/wait.h>
 #endif
-#ifndef OS2_NT
+#ifndef HAS_NO_GRP_PWD_H
 #   include <grp.h>
 #   include <pwd.h>
 #endif

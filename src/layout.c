@@ -27,12 +27,14 @@
 #include <sys/param.h>		/* Required by tree.h */
 #include <sys/types.h>
 #include <sys/stat.h>
-#if (!defined(__IBMC__) && !defined(__IBMCPP__)) && !defined(OS2_NT)
+#if (!defined(__IBMC__) && !defined(__IBMCPP__)) && !defined(HAS_NO_TERMIOS_H)
 #    include <termios.h>
+#endif
      /*
       * If TIOCGWINSZ supported, make it available here, because window-
       * resizing code depends on it...
       */
+#if (!defined(__IBMC__) && !defined(__IBMCPP__)) && !defined(HAS_NO_SYS_IOCTL_H)
 #	include <sys/ioctl.h>
 #endif
 #ifdef HAVE_UNISTD_H
@@ -583,7 +585,7 @@ void init_curses ()
     extern int force_ugly_line_drawing;
     extern int SLtt_Has_Alt_Charset;
     SLtt_get_terminfo ();
-#ifndef OS2_NT
+#ifndef HAS_ACS_AS_PCCHARS
     if (force_ugly_line_drawing)
 	SLtt_Has_Alt_Charset = 0;
 #endif

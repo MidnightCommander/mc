@@ -61,7 +61,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <stdio.h>
-#ifdef OS2_NT
+#ifdef NEEDS_IO_H
 #    include <io.h>
 #endif 
 

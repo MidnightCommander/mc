@@ -72,7 +72,7 @@
 #endif
 
 #include <errno.h>
-#ifndef OS2_NT
+#ifndef HAS_NO_GRP_PWD_H
 #    include <pwd.h>
 #endif
 #include <ctype.h>
@@ -128,8 +128,10 @@
 #include "chmod.h"
 #include "chown.h"
 
-#ifdef OS2_NT
+#ifdef NEEDS_IO_H
 #    include <io.h>
+#endif
+#ifdef NEEDS_DRIVE_H
 #    include <drive.h>
 #endif
 

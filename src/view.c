@@ -29,7 +29,7 @@
 #include "tty.h"
 #include "x.h"
 #include <stdio.h>
-#ifdef OS2_NT
+#ifdef NEEDS_IO_H
 #   include <io.h>
 #endif
 #include <sys/types.h>

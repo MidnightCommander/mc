@@ -22,7 +22,7 @@
 #include "tty.h"
 #include <string.h>
 #include <stdio.h>
-#ifdef OS2_NT
+#ifdef NEEDS_IO_H
 #    include <io.h>
 #endif
 #include "fs.h"

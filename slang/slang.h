@@ -62,6 +62,7 @@
 # endif
 # ifndef __os2__
 #   define __os2__
+#   define NEEDS_LOCAL_DIRENT_H
 # endif
 #endif
 

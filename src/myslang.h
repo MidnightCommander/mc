@@ -16,7 +16,7 @@
 #define ACS_URCORNER SLSMG_URCORN_CHAR
 #define ACS_LRCORNER SLSMG_LRCORN_CHAR
 
-#ifdef OS2_NT
+#ifdef HAS_ACS_AS_PCCHARS
 #    define ACS_LTEE 0xC3
 #    define acs()   ;
 #    define noacs() ;
@@ -121,7 +121,7 @@ void init_pair (int, char *, char *);
 
 #define SLsmg_draw_double_box(r,c,dr,dc) SLsmg_draw_box ((r), (c), (dr), (dc))
 
-#ifdef OS2_NT
+#ifdef HAS_ACS_AS_PCCHARS
 #   define one_vline() addch(ACS_VLINE)
 #   define one_hline() addch(ACS_HLINE)
     /* This is fast, but unusefull if ! pc_system - doesn't use

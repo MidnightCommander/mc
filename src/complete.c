@@ -31,7 +31,7 @@
 
 /* unistd.h defines _POSIX_VERSION on POSIX.1 systems. */
 #if defined(HAVE_DIRENT_H) || defined(_POSIX_VERSION)
-# ifdef __os2__
+# ifdef NEEDS_LOCAL_DIRENT_H
 #   include "dirent.h"
 # else
 #   include <dirent.h>
@@ -55,7 +55,7 @@
 #endif /* not (HAVE_DIRENT_H or _POSIX_VERSION) */
 #include <sys/types.h>
 #include <sys/stat.h>
-#ifndef OS2_NT
+#ifndef HAS_NO_GRP_PWD_H
 #   include <pwd.h>
 #endif
 

@@ -34,6 +34,19 @@
 
 #define OS2_NT
 
+#define NEEDS_IO_H
+#define NEEDS_DRIVE_H
+#define NEEDS_FCNTL_H
+#define HAS_NO_GRP_PWD_H
+#define HAS_NO_TERMIOS_H
+#define HAS_NO_SYS_PARAM_H
+#define HAS_NO_SYS_IOCTL_H
+
+#define USE_O_TEXT
+#define HAS_ACS_AS_PCCHARS
+#define HAS_DIRECT_COLOR_ACCESS
+#define NEEDS_CR_LF_TRANSLATION
+
 #ifdef MC_NT
 #  ifndef WIN32
 #    define WIN32
@@ -55,6 +68,7 @@
 #  endif
 #  ifndef __os2__
 #    define __os2__
+#    define NEEDS_LOCAL_DIRENT_H
 #  endif
 #endif /* MC_OS2 */
 
@@ -81,7 +95,6 @@
 #define HAVE_STRING_H
 #define HAVE_DIRENT_H
 #define HAVE_LIMITS_H
-#define HAVE_FCNTL_H
 #define HAVE_UTIME_H
 
 #define HAVE_MEMSET

@@ -27,7 +27,7 @@
 #endif
 #include <signal.h>	/* For kill() and SIGQUIT */
 #include <fcntl.h>
-#if (!defined(__IBMC__) && !defined(__IBMCPP__)) && !defined(OS2_NT)
+#if (!defined(__IBMC__) && !defined(__IBMCPP__)) && !defined(HAS_NO_TERMIOS_H)
 #    include <termios.h>
 #endif
 #include <malloc.h>

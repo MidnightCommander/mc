@@ -46,7 +46,7 @@
 #	include <sys/timeb.h>	/* alex: for struct timeb, used in time.h */
 #endif /* SCO_FLAVOR */
 #include <time.h>
-#ifndef OS2_NT
+#ifndef HAS_NO_GRP_PWD_H
 #   include <pwd.h>
 #   include <grp.h>
 #endif

@@ -562,7 +562,7 @@ void edit_get_syntax_color (WEdit * edit, long byte_index, int *fg, int *bg);
 
 /* put OS2/NT/WIN95 defines here */
 
-#    ifdef OS2_NT
+#    ifdef USE_O_TEXT
 #    	 define MY_O_TEXT O_TEXT
 #    else
 #    	 define MY_O_TEXT 0

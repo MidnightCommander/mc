@@ -6,7 +6,7 @@
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>
 #endif
-#ifndef OS2_NT
+#ifndef HAS_NO_SYS_PARAM_H
 #include <sys/param.h>
 #endif
 #include <sys/stat.h>
@@ -19,7 +19,7 @@
 
 /* unistd.h defines _POSIX_VERSION on POSIX.1 systems. */
 #if defined(HAVE_DIRENT_H) || defined(_POSIX_VERSION)
-# ifdef __os2__
+# ifdef NEEDS_LOCAL_DIRENT_H
 #   include "dirent.h"
 # else
 #   include <dirent.h>

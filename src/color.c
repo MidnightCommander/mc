@@ -294,7 +294,7 @@ void init_colors (void)
 	}
 #endif
 
-#if defined HAVE_SLANG && !defined(OS2_NT)
+#if defined HAVE_SLANG && !defined(HAS_DIRECT_COLOR_ACCESS)
 	if (use_colors) { /* Hack to make COLOR_PAIR(DEFAULT_COLOR_INDEX) 
                              be the default fg/bg of the terminal */
 	    char *Norm_Vid = SLtt_tgetstr ("me");
