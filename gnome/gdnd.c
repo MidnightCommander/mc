@@ -317,34 +317,14 @@ drop_on_file (GdkDragContext *context, GtkSelectionData *selection_data,
 	const char *mime_type;
 	char *full_name;
 	int retval;
-	GList *names, *l;
-	int len, i;
-	char **drops;
-
 
 	retval = FALSE; /* assume we cannot drop */
 	full_name = g_concat_dir_and_file (directory, dest_fe->fname);
 
-	/* Convert the data list into an array of strings */
-	
-	names = gnome_uri_list_extract_uris (selection_data->data);
-	len = g_list_length (names);
-	drops = g_new (char *, len + 1);
-	
-	for (l = names, i = 0; i < len; i++, l = l->next) {
-		char *text = l->data;
-		
-		if (strncmp (text, "file:", 5) == 0)
-			text += 5;
-		
-		drops[i] = text;
-	}
-	drops[i] = NULL;
-
 	/* 1. Try to use a metadata-based drop action */
 
 	if (gnome_metadata_get (full_name, "drop-action", &size, &buf) == 0) {
-		exec_extension (full_name, buf, drops, NULL, 0, 0);
+		gmc_execute (full_name, buf, 0);
 		g_free (buf);
 		retval = TRUE;
 		goto out;
@@ -358,7 +338,7 @@ drop_on_file (GdkDragContext *context, GtkSelectionData *selection_data,
 
 		action = gnome_mime_get_value (mime_type, "drop-action");
 		if (action) {
-			exec_extension (full_name, action, drops, NULL, 0, 0);
+			gmc_execute (full_name, action, 0);
 			retval = TRUE;
 			goto out;
 		}
@@ -367,13 +347,35 @@ drop_on_file (GdkDragContext *context, GtkSelectionData *selection_data,
 	/* 3. If executable, try metadata keys for "open" */
 
 	if (is_exe (dest_fe->buf.st_mode) && if_link_is_exe (directory, dest_fe)) {
+		GList *names, *l;
+		int len, i;
+		char **drops;
+
 		/* FIXME: handle the case for Netscape URLs */
+
+		/* Convert the data list into an array of strings */
+
+		names = gnome_uri_list_extract_uris (selection_data->data);
+		len = g_list_length (names);
+		drops = g_new (char *, len + 1);
+
+		for (l = names, i = 0; i < len; i++, l = l->next) {
+			char *text = l->data;
+
+			if (strncmp (text, "file:", 5) == 0)
+				text += 5;
+
+			drops[i] = text;
+		}
+		drops[i] = NULL;
 
 		if (gnome_metadata_get (full_name, "open", &size, &buf) == 0)
 			exec_extension (full_name, buf, drops, NULL, 0, 0);
 		else
 			exec_extension (full_name, "%f %q", drops, NULL, 0, 0);
 
+		g_free (drops);
+		gnome_uri_list_free_strings (names);
 		g_free (buf);
 
 		retval = TRUE;
@@ -381,8 +383,7 @@ drop_on_file (GdkDragContext *context, GtkSelectionData *selection_data,
 	}
 
  out:
-	g_free (drops);
-	gnome_uri_list_free_strings (names);
+
 	g_free (full_name);
 	return retval;
 }
