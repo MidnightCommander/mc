@@ -1,3 +1,7 @@
+1998-04-21  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* glayout.c (create_container): Add wmclass.
+
 1998-04-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_reload): Show all of the widgets on a reload

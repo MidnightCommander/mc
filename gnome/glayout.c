@@ -399,6 +399,7 @@ create_container (Dlg_head *h, char *name)
 
 	container->splitted = 0;
 	app = gnome_app_new ("gmc", name);
+	gtk_window_set_wmclass (GTK_WINDOW (app), "gmc", "gmc");
 	gtk_widget_set_usize (GTK_WIDGET (app), 500, 360);
 	panel = panel_new (name);
 

@@ -367,10 +367,10 @@ regex/(read\.?me$)|(README)
 shell/core
 	Icon=core.xpm
 
-type/PostScript\ text
-	Open=ghostview %f
+type/PostScript
+	Open=gv %f
 	Icon=postscript.xpm
-	View with GhostView=ghostview %f
+	View with GhostView=gv %f
 
 type/GIF\ image
 	Open=ee %f
@@ -385,6 +385,16 @@ type/GIF\ picture
 type/JPEG\ picture
 	Open=ee %f
 	Icon=jpeg.xpm
+	Include=image-options
+
+type/PC\ bitmap
+	Open=ee %f
+	Icon=bitmap.xpm
+	Include=image-options
+
+type/PNG\ image
+	Open=ee %f
+	Icon=gif.xpm
 	Include=image-options
 
 type/JPEG\ image
