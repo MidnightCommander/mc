@@ -1,5 +1,8 @@
 1999-03-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* file.c (panel_operate): Always create the ctx->ui.  Federico,
+	can you see if this change is correct from your point of view?
+
 	* cmd.c (edit_symlink_cmd): Small fix to improve the messages
 	printed. 
 

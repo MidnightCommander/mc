@@ -1890,10 +1890,11 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 
     /* Now, let's do the job */
 
+    file_op_context_create_ui (ctx, operation, 1);
+    
     /* This code is only called by the tree and panel code */
     if (only_one){
 	/* We now have ETA in all cases */
-	file_op_context_create_ui (ctx, operation, 1);
 
 	/* One file: FIXME mc_chdir will take user out of any vfs */
 	if (operation != OP_COPY && get_current_type () == view_tree)
@@ -1993,9 +1994,6 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
     	    }
 	}
 #endif
-	/* We now have ETA in all cases */
-	file_op_context_create_ui (ctx, operation, 1);
-
 	/* Loop for every file, perform the actual copy operation */
 	for (i = 0; i < panel->count; i++) {
 	    if (!panel->dir.list [i].f.marked)
