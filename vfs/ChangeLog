@@ -1,5 +1,10 @@
 2001-03-14  Pavel Roskin  <proski@gnu.org>
 
+	* Make-mc.in: Use Automake conditional USE_SAMBA_FS.
+	Remove any knowledge of SAMBAFILES. Merge object files with
+	libsamba.a if USE_SAMBA_FS is true. Propagate "mostlyclean"
+	to the `samba' directory. Don't ignore errors from ranlib.
+
 	* samba/Makefile.in: Make *clean targets Automake-compatible.
 	Don't ignore errors from `rm'.
 

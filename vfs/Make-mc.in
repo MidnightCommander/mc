@@ -25,39 +25,9 @@ AR = @AR@
 #
 # VFS code
 #
-NETFILES   = tcputil.o fish.o ftpfs.o @smbfs@ mcfs.o utilvfs.o
-
-SAMBAFILES=         \
-    samba/param/loadparm.o  \
-    samba/lib/time.o    \
-    samba/lib/slprintf.o    \
-    samba/lib/util.o    \
-    samba/lib/debug.o   \
-    samba/lib/system.o  \
-    samba/lib/util_str.o    \
-    samba/lib/kanji.o   \
-    samba/lib/charcnv.o     \
-    samba/lib/charset.o     \
-    samba/lib/username.o    \
-    samba/lib/util_file.o   \
-    samba/lib/signal.o  \
-    samba/lib/util_sock.o   \
-    samba/lib/genrand.o     \
-    samba/lib/md4.o     \
-    samba/lib/doscalls.o    \
-    samba/param/params.o    \
-    samba/libsmb/clientgen.o    \
-    samba/libsmb/pwd_cache.o    \
-    samba/libsmb/smbencrypt.o   \
-    samba/libsmb/smbdes.o   \
-    samba/lib/util_unistr.o     \
-    samba/lib/getsmbpass.o  \
-    samba/libsmb/nmblib.o   \
-    samba/libsmb/namequery.o\
-    samba/lib/interface.o   \
-    samba/lib/netmask.o     \
-    samba/libsmb/nterr.o    \
-    samba/libsmb/smberr.o
+@USE_SAMBA_FS_TRUE@SMB_NETFILES = smbfs.o
+@USE_SAMBA_FS_FALSE@SMB_NETFILES =
+NETFILES   = tcputil.o fish.o ftpfs.o mcfs.o utilvfs.o $(SMB_NETFILES)
 
 SAMBA_DIST_TOPLEVEL =		\
 	Makefile.in		\
@@ -222,13 +192,17 @@ $(SRC_LINKS):
 mcserv: mcserv.o tcputil.o mad.o
 	$(CC) $(LDFLAGS) -o mcserv mcserv.o tcputil.o mad.o $(LIBS)
 
-$(SAMBAFILES):
-	cd samba && $(MAKE)
-
-libvfs-mc.a: $(VFSOBJS) @SAMBAFILES@
+@USE_SAMBA_FS_TRUE@libvfs-mc.a: $(VFSOBJS) samba/libsamba.a
+@USE_SAMBA_FS_FALSE@libvfs-mc.a: $(VFSOBJS)
 	rm -f $@
-	$(AR) cr $@ $(VFSOBJS) @SAMBAFILES@
-	-$(RANLIB) $@
+@USE_SAMBA_FS_TRUE@	cp -f samba/libsamba.a libtmp.a
+@USE_SAMBA_FS_TRUE@	$(AR) r libtmp.a $(VFSOBJS)
+@USE_SAMBA_FS_TRUE@	mv libtmp.a $@
+@USE_SAMBA_FS_FALSE@	$(AR) cr $@ $(VFSOBJS)
+	$(RANLIB) $@
+
+samba/libsamba.a:
+	cd samba && $(MAKE) libsamba.a
 
 showlibdep:
 	@echo 'OBJS="$(VFSOBJS)"'
@@ -238,7 +212,9 @@ TAGS: $(VFSSRCS)
 
 mostlyclean:
 	(cd extfs && $(MAKE) mostlyclean)
-	rm -f $(SAMBAFILES)
+	if test -f samba/Makefile; then \
+	  (cd samba && $(MAKE) mostlyclean); \
+	else :;	fi
 	rm -f *.o core a.out
 
 clean: mostlyclean
