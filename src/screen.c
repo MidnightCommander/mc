@@ -1021,14 +1021,6 @@ panel_new (char *panel_name)
     /* Load format strings */
     err = set_panel_formats (panel);
     if (err){
-	if (err & 0x01){
-	    g_free (panel->user_format);
-	    panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
-	}
-	if (err & 0x02){
-	    g_free (panel->user_status_format [panel->list_type]);
-	    panel->user_status_format [panel->list_type] = g_strdup (DEFAULT_USER_FORMAT);
-	}
 	set_panel_formats (panel);
     }
 
@@ -1435,6 +1427,17 @@ set_panel_formats (WPanel *p)
     
     panel_format_modified (p);
     panel_update_cols (&(p->widget), p->frame_size);
+
+    if (retcode)
+      message( 1, _(" Warning " ), _( "User suplied format looks invalid, reverting to default." ) );
+    if (retcode & 0x01){
+      g_free (p->user_format);
+      p->user_format = g_strdup (DEFAULT_USER_FORMAT);
+    }
+    if (retcode & 0x02){
+      g_free (p->user_status_format [p->list_type]);
+      p->user_status_format [p->list_type] = g_strdup (DEFAULT_USER_FORMAT);
+    }
     
     return retcode;
 }

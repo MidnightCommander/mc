@@ -1411,8 +1411,6 @@ save_setup_cmd (void)
 void
 configure_panel_listing (WPanel *p, int view_type, int use_msformat, char *user, char *status)
 {
-    int err;
-    
     p->user_mini_status = use_msformat; 
     p->list_type = view_type;
     
@@ -1423,19 +1421,7 @@ configure_panel_listing (WPanel *p, int view_type, int use_msformat, char *user,
 	g_free (p->user_status_format [view_type]);
 	p->user_status_format [view_type] = status;
     
-	err = set_panel_formats (p);
-	
-	if (err){
-	    if (err & 0x01){
-	    	g_free (p->user_format);
-		p->user_format  = g_strdup (DEFAULT_USER_FORMAT);
-	    }
-		
-	    if (err & 0x02){
-		g_free (p->user_status_format [view_type]);
-		p->user_status_format [view_type]  = g_strdup (DEFAULT_USER_FORMAT);
-	    }
-	}
+	set_panel_formats (p);
     }
     else {
         g_free (user);
