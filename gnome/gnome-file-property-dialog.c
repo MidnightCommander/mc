@@ -478,7 +478,7 @@ generate_actions_box (GnomeFilePropertyDialog *fp_dlg)
 	gtk_table_attach_defaults (GTK_TABLE (table),
 				   fp_dlg->open_entry,
 				   1, 2, 0, 1);
-	fp_dlg->open_cbox = gtk_check_button_new_with_label (_("Use default Open options"));
+	fp_dlg->open_cbox = gtk_check_button_new_with_label (_("Use default Open action"));
 	gtk_signal_connect (GTK_OBJECT (fp_dlg->open_cbox), "toggled", metadata_toggled, fp_dlg);
 	gtk_table_attach_defaults (GTK_TABLE (table), fp_dlg->open_cbox, 0, 2, 1, 2);
 
@@ -501,9 +501,9 @@ generate_actions_box (GnomeFilePropertyDialog *fp_dlg)
 				   fp_dlg->prop1_entry,
 				   1, 2, 3, 4);
 	if (fp_dlg->executable)
-		fp_dlg->prop1_cbox = gtk_check_button_new_with_label (_("Use default Drop action options"));
+		fp_dlg->prop1_cbox = gtk_check_button_new_with_label (_("Use default Drop action"));
 	else
-		fp_dlg->prop1_cbox = gtk_check_button_new_with_label (_("Use default View options"));
+		fp_dlg->prop1_cbox = gtk_check_button_new_with_label (_("Use default View action"));
 	gtk_signal_connect (GTK_OBJECT (fp_dlg->prop1_cbox), "toggled", metadata_toggled, fp_dlg);
 	gtk_table_attach_defaults (GTK_TABLE (table), fp_dlg->prop1_cbox, 0, 2, 4, 5);
 
@@ -522,7 +522,7 @@ generate_actions_box (GnomeFilePropertyDialog *fp_dlg)
 	gtk_table_attach_defaults (GTK_TABLE (table),
 				   fp_dlg->prop2_entry,
 				   1, 2, 6, 7);
-	fp_dlg->prop2_cbox = gtk_check_button_new_with_label (_("Use default Edit options"));
+	fp_dlg->prop2_cbox = gtk_check_button_new_with_label (_("Use default Edit action"));
 	gtk_signal_connect (GTK_OBJECT (fp_dlg->prop2_cbox), "toggled", metadata_toggled, fp_dlg);
 	gtk_table_attach_defaults (GTK_TABLE (table), fp_dlg->prop2_cbox, 0, 2, 7, 8);
 
@@ -610,7 +610,7 @@ create_settings_pane (GnomeFilePropertyDialog *fp_dlg)
 	}
 
         /* We must be a file or a link to a file. */
-	frame = gtk_frame_new (_("Actions"));
+	frame = gtk_frame_new (_("File Actions"));
 	gtk_box_pack_start (GTK_BOX (vbox), frame, TRUE, TRUE, 0);
 	table = generate_actions_box (fp_dlg);
 	gtk_container_add (GTK_CONTAINER (frame), table);
