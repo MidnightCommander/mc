@@ -2365,6 +2365,7 @@ edit_ext_cmd (WEdit *edit)
 	return 1;
 
     e = system (catstrs (exp, " > ", home_dir, TEMP_FILE, 0));
+    g_free (exp);
 
     if (e) {
 	edit_error_dialog (_("External command"),

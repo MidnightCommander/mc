@@ -1,3 +1,7 @@
+2003-06-05  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* editcmd.c (edit_ext_cmd): Fix memory leak.
+
 2003-05-30  Michal Szwaczko  <mikey@scene.pl>
 
 	* editcmd.c: Implement pasting the output of any external
