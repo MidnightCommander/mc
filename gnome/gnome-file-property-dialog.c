@@ -1319,6 +1319,7 @@ apply_metadata_change (GnomeFilePropertyDialog *fpd)
 	 * metadata value is actually a list of comma separated flags.  So
 	 * we need to edit this list when removing the "needsterminal" flag.
 	 */
+	if (fpd->needs_terminal_check)
 	{
 		int toggled = 0 != GTK_TOGGLE_BUTTON (fpd->needs_terminal_check)->active;
 		int size;
