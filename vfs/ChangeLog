@@ -1,3 +1,8 @@
+2003-01-13  Adam Byrtek  <alpha@debian.org>
+
+	* extfs/patchfs.in: context diff format support, regular
+	expressions precompiled, some minor fixes.
+
 2002-12-29  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* extfs/rpm: Use --nosignature only if rpm supports this.
