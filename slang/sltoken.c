@@ -35,7 +35,7 @@
 
 /* There are non-zeros at positions "\t %()*,/:;[]{}" */
 
-static unsigned char special_chars[256] =
+static const unsigned char special_chars[256] =
 {
    /* 0 */	0,0,0,0,0,0,0,0,	0,'\t',0,0,0,0,0,0,
    /* 16 */	0,0,0,0,0,0,0,0,	0,0,0,0,0,0,0,0,
