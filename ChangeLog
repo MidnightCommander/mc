@@ -22,11 +22,11 @@
 
 2004-12-13  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
-        * acinclude.m4: Fix "make distcheck".
+	* acinclude.m4: Fix "make distcheck".
 
 2004-12-12  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
-        * NEWS: Update.
+	* NEWS: Update.
 
 2004-12-10  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
@@ -66,7 +66,7 @@
 
 	* README: Fix typo.
 
-2004-11-04 Mike Gorchak <mike@malva.ua>
+2004-11-04  Mike Gorchak  <mike@malva.ua>
 
 	* mc.qpg.in: Synchronization with the latest file has been added
 	to the distro.
@@ -88,7 +88,7 @@
 
 	* configure.ac: Add check for type socklen_t.
 
-2004-10-27  Juan C. Olivares <juancri@juancri.com>
+2004-10-27  Juan C. Olivares  <juancri@juancri.com>
 
 	* syntax/aspx.syntax: Add syntax file for ASP.NET.
 	* syntax/Syntax: Likewise.
@@ -144,7 +144,7 @@
 	* acinclude.m4 (MC_WITH_MCSLANG): Set screen_type to mcslang.
 	* configure.ac: Define USE_INCLUDED_SLANG if screen_type is mcslang.
 
-2004-10-05  Gergely Sza'sz  <szaszg@hu.inter.net> 
+2004-10-05  Gergely Sza'sz  <szaszg@hu.inter.net>
 
 	* syntax/perl.syntax: Fix highlight the hashes.
 	* syntax/diff.syntax: Highlight comments (lines begin with #),
@@ -175,14 +175,14 @@
 
 	* HACKING: Added explanation for const_cast.
 
-2004-09-17 Dmitry Alexeyev <dmi_a@qnx.org.ru> 
+2004-09-17  Dmitry Alexeyev  <dmi_a@qnx.org.ru>
 
 	* syntax/makefile.syntax: Adds "define" and "ended" keywords
 	* syntax/perl.syntax: Adds "break" keyword
 
 2004-09-10  Jakub Jelinek  <jakub@redhat.com>
 
-        * lib/mc.lib: Add gnome, rxvt and xterm-new terminals.
+	* lib/mc.lib: Add gnome, rxvt and xterm-new terminals.
 
 2004-09-10  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
@@ -229,7 +229,7 @@
 2004-08-17  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* lib/cedit.menu: Security fix patch. Fix insecure temporary file and
-        directory creations. (CAN-2004-0231). 
+	directory creations. (CAN-2004-0231).
 
 	* lib/mc.menu: Likewise.
 	* doc/mc.1.in: Likewise.
@@ -249,7 +249,7 @@
 
 2004-08-02  Pavel Shirshov  <me@pavelsh.pp.ru>
 
-        * autogen.sh: Fix unportable "\n" in sed.
+	* autogen.sh: Fix unportable "\n" in sed.
 
 2004-04-02  Pavel Roskin  <proski@gnu.org>
 

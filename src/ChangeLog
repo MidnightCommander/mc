@@ -114,8 +114,8 @@
 
 2004-12-08  Pavel Shirshov  <me@pavelsh.pp.ru>
 
-        * subshell.c (init_subshell_child): Don't g_strdup() constant string
-        in putenv() calls.
+	* subshell.c (init_subshell_child): Don't g_strdup() constant string
+	in putenv() calls.
 
 2004-12-03  Roland Illig  <roland.illig@gmx.de>
 
@@ -146,8 +146,8 @@
 
 2004-12-02  Leonard den Ottolander  <leonard * den ottolander nl>
 
-        * file.c (copy_dir_dir): Code cleanup (removal of unnecessary goto,
-        redundant comment, indentation).
+	* file.c (copy_dir_dir): Code cleanup (removal of unnecessary goto,
+	redundant comment, indentation).
 
 2004-12-02  Jindrich Novy  <jnovy@redhat.com>
 
@@ -239,7 +239,7 @@
 	dialogs.
 	(add2hotlist_cmd): Likewise.
 
-2004-11-07  Leonard den Ottolander <leonard * den ottolander nl>
+2004-11-07  Leonard den Ottolander  <leonard * den ottolander nl>
 
 	* slint.c (slang_init): Allow upto 512 lines and cols if the
 	SLang library can handle it.
@@ -281,7 +281,7 @@
 
 	* screen.c (panel_callback): Likewise.
 
-	* util.c (path_trunc): Add function. path_trunc() is the same as 
+	* util.c (path_trunc): Add function. path_trunc() is the same as
 	name_trunc(), but it deletes possible password from path for security
 	reasons.
 
@@ -302,15 +302,15 @@
 
 2004-11-02  Pavel Tsekov  <ptsekov@gmx.net>
 
-        * dialog.c (do_select_widget): Walk the whole widgets list looking
-        for a widget accepting the focus.
+	* dialog.c (do_select_widget): Walk the whole widgets list looking
+	for a widget accepting the focus.
 
 2004-11-01  Roland Illig  <roland.illig@gmx.de>
 
 	* utilunix.c (mc_tmpdir): Use putenv(3) instead of setenv(3) if
 	the latter is not available. Needed for Solaris.
 
-2004-10-29  Pavel Tsekov <ptsekov@gmx.net>
+2004-10-29  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* complete.c (completion_matches): Fix duplicate completion matches
 	if there are more than two matches available.
@@ -346,7 +346,7 @@
 
 2004-10-22  Pavel Shirshov  <me@pavelsh.pp.ru>
 
-        * main.c (print_color_usage): Update list of keywords for global,
+	* main.c (print_color_usage): Update list of keywords for global,
 	menu and help.
 
 2004-10-21  Roland Illig  <roland.illig@gmx.de>
@@ -357,7 +357,7 @@
 2004-10-20  Jakub Jelinek  <jakub@redhat.com>
 
 	* user.c (user_menu_cmd): Fix error. test_line() doesn't handle
-	consecutive '+'s and '='s correctly. Pass a line starting with 
+	consecutive '+'s and '='s correctly. Pass a line starting with
 	a single '+' or '=' instead.
 
 2004-10-17  Andrew V. Samoilov  <sav@bcs.zp.ua>
@@ -390,11 +390,11 @@
 
 2004-10-06  Alexander Savelyev  <i@fano.com.ua>
 
-        * fileopctx.h (struct FileOpContext): Use off_t for offset.
+	* fileopctx.h (struct FileOpContext): Use off_t for offset.
 
 2004-10-05  Miroslav Rudisin  <miero+gnu@atrey.karlin.mff.cuni.cz>
 
-        * util.c(strip_password): Add support for '@' in username.
+	* util.c(strip_password): Add support for '@' in username.
 
 2004-10-05  Jakub Jelinek  <jakub@redhat.com>
 
@@ -459,7 +459,7 @@
 2004-09-25  Pavel Shirshov  <me@pavelsh.pp.ru>
 
 	* boxes.c (configure_vfs): g_free handles NULL argument too,
-        no need for the comparison.
+	no need for the comparison.
 	* cmd.c (set_panel_filter_to): Likewise.
 	    (do_link): Likewise.
 	    (quick_cd_cmd): Likewise.
@@ -468,29 +468,29 @@
 	* dir.c (alloc_dir_copy): Likewise.
 	* ext.c (flush_extension_file): Likewise.
 	* file.c (copy_file_file): Likewise.
-    	    (panel_operate): Likewise.
+	    (panel_operate): Likewise.
 	* hotlist.c (remove_group): Likewise.
-    	    (remove_from_hotlist): Likewise.
-    	    (done_hotlist): Likewise.
+	    (remove_from_hotlist): Likewise.
+	    (done_hotlist): Likewise.
 	* main.c (main): Likewise.
 	* setup.c (panel_load_setup): Likewise.
 	* tree.c (tree_destroy): Likewise.
-    	    (show_tree): Likewise.
+	    (show_tree): Likewise.
 	* user.c (user_menu_cmd): Likewise.
 	* utilunix.c (i_cache_add): Likewise.
-    	    (putenv): Likewise.
+	    (putenv): Likewise.
 	* view.c (view_done): Likewise.
-    	    (regexp_search): Likewise.
-    	    (normal_search): Likewise.
-    	    (change_viewer): Likewise.
+	    (regexp_search): Likewise.
+	    (normal_search): Likewise.
+	    (change_viewer): Likewise.
 	* widget.c (label_set_text): Likewise.
-    	    (set_label_text): Likewise.
+	    (set_label_text): Likewise.
 
 2004-09-24  Roland Illig  <roland.illig@gmx.de>
 
 	* file.c (progress_update_one): Changed parameter type from int
 	to off_t.
-	
+
 	Fixes http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=124241
 
 2004-09-24  Roland Illig  <roland.illig@gmx.de>
@@ -532,12 +532,12 @@
 2004-09-23  Roland Illig  <roland.illig@gmx.de>
 
 	* main.c (OS_Setup): Fixed segmentation fault.
-	
+
 	From Oskar Liljeblad <oskar osk.mine.nu>
 
 2004-09-21  Leonard den Ottolander  <leonard * den ottolander nl>
 
-	* filegui.c (file_mask_dialog): Expand tilde. Remove redundant 
+	* filegui.c (file_mask_dialog): Expand tilde. Remove redundant
 	ifs before g_free().
 
 2004-09-19  Roland Illig  <roland.illig@gmx.de>
@@ -601,7 +601,7 @@
 	QNX 6.x (QNX Neutrino) when guessing file type before
 	viewing file.
 
-	Based on patch from Dmitry Alexeyev <dmi_a@qnx.org.ru> 
+	Based on patch from Dmitry Alexeyev <dmi_a@qnx.org.ru>
 
 2004-09-17  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
@@ -611,7 +611,7 @@
 
 2004-09-14  Leonard den Ottolander  <leonard * den ottolander nl>
 
-	* utilunix.c (tilde_expand): Fix extra slash in result from 
+	* utilunix.c (tilde_expand): Fix extra slash in result from
 	tilde_expand() for ~<user>/dir.
 
 2004-09-14  Pavel Tsekov  <ptsekov@gmx.net>
@@ -628,11 +628,11 @@
 
 2004-09-10  Jakub Jelinek  <jakub@redhat.com>
 
-	* view.c (get_byte): Fix avoid dying if file is too large 
+	* view.c (get_byte): Fix avoid dying if file is too large
 	to fit into memory.
-	(load_view_file): Fix avoid mmaping just part of a >=4GB file 
+	(load_view_file): Fix avoid mmaping just part of a >=4GB file
 	on 32-bit arches.
-        
+
 	* setup.c (load_keys_from_section): Handle "copy".
 	gnome-terminal started using TERM=gnome instead of TERM=xterm,
 	so does rxvt etc.
@@ -647,12 +647,12 @@
 	* info.c (info_show_info): don't truncate block counts to 32 bits
 	on 64-bit platforms
 
-2004-09-04  Pavel S. Shirshov <me@pavelsh.pp.ru>
+2004-09-04  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
-	* subshell.c (exit_subshell): Prevent unwanted reuse of freed 
+	* subshell.c (exit_subshell): Prevent unwanted reuse of freed
 	pty_buffer.
 	* complete.c (variable_completion_function): strncpy()->memcpy()
-	changes are because we know there is no '\0' among the first 
+	changes are because we know there is no '\0' among the first
 	length bytes.
 	(insert_text): Likewise.
 	(command_completion_function): Avoid memory leaks.
@@ -663,24 +663,24 @@
 	(free_completions): Likewise.
 	* widget.c (gauge_callback): Fix for 64-bit arches (%*s len must
 	be int, %3d takes int.
-	(copy_region): g_free handles NULL argument too, no need for 
+	(copy_region): g_free handles NULL argument too, no need for
 	the comparison.
 	(kill_line): Likewise.
 	* find.c (do_search): Likewise.
 	(init_find_vars): Likewise.
 	(do_find): Likewise.
-	* util.c (get_current_wd): We know there is just one '\0' byte 
+	* util.c (get_current_wd): We know there is just one '\0' byte
 	in p, at p[len - 1].
 
-        Based on patch from Jakub Jelinek  <jakub@redhat.com>
+	Based on patch from Jakub Jelinek  <jakub@redhat.com>
 
-2004-09-03  Pavel S. Shirshov <me@pavelsh.pp.ru>
+2004-09-03  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* menu.c (destroy_menu): Fix warnings.
 	* view.c (view_adjust_size): Likewise.
 	* widget.c (find_buttonbar): Likewise.
 
-        Based on patch from Jakub Jelinek  <jakub@redhat.com>
+	Based on patch from Jakub Jelinek  <jakub@redhat.com>
 
 2004-09-02  Roland Illig  <roland.illig@gmx.de>
 
@@ -694,10 +694,10 @@
 	* Makefile.am (man2hlp): Added source file glibcompat.c for
 	glib-1.2 compatibility.
 
-2004-09-02  Pavel S. Shirshov <me@pavelsh.pp.ru>
+2004-09-02  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* complete.c (completion_matches): Use more suitable function
-        g_strndup() instead of sequence g_malloc(), strncpy(),
+	g_strndup() instead of sequence g_malloc(), strncpy(),
 	name[len] = '\0'
 	* widget.c (copy_region): Likewise.
 	(delete_region): Use memmove() instead of strcpy().
@@ -706,9 +706,9 @@
 
 	Based on patch from Jakub Jelinek  <jakub@redhat.com>
 
-2004-09-02  Pavel S. Shirshov <me@pavelsh.pp.ru>
+2004-09-02  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
-	* color.c (load_dialog_colors): Make a separate color for 
+	* color.c (load_dialog_colors): Make a separate color for
 	hotkeys in red dialogs.
 	* color.h: Likewise.
 	* view.c (view_ok_to_quit): Add hotkey to dialog.
@@ -716,7 +716,7 @@
 2004-09-01  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* user.c (check_format_var): Use more suitable function
-        g_strndup() instead of sequence g_malloc(), strncpy(),
+	g_strndup() instead of sequence g_malloc(), strncpy(),
 	name[len] = '\0'
 	* man2hlp.c (handle_link): Use g_strlcpy() instead of sequence
 	strncpy(), name[len] = '\0'
@@ -754,7 +754,7 @@
 
 2004-08-21  Pavel Shirshov  <me@pavelsh.pp.ru>
 
-	* utilunix.c (tilde_expand): Use more suitable function 
+	* utilunix.c (tilde_expand): Use more suitable function
 	g_strndup, instead sequence g_malloc, strncpy, name[len] = '\0'
 
 2004-08-19  Roland Illig  <roland.illig@gmx.de>
@@ -805,7 +805,7 @@
 
 	* dialog.c (create_dlg): Made the parameters help_ctx and title
 	const. No functional changes.
-	
+
 	* execute.c (execute_with_vfs_arg): Applied necessary changes to
 	the new mc_ungetlocalcopy.
 
@@ -814,7 +814,7 @@
 	* file.c: Needs the implementation details of the vfs, so include
 	"../vfs/vfs-impl.h". Adjusted some data types to size_t and const
 	char *. No functional changes.
-	
+
 	* filegui.c: Now using NULL_QuickWidget as initializer.
 	No functional changes.
 
@@ -910,13 +910,13 @@
 
 2004-08-18  Pavel Shirshov  <me@pavelsh.pp.ru>
 
-	* background.c (do_background): Use O_RDWR when opening 
-	the file '/dev/null' for replacement standard streams. 
+	* background.c (do_background): Use O_RDWR when opening
+	the file '/dev/null' for replacement standard streams.
 
 2004-08-17  Pavel Shirshov  <me@pavelsh.pp.ru>
 
 	* utilunix.c (mc_tmpdir): Check return value of getpwuid()
-	for NULL. 
+	for NULL.
 
 2004-04-18  Pavel Roskin  <proski@gnu.org>
 

@@ -39,7 +39,7 @@
 	* editcmd.c (edit_replace_cmd): Separated input and output arguments.
 	* editcmd.c (edit_replace_dialog): Code cleanup.
 
-2004-12-02  Pavel S. Shirshov <me@pavelsh.pp.ru>
+2004-12-02  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* editcmd.c (edit_replace_prompt): Fix warning with 'unused' label_len.
 
@@ -85,7 +85,7 @@
 
 2004-10-11  Leonard den Ottolander  <leonard * den ottolander nl>
 
-	* editcmd.c (regexp_error): Small text fix. 
+	* editcmd.c (regexp_error): Small text fix.
 	  (edit_search_cmd): Likewise.
 
 2004-09-26  Roland Illig  <roland.illig@gmx.de>
@@ -108,9 +108,9 @@
 	* editcmd.c (snprintf_p): Likewise. (edit_replace_prompt):
 	Simplified the code.
 
-2004-09-25  Pavel S. Shirshov <me@pavelsh.pp.ru>
+2004-09-25  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
-	* edit.c (edit_clean): g_free handles NULL argument too, 
+	* edit.c (edit_clean): g_free handles NULL argument too,
 	no need for the comparison.
 	    (edit_move_backward_lots): Likewise.
 	* editcmd.c (edit_set_filename): Likewise.
@@ -157,16 +157,16 @@
 	Based on patch from Jakub Jelinek  <jakub@redhat.com>
 
 
-2004-09-02  Pavel S. Shirshov <me@pavelsh.pp.ru>
+2004-09-02  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* editcmd.c (edit_save_as_cmd): Add hotkey to dialog.
 	(edit_save_confirm_cmd): Likewise. (edit_new_cmd): Likewise.
 	(edit_load_cmd): Likewise. (edit_block_move_cmd): Likewise.
 	(edit_block_delete): Likewise. (edit_ok_to_exit): Likewise.
 
-2004-09-01  Pavel S. Shirshov <me@pavelsh.pp.ru>
+2004-09-01  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
-	* syntax.c (this_try_alloc_color_pair): Use g_strlcpy instead 
+	* syntax.c (this_try_alloc_color_pair): Use g_strlcpy instead
 	sequence strncpy(), name[len] = '\0'
 	(edit_read_syntax_rules): Likewise.
 
@@ -177,9 +177,9 @@
 
 2004-08-26  Leonard den Ottolander  <leonard * den ottolander nl>
 
-        * edit/editcmd.c: Fix buffer overflows in edit replace code.
+	* edit/editcmd.c: Fix buffer overflows in edit replace code.
 
-        Based on patch from Jakub Jelinek  <jakub@redhat.com>
+	Based on patch from Jakub Jelinek  <jakub@redhat.com>
 
 2004-08-23  Jakub Jelinek  <jakub@redhat.com>
 
@@ -188,7 +188,7 @@
 2004-08-23  David Sterba  <dave@jikos.cz>
 
 	* syntax.c: (edit_read_syntax_rules): Dynamically allocate
-	more space for contexts and for words in context. 
+	more space for contexts and for words in context.
 
 2004-08-16  Roland Illig  <roland.illig@gmx.de>
 
@@ -206,14 +206,14 @@
 	NULL_QuickWidget (that is, added missing initializers).
 	(edit_completion_dialog): Made dlg_h and dlg_w unsigned to
 	avoid implicit sign conversion. No functional changes.
-	
+
 	* editlock.c (lock_build_name, edit_lock_file): Casted pid to
 	int to avoid wrong type argument for printf. No other functional
 	changes.
 
 	* editoptions.c: Added missing initializers for QuickDialogs
 	and QuickWidgets. No functional changes.
-	
+
 	* syntax.c (xx_strchr): Removed explicit loop unrolling. It's
 	the job of the compiler.
 
