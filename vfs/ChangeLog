@@ -1,5 +1,8 @@
 2002-08-19  Pavel Roskin  <proski@gnu.org>
 
+	* fish.c (pipeopen): Use _exit(), not vfs_die() to terminate the
+	child if execvp() fails.
+
 	* sfs.c: Don't use flag EXECUTE_SETUID because it's being
 	removed as insecure and EXECUTE_WAIT because it has no effect.
 	* extfs.c: Likewise.

@@ -182,7 +182,7 @@ pipeopen(vfs_s_super *super, char *path, char *argv[])
 	open ("/dev/null", O_WRONLY);
 	close(fileset2[0]); close(fileset2[1]);
 	execvp(path, argv);
-	vfs_die("Exec failed.");
+	_exit(3);
     }
 }
 
