@@ -178,9 +178,11 @@ static void hotlist_refresh (Dlg_head *dlg)
 {
     dialog_repaint (dlg, COLOR_NORMAL, COLOR_HOT_NORMAL);
     attrset (COLOR_NORMAL);
-    draw_box (dlg, UY, UX, UY+(LINES-14), COLS-2*UX-6);
+    draw_box (dlg, 2, 5, 
+		dlg->lines - (hotlist_state.moving ? 6 : 10),
+		dlg->cols - (UX*2));
     if (!hotlist_state.moving)
-	draw_box (dlg, UY+(LINES-12), UX, 3, COLS-2*UX-6);
+	draw_box (dlg, dlg->lines-8, 5, 3, dlg->cols - (UX*2));
 }
 #endif
 
@@ -203,9 +205,9 @@ static INLINE void update_path_name ()
 #ifndef HAVE_X
 	    p = copy_strings (" ", current_group->label, " ", (char *)0);
 	    if (!hotlist_state.moving)
-		label_set_text (pname_group, name_trunc (p, COLS-2*UX-8));
+		label_set_text (pname_group, name_trunc (p, dlg->cols - (UX*2+4)));
 	    else
-		label_set_text (movelist_group, name_trunc (p, COLS-2*UX-8));
+		label_set_text (movelist_group, name_trunc (p, dlg->cols - (UX*2+4)));
 	    free (p);
 #endif
 	} else {
@@ -215,7 +217,7 @@ static INLINE void update_path_name ()
 	text = "";
     }
     if (!hotlist_state.moving)
-	label_set_text (pname, name_trunc (text, COLS-2*UX-10));
+	label_set_text (pname, name_trunc (text, dlg->cols - (UX*2+4)));
     dlg_redraw (dlg);
 }
 
@@ -517,16 +519,99 @@ static void add_name_to_list (char *path)
     listbox_add_item (l_hotlist, 0, 0, path, 0);
 }
 
+/*
+ * Expands all button names (once) and recalculates button positions.
+ * returns number of columns in the dialog box, which is 10 chars longer
+ * then buttonbar.
+ *
+ * If common width of the window (i.e. in xterm) is less than returned
+ * width - sorry :)  (anyway this did not handled in previous version too)
+ */
+static int
+init_i18n_stuff(int list_type, int cols)
+{
+	register int i;
+	static char* cancel_but = "&Cancel";
+
+#ifdef ENABLE_NLS
+	static int hotlist_i18n_flag = 0;
+
+	if (!hotlist_i18n_flag)
+	{
+		i = sizeof (hotlist_but) / sizeof (hotlist_but [0]);
+		while (i--)
+			hotlist_but [i].text = _(hotlist_but [i].text);
+
+		cancel_but = _(cancel_but);
+		hotlist_i18n_flag = 1;
+	}
+#endif /* ENABLE_NLS */
+
+	/* Dynamic resizing of buttonbars */
+	{
+		int len[2], count[2]; /* at most two lines of buttons */
+		int cur_x[2], row;
+
+		i = sizeof (hotlist_but) / sizeof (hotlist_but [0]);
+		len[0] = len[1] = count[0] = count[1] = 0;
+
+		/* Count len of buttonbars, assuming 2 extra space between buttons */
+		while (i--)
+		{
+			if (! (hotlist_but[i].type & list_type))
+				continue;
+
+			row = hotlist_but [i].y;
+			++count [row];
+			len [row] += strlen (hotlist_but [i].text) + 5;
+			if (hotlist_but [i].flags == DEFPUSH_BUTTON)
+				len [row] += 2;
+		}
+		len[0] -= 2;
+		len[1] -= 2;
+
+		cols = max(cols, max(len[0], len[1]));
+
+		/* arrange buttons */
+
+		cur_x[0] = cur_x[1] = 0;
+		i = sizeof (hotlist_but) / sizeof (hotlist_but [0]);
+		while (i--)
+		{
+			if (! (hotlist_but[i].type & list_type))
+				continue;
+
+			row = hotlist_but [i].y;
+
+			if (hotlist_but [i].x != 0) 
+			{
+				/* not first int the row */
+				if (!strcmp (hotlist_but [i].text, cancel_but))
+					hotlist_but [i].x = 
+						cols - strlen (hotlist_but [i].text) - 13;
+				else
+					hotlist_but [i].x = cur_x [row];
+			}
+
+			cur_x [row] += strlen (hotlist_but [i].text) + 2
+				+ (hotlist_but [i].flags == DEFPUSH_BUTTON ? 5 : 3);
+		}
+	}
+	
+	return cols;
+}
+
 static void init_hotlist (int list_type)
 {
     int i;
+	int hotlist_cols = init_i18n_stuff (list_type, COLS - 6);
 
     do_refresh ();
 
     hotlist_state.expanded = GetPrivateProfileInt ("HotlistConfig",
 			    "expanded_view_of_groups", 0, profile_name);
 
-    hotlist_dlg = create_dlg (0, 0, LINES-2, COLS-6, dialog_colors,
+    hotlist_dlg = create_dlg (0, 0, LINES-2, hotlist_cols, dialog_colors,
 			      hotlist_callback, 
 			      list_type == LIST_VFSLIST ? "[vfshot]" : "[Hotlist]",
 			      list_type == LIST_VFSLIST ? "vfshot" : "hotlist",
@@ -534,7 +619,7 @@ static void init_hotlist (int list_type)
     x_set_dialog_title (hotlist_dlg,
         list_type == LIST_VFSLIST ? _("Active VFS directories") : _("Directory hotlist"));
 
-#define XTRACT(i) BY+hotlist_but[i].y, BX+hotlist_but[i].x, hotlist_but[i].ret_cmd, hotlist_but[i].flags, _(hotlist_but[i].text), hotlist_button_callback, 0, hotlist_but[i].tkname
+#define XTRACT(i) BY+hotlist_but[i].y, BX+hotlist_but[i].x, hotlist_but[i].ret_cmd, hotlist_but[i].flags, hotlist_but[i].text, hotlist_button_callback, 0, hotlist_but[i].tkname
 
     for (i = 0; i < BUTTONS; i++){
 	if (hotlist_but[i].type & list_type)
@@ -576,10 +661,11 @@ static void init_movelist (int list_type, struct hotlist *item)
 {
     int i;
     char *hdr = copy_strings (_("Moving "), item->label, 0);
+	int movelist_cols = init_i18n_stuff (list_type, COLS - 6);
 
     do_refresh ();
 
-    movelist_dlg = create_dlg (0, 0, LINES-6, COLS-6, dialog_colors,
+    movelist_dlg = create_dlg (0, 0, LINES-6, movelist_cols, dialog_colors,
 			      hotlist_callback, "[Hotlist]",
 			      "movelist",
 			      DLG_CENTER|DLG_GRID);
@@ -604,7 +690,9 @@ static void init_movelist (int list_type, struct hotlist *item)
     add_widget (movelist_dlg, movelist_group);
 #endif
     /* get new listbox */
-    l_movelist = listbox_new (UY + 1, UX + 1, COLS-2*UX-8, LINES-14, listbox_cback, l_call, "listbox");
+    l_movelist = listbox_new (UY + 1, UX + 1, 
+		movelist_dlg->cols - 2*UX - 2, movelist_dlg->lines - 8,
+		listbox_cback, l_call, "listbox");
 
     fill_listbox ();
 
@@ -689,6 +777,32 @@ add2hotlist (char *label, char *directory, enum HotListType type, int pos)
 
 }
 
+/*
+ * Support routine for add_new_entry_input()/add_new_group_input()
+ * Change positions of buttons (first three widgets).
+ *
+ * This is just a quick hack. Accurate procedure must take care of
+ * internationalized label lengths and total buttonbar length...assume
+ * 64 is longer anyway.
+ */
+static void add_widgets_i18n(QuickWidget* qw, int len)
+{
+	int i, l[3], space, cur_x;
+
+	for (i = 0; i < 3; i++)
+	{
+		qw [i].text = _(qw [i].text);
+		l[i] = strlen (qw [i].text) + 3;
+	}
+	space = (len - 4 - l[0] - l[1] - l[2]) / 4;
+
+	for (cur_x = 2 + space, i = 3; i--; cur_x += l[i] + space)
+	{
+		qw [i].relative_x = cur_x;
+		qw [i].x_divisions = len;
+	}
+}
+
 static int add_new_entry_input (char *header, char *text1, char *text2, char *help, char **r1, char **r2)
 {
     QuickDialog Quick_input;
@@ -710,9 +824,21 @@ static int add_new_entry_input (char *header, char *text1, char *text2, char *he
     int lines1, lines2;
     char *my_str1, *my_str2;
     
+#ifdef ENABLE_NLS
+	static int i18n_flag = 0;
+#endif /* ENABLE_NLS */
+
     len = max (strlen (header), msglen (text1, &lines1));
     len = max (len, msglen (text2, &lines2)) + 4;
     len = max (len, 64);
+
+#ifdef ENABLE_NLS
+	if (!i18n_flag)
+	{
+		add_widgets_i18n(quick_widgets, len);
+		i18n_flag = 1;
+	}
+#endif /* ENABLE_NLS */
 
     Quick_input.xlen  = len;
     Quick_input.xpos  = -1;
@@ -788,9 +914,21 @@ static int add_new_group_input (char *header, char *label, char **result)
     int i;
     int lines;
     char *my_str;
+
+#ifdef ENABLE_NLS
+	static int i18n_flag = 0;
+#endif /* ENABLE_NLS */
     
     len = max (strlen (header), msglen (label, &lines)) + 4;
     len = max (len, 64);
+
+#ifdef ENABLE_NLS
+	if (!i18n_flag)
+	{
+		add_widgets_i18n(quick_widgets, len);
+		i18n_flag = 1;
+	}
+#endif /* ENABLE_NLS */
 
     Quick_input.xlen  = len;
     Quick_input.xpos  = -1;
@@ -838,9 +976,11 @@ void add_new_group_cmd (void)
 void add2hotlist_cmd (void)
 {
     char *prompt, *label;
+	char* cp = _("Label for \"%s\":");
+	int l = strlen(cp);
 
-    prompt = xmalloc (strlen (cpanel->cwd) + 20, "add2hotlist_cmd");
-    sprintf (prompt, _("Label for \"%s\":"), name_trunc (cpanel->cwd, COLS-2*UX-23));
+    prompt = xmalloc (strlen (cpanel->cwd) + l, "add2hotlist_cmd");
+    sprintf (prompt, cp, name_trunc (cpanel->cwd, COLS-2*UX-(l+8)));
     label = input_dialog (_(" Add to hotlist "), prompt, cpanel->cwd);
     free (prompt);
     if (!label || !*label)

@@ -82,10 +82,10 @@ static int display_callback (struct Dlg_head *h, int id, int Msg)
     case DLG_DRAW:
 	attrset (COLOR_NORMAL);
 	dlg_erase (h);
-	draw_box (h, 1, 2, DISPLAY_Y-2, DISPLAY_X-4);
+	draw_box (h, 1, 2, h->lines - 2, h->cols - 4);
 
 	attrset (COLOR_HOT_NORMAL);
-	dlg_move (h, 1, (DISPLAY_X - strlen(display_title))/2);
+	dlg_move (h, 1, (h->cols - strlen(display_title))/2);
 	addstr (display_title);
 	attrset (COLOR_NORMAL);
 	break;

@@ -227,12 +227,17 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
     if (count > 0){
 	va_start (ap, count);
 	for (i = 0; i < count; i++)
-	    win_len += strlen (va_arg (ap, char *)) + 6;
+	{
+		char* cp = va_arg (ap, char *);
+	    win_len += strlen (cp) + 6;
+		if (strchr (cp, '&') != NULL)
+			win_len--;
+	}
 	va_end (ap);
     }
 
     /* count coordinates */
-    cols = 6 + max (win_len+1, max (strlen (header), msglen (text, &lines)));
+    cols = 6 + max (win_len, max (strlen (header), msglen (text, &lines)));
     lines += 4 + (count > 0 ? 2 : 0);
     xpos = COLS/2 - cols/2;
     ypos = LINES/3 - (lines-3)/2;
@@ -258,6 +263,8 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	for (i = 0; i < count; i++){
 	    cur_name = va_arg (ap, char *);
 	    xpos = strlen (cur_name)+6;
+		if (strchr(cur_name, '&') != NULL)
+			xpos--;
 #ifndef HAVE_XVIEW
 	    add_widget (query_dlg, button_new
 			(lines-3, cols, B_USER+i, NORMAL_BUTTON, cur_name,

@@ -99,18 +99,20 @@ static struct panelize{
     struct panelize *next;
 } *panelize = NULL;
 
+static char* panelize_title = N_(" External panelize ");
+
 #ifndef HAVE_X
 static void panelize_refresh (void)
 {
     attrset (COLOR_NORMAL);
     dlg_erase (panelize_dlg);
     
-    draw_box (panelize_dlg, 1, 2, 20, 70);
-    draw_box (panelize_dlg, UY, UX, 12, 63);
+    draw_box (panelize_dlg, 1, 2, panelize_dlg->lines-2, panelize_dlg->cols-4);
+    draw_box (panelize_dlg, UY, UX, panelize_dlg->lines-10, panelize_dlg->cols-10);
     
     attrset (COLOR_HOT_NORMAL);
-    dlg_move (panelize_dlg, 1, (72 - 19) / 2);
-    addstr (_(" External panelize "));
+    dlg_move (panelize_dlg, 1, (panelize_dlg->cols - strlen(panelize_title)) / 2);
+    addstr (panelize_title);
 }
 #endif
 
@@ -151,14 +153,42 @@ static int l_call (void *data)
 
 static void init_panelize (void)
 {
-    int i;
+    int i, panelize_cols = COLS - 6;
     struct panelize *current = panelize;
+
+#ifdef ENABLE_NLS
+	static int i18n_flag = 0;
+	static int maxlen = 0;
+	
+	if (!i18n_flag)
+	{
+		i = sizeof(panelize_but) / sizeof(panelize_but[0]);
+		while (i--)
+		{
+			panelize_but [i].text = _(panelize_but [i].text);
+			maxlen += strlen (panelize_but [i].text) + 5;
+		}
+		maxlen += 10;
+		panelize_title = _(panelize_title);
+
+		i18n_flag = 1;
+	}
+	panelize_cols = max(panelize_cols, maxlen);
+		
+	panelize_but [2].x = panelize_but [3].x 
+		+ strlen (panelize_but [3].text) + 7;
+	panelize_but [1].x = panelize_but [2].x 
+		+ strlen (panelize_but [2].text) + 5;
+	panelize_but [0].x = panelize_cols 
+		- strlen (panelize_but[0].text) - 8 - BX;
+
+#endif /* ENABLE_NLS */
     
     last_listitem = 0;
     
     do_refresh ();
 
-    panelize_dlg = create_dlg (0, 0, 22, 74, dialog_colors,
+    panelize_dlg = create_dlg (0, 0, 22, panelize_cols, dialog_colors,
 			      panelize_callback, "[External panelize]", "panelize",
 			      DLG_CENTER|DLG_GRID);
     x_set_dialog_title (panelize_dlg, _("External panelize"));
@@ -169,13 +199,13 @@ static void init_panelize (void)
 	add_widgetl (panelize_dlg, button_new (XTRACT (i)), (i == BUTTONS - 1) ?
 	    XV_WLAY_CENTERROW : XV_WLAY_RIGHTOF);
 
-    pname = input_new (UY+14, UX, INPUT_COLOR, 63, "", "in");
+    pname = input_new (UY+14, UX, INPUT_COLOR, panelize_dlg->cols-10, "", "in");
     add_widgetl (panelize_dlg, pname, XV_WLAY_RIGHTOF);
 
     add_widgetl (panelize_dlg, label_new (UY+13, UX, _("Command"), "label-command"), XV_WLAY_NEXTROW);
 
     /* get new listbox */
-    l_panelize = listbox_new (UY + 1, UX + 1, 61, 10, 0, l_call, "li");
+    l_panelize = listbox_new (UY + 1, UX + 1, panelize_dlg->cols-12, 10, 0, l_call, "li");
 
     while (current){
 	listbox_add_item (l_panelize, 0, 0, current->label, current);
@@ -226,7 +256,8 @@ void add2panelize_cmd (void)
     char *label;
 
     if (pname->buffer && (*pname->buffer)) {
-	label = input_dialog (_(" Add to external panelize "), "Unnamed find", 
+	label = input_dialog (_(" Add to external panelize "), 
+		_(" Enter command label: "), 
 			      "");
 	if (!label)
 	    return;
@@ -265,7 +296,7 @@ void external_panelize (void)
 
     if (!vfs_current_is_local ()){
 	message (1, _(" Oops... "),
-		 _(" I can't run external panalize while logged on a non local directory "));
+		 _(" I can't run external panelize while logged on a non local directory "));
 	return;
     }
 

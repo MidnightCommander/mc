@@ -49,7 +49,6 @@ static int extfserrno = 0;
 static struct stat hstat;		/* Stat struct corresponding */
 static char *current_file_name, *current_link_name;
 static char *extfs_current_dir;
-static struct extfs_entry *extfs_find_entry (struct extfs_entry *dir, char *name, int make_dirs, int make_file);
 
 enum {
     EFS_ARG_EMPTY,

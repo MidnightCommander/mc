@@ -1,3 +1,12 @@
+Wed Apr 15 10:48:41 1998 Alex Tkachenko <alex@bcs.zp.ua>
+
+	* src/hotlist.c: changes to hotlist boxes i18n.
+
+	* src/panelize.c: changes to panelize boxes i18n.
+
+	* src/wtools.c (query_dialog): Take care about possible '&' in
+	button names while calculating window sizes and button positions.
+
 1998-04-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* screen.c (string_file_nlinks): The buffer was too small and we
