@@ -7,10 +7,12 @@
         * vfs-impl.h (struct vfs_class.readlink): Make "size" size_t.
         Adjust all callers.
 	* local.c (local_readlink): Make "size" size_t.
-	* direntry.c (vfs_s_readlink): Revert last changes. Make "size" 
+	* direntry.c (vfs_s_readlink): Revert last changes. Make "size"
 	size_t.
 	* sfs.c (sfs_readlink): Reformat function.
-	* smbfs.c (smbfs_readlink): Reformat function.	
+	* smbfs.c (smbfs_readlink): Reformat function.
+	* mcfs.c (mcfs_readlink): Revert last change: readlink does not
+        append a NUL character to buf. Fix compilation.
 
 2004-09-02  Roland Illig  <roland.illig@gmx.de>
 

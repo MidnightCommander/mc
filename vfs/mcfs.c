@@ -963,11 +963,12 @@ mcfs_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
 }
 
 static int
-mcfs_readlink (struct vfs_class *me, const char *path, char *buf, int size)
+mcfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
 {
     char *remote_file, *stat_str;
     int status, error;
     mcfs_connection *mc;
+    size_t len;
 
     if (!(remote_file = mcfs_get_path (&mc, path)))
 	return -1;
@@ -984,8 +985,11 @@ mcfs_readlink (struct vfs_class *me, const char *path, char *buf, int size)
     if (!rpc_get (mc->sock, RPC_STRING, &stat_str, RPC_END))
 	return mcfs_set_error (-1, EIO);
 
-    strncpy (buf, stat_str, size - 1);
-    buf[size - 1] = '\0';
+    len = strlen (stat_str);
+    if (len < size)
+       size = len;
+    /* readlink() does not append a NUL character to buf */
+    memcpy (buf, stat_str, size);
     g_free (stat_str);
     return size;
 }
