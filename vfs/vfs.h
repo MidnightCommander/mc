@@ -99,16 +99,16 @@ union vfs_dirent {
 int vfs_register_class (struct vfs_class *vfs);
 
 void init_cpiofs (void);
+void init_extfs (void);
 void init_fish (void);
 void init_ftpfs (void);
-void init_tarfs (void);
 void init_localfs (void);
-
-extern struct vfs_class vfs_smbfs_ops;
-extern struct vfs_class vfs_mcfs_ops;
-extern struct vfs_class vfs_extfs_ops;
-extern struct vfs_class vfs_sfs_ops;
-extern struct vfs_class vfs_undelfs_ops;
+void init_localfs (void);
+void init_mcfs (void);
+void init_sfs (void);
+void init_smbfs (void);
+void init_tarfs (void);
+void init_undelfs (void);
 
 void vfs_init (void);
 void vfs_shut (void);
@@ -270,12 +270,6 @@ void vfs_print_stats (const char *fs_name, const char *action,
  * O_LINEAR allows filesystems not to create temporary file in some
  * cases (ftp transfer).				-- pavel@ucw.cz
  */
-
-#ifdef HAVE_MMAP
-#define MMAPNULL , NULL, NULL
-#else
-#define MMAPNULL
-#endif
 
 /* And now some defines for our errors. */
 

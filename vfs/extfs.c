@@ -83,6 +83,7 @@ static int extfs_which (struct vfs_class *me, char *path);
 static void remove_entry (struct entry *e);
 static void extfs_free (vfsid id);
 
+static struct vfs_class vfs_extfs_ops;
 static struct archive *first_archive = NULL;
 static int my_errno = 0;
 
@@ -1377,60 +1378,39 @@ static int extfs_setctl (struct vfs_class *me, char *path, int ctlop, char *arg)
     return 0;
 }
 
-struct vfs_class vfs_extfs_ops = {
-    NULL,	/* This is place of next pointer */
-    "extfs",
-    0,		/* flags */
-    NULL,	/* prefix */
-    NULL,	/* data */
-    0,		/* errno */
-    extfs_init,
-    extfs_done,
-    extfs_fill_names,
-    extfs_which,
-
-    extfs_open,
-    extfs_close,
-    extfs_read,
-    extfs_write,
-
-    s_opendir,
-    s_readdir,
-    s_closedir,
-    s_telldir,
-    s_seekdir,
-
-    s_stat,
-    s_lstat,
-    s_fstat,
-
-    extfs_chmod,		/* chmod ... strange, returns success? */
-    NULL,
-    NULL,
-
-    s_readlink,
-    
-    NULL,		/* symlink */
-    NULL,
-    extfs_unlink,
-
-    NULL,
-    extfs_chdir,
-    s_errno,
-    extfs_lseek,
-    NULL,
-    
-    extfs_getid,
-    extfs_nothingisopen,
-    extfs_free,
-    
-    extfs_getlocalcopy,
-    extfs_ungetlocalcopy,
-    
-    extfs_mkdir,	/* mkdir */
-    extfs_rmdir,
-    NULL,
-    extfs_setctl
-
-MMAPNULL
-};
+void
+init_extfs (void)
+{
+    vfs_extfs_ops.name = "extfs";
+    vfs_extfs_ops.init = extfs_init;
+    vfs_extfs_ops.done = extfs_done;
+    vfs_extfs_ops.fill_names = extfs_fill_names;
+    vfs_extfs_ops.which = extfs_which;
+    vfs_extfs_ops.open = extfs_open;
+    vfs_extfs_ops.close = extfs_close;
+    vfs_extfs_ops.read = extfs_read;
+    vfs_extfs_ops.write = extfs_write;
+    vfs_extfs_ops.opendir = s_opendir;
+    vfs_extfs_ops.readdir = s_readdir;
+    vfs_extfs_ops.closedir = s_closedir;
+    vfs_extfs_ops.telldir = s_telldir;
+    vfs_extfs_ops.seekdir = s_seekdir;
+    vfs_extfs_ops.stat = s_stat;
+    vfs_extfs_ops.lstat = s_lstat;
+    vfs_extfs_ops.fstat = s_fstat;
+    vfs_extfs_ops.chmod = extfs_chmod;
+    vfs_extfs_ops.readlink = s_readlink;
+    vfs_extfs_ops.unlink = extfs_unlink;
+    vfs_extfs_ops.chdir = extfs_chdir;
+    vfs_extfs_ops.ferrno = s_errno;
+    vfs_extfs_ops.lseek = extfs_lseek;
+    vfs_extfs_ops.getid = extfs_getid;
+    vfs_extfs_ops.nothingisopen = extfs_nothingisopen;
+    vfs_extfs_ops.free = extfs_free;
+    vfs_extfs_ops.getlocalcopy = extfs_getlocalcopy;
+    vfs_extfs_ops.ungetlocalcopy = extfs_ungetlocalcopy;
+    vfs_extfs_ops.mkdir = extfs_mkdir;
+    vfs_extfs_ops.rmdir = extfs_rmdir;
+    vfs_extfs_ops.setctl = extfs_setctl;
+    vfs_register_class (&vfs_extfs_ops);
+}

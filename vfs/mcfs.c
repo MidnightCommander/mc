@@ -77,9 +77,9 @@ typedef struct {
     mcfs_connection *conn;
 } mcfs_handle;
 
-static int my_errno;
-
 static char *mcfs_gethome (mcfs_connection * mc);
+static int my_errno;
+static struct vfs_class vfs_mcfs_ops;
 
 /* Extract the hostname and username from the path */
 /* path is in the form: hostname:user/remote-dir */
@@ -1151,61 +1151,42 @@ mcfs_setctl (struct vfs_class *me, char *path, int ctlop, char *arg)
     return 0;
 }
 
-struct vfs_class vfs_mcfs_ops = {
-    NULL,			/* This is place of next pointer */
-    "mcfs",
-    0,				/* flags */
-    "mc:",			/* prefix */
-    NULL,			/* data */
-    0,				/* errno */
-    NULL,
-    NULL,
-    mcfs_fill_names,
-    NULL,
-
-    mcfs_open,
-    mcfs_close,
-    mcfs_read,
-    mcfs_write,
-
-    mcfs_opendir,
-    mcfs_readdir,
-    mcfs_closedir,
-    NULL,
-    NULL,
-
-    mcfs_stat,
-    mcfs_lstat,
-    mcfs_fstat,
-
-    mcfs_chmod,
-    mcfs_chown,
-    mcfs_utime,
-
-    mcfs_readlink,
-    mcfs_symlink,
-    mcfs_link,
-    mcfs_unlink,
-
-    mcfs_rename,
-    mcfs_chdir,
-    mcfs_errno,
-    mcfs_lseek,
-    mcfs_mknod,
-
-    mcfs_getid,
-    mcfs_nothingisopen,
-    mcfs_free,
-
-    NULL,
-    NULL,
-
-    mcfs_mkdir,
-    mcfs_rmdir,
-    NULL,
-    mcfs_setctl MMAPNULL
-};
-
+void
+init_mcfs (void)
+{
+    vfs_mcfs_ops.name = "mcfs";
+    vfs_mcfs_ops.prefix = "mc:";
+    vfs_mcfs_ops.fill_names = mcfs_fill_names;
+    vfs_mcfs_ops.open = mcfs_open;
+    vfs_mcfs_ops.close = mcfs_close;
+    vfs_mcfs_ops.read = mcfs_read;
+    vfs_mcfs_ops.write = mcfs_write;
+    vfs_mcfs_ops.opendir = mcfs_opendir;
+    vfs_mcfs_ops.readdir = mcfs_readdir;
+    vfs_mcfs_ops.closedir = mcfs_closedir;
+    vfs_mcfs_ops.stat = mcfs_stat;
+    vfs_mcfs_ops.lstat = mcfs_lstat;
+    vfs_mcfs_ops.fstat = mcfs_fstat;
+    vfs_mcfs_ops.chmod = mcfs_chmod;
+    vfs_mcfs_ops.chown = mcfs_chown;
+    vfs_mcfs_ops.utime = mcfs_utime;
+    vfs_mcfs_ops.readlink = mcfs_readlink;
+    vfs_mcfs_ops.symlink = mcfs_symlink;
+    vfs_mcfs_ops.link = mcfs_link;
+    vfs_mcfs_ops.unlink = mcfs_unlink;
+    vfs_mcfs_ops.rename = mcfs_rename;
+    vfs_mcfs_ops.chdir = mcfs_chdir;
+    vfs_mcfs_ops.ferrno = mcfs_errno;
+    vfs_mcfs_ops.lseek = mcfs_lseek;
+    vfs_mcfs_ops.mknod = mcfs_mknod;
+    vfs_mcfs_ops.getid = mcfs_getid;
+    vfs_mcfs_ops.nothingisopen = mcfs_nothingisopen;
+    vfs_mcfs_ops.free = mcfs_free;
+    vfs_mcfs_ops.mkdir = mcfs_mkdir;
+    vfs_mcfs_ops.rmdir = mcfs_rmdir;
+    vfs_mcfs_ops.setctl = mcfs_setctl;
+    vfs_register_class (&vfs_mcfs_ops);
+}
 
 static void
 mcfs_free_bucket (int bucket)

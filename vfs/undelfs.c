@@ -76,6 +76,7 @@ static char *block_buf;
 static char *undelfserr = N_(" undelfs: error ");
 static int readdir_ptr;
 static int undelfs_usage;
+static struct vfs_class vfs_undelfs_ops;
 
 /* To generate the . and .. entries use -2 */
 #define READDIR_PTR_INIT 0
@@ -666,59 +667,25 @@ undelfs_init(struct vfs_class *me) {
 #define undelfs_init	NULL
 #endif
 
-struct vfs_class vfs_undelfs_ops = {
-    NULL,	/* This is place of next pointer */
-    "undelfs",
-    0,	/* flags */
-    "undel:",	/* prefix */
-    NULL,	/* data */
-    0,		/* errno */
-    undelfs_init,
-    NULL,
-    NULL,	/* fill_names */
-    NULL,
-
-    undelfs_open,
-    undelfs_close,
-    undelfs_read,
-    NULL,
-    
-    undelfs_opendir,
-    undelfs_readdir,
-    undelfs_closedir,
-    NULL,
-    NULL,
-
-    undelfs_stat,
-    undelfs_lstat,
-    undelfs_fstat,
-
-    NULL,
-    NULL,
-    NULL,
-
-    NULL,	/* readlink */
-    NULL,
-    NULL,
-    NULL,
-
-    NULL,
-    undelfs_chdir,
-    NULL,
-    undelfs_lseek, 
-    NULL,
-    
-    undelfs_getid,
-    undelfs_nothingisopen,
-    undelfs_free,
-    
-    NULL,	/* get_local_copy */
-    NULL,
-
-    NULL,
-    NULL,
-    NULL,
-    NULL
-
-MMAPNULL
-};
+void
+init_undelfs (void)
+{
+    vfs_undelfs_ops.name = "undelfs";
+    vfs_undelfs_ops.prefix = "undel:";
+    vfs_undelfs_ops.init = undelfs_init;
+    vfs_undelfs_ops.open = undelfs_open;
+    vfs_undelfs_ops.close = undelfs_close;
+    vfs_undelfs_ops.read = undelfs_read;
+    vfs_undelfs_ops.opendir = undelfs_opendir;
+    vfs_undelfs_ops.readdir = undelfs_readdir;
+    vfs_undelfs_ops.closedir = undelfs_closedir;
+    vfs_undelfs_ops.stat = undelfs_stat;
+    vfs_undelfs_ops.lstat = undelfs_lstat;
+    vfs_undelfs_ops.fstat = undelfs_fstat;
+    vfs_undelfs_ops.chdir = undelfs_chdir;
+    vfs_undelfs_ops.lseek = undelfs_lseek;
+    vfs_undelfs_ops.getid = undelfs_getid;
+    vfs_undelfs_ops.nothingisopen = undelfs_nothingisopen;
+    vfs_undelfs_ops.free = undelfs_free;
+    vfs_register_class (&vfs_undelfs_ops);
+}

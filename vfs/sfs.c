@@ -31,6 +31,7 @@ struct cachedfile {
 };
 
 static struct cachedfile *head;
+static struct vfs_class vfs_sfs_ops;
 
 #define MAXFS 32
 static int sfs_no = 0;
@@ -392,63 +393,34 @@ sfs_which (struct vfs_class *me, char *path)
     return -1;
 }
 
-struct vfs_class vfs_sfs_ops = {
-    NULL,	/* This is place of next pointer */
-    "sfs",
-    0,		/* flags */
-    NULL,	/* prefix */
-    NULL,	/* data */
-    0,		/* errno */
-    sfs_init,
-    sfs_done,
-    sfs_fill_names,
-    sfs_which,
-
-    sfs_open,
-    local_close,
-    local_read,
-    NULL,
-    
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-
-    sfs_stat,
-    sfs_lstat,
-    local_fstat,
-
-    sfs_chmod,
-    sfs_chown,
-    sfs_utime,
-
-    sfs_readlink,
-    NULL,
-    NULL,
-    NULL,
-
-    NULL,
-    NULL,
-    local_errno,
-    local_lseek,
-    NULL,
-    
-    sfs_getid,
-    sfs_nothingisopen,
-    sfs_free,
-    
-    sfs_getlocalcopy,
-    sfs_ungetlocalcopy,
-    
-    NULL,
-    NULL,
-    NULL,
-    NULL
-
+void
+init_sfs (void)
+{
+    vfs_sfs_ops.name = "sfs";
+    vfs_sfs_ops.init = sfs_init;
+    vfs_sfs_ops.done = sfs_done;
+    vfs_sfs_ops.fill_names = sfs_fill_names;
+    vfs_sfs_ops.which = sfs_which;
+    vfs_sfs_ops.open = sfs_open;
+    vfs_sfs_ops.close = local_close;
+    vfs_sfs_ops.read = local_read;
+    vfs_sfs_ops.stat = sfs_stat;
+    vfs_sfs_ops.lstat = sfs_lstat;
+    vfs_sfs_ops.fstat = local_fstat;
+    vfs_sfs_ops.chmod = sfs_chmod;
+    vfs_sfs_ops.chown = sfs_chown;
+    vfs_sfs_ops.utime = sfs_utime;
+    vfs_sfs_ops.readlink = sfs_readlink;
+    vfs_sfs_ops.ferrno = local_errno;
+    vfs_sfs_ops.lseek = local_lseek;
+    vfs_sfs_ops.getid = sfs_getid;
+    vfs_sfs_ops.nothingisopen = sfs_nothingisopen;
+    vfs_sfs_ops.free = sfs_free;
+    vfs_sfs_ops.getlocalcopy = sfs_getlocalcopy;
+    vfs_sfs_ops.ungetlocalcopy = sfs_ungetlocalcopy;
 #ifdef HAVE_MMAP
-    ,local_mmap,
-    local_munmap
+    vfs_sfs_ops.mmap = local_mmap;
+    vfs_sfs_ops.munmap = local_munmap;
 #endif
-};
-
+    vfs_register_class (&vfs_sfs_ops);
+}

@@ -19,7 +19,7 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-/* Namespace: exports vfs_smbfs_ops, smbfs_set_debug(), smbfs_set_debugf() */
+/* Namespace: exports init_smbfs, smbfs_set_debug(), smbfs_set_debugf() */
 #include <config.h>
 #include <stdio.h>
 #include <sys/types.h>
@@ -66,6 +66,7 @@ static gboolean got_user = FALSE;
 static gboolean got_pass = FALSE;
 static pstring password;
 static pstring username;
+static struct vfs_class vfs_smbfs_ops;
 
 static struct _smbfs_connection {
 	struct cli_state *cli;
@@ -1887,59 +1888,41 @@ smbfs_fstat (void *data, struct stat *buf)
 	return 0;
 }
 
-struct vfs_class vfs_smbfs_ops = {
-    NULL,	/* This is place of next pointer */
-    "smbfs",
-    VFSF_NOLINKS, /* flags */
-    "smb:",	/* prefix */
-    NULL,	/* data */
-    0,		/* errno */
-    smbfs_init,
-    NULL,
-    smbfs_fill_names,
-    NULL,
-
-    smbfs_open,
-    smbfs_close,
-    smbfs_read,
-    smbfs_write,
-    
-    smbfs_opendir,
-    smbfs_readdir,
-    smbfs_closedir,
-    NULL,
-    NULL,
-
-    smbfs_stat,
-    smbfs_lstat,
-    smbfs_fstat,
-
-    smbfs_chmod,
-    smbfs_chown,
-    smbfs_utime,
-
-    smbfs_readlink,
-    smbfs_symlink,
-    smbfs_link,
-    smbfs_unlink,
-
-    smbfs_rename,
-    smbfs_chdir,
-    smbfs_errno,
-    smbfs_lseek,
-    smbfs_mknod,
-    
-    smbfs_getid,
-    smbfs_nothingisopen,
-    smbfs_free,
-    
-    NULL,
-    NULL,
-
-    smbfs_mkdir,
-    smbfs_rmdir,
-    NULL,
-    smbfs_setctl
-
-MMAPNULL
-};
+void
+init_smbfs (void)
+{
+    vfs_smbfs_ops.name = "smbfs";
+    vfs_smbfs_ops.prefix = "smb:";
+    vfs_smbfs_ops.flags = VFSF_NOLINKS;
+    vfs_smbfs_ops.init = smbfs_init;
+    vfs_smbfs_ops.fill_names = smbfs_fill_names;
+    vfs_smbfs_ops.open = smbfs_open;
+    vfs_smbfs_ops.close = smbfs_close;
+    vfs_smbfs_ops.read = smbfs_read;
+    vfs_smbfs_ops.write = smbfs_write;
+    vfs_smbfs_ops.opendir = smbfs_opendir;
+    vfs_smbfs_ops.readdir = smbfs_readdir;
+    vfs_smbfs_ops.closedir = smbfs_closedir;
+    vfs_smbfs_ops.stat = smbfs_stat;
+    vfs_smbfs_ops.lstat = smbfs_lstat;
+    vfs_smbfs_ops.fstat = smbfs_fstat;
+    vfs_smbfs_ops.chmod = smbfs_chmod;
+    vfs_smbfs_ops.chown = smbfs_chown;
+    vfs_smbfs_ops.utime = smbfs_utime;
+    vfs_smbfs_ops.readlink = smbfs_readlink;
+    vfs_smbfs_ops.symlink = smbfs_symlink;
+    vfs_smbfs_ops.link = smbfs_link;
+    vfs_smbfs_ops.unlink = smbfs_unlink;
+    vfs_smbfs_ops.rename = smbfs_rename;
+    vfs_smbfs_ops.chdir = smbfs_chdir;
+    vfs_smbfs_ops.ferrno = smbfs_errno;
+    vfs_smbfs_ops.lseek = smbfs_lseek;
+    vfs_smbfs_ops.mknod = smbfs_mknod;
+    vfs_smbfs_ops.getid = smbfs_getid;
+    vfs_smbfs_ops.nothingisopen = smbfs_nothingisopen;
+    vfs_smbfs_ops.free = smbfs_free;
+    vfs_smbfs_ops.mkdir = smbfs_mkdir;
+    vfs_smbfs_ops.rmdir = smbfs_rmdir;
+    vfs_smbfs_ops.setctl = smbfs_setctl;
+    vfs_register_class (&vfs_smbfs_ops);
+}

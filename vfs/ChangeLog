@@ -1,5 +1,14 @@
 2003-10-12  Pavel Roskin  <proski@gnu.org>
 
+	* extfs.c: Switch to self-registration.
+	* mcfs.c: Likewise.
+	* sfs.c: Likewise.
+	* smbfs.c: Likewise.
+	* undelfs.c: Likewise.
+	* vfs.s (_vfs_add_noncurrent_stamps): Temporary disable code
+	that uses vfs_extfs_ops.
+	(vfs_file_is_smb): Remove.
+
 	* local.c: Switch to self-registration.
 	* vfs.c: Cache localfs class for the use in vfs_get_class().
 

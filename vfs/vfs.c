@@ -826,11 +826,13 @@ _vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid, struct vfs
     }
     
     if ((*oldvfs->nothingisopen) (oldvfsid)){
+#if 0 /* need setctl for this */
 	if (oldvfs == &vfs_extfs_ops && ((extfs_archive *) oldvfsid)->name == 0){
 	    /* Free the resources immediatly when we leave a mtools fs
 	       ('cd a:') instead of waiting for the vfs-timeout */
 	    (oldvfs->free) (oldvfsid);
 	} else
+#endif
 	    vfs_addstamp (oldvfs, oldvfsid, parent);
 	for (stamp = parent; stamp != NULL; stamp = stamp->parent){
 	    if ((stamp->v == nvfs && stamp->id == nvfsid) ||
@@ -839,10 +841,12 @@ _vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid, struct vfs
 		stamp->id == (vfsid) - 1 ||
 		!(*stamp->v->nothingisopen) (stamp->id))
 		break;
+#if 0
 	    if (stamp->v == &vfs_extfs_ops && ((extfs_archive *) stamp->id)->name == 0){
 		(stamp->v->free) (stamp->id);
 		vfs_rmstamp (stamp->v, stamp->id, 0);
 	    } else
+#endif
 		vfs_addstamp (stamp->v, stamp->id, stamp->parent);
 	}
     }
@@ -957,21 +961,6 @@ vfs_file_class_flags (const char *filename)
     vfs = vfs_get_class (fname);
     g_free (fname);
     return vfs->flags;
-}
-
-int
-vfs_file_is_smb (const char *filename)
-{
-#ifdef WITH_SMBFS
-#ifdef USE_NETCODE
-    struct vfs_class *vfs;
-    char *fname = vfs_canon (filename);
-    vfs = vfs_get_class (fname);
-    g_free (fname);
-    return vfs == &vfs_smbfs_ops;
-#endif /* USE_NETCODE */
-#endif /* WITH_SMBFS */
-    return 0;
 }
 
 MC_NAMEOP (mkdir, (char *path, mode_t mode), (vfs, path, mode))
@@ -1226,26 +1215,26 @@ vfs_init (void)
     /* fallback value for vfs_get_class() */
     localfs_class = vfs_list;
 
+    init_extfs ();
+    init_sfs ();
+    init_tarfs ();
+    init_cpiofs ();
+
+#ifdef USE_EXT2FSLIB
+    init_undelfs ();
+#endif /* USE_EXT2FSLIB */
+
 #ifdef USE_NETCODE
     tcp_init();
     init_ftpfs ();
     init_fish ();
 #ifdef WITH_SMBFS
-    vfs_register_class (&vfs_smbfs_ops);
+    init_smbfs ();
 #endif /* WITH_SMBFS */
 #ifdef WITH_MCFS
-    vfs_register_class (&vfs_mcfs_ops);
+    init_mcfs ();
 #endif /* WITH_SMBFS */
 #endif /* USE_NETCODE */
-
-    vfs_register_class (&vfs_extfs_ops);
-    vfs_register_class (&vfs_sfs_ops);
-    init_tarfs ();
-    init_cpiofs ();
-
-#ifdef USE_EXT2FSLIB
-    vfs_register_class (&vfs_undelfs_ops);
-#endif /* USE_EXT2FSLIB */
 
     vfs_setup_wd ();
 }
