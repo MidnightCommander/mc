@@ -603,16 +603,6 @@ extern int errno;
 #define MAP_FILE 0
 #endif
 
-#ifdef HAVE_SYSV_IPC
-#ifndef HAVE_UNION_SEMUN
-union semun {
-	int val;
-	struct semid_ds *buf;
-	unsigned short *array;
-};
-#endif
-#endif
-
 #if (!defined(WITH_NISPLUS) && !defined(WITH_LDAP))
 #define USE_SMBPASS_DB 1
 #endif

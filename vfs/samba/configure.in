@@ -244,17 +244,6 @@ if test x"$samba_cv_have_longlong" = x"yes"; then
     AC_DEFINE(HAVE_LONGLONG, 1, [Define if long long is usable])
 fi
 
-AC_CACHE_CHECK([for union semun],samba_cv_HAVE_UNION_SEMUN,[
-AC_TRY_RUN([
-#include <sys/types.h>
-#include <sys/ipc.h>
-#include <sys/sem.h>
-main() { union semun ss; exit(0); }],
-samba_cv_HAVE_UNION_SEMUN=yes,samba_cv_HAVE_UNION_SEMUN=no,samba_cv_HAVE_UNION_SEMUN=cross)])
-if test x"$samba_cv_HAVE_UNION_SEMUN" = x"yes"; then
-    AC_DEFINE(HAVE_UNION_SEMUN, 1, [Defne if union semun is already defined])
-fi
-
 AC_CACHE_CHECK([for sin_len in sock],samba_cv_HAVE_SOCK_SIN_LEN,[
 AC_TRY_COMPILE([#include <sys/types.h>
 #include <sys/socket.h>
