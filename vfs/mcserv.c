@@ -766,6 +766,11 @@ static int ftp_answer (int sock, char *text)
     return 0;
 }
 
+static int send_string (int sock, char *string)
+{
+    return socket_write_block (sock, string, strlen (string));
+}
+
 static int do_ftp_auth (char *username, char *password)
 {
     struct   sockaddr_in local_address;

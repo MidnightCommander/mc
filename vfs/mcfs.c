@@ -40,6 +40,14 @@
 #include <arpa/inet.h>
 #endif
 
+#ifdef HAVE_PMAP_SET
+#include <rpc/rpc.h>
+#include <rpc/pmap_prot.h>
+#ifdef HAVE_RPC_PMAP_CLNT_H
+#include <rpc/pmap_clnt.h>
+#endif
+#endif
+
 #include "utilvfs.h"
 
 #include "vfs.h"
@@ -156,6 +164,35 @@ static int mcfs_login_server (int my_socket, char *user, int port,
 	}
     }
     return my_socket;
+}
+
+static int
+get_remote_port (struct sockaddr_in *sin, int *version)
+{
+#ifdef HAVE_PMAP_GETMAPS
+    int port;
+    struct pmaplist *pl;
+
+    *version = 1;
+    port = mcserver_port;
+    for (pl = pmap_getmaps (sin); pl; pl = pl->pml_next)
+	if (pl->pml_map.pm_prog == RPC_PROGNUM
+	    && pl->pml_map.pm_prot == IPPROTO_TCP
+	    && pl->pml_map.pm_vers >= *version) {
+	    *version = pl->pml_map.pm_vers;
+	    port = pl->pml_map.pm_port;
+	}
+    return port;
+#else
+#ifdef HAVE_PMAP_GETPORT
+    int port;
+    for (*version = RPC_PROGVER; *version >= 1; (*version)--)
+	if (port = pmap_getport (sin, RPC_PROGNUM, *version, IPPROTO_TCP))
+	    return port;
+#endif				/* HAVE_PMAP_GETPORT */
+#endif				/* HAVE_PMAP_GETMAPS */
+    *version = 1;
+    return mcserver_port;
 }
 
 /* This used to be in utilvfs.c, but as it deals with portmapper, it

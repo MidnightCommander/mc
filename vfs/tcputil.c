@@ -89,11 +89,6 @@ int socket_write_block (int sock, char *buffer, int len)
     return 1;
 }
 
-int send_string (int sock, char *string)
-{
-    return socket_write_block (sock, string, strlen (string));
-}
-
 int rpc_send (int sock, ...)
 {
     long int tmp, len, cmd;
@@ -235,17 +230,6 @@ int rpc_get (int sock, ...)
 	}
     }
 }
-
-void rpc_add_get_callback (int sock, void (*cback)(int))
-{
-    sock_callback_t *new;
-
-    new = g_new (sock_callback_t, 1);
-    new->cback = cback;
-    new->sock = sock;
-    new->link = sock_callbacks;
-    sock_callbacks = new;
-}
 #endif	/* WITH_MCFS */
 
 static void sig_pipe (int unused)
@@ -263,34 +247,4 @@ void tcp_init (void)
     sigemptyset (&sa.sa_mask);
     sigaction (SIGPIPE, &sa, NULL);
 }
-
-#ifdef	WITH_MCFS
-int get_remote_port (struct sockaddr_in *sin, int *version)
-{
-#ifdef HAVE_PMAP_GETMAPS
-    int              port;
-    struct pmaplist  *pl;
-    
-    *version = 1;
-    port     = mcserver_port;
-    for (pl = pmap_getmaps (sin); pl; pl = pl->pml_next)
-	if (pl->pml_map.pm_prog == RPC_PROGNUM &&
-	    pl->pml_map.pm_prot == IPPROTO_TCP &&
-	    pl->pml_map.pm_vers >= *version) {
-	    *version = pl->pml_map.pm_vers;
-	    port     = pl->pml_map.pm_port;
-	}
-    return port;
-#else
-#ifdef HAVE_PMAP_GETPORT
-    int              port;
-    for (*version = RPC_PROGVER; *version >= 1; (*version)--)
-	if (port = pmap_getport (sin, RPC_PROGNUM, *version, IPPROTO_TCP))
-	    return port;
-#endif /* HAVE_PMAP_GETPORT */
-#endif /* HAVE_PMAP_GETMAPS */
-    *version = 1;
-    return mcserver_port;
-}
-#endif	/* WITH_MCFS */
 

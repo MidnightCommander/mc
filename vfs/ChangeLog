@@ -1,5 +1,9 @@
 2002-10-02  Pavel Roskin  <proski@gnu.org>
 
+	* tcputil.c (get_remote_port): Move to mcfs.c.
+	(send_string): Move to mcserv.c.
+	(rpc_add_get_callback): Remove, it's unused.
+
 	* container.h: Remove, it's unused.
 
 	* utilvfs.c: Remove tests, since get_host_and_username() is

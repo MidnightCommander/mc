@@ -1,7 +1,5 @@
 /* Operations of the rpc manager */
 
-#include <netinet/in.h>	/* For sockaddr_in needed by get_remote_port */
-
 /* Please note that the RPC manager does not use integers, it only uses */
 /* 4-byte integers for the comunication */
 enum {
@@ -14,11 +12,8 @@ enum {
 
 int rpc_get (int sock, ...);
 int rpc_send (int sock, ...);
-void rpc_add_get_callback (int sock, void (*cback)(int));
 int socket_read_block (int sock, char *dest, int len);
 int socket_write_block (int sock, char *buffer, int len);
-int send_string (int sock, char *string);
 void tcp_init (void);
-int get_remote_port (struct sockaddr_in *sin, int *version);
 
 extern int got_sigpipe;
