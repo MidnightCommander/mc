@@ -718,6 +718,9 @@ if test "x$enable_charset" = xyes; then
   fi
 fi
 
+if test "$GLIBC21" != yes; then
+    AC_DEFINE(USE_INCLUDED_REGEX, 1, [Use the regex included here])
+fi
 
 dnl
 dnl This code should be moved to the ac_WITH_SLANG
