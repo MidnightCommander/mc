@@ -1864,24 +1864,28 @@ do_search (WPanel *panel, int c_code)
 
     l = strlen (panel->search_buffer);
     if (l && (c_code == 8 || c_code == 0177 || c_code == KEY_BACKSPACE))
-	panel->search_buffer [--l] = 0;
+	panel->search_buffer[--l] = 0;
     else {
-	if (c_code && l < sizeof (panel->search_buffer)){
-	    panel->search_buffer [l] = c_code;
-	    panel->search_buffer [l+1] = 0;
+	if (c_code && l < sizeof (panel->search_buffer)) {
+	    panel->search_buffer[l] = c_code;
+	    panel->search_buffer[l + 1] = 0;
 	    l++;
 	}
     }
 
     found = 0;
-    for (i = panel->selected; !wrapped || i != panel->selected; i++){
-	if (i >= panel->count){
+    for (i = panel->selected; !wrapped || i != panel->selected; i++) {
+	if (i >= panel->count) {
 	    i = 0;
 	    if (wrapped)
 		break;
 	    wrapped = 1;
 	}
-	if (STRNCOMP (panel->dir.list [i].fname, panel->search_buffer, l) == 0){
+	if (panel->
+	    case_sensitive
+	    ? (strncmp (panel->dir.list[i].fname, panel->search_buffer, l)
+	       == 0) : (g_strncasecmp (panel->dir.list[i].fname,
+				       panel->search_buffer, l) == 0)) {
 	    unselect_item (panel);
 	    panel->selected = i;
 	    select_item (panel);
@@ -1890,7 +1894,7 @@ do_search (WPanel *panel, int c_code)
 	}
     }
     if (!found)
-	panel->search_buffer [--l] = 0;
+	panel->search_buffer[--l] = 0;
 
     paint_panel (panel);
 }

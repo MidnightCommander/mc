@@ -1,3 +1,9 @@
+2003-01-20  Pavel Roskin  <proski@gnu.org>
+
+	* screen.c (do_search): Use case-insensitive search if and only
+	if the sort order is case-insensitive.
+	Suggested by Bulia Byak <bulia@dr.com>
+
 2003-01-19  Pavel Roskin  <proski@gnu.org>
 
 	* dir.c (do_load_dir): Remove dotdot_found - handle_dirent()
