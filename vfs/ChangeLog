@@ -1,3 +1,12 @@
+2003-04-03  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* smbfs.c (open_readwrite): New function to replace open_read()
+	and open_write().  Use cli_close() if cli_qfileinfo() or
+	cli_getattrE() fail.
+
+	(smbfs_open): Use open_readwrite(). Free remote_handle if
+	open_readwrite() fails.
+
 2003-03-24  Adam Byrtek  <alpha@debian.org>
 
 	* extfs/patchfs.in: Treat '\ No newline at end of file' line
@@ -1162,7 +1171,7 @@
 
 	* smbfs.c (smbfs_add_dots): New function. Insert a "." and ".."
 	entries into the linked list.
-	(smbfs_loaddir): Call smbfs_add_dots for shares or servers.
+	(smbfs_loaddir): Call smbfs_add_dots() for shares or servers.
 	(smbfs_get_free_bucket): Eliminate time.
 	(fake_share_stat): Make path const.
 
@@ -1194,7 +1203,7 @@
 	By David Kaelbling <drk@sgi.com>.
 	http://bugzilla.gnome.org/show_bug.cgi?id=60933
 
-	* cpio.c (cpio_read_bin_head): Release name if mc_read fails.
+	* cpio.c (cpio_read_bin_head): Release name if mc_read() fails.
 	(cpio_read_crc_head): Likewise.
 
 2001-10-25  Andrew V. Samoilov  <kai@cmail.ru>
@@ -1204,13 +1213,13 @@
 	By David Kaelbling <drk@sgi.com>.
 	http://bugzilla.gnome.org/show_bug.cgi?id=60933
 
-	* (cpio_read_oldc_head): Release name if mc_read fails.
+	* (cpio_read_oldc_head): Release name if mc_read() fails.
 
 2001-10-24  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* tcputil.c (rpc_get): Add missing va_end()s.
 	Fix memory leaking.
-	* smbfs.h: Declare smbfs_set_debug.
+	* smbfs.h: Declare smbfs_set_debug().
 
 2001-10-20  Pavel Roskin  <proski@gnu.org>
 
@@ -1324,14 +1333,14 @@
 
 2001-08-06  Andrew V. Samoilov  <kai@cmail.ru>
 
-	* smbfs.c: Eliminate smbfs_get_free_bucket_init.  convert_path
-	gives malloced filename, so this memory must be released after use.
+	* smbfs.c: Eliminate smbfs_get_free_bucket_init().  convert_path()
+	gives malloc()ed filename, so this memory must be released after use.
 
 	(reconnect): Fix segmentation fault.
-	(smbfs_loadddir): Don't g_strdup path.
-	(smbfs_get_free_bucket): Eliminate smbfs_get_free_bucket_init and
+	(smbfs_loadddir): Don't g_strdup() path.
+	(smbfs_get_free_bucket): Eliminate smbfs_get_free_bucket_init() and
 	smbfs_connections initialisation.
-	(smbfs_open_link): Likewise. Release host after get_master_browser.
+	(smbfs_open_link): Likewise. Release host after get_master_browser().
 	(get_stat_info): Fix unneeded g_strdup/g_free calls.
 	(smbfs_mkdir): Release path after use.
 	(smbfs_mkdir): Likewise.
@@ -1355,8 +1364,8 @@
 
 	* samba/libsmb/clientgen.c (cli_chkpath): Fix possible buffer overflow.
 	* smbfs.c (new_dir_entry): New function with repeated code from
-	browsing_helper, loaddir_helper and server_browsing_helper.
-	(browsing_helper): Use new_dir_entry.
+	browsing_helper(), loaddir_helper() and server_browsing_helper().
+	(browsing_helper): Use new_dir_entry().
 	(loaddir_helper): Likewise.
 	(server_browsing_helper): Likewise.
 
@@ -1519,8 +1528,9 @@
 
 2001-06-01  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-	* ftpfs.h: Declare use_netrc, ftpfs_retry_seconds, ftpfs_first_cd_then_ls,
-	ftpfs_use_passive_connections and ftpfs_use_unix_list_options.
+	* ftpfs.h: Declare use_netrc, ftpfs_retry_seconds,
+	ftpfs_first_cd_then_ls, ftpfs_use_passive_connections and
+	ftpfs_use_unix_list_options.
 
 	* vfs.c [VFS_STANDALONE]: Undefine WITH_SMBFS, they are mutually
 	exclusive now.
@@ -1572,8 +1582,8 @@
 	(loaddir_helper): Don't ignore hidden files, style fixes.
 	(browsing_helper): typestr declared as char *, fstrcpy replaced by =.
 
-	(do_connect): Call cli_shutdown () and authinfo_remove () if
-	cli_session_setup () fails. It is not good idea to remember
+	(do_connect): Call cli_shutdown() and authinfo_remove() if
+	cli_session_setup() fails. It is not good idea to remember
 	wrong username/password.
 
 	(smbfs_free_dir): Nested between #ifdef SMBFS_FREE_DIR ... #endif.
@@ -1646,12 +1656,12 @@
 
 2001-03-15  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-	* samba/libsmb/smbdes.c: undefine uchar before redefine it
+	* samba/libsmb/smbdes.c: Undefine uchar before redefine it
 
-	* smbfs.c (smbfs_close): honour changed semantics for return value
+	* smbfs.c (smbfs_close): Honour changed semantics for return value
 	(on error -1 is expected).
 
-	* (fs): it is at least strange use char * for counter. Changed to int
+	* (fs): It is at least strange use char * for counter. Changed to int
 
 2001-03-14  Pavel Roskin  <proski@gnu.org>
 

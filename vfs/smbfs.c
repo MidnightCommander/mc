@@ -1,14 +1,15 @@
 /* Virtual File System: Midnight Commander file system.
-   
+
    Copyright (C) 1995, 1996, 1997 The Free Software Foundation
 
-   Written by Wayne Roberts <wroberts1@home.com>
+   Written by Wayne Roberts <wroberts1@home.com>, 1997
+	      Andrew V. Samoilov <sav@bcs.zp.ua> 2002, 2003
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License
    as published by the Free Software Foundation; either version 2 of
    the License, or (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -1737,53 +1738,44 @@ smbfs_setctl (vfs *me, char *path, int ctlop, char *arg)
     return 0;
 }
 
-static smbfs_handle *
-open_write (smbfs_handle *remote_handle, char *rname, int flags, int mode)
-{
-	if (flags & O_TRUNC)	/* if it exists truncate to zero */
-		DEBUG(3, ("open_write: O_TRUNC\n"));
-
-	remote_handle->fnum = cli_open(remote_handle->cli, rname, flags, DENY_NONE);
-
-	if (remote_handle->fnum == -1) {
-        message_3s (1, MSG_ERROR, _(" %s opening remote file %s "), 
-			cli_errstr(remote_handle->cli), CNV_LANG(rname));
-		DEBUG(1,("smbfs_open(rname:%s) error:%s\n",
-			rname, cli_errstr(remote_handle->cli)));
-		my_errno = cli_error(remote_handle->cli, NULL, &err, NULL);
-    	return NULL;
-	}
-	
-    return remote_handle;
-}
 
 static smbfs_handle *
-open_read (smbfs_handle *remote_handle, char *rname, int flags, int mode)
+open_readwrite (smbfs_handle *remote_handle, char *rname, int flags, int mode)
 {
-	size_t		size;
+    size_t size;
 
-	remote_handle->fnum =
-		cli_open(remote_handle->cli, rname, O_RDONLY, DENY_NONE);
+    if (flags & O_TRUNC)	/* if it exists truncate to zero */
+	DEBUG (3, ("smbfs_open: O_TRUNC\n"));
 
-	if (remote_handle->fnum == -1) {
-        message_3s (1, MSG_ERROR, _(" %s opening remote file %s "), 
-			cli_errstr(remote_handle->cli), CNV_LANG(rname));
-		DEBUG(1,("smbfs_open(rname:%s) error:%s\n",
-			rname, cli_errstr(remote_handle->cli)));
-		my_errno = cli_error(remote_handle->cli, NULL, &err, NULL);
-    	return NULL;
-	}
- 
-    if (!cli_qfileinfo(remote_handle->cli, remote_handle->fnum,
-               &remote_handle->attr, &size, NULL, NULL, NULL, NULL, NULL) &&
-        !cli_getattrE(remote_handle->cli, remote_handle->fnum,
-              &remote_handle->attr, &size, NULL, NULL, NULL)) {
-	    message_2s (1, MSG_ERROR, " getattrib: %s ",
-			cli_errstr(remote_handle->cli));
-		DEBUG(1,("smbfs_open(rname:%s) getattrib:%s\n",
-			rname, cli_errstr(remote_handle->cli)));
-		my_errno = cli_error(remote_handle->cli, NULL, &err, NULL);
-        return NULL;
+    remote_handle->fnum =
+	cli_open (remote_handle->cli, rname, flags & O_CREAT ? flags : O_RDONLY,
+		  DENY_NONE);
+
+    if (remote_handle->fnum == -1) {
+	message_3s (1, MSG_ERROR, _(" %s opening remote file %s "),
+		    cli_errstr (remote_handle->cli), CNV_LANG (rname));
+	DEBUG (1, ("smbfs_open(rname:%s) error:%s\n",
+		   rname, cli_errstr (remote_handle->cli)));
+	my_errno = cli_error (remote_handle->cli, NULL, &err, NULL);
+	return NULL;
+    }
+
+    if (flags & O_CREAT)
+	return remote_handle;
+
+    if (!cli_qfileinfo (remote_handle->cli, remote_handle->fnum,
+			&remote_handle->attr, &size, NULL, NULL, NULL, NULL,
+			NULL)
+	&& !cli_getattrE (remote_handle->cli, remote_handle->fnum,
+			  &remote_handle->attr, &size, NULL, NULL, NULL)) {
+	message_2s (1, MSG_ERROR, " getattrib: %s ",
+		    cli_errstr (remote_handle->cli));
+	DEBUG (1,
+	       ("smbfs_open(rname:%s) getattrib:%s\n", rname,
+		cli_errstr (remote_handle->cli)));
+	my_errno = cli_error (remote_handle->cli, NULL, &err, NULL);
+	cli_close (remote_handle->cli, remote_handle->fnum);
+	return NULL;
     }
 
     return remote_handle;
@@ -1797,25 +1789,24 @@ smbfs_open (vfs *me, char *file, int flags, int mode)
     smbfs_connection	*sc;
     smbfs_handle	*remote_handle;
 
-    DEBUG(3, ("smbfs_open(file:%s, flags:%d, mode:%d)\n", file, flags, mode));
+    DEBUG(3, ("smbfs_open(file:%s, flags:%d, mode:%o)\n", file, flags, mode));
 
     if (!(remote_file = smbfs_get_path (&sc, file)))
 	return 0;
 
     p = remote_file;
-    convert_path(&remote_file, FALSE);
+    convert_path (&remote_file, FALSE);
     g_free (p);
 
     remote_handle		= g_new (smbfs_handle, 2);
     remote_handle->cli		= sc->cli;
     remote_handle->nread	= 0;
 
-    if (flags & O_CREAT)
-	ret = open_write(remote_handle, remote_file, flags, mode);
-    else
-	ret = open_read(remote_handle, remote_file, flags, mode);
+    ret = open_readwrite (remote_handle, remote_file, flags, mode);
 
     g_free (remote_file);
+    if (!ret)
+	g_free (remote_handle);
 
     return ret;
 }
