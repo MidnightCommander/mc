@@ -21,7 +21,8 @@ Implement --with-screen option.
 
 Remove side effects from --with-termcap option.
 
-Display carriage return in the editor.
+Use a more traditional representation of non-printable characters in
+editor (i.e. binary 0 would be ^@).
 
 
 Before 4.6.0
