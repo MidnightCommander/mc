@@ -121,6 +121,7 @@ typedef struct {
     void *table;
     void *list;
     void *icons;
+    void *scrollbar;
     void *status;
     void *ministatus;
 
@@ -132,6 +133,11 @@ typedef struct {
     void *back_b;
     void *fwd_b;
     void *up_b;
+
+    /* Used during drag and drop */
+    int maybe_start_drag;
+    int click_x, click_y;
+    
 #endif
 } WPanel;
 
