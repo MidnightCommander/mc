@@ -1157,94 +1157,96 @@ Crea una nuova directory sotto questa directory.
 Cancella questa directory dal file system.
 .PP
 .B C-s, M-s.
-Search the next directory matching the search string. If there is
-no such directory these keys will move one line down.
+Cerca la prossima directory che corrisponde alla stringa di ricerca.
+Se tale directory non esiste, questi tasti faranno scendere di una riga
+(il cursore).
 .PP
 .B C-h, Backspace.
-Delete the last character of the search string.
+Cancella l'ultimo carattere nella stringa di ricerca.
 .PP
-.B Any other character.
-Add the character to the search string and move to the next directory
-which starts with these characters. In the tree view you must first
-activate the search mode by pressing C-s. The search string is shown
-in the mini status line.
+.B Qualsiasi altro carattere.
+Aggiunge un carattere alla stringa di ricerca e sposta alla nuova directory
+che comincia con questi caratteri (il cursore). Nella vista ad albero
+si deve prima attivare la ricerca premendo C-s. La stringa di ricerca è
+visibile nella riga di mini stato.
 .PP
-The following actions are available only in the directory tree. They
-aren't supported in the tree view.
+Le azioni seguenti sono disponibili solo nell'albero directory.
+Non sono supportate nella vista ad albero.
 .PP
-.B F1 (Help).
-Invoke the help viewer and show this section.
+.B F1 (Aiuto).
+Invoca il visualizzatore dell'aiuto e mostra questa sezione.
 .PP
 .B Esc, F10.
-Exit the directory tree. Do not change the directory.
+Esce dalla rappresentazione ad albero. Non cambia directory.
 .PP
-The mouse is supported. A double-click behaves like Enter. See
-also the section on
+Il mouse è supportato. Un doppio click si comporta come premere Invio.
+Vedere anche la sezione
 .\"LINK2"
-mouse support.
+supporto mouse
 .\"Mouse Support"
+ .
 .PP
-.SH "    Find File"
-The Find File feature first asks for the start directory for the
-search and the filename to be searched for. By pressing the Tree
-button you can select the start directory from the
+.\"NODE "    Find File"
+.SH "    Trova File"
+Il comando Trova file domanda prima la directory di inizio per la
+ricerca ed il nome del file da cercare. Premendo il tasto albero
+puoi selezionare la directory di partenza dall'
 .\"LINK2"
-directory tree
+albero directory
 .\"Directory Tree"
-figure. 
+ . 
 .PP
-The contents field accepts regular expressions similar to egrep(1). That
+Il campo contenuo accetta espressioni regolari simili a egrep(1). That
 means you have to escape characters with a special meaning to egrep with "\\", 
 e.g. if you search for "strcmp (" you will have to input "strcmp \\(" 
 (without the double quotes).
 .PP
-You can start the search by pressing the Ok button.
-During the search you can stop from the Stop button and continue from
-the Start button.
+Per far partire la ricerca premere il tasto Ok.
+E' possibile bloccare la ricerca con il tasto Sospende e farla riprendere
+con il tasto Continua.
 .PP
-You can browse the filelist with the up and down arrow keys. The Chdir
-button will change to the directory of the currently selected
-file. The Again button will ask for the parameters for a new
-search. The Quit button quits the search operation. The Panelize
-button will place the found files to the current directory panel so
-that you can do additional operations on them (view, copy, move,
-delete and so on). After panelizing you can press C-r to return to the
-normal file listing.
+E' possibile navigare l'elenco file con i tasti freccia Su e Giu.
+Il tasto Chdir cambierà la directory corrente a quella del file selezionato.
+Il tasto Ripete chiederà nuovamente i parametri per una nuova ricerca.
+Il tasto Uscita esce dal comando Trova. Il tasto Pannellizza
+metterà i file trovati sul pannello di directory corrente cosicchè si
+possa svolgere ulteriori operazioni su di essi (visualizzazione, copia, 
+spostamento, e così via). Dopo la pannellizzazione è possibile premere C-r
+per ripristinare la vista normale dei file.
 .PP
-It is possible to have a list of directories that the Find File
-command should skip during the search (for example, you may want to
-avoid searches on a CDROM or on a NFS directory that is mounted across
-a slow link).
+E' possibile avere una lista di directory che il comando Trova File dovrebbe
+saltare durante la ricerca (per esempio, si può evitare di fare ricerche su
+un CDROM o su una directory NFS montata attraverso un collegamento lento).
 .PP
-Directories to be skipped should be set on the variable
+Le directory che devono essere saltate devono essere impostate nella variabile
 .B find_ignore_dirs 
-in the 
+nella sezione
 .B Misc 
-section of your ~/.mc/ini file.
+del file ~/.mc/ini.
 .PP
-Directory components should be separated with a colon, here is an
-example: 
+Le directory devono essere separate da una virgola, come nell'esempio:
 .PP
 .nf
 [Misc]
 find_ignore_dirs=/cdrom:/nfs/wuarchive:/afs
 .fi
 .PP
-You may consider using the
+Si può prendere in considerazione l'uso del comando
 .\"LINK2"
-External panelize
+Pannellizza comando
 .\"External panelize"
-command for some operations. Find file command is for simple queries
-only, while using External panelize you can do as mysterious searches
-as you would like.  
+per operazioni particolari. Il comando Trova file serve solo per 
+ricerche semplici mentre usando Pannellizza comando si può fare 
+ricerche complesse come si vuole.
 .PP
-.SH "    External panelize"
-The External panelize allows you to execute an external program, and
-make the output of that program the contents of the current panel.
+.\"NODE "    External panelize"
+.SH "    Pannellizza comando"
+Il Pannellizza comando permette di eseguire un programma esterno, e
+mettere il risultato del programma nel pannello corrente.
 .PP
-For example, if you want to manipulate in one of the panels all the
-symbolic links in the current directory, you can use external
-panelization to run the following command:
+Per esempio, se si vuole manipolare in uno dei pannelli tutti i collegamenti
+simbolici nella directory corrente, basta usare Pannellizza comando per
+eseguire il seguente:
 .PP
 .nf
 find . -type l -print
