@@ -1,3 +1,7 @@
+1999-06-01  Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>
+
+	* util.c (is_printable): in GNOME all characters are printable.
+
 1999-05-31  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* main.c (handle_args): Handle --desktop-linksdir without using X

@@ -12,7 +12,7 @@
 
 #define DEFAULT_WIDTH  80
 #define DEFAULT_HEIGHT 25
-#define DEFAULT_FONT   "fixed"
+#define DEFAULT_FONT   "fixed,-*-*-medium-r-normal-*-12-*-*-*-*-*-*-*,*"
 
 
 #define CHARS(cgrid) ((char *) cgrid->chars)
@@ -518,10 +518,10 @@ gmc_char_grid_set_font (GmcCharGrid *cgrid, const char *font_name)
 	if (cgrid->font)
 		gdk_font_unref (cgrid->font);
 
-	cgrid->font = gdk_font_load (font_name);
+	cgrid->font = gdk_fontset_load (font_name);
 
 	if (!cgrid->font)
-		cgrid->font = gdk_font_load (DEFAULT_FONT);
+		cgrid->font = gdk_fontset_load (DEFAULT_FONT);
 
 	cgrid->char_width = gdk_char_width (cgrid->font, ' '); /* assume monospaced font! */
 	cgrid->char_height = cgrid->font->ascent + cgrid->font->descent;

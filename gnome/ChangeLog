@@ -1,3 +1,13 @@
+1999-06-01  Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>
+
+	* gnome/gdesktop-icon.h:
+	* gnome/gmc-chargrid.c: Replace gdk_font_load() with
+	gdk_fontset_load(), and change the default font names.
+
+1999-05-28  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c: Include util.h after x.h;  Undefine __G_LIB_H__.
+
 1999-06-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop-icon.c (desktop_icon_select): Show the

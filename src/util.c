@@ -104,6 +104,10 @@ int is_printable (int c)
     extern int eight_bit_clean;
     extern int full_eight_bits;
 
+#ifdef HAVE_GNOME
+    return 1;
+#endif
+    
     c &= 0xff;
     if (eight_bit_clean){
         if (full_eight_bits){

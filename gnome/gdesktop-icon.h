@@ -16,7 +16,8 @@
 BEGIN_GNOME_DECLS
 
 
-#define DESKTOP_ICON_FONT "-*-helvetica-medium-r-normal--10-*-*-*-p-*-*-*"
+#define DESKTOP_ICON_FONT "-*-helvetica-medium-r-normal--10-*-*-*-p-*-*-*," \
+			"-*-*-medium-r-normal-*-10-*-*-*-*-*-*-*,*"
 
 
 #define TYPE_DESKTOP_ICON            (desktop_icon_get_type ())
