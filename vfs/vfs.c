@@ -978,9 +978,8 @@ vfs_file_is_smb (char *filename)
     g_free (filename);
     return vfs == &vfs_smbfs_ops;
 #endif /* USE_NETCODE */
-#else
-    return 0;
 #endif /* WITH_SMBFS */
+    return 0;
 }
 
 char *vfs_get_current_dir (void)
@@ -1720,8 +1719,11 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
         goto error;
     /* Use resulting time value */
     s->st_atime = s->st_ctime = s->st_mtime;
+#if 0
+    /* These variables must be initialized by vfs_s_new_inode () */
     s->st_dev = 0;
     s->st_ino = 0;
+#endif
 #ifdef HAVE_ST_BLKSIZE
     s->st_blksize = 512;
 #endif

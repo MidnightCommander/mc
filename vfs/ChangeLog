@@ -1,3 +1,11 @@
+2000-03-06  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	Patch by  Andrew V. Samoilov <sav@bcs.zp.ua>
+	
+	* vfs.c (vfs_parse_ls_lga): don't hard code st_ino and st_dev to 0's,
+	  these variables must be assigned in vfs_s_new_inode () or extfs
+	  layer, so ftpfs subdirectories now can be copied.
+
 2000-02-25  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	Patch by  Andrew V. Samoilov <sav@bcs.zp.ua>
