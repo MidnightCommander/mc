@@ -1,3 +1,18 @@
+2000-09-07  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* edit.c (check_file_access) [MIDNIGHT,GTK]: error message localized;
+	some cosmetics changes to avoid annoying warnings
+
+	* editcmd.c (edit_save_file): pclose returns 0 on success, 
+	file fclose()d when fwrite fails
+	
+	(pipe_mail): malloc () + sprintf () replaced by g_strdup_printf ()
+	
+	* syntax.c (syntax_text): Makefile replaced by [Mm]akefile to cover
+	makefile and GNUmakefile
+	(upgrade_syntax_file): infinitive loop fixed when rule file
+	is outdated but it cannot be unlinked/overwritten
+
 2000-08-30  Pavel Roskin  <proski@gnu.org>
 
 	* editwidget.c [!MIDNIGHT]: include xdnd.h

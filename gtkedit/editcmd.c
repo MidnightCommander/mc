@@ -4,6 +4,8 @@
 
    Authors: 1996, 1997 Paul Sheer
 
+   $Id$
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
@@ -18,6 +20,7 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
    02111-1307, USA.
+
 */
 
 /* #define PIPE_BLOCKS_SO_READ_BYTE_BY_BYTE */
@@ -179,12 +182,12 @@ void edit_refresh_cmd (WEdit * edit)
 	edit_get_syntax_color (edit, -1, &fg, &bg);
     }
     touchwin(stdscr);
-#endif
+#endif	/* !HAVE_SLANG */
     mc_refresh();
     doupdate();
 }
 
-#else
+#else /* MIDNIGHT */
 
 void edit_help_cmd (WEdit * edit)
 {
@@ -202,7 +205,7 @@ void CRefreshEditor (WEdit * edit)
     edit_refresh_cmd (edit);
 }
 
-#endif
+#endif /* MIDNIGHT */
 
 #ifndef MIDNIGHT
 #ifndef GTK
@@ -227,8 +230,8 @@ int my_open (const char *pathname, int flags,...)
 
 #define open my_open
 
-#endif
-#endif
+#endif /* !GTK */
+#endif /* !MIDNIGHT */
 
 /* "Oleg Yu. Repin" <repin@ssd.sscc.ru> added backup filenames
     ...thanks -paul */
@@ -294,7 +297,7 @@ int edit_save_file (WEdit * edit, const char *filename)
 #if 1
 	    pclose (file);
 #else
-	    if (pclose (file) > 0) {
+	    if (pclose (file) != 0) {
 		edit_error_dialog (_ (" Error "), catstrs (_ (" Error writing to pipe: "), p, " ", 0));
 		free (p);
 		goto error_save;
@@ -318,6 +321,7 @@ int edit_save_file (WEdit * edit, const char *filename)
 	filelen = edit->last_byte;
 	while (buf <= (edit->curs1 >> S_EDIT_BUF_SIZE) - 1) {
 	    if (fwrite ((char *) edit->buffers1[buf], EDIT_BUF_SIZE, 1, file) != 1) {
+		fclose (file);
 		goto error_save;
 	    }
 	    buf++;
@@ -418,10 +422,6 @@ void menu_save_mode_cmd (void)
     memcpy ((char *) &option_backup_ext_int, str_result, strlen (option_backup_ext));
 }
 
-#endif
-
-#ifdef MIDNIGHT
-
 void edit_split_filename (WEdit * edit, char *f)
 {
     if (edit->filename)
@@ -432,7 +432,7 @@ void edit_split_filename (WEdit * edit, char *f)
     edit->dir = (char *) strdup ("");
 }
 
-#else
+#else	/* MIDNIGHT */
 
 #ifdef GTK
 
@@ -496,7 +496,7 @@ static char *canonicalize_pathname (char *p)
 void edit_split_filename (WEdit * edit, char *longname)
 {
     char *exp, *p;
-#if defined(MIDNIGHT) || defined(GTK)
+#ifdef	GTK
     exp = canonicalize_pathname (longname);
 #else
     exp = pathdup (longname);	/* this ensures a full path */
@@ -620,7 +620,7 @@ int edit_raw_key_query (char *heading, char *query, int cancel)
     return w;
 }
 
-#else
+#else /* MIDNIGHT */
 
 int edit_raw_key_query (char *heading, char *query, int cancel)
 {
@@ -632,7 +632,7 @@ int edit_raw_key_query (char *heading, char *query, int cancel)
 #endif
 }
 
-#endif
+#endif /* MIDNIGHT */
 
 /* creates a macro file if it doesn't exist */
 static FILE *edit_open_macro_file (const char *r)
@@ -705,7 +705,7 @@ int edit_delete_macro (WEdit * edit, int k)
 		fprintf (g, "%hd %hd, ", macro[i].command, macro[i].ch);
 	    fprintf (g, ";\n");
 	}
-    };
+    }
     fclose (f);
     fclose (g);
     if (rename (catstrs (home_dir, TEMP_FILE, 0), catstrs (home_dir, MACRO_FILE, 0)) == -1) {
@@ -2887,7 +2887,7 @@ void edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
                 return;
             } else {    
                 while (fgets(buf, sizeof(buf), script_src))
-	                fprintf(script_home, "%s",buf);
+		    fputs (buf, script_home);
                 if (fclose(script_home)) {
 	            edit_error_dialog ("",
                     get_sys_error (catstrs (_ ("Error close script:"), h, 0)));
@@ -2946,7 +2946,7 @@ void edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
     return;
 }
 
-#endif
+#endif /* MIDNIGHT */
 
 int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion);
 
@@ -2980,21 +2980,22 @@ int edit_printf (WEdit * e, const char *fmt,...)
 
 static void pipe_mail (WEdit *edit, char *to, char *subject, char *cc)
 {
-    FILE *p;
+    FILE *p = 0;
     char *s;
-    s = malloc (4096);
-    sprintf (s, "mail -s \"%s\" -c \"%s\" \"%s\"", subject, cc, to);
-    p = popen (s, "w");
-    if (!p) {
-	free (s);
-	return;
-    } else {
+
+    s = g_strdup_printf ("mail -s \"%s\" -c \"%s\" \"%s\"", subject, cc, to);
+
+    if (s) {
+	p = popen (s, "w");
+	g_free (s);
+    }
+
+    if (p) {
 	long i;
 	for (i = 0; i < edit->last_byte; i++)
 	    fputc (edit_get_byte (edit, i), p);
 	pclose (p);
     }
-    free (s);
 }
 
 #define MAIL_DLG_HEIGHT 12
@@ -3060,5 +3061,5 @@ void edit_mail_dialog (WEdit * edit)
     }
 }
 
-#endif
+#endif /* MIDNIGHT */
 

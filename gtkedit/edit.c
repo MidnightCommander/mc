@@ -4,6 +4,8 @@
    
    Authors: 1996, 1997 Paul Sheer
 
+   $Id$
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
@@ -280,7 +282,7 @@ long edit_write_stream (WEdit * edit, FILE * f)
     }
     return i;
 }
-#else
+#else /* CR_LF_TRANSLATION */
 long edit_insert_stream (WEdit * edit, FILE * f)
 {
     int c;
@@ -299,7 +301,7 @@ long edit_write_stream (WEdit * edit, FILE * f)
 	    break;
     return i;
 }
-#endif
+#endif /* CR_LF_TRANSLATION */
 
 #define TEMP_BUF_LEN 1024
 
@@ -370,7 +372,7 @@ static int check_file_access (WEdit *edit, const char *filename, struct stat *st
     if ((file = open ((char *) filename, O_RDONLY)) < 0) {
 	close (creat ((char *) filename, 0666));
 	if ((file = open ((char *) filename, O_RDONLY)) < 0) {
-	    edit_error_dialog (_ (" Error "), get_sys_error (catstrs (" Fail trying to open the file, ", filename, ", for reading ", 0)));
+	    edit_error_dialog (_ (" Error "), get_sys_error (catstrs (_ (" Failed trying to open file for reading: "), filename, " ", 0)));
 	    return 2;
 	}
     }
@@ -2752,13 +2754,13 @@ void user_menu (WEdit *edit)
                 edit_cursor_to_bol (edit);
                 edit_insert_file (edit, block_file);
                 edit_cursor_to_eol (edit);
-                if (fd = fopen (block_file, "w")) fclose(fd);
+                if ((fd = fopen (block_file, "w"))) fclose(fd);
             }
         } else { /* it is error */
                 edit_cursor_to_bol (edit);
 		edit_insert_file (edit, error_file);
-		if (fd = fopen (error_file, "w")) fclose(fd);
-		if (fd = fopen (block_file, "w")) fclose(fd);
+		if ((fd = fopen (error_file, "w"))) fclose(fd);
+		if ((fd = fopen (block_file, "w"))) fclose(fd);
         }
     } else {
 	edit_error_dialog ("",
@@ -2775,8 +2777,8 @@ void edit_init_file()
 {
     FILE *f;
 
-    if (f = fopen (catstrs (home_dir, ERROR_FILE, 0), "w")) fclose(f);
-    if (f = fopen (catstrs (home_dir, BLOCK_FILE, 0), "w")) fclose(f);
-    if (f = fopen (catstrs (home_dir, TEMP_FILE, 0) , "w")) fclose(f);
+    if ((f = fopen (catstrs (home_dir, ERROR_FILE, 0), "w"))) fclose(f);
+    if ((f = fopen (catstrs (home_dir, BLOCK_FILE, 0), "w"))) fclose(f);
+    if ((f = fopen (catstrs (home_dir, TEMP_FILE, 0) , "w"))) fclose(f);
     return;
 }
