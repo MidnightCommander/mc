@@ -203,7 +203,8 @@ void query_set_sel (int new_sel)
 /* {{{ The message function */
 
 /* To show nice messages to the users */
-Dlg_head *message (int error, char *header, const char *text, ...)
+struct Dlg_head *
+message (int error, char *header, const char *text, ...)
 {
     va_list  args;
     char     buffer [4096];

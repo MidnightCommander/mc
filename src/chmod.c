@@ -28,21 +28,15 @@
 #endif
 
 #include "global.h"
-#include "tty.h"
-#include "win.h"
-#include "color.h"
-#include "dlg.h"
-#include "widget.h"
-#include "dialog.h"	/* For do_refresh() */
-
-#include "dir.h"
-#include "panel.h"		/* Needed for the externs */
-#include "file.h"
-#include "main.h"
+#include "tty.h"	/* A_REVERSE */
+#include "color.h"	/* dialog_colors */
+#include "dlg.h"	/* add_widget() */
+#include "widget.h"	/* NORMAL_BUTTON */
+#include "dialog.h"	/* do_refresh() */
+#include "wtools.h"	/* message() */
+#include "panel.h"	/* do_file_mark() */
+#include "main.h"	/* update_panels() */
 #include "chmod.h"
-#include "achown.h"
-#include "chown.h"
-#include "../vfs/vfs.h"
 
 static int single_set;
 

@@ -37,14 +37,13 @@
 #include "ext.h"		/* regexp_command */
 #include "mouse.h"		/* For Gpm_Event */
 #include "layout.h"		/* Most layout variables are here */
-#include "dialog.h"		/* for message (...) */
+#include "wtools.h"		/* for message (...) */
 #include "cmd.h"
 #include "key.h"		/* XCTRL and ALT macros  */
 #include "setup.h"		/* For loading/saving panel options */
 #include "user.h"
 #include "profile.h"
 #include "widget.h"
-#include "../vfs/vfs.h"
 
 #ifdef NATIVE_WIN32
 #  include "drive.h"

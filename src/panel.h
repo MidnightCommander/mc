@@ -98,6 +98,10 @@ int set_panel_formats (WPanel *p);
 WPanel *get_current_panel (void);
 WPanel *get_other_panel (void);
 
+/* Useful macros to avoid too much typing */
+#define cpanel get_current_panel()
+#define opanel get_other_panel()
+
 extern WPanel *left_panel;
 extern WPanel *right_panel;
 extern WPanel *current_panel;

@@ -26,6 +26,14 @@
 #include "main.h"		/* fast_refresh */
 
 
+/* The refresh stack */
+typedef struct Refresh {
+    void (*refresh_fn)(void *);
+    void *parameter;
+    int  flags;
+    struct Refresh *next;
+} Refresh;
+
 static Refresh *refresh_list;
 
 void

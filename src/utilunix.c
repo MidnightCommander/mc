@@ -38,8 +38,7 @@
 #include "global.h"
 #include "fsusage.h"
 #include "mountlist.h"
-#include "dialog.h"		/* message() */
-#include "../vfs/vfs.h"		/* mc_read() */
+#include "wtools.h"		/* message() */
 
 struct sigaction startup_handler;
 

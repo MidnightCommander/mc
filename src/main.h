@@ -91,10 +91,6 @@ extern int is_right;		/* If the selected menu was the right */
 #define MENU_PANEL (is_right ? right_panel : left_panel)
 #define SELECTED_IS_PANEL (get_display_type (is_right ? 1 : 0) == view_listing)
 
-/* Useful macros to avoid too much typing */
-#define cpanel get_current_panel()
-#define opanel get_other_panel()
-
 typedef void (*key_callback) ();
 /* FIXME: We have to leave this type ambiguous, because `key_callback'
    is used both for functions that take an argument and ones that don't.

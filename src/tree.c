@@ -34,7 +34,7 @@
 #include "global.h"
 #include "tty.h"
 #include "color.h"
-#include "dialog.h"
+#include "wtools.h"	/* message() */
 #include "dir.h"
 #include "dlg.h"
 #include "widget.h"
@@ -42,7 +42,6 @@
 #include "mouse.h"
 #include "main.h"
 #include "file.h"	/* For copy_dir_dir(), move_dir_dir(), erase_dir() */
-#include "fileopctx.h"
 #include "help.h"
 #include "key.h"	/* For mi_getch() */
 #include "tree.h"

@@ -32,11 +32,9 @@
 #include "tty.h"
 #include "user.h"
 #include "main.h"
-#include "dialog.h"
+#include "wtools.h"
 #include "ext.h"
 #include "view.h"
-#include "main.h"
-#include "../vfs/vfs.h"
 
 #include "cons.saver.h"
 #include "layout.h"

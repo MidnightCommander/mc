@@ -26,9 +26,8 @@
 #include "global.h"
 #include "tty.h"
 #include "dir.h"
-#include "dialog.h"
+#include "wtools.h"
 #include "tree.h"
-#include "../vfs/vfs.h"
 
 /* If true show files starting with a dot */
 int show_dot_files = 1;

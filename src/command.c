@@ -26,20 +26,17 @@
 #include <string.h>
 #include "global.h"		/* home_dir */
 #include "tty.h"
-#include "dlg.h"
-#include "widget.h"
+#include "widget.h"		/* WInput */
 #include "command.h"
 #include "complete.h"		/* completion constants */
-#include "dialog.h"		/* message () */
-#include "dir.h"		/* required by panel.h */
+#include "wtools.h"		/* message () */
 #include "panel.h"		/* view_tree enum. Also, needed by main.h */
 #include "main.h"		/* do_cd */
 #include "layout.h"		/* for command_prompt variable */
 #include "user.h"		/* expand_format */
-#include "subshell.h"
+#include "subshell.h"		/* SUBSHELL_EXIT */
 #include "tree.h"		/* for tree_chdir */
-#include "color.h"
-#include "../vfs/vfs.h"
+#include "color.h"		/* DEFAULT_COLOR */
 
 /* This holds the command line */
 WInput *cmdline;

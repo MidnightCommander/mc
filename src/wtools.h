@@ -1,11 +1,12 @@
 #ifndef __WTOOLS_H
 #define __WTOOLS_H
 
+struct Dlg_head;
 struct WListbox;
 
 /* Listbox utility functions */
 typedef struct {
-    Dlg_head *dlg;
+    struct Dlg_head *dlg;
     struct WListbox *list;
 } Listbox;
 
@@ -66,4 +67,20 @@ char *real_input_dialog (char *header, char *text, char *def_text);
 char *real_input_dialog_help (char *header, char *text, char *help, char *def_text);
 
 void query_set_sel (int new_sel);
+
+struct Dlg_head *message (int error, char *header, const char *text, ...)
+    __attribute__ ((format (printf, 3, 4)));
+
+/* Use this as header for message() - it expands to "Error" */
+#define MSG_ERROR ((char *) -1)
+
+int query_dialog (char *header, char *text, int flags, int count, ...);
+
+/* flags for message() and query_dialog() */
+enum {
+   D_NORMAL = 0,
+   D_ERROR  = 1,
+   D_INSERT = 2
+} /* dialog options */;
+
 #endif	/* __WTOOLS_H */
