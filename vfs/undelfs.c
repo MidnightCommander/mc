@@ -52,7 +52,7 @@
 #include "vfs.h"
 
 struct deleted_info {
-    ino_t   ino;
+    ext2_ino_t   ino;
     unsigned short mode;
     unsigned short uid;
     unsigned short gid;
@@ -63,7 +63,7 @@ struct deleted_info {
 };
 
 struct lsdel_struct {
-    ino_t                   inode;
+    ext2_ino_t                   inode;
     int                     num_blocks;
     int                     free_blocks;
     int                     bad_blocks;
@@ -171,7 +171,7 @@ static int
 undelfs_loaddel (void)
 {
     int retval, count;
-    ino_t ino;
+    ext2_ino_t ino;
     struct ext2_inode inode;
     ext2_inode_scan   scan;
     
@@ -370,7 +370,7 @@ typedef struct {
     int  pos;			/* file position */
     int  current;		/* used to determine current position in itereate */
     int  finished;
-    ino_t inode;
+    ext2_ino_t inode;
     int  bytes_read;
     long size;
     
@@ -384,7 +384,7 @@ static void *
 undelfs_open (vfs *me, char *fname, int flags, int mode)
 {
     char *file, *f;
-    ino_t  inode, i;
+    ext2_ino_t  inode, i;
     undelfs_file *p = NULL;
     
     /* Only allow reads on this file system */
@@ -528,7 +528,7 @@ undelfs_read (void *vfs_info, char *buffer, int count)
 static long
 undelfs_getindex (char *path)
 {
-    ino_t inode = atol (path);
+    ext2_ino_t inode = atol (path);
     int i;
 
     for (i = 0; i < num_delarray; i++){

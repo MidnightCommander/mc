@@ -1,3 +1,8 @@
+2001-11-14  Pavel Roskin  <proski@gnu.org>
+
+	* undelfs.c: Use ext2_ino_t to avoid warnings with e2fsprogs
+	1.20 and newer.
+
 2001-11-13  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* samba/acconfig.h: Remove WITH_SYSLOG.
