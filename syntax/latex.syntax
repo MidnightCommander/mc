@@ -10,7 +10,7 @@ wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
     keyword } brightgreen/6
     keyword { brightgreen/6
 
-    keyword whole \\$ yellow/24
+    keyword \\$ yellow/24
 
 # type style
     keyword whole \\tiny yellow/24
@@ -264,6 +264,8 @@ context \\pagenumbering{ } yellow/20
     keyword Alph brightcyan/17
 
 context % \n brown/22
+
+context exclusive \\begin{verbatim} \\end{verbatim} white/13
 
 # mathematical formulas
 context $ $ brightgreen/6

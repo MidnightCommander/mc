@@ -1,0 +1,241 @@
+# ---------------------------------------------------
+# fortran.syntax
+# FORTRAN language syntax highlighting template.
+# Provides syntax highlighting rules for the 
+# FORTRAN programming language.
+#
+# Author: John Theal
+# Email: jtheal@renegadelinuxbox.dhs.org
+# December 7, 1999
+# ---------------------------------------------------
+
+# Heavily modified by Paul Sheer <psheer@obsidian.co.za>.
+
+context default 
+# boolean and logical expressions / operators
+    keyword .and. brightred/orange
+    keyword .eq. brightred/orange
+    keyword .eqv. brightred/orange	    
+    keyword .false. brightred/orange
+    keyword .ge. brightred/orange
+    keyword .gt. brightred/orange
+    keyword .le. brightred/orange
+    keyword .lt. brightred/orange
+    keyword .ne. brightred/orange
+    keyword .neqv. brightred/orange
+    keyword .not. brightred/orange
+    keyword .or. brightred/orange
+    keyword .true. brightred/orange
+    keyword whole lge brightred/orange
+    keyword whole lgt brightred/orange
+    keyword whole lle brightred/orange
+    keyword whole llt brightred/orange
+
+# declarations 
+    keyword whole block brightcyan/17
+    keyword whole character brightcyan/17
+    keyword whole common brightcyan/17
+    keyword whole complex brightcyan/17
+    keyword whole data brightcyan/17
+    keyword whole dimension brightcyan/17
+    keyword whole double brightcyan/17
+    keyword whole external brightcyan/17 
+    keyword whole format brightcyan/17
+    keyword whole implicit brightcyan/17
+    keyword whole integer brightcyan/17
+    keyword whole intrinsic brightcyan/17
+    keyword whole logical brightcyan/17
+    keyword whole none brightcyan/17
+    keyword whole parameter brightcyan/17
+    keyword whole precision brightcyan/17
+    keyword whole real brightcyan/17
+
+# general programming syntax
+    keyword whole assign brightgreen/15
+    keyword whole call brightgreen/15
+    keyword whole continue brightgreen/15
+    keyword whole do brightgreen/15
+    keyword whole else brightgreen/15
+    keyword whole elseif brightgreen/15
+    keyword whole end brightgreen/15
+    keyword whole enddo brightgreen/15
+    keyword whole endif brightgreen/15
+    keyword whole for brightgreen/15
+    keyword whole goto brightgreen/15
+    keyword whole if brightgreen/15
+    keyword whole pause brightgreen/15
+    keyword whole return brightgreen/15
+    keyword whole stop brightgreen/15
+    keyword whole then brightgreen/15
+    keyword whole to brightgreen/15
+    keyword whole while brightgreen/15   
+
+# headers
+    keyword whole entry brightgreen/15
+    keyword whole function yellow/21
+    keyword whole program yellow/21
+    keyword whole subroutine yellow/21
+
+# I/O functions
+# may have optional equal signs after them: 'keyword =' 
+    keyword whole access brightmagenta/20
+    keyword whole backspace brightmagenta/20
+    keyword whole blank brightmagenta/20
+    keyword whole close brightmagenta/20
+    keyword whole direct brightmagenta/20
+    keyword whole endfile brightmagenta/20
+    keyword whole err brightmagenta/20
+    keyword whole exist brightmagenta/20
+    keyword whole file brightmagenta/20
+    keyword whole fmt brightmagenta/20
+    keyword whole form brightmagenta/20
+    keyword whole formatted brightmagenta/20
+    keyword whole inquire brightmagenta/20
+    keyword whole iostat brightmagenta/20
+    keyword whole name brightmagenta/20
+    keyword whole named brightmagenta/20
+    keyword whole nextrec brightmagenta/20
+    keyword whole number brightmagenta/20
+    keyword whole open brightmagenta/20
+    keyword whole opened brightmagenta/20
+    keyword whole print brightmagenta/20
+    keyword whole read brightmagenta/20
+    keyword whole rec brightmagenta/20
+    keyword whole recl brightmagenta/20
+    keyword whole rewind brightmagenta/20
+    keyword whole sequential brightmagenta/20
+    keyword whole status brightmagenta/20
+    keyword whole unformatted brightmagenta/20
+    keyword whole unit brightmagenta/20
+    keyword whole write brightmagenta/20
+
+# mathematical functions
+    keyword whole abs yellow/24
+    keyword whole acos yellow/24
+    keyword whole aimag yellow/24
+    keyword whole aint yellow/24
+    keyword whole alog yellow/24
+    keyword whole alog10 yellow/24
+    keyword whole amax0 yellow/24
+    keyword whole amax1 yellow/24
+    keyword whole amin0 yellow/24
+    keyword whole amin1 yellow/24
+    keyword whole amod yellow/24
+    keyword whole anint yellow/24
+    keyword whole aprime yellow/24
+    keyword whole asin yellow/24
+    keyword whole atan yellow/24
+    keyword whole atan2 yellow/24
+    keyword whole acos yellow/24
+    keyword whole cabs yellow/24
+    keyword whole cexp yellow/24
+    keyword whole char yellow/24
+    keyword whole clog yellow/24
+    keyword whole cmplx yellow/24
+    keyword whole conjg yellow/24
+    keyword whole cos yellow/24
+    keyword whole cosh yellow/24
+    keyword whole ccos yellow/24
+    keyword whole csin yellow/24
+    keyword whole csqrt yellow/24
+    keyword whole dabs yellow/24
+    keyword whole dacos yellow/24
+    keyword whole dasin yellow/24
+    keyword whole datan yellow/24
+    keyword whole datan2 yellow/24
+    keyword whole dble yellow/24
+    keyword whole dcos yellow/24
+    keyword whole dcosh yellow/24
+    keyword whole dfloat yellow/24
+    keyword whole ddmim yellow/24
+    keyword whole dexp yellow/24
+    keyword whole dim yellow/24
+    keyword whole dint yellow/24
+    keyword whole dlog yellow/24
+    keyword whole dlog10 yellow/24
+    keyword whole dmax1 yellow/24
+    keyword whole dmin1 yellow/24
+    keyword whole dmod yellow/24
+    keyword whole dnint yellow/24
+    keyword whole dsign yellow/24
+    keyword whole dsin yellow/24
+    keyword whole dsinh yellow/24
+    keyword whole dsqrt yellow/24
+    keyword whole dtan yellow/24
+    keyword whole dtanh yellow/24
+    keyword whole equivalence yellow/24
+    keyword whole exp yellow/24
+    keyword whole float yellow/24
+    keyword whole iabs yellow/24
+    keyword whole ichar yellow/24
+    keyword whole idim yellow/24
+    keyword whole idint yellow/24
+    keyword whole ifix yellow/24
+    keyword whole index yellow/24
+    keyword whole int yellow/24
+    keyword whole isign yellow/24
+    keyword whole len yellow/24
+    keyword whole log yellow/24
+    keyword whole log10 yellow/24
+    keyword whole max yellow/24
+    keyword whole max0 yellow/24
+    keyword whole max1 yellow/24
+    keyword whole min yellow/24
+    keyword whole min0 yellow/24
+    keyword whole min1 yellow/24
+    keyword whole mod yellow/24
+    keyword whole rand yellow/24
+    keyword whole sign yellow/24
+    keyword whole sin yellow/24
+    keyword whole sinh yellow/24
+    keyword whole sngl yellow/24
+    keyword whole sqrt yellow/24
+    keyword whole tan yellow/24
+    keyword whole tanh yellow/24
+
+    keyword ( brightcyan/15
+    keyword ) brightcyan/15
+    keyword , brightcyan/14
+    keyword \+ yellow/24
+    keyword - yellow/24
+    keyword \* yellow/24
+    keyword / yellow/24
+    keyword = yellow/24
+
+    keyword linestart ! black/0 yellow/24
+    keyword linestart \* black/0 yellow/24
+    keyword linestart c black/0 yellow/24
+    keyword linestart C black/0 yellow/24
+
+    keyword linestart \s\s\s\s\s\* yellow/24 red/9
+
+    keyword linestart                                                         \s\s\s\s\s\s black/0 brightcyan/blue3
+
+    keyword linestart 0\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart 1\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart 2\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart 3\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart 4\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart 5\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart 6\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart 7\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart 8\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart 9\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+
+    keyword linestart \s\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart               \s\s\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart                             \s\s\s\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart                                           \s\s\s\s\{0123456789\s\}\s white/26 brightcyan/2
+
+# comments and quotes
+    keyword '*' green/6
+
+context exclusive linestart ! \n brown/22
+   spellcheck
+context exclusive linestart \* \n brown/22
+   spellcheck
+context exclusive linestart c \n brown/22
+   spellcheck
+context exclusive linestart C \n brown/22
+   spellcheck
+

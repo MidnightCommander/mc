@@ -5,6 +5,7 @@ context default
     keyword whole linestart include magenta
     keyword whole linestart ifdef magenta
     keyword whole linestart endif magenta
+    keyword whole linestart if magenta
     keyword whole linestart ifeq magenta
     keyword whole linestart ifneq magenta
     keyword whole linestart else magenta

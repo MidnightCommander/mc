@@ -45,7 +45,7 @@ context default
 
     keyword $ brightgreen/16
 
-    keyword wholeleft linestart function* brightblue/11
+    keyword wholeleft linestart function*() brightblue/11
 
 wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
@@ -175,6 +175,7 @@ context " " green/6
 context exclusive ` ` white/26 black/0
     keyword '*' green/6
     keyword " green/6
+    keyword \\` green/6
     keyword ; brightcyan/17
     keyword $(*) brightgreen/16
     keyword ${*} brightgreen/16

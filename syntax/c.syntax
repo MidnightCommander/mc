@@ -66,12 +66,12 @@ context default
     keyword /\* brown/22
     keyword \*/ brown/22
 
-    keyword '\\\{abtnvfr\}' brightgreen/16
+    keyword '\\\{"abtnvfr\}' brightgreen/16
     keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen/16
     keyword '\\'' brightgreen/16
     keyword '\\\\' brightgreen/16
     keyword '\\0' brightgreen/16
-    keyword '\{\s!"#$%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ\}' brightgreen/16
+    keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ\}' brightgreen/16
 
     keyword > yellow/24
     keyword < yellow/24
@@ -92,6 +92,7 @@ context default
     keyword , brightcyan/14
     keyword : brightcyan/14
     keyword ; brightmagenta/19
+    keyword #define\[\t\s\]\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\]\[\t\s\]0x\[0123456789abcdefABCDEF\] brightred/18
 context exclusive /\* \*/ brown/22
     spellcheck
 context // \n brown/22
