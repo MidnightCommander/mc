@@ -1,5 +1,8 @@
 2002-09-22  Pavel Roskin  <proski@gnu.org>
 
+	* doc/Makefile.am: Remove width from the man2hlp command line.
+	The same for translations.
+
 	* configure.in: Remove support for HSC proxy - it's obsolete.
 	Remove all references to HSC proxy everywhere.
 
