@@ -16,8 +16,13 @@
 #       define rindex strrchr
 #   endif
 
+#   undef bcopy
 #   define bcopy(s,d,n) memcpy ((d), (s), (n))
+
+#   undef bcmp
 #   define bcmp(s1,s2,n) memcmp ((s1), (s2), (n))
+
+#   undef bzero
 #   define bzero(s,n) memset ((s), 0, (n))
 
 #else /* not STDC_HEADERS and not HAVE_STRING_H */

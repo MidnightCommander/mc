@@ -1,3 +1,8 @@
+2001-06-23  Pavel Roskin  <proski@gnu.org>
+
+	* mem.h: Undefine bcopy(), bcmp() and bzero() before redefining
+	them.
+
 2001-06-22  Pavel Roskin  <proski@gnu.org>
 
 	* ext.c (exec_extension) [HAVE_X]: Disable console handling.
