@@ -137,19 +137,15 @@ int check_format_var (const char *p, char **v)
 	}
 	
 	/* Copy the variable name */
-	var_name = g_malloc (dots - p);
-	strncpy (var_name, p+4, dots-2 - (p+3));
-	var_name [dots-2 - (p+3)] = 0;
+	var_name = g_strndup (p + 4, dots-2 - (p+3));
 
 	value = getenv (var_name);
 	g_free (var_name);
 	if (value){
 	    *v = g_strdup (value);
 	    return q-p;
-	}
-	var_name = g_malloc (q - dots + 1);
-	strncpy (var_name, dots, q - dots + 1);
-	var_name [q-dots] = 0;
+	}	
+	var_name = g_strndup (dots, q - dots);
 	*v = var_name;
 	return q-p;
     }

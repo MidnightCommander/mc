@@ -1,3 +1,14 @@
+2004-09-01  Pavel S. Shirshov  <pavelsh@mail.ru>
+
+	* user.c (check_format_var): Use more suitable function
+        g_strndup, instead sequence g_malloc(), strncpy(), name[len] = '\0'
+	* man2hlp.c (handle_link): Use g_strlcpy instead sequence 
+	strncpy(), name[len] = '\0'
+	* profile.c (GetSetProfile): Likewise.
+	* wtools.c (fg_input_dialog_help): Likewise.
+
+	Based on patch from Jakub Jelinek  <jakub@redhat.com>
+
 2004-09-01  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* wtools.h: Fix warnings.

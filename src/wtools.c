@@ -453,8 +453,7 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
 
     /* we need a unique name for histname because widget.c:history_tool()
        needs a unique name for each dialog - using the header is ideal */
-    strncpy (histname + 3, header, 60);
-    histname[63] = '\0';
+    g_strlcpy (histname + 3, header, 61);
     quick_widgets[2].histname = histname;
 
     len = max ((int) strlen (header), msglen (text, &lines)) + 4;
