@@ -2063,8 +2063,6 @@ void edit_quit_cmd (WEdit * edit)
 	case 2:
 	    if (edit->locked)
 		edit->locked = edit_unlock_file (edit->filename);
-	    if (edit->delete_file)
-		unlink (edit->filename);
 	    break;
 	case 0:
 	case -1:
