@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.6\n"
 "POT-Creation-Date: 1999-02-03 21:58-0500\n"
-"PO-Revision-Date: 1999-01-17 03:06:07+0900\n"
+"PO-Revision-Date: 1999-02-04 14:20:02+0900\n"
 "Last-Translator: Sung-Hyun Nam <namsh@lgic.co.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -188,9 +188,9 @@ msgid "Warning"
 msgstr "경고"
 
 #: gnome/gdesktop.c:348
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open %s; will not have desktop icons"
-msgstr "%s 열 수 없슴; 초기 데스크탑 아이콘을 가질 수 없을 것임"
+msgstr "%s 열 수 없음; 초기 데스크탑 아이콘을 가질 수 없을 것임"
 
 #: gnome/gdesktop.c:1451
 msgid "Trashcan"
@@ -205,7 +205,7 @@ msgstr "홈 자료방"
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial desktop icons."
 msgstr ""
-"%s를 %s로 심볼릭링크 만들 수 없슴; 초기 데스크탑 아이콘을 가질 수 없을 것임"
+"%s를 %s로 심볼릭링크 만들 수 없음; 초기 데스크탑 아이콘을 가질 수 없을 것임"
 
 #: gnome/gdialogs.c:58
 msgid "To: "
@@ -216,9 +216,8 @@ msgid "Copying from: "
 msgstr ""
 
 #: gnome/gdialogs.c:60
-#, fuzzy
 msgid "Deleting file: "
-msgstr "지우기"
+msgstr "파일 지움: "
 
 #: gnome/gdialogs.c:340
 msgid "Files Exist"
@@ -326,19 +325,16 @@ msgid "If set, this will copy the directories recursively"
 msgstr "이것이 설정되면 자료방을 밑의 자료방까지 복사합니다"
 
 #: gnome/gdialogs.c:733
-#, fuzzy
 msgid "Move Progress"
-msgstr "여기로 이동"
+msgstr "이동중"
 
 #: gnome/gdialogs.c:736
-#, fuzzy
 msgid "Copy Progress"
-msgstr "여기로 복사"
+msgstr "복사중"
 
 #: gnome/gdialogs.c:739
-#, fuzzy
 msgid "Delete Progress"
-msgstr "Delete key"
+msgstr "삭제중"
 
 #: gnome/gdialogs.c:784
 msgid "File "
@@ -353,19 +349,16 @@ msgid " Done."
 msgstr " Done."
 
 #: gnome/gdnd.c:50
-#, fuzzy
 msgid "_Move here"
-msgstr "여기로 이동"
+msgstr "여기로 이동(_M)"
 
 #: gnome/gdnd.c:51
-#, fuzzy
 msgid "_Copy here"
-msgstr "여기로 복사"
+msgstr "여기로 복사(_C)"
 
 #: gnome/gdnd.c:52
-#, fuzzy
 msgid "_Link here"
-msgstr "여기로 연결"
+msgstr "여기로 연결(_L)"
 
 #: gnome/gdnd.c:54
 msgid "Cancel drag"
@@ -387,7 +380,7 @@ msgstr "에러"
 
 #: gnome/gicon.c:83
 msgid "Default set of icons not found, check your installation"
-msgstr "기본 아이콘 세트를 찾을 수 없슴. 인스틀이 제대로 되었는 지 확인하시오"
+msgstr "기본 아이콘 세트를 찾을 수 없음. 인스틀이 제대로 되었는 지 확인하시오"
 
 #: gnome/glayout.c:274
 msgid "Enter command to run"
@@ -472,9 +465,8 @@ msgid "Close this panel"
 msgstr "현재 패널 닫기"
 
 #: gnome/glayout.c:317
-#, fuzzy
 msgid "Select _All"
-msgstr "모두 선택(_S)"
+msgstr "모두 선택(_A)"
 
 #: gnome/glayout.c:317
 msgid "Select all files in the current Panel"
@@ -661,98 +653,84 @@ msgid "Delete"
 msgstr "지우기"
 
 #: gnome/gprefs.c:96
-#, fuzzy
 msgid "Show backup files"
-msgstr "여벌 파일 보기(&B)"
+msgstr "백업 파일 보기"
 
 #: gnome/gprefs.c:100
-#, fuzzy
 msgid "Show hidden files"
-msgstr "숨은 파일 보기(&H)"
+msgstr "숨은 파일 보기"
 
 #: gnome/gprefs.c:104
-#, fuzzy
 msgid "Mix files and directories"
-msgstr "files/directories"
+msgstr "파일과 자료방 섞음"
 
 #: gnome/gprefs.c:108
-#, fuzzy
 msgid "Use shell patterns instead of regular expressions"
-msgstr "  이해할 수 없는 정규표현식  "
+msgstr "정규표현식 대신 쉘 패턴 사용"
 
 #: gnome/gprefs.c:117
 msgid "Confirm when deleting file"
-msgstr ""
+msgstr "파일 삭제전에 확인"
 
 #: gnome/gprefs.c:121
-#, fuzzy
 msgid "Confirm when overwriting files"
-msgstr "어떤 파일도 겹쳐쓸 수 없습니다."
+msgstr "파일 겹쳐쓰기전에 확인"
 
 #: gnome/gprefs.c:125
-#, fuzzy
 msgid "Confirm when executing files"
-msgstr "확인 내용 설정"
+msgstr "파일 실행전에 확인"
 
 #: gnome/gprefs.c:129
 msgid "Show progress while operations are being performed"
-msgstr ""
+msgstr "작업을 수행하는 동안 진행상황 표시"
 
 #: gnome/gprefs.c:138
 msgid "VFS Timeout :"
-msgstr ""
+msgstr "VFS 타임아웃 :"
 
 #: gnome/gprefs.c:139 gnome/gprefs.c:164
 msgid "Seconds"
-msgstr ""
+msgstr "초"
 
 #: gnome/gprefs.c:142
-#, fuzzy
 msgid "Anonymous FTP password :"
-msgstr "ftp anonymous 비밀번호:"
+msgstr "Anonymous FTP 비밀번호:"
 
 #: gnome/gprefs.c:146
-#, fuzzy
 msgid "Always use FTP proxy"
-msgstr "항상 FTP proxy 사용(&A)"
+msgstr "항상 FTP proxy 사용"
 
 #: gnome/gprefs.c:155
-#, fuzzy
 msgid "Fast directory reload"
-msgstr "자료방 빨리 다시읽기(&F)"
+msgstr "자료방 빨리 다시읽기"
 
 #: gnome/gprefs.c:159
-#, fuzzy
 msgid "Compute totals before copying files"
-msgstr "파일을 덮어쓰기전에 물어보기."
+msgstr "파일 복사전에 전체크기 계산"
 
 #: gnome/gprefs.c:163
-#, fuzzy
 msgid "FTP directory cache timeout :"
-msgstr "ftpfs 캐쉬 타임아웃:"
+msgstr "FTP 자료방 캐쉬 타임아웃:"
 
 #: gnome/gprefs.c:167
 msgid "Allow customization of icons in panels"
-msgstr ""
+msgstr "패널의 아이콘 바꾸기 허용"
 
 #: gnome/gprefs.c:176
-#, fuzzy
 msgid "File display"
-msgstr "파일 있음"
+msgstr "파일 표시"
 
 #: gnome/gprefs.c:180
-#, fuzzy
 msgid "Confirmation"
-msgstr " 확인 "
+msgstr "확인"
 
 #: gnome/gprefs.c:184
 msgid "VFS"
-msgstr ""
+msgstr "VFS"
 
 #: gnome/gprefs.c:188
-#, fuzzy
 msgid "Caching"
-msgstr "찾는 중"
+msgstr "캐쉬"
 
 #: gnome/gprop.c:58 gnome/gprop.c:75
 msgid "Filename"
@@ -944,71 +922,63 @@ msgstr "필터"
 
 #: gnome/gscreen.c:2271
 msgid "Switch view to an Icon view"
-msgstr ""
+msgstr "아이콘 보기로 전환"
 
 #: gnome/gscreen.c:2273
-#, fuzzy
 msgid "Brief"
-msgstr "쓰기"
+msgstr "간단히"
 
 #: gnome/gscreen.c:2273
 msgid "Switch view to show just file name and type"
-msgstr ""
+msgstr "파일 이름과 형식 보기로 전환"
 
 #: gnome/gscreen.c:2275
-#, fuzzy
 msgid "Detailed"
-msgstr " 복제 실패 "
+msgstr "자세히"
 
 #: gnome/gscreen.c:2275
 msgid "Switch view to show detailed file statistics"
-msgstr ""
+msgstr "파일 상태를 자세히 보기로 전환"
 
 #: gnome/gscreen.c:2277
-#, fuzzy
 msgid "Custom"
 msgstr "사용자 보기"
 
 #: gnome/gscreen.c:2277
 msgid "Switch view to show custom determined statistics."
-msgstr ""
+msgstr "사용자가 설정한 상태로 보기 전환"
 
 #: gnome/gscreen.c:2282
 msgid "Back"
-msgstr ""
+msgstr "뒤로"
 
 #: gnome/gscreen.c:2282
 msgid "Go to the previously visited directory"
-msgstr ""
+msgstr "바로 전 자료방으로 가기"
 
 #: gnome/gscreen.c:2284
-#, fuzzy
 msgid "Up"
-msgstr "위로(&U)"
+msgstr "위로"
 
 #: gnome/gscreen.c:2284
 msgid "Go up a level in the directory heirarchy"
-msgstr ""
+msgstr "윗 자료방으로 가기"
 
 #: gnome/gscreen.c:2286
-#, fuzzy
 msgid "Forward"
-msgstr "Format"
+msgstr "앞으로"
 
 #: gnome/gscreen.c:2286
-#, fuzzy
 msgid "Go to the next directory"
-msgstr "자료방을 바꿀 수 없습니다"
+msgstr "다음 자료방으로 가기"
 
 #: gnome/gscreen.c:2289
-#, fuzzy
 msgid "Home"
-msgstr "홈(&H)"
+msgstr "홈"
 
 #: gnome/gscreen.c:2289
-#, fuzzy
 msgid "Go to your home directory"
-msgstr "홈 자료방"
+msgstr "홈 자료방으로 가기"
 
 #: gnome/gscreen.c:2438
 msgid "Location:"
@@ -1536,9 +1506,8 @@ msgid " Enter line length, 0 for off: "
 msgstr " 라인 길이를 입력, 0은 off: "
 
 #: gtkedit/editmenu.c:69
-#, fuzzy
 msgid " About "
-msgstr "이 풀그림은(_A)"
+msgstr " 이 프로그램은 "
 
 #: gtkedit/editmenu.c:70
 msgid ""
@@ -1550,6 +1519,13 @@ msgid ""
 "       A user friendly text editor written\n"
 "           for the Midnight Commander.\n"
 msgstr ""
+"\n"
+"                 Cooledit  v2.1\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"         Midnight Commander를 위해 개발된\n"
+"          사용자와 친근한 텍스트 편집기.\n"
 
 #: gtkedit/editmenu.c:118 gtkedit/editmenu.c:134
 msgid "&Open/load...     C-o"
@@ -1871,7 +1847,7 @@ msgstr "화면 갱신\tC-l"
 #. Tool hint
 #: gtkedit/editmenu.c:456
 msgid "Macros and internal commands"
-msgstr ""
+msgstr "매크로와 내장 명령"
 
 #: gtkedit/editoptions.c:37
 msgid "None"
@@ -1893,7 +1869,7 @@ msgstr "Wrap 모드"
 #. 15
 #: gtkedit/editoptions.c:106
 msgid "Key emulation"
-msgstr ""
+msgstr "글쇠 에뮬레이션"
 
 #. Not essential to translate
 #: gtkedit/editwidget.c:310
@@ -1929,7 +1905,7 @@ msgstr "종료"
 
 #: gtkedit/gtkedit.c:65
 msgid "&Dismiss"
-msgstr ""
+msgstr "취소(&D)"
 
 #: gtkedit/gtkedit.c:110
 msgid "The Quick Brown Fox Jumps Over The Lazy Dog"
@@ -1939,7 +1915,7 @@ msgstr "The Quick Brown Fox Jumps Over The Lazy Dog"
 msgid ""
 "gtkedit.c: HOME environment variable not set and no passwd entry - aborting\n"
 msgstr ""
-"gtkedit.c: HOME 환경변수가 설정되지 않았고, passwd 파일에도 없슴 - 중단\n"
+"gtkedit.c: HOME 환경변수가 설정되지 않았고, passwd 파일에도 없음 - 중단\n"
 
 #: gtkedit/gtkedit.c:1289
 msgid "Open/Load"
@@ -2304,9 +2280,8 @@ msgid "cd"
 msgstr "cd"
 
 #: src/boxes.c:796
-#, fuzzy
 msgid "Symbolic link"
-msgstr "심볼릭링크 파일명:"
+msgstr "심볼릭링크"
 
 #: src/boxes.c:801
 msgid "Symbolic link filename:"
@@ -2835,7 +2810,7 @@ msgstr "집단(&G)"
 #: src/dir.c:375
 #, c-format
 msgid "File exists but can not be stat-ed: %s %s"
-msgstr "파일이 있지만 정보를 얻을 수 없슴: %s %s"
+msgstr "파일이 있지만 정보를 얻을 수 없음: %s %s"
 
 #: src/dir.c:633
 msgid "Unknown"
@@ -3342,9 +3317,8 @@ msgstr ""
 "   그래도 지울까요? "
 
 #: src/file.c:2166
-#, fuzzy
 msgid " Delete: "
-msgstr " 지우기 "
+msgstr " 지우기: "
 
 #: src/file.c:2172
 msgid "a&ll"
@@ -4378,7 +4352,7 @@ msgstr "시작할 때 창을 열지 않아요"
 
 #: src/main.c:2668
 msgid "Force activation even if a server is already running"
-msgstr ""
+msgstr "서버가 이미 실행 중이더라도 무조건 활성화하기"
 
 #: src/main.c:2940
 msgid ""
@@ -4615,7 +4589,7 @@ msgstr " 정말로 실행하시겠읍니까? "
 
 #: src/screen.c:2064
 msgid " No action taken "
-msgstr ""
+msgstr " No action taken "
 
 #: src/screen.c:2289 src/screen.c:2319 src/tree.c:1026
 msgid "RenMov"
@@ -4723,12 +4697,12 @@ msgid "Rmdir"
 msgstr "Rmdir"
 
 #: src/treestore.c:354
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Can't write to the %s file:\n"
 "%s\n"
 msgstr ""
-"쓰기 위한 파일 %s를 열수 없어요:\n"
+"%s 파일에 쓸 수 없습니다:\n"
 "%s\n"
 
 #: src/user.c:261
@@ -5230,12 +5204,3 @@ msgstr ""
 "흠,...\n"
 "%s\n"
 "테잎 아카이브 파일같지 않습니다."
-
-#~ msgid "|"
-#~ msgstr "|"
-
-#~ msgid "_Compare panels..."
-#~ msgstr "패널 비교(_C)..."
-
-#~ msgid "Compare two panel contents"
-#~ msgstr "두 패널 내용 비교"
