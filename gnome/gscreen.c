@@ -30,6 +30,7 @@
 #include "gdnd.h"
 #include "gtree.h"
 #include "gpageprop.h"
+#include "gpopup.h"
 #include "gcliplabel.h"
 #include "gblist.h"
 #include "../vfs/vfs.h"
@@ -834,7 +835,12 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 			break;
 
 		case 3:
+#if 1
 			file_popup (&event->button, panel, NULL, row, panel->dir.list[row].fname);
+#else
+			/* FIXME: this should happen on button press, not button release */
+			gpopup_do_popup (panel->dir.list[row].fname, panel, (GdkEventButton *) event);
+#endif
 			break;
 		}
 
@@ -1464,8 +1470,12 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 	
 	switch (event->type){
 	case GDK_BUTTON_PRESS:
-		if (event->button.button == 3){
+		if (event->button.button == 3) {
+#if 1
 			file_popup (&event->button, panel, NULL, index, panel->dir.list [index].fname);
+#else
+			gpopup_do_popup (panel->dir.list[index].fname, panel, (GdkEventButton *) event);
+#endif
 			return;
 		}
 		break;

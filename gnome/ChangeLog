@@ -1,3 +1,8 @@
+1998-11-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gscreen.c (panel_icon_list_select_icon): Use gpopup_do_popup().
+	(panel_file_list_select_row): Use gpopup_do_popup().
+
 1998-11-29  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gscreen.c (display_mini_info): Use g_strdup_printf() to make it

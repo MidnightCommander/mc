@@ -130,6 +130,9 @@ popup_open (GtkWidget *widget, gpointer data)
 		return;
 	}
 
+	do_enter (pfi->panel);
+
+#if 0
 	if (S_ISDIR (s.st_mode)) {
 		/* Open the directory in the panel the menu was activated from */
 
@@ -141,6 +144,7 @@ popup_open (GtkWidget *widget, gpointer data)
 	} else {
 		/* FIXME: get default program and launch it with this file */
 	}
+#endif
 }
 
 static void
