@@ -1006,15 +1006,15 @@ msgstr "cd"
 
 #: src/boxes.c:839
 msgid "Symbolic link"
-msgstr "Simbolna povezava"
+msgstr "Simbolična povezava"
 
 #: src/boxes.c:843
 msgid "Symbolic link filename:"
-msgstr "Ime simbolne povezave:"
+msgstr "Ime simbolične povezave:"
 
 #: src/boxes.c:845
 msgid "Existing filename (filename symlink will point to):"
-msgstr "Ime obstoječe datoteke (tja bo simbolna povezava kazala):"
+msgstr "Ime obstoječe datoteke (tja bo simbolična povezava kazala):"
 
 #: src/boxes.c:874
 msgid "Running "
@@ -1364,31 +1364,31 @@ msgstr " povezava: %s"
 #: src/cmd.c:1098
 #, c-format
 msgid " symlink: %s "
-msgstr " simbolna povezava: %s"
+msgstr " simbolična povezava: %s"
 
 #: src/cmd.c:1132
 #, c-format
 msgid " Symlink `%s' points to: "
-msgstr " Simbolna povezava `%s' kaže na: "
+msgstr " Simbolična povezava `%s' kaže na: "
 
 #: src/cmd.c:1137
 msgid " Edit symlink "
-msgstr " Uredi simbolno povezavo "
+msgstr " Uredi simbolično povezavo "
 
 #: src/cmd.c:1142
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
-msgstr " uredi simbolno povezavo, ne morem odstraniti %s: %s"
+msgstr " uredi simbolično povezavo, ne morem odstraniti %s: %s"
 
 #: src/cmd.c:1146
 #, c-format
 msgid " edit symlink: %s "
-msgstr " uredi simbolno povezavo: %s"
+msgstr " uredi simbolično povezavo: %s"
 
 #: src/cmd.c:1157
 #, c-format
 msgid "`%s' is not a symbolic link"
-msgstr "`%s' ni simbolna povezava"
+msgstr "`%s' ni simbolična povezava"
 
 #: src/cmd.c:1283
 msgid " Cannot chdir to %s "
@@ -1649,7 +1649,7 @@ msgid ""
 " Cannot create target symlink \"%s\" \n"
 " %s "
 msgstr ""
-" Ne morem ustvariti cilja simbolne povezeave \"%s\" \n"
+" Ne morem ustvariti cilja simbolične povezeave \"%s\" \n"
 " %s "
 
 #: src/file.c:507
@@ -1818,7 +1818,7 @@ msgid ""
 " Cannot copy cyclic symbolic link \n"
 " `%s' "
 msgstr ""
-" Ne morem kopirati ciklične simbolne povezave \n"
+" Ne morem kopirati ciklične simbolične povezave \n"
 " `%s' "
 
 #: src/file.c:972 src/file.c:2015 src/tree.c:705
@@ -2150,7 +2150,7 @@ msgstr "&Ozadje"
 
 #: src/filegui.c:782
 msgid "&Stable Symlinks"
-msgstr "&Stabilne simbolne povezave"
+msgstr "&Stabilne simbolične povezave"
 
 #. &file_mask_stable_symlinks
 #: src/filegui.c:784
@@ -3299,7 +3299,7 @@ msgstr "POD-IMENIK"
 
 #: src/screen.c:405 src/screen.c:406
 msgid "Size"
-msgstr "Velikosti"
+msgstr "Velikost"
 
 #: src/screen.c:408
 msgid "MTime"
@@ -4242,11 +4242,11 @@ msgstr "ftpfs: CWD (sprememba delavnega imenika) ni uspela."
 
 #: vfs/ftpfs.c:1119 vfs/ftpfs.c:1126
 msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: ne morem razvozlati simbolne povezave"
+msgstr "ftpfs: ne morem razvozlati simbolične povezave"
 
 #: vfs/ftpfs.c:1177
 msgid "Resolving symlink..."
-msgstr "Razvozljujem simbolno povezavo..."
+msgstr "Razvozljujem simbolično povezavo..."
 
 #: vfs/ftpfs.c:1202
 #, c-format
@@ -4645,7 +4645,7 @@ msgstr "%s: %s: %s %lu bajtov prenešenih"
 #~ msgstr " Katero datoteko z menuji želite urejati?"
 
 #~ msgid " Link symbolically "
-#~ msgstr " Poveži simbolno"
+#~ msgstr " Poveži simbolično"
 
 #~ msgid " Relative symlink "
 #~ msgstr " Relativna simbolična povezava"
@@ -5413,18 +5413,8 @@ msgstr "%s: %s: %s %lu bajtov prenešenih"
 #~ msgid "Advanced Options"
 #~ msgstr "Napredne izbire"
 
-#~ msgid "Preserve symlinks"
-#~ msgstr "Ohrani simbolne povezave"
-
 #~ msgid "Follow links."
 #~ msgstr "Sledi povezavam."
-
-#~ msgid ""
-#~ "Selecting this will copy the files that symlinks point to instead of just "
-#~ "copying the link."
-#~ msgstr ""
-#~ "Če izberete to, se bodo kopirale datoteke na katere kažejo simbolne "
-#~ "povezave namesto kopiranja povezav samih."
 
 #~ msgid "Preserve file attributes."
 #~ msgstr "Ohrani atribute datotek."
@@ -5467,9 +5457,6 @@ msgstr "%s: %s: %s %lu bajtov prenešenih"
 
 #~ msgid "Password"
 #~ msgstr "Geslo"
-
-#~ msgid "Symbolic Link"
-#~ msgstr "Simbolna povezava"
 
 #~ msgid "_Move here"
 #~ msgstr "_Prestavi sem"
@@ -5762,7 +5749,7 @@ msgstr "%s: %s: %s %lu bajtov prenešenih"
 
 #~ msgid ""
 #~ "Could not symlink %s to %s; will not have such a desktop device icon."
-#~ msgstr "Ne morem simbolno povezati %s na %s. Take namizne ikone ne bo."
+#~ msgstr "Ne morem simbolično povezati %s na %s. Take namizne ikone ne bo."
 
 #~ msgid "CD-ROM %d"
 #~ msgstr "CD-ROM %d"
@@ -5787,9 +5774,6 @@ msgstr "%s: %s: %s %lu bajtov prenešenih"
 
 #~ msgid "File Type: "
 #~ msgstr "Vrsta datoteke: "
-
-#~ msgid "File Type: Symbolic Link"
-#~ msgstr "Vrsta datoteke: simbolna povezava"
 
 #~ msgid "Target Name: INVALID LINK"
 #~ msgstr "Ime cilja: NEVELJAVNA POVEZAVA"
@@ -5996,7 +5980,7 @@ msgstr "%s: %s: %s %lu bajtov prenešenih"
 #~ msgstr "Simbolna povezava..."
 
 #~ msgid "Edit Symlink..."
-#~ msgstr "Uredi Simbolno povezavo..."
+#~ msgstr "Uredi Simbolično povezavo..."
 
 #~ msgid "Properties..."
 #~ msgstr "Lastnosti..."
