@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"POT-Creation-Date: 2000-10-25 21:20+0200\n"
-"PO-Revision-Date: 2000-10-26 12:15+0200\n"
+"POT-Creation-Date: 2000-11-09 16:56+0100\n"
+"PO-Revision-Date: 2000-11-15 18:55+0100\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1781,8 +1781,8 @@ msgstr ""
 " Zwiêksz edit.h:MAXBUF i przekompiluj edytor. "
 
 #: gtkedit/edit.c:1
-msgid "User menu avalaible only in mcedit invoked from mc"
-msgstr "Menu u¿ytkownika dostêpne s± tylko po uruchomieniu mcedit z mc"
+msgid "User menu available only in mcedit invoked from mc"
+msgstr "Menu u¿ytkownika jest dostêpne tylko po uruchomieniu mcedit z mc"
 
 #: gtkedit/edit.c:1 gtkedit/editcmd.c:1
 msgid "Error trying to stat file:"
@@ -5066,6 +5066,15 @@ msgstr "Midnight Commander"
 #: src/main.c:1
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr " Czy na pewno chcesz zakoñczyæ Midnight Commandera? "
+
+#: src/main.c:1
+msgid " Listing format edit "
+msgstr " Edycja formatu wy¶wietlania "
+
+#: src/main.c:1
+#, c-format
+msgid " New mode is \"%s\" "
+msgstr " Nowym trybem jest \"%s\" "
 
 #: src/main.c:1 src/main.c:1
 msgid "&Listing mode..."
