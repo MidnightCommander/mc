@@ -254,6 +254,7 @@ static struct {
 
 #ifdef HAVE_GNOME
     { "desktop_use_shaped_icons", &desktop_use_shaped_icons },
+    { "desktop_use_shaped_text", &desktop_use_shaped_text },
     { "desktop_auto_placement", &desktop_auto_placement },
     { "desktop_snap_icons", &desktop_snap_icons },
     { "desktop_arr_r2l", &desktop_arr_r2l },
