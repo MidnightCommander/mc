@@ -1,3 +1,9 @@
+2002-07-02  Pavel Roskin  <proski@gnu.org>
+
+	* ftpfs.c (send_ftp_command): Use "anonymous@" as default
+	anonymous password.
+	From Eduardo Perez Ureta" <eperez@it.uc3m.es>
+
 2002-06-25  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.c: Add protection against NULL strings to all is_*()

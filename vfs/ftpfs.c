@@ -1539,25 +1539,19 @@ send_ftp_command(vfs *me, char *filename, char *cmd, int flags)
 void
 ftpfs_init_passwd(void)
 {
-    struct passwd *passwd_info;
-    char *p, hostname[MAXHOSTNAMELEN];
-    struct hostent *hp;
-
     ftpfs_anonymous_passwd = load_anon_passwd ();
     if (ftpfs_anonymous_passwd)
 	return;
 
-    if ((passwd_info = getpwuid (geteuid ())) == NULL)
-	p = "unknown";
-    else
-	p = passwd_info->pw_name;
-    gethostname(hostname, sizeof(hostname));
-    hp = gethostbyname(hostname);
-    if (hp != NULL)
-	ftpfs_anonymous_passwd = g_strconcat (p, "@", hp->h_name, NULL);
-    else
-	ftpfs_anonymous_passwd = g_strconcat (p, "@", hostname, NULL);
-    endpwent ();
+    /* If there is no anonymous ftp password specified
+     * then we'll just use anonymous@
+     * We don't send any other thing because:
+     * - We want to remain anonymous
+     * - We want to stop SPAM
+     * - We don't want to let ftp sites to discriminate by the user,
+     *   host or country.
+     */
+    ftpfs_anonymous_passwd = g_strdup ("anonymous@");
 }
 
 static int ftpfs_chmod (vfs *me, char *path, int mode)
