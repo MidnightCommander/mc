@@ -1,3 +1,8 @@
+2003-02-24  Adam Byrtek  <alpha@debian.org>
+
+	* extfs/patchfs.in: rm and proper copyin support, more
+	functions to make code more clear.
+
 2003-02-19  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* smbfs.c (smbfs_lseek): Backport from Samba 2.2.7 Suite.
