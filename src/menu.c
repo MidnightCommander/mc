@@ -54,6 +54,8 @@ Menu create_menu (char *name, menu_entry *entries, int count)
 		register char* cp;
 		for (mp = entries; count--; mp++)
 		{
+			mp->string_dupped = 0;
+			
 			if (mp->text[0] == '\0')
 				continue;
 
@@ -76,8 +78,8 @@ Menu create_menu (char *name, menu_entry *entries, int count)
 				}
 				*dest = '\0';
 				mp->text = strdup(tmpbuf);
-			} else
-			        mp->text = strdup (mp->text);
+				mp->string_dupped = 1;
+			} 
 		}
     }
     menu->name = _(name);
@@ -531,7 +533,7 @@ destroy_menu (Menu menu)
     for (i = 0, e = menu->entries; i < menu->count; i++){
 #ifdef ENABLE_NLS
 	    /* Separators are NULLS */
-	if (*e->text)
+	if (e->string_dupped)
 	    free (e->text);
 #endif
 	e++;

@@ -20,6 +20,7 @@ typedef struct {
     int  hot_key;
     int  hot_pos;
     callfn call_back;
+    int  string_dupped;
 } menu_entry;
 
 #ifdef HAVE_XVIEW
