@@ -2852,7 +2852,7 @@ handle_args (int argc, char *argv [])
 
 #ifdef HAVE_GNOME
     gnome_init_with_popt_table ("gmc", VERSION, argc, argv, argumentTable, 0, &optCon);
-    /* poptResetContext(optCon); */
+    poptResetContext(optCon);
 #else
     optCon = poptGetContext ("mc", argc, argv, argumentTable, 0);
 #endif
@@ -3025,7 +3025,7 @@ int main (int argc, char *argv [])
        calls any define_sequence */
     init_key ();
 
-#ifndef PORT_WANTS_ARGP
+#if defined(PORT_WANTS_ARGP) && !defined(HAVE_GNOME)
     handle_args (argc, argv);
 #endif
     
