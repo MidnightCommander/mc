@@ -1,5 +1,8 @@
 2003-02-18  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (directory_history_list): Allow history command even
+	with just one entry - it's more intuitive.
+
 	* util.c (list_append_unique): New function - add text to GList
 	and remove duplicates.
 	* main.c (directory_history_add): Use list_append_unique().

@@ -833,23 +833,20 @@ void
 directory_history_list (WPanel *panel)
 {
     char *s;
-/* must be at least two to show a history */
-    if (panel->dir_history) {
-	if (panel->dir_history->prev || panel->dir_history->next) {
-	    s = show_hist (panel->dir_history, panel->widget.x,
-			   panel->widget.y);
-	    if (s) {
-		int r;
-		r = _do_panel_cd (panel, s, cd_exact);
-		if (r)
-		    directory_history_add (panel, panel->cwd);
-		else
-		    message (1, MSG_ERROR,
-			     _("Cannot change directory"));
-		g_free (s);
-	    }
-	}
-    }
+
+    if (!panel->dir_history)
+	return;
+
+    s = show_hist (panel->dir_history, panel->widget.x, panel->widget.y);
+
+    if (!s)
+	return;
+
+    if (_do_panel_cd (panel, s, cd_exact))
+	directory_history_add (panel, panel->cwd);
+    else
+	message (1, MSG_ERROR, _("Cannot change directory"));
+    g_free (s);
 }
 
 #ifdef HAVE_SUBSHELL_SUPPORT
