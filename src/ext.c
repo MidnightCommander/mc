@@ -276,6 +276,111 @@ exec_extension (const char *filename, const char *data, int *move_dir, int start
 #   define FILE_CMD "file "
 #endif
 
+/*
+ * Invoke the "file" command on the file and match its output against PTR.
+ * Return 1 for match, 0 otherwise.
+ */
+static int
+regex_check_type (char *filename, int file_len, char *ptr)
+{
+    int found = 0;
+    int islocal = vfs_file_is_local (filename);
+    int asked_file = 0;		/* Have we asked file for the file contents? */
+    char content_string[2048];
+    int content_shift = 0;
+
+#ifdef FILE_STDIN
+    int file_supports_stdin = 1;
+#else
+    int file_supports_stdin = 0;
+#endif
+
+    if (islocal || file_supports_stdin) {
+	char *pp;
+	int hasread = use_file_to_check_type;
+
+	if (asked_file || !use_file_to_check_type)
+	    goto match_file_output;
+
+	hasread = 0;
+	if (islocal) {
+	    char *tmp = name_quote (filename, 0);
+	    char *command = g_strconcat (FILE_CMD, tmp, NULL);
+	    FILE *f = popen (command, "r");
+
+	    g_free (tmp);
+	    g_free (command);
+	    if (f != NULL) {
+		hasread = (fgets (content_string, 2047, f)
+			   != NULL);
+		if (!hasread)
+		    content_string[0] = 0;
+		pclose (f);
+#ifdef SCO_FLAVOR
+		/*
+		   **       SCO 3.2 does has a buggy pclose(), so
+		   **       <command> become zombie (alex)
+		 */
+		waitpid (-1, NULL, WNOHANG);
+#endif				/* SCO_FLAVOR */
+	    }
+	} else {
+#ifdef _OS_NT
+	    message (1, " Win32 ", " Unimplemented file prediction ");
+#else
+	    int pipehandle, remotehandle;
+	    pid_t p;
+
+	    remotehandle = mc_open (filename, O_RDONLY);
+	    if (remotehandle != -1) {
+		/* 8192 is HOWMANY hardcoded value in the file-3.14
+		 * sources. Tell me if any other file uses larger
+		 * chunk from beginning
+		 */
+		pipehandle = mc_doublepopen
+		    (remotehandle, 8192, &p, "file", "file", "-", NULL);
+		if (pipehandle != -1) {
+		    int i;
+		    while ((i = read (pipehandle, content_string
+				      + hasread, 2047 - hasread)) > 0)
+			hasread += i;
+		    mc_doublepclose (pipehandle, p);
+		    content_string[hasread] = 0;
+		}
+		mc_close (remotehandle);
+	    }
+#endif				/* _OS_NT */
+	}
+	asked_file = 1;
+      match_file_output:
+	if (hasread) {
+	    if ((pp = strchr (content_string, '\n')) != 0)
+		*pp = 0;
+	    if (islocal && !strncmp (content_string, filename, file_len)) {
+		content_shift = file_len;
+		if (content_string[content_shift] == ':')
+		    for (content_shift++;
+			 content_string[content_shift] == ' ';
+			 content_shift++);
+	    } else if (!islocal
+		       && !strncmp (content_string,
+				    "standard input:", 15)) {
+		for (content_shift = 15;
+		     content_string[content_shift] == ' ';
+		     content_shift++);
+	    }
+	    if (content_string &&
+		regexp_match (ptr, content_string +
+			      content_shift, match_normal)) {
+		found = 1;
+	    }
+	}
+    }
+
+    return found;
+}
+
+
 /* The second argument is action, i.e. Open, View or Edit
  *
  * This function returns:
@@ -289,43 +394,32 @@ int
 regex_command (char *filename, char *action, int *move_dir)
 {
     char *p, *q, *r, c;
-    int  file_len = strlen (filename);
+    int file_len = strlen (filename);
     int found = 0;
-    char content_string [2048];
-    int content_shift = 0;
     int ret = 0;
     int old_patterns;
     struct stat mystat;
-    int asked_file;
     int view_at_line_number;
     char *include_target;
     int include_target_len;
 
-#ifdef FILE_STDIN
-    int file_supports_stdin = 1;
-#else
-    int file_supports_stdin = 0;
-#endif
-
     /* Check for the special View:%d parameter */
-    if (strncmp (action, "View:", 5) == 0){
+    if (strncmp (action, "View:", 5) == 0) {
 	view_at_line_number = atoi (action + 5);
-	action [4] = 0;
+	action[4] = 0;
     } else {
 	view_at_line_number = 0;
     }
-    /* Have we asked file for the file contents? */
-    asked_file = 0;
 
     if (data == NULL) {
 	char *extension_file;
 	int mc_user_ext = 1;
-        int home_error = 0;
+	int home_error = 0;
 
 	extension_file = concat_dir_and_file (home_dir, MC_USER_EXT);
 	if (!exist_file (extension_file)) {
 	    g_free (extension_file);
-check_stock_mc_ext:
+	  check_stock_mc_ext:
 	    extension_file = concat_dir_and_file (mc_home, MC_LIB_EXT);
 	    mc_user_ext = 0;
 	}
@@ -336,207 +430,128 @@ check_stock_mc_ext:
 
 	if (!strstr (data, "default/")) {
 	    if (!strstr (data, "regex/") && !strstr (data, "shell/") &&
-	        !strstr (data, "type/")) {
-	        g_free (data);
-	        data = NULL;
+		!strstr (data, "type/")) {
+		g_free (data);
+		data = NULL;
 		if (mc_user_ext) {
 		    home_error = 1;
 		    goto check_stock_mc_ext;
-	        } else {
-                    char *msg;
-                    char *msg2;
-                    msg = g_strconcat (" ", mc_home, MC_LIB_EXT, _(" file error"), NULL);
-                    msg2 = g_strconcat (_("Format of the "),
-                                         mc_home,
-_("mc.ext file has changed\n\
+		} else {
+		    char *msg;
+		    char *msg2;
+		    msg =
+			g_strconcat (" ", mc_home, MC_LIB_EXT,
+				     _(" file error"), NULL);
+		    msg2 =
+			g_strconcat (_("Format of the "), mc_home, _("mc.ext file has changed\n\
 with version 3.0. It seems that installation\n\
 failed. Please fetch a fresh new copy from the\n\
 Midnight Commander package."), NULL);
-	            message (1, msg, msg2);
-                    g_free (msg);
-                    g_free (msg2);
+		    message (1, msg, msg2);
+		    g_free (msg);
+		    g_free (msg2);
 		    return 0;
-	        }
+		}
 	    }
 	}
 	if (home_error) {
-            char *msg;
-            char *msg2;
-            msg = g_strconcat (" ~/", MC_USER_EXT, _(" file error "), NULL);
-            msg2 = g_strconcat (_("Format of the ~/"), MC_USER_EXT, _(" file has changed\n\
+	    char *msg;
+	    char *msg2;
+	    msg =
+		g_strconcat (" ~/", MC_USER_EXT, _(" file error "), NULL);
+	    msg2 =
+		g_strconcat (_("Format of the ~/"), MC_USER_EXT, _(" file has changed\n\
 with version 3.0. You may want either to\n\
 copy it from "), mc_home, _("mc.ext or use that\n\
 file as an example of how to write it.\n\
-"), mc_home,  _("mc.ext will be used for this moment."), NULL);
+"), mc_home, _("mc.ext will be used for this moment."),
+			     NULL);
 	    message (1, msg, msg2);
-            g_free (msg);
-            g_free (msg2);
-        }
+	    g_free (msg);
+	    g_free (msg2);
+	}
     }
     mc_stat (filename, &mystat);
 
     old_patterns = easy_patterns;
-    easy_patterns = 0; /* Real regular expressions are needed :) */
+    easy_patterns = 0;		/* Real regular expressions are needed :) */
     include_target = NULL;
     include_target_len = 0;
     for (p = data; *p; p++) {
-    	for (q = p; *q == ' ' || *q == '\t'; q++)
-		;
-    	if (*q == '\n' || !*q)
-    	    p = q; /* empty line */
-    	if (*p == '#') /* comment */
-    	    while (*p && *p != '\n')
-    	    	p++;
+	for (q = p; *q == ' ' || *q == '\t'; q++);
+	if (*q == '\n' || !*q)
+	    p = q;		/* empty line */
+	if (*p == '#')		/* comment */
+	    while (*p && *p != '\n')
+		p++;
 	if (*p == '\n')
 	    continue;
 	if (!*p)
 	    break;
-	if (p == q) { /* i.e. starts in the first column, should be
-	               * keyword/descNL
-	               */
+	if (p == q) {		/* i.e. starts in the first column, should be
+				 * keyword/descNL
+				 */
 	    found = 0;
 	    q = strchr (p, '\n');
 	    if (q == NULL)
-	        q = strchr (p, 0);
+		q = strchr (p, 0);
 	    c = *q;
 	    *q = 0;
-	    if (include_target){
+	    if (include_target) {
 		if ((strncmp (p, "include/", 8) == 0) &&
-		    (strncmp (p+8, include_target, include_target_len) == 0))
+		    (strncmp (p + 8, include_target, include_target_len) ==
+		     0))
 		    found = 1;
 	    } else if (!strncmp (p, "regex/", 6)) {
-	        p += 6;
-	        /* Do not transform shell patterns, you can use shell/ for
-	         * that
-	         */
-	        if (regexp_match (p, filename, match_normal))
-	            found = 1;
+		p += 6;
+		/* Do not transform shell patterns, you can use shell/ for
+		 * that
+		 */
+		if (regexp_match (p, filename, match_normal))
+		    found = 1;
 	    } else if (!strncmp (p, "directory/", 10)) {
-	        if (S_ISDIR (mystat.st_mode) && regexp_match (p+10, filename, match_normal))
-	            found = 1;
+		if (S_ISDIR (mystat.st_mode)
+		    && regexp_match (p + 10, filename, match_normal))
+		    found = 1;
 	    } else if (!strncmp (p, "shell/", 6)) {
-	        p += 6;
+		p += 6;
 		if (*p == '.' && file_len >= (q - p)) {
-		    if (!strncmp (p, filename + file_len - (q - p),
-			q - p))
-	                found = 1;
-	        } else {
-	            if (q - p == file_len && !strncmp (p, filename, q - p))
-	                found = 1;
-	        }
+		    if (!strncmp (p, filename + file_len - (q - p), q - p))
+			found = 1;
+		} else {
+		    if (q - p == file_len && !strncmp (p, filename, q - p))
+			found = 1;
+		}
 	    } else if (!strncmp (p, "type/", 5)) {
-		int islocal = vfs_file_is_local (filename);
-	        p += 5;
-
-	        if (islocal || file_supports_stdin) {
-	    	    char *pp;
-	    	    int hasread = use_file_to_check_type;
-
-		    if (asked_file || !use_file_to_check_type)
-			goto match_file_output;
-
-		    hasread = 0;
-	    	    if (islocal) {
-			char *tmp = name_quote (filename, 0);
-	    	        char *command =
-			    g_strconcat (FILE_CMD, tmp, NULL);
-	    	        FILE *f = popen (command, "r");
-
-			g_free (tmp);
-	    	        g_free (command);
-	    	        if (f != NULL) {
-	    	            hasread = (fgets (content_string, 2047, f)
-	    	                != NULL);
-	    	    	    if (!hasread)
-	    	    	        content_string [0] = 0;
-	    	    	    pclose (f);
-#ifdef SCO_FLAVOR
-	    	    	    /*
-	    	    	    **	SCO 3.2 does has a buggy pclose(), so
-	    	    	    **	<command> become zombie (alex)
-	    	    	    */
-	    	    	    waitpid(-1,NULL,WNOHANG);
-#endif /* SCO_FLAVOR */
-	    	        }
-	    	    } else {
-#ifdef _OS_NT
-			message (1, " Win32 ", " Unimplemented file prediction ");
-#else
-	    	        int pipehandle, remotehandle;
-	    	        pid_t p;
-
-	    	        remotehandle = mc_open (filename, O_RDONLY);
-		        if (remotehandle != -1) {
-		        /* 8192 is HOWMANY hardcoded value in the file-3.14
-		         * sources. Tell me if any other file uses larger
-		         * chunk from beginning
-		         */
-	    	            pipehandle = mc_doublepopen
-			    (remotehandle, 8192, &p,"file", "file", "-", NULL);
-			    if (pipehandle != -1) {
-	    	                int i;
-	    	                while ((i = read (pipehandle, content_string
-	    	                     + hasread, 2047 - hasread)) > 0)
-	    	                    hasread += i;
-	    	    	        mc_doublepclose (pipehandle, p);
-	    	    	        content_string [hasread] = 0;
-	    	            }
-	    	            mc_close (remotehandle);
-	    	        }
-#endif /* _OS_NT */
-	    	    }
-		    asked_file = 1;
-match_file_output:
-	    	    if (hasread) {
-	    	        if ((pp = strchr (content_string, '\n')) != 0)
-	    	    	    *pp = 0;
-	    	        if (islocal && !strncmp (content_string,
-	    	            filename, file_len)) {
-	    	    	    content_shift = file_len;
-	    	    	    if (content_string [content_shift] == ':')
-	    	    	        for (content_shift++;
-	    	    	            content_string [content_shift] == ' ';
-	    	    	            content_shift++);
-	    	        } else if (!islocal
-				   && !strncmp (content_string,
-						"standard input:", 15)) {
-	    	            for (content_shift = 15;
-	    	                content_string [content_shift] == ' ';
-	    	                content_shift++);
-	    	        }
-	    		if (content_string &&
-	    		    regexp_match (p, content_string +
-	    		        content_shift, match_normal)){
-	    		    found = 1;
-	    		}
-	    	    }
-	        }
+		p += 5;
+		found = regex_check_type (filename, file_len, p);
 	    } else if (!strncmp (p, "default/", 8)) {
-	        p += 8;
-	        found = 1;
+		found = 1;
 	    }
 	    *q = c;
 	    p = q;
 	    if (!*p)
-	        break;
-    	} else { /* List of actions */
-    	    p = q;
-    	    q = strchr (p, '\n');
-    	    if (q == NULL)
-    	        q = strchr (p, 0);
-    	    if (found) {
-    	        r = strchr (p, '=');
-    	        if (r != NULL) {
-    	            c = *r;
-    	            *r = 0;
-		    if (strcmp (p, "Include") == 0){
+		break;
+	} else {		/* List of actions */
+	    p = q;
+	    q = strchr (p, '\n');
+	    if (q == NULL)
+		q = strchr (p, 0);
+	    if (found) {
+		r = strchr (p, '=');
+		if (r != NULL) {
+		    c = *r;
+		    *r = 0;
+		    if (strcmp (p, "Include") == 0) {
 			char *t;
 
 			include_target = p + 8;
 			t = strchr (include_target, '\n');
-			if (t) *t = 0;
+			if (t)
+			    *t = 0;
 			include_target_len = strlen (include_target);
-			if (t) *t = '\n';
+			if (t)
+			    *t = '\n';
 
 			*r = c;
 			p = q;
@@ -546,10 +561,9 @@ match_file_output:
 			    break;
 			continue;
 		    }
-		if (!strcmp (action, p)) {
-    	                *r = c;
-    	                for (p = r + 1; *p == ' ' || *p == '\t'; p++)
-			    ;
+		    if (!strcmp (action, p)) {
+			*r = c;
+			for (p = r + 1; *p == ' ' || *p == '\t'; p++);
 
 			/* Empty commands just stop searching
 			 * through, they don't do anything
@@ -559,23 +573,24 @@ match_file_output:
 			 * filename parameter invalid (ie, most of the time,
 			 * we get filename as a pointer from cpanel->dir).
 			 */
-    	                if (p < q) {
+			if (p < q) {
 			    char *filename_copy = g_strdup (filename);
 
-			    exec_extension (filename_copy, r + 1, move_dir, view_at_line_number);
+			    exec_extension (filename_copy, r + 1, move_dir,
+					    view_at_line_number);
 			    g_free (filename_copy);
 
-    	                    ret = 1;
-    	                }
-    	                break;
-    	            } else
-    	            	*r = c;
-    	        }
-    	    }
-    	    p = q;
-    	    if (!*p)
-    	        break;
-    	}
+			    ret = 1;
+			}
+			break;
+		    } else
+			*r = c;
+		}
+	    }
+	    p = q;
+	    if (!*p)
+		break;
+	}
     }
     easy_patterns = old_patterns;
     return ret;
