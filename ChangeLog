@@ -1,5 +1,8 @@
 2001-03-02  Pavel Roskin  <proski@gnu.org>
 
+	* lib/mc.ext.in: Recognize files ending by `.lslR' and `.ls-lR'.
+	Suggested by Christian Gennerat.
+
 	* lib/mc.ext.in: Add support for "freeze" - old compression
 	program used mostly on QNX.
 	* lib/mc.ext.in.qnx.diff: Remove, it's obsolete.

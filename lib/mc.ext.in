@@ -533,10 +533,10 @@ regex/\.(so|so\.[0-9\.]*)$
 	View=%view{hex}
 
 # ls-lR
-regex/^ls-?lR$
+regex/(^|\.)ls-?lR$
 	Open=%cd %p#lslR
 	View=%view{ascii}
-regex/^ls-?lR\.(g?z|Z)$
+regex/(^|\.)ls-?lR\.(g?z|Z)$
 	Open=%cd %p#lslR
 	View=%view{ascii} gunzip -c %f
 
