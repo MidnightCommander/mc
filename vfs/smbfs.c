@@ -836,6 +836,7 @@ smbfs_symlink (vfs *me, char *n1, char *n2)
 
 /* Extract the hostname and username from the path */
 /* path is in the form: hostname:user/remote-dir */
+#if 0
 static char *
 smbfs_get_host_and_username
 (char **path, char **host, char **user, int *port, char **pass)
@@ -854,7 +855,10 @@ smbfs_get_host_and_username
 
 	return ret;
 }
-
+#else
+#define smbfs_get_host_and_username(path, host, user, port, pass) \
+	vfs_split_url (*path, host, user, port, pass, SMB_PORT, 0)
+#endif
 /***************************************************** 
 	return a connection to a SMB server
 	current_bucket needs to be set before calling
@@ -1341,7 +1345,7 @@ get_remote_stat(smbfs_connection *sc, char *path, struct stat *buf)
 }
 
 static int
-search_dir_entry (dir_entry *dentry, char *text, struct stat *buf)
+search_dir_entry (dir_entry *dentry, const char *text, struct stat *buf)
 {
 	while (dentry) {
 		if (strcmp(text, dentry->text) == 0) {
@@ -1695,7 +1699,7 @@ my_forget (char *path)
     if (path[0] == '/' && path[1] == '/')
 	path += 2;
 
-    if ((p = smbfs_get_host_and_username (&path, &host, &user, &port, NULL)) {
+    if ((p = smbfs_get_host_and_username (&path, &host, &user, &port, NULL))) {
 	g_free (p);
 	for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++) {
 		if ((strcmp (host, smbfs_connections [i].host) == 0) &&

@@ -10,6 +10,8 @@
 	(smbfs_open): Likewise. Indentation fixes.
 	(smbfs_unlink): Likewise.
 	(smbfs_rename): Release rb and ra after use.
+	(search_dir_entry): Make text parameter const.
+	(smbfs_get_host_and_username): Make macro.
 
 2001-07-20  Pavel Roskin  <proski@gnu.org>
 
