@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc VERSION\n"
-"POT-Creation-Date: 1998-08-01 04:50+0200\n"
+"POT-Creation-Date: 1998-08-03 17:16+0200\n"
 "PO-Revision-Date: 1998-03-27 01:22+0100\n"
 "Last-Translator: Vincent Renardias <vincent@waw.com>\n"
 "Language-Team: Vincent Renardias <vincent@waw.com>\n"
@@ -194,8 +194,7 @@ msgstr " Erreur en essayant d'ouvrir le fichier en lecture "
 
 #: edit/editcmd.c:970 edit/editcmd.c:1072
 msgid " Block is large, you may not be able to undo this action. "
-msgstr ""
-" Le block est gros et il est possible que vous ne puissiez pas annuler ce "
+msgstr " Le block est gros et il est possible que vous ne puissiez pas annuler ce "
 "changement. "
 
 #: edit/editcmd.c:1072
@@ -528,11 +527,11 @@ msgstr "copier vers &Fichier..."
 
 #: edit/editmenu.c:150 edit/editmenu.c:167
 msgid "&Toggle Mark       F3"
-msgstr ""
+msgstr "&Inverser Marque   F3"
 
 #: edit/editmenu.c:151 edit/editmenu.c:168
 msgid "&Mark Columns    S-F3"
-msgstr ""
+msgstr "&Marquer Colonnes S-F3"
 
 #: edit/editmenu.c:153 edit/editmenu.c:170
 msgid "toggle &Ins/overw Ins"
@@ -699,7 +698,7 @@ msgstr "Opérations disque"
 
 #: edit/editmenu.c:408
 msgid "Toggle mark\tF3"
-msgstr ""
+msgstr "Echange Marque\tF3"
 
 #: edit/editmenu.c:410
 msgid "Toggle insert/overwrite\tIns"
@@ -871,6 +870,19 @@ msgstr "Menu"
 #: src/view.c:1990 src/view.c:2010
 msgid "Quit"
 msgstr "Quitter"
+
+#: edit/syntax.c:1677 edit/syntax.c:1684
+msgid " Load syntax file "
+msgstr " Chargement du fichier de syntaxe "
+
+#: edit/syntax.c:1677
+msgid " File access error "
+msgstr " erreur d'acces au fichier "
+
+#: edit/syntax.c:1683
+#, c-format
+msgid " Syntax error in file %s on line %d "
+msgstr " Erreur de syntaxe dans le fichier %s à la ligne %d "
 
 #: gnome/achown.c:72 gnome/boxes.c:143 gnome/boxes.c:282 gnome/boxes.c:379
 #: gnome/boxes.c:466 gnome/boxes.c:645 gnome/boxes.c:766 gnome/boxes.c:819
@@ -2414,11 +2426,11 @@ msgstr " Impossible d'ouvrir le répertoire %s"
 
 #: gnome/glayout.c:268
 msgid "New window"
-msgstr "Nouvelle fenetre"
+msgstr "Nouvelle fenêtre"
 
 #: gnome/glayout.c:268
 msgid "Opens a new window"
-msgstr "Ouvre une nouvelle fenetre"
+msgstr "Ouvre une nouvelle fenêtre"
 
 #: gnome/glayout.c:269
 msgid "New Terminal"
@@ -2631,7 +2643,7 @@ msgstr "Liste des systèmes de fichiers virtuels actifs"
 
 #: gnome/glayout.c:323
 msgid "Undelete files (ext2fs only)..."
-msgstr ""
+msgstr "Récupération de fichiers (ext2fs seulement)..."
 
 #: gnome/glayout.c:323
 msgid "Recover deleted files"
@@ -4162,12 +4174,12 @@ msgstr ""
 #: gnome/tree.c:1098 src/tree.c:1098
 #, c-format
 msgid "Copy \"%s\" directory to:"
-msgstr "Copier le répertoire \"%s\" vers:"
+msgstr "Copier le répertoire \"%s\" dans:"
 
 #: gnome/tree.c:1131 src/tree.c:1131
 #, c-format
 msgid "Move \"%s\" directory to:"
-msgstr ""
+msgstr "Déplacer le pépertoire \"%s\" dans:"
 
 #: gnome/tree.c:1138 src/tree.c:1138
 #, c-format
@@ -4198,7 +4210,7 @@ msgstr "Dynamique"
 msgid ""
 " Can't chdir to \"%s\" \n"
 " %s "
-msgstr ""
+msgstr " Impossible d'aller dans le répertoire \"%s\" \n %s "
 
 #: gnome/tree.c:1455 src/tree.c:1455
 msgid "Forget"
@@ -4251,7 +4263,7 @@ msgstr " Menu utilisateur "
 
 #: gnome/util.c:235 src/util.c:235
 msgid "name_trunc: too big"
-msgstr ""
+msgstr "name_trunc: trop gros"
 
 #: gnome/utilunix.c:380 src/utilunix.c:380
 msgid " Pipe failed "
@@ -4259,21 +4271,21 @@ msgstr " Echec du tube "
 
 #: gnome/utilunix.c:384 src/utilunix.c:384
 msgid " Dup failed "
-msgstr ""
+msgstr " Echec de la duplication "
 
 #: gnome/view.c:408 src/view.c:408
 msgid ""
 "File: \n"
 "\n"
 "    "
-msgstr ""
+msgstr "Fichier:  \n\n    "
 
 #: gnome/view.c:409 src/view.c:409
 msgid ""
 "\n"
 "\n"
 "has been modified, do you want to save the changes?\n"
-msgstr ""
+msgstr "\n\na été modifié, voulez-vous enregistrer les changements?\n"
 
 #: gnome/view.c:411 src/view.c:411
 msgid " Save changes "
@@ -4309,7 +4321,7 @@ msgstr ""
 
 #: gnome/view.c:521 src/view.c:521
 msgid " Can not fetch local copy "
-msgstr ""
+msgstr " Impossible de récupérer une copie locale "
 
 #: gnome/view.c:708 src/view.c:708
 #, c-format
@@ -4607,7 +4619,7 @@ msgstr ""
 
 #: vfs/extfs.c:300 vfs/extfs.c:320
 msgid "Inconsistent extfs archive"
-msgstr ""
+msgstr "archive extfs inconsistante"
 
 #: vfs/ftpfs.c:602
 #, c-format
@@ -4666,11 +4678,11 @@ msgstr " Trop de connexions ouvertes "
 
 #: vfs/tar.c:578
 msgid "Unexpected EOF on archive file"
-msgstr ""
+msgstr "Fin de fichier inattendue sur le fichier archive."
 
 #: vfs/tar.c:632 vfs/tar.c:653
 msgid "Inconsistent tar archive"
-msgstr ""
+msgstr "Archive tar inconsistante."
 
 #. Open for reading
 #: vfs/tar.c:753
@@ -4687,4 +4699,6 @@ msgid ""
 "Hmm,...\n"
 "%s\n"
 "doesn't look like a tar archive."
-msgstr ""
+msgstr "Hmm,...\n"
+"%s\n"
+"ne ressemble pas à une archive tar."

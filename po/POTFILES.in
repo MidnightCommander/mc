@@ -5,6 +5,7 @@ edit/editcmd.c
 edit/editmenu.c
 edit/editoptions.c
 edit/editwidget.c
+edit/syntax.c
 gnome/achown.c
 gnome/background.c
 gnome/boxes.c
