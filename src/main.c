@@ -2553,7 +2553,8 @@ probably_finish_program (void)
 }
 
 enum {
-	GEOMETRY_KEY = -1
+	GEOMETRY_KEY = -1,
+	NOWIN_KEY    = -2
 };
 
 static int
@@ -2681,11 +2682,13 @@ static struct argp_option argp_options [] = {
     { "view", 		'v', NULL, 0, N_("Start up into the viewer mode."), 0 },
     { "xterm", 		'x', NULL, 0, N_("Force xterm mouse support and screen save/restore"), 0 },
     { "geometry",       GEOMETRY_KEY,  "GEOMETRY", 0, N_("Geometry for the window"), 0 },
+    { "nowindows",      NOWIN_KEY, NULL, 0, N_("No windows opened at startup"), 0 },
     { NULL, 		0,   NULL, 0, NULL },
 };
 
 GList *directory_list = 0;
 GList *geometry_list  = 0;
+int   nowindows;
 
 static error_t
 parse_an_arg (int key, char *arg, struct argp_state *state)
@@ -2729,6 +2732,9 @@ parse_an_arg (int key, char *arg, struct argp_state *state)
 	case GEOMETRY_KEY:
 	    geometry_list = g_list_append (geometry_list, arg);
 	    return 0;
+
+	case NOWIN_KEY:
+	    nowindows = 1;
 	    
 	case ARGP_KEY_ARG:
 	    break;
