@@ -86,3 +86,12 @@ WMenu *menubar_new (int y, int x, int cols, Menu menu [], int items)
     return menubar;
 }
 
+void
+menubar_arrange(WMenu* menubar)
+{
+}
+
+void
+destroy_menu (Menu menu)
+{
+}
