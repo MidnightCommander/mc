@@ -23,6 +23,7 @@
 #include <stdarg.h>
 #include <string.h>
 
+#include <glib.h>
 #include "help.h"
 
 #define BUFFER_SIZE 256
@@ -131,7 +132,8 @@ fopen_check (const char *filename, const char *flags)
 
     f = fopen (filename, flags);
     if (f == NULL) {
-	sprintf (tmp, "man2hlp: Cannot open file \"%s\"", filename);
+	g_snprintf (tmp, sizeof (tmp), "man2hlp: Cannot open file \"%s\"",
+		    filename);
 	perror (tmp);
 	exit (3);
     }
@@ -269,7 +271,7 @@ printf_string (const char *format, ...)
     char buffer[BUFFER_SIZE];
 
     va_start (args, format);
-    vsprintf (buffer, format, args);
+    g_vsnprintf (buffer, sizeof (buffer), format, args);
     va_end (args);
     print_string (buffer);
 }
@@ -752,7 +754,8 @@ main (int argc, char **argv)
 	    }
 	}
 	if (!found) {
-	    sprintf (buffer, "Stale link \"%s\"", current_link->linkname);
+	    g_snprintf (buffer, sizeof (buffer), "Stale link \"%s\"",
+			current_link->linkname);
 	    c_in = current_link->filename;
 	    in_row = current_link->line;
 	    print_error (buffer);
