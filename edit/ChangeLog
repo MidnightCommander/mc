@@ -41,7 +41,7 @@
 	* edit.h: Remove "dir" field in WEdit - it's always an empty
 	string.  Adjust all dependencies.
 
-	* editcmd.c (edit_get_save_file): Remove first argument, it's
+	* editcmd.c (edit_get_load_file): Remove first argument, it's
 	unused.
 	(edit_get_save_file): Likewise.
 
