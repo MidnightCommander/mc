@@ -6,7 +6,7 @@ AC_INIT([GNU Midnight Commander], [], [mc-devel@gnome.org])
 AC_PREREQ(2.52)
 AC_CONFIG_SRCDIR(src/main.c)
 AC_CONFIG_AUX_DIR(config)
-AM_INIT_AUTOMAKE(mc, 4.6.1-pre1a)
+AM_INIT_AUTOMAKE(mc, 4.6.1-20041104)
 
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
@@ -536,10 +536,10 @@ dnl
 AC_ARG_ENABLE([charset],
 	      [  --enable-charset         Support for charset selection and conversion [[no]]])
 have_charset=
+charset_msg="no"
 if test "x$enable_charset" = xyes; then
   if test "x$am_cv_func_iconv" != xyes; then
-    AC_MSG_WARN([Cannot enable charset support because iconv function is missing])
-    charset_msg="no"
+    AC_MSG_WARN([Cannot enable charset support because iconv function is missing])    
   else
     AC_DEFINE(HAVE_CHARSET, 1,
 	      [Define to enable charset selection and conversion])
