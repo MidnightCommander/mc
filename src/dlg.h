@@ -175,6 +175,9 @@ void common_dialog_repaint (struct Dlg_head *h);
 
 extern Dlg_head *current_dlg;
 
+/* A hook list for idle events */
+extern Hook *idle_hook;
+
 static inline cb_ret_t
 send_message (Widget *w, widget_msg_t msg, int parm)
 {

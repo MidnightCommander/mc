@@ -1,5 +1,7 @@
 2003-10-24  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.h: Declare idle_hook here.
+
 	* dialog.c: Eliminate typedef Refresh, unneeded includes.
 
 	* complete.h: Move CompletionFunction definition ...

@@ -160,8 +160,6 @@ struct WView {
 /* Maxlimit for skipping updates */
 int max_dirt_limit = 10;
 
-extern Hook *idle_hook;
-
 /* If set, show a ruler */
 static int ruler = 0;
 
