@@ -179,7 +179,7 @@ extern WPanel *current_panel;
 
 void try_to_select (WPanel *panel, char *name);
 
-#define DEFAULT_USER_FORMAT "half type,name,|,size,|,perm"
+#define DEFAULT_USER_FORMAT "half type name | size | perm"
 
 /* This were in main: */
 void unmark_files (WPanel *panel);

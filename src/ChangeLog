@@ -1,3 +1,10 @@
+2002-10-29  Pavel Roskin  <proski@gnu.org>
+
+	* panel.h: Use spaces, not commas, in the format - they are more
+	readable and easier to document.
+	* screen.c (panel_format): Likewise.
+	(mini_status_format): Likewise.
+
 2002-10-24  Pavel Roskin  <proski@gnu.org>
 
 	* screen.c (mini_info_separator): Revert last patch.  The bug is

@@ -1382,17 +1382,17 @@ panel_format (WPanel *panel)
     switch (panel->list_type){
 
     case list_long:
-	return "full perm,space,nlink,space,owner,space,group,space,size,space,mtime,space,name";
+	return "full perm space nlink space owner space group space size space mtime space name";
 
     case list_brief:
-	return "half 2,type,name";
+	return "half 2 type name";
 
     case list_user:
 	return panel->user_format;
 
     default:
     case list_full:
-	return "half type,name,|,size,|,mtime";
+	return "half type name | size | mtime";
     }
 }
 
@@ -1405,13 +1405,13 @@ mini_status_format (WPanel *panel)
     switch (panel->list_type){
 
     case list_long:
-       return "full perm,space,nlink,space,owner,space,group,space,size,space,mtime,space,name";
+       return "full perm space nlink space owner space group space size space mtime space name";
 
     case list_brief:
-       return "half type,name,space,bsize,space,perm,space";
+       return "half type name space bsize space perm space";
 
     case list_full:
-       return "half type,name";
+       return "half type name";
 
     default:
     case list_user:
