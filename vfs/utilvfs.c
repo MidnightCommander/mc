@@ -60,8 +60,8 @@
  * returns a malloced strings with the pathname relative to the host.
  * */
 
-char *vfs_split_url (char *path, char **host, char **user, int *port, char **pass,
-				 int default_port, int flags)
+char *vfs_split_url (const char *path, char **host, char **user, 
+		     int *port, char **pass, int default_port, int flags)
 {
     struct passwd *passwd_info;
     char *dir, *colon, *inner_colon, *at, *rest;

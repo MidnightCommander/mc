@@ -347,8 +347,8 @@ extern int vfs_parse_filedate(int idx, time_t *t);
 
 extern void vfs_die (char *msg);
 extern char *vfs_get_password (char *msg);
-extern char *vfs_split_url (char *path, char **host, char **user, int *port, char **pass,
-					int default_port, int flags);
+extern char *vfs_split_url (const char *path, char **host, char **user, 
+			    int *port, char **pass, int default_port, int flags);
 
 #ifdef WITH_SMBFS
 /* Interface for requesting SMB credentials.  */
