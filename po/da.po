@@ -1,18 +1,18 @@
 # Danish translation of Midnight Commander
 # Copyright (C) 1998 Free Software Foundation, Inc.
-# Kenneth Christiansen <kenneth@ripen.dk>,1999
-# Birger Langkjer <birger.langkjer@image.dk>,1999.
-# Keld Simonsen <keld@dkuug.dk> 2000.
+# Kenneth Christiansen <kenneth@ripen.dk>, 1999-2000
+# Birger Langkjer <birger.langkjer@image.dk>, 1999.
+# Keld Simonsen <keld@dkuug.dk>, 2000.
 #
 # Note: MC består af konsol- (mc) og gtkdel (gmc)
 # Genveje i konsolen er '&+stort bogstav', resten
-# af linien er med småt, så kan sort/hvid brugere
+# af linjen er med småt, så kan sort/hvid brugere
 # lettere se hvilken tast er genvejen.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
-"POT-Creation-Date: 2000-04-16 14:58+0200\n"
+"POT-Creation-Date: 2000-05-07 04:48+0200\n"
 "PO-Revision-Date: 2000-04-26 01:37+01:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -120,7 +120,7 @@ msgstr "Midnight Commander-holdet"
 
 #: gnome/gcmd.c:102
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
-msgstr "bug-rapporter: http://bugs.gnome.org, eller brug gnome-bug"
+msgstr "fejl-rapporter: http://bugs.gnome.org, eller brug bug-buddy"
 
 #: gnome/gcmd.c:114
 msgid "GNU Midnight Commander"
@@ -128,7 +128,7 @@ msgstr "GNU Midnight Commander"
 
 #: gnome/gcmd.c:117
 msgid "The GNOME edition of the Midnight Commander file manager."
-msgstr "GNOME udgaven af Midnight Commander filhåndteringen."
+msgstr "Gnome udgaven af Midnight Commander filhåndteringen."
 
 #: gnome/gcmd.c:290
 msgid "Sort By"
@@ -286,7 +286,7 @@ msgstr "Opretter en skrivebordsgenvej"
 
 #: gnome/gcmd.c:963
 msgid "Enter the URL:"
-msgstr "Indtast URL'en:"
+msgstr "Indtast Url'en:"
 
 #: gnome/gcustom-layout.c:34
 msgid "Access Time"
@@ -305,7 +305,7 @@ msgstr "Gruppe"
 
 #: gnome/gcustom-layout.c:37
 msgid "Group ID"
-msgstr "Gruppe-ID"
+msgstr "Gruppe-id"
 
 #: gnome/gcustom-layout.c:38
 msgid "Inode Number"
@@ -313,7 +313,7 @@ msgstr "Inode-nummer"
 
 #: gnome/gcustom-layout.c:39 src/achown.c:378
 msgid "Mode"
-msgstr "Modus"
+msgstr "Tilstand"
 
 #: gnome/gcustom-layout.c:40
 msgid "Modification Time"
@@ -343,7 +343,7 @@ msgstr "Type"
 
 #: gnome/gcustom-layout.c:48
 msgid "User ID"
-msgstr "Bruger-ID"
+msgstr "Bruger-id"
 
 #: gnome/gcustom-layout.c:142
 msgid "Possible Columns"
@@ -411,11 +411,11 @@ msgstr "Opretter en ny mappe"
 
 #: gnome/gdesktop.c:2643
 msgid "URL L_ink..."
-msgstr "_URL-genvej..."
+msgstr "_Url-genvej..."
 
 #: gnome/gdesktop.c:2643
 msgid "Creates a new URL link"
-msgstr "Opretter en ny URL-genvej"
+msgstr "Opretter en ny Url-genvej"
 
 #: gnome/gdesktop.c:2644
 msgid "_Launcher..."
@@ -471,7 +471,7 @@ msgstr "Genskab standard_ikoner"
 
 #: gnome/gdesktop.c:2670
 msgid "Configure _Background Image"
-msgstr "Indstil _baggundsbillede"
+msgstr "Indstil _baggrundsbillede"
 
 #. Icon position
 #: gnome/gdesktop-prefs.c:242
@@ -667,7 +667,7 @@ msgstr "færdig."
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
-#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1834
+#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1833
 msgid "Password:"
 msgstr "Adgangskode:"
 
@@ -778,7 +778,7 @@ msgid ""
 "Are you sure you want to exit?"
 msgstr ""
 "Bemærk at hvis du vælger at afslutte filhåndteringen, vil du også\n"
-"afslutte GNOME skrivebordshåndteringen.\n"
+"afslutte Gnome skrivebordshåndteringen.\n"
 "\n"
 "Er du sikker på at du vil afslutte?"
 
@@ -794,9 +794,10 @@ msgstr ""
 "Filhåndteringen og skrivebordshåndteringen afslutter nu\n"
 "\n"
 "Hvis du vil starte filhåndteringen eller skrivebordshåndteringen igen,\n"
-"kan du starte den fra panelet eller du kan køre UNIX kommandoen 'gmc'\n"
+"kan du starte den fra panelet eller du kan køre Unix kommandoen 'gmc'\n"
 "\n"
-"Tryk OK for at afslutte programmet eller annullér for fortsat at bruge det."
+"Tryk Ok for at afslutte programmet eller annullér for fortsat at bruge
+det."
 
 #: gnome/glayout.c:367
 msgid "_File..."
@@ -983,10 +984,10 @@ msgid ""
 "As root, you can damage your system if you are not careful, and the GNOME "
 "File Manager will not stop you from doing it."
 msgstr ""
-"Du kører GNOME filhåndteringen som administrator (root).\n"
+"Du kører Gnome filhåndteringen som administrator (root).\n"
 "\n"
 "Som root kan du gøre skade på dit system, hvis ud ikke passer på.\n"
-"GNOME filhåndteringen vil ikke forhindre dig i det."
+"Gnome filhåndteringen vil ikke forhindre dig i det."
 
 #: gnome/gmount.c:218
 msgid "Could not open the /etc/fstab file"
@@ -1002,7 +1003,7 @@ msgstr ""
 #: gnome/gmount.c:439
 #, c-format
 msgid "CD-ROM %d"
-msgstr "Cd-rom %d"
+msgstr "Cdrom %d"
 
 #: gnome/gmount.c:451
 #, c-format
@@ -1017,7 +1018,7 @@ msgstr "Disk %d"
 #: gnome/gmount.c:462
 #, c-format
 msgid "NFS dir %s"
-msgstr "NFS mappe %s"
+msgstr "NFS-mappe %s"
 
 #: gnome/gmount.c:466
 #, c-format
@@ -1111,7 +1112,7 @@ msgstr "Sidst læst den: "
 
 #: gnome/gnome-file-property-dialog.c:313
 msgid "URL:"
-msgstr "URL:"
+msgstr "Url:"
 
 #: gnome/gnome-file-property-dialog.c:320
 msgid "Caption:"
@@ -1189,7 +1190,7 @@ msgstr "Filrettigheder"
 
 #: gnome/gnome-file-property-dialog.c:764 gnome/gprop.c:259
 msgid "Current mode: "
-msgstr "Nuværende modus: "
+msgstr "Nuværende tilstand: "
 
 #. Headings
 #: gnome/gnome-file-property-dialog.c:780 gnome/gprop.c:272
@@ -1241,7 +1242,7 @@ msgstr "Filejer"
 
 #: gnome/gnome-file-property-dialog.c:1097
 msgid "URL"
-msgstr "URL"
+msgstr "Url"
 
 #: gnome/gnome-file-property-dialog.c:1100
 msgid "Statistics"
@@ -1401,7 +1402,7 @@ msgstr "Beregn totaler før filer kopieres"
 
 #: gnome/gprefs.c:163
 msgid "FTP directory cache timeout :"
-msgstr "FTP-mappe mellemlager timeout :"
+msgstr "FTP-mappe buffer tidsudløb :"
 
 #: gnome/gprefs.c:167
 msgid "Allow customization of icons in icon view"
@@ -1421,7 +1422,7 @@ msgstr "VFS"
 
 #: gnome/gprefs.c:188
 msgid "Caching"
-msgstr "Mellemlager"
+msgstr "Bufring"
 
 #: gnome/gprefs.c:478
 msgid "Preferences"
@@ -1449,7 +1450,7 @@ msgstr "Brug terminal"
 
 #: gnome/gprop.c:248
 msgid "File mode (permissions)"
-msgstr "Filmodus (rettigheder)"
+msgstr "Filtilstand (rettigheder)"
 
 #: gnome/gprop.c:321 gnome/gprop.c:347
 msgid "<Unknown>"
@@ -1752,7 +1753,7 @@ msgid ""
 " Increase edit.h:MAXBUF and recompile the editor. "
 msgstr ""
 " \n"
-" Gør edit.h:MAXBUF større og rekompilér editoren. "
+" Gør edit.h:MAXBUF større og omkompilér editoren. "
 
 #: gtkedit/editcmd.c:298
 msgid " Error writing to pipe: "
@@ -2213,12 +2214,12 @@ msgstr " Klip til klipbord "
 #: gtkedit/editcmd.c:2724 gtkedit/editcmd.c:2728 gtkedit/editcmd.c:2733
 #: gtkedit/editcmd.c:2736 src/view.c:1915
 msgid " Goto line "
-msgstr " Gå til linie "
+msgstr " Gå til linje "
 
 #: gtkedit/editcmd.c:2724 gtkedit/editcmd.c:2728 gtkedit/editcmd.c:2733
 #: gtkedit/editcmd.c:2736
 msgid " Enter line: "
-msgstr " Indtast linie: "
+msgstr " Indtast linje: "
 
 #: gtkedit/editcmd.c:2757 gtkedit/editcmd.c:2770
 msgid " Save Block "
@@ -2328,7 +2329,7 @@ msgstr ""
 " Ophavsret (C) 1996 the Free Software Foundation\n"
 "\n"
 "       En brugervenlig teksteditor skrevet\n"
-"             for Midnight Commander.\n"
+"             til Midnight Commander.\n"
 
 #: gtkedit/editmenu.c:124 gtkedit/editmenu.c:140
 msgid "&Open/load...     C-o"
@@ -3774,7 +3775,7 @@ msgstr "Tk"
 
 #: src/features.inc:16
 msgid "text mode"
-msgstr "tekst modus"
+msgstr "tekst tilstand"
 
 #: src/features.inc:18
 msgid " with X11 support to read modifiers"
@@ -3790,7 +3791,7 @@ msgstr ", ftpfs"
 
 #: src/features.inc:28
 msgid " (proxies: hsc proxy)"
-msgstr " (proxier: hsc proxy)"
+msgstr " (proxyer: hsc proxy)"
 
 #: src/features.inc:30
 msgid ", mcfs"
@@ -4448,7 +4449,7 @@ msgstr ""
 
 #: src/find.c:130
 msgid "&Suspend"
-msgstr "&Suspender"
+msgstr "&Suspendér"
 
 #: src/find.c:131
 msgid "Con&tinue"
@@ -4655,7 +4656,7 @@ msgstr "Skift &Til"
 
 #: src/hotlist.c:201
 msgid "Subgroup - press ENTER to see list"
-msgstr "Undergruppe - tryk ENTER for at se listen"
+msgstr "Undergruppe - tryk RETUR for at se listen"
 
 #: src/hotlist.c:620
 msgid "Active VFS directories"
@@ -4940,7 +4941,7 @@ msgstr "vis &Ministatus"
 
 #: src/layout.c:175
 msgid "menu&Bar visible"
-msgstr "menulinie synlig"
+msgstr "menulinje synlig"
 
 #: src/layout.c:176
 msgid "&Equal split"
@@ -5023,7 +5024,7 @@ msgstr " Du har indtastet \"%s\""
 
 #: src/learn.c:170
 msgid "OK"
-msgstr "OK"
+msgstr "Ok"
 
 #: src/learn.c:177
 msgid ""
@@ -5080,7 +5081,7 @@ msgstr "Tryk på en tast for at fortsætte..."
 
 #: src/main.c:834
 msgid " The shell is already running a command "
-msgstr " Shell'en kører allerede en kommando "
+msgstr " Skallen kører allerede en kommando "
 
 #: src/main.c:861 src/screen.c:2116 src/screen.c:2163
 msgid " The Midnight Commander "
@@ -5564,7 +5565,7 @@ msgstr "Fjern museunderstøttelse i tekstversion"
 
 #: src/main.c:2724
 msgid "Disables subshell support"
-msgstr "Slå underskal understøttelse fra"
+msgstr "Deaktivér underskal understøttelse"
 
 #: src/main.c:2728
 msgid "Prints working directory at program exit"
@@ -5584,7 +5585,7 @@ msgstr "Brug tændstiktegn til at tegne"
 
 #: src/main.c:2739
 msgid "Enables subshell support (default)"
-msgstr "Slå underskal understøttelse til (forvalgt)"
+msgstr "Aktivér underskal understøttelse (forvalgt)"
 
 #: src/main.c:2744
 msgid "Tries to use termcap instead of terminfo"
@@ -5616,7 +5617,7 @@ msgstr "Ingen vinduer åbnet ved opstart"
 
 #: src/main.c:2756
 msgid "No desktop icons"
-msgstr "Genindlæs skrivebordsikonerne"
+msgstr "Ingen skrivebordsikoner"
 
 #: src/main.c:2757
 msgid "Look more like traditional gmc"
@@ -5636,7 +5637,7 @@ msgstr ""
 
 #: src/main.c:3149
 msgid " Notice "
-msgstr " Notits "
+msgstr " Notér "
 
 #: src/main.c:3150
 msgid ""
@@ -6479,29 +6480,29 @@ msgstr ""
 "Uventet EOF\n"
 "%s"
 
-#: vfs/direntry.c:310
+#: vfs/direntry.c:300
 #, c-format
 msgid "Dir cache expired for %s"
 msgstr "Katalog-cache udløbet for %s"
 
-#: vfs/direntry.c:440 vfs/direntry.c:443
+#: vfs/direntry.c:430 vfs/direntry.c:433
 msgid " Direntry warning "
 msgstr " Katalogindgang advarsel "
 
-#: vfs/direntry.c:440
+#: vfs/direntry.c:430
 #, c-format
 msgid "Super ino_usage is %d, memory leak"
 msgstr "Super ino_usage er %d, lagerlækage"
 
-#: vfs/direntry.c:443
+#: vfs/direntry.c:433
 msgid "Super has want_stale set"
 msgstr "Super har want_stale sat"
 
-#: vfs/direntry.c:823
+#: vfs/direntry.c:811
 msgid "Starting linear transfer..."
 msgstr "Begynder lineær overførsel..."
 
-#: vfs/direntry.c:968
+#: vfs/direntry.c:956
 msgid "Getting file"
 msgstr "Henter fil: "
 
@@ -6717,20 +6718,20 @@ msgstr "(følg rfc959)"
 msgid "(chdir first)"
 msgstr "(chdir først)"
 
-#: vfs/ftpfs.c:1286
+#: vfs/ftpfs.c:1287
 msgid "ftpfs: failed"
 msgstr "ftpfs: fejlede"
 
-#: vfs/ftpfs.c:1296
+#: vfs/ftpfs.c:1297
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: fejlede; ingen steder at falde tilbage på"
 
-#: vfs/ftpfs.c:1359
+#: vfs/ftpfs.c:1360
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs: gemmer fil %d (%d)"
 
-#: vfs/ftpfs.c:1774
+#: vfs/ftpfs.c:1775
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -6878,31 +6879,31 @@ msgstr ""
 "%s\n"
 "ser ikke ud til at være et tar-arkiv."
 
-#: vfs/vfs.c:1152
+#: vfs/vfs.c:1151
 msgid "Changes to file lost"
 msgstr "Ændringer til fil tabt"
 
-#: vfs/vfs.c:1795
+#: vfs/vfs.c:1794
 msgid "Could not parse:"
 msgstr "Kunne ikke fortolke:"
 
-#: vfs/vfs.c:1797
+#: vfs/vfs.c:1796
 msgid "More parsing errors will be ignored."
 msgstr "Flere fortolkningsfejl vil blive ignoreret."
 
-#: vfs/vfs.c:1797
+#: vfs/vfs.c:1796
 msgid "(sorry)"
 msgstr "(beklager)"
 
-#: vfs/vfs.c:1808
+#: vfs/vfs.c:1807
 msgid "Internal error:"
 msgstr " Intern fejl:"
 
-#: vfs/vfs.c:1818
+#: vfs/vfs.c:1817
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
 msgstr "%s: %s: %s %3d%% (%ld byte overført)"
 
-#: vfs/vfs.c:1819
+#: vfs/vfs.c:1818
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld byte overført"
@@ -7013,9 +7014,3 @@ msgstr " Kunne ikke åbne filen %s "
 msgid "Undelete filesystem for ext2"
 msgstr "Undelete filsystem for ext2"
 
-#~ msgid ""
-#~ " Can't chdir to %s \n"
-#~ " %s "
-#~ msgstr ""
-#~ " Kan ikke skifte mappe til %s \n"
-#~ " %s "
