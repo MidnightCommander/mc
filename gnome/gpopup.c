@@ -21,6 +21,8 @@
 #define CLIST_FROM_SW(panel_list) GTK_CLIST (GTK_BIN (panel_list)->child)
 
 
+extern int we_can_afford_the_speed;
+
 /* Flags for the popup menu entries.  They specify to which kinds of files an entry is valid for. */
 enum {
 	F_ALL 		= 1 << 0,	/* Applies to all files */
@@ -88,7 +90,7 @@ dicon_properties (GtkWidget *widget, DesktopIconInfo *dii)
 	
 	path = g_strconcat (getenv("HOME"), "/desktop/", dii->filename, NULL);
 /*	retval = item_properties (dii->dicon, path, dii);*/
-	dlg = gnome_file_property_dialog_new (path);
+	dlg = gnome_file_property_dialog_new (path, TRUE);
 	gtk_widget_show_all (dlg);
 	if (gnome_dialog_run (GNOME_DIALOG (dlg)) == 0)
 		retval = gnome_file_property_dialog_make_changes (GNOME_FILE_PROPERTY_DIALOG (dlg));
@@ -115,7 +117,8 @@ panel_action_properties (GtkWidget *widget, WPanel *panel)
 
 /*	if (item_properties (GTK_WIDGET (CLIST_FROM_SW (panel->list)), full_name, NULL) != 0)
 	reread_cmd ();*/
-	dlg = gnome_file_property_dialog_new (full_name);
+	dlg = gnome_file_property_dialog_new (full_name, we_can_afford_the_speed);
+	gnome_dialog_set_parent (GNOME_DIALOG (dlg), GTK_WINDOW (gtk_widget_get_toplevel (panel->ministatus)));
 	if (gnome_dialog_run (GNOME_DIALOG (dlg)) == 0)
 		retval = gnome_file_property_dialog_make_changes (GNOME_FILE_PROPERTY_DIALOG (dlg));
 		gtk_widget_destroy (dlg);

@@ -1,3 +1,22 @@
+1999-01-28  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-file-property-dialog.c (create_settings_pane): We only let
+	you set info if we are a regular file, or a link to a regular file.
+
+	* gdesktop-icon.c (desktop_icon_reshape): Cut-n-paste error fixed
+	by Quartic.
+
+1999-01-27  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-file-property-dialog.h (struct _GnomeFilePropertyDialog):
+	Now make open field mandatory and icon selection optional.
+	* gnome-file-property-dialog.c: as above
+	
+	* gpopup.c (panel_action_properties): only allow setting images if
+	we_can_afford_the_speed.
+
+	* gicon.c: make we_can_afford_the_speed non-static
+
 1999-01-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gcorba.c: Provide new code to activate an existing

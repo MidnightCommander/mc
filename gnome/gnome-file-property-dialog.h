@@ -64,9 +64,10 @@ struct _GnomeFilePropertyDialog
 	gint euid;
 
 	/* Settings Stuff */
+	GtkWidget *open_label, *open_entry, *open_cbox;
 	GtkWidget *prop1_label, *prop1_entry, *prop1_cbox;
-	GtkWidget *prop2_label, *prop2_entry, *prop2_cbox;
-	GtkWidget *dlg;
+	GtkWidget *prop2_label, *prop2_entry, *prop2_cbox, *prop2_hline;
+	GtkWidget *button;
 
 	gchar *fm_open;
 	gchar *fm_view;
@@ -76,6 +77,8 @@ struct _GnomeFilePropertyDialog
 	gchar *mime_fm_view;
 	gchar *mime_drop_target;
 	gchar *mime_edit;
+	gchar *icon_filename;
+	gboolean can_set_icon;
 	GdkImlibImage *im;
 
 	/* Private Data */
@@ -88,7 +91,7 @@ struct _GnomeFilePropertyDialogClass
 
 
 GtkType    gnome_file_property_dialog_get_type     (void);
-GtkWidget *gnome_file_property_dialog_new          (gchar *file_name);
+GtkWidget *gnome_file_property_dialog_new          (gchar *file_name, gboolean can_set_icon);
 gint       gnome_file_property_dialog_make_changes (GnomeFilePropertyDialog *file_property_dialog);
 
 #ifdef __cplusplus

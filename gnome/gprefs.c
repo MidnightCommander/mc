@@ -31,6 +31,7 @@ extern int vfs_timeout;
 extern int ftpfs_always_use_proxy;
 extern char* ftpfs_anonymous_passwd;
 extern int file_op_compute_totals;
+extern int we_can_afford_the_speed;
 typedef enum
 {
         PROPERTY_NONE,
@@ -161,6 +162,10 @@ static Property caching_and_optimization_props [] =
         {
                 N_("FTP directory cache timeout :"), PROPERTY_INT,
                 &ftpfs_directory_timeout, N_("Seconds"), NULL, NULL
+        },
+        {
+                N_("Allow customization of icons in panels"), PROPERTY_BOOL,
+                &we_can_afford_the_speed, NULL, NULL, NULL
         },
         PROPERTIES_DONE
 };

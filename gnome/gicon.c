@@ -39,7 +39,7 @@ static gid_t our_gid;
 /*
  * If true, we choose the icon in a way that might be a bit slow
  */
-static int we_can_affort_the_speed = 0;
+int we_can_afford_the_speed = 0;
 
 /**
  * gicon_init:
@@ -246,7 +246,7 @@ gicon_get_icon_for_file_speed (char *directory, file_entry *fe, gboolean do_quic
 	/*
 	 * 2. Expensive tests
 	 */
-	if (!do_quick || we_can_affort_the_speed) {
+	if (!do_quick || we_can_afford_the_speed) {
 		char *full_name;
 
 		full_name = g_concat_dir_and_file (directory, fe->fname);

@@ -374,7 +374,7 @@ desktop_icon_reshape (DesktopIcon *dicon)
 	args[1].name = "height";
 	gtk_object_getv (GTK_OBJECT (dicon->icon), 2, args);
 	icon_width = GTK_VALUE_DOUBLE (args[0]);
-	icon_height = GTK_VALUE_DOUBLE (args[0]);
+	icon_height = GTK_VALUE_DOUBLE (args[1]);
 
 	/* Get size of icon text */
 

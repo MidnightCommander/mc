@@ -2243,7 +2243,7 @@ static GnomeUIInfo viewbar[] = {
 		GNOME_APP_PIXMAP_DATA, listing_brief_list_xpm, 0, (GdkModifierType) 0, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Detailed"), N_("Switch view to show detailed file statistics"), do_switch_to_full_listing, NULL, NULL, \
 		GNOME_APP_PIXMAP_DATA, listing_list_xpm, 0, (GdkModifierType) 0, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Custom"), N_("Switch view to show custom determined statistics.  You can set this in the "), do_switch_to_custom_listing, NULL, NULL, \
+	{ GNOME_APP_UI_ITEM, N_("Custom"), N_("Switch view to show custom determined statistics."), do_switch_to_custom_listing, NULL, NULL, \
 		GNOME_APP_PIXMAP_DATA, listing_custom_xpm, 0, (GdkModifierType) 0, NULL },
 	GNOMEUIINFO_END
 };
