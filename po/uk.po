@@ -3756,6 +3756,10 @@ msgstr ", ftpfs"
 msgid " (proxies: hsc proxy)"
 msgstr " (прокс╕: hsc прокс╕)"
 
+#: src/textconf.c:34
+msgid ", fish"
+msgstr ", fish"
+
 #: src/textconf.c:17
 msgid ", mcfs"
 msgstr ", mcfs"
