@@ -700,9 +700,18 @@ static int
 fish_chown (vfs *me, char *path, int owner, int group)
 {
     char *sowner, *sgroup;
+    struct passwd *pw;
+    struct group *gr;
     PREFIX
-    sowner = getpwuid( owner )->pw_name;
-    sgroup = getgrgid( group )->gr_name;
+
+    if ((pw = getpwuid (owner)) == NULL)
+	return 0;
+
+    if ((gr = getgrgid (group)) == NULL)
+	return 0;
+
+    sowner = pw->pw_name;
+    sgroup = gr->gr_name;
     g_snprintf(buf, sizeof(buf),
             "#CHOWN /%s /%s\n"
 	    "chown %s \"/%s\" 2>/dev/null\n"
