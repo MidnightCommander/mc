@@ -1286,7 +1286,7 @@ msgid " Menu edit "
 msgstr " Menyunu dəyişdir "
 
 #: src/cmd.c:690
-msgid " Which menu file will you edit ? "
+msgid " Which menu file do you want to edit? "
 msgstr " Hansı menyu faylını düzəltmək istəyirsan?"
 
 #: src/cmd.c:692
@@ -2822,20 +2822,20 @@ msgid "&Listing format edit"
 msgstr "Şəkilləndirmə düzəldicisinin &Sıralaması "
 
 #: src/main.c:1056
-msgid "&Extension file edit"
+msgid "Edit &extension file"
 msgstr "Fayl suf&fikslərini dəyişdir"
 
 #: src/main.c:1057
-msgid "&Menu file edit"
+msgid "Edit &menu file"
 msgstr "&Menyunu dəyişdir"
 
 #: src/main.c:1059
-msgid "Menu edi&Tor edit"
+msgid "Edit edi&tor menu file"
 msgstr "Menyu edi&toru"
 
 #: src/main.c:1060
 #, fuzzy
-msgid "&Syntax file edit"
+msgid "Edit &syntax file"
 msgstr "&Menyunu dəyişdir"
 
 #: src/main.c:1066

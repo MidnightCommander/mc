@@ -632,7 +632,7 @@ menu_edit_cmd (int where)
     
     dir = query_dialog (
 	_(" Menu edit "),
-	_(" Which menu file will you edit ? "), 
+	_(" Which menu file do you want to edit? "), 
 	0, geteuid() ? 2 : 3,
 	_("&Local"), _("&Home"), _("&System Wide")
     );

@@ -1287,7 +1287,7 @@ msgid " Menu edit "
 msgstr " Izvçlòu rediìçðana "
 
 #: src/cmd.c:690
-msgid " Which menu file will you edit ? "
+msgid " Which menu file do you want to edit? "
 msgstr " Kuru izvçlnes failu jûs rediìçsiet ? "
 
 #: src/cmd.c:692
@@ -2825,20 +2825,20 @@ msgid "&Listing format edit"
 msgstr "&Saraksta formâta rediìçðana"
 
 #: src/main.c:1056
-msgid "&Extension file edit"
+msgid "Edit &extension file"
 msgstr "&Paplaðinâjumu faila rediìçðana"
 
 #: src/main.c:1057
-msgid "&Menu file edit"
+msgid "Edit &menu file"
 msgstr "&Izvçlnes faila rediìçðana"
 
 #: src/main.c:1059
-msgid "Menu edi&Tor edit"
+msgid "Edit edi&tor menu file"
 msgstr "Izvçlòu re&Daktora rediìçðana"
 
 #: src/main.c:1060
 #, fuzzy
-msgid "&Syntax file edit"
+msgid "Edit &syntax file"
 msgstr "&Izvçlnes faila rediìçðana"
 
 #: src/main.c:1066

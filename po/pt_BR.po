@@ -1302,7 +1302,7 @@ msgstr " Editar menu"
 
 #
 #: src/cmd.c:690
-msgid " Which menu file will you edit ? "
+msgid " Which menu file do you want to edit? "
 msgstr " Que arquivo de menu quer editar? "
 
 #: src/cmd.c:692
@@ -2841,21 +2841,21 @@ msgid "&Listing format edit"
 msgstr "Editar forma de &Listagem"
 
 #: src/main.c:1056
-msgid "&Extension file edit"
+msgid "Edit &extension file"
 msgstr "Editar &extensões de arquivo"
 
 #: src/main.c:1057
-msgid "&Menu file edit"
+msgid "Edit &menu file"
 msgstr "Editar &Menu de arquivo"
 
 #
 #: src/main.c:1059
-msgid "Menu edi&Tor edit"
+msgid "Edit edi&tor menu file"
 msgstr "Editar Edi&tor de Menu"
 
 #: src/main.c:1060
 #, fuzzy
-msgid "&Syntax file edit"
+msgid "Edit &syntax file"
 msgstr "Editar &Menu de arquivo"
 
 #: src/main.c:1066

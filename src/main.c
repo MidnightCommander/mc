@@ -1063,11 +1063,11 @@ static menu_entry CmdMenu[] = {
 #if defined (USE_EXT2FSLIB) || defined (LISTMODE_EDITOR)
     {' ', "", ' ', 0},
 #endif
-    {' ', N_("&Extension file edit"), 'E', ext_cmd},
-    {' ', N_("&Menu file edit"), 'M', edit_mc_menu_cmd},
+    {' ', N_("Edit &extension file"), 'E', ext_cmd},
+    {' ', N_("Edit &menu file"), 'M', edit_mc_menu_cmd},
 #ifdef USE_INTERNAL_EDIT
-    {' ', N_("Menu edi&Tor edit"), 'T', edit_user_menu_cmd},
-    {' ', N_("&Syntax file edit"), 'S', edit_syntax_cmd}
+    {' ', N_("Edit edi&tor menu file"), 'T', edit_user_menu_cmd},
+    {' ', N_("Edit &syntax file"), 'S', edit_syntax_cmd}
 #endif				/* USE_INTERNAL_EDIT */
 };
 

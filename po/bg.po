@@ -1281,7 +1281,7 @@ msgid " Menu edit "
 msgstr "Редактирай меню"
 
 #: src/cmd.c:690
-msgid " Which menu file will you edit ? "
+msgid " Which menu file do you want to edit? "
 msgstr " Кой меню-файл ще редактирате? "
 
 #: src/cmd.c:692
@@ -2817,19 +2817,19 @@ msgid "&Listing format edit"
 msgstr "Редактирай формата на списъка"
 
 #: src/main.c:1056
-msgid "&Extension file edit"
+msgid "Edit &extension file"
 msgstr "Редактирай файл с разширения"
 
 #: src/main.c:1057
-msgid "&Menu file edit"
+msgid "Edit &menu file"
 msgstr "Редактирай меню-файл"
 
 #: src/main.c:1059
-msgid "Menu edi&Tor edit"
+msgid "Edit edi&tor menu file"
 msgstr "Меню на редактора"
 
 #: src/main.c:1060
-msgid "&Syntax file edit"
+msgid "Edit &syntax file"
 msgstr "Редактирай файл със синтаксис"
 
 #: src/main.c:1066
