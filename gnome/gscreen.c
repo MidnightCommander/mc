@@ -1455,7 +1455,7 @@ file_list_popup (GdkEventButton *event, WPanel *panel)
 
 	trash_dir = g_strconcat (gnome_user_home_dir, "/",
 				 DESKTOP_DIR_NAME, "/",
-				 "Trash",
+				 "Trash.gmc",
 				 NULL);
 
 	if ((strncmp (panel->cwd, trash_dir, strlen (trash_dir)) == 0) && (panel->count != 1))

@@ -637,7 +637,7 @@ create_trash_panel (void)
 	is_trash_panel = TRUE;
 	trash_dir = g_strconcat (gnome_user_home_dir, "/",
 				 DESKTOP_DIR_NAME, "/",
-				 "Trash",
+				 "Trash.gmc",
 				 NULL);
 	retval = new_panel_at (trash_dir);
 	g_free (trash_dir);

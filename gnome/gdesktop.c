@@ -595,14 +595,62 @@ get_drop_grid (gint xpos, gint ypos, gint need_position_list_length, GSList *gri
 			        get_icon_snap_pos (&new_xpos, &new_ypos);
 			}
 	                
-			grid_list = g_slist_append (grid_list, (void *) new_xpos);	      	                                    grid_list = g_slist_append (grid_list, (void *) new_ypos);
+			grid_list = g_slist_append (grid_list, (void *) new_xpos);
+			grid_list = g_slist_append (grid_list, (void *) new_ypos);
 	        }
 	}
 
 	return grid_list;
 
 }
+
+#define NAUTILUS_KEY "<?xml version=\"1.0\"?>\n<nautilus_object nautilus_link=\""
+#define NAUTILUS_MOUNT_KEY "Mount Link\""
+#define NAUTILUS_GENERIC_KEY "Generic Link\""
+#define NAUTILUS_HOME_KEY "Home Link\""
+#define NAUTILUS_TRASH_KEY "Trash Link\""
+
+static gboolean
+should_skip_nautilus_file (char *name)
+{
+	char buffer [256], *full, *p;
+	FILE *f;
+	int n;
+
+	if (strcmp (name, ".nautilus-metafile.xml") == 0)
+		return TRUE;
+
+	if (strcmp (name, "Trash") == 0)
+		return TRUE;
+
+	full = g_concat_dir_and_file (desktop_directory, name);
+	f = fopen (full, "r");
+	g_free (full);
 	
+	if (f == NULL)
+		return FALSE;
+	n = fread (buffer, sizeof (buffer), 1, f);
+	fclose (f);
+
+	if (n < 0)
+		return FALSE;
+
+	if (strncmp (buffer, NAUTILUS_KEY, strlen (NAUTILUS_KEY)) != 0)
+		return FALSE;
+
+	p = buffer + strlen (NAUTILUS_KEY);
+	
+	if (strncmp (p, NAUTILUS_HOME_KEY, strlen (NAUTILUS_HOME_KEY)) == 0)
+		return TRUE;
+
+	if (strncmp (p, NAUTILUS_TRASH_KEY, strlen (NAUTILUS_TRASH_KEY)) == 0)
+		return TRUE;
+	
+	if (strncmp (p, NAUTILUS_MOUNT_KEY, strlen (NAUTILUS_MOUNT_KEY)) == 0)
+		return TRUE;
+
+	return FALSE;
+}
 
 /* Reloads the desktop icons efficiently.  If there are "new" files for which no
  * icons have been created, then icons for them will be created started at the
@@ -665,6 +713,9 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 			&& dirent->d_name[2] == 0))
 			continue;
 
+		if (should_skip_nautilus_file (dirent->d_name))
+			continue;
+		    
 		l = icon_exists_in_list (all_icons, dirent->d_name);
 		if (l) {
 			GdkImlibImage *im;
@@ -2429,6 +2480,25 @@ create_layout_info (void)
 }
 
 /*
+ * Rename old Trash directory if found
+ */
+static void
+migrate_init (void)
+{
+	struct stat buf;
+	
+	char *old_trash_dir = g_concat_dir_and_file (desktop_directory, "Trash");
+	if (stat (old_trash_dir, &buf) == 0 && S_ISDIR (buf.st_mode)){
+		char *new_trash_dir = g_concat_dir_and_file (desktop_directory, "Trash.gmc");
+		
+		rename (old_trash_dir, new_trash_dir);
+		gnome_metadata_rename (old_trash_dir, new_trash_dir);
+		g_free (new_trash_dir);
+	}
+	g_free (old_trash_dir);
+}
+
+/*
  * Check that the user's desktop directory exists, and if not, create the
  * default desktop setup.
  */
@@ -2450,6 +2520,7 @@ create_desktop_dir (void)
 		gmount_setup_devices ();
 		gprint_setup_devices ();
 	}
+	migrate_init ();
 }
 
 /* Property placed on target windows */
@@ -3420,7 +3491,7 @@ setup_desktop_clicks (void)
 }
 
 static gboolean
-do_rescan (void)
+do_rescan (gpointer data)
 {
 	struct stat buf;
 	

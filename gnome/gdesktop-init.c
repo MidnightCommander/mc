@@ -148,7 +148,7 @@ gdesktop_links_init (void)
 	g_free (link_name);
 
 	/* Create the link to the user's trash directory */
-	link_name = g_concat_dir_and_file (desktop_directory, "Trash");
+	link_name = g_concat_dir_and_file (desktop_directory, "Trash.gmc");
 	icon = gnome_pixmap_file ("mc/gnome-trashcan.png");
 	mc_mkdir (link_name, S_IRUSR | S_IWUSR | S_IXUSR );
 	if (icon){

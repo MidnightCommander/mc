@@ -202,7 +202,7 @@ check_trash_func (WPanel *panel, DesktopIconInfo *dii)
 	gint i;
 	trash_dir = g_strconcat (gnome_user_home_dir, "/",
 				 DESKTOP_DIR_NAME, "/",
-				 "Trash",
+				 "Trash.gmc",
 				 NULL);
 
 	if (mc_stat (trash_dir, &st) || !S_ISDIR (st.st_mode)) {
@@ -243,7 +243,7 @@ check_trash_icon_func (WPanel *panel, DesktopIconInfo *dii)
 
 	trash_dir = g_strconcat (gnome_user_home_dir, "/",
 				 DESKTOP_DIR_NAME, "/",
-				 "Trash",
+				 "Trash.gmc",
 				 NULL);
 	file_name = get_full_filename (panel);
 
@@ -804,7 +804,7 @@ handle_trash (GtkWidget *widget, WPanel *panel)
 
 	trash_dir = g_strconcat (gnome_user_home_dir, "/",
 				 DESKTOP_DIR_NAME, "/",
-				 "Trash",
+				 "Trash.gmc",
 				 NULL);
 
 	if (panel_operate (cpanel, OP_MOVE, trash_dir, FALSE)) {
