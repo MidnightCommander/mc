@@ -54,7 +54,7 @@
 #include <glib.h>
 
 #ifndef __GNUC__
-#define __attribute__()
+#define __attribute__(x)
 #endif
 
 #include "fs.h"

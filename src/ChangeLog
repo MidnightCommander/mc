@@ -1,3 +1,7 @@
+2002-01-21  Pavel Roskin  <proski@gnu.org>
+
+	* global.h [!__GNUC__]: Define __attribute__ with one argument.
+
 2002-01-20  Pavel Roskin  <proski@gnu.org>
 
 	* screen.c (string_file_size): Translate "UP--DIR".
