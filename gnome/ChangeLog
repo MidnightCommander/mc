@@ -1,3 +1,8 @@
+1999-04-07  Owen Taylor  <otaylor@redhat.com>
+
+	* gsession.c (session_save): Set a discard command
+	to get rid of the per-session information.
+
 1999-04-06  Jonathan Blandford  <jrb@redhat.com>
 
 	* gscreen.c: make sure that we bring up an open_with if 

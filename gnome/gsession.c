@@ -157,6 +157,7 @@ session_save (GnomeClient *client, gint phase, GnomeSaveStyle save_style, gint s
 	char *prefix;
 	GList *l;
 	PanelContainer *pc;
+	gchar *discard_args[] = { "rm", NULL };
 
 	prefix = gnome_client_get_config_prefix (client);
 	gnome_config_push_prefix (prefix);
@@ -171,6 +172,10 @@ session_save (GnomeClient *client, gint phase, GnomeSaveStyle save_style, gint s
 
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
+
+	discard_args[1] = gnome_config_get_real_path (prefix);
+	gnome_client_set_discard_command (client, 2, discard_args);
+	g_free (discard_args[1]);
 
 	return TRUE;
 }
