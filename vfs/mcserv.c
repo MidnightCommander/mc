@@ -109,6 +109,10 @@
 #include "mcfsutil.h"
 #include "tcputil.h"
 
+#ifndef INADDR_NONE
+#  define INADDR_NONE (0xffffffffU)
+#endif
+
 /* replacement for g_free() from glib */
 #undef g_free
 #define g_free(x) do {if (x) free (x);} while (0)
@@ -723,8 +727,8 @@ do_quit (void)
 #ifdef HAVE_PAM
 
 struct user_pass {
-    char *username;
-    char *password;
+    const char *username;
+    const char *password;
 };
 
 static int

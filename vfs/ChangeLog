@@ -1,3 +1,8 @@
+2004-10-21  Roland Illig  <roland.illig@gmx.de>
+
+	* mcfs.c: Add INADDR_NONE definition for SunOS.
+	* mcserv.c: Likewise. (struct user_pass): Add "const" qualifier.
+
 2004-10-18  Roland Illig  <roland.illig@gmx.de>
 
 	* extfs/hp48.in: Correct quoting from last patch. Avoid a

@@ -56,6 +56,10 @@
 #include "mcfsutil.h"
 #include "tcputil.h"
 
+#ifndef INADDR_NONE
+#  define INADDR_NONE (0xffffffffU)
+#endif
+
 #define MCFS_MAX_CONNECTIONS 32
 
 static struct _mcfs_connection {
