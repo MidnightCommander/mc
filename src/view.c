@@ -1644,7 +1644,7 @@ block_search (WView *view, char *buffer, int len)
     search_update_steps (view);
     update_activate = 0;
     
-    for (; e < view->last_byte; e++){
+    while (e < view->last_byte){
 	if (e >= update_activate){
 	    update_activate += update_steps;
 	    if (verbose){
@@ -1654,17 +1654,17 @@ block_search (WView *view, char *buffer, int len)
 	    if (got_interrupt ())
 		break;
 	}
-	b = get_byte (view, e);
+	b = get_byte (view, e++);
 	
 	if (*d == b){
 	    d++;
+	    if (d - buffer == len){
+		disable_interrupt_key ();
+		return e - len;
+	    }
 	} else {
 	    e -= d - buffer;
 	    d = buffer;
-	}
-	if (d - buffer == len){
-	    disable_interrupt_key ();
-	    return e - len;
 	}
     }
     disable_interrupt_key ();
@@ -1740,7 +1740,7 @@ hex_search (WView *view, char *text)
 	return;
     }
     
-    view->search_start = pos + 1;
+    view->search_start = pos;
     view->found_len = block_len;
     /* Set the edit cursor to the search position, left nibble */
     view->edit_cursor = view->search_start;
