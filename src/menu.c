@@ -213,7 +213,8 @@ menubar_finish (WMenu *menubar)
     menubar->active = 0;
     menubar->widget.lines = 1;
     widget_want_hotkey (menubar->widget, 0);
-    dlg_select_widget (menubar->widget.parent, menubar->previous_widget);
+
+    dlg_select_by_id (menubar->widget.parent, menubar->previous_widget);
     do_refresh ();
 }
 
@@ -399,7 +400,7 @@ menubar_event    (Gpm_Event *event, WMenu *menubar)
 	return MOU_NORMAL;
     
     if (!menubar->dropped){
-	menubar->previous_widget = menubar->widget.parent->current;
+	menubar->previous_widget = menubar->widget.parent->current->dlg_id;
 	menubar->active = 1;
 	menubar->dropped = 1;
 	was_active = 0;

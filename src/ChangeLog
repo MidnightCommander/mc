@@ -1,5 +1,11 @@
 2003-09-13  Pavel Roskin  <proski@gnu.org>
 
+	* menu.h: Return to keeping dialog id instead of a widget
+	pointer for previous widget.  The widget can be replaced in the
+	meantime.
+	* dlg.c (dlg_select_by_id): New function, essentially a cleaner
+	implementation of dlg_select_nth_widget().
+
 	* dlg.h: Remove "first" field for dialogs and DLG_HAS_MENUBAR.
 	* dlg.c (dlg_mouse_event): Remove menubar hack.
 	* screen.c (do_panel_event): Redirect mouse events on the upper

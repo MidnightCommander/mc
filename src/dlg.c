@@ -369,6 +369,30 @@ find_widget_type (Dlg_head *h, void *callback)
     return w;
 }
 
+/* Find the widget with the given dialog id in the dialog h and select it */
+void
+dlg_select_by_id (Dlg_head *h, int id)
+{
+    Widget *w, *w_found;
+
+    if (!h->current)
+	return;
+
+    w = h->current;
+    w_found = NULL;
+
+    do {
+	if (w->dlg_id == id) {
+	    w_found = w;
+	    break;
+	}
+	w = w->next;
+    } while (w != h->current);
+
+    if (w_found)
+	dlg_select_widget(h, w_found);
+}
+
 void dlg_one_up (Dlg_head *h)
 {
     Widget *old;

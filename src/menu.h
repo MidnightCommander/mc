@@ -37,7 +37,7 @@ typedef struct WMenu {
     int    selected;		/* Selected menu on the top bar */
     int    subsel;		/* Selected entry on the submenu */
     int    max_entry_len;	/* Cache value for the columns in a box */
-    Widget *previous_widget;	/* Selected widget before activating menu */
+    int    previous_widget;	/* Selected widget ID before activating menu */
 } WMenu;
 
 Menu  *create_menu     (char *name, menu_entry *entries, int count,
