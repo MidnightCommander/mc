@@ -1,3 +1,8 @@
+2002-11-14  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* lib/mc.menu: Don't use --repetitive-best option with bzip2 -
+	it is redundant in versions 0.9.5 and above.
+
 2002-11-10  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Check for uintptr_t.  Needed to compile regex.c

@@ -41,7 +41,7 @@ shell_patterns=0
 	read tar
         if [ "$tar"x = x ]; then tar="$Pwd"; fi
 	cd .. && \
-	tar cf - "$Pwd" | bzip2 -f --repetitive-best > "$tar.tar.bz2" && \
+	tar cf - "$Pwd" | bzip2 -f > "$tar.tar.bz2" && \
 	echo "../$tar.tar.bz2 created."
 
 = f \.c$ & t r
@@ -285,7 +285,7 @@ c       Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
         if [ "$EXT" = "bz2" ]; then
 	    bunzip2 -v %f ; gzip -f9 -v $D
 	else
-	    gunzip -v %f ; bzip2 -v --repetitive-best $D
+	    gunzip -v %f ; bzip2 -v $D
 	fi
 
 + t t
@@ -313,7 +313,7 @@ C       Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
 	    gzip -f9 -v $D
 	  else
 	    gunzip -v $1
-	    bzip2 -v --repetitive-best $D
+	    bzip2 -v $D
 	  fi
 	  shift
         done
