@@ -7,6 +7,9 @@ regex: \.gif$
 regex: \.ief$
 	icon-filename=@icondir@/gnome-image-ief.png
 
+regex: \.jpg$
+	icon-filename=@icondir@/gnome-image-jpeg.png
+
 regex: \.jpeg$
 	icon-filename=@icondir@/gnome-image-jpeg.png
 

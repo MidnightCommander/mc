@@ -89,7 +89,7 @@ static struct desktop_icon_info *last_selected_icon;
 /* Drag and drop sources and targets */
 
 static GtkTargetEntry dnd_icon_sources[] = {
-	{ "application/mc-desktop-icon", 0, TARGET_MC_DESKTOP_ICON },
+	{ "application/x-mc-desktop-icon", 0, TARGET_MC_DESKTOP_ICON },
 	{ "text/uri-list", 0, TARGET_URI_LIST },
 	{ "text/plain", 0, TARGET_TEXT_PLAIN }
 };
@@ -99,7 +99,7 @@ static GtkTargetEntry dnd_icon_targets[] = {
 };
 
 static GtkTargetEntry dnd_desktop_targets[] = {
-	{ "application/mc-desktop-icon", 0, TARGET_MC_DESKTOP_ICON },
+	{ "application/x-mc-desktop-icon", 0, TARGET_MC_DESKTOP_ICON },
 	{ "text/uri-list", 0, TARGET_URI_LIST }
 };
 
@@ -112,6 +112,14 @@ static GtkWidget *dnd_proxy_window;
 
 /* Offsets for the DnD cursor hotspot */
 static int dnd_press_x, dnd_press_y;
+
+/* Whether a call to select_icon() is pending because the initial click on an
+ * icon had the GDK_CONTROL_MASK in it.  */
+static int dnd_select_icon_pending;
+
+/* Proxy window for clicks on the root window */
+static GdkWindow *click_proxy_gdk_window;
+static GtkWidget *click_proxy_invisible;
 
 
 static struct desktop_icon_info *desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos);
@@ -371,9 +379,9 @@ reload_desktop_icons (int incremental, int x, int y)
 	load_desktop_icons (incremental, x, y);
 }
 
-/* Unselects all the desktop icons */
+/* Unselects all the desktop icons except the one in exclude */
 static void
-unselect_all (void)
+unselect_all (struct desktop_icon_info *exclude)
 {
 	int i;
 	GList *l;
@@ -383,7 +391,7 @@ unselect_all (void)
 		for (l = layout_slots[i].icons; l; l = l->next) {
 			dii = l->data;
 
-			if (dii->selected) {
+			if (dii->selected && dii != exclude) {
 				desktop_icon_select (DESKTOP_ICON (dii->dicon), FALSE);
 				dii->selected = FALSE;
 			}
@@ -457,18 +465,20 @@ select_range (struct desktop_icon_info *dii, int sel)
 			}
 }
 
-/* Handles icon selection and unselection due to button presses */
+/* Handles icon selection and unselection due to button presses.  The
+ * event_state is the state field of the event.
+ */
 static void
-select_icon (struct desktop_icon_info *dii, GdkEventButton *event)
+select_icon (struct desktop_icon_info *dii, int event_state)
 {
 	int range;
 	int additive;
 
-	range = ((event->state & GDK_SHIFT_MASK) != 0);
-	additive = ((event->state & GDK_CONTROL_MASK) != 0);
+	range = ((event_state & GDK_SHIFT_MASK) != 0);
+	additive = ((event_state & GDK_CONTROL_MASK) != 0);
 
 	if (!additive)
-		unselect_all ();
+		unselect_all (NULL);
 
 	if (!range) {
 		if (additive) {
@@ -529,89 +539,6 @@ file_entry_free (file_entry *fe)
 	g_free (fe);
 }
 
-/* Handler for events on desktop icons.  The on_text flag specifies whether the event ocurred on the
- * text item in the icon or not.
- */
-static gint
-desktop_icon_info_event (struct desktop_icon_info *dii, GdkEvent *event, int on_text)
-{
-	int retval;
-	char *filename;
-	file_entry *fe;
-
-	retval = FALSE;
-
-	switch (event->type) {
-	case GDK_BUTTON_PRESS:
-		if ((event->button.button == 1) && (!dii->selected || (event->button.state & GDK_CONTROL_MASK))) {
-			select_icon (dii, (GdkEventButton *) event);
-			retval = TRUE;
-		} else if (event->button.button == 3) {
-			filename = g_concat_dir_and_file (desktop_directory, dii->filename);
-
-			if (gpopup_do_popup ((GdkEventButton *) event, NULL, 0, filename) != -1)
-				reload_desktop_icons (FALSE, 0, 0); /* bleah */
-
-			g_free (filename);
-			retval = TRUE;
-		}
-
-		break;
-
-	case GDK_2BUTTON_PRESS:
-		if (event->button.button != 1)
-			break;
-
-		filename = g_concat_dir_and_file (desktop_directory, dii->filename);
-
-		fe = file_entry_from_file (filename);
-
-		if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe))
-			new_panel_at (filename);
-		else
-			do_enter_on_file_entry (fe);
-
-		file_entry_free (fe);
-
-		retval = TRUE;
-		break;
-
-	case GDK_BUTTON_RELEASE:
-/* 		select_icon (dii, (GdkEventButton *) event); */
-		retval = TRUE;
-		break;
-
-	default:
-		break;
-	}
-
-	/* If we handled the event, do not pass it on to the icon text item */
-
-	if (on_text && retval)
-		gtk_signal_emit_stop_by_name (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->text),
-					      "event");
-
-	return retval;
-}
-
-/* Handler for button presses on the images on desktop icons.  The desktop icon info structure is
- * passed in the user data.
- */
-static gint
-icon_event (GnomeCanvasItem *item, GdkEvent *event, gpointer data)
-{
-	return desktop_icon_info_event (data, event, FALSE);
-}
-
-/* Handler for button presses on the text on desktop icons.  The desktop icon info structure is
- * passed in the user data.
- */
-static gint
-text_event (GnomeCanvasItem *item, GdkEvent *event, gpointer data)
-{
-	return desktop_icon_info_event (data, event, TRUE);
-}
-
 /* Callback used when an icon's text changes.  We must validate the rename and return the
  * appropriate value.  The desktop icon info structure is passed in the user data.
  */
@@ -654,6 +581,9 @@ editing_started (GnomeIconTextItem *iti, gpointer data)
 
 	dii = data;
 
+	/* Unselect all icons but this one */
+	unselect_all (dii);
+
 	ibeam = gdk_cursor_new (GDK_XTERM);
 	gdk_pointer_grab (GTK_LAYOUT (DESKTOP_ICON (dii->dicon)->canvas)->bin_window,
 			  FALSE,
@@ -676,19 +606,121 @@ editing_started (GnomeIconTextItem *iti, gpointer data)
 static void
 editing_stopped (GnomeIconTextItem *iti, gpointer data)
 {
+	struct desktop_icon_info *dii;
+
+	dii = data;
+
 	gdk_pointer_ungrab (GDK_CURRENT_TIME);
 	gdk_keyboard_ungrab (GDK_CURRENT_TIME);
 }
 
-/* Callback used to store the button press position for the hot spot of the DnD cursor */
+/* Used to open a desktop icon when the user double-clicks on it */
+static void
+open_desktop_icon (struct desktop_icon_info *dii)
+{
+	char *filename;
+	file_entry *fe;
+
+	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
+
+	fe = file_entry_from_file (filename);
+
+	if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe))
+		new_panel_at (filename);
+	else
+		do_enter_on_file_entry (fe);
+
+	file_entry_free (fe);
+}
+
+/* Used to execute the popup menu for desktop icons */
+static void
+do_popup_menu (struct desktop_icon_info *dii, GdkEventButton *event)
+{
+	char *filename;
+
+	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
+
+	if (gpopup_do_popup (event, NULL, 0, filename) != -1)
+		reload_desktop_icons (FALSE, 0, 0); /* bleah */
+
+	g_free (filename);
+}
+
+/* Callback used when a button is pressed on a desktop icon */
 static gint
-button_press (GtkWidget *widget, GdkEventButton *event, gpointer data)
+icon_button_press (GtkWidget *widget, GdkEventButton *event, gpointer data)
+{
+	struct desktop_icon_info *dii;
+	int retval;
+
+	dii = data;
+
+	/* Save the mouse position for DnD */
+
+	dnd_press_x = event->x;
+	dnd_press_y = event->y;
+
+	/* Process the event */
+
+	retval = FALSE;
+
+	switch (event->type) {
+	case GDK_BUTTON_PRESS:
+		if (event->button == 1) {
+			/* If (only) the Control key is down, then we have to delay the icon selection */
+
+			dnd_select_icon_pending = ((event->state & GDK_CONTROL_MASK)
+						   && !((event->state & GDK_CONTROL_MASK)
+							&& (event->state & GDK_SHIFT_MASK)));
+
+			if (!dnd_select_icon_pending) {
+				select_icon (dii, event->state);
+				retval = TRUE;
+			}
+		} else if (event->button == 3) {
+			do_popup_menu (dii, event);
+			retval = TRUE;
+		}
+
+		break;
+
+	case GDK_2BUTTON_PRESS:
+		if (event->button != 1)
+			break;
+
+		open_desktop_icon (dii);
+		retval = TRUE;
+		break;
+
+	default:
+		break;
+	}
+
+	/* Keep the canvas items from getting the signal */
+#if 0
+	if (retval)
+		gtk_signal_emit_stop_by_name (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "button_press_event");
+#endif
+	return retval;
+}
+
+/* Handler for button releases on desktop icons.  If there was a pending
+ * selection on the icon, then the function performs the selection.
+ */
+static gint
+icon_button_release (GtkWidget *widget, GdkEventButton *event, gpointer data)
 {
 	struct desktop_icon_info *dii;
 
 	dii = data;
-	dnd_press_x = event->x;
-	dnd_press_y = event->y;
+
+	if (dnd_select_icon_pending) {
+		select_icon (dii, GDK_CONTROL_MASK);
+		dnd_select_icon_pending = FALSE;
+
+		return TRUE;
+	}
 
 	return FALSE;
 }
@@ -709,6 +741,15 @@ drag_begin (GtkWidget *widget, GdkDragContext *context, gpointer data)
 
 	dii = data;
 	dicon = DESKTOP_ICON (dii->dicon);
+
+	/* See if the icon was pending to be selected */
+
+	if (dnd_select_icon_pending) {
+		if (!dii->selected)
+			select_icon (dii, GDK_CONTROL_MASK);
+
+		dnd_select_icon_pending = FALSE;
+	}
 
 	/* FIXME: see if it is more than one icon and if so, use a multiple-files icon. */
 
@@ -830,9 +871,6 @@ setup_icon_dnd_source (struct desktop_icon_info *dii)
 			     dnd_icon_nsources,
 			     GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
 
-	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "button_press_event",
-			    (GtkSignalFunc) button_press,
-			    dii);
 	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "drag_begin",
 			    (GtkSignalFunc) drag_begin,
 			    dii);
@@ -943,14 +981,11 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 
 	/* Connect to the icon's signals */
 
-	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->icon), "event",
-			    (GtkSignalFunc) icon_event,
+	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "button_press_event",
+			    (GtkSignalFunc) icon_button_press,
 			    dii);
-	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->text), "event",
-			    (GtkSignalFunc) text_event,
-			    dii);
-	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->stipple), "event",
-			    (GtkSignalFunc) icon_event,
+	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "button_release_event",
+			    (GtkSignalFunc) icon_button_release,
 			    dii);
 
 	/* Connect to the text item's signals */
@@ -1066,14 +1101,14 @@ setup_xdnd_proxy (guint32 xid, GdkWindow *proxy_window)
 			    (guchar **) &proxy_data);
 
 	if (type != None) {
-		if ((format == 32) && (nitems == 1))
+		if (format == 32 && nitems == 1)
 			proxy = *proxy_data;
 
 		XFree (proxy_data);
 	}
 
-	/* The property was set, now check if the window it points to exists and has a XdndProxy
-	 * property pointing to itself.
+	/* The property was set, now check if the window it points to exists and
+	 * has a XdndProxy property pointing to itself.
 	 */
 	if (proxy) {
 		XGetWindowProperty (GDK_DISPLAY (), proxy, 
@@ -1083,7 +1118,7 @@ setup_xdnd_proxy (guint32 xid, GdkWindow *proxy_window)
 				    (guchar **) &proxy_data);
 
 		if (!gdk_error_code && type != None) {
-			if ((format == 32) && (nitems == 1))
+			if (format == 32 && nitems == 1)
 				if (*proxy_data != proxy)
 					proxy = GDK_NONE;
 
@@ -1253,6 +1288,106 @@ setup_desktop_dnd (void)
 			    NULL);
 }
 
+/* Looks for the proxy window to get root window clicks from the window manager */
+static GdkWindow *
+find_click_proxy_window (void)
+{
+	GdkAtom click_proxy_atom;
+	Atom type;
+	int format;
+	unsigned long nitems, after;
+	Window *proxy_data;
+	Window proxy;
+	guint32 old_warnings;
+	GdkWindow *proxy_gdk_window;
+
+	XGrabServer (GDK_DISPLAY ());
+
+	click_proxy_atom = gdk_atom_intern ("_WIN_DESKTOP_BUTTON_PROXY", FALSE);
+	type = None;
+	proxy = None;
+
+	old_warnings = gdk_error_warnings;
+
+	gdk_error_code = 0;
+	gdk_error_warnings = 0;
+
+	/* Check if the proxy window exists */
+
+	XGetWindowProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
+			    click_proxy_atom, 0,
+			    1, False, AnyPropertyType,
+			    &type, &format, &nitems, &after,
+			    (guchar **) &proxy_data);
+
+	if (type != None) {
+		if (format == 32 && nitems == 1)
+			proxy = *proxy_data;
+
+		XFree (proxy_data);
+	}
+
+	/* The property was set, now check if the window it points to exists and
+	 * has a _WIN_DESKTOP_BUTTON_PROXY property pointing to itself.
+	 */
+
+	if (proxy) {
+		XGetWindowProperty (GDK_DISPLAY (), proxy,
+				    click_proxy_atom, 0,
+				    1, False, AnyPropertyType,
+				    &type, &format, &nitems, &after,
+				    (guchar **) &proxy_data);
+
+		if (!gdk_error_code && type != None) {
+			if (format == 32 && nitems == 1)
+				if (*proxy_data != proxy)
+					proxy = GDK_NONE;
+
+			XFree (proxy_data);
+		} else
+			proxy = GDK_NONE;
+	}
+
+	gdk_error_code = 0;
+	gdk_error_warnings = old_warnings;
+
+	XUngrabServer (GDK_DISPLAY ());
+
+	if (proxy)
+		proxy_gdk_window = gdk_window_foreign_new (proxy);
+	else
+		proxy_gdk_window = NULL;
+
+	return proxy_gdk_window;
+}
+
+/* Handles events on the root window via the click_proxy_gdk_window */
+static gint
+click_proxy_event (GtkWidget *widget, GdkEvent *event, gpointer data)
+{
+	printf ("Click proxy event %d\n", event->type);
+	return FALSE;
+}
+
+/* Sets up the window manager proxy window to receive clicks on the desktop root window */
+static void
+setup_desktop_clicks (void)
+{
+	click_proxy_gdk_window = find_click_proxy_window ();
+	if (!click_proxy_gdk_window) {
+		g_warning ("Root window clicks will not work as no GNOME-compliant window manager could be found!");
+		return;
+	}
+
+	click_proxy_invisible = gtk_invisible_new ();
+	gtk_widget_show (click_proxy_invisible);
+	gdk_window_set_user_data (click_proxy_gdk_window, click_proxy_invisible); /* make it send events to us */
+
+	gtk_signal_connect (GTK_OBJECT (click_proxy_invisible), "event",
+			    (GtkSignalFunc) click_proxy_event,
+			    NULL);
+}
+
 /**
  * desktop_init
  *
@@ -1266,6 +1401,7 @@ desktop_init (void)
 	create_desktop_dir ();
 	load_desktop_icons (FALSE, 0, 0);
 	setup_desktop_dnd ();
+	setup_desktop_clicks ();
 }
 
 /**

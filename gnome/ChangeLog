@@ -1,3 +1,32 @@
+1998-12-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (dnd_select_icon_pending): Added this flag that
+	specifies whether a selection is pending for an icon if the user
+	was holding the Control key down while clicking.  We have to delay
+	selection in this case so that DnD will work correctly, just like
+	Windows.
+	(icon_button_press): New function that handles button presses on
+	icons; it obsoletes the old desktop_icon_info_event().
+	(icon_button_release): New function that handles button releases
+	on desktop icons; it will do what is appropriate if there was a
+	pending icon selection.
+	(drag_begin): Handle pending selections as appropriate.
+	(unselect_all): Added an paremeter that specifies which icon to
+	exclude from unselection.
+	(editing_started): Unselect all icons but the one for which
+	editing has started.
+	(dnd_icon_sources): Changed the MIME-types for internal drops to
+	"application/x-mc-desktop-icon".
+	(click_proxy_window): New variable that stores the proxy window
+	for clicks on the desktop.
+	(setup_desktop_clicks): New function that sets up clicks on the
+	root window.
+	(find_click_proxy_window): New function to find and set up the
+	window for proxying clicks from the root window.
+
+	* image.metadata.in: Added case for `jpg', as there was only a
+	case for `jpeg'.
+
 1998-12-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gicon.c (gnome_file_entry_color): If we do not have permissions
