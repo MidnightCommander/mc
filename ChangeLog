@@ -1,3 +1,10 @@
+2000-09-15  Pavel Roskin  <proski@gnu.org>
+
+	* doc/Makefile.in, edit/Makefile.in, gnome/Makefile.in,
+	gtkedit/Makefile.in, slang/Makefile.in, src/Makefile.in,
+	vfs/Make-mc.in: preserve timestamp on "make distdir", otherwise
+	mc.pot becomes out of date in the tarball.
+
 2000-09-14  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Removed some abuses of CPPFLAGS. Removed useless

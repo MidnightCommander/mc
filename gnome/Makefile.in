@@ -315,7 +315,9 @@ distclean: cleansourcelinks
 distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 
 distdir:
-	for I in $(DISTGNOME); do $(CP) $(srcdir)/$$I $(distdir); done
+	for I in $(DISTGNOME); \
+	  do cp -p $(srcdir)/$$I $(distdir) || exit 1; \
+	done
 
 install: install_@mx@
 

@@ -288,7 +288,9 @@ uninstall:
 distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 
 distdir:
-	for I in $(DISTVFS); do $(CP) $(srcdir)/$$I $(distdir) || exit 1; done
+	for I in $(DISTVFS); \
+	  do cp -p $(srcdir)/$$I $(distdir) || exit 1; \
+	done
 	mkdir $(distdir)/extfs
 	(cd extfs && $(MAKE) $(AM_MAKEFLAGS) top_distdir=../$(top_distdir) \
 		distdir=../$(distdir)/extfs distdir) || exit 1
@@ -301,14 +303,14 @@ distdir:
 	mkdir $(distdir)/samba/tests
 	mkdir $(distdir)/samba/ubiqx
 
-	for I in $(SAMBA_DIST_TOPLEVEL); do $(CP) $(srcdir)/samba/$$I $(distdir)/samba || exit 1; done
-	for I in $(SAMBA_DIST_INCLUDE); do $(CP) $(srcdir)/samba/include/$$I $(distdir)/samba/include || exit 1; done
-	for I in $(SAMBA_DIST_LIB); do $(CP) $(srcdir)/samba/lib/$$I $(distdir)/samba/lib || exit 1; done
-	for I in $(SAMBA_DIST_LIBSMB); do $(CP) $(srcdir)/samba/libsmb/$$I $(distdir)/samba/libsmb || exit 1; done
-	for I in $(SAMBA_DIST_PARAM); do $(CP) $(srcdir)/samba/param/$$I $(distdir)/samba/param || exit 1; done
-	for I in $(SAMBA_DIST_SMBWRAPPER); do $(CP) $(srcdir)/samba/smbwrapper/$$I $(distdir)/samba/smbwrapper || exit 1; done
-	for I in $(SAMBA_DIST_TESTS); do $(CP) $(srcdir)/samba/tests/$$I $(distdir)/samba/tests || exit 1; done
-	for I in $(SAMBA_DIST_UBIQX); do $(CP) $(srcdir)/samba/ubiqx/$$I $(distdir)/samba/ubiqx || exit 1; done
+	for I in $(SAMBA_DIST_TOPLEVEL); do cp -p $(srcdir)/samba/$$I $(distdir)/samba || exit 1; done
+	for I in $(SAMBA_DIST_INCLUDE); do cp -p $(srcdir)/samba/include/$$I $(distdir)/samba/include || exit 1; done
+	for I in $(SAMBA_DIST_LIB); do cp -p $(srcdir)/samba/lib/$$I $(distdir)/samba/lib || exit 1; done
+	for I in $(SAMBA_DIST_LIBSMB); do cp -p $(srcdir)/samba/libsmb/$$I $(distdir)/samba/libsmb || exit 1; done
+	for I in $(SAMBA_DIST_PARAM); do cp -p $(srcdir)/samba/param/$$I $(distdir)/samba/param || exit 1; done
+	for I in $(SAMBA_DIST_SMBWRAPPER); do cp -p $(srcdir)/samba/smbwrapper/$$I $(distdir)/samba/smbwrapper || exit 1; done
+	for I in $(SAMBA_DIST_TESTS); do cp -p $(srcdir)/samba/tests/$$I $(distdir)/samba/tests || exit 1; done
+	for I in $(SAMBA_DIST_UBIQX); do cp -p $(srcdir)/samba/ubiqx/$$I $(distdir)/samba/ubiqx || exit 1; done
 	
 depend dep: mcdep
 

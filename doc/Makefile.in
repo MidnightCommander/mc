@@ -83,6 +83,8 @@ distclean:
 distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 
 distdir:
-	for I in $(DISTDOC); do $(CP) $(srcdir)/$$I $(distdir); done
+	for I in $(DISTDOC); \
+	  do cp -p $(srcdir)/$$I $(distdir) || exit 1; \
+	done
 
 depend dep:

@@ -70,7 +70,9 @@ distclean:
 distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 
 distdir: 
-	for I in $(DISTSLANG); do $(CP) $(srcdir)/$$I $(distdir); done
+	for I in $(DISTSLANG); \
+	  do cp -p $(srcdir)/$$I $(distdir) || exit 1; \
+	done
 
 install uninstall:
 
