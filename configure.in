@@ -496,12 +496,12 @@ AC_ARG_WITH(hsc,
 dnl
 dnl Check for Gnome
 dnl
-gmc=""
+mx=""
 gmcdep=""
 libgtkedit=""
 AC_SUBST(insticons)
 GNOME_INIT_HOOK([
-	gmc=gmc
+	mx=mx
  	gmcdep=gmcdep
 	libgtkedit="libgtkedit.a"
 	insticons=install_icons
@@ -511,7 +511,7 @@ GNOME_INIT_HOOK([
 	    xvers="Gnome+$xvers"
 	fi
 ])
-AC_SUBST(gmc)
+AC_SUBST(mx)
 AC_SUBST(gmcdep)
 AC_SUBST(libgtkedit)
 AC_SUBST(GNOMEGNORBA_LIBS)

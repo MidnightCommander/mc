@@ -2671,10 +2671,10 @@ handle_args (int argc, char *argv [])
     corba_register_server ();
 #else
     gnome_init_with_popt_table ("gmc", VERSION, argc, argv, argument_table, 0, &ctx);
+#endif
     gtk_widget_push_visual (gdk_imlib_get_visual ());
     gtk_widget_push_colormap (gdk_imlib_get_colormap ());
 	
-#endif
     poptResetContext (ctx);
 #else
     ctx = poptGetContext ("mc", argc, argv, argument_table, 0);

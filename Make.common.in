@@ -17,6 +17,8 @@ manprefix =
 
 builddir   = @builddir@
 bindir     = @bindir@
+sysconfdir = @sysconfdir@
+corbadir   = $(sysconfdir)/CORBA/servers
 libdir     = $(exec_prefix)/lib/mc
 idldir     = $(prefix)/share/idl
 suppbindir = $(libdir)/bin

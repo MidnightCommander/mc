@@ -8,7 +8,7 @@ GNOMEDEFS     = -DHAVE_X -DHAVE_GNOME @GNOME_INCLUDEDIR@
 CFLAGS        = -g $(XCFLAGS) @X_CFLAGS@
 CPPFLAGS      = $(XCPPFLAGS) -I$(vfsdir) -I$(slangdir) $(GNOMEDEFS)
 LDFLAGS       = $(XLDFLAGS) @GNOME_LIBDIR@ @GNOMEUI_LIBS@
-pCORBA_LDFLAGS = $(XLDFLAGS) @GNOME_LIBDIR@ @GNOMEGNORBA_LIBS@
+CORBA_LDFLAGS = $(XLDFLAGS) @GNOME_LIBDIR@ @GNOMEGNORBA_LIBS@
 DEFS = $(XDEFS)
 LIBS = $(XLIBS) @TERMNET@ 
 EXTRALIBS = @LVFS@ -lgtkedit @LINTL@
@@ -111,7 +111,6 @@ OOBJS = dlg.o screen.o widget.o wtools.o info.o boxes.o \
 CORBAOBJS = 			\
 	main-corba.o		\
 	gcorba.o		\
-	FileManager-impl.o	\
 	FileManager-skels.o	\
 	FileManager-common.o
 
@@ -177,17 +176,18 @@ DISTGNOME = \
 main-corba.o: main.c
 	$(CC) -c -DHAVE_CORBA $(CPPFLAGS) $(DEFS) $(CFLAGS) $< -o main-corba.o
 
-all: @gmc@ Makefile mc.keys 
+all: @mx@ Makefile mc.keys 
 
 Makefile: Makefile.in ../config.status
 	(cd ..; CONFIG_FILES=gnome/Makefile CONFIG_HEADERS= ./config.status)
 
-gmc: checklinks 
-	$(MAKE) mx
-
-mx: @LIBVFS@ $(OBJS) $(NORMALOBJS) @LIBSLANG@ libgtkedit.a
-	$(CC) $(LDFLAGS) -o gmc $(NORMALOBJS) $(OBJS) -L../vfs -L../slang -L../gtkedit $(EXTRALIBS) $(LIBS) 
+mx: checklinks 
+	$(MAKE) gmc
+	$(MAKE) corba-gmc
 	touch mx
+
+gmc: @LIBVFS@ $(OBJS) $(NORMALOBJS) @LIBSLANG@ libgtkedit.a
+	$(CC) $(LDFLAGS) -o gmc $(NORMALOBJS) $(OBJS) -L../vfs -L../slang -L../gtkedit $(EXTRALIBS) $(LIBS) 
 
 corba-gmc: @LIBVFS@ $(OBJS) $(CORBAOBJS) @LIBSLANG@ libgtkedit.a
 	$(CC) $(CORBA_LDFLAGS) -o corba-gmc $(CORBAOBJS) $(OBJS) -L../vfs -L../slang -L../gtkedit $(EXTRALIBS) $(LIBS) 
@@ -253,28 +253,34 @@ distclean: cleansourcelinks
 distcopy:
 	$(CP) $(DISTGNOME) ../../mc-$(VERSION)/gnome
 
-install: install_@gmc@
+install: install_@mx@
 
 install_:
 
-install_gmc: all 
+install_mx: all 
 	$(mcsrcdir)/xmkdir $(DESTDIR)$(bindir)
 	$(mcsrcdir)/xmkdir $(DESTDIR)$(icondir)
 	$(mcsrcdir)/xmkdir $(DESTDIR)$(libdir)
 	$(mcsrcdir)/xmkdir $(DESTDIR)$(bindir)
 	$(INSTALL_PROGRAM) gmc $(DESTDIR)$(bindir)/$(binprefix)gmc
+	$(INSTALL_PROGRAM) corba-gmc $(DESTDIR)$(bindir)/$(binprefix)corba-gmc
 	for I in $(ICONS); \
 	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(icondir)/$$I; done
 	$(INSTALL_DATA) $(srcdir)/layout $(DESTDIR)$(libdir)/layout
 	$(mcsrcdir)/xmkdir $(DESTDIR)$(datadir)/mime-info
 	$(INSTALL_DATA) mc.keys $(DESTDIR)$(datadir)/mime-info
+	$(mcsrcdir)/xmkdir $(DESTDIR)$(corbadir)
+	$(INSTALL_DATA) gmc.gnorba $(DESTDIR)$(corbadir)
 
 uninstall: 
 	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)gmc
+	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)corba-gmc
 	for I in $(ICONS); \
 	do $(RMF) $(DESTDIR)$(icondir)/$$I; done
 	-rmdir $(DESTDIR)$(icondir)
 	-$(RMF) $(DESTDIR)$(libdir)/layout
+	-$(RMF) $(DESTDIR)$(datadir)/mime-info/mc.keys
+	-rmdir $(DESTDIR)$(datadir)/mime-info
 
 depend dep: @gmcdep@
 

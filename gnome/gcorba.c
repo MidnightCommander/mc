@@ -40,69 +40,73 @@ typedef struct {
 /*** Implementation stub prototypes ***/
 
 static void
-impl_GNOME_FileManagerWindow_close(impl_POA_GNOME_FileManagerWindow * servant,
-				   CORBA_Environment * ev);
+impl_GNOME_FileManagerWindow_close (impl_POA_GNOME_FileManagerWindow * servant,
+				    CORBA_Environment * ev);
 
 GNOME_FileManagerWindow
-impl_GNOME_FileManagerFactory_create_window(impl_POA_GNOME_FileManagerFactory * servant,
-					    CORBA_char * dir,
-					    CORBA_Environment * ev);
+impl_GNOME_FileManagerFactory_create_window (impl_POA_GNOME_FileManagerFactory * servant,
+					     CORBA_char * dir,
+					     CORBA_Environment * ev);
 
 CORBA_boolean
-impl_GNOME_FileManagerFactory_supports(impl_POA_GNOME_FileManagerFactory * servant,
-				       CORBA_char * obj_goad_id,
-				       CORBA_Environment * ev);
+impl_GNOME_FileManagerFactory_supports (impl_POA_GNOME_FileManagerFactory * servant,
+					CORBA_char * obj_goad_id,
+					CORBA_Environment * ev);
 CORBA_Object
-impl_GNOME_FileManagerFactory_create_object(impl_POA_GNOME_FileManagerFactory * servant,
-					    CORBA_char * goad_id,
-					    GNOME_stringlist * params,
-					    CORBA_Environment * ev);
+impl_GNOME_FileManagerFactory_create_object (impl_POA_GNOME_FileManagerFactory * servant,
+					     CORBA_char * goad_id,
+					     GNOME_stringlist * params,
+					     CORBA_Environment * ev);
 
 /*** epv structures ***/
 
 static PortableServer_ServantBase__epv impl_GNOME_FileManagerWindow_base_epv =
 {
-   NULL, NULL, NULL
+	NULL, NULL, NULL
 };
+
 static POA_GNOME_FileManagerWindow__epv impl_GNOME_FileManagerWindow_epv =
 {
-   NULL,			/* _private */
-   (gpointer) & impl_GNOME_FileManagerWindow_close,
+	NULL,			/* _private */
+	(gpointer) & impl_GNOME_FileManagerWindow_close,
 };
+
 static PortableServer_ServantBase__epv impl_GNOME_FileManagerFactory_base_epv =
 {
-   NULL,			/* _private data */
-   NULL,
-   NULL			/* default_POA routine */
+	NULL,			/* _private data */
+	NULL,
+	NULL			/* default_POA routine */
 };
 static POA_GNOME_FileManagerFactory__epv impl_GNOME_FileManagerFactory_epv =
 {
-   NULL,			/* _private */
-   (gpointer) & impl_GNOME_FileManagerFactory_create_window,
+	NULL,			/* _private */
+	(gpointer) & impl_GNOME_FileManagerFactory_create_window,
 };
 
 static POA_GNOME_GenericFactory__epv impl_GNOME_FileManagerFactory_GNOME_GenericFactory_epv =
 {
-   NULL,			/* _private */
-   (gpointer) & impl_GNOME_FileManagerFactory_supports,
-   (gpointer) & impl_GNOME_FileManagerFactory_create_object,
+	NULL,			/* _private */
+	(gpointer) & impl_GNOME_FileManagerFactory_supports,
+	(gpointer) & impl_GNOME_FileManagerFactory_create_object,
 };
 
 /*** vepv structures ***/
 
 static POA_GNOME_FileManagerWindow__vepv impl_GNOME_FileManagerWindow_vepv =
 {
-   &impl_GNOME_FileManagerWindow_base_epv,
-   &impl_GNOME_FileManagerWindow_epv,
-};
-static POA_GNOME_FileManagerFactory__vepv impl_GNOME_FileManagerFactory_vepv =
-{
-   &impl_GNOME_FileManagerFactory_base_epv,
-   &impl_GNOME_FileManagerFactory_GNOME_GenericFactory_epv,
-   &impl_GNOME_FileManagerFactory_epv,
+	&impl_GNOME_FileManagerWindow_base_epv,
+	&impl_GNOME_FileManagerWindow_epv,
 };
 
-impl_POA_GNOME_FileManagerFactory poa_filemanagerfactory_servant = {
+static POA_GNOME_FileManagerFactory__vepv impl_GNOME_FileManagerFactory_vepv =
+{
+	&impl_GNOME_FileManagerFactory_base_epv,
+	&impl_GNOME_FileManagerFactory_GNOME_GenericFactory_epv,
+	&impl_GNOME_FileManagerFactory_epv,
+};
+
+impl_POA_GNOME_FileManagerFactory poa_filemanagerfactory_servant =
+{
 	{ NULL, &impl_GNOME_FileManagerWindow_vepv}, NULL
 };
 
@@ -128,15 +132,15 @@ do_window_close(GtkWidget *widget, gpointer _servant)
 }
 
 static void
-impl_GNOME_FileManagerWindow_close(impl_POA_GNOME_FileManagerWindow * servant, CORBA_Environment * ev)
+impl_GNOME_FileManagerWindow_close (impl_POA_GNOME_FileManagerWindow * servant, CORBA_Environment * ev)
 {
 	gtk_widget_destroy(servant->mywin->xwindow);
 }
 
 GNOME_FileManagerWindow
-impl_GNOME_FileManagerFactory_create_window(impl_POA_GNOME_FileManagerFactory * servant,
-					    CORBA_char * dir,
-					    CORBA_Environment * ev)
+impl_GNOME_FileManagerFactory_create_window (impl_POA_GNOME_FileManagerFactory * servant,
+					     CORBA_char * dir,
+					     CORBA_Environment * ev)
 {
 	GNOME_FileManagerWindow retval;
 	impl_POA_GNOME_FileManagerWindow *newservant;
@@ -160,9 +164,9 @@ impl_GNOME_FileManagerFactory_create_window(impl_POA_GNOME_FileManagerFactory * 
 }
 
 CORBA_boolean
-impl_GNOME_FileManagerFactory_supports(impl_POA_GNOME_FileManagerFactory * servant,
-				       CORBA_char * obj_goad_id,
-				       CORBA_Environment * ev)
+impl_GNOME_FileManagerFactory_supports (impl_POA_GNOME_FileManagerFactory * servant,
+					CORBA_char * obj_goad_id,
+					CORBA_Environment * ev)
 {
 	return !strcmp(obj_goad_id, "gmc_filemanager_window");
 }
@@ -193,7 +197,7 @@ corba_register_server (void)
 	
 	CORBA_exception_init (&ev);
 
-	orb = gnome_CORBA_ORB();
+	orb = gnome_CORBA_ORB ();
 
 	poa = CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
 	if (ev._major != CORBA_NO_EXCEPTION){
