@@ -793,7 +793,7 @@ jobs_cmd (void)
     bg_list = listbox_new (2, 3, JOBS_X-7, JOBS_Y-9, listbox_nothing, 0, "listbox");
     add_widget (jobs_dlg, bg_list);
     add_widget (jobs_dlg,
-		button_new (JOBS_Y-4, 35, B_CANCEL, NORMAL_BUTTON, "&Ok", 0, 0, "button-kill"));
+		button_new (JOBS_Y-4, 35, B_CANCEL, NORMAL_BUTTON, "&Ok", 0, 0, "button-ok"));
     add_widget (jobs_dlg,
 		button_new (JOBS_Y-4, 23, B_KILL, NORMAL_BUTTON, "&Kill", task_cb, 0, "button-kill"));
     add_widget (jobs_dlg,

@@ -1,3 +1,15 @@
+Thu Mar 12 21:29:33 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gwidget.c (listbox_select): Fix for the listbox selection with
+	the mouse.
+	(x_create_button): Use stock pixmaps.
+	
+	* gcmd.c: Moved all of the _cmd routines from glayout to this
+	place.
+	(save_panel_types): Provide GNOME implementation.
+	
+	* glayout.c: New and improved menu layout.  Use stock pixmaps.
+	
 1998-03-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gmc-chargrid.c (gmc_char_grid_draw): Someone teach me how to

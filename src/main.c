@@ -747,6 +747,7 @@ do_execute (const char *shell, const char *command, int internal_command)
 #endif
 	my_system (!internal_command, shell, command);
 
+#ifndef HAVE_GNOME
     if (!internal_command){
 	/* .ado: ask Juan why CONSOLE_SAVE not work here */
 #ifndef _OS_NT
@@ -774,8 +775,8 @@ do_execute (const char *shell, const char *command, int internal_command)
 	    handle_console (CONSOLE_SAVE);
 	}
 #endif
-
     }
+#endif
 
     edition_post_exec ();
 
@@ -1808,6 +1809,10 @@ static void setup_mc (void)
     setup_pre ();
     init_menu ();
     create_panels ();
+
+#ifdef HAVE_GNOME
+    return;
+#endif
     setup_panels ();
     
 #ifdef HAVE_SUBSHELL_SUPPORT
@@ -2159,8 +2164,10 @@ do_nc (void)
     
     setup_mc ();
 
+#ifndef HAVE_GNOME
     setup_panels_and_run_mc ();
-
+#endif
+    
     /* Program end */
     midnight_shutdown = 1;
 
@@ -2173,8 +2180,8 @@ do_nc (void)
     }
     done_mc ();
     
-    destroy_dlg (midnight_dlg);
 #ifndef HAVE_GNOME
+    destroy_dlg (midnight_dlg);
     current_panel = 0;
 #endif
     done_mc_profile ();
@@ -2848,6 +2855,10 @@ int main (int argc, char *argv [])
     init_colors ();
 #else
     init_curses ();
+#endif
+
+#ifdef HAVE_GNOME
+    use_subshell = 0;
 #endif
     
 #   ifdef HAVE_SUBSHELL_SUPPORT

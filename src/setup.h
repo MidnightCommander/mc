@@ -9,6 +9,7 @@ void done_setup (void);
 void panel_save_setup ();
 void panel_load_setup ();
 void load_key_defs (void);
+void save_panel_types (void);
 char *load_anon_passwd ();
 
 extern char *profile_name;

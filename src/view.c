@@ -1955,7 +1955,7 @@ change_nroff (WView *view)
 
 /* Real view only */
 static void
-quit_cmd (WView *view)
+view_quit_cmd (WView *view)
 {
     if (view_ok_to_quit (view))
 	view->widget.parent->running = 0;
@@ -1969,7 +1969,7 @@ view_labels (WView *view)
     
     define_label (h, (Widget *) view, 1, "Help", help_cmd);
     
-    my_define (h, 10, "Quit", quit_cmd, view);
+    my_define (h, 10, "Quit", view_quit_cmd, view);
     my_define (h, 4, view->hex_mode ?"Ascii":"Hex", toggle_hex_mode, view);
     my_define (h, 5, "Line", goto_line, view);
     my_define (h, 6, view->hex_mode ? "Save" : "RxSrch", regexp_search_cmd, view);
@@ -1989,7 +1989,7 @@ view_labels (WView *view)
     if (!view->have_frame){
 	my_define (h, 9, view->viewer_nroff_flag ? "Unform" : "Format",
 		   change_nroff, view);
-	my_define (h, 3, "Quit", quit_cmd, view);
+	my_define (h, 3, "Quit", view_quit_cmd, view);
     }
     
     redraw_labels (h, (Widget *) view);

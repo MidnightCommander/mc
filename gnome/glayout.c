@@ -1,3 +1,10 @@
+/*
+ * Layout routines for the GNOME edition of the GNU Midnight Commander
+ *
+ * (C) 1998 the Free Software Foundation
+ *
+ * Author: Miguel de Icaza (miguel@kernel.org)
+ */
 #include <config.h>
 #include "x.h"
 #include <stdio.h>
@@ -8,6 +15,8 @@
 #include "main.h"
 #include "cmd.h"
 #include "boxes.h"
+#include "panelize.h"
+#include "gcmd.h"
 
 #define UNDEFINED_INDEX -1
 
@@ -159,45 +168,93 @@ get_panel_widget (int index)
 	return (Widget *) ((PanelContainer *)p->data)->panel;
 }
 
-void
-gnome_listing_cmd (GtkWidget *widget, WPanel *panel)
+/* FIXME: This routine is wrong.  It should follow what the original save_panel_types
+ * does.  I can not remember which problem the original routine was trying to address
+ * when I did the "New {Left|Rigth} Panel" sections.
+ */
+void save_panel_types (void)
 {
-	GtkAllocation *alloc = &GTK_WIDGET (panel->list)->allocation;
-	int   view_type, use_msformat;
-	char  *user, *status;
+	GList *p;
 	
-	view_type = display_box (panel, &user, &status, &use_msformat, get_current_index ());
-	
-	if (view_type == -1)
-		return;
+	for (p = containers; p; p = p->next){
+		PanelContainer *pc = p->data;
 
-	configure_panel_listing (panel, view_type, use_msformat, user, status);
+		panel_save_setup (pc->panel, pc->panel->panel_name);
+	}
 }
 
 void configure_box (void);
 
-GnomeUIInfo gnome_panel_filemenu [] = {
-	{ GNOME_APP_UI_ITEM, "Network link...", NULL, netlink_cmd },
-	{ GNOME_APP_UI_ITEM, "FTP link...",     NULL, ftplink_cmd },
-	{ GNOME_APP_UI_ITEM, "Display mode...", NULL, gnome_listing_cmd },
-	{ GNOME_APP_UI_ITEM, "Sort order...",   NULL, sort_cmd },
-	{ GNOME_APP_UI_ITEM, "Filter...",       NULL, filter_cmd },
-	{ GNOME_APP_UI_ITEM, "Rescan",          NULL, reread_cmd },
-	{ GNOME_APP_UI_ITEM, "Find",            NULL, find_cmd },
-	{ GNOME_APP_UI_ITEM, "Hotlist",         NULL, quick_chdir_cmd },
-#ifdef USE_VFS
-	{ GNOME_APP_UI_ITEM, "Active VFS",      NULL, reselect_vfs },
-#endif
-	{ GNOME_APP_UI_ITEM, "Confirmation",    NULL, confirm_box },
-	{ GNOME_APP_UI_ITEM, "Options",         NULL, configure_box },
-	{ GNOME_APP_UI_ITEM, "Virtual FS",      NULL, configure_vfs },
-	{ GNOME_APP_UI_ITEM, "Save setup",      NULL, save_setup_cmd },
-	{ GNOME_APP_UI_ITEM, "Mkdir",           NULL, mkdir_cmd },
+GnomeUIInfo gnome_panel_file_menu [] = {
+	{ GNOME_APP_UI_ITEM, "Open Terminal",     "Opens a terminal", gnome_open_terminal },
+	{ GNOME_APP_UI_ITEM, "Copy",              "Copy files",       copy_cmd },
+	{ GNOME_APP_UI_ITEM, "Rename/Move",       "Rename or move files", ren_cmd },
+	{ GNOME_APP_UI_ITEM, "Mkdir",             "Creates a new folder", mkdir_cmd },
+	{ GNOME_APP_UI_ITEM, "Delete",            "Delete files from disk", delete_cmd },
+	{ GNOME_APP_UI_SEPARATOR },
+	{ GNOME_APP_UI_ITEM, "Select group",      "Selects a group of files", select_cmd },
+	{ GNOME_APP_UI_ITEM, "Unselect group",    "Un-selects a group of marked files", select_cmd },
+	{ GNOME_APP_UI_ITEM, "Reverse selection", "Reverses the list of tagged files", reverse_selection_cmd },
+	{ GNOME_APP_UI_SEPARATOR },
+	{ GNOME_APP_UI_ITEM, "Exit",              "Exit program", gnome_quit_cmd, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_EXIT },
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 
+GnomeUIInfo gnome_panel_panel_menu [] = {
+	{ GNOME_APP_UI_ITEM, "Display mode...",   "Set the display mode for the panel",  gnome_listing_cmd },
+	{ GNOME_APP_UI_ITEM, "Sort order...",     "Changes the sort order of the files", sort_cmd },
+	{ GNOME_APP_UI_ITEM, "Filter...",         "Set a filter for the files", filter_cmd },
+	{ GNOME_APP_UI_ITEM, "Rescan",            "Rescan the directory contents", reread_cmd },
+	{ GNOME_APP_UI_SEPARATOR },
+#ifdef USE_NETCODE
+	{ GNOME_APP_UI_ITEM, "Network link...",   "Connect to a remote machine", netlink_cmd },
+	{ GNOME_APP_UI_ITEM, "FTP link...",       "Connect to a remote machine with FTP", ftplink_cmd },
+#endif
+	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
+};
+
+GnomeUIInfo gnome_panel_options_menu [] = {
+	{ GNOME_APP_UI_ITEM, "Confirmation",      "Confirmation settings", confirm_box },
+	{ GNOME_APP_UI_ITEM, "Options",           "Global option settings", configure_box, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP },
+#ifdef USE_VFS
+	{ GNOME_APP_UI_ITEM, "Virtual FS",        "Virtual File System settings", configure_vfs },
+#endif
+	{ GNOME_APP_UI_SEPARATOR },
+	{ GNOME_APP_UI_ITEM, "Save setup",        NULL, save_setup_cmd },
+	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
+};
+
+GnomeUIInfo gnome_panel_commands_menu [] = {
+	{ GNOME_APP_UI_ITEM, "Find",              "Locate files on disk",   find_cmd },
+	{ GNOME_APP_UI_ITEM, "Hotlist",           "List of favorite sites", quick_chdir_cmd },
+	{ GNOME_APP_UI_ITEM, "Compare panels",    "Compare panel contents", gnome_compare_panels },
+	{ GNOME_APP_UI_ITEM, "External panelize", NULL, external_panelize },
+#ifdef USE_VFS					  
+	{ GNOME_APP_UI_ITEM, "Active VFS list",   "List of active virtual file systems", reselect_vfs },
+#endif						  
+#ifdef USE_EXT2FSLIB
+	{ GNOME_APP_UI_ITEM, "Undelete files (ext2fs only)", "Recover deleted files", undelete_cmd },
+#endif
+#ifdef WITH_BACKGROUND
+	{ GNOME_APP_UI_ITEM, "Background jobs",   "List of background operations", jobs_cmd },
+#endif
+	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
+};
+
+GnomeUIInfo gnome_panel_about_menu [] = {
+	GNOMEUIINFO_ITEM ("About", "Information on this program", gnome_about_cmd, NULL),
+	GNOMEUIINFO_HELP ("midnight-commander"),
+	GNOMEUIINFO_END
+};
+
 GnomeUIInfo gnome_panel_menu [] = {
-	{ GNOME_APP_UI_SUBTREE, "This is a temporal menu, it will go away", NULL, &gnome_panel_filemenu },
+	{ GNOME_APP_UI_SUBTREE, "File",     NULL, &gnome_panel_file_menu },
+	{ GNOME_APP_UI_SUBTREE, "Panel",    NULL, &gnome_panel_panel_menu },
+	{ GNOME_APP_UI_SUBTREE, "Commands", NULL, &gnome_panel_commands_menu },
+	{ GNOME_APP_UI_SUBTREE, "Options",  NULL, &gnome_panel_options_menu },
+	{ GNOME_APP_UI_SUBTREE, "Help",     NULL, &gnome_panel_about_menu },
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 

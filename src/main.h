@@ -155,6 +155,7 @@ int load_prompt (int fd, void *unused);
 void save_cwds_stat (void);
 void copy_prog_name (void);
 int quiet_quit_cmd (void);	/* For cmd.c and command.c */
+int quit_cmd (void);
 
 void untouch_bar (void);
 void touch_bar (void);

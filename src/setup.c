@@ -44,6 +44,7 @@
 #include "win.h"		/* lookup_key */
 #include "cmd.h"
 #include "dirhist.h"		/* Directory history routines */
+#include "x.h"
 
 #include "../vfs/vfs.h"
 #ifdef USE_NETCODE
@@ -307,6 +308,7 @@ static void panel_save_type (char *section, int type)
 	}
 }
 
+#ifndef PORT_HAS_SAVE_PANEL_TYPES
 void save_panel_types ()
 {
     int type;
@@ -320,6 +322,7 @@ void save_panel_types ()
     if (type == view_listing)
 	panel_save_setup (right_panel, right_panel->panel_name);
 }
+#endif
 
 void save_setup (void)
 {

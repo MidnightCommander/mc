@@ -56,9 +56,29 @@ int
 x_create_button (Dlg_head *h, widget_data parent, WButton *b)
 {
 	GtkWidget *button;
+	char *stock;
 	int tag;
+
+	if (strcasecmp (b->text, "ok") == 0)
+		stock = GNOME_STOCK_BUTTON_OK;
+	else if (strcasecmp (b->text, "cancel") == 0)
+		stock = GNOME_STOCK_BUTTON_CANCEL;
+	else if (strcasecmp (b->text, "help") == 0)
+		stock = GNOME_STOCK_BUTTON_HELP;
+	else if (strcasecmp (b->text, "yes") == 0)
+		stock = GNOME_STOCK_BUTTON_YES;
+	else if (strcasecmp (b->text, "no") == 0)
+		stock = GNOME_STOCK_BUTTON_NO;
+	else if (strcasecmp (b->text, "exit") == 0)
+		stock = GNOME_STOCK_BUTTON_CLOSE;
+	else
+		stock = 0;
+
+	if (stock){
+		button = gnome_stock_button (stock);
+	} else 
+		button = gtk_button_new_with_label (b->text);
 		
-	button = gtk_button_new_with_label (b->text);
 	gtk_widget_show (button);
 	tag = gtk_signal_connect (GTK_OBJECT(button), "clicked", (GtkSignalFunc) gbutton_callback, b);
 	gtk_object_set_data (GTK_OBJECT (button), "click-signal-tag", (void *) tag);
@@ -241,7 +261,12 @@ listbox_select (GtkWidget *widget, int row, int column, GdkEvent *event, WListbo
 
 	listbox_select_by_number (l, row);
 	
-	if (event && event->type == GDK_2BUTTON_PRESS){
+	if (!event){
+		inside = 0;
+		return;
+	}
+	
+	if (event->type == GDK_2BUTTON_PRESS){
 		printf ("Activando\n");
 		switch (l->action){
 		case listbox_nothing:
@@ -259,6 +284,9 @@ listbox_select (GtkWidget *widget, int row, int column, GdkEvent *event, WListbo
 				return;
 			}
 		}
+	}
+	if (event->type = GDK_BUTTON_PRESS){
+		
 	}
 	inside = 0;
 }
@@ -334,7 +362,8 @@ x_create_label (Dlg_head *g, widget_data parent, WLabel *l)
 void
 x_label_set_text (WLabel *label, char *text)
 {
-	gtk_label_set (GTK_LABEL (label->widget.wdata), text);
+	if (label->widget.wdata)
+		gtk_label_set (GTK_LABEL (label->widget.wdata), text);
 }
 
 /* Buttonbar */

@@ -317,8 +317,10 @@ static struct {
 	int  flags;
 	context_menu_callback callback;
 } file_actions [] = {
+#if 0
 	{ "Info",            0, NULL },
 	{ "",                0, NULL },
+#endif
 	{ "Open",            F_ALL, panel_action_open },
 	{ "Open with",       F_ALL, panel_action_open_with },
 	{ "View",            F_ALL, panel_action_view },
@@ -555,6 +557,7 @@ panel_file_list_compute_lines (GtkCList *file_list, WPanel *panel, int height)
 static void
 panel_file_list_size_allocate_hook (GtkWidget *file_list, GtkAllocation *allocation, WPanel *panel)
 {
+	printf ("%d %d\n", allocation->width, allocation->height);
 	gtk_signal_handler_block_by_data (GTK_OBJECT (file_list), panel);
 	panel_file_list_configure_contents (file_list, panel, allocation->width, allocation->height);
 	gtk_signal_handler_unblock_by_data (GTK_OBJECT (file_list), panel);
@@ -760,7 +763,7 @@ fixed_gtk_widget_dnd_drag_set (GtkCList *clist, int drag_enable, gchar **type_ac
 static void
 panel_drag_begin (GtkWidget *widget, GdkEvent *event, WPanel *panel)
 {
-	GdkPoint hotspot = { 5, 5 };
+	GdkPoint hotspot = { 15, 15 };
 
 	printf ("Drag starting\n");
 	if (panel->marked){
@@ -1026,7 +1029,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 			  GTK_EXPAND | GTK_FILL, GTK_SHRINK, 0, 0);
 
 	gtk_table_attach (GTK_TABLE (panel->table), statusbar, 0, 1, 2, 3,
-			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
+			  GTK_EXPAND | GTK_FILL,
 			  0, 0, 0);
 	
 	gtk_widget_show (panel->table);
@@ -1078,7 +1081,7 @@ load_hint (void)
 			set_hintbar (hint);
 		free (hint);
 	} else
-		set_hintbar ("The GNOME Midnight Commander " VERSION " (C) 1995-1998 the FSF");
+		set_hintbar ("The GNOME File Manager " VERSION);
 	
 }
 

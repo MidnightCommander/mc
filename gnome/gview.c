@@ -1,5 +1,5 @@
 /*
- * The GNOME file viewer backend
+ * The GNOME file viewer frontend
  * (C) The Free Software Foundation
  *
  * Author: Miguel de Icaza (miguel@gnu.org)
