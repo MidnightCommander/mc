@@ -197,9 +197,9 @@
 	int mc_readlink (char *path, char *buf, int bufsiz);
 	int mc_unlink   (char *path);
 	int mc_symlink  (char *name1, char *name2);
-        int mc_link     (char *name1, char *name2);
+	int mc_link     (const char *name1, const char *name2);
         int mc_mknod    (char *, int, int);
-	int mc_rename   (char *original, char *target);
+	int mc_rename   (const char *original, const char *target);
 	int mc_write    (int fd, char *buf, int nbyte);
         int mc_rmdir    (char *path);
         int mc_mkdir    (char *path, mode_t mode);

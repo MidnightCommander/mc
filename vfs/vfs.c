@@ -671,14 +671,14 @@ MC_NAMEOP (unlink, (char *path), (vfs, vfs_name (path)))
 MC_NAMEOP (symlink, (char *name1, char *path), (vfs, vfs_name (name1), vfs_name (path)))
 
 #define MC_RENAMEOP(name) \
-int mc_##name (char *name1, char *name2) \
+int mc_##name (const char *fname1, const char *fname2) \
 { \
     vfs *vfs; \
     int result; \
 \
-    name1 = vfs_canon (name1); \
+    char *name2, *name1 = vfs_canon (fname1); \
     vfs = vfs_type (name1); \
-    name2 = vfs_canon (name2); \
+    name2 = vfs_canon (fname2); \
     if (vfs != vfs_type (name2)){ \
     	errno = EXDEV; \
     	g_free (name1); \

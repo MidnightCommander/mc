@@ -2,6 +2,10 @@
 
 	* Makefile.am (mcserv_SOURCES): Add $(top_srcdir)/src/mad.c.
 
+	* vfs.c (MC_RENAMEOP): Make arguments const.
+	* vfs.h (mc_rename): Adjust declaration.
+	* (mc_link): Likewise.
+
 2002-05-11  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* samba/configure.in: Add AC_SYS_LARGEFILE.
