@@ -255,7 +255,6 @@ add_widget (Dlg_head *h, void *w)
     } else {
 	widget->prev = widget;
 	widget->next = widget;
-	h->first = widget;
     }
 
     if ((h->flags & DLG_REVERSE) || !h->current)
@@ -630,11 +629,6 @@ dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
     Gpm_Event new_event;
     int x = event->x;
     int y = event->y;
-
-    /* kludge for the menubar: start at h->first, not current  */
-    /* Must be careful in the insertion order to the dlg list */
-    if (y == 1 && (h->flags & DLG_HAS_MENUBAR))
-	starting_widget = h->first;
 
     item = starting_widget;
     do {

@@ -33,7 +33,6 @@
 #include "color.h"
 #include "tree.h"
 #include "win.h"
-#include "main.h"
 #include "ext.h"		/* regexp_command */
 #include "mouse.h"		/* For Gpm_Event */
 #include "layout.h"		/* Most layout variables are here */
@@ -45,6 +44,9 @@
 #include "profile.h"
 #include "execute.h"
 #include "widget.h"
+#include "menu.h"		/* menubar_visible */
+#define WANT_WIDGETS
+#include "main.h"		/* the_menubar */
 
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
 
@@ -2259,9 +2261,12 @@ mark_if_marking (WPanel *panel, Gpm_Event *event)
     return 0;
 }
 
-/* Mouse callback of the panel minus repainting */
+/*
+ * Mouse callback of the panel minus repainting.
+ * If the event is redirected to the menu, *redir is set to 1.
+ */
 static int
-do_panel_event (Gpm_Event *event, WPanel *panel)
+do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
 {
     const int lines = llines (panel);
 
@@ -2278,29 +2283,36 @@ do_panel_event (Gpm_Event *event, WPanel *panel)
     }
 
     /* "<" button */
-    if (event->type & GPM_DOWN && event->x == 1 + 1 && event->y == 0 + 1) {
+    if (event->type & GPM_DOWN && event->x == 2 && event->y == 1) {
 	directory_history_prev (panel);
 	return MOU_NORMAL;
     }
 
     /* ">" button */
-    if (event->type & GPM_DOWN && event->x == panel->widget.cols - 2 + 1
-	&& event->y == 0 + 1) {
+    if (event->type & GPM_DOWN && event->x == panel->widget.cols - 1
+	&& event->y == 1) {
 	directory_history_next (panel);
 	return MOU_NORMAL;
     }
 
     /* "v" button */
-    if (event->type & GPM_DOWN && event->x == panel->widget.cols - 3 + 1
-	&& event->y == 0 + 1) {
+    if (event->type & GPM_DOWN && event->x == panel->widget.cols - 2
+	&& event->y == 1) {
 	directory_history_list (panel);
 	return MOU_NORMAL;
+    }
+
+    /* rest of the upper frame, the menu is invisible - call menu */
+    if (event->type & GPM_DOWN && event->y == 1 && !menubar_visible) {
+	*redir = 1;
+	event->x += panel->widget.x;
+	return (*(the_menubar->widget.mouse)) (event, the_menubar);
     }
 
     event->y -= 2;
     if ((event->type & (GPM_DOWN | GPM_DRAG))) {
 
-	if (panel != (WPanel *) current_dlg->current)
+	if (&panel->widget != current_dlg->current)
 	    change_panel ();
 
 	if (event->y <= 0) {
@@ -2312,9 +2324,8 @@ do_panel_event (Gpm_Event *event, WPanel *panel)
 	    return MOU_REPEAT;
 	}
 
-	if (!
-	    ((panel->top_file + event->y <= panel->count)
-	     && event->y <= lines)) {
+	if (!((panel->top_file + event->y <= panel->count)
+	      && event->y <= lines)) {
 	    mark_if_marking (panel, event);
 	    if (mouse_move_pages)
 		next_page (panel);
@@ -2353,9 +2364,12 @@ static int
 panel_event (Gpm_Event *event, WPanel *panel)
 {
     int ret;
+    int redir = 0;
 
-    ret = do_panel_event (event, panel);
-    panel_update_contents (panel);
+    ret = do_panel_event (event, panel, &redir);
+    if (!redir)
+	panel_update_contents (panel);
+
     return ret;
 }
 

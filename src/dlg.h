@@ -86,7 +86,6 @@ typedef struct Dlg_head {
     /* Internal variables */
     int count;			/* Number of widgets */
     struct Widget *current;	/* Curently active widget */
-    struct Widget *first;	/* First widget added to the dialog */
     dlg_cb_fn callback;
     void *previous_dialog;	/* Pointer to the previously running Dlg_head */
 
@@ -130,10 +129,9 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 
 
 /* The flags: */
-#define DLG_WANT_IDLE   64	/* Dialog wants idle events */
 #define DLG_REVERSE     32	/* Tab order is opposite to the add order */
 #define DLG_WANT_TAB    16	/* Should the tab key be sent to the dialog? */
-#define DLG_HAS_MENUBAR  8	/* GrossHack: Send events on row 1 to a menubar? */
+#define DLG_WANT_IDLE    8	/* Dialog wants idle events */
 #define DLG_COMPACT      4	/* Suppress spaces around the frame */
 #define DLG_TRYUP        2	/* Try to move two lines up the dialog */
 #define DLG_CENTER       1	/* Center the dialog */
