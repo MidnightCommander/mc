@@ -48,19 +48,19 @@ gtk_dtree_get_row_path (GtkDTree *dtree, GtkCTreeNode *row, gint column)
 	g_return_val_if_fail (dtree != NULL, NULL);
 	g_return_val_if_fail (GTK_IS_DTREE (dtree), NULL);
 	g_return_val_if_fail (row != NULL, NULL);
-	
+
 	path = g_strdup ("");
 	do {
 		char *new_path;
 		int val;
-		
+
 		val = gtk_ctree_node_get_pixtext (
 			GTK_CTREE (dtree), row, column,
 			&node_text, NULL, NULL, NULL);
 
 		if (!val)
 			return path;
-		
+
 		new_path = g_concat_dir_and_file (node_text, path);
 		g_free (path);
 		path = new_path;
@@ -81,21 +81,21 @@ static GtkCTreeNode *
 gtk_dtree_contains (GtkDTree *dtree, GtkCTreeNode *parent, char *text)
 {
 	GtkCTreeNode *node;
-	
+
 	g_assert (dtree);
 	g_assert (parent);
 	g_assert (text);
 
 	node = GTK_CTREE_ROW (parent)->children;
-	
+
 	for (; node && GTK_CTREE_ROW (node)->parent == parent;){
 		char *s;
-		
+
 		gtk_ctree_node_get_pixtext (GTK_CTREE (dtree), node, 0, &s, NULL, NULL, NULL);
 
 		if (strcmp (s, text) == 0)
 			return node;
-		
+
 		node = GTK_CTREE_ROW (node)->sibling;
 	}
 
@@ -125,7 +125,7 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 	tree_scan  *dir;
 	tree_entry *dirent;
         struct stat dir_stat;
-	
+
 	g_assert (path);
 	g_assert (parent);
 	g_assert (dtree);
@@ -138,8 +138,7 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 
 	dtree->loading_dir++;
 
-
-        phantom = gtk_dtree_contains (dtree, parent, "PHANTOM");        
+        phantom = gtk_dtree_contains (dtree, parent, "PHANTOM");
         if (!level) {
 		dirent = tree_store_whereis (path);
 		if (!phantom && (!dirent  || (dirent && !dirent->scanned)))
@@ -181,7 +180,7 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 		gtk_ctree_remove_node (GTK_CTREE (dtree), phantom);
 		dtree->removing_rows = 0;
 	}
-	
+
 	return TRUE;
 }
 
@@ -205,34 +204,27 @@ scan_end (GtkDTree *dtree)
 	}
 }
 
-static void
-gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
+/* Scans a subdirectory in the tree.  Returns whether it is worth it to reload
+ * the directory or not.
+ */
+static int
+scan_subtree (GtkDTree *dtree, GtkCTreeNode *row)
 {
-	GtkDTree *dtree = GTK_DTREE (ctree);
 	char *path;
 
-	if (dtree->removing_rows)
-		return;
-	
-	parent_class->tree_select_row (ctree, row, column);
-
-	if (row == dtree->last_node) {
-		return;
-	}
+	if (row == dtree->last_node)
+		return FALSE;
 
 	dtree->loading_dir++;
 	dtree->last_node = row;
 
 	scan_begin (dtree);
-	path = gtk_dtree_get_row_path (GTK_DTREE (ctree), row, 0);
-	
+	path = gtk_dtree_get_row_path (dtree, row, 0);
+
 	if (dtree->current_path)
 		g_free (dtree->current_path);
 
 	dtree->current_path = path;
-
-	if (!dtree->internal)
-		gtk_signal_emit (GTK_OBJECT (ctree), gtk_dtree_signals [DIRECTORY_CHANGED], path);
 
 	gtk_dtree_load_path (dtree, path, row, 1);
 #if 0
@@ -240,9 +232,8 @@ gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 	for (; last_node; last_node = GTK_CTREE_ROW (last_node)->sibling){
 		char *np, *text;
 
-		gtk_ctree_node_get_pixtext (
-			ctree, last_node, column, &text,
-			NULL, NULL, NULL);
+		gtk_ctree_node_get_pixtext (GTK_CTREE (dtree), last_node, column,
+					    &text, NULL, NULL, NULL);
 
 		np = g_concat_dir_and_file (path, text);
 		gtk_dtree_load_path (dtree, np, last_node, 0);
@@ -252,19 +243,44 @@ gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 
 	dtree->loading_dir--;
 	scan_end (dtree);
+
+	return TRUE;
+}
+
+static void
+gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
+{
+	GtkDTree *dtree;
+	int do_change;
+
+	dtree = GTK_DTREE (ctree);
+
+	if (dtree->removing_rows)
+		return;
+
+	scan_begin (dtree);
+
+	(* parent_class->tree_select_row) (ctree, row, column);
+	do_change = scan_subtree (dtree, row);
+
+	if (do_change && !dtree->internal)
+		gtk_signal_emit (GTK_OBJECT (dtree), gtk_dtree_signals [DIRECTORY_CHANGED],
+				 dtree->current_path);
+
+	scan_end (dtree);
 }
 
 static GtkCTreeNode *
 gtk_dtree_lookup_dir (GtkDTree *dtree, GtkCTreeNode *parent, char *dirname)
 {
 	GtkCTreeNode *node;
-	
+
 	g_assert (dtree);
 	g_assert (parent);
 	g_assert (dirname);
 
 	node = GTK_CTREE_ROW (parent)->children;
-	
+
 	while (node){
 		char *text;
 
@@ -272,7 +288,7 @@ gtk_dtree_lookup_dir (GtkDTree *dtree, GtkCTreeNode *parent, char *dirname)
 			gtk_ctree_node_get_pixtext (
 				GTK_CTREE (dtree), node, 0, &text,
 				NULL, NULL, NULL);
-			
+
 			if (strcmp (dirname, text) == 0)
 				return node;
 		}
@@ -287,12 +303,11 @@ gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
 {
 	GtkCTreeNode *current_node;
 	char *s, *current, *npath;
-	
+
 	g_return_val_if_fail (dtree != NULL, FALSE);
 	g_return_val_if_fail (GTK_IS_DTREE (dtree), FALSE);
 	g_return_val_if_fail (path != NULL, FALSE);
 
-	
 	if (dtree->current_path && (strcmp (path, dtree->current_path) == 0))
 		return TRUE;
 
@@ -319,7 +334,7 @@ gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
 
 			node = gtk_dtree_lookup_dir (dtree, current_node, current);
 		}
-		
+
 		if (node){
 			gtk_ctree_expand (GTK_CTREE (dtree), node);
 			current_node = node;
@@ -327,7 +342,7 @@ gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
 			break;
 	}
         g_free (npath);
-	
+
 	if (current_node){
 		gtk_ctree_select (GTK_CTREE (dtree), current_node);
 		if (gtk_ctree_node_is_visible (GTK_CTREE (dtree), current_node) != GTK_VISIBILITY_FULL){
@@ -413,22 +428,49 @@ gtk_dtree_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 	g_free (request);
 }
 
+/* Our handler for the tree_expand signal */
 static void
 gtk_dtree_expand (GtkCTree *ctree, GtkCTreeNode *node)
 {
-	scan_begin (GTK_DTREE (ctree));
+	GtkDTree *dtree;
 
-	parent_class->tree_expand (ctree, node);
-	gtk_ctree_select (ctree, node);
+	dtree = GTK_DTREE (ctree);
 
-	scan_end (GTK_DTREE (ctree));
+	scan_begin (dtree);
+	(* parent_class->tree_expand) (ctree, node);
+	scan_subtree (dtree, node);
+	scan_end (dtree);
 }
 
+/* Our handler for the tree_collapse signal */
 static void
 gtk_dtree_collapse (GtkCTree *ctree, GtkCTreeNode *node)
 {
-	parent_class->tree_collapse (ctree, node);
-	gtk_ctree_select (ctree, node);
+	GList *sel;
+	int do_select;
+
+	/* Select the node only if it is an ancestor of the currently-selected
+	 * node.
+	 */
+
+	do_select = FALSE;
+
+	sel = GTK_CLIST (ctree)->selection;
+	if (!sel)
+		do_select = TRUE;
+	else {
+		if (gtk_ctree_is_ancestor (ctree, node, sel->data))
+			do_select = TRUE;
+	}
+
+	gtk_clist_freeze (GTK_CLIST (ctree));
+
+	(* parent_class->tree_collapse) (ctree, node);
+
+	if (do_select)
+		gtk_ctree_select (ctree, node);
+
+	gtk_clist_thaw (GTK_CLIST (ctree));
 }
 
 /*
@@ -441,11 +483,11 @@ entry_removed_callback (tree_entry *tree, void *data)
 {
 	GtkCTreeNode *current_node;
 	GtkDTree *dtree = data;
-	char *dirname, *copy, *current ;
+	char *dirname, *copy, *current;
 
 	if (dtree->loading_dir)
 		return;
-	
+
 	copy = dirname = g_strdup (tree->name);
 	copy++;
 	current_node = dtree->root_node;
@@ -460,7 +502,7 @@ entry_removed_callback (tree_entry *tree, void *data)
 		gtk_ctree_remove_node (GTK_CTREE (data), current_node);
 		dtree->removing_rows = 0;
 	}
-	
+
 	g_free (dirname);
 }
 
@@ -489,11 +531,11 @@ entry_added_callback (char *dirname, void *data)
 		full_path = g_concat_dir_and_file (npath, current);
 		g_free (npath);
 		npath = full_path;
-		
+
 		new_node = gtk_dtree_lookup_dir (dtree, current_node, current);
 		if (!new_node){
 			GtkCTreeNode *sibling;
-			
+
 			sibling = gtk_dtree_insert_node (dtree, current_node, current);
 			gtk_dtree_load_path (dtree, full_path, sibling, 1);
 			break;
@@ -528,7 +570,7 @@ gtk_dtree_destroy (GtkObject *object)
 	tree_store_remove_entry_remove_hook (entry_removed_callback);
 	tree_store_remove_entry_add_hook (entry_added_callback);
 	tree_store_remove_freeze_hook (tree_set_freeze);
-	
+
 	gdk_pixmap_unref (dtree->pixmap_open);
 	gdk_pixmap_unref (dtree->pixmap_close);
 	gdk_bitmap_unref (dtree->bitmap_open);
@@ -543,7 +585,7 @@ gtk_dtree_class_init (GtkDTreeClass *klass)
 	GtkObjectClass *object_class = (GtkObjectClass *) klass;
 	GtkWidgetClass *widget_class = (GtkWidgetClass *) klass;
 	GtkCTreeClass  *ctree_class  = (GtkCTreeClass *) klass;
-	
+
 	parent_class = gtk_type_class (GTK_TYPE_CTREE);
 
 	gtk_dtree_signals[DIRECTORY_CHANGED] =
@@ -586,7 +628,7 @@ gtk_dtree_load_root_tree (GtkDTree *dtree)
 	char *root_dir [1] = { "/" };
 
 	g_assert (dtree);
-	
+
 	gtk_clist_freeze (GTK_CLIST (dtree));
 	gtk_clist_clear (GTK_CLIST (dtree));
 
@@ -621,7 +663,7 @@ static void
 gtk_dtree_load_pixmap (char *pix [], GdkPixmap **pixmap, GdkBitmap **bitmap)
 {
 	GdkImlibImage *image;
-	
+
 	g_assert (pix);
 	g_assert (pixmap);
 	g_assert (bitmap);
@@ -630,7 +672,6 @@ gtk_dtree_load_pixmap (char *pix [], GdkPixmap **pixmap, GdkBitmap **bitmap)
 	gdk_imlib_render (image, image->rgb_width, image->rgb_height);
 	*pixmap = gdk_imlib_move_image (image);
 	*bitmap = gdk_imlib_move_mask (image);
-
 }
 
 /*
@@ -643,7 +684,7 @@ static void
 gdk_dtree_load_pixmaps (GtkDTree *dtree)
 {
 	g_assert (dtree);
-	
+
 	gtk_dtree_load_pixmap (
 		DIRECTORY_OPEN_XPM,
 		&dtree->pixmap_open, &dtree->bitmap_open);
@@ -685,6 +726,9 @@ gtk_dtree_dirty_notify (int state)
 static void
 gtk_dtree_init (GtkDTree *dtree)
 {
+	/* HACK: This is to avoid GtkCTree's broken focusing behavior */
+	GTK_WIDGET_UNSET_FLAGS (dtree, GTK_CAN_FOCUS);
+
 	dtree->current_path = NULL;
 	dtree->auto_expanded_nodes = NULL;
 
@@ -700,22 +744,21 @@ gtk_dtree_construct (GtkDTree *dtree)
 {
 	GtkCList *clist;
 	GtkCTree *ctree;
-	
+
 	g_return_if_fail (dtree != NULL);
 	g_return_if_fail (GTK_IS_DTREE (dtree));
 
 	clist = GTK_CLIST (dtree);
 	ctree = GTK_CTREE (dtree);
-	
+
 	gtk_ctree_construct (ctree, 1, 0, NULL);
 
 	gtk_clist_set_selection_mode(clist, GTK_SELECTION_BROWSE);
 	gtk_clist_set_auto_sort (clist, TRUE);
 	gtk_clist_set_sort_type (clist, GTK_SORT_ASCENDING);
-	gtk_clist_set_selection_mode (clist, GTK_SELECTION_BROWSE);
 	gtk_clist_set_column_auto_resize (clist, 0, TRUE);
 	gtk_clist_columns_autosize (clist);
-	
+
 	gtk_ctree_set_line_style (ctree, GTK_CTREE_LINES_DOTTED);
 	gtk_clist_set_reorderable (GTK_CLIST (ctree), FALSE);
 
@@ -728,7 +771,7 @@ GtkWidget *
 gtk_dtree_new (void)
 {
 	GtkWidget *widget;
-	
+
 	widget = gtk_type_new (GTK_TYPE_DTREE);
 	gtk_dtree_construct (GTK_DTREE (widget));
 
@@ -739,7 +782,7 @@ GtkType
 gtk_dtree_get_type (void)
 {
 	static GtkType dtree_type = 0;
-	
+
 	if (!dtree_type)
 	{
 		GtkTypeInfo dtree_info =
@@ -753,10 +796,9 @@ gtk_dtree_get_type (void)
 			/* reserved_2 */ NULL,
 			(GtkClassInitFunc) NULL,
 		};
-		
+
 		dtree_type = gtk_type_unique (GTK_TYPE_CTREE, &dtree_info);
 	}
-	
+
 	return dtree_type;
 }
-

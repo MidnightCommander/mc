@@ -26,6 +26,7 @@
 #include "gsession.h"
 #include "command.h"
 #include "cmd.h"
+#include <gdk/gdkx.h>
 
 GdkColorContext *mc_cc;
 
@@ -106,7 +107,6 @@ int
 xtoolkit_init (int *argc, char *argv [])
 {
 	gmc_color_init ();
-
 	return 0;
 }
 
