@@ -298,7 +298,7 @@ tilde_expand (const char *directory)
 
 /*
  * Return the directory where mc should keep its temporary files.
- * This directory is (in Bourne shell terms) "${TMPDIR=/tmp}-$USER"
+ * This directory is (in Bourne shell terms) "${TMPDIR=/tmp}/mc-$USER"
  * When called the first time, the directory is created if needed.
  * The first call should be done early, since we are using fprintf()
  * and not message() to report possible problems.
@@ -378,6 +378,7 @@ mc_tmpdir (void)
 	if (fallback_ok) {
 	    fprintf (stderr, _("Temporary files will be created in %s\n"),
 		     sys_tmp);
+	    error = NULL;
 	} else {
 	    fprintf (stderr, _("Temporary files will not be created\n"));
 	    tmpdir = "/dev/null/";
@@ -386,6 +387,9 @@ mc_tmpdir (void)
 	fprintf (stderr, "%s\n", _("Press any key to continue..."));
 	getc (stdin);
     }
+
+    if (!error)
+	setenv ("MC_TMPDIR", tmpdir, 1);
 
     return tmpdir;
 }

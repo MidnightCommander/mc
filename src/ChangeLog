@@ -1,5 +1,11 @@
 2004-08-19  Pavel Shirshov  <pavelsh@mail.ru>
 
+	* utilunix.c (mc_tmpdir): Fix typos in comment.
+	Set MC_TMPDIR environment variable for vfs scripts.
+	Clear error after successful test of mc temp dir.
+
+2004-08-19  Pavel Shirshov  <pavelsh@mail.ru>
+
 	* screen.c (paint_frame): Fix possible buffer overflow.
 
 2004-08-18  Pavel Shirshov  <pavelsh@mail.ru>
