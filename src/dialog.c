@@ -268,67 +268,25 @@ enum {
     REFRESH_COVERS_ALL		/* If the refresh fn convers all the screen */
 };
 
-typedef void (*refresh_fn) (void *);
-
-/* The refresh stack */
-struct Refresh {
-    void (*refresh_fn)(void *);
-    void *parameter;
-    int  flags;
-    struct Refresh *next;
-};
-
-static struct Refresh *refresh_list;
-
 static void
-push_refresh (refresh_fn new_refresh, void *parameter, int flags)
+do_complete_refresh (Dlg_head *dlg)
 {
-    struct Refresh *new;
+    if (!dlg->fullscreen && dlg->parent)
+	do_complete_refresh (dlg->parent);
 
-    new = g_new (struct Refresh, 1);
-    new->next = (struct Refresh *) refresh_list;
-    new->refresh_fn = new_refresh;
-    new->parameter = parameter;
-    new->flags = flags;
-    refresh_list = new;
-}
-
-static void
-pop_refresh (void)
-{
-    struct Refresh *old;
-
-    if (!refresh_list)
-	fprintf (stderr, _("\n\n\nrefresh stack underflow!\n\n\n"));
-    else {
-	old = refresh_list;
-	refresh_list = refresh_list->next;
-	g_free (old);
-    }
-}
-
-static void
-do_complete_refresh (struct Refresh *refresh_list)
-{
-    if (!refresh_list)
-	return;
-
-    if (refresh_list->flags != REFRESH_COVERS_ALL)
-	do_complete_refresh (refresh_list->next);
-
-    (*(refresh_list->refresh_fn)) (refresh_list->parameter);
+    dlg_redraw (dlg);
 }
 
 void
 do_refresh (void)
 {
-    if (we_are_background || !refresh_list)
+    if (we_are_background || !current_dlg)
 	return;
 
     if (fast_refresh)
-	(*(refresh_list->refresh_fn)) (refresh_list->parameter);
+	dlg_redraw (current_dlg);
     else {
-	do_complete_refresh (refresh_list);
+	do_complete_refresh (current_dlg);
     }
 }
 
@@ -551,12 +509,6 @@ void dlg_redraw (Dlg_head *h)
     update_cursor (h);
 }
 
-static void
-dlg_refresh (void *parameter)
-{
-    dlg_redraw ((Dlg_head *) parameter);
-}
-
 void dlg_stop (Dlg_head *h)
 {
     h->running = 0;
@@ -753,21 +705,14 @@ dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
 /* Init the process */
 void init_dlg (Dlg_head *h)
 {
-    int refresh_mode;
-
     /* Initialize dialog manager and widgets */
     (*h->callback) (h, DLG_INIT, 0);
     dlg_broadcast_msg (h, WIDGET_INIT, 0);
 
     if (h->x == 0 && h->y == 0 && h->cols == COLS && h->lines == LINES)
-	refresh_mode = REFRESH_COVERS_ALL;
-    else
-	refresh_mode = REFRESH_COVERS_PART;
+	h->fullscreen = 1;
 
-    push_refresh (dlg_refresh, h, refresh_mode);
-    h->refresh_pushed = 1;
-
-    h->previous_dialog = current_dlg;
+    h->parent = current_dlg;
     current_dlg = h;
 
     /* Initialize the mouse status */
@@ -790,7 +735,7 @@ void dlg_run_done (Dlg_head *h)
     if (h->current)
 	(*h->callback) (h, DLG_END, 0);
 
-    current_dlg = (Dlg_head *) h->previous_dialog;
+    current_dlg = h->parent;
 }
 
 void dlg_process_event (Dlg_head *h, int key, Gpm_Event *event)
@@ -862,9 +807,6 @@ destroy_dlg (Dlg_head *h)
 {
     int i;
     Widget *c;
-
-    if (h->refresh_pushed)
-	pop_refresh ();
 
     dlg_broadcast_msg (h, WIDGET_DESTROY, 0);
     c = h->current;

@@ -97,15 +97,15 @@ typedef struct Dlg_head {
     int cols, lines;		/* Width and height of the window */
 
     /* Internal flags */
-    int running;
+    int running:1;		/* The dialog is currently active */
+    int fullscreen:1;		/* Parents dialogs don't need refresh */
     int mouse_status;		/* For the autorepeat status of the mouse */
-    int refresh_pushed;		/* Did the dialog actually run? */
 
     /* Internal variables */
     int count;			/* Number of widgets */
     struct Widget *current;	/* Curently active widget */
     dlg_cb_fn callback;
-    void *previous_dialog;	/* Pointer to the previously running Dlg_head */
+    struct Dlg_head *parent;	/* Parent dialog */
 
 } Dlg_head;
 
