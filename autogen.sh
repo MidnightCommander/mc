@@ -35,9 +35,9 @@ if test ! -d config; then
   mkdir config || exit 1
 fi
 
+rm -f aclocal.m4
 if test -f `aclocal --print-ac-dir`/gettext.m4; then
-  # gettext macro files are available to aclocal.
-  $ACLOCAL $ACLOCAL_FLAGS || exit 1
+  : # gettext macro files are available to aclocal.
 else
   # gettext macro files are not available.
   # Find them and copy to a local directory.
@@ -50,20 +50,40 @@ else
   for i in $m4files; do
     cp -f $fromdir/$i gettext.m4
   done
-  $ACLOCAL -I gettext.m4 $ACLOCAL_FLAGS || exit 1
+  ACLOCAL_INCLUDES="-I gettext.m4"
 fi
 
+# Some old version of GNU build tools fail to set error codes.
+# Check that they generate some of the files they should.
+
+$ACLOCAL $ACLOCAL_INCLUDES $ACLOCAL_FLAGS || exit 1
+test -f aclocal.m4 || \
+  { echo "aclocal failed to generate aclocal.m4" 2>&1; exit 1; }
+
 $AUTOHEADER || exit 1
+test -f config.h.in || \
+  { echo "autoheader failed to generate config.h.in" 2>&1; exit 1; }
+
 $AUTOCONF || exit 1
+test -f configure || \
+  { echo "autoconf failed to generate configure" 2>&1; exit 1; }
 
 # Workaround for Automake 1.5 to ensure that depcomp is distributed.
 $AUTOMAKE -a src/Makefile || exit 1
 $AUTOMAKE -a || exit 1
+test -f Makefile.in || \
+  { echo "automake failed to generate Makefile.in" 2>&1; exit 1; }
 
 cd vfs/samba || exit 1
 date -u >include/stamp-h.in
+
 $AUTOHEADER || exit 1
+test -f include/config.h.in || \
+  { echo "autoheader failed to generate vfs/samba/include/config.h.in" 2>&1; exit 1; }
+
 $AUTOCONF || exit 1
+test -f configure || \
+  { echo "autoconf failed to generate vfs/samba/configure" 2>&1; exit 1; }
 ) || exit 1
 
 $srcdir/configure --cache-file=config.cache --enable-maintainer-mode "$@"
