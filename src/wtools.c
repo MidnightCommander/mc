@@ -316,7 +316,8 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 
     if (qd->xpos == -1)
 	dd = create_dlg (0, 0, qd->ylen, qd->xlen, dialog_colors, NULL,
-			 qd->help, qd->title, DLG_CENTER | DLG_TRYUP | DLG_REVERSE);
+			 qd->help, qd->title,
+			 DLG_CENTER | DLG_TRYUP | DLG_REVERSE);
     else
 	dd = create_dlg (qd->ypos, qd->xpos, qd->ylen, qd->xlen,
 			 dialog_colors, NULL, qd->help, qd->title,
@@ -401,7 +402,11 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 		break;
 
 	    case quick_input:
-		*qw->str_result = g_strdup (((WInput *) w)->buffer);
+		if (qw->value & 2)
+		    *qw->str_result =
+			tilde_expand (((WInput *) w)->buffer);
+		else
+		    *qw->str_result = g_strdup (((WInput *) w)->buffer);
 		break;
 	    }
 	}
