@@ -70,9 +70,14 @@
 #define MARKED_SELECTED	3
 #define STATUS		5
 
+typedef void (*info_fn) (file_entry *, char * buf, size_t bufsize);
+
 /*
  * This describes a format item.  The parse_display_format routine parses
  * the user specified format and creates a linked list of format_e structures.
+ *
+ * The string_fn functions may assume that the size of the passed buffer is
+ * at least 1, to allow storing the trailing '\0'.
  */
 typedef struct format_e {
     struct format_e *next;
@@ -80,7 +85,7 @@ typedef struct format_e {
     int    field_len;
     int    just_mode;
     int    expand;
-    const char *(*string_fn)(file_entry *, int len);
+    info_fn string_fn;
     const char   *title;
     const char   *id;
 } format_e;
@@ -167,29 +172,23 @@ add_permission_string (char *dest, int width, file_entry *fe, int attr, int colo
 }
 
 /* String representations of various file attributes */
+
 /* name */
-static const char *
-string_file_name (file_entry *fe, int len)
+static void
+string_file_name (file_entry *fe, char *buffer, size_t bufsize)
 {
-    static char buffer [BUF_SMALL];
     size_t i;
+    char c;
 
-    for (i = 0; i < sizeof(buffer) - 1; i++) {
-	char c;
-
+    for (i = 0; i < bufsize - 1; i++) {
 	c = fe->fname[i];
-
 	if (!c)
 	    break;
-
 	if (!is_printable(c))
 	    c = '?';
-
 	buffer[i] = c;
     }
-
-    buffer[i] = 0;
-    return buffer;
+    buffer[i] = '\0';
 }
 
 static inline int ilog10(dev_t n)
@@ -205,8 +204,8 @@ static void format_device_number (char *buf, size_t bufsize, dev_t dev)
 {
     dev_t major_dev = major(dev);
     dev_t minor_dev = minor(dev);
-    int major_digits = ilog10(major_dev);
-    int minor_digits = ilog10(minor_dev);
+    size_t major_digits = ilog10(major_dev);
+    size_t minor_digits = ilog10(minor_dev);
 
     g_assert(bufsize >= 1);
     if (major_digits + 1 + minor_digits + 1 <= bufsize) {
@@ -218,48 +217,44 @@ static void format_device_number (char *buf, size_t bufsize, dev_t dev)
 }
 
 /* size */
-static const char *
-string_file_size (file_entry *fe, int len)
+static void
+string_file_size (file_entry *fe, char *buffer, size_t bufsize)
 {
-    static char buffer [BUF_TINY];
-
     /* Don't ever show size of ".." since we don't calculate it */
     if (!strcmp (fe->fname, "..")) {
-	return _("UP--DIR");
-    }
-
+	g_strlcpy (buffer, _("UP--DIR"), bufsize);
+    } else
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
     if (S_ISBLK (fe->st.st_mode) || S_ISCHR (fe->st.st_mode))
-        format_device_number (buffer, len + 1, fe->st.st_rdev);
+        format_device_number (buffer, bufsize, fe->st.st_rdev);
     else
 #endif
     {
-	size_trunc_len (buffer, len, fe->st.st_size, 0);
+	size_trunc_len (buffer, bufsize - 1, fe->st.st_size, 0);
     }
-    return buffer;
 }
 
 /* bsize */
-static const char *
-string_file_size_brief (file_entry *fe, int len)
+static void
+string_file_size_brief (file_entry *fe, char *buffer, size_t bufsize)
 {
     if (S_ISLNK (fe->st.st_mode) && !fe->f.link_to_dir) {
-	return _("SYMLINK");
+	g_strlcpy (buffer, _("SYMLINK"), bufsize);
+    } else if ((S_ISDIR (fe->st.st_mode) || fe->f.link_to_dir) && strcmp (fe->fname, "..") != 0) {
+	g_strlcpy (buffer, _("SUB-DIR"), bufsize);
+    } else {
+	string_file_size (fe, buffer, bufsize);
     }
-
-    if ((S_ISDIR (fe->st.st_mode) || fe->f.link_to_dir) && strcmp (fe->fname, "..")) {
-	return _("SUB-DIR");
-    }
-
-    return string_file_size (fe, len);
 }
 
-/* This functions return a string representation of a file entry */
 /* type */
-static const char *
-string_file_type (file_entry *fe, int len)
+static void
+string_file_type (file_entry *fe, char *buffer, size_t bufsize)
 {
-    static char buffer[2];
+    if (bufsize == 1) {
+	buffer[0] = '\0';
+	return;
+    }
 
     if (S_ISDIR (fe->st.st_mode))
 	buffer[0] = PATH_SEP;
@@ -289,132 +284,119 @@ string_file_type (file_entry *fe, int len)
     else
 	buffer[0] = ' ';
     buffer[1] = '\0';
-    return buffer;
 }
 
 /* mtime */
-static const char *
-string_file_mtime (file_entry *fe, int len)
+static void
+string_file_mtime (file_entry *fe, char *buffer, size_t bufsize)
 {
-    if (!strcmp (fe->fname, "..")) {
-       return "";
-    }
-    return file_date (fe->st.st_mtime);
+    if (str_cmp (fe->fname, ==, ".."))
+	g_strlcpy (buffer, "", bufsize);
+    else
+	g_strlcpy (buffer, file_date (fe->st.st_mtime), bufsize);
 }
 
 /* atime */
-static const char *
-string_file_atime (file_entry *fe, int len)
+static void
+string_file_atime (file_entry *fe, char *buffer, size_t bufsize)
 {
-    if (!strcmp (fe->fname, "..")) {
-       return "";
-    }
-    return file_date (fe->st.st_atime);
+    if (str_cmp (fe->fname, ==, ".."))
+	g_strlcpy (buffer, "", bufsize);
+    else
+	g_strlcpy (buffer, file_date (fe->st.st_atime), bufsize);
 }
 
 /* ctime */
-static const char *
-string_file_ctime (file_entry *fe, int len)
+static void
+string_file_ctime (file_entry *fe, char *buffer, size_t bufsize)
 {
-    if (!strcmp (fe->fname, "..")) {
-       return "";
-    }
-    return file_date (fe->st.st_ctime);
+    if (str_cmp (fe->fname, ==, ".."))
+	g_strlcpy (buffer, "", bufsize);
+    else
+	g_strlcpy (buffer, file_date (fe->st.st_ctime), bufsize);
 }
 
 /* perm */
-static const char *
-string_file_permission (file_entry *fe, int len)
+static void
+string_file_permission (file_entry *fe, char *buffer, size_t bufsize)
 {
-    return string_perm (fe->st.st_mode);
+    g_strlcpy (buffer, string_perm (fe->st.st_mode), bufsize);
 }
 
 /* mode */
-static const char *
-string_file_perm_octal (file_entry *fe, int len)
+static void
+string_file_perm_octal (file_entry *fe, char *buffer, size_t bufsize)
 {
-    static char buffer [10];
+    char buf[8];
+    const int digits = bufsize - 1;
 
-    g_snprintf (buffer, sizeof (buffer), "0%06lo", (unsigned long) fe->st.st_mode);
-    return buffer;
+    g_snprintf (buf, sizeof(buf), "0%06lo", (unsigned long) fe->st.st_mode);
+    g_strlcpy (buffer, buf + ((digits < 7) ? (7 - digits) : 0), bufsize);
 }
 
 /* nlink */
-static const char *
-string_file_nlinks (file_entry *fe, int len)
+static void
+string_file_nlinks (file_entry *fe, char *buffer, size_t bufsize)
 {
-    static char buffer[BUF_TINY];
-
-    g_snprintf (buffer, sizeof (buffer), "%16d", (int) fe->st.st_nlink);
-    return buffer;
+    g_snprintf (buffer, bufsize, "%16d", (int) fe->st.st_nlink);
 }
 
 /* inode */
-static const char *
-string_inode (file_entry *fe, int len)
+static void
+string_inode (file_entry *fe, char *buffer, size_t bufsize)
 {
-    static char buffer [10];
-
-    g_snprintf (buffer, sizeof (buffer), "%lu",
-		(unsigned long) fe->st.st_ino);
-    return buffer;
+    g_snprintf (buffer, bufsize, "%lu", (unsigned long) fe->st.st_ino);
 }
 
 /* nuid */
-static const char *
-string_file_nuid (file_entry *fe, int len)
+static void
+string_file_nuid (file_entry *fe, char *buffer, size_t bufsize)
 {
-    static char buffer [10];
-
-    g_snprintf (buffer, sizeof (buffer), "%lu",
-		(unsigned long) fe->st.st_uid);
-    return buffer;
+    g_snprintf (buffer, bufsize, "%lu", (unsigned long) fe->st.st_uid);
 }
 
 /* ngid */
-static const char *
-string_file_ngid (file_entry *fe, int len)
+static void
+string_file_ngid (file_entry *fe, char *buffer, size_t bufsize)
 {
-    static char buffer [10];
-
-    g_snprintf (buffer, sizeof (buffer), "%lu",
-		(unsigned long) fe->st.st_gid);
-    return buffer;
+    g_snprintf (buffer, bufsize, "%lu", (unsigned long) fe->st.st_gid);
 }
 
 /* owner */
-static const char *
-string_file_owner (file_entry *fe, int len)
+static void
+string_file_owner (file_entry *fe, char *buffer, size_t bufsize)
 {
-    return get_owner (fe->st.st_uid);
+    g_strlcpy (buffer, get_owner (fe->st.st_uid), bufsize);
 }
 
 /* group */
-static const char *
-string_file_group (file_entry *fe, int len)
+static void
+string_file_group (file_entry *fe, char *buffer, size_t bufsize)
 {
-    return get_group (fe->st.st_gid);
+    g_strlcpy (buffer, get_group (fe->st.st_gid), bufsize);
 }
 
 /* mark */
-static const char *
-string_marked (file_entry *fe, int len)
+static void
+string_marked (file_entry *fe, char *buffer, size_t bufsize)
 {
-    return fe->f.marked ? "*" : " ";
+    g_strlcpy (buffer, fe->f.marked ? "*" : " ", bufsize);
 }
 
 /* space */
-static const char *
-string_space (file_entry *fe, int len)
+static void
+string_space (file_entry *fe, char *buffer, size_t bufsize)
 {
-    return " ";
+    (void) fe;
+    g_strlcpy (buffer, " ", bufsize);
 }
 
 /* dot */
-static const char *
-string_dot (file_entry *fe, int len)
+static void
+string_dot (file_entry *fe, char *buffer, size_t bufsize)
 {
-    return ".";
+    (void) fe;
+    g_strlcpy (buffer, ".", bufsize);
 }
 
 #define GT 1
@@ -426,7 +408,7 @@ static struct {
     int  default_just;
     const char *title;
     int  use_in_gui;
-    const char *(*string_fn)(file_entry *, int);
+    info_fn string_fn;
     sortfn *sort_routine;
 } formats [] = {
 { "name",  12, 1, J_LEFT_FIT,	N_("Name"),	1, string_file_name,	   (sortfn *) sort_name },
@@ -539,8 +521,9 @@ file_compute_color (int attr, file_entry *fe)
 
 /* Formats the file number file_index of panel in the buffer dest */
 static void
-format_file (char *dest, int limit, WPanel *panel, int file_index, int width, int attr, int isstatus)
+format_file (char *dest, size_t destsize, WPanel *panel, int file_index, int width, int attr, int isstatus)
 {
+    char buffer[BUF_1K];
     int      color, length, empty_line;
     const char *txt;
     char     *old_pos;
@@ -567,20 +550,20 @@ format_file (char *dest, int limit, WPanel *panel, int file_index, int width, in
 	    int len;
 
 	    if (empty_line)
-		txt = " ";
+	        strcpy (buffer, " ");
 	    else
-		txt = (*format->string_fn)(fe, format->field_len);
+		(*format->string_fn) (fe, buffer, min(format->field_len, sizeof(buffer) - 1) + 1);
 
 	    old_pos = cdest;
 
 	    len = format->field_len;
 	    if (len + length > width)
 		len = width - length;
-	    if (len + (cdest - dest) > limit)
-		len = limit - (cdest - dest);
+	    if (len + (cdest - dest) > destsize)
+		len = destsize - (cdest - dest);
 	    if (len <= 0)
 		break;
-	    cdest = to_buffer (cdest, format->just_mode, len, txt);
+	    cdest = to_buffer (cdest, format->just_mode, len, buffer);
 	    length += len;
 
             attrset (color);

@@ -1,5 +1,11 @@
 2005-02-08  Roland Illig  <roland.illig@gmx.de>
 
+	* screen.c (string_file_*): Don't use static buffers.
+	* screen.c (format_file): Provide a buffer for the string_file_*
+	functions.
+
+2005-02-08  Roland Illig  <roland.illig@gmx.de>
+
 	* widget.h: Renamed define_label to buttonbar_set_label. Renamed
 	define_label_data to buttonbar_set_label_data. Renamed
 	redraw_labels to buttonbar_redraw.
