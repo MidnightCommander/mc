@@ -116,7 +116,7 @@ typedef struct Widget Widget;
 /* Widget callback */
 typedef cb_ret_t (*callback_fn) (Widget *widget, widget_msg_t msg, int parm);
 
-/* Every Widget must have this as it's first element */
+/* Every Widget must have this as its first element */
 struct Widget {
     int x, y;
     int cols, lines;
