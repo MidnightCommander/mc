@@ -35,8 +35,11 @@ ALLICONS = 			\
 	gnome-pack-rpm.png	\
 	gnome-video-mpeg.png	\
 	gnome-video-quicktime.png \
-	gnome-video-x-msvideo.png 
-
+	gnome-video-x-msvideo.png \
+	gnome-text-html.png	\
+	gnome-http-url.png	\
+	gnome-image-generic.png
+	
 all:
 
 install: @insticons@
