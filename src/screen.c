@@ -229,14 +229,10 @@ string_file_type (file_entry *fe, int len)
 	    buffer [0] = '@';
     } else if (S_ISCHR (fe->buf.st_mode))
 	buffer [0] = '-';
-#ifdef S_ISSOCK
     else if (S_ISSOCK (fe->buf.st_mode))
 	buffer [0] = '=';
-#endif
-#ifdef S_ISDOOR
     else if (S_ISDOOR (fe->buf.st_mode))
 	buffer [0] = '>';
-#endif
     else if (S_ISBLK (fe->buf.st_mode))
 	buffer [0] = '+';
     else if (S_ISFIFO (fe->buf.st_mode))
@@ -475,6 +471,8 @@ file_compute_color (int attr, file_entry *fe)
     else if (S_ISBLK (fe->buf.st_mode))
         return (DEVICE_COLOR);
     else if (S_ISFIFO (fe->buf.st_mode))
+        return (SPECIAL_COLOR);
+    else if (S_ISDOOR (fe->buf.st_mode))
         return (SPECIAL_COLOR);
     else if (is_exe (fe->buf.st_mode))
         return (EXECUTABLE_COLOR);

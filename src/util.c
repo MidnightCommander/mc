@@ -325,9 +325,7 @@ char *string_perm (mode_t mode_bits)
 
     strcpy (mode, "----------");
     if (ismode (mode_bits, S_IFDIR)) mode [0] = 'd';
-#ifdef S_IFSOCK
     if (ismode (mode_bits, S_IFSOCK)) mode [0] = 's';
-#endif /* S_IFSOCK */
     if (ismode (mode_bits, S_IXOTH)) mode [9] = 'x';
     if (ismode (mode_bits, S_IWOTH)) mode [8] = 'w';
     if (ismode (mode_bits, S_IROTH)) mode [7] = 'r';

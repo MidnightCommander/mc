@@ -16,7 +16,7 @@
 #endif
 
 #ifndef S_ISLNK
-#   define S_ISLNK(x) (((x) & S_IFLNK) == S_IFLNK)
+#   define S_ISLNK(x) (((x) & S_IFMT) == S_IFLNK)
 #endif
 
 #ifndef S_IFSOCK
@@ -24,7 +24,7 @@
 #endif
 
 #ifndef S_ISSOCK
-#   define S_ISSOCK(x) (((x) & S_IFSOCK) == S_IFSOCK)
+#   define S_ISSOCK(x) (((x) & S_IFMT) == S_IFSOCK)
 #endif
 
 #ifndef S_IFFIFO
@@ -32,7 +32,7 @@
 #endif
 
 #ifndef S_ISFIFO
-#   define S_ISFIFO(x) (((x) & S_IFFIFO) == S_IFFIFO)
+#   define S_ISFIFO(x) (((x) & S_IFMT) == S_IFFIFO)
 #endif
 
 #ifndef S_IFCHR
@@ -40,7 +40,7 @@
 #endif
 
 #ifndef S_ISCHR
-#   define S_ISCHR(x) (((x) & S_IFCHR) == S_IFCHR)
+#   define S_ISCHR(x) (((x) & S_IFMT) == S_IFCHR)
 #endif
 
 #ifndef S_IFBLK
@@ -48,8 +48,18 @@
 #endif
 
 #ifndef S_ISBLK
-#   define S_ISBLK(x) (((x) & S_IFBLK) == S_IFBLK)
+#   define S_ISBLK(x) (((x) & S_IFMT) == S_IFBLK)
 #endif
+
+/* Door is something that only exists on Solaris */
+#ifndef S_IFDOOR
+#   define S_IFDOOR 0
+#endif
+
+#ifndef S_ISDOOR
+#   define S_ISDOOR(x) (((x) & S_IFMT) == S_IFDOOR)
+#endif
+
 
 
 #ifndef MAXPATHLEN
