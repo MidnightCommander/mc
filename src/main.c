@@ -2070,14 +2070,16 @@ init_sigchld (void)
 #endif /* NATIVE_WIN32, UNIX */
 
 static void
-print_mc_usage (poptContext ctx, FILE * stream)
+print_mc_usage (poptContext ctx, FILE *stream)
 {
+    int leftColWidth;
+
     poptSetOtherOptionHelp (ctx,
 			    _("[flags] [this_dir] [other_panel_dir]\n\n"));
 
     /* print help for options */
-    fprintf (stream, "  %-*s   %s\n", poptPrintHelp (ctx, stream, 0),
-	     _("+number"),
+    leftColWidth = poptPrintHelp (ctx, stream, 0);
+    fprintf (stream, "  %-*s   %s\n", leftColWidth, _("+number"),
 	     _("Set initial line number for the internal editor"));
     fprintf (stream,
 	     _("\n"
