@@ -1821,14 +1821,21 @@ You can define an FTP proxy host for doing FTP.  Note that most modern
 firewalls are fully transparent at least for passive FTP (see below), so
 FTP proxies are considered obsolete.
 .PP
-You can set
+If
 .I Always use ftp proxy
-to use proxy for all connections or use the exclamation sign to enable
-proxy for certain hosts.  See
+is not set, you can use the exclamation sign to enable proxy for certain
+hosts.  See
 .\"LINK2"
 FTP File System
 .\"FTP File System"
-for more information.
+for examples.
+.PP
+If this option is set, the program will do two things: consult the
+@prefix@/lib/mc/mc.no_proxy file for lines containing host names that
+are local (if the host name starts with a dot, it is assumed to be a
+domain) and to assume that any hostnames without dots in their names are
+directly accessible.  All other hosts will be accessed through the
+specified FTP proxy.
 .PP
 You can enable using
 .I ~/.netrc
@@ -1836,10 +1843,11 @@ file, which keeps login names and passwords for ftp servers.  See netrc
 (5) for the description of the .netrc format.
 .PP
 .I Use passive mode
-enables using FTP passive mode, when the existing connection is reused
-to transfer data.  This option is recommended and enabled by default. 
-If this option is turned off, the data connection is initiated by the
-server.  This may not work with some firewalls.
+enables using FTP passive mode, when the connection for data transfer is
+initated by the client, not by the server.  This option is recommended
+and enabled by default.  If this option is turned off, the data
+connection is initiated by the server.  This may not work with some
+firewalls.
 .\"NODE "    Save Setup"
 .SH "    Save Setup"
 At startup the Midnight Commander will try to load initialization
