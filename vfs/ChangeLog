@@ -1,3 +1,11 @@
+1999-07-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* Make-mc.in (distcopy): Added a bunch of new lists of files for
+	the directories in vfs/samba.  Use them in this rule, because
+	plain wildcards will not work right.
+	(SAMBA_DIST_TOPLEVEL): Added configure to the list of distributed
+	files.
+
 1999-07-02  Tuomas J. Lukka <lukka@iki.fi>
 
 	* Make-mc.in: $SAMBAFILES -> @SAMBAFILES@ in the rule

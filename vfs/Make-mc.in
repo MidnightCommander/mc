@@ -57,15 +57,107 @@ SAMBAFILES=         \
 
 SAMBA_DIST_TOPLEVEL =		\
 	Makefile.in		\
+	acconfig.h		\
 	aclocal.m4		\
 	architecture.doc	\
+	configure		\
 	configure.in		\
 	internals.doc		\
 	parsing.doc		\
 	samba-files		\
-	smbadduser		\
-	acconfig.h		\
+	smbadduser
 
+SAMBA_DIST_INCLUDE =		\
+	byteorder.h		\
+	charset.h		\
+	client.h		\
+	config.h		\
+	config.h.in		\
+	dlinklist.h		\
+	includes.h		\
+	kanji.h			\
+	local.h			\
+	nameserv.h		\
+	ntdomain.h		\
+	nterr.h			\
+	proto.h			\
+	rpc_dce.h		\
+	rpc_lsa.h		\
+	rpc_misc.h		\
+	rpc_netlogon.h		\
+	rpc_reg.h		\
+	rpc_samr.h		\
+	rpc_secdes.h		\
+	rpc_srvsvc.h		\
+	rpc_wkssvc.h		\
+	rpcclient.h		\
+	smb.h			\
+	stamp-h			\
+	trans2.h		\
+	version.h
+
+SAMBA_DIST_LIB =		\
+	charcnv.c		\
+	charset.c		\
+	debug.c			\
+	doscalls.c		\
+	genrand.c		\
+	getsmbpass.c		\
+	interface.c		\
+	kanji.c			\
+	md4.c			\
+	netmask.c		\
+	signal.c		\
+	slprintf.c		\
+	system.c		\
+	time.c			\
+	username.c		\
+	util.c			\
+	util_file.c		\
+	util_sock.c		\
+	util_str.c		\
+	util_unistr.c
+
+SAMBA_DIST_LIBSMB =		\
+	clientgen.c		\
+	namequery.c		\
+	nmblib.c		\
+	nterr.c			\
+	pwd_cache.c		\
+	smbdes.c		\
+	smbencrypt.c		\
+	smberr.c
+
+SAMBA_DIST_PARAM =		\
+	loadparm.c		\
+	params.c
+
+SAMBA_DIST_SMBWRAPPER =		\
+	smbw.h
+
+SAMBA_DIST_TESTS =		\
+	README			\
+	crypttest.c		\
+	fcntl_lock.c		\
+	ftruncate.c		\
+	ftruncroot.c		\
+	getgroups.c		\
+	shared_mmap.c		\
+	summary.c		\
+	sysv_ipc.c		\
+	trapdoor.c		\
+	trivial.c
+
+SAMBA_DIST_UBIQX =		\
+	COPYING.LIB		\
+	README.UBI		\
+	debugparse.h		\
+	sys_include.h		\
+	ubi_BinTree.h		\
+	ubi_Cache.h		\
+	ubi_SplayTree.h		\
+	ubi_dLinkList.h		\
+	ubi_sLinkList.h
 
 NONETFILES = 			\
 	container.o		\
@@ -268,17 +360,19 @@ distcopy:
 	mkdir ../../mc-$(VERSION)/vfs/samba/include
 	mkdir ../../mc-$(VERSION)/vfs/samba/lib
 	mkdir ../../mc-$(VERSION)/vfs/samba/libsmb
-	mkdir ../../mc-$(VERSION)/vfs/samba/ubiqx
-	mkdir ../../mc-$(VERSION)/vfs/samba/tests
 	mkdir ../../mc-$(VERSION)/vfs/samba/param
+	mkdir ../../mc-$(VERSION)/vfs/samba/smbwrapper
+	mkdir ../../mc-$(VERSION)/vfs/samba/tests
+	mkdir ../../mc-$(VERSION)/vfs/samba/ubiqx
 
 	(cd samba; $(CP) $(SAMBA_DIST_TOPLEVEL) ../../../mc-$(VERSION)/vfs/samba)
-	(cd samba; $(CP) include/* ../../../mc-$(VERSION)/vfs/samba/include)
-	(cd samba; $(CP) lib/*.[ch] ../../../mc-$(VERSION)/vfs/samba/lib)
-	(cd samba; $(CP) libsmb/*.[ch] ../../../mc-$(VERSION)/vfs/samba/libsmb)
-	(cd samba; $(CP) ubiqx/*.[ch] ../../../mc-$(VERSION)/vfs/samba/ubiqx)
-	(cd samba; $(CP) tests/* ../../../mc-$(VERSION)/vfs/samba/tests)
-	(cd samba; $(CP) param/* ../../../mc-$(VERSION)/vfs/samba/param)
+	(cd samba/include; $(CP) $(SAMBA_DIST_INCLUDE)* ../../../../mc-$(VERSION)/vfs/samba/include)
+	(cd samba/lib; $(CP) $(SAMBA_DIST_LIB) ../../../../mc-$(VERSION)/vfs/samba/lib)
+	(cd samba/libsmb; $(CP) $(SAMBA_DIST_LIBSMB) ../../../../mc-$(VERSION)/vfs/samba/libsmb)
+	(cd samba/param; $(CP) $(SAMBA_DIST_PARAM) ../../../../mc-$(VERSION)/vfs/samba/param)
+	(cd samba/smbwrapper; $(CP) $(SAMBA_DIST_SMBWRAPPER) ../../../../mc-$(VERSION)/vfs/samba/smbwrapper)
+	(cd samba/tests; $(CP) $(SAMBA_DIST_TESTS) ../../../../mc-$(VERSION)/vfs/samba/tests)
+	(cd samba/ubiqx; $(CP) $(SAMBA_DIST_UBIQX) ../../../../mc-$(VERSION)/vfs/samba/ubiqx)
 	
 depend dep: mcdep
 

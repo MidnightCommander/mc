@@ -1,3 +1,7 @@
+1999-07-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* configure.in (VERSION): Bumped version number to 4.5.34.
+
 1999-07-02  Tuomas J. Lukka <lukka@iki.fi>
 
 	* Add fi into ALL_LINGUAS
