@@ -1,5 +1,9 @@
 1998-03-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gscreen.c (panel_file_list_size_allocate_hook): Now we
+	connect_after to the size_allocate signal and block the handler.
+	Things are still not perfect, though.
+
 	* gtools.c (message): Added return NULL.  This needs to be fixed.
 	(translate_gdk_keysym_to_curses): FIXME: Replace KEY_BACKTAB by '\t'
 	while KEY_BACKTAB is added somewhere else.

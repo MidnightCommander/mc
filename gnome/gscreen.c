@@ -512,7 +512,9 @@ panel_file_list_compute_lines (GtkCList *file_list, WPanel *panel, int height)
 static void
 panel_file_list_size_allocate_hook (GtkWidget *file_list, GtkAllocation *allocation, WPanel *panel)
 {
+	gtk_signal_handler_block_by_data (GTK_OBJECT (file_list), panel);
 	panel_file_list_configure_contents (file_list, panel, allocation->width, allocation->height);
+	gtk_signal_handler_unblock_by_data (GTK_OBJECT (file_list), panel);
 	
 	panel_file_list_compute_lines (GTK_CLIST (file_list), panel, allocation->height);
 }
@@ -780,18 +782,18 @@ panel_create_file_list (WPanel *panel)
 	clist = GTK_CLIST (file_list);
 	panel_configure_file_list (panel, file_list);
 	free (titles);
-	
-	gtk_signal_connect (GTK_OBJECT (file_list),
-			    "size_allocate",
-			    GTK_SIGNAL_FUNC (panel_file_list_size_allocate_hook),
+
+	gtk_signal_connect_after (GTK_OBJECT (file_list), "size_allocate",
+				  GTK_SIGNAL_FUNC (panel_file_list_size_allocate_hook),
+				  panel);
+
+	gtk_signal_connect (GTK_OBJECT (file_list), "realize",
+			    GTK_SIGNAL_FUNC (panel_realized),
 			    panel);
 
-	gtk_signal_connect (GTK_OBJECT (file_list),
-			    "realize",
-			    GTK_SIGNAL_FUNC (panel_realized), panel);
-
 	gtk_signal_connect (GTK_OBJECT (file_list), "select_row",
-			    GTK_SIGNAL_FUNC (panel_file_list_select_row), panel);
+			    GTK_SIGNAL_FUNC (panel_file_list_select_row),
+			    panel);
 	return file_list;
 }
 
