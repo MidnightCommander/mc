@@ -1,3 +1,9 @@
+2002-10-07  Pavel Roskin  <proski@gnu.org>
+
+	* direntry.c (vfs_s_resolve_symlink): Use g_snprintf() instead
+	of non-portable snprintf().
+	Reported by Xu Qiang <Xu.Qiang@xssc.sgp.xerox.com>
+
 2002-10-04  Pavel Roskin  <proski@gnu.org>
 
 	* mcfs.c (mcfs_lseek): Explicity cast offset to int.  This fixes

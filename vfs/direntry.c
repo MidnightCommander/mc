@@ -340,8 +340,6 @@ vfs_s_find_inode (vfs *me, vfs_s_inode *root, char *path, int follow, int flags)
     return ent->ino;
 }
 
-/* Ouch - vfs_s_resolve symlink does not work for filesystems like ftp & fish:
-   you may not lookup with some other root! */
 vfs_s_entry *
 vfs_s_resolve_symlink (vfs *me, vfs_s_entry *entry, char *path, int follow)
 {
@@ -362,25 +360,29 @@ vfs_s_resolve_symlink (vfs *me, vfs_s_entry *entry, char *path, int follow)
 	ERRNOR (EFAULT, NULL);
 
     if (MEDATA->find_entry == vfs_s_find_entry_linear) {
-        if (*linkname == PATH_SEP)
-	    return (MEDATA->find_entry) (me, entry->dir->super->root, linkname, follow - 1, 0);
-	else { /* FIXME: this does not work */ 
-	    char *fullpath = vfs_s_fullpath(me, entry->dir);
-	    snprintf(buf, sizeof (buf), "%s/%s", fullpath, linkname);
+	if (*linkname == PATH_SEP)
+	    return (MEDATA->find_entry) (me, entry->dir->super->root,
+					 linkname, follow - 1, 0);
+	else {
+	    char *fullpath = vfs_s_fullpath (me, entry->dir);
+
+	    g_snprintf (buf, sizeof (buf), "%s/%s", fullpath, linkname);
 	    g_free (fullpath);
-	    return (MEDATA->find_entry) (me, entry->dir->super->root, buf, follow - 1, 0);
+	    return (MEDATA->find_entry) (me, entry->dir->super->root, buf,
+					 follow - 1, 0);
 	}
     }
 
     /* Convert absolute paths to relative ones */
     if (*linkname == PATH_SEP) {
 	char *p, *q;
+
 	for (p = path, q = entry->ino->linkname; *p == *q; p++, q++);
 	while (*(--q) != PATH_SEP);
 	q++;
-	for (;; p++){
+	for (;; p++) {
 	    p = strchr (p, PATH_SEP);
-	    if (!p){
+	    if (!p) {
 		strcat (buf, q);
 		break;
 	    }
