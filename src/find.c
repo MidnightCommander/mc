@@ -138,92 +138,93 @@ find_parameters (char **start_dir, char **pattern, char **content)
     int return_value;
     char *temp_dir;
     WCheck *case_sense;
-    static char* case_label = N_("case &Sensitive");
+    static char *case_label = N_("case &Sensitive");
 
     static char *in_contents = NULL;
     static char *in_start_dir = NULL;
     static char *in_start_name = NULL;
 
-    static char* labs[] = {N_("Start at:"), N_("Filename:"), N_("Content: ")};
-    static char* buts[] = {N_("&Ok"), N_("&Tree"), N_("&Cancel")};
+    static char *labs[] =
+	{ N_("Start at:"), N_("Filename:"), N_("Content: ") };
+    static char *buts[] = { N_("&Ok"), N_("&Tree"), N_("&Cancel") };
     static int ilen = 30, istart = 14;
     static int b0 = 3, b1 = 16, b2 = 36;
 
 #ifdef ENABLE_NLS
-	static int i18n_flag = 0;
-	
-	if (!i18n_flag)
-	{
-		register int i = sizeof(labs)/sizeof(labs[0]);
-		int l1, maxlen = 0;
-		
-		while (i--)
-		{
-			l1 = strlen (labs [i] = _(labs [i]));
-			if (l1 > maxlen)
-				maxlen = l1;
-		}
-		i = maxlen + ilen + 7;
-		if (i > FIND_X)
-			FIND_X = i;
-		
-		for (i = sizeof(buts)/sizeof(buts[0]), l1 = 0; i--; )
-		{
-			l1 += strlen (buts [i] = _(buts [i]));
-		}
-		l1 += 21;
-		if (l1 > FIND_X)
-			FIND_X = l1;
+    static int i18n_flag = 0;
 
-		ilen = FIND_X - 7 - maxlen; /* for the case of very long buttons :) */
-		istart = FIND_X - 3 - ilen;
-		
-		b1 = b0 + strlen(buts[0]) + 7;
-		b2 = FIND_X - (strlen(buts[2]) + 6);
-		
-		i18n_flag = 1;
-		case_label = _(case_label);
+    if (!i18n_flag) {
+	register int i = sizeof (labs) / sizeof (labs[0]);
+	int l1, maxlen = 0;
+
+	while (i--) {
+	    l1 = strlen (labs[i] = _(labs[i]));
+	    if (l1 > maxlen)
+		maxlen = l1;
 	}
-	
-#endif /* ENABLE_NLS */
+	i = maxlen + ilen + 7;
+	if (i > FIND_X)
+	    FIND_X = i;
 
-find_par_start:
+	for (i = sizeof (buts) / sizeof (buts[0]), l1 = 0; i--;) {
+	    l1 += strlen (buts[i] = _(buts[i]));
+	}
+	l1 += 21;
+	if (l1 > FIND_X)
+	    FIND_X = l1;
+
+	ilen = FIND_X - 7 - maxlen;	/* for the case of very long buttons :) */
+	istart = FIND_X - 3 - ilen;
+
+	b1 = b0 + strlen (buts[0]) + 7;
+	b2 = FIND_X - (strlen (buts[2]) + 6);
+
+	i18n_flag = 1;
+	case_label = _(case_label);
+    }
+#endif				/* ENABLE_NLS */
+
+  find_par_start:
     if (!in_start_dir)
 	in_start_dir = g_strdup (".");
     if (!in_start_name)
 	in_start_name = g_strdup (easy_patterns ? "*" : ".");
     if (!in_contents)
 	in_contents = g_strdup ("");
-    
+
     find_dlg = create_dlg (0, 0, FIND_Y, FIND_X, dialog_colors, NULL,
 			   "[Find File]", _("Find File"), DLG_CENTER);
 
-	add_widget (find_dlg, button_new (11, b2, B_CANCEL, NORMAL_BUTTON,
-		buts[2], 0 ,0, "cancel"));
-	add_widget (find_dlg, button_new (11, b1, B_TREE, NORMAL_BUTTON,
-		buts[1], 0, 0, "tree"));
-	add_widget (find_dlg, button_new (11, b0, B_ENTER, DEFPUSH_BUTTON,
-		buts[0], 0, 0, "ok"));
+    add_widget (find_dlg, button_new (11, b2, B_CANCEL, NORMAL_BUTTON,
+				      buts[2], 0, 0, "cancel"));
+    add_widget (find_dlg, button_new (11, b1, B_TREE, NORMAL_BUTTON,
+				      buts[1], 0, 0, "tree"));
+    add_widget (find_dlg, button_new (11, b0, B_ENTER, DEFPUSH_BUTTON,
+				      buts[0], 0, 0, "ok"));
 
-    case_sense = check_new (9, 3, case_sensitive, case_label, "find-case-check");
+    case_sense =
+	check_new (9, 3, case_sensitive, case_label, "find-case-check");
     add_widget (find_dlg, case_sense);
 
-	in_with  = input_new (7, istart, INPUT_COLOR, ilen,	in_contents, "content");
+    in_with =
+	input_new (7, istart, INPUT_COLOR, ilen, in_contents, "content");
     add_widget (find_dlg, in_with);
 
-	in_name  = input_new (5, istart, INPUT_COLOR, ilen, in_start_name, "name");
+    in_name =
+	input_new (5, istart, INPUT_COLOR, ilen, in_start_name, "name");
     add_widget (find_dlg, in_name);
 
-	in_start = input_new (3, istart, INPUT_COLOR, ilen,	in_start_dir, "start");
+    in_start =
+	input_new (3, istart, INPUT_COLOR, ilen, in_start_dir, "start");
     add_widget (find_dlg, in_start);
 
-	add_widget (find_dlg, label_new (7, 3, labs[2], "label-cont"));
-	add_widget (find_dlg, label_new (5, 3, labs[1], "label-file"));
-	add_widget (find_dlg, label_new (3, 3, labs[0], "label-start"));
+    add_widget (find_dlg, label_new (7, 3, labs[2], "label-cont"));
+    add_widget (find_dlg, label_new (5, 3, labs[1], "label-file"));
+    add_widget (find_dlg, label_new (3, 3, labs[0], "label-start"));
 
     run_dlg (find_dlg);
 
-    switch (find_dlg->ret_value){
+    switch (find_dlg->ret_value) {
     case B_CANCEL:
 	return_value = 0;
 	break;
@@ -233,7 +234,7 @@ find_par_start:
 	case_sensitive = case_sense->state & C_BOOL;
 	destroy_dlg (find_dlg);
 	g_free (in_start_dir);
-	if (strcmp (temp_dir, ".") == 0){
+	if (strcmp (temp_dir, ".") == 0) {
 	    g_free (temp_dir);
 	    temp_dir = g_strdup (cpanel->cwd);
 	}
@@ -245,11 +246,11 @@ find_par_start:
 	/* Warning: Dreadful goto */
 	goto find_par_start;
 	break;
-	
+
     default:
 	g_free (in_contents);
-	if (in_with->buffer [0]){
-	    int flags = REG_EXTENDED|REG_NOSUB;
+	if (in_with->buffer[0]) {
+	    int flags = REG_EXTENDED | REG_NOSUB;
 
 	    if (!(case_sense->state & C_BOOL))
 		flags |= REG_ICASE;
@@ -257,11 +258,12 @@ find_par_start:
 	    if (regcomp (r, in_with->buffer, flags)) {
 		*content = in_contents = NULL;
 		r = 0;
-		message (1, MSG_ERROR, _("  Malformed regular expression  "));
+		message (1, MSG_ERROR,
+			 _("  Malformed regular expression  "));
 		return_value = 0;
 		break;
 	    }
-	    *content    = g_strdup (in_with->buffer);
+	    *content = g_strdup (in_with->buffer);
 	    in_contents = g_strdup (*content);
 	} else {
 	    *content = in_contents = NULL;
@@ -271,7 +273,7 @@ find_par_start:
 	case_sensitive = case_sense->state & C_BOOL;
 	return_value = 1;
 	*start_dir = g_strdup (in_start->buffer);
-	*pattern   = g_strdup (in_name->buffer);
+	*pattern = g_strdup (in_name->buffer);
 
 	g_free (in_start_dir);
 	in_start_dir = g_strdup (*start_dir);
@@ -280,7 +282,7 @@ find_par_start:
     }
 
     destroy_dlg (find_dlg);
-			 
+
     return return_value;
 }
 
@@ -734,78 +736,90 @@ static void
 setup_gui (void)
 {
 #ifdef ENABLE_NLS
-	static int i18n_flag = 0;
-	if (!i18n_flag)
-	{
-		register int i = sizeof (fbuts) / sizeof (fbuts[0]);
-		while (i--)
-			fbuts [i].len = strlen (fbuts [i].text = _(fbuts [i].text)) + 3;
-		fbuts [2].len += 2; /* DEFPUSH_BUTTON */
-		i18n_flag = 1;
-	}
-#endif /* ENABLE_NLS */
+    static int i18n_flag = 0;
+    if (!i18n_flag) {
+	register int i = sizeof (fbuts) / sizeof (fbuts[0]);
+	while (i--)
+	    fbuts[i].len = strlen (fbuts[i].text = _(fbuts[i].text)) + 3;
+	fbuts[2].len += 2;	/* DEFPUSH_BUTTON */
+	i18n_flag = 1;
+    }
+#endif				/* ENABLE_NLS */
 
-	/*
-	 * Dynamically place buttons centered within current window size
-	 */
-	{
-		int l0 = max (fbuts[0].len, fbuts[1].len);
-		int l1 = fbuts[2].len + fbuts[3].len + l0 + fbuts[4].len;
-		int l2 = fbuts[5].len + fbuts[6].len + fbuts[7].len;
-		int r1, r2;
-		
-		FIND2_X = COLS - 16;
+    /*
+     * Dynamically place buttons centered within current window size
+     */
+    {
+	int l0 = max (fbuts[0].len, fbuts[1].len);
+	int l1 = fbuts[2].len + fbuts[3].len + l0 + fbuts[4].len;
+	int l2 = fbuts[5].len + fbuts[6].len + fbuts[7].len;
+	int r1, r2;
 
-		/* Check, if both button rows fit within FIND2_X */
-		if (l1 + 9 > FIND2_X) FIND2_X = l1 + 9;
-		if (l2 + 8 > FIND2_X) FIND2_X = l2 + 8;
+	FIND2_X = COLS - 16;
 
-		/* compute amount of space between buttons for each row */
-		r1 = (FIND2_X - 4 - l1) % 5;
-		l1 = (FIND2_X - 4 - l1) / 5;
-		r2 = (FIND2_X - 4 - l2) % 4;
-		l2 = (FIND2_X - 4 - l2) / 4;
+	/* Check, if both button rows fit within FIND2_X */
+	if (l1 + 9 > FIND2_X)
+	    FIND2_X = l1 + 9;
+	if (l2 + 8 > FIND2_X)
+	    FIND2_X = l2 + 8;
 
-		/* ...and finally, place buttons */
-		fbuts [2].x = 2 + r1/2 + l1;
-		fbuts [3].x = fbuts [2].x + fbuts [2].len + l1;
-		fbuts [0].x = fbuts [3].x + fbuts [3].len + l1;
-		fbuts [4].x = fbuts [0].x + l0 + l1;
-		fbuts [5].x = 2 + r2/2 + l2;
-		fbuts [6].x = fbuts [5].x + fbuts [5].len + l2;
-		fbuts [7].x = fbuts [6].x + fbuts [6].len + l2;
-	}
-    
+	/* compute amount of space between buttons for each row */
+	r1 = (FIND2_X - 4 - l1) % 5;
+	l1 = (FIND2_X - 4 - l1) / 5;
+	r2 = (FIND2_X - 4 - l2) % 4;
+	l2 = (FIND2_X - 4 - l2) / 4;
+
+	/* ...and finally, place buttons */
+	fbuts[2].x = 2 + r1 / 2 + l1;
+	fbuts[3].x = fbuts[2].x + fbuts[2].len + l1;
+	fbuts[0].x = fbuts[3].x + fbuts[3].len + l1;
+	fbuts[4].x = fbuts[0].x + l0 + l1;
+	fbuts[5].x = 2 + r2 / 2 + l2;
+	fbuts[6].x = fbuts[5].x + fbuts[5].len + l2;
+	fbuts[7].x = fbuts[6].x + fbuts[6].len + l2;
+    }
+
     find_dlg = create_dlg (0, 0, FIND2_Y, FIND2_X, dialog_colors,
-			   find_callback, "[Find File]", _("Find file"), DLG_CENTER);
+			   find_callback, "[Find File]", _("Find File"),
+			   DLG_CENTER);
 
-	add_widget (find_dlg,
-		button_new (FIND2_Y-3, fbuts[7].x, B_VIEW, NORMAL_BUTTON, 
-			fbuts[7].text, find_do_edit_file, find_dlg, "button-edit"));
-	add_widget (find_dlg,
-		button_new (FIND2_Y-3, fbuts[6].x, B_VIEW, NORMAL_BUTTON,
-			fbuts[6].text, find_do_view_file, find_dlg, "button-view"));
-	add_widget (find_dlg,
-		button_new (FIND2_Y-3, fbuts[5].x, B_PANELIZE, NORMAL_BUTTON,
-			fbuts[5].text, 0, 0, "button-panelize"));
+    add_widget (find_dlg,
+		button_new (FIND2_Y - 3, fbuts[7].x, B_VIEW, NORMAL_BUTTON,
+			    fbuts[7].text, find_do_edit_file, find_dlg,
+			    "button-edit"));
+    add_widget (find_dlg,
+		button_new (FIND2_Y - 3, fbuts[6].x, B_VIEW, NORMAL_BUTTON,
+			    fbuts[6].text, find_do_view_file, find_dlg,
+			    "button-view"));
+    add_widget (find_dlg,
+		button_new (FIND2_Y - 3, fbuts[5].x, B_PANELIZE,
+			    NORMAL_BUTTON, fbuts[5].text, 0, 0,
+			    "button-panelize"));
 
-	add_widget (find_dlg,
-		button_new (FIND2_Y-4, fbuts[4].x, B_CANCEL, NORMAL_BUTTON,
-			fbuts[4].text, 0, 0, "button-quit"));
-    stop_button = button_new (FIND2_Y-4, fbuts[0].x, B_STOP, NORMAL_BUTTON,
-		fbuts[0].text, start_stop, find_dlg, "start-stop");
-	add_widget (find_dlg, stop_button);
-	add_widget (find_dlg,
-		button_new (FIND2_Y-4, fbuts[3].x, B_AGAIN, NORMAL_BUTTON, 
-			fbuts[3].text, 0, 0, "button-again"));
-	add_widget (find_dlg, 
-		button_new (FIND2_Y-4, fbuts[2].x, B_ENTER, DEFPUSH_BUTTON,
-			fbuts[2].text, 0, 0, "button-chdir"));
+    add_widget (find_dlg,
+		button_new (FIND2_Y - 4, fbuts[4].x, B_CANCEL,
+			    NORMAL_BUTTON, fbuts[4].text, 0, 0,
+			    "button-quit"));
+    stop_button =
+	button_new (FIND2_Y - 4, fbuts[0].x, B_STOP, NORMAL_BUTTON,
+		    fbuts[0].text, start_stop, find_dlg, "start-stop");
+    add_widget (find_dlg, stop_button);
+    add_widget (find_dlg,
+		button_new (FIND2_Y - 4, fbuts[3].x, B_AGAIN,
+			    NORMAL_BUTTON, fbuts[3].text, 0, 0,
+			    "button-again"));
+    add_widget (find_dlg,
+		button_new (FIND2_Y - 4, fbuts[2].x, B_ENTER,
+			    DEFPUSH_BUTTON, fbuts[2].text, 0, 0,
+			    "button-chdir"));
 
-    status_label = label_new (FIND2_Y-6, 4, _("Searching"), "label-search");
+    status_label =
+	label_new (FIND2_Y - 6, 4, _("Searching"), "label-search");
     add_widget (find_dlg, status_label);
 
-    find_list = listbox_new (2, 2, FIND2_X-4, FIND2_Y-9, listbox_finish, 0, "listbox");
+    find_list =
+	listbox_new (2, 2, FIND2_X - 4, FIND2_Y - 9, listbox_finish, 0,
+		     "listbox");
     add_widget (find_dlg, find_list);
 }
 
