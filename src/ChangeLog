@@ -1,3 +1,11 @@
+2002-12-16  Pavel Roskin  <proski@gnu.org>
+
+	* dir.c (do_load_dir): Add an error message if mc_opendir()
+	fails.
+	(do_reload_dir): Likewise.
+	* screen.c (do_enter_on_file_entry): Add an error message if
+	do_cd() fails.
+
 2002-12-15  Pavel Roskin  <proski@gnu.org>
 
 	* view.c (do_view_init): Use non-blocking open() followed by

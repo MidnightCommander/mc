@@ -8,8 +8,6 @@ ftp and fish with home != '/' - readjust directory to the home.
 
 Allow modifiers for keys in mc.lib, like "shift-up".
 
-Check and report errors from opendir().
-
 
 Before 4.6.0
 ============

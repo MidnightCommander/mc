@@ -1926,7 +1926,8 @@ do_enter_on_file_entry (file_entry *fe)
 
     /* Directory or link to directory - change directory */
     if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe)) {
-	do_cd (fe->fname, cd_exact);
+	if (!do_cd (fe->fname, cd_exact))
+	    message (1, MSG_ERROR, _("Cannot change directory"));
 	return 1;
     }
 

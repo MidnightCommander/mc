@@ -457,40 +457,43 @@ handle_path (dir_list *list, char *path,
 }
 
 int
-do_load_dir (dir_list *list, sortfn *sort, int reverse, int case_sensitive, char *filter)
+do_load_dir (dir_list *list, sortfn *sort, int reverse, int case_sensitive,
+	     char *filter)
 {
-    DIR           *dirp;
+    DIR *dirp;
     struct dirent *dp;
-    int           status, link_to_dir, stale_link;
-    int           next_free = 0;
-    struct stat   buf;
+    int status, link_to_dir, stale_link;
+    int next_free = 0;
+    struct stat buf;
     int dotdot_found = 0;
 
     tree_store_start_check_cwd ();
 
     dirp = mc_opendir (".");
-    if (!dirp){
+    if (!dirp) {
+	message (1, MSG_ERROR, _("Cannot read directory contents"));
 	tree_store_end_check ();
 	return set_zero_dir (list);
     }
-    for (dp = mc_readdir (dirp); dp; dp = mc_readdir (dirp)){
-	status = handle_dirent (list, filter, dp, &buf, next_free, &link_to_dir,
-	    &stale_link);
+    for (dp = mc_readdir (dirp); dp; dp = mc_readdir (dirp)) {
+	status =
+	    handle_dirent (list, filter, dp, &buf, next_free, &link_to_dir,
+			   &stale_link);
 	if (status == 0)
 	    continue;
-	if (status == -1){
+	if (status == -1) {
 	    tree_store_end_check ();
 	    mc_closedir (dirp);
 	    return next_free;
 	}
-	list->list [next_free].fnamelen = NLENGTH (dp);
-	list->list [next_free].fname = g_strdup (dp->d_name);
-	list->list [next_free].f.marked = 0;
-	list->list [next_free].f.link_to_dir = link_to_dir;
-	list->list [next_free].f.stale_link = stale_link;
-        list->list [next_free].f.dir_size_computed = 0;
-	list->list [next_free].buf = buf;
-	if (strcmp (dp->d_name, ".." ) == 0)
+	list->list[next_free].fnamelen = NLENGTH (dp);
+	list->list[next_free].fname = g_strdup (dp->d_name);
+	list->list[next_free].f.marked = 0;
+	list->list[next_free].f.link_to_dir = link_to_dir;
+	list->list[next_free].f.stale_link = stale_link;
+	list->list[next_free].f.dir_size_computed = 0;
+	list->list[next_free].buf = buf;
+	if (strcmp (dp->d_name, "..") == 0)
 	    dotdot_found = 1;
 	next_free++;
 	if (!(next_free % 32))
@@ -500,7 +503,7 @@ do_load_dir (dir_list *list, sortfn *sort, int reverse, int case_sensitive, char
     if (next_free) {
 	if (!dotdot_found)
 	    add_dotdot_to_list (list, next_free++);
-	do_sort (list, sort, next_free-1, reverse, case_sensitive);
+	do_sort (list, sort, next_free - 1, reverse, case_sensitive);
     } else {
 	tree_store_end_check ();
 	mc_closedir (dirp);
@@ -576,6 +579,7 @@ do_reload_dir (dir_list * list, sortfn * sort, int count, int rev,
     tree_store_start_check_cwd ();
     dirp = mc_opendir (".");
     if (!dirp) {
+	message (1, MSG_ERROR, _("Cannot read directory contents"));
 	clean_dir (list, count);
 	tree_store_end_check ();
 	return set_zero_dir (list);
