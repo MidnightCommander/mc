@@ -2,11 +2,6 @@ Mon Jun 22 22:30:00 1998  Manish Vachharajani <mvachhar@vger.rutgers.edu>
 
 	* Makefile.in: Remove arfs, since it doesn't seem to exist
 
-Fri Jun 19 08:21:46 1998  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
-
-	* ftpfs.c (retrieve_dir): use concat_dir_and_file instead of
-	copy_strings. Should help when retrieving root directories.
-
 Wed Jun 17 Pavel Machek <pavel@ucw.cz>
 	* Rename helper scripts (extfs/{rar|lha|...}.in), so their names
 	are more logical (and so that things actually work, because new

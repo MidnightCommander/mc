@@ -1413,7 +1413,7 @@ retrieve_dir(struct ftpfs_connection *bucket, char *remote_path)
     if (has_spaces)
         sock = open_data_connection (bucket, "LIST -la", ".", TYPE_ASCII);
     else {
-	char *path = concat_dir_and_file (remote_path, ".");
+	char *path = copy_strings (remote_path, PATH_SEP_STR, ".", (char *) 0);
 	sock = open_data_connection (bucket, "LIST -la", path, TYPE_ASCII);
 	free (path);
     }
