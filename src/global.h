@@ -53,6 +53,10 @@
 
 #include <glib.h>
 
+#ifndef __GNUC__
+#define __attribute__()
+#endif
+
 #include "fs.h"
 #include "mem.h"
 #include "util.h"

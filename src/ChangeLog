@@ -1,3 +1,8 @@
+2001-10-19  Pavel Roskin  <proski@gnu.org>
+
+	* global.h: Define __attribute__ to an empty string for non-gcc
+	compilers so that it's safe to use.
+
 2001-10-18  Pavel Roskin  <proski@gnu.org>
 
 	* view.c (init_growing_view): Revert last change, it was wrong.
