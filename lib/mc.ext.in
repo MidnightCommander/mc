@@ -137,7 +137,7 @@ shell/.h
 # Object
 shell/.o
 	#Open=%var{PAGER:more} %f
-	View=%view{ascii} nm %f
+	View=%view{ascii} file %f && nm %f
 	Link=%var{CC:cc} -O %f
 	Disassemble=%view{ascii} objdump -d -r %f
 
@@ -168,7 +168,7 @@ shell/.info
 # Manual page
 # Exception - .so libraries are not manual pages
 regex/\.(so|so\.[0-9\.]*)$
-	View=%view{ascii} nm %f
+	View=%view{ascii} file %f && nm %f
 
 regex/(([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|n)|\.man)$
 	Open=nroff @TROFFASCII@ @MANDOC@ %f | %var{PAGER:more}
@@ -515,7 +515,7 @@ type/^compress
 regex/\.s?a$
 	Open=%cd %p#uar
 	#Open=%view{ascii} ar tv %f
-	View=%view{ascii} nm %f
+	View=%view{ascii} file %f && nm %f
 
 # trpm
 regex/\.trpm$
