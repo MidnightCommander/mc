@@ -962,7 +962,7 @@ vfs_s_getlocalcopy (vfs *me, char *path)
     if (!ino->localname)
 	ino->localname = mc_def_getlocalcopy (me, buf);
     /* FIXME: fd_usage++ missing */
-    return ino->localname;
+    return g_strdup (ino->localname);
 }
 
 int 
