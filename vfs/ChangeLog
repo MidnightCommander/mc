@@ -1,3 +1,17 @@
+2004-09-04  Pavel S. Shirshov  <pavelsh@mail.ru>
+
+	* vfs.c (vfs_cmp_handle): Fixing warnings on on 64-bit 
+	platforms.
+	(vfs_op):Likewise.
+	(vfs_info):Likewise.
+	(vfs_free_handle):Likewise.
+	* extfs/rpm (mcrpmfs_run): Quote parameters to calls 
+	to system/open that spawn a shell.
+	* direntry.c (vfs_s_find_entry_tree): Make "size" 
+	size_t.
+
+Based on patches from Jakub Jelinek  <jakub@redhat.com>
+
 2004-09-02  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
         * tar.c (tar_read_header): Fix missed *.

@@ -85,7 +85,7 @@ vfs_cmp_handle (gconstpointer a, gconstpointer b)
 {
     if (!a)
 	return 1;
-    return ((struct vfs_openfile *) a)->handle != (int) b;
+    return ((struct vfs_openfile *) a)->handle != (long) b;
 }
 
 /* Find VFS class by file handle */
@@ -95,7 +95,7 @@ vfs_op (int handle)
     GSList *l;
     struct vfs_openfile *h;
 
-    l = g_slist_find_custom (vfs_openfiles, (void *) handle,
+    l = g_slist_find_custom (vfs_openfiles, (void *) (long) handle,
 			     vfs_cmp_handle);
     if (!l)
 	return NULL;
@@ -112,7 +112,7 @@ vfs_info (int handle)
     GSList *l;
     struct vfs_openfile *h;
 
-    l = g_slist_find_custom (vfs_openfiles, (void *) handle,
+    l = g_slist_find_custom (vfs_openfiles, (void *) (long) handle,
 			     vfs_cmp_handle);
     if (!l)
 	return NULL;
@@ -128,7 +128,7 @@ vfs_free_handle (int handle)
 {
     GSList *l;
 
-    l = g_slist_find_custom (vfs_openfiles, (void *) handle,
+    l = g_slist_find_custom (vfs_openfiles, (void *) (long) handle,
 			     vfs_cmp_handle);
     vfs_openfiles = g_slist_delete_link (vfs_openfiles, l);
 }

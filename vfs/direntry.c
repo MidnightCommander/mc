@@ -240,7 +240,7 @@ static struct vfs_s_entry *
 vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
 		       char *path, int follow, int flags)
 {
-    unsigned int pseg;
+    size_t pseg;
     struct vfs_s_entry *ent = NULL;
 
     canonicalize_pathname (path);

@@ -177,8 +177,8 @@ mcrpmfs_run ()
 {
     f="`echo "$1" | $SED "$SEDCMD"`"
     case "$2" in
-	INSTALL) echo "Installing \"\"$f\"\""; $RPM -ivh "$1"; exit 0;;
-	UPGRADE) echo "Upgrading \"\"$f\"\""; $RPM -Uvh "$1"; exit 0;;
+	INSTALL) echo "Installing \"\"$f\"\""; $RPM -ivh "$f"; exit 0;;
+	UPGRADE) echo "Upgrading \"\"$f\"\""; $RPM -Uvh "$f"; exit 0;;
     esac
 }
 
