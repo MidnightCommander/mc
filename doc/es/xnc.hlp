@@ -18,8 +18,8 @@ GNU Midnight Commander es obra de sus numerosos autoresAUTHORS.
 GNU Midnight Commander NO INCLUYE NINGÚN TIPO DE GARANTÍAWarranty,
 es software libre, y se alienta su redistribución en los
 terminos y condiciones que están contenidos en la Licencia
-Pública General de GNU (GPL)Licencia, de la que existe una
-traducción no oficial al españolLicense-es.[Licencia]
+Pública General de GNU (GPL)Licencia GNU, de la que existe una
+traducción no oficial al españolLicencia GNU (Español).[Licencia GNU]
 
                 GNU GENERAL PUBLIC LICENSE
                    Version 2, June 1991
@@ -430,7 +430,8 @@ to permit linking proprietary applications with the
 library.  If this is what you want to do, use the GNU
 Library General Public License instead of this License.
 
-[License-es]
+[Licencia GNU (Español)]
+
 Licencia Pública GNU
 
 Esta  es  la conocida como GNU Public License (GPL), versión 2
@@ -442,7 +443,7 @@ la Free Software Foundation, y muchos más programas.
 NOTA IMPORTANTE:
 
 Esta es una traducción no oficial al español de la GNU General
-Public LicenseLicencia.
+Public LicenseLicencia GNU.
 
 No ha sido publicada por la Free  Software  Foundation,  y  no
 establece  legalmente  las condiciones de distribución para el
@@ -890,16 +891,16 @@ Uso de la ayuda
 Se pueden utilizar las flechas o el ratón para navegar
 por el sistema de ayuda.
 
-La flecha de abajo cambia al siguiente elemento o baja.
-La tecla de arriba vuelve al elemento anterior o sube.
-La tecla derecha sigue el enlace activo.
-La tecla derecha vuelve a la última página visitada.
+La flecha de abajo cambia al siguiente elemento o baja.
+La tecla de arriba vuelve al elemento anterior o sube.
+La tecla derecha sigue el enlace activo.
+La tecla izquierda vuelve a la última página visitada.
 
 Si el terminal no es compatible con las flechas de cursor
-se puede avanzar con la barra espaciadora y retroceder con
-la tecla 'b'. El tabulador activa el elemento siguiente y
-con INTRO se puede entrar al enlace correspondiente.
-La tecla 'l' (last) permite volver a la última página.
+se puede avanzar con la barra espaciadora y retroceder con
+la tecla b (back). El tabulador activa el elemento siguiente y
+con INTRO se puede entrar al enlace correspondiente.
+La tecla l (last) permite volver a la última página.
 
 ESC pulsada dos veces permite salir de la ayuda.
 
@@ -910,17 +911,17 @@ La función de todas las teclas en la ayuda:
 
 Las teclas de desplazamiento genéricasGeneral Movement Keys son válidas.
 
-tabulador       Avanzar al elemento posterior.
-Alt-tabulador   Retroceder al elemento anterior.
-down            Avanzar elemento o bajar una línea.
-up              Retroceder elemento o subir una línea.
-derecha, INTRO  Seguir enlace.
-izquierda, l    Volver a la última página visitada.
-F1              Mostrar la ayuda del sistema de ayuda.
-n               Pasar a la página siguiente.
-p               Pasar a la página anterior.
-c               Pasar a la página de contenidos.
-F10, ESC        Salir de la ayuda.
+tabulador       Avanzar al elemento posterior.
+Alt-tabulador   Retroceder al elemento anterior.
+abajo           Avanzar elemento o bajar una línea.
+arriba          Retroceder elemento o subir una línea.
+derecha, INTRO  Seguir enlace.
+izquierda, l    Volver a la última página visitada.
+F1              Mostrar la ayuda del sistema de ayuda.
+n               Pasar a la página siguiente.
+p               Pasar a la página anterior.
+c               Pasar a la página de contenidos.
+F10, ESC        Salir de la ayuda.
 
 Local variables:
 fill-column: 58
