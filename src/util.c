@@ -78,7 +78,7 @@ int message (int error, char *header, char *text, ...);
 #if defined(HAVE_RX_H) && defined(HAVE_REGCOMP)
 #include <rx.h>
 #else
-#include "regex.h"
+#include <regex.h>
 #endif
 #include "util.h"
 #include "global.h"

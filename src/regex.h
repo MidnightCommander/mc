@@ -347,7 +347,10 @@ struct re_pattern_buffer
 /* [[[end pattern_buffer]]] */
 };
 
+#if 0
 typedef struct re_pattern_buffer regex_t;
+#endif
+
 
 /* Type for byte offsets within the string.  POSIX mandates this.  */
 typedef int regoff_t;
@@ -370,7 +373,7 @@ struct re_registers
 #define RE_NREGS 30
 #endif
 
-
+#if 0
 /* POSIX specification for registers.  Aside from the different names than
    `re_registers', POSIX uses an array of structures, instead of a
    structure of arrays.  */
@@ -379,6 +382,8 @@ typedef struct
   regoff_t rm_so;  /* Byte offset from string's start to substring's start.  */
   regoff_t rm_eo;  /* Byte offset from string's start to substring's end.  */
 } regmatch_t;
+#endif
+
 
 /* Declarations for routines.  */
 
