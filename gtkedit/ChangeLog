@@ -1,3 +1,9 @@
+2001-07-11  Pavel Roskin  <proski@gnu.org>
+
+	* editdraw.c (status_string): Use g_snprintf() instead of
+	snprintf().
+	From Libor Motyèka <l_motycka@ortex.cz>
+
 2001-07-10  Pavel Roskin  <proski@gnu.org>
 
 	* gtkeditkey.c (edit_translate_key): When processing bindings

@@ -52,10 +52,10 @@ static void status_string (WEdit * edit, char *s, int w, int fill, int font_widt
      */
     if (edit->curs1 < edit->last_byte) {
 	unsigned char cur_byte = edit_get_byte (edit, edit->curs1);
-	snprintf(byte_str, sizeof(byte_str), "%c %3d 0x%02X",
-		 is_printable(cur_byte) ? cur_byte : '.',
-		 cur_byte,
-		 cur_byte);
+	g_snprintf (byte_str, sizeof(byte_str), "%c %3d 0x%02X",
+		    is_printable(cur_byte) ? cur_byte : '.',
+		    cur_byte,
+		    cur_byte);
     } else {
 	strcpy(byte_str, "<EOF>");
     }
