@@ -1,0 +1,220 @@
+#Ruby syntax file derived from perl syntax by Marco Ciampa <ciampix@libero.it>
+#alpha version 0.1 14/05/2003
+
+context default
+
+#Bang path
+
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby brightcyan black
+    keyword whole linestart #!\[\s\]/bin/ruby brightcyan black
+
+#Operators
+
+    keyword > yellow
+    keyword < yellow
+    keyword - yellow
+    keyword \+ yellow
+    keyword \* yellow
+    keyword / yellow
+    keyword % yellow
+    keyword = yellow
+    keyword \+= yellow
+    keyword -= yellow
+    keyword == yellow
+    keyword != yellow
+    keyword === yellow
+    keyword <=> yellow
+    keyword ! yellow
+    keyword ~ yellow
+    keyword =~ yellow
+    keyword & yellow
+    keyword | yellow
+    keyword .. yellow
+
+#System variables
+
+#Please note that in regular expressions the final $/ is not correctly
+#highlighted as a system variable. This is not right but I actually do
+#not know any way to avoid it. Any idea is welcome.
+
+    keyword $\{!@&\+`'=~/\\,\.;<>_\*"$:F?\} red
+    keyword $\{\0123456789\} red
+    keyword $defout red
+    keyword $-+ red
+    keyword $DEBUG red
+    keyword $F red
+    keyword $FILENAME red
+    keyword $LOAD_PATH red
+    keyword $SAFE red
+    keyword $VERBOSE red
+    keyword __FILE__ red
+    keyword __LINE__ red
+    keyword BEGIN red
+    keyword END red
+		keyword DATA red
+		keyword RUBY_PLATFORM red
+	  keyword RUBY_RELEASE_DATE red
+	  keyword RUBY_VERSION red
+    keyword $stdin red
+    keyword STDIN red
+    keyword $stdout red
+    keyword STDOUT red
+    keyword $stderr red
+    keyword STDERR red
+    keyword argv red
+    keyword ARGV red
+    keyword ARGF red
+    keyword env red
+    keyword ENV red
+
+#Braces & 
+
+    keyword { brightcyan
+    keyword } brightcyan
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword [ brightcyan
+    keyword ] brightcyan
+    keyword , brightcyan
+    keyword : brightcyan
+
+		keyword whole false brightred
+		keyword whole FALSE brightred
+		keyword whole nil brightred
+		keyword whole NIL brightred
+	  keyword whole true brightred
+	  keyword whole TRUE brightred
+
+#Variables
+
+    keyword wholeright $+ brightgreen
+    keyword wholeright @+ white
+    keyword \\" brightred
+    keyword \\' brightred
+
+#Reserved words (see ruby manual)
+
+    keyword whole alias magenta
+    keyword whole and magenta
+    keyword whole begin magenta
+    keyword whole break magenta
+    keyword whole case magenta
+    keyword whole class magenta
+    keyword whole def magenta
+    keyword whole defined\? magenta
+    keyword whole do magenta
+    keyword whole else magenta
+    keyword whole elsif magenta
+    keyword whole end magenta
+    keyword whole ensure magenta
+    keyword whole for magenta
+    keyword whole if magenta
+    keyword whole in magenta
+    keyword whole module magenta
+    keyword whole next magenta
+    keyword whole not magenta
+    keyword whole or magenta
+    keyword whole redo magenta
+    keyword whole rescue magenta
+    keyword whole retry magenta
+    keyword whole return magenta
+    keyword whole self magenta
+    keyword whole super magenta
+    keyword whole then magenta
+    keyword whole undef magenta
+    keyword whole unless magenta
+    keyword whole until magenta
+    keyword whole when magenta
+    keyword whole while magenta
+    keyword whole yeld magenta
+
+#First class methods
+
+    keyword whole new yellow
+    keyword whole inherited yellow
+    keyword whole superclass yellow
+
+#Class module
+
+    keyword whole include magenta
+    keyword whole require magenta
+#    keyword whole where magenta
+
+#Class numeric
+
+    keyword whole abs red
+    keyword whole modulo red
+    keyword whole remainder red
+
+#Class IO
+
+    keyword whole sync yellow
+    keyword whole crypt yellow
+    keyword whole inspect yellow
+    keyword whole delete yellow
+    keyword whole each yellow
+    keyword whole grep yellow
+    keyword whole join yellow
+
+#Class Array
+
+    keyword whole index yellow
+    keyword whole indexes yellow
+    keyword whole indices yellow
+    keyword whole size yellow
+    keyword whole pop yellow
+    keyword whole push yellow
+    keyword whole sort yellow
+    keyword whole shift yellow
+    keyword whole unshift yellow
+
+#Math module
+
+    keyword whole Math::PI red
+    keyword whole Math::E red
+    keyword whole atan2 red
+    keyword whole cos red
+    keyword whole exp red
+    keyword whole frexp red
+    keyword whole ldexp red
+    keyword whole log red
+    keyword whole log10 red
+    keyword whole sin red
+    keyword whole sqrt red
+    keyword whole tan red
+
+#Kernel module
+
+    keyword whole chomp yellow
+    keyword whole chomp! yellow
+    keyword whole chop yellow
+    keyword whole chop! yellow
+    keyword whole raise yellow
+    keyword whole fork yellow
+    keyword whole rand yellow
+    keyword whole srand yellow
+    keyword whole print yellow
+    keyword whole printf yellow
+    keyword whole sprintf yellow
+    keyword whole exec yellow
+    keyword whole eval yellow
+    keyword whole exit yellow
+    keyword whole sleep yellow
+
+
+#this works only with label EOF :-(
+#context exclusive whole <<\[\s\]EOF EOF green 
+
+context # \n brown
+    spellcheck
+context " " green
+    keyword \\" brightgreen
+    keyword \\\\ brightgreen
+context ' ' brightgreen
+    keyword \\' green
+    keyword \\\\ green
+
+context exclusive ` ` white black

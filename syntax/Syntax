@@ -35,6 +35,9 @@ include perl.syntax
 file ..\*\\.(py|PY)$ Python\sProgram ^#!\s\*/.\*/python
 include python.syntax
 
+file ..\*\\.(rb|RB)$ Ruby\sProgram ^#!\s\*/.\*/ruby
+include ruby.syntax
+
 file ..\*\\.(man|[0-9n]|[0-9]x)$ NROFF\sSource
 include nroff.syntax
 

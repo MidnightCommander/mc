@@ -26,6 +26,7 @@ syntax_DATA =			\
 	php.syntax		\
 	po.syntax		\
 	python.syntax		\
+	ruby.syntax		\
 	sh.syntax		\
 	smalltalk.syntax	\
 	slang.syntax		\
