@@ -1,3 +1,9 @@
+2002-05-14  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* Makefile.am (noinst_LIBRARIES): Add samba/libsamba.a
+	if USE_SAMBA_FS is true.
+	* (libvfs-mc.a): Don't merge object files with libsamba.a.
+
 2002-05-13  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* Makefile.am (mcserv_SOURCES): Add $(top_srcdir)/src/mad.c.

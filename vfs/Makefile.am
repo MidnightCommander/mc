@@ -75,7 +75,11 @@ distclean-local:
 	else :; fi
 
 if USE_VFS
+if USE_SAMBA_FS
+noinst_LIBRARIES = libvfs-mc.a samba/libsamba.a
+else
 noinst_LIBRARIES = libvfs-mc.a
+endif
 else
 noinst_LIBRARIES =
 endif
@@ -97,15 +101,6 @@ endif
 mcserv_SOURCES = mcserv.c tcputil.c $(top_srcdir)/src/mad.c
 
 mcserv_LDFLAGS = $(SHADOWLIB) $(TERMNET) $(PAMLIBS) $(LCRYPT)
-
-if USE_SAMBA_FS
-libvfs-mc.a: $(libvfs_mc_a_OBJECTS) $(libvfs_mc_a_DEPENDENCIES) samba/libsamba.a
-	rm -f $@ libtmp.a
-	cp -f samba/libsamba.a libtmp.a
-	$(libvfs_mc_a_AR) libtmp.a $(libvfs_mc_a_OBJECTS) $(libvfs_mc_a_LIBADD)
-	mv libtmp.a $@
-	$(RANLIB) $@
-endif
 
 samba/libsamba.a:
 	cd samba && $(MAKE) libsamba.a
