@@ -223,13 +223,6 @@ static FILE *open_archive (int fstype, char *name, struct archive **pparc)
         tmp = name_quote (name, 0);
     }
 
-#if 0
-    /* Sorry, what is this good for? */
-    if (uses_archive == EFS_NEED_ARG){
-        tmp = name_quote (name, 0);
-    }
-#endif
-    
     mc_extfsdir = concat_dir_and_file (mc_home, "extfs/");
     cmd = g_strconcat (mc_extfsdir, extfs_prefixes [fstype], 
                         " list ", local_name ? local_name : tmp, NULL);
