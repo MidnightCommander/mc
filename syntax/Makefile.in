@@ -13,23 +13,28 @@ INSTALL_DATA = @INSTALL_DATA@
 #
 
 DISTSYNTAX = Makefile.in $(ALLSYNTAX)
-ALLSYNTAX =		\
-	c.syntax	\
-	changelog.syntax \
-	diff.syntax	\
-	diffc.syntax	\
-	html.syntax	\
-	java.syntax	\
-	latex.syntax	\
-	lsm.syntax	\
-	makefile.syntax	\
-	ml.syntax	\
-	nroff.syntax	\
-	pascal.syntax	\
-	perl.syntax	\
-	python.syntax	\
-	sh.syntax	\
-	smalltalk.syntax
+ALLSYNTAX =			\
+	ada95.syntax		\
+	c.syntax		\
+	changelog.syntax	\
+	diff.syntax		\
+	diffc.syntax		\
+	html.syntax		\
+	java.syntax		\
+	latex.syntax		\
+	lsm.syntax		\
+	mail.syntax		\
+	makefile.syntax		\
+	ml.syntax		\
+	nroff.syntax		\
+	pascal.syntax		\
+	perl.syntax		\
+	python.syntax		\
+	sh.syntax		\
+	smalltalk.syntax	\
+	swig.syntax		\
+	texinfo.syntax		\
+	unknown.syntax
 
 all:
 

@@ -1,3 +1,8 @@
+1999-07-27  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* syntax/Makefile.in (ALLSYNTAX): Added the missing syntax files
+	to the list.
+
 1999-07-21  Paul Sheer <psheer@obsidian.co.za>
 
 	* gtkedit.c, edit.c, editcmd.c, syntax.c, edit.h, bookmark.c,
