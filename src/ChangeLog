@@ -1,3 +1,8 @@
+2004-09-25  Pavel Shirshov  <me@pavelsh.pp.ru>
+
+        * main.c (print_color_usage): Update list of keywords for global,
+	menu and help.
+
 2004-10-21  Roland Illig  <roland.illig@gmx.de>
 
 	* cons.saver.c (die): Declare as "static" to avoid gcc warning.
@@ -105,7 +110,7 @@
 	* user.c (check_format_var): Likewise.
 	* widget.c (radio_callback): Likewise.
 
-2004-09-25  Pavel Shirshov  <pavelsh@mail.ru>
+2004-09-25  Pavel Shirshov  <me@pavelsh.pp.ru>
 
 	* boxes.c (configure_vfs): g_free handles NULL argument too,
         no need for the comparison.
@@ -244,7 +249,7 @@
 	* win.c (check_movement_keys): likewise.
 	* win.h (check_movement_keys): likewise.
 
-2004-09-17  Pavel Shirshov  <pavelsh@mail.ru>
+2004-09-17  Pavel Shirshov  <me@pavelsh.pp.ru>
 
 	* ext.c (get_file_type_local): Fixes <zombies> in
 	QNX 6.x (QNX Neutrino) when guessing file type before
@@ -267,7 +272,7 @@
 
 	* key.c (get_modifier): Recognize keyboard modifiers on Cygwin.
 
-2004-09-12  Pavel Shirshov  <pavelsh@mail.ru>
+2004-09-12  Pavel Shirshov  <me@pavelsh.pp.ru>
 
 	* execute.c (toggle_panels): Fix error. show_output_starts_shell=1
 	is not working
@@ -296,7 +301,7 @@
 	* info.c (info_show_info): don't truncate block counts to 32 bits
 	on 64-bit platforms
 
-2004-09-04  Pavel S. Shirshov <pavelsh@mail.ru>
+2004-09-04  Pavel S. Shirshov <me@pavelsh.pp.ru>
 
 	* subshell.c (exit_subshell): Prevent unwanted reuse of freed 
 	pty_buffer.
@@ -323,7 +328,7 @@
 
         Based on patch from Jakub Jelinek  <jakub@redhat.com>
 
-2004-09-03  Pavel S. Shirshov <pavelsh@mail.ru>
+2004-09-03  Pavel S. Shirshov <me@pavelsh.pp.ru>
 
 	* menu.c (destroy_menu): Fix warnings.
 	* view.c (view_adjust_size): Likewise.
@@ -343,7 +348,7 @@
 	* Makefile.am (man2hlp): Added source file glibcompat.c for
 	glib-1.2 compatibility.
 
-2004-09-02  Pavel S. Shirshov <pavelsh@mail.ru>
+2004-09-02  Pavel S. Shirshov <me@pavelsh.pp.ru>
 
 	* complete.c (completion_matches): Use more suitable function
         g_strndup(), instead sequence g_malloc(), strncpy(),
@@ -355,14 +360,14 @@
 
 	Based on patch from Jakub Jelinek  <jakub@redhat.com>
 
-2004-09-02  Pavel S. Shirshov <pavelsh@mail.ru>
+2004-09-02  Pavel S. Shirshov <me@pavelsh.pp.ru>
 
 	* color.c (load_dialog_colors): Make a separate color for 
 	hotkeys in red dialogs.
 	* color.h: Likewise.
 	* view.c (view_ok_to_quit): Add hotkey to dialog.
 
-2004-09-01  Pavel S. Shirshov  <pavelsh@mail.ru>
+2004-09-01  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* user.c (check_format_var): Use more suitable function
         g_strndup(), instead sequence g_malloc(), strncpy(),
@@ -380,7 +385,7 @@
 	* selcodepage.c (select_charset): Likewise.
 	* boxes.c (display_bits_box): Likewise.
 
-2004-09-01  Pavel S. Shirshov  <pavelsh@mail.ru>
+2004-09-01  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* color.c (mc_init_pair): Use cast to avoid warning.
 	* screen.c (display_mini_info): Likewise.
@@ -401,7 +406,7 @@
 
 	* cmd.c (do_link): Fixed memory leak and cleaned up code.
 
-2004-08-21  Pavel Shirshov  <pavelsh@mail.ru>
+2004-08-21  Pavel Shirshov  <me@pavelsh.pp.ru>
 
 	* utilunix.c (tilde_expand): Use more suitable function 
 	g_strndup, instead sequence g_malloc, strncpy, name[len] = '\0'
@@ -547,22 +552,22 @@
 	more readable. Outsourced the hardest case into
 	move_backward2_textmode_wrap and left it with the old code.
 
-2004-08-19  Pavel Shirshov  <pavelsh@mail.ru>
+2004-08-19  Pavel Shirshov  <me@pavelsh.pp.ru>
 
 	* utilunix.c (mc_tmpdir): Fix typos in comment.
 	Set MC_TMPDIR environment variable for vfs scripts.
 	Clear error after successful test of mc temp dir.
 
-2004-08-19  Pavel Shirshov  <pavelsh@mail.ru>
+2004-08-19  Pavel Shirshov  <me@pavelsh.pp.ru>
 
 	* screen.c (paint_frame): Fix possible buffer overflow.
 
-2004-08-18  Pavel Shirshov  <pavelsh@mail.ru>
+2004-08-18  Pavel Shirshov  <me@pavelsh.pp.ru>
 
 	* background.c (do_background): Use O_RDWR when opening 
 	the file '/dev/null' for replacement standard streams. 
 
-2004-08-17  Pavel Shirshov  <pavelsh@mail.ru>
+2004-08-17  Pavel Shirshov  <me@pavelsh.pp.ru>
 
 	* utilunix.c (mc_tmpdir): Check return value of getpwuid()
 	for NULL. 
@@ -688,7 +693,7 @@
 2003-11-20  Pavel Roskin  <proski@gnu.org>
 
 	* glibcompat.h: Provide replacement for g_slist_delete_link().
-	Reported by Pavel S. Shirshov <pavelsh@mail.ru>
+	Reported by Pavel S. Shirshov <me@pavelsh.pp.ru>
 
 2003-11-20  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
@@ -968,7 +973,7 @@
 
 	* view.c (load_view_file): Use g_try_malloc() because the
 	failure to allocate memory is acceptable here.
-	Reported by Pavel S. Shirshov <pavelsh@mail.ru>
+	Reported by Pavel S. Shirshov <me@pavelsh.pp.ru>
 
 2003-10-14  Pavel Roskin  <proski@gnu.org>
 
@@ -2416,7 +2421,7 @@
 
 	* file.c (copy_file_file): Rename DST_* names to DEST_*, since
 	DST_NONE is used in FreeBSD libc.
-	Reported by Pavel Shirshov <pavelsh@mail.ru>
+	Reported by Pavel Shirshov <me@pavelsh.pp.ru>
 
 2002-09-26  Pavel Roskin  <proski@gnu.org>
 
@@ -2465,7 +2470,7 @@
 
 	* mountlist.c: Restore sys/param.h before sys/mount.h - it's
 	required on FreeBSD.
-	Reported by Pavel Shirshov <pavelsh@mail.ru>
+	Reported by Pavel Shirshov <me@pavelsh.pp.ru>
 
 	* screen.c (panel_event): Implement support for mouse wheel.
 
