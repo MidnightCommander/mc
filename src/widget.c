@@ -242,7 +242,7 @@ button_len (const char *text, unsigned int flags)
  * and shifting data past it to the left results to one unused byte.
  * This does not harm though :)
  */
-void
+static void
 button_scan_hotkey(WButton* b)
 {
     char* cp = strchr (b->text, '&');
@@ -998,7 +998,8 @@ void history_put (char *input_name, Hist *h)
 
 static const char history_title[] = " History ";
 
-int history_callback (Dlg_head * h, int Par, int Msg)
+static int
+history_callback (Dlg_head * h, int Par, int Msg)
 {
 #ifndef HAVE_X
     switch (Msg) {
@@ -2343,7 +2344,7 @@ listbox_get_current (WListbox *l, char **string, char **extra)
 	*extra = l->current->data;
 }
 
-int
+static int
 buttonbar_callback (Dlg_head *h, WButtonBar *bb, int msg, int par)
 {
     int i;

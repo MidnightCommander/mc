@@ -76,7 +76,8 @@ static int is_loaded (char *FileName, TSecHeader **section)
 
 #define TRANSLATION_CHAR '\200'
 
-char *str_untranslate_newline_dup (char *s)
+static char *
+str_untranslate_newline_dup (char *s)
 {
     int l = 0;
     char *p = s, *q;
@@ -111,7 +112,8 @@ char *str_untranslate_newline_dup (char *s)
     return 0;			/* not reached */
 }
 
-char *str_translate_newline_dup (char *s)
+static char *
+str_translate_newline_dup (char *s)
 {
     char *p, *q;
     q = p = malloc (strlen (s) + 1);
@@ -255,8 +257,9 @@ static void new_key (TSecHeader *section, char *KeyName, char *Value)
     section->Keys = key;
 }
 
-char *GetSetProfileChar (int set, char *AppName, char *KeyName,
-			 char *Default, char *FileName)
+static char *
+GetSetProfileChar (int set, char *AppName, char *KeyName,
+		   char *Default, char *FileName)
 {
     
     TProfile   *New;
@@ -307,8 +310,9 @@ char *GetSetProfileChar (int set, char *AppName, char *KeyName,
     return Default;
 }
 
-short GetSetProfile (int set, char * AppName, char * KeyName, char * Default,
-		     char * ReturnedString, short Size, char * FileName)
+static short GetSetProfile (int set, char * AppName, char * KeyName,
+			    char * Default, char * ReturnedString,
+			    short Size, char * FileName)
 
 {
     char  *s;

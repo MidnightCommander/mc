@@ -376,7 +376,7 @@ try_to_select (WPanel *panel, char *name)
     display_mini_info (panel);
 }
 
-void
+static void
 reload_panelized (WPanel *panel)
 {
     int i, j;
@@ -919,7 +919,7 @@ directory_history_add (WPanel * panel, char *s)
  *
  *  You do _NOT_ want to add any vfs aware code here. <pavel@ucw.cz>
  */
-char*
+static char*
 get_parent_dir_name (char *cwd, char *lwd)
 {
     char *p;
@@ -931,7 +931,7 @@ get_parent_dir_name (char *cwd, char *lwd)
 }
 
 /* Changes the current panel directory */
-int
+static int
 _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
 {
     char *directory, *olddir;
@@ -1121,7 +1121,7 @@ maybe_cd (int char_code, int move_up_dir)
     return 0;
 }
 
-void
+static void
 set_sort_to (WPanel *p, sortfn *sort_order)
 {
     p->sort_type = sort_order;
@@ -1193,8 +1193,8 @@ static void
 #endif
 
 #ifdef HAVE_GNOME
-void init_menu () {};
-void done_menu () {};
+void init_menu (void) {};
+void done_menu (void) {};
 #else
 /* NOTICE: hotkeys specified here are overriden in menubar_paint_idx (alex) */
 static menu_entry PanelMenu [] = {
@@ -1674,7 +1674,8 @@ static void do_suspend_cmd (void)
     edition_post_exec ();
 }
 
-void suspend_cmd (void)
+void
+suspend_cmd (void)
 {
     save_cwds_stat ();
     do_suspend_cmd ();
@@ -1682,7 +1683,8 @@ void suspend_cmd (void)
     do_refresh ();
 }
 
-void init_labels (Widget *paneletc)
+static void
+init_labels (Widget *paneletc)
 {
     define_label (midnight_dlg, paneletc, 1, _("Help"), help_cmd);
     define_label (midnight_dlg, paneletc, 2, _("Menu"), user_menu_cmd);
@@ -1911,7 +1913,8 @@ static void done_mc_profile ()
  * change to use npanels, just loop over the number of panels
  * and use get_panel_widget (i) and make the test done below
  */
-void make_panels_dirty ()
+static void
+make_panels_dirty ()
 {
     if (cpanel->dirty)
 	panel_update_contents (cpanel);
@@ -1927,7 +1930,8 @@ void make_panels_dirty ()
 #   define check_key_backslash(x) ((x) == '\\')
 #endif
 
-int midnight_callback (struct Dlg_head *h, int id, int msg)
+int
+midnight_callback (struct Dlg_head *h, int id, int msg)
 {
     int i;
     
@@ -2153,7 +2157,7 @@ setup_panels_and_run_mc ()
 }
 
 /* result must be free'd (I think this should go in util.c) */
-char *
+static char *
 prepend_cwd_on_local (char *filename)
 {
     char *d;
@@ -2175,7 +2179,7 @@ prepend_cwd_on_local (char *filename)
 #ifdef USE_INTERNAL_EDIT
 void edit (const char *file_name, int startline);
 
-int
+static int
 mc_maybe_editor_or_viewer (void)
 {
     char *path;
@@ -2342,7 +2346,7 @@ init_sigfatals (void)
 #define CONTROL_FILE "/tmp/mc.%d.control"
 char control_file [sizeof (CONTROL_FILE) + 8];
 
-void
+static void
 OS_Setup ()
 {
     char   *termvalue;
@@ -2750,7 +2754,7 @@ handle_args (int argc, char *argv [])
 #    define compatibility_move_mc_files()
 #else
 
-int
+static int
 do_mc_filename_rename (char *mc_dir, char *o_name, char *n_name)
 {
 	char *full_o_name = concat_dir_and_file (home_dir, o_name);
@@ -2763,7 +2767,7 @@ do_mc_filename_rename (char *mc_dir, char *o_name, char *n_name)
 	return move;
 }
 
-void
+static void
 do_compatibility_move (char *mc_dir)
 {
 	struct stat s;
@@ -2792,7 +2796,7 @@ do_compatibility_move (char *mc_dir)
 	show_change_notice = 1;
 }
 
-void
+static void
 compatibility_move_mc_files (void)
 {
 	char *mc_dir = concat_dir_and_file (home_dir, ".mc");

@@ -38,9 +38,6 @@ typedef struct {
 typedef sMenu *Menu;
 #endif
 
-Menu create_menu (char *name, menu_entry *entries, int count);
-void destroy_menu (Menu menu);
-
 extern int menubar_visible;
 
 /* The button bar menu */
@@ -57,7 +54,11 @@ typedef struct {
     int    previous_selection;	/* Selected widget before activating menu */
 } WMenu;
 
-WMenu *menubar_new (int y, int x, int cols, Menu menu [], int items);
+Menu   create_menu     (char *name, menu_entry *entries, int count);
+void   destroy_menu    (Menu menu);
+WMenu *menubar_new     (int y, int x, int cols, Menu menu [], int items);
+void   menubar_arrange (WMenu* menubar);
+int    menubar_event   (Gpm_Event *event, WMenu *menubar);
 
 #endif /* __MENU_H */
 

@@ -182,12 +182,17 @@ extern Dlg_head *midnight_dlg;
 void directory_history_add   (WPanel *panel, char *s);
 int  do_panel_cd             (WPanel *panel, char *new_dir, enum cd_enum cd_type);
 void update_one_panel_widget (WPanel *panel, int force_update, char *current_file);
+int  midnight_callback       (struct Dlg_head *h, int id, int msg);
 #endif
 
 #endif
 
 void edition_pre_exec (void);
 void edition_post_exec (void);
+
+void done_menu (void);
+void init_menu (void);
+void exec_shell (void);
 
 #ifdef OS2_NT
 #    define MC_BASE ""

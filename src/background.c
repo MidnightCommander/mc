@@ -175,7 +175,7 @@ do_background (char *info)
     }
 }
 
-char *
+static char *
 background_title (char *str)
 {
     char *result = copy_strings (_("Background process:"), str, NULL);
@@ -184,7 +184,7 @@ background_title (char *str)
 }
 
 /* {{{ Routines that do the real job */
-void
+static void
 real_message_1s (enum OperationMode mode, int *flags, char *title, char *str1)
 {
     char *full_title;
@@ -200,7 +200,7 @@ real_message_1s (enum OperationMode mode, int *flags, char *title, char *str1)
 	free (full_title);
 }
 
-void
+static void
 real_message_2s (enum OperationMode mode, int *flags, char *title, char *str1, char *str2)
 {
     char *full_title;
@@ -216,7 +216,7 @@ real_message_2s (enum OperationMode mode, int *flags, char *title, char *str1, c
 	free (full_title);
 }
 
-void
+static void
 real_message_3s (enum OperationMode mode, int *flags, char *title, char *str1, char *str2, const char *str3)
 {
     char *full_title;
@@ -396,7 +396,7 @@ background_attention (int fd, void *xpid)
 /* }}} */
 
 /* {{{ client RPC routines */
-void
+static void
 parent_call_header (void *routine, int argc, enum ReturnType type)
 {
     write (parent_fd, &routine, sizeof (routine));
@@ -430,7 +430,7 @@ parent_call (void *routine, int argc, ...)
     return i;
 }
 
-char *
+static char *
 parent_call_string (void *routine, int argc, ...)
 {
     va_list ap;

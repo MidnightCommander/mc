@@ -150,7 +150,7 @@ extern int altered_hex_mode;
 extern int altered_magic_flag;
 extern int altered_nroff_flag;
 
-void view_adjust_size ();
+void view_adjust_size (Dlg_head *);
 
 /* A node for building a change list on change_list */
 struct hexedit_change_node {

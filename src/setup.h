@@ -15,7 +15,7 @@ void panel_load_setup ();
 #endif
 void load_key_defs (void);
 void save_panel_types (void);
-char *load_anon_passwd ();
+char *load_anon_passwd (void);
 
 extern char *profile_name;
 

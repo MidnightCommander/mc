@@ -219,7 +219,8 @@ key_define_t mc_default_keys [] = {
 };
 #endif
 
-void define_sequences (key_define_t *kd)
+static void
+define_sequences (key_define_t *kd)
 {
 #ifndef HAVE_X
     int i;
@@ -282,7 +283,8 @@ void init_key_input_fd (void)
 
 
 #ifndef HAVE_X
-void xmouse_get_event (Gpm_Event *ev)
+static void
+xmouse_get_event (Gpm_Event *ev)
 {
     int btn;
     static struct timeval tv1 = { 0, 0 }; /* Force first click as single */
@@ -412,7 +414,8 @@ void define_sequence (int code, char *seq, int action)
 static int *pending_keys;
 #endif
 
-int correct_key_code (int c)
+static int
+correct_key_code (int c)
 {
     /* This is needed on some OS that do not support ncurses and */
     /* do some magic after read()ing the data */
@@ -611,7 +614,8 @@ int get_key_code (int no_delay)
 
 #ifndef PORT_HAS_FILE_HANDLERS
 /* If set timeout is set, then we wait 0.1 seconds, else, we block */
-void try_channels (int set_timeout)
+static void
+try_channels (int set_timeout)
 {
     struct timeval timeout;
     static fd_set select_set;
@@ -847,7 +851,8 @@ int xgetch_second (void)
 #endif
 
 #ifndef HAVE_X
-void learn_store_key (char *buffer, char **p, int c)
+static void
+learn_store_key (char *buffer, char **p, int c)
 {
     if (*p - buffer > 253)
         return;
@@ -959,7 +964,8 @@ int is_idle (void)
 }
 
 
-int get_modifier ()
+int
+get_modifier (void)
 {
 #ifdef __linux__
     unsigned char modifiers;
@@ -975,7 +981,8 @@ int get_modifier ()
 #endif
 }
 
-int ctrl_pressed ()
+int
+ctrl_pressed ()
 {
 #ifdef __linux__
     if (get_modifier () & CONTROL_PRESSED)

@@ -129,7 +129,7 @@ static tree_entry *forw_ptr (tree_entry *ptr, int *count)
     greater than zero if p1 is found to be less than, to match, or be greater 
     than p2.
  */
-int
+static int
 pathcmp (const char *p1, const char *p2)
 {
     for ( ;*p1 == *p2; p1++, p2++)
@@ -944,7 +944,8 @@ void tree_chdir (WTree *tree, char *dir)
     }
 }
 
-void sync_tree (char *path)
+void
+sync_tree (char *path)
 {
     tree_chdir (the_tree, path);
 }
@@ -1153,13 +1154,15 @@ void tree_move (WTree *tree, char *default_dest)
     free (dest);
 }
 
-static int tree_move_cmd (WTree *tree)
+static int
+tree_move_cmd (WTree *tree)
 {
     tree_move (tree, "");
     return 1;
 }
 
-static int tree_mkdir_cmd (WTree *tree)
+static int
+tree_mkdir_cmd (WTree *tree)
 {
     char old_dir [MC_MAXPATHLEN];
 
@@ -1177,7 +1180,8 @@ static int tree_mkdir_cmd (WTree *tree)
     return 1;
 }
 
-static void tree_rmdir_cmd (WTree *tree)
+static void
+tree_rmdir_cmd (WTree *tree)
 {
     char old_dir [MC_MAXPATHLEN];
 
@@ -1210,7 +1214,8 @@ static void tree_rmdir_cmd (WTree *tree)
 }
 
 #if 0
-static int tree_quit_cmd (void)
+static int
+tree_quit_cmd (void)
 {
     /*
        FIXME
@@ -1221,48 +1226,56 @@ static int tree_quit_cmd (void)
 #endif
 
 static void set_navig_label (Dlg_head *h);
-static void tree_toggle_navig (Dlg_head *h)
+
+static void
+tree_toggle_navig (Dlg_head *h)
 {
     tree_navigation_flag = 1 - tree_navigation_flag;
     set_navig_label (h);
 }
 
-void set_navig_label (Dlg_head *h)
+void
+set_navig_label (Dlg_head *h)
 {
     define_label_data (h, (Widget *)tree,
 		       4, tree_navigation_flag ? _("Static") : _("Dynamc"),
 		       (void (*)(void *))tree_toggle_navig, h);
 }
 
-static void move_down (WTree *tree)
+static void
+move_down (WTree *tree)
 {
     tree_move_forward (tree, 1);
     show_tree (tree);
     maybe_chdir (tree);
 }
 
-static void move_up (WTree *tree)
+static void
+move_up (WTree *tree)
 {
     tree_move_backward (tree, 1);
     show_tree (tree);
     maybe_chdir (tree);
 }
 
-static void move_home (WTree *tree)
+static void
+move_home (WTree *tree)
 {
     tree_move_to_top (tree);
     show_tree (tree);
     maybe_chdir (tree);
 }
 
-static void move_end (WTree *tree)
+static void
+move_end (WTree *tree)
 {
     tree_move_to_bottom (tree);
     show_tree (tree);
     maybe_chdir (tree);
 }
 
-static int move_left (WTree *tree)
+static int
+move_left (WTree *tree)
 {
     int v;
     
@@ -1275,7 +1288,8 @@ static int move_left (WTree *tree)
     return 0;
 }
 
-static int move_right (WTree *tree)
+static int
+move_right (WTree *tree)
 {
     if (tree_navigation_flag){
 	tree_move_to_child (tree);
@@ -1286,21 +1300,24 @@ static int move_right (WTree *tree)
     return 0;
 }
 
-static void move_prevp (WTree *tree)
+static void
+move_prevp (WTree *tree)
 {
     tree_move_backward (tree, tlines (tree) - 1);
     show_tree (tree);
     maybe_chdir (tree);
 }
 
-static void move_nextp (WTree *tree)
+static void
+move_nextp (WTree *tree)
 {
     tree_move_forward (tree, tlines (tree) - 1);
     show_tree (tree);
     maybe_chdir (tree);
 }
 
-static void chdir_sel (WTree *tree)
+static void
+chdir_sel (WTree *tree)
 {
     if (!tree->is_panel){
 	tree->done = 1;
@@ -1319,7 +1336,8 @@ static void chdir_sel (WTree *tree)
     return;
 }
 
-static void start_search (WTree *tree)
+static void
+start_search (WTree *tree)
 {
     int i;
 
@@ -1370,7 +1388,8 @@ static key_map tree_keymap [] = {
     { 0, 0 }
     };
 
-static inline int tree_key (WTree *tree, int key)
+static inline int
+tree_key (WTree *tree, int key)
 {
     int i;
 
@@ -1421,7 +1440,8 @@ static inline int tree_key (WTree *tree, int key)
     return 0;
 }
 
-static void tree_frame (Dlg_head *h, WTree *tree)
+static void
+tree_frame (Dlg_head *h, WTree *tree)
 {
     attrset (NORMAL_COLOR);
     widget_erase ((Widget*) tree);
@@ -1436,7 +1456,8 @@ static void tree_frame (Dlg_head *h, WTree *tree)
 }
 
 
-static int tree_callback (Dlg_head *h, WTree *tree, int msg, int par)
+static int
+tree_callback (Dlg_head *h, WTree *tree, int msg, int par)
 {
     switch (msg){
     case WIDGET_DRAW:
@@ -1486,7 +1507,8 @@ static int tree_callback (Dlg_head *h, WTree *tree, int msg, int par)
     return default_proc (h, msg, par);
 }
 
-WTree *tree_new (int is_panel, int y, int x, int lines, int cols)
+WTree *
+tree_new (int is_panel, int y, int x, int lines, int cols)
 {
     WTree *tree = xmalloc (sizeof (WTree), "tree_new");
 

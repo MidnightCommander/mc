@@ -42,6 +42,7 @@
 #include "panel.h"		/* Needed for the externs */
 #include "file.h"
 #include "layout.h"		/* For nice_rotating_dash */
+#include "option.h"
 #define PX	4
 #define PY	2
 

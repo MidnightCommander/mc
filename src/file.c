@@ -224,7 +224,7 @@ static int erase_file (char *s);
 
 enum CaseConvs { NO_CONV=0, UP_CHAR=1, LOW_CHAR=2, UP_SECT=4, LOW_SECT=8 };
 
-int
+static int
 convert_case (int c, enum CaseConvs *conversion)
 {
     if (*conversion & UP_CHAR){
@@ -331,7 +331,7 @@ transform_source (char *source)
     return q;
 }
 
-void
+static void
 free_linklist (struct link **linklist)
 {
     struct link *lp, *lp2;
@@ -343,7 +343,7 @@ free_linklist (struct link **linklist)
     *linklist = NULL;
 }
 
-int 
+static int 
 is_in_linklist (struct link *lp, char *path, struct stat *sb)
 {
    ino_t ino = sb->st_ino;
@@ -363,9 +363,11 @@ is_in_linklist (struct link *lp, char *path, struct stat *sb)
    return 0;
 }
 
-/* Returns 0 if the inode wasn't found in the cache and 1 if it was found
-   and a hardlink was succesfully made */
-int
+/*
+ * Returns 0 if the inode wasn't found in the cache and 1 if it was found
+ * and a hardlink was succesfully made
+ */
+static int
 check_hardlinks (char *src_name, char *dst_name, struct stat *pstat)
 {
     struct link *lp;
@@ -1850,7 +1852,7 @@ files_error (char *format, char *file1, char *file2)
     return do_file_error (cmd_buf);
 }
 
-int
+static int
 real_query_recursive (enum OperationMode mode, char *s)
 {
     char *confirm, *text;

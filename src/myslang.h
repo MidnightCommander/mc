@@ -84,7 +84,7 @@ void slang_shell_mode (void);
 void slang_shutdown (void);
 int has_colors (void);
 /* Internal function prototypes */
-void load_terminfo_keys ();
+void load_terminfo_keys (void);
 
 /* FIXME Clean up this; gnome has nothing to do here */
 #ifndef HAVE_GNOME
@@ -132,6 +132,6 @@ void init_pair (int, char *, char *);
 #   define one_hline() SLsmg_draw_object (SLsmg_get_row(), SLsmg_get_column(), slow_terminal ? ' ' : ACS_HLINE) 
 #endif    
 
-void enable_interrupt_key ();
-void disable_interrupt_key ();
+void enable_interrupt_key (void);
+void disable_interrupt_key (void);
 #endif

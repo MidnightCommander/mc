@@ -6,6 +6,6 @@ typedef struct {
     int ready;
 } WInfo;
 
-WInfo *info_new ();
+WInfo *info_new (void);
 
 #endif

@@ -30,6 +30,7 @@
 #define DIR_H_INCLUDE_HANDLE_DIRENT
 #include "dir.h"
 #include "util.h"
+#include "dialog.h"
 #include "tree.h"
 #include "../vfs/vfs.h"
 

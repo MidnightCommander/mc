@@ -39,6 +39,7 @@
 #include "color.h"
 #include "global.h"
 #include "setup.h"
+#include "find.h"
 
 /* Dialog manager and widgets */
 #include "dlg.h"
@@ -390,7 +391,7 @@ locate_egrep (void)
  * Search with egrep the global (FIXME) content_pattern string in the
  * DIRECTORY/FILE.  It will add the found entries to the find listbox.
  */
-void
+static void
 search_content (Dlg_head *h, char *directory, char *filename)
 {
     struct stat s;

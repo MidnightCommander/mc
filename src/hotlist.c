@@ -1082,7 +1082,8 @@ char *hotlist_cmd (int vfs_or_hotlist)
     return target;
 }
 
-void load_group (struct hotlist *grp)
+static void
+load_group (struct hotlist *grp)
 {
     void *profile_keys;
     char *key, *value;
@@ -1324,7 +1325,7 @@ hot_load_file (struct hotlist * grp)
 	}
 }
 
-void
+static void
 clean_up_hotlist_groups (char *section)
 {
     char	*grp_section;
@@ -1476,7 +1477,8 @@ void load_hotlist (void)
     current_group = hotlist;
 }
 
-void save_group (struct hotlist *grp)
+static void
+save_group (struct hotlist *grp)
 {
     struct hotlist *current = grp->head;
     char           *group_section;
@@ -1508,7 +1510,8 @@ void save_group (struct hotlist *grp)
 
 static int  list_level = 0;
 
-void hot_save_group (struct hotlist *grp)
+static void
+hot_save_group (struct hotlist *grp)
 {
     struct hotlist *current = grp->head;
     int		    i;

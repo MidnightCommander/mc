@@ -234,7 +234,7 @@ static void listmode_done (void)
     repaint_screen ();
 }
 
-char *select_new_item (void)
+static char *select_new_item (void)
 {
     /* NOTE: The following array of possible items must match the
        formats array in screen.c. Better approach might be to make the
@@ -259,7 +259,8 @@ char *select_new_item (void)
 	return NULL;
 }
 
-char *collect_new_format (void)
+static char *
+collect_new_format (void)
 {
     char *newformat;
     int i;

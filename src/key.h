@@ -6,7 +6,7 @@ void init_key_input_fd (void);
 void done_key (void);
 int get_event (Gpm_Event *event, int redo_event, int block);
 int is_idle (void);
-int ctrl_pressed ();
+int ctrl_pressed (void);
 
 #ifndef PORT_HAS_GETCH
 int mi_getch (void);
@@ -27,7 +27,7 @@ int mi_getch (void);
 #define ALTR_PRESSED 2
 #define CONTROL_PRESSED 4
 #define ALTL_PRESSED 8
-int get_modifier ();
+int get_modifier (void);
 
 extern int double_click_speed;
 extern int old_esc_mode;

@@ -129,7 +129,7 @@ slang_intr (int signo)
     slinterrupt = 1;
 }
 
-int
+static int
 interrupts_enabled (void)
 {
     struct sigaction current_act;
@@ -268,7 +268,7 @@ slang_shutdown ()
    sequence. -- Norbert
  */   
    
-void
+static void
 slang_reset_softkeys (void)
 {
     int key;
@@ -361,7 +361,7 @@ init_pair (int index, char *foreground, char *background)
 	max_index = index;
 }
 
-int
+static int
 alloc_color_pair (char *foreground, char *background)
 {
     init_pair (++max_index, foreground, background);

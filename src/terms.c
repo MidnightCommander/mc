@@ -19,6 +19,7 @@
 #include <stdio.h>
 #include "global.h"
 #include "main.h"
+#include "win.h"
 
 /* This flag is set by xterm detection routine in function main() */
 /* It is used by function view_other_cmd() */

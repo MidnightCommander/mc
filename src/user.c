@@ -172,7 +172,8 @@ int check_format_var (char *p, char **v)
 }
 
 /* strip file's extension */
-char *strip_ext(char *ss)
+static char *
+strip_ext(char *ss)
 {
     register char *s = ss;
     char *e = NULL;
@@ -377,7 +378,8 @@ static char *test_condition (char *p, int *condition)
 }
 
 /* General purpose condition debug output handler */
-void debug_out (char *start, char *end, int cond)
+static void
+debug_out (char *start, char *end, int cond)
 {
     static char msg [256];
     int len;
@@ -488,7 +490,8 @@ static char *test_line (char *p, int *result)
 }
 
 /* FIXME: recode this routine on version 3.0, it could be cleaner */
-void execute_menu_command (char *s)
+static void
+execute_menu_command (char *s)
 {
     char *commands;
     FILE *cmd_file;

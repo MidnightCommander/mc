@@ -77,7 +77,8 @@ static char *displays [LIST_TYPES] = {
 
 static int user_hotkey = 'u';
 
-static int display_callback (struct Dlg_head *h, int id, int Msg)
+static int
+display_callback (struct Dlg_head *h, int id, int Msg)
 {
 #ifndef HAVE_X
     switch (Msg){
@@ -132,8 +133,9 @@ static int display_callback (struct Dlg_head *h, int id, int Msg)
     return MSG_NOT_HANDLED;
 }
 
-static void display_init (int radio_sel, char *init_text,
-			  int _check_status, char ** _status)
+static void
+display_init (int radio_sel, char *init_text,
+	      int _check_status, char ** _status)
 {
 	char* user_mini_status = _("user &Mini status");
 	char* ok_button = _("&Ok");
@@ -215,8 +217,8 @@ static void display_init (int radio_sel, char *init_text,
     add_widgetl (dd, my_radio, XV_WLAY_BELOWCLOSE);
 }
 
-int display_box (WPanel *panel, char **userp, char **minip, int *use_msformat,
-    int num)
+int
+display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int num)
 {
     int result, i;
     char *section = NULL;
@@ -269,7 +271,8 @@ int SORT_X = 40, SORT_Y = 14;
 
 char *sort_orders_names [SORT_TYPES];
 
-sortfn *sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive)
+sortfn *
+sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive)
 {
     int i, r, l;
     sortfn *result;
@@ -393,7 +396,8 @@ static QuickDialog confirmation =
 { CONFX, CONFY, -1, -1, N_(" Confirmation "), "[Confirmation]", "quick_confirm",
       conf_widgets, 0 };
 
-void confirm_box ()
+void
+confirm_box ()
 {
 
 #ifdef ENABLE_NLS
@@ -475,7 +479,8 @@ static QuickDialog display_bits =
 { DISPX, DISPY, -1, -1, N_(" Display bits "), "[Display bits]",
   "dbits", display_widgets, 0 };
 
-void display_bits_box ()
+void
+display_bits_box ()
 {
     int current_mode;
 
@@ -545,7 +550,8 @@ void display_bits_box ()
 
 static int tree_colors [4];
 
-static int tree_callback (struct Dlg_head *h, int id, int msg)
+static int
+tree_callback (struct Dlg_head *h, int id, int msg)
 {
     switch (msg){
 
@@ -565,7 +571,8 @@ static int tree_callback (struct Dlg_head *h, int id, int msg)
 }
 
 #ifndef HAVE_GNOME
-char *tree (char *current_dir)
+char *
+tree (char *current_dir)
 {
     WTree    *mytree;
     Dlg_head *dlg;
@@ -687,7 +694,8 @@ static QuickDialog confvfs_dlg =
 #define VFS_WIDGETBASE 0
 #endif
 
-void configure_vfs ()
+void
+configure_vfs (void)
 {
     char buffer1 [15], buffer2 [15];
 #if defined(USE_NETCODE)
@@ -758,7 +766,8 @@ void configure_vfs ()
 
 #endif
 
-char *cd_dialog (void)
+char *
+cd_dialog (void)
 {
     QuickDialog Quick_input;
     QuickWidget quick_widgets [] = {
@@ -809,8 +818,9 @@ char *cd_dialog (void)
 	return 0;
 }
 
-void symlink_dialog (char *existing, char *new, char **ret_existing, 
-    char **ret_new)
+void
+symlink_dialog (char *existing, char *new, char **ret_existing, 
+		char **ret_new)
 {
     QuickDialog Quick_input;
     QuickWidget quick_widgets [] = {

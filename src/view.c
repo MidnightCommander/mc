@@ -132,7 +132,7 @@ static char hex_char[] = "0123456789ABCDEF";
 /* }}} */
 /* {{{ Clean-up functions */
 
-void
+static void
 close_view_file (WView *view)
 {
     if (view->file != -1){
@@ -141,7 +141,7 @@ close_view_file (WView *view)
     }
 }
 
-void
+static void
 free_file (WView *view)
 {
     int i;
@@ -180,7 +180,7 @@ free_file (WView *view)
 enum { off, on };
 
 /* Both views */
-void
+static void
 view_done (WView *view)
 {
     set_monitor (view, off);
@@ -208,7 +208,7 @@ view_done (WView *view)
 
 static void view_hook (void *);
 
-void
+static void
 view_destroy (WView *view)
 {
     view_done (view);
@@ -532,7 +532,7 @@ no_mmap:
 }
 
 /* Return zero on success, -1 on failure */
-int
+static int
 do_view_init (WView *view, char *_command, char *_file, int start_line)
 {
     char *error = 0;
@@ -1002,7 +1002,7 @@ display (WView *view)
     return from;
 }
 
-void
+static void
 view_place_cursor (WView *view)
 {
     int shift;
@@ -1812,7 +1812,7 @@ toggle_hex_mode (WView *view)
 }
 
 /* Both views */
-void
+static void
 toggle_hexedit_mode(WView *view)
 {
     view->hexedit_mode = 1 - view->hexedit_mode;
@@ -1846,7 +1846,7 @@ goto_line (WView *view)
 }
 
 /* Both views */
-void
+static void
 regexp_search (WView *view, int direction)
 {
     char *regexp = "";
@@ -1885,7 +1885,7 @@ regexp_search_cmd (WView *view)
 }
 
 /* Both views */
-void
+static void
 normal_search (WView *view, int direction)
 {
     static char *old;
@@ -1911,7 +1911,7 @@ normal_search_cmd (WView *view)
     normal_search (view, 1);
 }
 
-void
+static void
 change_viewer (WView *view)
 {
     char *s;
@@ -2258,7 +2258,7 @@ view_event (WView *view, Gpm_Event *event, int *result)
 }
 
 /* Real view only */
-int
+static int
 real_view_event (Gpm_Event *event, void *x)
 {
     int result;

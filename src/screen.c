@@ -143,7 +143,7 @@ set_colors (WPanel *panel)
 #endif
 
 /* Delete format string, it is a linked list */
-void
+static void
 delete_format (format_e *format)
 {
     format_e *next;
@@ -157,7 +157,7 @@ delete_format (format_e *format)
 
 #ifndef HAVE_X
 /* This code relies on the default justification!!! */
-void
+static void
 add_permission_string (char *dest, int width, file_entry *fe, int attr, int color, int is_octal)
 {
     int i, r, l;
@@ -1206,7 +1206,7 @@ parse_panel_size (WPanel *panel, char *format, int isstatus)
    
 */
 
-format_e *
+static format_e *
 parse_display_format (WPanel *panel, char *format, char **error, int isstatus, int *res_total_cols)
 {
     format_e *darr, *old, *home = 0;   	/* The formats we return */

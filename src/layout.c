@@ -71,7 +71,7 @@
 #include "info.h"		/* The Info widget */
 #include "view.h"		/* The view widget */
 
-#define WANT_DEFAULTS
+#define WANT_WIDGETS
 #include "setup.h"		/* For save_setup() */
 
 #include "x.h"
@@ -635,7 +635,8 @@ void done_screen ()
 }
 #endif /* HAVE_X */
 
-void panel_do_cols (int index)
+static void
+panel_do_cols (int index)
 {
     if (get_display_type (index) == view_listing)
 	set_panel_formats ((WPanel *) panels [index].widget);
@@ -761,7 +762,8 @@ void flag_winch (int dummy)
 void edit_adjust_size (Dlg_head * h);
 
 #ifdef PORT_NEEDS_CHANGE_SCREEN_SIZE
-void low_level_change_screen_size (void)
+static void
+low_level_change_screen_size (void)
 {
 #if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
 #if defined TIOCGWINSZ && !defined SCO_FLAVOR

@@ -57,6 +57,7 @@
 #include "main.h"
 #include "global.h"
 #include "../vfs/vfs.h"
+#include "panelize.h"
 
 void do_external_panelize (char *command);
 
@@ -254,7 +255,8 @@ static void add2panelize (char *label, char *command)
     }
 }
 
-void add2panelize_cmd (void)
+void
+add2panelize_cmd (void)
 {
     char *label;
 
@@ -293,7 +295,8 @@ static void remove_from_panelize (struct panelize *entry)
     }
 }
 
-void external_panelize (void)
+void
+external_panelize (void)
 {
     char *target = NULL;
 

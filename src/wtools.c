@@ -89,7 +89,7 @@ common_dialog_callback (struct Dlg_head *h, int id, int msg)
 /* }}} */
 /* {{{ Listbox utility functions */
 
-void
+static void
 listbox_refresh (Dlg_head *h)
 {
     dialog_repaint (h, COLOR_NORMAL, COLOR_HOT_NORMAL);
@@ -654,7 +654,8 @@ char *input_dialog (char *header, char *text, char *def_text)
     return input_dialog_help (header, text, "[Input Line Keys]", def_text);
 }
 
-int input_dialog_help_2 (char *header, char *text1, char *text2, char *help, char **r1, char **r2)
+static int
+input_dialog_help_2 (char *header, char *text1, char *text2, char *help, char **r1, char **r2)
 {
     QuickDialog Quick_input;
     QuickWidget quick_widgets [] = {

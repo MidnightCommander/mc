@@ -80,7 +80,8 @@ int ignore_filenames = 0;
 /* to hint the filename_completion_function */
 int look_for_executables = 0;
 
-char *filename_completion_function (char *text, int state)
+static char *
+filename_completion_function (char *text, int state)
 {
     static DIR *directory;
     static char *filename = NULL;
@@ -246,7 +247,8 @@ char *username_completion_function (char *text, int state)
     return NULL;
 }
 #else
-char *username_completion_function (char *text, int state)
+static char *
+username_completion_function (char *text, int state)
 {
     static struct passwd *entry;
     static int userlen;
@@ -282,7 +284,8 @@ extern char **environ;
 
 /* We assume text [0] == '$' and want to have a look at text [1], if it is
    equal to '{', so that we should append '}' at the end */
-char *variable_completion_function (char *text, int state)
+static char *
+variable_completion_function (char *text, int state)
 {
     static char **env_p;
     static int varlen, isbrace;
@@ -396,7 +399,8 @@ static void fetch_hosts (char *filename)
     fclose (file);
 }
 
-char *hostname_completion_function (char *text, int state)
+static char *
+hostname_completion_function (char *text, int state)
 {
     static char **host_p;
     static int textstart, textlen;
@@ -443,11 +447,14 @@ char *hostname_completion_function (char *text, int state)
     }
 }
 
-/* This is the function to call when the word to complete is in a position
-   where a command word can be found. It looks around $PATH, looking for
-   commands that match. It also scans aliases, function names, and the
-   table of shell built-ins. */
-char *command_completion_function (char *text, int state)
+/*
+ * This is the function to call when the word to complete is in a position
+ * where a command word can be found. It looks around $PATH, looking for
+ * commands that match. It also scans aliases, function names, and the
+ * table of shell built-ins.
+ */
+static char *
+command_completion_function (char *text, int state)
 {
     static int isabsolute;
     static int phase;
@@ -571,7 +578,8 @@ char *command_completion_function (char *text, int state)
     
 }
 
-int match_compare (const void *a, const void *b)
+static int
+match_compare (const void *a, const void *b)
 {
     return strcmp (*(char **)a, *(char **)b);
 }
@@ -583,7 +591,8 @@ int match_compare (const void *a, const void *b)
    want to complete as the first argument and an count of previous matches
    as the second. 
    In case no matches were found we return NULL. */
-char **completion_matches (char *text, CompletionFunction entry_function)
+static char **
+completion_matches (char *text, CompletionFunction entry_function)
 {
     /* Number of slots in match_list. */
     int match_list_size;
@@ -658,7 +667,8 @@ char **completion_matches (char *text, CompletionFunction entry_function)
     return match_list;
 }
 
-int check_is_cd (char *text, int start, int flags)
+static int
+check_is_cd (char *text, int start, int flags)
 {
     char *p, *q = text + start;
     	    
@@ -672,7 +682,8 @@ int check_is_cd (char *text, int start, int flags)
 }
 
 /* Returns an array of matches, or NULL if none. */
-char **try_complete (char *text, int *start, int *end, int flags)
+static char **
+try_complete (char *text, int *start, int *end, int flags)
 {
     int in_command_position = 0, i;
     char *word, c;
@@ -963,7 +974,8 @@ static int querylist_callback (void *data)
 #define DO_INSERTION 1
 #define DO_QUERY     2
 /* Returns 1 if the user would like to see us again */
-int complete_engine (WInput *in, int what_to_do)
+static int
+complete_engine (WInput *in, int what_to_do)
 {
     if (in->completions && in->point != end)
     	free_completions (in);

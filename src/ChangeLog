@@ -1,4 +1,7 @@
-1998-12-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+1998-12-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* Added prototypes, made private functions static, clean up
+	various silly warnings.
 
 	* main.c (main): Removed crufty init_sigfatal code.
 

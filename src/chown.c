@@ -98,7 +98,8 @@ static struct {
 };
 
 #ifndef HAVE_X
-static void chown_refresh (void)
+static void
+chown_refresh (void)
 {
     attrset (COLOR_NORMAL);
     dlg_erase (ch_dlg);
@@ -132,7 +133,8 @@ static void chown_refresh (void)
 }
 #endif
 
-static char *next_file (void)
+static char *
+next_file (void)
 {
     while (!cpanel->dir.list[current_file].f.marked)
 	current_file++;
@@ -140,7 +142,8 @@ static char *next_file (void)
     return cpanel->dir.list[current_file].fname;
 }
 
-static int chown_callback (Dlg_head * h, int Par, int Msg)
+static int
+chown_callback (Dlg_head * h, int Par, int Msg)
 {
     switch (Msg) {
 #ifndef HAVE_X
@@ -152,12 +155,14 @@ static int chown_callback (Dlg_head * h, int Par, int Msg)
     return 0;
 }
 
-static int l_call (void *data)
+static int
+l_call (void *data)
 {
     return 1;
 }
 
-static void init_chown (void)
+static void
+init_chown (void)
 {
     int i;
     struct passwd *l_pass;
@@ -210,14 +215,16 @@ static void init_chown (void)
     tk_end_frame ();
 }
 
-void chown_done (void)
+static void
+chown_done (void)
 {
     if (need_update)
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();
 }
 
-static inline void do_chown (uid_t u, gid_t g)
+static inline void
+do_chown (uid_t u, gid_t g)
 {
     if (mc_chown (cpanel->dir.list [current_file].fname, u, g) == -1)
 	message (1, MSG_ERROR, _(" Couldn't chown \"%s\" \n %s "),
@@ -226,7 +233,8 @@ static inline void do_chown (uid_t u, gid_t g)
     do_file_mark (cpanel, current_file, 0);
 }
 
-static void apply_chowns (uid_t u, gid_t g)
+static void
+apply_chowns (uid_t u, gid_t g)
 {
     char *fname;
   
@@ -242,7 +250,8 @@ static void apply_chowns (uid_t u, gid_t g)
 
 #define chown_label(n,txt) label_set_text (chown_label [n].l, txt)
 
-void chown_cmd (void)
+void
+chown_cmd (void)
 {
     char *fname;
     struct stat sf_stat;

@@ -46,6 +46,7 @@
 #include "file.h"
 #include "chmod.h"
 #include "main.h"
+#include "achown.h"
 #include "../vfs/vfs.h"
 
 #define BX		5
@@ -593,7 +594,8 @@ static void init_chown_advanced (void)
     add_widget (ch_dlg, b_att[0]);
 }
 
-void chown_advanced_done (void)
+static void
+chown_advanced_done (void)
 {
     free (sf_stat);
     if (need_update)
@@ -653,7 +655,8 @@ static void apply_advanced_chowns (struct stat *sf)
     } while (cpanel->marked);
 }
 
-void chown_advanced_cmd (void)
+void
+chown_advanced_cmd (void)
 {
 
     files_on_begin = cpanel->marked;

@@ -66,7 +66,8 @@ static void info_box (Dlg_head *h, WInfo *info)
 }
 #endif
 
-void info_show_info (WInfo *info)
+static void
+info_show_info (WInfo *info)
 {
     struct stat buf;
 

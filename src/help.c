@@ -129,7 +129,8 @@ static int acs2pc (int acscode)
 
 /* returns the position where text was found in the start buffer */
 /* or 0 if not found */
-char *search_string (char *start, char *text)
+static char *
+search_string (char *start, char *text)
 {
     char *d = text;
     char *e = start;
@@ -549,7 +550,8 @@ static int help_event (Gpm_Event *event, Widget *w)
 }
 
 /* show help */
-void help_help_cmd (Dlg_head *h)
+static void
+help_help_cmd (Dlg_head *h)
 {
     history_ptr = (history_ptr+1) % HISTORY_SIZE;
     history [history_ptr].page = currentpoint;
@@ -561,7 +563,8 @@ void help_help_cmd (Dlg_head *h)
 #endif    
 }
 
-void help_index_cmd (Dlg_head *h)
+static void
+help_index_cmd (Dlg_head *h)
 {
     char *new_item;
 
@@ -755,13 +758,15 @@ static int help_callback (struct Dlg_head *h, int id, int msg)
     return 0;
 }
 
-void interactive_display_finish (void)
+static void
+interactive_display_finish (void)
 {
     clear_link_areas ();
     free (data);
 }
 
-void interactive_display (char *filename, char *node)
+void
+interactive_display (char *filename, char *node)
 {
     WButtonBar *help_bar;
     Widget     *md;

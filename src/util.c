@@ -861,7 +861,8 @@ char *get_current_wd (char *buffer, int size)
 
 #define CHECK(x) if (x == -1) return 0;
 
-long get_small_endian_long (int fd)
+static long
+get_small_endian_long (int fd)
 {
     unsigned char a, b, c, d;
 

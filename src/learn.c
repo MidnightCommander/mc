@@ -41,6 +41,8 @@
 #include "key.h"
 #include "setup.h"
 #include "main.h"
+#include "learn.h"
+
 #define UX		4
 #define UY		3
 
@@ -310,7 +312,8 @@ static void learn_done (void)
     repaint_screen ();
 }
 
-void learn_save (void)
+static void
+learn_save (void)
 {
     int i;
     int profile_changed = 0;

@@ -31,7 +31,7 @@
 #include "main.h"
 #include "tree.h"
 #include "profile.h"
-#define WANT_DEFAULTS
+#define WANT_WIDGETS
 #include "setup.h"
 #include "mouse.h"		/* To make view.h happy */
 #include "view.h"		/* For the externs */
@@ -252,7 +252,8 @@ static struct {
     { 0, 0 }
 };
 
-void panel_save_setup (WPanel *panel, char *section)
+void
+panel_save_setup (WPanel *panel, char *section)
 {
     char buffer [40];
     int  i;
@@ -288,7 +289,8 @@ void panel_save_setup (WPanel *panel, char *section)
 			       profile_name);
 }
 
-void save_layout (void)
+void
+save_layout (void)
 {
     char *profile;
     int  i;
@@ -305,7 +307,8 @@ void save_layout (void)
     free (profile);
 }
 
-void save_configure (void)
+void
+save_configure (void)
 {
     char *profile;
     int  i;
@@ -319,7 +322,8 @@ void save_configure (void)
     free (profile);
 }
 
-static void panel_save_type (char *section, int type)
+static void
+panel_save_type (char *section, int type)
 {
     int i;
     
@@ -332,7 +336,8 @@ static void panel_save_type (char *section, int type)
 }
 
 #ifndef PORT_HAS_SAVE_PANEL_TYPES
-void save_panel_types ()
+void
+save_panel_types ()
 {
     int type;
 
@@ -347,7 +352,8 @@ void save_panel_types ()
 }
 #endif
 
-void save_setup (void)
+void
+save_setup (void)
 {
     char *profile;
 #ifdef USE_VFS
@@ -384,7 +390,8 @@ void save_setup (void)
     saving_setup = 0;
 }
 
-void panel_load_setup (WPanel *panel, char *section)
+void
+panel_load_setup (WPanel *panel, char *section)
 {
     int i;
     char buffer [40];
@@ -435,7 +442,8 @@ void panel_load_setup (WPanel *panel, char *section)
 
 }
 
-static void load_layout (char *profile_name)
+static void
+load_layout (char *profile_name)
 {
     int i;
     
@@ -445,7 +453,8 @@ static void load_layout (char *profile_name)
 				  *layout [i].opt_addr);
 }
 
-static int load_mode (char *section)
+static int
+load_mode (char *section)
 {
     char buffer [20];
     int  i;
@@ -464,7 +473,8 @@ static int load_mode (char *section)
     return mode;
 }
 
-char *do_load_string (char *s, char *ss, char *def)
+static char *
+do_load_string (char *s, char *ss, char *def)
 {
     char *buffer = xmalloc (128, "dls");
     char *p;
@@ -476,7 +486,8 @@ char *do_load_string (char *s, char *ss, char *def)
     return p;
 }
 
-void load_setup (void)
+void
+load_setup (void)
 {
     static char *buffer;
     char   *profile;
@@ -557,7 +568,8 @@ void load_setup (void)
 
 #ifdef USE_VFS
 #ifdef USE_NETCODE
-char *load_anon_passwd ()
+char *
+load_anon_passwd ()
 {
     char buffer [255];
 
@@ -578,7 +590,8 @@ void done_setup (void)
 /*    directory_history_free (); */
 }
 
-void load_keys_from_section (char *terminal, char *profile_name)
+static void
+load_keys_from_section (char *terminal, char *profile_name)
 {
     char *section_name;
     void *profile_keys;

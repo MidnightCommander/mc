@@ -119,7 +119,8 @@ int is_right;
 /* defined in this file may receive a 0 parameter if they are invoked */
 /* The drop down menu */
 
-WPanel *get_a_panel (WPanel *panel)
+static WPanel *
+get_a_panel (WPanel *panel)
 {
     if (panel)
 	return panel;

@@ -66,7 +66,8 @@ int statfs ();  /* We leave the type ambiguous intentionally here */
    BLOCKS FROMSIZE-byte blocks, rounding away from zero.
    TOSIZE must be positive.  Return -1 if FROMSIZE is not positive.  */
 
-long fs_adjust_blocks (long blocks, int fromsize, int tosize)
+static long
+fs_adjust_blocks (long blocks, int fromsize, int tosize)
 {
     if (tosize <= 0)
 	abort ();
