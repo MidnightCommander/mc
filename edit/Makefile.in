@@ -73,7 +73,7 @@ distclean: clean
 	rm -f *~
 	rm -f Makefile
 
-install:
+install: all
 
 uninstall:
 
