@@ -32,8 +32,6 @@
 #include "cmd.h"		/* copy_cmd, ren_cmd, delete_cmd, ... */
 #include "tkscreen.h"
 
-void do_enter (WPanel *panel);
-
 /* These two variables keep track of the dimensions of a character in the
  * panel listing.
  */

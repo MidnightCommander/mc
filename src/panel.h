@@ -125,6 +125,7 @@ typedef struct {
     /* navigation buttons */
     void *back_b;
     void *fwd_b;
+    void *up_b;
 #endif
 } WPanel;
 

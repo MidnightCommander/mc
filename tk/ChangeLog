@@ -1,3 +1,8 @@
+1998-04-10  Marc Ewing  <marc@redhat.com>
+
+	* tkscreen.c: removed duplicate (conflicting) definition
+	of do_enter()
+
 Fri Apr  3 12:14:08 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* tkmenu.c (menubar_arrange, destroy_menu): Added small stubs in order
