@@ -39,7 +39,6 @@ the need to embed this logic into configure.in.
 
 #    define USE_O_TEXT
 #    define HAS_ACS_AS_PCCHARS
-#    define HAS_DIRECT_COLOR_ACCESS
 #    define NEEDS_CR_LF_TRANSLATION
 #endif
 

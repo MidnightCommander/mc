@@ -1,12 +1,13 @@
-2001-04-29  Pavel Roskin  <proski@gnu.org>
+2001-05-29  Pavel Roskin  <proski@gnu.org>
+
+	* extraconf.h: Remove unused HAS_DIRECT_COLOR_ACCESS.
+	* pc/config.h: Likewise.
 
 	* lib/mc.ext.in: For MS Word documents try "catdoc", "word2x"
 	and "strings". Recognize "write" files and MS Word templates.
 	For MS Excel documents try "xls2csv" and "strings".
 	Escape spaces in the "type" directives.
 	From Nerijus Baliunas.
-
-2001-05-29  Pavel Roskin  <proski@gnu.org>
 
 	* Make.common.in: Add -I$(top_srcdir) to XCPPFLAGS.
 
