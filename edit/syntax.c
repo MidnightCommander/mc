@@ -1094,7 +1094,7 @@ void
 edit_load_syntax (WEdit *edit, char **names, const char *type)
 {
     int r;
-    const char *f;
+    char *f = NULL;
 
     edit_free_syntax_rules (edit);
 
@@ -1110,7 +1110,7 @@ edit_load_syntax (WEdit *edit, char **names, const char *type)
 	if (!*edit->filename && !type)
 	    return;
     }
-    f = catstrs (home_dir, SYNTAX_FILE, (char *) NULL);
+    f = concat_dir_and_file (home_dir, SYNTAX_FILE);
     r = edit_read_syntax_file (edit, names, f, edit ? edit->filename : 0,
 			       get_first_editor_line (edit), type);
     if (r == -1) {
@@ -1118,14 +1118,14 @@ edit_load_syntax (WEdit *edit, char **names, const char *type)
 	message (D_ERROR, _(" Load syntax file "),
 		 _(" Cannot open file %s \n %s "), f,
 		 unix_error_string (errno));
-	return;
-    }
-    if (r) {
+    } else if (r) {
 	edit_free_syntax_rules (edit);
 	message (D_ERROR, _(" Load syntax file "),
 		 _(" Error in file %s on line %d "),
 		 error_file_name ? error_file_name : f, r);
 	syntax_g_free (error_file_name);
-	return;
+    } else {
+	/* succeeded */
     }
+    g_free (f);
 }

@@ -4,7 +4,7 @@
 	* editcmd.c (catstrs): Likewise.
 	* edit.c (user_menu): Added const qualifiers.
 	* editcmd.c: Likewise.
-	* syntax.c: Likewise.
+	* syntax.c: Don't use catstrs anymore.
 
 2005-02-07  Roland Illig  <roland.illig@gmx.de>
 
