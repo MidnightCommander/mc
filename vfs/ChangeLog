@@ -1,3 +1,7 @@
+1999-08-17  Kjartan Maraas  <kmaraas@online.no>
+
+	* fish.c: Fix typo.
+	
 1999-08-15  David Martin <dmartina@usa.net>
 
 	* vfs.c (vfs_print_stats): Translate vfs stats

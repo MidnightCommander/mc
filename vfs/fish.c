@@ -524,7 +524,7 @@ linear_abort (vfs *me, vfs_s_fh *fh)
     if (get_reply (me, SUP.sockr, NULL, 0) != COMPLETE)
         print_vfs_message( _("Error reported after abort.") );
     else
-        print_vfs_message( _("Aborted transfer would be successfull.") );
+        print_vfs_message( _("Aborted transfer would be successful.") );
 }
 
 static int
