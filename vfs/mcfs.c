@@ -185,8 +185,8 @@ mcfs_get_remote_port (struct sockaddr_in *sin, int *version)
     for (pl = pmap_getmaps (sin); pl; pl = pl->pml_next)
 	if (pl->pml_map.pm_prog == RPC_PROGNUM
 	    && pl->pml_map.pm_prot == IPPROTO_TCP
-	    && pl->pml_map.pm_vers >= *version) {
-	    *version = pl->pml_map.pm_vers;
+	    && pl->pml_map.pm_vers >= (unsigned long) *version) {
+	    *version = (int) pl->pml_map.pm_vers;
 	    port = pl->pml_map.pm_port;
 	}
     return port;
@@ -219,7 +219,7 @@ mcfs_create_tcp_link (char *host, int *port, int *version, char *caller)
     server_address.sin_family = AF_INET;
 
     /*  Try to use the dotted decimal number */
-    if ((inaddr = inet_addr (host)) != -1)
+    if ((inaddr = inet_addr (host)) != INADDR_NONE)
 	memcpy ((char *) &server_address.sin_addr, (char *) &inaddr,
 		sizeof (inaddr));
     else {
