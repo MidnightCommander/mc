@@ -82,6 +82,7 @@ static struct entry *
 find_entry (struct entry *dir, char *name, int make_dirs, int make_file);
 static int extfs_which (vfs *me, char *path);
 static void remove_entry (struct entry *e);
+static void extfs_free (vfsid id);
 
 static struct archive *first_archive = NULL;
 static int my_errno = 0;
@@ -276,7 +277,7 @@ open_archive (int fstype, char *name, struct archive **pparc)
 
 /*
  * Main loop for reading an archive.
- * Returns 0 on success, -1 on error.
+ * Return 0 on success, -1 on error.
  */
 static int
 read_archive (int fstype, char *name, struct archive **pparc)
@@ -392,7 +393,15 @@ read_archive (int fstype, char *name, struct archive **pparc)
 		g_free (current_link_name);
 	}
     }
-    pclose (extfsd);
+
+    /* Check if extfs 'list' returned 0 */
+    if (pclose (extfsd) != 0) {
+	g_free (buffer);
+	extfs_free (current_archive);
+	close_error_pipe (1, _("Inconsistent extfs archive"));
+	return -1;
+    }
+
     close_error_pipe (1, NULL);
 #ifdef SCO_FLAVOR
     waitpid (-1, NULL, WNOHANG);
