@@ -11,6 +11,8 @@ AC_DEFINE_UNQUOTED(VERSION, "$VERSION")
 AC_SUBST(VERSION)
 AC_SUBST(PACKAGE)
 
+AC_CANONICAL_SYSTEM
+
 dnl This is path where we're looking for headers in addition to /usr/include
 dnl and whatever cpp defaults to.
 include_additional_path="/usr/local/include /usr/contrib/include /opt/gnu/include"
