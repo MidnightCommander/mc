@@ -1,3 +1,7 @@
+2003-11-20  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* util.c (load_mc_home_file): Eliminate g_strdup_printf().
+
 2003-11-19  Pavel Roskin  <proski@gnu.org>
 
 	* user.c (expand_format): Preserve "%" if followed by a

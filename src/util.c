@@ -619,7 +619,8 @@ char *load_file (char *filename)
     }
 }
 
-char *load_mc_home_file (const char *filename, char ** allocated_filename)
+char *
+load_mc_home_file (const char *filename, char **allocated_filename)
 {
     char *hintfile_base, *hintfile;
     char *lang;
@@ -628,12 +629,15 @@ char *load_mc_home_file (const char *filename, char ** allocated_filename)
     hintfile_base = concat_dir_and_file (mc_home, filename);
     lang = guess_message_value ();
 
-    hintfile = g_strdup_printf ("%s.%s", hintfile_base, lang);
+    hintfile = g_strconcat (hintfile_base, ".", lang, NULL);
     data = load_file (hintfile);
 
     if (!data) {
 	g_free (hintfile);
-	hintfile = g_strdup_printf ("%s.%.2s", hintfile_base, lang);
+	/* Fall back to the two-letter language code */
+	if (lang[0] && lang[1])
+	    lang[2] = 0;
+	hintfile = g_strconcat (hintfile_base, ".", lang, NULL);
 	data = load_file (hintfile);
 
 	if (!data) {
