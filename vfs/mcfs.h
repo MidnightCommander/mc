@@ -1,5 +1,5 @@
-#ifndef __MCFS_H
-#define __MCFS_H
+#ifndef MC_VFS_MCFS_H
+#define MC_VFS_MCFS_H
 
 #define mcserver_port 9876
 
@@ -53,4 +53,4 @@ enum {
 extern void init_mcfs (void);
 extern void tcp_invalidate_socket (int);
 
-#endif				/* __MCFS_H */
+#endif

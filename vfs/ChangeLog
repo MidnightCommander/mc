@@ -1,3 +1,7 @@
+2005-02-18  Roland Illig  <roland.illig@gmx.de>
+
+	* *.h: Renamed the multiple inclusion guards.
+
 2005-02-14  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* samba/lib/util_str.c: Comment out strhasupper(), strhaslower(),

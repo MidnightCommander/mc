@@ -5,4 +5,4 @@ void init_smbfs (void);
 extern void smbfs_set_debug (int arg);
 extern void smbfs_set_debugf (const char *filename);
 
-#endif /* MC_VFS_SMBFS_H */
+#endif

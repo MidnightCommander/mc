@@ -1,5 +1,5 @@
-#ifndef __UTILVFS_H
-#define __UTILVFS_H
+#ifndef MC_VFS_UTILVFS_H
+#define MC_VFS_UTILVFS_H
 
 #include "../src/global.h"
 
@@ -28,4 +28,4 @@ int vfs_parse_filetype (char c);
 int vfs_parse_filemode (const char *p);
 int vfs_parse_filedate (int idx, time_t *t);
 
-#endif				/* !__UTILVFS_H */
+#endif

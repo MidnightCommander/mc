@@ -1,5 +1,5 @@
-#ifndef __GC_H
-#define __GC_H
+#ifndef MC_VFS_GC_H
+#define MC_VFS_GC_H
 
 #include "vfs-impl.h"
 

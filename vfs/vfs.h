@@ -1,5 +1,5 @@
-#ifndef __VFS_H
-#define __VFS_H
+#ifndef MC_VFS_VFS_H
+#define MC_VFS_VFS_H
 
 #ifdef HAVE_MMAP
 #include <sys/mman.h>
@@ -126,4 +126,4 @@ enum {
 #define E_PROTO EIO
 #endif
 
-#endif				/* __VFS_H */
+#endif

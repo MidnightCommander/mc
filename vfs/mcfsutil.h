@@ -1,5 +1,5 @@
-#ifndef __MCFSUTIL_H
-#define __MCFSUTIL_H
+#ifndef MC_VFS_MCFSUTIL_H
+#define MC_VFS_MCFSUTIL_H
 
 /*
  * FIXME: This protocol uses 32-bit integers for the communication.
@@ -20,4 +20,5 @@ int rpc_get (int sock, ...);
 int rpc_send (int sock, ...);
 int socket_read_block (int sock, char *dest, int len);
 int socket_write_block (int sock, const char *buffer, int len);
-#endif				/* !__MCFSUTIL_H */
+
+#endif

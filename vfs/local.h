@@ -1,5 +1,5 @@
-#ifndef _VFS_LOCAL_H_
-#define _VFS_LOCAL_H_
+#ifndef MC_VFS_LOCAL_H
+#define MC_VFS_LOCAL_H
 
 #include "vfs-impl.h"
 

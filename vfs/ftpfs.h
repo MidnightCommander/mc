@@ -1,7 +1,5 @@
-/*  ftpfs.h */
-
-#if !defined(__FTPFS_H)
-#define __FTPFS_H
+#ifndef MC_VFS_FTPFS_H
+#define MC_VFS_FTPFS_H
 
 extern char *ftpfs_anonymous_passwd;
 extern char *ftpfs_proxy_host;
@@ -19,4 +17,4 @@ void init_ftpfs (void);
 #define OPT_FLUSH        1
 #define OPT_IGNORE_ERROR 2
 
-#endif /* __FTPFS_H */
+#endif
