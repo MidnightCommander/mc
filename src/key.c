@@ -596,6 +596,11 @@ correct_key_code (int code)
 	mod &= ~KEY_M_CTRL;
     }
 
+    /* Shift+BackSpace is backspace */
+    if (c == KEY_BACKSPACE && (mod & KEY_M_SHIFT)) {
+	mod &= ~KEY_M_SHIFT;
+    }
+
     /* Convert Shift+Fn to F(n+10) */
     if (c >= KEY_F (1) && c <= KEY_F (10) && (mod & KEY_M_SHIFT)) {
 	c += 10;
