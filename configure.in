@@ -582,11 +582,13 @@ vfs/extfs/deb
 vfs/extfs/deba
 vfs/extfs/debd
 vfs/extfs/dpkg
+vfs/extfs/hp48
 vfs/extfs/lslR
 vfs/extfs/mailfs
 vfs/extfs/patchfs
 vfs/extfs/rpms
 vfs/extfs/uar
+vfs/extfs/uarj
 vfs/extfs/uha
 vfs/extfs/ulha 
 vfs/extfs/urar
