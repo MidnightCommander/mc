@@ -1,3 +1,7 @@
+Tue Sep 15 21:52:00 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* mc.hlp, doc/mc.1.in, doc/mc.sgml: updated my EMail address
+
 Tue Sep 15 20:51:42 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* setup.c: save and restore new global variable/option 

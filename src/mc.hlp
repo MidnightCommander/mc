@@ -2664,16 +2664,17 @@ Kukonlehto (jtklehto@paju.oulu.fi), Radek Doulik
 Dugan Porter (dugan@b011.eunet.es), Jakub Jelinek
 (jj@sunsite.mff.cuni.cz), Ching Hui
 (mr854307@cs.nthu.edu.tw), Andrej Borsenkow
-(borsenkow.msk@sni.de), Norbert Warmuth (k3190@fh-sw.de),
-Mauricio Plaza (mok@roxanne.nuclecu.unam.mx) and Paul
-Sheer (psheer@icon.co.za) are the developers of this
-package; Alessandro Rubini (rubini@ipvvis.unipv.it) has
-been especially helpful debugging and enhancing the
-program's mouse support, John Davis (davis@space.mit.edu)
-also made his S-Lang library available to us under the GPL
-and answered my questions about it, and the following
-people have contributed code and many bug fixes (in
-alphabetical order):
+(borsenkow.msk@sni.de), Norbert Warmuth
+(nwarmuth@privat.circular.de), Mauricio Plaza
+(mok@roxanne.nuclecu.unam.mx) and Paul Sheer
+(psheer@icon.co.za) are the developers of this package;
+Alessandro Rubini (rubini@ipvvis.unipv.it) has been
+especially helpful debugging and enhancing the program's
+mouse support, John Davis (davis@space.mit.edu) also made
+his S-Lang library available to us under the GPL and
+answered my questions about it, and the following people
+have contributed code and many bug fixes (in alphabetical
+order):
 
 Adam Tla/lka (atlka@sunrise.pg.gda.pl), alex@bcs.zp.ua
 (Alex I. Tkachenko), Antonio Palama, DOS port
