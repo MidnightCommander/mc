@@ -18,6 +18,7 @@ syntax_DATA =			\
 	octave.syntax		\
 	pascal.syntax		\
 	perl.syntax		\
+	po.syntax		\
 	python.syntax		\
 	sh.syntax		\
 	smalltalk.syntax	\

@@ -1,5 +1,9 @@
 2001-08-17  Pavel Roskin  <proski@gnu.org>
 
+	* syntax/po.syntax: New file - PO file highlighting.
+	From David Martin <dmartina@excite.es>
+	* syntax/Makefile.am: Add po.syntax.
+
 	* lib/mc.lib: Add "delete=\e[3~" for xterm and xterm-color -
 	it's sometimes missing from the databases.
 
