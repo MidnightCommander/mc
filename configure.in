@@ -880,6 +880,32 @@ AC_SUBST(SEDCMD2)
 
 
 dnl
+dnl Basic support for charset conversion.
+dnl May be useful e.g. for converting help and hints.
+dnl
+have_iconv=
+AC_CHECK_FUNCS(iconv, [have_iconv=yes])
+
+dnl
+dnl User visible support for charset conversion.
+dnl
+AC_ARG_ENABLE([charset],
+	      [--enable-charset           Support for charset selection and conversion])
+have_charset=
+if test "x$enable_charset" = xyes; then
+  if test -z "$have_iconv"; then
+    AC_MSG_WARN([Cannot enable charset support because iconv function is missing])
+  else
+    AC_DEFINE(HAVE_CHARSET, 1,
+	      [Define to enable charset selection and conversion])
+    have_charset=yes
+  fi
+fi
+
+AM_CONDITIONAL(CHARSET, [test -n "$have_charset"])
+
+
+dnl
 dnl This code should be moved to the ac_WITH_SLANG
 dnl
 dnl We check for the existance of setupterm on curses library
