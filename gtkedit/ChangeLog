@@ -1,5 +1,9 @@
 2001-07-13  Pavel Roskin  <proski@gnu.org>
 
+	* editoptions.c (edit_options_dialog): Allow numbers for tab
+	spacing. Reported by mharris@redhat.com.
+	http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=34852
+
 	* editcmd.c (menu_save_mode_cmd): Give meaningful names to the
 	input fields instead of "i" so that they have separate history.
 	* editoptions.c (edit_options_dialog): Likewise.

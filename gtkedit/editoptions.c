@@ -168,7 +168,10 @@ void edit_options_dialog (void)
 		option_tab_spacing = atoi (q);
 		if (option_tab_spacing < 0)
 		    option_tab_spacing = 2;
+#if 0
+		/* Only allow even numbers */
 		option_tab_spacing += option_tab_spacing & 1;
+#endif
 		free (q);
 	    }
 	    option_syntax_highlighting = *quick_widgets[5 + OA].result;
