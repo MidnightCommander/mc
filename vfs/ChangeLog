@@ -1,5 +1,8 @@
 2001-07-09  Pavel Roskin  <proski@gnu.org>
 
+	* tar.c (ReadStatus): Fix compilation on AIX.
+	From Dan McNichol <mcnichol@austin.ibm.com>.
+
 	* extfs/mailfs: Strip trailing DOS newlines from mail files.
 	From Christian Gennerat <christian.gennerat@vz.cit.alcatel.fr>
 

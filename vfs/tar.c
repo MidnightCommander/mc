@@ -189,7 +189,7 @@ typedef enum {
     STATUS_BADCHECKSUM,
     STATUS_SUCCESS,
     STATUS_EOFMARK,
-    STATUS_EOF,
+    STATUS_EOF
 } ReadStatus;
 /*
  * Return 1 for success, 0 if the checksum is bad, EOF on eof,
