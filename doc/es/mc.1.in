@@ -197,14 +197,17 @@ Algunos comandos en Midnight Commander implican el uso de las teclas
 .I Meta
 (identificada como ALT o incluso Compose). En este manual usaremos las
 siguientes abreviaturas:
-.PP
-C-<chr> significa mantener pulsada la tecla Control mientras pulsamos
+.TP
+.B C-<chr>
+significa mantener pulsada la tecla Control mientras pulsamos
 el carácter <chr>. Así C-f sería: manteniendo pulsada la tecla Control
 teclear f.
-.PP
-M-<chr> significa mantener pulsada la tecla Meta o Alt mientras pulsamos
-el carácter <chr>. Si no hay tecla Meta o Alt, pulsar ESC, soltar,
-y entonces pulsar el carácter <chr>.
+.TP
+.B M-<chr>
+significa mantener pulsada la tecla Meta o Alt mientras pulsamos
+el carácter <chr>. Si no hay tecla Meta o Alt, pulsar
+.IR ESC ,
+soltar, y entonces pulsar el carácter <chr>.
 .PP
 Todas las líneas de entrada en Midnight Commander usan una aproximación
 a las asociaciones de teclas del editor GNU Emacs.
@@ -261,73 +264,73 @@ extensiones en el
 fichero de extensiones
 .\"Extension File Edit"
 entonces es ejecutado el comando correspondiente.
-.PP
-.B C-l.
-Redibuja toda la información en la pantalla de Midnight Commander.
-.PP
-.B C-x c.
-Ejecuta el comando
+.TP
+.B C-l
+redibuja toda la información en la pantalla de Midnight Commander.
+.TP
+.B C-x c
+ejecuta el comando
 .\"LINK2"
 Cambiar Permisos
 .\"Chmod"
 en un fichero o un conjunto de ficheros marcados.
-.PP
-.B C-x o.
-Ejecuta el comando
+.TP
+.B C-x o
+ejecuta el comando
 .\"LINK2"
 Chown
 .\"Chown"
 sobre el fichero actual o sobre los ficheros marcados.
-.PP
-.B C-x l.
-Ejecuta el comando enlazado.
-.PP
-.B C-x s.
-Ejecuta el comando enlazado simbólicamente.
-.PP
-.B C-x i.
-Selecciona el modo de la pantalla del otro panel a información.
-.PP
-.B C-x q.
-Selecciona el modo de la pantalla del otro panel a vista rápida.
-.PP
-.B C-x !.
-Ejecuta la utilidad de
+.TP
+.B C-x l
+ejecuta el comando enlazado.
+.TP
+.B C-x s
+ejecuta el comando enlazado simbólicamente.
+.TP
+.B C-x i
+selecciona el modo de la pantalla del otro panel a información.
+.TP
+.B C-x q
+selecciona el modo de la pantalla del otro panel a vista rápida.
+.TP
+.B C-x !
+ejecuta la utilidad de
 .\"LINK2"
 búsquedas externas\&.
 .\"External panelize"
-.PP
+.TP
 .B C-x h
-Ejecuta el comando
+ejecuta el comando
 .\"LINK2"
 añadir a la Lista Rápida de Directorios\&.
 .\"Hotlist"
-.PP
-.B M-!,
-Ejecuta el comando de Vista Filtrada, descrito en el
+.TP
+.B M-!
+ejecuta el comando de Vista Filtrada, descrito en el
 .\"LINK2"
 comando Ver\&.
 .\"Internal File Viewer"
-.PP
-.B M-?,
-Ejecuta el comando
+.TP
+.B M-?
+ejecuta el comando
 .\"LINK2"
 Buscar fichero\&.
 .\"Find File"
-.PP
-.B M-c,
-Muestra la ventana de diálogo del comando
+.TP
+.B M-c
+muestra la ventana de diálogo del comando
 .\"LINK2"
 "cd Rápido" .
 .\"Quick cd"
-.PP
-.B C-o,
-Cuando el programa está siendo ejecutado en la consola Linux o SCO o bajo un xterm,
+.TP
+.B C-o
+cuando el programa está siendo ejecutado en la consola Linux o SCO o bajo un xterm,
 se mostrará la salida del comando anterior. Cuando fuere ejecutado en una
 consola de Linux, Midnight Commander usa un programa externo
 (cons.saver) para controlar la copia y restauración de información en la
 pantalla.
-.PP
+.IP
 Cuando el soporte de subshell está compilado internamente, podemos pulsar C-o en cualquier
 momento y seremos llevados de vuelta a la pantalla principal de Midnight Commander, para
 volver a nuestra aplicación basta con volver a pulsar C-o. Si tenemos una aplicación
@@ -342,23 +345,23 @@ a la sección
 .\"LINK2"
 Menús Izquierdo y Derecho\&.
 .\"Left and Right Menus"
-.PP
-.B Tab, C-i.
-Cambia el panel actual. El panel activo deja de serlo y el no activo
+.TP
+.B Tab, C-i
+cambia el panel actual. El panel activo deja de serlo y el no activo
 pasa a ser el nuevo panel activo. La barra de selección se mueve del
 antiguo panel al nuevo, desaparece de aquél y aparece en éste.
-.PP
-.B Insertar, C-t.
-Para marcar ficheros (y/o directorios) como seleccionados podemos usar la tecla Insertar (Ins)
+.TP
+.B Insertar, C-t
+para marcar ficheros (y/o directorios) como seleccionados podemos usar la tecla Insertar (Ins)
 (La secuencia kich1 de terminfo) o la combinación C-t (Control-t). Para deseleccionar
 ficheros, basta con repetir la operación sobre los ficheros y/o directorios antes marcados.
-.PP
-.B M-g, M-r, M-j.
-Usadas para seleccionar el fichero superior en un panel, el fichero central y el inferior del
+.TP
+.B M-g, M-r, M-j
+usadas para seleccionar el fichero superior en un panel, el fichero central y el inferior del
 panel, respectivamente.
-.PP
-.B C-s, M-s.
-Inicia la búsqueda de un fichero en la lista de directorios (panel activo). Cuando la búsqueda
+.TP
+.B C-s, M-s
+inicia la búsqueda de un fichero en la lista de directorios (panel activo). Cuando la búsqueda
 está activa las pulsaciones de teclado son añadidas a la cadena de búsqueda y no a
 la línea de comandos. Si la opción
 .I Mostrar Mini-estado
@@ -370,14 +373,14 @@ o
 .I suprimir
 pueden ser utilizadas para corregir errores de escritura. Si pulsamos C-s
 de nuevo, se busca la siguiente coincidencia.
-.PP
+.TP
 .B M-t
-Rota el listado de pantalla actual para mostrar el siguiente modo
+rota el listado de pantalla actual para mostrar el siguiente modo
 de listado. Con esto es posible intercambiar rápidamente de un listado
 completo al regular o breve, así como al modo de listado definido por el usuario.
-.PP
-.B C-\\\\ (control-Contrabarra).
-Muestra la
+.TP
+.B C-\\\\ (control-Contrabarra)
+muestra la
 .\"LINK2"
 Lista Rápida de Directorios
 .\"Hotlist"
@@ -387,9 +390,9 @@ y cambiar al directorio seleccionado.
 En el teclado castellano, existe un pequeño inconveniente, dado que
 la contrabarra, no se consigue con una sola pulsación, por lo que este método
 no funciona directamente.
-.PP
-.B + \ (más).
-Usado para seleccionar (marcar) un grupo de ficheros. Midnight Commander
+.TP
+.B + \ (más)
+usado para seleccionar (marcar) un grupo de ficheros. Midnight Commander
 preguntará por una expresión regular describiendo el grupo. Cuando los
 .I Caracteres Comodín (Shell Patterns)
 están habilitados, la expresión regular es idéntica a las expresiones
@@ -398,85 +401,85 @@ para uno o más caracteres). Si los
 .I Caracteres Comodín
 están deshabilitados, entonces la selección de ficheros se realiza con expresiones
 regulares normales (VA. ed (1)).
-.PP
+.IP
 Si la expresión empieza o termina con una barra (/), entonces la selección se
 realiza sobre directorios en vez de ficheros.
-.PP
-.B - (menos) o \\\\ (contrabarra).
-Usaremos la tecla - o "\\" para deseleccionar un grupo de ficheros. Ésta es la operación contraria
+.TP
+.B - (menos) o \\\\ (contrabarra)
+usaremos la tecla - o "\\" para deseleccionar un grupo de ficheros. Ésta es la operación contraria
 a la realizada por la tecla Más (+).
 
 .B * N. de T.:
 La tecla que realiza originalmente la función descrita es el menos (-)
 ya que ésta es la utilizada en la versión originaria del programa, Comandante Norton.
 
-.PP
-.B Cursor-Arriba, C-p.
-Desplaza la barra de selección a la entrada anterior en el panel.
-.PP
-.B Cursor-Abajo, C-n.
-Desplaza la barra de selección a la entrada siguiente en el panel.
-.PP
-.B Inicio (Home), a1, M-<.
-Desplaza la barra de selección a la primera entrada en el panel.
-.PP
-.B Fin (End), c1, M->.
-Desplaza la barra de selección a la última entrada en el panel.
-.PP
-.B Av. Pág (next-page), C-v.
-Desplaza la barra de selección a la página siguiente.
-.PP
-.B Re. Pág (prev-page), M-v.
-Desplaza la barra de selección a la página anterior.
-.PP
-.B M-o,
-Si el otro panel es un panel con lista de ficheros y estamos situados en un
+.TP
+.B Cursor-Arriba, C-p
+desplaza la barra de selección a la entrada anterior en el panel.
+.TP
+.B Cursor-Abajo, C-n
+desplaza la barra de selección a la entrada siguiente en el panel.
+.TP
+.B Inicio (Home), a1, M-<
+desplaza la barra de selección a la primera entrada en el panel.
+.TP
+.B Fin (End), c1, M->
+desplaza la barra de selección a la última entrada en el panel.
+.TP
+.B Av. Pág (next-page), C-v
+desplaza la barra de selección a la página siguiente.
+.TP
+.B Re. Pág (prev-page), M-v
+desplaza la barra de selección a la página anterior.
+.TP
+.B M-o
+si el otro panel es un panel con lista de ficheros y estamos situados en un
 directorio en el panel activo actual, entonces otro panel se posiciona
 dentro del directorio del panel activo (como la tecla de Emacs C-o)
 en otro caso el otro panel es posicionado el directorio padre
 del directorio seleccionado en el panel activo.
-.PP
+.TP
 .B C-RePág (C-PageUp), C-AvPág (C-PageDown)
-Solamente bajo la consola Linux: realiza un chdir ".." o al
+solamente bajo la consola Linux: realiza un chdir ".." o al
 directorio actualmente seleccionado respectivamente.
 .\"NODE "  Shell Command Line"
 .SH "  Línea de Comandos del Shell"
 Esta sección enumera las teclas útiles para evitar la excesiva escritura
 cuando se introducen comandos del shell.
-.PP
-.B M-Intro.
-Copia el nombre de fichero seleccionado a la línea de comandos.
-.PP
-.B C-Intro.
-Igual a M-Intro, esto sólo funciona bajo Linux.
-.PP
-.B M-Tab.
-Realiza una
+.TP
+.B M-Intro
+copia el nombre de fichero seleccionado a la línea de comandos.
+.TP
+.B C-Intro
+igual a M-Intro, esto sólo funciona bajo Linux.
+.TP
+.B M-Tab
+realiza una
 .\"LINK2"
 Terminación automática (completion)
 .\"Completion"
 del nombre de fichero, comando, variable, nombre de usuario y host.
-.PP
-.B C-x t, C-x C-t.
-Copia los ficheros marcados (o si no los hay, el fichero
+.TP
+.B C-x t, C-x C-t
+copia los ficheros marcados (o si no los hay, el fichero
 seleccionado) del panel activo (C-x t) o del otro panel (C-x C-t) a
 la línea de comandos.
-.PP
-.B C-x p, C-x C-p.
-La primera secuencia de teclas copia el nombre de la ruta de acceso actual
+.TP
+.B C-x p, C-x C-p
+la primera secuencia de teclas copia el nombre de la ruta de acceso actual
 a la línea de comandos, y la segunda copia la ruta del otro panel a la
 línea de comandos.
-.PP
-.B C-q.
-El comando cita (quote) puede ser utilizado para insertar caracteres
+.TP
+.B C-q
+el comando cita (quote) puede ser utilizado para insertar caracteres
 que de otro modo serían interpretados por Midnight Commander (como el símbolo '+')
-.PP
-.B M-p, M-n.
-Usaremos esas teclas para navegar a través del histórico de comandos. M-p devuelve
+.TP
+.B M-p, M-n
+usaremos esas teclas para navegar a través del histórico de comandos. M-p devuelve
 la última entrada, M-n devuelve la siguiente.
-.PP
-.B M-h.
-Visualiza el historial para la línea de entrada actual.
+.TP
+.B M-h
+visualiza el historial para la línea de entrada actual.
 .\"NODE "  General Movement Keys"
 .SH "  Teclas Generales de Movimiento"
 El visor de ayuda, el visor de fichero y el árbol de directorios usan
@@ -485,39 +488,39 @@ mismas teclas. Además, cada uno reconoce algunas otras teclas propias.
 .PP
 Otras partes de Midnight Commander utilizan algunas de las mismas
 teclas de movimiento, por lo que esta sección podría ser aplicada a ellas también.
-.PP
-.B Arriba (Up), C-p.
-Mueve una línea hacia arriba.
-.PP
-.B Abajo (Down), C-n.
-Mueve una línea hacia abajo.
-.PP
-.B Re Pág (Retroceso de Página, Prev Page, Page Up), M-v.
-Mueve una página completa hacia atrás.
-.PP
-.B Av Pág (Avance de Página, Next Page, Page Down), C-v.
-Mueve una página hacia delante.
-.PP
-.B Inicio (Home), A1.
-Mueve al principio.
-.PP
-.B Fin (End), C1.
-Mueve al final.
+.TP
+.B Arriba (Up), C-p
+mueve una línea hacia arriba.
+.TP
+.B Abajo (Down), C-n
+mueve una línea hacia abajo.
+.TP
+.B Re Pág (Retroceso de Página, Prev Page, Page Up), M-v
+mueve una página completa hacia atrás.
+.TP
+.B Av Pág (Avance de Página, Next Page, Page Down), C-v
+mueve una página hacia delante.
+.TP
+.B Inicio (Home), A1
+mueve al principio.
+.TP
+.B Fin (End), C1
+mueve al final.
 .PP
 El visor de ayuda y el de fichero reconocen las siguientes teclas
 aparte de las mencionadas anteriormente:
-.PP
-.B b, C-b, C-h, Retroespacio (Backspace), Suprimir (Delete).
-Mueve una página completa hacia atrás.
-.PP
-.B Barra espaciadora (Space bar).
-Mueve una página hacia delante.
-.PP
-.B u, d.
-Mueve la mitad de la página hacia atrás o adelante.
-.PP
-.B g, G.
-Mueve al principio o al final.
+.TP
+.B b, C-b, C-h, Retroespacio (Backspace), Suprimir (Delete)
+mueve una página completa hacia atrás.
+.TP
+.B Barra espaciadora (Space bar)
+mueve una página hacia delante.
+.TP
+.B u, d
+mueve la mitad de la página hacia atrás o adelante.
+.TP
+.B g, G
+mueve al principio o al final.
 .\"NODE "  Input Line Keys"
 .SH "  Teclas de la Línea de Entrada"
 Las líneas de entrada (usadas en la
@@ -525,56 +528,56 @@ Las líneas de entrada (usadas en la
 línea de comandos
 .\"Shell Command Line"
 y para los cuadros de diálogo en el programa) reconocen esas teclas:
-.PP
+.TP
 .B C-a
-Coloca el cursor al comienzo de la línea.
-.PP
+coloca el cursor al comienzo de la línea.
+.TP
 .B C-e
-Coloca el cursor al final de la línea.
-.PP
+coloca el cursor al final de la línea.
+.TP
 .B C-b, Izquierda (move-left)
-Desplaza el cursor una posición a la izquierda.
-.PP
+desplaza el cursor una posición a la izquierda.
+.TP
 .B C-f, Derecha (move-right)
-Desplaza el cursor una posición a la derecha.
-.PP
+desplaza el cursor una posición a la derecha.
+.TP
 .B M-f
-Avanza una palabra.
-.PP
+avanza una palabra.
+.TP
 .B M-b
-Retrocede una palabra.
-.PP
+retrocede una palabra.
+.TP
 .B C-h, Retroespacio (backspace)
-Borra el carácter anterior.
-.PP
+borra el carácter anterior.
+.TP
 .B C-d, Suprimir (Delete)
-Elimina el carácter de la posición del cursor.
-.PP
+elimina el carácter de la posición del cursor.
+.TP
 .B C-@
-Sitúa una marca para cortar.
-.PP
+sitúa una marca para cortar.
+.TP
 .B C-w
-Copia el texto entre el cursor y la marca a la caché de eliminación y elimina
+copia el texto entre el cursor y la marca a la caché de eliminación y elimina
 el texto de la línea de entrada.
-.PP
+.TP
 .B M-w
-Copia el texto entre el cursor y la marca a la caché de eliminación.
-.PP
+copia el texto entre el cursor y la marca a la caché de eliminación.
+.TP
 .B C-y
-Restaura el contenido de la caché de eliminación.
-.PP
+restaura el contenido de la caché de eliminación.
+.TP
 .B C-k
-Elimina el texto desde el cursor hasta el final de la línea.
-.PP
+elimina el texto desde el cursor hasta el final de la línea.
+.TP
 .B M-p, M-n
-Usaremos esas teclas para desplazarnos a través del historial de comandos. M-p nos lleva
+usaremos esas teclas para desplazarnos a través del historial de comandos. M-p nos lleva
 a la última entrada, M-n nos sitúa en la siguiente.
-.PP
+.TP
 .B M-C-h, M-Retroespacio (M-Backspace)
-Borra la palabra anterior.
-.PP
+borra la palabra anterior.
+.TP
 .B M-Tab
-Realiza una
+realiza una
 .\"LINK2"
 terminación
 .\"Completion"
@@ -653,20 +656,20 @@ usuario.
 .PP
 Después de esto añadimos el nombre de los campos con un delimitador de tamaño
 opcional. Estos son los campos disponibles que podemos visualizar:
-.PP
-.B nombre (en la versión internacional, name),
+.TP
+.B nombre (en la versión internacional, name)
 visualiza el nombre de fichero.
-.PP
-.B tamaño (size),
+.TP
+.B tamaño (size)
 visualiza el tamaño del fichero.
-.PP
-.B bsize,
+.TP
+.B bsize
 es una forma alternativa del formato
 .BR size .
 Muestra el tamaño de los ficheros y para los directorios visualiza
 SUB-DIR o UP--DIR.
-.PP
-.B tipo (type),
+.TP
+.B tipo (type)
 muestra el campo type de un carácter de extensión. Este carácter es un
 subconjunto de la información mostrada por el comando ls con la opción -F.
 Un asterisco (*) para ficheros ejecutables, una barra (/) para directorios,
@@ -674,49 +677,50 @@ una arroba (@, at-sign) para los enlaces, un signo igual (=) para sockets,
 un guión para los dispositivos de caracteres, un signo más para dispositivos de bloque,
 un pipe (|) para colas, una tilde (~) para enlaces simbólicos a directorios y
 un signo de exclamación para enlaces perdidos (enlaces que no apuntan a ninguna parte).
-.PP
-.B mtime,
+.TP
+.B mtime
 hora de última modificación del fichero.
-.PP
-.B atime,
+.TP
+.B atime
 hora del último acceso al fichero.
-.PP
-.B ctime,
+.TP
+.B ctime
 hora de creación del fichero.
-.PP
-.B perm,
+.TP
+.B perm
 una cadena representando los bits actuales de permisos del fichero.
-.PP
-.B mode,
+.TP
+.B mode
 un valor octal con los actuales bits de permisos del fichero.
-.PP
-.B nlink,
+.TP
+.B nlink
 número de enlaces al fichero.
-.B ngid,
+.TP
+.B ngid
 el Identificador de Grupo, GID (numérico).
-.PP
-.B nuid,
+.TP
+.B nuid
 el Identificador de Usuario, UID (numérico).
-.PP
-.B owner,
+.TP
+.B owner
 el propietario del fichero.
-.PP
-.B group,
+.TP
+.B group
 el grupo del fichero.
-.PP
-.B inode,
+.TP
+.B inode
 el inodo del fichero.
 .PP
 Además, podemos usar estos nombres de campo para organizar la pantalla:
-.PP
-.B space,
+.TP
+.B space
 un espacio en el formato de pantalla.
-.PP
-.B mark,
+.TP
+.B mark
 un asterisco si el fichero está marcado, o un espacio si no lo está.
-.PP
-.B |,
-Este carácter es utilizado para añadir una línea vertical al formato de pantalla.
+.TP
+.B |
+este carácter es utilizado para añadir una línea vertical al formato de pantalla.
 .PP
 Para forzar un campo a un tamaño fijo (un especificador de tamaño), basta añadir
 ':' seguido del número de caracteres que deseamos tenga el campo, si
