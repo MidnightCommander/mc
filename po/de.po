@@ -6849,7 +6849,7 @@ msgid " Too many open connections "
 msgstr " Zuviele offene Verbindungen "
 
 #: vfs/sfs.c:329
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Warning: Invalid line in sfs.ini:\n"
 "%s\n"

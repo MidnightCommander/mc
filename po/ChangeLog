@@ -1,3 +1,7 @@
+2001-08-24  Abel Cheung  <maddog@linux.org.hk>
+
+	* de.po: Marked line 6853 as fuzzy, gettext complaint.
+
 2001-08-24  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* no.po: Updated Norwegian (bokmål) translation.
