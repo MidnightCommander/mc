@@ -305,7 +305,7 @@ void do_edit_at_line (const char *what, int start_line)
 static void
 do_edit (const char *what)
 {
-    do_edit_at_line (what, 1);
+    do_edit_at_line (what, 0);
 }
 
 void

@@ -1,3 +1,9 @@
+2002-12-01  Pavel Roskin  <proski@gnu.org>
+
+	* cmd.c (do_edit_at_line): Set line to 0 to allow the editor to
+	decide if the user cares about the initial line or not.
+	* main.c: Set edit_one_file_start_line to 0 initially.
+
 2002-11-29  Pavel Roskin  <proski@gnu.org>
 
 	* setup.c: Add option_save_position to the options table.

@@ -278,7 +278,9 @@ char *view_one_file = 0;
 
 /* File name to edit if argument was supplied */
 char *edit_one_file = 0;
-static int edit_one_file_start_line = 1;
+
+/* Line to start the editor on */
+static int edit_one_file_start_line = 0;
 
 /* Used so that widgets know if they are being destroyed or
    shut down */
@@ -2301,7 +2303,6 @@ handle_args (int argc, char *argv[])
     base = x_basename (argv[0]);
     if (!STRNCOMP (base, "mce", 3) || !STRCOMP (base, "vi")) {
 	edit_one_file = "";
-	edit_one_file_start_line = 1;
 	if (tmp) {
 	    if (*tmp == '+' && isdigit ((unsigned char) tmp[1])) {
 		int start_line = atoi (tmp);
