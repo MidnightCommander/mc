@@ -156,20 +156,7 @@ struct hotlist *current_group;
 static void remove_from_hotlist (struct hotlist *entry);
 void add_new_group_cmd (void);
 
-static struct hotlist *new_hotlist (void)
-{
-    struct hotlist *hl;
-
-    hl = g_new (struct hotlist, 1);
-    hl->type     = 0;
-    hl->directory =
-	hl->label = 0;
-    hl->head =
-	hl->up =
-	    hl->next = 0;
-    
-    return hl;
-}
+#define new_hotlist() g_new0(struct hotlist, 1)
 
 #ifndef HAVE_X
 static void hotlist_refresh (Dlg_head *dlg)
@@ -1403,7 +1390,7 @@ void load_hotlist (void)
 	load_group (hotlist);
 	hotlist_state.loaded   = 1;
 	/*
-	 * just to be shure we got copy
+	 * just to be sure we got copy
 	 */
 	hotlist_state.modified = 1;
 	result = save_hotlist ();
@@ -1590,7 +1577,6 @@ int save_hotlist (void)
 	    else
 		chmod (hotlist_file_name, S_IRUSR | S_IWUSR);
 	    hot_save_group (hotlist);
-	    fflush (hotlist_file);
 	    fclose (hotlist_file);
 	    stat (hotlist_file_name, &stat_buf);
 	    hotlist_file_mtime = stat_buf.st_mtime;
@@ -1606,26 +1592,29 @@ int save_hotlist (void)
 
 void done_hotlist (void)
 {
-    if (hotlist)
-        remove_group (hotlist);
-    hotlist_state.loaded = 0;
-
     if (hotlist){
+	remove_group (hotlist);
 	if (hotlist->label)
 	   g_free (hotlist->label);
         if (hotlist->directory)
             g_free (hotlist->directory);
         g_free (hotlist);
+	hotlist = 0;
     }
     
-    if (hotlist_file_name)
+    hotlist_state.loaded = 0;
+
+    if (hotlist_file_name){
         g_free (hotlist_file_name);
-    hotlist_file_name = 0;
-    hotlist = current_group = 0;
+	hotlist_file_name = 0;
+    }
     l_hotlist = 0;
     current_group = 0;
-    if (tkn_buf)
+    if (tkn_buf){
         g_free (tkn_buf);
+	tkn_buf_length = 0;
+	tkn_length = 0;
+	tkn_buf = NULL;
+    }
 }
-
 

@@ -178,58 +178,44 @@ do_background (FileOpContext *ctx, char *info)
 static char *
 background_title (char *str)
 {
-    char *result = g_strconcat (_("Background process:"), str, NULL);
-
-    return result;
+    return g_strconcat (_("Background process:"), str, NULL);
 }
 
 /* {{{ Routines that do the real job */
 static void
 real_message_1s (enum OperationMode mode, int *flags, char *title, char *str1)
 {
-    char *full_title;
-    
     if (mode == Background)
-	full_title = background_title (title);
-    else
-        full_title = title;
+	title = background_title (title);
     
     message (*flags, title, str1);
 
-    if (title != full_title)
-	g_free (full_title);
+    if (mode == Background)
+	g_free (title);
 }
 
 static void
 real_message_2s (enum OperationMode mode, int *flags, char *title, char *str1, char *str2)
 {
-    char *full_title;
-    
     if (mode == Background)
-	full_title = background_title (title);
-    else
-        full_title = title;
+	title = background_title (title);
     
     message (*flags, title, str1, str2);
     
-    if (title != full_title)
-	g_free (full_title);
+    if (mode == Background)
+	g_free (title);
 }
 
 static void
 real_message_3s (enum OperationMode mode, int *flags, char *title, char *str1, char *str2, const char *str3)
 {
-    char *full_title;
-    
     if (mode == Background)
-	full_title = background_title (title);
-    else
-        full_title = title;
+	title = background_title (title);
     
     message (*flags, title, str1, str2, str3);
     
-    if (title != full_title)
-	g_free (full_title);
+    if (mode == Background)
+	g_free (title);
 }
 /* }}} */
 
@@ -281,15 +267,15 @@ background_attention (int fd, void *closure)
     void *routine;
     int  argc, i, result, status;
     char *data [MAXCALLARGS];
-    char *resstr;
     int bytes;
     enum ReturnType type;
-    char *background_process_error = _(" Background process error ");
 
     ctx = closure;
 
     bytes = read (fd, &routine, sizeof (routine));
     if (bytes < (sizeof (routine))){
+	char *background_process_error = _(" Background process error ");
+
 	if (errno == ECHILD)
 	    message (1, background_process_error, _(" Child died unexpectedly "));
 	else
@@ -373,6 +359,7 @@ background_attention (int fd, void *closure)
 	    write (fd, ctx, sizeof (FileOpContext));
     } else if (type == Return_String) {
 	int len;
+	char *resstr = NULL;
 
 	/* FIXME: string routines should also use the Foreground/Background
 	 * parameter.  Currently, this is not used here
@@ -535,7 +522,6 @@ message_3s (int flags, char *title, char *str1, char *str2, const char *str3)
 char *
 input_dialog_help (char *header, char *text, char *help, char *def_text)
 {
-    extern char *real_input_dialog_help (char *header, char *text, char *help, char *def_text);
     if (we_are_background)
 	return parent_call_string ((void *)real_input_dialog_help, 4,
 				   strlen (header),   header,

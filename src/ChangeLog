@@ -1,3 +1,15 @@
+2000-08-08  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* hotlist.c (done_hotlist): static tkn_buf, tkn_buf_length and 
+	tkn_length nullified after tkn_buf is freed to prevent crushes.
+
+	(new_hotlist): became a macro
+
+	* background.c (real_message_[123]s): title is really prepended
+	by "Background process:" string now if mode == Background
+
+	(background_attention): resstr NULLified to prevent warning
+
 2000-06-26  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* screen.c (display_mini_info): two different patterns are
