@@ -132,7 +132,7 @@ dnl Check availability of some functions
 dnl 
 
 AC_CHECK_FUNCS([strerror statfs strftime \
-		memmove pwdauth truncate initgroups putenv \
+		memmove truncate initgroups putenv \
 		memset memcpy tcsetattr tcgetattr cfgetospeed \
 		sigaction sigemptyset sigprocmask sigaddset \
 		sysconf setuid setreuid telldir seekdir])

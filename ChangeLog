@@ -1,5 +1,9 @@
 2002-11-16  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Move check for pwdauth() to MC_MCSERVER_CHECKS.
+	* acinclude.m4 (MC_MCSERVER_CHECKS): If using crypt(), check for
+	shadow password support.
+
 	* acinclude.m4 (MC_MCSERVER_CHECKS): Don't limit PAM check to
 	Linux.  Use AC_SEARCH_LIBS to find crypt().  Consolidate mcserv
 	libraries into MCSERVLIBS.
