@@ -386,11 +386,11 @@ make_symlink (FileOpContext *ctx, const char *src_path, const char *dst_path)
 	    if (*dst_path == PATH_SEP)
 		q = g_strdup (dst_path);
 	    else
-		q = g_strconcat (p, dst_path, NULL);
+		q = g_strconcat (p, dst_path, (char *) NULL);
 	    r = strrchr (q, PATH_SEP);
 	    if (r) {
 		r[1] = 0;
-		s = g_strconcat (p, link_target, NULL);
+		s = g_strconcat (p, link_target, (char *) NULL);
 		strcpy (link_target, s);
 		g_free (s);
 		s = diff_two_paths (q, link_target);
@@ -2198,7 +2198,7 @@ real_query_recursive (FileOpContext *ctx, enum OperationMode mode, const char *s
 	      "   Delete it recursively? ")
 	    : _("\n   Background process: Directory not empty \n"
 		"   Delete it recursively? ");
-	text = g_strconcat (_(" Delete: "), name_trunc (s, 30), " ", NULL);
+	text = g_strconcat (_(" Delete: "), name_trunc (s, 30), " ", (char *) NULL);
 
 	if (safe_delete)
 	    query_set_sel (1);

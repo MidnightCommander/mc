@@ -214,7 +214,7 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
     case 'k':			/* block file name */
     case 'b':			/* block file name / strip extension */  {
 	    if (edit_widget) {
-		char *file = g_strconcat (home_dir, BLOCK_FILE, NULL);
+		char *file = g_strconcat (home_dir, BLOCK_FILE, (char *) NULL);
 		fname = (*quote_func) (file, 0);
 		g_free (file);
 		return fname;

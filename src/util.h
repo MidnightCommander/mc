@@ -211,7 +211,7 @@ void save_file_position (const char *filename, long line, long column);
 
 /* this function allows you to write:
  * char *s = g_strdup("hello, world");
- * s = free_after(g_strconcat(s, s, NULL), s);
+ * s = free_after(g_strconcat(s, s, (char *) NULL), s);
  */
 static inline char *
 free_after (char *result, char *string_to_free)

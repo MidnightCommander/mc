@@ -2398,7 +2398,7 @@ groupbox_new (int x, int y, int width, int height, const char *title)
     if (title) {
 	char *t;
 	t = g_strstrip (g_strdup (title));
-	g->title = g_strconcat (" ", t, " ", NULL);
+	g->title = g_strconcat (" ", t, " ", (char *) NULL);
 	g_free (t);
     }
 

@@ -601,7 +601,7 @@ tree_store_mark_checked(const char *subname)
 	(subname[1] == 0 || (subname[1] == '.' && subname[2] == 0)))
 	return;
     if (ts.check_name[0] == PATH_SEP && ts.check_name[1] == 0)
-	name = g_strconcat(PATH_SEP_STR, subname, NULL);
+	name = g_strconcat(PATH_SEP_STR, subname, (char *) NULL);
     else
 	name = concat_dir_and_file(ts.check_name, subname);
 

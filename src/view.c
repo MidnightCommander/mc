@@ -671,7 +671,7 @@ do_view_init (WView *view, const char *_command, const char *_file,
 	if (view->viewer_magic_flag && (type != COMPRESSION_NONE)) {
 	    g_free (view->filename);
 	    view->filename =
-		g_strconcat (_file, decompress_extension (type), NULL);
+		g_strconcat (_file, decompress_extension (type), (char *) NULL);
 	}
 
 	error = load_view_file (view, fd);

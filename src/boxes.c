@@ -227,7 +227,7 @@ display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int n
         panel->user_mini_status = 0;
 	for (i = 0; i < LIST_TYPES; i++)
     	    panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
-        section = g_strconcat ("Temporal:", p, NULL);
+        section = g_strconcat ("Temporal:", p, (char *) NULL);
         if (!profile_has_section (section, profile_name)) {
             g_free (section);
             section = g_strdup (p);
@@ -886,7 +886,7 @@ jobs_fill_listbox (void)
     while (tl){
 	char *s;
 
-	s = g_strconcat (state_str [tl->state], " ", tl->info, NULL);
+	s = g_strconcat (state_str [tl->state], " ", tl->info, (char *) NULL);
 	listbox_add_item (bg_list, LISTBOX_APPEND_AT_END, 0, s, (void *) tl);
 	g_free (s);
 	tl = tl->next;

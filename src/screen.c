@@ -901,7 +901,7 @@ panel_save_name (WPanel *panel)
     if ((midnight_shutdown && auto_save_setup) || saving_setup)
 	return  g_strdup (panel->panel_name);
     else
-	return  g_strconcat ("Temporal:", panel->panel_name, NULL);
+	return  g_strconcat ("Temporal:", panel->panel_name, (char *) NULL);
 }
 
 static void
@@ -963,7 +963,7 @@ panel_new (const char *panel_name)
     mc_get_current_wd (panel->cwd, sizeof (panel->cwd) - 2);
     strcpy (panel->lwd, ".");
 
-    panel->hist_name = g_strconcat ("Dir Hist ", panel_name, NULL);
+    panel->hist_name = g_strconcat ("Dir Hist ", panel_name, (char *) NULL);
     panel->dir_history = history_get (panel->hist_name);
     directory_history_add (panel, panel->cwd);
 
@@ -993,7 +993,7 @@ panel_new (const char *panel_name)
 
     panel->search_buffer[0] = 0;
     panel->frame_size = frame_half;
-    section = g_strconcat ("Temporal:", panel->panel_name, NULL);
+    section = g_strconcat ("Temporal:", panel->panel_name, (char *) NULL);
     if (!profile_has_section (section, profile_name)) {
 	g_free (section);
 	section = g_strdup (panel->panel_name);
@@ -1280,7 +1280,7 @@ parse_display_format (WPanel *panel, const char *format, char **error, int issta
 	    int pos = min (8, strlen (format));
 	    delete_format (home);
 	    tmp_format [pos] = 0;
-	    *error = g_strconcat (_("Unknown tag on display format: "), tmp_format, NULL);
+	    *error = g_strconcat (_("Unknown tag on display format: "), tmp_format, (char *) NULL);
 	    g_free (tmp_format);
 	    return 0;
 	}
@@ -1964,7 +1964,7 @@ do_enter_on_file_entry (file_entry *fe)
 
     {
 	char *tmp = name_quote (fe->fname, 0);
-	char *cmd = g_strconcat (".", PATH_SEP_STR, tmp, NULL);
+	char *cmd = g_strconcat (".", PATH_SEP_STR, tmp, (char *) NULL);
 	g_free (tmp);
 	shell_execute (cmd, 0);
 	g_free (cmd);

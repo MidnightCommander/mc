@@ -527,7 +527,7 @@ load_setup (void)
     load_string ("Misc", "find_ignore_dirs", "", setup_color_string,
 		 sizeof (setup_color_string));
     if (setup_color_string [0])
-	find_ignore_dirs = g_strconcat (":", setup_color_string, ":", NULL);
+	find_ignore_dirs = g_strconcat (":", setup_color_string, ":", (char *) NULL);
 
     /* The default color and the terminal dependent color */
     load_string ("Colors", "base_color", "", setup_color_string,
@@ -593,7 +593,7 @@ load_keys_from_section (const char *terminal, const char *profile_name)
     if (!terminal)
 	return;
 
-    section_name = g_strconcat ("terminal:", terminal, NULL);
+    section_name = g_strconcat ("terminal:", terminal, (char *) NULL);
     profile_keys = profile_init_iterator (section_name, profile_name);
     g_free (section_name);
     while (profile_keys){

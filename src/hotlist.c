@@ -186,7 +186,7 @@ update_path_name (void)
 	label_set_text (pname,
 			name_trunc (text, dlg->cols - (UX * 2 + 4)));
 
-    p = g_strconcat (" ", current_group->label, " ", NULL);
+    p = g_strconcat (" ", current_group->label, " ", (char *) NULL);
     if (!hotlist_state.moving)
 	label_set_text (pname_group,
 			name_trunc (p, dlg->cols - (UX * 2 + 4)));
@@ -449,7 +449,7 @@ hotlist_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 			    (struct hotlist *) l_hotlist->current->data;
 			if (hlp->type == HL_TYPE_ENTRY) {
 			    char *tmp =
-				g_strconcat ("cd ", hlp->directory, NULL);
+				g_strconcat ("cd ", hlp->directory, (char *) NULL);
 			    stuff (cmdline, tmp, 0);
 			    g_free (tmp);
 			    dlg_stop (h);
@@ -719,7 +719,7 @@ static void hotlist_done (void)
 static char *
 find_group_section (struct hotlist *grp)
 {
-    return  g_strconcat (grp->directory, ".Group", NULL);
+    return  g_strconcat (grp->directory, ".Group", (char *) NULL);
 
 }
 
@@ -780,7 +780,7 @@ add2hotlist (char *label, char *directory, enum HotListType type, int pos)
 
     if (hotlist_state.running && type != HL_TYPE_COMMENT) {
 	if (type == HL_TYPE_GROUP) {
-	    char  *lbl = g_strconcat ("->", new->label, NULL);
+	    char  *lbl = g_strconcat ("->", new->label, (char *) NULL);
 
 	    listbox_add_item (l_hotlist, pos, 0, lbl, new);
 	    g_free (lbl);
@@ -1355,7 +1355,7 @@ clean_up_hotlist_groups (const char *section)
     void	*profile_keys;
     char	*key, *value;
 
-    grp_section = g_strconcat (section, ".Group", NULL);
+    grp_section = g_strconcat (section, ".Group", (char *) NULL);
     if (profile_has_section (section, profile_name))
 	profile_clean_section (section, profile_name);
     if (profile_has_section (grp_section, profile_name)) {
@@ -1415,7 +1415,7 @@ load_hotlist (void)
 	    char *msg;
 
 	    msg = g_strconcat (_("MC was unable to write ~/"), HOTLIST_FILENAME,
-				_(" file, your old hotlist entries were not deleted"), NULL);
+				_(" file, your old hotlist entries were not deleted"), (char *) NULL);
 
 	    message (D_ERROR, _(" Hotlist Load "), msg);
 	    g_free (msg);
@@ -1534,7 +1534,7 @@ int save_hotlist (void)
     struct      stat stat_buf;
     
     if (!hotlist_state.readonly && hotlist_state.modified && hotlist_file_name) {
-	char	*fbak = g_strconcat (hotlist_file_name, ".bak", NULL);
+	char	*fbak = g_strconcat (hotlist_file_name, ".bak", (char *) NULL);
 
 	rename (hotlist_file_name, fbak);
 	if ((hotlist_file = fopen (hotlist_file_name, "w")) != 0) {

@@ -640,7 +640,7 @@ load_mc_home_file (const char *filename, char **allocated_filename)
     hintfile_base = concat_dir_and_file (mc_home, filename);
     lang = guess_message_value ();
 
-    hintfile = g_strconcat (hintfile_base, ".", lang, NULL);
+    hintfile = g_strconcat (hintfile_base, ".", lang, (char *) NULL);
     data = load_file (hintfile);
 
     if (!data) {
@@ -648,7 +648,7 @@ load_mc_home_file (const char *filename, char **allocated_filename)
 	/* Fall back to the two-letter language code */
 	if (lang[0] && lang[1])
 	    lang[2] = 0;
-	hintfile = g_strconcat (hintfile_base, ".", lang, NULL);
+	hintfile = g_strconcat (hintfile_base, ".", lang, (char *) NULL);
 	data = load_file (hintfile);
 
 	if (!data) {
@@ -1182,9 +1182,9 @@ concat_dir_and_file (const char *dir, const char *file)
     int i = strlen (dir);
     
     if (dir [i-1] == PATH_SEP)
-	return  g_strconcat (dir, file, NULL);
+	return  g_strconcat (dir, file, (char *) NULL);
     else
-	return  g_strconcat (dir, PATH_SEP_STR, file, NULL);
+	return  g_strconcat (dir, PATH_SEP_STR, file, (char *) NULL);
 }
 
 
@@ -1254,7 +1254,7 @@ mc_mkstemps (char **pname, const char *prefix, const char *suffix)
 	tmpbase = g_strdup (prefix);
     }
 
-    tmpname = g_strconcat (tmpbase, "XXXXXX", suffix, NULL);
+    tmpname = g_strconcat (tmpbase, "XXXXXX", suffix, (char *) NULL);
     *pname = tmpname;
     XXXXXX = &tmpname[strlen (tmpbase)];
     g_free (tmpbase);

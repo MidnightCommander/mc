@@ -1138,9 +1138,9 @@ nice_cd (const char *text, const char *xtext, const char *help, const char *pref
 			   ugly as hell and leads to problems in vfs layer */
 
     if (strncmp (prefix, machine, strlen (prefix)) == 0)
-	cd_path = g_strconcat (machine, to_home ? "/~/" : NULL, NULL);
+	cd_path = g_strconcat (machine, to_home ? "/~/" : (char *) NULL, (char *) NULL);
     else 
-	cd_path = g_strconcat (prefix, machine, to_home ? "/~/" : NULL, NULL);
+	cd_path = g_strconcat (prefix, machine, to_home ? "/~/" : (char *) NULL, (char *) NULL);
     
     if (do_panel_cd (MENU_PANEL, cd_path, 0))
 	directory_history_add (MENU_PANEL, (MENU_PANEL)->cwd);
@@ -1200,7 +1200,7 @@ void quick_cd_cmd (void)
     char *p = cd_dialog ();
 
     if (p && *p) {
-        char *q = g_strconcat ("cd ", p, NULL);
+        char *q = g_strconcat ("cd ", p, (char *) NULL);
         
         do_cd_command (q);
         g_free (q);
@@ -1239,7 +1239,7 @@ save_setup_cmd (void)
     
     save_setup ();
     sync_profiles ();
-    str = g_strconcat ( _(" Setup saved to ~/"), PROFILE_NAME, NULL);
+    str = g_strconcat ( _(" Setup saved to ~/"), PROFILE_NAME, (char *) NULL);
     
     message (0, _(" Setup "), str);
     g_free (str);

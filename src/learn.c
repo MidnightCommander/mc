@@ -306,7 +306,7 @@ learn_save (void)
 {
     int i;
     int profile_changed = 0;
-    char *section = g_strconcat ("terminal:", getenv ("TERM"), NULL);
+    char *section = g_strconcat ("terminal:", getenv ("TERM"), (char *) NULL);
 
     for (i = 0; i < learn_total; i++) {
 	if (learnkeys [i].sequence != NULL) {

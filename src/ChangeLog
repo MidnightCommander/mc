@@ -1,5 +1,27 @@
 2004-09-24  Roland Illig  <roland.illig@gmx.de>
 
+	* boxes.c: Replaced NULL with (char *) NULL. Likewise for 0, where
+	NULL was meant.
+	* cmd.c: Likewise.
+	* dialog.c: Likewise.
+	* ext.c: Likewise.
+	* file.c: Likewise.
+	* find.c: Likewise.
+	* hotlist.c: Likewise.
+	* learn.c: Likewise.
+	* main.c: Likewise.
+	* screen.c: Likewise.
+	* setup.c: Likewise.
+	* treestore.c: Likewise.
+	* user.c: Likewise.
+	* util.c: Likewise.
+	* utilunix.c: Likewise.
+	* view.c: Likewise.
+	* widget.c: Likewise.
+	* wtools.c: Likewise.
+
+2004-09-24  Roland Illig  <roland.illig@gmx.de>
+
 	* cons.handler.c (handle_console_linux): Replaced NULL with
 	(char *) NULL in call to execl.
 	* subshell.c (init_subshell_child): Likewise.

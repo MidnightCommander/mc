@@ -223,7 +223,7 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 	/* Set executable flag on the command file ... */
 	chmod (file_name, S_IRWXU);
 	/* ... but don't rely on it - run /bin/sh explicitly */
-	cmd = g_strconcat ("/bin/sh ", file_name, NULL);
+	cmd = g_strconcat ("/bin/sh ", file_name, (char *) NULL);
     }
 
     if (run_view) {
@@ -303,7 +303,7 @@ get_file_type_local (char *filename, char *buf, int buflen)
     int read_bytes = 0;
 
     char *tmp = name_quote (filename, 0);
-    char *command = g_strconcat (FILE_CMD, tmp, NULL);
+    char *command = g_strconcat (FILE_CMD, tmp, (char *) NULL);
     FILE *f = popen (command, "r");
 
     g_free (tmp);
@@ -468,14 +468,14 @@ regex_command (const char *filename, const char *action, int *move_dir)
 		    char *msg2;
 		    msg =
 			g_strconcat (" ", mc_home, MC_LIB_EXT,
-				     _(" file error "), NULL);
+				     _(" file error "), (char *) NULL);
 		    msg2 =
 			g_strconcat (_("Format of the "), mc_home,
 				     _("mc.ext file has changed\n"
 				       "with version 3.0. It seems that installation\n"
 				       "failed. Please fetch a fresh new copy from the\n"
 				       "Midnight Commander package."),
-				     NULL);
+				     (char *) NULL);
 		    message (1, msg, "%s", msg2);
 		    g_free (msg);
 		    g_free (msg2);
@@ -487,7 +487,7 @@ regex_command (const char *filename, const char *action, int *move_dir)
 	    char *msg;
 	    char *msg2;
 	    msg =
-		g_strconcat (" ~/", MC_USER_EXT, _(" file error "), NULL);
+		g_strconcat (" ~/", MC_USER_EXT, _(" file error "), (char *) NULL);
 	    msg2 =
 		g_strconcat (_("Format of the "), "~/", MC_USER_EXT,
 			     _(" file has changed\n"
@@ -497,7 +497,7 @@ regex_command (const char *filename, const char *action, int *move_dir)
 			       "file as an example of how to write it.\n"),
 			     mc_home,
 			     _("mc.ext will be used for this moment."),
-			     NULL);
+			     (char *) NULL);
 	    message (1, msg, "%s", msg2);
 	    g_free (msg);
 	    g_free (msg2);

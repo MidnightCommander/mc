@@ -210,7 +210,7 @@ create_dlg (int y1, int x1, int lines, int cols, const int *color_set,
     if (title) {
 	char *t;
 	t = g_strstrip (g_strdup (title));
-	new_d->title = g_strconcat (" ", t, " ", NULL);
+	new_d->title = g_strconcat (" ", t, " ", (char *) NULL);
 	g_free (t);
     }
 

@@ -290,7 +290,7 @@ tilde_expand (const char *directory)
     if (!passwd)
 	return g_strdup (directory);
 
-    return g_strconcat (passwd->pw_dir, PATH_SEP_STR, q, NULL);
+    return g_strconcat (passwd->pw_dir, PATH_SEP_STR, q, (char *) NULL);
 }
 
 

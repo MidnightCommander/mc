@@ -2098,7 +2098,7 @@ static int
 do_mc_filename_rename (const char *mc_dir, const char *o_name, const char *n_name)
 {
     char *full_o_name = concat_dir_and_file (home_dir, o_name);
-    char *full_n_name = g_strconcat (home_dir, MC_BASE, n_name, NULL);
+    char *full_n_name = g_strconcat (home_dir, MC_BASE, n_name, (char *) NULL);
     int move;
 
     move = 0 == rename (full_o_name, full_n_name);

@@ -370,7 +370,7 @@ insert_file (const char *dir, const char *file)
 	dirname = add_to_list (dir, NULL);
     }
     
-    tmp_name = g_strconcat ("    ", file, NULL);
+    tmp_name = g_strconcat ("    ", file, (char *) NULL);
     add_to_list (tmp_name, dirname);
     g_free (tmp_name);
 }
@@ -608,7 +608,7 @@ do_search (struct Dlg_head *h)
 		}
 		if (find_ignore_dirs){
                     int found;
-		    char *temp_dir = g_strconcat (":", tmp, ":", NULL);
+		    char *temp_dir = g_strconcat (":", tmp, ":", (char *) NULL);
 
                     found = strstr (find_ignore_dirs, temp_dir) != 0;
                     g_free (temp_dir);
