@@ -1000,8 +1000,16 @@ lib/mc.sh
 lib/mc.csh
 
 mcfn_install
-vfs/extfs/ftplist vfs/extfs/uzip vfs/extfs/uzoo vfs/extfs/lslR vfs/extfs/ulha 
-vfs/extfs/uha vfs/extfs/ucpio vfs/extfs/deb vfs/extfs/urar vfs/extfs/uar
+
+vfs/extfs/deb
+vfs/extfs/ftplist
+vfs/extfs/lslR
+vfs/extfs/uar
+vfs/extfs/ucpio
+vfs/extfs/ulha 
+vfs/extfs/uha
+vfs/extfs/urar
+vfs/extfs/uzoo
 
 doc/mc.1 doc/mcedit.1 doc/mcserv.8
 
