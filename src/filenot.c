@@ -28,11 +28,12 @@
 #include "global.h"
 #include "../vfs/vfs.h"
 
-static char *get_absolute_name (char *file)
+static char *
+get_absolute_name (char *file)
 {
-    char dir [MC_MAXPATHLEN];
+    char dir[MC_MAXPATHLEN];
 
-    if (file [0] == PATH_SEP)
+    if (file[0] == PATH_SEP)
 	return g_strdup (file);
     mc_get_current_wd (dir, MC_MAXPATHLEN);
     return concat_dir_and_file (dir, file);
@@ -43,9 +44,9 @@ my_mkdir_rec (char *s, mode_t mode)
 {
     char *p, *q;
     int result;
-    
+
     if (!mc_mkdir (s, mode))
-        return 0;
+	return 0;
     else if (errno != ENOENT)
 	return -1;
 
@@ -54,16 +55,16 @@ my_mkdir_rec (char *s, mode_t mode)
 	return -1;
 
     if (!strcmp (s, PATH_SEP_STR)) {
-        errno = ENOTDIR;
-        return -1;
+	errno = ENOTDIR;
+	return -1;
     }
 
     p = concat_dir_and_file (s, "..");
     q = vfs_canon (p);
     g_free (p);
 
-    if (!(result = my_mkdir_rec (q, mode))) 
-    	result = mc_mkdir (s, mode);
+    if (!(result = my_mkdir_rec (q, mode)))
+	result = mc_mkdir (s, mode);
 
     g_free (q);
     return result;
@@ -81,12 +82,12 @@ my_mkdir (char *s, mode_t mode)
     return result;
 #endif
     if (result) {
-        char *p = vfs_canon (s);
-        
-        result = my_mkdir_rec (p, mode);
-        g_free (p);
+	char *p = vfs_canon (s);
+
+	result = my_mkdir_rec (p, mode);
+	g_free (p);
     }
-    if (result == 0){
+    if (result == 0) {
 	s = get_absolute_name (s);
 
 #if FIXME
@@ -98,16 +99,17 @@ my_mkdir (char *s, mode_t mode)
     return result;
 }
 
-int my_rmdir (char *s)
+int
+my_rmdir (char *s)
 {
     int result;
-#if FIXME    
+#if FIXME
     WTree *tree = 0;
-#endif    
+#endif
 
     /* FIXME: Should receive a Wtree! */
     result = mc_rmdir (s);
-    if (result == 0){
+    if (result == 0) {
 	s = get_absolute_name (s);
 
 #if FIXME
@@ -118,4 +120,3 @@ int my_rmdir (char *s)
     }
     return result;
 }
-

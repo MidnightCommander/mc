@@ -39,20 +39,20 @@
 FileOpContext *
 file_op_context_new (void)
 {
-	FileOpContext *ctx;
+    FileOpContext *ctx;
 
-	ctx = g_new0 (FileOpContext, 1);
-	ctx->eta_secs        = 0.0;
-	ctx->progress_bytes  = 0.0;
-	ctx->op_preserve     = TRUE;
-	ctx->do_reget        = TRUE;
-	ctx->stat_func       = (mc_stat_fn) mc_lstat;
-	ctx->preserve        = TRUE;
-	ctx->preserve_uidgid = (geteuid () == 0) ? TRUE : FALSE;
-	ctx->umask_kill      = 0777777;
-	ctx->erase_at_end    = TRUE;
+    ctx = g_new0 (FileOpContext, 1);
+    ctx->eta_secs = 0.0;
+    ctx->progress_bytes = 0.0;
+    ctx->op_preserve = TRUE;
+    ctx->do_reget = TRUE;
+    ctx->stat_func = (mc_stat_fn) mc_lstat;
+    ctx->preserve = TRUE;
+    ctx->preserve_uidgid = (geteuid () == 0) ? TRUE : FALSE;
+    ctx->umask_kill = 0777777;
+    ctx->erase_at_end = TRUE;
 
-	return ctx;
+    return ctx;
 }
 
 
@@ -66,12 +66,12 @@ file_op_context_new (void)
 void
 file_op_context_destroy (FileOpContext *ctx)
 {
-	g_return_if_fail (ctx != NULL);
+    g_return_if_fail (ctx != NULL);
 
-	if (ctx->ui)
-		file_op_context_destroy_ui (ctx);
+    if (ctx->ui)
+	file_op_context_destroy_ui (ctx);
 
-	/* FIXME: do we need to free ctx->dest_mask? */
+    /* FIXME: do we need to free ctx->dest_mask? */
 
-	g_free (ctx);
+    g_free (ctx);
 }
