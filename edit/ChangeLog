@@ -1,5 +1,9 @@
 2001-09-04  Pavel Roskin  <proski@gnu.org>
 
+	* syntax.c (syntax_text): Remove useless ']' in the Perl and
+	Python rules.  Change shell script rule to use more portable
+	regular expression.
+
 	* editcmd.c (edit_block_process_cmd): Prepend space to the
 	command to avoid polluting bash history.  Document arguments.
 	Fix crash if block is 0 - not used currently.
