@@ -324,13 +324,14 @@ mc_tmpdir (void)
 		pwd->pw_name);
     canonicalize_pathname (tmpdir);
 
-    if (chmod (tmpdir, S_IRWXU) != 0) {
-	/* Need to create directory.  */
+    if (chmod (tmpdir, S_IRWXU) != 0 && errno == ENOENT) {
+	/* Need to create directory. */
 	if (mkdir (tmpdir, S_IRWXU) != 0) {
 	    fprintf (stderr,
 		     _("Cannot create temporary directory %s: %s\n"),
 		     tmpdir, unix_error_string (errno));
-	    g_snprintf (tmpdir, sizeof (tmpdir), sys_tmp);
+	    strncpy (tmpdir, sys_tmp, sizeof (tmpdir) - 1);
+	    tmpdir [sizeof (tmpdir) - 1] = 0;
 	}
     }
 
