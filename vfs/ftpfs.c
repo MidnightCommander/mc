@@ -766,7 +766,7 @@ open_archive_int (vfs *me, vfs_s_super *super)
     int retry_seconds, count_down;
 
     /* We do not want to use the passive if we are using proxies */
-    if (SUP.use_proxy)
+    if (SUP.proxy)
 	SUP.use_passive_connection = 0;
     
     retry_seconds = 0;
@@ -822,8 +822,9 @@ open_archive (vfs *me, vfs_s_super *super, char *archive_name, char *op)
     SUP.user = user;
     SUP.port = port;
     SUP.home = NULL;
-    SUP.proxy= 0;
-    SUP.use_proxy = ftpfs_check_proxy (host);
+    SUP.proxy = 0;
+    if (ftpfs_check_proxy (host))
+	SUP.proxy = ftpfs_proxy_host;
     SUP.password = password;
     SUP.use_passive_connection = ftpfs_use_passive_connections | source_route;
     SUP.use_source_route = source_route;

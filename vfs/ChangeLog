@@ -1,5 +1,11 @@
 2002-07-11  Pavel Roskin  <proski@gnu.org>
 
+	* xdirentry.h: Eliminate use_proxy field.
+	* ftpfs.c (open_archive_int): Use SUP.proxy instead of
+	SUP.use_proxy.
+	(open_archive): Set SUP.proxy to ftpfs_proxy_host.
+	* ftpfs.h: Eliminate unused structures.
+
 	* vfs.h: Rename URL_DEFAULTANON to URL_ALLOW_ANON.
 	* utilvfs.c (vfs_split_url): Return NULL as username if
 	URL_ALLOW_ANON is set and no username is found in the URL,

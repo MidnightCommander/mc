@@ -101,9 +101,8 @@ typedef struct vfs_s_super {
 	    char *password;
 	    int port;
 
-	    char *proxy;
+	    char *proxy;		/* proxy server, NULL if no proxy */
 	    int failed_on_login;	/* used to pass the failure reason to upper levels */
-	    int use_proxy;		/* use a proxy server */
 	    int use_source_route;
 	    int use_passive_connection;
 	    int remote_is_amiga;       /* No leading slash allowed for AmiTCP (Amiga) */
