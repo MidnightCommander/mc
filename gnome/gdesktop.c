@@ -1152,46 +1152,15 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 			new_panel_at (point);
 		g_free (point);
 	} else {
-#if 0
-		if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe))
-			new_panel_at (filename);
-		else {
-			int size;
-			char *buf;
-
-			if (gnome_metadata_get (filename,"fm-open", &size, &buf) == 0){
-				g_free (buf);
-				gmc_open_filename (filename, NULL);
-				goto out;
-			}
-
-			if (gnome_metadata_get (filename, "open", &size, &buf) == 0){
-				g_free (buf);
-				gmc_open_filename (filename, NULL);
-				goto out;
-			}
-
-			if (is_exe (fe->buf.st_mode) && if_link_is_exe (desktop_directory, fe)){
-				int needs_terminal = 0;
-
-				if (gnome_metadata_get (filename, "flags", &size, &buf) == 0){
-					needs_terminal = strstr (buf, "needsterminal") != 0;
-					g_free (buf);
-				}
-
-				if (needs_terminal)
-					gnome_open_terminal_with_cmd (filename);
-				else
-					my_system (EXECUTE_AS_SHELL, shell, filename);
-			} else
-				gmc_open_filename (filename, NULL);
-		}
-#endif
+		WPanel *panel;
+		panel = push_desktop_panel_hack ();
 		/* we need to special case the new dir.  Otherwise we'd try to cd */
 		if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe))
 			new_panel_at (filename);
 		else
 			do_enter_on_file_entry (fe);
+		layout_panel_gone (panel);
+		free_panel_from_desktop (panel);
 	}
 
  out:

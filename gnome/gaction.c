@@ -21,22 +21,99 @@
 #include "gnome-open-dialog.h"
 
 static void
+gmc_unable_to_execute_dlg (gchar *fname, const gchar *command, gchar *action, const gchar *mime)
+{
+	GtkWidget *msg_dialog = NULL;
+	GtkWidget *hack_widget;
+	gchar *msg;
+	gchar *fix = NULL;
+	if (!strcmp (action, "x-gnome-app-info")) {
+		msg = g_strconcat (_("Unable to execute\n\""),
+				   fname,
+				   _("\".\n\nPlease check it to see if it points to a valid command."),
+				   NULL);
+		
+	} else {
+		if (mime)
+			fix = g_strconcat (_("\".\n\nTo fix this, bring up the mime-properties editor "
+					     "in the GNOME Control Center, and edit the default "),
+					   action,
+					   _("-action for \""),
+					   mime,
+					   "\".",
+					   NULL);
+		else 
+			fix = g_strconcat (_("\".\n\nTo fix this error, bring up this file's properties "
+					     "and change the default "),
+					   action,
+					   _("-action."),
+					   NULL);
+		msg = g_strconcat (_("Unable to "),
+				   action,
+				   "\n\"",
+				   fname,
+				   _("\"\nwith\n\""),
+				   command,
+				   fix,
+				   NULL);
+		g_free (fix);
+	}
+	msg_dialog = gnome_message_box_new (msg,
+					    GNOME_MESSAGE_BOX_ERROR,
+					    GNOME_STOCK_BUTTON_OK,
+					    NULL);
+	/* Kids, don't try this at home */
+	/* this is pretty evil... <-: 
+	hack_widget = GNOME_DIALOG (msg_dialog)->vbox;
+	hack_widget = GTK_WIDGET (GTK_BOX (hack_widget)->children->data);
+	gtk_label_set_line_wrap (GTK_LABEL (hack_widget), TRUE);
+	*/
+	gnome_dialog_run_and_close (GNOME_DIALOG (msg_dialog));
+	g_free (msg);
+	
+}
+
+static void
 gmc_execute (const char *fname, const char *buf, int needs_terminal)
 {
 	exec_extension (fname, buf, NULL, NULL, 0, needs_terminal);
 }
+static gboolean
+gmc_check_exec_string (const char *buf)
+{
+	gint argc;
+	gint retval, i;
+	gchar *prog;
+	gchar **argv;
+	
+	gnome_config_make_vector (buf, &argc, &argv);
+	if (argc < 1)
+		return FALSE;
 
+	prog = gnome_is_program_in_path (argv[0]);
+	if (prog)
+		retval = TRUE;
+	else
+		retval = FALSE;
+	g_free (prog);
+	/* check to see if it's a GMC directive. */
+	if ((strlen (argv[0]) > 1) && (argv[0][0] == '%') && (argv[0][1] != '%'))
+		retval = TRUE;
+	for (i = 0; i < argc; i++)
+		g_free (argv[i]);
+	g_free (argv);
+	return retval;
+}
 int
 gmc_open_filename (char *fname, GList *args)
 {
 	const char *mime_type;
 	const char *cmd;
-	char *buf;
+	char *buf = NULL;
 	int size;
 	int needs_terminal = 0;
 
 	mime_type = gnome_mime_type_or_default (fname, NULL);
-
 	/*
 	 * We accept needs_terminal as -1, which means our caller
 	 * did not want to do the work
@@ -51,32 +128,30 @@ gmc_open_filename (char *fname, GList *args)
 		needs_terminal = (strstr (flags, "needsterminal") != 0);
 	}
 	
-	if (gnome_metadata_get (fname, "fm-open", &size, &buf) == 0){
-		gmc_execute (fname, buf, needs_terminal);
+	if (gnome_metadata_get (fname, "fm-open", &size, &buf) != 0) {
+		gnome_metadata_get (fname, "open", &size, &buf);
+	}
+	if (buf) {
+		if (gmc_check_exec_string (buf))
+			gmc_execute (fname, buf, needs_terminal);
+		else
+			gmc_unable_to_execute_dlg (fname, buf, "open", NULL);
 		g_free (buf);
 		return 1;
 	}
-
-	if (gnome_metadata_get (fname, "open", &size, &buf) == 0){
-		gmc_execute (fname, buf, needs_terminal);
-		g_free (buf);
-		return 1;
-	}
-
 	if (!mime_type)
 		return 0;
 	
-		
 	cmd = gnome_mime_get_value (mime_type, "fm-open");
-	
-	if (cmd){
-		gmc_execute (fname, cmd, needs_terminal);
-		return 1;
+	if (cmd == NULL) {
+		cmd = gnome_mime_get_value (mime_type, "open");
 	}
 	
-	cmd = gnome_mime_get_value (mime_type, "open");
 	if (cmd){
-		gmc_execute (fname, cmd, needs_terminal);
+		if (gmc_check_exec_string (cmd))
+			gmc_execute (fname, cmd, needs_terminal);
+		else 
+			gmc_unable_to_execute_dlg (fname, cmd, "open", mime_type);
 		return 1;
 	}
 
@@ -88,9 +163,12 @@ gmc_open_filename (char *fname, GList *args)
 			gnome_desktop_entry_launch (entry);
 			gnome_desktop_entry_free (entry);
 			return 1;
+		} else {
+			gmc_unable_to_execute_dlg (fname, NULL, "x-gnome-app-info", NULL);
+			return 1;
 		}
 	}
-
+	/* We just struck out.  Prompt the user. */
 	return 0;
 }
 
@@ -154,7 +232,12 @@ gmc_edit (char *fname)
 int
 gmc_open (file_entry *fe)
 {
-	return gmc_open_filename (fe->fname, NULL);
+	gint retval;
+	gchar *fullname;
+	fullname = g_concat_dir_and_file (cpanel->cwd, fe->fname);
+	retval = gmc_open_filename (fullname, NULL);
+	g_free (fullname);
+	return retval;
 }
 
 int

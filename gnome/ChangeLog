@@ -1,3 +1,8 @@
+1999-04-08  Jonathan Blandford  <jrb@redhat.com>
+
+	* gaction.c (gmc_unable_to_execute_dlg): 
+	now actions do the right thing (TM).
+
 1999-04-07  Owen Taylor  <otaylor@redhat.com>
 
 	* gsession.c (session_save): Set a discard command

@@ -2050,6 +2050,8 @@ start_search (WPanel *panel)
 int
 do_enter_on_file_entry (file_entry *fe)
 {
+#ifdef HAVE_GNOME
+#endif
     if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe)) {
 	do_cd (fe->fname, cd_exact);
 	return 1;
@@ -2086,10 +2088,12 @@ do_enter_on_file_entry (file_entry *fe)
 	} else {
 
 #ifdef HAVE_GNOME
-	    if (gmc_open (fe) == 0) {
-		    return (gmc_open_with (fe->fname));
-	    } else
-		    return 0;
+	if (gmc_open (fe) == 0) {
+		return gmc_open_with (fe->fname);
+	} else {
+		return 0;
+	}
+	
 #else
 	    char *p;
 
