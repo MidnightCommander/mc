@@ -1,6 +1,6 @@
 2002-12-23  Pavel Roskin  <proski@gnu.org>
 
-	* subshell.c (subshell_switch_key): Make static const int.
+	* subshell.c (subshell_switch_key): Make static const.
 
 	* key.c (correct_key_code): Strip or add modifier information
 	when necessary.  Recognize shift with function key N as function

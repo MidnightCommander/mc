@@ -104,7 +104,7 @@ TRUE;
 int subshell_pty = 0;
 
 /* The key for switching back to MC from the subshell */
-static const int subshell_switch_key = XCTRL('o');
+static const char subshell_switch_key = XCTRL('o') & 255;
 
 /* State of the subshell:
  * INACTIVE: the default state; awaiting a command
