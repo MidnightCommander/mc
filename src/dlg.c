@@ -202,7 +202,6 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 	y1 -= 2;
 
     new_d = g_new0 (Dlg_head, 1);
-    new_d->direction = DIR_FORWARD;
     new_d->color = color_set;
     new_d->help_ctx = help_ctx;
     new_d->callback = callback ? callback : default_dlg_callback;
@@ -381,16 +380,16 @@ int dlg_unfocus (Dlg_head *h)
 
 static void select_a_widget (Dlg_head *h, int down)
 {
-    int direction = h->direction;
+    int dir_forward = !(h->flags & DLG_BACKWARD);
 
     if (!h->current)
        return;
 
     if (!down)
-	direction = !direction;
+	dir_forward = !dir_forward;
 
     do {
-	if (direction)
+	if (dir_forward)
 	    h->current = h->current->next;
 	else
 	    h->current = h->current->prev;
@@ -763,7 +762,7 @@ void init_dlg (Dlg_head *h)
     h->refresh_pushed = 1;
 
     /* Initialize direction */
-    if (!h->direction)
+    if (h->flags & DLG_BACKWARD)
 	h->current =  h->first;
 
     if (h->initfocus != NULL)
@@ -847,11 +846,12 @@ frontend_run_dlg (Dlg_head *h)
  * behavior on complex routines like the file routines, this way,
  * they can call the dlg_process_event without rewriting all the code
  */
-void run_dlg (Dlg_head *h)
+int run_dlg (Dlg_head *h)
 {
     init_dlg (h);
     frontend_run_dlg (h);
     dlg_run_done (h);
+    return h->ret_value;
 }
 
 void

@@ -211,14 +211,8 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 
     /* prepare dialog */
     query_dlg = create_dlg (ypos, xpos, lines, cols, query_colors,
-			    query_callback, "[QueryBox]", "query", DLG_NONE);
+			    query_callback, "[QueryBox]", "query", DLG_BACKWARD);
     x_set_dialog_title (query_dlg, header);
-
-    /* The data we need to pass to the callback */
-    query_dlg->cols = cols; 
-    query_dlg->lines = lines; 
-	
-    query_dlg->direction = DIR_BACKWARD;
 
     if (count > 0){
 

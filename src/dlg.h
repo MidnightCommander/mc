@@ -8,10 +8,6 @@
 #define HOT_NORMALC      h->color[2]
 #define HOT_FOCUSC       h->color[3]
 
-/* Possible directions */
-#define DIR_FORWARD     1
-#define DIR_BACKWARD    0
-
 /* Common return values */
 #define B_EXIT		0
 #define B_CANCEL	1
@@ -65,41 +61,37 @@ enum {
     DLG_PRE_EVENT               /* Send before calling get_event */
 } /* Dialog_Messages */;
 
-typedef unsigned long widget_data;
+
 typedef struct Dlg_head {
-    int *color;			/* color set */
-    int count;			/* number of widgets */
-    int ret_value;
 
-    /* mouse status */
-    int mouse_status;		/* For the autorepeat status of the mouse */
+    /* Set by the user */
+    int flags;			/* User flags */
+    char *help_ctx;		/* Name of the help entry */
+    int *color;			/* Color set */
+    char *title;		/* Title of the dialog */
 
-    void *previous_dialog;	/* Pointer to the previously running Dlg_head */
-    int  refresh_pushed;	/* Did the dialog actually run? */
-    
-    /* position */
+    /* Set and received by the user */
+    int ret_value;		/* Result of run_dlg() */
+
+    /* Geometry */
     int x, y;			/* Position relative to screen origin */
-    
-    /* Flags */
-    int running;
-    int direction;
-    int send_idle_msg;
+    int cols, lines;		/* Width and height of the window */
 
-    char *help_ctx;
+    /* Internal flags */
+    int running;
+    int send_idle_msg;
+    int mouse_status;		/* For the autorepeat status of the mouse */
+    int refresh_pushed;		/* Did the dialog actually run? */
 
     /* Internal variables */
+    int count;			/* number of widgets */
     struct Widget_Item *current, *first, *last;
     int (*callback) (struct Dlg_head *, int, int);
-    
     struct Widget_Item *initfocus;
+    void *previous_dialog;	/* Pointer to the previously running Dlg_head */
 
-    char *title;	/* Title of the dialog */
-
-    int cols;
-    int lines;
-    
-    int flags;		/* Different flags, specified in create_dlg() */
 } Dlg_head;
+
 
 /* Every Widget must have this as it's first element */
 typedef struct Widget {
@@ -141,6 +133,7 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 		      char *help_ctx, char *name, int flags);
 
 /* The flags: */
+#define DLG_BACKWARD    32	/* Tab order is reverse to the index order */
 #define DLG_WANT_TAB    16	/* Should the tab key be sent to the dialog? */
 #define DLG_HAS_MENUBAR  8	/* GrossHack: Send events on row 1 to a menubar? */
 #define DLG_COMPACT      4	/* Suppress spaces around the frame */
@@ -153,7 +146,7 @@ int  remove_widget        (Dlg_head *dest, void *Widget);
 int  destroy_widget       (Widget *w);
 
 /* Runs dialog d */       
-void run_dlg              (Dlg_head *d);
+int run_dlg               (Dlg_head *d);
 		          
 void dlg_run_done         (Dlg_head *h);
 void dlg_process_event    (Dlg_head *h, int key, Gpm_Event *event);
