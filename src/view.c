@@ -440,30 +440,36 @@ set_view_init_error (WView *view, char *msg)
 
 /* return values: NULL for success, else points to error message */
 static char *
-init_growing_view (WView *view, char *name, char *filename)
+init_growing_view (WView * view, char *name, char *filename)
 {
+    char *err_msg = NULL;
+
     view->growing_buffer = 1;
 
-    if (name){
+    if (name) {
 	view->reading_pipe = 1;
 	view->s.st_size = 0;
 
 	open_error_pipe ();
-	if ((view->stdfile = popen (name, "r")) == NULL){
-	    close_error_pipe (view->have_frame?-1:1, view->data);
-	    return set_view_init_error (view, _(" Cannot spawn child program "));
+	if ((view->stdfile = popen (name, "r")) == NULL) {
+	    /* Avoid two messages.  Message from stderr has priority.  */
+	    if (!close_error_pipe (view->have_frame ? -1 : 1, view->data))
+		err_msg = _(" Cannot spawn child program ");
+	    return set_view_init_error (view, err_msg);
 	}
 
 	/* First, check if filter produced any output */
 	get_byte (view, 0);
-	if (view->bytes_read <= 0){
+	if (view->bytes_read <= 0) {
 	    pclose (view->stdfile);
 	    view->stdfile = NULL;
-	    close_error_pipe (view->have_frame?-1:1, view->data);
-	    return set_view_init_error (view, _(" Empty output from child filter "));
+	    /* Avoid two messages.  Message from stderr has priority.  */
+	    if (!close_error_pipe (view->have_frame ? -1 : 1, view->data))
+		err_msg = (" Empty output from child filter ");
+	    return set_view_init_error (view, err_msg);
 	}
     } else {
-        view->stdfile = NULL;
+	view->stdfile = NULL;
 	if ((view->file = mc_open (filename, O_RDONLY)) == -1)
 	    return set_view_init_error (view, _(" Could not open file "));
     }
