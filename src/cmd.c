@@ -1289,13 +1289,13 @@ static void nice_cd (char *text, char *xtext, char *help, char *prefix, int to_h
     g_free (cd_path);
     g_free (machine);
 }
-
+#ifdef WITH_MCFS
 void netlink_cmd (void)
 {
     nice_cd (_(" Link to a remote machine "), _(machine_str),
 	     "[Network File System]", "/#mc:", 1);
 }
-
+#endif
 void ftplink_cmd (void)
 {
     nice_cd (_(" FTP to machine "), _(machine_str),

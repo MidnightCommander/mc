@@ -13,7 +13,9 @@ static const char * const features [] =  {
 #   ifdef HSC_PROXY
     N_(" (proxies: hsc proxy)"),
 #   endif
+#   ifdef WITH_MCFS
     N_(", mcfs"),
+#   endif
 #   ifdef USE_TERMNET
     N_(" (with termnet support)"),
 #   endif

@@ -1,3 +1,10 @@
+2002-04-19  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* main.c [!WITH_MCFS] (PanelMenu): Eliminate mcfs related entry.
+	(RightMenu): Likewise.
+	* textconf.c (features): Likewise.
+	* cmd.c (netlink_cmd) [!WITH_MCFS]: Eliminate.
+
 2002-04-03  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile: mc.hlp should be in MAINTAINERCLEANFILES, not in

@@ -1103,7 +1103,9 @@ static menu_entry PanelMenu [] = {
     { ' ', N_("&Filter..."),                'F', filter_cmd },
 #ifdef USE_NETCODE			    
     { ' ', "", ' ', 0 },		    
+#ifdef WITH_MCFS
     { ' ', N_("&Network link..."),          'N', netlink_cmd },
+#endif
     { ' ', N_("FT&P link..."),              'P', ftplink_cmd },
 #ifdef WITH_SMBFS
     { ' ', N_("SM&B link..."),              'B', smblink_cmd },
@@ -1127,7 +1129,9 @@ static menu_entry RightMenu [] = {
     { ' ', N_("&Filter..."),             'F', filter_cmd },
 #ifdef USE_NETCODE			    
     { ' ', "", ' ', 0 },		    
+#ifdef WITH_MCFS
     { ' ', N_("&Network link..."),       'N', netlink_cmd },
+#endif
     { ' ', N_("FT&P link..."),           'P', ftplink_cmd },
 #ifdef WITH_SMBFS
     { ' ', N_("SM&B link..."),           'B', smblink_cmd },
