@@ -1,3 +1,13 @@
+Tue Mar  2 22:28:39 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* main.c (panel_clean_dir): New function: reset all counters of a 
+	WPanel and clean directory list.
+
+	* various places: Use panel_clean_dir instead of clean_dir whenever
+	a WPanel is available. This solves the problem reported by Enrico
+	Scholz (screen refresh while panel reload with an old/now invalid
+	panel->count).
+
 Mon Mar  1 00:18:48 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* mad.c: Tempnam() returns malloced buffer, so, free() it, not g_free().

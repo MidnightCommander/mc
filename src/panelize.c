@@ -403,12 +403,8 @@ void do_external_panelize (char *command)
 	close_error_pipe (1, _("Cannot invoke command."));
 	return;
     }
-    clean_dir (list, cpanel->count);
-
-    /* Clear the counters */
-    cpanel->total = cpanel->dirs_marked = cpanel->marked = 0;
-    cpanel->top_file = 0;
-    cpanel->selected = 0;
+    /* Clear the counters and the directory list */
+    panel_clean_dir (cpanel);
 
     while (1) {
 	clearerr(external);

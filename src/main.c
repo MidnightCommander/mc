@@ -462,6 +462,23 @@ update_one_panel_widget (WPanel *panel, int force_update, char *current_file)
 #endif
 }
 
+void
+panel_clean_dir (WPanel *panel)
+{
+    int count = panel->count;
+
+    panel->count = 0;
+    panel->top_file = 0;
+    panel->selected = 0;
+    panel->marked = 0;
+    panel->dirs_marked = 0;
+    panel->total = 0;
+    panel->searching = 0;
+    panel->is_panelized = 0;
+
+    clean_dir (&panel->dir, count);
+}
+
 #ifndef PORT_HAS_UPDATE_PANELS
 void
 update_one_panel (int which, int force_update, char *current_file)
@@ -999,15 +1016,9 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
     subshell_chdir (panel->cwd);
 
     /* Reload current panel */
-    clean_dir (&panel->dir, panel->count);
+    panel_clean_dir (panel);
     panel->count = do_load_dir (&panel->dir, panel->sort_type,
 				 panel->reverse, panel->case_sensitive, panel->filter);
-    panel->top_file = 0;
-    panel->selected = 0;
-    panel->marked = 0;
-    panel->dirs_marked = 0;
-    panel->total = 0;
-    panel->searching = 0;
     try_to_select (panel, get_parent_dir_name (panel->cwd, olddir));
     load_hint ();
     panel_update_contents (panel);

@@ -166,7 +166,7 @@ void panel_set_size (WPanel *panel, int x1, int y1, int x2, int y2);
 void paint_paint (WPanel *panel);
 void panel_refresh (WPanel *panel);
 void Xtry_to_select (WPanel *panel, char *name);
-
+void panel_clean_dir (WPanel *panel);
 int is_a_panel (Widget *);
 
 extern int torben_fj_mode;

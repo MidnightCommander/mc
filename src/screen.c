@@ -913,7 +913,7 @@ panel_destroy (WPanel *p)
 
     panel_save_setup (p, name);
     x_panel_destroy (p);
-    clean_dir (&p->dir, p->count);
+    panel_clean_dir (p);
     
 /* save and clean history */
     if (p->dir_history){
@@ -1052,7 +1052,7 @@ panel_reload (WPanel *panel)
 	char *last_slash;
 
 	if (panel->cwd [0] == PATH_SEP && panel->cwd [1] == 0){
-	    clean_dir (&panel->dir, panel->count);
+	    panel_clean_dir (panel);
 	    panel->count = set_zero_dir (&panel->dir);
 	    return;
 	}

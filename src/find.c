@@ -1155,7 +1155,7 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
 	    }
 
 	    if (!next_free) /* first turn i.e clean old list */
-    		clean_dir (list, cpanel->count);
+    		panel_clean_dir (cpanel);
 	    list->list [next_free].fnamelen = strlen (name);
 	    list->list [next_free].fname = name;
 	    file_mark (cpanel, next_free, 0);
@@ -1170,11 +1170,12 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
 	if (next_free){
 	    cpanel->count = next_free;
 	    cpanel->is_panelized = 1;
+	  /* Done by panel_clean_dir a few lines above 
 	    cpanel->dirs_marked = 0;
 	    cpanel->marked = 0;
 	    cpanel->total = 0;
 	    cpanel->top_file = 0;
-	    cpanel->selected = 0;
+	    cpanel->selected = 0;*/
 
 	    if (start_dir [0] == PATH_SEP){
 		strcpy (cpanel->cwd, PATH_SEP_STR);
