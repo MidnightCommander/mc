@@ -4,8 +4,6 @@ Before 4.6.1
 Broken pipe warning when viewing large *.tar.gz files.  Warnings should
 be shown before the viewer is started if possible.
 
-Tilde not expanded in copy and move dialogs.
-
 
 Before 4.6.2
 ============
@@ -73,8 +71,6 @@ Report errors in fish operations and recover from them.
 
 Allow colors to be defined in the mc.lib file.  Make it possible to
 avoid using a super-long line to redefine all colors.
-
-Use separate colors for hotkeys in error dialogs.
 
 Allow verbatim search in "Find File".  Right now, the context is always
 interpreted as regular expression.
