@@ -1,3 +1,15 @@
+Sun Jan 17 15:49:39 1999  Paul Sheer <psheer@obsidian.co.za>
+
+	* direntry.c: vfs_s_find_entry_tree changed to follow
+	symlinks properly. Symlinks are now always followed
+	except for the last part of the filename.
+	vfs_s_resolve_symlink() now converts absolute paths to
+	../../file notation so that they can be easily resolved
+	within the tree.
+
+	* tar.c: . and .. are missing from directory entries,
+	making it impossible to resolve links - fixed.
+
 1999-01-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* vfs.c (mc_get_current_wd): Do not die.  Truncate the pathname.
