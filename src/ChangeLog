@@ -1,5 +1,9 @@
 2002-02-28  Andrew V. Samoilov  <kai@cmail.ru>
 
+	* mad.c: Make mem_areas dynamically growing.
+	(mad_init): Allocate memory for mem_areas.
+	(mad_alloc): Grow mem_areas if it is exhausted.
+
 	* filegui.c (file_mask_dialog): Enable 'follow Links'
 	and 'preserve Attributes' features in Move dialog.
 	(file_bps_show): Translate messages.

@@ -18,6 +18,8 @@
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
 #include <config.h>
+
+#ifdef HAVE_MAD
 #include "mad.h"
 
 #undef tempnam
@@ -47,12 +49,9 @@
 #endif
 #include <glib.h>
 
-/* Here to avoid non empty translation units */
-#ifdef HAVE_MAD
-
-/* Maximum number of memory area handles,
-   increase this if you run out of handles */
-#define MAD_MAX_AREAS 20000 /* vfs leaks Lots of memory*/
+/* Number of memory area handles currently allocated */
+#define MAD_AREAS_STEP 10000
+static int MAD_MAX_AREAS = MAD_AREAS_STEP;
 /* Maximum file name length */
 #define MAD_MAX_FILE 50
 /* Signature for detecting overwrites */
@@ -67,7 +66,7 @@ typedef struct {
     long *end_sig;
 } mad_mem_area;
 
-static mad_mem_area mem_areas [MAD_MAX_AREAS];
+static mad_mem_area *mem_areas;
 static FILE *memlog;
 
 #define MAD_CHECK_CALL_FACTOR 30        /* Perform actual test every N call. */
@@ -84,6 +83,8 @@ void
 mad_init (void)
 {
     memlog = stderr;
+/* Here to prevent crash if mad_free or mad_realloc called before mad_alloc */
+    mem_areas = g_new0 (mad_mem_area, MAD_MAX_AREAS);
 }
 
 void mad_set_debug (const char *file)
@@ -154,9 +155,13 @@ void *mad_alloc (int size, const char *file, int line)
         if (! mem_areas [i].in_use)
             break;
     }
-    if (i >= MAD_MAX_AREAS)
-	mad_fatal_error("Out of memory area handles. Increase the value of MAD_MAX_AREAS.", NULL, file, line);
-
+    if (i >= MAD_MAX_AREAS) {
+	MAD_MAX_AREAS += MAD_AREAS_STEP;
+	mem_areas = g_realloc (mem_areas, MAD_MAX_AREAS * sizeof (mad_mem_area));
+	if (mem_areas == NULL)
+	    mad_fatal_error ("Out of memory area handles.", NULL, file, line);
+	memset (mem_areas + i, 0, MAD_AREAS_STEP * sizeof (mad_mem_area));
+    }
     Alloc_idx_hint = i+1;
     if (i > Stats.last_max_i)
         Stats.last_max_i = i;
