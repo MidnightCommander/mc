@@ -1,3 +1,7 @@
+2001-07-27  Pavel Roskin  <proski@gnu.org>
+
+	* extraconf.h: Move WITH_BACKGROUND here.
+
 2001-07-24  Pavel Roskin  <proski@gnu.org>
 
 	* doc/mc.1.in: Quote all section headers.  Minor formatting fix.
