@@ -5,7 +5,7 @@
 	* view.c (display): Fixed bug that displayed an empty file in
 	hexview mode with growing buffers.
 
-2004-09-25  Pavel Shirshov  <me@pavelsh.pp.ru>
+2004-10-22  Pavel Shirshov  <me@pavelsh.pp.ru>
 
         * main.c (print_color_usage): Update list of keywords for global,
 	menu and help.
