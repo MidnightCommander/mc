@@ -1,3 +1,8 @@
+1998-12-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* main.c (try_to_select): We do not need to select the item
+	manually in this case, as the X code will do this for us.
+
 Fri Dec 11 00:05:50 1998 Paul Sheer <psheer@obsidian.co.za>
 
 	* syntax.c, slint.c, color.c, color.h: editor now has its

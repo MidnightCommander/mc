@@ -373,7 +373,9 @@ void
 try_to_select (WPanel *panel, char *name)
 {
     Xtry_to_select (panel, name);
+#ifndef HAVE_X
     select_item (panel);
+#endif
     display_mini_info (panel);
 }
 
@@ -992,7 +994,7 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
     panel->dirs_marked = 0;
     panel->total = 0;
     panel->searching = 0;
-    try_to_select (panel, get_parent_dir_name(panel->cwd, olddir));
+    try_to_select (panel, get_parent_dir_name (panel->cwd, olddir));
     load_hint ();
     panel_update_contents (panel);
     
