@@ -125,7 +125,8 @@ install: mc mcmfmt
 	$(mkinstalldirs) $(DESTDIR)$(mclibdir)
 	$(INSTALL_PROGRAM) mc     $(DESTDIR)$(bindir)/$(binprefix)mc
 	$(INSTALL_PROGRAM) mcmfmt $(DESTDIR)$(bindir)/$(binprefix)mcmfmt
-	sed 's%@prefix@%$(prefix)%' $(srcdir)/mc.hlp > $(DESTDIR)$(mclibdir)/mc.hlp
+	sed 's%@''prefix@%$(prefix)%' \
+	  $(srcdir)/mc.hlp > $(DESTDIR)$(mclibdir)/mc.hlp
 	$(MAKE) install_mcview
 	$(MAKE) install_@MCEDIT@
 	$(MAKE) install_@cons_saver@

@@ -1,5 +1,8 @@
 2001-07-06  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.in: Use additional quotes to preserve @prefix@ when
+	Makefile is generated.
+
 	* Makefile.in: Don't use SEDCMD2, use sed.
 
 	* cons.saver.c: New variable console_minor. Eliminate variables
