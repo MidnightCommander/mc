@@ -34,9 +34,11 @@ context default
     keyword whole Summary: green
     keyword whole Summary(\[abcdefghijklmnopqrstuvwxyz\]): green
     keyword whole Summary(\[abcdefghijklmnopqrstuvwxyz\]_\[ABCDEFGHIJKLMNOPQRSTUVWXYZ\]): green
+    keyword whole Summary(\[abcdefghijklmnopqrstuvwxyz\]_\[ABCDEFGHIJKLMNOPQRSTUVWXYZ\].\[ABCDEFGHIJKLMNOPQRSTUVWXYZ-1234567890\]): green
     keyword whole Vendor: green
     keyword whole Version: green
     keyword whole URL: green
+    keyword whole Url: green
 
     keyword whole linestart %build red
     keyword whole linestart %clean red
