@@ -143,7 +143,7 @@ sections to learn more about the command line.
 The Midnight Commander comes with mouse support.  It is activated
 whenever you are running on an
 .B xterm(1)
-terminal (it even works if you take a telnet or rlogin connection to
+terminal (it even works if you take a telnet, ssh or rlogin connection to
 another machine from the xterm) or if you are running on a Linux
 console and have the
 .B gpm
@@ -2122,11 +2122,11 @@ WANT_PARSE option.
 The following instructions are supported.
 .PP
 .nf
-clear_tags		Clear all tags.
-tag <filename>		Tag specified file.
-untag <filename>	Untag specified file.
-select <filename>	Move pointer to file.
-change_panel		Switch between panels.
+clear_tags              Clear all tags.
+tag <filename>          Tag specified file.
+untag <filename>        Untag specified file.
+select <filename>       Move pointer to file.
+change_panel            Switch between panels.
 cd <path>               Change directory.
 .fi
 .PP
@@ -2834,7 +2834,7 @@ before you start browsing files there.
 .SH "  SMB File System"
 The smbfs allows you to manipulate files on remote machines with SMB
 (or CIFS) protocol.  These include Windows for Workgroups, 
-Windows 9x, Windows NT, Windows 2000, OS/2 and Samba.
+Windows 9x, Windows NT, Windows 2000 and Samba.
 To actually use it, you may try 
 to use the panel command "SMB link..."
 (accessible from the menubar) or you may directly change your current
