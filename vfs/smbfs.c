@@ -1243,11 +1243,11 @@ get_stat_info (smbfs_connection *sc, char *path, struct stat *buf)
 		DEBUG(3, ("'%s' not found in previous_info '%s'\n", path, previous_info->dirname));
 	}
 	/* try to find this in the SHARE listing */
-	if (search_dir_entry(current_share_info->entries, mypath, buf) == 0)
+	if (current_share_info && search_dir_entry(current_share_info->entries, mypath, buf) == 0)
 		return 0;
 	DEBUG(3, ("'%s' not found in share_info '%s'\n", path, current_share_info->dirname));
 	/* try to find this in the SERVER listing */
-	if (search_dir_entry(current_server_info->entries, mypath, buf) == 0)
+	if (current_server_info && search_dir_entry(current_server_info->entries, mypath, buf) == 0)
 		return 0;
 	DEBUG(3, ("'%s' not found in server_info '%s'\n", path, current_server_info->dirname));
 	/* nothing found. get stat file info from server */

@@ -189,7 +189,7 @@ mcservx: mcserv.o tcputil.o mad.o
 $(SAMBAFILES):
 	cd samba && $(MAKE)
 
-libvfs-mc.a: $(VFSOBJS) $(SAMBAFILES)
+libvfs-mc.a: $(VFSOBJS) @SAMBAFILES@
 	$(RMF) $@
 	$(AR) cr $@ $(VFSOBJS) $(SAMBAFILES)
 	-$(RANLIB) $@
