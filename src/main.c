@@ -3065,8 +3065,13 @@ int main (int argc, char *argv [])
 					   "if you continue."),
 					   GNOME_MESSAGE_BOX_WARNING,
 					   _("Continue"), GNOME_STOCK_BUTTON_CANCEL, NULL);
-	    if (gnome_dialog_run (GNOME_DIALOG (warning_dlg)) != 0)
+	    if (gnome_dialog_run (GNOME_DIALOG (warning_dlg)) != 0) {
+		    GnomeClient *client = NULL;
+		    
+		    client = gnome_master_client ();
+		    gnome_client_set_restart_style (client, GNOME_RESTART_NEVER);
 		    exit (0);
+	    }
     }
 #endif
     if (show_change_notice){
