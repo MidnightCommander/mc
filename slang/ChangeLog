@@ -1,3 +1,12 @@
+2002-10-07  Pavel Roskin  <proski@gnu.org>
+
+	Update to S-Lang 1.4.5.  Move include files to "include"
+	directory to avoid the need to rename slang.h.
+	* Makefile.am: Adjust file list.  Add "-Iinclude" to the
+	compiler flags.
+	* include/jdmacros.h: Rewrite to use glib.
+	* slmisc.c: Trim to include only needed functions.
+
 2002-09-18  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* slerr.c (SLang_doerror): Use error parameter.  Eliminate

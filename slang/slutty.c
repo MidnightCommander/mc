@@ -1,29 +1,19 @@
 /* slutty.c --- Unix Low level terminal (tty) functions for S-Lang */
-/* Copyright (c) 1992, 1995 John E. Davis
- * All rights reserved.
- * 
+/* Copyright (c) 1992, 1999, 2001, 2002 John E. Davis
+ * This file is part of the S-Lang library.
+ *
  * You may distribute under the terms of either the GNU General Public
  * License or the Perl Artistic License.
  */
 
+#include "slinclud.h"
 
-#include "config.h"
-
-#include <stdio.h>
 #include <signal.h>
 /* sequent support thanks to Kenneth Lorber <keni@oasys.dt.navy.mil> */
 /* SYSV (SYSV ISC R3.2 v3.0) provided by iain.lea@erlm.siemens.de */
 
 #if defined (_AIX) && !defined (_ALL_SOURCE)
 # define _ALL_SOURCE	/* so NBBY is defined in <sys/types.h> */
-#endif
-
-#ifdef HAVE_STDLIB_H
-# include <stdlib.h>
-#endif
-
-#ifdef HAVE_UNISTD_H
-# include <unistd.h>
 #endif
 
 #include <sys/time.h>
@@ -38,7 +28,6 @@
 #  include <sys/tty.h>
 # endif
 #endif
-
 
 #ifdef __BEOS__
 /* Prototype for select */
@@ -66,12 +55,11 @@
 # include <fcntl.h>
 #endif
 
-
+#include "slang.h"
 #include "_slang.h"
 
 int SLang_TT_Read_FD = -1;
 int SLang_TT_Baud_Rate;
-
 
 #ifdef HAVE_TERMIOS_H
 # if !defined(HAVE_TCGETATTR) || !defined(HAVE_TCSETATTR)
@@ -103,39 +91,103 @@ typedef struct termios TTY_Termio_Type;
 static TTY_Termio_Type Old_TTY;
 
 #ifdef HAVE_TERMIOS_H
-static const struct 
+typedef struct
 {
-    speed_t key;
-    int value;
-} Baud_Rates[] = 
+   unsigned int key;
+   unsigned int value;
+} Baud_Rate_Type;
+
+static Baud_Rate_Type Baud_Rates [] =
 {
-   {B0, 0},
-   {B50, 50}, 
-   {B75, 75}, 
-   {B110, 110}, 
-   {B134, 134}, 
-   {B150, 150}, 
-   {B200, 200}, 
-   {B300, 300}, 
-   {B600, 600}, 
-   {B1200, 1200}, 
-   {B1800, 1800}, 
-   {B2400, 2400}, 
-   {B4800, 4800}, 
-   {B9600, 9600}, 
-   {B19200, 19200}, 
-   {B38400, 38400}
+#ifdef B0
+     {B0, 0},
+#endif
+#ifdef B50
+     {B50, 50},
+#endif
+#ifdef B75
+     {B75, 75},
+#endif
+#ifdef B110
+     {B110, 110},
+#endif
+#ifdef B134
+     {B134, 134},
+#endif
+#ifdef B150
+     {B150, 150},
+#endif
+#ifdef B200
+     {B200, 200},
+#endif
+#ifdef B300
+     {B300, 300},
+#endif
+#ifdef B600
+     {B600, 600},
+#endif
+#ifdef B1200
+     {B1200, 1200},
+#endif
+#ifdef B1800
+     {B1800, 1800},
+#endif
+#ifdef B2400
+     {B2400, 2400},
+#endif
+#ifdef B4800
+     {B4800, 4800},
+#endif
+#ifdef B9600
+     {B9600, 9600},
+#endif
+#ifdef B19200
+     {B19200, 19200},
+#endif
+#ifdef B38400
+     {B38400, 38400},
+#endif
 #ifdef B57600
-   , {B57600, 57600}
+     {B57600, 57600},
 #endif
 #ifdef B115200
-   , {B115200, 115200}
+     {B115200, 115200},
 #endif
 #ifdef B230400
-   , {B230400, 230400}
+     {B230400, 230400},
 #endif
+     {0, 0}
 };
+
+static void
+set_baud_rate (TTY_Termio_Type *tty)
+{
+#ifdef HAVE_CFGETOSPEED
+   unsigned int speed;
+   Baud_Rate_Type *b, *bmax;
+
+   if (SLang_TT_Baud_Rate)
+     return;			       /* already set */
+
+   speed = (unsigned int) cfgetospeed (tty);
+
+   b = Baud_Rates;
+   bmax = b + (sizeof (Baud_Rates)/sizeof(Baud_Rates[0]));
+   while (b < bmax)
+     {
+	if (b->key == speed)
+	  {
+	     SLang_TT_Baud_Rate = b->value;
+	     return;
+	  }
+	b++;
+     }
+#else
+   (void) tty;
 #endif
+}
+
+#endif				       /* HAVE_TERMIOS_H */
 
 #ifdef HAVE_TERMIOS_H
 # define GET_TERMIOS(fd, x) tcgetattr(fd, x)
@@ -170,58 +222,36 @@ static int TTY_Open = 0;
 # endif
 #endif
 
-static int
-speed_t2baud_rate (speed_t s)
-{
-    int i;
-    
-    for (i = 0; i < sizeof (Baud_Rates)/sizeof (Baud_Rates[0]); i++)
-	if (Baud_Rates[i].key == s)
-	    return (Baud_Rates[i].value);
-    return 0;
-}
-
 int SLang_init_tty (int abort_char, int no_flow_control, int opost)
 {
    TTY_Termio_Type newtty;
-   
+
    SLsig_block_signals ();
-   
-   if (TTY_Inited) 
+
+   if (TTY_Inited)
      {
 	SLsig_unblock_signals ();
 	return 0;
      }
-   
+
    TTY_Open = 0;
-   
+
    if ((SLang_TT_Read_FD == -1)
        || (1 != isatty (SLang_TT_Read_FD)))
      {
-#if 0
 #ifdef O_RDWR
-# ifndef __BEOS__  /* I have been told that BEOS will HANG if passed /dev/tty */
+# if !defined(__BEOS__) && !defined(__APPLE__)
+	/* I have been told that BEOS will HANG if passed /dev/tty */
 	if ((SLang_TT_Read_FD = open("/dev/tty", O_RDWR)) >= 0)
 	  {
 	     TTY_Open = 1;
 	  }
 # endif
 #endif
-#endif /* 0 */
 	if (TTY_Open == 0)
 	  {
-
-#if 0
-/* In the Midnight Commander we bind stderr sometimes to a pipe. If we
-   use stderr for terminal input and call SLang_getkey while stderr is
-   bound to a pipe MC will hang completly in SLsys_input_pending. 
-   NOTE: There's an independent fix for this problem in src/slint.c for
-   the case that the Midnight Commander is linked against a shared slang 
-   library compiled from different sources.
- */
 	     SLang_TT_Read_FD = fileno (stderr);
 	     if (1 != isatty (SLang_TT_Read_FD))
-#endif	     
 	       {
 		  SLang_TT_Read_FD = fileno (stdin);
 		  if (1 != isatty (SLang_TT_Read_FD))
@@ -232,10 +262,10 @@ int SLang_init_tty (int abort_char, int no_flow_control, int opost)
 	       }
 	  }
      }
-   
+
    SLang_Abort_Char = abort_char;
-   
-   /* Some systems may not permit signals to be blocked.  As a result, the 
+
+   /* Some systems may not permit signals to be blocked.  As a result, the
     * return code must be checked.
     */
    while (-1 == GET_TERMIOS(SLang_TT_Read_FD, &Old_TTY))
@@ -246,7 +276,7 @@ int SLang_init_tty (int abort_char, int no_flow_control, int opost)
 	     return -1;
 	  }
      }
-   
+
    while (-1 == GET_TERMIOS(SLang_TT_Read_FD, &newtty))
      {
 	if (errno != EINTR)
@@ -255,8 +285,10 @@ int SLang_init_tty (int abort_char, int no_flow_control, int opost)
 	     return -1;
 	  }
      }
-   
+
 #ifndef HAVE_TERMIOS_H
+   (void) opost;
+   (void) no_flow_control;
    newtty.s.sg_flags &= ~(ECHO);
    newtty.s.sg_flags &= ~(CRMOD);
    /*   if (Flow_Control == 0) newtty.s.sg_flags &= ~IXON; */
@@ -269,43 +301,38 @@ int SLang_init_tty (int abort_char, int no_flow_control, int opost)
    newtty.lt.t_lnextc = 255;
    newtty.s.sg_flags |= CBREAK;		/* do I want cbreak or raw????? */
 #else
-   
+
    /* get baud rate */
-   
-   /* [not only QNX related !?!]
-    * ECHO(0x08) is a c_lflag bit, it means here PARMRK(0x08) in c_iflag!!!
-    */
-   /*newtty.c_iflag &= ~(ECHO | INLCR | ICRNL);*/
-   newtty.c_iflag &= ~(INLCR | ICRNL);
+
+   newtty.c_iflag &= ~(ECHO | INLCR | ICRNL);
 #ifdef ISTRIP
    /* newtty.c_iflag &= ~ISTRIP; */
 #endif
    if (opost == 0) newtty.c_oflag &= ~OPOST;
 
-   if (SLang_TT_Baud_Rate == 0)
-     {
-/* Note:  if this generates an compiler error, simply remove 
-   the statement */
-#ifdef HAVE_CFGETOSPEED
-	SLang_TT_Baud_Rate = cfgetospeed (&newtty);
-#endif	
-	SLang_TT_Baud_Rate = speed_t2baud_rate (SLang_TT_Baud_Rate);
-     }
+   set_baud_rate (&newtty);
+
    if (no_flow_control) newtty.c_iflag &= ~IXON; else newtty.c_iflag |= IXON;
 
+   newtty.c_cc[VEOF] = 1;
    newtty.c_cc[VMIN] = 1;
    newtty.c_cc[VTIME] = 0;
-   newtty.c_cc[VEOF] = 1;
    newtty.c_lflag = ISIG | NOFLSH;
    if (abort_char == -1) SLang_Abort_Char = newtty.c_cc[VINTR];
    newtty.c_cc[VINTR] = SLang_Abort_Char;   /* ^G */
    newtty.c_cc[VQUIT] = NULL_VALUE;
    newtty.c_cc[VSUSP] = NULL_VALUE;   /* to ignore ^Z */
+#ifdef VDSUSP
+   newtty.c_cc[VDSUSP] = NULL_VALUE;   /* to ignore ^Y */
+#endif
+#ifdef VLNEXT
+   newtty.c_cc[VLNEXT] = NULL_VALUE;   /* to ignore ^V ? */
+#endif
 #ifdef VSWTCH
    newtty.c_cc[VSWTCH] = NULL_VALUE;   /* to ignore who knows what */
 #endif
 #endif /* NOT HAVE_TERMIOS_H */
-   
+
    while (-1 == SET_TERMIOS(SLang_TT_Read_FD, &newtty))
      {
 	if (errno != EINTR)
@@ -314,7 +341,7 @@ int SLang_init_tty (int abort_char, int no_flow_control, int opost)
 	     return -1;
 	  }
      }
-   
+
    TTY_Inited = 1;
    SLsig_unblock_signals ();
    return 0;
@@ -323,27 +350,48 @@ int SLang_init_tty (int abort_char, int no_flow_control, int opost)
 void SLtty_set_suspend_state (int mode)
 {
    TTY_Termio_Type newtty;
-   
+
    SLsig_block_signals ();
-   
+
    if (TTY_Inited == 0)
      {
 	SLsig_unblock_signals ();
 	return;
      }
-      
+
    while ((-1 == GET_TERMIOS (SLang_TT_Read_FD, &newtty))
 	  && (errno == EINTR))
      ;
-   
+
 #ifndef HAVE_TERMIOS_H
-   if (mode == 0) newtty.lt.t_suspc = 255;
-   else newtty.lt.t_suspc = Old_TTY.lt.t_suspc;
+   /* I do not know if all systems define the t_dsuspc field */
+   if (mode == 0)
+     {
+	newtty.lt.t_suspc = 255;
+	newtty.lt.t_dsuspc = 255;
+     }
+   else
+     {
+	newtty.lt.t_suspc = Old_TTY.lt.t_suspc;
+	newtty.lt.t_dsuspc = Old_TTY.lt.t_dsuspc;
+     }
 #else
-   if (mode == 0) newtty.c_cc[VSUSP] = NULL_VALUE;
-   else newtty.c_cc[VSUSP] = Old_TTY.c_cc[VSUSP];
+   if (mode == 0)
+     {
+	newtty.c_cc[VSUSP] = NULL_VALUE;
+#ifdef VDSUSP
+	newtty.c_cc[VDSUSP] = NULL_VALUE;
 #endif
-   
+     }
+   else
+     {
+	newtty.c_cc[VSUSP] = Old_TTY.c_cc[VSUSP];
+#ifdef VDSUSP
+	newtty.c_cc[VDSUSP] = Old_TTY.c_cc[VDSUSP];
+#endif
+     }
+#endif
+
    while ((-1 == SET_TERMIOS (SLang_TT_Read_FD, &newtty))
 	  && (errno == EINTR))
      ;
@@ -354,27 +402,27 @@ void SLtty_set_suspend_state (int mode)
 void SLang_reset_tty (void)
 {
    SLsig_block_signals ();
-   
+
    if (TTY_Inited == 0)
      {
 	SLsig_unblock_signals ();
 	return;
      }
-   
+
    while ((-1 == SET_TERMIOS(SLang_TT_Read_FD, &Old_TTY))
 	  && (errno == EINTR))
      ;
-   
+
    if (TTY_Open)
      {
 	while ((-1 == close (SLang_TT_Read_FD))
 	       && (errno == EINTR))
 	  ;
-	  
+
 	TTY_Open = 0;
 	SLang_TT_Read_FD = -1;
      }
-   
+
    TTY_Inited = 0;
    SLsig_unblock_signals ();
 }
@@ -382,21 +430,27 @@ void SLang_reset_tty (void)
 static void default_sigint (int sig)
 {
    sig = errno;			       /* use parameter */
-   
+
    SLKeyBoard_Quit = 1;
-   if (SLang_Ignore_User_Abort == 0) SLang_Error = USER_BREAK;
+   if (SLang_Ignore_User_Abort == 0) SLang_Error = SL_USER_BREAK;
    SLsignal_intr (SIGINT, default_sigint);
    errno = sig;
 }
 
-void SLang_set_abort_signal (void (*hand)(int))
+int SLang_set_abort_signal (void (*hand)(int))
 {
    int save_errno = errno;
-   
+   SLSig_Fun_Type *f;
+
    if (hand == NULL) hand = default_sigint;
-   SLsignal_intr (SIGINT, hand);
-   
+   f = SLsignal_intr (SIGINT, hand);
+
    errno = save_errno;
+
+   if (f == (SLSig_Fun_Type *) SIG_ERR)
+     return -1;
+
+   return 0;
 }
 
 #ifndef FD_SET
@@ -408,16 +462,20 @@ typedef int fd_set;
 
 static fd_set Read_FD_Set;
 
-
 /* HACK: If > 0, use 1/10 seconds.  If < 0, use 1/1000 seconds */
 
-int SLsys_input_pending(int tsecs)
+int _SLsys_input_pending(int tsecs)
 {
    struct timeval wait;
    long usecs, secs;
 
-   if (TTY_Inited == 0) return -1;
-   
+   if ((TTY_Inited == 0)
+       || (SLang_TT_Read_FD < 0))
+     {
+	errno = EBADF;
+	return -1;
+     }
+
    if (tsecs >= 0)
      {
 	secs = tsecs / 10;
@@ -429,16 +487,15 @@ int SLsys_input_pending(int tsecs)
 	secs = tsecs / 1000;
 	usecs = (tsecs % 1000) * 1000;
      }
-   
+
    wait.tv_sec = secs;
    wait.tv_usec = usecs;
 
    FD_ZERO(&Read_FD_Set);
    FD_SET(SLang_TT_Read_FD, &Read_FD_Set);
-   
+
    return select(SLang_TT_Read_FD + 1, &Read_FD_Set, NULL, NULL, &wait);
 }
-
 
 int (*SLang_getkey_intr_hook) (void);
 
@@ -447,70 +504,80 @@ static int handle_interrupt (void)
    if (SLang_getkey_intr_hook != NULL)
      {
 	int save_tty_fd = SLang_TT_Read_FD;
-   
+
 	if (-1 == (*SLang_getkey_intr_hook) ())
 	  return -1;
-	
+
 	if (save_tty_fd != SLang_TT_Read_FD)
 	  return -1;
      }
-   
+
    return 0;
 }
 
-unsigned int SLsys_getkey (void)
+unsigned int _SLsys_getkey (void)
 {
    unsigned char c;
-   unsigned int i;
-   
+
    if (TTY_Inited == 0)
      {
 	int ic = fgetc (stdin);
 	if (ic == EOF) return SLANG_GETKEY_ERROR;
 	return (unsigned int) ic;
      }
-   
+
    while (1)
      {
 	int ret;
-	
-	if (SLKeyBoard_Quit) 
+
+	if (SLKeyBoard_Quit)
 	  return SLang_Abort_Char;
-	
-	if (0 == (ret = SLsys_input_pending (100)))
+
+	if (0 == (ret = _SLsys_input_pending (100)))
 	  continue;
-	
+
 	if (ret != -1)
 	  break;
-	
-	if (SLKeyBoard_Quit) 
+
+	if (SLKeyBoard_Quit)
 	  return SLang_Abort_Char;
-	
+
 	if (errno == EINTR)
 	  {
 	     if (-1 == handle_interrupt ())
 	       return SLANG_GETKEY_ERROR;
-	     
+
 	     continue;
 	  }
-	
+
 	break;			       /* let read handle it */
      }
-   
-   while (-1 == (i = read(SLang_TT_Read_FD, (char *) &c, 1)))
+
+   while (1)
      {
-	if (errno == EINTR) 
+	int status = read(SLang_TT_Read_FD, (char *) &c, 1);
+
+	if (status > 0)
+	  break;
+
+	if (status == 0)
+	  {
+	     /* We are at the end of a file.  Let application handle it. */
+	     return SLANG_GETKEY_ERROR;
+	  }
+
+	if (errno == EINTR)
 	  {
 	     if (-1 == handle_interrupt ())
 	       return SLANG_GETKEY_ERROR;
-	     
-	     if (SLKeyBoard_Quit) 
+
+	     if (SLKeyBoard_Quit)
 	       return SLang_Abort_Char;
-	     
+
 	     continue;
 	  }
 #ifdef EAGAIN
-	if (errno == EAGAIN) 
+	if (errno == EAGAIN)
 	  {
 	     sleep (1);
 	     continue;
@@ -526,15 +593,12 @@ unsigned int SLsys_getkey (void)
 #ifdef EIO
 	if (errno == EIO)
 	  {
-	     SLang_exit_error ("SLsys_getkey: EIO error.");
+	     SLang_exit_error ("_SLsys_getkey: EIO error.");
 	  }
 #endif
 	return SLANG_GETKEY_ERROR;
      }
 
-   if (i == 0)
-	return SLANG_GETKEY_ERROR;
-   
    return((unsigned int) c);
 }
 
