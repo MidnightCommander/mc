@@ -94,7 +94,7 @@ noinst_PROGRAMS = mcserv
 endif
 endif
 
-mcserv_SOURCES = mcserv.c tcputil.c
+mcserv_SOURCES = mcserv.c tcputil.c $(top_srcdir)/src/mad.c
 
 mcserv_LDFLAGS = $(SHADOWLIB) $(TERMNET) $(PAMLIBS) $(LCRYPT)
 

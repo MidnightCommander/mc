@@ -1,3 +1,7 @@
+2002-05-13  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* Makefile.am (mcserv_SOURCES): Add $(top_srcdir)/src/mad.c.
+
 2002-05-11  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* samba/configure.in: Add AC_SYS_LARGEFILE.
