@@ -8,9 +8,8 @@
 
 static GtkWidget *op_win = NULL;
 static GtkWidget *fmd_win = NULL;
-static GtkObject *count_prog = NULL;
+static GtkObject *count_label = NULL;
 static GtkObject *byte_prog = NULL;
-static GtkObject *file_prog = NULL;
 static GtkWidget *file_label = NULL;
 static GtkWidget *op_source_label = NULL;
 static GtkWidget *op_target_label = NULL;
@@ -74,8 +73,6 @@ file_progress_show_source (char *path)
                 path_copy = trim_file_name (path, GDIALOG_PROGRESS_WIDTH - from_width, path_width);
                 
                 gtk_label_set (GTK_LABEL (op_source_label), path_copy);
-                g_print ("%d\n", gdk_string_width (op_target_label->style->font,
-                                                   path_copy));
                 g_free (path_copy);
         }
 
@@ -101,8 +98,6 @@ file_progress_show_target (char *path)
         else {
                 path_copy = trim_file_name (path, GDIALOG_PROGRESS_WIDTH - to_width, path_width);
                 gtk_label_set (GTK_LABEL (op_target_label), path_copy);
-                g_print ("%d\n", gdk_string_width (op_target_label->style->font,
-                                                   path_copy));
                 g_free (path_copy);
         }
 
@@ -119,11 +114,10 @@ file_progress_show_deleting (char *path)
 FileProgressStatus
 file_progress_show (long done, long total)
 {
-        if (!total)
-                gtk_progress_bar_update (GTK_PROGRESS_BAR (file_prog), 0.0);
-        else
-                gtk_progress_bar_update (GTK_PROGRESS_BAR (file_prog), (gfloat) done/(gfloat) total);
-        
+        static gchar count[10];
+        snprintf (count, 9, "%d%%", (gint)(100.0 *(gfloat)done/(gfloat)total));
+        g_print ("%d\t%d\n",done, total);
+        gtk_label_set (GTK_LABEL (file_label), count);
         while (gtk_events_pending ())
                 gtk_main_iteration ();
 	return FILE_CONT;
@@ -132,11 +126,9 @@ file_progress_show (long done, long total)
 FileProgressStatus
 file_progress_show_count (long done, long total)
 {
-        g_print ("in file_progress_show_count\n");
-        if (!total)
-                gtk_progress_bar_update (GTK_PROGRESS_BAR (count_prog), 0.0);
-        else
-                gtk_progress_bar_update (GTK_PROGRESS_BAR (count_prog),(gfloat) done/(gfloat) total);
+        static gchar count[14]; /* that's a lot of files... */
+        snprintf (count, 13, "%d/%d", done, total);
+        gtk_label_set (GTK_LABEL (count_label), count);
         while (gtk_events_pending ())
                 gtk_main_iteration ();
 	return FILE_CONT;
@@ -145,7 +137,6 @@ file_progress_show_count (long done, long total)
 FileProgressStatus
 file_progress_show_bytes (long done, long total)
 {
-        g_print ("in file_progress_show_bytes\n");
         if (!total)
                 gtk_progress_bar_update (GTK_PROGRESS_BAR (byte_prog), 0.0);
         else
@@ -356,7 +347,6 @@ void
 create_op_win (FileOperation op, int with_eta)
 {
         GtkWidget *alignment;
-        GtkWidget *label;
         GtkWidget *hbox;
         GtkWidget *prog;
         g_print ("in create_op_win\n");
@@ -389,10 +379,25 @@ create_op_win (FileOperation op, int with_eta)
 
                 alignment = gtk_alignment_new (0.0, 0.5, 0, 0);
                 hbox = gtk_hbox_new (FALSE, 0);
+                gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (N_("File ")), FALSE, FALSE, 0);
+                count_label = gtk_label_new ("");
+                gtk_box_pack_start (GTK_BOX (hbox), count_label, FALSE, FALSE, 0);
+
+                gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (N_(" is ")), FALSE, FALSE, 0);
+                file_label = gtk_label_new ("");
+                gtk_box_pack_start (GTK_BOX (hbox), file_label, FALSE, FALSE, 0);
+                gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (N_(" Done.")), FALSE, FALSE, 0);
+                
                 gtk_container_add (GTK_CONTAINER (alignment), hbox);
-                file_prog = gtk_progress_bar_new ();
-                gtk_box_pack_start (GTK_BOX (hbox), file_prog, FALSE, FALSE, 0);
-                gtk_widget_set_usize (file_prog, GDIALOG_PROGRESS_WIDTH, -1);
+                
+
+                gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (op_win)->vbox),
+                                    alignment, FALSE, FALSE, 0);
+
+                byte_prog = gtk_progress_bar_new ();
+                gtk_widget_set_usize (byte_prog, GDIALOG_PROGRESS_WIDTH, -1);
+                gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (op_win)->vbox),
+                                    byte_prog, FALSE, FALSE, 0);
                 
                 gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (op_win)->vbox),
                                     alignment, FALSE, FALSE, 0);
@@ -412,6 +417,7 @@ create_op_win (FileOperation op, int with_eta)
 void
 destroy_op_win (void)
 {
+        g_print ("\n");
         if (op_win)
                  gtk_widget_destroy (op_win);
 }
