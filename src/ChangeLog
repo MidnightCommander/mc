@@ -1,3 +1,8 @@
+2004-10-23  Roland Illig  <roland.illig@gmx.de>
+
+	* regex.c (regerror): Never use the __memcpy function, as it
+	breaks the build on Cygwin.
+
 2004-10-22  Roland Illig  <roland.illig@gmx.de>
 
 	* regex.c: Fix the C preprocessor feature tests. They produced
