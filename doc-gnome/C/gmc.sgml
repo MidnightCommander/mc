@@ -36,6 +36,13 @@
 	  <country>USA</country>
 	</address>
       </para>
+      <para>
+	Many of the names used by companies to distinguish their products and
+	services are claimed as trademarks. Where those names appear in any
+	GNOME documentation, and those trademarks are made aware to the members
+	of the GNOME Documentation Project, the names have been printed in caps
+	or initial caps.
+      </para>
     </legalnotice>
     <title>Gnome Midnight Commander Documentation</title>
   </artheader>
