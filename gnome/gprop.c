@@ -30,12 +30,12 @@ free_stuff (GtkWidget *widget, gpointer data)
 		g_free (data);
 }
 
-/***** General *****/
+/***** Filename *****/
 
-GpropGeneral *
-gprop_general_new (char *complete_filename, char *filename)
+GpropFilename *
+gprop_filename_new (char *complete_filename, char *filename)
 {
-	GpropGeneral *gpg;
+	GpropFilename *gp;
 	GtkWidget *frame;
 	GtkWidget *vbox;
 	GtkWidget *hbox;
@@ -44,15 +44,15 @@ gprop_general_new (char *complete_filename, char *filename)
 	g_return_val_if_fail (complete_filename != NULL, NULL);
 	g_return_val_if_fail (filename != NULL, NULL);
 
-	gpg = g_new (GpropGeneral, 1);
+	gp = g_new (GpropFilename, 1);
 
-	gpg->top = gtk_vbox_new (FALSE, 6);
-	gtk_signal_connect (GTK_OBJECT (gpg->top), "destroy",
+	gp->top = gtk_vbox_new (FALSE, 6);
+	gtk_signal_connect (GTK_OBJECT (gp->top), "destroy",
 			    (GtkSignalFunc) free_stuff,
-			    gpg);
+			    gp);
 
-	frame = gtk_frame_new ("Name");
-	gtk_box_pack_start (GTK_BOX (gpg->top), frame, FALSE, FALSE, 0);
+	frame = gtk_frame_new ("Filename");
+	gtk_box_pack_start (GTK_BOX (gp->top), frame, FALSE, FALSE, 0);
 	gtk_widget_show (frame);
 
 	vbox = gtk_vbox_new (FALSE, 6);
@@ -68,25 +68,25 @@ gprop_general_new (char *complete_filename, char *filename)
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 	gtk_widget_show (hbox);
 
-	gtk_box_pack_start (GTK_BOX (hbox), label_new ("Name", 0.0, 0.5), FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), label_new ("Filename", 0.0, 0.5), FALSE, FALSE, 0);
 
-	gpg->filename = gnome_entry_new ("gprop_general_filename");
-	gtk_entry_set_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (gpg->filename))), filename);
-	gtk_box_pack_start (GTK_BOX (hbox), gpg->filename, TRUE, TRUE, 0);
-	gtk_widget_show (gpg->filename);
+	gp->filename = gnome_entry_new ("gprop_filename_filename");
+	gtk_entry_set_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (gp->filename))), filename);
+	gtk_box_pack_start (GTK_BOX (hbox), gp->filename, TRUE, TRUE, 0);
+	gtk_widget_show (gp->filename);
 
-	return gpg;
+	return gp;
 }
 
 void
-gprop_general_get_data (GpropGeneral *gpg, char **filename)
+gprop_filename_get_data (GpropFilename *gp, char **filename)
 {
 	GtkWidget *entry;
 
-	g_return_if_fail (gpg != NULL);
+	g_return_if_fail (gp != NULL);
 
 	if (filename) {
-		entry = gnome_entry_gtk_entry (GNOME_ENTRY (gpg->filename));
+		entry = gnome_entry_gtk_entry (GNOME_ENTRY (gp->filename));
 		*filename = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
 	}
 }
@@ -94,7 +94,7 @@ gprop_general_get_data (GpropGeneral *gpg, char **filename)
 /***** Permissions *****/
 
 static umode_t
-perm_get_umode (GpropPerm *gpp)
+perm_get_umode (GpropPerm *gp)
 {
 	umode_t umode;
 
@@ -102,21 +102,21 @@ perm_get_umode (GpropPerm *gpp)
 
 	umode = 0;
 
-	SETBIT (gpp->suid, S_ISUID);
-	SETBIT (gpp->sgid, S_ISGID);
-	SETBIT (gpp->svtx, S_ISVTX);
+	SETBIT (gp->suid, S_ISUID);
+	SETBIT (gp->sgid, S_ISGID);
+	SETBIT (gp->svtx, S_ISVTX);
 	
-	SETBIT (gpp->rusr, S_IRUSR);
-	SETBIT (gpp->wusr, S_IWUSR);
-	SETBIT (gpp->xusr, S_IXUSR);
+	SETBIT (gp->rusr, S_IRUSR);
+	SETBIT (gp->wusr, S_IWUSR);
+	SETBIT (gp->xusr, S_IXUSR);
 	
-	SETBIT (gpp->rgrp, S_IRGRP);
-	SETBIT (gpp->wgrp, S_IWGRP);
-	SETBIT (gpp->xgrp, S_IXGRP);
+	SETBIT (gp->rgrp, S_IRGRP);
+	SETBIT (gp->wgrp, S_IWGRP);
+	SETBIT (gp->xgrp, S_IXGRP);
 	
-	SETBIT (gpp->roth, S_IROTH);
-	SETBIT (gpp->woth, S_IWOTH);
-	SETBIT (gpp->xoth, S_IXOTH);
+	SETBIT (gp->roth, S_IROTH);
+	SETBIT (gp->woth, S_IWOTH);
+	SETBIT (gp->xoth, S_IXOTH);
 
 	return umode;
 	
@@ -127,12 +127,12 @@ static void
 perm_set_mode_label (GtkWidget *widget, gpointer data)
 {
 	umode_t umode;
-	GpropPerm *gpp;
+	GpropPerm *gp;
 	char s_mode[5];
 	
-	gpp = data;
+	gp = data;
 
-	umode = perm_get_umode (gpp);
+	umode = perm_get_umode (gp);
 
 	s_mode[0] = '0' + ((umode & (S_ISUID | S_ISGID | S_ISVTX)) >> 9);
 	s_mode[1] = '0' + ((umode & (S_IRUSR | S_IWUSR | S_IXUSR)) >> 6);
@@ -140,11 +140,11 @@ perm_set_mode_label (GtkWidget *widget, gpointer data)
 	s_mode[3] = '0' + ((umode & (S_IROTH | S_IWOTH | S_IXOTH)) >> 0);
 	s_mode[4] = 0;
 
-	gtk_label_set (GTK_LABEL (gpp->mode_label), s_mode);
+	gtk_label_set (GTK_LABEL (gp->mode_label), s_mode);
 }
 
 static GtkWidget *
-perm_check_new (char *text, int state, GpropPerm *gpp)
+perm_check_new (char *text, int state, GpropPerm *gp)
 {
 	GtkWidget *check;
 
@@ -158,7 +158,7 @@ perm_check_new (char *text, int state, GpropPerm *gpp)
 
 	gtk_signal_connect (GTK_OBJECT (check), "toggled",
 			    (GtkSignalFunc) perm_set_mode_label,
-			    gpp);
+			    gp);
 
 	gtk_widget_show (check);
 	return check;
@@ -172,9 +172,9 @@ gtk_table_attach (GTK_TABLE (table), widget,		\
 		  0, 0);
 
 #define PERMSET(name, r, w, x, rmask, wmask, xmask, y) do {		\
-	r = perm_check_new (NULL, umode & rmask, gpp);			\
-	w = perm_check_new (NULL, umode & wmask, gpp);			\
-	x = perm_check_new (NULL, umode & xmask, gpp);			\
+	r = perm_check_new (NULL, umode & rmask, gp);			\
+	w = perm_check_new (NULL, umode & wmask, gp);			\
+	x = perm_check_new (NULL, umode & xmask, gp);			\
 									\
 	ATTACH (table, label_new (name, 0.0, 0.5), 0, 1, y, y + 1);	\
 	ATTACH (table, r, 1, 2, y, y + 1);				\
@@ -183,7 +183,7 @@ gtk_table_attach (GTK_TABLE (table), widget,		\
 } while (0);
 	
 static GtkWidget *
-perm_mode_new (GpropPerm *gpp, umode_t umode)
+perm_mode_new (GpropPerm *gp, umode_t umode)
 {
 	GtkWidget *frame;
 	GtkWidget *vbox;
@@ -203,8 +203,8 @@ perm_mode_new (GpropPerm *gpp, umode_t umode)
 
 	gtk_box_pack_start (GTK_BOX (hbox), label_new ("Current mode: ", 0.0, 0.5), FALSE, FALSE, 0);
 
-	gpp->mode_label = label_new ("0000", 0.0, 0.5);
-	gtk_box_pack_start (GTK_BOX (hbox), gpp->mode_label, FALSE, FALSE, 0);
+	gp->mode_label = label_new ("0000", 0.0, 0.5);
+	gtk_box_pack_start (GTK_BOX (hbox), gp->mode_label, FALSE, FALSE, 0);
 
 	table = gtk_table_new (4, 5, FALSE);
 	gtk_table_set_col_spacings (GTK_TABLE (table), 4);
@@ -221,21 +221,21 @@ perm_mode_new (GpropPerm *gpp, umode_t umode)
 
 	/* Permissions */
 
-	PERMSET ("User",  gpp->rusr, gpp->wusr, gpp->xusr, S_IRUSR, S_IWUSR, S_IXUSR, 1);
-	PERMSET ("Group", gpp->rgrp, gpp->wgrp, gpp->xgrp, S_IRGRP, S_IWGRP, S_IXGRP, 2);
-	PERMSET ("Other", gpp->roth, gpp->woth, gpp->xoth, S_IROTH, S_IWOTH, S_IXOTH, 3);
+	PERMSET ("User",  gp->rusr, gp->wusr, gp->xusr, S_IRUSR, S_IWUSR, S_IXUSR, 1);
+	PERMSET ("Group", gp->rgrp, gp->wgrp, gp->xgrp, S_IRGRP, S_IWGRP, S_IXGRP, 2);
+	PERMSET ("Other", gp->roth, gp->woth, gp->xoth, S_IROTH, S_IWOTH, S_IXOTH, 3);
 
 	/* Special */
 
-	gpp->suid = perm_check_new ("Set UID", umode & S_ISUID, gpp);
-	gpp->sgid = perm_check_new ("Set GID", umode & S_ISGID, gpp);
-	gpp->svtx = perm_check_new ("Sticky",  umode & S_ISVTX, gpp);
+	gp->suid = perm_check_new ("Set UID", umode & S_ISUID, gp);
+	gp->sgid = perm_check_new ("Set GID", umode & S_ISGID, gp);
+	gp->svtx = perm_check_new ("Sticky",  umode & S_ISVTX, gp);
 	
-	ATTACH (table, gpp->suid, 4, 5, 1, 2);
-	ATTACH (table, gpp->sgid, 4, 5, 2, 3);
-	ATTACH (table, gpp->svtx, 4, 5, 3, 4);
+	ATTACH (table, gp->suid, 4, 5, 1, 2);
+	ATTACH (table, gp->sgid, 4, 5, 2, 3);
+	ATTACH (table, gp->svtx, 4, 5, 3, 4);
 
-	perm_set_mode_label (NULL, gpp);
+	perm_set_mode_label (NULL, gp);
 	
 	return frame;
 }
@@ -316,7 +316,7 @@ perm_group_new (char *group)
 }
 
 static GtkWidget *
-perm_ownership_new (GpropPerm *gpp, char *owner, char *group)
+perm_ownership_new (GpropPerm *gp, char *owner, char *group)
 {
 	GtkWidget *frame;
 	GtkWidget *table;
@@ -337,13 +337,13 @@ perm_ownership_new (GpropPerm *gpp, char *owner, char *group)
 			  GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK,
 			  0, 0);
 
-	gpp->owner = perm_owner_new (owner);
-	gtk_table_attach (GTK_TABLE (table), gpp->owner,
+	gp->owner = perm_owner_new (owner);
+	gtk_table_attach (GTK_TABLE (table), gp->owner,
 			  1, 2, 0, 1,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  GTK_FILL | GTK_SHRINK,
 			  0, 0);
-	gtk_widget_show (gpp->owner);
+	gtk_widget_show (gp->owner);
 
 	/* Group */
 
@@ -352,13 +352,13 @@ perm_ownership_new (GpropPerm *gpp, char *owner, char *group)
 			  GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK,
 			  0, 0);
 
-	gpp->group = perm_group_new (group);
-	gtk_table_attach (GTK_TABLE (table), gpp->group,
+	gp->group = perm_group_new (group);
+	gtk_table_attach (GTK_TABLE (table), gp->group,
 			  1, 2, 1, 2,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  GTK_FILL | GTK_SHRINK,
 			  0, 0);
-	gtk_widget_show (gpp->group);
+	gtk_widget_show (gp->group);
 
 	return frame;
 }
@@ -366,89 +366,125 @@ perm_ownership_new (GpropPerm *gpp, char *owner, char *group)
 GpropPerm *
 gprop_perm_new (umode_t umode, char *owner, char *group)
 {
-	GpropPerm *gpp;
+	GpropPerm *gp;
 	GtkWidget *w;
 
 	g_return_val_if_fail (owner != NULL, NULL);
 	g_return_val_if_fail (group != NULL, NULL);
 
-	gpp = g_new (GpropPerm, 1);
+	gp = g_new (GpropPerm, 1);
 
-	gpp->top = gtk_vbox_new (FALSE, 6);
-	gtk_signal_connect (GTK_OBJECT (gpp->top), "destroy",
+	gp->top = gtk_vbox_new (FALSE, 6);
+	gtk_signal_connect (GTK_OBJECT (gp->top), "destroy",
 			    (GtkSignalFunc) free_stuff,
-			    gpp);
+			    gp);
 
-	w = perm_mode_new (gpp, umode);
-	gtk_box_pack_start (GTK_BOX (gpp->top), w, FALSE, FALSE, 0);
+	w = perm_mode_new (gp, umode);
+	gtk_box_pack_start (GTK_BOX (gp->top), w, FALSE, FALSE, 0);
 	gtk_widget_show (w);
 
-	w = perm_ownership_new (gpp, owner, group);
-	gtk_box_pack_start (GTK_BOX (gpp->top), w, FALSE, FALSE, 0);
+	w = perm_ownership_new (gp, owner, group);
+	gtk_box_pack_start (GTK_BOX (gp->top), w, FALSE, FALSE, 0);
 	gtk_widget_show (w);
 
-	return gpp;
+	return gp;
 }
 
 void
-gprop_perm_get_data (GpropPerm *gpp, umode_t *umode, char **owner, char **group)
+gprop_perm_get_data (GpropPerm *gp, umode_t *umode, char **owner, char **group)
 {
-	g_return_if_fail (gpp != NULL);
+	g_return_if_fail (gp != NULL);
 
 	if (umode)
-		*umode = perm_get_umode (gpp);
+		*umode = perm_get_umode (gp);
 
 	if (owner)
-		*owner = g_strdup (gtk_entry_get_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (gpp->owner)))));
+		*owner = g_strdup (gtk_entry_get_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (gp->owner)))));
 
 	if (group)
-		*group = g_strdup (gtk_entry_get_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (gpp->group)))));
+		*group = g_strdup (gtk_entry_get_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (gp->group)))));
 }
 
-/***** Icon *****/
+/***** General *****/
 
-GpropIcon *
-gprop_icon_new (char *icon_filename)
+GpropGeneral *
+gprop_general_new (char *title, char *icon_filename)
 {
-	GpropIcon *gpi;
+	GpropGeneral *gp;
 	GtkWidget *frame;
-	GtkWidget *vbox;
+	GtkWidget *table;
 	GtkWidget *entry;
 
-	gpi = g_new (GpropIcon, 1);
+	g_return_val_if_fail (title != NULL, NULL);
+	g_return_val_if_fail (icon_filename != NULL, NULL);
 
-	gpi->top = gtk_vbox_new (FALSE, 6);
-	gtk_signal_connect (GTK_OBJECT (gpi->top), "destroy",
+	gp = g_new (GpropGeneral, 1);
+
+	gp->top = gtk_vbox_new (FALSE, 6);
+	gtk_signal_connect (GTK_OBJECT (gp->top), "destroy",
 			    (GtkSignalFunc) free_stuff,
-			    gpi);
+			    gp);
 
-	frame = gtk_frame_new ("Icon");
-	gtk_box_pack_start (GTK_BOX (gpi->top), frame, FALSE, FALSE, 0);
+	frame = gtk_frame_new ("General");
+	gtk_box_pack_start (GTK_BOX (gp->top), frame, FALSE, FALSE, 0);
 	gtk_widget_show (frame);
 
-	vbox = gtk_vbox_new (FALSE, 6);
-	gtk_container_border_width (GTK_CONTAINER (vbox), 6);
-	gtk_container_add(GTK_CONTAINER (frame), vbox);
-	gtk_widget_show (vbox);
+	table = gtk_table_new (2, 2, FALSE);
+	gtk_container_border_width (GTK_CONTAINER (table), 6);
+	gtk_table_set_row_spacings (GTK_TABLE (table), 6);
+	gtk_table_set_col_spacings (GTK_TABLE (table), 4);
+	gtk_container_add (GTK_CONTAINER (frame), table);
+	gtk_widget_show (table);
 
-	gpi->icon_filename = gnome_file_entry_new ("gprop_icon_filename", "Select icon");
-	entry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (gpi->icon_filename));
-	gtk_entry_set_text (GTK_ENTRY (entry), icon_filename ? icon_filename : "");
-	gtk_box_pack_start (GTK_BOX (vbox), gpi->icon_filename, FALSE, FALSE, 0);
-	gtk_widget_show (gpi->icon_filename);
+	gtk_table_attach (GTK_TABLE (table), label_new ("Title", 0.0, 0.5),
+			  0, 1, 0, 1,
+			  GTK_FILL | GTK_SHRINK,
+			  GTK_FILL | GTK_SHRINK,
+			  0, 0);
 
-	return gpi;
+	gp->title = gnome_entry_new ("gprop_general_title");
+	entry = gnome_entry_gtk_entry (GNOME_ENTRY (gp->title));
+	gtk_entry_set_text (GTK_ENTRY (entry), title);
+	gtk_table_attach (GTK_TABLE (table), gp->title,
+			  1, 2, 0, 1,
+			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
+			  GTK_FILL | GTK_SHRINK,
+			  0, 0);
+	gtk_widget_show (gp->title);
+
+	gtk_table_attach (GTK_TABLE (table), label_new ("Icon", 0.0, 0.5),
+			  0, 1, 1, 2,
+			  GTK_FILL | GTK_SHRINK,
+			  GTK_FILL | GTK_SHRINK,
+			  0, 0);
+
+	gp->icon_filename = gnome_file_entry_new ("gprop_general_icon_filename", "Select icon");
+	entry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (gp->icon_filename));
+	gtk_entry_set_text (GTK_ENTRY (entry), icon_filename);
+	gtk_table_attach (GTK_TABLE (table), gp->icon_filename,
+			  1, 2, 1, 2,
+			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
+			  GTK_FILL | GTK_SHRINK,
+			  0, 0);
+	gtk_widget_show (gp->icon_filename);
+
+	return gp;
 }
 
 void
-gprop_icon_get_data (GpropIcon *gpi, char **icon_filename)
+gprop_general_get_data (GpropGeneral *gp, char **title, char **icon_filename)
 {
 	GtkWidget *entry;
 
-	g_return_if_fail (gpi != NULL);
+	g_return_if_fail (gp != NULL);
 
-	entry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (gpi->icon_filename));
+	if (title) {
+		entry = gnome_entry_gtk_entry (GNOME_ENTRY (gp->title));
+		*title = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
+	}
 
-	if (icon_filename)
+	if (icon_filename) {
+		entry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (gp->icon_filename));
 		*icon_filename = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
+	}
 }

@@ -14,16 +14,16 @@
 #include "config.h"
 
 
-/***** General *****/
+/***** Filename *****/
 
 typedef struct {
 	GtkWidget *top;
 
 	GtkWidget *filename;
-} GpropGeneral;
+} GpropFilename;
 
-GpropGeneral *gprop_general_new (char *complete_filename, char *filename);
-void gprop_general_get_data (GpropGeneral *gpg, char **filename);
+GpropFilename *gprop_filename_new (char *complete_filename, char *filename);
+void gprop_filename_get_data (GpropFilename *gp, char **filename);
 
 /***** Permissions *****/
 
@@ -42,17 +42,19 @@ typedef struct {
 } GpropPerm;
 
 GpropPerm *gprop_perm_new (umode_t umode, char *owner, char *group);
-void gprop_perm_get_data (GpropPerm *gpp, umode_t *umode, char **owner, char **group);
+void gprop_perm_get_data (GpropPerm *gp, umode_t *umode, char **owner, char **group);
 
-/***** Icon *****/
+/***** General *****/
 
 typedef struct {
 	GtkWidget *top;
 
+	GtkWidget *title;
 	GtkWidget *icon_filename;
-} GpropIcon;
+} GpropGeneral;
 
-GpropIcon *gprop_icon_new (char *icon_filename);
-void gprop_icon_get_data (GpropIcon *gpi, char **icon_filename);
+GpropGeneral *gprop_general_new (char *title, char *icon_filename);
+void gprop_general_get_data (GpropGeneral *gp, char **title, char **icon_filename);
+
 
 #endif

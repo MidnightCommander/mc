@@ -670,7 +670,7 @@ icon_properties (GtkWidget *widget, desktop_icon_t *di)
 
 	retval = item_properties (di->widget, di->pathname, di);
 
-	if (retval & GPROP_ICON) {
+	if (retval & (GPROP_TITLE | GPROP_ICON)) {
 		gtk_widget_destroy (di->widget);
 
 		di->widget = get_transparent_window_for_dentry (di->dentry);
@@ -698,14 +698,14 @@ desktop_icon_context_popup (GdkEventButton *event, desktop_icon_t *di)
 	item = gtk_menu_item_new_with_label (_("Properties"));
 	gtk_signal_connect (GTK_OBJECT (item), "activate", GTK_SIGNAL_FUNC (icon_properties), di);
 	gtk_signal_connect_object_after (GTK_OBJECT (item), "activate",
-					 GTK_SIGNAL_FUNC (gtk_widget_destroy), menu);
+					 GTK_SIGNAL_FUNC (gtk_widget_destroy), GTK_OBJECT (menu));
 	gtk_menu_append (GTK_MENU (menu), item);
 	gtk_widget_show (item);
 
 	item = gtk_menu_item_new_with_label (_("Delete"));
 	gtk_signal_connect (GTK_OBJECT (item), "activate", GTK_SIGNAL_FUNC (icon_delete), di);
 	gtk_signal_connect_object_after (GTK_OBJECT (item), "activate",
-					 GTK_SIGNAL_FUNC (gtk_widget_destroy), menu);
+					 GTK_SIGNAL_FUNC (gtk_widget_destroy), GTK_OBJECT (menu));
 	gtk_menu_append (GTK_MENU (menu), item);
 	gtk_widget_show (item);
 

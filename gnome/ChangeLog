@@ -1,3 +1,16 @@
+1998-03-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (icon_properties): 
+	* gpageprop.c (item_properties): Modified to accept dentry title
+	changes as well.
+	(item_properties): Fixed base and fname confusion in call to
+	concat_dir_and_file().
+
+	* gprop.c (gprop_general_new):
+	(gprop_general_get_data): Renamed to general from icon.  The
+	general Gprop now lets you enter the title and icon filename for a
+	dentry.
+
 1998-03-19  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (icon_properties): Whoops, actually save the dentry.

@@ -48,21 +48,22 @@ kill_toplevel ()
 int
 item_properties (GtkWidget *parent, char *fname, desktop_icon_t *di)
 {
-	GtkWidget    *parent_window;
-	GdkCursor    *clock_cursor;
-	GtkWidget    *notebook, *ok, *cancel;
-	GtkWidget    *vbox;
-	GpropGeneral *gene;
-	GpropPerm    *perm;
-	GpropIcon    *icon;
-	GtkDialog    *toplevel;
+	GtkWidget     *parent_window;
+	GdkCursor     *clock_cursor;
+	GtkWidget     *notebook, *ok, *cancel;
+	GtkWidget     *vbox;
+	GpropFilename *name;
+	GpropPerm     *perm;
+	GpropGeneral  *gene;
+	GtkDialog     *toplevel;
 
-	umode_t       new_mode;
-	char         *new_group;
-	char         *new_owner;
-	char         *new_name;
-	char         *new_icon;
-	char         *base;
+	umode_t        new_mode;
+	char          *new_group;
+	char          *new_owner;
+	char          *new_title;
+	char          *new_icon;
+	char          *new_name;
+	char          *base;
 
 	struct stat s;
 	int retval = 0;
@@ -83,15 +84,16 @@ item_properties (GtkWidget *parent, char *fname, desktop_icon_t *di)
 	base = x_basename (fname);
 
 	vbox = gtk_vbox_new (FALSE, 6);
-	gene = gprop_general_new (fname, base);
-	gtk_box_pack_start (GTK_BOX (vbox), gene->top, FALSE, FALSE, 0);
-
-	perm = gprop_perm_new (s.st_mode, get_owner (s.st_uid), get_group (s.st_gid));
 
 	if (di && di->dentry) {
-		icon = gprop_icon_new (di->dentry->icon);
-		gtk_box_pack_start (GTK_BOX (vbox), icon->top, FALSE, FALSE, 0);
+		gene = gprop_general_new (di->dentry->name, di->dentry->icon);
+		gtk_box_pack_start (GTK_BOX (vbox), gene->top, FALSE, FALSE, 0);
 	}
+
+	name = gprop_filename_new (fname, base);
+	gtk_box_pack_start (GTK_BOX (vbox), name->top, FALSE, FALSE, 0);
+
+	perm = gprop_perm_new (s.st_mode, get_owner (s.st_uid), get_group (s.st_gid));
 
 	/* Pack them into nice notebook */
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), c_spacing (vbox), gtk_label_new ("General"));
@@ -181,7 +183,7 @@ item_properties (GtkWidget *parent, char *fname, desktop_icon_t *di)
 
 	/* Check and change filename */
 
-	gprop_general_get_data (gene, &new_name);
+	gprop_filename_get_data (name, &new_name);
 
 	if (strchr (new_name, '/'))
 		message (1, "Error", "The new name includes the `/' character");
@@ -191,7 +193,7 @@ item_properties (GtkWidget *parent, char *fname, desktop_icon_t *di)
 		char *full_target;
 
 		*base = 0;
-		full_target = concat_dir_and_file (base, new_name);
+		full_target = concat_dir_and_file (fname, new_name);
 		*base = save;
 
 		create_op_win (OP_MOVE, 0);
@@ -208,10 +210,17 @@ item_properties (GtkWidget *parent, char *fname, desktop_icon_t *di)
 		retval |= GPROP_FILENAME;
 	}
 
-	/* Check and change icon -- change is handled by caller */
+	/* Check and change title and icon -- change is handled by caller */
 
 	if (di && di->dentry) {
-		gprop_icon_get_data (icon, &new_icon);
+		gprop_general_get_data (gene, &new_title, &new_icon);
+
+		if (strcmp (new_title, di->dentry->name) != 0) {
+			g_free (di->dentry->name);
+
+			di->dentry->name = new_title;
+			retval |= GPROP_TITLE;
+		}
 
 		if (strcmp (new_icon, di->dentry->icon) != 0) {
 			g_free (di->dentry->icon);
