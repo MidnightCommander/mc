@@ -1,3 +1,8 @@
+2003-09-22  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.c (mc_get_current_wd): Use g_strlcpy() to avoid unneeded
+	padding and silence Valgrind.
+
 2003-09-09  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* samba/libsmb/namequery.c (_interpret_node_status): Comment

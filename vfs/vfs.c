@@ -651,7 +651,7 @@ mc_get_current_wd (char *buffer, int size)
 {
     const char *cwd = _vfs_get_cwd ();
 
-    strncpy (buffer, cwd, size - 1);
+    g_strlcpy (buffer, cwd, size - 1);
     buffer[size - 1] = 0;
     return buffer;
 }
