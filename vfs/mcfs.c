@@ -51,7 +51,6 @@
 #include "../src/dialog.h"
 
 #define MCFS_MAX_CONNECTIONS 32
-#define mcserver_port 9876
 
 static struct _mcfs_connection {
     char *host;
@@ -61,6 +60,10 @@ static struct _mcfs_connection {
     int  port;
     int  version;
 } mcfs_connections [MCFS_MAX_CONNECTIONS];
+
+#ifdef WITH_MCFS
+
+#define mcserver_port 9876
 
 typedef struct _mcfs_connection mcfs_connection;
 
@@ -91,47 +94,6 @@ static void mcfs_fill_names (vfs *me, void (*func)(char *))
 	(*func) (name);
 	g_free (name);
     }
-}
-
-static void mcfs_free_bucket (int bucket)
-{
-    g_free (mcfs_connections [bucket].host);
-    g_free (mcfs_connections [bucket].user);
-    g_free (mcfs_connections [bucket].home);
-
-    /* Set all the fields to zero */
-    mcfs_connections [bucket].host =
-	mcfs_connections [bucket].user =
-	    mcfs_connections [bucket].home = 0;
-    mcfs_connections [bucket].sock =
-	mcfs_connections [bucket].version = 0;
-}
-
-/* FIXME: This part should go to another c module, perhaps tcp.c */
-static int mcfs_invalidate_socket (int);
-
-void tcp_invalidate_socket (int sock)
-{
-     mcfs_invalidate_socket (sock);
-}
-/* FIXME end: 'cause it is used not only by mcfs */
-
-static int mcfs_invalidate_socket (int sock)
-{
-    int i, j = -1;
-    extern int mc_chdir (char *);
-    
-    for (i = 0; i < MCFS_MAX_CONNECTIONS; i++)
-	if (mcfs_connections [i].sock == sock) {
-	    mcfs_free_bucket (i);
-	    j = 0;
-	}
-
-    if (j == -1)
-        return -1; /* It was not our sock */
-    /* Break from any possible loop */
-    mc_chdir ("/");
-    return 0;
 }
 
 /* This routine checks the server RPC version and logs the user in */
@@ -1164,3 +1126,46 @@ vfs vfs_mcfs_ops = {
 
 MMAPNULL
 };
+
+#endif /* WITH_MCFS */
+
+
+/* FIXME: This part should go to another c module, perhaps tcp.c */
+
+static void mcfs_free_bucket (int bucket)
+{
+    g_free (mcfs_connections [bucket].host);
+    g_free (mcfs_connections [bucket].user);
+    g_free (mcfs_connections [bucket].home);
+
+    /* Set all the fields to zero */
+    mcfs_connections [bucket].host =
+	mcfs_connections [bucket].user =
+	    mcfs_connections [bucket].home = 0;
+    mcfs_connections [bucket].sock =
+	mcfs_connections [bucket].version = 0;
+}
+
+static int mcfs_invalidate_socket (int sock)
+{
+    int i, j = -1;
+    extern int mc_chdir (char *);
+    
+    for (i = 0; i < MCFS_MAX_CONNECTIONS; i++)
+	if (mcfs_connections [i].sock == sock) {
+	    mcfs_free_bucket (i);
+	    j = 0;
+	}
+
+    if (j == -1)
+        return -1; /* It was not our sock */
+    /* Break from any possible loop */
+    mc_chdir ("/");
+    return 0;
+}
+
+void tcp_invalidate_socket (int sock)
+{
+     mcfs_invalidate_socket (sock);
+}
+/* FIXME end: 'cause it is used not only by mcfs */
