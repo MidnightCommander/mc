@@ -20,29 +20,8 @@ typedef struct {
 #define tlines(t) (t->is_panel ? t->widget.lines-2 - (show_mini_info ? 2 : 0) : t->widget.lines)
 
 int tree_init (char *current_dir, int lines);
-void load_tree (WTree *tree);
-void save_tree (WTree *tree);
-void show_tree (WTree *tree);
 void tree_chdir (WTree *tree, char *dir);
-void tree_rescan_cmd (WTree *tree);
-int tree_forget_cmd (WTree *tree);
-void tree_copy (WTree *tree, char *default_dest);
-void tree_move (WTree *tree, char *default_dest);
-void tree_event (WTree *tree, int y);
 char *tree (char *current_dir);
-
-int search_tree (WTree *tree, char *text);
-
-tree_entry *tree_add_entry (WTree *tree, char *name);
-void tree_remove_entry (WTree *tree, char *name);
-void tree_destroy (WTree *tree);
-
-void tree_move_backward (WTree *tree, int i);
-void tree_move_forward (WTree *tree, int i);
-int tree_move_to_parent (WTree *tree);
-void tree_move_to_child (WTree *tree);
-void tree_move_to_top (WTree *tree);
-void tree_move_to_bottom (WTree *tree);
 
 void sync_tree (char *pathname);
 

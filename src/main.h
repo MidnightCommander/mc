@@ -34,7 +34,7 @@ void shell_execute (char *command, int flags);
 void execute (char *command);
 
 /* This one executes a shell */
-void exec_shell ();
+void exec_shell (void);
 
 void subshell_chdir (char *command);
 

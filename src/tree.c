@@ -53,9 +53,11 @@ extern int command_prompt;
 #define TREE_NORMALC HOT_FOCUSC
 
 /* Specifies the display mode: 1d or 2d */
-int tree_navigation_flag;
+static int tree_navigation_flag;
 
 /* Forwards */
+static void save_tree (WTree *tree);
+static void tree_rescan_cmd (WTree *tree);
 static int tree_callback (Dlg_head *h, WTree *tree, int msg, int par);
 #define tcallback (callback_fn) tree_callback
 
@@ -85,8 +87,9 @@ static tree_entry *forw_ptr (tree_entry *ptr, int *count)
     return ptr;
 }
 
+#if 0
 /* Add a directory to the list of directories */
-tree_entry *tree_add_entry (WTree *tree, char *name)
+static tree_entry *tree_add_entry (WTree *tree, char *name)
 {
     if (!tree)
 	return 0;
@@ -94,7 +97,6 @@ tree_entry *tree_add_entry (WTree *tree, char *name)
     return tree_store_add_entry (name);
 }
 
-#if 0
 /* Append a directory to the list of directories */
 static tree_entry *tree_append_entry (WTree *tree, char *name)
 {
@@ -142,7 +144,7 @@ static tree_entry *tree_append_entry (WTree *tree, char *name)
 }
 #endif
 
-void
+static void
 remove_callback (tree_entry *entry, void *data)
 {
 	WTree *tree = data;
@@ -155,12 +157,12 @@ remove_callback (tree_entry *entry, void *data)
 	}
 }
 
-void tree_remove_entry (WTree *tree, char *name)
+static void tree_remove_entry (WTree *tree, char *name)
 {
     tree_store_remove_entry (name);
 }
 
-void tree_destroy (WTree *tree)
+static void tree_destroy (WTree *tree)
 {
     tree_store_remove_entry_remove_hook (remove_callback);
     save_tree (tree);
@@ -173,7 +175,7 @@ void tree_destroy (WTree *tree)
 }
 
 /* Loads the .mc.tree file */
-void load_tree (WTree *tree)
+static void load_tree (WTree *tree)
 {
     tree_store_load ();
 
@@ -182,7 +184,7 @@ void load_tree (WTree *tree)
 }
 
 /* Save the .mc.tree file */
-void save_tree (WTree *tree)
+static void save_tree (WTree *tree)
 {
     int error;
 
@@ -227,7 +229,7 @@ static void tree_show_mini_info (WTree *tree, int tree_lines, int tree_cols)
     }
 }
 
-void show_tree (WTree *tree)
+static void show_tree (WTree *tree)
 {
     Dlg_head *h = tree->widget.parent;
     tree_entry *current;
@@ -386,7 +388,7 @@ static void check_focus (WTree *tree)
 	tree->topdiff = tlines (tree) - 3 - 1;
 }
 
-void tree_move_backward (WTree *tree, int i)
+static void tree_move_backward (WTree *tree, int i)
 {
     tree_entry *current;
     int j = 0;
@@ -408,7 +410,7 @@ void tree_move_backward (WTree *tree, int i)
     check_focus (tree);
 }
 
-void tree_move_forward (WTree *tree, int i)
+static void tree_move_forward (WTree *tree, int i)
 {
     tree_entry *current;
     int j = 0;
@@ -430,7 +432,7 @@ void tree_move_forward (WTree *tree, int i)
     check_focus (tree);
 }
 
-void tree_move_to_child (WTree *tree)
+static void tree_move_to_child (WTree *tree)
 {
     tree_entry *current;
 
@@ -457,7 +459,7 @@ void tree_move_to_child (WTree *tree)
     }
 }
 
-int tree_move_to_parent (WTree *tree)
+static int tree_move_to_parent (WTree *tree)
 {
     tree_entry *current;
     tree_entry *old;
@@ -477,13 +479,13 @@ int tree_move_to_parent (WTree *tree)
     return tree->selected_ptr != old;
 }
 
-void tree_move_to_top (WTree *tree)
+static void tree_move_to_top (WTree *tree)
 {
     tree->selected_ptr = tree->store->tree_first;
     tree->topdiff = 0;
 }
 
-void tree_move_to_bottom (WTree *tree)
+static void tree_move_to_bottom (WTree *tree)
 {
     tree->selected_ptr = tree->store->tree_last;
     tree->topdiff = tlines (tree) - 3 - 1;
@@ -507,7 +509,7 @@ sync_tree (char *path)
 }
 
 /* Handle mouse click */
-void tree_event (WTree *tree, int y)
+static void tree_event (WTree *tree, int y)
 {
     if (tree->tree_shown [y]){
 	tree->selected_ptr = tree->tree_shown [y];
@@ -557,7 +559,7 @@ static int event_callback (Gpm_Event *event, WTree *tree)
 }
 
 /* Search tree for text */
-int search_tree (WTree *tree, char *text)
+static int search_tree (WTree *tree, char *text)
 {
     tree_entry *current;
     int len;
@@ -606,7 +608,7 @@ static void tree_do_search (WTree *tree, int key)
     maybe_chdir (tree);
 }
 
-void tree_rescan_cmd (WTree *tree)
+static void tree_rescan_cmd (WTree *tree)
 {
     char old_dir [MC_MAXPATHLEN];
 
@@ -618,14 +620,14 @@ void tree_rescan_cmd (WTree *tree)
     mc_chdir (old_dir);
 }
 
-int tree_forget_cmd (WTree *tree)
+static int tree_forget_cmd (WTree *tree)
 {
     if (tree->selected_ptr)
 	tree_remove_entry (tree, tree->selected_ptr->name);
     return 1;
 }
 
-void tree_copy (WTree *tree, char *default_dest)
+static void tree_copy (WTree *tree, char *default_dest)
 {
     char   *dest;
     long   count = 0;
@@ -660,7 +662,7 @@ static int tree_copy_cmd (WTree *tree)
     return 1;
 }
 
-void tree_move (WTree *tree, char *default_dest)
+static void tree_move (WTree *tree, char *default_dest)
 {
     char   *dest;
     struct stat buf;
@@ -769,7 +771,7 @@ tree_toggle_navig (Dlg_head *h)
     set_navig_label (h);
 }
 
-void
+static void
 set_navig_label (Dlg_head *h)
 {
     define_label_data (h, (Widget *)tree,

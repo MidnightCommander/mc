@@ -1,5 +1,9 @@
 2001-06-14  Pavel Roskin  <proski@gnu.org>
 
+	* main.h: Fix prototype of exec_shell.
+	* tree.c: Make all functions static when possible.
+	* tree.h: Changes for the above.
+
 	* text.c [HAVE_X]: Remove useless #error.
 	* cons.saver.c: Indent #error to hide it from old compilers.
 
