@@ -449,23 +449,23 @@ strip_password (char *p, int has_prefix)
 	       continue;
             else
 	        p = q + prefixes[i].len;
-       	};
+       	}
 
         if ((dir = strchr (p, PATH_SEP)) != NULL)
    	    *dir = '\0';
+
         /* search for any possible user */
         at = strrchr (p, '@');
 
-        /* We have a username */
-        if (at) {
-            *at = 0;
-            inner_colon = strchr (p, ':');
-  	    *at = '@';
-            if (inner_colon)
-                strcpy (inner_colon, at);
-        }
         if (dir)
 	    *dir = PATH_SEP;
+
+        /* We have a username */
+        if (at) {
+	    inner_colon = memchr (p, ':', at - p);
+            if (inner_colon)
+		memmove (inner_colon, at, strlen(at) + 1);
+        }
 	break;
     }
     return (result);

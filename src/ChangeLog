@@ -1,3 +1,7 @@
+2004-11-09  Pavel Shirshov  <me@pavelsh.pp.ru>
+
+	* util.c (strip_password): Fix bug - don't delete path from url.
+
 2004-11-09  Jindrich Novy  <jnovy@redhat.com>
 
 	* filegui.c (file_mask_dialog): Fix memory leak.
