@@ -1,0 +1,211 @@
+/* Drag and Drop functionality for the Midnight Commander
+ *
+ * Copyright (C) 1998 The Free Software Foundation
+ *
+ * Authors: Federico Mena <federico@nuclecu.unam.mx>
+ *          Miguel de Icaza <miguel@nuclecu.unam.mx>
+ */
+
+#include <config.h>
+#include <sys/stat.h>
+#include <gdk/gdkprivate.h>
+#include "gdnd.h"
+#include "file.h"
+#include "main.h"
+#include "panel.h"
+#include "gscreen.h"
+#include "../vfs/vfs.h"
+
+
+/* Pops up a menu of actions to perform on dropped files */
+static GdkDragAction
+get_action (void)
+{
+	/* FIXME */
+	printf ("Should query for the action!\n");
+	return GDK_ACTION_LINK;
+}
+
+/* Looks for a panel that has the specified window for its list display.  It is used to figure out
+ * if we are receiving a drop from a panel on this MC process.  If no panel is found, it returns
+ * NULL.
+ */
+static WPanel *
+find_panel_owning_window (GdkWindow *window)
+{
+	GList *list;
+	WPanel *panel;
+	GdkWindowPrivate *wp, *lwp;
+
+	wp = (GdkWindowPrivate *) window;
+
+	for (list = containers; list; list = list->next) {
+		panel = ((PanelContainer *) list->data)->panel;
+
+		if (panel->list_type == list_icons)
+			lwp = (GdkWindowPrivate *) GTK_WIDGET (panel->icons)->window;
+		else
+			lwp = (GdkWindowPrivate *) GTK_CLIST (panel->list)->clist_window;
+
+		if (lwp->xwindow == wp->xwindow)
+			return panel;
+	}
+
+	return NULL;
+}
+
+/* Performs a drop action on the specified panel.  Only supports copy and move operations.  The
+ * files are moved or copied to the specified destination directory.
+ */
+static void
+perform_action_on_panel (WPanel *source_panel, GdkDragAction action, char *destdir)
+{
+	switch (action) {
+	case GDK_ACTION_COPY:
+		panel_operate (source_panel, OP_COPY, destdir);
+		break;
+
+	case GDK_ACTION_MOVE:
+		panel_operate (source_panel, OP_MOVE, destdir);
+		break;
+
+	default:
+		g_assert_not_reached ();
+	}
+
+	/* Finish up */
+
+	update_one_panel_widget (source_panel, FALSE, UP_KEEPSEL);
+	panel_update_contents (source_panel);
+}
+
+/* Performs handling of symlinks via drag and drop.  This should go away when operation windows
+ * support links.
+ */
+static void
+perform_links (GList *names, char *destdir)
+{
+	char *name;
+	char *dest_name;
+
+	for (; names; names = names->next) {
+		name = names->data;
+		if (strncmp (name, "file:", 5) == 0)
+			name += 5;
+
+		dest_name = g_concat_dir_and_file (destdir, x_basename (name));
+		mc_symlink (name, dest_name);
+		g_free (dest_name);
+	}
+}
+
+/* Performs a drop action manually, by going through the list of files to operate on.  The files are
+ * copied or moved to the specified directory.  This should also encompass symlinking when the file
+ * operations window supports links.
+ */
+static void
+perform_action (GList *names, GdkDragAction action, char *destdir)
+{
+	struct stat s;
+	char *name;
+	char *dest_name;
+	int result;
+
+	switch (action) {
+	case GDK_ACTION_COPY:
+		create_op_win (OP_COPY, FALSE);
+		break;
+
+	case GDK_ACTION_MOVE:
+		create_op_win (OP_MOVE, FALSE);
+		break;
+
+	default:
+		g_assert_not_reached ();
+	}
+
+	file_mask_defaults ();
+
+	for (; names; names = names->next) {
+		name = names->data;
+		if (strncmp (name, "file:", 5) == 0)
+			name += 5;
+
+		dest_name = g_concat_dir_and_file (destdir, x_basename (name));
+
+		do {
+			result = mc_stat (name, &s);
+
+			if (result != 0) {
+				/* FIXME: this error message sucks */
+				if (file_error (_("Could not stat %s\n%s"), dest_name) != FILE_RETRY)
+					result = 0;
+				else {
+					if (S_ISDIR (s.st_mode)) {
+						if (action == GDK_ACTION_COPY)
+							copy_dir_dir (name, dest_name, TRUE, FALSE, FALSE, FALSE);
+						else
+							move_dir_dir (name, dest_name);
+					} else {
+						if (action == GDK_ACTION_COPY)
+							copy_file_file (name, dest_name, TRUE);
+						else
+							move_file_file (name, dest_name);
+					}
+				}
+			}
+		} while (result != 0);
+
+		g_free (dest_name);
+		break;
+	}
+
+	destroy_op_win ();
+}
+
+/**
+ * gdnd_drop_on_directory:
+ * @context: The drag context received from the drag_data_received callback
+ * @selection_data: The selection data from the drag_data_received callback
+ * @dirname: The name of the directory to drop onto
+ * 
+ * Extracts an URI list from the selection data and drops all the files in the
+ * specified directory.
+ *
+ * Return Value: TRUE if the drop was sucessful, FALSE if it was not.
+ **/
+int
+gdnd_drop_on_directory (GdkDragContext *context, GtkSelectionData *selection_data, char *destdir)
+{
+	GdkDragAction action;
+	WPanel *source_panel;
+	GList *names;
+
+	if (context->suggested_action == GDK_ACTION_ASK) {
+		action = get_action ();
+
+		if (action == GDK_ACTION_ASK)
+			return FALSE;
+	} else
+		action = context->suggested_action;
+
+	/* If we are dragging from a file panel, we can display a nicer status display */
+	source_panel = find_panel_owning_window (context->source_window);
+
+	/* Symlinks do not use file.c */
+
+	if (source_panel && action != GDK_ACTION_LINK)
+		perform_action_on_panel (source_panel, action, destdir);
+	else {
+		names = gnome_uri_list_extract_uris (selection_data->data);
+
+		if (action == GDK_ACTION_LINK)
+			perform_links (names, destdir);
+		else
+			perform_action (names, action, destdir);
+
+		gnome_uri_list_free_strings (names);
+	}
+
+	return TRUE;
+}

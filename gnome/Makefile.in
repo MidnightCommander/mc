@@ -16,6 +16,7 @@ INSTALL_DATA = @INSTALL_DATA@
 
 GNOMESRCS = 		\
 	gdesktop-icon.c	\
+	gdnd.c		\
 	gkey.c 		\
 	gmain.c 	\
 	gmetadata.c	\
@@ -40,6 +41,7 @@ GNOMESRCS = 		\
 
 GNOMEHDRS = 		\
 	gdesktop-icon.h	\
+	gdnd.h		\
 	gmain.h 	\
 	gmetadata.h	\
 	gscreen.h	\
@@ -84,6 +86,7 @@ OOBJS = main.o dlg.o screen.o widget.o wtools.o info.o boxes.o \
 
 OBJS = $(LOBJS) $(OOBJS) \
 	gdesktop-icon.o	\
+	gdnd.o		\
 	gkey.o 		\
 	gmain.o 	\
 	gmetadata.o	\

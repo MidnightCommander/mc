@@ -1,3 +1,27 @@
+1998-11-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdnd.c: New file that handles all the DnD stuff.  Mainly used to
+	clean up gdesktop.c.
+
+	* gscreen.c (panel_icon_list_drag_data_received): Use
+	gdnd_drop_on_directory().
+	(CLIST_FROM_SW): Added this macro to fetch the clist from the
+	scrolled window in panel->list.
+	(panel_create_file_list): Create a scrolled window and put the
+	clist inside it.  This is required per the new clist API.
+	(panel_configure_file_list): Use the scrolled window's adjustment.
+	(panel_file_list_size_allocate_hook): Use the scrolled window
+	instead of the clist.
+	(panel_file_list_compute_lines): Use the scrolled window instead
+	of the clist.
+	(panel_file_list_configure_contents): Use the scrolled window
+	instead of the clist.
+	(panel_create_file_list): Do the DnD setup here, not in the
+	realization callback.
+	(x_create_panel): Do not realize the panel explicitly.
+	(panel_create_pixmaps): Create the pixmaps using imlib instead of
+	Gdk.
+
 1998-11-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (text_changed): Doh.  Set the new filename of the
