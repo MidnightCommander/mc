@@ -1,3 +1,8 @@
+2004-11-08  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+        * include/slang.h (SLang_Version): Declare const.
+        * slmisc.c: Add SLang_Version.
+
 2004-11-01  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* README: Imported slang-1.4.9.

@@ -12,6 +12,8 @@
 #include "slang.h"
 #include "_slang.h"
 
+const int SLang_Version = 10409;
+
 /* p and ch may point to the same buffer */
 char *_SLexpand_escaped_char(char *p, char *ch)
 {
