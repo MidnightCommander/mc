@@ -418,7 +418,7 @@ command_completion_function (char *text, int state)
 	    "shift", "source", "suspend", "test", "times", "trap", "type",
 	    "typeset", "ulimit", "umask", "unalias", "unset", "wait", 0
     };
-    char *found;
+    char *p, *found;
 
     if (!state) {		/* Initialize us a little bit */
 	isabsolute = strchr (text, PATH_SEP) != 0;
@@ -428,9 +428,9 @@ command_completion_function (char *text, int state)
 	    phase = 0;
 	    text_len = strlen (text);
 	    if (!path && (path = g_strdup (getenv ("PATH"))) != NULL) {
-		char *p = path;
+		p = path;
 		path_end = strchr (p, 0);
-		while ((p = (char *) strchr (p, PATH_ENV_SEP))) {
+		while ((p = strchr (p, PATH_ENV_SEP))) {
 		    *p++ = 0;
 		}
 	    }
@@ -438,7 +438,7 @@ command_completion_function (char *text, int state)
     }
 
     if (isabsolute) {
-	char *p = filename_completion_function (text, state);
+	p = filename_completion_function (text, state);
 	if (!p)
 	    look_for_executables = 0;
 	return p;
@@ -476,7 +476,7 @@ command_completion_function (char *text, int state)
 		cur_word = concat_dir_and_file (expanded, text);
 		g_free (expanded);
 		canonicalize_pathname (cur_word);
-		cur_path = (char *) strchr (cur_path, 0) + 1;
+		cur_path = strchr (cur_path, 0) + 1;
 		init_state = state;
 	    }
 	    found =
@@ -495,13 +495,11 @@ command_completion_function (char *text, int state)
 	path = NULL;
 	return NULL;
     }
-    { char *p;
-    if ((p = (char *) strrchr (found, PATH_SEP)) != NULL) {
+    if ((p = strrchr (found, PATH_SEP)) != NULL) {
 	p++;
 	p = g_strdup (p);
 	g_free (found);
 	return p;
-    }
     }
     return found;
 
@@ -667,11 +665,11 @@ try_complete (char *text, int *start, int *end, int flags)
     }
 
     if (flags & INPUT_COMPLETE_COMMANDS)
-    	p = (char *) strrchr (word, '`');
+    	p = strrchr (word, '`');
     if (flags & (INPUT_COMPLETE_COMMANDS | INPUT_COMPLETE_VARIABLES))
-        q = (char *) strrchr (word, '$');
+        q = strrchr (word, '$');
     if (flags & INPUT_COMPLETE_HOSTNAMES)    
-        r = (char *) strrchr (word, '@');
+        r = strrchr (word, '@');
     if (q && q [1] == '(' && INPUT_COMPLETE_COMMANDS){
     	if (q > p)
     	    p = q + 1;
@@ -733,9 +731,9 @@ try_complete (char *text, int *start, int *end, int flags)
 		else
 		    c = ':';
 		while (!matches && c == ':'){
-		    s = (char *) strchr (cdpath, ':');
+		    s = strchr (cdpath, ':');
 		    if (s == NULL)
-		        s = (char *) strchr (cdpath, 0);
+		        s = strchr (cdpath, 0);
 		    c = *s; 
 		    *s = 0;
 		    if (*cdpath){
