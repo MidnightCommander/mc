@@ -840,6 +840,8 @@ sigchld_handler (int sig)
     int status;
     pid_t pid;
 
+    (void) sig;
+
     pid = waitpid (subshell_pid, &status, WUNTRACED | WNOHANG);
 
     if (pid == subshell_pid) {

@@ -115,6 +115,7 @@ remove_callback (tree_entry *entry, void *data)
 
 static void tree_remove_entry (WTree *tree, char *name)
 {
+    (void) tree;
     tree_store_remove_entry (name);
 }
 
@@ -142,12 +143,12 @@ static void save_tree (WTree *tree)
 {
     int error;
 
+    (void) tree;
     error = tree_store_save ();
 
     if (error){
 	fprintf (stderr, _("Cannot open the %s file for writing:\n%s\n"), MC_TREE,
 		 unix_error_string (error));
-	return;
     }
 }
 

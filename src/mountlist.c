@@ -231,6 +231,9 @@ read_filesystem_list (int need_fs_type, int all_fs)
     struct mount_entry *me;
     struct mount_entry *mtail;
 
+    (void) need_fs_type;
+    (void) all_fs;
+
     /* Start the list off with a dummy entry. */
     me = (struct mount_entry *) malloc (sizeof (struct mount_entry));
     me->me_next = NULL;

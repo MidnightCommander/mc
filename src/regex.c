@@ -8230,6 +8230,8 @@ regerror (errcode, preg, errbuf, errbuf_size)
   const char *msg;
   size_t msg_size;
 
+  (void) preg;
+
   if (errcode < 0
       || errcode >= (int) (sizeof (re_error_msgid_idx)
 			   / sizeof (re_error_msgid_idx[0])))

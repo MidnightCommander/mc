@@ -130,6 +130,8 @@ int poptReadDefaultConfig(poptContext con, int useEnv) {
     const char* home;
     int rc;
 
+    (void) useEnv;
+
     if (!con->appName) return 0;
 
     rc = poptReadConfigFile(con, "/etc/popt");

@@ -19,7 +19,12 @@
 
 static void displayArgs(poptContext con, enum poptCallbackReason foo, 
 			struct poptOption * key, 
-			const char * arg, void * data) {
+			const char * arg, void * data)
+{
+    (void) foo;
+    (void) arg;
+    (void) data;
+
     if (key->shortName== '?')
 	poptPrintHelp(con, stdout, 0);
     else
@@ -52,6 +57,8 @@ getTableTranslationDomain(const struct poptOption *table)
 
 static const char * getArgDescrip(const struct poptOption * opt,
 				  const char *translation_domain) {
+    (void) translation_domain;
+
     if (!(opt->argInfo & POPT_ARG_MASK)) return NULL;
 
     if (opt == (poptHelpOptions + 1) || opt == (poptHelpOptions + 2))
@@ -191,6 +198,8 @@ static int showHelpIntro(poptContext con, FILE * f) {
 int poptPrintHelp(poptContext con, FILE * f, int flags) {
     int leftColWidth;
 
+    (void) flags;
+
     showHelpIntro(con, f);
     if (con->otherHelp)
 	fprintf(f, " %s\n", con->otherHelp);
@@ -287,6 +296,8 @@ static int showShortOptions(const struct poptOption * opt, FILE * f,
 
 void poptPrintUsage(poptContext con, FILE * f, int flags) {
     int cursor;
+
+    (void) flags;
 
     cursor = showHelpIntro(con, f);
     cursor += showShortOptions(con->options, f, NULL);

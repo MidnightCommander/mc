@@ -5,6 +5,22 @@
 	* main.c (maybe_cd): Removed unused parameter.
 	* main.h: Likewise.
 	* screen.c: Marked unused parameters. Updated use of maybe_cd.
+	* cons.handler.c: Marked unused parameters.
+	* dir.c: Likewise.
+	* find.c: Likewise.
+	* help.c: Likewise.
+	* layout.c: Likewise.
+	* mountlist.c: Likewise.
+	* popt.c: Likewise.
+	* poptconfig.c: Likewise.
+	* popthelp.c: Likewise.
+	* regex.c: Likewise.
+	* subshell.c: Likewise.
+	* tree.c: Likewise.
+	* util.c: Likewise.
+	* utilunix.c: Likewise.
+	* widget.c: Likewise.
+	* wtools.c: Likewise.
 
 2005-02-08  Roland Illig  <roland.illig@gmx.de>
 

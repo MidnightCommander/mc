@@ -214,6 +214,7 @@ name_quote (const char *s, int quote_percent)
 char *
 fake_name_quote (const char *s, int quote_percent)
 {
+    (void) quote_percent;
     return g_strdup (s);
 }
 

@@ -111,6 +111,8 @@ static int string_sortcomp (const char *str1, const char *str2)
 int
 unsorted (const file_entry *a, const file_entry *b)
 {
+    (void) a;
+    (void) b;
     return 0;
 }
 

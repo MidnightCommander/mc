@@ -247,6 +247,8 @@ static void move_backward (int i)
 
 static void move_to_top (int dummy)
 {
+    (void) dummy;
+
     while (currentpoint > data && *currentpoint != CHAR_NODE_END)
 	currentpoint--;
     while (*currentpoint != ']')
@@ -257,6 +259,8 @@ static void move_to_top (int dummy)
 
 static void move_to_bottom (int dummy)
 {
+    (void) dummy;
+
     while (*currentpoint && *currentpoint != CHAR_NODE_END)
 	currentpoint++;
     currentpoint--;
@@ -289,7 +293,7 @@ static const char *help_follow_link (const char *start, const char *selected_ite
     return _(" Help file format error\n");
 }
 
-static const char *select_next_link (const char *start, const char *current_link)
+static const char *select_next_link (const char *current_link)
 {
     const char *p;
 
@@ -595,6 +599,7 @@ static void prev_node_cmd (Dlg_head *h)
 static cb_ret_t
 md_callback (Widget *w, widget_msg_t msg, int parm)
 {
+    (void) w;
     return default_proc (msg, parm);
 }
 
@@ -655,8 +660,7 @@ help_handle_key (struct Dlg_head *h, int c)
 	
     case KEY_DOWN:
     case '\t':
-	/* select next link */
-	new_item = select_next_link (startpoint, selected_item);
+	new_item = select_next_link (selected_item);
 	if (new_item){
 	    selected_item = new_item;
 	    if (selected_item >= last_shown){

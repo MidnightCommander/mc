@@ -380,6 +380,8 @@ show_console_contents (int starty, unsigned char begin_line,
 void
 handle_console (unsigned char action)
 {
+    (void) action;
+
     if (look_for_rxvt_extensions ())
 	return;
 

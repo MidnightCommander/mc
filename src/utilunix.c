@@ -63,6 +63,8 @@ mc_gid_compare (gconstpointer v, gconstpointer v2)
 static gint
 mc_gid_destroy (gpointer key, gpointer value, gpointer data)
 {
+    (void) key;
+    (void) data;
     g_free (value);
     
     return FALSE;

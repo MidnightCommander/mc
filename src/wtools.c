@@ -255,6 +255,7 @@ fg_message (int flags, const char *title, const char *text)
 static void
 bg_message (int dummy, int *flags, char *title, const char *text)
 {
+    (void) dummy;
     title = g_strconcat (_("Background process:"), " ", title, (char *) NULL);
     fg_message (*flags, title, text);
     g_free (title);

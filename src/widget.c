@@ -1454,7 +1454,9 @@ int
 is_in_input_map (WInput *in, int c_code)
 {
     int i;
-    
+
+    (void) in;
+
     for (i = 0; input_map [i].fn; i++)
 	if (c_code == input_map [i].key_code) {
 	    if (input_map [i].fn == complete)

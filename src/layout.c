@@ -225,6 +225,8 @@ static void update_split (void)
 
 static int b2left_cback (int action)
 {
+    (void) action;
+
     if (_equal_split){
 	/* Turn equal split off */
 	_equal_split = 0;
@@ -238,6 +240,8 @@ static int b2left_cback (int action)
 
 static int b2right_cback (int action)
 {
+    (void) action;
+
     if (_equal_split){
 	/* Turn equal split off */
 	_equal_split = 0;
@@ -251,6 +255,8 @@ static int b2right_cback (int action)
 
 static int bplus_cback (int action)
 {
+    (void) action;
+
     if (_output_lines < 99)
 	_output_lines++;
     return 0;
@@ -258,6 +264,8 @@ static int bplus_cback (int action)
 
 static int bminus_cback (int action)
 {
+    (void) action;
+
     if (_output_lines > 0)
 	_output_lines--;
     return 0;
@@ -721,6 +729,7 @@ setup_panels (void)
 
 void flag_winch (int dummy)
 {
+    (void) dummy;
 #ifndef USE_NCURSES	/* don't do malloc in a signal handler */
     low_level_change_screen_size ();
 #endif

@@ -228,6 +228,7 @@ static void execCommand(poptContext con) {
 
     execvp(argv[0], argv);
 #else
+    (void) con;
     abort();
 #endif
 }
@@ -506,6 +507,8 @@ void poptFreeContext(poptContext con) {
 int poptAddAlias(poptContext con, struct poptAlias newAlias, int flags) {
     int aliasNum = con->numAliases++;
     struct poptAlias * alias;
+
+    (void) flags;
 
     /* SunOS won't realloc(NULL, ...) */
     if (!con->aliases)

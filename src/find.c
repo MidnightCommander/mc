@@ -404,6 +404,8 @@ find_add_match (Dlg_head *h, const char *dir, const char *file)
 {
     int p = ++matches & 7;
 
+    (void) h;
+
     insert_file (dir, file);
 
     /* Scroll nicely */
@@ -815,6 +817,8 @@ find_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 static int
 start_stop (int button)
 {
+    (void) button;
+
     running = is_start;
     set_idle_proc (find_dlg, running);
     is_start = !is_start;
@@ -829,6 +833,8 @@ start_stop (int button)
 static int
 find_do_view_file (int button)
 {
+    (void) button;
+
     view_edit_currently_selected_file (0, 0);
     return 0;
 }
@@ -837,6 +843,8 @@ find_do_view_file (int button)
 static int
 find_do_edit_file (int button)
 {
+    (void) button;
+
     view_edit_currently_selected_file (0, 1);
     return 0;
 }
