@@ -159,7 +159,6 @@ typedef struct {
     int drag_motion_y;
     void *panel_listbox;	/* container for the list */
 #endif
-    void *corbadat;
 } WPanel;
 
 WPanel *panel_new (char *panel_name);

@@ -1,3 +1,7 @@
+1999-02-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* panel.h (WPanel): Removed unused field "corbadat".
+
 1999-02-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* screen.c: Make delete key delete files.
