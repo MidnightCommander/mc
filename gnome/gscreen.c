@@ -321,7 +321,6 @@ x_select_item (WPanel *panel)
 				if (gnome_icon_list_icon_is_visible (list, panel->selected) != GTK_VISIBILITY_FULL)
 					gnome_icon_list_moveto (list, panel->selected, 0.5);
 		}
-		gnome_canvas_update_now (GNOME_CANVAS (list));
 	} else {
 		GtkCList *clist = CLIST_FROM_SW (panel->list);
 

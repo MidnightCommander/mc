@@ -113,8 +113,6 @@ gnome_file_property_dialog_finalize (GtkObject *object)
 
 	if (gfpd->file_name)
 		g_free (gfpd->file_name);
-	if (gfpd->im)
-		gdk_imlib_destroy_image (gfpd->im);
 	if (gfpd->fm_open)
 		g_free (gfpd->fm_open);
 	if (gfpd->fm_view)

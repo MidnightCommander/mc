@@ -185,24 +185,11 @@ desktop_icon_realize (GtkWidget *widget)
 static void
 set_icon (DesktopIcon *dicon, GdkImlibImage *im)
 {
-	GdkImlibImage *old_im;
-	GtkArg arg;
-
-	/* Destroy the old image if it exists */
-
-	arg.name = "image";
-	gtk_object_getv (GTK_OBJECT (dicon->icon), 1, &arg);
-
-	old_im = GTK_VALUE_POINTER (arg);
-
 	gnome_canvas_item_set (dicon->icon,
 			       "image", im,
 			       "width", (double) im->rgb_width,
 			       "height", (double) im->rgb_height,
 			       NULL);
-
-	if (old_im != im)
-		gdk_imlib_destroy_image (old_im);
 }
 
 /* Sets the text in the desktop icon, but does not re-create its window shape.  */

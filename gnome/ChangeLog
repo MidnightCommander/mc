@@ -1,3 +1,14 @@
+1999-03-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gscreen.c (x_select_item): It is not necessary to call
+	gnome_canvas_update_now() here.
+
+	* gdesktop-icon.c (set_icon): Do not destroy the icon image.
+
+	* gnome-file-property-dialog.c
+	(gnome_file_property_dialog_finalize): Do not destroy the icon
+	image, since it is a shared resource.
+
 1999-03-14  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (text_changed): If the file has the "icon-caption"
