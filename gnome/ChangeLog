@@ -1,4 +1,12 @@
+1999-09-21  Federico Mena Quintero  <federico@redhat.com>
+
+	* gmain.c (x_init_dlg): Only call x_focus_widget() if there is a
+	current widget.
+
 1999-09-20  Federico Mena Quintero  <federico@redhat.com>
+
+	* gsession.c (save_panel_info): Save the panel's list type.
+	(idle_create_panels): Set the panel's list type.
 
 	* gdesktop.c (handle_recreate_default_icons): New option to
 	re-create the default set of icons.

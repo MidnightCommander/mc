@@ -463,7 +463,7 @@ GnomeUIInfo gnome_panel_desktop_menu [] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_NONE (N_("Rescan _Desktop Directory"), NULL, do_rescan_desktop),
 	GNOMEUIINFO_ITEM_NONE (N_("Rescan De_vices"), NULL, desktop_rescan_devices),
-	GNOMEUIINFO_ITEM_NONE (N_("Re-create Default _Icons"), NULL, desktop_recreate_default_icons),
+	GNOMEUIINFO_ITEM_NONE (N_("Recreate Default _Icons"), NULL, desktop_recreate_default_icons),
 	GNOMEUIINFO_END
 };
 

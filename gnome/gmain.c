@@ -159,7 +159,7 @@ dialog_key_pressed (GtkWidget *win, GdkEventKey *event, Dlg_head *h)
 	w = win;
 	while (w && (GTK_IS_CONTAINER (w) && !GNOME_IS_ICON_LIST (w)))
 		w = GTK_CONTAINER (w)->focus_child;
-	
+
 	if (w && GNOME_IS_ICON_LIST (w)){
 		GnomeCanvas *c = GNOME_CANVAS (w);
 
@@ -168,9 +168,9 @@ dialog_key_pressed (GtkWidget *win, GdkEventKey *event, Dlg_head *h)
 
 			if (i->editing)
 				return FALSE;
-			
+
 		}
-	} 
+	}
 
 	key = translate_gdk_keysym_to_curses (event);
 	if (key == -1)
@@ -196,7 +196,7 @@ dialog_key_pressed (GtkWidget *win, GdkEventKey *event, Dlg_head *h)
 		}
 		on_escape = 0;
 	}
-	
+
 	if (dlg_key_event (h, key)){
 		gtk_signal_emit_stop_by_name (GTK_OBJECT (win), "key_press_event");
 		return TRUE;
@@ -227,7 +227,7 @@ xtoolkit_create_dialog (Dlg_head *h, int flags)
 		}
 	} else
 		win = 0;
-	
+
 	h->grided = flags;
 	h->idle_fn_tag = -1;
 	if (!(flags & DLG_NO_TED)){
@@ -235,7 +235,7 @@ xtoolkit_create_dialog (Dlg_head *h, int flags)
 		ted = gtk_ted_new_layout (h->name, LIBDIR "/layout");
 		gtk_container_add (GTK_CONTAINER (win), ted);
 		gtk_widget_show (ted);
-		
+
 		bind_gtk_keys (GTK_WIDGET (ted), h);
 	}
 	if (win){
@@ -253,7 +253,7 @@ void
 x_dlg_set_window (Dlg_head *h, GtkWidget *win)
 {
 	h->wdata = (widget_data) win;
-	bind_gtk_keys (GTK_WIDGET (win), h);	
+	bind_gtk_keys (GTK_WIDGET (win), h);
 }
 
 void
@@ -268,7 +268,7 @@ xtoolkit_get_main_dialog (Dlg_head *h)
 	GtkWidget *win;
 
 	win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-	return (widget_data) win; 
+	return (widget_data) win;
 }
 
 /* Creates the containers */
@@ -315,7 +315,7 @@ x_init_dlg (Dlg_head *h)
 	if (!(h->grided & DLG_NO_TED)){
 		GtkTed *ted = GTK_TED (GTK_BIN (h->wdata)->child);
 		Widget_Item *p, *first;
-	
+
 		g_warning ("Should never use GtkTed!!!  Write a real dialog!!!");
 
 		first = p = h->current;
@@ -325,16 +325,19 @@ x_init_dlg (Dlg_head *h)
 			p = p->next;
 		} while (p != first);
 		gtk_ted_prepare (ted);
-		
+
 		if (!ted->need_gui){
 			gtk_grab_add (GTK_WIDGET (ted));
 			gtk_window_set_policy (GTK_WINDOW (h->wdata), 0, 0, 0);
 		}
 		gtk_widget_show (GTK_WIDGET (h->wdata));
 	}
+
 	gtk_signal_connect (GTK_OBJECT (h->wdata), "delete_event",
 			    GTK_SIGNAL_FUNC (gnome_dlg_send_destroy), h);
-	x_focus_widget (h->current);
+
+	if (h->current)
+		x_focus_widget (h->current);
 }
 
 /*
@@ -432,7 +435,7 @@ dialog_panel_callback (struct Dlg_head *h, int id, int msg)
 {
 	Widget_Item *dh;
 	void *current_widget;	/* The current widget */
-	
+
 	if (msg == DLG_KEY && id == '\n'){
 		current_widget = (void *) h->current->widget;
 
@@ -446,11 +449,11 @@ dialog_panel_callback (struct Dlg_head *h, int id, int msg)
 
 				if (current_widget == p->current_dir){
 					WInput *in = p->current_dir;
-			
+
 					do_panel_cd (p, in->buffer, cd_parse_command);
 					assign_text (in, p->cwd);
 					update_input (in, 1);
-			
+
 					return MSG_HANDLED;
 				}
 			}
@@ -492,7 +495,7 @@ non_corba_create_panels (char *startup_dir)
 				  dialog_panel_callback, "[panel]", "midnight", DLG_NO_TED);
 
 	session_load ();
-
+#if 0
 	/* The following is a hack.  We have to have at least one panel for
 	 * run_dlg() to be happy.  So we destroy it in the idle loop if we
 	 * didn't need it in the first place.  This idle function is to be run
@@ -502,7 +505,7 @@ non_corba_create_panels (char *startup_dir)
 	panel = new_panel_at (startup_dir);
 	gtk_idle_add_priority (GTK_PRIORITY_DEFAULT, idle_destroy_panel, panel);
 	panel->widget.options |= W_PANEL_HIDDEN;
-
+#endif
 	run_dlg (desktop_dlg);
 
 	desktop_destroy ();
@@ -546,8 +549,8 @@ gmc_window_setup_from_panel (GnomeDialog *dialog, WPanel *panel)
 
 /**
  * gnome_check_super_user:
- * @void: 
- * 
+ * @void:
+ *
  * Puts out a warning if the user is running gmc as root.  If the user selects
  * Cancel, then gmc will terminate.
  **/

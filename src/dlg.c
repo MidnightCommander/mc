@@ -855,7 +855,7 @@ void init_dlg (Dlg_head *h)
     /* Redraw the screen */
     dlg_redraw (h);
     
-    while (!dlg_focus (h))
+    while (!dlg_focus (h) && h->current)
 	h->current = h->current->next;
 
     h->ret_value = 0;

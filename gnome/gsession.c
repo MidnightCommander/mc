@@ -9,6 +9,7 @@
 #include <config.h>
 #include "main.h"
 #include "../vfs/vfs.h"
+#include "gcmd.h"
 #include "gmain.h"
 #include "gscreen.h"
 #include "gsession.h"
@@ -26,6 +27,7 @@ typedef struct {
 	char *cwd;
 	int column_width[GMC_COLUMNS];
 	char *user_format;
+	int list_type;
 } PanelInfo;
 
 
@@ -54,6 +56,10 @@ save_panel_info (WPanel *panel)
 		gnome_config_set_int (path, panel->column_width[i]);
 		g_free (path);
 	}
+
+	path = g_strconcat (section, "/list_type", NULL);
+	gnome_config_set_int (path, panel->list_type);
+	g_free (path);
 }
 
 /* Loads a panel from the information in the specified gnome-config file/section */
@@ -94,6 +100,8 @@ load_panel_info (char *file, char *section)
 		pi->column_width[i] = gnome_config_get_int_with_default (key, NULL);
 	}
 
+	pi->list_type = gnome_config_get_int_with_default ("list_type=0", NULL);
+
 	gnome_config_pop_prefix ();
 	g_free (prefix);
 
@@ -108,6 +116,42 @@ free_panel_info (PanelInfo *pi)
 	g_free (pi->user_format);
 	g_free (pi);
 }
+
+static void
+create_panel_from_info (PanelInfo *pi)
+{
+	WPanel *panel;
+
+	panel = new_panel_at (pi->cwd);
+
+	g_free (panel->user_format);
+	panel->user_format = g_strdup (pi->user_format);
+	memcpy (panel->column_width, pi->column_width, sizeof (pi->column_width));
+	gnome_set_panel_list_type (panel, pi->list_type);
+}
+
+static void
+load_session_info (char *filename)
+{
+	void *iterator;
+	char *key, *value;
+	PanelInfo *pi;
+
+	iterator = gnome_config_init_iterator_sections (filename);
+
+	while ((iterator = gnome_config_iterator_next (iterator, &key, &value)) != NULL)
+		if (key && strncmp (key, "panel ", 6) == 0) {
+			pi = load_panel_info (filename, key);
+			g_free (key);
+			if (!pi)
+				continue;
+
+			create_panel_from_info (pi);
+			free_panel_info (pi);
+		}
+}
+
+#if 0
 
 /* Idle handler to create the list of panels loaded from the session info file */
 static gint
@@ -126,6 +170,7 @@ idle_create_panels (gpointer data)
 		g_free (panel->user_format);
 		panel->user_format = g_strdup (pi->user_format);
 		memcpy (panel->column_width, pi->column_width, sizeof (pi->column_width));
+		gnome_set_panel_list_type (panel, pi->list_type);
 
 		free_panel_info (pi);
 	}
@@ -165,6 +210,23 @@ load_session_info (char *filename)
 	gtk_idle_add_priority (GTK_PRIORITY_DEFAULT + 1, idle_create_panels, panels);
 }
 
+#endif
+
+static void
+create_default_panel (const char *startup_dir)
+{
+	char buf[MC_MAXPATHLEN];
+	const char *dir = buf;
+
+	if (startup_dir == NULL)
+		mc_get_current_wd (buf, MC_MAXPATHLEN);
+	else
+		dir = startup_dir;
+
+	new_panel_with_geometry_at (dir, cmdline_geometry);
+}
+
+#if 0
 /* Idle handler to create the default panel */
 static gint
 idle_create_default_panel (gpointer data)
@@ -192,6 +254,8 @@ create_default_panel (const char *startup_dir)
 
 	gtk_idle_add_priority (GTK_PRIORITY_DEFAULT + 1, idle_create_default_panel, g_strdup (dir));
 }
+
+#endif
 
 /* Callback from the master client to save the session */
 static gint

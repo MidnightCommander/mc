@@ -2639,7 +2639,7 @@ GnomeUIInfo desktop_popup_items[] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_NONE (N_("Rescan _Desktop Directory"), NULL, handle_rescan_desktop),
 	GNOMEUIINFO_ITEM_NONE (N_("Rescan De_vices"), NULL, handle_rescan_devices),
-	GNOMEUIINFO_ITEM_NONE (N_("Re-create Default _Icons"), NULL, handle_recreate_default_icons),
+	GNOMEUIINFO_ITEM_NONE (N_("Recreate Default _Icons"), NULL, handle_recreate_default_icons),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_NONE (N_("Configure _Background Image"), NULL, set_background_image),
 	GNOMEUIINFO_END
