@@ -294,7 +294,7 @@ void init_colors (void)
 #endif
 
 	if (use_colors) {
-#if defined HAVE_SLANG && !defined(HAS_DIRECT_COLOR_ACCESS)
+#ifdef HAVE_SLANG
 	    /*
 	     * We are relying on undocumented feature of
 	     * S-Lang to make COLOR_PAIR(DEFAULT_COLOR_INDEX)
@@ -302,8 +302,8 @@ void init_colors (void)
 	     * Hopefully, future versions of S-Lang will
 	     * document this feature.
 	     */
-	    SLtt_set_color (DEFAULT_COLOR_INDEX, NULL, NULL, NULL);
-#elif USE_NCURSES
+	    SLtt_set_color (DEFAULT_COLOR_INDEX, NULL, "default", "default");
+#elif defined(USE_NCURSES)
 	    /* Always white on black */
 	    init_pair(DEFAULT_COLOR_INDEX, COLOR_WHITE, COLOR_BLACK);
 #endif

@@ -1,5 +1,9 @@
 2001-05-29  Pavel Roskin  <proski@gnu.org>
 
+	* color.c (init_colors) [HAVE_SLANG]: Use "default" instead of
+	NULL as color names - this works even if COLORFGBG is unset.
+	Don't check HAS_DIRECT_COLOR_ACCESS - it's now meaningless.
+
 	* color.h: Define DEFAULT_COLOR_INDEX and DEFAULT_COLOR in the
 	same way regardless of HAVE_SLANG.
 	* color.c (init_colors) [USE_NCURSES]: Initialize the default
