@@ -61,22 +61,22 @@ static void status_string (WEdit * edit, char *s, int w, int fill, int font_widt
     }
 
     /* The field lengths just prevent the status line from shortening too much */
-    snprintf (s, w,
-	      "[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb)= %s",
-	      edit->mark1 != edit->mark2 ? ( column_highlighting ? 'C' : 'B') : '-',
-	      edit->modified ? 'M' : '-',
-	      edit->macro_i < 0 ? '-' : 'R',
-	      edit->overwrite == 0 ? '-' : 'O',
-	      edit->curs_col / font_width,
+    g_snprintf (s, w,
+		"[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb)= %s",
+		edit->mark1 != edit->mark2 ? ( column_highlighting ? 'C' : 'B') : '-',
+		edit->modified ? 'M' : '-',
+		edit->macro_i < 0 ? '-' : 'R',
+		edit->overwrite == 0 ? '-' : 'O',
+		edit->curs_col / font_width,
 
-	      edit->start_line + 1,
-	      edit->curs_row,
-	      edit->curs_line + 1,
-	      edit->total_lines + 1,
+		edit->start_line + 1,
+		edit->curs_row,
+		edit->curs_line + 1,
+		edit->total_lines + 1,
 
-	      edit->curs1,
-	      edit->last_byte, 
-	      byte_str);
+		edit->curs1,
+		edit->last_byte, 
+		byte_str);
 }
 
 #endif /* MIDNIGHT || GTK */
