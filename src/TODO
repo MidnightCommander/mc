@@ -30,6 +30,9 @@ anything can be done about it.
 
 ftp and fish with home != '/' - readjust directory to the home.
 
+Check compatibility with new gpm.  Excessive warnings on Mandrake 9.0
+have been reported.
+
 
 Before 4.6.0
 ============
