@@ -367,24 +367,28 @@ int quick_dialog (QuickDialog *qd)
 /* {{{ Input routines */
 
 #define INPUT_INDEX 2
-char *real_input_dialog_help (char *header, char *text, char *help, char *def_text)
+char *
+real_input_dialog_help (char *header, char *text, char *help,
+			char *def_text)
 {
     QuickDialog Quick_input;
-    QuickWidget quick_widgets [] = {
-    { quick_button, 6, 10, 1, 0, N_("&Cancel"), 0, B_CANCEL, 0, 0,
-	  "button-cancel" },
-    { quick_button, 3, 10, 1, 0, N_("&Ok"), 0, B_ENTER, 0, 0,
-	  "button-ok" },
-    { quick_input,  4, 80, 0, 0, "", 58, 0, 0, 0, 0 },
-    { quick_label,  3, 80, 2, 0, "", 0, 0, 0, 0, "label" },
-    { 0 } };
-    
+    QuickWidget quick_widgets[] = {
+	{quick_button, 6, 10, 1, 0, N_("&Cancel"), 0, B_CANCEL, 0, 0,
+	 "button-cancel"},
+	{quick_button, 3, 10, 1, 0, N_("&Ok"), 0, B_ENTER, 0, 0,
+	 "button-ok"},
+	{quick_input, 4, 80, 0, 0, "", 58, 0, 0, 0, 0},
+	{quick_label, 4, 80, 2, 0, "", 0, 0, 0, 0, "label"},
+	{0}
+    };
+
     int len;
     int i;
     int lines;
+    int ret;
     char *my_str;
     char tk_name[64] = "inp|";
-    
+
 /* we need a unique name for tkname because widget.c:history_tool()
    needs a unique name for each dialog - using the header is ideal */
 
@@ -394,48 +398,51 @@ char *real_input_dialog_help (char *header, char *text, char *help, char *def_te
 
     len = max (strlen (header), msglen (text, &lines)) + 4;
     len = max (len, 64);
-    
+
     /* The special value of def_text is used to identify password boxes
        and hide characters with "*".  Don't save passwords in history! */
     if (def_text == INPUT_PASSWORD) {
-	quick_widgets [INPUT_INDEX].value = 1;
+	quick_widgets[INPUT_INDEX].value = 1;
 	tk_name[3] = 0;
 	def_text = "";
     } else {
-	quick_widgets [INPUT_INDEX].value = 0;
+	quick_widgets[INPUT_INDEX].value = 0;
     }
 
 #ifdef ENABLE_NLS
-	/* 
-	 * An attempt to place buttons symmetrically, based on actual i18n
-	 * length of the string. It looks nicer with i18n (IMO) - alex
-	 */
-	quick_widgets [0].relative_x = len/2 + 4;
-	quick_widgets [1].relative_x = 
-		len/2 - (strlen (_(quick_widgets [1].text)) + 9);
-	quick_widgets [0].x_divisions = quick_widgets [1].x_divisions = len;
-#endif /* ENABLE_NLS */
-    
-    Quick_input.xlen  = len;
-    Quick_input.xpos  = -1;
+    /* 
+     * An attempt to place buttons symmetrically, based on actual i18n
+     * length of the string. It looks nicer with i18n (IMO) - alex
+     */
+    quick_widgets[0].relative_x = len / 2 + 4;
+    quick_widgets[1].relative_x =
+	len / 2 - (strlen (_(quick_widgets[1].text)) + 9);
+    quick_widgets[0].x_divisions = quick_widgets[1].x_divisions = len;
+#endif				/* ENABLE_NLS */
+
+    Quick_input.xlen = len;
+    Quick_input.xpos = -1;
     Quick_input.title = header;
-    Quick_input.help  = help;
-    Quick_input.i18n  = 0;
-    quick_widgets [INPUT_INDEX+1].text = text;
-    quick_widgets [INPUT_INDEX].text = def_text;
+    Quick_input.help = help;
+    Quick_input.i18n = 0;
+    quick_widgets[INPUT_INDEX + 1].text = g_strstrip (g_strdup (text));
+    quick_widgets[INPUT_INDEX].text = def_text;
 
     for (i = 0; i < 4; i++)
-	quick_widgets [i].y_divisions = lines+6;
-    Quick_input.ylen  = lines + 6;
+	quick_widgets[i].y_divisions = lines + 6;
+    Quick_input.ylen = lines + 6;
 
     for (i = 0; i < 3; i++)
-	quick_widgets [i].relative_y += 2 + lines;
+	quick_widgets[i].relative_y += 2 + lines;
 
-    quick_widgets [INPUT_INDEX].str_result = &my_str;
-    
+    quick_widgets[INPUT_INDEX].str_result = &my_str;
+
     Quick_input.widgets = quick_widgets;
-    if (quick_dialog (&Quick_input) != B_CANCEL){
-	return *(quick_widgets [INPUT_INDEX].str_result);
+    ret = quick_dialog (&Quick_input);
+    g_free (quick_widgets[INPUT_INDEX + 1].text);
+
+    if (ret != B_CANCEL) {
+	return *(quick_widgets[INPUT_INDEX].str_result);
     } else
 	return 0;
 }

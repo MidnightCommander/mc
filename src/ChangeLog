@@ -1,5 +1,8 @@
 2002-09-16  Pavel Roskin  <proski@gnu.org>
 
+	* wtools.c (real_input_dialog_help): Trim spaces from the label
+	text.  Align label with the input field.
+
 	* cmd.c (do_link): Avoid using g_strconcat() on translatable
 	strings.
 	(other_symlink_cmd): Likewise.
