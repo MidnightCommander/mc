@@ -65,12 +65,14 @@ static int vfmake (vfs *me, char *name, char *cache)
 
     if ((sfs_flags[w] & F_1) || (!strcmp (name, "/"))) ; else return -1;
     /*    if ((sfs_flags[w] & F_2) || (!inpath) || (!*inpath)); else return -1; */
-    if (!(sfs_flags[w] & F_NOLOCALCOPY))
-        name = mc_getlocalcopy (name);
-    else 
-        name = g_strdup (name);
-    if (!name)
-	return -1;
+    if (!(sfs_flags[w] & F_NOLOCALCOPY)) {
+        s = mc_getlocalcopy (name);
+	if (!s)
+	    return -1;
+        name = name_quote (s, 0);
+	g_free (s);
+    } else 
+        name = name_quote (name, 0);
     s = sfs_command[w];
 #define COPY_CHAR if (t-pad>10200) return -1; else *t++ = *s;
 #define COPY_STRING(a) if ((t-pad)+strlen(a)>10200) return -1; else { strcpy (t, a); t+= strlen(a); }
