@@ -1,5 +1,6 @@
 mx
-gmc
+plain-gmc
+corba-gmc
 Makefile
 .depend
 mc.metadata

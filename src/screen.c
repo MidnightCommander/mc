@@ -467,7 +467,7 @@ to_buffer (char *dest, int just_mode, int len, char *txt)
     }
     still = len - txtlen;
     if (just_mode == J_LEFT){
-	strcpy (dest, txt);
+	strncpy (dest, txt, txtlen);
 	dest += txtlen;
 	while (still--)
 	    *dest++ = ' ';
@@ -475,7 +475,7 @@ to_buffer (char *dest, int just_mode, int len, char *txt)
     } else {
 	while (still--)
 	    *dest++ = ' ';
-	strcpy (dest, txt);
+	strncpy (dest, txt, len);
 	dest += txtlen;
     }
     return dest;

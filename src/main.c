@@ -2606,6 +2606,7 @@ static void parse_an_arg (poptContext state,
 char *cmdline_geometry = NULL;
 int   nowindows = 0;
 char **directory_list = NULL;
+int   force_activation = 0;
 
 static struct poptOption argument_table [] = {
 #ifdef HAVE_GNOME
@@ -2662,6 +2663,7 @@ static struct poptOption argument_table [] = {
 #ifdef HAVE_GNOME
     { "geometry", '\0', POPT_ARG_STRING, &cmdline_geometry, 0, N_("Geometry for the window"), N_("GEOMETRY")},
     {"nowindows", '\0', POPT_ARG_NONE, &nowindows, 0, N_("No windows opened at startup"), NULL},
+    {"force-activation",0,POPT_ARG_NONE, &force_activation, 0, N_("Force activation even if a server is already running"), NULL},
 #endif
 
     { NULL, 		0,			0, NULL, 0 }
@@ -2687,10 +2689,13 @@ handle_args (int argc, char *argv [])
     CORBA_Environment ev;
 
     CORBA_exception_init (&ev);
-
     orb = gnome_CORBA_init_with_popt_table (
 	    "gmc", VERSION, &argc, argv, argument_table, 0, &ctx, GNORBA_INIT_SERVER_FUNC, &ev);
 
+    corba_init ();
+    if (!force_activation)
+	    if (try_to_activate_running_copy ())
+		    exit (1);
 #else
     gnome_init_with_popt_table ("gmc", VERSION, argc, argv, argument_table, 0, &ctx);
 #endif

@@ -1,3 +1,11 @@
+1999-01-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gcorba.c: Provide new code to activate an existing
+	FileManagerFactory factory.
+
+	installed gmc is now corba-gmc.  plain-gmc is still available if
+	you want it.
+
 Thu Jan 28 02:15:48 1999  Timur Bakeyev <mc@bat.ru>
 
 	* gdialogs.c: fixed "regexp.h" -> "eregexp.h" conversion.

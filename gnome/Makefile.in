@@ -116,6 +116,7 @@ CORBAOBJS = 			\
 	main-corba.o		\
 	gcorba.o		\
 	FileManager-skels.o	\
+	FileManager-stubs.o	\
 	FileManager-common.o
 
 OBJS = 			\
@@ -169,7 +170,7 @@ $(CORBA_SOURCES): $(CORBA_GENERATED)
 
 FileManager-impl.c: FileManager.h
 
-EXTRA_DIST = gnome.TODO layout gmc.gnorba mc.keys.in.in	gimp.image.desktop
+EXTRA_DIST = gnome.TODO layout gmc.gnorba mc.keys.in.in	gimp.image.desktop 
 
 DISTGNOME = \
 	Makefile.in ChangeLog $(EXTRA_DIST) $(CORBA_SOURCES) \
@@ -188,12 +189,18 @@ Makefile: Makefile.in ../config.status
 	(cd ..; CONFIG_FILES=gnome/Makefile CONFIG_HEADERS= ./config.status)
 
 mx: checklinks 
-	$(MAKE) gmc
+	$(MAKE) plain-gmc
 	$(MAKE) corba-gmc
-	touch mx
+	@echo ----------------------------------------------------------
+	@echo -
+	@echo - GMC no longer exists here.  Use plain-gmc or corba-gmc
+	@echo - if you are debugging/working on this.
+	@echo -
+	@echo -----------------------------------------------------------
+	@touch mx
 
-gmc: @LIBVFS@ $(OBJS) $(NORMALOBJS) @LIBSLANG@ libgtkedit.a
-	$(CC) -o gmc $(NORMALOBJS) $(OBJS) $(LDFLAGS) -L../vfs -L../slang -L../gtkedit $(EXTRALIBS) $(LIBS) 
+plain-gmc: @LIBVFS@ $(OBJS) $(NORMALOBJS) @LIBSLANG@ libgtkedit.a
+	$(CC) -o plain-gmc $(NORMALOBJS) $(OBJS) $(LDFLAGS) -L../vfs -L../slang -L../gtkedit $(EXTRALIBS) $(LIBS) 
 
 corba-gmc: @LIBVFS@ $(OBJS) $(CORBAOBJS) @LIBSLANG@ libgtkedit.a
 	$(CC) -o corba-gmc $(CORBAOBJS) $(OBJS) $(CORBA_LDFLAGS) -L../vfs -L../slang -L../gtkedit $(EXTRALIBS) $(LIBS) 
@@ -243,7 +250,7 @@ TAGS: $(GNOMESRCS)
 	etags $(GNOMESRCS)
 
 clean:
-	$(RMF) gmc corba-gmc *.o core a.out mx @LIBVFS@ libgtkedit.a libmcslang.a
+	$(RMF) plain-gmc corba-gmc *.o core a.out mx @LIBVFS@ libgtkedit.a libmcslang.a
 
 realclean: clean
 	$(RMF) .depend
@@ -269,8 +276,8 @@ install_mx: all
 	$(mcsrcdir)/xmkdir $(DESTDIR)$(libdir)
 	$(mcsrcdir)/xmkdir $(DESTDIR)$(bindir)
 	$(mcsrcdir)/xmkdir $(gnewdir)
-	$(INSTALL_PROGRAM) gmc $(DESTDIR)$(bindir)/$(binprefix)gmc
-	$(INSTALL_PROGRAM) corba-gmc $(DESTDIR)$(bindir)/$(binprefix)corba-gmc
+	$(INSTALL_PROGRAM) plain-gmc $(DESTDIR)$(bindir)/$(binprefix)plain-gmc
+	$(INSTALL_PROGRAM) corba-gmc $(DESTDIR)$(bindir)/$(binprefix)gmc
 	for I in $(ICONS); \
 	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(icondir)/$$I; done
 	$(INSTALL_DATA) $(srcdir)/layout $(DESTDIR)$(libdir)/layout

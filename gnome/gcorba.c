@@ -189,10 +189,46 @@ impl_GNOME_FileManagerFactory_create_object(impl_POA_GNOME_FileManagerFactory * 
 	return CORBA_OBJECT_NIL;
 }
 
-void
-corba_register_server (void)
+int
+try_to_activate_running_copy (void)
 {
-	int v;
+	CORBA_Object name_service;
+	CORBA_Environment ev;
+	CosNaming_NameComponent nc[3] = {{"GNOME", "subcontext"},
+					 {"Servers", "subcontext"},
+					 {"gmc_filemanager_factory", "object"}};
+	CosNaming_Name          nom = {0, 3, nc, CORBA_FALSE};
+	CORBA_Object retval = CORBA_OBJECT_NIL;
+	
+	CORBA_exception_init (&ev);
+	
+	name_service = gnome_name_service_get();
+	if (name_service == CORBA_OBJECT_NIL)
+		goto out;
+
+	retval = CosNaming_NamingContext_resolve (name_service, &nom, &ev);
+	if (ev._major == CORBA_USER_EXCEPTION
+	    && strcmp(CORBA_exception_id(&ev), ex_CosNaming_NamingContext_NotFound) == 0){
+		retval = CORBA_OBJECT_NIL;
+		goto out;
+	}
+
+	if (CORBA_Object_is_nil (retval, &ev))
+		goto out;
+
+	GNOME_FileManagerFactory_create_window (retval, home_dir, &ev);
+
+	if (ev._major != CORBA_NO_EXCEPTION)
+		retval = CORBA_OBJECT_NIL;
+out:
+	CORBA_exception_free (&ev);
+	CORBA_Object_release (name_service, &ev);
+	return retval != CORBA_OBJECT_NIL;
+}
+
+void
+corba_init (void)
+{
 	CORBA_Environment ev;
 	
 	CORBA_exception_init (&ev);
@@ -216,6 +252,15 @@ corba_register_server (void)
 		printf ("Can not get the POAmanager");
 		return;
 	}
+}
+
+void
+corba_register_server (void)
+{
+	CORBA_Environment ev;
+	int v;
+	
+	CORBA_exception_init (&ev);
 
 	/*
 	 * Initialize the Factory Object
@@ -225,6 +270,7 @@ corba_register_server (void)
 		&ev);
 	
 	if (ev._major != CORBA_NO_EXCEPTION){
+		CORBA_exception_free (&ev);
 		printf ("Can not initialize FileManagerFactory object\n");
 		return;
 	}
@@ -236,11 +282,12 @@ corba_register_server (void)
 	/* Get a refeerence to te object */
 	filemanagerfactory_server = PortableServer_POA_servant_to_reference (
 		poa, &poa_filemanagerfactory_servant, &ev);
-	
+
 	v = goad_server_register (
 		NULL, filemanagerfactory_server,
 		"gmc_filemanager_factory", "server", &ev);
 
+	CORBA_exception_free (&ev);
 	if (v != 0)
 		return;
 	

@@ -2,7 +2,7 @@
 type=exe
 repo_id=IDL:GNOME/FileManagerFactory:1.0 IDL:GNOME/GenericFactory:1.0
 description=GNOME Midnight Commander
-location_info=corba-gmc
+location_info=gmc
 
 [gmc_filemanager_window]
 type=factory
