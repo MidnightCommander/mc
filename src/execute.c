@@ -133,7 +133,7 @@ do_execute (const char *shell, const char *command, int flags)
 	    printf (_("Press any key to continue..."));
 	    fflush (stdout);
 	    mc_raw_mode ();
-	    getch ();
+	    get_key_code (0);
 	    printf ("\r\n");
 	    fflush (stdout);
 	}

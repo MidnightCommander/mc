@@ -1,3 +1,9 @@
+2003-11-21  Pavel Roskin  <proski@gnu.org>
+
+	* execute.c (do_execute): Use get_key_code(), not getch() to
+	consume all characters from a single sequence.
+	Reported by Miven Dooligan <dooligan@intergate.ca>
+
 2003-11-20  Pavel Roskin  <proski@gnu.org>
 
 	* glibcompat.h: Provide replacement for g_slist_delete_link().
