@@ -1,3 +1,9 @@
+2001-03-18  Miguel de Icaza  <miguel@ximian.com>
+
+	* widget.c (forward_word, backward_word): Revert Timur's patch
+	from last year which made the behaviour for advancing words not
+	match the one in Emacs.
+
 2001-03-02  Pavel Roskin  <proski@gnu.org>
 
 	* key.c (mi_getch): Discard non-events (EV_NONE), but not

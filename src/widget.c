@@ -23,7 +23,6 @@
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
  */
-/* "$Id$" */
 
 #include <config.h>
 #include <string.h>
@@ -1281,12 +1280,11 @@ static void
 forward_word (WInput *in)
 {
     unsigned char *p = in->buffer+in->point;
-    
-    /* We really want to delete either words or separators */
-    while (*p && isalnum (*p))
-        p++;
+
     while (*p && (isspace (*p) || ispunct (*p)))
-        p++;
+	p++;
+    while (*p && isalnum (*p))
+	p++;
     in->point = p - in->buffer;
 }
 
@@ -1295,11 +1293,10 @@ backward_word (WInput *in)
 {
     unsigned char *p = in->buffer+in->point;
 
-    /* We really want to delete either words or separators */
-    while (p-1 > in->buffer-1 && isalnum (*(p-1)))
-        p--;
     while (p-1 > in->buffer-1 && (isspace (*(p-1)) || ispunct (*(p-1))))
-        p--;
+	p--;
+    while (p-1 > in->buffer-1 && isalnum (*(p-1)))
+	p--;
     in->point = p - in->buffer;
 }
 
