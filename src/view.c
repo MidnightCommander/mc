@@ -503,16 +503,15 @@ static char *load_view_file (WView *view, char *filename)
 #ifdef HAVE_MMAP
     view->data = mc_mmap (0, view->s.st_size, PROT_READ, MAP_FILE | MAP_SHARED,
 		          view->file, 0);
-    if ((caddr_t) view->data == (caddr_t) -1)
-        goto no_mmap;
+    if ((caddr_t) view->data != (caddr_t) -1) {
+	/* mmap worked */
+	view->first = 0;
+	view->bytes_read = view->s.st_size;
+	view->mmapping = 1;
+	return NULL;
+    }
+#endif /* HAVE_MMAP */
 
-    view->first = 0;
-    view->bytes_read = view->s.st_size;
-    view->mmapping = 1;
-    return NULL;
-#endif
-
-no_mmap:
     /* For those OS that dont provide mmap call. Try to load all the
      * file into memory (alex@bcs.zaporizhzhe.ua). Also, mmap can fail
      * for any reason, so we use this as fallback (pavel@ucw.cz) */

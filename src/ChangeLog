@@ -1,3 +1,7 @@
+2001-08-20  Pavel Roskin  <proski@gnu.org>
+
+	* view.c (load_view_file) [!HAVE_MMAP]: Warning fix.
+
 2001-08-19  Pavel Roskin  <proski@gnu.org>
 
 	* main.c (mc_maybe_editor_or_viewer) [!USE_INTERNAL_EDIT]:
