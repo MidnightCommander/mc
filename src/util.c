@@ -254,7 +254,7 @@ char *size_trunc_sep (double size)
     p += strlen (p) - 1;
     d = x + sizeof (x) - 1;
     *d-- = 0;
-    while (p >= y && isalpha (*p))
+    while (p >= y && isalpha ((unsigned char) *p))
 	*d-- = *p--;
     for (count = 0; p >= y; count++){
 	if (count == 3){
@@ -781,7 +781,7 @@ char *skip_separators (char *s)
 char *skip_numbers (char *s)
 {
     for (;*s; s++)
-	if (!isdigit (*s))
+	if (!isdigit ((unsigned int) *s))
 	    break;
     return s;
 }

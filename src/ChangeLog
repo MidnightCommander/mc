@@ -1,5 +1,11 @@
 2002-07-03  Pavel Roskin  <proski@gnu.org>
 
+	* file.c (do_transform_source): Cast the argument to functions
+	for character classification to unsigned int.
+	* main.c (handle_args): Likewise.
+	* util.c (size_trunc_sep): Likewise.
+	(skip_numbers): Likewise.
+
 	* subshell.c (sigchld_handler): Remove subshell_pty from the
 	channel list if the subshell has died.
 

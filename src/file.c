@@ -193,7 +193,7 @@ do_transform_source (FileOpContext *ctx, unsigned char *source)
         switch (ctx->dest_mask [j]){
 	case '\\':
 	    j++;
-	    if (! isdigit (ctx->dest_mask [j])){
+	    if (! isdigit ((unsigned char) ctx->dest_mask [j])){
 		/* Backslash followed by non-digit */
 		switch (ctx->dest_mask [j]){
 		case 'U':

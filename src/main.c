@@ -2497,7 +2497,7 @@ handle_args (int argc, char *argv [])
 	edit_one_file = "";
 	edit_one_file_start_line = 1;
         if (tmp) {
-	    if (*tmp == '+' && isdigit (tmp[1])){
+	    if (*tmp == '+' && isdigit ((unsigned char) tmp[1])){
 		int start_line = atoi (tmp);
 		if (start_line > 0) {
 		    char *file = poptGetArg (ctx);
