@@ -250,7 +250,7 @@ static void do_view_cmd (WPanel *panel, int normal)
 	    }
 	}
 	if (!do_cd (selection (panel)->fname, cd_exact))
-	    message_1s(1, MSG_ERROR, _("Could not change directory") );
+	    message (1, MSG_ERROR, _("Could not change directory") );
 
 	return;
 	
@@ -712,7 +712,7 @@ void quick_chdir_cmd (void)
 	tree_chdir (the_tree, target);
     else
         if (!do_cd (target, cd_exact))
-	    message_1s(1, MSG_ERROR, _("Could not change directory") );
+	    message (1, MSG_ERROR, _("Could not change directory") );
     free (target);
 }
 
@@ -726,7 +726,7 @@ void reselect_vfs (void)
 	return;
 
     if (!do_cd (target, cd_exact))
-        message_1s(1, MSG_ERROR, _("Could not change directory") );
+        message (1, MSG_ERROR, _("Could not change directory") );
     free (target);
 }
 #endif

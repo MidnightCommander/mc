@@ -4,6 +4,10 @@ Fri Oct 16 12:10:56 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
  	do_cd(). (Fixed error for here, but more such bugs are present in
  	src/ tree. Or maybe move error checking into do_cd?)
 
+	* command.c: warn user if he is pressing enter while on non-local
+ 	filesystem. (Prev. behaviour was fail silently to do anything,
+ 	which is _bad_.)
+
 Mon Oct 12 22:47:53 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* file.c (copy_file_file): MCCTL_SETREMOTECOPY is no longer used

@@ -197,8 +197,11 @@ static int enter (WCommand *cmdline)
 	    char *command, *s;
 	    int i, j;
 
-	    if (!vfs_current_is_local ())
+	    if (!vfs_current_is_local ()) {
+	        message (1, MSG_ERROR, _(" You can not execute commands on non-local filesystems"));
+	        
 		return MSG_NOT_HANDLED;
+	    }
 	    command = xmalloc (strlen (cmd) + 1, "main, enter");
 	    command [0] = 0;
 	    for (i = j = 0; i < strlen (cmd); i ++){
