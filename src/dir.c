@@ -79,7 +79,7 @@ typedef enum {
     STRCOLL_TEST	
 } strcoll_status;
 
-static int string_sortcomp (char *str1, char *str2)
+static int string_sortcomp (const char *str1, const char *str2)
 {
     static strcoll_status use_strcoll = STRCOLL_TEST;
 
@@ -126,7 +126,7 @@ sort_name (const file_entry *a, const file_entry *b)
 int
 sort_ext (const file_entry *a, const file_entry *b)
 {
-    char *exta, *extb;
+    const char *exta, *extb;
     int r;
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
@@ -368,7 +368,7 @@ set_zero_dir (dir_list *list)
 /* If you change handle_dirent then check also handle_path. */
 /* Return values: -1 = failure, 0 = don't add, 1 = add to the list */
 static int
-handle_dirent (dir_list *list, char *filter, struct dirent *dp,
+handle_dirent (dir_list *list, const char *filter, struct dirent *dp,
 	       struct stat *buf1, int next_free, int *link_to_dir,
 	       int *stale_link)
 {

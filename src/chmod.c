@@ -63,13 +63,18 @@ static int mode_change, need_update;
 static int c_file, end_chmod;
 
 static umode_t and_mask, or_mask, c_stat;
-static char *c_fname, *c_fown, *c_fgrp;
+
+/* FIXME: these variables are superfluous, aren't they? (hint: name_trunc
+ * returns a pointer to a static buffer, and label_new creates its own copy
+ * of its argument)
+ * --rillig, 2004-08-29 */
+static const char *c_fname, *c_fown, *c_fgrp;
 
 static WLabel *statl;
 
 static struct {
     mode_t mode;
-    char *text;
+    const char *text;
     int selected;
     WCheck *check;
 } check_perm[PERMISSIONS] = 
@@ -90,7 +95,7 @@ static struct {
 
 static struct {
     int ret_cmd, flags, y, x;
-    char *text;
+    const char *text;
 } chmod_but[BUTTONS] = 
 {
     { B_CANCEL, NORMAL_BUTTON,  2, 33, N_("&Cancel") },

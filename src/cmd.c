@@ -85,7 +85,7 @@ int
 view_file_at_line (const char *filename, int plain_view, int internal,
 		   int start_line)
 {
-    static char *viewer = 0;
+    static const char *viewer = NULL;
     int move_dir = 0;
 
 
@@ -265,7 +265,7 @@ filtered_view_cmd (void)
 
 void do_edit_at_line (const char *what, int start_line)
 {
-    static char *editor = 0;
+    static const char *editor = NULL;
 
 #ifdef USE_INTERNAL_EDIT
     if (use_internal_edit){
@@ -421,7 +421,7 @@ static void
 set_panel_filter (WPanel *p)
 {
     char *reg_exp;
-    char *x;
+    const char *x;
     
     x = p->filter ? p->filter : easy_patterns ? "*" : ".";
 	
@@ -1062,7 +1062,7 @@ char *guess_message_value (void)
     };
 
     unsigned i = 0;
-    char *locale = NULL;
+    const char *locale = NULL;
 
     while (var[i] != NULL) {
 	locale = getenv (var[i]);
@@ -1120,7 +1120,7 @@ get_random_hint (int force)
 
 #if defined(USE_NETCODE) || defined(USE_EXT2FSLIB)
 static void
-nice_cd (char *text, char *xtext, char *help, char *prefix, int to_home)
+nice_cd (const char *text, const char *xtext, const char *help, const char *prefix, int to_home)
 {
     char *machine;
     char *cd_path;
@@ -1154,7 +1154,7 @@ nice_cd (char *text, char *xtext, char *help, char *prefix, int to_home)
 
 #ifdef USE_NETCODE
 
-static char *machine_str = N_(" Enter machine name (F1 for details): ");
+static const char *machine_str = N_(" Enter machine name (F1 for details): ");
 
 #ifdef WITH_MCFS
 void netlink_cmd (void)

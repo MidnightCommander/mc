@@ -274,7 +274,7 @@ variable_completion_function (char *text, int state)
 static char **hosts = NULL;
 static char **hosts_p = NULL;
 static int hosts_alloclen = 0;
-static void fetch_hosts (char *filename)
+static void fetch_hosts (const char *filename)
 {
     FILE *file = fopen (filename, "r");
     char *temp, buffer[256], *name;
@@ -352,7 +352,7 @@ hostname_completion_function (char *text, int state)
     static int textstart, textlen;
 
     if (!state){ /* Initialization stuff */
-        char *p;
+        const char *p;
         
     	if (hosts != NULL){
     	    for (host_p = hosts; *host_p; host_p++)
@@ -614,8 +614,8 @@ check_is_cd (const char *text, int start, int flags)
 	return 0;
 
     /* Skip initial spaces */
-    p = text;
-    q = text + start;
+    p = (const unsigned char *) text;
+    q = (const unsigned char *) text + start;
     while (p < q && *p && isspace (*p))
 	p++;
 
@@ -633,7 +633,7 @@ try_complete (char *text, int *start, int *end, int flags)
     int in_command_position = 0, i;
     char *word, c;
     char **matches = NULL;
-    char *command_separator_chars = ";|&{(`";
+    const char *command_separator_chars = ";|&{(`";
     char *p = NULL, *q = NULL, *r = NULL;
     int is_cd = check_is_cd (text, *start, flags);
 

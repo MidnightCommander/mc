@@ -133,11 +133,11 @@ static void
 display_init (int radio_sel, char *init_text, int _check_status,
 	      char **_status)
 {
-    static char *display_title = N_("Listing mode");
+    static const char *display_title = N_("Listing mode");
     static int i18n_displays_flag;
-    char *user_mini_status = _("user &Mini status");
-    char *ok_button = _("&OK");
-    char *cancel_button = _("&Cancel");
+    const char *user_mini_status = _("user &Mini status");
+    const char *ok_button = _("&OK");
+    const char *cancel_button = _("&Cancel");
 
     static int button_start = 30;
 
@@ -217,7 +217,7 @@ display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int n
 {
     int result, i;
     char *section = NULL;
-    char *p;
+    const char *p;
 
     if (!panel) {
         p = get_nth_panel_name (num);
@@ -455,7 +455,7 @@ confirm_box (void)
 static int new_mode;
 static int new_meta;
 
-static char *display_bits_str [] =
+static const char *display_bits_str [] =
 { N_("Full 8 bits output"), N_("ISO 8859-1"), N_("7 bits") };
 
 static QuickWidget display_widgets [] = {
@@ -466,7 +466,7 @@ static QuickWidget display_widgets [] = {
 { quick_checkbox, 4, DISPX, 7, DISPY, N_("F&ull 8 bits input"),
       0, 0, &new_meta, 0, "u" },
 { quick_radio,    4, DISPX, 3, DISPY, "", 3, 0,
-      &new_mode, display_bits_str, "r" },
+      &new_mode, const_cast(char **, display_bits_str), "r" },
 NULL_QuickWidget
 };
 
@@ -932,7 +932,7 @@ task_cb (int action)
 
 static struct 
 {
-	char* name;
+	const char* name;
 	int xpos;
 	int value;
 	int (*callback)(int);
@@ -1009,8 +1009,8 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
     static int dialog_x = 44;
     enum { b0 = 3, dialog_y = 12};
     struct smb_authinfo *return_value;
-    static char* labs[] = {N_("Domain:"), N_("Username:"), N_("Password:")};
-    static char* buts[] = {N_("&OK"), N_("&Cancel")};
+    static const char* labs[] = {N_("Domain:"), N_("Username:"), N_("Password:")};
+    static const char* buts[] = {N_("&OK"), N_("&Cancel")};
     static int ilen = 30, istart = 14;
     static int b2 = 30;
     char *title;

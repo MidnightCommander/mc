@@ -67,7 +67,7 @@ static WListbox *l_user, *l_group;
 
 static struct {
     int ret_cmd, flags, y, x;
-    char *text;
+    const char *text;
 } chown_but[BUTTONS] = {
     { B_CANCEL, NORMAL_BUTTON,  0, 53, N_("&Cancel") },
     { B_ENTER,  DEFPUSH_BUTTON, 0, 40, N_("&Set") },

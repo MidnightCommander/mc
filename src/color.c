@@ -44,7 +44,7 @@ int alarm_colors [4];
 #endif
 
 struct colorpair {
-    char *name;			/* Name of the entry */
+    const char *name;		/* Name of the entry */
     CTYPE fg;			/* foreground color */
     CTYPE bg;			/* background color */
 };
@@ -99,7 +99,7 @@ static struct colorpair color_map [] = {
 };
 
 struct color_table_s {
-    char *name;
+    const char *name;
     int  value;
 };
 
@@ -124,7 +124,7 @@ static struct color_table_s const color_table [] = {
     { "default",       0 } /* default color of the terminal */
 };
 
-static char *default_colors =
+static const char *default_colors =
 "normal=lightgray,blue:"
 "selected=black,cyan:"
 "marked=yellow,blue:"
@@ -166,7 +166,7 @@ static char *default_colors =
 #   define color_name(i)  color_table [i].name
 #endif
 
-static void get_color (char *cpp, CTYPE *colp)
+static void get_color (const char *cpp, CTYPE *colp)
 {
     size_t i;
     
@@ -205,7 +205,7 @@ static void get_two_colors (char **cpp, struct colorpair *colorpairp)
     get_color (*cpp, state ? &colorpairp->bg : &colorpairp->fg);
 }
 
-static void configure_colors_string (char *the_color_string)
+static void configure_colors_string (const char *the_color_string)
 {
     char *color_string, *p;
     size_t i;

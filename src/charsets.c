@@ -121,7 +121,7 @@ free_codepages_list (void)
 
 #define OTHER_8BIT "Other_8_bit"
 
-char *
+const char *
 get_codepage_id (int n)
 {
     return (n < 0) ? OTHER_8BIT : codepages[n].id;

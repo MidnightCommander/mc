@@ -80,7 +80,7 @@ extern int alarm_colors[4];
 #define EDITOR_MARKED_COLOR          IF_COLOR (36, A_REVERSE)
 
 #ifdef HAVE_SLANG
-#   define CTYPE char *
+#   define CTYPE const char *
 #else
 #   define CTYPE int
 #endif

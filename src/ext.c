@@ -58,7 +58,7 @@ flush_extension_file (void)
     }
 }
 
-typedef char *(*quote_func_t) (const char *name, int i);
+typedef char *(*quote_func_t) (const char *name, int quote_percent);
 
 static void
 exec_extension (const char *filename, const char *data, int *move_dir,
@@ -329,7 +329,7 @@ get_file_type_local (char *filename, char *buf, int buflen)
  * Return 1 for match, 0 for no match, -1 errors.
  */
 static int
-regex_check_type (char *filename, char *ptr, int *have_type)
+regex_check_type (const char *filename, const char *ptr, int *have_type)
 {
     int found = 0;
 
