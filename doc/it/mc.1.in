@@ -620,10 +620,10 @@ superiore dello schermo. La barra menu possiede cinque menu: "Sinistra", "File",
 .PP
 I
 .\"LINK2"
-Menu Sinistra e Destra
+Menu Sinistra e Destra 
 .\"Left and Right Menus"
-permettono di modificare l'apparenza dei pannelli directory di sinistra
-e di destra.
+permettono di modificare l'aspetto dei pannelli directory di 
+sinistra e di destra.
 .PP
 Il
 .\"LINK2"
@@ -646,11 +646,20 @@ Menu Opzioni
 elenca le azioni che permettono di personalizzare il Midnight Commander.
 .PP
 .\"NODE "  Left and Right Menus"
-.SH "  Menu Sinistra e Destra"
+.SH "  Menu Sinistra e Destra (Sopra e Sotto)"
 L'apparenza dei pannelli directory è modificabile tramite i menu
 .B Sinistra
 e
-.BR Destra .
+.B Destra 
+(vengono chiamati
+.B Sopra
+e
+.B Sotto
+se la divisione pannello nella finestra
+.\"LINK2"
+Aspetto
+.\"Layout"
+del menu Opzioni è Orizzontale).
 .PP
 .\"NODE "    Listing Mode..."
 .SH "    Modalità Lista..."
