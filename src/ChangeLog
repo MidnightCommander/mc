@@ -1,5 +1,10 @@
 2002-02-28  Andrew V. Samoilov  <kai@cmail.ru>
 
+	* filegui.c (file_mask_dialog): Enable 'follow Links'
+	and 'preserve Attributes' features in Move dialog.
+	(file_bps_show): Translate messages.
+	(file_eta_show): Likewise.
+
 	* man2hlp.c (main): Don't crash if called without argument(s).
 	Make buffer char pointer.
 	(handle_command): Handle '.\"NODE' comment.  Use it for

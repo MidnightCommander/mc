@@ -345,7 +345,7 @@ file_eta_show (FileOpContext *ctx)
         eta_hours = ctx->eta_secs / (60 * 60);
 	eta_mins  = (ctx->eta_secs - (eta_hours * 60 * 60)) / 60;
 	eta_s     = ctx->eta_secs - (eta_hours * 60 * 60 + eta_mins * 60);
-	g_snprintf (eta_buffer, sizeof (eta_buffer), "ETA %d:%02d.%02d", eta_hours, eta_mins, eta_s);
+	g_snprintf (eta_buffer, sizeof (eta_buffer), _("ETA %d:%02d.%02d"), eta_hours, eta_mins, eta_s);
     } else
 	*eta_buffer = 0;
     
@@ -367,11 +367,11 @@ file_bps_show (FileOpContext *ctx)
 	return;
 
     if (ctx->bps > 1024*1024) {
-        g_snprintf (bps_buffer, sizeof (bps_buffer), "%.2f MB/s", ctx->bps / (1024*1024.0));
+	g_snprintf (bps_buffer, sizeof (bps_buffer), _("%.2f MB/s"), ctx->bps / (1024*1024.0));
     } else if (ctx->bps > 1024){
-        g_snprintf (bps_buffer, sizeof (bps_buffer), "%.2f KB/s", ctx->bps / 1024.0);
+	g_snprintf (bps_buffer, sizeof (bps_buffer), _("%.2f KB/s"), ctx->bps / 1024.0);
     } else if (ctx->bps > 1){
-        g_snprintf (bps_buffer, sizeof (bps_buffer), "%ld B/s", ctx->bps);
+	g_snprintf (bps_buffer, sizeof (bps_buffer), _("%ld B/s"), ctx->bps);
     } else
 	*bps_buffer = 0;
 
@@ -871,8 +871,8 @@ fmd_init_i18n (int force)
 }
 
 char *
-file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char *def_text,
-		  int only_one, int *do_background)
+file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, 
+		  char *def_text, int only_one, int *do_background)
 {
     int source_easy_patterns = easy_patterns;
     char *source_mask, *orig_mask, *dest_dir;
@@ -882,7 +882,9 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char 
     QuickDialog Quick_input;
 
     g_return_val_if_fail (ctx != NULL, NULL);
-
+#if 0
+    message_3s (1, __FUNCTION__, "text = `%s' \n def_text = `%s'", text, def_text);
+#endif
     fmd_init_i18n (FALSE);
 
     /* Set up the result pointers */
@@ -906,11 +908,10 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char 
 
     if (operation == OP_COPY) {
 	Quick_input.class = "quick_file_mask_copy";
-	Quick_input.widgets = fmd_widgets;
     } else { /* operation == OP_MOVE */
 	Quick_input.class = "quick_file_mask_move";
-	Quick_input.widgets = fmd_widgets + 2;
     }
+    Quick_input.widgets = fmd_widgets;
     fmd_widgets [FMDI0].text = text;
     fmd_widgets [FMDI2].text = def_text;
     fmd_widgets [FMDI2].str_result = &dest_dir;
@@ -922,12 +923,12 @@ ask_file_mask:
     if ((val = quick_dialog_skip (&Quick_input, SKIP)) == B_CANCEL)
 	return 0;
 
-    if (ctx->follow_links && operation != OP_MOVE)
+    if (ctx->follow_links)
 	ctx->stat_func = (mc_stat_fn) mc_stat;
     else
 	ctx->stat_func = (mc_stat_fn) mc_lstat;
 
-    if (ctx->op_preserve || operation == OP_MOVE) {
+    if (ctx->op_preserve) {
 	ctx->preserve = 1;
 	ctx->umask_kill = 0777777;
 	ctx->preserve_uidgid = (geteuid () == 0) ? 1 : 0;
