@@ -1,5 +1,9 @@
 2002-08-19  Pavel Roskin  <proski@gnu.org>
 
+	* subshell.c (synchronize): Workaround for Cygwin (should not be
+	needed for the next version) - remove SIGCHLD blocking from
+	old_mask.
+
 	* dlg.h: Remove all unused flags for create_dlg().  Adjust all
 	dependencies.
 

@@ -1039,6 +1039,12 @@ static void synchronize (void)
     sigaddset (&sigchld_mask, SIGCHLD);
     sigprocmask (SIG_BLOCK, &sigchld_mask, &old_mask);
 
+    /*
+     * SIGCHLD should not be blocked, but we unblock it just in case.
+     * This is known to be useful for cygwin 1.3.12 and older.
+     */
+    sigdelset (&old_mask, SIGCHLD);
+
     /* Wait until the subshell has stopped */
     while (subshell_alive && !subshell_stopped)
 	sigsuspend (&old_mask);
