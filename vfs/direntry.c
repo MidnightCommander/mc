@@ -973,19 +973,21 @@ vfs_s_ferrno (struct vfs_class *me)
     return me->verrno;
 }
 
-/* Get local copy of the given file.  We reuse the existing cache.  */
+/*
+ * Get local copy of the given file.  We reuse the existing file cache
+ * for remote filesystems.  Archives use standard VFS facilities.
+ */
 static char *
 vfs_s_getlocalcopy (struct vfs_class *me, const char *path)
 {
-    struct vfs_s_inode *ino;
     struct vfs_s_fh *fh;
     char *local;
 
     fh = vfs_s_open (me, path, O_RDONLY, 0);
-    if (!fh || !fh->ino || !fh->ino->localname)
+    if (!fh || !fh->ino || fh->ino->localname)
 	return NULL;
 
-    local = g_strdup (ino->localname);
+    local = g_strdup (fh->ino->localname);
     vfs_s_close (fh);
     return local;
 }
@@ -1097,10 +1099,10 @@ vfs_s_init_class (struct vfs_class *vclass, struct vfs_s_subclass *sub)
     vclass->nothingisopen = vfs_s_nothingisopen;
     vclass->free = vfs_s_free;
     if (sub->flags & VFS_S_REMOTE) {
-	sub->find_entry = vfs_s_find_entry_linear;
-    } else {
 	vclass->getlocalcopy = vfs_s_getlocalcopy;
 	vclass->ungetlocalcopy = vfs_s_ungetlocalcopy;
+	sub->find_entry = vfs_s_find_entry_linear;
+    } else {
 	sub->find_entry = vfs_s_find_entry_tree;
     }
     vclass->setctl = vfs_s_setctl;
