@@ -103,6 +103,7 @@ dicon_properties (GtkWidget *widget, DesktopIconInfo *dii)
 	
 	gtk_widget_destroy (dlg);
 	g_free(path);
+
 	if (retval)
 		reread_cmd ();
 }

@@ -1,3 +1,25 @@
+1999-02-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop-icon.c (set_icon): Do not destroy the image if it is
+	the same as the old one.  Sigh, imlib really needs proper
+	refcounting.
+
+	* gscreen.c: Use gpopup_do_popup() until the new version is
+	finished.
+
+	* gpopup2.c (create_actions): Made the action selection logic
+	simpler.
+	(gpopup_do_popup2): Now can only operate on panels.
+	(file_actions): Sanitized the actions a bit.
+
+	* gutil.c (my_system_get_child_pid): sa_handler must be
+	gnome_sigchld_handler, not gnome_sigchld_installed.
+
+	* gpopup.c (dicon_properties): Do not call reread_cmd().  This is
+	a hack until the menus for panels/desktop are finished.
+
+	* gscreen.c (panel_file_list_press_row): Use gpopup_do_popup2().
+
 1999-02-11  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gutil.c (my_system_get_child_pid): Implement a erase-temp-file
@@ -88,7 +110,6 @@
 	scan_begin and scan_end signals of the tree -- these will set the
 	cursor to a watch while the tree is being scanned.
 
->>>>>>> 1.321
 1999-02-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_icon_info_destroy): Delete the metadata

@@ -123,7 +123,7 @@ int my_system_get_child_pid (int flags, const char *shell, const char *command, 
 		pipe (monitors);
 		sigemptyset (&newsig.sa_mask);
 		newsig.sa_flags = 0;
-		newsig.sa_handler = gnome_sigchld_installed;
+		newsig.sa_handler = gnome_sigchld_handler;
 		
 		sigaction (SIGCHLD, &newsig, &previous_sigchld);
 		gnome_sigchld_installed = 1;

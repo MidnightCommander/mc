@@ -470,7 +470,8 @@ panel_file_list_press_row (GtkWidget *file_list, GdkEvent *event, WPanel *panel)
 					      event->button.x, event->button.y,
 					      &row, &column);
 		gtk_clist_select_row (GTK_CLIST (file_list), row, 0);
-		gpopup_do_popup ((GdkEventButton *) event, panel, NULL, row, panel->dir.list[row].fname);
+		gpopup_do_popup ((GdkEventButton *) event, panel, NULL,
+				 row, panel->dir.list[row].fname);
 	}
 	return TRUE;
 }
@@ -1365,7 +1366,8 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 	switch (event->type){
 	case GDK_BUTTON_PRESS:
 		if (event->button.button == 3)
-			gpopup_do_popup2 ((GdkEventButton *) event, panel, NULL, TRUE);
+			gpopup_do_popup ((GdkEventButton *) event, panel, NULL,
+					 index, panel->dir.list[index].fname);
 		break;
 
 	case GDK_BUTTON_RELEASE:
@@ -1433,7 +1435,10 @@ panel_icon_list_button_press (GtkWidget *widget, GdkEventButton *event, WPanel *
 
 	if (icon == -1) {
 		if (event->button == 3) {
-			gpopup_do_popup2 ((GdkEventButton *) event, panel, NULL, FALSE);
+#if 0
+			g_warning ("FIXME: icon_list_button_press menu");
+			gpopup_do_popup ((GdkEventButton *) event, panel, NULL, FALSE);
+#endif
 			return TRUE;
 		}
 	} else if (event->button != 3)

@@ -201,7 +201,7 @@ set_icon (DesktopIcon *dicon, GdkImlibImage *im)
 			       "height", (double) im->rgb_height,
 			       NULL);
 
-	if (old_im)
+	if (old_im != im)
 		gdk_imlib_destroy_image (old_im);
 }
 

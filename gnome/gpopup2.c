@@ -25,28 +25,29 @@
 #include "gnome-file-property-dialog.h"
 #define CLIST_FROM_SW(panel_list) GTK_CLIST (GTK_BIN (panel_list)->child)
 
-/* Flags for the popup menu entries.  They specify to which kinds of files an entry is valid for. */
+/* Flags for the popup menu entries.  They specify to which kinds of files an
+ * entry is valid for.
+ */
 enum {
 	F_ALL 		= 1 << 0,	/* Applies to all files */
 	F_REGULAR	= 1 << 1,	/* Applies only to regular files */
-	F_SYMLINK	= 1 << 2,	/* Applies only to symlink */
-	F_SINGLE	= 1 << 3,	/* Applies only to a single file, not to a multiple selection */
+	F_SYMLINK	= 1 << 2,	/* Applies only to symlinks */
+	F_SINGLE	= 1 << 3,	/* Applies only to a single file, not to multiple files */
 	F_NOTDIR	= 1 << 4,	/* Applies to non-directories */
 	F_DICON		= 1 << 5,	/* Applies only to desktop icons */
-	F_NOTDEV        = 1 << 6,	/* Applies to non-devices only (ie. reg, lnk, dir) */
-	F_ADVANCED      = 1 << 7        /* Only appears in (non-existent) Advanced mode */
+	F_NOTDEV	= 1 << 6,	/* Applies to non-devices only (ie. reg, lnk, dir) */
+	F_ADVANCED	= 1 << 7        /* Only appears in advanced mode */
 };
 
 /* typedefs */
-typedef struct action {
+struct action {
 	char *text;		/* Menu item text */
 	int flags;		/* Flags from the above enum */
 	gpointer callback;	/* Callback for menu item */
-} action;
+};
 
-/* Prototypes */
 /* Multiple File commands */
-static void panel_action_with (GtkWidget *widget, WPanel *panel);
+static void panel_action_open_with (GtkWidget *widget, WPanel *panel);
 static void handle_open (GtkWidget *widget, WPanel *panel);
 static void handle_view (GtkWidget *widget, WPanel *panel);
 static void handle_view_unfiltered (GtkWidget *widget, WPanel *panel);
@@ -71,11 +72,9 @@ static void handle_logout (GtkWidget *widget, WPanel *panel);
 /* global vars */
 extern int we_can_afford_the_speed;
 
-static action file_actions[] = {
-	{ N_("Properties"),		F_SINGLE | F_ALL, 			handle_properties },
-	{ "",				F_SINGLE | F_ALL, 			NULL },
-	{ N_("Open"),			F_NOTDEV, 				handle_open },
-	{ "",				F_NOTDEV, 				NULL },
+static struct action file_actions[] = {
+	{ N_("Open"),			F_NOTDEV,				handle_open },
+	{ "",				F_NOTDEV,				NULL },
 	{ N_("Open with..."),		F_REGULAR | F_SINGLE, 			handle_open_with },
 	{ N_("View"),			F_REGULAR | F_SINGLE, 			handle_view },
 	{ N_("View Unfiltered"),	F_REGULAR | F_ADVANCED | F_SINGLE,	handle_view_unfiltered },  
@@ -84,13 +83,15 @@ static action file_actions[] = {
 	{ N_("Copy..."),		F_ALL, 					handle_copy },
 	{ N_("Delete"),			F_ALL, 					handle_delete },
 	{ N_("Move..."),		F_ALL, 					handle_move },
-	{ "",				F_SINGLE, 				NULL }, 
 	{ N_("Hard Link..."),		F_ADVANCED | F_SINGLE, 			handle_hard_link },
-	{ N_("Link..."),		F_SINGLE, 				handle_symlink },
+	{ N_("Symlink..."),		F_SINGLE, 				handle_symlink },
 	{ N_("Edit Symlink..."),	F_SYMLINK | F_SINGLE, 			handle_edit_symlink },
+	{ "",				F_SINGLE | F_ALL, 			NULL },
+	{ N_("Properties..."),		F_SINGLE | F_ALL, 			handle_properties },
 	{ NULL, 0, NULL }
 };
 
+#if 0
 static action generic_actions[] = {
 	{ N_("NEW(FIXME)"),		F_ALL, 		NULL },
 	{ "",				F_ALL, 		NULL },
@@ -101,7 +102,7 @@ static action generic_actions[] = {
 	{ N_("Logout"),			F_DICON, 	handle_logout },
 	{ NULL, 0, NULL }
 };
-
+#endif
 
 /* This is our custom signal connection function for popup menu items -- see below for the
  * marshaller information.  We pass the original callback function as the data pointer for the
@@ -178,42 +179,20 @@ fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, int pos)
 /* Creates the menu items for the standard actions.  Returns the position at
  * which additional menu items should be inserted.
  */
-static int
-create_actions (GtkWidget *menu, gint flags, gboolean on_selected, WPanel *panel)
+static void
+create_actions (GtkWidget *menu, gint flags, WPanel *panel)
 {
 	struct action *action;
-	gint pos = 0;
-	gint error_correction;
+	int pos;
 	GnomeUIInfo uiinfo[] = {
 		{ 0 },
 		GNOMEUIINFO_END
 	};
 
-	if (on_selected)
-		action = file_actions;
-	else
-		action = generic_actions;
+	pos = 0;
 
-
-	for (;action->text; action++) {
-		error_correction = 0;
-		/* Let's see if we want this particular entry */
-		/* we need to special-case F_SINGLE */
-		if (action->flags & F_SINGLE) {
-			if  (!(flags & F_SINGLE))
-				continue;
-			else if (action->flags != F_SINGLE)
-				error_correction |= F_SINGLE;
-		}
-		/* same with advanced */
-		if (action->flags & F_ADVANCED) {
-			if  (!(flags & F_ADVANCED))
-				continue;
-			else
-				error_correction |= F_ADVANCED;
-		}
-
-		if ((flags & (action->flags - error_correction)) == 0)
+	for (action = file_actions; action->text; action++) {
+		if ((action->flags & flags) != action->flags)
 			continue;
 
 		if (action->text[0]) {
@@ -231,11 +210,8 @@ create_actions (GtkWidget *menu, gint flags, gboolean on_selected, WPanel *panel
 		} else
 			uiinfo[0].type = GNOME_APP_UI_SEPARATOR;
 
-		fill_menu (GTK_MENU_SHELL (menu), uiinfo, pos);
-		pos++;
+		fill_menu (GTK_MENU_SHELL (menu), uiinfo, pos++);
 	}
-
-	return pos;
 }
 
 /* Convenience callback to exit the main loop of a modal popup menu when it is deactivated*/
@@ -262,81 +238,62 @@ get_active_index (GtkMenu *menu)
 	return -1;
 }
 
-/* Create a context menu.  It can take either a WPanel or a GnomeDesktopEntry.
- * One of them should be set to NULL.
- */
 #define REMOVE(x,f) x &= ~f
 
 int
-gpopup_do_popup2 (GdkEventButton *event,
-		  WPanel *panel, GList *file_list,
-		  gboolean on_selected)
+gpopup_do_popup2 (GdkEventButton *event, WPanel *panel)
 {
 	GtkWidget *menu;
-	GList *list;
 	gint flags = F_ALL | F_REGULAR | F_SYMLINK | F_SINGLE | F_NOTDEV | F_NOTDIR;
 	struct stat s;
 	guint id;
-	gint i;
-	gint count = 0;
+	int i;
+	int marked;
 
 	g_return_val_if_fail (event != NULL, -1);
+	g_return_val_if_fail (panel != NULL, -1);
 
 	menu = gtk_menu_new ();
 
-	/* Connect to the deactivation signal to be able to quit our
-           modal main loop */
+	/* Connect to the deactivation signal to be able to quit our modal main
+	 * loop.
+	 */
 	id = gtk_signal_connect (GTK_OBJECT (menu), "deactivate",
 				 (GtkSignalFunc) menu_shell_deactivated,
 				 NULL);
 
-	if (file_list == NULL) {
-		/* make the file list */
-		for (i = 0; i < panel->count; i++) {
-			if (!strcmp (panel->dir.list [i].fname, "..")) {
-				continue;
-			}
-			if (panel->dir.list [i].f.marked) {
-				s.st_mode = panel->dir.list[i].buf.st_mode;
-				/* do flag stuff */
-				if (S_ISLNK (s.st_mode))
-					mc_stat (panel->dir.list [i].fname, &s);
-				else
-					REMOVE (flags, F_SYMLINK);
-				if (S_ISDIR (s.st_mode))
-					REMOVE (flags, F_NOTDIR);
-				if (!S_ISREG (s.st_mode))
-					REMOVE (flags, F_REGULAR);
-				if (count == 1)
-					REMOVE (flags, F_SINGLE);
-				if (!S_ISREG (s.st_mode) && !S_ISDIR (s.st_mode))
-					REMOVE (flags, F_NOTDEV);
-				count++;
-			}
-		}
-	} else {
-		/* we already have the file list, but we need to create the flags */
-		for (list = file_list; list; list = list->next) {
-			mc_lstat (list->data, &s);
-			if (S_ISLNK (s.st_mode))
-				mc_stat (list->data, &s);
-			else
-				REMOVE (flags, F_SYMLINK);
-			     
-			if (S_ISDIR (s.st_mode))
-				REMOVE (flags, F_NOTDIR);
-			if (!S_ISREG (s.st_mode))
-				REMOVE (flags, F_REGULAR);
-			if (count == 1)
-				REMOVE (flags, F_SINGLE);
-			if (!S_ISREG (s.st_mode) && !S_ISDIR (s.st_mode))
-				REMOVE (flags, F_NOTDEV);
-			count++;
-		}
+	marked = 0;
+
+	for (i = 0; i < panel->count; i++) {
+		if (!strcmp (panel->dir.list [i].fname, "..") || !panel->dir.list[i].f.marked)
+			continue;
+
+		marked++;
+
+		s = panel->dir.list[i].buf;
+
+		if (S_ISLNK (s.st_mode))
+			mc_stat (panel->dir.list [i].fname, &s);
+		else
+			REMOVE (flags, F_SYMLINK);
+
+		if (S_ISDIR (s.st_mode))
+			REMOVE (flags, F_NOTDIR);
+
+		if (!S_ISREG (s.st_mode))
+			REMOVE (flags, F_REGULAR);
+
+		if (S_ISCHR (s.st_mode) || S_ISBLK (s.st_mode))
+			REMOVE (flags, F_NOTDEV);
 	}
 
+	g_assert (marked > 0);
+
+	if (marked > 1)
+		REMOVE (flags, F_SINGLE);
+
 	/* Fill the menu */
-	create_actions (menu, flags, on_selected, panel);
+	create_actions (menu, flags, panel);
 
 	/* Run it */
 	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, event->button, event->time);
@@ -345,8 +302,10 @@ gpopup_do_popup2 (GdkEventButton *event,
 	gtk_grab_remove (menu);
 
 	gtk_signal_disconnect (GTK_OBJECT (menu), id);
-	/* FIXME: FIXME: FIXME: free the stoopid memory */
-	return get_active_index (GTK_MENU (menu));
+
+	i = get_active_index (GTK_MENU (menu));
+	gtk_widget_destroy (menu);
+	return i;
 }
 
 static void
@@ -439,7 +398,7 @@ static void
 handle_open_with (GtkWidget *widget, WPanel *panel)
 {
 	char *command;
-	
+
 	command = input_expand_dialog (_(" Open with..."),
 				       _("Enter extra arguments:"),
 				       panel->dir.list [panel->selected].fname);
