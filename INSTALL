@@ -92,11 +92,14 @@ installed the gpm package.
      Configures the program to be compiled without the built-in file
      editor.   The built-in editor is compiled in by default.
 
-`--with-ext2undel=PATH'
+`--with-ext2undel[=PATH]'
      On systems that use the Extended 2 file system and have the
      libext2fs.a library available, this compiles into the Midnight
      Commander the support code for recovering deleted files (the
      undel virtual file system). 
+     Use =PATH if libext2fs.a is installed in a non-standard place. 
+     The configure will append `lib' and `include' to find the ext2fs 
+     libraries and include files respectively.
 
 `--with-gpm-mouse[=PATH]'
      Use this flag if your GPM mouse package cannot be detected by the
@@ -179,14 +182,17 @@ note that slang is included as part of the distribution),
 `--with-slang' (default)
      This is used to configure the program to use the SLang screen
      manager.  This is included as part of the Midnight Commander,
-     you don't need it installed on your system.
+     you don't need it installed on your system. If SLang is installed
+     on your system it will be used if possible. You can force usage of
+     the included SLang with the `--with-included-slang' option.
      Slang is the only library that will let you resize the Midnight
      Commander window on an xterm.
 
      This option will usually try to use the terminfo database if it
      is available, otherwise it will use the termcap database.  At
      compile time, you may force the use the terminal database with
-     the `--with-termcap' and `--with-terminfo' options.
+     the `--with-termcap' and `--with-terminfo' options (both options
+     automaticly turn `--with-included-slang' on).
 
 `--with-ncurses[=directory]'
      Use this flag (either with or without the =directory part), if
