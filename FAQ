@@ -61,6 +61,9 @@ Frequently Asked Questions
             .kshrc within MC?
           + 6.5 Is there any way to include additional options or hot
             keys to MC?
+          + 6.6 When I use Ctrl-O I don't get a subshell.  How do I fix
+            this?
+          + 6.7 Ctrl-O doesn't work at all.  What happens?
 
      * 7 Virtual file systems
           + 7.1 How can I see the contents of a tar archive?
@@ -618,9 +621,9 @@ MC?
 
 6.5 Is there any way to include additional options or hot keys to MC?
 
-   Yes, F2 invokes an user menu which fully configurable.  You can add
-   any shell commands to the user menu.  See the mc(1) man page for more
-   info.
+   Yes, F2 invokes an user menu,  which is fully configurable.  You can
+   add any shell commands to the user menu.  See the mc(1) man page for
+   more info.
 
    Another way to add functionality is the external panelize feature.
    See the mc(1) man page for more info.
@@ -629,6 +632,21 @@ MC?
    code is free which means you can change it anyway you want.  There
    are some limitations to make sure MC stays free.  See GNU General
    Public License for details.
+
+6.6 When I use Ctrl-O I don't get a subshell.  How do I fix this?
+
+   Only bash, tcsh and zsh can be used as subshell.  Use one of those
+   shells as your default shell, and it will be used as subshell in GNU
+   Midnight Commander.
+
+6.7 Ctrl-O doesn't work at all.  What happens?
+
+   Ctrl-O works if either the subshell is used or the terminal can save
+   the output of the commands so it can be restored.  If neither is
+   true, there is absolutely nothing interesting behind the panels!
+
+   Only few terminals support screen saving.  It's xterm, rxvt and other
+   xterm-like terminals and virtual terminals on Linux and FreeBSD.
 
 
 7 Virtual file systems
