@@ -2571,10 +2571,10 @@ void ftpfs_forget (char *file)
 
 #ifndef BROKEN_PATHS
     if (strncmp (file, "/#ftp:", 6))
-        return NULL; 	/* Normal: consider cd /bla/#ftp */ 
+        return; 	/* Normal: consider cd /bla/#ftp */ 
 #else
     if (!(file = strstr (file, "/#ftp:")))
-        return NULL;
+        return;
 #endif    
 
     file += 6;
