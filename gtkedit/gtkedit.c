@@ -783,8 +783,6 @@ static gint gtk_edit_key_press (GtkWidget * widget, GdkEventKey * event)
 /*                              Widget Crap                           */
 /**********************************************************************/
 
-char *home_dir = 0;
-
 static void get_home_dir (void)
 {
     if (home_dir)		/* already been set */

@@ -1,3 +1,7 @@
+2001-06-25  Pavel Roskin  <proski@gnu.org>
+
+	* gtkedit.c: Remove home_dir - it's declared in main.c.
+
 2001-06-15  Pavel Roskin  <proski@gnu.org>
 
 	* editcmd.c (canonicalize_pathname) [GTK]: Rename to ...
