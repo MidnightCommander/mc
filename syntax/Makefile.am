@@ -11,6 +11,7 @@ syntax_DATA =			\
 	fortran.syntax		\
 	html.syntax		\
 	java.syntax		\
+	js.syntax		\
 	latex.syntax		\
 	lisp.syntax		\
 	lsm.syntax		\
