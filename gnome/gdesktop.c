@@ -736,8 +736,11 @@ drop_cb (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di
 {
 	if (strcmp (event->data_type, "icon/root") == 0){
 		printf ("ICON DROPPED ON ROOT!\n");
-	} else
+	} if (strcmp (event->data_type, "url:ALL") == 0 || (strcmp (event->data_type, "file:ALL") == 0)){
 		url_dropped (widget, event, di);
+	} else
+		return FALSE;
+	return TRUE;
 }
 
 static void
