@@ -626,13 +626,19 @@ int edit_renew (WEdit * edit)
     return retval;
 }
 
-/* returns 1 on success, if returns 0, the edit struct would have been free'd */
+/*
+ * Load a new file into the editor.  If it fails, preserve the old file.
+ * To do it, allocate a new widget, initialize it and, if the new file
+ * was loaded, copy the data to the old widget.
+ * Return 1 on success, 0 on failure.
+ */
 int
 edit_reload (WEdit *edit, const char *filename)
 {
     WEdit *e;
     int lines = edit->num_widget_lines;
     int columns = edit->num_widget_columns;
+
     e = g_malloc0 (sizeof (WEdit));
     e->widget = edit->widget;
     if (!edit_init (e, lines, columns, filename, 0)) {
