@@ -1,5 +1,7 @@
 1998-11-17  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* dlg.c (destroy_dlg): Do not refresh.
+
 	* filegui.c: New file.  We keep all of the user interface code for
 	the text edition in this file now.  This should be a per-GUI port
 	file. 

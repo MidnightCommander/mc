@@ -910,8 +910,11 @@ destroy_dlg (Dlg_head *h)
 	free (h->title);
     x_destroy_dlg (h);
     free (h);
+
+#ifndef HAVE_X
     if (refresh_list)
 	do_refresh ();
+#endif
 }
 
 int std_callback (Dlg_head *h, int Msg, int Par)
