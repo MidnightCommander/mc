@@ -62,7 +62,7 @@ if ($LANG=~/^-(.)*/){
         
     elsif ($LANG eq "--maintain" || "$LANG" eq "-M"){
 
-        $a="find ../ -print | egrep '.*\\.(c|y|cc|c++|h|gob)' ";
+        $a="find ../ -type f -print | egrep '.*\\.(c|y|cc|c++|h|gob)' ";
 
         open(BUF2, "POTFILES.in") || die "update.pl:  there's not POTFILES.in!!!\n";
         print "Searching for missing _(\" \") entries...\n";

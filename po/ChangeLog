@@ -1,5 +1,7 @@
 2001-06-07  Pavel Roskin  <proski@gnu.org>
 
+	* update.pl: When using `--maintain' only scan ordinary	files.
+
 	* ru.po: Update.
 	* POTFILES.in: Add src/charsets.c, src/selcodepage.c and
 	src/setup.c.
