@@ -1,3 +1,9 @@
+2003-11-28  Pavel Roskin  <proski@gnu.org>
+
+	* acinclude.m4 (MC_UNDELFS_CHECKS): Try ext2fs/ext2_fs.h before
+	linux/ext2_fs.h.  Use ext2fs/ext2_fs.h when possible - it's
+	safer to avoid kernel headers.
+
 2003-11-27  Pavel Roskin  <proski@gnu.org>
 
 	* src/TODO: Move ...

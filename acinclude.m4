@@ -7,12 +7,17 @@ dnl    Will set EXT2FS_UNDEL_LIBS to required libraries.
 AC_DEFUN([MC_UNDELFS_CHECKS], [
   ext2fs_undel=no
   EXT2FS_UNDEL_LIBS=
-  AC_CHECK_HEADERS([linux/ext2_fs.h], [linux_ext2_fs_h=yes])
-  if test x$linux_ext2_fs_h = xyes; then
+  AC_CHECK_HEADERS([ext2fs/ext2_fs.h linux/ext2_fs.h], [ext2_fs_h=yes; break])
+  if test x$ext2_fs_h = xyes; then
     AC_CHECK_HEADERS([ext2fs/ext2fs.h], [ext2fs_ext2fs_h=yes], ,
 		     [
 #include <stdio.h>
+#ifdef HAVE_EXT2FS_EXT2_FS_H
+#include <ext2fs/ext2_fs.h>
+#else
+#undef umode_t
 #include <linux/ext2_fs.h>
+#endif
 		     ])
     if test x$ext2fs_ext2fs_h = xyes; then
       AC_DEFINE(USE_EXT2FSLIB, 1,
@@ -27,9 +32,12 @@ AC_DEFUN([MC_UNDELFS_CHECKS], [
 #include <stdio.h>
 #include <fcntl.h>
 #include <stdlib.h>
-/* asm/types.h defines its own umode_t :-( */
+#ifdef HAVE_EXT2FS_EXT2_FS_H
+#include <ext2fs/ext2_fs.h>
+#else
 #undef umode_t
 #include <linux/ext2_fs.h>
+#endif
 #include <ext2fs/ext2fs.h>
 		    ])
     fi
