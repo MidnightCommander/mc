@@ -6,16 +6,21 @@
 #            Andrew V. Samoilov <sav@bcs.zp.ua> 2000
 # beta version 2.0
 #
-RAR=rar
-UNRAR=unrar # Prefer unrar (freeware)
-#
-# NOTE: rar ver 2.0 by Eugene Roshal
-# ftp.elf.stuba.sk/pub/pc/pack
-#
+# rar and unrar can be found on http://www.rarlabs.com/
 
-if ! unrar >/dev/null 2>&1; then
-    UNRAR=$RAR
-fi
+RAR=rar
+UNRAR=$RAR
+
+# Prefer unrar (freeware).  Try to find unrar in $PATH.
+save_IFS="$IFS"; IFS=:
+for dir in $PATH; do
+    IFS="$save_IFS"
+    test -z "$dir" && dir=.
+    if test -x $dir/unrar -a -f $dir/unrar; then
+	UNRAR=$dir/unrar
+	break
+    fi
+done
 
 mcrarfs_list ()
 {
