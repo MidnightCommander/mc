@@ -85,13 +85,10 @@ dialog_key_pressed (GtkWidget *win, GdkEventKey *event, Dlg_head *h)
 	static int on_escape;
 	int key;
 
-	printf ("evento: 0x%02x (%c)\n", key, key);	
 	key = translate_gdk_keysym_to_curses (event);
-	printf ("evento: 0x%02x (%c)\n", key, key);	
 	if (key == -1)
 		return FALSE;
 
-	printf ("tecla buenera (%s)\n", on_escape ? "escapada" : "normal");
 	if (!on_escape){
 		if (key == 27){
 			on_escape = 1;
@@ -114,7 +111,6 @@ dialog_key_pressed (GtkWidget *win, GdkEventKey *event, Dlg_head *h)
 	}
 	
 	gtk_signal_emit_stop_by_name (GTK_OBJECT (win), "key_press_event");
-	printf ("Mandando: %04x\n", key);
 	dlg_key_event (h, key);
 	return TRUE;
 }

@@ -163,7 +163,7 @@ x_select_item (WPanel *panel)
 	
 	gtk_clist_select_row (clist, panel->selected, 0);
 	
-	if (!gtk_clist_row_isvisable (clist, panel->selected)){
+	if (!gtk_clist_row_is_visible (clist, panel->selected)){
 		gtk_clist_moveto (clist, panel->selected, 0, 0.5, 0.0);
 	}
 }

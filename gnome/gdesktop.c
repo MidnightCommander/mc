@@ -123,7 +123,25 @@ desktop_icon_set_position (desktop_icon_t *di, GtkWidget *widget)
 static void
 drop_cb (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di)
 {
+	char *p;
+	int count;
+	int len;
+	
+	if (strcmp (event->data_type, "url:ALL") == 0){
+		count = event->data_numbytes;
+		p = event->data;
+		do {
+			len = 1 + strlen (event->data);
+			count -= len;
+			printf ("Receiving: %s\n", p);
+			p += len;
+		} while (count);
+		printf ("Receiving: %s %d\n", event->data, event->data_numbytes);
+		return;
+	}
 
+	if (strcmp (event->data_type, "urls:ALL") == 0){
+	}
 }
 
 static void
@@ -175,17 +193,21 @@ desktop_load_dentry (char *filename)
 	GtkWidget *window;
 
 	char *drop_types [] = {
-		"url:ALL",
 		"text/plain"
+		"url:ALL",
 	};
 	
 	dentry = gnome_desktop_entry_load (filename);
 
 	if (!dentry)
 		return;
-	
-	window = shaped_icon_new_from_file (dentry->icon, GDK_BUTTON_PRESS_MASK);
 
+	if (dentry->icon)
+		window = shaped_icon_new_from_file (dentry->icon, GDK_BUTTON_PRESS_MASK);
+	else {
+		window = gtk_window_new (GTK_WINDOW_POPUP);
+		gtk_widget_set_usize (window, 20, 20);
+	}
 	di = xmalloc (sizeof (desktop_icon_t), "desktop_load_entry");
 	di->dentry = dentry;
 	di->widget = window;
@@ -214,8 +236,9 @@ desktop_create_directory_entry (char *dentry_path, char *pathname, char *short_n
 	dentry = xmalloc (sizeof (GnomeDesktopEntry), "dcde");
 	dentry->name    = g_strdup (short_name);
 	dentry->comment = NULL;
+	dentry->tryexec = NULL;
 	dentry->exec    = g_strdup (pathname);
-	dentry->icon    = gnome_unconditional_pixmap_file ("folder.xpm");
+	dentry->icon    = gnome_unconditional_pixmap_file ("gnome-folder.png");
 	dentry->docpath = NULL;
 	dentry->type    = g_strdup ("Directory");
 	dentry->location = g_strdup (dentry_path);
@@ -241,7 +264,7 @@ get_desktop_icon (char *pathname)
 	if (full_fname)
 		return full_fname;
 	
-	return gnome_unconditional_pixmap_file ("app.xpm");
+	return gnome_unconditional_pixmap_file ("launcher-program.xpm");
 }
 
 static void
