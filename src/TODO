@@ -14,8 +14,6 @@ Don't rely on temporary scripts being executable.  Run shell explicitly.
 
 Recheck and clean up manuals.  Add node names to the English manual.
 
-Check "mc --help-colors" for completeness.
-
 reimplement "-P" in a safer way (temp file instead of stdout) - possibly
 security issues.
 
