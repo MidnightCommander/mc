@@ -1,3 +1,7 @@
+2001-07-29  Pavel Roskin  <proski@gnu.org>
+
+	* syntax.c (syntax_text): Add support for S-Lang.
+
 2001-07-28  Pavel Roskin  <proski@gnu.org>
 
 	* editcmd.c (menu_save_mode_cmd): Resurrect i18n code lost in
