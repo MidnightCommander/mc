@@ -759,29 +759,28 @@ si vuole che il campo abbia; e se il numero è seguito dal simbolo '+',
 allora la specifica definisce l'ampiezza minima e se il programma
 trova che serve più spazio sullo schermo, espanderà il campo.
 .PP
-For example, the 
-.B Full
-display corresponds to this format:
+Per esempio la modalità 
+.B Completa
+corrisponde a questo formato:
 .PP
 half type,name,|,size,|,mtime
 .PP
-And the 
-.B Long
-display corresponds to this format:
+E quella
+.B Lunga
+corrisponde a questo formato:
 .PP
 full perm,space,nlink,space,owner,space,group,space,size,space,
 mtime,space,name
 .PP
-This is a nice user display format:
+Questa è una modalità interessante:
 .PP
 half name,|,size:7,|,type,mode:3
 .PP
-Panels may also be set to the following modes:
+I pannelli possono anche essere impostati alle modalità seguenti:
 .TP
-.B "Info"
-The info view display information related to the currently
-selected file and if possible information about the current file
-system.
+.B "Informazioni"
+La modalità informazioni mostra alcuni dati relativi al file correntemente selezionato
+e se possibile informazioni circa il file system corrente.
 .TP
 .B "Tree" 
 The tree view is quite similar to the
