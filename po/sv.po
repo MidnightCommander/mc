@@ -795,16 +795,17 @@ msgid ""
 "\n"
 "Press OK to terminate the application, or cancel to continue using it."
 msgstr ""
-"Filhanteraren och skrivbords kontrollen kommer nu att avslutas.\n"
+"Filhanteraren och skrivbordshanteringen kommer nu att avslutas.\n"
 "\n"
-"Om du vill så kan du starta upp dessa igen. Endera från panelen, eller genom "
-"att köra UNIX kommandot 'gmc'. \n"
+"Om du vill starta upp dessa igen, kan du göra detta antingen från\n"
+"panelen, eller genom att köra UNIX-kommandot 'gmc'.\n"
 "\n"
-"Tryck OK för att avsluta applikationen."
+"Tryck OK för att avsluta applikationen, eller Avbryt för att fortsätta "
+"köra den."
 
 #: gnome/glayout.c:367
 msgid "_File..."
-msgstr "_Filter..."
+msgstr "_Fil..."
 
 #: gnome/glayout.c:368
 msgid "Creates a new file in this directory"
@@ -841,7 +842,7 @@ msgstr "Visa katalogstorlek"
 
 #: gnome/glayout.c:393
 msgid "Shows the disk space used by each directory"
-msgstr "Visa mängden diskutrymme använt i varje katalog"
+msgstr "Visa mängden använt diskutrymme i varje katalog"
 
 #: gnome/glayout.c:395
 msgid "Close window"
@@ -853,7 +854,7 @@ msgstr "Stäng det här fönstret"
 
 #: gnome/glayout.c:402
 msgid "Select _All"
-msgstr "Välj _Alla"
+msgstr "Välj _alla"
 
 #: gnome/glayout.c:402
 msgid "Select all files in the current Panel"
@@ -901,7 +902,7 @@ msgstr "Inställningar om bekräftelser"
 
 #: gnome/glayout.c:422
 msgid "_Filter View..."
-msgstr "_Filtervy..."
+msgstr "_Filtrera vy..."
 
 #: gnome/glayout.c:422
 msgid "Global option settings"
@@ -918,11 +919,11 @@ msgstr "Leta efter filer på disken"
 #. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
 #: gnome/glayout.c:432
 msgid "_Edit mime types..."
-msgstr "_Redigera mimetyper..."
+msgstr "_Redigera mime-typer..."
 
 #: gnome/glayout.c:432
 msgid "Edits the MIME type bindings"
-msgstr "Redigera MIME typbindningar"
+msgstr "Redigera mime-typ-associationer"
 
 #: gnome/glayout.c:434
 msgid "_Run Command..."
@@ -934,11 +935,11 @@ msgstr "Kör ett kommando"
 
 #: gnome/glayout.c:436
 msgid "_Run Command in panel..."
-msgstr "_Kör kommandot i panelen..."
+msgstr "_Kör kommando i panelen..."
 
 #: gnome/glayout.c:436
 msgid "Run a command and put the results in a panel"
-msgstr "Kör ett kommando och lägg resultatet i panelen"
+msgstr "Kör ett kommando och lägg resultatet i panelvyn"
 
 #: gnome/glayout.c:446
 msgid "_Background jobs..."
@@ -1181,7 +1182,7 @@ msgstr "Filhandlingar"
 
 #: gnome/gnome-file-property-dialog.c:616
 msgid "Open action"
-msgstr "Metod för att Öppna"
+msgstr "Metod för att öppna"
 
 #: gnome/gnome-file-property-dialog.c:617
 msgid "Needs terminal to run"
@@ -5978,202 +5979,202 @@ msgstr "Formera"
 
 #: src/widget.c:999
 msgid " History "
-msgstr " Historia "
+msgstr " Historik "
 
 #. KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
 #. to define f0 as well. Also, it makes Learn keys a bunch of problems :(
 #: src/win.c:224
 msgid "Function key 1"
-msgstr "Funktions tangent 1"
+msgstr "Funktionstangent 1"
 
 #: src/win.c:225
 msgid "Function key 2"
-msgstr "Funktions tangent 2"
+msgstr "Funktionstangent 2"
 
 #: src/win.c:226
 msgid "Function key 3"
-msgstr "Funktions tangent 3"
+msgstr "Funktionstangent 3"
 
 #: src/win.c:227
 msgid "Function key 4"
-msgstr "Funktions tangent 4"
+msgstr "Funktionstangent 4"
 
 #: src/win.c:228
 msgid "Function key 5"
-msgstr "Funktions tangent 5"
+msgstr "Funktionstangent 5"
 
 #: src/win.c:229
 msgid "Function key 6"
-msgstr "Funktions tangent 6"
+msgstr "Funktionstangent 6"
 
 #: src/win.c:230
 msgid "Function key 7"
-msgstr "Funktions tangent 7"
+msgstr "Funktionstangent 7"
 
 #: src/win.c:231
 msgid "Function key 8"
-msgstr "Funktions tangent 8"
+msgstr "Funktionstangent 8"
 
 #: src/win.c:232
 msgid "Function key 9"
-msgstr "Funktions tangent 9"
+msgstr "Funktionstangent 9"
 
 #: src/win.c:233
 msgid "Function key 10"
-msgstr "Funktions tangent 10"
+msgstr "Funktionstangent 10"
 
 #: src/win.c:234
 msgid "Function key 11"
-msgstr "Funktions tangent 11"
+msgstr "Funktionstangent 11"
 
 #: src/win.c:235
 msgid "Function key 12"
-msgstr "Funktions tangent 12"
+msgstr "Funktionstangent 12"
 
 #: src/win.c:236
 msgid "Function key 13"
-msgstr "Funktions tangent 13"
+msgstr "Funktionstangent 13"
 
 #: src/win.c:237
 msgid "Function key 14"
-msgstr "Funktions tangent 14"
+msgstr "Funktionstangent 14"
 
 #: src/win.c:238
 msgid "Function key 15"
-msgstr "Funktions tangent 15"
+msgstr "Funktionstangent 15"
 
 #: src/win.c:239
 msgid "Function key 16"
-msgstr "Funktions tangent 16"
+msgstr "Funktionstangent 16"
 
 #: src/win.c:240
 msgid "Function key 17"
-msgstr "Funktions tangent 17"
+msgstr "Funktionstangent 17"
 
 #: src/win.c:241
 msgid "Function key 18"
-msgstr "Funktions tangent 18"
+msgstr "Funktionstangent 18"
 
 #: src/win.c:242
 msgid "Function key 19"
-msgstr "Funktions tangent 19"
+msgstr "Funktionstangent 19"
 
 #: src/win.c:243
 msgid "Function key 20"
-msgstr "Funktions tangent 20"
+msgstr "Funktionstangent 20"
 
 #: src/win.c:244
 msgid "Backspace key"
-msgstr "Backspace tangenten"
+msgstr "Backspace"
 
 #: src/win.c:245
 msgid "End key"
-msgstr "End tangenten"
+msgstr "End"
 
 #: src/win.c:246
 msgid "Up arrow key"
-msgstr "Upppåt pil tangenten"
+msgstr "Upppåtpil"
 
 #: src/win.c:247
 msgid "Down arrow key"
-msgstr "Neråt pil tangenten"
+msgstr "Neråtpil"
 
 #: src/win.c:248
 msgid "Left arrow key"
-msgstr "Vänster pil tangenten"
+msgstr "Vänsterpil"
 
 #: src/win.c:249
 msgid "Right arrow key"
-msgstr "Höger pil tangenten"
+msgstr "Högerpil"
 
 #: src/win.c:250
 msgid "Home key"
-msgstr "Home tangenten"
+msgstr "Home"
 
 #: src/win.c:251
 msgid "Page Down key"
-msgstr "Page Down tangenten"
+msgstr "Page Down"
 
 #: src/win.c:252
 msgid "Page Up key"
-msgstr "Page Up tangenten"
+msgstr "Page Up"
 
 #: src/win.c:253
 msgid "Insert key"
-msgstr "Insert tangenten"
+msgstr "Insert"
 
 #: src/win.c:254
 msgid "Delete key"
-msgstr "Delete tangenten"
+msgstr "Delete"
 
 #: src/win.c:255
 msgid "Completion/M-tab"
-msgstr "Slutföra/M-tab"
+msgstr "Kompletera/M-tab"
 
 #: src/win.c:256
 msgid "+ on keypad"
-msgstr "+ på tangentbordet"
+msgstr "+ på numeriska tangentbordet"
 
 #: src/win.c:257
 msgid "- on keypad"
-msgstr "- på tangentbordet"
+msgstr "- på numeriska tangentbordet"
 
 #: src/win.c:258
 msgid "* on keypad"
-msgstr "* på tangentbordet"
+msgstr "* på numeriska tangentbordet"
 
 #. From here on, these won't be shown in Learn keys (no space)
 #: src/win.c:260
 msgid "Left arrow keypad"
-msgstr "Vänsterpil"
+msgstr "Vänsterpil, numeriska"
 
 #: src/win.c:261
 msgid "Right arrow keypad"
-msgstr "Högerpil"
+msgstr "Högerpil, numeriska"
 
 #: src/win.c:262
 msgid "Up arrow keypad"
-msgstr "Uppåt pil"
+msgstr "Uppåtpil, numeriska"
 
 #: src/win.c:263
 msgid "Down arrow keypad"
-msgstr "Neråt pil"
+msgstr "Neråtpil, numeriska"
 
 #: src/win.c:264
 msgid "Home on keypad"
-msgstr "Home tangenten"
+msgstr "Home, numeriska"
 
 #: src/win.c:265
 msgid "End on keypad"
-msgstr "End tangenten"
+msgstr "End, numeriska"
 
 #: src/win.c:266
 msgid "Page Down keypad"
-msgstr "Page Down tangenten"
+msgstr "Page Down, numeriska"
 
 #: src/win.c:267
 msgid "Page Up keypad"
-msgstr "Page Up tangenten"
+msgstr "Page Up, numeriska"
 
 #: src/win.c:268
 msgid "Insert on keypad"
-msgstr "Insert på tangentbordet"
+msgstr "Insert, numeriska"
 
 #: src/win.c:269
 msgid "Delete on keypad"
-msgstr "Delete på tangentbordet"
+msgstr "Delete, numeriska"
 
 #: src/win.c:270
 msgid "Enter on keypad"
-msgstr "Enter på tangentbordet"
+msgstr "Enter, numeriska"
 
 #: src/win.c:271
 msgid "Slash on keypad"
-msgstr "Slash på tangentbordet"
+msgstr "Snedstreck, numeriska"
 
 #: src/win.c:272
 msgid "NumLock on keypad"
-msgstr "Numlock på tangentbordet"
+msgstr "Numlock, numeriska"
 
 #: vfs/extfs.c:268
 #, c-format
@@ -6549,10 +6550,3 @@ msgstr "%s: %s: %s %3d%% (%ld bytes överförda)"
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld bytes överförda"
 
-#~ msgid "Home directory"
-#~ msgstr "Hemkatalog"
-
-#~ msgid "Could not symlink %s to %s; will not have initial home desktop icon."
-#~ msgstr ""
-#~ "Kan inte symlänka %s till %s. Det kommer inte att finnas en initial hemikon "
-#~ "på skrivbordet."
