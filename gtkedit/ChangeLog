@@ -1,3 +1,8 @@
+2000-08-08  Pavel Roskin <proski@gnu.org>
+
+	* gtkedit.c [GTK]: don't include mousemark.h
+	* gtkedit.h [GTK]: likewise
+
 2000-08-03  Pavel Roskin <proski@gnu.org>
 
 	* mousemark.c, mousemark.h: removed

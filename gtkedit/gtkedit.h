@@ -23,7 +23,7 @@
 #include <gdk/gdk.h>
 #include <gtk/gtkadjustment.h>
 #include <gtk/gtkeditable.h>
-#ifndef MIDNIGHT
+#if ! defined (MIDNIGHT) && ! defined (GTK)
 #include <gtkedit/mousemark.h>
 #endif
 

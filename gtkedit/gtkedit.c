@@ -31,7 +31,7 @@
 #include "gtk/gtkselection.h"
 #include "gtk/gtksignal.h"
 #include "edit.h"
-#ifndef MIDNIGHT
+#if ! defined (MIDNIGHT) && ! defined (GTK)
 #include "mousemark.h"
 #endif
 
