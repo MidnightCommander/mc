@@ -121,7 +121,7 @@ distcopy:
 
 dist: configure config.h.in distcopy
 
-check: Makefile
+mycheck: Makefile
 	rm -rf ../mc-$(VERSION)
 	tar xzvf ../mc-$(VERSION).tar.gz
 	mkdir mc-$(VERSION)/=build
@@ -133,8 +133,10 @@ check: Makefile
 	  && make install \
 	-rm -rf mc-$(VERSION)
 
-distcheck: dist check
+mydistcheck: dist mycheck
 	@echo ***********************************
 	@echo mc-$(VERSION) is ready for release
 	@echo ***********************************
 
+distcheck:
+	@echo use mydistcheck only if you know what you are doing.
