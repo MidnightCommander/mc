@@ -335,8 +335,14 @@ int boot_current_is_left = 1;
 /* Used for keeping track of the original stdout */
 int stdout_fd = 0;
 
+/*
+ * Ugh.  Pavel, you shell hack in sfs is BAD.
+ * We need to kill shell from vfs
+ */
+#ifndef USE_VFS
 /* The user's shell */
 char *shell;
+#endif
 
 /* mc_home: The home of MC */
 char *mc_home;

@@ -18,7 +18,7 @@ LIBFILES_CONST = mc.hint mc.lib mc.menu
 TIFILES = README.xterm linux.ti xterm.ad xterm.ti ansi.ti vt100.ti xterm.tcap
 DISTLIB = $(LIBFILES_IN) $(LIBFILES_CONST) $(TIFILES) \
 	Makefile.in tdiff xnc.hlp ncurses.h mc.sh mc.csh mcserv.init \
-	mcserv.pamd tkmc.wmconfig mc.ext.in.qnx.diff
+	mcserv.pamd tkmc.wmconfig mc.ext.in.qnx.diff mc.global
 
 all:
 
@@ -44,6 +44,7 @@ install:
 	do $(INSTALL_DATA) $(builddir)/lib/$$I $(DESTDIR)$(libdir)/$$I; done
 	for I in $(TIFILES); \
 	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(tidir)/$$I; done
+	$(INSTALL_DATA) $(srcdir)/special.dirs $(DESTDIR)$(confdir)
 
 uninstall:
 	for I in $(LIBFILES_OUT) $(LIBFILES_CONST); \

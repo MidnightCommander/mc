@@ -32,7 +32,13 @@
 
 /* We need this for `regex.h', and perhaps for the Emacs include files.  */
 #include <sys/types.h>
+#if defined(__GLIBC__)
+#  if __GLIBC__ > 1
+#    define ELIDE_CODE
+#  endif
+#endif
 
+#ifndef ELIDE_CODE
 /* This is for other GNU distributions with internationalized messages.  */
 #if HAVE_LIBINTL_H || defined (_LIBC)
 # include <libintl.h>
@@ -5406,6 +5412,7 @@ regfree (preg)
 }
 
 #endif /* not emacs  */
+#endif /* !defined(elide_code) */
 
 /*
 Local variables:

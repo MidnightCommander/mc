@@ -4,14 +4,6 @@
 #include "fileopctx.h"
 #include "background.h"
 
-enum {
-    RECURSIVE_YES,
-    RECURSIVE_NO,
-    RECURSIVE_ALWAYS,
-    RECURSIVE_NEVER,
-    RECURSIVE_ABORT
-} FileCopyMode;
-
 extern int know_not_what_am_i_doing;
 
 struct link;

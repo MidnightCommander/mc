@@ -1,5 +1,12 @@
 1999-02-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* file.c: Moved FileCopyMode here (thanks to Wolfgang Scherer for
+	pointing this out) and made it a typedef.
+
+	* treestore.c (process_special_dirs): New function.
+	(should_skip_directory): Load the settings from the global
+	special.dirs file and from the 
+
 	* util.c: Test for glibc/linux and if so, do not use getwd, but
 	getcwd as on this system it is better than popen ("pwd").
 

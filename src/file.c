@@ -156,6 +156,14 @@ char *op_names [3] = {
 	N_(" Delete ")
 };
 
+typedef enum {
+    RECURSIVE_YES,
+    RECURSIVE_NO,
+    RECURSIVE_ALWAYS,
+    RECURSIVE_NEVER,
+    RECURSIVE_ABORT
+} FileCopyMode;
+
 static int recursive_erase (FileOpContext *ctx, char *s,
 			    long *progress_count, double *progress_bytes);
 

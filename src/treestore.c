@@ -689,26 +689,34 @@ tree_store_end_check (void)
 	tree_store_set_freeze (FALSE);
 }
 
+static void
+process_special_dirs (GList **special_dirs, char *file)
+{
+	char *token;
+	char *buffer = g_malloc (4096);
+	char *s;
+	
+	GetPrivateProfileString ("Special dirs", "list",
+				 "", buffer, 4096, file);
+	s = buffer;
+	while ((token = strtok (s, ",")) != NULL){
+		*special_dirs = g_list_prepend (*special_dirs, g_strdup (token));
+			s = NULL;
+	}
+}
+
 gboolean
 should_skip_directory (char *dir)
 {
-	static GList *special_dirs, *l;
+	static GList *special_dirs;
+	GList *l;
 	static int loaded;
 	
 	if (loaded == 0){
-		char *token;
-		char *buffer = g_malloc (4096);
-		char *s;
-
 		loaded = 1;
 		setup_init ();
-		GetPrivateProfileString ("Special dirs", "list",
-					 "/afs,/coda,/:,/...,/net", buffer, 4096, profile_name);
-		s = buffer;
-		while ((token = strtok (s, ",")) != NULL){
-			special_dirs = g_list_prepend (special_dirs, g_strdup (token));
-			s = NULL;
-		}
+		process_special_dirs (&special_dirs, profile_name);
+		process_special_dirs (&special_dirs, CONFDIR "mc.global");
 	}
 
 	for (l = special_dirs; l; l = l->next){
