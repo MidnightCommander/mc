@@ -156,10 +156,8 @@
 
     void vfs_stamp (vfs *, vfsid);
     void vfs_rmstamp (vfs *, vfsid, int);
-    void vfs_addstamp (vfs *, vfsid, struct vfs_stamping *);
     void vfs_add_noncurrent_stamps (vfs *, vfsid, struct vfs_stamping *);
     void vfs_add_current_stamps (void);
-    void vfs_free_resources(char *path);
     void vfs_timeout_handler (void);
     void vfs_expire (int);
     int vfs_timeouts (void);
@@ -282,7 +280,6 @@ static inline int mc_setctl(a,b,c) { return 0; }
 #   define vfs_init() do { } while (0)
 #   define vfs_shut() do { } while (0)
 #   define vfs_canon(p) g_strdup (canonicalize_pathname(p))
-#   define vfs_free_resources() do { } while (0)
 #   define vfs_timeout_handler() do { } while (0)
 #   define vfs_timeouts() 0
 #   define vfs_force_expire() do { } while (0)
@@ -359,9 +356,8 @@ extern void vfs_print_stats (const char *fs_name, const char *action,
 #define MCCTL_WANT_STALE_DATA	9
 #define MCCTL_NO_STALE_DATA    10
 
-extern int vfs_flags;
-extern uid_t vfs_uid;
-extern gid_t vfs_gid;
+#define vfs_uid 0
+#define vfs_gid 0
 
 #define FL_ALWAYS_MAGIC 1
 #define FL_NO_MCFS 2

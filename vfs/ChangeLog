@@ -1,3 +1,8 @@
+2002-11-03  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.c: Remove unused code.
+	* vfs.h: Define vfs_uid and vfs_gid as 0, they never change.
+
 2002-11-01  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* fish.c: Use name_quote() to quote filenames.

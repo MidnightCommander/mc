@@ -60,7 +60,7 @@
 extern int get_other_type (void);
 
 int vfs_timeout = 60; /* VFS timeout in seconds */
-int vfs_flags = 0;    /* Flags */
+static int vfs_flags = 0;    /* Flags */
 
 extern int cd_symlinks; /* Defined in main.c */
 
@@ -74,9 +74,6 @@ static char *current_dir = NULL;
 static int current_mday;
 static int current_mon;
 static int current_year;
-
-uid_t vfs_uid = 0;
-gid_t vfs_gid = 0;
 
 /* FIXME: Open files managed by the vfs layer, should be dynamical */
 #define MAX_VFS_FILES 100
@@ -290,7 +287,7 @@ vfs_timeouts ()
     return stamps ? 10 : 0;
 }
 
-void
+static void
 vfs_addstamp (vfs *v, vfsid id, struct vfs_stamping *parent)
 {
     if (v != &vfs_local_ops && id != (vfsid)-1){
@@ -932,27 +929,6 @@ vfs_current_is_local (void)
     return current_vfs == &vfs_local_ops;
 }
 
-#if 0
-/* External world should not do differences between VFS-s */
-int
-vfs_current_is_extfs (void)
-{
-    return current_vfs == &vfs_extfs_ops;
-}
-
-int
-vfs_current_is_tarfs (void)
-{
-    return current_vfs == &vfs_tarfs_ops;
-}
-
-int
-vfs_current_is_cpiofs (void)
-{
-    return current_vfs == &vfs_cpiofs_ops;
-}
-#endif
-
 int
 vfs_file_is_local (const char *file)
 {
@@ -1278,35 +1254,6 @@ vfs_init (void)
 
     vfs_setup_wd ();
 }
-
-void
-vfs_free_resources (char *path)
-{
-    vfs *vfs;
-    vfsid vid;
-    struct vfs_stamping *parent;
-    
-    vfs = vfs_type (path);
-    vid = vfs_ncs_getid (vfs, path, &parent);
-    if (vid != (vfsid) -1)
-	(*vfs->free)(vid);
-    vfs_rm_parents (parent);
-}
-
-#if 0
-/* Shutdown a vfs given a path name */
-void
-vfs_shut_path (char *p)
-{
-    vfs *the_vfs;
-    struct vfs_stamping *par;
-
-    the_vfs = vfs_type (p);
-    vfs_ncs_getid (the_vfs, p, &par);
-    (*par->v->free)(par->id);
-    vfs_rm_parents (par);
-}
-#endif
 
 void
 vfs_shut (void)
@@ -1782,11 +1729,6 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
         goto error;
     /* Use resulting time value */
     s->st_atime = s->st_ctime = s->st_mtime;
-#if 0
-    /* These variables must be initialized by vfs_s_new_inode () */
-    s->st_dev = 0;
-    s->st_ino = 0;
-#endif
 #ifdef HAVE_ST_BLKSIZE
     s->st_blksize = 512;
 #endif
