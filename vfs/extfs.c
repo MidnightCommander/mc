@@ -101,9 +101,9 @@ static void extfs_fill_names (vfs *me, void (*func)(char *))
     char *name;
     
     while (a){
-	name = g_strconcat (extfs_prefixes [a->fstype], "#", 
-			    (a->name ? a->name : ""), "/",
-			     a->current_dir->name, NULL);
+	name = g_strconcat (a->name ? a->name : "",
+			    "#", extfs_prefixes [a->fstype],
+			    PATH_SEP_STR, a->current_dir->name, NULL);
 	(*func)(name);
 	g_free (name);
 	a = a->next;

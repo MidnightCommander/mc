@@ -1,5 +1,8 @@
 2002-07-03  Andrew V. Samoilov  <kai@cmail.ru>
 
+	* extfs.c (extfs_fill_names): Generate filename#vfsname/dir
+	instead of #vfsname/filename/dir.  Use PATH_SEP_STR.
+
 	* sfs.c (sfs_free): Fix memory leak.
 	(sfs_init): Use PATH_SEP_STR.
 
