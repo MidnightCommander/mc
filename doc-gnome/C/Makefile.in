@@ -96,7 +96,6 @@ GT_NO = @GT_NO@
 GT_YES = @GT_YES@
 HAVE_FILECMD = @HAVE_FILECMD@
 HAVE_SLINGSHOT = @HAVE_SLINGSHOT@
-HAVE_XVIEW = @HAVE_XVIEW@
 HAVE_nroff = @HAVE_nroff@
 INCLUDE_LOCALE_H = @INCLUDE_LOCALE_H@
 INSTOBJEXT = @INSTOBJEXT@
@@ -156,9 +155,6 @@ X11_WWW = @X11_WWW@
 XCURSES = @XCURSES@
 XEXT_LIB = @XEXT_LIB@
 XPM_LIB = @XPM_LIB@
-XVIEW_CFLAGS = @XVIEW_CFLAGS@
-XVIEW_CPPFLAGS = @XVIEW_CPPFLAGS@
-XVIEW_LIBS = @XVIEW_LIBS@
 ZVT_LIBS = @ZVT_LIBS@
 builddir = @builddir@
 dep = @dep@
@@ -192,7 +188,7 @@ CONFIG_HEADER = ../../config.h
 CONFIG_CLEAN_FILES = 
 DATA =  $(gmc_help_DATA)
 
-HEADERS =  $(HAVE_XVIEW_PRIVATE_HEADERS)
+HEADERS =
 
 DIST_COMMON = Makefile.in
 
@@ -228,20 +224,6 @@ uninstall-gmc_helpDATA:
 	  rm -f $(DESTDIR)$(gmc_helpdir)/$$p; \
 	done
 
-install-HAVE_XVIEW_PRIVATEHEADERS: $(HAVE_XVIEW_PRIVATE_HEADERS)
-	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(HAVE_XVIEW_PRIVATEdir)
-	@list='$(HAVE_XVIEW_PRIVATE_HEADERS)'; for p in $$list; do \
-	  if test -f "$$p"; then d= ; else d="$(srcdir)/"; fi; \
-	  echo " $(INSTALL_DATA) $$d$$p $(DESTDIR)$(HAVE_XVIEW_PRIVATEdir)/$$p"; \
-	  $(INSTALL_DATA) $$d$$p $(DESTDIR)$(HAVE_XVIEW_PRIVATEdir)/$$p; \
-	done
-
-uninstall-HAVE_XVIEW_PRIVATEHEADERS:
-	@$(NORMAL_UNINSTALL)
-	list='$(HAVE_XVIEW_PRIVATE_HEADERS)'; for p in $$list; do \
-	  rm -f $(DESTDIR)$(HAVE_XVIEW_PRIVATEdir)/$$p; \
-	done
 tags: TAGS
 TAGS:
 
@@ -283,24 +265,20 @@ installcheck: installcheck-am
 install-exec-am:
 install-exec: install-exec-am
 
-install-data-am: install-gmc_helpDATA \
-		install-HAVE_XVIEW_PRIVATEHEADERS install-data-local
+install-data-am: install-gmc_helpDATA install-data-local
 install-data: install-data-am
 
 install-am: all-am
 	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
 install: install-am
-uninstall-am: uninstall-gmc_helpDATA \
-		uninstall-HAVE_XVIEW_PRIVATEHEADERS
+uninstall-am: uninstall-gmc_helpDATA
 uninstall: uninstall-am
 all-am: Makefile $(DATA) $(HEADERS)
 all-redirect: all-am
 install-strip:
 	$(MAKE) $(AM_MAKEFLAGS) INSTALL_STRIP_FLAG=-s install
 installdirs:
-	$(mkinstalldirs)  $(DESTDIR)$(gmc_helpdir) \
-		$(DESTDIR)$(HAVE_XVIEW_PRIVATEdir)
-
+	$(mkinstalldirs)  $(DESTDIR)$(gmc_helpdir)
 
 mostlyclean-generic:
 	-rm -f index.html
@@ -330,7 +308,6 @@ maintainer-clean-am:  maintainer-clean-generic distclean-am
 maintainer-clean: maintainer-clean-am
 
 .PHONY: uninstall-gmc_helpDATA install-gmc_helpDATA \
-uninstall-HAVE_XVIEW_PRIVATEHEADERS install-HAVE_XVIEW_PRIVATEHEADERS \
 tags distdir info-am info dvi-am dvi check check-am installcheck-am \
 installcheck install-exec-am install-exec install-data-local \
 install-data-am install-data install-am install uninstall-am uninstall \
@@ -347,23 +324,23 @@ gmc.html: gmc/gmc.html
 	-cp gmc/index.html .
 
 gmc/gmc.html: $(SGML_FILES)
-	-db2html gmc.sgml
+	-db2html $(srcdir)/gmc.sgml
 
 dist-hook:
 	mkdir $(distdir)/gmc
 	-cp gmc/*.html gmc/*.css $(distdir)/gmc
 	-cp gmc.html $(distdir)
 	mkdir $(distdir)/figs
-	-cp figs/*.png $(distdir)/figs
+	-cp $(srcdir)/figs/*.png $(distdir)/figs
 
 install-data-local: gmc.html
 	$(mkinstalldirs) $(DESTDIR)$(gmc_helpdir)/figs
 	-for file in $(srcdir)/gmc/*.html $(srcdir)/gmc/*.css; do \
 	basefile=`basename $$file`; \
-	$(INSTALL_DATA) $(srcdir)/$$file $(DESTDIR)$(gmc_helpdir)/$$basefile; \
+	$(INSTALL_DATA) $$file $(DESTDIR)$(gmc_helpdir)/$$basefile; \
 	done
 	-for file in $(srcdir)/figs/*.png; do \
-	$(INSTALL_DATA) $(srcdir)/$$file $(DESTDIR)$(gmc_helpdir)/figs;\
+	$(INSTALL_DATA) $$file $(DESTDIR)$(gmc_helpdir)/figs;\
 	done
 
 gmc.ps: gmc.sgml

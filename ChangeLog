@@ -1,5 +1,8 @@
 2000-08-15  Pavel Roskin  <proski@gnu.org>
 
+	* doc-gnome/Makefile.in: Fixed some abuses of $(srcdir)
+	Removed all XVIEW-related stuff
+
 	* doc/mc.1.in: Updated info about the internal editor
 
 	* Makefile.in, */Makefile.in: Fail if $(RMF) fails - it may
