@@ -407,7 +407,8 @@ ftpfs_changetype (struct vfs_class *me, struct vfs_s_super *super, int binary)
 
 /* This routine logs the user in */
 static int
-ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char *netrcpass)
+ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super,
+		    const char *netrcpass)
 {
     char *pass;
     char *op;
@@ -416,28 +417,26 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
     char reply_string[BUF_MEDIUM];
 
     SUP.isbinary = TYPE_UNKNOWN;
-    if (netrcpass)
-	op = g_strdup (netrcpass);
-    else {
-	if (!strcmp (SUP.user, "anonymous") || !strcmp (SUP.user, "ftp")) {
-	    if (!ftpfs_anonymous_passwd)
-		ftpfs_init_passwd ();
-	    op = g_strdup (ftpfs_anonymous_passwd);
-	    anon = 1;
-	} else {
-	    char *p;
 
-	    if (!SUP.password) {
-		p = g_strconcat (_(" FTP: Password required for "),
-				 SUP.user, " ", NULL);
-		op = vfs_get_password (p);
-		g_free (p);
-		if (op == NULL)
-		    ERRNOR (EPERM, 0);
-		SUP.password = g_strdup (op);
-	    } else
-		op = g_strdup (SUP.password);
-	}
+    if (SUP.password)		/* explicit password */
+	op = g_strdup (SUP.password);
+    else if (netrcpass)		/* password from netrc */
+	op = g_strdup (netrcpass);
+    else if (!strcmp (SUP.user, "anonymous") || !strcmp (SUP.user, "ftp")) {
+	if (!ftpfs_anonymous_passwd)	/* default anonymous password */
+	    ftpfs_init_passwd ();
+	op = g_strdup (ftpfs_anonymous_passwd);
+	anon = 1;
+    } else {			/* ask user */
+	char *p;
+
+	p = g_strconcat (_(" FTP: Password required for "), SUP.user, " ",
+			 NULL);
+	op = vfs_get_password (p);
+	g_free (p);
+	if (op == NULL)
+	    ERRNOR (EPERM, 0);
+	SUP.password = g_strdup (op);
     }
 
     if (!anon || MEDATA->logfile)
@@ -456,8 +455,9 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
     } else
 	name = g_strdup (SUP.user);
 
-    if (ftpfs_get_reply (me, SUP.sock, reply_string, sizeof (reply_string) - 1)
-	== COMPLETE) {
+    if (ftpfs_get_reply
+	(me, SUP.sock, reply_string,
+	 sizeof (reply_string) - 1) == COMPLETE) {
 	g_strup (reply_string);
 	SUP.remote_is_amiga = strstr (reply_string, "AMIGA") != 0;
 	if (MEDATA->logfile) {
@@ -483,7 +483,8 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
 		if (op == NULL)
 		    ERRNOR (EPERM, 0);
 		print_vfs_message (_("ftpfs: sending user account"));
-		code = ftpfs_command (me, super, WAIT_REPLY, "ACCT %s", op);
+		code =
+		    ftpfs_command (me, super, WAIT_REPLY, "ACCT %s", op);
 		g_free (op);
 	    }
 	    if (code != COMPLETE)
@@ -506,7 +507,7 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
 	}
     }
     message (1, MSG_ERROR, _("ftpfs: Login incorrect for user %s "),
-		SUP.user);
+	     SUP.user);
   login_fail:
     wipe_password (pass);
     g_free (name);

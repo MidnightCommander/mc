@@ -1,3 +1,9 @@
+2003-11-21  Pavel Roskin  <proski@gnu.org>
+
+	* ftpfs.c (ftpfs_login_server): Explicit password should have
+	priority over the netrc password and the anonymous password.
+	Reported by Jindrich Makovicka <makovick@kmlinux.fjfi.cvut.cz>
+
 2003-11-14  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* undelfs.c (undelfs_loaddel): Use g_try_malloc()/g_try_relloc()
