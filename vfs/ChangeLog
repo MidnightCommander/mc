@@ -1,3 +1,8 @@
+2003-08-18  Oskar Liljeblad  <oskar@osk.mine.nu>
+
+	* extfs/uzip.in: Fix error in parsing size of files over 9999999
+	bytes long.
+
 2003-08-08  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/audio.in: Further portability fixes.  Use current date
