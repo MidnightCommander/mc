@@ -1,9 +1,8 @@
-Mon Feb  7 11:44:23 2000  Dan Winship  <danw@helixcode.com>
+2000-02-10  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
-	* mountlist.c: use a better feature test for distinguishing
-	old-style 4.4BSD getmntinfo from new-style 4.4BSD getmntinfo.
-	(NetBSD defines MOUNT_UFS, etc, but as strings rather than
-	integers.)
+	* setup.c (load_setup): remove duplicate loading of anonymous
+	passwd by do_load_string(), it is doing by
+	ftpfs_init_passwd. (Patch by sav@bcs.zp.ua)
 
 2000-02-04 "David H.Martin" <dmartina@usa.net> 
 	
