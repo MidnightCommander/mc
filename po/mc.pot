@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-03-14 18:17-0600\n"
+"POT-Creation-Date: 1999-03-18 19:56-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr ""
 msgid "The GNOME edition of the Midnight Commander file manager."
 msgstr ""
 
-#: gnome/gcmd.c:127 src/main.c:844 src/screen.c:2053
+#: gnome/gcmd.c:127 src/main.c:844 src/screen.c:2067
 msgid " The Midnight Commander "
 msgstr ""
 
@@ -55,16 +55,16 @@ msgstr ""
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr ""
 
-#: gnome/gcmd.c:129 gtkedit/editcmd.c:2248 src/cmd.c:251 src/file.c:1860
-#: src/file.c:2232 src/filegui.c:602 src/hotlist.c:1035 src/main.c:846
-#: src/screen.c:2055 src/subshell.c:706 src/subshell.c:732 src/tree.c:755
+#: gnome/gcmd.c:129 gtkedit/editcmd.c:2248 src/cmd.c:251 src/file.c:1859
+#: src/file.c:2231 src/filegui.c:602 src/hotlist.c:1035 src/main.c:846
+#: src/screen.c:2069 src/subshell.c:706 src/subshell.c:732 src/tree.c:755
 #: src/view.c:404
 msgid "&Yes"
 msgstr ""
 
-#: gnome/gcmd.c:129 gtkedit/editcmd.c:2248 src/cmd.c:251 src/file.c:1860
-#: src/file.c:2232 src/filegui.c:601 src/hotlist.c:1035 src/main.c:846
-#: src/screen.c:2055 src/subshell.c:706 src/subshell.c:732 src/tree.c:755
+#: gnome/gcmd.c:129 gtkedit/editcmd.c:2248 src/cmd.c:251 src/file.c:1859
+#: src/file.c:2231 src/filegui.c:601 src/hotlist.c:1035 src/main.c:846
+#: src/screen.c:2069 src/subshell.c:706 src/subshell.c:732 src/tree.c:755
 #: src/view.c:404
 msgid "&No"
 msgstr ""
@@ -153,7 +153,7 @@ msgid "Set Filter"
 msgstr ""
 
 #: gnome/gcmd.c:650 gnome/gcmd.c:691 gnome/gcmd.c:696 gnome/gcmd.c:700
-#: gnome/gscreen.c:2517
+#: gnome/gscreen.c:2516
 msgid "Show all files"
 msgstr ""
 
@@ -181,7 +181,7 @@ msgstr ""
 msgid "Enter extra arguments:"
 msgstr ""
 
-#: gnome/gdesktop.c:420 gnome/gdesktop.c:2067
+#: gnome/gdesktop.c:420 gnome/gdesktop.c:2070
 msgid "Warning"
 msgstr ""
 
@@ -190,176 +190,176 @@ msgstr ""
 msgid "Could not open %s; will not have desktop icons"
 msgstr ""
 
-#: gnome/gdesktop.c:1013
+#: gnome/gdesktop.c:1014
 msgid "While running the mount/umount command"
 msgstr ""
 
-#: gnome/gdesktop.c:1082
+#: gnome/gdesktop.c:1083
 msgid "While running the eject command"
 msgstr ""
 
-#: gnome/gdesktop.c:1135 gnome/gicon.c:154 gnome/gtools.c:52
+#: gnome/gdesktop.c:1136 gnome/gicon.c:154 gnome/gtools.c:52
 msgid "Error"
 msgstr ""
 
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop.c:2063
+#: gnome/gdesktop.c:2066
 msgid "Home directory"
 msgstr ""
 
-#: gnome/gdesktop.c:2068
+#: gnome/gdesktop.c:2071
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial desktop icons."
 msgstr ""
 
-#: gnome/gdesktop.c:2397 gnome/glayout.c:355
+#: gnome/gdesktop.c:2400 gnome/glayout.c:355
 msgid "_Terminal"
 msgstr ""
 
-#: gnome/gdesktop.c:2397 gnome/glayout.c:355
+#: gnome/gdesktop.c:2400 gnome/glayout.c:355
 msgid "Launch a new terminal in the current directory"
 msgstr ""
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2399 gnome/glayout.c:357
+#: gnome/gdesktop.c:2402 gnome/glayout.c:357
 msgid "_Directory..."
 msgstr ""
 
-#: gnome/gdesktop.c:2399 gnome/glayout.c:357
+#: gnome/gdesktop.c:2402 gnome/glayout.c:357
 msgid "Creates a new directory"
 msgstr ""
 
-#: gnome/gdesktop.c:2407 gnome/glayout.c:440
+#: gnome/gdesktop.c:2410 gnome/glayout.c:440
 msgid "Arrange Icons"
 msgstr ""
 
-#: gnome/gdesktop.c:2408
+#: gnome/gdesktop.c:2411
 msgid "Create New Window"
 msgstr ""
 
-#: gnome/gdesktop.c:2410
+#: gnome/gdesktop.c:2413
 msgid "Rescan Mountable Devices"
 msgstr ""
 
-#: gnome/gdesktop.c:2411 gnome/glayout.c:443
+#: gnome/gdesktop.c:2414 gnome/glayout.c:443
 msgid "Rescan Desktop"
 msgstr ""
 
-#: gnome/gdialogs.c:58
+#: gnome/gdialogs.c:59
 msgid "To: "
 msgstr ""
 
-#: gnome/gdialogs.c:59
+#: gnome/gdialogs.c:60
 msgid "Copying from: "
 msgstr ""
 
-#: gnome/gdialogs.c:60
+#: gnome/gdialogs.c:61
 msgid "Deleting file: "
 msgstr ""
 
-#: gnome/gdialogs.c:361
+#: gnome/gdialogs.c:368
 msgid "Files Exist"
 msgstr ""
 
-#: gnome/gdialogs.c:376
+#: gnome/gdialogs.c:383
 msgid ""
 "Some of the files you are trying to copy already exist in the destination "
 "folder.  Please select the action to be performed."
 msgstr ""
 
-#: gnome/gdialogs.c:389
+#: gnome/gdialogs.c:396
 msgid "Prompt me before overwriting any file."
 msgstr ""
 
-#: gnome/gdialogs.c:396
+#: gnome/gdialogs.c:403
 msgid "Don't overwrite any files."
 msgstr ""
 
-#: gnome/gdialogs.c:412
+#: gnome/gdialogs.c:419
 msgid "Overwrite:"
 msgstr ""
 
-#: gnome/gdialogs.c:419
+#: gnome/gdialogs.c:426
 msgid "Older files."
 msgstr ""
 
-#: gnome/gdialogs.c:425
+#: gnome/gdialogs.c:432
 msgid "Files only if size differs."
 msgstr ""
 
-#: gnome/gdialogs.c:431
+#: gnome/gdialogs.c:438
 msgid "All files."
 msgstr ""
 
-#: gnome/gdialogs.c:471
+#: gnome/gdialogs.c:478
 msgid "File Exists"
 msgstr ""
 
-#: gnome/gdialogs.c:477
+#: gnome/gdialogs.c:484
 #, c-format
 msgid "The target file already exists: %s"
 msgstr ""
 
-#: gnome/gdialogs.c:484
+#: gnome/gdialogs.c:491
 msgid "Replace it?"
 msgstr ""
 
-#: gnome/gdialogs.c:558 gtkedit/editwidget.c:1067 src/file.c:803
-#: src/screen.c:2294 src/screen.c:2324 src/tree.c:1024
+#: gnome/gdialogs.c:565 gtkedit/editwidget.c:1067 src/file.c:802
+#: src/screen.c:2308 src/screen.c:2338 src/tree.c:1024
 msgid "Copy"
 msgstr ""
 
-#: gnome/gdialogs.c:561 gtkedit/editwidget.c:1068
+#: gnome/gdialogs.c:568 gtkedit/editwidget.c:1068
 msgid "Move"
 msgstr ""
 
-#: gnome/gdialogs.c:578
+#: gnome/gdialogs.c:585
 msgid "Destination"
 msgstr ""
 
-#: gnome/gdialogs.c:582
+#: gnome/gdialogs.c:589
 msgid "Find Destination Folder"
 msgstr ""
 
-#: gnome/gdialogs.c:587
+#: gnome/gdialogs.c:594
 msgid "Copy as a background process"
 msgstr ""
 
-#: gnome/gdialogs.c:607
+#: gnome/gdialogs.c:614
 msgid "Advanced Options"
 msgstr ""
 
-#: gnome/gdialogs.c:611
+#: gnome/gdialogs.c:618
 msgid "Preserve symlinks"
 msgstr ""
 
-#: gnome/gdialogs.c:621
+#: gnome/gdialogs.c:628
 msgid "Follow links."
 msgstr ""
 
-#: gnome/gdialogs.c:627
+#: gnome/gdialogs.c:634
 msgid ""
 "Selecting this will copy the files that symlinks point to instead of just "
 "copying the link."
 msgstr ""
 
-#: gnome/gdialogs.c:632
+#: gnome/gdialogs.c:639
 msgid "Preserve file attributes."
 msgstr ""
 
-#: gnome/gdialogs.c:637
+#: gnome/gdialogs.c:644
 msgid "Preserves the permissions and the UID/GID if possible"
 msgstr ""
 
-#: gnome/gdialogs.c:643
+#: gnome/gdialogs.c:650
 msgid "Recursively copy subdirectories."
 msgstr ""
 
-#: gnome/gdialogs.c:648
+#: gnome/gdialogs.c:655
 msgid "If set, this will copy the directories recursively"
 msgstr ""
 
-#: gnome/gdialogs.c:752
+#: gnome/gdialogs.c:759
 #, c-format
 msgid ""
 "%s\n"
@@ -367,36 +367,57 @@ msgid ""
 "Directory not empty. Delete it recursively?"
 msgstr ""
 
-#: gnome/gdialogs.c:761 src/file.c:2227
+#: gnome/gdialogs.c:768 src/file.c:2226
 msgid " Delete: "
 msgstr ""
 
-#: gnome/gdialogs.c:765
+#: gnome/gdialogs.c:772
 msgid "Do the same for the rest"
 msgstr ""
 
-#: gnome/gdialogs.c:834
+#: gnome/gdialogs.c:841
 msgid "Move Progress"
 msgstr ""
 
-#: gnome/gdialogs.c:837
+#: gnome/gdialogs.c:844
 msgid "Copy Progress"
 msgstr ""
 
-#: gnome/gdialogs.c:840
+#: gnome/gdialogs.c:847
 msgid "Delete Progress"
 msgstr ""
 
-#: gnome/gdialogs.c:885
+#: gnome/gdialogs.c:892
 msgid "File "
 msgstr ""
 
-#: gnome/gdialogs.c:889
+#: gnome/gdialogs.c:896
 msgid " is "
 msgstr ""
 
-#: gnome/gdialogs.c:892
+#: gnome/gdialogs.c:899
 msgid " Done."
+msgstr ""
+
+#: gnome/gdialogs.c:959 src/wtools.c:585 vfs/vfs.c:1762
+msgid "Password:"
+msgstr ""
+
+#: gnome/gdialogs.c:959 src/wtools.c:585
+msgid "Password"
+msgstr ""
+
+#. Create the dialog
+#: gnome/gdialogs.c:991
+msgid "Symbolic Link"
+msgstr ""
+
+#: gnome/gdialogs.c:1007 src/boxes.c:803
+msgid "Existing filename (filename symlink will point to):"
+msgstr ""
+
+#: gnome/gdialogs.c:1021 src/boxes.c:801
+msgid "Symbolic link filename:"
 msgstr ""
 
 #: gnome/gdnd.c:51
@@ -648,7 +669,7 @@ msgid "Properties"
 msgstr ""
 
 #: gnome/gpopup.c:253 gnome/gpopup.c:254 gtkedit/editwidget.c:1070
-#: src/screen.c:2297 src/screen.c:2327
+#: src/screen.c:2311 src/screen.c:2341
 msgid "Delete"
 msgstr ""
 
@@ -672,7 +693,7 @@ msgstr ""
 msgid "Open with"
 msgstr ""
 
-#: gnome/gpopup.c:263 src/screen.c:2292 src/screen.c:2322
+#: gnome/gpopup.c:263 src/screen.c:2306 src/screen.c:2336
 msgid "View"
 msgstr ""
 
@@ -680,7 +701,7 @@ msgstr ""
 msgid "View unfiltered"
 msgstr ""
 
-#: gnome/gpopup.c:265 src/screen.c:2293 src/screen.c:2323 src/view.c:1991
+#: gnome/gpopup.c:265 src/screen.c:2307 src/screen.c:2337 src/view.c:1991
 msgid "Edit"
 msgstr ""
 
@@ -885,154 +906,154 @@ msgstr ""
 msgid "Select icon"
 msgstr ""
 
-#: gnome/gscreen.c:1469
+#: gnome/gscreen.c:1468
 msgid "Rescan Directory"
 msgstr ""
 
-#: gnome/gscreen.c:1469
+#: gnome/gscreen.c:1468
 msgid "Reloads the current directory"
 msgstr ""
 
-#: gnome/gscreen.c:1471
+#: gnome/gscreen.c:1470
 msgid "New folder"
 msgstr ""
 
-#: gnome/gscreen.c:1471
+#: gnome/gscreen.c:1470
 msgid "Creates a new folder here"
 msgstr ""
 
-#: gnome/gscreen.c:1649
+#: gnome/gscreen.c:1648
 msgid "All files"
 msgstr ""
 
-#: gnome/gscreen.c:1651
+#: gnome/gscreen.c:1650
 msgid "Archives and compressed files"
 msgstr ""
 
-#: gnome/gscreen.c:1653
+#: gnome/gscreen.c:1652
 msgid "RPM/DEB files"
 msgstr ""
 
-#: gnome/gscreen.c:1655
+#: gnome/gscreen.c:1654
 msgid "Text/Document files"
 msgstr ""
 
-#: gnome/gscreen.c:1657
+#: gnome/gscreen.c:1656
 msgid "HTML and SGML files"
 msgstr ""
 
-#: gnome/gscreen.c:1659
+#: gnome/gscreen.c:1658
 msgid "Postscript and PDF files"
 msgstr ""
 
-#: gnome/gscreen.c:1661
+#: gnome/gscreen.c:1660
 msgid "Spreadsheet files"
 msgstr ""
 
-#: gnome/gscreen.c:1663
+#: gnome/gscreen.c:1662
 msgid "Image files"
 msgstr ""
 
-#: gnome/gscreen.c:1666
+#: gnome/gscreen.c:1665
 msgid "Video/animation files"
 msgstr ""
 
-#: gnome/gscreen.c:1668
+#: gnome/gscreen.c:1667
 msgid "Audio files"
 msgstr ""
 
-#: gnome/gscreen.c:1670
+#: gnome/gscreen.c:1669
 msgid "C program files"
 msgstr ""
 
-#: gnome/gscreen.c:1672
+#: gnome/gscreen.c:1671
 msgid "C++ program files"
 msgstr ""
 
-#: gnome/gscreen.c:1674
+#: gnome/gscreen.c:1673
 msgid "Objective-C program files"
 msgstr ""
 
-#: gnome/gscreen.c:1676
+#: gnome/gscreen.c:1675
 msgid "Scheme program files"
 msgstr ""
 
-#: gnome/gscreen.c:1678
+#: gnome/gscreen.c:1677
 msgid "Assembler program files"
 msgstr ""
 
-#: gnome/gscreen.c:1680
+#: gnome/gscreen.c:1679
 msgid "Misc. program files"
 msgstr ""
 
-#: gnome/gscreen.c:1682
+#: gnome/gscreen.c:1681
 msgid "Font files"
 msgstr ""
 
-#: gnome/gscreen.c:1809
+#: gnome/gscreen.c:1808
 #, c-format
 msgid "Search: %s"
 msgstr ""
 
-#: gnome/gscreen.c:1819
+#: gnome/gscreen.c:1818
 #, c-format
 msgid "%s bytes in %d file"
 msgstr ""
 
-#: gnome/gscreen.c:1819
+#: gnome/gscreen.c:1818
 #, c-format
 msgid "%s bytes in %d files"
 msgstr ""
 
-#: gnome/gscreen.c:1845 src/screen.c:677
+#: gnome/gscreen.c:1844 src/screen.c:677
 msgid "<readlink failed>"
 msgstr ""
 
-#: gnome/gscreen.c:1899
+#: gnome/gscreen.c:1898
 msgid "Filter"
 msgstr ""
 
-#: gnome/gscreen.c:2339
+#: gnome/gscreen.c:2338
 msgid "Back"
 msgstr ""
 
-#: gnome/gscreen.c:2339
+#: gnome/gscreen.c:2338
 msgid "Go to the previously visited directory"
 msgstr ""
 
-#: gnome/gscreen.c:2341
+#: gnome/gscreen.c:2340
 msgid "Up"
 msgstr ""
 
-#: gnome/gscreen.c:2341
+#: gnome/gscreen.c:2340
 msgid "Go up a level in the directory heirarchy"
 msgstr ""
 
-#: gnome/gscreen.c:2343
+#: gnome/gscreen.c:2342
 msgid "Forward"
 msgstr ""
 
-#: gnome/gscreen.c:2343
+#: gnome/gscreen.c:2342
 msgid "Go to the next directory"
 msgstr ""
 
-#: gnome/gscreen.c:2346 src/tree.c:1020
+#: gnome/gscreen.c:2345 src/tree.c:1020
 msgid "Rescan"
 msgstr ""
 
-#: gnome/gscreen.c:2346
+#: gnome/gscreen.c:2345
 msgid "Rescan the current directory"
 msgstr ""
 
-#: gnome/gscreen.c:2349
+#: gnome/gscreen.c:2348
 msgid "Home"
 msgstr ""
 
-#: gnome/gscreen.c:2349
+#: gnome/gscreen.c:2348
 msgid "Go to your home directory"
 msgstr ""
 
-#: gnome/gscreen.c:2495
+#: gnome/gscreen.c:2494
 msgid "Location:"
 msgstr ""
 
@@ -1040,9 +1061,9 @@ msgstr ""
 #: gnome/gtools.c:110 gtkedit/editcmd.c:342 gtkedit/editcmd.c:1185
 #: gtkedit/editcmd.c:1270 gtkedit/editcmd.c:2847 gtkedit/editoptions.c:69
 #: src/boxes.c:138 src/boxes.c:278 src/boxes.c:378 src/boxes.c:466
-#: src/boxes.c:646 src/boxes.c:728 src/boxes.c:783 src/boxes.c:897
+#: src/boxes.c:646 src/boxes.c:728 src/boxes.c:783 src/boxes.c:898
 #: src/filegui.c:838 src/find.c:171 src/layout.c:369 src/option.c:144
-#: src/wtools.c:289 src/wtools.c:561
+#: src/wtools.c:289 src/wtools.c:563
 msgid "&Ok"
 msgstr ""
 
@@ -1122,11 +1143,11 @@ msgstr ""
 msgid "help"
 msgstr ""
 
-#: gnome/gwidget.c:96 src/file.c:2251
+#: gnome/gwidget.c:96 src/file.c:2250
 msgid "yes"
 msgstr ""
 
-#: gnome/gwidget.c:98 src/file.c:2249
+#: gnome/gwidget.c:98 src/file.c:2248
 msgid "no"
 msgstr ""
 
@@ -1142,7 +1163,7 @@ msgstr ""
 #: gtkedit/edit.c:129 gtkedit/edit.c:224 gtkedit/edit.c:231 gtkedit/edit.c:238
 #: gtkedit/edit.c:245 gtkedit/edit.c:251 gtkedit/edit.c:308 gtkedit/edit.c:344
 #: gtkedit/editcmd.c:1945 gtkedit/editwidget.c:950 src/dir.c:386
-#: src/screen.c:2312 src/tree.c:692 src/tree.c:698 src/wtools.c:222
+#: src/screen.c:2326 src/tree.c:692 src/tree.c:698 src/wtools.c:222
 #: vfs/fish.c:224
 msgid " Error "
 msgstr ""
@@ -1193,8 +1214,7 @@ msgstr ""
 #: src/chmod.c:114 src/chown.c:79 src/cmd.c:856 src/filegui.c:821
 #: src/find.c:171 src/hotlist.c:138 src/hotlist.c:814 src/hotlist.c:911
 #: src/layout.c:370 src/learn.c:59 src/option.c:145 src/panelize.c:86
-#: src/view.c:404 src/wtools.c:111 src/wtools.c:386 src/wtools.c:559
-#: src/wtools.c:640
+#: src/view.c:404 src/wtools.c:111 src/wtools.c:386 src/wtools.c:561
 msgid "&Cancel"
 msgstr ""
 
@@ -1213,9 +1233,9 @@ msgstr ""
 
 #. Warning message with a query to continue or cancel the operation
 #: gtkedit/editcmd.c:491 gtkedit/editcmd.c:810 gtkedit/editcmd.c:840
-#: gtkedit/editcmd.c:987 gtkedit/editcmd.c:1084 src/ext.c:301 src/file.c:620
-#: src/help.c:318 src/main.c:691 src/screen.c:2069 src/subshell.c:705
-#: src/subshell.c:731 src/utilunix.c:388 src/utilunix.c:392 src/utilunix.c:458
+#: gtkedit/editcmd.c:987 gtkedit/editcmd.c:1084 src/ext.c:301 src/file.c:619
+#: src/help.c:318 src/main.c:691 src/screen.c:2083 src/subshell.c:705
+#: src/subshell.c:731 src/utilunix.c:388 src/utilunix.c:392 src/utilunix.c:463
 #: vfs/mcfs.c:170
 msgid " Warning "
 msgstr ""
@@ -1312,6 +1332,7 @@ msgid ""
 msgstr ""
 
 #: gtkedit/editcmd.c:810 gtkedit/editcmd.c:840 gtkedit/editcmd.c:987
+#: src/main.c:3067
 msgid "Continue"
 msgstr ""
 
@@ -1340,7 +1361,7 @@ msgstr ""
 msgid "al&L"
 msgstr ""
 
-#: gtkedit/editcmd.c:1141 src/file.c:2173 src/filegui.c:266
+#: gtkedit/editcmd.c:1141 src/file.c:2172 src/filegui.c:266
 msgid "&Skip"
 msgstr ""
 
@@ -1729,8 +1750,8 @@ msgstr ""
 msgid "Error initialising editor.\n"
 msgstr ""
 
-#: gtkedit/editwidget.c:1063 src/help.c:806 src/main.c:1688 src/screen.c:2290
-#: src/screen.c:2320 src/tree.c:1018 src/view.c:1982
+#: gtkedit/editwidget.c:1063 src/help.c:806 src/main.c:1688 src/screen.c:2304
+#: src/screen.c:2334 src/tree.c:1018 src/view.c:1982
 msgid "Help"
 msgstr ""
 
@@ -2233,7 +2254,7 @@ msgstr ""
 msgid "Background process:"
 msgstr ""
 
-#: src/background.c:287 src/file.c:2172
+#: src/background.c:287 src/file.c:2171
 msgid " Background process error "
 msgstr ""
 
@@ -2376,35 +2397,27 @@ msgstr ""
 msgid "Symbolic link"
 msgstr ""
 
-#: src/boxes.c:801
-msgid "Symbolic link filename:"
-msgstr ""
-
-#: src/boxes.c:803
-msgid "Existing filename (filename symlink will point to):"
-msgstr ""
-
-#: src/boxes.c:832
+#: src/boxes.c:833
 msgid "Running "
 msgstr ""
 
-#: src/boxes.c:833 src/find.c:716 src/find.c:957
+#: src/boxes.c:834 src/find.c:716 src/find.c:957
 msgid "Stopped"
 msgstr ""
 
-#: src/boxes.c:894
+#: src/boxes.c:895
 msgid "&Stop"
 msgstr ""
 
-#: src/boxes.c:895
+#: src/boxes.c:896
 msgid "&Resume"
 msgstr ""
 
-#: src/boxes.c:896
+#: src/boxes.c:897
 msgid "&Kill"
 msgstr ""
 
-#: src/boxes.c:935
+#: src/boxes.c:936
 msgid "Background Jobs"
 msgstr ""
 
@@ -2707,7 +2720,7 @@ msgstr ""
 msgid " Link "
 msgstr ""
 
-#: src/cmd.c:1032 src/cmd.c:1168 src/file.c:1686
+#: src/cmd.c:1032 src/cmd.c:1171 src/file.c:1685
 msgid " to:"
 msgstr ""
 
@@ -2721,89 +2734,86 @@ msgstr ""
 msgid " symlink: %s "
 msgstr ""
 
-#: src/cmd.c:1117
-msgid " Symlink "
+#: src/cmd.c:1130
+#, c-format
+msgid " Symlink `%s' points to: "
 msgstr ""
 
-#: src/cmd.c:1117
-msgid " points to:"
-msgstr ""
-
-#: src/cmd.c:1132
+#: src/cmd.c:1135
 msgid " Edit symlink "
 msgstr ""
 
-#: src/cmd.c:1137
+#: src/cmd.c:1140
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr ""
 
-#: src/cmd.c:1141
+#: src/cmd.c:1144
 #, c-format
 msgid " edit symlink: %s "
 msgstr ""
 
-#: src/cmd.c:1168
+#: src/cmd.c:1171
 msgid " Link symbolically "
 msgstr ""
 
-#: src/cmd.c:1169
+#: src/cmd.c:1172
 msgid " Relative symlink "
 msgstr ""
 
-#: src/cmd.c:1180
+#: src/cmd.c:1183
 #, c-format
 msgid " relative symlink: %s "
 msgstr ""
 
-#: src/cmd.c:1283
+#: src/cmd.c:1286
 msgid " Enter machine name (F1 for details): "
 msgstr ""
 
-#: src/cmd.c:1307
+#: src/cmd.c:1310
 #, c-format
 msgid " Could not chdir to %s "
 msgstr ""
 
-#: src/cmd.c:1314
+#: src/cmd.c:1317
 msgid " Link to a remote machine "
 msgstr ""
 
-#: src/cmd.c:1320
+#: src/cmd.c:1323
 msgid " FTP to machine "
 msgstr ""
 
-#: src/cmd.c:1330
+#: src/cmd.c:1333
 msgid " Socket source routing setup "
 msgstr ""
 
-#: src/cmd.c:1331
+#: src/cmd.c:1334
 msgid " Enter host name to use as a source routing hop: "
 msgstr ""
 
-#: src/cmd.c:1338
+#: src/cmd.c:1341
 msgid " Host name "
 msgstr ""
 
-#: src/cmd.c:1338
+#: src/cmd.c:1341
 msgid " Error while looking up IP address "
 msgstr ""
 
-#: src/cmd.c:1349
+#: src/cmd.c:1352
 msgid " Undelete files on an ext2 file system "
 msgstr ""
 
-#: src/cmd.c:1350
+#: src/cmd.c:1353
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
 msgstr ""
 
-#: src/cmd.c:1400
+#: src/cmd.c:1403
 msgid " Setup saved to ~/"
 msgstr ""
 
-#: src/cmd.c:1405
+#: src/cmd.c:1408
 msgid " Setup "
 msgstr ""
 
@@ -2983,130 +2993,130 @@ msgid ""
 " %s "
 msgstr ""
 
-#: src/file.c:510
+#: src/file.c:509
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:519
+#: src/file.c:518
 #, c-format
 msgid ""
 " Cannot stat source file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:532
+#: src/file.c:531
 #, c-format
 msgid " `%s' and `%s' are the same file. "
 msgstr ""
 
-#: src/file.c:575
+#: src/file.c:574
 #, c-format
 msgid ""
 " Cannot create special file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:584 src/file.c:813
+#: src/file.c:583 src/file.c:812
 #, c-format
 msgid ""
 " Cannot chown target file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:593 src/file.c:832
+#: src/file.c:592 src/file.c:831
 #, c-format
 msgid ""
 " Cannot chmod target file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:610
+#: src/file.c:609
 #, c-format
 msgid ""
 " Cannot open source file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:620
+#: src/file.c:619
 msgid " Reget failed, about to overwrite file "
 msgstr ""
 
-#: src/file.c:626
+#: src/file.c:625
 #, c-format
 msgid ""
 " Cannot fstat source file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:652
+#: src/file.c:651
 #, c-format
 msgid ""
 " Cannot create target file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:666
+#: src/file.c:665
 #, c-format
 msgid ""
 " Cannot fstat target file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:697
+#: src/file.c:696
 #, c-format
 msgid ""
 " Cannot read source file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:727
+#: src/file.c:726
 #, c-format
 msgid ""
 " Cannot write target file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:746
+#: src/file.c:745
 msgid "(stalled)"
 msgstr ""
 
-#: src/file.c:784
+#: src/file.c:783
 #, c-format
 msgid ""
 " Cannot close source file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:793
+#: src/file.c:792
 #, c-format
 msgid ""
 " Cannot close target file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:803
+#: src/file.c:802
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr ""
 
-#: src/file.c:804
+#: src/file.c:803
 msgid "&Delete"
 msgstr ""
 
-#: src/file.c:804 src/hotlist.c:1443
+#: src/file.c:803 src/hotlist.c:1443
 msgid "&Keep"
 msgstr ""
 
-#: src/file.c:877
+#: src/file.c:876
 #, c-format
 msgid ""
 " Cannot stat source directory \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:900
+#: src/file.c:899
 #, c-format
 msgid ""
 " Source directory \"%s\" is not a directory \n"
@@ -3114,21 +3124,21 @@ msgid ""
 msgstr ""
 
 #. we found a cyclic symbolic link
-#: src/file.c:908
+#: src/file.c:907
 #, c-format
 msgid ""
 " Cannot copy cyclic symbolic link \n"
 " `%s' "
 msgstr ""
 
-#: src/file.c:965
+#: src/file.c:964
 #, c-format
 msgid ""
 " Cannot create target directory \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:988
+#: src/file.c:987
 #, c-format
 msgid ""
 " Cannot chown target directory \"%s\" \n"
@@ -3136,69 +3146,69 @@ msgid ""
 msgstr ""
 
 #. Source doesn't exist
-#: src/file.c:1101
+#: src/file.c:1100
 #, c-format
 msgid ""
 " Cannot stat file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1123
+#: src/file.c:1122
 #, c-format
 msgid " `%s' and `%s' are the same file "
 msgstr ""
 
-#: src/file.c:1130
+#: src/file.c:1129
 #, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr ""
 
-#: src/file.c:1173
+#: src/file.c:1172
 #, c-format
 msgid ""
 " Cannot move file \"%s\" to \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1193
+#: src/file.c:1192
 #, c-format
 msgid ""
 " Cannot remove file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1247
+#: src/file.c:1246
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
 msgstr ""
 
-#: src/file.c:1249
+#: src/file.c:1248
 #, c-format
 msgid " Cannot overwrite file \"%s\" %s "
 msgstr ""
 
-#: src/file.c:1276
+#: src/file.c:1275
 #, c-format
 msgid ""
 " Cannot move directory \"%s\" to \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1339
+#: src/file.c:1338
 #, c-format
 msgid ""
 " Cannot delete file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1400 src/file.c:1470 src/file.c:1502
+#: src/file.c:1399 src/file.c:1469 src/file.c:1501
 #, c-format
 msgid ""
 " Cannot remove directory \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1541
+#: src/file.c:1540
 msgid " Internal error: get_file \n"
 msgstr ""
 
@@ -3211,136 +3221,136 @@ msgstr ""
 #. * (I don't use spaces around the words, because someday they could be
 #. * dropped, when widgets get smarter)
 #.
-#: src/file.c:1662
+#: src/file.c:1661
 msgid "1Copy"
 msgstr ""
 
-#: src/file.c:1662
+#: src/file.c:1661
 msgid "1Move"
 msgstr ""
 
-#: src/file.c:1662
+#: src/file.c:1661
 msgid "1Delete"
 msgstr ""
 
-#: src/file.c:1677
+#: src/file.c:1676
 #, c-format
 msgid "%o %f \"%s\"%m"
 msgstr ""
 
-#: src/file.c:1678
+#: src/file.c:1677
 #, c-format
 msgid "%o %d %f%m"
 msgstr ""
 
-#: src/file.c:1680
+#: src/file.c:1679
 #, c-format
 msgid "%o %f \"%s\"%e"
 msgstr ""
 
-#: src/file.c:1681
+#: src/file.c:1680
 #, c-format
 msgid "%o %d %f%e"
 msgstr ""
 
-#: src/file.c:1685
+#: src/file.c:1684
 msgid "file"
 msgstr ""
 
-#: src/file.c:1685
+#: src/file.c:1684
 msgid "files"
 msgstr ""
 
-#: src/file.c:1685
+#: src/file.c:1684
 msgid "directory"
 msgstr ""
 
-#: src/file.c:1685
+#: src/file.c:1684
 msgid "directories"
 msgstr ""
 
-#: src/file.c:1686
+#: src/file.c:1685
 msgid "files/directories"
 msgstr ""
 
-#: src/file.c:1686
+#: src/file.c:1685
 msgid " with source mask:"
 msgstr ""
 
-#: src/file.c:1838
+#: src/file.c:1837
 msgid " Can't operate on \"..\"! "
 msgstr ""
 
-#: src/file.c:1857
+#: src/file.c:1856
 msgid "Yes"
 msgstr ""
 
-#: src/file.c:1857
+#: src/file.c:1856
 msgid "No"
 msgstr ""
 
-#: src/file.c:1910
+#: src/file.c:1909
 msgid " Sorry, I could not put the job in background "
 msgstr ""
 
-#: src/file.c:1997 src/file.c:2081
+#: src/file.c:1996 src/file.c:2080
 msgid " Internal failure "
 msgstr ""
 
-#: src/file.c:1997 src/file.c:2081
+#: src/file.c:1996 src/file.c:2080
 msgid " Unknown file operation "
 msgstr ""
 
-#: src/file.c:2012
+#: src/file.c:2011
 #, c-format
 msgid ""
 " Destination \"%s\" must be a directory \n"
 " %s "
 msgstr ""
 
-#: src/file.c:2173
+#: src/file.c:2172
 msgid "&Retry"
 msgstr ""
 
-#: src/file.c:2173 src/file.c:2234 src/filegui.c:263 src/filegui.c:591
+#: src/file.c:2172 src/file.c:2233 src/filegui.c:263 src/filegui.c:591
 msgid "&Abort"
 msgstr ""
 
-#: src/file.c:2225
+#: src/file.c:2224
 msgid ""
 "\n"
 "   Directory not empty.   \n"
 "   Delete it recursively? "
 msgstr ""
 
-#: src/file.c:2226
+#: src/file.c:2225
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
 "   Delete it recursively? "
 msgstr ""
 
-#: src/file.c:2233
+#: src/file.c:2232
 msgid "a&ll"
 msgstr ""
 
-#: src/file.c:2233 src/filegui.c:594
+#: src/file.c:2232 src/filegui.c:594
 msgid "non&E"
 msgstr ""
 
-#: src/file.c:2243
+#: src/file.c:2242
 msgid " Type 'yes' if you REALLY want to delete "
 msgstr ""
 
-#: src/file.c:2245
+#: src/file.c:2244
 msgid "all the directories "
 msgstr ""
 
-#: src/file.c:2247
+#: src/file.c:2246
 msgid " Recursive Delete "
 msgstr ""
 
-#: src/file.c:2248
+#: src/file.c:2247
 msgid " Background process: Recursive Delete "
 msgstr ""
 
@@ -4293,7 +4303,7 @@ msgid ""
 " the details.                                           "
 msgstr ""
 
-#: src/main.c:1689 src/screen.c:2291 src/screen.c:2321
+#: src/main.c:1689 src/screen.c:2305 src/screen.c:2335
 msgid "Menu"
 msgstr ""
 
@@ -4426,11 +4436,19 @@ msgid ""
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 
-#: src/main.c:3061
+#: src/main.c:3063
+msgid ""
+"You are running the GNOME Midnight Commander as root. \n"
+"\n"
+"You will not be protected from severly damaging your system\n"
+"if you continue."
+msgstr ""
+
+#: src/main.c:3073
 msgid " Notice "
 msgstr ""
 
-#: src/main.c:3062
+#: src/main.c:3074
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -4639,27 +4657,27 @@ msgstr ""
 msgid "  %s bytes in %d file%s"
 msgstr ""
 
-#: src/screen.c:1292
+#: src/screen.c:1306
 msgid "Unknow tag on display format: "
 msgstr ""
 
-#: src/screen.c:2054
+#: src/screen.c:2068
 msgid " Do you really want to execute? "
 msgstr ""
 
-#: src/screen.c:2069
+#: src/screen.c:2083
 msgid " No action taken "
 msgstr ""
 
-#: src/screen.c:2295 src/screen.c:2325 src/tree.c:1026
+#: src/screen.c:2309 src/screen.c:2339 src/tree.c:1026
 msgid "RenMov"
 msgstr ""
 
-#: src/screen.c:2296 src/screen.c:2326 src/tree.c:1030
+#: src/screen.c:2310 src/screen.c:2340 src/tree.c:1030
 msgid "Mkdir"
 msgstr ""
 
-#: src/screen.c:2312
+#: src/screen.c:2326
 #, c-format
 msgid ""
 " Can't chdir to %s \n"
@@ -4792,7 +4810,7 @@ msgstr ""
 msgid " User menu "
 msgstr ""
 
-#: src/util.c:222
+#: src/util.c:228
 msgid "name_trunc: too big"
 msgstr ""
 
@@ -5126,18 +5144,6 @@ msgstr ""
 
 #: src/win.c:272
 msgid "NumLock on keypad"
-msgstr ""
-
-#: src/wtools.c:587 vfs/vfs.c:1762
-msgid "Password:"
-msgstr ""
-
-#: src/wtools.c:587
-msgid "Password"
-msgstr ""
-
-#: src/wtools.c:642
-msgid "Ok"
 msgstr ""
 
 #: vfs/extfs.c:266

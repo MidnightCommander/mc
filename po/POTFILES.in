@@ -1,11 +1,14 @@
 edit/edit_key_translator.c
 gnome/gcmd.c
+gnome/gcustom-layout.c
 gnome/gdesktop.c
 gnome/gdialogs.c
 gnome/gdnd.c
 gnome/gicon.c
 gnome/glayout.c
-gnome/gpopup.c
+gnome/gnome-file-property-dialog.c
+gnome/gnome-open-dialog.c
+gnome/gpopup2.c
 gnome/gprefs.c
 gnome/gprop.c
 gnome/gscreen.c
