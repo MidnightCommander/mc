@@ -134,7 +134,7 @@ application/x-object-file:
 application/x-dvi:
 	open=xdvi %f
 	view=xdvi %f
-	open.convert.Convert file to Postscript=dvips %f
+	open.convert.Convert file to Postscript=dvips %f -o `basename %f .dvi`.ps
 
 application/x-tex:
 	open.tex."TeX this file"=tex %f
