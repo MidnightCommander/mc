@@ -1,0 +1,335 @@
+#
+# NASM,WASM,TASM,MASM and GAS x86 syntax highlight
+# // Mike Gorchak
+#
+
+context default lightgray
+
+# NASM directives
+    keyword whole BITS white
+    keyword whole SECTION white
+    keyword whole SEGMENT white
+    keyword whole ABSOLUTE white
+    keyword whole EXTERN white
+    keyword whole GLOBAL white
+    keyword whole COMMON white
+    keyword whole CPU white
+    
+# NASM, WASM, TASM, MASM and common modifiers
+    keyword whole ALIGN white
+    keyword whole ALIGNB white
+    keyword whole STRUC white
+    keyword whole ENDSTRUC white
+    keyword whole ISTRUC white
+    keyword whole IEND white
+    keyword whole AT white
+    keyword whole __FILE__ white
+    keyword whole __LINE__ white
+    keyword whole __NASM_VER__ white
+    keyword whole __NASM_VERSION_ID__ white
+    keyword whole __NASM_MAJOR__ white
+    keyword whole __NASM_MINOR__ white
+    keyword whole __NASM_SUBMINOR__ white
+    keyword whole __NASM_PATCHLEVEL__ white
+    keyword whole __SECT__ white
+    keyword whole STRICT white
+    keyword whole SEG white
+    keyword whole WRT white
+    keyword whole NOSPLIT white
+    keyword whole BYTE white
+    keyword whole WORD white
+    keyword whole DWORD white
+    keyword whole QWORD white
+    keyword whole TWORD white
+    keyword whole align white
+    keyword whole alignb white
+    keyword whole struc white
+    keyword whole endstruc white
+    keyword whole istruc white
+    keyword whole iend white
+    keyword whole at white
+    keyword whole strict white
+    keyword whole seg white
+    keyword whole wrt white
+    keyword whole nosplit white
+    keyword whole byte white
+    keyword whole word white
+    keyword whole dword white
+    keyword whole qword white
+    keyword whole tword white
+
+# Pseudo instructions
+    keyword whole Org white
+    keyword whole Equ white
+    keyword whole Db white
+    keyword whole Dw white
+    keyword whole Dd white
+    keyword whole Dq white
+    keyword whole Dt white
+    keyword whole Resb white
+    keyword whole Resw white
+    keyword whole Resd white
+    keyword whole Resq white
+    keyword whole Rest white
+    keyword whole Incbin white
+    keyword whole Times white
+    keyword whole org white
+    keyword whole equ white
+    keyword whole db white
+    keyword whole dw white
+    keyword whole dd white
+    keyword whole dq white
+    keyword whole dt white
+    keyword whole resb white
+    keyword whole resw white
+    keyword whole resd white
+    keyword whole resq white
+    keyword whole rest white
+    keyword whole incbin white
+    keyword whole times white
+    keyword whole ORG white
+    keyword whole EQU white
+    keyword whole DB white
+    keyword whole DW white
+    keyword whole DD white
+    keyword whole DQ white
+    keyword whole DT white
+    keyword whole RESB white
+    keyword whole RESW white
+    keyword whole RESD white
+    keyword whole RESQ white
+    keyword whole REST white
+    keyword whole INCBIN white
+    keyword whole TIMES white
+
+# GAS specific
+    keyword whole .string white
+    keyword whole .section white
+    keyword whole .align white
+    keyword whole .type white
+    keyword whole .size white
+    keyword whole .comm white
+    keyword whole .ident white
+    keyword whole .globl white
+    keyword whole .rodata brightblue
+    keyword whole .data brightblue
+    keyword whole .text brightblue
+    keyword whole .bss brightblue
+
+# NASM/TASM Macroses
+    keyword whole %ifdef  brightred
+    keyword whole %define brightred
+    keyword whole %else brightred
+    keyword whole %elif brightred
+    keyword whole %endif brightred
+    keyword whole %macro brightred
+    keyword whole %endmacro brightred
+    keyword whole %rep brightred
+    keyword whole %repl brightred
+    keyword whole %strlen brightred
+    keyword whole %substr brightred
+    keyword whole %arg brightred
+    keyword whole %stacksize brightred
+    keyword whole %local brightred
+    keyword whole %push brightred
+    keyword whole %pop brightred
+    keyword whole %line brightred
+    keyword whole %\! brightred
+    keyword whole %\+ brightred
+
+# Generic 16-bit registers set
+    keyword whole al brightmagenta
+    keyword whole bl brightmagenta
+    keyword whole cl brightmagenta
+    keyword whole dl brightmagenta
+    keyword whole ah brightmagenta
+    keyword whole bh brightmagenta
+    keyword whole ch brightmagenta
+    keyword whole dh brightmagenta
+    keyword whole ax brightmagenta
+    keyword whole bx brightmagenta
+    keyword whole cx brightmagenta
+    keyword whole dx brightmagenta
+    keyword whole si brightmagenta
+    keyword whole di brightmagenta
+    keyword whole bp brightmagenta
+    keyword whole sp brightmagenta
+    keyword whole es brightmagenta
+    keyword whole cs brightmagenta
+    keyword whole ds brightmagenta
+
+    keyword whole %al brightmagenta
+    keyword whole %bl brightmagenta
+    keyword whole %cl brightmagenta
+    keyword whole %dl brightmagenta
+    keyword whole %ah brightmagenta
+    keyword whole %bh brightmagenta
+    keyword whole %ch brightmagenta
+    keyword whole %dh brightmagenta
+    keyword whole %ax brightmagenta
+    keyword whole %bx brightmagenta
+    keyword whole %cx brightmagenta
+    keyword whole %dx brightmagenta
+    keyword whole %si brightmagenta
+    keyword whole %di brightmagenta
+    keyword whole %bp brightmagenta
+    keyword whole %sp brightmagenta
+    keyword whole %es brightmagenta
+    keyword whole %cs brightmagenta
+    keyword whole %ds brightmagenta
+
+    keyword whole AL brightmagenta
+    keyword whole BL brightmagenta
+    keyword whole CL brightmagenta
+    keyword whole DL brightmagenta
+    keyword whole AH brightmagenta
+    keyword whole BH brightmagenta
+    keyword whole CH brightmagenta
+    keyword whole DH brightmagenta
+    keyword whole AX brightmagenta
+    keyword whole BX brightmagenta
+    keyword whole CX brightmagenta
+    keyword whole DX brightmagenta
+    keyword whole SI brightmagenta
+    keyword whole DI brightmagenta
+    keyword whole BP brightmagenta
+    keyword whole SP brightmagenta
+    keyword whole ES brightmagenta
+    keyword whole CS brightmagenta
+    keyword whole DS brightmagenta
+
+# Generic 32-bit registers set
+    keyword whole eax brightmagenta
+    keyword whole ebx brightmagenta
+    keyword whole ecx brightmagenta
+    keyword whole edx brightmagenta
+    keyword whole esi brightmagenta
+    keyword whole edi brightmagenta
+    keyword whole ebp brightmagenta
+    keyword whole esp brightmagenta
+    keyword whole fs brightmagenta
+    keyword whole gs brightmagenta
+
+    keyword whole %eax brightmagenta
+    keyword whole %ebx brightmagenta
+    keyword whole %ecx brightmagenta
+    keyword whole %edx brightmagenta
+    keyword whole %esi brightmagenta
+    keyword whole %edi brightmagenta
+    keyword whole %ebp brightmagenta
+    keyword whole %esp brightmagenta
+    keyword whole %fs brightmagenta
+    keyword whole %gs brightmagenta
+
+    keyword whole EAX brightmagenta
+    keyword whole EBX brightmagenta
+    keyword whole ECX brightmagenta
+    keyword whole EDX brightmagenta
+    keyword whole ESI brightmagenta
+    keyword whole EDI brightmagenta
+    keyword whole EBP brightmagenta
+    keyword whole ESP brightmagenta
+    keyword whole FS brightmagenta
+    keyword whole GS brightmagenta
+
+    keyword whole cr0 magenta
+    keyword whole cr1 magenta
+    keyword whole cr2 magenta
+    keyword whole dr0 magenta
+    keyword whole dr1 magenta
+    keyword whole tr0 magenta
+    keyword whole tr1 magenta
+
+    keyword whole CR0 magenta
+    keyword whole CR1 magenta
+    keyword whole CR2 magenta
+    keyword whole DR0 magenta
+    keyword whole DR1 magenta
+    keyword whole TR0 magenta
+    keyword whole TR1 magenta
+
+# FPU registers set
+    keyword whole st0 brightcyan
+    keyword whole st1 brightcyan
+    keyword whole st2 brightcyan
+    keyword whole st3 brightcyan
+    keyword whole st4 brightcyan
+    keyword whole st5 brightcyan
+    keyword whole st6 brightcyan
+    keyword whole st7 brightcyan
+    keyword whole %st0 brightcyan
+    keyword whole %st1 brightcyan
+    keyword whole %st2 brightcyan
+    keyword whole %st3 brightcyan
+    keyword whole %st4 brightcyan
+    keyword whole %st5 brightcyan
+    keyword whole %st6 brightcyan
+    keyword whole %st7 brightcyan
+
+# MMX/3DNOW registers set
+    keyword whole mm0 brightcyan
+    keyword whole mm1 brightcyan
+    keyword whole mm2 brightcyan
+    keyword whole mm3 brightcyan
+    keyword whole mm4 brightcyan
+    keyword whole mm5 brightcyan
+    keyword whole mm6 brightcyan
+    keyword whole mm7 brightcyan
+    keyword whole %mm0 brightcyan
+    keyword whole %mm1 brightcyan
+    keyword whole %mm2 brightcyan
+    keyword whole %mm3 brightcyan
+    keyword whole %mm4 brightcyan
+    keyword whole %mm5 brightcyan
+    keyword whole %mm6 brightcyan
+    keyword whole %mm7 brightcyan
+
+# SSE registers set
+    keyword whole xmm0 brightcyan
+    keyword whole xmm1 brightcyan
+    keyword whole xmm2 brightcyan
+    keyword whole xmm3 brightcyan
+    keyword whole xmm4 brightcyan
+    keyword whole xmm5 brightcyan
+    keyword whole xmm6 brightcyan
+    keyword whole xmm7 brightcyan
+    keyword whole %xmm0 brightcyan
+    keyword whole %xmm1 brightcyan
+    keyword whole %xmm2 brightcyan
+    keyword whole %xmm3 brightcyan
+    keyword whole %xmm4 brightcyan
+    keyword whole %xmm5 brightcyan
+    keyword whole %xmm6 brightcyan
+    keyword whole %xmm7 brightcyan
+
+# Common symbols
+    keyword ; brown
+    keyword [ white
+    keyword ] white
+    keyword , white
+    keyword \+ white
+    keyword - white
+    keyword . white
+    keyword ( white
+    keyword ) white
+    keyword : white
+    keyword @ white
+    keyword >> white
+    keyword << white
+    keyword % white
+    keyword \\ white
+    keyword / white
+    keyword // white
+    keyword ~ white
+    keyword ^ white
+    keyword & white
+    keyword \* white
+    keyword | white
+    keyword $ brightgreen
+    keyword $$ brightgreen
+    keyword %% cyan
+
+context " " green
+context ' ' brightgreen
+context exclusive ; \n brown
+    spellcheck

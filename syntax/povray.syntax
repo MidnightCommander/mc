@@ -1,0 +1,254 @@
+#
+# POVRay - Persistence of Vision(tm) Ray Tracer syntax highlight
+# // Mike Gorchak
+#
+
+context default lightgray
+
+# Keywords
+    keyword whole global_settings yellow
+    keyword whole radiosity yellow
+    keyword whole light_source yellow
+    keyword whole fog yellow
+    keyword whole sphere yellow
+    keyword whole camera yellow
+    keyword whole plane yellow
+    keyword whole union yellow
+    keyword whole box yellow
+    keyword whole cylinder yellow
+    keyword whole torus yellow
+    keyword whole difference yellow
+    keyword whole intersection yellow
+    keyword whole object yellow
+    keyword whole photons yellow
+    keyword whole material yellow
+    keyword whole texture yellow
+    keyword whole pigment yellow
+    keyword whole pigment_pattern yellow
+    keyword whole pigment_map yellow
+    keyword whole finish yellow
+    keyword whole interior yellow
+    keyword whole merge yellow
+    keyword whole warp yellow
+    keyword whole color_map yellow
+    keyword whole colour_map yellow
+    keyword whole isosurface yellow
+    keyword whole sky_sphere yellow
+    keyword whole bounded_by yellow
+    keyword whole clipped_by yellow
+    keyword whole normal yellow
+    keyword whole tiles yellow
+    keyword whole height_field yellow
+    keyword whole image_map yellow
+    keyword whole looks_like yellow
+    keyword whole quadric yellow
+    keyword whole scattering yellow
+    keyword whole text yellow
+    keyword whole bump_map yellow
+    keyword whole texture_map yellow
+    keyword whole slope yellow
+    keyword whole contained_by yellow
+    keyword whole superellipsoid yellow
+    keyword whole cone yellow
+    keyword whole blob yellow
+    keyword whole light_group yellow
+
+# Constructions
+    keyword whole #switch white
+    keyword whole #break white
+    keyword whole #case white
+    keyword whole #end white
+    keyword whole #declare white
+    keyword whole #macro white
+    keyword whole #local white
+    keyword whole #while white
+    keyword whole #ifndef white
+    keyword whole #version white
+    keyword whole #ifdef white
+    keyword whole #debug white
+    keyword whole #include white
+    keyword whole #if white
+    keyword whole function white
+    keyword whole array white
+
+# Predefined constants
+    keyword whole on brightblue
+    keyword whole off brightblue
+    keyword whole true brightblue
+    keyword whole false brightblue
+    keyword whole no brightblue
+    keyword whole yes brightblue
+
+# Built-in functions
+    keyword whole sqrt brightmagenta
+    keyword whole mod brightmagenta
+    keyword whole min brightmagenta
+    keyword whole max brightmagenta
+    keyword whole sin brightmagenta
+    keyword whole cos brightmagenta
+    keyword whole pow brightmagenta
+    keyword whole abs brightmagenta
+    keyword whole concat brightmagenta
+    keyword whole str brightmagenta
+    keyword whole rand brightmagenta
+    keyword whole seed brightmagenta
+
+# Arguments
+    keyword whole assumed_gamma brightgreen
+    keyword whole max_trace_level brightgreen
+    keyword whole noise_generator brightgreen
+    keyword whole number_of_waves brightgreen
+    keyword whole fog_type brightgreen
+    keyword whole fog_alt brightgreen
+    keyword whole fog_offset brightgreen
+    keyword whole color brightgreen
+    keyword whole colour brightgreen
+    keyword whole rgb brightgreen
+    keyword whole rgbf brightgreen
+    keyword whole rgbt brightgreen
+    keyword whole distance brightgreen
+    keyword whole pretrace_start brightgreen
+    keyword whole pretrace_end brightgreen
+    keyword whole count brightgreen
+    keyword whole nearest_count brightgreen
+    keyword whole error_bound brightgreen
+    keyword whole recursion_limit brightgreen
+    keyword whole low_error_factor brightgreen
+    keyword whole gray_threshold brightgreen
+    keyword whole minimum_reuse brightgreen
+    keyword whole brightness brightgreen
+    keyword whole adc_bailout brightgreen
+    keyword whole normal brightgreen
+    keyword whole diffuse brightgreen
+    keyword whole ambient brightgreen
+    keyword whole scale brightgreen
+    keyword whole translate brightgreen
+    keyword whole rotate brightgreen
+    keyword whole red brightgreen
+    keyword whole green brightgreen
+    keyword whole blue brightgreen
+    keyword whole spacing brightgreen
+    keyword whole location brightgreen
+    keyword whole direction brightgreen
+    keyword whole sky brightgreen
+    keyword whole up brightgreen
+    keyword whole right brightgreen
+    keyword whole look_at brightgreen
+    keyword whole angle brightgreen
+    keyword whole reflection brightgreen
+    keyword whole refraction brightgreen
+    keyword whole area_light brightgreen
+    keyword whole jitter brightgreen
+    keyword whole circular brightgreen
+    keyword whole orient brightgreen
+    keyword whole specular brightgreen
+    keyword whole roughness brightgreen
+    keyword whole conserve_energy brightgreen
+    keyword whole fresnel brightgreen
+    keyword whole ior brightgreen
+    keyword whole fade_distance brightgreen
+    keyword whole fade_power brightgreen
+    keyword whole fade_color brightgreen
+    keyword whole fade_colour brightgreen
+    keyword whole agate brightgreen
+    keyword whole turbulence brightgreen
+    keyword whole octaves brightgreen
+    keyword whole granite brightgreen
+    keyword whole checker brightgreen
+    keyword whole gradient brightgreen
+    keyword whole caustics brightgreen
+    keyword whole phong brightgreen
+    keyword whole phong_size brightgreen
+    keyword whole filter brightgreen
+    keyword whole inverse brightgreen
+    keyword whole onion brightgreen
+    keyword whole frequency brightgreen
+    keyword whole sine_wave brightgreen
+    keyword whole marble brightgreen
+    keyword whole lambda brightgreen
+    keyword whole omega brightgreen
+    keyword whole quilted brightgreen
+    keyword whole control0 brightgreen
+    keyword whole control1 brightgreen
+    keyword whole wrinkles brightgreen
+    keyword whole boxed brightgreen
+    keyword whole repeat brightgreen
+    keyword whole png brightgreen
+    keyword whole water_level brightgreen
+    keyword whole png brightgreen
+    keyword whole quick_color brightgreen
+    keyword whole quick_colour brightgreen
+    keyword whole hollow brightgreen
+    keyword whole waves brightgreen
+    keyword whole bozo brightgreen
+    keyword whole adaptive brightgreen
+    keyword whole media brightgreen
+    keyword whole media_interaction brightgreen
+    keyword whole brilliance brightgreen
+    keyword whole spotlight brightgreen
+    keyword whole radius brightgreen
+    keyword whole falloff brightgreen
+    keyword whole point_at brightgreen
+    keyword whole extinction brightgreen
+    keyword whole emission brightgreen
+    keyword whole method brightgreen
+    keyword whole intervals brightgreen
+    keyword whole samples brightgreen
+    keyword whole target brightgreen
+    keyword whole collect brightgreen
+    keyword whole ttf brightgreen
+    keyword whole metallic brightgreen
+    keyword whole cylindrical brightgreen
+    keyword whole dispersion brightgreen
+    keyword whole dispersion_samples brightgreen
+    keyword whole crand brightgreen
+    keyword whole pot brightgreen
+    keyword whole bump_size brightgreen
+    keyword whole interpolate brightgreen
+    keyword whole ripples brightgreen
+    keyword whole brick brightgreen
+    keyword whole aa_threshold brightgreen
+    keyword whole aa_level brightgreen
+    keyword whole no_shadow brightgreen
+    keyword whole accuracy brightgreen
+    keyword whole altitude brightgreen
+    keyword whole max_gradient brightgreen
+    keyword whole support_piece brightgreen
+    keyword whole open brightgreen
+    keyword whole support brightgreen
+    keyword whole bezier_spline brightgreen
+    keyword whole cubic_spline brightgreen
+    keyword whole shadowless brightgreen
+    keyword whole threshold brightgreen
+    keyword whole global_lights brightgreen
+    keyword whole absorption brightgreen
+
+# Common symbols
+    keyword // brown
+    keyword /\* brown
+    keyword \*/ brown
+    keyword { brightcyan
+    keyword } brightcyan
+    keyword , brightcyan
+    keyword . brightcyan
+    keyword \* brightcyan
+    keyword / brightcyan
+    keyword \+ brightcyan
+    keyword - brightcyan
+    keyword = brightcyan
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword < brightcyan
+    keyword > brightcyan
+    keyword [ brightcyan
+    keyword ] brightcyan
+    keyword ; brightcyan
+
+context exclusive /\* \*/ brown
+    spellcheck
+
+context exclusive // \n brown
+    spellcheck
+
+context " " green
+    spellcheck
