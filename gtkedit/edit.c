@@ -257,7 +257,7 @@ int edit_load_file (WEdit * edit, const char *filename, const char *text, unsign
 #if defined CR_LF_TRANSLATION
 	if(file && (!text)){
 		real_size=0;
-		tmp_buf[1024]=0;
+		tmp_buf[sizeof (tmp_buf)-1]=0;
 		while((bytes_read = read(file,tmp_buf,1024)) > 0){
 			real_size += bytes_read;
 		}
