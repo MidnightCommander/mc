@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc VERSION\n"
-"POT-Creation-Date: 1999-06-01 15:19+0200\n"
+"POT-Creation-Date: 1999-06-09 13:40+0200\n"
 "PO-Revision-Date: 1998-03-27 01:22+0100\n"
 "Last-Translator: Vincent Renardias <vincent@ldsol.com>\n"
 "Language-Team: Vincent Renardias <vincent@ldsol.com>\n"
@@ -244,7 +244,7 @@ msgstr " Enregistrer fichier "
 #: edit/editcmd.c:782 edit/editwidget.c:1066 gnome/view.c:2030
 #: gtkedit/editcmd.c:782 gtkedit/editwidget.c:1066 src/view.c:2030
 msgid "Save"
-msgstr "Sauver"
+msgstr "Enregistrer"
 
 #: edit/editcmd.c:809 edit/editcmd.c:839 gtkedit/editcmd.c:809
 #: gtkedit/editcmd.c:839
@@ -390,18 +390,17 @@ msgid ""
 msgstr ""
 
 #: edit/editcmd.c:1359 gtkedit/editcmd.c:1359
-#, fuzzy
 msgid " Enter argument (or substring) order : "
-msgstr " Entrez l'ordre des arguments : "
+msgstr " Entrez l'ordre des arguments (ou sous-chaines) : "
 
 #. Tool hint
 #: edit/editcmd.c:1363 edit/editcmd.c:1364 gtkedit/editcmd.c:1363
 #: gtkedit/editcmd.c:1364
-#, fuzzy
 msgid ""
 "Enter the order of replacement of your scanf format specifiers or regexp "
 "substrings"
-msgstr "Entrer l'ordre de remplacement des spécificateurs de format scanf"
+msgstr "Entrer l'ordre de remplacement des spécificateurs de format scanf "
+"ou sous-chaines regexp"
 
 #. The following are check boxes
 #: edit/editcmd.c:1369 gtkedit/editcmd.c:1369
@@ -512,11 +511,11 @@ msgid ""
 " Save with exit? "
 msgstr ""
 " Ce texte a été modifié sans etre sauvé. \n"
-" Sauver en sortant? "
+" Enregistrer en sortant? "
 
 #: edit/editcmd.c:2266 gtkedit/editcmd.c:2266
 msgid " File was modified, Save with exit? "
-msgstr " Le fichier a été modifié, Sauver et quitter? "
+msgstr " Le fichier a été modifié, Enregistrer et quitter? "
 
 #: edit/editcmd.c:2266 gtkedit/editcmd.c:2266
 msgid "Cancel quit"
@@ -586,7 +585,7 @@ msgstr " Entrez la ligne: "
 #: edit/editcmd.c:2616 edit/editcmd.c:2633 gtkedit/editcmd.c:2616
 #: gtkedit/editcmd.c:2633
 msgid " Save Block "
-msgstr " Sauver le Block "
+msgstr " Enregistrer le Block "
 
 #: edit/editcmd.c:2667 gtkedit/editcmd.c:2667
 msgid " Insert File "
@@ -709,7 +708,7 @@ msgstr "&Nouveau          C-n"
 #: edit/editmenu.c:122 edit/editmenu.c:138 gtkedit/editmenu.c:122
 #: gtkedit/editmenu.c:138
 msgid "&Save              F2"
-msgstr "&Sauver            F2"
+msgstr "&Enregistrer       F2"
 
 #: edit/editmenu.c:123 edit/editmenu.c:139 gtkedit/editmenu.c:123
 #: gtkedit/editmenu.c:139
@@ -954,34 +953,32 @@ msgid "Toggle mark columns\tC-b"
 msgstr "Echange Marque\tC-b"
 
 #: edit/editmenu.c:412 gtkedit/editmenu.c:412
-#, fuzzy
 msgid "Toggle book mark\tC-M-Ins"
-msgstr "Echange Marque\tF3"
+msgstr "Echange Signet\tC-M-Ins"
 
 #: edit/editmenu.c:413 gtkedit/editmenu.c:413
 msgid "Previous book mark\tC-M-Up"
-msgstr ""
+msgstr "Signet précédent\tC-M-Up"
 
 #: edit/editmenu.c:414 gtkedit/editmenu.c:414
 msgid "Next book mark\tC-M-Down"
-msgstr ""
+msgstr "Signet suivant\tC-M-Down"
 
 #: edit/editmenu.c:415 gtkedit/editmenu.c:415
 msgid "Flush book marks"
-msgstr ""
+msgstr "Effacer signets"
 
 #: edit/editmenu.c:417 gtkedit/editmenu.c:417
 msgid "Toggle insert/overwrite\tIns"
 msgstr "Echange insére/écrasement\tIns"
 
 #: edit/editmenu.c:419 gtkedit/editmenu.c:419
-#, fuzzy
 msgid "Copy block to cursor\tF5"
-msgstr "Copier le block dans le presse-papier\tC-Ins"
+msgstr "Copier le block vers le curseur\tF5"
 
 #: edit/editmenu.c:420 gtkedit/editmenu.c:420
 msgid "Move block to cursor\tF6"
-msgstr ""
+msgstr "Déplacer le block vers le curseur\tF6"
 
 #: edit/editmenu.c:421 gtkedit/editmenu.c:421
 msgid "Delete block\tF8/C-Del"
@@ -1635,17 +1632,16 @@ msgid " I can't run the Chmod command on an extfs "
 msgstr " Je ne peut pas utiliser la commande Chmod sur un extfs "
 
 #: gnome/chmod.c:325 src/chmod.c:325
-#, fuzzy
 msgid " I can't run the Chmod command on a tarfs "
-msgstr " je ne peux pas utiliser la commande Chown sur un tarfs "
+msgstr " Je ne peux pas utiliser la commande Chown sur un tarfs "
 
 #: gnome/chown.c:81 src/chown.c:81
 msgid "Set &users"
-msgstr ""
+msgstr "Définir &utilisateurs"
 
 #: gnome/chown.c:82 src/chown.c:82
 msgid "Set &groups"
-msgstr ""
+msgstr "Définir &groupes"
 
 #: gnome/chown.c:112 src/chown.c:112
 msgid " Name "
@@ -2840,22 +2836,19 @@ msgid ""
 msgstr ""
 
 #: gnome/gaction.c:50
-#, fuzzy
 msgid "-action."
-msgstr "Action pour l'ouverture"
+msgstr "-action."
 
 #: gnome/gaction.c:52
-#, fuzzy
 msgid "Unable to "
-msgstr " Désélectionner "
+msgstr "Incapable de "
 
 #: gnome/gaction.c:56
-#, fuzzy
 msgid ""
 "\"\n"
 "with the command:\n"
 "\""
-msgstr "Autre commande"
+msgstr "\"\navec la commande:\n\""
 
 #: gnome/gcmd.c:58
 msgid " There is no other panel to compare contents to "
@@ -3124,58 +3117,56 @@ msgid ""
 "We are unable to set the background."
 msgstr ""
 
-#: gnome/gdesktop.c:2407 gnome/glayout.c:361
+#: gnome/gdesktop.c:2421 gnome/glayout.c:361
 msgid "_Terminal"
 msgstr "_Terminal"
 
-#: gnome/gdesktop.c:2407 gnome/glayout.c:361
+#: gnome/gdesktop.c:2421 gnome/glayout.c:361
 msgid "Launch a new terminal in the current directory"
 msgstr "Démarrer un nouveau terminal dans le répertoire courant"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2409 gnome/glayout.c:363
+#: gnome/gdesktop.c:2423 gnome/glayout.c:363
 msgid "_Directory..."
 msgstr "_Répertoire..."
 
-#: gnome/gdesktop.c:2409 gnome/glayout.c:363
+#: gnome/gdesktop.c:2423 gnome/glayout.c:363
 msgid "Creates a new directory"
 msgstr "Créé un nouveau répertoire"
 
-#: gnome/gdesktop.c:2410
-#, fuzzy
+#: gnome/gdesktop.c:2424
 msgid "URL L_ink..."
-msgstr "Lien Physique..."
+msgstr "L_ien URL..."
 
-#: gnome/gdesktop.c:2410
-#, fuzzy
+#: gnome/gdesktop.c:2424
 msgid "Creates a new URL link"
-msgstr "Créér un nouveau lanceur"
+msgstr "Créér un nouveau lien URL"
 
-#: gnome/gdesktop.c:2411
+#: gnome/gdesktop.c:2425
 msgid "_Launcher..."
 msgstr "_Lanceur..."
 
-#: gnome/gdesktop.c:2411
+#: gnome/gdesktop.c:2425
 msgid "Creates a new launcher"
 msgstr "Créér un nouveau lanceur"
 
-#: gnome/gdesktop.c:2419 gnome/glayout.c:451
+#: gnome/gdesktop.c:2433 gnome/glayout.c:451
 msgid "Arrange Icons"
 msgstr "Arranger les Icones"
 
-#: gnome/gdesktop.c:2420
+#: gnome/gdesktop.c:2434
 msgid "Create New Window"
 msgstr "Créér une nouvelle fenêtre"
 
-#: gnome/gdesktop.c:2422
+#: gnome/gdesktop.c:2436
 msgid "Recreate Desktop Shortcuts"
 msgstr "Recréér les raccourcis sur le bureau"
 
-#: gnome/gdesktop.c:2423 gnome/glayout.c:454
+#: gnome/gdesktop.c:2437 gnome/glayout.c:454
 msgid "Rescan Desktop"
 msgstr "Rafraichir Bureau"
 
-#: gnome/gdesktop.c:2424
+#: gnome/gdesktop.c:2438
 msgid "Configure Background Image"
 msgstr ""
 
@@ -3593,7 +3584,7 @@ msgstr "_Aide"
 msgid "File/New/Directory..."
 msgstr "Fichier/Nouveau/Répertoire..."
 
-#: gnome/gmain.c:555
+#: gnome/gmain.c:558
 msgid ""
 "You are running the GNOME File Manager as root.\n"
 "\n"
@@ -3606,48 +3597,40 @@ msgid "Copyright (C) 1998 The Free Software Foundation"
 msgstr ""
 
 #: gnome/gmc-window.c:81
-#, fuzzy
 msgid "Open _new window"
-msgstr "Créér une nouvelle fenêtre"
+msgstr "Ouvrir une _nouvelle fenêtre"
 
 #: gnome/gmc-window.c:86
 msgid "_Close this window"
-msgstr ""
+msgstr "_Fermer cette fenêtre"
 
 #: gnome/gmc-window.c:88
-#, fuzzy
 msgid "E_xit"
-msgstr "Quitter"
+msgstr "_Quitter"
 
 #: gnome/gmc-window.c:95
-#, fuzzy
 msgid "_Listing view"
-msgstr "Mode de listage"
+msgstr "Mode de _listage"
 
 #: gnome/gmc-window.c:96
-#, fuzzy
 msgid "_Icon view"
-msgstr "Vue par _Icones"
+msgstr "Vue par _Icônes"
 
 #: gnome/gmc-window.c:102
-#, fuzzy
 msgid "Display _tree view"
-msgstr " Vue filtrée "
+msgstr "Vue arborescen_te"
 
 #: gnome/gmc-window.c:112
-#, fuzzy
 msgid "_About the Midnight Commander..."
-msgstr " Midnight Commander "
+msgstr "_A Propos de Midnight Commander..."
 
 #: gnome/gmc-window.c:119
-#, fuzzy
 msgid "_File"
-msgstr "Fichier"
+msgstr "_Fichier"
 
 #: gnome/gmc-window.c:120
-#, fuzzy
 msgid "_View"
-msgstr "Voir"
+msgstr "_Vue"
 
 #: gnome/gmount.c:195
 msgid "Could not open the /etc/fstab file"
@@ -3944,9 +3927,8 @@ msgid "Program to run"
 msgstr "Programme à lancer"
 
 #: gnome/gpopup.c:261 gnome/gpopup.c:264
-#, fuzzy
 msgid "Properties"
-msgstr " Propriétés"
+msgstr "Propriétés"
 
 #: gnome/gpopup.c:265 gnome/gpopup2.c:188
 msgid "Mount device"
@@ -3961,35 +3943,30 @@ msgid "Eject device"
 msgstr "Ejecter le périphérique"
 
 #: gnome/gpopup.c:271
-#, fuzzy
 msgid "Open with"
-msgstr "Ouvrir avec..."
+msgstr "Ouvrir avec"
 
 #: gnome/gpopup.c:273
-#, fuzzy
 msgid "View unfiltered"
 msgstr "Vue non filtrée"
 
 #: gnome/gpopup.c:276
-#, fuzzy
 msgid "Move/rename..."
-msgstr "Déplacer..."
+msgstr "Déplacer/Renommer..."
 
 #: gnome/gpopup.c:277 gnome/gpopup2.c:198
 msgid "Copy..."
 msgstr "Copier..."
 
 #: gnome/gpopup.c:279
-#, fuzzy
 msgid "Link..."
-msgstr "Lien Physique..."
+msgstr "Lien..."
 
 #: gnome/gpopup.c:280 gnome/gpopup2.c:202
 msgid "Symlink..."
 msgstr "Lien Symbolique..."
 
 #: gnome/gpopup.c:281
-#, fuzzy
 msgid "Edit symlink..."
 msgstr "Editer lien symbolique..."
 
@@ -4075,13 +4052,12 @@ msgid "Compute totals before copying files"
 msgstr "Calculer les totaux avant de copier les fichiers"
 
 #: gnome/gprefs.c:155
-#, fuzzy
 msgid "FTP directory cache timeout :"
-msgstr "délai d'expiration du cache pour ftpfs"
+msgstr "délai d'expiration du cache de répertoires FTP :"
 
 #: gnome/gprefs.c:159
 msgid "Allow customization of icons in icon view"
-msgstr ""
+msgstr "Permettre la personnalisation des icônes dans la vue par icône"
 
 #: gnome/gprefs.c:167
 msgid "Use shaped icons"
@@ -4093,7 +4069,7 @@ msgstr "Placement automatique des icones"
 
 #: gnome/gprefs.c:175
 msgid "Snap icons to grid"
-msgstr ""
+msgstr "Coller les icônes sur la grille"
 
 #: gnome/gprefs.c:184
 msgid "File display"
@@ -4108,9 +4084,8 @@ msgid "VFS"
 msgstr "SVF"
 
 #: gnome/gprefs.c:196
-#, fuzzy
 msgid "Caching"
-msgstr "Recherche de %s"
+msgstr "Mise en tampon"
 
 #: gnome/gprefs.c:200
 msgid "Desktop"
@@ -4260,27 +4235,24 @@ msgid "<readlink failed>"
 msgstr "<echec de readlink>"
 
 #: gnome/gscreen.c:2233
-#, fuzzy
 msgid "Copy directory"
-msgstr "Répertoire 'Home'"
+msgstr "Copier répertoire"
 
 #: gnome/gscreen.c:2234
-#, fuzzy
 msgid "Delete directory"
-msgstr "Répertoire 'Home'"
+msgstr "Effacer répertoire"
 
 #: gnome/gscreen.c:2235
-#, fuzzy
 msgid "Rename or move directory"
-msgstr "Renommer ou déplacer fichiers"
+msgstr "Renommer ou déplacer répertoire"
 
 #: gnome/gscreen.c:2391
 msgid "Back"
-msgstr ""
+msgstr "Retour"
 
 #: gnome/gscreen.c:2391
 msgid "Go to the previously visited directory"
-msgstr ""
+msgstr "Retourner au répertoire visité précédement"
 
 #: gnome/gscreen.c:2393
 msgid "Up"
@@ -4300,11 +4272,11 @@ msgstr "Aller au répertoire suivant"
 
 #: gnome/gscreen.c:2398 gnome/tree.c:1011 src/tree.c:1011
 msgid "Rescan"
-msgstr "Rafraichir"
+msgstr "Rafraîchir"
 
 #: gnome/gscreen.c:2398
 msgid "Rescan the current directory"
-msgstr "Rafraichir le répertoire courant"
+msgstr "Rafraîchir le répertoire courant"
 
 #: gnome/gscreen.c:2401
 msgid "Home"
@@ -4342,13 +4314,12 @@ msgid "Jump to a specified line number"
 msgstr "Aller au numéro de ligne spécifié"
 
 #: gnome/gview.c:308
-#, fuzzy
 msgid "_Monitor file"
-msgstr "Fichiers polices"
+msgstr "_Surveiller Fichier"
 
 #: gnome/gview.c:308
 msgid "Monitor file growing"
-msgstr ""
+msgstr "Surveiller la croissante du fichier"
 
 #: gnome/gview.c:315
 msgid "Regexp search"
@@ -4786,7 +4757,7 @@ msgstr "Types de &fichiers"
 #: gnome/layout.c:372 gnome/learn.c:60 gnome/learn.c:179 gnome/option.c:146
 #: src/layout.c:372 src/learn.c:60 src/learn.c:179 src/option.c:146
 msgid "&Save"
-msgstr "&Sauver"
+msgstr "Enregi&strer"
 
 #. length of line with '<' '>' buttons
 #: gnome/layout.c:380 src/layout.c:380
@@ -5291,14 +5262,12 @@ msgstr ""
 
 #. Not yet implemented the Link bits, so better to not show what we dont have
 #: gnome/olddnd.c:662
-#, fuzzy
 msgid "Link"
-msgstr " Lien "
+msgstr "Lien"
 
 #: gnome/olddnd.c:956
-#, fuzzy
 msgid "Do you want to delete "
-msgstr " Voulez-vous vraiment éxécuter? "
+msgstr "Voulez-vous vraiment effacer "
 
 #: gnome/olddnd.c:1535 gnome/screen.c:2091 gnome/screen.c:2131
 #: src/screen.c:2091 src/screen.c:2131
@@ -5306,9 +5275,9 @@ msgid " Do you really want to execute? "
 msgstr " Voulez-vous vraiment éxécuter? "
 
 #: gnome/olddnd.c:1681
-#, fuzzy, c-format
+#, c-format
 msgid " Could not open %s directory"
-msgstr " Impossible de changer de répertoire"
+msgstr " Impossible d'ouvrir le répertoire %s"
 
 #: gnome/option.c:75 src/option.c:75
 msgid "safe de&Lete"
@@ -5675,17 +5644,17 @@ msgstr ""
 msgid " User menu "
 msgstr " Menu utilisateur "
 
-#: gnome/util.c:228 src/util.c:228
+#: gnome/util.c:232 src/util.c:232
 msgid "name_trunc: too big"
 msgstr "name_trunc: trop gros"
 
 #. strftime() format string for recent dates
-#: gnome/util.c:598 gnome/util.c:623 src/util.c:598 src/util.c:623
+#: gnome/util.c:602 gnome/util.c:627 src/util.c:602 src/util.c:627
 msgid "%b %e %H:%M"
 msgstr ""
 
 #. strftime() format string for old dates
-#: gnome/util.c:599 gnome/util.c:621 src/util.c:599 src/util.c:621
+#: gnome/util.c:603 gnome/util.c:625 src/util.c:603 src/util.c:625
 msgid "%b %e  %Y"
 msgstr ""
 
@@ -6077,13 +6046,12 @@ msgid "ftpfs: sending proxy login name"
 msgstr ""
 
 #: vfs/ftpfs.c:439
-#, fuzzy
 msgid "ftpfs: sending proxy user password"
-msgstr "mot de passe pour ftp anonyme:"
+msgstr "ftpfs: envoie du mot de passe pour le proxy"
 
 #: vfs/ftpfs.c:443
 msgid "ftpfs: proxy authentication succeeded"
-msgstr ""
+msgstr "ftpfs: succès de l'authentification par le proxy"
 
 #: vfs/ftpfs.c:447
 #, c-format
@@ -6146,25 +6114,24 @@ msgstr " Impossible d'utiliser le routage par la source (%s)"
 
 #: vfs/ftpfs.c:995
 msgid "ftpfs: could not setup passive mode"
-msgstr ""
+msgstr "ftpfs: impossible de configurer le mode passif"
 
 #: vfs/ftpfs.c:1066
 msgid "ftpfs: aborting transfer."
-msgstr ""
+msgstr "ftpfs: abandon du transfer."
 
 #: vfs/ftpfs.c:1068
 #, c-format
 msgid "ftpfs: abort error: %s"
-msgstr ""
+msgstr "ftpfs: erreur d'abandon: %s"
 
 #: vfs/ftpfs.c:1073
 msgid "ftpfs: abort failed"
-msgstr ""
+msgstr "ftpfs: échec de l'abandon"
 
 #: vfs/ftpfs.c:1159 vfs/ftpfs.c:1329
-#, fuzzy
 msgid "ftpfs: CWD failed."
-msgstr " Echec de la duplication "
+msgstr "ftpfs: échec de CWD.
 
 #: vfs/ftpfs.c:1169 vfs/ftpfs.c:1176
 msgid "ftpfs: couldn't resolve symlink"
