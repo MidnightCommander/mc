@@ -102,7 +102,7 @@ int filetype_mode = 1;
 /* The hook list for the select file function */
 Hook *select_file_hook = 0;
 
-static int panel_callback (WPanel *p, int Msg, int Par);
+static cb_ret_t panel_callback (WPanel *p, widget_msg_t msg, int parm);
 static int panel_event (Gpm_Event *event, WPanel *panel);
 static void paint_frame (WPanel *panel);
 static char *panel_format (WPanel *panel);
@@ -1635,12 +1635,12 @@ move_selection (WPanel *panel, int lines)
     select_item (panel);
 }
 
-static int
+static cb_ret_t
 move_left (WPanel *panel, int c_code)
 {
     if (panel->split) {
 	move_selection (panel, -llines (panel));
-	return 1;
+	return MSG_HANDLED;
     } else
 	return maybe_cd (c_code, 0);
 }
@@ -1650,7 +1650,7 @@ move_right (WPanel *panel, int c_code)
 {
     if (panel->split) {
 	move_selection (panel, llines (panel));
-	return 1;
+	return MSG_HANDLED;
     } else
 	return maybe_cd (c_code, 1);
 }
@@ -2117,7 +2117,7 @@ static const key_map panel_keymap [] = {
     { 0, 0 }
 };
 
-static inline int
+static inline cb_ret_t
 panel_key (WPanel *panel, int key)
 {
     int i;
@@ -2133,12 +2133,12 @@ panel_key (WPanel *panel, int key)
 
 	    if (panel->searching != old_searching)
 		display_mini_info (panel);
-	    return 1;
+	    return MSG_HANDLED;
 	}
     }
     if (torben_fj_mode && key == ALT ('h')) {
 	goto_middle_file (panel);
-	return 1;
+	return MSG_HANDLED;
     }
 
     /* We do not want to take a key press if nothing can be done with it */
@@ -2152,39 +2152,39 @@ panel_key (WPanel *panel, int key)
     if (is_abort_char (key)) {
 	panel->searching = 0;
 	display_mini_info (panel);
-	return 1;
+	return MSG_HANDLED;
     }
 
     /* Do not eat characters not meant for the panel below ' ' (e.g. C-l). */
     if ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE) {
 	if (panel->searching) {
 	    do_search (panel, key);
-	    return 1;
+	    return MSG_HANDLED;
 	}
 
 	if (!command_prompt) {
 	    start_search (panel);
 	    do_search (panel, key);
-	    return 1;
+	    return MSG_HANDLED;
 	}
     }
 
-    return 0;
+    return MSG_NOT_HANDLED;
 }
 
 void user_file_menu_cmd (void) {
     user_menu_cmd (NULL);
 }
 
-static int
-panel_callback (WPanel *panel, int msg, int par)
+static cb_ret_t
+panel_callback (WPanel *panel, widget_msg_t msg, int parm)
 {
     Dlg_head *h = panel->widget.parent;
 
-    switch (msg){
+    switch (msg) {
     case WIDGET_DRAW:
 	paint_panel (panel);
-	return 1;
+	return MSG_HANDLED;
 
     case WIDGET_FOCUS:
 	current_panel = panel;
@@ -2208,10 +2208,7 @@ panel_callback (WPanel *panel, int msg, int par)
 	define_label (h, 7, _("Mkdir"), mkdir_cmd);
 	define_label (h, 8, _("Delete"), delete_cmd);
 	redraw_labels (h);
-
-	/* Chain behavior */
-	default_proc (WIDGET_FOCUS, par);
-	return 1;
+	return MSG_HANDLED;
 
     case WIDGET_UNFOCUS:
 	/* Janne: look at this for the multiple panel options */
@@ -2222,17 +2219,17 @@ panel_callback (WPanel *panel, int msg, int par)
 	panel->active = 0;
 	show_dir (panel);
 	unselect_item (panel);
-	return 1;
+	return MSG_HANDLED;
 
     case WIDGET_KEY:
-	return panel_key (panel, par);
+	return panel_key (panel, parm);
 
     case WIDGET_DESTROY:
 	panel_destroy (panel);
-	return 1;
+	return MSG_HANDLED;
 
     default:
-	return default_proc (msg, par);
+	return default_proc (msg, parm);
     }
 }
 

@@ -71,7 +71,6 @@ struct WTree {
 /* Forwards */
 static void save_tree (WTree *tree);
 static void tree_rescan_cmd (WTree *tree);
-static int tree_callback (WTree *tree, int msg, int par);
 
 static tree_entry *back_ptr (tree_entry *ptr, int *count)
 {
@@ -943,7 +942,7 @@ static const key_map tree_keymap [] = {
     { 0, 0 }
     };
 
-static inline int
+static inline cb_ret_t
 tree_key (WTree *tree, int key)
 {
     int i;
@@ -954,7 +953,7 @@ tree_key (WTree *tree, int key)
 	        tree->searching = 0;
 	    (*tree_keymap [i].fn)(tree);
 	    show_tree (tree);
-	    return 1;
+	    return MSG_HANDLED;
 	}
     }
 
@@ -970,10 +969,11 @@ tree_key (WTree *tree, int key)
 	if (tree->is_panel) {
 	    tree->searching = 0;
 	    show_tree (tree);
-	    return 1;  /* eat abort char */
+	    return MSG_HANDLED;  /* eat abort char */
 	}
-	return 0;  /* modal tree dialog: let upper layer see the
-		      abort character and close the dialog */
+	/* modal tree dialog: let upper layer see the
+	   abort character and close the dialog */
+	return MSG_NOT_HANDLED;
     }
 
     /* Do not eat characters not meant for the tree below ' ' (e.g. C-l). */
@@ -981,18 +981,18 @@ tree_key (WTree *tree, int key)
 	if (tree->searching){
 	    tree_do_search (tree, key);
 	    show_tree (tree);
-	    return 1;
+	    return MSG_HANDLED;
 	}
 
 	if (!command_prompt) {
 	    tree_start_search (tree);
 	    tree_do_search (tree, key);
-	    return 1;
+	    return MSG_HANDLED;
 	}
 	return tree->is_panel;
     }
 
-    return 0;
+    return MSG_NOT_HANDLED;
 }
 
 static void
@@ -1011,8 +1011,8 @@ tree_frame (Dlg_head *h, WTree *tree)
 }
 
 
-static int
-tree_callback (WTree *tree, int msg, int par)
+static cb_ret_t
+tree_callback (WTree *tree, widget_msg_t msg, int parm)
 {
     Dlg_head *h = tree->widget.parent;
 
@@ -1020,10 +1020,10 @@ tree_callback (WTree *tree, int msg, int par)
     case WIDGET_DRAW:
 	tree_frame (h, tree);
 	show_tree (tree);
-	return 1;
+	return MSG_HANDLED;
 
     case WIDGET_KEY:
-	return tree_key (tree, par);
+	return tree_key (tree, parm);
 
     case WIDGET_FOCUS:
 	tree->active = 1;
@@ -1052,7 +1052,7 @@ tree_callback (WTree *tree, int msg, int par)
 	/* FIXME: Should find a better way of only displaying the
 	   currently selected item */
 	show_tree (tree);
-	return 1;
+	return MSG_HANDLED;
 
 	/* FIXME: Should find a better way of changing the color of the
 	   selected item */
@@ -1060,14 +1060,14 @@ tree_callback (WTree *tree, int msg, int par)
     case WIDGET_UNFOCUS:
 	tree->active = 0;
 	show_tree (tree);
-	return 1;
+	return MSG_HANDLED;
 
     case WIDGET_DESTROY:
 	tree_destroy (tree);
-	return 1;
+	return MSG_HANDLED;
 
     default:
-	return default_proc (msg, par);
+	return default_proc (msg, parm);
     }
 }
 

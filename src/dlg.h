@@ -93,18 +93,20 @@ typedef struct Dlg_head {
 } Dlg_head;
 
 
+typedef struct Widget Widget;
+
 /* Widget callback */
-typedef int (*callback_fn)(void *widget, int Msg, int Par);
+typedef cb_ret_t (*callback_fn) (Widget *widget, widget_msg_t msg, int parm);
 
 /* Every Widget must have this as it's first element */
-typedef struct Widget {
+struct Widget {
     int x, y;
     int cols, lines;
     int options;
     callback_fn callback;  /* The callback function */
     mouse_h mouse;
     struct Dlg_head *parent;
-} Widget;
+};
 
 /* The options for the widgets */
 #define  W_WANT_HOTKEY       2
@@ -168,7 +170,7 @@ void init_widget (Widget *w, int y, int x, int lines, int cols,
 cb_ret_t default_dlg_callback (Dlg_head *h, dlg_msg_t msg, int parm);
 
 /* Default callback for widgets */
-int default_proc          (int Msg, int Par);
+cb_ret_t default_proc (widget_msg_t msg, int parm);
 
 /* Default paint routine for dialogs */
 void common_dialog_repaint (struct Dlg_head *h);

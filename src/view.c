@@ -197,8 +197,8 @@ int altered_nroff_flag = 0;
 
 static const char hex_char[] = "0123456789ABCDEF";
 
-/* Our callback */
-static int view_callback (WView *view, int msg, int par);
+/* Our widget callback */
+static cb_ret_t view_callback (WView *view, widget_msg_t msg, int parm);
 
 static int regexp_view_search (WView * view, char *pattern, char *string,
 			       int match_type);
@@ -2313,7 +2313,7 @@ continue_search (WView *view)
 }
 
 /* Both views */
-static int
+static cb_ret_t
 view_handle_key (WView *view, int c)
 {
     int prev_monitor = view->monitor;
@@ -2327,26 +2327,26 @@ view_handle_key (WView *view, int c)
 	case 0x09:		/* Tab key */
 	    view->view_side = 1 - view->view_side;
 	    view->dirty++;
-	    return 1;
+	    return MSG_HANDLED;
 
 	case XCTRL ('a'):	/* Beginning of line */
 	    view->edit_cursor -= view->edit_cursor % view->bytes_per_line;
 	    view->dirty++;
-	    return 1;
+	    return MSG_HANDLED;
 
 	case XCTRL ('b'):	/* Character back */
 	    move_left (view);
-	    return 1;
+	    return MSG_HANDLED;
 
 	case XCTRL ('e'):	/* End of line */
 	    view->edit_cursor -= view->edit_cursor % view->bytes_per_line;
 	    view->edit_cursor += view->bytes_per_line - 1;
 	    view->dirty++;
-	    return 1;
+	    return MSG_HANDLED;
 
 	case XCTRL ('f'):	/* Character forward */
 	    move_right (view);
-	    return 1;
+	    return MSG_HANDLED;
 	}
 
 	/* Trap 0-9,A-F,a-f for left side data entry (hex editing) */
@@ -2355,7 +2355,7 @@ view_handle_key (WView *view, int c)
 		(c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f')) {
 
 		put_editkey (view, c);
-		return 1;
+		return MSG_HANDLED;
 	    }
 	}
 
@@ -2364,36 +2364,36 @@ view_handle_key (WView *view, int c)
 	if (view->view_side == view_side_right) {
 	    if (c < 256 && (is_printable (c) || (c == '\n'))) {
 		put_editkey (view, c);
-		return 1;
+		return MSG_HANDLED;
 	    }
 	}
     }
 
     if (check_left_right_keys (view, c))
-	return 1;
+	return MSG_HANDLED;
 
     if (check_movement_keys
 	(c, 1, vheight, view, (movefn) view_move_backward,
 	 (movefn) view_move_forward, (movefn) move_to_top,
 	 (movefn) move_to_bottom)) {
-	return 1;
+	return MSG_HANDLED;
     }
     switch (c) {
 
     case '?':
 	regexp_search (view, -1);
-	return 1;
+	return MSG_HANDLED;
 
     case '/':
 	regexp_search (view, 1);
-	return 1;
+	return MSG_HANDLED;
 
 	/* Continue search */
     case XCTRL ('s'):
     case 'n':
     case KEY_F (17):
 	continue_search (view);
-	return 1;
+	return MSG_HANDLED;
 
     case XCTRL ('r'):
 	if (view->last_search) {
@@ -2401,7 +2401,7 @@ view_handle_key (WView *view, int c)
 	} else {
 	    normal_search (view, -1);
 	}
-	return 1;
+	return MSG_HANDLED;
 
 	/* toggle ruler */
     case ALT ('r'):
@@ -2417,73 +2417,73 @@ view_handle_key (WView *view, int c)
 	    break;
 	}
 	view->dirty++;
-	return 1;
+	return MSG_HANDLED;
 
     case 'h':
 	move_left (view);
-	return 1;
+	return MSG_HANDLED;
 
     case 'j':
     case '\n':
     case 'e':
 	view_move_forward (view, 1);
-	return 1;
+	return MSG_HANDLED;
 
     case 'd':
 	view_move_forward (view, vheight / 2);
-	return 1;
+	return MSG_HANDLED;
 
     case 'u':
 	view_move_backward (view, vheight / 2);
-	return 1;
+	return MSG_HANDLED;
 
     case 'k':
     case 'y':
 	view_move_backward (view, 1);
-	return 1;
+	return MSG_HANDLED;
 
     case 'l':
 	move_right (view);
-	return 1;
+	return MSG_HANDLED;
 
     case ' ':
     case 'f':
 	view_move_forward (view, vheight - 1);
-	return 1;
+	return MSG_HANDLED;
 
     case XCTRL ('o'):
 	view_other_cmd ();
-	return 1;
+	return MSG_HANDLED;
 
 	/* Unlike Ctrl-O, run a new shell if the subshell is not running.  */
     case '!':
 	exec_shell ();
-	return 1;
+	return MSG_HANDLED;
 
     case 'F':
 	set_monitor (view, on);
-	return 1;
+	return MSG_HANDLED;
 
     case 'b':
 	view_move_backward (view, vheight - 1);
-	return 1;
+	return MSG_HANDLED;
 
     case KEY_IC:
 	view_move_backward (view, 2);
-	return 1;
+	return MSG_HANDLED;
 
     case KEY_DC:
 	view_move_forward (view, 2);
-	return 1;
+	return MSG_HANDLED;
 
     case 'm':
 	view->marks[view->marker] = view->start_display;
-	return 1;
+	return MSG_HANDLED;
 
     case 'r':
 	view->start_display = view->marks[view->marker];
 	view->dirty++;
-	return 1;
+	return MSG_HANDLED;
 
 	/*  Use to indicate parent that we want to see the next/previous file */
 	/* Only works on full screen mode */
@@ -2498,14 +2498,14 @@ view_handle_key (WView *view, int c)
     case ESC_CHAR:
 	if (view_ok_to_quit (view))
 	    view->view_quit = 1;
-	return 1;
+	return MSG_HANDLED;
 
 #ifdef HAVE_CHARSET
     case XCTRL ('t'):
 	do_select_codepage ();
 	view->dirty++;
 	view_update (view, TRUE);
-	return 1;
+	return MSG_HANDLED;
 #endif				/* HAVE_CHARSET */
 
     }
@@ -2516,7 +2516,7 @@ view_handle_key (WView *view, int c)
     set_monitor (view, prev_monitor);
 
     /* Key not used */
-    return 0;
+    return MSG_NOT_HANDLED;
 }
 
 /* Both views */
@@ -2680,10 +2680,10 @@ view_hook (void *v)
     view_status (view, TRUE);
 }
 
-static int
-view_callback (WView *view, int msg, int par)
+static cb_ret_t
+view_callback (WView *view, widget_msg_t msg, int parm)
 {
-    int i;
+    cb_ret_t i;
     Dlg_head *h = view->widget.parent;
 
     switch (msg) {
@@ -2693,20 +2693,20 @@ view_callback (WView *view, int msg, int par)
 	    add_hook (&select_file_hook, view_hook, view);
 	else
 	    view_labels (view);
-	return 1;
+	return MSG_HANDLED;
 
     case WIDGET_DRAW:
 	display (view);
 	view_status (view, TRUE);
-	return 1;
+	return MSG_HANDLED;
 
     case WIDGET_CURSOR:
 	if (view->hex_mode)
 	    view_place_cursor (view);
-	return 1;
+	return MSG_HANDLED;
 
     case WIDGET_KEY:
-	i = view_handle_key ((WView *) view, par);
+	i = view_handle_key ((WView *) view, parm);
 	if (view->view_quit)
 	    dlg_stop (h);
 	else {
@@ -2721,20 +2721,20 @@ view_callback (WView *view, int msg, int par)
 	display (view);
 	view_status (view, TRUE);
 	sleep (1);
-	return 1;
+	return MSG_HANDLED;
 
     case WIDGET_FOCUS:
 	view_labels (view);
-	return 1;
+	return MSG_HANDLED;
 
     case WIDGET_DESTROY:
 	view_done (view);
 	if (view->have_frame)
 	    delete_hook (&select_file_hook, view_hook);
-	return 1;
+	return MSG_HANDLED;
 
     default:
-	return default_proc (msg, par);
+	return default_proc (msg, parm);
     }
 }
 

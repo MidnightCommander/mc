@@ -34,7 +34,7 @@ struct WMenu *edit_menubar;
 
 int column_highlighting = 0;
 
-static int edit_callback (WEdit *edit, int msg, int par);
+static cb_ret_t edit_callback (WEdit *edit, widget_msg_t msg, int parm);
 
 static int
 edit_event (WEdit * edit, Gpm_Event * event, int *result)
@@ -317,36 +317,49 @@ void edit_update_screen (WEdit * e)
     edit_render_keypress (e);
 }
 
-static int edit_callback (WEdit *e, int msg, int par)
+static cb_ret_t
+edit_callback (WEdit *e, widget_msg_t msg, int parm)
 {
     switch (msg) {
     case WIDGET_INIT:
 	e->force |= REDRAW_COMPLETELY;
 	edit_labels (e);
-	break;
+	return MSG_HANDLED;
+
     case WIDGET_DRAW:
 	e->force |= REDRAW_COMPLETELY;
 	e->num_widget_lines = LINES - 2;
 	e->num_widget_columns = COLS;
+	/* fallthrough */
+
     case WIDGET_FOCUS:
 	edit_update_screen (e);
-	return 1;
-    case WIDGET_KEY:{
+	return MSG_HANDLED;
+
+    case WIDGET_KEY:
+	{
 	    int cmd, ch;
-	    if (edit_drop_hotkey_menu (e, par))		/* first check alt-f, alt-e, alt-s, etc for drop menus */
-		return 1;
-	    if (!edit_translate_key (e, par, &cmd, &ch))
-		return 0;
+
+	    /* first check alt-f, alt-e, alt-s, etc for drop menus */
+	    if (edit_drop_hotkey_menu (e, parm))
+		return MSG_HANDLED;
+	    if (!edit_translate_key (e, parm, &cmd, &ch))
+		return MSG_NOT_HANDLED;
 	    edit_execute_key_command (e, cmd, ch);
 	    edit_update_screen (e);
 	}
-	return 1;
+	return MSG_HANDLED;
+
     case WIDGET_CURSOR:
-	widget_move (&e->widget, e->curs_row + EDIT_TEXT_VERTICAL_OFFSET, e->curs_col + e->start_col);
-	return 1;
+	widget_move (&e->widget, e->curs_row + EDIT_TEXT_VERTICAL_OFFSET,
+		     e->curs_col + e->start_col);
+	return MSG_HANDLED;
+
     case WIDGET_DESTROY:
 	edit_clean (e);
-	return 1;
+	return MSG_HANDLED;
+
+    default:
+	return default_proc (msg, parm);
     }
-    return default_proc (msg, par);
 }

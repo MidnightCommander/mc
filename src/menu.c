@@ -336,52 +336,56 @@ static int menubar_handle_key (WMenu *menubar, int key)
     return 0;
 }
 
-static int menubar_callback (WMenu *menubar, int msg, int par)
+static cb_ret_t
+menubar_callback (WMenu *menubar, widget_msg_t msg, int parm)
 {
-    switch (msg){
+    switch (msg) {
 	/* We do not want the focus unless we have been activated */
     case WIDGET_FOCUS:
-	if (menubar->active){
-	    widget_want_cursor (menubar->widget, 1);
+	if (!menubar->active)
+	    return MSG_NOT_HANDLED;
 
-	    /* Trick to get all the mouse events */
-	    menubar->widget.lines = LINES;
+	widget_want_cursor (menubar->widget, 1);
 
-	    /* Trick to get all of the hotkeys */
-	    widget_want_hotkey (menubar->widget, 1);
-	    menubar->subsel = 0;
-	    menubar_drop_compute (menubar);
-	    menubar_draw (menubar);
-	    return 1;
-	} else
-	    return 0;
+	/* Trick to get all the mouse events */
+	menubar->widget.lines = LINES;
+
+	/* Trick to get all of the hotkeys */
+	widget_want_hotkey (menubar->widget, 1);
+	menubar->subsel = 0;
+	menubar_drop_compute (menubar);
+	menubar_draw (menubar);
+	return MSG_HANDLED;
 
 	/* We don't want the buttonbar to activate while using the menubar */
     case WIDGET_HOTKEY:
     case WIDGET_KEY:
-	if (menubar->active){
-	    menubar_handle_key (menubar, par);
-	    return 1;
+	if (menubar->active) {
+	    menubar_handle_key (menubar, parm);
+	    return MSG_HANDLED;
 	} else
-	    return 0;
+	    return MSG_NOT_HANDLED;
 
     case WIDGET_CURSOR:
 	/* Put the cursor in a suitable place */
-	return 0;
-	
+	return MSG_NOT_HANDLED;
+
     case WIDGET_UNFOCUS:
 	if (menubar->active)
-	    return 0;
+	    return MSG_NOT_HANDLED;
 	else {
 	    widget_want_cursor (menubar->widget, 0);
-	    return 1;
+	    return MSG_HANDLED;
 	}
 
     case WIDGET_DRAW:
 	if (menubar_visible)
 	    menubar_draw (menubar);
+	return MSG_HANDLED;
+
+    default:
+	return default_proc (msg, parm);
     }
-    return default_proc (msg, par);
 }
 
 static int

@@ -249,8 +249,8 @@ enter (WInput *cmdline)
     return MSG_HANDLED;
 }
 
-static int
-command_callback (WInput *cmd, int msg, int par)
+static cb_ret_t
+command_callback (WInput *cmd, widget_msg_t msg, int parm)
 {
     switch (msg) {
     case WIDGET_FOCUS:
@@ -259,11 +259,14 @@ command_callback (WInput *cmd, int msg, int par)
 
     case WIDGET_KEY:
 	/* Special case: we handle the enter key */
-	if (par == '\n') {
+	if (parm == '\n') {
 	    return enter (cmd);
 	}
+	/* fall through */
+
+    default:
+	return input_callback (cmd, msg, parm);
     }
-    return input_callback (cmd, msg, par);
 }
 
 WInput *

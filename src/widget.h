@@ -149,7 +149,7 @@ WGroupbox *groupbox_new (int x, int y, int width, int height, char *title);
 
 /* Input lines */
 void winput_set_origin (WInput *i, int x, int field_len);
-int handle_char (WInput *in, int c_code);
+cb_ret_t handle_char (WInput *in, int c_code);
 int is_in_input_map (WInput *in, int c_code);
 void update_input (WInput *in, int clear_first);
 void new_input (WInput *in);
@@ -161,7 +161,7 @@ void input_enable_update (WInput *in);
 void input_set_point (WInput *in, int pos);
 void input_show_cursor (WInput *in);
 void assign_text (WInput *in, char *text);
-int input_callback (WInput *in, int Msg, int Par);
+cb_ret_t input_callback (WInput *in, widget_msg_t msg, int parm);
 
 /* Labels */
 void label_set_text (WLabel *label, char *text);

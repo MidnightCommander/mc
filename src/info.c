@@ -217,29 +217,30 @@ static void info_hook (void *data)
     info_show_info (info);
 }
 
-static int
-info_callback (WInfo *info, int msg, int par)
+static cb_ret_t
+info_callback (WInfo *info, widget_msg_t msg, int parm)
 {
     switch (msg) {
 
     case WIDGET_INIT:
 	add_hook (&select_file_hook, info_hook, info);
 	info->ready = 0;
-	return 1;
+	return MSG_HANDLED;
 
     case WIDGET_DRAW:
 	info_hook (info);
 	info_show_info (info);
-	return 1;
+	return MSG_HANDLED;
 
     case WIDGET_FOCUS:
-	return 0;
+	return MSG_NOT_HANDLED;
 
     case WIDGET_DESTROY:
 	delete_hook (&select_file_hook, info_hook);
+	return MSG_HANDLED;
 
     default:
-	return default_proc (msg, par);
+	return default_proc (msg, parm);
     }
 }
 			   

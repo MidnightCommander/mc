@@ -1,5 +1,8 @@
 2003-09-10  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.h: Use cb_ret_t and widget_msg_t in widget callbacks.
+	Massive adjustment for the above.
+
 	* chmod.c (chmod_toggle_select): Get id as argument.
 
 	* dlg.h: Remove restroy callback.  Widgets should use

@@ -133,40 +133,22 @@ init_widget (Widget *w, int y, int x, int lines, int cols,
 }
 
 /* Default callback for widgets */
-int default_proc (int Msg, int Par)
+cb_ret_t
+default_proc (widget_msg_t msg, int parm)
 {
-    switch (Msg){
-
-    case WIDGET_HOTKEY:         /* Didn't use the key */
-        return 0;
-
-    case WIDGET_INIT:		/* We could tell if something went wrong */
-	return 1;
-
-    case WIDGET_KEY:
-	return 0;		/* Didn't use the key */
-
-    case WIDGET_FOCUS:		/* We accept FOCUSes */
-	return 1;
-
-    case WIDGET_UNFOCUS:	/* We accept loose FOCUSes */
-	return 1;
-
+    switch (msg) {
+    case WIDGET_INIT:
+    case WIDGET_FOCUS:
+    case WIDGET_UNFOCUS:
     case WIDGET_DRAW:
-	return 1;
-
     case WIDGET_DESTROY:
-	return 1;
-
     case WIDGET_CURSOR:
-	/* Move the cursor to the default widget position */
-	return 1;
-
     case WIDGET_IDLE:
-	return 1;
+	return MSG_HANDLED;
+
+    default:
+	return MSG_NOT_HANDLED;
     }
-    printf ("Internal error: unhandled message: %d\n", Msg);
-    return 1;
 }
 
 /* Clean the dialog area, draw the frame and the title */

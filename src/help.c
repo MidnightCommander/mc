@@ -582,10 +582,10 @@ static void prev_node_cmd (Dlg_head *h)
     help_callback (h, DLG_DRAW, 0);
 }
 
-static int
-md_callback (Widget *w, int msg, int par)
+static cb_ret_t
+md_callback (Widget *w, widget_msg_t msg, int parm)
 {
-    return default_proc (msg, par);
+    return default_proc (msg, parm);
 }
 
 static Widget *
