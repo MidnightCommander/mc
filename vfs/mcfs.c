@@ -175,7 +175,7 @@ static int mcfs_login_server (int my_socket, char *user, int port,
 		  " not be safe on the remote side.  Continue? \n"), 3, 2,
 			      _(" Yes "),  _(" No "));
 #else
-	    message_1s( 1, " MCFS ", _(" The remote server is running on stange port. Giving up.\n"));
+	    message_1s( 1, " MCFS ", _(" The remote server is running on strange port. Giving up.\n"));
 	    v = 1;
 #endif
 
