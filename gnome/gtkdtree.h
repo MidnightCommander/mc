@@ -31,7 +31,8 @@ typedef struct {
 	GdkBitmap *bitmap_open;
 	GdkBitmap *bitmap_close;
 
-	int internal;
+	unsigned short internal;
+	unsigned short loading_dir;
 	int *show_dot_files;
 } GtkDTree;
 

@@ -127,9 +127,12 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 	g_assert (parent);
 	g_assert (dtree);
 
+	dtree->loading_dir++;
 	dir = tree_store_opendir (path);
-	if (!dir)
+	if (!dir){
+		dtree->loading_dir--;
 		return FALSE;
+	}
 
 	for (; (dirent = tree_store_readdir (dir)) != NULL; ){
 		GtkCTreeNode *sibling;
@@ -151,7 +154,8 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 	}
 
 	tree_store_closedir (dir);
-
+	dtree->loading_dir--;
+	
 	return TRUE;
 }
 
@@ -375,6 +379,9 @@ entry_removed_callback (tree_entry *tree, void *data)
 	GtkDTree *dtree = data;
 	char *dirname, *copy, *current ;
 
+	if (dtree->loading_dir)
+		return;
+	
 	copy = dirname = g_strdup (tree->name);
 	copy++;
 	current_node = dtree->root_node;
@@ -403,6 +410,9 @@ entry_added_callback (tree_entry *tree, void *data)
 	GtkDTree *dtree = data;
 	char *dirname, *copy, *current, *npath, *full_path;
 
+	if (dtree->loading_dir)
+		return;
+	
 	copy = dirname = g_strdup (tree->name);
 	copy++;
 	current_node = dtree->root_node;

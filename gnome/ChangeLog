@@ -1,3 +1,10 @@
+1999-01-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtkdtree.c (gtk_dtree_load_path): Keep track of when we are
+	loading the tree (and thus we do not care about async
+	notifications to the tree state changes) and when we are done (and
+	thus, we care about the async treestore structure notifications). 
+
 1999-01-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gcmd.c (ep_add_callback): Set Window's position to
