@@ -56,9 +56,8 @@ echo $RPM_BUILD_ROOT
 rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/profile.d
-install lib/mc.sh $RPM_BUILD_ROOT/etc/profile.d
-install lib/mc.csh $RPM_BUILD_ROOT/etc/profile.d
-rm -rf $RPM_BUILD_ROOT%{_prefix}/share/mc/bin/
+cp -f $RPM_BUILD_ROOT%{_prefix}/share/mc/bin/mc.{csh,sh} \
+	$RPM_BUILD_ROOT/etc/profile.d
 
 
 %clean
@@ -80,6 +79,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_prefix}/share/mc/cedit.menu
 %{_prefix}/share/mc/edit.indent.rc
 %{_prefix}/share/mc/edit.spell.rc
+%{_prefix}/share/mc/bin/*
 %{_prefix}/share/mc/extfs/*
 %{_prefix}/share/mc/mc.ext
 %{_prefix}/share/mc/mc.lib
@@ -99,6 +99,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/share/mc/term
 
 %changelog
+* Fri Nov 01 2002 Pavel Roskin <proski@gnu.org>
+- Add wrappers to support setting last directory on exit.  Keep all
+  scripts in their original directory, just copy them.
+
 * Tue Oct 22 2002 Pavel Roskin <proski@gnu.org>
 - Don't use the included S-Lang, there is a workaround for Red Hat 8.0
   S-Lang, and binary compatibility with Red Hat 7.x doesn't work anyway.
