@@ -1,3 +1,8 @@
+2003-06-25  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* ext.c (regex_check_type): Strip tab(s) after "filename:" in
+	file output.
+
 2003-06-22  Pavel Roskin  <proski@gnu.org>
 
 	* execute.c (do_execute): Make static.  Print end of line after

@@ -56,7 +56,6 @@ flush_extension_file (void)
 	g_free (data);
 	data = NULL;
     }
-
 }
 
 typedef char *(*quote_func_t) (const char *name, int i);
@@ -417,27 +416,31 @@ regex_check_type (char *filename, int file_len, char *ptr, int *have_type)
 	    if ((pp = strchr (content_string, '\n')) != 0)
 		*pp = 0;
 
-	    if (islocal && !strncmp (content_string, filename, file_len)) {
-		/* Skip "filename: " */
-		content_shift = file_len;
-		if (content_string[content_shift] == ':')
-		    for (content_shift++;
+	    if (islocal) {
+		if (!strncmp (content_string, filename, file_len)) {
+		    /* Skip "filename: " */
+		    content_shift = file_len;
+		    if (content_string[content_shift] == ':') {
+			content_shift++;
+			/* Solaris' file prints tab after ':' */
+			for (content_shift++;
+			     content_string[content_shift] == ' '
+			     || content_string[content_shift] == '\t';
+			     content_shift++);
+		    }
+		}
+	    } else {
+		if (!strncmp (content_string, "standard input:", 15)) {
+		    /* Skip "standard input: " */
+		    for (content_shift = 15;
 			 content_string[content_shift] == ' ';
 			 content_shift++);
-	    } else if (!islocal
-		       && !strncmp (content_string, "standard input:",
-				    15)) {
-		/* Skip "standard input: " */
-		for (content_shift = 15;
-		     content_string[content_shift] == ' ';
-		     content_shift++);
-	    } else if (!islocal
-		       && !strncmp (content_string, "/dev/stdin:",
-				    11)) {
-		/* Skip "/dev/stdin: " */
-		for (content_shift = 11;
-		     content_string[content_shift] == ' ';
-		     content_shift++);
+		} else if (!strncmp (content_string, "/dev/stdin:", 11)) {
+		    /* Skip "/dev/stdin: " */
+		    for (content_shift = 11;
+			 content_string[content_shift] == ' ';
+			 content_shift++);
+		}
 	    }
 	} else {
 	    /* No data */
@@ -449,9 +452,8 @@ regex_check_type (char *filename, int file_len, char *ptr, int *have_type)
 	return -1;
     }
 
-    if (content_string && content_string[0]
-	&& regexp_match (ptr, content_string + content_shift,
-			 match_regex)) {
+    if (content_string[0]
+	&& regexp_match (ptr, content_string + content_shift, match_regex)) {
 	found = 1;
     }
 
