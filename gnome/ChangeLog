@@ -1,3 +1,12 @@
+1998-12-11  Owen Taylor  <otaylor@redhat.com>
+
+	* gdesktop.c (editing_started): Grab on the window for the
+	icon, not on the canvas, so we can properly detect
+	clicks elsewhere. 
+
+	(icon_button_release_after): When the user stops selecting,
+	regrab the pointer.
+
 1998-12-11  Jonathan Blandford  <jrb@redhat.com>
 
 	* gtkdtree.c (gtk_dtree_do_select_dir): fixed a little bug --

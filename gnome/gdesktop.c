@@ -50,16 +50,19 @@
 
 /* This structure defines the information carried by a desktop icon */
 struct desktop_icon_info {
-	GtkWidget *dicon;	/* The desktop icon widget */
-	int x, y;		/* Position in the desktop */
-	int slot;		/* Index of the slot the icon is in, or -1 for none */
-	char *filename;		/* The file this icon refers to (relative to the desktop_directory) */
-	int selected : 1;	/* Is the icon selected? */
+	GtkWidget *dicon;	      /* The desktop icon widget */
+	int x, y;		      /* Position in the desktop */
+	int slot;		      /* Index of the slot the icon is in, or -1 for none */
+	char *filename;		      /* The file this icon refers to (relative to the desktop_directory) */
+	int selected : 1;	      /* Is the icon selected? */
+	int finishing_selection : 1;  /* Flag set while we are releasing button
+				       * after selecting in the text
+				       */
 };
 
 struct layout_slot {
-	int num_icons;		/* Number of icons in this slot */
-	GList *icons;		/* The list of icons in this slot */
+	int num_icons;		      /* Number of icons in this slot */
+	GList *icons;		      /* The list of icons in this slot */
 };
 
 
@@ -589,8 +592,8 @@ editing_started (GnomeIconTextItem *iti, gpointer data)
 	unselect_all (dii);
 
 	ibeam = gdk_cursor_new (GDK_XTERM);
-	gdk_pointer_grab (GTK_LAYOUT (DESKTOP_ICON (dii->dicon)->canvas)->bin_window,
-			  FALSE,
+	gdk_pointer_grab (dii->dicon->window,
+			  TRUE,
 			  (GDK_BUTTON_PRESS_MASK
 			   | GDK_BUTTON_RELEASE_MASK
 			   | GDK_POINTER_MOTION_MASK
@@ -599,6 +602,7 @@ editing_started (GnomeIconTextItem *iti, gpointer data)
 			  NULL,
 			  ibeam,
 			  GDK_CURRENT_TIME);
+	gtk_grab_add (dii->dicon);
 	gdk_cursor_destroy (ibeam);
 
 	gdk_keyboard_grab (GTK_LAYOUT (DESKTOP_ICON (dii->dicon)->canvas)->bin_window, FALSE, GDK_CURRENT_TIME);
@@ -625,6 +629,7 @@ editing_stopped (GnomeIconTextItem *iti, gpointer data)
 
 	dii = data;
 
+	gtk_grab_remove (dii->dicon);
 	gdk_pointer_ungrab (GDK_CURRENT_TIME);
 	gdk_keyboard_ungrab (GDK_CURRENT_TIME);
 
@@ -664,6 +669,30 @@ do_popup_menu (struct desktop_icon_info *dii, GdkEventButton *event)
 		reload_desktop_icons (FALSE, 0, 0); /* bleah */
 
 	g_free (filename);
+}
+
+/* Callback activated when a button is redirected from the desktop to
+ * the icon during a grab.
+ */
+static gint
+window_button_press (GtkWidget *widget, GdkEventButton *event, gpointer data)
+{
+	struct desktop_icon_info *dii;
+	int retval;
+
+	dii = data;
+
+	/* We should only get this while editing. But check anyways */
+
+	if ((event->window == widget->window) &&
+	    GNOME_ICON_TEXT_ITEM (DESKTOP_ICON (dii->dicon)->text)->editing) {
+		gnome_icon_text_item_stop_editing (
+			GNOME_ICON_TEXT_ITEM (
+				DESKTOP_ICON (dii->dicon)->text), TRUE);
+		return TRUE;
+	}
+
+	return FALSE;
 }
 
 /* Callback used when a button is pressed on a desktop icon */
@@ -744,6 +773,41 @@ icon_button_release (GtkWidget *widget, GdkEventButton *event, gpointer data)
 		dnd_select_icon_pending = FALSE;
 
 		return TRUE;
+	} else if (GNOME_ICON_TEXT_ITEM (DESKTOP_ICON (dii->dicon)->text)->selecting) {
+		dii->finishing_selection = TRUE;
+	}
+
+	return FALSE;
+}
+
+/* Handler for button releases on desktop icons.  If there was a pending
+ * selection on the icon, then the function performs the selection.
+ */
+static gint
+icon_button_release_after (GtkWidget *widget, GdkEventButton *event, gpointer data)
+{
+	struct desktop_icon_info *dii;
+
+	dii = data;
+
+	if (dii->finishing_selection) {
+		/* Restore the pointer grab here because the icon item just
+		 * called gdk_pointer_ungrab()
+		 */
+		GdkCursor *ibeam = gdk_cursor_new (GDK_XTERM);
+		gdk_pointer_grab (dii->dicon->window,
+				  TRUE,
+				  (GDK_BUTTON_PRESS_MASK
+				   | GDK_BUTTON_RELEASE_MASK
+				   | GDK_POINTER_MOTION_MASK
+				   | GDK_ENTER_NOTIFY_MASK
+				   | GDK_LEAVE_NOTIFY_MASK),
+				  NULL,
+				  ibeam,
+				  GDK_CURRENT_TIME);
+		gdk_cursor_destroy (ibeam);
+
+		dii->finishing_selection = FALSE;
 	}
 
 	return FALSE;
@@ -1005,12 +1069,18 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 
 	/* Connect to the icon's signals */
 
-	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "button_press_event",
+	gtk_signal_connect_after (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "button_press_event",
 			    (GtkSignalFunc) icon_button_press,
 			    dii);
-	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "button_release_event",
-			    (GtkSignalFunc) icon_button_release,
+	gtk_signal_connect (GTK_OBJECT (dii->dicon), "button_press_event",
+			    (GtkSignalFunc) window_button_press,
 			    dii);
+	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "button_release_event",
+				  (GtkSignalFunc) icon_button_release,
+				  dii);
+	gtk_signal_connect_after (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "button_release_event",
+				  (GtkSignalFunc) icon_button_release_after,
+				  dii);
 
 	/* Connect to the text item's signals */
 
