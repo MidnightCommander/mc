@@ -41,7 +41,7 @@ dnl It's needed until Autoconf 2.50 is released.
 ifdef([AC_PROG_CC_STDC], [AC_PROG_CC_STDC], [AM_PROG_CC_STDC])
 AC_HEADER_MAJOR
 AC_C_CONST
-AC_PATH_PROG(AR, ar, ar)
+AC_CHECK_TOOL(AR, ar, ar)
 
 AC_CHECK_PROGS(X11_WWW,netscape arena Mosaic chimera)
 if test x"$X11_WWW" = x; then
@@ -974,6 +974,8 @@ fi],
 [if test "x$SAMBAFILES" != x; then
   AC_CONFIG_SUBDIRS([vfs/samba])
 fi])
+
+AM_CONDITIONAL([USE_SAMBA_FS], [test "x$SAMBAFILES" != x])
 
 AC_OUTPUT([
 Make.common 

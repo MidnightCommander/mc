@@ -1,3 +1,9 @@
+2001-03-14  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Use AC_CHECK_TOOL for finding AR. Define
+	Automake conditional USE_SAMBA_FS if Samba is to be supported
+	in VFS.
+
 2001-03-07  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Use AM_PROG_CC_STDC if AC_PROG_CC_STDC is not
