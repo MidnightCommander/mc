@@ -54,3 +54,5 @@ libvfs_la_SOURCES = \
 	xdirentry.h
 
 libvfs_la_LDFLAGS = -version-info 27:0:27
+
+SUBDIRS = extfs
