@@ -110,7 +110,7 @@
 
 /* }}} */
 
-#if USE_VFS
+#if USE_VFS && USE_NETCODE
 extern
 #else
 static

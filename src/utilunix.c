@@ -59,6 +59,9 @@
 #    endif
 #  include <sys/ioctl.h>
 #endif
+#ifdef __QNX__
+#   include <unix.h>		/* exec*() from <process.h> */
+#endif
 #include "util.h"
 #include "global.h"
 #include "fsusage.h"

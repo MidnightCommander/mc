@@ -409,6 +409,12 @@ char *color_terminals [] = {
     "dtterm",
     "xtermc",
     "ansi",
+/* 'qnx*' terminals have non-ANSI-compatible color sequences... */
+    "qansi",
+    "qansi-g",
+    "qansi-m",
+    "qansi-t",
+    "qansi-w",
     0
 };
 

@@ -89,10 +89,10 @@ distclean:
 	-if test $(srcdir) = .; then $(MAKE) realclean; fi
 	-$(RMF) $(srcdir)/Makefile
 
-install: mcserv install.extfs
-	if test x@mcserv@ != x; then \
+install: @mcserv@ install.extfs
+	-(if test x@mcserv@ != x; then \
 	    $(INSTALL_PROGRAM) mcserv $(DESTDIR)$(bindir)/$(binprefix)mcserv; \
-	fi
+	fi)
 
 install.extfs:
 	$(INSTALL_DATA) $(srcdir)/extfs/README $(DESTDIR)$(libdir)/extfs/README

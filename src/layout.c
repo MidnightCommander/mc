@@ -29,6 +29,13 @@
 #include <sys/stat.h>
 #if (!defined(__IBMC__) && !defined(__IBMCPP__)) && !defined(OS2_NT)
 #    include <termios.h>
+     /*
+      * If TIOCGWINSZ supported, make it available here, because window-
+      * resizing code depends on it...
+      */
+#    ifdef __QNX__              /* Maybe not only QNX-specific... */
+#	include <sys/ioctl.h>
+#    endif
 #endif
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>

@@ -4,6 +4,54 @@
  * You may distribute under the terms of either the GNU General Public
  * License or the Perl Artistic License.
  */
+
+/*
+ * SLTT_TRANSP_ACS_PATCH (#define/#undef):
+ *
+ *  The problem: some terminals (e.g. QNX/qansi*) map the whole upper half of
+ *  the ASCII table to the lower half, when alt-char-set is activated with
+ *  the smacs/as string-sequence. This means, that if 0 <= ch < 128 written
+ *  to the terminal, it will be translated to (ch+128) automatically by the
+ *  terminal: so not only the line-drawing characters can be written, when
+ *  the alt-char-set is activated. It implicitly means, that space, NL, CR,
+ *  etc. characters (exactly: anything besides the "standard" line drawing
+ *  characters) can not be written directly to the terminal, when the
+ *  alt-char-set is activated, because writing these characters doesn't cause
+ *  an implicit/temporary switching-back to the standard char-set!
+ *  
+ *  The original code in SLang assumes that space, NL, CR, etc. can be
+ *  printed when alt-char-set is activated. If SLTT_TRANSP_ACS_PATCH is
+ *  defined, the modified code will not use this assumption.
+ *  [Remark: the patch-code is not the most exact solution, but works...] 
+ */
+/*#define SLTT_TRANSP_ACS_PATCH 1*/
+
+/*
+ * QNX_QANSI_SLANG_COMPAT_ACS (#define/#undef):
+ *
+ *  A more OS/terminal-specific solution for the problem mentioned above
+ *  (->SLTT_TRANSP_ACS_PATCH).
+ *
+ *  If QNX_QANSI_SLANG_COMPAT_ACS is defined, the default smacs/sa, rmacs/ae,
+ *  acsc/ac [and sgr/sa, if it would be used!] command sequences will be
+ *  replaced internally with the "old style" (pre-QNX 4.23) sequences in case
+ *  of QNX/qansi terminals. Using these optional command sequences the terminal
+ *  remains compatible with the original SLang code (without using the
+ *  workaround-code enabled by defining SLTT_TRANSP_ACS_PATCH).
+ */
+/*#define QNX_QANSI_SLANG_COMPAT_ACS 1*/
+
+/* auto-configuration */
+#ifdef SLTT_TRANSP_ACS_PATCH
+# if defined(__QNX__) && defined(QNX_QANSI_SLANG_COMPAT_ACS)
+#  undef SLTT_TRANSP_ACS_PATCH
+# endif
+#else
+# if defined(__QNX__) && !defined(QNX_QANSI_SLANG_COMPAT_ACS)
+#  define QNX_QANSI_SLANG_COMPAT_ACS 1
+# endif
+#endif
+
 #include "sl-feat.h"
 #include "config.h"
 
@@ -250,6 +298,10 @@ static unsigned char *Output_Bufferp = Output_Buffer;
 
 unsigned long SLtt_Num_Chars_Output;
 
+#ifdef SLTT_TRANSP_ACS_PATCH
+static int SLtt_ACS_Active = 0;
+#endif
+
 static int sl_usleep (unsigned long usecs)
 {
 #ifndef VMS
@@ -356,11 +408,24 @@ void SLtt_write_string (char *str)
 
 void SLtt_putchar (char ch)
 {
+#ifdef SLTT_TRANSP_ACS_PATCH
+   int restore_acs = 0;
+#endif
+    
    SLtt_normal_video ();
    if (Cursor_Set == 1)
      {
 	if (ch >= ' ') Cursor_c++;
+#ifndef SLTT_TRANSP_ACS_PATCH
 	else if (ch == '\b') Cursor_c--;
+#else 
+	if (ch <= ' ' && SLtt_ACS_Active)
+	  {
+	     SLtt_set_alt_char_set (0);
+	     restore_acs = 1;
+	  }
+	if (ch == '\b') Cursor_c--;
+#endif
 	else if (ch == '\r') Cursor_c = 0;
 	else Cursor_Set = 0;
 	
@@ -373,6 +438,13 @@ void SLtt_putchar (char ch)
 	*Output_Bufferp++ = (unsigned char) ch;
      }
    else tt_write (&ch, 1);
+   
+#ifdef SLTT_TRANSP_ACS_PATCH
+   if (restore_acs)
+     {
+        SLtt_set_alt_char_set (1);
+     }
+#endif
 }
 
 /* this is supposed to be fast--- also handles 
@@ -547,6 +619,9 @@ void SLtt_goto_rc(int r, int c)
    char *s = NULL;
    int n;
    char buf[6];
+#ifdef SLTT_TRANSP_ACS_PATCH
+   int check_alt_acs = 0;
+#endif
    
    if (c < 0)
      {
@@ -576,6 +651,9 @@ void SLtt_goto_rc(int r, int c)
 		       s = buf;
 		       *s++ = '\b'; *s = 0;
 		       s = buf;
+#ifdef SLTT_TRANSP_ACS_PATCH
+		       check_alt_acs = 1;
+#endif
 		    }
 	       }
 	     else if (c == 0)
@@ -589,6 +667,9 @@ void SLtt_goto_rc(int r, int c)
 #endif
 		  *s = 0;
 		  s = buf;
+#ifdef SLTT_TRANSP_ACS_PATCH
+		  check_alt_acs = 1;
+#endif
 	       }
 	     /* Will fail on VMS */
 #ifndef VMS
@@ -601,11 +682,27 @@ void SLtt_goto_rc(int r, int c)
 		  while (n--) *s++ = '\b';
 		  *s = 0;
 		  s = buf;
+#ifdef SLTT_TRANSP_ACS_PATCH
+		  check_alt_acs = 1;
+#endif
 	       }
 #endif
 	  }
      }
+#ifndef SLTT_TRANSP_ACS_PATCH
    if (s != NULL) SLtt_write_string(s);
+#else
+   if (s != NULL)
+     {
+        if (check_alt_acs && SLtt_ACS_Active)
+          {
+	     SLtt_set_alt_char_set (0);
+	     SLtt_write_string(s);
+	     SLtt_set_alt_char_set (1);
+          }
+        else SLtt_write_string(s);
+     }
+#endif
    else tt_printf(Curs_Pos_Str, r, c);
    Cursor_c = c; Cursor_r = r;
    Cursor_Set = 1;
@@ -638,6 +735,9 @@ void SLtt_delete_nlines (int n)
 {
    int r1, curs;
    char buf[132];
+#ifdef SLTT_TRANSP_ACS_PATCH
+   int restore_acs = 0;
+#endif
    
    if (n <= 0) return;
    SLtt_normal_video ();
@@ -649,8 +749,18 @@ void SLtt_delete_nlines (int n)
 	curs = Cursor_r;
 	SLtt_set_scroll_region(curs, Scroll_r2);
 	SLtt_goto_rc(Scroll_r2 - Scroll_r1, 0);
+#ifdef SLTT_TRANSP_ACS_PATCH
+	if (SLtt_ACS_Active)
+	  {
+	     SLtt_set_alt_char_set (0);
+	     restore_acs = 1;
+	  }
+#endif
 	SLMEMSET(buf, '\n', (unsigned int) n);
 	tt_write(buf, (unsigned int) n);
+#ifdef SLTT_TRANSP_ACS_PATCH
+	if (restore_acs) SLtt_set_alt_char_set (1);
+#endif
 	/* while (n--) tt_putchar('\n'); */
 	SLtt_set_scroll_region(r1, Scroll_r2);
 	SLtt_goto_rc(curs, 0);
@@ -993,16 +1103,22 @@ void SLtt_set_color_esc (int obj, char *esc)
    if (obj == 0) Color_0_Modified = 1;
 }
 
-
 void SLtt_set_alt_char_set (int i)
 {
+#ifndef SLTT_TRANSP_ACS_PATCH
    static int last_i;
+#else
+#define last_i SLtt_ACS_Active
+#endif
    if (SLtt_Has_Alt_Charset == 0) return;
    if (i == last_i) return;
    SLtt_write_string (i ? Start_Alt_Chars_Str : End_Alt_Chars_Str );
    /* if (i) Current_Fgbg |= SLTT_ALTC_MASK; 
     else Current_Fgbg &= ~SLTT_ALTC_MASK; */
    last_i = i;
+#ifdef SLTT_TRANSP_ACS_PATCH
+#undef last_i
+#endif
 }
 
 static void write_attributes (SLtt_Char_Type fgbg)
@@ -1166,12 +1282,16 @@ static void send_attr_str (unsigned short *s)
      {
 	ch = sh & 0xFF;
 	color = ((int) sh & 0xFF00) >> 8;
+#ifdef SLTT_TRANSP_ACS_PATCH
+	if (ch <= ' ' && (color & 0x80)) color &= ~0x80;
+#endif
 	if (color != last_color)
 	  {
 	     if (SLtt_Use_Ansi_Colors) attr = Ansi_Color_Map[color & 0x7F].fgbg;
 	     else attr = Ansi_Color_Map[color & 0x7F].mono;
 	     
-	     if (sh & 0x8000) /* alternate char set */
+	     /* sh => color */
+	     if (color & 0x80) /* alternate char set */
 	       {
 		  if (SLtt_Use_Blink_For_ACS)
 		    {
@@ -1180,13 +1300,16 @@ static void send_attr_str (unsigned short *s)
 		  else attr |= SLTT_ALTC_MASK;   
 	       }
 	     
+	     
 	     if (attr != Current_Fgbg)
 	       {
+#ifndef SLTT_TRANSP_ACS_PATCH
 		  if ((ch != ' ') ||
 		      /* it is a space so only consider it different if it
 		       * has different attributes.
 		       */
 		      (attr & BGALL_MASK) != (Current_Fgbg & BGALL_MASK))
+#endif
 		    {
 		       if (p != out)
 			 {
@@ -1866,6 +1989,30 @@ termcap entry.", term);
 				|| (-1 != SLtt_tgetnum ("pa")));
 	
      }
+   
+#if defined(__QNX__) && defined(QNX_QANSI_SLANG_COMPAT_ACS)
+   /*
+    * Override the alt-char-set handling string in case of a
+    * QNX/qansi terminal: use the "old style" strings in order
+    * to be compatible with S-Lang without the SLTT_TRANSP_ACS_PATCH
+    * code...
+    */
+   if (SLtt_Has_Alt_Charset &&
+	    strncmp(term, "qansi", 5) == 0 &&
+	    Start_Alt_Chars_Str[0] != '\016')
+     {
+        Start_Alt_Chars_Str = "\016"; /* smacs/as (^N) */
+        End_Alt_Chars_Str = "\017";   /* rmacs/ae (^O) */
+        SLtt_Graphics_Char_Pairs =    /* acsc/ac */
+	    "``aaffggjjkkllmmnnooppqqrrssttuuvvwwxxyyzz{{||}}~~O\141";
+	
+	/* 
+	 * it would be required to modify the sgr/sa entry also, if it
+	 * would be used (->embedded as/ae sequences)...
+	 */
+     }
+#endif /* __QNX__ && QNX_QANSI_SLANG_COMPAT_ACS */
+
 }
 
 #endif

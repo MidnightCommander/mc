@@ -252,6 +252,28 @@ void init_key (void)
 	define_sequences (xterm_key_defines);
     
     define_sequences (mc_bindings);
+    
+    /* load some additional keys (e.g. direct Alt-? support) */
+    load_xtra_key_defines();
+    
+#ifdef __QNX__
+    if (strncmp(term, "qnx", 3) == 0){
+	/* Modify the default value of use_8th_bit_as_meta: we would
+	 * like to provide a working mc for a newbie who knows nothing
+	 * about [Options|Display bits|Full 8 bits input]...
+	 * 
+	 * Don't use 'meta'-bit, when we are dealing with a 
+	 * 'qnx*'-type terminal: clear the default value!
+	 * These terminal types use 0xFF as an escape character,
+	 * so use_8th_bit_as_meta==1 must not be enabled!
+	 * 
+	 * [mc-4.1.21+,slint.c/getch(): the DEC_8BIT_HACK stuff
+	 * is not used now (doesn't even depend on use_8th_bit_as_meta
+	 * as in mc-3.1.2)...GREAT!...no additional code is required!]
+	 */
+	use_8th_bit_as_meta = 0;
+    }
+#endif /* __QNX__ */
 #endif /* !HAVE_X */
 }
 

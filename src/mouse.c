@@ -50,6 +50,11 @@ int xmouse_flag = 0;
 #ifndef HAVE_KEYOK
 #ifdef NCURSES_MOUSE_VERSION	/* first defined for ncurses 1.9.6 */
 #ifdef NCURSES_970530		/* defined by configure script */
+/*
+ * ncurses 1.9.8a ported to QNX doesn't provide the SP pointer as a global
+ * symbol in the library...
+ */
+#ifndef __QNX__
 struct tries {
 	struct tries    *child;
 	struct tries    *sibling;
@@ -110,7 +115,8 @@ keyok(int code, bool flag)
 	_nc_remove_key(&(SP->_keytry), code);
 	return OK;
 }
-#endif 
+#endif /* __QNX__ */
+#endif /* NCURSES_970530 */
 #endif /* NCURSES_MOUSE_VERSION */
 #endif /* HAVE_KEYOK */
 
@@ -185,7 +191,10 @@ void init_mouse (void)
      * simplest solution is to disable NCURSE's mouse.
      */
 #ifdef NCURSES_MOUSE_VERSION
+/* See the comment above about QNX/ncurses 1.9.8a ... */
+#ifndef __QNX__
     keyok(KEY_MOUSE, FALSE);
+#endif /* __QNX__ */
 #endif /* NCURSES_MOUSE_VERSION */
 
 #if defined(NCURSES_970530)

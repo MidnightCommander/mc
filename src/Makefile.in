@@ -14,7 +14,7 @@ INSTALL = @INSTALL@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
 
-SRCS =	dir.c util.c main.c screen.c dialog.c key.c menu.c\
+SRCS =	dir.c util.c main.c screen.c dialog.c key.c keyxdef.c menu.c\
 	file.c win.c color.c help.c find.c profile.c user.c view.c \
 	ext.c mouse.c setup.c dlg.c option.c info.c \
 	tree.c widget.c chmod.c mad.c xcurses.c xslint.c \
@@ -34,7 +34,7 @@ HDRS =	color.h file.h mouse.h user.h dialog.h find.h main.h \
 	learn.h listmode.h features.inc background.h \
 	x.h popt.h textconf.h i18n.h
 
-OBJS =	dir.o util.o screen.o dialog.o key.o menu.o\
+OBJS =	dir.o util.o screen.o dialog.o key.o keyxdef.o menu.o\
 	file.o win.o color.o help.o find.o profile.o user.o view.o \
 	ext.o mouse.o setup.o dlg.o option.o \
 	tree.o widget.o chmod.o mad.o wtools.o info.o \

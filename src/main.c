@@ -2484,7 +2484,7 @@ init_sigchld (void)
 
 #ifndef PORT_WANTS_ARGP
 static void
-print_usage (void)
+print_mc_usage (void)
 {
     version (0);
     fprintf (stderr,
@@ -2646,7 +2646,7 @@ process_args (int c, char *option_arg)
 	    
     case 'h':
 #ifndef PORT_WANTS_ARGP
-	print_usage ();
+	print_mc_usage ();
 	finish_program = 1;
 #endif
     }
@@ -2843,7 +2843,7 @@ handle_args (int argc, char *argv [])
     }
 
     if (c < -1){
-	print_usage ();
+	print_mc_usage ();
 	fprintf(stderr, "%s: %s\n", 
 		poptBadOption(optCon, POPT_BADOPTION_NOALIAS), 
 		poptStrerror(c));

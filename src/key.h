@@ -64,6 +64,9 @@ int is_quit_char (int c);
 void do_define_key (int code, char *strcap);
 void define_sequence (int code, char *seq, int action);
 
+/* internally used in key.c, defined in keyxtra.c */
+void load_xtra_key_defines (void);
+
 /* Learn a single key */
 char *learn_key (void);
 

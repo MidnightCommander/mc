@@ -273,7 +273,11 @@ int SLang_init_tty (int abort_char, int no_flow_control, int opost)
    
    /* get baud rate */
    
-   newtty.c_iflag &= ~(ECHO | INLCR | ICRNL);
+   /* [not only QNX related !?!]
+    * ECHO(0x08) is a c_lflag bit, it means here PARMRK(0x08) in c_iflag!!!
+    */
+   /*newtty.c_iflag &= ~(ECHO | INLCR | ICRNL);*/
+   newtty.c_iflag &= ~(INLCR | ICRNL);
 #ifdef ISTRIP
    /* newtty.c_iflag &= ~ISTRIP; */
 #endif

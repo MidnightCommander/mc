@@ -386,7 +386,8 @@ search_content (Dlg_head *h, char *directory, char *filename)
     char buffer [128];
     char *fname, *p;
     int file_fd, pipe, ignoring;
-    char c, i;
+    char c;
+    int i;
     pid_t pid;
     static char *egrep_path;
 

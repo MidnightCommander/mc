@@ -72,6 +72,10 @@
 #   include <grp.h>	/* For the group struct & getgrnam()  */
 #endif /* SCO_FLAVOR */
 
+#ifdef __QNX__
+#   include <unix.h>	/* exec*() from <process.h> */
+#endif
+
 #include "dir.h"	/* Required by panel.h below	      */
 #include "util.h"	/* Required by panel.h		      */
 #include "panel.h"	/* For WPanel and current_panel	      */
