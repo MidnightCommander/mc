@@ -324,11 +324,14 @@ mc_tmpdir (void)
 		pwd->pw_name);
     canonicalize_pathname (tmpdir);
 
-    /* No recursion or VFS here.  If $TMPDIR is missing, exit.  */
-    if (mkdir (tmpdir, 0700) != 0 && errno != EEXIST) {
-	fprintf (stderr, _("Cannot create temporary directory %s: %s\n"),
-		 tmpdir, unix_error_string (errno));
-	exit (1);
+    if (chmod (tmpdir, S_IRWXU) != 0) {
+	/* Need to create directory.  */
+	if (mkdir (tmpdir, S_IRWXU) != 0) {
+	    fprintf (stderr,
+		     _("Cannot create temporary directory %s: %s\n"),
+		     tmpdir, unix_error_string (errno));
+	    g_snprintf (tmpdir, sizeof (tmpdir), sys_tmp);
+	}
     }
 
     return tmpdir;

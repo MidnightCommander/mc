@@ -1,3 +1,9 @@
+2002-10-20  Pavel Roskin  <proski@gnu.org>
+
+	* utilunix.c (mc_tmpdir): Don't exit if the temporary directory
+	cannot be created - it should be possible to run mc on read-only
+	filesystems.  Try to chmod() the temporary directory.
+
 2002-10-17  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* man2hlp.c (handle_tp_ip): Implement .IP and .TP macroses
