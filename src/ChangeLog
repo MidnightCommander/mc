@@ -1,3 +1,9 @@
+1998-10-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* layout.c (print_vfs_message): Use g_snprintf instead of
+	vnsprintf. 
+	
+
 1998-10-30  Sung-Hyun Nam  <namsh@lgic.co.kr>
 
 	* color.c, slint.c: support transparent background if user use

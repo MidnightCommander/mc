@@ -41,6 +41,7 @@
 #   include <unistd.h>
 #endif
 #include <signal.h>
+#include <glib.h>
 #include "tty.h"
 #include "mad.h"
 #include "util.h"		/* Needed for the externs */
@@ -854,18 +855,16 @@ void set_hintbar(char *str)
     }
 }
 
-void print_vfs_message(char *msg, ...)
+void print_vfs_message (char *msg, ...)
 {
     va_list ap;
-    char str[128];
+    char str [128];
 
-    va_start(ap, msg);
-    vsnprintf(str, 126, msg, ap);
-    /* Before you kill me for using non-portable vsnprintf... It is
-       neccessary: vfs layer may print arbitrary long messages (they
-       contain pathname). If you know how to solve it, please do so,
-       but this is probably exploitable buffer overrun.) */
-    va_end(ap);
+    va_start (ap, msg);
+    
+    g_vsnprintf (str, 126, msg, ap);
+    va_end (ap);
+    
     if (midnight_shutdown || !the_hint || !the_hint->widget.parent)
 	return;
     

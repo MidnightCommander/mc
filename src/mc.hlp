@@ -53,6 +53,7 @@ Topics:
    Virtual File System Virtual File System
      FTP File System FTP File System
      Tar File System Tar File System
+     FIle transfer over SHell filesystem FIle transfer over SHell filesystem
      Network File System Network File System
      Undelete File System Undelete File System
    Colors Colors
@@ -404,6 +405,14 @@ dir of the current dir.
 C-PageUp, C-PageDown Only when ran on the Linux console:
 does a chdir to ".." and to the currently selected
 directory respectively.
+
+M-y Moves to the previous directory in the history,
+equivalent to depressing the '<' with the mouse.
+
+M-u Moves to the next directory in the history, equivalent
+to depressing the '>' with the mouse. Displays the
+directory history, equivalent to depressing the 'v' with
+the mouse.
 
 [Shell Command Line]
 Shell Command Line
@@ -2173,15 +2182,17 @@ virtual file system switch. The virtual file system switch
 allows the Midnight Commander to manipulate files not
 located on the Unix file system.
 
-Currently the Midnight Commander is packaged with five
+Currently the Midnight Commander is packaged with some
 Virtual File Systems (VFS): the local file system, used
 for accessing the regular Unix file system; the ftpfs,
 used to manipulate files on remote systems with the FTP
 protocol; the tarfs, used to manipulate tar and compressed
 tar files; the undelfs, used to recover deleted files on
 ext2 file systems (the default file system for Linux
-systems) and finally the mcfs (Midnight Commander file
-system), a network based file system.
+systems), fish (for manipulating files over shell
+connections such as rsh and ssh) and finally the mcfs
+(Midnight Commander file system), a network based file
+system.
 
 The VFS switch code will interpret all of the path names
 used and will forward them to the correct file system, the
@@ -2197,7 +2208,7 @@ command FTP link (accessible from the menubar) or you may
 directly change your current directory to it using the cd
 command to a path name that looks like this:
 
-ftp://[!][user[:pass]@]machine[:port][remote-dir]
+/#ftp:[!][user[:pass]@]machine[:port][remote-dir]
 
 The, user, port and remote-dir elements are optional. If
 you specify the user element, then the Midnight Commander
@@ -2210,11 +2221,11 @@ there, and then, it may not be entirely safe anyways).
 
 Examples:
 
-    ftp://ftp.nuclecu.unam.mx/linux/local
-    ftp://tsx-11.mit.edu/pub/linux/packages
-    ftp://!behind.firewall.edu/pub
-    ftp://guest@remote-host.com:40/pub
-    ftp://miguel:xxx@server/pub
+    /#ftp:ftp.nuclecu.unam.mx/linux/local
+    /#ftp:tsx-11.mit.edu/pub/linux/packages
+    /#ftp:!behind.firewall.edu/pub
+    /#ftp:guest@remote-host.com:40/pub
+    /#ftp:miguel:xxx@server/pub
 
 To connect to sites behind a firewall, you will need to
 use the prefix ftp://! (ie, with a bang character after
@@ -2257,7 +2268,7 @@ command. To change your directory to a tar file, you
 change your current directory to the tar file by using the
 following syntax:
 
-tar:filename.tar[dir-inside-tar]
+/filename.tar:utar/[dir-inside-tar]
 
 The mc.ext file already provides a shortcut for tar files,
 this means that usually you just point to a tar file and
@@ -2266,10 +2277,39 @@ File Edit Extension File Edit section for details on how this is done.
 
 Examples:
 
-    tar:mc-3.0.tar.gz/mc-3.0/vfs
-    tar:/ftp/GCC/gcc-2.7.0.tar
+    mc-3.0.tar.gz#utar/mc-3.0/vfs
+    /ftp/GCC/gcc-2.7.0.tar#utar
 
-The latter specifies the full path of the tar archive.
+The latter specifies the full path of the tar archive.[FIle transfer over SHell filesystem]
+FIle transfer over SHell filesystem
+
+
+The fish file system is a network based file system that
+allows you to manipulate the files in a remote machine as
+if they were local. To use this, the other side has to
+either run fish server, or has to have bash-compatible
+shell.
+
+To connect to a remote machine, you just need to chdir
+into a special directory which name is in the following
+format:
+
+/#sh:[user@]machine[:options];/[remote-dir];</em>
+The, user,  options and remote-dir elements are optional.
+If you specify the user element then the Midnight
+Commander will try to logon on the remote machine as that
+user, otherwise it will use your login name.
+
+The options are 'C' - use compression and 'rsh' use rsh
+instead of ssh. If the remote-dir element is present, your
+current directory on the remote machine will be set to
+this one.
+
+Examples:
+
+    /#sh:onlyrsh.mx:r/linux/local
+    /#sh:joe@want.compression.edu:C/private
+    /#sh:joe@noncompressed.ssh.edu/private
 
 [Network File System]
 Network File System
@@ -2283,7 +2323,7 @@ To connect to a remote machine, you just need to chdir
 into a special directory which name is in the following
 format:
 
-mc:[user@]machine[:port][remote-dir]
+/#mc:[user@]machine[:port][remote-dir]
 
 The, user, port and remote-dir elements are optional. If
 you specify the user element then the Midnight Commander
@@ -2298,8 +2338,8 @@ machine will be set to this one.
 
 Examples:
 
-    mc:ftp.nuclecu.unam.mx/linux/local
-    mc:joe@foo.edu:11321/private
+    /#mc:ftp.nuclecu.unam.mx/linux/local
+    /#mc:joe@foo.edu:11321/private
 
 [Undelete File System]
 Undelete File System
@@ -2314,14 +2354,14 @@ and to extract the selected files into a regular
 partition.
 
 To use this file system, you have to chdir into the
-special file name formed by the "undel:" prefix and the
+special file name formed by the "/#undel" prefix and the
 file name where the actual file system resides.
 
 For example, to recover deleted files on the second
 partition of the first scsi disk on Linux, you would use
 the following path name:
 
-    undel:/dev/sda2
+    /#undel:/dev/sda2
 
 It may take a while for the undelfs to load the required
 information before you start browsing files there.
@@ -2594,6 +2634,11 @@ everywhere).
 
 [FILES]
 FILES
+
+
+The program will retrieve all of its information relative
+to the MCHOME environment variable, if this variable is
+not set, then it will fall back to the @prefix@ directory.
 
 @prefix@/lib/mc.hlp The help file for the program.
 

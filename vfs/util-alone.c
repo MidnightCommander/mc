@@ -144,14 +144,15 @@ vfs_get_password (char *msg)
 void
 print_vfs_message (char *msg, ...)
 {
-    char buf [4096];
-
+    char *str;
     va_list args;
 
     va_start  (args,msg);
-    vsnprintf (buf, sizeof (buf)-1, msg, args);
-    info_puts (buf);
+    str = g_strdup_vprintf (msg, args);
     va_end    (args);
+
+    info_puts (str);
+    g_free (str);
 }
 
 void

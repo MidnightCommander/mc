@@ -225,41 +225,45 @@ static int
 command (struct connection *bucket, int wait_reply, char *fmt, ...)
 {
     va_list ap;
-    char buf[2048]; /* FIXME: buffer exceed ?? */
+    char *str, *fmt_str;
     int n, status;
     int sock = qsock (bucket);
     
     va_start (ap, fmt);
-    vsnprintf (buf, 2046, fmt, ap);
+    fmt_str = g_strdup_vprintf (fmt, ap);
     va_end (ap);
-    n = strlen(buf);
-    buf[n++] = '\r';
-    buf[n++] = '\n';
-    buf[n] = 0;
+
+    str = copy_strings (fmt_str, "\r\n", NULL);
+    g_free (fmt_str);
 
     if (logfile){
-        if (strncmp (buf, "PASS ", 5) == 0) {
+        if (strncmp (str, "PASS ", 5) == 0){
             char *tmp = "PASS <Password not logged>\r\n";
             fwrite (tmp, strlen (tmp), 1, logfile);
         } else
 	    fwrite (buf, strlen (buf), 1, logfile);
 	fflush (logfile);
     }
+
     got_sigpipe = 0;
-    enable_interrupt_key();
-    status = write(sock, buf, strlen(buf));
+    enable_interrupt_key ();
+    status = write (sock, str, strlen (str));
+    free (str);
+    
     if (status < 0){
 	code = 421;
+
 	if (errno == EPIPE){
 	    got_sigpipe = 1;
 	}
-	disable_interrupt_key();
+	disable_interrupt_key ();
 	return TRANSIENT;
     }
-    disable_interrupt_key();
+    disable_interrupt_key ();
     
     if (wait_reply)
 	return get_reply (sock, (wait_reply & WANT_STRING) ? reply_str : NULL, sizeof (reply_str)-1);
+
     return COMPLETE;
 }
 

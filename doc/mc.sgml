@@ -2082,7 +2082,7 @@ regular Unix file system; the <em/ftpfs/, used to manipulate files on
 remote systems with the FTP protocol; the <em/tarfs/, used to
 manipulate tar and compressed tar files; the <em/undelfs/, used to
 recover deleted files on ext2 file systems (the default file system
-for Linux systems), fish (for manipulating files over shell connection
+for Linux systems), fish (for manipulating files over shell connections
 such as rsh/ssh) and finally the <em/mcfs/ (Midnight Commander file
 system), a network based file system.
 
@@ -2247,13 +2247,13 @@ to extract the selected files into a regular partition.
 
 To use this file system, you have to chdir into the special file name
 formed by the "/#undel:" prefix and the file name where the actual
-file system resides (without /dev/ prefix).
+file system resides.
 
 For example, to recover deleted files on the second partition of the
 first scsi disk on Linux, you would use the following path name:
 
 <tscreen><verb>
-    /#undel:sda2
+    /#undel:/dev/sda2
 </verb></tscreen>
 
 It may take a while for the undelfs to load the required information

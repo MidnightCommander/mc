@@ -1,3 +1,13 @@
+1998-10-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* fish.c (command): Replace vnsprintf with g_strdup_vprintf.  This
+	is both safe and more correct, as there is no limit on the
+	pathname. 
+	
+	* ftpfs.c (command): Same as above.
+
+	* util-alone.c (print_vfs_message): Same as above.
+	
 Wed Oct 28 17:06:57 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
 	* ftpfs.c: report which directory you are listing, fix behaviour

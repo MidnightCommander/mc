@@ -43,6 +43,7 @@
 #include <pwd.h>
 #include <grp.h>
 #include <ctype.h>	/* For isdigit */
+#include <glib.h>
 #ifdef SCO_FLAVOR
 #	include <sys/timeb.h>	/* alex: for struct timeb definition */
 #endif /* SCO_FLAVOR */
@@ -156,22 +157,22 @@ static int command (struct connection *bucket, int wait_reply,
 		    char *fmt, ...)
 {
     va_list ap;
-    char buf[2048]; /* FIXME: buffer exceed ?? */
+    char *str;
     int n, status;
-    
-    va_start (ap, fmt);
-    vsnprintf (buf, 2046, fmt, ap);
-    va_end (ap);
-    n = strlen(buf);
-    buf[n] = 0;
 
+    va_start (ap, fmt);
+    str = g_strdup_vprintf (fmt, ap);
+    va_end (ap);
+    
     if (logfile){
-        fwrite (buf, strlen (buf), 1, logfile);
+        fwrite (str, strlen (str), 1, logfile);
 	fflush (logfile);
     }
 
     enable_interrupt_key();
-    status = write(qsockw(bucket), buf, strlen(buf));
+    status = write (qsockw (bucket), str, strlen (str));
+    g_free (str);
+    
     if (status < 0){
 	code = 421;
 	if (errno == EPIPE){
@@ -183,7 +184,7 @@ static int command (struct connection *bucket, int wait_reply,
     disable_interrupt_key();
     
     if (wait_reply)
-	return get_reply (qsockr(bucket), (wait_reply & WANT_STRING) ? reply_str : NULL, sizeof (reply_str)-1);
+	return get_reply (qsockr (bucket), (wait_reply & WANT_STRING) ? reply_str : NULL, sizeof (reply_str) - 1);
     return COMPLETE;
 }
 
