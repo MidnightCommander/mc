@@ -50,7 +50,7 @@ checklinks:
 	else $(MAKE) sourcelinks; fi
 
 sourcelinks:
-	-cd $(vfsdir); $(LN_S) $(rootdir)/src/mad.c $(rootdir)/src/mad.h . >/dev/null 2>&1; true
+	-cd $(vfsdir); $(LN_S) ../src/mad.c ../src/mad.h . >/dev/null 2>&1; true
 
 mcserv: checklinks
 	$(MAKE) mcservx

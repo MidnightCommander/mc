@@ -1,5 +1,9 @@
 Mon May  4 10:27:49 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
+	* Makefile.in: Links to mad.c and mad.h were created wrong when
+	srcdir != builddir and directory depth to srcdir and builddir were 
+	different (e.g. srcdir=/src/mc and builddir=/src/compile/mc)
+
 	* ftpfs.c (retrieve_file_start2): Don't create target file O_EXCL, 
 	in copy_file_file we check existance of the target file and know
 	that we want to truncate it.
