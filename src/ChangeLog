@@ -1,5 +1,8 @@
 2003-02-18  Pavel Roskin  <proski@gnu.org>
 
+	* widget.c (history_get): Set the history to the last item.
+	Reported by Adam Byrtek <alpha@debian.org>
+
 	* main.c (do_panel_cd): Record directory history for the panel
 	that changes the directory, not for the current panel.
 

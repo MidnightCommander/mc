@@ -829,7 +829,9 @@ history_get (char *input_name)
     }
     g_free (profile);
 
-    /* return pointer to last entry in list */
+    /* return pointer to the last entry in the list */
+    hist = g_list_last (hist);
+
     return hist;
 }
 
