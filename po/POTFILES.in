@@ -66,6 +66,7 @@ src/view.c
 src/widget.c
 src/win.c
 src/wtools.c
+vfs/direntry.c
 vfs/extfs.c
 vfs/fish.c
 vfs/ftpfs.c
@@ -73,3 +74,4 @@ vfs/mcfs.c
 vfs/smbfs.c
 vfs/tar.c
 vfs/vfs.c
+vfs/undelfs.c

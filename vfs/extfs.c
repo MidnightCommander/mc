@@ -5,6 +5,8 @@
    Rewritten by: 1998 Pavel Machek
    Additional changes by: 1999 Andrew T. Veliath
 
+   $Id$
+
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License
    as published by the Free Software Foundation; either version 2 of
@@ -367,7 +369,7 @@ static int read_archive (int fstype, char *name, struct archive **pparc)
     }
     pclose (extfsd);
 #ifdef SCO_FLAVOR
-	waitpid(-1,NULL,WNOHANG);
+    waitpid(-1,NULL,WNOHANG);
 #endif /* SCO_FLAVOR */
     *pparc = current_archive;
     g_free (buffer);
@@ -395,10 +397,10 @@ static char *get_path_mangle (char *inname, struct archive **archive, int is_dir
     fstype = extfs_which( NULL, op ); /* FIXME: we really should pass
 					 self pointer. But as we know that extfs_which does not touch vfs
 					 *me, it does not matter for now */
-    if (!local)
-        local = "";
     if (fstype == -1)
         return NULL;
+    if (!local)
+        local = "";
 
     /* All filesystems should have some local archive, at least
      * it can be '/'.
@@ -564,6 +566,7 @@ void extfs_run (char *file)
     if ((p = get_path (file, &archive, 0, 0)) == NULL)
 	return;
     q = name_quote (p, 0);
+    g_free (p);
     
     archive_name = name_quote (get_archive_name(archive), 0);
     mc_extfsdir = concat_dir_and_file (mc_home, "extfs/");
@@ -578,7 +581,6 @@ void extfs_run (char *file)
     vfs_die( "shell_execute: implement me!" );
 #endif
     g_free(cmd);
-    g_free(p);
 }
 
 static void *extfs_open (vfs *me, char *file, int flags, int mode)
@@ -1031,7 +1033,7 @@ static int extfs_ungetlocalcopy (vfs *me, char *path, char *local, int has_chang
         (struct pseudofile *) extfs_open (me, path, O_WRONLY, 0);
     
     if (fp == NULL)
-        return;
+        return 0;
     if (!strcmp (fp->entry->inode->local_filename, local)) {
         fp->entry->inode->has_changed = has_changed;
         fp->archive->fd_usage--;

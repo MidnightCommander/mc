@@ -338,8 +338,7 @@ undelfs_readdir (void *vfs_info)
     char *dirent_dest;
     
     if (vfs_info != fs){
-	message_1s (1, _(" delfs: internal error "),
-		 _(" vfs_info is not fs! "));
+	message_1s (1, undelfserr, _(" vfs_info is not fs! "));
 	return NULL;
     }
     if (readdir_ptr == num_delarray)
@@ -387,7 +386,7 @@ undelfs_open (vfs *me, char *fname, int flags, int mode)
 {
     char *file, *f;
     ino_t  inode, i;
-    undelfs_file *p;
+    undelfs_file *p = 0;
     
     /* Only allow reads on this file system */
     undelfs_get_path (fname, &file, &f);
@@ -669,6 +668,16 @@ undelfs_free(vfsid id)
     undelfs_shutdown ();
 }
 
+#ifdef	ENABLE_NLS
+static int
+undelfs_init(vfs *me) {
+    undelfserr = _(undelfserr);
+    return 1;
+}
+#else
+#define undelfs_init	NULL
+#endif
+
 vfs vfs_undelfs_ops = {
     NULL,	/* This is place of next pointer */
     N_("Undelete filesystem for ext2"),
@@ -676,7 +685,7 @@ vfs vfs_undelfs_ops = {
     "undel:",	/* prefix */
     NULL,	/* data */
     0,		/* errno */
-    NULL,
+    undelfs_init,
     NULL,
     NULL,	/* fill_names */
     NULL,

@@ -1,3 +1,7 @@
+1999-12-28  Andrew V. Samoilov <sav@bcs.zp.ua>
+
+	* vfs/vfs.c (vfs_parse_filedate): don't decode last columns as year
+
 2000-01-03  Fatih Demir <kabalak@gmx.net>
 
 	* configure.in: Added tr -> ALL_LINGUAS .
@@ -8,7 +12,7 @@
 
 1999-12-06  Federico Mena Quintero  <federico@redhat.com>
 
-	* configure.in (VERSION): Bumped version number to 0.42.
+	* configure.in (VERSION): Bumped version number to 4.5.42.
 
 1999-11-25  Yuri Syrota <rasta@renome.rovno.ua>
 

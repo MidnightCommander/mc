@@ -5,6 +5,8 @@
                1995 Jakub Jelinek
 	       1998 Pavel Machek
    
+   $Id$
+
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License
    as published by the Free Software Foundation; either version 2 of
@@ -355,13 +357,12 @@ vfs_stamp (vfs *v, vfsid id)
 void
 vfs_rm_parents (struct vfs_stamping *stamp)
 {
-    struct vfs_stamping *st2, *st3;
+    struct vfs_stamping *parent;
 
-    if (stamp){
-	for (st2 = stamp, st3 = st2->parent; st3 != NULL; st2 = st3, st3 = st3->parent)
-	    g_free (st2);
-
-	g_free (st2);
+    while (stamp) {
+	parent = stamp->parent;
+	g_free (stamp);
+	stamp = parent;
     }
 }
 
@@ -1598,10 +1599,10 @@ int vfs_parse_filedate(int idx, time_t *t)
     
     if (is_num (idx)) {
         if(is_time(columns[idx], &tim) || (got_year = is_year(columns[idx], &tim))) {
-	idx++;
+	    idx++;
 
 	/* This is a special case for ctime() or Mon DD YYYY hh:mm */
-	if(is_num (idx) && 
+	if(is_num (idx) && (columns[idx+1][0]) &&
 	    ((got_year = is_year(columns[idx], &tim)) || is_time(columns[idx], &tim)))
 		idx++; /* time & year or reverse */
 	} /* only time or date */
