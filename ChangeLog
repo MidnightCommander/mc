@@ -1,3 +1,23 @@
+Tue Feb  9 20:52:19 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* README.QNX: Deleted documention about mc.menu.qnx.diff.
+
+Tue Feb  9 20:46:07 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* lib/mc.menu.qnx.diff: Deleted, it was merged with mc.menu.
+
+Tue Feb  9 20:32:39 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* lib/mc.menu: Removed GNU tar'isms (option z). Removed option -o 
+	from tar calls when extracting (according to my man page this option 
+	is only useful when creating archieves).
+
+Tue Feb  9 20:28:15 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* lib/mc.menu: Applied patch from root 	<root@golia.dntis.ro> which 
+	adds support for tar.bz2 and merges the support for freeze-compressed 
+	tar files (tar.F) from mc.menu.qnx.diff.
+
 Sun Feb  7 06:11:48 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* Makefile.in: Change calls to xmkdir to mkinstalldirs - this is more

@@ -18,7 +18,7 @@ LIBFILES_CONST = mc.hint mc.lib mc.menu
 TIFILES = README.xterm linux.ti xterm.ad xterm.ti ansi.ti vt100.ti xterm.tcap
 DISTLIB = $(LIBFILES_IN) $(LIBFILES_CONST) $(TIFILES) \
 	Makefile.in tdiff xnc.hlp ncurses.h mc.sh mc.csh mcserv.init \
-	mcserv.pamd tkmc.wmconfig mc.ext.in.qnx.diff mc.menu.qnx.diff
+	mcserv.pamd tkmc.wmconfig mc.ext.in.qnx.diff
 
 all:
 

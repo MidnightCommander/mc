@@ -26,13 +26,22 @@ shell_patterns=0
         info
 
 = t d
-3       Make a release of the current subdirectory
+3       Make a release of the current subdirectory (tar.gz)
 	Pwd=`basename %d /`
 	echo -n "Name of the distribution file (without extension) [$Pwd]: "
 	read tar
         if [ "$tar"x = x ]; then tar=$Pwd; fi
 	cd .. && tar chf - $Pwd | gzip -f9 > $tar.tar.gz
 	echo ../${tar}.tar.gz created.
+#       tar=%{Name of the distribution file (without extension)}
+
+4       Make a release of the current subdirectory (tar.bz2)
+	Pwd=`basename %d /`
+	echo -n "Name of the distribution file (without extension) [$Pwd]: "
+	read tar
+        if [ "$tar"x = x ]; then tar=$Pwd; fi
+	cd .. && tar chf - $Pwd | bzip2 -f --repetitive-best > $tar.tar.bz2
+	echo ../${tar}.tar.bz2 created.
 #       tar=%{Name of the distribution file (without extension)}
 
 = f \.c$ & t r
@@ -177,9 +186,15 @@ U       Uudecode marked news articles (needs work)
 	fi
 	echo "Please test the output file before deleting anything"
 
-=+ f \.tar\.gz$ | f \.tar\.z$ | f \.tgz$ | f \.tpz$ | f \.tar\.Z$ & t r
+=+ f \.tar\.gz$ | f \.tar\.z$ | f \.tgz$ | f \.tpz$ | f \.tar\.Z$| f \.tar\.bz2$ & t r
 x       Extract the contents of a compressed tar file
-	tar xzvf %f
+	unset EXT
+	echo %f|egrep -q "\.tar.bz2$" && EXT=tar_bz2
+	if [ "$EXT" = "tar_bz2" ]; then
+	  bunzip2 -c %f | tar xvf -
+	else
+	  gzip -dc %f | tar xvf -
+	fi
 
 = t r
 + ! t t
@@ -197,7 +212,22 @@ Y       Gzip or gunzip tagged files
           gzip $DECOMP -v $i
         done
 
-+ f \.tar.gz$ | f \.tgz$ | f \.tpz$ | f \.tar.Z$ | f \.tar.z$ & t r & ! t t
++ ! t t
+b       Bzip2 or bunzip2 current file
+        unset DECOMP
+	echo %f|egrep -q "\.bz2$" && DECOMP=-d
+        bzip2 $DECOMP -v %f
+
++ t t
+B       Bzip2 or bunzip2 tagged files
+        for i in %t
+        do
+          unset DECOMP
+	  echo $i|egrep -q "\.bz2$" && DECOMP=-d
+          bzip2 $DECOMP -v $i
+        done
+
++ f \.tar.gz$ | f \.tgz$ | f \.tpz$ | f \.tar.Z$ | f \.tar.z$ | f \.tar.bz2$ & t r & ! t t
 z       Extract compressed tar file to subdirectory
         unset D
 	echo %f|egrep -q "\.tar.gz$" && EXT=tar_gz
@@ -205,14 +235,29 @@ z       Extract compressed tar file to subdirectory
 	echo %f|egrep -q "\.tpz$"    && EXT=tpz
 	echo %f|egrep -q "\.tar.Z$"    && EXT=tar_Z
 	echo %f|egrep -q "\.tar.z$"    && EXT=tar_z
+	echo %f|egrep -q "\.tar.bz2$"  && EXT=tar_bz2
         case $EXT in
           tar_gz) D="`basename %f .tar.gz`";;
           tgz)    D="`basename %f .tgz`";;
           tpz)    D="`basename %f .tpz`";;
           tar_Z)  D="`basename %f .tar.Z`";;
           tar_z)  D="`basename %f .tar.z`";;
+	  tar_bz2) D="`basename %f .tar.bz2`";;
         esac
-        mkdir $D; cd $D && tar xvzof ../%f
+        if [ "$EXT" = "tar_bz2" ]; then
+            mkdir $D; cd $D && (bunzip2 -c ../%f | tar xvf -)
+	else
+	    mkdir $D; cd $D && (gzip -dc ../%f | tar xvf -)
+	fi
+
++ f \.tar.F$ & t r & ! t t
+z	Extract compressed tar file to subdirectory
+        unset D
+	echo %f|egrep -q "\.tar.F$" && EXT=tar_F
+	case $EXT in
+	  tar_F) D="`basename %f .tar.F`";;
+	esac
+	mkdir $D; cd $D && (freeze -dc ../%f | tar xvf -)
 
 + t t
 Z       Extract compressed tar files to subdirectories
@@ -225,13 +270,67 @@ Z       Extract compressed tar files to subdirectories
 	  echo $1|egrep -q "\.tpz$"    && EXT=tpz
 	  echo $1|egrep -q "\.tar.Z$"    && EXT=tar_Z
 	  echo $1|egrep -q "\.tar.z$"    && EXT=tar_z
+	  echo $1|egrep -q "\.tar.F$"    && EXT=tar_F
+	  echo $1|egrep -q "\.tar.bz2$"  && EXT=tar_bz2
           case $EXT in
-            tar_gz) D="`basename $1 .tar.gz`";;
-            tgz)    D="`basename $1 .tgz`";;
-            tpz)    D="`basename $1 .tpz`";;
-            tar_Z)  D="`basename $1 .tar.Z`";;
-            tar_z)  D="`basename $1 .tar.z`";;
+            tar_gz)  D="`basename $1 .tar.gz`";;
+            tgz)     D="`basename $1 .tgz`";;
+            tpz)     D="`basename $1 .tpz`";;
+            tar_Z)   D="`basename $1 .tar.Z`";;
+            tar_z)   D="`basename $1 .tar.z`";;
+	    tar_F)   D="`basename $1 .tar.F`";;
+	    tar_bz2) D="`basename $1 .tar.bz2`";;
           esac
-          mkdir $D; (cd $D && tar xvzof ../$1)||echo tag $1 >>$MC_CONTROL_FILE
+	  case $EXT in
+	    tar_gz|tgz|tpz|tar_Z|tar_z) mkdir $D; (cd $D && gzip -dc ../$1 | tar xvf -)||echo tag $1 >>$MC_CONTROL_FILE;;
+	    tar_F)                      mkdir $D; (cd $D && freeze -dc ../$1 | tar xvf -)||echo tag $1 >>$MC_CONTROL_FILE;;
+	    tar_bz2)			mkdir $D; (cd $D && bunzip2 -c ../$1 | tar xvf -)||echo tag $1 >>$MC_CONTROL_FILE
+	  shift
+        done
+
++ f \.gz$ | f \.tgz$ | f \.tpz$ | f \.Z$ | f \.z$ | f \.bz2$ & t r & ! t t
+c       Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
+        unset D
+	echo %f|egrep -q "\.tgz$"    && EXT=tgz
+	echo %f|egrep -q "\.tpz$"    && EXT=tpz
+	echo %f|egrep -q "\.Z$"    && EXT=Z
+	echo %f|egrep -q "\.z$"    && EXT=z
+	echo %f|egrep -q "\.gz$" && EXT=gz
+	echo %f|egrep -q "\.bz2$" && EXT=bz2
+        case $EXT in
+          tgz)    D="`basename %f .tgz`.tar";;
+          tpz)    D="`basename %f .tpz`.tar";;
+          gz) D="`basename %f .gz`";;
+	  bz2) D="`basename %f .bz2`";;
+        esac
+        if [ "$EXT" = "bz2" ]; then
+	    bunzip2 -v %f ; gzip -f9 -v $D
+	else
+	    gunzip -v %f ; bzip2 -v --repetitive-best $D
+	fi
+
++ t t
+C       Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
+	set %u
+	while [ -n "$1" ]
+        do
+          unset D
+	  echo %f|egrep -q "\.tgz$"    && EXT=tgz
+	  echo %f|egrep -q "\.tpz$"    && EXT=tpz
+	  echo %f|egrep -q "\.Z$"    && EXT=Z
+	  echo %f|egrep -q "\.z$"    && EXT=z
+	  echo %f|egrep -q "\.gz$" && EXT=gz
+	  echo %f|egrep -q "\.bz2$" && EXT=bz2
+	  case $EXT in
+	      tgz)    D="`basename $1 .tgz`.tar";;
+              tpz)    D="`basename $1 .tpz`.tar";;
+              gz) D="`basename $1 .gz`";;
+	      bz2) D="`basename $1 .bz2`";;
+	  esac
+	  if [ "$EXT" = "bz2" ]; then
+	    (bunzip2 -v $1 ; gzip -f9 -v $D)||echo tag $1 >>$MC_CONTROL_FILE
+	  else
+	    (gunzip -v $1 ; bzip2 -v --repetitive-best $D)||echo tag $1 >>$MC_CONTROL_FILE
+	  fi
 	  shift
         done

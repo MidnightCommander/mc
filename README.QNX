@@ -141,20 +141,16 @@ lib/
     'Z' on 'tar.Z' and 'tar.z' files: '%f' -> '$1'.
 
   mc.ext.in.qnx.diff:
-  mc.menu.qnx.diff:
 
     QNX: modified 'mc.ext.in'. [tar -t: output to stderr,...]
-    QNX: modified 'mc.menu'. [tar is not GNU tar: doesn't know '-z',...]
-
-    Support for '*.tar.F': 'freeze'-compressed tar files...
     
-    (No automatic install implemented: patches must be applied before
+    (No automatic install implemented: patch must be applied before
     running 'configure' [->mc.ext.in.qnx.diff!]; this patch can be not
     only QNX-specific...) 
 
   Makefile.in:
 
-    'mc.ext.in.qnx.diff' and 'mc.menu.qnx.diff' added to DISTLIB.
+    'mc.ext.in.qnx.diff' added to DISTLIB.
 
 slang/
 
