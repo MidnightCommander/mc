@@ -76,6 +76,8 @@ void desktop_recreate_default_icons (void);
 void desktop_reload_icons (int user_pos, int xpos, int ypos);
 void desktop_arrange_icons (SortType type);
 void desktop_create_url (const char *filename, const char *title, const char *url, const char *icon);
+void desktop_tidy_icons (void);
+
 
 extern int desktop_wm_is_gnome_compliant;
 

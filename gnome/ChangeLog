@@ -1,3 +1,14 @@
+2000-05-15 Andrew Post <apost@cbmi.upmc.edu>
+
+	* gdesktop.c (get_icon_snap_pos): Icons no longer count themselves
+	in the slot count.
+
+	* gdesktop.c (desktop_reload_icons): Icons are no longer
+	auto-arranged every time the user logs in (or in IceWM, the weird
+	icon focusing problems are fixed). An old and broken version of
+	the snap-to-grid patch was committed to CVS, causing these
+	problems.
+
 2000-05-14  Andreas Hyden  <a.hyden@cyberpoint.se>
 
 	* application.x-gnumeric.desktop: Added Swedish translation.

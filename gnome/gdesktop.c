@@ -348,14 +348,21 @@ get_icon_snap_pos (int *x, int *y)
 	int val, dist;
 	int dx, dy;
 	int ux, vy;
+	int this_icon_u, this_icon_v;
 
 	min = l_slots (0, 0).num_icons;
 	min_x = min_y = 0;
 	min_dist = INT_MAX;
 
+	get_slot_from_pos(*x, *y, &this_icon_u, &this_icon_v);
+
 	for (u = 0; u < layout_cols; u++)
 		for (v = 0; v < layout_rows; v++) {
 			val = l_slots (u, v).num_icons;
+
+			if (u==this_icon_u && v==this_icon_v)
+			        val--;
+			
 			get_pos_from_slot(u, v, &ux, &vy);
 			dx = *x - ux;
 			dy = *y - vy;
@@ -605,8 +612,7 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 	struct dirent *dirent;
 	DIR *dir;
 	char *full_name;
-	/* int have_pos, x, y, size; */
-	int x, y, size;
+	int have_pos, x, y, size;
 	DesktopIconInfo *dii;
 	GSList *need_position_list, *sl, *drop_grid_list, *drop_gl_copy;
 	GList *all_icons, *l;
@@ -614,6 +620,7 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 	const char *mime;
 	int orig_xpos, orig_ypos;
 	guint need_position_list_length;
+	static int first_reload = TRUE;
 	file_and_url_t *fau;
 
 	dir = mc_opendir (desktop_directory);
@@ -674,23 +681,31 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 
 		full_name = g_concat_dir_and_file (desktop_directory, dirent->d_name);
 
+		have_pos = gmeta_get_icon_pos (full_name, &x, &y);
+
 		if (gnome_metadata_get (full_name, "desktop-url", &size, &desktop_url) != 0)
 			desktop_url = NULL;
 
 		caption = NULL;
 		gnome_metadata_get (full_name, "icon-caption", &size, &caption);
 
-		fau = g_new0 (file_and_url_t, 1);
-		fau->filename = g_strdup (dirent->d_name);
+		if (first_reload && have_pos) {
+		        dii = desktop_icon_info_new (dirent->d_name, desktop_url, caption, x, y);
+		        gtk_widget_show (dii->dicon);
+		} else {
+		        file_and_url_t *fau;
+		        fau = g_new0 (file_and_url_t, 1);
+		        fau->filename = g_strdup (dirent->d_name);
 
-		if (desktop_url)
-		        fau->url = g_strdup (desktop_url);
+		        if (desktop_url)
+		                fau->url = g_strdup (desktop_url);
 
-		if (caption)
-		        fau->caption  = g_strdup (caption);
+		        if (caption)
+		                fau->caption  = g_strdup (caption);
 
-		need_position_list = g_slist_prepend (need_position_list, fau);
-
+		        need_position_list = g_slist_prepend (need_position_list, fau);
+		}
+		
 		g_free (full_name);
 
 		if (desktop_url)
@@ -699,6 +714,9 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 		if (caption)
 			g_free (caption);
 	}
+
+	if (first_reload)
+	        first_reload = FALSE;
 
 	mc_closedir (dir);
 
@@ -821,6 +839,37 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 static WPanel *create_panel_from_desktop(); /* Fwd decl */
 static void free_panel_from_desktop(WPanel *panel);
 
+/* Run all of the desktop icons through snap-to-grid */
+void
+desktop_tidy_icons (void)
+{
+        WPanel *panel;
+        DesktopIconInfo *dii;
+        int i;
+        dir_list dir;
+        int xpos, ypos;
+    
+        panel = create_panel_from_desktop ();
+        if (panel->count == 0) {
+	        free_panel_from_desktop (panel);
+	        return;
+        }
+    
+        dir = panel->dir;
+        g_assert (dir.list != NULL);
+    
+        for (i = 0; i < dir.size; i++) {
+	        dii = desktop_icon_info_get_by_filename (dir.list[i].fname);
+	        xpos = dii->x;
+	        ypos = dii->y;
+	        get_icon_snap_pos (&xpos, &ypos);
+	        desktop_icon_info_place (dii, xpos, ypos);
+        }
+    
+        free_panel_from_desktop (panel);
+}
+
+
 /* Perform automatic arrangement of the desktop icons */
 void
 desktop_arrange_icons (SortType type)
@@ -846,7 +895,7 @@ desktop_arrange_icons (SortType type)
 	g_assert (dir.list != NULL);
 
 	for (i = 0; i < dir.size; i++)
-		remove_from_slot (desktop_icon_info_get_by_filename (dir.list[i].fname));
+	        remove_from_slot (desktop_icon_info_get_by_filename (dir.list[i].fname));
 
 	for (i = 0; i < dir.size; i++) {
 		dii = desktop_icon_info_get_by_filename (dir.list[i].fname);
@@ -2713,6 +2762,14 @@ handle_arrange_icons_change (GtkWidget *widget, gpointer data)
 	desktop_arrange_icons (SORT_CHANGE);
 }
 
+/* Callback for running all desktop icons through snap-to-grid */
+static void
+handle_tidy_icons (GtkWidget *widget, gpointer data)
+{
+        desktop_tidy_icons();
+}
+
+
 /* Callback for creating a new panel window */
 static void
 handle_new_window (GtkWidget *widget, gpointer data)
@@ -2819,6 +2876,7 @@ GnomeUIInfo desktop_popup_items[] = {
 	GNOMEUIINFO_MENU_NEW_SUBTREE (gnome_panel_new_menu),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_SUBTREE (N_("_Arrange Icons"), desktop_arrange_icons_items),
+	GNOMEUIINFO_ITEM_NONE (N_("_Tidy Icons"), NULL, handle_tidy_icons),
 	GNOMEUIINFO_ITEM_NONE (N_("Create _New Window"), NULL, handle_new_window),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_NONE (N_("Rescan _Desktop Directory"), NULL, handle_rescan_desktop),
