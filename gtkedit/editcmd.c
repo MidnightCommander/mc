@@ -810,7 +810,8 @@ int edit_load_file_from_filename (WEdit *edit, char *exp)
     int file;
     if ((file = open ((char *) exp, O_RDONLY, MY_O_TEXT)) != -1) {
 	close (file);
-	edit_reload (edit, exp, 0, "", 0);
+	if (!edit_reload (edit, exp, 0, "", 0))
+	    return 1;
 	edit_split_filename (edit, exp);
 	edit->modified = 0;
 	return 0;

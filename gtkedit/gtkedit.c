@@ -29,6 +29,9 @@ int edit_translate_key (unsigned int x_keycode, long x_key, int x_state, int *cm
 void gtk_edit_alloc_colors (GtkEdit *edit, GdkColormap *colormap);
 static void gtk_edit_set_position (GtkEditable *editable, gint position);
 void edit_mouse_mark (WEdit * edit, XEvent * event, int double_click);
+void edit_move_to_prev_col (WEdit * edit, long p);
+int edit_load_file_from_filename (WEdit *edit, char *exp);
+
 
 guchar gtk_edit_font_width_per_char[256];
 int gtk_edit_option_text_line_spacing;
@@ -275,7 +278,10 @@ static void gtk_edit_destroy (GtkObject * object)
 	gtk_timeout_remove (edit->timer);
 	edit->timer = 0;
     }
-    edit_destroy_callback (edit->editor->widget);
+    if (edit->funcs) {
+	free (edit->funcs);
+    }
+    edit_destroy_callback (edit);
 
     GTK_OBJECT_CLASS (parent_class)->destroy (object);
 }
@@ -961,7 +967,7 @@ static void gtk_edit_set_position (GtkEditable * editable, gint position)
 /* returns 1 on error */
 gint gtk_edit_load_file_from_filename (GtkWidget * edit, const gchar * filename)
 {
-    return edit_load_file_from_filename (GTK_EDIT (edit)->editor, filename);
+    return edit_load_file_from_filename (GTK_EDIT (edit)->editor, (char *) filename);
 }
 
 void gtk_edit_set_top_line (GtkWidget * e, int line)
@@ -1090,14 +1096,14 @@ static GtkWidget *create_toolbar (GtkWidget * window, GtkEdit * edit)
     return toolbar;
 }
 
-
+/* returns 1 on error */
 int edit (const char *file, int line)
 {
     GtkWidget *app;
     GtkWidget *edit, *statusbar;
 
     edit = gtk_edit_new (NULL, NULL);
-    app = gnome_app_new ("mcedit", file ? file : "Mcedit");
+    app = gnome_app_new ("mcedit", (char *) (file ? file : "Mcedit"));
 
     {
 	GnomeUIInfo file_menu[] =
@@ -1202,7 +1208,10 @@ int edit (const char *file, int line)
 	gtk_widget_realize (edit);
 	if (file)
 	    if (*file)
-		gtk_edit_load_file_from_filename (edit, file);
+		if (gtk_edit_load_file_from_filename (edit, file)) {
+		    gtk_widget_destroy (app);
+		    return 1;
+		}
 	gtk_edit_set_cursor_line (edit, line);
 	gtk_widget_show (app);
 	gtk_widget_grab_focus (edit);

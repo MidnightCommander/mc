@@ -317,7 +317,7 @@ CWidget *CDrawEditor (const char *identifier, Window parent, int x, int y,
 	mkdir (catstrs (home_dir, EDIT_DIR, 0), 0700);
 	made_directory = 1;
     }
-    e = w->editor = CMalloc (sizeof (WEdit));
+    e = w->editor = edit_init (0, height / FONT_PIX_PER_LINE, width / FONT_MEAN_WIDTH, filename, text, starting_directory, text_size);
     w->funcs = mouse_funcs_new (w->editor, &edit_mouse_funcs);
 
     if (!w->editor) {
@@ -326,7 +326,6 @@ CWidget *CDrawEditor (const char *identifier, Window parent, int x, int y,
 	return 0;
     }
     w->editor->widget = w;
-    e = w->editor = edit_init (e, height / FONT_PIX_PER_LINE, width / FONT_MEAN_WIDTH, filename, text, starting_directory, text_size);
     w->funcs->data = (void *) w->editor;
     if (!e) {
 	CDestroyWidget (w->ident);

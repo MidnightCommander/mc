@@ -216,18 +216,21 @@ void edit_set_space_width (int s)
 
 #endif
 
-/* fills in the edit struct. returns 0 on fail. Pass edit as NULL for this function to do an malloc for you */
+/* fills in the edit struct. returns 0 on fail. Pass edit as NULL for this */
 WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, const char *text, const char *dir, unsigned long text_size)
 {
     char *f;
+    int to_free = 0;
 #ifndef MIDNIGHT
     if (option_long_whitespace)
 	edit_set_space_width (per_char[' '] * 2);
     else
 	edit_set_space_width (per_char[' ']);
 #endif
-    if (!edit)
+    if (!edit) {
 	edit = malloc (sizeof (WEdit));
+	to_free = 1;
+    }
     if (!edit) {
 	edit_error_dialog (_(" Error "), _(" Error allocating memory "));
 	return 0;
@@ -249,7 +252,8 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
 	f = catstrs (dir, filename, 0);
     if (edit_load_file (edit, f, text, text_size)) {
 /* edit_load_file already gives an error message */
-	free (edit);
+	if (to_free)
+	    free (edit);
 	return 0;
     }
     edit->force |= REDRAW_PAGE;
@@ -265,7 +269,8 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
     edit->undo_stack = malloc ((edit->stack_size + 10) * sizeof (long));
     if (!edit->undo_stack) {
 	edit_error_dialog (_(" Error "), _(" Error allocating memory "));
-	free (edit);
+	if (to_free)
+	    free (edit);
 	return 0;
     }
     edit->total_lines = edit_count_lines (edit, 0, edit->last_byte);
@@ -323,7 +328,7 @@ int edit_renew (WEdit * edit)
     return 1;
 }
 
-/* returns 1 on success */
+/* returns 1 on success, if returns 0, the edit struct would have been free'd */
 int edit_reload (WEdit * edit, const char *filename, const char *text, const char *dir, unsigned long text_size)
 {
     int lines = edit->num_widget_lines;
