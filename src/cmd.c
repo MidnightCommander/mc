@@ -39,22 +39,32 @@
 #endif
 
 #include "global.h"
-#include "panel.h"
 #include "cmd.h"		/* Our definitions */
-#include "view.h"		/* view() */
-#include "file.h"		/* the file operations */
-#include "find.h"		/* do_find */
-#include "hotlist.h"
-#include "tree.h"		/* tree_chdir */
+#include "fileopctx.h"		/* file_op_context_new() */
+#include "file.h"		/* copy_file_file() */
+#include "find.h"		/* do_find() */
+#include "hotlist.h"		/* hotlist_cmd() */
+#include "tree.h"		/* tree_chdir() */
 #include "subshell.h"		/* use_subshell */
-#include "cons.saver.h"
-#include "widget.h"		/* required by wtools.h */
-#include "command.h"		/* for cmdline */
-#include "layout.h"		/* get_current/other_type */
-#include "ext.h"		/* regex_command */
-#include "boxes.h"		/* cd_dialog */
-#include "setup.h"
-#include "profile.h"
+#include "cons.saver.h"		/* console_flag */
+#include "tty.h"		/* LINES */
+#include "dlg.h"		/* Widget */
+#include "view.h"		/* view() */
+#include "wtools.h"		/* message() */
+#include "widget.h"		/* push_history() */
+#include "key.h"		/* application_keypad_mode() */
+#include "win.h"		/* do_enter_ca_mode() */
+#include "dialog.h"		/* do_refresh() */
+#include "main.h"		/* change_panel() */
+#include "panel.h"		/* cpanel */
+#include "help.h"		/* interactive_display() */
+#include "user.h"		/* MC_GLOBAL_MENU */
+#include "command.h"		/* cmdline */
+#include "layout.h"		/* get_current_type() */
+#include "ext.h"		/* regex_command() */
+#include "boxes.h"		/* cd_dialog() */
+#include "setup.h"		/* save_setup() */
+#include "profile.h"		/* PROFILE_NAME */
 
 #ifndef MAP_FILE
 #   define MAP_FILE 0

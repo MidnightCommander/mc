@@ -1,5 +1,7 @@
 2002-11-14  Pavel Roskin  <proski@gnu.org>
 
+	* cmd.c: Clean up includes, don't rely on edit.h.
+
 	* dialog.c (struct Refresh): Make opaque.
 	* dialog.h: Move all stuff unrelated to dialog.c ...
 	* wtools.h: ... here.  Adjust all users.
