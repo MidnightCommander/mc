@@ -374,8 +374,13 @@ int read_extfs_archive (int fstype, char *name, struct extfs_archive **pparc)
     return 0;
 }
 
-/* Returns allocated path inside the archive or NULL */
 static char *extfs_get_path (char *inname, struct extfs_archive **archive, int is_dir,
+    int do_not_open);
+
+/* Returns path inside argument. Returned char* is inside inname, which is mangled	
+ * by this operation (so you must not free it's return value)
+ */
+static char *extfs_get_path_mangle (char *inname, struct extfs_archive **archive, int is_dir,
     int do_not_open)
 {
     char *local, *archive_name, *op;
@@ -571,7 +576,7 @@ static void *extfs_open (char *file, int flags, int mode)
     int local_handle;
     const int do_create = (flags & O_ACCMODE) != O_RDONLY;
     
-    if ((q = extfs_get_path (file, &archive, 0, 0)) == NULL)
+    if ((q = extfs_get_path_mangle (file, &archive, 0, 0)) == NULL)
 	return NULL;
     entry = extfs_find_entry (archive->root_entry, q, 0, do_create);
     if (entry == NULL)
@@ -704,6 +709,7 @@ static int extfs_close (void *data)
 #define X_entry extfs_entry
 #define X_archive extfs_archive
 #define X_get_path extfs_get_path
+#define X_get_path_mangle extfs_get_path_mangle
 #define X_find_entry extfs_find_entry
 #define X_resolve_symlinks extfs_resolve_symlinks
 #define X_inode extfs_inode
@@ -753,7 +759,7 @@ static int extfs_chdir (char *path)
     struct extfs_entry *entry;
 
     extfserrno = ENOTDIR;
-    if ((q = extfs_get_path (path, &archive, 1, 0)) == NULL)
+    if ((q = extfs_get_path_mangle (path, &archive, 1, 0)) == NULL)
 	return -1;
     entry = extfs_find_entry (archive->root_entry, q, 0, 0);
     if (!entry)
@@ -805,10 +811,12 @@ static vfsid extfs_getid (char *path, struct vfs_stamping **parent)
     vfs *v;
     vfsid id;
     struct vfs_stamping *par;
+    char *p;
 
     *parent = NULL;
-    if (!extfs_get_path (path, &archive, 1, 1))
+    if (!(p = extfs_get_path (path, &archive, 1, 1)))
 	return (vfsid) -1;
+    free(p);
     if (archive->name){
 	v = vfs_type (archive->name);
 	id = (*v->getid) (archive->name, &par);

@@ -793,8 +793,13 @@ int read_tar_archive (char *name, struct tarfs_archive **pparc)
     return 0;
 }
 
-/* Returns allocated path inside the archive or NULL */
 static char *tarfs_get_path (char *inname, struct tarfs_archive **archive, int is_dir,
+    int do_not_open);
+
+/* Returns path inside argument. Returned char* is inside inname, which is mangled	
+ * by this operation (so you must not free it's return value)
+ */
+static char *tarfs_get_path_mangle (char *inname, struct tarfs_archive **archive, int is_dir,
     int do_not_open)
 {
     char *local, *archive_name;
@@ -807,7 +812,7 @@ static char *tarfs_get_path (char *inname, struct tarfs_archive **archive, int i
     archive_name = inname;
     vfs_split( inname, &local, NULL );
     if (!local)
-      local = "";
+        local = "";
 
     mc_stat (archive_name, &stat_buf);
 
@@ -917,7 +922,7 @@ static void *tar_open (char *file, int flags, int mode)
     char *q;
     struct tarfs_entry *entry;
 
-    if ((q = tarfs_get_path (file, &archive, 0, 0)) == NULL)
+    if ((q = tarfs_get_path_mangle (file, &archive, 0, 0)) == NULL)
 	return NULL;
     entry = tarfs_find_entry (archive->root_entry, q, 0, 0);
     if (entry == NULL)
@@ -1030,6 +1035,7 @@ static int tar_close (void *data)
 #define X_entry tarfs_entry
 #define X_archive tarfs_archive
 #define X_get_path tarfs_get_path
+#define X_get_path_mangle tarfs_get_path_mangle
 #define X_find_entry tarfs_find_entry
 #define X_resolve_symlinks tarfs_resolve_symlinks
 #define X_inode tarfs_inode
@@ -1076,7 +1082,7 @@ static int tar_chdir (char *path)
     struct tarfs_entry *entry;
 
     tarerrno = ENOTDIR;
-    if ((q = tarfs_get_path (path, &archive, 1, 0)) == NULL)
+    if ((q = tarfs_get_path_mangle (path, &archive, 1, 0)) == NULL)
 	return -1;
     entry = tarfs_find_entry (archive->root_entry, q, 0, 0);
     if (!entry)
@@ -1137,9 +1143,9 @@ static vfsid tar_getid (char *path, struct vfs_stamping **parent)
     struct vfs_stamping *par;
 
     *parent = NULL;
-    if ((p = tarfs_get_path (path, &archive, 0, 1)) == NULL) {
+    if (!(p = tarfs_get_path (path, &archive, 0, 1)))
 	return (vfsid) -1;
-    }
+    free(p);
     v = vfs_type (archive->name);
     id = (*v->getid) (archive->name, &par);
     if (id != (vfsid)-1) {
@@ -1210,7 +1216,7 @@ static char *tar_getlocalcopy (char *path)
     char buf[MC_MAXPATHLEN];
 
     strcpy( buf, path );
-    if ((q = tarfs_get_path (path, &archive, 1, 0)) == NULL)
+    if ((q = tarfs_get_path_mangle (path, &archive, 1, 0)) == NULL)
 	return NULL;
     entry = tarfs_find_entry (archive->root_entry, q, 0, 0);
     if (entry == NULL)

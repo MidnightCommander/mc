@@ -285,6 +285,8 @@ int mc_open (char *file, int flags, ...)
     mode = va_arg (ap, int);
     va_end (ap);
     
+    if (!vfs->open)
+        vfs_die( "VFS must support open\n" );
     info = (*vfs->open) (file, flags, mode);	/* open must be supported */
     free (file);
     if (!info){

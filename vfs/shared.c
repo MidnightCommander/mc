@@ -5,6 +5,18 @@
  * 1998 Pavel Machek
  */
 
+static char *X_get_path (char *inname, struct X_archive **archive, int is_dir,
+    int do_not_open)
+{
+    char *buf = strdup( inname );
+    char *res = X_get_path_mangle( buf, archive, is_dir, do_not_open );
+    char *res2 = NULL;
+    if (res)
+        res2 = strdup(res);
+    free(buf);
+    return res2;
+}
+
 static struct X_entry*
 __X_find_entry (struct X_entry *dir, char *name, 
 		     struct X_loop_protect *list, int make_dirs, int make_file)
@@ -108,7 +120,7 @@ static void * s_opendir (char *dirname)
     struct X_entry *entry;
     struct X_entry **info;
 
-    if ((q = X_get_path (dirname, &archive, 1, 0)) == NULL)
+    if ((q = X_get_path_mangle (dirname, &archive, 1, 0)) == NULL)
 	return NULL;
     entry = X_find_entry (archive->root_entry, q, 0, 0);
     if (entry == NULL)
@@ -214,7 +226,7 @@ char debugbuf[10240];
 strcpy( debugbuf, path );
 
 
-    if ((q = X_get_path (path, &archive, 0, 0)) == NULL)
+    if ((q = X_get_path_mangle (path, &archive, 0, 0)) == NULL)
 	return -1;
     entry = X_find_entry (archive->root_entry, q, 0, 0);
     if (entry == NULL)
@@ -253,7 +265,7 @@ static int s_readlink (char *path, char *buf, int size)
     int i;
     struct X_entry *entry;
 
-    if ((q = X_get_path (path, &archive, 0, 0)) == NULL)
+    if ((q = X_get_path_mangle (path, &archive, 0, 0)) == NULL)
 	return -1;
     entry = X_find_entry (archive->root_entry, q, 0, 0);
     if (entry == NULL)

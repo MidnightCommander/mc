@@ -1,3 +1,18 @@
+Thu May 28 16:42:31 1998  Pavel Machek <pavel@bug.mj.gts.cz>
+
+	* extfs.c, shared.c, tar.c: I changed semantics in my previous
+	patch - _get_path() now modifies strings passed to it. I thought
+	that I were carefull enough not to introduce bugs. You guessed it -
+	I was not. [Many tar_ and extfs_ functions modify strings passed 
+	to them, but as they are only called from vfs layer, it does not 
+	matter much.]
+	So I renamed function to alert everyone that semantics changed. 
+
+	Fixed bugs in timestamping (and segfaults) when you entered tar 
+	inside zip file or similar.
+
+	* vfs.c (mc_open): Die if the filesystem doesn't support open
+
 1998-05-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* vfs.c (MC_DIROP): Macro now returns the proper value. 
