@@ -1,3 +1,7 @@
+1999-04-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* extfs/uzip.in (nam): Handle new unzips.
+
 Fri Apr 23 21:02:32 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* ftpfs.c (retrieve_dir): If we don't get any valid directory entry

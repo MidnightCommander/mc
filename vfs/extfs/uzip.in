@@ -58,7 +58,7 @@ if test -n "$DOZIPINFO"; then
 BEGIN { hyphens=0 }
 /^Archive/ { next }
 /^\ Length/ { next }
-/^\ ------/ { if (hyphens > 0) exit 0; hyphens=1; next }
+/^\ ?------/ { if (hyphens > 0) exit 0; hyphens=1; next }
 { 
 if (hyphens < 1) next;
 if ($8 ~ /^\^/)
