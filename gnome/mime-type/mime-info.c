@@ -421,13 +421,13 @@ write_keys (GHashTable *spec_hash, GHashTable *generic_hash)
 		if (errno == ENOENT) {
 			if (mkdir (dirname, S_IRWXU) < 0) {
 				run_error (_("We are unable to create the directory\n"
-					   "~/.gnome/mime-info\n\n"
+					   "~/.gnome/mime-info.\n\n"
 					   "We will not be able to save the state."));
 				return;
 			}
 		} else {
 			run_error (_("We are unable to access the directory\n"
-				   "~/.gnome/mime-info\n\n"
+				   "~/.gnome/mime-info.\n\n"
 				   "We will not be able to save the state."));
 			return;
 		}
@@ -437,7 +437,7 @@ write_keys (GHashTable *spec_hash, GHashTable *generic_hash)
         remove (filename);
 	file = fopen (filename, "w");
 	if (file == NULL) {
-		run_error (_("Cannot create the file\n~/.gnome/mime-info/user.keys\n\n"
+		run_error (_("Cannot create the file\n~/.gnome/mime-info/user.keys.\n\n"
 			     "We will not be able to save the state"));
 		return;
 	}
