@@ -784,13 +784,14 @@ void SLsmg_touch_lines (int row, int n)
 }
 
 #ifndef pc_system
-static char Fake_Alt_Char_Pairs [] = "a:j+k+l+m+q-t+u+v+w+x|n+`+f\\g#~o,<+>.v-^h#0#";
+static const char Fake_Alt_Char_Pairs [] = "a:j+k+l+m+q-t+u+v+w+x|n+`+f\\g#~o,<+>.v-^h#0#";
 
 static void init_alt_char_set (void)
 {
    int i;
-   unsigned char *p, *pmax, ch;
-   
+   const unsigned char *p, *pmax;
+   unsigned char ch;
+
    if (Alt_Char_Set[128] == 128) return;
 
    i = 32;
