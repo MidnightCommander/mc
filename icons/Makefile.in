@@ -29,6 +29,8 @@ ALLICONS = a.xpm application.xpm binary.xpm bitmap.xpm blackhole.xpm \
 	xbm.xpm xchess.xpm xfig.xpm xman.xpm xmosaic.xpm xpaint.xpm xpm.xpm \
 	zip.xpm zoo.xpm
 
+DECENTICONS = c.xpm h.xpm tiff.xpm 
+
 all:
 
 install:
@@ -36,7 +38,7 @@ install:
 installx: @insticons@
 
 install_icons:
-	for I in $(ALLICONS); \
+	for I in $(DECENTICONS); \
 	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(icondir)/$$I; done
 
 uninstall:

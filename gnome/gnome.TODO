@@ -8,17 +8,17 @@ New task list:
 
 	- Make the tree faster (cache loaded directories)
 	
-	- Sync the tree to the panel view
-
 	- Add focus management to the tree
-
-	- Sync the tree selection to the panel view.
-
-	- Add drag and drop to the tree view.
 
 	- Add to the gnome-panel mime-type support
 
 	- Drop the MC event handling off for the main window.
+
+	- Remote control of the file manager (corba client command).
+
+	- Dynamic directory content loading.
+
+	- Dynamic thumbnail generation
 
 Federico:
 

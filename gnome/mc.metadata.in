@@ -1,0 +1,11 @@
+regex: \.c$
+	type=x-application-gnome/c-source
+	icon-filename=@icondir@/c.xpm
+
+regex: \.h$
+	type=x-application-gnome/c-source
+	icon-filename=@icondir@/h.xpm
+
+regex: \.tiff$
+	type=image/tiff
+	icon-filename=@icondir@/tiff.xpm

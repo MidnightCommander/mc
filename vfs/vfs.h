@@ -406,7 +406,7 @@ extern void mc_vfs_done( void );
 #ifdef ENOSYS
 #define E_NOTSUPP ENOSYS	/* for use in vfs when module does not provide function */
 #else
-#warning Does this really happen?
+/* Yes, this does happen */
 #endif
 
 #ifdef ENOMSG

@@ -982,6 +982,15 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 		if (event->button.button == 3) {
 			gpopup_do_popup ((GdkEventButton *) event, panel, index, panel->dir.list[index].fname);
 			return;
+		} else if (event->button.button == 2){
+			char *fullname;
+
+			if (S_ISDIR (panel->dir.list [index].buf.st_mode) ||
+			    panel->dir.list [index].f.link_to_dir){
+				fullname = concat_dir_and_file (panel->cwd, panel->dir.list [index].fname);
+				new_panel_at (fullname);
+				free (fullname);
+			}
 		}
 		break;
 
