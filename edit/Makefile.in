@@ -18,8 +18,7 @@ AR = @AR@
 # Distribution variables
 #
 
-EDITSRC = edit.c editcmd.c editwidget.c edit_key_translator.c editdraw.c \
-	  edit.h editmenu.c editcmddef.h wordproc.c syntax.c editoptions.c
+EDITSRC = edit_key_translator.c
 
 EDITOBJS = edit.o editcmd.o editwidget.o editdraw.o editmenu.o wordproc.o \
 	  syntax.o editoptions.o
