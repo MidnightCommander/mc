@@ -320,7 +320,7 @@ static int hotlist_button_callback (int action, void *data)
 	    break;
 	}
     case B_REMOVE:
-	if (l_hotlist->current)
+	if (l_hotlist->current && l_hotlist->current->data)
 	    remove_from_hotlist (l_hotlist->current->data);
 	return 0;
 	break;
