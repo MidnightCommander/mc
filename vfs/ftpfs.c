@@ -1645,7 +1645,7 @@ linear_read (struct direntry *fe, void *buf, int len)
 
     if (!n) {
 	close (fe->data_sock);
-	fe->data_sock = 1;
+	fe->data_sock = -1;
 	
         if ((get_reply (qsock (fe->bucket), NULL, 0) != COMPLETE)) {
 	    my_errno = EIO;
