@@ -74,7 +74,7 @@ fi
 rm -f $MC_PATCH $MC_PATCH_BZ2
 
 # Don't merge PO-files, we are skipping them in the patch
-make distdir MSGMERGE=
+make distdir MSGMERGE=false
 
 # Sometimes GNU diff returns 1 for unclear reasons
 diff -urN -x po $MC_BASE_DIR mc-*/ >$MC_PATCH || :
