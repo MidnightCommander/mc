@@ -1,3 +1,10 @@
+2000-09-01  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: AC_CANONICAL_SYSTEM moved above AM_INIT_AUTOMAKE
+	to avoid a warning
+	* acinclude.m4: removed unused macros AC_CHECK_HEADER_IN_PATH,
+	AC_LIB_XPM, AC_X_SHAPE_EXTENSION
+
 2000-08-29  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: use AM_GNOME_GETTEXT

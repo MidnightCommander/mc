@@ -2,13 +2,12 @@ dnl
 dnl Configure.in file for the Midnight Commander
 dnl
 AC_INIT(create_vcs)
+AC_CANONICAL_SYSTEM
 AM_INIT_AUTOMAKE(mc, 4.5.51)
 AM_CONFIG_HEADER(config.h)
 
 top_srcdir=`dirname $0`
 AC_SUBST(top_srcdir)
-
-AC_CANONICAL_SYSTEM
 
 dnl This is path where we're looking for headers in addition to /usr/include
 dnl and whatever cpp defaults to.
