@@ -593,16 +593,14 @@ this_try_alloc_color_pair (char *fg, char *bg)
 	if (!*fg)
 	    fg = 0;
     if (fg) {
-	strncpy (f, fg, sizeof (f) - 1);
-	f[sizeof (f) - 1] = 0;
+	g_strlcpy (f, fg, sizeof (f));
 	p = strchr (f, '/');
 	if (p)
 	    *p = '\0';
 	fg = f;
     }
     if (bg) {
-	strncpy (b, bg, sizeof (b) - 1);
-	b[sizeof (b) - 1] = 0;
+	g_strlcpy (b, bg, sizeof (b));
 	p = strchr (b, '/');
 	if (p)
 	    *p = '\0';
@@ -705,17 +703,13 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
 	    check_a;
 	    if (!strcmp (*a, "left")) {
 		a++;
-		strncpy (whole_left, *a, sizeof (whole_left) - 1);
-		whole_left[sizeof (whole_left) - 1] = 0;
+		g_strlcpy (whole_left, *a, sizeof (whole_left));
 	    } else if (!strcmp (*a, "right")) {
 		a++;
-		strncpy (whole_right, *a, sizeof (whole_right) - 1);
-		whole_right[sizeof (whole_right) - 1] = 0;
+		g_strlcpy (whole_right, *a, sizeof (whole_right));
 	    } else {
-		strncpy (whole_left, *a, sizeof (whole_left) - 1);
-		whole_left[sizeof (whole_left) - 1] = 0;
-		strncpy (whole_right, *a, sizeof (whole_right) - 1);
-		whole_right[sizeof (whole_right) - 1] = 0;
+		g_strlcpy (whole_left, *a, sizeof (whole_left));
+		g_strlcpy (whole_right, *a, sizeof (whole_right));
 	    }
 	    a++;
 	    check_not_a;
@@ -777,10 +771,8 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
 	    bg = *a;
 	    if (*a)
 		a++;
-	    strncpy (last_fg, fg ? fg : "", sizeof (last_fg) - 1);
-	    last_fg[sizeof (last_fg) - 1] = 0;
-	    strncpy (last_bg, bg ? bg : "", sizeof (last_bg) - 1);
-	    last_bg[sizeof (last_bg) - 1] = 0;
+	    g_strlcpy (last_fg, fg ? fg : "", sizeof (last_fg));
+	    g_strlcpy (last_bg, bg ? bg : "", sizeof (last_bg));
 	    c->keyword[0]->color = this_try_alloc_color_pair (fg, bg);
 	    c->keyword[0]->keyword = g_strdup (" ");
 	    check_not_a;
