@@ -19,6 +19,8 @@ Version 4.6.1-pre4.
 - Editor.
 	- Add syntax file for the x86 assembler.
 	- Add syntax file for the Vision(tm) Ray Tracer.
+        - Add syntax file for the CORBA IDL.
+        - Add syntax file for the LUA programming language.
 
 
 Version 4.6.1-pre3.

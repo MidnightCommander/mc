@@ -1,3 +1,14 @@
+2005-03-19  Pavel S. Shirshov  <me@pavelsh.pp.ru>
+
+        * syntax/idl.syntax: Add syntax file for the CORBA idl.
+	From Ian Zagorskih <ianzag@megasignal.com>
+        * syntax/lua.syntax: Add syntax file for the LUA programming language.
+	From Mike Gorchak  <mike@malva.ua> 
+        * syntax/Syntax: Add syntax file for CORBA idl and lua.
+        * syntax/Makefile.am: Likewise.
+        * mc.qpg.in: Likewise.
+        * NEWS: Likewise.
+
 2005-03-19  Pavel Roskin  <proski@gnu.org>
 
 	* acinclude.m4 (MC_WITH_SLANG): Define HAVE_SYSTEM_SLANG after

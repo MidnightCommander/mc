@@ -96,11 +96,13 @@
          <QPG:Add file="./syntax/eiffel.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/fortran.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/html.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/idl.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/java.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/js.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/latex.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/lisp.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/lsm.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/lua.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/m4.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/mail.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/makefile.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
