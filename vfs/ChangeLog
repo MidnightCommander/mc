@@ -1,3 +1,8 @@
+2003-01-24  Pavel Roskin  <proski@gnu.org>
+
+	* smbfs.c (smbfs_nothingisopen): Warning fix for 64-bit systems.
+	(smbfs_free): Likewise.
+
 2003-01-24  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* extfs/urar.in: Search $PATH for unrar, fallback to rar.

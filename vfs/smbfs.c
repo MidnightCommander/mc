@@ -1630,8 +1630,8 @@ smbfs_rmdir (vfs *me, char *path)
 static int
 smbfs_link (vfs *me, char *p1, char *p2)
 {
-	DEBUG(3, ("smbfs_link(p1:%s, p2:%s)\n", p1, p2));
-	my_errno = EOPNOTSUPP;
+    DEBUG (3, ("smbfs_link(p1:%s, p2:%s)\n", p1, p2));
+    my_errno = EOPNOTSUPP;
     return -1;
 }
 
@@ -1642,24 +1642,24 @@ static vfsid
 smbfs_getid (vfs *me, char *p, struct vfs_stamping **parent)
 {
     *parent = NULL;
-	DEBUG(3, ("smbfs_getid(p:%s)\n", p));
-    
-    return (vfsid) -1;
+    DEBUG (3, ("smbfs_getid(p:%s)\n", p));
+
+    return (vfsid) - 1;
 }
 
 static int
 smbfs_nothingisopen (vfsid id)
 {
-	DEBUG(3, ("smbfs_nothingisopen(%d)\n", (int)id));
+    DEBUG (3, ("smbfs_nothingisopen(%p)\n", id));
     return 0;
 }
 
 static void
 smbfs_free (vfsid id)
 {
-	DEBUG(3, ("smbfs_free(%d)\n", (int)id));
+    DEBUG (3, ("smbfs_free(%p)\n", id));
     /* FIXME: Should not be empty */
-	authinfo_free_all ();
+    authinfo_free_all ();
 }
 
 /* Gives up on a socket and reopens the connection, the child own the socket
