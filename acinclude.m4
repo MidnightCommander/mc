@@ -95,12 +95,12 @@ AC_DEFUN([MC_WITH_VFS],[
       dnl mcfs support
       dnl
       AC_ARG_WITH(mcfs,
-	  [--with-mcfs	           Support mc-specific networking file system],[
-	  if test "x$withval" != "xno"; then
+	[  --with-mcfs              Support mc-specific networking file system [[no]]],
+	[if test "x$withval" != "xno"; then
 	    AC_DEFINE(WITH_MCFS, 1, [Define to enable mc-specific networking file system])
             vfs_flags="$vfs_flags, mcfs"
-	  fi
-      ])
+	fi]
+      )
       vfs_flags="$vfs_flags, ftpfs, fish"
       use_net_code=true
   fi
@@ -111,8 +111,8 @@ AC_DEFUN([MC_WITH_VFS],[
   smbfs=""
   SAMBAFILES=""
   AC_ARG_WITH(samba,
-  	  [--with-samba	           Support smb virtual file system],[
-  	  if test "x$withval" != "xno"; then
+  	  [  --with-samba             Support smb virtual file system [[no]]],
+	  [if test "x$withval" != "xno"; then
   		  AC_DEFINE(WITH_SMBFS, 1, [Define to enable VFS over SMB])
 	          vfs_flags="$vfs_flags, smbfs"
 		  smbfs="smbfs.o"
@@ -127,7 +127,7 @@ AC_DEFUN([MC_WITH_VFS],[
   # set Samba configuration directory location
   configdir="/etc"
   AC_ARG_WITH(configdir,
-  [  --with-configdir=DIR     Where the Samba configuration files are (/etc)],
+  [  --with-configdir=DIR     Where the Samba configuration files are [[/etc]]],
   [ case "$withval" in
     yes|no)
     #
@@ -176,7 +176,7 @@ dnl MC_VFS_LIBS=
 AC_DEFUN([MC_VFS_CHECKS],[
 	use_vfs=yes
 	AC_ARG_WITH(vfs,
-		[--with-vfs		   Compile with the VFS code],
+		[  --with-vfs               Compile with the VFS code [[yes]]],
 		use_vfs=$withval
 	)
 	case $use_vfs in

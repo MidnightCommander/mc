@@ -1,5 +1,9 @@
 2002-09-12  Pavel Roskin  <proski@gnu.org>
 
+	* acinclude.m4: Clarify some help texts, add defaults in square
+	brackets, use more consistent spacing.
+	* configure.in: Likewise.
+
 	* lib/mc.menu: Don't call tarballs "releases".  Don't
 	dereference symlinks.
 

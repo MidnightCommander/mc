@@ -52,7 +52,7 @@ dnl We use only part of the functionality of mmap, so on AIX,
 dnl it's possible to use mmap, even if it doesn't pass the autoconf test.
 dnl
 AC_ARG_WITH(mmap, 
-	[--with-mmap                To force using the mmap call (AIX)],
+	[  --with-mmap              Force using the mmap call (only useful on AIX)],
 	[case $withval in
 yes)
 	ac_cv_func_mmap_fixed_mapped=yes
@@ -214,7 +214,7 @@ dnl
 
 textmode_x11_support="no"
 AC_ARG_WITH(tm-x-support,
-	[--with-tm-x-support        Try getting events from X Window System],
+	[  --with-tm-x-support      Get keyboard events from X Window System [[no]]],
 	[if test x$withval = xyes; then
 		AC_PATH_XTRA
 		CPPFLAGS="$CPPFLAGS $X_CFLAGS"
@@ -272,7 +272,7 @@ dnl
 dnl Install mcserv only if explicitly enabled
 dnl
 AC_ARG_ENABLE([mcserv-install],
-	      [--enable-mcserv-install    Install mcserv - Midnight Commander file server])
+	      [  --enable-mcserv-install  Install mcserv - Midnight Commander file server [[no]]])
 
 vfs_type="normal"
 if test $use_vfs = yes
@@ -291,7 +291,8 @@ mouse_lib="xterm only"
 case $host_os in
 linux*)
     AC_ARG_WITH(gpm-mouse, 
-	[--with-gpm-mouse[[=base-dir]]  Compile with gpm mouse support (Linux only)],
+	[  --with-gpm-mouse[[=base-dir]]  Compile with gpm mouse support (Linux only)
+                               [[yes if found]]],
 	[if test x$withval != xno
 	then
 		if test x$withval != xyes
@@ -315,7 +316,7 @@ linux*)
 esac
 
 AC_ARG_WITH(ncurses,
-	[--with-ncurses[[=base-dir]]  Compile with ncurses/locate base dir],
+	[  --with-ncurses[[=base-dir]]    Compile with ncurses [[no]]],
 [if test x$withval != xno; then
 	if test x$withval != xyes; then
 		LDFLAGS="$LDFLAGS -L$withval/lib"
@@ -340,7 +341,8 @@ fi
 ])
 
 AC_ARG_WITH(hsc,
-        [--with-hsc                 Compile with support for the HSC firewall],
+        [  --with-hsc               Compile with support for HSC firewall instead
+                           of FTP proxy [[no]]],
         [if test x$withval = xyes; then
                 AC_DEFINE(HSC_PROXY, 1,
 			  [Define if you want to use the HSC firewall])
@@ -457,8 +459,8 @@ fi
 
 AC_MSG_CHECKING([for subshell support])
 AC_ARG_WITH(subshell,
-	[--with-subshell=optional   To disable concurrent shell by default
---without-subshell         To disable concurrent shell completely],
+	[  --with-subshell          Compile in concurrent subshell [[yes]]
+  --with-subshell=optional Don't run concurrent shell by default [[no]]],
 	[result=no
 	if test x$withval = xoptional
 	then
@@ -494,36 +496,37 @@ if test "x$screen_type" != xncurses; then
 	])
 fi
 
+AC_ARG_WITH(slang,
+	[  --with-slang             Compile with S-Lang screen manager [[yes]]],
+	[if test x$withval = xyes; then
+		AC_WITH_SLANG
+	fi]
+)
+
+AC_ARG_WITH(included-slang,
+	[  --with-included-slang    Use S-Lang library included with mc sources
+                           [[use installed library if found]]],
+	[if test x$withval = xyes; then
+	    slang_use_system_installed_lib=false
+	    slang_check_lib=true
+	fi]
+)
+
 AC_ARG_WITH(termcap,
-	[--with-termcap             SLANG: Force usage of termcap],[
-	if test x$withval = xyes; then
+	[  --with-termcap           Same as above, and try using termcap database [[no]]],
+	[if test x$withval = xyes; then
 		AC_USE_TERMCAP
 		slang_check_lib=false
 		slang_use_system_installed_lib=false
 	fi]
 )
 
-AC_ARG_WITH(included-slang,
-	[--with-included-slang      SLANG: use the SLang library included here],[
-	if test x$withval = xyes; then
-	    slang_use_system_installed_lib=false
-	    slang_check_lib=true
-	fi]
-)
-
-AC_ARG_WITH(slang,
-	[--with-slang		   Compile with the slang screen manager],[
-	if test x$withval = xyes; then
-		AC_WITH_SLANG
-	fi
-])
-
 LIBEDIT_A=""
 MCEDIT=""
 LEDIT=""
 EDIT_msg=""
 AC_ARG_WITH(edit,
-        [--with-edit                Enable internal editor],
+        [  --with-edit              Enable internal editor [[yes]]],
 	[if test x$withval = xyes
 	then
 		AC_WITH_EDIT
@@ -541,11 +544,9 @@ undelfs_o=""
 
 if test $use_vfs = yes; then
     AC_ARG_WITH(ext2undel,
-        [--with-ext2undel           Compile with ext2 undelete code],[
-	if test x$withval != xno;
-	then
-		if test x$withval != xyes
-		then
+        [  --with-ext2undel         Compile with ext2 undelete code [[yes if found]]],
+	[if test x$withval != xno; then
+		if test x$withval != xyes; then
 			LDFLAGS="$LDFLAGS -L$withval/lib"
 			CPPFLAGS="$CPPFLAGS -I$withval/include"
 		fi
@@ -621,7 +622,7 @@ dnl
 dnl User visible support for charset conversion.
 dnl
 AC_ARG_ENABLE([charset],
-	      [--enable-charset           Support for charset selection and conversion])
+	      [  --enable-charset         Support for charset selection and conversion [[no]]])
 have_charset=
 if test "x$enable_charset" = xyes; then
   if test "x$am_cv_func_iconv" != xyes; then
