@@ -14,5 +14,6 @@ void    jobs_cmd         (void);
 char   *cd_dialog        (void);
 void    symlink_dialog   (char *existing, char *new,
 			  char **ret_existing, char **ret_new);
+char   *tree_box         (char *current_dir);
 
 #endif

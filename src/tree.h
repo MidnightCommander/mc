@@ -21,7 +21,6 @@ typedef struct {
 
 int tree_init (char *current_dir, int lines);
 void tree_chdir (WTree *tree, char *dir);
-char *tree (char *current_dir);
 
 void sync_tree (char *pathname);
 

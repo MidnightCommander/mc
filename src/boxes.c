@@ -681,8 +681,9 @@ tree_callback (struct Dlg_head *h, int id, int msg)
     return MSG_NOT_HANDLED;
 }
 
+/* Show tree in a box, not on a panel */
 char *
-tree (char *current_dir)
+tree_box (char *current_dir)
 {
     WTree    *mytree;
     Dlg_head *dlg;

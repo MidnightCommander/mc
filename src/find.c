@@ -42,8 +42,8 @@
 #include "panel.h"		/* current_panel */
 #include "main.h"		/* do_cd, try_to_select */
 #include "wtools.h"
-#include "tree.h"
 #include "cmd.h"		/* view_file_at_line */
+#include "boxes.h"
 #include "../vfs/vfs.h"
 
 #if defined(HAVE_RX_H) && defined(HAVE_REGCOMP)
@@ -243,7 +243,7 @@ find_par_start:
 	   g_free (temp_dir);
 	    temp_dir = g_strdup (cpanel->cwd);
 	}
-	in_start_dir = tree (temp_dir);
+	in_start_dir = tree_box (temp_dir);
 	if (in_start_dir)
 	   g_free (temp_dir);
 	else

@@ -1097,11 +1097,11 @@ sort_cmd (void)
 }
 
 static void
-tree_box (void)
+treebox_cmd (void)
 {
     char *sel_dir;
 
-    sel_dir = tree (selection (cpanel)->fname);
+    sel_dir = tree_box (selection (cpanel)->fname);
     if (sel_dir){
 	do_cd(sel_dir, cd_exact);
 	g_free (sel_dir);
@@ -1200,7 +1200,7 @@ static menu_entry CmdMenu [] = {
      * as a panel still has some problems, I have not yet finished
      * the WTree widget port, sorry.
      */
-    { ' ', N_("&Directory tree"),               'D', tree_box },
+    { ' ', N_("&Directory tree"),               'D', treebox_cmd },
     { ' ', N_("&Find file            M-?"),     'F', find_cmd },
     { ' ', N_("s&Wap panels          C-u"),     'W', swap_cmd },
     { ' ', N_("switch &Panels on/off C-o"),     'P', view_other_cmd },

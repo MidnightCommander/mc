@@ -1,5 +1,9 @@
 2001-10-01  Pavel Roskin  <proski@gnu.org>
 
+	* boxes.c (tree): Rename to tree_box() to avoid confusion.
+	Adjust all callers and headers.
+	* main.c (tree_box): Rename to tree_box_cmd().
+
 	* tree.c (set_navig_label): Get argument "tree".
 	(set_navig_label): Likewise.  Adjust all callers.  Don't cast
 	function tree() to (Widget *) - it's wrong and dangerous.
