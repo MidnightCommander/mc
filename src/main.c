@@ -2517,7 +2517,8 @@ main (int argc, char *argv[])
 	prompt = (geteuid () == 0) ? "# " : "$ ";
 
     /* Program main loop */
-    do_nc ();
+    if (!midnight_shutdown)
+	do_nc ();
 
     /* Save the tree store */
     tree_store_save ();

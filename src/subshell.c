@@ -189,6 +189,9 @@ static void init_subshell_child (const char *pty_name)
 {
     int pty_slave;
     char *init_file = NULL;
+#ifdef HAVE_GETSID
+    pid_t mc_sid;
+#endif /* HAVE_GETSID */
 	
     setsid ();  /* Get a fresh terminal session */
 
@@ -243,6 +246,16 @@ static void init_subshell_child (const char *pty_name)
     /* It simplifies things to change to our home directory here, */
     /* and the user's startup file may do a `cd' command anyway   */
     chdir (home_dir);  /* FIXME? What about when we re-run the subshell? */
+
+#ifdef HAVE_GETSID
+    /* Set MC_SID to prevent running one mc from another */
+    mc_sid = getsid (0);
+    if (mc_sid != -1) {
+	char sid_str[BUF_SMALL];
+	g_snprintf (sid_str, sizeof (sid_str), "MC_SID=%ld", (long) mc_sid);
+	putenv (sid_str);
+    }
+#endif /* HAVE_GETSID */
 
     switch (subshell_type)
     {
@@ -318,6 +331,52 @@ static void init_subshell_child (const char *pty_name)
     /* }}} */
 }
 
+
+#ifdef HAVE_GETSID
+/*
+ * Check MC_SID to prevent running one mc from another.
+ * Return:
+ * 0 if no parent mc in our session was found,
+ * 1 if parent mc was found and the user wants to continue,
+ * 2 if parent mc was found and the user wants to quit mc.
+ */
+static int
+check_sid ()
+{
+    pid_t my_sid, old_sid;
+    char *sid_str;
+    int r;
+
+    sid_str = getenv ("MC_SID");
+    if (!sid_str)
+	return 0;
+
+    old_sid = (pid_t) strtol (sid_str, NULL, 0);
+    if (!old_sid)
+	return 0;
+
+    my_sid = getsid (0);
+    if (my_sid == -1)
+	return 0;
+
+    /* The parent mc is in a different session, it's OK */
+    if (old_sid != my_sid)
+	return 0;
+
+    r = query_dialog (_("Warning"),
+		      _("GNU Midnight Commander is already\n"
+			"running on this terminal.\n"
+			"Subshell support will be disabled."), D_ERROR, 2,
+		      _("&OK"), _("&Quit"));
+    if (r != 0) {
+	return 2;
+    }
+
+    return 1;
+}
+#endif				/* HAVE_GETSID */
+
+
 /* {{{ init_subshell */
 
 /*
@@ -337,6 +396,15 @@ void init_subshell (void)
     static char pty_name[BUF_SMALL];
     int pty_slave = -1;
 
+    switch (check_sid ()) {
+    case 1:
+	use_subshell = FALSE;
+	return;
+    case 2:
+	use_subshell = FALSE;
+	midnight_shutdown = 1;
+	return;
+    }
     
 #ifdef SYNC_PTY_SIDES
 	/* Used to wait for a SIGUSR1 signal from the subprocess */

@@ -1,3 +1,11 @@
+2003-03-05  Pavel Roskin  <proski@gnu.org>
+
+	* subshell.c (init_subshell_child): Set environment variable
+	MC_SID to the session number of the subshell.
+	(check_sid): Check that we are not running mc already in the
+	same session.
+	* main.c (main): Don't run do_nc() if shutdown was requested.
+
 2003-03-05  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* cons.handler.c (set_attr) [__FreeBSD__]: Eliminate cmd array.
