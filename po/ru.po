@@ -1,5 +1,5 @@
 # Russian translation of Midnight Commander
-# Copyright (C) 1998-2001 Free Software Foundation, Inc.
+# Copyright (C) 1998-2002 Free Software Foundation, Inc.
 # 
 # Current translator Andrew V. Samoilov <kai@cmail.ru>, 2000, 2001,
 # 	Pavel Roskin <proski@gnu.org>, 2001
@@ -12,7 +12,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.5.99a\n"
+"Project-Id-Version: mc 4.6.0\n"
 "POT-Creation-Date: 2002-08-21 11:11-0400\n"
 "PO-Revision-Date: 2000-08-21 12:24+00:00\n"
 "Last-Translator: Andrew V. Samoilov <kai@cmail.ru>\n"
@@ -3080,7 +3080,7 @@ msgstr "Файл &меню"
 
 #: src/main.c:1069
 msgid "Menu edi&Tor edit"
-msgstr "Правка меню редактора"
+msgstr "Правка меню р&едактора"
 
 #: src/main.c:1070
 msgid "&Syntax file edit"
