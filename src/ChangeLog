@@ -1,3 +1,14 @@
+2000-11-20  Andrew V. Samoilov <sav@bcs.zp.ua>
+
+	* view.c: Fixed long existed bugs in internal viewer. When search is
+	doing in binary file it ignore skipped zero(es), so cursor is before
+	searched expression and next search find the same string. Also regexp
+	search could return wrong results for '^ ?' expressions.
+	
+	(get_line_at): skipped: new parameter for number of skipped zero(es)
+	
+	(search): new features of get_line_at used.
+
 2000-11-16  Andrew V. Samoilov <sav@bcs.zp.ua>
 
 	* cons.saver.c (check_file): close fd on error. There was a bug, which 
