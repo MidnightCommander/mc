@@ -51,13 +51,6 @@
 #ifdef HAVE_GRP_H
 #    include <grp.h>
 #endif
-#ifdef HAVE_SHADOW_H
-#    include <shadow.h>
-#else
-#    ifdef HAVE_SHADOW_SHADOW_H
-#        include <shadow/shadow.h>
-#    endif
-#endif
 #ifdef HAVE_CRYPT_H
 #    include <crypt.h>
 #endif
@@ -820,32 +813,18 @@ static int do_ftp_auth (char *username, char *password)
     return 0;
 }
 
+#ifdef NEED_CRYPT_PROTOTYPE
+extern char *crypt (const char *, const char *);
+#endif
+
 static int do_classic_auth (char *username, char *password)
 {
     struct passwd *this;
     int ret;
-#ifdef LINUX_SHADOW
-    struct spwd *spw;
-    extern char *pw_encrypt (char *, char *);
-#else
-#ifdef NEED_CRYPT_PROTOTYPE
-    extern char *crypt (const char *, const char *);
-#endif
-#endif
     
     if ((this = getpwnam (username)) == 0)
 	return 0;
 
-#ifdef LINUX_SHADOW
-    if ((spw = getspnam (username)) == NULL)
-        this->pw_passwd = "*";
-    else
-        this->pw_passwd = spw->sp_pwdp;
-    if (strcmp (pw_encrypt (password, this->pw_passwd), this->pw_passwd) == 0)
-        ret = 1;
-    else
-        ret = 0;
-#else	
 #ifdef HAVE_CRYPT    
     if (strcmp (crypt (password, this->pw_passwd), this->pw_passwd) == 0){
 	ret = 1;
@@ -854,7 +833,6 @@ static int do_classic_auth (char *username, char *password)
     {
 	ret = 0;
     }
-#endif
     endpwent ();
     return ret;
 }
