@@ -1,3 +1,8 @@
+2000-01-04  Kjartan Maraas  <kmaraas@online.no>
+
+	* update.sh: A little script that lets people
+	update the .pot file without makefiles etc.
+
 2000-01-03  Fatih Demir <kabalak@gmx.net>
 
 	* tr.po: Added a first-translation try ...
