@@ -1,3 +1,10 @@
+1998-05-16  Jaka Mocnik <jaka.mocnik@kiss.uni-lj.si>
+
+	* gscreen.c (create_popup_submenu): fixed bug which caused it to require
+	0 instead of 1 marked files for F_SINGLE file_actions.
+	* gscreen.c (file_popup): first item in the menu displays "..." when
+	multiple files are selected.
+
 Thu May 14 23:31:15 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gmain.c (session_save_state): Use "+" instead of "%s" in format

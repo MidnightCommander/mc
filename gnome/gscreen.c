@@ -553,9 +553,9 @@ create_popup_submenu (WPanel *panel, int row, char *filename)
 		/* Items with F_ALL bypass any other condition */
 		if (!(file_actions [i].flags & F_ALL)){
 
-			/* Items with F_SINGLE require that no marked files exist */
+			/* Items with F_SINGLE require that ONLY ONE marked files exist */
 			if (file_actions [i].flags & F_SINGLE){
-				if (panel->marked)
+				if (panel->marked > 1)
 					continue;
 			}
 
@@ -677,7 +677,7 @@ file_popup (GdkEvent *event, WPanel *panel, int row, char *filename)
 	GtkWidget *submenu;
 	GtkWidget *item;
 	
-	item = gtk_menu_item_new_with_label (filename);
+	item = gtk_menu_item_new_with_label ( (panel->marked > 1)?"...":filename );
 	gtk_widget_show (item);
 	gtk_menu_append (GTK_MENU (menu), item);
 
