@@ -1,5 +1,11 @@
 2002-07-14  Pavel Roskin  <proski@gnu.org>
 
+	* edit.h (struct key_word): Remove unused "bg" field, rename
+	"fg" to	"color", since it keeps all color information.
+	* syntax.c (edit_get_syntax_color): Replace "fg" and "bg"
+	arguments with a single argument "color".
+	Adjust all dependencies.
+
 	* editdraw.c (edit_draw_this_line): Fix setting MOD_ABNORMAL
 	attribute.
 	(print_to_widget): Fix displaying non-printable characters with

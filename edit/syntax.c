@@ -45,11 +45,6 @@
 int option_syntax_highlighting = 1;
 int option_auto_spellcheck = 1;
 
-/* these three functions are called from the outside */
-void edit_load_syntax (WEdit * edit, char **names, char *type);
-void edit_free_syntax_rules (WEdit * edit);
-void edit_get_syntax_color (WEdit * edit, long byte_index, int *fg, int *bg);
-
 #ifdef HAVE_MAD
 static void *mad_syntax_malloc (size_t x, char *file, int line)
 #define syntax_malloc(x) mad_syntax_malloc (x, __FILE__, __LINE__)
@@ -363,23 +358,22 @@ static struct syntax_rule edit_get_rule (WEdit * edit, long byte_index)
     return edit->rule;
 }
 
-static void translate_rule_to_color (WEdit * edit, struct syntax_rule rule, int *fg, int *bg)
+static void translate_rule_to_color (WEdit * edit, struct syntax_rule rule, int *color)
 {
     struct key_word *k;
     k = edit->rules[rule.context]->keyword[rule.keyword];
-    *bg = k->bg;
-    *fg = k->fg;
+    *color = k->color;
 }
 
 extern int use_colors;
 
-void edit_get_syntax_color (WEdit * edit, long byte_index, int *fg, int *bg)
+void edit_get_syntax_color (WEdit * edit, long byte_index, int *color)
 {
     if (edit->rules && byte_index < edit->last_byte && 
                          option_syntax_highlighting && use_colors) {
-	translate_rule_to_color (edit, edit_get_rule (edit, byte_index), fg, bg);
+	translate_rule_to_color (edit, edit_get_rule (edit, byte_index), color);
     } else {
-	*fg = EDITOR_NORMAL_COLOR;
+	*color = EDITOR_NORMAL_COLOR;
     }
 }
 
@@ -712,7 +706,7 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 		a++;
 	    strcpy (last_fg, fg ? fg : "");
 	    strcpy (last_bg, bg ? bg : "");
-	    c->keyword[0]->fg = this_try_alloc_color_pair (fg, bg);
+	    c->keyword[0]->color = this_try_alloc_color_pair (fg, bg);
 	    c->keyword[0]->keyword = (char *) strdup (" ");
 	    check_not_a;
 	    num_contexts++;
@@ -760,7 +754,7 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 		fg = last_fg;
 	    if (!bg)
 		bg = last_bg;
-	    k->fg = this_try_alloc_color_pair (fg, bg);
+	    k->color = this_try_alloc_color_pair (fg, bg);
 	    check_not_a;
 	    num_words++;
 	} else if (!strncmp (args[0], "#", 1)) {
@@ -1021,9 +1015,9 @@ void edit_free_syntax_rules (WEdit * edit)
     return;
 }
 
-void edit_get_syntax_color (WEdit * edit, long byte_index, int *fg, int *bg)
+void edit_get_syntax_color (WEdit * edit, long byte_index, int *color)
 {
-    *fg = EDITOR_NORMAL_COLOR;
+    *color = EDITOR_NORMAL_COLOR;
 }
 
 int edit_check_spelling (WEdit * edit)

@@ -565,8 +565,8 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
     edit->modified = 0;
     edit_load_syntax (edit, 0, 0);
     {
-	int fg, bg;
-	edit_get_syntax_color (edit, -1, &fg, &bg);
+	int color;
+	edit_get_syntax_color (edit, -1, &color);
     }
     return edit;
 }

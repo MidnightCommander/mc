@@ -243,7 +243,7 @@ static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col,
     long m1 = 0, m2 = 0, q, c1, c2;
     int col, start_col_real;
     unsigned int c;
-    int fg, bg;
+    int color;
     int i, book_mark = -1;
 
 #if 0
@@ -251,7 +251,7 @@ static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col,
 	book_mark = -1;
 #endif
 
-    edit_get_syntax_color (edit, b - 1, &fg, &bg);
+    edit_get_syntax_color (edit, b - 1, &color);
     q = edit_move_forward3 (edit, b, start_col - edit->start_col, 0);
     start_col_real = (col = (int) edit_move_forward3 (edit, b, 0, q)) + edit->start_col;
     c1 = min (edit->column1, edit->column2);
@@ -281,8 +281,8 @@ static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col,
 		c = edit_get_byte (edit, q);
 /* we don't use bg for mc - fg contains both */
 		if (book_mark == -1) {
-		    edit_get_syntax_color (edit, q, &fg, &bg);
-		    *p |= fg << 16;
+		    edit_get_syntax_color (edit, q, &color);
+		    *p |= color << 16;
 		} else {
 		    *p |= book_mark << 16;
 		}

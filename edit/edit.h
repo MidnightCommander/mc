@@ -168,8 +168,7 @@ struct key_word {
 #define NO_COLOR 0x7FFFFFFF
 #define SPELLING_ERROR 0x7EFEFEFE
     int line_start;
-    int bg;
-    int fg;
+    int color;
 };
 
 struct context_rule {
@@ -310,7 +309,7 @@ void edit_split_filename (WEdit * edit, const char *name);
 void edit_set_syntax_change_callback (void (*callback) (CWidget *));
 void edit_load_syntax (WEdit * edit, char **names, char *type);
 void edit_free_syntax_rules (WEdit * edit);
-void edit_get_syntax_color (WEdit * edit, long byte_index, int *fg, int *bg);
+void edit_get_syntax_color (WEdit * edit, long byte_index, int *color);
 int edit_check_spelling (WEdit * edit);
 
 

@@ -155,8 +155,8 @@ void edit_refresh_cmd (WEdit * edit)
     do_refresh();
 #else
     {
-	int fg, bg;
-	edit_get_syntax_color (edit, -1, &fg, &bg);
+	int color;
+	edit_get_syntax_color (edit, -1, &color);
     }
     touchwin(stdscr);
 #endif /* !HAVE_SLANG */
