@@ -1,3 +1,8 @@
+2003-10-25  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
+
+	* hotlist.c (remove_from_hotlist): Fix improper check of the
+	return value - group could be deleted after pressing ESC.
+
 2003-10-25  Pavel Roskin  <proski@gnu.org>
 
 	* background.c (background_attention): Unregister task before

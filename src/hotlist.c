@@ -1048,7 +1048,7 @@ static void remove_from_hotlist (struct hotlist *entry)
 				   _("&No"), _("&Yes"));
 	    g_free (header);
 
-	    if (!result)
+	    if (result != 1)
 		return;
 	}
 
