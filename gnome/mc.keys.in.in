@@ -184,6 +184,15 @@ image/x-xpixmap:
 image/x-xwindowdump:
 	icon-filename=@icondir@/gnome-image-xwd.png
 	
+video/mpeg:
+	icon-filename=@icondir@/gnome-video-mpeg.png
+
+video/quicktime:
+	icon-filename=@icondir@/gnome-video-quicktime.png
+
+video/x-ms-video:
+	icon-filename=@icondir@/gnome-video-x-msvideo.png
+
 image/*:
 	icon-filename=@icondir@/gnome-image-generic.png
 
