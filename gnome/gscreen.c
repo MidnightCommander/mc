@@ -1363,8 +1363,7 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 	switch (event->type){
 	case GDK_BUTTON_PRESS:
 		if (event->button.button == 3)
-			gpopup_do_popup ((GdkEventButton *) event, panel, NULL, index,
-					 panel->dir.list[index].fname);
+			gpopup_do_popup2 ((GdkEventButton *) event, panel, NULL, TRUE);
 		break;
 
 	case GDK_BUTTON_RELEASE:
@@ -1430,9 +1429,10 @@ panel_icon_list_button_press (GtkWidget *widget, GdkEventButton *event, WPanel *
 
 	icon = gnome_icon_list_get_icon_at (gil, event->x, event->y);
 
-	if (icon == -1)
-		panel->maybe_start_drag = 0;
-	else {
+	if (icon == -1) {
+		if (event->button == 3)
+			gpopup_do_popup2 ((GdkEventButton *) event, panel, NULL, FALSE);
+	} else {
 		if (event->button != 3)
 			panel->maybe_start_drag = event->button;
 	}
