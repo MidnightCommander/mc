@@ -843,7 +843,7 @@ do_ftp_auth (char *username, char *password)
     local_address.sin_port = htons (21);
 
     /*  Convert localhost to usable format */
-    if ((inaddr = inet_addr ("127.0.0.1")) != -1)
+    if ((inaddr = inet_addr ("127.0.0.1")) != INADDR_NONE)
 	memcpy ((char *) &local_address.sin_addr, (char *) &inaddr,
 		sizeof (inaddr));
 
