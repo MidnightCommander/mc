@@ -99,7 +99,7 @@ endif
 
 mcserv_SOURCES = mcserv.c mcfsutil.c
 
-mcserv_LDADD = $(PAMLIBS) $(LCRYPT)
+mcserv_LDADD = $(MCSERVLIBS)
 
 SAMBA_DIST =			\
 	Makefile.in		\
