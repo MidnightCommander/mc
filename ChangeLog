@@ -1,3 +1,8 @@
+2001-08-16  Abel Cheung  <maddog@linux.org.hk>
+
+	* lib/mc.hint.zh_TW.Big5 -> lib/mc.hint.zh: Temporary measure.
+	* lib/Makefile.am: Reflect above change.
+
 2001-08-15  Pavel Roskin  <proski@gnu.org>
 
 	* doc/mc.1.in (Terminal databases): Recommend using \e, not \E.
