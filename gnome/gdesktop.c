@@ -34,6 +34,7 @@
 #include "dialog.h"
 #define DIR_H_INCLUDE_HANDLE_DIRENT /* bleah */
 #include "dir.h"
+#include "file.h"
 #include "gdesktop.h"
 #include "gdesktop-icon.h"
 #include "gicon.h"
@@ -129,7 +130,6 @@ static int click_dragging;
 
 
 static struct desktop_icon_info *desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos);
-static void desktop_icon_info_free (struct desktop_icon_info *dii);
 
 
 /* Looks for a free slot in the layout_slots array and returns the coordinates that coorespond to
@@ -291,8 +291,40 @@ icon_exists (char *filename)
 	return FALSE;
 }
 
+static GList *
+icon_exists_in_list (GList *list, char *filename)
+{
+	GList *l;
+
+	for (l = list; l; l = l->next){
+		struct desktop_icon_info *dii = l->data;
+
+		if (strcmp (filename, dii->filename) == 0)
+			return l;
+	}
+	return NULL;
+}
+
 /*
- * Reads the ~/Desktop directory and creates the desktop icons.  If
+ * Returns a GList with all of the icons on the desktop
+ */
+GList *
+desktop_get_all_icons (void)
+{
+	GList *l, *res;
+	int i;
+
+	res = NULL;
+	for (i = 0; i < (layout_cols * layout_rows); i++)
+		for (l = layout_slots [i].icons; l; l = l->next){
+			res = g_list_prepend (res, l->data);
+		}
+
+	return res;
+}
+
+/*
+ * Reads the ~/desktop directory and creates the desktop icons.  If
  * incremental is TRUE, then an icon will not be created for a file if
  * there is already an icon for it, and icons will be created starting
  * at the specified position.
@@ -306,6 +338,7 @@ load_desktop_icons (int incremental, int xpos, int ypos)
 	int have_pos, x, y;
 	struct desktop_icon_info *dii;
 	GSList *need_position_list, *l;
+	GList *all_icons;
 
 	dir = mc_opendir (desktop_directory);
 	if (!dir) {
@@ -316,20 +349,33 @@ load_desktop_icons (int incremental, int xpos, int ypos)
 		return;
 	}
 
-	/* First create the icons for all the files that do have their icon position set.  Build a
-	 * list of the icons that do not have their position set.
+	/*
+	 * First create the icons for all the files that do have their
+	 * icon position set.  Build a list of the icons that do not
+	 * have their position set.
 	 */
 
 	need_position_list = NULL;
 
+	all_icons = desktop_get_all_icons ();
+	
 	while ((dirent = mc_readdir (dir)) != NULL) {
 		if (((dirent->d_name[0] == '.') && (dirent->d_name[1] == 0))
 		    || ((dirent->d_name[0] == '.') && (dirent->d_name[1] == '.') && (dirent->d_name[2] == 0)))
 			continue;
 
-		if (incremental && icon_exists (dirent->d_name))
-			continue;
+		if (incremental){
+			GList *element;
 
+			element = icon_exists_in_list (all_icons, dirent->d_name);
+			
+			if (element){
+				g_list_remove_link (all_icons, element);
+				continue;
+			}
+
+		}
+		
 		full_name = g_concat_dir_and_file (desktop_directory, dirent->d_name);
 
 		have_pos = gmeta_get_icon_pos (full_name, &x, &y);
@@ -345,7 +391,23 @@ load_desktop_icons (int incremental, int xpos, int ypos)
 
 	mc_closedir (dir);
 
-	/* Now create the icons for all the files that did not have their position set.  This makes
+	/*
+	 * all_icons now contains a list of all of the icons that were not found
+	 * in the ~/desktop directory, remove them.
+	 */
+	if (incremental){
+		GList *l;
+		
+		for (l = all_icons; l; l = l->next){
+			struct desktop_icon_info *dii = l->data;
+
+			desktop_icon_destroy (dii);
+		}
+	}
+	g_list_free (all_icons);
+
+	/*
+	 * Now create the icons for all the files that did not have their position set.  This makes
 	 * auto-placement work correctly without overlapping icons.
 	 */
 
@@ -375,7 +437,7 @@ destroy_desktop_icons (void)
 			dii = l->data;
 			l = l->next;
 
-			desktop_icon_info_free (dii);
+			desktop_icon_destroy (dii);
 		}
 	}
 }
@@ -392,6 +454,7 @@ reload_desktop_icons (int incremental, int x, int y)
 		destroy_desktop_icons ();
 
 	load_desktop_icons (incremental, x, y);
+	x_flush_events ();
 }
 
 /* Unselects all the desktop icons except the one in exclude */
@@ -657,8 +720,8 @@ editing_stopped (GnomeIconTextItem *iti, gpointer data)
 }
 
 /* Used to open a desktop icon when the user double-clicks on it */
-static void
-open_desktop_icon (struct desktop_icon_info *dii)
+void
+desktop_icon_open (struct desktop_icon_info *dii)
 {
 	char *filename;
 	file_entry *fe;
@@ -675,6 +738,31 @@ open_desktop_icon (struct desktop_icon_info *dii)
 	file_entry_free (fe);
 }
 
+void
+desktop_icon_delete (struct desktop_icon_info *dii)
+{
+	char *full_name;
+	struct stat s;
+	long progress_count = 0;
+	double progress_bytes = 0;
+
+	/* 1. Delete the file */
+	create_op_win (OP_DELETE, 1);
+	x_flush_events ();
+	
+	full_name = g_concat_dir_and_file (desktop_directory, dii->filename);
+	stat (full_name, &s);
+	if (S_ISDIR (s.st_mode))
+		erase_dir (full_name, &progress_count, &progress_bytes);
+	else
+		erase_file (full_name, &progress_count, &progress_bytes, TRUE);
+	g_free (full_name);
+	destroy_op_win ();
+
+	/* 2. Destroy the dicon */
+	desktop_icon_destroy (dii);
+}
+
 /* Used to execute the popup menu for desktop icons */
 static void
 do_popup_menu (struct desktop_icon_info *dii, GdkEventButton *event)
@@ -684,7 +772,7 @@ do_popup_menu (struct desktop_icon_info *dii, GdkEventButton *event)
 	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
 
 	if (gpopup_do_popup (event, NULL, dii, 0, filename) != -1)
-		reload_desktop_icons (FALSE, 0, 0); /* bleah */
+		reload_desktop_icons (TRUE, 0, 0); /* bleah */
 
 	g_free (filename);
 }
@@ -770,7 +858,7 @@ icon_button_press (GtkWidget *widget, GdkEventButton *event, gpointer data)
 		if (event->button != 1)
 			break;
 
-		open_desktop_icon (dii);
+		desktop_icon_open (dii);
 		retval = TRUE;
 		break;
 
@@ -1152,8 +1240,8 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
  * Frees a desktop icon information structure, and destroy the icon
  * widget.  Does not remove the structure from the desktop_icons list!
  */
-static void
-desktop_icon_info_free (struct desktop_icon_info *dii)
+void
+desktop_icon_destroy (struct desktop_icon_info *dii)
 {
 	gtk_widget_destroy (dii->dicon);
 	remove_from_slot (dii);
@@ -1220,7 +1308,7 @@ create_desktop_dir (void)
 		g_free (home_link_name);
 	}
 
-	setup_trashcan (desktop_directory);
+/*	setup_trashcan (desktop_directory); */
 }
 
 /* Sets up a proxy window for DnD on the specified X window.  Courtesy of Owen Taylor */

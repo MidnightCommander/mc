@@ -124,6 +124,7 @@ typedef struct {
     void *list;
     void *tree;
     void *icons;
+    void *notebook;
     void *scrollbar;
     void *status;
     void *ministatus;

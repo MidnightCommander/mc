@@ -2684,6 +2684,9 @@ handle_args (int argc, char *argv [])
     corba_register_server ();
 #else
     gnome_init_with_popt_table ("gmc", VERSION, argc, argv, argument_table, 0, &ctx);
+    gtk_widget_push_visual (gdk_imlib_get_visual ());
+    gtk_widget_push_colormap (gdk_imlib_get_colormap ());
+	
 #endif
     poptResetContext (ctx);
 #else
@@ -2818,6 +2821,13 @@ int main (int argc, char *argv [])
     bindtextdomain ("mc", LOCALEDIR);
     textdomain ("mc");
 
+    {
+	    volatile  int i = 1;
+
+	    while (!i)
+		    ;
+
+    }
     /* Initialize list of all user group for timur_clr_mode */
     init_groups ();
     

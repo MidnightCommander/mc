@@ -904,7 +904,7 @@ panel_widget_motion (GtkWidget *widget, GdkEventMotion *event, WPanel *panel)
 
 	list = gtk_target_list_new (drag_types, ELEMENTS (drag_types));
 
-	if (panel->maybe_start_drag == 3)
+	if (panel->maybe_start_drag == 2)
 		action = GDK_ACTION_ASK;
 	else
 		action = GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK;
@@ -1126,16 +1126,12 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 				new_panel_at (fullname);
 				free (fullname);
 			}
-		}
+			break;
+		} 
+		if (event->button.button == 3)
+			gpopup_do_popup ((GdkEventButton *) event, panel, NULL, index, panel->dir.list[index].fname);
 		break;
 
-	case GDK_BUTTON_RELEASE:
-		if (event->button.button != 3)
-			return;
-		
-		gpopup_do_popup ((GdkEventButton *) event, panel, NULL, index, panel->dir.list[index].fname);
-		return;
-		
 	case GDK_2BUTTON_PRESS:
 		if (event->button.button == 1)
 			do_enter (panel);
@@ -1200,8 +1196,10 @@ panel_icon_list_button_press (GtkWidget *widget, GdkEventButton *event, WPanel *
 
 	if (icon == -1)
 		panel->maybe_start_drag = 0;
-	else
-		panel->maybe_start_drag = event->button;
+	else {
+		if (event->button != 3)
+			panel->maybe_start_drag = event->button;
+	}
 
 	panel->click_x = event->x;
 	panel->click_y = event->y;

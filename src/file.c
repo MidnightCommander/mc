@@ -232,8 +232,6 @@ char *op_names [3] = {
 };
 
 static int recursive_erase (char *s, long *progress_count, double *progress_bytes);
-static int erase_file (char *s, long *progress_count, 
-                       double *progress_bytes, int is_toplevel_file);
 
 /* }}} */
 
@@ -1357,7 +1355,7 @@ oktoret:
 
 /* {{{ Erase routines */
 /* Don't update progress status if progress_count==NULL */
-static int
+int
 erase_file (char *s, 
             long *progress_count, 
             double *progress_bytes, 

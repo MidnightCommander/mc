@@ -32,6 +32,7 @@ void desktop_init (void);
 /* Shuts the desktop down by destroying the desktop icons. */
 void desktop_destroy (void);
 
+
 /* This structure defines the information carried by a desktop icon */
 typedef struct desktop_icon_info {
 	GtkWidget *dicon;		/* The desktop icon widget */
@@ -45,19 +46,16 @@ typedef struct desktop_icon_info {
 					 */
 } desktop_icon_info;
 
-
-
-
-
-
-
-
+void desktop_icon_destroy   (struct desktop_icon_info *dii);
+void desktop_icon_open      (struct desktop_icon_info *dii);
+void desktop_icon_delete    (struct desktop_icon_info *dii);
 
 typedef enum {
 	application,
 	directory,
 	file
 } icon_t;
+
 /* A structure that describes each icon on the desktop */
 typedef struct {
 	GnomeDesktopEntry *dentry;

@@ -1,5 +1,26 @@
 1998-12-29  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gdesktop.c (desktop_icon_delete): New function, used for
+	dicon_delete. 
+	(load_desktop_icons): Implemented the incremental reloading of
+	desktop icons.  This should make the code much nicer.
+	(reload_desktop_icons): Call x_flush_events to force a display at
+	that point.
+
+	* gpopup.c (dicon_delete): Implement this operation.
+	(desktop_icon_execute): Use the existing implementation for
+	launching desktop icons instead of a new hacked up version 
+
+	(desktop_icon_actions): Until copy/move is implemented, do not
+	even list them to the user.
+
+	* gdesktop.c (create_desktop_dir): No trashcan setup until it
+	works. 
+
+	* gscren.c (panel_widget_motion): Use button 2 for dragging and
+	asking. 
+	
+
 	* gscreen.c (panel_create_file_list): Use a notebook instead of
 	the hack I was using before for switching the panel contents.
 

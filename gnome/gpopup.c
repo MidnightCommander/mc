@@ -18,7 +18,6 @@
 #include "gpopup.h"
 #include "main.h"
 
-
 #define CLIST_FROM_SW(panel_list) GTK_CLIST (GTK_BIN (panel_list)->child)
 
 
@@ -82,39 +81,27 @@ panel_action_edit (GtkWidget *widget, WPanel *panel)
 static void
 desktop_icon_view(GtkWidget *widget, desktop_icon_info *dii)
 {
-  g_warning("NYI");
+	g_warning ("Not yet implemented\n");
 }
 
 /* Pops up the icon properties pages */
 void
 desktop_icon_properties (GtkWidget *widget, desktop_icon_info *dii)
 {
-  int retval;
-  char *path;
-
-  path = g_copy_strings(getenv("HOME"), "/desktop/", dii->filename, NULL);
-  retval = item_properties (dii->dicon, path, dii);
-  g_free(path);
-  if(retval)
-    reread_cmd(); /* Lame. Slow. Works. */
+	int retval;
+	char *path;
+	
+	path = g_copy_strings (getenv("HOME"), "/desktop/", dii->filename, NULL);
+	retval = item_properties (dii->dicon, path, dii);
+	g_free(path);
+	if (retval)
+		reread_cmd ();
 }
 
 void
 desktop_icon_execute (GtkWidget *ignored, desktop_icon_info *dii)
 {
-  char *path;
-  /* Ultra lame-o execute.  This should be replaced by the fixed regexp_command
-   * invocation 
-   */
-  
-  path = g_copy_strings(getenv("HOME"), "/desktop/", dii->filename, NULL);
-
-  if (g_file_test(path, G_FILE_TEST_ISDIR))
-    new_panel_at (path);
-  else 
-    gnome_desktop_entry_launch (path);
-
-  g_free(path);
+	desktop_icon_open (dii);
 }
 
 static void
@@ -144,7 +131,7 @@ dicon_copy (GtkWidget *widget, desktop_icon_info *dii)
 static void
 dicon_delete (GtkWidget *widget, desktop_icon_info *dii)
 {
-	g_warning ("Implement this function!");
+	desktop_icon_delete (dii);
 }
 
 /* This is our custom signal connection function for popup menu items -- see below for the
@@ -243,8 +230,10 @@ static GnomeUIInfo panel_actions[] = {
 /* Menu entries for files from desktop icons */
 static GnomeUIInfo desktop_icon_actions[] = {
 	GNOMEUIINFO_SEPARATOR,
+#if 0
 	GNOMEUIINFO_ITEM_NONE (N_("Move/rename..."), NULL, dicon_move),
 	GNOMEUIINFO_ITEM_NONE (N_("Copy..."), NULL, dicon_copy),
+#endif
 	GNOMEUIINFO_ITEM_NONE (N_("Delete"), NULL, dicon_delete),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_END
@@ -545,7 +534,7 @@ gpopup_do_popup (GdkEventButton *event,
 
 	/* Run it */
 
-	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3, event->time);
+	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, event->button, event->time);
 	gtk_grab_add (menu);
 	gtk_main ();
 	gtk_grab_remove (menu);

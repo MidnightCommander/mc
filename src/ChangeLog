@@ -1,3 +1,7 @@
+1998-12-29  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* cmd.c (check_for_default): Make this compile.
+
 Tue Dec 29 22:25:34 1998  Timur Bakeyev <mc@bat.ru>
 
 	* mountlist.c: Compress all xBSD systems to one line and add check

@@ -41,6 +41,7 @@ int copy_dir_dir        (char *s, char *d, int toplevel, int move_over,
 			 int delete, struct link *parent_dirs,
 			 long *progres_count, double *progress_bytes);
 int erase_dir           (char *s, long *progres_count, double *progress_bytes);
+int erase_file          (char *s, long *progress_count, double *progress_bytes, int is_toplevel_file);
 int erase_dir_iff_empty (char *s);
 
 /*
