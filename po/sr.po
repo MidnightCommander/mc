@@ -1,23 +1,24 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Serbian translation of GNU MC
+# Copyright (C) 2003 Free Software Foundation, Inc.
+# This file is distributed under the same license as the mc package.
+# Strahinya Radich (Страхиња Радић) <mr99164@alas.matf.bg.ac.yu>, 2003.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-09-11 17:05-0400\n"
-"PO-Revision-Date: 2003-09-11 20:41+0200\n"
-"Last-Translator: Страхиња Радић <mr99164@alas.matf.bg.ac.yu>\n"
-"Language-Team: српски <sr@li.org>\n"
+"POT-Creation-Date: 2003-09-22 16:46-0400\n"
+"PO-Revision-Date: 2003-09-20 18:50+0200\n"
+"Last-Translator: Strahinya Radich (Страхиња Радић) <mr99164@alas.matf.bg.ac."
+"yu>\n"
+"Language-Team: Serbian (српски) <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-5\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: edit/edit.c:150 edit/edit.c:281 edit/edit.c:289 edit/edit.c:337
 #: edit/edit.c:352 edit/edit.c:363 edit/edit.c:379 edit/edit.c:2705
-#: edit/editcmd.c:273 edit/editcmd.c:281 edit/editcmd.c:1709 src/wtools.c:133
+#: edit/editcmd.c:273 edit/editcmd.c:281 edit/editcmd.c:1709 src/wtools.c:135
 #: vfs/vfs.c:1840
 msgid "Error"
 msgstr "Грешка"
@@ -57,9 +58,9 @@ msgstr "&Отпусти"
 #: edit/edit.h:281 edit/editcmd.c:373 edit/editcmd.c:1218 edit/editcmd.c:1300
 #: edit/editcmd.c:2572 edit/editmenu.c:37 edit/editoptions.c:71
 #: src/boxes.c:138 src/boxes.c:275 src/boxes.c:371 src/boxes.c:463
-#: src/boxes.c:589 src/boxes.c:712 src/boxes.c:938 src/boxes.c:1006
-#: src/filegui.c:780 src/find.c:179 src/layout.c:349 src/option.c:114
-#: src/subshell.c:323 src/view.c:2134 src/wtools.c:381
+#: src/boxes.c:589 src/boxes.c:712 src/boxes.c:834 src/boxes.c:944
+#: src/boxes.c:1012 src/filegui.c:780 src/find.c:179 src/layout.c:349
+#: src/option.c:114 src/subshell.c:323 src/view.c:2134 src/wtools.c:387
 msgid "&OK"
 msgstr "&У реду"
 
@@ -90,12 +91,12 @@ msgstr "Прави резерву -->"
 #: edit/editcmd.c:371 edit/editcmd.c:1159 edit/editcmd.c:1216
 #: edit/editcmd.c:1298 edit/editcmd.c:2570 edit/editoptions.c:68
 #: src/achown.c:69 src/boxes.c:139 src/boxes.c:276 src/boxes.c:369
-#: src/boxes.c:461 src/boxes.c:587 src/boxes.c:710 src/boxes.c:1006
-#: src/chmod.c:97 src/chown.c:74 src/cmd.c:865 src/filegui.c:762
-#: src/find.c:179 src/hotlist.c:121 src/hotlist.c:522 src/hotlist.c:829
-#: src/hotlist.c:925 src/layout.c:350 src/learn.c:59 src/option.c:115
-#: src/panelize.c:69 src/view.c:464 src/view.c:2131 src/wtools.c:58
-#: src/wtools.c:379
+#: src/boxes.c:461 src/boxes.c:587 src/boxes.c:710 src/boxes.c:832
+#: src/boxes.c:1012 src/chmod.c:97 src/chown.c:74 src/cmd.c:865
+#: src/filegui.c:762 src/find.c:179 src/hotlist.c:121 src/hotlist.c:522
+#: src/hotlist.c:829 src/hotlist.c:925 src/layout.c:350 src/learn.c:59
+#: src/option.c:115 src/panelize.c:69 src/view.c:464 src/view.c:2131
+#: src/wtools.c:58 src/wtools.c:385
 msgid "&Cancel"
 msgstr "&Поништи"
 
@@ -113,7 +114,7 @@ msgstr " Сачувај као "
 
 #: edit/editcmd.c:473 edit/editcmd.c:794 edit/editcmd.c:831 edit/editcmd.c:990
 #: edit/editcmd.c:1103 src/file.c:612 src/help.c:319 src/main.c:434
-#: src/screen.c:1413 src/screen.c:1970 src/selcodepage.c:106
+#: src/screen.c:1415 src/screen.c:1972 src/selcodepage.c:106
 #: src/subshell.c:319 src/subshell.c:653 src/utilunix.c:398 src/utilunix.c:402
 #: src/utilunix.c:424 src/utilunix.c:476 vfs/mcfs.c:139
 msgid "Warning"
@@ -127,7 +128,7 @@ msgstr " Датотека под тим називом већ постоји. "
 msgid "Overwrite"
 msgstr "Препиши"
 
-#: edit/editcmd.c:475 edit/editcmd.c:557 edit/editcmd.c:759 edit/editcmd.c:794
+#: edit/editcmd.c:475 edit/editcmd.c:560 edit/editcmd.c:759 edit/editcmd.c:794
 #: edit/editcmd.c:834 edit/editcmd.c:993 edit/editcmd.c:1106
 msgid "Cancel"
 msgstr "Поништи"
@@ -170,13 +171,13 @@ msgstr " Учитавање макроа "
 
 #: edit/editcmd.c:757
 msgid " Confirm save file? : "
-msgstr " Потврда чувања датотека? : "
+msgstr " Потврда чувања датотеке? : "
 
 #: edit/editcmd.c:759 src/view.c:462
 msgid " Save file "
 msgstr " Чување датотеке "
 
-#: edit/editcmd.c:759 edit/editwidget.c:289 src/view.c:2247
+#: edit/editcmd.c:759 edit/editwidget.c:288 src/view.c:2247
 msgid "Save"
 msgstr "Сачувај"
 
@@ -270,7 +271,7 @@ msgid " Replace "
 msgstr " Замена "
 
 #: edit/editcmd.c:1328 edit/editcmd.c:2026 edit/editcmd.c:2028
-#: edit/editcmd.c:2056 edit/editwidget.c:294 src/view.c:1619 src/view.c:1698
+#: edit/editcmd.c:2056 edit/editwidget.c:293 src/view.c:1619 src/view.c:1698
 #: src/view.c:1851 src/view.c:1863 src/view.c:2087 src/view.c:2140
 #: src/view.c:2147 src/view.c:2257
 msgid "Search"
@@ -301,7 +302,7 @@ msgstr " Тражена ниска није нађена "
 msgid " %d finds made, %d bookmarks added "
 msgstr " Нађено %d, додано %d обележивача "
 
-#: edit/editcmd.c:2078 edit/editwidget.c:297 src/help.c:827 src/main.c:1233
+#: edit/editcmd.c:2078 edit/editwidget.c:296 src/help.c:827 src/main.c:1233
 #: src/view.c:479 src/view.c:2242 src/view.c:2267
 msgid "Quit"
 msgstr "Заврши"
@@ -315,13 +316,13 @@ msgid "Cancel quit"
 msgstr "Поништи завршетак"
 
 #: edit/editcmd.c:2079 src/cmd.c:199 src/file.c:1850 src/file.c:2223
-#: src/filegui.c:543 src/hotlist.c:1048 src/main.c:481 src/screen.c:1958
+#: src/filegui.c:543 src/hotlist.c:1048 src/main.c:481 src/screen.c:1960
 #: src/subshell.c:654 src/tree.c:764 src/view.c:481 vfs/mcfs.c:144
 msgid "&Yes"
 msgstr "&Да"
 
 #: edit/editcmd.c:2079 src/cmd.c:199 src/file.c:1850 src/file.c:2223
-#: src/filegui.c:542 src/hotlist.c:1048 src/main.c:481 src/screen.c:1959
+#: src/filegui.c:542 src/hotlist.c:1048 src/main.c:481 src/screen.c:1961
 #: src/subshell.c:654 src/tree.c:764 src/view.c:481 vfs/mcfs.c:144
 msgid "&No"
 msgstr "&Не"
@@ -444,7 +445,7 @@ msgstr " mail -s <тема> -c <копије> <коме>"
 
 #: edit/editkeys.c:180
 msgid " Emacs key: "
-msgstr " Тастер Емакса: "
+msgstr " Пречица Емакса: "
 
 #: edit/editkeys.c:194 edit/editkeys.c:225
 msgid " Execute Macro "
@@ -501,7 +502,7 @@ msgstr ""
 " Ауторска права (C) 1996 Задужбина за слободни софтвер\n"
 "\n"
 "     Пријатељски према кориснику уређивач текста написан\n"
-"                  за Поноћног Командира.\n"
+"                  за Поноћног командира.\n"
 
 #: edit/editmenu.c:283 edit/editmenu.c:301
 msgid "&Open file..."
@@ -597,7 +598,7 @@ msgstr "&Замени...                 F4"
 
 #: edit/editmenu.c:347 edit/editmenu.c:371
 msgid "&Go to line...            M-l"
-msgstr "&Иди на линију...               M-l"
+msgstr "&Иди на ред...               M-l"
 
 #: edit/editmenu.c:348 edit/editmenu.c:372
 msgid "Go to matching &bracket   M-b"
@@ -717,7 +718,7 @@ msgstr "Аутоматски прелом"
 
 #: edit/editoptions.c:75
 msgid "Word wrap line length: "
-msgstr "Прелом на дужини: "
+msgstr "Прелом реда на дужини: "
 
 #: edit/editoptions.c:81
 msgid "Tab spacing: "
@@ -753,44 +754,44 @@ msgstr "&Лажна полутабулација"
 
 #: edit/editoptions.c:112
 msgid "Wrap mode"
-msgstr "Прелом линија"
+msgstr "Прелом редова"
 
 #: edit/editoptions.c:119
 msgid "Key emulation"
-msgstr "Имитација тастера"
+msgstr "Имитација пречица"
 
 #: edit/editoptions.c:124
 msgid " Editor options "
 msgstr " Избори уређивача "
 
-#: edit/editwidget.c:288 src/help.c:794 src/help.c:815 src/main.c:1230
-#: src/screen.c:2185 src/tree.c:1030 src/view.c:2240
+#: edit/editwidget.c:287 src/help.c:794 src/help.c:815 src/main.c:1230
+#: src/screen.c:2187 src/tree.c:1030 src/view.c:2240
 msgid "Help"
 msgstr "Помоћ"
 
-#: edit/editwidget.c:290
+#: edit/editwidget.c:289
 msgid "Mark"
 msgstr "Означи"
 
-#: edit/editwidget.c:291
+#: edit/editwidget.c:290
 msgid "Replac"
 msgstr "Замени"
 
-#: edit/editwidget.c:292 src/file.c:816 src/screen.c:2189 src/tree.c:1035
+#: edit/editwidget.c:291 src/file.c:816 src/screen.c:2191 src/tree.c:1035
 msgid "Copy"
-msgstr "Копир."
+msgstr "Копирј"
 
-#: edit/editwidget.c:293
+#: edit/editwidget.c:292
 msgid "Move"
-msgstr "Прем."
+msgstr "Прмсти"
 
-#: edit/editwidget.c:295 src/screen.c:2192
+#: edit/editwidget.c:294 src/screen.c:2194
 msgid "Delete"
 msgstr "Обриши"
 
-#: edit/editwidget.c:296 src/main.c:1232
+#: edit/editwidget.c:295 src/main.c:1232
 msgid "PullDn"
-msgstr "Мени"
+msgstr "ПадМни"
 
 #: edit/syntax.c:1089 edit/syntax.c:1096
 msgid " Load syntax file "
@@ -836,7 +837,7 @@ msgstr "други"
 
 #: src/achown.c:351
 msgid "On"
-msgstr "На"
+msgstr "За"
 
 #: src/achown.c:353
 msgid "Flag"
@@ -855,8 +856,8 @@ msgstr "%6d од %d"
 msgid " Chown advanced command "
 msgstr " Напредна промена власника "
 
-#: src/achown.c:608 src/achown.c:624 src/achown.c:670 src/chmod.c:253
-#: src/chmod.c:323
+#: src/achown.c:608 src/achown.c:624 src/achown.c:670 src/chmod.c:250
+#: src/chmod.c:320
 #, c-format
 msgid ""
 " Cannot chmod \"%s\" \n"
@@ -929,7 +930,7 @@ msgstr "корисничко &Мини стање"
 
 #: src/boxes.c:277
 msgid "&Reverse"
-msgstr "&Изврни"
+msgstr "&Обрни"
 
 #: src/boxes.c:278
 msgid "case sensi&tive"
@@ -981,7 +982,7 @@ msgstr " Битова у приказу "
 
 #: src/boxes.c:555 src/boxes.c:580 src/selcodepage.c:71
 msgid "Other 8 bit"
-msgstr "Друго осмобитно"
+msgstr "Другa, осмобитнa"
 
 #: src/boxes.c:577
 msgid "Input / display codepage:"
@@ -1031,55 +1032,55 @@ msgstr "Брза пром.дир."
 msgid "cd"
 msgstr "пром.дир."
 
-#: src/boxes.c:839
-msgid "Symbolic link"
-msgstr "Симболичка веза"
-
-#: src/boxes.c:843
+#: src/boxes.c:836
 msgid "Symbolic link filename:"
 msgstr "Датотека симболичке везе:"
 
-#: src/boxes.c:845
+#: src/boxes.c:840
 msgid "Existing filename (filename symlink will point to):"
 msgstr "Постојећа датотека (на коју ће упућивати веза):"
 
-#: src/boxes.c:874
+#: src/boxes.c:847
+msgid "Symbolic link"
+msgstr "Симболичка веза"
+
+#: src/boxes.c:880
 msgid "Running "
 msgstr "Покренуто "
 
-#: src/boxes.c:875 src/find.c:734
+#: src/boxes.c:881 src/find.c:734
 msgid "Stopped"
 msgstr "Заустављено "
 
-#: src/boxes.c:935
+#: src/boxes.c:941
 msgid "&Stop"
 msgstr "&Заустави"
 
-#: src/boxes.c:936
+#: src/boxes.c:942
 msgid "&Resume"
 msgstr "&Настави"
 
-#: src/boxes.c:937
+#: src/boxes.c:943
 msgid "&Kill"
 msgstr "&Убиј"
 
-#: src/boxes.c:974
+#: src/boxes.c:980
 msgid "Background Jobs"
 msgstr "Позадински послови"
 
-#: src/boxes.c:1005
+#: src/boxes.c:1011
 msgid "Domain:"
 msgstr "Домен:"
 
-#: src/boxes.c:1005
+#: src/boxes.c:1011
 msgid "Username:"
 msgstr "Корисн. име:"
 
-#: src/boxes.c:1005 vfs/vfs.c:1875
+#: src/boxes.c:1011 vfs/vfs.c:1875
 msgid "Password:"
 msgstr "Лозинка:"
 
-#: src/boxes.c:1056
+#: src/boxes.c:1062
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "Лозинка за \\\\%s\\%s"
@@ -1154,7 +1155,7 @@ msgstr "П&остави означене"
 msgid "&Marked all"
 msgstr "&Све означене"
 
-#: src/chmod.c:125 src/screen.c:403
+#: src/chmod.c:125 src/screen.c:405
 msgid "Name"
 msgstr "Назив"
 
@@ -1190,7 +1191,7 @@ msgstr "а T или INS за означавање"
 msgid " Permission "
 msgstr " Дозвола "
 
-#: src/chmod.c:200
+#: src/chmod.c:197
 msgid "Chmod command"
 msgstr "Промена дозвола"
 
@@ -1238,7 +1239,7 @@ msgstr "<Непозната група>"
 msgid "Files tagged, want to cd?"
 msgstr "Датотеке означене, да пром.дир.?"
 
-#: src/cmd.c:204 src/cmd.c:674 src/cmd.c:736 src/main.c:706 src/screen.c:1931
+#: src/cmd.c:204 src/cmd.c:674 src/cmd.c:736 src/main.c:706 src/screen.c:1933
 msgid "Cannot change directory"
 msgstr "Не могу да променим директоријум"
 
@@ -1328,7 +1329,7 @@ msgstr " Коју синтаксну датотеку желите да уредите?"
 
 #: src/cmd.c:863
 msgid " Compare directories "
-msgstr " Пореди директоријуме "
+msgstr " Упореди директоријуме "
 
 #: src/cmd.c:864
 msgid " Select compare method: "
@@ -1432,7 +1433,7 @@ msgstr " Повезивање љуске са машином "
 
 #: src/cmd.c:1192 src/widget.c:1053
 msgid " SMB link to machine "
-msgstr " Веза SMB са машином "
+msgstr " Веза SMB-ом са машином "
 
 #: src/cmd.c:1203
 msgid " Socket source routing setup "
@@ -1464,13 +1465,13 @@ msgstr ""
 
 #: src/cmd.c:1274
 msgid " Setup saved to ~/"
-msgstr " Подешавања сачувана у ~/"
+msgstr " Подешавања су сачувана у ~/"
 
 #: src/cmd.c:1276
 msgid " Setup "
 msgstr " Подешавања "
 
-#: src/command.c:168 src/screen.c:2175 src/tree.c:883
+#: src/command.c:168 src/screen.c:2177 src/tree.c:883
 #, c-format
 msgid ""
 " Cannot chdir to \"%s\" \n"
@@ -1533,7 +1534,7 @@ msgstr "&Величина"
 
 #: src/dir.c:57
 msgid "&Inode"
-msgstr "&Инод"
+msgstr "&Ичвор"
 
 #: src/dir.c:60
 msgid "&Type"
@@ -1569,7 +1570,7 @@ msgstr "Притисните било који тастер за наставак..."
 
 #: src/execute.c:234
 msgid "Type `exit' to return to the Midnight Commander"
-msgstr "Унесите `exit' да бисте се вратили у Поноћног Командира"
+msgstr "Унесите `exit' да бисте се вратили у Поноћног командира"
 
 #: src/execute.c:342
 #, c-format
@@ -1607,7 +1608,7 @@ msgstr ""
 "Датотека mc.ext је измењена у верзији 3.0.\n"
 "Изгледа да инсталација није успела.\n"
 "Молим да преузмете свеж примерак из\n"
-"пакета Поноћног Командира."
+"пакета Поноћног командира."
 
 #: src/ext.c:545
 msgid ""
@@ -2183,7 +2184,7 @@ msgstr "&Настави"
 
 #: src/find.c:104
 msgid "&Chdir"
-msgstr "&Chdir"
+msgstr "&Пром.дир."
 
 #: src/find.c:105
 msgid "&Again"
@@ -2215,7 +2216,7 @@ msgstr "Датотека:"
 
 #: src/find.c:178
 msgid "Content: "
-msgstr "Саджај: "
+msgstr "Садржај: "
 
 #: src/find.c:179 src/main.c:820 src/main.c:844
 msgid "&Tree"
@@ -2407,7 +2408,7 @@ msgstr "Датотека:        %s"
 #: src/info.c:103
 #, c-format
 msgid "Free nodes: %d (%d%%) of %d"
-msgstr "Слободно чворова: %d (%d%%) од %d"
+msgstr "Слоб. чворова:   %d (%d%%) од %d"
 
 #: src/info.c:109
 msgid "No node information"
@@ -2416,7 +2417,7 @@ msgstr "Нема података о чворовима"
 #: src/info.c:117
 #, c-format
 msgid "Free space: %s (%d%%) of %s"
-msgstr "Слободно простора: %s (%d%%) од %s"
+msgstr "Слоб. простора:  %s (%d%%) од %s"
 
 #: src/info.c:121
 msgid "No space information"
@@ -2439,7 +2440,7 @@ msgstr "Уређај:          %s"
 #: src/info.c:135
 #, c-format
 msgid "Filesystem: %s"
-msgstr "Систем датотека: %s"
+msgstr "Систем датот.:   %s"
 
 #: src/info.c:140
 #, c-format
@@ -2474,7 +2475,7 @@ msgstr " (%d блокова)"
 #: src/info.c:172
 #, c-format
 msgid "Owner:     %s/%s"
-msgstr "Власник:      %s/%s"
+msgstr "Власник:         %s/%s"
 
 #: src/info.c:177
 #, c-format
@@ -2484,16 +2485,16 @@ msgstr "Веза:            %d"
 #: src/info.c:181
 #, c-format
 msgid "Mode:      %s (%04o)"
-msgstr "Дозволе:   %s (%04o)"
+msgstr "Дозволе:         %s (%04o)"
 
 #: src/info.c:186
 #, c-format
 msgid "Location:  %Xh:%Xh"
-msgstr "Место:       %Xh:%Xh"
+msgstr "Место:           %Xh:%Xh"
 
 #: src/info.c:196
 msgid "File:       None"
-msgstr "Датотека:    Ниједна"
+msgstr "Датотека:        Ниједна"
 
 #: src/layout.c:152
 msgid "&Vertical"
@@ -2509,11 +2510,11 @@ msgstr "наслов прозора и&Кс терминала"
 
 #: src/layout.c:164
 msgid "h&Intbar visible"
-msgstr "&Линија са саветима је видљива"
+msgstr "&Ред са саветима је видљив"
 
 #: src/layout.c:165
 msgid "&Keybar visible"
-msgstr "линија са &Тастерима је видљива"
+msgstr "ред са &Тастерима је видљив"
 
 #: src/layout.c:166
 msgid "command &Prompt"
@@ -2525,7 +2526,7 @@ msgstr "прикажи &Мини стање"
 
 #: src/layout.c:168
 msgid "menu&Bar visible"
-msgstr "линија мени&Ја је видљива"
+msgstr "ред мени&Ја је видљив"
 
 #: src/layout.c:169
 msgid "&Equal split"
@@ -2650,13 +2651,13 @@ msgstr ""
 " обрисали ваш текући директоријум, или сте дали\n"
 " себи прешироке дозволе преко наредбе `su'? "
 
-#: src/main.c:479 src/screen.c:1957
+#: src/main.c:479 src/screen.c:1959
 msgid " The Midnight Commander "
 msgstr " Поноћни командир "
 
 #: src/main.c:480
 msgid " Do you really want to quit the Midnight Commander? "
-msgstr " Да ли заисте желите да завршите рад у Поноћном Командиру? "
+msgstr " Да ли заисте желите да завршите рад у Поноћном командиру? "
 
 #: src/main.c:817 src/main.c:841
 msgid "&Listing mode..."
@@ -2684,15 +2685,15 @@ msgstr "&Мрежно повезивање..."
 
 #: src/main.c:830 src/main.c:854
 msgid "FT&P link..."
-msgstr "Повезивање FT&P-а..."
+msgstr "Повезивање FT&P-ом..."
 
 #: src/main.c:831 src/main.c:855
 msgid "S&hell link..."
-msgstr "Повезивање &љуске..."
+msgstr "Повезивање &љуском..."
 
 #: src/main.c:833 src/main.c:857
 msgid "SM&B link..."
-msgstr "Повезивање SM&B-а..."
+msgstr "Повезивање SM&B-ом..."
 
 #: src/main.c:837 src/main.c:861
 msgid "&Rescan         C-r"
@@ -2796,7 +2797,7 @@ msgstr "искључи/укључи &Окна        C-o"
 
 #: src/main.c:898
 msgid "&Compare directories  C-x d"
-msgstr "&Пореди директоријуме     C-x d"
+msgstr "у&Пореди директоријуме     C-x d"
 
 #: src/main.c:899
 msgid "e&Xternal panelize    C-x !"
@@ -2914,7 +2915,7 @@ msgstr ""
 " морати да ручно освежавате приказ. Погледајте упутство  \n"
 " за детаље.                                              "
 
-#: src/main.c:1231 src/screen.c:2186
+#: src/main.c:1231 src/screen.c:2188
 msgid "Menu"
 msgstr "Мени"
 
@@ -2922,24 +2923,24 @@ msgstr "Мени"
 msgid "The TERM environment variable is unset!\n"
 msgstr "Променљива љуске `TERM' није постављена!\n"
 
-#: src/main.c:1662 src/textconf.c:116
+#: src/main.c:1663 src/textconf.c:116
 #, c-format
 msgid "GNU Midnight Commander %s\n"
-msgstr "ГНУ-ов Поноћни командир %s\n"
+msgstr "ГНУ-ов поноћни командир %s\n"
 
-#: src/main.c:1873
+#: src/main.c:1869
 msgid "[flags] [this_dir] [other_panel_dir]\n"
 msgstr "[прекидачи] [овај_дир] [дир_другог_окна]\n"
 
-#: src/main.c:1877
+#: src/main.c:1873
 msgid "+number"
 msgstr "+број"
 
-#: src/main.c:1878
+#: src/main.c:1874
 msgid "Set initial line number for the internal editor"
 msgstr "Поставите број почетног реда за уграђени уређивач"
 
-#: src/main.c:1880
+#: src/main.c:1876
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2949,7 +2950,7 @@ msgstr ""
 "Молим да пошаљете пријаве грешака (укључивши излаз наредбе `mc -V')\n"
 "на адресу mc-devel@gnome.org\n"
 
-#: src/main.c:1895
+#: src/main.c:1891
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2989,95 +2990,95 @@ msgstr ""
 "   brightcyan, lightgray и white\n"
 "\n"
 
-#: src/main.c:1970
+#: src/main.c:1966
 msgid "Use to debug the background code"
 msgstr "Користите да бисте поправљали позадински код"
 
-#: src/main.c:1973
+#: src/main.c:1969
 msgid "Request to run in color mode"
 msgstr "Захтевање обојеног режима"
 
-#: src/main.c:1975
+#: src/main.c:1971
 msgid "Specifies a color configuration"
 msgstr "Поставља подешавања боја"
 
-#: src/main.c:1979
+#: src/main.c:1975
 msgid "Edits one file"
 msgstr "Уређује једну датотеку"
 
-#: src/main.c:1983
+#: src/main.c:1979
 msgid "Displays this help message"
 msgstr "Приказује ову поруку помоћи"
 
-#: src/main.c:1985
+#: src/main.c:1981
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Приказује екран помоћи око промене шеме боја"
 
-#: src/main.c:1988
+#: src/main.c:1984
 msgid "Log ftp dialog to specified file"
 msgstr "Бележи садржај дијалога FTP-а у задану датотеку"
 
-#: src/main.c:1991
+#: src/main.c:1987
 msgid "Set debug level"
 msgstr "Постављање нивоа поправљања"
 
-#: src/main.c:1995
+#: src/main.c:1991
 msgid "Print data directory"
 msgstr "Штампај директоријум са подацима"
 
-#: src/main.c:1997
+#: src/main.c:1993
 msgid "Requests to run in black and white"
 msgstr "Захтева покретање у режиму без боја"
 
-#: src/main.c:1999
+#: src/main.c:1995
 msgid "Disable mouse support in text version"
 msgstr "Искључи подршку за миша у текстуалној верзији"
 
-#: src/main.c:2002
+#: src/main.c:1998
 msgid "Disables subshell support"
 msgstr "Искључује подршку за подљуске"
 
-#: src/main.c:2005
+#: src/main.c:2001
 msgid "Print last working directory to specified file"
 msgstr "Штампај последњи радни директоријум у задану датотеку"
 
-#: src/main.c:2007
+#: src/main.c:2003
 msgid "Resets soft keys on HP terminals"
 msgstr "Поставља меке тастере на ХП-овим терминалима"
 
-#: src/main.c:2009
+#: src/main.c:2005
 msgid "To run on slow terminals"
 msgstr "Покретање на спором терминалу"
 
-#: src/main.c:2011
+#: src/main.c:2007
 msgid "Use stickchars to draw"
 msgstr "Користи квазиграфичке симболе за цртање"
 
-#: src/main.c:2014
+#: src/main.c:2010
 msgid "Enables subshell support (default)"
 msgstr "Укључује подршку за подљуске (подраз.)"
 
-#: src/main.c:2018
+#: src/main.c:2014
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Покушава да користи termcap уместо terminfo-а"
 
-#: src/main.c:2021
+#: src/main.c:2017
 msgid "Displays the current version"
 msgstr "Приказује текућу верзију"
 
-#: src/main.c:2023
+#: src/main.c:2019
 msgid "Launches the file viewer on a file"
 msgstr "Покреће прегледач датотека над датотеком"
 
-#: src/main.c:2025
+#: src/main.c:2021
 msgid "Forces xterm features"
 msgstr "Захтева одлике Икс терминала"
 
-#: src/main.c:2238
+#: src/main.c:2234
 msgid " Notice "
 msgstr " Објава "
 
-#: src/main.c:2239
+#: src/main.c:2235
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -3109,11 +3110,11 @@ msgstr "до&Пуна: прикажи све"
 
 #: src/option.c:62
 msgid "&Use internal view"
-msgstr "&Користи уграђени преглед"
+msgstr "&Користи уграђени прегледач"
 
 #: src/option.c:63
 msgid "use internal ed&It"
-msgstr "користи уграђено уређ&Ивање"
+msgstr "користи уграђени уређ&Ивач"
 
 #: src/option.c:64
 msgid "auto m&Enus"
@@ -3259,110 +3260,110 @@ msgstr "АРГ"
 msgid "Usage:"
 msgstr "Употреба:"
 
-#: src/screen.c:199
+#: src/screen.c:201
 msgid "UP--DIR"
 msgstr "НАД-ДИР"
 
-#: src/screen.c:220
+#: src/screen.c:222
 msgid "SYMLINK"
 msgstr "СИМВЕЗА"
 
-#: src/screen.c:224
+#: src/screen.c:226
 msgid "SUB-DIR"
 msgstr "ПОД-ДИР"
 
-#: src/screen.c:404 src/screen.c:405
+#: src/screen.c:406 src/screen.c:407
 msgid "Size"
 msgstr "Величина"
 
-#: src/screen.c:407
+#: src/screen.c:409
 msgid "MTime"
 msgstr "ДатИзм"
 
-#: src/screen.c:408
+#: src/screen.c:410
 msgid "ATime"
 msgstr "ДатПрс"
 
-#: src/screen.c:409
+#: src/screen.c:411
 msgid "CTime"
 msgstr "ДатПрм"
 
-#: src/screen.c:410
+#: src/screen.c:412
 msgid "Permission"
 msgstr "Дозволе"
 
-#: src/screen.c:411
+#: src/screen.c:413
 msgid "Perm"
 msgstr "Дозв"
 
 # Број веза
-#: src/screen.c:412
+#: src/screen.c:414
 msgid "Nl"
 msgstr "Бв"
 
-#: src/screen.c:413
+#: src/screen.c:415
 msgid "Inode"
-msgstr "Инод"
+msgstr "Ичвор"
 
-#: src/screen.c:414
+#: src/screen.c:416
 msgid "UID"
 msgstr "КИБ"
 
-#: src/screen.c:415
+#: src/screen.c:417
 msgid "GID"
 msgstr "ИБГ"
 
-#: src/screen.c:416
+#: src/screen.c:418
 msgid "Owner"
 msgstr "Власник"
 
-#: src/screen.c:417
+#: src/screen.c:419
 msgid "Group"
 msgstr "Група"
 
-#: src/screen.c:653
+#: src/screen.c:655
 #, c-format
 msgid "%s bytes in %d file"
 msgstr "%s бајтова у %d датотеци"
 
-#: src/screen.c:653
+#: src/screen.c:655
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s бајтова у %d датотека"
 
-#: src/screen.c:679
+#: src/screen.c:681
 msgid "<readlink failed>"
 msgstr "<неуспешно читање везе>"
 
-#: src/screen.c:1287
+#: src/screen.c:1289
 msgid "Unknown tag on display format: "
 msgstr "Непозната ознака у формату приказа: "
 
-#: src/screen.c:1413
+#: src/screen.c:1415
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Кориснички формат не изгледа исправно, враћам на подраз."
 
-#: src/screen.c:1958
+#: src/screen.c:1960
 msgid " Do you really want to execute? "
 msgstr " Да ли заиста желите да извршим? "
 
-#: src/screen.c:1970
+#: src/screen.c:1972
 msgid " No action taken "
 msgstr " Ништа није урађено "
 
-#: src/screen.c:2187
+#: src/screen.c:2189
 msgid "View"
 msgstr "Преглд"
 
-#: src/screen.c:2188 src/view.c:2253
+#: src/screen.c:2190 src/view.c:2253
 msgid "Edit"
 msgstr "Уреди"
 
-#: src/screen.c:2190 src/tree.c:1037
+#: src/screen.c:2192 src/tree.c:1037
 msgid "RenMov"
 msgstr "ПимПрм"
 
-#: src/screen.c:2191 src/tree.c:1041
+#: src/screen.c:2193 src/tree.c:1041
 msgid "Mkdir"
 msgstr "НапДир"
 
@@ -3399,7 +3400,7 @@ msgid ""
 "running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"ГНУ-ов Поноћни командир је већ\n"
+"ГНУ-ов поноћни командир је већ\n"
 "покренут на овом терминалу.\n"
 "Подршка за подљуске ће бити искључена."
 
@@ -3886,7 +3887,7 @@ msgstr "Стрелица надоле"
 
 #: src/win.c:145
 msgid "Left arrow key"
-msgstr "Стралица налево"
+msgstr "Стрелица налево"
 
 #: src/win.c:146
 msgid "Right arrow key"
@@ -4423,12 +4424,12 @@ msgstr " open_inode_scan: %d "
 #: vfs/undelfs.c:192
 #, c-format
 msgid " while starting inode scan %d "
-msgstr " при почетку скенирања инодова %d "
+msgstr " при почетку претраживања ичворова %d "
 
 #: vfs/undelfs.c:199
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: учитавам податке о обрисаним инодовима: %d инодова"
+msgstr "undelfs: учитавам податке о обрисаним ичворовима: %d ичворова"
 
 #: vfs/undelfs.c:214
 #, c-format
@@ -4442,7 +4443,7 @@ msgstr " нема више меморије при поновној алок. низа "
 #: vfs/undelfs.c:241
 #, c-format
 msgid " while doing inode scan %d "
-msgstr " при скенирању инодова %d "
+msgstr " при претраживању ичворова %d "
 
 #: vfs/undelfs.c:265
 msgid " Ext2lib error "
@@ -4455,7 +4456,7 @@ msgstr " Не могу да отворим датотеку %s "
 
 #: vfs/undelfs.c:295
 msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: читам мапу битова за инодове..."
+msgstr "undelfs: читам мапу битова за ичворове..."
 
 #: vfs/undelfs.c:298
 #, c-format
@@ -4463,12 +4464,12 @@ msgid ""
 " Cannot load inode bitmap from: \n"
 " %s \n"
 msgstr ""
-" Не могу да учитам мапу битова за инодове из: \n"
+" Не могу да учитам мапу битова за ичворове из: \n"
 " %s \n"
 
 #: vfs/undelfs.c:301
 msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: учитавам мапу битова за инодове..."
+msgstr "undelfs: учитавам мапу битова за ичворове..."
 
 #: vfs/undelfs.c:304
 #, c-format
