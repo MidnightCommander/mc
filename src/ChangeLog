@@ -1,3 +1,7 @@
+1999-01-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* cons.saver.c: Removed glib from the suid app
+
 Wed Jan 27 03:17:44 1999  Timur Bakeyev <mc@bat.ru>
 
 	* Converted memory managment to Glib. Now we use g_new()/g_malloc()/

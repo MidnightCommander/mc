@@ -89,7 +89,7 @@ inline void tty_cursormove(int y, int x)
     char buffer [BUF_TINY];
 
     /* Standard ANSI escape sequence for cursor positioning */
-    g_snprintf (buffer, sizeof (buffer), "\33[%d;%dH", y + 1, x + 1);
+    snprintf (buffer, sizeof (buffer), "\33[%d;%dH", y + 1, x + 1);
     dwrite (console_fd, buffer);
 }
 
@@ -167,7 +167,7 @@ char *detect_console (void)
 	!isdigit(tty_name[len - 1]))
 	return "Doesn't look like console";
 
-    g_snprintf (vcs_name, sizeof (vcs_name), "/dev/vcsa%s", tty_name + xlen - 1);
+    snprintf (vcs_name, sizeof (vcs_name), "/dev/vcsa%s", tty_name + xlen - 1);
     vcs_fd = check_file (vcs_name, 0, &msg);
     console_fd = check_file (tty_name, 1, &msg);
 
@@ -359,7 +359,7 @@ int main (int argc, char **argv)
 	/* Allocate buffer for screen image */
 	tty_getsize ();
 	buffer_size = 4 + 2 * columns * rows;
-	buffer = (char*) g_malloc (buffer_size);
+	buffer = (char*) malloc (buffer_size);
     }
 
     /* If using /dev/vcs*, we don't need anymore the console fd */
@@ -392,7 +392,7 @@ int main (int argc, char **argv)
     } /* while (read ...) */
 
     if (buffer)
-	g_free (buffer);
+	free (buffer);
     return 0;   
 }
 
