@@ -189,19 +189,19 @@ audio/*:
 
 audio/x-mp3:
 	open=mpg123 %f
-	open.x11amp.Use x11amp to play this=x11amp %f
+	open.xmms.Use xmms to play this=xmms %f
 
 audio/x-mod:
-	open=x11amp %f
-	view=x11amp %f
+	open=xmms %f
+	view=xmms %f
 
 audio/x-s3m:
-	open=x11amp %f
-	view=x11amp %f
+	open=xmms %f
+	view=xmms %f
 
 audio/x-xm:
-	open=x11amp %f
-	view=x11amp %f
+	open=xmms %f
+	view=xmms %f
 
 
 image/*:

@@ -1,3 +1,8 @@
+1999-07-17  Karsten Weiss  <karsten@addx.au.s.shuttle.de>
+
+	* mc.keys.in.in: changed "x11amp" references to "xmms" (xmms is
+        the new name of x11amp).
+
 1999-07-13  Miguel de Icaza  <miguel@gnu.org>
 
 	* gnome-file-property-dialog.c (perm_group_new): the return values
