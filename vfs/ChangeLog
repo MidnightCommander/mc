@@ -1,3 +1,7 @@
+Mon Jun 22 22:30:00 1998  Manish Vachharajani <mvachhar@vger.rutgers.edu>
+
+	* Makefile.in: Remove arfs, since it doesn't seem to exist
+
 Fri Jun 19 08:21:46 1998  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
 
 	* ftpfs.c (retrieve_dir): use concat_dir_and_file instead of
