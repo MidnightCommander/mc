@@ -306,7 +306,7 @@ msgstr "Номер I-вузла"
 
 #: gnome/gcustom-layout.c:39 src/achown.c:378
 msgid "Mode"
-msgstr ""
+msgstr "Режим"
 
 #: gnome/gcustom-layout.c:40
 msgid "Modification Time"
@@ -6915,9 +6915,3 @@ msgstr " Не вдалось в╕дкрити файл: %s "
 #: vfs/undelfs.c:684
 msgid "Undelete filesystem for ext2"
 msgstr "В╕дновлення файлово╖ системи для ext2"
-
-#~ msgid "key '%d 0': "
-#~ msgstr "клав╕ша '%d 0': "
-
-#~ msgid "fixhlp: Cannot open toc for writing"
-#~ msgstr "fixhlp: Не вдалось в╕дкрити зм╕ст для запису"
