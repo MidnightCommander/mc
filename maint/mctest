@@ -5,6 +5,12 @@
 
 set -e
 
+function distcheck () {
+    id="$1"
+    shift
+    make distcheck MSGMERGE="msgmerge -q" "$@" >test-$id.out 2>test-$id.err
+}
+
 # Specify which warnings we want to see.
 # Don't add options that produce massive warnings.
 # Add -Wstrict-prototypes after main.h is fixed (always use cpanel).
@@ -12,6 +18,9 @@ set -e
 export CFLAGS="-O2 -Wall -Wno-unused-parameter -Wno-sign-compare \
  -Wmissing-declarations -Wmissing-prototypes -Wbad-function-cast \
  -Wcast-align -Wpointer-arith -Wredundant-decls -Wundef -Wfloat-equal"
+
+# Suppress progress indicator
+export MSGMERGE="msgmerge --quiet"
 
 echo "Checking the documentation"
 maint/doctest
@@ -26,27 +35,25 @@ echo "Making everything in the source directory"
 make all >test0.out 2>test0.err
 
 echo "Checking the default configuration"
-make distcheck >test1.out 2>test1.err
+distcheck 1
 
 echo "Checking the configuration with maximal code coverage"
-make distcheck with_screen=mcslang enable_charset=yes with_samba=yes \
-     with_mcfs=yes with_included_gettext=yes with_glib12=yes \
-     >test2.out 2>test2.err
+distcheck 2 with_screen=mcslang enable_charset=yes with_samba=yes \
+     with_mcfs=yes with_included_gettext=yes with_glib12=yes
 
 echo "Checking the configuration with minimal code coverage"
-make distcheck enable_largefile=no enable_nls=no with_vfs=no \
+distcheck 3 enable_largefile=no enable_nls=no with_vfs=no \
      with_gpm_mouse=no with_subshell=no with_edit=no with_ext2undel=no \
-     with_screen=ncurses with_x=no enable_background=no \
-     >test3.out 2>test3.err
+     with_screen=ncurses with_x=no enable_background=no
 
 echo "Checking the configuration with minimal code coverage + editor"
-make distcheck enable_largefile=no enable_nls=no with_vfs=no \
+distcheck 4 enable_largefile=no enable_nls=no with_vfs=no \
      with_gpm_mouse=no with_subshell=no with_ext2undel=no \
-     with_screen=ncurses >test4.out 2>test4.err
+     with_screen=ncurses
 
 echo "Checking the configuration with experimental and rarely used options"
-make distcheck with_screen=mcslang with_termcap=yes \
-     with_mmap=no with_subshell=optional >test5.out 2>test5.err
+distcheck 5 with_screen=mcslang with_termcap=yes \
+     with_mmap=no with_subshell=optional
 
 if test -x /usr/bin/rpmbuild; then
 	echo "Building RPM package"
