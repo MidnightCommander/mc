@@ -2129,7 +2129,7 @@ void edit_execute_key_command (WEdit *edit, int command, int char_for_insertion)
 	edit->force |= REDRAW_PAGE;
 }
 
-static const char * const shell_cmd[] = SHELL_COMMANDS_i
+static const char * const shell_cmd[] = SHELL_COMMANDS_i;
 
 /*
    This executes a command at a lower level than macro recording.
