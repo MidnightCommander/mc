@@ -1,0 +1,3280 @@
+.\" Tradotto dal 15 agosto 2002 da
+.\"     Marco Ciampa <ciampix@libero.it>
+.\"
+.TH mc 1 "30 Ottobre 1998"
+.\"SKIP_SECTION"
+.SH "NOME"
+mc \- interfaccia visuale per sistemi tipo Unix.
+.\"SKIP_SECTION"
+.SH "USO"
+.B mc
+[\-abcCdfhPstuUVx?] [\-l log] [dir1 [dir2]] [-v file]
+.\"NODE "DESCRIPTION"
+.SH "DESCRIZIONE"
+.LP
+Il Midnight Commander è un file manager per sistemi operativi di tipo Unix.  
+.\".\"DONT_SPLIT"
+.\"NODE "OPTIONS"
+.SH "OPZIONI"
+.TP
+.I "\-a"
+Disabilita l'uso dei caratteri grafici per il disegno delle linee.
+.TP
+.I "\-b"
+Forza la visualizzazione in bianco e nero.
+.TP
+.I "\-c"
+Forza la modalità colore, prego vedere la sezione 
+.\"LINK2"
+Colori
+.\"Colors"
+per informazioni aggiuntive.
+.TP
+.I "\-C arg"
+Used to specify a different color set in the command line.  The format
+of arg is documented in the
+.\"LINK2"
+Colors
+.\"Colors"
+section.
+.TP
+.I "\-d"
+Disables mouse support.
+.TP
+.I "\-f"
+Displays the compiled-in search paths for Midnight Commander files.
+.TP
+.I "\-k"
+Reset softkeys to their default from the termcap/terminfo
+database. Only useful on HP terminals when the function keys don't work.
+.TP
+.I "-l file" 
+Save the ftpfs dialog with the server in file.
+.TP
+.I "\-P"
+At program end, the Midnight Commander will print the last working
+directory. This function should not be used directly, instead, it should
+be used from a special shell function that will automatically change the
+current directory of the shell to the last directory the Midnight
+Commander was in (thanks to Torben Fjerdingstad and Sergey for
+contributing this function and the code implementing this option).
+Source the files
+.B @prefix@/lib/mc/bin/mc.sh
+(bash and zsh users) respectively
+.B @prefix@/lib/mc/bin/mc.csh
+(tcsh users) in order to have this function defined.
+.TP
+.I "\-s"
+Turns on the slow terminal mode, in this mode the program will not
+draw expensive line drawing characters and will toggle verbose mode
+off.
+.TP
+.I "\-t"
+Used only if the code was compiled with Slang and terminfo: it makes
+the Midnight Commander use the value of the 
+.B TERMCAP
+variable for the terminal information instead of the information on
+the system wide terminal database
+.TP
+.I "\-u"
+Disables the use of a concurrent shell (only makes sense if the
+Midnight Commander has been built with concurrent shell support).
+.TP
+.I "\-U"
+Enables the use of the concurrent shell support (only makes sense if
+the Midnight Commander was built with the subshell support set as an
+optional feature).
+.TP
+.I "\-v file"
+Enters the internal viewer to view the file specified.
+.TP
+.I "\-V"
+Displays the version of the program.
+.TP
+.I "\-x"
+Forces xterm mode.  Used when running on xterm-capable terminals (two
+screen modes, and able to send mouse escape sequences).
+.PP
+If specified, the first path name is the directory to show in the
+selected panel; the second path name is the directory to be shown in
+the other panel.
+.PP
+.SH "Overview"
+The screen of the Midnight Commander is divided into four parts.
+Almost all of the screen space is taken up by two directory panels.
+By default, the second line from the bottom of the screen is the
+shell command line, and the bottom line shows the function key labels.
+The topmost line is the
+.\"LINK2"
+menu bar line.
+.\"Menu Bar"
+The menu bar line may not be visible, but appears if you click the
+topmost line with the mouse or press the F9 key.
+.PP
+The Midnight Commander provides a view of two directories at the same
+time. One of the panels is the current panel (a selection bar is in
+the current panel). Almost all operations take place on the current
+panel. Some file operations like Rename and Copy by default use the
+directory of the unselected panel as a destination (don't worry, they
+always ask you for confirmation first). For more information, see the
+sections on the
+.\"LINK2"
+Directory Panels,
+.\"Directory Panels"
+the
+.\"LINK2"
+Left and Right Menus
+.\"Left and Right Menus"
+and the
+.\"LINK2"
+File Menu.
+.\"File Menu"
+.PP
+You can execute system commands from the Midnight Commander by simply
+typing them. Everything you type will appear on the shell command line,
+and when you press Enter the Midnight Commander will execute the
+command line you typed; read the
+.\"LINK2"
+Shell Command Line
+.\"Shell Command Line"
+and
+.\"LINK2"
+Input Line Keys
+.\"Input Line Keys"
+sections to learn more about the command line.
+.PP
+.\"NODE "Mouse Support"
+.SH "Supporto Mouse"
+The Midnight Commander comes with mouse support.  It is activated
+whenever you are running on an
+.B xterm(1)
+terminal (it even works if you take a telnet or rlogin connection to
+another machine from the xterm) or if you are running on a Linux
+console and have the
+.B gpm
+mouse server running.
+.PP
+When you left click on a file in the directory panels, that file is
+selected; if you click with the right button, the file is marked (or
+unmarked, depending on the previous state).
+.PP
+Double-clicking on a file will try to execute the command if it is
+an executable program; and if the
+.\"LINK2"
+extension file
+.\"Extension File Edit"
+has a program specified for the file's extension, the specified
+program is executed.
+.PP
+Also, it is possible to execute the commands assigned to the function
+key labels by clicking on them.
+.PP
+If a mouse button is clicked on the top frame line of the directory panel,
+it is scrolled one page up.  Likewise, a click on the bottom frame line
+will cause scrolling one page down.  This frame line method works also
+in the
+.\"LINK2"
+Help Viewer
+.\"Contents"
+and the
+.\"LINK2"
+Directory Tree.
+.\"Directory Tree"
+.PP
+The default auto repeat rate for the mouse buttons is 400
+milliseconds. This may be changed to other values by editing the
+.\"LINK2"
+\&~/.mc/ini
+.\"Save Setup"
+file and changing the 
+.I mouse_repeat_rate
+parameter.
+.PP
+If you are running the Commander with the mouse support, you can bypass
+the Commander and get the default mouse behavior (cutting and pasting
+text) by holding down the Shift key.
+.SH ""
+.SH "Keys"
+Some commands in the Midnight Commander involve the use of the
+.I Control
+(sometimes labeled CTRL or CTL) and the 
+.I Meta
+(sometimes labeled ALT or even Compose) keys. In this manual we will
+use the following abbreviations:
+.PP
+C-<chr> means hold the Control key while typing the character
+<chr>. Thus C-f would be: hold the Control key and type f.
+.PP
+M-<chr> means hold the Meta or Alt key down while typing <chr>. If
+there is no Meta or Alt key, type ESC, release it, then type the
+character <chr>. 
+.PP
+All input lines in the Midnight Commander use an approximation to
+the GNU Emacs editor's key bindings.
+.PP
+There are many sections which tell about the keys. The following are
+the most important.
+.PP
+The
+.\"LINK2"
+File Menu
+.\"File Menu"
+section documents the keyboard shortcuts for the commands appearing in
+the File menu. This section includes the function keys. Most of these
+commands perform some action, usually on the selected file or the
+tagged files.
+.PP
+The
+.\"LINK2"
+Directory Panels
+.\"Directory Panels"
+section documents the keys which select a file or tag files as a
+target for a later action (the action is usually one from the file
+menu).
+.PP
+The
+.\"LINK2"
+Shell Command Line
+.\"Shell Command Line"
+section list the keys which are used for entering and editing command
+lines. Most of these copy file names and such from the directory
+panels to the command line (to avoid excessive typing) or access the
+command line history.
+.PP
+.\"LINK2"
+Input Line Keys
+.\"Input Line Keys"
+are used for editing input lines. This means both the command line and
+the input lines in the query dialogs.
+.PP
+.SH "  Miscellaneous Keys"
+Here are some keys which don't fall into any of the other categories:
+.PP
+.B Enter.
+If there is some text in the command line (the one at the bottom of
+the panels), then that command is executed. If there is no text in the
+command line then if the selection bar is over a directory the
+Midnight Commander does a 
+.B chdir(2)
+to the selected directory and reloads the information on the panel;
+if the selection is an executable file then it is executed. Finally,
+if the extension of the selected file name matches one of the
+extensions in the
+.\"LINK2"
+extensions file
+.\"Extension File Edit"
+then the corresponding command is executed.
+.PP
+.B C-l.
+Repaint all the information in the Midnight Commander.
+.PP
+.B C-x c.
+Run the
+.\"LINK2"
+Chmod
+.\"Chmod"
+command on a file or on the tagged files.
+.PP
+.B C-x o.
+Run the
+.\"LINK2"
+Chown
+.\"Chown"
+command on the current file or on the tagged files.
+.PP
+.B C-x l.
+Run the link command.
+.PP
+.B C-x s.
+Run the symbolic link command.
+.PP
+.B C-x i.
+Set the other panel display mode to information.
+.PP
+.B C-x q.
+Set the other panel display mode to quick view.
+.PP
+.B C-x !.
+Execute the 
+.\"LINK2"
+External panelize
+.\"External panelize"
+command.
+.PP
+.B C-x h
+Run the 
+.\"LINK2"
+add directory to hotlist
+.\"Hotlist"
+command.
+.PP
+.B M-!,
+Executes the Filtered view command, described in the
+.\"LINK2"
+view command.
+.\"Internal File Viewer"
+.PP
+.B M-?,
+Executes the 
+.\"LINK2"
+Find file
+.\"Find File"
+command.
+.PP
+.B M-c,
+Pops up the
+.\"LINK2"
+quick cd
+.\"Quick cd"
+dialog.
+.PP
+.B C-o,
+When the program is being run in the Linux or SCO console or under an xterm,
+it will show you the output of the previous command.  When ran on the
+Linux console, the Midnight Commander uses an external program
+(cons.saver) to handle saving and restoring of information on the
+screen.
+.PP
+When the subshell support is compiled in, you can type C-o at any time
+and you will be taken back to the Midnight Commander main screen, to
+return to your application just type C-o.  If you have an application
+suspended by using this trick, you won't be able to execute other
+programs from the Midnight Commander until you terminate the suspended
+application. 
+.PP
+.SH "  Directory Panels"
+This section lists the keys which operate on the directory panels. If
+you want to know how to change the appearance of the panels take a
+look at the section on
+.\"LINK2"
+Left and Right Menus.
+.\"Left and Right Menus"
+.PP
+.B Tab, C-i.
+Change the current panel. The old other panel becomes the new current
+panel and the old current panel becomes the new other panel. The
+selection bar moves from the old current panel to the new current
+panel.
+.PP
+.B Insert, C-t.
+To tag files you may use the Insert key (the kich1 terminfo sequence)
+or the C-t (Control-t) sequence. To untag files, just retag a tagged
+file.
+.PP
+.B M-g, M-h (or M-r), M-j.
+Used to select the top file in a panel, the middle file and the bottom one,
+respectively. 
+.PP
+.B C-s, M-s.
+Start a filename search in the directory listing. When the search is
+active, the user input will be added to the search string instead of
+the command line. If the
+.I "Show mini-status"
+option is enabled the search string is shown on the mini-status
+line. When typing, the selection bar will move to the next file
+starting with the typed letters. The
+.I "backspace"
+or
+.I DEL 
+keys can be used to correct typing mistakes. If C-s is pressed
+again, the next match is searched for.
+.PP
+.B M-t
+Toggle the current display listing to show the next display listing
+mode.  With this it is possible to quickly switch from long listing
+to regular listing and the user defined listing mode.
+.PP
+.B C-\\\\ (control-backslash).
+Show the 
+.\"LINK2"
+directory hotlist
+.\"Hotlist"
+and change to the selected directory.
+.PP
+.B + \ (plus).
+This is used to select (tag) a group of files. The Midnight Commander
+will prompt for a regular expression describing the group. When
+.I Shell Patterns 
+are enabled, the regular expression is much like the regular
+expressions in the shell (* standing for zero or more characters and ?
+standing for one character). If
+.I Shell Patterns
+is off, then the tagging of files is done with normal regular
+expressions (see ed (1)).
+.PP
+If the expression starts or ends with a slash (/), then it will select
+directories instead of files.
+.PP
+.B \\\\ (backslash).
+Use the "\\" key to unselect a group of files. This is the opposite of
+the Plus key.
+.PP
+.B up-key, C-p.
+Move the selection bar to the previous entry in the panel.
+.PP
+.B down-key, C-n.
+Move the selection bar to the next entry in the panel.
+.PP
+.B home, a1, M-<.
+Move the selection bar to the first entry in the panel.
+.PP
+.B end, c1, M->.
+Move the selection bar to the last entry in the panel.
+.PP
+.B next-page, C-v.
+Move the selection bar one page down.
+.PP
+.B prev-page, M-v.
+Move the selection bar one page up.
+.PP
+.B M-o,
+If the other panel is a listing panel and you are standing on a
+directory in the current panel, then the other panel contents are set
+to the contents of the currently selected directory (like Emacs' dired
+C-o key) otherwise the other panel contents are set to the parent dir
+of the current dir.
+.PP
+.B C-PageUp, C-PageDown
+Only when ran on the Linux console: does a chdir to ".." and to the
+currently selected directory respectively.
+.PP
+.B M-y
+Moves to the previous directory in the history, equivalent 
+to depressing the '<' with the mouse.
+.PP
+.B M-u
+Moves to the next directory in the history, equivalent 
+to depressing the '>' with the mouse.
+.PP
+.B M-S-h, M-H
+Displays the directory history, equivalent to depressing the 'v' with
+the mouse.
+.PP
+.SH "  Shell Command Line"
+This section lists keys which are useful to avoid excessive typing when
+entering shell commands.
+.PP
+.B M-Enter.
+Copy the currently selected file name to the command line.
+.PP
+.B C-Enter.
+Same a M-Enter, this one only works on the Linux console.
+.PP
+.B M-Tab.
+Does the filename, command, variable, username and hostname
+.\"LINK2"
+completion
+.\"Completion"
+for you.
+.PP
+.B C-x t, C-x C-t.
+Copy the tagged files (or if there are no tagged files, the selected
+file) of the current panel (C-x t) or of the other panel (C-x C-t) to
+the command line.
+.PP
+.B C-x p, C-x C-p. 
+The first key sequence copies the current path name to the command
+line, and the second one copies the unselected panel's path name to
+the command line.
+.PP
+.B C-q.
+The quote command can be used to insert characters that are otherwise
+interpreted by the Midnight Commander (like the '+' symbol)
+.PP
+.B M-p, M-n.
+Use these keys to browse through the command history. M-p takes you
+to the last entry, M-n takes you to the next one.
+.PP
+.B M-h.
+Displays the history for the current input line. 
+.PP
+.SH "  General Movement Keys"
+The help viewer, the file viewer and the directory tree use common
+code to handle moving. Therefore they accept exactly the same
+keys. Each of them also accepts some keys of its own.
+.PP
+Other parts of the Midnight Commander use some of the same movement
+keys, so this section may be of use for those parts too.
+.PP
+.B Up, C-p.
+Moves one line backward.
+.PP
+.B Down, C-n.
+Moves one line forward.
+.PP
+.B Prev Page, Page Up, M-v.
+Moves one page up.
+.PP
+.B Next Page, Page Down, C-v.
+Moves one page down.
+.PP
+.B Home, A1.
+Moves to the beginning.
+.PP
+.B End, C1.
+Move to the end.
+.PP
+The help viewer and the file viewer accept the following keys in
+addition the to ones mentioned above:
+.PP
+.B b, C-b, C-h, Backspace, Delete.
+Moves one page up.
+.PP
+.B Space bar.
+Moves one page down.
+.PP
+.B u, d.
+Moves one half of a page up or down.
+.PP
+.B g, G.
+Moves to the beginning or to the end.
+.PP
+.SH "  Input Line Keys"
+The input lines (they are used for the
+.\"LINK2"
+command line
+.\"Shell Command Line"
+and for the query dialogs in the program) accept these keys:
+.PP
+.B C-a
+puts the cursor at the beginning of line.
+.PP
+.B C-e
+puts the cursor at the end of the line.
+.PP
+.B C-b, move-left
+move the cursor one position left.
+.PP
+.B C-f, move-right
+move the cursor one position right.
+.PP
+.B M-f
+moves one word forward.
+.PP
+.B M-b
+moves one word backward.
+.PP
+.B C-h, backspace
+delete the previous character.
+.PP
+.B C-d, Delete
+delete the character in the point (over the cursor).
+.PP
+.B C-@
+sets the mark for cutting.
+.PP
+.B C-w
+copies the text between the cursor and the mark to a kill buffer and
+removes the text from the input line.
+.PP
+.B M-w
+copies the text between the cursor and the mark to a kill buffer.
+.PP
+.B C-y
+yanks back the contents of the kill buffer.
+.PP
+.B C-k
+kills the text from the cursor to the end of the line.
+.PP
+.B M-p, M-n
+Use these keys to browse through the command history. M-p takes you
+to the last entry, M-n takes you to the next one.
+.PP
+.B M-C-h, M-Backspace
+delete one word backward.
+.PP
+.B M-Tab
+does the filename, command, variable, username and hostname
+.\"LINK2"
+completion
+.\"Completion"
+for you.
+.PP
+.SH ""
+.SH "Menu Bar"
+The menu bar pops up when you press F9 or click the mouse on the top
+row of the screen. The menu bar has five menus: "Left", "File",
+"Command", "Options" and "Right".
+.PP
+The
+.\"LINK2"
+Left and Right Menus
+.\"Left and Right Menus"
+allow you to modify the appearance of the left and right directory
+panels.
+.PP
+The
+.\"LINK2"
+File Menu
+.\"File Menu"
+lists the actions you can perform on the currently selected file or
+the tagged files.
+.PP
+The
+.\"LINK2"
+Command Menu
+.\"Command Menu"
+lists the actions which are more general and bear no relation to the
+currently selected file or the tagged files.
+.PP
+The
+.\"LINK2"
+Options Menu
+.\"Options Menu"
+lists the actions which allow you to customize the Midnight Commander.
+.PP
+.SH "  Left and Right Menus"
+The outlook of the directory panels can be changed from the
+.B "Left"
+and
+.B "Right"
+menus.
+.PP
+.SH "    Listing Mode..."
+The listing mode view is used to display a listing of files, there are
+four different listing modes available:
+.B Full,
+.B Brief,
+.B Long
+and
+.B User.
+The full directory view shows the file name, the size of the file and
+the modification time. 
+.PP
+The brief view shows only the file name and it has two columns
+(therefore showing twice as many files as other views). The long view
+is similar to the output of
+.B "ls -l"
+command. The long view takes the whole screen width.
+.PP
+If you choose the "User" display format, then you have to specify
+the display format.
+.PP
+The user display format must start with a panel size specifier.  This
+may be "half" or "full", and they specify a half screen panel and a
+full screen panel respectively.
+.PP
+After the panel size, you may specify the two columns mode on the
+panel, this is done by adding the number "2" to the user format
+string. 
+.PP
+After this you add the name of the fields with an optional size
+specifier.  This are the available fields you may display:
+.PP
+.B name,
+displays the file name.
+.PP
+.B size,
+displays the file size.
+.PP
+.B bsize,
+is an alternative form of the
+.B size
+format. It displays the size of the files and for directories it just
+shows SUB-DIR or UP--DIR.
+.PP
+.B type,
+displays a one character field type.  This character is similar to
+what is displayed by ls with the -F flag -
+.B *
+for executable files,
+.B /
+for directories,
+.B @
+for links,
+.B =
+for sockets,
+.B -
+for character devices,
+.B +
+for block devices,
+.B |
+for pipes,
+.B ~
+for symbolic links to directories and
+.B !
+for stalled symlinks (links that point nowhere).
+.PP
+.B mtime,
+file's last modification time.
+.PP
+.B atime,
+file's last access time.
+.PP
+.B ctime,
+file's creation time.
+.PP
+.B perm,
+a string representing the current permission bits of the file.
+.PP
+.B mode,
+an octal value with the current permission bits of the file.
+.PP
+.B nlink,
+the number of links to the file.
+.PP
+.B ngid,
+the GID (numeric).
+.PP
+.B nuid,
+the UID (numeric).
+.PP
+.B owner,
+the owner of the file.
+.PP
+.B group,
+the group of the file.
+.PP
+.B inode,
+the inode of the file.
+.PP
+Also you may use these field names for arranging the display:
+.PP
+.B space,
+a space in the display format.
+.PP
+.B mark,
+An asterisk if the file is tagged, a space if it's not.
+.PP
+.B |,
+This character is used to add a vertical line to the display format.
+.PP
+To force one field to a fixed size (a size specifier), you just add
+a ':' and then the number of characters you want the field to have, if
+the number is followed by the symbol '+', then the size specifies the
+minimum field size, if the program finds out that there is more space
+on the screen, it will then expand this field.
+.PP
+For example, the 
+.B Full
+display corresponds to this format:
+.PP
+half type,name,|,size,|,mtime
+.PP
+And the 
+.B Long
+display corresponds to this format:
+.PP
+full perm,space,nlink,space,owner,space,group,space,size,space,
+mtime,space,name
+.PP
+This is a nice user display format:
+.PP
+half name,|,size:7,|,type,mode:3
+.PP
+Panels may also be set to the following modes:
+.TP
+.B "Info"
+The info view display information related to the currently
+selected file and if possible information about the current file
+system.
+.TP
+.B "Tree" 
+The tree view is quite similar to the
+.\"LINK2"
+directory tree
+.\"Directory Tree"
+feature. See the section about it for more information.
+.TP 
+.B "Quick View"
+In this mode, the panel will switch to a reduced 
+.\"LINK2"
+viewer
+.\"Internal File Viewer"
+that displays the contents of the currently selected file, if you
+select the panel (with the tab key or the mouse), you will have access
+to the usual viewer commands.
+.PP
+.SH "    Sort Order..."
+The eight sort orders are by name, by extension, by modification time,
+by access time, and by inode information modification time, by size,
+by inode and unsorted.  In the Sort order dialog box you can choose
+the sort order and you may also specify if you want to sort in reverse
+order by checking the reverse box.
+.PP
+By default directories are sorted before files but this can be changed
+from the
+.\"LINK2"
+Options menu
+.\"Options Menu"
+(option 
+.B "Mix all files"
+).
+.PP
+.SH "    Filter..."
+The filter command allows you to specify a shell pattern (for example
+.B "*.tar.gz"
+) which the files must match to be shown. Regardless
+of the filter pattern, the directories and the links to directories
+are always shown in the directory panel.
+.PP
+.SH "    Reread"
+The reread command reload the list of files in the directory. It is
+useful if other processes have created or removed files.  If you
+have panelized file names in a panel this will reload the directory
+contents and remove the panelized information (See the section
+.\"LINK2"
+External panelize
+.\"External panelize"
+for more information).
+.PP
+.SH "  File Menu"
+The Midnight Commander uses the F1 - F10 keys as keyboard shortcuts
+for commands appearing in the file menu.  The escape sequences for the
+function keys are terminfo capabilities kf1 trough kf10.  On terminals
+without function key support, you can achieve the same functionality by
+pressing the ESC key and then a number in the range 1 through 9 and 0
+(corresponding to F1 to F9 and F10 respectively).
+.PP
+The File menu has the following commands (keyboard shortcuts in parentheses):
+.PP
+.B Help (F1)
+.PP
+Invokes the built-in hypertext help viewer. Inside the
+.\"LINK2"
+help viewer,
+.\"Contents"
+you can use the Tab key to select the next link and the Enter key to
+follow that link. The keys Space and Backspace are used to move
+forward and backward in a help page. Press F1 again to get the full
+list of accepted keys.
+.PP
+.B Menu (F2)
+.PP
+Invoke the
+.\"LINK2"
+user menu.
+.\"Menu File Edit"
+The user menu provides an easy way to provide users with a menu and
+add extra features to the Midnight Commander.
+.PP
+.B View (F3, Shift-F3)
+.PP
+View the currently selected file. By default this invokes the
+.\"LINK2"
+Internal File Viewer
+.\"Internal File Viewer"
+but if the option "Use internal view" is off, it invokes an external
+file viewer specified by the 
+.B PAGER 
+environment variable. If 
+.B PAGER
+is undefined, the "view" command is invoked.  If you use Shift-F3
+instead, the viewer will be invoked without doing any formatting or
+preprocessing to the file.
+.PP
+.B Filtered View (M-!)
+.PP
+this command prompts for a command
+and it's arguments (the argument defaults to the currently selected
+file name), the output from such command is shown in the internal file
+viewer.
+.PP
+.B Edit (F4)
+.PP
+Currently it invokes the 
+.B vi 
+editor, or the editor specified in the
+.B EDITOR
+environment variable, or the 
+.\"LINK2"
+Internal File Editor
+.\"Internal File Editor"
+if the use_internal_edit option is on.
+.PP
+.B Copy (F5)
+.PP
+Pop up an input dialog with destination that defaults to the directory
+in the non-selected panel and copies the currently selected file (or
+the tagged files, if there is at least one file tagged) to the
+directory specified by the user in the input dialog. During this
+process, you can press C-c or ESC to abort the operation. For details
+about source mask (which will be usually either * or ^\\(.*\\)$ depending
+on setting of Use shell patterns) and possible wildcards in the destination
+see 
+.\"LINK2"
+Mask copy/rename.
+.\"Mask Copy/Rename"
+.PP
+On some systems, it is possible to do the copy in the background by
+clicking on the background button (or pressing M-b in the dialog
+box).  The 
+.\"LINK2"
+Background Jobs
+.\"Background jobs"
+is used to control the background process.
+.PP
+.B Link (C-x l)
+.PP
+Create a hard link to the current file.
+.PP
+.B SymLink (C-x s)
+.PP
+Create a symbolic link to the current file. To those of you who don't
+know what links are: creating a link to a file is a bit like copying
+the file, but both the source filename and the destination filename
+represent the same file image. For example, if you edit one of these
+files, all changes you make will appear in both files. Some people call
+links aliases or shortcuts.
+.PP
+A hard link appears as a real file. After making it, there is no way of
+telling which one is the original and which is the link. If you delete
+either one of them the other one is still intact. It is very difficult
+to notice that the files represent the same image. Use hard links when
+you don't even want to know.
+.PP
+A symbolic link is a reference to the name of the original file. If
+the original file is deleted the symbolic link is useless. It is quite
+easy to notice that the files represent the same image. The Midnight
+Commander shows an "@"-sign in front of the file name if it is a
+symbolic link to somewhere (except to directory, where it shows a tilde (~)).
+The original file which the link points to is shown on mini-status line if the
+.I "Show mini-status"
+option is enabled. Use symbolic links when you want to avoid the
+confusion that can be caused by hard links.
+.PP
+.B Rename/Move (F6)
+.PP
+Pop up an input dialog that defaults to the directory in the
+non-selected panel and moves the currently selected file (or the
+tagged files if there is at least one tagged file) to the directory
+specified by the user in the input dialog. During the process, you
+can press C-c or ESC to abort the operation. For more details look at Copy
+operation above, most of the things are quite similar.
+.PP
+On some systems, it is possible to do the copy in the background by
+clicking on the background button (or pressing M-b in the dialog
+box). The 
+.\"LINK2"
+Background Jobs
+.\"Background jobs"
+is used to control the background process.
+.PP
+.B Mkdir (F7)
+.PP
+Pop up an input dialog and creates the directory specified.
+.PP
+.B Delete (F8)
+.PP
+Delete the currently selected file or the tagged files in the
+currently selected panel. During the process, you can press C-c or
+ESC to abort the operation.
+.PP
+.B Quick cd (M-c)
+Use the
+.\"LINK2"
+quick cd
+.\"Quick cd"
+command if you have full command line and want to cd somewhere.
+.PP
+.B Select group (+)
+.PP
+This is used to select (tag) a group of files. The Midnight Commander
+will prompt for a regular expression describing the group. When
+.I Shell Patterns 
+are enabled, the regular expression is much like the filename globbing
+in the shell (* standing for zero or more characters and ?  standing
+for one character). If
+.I Shell Patterns
+is off, then the tagging of files is done with normal regular
+expressions (see ed (1)).
+.PP
+To mark directories instead of files, the expression must start or end
+with a '/'.
+.PP
+.B Unselect group (\\\\)
+.PP
+Used to unselect a group of files. This is the opposite of the
+.I "Select group"
+command.
+.PP
+.B Quit (F10, Shift-F10)
+.PP
+Terminate the Midnight Commander.  Shift-F10 is used when you want to
+quit and you are using the shell wrapper.  Shift-F10 will not take you
+to the last directory you visited with the Midnight Commander, instead
+it will stay at the directory where you started the Midnight Commander.
+.PP
+.SH "    Quick cd"
+This command is useful if you have a full command line and want to 
+.\"LINK2"
+cd
+.\"The cd internal command"
+somewhere without having to yank and paste the command line. This command
+pops up a small dialog, where you enter everything you would enter after
+.B cd 
+on the command line and then you press enter. This features all the things
+that are already in the 
+.\"LINK2"
+internal cd command.
+.\"The cd internal command"
+.PP
+.SH "  Command Menu"
+The
+.\"LINK2"
+Directory tree
+.\"Directory Tree"
+command shows a tree figure of the directories.
+.PP
+The
+.\"LINK2"
+Find file
+.\"Find File"
+command allows you to search for a specific file. The "Swap panels"
+command swaps the contents of the two directory panels. 
+.PP
+The "Panels on/off" command shows the output of the last shell
+command. This works only on xterm and on Linux and SCO console.
+.PP
+The Compare directories (C-x d) command compares the directory
+panels with each other. You can then use the Copy (F5) command to make
+the panels identical. There are three compare methods. The quick method
+compares only file size and file date. The thorough method makes a
+full byte-by-byte compare. The thorough method is not available if the
+machine does not support the mmap(2) system call.  The size-only
+compare method just compares the file sizes and does not check the
+contents or the date times, it just checks the file size.
+.PP
+The Command history command shows a list of typed commands. The
+selected command is copied to the command line. The command history
+can also be accessed by typing M-p or M-n. 
+.PP
+The 
+.\"LINK2"
+Directory hotlist (C-\\)
+.\"Hotlist"
+command makes changing of the current directory to often used directories
+faster.
+.PP
+The 
+.\"LINK2"
+External panelize
+.\"External panelize"
+allows you to execute an external program, and
+make the output of that program the contents of the current panel.
+.PP
+.\"LINK2"
+Extension file edit
+.\"Extension File Edit"
+command allows you to specify programs to executed when you try to
+execute, view, edit and do a bunch of other thing on files
+with certain extensions (filename endings). The
+.\"LINK2"
+Menu file edit
+.\"Menu File Edit"
+command may be used for editing the user menu (which appears by
+pressing F2).
+.PP
+.SH "    Directory Tree"
+The Directory Tree command shows a tree figure of the directories. You
+can select a directory from the figure and the Midnight Commander will
+change to that directory.
+.PP
+There are two ways to invoke the tree. The real directory tree command
+is available from Commands menu. The other way is to select tree view
+from the Left or Right menu.
+.PP
+To get rid of long delays the Midnight Commander creates the tree
+figure by scanning only a small subset of all the directories. If the
+directory which you want to see is missing, move to its parent
+directory and press C-r (or F2).
+.PP
+You can use the following keys:
+.PP
+.\"LINK2"
+General movement keys
+.\"General Movement Keys"
+are accepted.
+.PP
+.B Enter.
+In the directory tree, exits the directory tree and changes to this
+directory in the current panel. In the tree view, changes to this
+directory in the other panel and stays in tree view mode in the
+current panel.
+.PP
+.B C-r, F2 (Rescan).
+Rescan this directory. Use this when the tree figure is out of date:
+it is missing subdirectories or shows some subdirectories which don't
+exist any more.
+.PP
+.B F3 (Forget).
+Delete this directory from the tree figure. Use this to remove clutter
+from the figure. If you want the directory back to the tree figure
+press F2 in its parent directory. 
+.PP
+.B F4 (Static/Dynamic).
+Toggle between the dynamic navigation mode (default) and the static
+navigation mode.
+.PP
+In the static navigation mode you can use the Up and Down keys to
+select a directory. All known directories are shown.
+.PP
+In the dynamic navigation mode you can use the Up and Down keys to
+select a sibling directory, the Left key to move to the parent
+directory, and the Right key to move to a child directory. Only the
+parent, sibling and children directories are shown, others are left
+out. The tree figure changes dynamically as you traverse.
+.PP
+.B F5 (Copy).
+Copy the directory.
+.PP
+.B F6 (RenMov).
+Move the directory.
+.PP
+.B F7 (Mkdir).
+Make a new directory below this directory.
+.PP
+.B F8 (Delete).
+Delete this directory from the file system.
+.PP
+.B C-s, M-s.
+Search the next directory matching the search string. If there is
+no such directory these keys will move one line down.
+.PP
+.B C-h, Backspace.
+Delete the last character of the search string.
+.PP
+.B Any other character.
+Add the character to the search string and move to the next directory
+which starts with these characters. In the tree view you must first
+activate the search mode by pressing C-s. The search string is shown
+in the mini status line.
+.PP
+The following actions are available only in the directory tree. They
+aren't supported in the tree view.
+.PP
+.B F1 (Help).
+Invoke the help viewer and show this section.
+.PP
+.B Esc, F10.
+Exit the directory tree. Do not change the directory.
+.PP
+The mouse is supported. A double-click behaves like Enter. See
+also the section on
+.\"LINK2"
+mouse support.
+.\"Mouse Support"
+.PP
+.SH "    Find File"
+The Find File feature first asks for the start directory for the
+search and the filename to be searched for. By pressing the Tree
+button you can select the start directory from the
+.\"LINK2"
+directory tree
+.\"Directory Tree"
+figure. 
+.PP
+The contents field accepts regular expressions similar to egrep(1). That
+means you have to escape characters with a special meaning to egrep with "\\", 
+e.g. if you search for "strcmp (" you will have to input "strcmp \\(" 
+(without the double quotes).
+.PP
+You can start the search by pressing the Ok button.
+During the search you can stop from the Stop button and continue from
+the Start button.
+.PP
+You can browse the filelist with the up and down arrow keys. The Chdir
+button will change to the directory of the currently selected
+file. The Again button will ask for the parameters for a new
+search. The Quit button quits the search operation. The Panelize
+button will place the found files to the current directory panel so
+that you can do additional operations on them (view, copy, move,
+delete and so on). After panelizing you can press C-r to return to the
+normal file listing.
+.PP
+It is possible to have a list of directories that the Find File
+command should skip during the search (for example, you may want to
+avoid searches on a CDROM or on a NFS directory that is mounted across
+a slow link).
+.PP
+Directories to be skipped should be set on the variable
+.B find_ignore_dirs 
+in the 
+.B Misc 
+section of your ~/.mc/ini file.
+.PP
+Directory components should be separated with a colon, here is an
+example: 
+.PP
+.nf
+[Misc]
+find_ignore_dirs=/cdrom:/nfs/wuarchive:/afs
+.fi
+.PP
+You may consider using the
+.\"LINK2"
+External panelize
+.\"External panelize"
+command for some operations. Find file command is for simple queries
+only, while using External panelize you can do as mysterious searches
+as you would like.  
+.PP
+.SH "    External panelize"
+The External panelize allows you to execute an external program, and
+make the output of that program the contents of the current panel.
+.PP
+For example, if you want to manipulate in one of the panels all the
+symbolic links in the current directory, you can use external
+panelization to run the following command:
+.PP
+.nf
+find . -type l -print
+.fi
+Upon command completion, the directory contents of the panel will no
+longer be the directory listing of the current directory, but all the
+files that are symbolic links.
+.PP
+If you want to panelize all of the files that have been downloaded
+from your ftp server, you can use this awk command to extract the file
+name from the transfer log files:
+.PP
+.nf
+awk '$9 ~! /incoming/ { print $9 }' < /usr/adm/xferlog
+.fi
+.PP
+You may want to save often used panelize commands under a descriptive name,
+so that you can recall them quickly. You do this by typing the command on
+the input line and pressing Add new button. Then you enter a name under
+which you want the command to be saved. Next time, you just choose that
+command from the list and do not have to type it again.
+.PP
+.SH "    Hotlist"
+The Directory hotlist command shows the labels of the directories
+in the directory hotlist.  The Midnight Commander will change to the
+directory corresponding to the selected label.  From the hotlist dialog,
+you can remove already created label/directory pairs and add new ones.
+To add new directories quickly, you can use the Add to hotlist command
+(C-x h), which adds the current directory into the directory hotlist,
+asking just for the label for the directory.
+.PP
+This makes cd to often used directories faster. You may consider using the
+CDPATH variable as described in
+.\"LINK2"
+internal cd command
+.\"The cd internal command"
+description.
+.PP
+.SH "    Extension File Edit"
+This will invoke your editor on the file ~/.mc/bindings. The format of this
+file is as follows (the format has changed with version 3.0):
+.PP
+All lines starting with # or empty lines are thrown away.
+.PP
+Lines starting in the first column should have following format:
+.PP
+.I keyword/descNL,
+i.e. everything after 
+.I keyword/
+until new line is 
+.I desc
+.PP
+keyword can be: 
+.PP
+.I shell
+.IP
+(desc is then any extension (no wildcards), i.e. matches all the files 
+*desc . Example: .tar matches *.tar)
+.PP
+.I regex
+.IP
+(desc is a regular expression)
+.PP
+.I type
+.IP
+(file matches this if `file %f` matches regular expression desc
+(the filename: part from `file %f` is removed))
+.PP
+.I default
+.IP
+(matches any file no matter what desc is)
+.PP
+Other lines should start with a space or tab and should be of the format:
+.PP
+.I keyword=commandNL
+(with no spaces around =), where 
+.I keyword
+should be: 
+.PP
+.I Open
+(if the user presses Enter or doubleclicks it), 
+.I View
+(F3), 
+.I Edit
+(F4), 
+.I Drop
+(user drops some files on it) or any other
+user defined name (those will be listed in the extension dependent pop-up
+menu). 
+.I Icon
+name is reserved for future use by mc.
+.PP
+.I command
+is any one-line shell command, with the simple 
+.\"LINK2"
+macro substitution.
+.\"Macro Substitution"
+.PP
+Target are evaluated from top to bottom (order is thus important).
+If some actions are missing, search continues as if this target didn't
+match (i.e. if a file matches the first and second entry and View action
+is missing in the first one, then on pressing F3 the View action from
+the second entry will be used. default should catch all the actions.
+.PP
+.\"NODE "    Background jobs"
+.SH "    Background Jobs"
+This lets you control the state of any background Midnight Commander
+process (only copy and move files operations can be done in the
+background).  You can stop, restart and kill a background job from
+here. 
+.PP
+.SH "    Menu File Edit"
+The user menu is a menu of useful actions that can be customized by
+the user. When you access the user menu, the
+file .mc.menu from the current directory is used if it exists,
+but only if it is owned by user or root and is not world-writable.
+If no such file found, ~/.mc/menu is tried in the same way, 
+and otherwise mc uses the default system-wide menu
+@prefix@/lib/mc/mc.menu.
+.PP
+The format of the menu file is very simple. Lines that start with
+anything but space or tab are considered entries for the menu (in
+order to be able to use it like a hot key, the first character should
+be a letter). All the lines that start with a space or a tab are the
+commands that will be executed when the entry is selected.
+.PP
+When an option is selected all the command lines of the option are
+copied to a temporary file in the temporary directory (usually
+/usr/tmp) and then that file is executed. This allows the user to put
+normal shell constructs in the menus. Also simple macro substitution
+takes place before executing the menu code. For more information, see
+.\"LINK2"
+macro substitution.
+.\"Macro Substitution"
+.PP
+Here is a sample mc.menu file:
+.PP
+.nf
+A	Dump the currently selected file
+	od -c %f
+
+B	Edit a bug report and send it to root
+	vi /tmp/mail.$$
+	mail -s "Midnight Commander bug" root < /tmp/mail.$$
+
+M	Read mail
+	emacs -f rmail
+
+N	Read Usenet news
+	emacs -f gnus
+
+H	Call the info hypertext browser
+	info
+
+J	Copy current directory to other panel recursively
+	tar cf - . | (cd %D && tar xvpf -)
+
+K	Make a release of the current subdirectory
+	echo -n "Name of distribution file: "
+	read tar
+	ln -s %d `dirname %d`/$tar 
+	cd ..
+	tar cvhf ${tar}.tar $tar
+
+= f *.tar.gz | f *.tgz & t n
+X       Extract the contents of a compressed tar file
+	tar xzvf %f
+.fi
+.PP
+.B Default Conditions
+.PP
+Each menu entry may be preceded by a condition. The condition must
+start from the first column with a '=' character. If the condition is
+true, the menu entry will be the default entry.
+.PP
+.nf
+Condition syntax: 	= <sub-cond>
+  or:			= <sub-cond> | <sub-cond> ...
+  or:			= <sub-cond> & <sub-cond> ... 
+
+Sub-condition is one of following:
+
+  y <pattern>		syntax of current file matching pattern?
+                        for edit menu only.
+  f <pattern>		current file matching pattern?
+  F <pattern>		other file matching pattern?
+  d <pattern>		current directory matching pattern?
+  D <pattern>		other directory matching pattern?
+  t <type>		current file of type?
+  T <type>		other file of type?
+  x <filename>		is it executable filename?
+  ! <sub-cond>		negate the result of sub-condition
+.fi
+.PP
+Pattern is a normal shell pattern or a regular expression, according
+to the shell patterns option. You can override the global value of
+the shell patterns option by writing "shell_patterns=x" on the first
+line of the menu file (where "x" is either 0 or 1).
+.PP
+.nf
+Type is one or more of the following characters:
+
+  n	not directory
+  r	regular file
+  d	directory
+  l	link
+  c	char special
+  b	block special
+  f	fifo (pipe)
+  s	socket
+  x	executable
+  t	tagged
+.fi
+.PP
+For example 'rlf' means either regular file, link or fifo. The 't'
+type is a little special because it acts on the panel instead of the
+file. The condition '=t t' is true if there are tagged files in the
+current panel and false if not.
+.PP
+If the condition starts with '=?' instead of '=' a debug trace will be
+shown whenever the value of the condition is calculated.
+.PP
+The conditions are calculated from left to right. This means
+.nf
+	= f *.tar.gz | f *.tgz & t n
+.fi
+is calculated as
+.nf
+	( (f *.tar.gz) | (f *.tgz) ) & (t n)
+.fi
+.PP
+Here is a sample of the use of conditions:
+.PP
+.nf
+= f *.tar.gz | f *.tgz & t n
+L	List the contents of a compressed tar-archive
+	gzip -cd %f | tar xvf -
+.fi
+.PP
+.B Addition Conditions
+.PP
+If the condition begins with '+' (or '+?') instead of '=' (or '=?') it
+is an addition condition. If the condition is true the menu entry will
+be included in the menu. If the condition is false the menu entry will
+not be included in the menu.
+.PP
+You can combine default and addition conditions by starting condition
+with '+=' or '=+' (or '+=?' or '=+?' if you want debug trace). If you
+want to use two different conditions, one for adding and another for
+defaulting, you can precede a menu entry with two condition lines, one
+starting with '+' and another starting with '='.
+.PP
+Comments are started with '#'. The additional comment lines must start
+with '#', space or tab.
+.PP
+.SH "  Options Menu"
+The Midnight Commander has some options that may be toggled on and
+off in several dialogs which are accessible from this menu. Options 
+are enabled if they have an asterisk or "x" in front of them. 
+.PP
+The
+.\"LINK2"
+Configuration
+.\"Configuration"
+command pops up a dialog from which you can change most of settings of
+the Midnight Commander.
+.PP
+The
+.\"LINK2"
+Display bits
+.\"Display bits"
+command pops up a dialog from which you may select which characters is your
+terminal able to display.
+.PP
+The
+.\"LINK2"
+Confirmation
+.\"Confirmation"
+command pops up a dialog from which you specify which actions you want to
+confirm.
+.PP
+The
+.\"LINK2"
+Learn keys
+.\"Learn keys"
+command pops up a dialog from which you test some keys which are not working
+on some terminals and you may fix them.
+.PP
+The
+.\"LINK2"
+Virtual FS
+.\"Virtual FS"
+command pops up a dialog from which you specify some VFS related options.
+.PP
+The
+.\"LINK2"
+Layout
+.\"Layout"
+command pops up a dialog from which you specify a bunch of options how mc
+looks like on the screen.
+.PP
+The
+.\"LINK2"
+Save setup
+.\"Save Setup"
+command saves the current settings of the Left, Right and Options
+menus. A small number of other settings is saved, too.
+.PP
+.SH "    Configuration"
+The options in this dialog are divided into three groups:
+Panel Options, Pause after run and Other Options.
+.PP
+.B Panel Options
+.PP
+.I Show Backup Files.
+If enabled, the Midnight Commander will show files ending with a tilde.
+Otherwise, they won't be shown (like GNU's ls option -B).
+.PP
+.I Show Hidden Files.
+If enabled, the Midnight Commander will show all files that start with
+a dot (like ls -a).
+.PP
+.I Mark moves down.
+If enabled, the selection bar will move down when you mark a file (with
+either C-t or the Insert key).
+.PP
+.I Drop down menus.
+When this option is enabled, the pull down menus will be activated as
+soon as you press the 
+.B F9
+key.  Otherwise, you will only get the menu title, and you will have
+to activate the menu either with the arrow keys or with the hotkeys.
+It is recommended if you are using hotkeys.
+.PP
+.I Mix all files.
+If this option is enabled, all files and directories are shown mixed
+together.  If the option is off, directories (and links to directories)
+are shown at the beginning of the listing, and other files below.
+.PP
+.I Fast directory reload.
+If this option is enabled, the Midnight Commander will use a trick to
+determine if the directory contents have changed.  The trick is to reload
+the directory only if the i-node of the directory has changed; this means
+that reloads only happen when files are created or deleted.  If what
+changes is the i-node for a file in the directory (file size changes,
+mode or owner changes, etc) the display is not updated.  In these cases,
+if you have the option on, you have to rescan the directory manually
+(with C-r).
+.PP
+.B Pause after run
+.PP
+After executing your commands, the Midnight Commander can pause, so
+that you can examine the output of the command.  There are three
+possible settings for this variable:
+.IP
+.I Never
+Means that you do not want to see the output of your command.  If you
+are using the Linux or SCO console or an xterm, you will be able to see the
+output of the command by typing C-o.
+.IP
+.I "On dumb terminals"
+You will get the pause message on terminals that are not capable of
+showing the output of the last command executed (any terminal that is
+not an xterm or the Linux console).
+.IP
+.I Always
+The program will pause after executing all of your commands.
+.PP
+.B Other Options
+.PP
+.I Verbose operation.
+This toggles whether the file Copy, Rename and Delete operations are
+verbose (i.e., display a dialog box for each operation). If you have a
+slow terminal, you may wish to disable the verbose operation. It is
+automatically turned off if the speed of your terminal is less than
+9600 bps.
+.PP
+.I Compute totals.
+If this option is enabled, the Midnight
+Commander computes total byte sizes and total number of files
+prior to any Copy, Rename and Delete operations. This will
+provide you with a more accurate progress bar at the expense
+of some speed. This option has no effect, if 
+.I Verbose operation
+is disabled.
+.PP
+.I Shell Patterns.
+By default the Select, Unselect and Filter commands will use shell-like
+regular expressions. The following conversions are performed to achieve
+this: the '*' is replaced by '.*' (zero or more characters); the '?'
+is replaced by '.' (exactly one character) and '.' by the literal
+dot. If the option is disabled, then the regular expressions are the
+ones described in ed(1).
+.PP
+.I Auto Save Setup.
+If this option is enabled, when you exit the Midnight Commander the
+configurable options of the Midnight Commander are saved in the
+~/.mc/ini file.
+.PP
+.I Auto menus.
+If this option is enabled, the user menu will be invoked at startup.
+Useful for building menus for non-unixers.
+.PP
+.I Use internal editor.
+If this option is enabled, the built-in file editor is used to edit
+files. If the option is disabled, the editor specified in the
+.B EDITOR
+environment variable is used.
+If no editor is specified, 
+.B vi
+is used.  See the section on the
+.\"LINK2"
+internal file editor.
+.\"Internal File Editor"
+.PP
+.I Use internal viewer.
+If this option is enabled, the built-in file viewer is used to view
+files. If the option is disabled, the pager specified in the
+.B PAGER
+environment variable is used.
+If no pager is specified, the 
+.B view
+command is used.  See the section on the
+.\"LINK2"
+internal file viewer.
+.\"Internal File Viewer"
+.PP
+.I Complete: show all.
+By default the Midnight Commander
+pops up all possible 
+.\"LINK2"
+completions
+.\"Completion"
+if the completion is
+ambiguous if you press 
+.B M-Tab
+for the second time, for the
+first time it just completes as much as possible and in
+the case of ambiguity beeps. If you want to see all the
+possible completions already after the first
+.B M-Tab
+pressing, enable this option.
+.PP
+.I Rotating dash.
+If this option is enabled, the 
+Midnight Commander shows a rotating dash in the upper right corner
+as a work in progress indicator.
+.PP
+.I Lynx-like motion.
+If this option is enabled, 
+you may use the arrows keys to automatically chdir if the
+current selection is a subdirectory and the shell command
+line is empty. By default, this setting is off.
+.PP
+.I Advanced chown.
+If this option is enabled, the 
+.\"LINK2"
+Advanced Chown
+.\"Advanced Chown"
+command will be invoked if you run the 
+.\"LINK2"
+Chmod
+.\"Chmod"
+or 
+.\"LINK2"
+Chown
+.\"Chown"
+command.
+.PP
+.I Cd follows links.
+This option, if set, causes the Midnight Commander to follow the
+logical chain of directories when changing current directory
+either in the panels, or using the cd command. This is the default
+behavior of bash. When unset, the Midnight Commander follows the
+real directory structure, so cd .. if you've entered that directory
+through a link will move you to the current directory's real parent
+and not to the directory where the link was present.
+.PP
+.I Safe delete.
+If this option is enabled, deleting files 
+unintentionally will get more difficult. The default
+selection in the confirmation dialog changes from the "Yes"
+to the "No" button and deletion of non empty directories has to be 
+confirmed by entering the word 
+.I yes
+\&. 
+By default this option is disabled.
+.PP
+.SH "    Display bits"
+This is used to configure the range of visible characters on the
+screen.  This setting may be 7-bits if your terminal/curses supports
+only seven output bits, ISO-8859-1 displays all the characters in the
+ISO-8859-1 map and full 8 bits is for those terminals that can display
+full 8 bit characters.
+.PP
+.SH "    Confirmation"
+In this menu you configure the confirmation options for file deletion,
+overwriting, execution by pressing enter and quitting the program.
+.PP
+.SH "    Learn keys"
+This dialog allows you to test and redefine functional keys, cursor
+arrows and some other keys to make them work properly on your terminal.
+They often don't, since many terminal databases are incomplete or broken.
+.PP
+You can move around with the Tab key and with the vi moving keys ('h'
+left, 'j' down, 'k' up and 'l' right).  Once you press any cursor movement
+key and it is recognized, you can use that key as well.
+.PP
+You can test keys just by pressing each of them.  When you press a
+key and it is recognized properly, OK should appear next to the name
+of that key.  Once a key is marked OK it starts working as usually,
+e.g. F1 pressed the first time will just check that the F1 key works,
+but after that it will show help.  The same applies to the arrow keys.
+The Tab key should be working always.
+.PP
+If some keys do not work properly then you won't see OK appear after
+pressing that key.  Then you may want to redefine it.  Do it by pressing
+the button with the name of that key (either by the mouse or by Enter
+or Space after selecting the button with Tab or arrows).  Then a message
+box will appear asking you to press that key.  Do it and wait until the
+message box disappears.  If you want to abort, just press Escape once
+and wait.
+.PP
+When you finish with all the keys, you can Save them.  The definitions
+for the keys you have redefined will be written into the [terminal:TERM]
+section of your ~/.mc/ini file (where TERM is the name of your current
+terminal).  The definitions of the keys that were already working properly
+are not saved.
+.PP
+.SH "    Virtual FS"
+This option gives you control over the settings of the 
+.\"LINK2"
+Virtual File System 
+.\"Virtual File System"
+information cache.  
+.PP
+The Midnight Commander keeps in memory the information
+related to some of the virtual file systems to speed up
+the access to the files in the file system (for example,
+directory listings fetched from ftp servers). 
+.PP
+Moreover in order to access the contents of compressed files 
+(for example, compressed tar files) the Midnight Commander 
+has to create a temporary uncompressed file on your disk.
+.PP
+Since both the information in memory and the temporary files on
+disk take up resources, you may want to tune the parameters of 
+the cached information to decrease your resource usage or to maximize
+the speed of access to frequently used file systems.
+.PP
+The Tar file system is quite clever about how it handles
+tar files: it just loads the directory entries and when it
+needs to use the information contained in the tar file, it
+goes and grab it.
+.PP
+In the wild, tar files are usually kept compressed (plain
+tar files are species in extinction), and because of the
+nature of those files (the directory entries for the tar
+files is not there waiting for us to be loaded), the tar
+file system has to uncompress the file
+on the disk in a temporary location and then access the
+uncompressed file as a regular tar file.
+.PP
+Now, since we all love to browse files and tar files all
+over the disk, it's common that you will leave a tar file
+and the re-enter it later. Since uncompression is slow,
+the Midnight Commander will cache the information in
+memory for a limited amount of time, after you hit the
+timeout, all of the resources associated with the
+file system will be freed. The default timeout is set to
+one minute.
+.PP
+The 
+.\"LINK2"
+FTP File System
+.\"FTP File System"
+keeps the directory listing it fetches from a ftp server
+in a cache.  The cache
+expire time is configurable with the 
+.I ftpfs directory cache timeout
+option.  
+A low value for this
+option may slow down every operation on the ftp file System
+because every operation is accompanied by a query of the
+ftp server. 
+.PP
+Moreover you can define a proxy host for doing ftp transfers 
+and configure the Midnight Commander to always use the proxy host. 
+See
+the section on
+.\"LINK2"
+FTP File System
+.\"FTP File System"
+for more information.
+.PP
+.SH "    Layout"
+The layout dialog gives you a possibility to change the general layout
+of screen. You can specify whether the menubar, the command prompt,
+the hintbar and the function keybar are visible. On the Linux or SCO console
+you can specify how many lines are shown in the output window.
+.PP
+The rest of the screen area is used for the two directory panels. You
+can specify whether the area is split to the panels in vertical or
+horizontal direction. The split can be equal or you can specify an
+unequal split.
+.PP
+By default all contents of the directory panels are displayed with 
+the same color, but you can specify whether 
+.I permissions 
+and 
+.I file types
+are highlighted with special 
+.\"LINK2"
+Colors.
+.\"Colors"
+If permission highlighting is enabled, the parts of the 
+.I perm
+and
+.I mode
+.\"LINK2"
+display fields
+.\"Listing Mode..."
+which are valid for the user running Midnight Commander
+are highlighted with the color defined with the
+.I selected
+keyword. If file type highlighting is enabled, files are colored according
+to their file type (e.g. directory, core file, executable, ...). 
+.PP
+If the 
+.I Show Mini-Status
+option is enabled, one line of status
+information about the currently selected item is showed at the bottom 
+of the panels.
+.PP
+.SH "    Save Setup"
+At startup the Midnight Commander will try to load initialization
+information from the ~/.mc/ini file. If this file doesn't exist,
+it will load the information from the system-wide configuration file,
+located in @prefix@/lib/mc/mc.ini. If the system-wide configuration
+file doesn't exist, MC uses the default settings.
+.PP
+The
+.I Save Setup
+command creates the ~/.mc/ini file by saving the current settings
+of the
+.\"LINK2"
+Left, Right
+.\"Left and Right Menus"
+and
+.\"LINK2"
+Options
+.\"Options Menu"
+menus.
+.PP
+If you activate the
+.I auto save setup
+option, MC will always save the current settings when exiting.
+.PP
+There also exist settings which can't be changed from the menus. To
+change these settings you have to edit the setup file with your
+favorite editor. See the section on
+.\"LINK2"
+Special Settings
+.\"Special Settings"
+for more information.
+.PP
+.SH ""
+.SH "Executing operating system commands"
+You may execute commands by typing them directly in the Midnight
+Commander's input line, or by selecting the program you want to
+execute with the selection bar in one of the panels and hitting Enter.
+.PP
+If you press Enter over a file that is not executable, the Midnight
+Commander checks the extension of the selected file against the
+extensions in the
+.\"LINK2"
+Extensions File.
+.\"Extension File Edit"
+If a match is found then the code associated with that extension is
+executed. A very simple
+.\"LINK2"
+macro expansion
+.\"Macro Substitution"
+takes place before executing the command.
+.PP
+.SH "  The cd internal command"
+The 
+.I cd
+command is interpreted by the Midnight Commander, it is not passed to
+the command shell for execution.  Thus it may not handle all of the
+nice macro expansion and substitution that your shell does, although it
+does some of them:
+.PP
+.I Tilde substitution
+The (~) will be substituted with your home directory, if you append a
+username after the tilde, then it will be substituted with the login
+directory of the the specified user.
+.PP
+For example, ~guest is the home directory for the user guest, while
+~/guest is the directory guest in your home directory.
+.PP
+.I Previous directory
+You can jump to the directory you were previously by using the special
+directory name '-' like this:
+.B cd -
+.PP
+.I CDPATH directories
+If the directory specified to the 
+.B cd 
+command is not in the current directory, then The Midnight Commander
+uses the value in the environment variable 
+.B CDPATH
+to search for the directory in any of the named directories.
+.PP
+For example you could set your
+.B CDPATH
+variable to ~/src:/usr/src, allowing you to change your directory to
+any of the directories inside the ~/src and /usr/src directories, from
+any place in the file system by using it's relative name (for example
+cd linux could take you to /usr/src/linux).
+.PP
+.SH "  Macro Substitution"
+.PP
+When accessing a
+.\"LINK2"
+user menu, 
+.\"Menu File Edit"
+or executing an
+.\"LINK2"
+extension dependent command,
+.\"Extension File Edit"
+or running a command from the command line input,
+a simple macro substitution takes place.
+.PP
+The macros are:
+.PP
+.I "%i"
+.IP
+The indent of blank space, equal the cursor column
+position. For edit menu only.
+.PP
+.I "%y"
+.IP
+The syntax type of current file. For edit menu only.
+.PP
+.I "%k"
+.IP
+The block file name.
+.PP
+.I "%e"
+.IP
+The error file name.
+.PP
+.I "%m"
+.IP
+The current menu name.
+.PP
+.I "%f"
+and
+.I "%p"
+.IP
+The current file name.
+.PP
+.I "%x"
+.IP
+The extension of current file name.
+.PP
+.I "%b"
+.IP
+The current file name without extension.
+.PP
+.I "%d"
+.IP
+The current directory name.
+.PP
+.I "%F"
+.IP
+The current file in the unselected panel.
+.PP
+.I "%D"
+.IP
+The directory name of the unselected panel.
+.PP
+.I "%t"
+.IP
+The currently tagged files.
+.PP
+.I "%T"
+.IP
+The tagged files in the unselected panel.
+.PP
+.I "%u"
+and
+.I "%U"
+.IP
+Similar to the %t and %T macros, but in addition the files are
+untagged. You can use this macro only once per menu file entry or
+extension file entry, because next time there will be no tagged
+files.
+.PP
+.I "%s"
+and
+.I "%S"
+.IP
+The selected files: The tagged files if there are any. Otherwise the
+current file.
+.PP
+.I "%q"
+.IP
+Dropped files. In all places except in the Drop action of the
+.\"LINK2"
+mc.ext file,
+.\"Extension File Edit"
+this will become a null string, in the Drop action it will be replaced
+with a space separated list of files that were dropped on the file.
+.PP
+.I "%cd"
+.IP
+This is a special macro that is used to change the current directory
+to the directory specified in front of it.  This is used primarily as
+an interface to the
+.\"LINK2"
+Virtual File System.
+.\"Virtual File System"
+.PP
+.I "%view"
+.IP
+This macro is used to invoke the internal viewer.  This macro can be
+used alone, or with arguments.  If you pass any arguments to this
+macro, they should be enclosed in brackets.
+.IP
+The arguments are: 
+.I ascii
+to force the viewer into ascii mode;
+.I hex
+to force the viewer into hex mode;
+.I nroff
+to tell the viewer that it should interpret the bold and underline
+sequences of nroff; 
+.I unformatted
+to tell the viewer to not interpret nroff commands for making the text
+bold or underlined.
+.PP
+.I "%%"
+.IP
+The % character
+.PP
+.I "%{some text}"
+.IP
+Prompt for the substitution. An input box is shown and the text inside
+the braces is used as a prompt. The macro is substituted by the text
+typed by the user. The user can press ESC or F10 to cancel. This macro
+doesn't work on the command line yet.
+.PP
+.I "%var{ENV:default}"
+.IP
+If environment variable
+.I ENV
+is unset, the 
+.I default
+is substituted.  Otherwise, the value of
+.I ENV
+is substituted.
+.PP
+.SH "  The subshell support"
+The subshell support is a compile time option, that works with the
+shells: bash, tcsh and zsh.  
+.PP
+When the subshell code is activated the Midnight Commander will
+spawn a concurrent copy of your shell (the one defined in the 
+.B SHELL
+variable and if it is not defined, then the one in the /etc/passwd
+file) and run it in a pseudo terminal, instead of invoking a new shell
+each time you execute a command, the command will be passed to the
+subshell as if you had typed it.  This also allows you to change the
+environment variables, use shell functions and define aliases that are
+valid until you quit the Midnight Commander.
+.PP
+If you are using 
+.B bash
+you can specify startup
+commands for the subshell in your ~/.mc/bashrc file and
+special keyboard maps in the ~/.mc/inputrc file.
+.B tcsh 
+users may specify startup commands in the ~/.mc/tcshrc file.
+.PP
+When the subshell code is used, you can suspend applications at any
+time with the sequence C-o and jump back to the Midnight Commander, if
+you interrupt an application, you will not be able to run other
+external commands until you quit the application you interrupted.
+.PP
+An extra added feature of using the subshell is that the prompt
+displayed by the Midnight Commander is the same prompt that you are
+currently using in your shell.
+.PP
+The
+.\"LINK2"
+OPTIONS
+.\"OPTIONS"
+section has more information on how you can control the subshell code.
+.PP
+.SH "  Controlling Midnight Commander"
+The Midnight Commander defines an environment variable
+MC_CONTROL_FILE. The commands executed by MC may give instructions to
+MC by writing to the file specified by this variable.  This is only
+available if you compiled your copy of the Midnight Commander with the
+WANT_PARSE option.
+.PP
+The following instructions are supported.
+.PP
+.nf
+clear_tags		Clear all tags.
+tag <filename>		Tag specified file.
+untag <filename>	Untag specified file.
+select <filename>	Move pointer to file.
+change_panel		Switch between panels.
+cd <path>               Change directory.
+.fi
+.PP
+If the first letter of the instruction is in lower case it operates on
+the current panel. If the letter is in upper case the instruction
+operates on the other panel. The additional letters must be in lower
+case. Instructions must be separated by exactly one space, tab or
+newline. The instructions don't work in the Info, Tree and Quick
+views. The first error causes the rest to be ignored.
+.PP
+.SH "Chmod"
+The Chmod window is used to change the attribute bits in a group of
+files and directories.  It can be invoked with the C-x c key combination.
+.PP
+The Chmod window has two parts -
+.I Permissions
+and 
+.I File
+.PP
+In the File section are displayed the name of the file or directory
+and its permissions in octal form, as well as its owner and group.
+.PP
+In the Permissions section there is a set of check buttons which
+correspond to the file attribute bits.  As you change the attribute
+bits, you can see the octal value change in the File section.
+.PP
+To move between the widgets (buttons and check buttons) use the
+.I arrow keys
+or the
+.I Tab
+key.  To change the state of the check buttons or to select a button
+use
+.I Space.
+You can also use the hotkeys on the buttons to quickly activate them.
+Hotkeys are shown as highlighted letters on the buttons.
+.PP
+To set the attribute bits, use the Enter key.
+.PP
+When working with a group of files or directories, you just click on
+the bits you want to set or clear.  Once you have selected the bits
+you want to change, you select one of the action buttons (Set marked
+or Clear marked).
+.PP
+Finally, to set the attributes exactly to those specified, you can use
+the
+.B [Set all]
+button, which will act on all the tagged files.
+.PP
+.B [Marked all]
+set only marked attributes to all selected files
+.PP
+.B [Set marked]
+set marked bits in attributes of all selected files
+.PP
+.B [Clean marked]
+clear marked bits in attributes of all selected files
+.PP
+.B [Set]
+set the attributes of one file
+.PP
+.B [Cancel]
+cancel the Chmod command
+.PP
+.SH "Chown"
+The Chown command is used to change the owner/group of a file. The hot
+key for this command is C-x o.
+.PP
+.SH "Advanced Chown"
+The Advanced Chown command is the 
+.\"LINK2"
+Chmod
+.\"Chmod"
+and 
+.\"LINK2"
+Chown
+.\"Chown"
+command combined into one window. You can change the permissions and 
+owner/group of files at once.
+.PP
+.SH "File Operations"
+When you copy, move or delete files the Midnight Commander shows the
+file operations dialog. It shows the files currently being operated on
+and there are at most three progress bars. The file bar tells how big
+part of the current file has been copied so far. The count bar tells
+how many of tagged files have been handled so far. The bytes bar tells
+how big part of total size of the tagged files has been handled so
+far. If the verbose option is off the file and bytes bars are not
+shown.
+.PP
+There are two buttons at the bottom of the dialog. Pressing the Skip
+button will skip the rest of the current file. Pressing the Abort
+button will abort the whole operation, the rest of the files are
+skipped.
+.PP
+There are three other dialogs which you can run into during the file
+operations.
+.PP
+The error dialog informs about error conditions and has three
+choices. Normally you select either the Skip button to skip the file
+or the Abort button to abort the operation altogether. You can also
+select the Retry button if you fixed the problem from another
+terminal.
+.PP
+The replace dialog is shown when you attempt to copy or move a file on
+the top of an existing file. The dialog shows the dates and sizes of
+the both files. Press the Yes button to overwrite the file, the No
+button to skip the file, the alL button to overwrite all the files,
+the nonE button to never overwrite and the Update button to overwrite
+if the source file is newer than the target file. You can abort the
+whole operation by pressing the Abort button.
+.PP
+The recursive delete dialog is shown when you try to delete a
+directory which is not empty. Press the Yes button to delete the
+directory recursively, the No button to skip the directory, the alL
+button to delete all the directories and the nonE button to skip all
+the non-empty directories. You can abort the whole operation by
+pressing the Abort button. If you selected the Yes or alL button you
+will be asked for a confirmation. Type "yes" only if you are really
+sure you want to do the recursive delete.
+.PP
+If you have tagged files and perform an operation on them only the
+files on which the operation succeeded are untagged. Failed and
+skipped files are left tagged.
+.PP
+.SH "Mask Copy/Rename"
+The copy/move operations lets you translate the names of files in an easy
+way. To do it, you have to specify the correct source mask and usually in
+the trailing part of the destination specify some wildcards.
+All the files matching the source mask are copied/renamed according to
+the target mask. If there are tagged files, only the tagged files
+matching the source mask are renamed.
+.PP
+There are other option which you can set: 
+.PP
+Follow links tells whether make the symlinks and hardlinks in the source 
+directory (recursively in subdirectories) new links in the target 
+directory or whether would you like to copy their content.
+.PP
+Dive into subdirs tells what to do if in the target
+directory exists a directory with the same name as the
+file/directory being copied. The default action is to copy
+it's content into that directory, by enabling this 
+you can copy the source directory into that directory. 
+Perhaps an example will help:
+.PP
+You want to copy content of a directory foo to /bla/foo,
+which is an already existing directory. Normally (when
+Dive is not set), mc would copy it exactly into /bla/foo. 
+By enabling this option you will copy the content into /bla/foo/foo,
+because the directory already exists.
+.PP
+Preserve attributes tells whether to preserve the original files' 
+permissions, timestamps and if you are root whether to preserve 
+the original files' UID and GID. If this option is not set the current 
+value of the umask will be respected.
+.PP
+.B "Use shell patterns on"
+.PP
+When the shell patterns option is on you can use the '*' and '?'
+wildcards in the source mask. They work like they do in the shell. In
+the target mask only the '*' and '\\<digit>' wildcards are allowed. The
+first '*' wildcard in the target mask corresponds to the first
+wildcard group in the source mask, the second '*' corresponds to the
+second group and so on. The '\\1' wildcard corresponds to the first
+wildcard group in the source mask, the '\\2' wildcard corresponds to
+the second group and so on all the way up to '\\9'. The '\\0' wildcard
+is the whole filename of the source file.
+.PP
+Two examples:
+.PP
+If the source mask is "*.tar.gz", the destination is "/bla/*.tgz" and the
+file to be copied is "foo.tar.gz", the copy will be "foo.tgz" in "/bla".
+.PP
+Let's suppose you want to swap basename and extension so that "file.c"
+will become "c.file" and so on. The source mask for this is "*.*" and
+the destination is "\\2.\\1".
+.PP
+.B "Use shell patterns off"
+.PP
+When the shell patterns option is off the MC doesn't do automatic
+grouping anymore. You must use '\\(...\\)' expressions in the source
+mask to specify meaning for the wildcards in the target mask. This is
+more flexible but also requires more typing. Otherwise target masks
+are similar to the situation when the shell patterns option is on.
+.PP
+Two examples:
+.PP
+If the source mask is "^\\(.*\\)\\.tar\\.gz$", the destination is
+"/bla/*.tgz" and the file to be copied is "foo.tar.gz", the copy
+will be "/bla/foo.tgz".
+.PP
+Let's suppose you want to swap basename and extension so that "file.c"
+will become "c.file" and so on. The source mask for this is
+"^\\(.*\\)\\.\\(.*\\)$" and the destination is "\\2.\\1".
+.PP
+.B "Case Conversions"
+.PP
+You can also change the case of the filenames.  If you use '\\u'
+or '\\l' in the target mask, the next character will be converted to
+uppercase or lowercase correspondingly.
+.PP
+If you use '\\U' or '\\L' in the target mask, the next characters will
+be converted to uppercase or lowercase correspondingly up to the
+next '\\E' or next '\\U', '\\L' or the end of the file name.
+.PP
+The '\\u' and '\\l' are stronger than '\\U' and '\\L'.
+.PP
+For example, if the source mask is '*' (shell patterns on) or '^\\(.*\\)$'
+(shell patterns off) and the target mask is '\\L\\u*' the file names
+will be converted to have initial upper case and otherwise lower case.
+.PP
+You can also use '\\' as a quote character. For example, '\\\\' is 
+a backslash and '\\*' is an asterisk.
+.PP
+.SH "Internal File Viewer"
+The internal file viewer provides two display modes: ASCII and hex.
+To toggle between modes, use the F4 key.  If you have the GNU gzip
+program installed, it will be used to automatically decompress the
+files on demand.
+.PP
+The viewer will try to use the best method provided by your system or
+the file type to display the information.  The internal file viewer
+will interpret some string sequences to set the bold and underline
+attributes, thus making a pretty display of your files.  
+.PP
+When in hex mode, the search function accepts text in quotes and
+constant numbers.  Text in quotes is matched exactly after removing
+the quotes.  Each number matches one byte.  You can mix quoted text
+with constants like this:
+.PP
+.nf
+"String" -1 0xBB 012 "more text"
+.fi
+.PP
+Note that 012 is an octal number.  -1 is converted to 0xFF.
+.PP
+Some internal details about the viewer: On systems that provide the
+mmap(2) system call, the program maps the file instead of loading it;
+if the system does not provide the mmap(2) system call or the file
+matches an action that requires a filter, then the viewer will use
+it's growing buffers, thus loading only those parts of the file that
+you actually access (this includes compressed files).
+.PP
+Here is a listing of the actions associated with each key that the
+Midnight Commander handles in the internal file viewer.
+.PP
+.B F1
+Invoke the builtin hypertext help viewer.
+.PP
+.B F2
+Toggle the wrap mode.
+.PP
+.B F4
+Toggle the hex mode.
+.PP
+.B F5
+Goto line.  This will prompt you for a line number and will display
+that line.
+.PP
+.B F6, /. 
+Regular expression search.
+.PP
+.B ?,
+Reverse regular expression search.
+.PP
+.B F7
+Normal search / hex mode search.
+.PP
+.B C-s, F17, n.
+Start normal search if there was no previous search expression else
+find next match.
+.PP
+.B C-r.
+Start reverse search if there was no previous search expression else
+find next match.
+.PP
+.B F8
+Toggle Raw/Parsed mode: This will show the file as found on disk or if
+a processing filter has been specified in the mc.ext file, then the
+output from the filter. Current mode is always the other than written
+on the button label, since on the button is the mode which you enter
+by that key.
+.PP
+.B F9
+Toggle the format/unformat mode: when format mode is on the viewer
+will interpret some string sequences to show bold and underline with
+different colors. Also, on button label is the other mode than current.
+.PP
+.B F10, Esc.
+Exit the internal file viewer.
+.PP
+.B next-page, space, C-v.
+Scroll one page forward.
+.PP
+.B prev-page, M-v, C-b, backspace.
+Scroll one page backward.
+.PP
+.B down-key
+Scroll one line forward.
+.PP
+.B up-key
+Scroll one line backward.
+.PP
+.B C-l
+Refresh the screen.
+.PP
+.B C-o
+Switch to the subshell and show the command screen.
+.PP
+.B !
+Like C-o, but run a new shell if the subshell is not running.
+.PP
+.B "[n] m"
+Set the mark n.
+.PP
+.B "[n] r"
+Jump to the mark n.
+.PP
+.B C-f
+Jump to the next file.
+.PP
+.B C-b 
+Jump to the previous file.
+.PP
+.B M-r 
+Toggle the ruler.
+.PP
+It's possible to instruct the file viewer how to display a file, look
+at the 
+.\"LINK2"
+Extension File Edit section
+.\"Extension File Edit"
+.SH "Internal File Editor"
+The internal file editor provides most of the features of
+common full screen editors. It is invoked using 
+.B F4
+provided
+the 
+.I use_internal_edit
+option is set in the initialization file. It has an extendable file size
+limit of sixteen megabytes and edits binary files flawlessly.
+.PP
+The features it presently supports are: Block
+copy, move, delete, cut, paste; 
+.I "key for key undo"; 
+pull-down
+menus; file insertion; macro definition; regular expression
+search and replace (and our own scanf-printf search and
+replace); shift-arrow MSW-MAC text highlighting (for the
+linux console only); insert-overwrite toggle; and an option
+to pipe text blocks through shell commands like indent.
+.PP
+The editor is very easy to use and requires no tutoring.
+To see what keys do what, just consult the appropriate
+pull-down menu. Other keys are: Shift movement
+keys do text highlighting. 
+.B Ctrl-Ins
+copies to the file
+.B cooledit.clip and 
+.B Shift-Ins
+pastes from cooledit.clip.
+.B Shift-Del 
+cuts to 
+.B cooledit.clip, 
+and 
+.B Ctrl-Del
+deletes highlighted text. The completion key also does a Return
+with an automatic indent. Mouse highlighting also works, and you
+can override the mouse as usual by holding down the shift key
+while dragging the mouse to let normal terminal mouse highlighting
+work.
+.PP
+To define a macro, press 
+.B Ctrl-R
+and then type out the key
+strokes you want to be executed. Press 
+.B Ctrl-R
+again when finished. You can then assign the macro to any key you
+like by pressing that key. The macro is executed when you press
+.B Ctrl-A and then the assigned key. The macro is also executed if
+you press Meta, Ctrl, or Esc and the assigned key, provided that the
+key is not used for any other function. Once defined, the macro
+commands go into the file 
+.B .mc/cedit/cooledit.macros
+in your home directory. You can delete a macro by deleting the
+appropriate line in this file.
+.PP
+.B F19
+will format the currently highlighted block (plain text or
+.B C
+or
+.B C++
+code or another). This is controlled by the
+file
+.B @prefix@/lib/mc/edit.indent.rc
+which is copied to
+.B .mc/cedit/edit.indent.rc
+in your home directory the first time you use it.
+.PP
+You can use scanf search and replace to search and replace
+a C format string. First take a look at the 
+.B sscanf
+and 
+.B sprintf
+man pages to see what a format string
+is and how it works. An example is as follows: Suppose you want
+to replace all occurrences of say, an open bracket, three
+comma separated numbers, and a close bracket, with the
+word 
+.I apples, 
+the third number, the word 
+.I oranges
+and then the second number, I would fill in the Replace dialog
+box as follows:
+.PP
+.nf
+ Enter search string
+(%d,%d,%d)
+ Enter replace string
+apples %d oranges %d
+ Enter replacement argument order
+3,2
+.fi
+.PP
+The last line specifies that the third and then the second
+number are to be used in place of the first and second.
+.PP
+It is advisable to use this feature with Prompt on replace on, because
+a match is thought to be found whenever the number of arguments found
+matches the number given, which is not always a real match. Scanf also
+treats whitespace as being elastic.  Note that the scanf format % is
+very useful for scanning strings, and whitespace.
+.PP
+The editor also displays non-us characters (160+). When editing
+binary files, you should set 
+.B display bits
+to 7 bits in the options menu to keep the spacing clean.
+.PP
+See also the file 
+.B README.edit
+in the source tree for some more info.
+.PP
+.SH "Completion"
+Let the Midnight Commander type for you.
+.PP
+Attempt to perform completion on the text before current position. MC
+attempts completion treating the text as variable (if the text begins with
+.B $
+), username (if the text begins with 
+.B ~
+), hostname (if the text
+begins with 
+.B @
+) or command (if you are on the command line in the
+position where you might type a command, possible completions then include
+shell reserved words and shell builtin commands as well) in turn. If none
+of these produces a match, filename completion is attempted.
+.PP
+Filename, username, variable and hostname completion works on all input
+lines, command completion is command line specific.
+If the completion is ambiguous (there are more different possibilities),
+MC beeps and the following action depends on the setting of the
+.I Complete: show all
+option in the
+.\"LINK2"
+Configuration
+.\"Configuration"
+dialog. If it is enabled, a list of all
+possibilities pops up next to the current position and you can select with
+the arrow keys and
+.B Enter
+the correct entry. You can also type the first letters in which the
+possibilities differ to move to a subset of all possibilities and complete
+as much as possible. If you press
+.B M-Tab
+again, only the subset will be shown in the listbox, otherwise the first
+item which matches all the previous characters will be highlighted. As soon
+as there is no ambiguity, dialog disappears, but you can hide it by
+canceling keys 
+.B Esc,
+.B F10
+and left and right arrow keys. If
+.\"LINK2"
+Complete: show all
+.\"Configuration"
+is disabled, the dialog pops up only if you press
+.B M-Tab
+for the second time, for the first time MC just beeps.
+.PP
+.SH "Virtual File System"
+The Midnight Commander is provided with a code layer to access the
+file system; this code layer is known as the virtual file system
+switch.  The virtual file system switch allows the Midnight Commander
+to manipulate files not located on the Unix file system.
+.PP
+Currently the Midnight Commander is packaged with some Virtual File
+Systems (VFS): the local file system, used for accessing the regular
+Unix file system; the ftpfs, used to manipulate files on remote
+systems with the FTP protocol; the tarfs, used to manipulate tar and
+compressed tar files; the undelfs, used to recover deleted files on
+ext2 file systems (the default file system for Linux systems), fish
+(for manipulating files over shell connections such as rsh and ssh) and
+finally the mcfs (Midnight Commander file system), a network based
+file system.  If the code was compiled with smbfs support, you can
+manipulate files on remote systems with the SMB (CIFS) protocol.
+.PP
+The VFS switch code will interpret all of the path names used and will
+forward them to the correct file system, the formats used for each one
+of the file systems is described later in their own section.
+.PP
+.SH "  FTP File System"
+The ftpfs allows you to manipulate files on remote machines, to
+actually use it, you may try to use the panel command FTP link
+(accessible from the menubar) or you may directly change your current
+directory to it using the cd command to a path name that looks like this:
+.PP
+.I /#ftp:[!][user[:pass]@]machine[:port][remote-dir]
+.PP
+The
+.I user, port
+and
+.I remote-dir
+elements are optional.  If you specify the
+.I user
+element, then the Midnight Commander will try to logon on the remote
+machine as that user, otherwise it will use your login name.  The
+optional 
+.I pass
+element, if present is the password used for the connection.  This is not
+recommended (nor keeping the password in your hotlist, unless you set the
+appropriate permissions there, and even then it may not be entirely safe).
+.PP
+Examples:
+.PP
+.nf
+    /#ftp:ftp.nuclecu.unam.mx/linux/local
+    /#ftp:tsx-11.mit.edu/pub/linux/packages
+    /#ftp:!behind.firewall.edu/pub
+    /#ftp:guest@remote-host.com:40/pub
+    /#ftp:miguel:xxx@server/pub
+.fi
+.PP
+To connect to sites behind a firewall, you will need to use the prefix
+ftp://! (i.e., with a bang character after the double slash) to make
+the Midnight Commander use a proxy host for doing the ftp transfer.
+You can define the proxy host in the
+.\"LINK2"
+Virtual File System
+.\"Virtual FS"
+dialog box.  
+.PP
+Another option to set is the 
+.I Always use ftp proxy
+option in the 
+.\"LINK2"
+Virtual File System
+.\"Virtual FS"
+dialog box.  This will configure the program
+to always use the proxy host.  If this variable is set, the program
+will do two things: consult the @prefix@/lib/mc/mc.no_proxy file for
+lines containing host names that are local (if the host name starts
+with a dot, it is assumed to be a domain) and to assume that any
+hostnames without dots in their names are directly accessible.
+.PP
+If you are using the ftpfs code with a filtering packet router that
+does not allow you to use the regular mode of opening files, you may
+want to force the program to use the passive-open mode.  To use this,
+set the ftpfs_use_passive_connections option in the initialization file.
+.PP
+The Midnight Commander keeps the directory listing in a cache.  The cache
+expire time is configurable in the
+.\"LINK2"
+Virtual File System 
+.\"Virtual FS"
+dialog box.  This has the funny behavior that even if you make changes to a
+directory, they will not be reflected in the directory listing until you
+force a cache reload with the C-r key.  This is a feature (when you think
+it's a bug, think about manipulating files on the other side of the Atlantic
+with ftpfs).
+.PP
+.SH "  Tar File System"
+The tar file system provides you with read-only access to your tar
+files and compressed tar files by using the chdir command.  To change
+your directory to a tar file, you change your current directory to the
+tar file by using the following syntax:
+.PP
+.I /filename.tar#utar/[dir-inside-tar]
+.PP
+The mc.ext file already provides a shortcut for tar files, this means
+that usually you just point to a tar file and press return to enter
+into the tar file, see the 
+.\"LINK2"
+Extension File Edit 
+.\"Extension File Edit"
+section for details on how this is done.
+.PP
+Examples:
+.PP
+.nf
+    mc-3.0.tar.gz#utar/mc-3.0/vfs
+    /ftp/GCC/gcc-2.7.0.tar#utar
+.fi
+.PP
+The latter specifies the full path of the tar archive.
+.SH "  FIle transfer over SHell filesystem"
+.PP
+The fish file system is a network based file system that allows you to
+manipulate the files in a remote machine as if they were local. To use
+this, the other side has to either run fish server, or has to have
+bash-compatible shell.
+.PP
+To connect to a remote machine, you just need to chdir
+into a special directory which name is in the following
+format:
+.PP
+.nf
+/#sh:[user@]machine[:options]/[remote-dir]
+.fi
+The 
+.I user, 
+.I options
+and 
+.I remote-dir
+elements are optional. If
+you specify the 
+.I user
+element then the Midnight Commander
+will try to logon on the remote machine as that user,
+otherwise it will use your login name.
+.PP
+The 
+.I options
+are 'C' - use compression and 'rsh' use rsh instead
+of ssh. If the 
+.I remote-dir
+element is present, your current directory on the remote machine will
+be set to this one.
+.PP
+Examples:
+.PP
+.nf
+    /#sh:onlyrsh.mx:r/linux/local
+    /#sh:joe@want.compression.edu:C/private
+    /#sh:joe@noncompressed.ssh.edu/private
+.fi
+.PP
+.SH "  Network File System"
+The Midnight Commander file system is a network base file system that
+allows you to manipulate the files in a remote machine as if they
+were local.  To use this, the remote machine must be running the
+mcserv(8) server program.
+.PP
+To connect to a remote machine, you just need to chdir into a special
+directory which name is in the following format:
+.PP
+.I /#mc:[user@]machine[:port][remote-dir]
+.PP
+The
+.I user, port
+and
+.I remote-dir
+elements are optional.  If you specify the 
+.I user
+element then the Midnight Commander will try to logon on the remote
+machine as that user, otherwise it will use your login name.
+.PP
+The 
+.I port
+element is used when the remote machine running on a special port
+(see the mcserv(8) manual page for more information about ports);
+finally, if the
+.I remote-dir
+element is present, your current directory on the remote machine will
+be set to this one.
+.PP
+Examples:
+.PP
+.nf
+    /#mc:ftp.nuclecu.unam.mx/linux/local
+    /#mc:joe@foo.edu:11321/private
+.fi
+.PP
+.SH "  Undelete File System"
+On Linux systems, if you asked configure to use the ext2fs undelete
+facilities, you will have the undelete file system available.
+Recovery of deleted files is only available on ext2 file systems.  The
+undelete file system is just an interface to the ext2fs library to:
+retrieve all of the deleted files names on an ext2fs and provides and
+to extract the selected files into a regular partition.
+.PP
+To use this file system, you have to chdir into the special file name
+formed by the "/#undel" prefix and the file name where the actual
+file system resides.
+.PP
+For example, to recover deleted files on the second partition of the
+first SCSI disk on Linux, you would use the following path name:
+.PP
+.nf
+    /#undel:sda2
+.fi
+.PP
+It may take a while for the undelfs to load the required information
+before you start browsing files there. 
+.PP
+.SH "  SMB File System"
+The smbfs allows you to manipulate files on remote machines with SMB
+(or CIFS) protocol.  These include Windows for Workgroups, 
+Windows 9x, Windows NT, Windows 2000, OS/2 and Samba.
+To actually use it, you may try 
+to use the panel command "SMB link..."
+(accessible from the menubar) or you may directly change your current
+directory to it using the cd command to a path name that looks like this:
+.PP
+.I /#smb:machine[/service][/remote-dir]
+.PP
+The
+.I service
+and
+.I remote-dir
+elements are optional.
+The
+.I username, domain
+and
+.I password 
+can be specified in input dialog.
+.PP
+Examples:
+.PP
+.nf
+    /#smb:machine/Share
+    /#smb:other_machine
+.fi
+.PP
+.SH "Colors"
+The Midnight Commander will try to detect if your terminal supports
+color using the terminal database and your terminal name.  Sometimes
+it gets confused, so you may force color mode or disable color mode
+using the -c and -b flag respectively.  
+.PP
+If the program is compiled with the Slang screen manager instead of
+ncurses, it will also check the variable 
+.B COLORTERM,
+if it is set, it has the same effect as the -c flag.
+.PP
+You may specify terminals that always force color mode
+by adding the 
+.I color_terminals
+variable to the Colors
+section of the initialization file. This will prevent the
+Midnight Commander from trying to detect if your terminal
+supports color. Example:
+.nf
+[Colors]
+color_terminals=linux,xterm
+.fi
+.nf
+color_terminals=terminal-name1,terminal-name2...
+.fi
+.PP
+The program can be compiled with both ncurses and slang, ncurses does
+not provide a way to force color mode: ncurses uses just the
+information in the terminal database.
+.PP
+The Midnight Commander provides a way to change the default colors.
+Currently the colors are configured using the environment variable
+.B MC_COLOR_TABLE 
+or the Colors section in the initialization file.
+.PP
+In the Colors section, the default color map is loaded from the 
+.I base_color 
+variable.  You can specify an alternate color map for a terminal by
+using the terminal name as the key in this section.  Example:
+.PP
+.nf
+[Colors]
+base_color=
+xterm=menu=magenta:marked=,magenta:markselect=,red
+.fi
+.PP
+The format for the color definition is:
+.PP
+.nf
+  <keyword>=<foregroundcolor>,<backgroundcolor>:<keyword>= ...
+.fi
+.PP
+The colors are optional, and the keywords are: normal,
+selected, marked, markselect, errors, input, reverse, gauge;
+Menu colors are: menu, menusel, menuhot, menuhotsel;  Dialog colors
+are: dnormal, dfocus, dhotnormal, dhotfocus;  Help colors
+are: helpnormal, helpitalic, helpbold, helplink, helpslink;  
+Viewer color is: viewunderline; Special highlighting colors are: 
+executable, directory, link, device, special, core; Editor colors
+are: editnormal, editbold, editmarked.
+.PP
+.I input 
+determines the color of input lines used in query dialogs.
+.PP
+.I gauge 
+determines the color of the filled part of the progress bar
+(gauge), which shows how many percent of files were copied
+etc. in a graphical way.
+.PP
+The dialog boxes use the following colors:
+.I dnormal 
+is used for the normal text,
+.I dfocus
+is the color used for the currently selected component,
+.I dhotnormal
+is the color used to differentiate the hotkey color in normal
+components, whereas the
+.I dhotfocus
+color is used for the highlighted color in the currently selected
+component.
+.PP
+Menus use the same scheme but uses the menu, menusel, menuhot and
+menuhotsel tags instead.
+.PP
+Help uses the following colors:
+.I helpnormal
+is used for normal text,
+.I helpitalic
+is used for text which is emphasized in italic in the manual page,
+.I helpbold
+is used for text which is emphasized in bold in the manual page,
+.I helplink
+is used for not selected hyperlinks and
+.I helpslink
+is used for selected hyperlink.
+.PP
+Special highlight colors determine how files are displayed 
+when file highlighting is enabled (see the section on
+.\"LINK2"
+Layout).
+.\"Layout
+.I directory
+is used for directories or symbolic links to directories; 
+.I executable
+for executable files;
+.I link
+is used for symbolic links which are neither stalled nor linked
+to a directory; 
+.I stalledlink
+is used for stalled symbolic links; 
+.I device
+- character and block devices; 
+.I special
+is used for special files, such as pipes and sockets; 
+.I core
+is for core files.
+.PP
+The possible colors are: black, gray, red, brightred, green,
+brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
+cyan, brightcyan, lightgray and white. And there is a special keyword
+for transparent background. It is 'default'. The 'default' can only be
+used for background color. Example:
+.nf
+[Colors]
+base_color=normal=white,default:marked=magenta,default
+.fi
+.PP
+.SH "Special Settings"
+Most of the settings of the Midnight Commander can be changed from the
+menus. However, there are a small number of settings which can only be
+changed by editing the setup file.
+.PP
+These variables may be set in your ~/.mc/ini file:
+.PP
+.I clear_before_exec.
+.IP
+By default the Midnight Commander clears the screen before executing a
+command. If you would prefer to see the output of the command at the
+bottom of the screen, edit your ~/.mc/ini file and change the value of
+the field clear_before_exec to 0.
+.PP
+.I confirm_view_dir.
+.IP
+If you press F3 on a directory, normally MC enters that directory. If
+this flag is set to 1, then MC will ask for confirmation before
+changing the directory if you have files tagged.
+.PP
+.I ftpfs_retry_seconds.
+.IP
+This value is the number of seconds the Midnight Commander will wait
+before attempting to reconnect to an ftp server that has denied the login.
+If the value is zero, the login will no be retried.
+.PP
+.I ftpfs_use_passive_connections.
+.IP
+This option is off by default.  This makes the ftpfs code use the
+passive open mode for transferring files.  This is used by people that
+are behind a filtering packet router.  This option just works if you
+are not using an ftp proxy.
+.PP
+.I max_dirt_limit.
+.IP
+Specifies how many screen updates can be skipped at most in the internal
+file viewer.  Normally this value is not significant, because the code
+automatically adjusts the number of updates to skip according to the rate
+of incoming keystrokes.  However, on very slow machines or terminals
+with a fast keyboard auto repeat, a big value can make screen updates
+too jumpy.
+.IP
+It seems that setting max_dirt_limit to 10 causes the best behavior,
+and that is the default value.
+.PP
+.I mouse_move_pages.
+.IP
+Controls whenever scrolling with the mouse is done by pages or line by
+line on the panels.
+.PP
+.I mouse_move_pages_viewer.
+.IP
+Controls if scrolling with the mouse is done by pages or line by line
+on the internal file viewer.
+.PP
+.I old_esc_mode
+.IP
+By default the Midnight Commander treats the ESC key as a key prefix
+(old_esc_mode=0), if you set this option (old_esc_mode=1), then the
+ESC key will act as a prefix key for one second, and if no extra keys
+have arrived, then the ESC key is interpreted as a cancel key (ESC
+ESC).
+.PP
+.PP
+.I only_leading_plus_minus
+.IP
+set special treatment for '+', '-', '*' in command line (select,
+unselect, reverse selection) only if command line is empty. No need to
+quote this characters in the middle of the command line. But we can not
+change selection when command line is not empty.
+.I panel_scroll_pages
+.IP
+If set (the default), panel will scroll by half the display when the
+cursor reaches the end or the beginning of the panel, otherwise it
+will just scroll a file at a time.
+.PP
+.I preserve_uidgid
+.IP
+If this option is set (the default), when logged in as root the
+default will be to preserve the UID and the GID of files.  Some users
+prefer to disable this option, so that's why it's configurable.
+.PP
+.I show_output_starts_shell
+.IP
+This variable only works if you are not using the subshell support.
+When you use the C-o keystroke to go back to the user screen, if this
+one is set, you will get a fresh shell.  Otherwise, pressing any key
+will bring you back to the Midnight Commander.
+.PP
+.I torben_fj_mode
+.IP
+If this flag is set, then the home and end keys will work slightly
+different on the panels, instead of moving the selection to the first
+and last files in the panels, they will act as follows:
+.IP
+The home key will: Go up to the middle line, if below it; else go to
+the top line unless it is already on the top line, in this case it
+will go to the first file in the panel.
+.IP
+The end key has a similar behavior: Go down to the middle line, if
+over it; else go to the bottom line unless you already are at the
+bottom line, in such case it will move the selection to the last file
+name in the panel.
+.PP
+.I use_file_to_guess_type
+.IP
+If this variable is on (the default) it will spawn the file command to
+match the file types listed on the
+.\"LINK2"
+mc.ext file.
+.\"Extension File Edit"
+.PP
+.I xterm_mode
+.IP
+If this variable is on (default is off) when you browse the file
+system on a Tree panel, it will automatically reload the other panel
+with the contents of the selected directory.
+.PP
+.SH "Terminal databases"
+The Midnight Commander provides a way to fix your system terminal
+database without requiring root privileges.  The Midnight Commander
+searches in the system initialization file (the mc.lib file located in
+the Midnight Commander library directory) and in the ~/.mc/ini file
+for the section "terminal:your-terminal-name" and then for the section
+"terminal:general", each line of the section contains a key symbol
+that you want to define, followed by an equal sign and the definition
+for the key.  You can use the special \\e form to represent the escape
+character and the ^x to represent the control-x character.
+.PP
+The possible key symbols are:
+.PP
+.nf
+f0 to f20     Function keys f0-f20
+bs	      backspace
+home          home key
+end           end key
+up            up arrow key
+down          down arrow key
+left          left arrow key
+right         right arrow key
+pgdn          page down key
+pgup          page up key
+insert        the insert character
+delete        the delete character
+complete      to do completion
+.fi
+.PP
+For example, to define the key insert to be the Escape + [ + O + p, you
+set this in the ini file:
+.PP
+.nf
+insert=\\e[Op
+.fi
+.PP
+The 
+.I complete
+key symbol represents the escape sequences used to invoke the
+completion process, this is invoked with M-tab, but you can define
+other keys to do the same work (on those keyboard with tons of nice
+and unused keys everywhere).
+.PP
+.SH ""
+.SH "FILES"
+.PP
+The program will retrieve all of its information relative to the
+MC_LIBDIR environment variable, if this variable is not set, then it will
+fall back to the @prefix@/lib/mc directory.
+.PP
+@prefix@/lib/mc/mc.hlp
+.IP
+The help file for the program.
+.PP
+@prefix@/lib/mc/mc.ext
+.IP
+The default system-wide extensions file.
+.PP
+~/.mc/bindings
+.IP
+User's own extension, view configuration and edit configuration
+file.  They override the contents of the system wide files if present.
+.PP
+@prefix@/lib/mc/mc.ini
+.IP
+The default system-wide setup for the Midnight Commander, used only if
+the user doesn't have his own ~/.mc/ini file.
+.PP
+@prefix@/lib/mc/mc.lib
+.IP
+Global settings for the Midnight Commander.  Settings in this file
+affect all users, whether they have ~/.mc/ini or not.  Currently, only
+.\"LINK2"
+terminal settings
+.\"Terminal databases"
+are loaded from mc.lib.
+.PP
+~/.mc/ini
+.IP
+User's own setup. If this file is present then the setup is loaded
+from here instead of the system-wide startup file.
+.PP
+@prefix@/lib/mc/mc.hint
+.IP
+This file contains the hints (cookies) displayed by the program.
+.PP
+@prefix@/lib/mc/mc.menu
+.IP
+This file contains the default system-wide applications menu.
+.PP
+~/.mc/menu
+.IP
+User's own application menu. If this file is present it is used
+instead of the system-wide applications menu.
+.PP
+~/.mc/Tree
+.IP
+The directory list for the directory tree and tree view features.
+.PP
+\&./.mc.menu
+.IP
+Local user-defined menu. If this file
+is present it is used instead of the home or system-wide
+applications menu.
+.PP
+.\"SKIP_SECTION"
+.SH "LICENSE"
+This program is distributed under the terms of the GNU General Public
+License as published by the Free Software Foundation. See the built-in
+help for details on the License and the lack of warranty.
+.SH "AVAILABILITY"
+The latest version of this program can be found at 
+ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/ and on the
+mirrors listed on the GNOME site http://www.gnome.org/.
+.SH "SEE ALSO"
+ed(1), gpm(1), mcserv(8), terminfo(1), view(1), sh(1), bash(1),
+tcsh(1), zsh(1).
+.PP
+.nf
+The Midnight Commander page on the World Wide Web:
+	http://www.gnome.org/mc/
+.fi
+.PP
+.SH "AUTHORS"
+Miguel de Icaza (miguel@ximian.com), Janne Kukonlehto
+(jtklehto@paju.oulu.fi), Radek Doulik (rodo@ucw.cz), Fred
+Leeflang (fredl@nebula.ow.org), Dugan Porter (dugan@b011.eunet.es),
+Jakub Jelinek (jj@sunsite.mff.cuni.cz), Ching Hui
+(mr854307@cs.nthu.edu.tw), Andrej Borsenkow (borsenkow.msk@sni.de),
+Norbert Warmuth (nwarmuth@privat.circular.de), 
+Mauricio Plaza (mok@roxanne.nuclecu.unam.mx), Paul Sheer
+(psheer@icon.co.za), Pavel Machek (pavel@ucw.cz) and Pavel Roskin
+(proski@gnu.org) are the developers of this package.
+Alessandro Rubini (rubini@ipvvis.unipv.it) has been especially helpful
+debugging and enhancing the program's mouse support, John Davis
+(davis@space.mit.edu) also made his S-Lang library available to us
+under the GPL and answered my questions about it, and the following
+people have contributed code and many bug fixes (in alphabetical
+order):
+.PP
+Adam Tla/lka (atlka@sunrise.pg.gda.pl),
+alex@bcs.zp.ua (Alex I. Tkachenko), Antonio Palama,
+DOS port (palama@posso.dm.unipi.it), Erwin van Eijk
+(wabbit@corner.iaf.nl), Gerd Knorr (kraxel@cs.tu-berlin.de),
+Jean-Daniel Luiset (luiset@cih.hcuge.ch), Jon Stevens
+(root@dolphin.csudh.edu), Juan Francisco Grigera, Win32 port
+(j-grigera@usa.net), Juan Jose Ciarlante (jjciarla@raiz.uncu.edu.ar),
+Ilya Rybkin (rybkin@rouge.phys.lsu.edu), Marcelo Roccasalva
+(mfroccas@raiz.uncu.edu.ar), Massimo Fontanelli (MC8737@mclink.it),
+Sergey Ya. Korshunoff (root@seyko.msk.su), Thomas Pundt
+(pundtt@math.uni-muenster.de), Timur Bakeyev
+(timur@goff.comtat.kazan.su), Tomasz Cholewo
+(tjchol01@mecca.spd.louisville.edu), Torben Fjerdingstad
+(torben.fjerdingstad@uni-c.dk), Vadim Sinolitis (vvs@nsrd.npi.msu.su)
+and Wim Osterholt (wim@djo.wtm.tudelft.nl).
+.PP
+.SH "BUGS"
+See the file TODO in the distribution for information on what
+remains to be done.
+.PP
+If you want to report a problem with the program, please send mail to
+this address: mc-devel@gnome.org.
+.PP
+Provide a detailed description of the bug, the version of the program
+you are running (mc -V display this information), the operating system
+you are running the program on and if the program crashes, we would
+appreciate a stack trace.
+
