@@ -461,10 +461,8 @@ progress_update_one (FileOpContext *ctx,
 
     /* Apply some heuristic here to not call the update stuff very often */
     ret = file_progress_show_count (ctx, *progress_count, ctx->progress_count);
-
     if (ret != FILE_CONT)
 	    return ret;
-
     ret = file_progress_show_bytes (ctx, *progress_bytes, ctx->progress_bytes);
 
     return ret;
@@ -502,6 +500,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
     if (file_progress_show_source (ctx, src_path) == FILE_ABORT ||
 	file_progress_show_target (ctx, dst_path) == FILE_ABORT)
 	return FILE_ABORT;
+    file_progress_show_count (ctx, *progress_count, ctx->progress_count);
     mc_refresh ();
 
  retry_dst_stat:
@@ -674,7 +673,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
     ctx->bps = 0;
 
     return_status = file_progress_show (ctx, 0, file_size);
-
+    file_progress_show_bytes (ctx, 0, file_size);
     mc_refresh ();
 
     if (return_status != FILE_CONT)
@@ -768,6 +767,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 	    file_progress_set_stalled_label (ctx, stalled_msg);
 
 	    return_status = file_progress_show (ctx, n_read_total, file_size);
+            file_progress_show_bytes (ctx, n_read_total, file_size);
 	    mc_refresh ();
 	    if (return_status != FILE_CONT)
 	        goto ret;
@@ -1821,7 +1821,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
     int i, value;
     FileOpContext *ctx;
 
-    long   count = 0;
+    long   count = 0;         
     double bytes = 0;
 
     int  dst_result;
