@@ -84,15 +84,6 @@
 #define REDRAW_CHAR_ONLY     (1 << 7)
 #define REDRAW_COMPLETELY    (1 << 8)
 
-#define MOD_ABNORMAL		(1 << 0)
-#define MOD_UNDERLINED		(1 << 1)
-#define MOD_BOLD		(1 << 2)
-#define MOD_HIGHLIGHTED		(1 << 3)
-#define MOD_MARKED		(1 << 4)
-#define MOD_ITALIC		(1 << 5)
-#define MOD_CURSOR		(1 << 6)
-#define MOD_INVERSE		(1 << 7)
-
 #define EDIT_TEXT_HORIZONTAL_OFFSET 0
 #define EDIT_TEXT_VERTICAL_OFFSET 1
 #define FONT_OFFSET_X 0

@@ -1,5 +1,11 @@
 2002-09-23  Pavel Roskin  <proski@gnu.org>
 
+	* edit.h: Move style definitions ...
+	* editdraw.c: ... here.  Multiply them by 256.  Remove unused
+	styles.
+	(print_to_widget): Don't divide style by 256.  Simplify logic
+	since we only have 4 styles now.
+
 	* edit.c (edit_move_forward3): Use caret notation for code 127
 	and below code 32.
 	* editdraw.c (edit_draw_this_line): Likewise.  Print '.' for

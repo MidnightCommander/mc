@@ -31,6 +31,13 @@
 #include "src/charsets.h"
 #endif
 
+/* Text styles */
+#define MOD_ABNORMAL		(1 << 8)
+#define MOD_BOLD		(1 << 9)
+#define MOD_MARKED		(1 << 10)
+#define MOD_CURSOR		(1 << 11)
+
+
 static void status_string (WEdit * edit, char *s, int w, int fill)
 {
     char byte_str[16];
@@ -206,7 +213,7 @@ static void print_to_widget (WEdit * edit, long row, int start_col, float start_
 	int color;
 
 	while (*p) {
-	    style = *p >> 8;
+	    style = *p & 0xFF00;
 	    textchar = *p & 0xFF;
 	    color = *p >> 16;
 
@@ -214,19 +221,15 @@ static void print_to_widget (WEdit * edit, long row, int start_col, float start_
 		/* Non-printable - use black background */
 		color = 0;
 	    }
-	    if (!(style & (0xFF - MOD_ABNORMAL - MOD_CURSOR)))
-		lowlevel_set_color (color);
-	    if (style & MOD_HIGHLIGHTED) {
+
+	    if (style & MOD_BOLD) {
 		set_color (EDITOR_BOLD_COLOR);
 	    } else if (style & MOD_MARKED) {
 		set_color (EDITOR_MARKED_COLOR);
+	    } else {
+		lowlevel_set_color (color);
 	    }
-	    if (style & MOD_UNDERLINED) {
-		set_color (EDITOR_UNDERLINED_COLOR);
-	    }
-	    if (style & MOD_BOLD) {
-		set_color (EDITOR_BOLD_COLOR);
-	    }
+
 	    addch (textchar);
 	    p++;
 	}
@@ -262,20 +265,20 @@ static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col,
 	    while (col <= end_col - edit->start_col) {
 		*p = 0;
 		if (q == edit->curs1)
-		    *p |= MOD_CURSOR * 256;
+		    *p |= MOD_CURSOR;
 		if (q >= m1 && q < m2) {
 		    if (column_highlighting) {
 			int x;
 			x = edit_move_forward3 (edit, b, 0, q);
 			if (x >= c1 && x < c2)
-			    *p |= MOD_MARKED * 256;
+			    *p |= MOD_MARKED;
 		    } else
-			*p |= MOD_MARKED * 256;
+			*p |= MOD_MARKED;
 		}
 		if (q == edit->bracket)
-		    *p |= MOD_BOLD * 256;
+		    *p |= MOD_BOLD;
 		if (q >= edit->found_start && q < edit->found_start + edit->found_len)
-		    *p |= MOD_HIGHLIGHTED * 256;
+		    *p |= MOD_BOLD;
 		c = edit_get_byte (edit, q);
 /* we don't use bg for mc - fg contains both */
 		if (book_mark == -1) {
@@ -293,7 +296,7 @@ static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col,
 		case '\t':
 		    i = TAB_SIZE - ((int) col % TAB_SIZE);
 		    *p |= ' ';
-		    c = *(p++) & (0xFFFFFFFF - MOD_CURSOR * 256);
+		    c = *(p++) & ~MOD_CURSOR;
 		    col += i;
 		    while (--i)
 			*(p++) = c;
@@ -305,14 +308,14 @@ static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col,
 #endif
 		    /* Caret notation for control characters */
 		    if (c < 32) {
-			*(p++) = '^' | (256 * MOD_ABNORMAL);
-			*(p++) = (c + 0x40) | (256 * MOD_ABNORMAL);
+			*(p++) = '^' | MOD_ABNORMAL;
+			*(p++) = (c + 0x40) | MOD_ABNORMAL;
 			col += 2;
 			break;
 		    }
 		    if (c == 127) {
-			*(p++) = '^' | (256 * MOD_ABNORMAL);
-			*(p++) = '?' | (256 * MOD_ABNORMAL);
+			*(p++) = '^' | MOD_ABNORMAL;
+			*(p++) = '?' | MOD_ABNORMAL;
 			col += 2;
 			break;
 		    }
@@ -320,7 +323,7 @@ static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col,
 		    if (is_printable (c)) {
 			*(p++) |= c;
 		    } else {
-			*(p++) = '.' | (256 * MOD_ABNORMAL);
+			*(p++) = '.' | MOD_ABNORMAL;
 		    }
 		    col++;
 		    break;
