@@ -86,8 +86,8 @@ BOOL use_mangled_map = False;
 BOOL short_case_preserve;
 BOOL case_mangle;
 
-fstring remote_machine="";
-fstring local_machine="";
+static const char *remote_machine = "";
+static const char *local_machine = "";
 static const char *remote_arch = "UNKNOWN";
 static enum remote_arch_types ra_type = RA_UNKNOWN;
 static const char *remote_proto = "UNKNOWN";

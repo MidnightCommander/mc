@@ -3,8 +3,9 @@
 	* samba/lib/util.c: Comment out some more unused functions.
 	(global_myworkgroup): Remove unused variable.
 	(def_finfo): Make const.
-	(remote_proto, remote_arch): Make const char * instead of
+	(remote_proto, remote_arch): Make static const char * instead of
 	fstring.
+	(local_machine, remote_machine): Ditto.
 	* samba/libsmb/clientgen.c (interpret_long_filename): Fix 
 	def_finfo declaration.
 
