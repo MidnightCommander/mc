@@ -1,10 +1,10 @@
+2003-04-04  Marco Ciampa  <ciampix@libero.it>
+
+	* it.po: Updated Italian translation.
+
 2003-03-12  Pavel Roskin  <proski@gnu.org>
 
 	* POTFILES.in: Add edit/editlock.c.
-
-2003-03-17  Marco Ciampa  <ciampix@libero.it>
-
-	* it.po: Updated Italian translation, some small fixies.
 
 2003-03-11  Marco Ciampa  <ciampix@libero.it>
 
