@@ -806,9 +806,9 @@ accesso ai normali comandi del visualizzatore.
 .PP
 .\"NODE "    Sort Order..."
 .SH "    Ordina per..."
-Gli otto possibili ordinamenti sono per nome, per estensione, per data 
-di modifica, per data di accesso, per data di modifica informazioni di
-inode, per ampiezza, per inode e non ordinato. Nella finestra di dialogo 
+Gli otto possibili ordinamenti sono per nome, estensione, data 
+di modifica, data di accesso, data di modifica informazioni di
+inode, ampiezza, per inode e non ordinato. Nella finestra di dialogo 
 di ordinamento è possibile scegliere il tipo di ordinamento ed è anche 
 possibile specificare se si desidera l'ordinamento inverso selezionando 
 la voce inverso.
@@ -818,15 +818,14 @@ può essere modificata dal
 .\"LINK2"
 Menu Opzioni
 .\"Options Menu"
-(oztione  
-.B "mescola tutti i file"
-).
+(opzione  
+.BR "mescola tutti i file" ).
 .PP
 .\"NODE "    Filter..."
 .SH "    Filtro..."
 Il comando di filtro permette di specificare un modello (per esempio
-.B "*.tar.gz"
-) che il file deve corrispondere per essere visualizzato. Malgrado
+.BR "*.tar.gz" )
+che il file deve corrispondere per essere visualizzato. Malgrado
 il modello del filtro, le directory e i collegamenti a directory
 vengono sempre visualizzati sul pannello directory.
 .PP
@@ -2514,12 +2513,13 @@ discesa appropriato. Gli altri tasti sono: maiusc + tasti freccia
 produce la selezione del testo.
 .B Ctrl-Ins
 copia nel file 
-.B cooledit.clip e
+.B cooledit.clip
+e
 .B Shift-Ins
 incolla da cooledit.clip.
 .B Shift-Del 
 taglia in 
-.B cooledit.clip, 
+.BR cooledit.clip , 
 e
 .B Ctrl-Del
 cancella il testo selezionato. 
