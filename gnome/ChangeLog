@@ -1,5 +1,11 @@
 1999-09-22  Federico Mena Quintero  <federico@redhat.com>
 
+	* gscreen.c (panel_chdir): Clear the lists if the chdir operation
+	was not successful.
+
+	* gtkflist.c (gtk_flist_button_press): Only emit the open_row
+	signal if we are not on the empty area.
+
 	* gnome-open-dialog.c (gnome_open_dialog_new): Expand the tree
 	when we are done generating it.
 

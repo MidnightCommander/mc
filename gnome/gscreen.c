@@ -447,8 +447,7 @@ panel_file_list_unselect_row (GtkWidget *widget, int row, int columns, GdkEvent 
 static void
 panel_file_list_resize_callback (GtkCList *clist, gint column, gint width, WPanel *panel)
 {
-	format_e *format = panel->format;
-	int i, p;
+	int p;
 
 	p = column_width_pos[panel->list_type]; /* offset in column_width */
 	g_assert (p >= 0);
@@ -1682,8 +1681,19 @@ display_mini_info (WPanel *panel)
 static void
 panel_chdir (GtkDTree *dtree, char *path, WPanel *panel)
 {
-	if (!panel->dragging)
-		do_panel_cd (panel, path, cd_exact);
+	if (panel->dragging)
+		return;
+
+	if (do_panel_cd (panel, path, cd_exact))
+		return; /* success */
+
+	if (panel->list_type == list_icons)
+		gnome_icon_list_clear (ILIST_FROM_SW (panel->icons));
+	else
+		gtk_clist_clear (CLIST_FROM_SW (panel->list));
+
+	strncpy (panel->cwd, path, sizeof (panel->cwd));
+	show_dir (panel);
 }
 
 static void
