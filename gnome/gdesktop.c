@@ -287,7 +287,7 @@ desktop_icon_info_place (DesktopIconInfo *dii, int xpos, int ypos)
 	layout_slots[dii->slot].icons = g_list_append (layout_slots[dii->slot].icons, dii);
 
 	/* Move the icon */
-	
+
 	dii->x = xpos;
 	dii->y = ypos;
 	gtk_widget_set_uposition (dii->dicon, xpos, ypos);
@@ -377,7 +377,7 @@ update_url (DesktopIconInfo *dii)
 	char *caption = NULL;
 	char *url = NULL;
 	int size;
-	
+
 	gnome_metadata_get (fullname, "icon-caption", &size, &caption);
 	if (caption){
 		desktop_icon_set_text (DESKTOP_ICON (dii->dicon), caption);
@@ -390,7 +390,7 @@ update_url (DesktopIconInfo *dii)
 			g_free (dii->url);
 		dii->url = url;
 	}
-	
+
 	g_free (fullname);
 }
 
@@ -438,7 +438,7 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 
 	need_position_list = NULL;
 	all_icons = get_all_icons ();
-	
+
 	while ((dirent = mc_readdir (dir)) != NULL) {
 		/* Skip . and .. */
 
@@ -471,7 +471,7 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 
 			/* Leave the icon in the desktop by removing it from the list */
 
-			all_icons = g_list_remove_link (all_icons, l); 
+			all_icons = g_list_remove_link (all_icons, l);
 			continue;
 		}
 
@@ -483,7 +483,7 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 
 		caption = NULL;
 		gnome_metadata_get (full_name, "icon-caption", &size, &caption);
-		
+
 		if (have_pos) {
 			dii = desktop_icon_info_new (dirent->d_name, desktop_url, caption, x, y);
 			gtk_widget_show (dii->dicon);
@@ -500,7 +500,7 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 		}
 
 		g_free (full_name);
-		
+
 		if (desktop_url)
 			g_free (desktop_url);
 
@@ -959,18 +959,18 @@ is_mountable (char *filename, file_entry *fe, int *is_mounted, char **point)
 {
 	char buffer [128], *p;
 	int len;
-	
+
 	if (point)
 		*point = NULL;
-	
+
 	if (!S_ISLNK (fe->buf.st_mode))
 		return FALSE;
 
 	len = readlink (filename, buffer, sizeof (buffer));
 	if (len == -1)
 		return FALSE;
-	buffer [len] = 0;	
-		
+	buffer [len] = 0;
+
 	p = is_block_device_mountable (buffer);
 	if (!p)
 		return FALSE;
@@ -979,9 +979,9 @@ is_mountable (char *filename, file_entry *fe, int *is_mounted, char **point)
 		*point = p;
 	else
 		g_free (point);
-			
+
 	*is_mounted = is_block_device_mounted (buffer);
-		
+
 	return TRUE;
 }
 
@@ -992,7 +992,7 @@ do_mount_umount (char *filename, gboolean is_mount)
 	static char *umount_command;
 	char *op;
 	char *buffer;
-	
+
 	if (is_mount){
 		if (!mount_command)
 			mount_command = find_command (mount_known_locations);
@@ -1006,21 +1006,21 @@ do_mount_umount (char *filename, gboolean is_mount)
 	buffer = g_readlink (filename);
 	if (buffer == NULL)
 		return FALSE;
-	
+
 	if (op){
 		gboolean success = TRUE;
 		char *command;
 		FILE *f;
-		
+
 		command = g_strconcat (op, " ", buffer, NULL);
 		open_error_pipe ();
 		f = popen (command, "r");
 		if (f == NULL){
 			success = !close_error_pipe (1, _("While running the mount/umount command"));
-		} else 
+		} else
 			success = !close_error_pipe (0, 0);
 		pclose (f);
-		
+
 		g_free (buffer);
 		return success;
 	}
@@ -1041,7 +1041,7 @@ static char *eject_known_locations [] = {
  * Right now the test only checks if this system has the eject
  * command
  */
-gboolean 
+gboolean
 is_ejectable (char *filename)
 {
 	char *buf;
@@ -1057,7 +1057,7 @@ is_ejectable (char *filename)
 		if (retval)
 			return TRUE;
 	}
-	
+
 	if (find_command (eject_known_locations))
 		return TRUE;
 	else
@@ -1098,7 +1098,7 @@ static gboolean
 try_to_mount (char *filename, file_entry *fe)
 {
 	int x;
-	
+
 	if (!is_mountable (filename, fe, &x, NULL))
 		return FALSE;
 
@@ -1201,7 +1201,7 @@ push_desktop_panel_hack (void)
 {
 	WPanel *panel;
 	PanelContainer *container;
-	
+
 	panel = create_panel_from_desktop ();
 	container = g_new (PanelContainer, 1);
 	container->splitted = FALSE;
@@ -1229,7 +1229,7 @@ free_panel_from_desktop (WPanel *panel)
 
 	for (i = 0; i < panel->count; i++)
 		g_free (panel->dir.list[i].fname);
-	
+
 	if (panel->dir.list)
 		g_free (panel->dir.list);
 
@@ -1239,7 +1239,7 @@ free_panel_from_desktop (WPanel *panel)
 /**
  * desktop_icon_info_open:
  * @dii: The desktop icon to open.
- * 
+ *
  * Opens the specified desktop icon when the user double-clicks on it.
  **/
 void
@@ -1281,7 +1281,7 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 				launch = FALSE;
 		} else
 			launch = TRUE;
-		
+
 		if (launch)
 			new_panel_at (point);
 		g_free (point);
@@ -1319,7 +1319,7 @@ desktop_icon_info_delete (DesktopIconInfo *dii)
 	ctx = file_op_context_new ();
 	file_op_context_create_ui (ctx, OP_DELETE, TRUE);
 	x_flush_events ();
-	
+
 	full_name = g_concat_dir_and_file (desktop_directory, dii->filename);
 
 	if (lstat (full_name, &s) != -1) {
@@ -1346,7 +1346,7 @@ desktop_icon_info_delete (DesktopIconInfo *dii)
  * desktop_icon_set_busy:
  * @dii: A desktop icon
  * @busy: TRUE to set a watch cursor, FALSE to reset the normal arrow cursor
- * 
+ *
  * Sets a wait/normal cursor for a desktop icon.
  **/
 void
@@ -1368,10 +1368,10 @@ desktop_icon_set_busy (DesktopIconInfo *dii, int busy)
 /**
  * desktop_icon_info_get_by_filename:
  * @filename: A filename relative to the desktop directory
- * 
+ *
  * Returns the desktop icon structure that corresponds to the specified filename,
  * which should be relative to the desktop directory.
- * 
+ *
  * Return value: The sought desktop icon, or NULL if it is not found.
  **/
 DesktopIconInfo *
@@ -1940,7 +1940,7 @@ desktop_icon_info_new (char *filename, char *url, char *caption, int xpos, int y
 	fe = file_entry_from_file (full_name);
 	if (!fe)
 		return NULL;
-	
+
 	dii = g_new (DesktopIconInfo, 1);
 	dii->x = 0;
 	dii->y = 0;
@@ -1955,12 +1955,12 @@ desktop_icon_info_new (char *filename, char *url, char *caption, int xpos, int y
 		if (caption == NULL)
 			caption = filename;
 	}
-	
+
 	icon_im = gicon_get_icon_for_file (desktop_directory, fe, FALSE);
 	dii->dicon = desktop_icon_new (icon_im, caption);
 	dii->filename = g_strdup (filename);
 	dii->selected = FALSE;
-	
+
 	file_entry_free (fe);
 	g_free (full_name);
 
@@ -2073,7 +2073,7 @@ typedef struct {
 } MotifDragReceiverInfo;
 
 /* Sets up a proxy window for DnD on the specified X window.  Courtesy of Owen Taylor */
-static gboolean 
+static gboolean
 setup_xdnd_proxy (guint32 xid, GdkWindow *proxy_window)
 {
 	GdkAtom xdnd_proxy_atom;
@@ -2116,10 +2116,10 @@ setup_xdnd_proxy (guint32 xid, GdkWindow *proxy_window)
 	 * has a XdndProxy property pointing to itself.
 	 */
 	if (proxy) {
-		XGetWindowProperty (GDK_DISPLAY (), proxy, 
-				    xdnd_proxy_atom, 0, 
+		XGetWindowProperty (GDK_DISPLAY (), proxy,
+				    xdnd_proxy_atom, 0,
 				    1, False, AnyPropertyType,
-				    &type, &format, &nitems, &after, 
+				    &type, &format, &nitems, &after,
 				    (guchar **) &proxy_data);
 
 		if (!gdk_error_code && type != None) {
@@ -2143,7 +2143,7 @@ setup_xdnd_proxy (guint32 xid, GdkWindow *proxy_window)
 
 	gdk_error_code = 0;
 	gdk_error_warnings = old_warnings;
-  
+
 	XUngrabServer (GDK_DISPLAY ());
 	gdk_flush ();
 
@@ -2471,7 +2471,7 @@ desktop_popup (GdkEventButton *event)
 	panel = push_desktop_panel_hack ();
 	gnome_popup_menu_do_popup_modal (popup, NULL, NULL, event, NULL);
 	layout_panel_gone (panel);
-	free_panel_from_desktop (panel); 
+	free_panel_from_desktop (panel);
 	gtk_widget_destroy (popup);
 
 	desktop_reload_icons (FALSE, 0, 0);
@@ -2498,7 +2498,7 @@ draw_rubberband (int x, int y)
 		y1 = y;
 		y2 = click_start_y;
 	}
-	
+
 	gdk_draw_rectangle (GDK_ROOT_PARENT (), click_gc, FALSE, x1, y1, x2 - x1, y2 - y1);
 }
 
@@ -2524,7 +2524,7 @@ store_temp_selection (void)
 /**
  * icon_is_in_area:
  * @dii: the desktop icon information
- * 
+ *
  * Returns TRUE if the specified icon is at least partially inside the specified
  * area, or FALSE otherwise.
  */
@@ -2543,16 +2543,16 @@ icon_is_in_area (DesktopIconInfo *dii, int x1, int y1, int x2, int y2)
 	if (x1 == x2 && y1 == y2)
 		return FALSE;
 
-	if (x1 < dicon->icon_x + dicon->icon_w - 1
-	    && x2 > dicon->icon_x
-	    && y1 < dicon->icon_y + dicon->icon_h - 1
-	    && y2 > dicon->icon_y)
+	if (x1 < dicon->icon_x + dicon->icon_w
+	    && x2 >= dicon->icon_x
+	    && y1 < dicon->icon_y + dicon->icon_h
+	    && y2 >= dicon->icon_y)
 		return TRUE;
 
-	if (x1 < dicon->text_x + dicon->text_w - 1
-	    && x2 > dicon->text_x
-	    && y1 < dicon->text_y + dicon->text_h - 1
-	    && y2 > dicon->text_y)
+	if (x1 < dicon->text_x + dicon->text_w
+	    && x2 >= dicon->text_x
+	    && y1 < dicon->text_y + dicon->text_h
+	    && y2 >= dicon->text_y)
 		return TRUE;
 
 	return FALSE;
@@ -2600,7 +2600,8 @@ update_drag_selection (int x, int y)
 			if (in_area) {
 				if (invert) {
 					if (dii->selected == dii->tmp_selected) {
-						desktop_icon_select (DESKTOP_ICON (dii->dicon), !dii->selected);
+						desktop_icon_select (DESKTOP_ICON (dii->dicon),
+								     !dii->selected);
 						dii->selected = !dii->selected;
 					}
 				} else if (additive) {
@@ -2785,7 +2786,7 @@ setup_desktop_click_proxy_window (void)
 		g_warning ("Root window clicks will not work as no GNOME-compliant window manager could be found!");
 		return;
 	}
-	desktop_wm_is_gnome_compliant = 1;	
+	desktop_wm_is_gnome_compliant = 1;
 
 	/* Make the proxy window send events to the invisible proxy widget */
 	gdk_window_set_user_data (click_proxy_gdk_window, proxy_invisible);
@@ -2955,17 +2956,15 @@ desktop_create_url (const char *filename, const char *title, const char *url, co
 
 	f = fopen (filename, "w");
 	if (f) {
-		
+
 		fprintf (f, "URL: %s\n", url);
 		fclose (f);
-		
+
 		gnome_metadata_set (filename, "desktop-url",
 				    strlen (url) + 1, url);
 		gnome_metadata_set (filename, "icon-caption",
 				    strlen (title) + 1, title);
-		
+
 		gnome_metadata_set (filename, "icon-filename", strlen (icon) + 1, icon);
 	}
 }
-
-

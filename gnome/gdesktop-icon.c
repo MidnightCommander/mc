@@ -417,6 +417,8 @@ desktop_icon_reshape (DesktopIcon *dicon)
 	dicon->icon_w = icon_width;
 	dicon->icon_h = icon_height;
 
+	gnome_canvas_item_get_bounds (dicon->text, &x1, &y1, &x2, &y2);
+
 	dicon->text_x = x1;
 	dicon->text_y = y1;
 	dicon->text_w = text_width;

@@ -1,3 +1,11 @@
+1999-06-14  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (icon_is_in_area): Fixed off-by-one error in
+	intersection computation.
+
+	* gdesktop-icon.c (desktop_icon_reshape): Set the correct values
+	for dicon->text_x and dicon->text_y.
+
 1999-06-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gwidget.c (x_update_input): Unblock the changed signal *after*
