@@ -1,3 +1,11 @@
+2002-09-03  Pavel Roskin  <proski@gnu.org>
+
+	* filegui.c: Eliminate x_set_dialog_title().
+	* hotlist.c: Likewise.
+	* help.c: Likewise.
+	(interactive_display): Default to node "[main]" if the given
+	node is empty.
+
 2002-09-02  Pavel Roskin  <proski@gnu.org>
 
 	* dlg.c (create_dlg): Take title instead of unused name as the

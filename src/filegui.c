@@ -218,13 +218,11 @@ file_op_context_create_ui (FileOpContext *ctx, FileOperation op, int with_eta)
     x_size = (WX + 4) + ui->eta_extra;
 
     ui->op_dlg = create_dlg (0, 0, WY-minus+4, x_size, dialog_colors,
-			     NULL, "", "opwin", DLG_CENTER);
+			     NULL, NULL, op_names[op], DLG_CENTER);
 
     last_hint_line = the_hint->widget.y;
     if ((ui->op_dlg->y + ui->op_dlg->lines) > last_hint_line)
 	the_hint->widget.y = ui->op_dlg->y + ui->op_dlg->lines+1;
-
-    x_set_dialog_title (ui->op_dlg, op_names[op]);
 
     add_widget (ui->op_dlg, button_new (BY-minus, WX - 19 + eta_offset, FILE_ABORT,
 					 NORMAL_BUTTON, _("&Abort"), 0, 0, "abort"));
@@ -553,95 +551,104 @@ rd_widgets [] =
 		label_new (rd_widgets [i].ypos, rd_widgets [i].xpos, buffer, rd_widgets [i].tkname))
 
 static void
-init_replace (FileOpContext *ctx, enum OperationMode mode)
+init_replace (FileOpContext * ctx, enum OperationMode mode)
 {
     FileOpContextUI *ui;
-    char buffer [BUF_SMALL];
+    char buffer[BUF_SMALL];
+    char *title;
     static int rd_xlen = 60, rd_trunc = X_TRUNC;
 
 #ifdef ENABLE_NLS
     static int i18n_flag;
     if (!i18n_flag) {
 	int l1, l2, l, row;
-	register int i = sizeof (rd_widgets) / sizeof (rd_widgets [0]); 
+	register int i = sizeof (rd_widgets) / sizeof (rd_widgets[0]);
 	while (i--)
-	    rd_widgets [i].text = _(rd_widgets [i].text);
+	    rd_widgets[i].text = _(rd_widgets[i].text);
 
 	/* 
-	 *longest of "Overwrite..." labels 
+	 * longest of "Overwrite..." labels 
 	 * (assume "Target date..." are short enough)
 	 */
-	l1 = max (strlen (rd_widgets [6].text), strlen (rd_widgets [11].text));
+	l1 = max (strlen (rd_widgets[6].text),
+		  strlen (rd_widgets[11].text));
 
 	/* longest of button rows */
-	i = sizeof (rd_widgets) / sizeof (rd_widgets [0]);
+	i = sizeof (rd_widgets) / sizeof (rd_widgets[0]);
 	for (row = l = l2 = 0; i--;) {
-	    if (rd_widgets [i].value != 0) {
-		if (row != rd_widgets [i].ypos) {
-		    row = rd_widgets [i].ypos;
+	    if (rd_widgets[i].value != 0) {
+		if (row != rd_widgets[i].ypos) {
+		    row = rd_widgets[i].ypos;
 		    l2 = max (l2, l);
 		    l = 0;
 		}
-		l += strlen (rd_widgets [i].text) + 4;
+		l += strlen (rd_widgets[i].text) + 4;
 	    }
 	}
-	l2 = max (l2, l); /* last row */
+	l2 = max (l2, l);	/* last row */
 	rd_xlen = max (rd_xlen, l1 + l2 + 8);
 	rd_trunc = rd_xlen - 6;
 
 	/* Now place buttons */
-	l1 += 5; /* start of first button in the row */
-	i = sizeof (rd_widgets) / sizeof (rd_widgets [0]);
-		
+	l1 += 5;		/* start of first button in the row */
+	i = sizeof (rd_widgets) / sizeof (rd_widgets[0]);
+
 	for (l = l1, row = 0; --i > 1;) {
-	    if (rd_widgets [i].value != 0) {
-		if (row != rd_widgets [i].ypos) {
-		    row = rd_widgets [i].ypos;
+	    if (rd_widgets[i].value != 0) {
+		if (row != rd_widgets[i].ypos) {
+		    row = rd_widgets[i].ypos;
 		    l = l1;
 		}
-		rd_widgets [i].xpos = l;
-		l += strlen (rd_widgets [i].text) + 4;
+		rd_widgets[i].xpos = l;
+		l += strlen (rd_widgets[i].text) + 4;
 	    }
 	}
 	/* Abort button is centered */
-	rd_widgets [1].xpos = (rd_xlen - strlen (rd_widgets [1].text) - 3) / 2;
+	rd_widgets[1].xpos =
+	    (rd_xlen - strlen (rd_widgets[1].text) - 3) / 2;
     }
-#endif /* ENABLE_NLS */
+#endif				/* ENABLE_NLS */
 
     ui = ctx->ui;
 
-    ui->replace_dlg = create_dlg (0, 0, 16, rd_xlen, alarm_colors, NULL,
-				  "[ Replace ]", "replace", DLG_CENTER);
-    
-    x_set_dialog_title (ui->replace_dlg,
-			(mode == Foreground
-			 ? _(" File exists ")
-			 : _(" Background process: File exists ")));
+    if (mode == Foreground)
+	title = _(" File exists ");
+    else
+	title = _(" Background process: File exists ");
+
+    /* FIXME - missing help node */
+    ui->replace_dlg =
+	create_dlg (0, 0, 16, rd_xlen, alarm_colors, NULL, "[Replace]",
+		    title, DLG_CENTER);
 
 
-    ADD_RD_LABEL(ui, 0,
-		 name_trunc (ui->replace_filename, rd_trunc - strlen (rd_widgets [0].text)), 0);
-    ADD_RD_BUTTON(1);
+    ADD_RD_LABEL (ui, 0,
+		  name_trunc (ui->replace_filename,
+			      rd_trunc - strlen (rd_widgets[0].text)), 0);
+    ADD_RD_BUTTON (1);
 
-    ADD_RD_BUTTON(2);
-    ADD_RD_BUTTON(3);
-    ADD_RD_BUTTON(4);
-    ADD_RD_BUTTON(5);
-    ADD_RD_LABEL(ui, 6, 0, 0);
+    ADD_RD_BUTTON (2);
+    ADD_RD_BUTTON (3);
+    ADD_RD_BUTTON (4);
+    ADD_RD_BUTTON (5);
+    ADD_RD_LABEL (ui, 6, 0, 0);
 
     /* "this target..." widgets */
-    if (!S_ISDIR (ui->d_stat->st_mode)){
-	if ((ui->d_stat->st_size && ui->s_stat->st_size > ui->d_stat->st_size))
-	    ADD_RD_BUTTON(7);
+    if (!S_ISDIR (ui->d_stat->st_mode)) {
+	if ((ui->d_stat->st_size
+	     && ui->s_stat->st_size > ui->d_stat->st_size))
+	    ADD_RD_BUTTON (7);
 
-	ADD_RD_BUTTON(8);
+	ADD_RD_BUTTON (8);
     }
-    ADD_RD_BUTTON(9);
-    ADD_RD_BUTTON(10);
-    ADD_RD_LABEL(ui, 11,0,0);
-    
-    ADD_RD_LABEL(ui, 12, file_date (ui->d_stat->st_mtime), (int) ui->d_stat->st_size);
-    ADD_RD_LABEL(ui, 13, file_date (ui->s_stat->st_mtime), (int) ui->s_stat->st_size);
+    ADD_RD_BUTTON (9);
+    ADD_RD_BUTTON (10);
+    ADD_RD_LABEL (ui, 11, 0, 0);
+
+    ADD_RD_LABEL (ui, 12, file_date (ui->d_stat->st_mtime),
+		  (int) ui->d_stat->st_size);
+    ADD_RD_LABEL (ui, 13, file_date (ui->s_stat->st_mtime),
+		  (int) ui->s_stat->st_size);
 }
 
 void

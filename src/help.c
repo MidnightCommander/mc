@@ -750,18 +750,18 @@ interactive_display_finish (void)
 void
 interactive_display (char *filename, char *node)
 {
-    WButtonBar	*help_bar;
-    Widget	*md;
-    char	*hlpfile = filename;
+    WButtonBar *help_bar;
+    Widget *md;
+    char *hlpfile = filename;
 
     if (filename)
 	data = load_file (filename);
     else
 	data = load_mc_home_file ("mc.hlp", &hlpfile);
 
-    if (data == NULL){
-	message (1, MSG_ERROR, _(" Cannot open file %s \n %s "),
-		 hlpfile, unix_error_string (errno));
+    if (data == NULL) {
+	message (1, MSG_ERROR, _(" Cannot open file %s \n %s "), hlpfile,
+		 unix_error_string (errno));
     }
 
     if (!filename)
@@ -770,42 +770,46 @@ interactive_display (char *filename, char *node)
     if (!data)
 	return;
 
-    if (!(main_node = search_string (data, node))){
-	message (1, MSG_ERROR, _(" Cannot find node %s in help file "), node);
+    if (!node || !*node)
+	node = "[main]";
+
+    if (!(main_node = search_string (data, node))) {
+	message (1, MSG_ERROR, _(" Cannot find node %s in help file "),
+		 node);
 	interactive_display_finish ();
 	return;
     }
 
     help_lines = min (LINES - 4, max (2 * LINES / 3, 18));
 
-    whelp = create_dlg (0, 0, help_lines+4, HELP_WINDOW_WIDTH+4, dialog_colors,
-			help_callback, "[Help]", "help",
-			DLG_TRYUP | DLG_CENTER | DLG_WANT_TAB);
-    x_set_dialog_title(whelp, _("Help"));
+    whelp =
+	create_dlg (0, 0, help_lines + 4, HELP_WINDOW_WIDTH + 4,
+		    dialog_colors, help_callback, "[Help]", _("Help"),
+		    DLG_TRYUP | DLG_CENTER | DLG_WANT_TAB);
 
     selected_item = search_string_node (main_node, STRING_LINK_START) - 1;
     currentpoint = startpoint = main_node + 1;
 
-    for (history_ptr = HISTORY_SIZE; history_ptr;){
+    for (history_ptr = HISTORY_SIZE; history_ptr;) {
 	history_ptr--;
-	history [history_ptr].page = currentpoint;
-	history [history_ptr].link = selected_item;
+	history[history_ptr].page = currentpoint;
+	history[history_ptr].link = selected_item;
     }
 
     help_bar = buttonbar_new (1);
     help_bar->widget.y -= whelp->y;
     help_bar->widget.x -= whelp->x;
-    
-    md       = mousedispatch_new (1, 1, help_lines, HELP_WINDOW_WIDTH-2);
-    
+
+    md = mousedispatch_new (1, 1, help_lines, HELP_WINDOW_WIDTH - 2);
+
     add_widget (whelp, help_bar);
     add_widget (whelp, md);
 
-    define_label_data (whelp, (Widget *)NULL, 1, _("Help"),
+    define_label_data (whelp, (Widget *) NULL, 1, _("Help"),
 		       (buttonbarfn) help_help_cmd, whelp);
-    define_label_data (whelp, (Widget *)NULL, 2, _("Index"),
-		       (buttonbarfn) help_index_cmd,whelp);
-    define_label_data (whelp, (Widget *)NULL, 3, _("Prev"),
+    define_label_data (whelp, (Widget *) NULL, 2, _("Index"),
+		       (buttonbarfn) help_index_cmd, whelp);
+    define_label_data (whelp, (Widget *) NULL, 3, _("Prev"),
 		       (buttonbarfn) prev_node_cmd, whelp);
     define_label (whelp, (Widget *) NULL, 4, "", 0);
     define_label (whelp, (Widget *) NULL, 5, "", 0);
@@ -813,7 +817,8 @@ interactive_display (char *filename, char *node)
     define_label (whelp, (Widget *) NULL, 7, "", 0);
     define_label (whelp, (Widget *) NULL, 8, "", 0);
     define_label (whelp, (Widget *) NULL, 9, "", 0);
-    define_label_data (whelp, (Widget *) NULL, 10, _("Quit"), quit_cmd, whelp);
+    define_label_data (whelp, (Widget *) NULL, 10, _("Quit"), quit_cmd,
+		       whelp);
 
     run_dlg (whelp);
     interactive_display_finish ();

@@ -568,62 +568,80 @@ init_i18n_stuff(int list_type, int cols)
 	return cols;
 }
 
-static void init_hotlist (int list_type)
+static void
+init_hotlist (int list_type)
 {
     int i;
-	int hotlist_cols = init_i18n_stuff (list_type, COLS - 6);
+    char *title, *help_node;
+    int hotlist_cols;
+
+    hotlist_cols = init_i18n_stuff (list_type, COLS - 6);
 
     do_refresh ();
 
-    hotlist_state.expanded = GetPrivateProfileInt ("HotlistConfig",
-			    "expanded_view_of_groups", 0, profile_name);
+    hotlist_state.expanded =
+	GetPrivateProfileInt ("HotlistConfig", "expanded_view_of_groups",
+			      0, profile_name);
 
-    hotlist_dlg = create_dlg (0, 0, LINES-2, hotlist_cols, dialog_colors,
-			      hotlist_callback, 
-			      list_type == LIST_VFSLIST ? "[vfshot]" : "[Hotlist]",
-			      list_type == LIST_VFSLIST ? "vfshot" : "hotlist",
-			      DLG_CENTER);
-    x_set_dialog_title (hotlist_dlg,
-        list_type == LIST_VFSLIST ? _("Active VFS directories") : _("Directory hotlist"));
-
-#define XTRACT(i) BY+hotlist_but[i].y, BX+hotlist_but[i].x, hotlist_but[i].ret_cmd, hotlist_but[i].flags, hotlist_but[i].text, hotlist_button_callback, 0, hotlist_but[i].tkname
-
-    for (i = 0; i < BUTTONS; i++){
-	if (hotlist_but[i].type & list_type)
-	    add_widget (hotlist_dlg, button_new (XTRACT (i)));
+    if (list_type == LIST_VFSLIST) {
+	title = _("Active VFS directories");
+	help_node = "[vfshot]";	/* FIXME - no such node */
+    } else {
+	title = _("Directory hotlist");
+	help_node = "[Hotlist]";
     }
-#undef XTRACT
+
+    hotlist_dlg =
+	create_dlg (0, 0, LINES - 2, hotlist_cols, dialog_colors,
+		    hotlist_callback, help_node, title, DLG_CENTER);
+
+    for (i = 0; i < BUTTONS; i++) {
+	if (hotlist_but[i].type & list_type)
+	    add_widget (hotlist_dlg,
+			button_new (BY + hotlist_but[i].y,
+				    BX + hotlist_but[i].x,
+				    hotlist_but[i].ret_cmd,
+				    hotlist_but[i].flags,
+				    hotlist_but[i].text,
+				    hotlist_button_callback, 0,
+				    hotlist_but[i].tkname));
+    }
 
     /* We add the labels. 
      *    pname       will hold entry's pathname;
      *    pname_group will hold name of current group
      */
-    pname = label_new (UY-11+LINES, UX+2, "", "the-lab");
+    pname = label_new (UY - 11 + LINES, UX + 2, "", "the-lab");
     add_widget (hotlist_dlg, pname);
     if (!hotlist_state.moving) {
-	add_widget (hotlist_dlg, label_new (UY-12+LINES, UX+1, _(" Directory path "), NULL));
+	add_widget (hotlist_dlg,
+		    label_new (UY - 12 + LINES, UX + 1,
+			       _(" Directory path "), NULL));
 
 	/* This one holds the displayed pathname */
-	pname_group = label_new (UY, UX+1, _(" Directory label "), NULL);
+	pname_group = label_new (UY, UX + 1, _(" Directory label "), NULL);
 	add_widget (hotlist_dlg, pname_group);
     }
     /* get new listbox */
-    l_hotlist = listbox_new (UY + 1, UX + 1, COLS-2*UX-8, LINES-14, listbox_cback, l_call, "listbox");
+    l_hotlist =
+	listbox_new (UY + 1, UX + 1, COLS - 2 * UX - 8, LINES - 14,
+		     listbox_cback, l_call, "listbox");
 
     /* Fill the hotlist with the active VFS or the hotlist */
 #ifdef USE_VFS
-    if (list_type == LIST_VFSLIST){
+    if (list_type == LIST_VFSLIST) {
 	listbox_add_item (l_hotlist, 0, 0, home_dir, 0);
 	vfs_fill_names (add_name_to_list);
     } else
-#endif /* !USE_VFS */
+#endif				/* !USE_VFS */
 	fill_listbox ();
 
-    add_widget (hotlist_dlg, l_hotlist); 
+    add_widget (hotlist_dlg, l_hotlist);
     /* add listbox to the dialogs */
 }
 
-static void init_movelist (int list_type, struct hotlist *item)
+static void
+init_movelist (int list_type, struct hotlist *item)
 {
     int i;
     char *hdr = g_strdup_printf (_("Moving %s"), item->label);
@@ -631,35 +649,37 @@ static void init_movelist (int list_type, struct hotlist *item)
 
     do_refresh ();
 
-    movelist_dlg = create_dlg (0, 0, LINES-6, movelist_cols, dialog_colors,
-			      hotlist_callback, "[Hotlist]",
-			      "movelist",
-			      DLG_CENTER);
-    x_set_dialog_title (movelist_dlg, hdr);
+    movelist_dlg =
+	create_dlg (0, 0, LINES - 6, movelist_cols, dialog_colors,
+		    hotlist_callback, "[Hotlist]", hdr, DLG_CENTER);
     g_free (hdr);
 
-#define XTRACT(i) BY-4+hotlist_but[i].y, BX+hotlist_but[i].x, hotlist_but[i].ret_cmd, hotlist_but[i].flags, hotlist_but[i].text, hotlist_button_callback, 0, hotlist_but[i].tkname
-
-    for (i = 0; i < BUTTONS; i++){
+    for (i = 0; i < BUTTONS; i++) {
 	if (hotlist_but[i].type & list_type)
-	    add_widget (movelist_dlg, button_new (XTRACT (i)));
+	    add_widget (movelist_dlg,
+			button_new (BY - 4 + hotlist_but[i].y,
+				    BX + hotlist_but[i].x,
+				    hotlist_but[i].ret_cmd,
+				    hotlist_but[i].flags,
+				    hotlist_but[i].text,
+				    hotlist_button_callback, 0,
+				    hotlist_but[i].tkname));
     }
-
-#undef	XTRACT
 
     /* We add the labels.  We are interested in the last one,
      * that one will hold the path name label
      */
-    movelist_group = label_new (UY, UX+1, _(" Directory label "), NULL);
+    movelist_group = label_new (UY, UX + 1, _(" Directory label "), NULL);
     add_widget (movelist_dlg, movelist_group);
     /* get new listbox */
-    l_movelist = listbox_new (UY + 1, UX + 1, 
-		movelist_dlg->cols - 2*UX - 2, movelist_dlg->lines - 8,
-		listbox_cback, l_call, "listbox");
+    l_movelist =
+	listbox_new (UY + 1, UX + 1, movelist_dlg->cols - 2 * UX - 2,
+		     movelist_dlg->lines - 8, listbox_cback, l_call,
+		     "listbox");
 
     fill_listbox ();
 
-    add_widget (movelist_dlg, l_movelist); 
+    add_widget (movelist_dlg, l_movelist);
     /* add listbox to the dialogs */
 }
 
