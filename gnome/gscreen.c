@@ -1451,8 +1451,17 @@ panel_icon_list_drop_data_available (GtkWidget *widget, GdkEventDropDataAvailabl
 }
 #endif
 
+/*
+ * Strategy for activaing the drags from the icon-list:
+ *
+ * The icon-list uses the button-press/motion-notify events for
+ * the banding selection.  We catch the events and only if the
+ * click happens in an icon and the user moves the mouse enough (a
+ * threshold to give it a better feel) activa the drag and drop.
+ *
+ */
 static int
-panel_icon_list_click (GtkWidget *widget, GdkEventButton *event, WPanel *panel)
+panel_icon_list_button_press (GtkWidget *widget, GdkEventButton *event, WPanel *panel)
 {
 	GnomeIconList *gil = GNOME_ICON_LIST (widget);
 	int icon;
@@ -1460,18 +1469,59 @@ panel_icon_list_click (GtkWidget *widget, GdkEventButton *event, WPanel *panel)
 	icon = gnome_icon_list_get_icon_at (gil, event->x, event->y);
 
 	if (icon == -1)
-		return FALSE;
-	
-	if (panel->dir.list [icon].f.marked)
-		printf ("Selected\n");
+		panel->maybe_start_drag = 0;
 	else
-		printf ("not selected\n");
+		panel->maybe_start_drag = event->button;
+	
+	panel->click_x = event->x;
+	panel->click_y = event->y;
 	return FALSE;
 }
 
 static int
+panel_icon_list_button_release (GtkWidget *widget, GdkEventButton *event, WPanel *panel)
+{
+	GnomeIconList *gil = GNOME_ICON_LIST (widget);
+	int icon;
+
+	icon = gnome_icon_list_get_icon_at (gil, event->x, event->y);
+
+	panel->maybe_start_drag = FALSE;
+	return FALSE;
+}
+
+#define MAX(a,b) ((a > b) ? a : b)
+
+static int
 panel_icon_list_motion (GtkWidget *widget, GdkEventMotion *event, WPanel *panel)
 {
+	GtkTargetList *list;
+	GdkDragAction action;
+	GdkDragContext *context;
+	
+	if (!panel->maybe_start_drag)
+		return FALSE;
+
+	if (panel->maybe_start_drag == 3)
+		return FALSE;
+	
+	if ((abs (event->x - panel->click_x) < 4) || 
+	    (abs (event->y - panel->click_y) < 4))
+		return FALSE;
+	
+	list = gtk_target_list_new (drag_types, ELEMENTS (drag_types));
+
+	/* Control+Shift = LINK */
+	if ((event->state & (GDK_SHIFT_MASK|GDK_CONTROL_MASK)) == (GDK_SHIFT_MASK|GDK_CONTROL_MASK))
+		action = GDK_ACTION_LINK;
+	else if (event->state & (GDK_SHIFT_MASK))
+		action = GDK_ACTION_MOVE;
+	else
+		action = GDK_ACTION_COPY;
+		
+	context = gtk_drag_begin (widget, list, action, panel->maybe_start_drag, (GdkEvent *) event);
+	gtk_drag_set_icon_default (context);
+	
 	return FALSE;
 }
 
@@ -1486,20 +1536,22 @@ panel_icon_list_realized (GtkObject *obj, WPanel *panel)
 	load_imlib_icons ();
 	load_dnd_icons ();
 
-#if 0
-	gtk_drag_source_set (GTK_WIDGET (icon), GDK_BUTTON1_MASK,
-			     drag_types, ELEMENTS (drag_types), GDK_ACTION_COPY);
-#endif
-	
 	gtk_signal_connect (obj, "drag_data_get",
 			    GTK_SIGNAL_FUNC (panel_drag_data_get), panel);
-	
-	gtk_signal_connect_after (obj, "button_press_event",
-			    GTK_SIGNAL_FUNC (panel_icon_list_click), panel);
+
+	/*
+	 * These implement our drag-start activation code, as we have a pretty
+	 * oveloaded widget
+	 */
+	gtk_signal_connect (obj, "button_press_event",
+			    GTK_SIGNAL_FUNC (panel_icon_list_button_press), panel);
+
+	gtk_signal_connect (obj, "button_release_event",
+			    GTK_SIGNAL_FUNC (panel_icon_list_button_release), panel);
 
 	gtk_signal_connect (obj, "motion_notify_event",
 			    GTK_SIGNAL_FUNC (panel_icon_list_motion), panel);
-	
+
 #ifdef OLD_DND
 	/* DND: Drag setup */
 	gtk_signal_connect (obj, "drag_request_event", GTK_SIGNAL_FUNC (panel_icon_list_drag_request), panel);
@@ -1925,15 +1977,14 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	GtkWidget *status_line, *filter, *vbox;
 	GtkWidget *frame, *cwd, *back_p, *fwd_p;
 	GtkWidget *display;
-	GtkWidget *scrollbar;
 		
 	panel->xwindow = gtk_widget_get_toplevel (GTK_WIDGET (panel->widget.wdata));
 	
 	panel->table = gtk_table_new (2, 1, 0);
 
 	panel->icons = panel_create_icon_display (panel);
-	scrollbar = gtk_vscrollbar_new (GNOME_ICON_LIST (panel->icons)->adj);
-	gtk_widget_show (scrollbar);
+	panel->scrollbar = gtk_vscrollbar_new (GNOME_ICON_LIST (panel->icons)->adj);
+	gtk_widget_show (panel->scrollbar);
 	
 	panel->list  = panel_create_file_list (panel);
 	gtk_widget_ref (panel->icons);
@@ -2003,7 +2054,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK, 
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0);
-	gtk_table_attach (GTK_TABLE (panel->table), scrollbar, 1, 2, 1, 2,
+	gtk_table_attach (GTK_TABLE (panel->table), panel->scrollbar, 1, 2, 1, 2,
 			  0,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0);
@@ -2037,9 +2088,6 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	if (!(panel->widget.options & W_PANEL_HIDDEN))
 		gtk_widget_show (gtk_widget_get_toplevel (panel->table));
 
-	/* This is a bug workaround for the icon list, as the icon */
-	gtk_widget_queue_resize (panel->icons);
-			     
 	if (!pixmaps_ready){
 		if (!GTK_WIDGET_REALIZED (panel->list))
 			gtk_widget_realize (panel->list);
@@ -2098,16 +2146,22 @@ void
 x_reset_sort_labels (WPanel *panel)
 {
 	if (panel->list_type == list_icons){
-		if (panel->icons)
+		if (panel->icons){
 			gtk_widget_show (panel->icons);
+			gtk_widget_show (panel->scrollbar);
+		}
 		if (panel->list)
 			gtk_widget_hide (panel->list);
 	} else {
 		panel_switch_new_display_mode (panel);
-		if (panel->list)
+		if (panel->list){
 			gtk_widget_show (panel->list);
-		if (panel->icons)
+			gtk_widget_show (panel->scrollbar);
+		}
+		if (panel->icons){
 			gtk_widget_hide (panel->icons);
+			gtk_widget_hide (panel->scrollbar);
+		}
 	}
 }
 

@@ -1444,11 +1444,11 @@ desktop_root (void)
 	rw = gnome_rootwin_new ();
 #ifdef OLD_DND
 	connect_drop_signals (rw, NULL);
-	gtk_widget_realize (rw);
 	gtk_widget_dnd_drop_set (rw, TRUE, root_drop_types, ELEMENTS (root_drop_types), FALSE);
-#endif
+	gtk_widget_realize (rw);
 	gtk_widget_show (rw);
 	root_window = GNOME_ROOTWIN (rw);
+#endif
 }
 
 /*
