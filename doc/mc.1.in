@@ -6,7 +6,7 @@ mc \- Visual shell for Unix-like systems.
 .\"SKIP_SECTION"
 .SH "USAGE"
 .B mc
-[\-abcCdfhPstuUVx] [\-l log] [dir1 [dir2]] [-v file]
+[\-abcCdfhPstuUVx] [\-l log] [dir1 [dir2]] [-e [file]] [-v file]
 .\"NODE "DESCRIPTION"
 .SH "DESCRIPTION"
 GNU Midnight Commander is a directory browser/file manager for
@@ -38,6 +38,11 @@ section.
 .TP
 .I "\-d"
 Disable mouse support.
+.TP
+.I "\-e [file]"
+Start the internal editor.  If the file is specified, open it on
+startup.  See also
+.BR "mcedit (1)" .
 .TP
 .I "\-f"
 Display the compiled-in search paths for Midnight Commander files.
@@ -83,7 +88,8 @@ Midnight Commander was built with the subshell support set as an
 optional feature).
 .TP
 .I "\-v file"
-Start the internal viewer to view the specified file.
+Start the internal viewer to view the specified file.  See also
+.BR "mcview (1)" .
 .TP
 .I "\-V"
 Display the version of the program.
