@@ -1432,6 +1432,7 @@ int vfs_parse_filedate(int idx, time_t *t)
     char *p, *pos;
     int extfs_format_date = 0;
     struct tm tim;
+    int	got_year = 0;
 
     /* Let's setup default time values */
     tim.tm_year = current_year;
@@ -1440,7 +1441,9 @@ int vfs_parse_filedate(int idx, time_t *t)
     tim.tm_hour = 0;
     tim.tm_min  = 0;
     tim.tm_sec  = 0;
-    tim.tm_isdst = 0;
+    tim.tm_isdst = -1; /* My man says, in this case mktime computes
+    			* correct dst offset
+			*/
     
     p = columns [idx++];
     
@@ -1487,16 +1490,29 @@ int vfs_parse_filedate(int idx, time_t *t)
     }
     
     if (is_num (idx)) {
-        if(is_time(columns[idx], &tim) || is_year(columns[idx], &tim)) {
+        if(is_time(columns[idx], &tim) || (got_year = is_year(columns[idx], &tim))) {
 	idx++;
 	 
 	if(is_num (idx) && 
-	    (is_year(columns[idx], &tim) || is_time(columns[idx], &tim)))
+	    ((got_year = is_year(columns[idx], &tim)) || is_time(columns[idx], &tim)))
 	    idx++; /* time & year or reverse */
 	 } /* only time or date */
     }
     else 
         return 0; /* Nor time or date */
+
+    /*
+     * If the date is less than 6 months in the past, it is shown without year
+     * other dates in the past or future are shown with year but without time
+     * This does not check for years before 1900 ... I don't know, how
+     * to represent them at all
+     */
+    if (!got_year &&
+         current_mon < 6 &&
+	 current_mon < tim.tm_mon &&
+	 tim.tm_mon - current_mon >= 6)
+
+	 tim.tm_year -= 1;
 
     if ((*t = mktime(&tim)) ==-1)
         *t = 0;

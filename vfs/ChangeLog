@@ -1,3 +1,9 @@
+Thu Jan  7 06:24:25 1999  Andrej Borsenkow <borsenkow.msk@sni.de>
+
+	* vfs.c (vfs_parse_filedate): If the date is less than 6 months 
+	in the past, it is shown without year. In this case MC assumed
+	the current year which is wrong from Jan to Jun.
+
 Thu Jan  7 03:47:35 1999  Timur I. Bakeyev <timur@com.bat.ru>
 
 	* vfs.c (parse_ls_lga): Fixed Y2K typo pointed by Alex.
