@@ -1,8 +1,17 @@
+2004-08-19  Roland Illig  <roland.illig@gmx.de>
+
+	* util.h (move_backward2): Fixed endless loop. Cleaned up code.
+	The only case that's left with the old code is text mode with
+	line wrapping. (move_backward2_textmode_wrap): The special case
+	of moving some lines up in text mode with line wrapping enabled.
+
 2004-18-19  Roland Illig  <roland.illig@gmx.de>
+
 	* util.h: Added the function free_after for easier handling
 	of dynamically allocated strings.
 
 2004-18-19  Roland Illig  <roland.illig@gmx.de>
+
 	* util.c: Added the function str_replace, which replaces
 	all occurences of a character in a string.
 

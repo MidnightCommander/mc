@@ -1261,6 +1261,36 @@ move_forward2 (WView *view, offset_type current, int lines, offset_type upto)
     return current;
 }
 
+/* special case for text (non-hex) mode with line wrapping. */
+static offset_type
+move_backward2_textmode_wrap (WView * view, offset_type current, int lines)
+{
+    offset_type p, q, pm;
+    int line;
+
+    if (current == view->last_byte && get_byte (view, current - 1) != '\n')
+        /* There is one virtual '\n' at the end,
+           so that the last line is shown */
+        line = 1;
+    else
+        line = 0;
+
+    for (q = p = current - 1; p > view->first; p--) {
+        if (get_byte (view, p) == '\n' || p == view->first) {
+            pm = p > view->first ? p + 1 : view->first;
+            line += move_forward2 (view, pm, 0, q);
+            if (line >= lines) {
+                if (line == lines)
+                    return pm;
+                else
+                    return move_forward2 (view, pm, line - lines, 0);
+            }
+            q = p + 1;
+        }
+    }
+    return p > view->first ? p : view->first;
+}
+
 /* returns the new current pointer */
 /* Cause even the forward routine became very complex, we in the wrap_mode
    just find the nearest '\n', use move_forward2(p, 0, q) to get the count
@@ -1272,51 +1302,41 @@ move_backward2 (WView *view, offset_type current, int lines)
     offset_type p, q, pm;
     int line;
 
-    if (!view->hex_mode && current == view->first)
-	return current;
-
     if (view->hex_mode) {
-	p = current - lines * view->bytes_per_line;
-	p = (p < view->first) ? view->first : p;
-	if (lines == 1) {
-	    q = view->edit_cursor - view->bytes_per_line;
-	    view->edit_cursor = (q < view->first) ? view->edit_cursor : q;
-	    p = (view->edit_cursor >= current) ? current : p;
-	} else {
-	    q = p + ((LINES - 2) * view->bytes_per_line);
-	    view->edit_cursor = (view->edit_cursor >= q) ?
-		p : view->edit_cursor;
-	}
-	return p;
+    	if (view->edit_cursor >= lines * view->bytes_per_line) {
+    	    view->edit_cursor -= lines * view->bytes_per_line;
+    	} else {
+    	    view->edit_cursor %= view->bytes_per_line;
+    	}
+    	if (current >= lines * view->bytes_per_line) {
+    	    current -= lines * view->bytes_per_line;
+    	} else {
+    	    current %= view->bytes_per_line;
+    	}
+    	return current;
     } else {
-	if (current == view->last_byte
-	    && get_byte (view, current - 1) != '\n')
-	    /* There is one virtual '\n' at the end,
-	       so that the last line is shown */
-	    line = 1;
-	else
-	    line = 0;
-	for (q = p = current - 1; p >= view->first; p--)
-	    if (get_byte (view, p) == '\n' || p == view->first) {
-		pm = p > view->first ? p + 1 : view->first;
-		if (!view->wrap_mode) {
-		    if (line == lines)
-			return pm;
-		    line++;
-		} else {
-		    line += move_forward2 (view, pm, 0, q);
-		    if (line >= lines) {
-			if (line == lines)
-			    return pm;
-			else
-			    return move_forward2 (view, pm, line - lines,
-						  0);
-		    }
-		    q = p + 1;
-		}
-	    }
+    	if (current == view->first)
+    	    return current;
+
+        if (view->wrap_mode)
+            return move_backward2_textmode_wrap (view, current, lines);
+
+        /* There is one virtual '\n' at the end,
+         * so that the last line is shown */
+	if (current == view->last_byte && get_byte (view, current - 1) != '\n')
+            lines--;
+        while (current > view->first && get_byte(view, current - 1) != '\n')
+            current--;
+	while (lines > 0) {
+            if (current > view->first)
+                current--;
+                lines--;
+            while (current > view->first && get_byte(view, current - 1) != '\n')
+                current--;
+        }
+        return current;
     }
-    return p > view->first ? p : view->first;
+    return current; /* unreached */
 }
 
 static void
