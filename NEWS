@@ -1,6 +1,8 @@
 After version 4.6.0.
 
 Add --with-glib12 option to configure to force using glib 1.2.x.
+Add --disable-background option to disable background support.
+Background support now uses pipes instead of UNIX sockets.
 libX11 is loaded dynamically using gmodule if possible.
 Screen saving is now supported on FreeBSD console.
 Support for SCO UNIX has been removed.
