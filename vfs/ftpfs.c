@@ -1410,8 +1410,6 @@ error_return:
     return -1;
 }
 
-//#define FH_SOCK fh->u.ftp.sock
-
 static int 
 linear_start(vfs *me, vfs_s_fh *fh, int offset)
 {
