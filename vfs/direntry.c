@@ -49,7 +49,7 @@ vfs_s_inode *vfs_s_new_inode (vfs *me, vfs_s_super *super, struct stat *initstat
     ino->st.st_ino = MEDATA->inode_counter++;
     ino->st.st_dev = MEDATA->rdev;
 
-    super->fd_usage++;
+    super->ino_usage++;
     total_inodes++;
     
     CALL(init_inode) (me, ino);
@@ -96,7 +96,7 @@ void vfs_s_free_inode (vfs *me, vfs_s_inode *ino)
 	    free(ino->localname);
 	}
 	total_inodes--;
-	ino->super->fd_usage--;
+	ino->super->ino_usage--;
 	free(ino);
     } else ino->st.st_nlink--;
 }
@@ -350,6 +350,7 @@ vfs_s_super *vfs_s_new_super (vfs *me)
     super->root = NULL;
     super->name = NULL;
     super->fd_usage = 0;
+    super->ino_usage = 0;
     super->me = me;
     return super;
 }
@@ -372,8 +373,8 @@ void vfs_s_free_super (vfs *me, vfs_s_super *super)
 
 #if 1
     /* We currently leak small ammount of memory, sometimes. Fix it if you can. */
-    if (super->fd_usage)
-	message_1s1d (1, " Direntry warning ", "Super fd_usage is %d, memory leak", super->fd_usage);
+    if (super->ino_usage)
+	message_1s1d (1, " Direntry warning ", "Super ino_usage is %d, memory leak", super->ino_usage);
 
     if (super->want_stale)
 	message_1s( 1, " Direntry warning ", "Super has want_stale set" );
@@ -873,6 +874,7 @@ char *vfs_s_getlocalcopy (vfs *me, char *path)
 
     if (!ino->localname)
 	ino->localname = mc_def_getlocalcopy (me, buf);
+    /* FIXME: fd_usage++ missing */
     return ino->localname;
 }
 

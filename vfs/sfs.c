@@ -266,7 +266,9 @@ static void sfs_fill_names (vfs *me, void (*func)(char *))
 
 static int sfs_nothingisopen (vfsid id)
 {
-    return 0;
+    /* FIXME: Investigate whether have to guard this like in
+       the other VFSs (see fd_usage in extfs) -- Norbert */
+    return 1;
 }
 
 static char *sfs_getlocalcopy (vfs *me, char *path)

@@ -75,7 +75,8 @@ typedef struct vfs_s_super {
     vfs *me;
     vfs_s_inode *root;
     char *name;		/* My name, whatever it means */
-    int fd_usage;	/* Usage count of this superblock */
+    int fd_usage;	/* Number of open files */
+    int ino_usage;	/* Usage count of this superblock */
     int want_stale;	/* If set, we do not flush cache properly */
 
     union {

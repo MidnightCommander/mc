@@ -67,11 +67,6 @@ static void tar_free_archive (vfs *me, vfs_s_super *archive)
 	mc_close(archive->u.tar.fd);
 }
 
-struct tar_super {
-};
-
-#define SUPER_DATA ((struct tar_super *) super->data)
-
 /* As we open one archive at a time, it is safe to have this static */
 static int current_tar_position = 0;
 

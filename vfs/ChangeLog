@@ -1,3 +1,20 @@
+Thu Dec 31 08:47:15 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* sfs.c (sfs_nothingisopen): Assume for now it's always save to free
+	this filesystem and delete temporary files. This needs further 
+	investigation.
+
+	* tar.c: deleted unused empty struct tar_super.
+
+Thu Dec 31 08:40:44 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* direntry.c: Split fd_usage into fd_usage and ino_usage. fd_usage
+	was used for external and internal reference count. This was wrong
+	because we can free resources taken up by the vfs as soon as the
+	external reference count (now fd_usage) is zero. The internal
+	reference count (ino_usage) mustn't matter because the vfs has to
+	clean up itself in the correct order.
+
 Fri Dec 25 21:48:51 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* direntry.c (vfs_s_new_inode): Moved initialization of st_ino
