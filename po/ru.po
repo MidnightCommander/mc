@@ -3196,7 +3196,7 @@ msgstr "Подразумевать медленный терминал"
 
 #: src/main.c:2233
 msgid "Use stickchars to draw"
-msgstr "Использовать псевдографика для рисования"
+msgstr "Использовать псевдографику для рисования"
 
 #: src/main.c:2237
 msgid "Enables subshell support (default)"
