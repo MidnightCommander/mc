@@ -1,37 +1,33 @@
 2004-09-06  Jakub Jelinek  <jakub@redhat.com>
 
-        * fish_file_store): Call get_interrupt instead of testing
+        * fish.c (fish_file_store): Call got_interrupt() instead of testing
         whether got_interrupt is non-NULL (it always is).
 
 2004-09-04  Pavel S. Shirshov  <pavelsh@mail.ru>
 
-	* vfs.c (vfs_cmp_handle): Fixing warnings on on 64-bit 
-	platforms.
-	(vfs_op):Likewise.
-	(vfs_info):Likewise.
-	(vfs_free_handle):Likewise.
-	* extfs/rpm (mcrpmfs_run): Quote parameters to calls 
+	* vfs.c (vfs_cmp_handle): Fix warnings on 64-bit platforms.
+	(vfs_op): Likewise.
+	(vfs_info): Likewise.
+	(vfs_free_handle): Likewise.
+	* extfs/rpm (mcrpmfs_run): Quote parameters to calls
 	to system/open that spawn a shell.
-	* direntry.c (vfs_s_find_entry_tree): Make "size" 
-	size_t.
+	* direntry.c (vfs_s_find_entry_tree): Make "size" size_t.
 
 Based on patches from Jakub Jelinek  <jakub@redhat.com>
 
 2004-09-02  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
         * tar.c (tar_read_header): Fix missed *.
-        * extfs.c (extfs_readlink): Revert last change: readlink does not
+        * extfs.c (extfs_readlink): Revert last change: readlink() does not
         append a NUL character to buf.
+	* mcfs.c (mcfs_readlink): Likewise.
+	* direntry.c (vfs_s_readlink): Likewise.
         * ftpfs.c: Warning fix.
         * vfs-impl.h (struct vfs_class.readlink): Make "size" size_t.
         Adjust all callers.
 	* local.c (local_readlink): Make "size" size_t.
-	* direntry.c (vfs_s_readlink): Revert last changes. Make "size"
-	size_t.
 	* sfs.c (sfs_readlink): Reformat function.
 	* smbfs.c (smbfs_readlink): Reformat function.
-	* mcfs.c (mcfs_readlink): Revert last change: readlink does not
-        append a NUL character to buf. Fix compilation.
 
 2004-09-02  Roland Illig  <roland.illig@gmx.de>
 
@@ -45,12 +41,12 @@ Based on patches from Jakub Jelinek  <jakub@redhat.com>
 
 2004-09-02  Pavel S. Shirshov  <pavelsh@mail.ru>
 
-	* direntry.c (vfs_s_readlink): Use g_strlcpy instead strncpy.
-	* ftpfs.c (ftpfs_get_reply): Use g_strlcpy instead strncpy.
-	* extfs.c (extfs_readlink): Fix return value. Use g_strlcpy
-	instead strncpy.
-	* mcfs.c (mcfs_readlink): Fix return value. Use g_strlcpy
-	instead strncpy.
+	* direntry.c (vfs_s_readlink): Use g_strlcpy() instead of strncpy().
+	* ftpfs.c (ftpfs_get_reply): Use g_strlcpy() instead of strncpy().
+	* extfs.c (extfs_readlink): Fix return value. Use g_strlcpy()
+	instead of strncpy().
+	* mcfs.c (mcfs_readlink): Fix return value. Use g_strlcpy()
+	instead strncpy().
 	* tar.c (tar_read_header): Add additional check for consistency.
 	Fix memory leak.
 	* cpio.c (cpio_defer_find): Remove recursion.
@@ -63,7 +59,7 @@ Based on patches from Jakub Jelinek  <jakub@redhat.com>
 
 2004-09-01  Pavel S. Shirshov  <pavelsh@mail.ru>
 
-	* fish.c (fish_get_reply): Use g_strlcpy instead
+	* fish.c (fish_get_reply): Use g_strlcpy() instead of
         sequence strncpy(), name[len] = '\0'
 	* vfs.c (mc_get_current_wd): Likewise.
 
@@ -174,9 +170,9 @@ Based on patches from Jakub Jelinek  <jakub@redhat.com>
 
 2004-08-19  Roland Illig  <roland.illig@gmx.de>
 
-	* smbfs.c: Modified smbfs_convert_path based on a patch sent by
-	Andrew V. Samoilov. Adjusted the calls to smbfs_convert_path.
-	Simplified string handling by using free_after from src/util.h.
+	* smbfs.c: Modified smbfs_convert_path() based on a patch sent by
+	Andrew V. Samoilov. Adjusted the calls to smbfs_convert_path().
+	Simplified string handling by using free_after() from src/util.h.
 	Fixed one memory leak and one accidental modification.
 
 2004-08-18  Pavel S. Shirshov  <pavelsh@mail.ru>
