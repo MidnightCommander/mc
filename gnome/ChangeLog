@@ -1,3 +1,7 @@
+Sat Mar  7 15:24:49 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gwidget.c (entry_click): Focus the entry on clicks.
+
 Fri Mar  6 20:50:19 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gmain.c (create_panels): New per-port variable, used to flush
