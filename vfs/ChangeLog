@@ -7,7 +7,7 @@
 
 	* samba/acconfig.h: Remove WITH_SYSLOG.
 	* samba/lib/system.c (sys_chroot): Removed.
-	* samba/configure.in: Remove RUNPROG.  Don't check 
+	* samba/configure.in: Remove RUNPROG.  Don't check
 	for chroot and execl functions.
 	Remove syslog logging support.
 	Add --with-codepagedir and --with-configdir from samba 2.2.2.
@@ -951,13 +951,13 @@
 2000-03-31  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* vfs.c (mc_def_getlocalcopy): free() replaced by g_free() to prevent
-	  crushes with mad, thanks to Timur I. Bakeyev <timur@bat.ru>
-	* fish.c (linear_start): name wasn't freed after usage
-	* cpio.c (cpio_ungetlocalcopy): return type changed to int,
-	  function return 0 now
-	* direntry.c (vfs_s_close, vfs_s_resolve_symlink): memory, allocated
-	  by vfs_s_fullpath () is freed after use
-	* ftpfs.c (linear_start): ditto;
+	crashes with mad, thanks to Timur I. Bakeyev <timur@bat.ru>
+	* fish.c (linear_start): Name wasn't freed after usage.
+	* cpio.c (cpio_ungetlocalcopy): Return type changed to int,
+	function return 0 now.
+	* direntry.c (vfs_s_close, vfs_s_resolve_symlink): Memory allocated
+	by vfs_s_fullpath() is freed after use.
+	* ftpfs.c (linear_start): Ditto.
 
 2000-04-03  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 

@@ -1,6 +1,6 @@
 2001-11-28  Andrew V. Samoilov  <kai@cmail.ru>
 
-	* syntax.c (apply_rules_going_right): Fix crush for lines like
+	* syntax.c (apply_rules_going_right): Fix crash for lines like
 	\s+ \n lightgray/13 red
 	in Syntax file.
 	(read_one_line): Use EOF instead of -1.

@@ -1622,7 +1622,7 @@
 2000-08-08  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* hotlist.c (done_hotlist): static tkn_buf, tkn_buf_length and
-	tkn_length nullified after tkn_buf is freed to prevent crushes.
+	tkn_length nullified after tkn_buf is freed to prevent crashes.
 
 	(new_hotlist): became a macro
 

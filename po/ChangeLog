@@ -7,25 +7,25 @@
 
 	* sk.po: Small fix.
 
-2001-11-21  Peteris Krisjanis <pecisk@inbox.lv>
+2001-11-21  Peteris Krisjanis  <pecisk@inbox.lv>
 
 	* lv.po: Updated Latvian translation by Artis Trops
 	<hornet@navigators.lv>
-	
-2001-11-06  Fatih Demir <kabalak@gtranslator.org>
+
+2001-11-06  Fatih Demir  <kabalak@gtranslator.org>
 
 	* tr.po: Committed updated Turkish translation by Nilgün.
 
-2001-11-01  Peteris Krisjanis <pecisk@inbox.lv>
+2001-11-01  Peteris Krisjanis  <pecisk@inbox.lv>
 
 	* lv.po: Updated Latvian translation by Artis Trops
 	<hornet@navigators.lv>
 
-2001-10-26  Peteris Krisjanis <pecisk@inbox.lv>
+2001-10-26  Peteris Krisjanis  <pecisk@inbox.lv>
 
 	* lv.po: Updated Latvian translation by Artis Trops
 	<hornet@navigators.lv>
-	
+
 2001-10-25  Christophe Merlet  <redfox@eikonex.org>
 
 	* fr.po: Updated French translation.
@@ -68,7 +68,7 @@
 	* sv.po: Fixed some bad language problems. Thanks to
 	Göran Weinholt <weinholt@linux.nu> for noticing.
 
-2001-10-07  Artis Trops <hornet@navigators.lv>
+2001-10-07  Artis Trops  <hornet@navigators.lv>
 
 	* lv.po: Updated Latvian translation.
 
@@ -90,7 +90,7 @@
 
 	* sk.po: Updated Slovak translation.
 
-2001-09-20  Fatih Demir <kabalak@gtranslator.org>
+2001-09-20  Fatih Demir  <kabalak@gtranslator.org>
 
 	* tr.po: Took over Nilgün's updated Turkish translation from RH
 		CVS.
