@@ -300,7 +300,7 @@ panelu.
 Do zaznaczania plików mo¿esz u¿ywaæ klawisza Insert lub C-t. ¯eby odznaczyæ plik
 po prostu zaznacz jaki¶ ju¿ zaznaczony.
 .PP
-.BR M-g ", " M-h " (lub M-r), " M-j .
+.BR M-g ", " M-r ", " M-j .
 U¿ywane do wybierania najwy¿szego, ¶rodkowego i najni¿szego pliku w panelu.
 .PP
 .BR C-s ", " M-s .

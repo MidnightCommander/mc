@@ -372,7 +372,7 @@ Per marcare i file si può usare il tasto di Inserimento (la sequenza
 teminfo kich1) o la sequenza C-t (Control-t). Per smarcare i file
 basta marcare un file già marcato.
 .PP
-.B M-g, M-h (o M-r), M-j.
+.B M-g, M-r, M-j.
 Usato per selezionare rispettivamente il file superiore, il file centrale o 
 quello inferiore in un pannello.
 .PP

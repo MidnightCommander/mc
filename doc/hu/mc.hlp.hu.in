@@ -376,7 +376,7 @@ használhatod (a kich1 terminfo kombináció), vagy a C-t
 (Control-t) kombinációt. A kijelölés megszüntetéséhez csak
 újra ki kell jelölni a kijelölt fájlt.
 
-M-g, M-h (vagy M-r), M-j A panel legfelsõ, középsõ és
+M-g, M-r, M-j A panel legfelsõ, középsõ és
 alsó fájljának kiválasztásához használd sorban a megfelelõ
 billentyû-kombinációt. Linuxban M-h a "history" bekapcsolására
 szolgál.
