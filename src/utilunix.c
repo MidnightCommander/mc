@@ -259,7 +259,6 @@ int my_system (int flags, const char *shell, const char *command)
     struct sigaction ignore, save_intr, save_quit, save_stop;
     pid_t pid;
     int status = 0;
-    int as_shell_command = flags & EXECUTE_AS_SHELL;
     
     ignore.sa_handler = SIG_IGN;
     sigemptyset (&ignore.sa_mask);

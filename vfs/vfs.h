@@ -140,7 +140,14 @@ struct utimbuf {
     char *tarfs_analysis (char *inname, char **archive, int is_dir);
 
     void ftpfs_init(void);
+    void fish_init(void);
+    void sfs_init(void);
     void ftpfs_done(void);
+    void sfs_done(void);
+    void fish_done(void);
+    int extfs_which (char *path);
+    int sfs_which (char *path);
+
     void ftpfs_set_debug (char *file);
 #ifdef USE_NETCODE
     void ftpfs_hint_reread(int reread);
@@ -153,6 +160,8 @@ struct utimbuf {
     void mcfs_fill_names (void (*)(char *));
     void ftpfs_fill_names (void (*)(char *));
     void tarfs_fill_names (void (*)(char *));
+    void fish_fill_names (void (*)(char *));
+    void sfs_fill_names (void (*)(char *));
     
     /* Only the routines outside of the VFS module need the emulation macros */
 
@@ -290,6 +299,10 @@ struct utimbuf {
 
 #ifdef WANT_PARSE_LS_LGA
 int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname);
+int split_text (char *p);
+int parse_filetype (char c);
+int parse_filemode (char *p);
+int parse_filedate(int idx, time_t *t);
 #endif
 extern void vfs_die (char *msg);
 extern char *vfs_get_password (char *msg);

@@ -47,6 +47,7 @@
 #include "../src/panel.h"
 #include "../src/key.h"		/* Required for the async alarm handler */
 #include "../src/layout.h"	/* For get_panel_widget and get_other_index */
+#include "../src/dialog.h"
 #endif
 #include "vfs.h"
 #include "mcfs.h"
@@ -57,7 +58,6 @@
 #endif
 
 extern int get_other_type (void);
-extern int extfs_which (char *path);
 
 int vfs_timeout = 60; /* VFS timeout in seconds */
 int vfs_flags =       /* Flags */
@@ -100,6 +100,7 @@ static int get_bucket (void)
 	    return i;
     }
     vfs_die ("No more virtual file handles");
+    return 0; /* Shut up, stupid gcc */
 }
 
 vfs *vfs_type_from_op (char *path)
@@ -1228,7 +1229,7 @@ static int is_year(char *str, struct tm *tim)
         return 0;
     if (strlen(str)!=4)
         return 0;
-    if (sscanf(str, "%d", &year) != 1)
+    if (sscanf(str, "%ld", &year) != 1)
         return 0;
     if (year < 1900 || year > 3000)
         return 0;
@@ -1316,7 +1317,6 @@ int parse_filemode (char *p)
     }
     return res;
 }
-
 
 int parse_filedate(int idx, time_t *t)
 {	/* This thing parses from idx in columns[] array */

@@ -246,7 +246,6 @@ static void sfs_free (vfsid id)
 void sfs_fill_names (void (*func)(char *))
 {
     struct cachedfile *cur = head;
-    char *name;
 
     while (cur){
 	(*func)(cur->name);
@@ -375,7 +374,7 @@ void sfs_init (void)
 	    case '2': flags |= F_2; break;
 	    case 'R': flags |= F_NOLOCALCOPY; break;
 	    default:
-	      fprintf( stderr, "Warning: Invalid flag %c in sfs.ini line %s.\n", c, key );
+	      fprintf( stderr, "Warning: Invalid flag %c in sfs.ini line %s.\n", *c, key );
 	    }	    
 	    c++;
 	}

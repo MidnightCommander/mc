@@ -128,7 +128,6 @@ static int decode_reply (char *s, int was_garbage)
 static int get_reply (int sock, char *string_buf, int string_len)
 {
     char answer[1024];
-    int i;
     int was_garbage = 0;
     
     for (;;) {
@@ -335,7 +334,6 @@ error:
 static struct connection *
 open_link (char *host, char *user, int flags, char *netrcpass)
 {
-    int sock;
     struct connection *bucket;
     struct linklist *lptr;
     
@@ -386,6 +384,7 @@ get_path (struct connection **bucket, char *path)
         qflags((*bucket)) |= FISH_FLAG_RSH;
         return res;
     }
+    return NULL;
 }
 
 /*
@@ -400,7 +399,7 @@ get_path (struct connection **bucket, char *path)
 static struct dir *
 retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
 {
-    int sock, has_symlinks;
+    int has_symlinks;
     struct linklist *file_list, *p;
     struct direntry *fe;
     char buffer[8192];
@@ -505,9 +504,6 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
 	          }
 	          break;
 	case 'd': {
-		      time_t t;
-		      int idx;
-
 		      split_text(buffer+1);
 		      if (!parse_filedate(0, &fe->s.st_ctime))
 			  break;
@@ -567,7 +563,7 @@ error_3:
 static int
 store_file(struct direntry *fe)
 {
-    int local_handle, sock, n, total;
+    int local_handle, n, total;
     char buffer[8192];
     struct stat s;
     int was_error = 0;
@@ -638,7 +634,6 @@ static int remotelocal_handle, remoten = 0, remotestat_size;
 static void
 fish_abort (struct connection *bucket)
 {
-    char buffer[8192];
     int n;
 
     print_vfs_message( "Aborting transfer..." );
@@ -764,8 +759,6 @@ int fish_ctl (void *data, int ctlop, int arg)
 
 static int retrieve_file(struct direntry *fe)
 {
-    int total;
-    
     if (fe->local_filename)
         return 1;
     fe->local_stat.st_mtime = 0;
@@ -885,7 +878,6 @@ FISH_OP(symlink,     , "#SYMLINK %s %s\nln -s %s %s; echo '*** 000'" );
 int fish_chown (char *path, int owner, int group)
 {
     char *sowner, *sgroup;
-    int res;
     PREFIX
     sowner = getpwuid( owner )->pw_name;
     sgroup = getgrgid( group )->gr_name;
