@@ -3746,7 +3746,7 @@ msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
 msgstr ""
-"Skærmstørrelse %dx%x er ikke understøttet.\n"
+"Skærmstørrelse %dx%d er ikke understøttet.\n"
 "Tjek TERM-miljøvariabelen.\n"
 
 #: src/subshell.c:417

@@ -4604,7 +4604,7 @@ msgstr "ftpfs : %s istifadəçisi üçün giriş düzgün olmadı "
 #: vfs/ftpfs.c:578
 #, c-format
 msgid " Could not set source routing (%s)"
-msgstr "%Qaynaq yollanması quraşdırılması bacarılmadı (%s)"
+msgstr " Qaynaq yollanması quraşdırılması bacarılmadı (%s)"
 
 #: vfs/ftpfs.c:705
 msgid "ftpfs: Invalid host name."
