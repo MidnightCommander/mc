@@ -329,10 +329,9 @@ x_fill_panel (WPanel *panel)
 	gtk_signal_handler_block_by_data (GTK_OBJECT (panel->tree), panel);
 
 	if (vfs_current_is_local ()){
-		char buffer [MC_MAXPATHLEN];
-
-		get_current_wd (buffer, sizeof (buffer)-1);
-		gtk_dtree_select_dir (GTK_DTREE (panel->tree), buffer);
+		char *cur_dir = g_get_current_dir ();
+		gtk_dtree_select_dir (GTK_DTREE (panel->tree), cur_dir);
+		g_free (cur_dir);
 	} else
 		gtk_dtree_select_dir (GTK_DTREE (panel->tree), panel->cwd);
 
