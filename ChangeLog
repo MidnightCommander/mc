@@ -1,3 +1,8 @@
+2001-05-21  Pavel Roskin  <proski@gnu.org>
+
+	* doc-gnome/C/mkhtml: Print a big warning if the script fails.
+	* doc-gnome/C/Makefile.am: Ignore exit status of mkhtml.
+
 2001-05-20  Pavel Roskin  <proski@gnu.org>
 
 	* doc-gnome/C/Makefile.am: Distribute mkhtml and genindex.sgml.

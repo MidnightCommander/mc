@@ -15,7 +15,7 @@ CLEANFILES = gmc.dvi gmc.ps gmc.pdf gmc.rtf
 DISTCLEANFILES = gmc.sgm
 
 $(srcdir)/index.html: @MAINT@ $(SGML_FILES)
-@MAINT@	cd $(srcdir) && $(SHELL) $(srcdir)/mkhtml
+@MAINT@	-cd $(srcdir) && $(SHELL) $(srcdir)/mkhtml
 
 dist-hook: $(srcdir)/index.html
 	cp $(srcdir)/*.html $(distdir)
