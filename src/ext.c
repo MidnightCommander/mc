@@ -139,17 +139,21 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
     else
 	do_local_copy = 0;
 
+    /*
+     * All commands should be run in /bin/sh regardless of user shell.
+     * To do that, create temporary shell script and run it.
+     * Sometimes it's not needed (e.g. for %cd and %view commands),
+     * but it's easier to create it anyway.
+     */
     cmd_file_fd = mc_mkstemps(&file_name, "mcext", SCRIPT_SUFFIX);
 
-    /* #warning FIXME: this is ugly */
     if (cmd_file_fd == -1){
 	message (1, MSG_ERROR, _(" Can't create temporary command file \n %s "),
 		 unix_error_string (errno));
 	return;
     }
     cmd_file = fdopen (cmd_file_fd, "w");
-    /* FIXME: This is a hack, that makes us sure, we are using the right syntax */
-    fprintf (cmd_file, "#!/bin/sh\n");
+    fputs ("#!/bin/sh\n", cmd_file);
 
     prompt [0] = 0;
     for (;*data && *data != '\n'; data++){
@@ -245,7 +249,9 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
 	    }
 	}
     } /* for */
-    fputc ('\n', cmd_file);
+
+    /* Make sure that the file removes itself when it finishes */
+    fprintf (cmd_file, "\n/bin/rm -f %s\n", file_name);
     fclose (cmd_file);
 
     if ((run_view && !written_nonspace) || is_cd) {
@@ -312,15 +318,6 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
 #endif /* !HAVE_X */
     }
     if (file_name) {
-	/*
-	 * GNOME edition executes file_name in a separate process.
-	 * Cannot remove it here because it may happen before the
-	 * child has executed it.  my_system() in gutil.c has
-	 * (currently defunct) code to remove temporary files.
-	 */
-#ifndef HAVE_X
-	unlink (file_name);
-#endif /* !HAVE_X */
 	g_free (file_name);
     }
     if (localcopy) {

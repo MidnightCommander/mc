@@ -1,5 +1,8 @@
 2001-07-17  Pavel Roskin  <proski@gnu.org>
 
+	* ext.c (exec_extension): Add the `rm' command to the end of
+	temporary scripts so that they erase themselves.
+
 	* util.c (mc_mkstemps): Always use "unsigned long" for enthropy,
 	since gcc-2.7.2.1 on SunOS doesn't understand __extension__ and
 	checking for "long long" is not worth the trouble.
