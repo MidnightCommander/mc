@@ -1170,15 +1170,23 @@ list_append_unique (GList *list, char *text)
 {
     GList *link, *newlink;
 
-    link = g_list_first (list);
+    /*
+     * Go to the last position and traverse the list backwards
+     * starting from the second last entry to make sure that we
+     * are not removing the current link.
+     */
+    list = g_list_append (list, text);
+    list = g_list_last (list);
+    link = g_list_previous (list);
+
     while (link) {
-	newlink = g_list_next (link);
+	newlink = g_list_previous (link);
 	if (!strcmp ((char *) link->data, text))
-	    list = g_list_remove_link (list, link);
+	    g_list_remove_link (list, link);
 	link = newlink;
     }
 
-    return g_list_append (list, text);
+    return list;
 }
 
 

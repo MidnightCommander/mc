@@ -1,5 +1,8 @@
 2003-02-18  Pavel Roskin  <proski@gnu.org>
 
+	* util.c (list_append_unique): Traverse the list backwards.
+	Otherwise the list was lost when the current link was removed.
+
 	* widget.c (history_get): Set the history to the last item.
 	Reported by Adam Byrtek <alpha@debian.org>
 
