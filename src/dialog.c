@@ -21,17 +21,10 @@
 #include <sys/types.h>
 #include <string.h>
 #include "global.h"
-#include "tty.h"
 #include "dialog.h"
-#include "color.h"
-#include "win.h"
-#include "mouse.h"
-#include "main.h"
-#include "key.h"		/* For mi_getch() */
-#include "dlg.h"		/* draw_box, yes I know, it's silly */
-#include "fileopctx.h"
+#include "key.h"		/* we_are_background */
+#include "main.h"		/* fast_refresh */
 
-/* "$Id$" */
 
 Refresh *refresh_list = 0;
 

@@ -1,7 +1,6 @@
 #ifndef __DIALOG_H
 #define __DIALOG_H
 
-#include "global.h"
 #include "dlg.h"
 
 #ifndef VFS_STANDALONE
@@ -40,7 +39,6 @@ enum {
 void push_refresh (void (*new_refresh)(void *), void *data, int flags);
 void pop_refresh (void);
 void do_refresh (void);
-void my_wputs (int y, int x, char *text);
 char *input_dialog (char *header, char *text, char *def_text);
 char *input_expand_dialog (char *header, char *text, char *def_text);
 
