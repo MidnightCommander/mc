@@ -636,9 +636,9 @@ gauge_callback (WGauge *g, int msg, int parm)
 	    columns = (2 * (gauge_len - 7) * done / total + 1) / 2;
 	    addch ('[');
 	    attrset (GAUGE_COLOR);
-	    printw ("%*s", columns, "");
+	    printw ("%*s", (int) columns, "");
 	    attrset (NORMALC);
-	    printw ("%*s] %3d%%", gauge_len - 7 - columns, "", percentage);
+	    printw ("%*s] %3d%%", (int)(gauge_len - 7 - columns), "", (int) percentage);
 	}
 	return MSG_HANDLED;
     }
