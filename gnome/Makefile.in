@@ -26,13 +26,15 @@ GNOMESRCS = 		\
 	gtools.c 	\
 	gdesktop.c 	\
 	gutil.c		\
-	gtrans.c
+	gtrans.c	\
+	gmc-chargrid.c
 
 GNOMEHDRS = 		\
 	gmain.h 	\
 	gscreen.h	\
 	gwidget.h 	\
-	gconf.h
+	gconf.h		\
+	gmc-chargrid.h
 
 #
 # These objects from ../src do not depend on HAVE_X / HAVE_GNOME??
@@ -52,7 +54,7 @@ OOBJS = main.o dlg.o screen.o widget.o wtools.o info.o boxes.o \
 
 OBJS = $(LOBJS) $(OOBJS) \
 	gkey.o gmain.o gscreen.o gwidget.o gmenu.o ghelp.o ginfo.o \
-	glayout.o gtools.o gdesktop.o gtrans.o gutil.o
+	glayout.o gtools.o gdesktop.o gtrans.o gutil.o gmc-chargrid.o
 
 #
 # Distribution variables

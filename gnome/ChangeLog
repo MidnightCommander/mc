@@ -1,3 +1,10 @@
+1998-03-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gmc-chargrid.h: 
+	* gmc-chargrid.c: New Character Grid widget for the file viewer.
+	This is a very lean and fast widget for displaying a grid of
+	monospaced characters.  Just like a crippled-down terminal.
+
 Tue Mar 10 23:46:29 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* glayout.c 
