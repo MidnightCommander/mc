@@ -184,31 +184,31 @@ regex/([^0-9]|^[^\.]*)\.([1-9][a-z]?|n)\.bz2$
 ### Images ###
 
 type/^GIF
-	Include=image-options
+	Include=image
 
 type/^JPEG
-	Include=image-options
+	Include=image
 
 type/^PC\ bitmap
-	Include=image-options
+	Include=image
 
 type/^PNG
-	Include=image-options
+	Include=image
 
 type/^TIFF
-	Include=image-options
+	Include=image
 
 type/^PBM
-	Include=image-options
+	Include=image
 
 type/^PGM
-	Include=image-options
+	Include=image
 
 type/^PPM
-	Include=image-options
+	Include=image
 
 type/^Netpbm
-	Include=image-options
+	Include=image
 
 shell/.xcf
 	Open=gimp %f
@@ -217,10 +217,10 @@ shell/.xbm
 	Open=bitmap %f
 
 shell/.xpm
-	Include=image-options
+	Include=image
 	View=sxpm %f
 
-include/image-options
+include/image
 	Open=if [ "$DISPLAY" = "" ]; then zgv %f; else (ee %f &); fi
 	View=%view{ascii} identify %f
 	#View=%view{ascii} asciiview %f
@@ -249,22 +249,34 @@ regex/\.(ogg|OGG|Ogg)$
 regex/\.(midi?|MIDI?|Midi?|rmid?|RMID?|Rmid?)$
 	Open=timidity %f
 
-### Multimedia ###
 
-regex/\.(mpe?g|MPE?G|Mpe?g)$
-	Open=(mplayer %f >/dev/null 2>&1 &)
-	#Open=(gtv %f >/dev/null 2>&1 &)
+### Video ###
 
-regex/\.(avi|AVI|Avi|mov|MOV|Mov)$
-	Open=(mplayer %f >/dev/null 2>&1 &)
-	#Open=(xanim %f >/dev/null 2>&1 &)
+regex/\.(avi|AVI|Avi)$
+	Include=video
 
-regex/\.(asf|ASF|Asf|wmv|WMV|Wmv)$
-	Open=(mplayer %f >/dev/null 2>&1 &)
+regex/\.(asf|ASF|Asf)$
+	Include=video
+
+regex/\.(divx|DIVX|DivX|Divx)$
+	Include=video
+
+regex/\.(mp4|MP4|Mp4|mpe?g|MPE?G|Mpe?g)$
+	Include=video
+
+regex/\.(vob|VOB|Vob)$
+	Include=video
+
+regex/\.(wmv|WMV|Wmv)$
+	Include=video
 
 regex/\.(rm|RM|Rm|ram|RAM|Ram)$
 	Open=(realplay %f >/dev/null 2>&1 &)
 
+include/video
+	Open=(mplayer %f >/dev/null 2>&1 &)
+	#Open=(gtv %f >/dev/null 2>&1 &)
+	#Open=(xanim %f >/dev/null 2>&1 &)
 
 ### Documents ###
 
@@ -288,9 +300,13 @@ regex/\.([Hh]tml?|HTML?)$
 	Open=if test -n "@X11_WWW@" && test -n "$DISPLAY"; then (@X11_WWW@ file://%d/%p &) >/dev/null 2>&1; else links %f || lynx -force_html %f; fi
 	View=%view{ascii} links -dump %f || lynx -dump -force_html %f
 
-# StarOffice and OpenOffice
+# StarOffice 5.2
 shell/.sdw
-	Open=(soffice %f &)
+	Open=(ooffice %f &)
+
+# StarOffice 6 and OpenOffice.org formats
+shell/.(sxw|stw|sxc|stc|sxi|sti|sxd|std|sxm|sxg)
+	Open=(ooffice %f &)
 
 # AbiWord
 shell/.abw
@@ -316,9 +332,9 @@ type/^Microsoft\ Excel
 	Open=(gnumeric %f >/dev/null 2>&1 &)
 	View=%view{ascii} xls2csv %f || strings %f
 
-# Use StarOffice to open any MS Office documents
+# Use OpenOffice.org to open any MS Office documents
 type/^Microsoft\ Office\ Document
-	Open=(soffice %f &)
+	Open=(ooffice %f &)
 
 # Framemaker
 type/^FrameMaker

@@ -1,5 +1,8 @@
 2002-08-27  Pavel Roskin  <proski@gnu.org>
 
+	* lib/mc.ext.in: Add new OpenOffice.org formats.  Always use
+	OpenOffice.org, not StarOffice.  Add more video formats.
+
 	* lib/mc.ext.in: Use gzip instead of gunzip and compress.  Avoid
 	unnecessary pipeline.  Redirect stderr from cpio, because it can
 	be non-empty even for successful operations.
