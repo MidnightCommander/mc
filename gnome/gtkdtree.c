@@ -20,6 +20,8 @@
 #include "gtkdtree.h"
 #include "../vfs/vfs.h"
 
+#define FREEZE
+
 #ifdef HACK
 # define mc_opendir opendir
 # define mc_closedir closedir
@@ -42,7 +44,7 @@ enum {
 static guint gtk_dtree_signals[LAST_SIGNAL] = { 0 };
 
 char *
-gtk_dtree_get_row_path (GtkDTree *dtree, GtkCTreeNode *row, gint column)
+gtk_dtree_get_row_path (GtkDTree *dtree, GtkCTreeNode *row)
 {
 	char *node_text, *path;
 
@@ -56,7 +58,7 @@ gtk_dtree_get_row_path (GtkDTree *dtree, GtkCTreeNode *row, gint column)
 		int val;
 
 		val = gtk_ctree_node_get_pixtext (
-			GTK_CTREE (dtree), row, column,
+			GTK_CTREE (dtree), row, 0,
 			&node_text, NULL, NULL, NULL);
 
 		if (!val)
@@ -191,7 +193,9 @@ static void
 scan_begin (GtkDTree *dtree)
 {
 	if (++dtree->scan_level == 1) {
+#ifdef FREEZE
 		gtk_clist_freeze (GTK_CLIST (dtree));
+#endif
 		gtk_signal_emit (GTK_OBJECT (dtree), gtk_dtree_signals[SCAN_BEGIN]);
 	}
 }
@@ -203,36 +207,30 @@ scan_end (GtkDTree *dtree)
 
 	if (--dtree->scan_level == 0) {
 		gtk_signal_emit (GTK_OBJECT (dtree), gtk_dtree_signals[SCAN_END]);
+#ifdef FREEZE
 		gtk_clist_thaw (GTK_CLIST (dtree));
+#endif
 	}
 }
 
 /* Scans a subdirectory in the tree */
 static void
-scan_subtree (GtkDTree *dtree, GtkCTreeNode *row)
+scan_subtree (GtkDTree *dtree, GtkCTreeNode *row, char *path)
 {
-	char *path;
-
 	dtree->loading_dir++;
-
 	scan_begin (dtree);
-	path = gtk_dtree_get_row_path (dtree, row, 0);
-
-	if (dtree->current_path)
-		g_free (dtree->current_path);
-
-	dtree->current_path = path;
 
 	gtk_dtree_load_path (dtree, path, row, 1);
 
-	dtree->loading_dir--;
 	scan_end (dtree);
+	dtree->loading_dir--;
 }
 
 static void
 gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 {
 	GtkDTree *dtree;
+	char *path;
 
 	dtree = GTK_DTREE (ctree);
 
@@ -241,7 +239,8 @@ gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 
 	/* Ask for someone to ungrab the mouse, as the stupid clist grabs it on
 	 * button press.  We cannot do it unconditionally because we don't want
-	 * to knock off a DnD grab.
+	 * to knock off a DnD grab.  We cannot do it in a button_press handler,
+	 * either, because the row is selected *inside* the default handler.
 	 */
 	gtk_signal_emit (GTK_OBJECT (dtree), gtk_dtree_signals[POSSIBLY_UNGRAB], NULL);
 
@@ -256,11 +255,19 @@ gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 
 	dtree->last_node = row;
 
-	scan_subtree (dtree, row);
+	/* Set the new current path */
+
+	path = gtk_dtree_get_row_path (dtree, row);
+
+	if (dtree->current_path)
+		g_free (dtree->current_path);
+
+	dtree->current_path = path;
+
+	scan_subtree (dtree, row, path);
 
 	if (!dtree->internal)
-		gtk_signal_emit (GTK_OBJECT (dtree), gtk_dtree_signals[DIRECTORY_CHANGED],
-				 dtree->current_path);
+		gtk_signal_emit (GTK_OBJECT (dtree), gtk_dtree_signals[DIRECTORY_CHANGED], path);
 
 	scan_end (dtree);
 }
@@ -306,7 +313,7 @@ gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
 	if (dtree->current_path && (strcmp (path, dtree->current_path) == 0))
 		return TRUE;
 
-	s = alloca (strlen (path)+1);
+	s = alloca (strlen (path) + 1);
 	strcpy (s, path);
 	current_node = dtree->root_node;
 
@@ -429,12 +436,18 @@ static void
 gtk_dtree_expand (GtkCTree *ctree, GtkCTreeNode *node)
 {
 	GtkDTree *dtree;
+	char *path;
 
 	dtree = GTK_DTREE (ctree);
 
 	scan_begin (dtree);
+
 	(* parent_class->tree_expand) (ctree, node);
-	scan_subtree (dtree, node);
+
+	path = gtk_dtree_get_row_path (dtree, node);
+	scan_subtree (dtree, node, path);
+	g_free (path);
+
 	scan_end (dtree);
 }
 
@@ -548,10 +561,12 @@ tree_set_freeze (int state, void *data)
 {
 	GtkDTree *dtree = GTK_DTREE (data);
 
+#ifdef FREEZE
 	if (state)
 		gtk_clist_freeze (GTK_CLIST (dtree));
 	else
 		gtk_clist_thaw (GTK_CLIST (dtree));
+#endif
 }
 
 static void
@@ -660,7 +675,6 @@ gtk_dtree_load_root_tree (GtkDTree *dtree)
 
 	/* Select root node */
 	gtk_ctree_select (GTK_CTREE (dtree), dtree->root_node);
-
 	gtk_clist_thaw (GTK_CLIST (dtree));
 }
 

@@ -1,5 +1,17 @@
 1999-09-13  Federico Mena Quintero  <federico@redhat.com>
 
+	* gtkdtree.c (scan_subtree): Do not set the current path here,
+	just load the subtree.
+	(gtk_dtree_get_row_path): Removed the column argument, since it
+	was never used.
+	(scan_subtree): Added a path argument that can be calculated
+	upstream.
+	(gtk_dtree_expand): Compute the path for scan_subtree().
+	(gtk_dtree_select_row): Compute the path for scan_subtree(), and
+	set the tree's current path here.  This is the right thing;
+	setting the current path is completely orthogonal from scanning a
+	subtree.
+
 	* gtkdtree.c (gtk_dtree_class_init): Sigh.  Create a new signal,
 	called "possibly_ungrab", used to request the client to ungrab the
 	mouse at the proper time.  This is required because the stupid

@@ -51,9 +51,7 @@ guint      gtk_dtree_get_type           (void);
 GtkWidget *gtk_dtree_new                (void);
 gboolean   gtk_dtree_select_dir         (GtkDTree *dtree,
 					 char *directory);
-char      *gtk_dtree_get_row_path       (GtkDTree *ctree,
-					 GtkCTreeNode *row,
-					 gint column);
+char      *gtk_dtree_get_row_path       (GtkDTree *ctree, GtkCTreeNode *row);
 void      gtk_dtree_construct           (GtkDTree *dtree);
 
 gboolean  gtk_dtree_is_ancestor (GtkDTree *dtree, GtkCTreeNode *node, GtkCTreeNode *child);

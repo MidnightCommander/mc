@@ -893,7 +893,7 @@ panel_tree_drag_data_received (GtkWidget          *widget,
 	if (!node)
 		return;
 
-	path = gtk_dtree_get_row_path (dtree, node, 0);
+	path = gtk_dtree_get_row_path (dtree, node);
 	fe = file_entry_from_file (path);
 	if (!fe) {
 		g_free (path);
@@ -2044,7 +2044,7 @@ panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *context, int x, int y
 
 	if (on_row) {
 		node = gtk_ctree_node_nth (GTK_CTREE (dtree), row);
-		row_path = gtk_dtree_get_row_path (dtree, node, 0);
+		row_path = gtk_dtree_get_row_path (dtree, node);
 
 		if (row != panel->drag_tree_row) {
 			/* Highlight the row by selecting it */
