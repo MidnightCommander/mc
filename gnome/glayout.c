@@ -473,6 +473,10 @@ update_panels (int force_update, char *current_file)
 {
 	int reload_others = !(force_update & UP_ONLY_CURRENT);
 	GList *p;
+
+	/* Test if there are panels open */
+	if (!cpanel)
+		return;
 	
 	update_one_panel_widget (cpanel, force_update, current_file);
 

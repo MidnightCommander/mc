@@ -1,3 +1,13 @@
+1998-05-06  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* layout.c (flag_winch): Propagate the window change to the slave
+	pty even when not running our event loop.  The resize_subshell
+	routine is thread safe. 
+
+	* dlg.c (update_cursor, dlg_broadcast_msg_to): Do not send
+	messages if no widgets are on the Dlg_head, this happens now with
+	the gmc code, as we can have all of the windows shut down.
+
 Wed May  6 13:46:37 1998 Paul Sheer  <psheer@obsidian.co.za>
 
 	* syntax.c: more bug fixes.
@@ -46,6 +56,23 @@ Fri May  1 11:24:21 1998  Paul Sheer  <psheer@obsidian.co.za>
 
 	* syntax.c: syntax highlighting segfaults when editing a binary
 	file - now fixed.
+
+Thu Apr 30 12:23:50 1998 Alex Tkachenko <alex@bcs.zp.ua>
+
+	* src/file.c: lot of i18n of file Copy/Move/Delete operations. Maintainers
+	of message catalogs please notice introduced op_names1 and formats for
+	file operations.
+
+	* src/boxes.c: i18n of background jobs control and quick cd
+	dialog boxes.
+
+	* src/menu.c (menubar_arrange): resizing of menubar upon changes of
+	window size is now controlled by preprocessor symbol RESIZABLE_MENUBAR
+	(now it's off by default, as requested in mailing list). If it is off,
+	menubar items are separated with fixed number of spaces (3).
+	
+	* src/layout.c, edit/editwidget.c: calls to menubar_arrange ifdef'ed
+
 
 1998-04-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 

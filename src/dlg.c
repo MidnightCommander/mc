@@ -379,6 +379,9 @@ void dlg_broadcast_msg_to (Dlg_head *h, int message, int reverse, int flags)
 {
     Widget_Item *p, *first;
 
+    if (!h->current)
+	    return;
+		    
     if (reverse)
 	first = p = h->current->prev;
     else
@@ -538,6 +541,8 @@ int send_message_to (Dlg_head *h, Widget *w, int msg, int par)
 
 void update_cursor (Dlg_head *h)
 {
+    if (!h->current)
+         return;
     if (h->current->widget->options & W_WANT_CURSOR)
 	send_message (h, h->current->widget, WIDGET_CURSOR, 0);
     else {

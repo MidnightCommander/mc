@@ -760,23 +760,34 @@ char *cd_dialog (void)
 #else
 #define INPUT_INDEX 0
 #endif
-    { quick_input,  8, 80, 5, 0, "", 50, 0, 0, 0, XV_WLAY_RIGHTOF, "input" },
-    { quick_label,  3, 80, 2, 0, "",  0, 0, 0, 0, XV_WLAY_DONTCARE, "label" },
+    { quick_input,  6, 57, 5, 0, "", 50, 0, 0, 0, XV_WLAY_RIGHTOF, "input" },
+    { quick_label,  3, 57, 2, 0, "",  0, 0, 0, 0, XV_WLAY_DONTCARE, "label" },
     { 0 } };
     
     char *my_str;
+	int len;
     
     Quick_input.xlen  = 57;
-    Quick_input.title = "Quick cd";
+    Quick_input.title = _("Quick cd");
     Quick_input.help  = "[Quick cd]";
     Quick_input.class = "quick_input";
-    Quick_input.i18n  = 0;
     quick_widgets [INPUT_INDEX].text = "";
     quick_widgets [INPUT_INDEX].value = 2; /* want cd like completion */
-    quick_widgets [INPUT_INDEX+1].text = "cd";
+    quick_widgets [INPUT_INDEX+1].text = _("cd");
     quick_widgets [INPUT_INDEX+1].y_divisions =
-	quick_widgets [INPUT_INDEX].y_divisions =
-	        Quick_input.ylen  = 5;
+	quick_widgets [INPUT_INDEX].y_divisions = Quick_input.ylen = 5;
+
+	len = strlen (quick_widgets [INPUT_INDEX+1].text);
+
+	quick_widgets [INPUT_INDEX+1].relative_x = 3;
+	quick_widgets [INPUT_INDEX].relative_x = 
+		quick_widgets [INPUT_INDEX+1].relative_x + len + 1;
+
+    Quick_input.xlen = len + quick_widgets [INPUT_INDEX].hotkey_pos + 7;
+	quick_widgets [INPUT_INDEX].x_divisions =
+		quick_widgets [INPUT_INDEX+1].x_divisions = Quick_input.xlen;
+
+    Quick_input.i18n = 1;
     Quick_input.xpos = 2;
     Quick_input.ypos = LINES - 2 - Quick_input.ylen;
     quick_widgets [INPUT_INDEX].relative_y = 2;
@@ -836,7 +847,7 @@ void symlink_dialog (char *existing, char *new, char **ret_existing,
 #define B_RESUME B_USER+2
 #define B_KILL   B_USER+3
 
-#define JOBS_X 60
+static int JOBS_X = 60;
 #define JOBS_Y 15
 static WListbox *bg_list;
 static Dlg_head *jobs_dlg;
@@ -897,9 +908,54 @@ task_cb (int action, void *ignored)
     return 0;
 }
 
+static struct 
+{
+	char* name;
+	int xpos;
+	int value;
+	int (*callback)();
+	char* tkname;
+} 
+job_buttons [] =
+{
+	{N_("&Stop"),   3,  B_STOP,   task_cb, "button-stop"},
+	{N_("&Resume"), 12, B_RESUME, task_cb, "button-cont"},
+	{N_("&Kill"),   23, B_KILL,   task_cb, "button-kill"},
+	{N_("&Ok"),     35, B_CANCEL, NULL,    "button-ok"},
+};
+
 void
 jobs_cmd (void)
 {
+	register int i;
+	int n_buttons = sizeof (job_buttons) / sizeof (job_buttons[0]);
+
+#ifdef ENABLE_NLS
+	static int i18n_flag = 0;
+	if (!i18n_flag)
+	{
+		int startx = job_buttons [0].xpos;
+		int len;
+
+		for (i = 0; i < n_buttons; i++)
+		{
+			job_buttons [i].name = _(job_buttons [i].name);
+
+			len = strlen (job_buttons [i].name) + 4;
+			JOBS_X = max (JOBS_X, startx + len + 3);
+
+			job_buttons [i].xpos = startx;
+			startx += len;
+		}
+
+		/* Last button - Ok a.k.a. Cancel :) */
+		job_buttons [n_buttons - 1].xpos =
+			JOBS_X - strlen (job_buttons [n_buttons - 1].name) - 7;
+
+		i18n_flag = 1;
+	}
+#endif /* ENABLE_NLS */
+
     jobs_dlg = create_dlg (0, 0, JOBS_Y, JOBS_X, dialog_colors,
 			   common_dialog_callback, "[Background jobs]", "jobs",
 			   DLG_CENTER | DLG_GRID);
@@ -907,16 +963,17 @@ jobs_cmd (void)
     
     bg_list = listbox_new (2, 3, JOBS_X-7, JOBS_Y-9, listbox_nothing, 0, "listbox");
     add_widget (jobs_dlg, bg_list);
-    add_widget (jobs_dlg,
-		button_new (JOBS_Y-4, 35, B_CANCEL, NORMAL_BUTTON, _("&Ok"), 0, 0, "button-ok"));
-    add_widget (jobs_dlg,
-		button_new (JOBS_Y-4, 23, B_KILL, NORMAL_BUTTON, _("&Kill"), task_cb, 0, "button-kill"));
-    add_widget (jobs_dlg,
-		button_new (JOBS_Y-4, 12, B_RESUME, NORMAL_BUTTON, _("&Resume"), task_cb, 0, "button-cont"));
-    add_widget (jobs_dlg,
-		button_new (JOBS_Y-4, 3, B_STOP, NORMAL_BUTTON, _("&Stop"), task_cb, 0, "button-stop"));
 
-    
+	i = n_buttons;
+	while (i--)
+	{
+		add_widget (jobs_dlg, button_new (JOBS_Y-4, 
+			job_buttons [i].xpos, job_buttons [i].value,
+			NORMAL_BUTTON, job_buttons [i].name, 
+			job_buttons [i].callback, 0,
+			job_buttons [i].tkname));
+	}
+	
     /* Insert all of task information in the list */
     jobs_fill_listbox ();
     run_dlg (jobs_dlg);
