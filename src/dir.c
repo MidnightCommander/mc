@@ -462,8 +462,8 @@ handle_path (dir_list *list, char *path,
 }
 
 int
-do_load_dir (dir_list *list, sortfn *sort, int reverse, int case_sensitive,
-	     char *filter)
+do_load_dir (char *path, dir_list *list, sortfn *sort, int reverse,
+	     int case_sensitive, char *filter)
 {
     DIR *dirp;
     struct dirent *dp;
@@ -504,7 +504,7 @@ do_load_dir (dir_list *list, sortfn *sort, int reverse, int case_sensitive,
 
     if (next_free) {
 	/* Add ".." except the root directory */
-	if (strcmp (vfs_canon ("."), "/") != 0)
+	if (strcmp (path, "/") != 0)
 	    add_dotdot_to_list (list, next_free++);
 	do_sort (list, sort, next_free - 1, reverse, case_sensitive);
     } else {
@@ -567,8 +567,8 @@ alloc_dir_copy (int size)
 
 /* If filter is null, then it is a match */
 int
-do_reload_dir (dir_list * list, sortfn * sort, int count, int rev,
-	       int case_sensitive, char *filter)
+do_reload_dir (char *path, dir_list *list, sortfn *sort, int count,
+	       int rev, int case_sensitive, char *filter)
 {
     DIR *dirp;
     struct dirent *dp;
@@ -656,7 +656,7 @@ do_reload_dir (dir_list * list, sortfn * sort, int count, int rev,
     g_hash_table_destroy (marked_files);
     if (next_free) {
 	/* Add ".." except the root directory */
-	if (strcmp (vfs_canon ("."), "/") != 0)
+	if (strcmp (path, "/") != 0)
 	    add_dotdot_to_list (list, next_free++);
 	do_sort (list, sort, next_free - 1, rev, case_sensitive);
     } else

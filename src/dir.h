@@ -29,15 +29,15 @@ typedef struct {
 
 typedef int sortfn (const void *, const void *);
 
-int        do_load_dir     (dir_list *list, sortfn *sort,
-			    int reverse, int case_sensitive, char *filter);
-void       do_sort         (dir_list *list, sortfn *sort, int top,
-			    int reverse, int case_sensitive);
-dir_list  *do_collect_stat (dir_list *dir, int top);
-int        do_reload_dir   (dir_list *list, sortfn *sort, int count,
-			    int reverse, int case_sensitive, char *filter);
-void       clean_dir       (dir_list *list, int count);
-int        set_zero_dir    (dir_list *list);
+int do_load_dir (char *path, dir_list * list, sortfn * sort, int reverse,
+		 int case_sensitive, char *filter);
+void do_sort (dir_list * list, sortfn * sort, int top, int reverse,
+	      int case_sensitive);
+dir_list *do_collect_stat (dir_list * dir, int top);
+int do_reload_dir (char *path, dir_list * list, sortfn * sort, int count,
+		   int reverse, int case_sensitive, char *filter);
+void clean_dir (dir_list * list, int count);
+int set_zero_dir (dir_list * list);
 
 #ifdef DIR_H_INCLUDE_HANDLE_DIRENT
 int handle_dirent (dir_list *list, char *filter, struct dirent *dp,

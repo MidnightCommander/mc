@@ -772,8 +772,8 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
     /* Reload current panel */
     panel_clean_dir (panel);
     panel->count =
-	do_load_dir (&panel->dir, panel->sort_type, panel->reverse,
-		     panel->case_sensitive, panel->filter);
+	do_load_dir (panel->cwd, &panel->dir, panel->sort_type,
+		     panel->reverse, panel->case_sensitive, panel->filter);
     try_to_select (panel, get_parent_dir_name (panel->cwd, olddir));
     load_hint (0);
     panel_update_contents (panel);

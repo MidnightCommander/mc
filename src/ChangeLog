@@ -1,5 +1,9 @@
 2003-06-05  Pavel Roskin  <proski@gnu.org>
 
+	* dir.c (do_load_dir): Add new argument "path" to avoid the need
+	to request the current directory.
+	(do_reload_dir): Likewise.  Adjust all callers.
+
 	* screen.c (panel_destroy): Rewind history to the beginning
 	before freeing it.
 	* widget.c (input_destroy): Likewise.

@@ -942,41 +942,41 @@ panel_new (const char *panel_name)
     /* We do not want the cursor */
     widget_want_cursor (panel->widget, 0);
 
-    mc_get_current_wd (panel->cwd, sizeof (panel->cwd)-2);
+    mc_get_current_wd (panel->cwd, sizeof (panel->cwd) - 2);
     strcpy (panel->lwd, ".");
 
     panel->hist_name = g_strconcat ("Dir Hist ", panel_name, NULL);
     panel->dir_history = history_get (panel->hist_name);
     directory_history_add (panel, panel->cwd);
 
-    panel->dir.list         = g_new (file_entry, MIN_FILES);
-    panel->dir.size         = MIN_FILES;
-    panel->active           = 0;
-    panel->filter           = 0;
-    panel->split            = 0;
-    panel->top_file         = 0;
-    panel->selected         = 0;
-    panel->marked           = 0;
-    panel->total            = 0;
-    panel->reverse          = 0;
-    panel->dirty            = 1;
-    panel->searching        = 0;
-    panel->dirs_marked      = 0;
-    panel->is_panelized     = 0;
-    panel->format	    = 0;
-    panel->status_format    = 0;
-    panel->format_modified  = 1;
+    panel->dir.list = g_new (file_entry, MIN_FILES);
+    panel->dir.size = MIN_FILES;
+    panel->active = 0;
+    panel->filter = 0;
+    panel->split = 0;
+    panel->top_file = 0;
+    panel->selected = 0;
+    panel->marked = 0;
+    panel->total = 0;
+    panel->reverse = 0;
+    panel->dirty = 1;
+    panel->searching = 0;
+    panel->dirs_marked = 0;
+    panel->is_panelized = 0;
+    panel->format = 0;
+    panel->status_format = 0;
+    panel->format_modified = 1;
 
     panel->panel_name = g_strdup (panel_name);
     panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
 
-    for(i = 0; i < LIST_TYPES; i++)
-	panel->user_status_format [i] = g_strdup (DEFAULT_USER_FORMAT);
+    for (i = 0; i < LIST_TYPES; i++)
+	panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
 
-    panel->search_buffer [0] = 0;
+    panel->search_buffer[0] = 0;
     panel->frame_size = frame_half;
     section = g_strconcat ("Temporal:", panel->panel_name, NULL);
-    if (!profile_has_section (section, profile_name)){
+    if (!profile_has_section (section, profile_name)) {
 	g_free (section);
 	section = g_strdup (panel->panel_name);
     }
@@ -985,13 +985,14 @@ panel_new (const char *panel_name)
 
     /* Load format strings */
     err = set_panel_formats (panel);
-    if (err){
+    if (err) {
 	set_panel_formats (panel);
     }
 
     /* Load the default format */
-    panel->count = do_load_dir (&panel->dir, panel->sort_type,
-				panel->reverse, panel->case_sensitive, panel->filter);
+    panel->count =
+	do_load_dir (panel->cwd, &panel->dir, panel->sort_type,
+		     panel->reverse, panel->case_sensitive, panel->filter);
     return panel;
 }
 
@@ -1000,16 +1001,15 @@ panel_reload (WPanel *panel)
 {
     struct stat current_stat;
 
-    if (fast_reload
-	&& !stat (panel->cwd, &current_stat)
+    if (fast_reload && !stat (panel->cwd, &current_stat)
 	&& current_stat.st_ctime == panel->dir_stat.st_ctime
 	&& current_stat.st_mtime == panel->dir_stat.st_mtime)
 	return;
 
-    while (mc_chdir (panel->cwd) == -1){
+    while (mc_chdir (panel->cwd) == -1) {
 	char *last_slash;
 
-	if (panel->cwd [0] == PATH_SEP && panel->cwd [1] == 0){
+	if (panel->cwd[0] == PATH_SEP && panel->cwd[1] == 0) {
 	    panel_clean_dir (panel);
 	    panel->count = set_zero_dir (&panel->dir);
 	    return;
@@ -1019,16 +1019,18 @@ panel_reload (WPanel *panel)
 	    strcpy (panel->cwd, PATH_SEP_STR);
 	else
 	    *last_slash = 0;
-        memset (&(panel->dir_stat), 0, sizeof (panel->dir_stat));
+	memset (&(panel->dir_stat), 0, sizeof (panel->dir_stat));
 	show_dir (panel);
     }
 
-    panel->count = do_reload_dir (&panel->dir, panel->sort_type, panel->count,
-				  panel->reverse, panel->case_sensitive, panel->filter);
+    panel->count =
+	do_reload_dir (panel->cwd, &panel->dir, panel->sort_type,
+		       panel->count, panel->reverse, panel->case_sensitive,
+		       panel->filter);
 
     panel->dirty = 1;
     if (panel->selected >= panel->count)
-        do_select (panel, panel->count-1);
+	do_select (panel, panel->count - 1);
 
     recalculate_panel_summary (panel);
 }
