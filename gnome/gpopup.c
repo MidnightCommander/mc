@@ -109,6 +109,68 @@ dicon_delete (GtkWidget *widget, char *filename)
 	g_warning ("Implement this function!");
 }
 
+/* This is our custom signal connection function for popup menu items -- see below for the
+ * marshaller information.  We pass the original callback function as the data pointer for the
+ * marshaller (uiinfo->moreinfo).
+ */
+static void
+popup_connect_func (GnomeUIInfo *uiinfo, gchar *signal_name, GnomeUIBuilderData *uibdata)
+{
+	g_assert (uibdata->is_interp);
+
+	if (uiinfo->moreinfo) {
+		gtk_object_set_data (GTK_OBJECT (uiinfo->widget), "popup_user_data", uiinfo->user_data);
+		gtk_signal_connect_full (GTK_OBJECT (uiinfo->widget), signal_name,
+					 NULL,
+					 uibdata->relay_func,
+					 uiinfo->moreinfo,
+					 uibdata->destroy_func,
+					 FALSE,
+					 FALSE);
+	}
+}
+
+/* Our custom marshaller for menu items.  We need it so that it can extract the per-attachment
+ * user_data pointer from the parent menu shell and pass it to the callback.  This overrides the
+ * user-specified data from the GnomeUIInfo structures.
+ */
+
+typedef void (* ActivateFunc) (GtkObject *object, gpointer data);
+
+static void
+popup_marshal_func (GtkObject *object, gpointer data, guint n_args, GtkArg *args)
+{
+	ActivateFunc func;
+	gpointer user_data;
+
+	func = (ActivateFunc) data;
+	user_data = gtk_object_get_data (object, "popup_user_data");
+
+	gtk_object_set_data (GTK_OBJECT (GTK_WIDGET (object)->parent), "popup_active_item", object);
+	(* func) (object, user_data);
+}
+
+/* Fills the menu with the specified uiinfo at the specified position, using our magic marshallers
+ * to be able to fetch the active item.  The code is shamelessly ripped from gnome-popup-menu.
+ */
+static void
+fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, int pos)
+{
+	GnomeUIBuilderData uibdata;
+
+	/* We use our own callback marshaller so that it can fetch the popup user data
+	 * from the popup menu and pass it on to the user-defined callbacks.
+	 */
+
+	uibdata.connect_func = popup_connect_func;
+	uibdata.data = NULL;
+	uibdata.is_interp = TRUE;
+	uibdata.relay_func = popup_marshal_func;
+	uibdata.destroy_func = NULL;
+
+	gnome_app_fill_menu_custom (menu_shell, uiinfo, &uibdata, NULL, FALSE, pos);
+}
+
 
 /* The context menu: text displayed, condition that must be met and the routine that gets invoked
  * upon activation.
@@ -243,7 +305,7 @@ create_actions (GtkWidget *menu, WPanel *panel, int panel_row, char *filename)
 		} else
 			uiinfo[0].type = GNOME_APP_UI_SEPARATOR;
 
-		gnome_app_fill_menu (GTK_MENU_SHELL (menu), uiinfo, NULL, FALSE, pos);
+		fill_menu (GTK_MENU_SHELL (menu), uiinfo, pos);
 		pos++;
 	}
 
@@ -327,7 +389,7 @@ create_regexp_actions (GtkWidget *menu, WPanel *panel, int panel_row, char *file
 	for (i = 0; i < 5; i++)
 		a_uiinfo[i].user_data = closure;
 
-	gnome_app_fill_menu (GTK_MENU_SHELL (menu), a_uiinfo, NULL, FALSE, insert_pos);
+	fill_menu (GTK_MENU_SHELL (menu), a_uiinfo, insert_pos);
 	insert_pos += 5; /* the number of items from the common menus */
 
 	/* Fill in the regex command part */
@@ -366,7 +428,7 @@ create_regexp_actions (GtkWidget *menu, WPanel *panel, int panel_row, char *file
 		uiinfo[0].ac_mods = 0;
 		uiinfo[0].widget = NULL;
 
-		gnome_app_fill_menu (GTK_MENU_SHELL (menu), uiinfo, NULL, FALSE, insert_pos++);
+		fill_menu (GTK_MENU_SHELL (menu), uiinfo, insert_pos++);
 
 		/* Next! */
 
@@ -375,6 +437,30 @@ create_regexp_actions (GtkWidget *menu, WPanel *panel, int panel_row, char *file
 
 		p = q + 1;
 	}
+}
+
+/* Convenience callback to exit the main loop of a modal popup menu when it is deactivated*/
+static void
+menu_shell_deactivated (GtkMenuShell *menu_shell, gpointer data)
+{
+	gtk_main_quit ();
+}
+
+/* Returns the index of the active item in the specified menu, or -1 if none is active */
+static int
+get_active_index (GtkMenu *menu)
+{
+	GList *l;
+	GtkWidget *active;
+	int i;
+
+	active = gtk_object_get_data (GTK_OBJECT (menu), "popup_active_item");
+
+	for (i = 0, l = GTK_MENU_SHELL (menu)->children; l; l = l->next, i++)
+		if (active == l->data)
+			return i;
+
+	return -1;
 }
 
 /*
@@ -387,236 +473,32 @@ gpopup_do_popup (GdkEventButton *event, WPanel *from_panel, int panel_row, char 
 {
 	GtkWidget *menu;
 	int pos;
+	guint id;
 
 	g_return_val_if_fail (event != NULL, -1);
-	g_return_val_if_fail ((from_panel != NULL) ^ (filename != NULL), -1);
+	g_return_val_if_fail (from_panel != NULL || filename != NULL, -1);
+
+	menu = gtk_menu_new ();
+
+	/* Connect to the deactivation signal to be able to quit our modal main loop */
+
+	id = gtk_signal_connect (GTK_OBJECT (menu), "deactivate",
+				 (GtkSignalFunc) menu_shell_deactivated,
+				 NULL);
+
+	/* Fill the menu */
 
 	pos = create_actions (menu, from_panel, panel_row, filename);
 	create_regexp_actions (menu, from_panel, panel_row, filename, pos);
 
+	/* Run it */
+
 	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3, event->time);
-	return 0; /* FIXME: return the index of the selected item */
+	gtk_grab_add (menu);
+	gtk_main ();
+	gtk_grab_remove (menu);
+
+	gtk_signal_disconnect (GTK_OBJECT (menu), id);
+
+	return get_active_index (GTK_MENU (menu));
 }
-
-
-
-
-
-
-
-
-
-#if 0
-
-#include <config.h>
-#include <sys/stat.h>
-#include "util.h"
-#include <gnome.h>
-#include "gpopup.h"
-#define WANT_WIDGETS /* yuck */
-#include "main.h"
-#include "../vfs/vfs.h"
-
-
-static void popup_open (GtkWidget *widget, gpointer data);
-static void popup_open_new_window (GtkWidget *widget, gpointer data);
-static void popup_open_with_program (GtkWidget *widget, gpointer data);
-static void popup_open_with_arguments (GtkWidget *widget, gpointer data);
-static void popup_view (GtkWidget *widget, gpointer data);
-static void popup_edit (GtkWidget *widget, gpointer data);
-static void popup_move (GtkWidget *widget, gpointer data);
-static void popup_copy (GtkWidget *widget, gpointer data);
-static void popup_link (GtkWidget *widget, gpointer data);
-static void popup_delete (GtkWidget *widget, gpointer data);
-static void popup_properties (GtkWidget *widget, gpointer data);
-
-
-/* Keep this in sync with the popup_info array defined below, as these values are used to figure out
- * which items to enable/disable as appropriate.
- */
-enum {
-	POPUP_OPEN			= 0,
-	POPUP_OPEN_IN_NEW_WINDOW	= 1,
-	POPUP_OPEN_WITH_PROGRAM		= 2,
-	POPUP_OPEN_WITH_ARGUMENTS	= 3,
-	POPUP_VIEW			= 5,
-	POPUP_EDIT			= 6,
-	POPUP_VIEW_EDIT_SEPARATOR	= 7
-};
-
-/* The generic popup menu */
-static GnomeUIInfo popup_info[] = {
-	GNOMEUIINFO_ITEM_NONE (N_("_Open"), NULL, popup_open),
-	GNOMEUIINFO_ITEM_NONE (N_("Open in _new window"), NULL, popup_open_new_window),
-	GNOMEUIINFO_ITEM_NONE (N_("Open with pro_gram..."), NULL, popup_open_with_program),
-	GNOMEUIINFO_ITEM_NONE (N_("Open with _arguments..."), NULL, popup_open_with_arguments),
-
-	GNOMEUIINFO_SEPARATOR,
-
-	GNOMEUIINFO_ITEM_NONE (N_("_View"), NULL, popup_view),
-	GNOMEUIINFO_ITEM_NONE (N_("_Edit"), NULL, popup_edit),
-
-	GNOMEUIINFO_SEPARATOR,
-
-	GNOMEUIINFO_ITEM_NONE (N_("_Move/rename..."), NULL, popup_move),
-	GNOMEUIINFO_ITEM_NONE (N_("_Copy..."), NULL, popup_copy),
-	GNOMEUIINFO_ITEM_NONE (N_("_Link..."), NULL, popup_link),
-	GNOMEUIINFO_ITEM_NONE (N_("_Delete"), NULL, popup_delete),
-
-	GNOMEUIINFO_SEPARATOR,
-
-	GNOMEUIINFO_ITEM_NONE (N_("_Properties..."), NULL, popup_properties),
-	GNOMEUIINFO_END
-};
-
-struct popup_file_info {
-	char *filename;
-	WPanel *panel;
-};
-
-int
-gpopup_do_popup (char *filename, WPanel *from_panel, GdkEventButton *event)
-{
-	GtkWidget *popup;
-	struct stat s;
-	int result;
-	struct popup_file_info pfi;
-
-	if (mc_stat (filename, &s) != 0) {
-		g_warning ("Could not stat %s, no popup menu will be run", filename);
-		return -1;
-	}
-
-	popup = gnome_popup_menu_new (popup_info);
-
-	/* Hide the menu items that are not appropriate */
-
-	if (S_ISDIR (s.st_mode)) {
-		if (!from_panel)
-			gtk_widget_hide (popup_info[POPUP_OPEN].widget); /* Only allow "open in new window" */
-
-		gtk_widget_hide (popup_info[POPUP_OPEN_WITH_ARGUMENTS].widget);
-		gtk_widget_hide (popup_info[POPUP_VIEW].widget);
-		gtk_widget_hide (popup_info[POPUP_EDIT].widget);
-		gtk_widget_hide (popup_info[POPUP_VIEW_EDIT_SEPARATOR].widget);
-	} else {
-		gtk_widget_hide (popup_info[POPUP_OPEN_IN_NEW_WINDOW].widget);
-
-		if (is_exe (s.st_mode))
-			gtk_widget_hide (popup_info[POPUP_OPEN_WITH_PROGRAM].widget);
-		else
-			gtk_widget_hide (popup_info[POPUP_OPEN_WITH_ARGUMENTS].widget);
-	}
-
-	/* Go! */
-
-	pfi.filename = filename;
-	pfi.panel = from_panel;
-
-	result = gnome_popup_menu_do_popup_modal (popup, NULL, NULL, event, &pfi);
-
-	gtk_widget_destroy (popup);
-	return result;
-}
-
-static void
-popup_open (GtkWidget *widget, gpointer data)
-{
-	struct popup_file_info *pfi;
-	struct stat s;
-
-	pfi = data;
-
-	if (mc_stat (pfi->filename, &s) != 0) {
-		g_warning ("Could not stat %s", pfi->filename);
-		return;
-	}
-
-	do_enter (pfi->panel);
-
-#if 0
-	if (S_ISDIR (s.st_mode)) {
-		/* Open the directory in the panel the menu was activated from */
-
-		g_assert (pfi->panel != NULL);
-
-		do_panel_cd (pfi->panel, pfi->filename, cd_exact);
-	} else if (is_exe (s.st_mode)) {
-		/* FIXME: execute */
-	} else {
-		/* FIXME: get default program and launch it with this file */
-	}
-#endif
-}
-
-static void
-popup_open_new_window (GtkWidget *widget, gpointer data)
-{
-	/* FIXME */
-	g_warning ("Implement this function!");
-}
-
-static void
-popup_open_with_program (GtkWidget *widget, gpointer data)
-{
-	/* FIXME */
-	g_warning ("Implement this function!");
-}
-
-static void
-popup_open_with_arguments (GtkWidget *widget, gpointer data)
-{
-	/* FIXME */
-	g_warning ("Implement this function!");
-}
-
-static void
-popup_view (GtkWidget *widget, gpointer data)
-{
-	/* FIXME */
-	g_warning ("Implement this function!");
-}
-
-static void
-popup_edit (GtkWidget *widget, gpointer data)
-{
-	/* FIXME */
-	g_warning ("Implement this function!");
-}
-
-static void
-popup_move (GtkWidget *widget, gpointer data)
-{
-	/* FIXME */
-	g_warning ("Implement this function!");
-}
-
-static void
-popup_copy (GtkWidget *widget, gpointer data)
-{
-	/* FIXME */
-	g_warning ("Implement this function!");
-}
-
-static void
-popup_link (GtkWidget *widget, gpointer data)
-{
-	/* FIXME */
-	g_warning ("Implement this function!");
-}
-
-static void
-popup_delete (GtkWidget *widget, gpointer data)
-{
-	/* FIXME */
-	g_warning ("Implement this function!");
-}
-
-static void
-popup_properties (GtkWidget *widget, gpointer data)
-{
-	/* FIXME */
-	g_warning ("Implement this function!");
-}
-
-#endif

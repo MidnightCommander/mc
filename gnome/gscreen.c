@@ -276,7 +276,7 @@ x_fill_panel (WPanel *panel)
 
 	gtk_signal_handler_block_by_data (GTK_OBJECT (panel->tree), panel);
 
-	gtk_dtree_do_select_dir (GTK_DTREE (panel->tree), panel->cwd); 
+	gtk_dtree_select_dir (GTK_DTREE (panel->tree), panel->cwd); 
 
 	gtk_signal_handler_unblock_by_data (GTK_OBJECT (panel->tree), panel);
 }

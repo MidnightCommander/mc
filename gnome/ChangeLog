@@ -1,3 +1,21 @@
+1998-12-02  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gtkdtree.c (gtk_dtree_do_select_dir): Made static, as it is for
+	internal use only.
+	Fixed a little bunch of compiler warnings.
+
+	* gscreen.c (x_fill_panel): Use gtk_dtree_select_dir(), not
+	gtk_ctree_do_select_dir().
+
+	* gpopup.c (gpopup_do_popup): Fixed incorrect assertion and
+	actually create the menu (doh).
+	(gpopup_do_popup): Do the same magic as in gnome-popup-menu to
+	fetch the item that was activated in the menu.  Keep this code out
+	of reach of children.
+	(fill_menu): New function to fill the menu using the
+	gnome-popup-menu magic for fetching the activated menu item.
+	Removed ifdef'ed code.
+
 1998-12-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (tree_drag_open_directory, panel_tree_drag_motion,

@@ -73,7 +73,6 @@ static GtkCTreeNode *
 gtk_dtree_contains (GtkDTree *dtree, GtkCTreeNode *parent, char *text)
 {
 	GtkCTreeNode *node;
-	char *s;
 	
 	g_assert (dtree);
 	g_assert (parent);
@@ -100,8 +99,6 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 {
 	DIR *dir;
 	struct dirent *dirent;
-	char *full_name;
-	int stats = 0;
 	
 	g_assert (path);
 	g_assert (parent);
@@ -174,7 +171,6 @@ static void
 gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 {
 	GtkDTree *dtree = GTK_DTREE (ctree);
-	GtkCTreeNode *last_node;
 	char *path;
 
 	parent_class->tree_select_row (ctree, row, column);
@@ -243,7 +239,7 @@ gtk_dtree_lookup_dir (GtkDTree *dtree, GtkCTreeNode *parent, char *dirname)
 	return NULL;
 }
 
-gboolean
+static gboolean
 gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
 {
 	GtkCTreeNode *current_node;
@@ -264,7 +260,7 @@ gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
 	npath = g_strdup ("/");
 
 	while ((current = strtok (s, "/")) != NULL){
-		char *comp, *full_path;
+		char *full_path;
 		GtkCTreeNode *node;
 
 		s = NULL;
@@ -320,10 +316,10 @@ gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
 gboolean
 gtk_dtree_select_dir (GtkDTree *dtree, char *path)
 {
-	g_return_if_fail (dtree != NULL);
-	g_return_if_fail (GTK_IS_DTREE (dtree));
-	g_return_if_fail (path != NULL);
-	g_return_if_fail (*path == '/');
+	g_return_val_if_fail (dtree != NULL, FALSE);
+	g_return_val_if_fail (GTK_IS_DTREE (dtree), FALSE);
+	g_return_val_if_fail (path != NULL, FALSE);
+	g_return_val_if_fail (*path == '/', FALSE);
 
 	if (dtree->visible)
 		gtk_dtree_do_select_dir (dtree, path);
