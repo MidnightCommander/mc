@@ -280,7 +280,6 @@ static menu_entry FileMenu[] =
     {' ', N_("copy to &File...  C-f"), 'F', menu_cut_cmd},
     {' ', "", ' ', 0},
     {' ', N_("&User menu...     F11"), 'U', menu_user_menu_cmd},
-/*    {' ', N_("Menu edi&Tor edit    "), 'T', edit_user_menu_cmd}, */
     {' ', "", ' ', 0},
     {' ', N_("a&Bout...            "), 'B', edit_about_cmd},
     {' ', "", ' ', 0},
@@ -299,7 +298,6 @@ static menu_entry FileMenuEmacs[] =
     {' ', N_("copy to &File...     "), 'F', menu_cut_cmd},
     {' ', "", ' ', 0},
     {' ', N_("&User menu...     F11"), 'U', menu_user_menu_cmd},
-/*    {' ', N_("Menu edi&Tor edit    "), 'T', edit_user_menu_cmd}, */
     {' ', "", ' ', 0},
     {' ', N_("a&Bout...            "), 'B', edit_about_cmd},
     {' ', "", ' ', 0},
