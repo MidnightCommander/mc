@@ -347,13 +347,17 @@ regex/\.([Hh]tml?|HTML?)$
 	View with @X11_WWW@=@X11_WWW@ file://%f
 
 # Microsoft Word Document
-regex/\.([Dd]oc|DOC)$
-	#View=%view{ascii} catdoc -w %f
-	View=%view{ascii} word2x -f text %f -
-type/Microsoft Word Document
-	#View=%view{ascii} catdoc -w %f
-	View=%view{ascii} word2x -f text %f -
- 
+regex/\.([Dd]o[ct]|DO[CT]|[Ww]ri|WRI)$
+	View=%view{ascii} catdoc -w %f || word2x -f text %f - || strings %f
+type/Microsoft\ Word
+	View=%view{ascii} catdoc -w %f || word2x -f text %f - || strings %f
+
+# Microsoft Excel Worksheet
+regex/\.([Xx]l[sw]|XL[SW])$
+	View=%view{ascii} xls2csv %f || strings %f
+type/Microsoft\ Excel
+	View=%view{ascii} xls2csv %f || strings %f
+
 # Framemaker
 type/FrameMaker
 	Open=fmclient -f %f

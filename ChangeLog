@@ -1,3 +1,11 @@
+2001-04-29  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: For MS Word documents try "catdoc", "word2x"
+	and "strings". Recognize "write" files and MS Word templates.
+	For MS Excel documents try "xls2csv" and "strings".
+	Escape spaces in the "type" directives.
+	From Nerijus Baliunas.
+
 2001-05-29  Pavel Roskin  <proski@gnu.org>
 
 	* Make.common.in: Add -I$(top_srcdir) to XCPPFLAGS.
@@ -1316,7 +1324,7 @@ Sun Dec 13 15:26:19 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 1998-12-08  Christopher Blizzard  <blizzard@appliedtheory.com>
 
 	* configure.in (builddir): Add icons/Makefile to AC_OUTPUT so that
- 	the build will still work.  (Has this been replaced by new_icons?)
+	the build will still work.  (Has this been replaced by new_icons?)
 
 Tue Dec  1 11:58:55 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
