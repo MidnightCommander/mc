@@ -20,6 +20,7 @@
 #include "util.h"
 #include "dialog.h"
 #include "file.h"
+#include "fileopctx.h"
 #include "../vfs/vfs.h"
 #include "gdesktop.h"
 #include "gdesktop-icon.h"
@@ -193,28 +194,29 @@ item_properties (GtkWidget *parent, char *fname, DesktopIconInfo *dii)
 	if (strchr (new_name, '/'))
 	  message (1, "Error", "The new name includes the `/' character");
 	else if (strcmp (new_name, base) != 0) {
-	  char  *base = x_basename (fname);
-	  char   save = *base;
-	  char  *full_target;
-	  long   count = 0;
-	  double bytes = 0;
+		char  *base = x_basename (fname);
+		char   save = *base;
+		char  *full_target;
+		long   count = 0;
+		double bytes = 0;
+		FileOpContext *ctx;
+
+		*base = 0;
+		full_target = concat_dir_and_file (fname, new_name);
+		*base = save;
+
+		ctx = file_op_context_new ();
+		file_op_context_create_ui (ctx, OP_MOVE, FALSE);
+		move_file_file (ctx, fname, full_target, &count, &bytes);
+		file_op_context_destroy (ctx);
 			
-	  *base = 0;
-	  full_target = concat_dir_and_file (fname, new_name);
-	  *base = save;
+		if (dii) {
+			free (dii->filename);
+			dii->filename = full_target;
+		} else
+			free (full_target);
 			
-	  create_op_win (OP_MOVE, 0);
-	  file_mask_defaults ();
-	  move_file_file (fname, full_target, &count, &bytes);
-	  destroy_op_win ();
-			
-	  if (dii) {
-	    free (dii->filename);
-	    dii->filename = full_target;
-	  } else
-	    free (full_target);
-			
-	  retval |= GPROP_FILENAME;
+		retval |= GPROP_FILENAME;
 	}
 	
 	/* Check and change title and icon -- change is handled by caller */

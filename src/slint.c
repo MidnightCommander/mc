@@ -34,7 +34,7 @@
 #include "key.h"		/* define_sequence */
 #include "main.h"		/* extern: force_colors */
 #include "win.h"		/* do_exit_ca_mode */
-#include "background.h"		/* we_are_background definition */
+#include "fileopctx.h"
 #include "setup.h"
 
 #ifdef HAVE_SLANG

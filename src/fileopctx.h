@@ -11,7 +11,6 @@
 
 #include <sys/stat.h>
 #include <sys/types.h>
-#include "background.h"
 #include "regex.h"
 
 
@@ -34,6 +33,13 @@ typedef struct {
 	/* Counters for progress indicators */
 	long progress_count;
 	double progress_bytes;
+
+	/* The value of the "preserve Attributes" checkbox in the copy file dialog.
+	 * We can't use the value of "ctx->preserve" because it can change in order
+	 * to preserve file attributs when moving files across filesystem boundaries
+	 * (we want to keep the value of the checkbox between copy operations).
+	 */
+	int op_preserve;
 
 	/* Result from the recursive query */
 	int recursive_result;
@@ -113,6 +119,12 @@ typedef enum {
 	FILE_SKIP,
 	FILE_ABORT
 } FileProgressStatus;
+
+/* First argument passed to real functions */
+enum OperationMode {
+    Foreground,
+    Background
+};
 
 /* The following functions are implemented separately by each port */
 

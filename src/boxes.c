@@ -49,7 +49,8 @@
 #include "main.h"		/* For the confirm_* variables */
 #include "tree.h"
 #include "layout.h"		/* for get_nth_panel_name proto */
-#include "background.h"		/* for background definitions */
+#include "fileopctx.h"
+#include "background.h"
 #include "x.h"
 
 static int DISPLAY_X = 45, DISPLAY_Y = 14;
@@ -701,8 +702,6 @@ configure_vfs (void)
 #endif
 
     if (quick_dialog (&confvfs_dlg) != B_CANCEL) {
-        char *p;
-        
         vfs_timeout = atoi (ret_timeout);
         free (ret_timeout);
         if (vfs_timeout < 0 || vfs_timeout > 10000)

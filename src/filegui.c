@@ -83,6 +83,7 @@
 #endif /* SCO_FLAVOR */
 #include <time.h>
 #include <utime.h>
+#include <glib.h>
 #include "mad.h"
 #include "regex.h"
 #include "setup.h"
@@ -99,13 +100,13 @@
 #include "layout.h"
 #include "widget.h"
 #include "wtools.h"
-#include "background.h"
 
 /* Needed for current_panel, other_panel and WTree */
 #include "dir.h"
 #include "panel.h"
 #include "file.h"
 #include "filegui.h"
+#include "fileopctx.h"
 #include "tree.h"
 #include "key.h"
 #include "../vfs/vfs.h"
@@ -114,36 +115,44 @@
 
 /* }}} */
 
-/* Describe the components in the panel operations window */
-static WLabel *FileLabel [2];
-static WLabel *FileString [2];
-static WLabel *ProgressLabel [3];
-static WGauge *ProgressGauge [3];
-static WLabel *eta_label;
-static WLabel *bps_label;
-static WLabel *stalled_label;
+/* This structure describes the UI and internal data required by a file
+ * operation context.
+ */
+typedef struct {
+    /* ETA and bps */
 
-/* Replace dialog: color set, descriptor and filename */
-static int       replace_colors [4];
-static Dlg_head *replace_dlg;
-int    showing_eta;
-int    showing_bps;
+    int showing_eta;
+    int showing_bps;
+    int eta_extra;
 
-/* With ETA on we have extra screen space */
-int eta_extra = 0;
+    /* Dialog and widgets for the operation progress window */
 
+    Dlg_head *op_dlg;
+
+    WLabel *file_label[2];
+    WLabel *file_string[2];
+    WLabel *progress_label[3];
+    WGauge *progress_gauge[3];
+    WLabel *eta_label;
+    WLabel *bps_label;
+    WLabel *stalled_label;
+
+    /* Query replace dialog */
+
+    Dlg_head *replace_dlg;
+    char *replace_filename;
+    int replace_result;
+    struct stat *s_stat, *d_stat;
+} FileOpContextUI;
+
+
+/* Replace dialog: color set */
+static int replace_colors [4];
+
+#ifndef HAVE_X
 /* Used to save the hint line */
 static int last_hint_line;
-
-static int selected_button;
-static int last_percentage [3];
-
-/* The value of the "preserve Attributes" checkbox in the copy file dialog.
- * We can't use the value of "preserve" because it can change in order to
- * preserve file attributs when moving files across filesystem boundaries
- * (we want to keep the value of the checkbox between copy operations).
- */
-int op_preserve = 1;
+#endif
 
 /* File operate window sizes */
 #define WX 62
@@ -167,23 +176,21 @@ enum {
     REPLACE_REGET
 } FileReplaceCode;
 
-/* Pointer to the operate dialog */
-static   Dlg_head *op_dlg;
-
-static struct stat *s_stat, *d_stat;
-
-FileProgressStatus
-file_progress_check_buttons (void)
+static FileProgressStatus
+check_progress_buttons (FileOpContext *ctx)
 {
     int c;
     Gpm_Event event;
+    FileOpContextUI *ui;
+
+    ui = ctx->ui;
 
     x_flush_events ();
     c = get_event (&event, 0, 0);
     if (c == EV_NONE)
       return FILE_CONT;
-    dlg_process_event (op_dlg, c, &event);
-    switch (op_dlg->ret_value) {
+    dlg_process_event (ui->op_dlg, c, &event);
+    switch (ui->op_dlg->ret_value) {
     case FILE_SKIP:
 	return FILE_SKIP;
 	break;
@@ -214,195 +221,256 @@ op_win_callback (struct Dlg_head *h, int id, int msg)
 }
 
 void
-create_op_win (FileOperation op, int with_eta)
+file_op_context_create_ui (FileOpContext *ctx, FileOperation op, int with_eta)
 {
-    int i, x_size;
-    int minus = verbose ? 0 : 3;
-    int eta_offset = with_eta ? (WX_ETA_EXTRA) / 2 : 0;
+    FileOpContextUI *ui;
+    int x_size;
+    int minus;
+    int eta_offset;
+    char *sixty;
+    char *fifteen;
 
-    char *sixty = "";
-    char *fifteen = "";
-    
-    file_progress_replace_result = 0;
-    file_progress_recursive_result = 0;
-    showing_eta = with_eta;
-    showing_bps = with_eta;
-    eta_extra = with_eta ? WX_ETA_EXTRA : 0;
-    x_size = (WX + 4) + eta_extra;
+    g_return_if_fail (ctx != NULL);
+    g_return_if_fail (ctx->ui == NULL);
 
-    op_dlg = create_dlg (0, 0, WY-minus+4, x_size, dialog_colors,
-			 op_win_callback, "", "opwin", DLG_CENTER);
+    ui = g_new0 (FileOpContextUI, 1);
+    ctx->ui = ui;
+
+    minus = verbose ? 0 : 3;
+    eta_offset = with_eta ? (WX_ETA_EXTRA) / 2 : 0;
+
+    sixty = "";
+    fifteen = "";
+
+    ctx->recursive_result = 0;
+
+    ui->replace_result = 0;
+    ui->showing_eta = with_eta;
+    ui->showing_bps = with_eta;
+    ui->eta_extra = with_eta ? WX_ETA_EXTRA : 0;
+    x_size = (WX + 4) + ui->eta_extra;
+
+    ui->op_dlg = create_dlg (0, 0, WY-minus+4, x_size, dialog_colors,
+			     op_win_callback, "", "opwin", DLG_CENTER);
 
 #ifndef HAVE_X
     last_hint_line = the_hint->widget.y;
-    if ((op_dlg->y + op_dlg->lines) > last_hint_line)
-	the_hint->widget.y = op_dlg->y + op_dlg->lines+1;
+    if ((ui->op_dlg->y + ui->op_dlg->lines) > last_hint_line)
+	the_hint->widget.y = ui->op_dlg->y + ui->op_dlg->lines+1;
 #endif
-    
-    x_set_dialog_title (op_dlg, "");
 
-    add_widgetl (op_dlg, button_new (BY-minus, WX - 19 + eta_offset, FILE_ABORT,
-				     NORMAL_BUTTON, _("&Abort"), 0, 0, "abort"),
-        XV_WLAY_RIGHTOF);
-    add_widgetl (op_dlg, button_new (BY-minus, 14 + eta_offset, FILE_SKIP,
-				     NORMAL_BUTTON, _("&Skip"), 0, 0, "skip"),
-        XV_WLAY_CENTERROW);
+    x_set_dialog_title (ui->op_dlg, "");
 
-    add_widgetl (op_dlg, ProgressGauge [2] = gauge_new (7, FCOPY_GAUGE_X, 0, 100, 0, "g-1"), 
-        XV_WLAY_RIGHTOF);
-    add_widgetl (op_dlg, ProgressLabel [2] = label_new (7, FCOPY_LABEL_X, fifteen, "l-1"), 
-        XV_WLAY_NEXTROW);
-    add_widgetl (op_dlg, bps_label = label_new (7, WX, "", "bps-label"), XV_WLAY_NEXTROW);
+    add_widgetl (ui->op_dlg, button_new (BY-minus, WX - 19 + eta_offset, FILE_ABORT,
+					 NORMAL_BUTTON, _("&Abort"), 0, 0, "abort"),
+		 XV_WLAY_RIGHTOF);
+    add_widgetl (ui->op_dlg, button_new (BY-minus, 14 + eta_offset, FILE_SKIP,
+					 NORMAL_BUTTON, _("&Skip"), 0, 0, "skip"),
+		 XV_WLAY_CENTERROW);
 
-    add_widgetl (op_dlg, ProgressGauge [1] = gauge_new (8, FCOPY_GAUGE_X, 0, 100, 0, "g-2"), 
-        XV_WLAY_RIGHTOF);
-    add_widgetl (op_dlg, ProgressLabel [1] = label_new (8, FCOPY_LABEL_X, fifteen, "l-2"), 
-        XV_WLAY_RIGHTOF);
-    add_widgetl (op_dlg, stalled_label = label_new (8, WX, "", "stalled"), XV_WLAY_NEXTROW);
-	
-    add_widgetl (op_dlg, ProgressGauge [0] = gauge_new (6, FCOPY_GAUGE_X, 0, 100, 0, "g-3"), 
-        XV_WLAY_RIGHTOF);
-    add_widgetl (op_dlg, ProgressLabel [0] = label_new (6, FCOPY_LABEL_X, fifteen, "l-3"), 
-        XV_WLAY_RIGHTOF);
-    add_widgetl (op_dlg, eta_label = label_new (6, WX, "", "eta_label"), XV_WLAY_NEXTROW);
-    
-    add_widgetl (op_dlg, FileString [1] = label_new (4, FCOPY_GAUGE_X, sixty, "fs-l-1"),
-        XV_WLAY_RIGHTOF);
-    add_widgetl (op_dlg, FileLabel [1] = label_new (4, FCOPY_LABEL_X, fifteen, "fs-l-2"), 
-        XV_WLAY_NEXTROW);
-    add_widgetl (op_dlg, FileString [0] = label_new (3, FCOPY_GAUGE_X, sixty, "fs-x-1"),
-        XV_WLAY_RIGHTOF);
-    add_widgetl (op_dlg, FileLabel [0] = label_new (3, FCOPY_LABEL_X, fifteen, "fs-x-2"), 
-        XV_WLAY_NEXTROW);
-	
+    add_widgetl (ui->op_dlg, ui->progress_gauge[2] = gauge_new (7, FCOPY_GAUGE_X, 0, 100, 0, "g-1"), 
+		 XV_WLAY_RIGHTOF);
+    add_widgetl (ui->op_dlg, ui->progress_label[2] = label_new (7, FCOPY_LABEL_X, fifteen, "l-1"), 
+		 XV_WLAY_NEXTROW);
+    add_widgetl (ui->op_dlg, ui->bps_label = label_new (7, WX, "", "bps-label"), XV_WLAY_NEXTROW);
+
+    add_widgetl (ui->op_dlg, ui->progress_gauge[1] = gauge_new (8, FCOPY_GAUGE_X, 0, 100, 0, "g-2"), 
+		 XV_WLAY_RIGHTOF);
+    add_widgetl (ui->op_dlg, ui->progress_label[1] = label_new (8, FCOPY_LABEL_X, fifteen, "l-2"), 
+		 XV_WLAY_RIGHTOF);
+    add_widgetl (ui->op_dlg, ui->stalled_label = label_new (8, WX, "", "stalled"), XV_WLAY_NEXTROW);
+
+    add_widgetl (ui->op_dlg, ui->progress_gauge[0] = gauge_new (6, FCOPY_GAUGE_X, 0, 100, 0, "g-3"), 
+		 XV_WLAY_RIGHTOF);
+    add_widgetl (ui->op_dlg, ui->progress_label[0] = label_new (6, FCOPY_LABEL_X, fifteen, "l-3"), 
+		 XV_WLAY_RIGHTOF);
+    add_widgetl (ui->op_dlg, ui->eta_label = label_new (6, WX, "", "eta_label"), XV_WLAY_NEXTROW);
+
+    add_widgetl (ui->op_dlg, ui->file_string[1] = label_new (4, FCOPY_GAUGE_X, sixty, "fs-l-1"),
+		 XV_WLAY_RIGHTOF);
+    add_widgetl (ui->op_dlg, ui->file_label[1] = label_new (4, FCOPY_LABEL_X, fifteen, "fs-l-2"), 
+		 XV_WLAY_NEXTROW);
+    add_widgetl (ui->op_dlg, ui->file_string[0] = label_new (3, FCOPY_GAUGE_X, sixty, "fs-x-1"),
+		 XV_WLAY_RIGHTOF);
+    add_widgetl (ui->op_dlg, ui->file_label[0] = label_new (3, FCOPY_LABEL_X, fifteen, "fs-x-2"), 
+		 XV_WLAY_NEXTROW);
+
     /* We will manage the dialog without any help, that's why
        we have to call init_dlg */
-    init_dlg (op_dlg);
-    op_dlg->running = 1;
-    selected_button = FILE_SKIP;
-    for (i = 0; i < 3; i++)
-	last_percentage [i] = -99;
+    init_dlg (ui->op_dlg);
+    ui->op_dlg->running = 1;
 }
 
 void
-destroy_op_win (void)
+file_op_context_destroy_ui (FileOpContext *ctx)
 {
-    dlg_run_done (op_dlg);
-    destroy_dlg (op_dlg);
+    FileOpContextUI *ui;
+
+    g_return_if_fail (ctx != NULL);
+    g_return_if_fail (ctx->ui != NULL);
+
+    ui = ctx->ui;
+
+    dlg_run_done (ui->op_dlg);
+    destroy_dlg (ui->op_dlg);
 #ifndef HAVE_X
     the_hint->widget.y = last_hint_line;
 #endif
+
+    g_free (ui);
+    ctx->ui = NULL;
 }
 
 static FileProgressStatus
-show_no_bar (int n)
+show_no_bar (FileOpContext *ctx, int n)
 {
+    FileOpContextUI *ui;
+
+    ui = ctx->ui;
+
     if (n >= 0) {
-    	label_set_text (ProgressLabel [n], "");
-        gauge_show (ProgressGauge [n], 0);
+    	label_set_text (ui->progress_label[n], "");
+        gauge_show (ui->progress_gauge[n], 0);
     }
-    return file_progress_check_buttons ();
+    return check_progress_buttons (ctx);
 }
 
 static FileProgressStatus
-show_bar (int n, long done, long total)
+show_bar (FileOpContext *ctx, int n, long done, long total)
 {
-    gauge_set_value (ProgressGauge [n], (int) total, (int) done);
-    gauge_show (ProgressGauge [n], 1);
-    return file_progress_check_buttons ();
+    FileOpContextUI *ui;
+
+    ui = ctx->ui;
+
+    gauge_set_value (ui->progress_gauge[n], (int) total, (int) done);
+    gauge_show (ui->progress_gauge[n], 1);
+    return check_progress_buttons (ctx);
 }
 
 static void
-file_eta_show ()
+file_eta_show (FileOpContext *ctx)
 {
     int eta_hours, eta_mins, eta_s;
     char eta_buffer [30];
+    FileOpContextUI *ui;
 
-    if (!showing_eta)
+    ui = ctx->ui;
+
+    if (!ui->showing_eta)
 	return;
     
-    if (file_progress_eta_secs > 0.5) {
-        eta_hours = file_progress_eta_secs / (60 * 60);
-	eta_mins  = (file_progress_eta_secs - (eta_hours * 60 * 60)) / 60;
-	eta_s     = file_progress_eta_secs - ((eta_hours * 60 * 60) + eta_mins * 60 );
+    if (ctx->eta_secs > 0.5) {
+        eta_hours = ctx->eta_secs / (60 * 60);
+	eta_mins  = (ctx->eta_secs - (eta_hours * 60 * 60)) / 60;
+	eta_s     = ctx->eta_secs - (eta_hours * 60 * 60 + eta_mins * 60);
 	sprintf (eta_buffer, "ETA %d:%02d.%02d", eta_hours, eta_mins, eta_s);
     } else
 	*eta_buffer = 0;
     
-    label_set_text (eta_label, eta_buffer);
+    label_set_text (ui->eta_label, eta_buffer);
 }
 
 static void
-file_bps_show ()
+file_bps_show (FileOpContext *ctx)
 {
     char bps_buffer [30];
+    FileOpContextUI *ui;
 
-    if (!showing_bps)
+    ui = ctx->ui;
+
+    if (!ui->showing_bps)
 	return;
 
-    if (file_progress_bps > 1024*1024){
-        sprintf (bps_buffer, "%.2f MB/s", file_progress_bps / (1024*1024.0));
-    } else if (file_progress_bps > 1024){
-        sprintf (bps_buffer, "%.2f KB/s", file_progress_bps / 1024.0);
-    } else if (file_progress_bps > 1){
-        sprintf (bps_buffer, "%ld B/s", file_progress_bps);
+    if (ctx->bps > 1024*1024) {
+        sprintf (bps_buffer, "%.2f MB/s", ctx->bps / (1024*1024.0));
+    } else if (ctx->bps > 1024){
+        sprintf (bps_buffer, "%.2f KB/s", ctx->bps / 1024.0);
+    } else if (ctx->bps > 1){
+        sprintf (bps_buffer, "%ld B/s", ctx->bps);
     } else
 	*bps_buffer = 0;
 
-    label_set_text (bps_label, bps_buffer);
+    label_set_text (ui->bps_label, bps_buffer);
 }
 
 FileProgressStatus
-file_progress_show (long done, long total)
+file_progress_show (FileOpContext *ctx, long done, long total)
 {
+    FileOpContextUI *ui;
+
+    g_return_val_if_fail (ctx != NULL, FILE_CONT);
+    g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
+
+    ui = ctx->ui;
+
     if (!verbose)
-	return file_progress_check_buttons ();
+	return check_progress_buttons (ctx);
     if (total > 0){
-	label_set_text (ProgressLabel [0], _("File"));
-	file_eta_show ();
-	file_bps_show ();
-	return show_bar (0, done, total);
+	label_set_text (ui->progress_label[0], _("File"));
+	file_eta_show (ctx);
+	file_bps_show (ctx);
+	return show_bar (ctx, 0, done, total);
     } else
-	return show_no_bar (0);
+	return show_no_bar (ctx, 0);
 }
 
 FileProgressStatus
-file_progress_show_count (long done, long total)
+file_progress_show_count (FileOpContext *ctx, long done, long total)
 {
+    FileOpContextUI *ui;
+
+    g_return_val_if_fail (ctx != NULL, FILE_CONT);
+    g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
+
+    ui = ctx->ui;
+
     if (!verbose)
-	return file_progress_check_buttons ();
+	return check_progress_buttons (ctx);
     if (total > 0){
-	label_set_text (ProgressLabel [1], _("Count"));
-	return show_bar (1, done, total);
+	label_set_text (ui->progress_label[1], _("Count"));
+	return show_bar (ctx, 1, done, total);
     } else
-	return show_no_bar (1);
+	return show_no_bar (ctx, 1);
 }
 
 FileProgressStatus
-file_progress_show_bytes (double done, double total)
+file_progress_show_bytes (FileOpContext *ctx, double done, double total)
 {
+    FileOpContextUI *ui;
+
+    g_return_val_if_fail (ctx != NULL, FILE_CONT);
+    g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
+
+    ui = ctx->ui;
+
     if (!verbose)
-	return file_progress_check_buttons ();
+	return check_progress_buttons (ctx);
     if (total > 0){
-	label_set_text (ProgressLabel [2], _("Bytes"));
-	return show_bar (2, done, total);
+	label_set_text (ui->progress_label[2], _("Bytes"));
+	return show_bar (ctx, 2, done, total);
     } else
-	return show_no_bar (2);
+	return show_no_bar (ctx, 2);
 }
 
 /* }}} */
 
 #ifndef HAVE_X
-#define truncFileString(s) name_trunc (s, eta_extra + 47)
+#define truncFileString(ui, s) name_trunc (s, ui->eta_extra + 47)
 #else
-#define truncFileString(s) s
+#define truncFileString(ui, s) s
 #endif
 
 FileProgressStatus
-file_progress_show_source (char *s)
+file_progress_show_source (FileOpContext *ctx, char *s)
 {
-    if (s != NULL){
+    FileOpContextUI *ui;
 
+    g_return_val_if_fail (ctx != NULL, FILE_CONT);
+    g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
+
+    ui = ctx->ui;
+
+    if (s != NULL) {
 #ifdef WITH_FULL_PATHS
     	int i = strlen (cpanel->cwd);
 
@@ -413,36 +481,50 @@ file_progress_show_source (char *s)
         }
 #endif /* WITH_FULL_PATHS */
 	
-	label_set_text (FileLabel [0], _("Source"));
-	label_set_text (FileString [0], truncFileString (s));
-	return file_progress_check_buttons ();
+	label_set_text (ui->file_label[0], _("Source"));
+	label_set_text (ui->file_string[0], truncFileString (ui, s));
+	return check_progress_buttons (ctx);
     } else {
-	label_set_text (FileLabel [0], "");
-	label_set_text (FileString [0], "");
-	return file_progress_check_buttons ();
+	label_set_text (ui->file_label[0], "");
+	label_set_text (ui->file_string[0], "");
+	return check_progress_buttons (ctx);
     }
 }
 
 FileProgressStatus
-file_progress_show_target (char *s)
+file_progress_show_target (FileOpContext *ctx, char *s)
 {
-    if (s != NULL){
-	label_set_text (FileLabel [1], _("Target"));
-	label_set_text (FileString [1], truncFileString (s));
-	return file_progress_check_buttons ();
+    FileOpContextUI *ui;
+
+    g_return_val_if_fail (ctx != NULL, FILE_CONT);
+    g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
+
+    ui = ctx->ui;
+
+    if (s != NULL) {
+	label_set_text (ui->file_label[1], _("Target"));
+	label_set_text (ui->file_string[1], truncFileString (ui, s));
+	return check_progress_buttons (ctx);
     } else {
-	label_set_text (FileLabel [1], "");
-	label_set_text (FileString [1], "");
-	return file_progress_check_buttons ();
+	label_set_text (ui->file_label[1], "");
+	label_set_text (ui->file_string[1], "");
+	return check_progress_buttons (ctx);
     }
 }
 
 FileProgressStatus
-file_progress_show_deleting (char *s)
+file_progress_show_deleting (FileOpContext *ctx, char *s)
 {
-    label_set_text (FileLabel [0], _("Deleting"));
-    label_set_text (FileString [0], truncFileString (s));
-    return file_progress_check_buttons ();
+    FileOpContextUI *ui;
+
+    g_return_val_if_fail (ctx != NULL, FILE_CONT);
+    g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
+
+    ui = ctx->ui;
+
+    label_set_text (ui->file_label[0], _("Deleting"));
+    label_set_text (ui->file_label[0], truncFileString (ui, s));
+    return check_progress_buttons (ctx);
 }
 
 static int
@@ -503,133 +585,152 @@ rd_widgets [] =
 }; 
 
 #define ADD_RD_BUTTON(i)\
-	add_widgetl (replace_dlg,\
+	add_widgetl (ui->replace_dlg,\
 		button_new (rd_widgets [i].ypos, rd_widgets [i].xpos, rd_widgets [i].value,\
 		NORMAL_BUTTON, rd_widgets [i].text, 0, 0, rd_widgets [i].tkname), \
 		rd_widgets [i].layout)
 
-#define ADD_RD_LABEL(i,p1,p2)\
+#define ADD_RD_LABEL(ui,i,p1,p2)\
 	sprintf (buffer, rd_widgets [i].text, p1, p2);\
-	add_widgetl (replace_dlg,\
+	add_widgetl (ui->replace_dlg,\
 		label_new (rd_widgets [i].ypos, rd_widgets [i].xpos, buffer, rd_widgets [i].tkname),\
 		rd_widgets [i].layout)
 
 static void
-init_replace (enum OperationMode mode)
+init_replace (FileOpContext *ctx, enum OperationMode mode)
 {
+    FileOpContextUI *ui;
     char buffer [128];
-	static int rd_xlen = 60, rd_trunc = X_TRUNC;
+    static int rd_xlen = 60, rd_trunc = X_TRUNC;
 
 #ifdef ENABLE_NLS
-	static int i18n_flag;
-	if (!i18n_flag)
-	{
-		int l1, l2, l, row;
-		register int i = sizeof (rd_widgets) / sizeof (rd_widgets [0]); 
-		while (i--)
-			rd_widgets [i].text = _(rd_widgets [i].text);
+    static int i18n_flag;
+    if (!i18n_flag) {
+	int l1, l2, l, row;
+	register int i = sizeof (rd_widgets) / sizeof (rd_widgets [0]); 
+	while (i--)
+	    rd_widgets [i].text = _(rd_widgets [i].text);
 
-		/* 
-		 *longest of "Overwrite..." labels 
-		 * (assume "Target date..." are short enough)
-		 */
-		l1 = max (strlen (rd_widgets [6].text), strlen (rd_widgets [11].text));
+	/* 
+	 *longest of "Overwrite..." labels 
+	 * (assume "Target date..." are short enough)
+	 */
+	l1 = max (strlen (rd_widgets [6].text), strlen (rd_widgets [11].text));
 
-		/* longest of button rows */
-		i = sizeof (rd_widgets) / sizeof (rd_widgets [0]);
-		for (row = l = l2 = 0; i--;)
-		{
-			if (rd_widgets [i].value != 0)
-			{
-				if (row != rd_widgets [i].ypos)
-				{
-					row = rd_widgets [i].ypos;
-					l2 = max (l2, l);
-					l = 0;
-				}
-				l += strlen (rd_widgets [i].text) + 4;
-			}
+	/* longest of button rows */
+	i = sizeof (rd_widgets) / sizeof (rd_widgets [0]);
+	for (row = l = l2 = 0; i--;) {
+	    if (rd_widgets [i].value != 0) {
+		if (row != rd_widgets [i].ypos) {
+		    row = rd_widgets [i].ypos;
+		    l2 = max (l2, l);
+		    l = 0;
 		}
-		l2 = max (l2, l); /* last row */
-		rd_xlen = max (rd_xlen, l1 + l2 + 8);
-		rd_trunc = rd_xlen - 6;
-
-		/* Now place buttons */
-		l1 += 5; /* start of first button in the row */
-		i = sizeof (rd_widgets) / sizeof (rd_widgets [0]);
-		
-		for (l = l1, row = 0; --i > 1;)
-		{
-			if (rd_widgets [i].value != 0)
-			{
-				if (row != rd_widgets [i].ypos)
-				{
-					row = rd_widgets [i].ypos;
-					l = l1;
-				}
-				rd_widgets [i].xpos = l;
-				l += strlen (rd_widgets [i].text) + 4;
-			}
-		}
-		/* Abort button is centered */
-		rd_widgets [1].xpos = (rd_xlen - strlen (rd_widgets [1].text) - 3) / 2;
-
+		l += strlen (rd_widgets [i].text) + 4;
+	    }
 	}
+	l2 = max (l2, l); /* last row */
+	rd_xlen = max (rd_xlen, l1 + l2 + 8);
+	rd_trunc = rd_xlen - 6;
+
+	/* Now place buttons */
+	l1 += 5; /* start of first button in the row */
+	i = sizeof (rd_widgets) / sizeof (rd_widgets [0]);
+		
+	for (l = l1, row = 0; --i > 1;) {
+	    if (rd_widgets [i].value != 0) {
+		if (row != rd_widgets [i].ypos) {
+		    row = rd_widgets [i].ypos;
+		    l = l1;
+		}
+		rd_widgets [i].xpos = l;
+		l += strlen (rd_widgets [i].text) + 4;
+	    }
+	}
+	/* Abort button is centered */
+	rd_widgets [1].xpos = (rd_xlen - strlen (rd_widgets [1].text) - 3) / 2;
+    }
 #endif /* ENABLE_NLS */
+
+    ui = ctx->ui;
 
     replace_colors [0] = ERROR_COLOR;
     replace_colors [1] = COLOR_NORMAL;
     replace_colors [2] = ERROR_COLOR;
     replace_colors [3] = COLOR_NORMAL;
     
-    replace_dlg = create_dlg (0, 0, 16, rd_xlen, replace_colors, replace_callback,
-			      "[ Replace ]", "replace", DLG_CENTER);
+    ui->replace_dlg = create_dlg (0, 0, 16, rd_xlen, replace_colors, replace_callback,
+				  "[ Replace ]", "replace", DLG_CENTER);
     
-    x_set_dialog_title (replace_dlg,
-        mode == Foreground ? _(" File exists ") : _(" Background process: File exists "));
+    x_set_dialog_title (ui->replace_dlg,
+			(mode == Foreground
+			 ? _(" File exists ")
+			 : _(" Background process: File exists ")));
 
 
-	ADD_RD_LABEL(0, name_trunc (file_progress_replace_filename, rd_trunc - strlen (rd_widgets [0].text)), 0 );
-	ADD_RD_BUTTON(1);    
-    
-	ADD_RD_BUTTON(2);
-	ADD_RD_BUTTON(3);
-	ADD_RD_BUTTON(4);
-	ADD_RD_BUTTON(5);
-	ADD_RD_LABEL(6,0,0);
+    ADD_RD_LABEL(ui, 0,
+		 name_trunc (ui->replace_filename, rd_trunc - strlen (rd_widgets [0].text)), 0);
+    ADD_RD_BUTTON(1);
+
+    ADD_RD_BUTTON(2);
+    ADD_RD_BUTTON(3);
+    ADD_RD_BUTTON(4);
+    ADD_RD_BUTTON(5);
+    ADD_RD_LABEL(ui, 6, 0, 0);
 
     /* "this target..." widgets */
-	if (!S_ISDIR (d_stat->st_mode)){
-		if ((d_stat->st_size && s_stat->st_size > d_stat->st_size))
-			ADD_RD_BUTTON(7);
+    if (!S_ISDIR (ui->d_stat->st_mode)){
+	if ((ui->d_stat->st_size && ui->s_stat->st_size > ui->d_stat->st_size))
+	    ADD_RD_BUTTON(7);
 
-		ADD_RD_BUTTON(8);
+	ADD_RD_BUTTON(8);
     }
-	ADD_RD_BUTTON(9);
-	ADD_RD_BUTTON(10);
-	ADD_RD_LABEL(11,0,0);
+    ADD_RD_BUTTON(9);
+    ADD_RD_BUTTON(10);
+    ADD_RD_LABEL(ui, 11,0,0);
     
-	ADD_RD_LABEL(12, file_date (d_stat->st_mtime), (int) d_stat->st_size);
-	ADD_RD_LABEL(13, file_date (s_stat->st_mtime), (int) s_stat->st_size);
+    ADD_RD_LABEL(ui, 12, file_date (ui->d_stat->st_mtime), (int) ui->d_stat->st_size);
+    ADD_RD_LABEL(ui, 13, file_date (ui->s_stat->st_mtime), (int) ui->s_stat->st_size);
+}
+
+void
+file_progress_set_stalled_label (FileOpContext *ctx, char *stalled_msg)
+{
+    FileOpContextUI *ui;
+
+    g_return_if_fail (ctx != NULL);
+    g_return_if_fail (ctx->ui != NULL);
+
+    ui = ctx->ui;
+
+    label_set_text (ui->stalled_label, stalled_msg);
 }
 
 FileProgressStatus
-file_progress_real_query_replace (enum OperationMode mode, char *destname, struct stat *_s_stat,
+file_progress_real_query_replace (FileOpContext *ctx, enum OperationMode mode,
+				  char *destname, struct stat *_s_stat,
 				  struct stat *_d_stat)
 {
-    if (file_progress_replace_result < REPLACE_ALWAYS){
-	file_progress_replace_filename = destname;
-	s_stat = _s_stat;
-	d_stat = _d_stat;
-	init_replace (mode);
-	run_dlg (replace_dlg);
-	file_progress_replace_result = replace_dlg->ret_value;
-	if (file_progress_replace_result == B_CANCEL)
-	    file_progress_replace_result = REPLACE_ABORT;
-	destroy_dlg (replace_dlg);
+    FileOpContextUI *ui;
+
+    g_return_val_if_fail (ctx != NULL, FILE_CONT);
+    g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
+
+    ui = ctx->ui;
+
+    if (ui->replace_result < REPLACE_ALWAYS){
+	ui->replace_filename = destname;
+	ui->s_stat = _s_stat;
+	ui->d_stat = _d_stat;
+	init_replace (ctx, mode);
+	run_dlg (ui->replace_dlg);
+	ui->replace_result = ui->replace_dlg->ret_value;
+	if (ui->replace_result == B_CANCEL)
+	    ui->replace_result = REPLACE_ABORT;
+	destroy_dlg (ui->replace_dlg);
     }
 
-    switch (file_progress_replace_result){
+    switch (ui->replace_result){
     case REPLACE_UPDATE:
 	do_refresh ();
 	if (_s_stat->st_mtime > _d_stat->st_mtime)
@@ -646,10 +747,10 @@ file_progress_real_query_replace (enum OperationMode mode, char *destname, struc
 	
     case REPLACE_REGET:
 	/* Carefull: we fall through and set do_append */
-	file_progress_do_reget = _d_stat->st_size;
+	ctx->do_reget = _d_stat->st_size;
 	
     case REPLACE_APPEND:
-        file_progress_do_append = 1;
+        ctx->do_append = 1;
 	
     case REPLACE_YES:
     case REPLACE_ALWAYS:
@@ -665,15 +766,9 @@ file_progress_real_query_replace (enum OperationMode mode, char *destname, struc
     }
 }
 
-void
-file_progress_set_stalled_label (char *stalled_msg)
-{
-    label_set_text (stalled_label, stalled_msg);
-}
-
 #define FMDY 13
 #define	FMD_XLEN 64
-extern int fmd_xlen, fmd_i18n_flag;
+extern int fmd_xlen;
 static QuickWidget fmd_widgets [] = {
 
 #define	FMCB0  FMDC
@@ -681,19 +776,12 @@ static QuickWidget fmd_widgets [] = {
 #define	FMCB11 1
 	/* follow symlinks and preserve Attributes must be the first */
     { quick_checkbox, 3, 64, 8, FMDY, N_("preserve &Attributes"), 9, 0,
-      &op_preserve, 0, XV_WLAY_BELOWCLOSE, "preserve" },
+      0 /* &op_preserve */, 0, XV_WLAY_BELOWCLOSE, "preserve" },
     { quick_checkbox, 3, 64, 7, FMDY, N_("follow &Links"), 7, 0, 
-      &file_mask_op_follow_links, 0, XV_WLAY_BELOWCLOSE, "follow" },
-#ifdef HAVE_XVIEW
-#define FMDI1 5
-#define FMDI2 2
-#define FMDC  4
-    { quick_input, 3, 64, 6, FMDY, "", 58, 0, 
-      0, 0, XV_WLAY_BELOWCLOSE, "input2" },
-#endif
+      0 /* &file_mask_op_follow_links */, 0, XV_WLAY_BELOWCLOSE, "follow" },
     { quick_label, 3, 64, 5, FMDY, N_("to:"), 0, 0, 0, 0, XV_WLAY_BELOWOF,"to"},
     { quick_checkbox, 37, 64, 4, FMDY, N_("&Using shell patterns"), 0, 0, 
-      0/* &source_easy_patterns */, 0, XV_WLAY_BELOWCLOSE, "using-shell" },
+      0 /* &source_easy_patterns */, 0, XV_WLAY_BELOWCLOSE, "using-shell" },
     { quick_input, 3, 64, 3, FMDY, "", 58, 
       0, 0, 0, XV_WLAY_BELOWCLOSE, "input-def" },
 #define FMDI1 4
@@ -723,19 +811,22 @@ static QuickWidget fmd_widgets [] = {
 #endif
     { quick_button, 14, 64, 9, FMDY, N_("&Ok"), 0, B_ENTER, 0, 0, XV_WLAY_NEXTROW, "ok" },
     { quick_checkbox, 42, 64, 8, FMDY, N_("&Stable Symlinks"), 0, 0,
-      &file_mask_stable_symlinks, 0, XV_WLAY_BELOWCLOSE, "stab-sym" },
+      0 /* &file_mask_stable_symlinks */, 0, XV_WLAY_BELOWCLOSE, "stab-sym" },
     { quick_checkbox, 31, 64, 7, FMDY, N_("&Dive into subdir if exists"), 0, 0, 
-      &dive_into_subdirs, 0, XV_WLAY_BELOWOF, "dive" },
+      0 /* &dive_into_subdirs */, 0, XV_WLAY_BELOWOF, "dive" },
     { 0 } };
 
 void
-fmd_init_i18n()
+fmd_init_i18n (int force)
 {
-#ifdef ENABLE_NLS
-
+	static int initialized = FALSE;
 	register int i;
 	int len;
 
+	if (initialized && !force)
+		return;
+
+#ifdef ENABLE_NLS
 	for (i = sizeof (op_names) / sizeof (op_names[0]); i--;)
 		op_names [i] = _(op_names [i]);
 
@@ -791,11 +882,11 @@ fmd_init_i18n()
 #undef chkbox_xpos
 #endif /* ENABLE_NLS */
 
-	fmd_i18n_flag = 1;
+	initialized = TRUE;
 }
 
 char *
-file_mask_dialog (FileOperation operation, char *text, char *def_text,
+file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char *def_text,
 		  int only_one, int *do_background)
 {
     int source_easy_patterns = easy_patterns;
@@ -803,13 +894,22 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text,
     const char *error;
     struct stat buf;
     int val;
-    
     QuickDialog Quick_input;
 
-    if (!fmd_i18n_flag)
-	fmd_init_i18n();
+    g_return_val_if_fail (ctx != NULL, NULL);
 
-    file_mask_stable_symlinks = 0;
+    fmd_init_i18n (FALSE);
+
+    /* Set up the result pointers */
+
+    fmd_widgets[FMCB12].result = &ctx->op_preserve;
+    fmd_widgets[FMCB11].result = &ctx->follow_links;
+    fmd_widgets[FMCB22].result = &ctx->stable_symlinks;
+    fmd_widgets[FMCB21].result = &ctx->dive_into_subdirs;
+
+    /* Create the dialog */
+
+    ctx->stable_symlinks = 0;
     fmd_widgets [FMDC].result = &source_easy_patterns;
     fmd_widgets [FMDI1].text = easy_patterns ? "*" : "^\\(.*\\)$";
     Quick_input.xlen  = fmd_xlen;
@@ -818,8 +918,8 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text,
     Quick_input.help  = "[Mask Copy/Rename]";
     Quick_input.ylen  = FMDY;
     Quick_input.i18n  = 1;
-    
-    if (operation == OP_COPY){
+
+    if (operation == OP_COPY) {
 	Quick_input.class = "quick_file_mask_copy";
 	Quick_input.widgets = fmd_widgets;
     } else { /* operation == OP_MOVE */
@@ -837,22 +937,21 @@ ask_file_mask:
     if ((val = quick_dialog_skip (&Quick_input, SKIP)) == B_CANCEL)
 	return 0;
 
-    if (file_mask_op_follow_links && operation != OP_MOVE)
-	file_mask_xstat = mc_stat;
+    if (ctx->follow_links && operation != OP_MOVE)
+	ctx->stat_func = mc_stat;
     else
-	file_mask_xstat = mc_lstat;
-    
-    if (op_preserve || operation == OP_MOVE){
-	file_mask_preserve = 1;
-	file_mask_umask_kill = 0777777;
-	file_mask_preserve_uidgid = (geteuid () == 0) ? 1 : 0;
-    }
-    else {
+	ctx->stat_func = mc_lstat;
+
+    if (ctx->op_preserve || operation == OP_MOVE) {
+	ctx->preserve = 1;
+	ctx->umask_kill = 0777777;
+	ctx->preserve_uidgid = (geteuid () == 0) ? 1 : 0;
+    } else {
         int i;
-	file_mask_preserve = file_mask_preserve_uidgid = 0;
+	ctx->preserve = ctx->preserve_uidgid = 0;
 	i = umask (0);
 	umask (i);
-	file_mask_umask_kill = i ^ 0777777;
+	ctx->umask_kill = i ^ 0777777;
     }
 
     orig_mask = source_mask;
@@ -866,10 +965,10 @@ ask_file_mask:
 	easy_patterns = 1;
 	source_mask = convert_pattern (source_mask, match_file, 1);
 	easy_patterns = source_easy_patterns;
-        error = re_compile_pattern (source_mask, strlen (source_mask), &file_mask_rx);
+        error = re_compile_pattern (source_mask, strlen (source_mask), &ctx->rx);
         free (source_mask);
     } else
-        error = re_compile_pattern (source_mask, strlen (source_mask), &file_mask_rx);
+        error = re_compile_pattern (source_mask, strlen (source_mask), &ctx->rx);
 
     if (error){
 	message_3s (1, MSG_ERROR, _("Invalid source pattern `%s' \n %s "),
@@ -880,19 +979,20 @@ ask_file_mask:
     }
     if (orig_mask)
 	free (orig_mask);
-    file_mask_dest_mask = strrchr (dest_dir, PATH_SEP);
-    if (file_mask_dest_mask == NULL)
-	file_mask_dest_mask = dest_dir;
+    ctx->dest_mask = strrchr (dest_dir, PATH_SEP);
+    if (ctx->dest_mask == NULL)
+	ctx->dest_mask = dest_dir;
     else
-	file_mask_dest_mask++;
-    orig_mask = file_mask_dest_mask;
-    if (!*file_mask_dest_mask || (!dive_into_subdirs && !is_wildcarded (file_mask_dest_mask) &&
-                        (!only_one || (!mc_stat (dest_dir, &buf) && S_ISDIR (buf.st_mode)))) ||
-	(dive_into_subdirs && ((!only_one && !is_wildcarded (file_mask_dest_mask)) ||
-			       (only_one && !mc_stat (dest_dir, &buf) && S_ISDIR (buf.st_mode)))))
-	file_mask_dest_mask = strdup ("*");
+	ctx->dest_mask++;
+    orig_mask = ctx->dest_mask;
+    if (!*ctx->dest_mask || (!ctx->dive_into_subdirs && !is_wildcarded (ctx->dest_mask) &&
+			     (!only_one || (!mc_stat (dest_dir, &buf) && S_ISDIR (buf.st_mode)))) ||
+	(ctx->dive_into_subdirs && ((!only_one && !is_wildcarded (ctx->dest_mask)) ||
+				    (only_one
+				     && !mc_stat (dest_dir, &buf) && S_ISDIR (buf.st_mode)))))
+	ctx->dest_mask = strdup ("*");
     else {
-	file_mask_dest_mask = strdup (file_mask_dest_mask);
+	ctx->dest_mask = strdup (ctx->dest_mask);
 	*orig_mask = 0;
     }
     if (!*dest_dir){

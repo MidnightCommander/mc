@@ -43,6 +43,7 @@
 #include "mouse.h"
 #include "main.h"
 #include "file.h"	/* For copy_dir_dir(), move_dir_dir(), erase_dir() */
+#include "fileopctx.h"
 #include "help.h"
 #include "key.h"	/* For mi_getch() */
 #include "tree.h"
@@ -89,7 +90,6 @@ static tree_entry *forw_ptr (tree_entry *ptr, int *count)
 /* Add a directory to the list of directories */
 tree_entry *tree_add_entry (WTree *tree, char *name)
 {
-    tree_entry entry;
     if (!tree)
 	return 0;
     
@@ -642,6 +642,7 @@ void tree_copy (WTree *tree, char *default_dest)
     char   *dest;
     long   count = 0;
     double bytes = 0;
+    FileOpContext *ctx;
     
     if (!tree->selected_ptr)
 	return;
@@ -651,11 +652,12 @@ void tree_copy (WTree *tree, char *default_dest)
     if (!dest || !*dest){
 	return;
     }
-    create_op_win (OP_COPY, 0);
-    file_mask_defaults ();
 
-    copy_dir_dir (tree->selected_ptr->name, dest, 1, 0, 0, 0, &count, &bytes);
-    destroy_op_win ();
+    ctx = file_op_context_new ();
+    file_op_context_create_ui (ctx, OP_COPY, FALSE);
+    copy_dir_dir (ctx, tree->selected_ptr->name, dest, 1, 0, 0, 0, &count, &bytes);
+    file_op_context_destroy (ctx);
+
     free (dest);
 }
 
@@ -678,7 +680,8 @@ void tree_move (WTree *tree, char *default_dest)
     struct stat buf;
     double bytes = 0;
     long   count = 0;
-    
+    FileOpContext *ctx;
+
     if (!tree->selected_ptr)
 	return;
     sprintf (cmd_buf, _("Move \"%s\" directory to:"),
@@ -698,10 +701,12 @@ void tree_move (WTree *tree, char *default_dest)
 	free (dest);
 	return;
     }
-    create_op_win (OP_MOVE, 0);
-    file_mask_defaults ();
-    move_dir_dir (tree->selected_ptr->name, dest, &count, &bytes);
-    destroy_op_win ();
+
+    ctx = file_op_context_new ();
+    file_op_context_create_ui (ctx, OP_MOVE, FALSE);
+    move_dir_dir (ctx, tree->selected_ptr->name, dest, &count, &bytes);
+    file_op_context_destroy (ctx);
+
     free (dest);
 }
 
@@ -737,6 +742,7 @@ tree_rmdir_cmd (WTree *tree)
     char old_dir [MC_MAXPATHLEN];
     long count = 0;
     double bytes = 0;
+    FileOpContext *ctx;
     
     if (tree->selected_ptr){
 	if (!mc_get_current_wd (old_dir, MC_MAXPATHLEN))
@@ -756,10 +762,12 @@ tree_rmdir_cmd (WTree *tree)
 		return;
 	    }
 	}
-	create_op_win (OP_DELETE, 0);
-	if (erase_dir (tree->selected_ptr->name, &count, &bytes) == FILE_CONT)
+
+	ctx = file_op_context_new ();
+	file_op_context_create_ui (ctx, OP_DELETE, FALSE);
+	if (erase_dir (ctx, tree->selected_ptr->name, &count, &bytes) == FILE_CONT)
 	    tree_forget_cmd (tree);
-	destroy_op_win ();
+	file_op_context_destroy (ctx);
 	mc_chdir (old_dir);
 	return;
     } else

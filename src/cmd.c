@@ -58,6 +58,7 @@
 #include "view.h"		/* view() */
 #include "dialog.h"		/* query_dialog, message */
 #include "file.h"		/* the file operations */
+#include "fileopctx.h"
 #include "find.h"		/* do_find */
 #include "hotlist.h"
 #include "tree.h"
@@ -359,7 +360,7 @@ void edit_cmd_new (WPanel *panel)
 void copy_cmd (void)
 {
     save_cwds_stat ();
-    if (panel_operate (cpanel, OP_COPY, NULL)){
+    if (panel_operate (cpanel, OP_COPY, NULL, TRUE)){
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
@@ -368,7 +369,7 @@ void copy_cmd (void)
 void ren_cmd (void)
 {
     save_cwds_stat ();
-    if (panel_operate (cpanel, OP_MOVE, NULL)){
+    if (panel_operate (cpanel, OP_MOVE, NULL, TRUE)){
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
@@ -377,7 +378,7 @@ void ren_cmd (void)
 void copymove_cmd_with_default (int copy, char *thedefault)
 {
     save_cwds_stat ();
-    if (panel_operate (cpanel, copy ? OP_COPY : OP_MOVE, thedefault)){
+    if (panel_operate (cpanel, copy ? OP_COPY : OP_MOVE, thedefault, TRUE)){
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
@@ -417,7 +418,7 @@ void delete_cmd (void)
 {
     save_cwds_stat ();
 
-    if (panel_operate (cpanel, OP_DELETE, NULL)){
+    if (panel_operate (cpanel, OP_DELETE, NULL, TRUE)){
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
@@ -620,15 +621,16 @@ static int check_for_default(char *default_file, char *file)
     struct stat s;
     long   count = 0;
     double bytes = 0;
+    FileOpContext *ctx;
     
     if (mc_stat (file, &s)){
 	if (mc_stat (default_file, &s)){
 	    return -1;
 	}
-	create_op_win (OP_COPY, 0);
-        file_mask_defaults ();
-	copy_file_file (default_file, file, 1, &count, &bytes, 1);
-	destroy_op_win ();
+	ctx = file_op_context_new ();
+	file_op_context_create_ui (ctx, OP_COPY, 0);
+	copy_file_file (ctx, default_file, file, 1, &count, &bytes, 1);
+	file_op_context_destroy (ctx);
     }
     return 0;
 }

@@ -24,14 +24,15 @@
 #include "layout.h"
 #include "../vfs/vfs.h"
 
-static enum {
+enum {
 	SORT_NAME,
 	SORT_EXTENSION,
 	SORT_ACCESS,
 	SORT_MODIFY,
 	SORT_CHANGE,
 	SORT_SIZE
-} SortOrderCode;
+};
+
 static char *panelize_section = "Panelize";
 
 void
@@ -271,22 +272,22 @@ gnome_sort_cmd (GtkWidget *widget, WPanel *panel)
 						     (omenu)->menu_item),
 						    "SORT_ORDER_CODE") ) {
 		case SORT_NAME:
-			sfn = sort_name;
+			sfn = (sortfn *) sort_name;
 			break;
 		case SORT_EXTENSION:
-			sfn = sort_ext;
+			sfn = (sortfn *) sort_ext;
 			break;
 		case SORT_ACCESS:
-			sfn = sort_atime;
+			sfn = (sortfn *) sort_atime;
 			break;
 		case SORT_MODIFY:
-			sfn = sort_time;
+			sfn = (sortfn *) sort_time;
 			break;
 		case SORT_CHANGE:
-			sfn = sort_ctime;
+			sfn = (sortfn *) sort_ctime;
 			break;
 		case SORT_SIZE:
-			sfn = sort_size;
+			sfn = (sortfn *) sort_size;
 			break;
 		}
 		/* case sensitive */
@@ -548,7 +549,6 @@ gnome_filter_cmd (GtkWidget *widget, WPanel *panel)
 	GtkWidget *entry;
 	GtkWidget *label;
 	gchar *text1, *text2, *text3;
-	GList *list;
 
 	filter_dlg = gnome_dialog_new (_("Set Filter"), GNOME_STOCK_BUTTON_OK, 
 				       GNOME_STOCK_BUTTON_CANCEL, NULL);
@@ -619,7 +619,9 @@ void
 gnome_open_files (GtkWidget *widget, WPanel *panel)
 {
 	GList *later = NULL;
+#if 0
 	GList *now;
+#endif
 	gint i;
 
 	/* FIXME: this is the easy way to do things.  We want the

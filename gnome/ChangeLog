@@ -1,3 +1,9 @@
+1999-01-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gpageprop.c (item_properties): Use file contexts appropriately.
+
+	* gdnd.c (perform_action): Use file contexts appropriately.
+
 1999-01-13  Jonathan Blandford  <jrb@redhat.com>
 
 	* glayout.c (create_container): finished the New->menu.  Looks
@@ -15,6 +21,18 @@
 	* gwidget.c: 
 	* gprop.c: 
 	s/gtk_toggle_button_state/gtk_toggle_button_active
+
+1999-01-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (desktop_icon_info_delete): Pass the file operation
+	context to erase_dir() and erase_file().
+
+	* gcmd.c (gnome_sort_cmd): Cast the sort functions to avoid
+	warnings.
+
+	* gdialogs.c: Converted to use FileOpContext.
+
+	* gmain.h: Added some prototypes needed in the Gnome version.
 
 1999-01-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -123,6 +141,17 @@
 	results so the next time works.  Will do this tomorrow.
 	(gnome_external_panelize): think I finished this now.
 
+1999-01-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop-icon.c (desktop_icon_realize): Make icons sticky as
+	well.
+
+	* gpageprop.c (item_properties): Use a file operation context.
+	* gdnd.c (perform_action): Likewise.
+	* gdesktop.c (desktop_icon_info_delete): Likewise.
+
+	* Makefile.in: Added fileopctx.o.
+
 1999-01-05  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_icon_drop_uri_list): Implement
@@ -148,6 +177,15 @@
 
 	* gcmd.c (gnome_external_panelize): mostly hooked up now.
 	will finish tomorrow (shouldn't take very long...)
+
+1999-01-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* Makefile.in (GNOMESRCS): Removed temp-hack.c from the list of
+	sources.
+	(GNOMEHDRS): Ditto for gdialogs.h.
+
+	* gscreen.c (x_create_panel): Removed periods from the toolbar
+	button tooltips.
 
 1999-01-04  Jonathan Blandford  <jrb@redhat.com>
 

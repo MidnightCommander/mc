@@ -1655,7 +1655,9 @@ static void
 move_selection (WPanel *panel, int lines)
 {
     int new_pos;
+#ifndef HAVE_X
     int adjust = 0;
+#endif
 
     new_pos = panel->selected + lines;
     if (new_pos >= panel->count)

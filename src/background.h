@@ -14,12 +14,6 @@ enum {
     MSG_CHILD_EXITING
 };
 
-/* First argument passed to real functions */
-enum OperationMode {
-    Foreground,
-    Background
-};
-
 enum ReturnType {
     Return_String,
     Return_Integer
@@ -42,14 +36,11 @@ extern struct TaskList *task_list;
 
 extern int background_wait;
 
-int do_background (char *info);
-int background_attention (int fd, void *xpid);
+int do_background (FileOpContext *ctx, char *info);
 void tell_parent (int msg);
-int parent_call (void *routine, int argc, ...);
-int call_1s (int (*routine)(enum OperationMode, char *), char *str);
+int parent_call (void *routine, FileOpContext *ctx, int argc, ...);
 
 void unregister_task_running (pid_t, int fd);
-void register_task_running (pid_t, int, char *);
 
 /* stubs */
 void message_1s (int flags, char *title, char *str1);

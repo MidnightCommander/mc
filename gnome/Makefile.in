@@ -36,6 +36,7 @@ GNOMESRCS = 		\
 	gcorba.c	\
 	gdesktop-icon.c	\
 	gdesktop.c 	\
+	gdialogs.c	\
 	gdnd.c		\
 	ghelp.c 	\
 	gicon.c		\
@@ -50,7 +51,6 @@ GNOMESRCS = 		\
 	gpopup.c	\
 	gprefs.c	\
 	gprop.c		\
-	gdialogs.c	\
 	gscreen.c 	\
 	gtools.c 	\
 	gtkdtree.c	\
@@ -103,13 +103,14 @@ LOBJS = mad.o
 #
 # These objects from ../src do depend on HAVE_GNOME
 #
-OOBJS = dlg.o screen.o widget.o wtools.o info.o boxes.o 	\
-	file.o find.o dialog.o key.o chmod.o chown.o view.o 	\
-	panelize.o hotlist.o background.o dir.o util.o 		\
-	win.o color.o profile.o user.o ext.o setup.o 		\
-	subshell.o terms.o achown.o fsusage.o mountlist.o 	\
-	@XCURSES@ @REGEX_O@ complete.o command.o 		\
-	option.o cmd.o utilunix.o xslint.o gdialogs.o filenot.o treestore.o
+OOBJS = dlg.o screen.o widget.o wtools.o info.o boxes.o		\
+	file.o find.o dialog.o key.o chmod.o chown.o view.o	\
+	panelize.o hotlist.o background.o dir.o util.o		\
+	win.o color.o profile.o user.o ext.o setup.o		\
+	subshell.o terms.o achown.o fsusage.o mountlist.o	\
+	@XCURSES@ @REGEX_O@ complete.o command.o		\
+	option.o cmd.o utilunix.o xslint.o gdialogs.o filenot.o	\
+	fileopctx.o treestore.o
 
 CORBAOBJS = 			\
 	main-corba.o		\

@@ -205,7 +205,7 @@ tree_store_load (char *name)
 	int len, common;
 	int do_load;
 	
-	g_return_if_fail (name != NULL);
+	g_return_val_if_fail (name != NULL, FALSE);
 
 	if (ts.loaded)
 		return TRUE;
@@ -679,8 +679,8 @@ tree_store_rescan (char *dir)
 		for (dp = mc_readdir (dirp); dp; dp = mc_readdir (dirp)){
 			char *full_name;
 
-			if (dp->d_name [0] == '.' &&
-			    dp->d_name [1] == 0 || (dp->d_name [1] == '.' && dp->d_name [2] == 0))
+			if ((dp->d_name [0] == '.' && dp->d_name [1] == 0)
+			    || (dp->d_name [1] == '.' && dp->d_name [2] == 0))
 				continue;
 
 			full_name = concat_dir_and_file (dir, dp->d_name);

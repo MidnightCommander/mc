@@ -224,7 +224,6 @@ gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
 {
 	GtkCTreeNode *current_node;
 	char *s, *current, *npath;
-	char *request;
 	
 	g_return_val_if_fail (dtree != NULL, FALSE);
 	g_return_val_if_fail (GTK_IS_DTREE (dtree), FALSE);
@@ -504,8 +503,6 @@ gtk_dtree_dirty_notify (int state)
 static void
 gtk_dtree_init (GtkDTree *dtree)
 {
-	static int tree_inited;
-	
 	dtree->current_path = NULL;
 	dtree->auto_expanded_nodes = NULL;
 

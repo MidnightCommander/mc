@@ -31,17 +31,18 @@ typedef struct {
 
 extern void (*tree_store_dirty_notify)(int state);
 
-TreeStore  *tree_store_init          (void);
-int         tree_store_load          (char *name);
-int         tree_store_save          (char *name);
-tree_entry *tree_store_add_entry     (char *name);
-void        tree_store_remove_entry  (char *name);
-void        tree_store_destroy       (void);
-tree_entry *tree_store_start_check   (char *path);
-void        tree_store_mark_checked  (const char *subname);
-void        tree_store_end_check     (void);
-tree_entry *tree_store_whereis       (char *name);
-tree_entry *tree_store_rescan        (char *dir);
+TreeStore  *tree_store_init            (void);
+int         tree_store_load            (char *name);
+int         tree_store_save            (char *name);
+tree_entry *tree_store_add_entry       (char *name);
+void        tree_store_remove_entry    (char *name);
+void        tree_store_destroy         (void);
+tree_entry *tree_store_start_check     (char *path);
+tree_entry *tree_store_start_check_cwd (void);
+void        tree_store_mark_checked    (const char *subname);
+void        tree_store_end_check       (void);
+tree_entry *tree_store_whereis         (char *name);
+tree_entry *tree_store_rescan          (char *dir);
 
 typedef void (*tree_store_remove_fn)(tree_entry *tree, void *data);
 void        tree_store_add_entry_remove_hook (tree_store_remove_fn callback, void *data);

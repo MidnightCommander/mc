@@ -7,4 +7,6 @@ void load_panelize (void);
 void save_panelize (void);
 void done_panelize (void);
 
+void do_external_panelize (char *command);
+
 #endif

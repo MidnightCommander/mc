@@ -51,7 +51,7 @@
 #endif
 #include "util.h"
 #include "dialog.h"
-#include "background.h"
+#include "fileopctx.h"
 #include "mad.h"
 #include "key.h"	/* For add_select_channel(), delete_select_channel() */
 #include "regex.h"
@@ -60,10 +60,6 @@
 
 /* If true, this is a background process */
 int we_are_background = 0;
-
-/* Ugh, ugly hack */
-extern int do_append;
-extern int recursive_result;
 
 #ifdef WITH_BACKGROUND
 /* If set background tasks wait to be attached */
@@ -80,9 +76,11 @@ static int parent_fd;
 #define mymsg "Desde el hijo\n\r"
 
 struct TaskList *task_list = NULL;
+
+static int background_attention (int fd, void *closure);
     
-void
-register_task_running (pid_t pid, int fd, char *info)
+static void
+register_task_running (FileOpContext *ctx, pid_t pid, int fd, char *info)
 {
     TaskList *new;
 
@@ -94,7 +92,7 @@ register_task_running (pid_t pid, int fd, char *info)
     new->fd    = fd;
     task_list  = new;
 
-    add_select_channel (fd, background_attention, (void *) pid);
+    add_select_channel (fd, background_attention, ctx);
 }
 
 void
@@ -128,23 +126,23 @@ unregister_task_running (pid_t pid, int fd)
  * -1 on failure
  */
 int
-do_background (char *info)
+do_background (FileOpContext *ctx, char *info)
 {
     int comm [2];		/* control connection stream */
     int pid;
-    
+
     if (socketpair (AF_UNIX, SOCK_STREAM, 0, comm) == -1)
 	return -1;
-    
+
     if ((pid = fork ()) == -1)
 	return -1;
-    
+
     if (pid == 0){
 	int nullfd;
 
 	parent_fd = comm [1];
 	we_are_background = 1;
-	
+
 	/* Make stdin/stdout/stderr point somewhere */
 	close (0);
 	close (1);
@@ -159,7 +157,7 @@ do_background (char *info)
 	/* To make it obvious if it fails, there is a bug report on this */
 	write (2, mymsg, sizeof (mymsg));
 	write (1, mymsg, sizeof (mymsg));
-	
+
 	/* Just for debugging the background back end */
 	if (background_wait){
 	    volatile int i = 1;
@@ -170,7 +168,8 @@ do_background (char *info)
 	return 0;
     } else {
 	close (comm [1]);
-	register_task_running (pid, comm [0], info);
+	ctx->pid = pid;
+	register_task_running (ctx, pid, comm [0], info);
 	return 1;
     }
 }
@@ -273,36 +272,39 @@ real_message_3s (enum OperationMode mode, int *flags, char *title, char *str1, c
  * specified routine 
  */
 
-int
-background_attention (int fd, void *xpid)
+static int
+background_attention (int fd, void *closure)
 {
+    FileOpContext *ctx;
+    int have_ctx;
     void *routine;
     int  argc, i, result, status;
     char *data [MAXCALLARGS];
     char *resstr;
-    pid_t  pid = (pid_t) xpid;
     int bytes;
     enum ReturnType type;
     char *background_process_error = _(" Background process error ");
-    
+
+    ctx = closure;
+
     bytes = read (fd, &routine, sizeof (routine));
     if (bytes < (sizeof (routine))){
 	if (errno == ECHILD)
 	    message (1, background_process_error, _(" Child died unexpectedly "));
 	else
 	    message (1, background_process_error, _(" Unknown error in child "));
-	unregister_task_running (pid, fd);
-	waitpid (pid, &status, 0);
+	unregister_task_running (ctx->pid, fd);
+	waitpid (ctx->pid, &status, 0);
 	return 0;
     }
 
     /* If the routine is zero, then the child is telling us that he is dying */
     if ((int) routine == MSG_CHILD_EXITING){
-	unregister_task_running (pid, fd);
-	waitpid (pid, &status, 0);
+	unregister_task_running (ctx->pid, fd);
+	waitpid (ctx->pid, &status, 0);
 	return 0;
     }
-    
+
     read (fd, &argc, sizeof (argc));
     if (argc > MAXCALLARGS){
 	message (1, _(" Background protocol error "),
@@ -310,42 +312,64 @@ background_attention (int fd, void *xpid)
 		 " than we can handle. \n"));
     }
     read (fd, &type, sizeof (type));
-    
+    read (fd, &have_ctx, sizeof (have_ctx));
+    if (have_ctx)
+	    read (fd, ctx, sizeof (FileOpContext));
+
     for (i = 0; i < argc; i++){
 	int size;
-	
+
 	read (fd, &size, sizeof (size));
 	data [i] = xmalloc (size+1, "RPC Arguments");
 	read (fd, data [i], size);
-	
+
 	data [i][size] = 0;	/* NULL terminate the blocks (they could be strings) */
     }
 
     /* Handle the call */
     if (type == Return_Integer){
-	switch (argc){
-	case 1:
-	    result = (*(int (*)(int, char *))routine)(Background, data [0]);
-	    break;
-	case 2:
-	    result = (*(int (*)(int, char *, char *))routine)
-		(Background, data [0], data [1]);
-	    break;
-	case 3:
-	    result = (*(int (*)(int, char *, char *, char *))routine)
-		(Background, data [0], data [1], data [2]);
-	    break;
-	case 4:
-	    result = (*(int (*)(int, char *, char *, char *, char *))routine)
-		(Background, data [0], data [1], data [2], data [3]);
-	    break;
-	}
-	
+	if (have_ctx)
+	    switch (argc){
+	    case 1:
+		result = (*(int (*)(int, char *))routine)(Background, data [0]);
+		break;
+	    case 2:
+		result = (*(int (*)(int, char *, char *))routine)
+		    (Background, data [0], data [1]);
+		break;
+	    case 3:
+		result = (*(int (*)(int, char *, char *, char *))routine)
+		    (Background, data [0], data [1], data [2]);
+		break;
+	    case 4:
+		result = (*(int (*)(int, char *, char *, char *, char *))routine)
+		    (Background, data [0], data [1], data [2], data [3]);
+		break;
+	    }
+	else
+	    switch (argc){
+	    case 1:
+		result = (*(int (*)(FileOpContext *, int, char *))routine)
+		    (ctx, Background, data [0]);
+		break;
+	    case 2:
+		result = (*(int (*)(FileOpContext *, int, char *, char *))routine)
+		    (ctx, Background, data [0], data [1]);
+		break;
+	    case 3:
+		result = (*(int (*)(FileOpContext *, int, char *, char *, char *))routine)
+		    (ctx, Background, data [0], data [1], data [2]);
+		break;
+	    case 4:
+		result = (*(int (*)(FileOpContext *, int, char *, char *, char *, char *))routine)
+		    (ctx, Background, data [0], data [1], data [2], data [3]);
+		break;
+	    }
+
 	/* Send the result code and the value for shared variables */
-	write (fd, &result,                  sizeof (int));
-	write (fd, &file_progress_do_append, sizeof (file_progress_do_append));
-	write (fd, &file_progress_recursive_result, sizeof (file_progress_recursive_result));
-	
+	write (fd, &result, sizeof (int));
+	if (have_ctx)
+	    write (fd, ctx, sizeof (FileOpContext));
     } else if (type == Return_String) {
 	int len;
 
@@ -396,23 +420,36 @@ background_attention (int fd, void *xpid)
 /* }}} */
 
 /* {{{ client RPC routines */
+
+/* Sends the header for a call to a routine in the parent process.  If the file
+ * operation context is not NULL, then it requests that the first parameter of
+ * the call be a file operation context.
+ */
 static void
-parent_call_header (void *routine, int argc, enum ReturnType type)
+parent_call_header (void *routine, int argc, enum ReturnType type, FileOpContext *ctx)
 {
+    int have_ctx;
+
+    have_ctx = (ctx != NULL);
+
     write (parent_fd, &routine, sizeof (routine));
     write (parent_fd, &argc, sizeof (int));
     write (parent_fd, &type, sizeof (type));
+    write (parent_fd, &have_ctx, sizeof (have_ctx));
+
+    if (have_ctx)
+	write (parent_fd, ctx, sizeof (FileOpContext));
 }
 
 int
-parent_call (void *routine, int argc, ...)
+parent_call (void *routine, FileOpContext *ctx, int argc, ...)
 {
     va_list ap;
     int i;
-    
+
     va_start (ap, argc);
-    parent_call_header (routine, argc, Return_Integer);
-    for (i = 0; i < argc; i++){
+    parent_call_header (routine, argc, Return_Integer, ctx);
+    for (i = 0; i < argc; i++) {
 	int  len;
 	void *value;
 
@@ -421,12 +458,10 @@ parent_call (void *routine, int argc, ...)
 	write (parent_fd, &len, sizeof (int));
 	write (parent_fd, value, len);
     }
-    /* Besides the regular result, get the value for 
-     * variables that may be modified in the parent that affect our behaviour
-     */
-    read (parent_fd, &i,         sizeof (int));
-    read (parent_fd, &file_progress_do_append, sizeof (file_progress_do_append));
-    read (parent_fd, &file_progress_recursive_result, sizeof (file_progress_recursive_result));
+    read (parent_fd, &i, sizeof (int));
+    if (ctx)
+	read (parent_fd, ctx, sizeof (FileOpContext));
+
     return i;
 }
 
@@ -438,7 +473,7 @@ parent_call_string (void *routine, int argc, ...)
     int i;
     
     va_start (ap, argc);
-    parent_call_header (routine, argc, Return_String);
+    parent_call_header (routine, argc, Return_String, NULL);
     for (i = 0; i < argc; i++){
 	int  len;
 	void *value;
@@ -448,7 +483,7 @@ parent_call_string (void *routine, int argc, ...)
 	write (parent_fd, &len, sizeof (int));
 	write (parent_fd, value, len);
     }
-    read (parent_fd, &i,         sizeof (int));
+    read (parent_fd, &i, sizeof (int));
     if (!i)
 	return NULL;
     str = xmalloc (i + 1, "parent_return");
@@ -463,21 +498,12 @@ tell_parent (int msg)
     write (parent_fd, &msg, sizeof (int));
 }
 
-int
-call_1s (int (*routine)(enum OperationMode, char *), char *str)
-{
-    if (we_are_background)
-	return parent_call ((void *)routine, 1, strlen (str), str);
-    else 
-	return (*routine)(Foreground, str);
-}
-
 void
 message_1s (int flags, char *title, char *str1)
 {
     if (we_are_background)
-	parent_call ((void *)real_message_1s, 3, sizeof (flags), &flags,
-		    strlen (title), title, strlen (str1), str1);
+	parent_call ((void *)real_message_1s, NULL, 3, sizeof (flags), &flags,
+		     strlen (title), title, strlen (str1), str1);
     else
 	real_message_1s (Foreground, &flags, title, str1);
 }
@@ -486,7 +512,7 @@ void
 message_2s (int flags, char *title, char *str1, char *str2)
 {
     if (we_are_background)
-	parent_call ((void *)real_message_2s, 4, sizeof (flags), &flags,
+	parent_call ((void *)real_message_2s, NULL, 4, sizeof (flags), &flags,
 		     strlen (title), title, strlen (str1), str1,
 	             strlen (str2), str2);
     else
@@ -497,7 +523,7 @@ void
 message_3s (int flags, char *title, char *str1, char *str2, const char *str3)
 {
     if (we_are_background)
-	parent_call ((void *)real_message_3s, 3, sizeof (flags), &flags,
+	parent_call ((void *)real_message_3s, NULL, 3, sizeof (flags), &flags,
 		     strlen (title), title, strlen (str1), str1,
 	             strlen (str2), str2, strlen (str3), str3);
     else

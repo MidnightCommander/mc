@@ -10,6 +10,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include "file.h"
+#include "fileopctx.h"
 #include "main.h"
 #include "panel.h"
 #include "gscreen.h"
@@ -121,17 +122,11 @@ perform_action_on_panel (WPanel *source_panel, GdkDragAction action, char *destd
 {
 	switch (action) {
 	case GDK_ACTION_COPY:
-		if (ask)
-			panel_operate (source_panel, OP_COPY, destdir);
-		else
-			panel_operate_def (source_panel, OP_COPY, destdir);
+		panel_operate (source_panel, OP_COPY, destdir, ask);
 		break;
 
 	case GDK_ACTION_MOVE:
-		if (ask)
-			panel_operate (source_panel, OP_MOVE, destdir);
-		else
-			panel_operate_def (source_panel, OP_MOVE, destdir);
+		panel_operate (source_panel, OP_MOVE, destdir, ask);
 		break;
 
 	default:
@@ -180,21 +175,22 @@ perform_action (GList *names, GdkDragAction action, char *destdir)
 	char *name;
 	char *dest_name;
 	int result;
+	FileOpContext *ctx;
+
+	ctx = file_op_context_new ();
 
 	switch (action) {
 	case GDK_ACTION_COPY:
-		create_op_win (OP_COPY, FALSE);
+		file_op_context_create_ui (ctx, OP_COPY, FALSE);
 		break;
 
 	case GDK_ACTION_MOVE:
-		create_op_win (OP_MOVE, FALSE);
+		file_op_context_create_ui (ctx, OP_MOVE, FALSE);
 		break;
 
 	default:
 		g_assert_not_reached ();
 	}
-
-	file_mask_defaults ();
 
 	for (; names; names = names->next) {
 		name = names->data;
@@ -216,25 +212,25 @@ perform_action (GList *names, GdkDragAction action, char *destdir)
 					
 				if (S_ISDIR (s.st_mode)) {
 					if (action == GDK_ACTION_COPY)
-						copy_dir_dir (
-							name, dest_name,
-							TRUE, FALSE,
-							FALSE, FALSE,
-							&count, &bytes);
+						copy_dir_dir (ctx,
+							      name, dest_name,
+							      TRUE, FALSE,
+							      FALSE, FALSE,
+							      &count, &bytes);
 					else
-						move_dir_dir (
-							name, dest_name,
-							&count, &bytes);
+						move_dir_dir (ctx,
+							      name, dest_name,
+							      &count, &bytes);
 				} else {
 					if (action == GDK_ACTION_COPY)
-						copy_file_file (
-							name, dest_name,
-							TRUE,
-							&count, &bytes, 1);
+						copy_file_file (ctx,
+								name, dest_name,
+								TRUE,
+								&count, &bytes, 1);
 					else
-						move_file_file (
-							name, dest_name,
-							&count, &bytes);
+						move_file_file (ctx,
+								name, dest_name,
+								&count, &bytes);
 				}
 			}
 		} while (result != 0);
@@ -243,7 +239,7 @@ perform_action (GList *names, GdkDragAction action, char *destdir)
 		break;
 	}
 
-	destroy_op_win ();
+	file_op_context_destroy (ctx);
 }
 
 /**
@@ -285,7 +281,8 @@ gdnd_drop_on_directory (GdkDragContext *context, GtkSelectionData *selection_dat
 	/* Symlinks do not use file.c */
 
 	if (source_panel && action != GDK_ACTION_LINK)
-		perform_action_on_panel (source_panel, action, destdir, context->suggested_action == GDK_ACTION_ASK);
+		perform_action_on_panel (source_panel, action, destdir,
+					 context->suggested_action == GDK_ACTION_ASK);
 	else {
 		names = gnome_uri_list_extract_uris (selection_data->data);
 

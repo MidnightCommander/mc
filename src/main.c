@@ -2811,7 +2811,7 @@ compatibility_move_mc_files (void)
 #endif
 
 void
-mc_tree_store_load ()
+mc_tree_store_load (void)
 {
 	char *tree_file;
 	
@@ -2822,7 +2822,7 @@ mc_tree_store_load ()
 }
 
 void
-mc_tree_store_save ()
+mc_tree_store_save (void)
 {
 	char *tree_file;
 

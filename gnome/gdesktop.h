@@ -23,8 +23,6 @@ extern int desktop_use_shaped_icons;	/* Whether to use shaped icons or not (for 
 extern int desktop_auto_placement;	/* Whether to auto-place icons or not (user placement) */
 extern int desktop_snap_icons;		/* Whether to snap icons to the grid or not */
 
-extern int want_transparent_icons;
-extern int want_transparent_text;
 
 /* Initializes the desktop -- init DnD, load the default desktop icons, etc. */
 void desktop_init (void);

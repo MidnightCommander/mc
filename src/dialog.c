@@ -33,7 +33,7 @@
 #include "main.h"
 #include "key.h"		/* For mi_getch() */
 #include "dlg.h"		/* draw_box, yes I know, it's silly */
-#include "background.h"		/* we_are_background definition */
+#include "fileopctx.h"
 
 /* "$Id$" */
 

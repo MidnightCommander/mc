@@ -1,8 +1,8 @@
 [Desktop Entry]
-Name=Gnumeric Spread Sheet
-Comment=Create a new Spread Sheet with Gnumeric
-TryExec=gnumeric
-Exec=gnumeric
+Name=Image
+Comment=Create a new Image
+TryExec=gimp
+Exec=gimp
 Icon=gnome-gimp.png
 Terminal=0
 Type=Application

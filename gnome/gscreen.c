@@ -2259,26 +2259,26 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_toolbar_append_space (GTK_TOOLBAR (status_line));
 	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
 				   panel->back_b,
-				   "Go to the previous directory.", NULL);
+				   "Go to the previous directory", NULL);
 	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
 				   panel->up_b,
-				   "Go up a level in the directory heirarchy.", NULL);
+				   "Go up a level in the directory heirarchy", NULL);
 	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
 				   panel->fwd_b,
-				   "Go to the next directory.", NULL);
+				   "Go to the next directory", NULL);
 	gtk_toolbar_append_space (GTK_TOOLBAR (status_line));
 	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
 				   button_switch_to_icon (panel),
-				   "Icon view.", NULL);
+				   "Icon view", NULL);
 	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
 				   button_switch_to_brief_listing (panel),
-				   "Brief view.", NULL);
+				   "Brief view", NULL);
 	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
 				   button_switch_to_full_listing (panel),
-				   "Detailed view.", NULL);
+				   "Detailed view", NULL);
 	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
 				   button_switch_to_custom_listing (panel),
-				   "Custom view.", NULL);
+				   "Custom view", NULL);
 	dock =  gnome_dock_item_new ("gmc-toolbar", GNOME_DOCK_ITEM_BEH_EXCLUSIVE | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
 	gtk_container_add (GTK_CONTAINER(dock),status_line);
 	gnome_dock_add_item (GNOME_DOCK(GNOME_APP (panel->xwindow)->dock),

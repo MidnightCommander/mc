@@ -77,7 +77,9 @@ int quote = 0;
 static int
 button_callback (Dlg_head *h, WButton *b, int Msg, int Par)
 {
+#ifndef HAVE_X
     char *txt, buf[256];
+#endif
     int stop = 0;
     int off = 0;
     
@@ -285,7 +287,9 @@ static int radio_event (Gpm_Event *event, WRadio *r);
 static int
 radio_callback (Dlg_head *h, WRadio *r, int Msg, int Par)
 {
+#ifndef HAVE_X
     int i;
+#endif
     
     switch (Msg) {
     case WIDGET_INIT:
@@ -812,8 +816,10 @@ void
 update_input (WInput *in, int clear_first)
 {
     int has_history = 0;
+#ifndef HAVE_X
     int    i, j;
     unsigned char   c;
+#endif
     int    buf_len = strlen (in->buffer);
 
     if (should_show_history_button (in))

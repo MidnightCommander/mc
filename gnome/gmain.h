@@ -3,6 +3,7 @@
 #include "dlg.h"
 #include "panel.h"
 #include "widget.h"
+#include "info.h"
 
 int xtoolkit_init (int *argc, char *argv []);
 void xtoolkit_end (void);
@@ -34,6 +35,11 @@ void bind_gtk_keys (GtkWidget *w, Dlg_head *h);
 WPanel *new_panel_at (char *dir);
 WPanel *new_panel_with_geometry_at (char *dir, char *geometry);
 void layout_panel_gone (WPanel *panel);
+void gtkrundlg_event (Dlg_head *h);
+int gmc_open (file_entry *fe);
+int gmc_view (char *filename, int start_line);
+void x_show_info (WInfo *info, struct my_statfs *s, struct stat *b);
+void x_create_info (Dlg_head *h, widget_data parent, WInfo *info);
 
 struct gmc_color_pairs_s {
 	GdkColor *fore, *back;

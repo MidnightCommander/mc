@@ -1,9 +1,27 @@
+1999-01-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* treestore.c (tree_store_load): Use g_return_val_if_fail(), not
+	g_return_if_fail().
+	(tree_store_rescan): Added parentheses to clarify || and &&.
+
+	* tree.c (tree_add_entry): Removed unused variable.
+
+	* treestore.h: Added prototype for tree_store_start_check_cwd().
+
 1999-01-13  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* view.c (search): Missing condition.
 
 	* treestore.c (tree_store_opendir): Simplistic fix.  This is not
 	quite correct.
+
+1999-01-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* panelize.h: Added prototype for do_external_panelize().
+
+	* screen.c (move_selection): Unused variable fixes for HAVE_X.
+
+	* boxes.c (configure_vfs): Removed an unused variable.
 
 1999-01-12  Jonathan Blandford  <jrb@redhat.com>
 
@@ -18,6 +36,21 @@ Tue Jan 12 13:40:46 1999  Timur Bakeyev <mc@bat.ru>
 
 	* treestore.c (tree_store_save): Add signature for version 2.0 of
 	the file format.
+
+1999-01-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* file.c (do_file_error): Made static.
+	(query_recursive): Have cases for background/foreground operation.
+	(do_file_error): Likewise.
+
+	* background.c: Removed the bg_ctx global, since now all the
+	contexts are carried around by the functions that actually need
+	them.
+
+	* fileopctx.h (FileOpContext): Moved the op_preserve field to here.
+
+	* filegui.c (file_mask_dialog): Removed the ui assertion, since
+	now the op_preserve field is kept in the main context structure.
 
 1999-01-11  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -56,6 +89,59 @@ Sun Jan 10 02:18:33 1999  Timur Bakeyev <mc@bat.ru>
 
 	* file.c (panel_operate_flags): Only show this dialog box if it is
 	a copy or move operation
+
+1999-01-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* background.c (do_background): Make it a bit saner.  Now we store
+	a per-child-process FileOpContext structure.
+
+	* fileopctx.h: New file with declarations for the file operation
+	context structure.
+
+	* fileopctx.c (file_op_context_new): New function to create a file
+	operation context with the default file mask values.
+	(file_op_context_destroy): New function to destroy a file
+	operation context and its associated UI, if appropriate.
+
+	* filegui.h: Use complete prototype for fmd_init_i18n().
+
+	* filegui.c (FileOpContextUI): New structure that describes the UI
+	and internal data for file operation contexts in the text mode
+	version.
+	(file_op_context_create_ui): Renamed from create_op_win() and
+	made it use a context instead of global variables.
+	(file_op_context_destroy_ui): Likewise, renamed from
+	destroy_op_win().
+	(fmd_widgets): Removed an #ifdef HAVE_XVIEW bit and moved the
+	initialization of the result pointers to file_mask_dialog(), as we
+	need to use the pointers to the fields inside the file op context now.
+	Made all the functions use a file operation context.
+	(file_mask_dialog): Always call fmd_init_i18n(); it will take care
+	of idempotence by itself.
+	(fmd_init_i18n): Now the code that makes sure this function is
+	only called once is here.
+
+	* cmd.c (check_for_default): Make it use a file operation context.
+	* tree.c (tree_copy): Likewise.
+	(tree_move): Likewise.
+	(tree_rmdir_cmd): Likewise.
+
+	* file.c: Removed file_progress_replace_progress and
+	file_progress_replace_filename -- they are only used in filegui.c
+	as part of the UI for the file operation context.
+	(panel_operate_generate_prompt): Made static.
+	(panel_operate_generate_prompt): Always call fmd_init_i18n(); it
+	will take care of idempotence by itself.
+	(panel_operate): Removed the panel_operate_def() function, and
+	made panel_operate() take an extra "ask_user" argument.
+	(query_recursive): Made static.
+
+	* background.c (background_attention): Made static.
+	(register_task_running): Made static.
+	(do_background): Now takes a file operation context as an
+	argument.  It stores the pid of the child there.
+
+	* Makefile.in: Added fileopctx.[ch].
 
 1999-01-06  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 

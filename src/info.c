@@ -35,6 +35,7 @@
 #include "win.h"		/* print_bytesize */
 #include "layout.h"
 #include "key.h"		/* is_idle() */
+#include "x.h"
 
 #ifdef HAVE_TK
 #   include "tkmain.h"

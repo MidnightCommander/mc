@@ -34,7 +34,9 @@
 #include "dialog.h"
 #define DIR_H_INCLUDE_HANDLE_DIRENT /* bleah */
 #include "dir.h"
+#include "ext.h"
 #include "file.h"
+#include "fileopctx.h"
 #include "gconf.h"
 #include "gdesktop.h"
 #include "gdesktop-icon.h"
@@ -735,28 +737,32 @@ desktop_icon_info_delete (DesktopIconInfo *dii)
 {
 	char *full_name;
 	struct stat s;
+	FileOpContext *ctx;
 	long progress_count = 0;
 	double progress_bytes = 0;
 
 	/* 1. Delete the file */
-	create_op_win (OP_DELETE, 1);
+	ctx = file_op_context_new ();
+	file_op_context_create_ui (ctx, OP_DELETE, TRUE);
 	x_flush_events ();
 	
 	full_name = g_concat_dir_and_file (desktop_directory, dii->filename);
-	if (lstat (full_name, &s) != -1){
+
+	if (lstat (full_name, &s) != -1) {
 		if (S_ISLNK (s.st_mode))
-			erase_file (full_name, &progress_count, &progress_bytes, TRUE);
+			erase_file (ctx, full_name, &progress_count, &progress_bytes, TRUE);
 		else {
 			if (S_ISDIR (s.st_mode))
-				erase_dir (full_name, &progress_count, &progress_bytes);
+				erase_dir (ctx, full_name, &progress_count, &progress_bytes);
 			else
-				erase_file (full_name, &progress_count, &progress_bytes, TRUE);
-			
-		    }
+				erase_file (ctx, full_name, &progress_count, &progress_bytes, TRUE);
+		}
+
 		gmeta_del_icon_pos (full_name);
 	}
+
 	g_free (full_name);
-	destroy_op_win ();
+	file_op_context_destroy (ctx);
 
 	/* 2. Destroy the dicon */
 	desktop_icon_info_destroy (dii);

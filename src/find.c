@@ -145,7 +145,9 @@ static int
 find_parameters (char **start_dir, char **pattern, char **content)
 {
     int return_value;
+#ifndef HAVE_GNOME
     char *temp_dir;
+#endif
     static char *in_contents = NULL;
     static char *in_start_dir = NULL;
     static char *in_start_name = NULL;
@@ -481,7 +483,9 @@ do_search (struct Dlg_head *h)
     static DIR  *dirp = 0;
     static char directory [MC_MAXPATHLEN+2];
     struct stat tmp_stat;
+#ifndef HAVE_X
     static int pos;
+#endif
     static int subdirs_left = 0;
     char *tmp_name;		/* For bulding file names */
 
@@ -493,8 +497,9 @@ do_search (struct Dlg_head *h)
         dp = 0;
 	return;
     }
-
+#ifndef HAVE_X
  do_search_begin:
+#endif
     while (!dp){
 	
 	if (dirp){
