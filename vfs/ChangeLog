@@ -1,3 +1,14 @@
+2005-01-24  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* samba/param/loadparm.c (print_parameter): Remove.
+	(is_default): Remove.
+	(dump_globals): Remove.
+	(dump_a_service): Remove.
+	(lp_dump): Remove.
+	(lp_dump_one): Remove.
+	(lp_remove_service): Remove.
+	(lp_copy_service): Remove.
+
 2005-01-20  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* Makefile.am (SAMBA_DIST): Remove lib/genrand.c and lib/util_unistr.c.
@@ -16,7 +27,7 @@
 	(remote_proto, remote_arch): Make static const char * instead of
 	fstring.
 	(local_machine, remote_machine): Ditto.
-	(interpret_long_filename): Fix 
+	* samba/libsmb/clientgen.c (interpret_long_filename): Fix 
 	def_finfo declaration.
 
 2005-01-19  Andrew V. Samoilov  <sav@bcs.zp.ua>

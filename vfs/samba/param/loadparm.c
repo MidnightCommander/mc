@@ -1138,10 +1138,6 @@ FN_GLOBAL_STRING(lp_username_map,&Globals.szUsernameMap)
 #ifdef USING_GROUPNAME_MAP
 FN_GLOBAL_STRING(lp_groupname_map,&Globals.szGroupnameMap)
 #endif /* USING_GROUPNAME_MAP */
-FN_GLOBAL_STRING(lp_logon_script,&Globals.szLogonScript) 
-FN_GLOBAL_STRING(lp_logon_path,&Globals.szLogonPath) 
-FN_GLOBAL_STRING(lp_logon_drive,&Globals.szLogonDrive) 
-FN_GLOBAL_STRING(lp_logon_home,&Globals.szLogonHome) 
 FN_GLOBAL_STRING(lp_remote_announce,&Globals.szRemoteAnnounce) 
 FN_GLOBAL_STRING(lp_remote_browse_sync,&Globals.szRemoteBrowseSync) 
 FN_GLOBAL_STRING(lp_wins_server,&Globals.szWINSserver)
@@ -1152,10 +1148,6 @@ static FN_GLOBAL_STRING(lp_announce_version,&Globals.szAnnounceVersion)
 FN_GLOBAL_STRING(lp_netbios_aliases,&Globals.szNetbiosAliases)
 FN_GLOBAL_STRING(lp_driverfile,&Globals.szDriverFile)
 FN_GLOBAL_STRING(lp_panic_action,&Globals.szPanicAction)
-#if 0
-FN_GLOBAL_STRING(lp_adduser_script,&Globals.szAddUserScript)
-FN_GLOBAL_STRING(lp_deluser_script,&Globals.szDelUserScript)
-#endif
 FN_GLOBAL_STRING(lp_domain_groups,&Globals.szDomainGroups)
 FN_GLOBAL_STRING(lp_domain_admin_group,&Globals.szDomainAdminGroup)
 FN_GLOBAL_STRING(lp_domain_guest_group,&Globals.szDomainGuestGroup)
@@ -1511,41 +1503,6 @@ static BOOL lp_add_ipc(void)
   return(True);
 }
 
-#if 0
-/***************************************************************************
-add a new printer service, with defaults coming from service iFrom
-***************************************************************************/
-BOOL lp_add_printer(char *pszPrintername, int iDefaultService)
-{
-  char *comment = "From Printcap";
-  int i = add_a_service(pSERVICE(iDefaultService),pszPrintername);
-  
-  if (i < 0)
-    return(False);
-  
-  /* note that we do NOT default the availability flag to True - */
-  /* we take it from the default service passed. This allows all */
-  /* dynamic printers to be disabled by disabling the [printers] */
-  /* entry (if/when the 'available' keyword is implemented!).    */
-  
-  /* the printer name is set to the service name. */
-  string_set(&iSERVICE(i).szPrintername,pszPrintername);
-  string_set(&iSERVICE(i).comment,comment);
-  iSERVICE(i).bBrowseable = sDefault.bBrowseable;
-  /* Printers cannot be read_only. */
-  iSERVICE(i).bRead_only = False;
-  /* No share modes on printer services. */
-  iSERVICE(i).bShareModes = False;
-  /* No oplocks on printer services. */
-  iSERVICE(i).bOpLocks = False;
-  /* Printer services must be printable. */
-  iSERVICE(i).bPrint_ok = True;
-  
-  DEBUG(3,("adding printer service %s\n",pszPrintername));
-  
-  return(True);
-}
-#endif /* 0 */
 
 /***************************************************************************
 Do a case-insensitive, whitespace-ignoring string compare.
@@ -2078,59 +2035,6 @@ static BOOL do_parameter( char *pszParmName, char *pszParmValue )
 
 
 /***************************************************************************
-print a parameter of the specified type
-***************************************************************************/
-static void print_parameter(struct parm_struct *p,void *ptr, FILE *f)
-{
-	int i;
-	switch (p->type) {
-	case P_ENUM:
-		for (i=0;p->enum_list[i].name;i++) {
-			if (*(int *)ptr == p->enum_list[i].value) {
-				fprintf(f,"%s",p->enum_list[i].name);
-				break;
-			}
-		}
-		break;
-
-	case P_BOOL:
-		fprintf(f,"%s",BOOLSTR(*(BOOL *)ptr));
-		break;
-      
-	case P_BOOLREV:
-		fprintf(f,"%s",BOOLSTR(! *(BOOL *)ptr));
-		break;
-      
-	case P_INTEGER:
-		fprintf(f,"%d",*(int *)ptr);
-		break;
-      
-	case P_CHAR:
-		fprintf(f,"%c",*(char *)ptr);
-		break;
-      
-	case P_OCTAL:
-		fprintf(f,"0%o",*(int *)ptr);
-		break;
-      
-	case P_GSTRING:
-	case P_UGSTRING:
-		if ((char *)ptr)
-			fprintf(f,"%s",(char *)ptr);
-		break;
-		
-	case P_STRING:
-	case P_USTRING:
-		if (*(char **)ptr)
-			fprintf(f,"%s",*(char **)ptr);
-		break;
-	case P_SEP:
-		break;
-	}
-}
-
-
-/***************************************************************************
 check if two parameters are equal
 ***************************************************************************/
 static BOOL equal_parameter(parm_type type,void *ptr1,void *ptr2)
@@ -2224,54 +2128,6 @@ static BOOL do_section(char *pszSectionName)
 
 
 /***************************************************************************
-determine if a partcular base parameter is currently set to the default value.
-***************************************************************************/
-static BOOL is_default(int i)
-{
-	if (!defaults_saved) return False;
-	switch (parm_table[i].type) {
-	case P_STRING:
-	case P_USTRING:
-		return strequal(parm_table[i].def.svalue,*(char **)parm_table[i].ptr);
-	case P_GSTRING:
-	case P_UGSTRING:
-		return strequal(parm_table[i].def.svalue,(char *)parm_table[i].ptr);
-	case P_BOOL:
-	case P_BOOLREV:
-		return parm_table[i].def.bvalue == *(BOOL *)parm_table[i].ptr;
-	case P_CHAR:
-		return parm_table[i].def.cvalue == *(char *)parm_table[i].ptr;
-	case P_INTEGER:
-	case P_OCTAL:
-	case P_ENUM:
-		return parm_table[i].def.ivalue == *(int *)parm_table[i].ptr;
-	case P_SEP:
-		break;
-	}
-	return False;
-}
-
-
-/***************************************************************************
-Display the contents of the global structure.
-***************************************************************************/
-static void dump_globals(FILE *f)
-{
-	int i;
-	fprintf(f, "# Global parameters\n[global]\n");
-	
-	for (i=0;parm_table[i].label;i++)
-		if (parm_table[i].class == P_GLOBAL &&
-		    parm_table[i].ptr &&
-		    (i == 0 || (parm_table[i].ptr != parm_table[i-1].ptr))) {
-			if (defaults_saved && is_default(i)) continue;
-			fprintf(f,"\t%s = ",parm_table[i].label);
-			print_parameter(&parm_table[i],parm_table[i].ptr, f);
-			fprintf(f,"\n");
-		}
-}
-
-/***************************************************************************
 return True if a local parameter is currently set to the global default
 ***************************************************************************/
 BOOL lp_is_default(int snum, struct parm_struct *parm)
@@ -2281,39 +2137,6 @@ BOOL lp_is_default(int snum, struct parm_struct *parm)
 	return equal_parameter(parm->type,
 			       ((char *)pSERVICE(snum)) + pdiff,
 			       ((char *)&sDefault) + pdiff);
-}
-
-
-/***************************************************************************
-Display the contents of a single services record.
-***************************************************************************/
-static void dump_a_service(service *pService, FILE *f)
-{
-	int i;
-	if (pService != &sDefault)
-		fprintf(f,"\n[%s]\n",pService->szService);
-
-	for (i=0;parm_table[i].label;i++)
-		if (parm_table[i].class == P_LOCAL &&
-		    parm_table[i].ptr && 
-		    (*parm_table[i].label != '-') &&
-		    (i == 0 || (parm_table[i].ptr != parm_table[i-1].ptr))) {
-			int pdiff = PTR_DIFF(parm_table[i].ptr,&sDefault);
-			
-			if (pService == &sDefault) {
-				if (defaults_saved && is_default(i)) continue;
-			} else {
-				if (equal_parameter(parm_table[i].type,
-						    ((char *)pService) + pdiff,
-						    ((char *)&sDefault) + pdiff)) 
-					continue;
-			}
-
-			fprintf(f,"\t%s = ",parm_table[i].label);
-			print_parameter(&parm_table[i],
-					((char *)pService) + pdiff, f);
-			fprintf(f,"\n");
-		}
 }
 
 
@@ -2366,27 +2189,6 @@ struct parm_struct *lp_next_parameter(int snum, int *i, int allparameters)
 }
 
 
-#if 0
-/***************************************************************************
-Display the contents of a single copy structure.
-***************************************************************************/
-static void dump_copy_map(BOOL *pcopymap)
-{
-  int i;
-  if (!pcopymap) return;
-
-  printf("\n\tNon-Copied parameters:\n");
-
-  for (i=0;parm_table[i].label;i++)
-    if (parm_table[i].class == P_LOCAL &&
-	parm_table[i].ptr && !pcopymap[i] &&
-	(i == 0 || (parm_table[i].ptr != parm_table[i-1].ptr)))
-      {
-	printf("\t\t%s\n",parm_table[i].label);
-      }
-}
-#endif
-
 /***************************************************************************
 Return TRUE if the passed service number is within range.
 ***************************************************************************/
@@ -2423,22 +2225,8 @@ static void lp_add_auto_services(char *str)
 	}
 	free(s);
 }
-#if 0
-/***************************************************************************
-auto-load one printer
-***************************************************************************/
-void lp_add_one_printer(char *name,char *comment)
-{
-	int printers = lp_servicenumber(PRINTERS_NAME);
-	int i;
 
-	if (lp_servicenumber(name) < 0)  {
-		lp_add_printer(name,printers);
-		if ((i=lp_servicenumber(name)) >= 0)
-			string_set(&iSERVICE(i).comment,comment);
-	}
-}
-#endif /* 0 */
+
 /***************************************************************************
 have we loaded a services file yet?
 ***************************************************************************/
@@ -2567,44 +2355,13 @@ void lp_resetnumservices(void)
   iNumServices = 0;
 }
 
+
 /***************************************************************************
 return the max number of services
 ***************************************************************************/
 int lp_numservices(void)
 {
   return(iNumServices);
-}
-
-/***************************************************************************
-Display the contents of the services array in human-readable form.
-***************************************************************************/
-void lp_dump(FILE *f, BOOL show_defaults, int maxtoprint)
-{
-   int iService;
-
-   if (show_defaults) {
-	   defaults_saved = False;
-   }
-
-   dump_globals(f);
-   
-   dump_a_service(&sDefault, f);
-
-   for (iService = 0; iService < maxtoprint; iService++)
-     lp_dump_one(f, show_defaults, iService);
-}
-
-/***************************************************************************
-Display the contents of one service in human-readable form.
-***************************************************************************/
-void lp_dump_one(FILE *f, BOOL show_defaults, int snum)
-{
-   if (VALID(snum))
-     {
-       if (iSERVICE(snum).szService[0] == '\0')
-	 return;
-       dump_a_service(pSERVICE(snum), f);
-     }
 }
 
 
@@ -2656,29 +2413,6 @@ static void set_default_server_announce_type(void)
   else if(lp_announce_as() == ANNOUNCE_AS_WFW)
     default_server_announce |= SV_TYPE_WFW;
   default_server_announce |= (lp_time_server() ? SV_TYPE_TIME_SOURCE : 0);
-}
-
-
-/*******************************************************************
-remove a service
-********************************************************************/
-void lp_remove_service(int snum)
-{
-	pSERVICE(snum)->valid = False;
-}
-
-/*******************************************************************
-copy a service
-********************************************************************/
-void lp_copy_service(int snum, char *new_name)
-{
-	char *oldname = lp_servicename(snum);
-	do_section(new_name);
-	if (snum >= 0) {
-		snum = lp_servicenumber(new_name);
-		if (snum >= 0)
-			lp_do_parameter(snum, "copy", oldname);
-	}
 }
 
 
@@ -2745,35 +2479,3 @@ void lp_set_name_resolve_order(char *new_order)
 { 
   Globals.szNameResolveOrder = new_order;
 }
-#if 0
-/***********************************************************
- Set the flag that says if kernel oplocks are available 
- (called by smbd).
-************************************************************/
-
-static BOOL kernel_oplocks_available = False;
-
-void lp_set_kernel_oplocks(BOOL val)
-{
-  /*
-   * Only set this to True if kernel
-   * oplocks are really available and were
-   * turned on in the smb.conf file.
-   */
-
-  if(Globals.bKernelOplocks && val)
-    kernel_oplocks_available = True;
-  else
-    kernel_oplocks_available = False;
-}
-
-/***********************************************************
- Return True if kernel oplocks are available and were turned
- on in smb.conf.
-************************************************************/
-
-BOOL lp_kernel_oplocks(void)
-{
-  return kernel_oplocks_available;
-}
-#endif
