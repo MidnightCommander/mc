@@ -1,5 +1,10 @@
 2001-05-29  Pavel Roskin  <proski@gnu.org>
 
+	* color.h: Define DEFAULT_COLOR_INDEX and DEFAULT_COLOR in the
+	same way regardless of HAVE_SLANG.
+	* color.c (init_colors) [USE_NCURSES]: Initialize the default
+	color pair.
+
 	* subshell.c (pty_open_master) [!HAVE_SCO && HAVE_GRANTPT]:
 	Don't try to close a file that wasn't opened.
 

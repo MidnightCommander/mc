@@ -293,15 +293,21 @@ void init_colors (void)
 	}
 #endif
 
+	if (use_colors) {
 #if defined HAVE_SLANG && !defined(HAS_DIRECT_COLOR_ACCESS)
-	if (use_colors) { /* We are relying on undocumented feature of
-			     S-Lang to make COLOR_PAIR(DEFAULT_COLOR_INDEX)
-			     the default fg/bg of the terminal.
-			     Hopefully, future versions of S-Lang will
-			     document this feature. */
+	    /*
+	     * We are relying on undocumented feature of
+	     * S-Lang to make COLOR_PAIR(DEFAULT_COLOR_INDEX)
+	     * the default fg/bg of the terminal.
+	     * Hopefully, future versions of S-Lang will
+	     * document this feature.
+	     */
 	    SLtt_set_color (DEFAULT_COLOR_INDEX, NULL, NULL, NULL);
+#elif USE_NCURSES
+	    /* Always white on black */
+	    init_pair(DEFAULT_COLOR_INDEX, COLOR_WHITE, COLOR_BLACK);
+#endif
 	}
-#endif	
 
 	for (i = 0; i < ELEMENTS (color_map); i++){
             if (!color_map [i].name)

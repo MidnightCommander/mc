@@ -77,13 +77,9 @@ extern int dialog_colors   [4];
 #define CORE_COLOR         (PORT_COLOR (MY_COLOR_PAIR (29),0))
 
 
-#ifdef HAVE_SLANG
 /* For the default color any unused index may be chosen. */
-#    define DEFAULT_COLOR_INDEX   30
-#    define DEFAULT_COLOR  (PORT_COLOR (MY_COLOR_PAIR(DEFAULT_COLOR_INDEX),0))
-#   else
-#     define DEFAULT_COLOR A_NORMAL
-#endif
+#define DEFAULT_COLOR_INDEX   30
+#define DEFAULT_COLOR  (PORT_COLOR (MY_COLOR_PAIR(DEFAULT_COLOR_INDEX),0))
 
 /*
  * editor colors - only 3 for normal, search->found, and select, respectively
