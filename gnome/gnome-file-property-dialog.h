@@ -75,10 +75,10 @@ struct _GnomeFilePropertyDialog
 	gchar *fm_view;
 	gchar *drop_target;
 	gchar *edit;
-	gchar *mime_fm_open;
-	gchar *mime_fm_view;
-	gchar *mime_drop_target;
-	gchar *mime_edit;
+	const gchar *mime_fm_open;
+	const gchar *mime_fm_view;
+	const gchar *mime_drop_target;
+	const gchar *mime_edit;
 	gchar *icon_filename;
 	gchar *desktop_url;
 	gchar *caption;

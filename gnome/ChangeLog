@@ -1,3 +1,18 @@
+1999-02-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gdialogs.c (file_mask_dialog): Renaming files was not working
+	due to having the "file-must-exist" bit turned on.
+
+	* gnome-file-property-dialog.c (apply_metadata_change): Metadata
+	rename the file.  
+
+	Change fpd->file_name to point to the new name so that any
+	metadat changes take effect on the new name, not the old name.
+
+	Test return value from move_file_file.
+	
+	(init_metadata): Fixed typo.
+
 1999-02-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* mc.metadata.in: Added a regexp for EPS files.

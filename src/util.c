@@ -23,7 +23,7 @@
 
 #include <config.h>
 #include <stdio.h>
-#if defined(__os2__)            /* OS/2 need io.h! .ado */
+#if defined(NEEDS_IO_H)            /* OS/2 need io.h! .ado */
 #    include <io.h>
 #endif
 #include <sys/types.h>
@@ -659,8 +659,12 @@ char *x_basename (char *s)
 void my_putenv (char *name, char *data)
 {
     char *full;
+    char *len = strlen (name) + strlen (data) + 2;
 
-    full = g_strdup_printf ("%s=%s", name, data);
+    full = malloc (len);
+    strcpy (full, name);
+    strcat (full, "=");
+    strcat (full, data);
     putenv (full);
 
     /* WARNING: NEVER FREE THE full VARIABLE!!!!!!!!!!!!!!!!!!!!!!!! */

@@ -16,12 +16,13 @@
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
-
+#include <config.h>
+#include "dir.h"
+#include "util.h"
 #include <gnome.h>
 #include <time.h>
 #include <string.h>
 #include "gnome-file-property-dialog.h"
-#include "dir.h"
 #include "gdesktop.h"
 #include <pwd.h>
 #include <grp.h>
@@ -32,7 +33,6 @@
 #include "../vfs/vfs.h"
 #include "gicon.h"
 #include "dialog.h"
-#include "util.h"
 
 static void gnome_file_property_dialog_init		(GnomeFilePropertyDialog	 *file_property_dialog);
 static void gnome_file_property_dialog_class_init	(GnomeFilePropertyDialogClass	 *klass);
@@ -980,7 +980,7 @@ init_metadata (GnomeFilePropertyDialog *fp_dlg)
 	if (!fp_dlg->mime_fm_view)
 		fp_dlg->mime_fm_view = gnome_mime_get_value (mime_type, "view");
 	fp_dlg->mime_edit = gnome_mime_get_value (mime_type, "edit");
-	fp_dlg->mime_edit = gnome_mime_get_value (mime_type, "drop-target");
+	fp_dlg->mime_drop_target = gnome_mime_get_value (mime_type, "drop-target");
 
 	gnome_metadata_get (fp_dlg->file_name, "icon-filename", &size, &fp_dlg->icon_filename);
 	if (fp_dlg->icon_filename)
@@ -1144,6 +1144,7 @@ apply_name_change (GnomeFilePropertyDialog *fpd)
 			return 0;
 		} else {
 			char *p;
+			int s;
 			
 			/* create the files. */
 			base_name = g_strdup (fpd->file_name);
@@ -1157,9 +1158,14 @@ apply_name_change (GnomeFilePropertyDialog *fpd)
 
 			ctx = file_op_context_new ();
 			file_op_context_create_ui (ctx, OP_MOVE, FALSE);
-			move_file_file (ctx, fpd->file_name, full_target, &count, &bytes);
+			s = move_file_file (ctx, fpd->file_name, full_target, &count, &bytes);
 			file_op_context_destroy (ctx);
-			g_free (full_target);
+
+			if (s == FILE_CONT){
+				g_free (fpd->file_name);
+				fpd->file_name = full_target;
+			} else
+				g_free (full_target);
 		}
 	}
 	return 1;
@@ -1169,6 +1175,7 @@ apply_metadata_change (GnomeFilePropertyDialog *fpd)
 {
 	gchar *text;
 	gchar *icon_name;
+	char *filename;
 
 	/* If we don't have an open_cbox, that means we have no metadata
 	 * to set.
@@ -1282,6 +1289,7 @@ gint
 gnome_file_property_dialog_make_changes (GnomeFilePropertyDialog *file_property_dialog)
 {
 	gint retval = 0;
+	
 	g_return_val_if_fail (file_property_dialog != NULL, 1);
 	g_return_val_if_fail (GNOME_IS_FILE_PROPERTY_DIALOG (file_property_dialog), 1);
 

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-02-11 20:35-0600\n"
+"POT-Creation-Date: 1999-02-12 16:27-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1068,7 +1068,7 @@ msgstr ""
 #: gtkedit/editcmd.c:482 gtkedit/editcmd.c:801 gtkedit/editcmd.c:831
 #: gtkedit/editcmd.c:978 gtkedit/editcmd.c:1075 src/ext.c:294 src/file.c:606
 #: src/help.c:318 src/main.c:665 src/screen.c:2064 src/subshell.c:700
-#: src/subshell.c:726 src/utilunix.c:382 src/utilunix.c:386 src/utilunix.c:452
+#: src/subshell.c:726 src/utilunix.c:386 src/utilunix.c:390 src/utilunix.c:456
 #: vfs/mcfs.c:169
 msgid " Warning "
 msgstr ""
@@ -2279,7 +2279,7 @@ msgstr ""
 msgid "File exists but can not be stat-ed: %s %s"
 msgstr ""
 
-#: src/dir.c:643
+#: src/dir.c:647
 msgid "Unknown"
 msgstr ""
 
@@ -4125,11 +4125,11 @@ msgstr ""
 msgid "name_trunc: too big"
 msgstr ""
 
-#: src/utilunix.c:382
+#: src/utilunix.c:386
 msgid " Pipe failed "
 msgstr ""
 
-#: src/utilunix.c:386
+#: src/utilunix.c:390
 msgid " Dup failed "
 msgstr ""
 

@@ -147,6 +147,7 @@ dialog_key_pressed (GtkWidget *win, GdkEventKey *event, Dlg_head *h)
 
 			if (i->editing)
 				return FALSE;
+			
 		}
 	} 
 

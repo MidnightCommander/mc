@@ -28,7 +28,7 @@
 #include <sys/types.h>
 #include <sys/param.h>
 #include <sys/stat.h>
-#ifndef OS2_NT
+#ifndef HAS_NO_GRP_PWD_H
 #    include <grp.h>
 #    include <pwd.h>
 #endif

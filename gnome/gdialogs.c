@@ -629,7 +629,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char 
                 return NULL;
         }
 
-        dest_dir = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY (fentry), TRUE);
+        dest_dir = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY (fentry), FALSE);
         gtk_widget_destroy (fmd_win);
         easy_patterns = 1;
         if (!dest_dir || !*dest_dir)
