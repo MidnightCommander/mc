@@ -1260,7 +1260,7 @@ msgstr " Désélectionner "
 
 #: src/cmd.c:635
 msgid "Extension file edit"
-msgstr "Éditer les extentions de fichiers"
+msgstr "Éditer les extensions de fichiers"
 
 #: src/cmd.c:636
 msgid " Which extension file you want to edit? "
