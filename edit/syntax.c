@@ -47,7 +47,7 @@ static void *syntax_malloc (size_t x)
 static int compare_word_to_right (WEdit * edit, long i, char *text, char *whole_left, char *whole_right, int line_start)
 {
     char *p;
-    int c;
+    int c, j;
     if (!*text)
 	return 0;
     c = edit_get_byte (edit, i - 1);
@@ -58,17 +58,73 @@ static int compare_word_to_right (WEdit * edit, long i, char *text, char *whole_
 	if (strchr (whole_left, c))
 	    return 0;
     for (p = text; *p; p++, i++) {
-	if (*p == '\001') {
+	switch (*p) {
+	case '\001':
 	    p++;
 	    for (;;) {
 		c = edit_get_byte (edit, i);
-		if (c == '\n')
-		    return 0;
 		if (c == *p)
 		    break;
+		if (c == '\n')
+		    return 0;
 		i++;
 	    }
-	} else {
+	    break;
+	case '\002':
+	    p++;
+	    for (;;) {
+		c = edit_get_byte (edit, i);
+		if (c == *p)
+		    break;
+		if (c == '\n' || c == '\t' || c == ' ')
+		    return 0;
+		i++;
+	    }
+	    break;
+	case '\003':
+	    p++;
+#if 0
+	    c = edit_get_byte (edit, i++);
+	    for (j = 0; p[j] != '\003'; j++)
+		if (c == p[j])
+		    goto found_char1;
+	    return 0;
+	  found_char1:
+#endif
+	    for (;;i++) {
+		c = edit_get_byte (edit, i);
+		for (j = 0; p[j] != '\003'; j++)
+		    if (c == p[j])
+			goto found_char2;
+		break;
+	      found_char2:
+	    }
+	    i--;
+	    while (*p != '\003')
+		p++;
+	    break;
+#if 0
+	case '\004':
+	    p++;
+	    c = edit_get_byte (edit, i++);
+	    for (j = 0; p[j] != '\004'; j++)
+		if (c == p[j])
+		    return 0;
+	    for (;;i++) {
+		c = edit_get_byte (edit, i);
+		for (j = 0; p[j] != '\004'; j++)
+		    if (c == p[j])
+			goto found_char4;
+		continue;
+	      found_char4:
+		break;
+	    }
+	    i--;
+	    while (*p != '\004')
+		p++;
+	    break;
+#endif
+	default:
 	    if (*p != edit_get_byte (edit, i))
 		return 0;
 	}
@@ -82,24 +138,84 @@ static int compare_word_to_right (WEdit * edit, long i, char *text, char *whole_
 static int compare_word_to_left (WEdit * edit, long i, char *text, char *whole_left, char *whole_right, int line_start)
 {
     char *p;
-    int c;
+    int c, j;
+#if 0
+    int d;
+#endif
     if (!*text)
 	return 0;
     if (whole_right)
 	if (strchr (whole_right, edit_get_byte (edit, i + 1)))
 	    return 0;
     for (p = text + strlen (text) - 1; (unsigned long) p >= (unsigned long) text; p--, i--) {
-	if (*p == '\001') {
+	switch (*p) {
+	case '\001':
 	    p--;
 	    for (;;) {
 		c = edit_get_byte (edit, i);
-		if (c == '\n')
-		    return 0;
 		if (c == *p)
 		    break;
+		if (c == '\n')
+		    return 0;
 		i--;
 	    }
-	} else {
+	    break;
+	case '\002':
+	    p--;
+	    for (;;) {
+		c = edit_get_byte (edit, i);
+		if (c == *p)
+		    break;
+		if (c == '\n' || c == '\t' || c == ' ')
+		    return 0;
+		i--;
+	    }
+	    break;
+	case '\003':
+	    while (*(--p) != '\003');
+	    p++;
+#if 0
+	    c = edit_get_byte (edit, i--);
+	    for (j = 0; p[j] != '\003'; j++)
+		if (c == p[j])
+		    goto found_char1;
+	    return 0;
+	  found_char1:
+#endif
+	    for (;; i--) {
+		c = edit_get_byte (edit, i);
+		for (j = 0; p[j] != '\003'; j++)
+		    if (c == p[j])
+			goto found_char2;
+		break;
+	      found_char2:
+	    }
+	    i++;
+	    p--;
+	    break;
+#if 0
+	case '\004':
+	    while (*(--p) != '\004');
+	    d = *p;
+	    p++;
+	    c = edit_get_byte (edit, i--);
+	    for (j = 0; p[j] != '\004'; j++)
+		if (c == p[j])
+		    return 0;
+	    for (;; i--) {
+		c = edit_get_byte (edit, i);
+		for (j = 0; p[j] != '\004'; j++)
+		    if (c == p[j] || c == '\n' || c == d)
+			goto found_char4;
+		continue;
+	      found_char4:
+		break;
+	    }
+	    i++;
+	    p--;
+	    break;
+#endif
+	default:
 	    if (*p != edit_get_byte (edit, i))
 		return 0;
 	}
@@ -116,7 +232,7 @@ static int compare_word_to_left (WEdit * edit, long i, char *text, char *whole_l
 
 
 #if 0
-#define debug_printf(x,y) printf(x,y)
+#define debug_printf(x,y) fprintf(stderr,x,y)
 #else
 #define debug_printf(x,y)
 #endif
@@ -125,6 +241,8 @@ static unsigned long apply_rules_going_right (WEdit * edit, long i, unsigned lon
 {
     struct context_rule *r;
     int context, keyword, c1, c2;
+    int found_right = 0, found_left = 0;
+    int done = 0;
     unsigned long border;
     context = (rule & RULE_CONTEXT) >> RULE_CONTEXT_SHIFT;
     keyword = (rule & RULE_WORD) >> RULE_WORD_SHIFT;
@@ -134,34 +252,6 @@ static unsigned long apply_rules_going_right (WEdit * edit, long i, unsigned lon
 
     debug_printf ("%c->", c1);
     debug_printf ("%c ", c2);
-/* check to turn off a context */
-    if (context && !keyword) {
-	r = edit->rules[context];
-	if (r->first_right == c2 && compare_word_to_right (edit, i, r->right, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_right)) {
-	    debug_printf ("3 ", 0);
-	    border = RULE_ON_RIGHT_BORDER;
-	    if (r->between_delimiters) {
-		context = 0;
-		debug_printf ("context=off ", 0);
-		keyword = 0;
-	    }
-	} else if (!r->between_delimiters && r->last_right == c1 && compare_word_to_left (edit, i - 1, r->right, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_right)) {
-	    debug_printf ("4 ", 0);
-	    border = 0;
-	    if (!(rule & RULE_ON_LEFT_BORDER)) {
-		context = 0;
-		debug_printf ("context=off ", 0);
-		keyword = 0;
-	    }
-	} else if (r->last_left == c1 && compare_word_to_left (edit, i - 1, r->left, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_left)) {
-	    debug_printf ("2 ", 0);
-	    border = 0;
-	    keyword = 0;
-	}
-    }
-    debug_printf ("border=%s ", border ? ((border & RULE_ON_LEFT_BORDER) ? "left" : "right") : "off");
-
-    debug_printf ("\n", 0);
 
 /* check to turn off a keyword */
     if (keyword) {
@@ -172,29 +262,79 @@ static unsigned long apply_rules_going_right (WEdit * edit, long i, unsigned lon
 	    debug_printf ("keyword=%d ", keyword);
 	}
     }
+    debug_printf ("border=%s ", border ? ((border & RULE_ON_LEFT_BORDER) ? "left" : "right") : "off");
+
+/* check to turn off a context */
+    if (context && !keyword) {
+	r = edit->rules[context];
+	if (r->first_right == c2 && compare_word_to_right (edit, i, r->right, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_right) \
+		&& !(rule & RULE_ON_RIGHT_BORDER)) {
+	    debug_printf ("A:3 ", 0);
+	    found_right = 1;
+	    border = RULE_ON_RIGHT_BORDER;
+	    if (r->between_delimiters) {
+		context = 0;
+		keyword = 0;
+	    }
+	} else if (!found_left) {
+	    if (r->last_right == c1 && compare_word_to_left (edit, i - 1, r->right, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_right) \
+		&&(rule & RULE_ON_RIGHT_BORDER)) {
+/* always turn off a context at 4 */
+		debug_printf ("A:4 ", 0);
+		found_left = 1;
+		border = 0;
+		context = 0;
+		keyword = 0;
+	    } else if (r->last_left == c1 && compare_word_to_left (edit, i - 1, r->left, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_left) \
+		       &&(rule & RULE_ON_LEFT_BORDER)) {
+/* never turn off a context at 2 */
+		debug_printf ("A:2 ", 0);
+		found_left = 1;
+		border = 0;
+		keyword = 0;
+	    }
+	}
+    }
+    debug_printf ("\n", 0);
+
 /* check to turn on a context */
     if (!context && !keyword) {
 	int count;
-	for (count = 1; edit->rules[count]; count++) {
+	for (count = 1; edit->rules[count] && !done; count++) {
 	    r = edit->rules[count];
-	    if (r->between_delimiters && r->last_right == c1 && compare_word_to_left (edit, i - 1, r->right, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_right)) {
-		debug_printf ("4 count=%d", count);
-		border = 0;
-		break;
-	    } else if (r->first_left == c2 && compare_word_to_right (edit, i, r->left, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_left)) {
-		debug_printf ("1 ", 0);
-		border = RULE_ON_LEFT_BORDER;
-		if (!r->between_delimiters) {
-		    context = count;
-		    debug_printf ("context=%d ", context);
-		    keyword = 0;
-		}
-		break;
-	    } else if (r->between_delimiters && r->last_left == c1 && compare_word_to_left (edit, i - 1, r->left, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_left)) {
-		debug_printf ("2 ", 0);
-		border = 0;
-		if (!(rule & RULE_ON_RIGHT_BORDER)) {
+	    if (!found_left) {
+		if (r->last_right == c1 && compare_word_to_left (edit, i - 1, r->right, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_right) \
+		    &&(rule & RULE_ON_RIGHT_BORDER)) {
+		    debug_printf ("B:4 count=%d", count);
+		    found_left = 1;
+		    border = 0;
+		    context = 0;
+		} else if (r->last_left == c1 && compare_word_to_left (edit, i - 1, r->left, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_left) \
+			   &&(rule & RULE_ON_LEFT_BORDER)) {
+		    debug_printf ("B:2 ", 0);
+		    found_left = 1;
+		    border = 0;
 		    if (r->between_delimiters) {
+			context = count;
+			debug_printf ("context=%d ", context);
+			keyword = 0;
+			if (r->first_right == c2 && compare_word_to_right (edit, i, r->right, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_right)) {
+			    debug_printf ("B:3 ", 0);
+			    found_right = 1;
+			    border = RULE_ON_RIGHT_BORDER;
+			    context = 0;
+			    keyword = 0;
+			}
+		    }
+		    break;
+		}
+	    }
+	    if (!found_right) {
+		if (r->first_left == c2 && compare_word_to_right (edit, i, r->left, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_left)) {
+		    debug_printf ("B:1 ", 0);
+		    found_right = 1;
+		    border = RULE_ON_LEFT_BORDER;
+		    if (!r->between_delimiters) {
 			context = count;
 			debug_printf ("context=%d ", context);
 			keyword = 0;
@@ -223,7 +363,7 @@ static unsigned long apply_rules_going_right (WEdit * edit, long i, unsigned lon
     debug_printf ("border=%s ", border ? ((border & RULE_ON_LEFT_BORDER) ? "left" : "right") : "off");
     debug_printf ("keyword=%d ", keyword);
 
-    debug_printf (" %d#\n", context);
+    debug_printf (" %d#\n\n", context);
 
     return (context << RULE_CONTEXT_SHIFT) | (keyword << RULE_WORD_SHIFT) | border;
 }
@@ -250,90 +390,112 @@ static inline int resolve_left_delim (WEdit * edit, long i, struct context_rule 
     return 0;
 }
 
-/* we don't concern ourselves with single words here, 'cos we will always
-   start at the beginning of a line and then go right */
 static unsigned long apply_rules_going_left (WEdit * edit, long i, unsigned long rule)
 {
     struct context_rule *r;
-    int context, keyword, c1, c2;
+    int context, keyword, c2, c1;
+    int found_left = 0, found_right = 0;
+    int done = 0;
     unsigned long border;
     context = (rule & RULE_CONTEXT) >> RULE_CONTEXT_SHIFT;
     keyword = (rule & RULE_WORD) >> RULE_WORD_SHIFT;
-    border = rule & (RULE_ON_LEFT_BORDER | RULE_ON_RIGHT_BORDER);
+    border = rule & (RULE_ON_RIGHT_BORDER | RULE_ON_LEFT_BORDER);
     c1 = edit_get_byte (edit, i);
     c2 = edit_get_byte (edit, i + 1);
 
-    debug_printf ("%c<-", c1);
-    debug_printf ("%c ", c2);
+    debug_printf ("%c->", c2);
+    debug_printf ("%c ", c1);
 
-/* check to turn off a context */
-    if (context && !keyword) {
-	r = edit->rules[context];
-	if (r->first_left == c2 && compare_word_to_right (edit, i + 1, r->left, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_left)) {
-	    debug_printf ("1 ", 0);
-	    border = 0;
-	    if (!(rule & RULE_ON_RIGHT_BORDER)) {
-		context = 0;
-		keyword = 0;
-		debug_printf ("context=off ", 0);
-	    }
-	} else if (!r->between_delimiters && r->first_right == c2 && compare_word_to_right (edit, i + 1, r->right, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_right)) {
-	    debug_printf ("3 ", 0);
-	    border = 0;
-	    keyword = 0;
-	} else if (r->last_left == c1 && compare_word_to_left (edit, i, r->left, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_left)) {
-	    debug_printf ("2 ", 0);
-	    border = RULE_ON_LEFT_BORDER;
-	    if (r->between_delimiters) {
-		context = 0;
-		keyword = 0;
-		debug_printf ("context=off ", 0);
-	    }
-	}
-    }
 /* check to turn off a keyword */
     if (keyword) {
 	struct key_word *k;
 	k = edit->rules[context]->keyword[keyword];
-	if (k->first == c2)
-	    if (compare_word_to_right (edit, i + 1, k->keyword, k->whole_word_chars_left, k->whole_word_chars_right, k->line_start)) {
-		keyword = 0;
-		debug_printf ("keyword=%d ", keyword);
-	    }
+	if (k->first == c2 && compare_word_to_right (edit, i + 1, k->keyword, k->whole_word_chars_right, k->whole_word_chars_left, k->line_start)) {
+	    keyword = 0;
+	    debug_printf ("keyword=%d ", keyword);
+	}
     }
-    debug_printf ("border=%s ", border ? ((border & RULE_ON_LEFT_BORDER) ? "left" : "right") : "off");
+    debug_printf ("border=%s ", border ? ((border & RULE_ON_RIGHT_BORDER) ? "right" : "left") : "off");
 
+/* check to turn off a context */
+    if (context && !keyword) {
+	r = edit->rules[context];
+	if (r->last_left == c1 && compare_word_to_left (edit, i, r->left, r->whole_word_chars_right, r->whole_word_chars_left, r->line_start_left) \
+	    &&!(rule & RULE_ON_LEFT_BORDER)) {
+	    debug_printf ("A:2 ", 0);
+	    found_left = 1;
+	    border = RULE_ON_LEFT_BORDER;
+	    if (r->between_delimiters) {
+		context = 0;
+		keyword = 0;
+	    }
+	} else if (!found_right) {
+	    if (r->first_left == c2 && compare_word_to_right (edit, i + 1, r->left, r->whole_word_chars_right, r->whole_word_chars_left, r->line_start_left) \
+		&&(rule & RULE_ON_LEFT_BORDER)) {
+/* always turn off a context at 4 */
+		debug_printf ("A:1 ", 0);
+		found_right = 1;
+		border = 0;
+		context = 0;
+		keyword = 0;
+	    } else if (r->first_right == c2 && compare_word_to_right (edit, i + 1, r->right, r->whole_word_chars_right, r->whole_word_chars_left, r->line_start_right) \
+		       &&(rule & RULE_ON_RIGHT_BORDER)) {
+/* never turn off a context at 2 */
+		debug_printf ("A:3 ", 0);
+		found_right = 1;
+		border = 0;
+		keyword = 0;
+	    }
+	}
+    }
     debug_printf ("\n", 0);
 
 /* check to turn on a context */
     if (!context && !keyword) {
-
 	int count;
-	for (count = 1; edit->rules[count]; count++) {
+	for (count = 1; edit->rules[count] && !done; count++) {
 	    r = edit->rules[count];
-	    if (r->first_left == c2 && compare_word_to_right (edit, i + 1, r->left, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_left)) {
-		debug_printf ("1 ", 0);
-		border = 0;
-		keyword = 0;
-		break;
-	    } else if (r->last_right == c1 && compare_word_to_left (edit, i, r->right, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_right)) {
-		debug_printf ("4 count=%d", count);
-		if (!r->between_delimiters && !(c1 == '\n' && r->single_char)) {
-		    border = RULE_ON_RIGHT_BORDER;
-		    context = resolve_left_delim (edit, i - 1, r, count);
-		    debug_printf ("context=%d ", context);
-		}
-		break;
-	    } else if (r->between_delimiters && r->first_right == c2 && compare_word_to_right (edit, i + 1, r->right, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_right)) {
-		debug_printf ("3 ", 0);
-		border = 0;
-		if (!(rule & RULE_ON_LEFT_BORDER))
-		    if (r->between_delimiters && !(c2 == '\n' && r->single_char)) {
-			context = resolve_left_delim (edit, i, r, count);
-			keyword = 0;
+	    if (!found_right) {
+		if (r->first_left == c2 && compare_word_to_right (edit, i + 1, r->left, r->whole_word_chars_right, r->whole_word_chars_left, r->line_start_left) \
+		    &&(rule & RULE_ON_LEFT_BORDER)) {
+		    debug_printf ("B:1 count=%d", count);
+		    found_right = 1;
+		    border = 0;
+		    context = 0;
+		} else if (r->first_right == c2 && compare_word_to_right (edit, i + 1, r->right, r->whole_word_chars_right, r->whole_word_chars_left, r->line_start_right) \
+			   &&(rule & RULE_ON_RIGHT_BORDER)) {
+		    if (!(c2 == '\n' && r->single_char)) {
+		    debug_printf ("B:3 ", 0);
+		    found_right = 1;
+		    border = 0;
+		    if (r->between_delimiters) {
+			    context = resolve_left_delim (edit, i, r, count);
 			debug_printf ("context=%d ", context);
+			keyword = 0;
+			if (r->last_left == c1 && compare_word_to_left (edit, i, r->left, r->whole_word_chars_right, r->whole_word_chars_left, r->line_start_left)) {
+			    debug_printf ("B:2 ", 0);
+			    found_left = 1;
+			    border = RULE_ON_LEFT_BORDER;
+			    context = 0;
+			    keyword = 0;
+			}
 		    }
-		break;
+		    break;
+		    }
+		}
+	    }
+	    if (!found_left) {
+		if (r->last_right == c1 && compare_word_to_left (edit, i, r->right, r->whole_word_chars_right, r->whole_word_chars_left, r->line_start_right)) {
+		    if (!(c1 == '\n' && r->single_char)) {
+		    debug_printf ("B:4 ", 0);
+		    found_left = 1;
+		    border = RULE_ON_RIGHT_BORDER;
+		    if (!r->between_delimiters)
+			context = resolve_left_delim (edit, i - 1, r, count);
+		    keyword = 0;
+		    break;
+		    }
+		}
 	    }
 	}
     }
@@ -346,19 +508,21 @@ static unsigned long apply_rules_going_left (WEdit * edit, long i, unsigned long
 	    int count;
 	    count = (unsigned long) p - (unsigned long) r->keyword_last_chars;
 	    k = r->keyword[count];
-	    if (k->last == c1 && compare_word_to_left (edit, i, k->keyword, k->whole_word_chars_left, k->whole_word_chars_right, k->line_start)) {
+	    if (compare_word_to_left (edit, i, k->keyword, k->whole_word_chars_right, k->whole_word_chars_left, k->line_start)) {
 		keyword = count;
 		debug_printf ("keyword=%d ", keyword);
 		break;
 	    }
 	}
     }
-    debug_printf ("border=%s ", border ? ((border & RULE_ON_LEFT_BORDER) ? "left" : "right") : "off");
+    debug_printf ("border=%s ", border ? ((border & RULE_ON_RIGHT_BORDER) ? "right" : "left") : "off");
+    debug_printf ("keyword=%d ", keyword);
 
-    debug_printf (" %d#\n", context);
+    debug_printf (" %d#\n\n", context);
 
     return (context << RULE_CONTEXT_SHIFT) | (keyword << RULE_WORD_SHIFT) | border;
 }
+
 
 static unsigned long edit_get_rule (WEdit * edit, long byte_index)
 {
@@ -368,6 +532,15 @@ static unsigned long edit_get_rule (WEdit * edit, long byte_index)
 	edit->rule = 0;
 	return 0;
     }
+#if 0
+    if (byte_index < edit->last_get_rule_start_display) {
+/* this is for optimisation */
+	for (i = edit->last_get_rule_start_display - 1; i >= byte_index; i--)
+	    edit->rule_start_display = apply_rules_going_left (edit, i, edit->rule_start_display);
+	edit->last_get_rule_start_display = byte_index;
+	edit->rule = edit->rule_start_display;
+    } else
+#endif
     if (byte_index > edit->last_get_rule) {
 	for (i = edit->last_get_rule + 1; i <= byte_index; i++)
 	    edit->rule = apply_rules_going_right (edit, i, edit->rule);
@@ -440,6 +613,9 @@ static int read_one_line (char **line, FILE * f)
 
 static char *strdup_convert (char *s)
 {
+#if 0
+    int e = 0;
+#endif
     char *r, *p;
     p = r = strdup (s);
     while (*s) {
@@ -465,17 +641,45 @@ static char *strdup_convert (char *s)
 	    case '\\':
 		*p = '\\';
 		break;
+	    case '[':
+	    case ']':
+		if ((unsigned long) p == (unsigned long) r || strlen (s) == 1)
+		    *p = *s;
+		else {
+#if 0
+		    if (!strncmp (s, "[^", 2)) {
+			*p = '\004';
+			e = 1;
+			s++;
+		    } else {
+			if (e)
+			    *p = '\004';
+			else
+#endif
+			    *p = '\003';
+#if 0
+			e = 0;
+		    }
+#endif
+		}
+		break;
 	    default:
 		*p = *s;
 		break;
 	    }
 	    break;
 	case '*':
-/* a * at the beginning or end of the line must be interpreted literally */
+/* a * or + at the beginning or end of the line must be interpreted literally */
 	    if ((unsigned long) p == (unsigned long) r || strlen (s) == 1)
 		*p = '*';
 	    else
 		*p = '\001';
+	    break;
+	case '+':
+	    if ((unsigned long) p == (unsigned long) r || strlen (s) == 1)
+		*p = '+';
+	    else
+		*p = '\002';
 	    break;
 	default:
 	    *p = *s;
@@ -521,7 +725,39 @@ static void free_args (char **args)
 #define check_not_a {if(*a){result=line;break;}}
 
 #ifdef MIDNIGHT
+
 int try_alloc_color_pair (char *fg, char *bg);
+
+int this_try_alloc_color_pair (char *fg, char *bg)
+{
+    char f[80], b[80], *p;
+    if (fg) {
+	strcpy (f, fg);
+	p = strchr (f, '/');
+	if (p)
+	    *p = '\0';
+	fg = f;
+    }
+    if (bg) {
+	strcpy (b, bg);
+	p = strchr (b, '/');
+	if (p)
+	    *p = '\0';
+	bg = b;
+    }
+    return try_alloc_color_pair (fg, bg);
+}
+#else
+int this_allocate_color (char *fg)
+{
+    char *p;
+    if (!fg)
+	return allocate_color (0);
+    p = strchr (fg, '/');
+    if (!p)
+	return allocate_color (fg);
+    return allocate_color (p + 1);
+}
 #endif
 
 /* returns line number on error */
@@ -539,8 +775,8 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 
     args[0] = 0;
 
-    strcpy (whole_left, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_");
-    strcpy (whole_right, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_");
+    strcpy (whole_left, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_01234567890");
+    strcpy (whole_right, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_01234567890");
 
     r = edit->rules = syntax_malloc (256 * sizeof (struct context_rule *));
 
@@ -627,10 +863,10 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 	    if (*a)
 		a++;
 #ifdef MIDNIGHT
-	    c->keyword[0]->fg = try_alloc_color_pair (fg, bg);
+	    c->keyword[0]->fg = this_try_alloc_color_pair (fg, bg);
 #else
-	    c->keyword[0]->fg = allocate_color (fg);
-	    c->keyword[0]->bg = allocate_color (bg);
+	    c->keyword[0]->fg = this_allocate_color (fg);
+	    c->keyword[0]->bg = this_allocate_color (bg);
 #endif
 	    c->keyword[0]->keyword = strdup (" ");
 	    check_not_a;
@@ -672,10 +908,10 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 	    if (*a)
 		a++;
 #ifdef MIDNIGHT
-	    k->fg = try_alloc_color_pair (fg, bg);
+	    k->fg = this_try_alloc_color_pair (fg, bg);
 #else
-	    k->fg = allocate_color (fg);
-	    k->bg = allocate_color (bg);
+	    k->fg = this_allocate_color (fg);
+	    k->bg = this_allocate_color (bg);
 #endif
 	    check_not_a;
 	    num_words++;
@@ -778,11 +1014,12 @@ void edit_free_syntax_rules (WEdit * edit)
     syntax_free (edit->rules);
 }
 
-
-#ifdef MIDNIGHT
+#define CURRENT_SYNTAX_RULES_VERSION "19"
 
 char *syntax_text = 
+"# syntax rules version " CURRENT_SYNTAX_RULES_VERSION "\n"
 "# Allowable colors for mc are\n"
+"# (after the slash is a Cooledit color, 0-26 or any of the X colors in rgb.txt)\n"
 "# black\n"
 "# red\n"
 "# green\n"
@@ -800,120 +1037,190 @@ char *syntax_text =
 "# brightcyan\n"
 "# white\n"
 "\n"
-"file ..\\*\\\\.([chC]|CC|cxx|cc|cpp|CPP|CXX)$ C/C++\\sProgram\n"
+"###############################################################################\n"
+"file ..\\*\\\\.([chC]|CC|cxx|cc|cpp|CPP|CXX)$ C/C\\+\\+\\sProgram\n"
 "context default\n"
-"    keyword whole void yellow\n"
-"    keyword whole int yellow\n"
-"    keyword whole unsigned yellow\n"
-"    keyword whole char yellow\n"
-"    keyword whole long yellow\n"
-"    keyword whole if yellow\n"
-"    keyword whole for yellow\n"
-"    keyword whole while yellow\n"
-"    keyword whole do yellow\n"
-"    keyword whole else yellow\n"
-"    keyword whole double yellow\n"
-"    keyword whole switch yellow\n"
-"    keyword whole case yellow\n"
-"    keyword whole default yellow\n"
-"    keyword whole static yellow\n"
-"    keyword whole extern yellow\n"
-"    keyword whole struct yellow\n"
-"    keyword whole typedef yellow\n"
-"    keyword whole ... yellow\n"
-"    keyword whole inline yellow\n"
-"    keyword whole return yellow\n"
-"    keyword '*' yellow\n"
-"    keyword > yellow\n"
-"    keyword < yellow\n"
-"    keyword + yellow\n"
-"    keyword - yellow\n"
-"    keyword \\* yellow\n"
-"    keyword / yellow\n"
-"    keyword % yellow\n"
-"    keyword = yellow\n"
-"    keyword != yellow\n"
-"    keyword == yellow\n"
-"    keyword { brightcyan\n"
-"    keyword } brightcyan\n"
-"    keyword ( brightcyan\n"
-"    keyword ) brightcyan\n"
-"    keyword [ brightcyan\n"
-"    keyword ] brightcyan\n"
-"    keyword , brightcyan\n"
-"    keyword : brightcyan\n"
-"    keyword ; brightmagenta\n"
-"context /\\* \\*/ brown\n"
-"context linestart # \\n brightred\n"
-"    keyword \\\\\\n yellow\n"
-"    keyword /\\**\\*/ brown\n"
-"    keyword \"*\" red\n"
-"    keyword <*> red\n"
-"context \" \" green\n"
-"    keyword %d yellow\n"
-"    keyword %s yellow\n"
-"    keyword %c yellow\n"
-"    keyword %lu yellow\n"
-"    keyword \\\\\" yellow\n";
-
-#else
-
-char *syntax_text = 
-"file ..\\*\\\\.([chC]|CC|cxx|cc|cpp|CPP|CXX)$ C/C++\\sProgram\n"
+"    keyword whole auto yellow/24\n"
+"    keyword whole break yellow/24\n"
+"    keyword whole case yellow/24\n"
+"    keyword whole char yellow/24\n"
+"    keyword whole const yellow/24\n"
+"    keyword whole continue yellow/24\n"
+"    keyword whole default yellow/24\n"
+"    keyword whole do yellow/24\n"
+"    keyword whole double yellow/24\n"
+"    keyword whole else yellow/24\n"
+"    keyword whole enum yellow/24\n"
+"    keyword whole extern yellow/24\n"
+"    keyword whole float yellow/24\n"
+"    keyword whole for yellow/24\n"
+"    keyword whole goto yellow/24\n"
+"    keyword whole if yellow/24\n"
+"    keyword whole int yellow/24\n"
+"    keyword whole long yellow/24\n"
+"    keyword whole register yellow/24\n"
+"    keyword whole return yellow/24\n"
+"    keyword whole short yellow/24\n"
+"    keyword whole signed yellow/24\n"
+"    keyword whole sizeof yellow/24\n"
+"    keyword whole static yellow/24\n"
+"    keyword whole struct yellow/24\n"
+"    keyword whole switch yellow/24\n"
+"    keyword whole typedef yellow/24\n"
+"    keyword whole union yellow/24\n"
+"    keyword whole unsigned yellow/24\n"
+"    keyword whole void yellow/24\n"
+"    keyword whole volatile yellow/24\n"
+"    keyword whole while yellow/24\n"
+"    keyword whole asm yellow/24\n"
+"    keyword whole catch yellow/24\n"
+"    keyword whole class yellow/24\n"
+"    keyword whole friend yellow/24\n"
+"    keyword whole delete yellow/24\n"
+"    keyword whole inline yellow/24\n"
+"    keyword whole new yellow/24\n"
+"    keyword whole operator yellow/24\n"
+"    keyword whole private yellow/24\n"
+"    keyword whole protected yellow/24\n"
+"    keyword whole public yellow/24\n"
+"    keyword whole this yellow/24\n"
+"    keyword whole throw yellow/24\n"
+"    keyword whole template yellow/24\n"
+"    keyword whole try yellow/24\n"
+"    keyword whole virtual yellow/24\n"
+"    keyword whole bool yellow/24\n"
+"    keyword whole const_cast yellow/24\n"
+"    keyword whole dynamic_cast yellow/24\n"
+"    keyword whole explicit yellow/24\n"
+"    keyword whole false yellow/24\n"
+"    keyword whole mutable yellow/24\n"
+"    keyword whole namespace yellow/24\n"
+"    keyword whole reinterpret_cast yellow/24\n"
+"    keyword whole static_cast yellow/24\n"
+"    keyword whole true yellow/24\n"
+"    keyword whole typeid yellow/24\n"
+"    keyword whole typename yellow/24\n"
+"    keyword whole using yellow/24\n"
+"    keyword whole wchar_t yellow/24\n"
+"    keyword whole ... yellow/24\n"
+"    keyword '\\s' brightgreen/16\n"
+"    keyword '+' brightgreen/16\n"
+"    keyword > yellow/24\n"
+"    keyword < yellow/24\n"
+"    keyword \\+ yellow/24\n"
+"    keyword - yellow/24\n"
+"    keyword \\* yellow/24\n"
+"    keyword / yellow/24\n"
+"    keyword % yellow/24\n"
+"    keyword = yellow/24\n"
+"    keyword != yellow/24\n"
+"    keyword == yellow/24\n"
+"    keyword { brightcyan/14\n"
+"    keyword } brightcyan/14\n"
+"    keyword ( brightcyan/15\n"
+"    keyword ) brightcyan/15\n"
+"    keyword [ brightcyan/14\n"
+"    keyword ] brightcyan/14\n"
+"    keyword , brightcyan/14\n"
+"    keyword : brightcyan/14\n"
+"    keyword ; brightmagenta/19\n"
+"context /\\* \\*/ brown/22\n"
+"context linestart # \\n brightred/18\n"
+"    keyword \\\\\\n yellow/24\n"
+"    keyword /\\**\\*/ brown/22\n"
+"    keyword \"+\" red/19\n"
+"    keyword <+> red/19\n"
+"context \" \" green/6\n"
+"    keyword \\\\\" brightgreen/16\n"
+"    keyword %% brightgreen/16\n"
+"    keyword %\\[#0\\s-\\+,\\]\\[0123456789\\]\\[.\\]\\[0123456789\\]\\[L\\]e brightgreen/16\n"
+"    keyword %\\[#0\\s-\\+,\\]\\[0123456789\\]\\[.\\]\\[0123456789\\]\\[L\\]E brightgreen/16\n"
+"    keyword %\\[#0\\s-\\+,\\]\\[0123456789\\]\\[.\\]\\[0123456789\\]\\[L\\]f brightgreen/16\n"
+"    keyword %\\[#0\\s-\\+,\\]\\[0123456789\\]\\[.\\]\\[0123456789\\]\\[L\\]g brightgreen/16\n"
+"    keyword %\\[#0\\s-\\+,\\]\\[0123456789\\]\\[.\\]\\[0123456789\\]\\[L\\]G brightgreen/16\n"
+"    keyword %\\[0\\s-\\+,\\]\\[0123456789\\]\\[.\\]\\[0123456789\\]\\[hl\\]d brightgreen/16\n"
+"    keyword %\\[0\\s-\\+,\\]\\[0123456789\\]\\[.\\]\\[0123456789\\]\\[hl\\]i brightgreen/16\n"
+"    keyword %\\[#0\\s-\\+,\\]\\[0123456789\\]\\[.\\]\\[0123456789\\]\\[hl\\]o brightgreen/16\n"
+"    keyword %\\[0\\s-\\+,\\]\\[0123456789\\]\\[.\\]\\[0123456789\\]\\[hl\\]u brightgreen/16\n"
+"    keyword %\\[#0\\s-\\+,\\]\\[0123456789\\]\\[.\\]\\[0123456789\\]\\[hl\\]x brightgreen/16\n"
+"    keyword %\\[#0\\s-\\+,\\]\\[0123456789\\]\\[.\\]\\[0123456789\\]\\[hl\\]X brightgreen/16\n"
+"    keyword %\\[hl\\]n brightgreen/16\n"
+"    keyword %\\[.\\]\\[0123456789\\]s brightgreen/16\n"
+"    keyword %[*] brightgreen/16\n"
+"    keyword %c brightgreen/16\n"
+"    keyword \\\\\\\\ brightgreen/16\n"
+"\n"
+"###############################################################################\n"
+"file .\\*ChangeLog$ GNU\\sDistribution\\sChangeLog\\sFile\n"
+"\n"
 "context default\n"
-"    keyword whole void 24\n"
-"    keyword whole int 24\n"
-"    keyword whole unsigned 24\n"
-"    keyword whole char 24\n"
-"    keyword whole long 24\n"
-"    keyword whole if 24\n"
-"    keyword whole for 24\n"
-"    keyword whole while 24\n"
-"    keyword whole do 24\n"
-"    keyword whole else 24\n"
-"    keyword whole double 24\n"
-"    keyword whole switch 24\n"
-"    keyword whole case 24\n"
-"    keyword whole default 24\n"
-"    keyword whole static 24\n"
-"    keyword whole extern 24\n"
-"    keyword whole struct 24\n"
-"    keyword whole typedef 24\n"
-"    keyword whole ... 24\n"
-"    keyword whole inline 24\n"
-"    keyword whole return 24\n"
-"    keyword '*' 6\n"
-"    keyword > 24\n"
-"    keyword < 24\n"
-"    keyword + 24\n"
-"    keyword - 24\n"
-"    keyword \\* 24\n"
-"    keyword / 24\n"
-"    keyword % 24\n"
-"    keyword = 24\n"
-"    keyword != 24\n"
-"    keyword == 24\n"
-"    keyword { 14\n"
-"    keyword } 14\n"
-"    keyword ( 15\n"
-"    keyword ) 15\n"
-"    keyword [ 14\n"
-"    keyword ] 14\n"
-"    keyword , 14\n"
-"    keyword : 14\n"
-"    keyword ; 19\n"
-"context /\\* \\*/ 22\n"
-"context linestart # \\n 18\n"
-"    keyword \\\\\\n 24\n"
-"    keyword /\\**\\*/ 22\n"
-"    keyword \"*\" 19\n"
-"    keyword <*> 19\n"
-"context \" \" 6\n"
-"    keyword %d 24\n"
-"    keyword %s 24\n"
-"    keyword %c 24\n"
-"    keyword %lu 24\n"
-"    keyword \\\\\" 24\n"
+"    keyword \\s+() brightmagenta/23\n"
+"    keyword \\t+() brightmagenta/23\n"
+"\n"
+"context linestart \\t\\* : brightcyan/17\n"
+"context linestart \\s\\s\\s\\s\\s\\s\\s\\s\\* : brightcyan/17\n"
+"\n"
+"context linestart 19+-+\\s \\n            yellow/24\n"
+"    keyword <+@+> 			brightred/19\n"
+"context linestart 20+-+\\s \\n            yellow/24\n"
+"    keyword <+@+> 			brightred/19\n"
+"context linestart Mon\\s+\\s+\\s+\\s \\n     yellow/24\n"
+"    keyword <+@+> 			brightred/19\n"
+"context linestart Tue\\s+\\s+\\s+\\s \\n     yellow/24\n"
+"    keyword <+@+> 			brightred/19\n"
+"context linestart Wed\\s+\\s+\\s+\\s \\n     yellow/24\n"
+"    keyword <+@+> 			brightred/19\n"
+"context linestart Thu\\s+\\s+\\s+\\s \\n     yellow/24\n"
+"    keyword <+@+> 			brightred/19\n"
+"context linestart Fri\\s+\\s+\\s+\\s \\n     yellow/24\n"
+"    keyword <+@+> 			brightred/19\n"
+"context linestart Sat\\s+\\s+\\s+\\s \\n     yellow/24\n"
+"    keyword <+@+> 			brightred/19\n"
+"context linestart Sun\\s+\\s+\\s+\\s \\n     yellow/24\n"
+"    keyword <+@+> 			brightred/19\n"
+"\n"
+"\n"
+"###############################################################################\n"
+"file .\\*Makefile[\\\\\\.a-z]\\*$ Makefile\n"
+"\n"
+"context default\n"
+"    keyword $(*) yellow/24\n"
+"    keyword ${*} brightgreen/16\n"
+"    keyword whole linestart include magenta\n"
+"    keyword whole linestart endif magenta\n"
+"    keyword whole linestart ifeq magenta\n"
+"    keyword whole linestart ifneq magenta\n"
+"    keyword whole linestart else magenta\n"
+"    keyword linestart \\t lightgray/13 red\n"
+"    keyword whole .PHONY white/25\n"
+"    keyword whole .NOEXPORT white/25\n"
+"    keyword = white/25\n"
+"    keyword : yellow/24\n"
+"    keyword \\\\\\n yellow/24\n"
+"# this handles strange cases like @something@@somethingelse@ properly\n"
+"    keyword whole @+@ brightmagenta/23 black/0\n"
+"    keyword @+@ brightmagenta/23 black/0\n"
+"\n"
+"context linestart # \\n brown/22\n"
+"    keyword whole @+@ brightmagenta/23 black/0\n"
+"    keyword @+@ brightmagenta/23 black/0\n"
+"\n"
+"context exclusive = \\n brightcyan/17\n"
+"    keyword \\\\\\n yellow/24\n"
+"    keyword $(*) yellow/24\n"
+"    keyword ${*} brightgreen/16\n"
+"    keyword linestart \\t lightgray/13 red\n"
+"    keyword whole @+@ brightmagenta/23 black/0\n"
+"    keyword @+@ brightmagenta/23 black/0\n"
+"\n"
+"context exclusive linestart \\t \\n\n"
+"    keyword \\\\\\n yellow/24\n"
+"    keyword $(*) yellow/24\n"
+"    keyword ${*} brightgreen/16\n"
+"    keyword linestart \\t lightgray/13 red\n"
+"    keyword whole @+@ brightmagenta/23 black/0\n"
+"    keyword @+@ brightmagenta/23 black/0\n"
+"\n"
 "file \\.\\* Help\\ssupport\\sother\\sfile\\stypes\n"
 "context default\n"
 "file \\.\\* by\\scoding\\srules\\sin\\s~/.cedit/syntax.\n"
@@ -923,7 +1230,48 @@ char *syntax_text =
 "file \\.\\* and\\sconsult\\sthe\\sman\\spage.\n"
 "context default\n";
 
+
+FILE *upgrade_syntax_file (char *syntax_file)
+{
+    FILE *f;
+    char line[80];
+    f = fopen (syntax_file, "r");
+    if (!f) {
+	f = fopen (syntax_file, "w");
+	if (!f)
+	    return 0;
+	fprintf (f, "%s", syntax_text);
+	fclose (f);
+	return fopen (syntax_file, "r");
+    }
+    memset (line, 0, 79);
+    fread (line, 80, 1, f);
+    if (!strstr (line, "syntax rules version")) {
+	goto rename_rule_file;
+    } else {
+	char *p;
+	p = strstr (line, "version") + strlen ("version") + 1;
+	if (atoi (p) < atoi (CURRENT_SYNTAX_RULES_VERSION)) {
+	    char s[1024];
+	  rename_rule_file:
+	    strcpy (s, syntax_file);
+	    strcat (s, ".OLD");
+	    unlink (s);
+	    rename (syntax_file, s);
+	    unlink (syntax_file);	/* might rename() fail ? */
+#ifdef MIDNIGHT
+	    edit_message_dialog (" Load Syntax Rules ", " Your syntax rule file is outdated \n A new rule file is being installed. \n Your old rule file has been saved with a .OLD extension. ");
+#else
+	    CMessageDialog (0, 20, 20, 0, " Load Syntax Rules ", " Your syntax rule file is outdated \n A new rule file is being installed. \n Your old rule file has been saved with a .OLD extension. ");
 #endif
+	    return upgrade_syntax_file (syntax_file);
+	} else {
+	    rewind (f);
+	    return (f);
+	}
+    }
+    return 0;			/* not reached */
+}
 
 /* returns -1 on file error, line number on error in file syntax */
 static int edit_read_syntax_file (WEdit * edit, char **names, char *syntax_file, char *editor_file, char *type)
@@ -937,17 +1285,9 @@ static int edit_read_syntax_file (WEdit * edit, char **names, char *syntax_file,
     int result = 0;
     int count = 0;
 
-    f = fopen (syntax_file, "r");
-    if (!f) {
-	f = fopen (syntax_file, "w");
-	if (!f)
-	    return -1;
-	fprintf (f, "%s", syntax_text);
-	fclose (f);
-	f = fopen (syntax_file, "r");
-	if (!f)
-	    return -1;
-    }
+    f = upgrade_syntax_file (syntax_file);
+    if (!f)
+	return -1;
     args[0] = 0;
 
     for (;;) {
@@ -1021,7 +1361,7 @@ void edit_load_syntax (WEdit * edit, char **names, char *type)
     if (edit) {
 	if (!edit->filename)
 	    return;
-	if (!*edit->filename)
+	if (!*edit->filename && !type)
 	    return;
     }
     f = catstrs (home_dir, SYNTAX_FILE, 0);

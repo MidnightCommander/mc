@@ -166,6 +166,10 @@ void edit_refresh_cmd (WEdit * edit)
     clr_scr();
     do_refresh();
 #else
+    {
+	int fg, bg;
+	edit_get_syntax_color (edit, -1, &fg, &bg);
+    }
     touchwin(stdscr);
 #endif
     mc_refresh();

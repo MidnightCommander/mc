@@ -1,3 +1,10 @@
+Wed Apr 29 03:06:09 1998  Paul Sheer  <psheer@obsidian.co.za>
+
+	* syntax.c: some optimisations, as well as support for
+	syntax highlighting of Makefiles and ChangeLog files.
+	Fixed some syntax highlighting bugs. All C and C++
+	keywords added.
+
 Tue Apr 28 06:11:08 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* view.c (toggle_wrap_mode, toggle_hex_mode): Force recalculation

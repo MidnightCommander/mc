@@ -102,11 +102,7 @@
 #define SEARCH_DIALOG_OPTION_NO_CASE	4
 #define SEARCH_DIALOG_OPTION_BACKWARDS	8
 
-#ifdef MIDNIGHT
-#define SYNTAX_FILE "/.cedit/mcsyntax"
-#else
 #define SYNTAX_FILE "/.cedit/syntax"
-#endif
 #define CLIP_FILE "/.cedit/cooledit.clip"
 #define MACRO_FILE "/.cedit/cooledit.macros"
 #define BLOCK_FILE "/.cedit/cooledit.block"
