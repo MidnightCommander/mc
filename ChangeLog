@@ -1,7 +1,7 @@
 2003-08-02  Pavel Roskin  <proski@gnu.org>
 
 	* lib/cedit.menu: Avoid using "id -u", it doesn't work on
-	Solaris.  From Andrew V. Samoilov <andrew@email.zp.ua>
+	Solaris.  From Andrew V. Samoilov <sav@bcs.zp.ua>
 
 2003-07-23  Pavel Roskin  <proski@gnu.org>
 
