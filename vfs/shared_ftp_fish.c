@@ -1,6 +1,8 @@
 /*
  * Shared code between the fish.c and the ftp.c file systems
  *
+ * $Id$
+ *
  * Actually, this code is not being used by fish.c any more :-).
  *
  * Namespace pollution: X_hint_reread, X_flushdir.
@@ -861,7 +863,7 @@ static int retrieve_file(struct direntry *fe)
 	    break;
 
 	total += n;
-	vfs_print_stats (X, "Getting file", fe->remote_filename, total, stat_size);
+	vfs_print_stats (X, _("Getting file"), fe->remote_filename, total, stat_size);
 
         while (write(local_handle, buffer, n) < 0) {
 	    if (errno == EINTR) {

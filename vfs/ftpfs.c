@@ -6,7 +6,8 @@
                1995, 1996, 1997 Miguel de Icaza
 	       1997 Norbert Warmuth
 	       1998 Pavel Machek
-   
+   $Id$   
+
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License
    as published by the Free Software Foundation; either version 2 of
@@ -132,14 +133,12 @@ static char reply_str [80];
  */
 
 static char *
-translate_path (vfs *me, vfs_s_super *super, char *remote_path)
+translate_path (vfs *me, vfs_s_super *super, const char *remote_path)
 {
-    char *p;
-    
     if (!SUP.remote_is_amiga)
-	return remote_path;
+	return g_strdup (remote_path);
     else {
-	char *ret;
+	char *ret, *p;
 
 	if (logfile) {
 	    fprintf (logfile, "MC -- translate_path: %s\n", remote_path);
@@ -931,10 +930,11 @@ open_data_connection (vfs *me, vfs_s_super *super, char *cmd, char *remote,
 	if (j != CONTINUE)
 	    return -1;
     }
-    if (remote)
-        j = command (me, super, WAIT_REPLY, "%s /%s", cmd, 
-		translate_path (me, super, remote));
-    else
+    if (remote) {
+	char * remote_path = translate_path (me, super, remote);
+	j = command (me, super, WAIT_REPLY, "%s /%s", cmd, remote_path);
+	g_free (remote_path);
+    } else
     	j = command (me, super, WAIT_REPLY, "%s", cmd);
     if (j != PRELIM)
 	    ERRNOR (EPERM, -1);
@@ -1155,10 +1155,12 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
     
         p = translate_path (me, super, remote_path);
         if (ftpfs_chdir_internal (me, super, p) != COMPLETE) {
+	    g_free (p);
             my_errno = ENOENT;
 	    print_vfs_message(_("ftpfs: CWD failed."));
 	    return -1;
         }
+	g_free (p);
     }
 
     gettimeofday(&dir->u.ftp.timestamp, NULL);
@@ -1414,8 +1416,9 @@ send_ftp_command(vfs *me, char *filename, char *cmd, int flags)
     if (!(rpath = vfs_s_get_path_mangle(me, filename, &super, 0)))
 	return -1;
     p = translate_path (me, super, rpath);
-    r = command (me, super, WAIT_REPLY, cmd, p);
     g_free(rpath);
+    r = command (me, super, WAIT_REPLY, cmd, p);
+    g_free (p);
     vfs_add_noncurrent_stamps (&vfs_ftpfs_ops, (vfsid) super, NULL);
     if (flags & OPT_IGNORE_ERROR)
 	r = COMPLETE;
@@ -1499,6 +1502,7 @@ ftpfs_chdir_internal (vfs *me, vfs_s_super *super, char *remote_path)
 
     p = translate_path (me, super, remote_path);
     r = command (me, super, WAIT_REPLY, "CWD /%s", p);
+    g_free (p);
 
     if (r != COMPLETE) {
 	my_errno = EIO;

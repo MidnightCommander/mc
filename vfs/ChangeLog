@@ -1,3 +1,8 @@
+1999-12-15  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* Merged changes by Andrew V. Samoilov <sav@bcs.zp.ua>. They are
+	mostly internationalization + fixing stupid bugs of mine
+
 1999-12-08  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* ftpfs.c: basically replaced ftpfs with new one. Unlike the

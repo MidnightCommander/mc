@@ -3,6 +3,8 @@
  *
  * Written at 1998 by Pavel Machek <pavel@ucw.cz>, distribute under LGPL.
  *
+ * $Id$
+ *
  * Very loosely based on tar.c from midnight and archives.[ch] from
  * avfs by Miklos Szeredi (mszeredi@inf.bme.hu)
  *
@@ -313,7 +315,7 @@ vfs_s_find_entry_linear (vfs *me, vfs_s_inode *root, char *path, int follow, int
 
     if (ent && (! (MEDATA->dir_uptodate) (me, ent->ino))){
 #if 1
-	print_vfs_message ("Dir cache expired for %s", path);
+	print_vfs_message (_("Dir cache expired for %s"), path);
 	sleep(1);
 #endif
 	vfs_s_free_entry (me, ent);
@@ -441,12 +443,12 @@ vfs_s_free_super (vfs *me, vfs_s_super *super)
     }
 
 #if 0
-    /* We currently leak small ammount of memory, sometimes. Fix it if you can. */
+    /* FIXME: We currently leak small ammount of memory, sometimes. Fix it if you can. */
     if (super->ino_usage)
-	message_1s1d (1, " Direntry warning ", "Super ino_usage is %d, memory leak", super->ino_usage);
+	message_1s1d (1, _(" Direntry warning "), _("Super ino_usage is %d, memory leak"), super->ino_usage);
 
     if (super->want_stale)
-	message_1s (1, " Direntry warning ", "Super has want_stale set");
+	message_1s (1, _(" Direntry warning "), _("Super has want_stale set"));
 #endif
 
     if (super->prevp){
@@ -557,8 +559,6 @@ vfs_s_fullpath (vfs *me, vfs_s_inode *ino)
     if (MEDATA->find_entry != vfs_s_find_entry_linear)
 	vfs_die ("Implement me!");
     if (!ino->ent) /* That must be directory... */
-        
-    if (!ino->ent)
 	ERRNOR (EAGAIN, NULL);
 
     if ((!ino->ent->dir) || (!ino->ent->dir->ent)) /* It must be directory */
@@ -584,16 +584,12 @@ vfs_s_inode *
 vfs_s_inode_from_path (vfs *me, char *name, int flags)
 {
     struct vfs_s_super *super;
-    struct vfs_s_inode *ino;
     char *q;
 
     if (!(q = vfs_s_get_path_mangle (me, name, &super, 0))) 
 	return NULL;
 
-    ino = vfs_s_find_inode (me, super->root, q, flags & FL_FOLLOW ? LINK_FOLLOW : LINK_NO_FOLLOW, flags & ~FL_FOLLOW);
-    if (ino) return ino;
-
-    return ino;
+    return vfs_s_find_inode (me, super->root, q, flags & FL_FOLLOW ? LINK_FOLLOW : LINK_NO_FOLLOW, flags & ~FL_FOLLOW);
 
 }
 
@@ -823,7 +819,7 @@ vfs_s_read (void *fh, char *buffer, int count)
     vfs *me = FH_SUPER->me;
     
     if (FH->linear == LS_LINEAR_CLOSED){
-        print_vfs_message ("Starting linear transfer...");
+        print_vfs_message (_("Starting linear transfer..."));
 	if (!MEDATA->linear_start (me, FH, 0))
 	    return -1;
     }
@@ -968,7 +964,7 @@ vfs_s_retrieve_file(vfs *me, struct vfs_s_inode *ino)
 	    break;
 
 	total += n;
-	vfs_print_stats (me->name, "Getting file", ino->ent->name, total, stat_size);
+	vfs_print_stats (me->name, _("Getting file"), ino->ent->name, total, stat_size);
 
         if (write(handle, buffer, n) < 0) {
 	    me->verrno = errno;

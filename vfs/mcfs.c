@@ -6,6 +6,8 @@
               Andrej Borsenkow
 	      Norbert Warmuth
    
+   $Id$
+
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License
    as published by the Free Software Foundation; either version 2 of
@@ -173,7 +175,7 @@ static int mcfs_login_server (int my_socket, char *user, int port,
 		  " not be safe on the remote side.  Continue? \n"), 3, 2,
 			      _(" Yes "),  _(" No "));
 #else
-	    message_1s( 1, " MCFS ", _(" The remote server is running on strange port. Giving up.\n"));
+	    message_1s( 1, _(" MCFS "), _(" The remote server is running on strange port. Giving up.\n"));
 	    v = 1;
 #endif
 
@@ -199,7 +201,7 @@ static int mcfs_login_server (int my_socket, char *user, int port,
 	    return 0;
 	
 	if (result != MC_LOGINOK){
-	    message_1s (1, " MCFS ", _(" Invalid password "));
+	    message_1s (1, _(" MCFS "), _(" Invalid password "));
 	    rpc_send (my_socket, RPC_INT, MC_QUIT, RPC_END);
 	    close (my_socket);
 	    return 0;
@@ -230,7 +232,7 @@ open_tcp_link  (char *host, int *port, int *version, char *caller)
 	       sizeof (inaddr));
     else {
 	if ((hp = gethostbyname (host)) == NULL){
-	    message_2s (1, caller, " Can't locate hostname: %s ", host);
+	    message_2s (1, caller, _(" Can't locate hostname: %s "), host);
 	    return 0;
 	}
 	bcopy ((char *) hp->h_addr, (char *) &server_address.sin_addr,
@@ -248,13 +250,13 @@ open_tcp_link  (char *host, int *port, int *version, char *caller)
     server_address.sin_port = htons (*port);
     
     if ((my_socket = socket (AF_INET, SOCK_STREAM, 0)) < 0){
-	message_2s (1, caller, " Can't create socket: %s ",
+	message_2s (1, caller, _(" Can't create socket: %s "),
 		 unix_error_string(errno));
 	return 0;
     }
     if (connect (my_socket, (struct sockaddr *) &server_address,
 	     sizeof (server_address)) < 0){
-	message_2s (1, caller, " Can't connect to server: %s ",
+	message_2s (1, caller, _(" Can't connect to server: %s "),
 		 unix_error_string (errno));
 	close (my_socket);
 	return 0;
@@ -1122,7 +1124,7 @@ mcfs_setctl (vfs *me, char *path, int ctlop, char *arg)
 
 vfs vfs_mcfs_ops = {
     NULL,	/* This is place of next pointer */
-    "Midnight Commander's private remote filesystem",
+    N_("Midnight Commander's private remote filesystem"),
     F_NET,	/* flags */
     "mc:",	/* prefix */
     NULL,	/* data */

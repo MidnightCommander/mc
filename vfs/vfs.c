@@ -315,7 +315,7 @@ vfs_addstamp (vfs *v, vfsid id, struct vfs_stamping *parent)
         stamp->id = id;
 	if (parent){
 	    struct vfs_stamping *st = stamp;
-	    for (; parent;){
+	    while (parent){
 		st->parent = g_new (struct vfs_stamping, 1);
 		*st->parent = *parent;
 		parent = parent->parent;
@@ -456,12 +456,9 @@ MC_HANDLEOP(read, (int handle, char *buffer, int count), (vfs_info (handle), buf
 int
 mc_ctl (int handle, int ctlop, int arg)
 {
-    vfs *vfs;
-    int result;
+    vfs *vfs = vfs_op (handle);
 
-    vfs = vfs_op (handle);
-    result = vfs->ctl ? (*vfs->ctl)(vfs_info (handle), ctlop, arg) : 0;
-    return result;
+    return vfs->ctl ? (*vfs->ctl)(vfs_info (handle), ctlop, arg) : 0;
 }
 
 int
@@ -1157,7 +1154,7 @@ mc_def_ungetlocalcopy (vfs *vfs, char *filename, char *local, int has_changed)
     return 0;
 
  failed:
-    message_1s (1, "Changes to file lost", filename);
+    message_1s (1, _("Changes to file lost"), filename);
     if (fdout) mc_close(fdout);
     if (fdin) close(fdin);
     unlink (local);
@@ -1169,7 +1166,6 @@ int
 mc_ungetlocalcopy (char *path, char *local, int has_changed)
 {
     vfs *vfs;
-    int res;
 
     path = vfs_canon (path);
     vfs = vfs_type (path);
@@ -1758,11 +1754,11 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 	}
 	if (linkname){
 	    s = g_strdup (p_copy + column_ptr [idx2+1]);
-	    p = strlen (s);
+	    p = strlen (s) - 1;
+	    if (s [p] == '\r' || s [p] == '\n')
+		s [p] = 0;
 	    if (s [p-1] == '\r' || s [p-1] == '\n')
 		s [p-1] = 0;
-	    if (s [p-2] == '\r' || s [p-2] == '\n')
-		s [p-2] = 0;
 		
 	    *linkname = s;
 	}
@@ -1778,12 +1774,12 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 	    char *s;
 	    
 	    s = g_strdup (p_copy + column_ptr [idx++]);
-	    p = strlen (s);
+	    p = strlen (s) - 1;
 	    /* g_strchomp(); */
+	    if (s [p] == '\r' || s [p] == '\n')
+	        s [p] = 0;
 	    if (s [p-1] == '\r' || s [p-1] == '\n')
-	        s [p-1] = 0;
-	    if (s [p-2] == '\r' || s [p-2] == '\n')
-		s [p-2] = 0;
+		s [p-1] = 0;
 	    
 	    *filename = s;
 	}
@@ -1798,9 +1794,9 @@ error:
       static int errorcount = 0;
 
       if (++errorcount < 5) {
-	message_1s (1, "Could not parse:", p_copy);
+	message_1s (1, _("Could not parse:"), p_copy);
       } else if (errorcount == 5)
-	message_1s (1, "More parsing errors will be ignored.", "(sorry)" );
+	message_1s (1, _("More parsing errors will be ignored."), _("(sorry)"));
     }
 
     if (p_copy != p)		/* Carefull! */
@@ -1811,7 +1807,7 @@ error:
 void
 vfs_die (char *m)
 {
-    message_1s (1, "Internal error:", m);
+    message_1s (1, _("Internal error:"), m);
     exit (1);
 }
 

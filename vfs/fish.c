@@ -5,6 +5,8 @@
    
    Written by: 1998 Pavel Machek
 
+   $Id$
+
    Derived from ftpfs.c.
    
    This program is free software; you can redistribute it and/or
@@ -226,7 +228,7 @@ open_archive_int (vfs *me, vfs_s_super *super)
 #endif
 	    if (!SUP.password){
 		char *p, *op;
-		p = g_strconcat (" fish: Password required for ", SUP.user, 
+		p = g_strconcat (_(" fish: Password required for "), SUP.user, 
 				  " ", NULL);
 		op = vfs_get_password (p);
 		g_free (p);
