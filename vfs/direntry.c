@@ -440,7 +440,7 @@ vfs_s_stamp_me (struct vfs_class *me, struct vfs_s_super *psup,
 	parent = g_new (struct vfs_stamping, 1);
 	parent->v = v;
 	parent->next = 0;
-	parent->id = (*v->getid) (v, fs_name, &(parent->parent));
+	parent->id = vfs_getid (v, fs_name, &(parent->parent));
     }
     vfs_add_noncurrent_stamps (me, (vfsid) psup, parent);
 }
@@ -863,7 +863,7 @@ vfs_s_close (void *fh)
 	    parent = g_new (struct vfs_stamping, 1);
 	    parent->v = v;
 	    parent->next = 0;
-	    parent->id = (*v->getid) (v, FH_SUPER->name, &(parent->parent));
+	    parent->id = vfs_getid (v, FH_SUPER->name, &(parent->parent));
 	}
         vfs_add_noncurrent_stamps (me, (vfsid) (FH_SUPER), parent);
     }
@@ -1071,7 +1071,7 @@ vfs_s_getid (struct vfs_class *me, const char *path, struct vfs_stamping **paren
 	return (vfsid) -1;
     g_free(p);
     v = vfs_get_class (archive->name);
-    id = (*v->getid) (v, archive->name, &par);
+    id = vfs_getid (v, archive->name, &par);
     if (id != (vfsid)-1){
         *parent = g_new (struct vfs_stamping, 1);
         (*parent)->v = v;

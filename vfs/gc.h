@@ -20,6 +20,8 @@ void vfs_timeout_handler (void);
 void vfs_expire (int);
 int vfs_timeouts (void);
 void vfs_release_path (const char *dir);
+vfsid vfs_getid (struct vfs_class *vclass, const char *path,
+		 struct vfs_stamping **parent);
 vfsid vfs_ncs_getid (struct vfs_class *nvfs, const char *dir,
 		     struct vfs_stamping **par);
 void vfs_gc_done (void);

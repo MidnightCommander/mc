@@ -230,24 +230,6 @@ local_rmdir (struct vfs_class *me, char *path)
     return rmdir (path);
 }
 
-static vfsid
-local_getid (struct vfs_class *me, const char *path, struct vfs_stamping **parent)
-{
-    *parent = NULL;
-    return (vfsid) -1; /* We do not free local fs stuff at all */
-}
-
-static int
-local_nothingisopen (vfsid id)
-{
-    return 0;
-}
-
-static void
-local_free (vfsid id)
-{
-}
-
 static char *
 local_getlocalcopy (struct vfs_class *me, const char *path)
 {
@@ -311,9 +293,6 @@ init_localfs (void)
     vfs_local_ops.ferrno = local_errno;
     vfs_local_ops.lseek = local_lseek;
     vfs_local_ops.mknod = local_mknod;
-    vfs_local_ops.getid = local_getid;
-    vfs_local_ops.nothingisopen = local_nothingisopen;
-    vfs_local_ops.free = local_free;
     vfs_local_ops.getlocalcopy = local_getlocalcopy;
     vfs_local_ops.ungetlocalcopy = local_ungetlocalcopy;
     vfs_local_ops.mkdir = local_mkdir;

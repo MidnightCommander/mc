@@ -1071,29 +1071,6 @@ mcfs_link (struct vfs_class *me, char *p1, char *p2)
     return mcfs_rpc_two_paths (MC_LINK, p1, p2);
 }
 
-/* We do not free anything right now: we free resources when we run
- * out of them
- */
-static vfsid
-mcfs_getid (struct vfs_class *me, const char *p, struct vfs_stamping **parent)
-{
-    *parent = NULL;
-
-    return (vfsid) - 1;
-}
-
-static int
-mcfs_nothingisopen (vfsid id)
-{
-    return 0;
-}
-
-static void
-mcfs_free (vfsid id)
-{
-    /* FIXME: Should not be empty */
-}
-
 /* Gives up on a socket and reopnes the connection, the child own the socket
  * now
  */
@@ -1178,9 +1155,6 @@ init_mcfs (void)
     vfs_mcfs_ops.ferrno = mcfs_errno;
     vfs_mcfs_ops.lseek = mcfs_lseek;
     vfs_mcfs_ops.mknod = mcfs_mknod;
-    vfs_mcfs_ops.getid = mcfs_getid;
-    vfs_mcfs_ops.nothingisopen = mcfs_nothingisopen;
-    vfs_mcfs_ops.free = mcfs_free;
     vfs_mcfs_ops.mkdir = mcfs_mkdir;
     vfs_mcfs_ops.rmdir = mcfs_rmdir;
     vfs_mcfs_ops.setctl = mcfs_setctl;

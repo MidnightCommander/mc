@@ -242,7 +242,7 @@ sfs_getid (struct vfs_class *me, const char *path, struct vfs_stamping **parent)
 	/* ... and learn whoever was the parent system */
 	v = vfs_split (path2, NULL, NULL);
 
-	id = (*v->getid) (v, path2, &par);
+	id = vfs_getid (v, path2, &par);
 	g_free (path2);
     }
 

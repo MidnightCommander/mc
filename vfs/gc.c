@@ -144,6 +144,22 @@ vfs_rmstamp (struct vfs_class *v, vfsid id, int removeparents)
 }
 
 
+/* Wrapper around getid methods */
+vfsid
+vfs_getid (struct vfs_class *vclass, const char *path,
+	   struct vfs_stamping **parent)
+{
+    vfsid id = (vfsid) - 1;
+
+    *parent = NULL;
+    if (vclass->getid)
+	id = (*vclass->getid) (vclass, path, parent);
+
+    return id;
+}
+
+
+/* Same as vfs_getid, but append slash to the path if needed */
 vfsid
 vfs_ncs_getid (struct vfs_class *nvfs, const char *dir,
 	       struct vfs_stamping **par)
@@ -152,7 +168,7 @@ vfs_ncs_getid (struct vfs_class *nvfs, const char *dir,
     char *dir1;
 
     dir1 = concat_dir_and_file (dir, "");
-    nvfsid = (*nvfs->getid) (nvfs, dir1, par);
+    nvfsid = vfs_getid (nvfs, dir1, par);
     g_free (dir1);
     return nvfsid;
 }
@@ -219,7 +235,7 @@ _vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid,
 
     f = is_parent (oldvfs, oldvfsid, par);
     vfs_rm_parents (par);
-    if ((nvfs == oldvfs && nvfsid == oldvfsid) || oldvfsid == (vfsid *) - 1
+    if ((nvfs == oldvfs && nvfsid == oldvfsid) || oldvfsid == (vfsid) - 1
 	|| f) {
 	return;
     }
@@ -232,7 +248,7 @@ _vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid,
 	if ((n2vfs == oldvfs && n2vfsid == oldvfsid) || f)
 	    return;
     } else {
-	n2vfs = (struct vfs_class *) -1;
+	n2vfs = NULL;
 	n2vfsid = (vfsid) - 1;
     }
 
@@ -244,36 +260,22 @@ _vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid,
 	if ((n3vfs == oldvfs && n3vfsid == oldvfsid) || f)
 	    return;
     } else {
-	n3vfs = (struct vfs_class *) -1;
+	n3vfs = NULL;
 	n3vfsid = (vfsid) - 1;
     }
 
-    if ((*oldvfs->nothingisopen) (oldvfsid)) {
-#if 0				/* need setctl for this */
-	if (oldvfs == &vfs_extfs_ops
-	    && ((extfs_archive *) oldvfsid)->name == 0) {
-	    /* Free the resources immediatly when we leave a mtools fs
-	       ('cd a:') instead of waiting for the vfs-timeout */
-	    (oldvfs->free) (oldvfsid);
-	} else
-#endif
-	    vfs_addstamp (oldvfs, oldvfsid, parent);
-	for (stamp = parent; stamp != NULL; stamp = stamp->parent) {
-	    if ((stamp->v == nvfs && stamp->id == nvfsid)
-		|| (stamp->v == n2vfs && stamp->id == n2vfsid)
-		|| (stamp->v == n3vfs && stamp->id == n3vfsid)
-		|| stamp->id == (vfsid) - 1
-		|| !(*stamp->v->nothingisopen) (stamp->id))
-		break;
-#if 0
-	    if (stamp->v == &vfs_extfs_ops
-		&& ((extfs_archive *) stamp->id)->name == 0) {
-		(stamp->v->free) (stamp->id);
-		vfs_rmstamp (stamp->v, stamp->id, 0);
-	    } else
-#endif
-		vfs_addstamp (stamp->v, stamp->id, stamp->parent);
-	}
+    if (!oldvfs->nothingisopen || !(*oldvfs->nothingisopen) (oldvfsid))
+	return;
+
+    vfs_addstamp (oldvfs, oldvfsid, parent);
+    for (stamp = parent; stamp != NULL; stamp = stamp->parent) {
+	if ((stamp->v == nvfs && stamp->id == nvfsid)
+	    || (stamp->v == n2vfs && stamp->id == n2vfsid)
+	    || (stamp->v == n3vfs && stamp->id == n3vfsid)
+	    || stamp->id == (vfsid) - 1 || !stamp->v->nothingisopen
+	    || !(*stamp->v->nothingisopen) (stamp->id))
+	    break;
+	vfs_addstamp (stamp->v, stamp->id, stamp->parent);
     }
 }
 
@@ -335,7 +337,8 @@ vfs_expire (int now)
     for (stamp = stamps; stamp != NULL;) {
 	if (now || (timeoutcmp (&stamp->time, &time))) {
 	    st = stamp->next;
-	    (*stamp->v->free) (stamp->id);
+	    if (stamp->v->free)
+		(*stamp->v->free) (stamp->id);
 	    vfs_rmstamp (stamp->v, stamp->id, 0);
 	    stamp = st;
 	} else
@@ -384,7 +387,8 @@ vfs_gc_done (void)
     struct vfs_stamping *stamp, *st;
 
     for (stamp = stamps, stamps = 0; stamp != NULL;) {
-	(*stamp->v->free) (stamp->id);
+	if (stamp->v->free)
+	    (*stamp->v->free) (stamp->id);
 	st = stamp->next;
 	g_free (stamp);
 	stamp = st;

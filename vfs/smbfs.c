@@ -1670,30 +1670,10 @@ smbfs_link (struct vfs_class *me, char *p1, char *p2)
     return -1;
 }
 
-/* We do not free anything right now: we free resources when we run
- * out of them
- */
-static vfsid
-smbfs_getid (struct vfs_class *me, const char *p, struct vfs_stamping **parent)
-{
-    *parent = NULL;
-    DEBUG (3, ("smbfs_getid(p:%s)\n", p));
-
-    return (vfsid) - 1;
-}
-
-static int
-smbfs_nothingisopen (vfsid id)
-{
-    DEBUG (3, ("smbfs_nothingisopen(%p)\n", id));
-    return 0;
-}
-
 static void
 smbfs_free (vfsid id)
 {
     DEBUG (3, ("smbfs_free(%p)\n", id));
-    /* FIXME: Should not be empty */
     smbfs_auth_free_all ();
 }
 
@@ -1926,8 +1906,6 @@ init_smbfs (void)
     vfs_smbfs_ops.ferrno = smbfs_errno;
     vfs_smbfs_ops.lseek = smbfs_lseek;
     vfs_smbfs_ops.mknod = smbfs_mknod;
-    vfs_smbfs_ops.getid = smbfs_getid;
-    vfs_smbfs_ops.nothingisopen = smbfs_nothingisopen;
     vfs_smbfs_ops.free = smbfs_free;
     vfs_smbfs_ops.mkdir = smbfs_mkdir;
     vfs_smbfs_ops.rmdir = smbfs_rmdir;

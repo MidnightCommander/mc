@@ -478,7 +478,7 @@ extfs_get_path_mangle (const char *inname, struct archive **archive,
 	    parent = g_new (struct vfs_stamping, 1);
 	    parent->v = v;
 	    parent->next = 0;
-	    parent->id = (*v->getid) (v, archive_name, &(parent->parent));
+	    parent->id = vfs_getid (v, archive_name, &(parent->parent));
 	}
 	vfs_add_noncurrent_stamps (&vfs_extfs_ops, (vfsid) parc, parent);
     }
@@ -769,7 +769,7 @@ extfs_close (void *data)
 	    parent->v = v;
 	    parent->next = 0;
 	    parent->id =
-		(*v->getid) (v, file->archive->name, &(parent->parent));
+		vfs_getid (v, file->archive->name, &(parent->parent));
 	}
 	vfs_add_noncurrent_stamps (&vfs_extfs_ops, (vfsid) (file->archive),
 				   parent);
@@ -1136,7 +1136,7 @@ static vfsid extfs_getid (struct vfs_class *me, const char *path, struct vfs_sta
     g_free(p);
     if (archive->name){
 	v = vfs_get_class (archive->name);
-	id = (*v->getid) (v, archive->name, &par);
+	id = vfs_getid (v, archive->name, &par);
 	if (id != (vfsid)-1) {
 	    *parent = g_new (struct vfs_stamping, 1);
 	    (*parent)->v = v;

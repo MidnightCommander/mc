@@ -1,3 +1,11 @@
+2003-11-08  Pavel Roskin  <proski@gnu.org>
+
+	* gc.c: Make getid(), nothingisopen() and free() methods
+	optional.  Eliminate trivial implementations.
+	(vfs_getid): New function - safe wrapper around getid().  Use
+	it everywhere.
+	(vfs_ncs_getid): Remove dead code, inprove readability.
+
 2003-11-07  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.c: Split garbage collection code into ...
