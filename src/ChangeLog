@@ -1,3 +1,7 @@
+2003-01-24  Pavel Roskin  <proski@gnu.org>
+
+	* subshell.c (resize_tty) [!TIOCSWINSZ]: Warning fix.
+
 2003-01-23  Pavel Roskin  <proski@gnu.org>
 
 	* slint.c (slang_init): Limit screen size to 255x255 because of

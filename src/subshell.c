@@ -684,6 +684,8 @@ static int resize_tty (int fd)
     tty_size.ws_xpixel = tty_size.ws_ypixel = 0;
 
     return ioctl (fd, TIOCSWINSZ, &tty_size);
+#else
+    return 0;
 #endif
 }
 
