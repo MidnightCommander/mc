@@ -235,24 +235,6 @@ message (int error, char *header, const char *text, ...)
 
 /* {{{ Quick dialog routines */
 
-static cb_ret_t
-quick_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
-{
-    switch (msg) {
-    case DLG_KEY:
-	/* Enter closes the dialog, not just moves to the next widget */
-	if (parm == '\n') {
-	    h->ret_value = B_ENTER;
-	    dlg_stop (h);
-	}
-	/* Allow button callback to override h->ret_value */
-	return MSG_NOT_HANDLED;
-
-    default:
-	return default_dlg_callback (h, msg, parm);
-    }
-}
-
 #define I18N(x) (do_int && *x ? (x = _(x)): x)
 
 int
@@ -280,13 +262,12 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 	do_int = 0;
 
     if (qd->xpos == -1)
-	dd = create_dlg (0, 0, qd->ylen, qd->xlen, dialog_colors,
-			 quick_callback, qd->help, qd->title,
-			 DLG_CENTER | DLG_TRYUP);
+	dd = create_dlg (0, 0, qd->ylen, qd->xlen, dialog_colors, NULL,
+			 qd->help, qd->title, DLG_CENTER | DLG_TRYUP);
     else
 	dd = create_dlg (qd->ypos, qd->xpos, qd->ylen, qd->xlen,
-			 dialog_colors, quick_callback, qd->help,
-			 qd->title, DLG_NONE);
+			 dialog_colors, NULL, qd->help, qd->title,
+			 DLG_NONE);
 
     /* We pass this to the callback */
     dd->cols = qd->xlen;
@@ -305,8 +286,7 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 
 	switch (qw->widget_type) {
 	case quick_checkbox:
-	    widget =
-		check_new (ypos, xpos, *qw->result, I18N (qw->text));
+	    widget = check_new (ypos, xpos, *qw->result, I18N (qw->text));
 	    break;
 
 	case quick_radio:
@@ -325,8 +305,9 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 
 	    /* We use the hotkey pos as the field length */
 	case quick_input:
-	    input = input_new (ypos, xpos, INPUT_COLOR,
-			       qw->hotkey_pos, qw->text, qw->histname);
+	    input =
+		input_new (ypos, xpos, INPUT_COLOR, qw->hotkey_pos,
+			   qw->text, qw->histname);
 	    input->is_password = qw->value == 1;
 	    input->point = 0;
 	    if (qw->value & 2)

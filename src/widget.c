@@ -54,25 +54,31 @@ button_callback (WButton *b, int Msg, int Par)
     int stop = 0;
     int off = 0;
     Dlg_head *h = b->widget.parent;
-    
-    switch (Msg){
+
+    switch (Msg) {
     case WIDGET_INIT:
 	return 1;
 
     case WIDGET_HOTKEY:
-        if (b->hotkey == Par ||  toupper(b->hotkey) == Par){
-	    button_callback (b, WIDGET_KEY, ' '); /* to make action */
+	if (Par == '\n' && b->flags == DEFPUSH_BUTTON) {
+	    button_callback (b, WIDGET_KEY, ' ');
 	    return 1;
-	} else
-	    return 0;
-	
+	}
+
+	if (b->hotkey == Par || toupper (b->hotkey) == Par) {
+	    button_callback (b, WIDGET_KEY, ' ');
+	    return 1;
+	}
+
+	return 0;
+
     case WIDGET_KEY:
 	if (Par != ' ' && Par != '\n')
 	    break;
 
 	if (b->callback)
-	    stop = (*b->callback)(b->action);
-	if (!b->callback || stop){
+	    stop = (*b->callback) (b->action);
+	if (!b->callback || stop) {
 	    h->ret_value = b->action;
 	    dlg_stop (h);
 	}
@@ -80,49 +86,49 @@ button_callback (WButton *b, int Msg, int Par)
 
     case WIDGET_CURSOR:
 	switch (b->flags) {
-	    case DEFPUSH_BUTTON:
-		off = 3;
-		break;
-	    case NORMAL_BUTTON:
-		off = 2;
-		break;
-	    case NARROW_BUTTON:
-		off = 1;
-		break;
-	    case HIDDEN_BUTTON:
-	    default:
-		off = 0;
-		break;
-        }
+	case DEFPUSH_BUTTON:
+	    off = 3;
+	    break;
+	case NORMAL_BUTTON:
+	    off = 2;
+	    break;
+	case NARROW_BUTTON:
+	    off = 1;
+	    break;
+	case HIDDEN_BUTTON:
+	default:
+	    off = 0;
+	    break;
+	}
 	widget_move (&b->widget, 0, b->hotpos + off);
 	return 1;
 
     case WIDGET_UNFOCUS:
     case WIDGET_FOCUS:
     case WIDGET_DRAW:
-	if (Msg==WIDGET_UNFOCUS) 
+	if (Msg == WIDGET_UNFOCUS)
 	    b->selected = 0;
-	else if (Msg==WIDGET_FOCUS) 
+	else if (Msg == WIDGET_FOCUS)
 	    b->selected = 1;
 
-	switch (b->flags){
-	    case DEFPUSH_BUTTON:
-		g_snprintf (buf, sizeof(buf), "[< %s >]", b->text);
-		off = 3;
-		break;
-	    case NORMAL_BUTTON:
-		g_snprintf (buf, sizeof(buf), "[ %s ]", b->text);
-		off = 2;
-		break;
-	    case NARROW_BUTTON:
-		g_snprintf (buf, sizeof(buf), "[%s]", b->text);
-		off = 1;
-		break;
-	    case HIDDEN_BUTTON:
-	    default:
-		buf[0] = '\0';
-		off = 0;
-		break;
+	switch (b->flags) {
+	case DEFPUSH_BUTTON:
+	    g_snprintf (buf, sizeof (buf), "[< %s >]", b->text);
+	    off = 3;
+	    break;
+	case NORMAL_BUTTON:
+	    g_snprintf (buf, sizeof (buf), "[ %s ]", b->text);
+	    off = 2;
+	    break;
+	case NARROW_BUTTON:
+	    g_snprintf (buf, sizeof (buf), "[%s]", b->text);
+	    off = 1;
+	    break;
+	case HIDDEN_BUTTON:
+	default:
+	    buf[0] = '\0';
+	    off = 0;
+	    break;
 	}
 
 	attrset ((b->selected) ? FOCUSC : NORMALC);
@@ -130,17 +136,17 @@ button_callback (WButton *b, int Msg, int Par)
 
 	addstr (buf);
 
-	if (b->hotpos >= 0){
+	if (b->hotpos >= 0) {
 	    attrset ((b->selected) ? HOT_FOCUSC : HOT_NORMALC);
-	    widget_move (&b->widget, 0, b->hotpos+off);
-	    addch ((unsigned char)b->text [b->hotpos]);
-        }
+	    widget_move (&b->widget, 0, b->hotpos + off);
+	    addch ((unsigned char) b->text[b->hotpos]);
+	}
 	if (Msg == WIDGET_FOCUS)
 	    break;
 	else
 	    return 1;
 	break;
-    }	
+    }
     return default_proc (Msg, Par);
 }
 
