@@ -6,7 +6,7 @@ mc \- Fájlkezelõ Unix típusú rendszerekhez
 .\"SKIP_SECTION"
 .SH "ALKALMAZÁSA"
 .B mc
-[\-abcCdfhPstuUVx?] [\-l log] [dir1 [dir2]] [-v file]
+[\-abcCdfhPstuUVx] [\-l log] [dir1 [dir2]] [-v file]
 .\"NODE "DESCRIPTION"
 .SH "LEÍRÁS"
 A Midnight Commander Unix típusú operációs rendszerekhez készített
@@ -1342,7 +1342,7 @@ A cd belsõ parancs
 leírásánál.
 .\"NODE "    Extension File Edit"
 .SH "    Társítások"
-Ez az ~/.mc/ext szerkesztéséhez segítségül fogja hívni a
+Ez az ~/.mc/bindings szerkesztéséhez segítségül fogja hívni a
 szövegszerkesztõdet. A fájl formátuma a következõ (a
 formátum a 3.0-ás verzióval megváltozott):
 .PP
@@ -1393,13 +1393,9 @@ lehet:
 (ha a felhasználó lenyomja az Enter-t, vagy duplán
 kattint),
 .I View
-(F3),
+(F3) és
 .I Edit
-(F4),
-.I Drop
-(a felhasználó eltüntethet néhány fájlt innen), vagy más bármely más,
-a felhasználó által megadott név (ezeket a kiterjesztés-lista menüben
-jeleníti meg).
+(F4).
 .PP
 .I command
 ez bármely egysoros shell parancs lehet, az egyszerû
@@ -1453,35 +1449,35 @@ részt.
 Egy példa az mc.menu fájlra:
 .PP
 .nf
-A	A kiválasztott fájlok listázása oktális formában
-	od -c %f
+A       A kiválasztott fájlok listázása oktális formában
+        od -c %f
 
-B	A hiba leírás szerkesztése és elküldése a root-nak
-	vi /tmp/mail.$$
-	mail -s "Midnight Commander bug" root < /tmp/mail.$$
+B       A hiba leírás szerkesztése és elküldése a root-nak
+        vi /tmp/mail.$$
+        mail -s "Midnight Commander bug" root < /tmp/mail.$$
 
-M	Levél olvasás
-	emacs -f rmail
+M       Levél olvasás
+        emacs -f rmail
 
-N	A Usenet hírek elolvasása
-	emacs -f gnus
+N       A Usenet hírek elolvasása
+        emacs -f gnus
 
-H	Az info hypertext böngészõ elindítása
-	info
+H       Az info hypertext böngészõ elindítása
+        info
 
-J	A jelenlegi könyvtár rekurzív átmásolása a másikba
-	tar cf - . | (cd %D && tar xvpf -)
+J       A jelenlegi könyvtár rekurzív átmásolása a másikba
+        tar cf - . | (cd %D && tar xvpf -)
 
-K	Az aktuális könyvtárról archiválása
-	echo -n "Name of distribution file: "
-	read tar
-	ln -s %d `dirname %d`/$tar
-	cd ..
-	tar cvhf ${tar}.tar $tar
+K       Az aktuális könyvtárról archiválása
+        echo -n "Name of distribution file: "
+        read tar
+        ln -s %d `dirname %d`/$tar
+        cd ..
+        tar cvhf ${tar}.tar $tar
 
 = f *.tar.gz | f *.tgz & t n
 X       A kijelölt tömörített tar fájl kicsomagolása
-	tar xzvf %f
+        tar xzvf %f
 .fi
 .PP
 .B Alapértelmezett Feltételek
@@ -1493,22 +1489,22 @@ válni.
 .PP
 .nf
 Feltétel szintaktika: 	= <belsõ-felt.>
-   vagy:		= <belsõ-felt.> | <belsõ-felt.> ...
-   vagy:	 	= <belsõ-felt.> & <belsõ-felt.> ...
+   vagy:                = <belsõ-felt.> | <belsõ-felt.> ...
+   vagy:                = <belsõ-felt.> & <belsõ-felt.> ...
 
 A belsõ feltétel az alábbiak közül valamelyik:
 
-  y <minta>		a jelenlegi fájlminta szintaktikusan
-			illeszkedik?
-			csak menüszerkesztéshez
-  f <minta>		jelenlegi fájlminta egyezik?
-  F <minta>		egyéb fájlminta egyezik?
-  d <minta>		jelenlegi könyvtár minta egyezik?
-  D <minta>		más könyvtár minta egyezik?
-  t <type>		jelenlegi fájltípus?
-  T <type>		más fájltípus?
-  x <fájlnév> 		ez futtatható fájlnév?
-  ! <belsõ-felt.> 	a belsõ feltételek ellentéte
+  y <minta>             a jelenlegi fájlminta szintaktikusan
+                        illeszkedik?
+                        csak menüszerkesztéshez
+  f <minta>             jelenlegi fájlminta egyezik?
+  F <minta>             egyéb fájlminta egyezik?
+  d <minta>             jelenlegi könyvtár minta egyezik?
+  D <minta>             más könyvtár minta egyezik?
+  t <type>              jelenlegi fájltípus?
+  T <type>              más fájltípus?
+  x <fájlnév>           ez futtatható fájlnév?
+  ! <belsõ-felt.>       a belsõ feltételek ellentéte
 .fi
 .PP
 A minta lehet a shell által értelmezett, vagy lehet szabványos
@@ -2090,6 +2086,8 @@ A hiba fájl neve.
 A jelenlegi menu neve.
 .PP
 .I "%f"
+és
+.I "%p"
 .IP
 A jelenlegi fájl neve.
 .PP
@@ -3219,7 +3217,7 @@ A látható billentyû szimbólumok:
 .PP
 .nf
 f0-tól f20-ig Funkció billentyûk f0-f20
-bs	      backspace
+bs            backspace
 home          home gomb
 end           end gomb
 up            kurzor fel gomb
@@ -3261,7 +3259,7 @@ A program súgó fájlja.
 .IP
 Az alapértelmezett rendszerszintû kiterjesztés fájl.
 .PP
-.I ~/.mc/ext
+.I ~/.mc/bindings
 .IP
 A felhasználó saját kiterjesztései, nézet
 beállítások és szerkesztési beállítások. Ezek felülbírálják
@@ -3300,13 +3298,16 @@ Ez a fájl azonos a rendszerszintû alkalmazás menüvel.
 A falhasználó saját alkalmazás menüje. Ha ez a fájl elérhetõ a
 rendszerszintû alkalmazás menü helyett ezt fogja használni.
 .PP
-.I ~/.mc/tree
+.I ~/.mc/Tree
 .IP
 A könyvtárlista a Könyvtárfa és a Fa nézethez.  Minden sor egy
 bejegyzés. Minden sor perjellel kezdik a teljes könyvtár neveknél. A
 sorok egy számmal kezdõdnek, amik azonosak az elözõ könyvtáréval. Ha
-ezt a fájlt el akarod készíteni a következõ parancsot használd: "find /
--type d -print | sort > ~/.mc.tree". Normálisan nincs erre szükséged,
+ezt a fájlt el akarod készíteni a következõ parancsot használd: 
+.nf
+find / -type d -print | sort > ~/.mc/Tree"
+.fi
+Normálisan nincs erre szükséged,
 mert a Midnight Commander automatikusan frissíti ezt.
 .PP
 .I ./.mc.menu
