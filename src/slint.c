@@ -5,7 +5,9 @@
 
    Author Miguel de Icaza
           Norbert Warmuth
-   
+
+   $Id$
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
@@ -81,7 +83,11 @@ extern unsigned int SLsys_getkey (void);
 extern int SLsys_input_pending (int);
 #endif
 
+/* Forward declarations */
 static void load_terminfo_keys (void);
+#ifdef	HAVE_MAD
+static void dealloc_color_pairs (void);
+#endif
 
 static unsigned int SLang_getkey2 (void)
 {
@@ -254,6 +260,9 @@ slang_shutdown (void)
     slang_shell_mode ();
     do_exit_ca_mode ();
     SLang_reset_tty ();
+#ifdef	HAVE_MAD
+    dealloc_color_pairs ();
+#endif	/* HAVE_MAD */
 
     /* Load the op capability to reset the colors to those that were
      * active when the program was started up
@@ -285,7 +294,7 @@ slang_reset_softkeys (void)
 {
     int key;
     char *send;
-    char *display = "                ";
+    static const char display [] = "                ";
     char tmp[BUF_SMALL];
     
     for ( key = 1; key < 9; key++ ) {
@@ -293,7 +302,7 @@ slang_reset_softkeys (void)
 	send = (char *) SLtt_tgetstr (tmp);
 	if (send) {
             g_snprintf(tmp, sizeof (tmp), "\033&f%dk%dd%dL%s%s", key,
-                    strlen(display), strlen(send), display, send);
+                    sizeof (display) - 1, strlen(send), display, send);
     	    SLtt_write_string (tmp);
 	}
     }
@@ -384,20 +393,20 @@ extern struct colorpair {
     char *name, *fg, *bg;
 } color_map[];
 
+struct colors_avail {
+    struct colors_avail *next;
+    char *fg, *bg;
+    int index;
+};
+
+static struct colors_avail c = { 0, 0, 0, 0 };
+
 int
 try_alloc_color_pair (char *fg, char *bg)
 {
-    static struct colors_avail {
-	struct colors_avail *next;
-	char *fg, *bg;
-	int index;
-    } *p, c =
-    {
-	0, 0, 0, 0
-    };
+    struct colors_avail *p = &c;
 
     c.index = EDITOR_NORMAL_COLOR_INDEX;
-    p = &c;
     for (;;) {
 	if (((fg && p->fg) ? !strcmp (fg, p->fg) : fg == p->fg) != 0
 	    && ((bg && p->bg) ? !strcmp (bg, p->bg) : bg == p->bg) != 0)
@@ -420,7 +429,25 @@ try_alloc_color_pair (char *fg, char *bg)
     return p->index;
 }
 
-char *color_terminals [] = {
+#ifdef	HAVE_MAD
+static void
+dealloc_color_pairs (void)
+{
+    struct colors_avail *p = c.next, *next;
+    while (p) {
+	next = p->next;
+	if (p->fg)
+	    g_free (p->fg);
+	if (p->bg)
+	    g_free (p->bg);
+	g_free (p);
+	p = next;
+    }
+    c.next = NULL;
+}
+#endif /* HAVE_MAD */
+
+static const char * const color_terminals [] = {
 #ifdef __linux__
     "console",
 #endif
@@ -524,7 +551,7 @@ attrset (int color)
 /* This table describes which capabilities we want and which values we
  * assign to them.
  */
-static struct {
+static const struct {
     int  key_code;
     char *key_name;
 } key_table [] = {

@@ -3,6 +3,16 @@
 	* dlg.c (add_widget): Check for what is not NULL
 	before everything else.
 
+	* slint.c (slang_reset_softkeys): Make display static const
+	array.  Use sizeof (display) - 1 instead of strlen display.
+	(color_terminals): Make static const array.
+	(key_table): Make const.
+
+	(dealloc_color_pairs) [HAVE_MAD]: New function.  Release
+	memory allocated in try_alloc_color_pair.
+	(slang_shutdown) [HAVE_MAD]: Call dealloc_color_pairs.
+	(try_alloc_color_pair): Move struct c outside function.
+
 2001-10-29  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* charsets.c (load_codepages_list): Use glib memory allocation
