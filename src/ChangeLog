@@ -1,3 +1,8 @@
+2001-06-04  Pavel Roskin  <proski@gnu.org>
+
+	* cmd.c (edit_symlink_cmd) [!HAVE_GNOME]: Warn if the current
+	selection is not a symbolic link.
+
 2001-06-02  Pavel Roskin  <proski@gnu.org>
 
 	* cmd.c (free_vfs_now) [HAVE_GNOME]: Eliminate.

@@ -1152,6 +1152,9 @@ void edit_symlink_cmd (void)
 	}
 	g_free (q);
 #ifndef HAVE_GNOME
+    } else {
+	message (1, MSG_ERROR, _("`%s' is not a symbolic link"),
+		 selection (cpanel)->fname);
     }
 #endif
 }
