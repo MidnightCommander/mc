@@ -37,10 +37,10 @@ extern unsigned char per_char[256];
 /* background colors: marked is refers to mouse highlighting, highlighted refers to a found string. */
 extern unsigned long edit_abnormal_color, edit_marked_abnormal_color;
 extern unsigned long edit_highlighted_color, edit_marked_color;
-extern unsigned long edit_normal_background_color = 0;
+extern unsigned long edit_normal_background_color;
 
 /* foreground colors */
-extern unsigned long edit_normal_foreground_color = 0, edit_bold_color;
+extern unsigned long edit_normal_foreground_color, edit_bold_color;
 extern unsigned long edit_italic_color;
 
 /* cursor color */

@@ -857,7 +857,7 @@ int eh_editor (CWidget * w, XEvent * xevent, CEvent * cwevent)
 	    r = edit_execute_key_command (e, (cwevent->button == Button5) ? CK_Page_Down : CK_Page_Up, -1);
 	    break;
 	}
-	edit_mouse_mark (e, xevent, cwevent);
+	edit_mouse_mark (e, xevent, cwevent->double_click);
 	break;
     case Expose:
 	edit_render_expose (e, &(xevent->xexpose));
