@@ -1,10 +1,40 @@
+/*
+ * This file should be included after all system includes and before
+ * all local includes.
+ */
+
 #ifndef __GLOBAL_H
 #define __GLOBAL_H
 
 #include <stdlib.h>	/* for free() and other usefull routins */
+
 #ifdef HAVE_SYS_PARAM_H
-#   include <sys/param.h>
+#  include <sys/param.h>
 #endif
+
+#ifdef HAVE_SYS_TIMEB_H
+#  include <sys/timeb.h>
+#endif
+
+#ifdef TIME_WITH_SYS_TIME
+#  include <sys/time.h>
+#  include <time.h>
+#else
+#  ifdef HAVE_SYS_TIME_H
+#    include <sys/time.h>
+#  else
+#    include <time.h>
+#  endif
+#endif
+
+#ifdef HAVE_SYS_WAIT_H
+#  include <sys/wait.h>
+#endif
+
+#ifdef HAVE_SYS_SELECT_H
+#  include <sys/select.h>
+#endif
+
 #include <glib.h>
 
 #include "fs.h"
