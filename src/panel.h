@@ -107,6 +107,15 @@ typedef struct {
     char     search_buffer [256];
    
     int      has_dir_sizes;	/* Set if directories have sizes = to du -s */
+
+#ifdef HAVE_GNOME
+    /* These are standard GtkWidgets */
+    void *table;
+    void *list;
+    void *current_dir;
+    void *filter_w;
+    void *status;
+#endif
 } WPanel;
 
 WPanel *panel_new (char *panel_name);

@@ -97,7 +97,7 @@ extern char search_buffer [256];
 extern char cmd_buf [512];
 
 #if HAVE_GNOME
-#define MENU_PANEL current_panel
+#define MENU_PANEL get_current_panel ()
 #define SELECTED_IS_PANEL 1
 #else
 /* The menu panels */
