@@ -7,12 +7,12 @@ VPATH = @srcdir@
 rootdir = $(srcdir)/..
 @MCFG@@MCF@
 
-CFLAGS = $(XCFLAGS)
+CFLAGS   = $(XCFLAGS)
 CPPFLAGS = $(XCPPFLAGS)
-LDFLAGS = $(XLDFLAGS)
-DEFS = $(XDEFS)
-LIBS = @LINTL@ @SHADOWLIB@ $(XLIBS) @TERMNET@ @PAMLIBS@ $(XLIB)
-INSTALL = @INSTALL@
+LDFLAGS  = $(XLDFLAGS)
+DEFS     = $(XDEFS)
+LIBS     = @LINTL@ @SHADOWLIB@ $(XLIBS) @TERMNET@ @PAMLIBS@ $(XLIB)
+INSTALL  = @INSTALL@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@ -m 755
 INSTALL_DATA = @INSTALL_DATA@
 AR = @AR@
@@ -21,22 +21,72 @@ AR = @AR@
 # VFS code
 #
 NETFILES   = tcputil.o fish.o ftpfs.o mcfs.o utilvfs.o
-NONETFILES = local.o vfs.o tar.o sfs.o names.o container.o extfs.o \
+
+NONETFILES = 			\
+	container.o		\ 
+	extfs.o 		\
+	local.o 		\
+	names.o			\
+	tar.o			\
+	sfs.o			\
+	vfs.o			\
 	@undelfs_o@
 
-VFSSRCS = local.c vfs.c mcfs.c tcputil.c tar.c sfs.c names.c \
-	ftpfs.c container.c mcserv.c extfs.c undelfs.c utilvfs.c fish.c
+VFSSRCS = \
+	container.c 		\
+	extfs.c 		\
+	ftpfs.c 		\
+	fish.c 			\
+	local.c 		\
+	mcfs.c			\
+	names.c 		\
+	mcserv.c 		\
+	sfs.c 			\
+	shared_tar_ext.c 	\
+	shared_ftp_fish.c	\
+	tar.c 			\
+	tcputil.c		\
+	undelfs.c 		\
+	utilvfs.c		\
+	vfs.c
 
-VFSHDRS = vfs.h mcfs.h tcputil.h tar.h container.h ftpfs.h names.h \
-	extfs.h
+VFSHDRS = 			\
+	container.h 		\
+	extfs.h 		\
+	fish.h			\
+	ftpfs.h 		\
+	mcfs.h 			\
+	names.h 		\
+	tar.h 			\
+	tcputil.h 		\
+	vfs.h
 
 VFSOBJS = $(NONETFILES) @NETFILES@
 
-EXTFS_MISC = README extfs.ini
+EXTFS_MISC  = README extfs.ini
 EXTFS_CONST = a rpm hp48 mailfs patchfs sfs.ini
-EXTFS_IN = deb.in lslR.in ucpio.in urar.in uzoo.in ftplist.in uar.in \
-	ulha.in uzip.in
-EXTFS_OUT = deb lslR ucpio urar uzoo ftplist uar ulha uzip
+
+EXTFS_IN    = 			\
+	deb.in 			\
+	lslR.in 		\
+	ucpio.in 		\
+	urar.in 		\
+	uzoo.in 		\
+	ftplist.in 		\
+	uar.in 			\
+	ulha.in 		\
+	uzip.in
+
+EXTFS_OUT = 			\
+	deb 			\
+	lslR 			\
+	ucpio 			\
+	urar 			\
+	uzoo 			\
+	ftplist 		\
+	uar 			\
+	ulha 			\
+	uzip
 
 EXTFSSTUFF = $(EXTFS_MISC) $(EXTFS_CONST) $(EXTFS_IN)
 
@@ -56,6 +106,10 @@ VFSSOOBJS = tcputil.so fish.so ftpfs.so mcfs.so utilvfs.so local.so vfs.so \
 
 libvfs.so: $(VFSSOOBJS) libvfs.o
 	gcc $(VFSSOOBJS) libvfs.o -shared -o libvfs.so
+
+
+Makefile: $(srcdir)/Make-mc.in $(srcdir)/../config.status
+	cd $(rootdir) && CONFIG_FILES=$@ CONFIG_HEADERS= $(SHELL) ./config.status
 
 
 #
