@@ -85,18 +85,6 @@ static char *mini_status_format (WPanel *panel);
 /* This macro extracts the number of available lines in a panel */
 #define llines(p) (p->widget.lines-3 - (show_mini_info ? 2 : 0))
 
-#ifdef PORT_NOT_FOCUS_SELECT_ITEM
-#   define focus_select_item(x)
-#else
-#   define focus_select_item(x) select_item(x)
-#endif
-
-#ifdef PORT_NOT_UNFOCUS_UNSELECT_ITEM
-#    define unfocus_unselect_item(x)
-#else
-#    define unfocus_unselect_item(x) unselect_item(x)
-#endif
-
 static void
 set_colors (WPanel *panel)
 {
@@ -247,39 +235,21 @@ string_file_type (file_entry *fe, int len)
 static char *
 string_file_mtime (file_entry *fe, int len)
 {
-#ifdef PORT_STATIC_IN_STRING_FILE_XTIME
-    static char timebuf [MAX_I18NTIMELENGTH + 1];
-
-    return strcpy (timebuf, file_date (fe->buf.st_mtime));
-#else
     return file_date (fe->buf.st_mtime);
-#endif
 }
 
 /* atime */
 static char *
 string_file_atime (file_entry *fe, int len)
 {
-#ifdef PORT_STATIC_IN_STRING_FILE_XTIME
-    static char timebuf [MAX_I18NTIMELENGTH + 1];
-
-    return strcpy (timebuf, file_date (fe->buf.st_atime));
-#else
     return file_date (fe->buf.st_atime);
-#endif
 }
 
 /* ctime */
 static char *
 string_file_ctime (file_entry *fe, int len)
 {
-#ifdef PORT_STATIC_IN_STRING_FILE_XTIME
-    static char timebuf [MAX_I18NTIMELENGTH + 1];
-
-    return strcpy (timebuf, file_date (fe->buf.st_ctime));
-#else
     return file_date (fe->buf.st_ctime);
-#endif
 }
 
 /* perm */
@@ -2213,7 +2183,7 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
 	    subshell_chdir (panel->cwd);
 
 	show_dir (panel);
-	focus_select_item (panel);
+	select_item (panel);
 
 	define_label (h, (Widget *)panel, 1, _("Help"), help_cmd);
 	define_label (h, (Widget *)panel, 2, _("Menu"), user_file_menu_cmd);

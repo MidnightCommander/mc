@@ -41,14 +41,6 @@
 #include "cmd.h"
 #include "file.h"
 
-#ifndef PORT_LIST_MODE_NAME
-#     define PORT_LIST_MODE_NAME "list_mode"
-#endif
-
-#ifndef PORT_LIST_MODE_DEFAULT
-#     define PORT_LIST_MODE_DEFAULT "full"
-#endif
-
 #ifdef HAVE_CHARSET
 #include "charsets.h"
 #endif
@@ -259,7 +251,7 @@ panel_save_setup (WPanel *panel, char *section)
 
     for (i = 0; list_types [i].key; i++)
 	if (list_types [i].list_type == panel->list_type){
-	    save_string (section, PORT_LIST_MODE_NAME, list_types [i].key, profile_name);
+	    save_string (section, "list_mode", list_types [i].key, profile_name);
 	    break;
 	}
 
@@ -397,7 +389,7 @@ panel_load_setup (WPanel *panel, char *section)
 	}
 
     /* Load the listing mode */
-    load_string (section, PORT_LIST_MODE_NAME, PORT_LIST_MODE_DEFAULT, buffer, sizeof (buffer));
+    load_string (section, "list_mode", "full", buffer, sizeof (buffer));
     panel->list_type = list_full;
     for (i = 0; list_types [i].key; i++)
 	if ( g_strcasecmp (list_types [i].key, buffer) == 0){

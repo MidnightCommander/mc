@@ -1,5 +1,8 @@
 2002-07-29  Pavel Roskin  <proski@gnu.org>
 
+	* setup.c: Eliminate all PORT* macros.
+	* screen.c: Likewise.
+
 	* subshell.c (feed_subshell): Reading 0 bytes in a channel with
 	FD_ISSET being set is a sign of something being wrong - exit
 	immediately.  Observed when mc is run under su in xterm and
