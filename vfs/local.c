@@ -129,19 +129,19 @@ local_fstat (void *data, struct stat *buf)
 }
 
 static int
-local_chmod (struct vfs_class *me, char *path, int mode)
+local_chmod (struct vfs_class *me, const char *path, int mode)
 {
     return chmod (path, mode);
 }
 
 static int
-local_chown (struct vfs_class *me, char *path, int owner, int group)
+local_chown (struct vfs_class *me, const char *path, int owner, int group)
 {
     return chown (path, owner, group);
 }
 
 static int
-local_utime (struct vfs_class *me, char *path, struct utimbuf *times)
+local_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
 {
     return utime (path, times);
 }

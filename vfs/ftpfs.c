@@ -1441,17 +1441,18 @@ static int ftpfs_ctl (void *fh, int ctlop, void *arg)
     }
 }
 
-/* Warning: filename passed to this command is damaged */
 static int
-ftpfs_send_command(struct vfs_class *me, char *filename, char *cmd, int flags)
+ftpfs_send_command(struct vfs_class *me, const char *filename, const char *cmd, int flags)
 {
-    char *rpath, *p;
+    char *rpath, *p, *mpath = g_strdup(filename);
     struct vfs_s_super *super;
     int r;
     int flush_directory_cache = (flags & OPT_FLUSH);
 
-    if (!(rpath = vfs_s_get_path_mangle(me, filename, &super, 0)))
+    if (!(rpath = vfs_s_get_path_mangle(me, mpath, &super, 0))) {
+    	g_free(mpath);
 	return -1;
+    }
     p = ftpfs_translate_path (me, super, rpath);
     r = ftpfs_command (me, super, WAIT_REPLY, cmd, p);
     g_free (p);
@@ -1462,6 +1463,7 @@ ftpfs_send_command(struct vfs_class *me, char *filename, char *cmd, int flags)
 	    ERRNOR (EPERM, -1);
     if (flush_directory_cache)
 	vfs_s_invalidate(me, super);
+    g_free(mpath);
     return 0;
 }
 
@@ -1484,7 +1486,7 @@ ftpfs_init_passwd(void)
     ftpfs_anonymous_passwd = g_strdup ("anonymous@");
 }
 
-static int ftpfs_chmod (struct vfs_class *me, char *path, int mode)
+static int ftpfs_chmod (struct vfs_class *me, const char *path, int mode)
 {
     char buf[BUF_SMALL];
 
@@ -1492,7 +1494,7 @@ static int ftpfs_chmod (struct vfs_class *me, char *path, int mode)
     return ftpfs_send_command(me, path, buf, OPT_FLUSH);
 }
 
-static int ftpfs_chown (struct vfs_class *me, char *path, int owner, int group)
+static int ftpfs_chown (struct vfs_class *me, const char *path, int owner, int group)
 {
 #if 0
     ftpfs_errno = EPERM;

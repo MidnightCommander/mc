@@ -991,7 +991,7 @@ extfs_readlink (struct vfs_class *me, char *path, char *buf, int size)
     return i;
 }
 
-static int extfs_chmod (struct vfs_class *me, char *path, int mode)
+static int extfs_chmod (struct vfs_class *me, const char *path, int mode)
 {
     return 0;
 }

@@ -824,7 +824,7 @@ smbfs_closedir (void *info)
 }
 
 static int
-smbfs_chmod (struct vfs_class *me, char *path, int mode)
+smbfs_chmod (struct vfs_class *me, const char *path, int mode)
 {
 	DEBUG(3, ("smbfs_chmod(path:%s, mode:%d)\n", path, mode));
 /*	my_errno = EOPNOTSUPP;
@@ -833,7 +833,7 @@ smbfs_chmod (struct vfs_class *me, char *path, int mode)
 }
 
 static int
-smbfs_chown (struct vfs_class *me, char *path, int owner, int group)
+smbfs_chown (struct vfs_class *me, const char *path, int owner, int group)
 {
 	DEBUG(3, ("smbfs_chown(path:%s, owner:%d, group:%d)\n", path, owner, group));
 	my_errno = EOPNOTSUPP;	/* ready for your labotomy? */
@@ -841,7 +841,7 @@ smbfs_chown (struct vfs_class *me, char *path, int owner, int group)
 }
 
 static int
-smbfs_utime (struct vfs_class *me, char *path, struct utimbuf *times)
+smbfs_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
 {
 	DEBUG(3, ("smbfs_utime(path:%s)\n", path));
 	my_errno = EOPNOTSUPP;

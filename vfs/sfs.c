@@ -216,19 +216,19 @@ static int sfs_lstat (struct vfs_class *me, const char *path, struct stat *buf)
 #endif
 }
 
-static int sfs_chmod (struct vfs_class *me, char *path, int mode)
+static int sfs_chmod (struct vfs_class *me, const char *path, int mode)
 {
     path = sfs_redirect (me, path);
     return chmod (path, mode);
 }
 
-static int sfs_chown (struct vfs_class *me, char *path, int owner, int group)
+static int sfs_chown (struct vfs_class *me, const char *path, int owner, int group)
 {
     path = sfs_redirect (me, path);
     return chown (path, owner, group);
 }
 
-static int sfs_utime (struct vfs_class *me, char *path, struct utimbuf *times)
+static int sfs_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
 {
     path = sfs_redirect (me, path);
     return utime (path, times);

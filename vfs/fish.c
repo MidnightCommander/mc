@@ -691,18 +691,19 @@ fish_send_command(struct vfs_class *me, struct vfs_s_super *super, char *cmd, in
 
 #define PREFIX \
     char buf[BUF_LARGE]; \
-    char *rpath; \
+    char *rpath, *mpath; \
     struct vfs_s_super *super; \
-    if (!(rpath = vfs_s_get_path_mangle(me, path, &super, 0))) \
+    if (!(rpath = vfs_s_get_path_mangle(me, mpath = g_strdup(path), &super, 0))) \
 	return -1; \
     rpath = name_quote (rpath, 0);
 
 #define POSTFIX(flags) \
     g_free (rpath); \
+    g_free (mpath); \
     return fish_send_command(me, super, buf, flags);
 
 static int
-fish_chmod (struct vfs_class *me, char *path, int mode)
+fish_chmod (struct vfs_class *me, const char *path, int mode)
 {
     PREFIX
     g_snprintf(buf, sizeof(buf), "#CHMOD %4.4o /%s\n"
@@ -753,7 +754,7 @@ static int fish_symlink (struct vfs_class *me, char *setto, char *path)
 }
 
 static int
-fish_chown (struct vfs_class *me, char *path, int owner, int group)
+fish_chown (struct vfs_class *me, const char *path, int owner, int group)
 {
     char *sowner, *sgroup;
     struct passwd *pw;

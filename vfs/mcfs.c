@@ -459,7 +459,7 @@ mcfs_rpc_path (int command, char *path)
 }
 
 static int
-mcfs_rpc_path_int (int command, char *path, int data)
+mcfs_rpc_path_int (int command, const char *path, int data)
 {
     mcfs_connection *mc;
     char *remote_file;
@@ -476,7 +476,7 @@ mcfs_rpc_path_int (int command, char *path, int data)
 }
 
 static int
-mcfs_rpc_path_int_int (int command, char *path, int n1, int n2)
+mcfs_rpc_path_int_int (int command, const char *path, int n1, int n2)
 {
     mcfs_connection *mc;
     char *remote_file;
@@ -919,19 +919,19 @@ mcfs_fstat (void *data, struct stat *buf)
 }
 
 static int
-mcfs_chmod (struct vfs_class *me, char *path, int mode)
+mcfs_chmod (struct vfs_class *me, const char *path, int mode)
 {
     return mcfs_rpc_path_int (MC_CHMOD, path, mode);
 }
 
 static int
-mcfs_chown (struct vfs_class *me, char *path, int owner, int group)
+mcfs_chown (struct vfs_class *me, const char *path, int owner, int group)
 {
     return mcfs_rpc_path_int_int (MC_CHOWN, path, owner, group);
 }
 
 static int
-mcfs_utime (struct vfs_class *me, char *path, struct utimbuf *times)
+mcfs_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
 {
     mcfs_connection *mc;
     int status;
