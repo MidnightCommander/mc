@@ -1196,7 +1196,17 @@ parse_display_format (WPanel *panel, char *format, char **error, int isstatus, i
     int  items = 0;			/* Number of items in the format */
     int  i;
 
+    static size_t i18n_timelength = 0; /* flag: check ?Time length at startup */
+
     *error = 0;
+
+    if (i18n_timelength == 0) {
+	i18n_timelength = i18n_checktimelength ();	/* Musn't be 0 */
+	
+	for (i = 0; i < ELEMENTS(formats); i++)
+	    if (strcmp ("time", formats [i].id+1) == 0)
+		formats [i].min_size = i18n_timelength;
+    }
     
     /*
      * This makes sure that the panel and mini status full/half mode

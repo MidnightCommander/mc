@@ -583,15 +583,48 @@ char *load_file (char *filename)
     }
 }
 
+/* Check strftime() results. Some systems (i.e. Solaris) have different
+short-month-name sizes for different locales */ 
+size_t i18n_checktimelength (void)
+{
+#define MAX_I18NTIMELENGTH 14
+#define MIN_I18NTIMELENGTH 10
+#define STD_I18NTIMELENGTH 12
+
+    size_t length, a, b;
+    char buf [MAX_I18NTIMELENGTH + 1];
+    time_t testtime = time (NULL);
+    
+    a = strftime (buf, sizeof(buf)-1, _("%b %e %H:%M"), localtime(&testtime));
+    b = strftime (buf, sizeof(buf)-1, _("%b %e  %Y"), localtime(&testtime));
+    
+    length = max (a, b);
+    
+    /* Don't handle big differences. Use standard value (email bug, please) */
+    if ( length > MAX_I18NTIMELENGTH || length < MIN_I18NTIMELENGTH )
+	length = STD_I18NTIMELENGTH;
+    
+    return length;
+}
+
 char *file_date (time_t when)
 {
-    static char timebuf [40];
+    static char timebuf [MAX_I18NTIMELENGTH + 1];
     time_t current_time = time ((time_t) 0);
-    static char *fmt;
+    static size_t i18n_timelength = 0;
+    static char *fmt, *fmtyear, *fmttime;
+
+    if (i18n_timelength == 0){
+	i18n_timelength = i18n_checktimelength() + 1;
+	
+	/* strftime() format string for old dates */
+	fmtyear = _("%b %e  %Y");
+	/* strftime() format string for recent dates */
+	fmttime = _("%b %e %H:%M");
+    }
 
     if (current_time > when + 6L * 30L * 24L * 60L * 60L /* Old. */
 	|| current_time < when - 60L * 60L) /* In the future. */
-    {
 	/* The file is fairly old or in the future.
 	   POSIX says the cutoff is 6 months old;
 	   approximate this by 6*30 days.
@@ -599,17 +632,12 @@ char *file_date (time_t when)
 	   to allow for NFS server/client clock disagreement.
 	   Show the year instead of the time of day.  */
 
-
-        fmt = "%b %e  %Y";
-    }
+	fmt = fmtyear;
     else
-    {
-	fmt = "%b %e %H:%M";
-    }
+	fmt = fmttime;
     
-    strftime(timebuf+4,16,fmt,localtime(&when));
-    timebuf[16] = 0;
-    return &timebuf [4];
+    strftime (timebuf, i18n_timelength, fmt, localtime(&when));
+    return timebuf;
 }
 
 /* Like file_date, but packs the data to fit in 10 columns */
