@@ -27,7 +27,7 @@
 #include "app_glob.c"
 #include "coollocal.h"
 #else
-#include "src/mad.h"
+#include "../src/mad.h"
 #endif
 
 

@@ -71,7 +71,7 @@ char *strcasechr (const unsigned char *s, int c)
 }
 
 
-#include "src/mad.h"
+#include "../src/mad.h"
 
 #ifndef HAVE_MEMMOVE
 /* for Christophe */

@@ -26,7 +26,7 @@
 
 #ifdef MIDNIGHT
 
-#include "src/mad.h"
+#include "../src/mad.h"
 
 extern int edit_key_emulation;
 extern WEdit *wedit;

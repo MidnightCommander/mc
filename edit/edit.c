@@ -1636,7 +1636,7 @@ int edit_translate_key (WEdit * edit, unsigned int x_keycode, long x_key, int x_
     int command = -1;
     int char_for_insertion = -1;
 
-#include "edit/edit_key_translator.c"
+#include "edit_key_translator.c"
 
     *cmd = command;
     *ch = char_for_insertion;

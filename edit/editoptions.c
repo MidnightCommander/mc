@@ -28,7 +28,7 @@
 #define USE_INTERNAL_EDIT 1
 #endif
 
-#include "src/main.h"	/* extern int option_this_and_that ... */
+#include "../src/main.h"	/* extern int option_this_and_that ... */
 
 char *key_emu_str[] =
 {"Intuitive", "Emacs"};
