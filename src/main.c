@@ -109,7 +109,7 @@ WPanel *right_panel;
 WTree *the_tree;
 
 /* The Menubar */
-WMenu *the_menubar;
+struct WMenu *the_menubar;
 
 /* Pointers to the selected and unselected panel */
 WPanel *current_panel = NULL;

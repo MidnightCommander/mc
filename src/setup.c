@@ -216,7 +216,7 @@ static const struct {
 };
 
 void
-panel_save_setup (WPanel *panel, char *section)
+panel_save_setup (struct WPanel *panel, char *section)
 {
     char buffer [BUF_TINY];
     int  i;
@@ -299,7 +299,7 @@ panel_save_type (char *section, int type)
 }
 
 void
-save_panel_types ()
+save_panel_types (void)
 {
     int type;
 

@@ -33,7 +33,7 @@ enum panel_display_enum {
 struct format_e;
 struct hist_entry;
 
-typedef struct {
+typedef struct WPanel {
     Widget   widget;
     dir_list dir;		/* Directory contents */
 

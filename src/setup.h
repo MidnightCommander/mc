@@ -7,16 +7,13 @@ void save_configure (void);
 void load_setup (void);
 void save_setup (void);
 void done_setup (void);
-#ifdef WANT_WIDGETS
-void panel_save_setup (WPanel *panel, char *section);
-void panel_load_setup (WPanel *panel, char *section);
-#else
-void panel_save_setup ();
-void panel_load_setup ();
-#endif
 void load_key_defs (void);
 void save_panel_types (void);
 char *load_anon_passwd (void);
+
+struct WPanel;
+void panel_save_setup (struct WPanel *panel, char *section);
+void panel_load_setup (struct WPanel *panel, char *section);
 
 extern char *profile_name;
 extern char *global_profile_name;

@@ -158,8 +158,9 @@ extern WLabel     *the_hint;
 extern Dlg_head   *midnight_dlg;
 extern Dlg_head   *edit_dlg;
 extern WLabel     *process_status;
-#include "menu.h"
-extern WMenu      *the_menubar;
+
+struct WMenu;
+extern struct WMenu *the_menubar;
 #endif /* WANT_WIDGETS */
 
 void edition_pre_exec (void);

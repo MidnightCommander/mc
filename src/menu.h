@@ -31,7 +31,7 @@ typedef sMenu *Menu;
 extern int menubar_visible;
 
 /* The button bar menu */
-typedef struct {
+typedef struct WMenu {
     Widget widget;
 
     int    active;		/* If the menubar is in use */

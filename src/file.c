@@ -1554,7 +1554,7 @@ erase_dir_iff_empty (FileOpContext *ctx, char *s)
 /* {{{ Panel operate routines */
 
 /* Returns currently selected file or the first marked file if there is one */
-char *
+static char *
 panel_get_file (WPanel *panel, struct stat *stat_buf)
 {
     int i;

@@ -1,5 +1,11 @@
 2002-11-11  Pavel Roskin  <proski@gnu.org>
 
+	* file.c (panel_get_file): Make static.
+	* filegui.h: Eliminate use of WANT_WIDGETS.
+	* setup.h: Likewise.
+	* menu.h: Declare struct WMenu.
+	* main.h: Don't include menu.h, use forward declaration.
+
 	* dlg.h: Move movefn definition ...
 	* win.h: ... where it's used.  Remove unused definitions.
 	* win.c: Remove unused code.
