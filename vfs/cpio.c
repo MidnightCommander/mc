@@ -45,6 +45,8 @@ enum {
     CPIO_CRC          /* New ASCII format + CRC */
 };
 
+static struct vfs_class vfs_cpiofs_ops;
+
 struct old_cpio_header
 {
   unsigned short c_magic;
@@ -620,61 +622,15 @@ static struct vfs_s_data cpiofs_data = {
     NULL
 };
 
-vfs vfs_cpiofs_ops = {
-    NULL, /* next pointer */
-    "cpiofs",
-    0, /* flags */
-    "ucpio", /* prefix */
-    &cpiofs_data, /* vfs_s_data */
-    0, /* errno */
-
-    NULL,
-    NULL,
-    vfs_s_fill_names,
-
-    NULL,
-
-    vfs_s_open,
-    vfs_s_close,
-    cpio_read,
-    NULL,
-
-    vfs_s_opendir,
-    vfs_s_readdir,
-    vfs_s_closedir,
-    vfs_s_telldir,
-    vfs_s_seekdir,
-
-    vfs_s_stat,
-    vfs_s_lstat,
-    vfs_s_fstat,
-
-    NULL,
-    NULL,
-    NULL,
-
-    vfs_s_readlink,
-    NULL,
-    NULL,
-    NULL,
-
-    NULL,
-    vfs_s_chdir,
-    vfs_s_ferrno,
-    vfs_s_lseek,
-    NULL,
-
-    vfs_s_getid,
-    vfs_s_nothingisopen,
-    vfs_s_free,
-
-    vfs_s_getlocalcopy,
-    cpio_ungetlocalcopy,
-
-    NULL,
-    NULL,
-    NULL,
-    NULL
-
-MMAPNULL
-};
+void
+init_cpiofs (void)
+{
+    vfs_s_init_class (&vfs_cpiofs_ops);
+    vfs_cpiofs_ops.name = "cpiofs";
+    vfs_cpiofs_ops.prefix = "ucpio";
+    vfs_cpiofs_ops.data = &cpiofs_data;
+    vfs_cpiofs_ops.read = cpio_read;
+    vfs_cpiofs_ops.write = NULL;
+    vfs_cpiofs_ops.ungetlocalcopy = cpio_ungetlocalcopy;
+    vfs_register_class (&vfs_cpiofs_ops);
+}

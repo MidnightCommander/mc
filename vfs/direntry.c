@@ -1108,6 +1108,32 @@ vfs_s_free (vfsid id)
     vfs_s_free_super (((vfs_s_super *)id)->me, (vfs_s_super *)id);
 }
 
+void
+vfs_s_init_class (struct vfs_class *vclass)
+{
+    vclass->fill_names = vfs_s_fill_names;
+    vclass->open = vfs_s_open;
+    vclass->close = vfs_s_close;
+    vclass->read = vfs_s_read;
+    vclass->write = vfs_s_write;
+    vclass->opendir = vfs_s_opendir;
+    vclass->readdir = vfs_s_readdir;
+    vclass->closedir = vfs_s_closedir;
+    vclass->telldir = vfs_s_telldir;
+    vclass->seekdir = vfs_s_seekdir;
+    vclass->stat = vfs_s_stat;
+    vclass->lstat = vfs_s_lstat;
+    vclass->fstat = vfs_s_fstat;
+    vclass->readlink = vfs_s_readlink;
+    vclass->chdir = vfs_s_chdir;
+    vclass->ferrno = vfs_s_ferrno;
+    vclass->lseek = vfs_s_lseek;
+    vclass->getid = vfs_s_getid;
+    vclass->nothingisopen = vfs_s_nothingisopen;
+    vclass->free = vfs_s_free;
+    vclass->getlocalcopy = vfs_s_getlocalcopy;
+}
+
 /* ----------- Utility functions for networked filesystems  -------------- */
 
 #ifdef USE_NETCODE

@@ -194,6 +194,7 @@ vfs_s_inode *vfs_s_find_inode        (vfs *me, vfs_s_inode *root, char *path,
 vfs_s_inode *vfs_s_find_root         (vfs *me, vfs_s_entry *entry);
 
 /* outside interface */
+void vfs_s_init_class (struct vfs_class *vclass);
 char *vfs_s_get_path_mangle          (vfs *me, char *inname, vfs_s_super **archive,
 				      int flags);
 void  vfs_s_invalidate               (vfs *me, vfs_s_super *super);

@@ -25,9 +25,9 @@
  * has include called <sys/vfs.h>, which contains things like vfs_t.
  */
 
-    typedef struct _vfs vfs;
+    typedef struct vfs_class vfs;
 
-    struct _vfs {
+    struct vfs_class {
         vfs   *next;
         char  *name;		/* "FIles over SHell" */
         int   flags;
@@ -105,11 +105,12 @@
 			    MC_MAXPATHLEN + 1];
     };
 
-    /* Other file systems */
+    /* Register a file system class */
+    int vfs_register_class (struct vfs_class *vfs);
     extern vfs vfs_local_ops;
     extern vfs vfs_nil_ops;
     extern vfs vfs_tarfs_ops;
-    extern vfs vfs_cpiofs_ops;
+    void init_cpiofs (void);
 
     extern vfs vfs_ftpfs_ops;
     extern vfs vfs_smbfs_ops;

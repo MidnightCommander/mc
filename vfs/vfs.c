@@ -94,8 +94,8 @@ get_bucket (void)
 /* vfs_local_ops needs to be the first one */
 static vfs *vfs_list = &vfs_local_ops;
 
-static int
-vfs_register (vfs *vfs)
+int
+vfs_register_class (vfs *vfs)
 {
     if (!vfs)
 	vfs_die("You cannot register NULL.");
@@ -1239,23 +1239,23 @@ vfs_init (void)
 
 #ifdef USE_NETCODE
     tcp_init();
-    vfs_register (&vfs_ftpfs_ops);
-    vfs_register (&vfs_fish_ops);
+    vfs_register_class (&vfs_ftpfs_ops);
+    vfs_register_class (&vfs_fish_ops);
 #ifdef WITH_SMBFS
-    vfs_register (&vfs_smbfs_ops);
+    vfs_register_class (&vfs_smbfs_ops);
 #endif /* WITH_SMBFS */
 #ifdef WITH_MCFS
-    vfs_register (&vfs_mcfs_ops);
+    vfs_register_class (&vfs_mcfs_ops);
 #endif /* WITH_SMBFS */
 #endif /* USE_NETCODE */
 
-    vfs_register (&vfs_extfs_ops);
-    vfs_register (&vfs_sfs_ops);
-    vfs_register (&vfs_tarfs_ops);
-    vfs_register (&vfs_cpiofs_ops);
+    vfs_register_class (&vfs_extfs_ops);
+    vfs_register_class (&vfs_sfs_ops);
+    vfs_register_class (&vfs_tarfs_ops);
+    init_cpiofs ();
 
 #ifdef USE_EXT2FSLIB
-    vfs_register (&vfs_undelfs_ops);
+    vfs_register_class (&vfs_undelfs_ops);
 #endif /* USE_EXT2FSLIB */
 
     vfs_setup_wd ();

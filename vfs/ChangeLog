@@ -1,3 +1,13 @@
+2003-10-10  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.h: Rename "struct _vfs" to "struct vfs_class".  Allow
+	calling vfs_register() in the file defining the VFS class.
+	* vfs.c (vfs_init): Register cpiofs in cpio.c.
+	(vfs_register): Rename to vfs_register_class(), remove "static".
+	* direntry.c (vfs_s_init_class): New function - generic VFS
+	class registraction for vfs_s descendants.
+	* cpio.c: Register VFS class locally.
+
 2003-10-07  Pavel Roskin  <proski@gnu.org>
 
 	* direntry.c: Make functions static when possible.
