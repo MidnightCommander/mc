@@ -1,3 +1,9 @@
+2002-11-10  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.c: Make the last argument to MC_OP non-empty in the
+	definition of MC_HANDLEOP.  Needed for Mac OS X.
+	Reported by Wim Rijnders <wimrijnders@home.nl>
+
 2002-11-08  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/a: Set environment to force date and time format

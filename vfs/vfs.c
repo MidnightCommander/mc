@@ -443,7 +443,7 @@ mc_open (const char *filename, int flags, ...)
 #define MC_NAMEOP(name, inarg, callarg) \
   MC_OP (name, inarg, callarg, path = vfs_canon (path); vfs = vfs_type (path);, g_free (path); )
 #define MC_HANDLEOP(name, inarg, callarg) \
-  MC_OP (name, inarg, callarg, if (handle == -1) return -1; vfs = vfs_op (handle);, )
+  MC_OP (name, inarg, callarg, if (handle == -1) return -1; vfs = vfs_op (handle);, ;)
 
 MC_HANDLEOP(read, (int handle, char *buffer, int count), (vfs_info (handle), buffer, count) )
 
