@@ -210,7 +210,7 @@ libgtkedit.a:
 
 checklinks:
 	@if test -f $(gnomedir)/regex.c; then echo ok; \
-	else $(MAKE) maksourcelinks; fi
+	else $(MAKE) sourcelinks; fi
 	@if test -f regex.o; then echo ok; else $(MAKE) links; fi
 
 links:
