@@ -1,3 +1,14 @@
+Sun Oct 11 20:21:20 1998  Peter Kleiweg <kleiweg@let.rug.nl>
+
+	* mfmt.c (main): When there are an even number of empty lines 
+	between messages, all goes well, but when the number of empty 
+	lines between messages is odd, the program fails.
+
+Sun Oct 11 20:11:16 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* setup.c: Option ftpfs_use_unix_list_options was saved from
+	and restored to the wrong variable (ftpfs_use_passive_connections).
+
 Mon Oct  5 21:33:14 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* screen.c (parse_display_format): Don't dereference NULL pointer

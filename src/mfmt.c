@@ -70,7 +70,9 @@ main (void)
 	case newline:
 	    if (c == 'F')
 		state = seen_f;
-	    else {
+            else if (c == '\n')
+                putchar ('\n');
+ 	    else {
 		state = plain;
 		putchar (c);
 	    }
