@@ -1190,6 +1190,7 @@ list_append_unique (GList *list, char *text)
     while (link) {
 	newlink = g_list_previous (link);
 	if (!strcmp ((char *) link->data, text)) {
+	    g_free (link->data);
 	    g_list_remove_link (list, link);
 	    g_list_free_1 (link);
 	}

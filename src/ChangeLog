@@ -1,6 +1,14 @@
+2003-06-05  Pavel Roskin  <proski@gnu.org>
+
+	* screen.c (panel_destroy): Rewind history to the beginning
+	before freeing it.
+	* widget.c (input_destroy): Likewise.
+	* util.c (list_append_unique): Free data when removing duplicate
+	list entries.
+
 2003-05-29  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-	key.c (init_key): Fix crash if TERM is unset.
+	* key.c (init_key): Fix crash if TERM is unset.
 
 2003-05-29  Koblinger Egmont  <egmont@uhulinux.hu>
 

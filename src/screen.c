@@ -896,9 +896,10 @@ panel_destroy (WPanel *p)
     panel_clean_dir (p);
 
     /* save and clean history */
-    if (p->dir_history){
+    if (p->dir_history) {
 	history_put (p->hist_name, p->dir_history);
 
+	p->dir_history = g_list_first (p->dir_history);
 	g_list_foreach (p->dir_history, (GFunc) g_free, NULL);
 	g_list_free (p->dir_history);
     }
@@ -910,7 +911,7 @@ panel_destroy (WPanel *p)
 
     g_free (p->user_format);
     for (i = 0; i < LIST_TYPES; i++)
-	g_free (p->user_status_format [i]);
+	g_free (p->user_status_format[i]);
     g_free (p->dir.list);
     g_free (p->panel_name);
     g_free (name);

@@ -1009,6 +1009,7 @@ input_destroy (WInput *in)
 	if (!in->is_password)	/* don't save passwords ;-) */
 	    history_put (in->history_name, in->history);
 
+	in->history = g_list_first (in->history);
 	g_list_foreach (in->history, (GFunc) g_free, NULL);
 	g_list_free (in->history);
     }
