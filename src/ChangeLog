@@ -1,3 +1,8 @@
+2003-10-12  Pavel Roskin  <proski@gnu.org>
+
+	* screen.c (do_enter_on_file_entry): Remove annoying message "no
+	action taken".  Simplify logic.  Confirmation affects VFS too.
+
 2003-10-11  Pavel Roskin  <proski@gnu.org>
 
 	* vfsdummy.h: New file to replace vfs.h if VFS is disabled.
