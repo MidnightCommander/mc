@@ -3086,7 +3086,7 @@ msgstr "Modifica file &Estensioni"
 
 #: src/main.c:1207
 msgid "&Menu file edit"
-msgstr "Modifica il file &Menu"
+msgstr "Modifica file &Menu"
 
 #: src/main.c:1209
 msgid "Menu edi&Tor edit"
@@ -3094,7 +3094,7 @@ msgstr "Modifica menu edito&R"
 
 #: src/main.c:1210
 msgid "&Syntax file edit"
-msgstr "Modifica il file sintass&I"
+msgstr "Modifica file sintass&I"
 
 #: src/main.c:1216
 msgid "&Configuration..."
