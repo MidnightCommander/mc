@@ -1,3 +1,9 @@
+2004-09-19  Roland Illig  <roland.illig@gmx.de>
+
+	* direntry.c: Added const qualifier to function declarations and
+	variables. Introduced local modifiable strings where necessary.
+	* xdirentry.h: likewise.
+
 2004-09-18  Roland Illig  <roland.illig@gmx.de>
 
 	* smbfs.c (smbfs_init): Added a cast to avoid compiler warning.

@@ -140,7 +140,7 @@ struct vfs_s_subclass {
 
     struct vfs_s_entry *(*find_entry) (struct vfs_class *me,
 				       struct vfs_s_inode *root,
-				       char *path, int follow, int flags);
+				       const char *path, int follow, int flags);
     int (*dir_load) (struct vfs_class *me, struct vfs_s_inode *ino,
 		     char *path);
     int (*dir_uptodate) (struct vfs_class *me, struct vfs_s_inode *ino);
@@ -159,19 +159,19 @@ struct vfs_s_subclass {
 struct vfs_s_inode *vfs_s_new_inode (struct vfs_class *me,
 				     struct vfs_s_super *super,
 				     struct stat *initstat);
-struct vfs_s_entry *vfs_s_new_entry (struct vfs_class *me, char *name,
+struct vfs_s_entry *vfs_s_new_entry (struct vfs_class *me, const char *name,
 				     struct vfs_s_inode *inode);
 void vfs_s_free_entry (struct vfs_class *me, struct vfs_s_entry *ent);
 void vfs_s_insert_entry (struct vfs_class *me, struct vfs_s_inode *dir,
 			 struct vfs_s_entry *ent);
 struct stat *vfs_s_default_stat (struct vfs_class *me, mode_t mode);
 
-struct vfs_s_entry *vfs_s_generate_entry (struct vfs_class *me, char *name,
+struct vfs_s_entry *vfs_s_generate_entry (struct vfs_class *me, const char *name,
 					  struct vfs_s_inode *parent,
 					  mode_t mode);
 struct vfs_s_inode *vfs_s_find_inode (struct vfs_class *me,
 				      const struct vfs_s_super *super,
-				      char *path, int follow, int flags);
+				      const char *path, int follow, int flags);
 struct vfs_s_inode *vfs_s_find_root (struct vfs_class *me,
 				     struct vfs_s_entry *entry);
 
