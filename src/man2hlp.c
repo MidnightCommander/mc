@@ -155,10 +155,12 @@ fopen_check (const char *filename, const char *flags)
 static void
 fclose_check (FILE *f)
 {
-    int ret;
+    if (ferror (f)) {
+	perror ("man2hlp: File error");
+	exit (3);
+    }
 
-    ret = fclose (f);
-    if (ret != 0) {
+    if (fclose (f)) {
 	perror ("man2hlp: Cannot close file");
 	exit (3);
     }

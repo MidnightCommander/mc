@@ -1,5 +1,8 @@
 2003-01-15  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
+	* man2hlp.c (fclose_check): Call ferror() and exit on file
+	error.
+
 	* man2hlp.c (main): Use fgets() return value in while loop
 	instead of feof() because end-of-file indicator can be false on
 	error.
