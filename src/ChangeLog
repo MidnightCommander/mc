@@ -1,5 +1,9 @@
 2002-08-21  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.h: Remove unused fields in struct Widget.
+	* dlg.c: Adjust for the above.
+	* layout.c: Likewise.
+
 	* cmd.c (info_cmd_no_menu): Toggle info screen.
 	(quick_cmd_no_menu): Toggle quick view.
 

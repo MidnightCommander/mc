@@ -127,13 +127,9 @@ void init_widget (Widget *w, int y, int x, int lines, int cols,
     w->y = y;
     w->cols = cols;
     w->lines = lines;
-    w->color = -1;
     w->callback = callback;
     w->destroy  = destroy;
     w->mouse = mouse_handler;
-    w->wdata = 0;
-    w->wcontainer = 0;
-    w->frame = "";
     w->parent = 0;
     w->tkname = tkname;
 
@@ -233,9 +229,6 @@ int add_widget (Dlg_head *where, void *what)
     /* initialize properly */
     if (!what)
 	return 0;
-
-    /* Only used by Tk */
-    widget->frame = the_frame;
 
     widget->x += where->x;
     widget->y += where->y;
@@ -916,7 +909,6 @@ void dlg_replace_widget (Dlg_head *h, Widget *old, Widget *new)
 
 	    /* We found the widget */
 	    /* First kill the widget */
-	    new->focused = old->focused;
 	    new->parent  = h;
 	    send_message_to (h, old, WIDGET_DESTROY, 0);
 	    (*old->destroy) (old);

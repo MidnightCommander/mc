@@ -982,14 +982,6 @@ void set_display_type (int num, int type)
     /* We set the same size the old widget had */
     widget_set_size ((Widget *) new_widget, y, x, lines, cols);
     
-    /* We wanna the new widget at the same position */
-    /* XView sets wcontainer to !0 <- Not XView, but we, when we create it */
-    /* Ok, the XView support code does it */
-    if (old_widget && old_widget->wcontainer){
-	new_widget->wcontainer = old_widget->wcontainer;
-	new_widget->area = old_widget->area;
-    }
-
     /* We use replace to keep the circular list of the dialog in the */
     /* same state.  Maybe we could just kill it and then replace it  */
     if (midnight_dlg && old_widget){

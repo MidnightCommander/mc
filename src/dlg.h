@@ -112,26 +112,12 @@ typedef struct Dlg_head {
 typedef struct Widget {
     int x, y;
     int cols, lines;
-    int color;			/* If the widget uses it, the color */
     int options;
-    int focused;		/* Tells if the widget is focused */
     int (*callback)(Dlg_head *, void *, int, int);  /* The callback function */
     void (*destroy)(void *);
     mouse_h mouse;
     struct Dlg_head *parent;
-    widget_data wdata;
-    widget_data wcontainer;   /* For children of midnight_dlg, identifies
-                               * the frame in which they should reside
-			       */
-    char *frame;		/* Tk version: frame containing it */
-    char *tkname;		/* Tk version: widget name */
-    enum {
-        AREA_TOP,
-        AREA_LEFT,
-        AREA_RIGHT,
-        AREA_BOTTOM
-    } area; /* Used by X platforms, should stay here always because the size
-               of this structure has to be same everywhere :) */
+    char *tkname;		/* name used for history saving */
 } Widget;
 
 /* The options for the widgets */
