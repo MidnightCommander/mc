@@ -54,7 +54,7 @@ __find_entry (struct entry *dir, char *name,
 		    *q = c;
 		    return NULL;
 		}
-		if (c == '/' && !S_ISDIR (pent->inode->mode)){
+		if (!S_ISDIR (pent->inode->mode)){
 		    *q = c;
 		    notadir = 1;
 		    return NULL;

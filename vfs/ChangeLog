@@ -1,5 +1,8 @@
 2001-02-19  Pavel Roskin  <proski@gnu.org>
 
+	* shared_tar_ext.c (__find_entry): Make sure that the parent is a
+	directory even if the child is not.
+
 	* extfs/mailfs (parse_date): Correctly handle two-digit years
 	between 1970 and 1999.
 
