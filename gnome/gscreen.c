@@ -1980,8 +1980,6 @@ tree_drag_open_directory (gpointer data)
 	WPanel *panel;
 	GtkDTree *dtree;
 	GtkCTreeNode *node;
-	int row, col;
-	int on_row;
 
 	panel = data;
 	dtree = GTK_DTREE (panel->tree);
@@ -1989,67 +1987,59 @@ tree_drag_open_directory (gpointer data)
 	node = gtk_ctree_node_nth (GTK_CTREE (panel->tree), panel->drag_tree_row);
 	g_assert (node != NULL);
 
-	if (!GTK_CTREE_ROW (node)->expanded)
+	if (!GTK_CTREE_ROW (node)->expanded) {
 		dtree->auto_expanded_nodes = g_list_append (dtree->auto_expanded_nodes, node);
-
-	gtk_ctree_expand (GTK_CTREE (panel->tree), node);
+		gtk_ctree_expand (GTK_CTREE (panel->tree), node);
+	}
 
 	return FALSE;
 }
 
+/* Handles automatic collapsing of the tree nodes when doing drag and drop */
 static void
 panel_tree_check_auto_expand (WPanel *panel, GtkCTreeNode *current)
 {
-	GtkDTree *dtree = GTK_DTREE (panel->tree);
-	GList *tmp_list = dtree->auto_expanded_nodes;
-#if 0
-	GtkCList *clist = GTK_CLIST (dtree);
+	GtkDTree *dtree;
+	GtkCTree *ctree;
+	GtkCList *clist;
+	GList *free_list;
+	GList *tmp_list;
 	gint row, old_y, new_y;
-#endif
 
-	if (current) {
-		while (tmp_list) {
-			GtkCTreeNode *parent_node = tmp_list->data;
-			GtkCTreeNode *tmp_node = current;
+	dtree = GTK_DTREE (panel->tree);
+	ctree = GTK_CTREE (panel->tree);
+	clist = GTK_CLIST (panel->tree);
+	tmp_list = dtree->auto_expanded_nodes;
 
-			while (tmp_node) {
-				if (tmp_node == parent_node)
-					break;
-				tmp_node = GTK_CTREE_ROW (tmp_node)->parent;
-			}
-			if (!tmp_node) /* parent not found */
+	if (current)
+		for (; tmp_list; tmp_list = tmp_list->next)
+			if (!gtk_dtree_is_ancestor (dtree, tmp_list->data, current))
 				break;
-			
-			tmp_list = tmp_list->next;
-		}
-	}
 
-	/* Collapse the rows as necessary. If possible, try to do
-	 * so that the "current" stays the same place on the
-	 * screen
+	/* Collapse the rows as necessary. If possible, try to do so that the
+	 * "current" stays the same place on the screen.
 	 */
-#if 0
-	/* This behaviour is confusing --jrb and quartic (and MS, apparently)*/
 	if (tmp_list) {
 		if (current) {
-			row = g_list_position (clist->row_list, (GList *)current);
+			row = g_list_position (clist->row_list, (GList *) current);
 			old_y = row * clist->row_height - clist->vadjustment->value;
 		}
-  
-		free_list = tmp_list;
-		while (tmp_list) {
-			gtk_ctree_collapse (GTK_CTREE (panel->tree), tmp_list->data);
-			tmp_list = tmp_list->next;
-		}
 
+		free_list = tmp_list;
+
+		for (; tmp_list; tmp_list = tmp_list->next)
+			gtk_ctree_collapse (GTK_CTREE (panel->tree), tmp_list->data);
+
+		/* We have to calculate the row position again because rows may
+		 * have shifted during the collapse.
+		 */
 		if (current) {
-			row = g_list_position (clist->row_list, (GList *)current);
+			row = g_list_position (clist->row_list, (GList *) current);
 			new_y = row * clist->row_height - clist->vadjustment->value;
 
-			if (new_y != old_y) {
+			if (new_y != old_y)
 				gtk_adjustment_set_value (clist->vadjustment,
 							  clist->vadjustment->value + new_y - old_y);
-			}
 		}
 
 		if (free_list->prev)
@@ -2060,7 +2050,6 @@ panel_tree_check_auto_expand (WPanel *panel, GtkCTreeNode *current)
 		free_list->prev = NULL;
 		g_list_free (free_list);
 	}
-#endif
 }
 
 /**
@@ -2128,6 +2117,7 @@ panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *context, int x, int y
 	GtkDTree *dtree;
 	WPanel *panel;
 	int on_row, row, col;
+	GtkCTreeNode *node;
 	GdkDragAction action;
 	GtkWidget *source_widget;
 	char *row_path;
@@ -2159,15 +2149,14 @@ panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *context, int x, int y
 	action = 0;
 
 	if (on_row) {
-		row_path = gtk_dtree_get_row_path (dtree,
-						   gtk_ctree_node_nth (GTK_CTREE (dtree), row),
-						   0);
+		node = gtk_ctree_node_nth (GTK_CTREE (dtree), row);
+		row_path = gtk_dtree_get_row_path (dtree, node, 0);
 
 		if (row != panel->drag_tree_row) {
 			/* Highlight the row by selecting it */
-#if 0
-			panel_tree_check_auto_expand (GTK_CTREE (widget), row);
-#endif
+
+			panel_tree_check_auto_expand (panel, node);
+
 			dtree->internal = TRUE;
 			gtk_clist_select_row (GTK_CLIST (widget), row, 0);
 			dtree->internal = FALSE;
@@ -2215,8 +2204,10 @@ panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *context, int x, int y
 
 		g_free (parent_dir);
 		g_free (row_path);
-	} else
+	} else {
 		panel->drag_tree_row = -1;
+		panel_tree_check_auto_expand (panel, NULL);
+	}
 
 	gdk_drag_status (context, action, time);
 	return TRUE;
@@ -2243,6 +2234,9 @@ panel_tree_drag_leave (GtkWidget *widget, GdkDragContext *context, guint time, g
 		file_entry_free (panel->drag_tree_fe);
 		panel->drag_tree_fe = NULL;
 	}
+
+	if (panel->drag_tree_row != -1)
+		panel_tree_check_auto_expand (panel, NULL);
 
 	panel->drag_tree_row = -1;
 }

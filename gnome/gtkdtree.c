@@ -459,18 +459,14 @@ gtk_dtree_collapse (GtkCTree *ctree, GtkCTreeNode *node)
 	if (!sel)
 		do_select = TRUE;
 	else {
-		if (gtk_ctree_is_ancestor (ctree, node, sel->data))
+		if (node != sel->data && gtk_dtree_is_ancestor (GTK_DTREE (ctree), node, sel->data))
 			do_select = TRUE;
 	}
-
-	gtk_clist_freeze (GTK_CLIST (ctree));
 
 	(* parent_class->tree_collapse) (ctree, node);
 
 	if (do_select)
 		gtk_ctree_select (ctree, node);
-
-	gtk_clist_thaw (GTK_CLIST (ctree));
 }
 
 /*
@@ -807,4 +803,31 @@ gtk_dtree_get_type (void)
 	}
 
 	return dtree_type;
+}
+
+/**
+ * gtk_dtree_is_ancestor:
+ * @dtree: A tree
+ * @node: The presumed ancestor node
+ * @child: The presumed child node
+ * 
+ * Tests whether a node is an ancestor of a child node.  This does this in
+ * O(height of child), instead of O(number of children in node), like GtkCTree
+ * does.
+ * 
+ * Return value: TRUE if the node is an ancestor of the child, FALSE otherwise.
+ **/
+gboolean
+gtk_dtree_is_ancestor (GtkDTree *dtree, GtkCTreeNode *node, GtkCTreeNode *child)
+{
+	g_return_val_if_fail (dtree != NULL, FALSE);
+	g_return_val_if_fail (GTK_IS_DTREE (dtree), FALSE);
+	g_return_val_if_fail (node != NULL, FALSE);
+	g_return_val_if_fail (child != NULL, FALSE);
+
+	for (; child; child = GTK_CTREE_ROW (child)->parent)
+		if (child == node)
+			return TRUE;
+
+	return FALSE;
 }

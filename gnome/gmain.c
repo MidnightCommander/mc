@@ -528,78 +528,7 @@ gmc_do_quit (void)
 	quit = 1;
 	dlg_stop (desktop_dlg);
 }
-#if 0
-static void
-session_die (void)
-{
-	gmc_do_quit ();
-}
 
-/*
- * Save the session callback
- */
-static int
-session_save_state (GnomeClient *client, gint phase, GnomeRestartStyle save_style, gint shutdown,
-		    GnomeInteractStyle  interact_style, gint fast, gpointer client_data)
-{
-	char *sess_id;
-	char **argv = g_malloc (sizeof (char *) * ((g_list_length (containers) * 3) + 2));
-	GList *l, *free_list = 0;
-	int   i;
-
-	sess_id = gnome_client_get_id (client);
-	
-	argv [0] = client_data;
-	for (i = 1, l = containers; l; l = l->next){
-		PanelContainer *pc = l->data;
-		char *geom;
-
-		geom = gnome_geometry_string (GTK_WIDGET (pc->panel->widget.wdata)->window);
-		
-		argv [i++] = pc->panel->cwd;
-		argv [i++] = "--geometry";
-		argv [i++] = geom;
-		free_list = g_list_append (free_list, geom);
-	}
-
-	/* If no windows were open */
-	if (i == 1){
-		argv [i++] = "--nowindows";
-	}
-
-	argv [i] = NULL;
-	gnome_client_set_clone_command (client, i, argv);
-	gnome_client_set_restart_command (client, i, argv);
-	gnome_config_sync ();
-
-	for (l = free_list; l; l = l->next)
-		g_free (l->data);
-	g_list_free (free_list);
-
-	g_free (argv);
-
-	if (shutdown){
-		quit = 1;
-		dlg_stop (midnight_dlg);
-	}
-	return 1;
-}
-
-void
-session_management_setup (char *name)
-{
-	session_client = gnome_master_client ();
-
-	if (session_client){
-		gnome_client_set_restart_style (session_client,
-						finish_program ? GNOME_RESTART_NEVER : GNOME_RESTART_IMMEDIATELY);
-		gtk_signal_connect (GTK_OBJECT (session_client), "save_yourself",
-				    GTK_SIGNAL_FUNC (session_save_state), name);
-		gtk_signal_connect (GTK_OBJECT (session_client), "die",
-				    GTK_SIGNAL_FUNC (session_die), NULL);
-	}
-}
-#endif
 /*
  * Configures the GtkWindow/GnomeDialog from a WPanel.
  *

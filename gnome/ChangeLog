@@ -1,3 +1,20 @@
+1999-04-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gscreen.c (panel_tree_check_auto_expand): Enabled auto-collapse
+	functionality again.  Made the code a simpler by using
+	gtk_dtree_is_ancestor().
+
+	* gtkdtree.c (gtk_dtree_is_ancestor): New function to test whether
+	a node is an ancestor of a child.  This does the same as
+	gtk_ctree_is_ancestor(), but much more efficiently.  GtkCTree
+	seems to use the pessimal algorithm for this.
+	(gtk_dtree_collapse): Slight optimization: do not re-select if the
+	node is already selected.
+	(gtk_dtree_collapse): Do not freeze/thaw the tree while
+	collapsing/selecting.
+
+	* gmain.c: Removed crufty old SM code.
+
 1999-04-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gscreen.c (panel_setup_drag_scroll): Made it not return

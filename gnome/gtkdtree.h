@@ -55,4 +55,6 @@ char      *gtk_dtree_get_row_path       (GtkDTree *ctree,
 					 gint column);
 void      gtk_dtree_construct           (GtkDTree *dtree);
 
+gboolean  gtk_dtree_is_ancestor (GtkDTree *dtree, GtkCTreeNode *node, GtkCTreeNode *child);
+
 #endif
