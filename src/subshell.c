@@ -986,12 +986,12 @@ static int feed_subshell (int how, int fail_on_error)
     struct timeval *wptr;
     /* }}} */
 
-    /* we wait up to 10 seconds if fail_on_error */
+    /* we wait up to 10 seconds if fail_on_error, forever otherwise */
     wtime.tv_sec = 10;
     wtime.tv_usec = 0;
+    wptr = fail_on_error ? &wtime : NULL;
     
-    for (wptr = fail_on_error ? &wtime : NULL;;)
-    {
+    while (1) {
 	if (!subshell_alive)
 	    return FALSE;
 
@@ -1014,9 +1014,6 @@ static int feed_subshell (int how, int fail_on_error)
 	}
 	/* }}} */
 
-	/* From now on: block forever on the select call */
-	wptr = NULL;
-	
 	if (FD_ISSET (subshell_pty, &read_set))
 	    /* {{{ Read from the subshell, write to stdout */
 
