@@ -1,3 +1,8 @@
+2001-02-08  Pavel Roskin  <proski@gnu.org>
+
+	* Make-mc.in: Don't add _LARGEFILE64_SOURCE to CFLAGS without
+	testing - it breaks on HP-UX 10.20.
+
 2001-02-07  Pavel Roskin  <proski@gnu.org>
 
 	* Make-mc.in: Don't distribute samba/tests/trapdoor.c and
