@@ -66,8 +66,8 @@
 
 void mad_init (void);
 void mad_set_debug (const char *file);
-void mad_check (char *file, int line);
-void *mad_alloc (int size, char *file, int line);
+void mad_check (const char *file, int line);
+void *mad_alloc (int size, const char *file, int line);
 void *mad_alloc0 (int size, char *file, int line);
 void *mad_realloc (void *ptr, int newsize, char *file, int line);
 char *mad_strdup (const char *s, char *file, int line);

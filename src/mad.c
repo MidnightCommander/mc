@@ -92,7 +92,7 @@ void mad_set_debug (const char *file)
 }
 
 /* This function is only called by the mad_check function */
-static void mad_abort (char *message, int area, char *file, int line)
+static void mad_abort (const char *message, int area, const char *file, int line)
 {
     fprintf (memlog, "MAD: %s in area %d.\r\n", message, area);
     fprintf (memlog, "     Allocated in file \"%s\" at line %d.\r\n",
@@ -121,7 +121,7 @@ static void mad_fatal_error(const char *problem, void *ptr, const char *file, in
 /* Checks all the allocated memory areas.
    This is called everytime memory is allocated or freed.
    You can also call it anytime you think memory might be corrupted. */
-void mad_check (char *file, int line)
+void mad_check (const char *file, int line)
 {
     int i;
 
@@ -142,7 +142,7 @@ void mad_check (char *file, int line)
 }
 
 /* Allocates a memory area. Used instead of malloc and calloc. */
-void *mad_alloc (int size, char *file, int line)
+void *mad_alloc (int size, const char *file, int line)
 {
     int i;
     char *area;
@@ -172,9 +172,8 @@ void *mad_alloc (int size, char *file, int line)
     *(mem_areas [i].start_sig) = MAD_SIGNATURE;
     *(mem_areas [i].end_sig) = MAD_SIGNATURE;
 
-    if (strlen (file) >= MAD_MAX_FILE)
-	file [MAD_MAX_FILE - 1] = 0;
-    strcpy (mem_areas [i].file, file);
+    strncpy (mem_areas [i].file, file, MAD_MAX_FILE - 1);
+    mem_areas [i].file [MAD_MAX_FILE - 1] = 0;
     mem_areas [i].line = line;
 
     return mem_areas [i].data;
