@@ -1,3 +1,9 @@
+2003-11-24  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* direntry.c (vfs_s_resolve_symlink): Eliminate
+	g_strdup_printf().
+	(vfs_s_fullpath): Likewise.
+
 2003-11-21  Pavel Roskin  <proski@gnu.org>
 
 	* ftpfs.c (ftpfs_login_server): Explicit password should have

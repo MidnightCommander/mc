@@ -217,7 +217,7 @@ vfs_s_resolve_symlink (struct vfs_class *me, struct vfs_s_entry *entry,
     /* make full path from relative */
     if (*linkname != PATH_SEP) {
 	char *fullpath = vfs_s_fullpath (me, entry->dir);
-	fullname = g_strdup_printf ("%s/%s", fullpath, linkname);
+	fullname = g_strconcat (fullpath, "/", linkname, NULL);
 	linkname = fullname;
 	g_free (fullpath);
     }
@@ -522,7 +522,7 @@ vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino)
 	    ino = ino->ent->dir;
 	    if (ino == ino->super->root)
 		break;
-	    newpath = g_strdup_printf ("%s/%s", ino->ent->name, path);
+	    newpath = g_strconcat (ino->ent->name, "/", path, NULL);
 	    g_free (path);
 	    path = newpath;
 	}
