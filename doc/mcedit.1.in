@@ -301,9 +301,9 @@ The default colors may be changed by appending to the
 background colors pairs may be specified for example with:
 .PP
 .nf
-MC_COLOR_TABLE="$MC_COLOR_TABLE:\
-editnormal=lightgray,black:\
-editbold=yellow,black:\
+MC_COLOR_TABLE="$MC_COLOR_TABLE:\\
+editnormal=lightgray,black:\\
+editbold=yellow,black:\\
 editmarked=black,cyan"
 .fi
 .PP

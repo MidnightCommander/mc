@@ -1,5 +1,8 @@
 2001-09-19  Pavel Roskin  <proski@gnu.org>
 
+	* doc/mcedit.1.in: Fix a very long line - use double
+	backslashes since they are interpreted even in the .nf blocks.
+
 	* lib/edit.spell.rc: Try aspell before resorting to ispell.
 
 	* syntax/php.syntax: Replace with a better implementation by
