@@ -2331,6 +2331,7 @@ void
 desktop_init (void)
 {
 	gdnd_init ();
+	gicon_init ();
 	create_layout_info ();
 	create_desktop_dir ();
 	reload_desktop_icons (FALSE, 0, 0);

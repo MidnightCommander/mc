@@ -47,7 +47,7 @@ int we_can_afford_the_speed = 0;
  * Initializes the hash tables for the icons used in the IconList
  * view
  */
-static void
+void
 gicon_init (void)
 {
 	g_assert (gicon_inited == FALSE);

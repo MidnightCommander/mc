@@ -7,5 +7,6 @@ GdkImlibImage *gicon_get_icon_for_file          (char *directory, file_entry *fe
 GdkImlibImage *gicon_get_icon_for_file_speed    (char *directory, file_entry *fe, gboolean do_quick);
 
 char *gicon_image_to_name (GdkImlibImage *image);
+void gicon_init (void);
 
 #endif
