@@ -4,13 +4,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc VERSION\n"
-"POT-Creation-Date: 2001-01-26 14:31+0100\n"
-"PO-Revision-Date: 1999-09-22 15:19-0400\n"
+"POT-Creation-Date: 2001-01-30 20:23+0100\n"
+"PO-Revision-Date: 2001-01-30 20:23CET\n"
 "Last-Translator: Miroslav Baranko <barmir00@dec.upjs.sk>\n"
-"Language-Team: slovak <barmir00@dec.upjs.sk>\n"
+"Language-Team: Slovak <sk-i18n@rak.isternet.sk>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-2\n"
+"Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 0.8\n"
 
 #: edit/edit_key_translator.c:126
 msgid " Emacs key: "
@@ -103,9 +104,8 @@ msgid " There is no other panel to compare contents to "
 msgstr " Nieje tu ¾iaden ïal¹í panel pre porovnanie obsahu "
 
 #: gnome/gcmd.c:86
-#, fuzzy
 msgid " Could not start a terminal "
-msgstr " Nemohol som vyrobi» hard odkaz "
+msgstr " Nemohol som spusti» terminál"
 
 #: gnome/gcmd.c:101
 msgid "The Midnight Commander Team"
@@ -404,7 +404,7 @@ msgstr "Vytvori» novı adresár"
 
 #: gnome/gdesktop.c:2864
 msgid "URL L_ink..."
-msgstr "URL Odkaz.."
+msgstr "URL O_dkaz.."
 
 #: gnome/gdesktop.c:2864
 msgid "Creates a new URL link"
@@ -432,24 +432,23 @@ msgstr "Podµa Veµkos_ti"
 
 #: gnome/gdesktop.c:2874
 msgid "By Time Last _Accessed"
-msgstr "Podµa Èasu Prístupu"
+msgstr "Podµa èasu _prístupu"
 
 #: gnome/gdesktop.c:2875
 msgid "By Time Last _Modified"
-msgstr "Podµa Èasu poslednej Modifikácie"
+msgstr "Podµa èasu poslednej _modifikácie"
 
 #: gnome/gdesktop.c:2876
 msgid "By Time Last _Changed"
-msgstr "Podµa Èasu poslednej zmeny"
+msgstr "Podµa èasu poslednej _zmeny"
 
 #: gnome/gdesktop.c:2884 gnome/glayout.c:466
 msgid "_Arrange Icons"
 msgstr "_Zarovná» Ikony"
 
 #: gnome/gdesktop.c:2885
-#, fuzzy
 msgid "_Tidy Icons"
-msgstr "Ikony"
+msgstr "_Uprata» ikony"
 
 #: gnome/gdesktop.c:2886
 msgid "Create _New Window"
@@ -472,9 +471,8 @@ msgid "Configure _Background Image"
 msgstr "Nastavi» o_Brázok pozadia"
 
 #: gnome/gdesktop.c:2893
-#, fuzzy
 msgid "Des_ktop Properties"
-msgstr "Vlastnosti vstupu Pracovnej plochy"
+msgstr "Vlastnosti _plochy"
 
 #. Icon position
 #: gnome/gdesktop-prefs.c:242
@@ -504,13 +502,12 @@ msgstr "Pracovná Plocha"
 
 #. Create the link to the user's home directory so that he will have an icon
 #: gnome/gdesktop-init.c:146
-#, fuzzy
 msgid "Home directory"
-msgstr "Kopírova» adresár"
+msgstr "Domovskı prieèinok"
 
 #: gnome/gdesktop-init.c:158
 msgid "Trash"
-msgstr ""
+msgstr "Odpadky"
 
 #: gnome/gdialogs.c:60
 msgid "To: "
@@ -526,7 +523,7 @@ msgstr "Ma¾em súbor: "
 
 #: gnome/gdialogs.c:371
 msgid "Files Exist"
-msgstr "Súbor Existuje"
+msgstr "Súbor existuje"
 
 #: gnome/gdialogs.c:386
 msgid ""
@@ -723,7 +720,6 @@ msgstr ""
 "%s"
 
 #: gnome/gicon.c:282
-#, fuzzy
 msgid "Default set of icons not found, check your installation"
 msgstr ""
 "Implicitné nastavenie ikon nie je nájdené, prosím skontrolujte si va¹u "
@@ -894,7 +890,7 @@ msgstr "Hµada» súbor v aktuálnom Panely"
 
 #: gnome/glayout.c:415 gnome/gscreen.c:1428 gnome/gscreen.c:1439
 msgid "_Rescan Directory"
-msgstr "Preskenova» Adresár"
+msgstr "_Preskenova» Adresár"
 
 #: gnome/glayout.c:415
 msgid "Rescan the directory contents"
@@ -943,7 +939,7 @@ msgstr "Spusti» príkaz"
 
 #: gnome/glayout.c:440
 msgid "_Run Command in panel..."
-msgstr "Spusti» príkaz v panely..."
+msgstr "_Spusti» príkaz v panely..."
 
 #: gnome/glayout.c:440
 msgid "Run a command and put the results in a panel"
@@ -1003,52 +999,43 @@ msgstr ""
 
 #: gnome/gmc-window.c:69
 msgid "Copyright (C) 1998 The Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1998 The Free Software Foundation"
 
 #: gnome/gmc-window.c:81
-#, fuzzy
 msgid "Open _new window"
 msgstr "Vytvori» _Nové okno"
 
 #: gnome/gmc-window.c:86
-#, fuzzy
 msgid "_Close this window"
-msgstr "Zavrie» toto okno"
+msgstr "_Zavrie» toto okno"
 
 #: gnome/gmc-window.c:88
-#, fuzzy
 msgid "E_xit"
-msgstr "Koniec"
+msgstr "_Koniec"
 
 #: gnome/gmc-window.c:95
-#, fuzzy
 msgid "_Listing view"
-msgstr "Módy vıpisu"
+msgstr "Módy _vıpisu"
 
 #: gnome/gmc-window.c:96
-#, fuzzy
 msgid "_Icon view"
 msgstr "_Ikony"
 
 #: gnome/gmc-window.c:102
-#, fuzzy
 msgid "Display _tree view"
-msgstr " Zobrazené bity "
+msgstr "Zobrazi» _strom"
 
 #: gnome/gmc-window.c:112
-#, fuzzy
 msgid "_About the Midnight Commander..."
-msgstr "Midnight Commander"
+msgstr "_O Midnight Commander..."
 
 #: gnome/gmc-window.c:119
-#, fuzzy
 msgid "_File"
-msgstr "Súbor"
+msgstr "_Súbor"
 
 #: gnome/gmc-window.c:120
-#, fuzzy
 msgid "_View"
-msgstr "Ukáza»"
+msgstr "_Zobrazi»"
 
 #: gnome/gmount.c:218
 msgid "Could not open the /etc/fstab file"
@@ -1166,7 +1153,7 @@ msgstr "Súbor bol vytvorenı: "
 #: gnome/gnome-file-property-dialog.c:290
 #: gnome/gnome-file-property-dialog.c:299
 msgid "%a, %b %d %Y,  %I:%M:%S %p"
-msgstr ""
+msgstr "%a, %b %d %Y,  %I:%M:%S %p"
 
 #: gnome/gnome-file-property-dialog.c:286
 msgid "Last Modified on: "
@@ -1371,7 +1358,7 @@ msgstr "Vysunú» zariadenie"
 
 #: gnome/gpopup2.c:283
 msgid "Empty Trash"
-msgstr ""
+msgstr "Vyprázdni» Odpadky"
 
 #: gnome/gpopup2.c:286
 msgid "Open with..."
@@ -1386,9 +1373,8 @@ msgid "Copy..."
 msgstr "Kopírova»..."
 
 #: gnome/gpopup2.c:292
-#, fuzzy
 msgid "Move to Trash"
-msgstr "Priebeh Presúvania"
+msgstr "Presunú» do odpadkov"
 
 #: gnome/gpopup2.c:293 gtkedit/editwidget.c:1144 src/screen.c:2400
 #: src/screen.c:2430
@@ -1433,7 +1419,7 @@ msgstr "Pou¾i» shell vzory miesto be¾nıch vırazov"
 
 #: gnome/gprefs.c:108
 msgid "Determine file types from file content instead of extensions"
-msgstr ""
+msgstr "Urèova» typ súborov podµa obsahu a nie prípony"
 
 #: gnome/gprefs.c:117
 msgid "Confirm when deleting file"
@@ -1557,11 +1543,11 @@ msgstr "Vytvori» tu novı adresár"
 
 #: gnome/gscreen.c:1437
 msgid "Empty _Trash"
-msgstr ""
+msgstr "Vyprázdni» _Odpadky"
 
 #: gnome/gscreen.c:1437
 msgid "Empties the Trash"
-msgstr ""
+msgstr "Vyprázdni odpadky"
 
 #: gnome/gscreen.c:1653
 #, c-format
@@ -1607,7 +1593,6 @@ msgid "Up"
 msgstr "Hore"
 
 #: gnome/gscreen.c:2280
-#, fuzzy
 msgid "Go up a level in the directory hierarchy"
 msgstr "Choï o úroveò vy¹¹ie v hierarchii adresárov"
 
@@ -1752,7 +1737,7 @@ msgstr "Nemohol dosta pracovnú plochu\n"
 #: gnome/gmc-client.c:142
 #, c-format
 msgid "Unknown arrange type `%s'\n"
-msgstr ""
+msgstr "Neznámy typ `%s'\n"
 
 #: gnome/gmc-client.c:206
 msgid "Create window showing the specified directory"
@@ -1775,13 +1760,12 @@ msgid "Rescan the desktop device icons"
 msgstr "Obnov ikony zariadení pracovnej plochy"
 
 #: gnome/gmc-client.c:214
-#, fuzzy
 msgid "Arrange the desktop icons"
-msgstr "Obnov ikony pracovnej plochy"
+msgstr "Uprata» ikony pracovnej plochy"
 
 #: gnome/gmc-client.c:215
 msgid "name | type | size | atime | mtime | ctime"
-msgstr ""
+msgstr "meno | typ | veµkos» | aèas | mèas | cèas"
 
 #: gnome/gmc-client.c:217
 msgid "Close windows whose directories cannot be reached"
@@ -1792,7 +1776,7 @@ msgstr "Zavry okná tıch adresárov ktoré nemohly by» dostupné"
 #: gtkedit/edit.c:343 gtkedit/edit.c:375 gtkedit/edit.c:381 gtkedit/edit.c:388
 #: gtkedit/edit.c:395 gtkedit/edit.c:401 gtkedit/editcmd.c:305
 #: gtkedit/editcmd.c:311 gtkedit/editcmd.c:2038 gtkedit/editwidget.c:1024
-#: src/dir.c:386 src/tree.c:682 src/tree.c:688 src/wtools.c:222
+#: src/dir.c:396 src/tree.c:682 src/tree.c:688 src/wtools.c:222
 msgid " Error "
 msgstr " Chyba "
 
@@ -1801,19 +1785,16 @@ msgid " Failed trying to open file for reading: "
 msgstr " Neúspe¹nı pokus o otvorenie súboru pre èítanie: "
 
 #: gtkedit/edit.c:320
-#, fuzzy
 msgid " Error reading from pipe: "
-msgstr " Problematické èítanie z potomka procesu "
+msgstr " Chyba pri èítaní z rúry: "
 
 #: gtkedit/edit.c:325
-#, fuzzy
 msgid " Failed trying to open pipe for reading: "
-msgstr " Neúspe¹nı pokus o otvorenie súboru pre èítanie: "
+msgstr " Neúspe¹nı pokus o otvorenie rúry pre èítanie: "
 
 #: gtkedit/edit.c:339
-#, fuzzy
 msgid " Error reading file: "
-msgstr " Chyba poèas urèovania stavu súboru "
+msgstr " Chyba poèas èítania súboru:"
 
 #: gtkedit/edit.c:388
 msgid " Cannot get size/permissions info on file: "
@@ -1837,27 +1818,23 @@ msgstr ""
 
 #: gtkedit/edit.c:2594
 msgid "User menu available only in mcedit invoked from mc"
-msgstr ""
+msgstr "Pou¾ívateµské menu k dispozícii iba v mcedit spustenom z mc"
 
 #: gtkedit/edit.c:2792 gtkedit/editcmd.c:2940
-#, fuzzy
 msgid "Error trying to stat file:"
-msgstr " Chyba poèas urèovania stavu súboru "
+msgstr " Chyba poèas urèovania stavu súboru:"
 
 #: gtkedit/editcmd.c:168 src/cmd.c:1206 src/tree.c:654 src/view.c:1821
-#, fuzzy
 msgid "mc.hlp"
-msgstr "pomoc"
+msgstr "mc.hlp"
 
 #: gtkedit/editcmd.c:305
-#, fuzzy
 msgid " Error writing to pipe: "
-msgstr " Chyba poèas urèovania stavu súboru "
+msgstr " Chyba poèas zápisu do rúry: "
 
 #: gtkedit/editcmd.c:311
-#, fuzzy
 msgid " Failed trying to open pipe for writing: "
-msgstr " Neúspe¹nı pokus o otvorenie súboru pre èítanie: "
+msgstr " Neúspe¹nı pokus o otvorenie rúry pre zápis: "
 
 #: gtkedit/editcmd.c:386
 msgid "Quick save "
@@ -2166,19 +2143,17 @@ msgstr " Nahradi» v¹etko "
 
 #. Tool hint
 #: gtkedit/editcmd.c:1477
-#, fuzzy
 msgid "Replace repeatedly"
 msgstr "Nahradi» v¹etko"
 
 #: gtkedit/editcmd.c:1481
-#, fuzzy
 msgid " Bookmarks "
-msgstr "Flush book oznaèenia"
+msgstr " Zálo¾ky "
 
 #. Tool hint
 #: gtkedit/editcmd.c:1483 gtkedit/editcmd.c:1484
 msgid "Create bookmarks at all lines found"
-msgstr ""
+msgstr "Vytvorí zálo¾ky na v¹etkıch nájdenıch riadkoch"
 
 #: gtkedit/editcmd.c:1487
 msgid " Scanf expression "
@@ -2241,7 +2216,7 @@ msgstr " Hµadanı re»azec nebol nájdenı. "
 #: gtkedit/editcmd.c:2319
 #, c-format
 msgid " %d finds made, %d bookmarks added "
-msgstr ""
+msgstr " %d nájdenıch, %d pridanıch zálo¾iek"
 
 #. Confirm 'Quit' dialog box
 #: gtkedit/editcmd.c:2375 gtkedit/editcmd.c:2390 gtkedit/editcmd.c:2393
@@ -2358,24 +2333,23 @@ msgstr " Triedenie nevrátilo non-zero: "
 
 #: gtkedit/editcmd.c:2884
 msgid "Error create script:"
-msgstr ""
+msgstr "Chyba pri vytvorení skriptu:"
 
 #: gtkedit/editcmd.c:2890
 msgid "Error read script:"
-msgstr ""
+msgstr "Chyba pri èítaní skriptu:"
 
 #: gtkedit/editcmd.c:2897
 msgid "Error close script:"
-msgstr ""
+msgstr "Chyba pri zatvorení skriptu:"
 
 #: gtkedit/editcmd.c:2902
 msgid "Script created:"
-msgstr ""
+msgstr "Vytvorenı skript:"
 
 #: gtkedit/editcmd.c:2909
-#, fuzzy
 msgid "Process block"
-msgstr " Spracúvavam blok "
+msgstr "Spracovávam blok "
 
 #: gtkedit/editcmd.c:3015
 msgid " Mail "
@@ -2453,9 +2427,8 @@ msgid "copy to &File...  C-f"
 msgstr "&Kopírova» do súboru. C-f"
 
 #: gtkedit/editmenu.c:137 gtkedit/editmenu.c:156
-#, fuzzy
 msgid "&User menu...     F11"
-msgstr "&Pou¾ívateµské menu       F2"
+msgstr "&Pou¾ívateµské menu       F11"
 
 #: gtkedit/editmenu.c:140 gtkedit/editmenu.c:159
 msgid "a&Bout...            "
@@ -2527,7 +2500,7 @@ msgstr "&Choï na riadok...           M-1"
 
 #: gtkedit/editmenu.c:215 gtkedit/editmenu.c:238
 msgid "goto matching &Bracket   M-b"
-msgstr ""
+msgstr "choï na odpovedajúcu %zátvorku  M-b"
 
 #: gtkedit/editmenu.c:217 gtkedit/editmenu.c:240
 msgid "insert &Literal...       C-q"
@@ -2570,9 +2543,8 @@ msgid "sor&T...                 M-t"
 msgstr "&Usporiada»...               M-t"
 
 #: gtkedit/editmenu.c:231 gtkedit/editmenu.c:254
-#, fuzzy
 msgid "E&xternal Formatter      F19"
-msgstr "'indent' C &Formátor         F19"
+msgstr "Externı &Formátor         F19"
 
 #: gtkedit/editmenu.c:232
 msgid "&Mail...                    "
@@ -2745,7 +2717,7 @@ msgstr "Choï na riadok...\tM-1"
 
 #: gtkedit/editmenu.c:467
 msgid "Goto matching bracket\tM-b"
-msgstr ""
+msgstr "choï na odpovedajúcu zátvorku\tM-b"
 
 #: gtkedit/editmenu.c:469
 msgid "Start record macro\tC-r"
@@ -3528,12 +3500,10 @@ msgid "&System Wide"
 msgstr "&Systémovı"
 
 #: src/cmd.c:667
-#, fuzzy
 msgid " Menu edit "
-msgstr "Pou¾ívateµské menu"
+msgstr " Editor menu"
 
 #: src/cmd.c:668
-#, fuzzy
 msgid " Which menu file will you edit ? "
 msgstr " Ktorı súbor menu chcete upravi»? "
 
@@ -3649,14 +3619,13 @@ msgid " relative symlink: %s "
 msgstr " relatívny symb. odkaz: %s "
 
 #: src/cmd.c:1263
-#, fuzzy
 msgid "Using default locale"
-msgstr "Pou¾i» ¹tandardnú hodnotu pre funkciu «ahania"
+msgstr "Pou¾i» ¹tandardnú hodnotu pre lokalizáciu"
 
 #: src/cmd.c:1265
 #, c-format
 msgid "Using locale \"%s\" (from environment variable %s)"
-msgstr ""
+msgstr "Pou¾i» lokalizáciu \"%s\" (z premennej prostredia %s)"
 
 #: src/cmd.c:1351
 msgid " Enter machine name (F1 for details): "
@@ -3801,12 +3770,12 @@ msgstr "&Vlastník"
 msgid "&Group"
 msgstr "s&Kupina"
 
-#: src/dir.c:386
-#, fuzzy, c-format
+#: src/dir.c:396
+#, c-format
 msgid "File '%s' exists but can not be stat-ed: %s"
-msgstr "Súbor existuje, ale nemô¾em urèi»-ed: %s %s"
+msgstr "Súbor '%s' existuje, ale nemô¾em urèi» stav: %s"
 
-#: src/dir.c:657
+#: src/dir.c:667
 msgid "Unknown"
 msgstr "Neznámy"
 
@@ -3852,6 +3821,11 @@ msgid ""
 "Midnight Commander package or in case you don't\n"
 "have any, get it from ftp://ftp.nuclecu.unam.mx."
 msgstr ""
+"Súbor mc.ext bol zmenenı vo verzii 3.0.\n"
+"Vyzerá to, ¾e in¹talácia zlyhala. Prosím, \n"
+"pou¾ite novú kópiu balíka Midnight\n"
+"Commander alebo, ak ¾iadny nemáte, nav¹tívte\n"
+"ftp://ftp.nuclecu.unam.mx."
 
 #: src/ext.c:432
 msgid " file error "
@@ -3884,119 +3858,108 @@ msgid "mc.ext will be used for this moment."
 msgstr "mc.ext bude pou¾ívanı v tejto chvíli."
 
 #: src/textconf.c:12
-#, fuzzy
 msgid "Edition: "
-msgstr " Upravi»"
+msgstr "Úpravy: "
 
 #: src/textconf.c:13
-#, fuzzy
 msgid "text mode"
-msgstr "Aktuálny mód: "
+msgstr "textovı mód"
 
 #: src/textconf.c:15
 msgid " with X11 support to read modifiers"
-msgstr ""
+msgstr " s podporou X11 pre èítanie modifikátorov"
 
 #: src/textconf.c:20
-#, fuzzy
 msgid "Virtual File System: tarfs, extfs"
-msgstr " Nastavenie virtuálneho súborového systému "
+msgstr "Virtuálneho súborovı systém: tarfs, extfs"
 
 #: src/textconf.c:22
 msgid ", ftpfs"
-msgstr ""
+msgstr ", ftpfs"
 
 #: src/textconf.c:24
 msgid " (proxies: hsc proxy)"
-msgstr ""
+msgstr " (proxy: hsc proxy)"
 
 #: src/textconf.c:26
 msgid ", mcfs"
-msgstr ""
+msgstr ", mcfs"
 
 #: src/textconf.c:28
 msgid " (with termnet support)"
-msgstr ""
+msgstr " (s podporou termnet)"
 
 #: src/textconf.c:31
 msgid ", smbfs"
-msgstr ""
+msgstr ", smbfs"
 
 #: src/textconf.c:35
 msgid ", undelfs"
-msgstr ""
+msgstr ", undelfs"
 
 #: src/textconf.c:41
 msgid "With builtin Editor\n"
-msgstr ""
+msgstr "S zabudovanım editorom\n"
 
 #: src/textconf.c:44
-#, fuzzy
 msgid "Using "
-msgstr "Presúvam "
+msgstr "Pou¾ívam "
 
 #: src/textconf.c:47
 msgid "system-installed "
-msgstr ""
+msgstr "nain¹talovaná"
 
 #: src/textconf.c:49
 msgid "S-lang library with "
-msgstr ""
+msgstr "S-lang kni¾nica s "
 
 #: src/textconf.c:52
-#, fuzzy
 msgid "terminfo"
-msgstr "Pou¾i» terminál"
+msgstr "terminfo"
 
 #: src/textconf.c:55
 msgid "termcap"
-msgstr ""
+msgstr "termcap"
 
 #: src/textconf.c:57
-#, fuzzy
 msgid "an unknown terminal"
-msgstr "Na spú¹»anie na pomalıch termináloch"
+msgstr "neznámy terminál"
 
 #: src/textconf.c:60
 msgid " database"
-msgstr ""
+msgstr " databáza"
 
 #: src/textconf.c:63
 msgid "the ncurses library"
-msgstr ""
+msgstr "ncurses kni¾nica"
 
 #: src/textconf.c:65
 msgid "some unknown curses library"
-msgstr ""
+msgstr "neznáma kni¾nica curses"
 
 #: src/textconf.c:70
-#, fuzzy
 msgid "With subshell support: "
-msgstr "Vypínam podporu pre subshell"
+msgstr "S podporou subshellu:"
 
 #: src/textconf.c:72
-#, fuzzy
 msgid "optional"
-msgstr "Nastavenia"
+msgstr "nepovinné"
 
 #: src/textconf.c:74
 msgid "as default"
-msgstr ""
+msgstr "ako ¹tandardné"
 
 #: src/textconf.c:80
-#, fuzzy
 msgid "With support for background operations\n"
-msgstr "Vıpis operácií v pozadí"
+msgstr "S podporou operácií na pozadí\n"
 
 #: src/textconf.c:84
-#, fuzzy
 msgid "with mouse support on xterm and the Linux console.\n"
-msgstr "s podporou pre my¹ v xterme%s\n"
+msgstr "s podporou pre my¹ v xterme a Linuxovej konzole.\n"
 
 #: src/textconf.c:86
-#, fuzzy
 msgid "with mouse support on xterm.\n"
-msgstr "s podporou pre my¹ v xterme%s\n"
+msgstr "s podporou pre my¹ v xterme.\n"
 
 #: src/file.c:154 src/tree.c:639
 msgid " Copy "
@@ -4701,11 +4664,12 @@ msgid "Send the results to a Panel"
 msgstr "Vısledky posla» Panelu"
 
 #: src/help.c:279
-#, fuzzy
 msgid ""
 " Help file format error\n"
 ""
-msgstr " Chyba vo formáte súboru nápovedy\n"
+msgstr ""
+" Chyba vo formáte súboru pomocníka\n"
+" "
 
 #: src/help.c:318
 msgid " Internal bug: Double start of link area "
@@ -5214,14 +5178,13 @@ msgid " Do you really want to quit the Midnight Commander? "
 msgstr " Naozaj chcete skonèi» prácu v Midnight Commandery? "
 
 #: src/main.c:1236
-#, fuzzy
 msgid " Listing format edit "
-msgstr "&Upravi» formát vıpisu"
+msgstr " Upravi» formát vıpisu"
 
 #: src/main.c:1236
 #, c-format
 msgid " New mode is \"%s\" "
-msgstr ""
+msgstr " Novı mód je \"%s\" "
 
 #: src/main.c:1248 src/main.c:1272
 msgid "&Listing mode..."
@@ -5385,7 +5348,7 @@ msgstr "aktívn&Y VFS zoznam     C-x a"
 
 #: src/main.c:1344
 msgid "Fr&ee VFSs now"
-msgstr ""
+msgstr "&Uvoµni» VFS teraz"
 
 #: src/main.c:1347
 msgid "&Background jobs      C-x j"
@@ -5408,9 +5371,8 @@ msgid "&Menu file edit"
 msgstr "upravi» súborové me&Nu "
 
 #: src/main.c:1362
-#, fuzzy
 msgid "Menu edi&Tor edit"
-msgstr "Pou¾ívateµské menu"
+msgstr "Editor pou¾ívateµského menu"
 
 #: src/main.c:1368
 msgid "&Configuration..."
@@ -5495,18 +5457,22 @@ msgid ""
 "mc [flags] [this_dir] [other_panel_dir]\n"
 "\n"
 msgstr ""
+"Pou¾itie:\n"
+"\n"
+"mc [flags] [this_dir] [other_panel_dir]\n"
+"\n"
 
 #: src/main.c:2486
 msgid "-a, --stickchars   Force use of +, -, | for line drawing.\n"
-msgstr ""
+msgstr "-a, --stickchars   Vynúti kreslenie èiar pomocou +, -, |.\n"
 
 #: src/main.c:2488
 msgid "-b, --nocolor      Force black and white display.\n"
-msgstr ""
+msgstr "-b, --nocolor      Èiernobiely displej.\n"
 
 #: src/main.c:2490
 msgid "-B, --background   [DEVEL-ONLY: Debug the background code]\n"
-msgstr ""
+msgstr "-B, --background   [DEVEL-ONLY: Ladenie kódu na pozadí]\n"
 
 #: src/main.c:2492
 msgid ""
@@ -5514,10 +5480,14 @@ msgid ""
 "-C, --colors       Specify colors (use --help-colors to get a list).\n"
 "-d, --nomouse      Disable mouse support.\n"
 msgstr ""
+"-c, --color        Farebnı mód.\n"
+"-C, --colors       Nastavenie farieb (pou¾ite --help-colors pre ich "
+"zoznam).\n"
+"-d, --nomouse      Zaká¾e podporu my¹i.\n"
 
 #: src/main.c:2496
 msgid "-e, --edit         Startup the internal editor.\n"
-msgstr ""
+msgstr "-e, --edit         Spustí internı editor.\n"
 
 #: src/main.c:2498
 msgid ""
@@ -5527,29 +5497,38 @@ msgid ""
 "terminfo/termcap\n"
 "                   default.\n"
 msgstr ""
+"-f, --libdir       Vypísa» nastavené cesty.\n"
+"-h, --help         Ukáza» tento text.\n"
+"-k, --resetsoft    Vráti» softklávesy (iba terminál HP) na ich ¹tandardné "
+"hodnoty\n"
+"terminfo/termcap\n"
 
 #: src/main.c:2503
 msgid "-l, --ftplog file  Log ftpfs commands to the file.\n"
-msgstr ""
+msgstr "-l, --ftplog súbor  Zaznamenáva» príkazy ftpfs do súboru.\n"
 
 #: src/main.c:2506
 msgid "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
-msgstr ""
+msgstr "-M, --memory súbor  [DEVEL-ONLY: Zaznamenáva» MAD správy do súboru.]\n"
 
 #: src/main.c:2508
 msgid ""
 "-P, --printwd      At exit, print the last working directory.\n"
 "-s, --slow         Disables verbose operation (for slow terminals).\n"
 msgstr ""
+"-P, --printwd      Na konci vypísa» poslednı pracovnı adresár.\n"
+"-s, --slow         Zaká¾e operácie so správami (pre pomalé terminály).\n"
 
 #: src/main.c:2511
 msgid "-t, --termcap      Activate support for the TERMCAP variable.\n"
-msgstr ""
+msgstr "-t, --termcap      Aktivova» podporu premennej TERMCAP.\n"
 
 #: src/main.c:2514
 msgid ""
 "-S, --createcmdile Create command file to set default directory upon exit.\n"
 msgstr ""
+"-S, --createcmdile Vytvorí súbor s príkazmi pre nastavenie ¹tandardného "
+"prieèinku na konci.\n"
 
 #: src/main.c:2517
 msgid ""
@@ -5557,6 +5536,9 @@ msgid ""
 "-U, --subshell     Force the concurrent subshell mode.\n"
 "-r, --forceexec    Force subshell execution.\n"
 msgstr ""
+"-u, --nosubshell   Zaká¾e paralelnı mód subshellu.\n"
+"-U, --subshell     Vynúti paralelnı mód subshellu.\n"
+"-r, --forceexec    Vynúti spustenie subshellu.\n"
 
 #: src/main.c:2521
 msgid ""
@@ -5565,10 +5547,15 @@ msgid ""
 "-x, --xterm        Force xterm mouse support and screen save/restore.\n"
 "+number            number it is the start line number of file for `mcedit'.\n"
 msgstr ""
+"-v, --view fname   Spustí v prehliadacom móde.\n"
+"-V, --version      Oznámi verziu a nastavenie.\n"
+"-x, --xterm        Vynúti podporu my¹i v xterme a ukladanie/obnovu "
+"obrazovky.\n"
+"+number            Poèiatoèné èíslo riadku v súbore pre `mcedit'.\n"
 
 #: src/main.c:2526
 msgid "-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
-msgstr ""
+msgstr "-X, --dbgsubshell  [DEVEL-ONLY: Ladi» subshell].\n"
 
 #: src/main.c:2528
 msgid ""
@@ -5576,6 +5563,9 @@ msgid ""
 "Please send any bug reports (including the output of `mc -V')\n"
 "to mc-bugs@nuclecu.unam.mx\n"
 msgstr ""
+"\n"
+"Správy o chybách posielajte (vrátane vıpisu `mc -V')\n"
+"na adresu mc-bugs@nuclecu.unam.mx\n"
 
 #: src/main.c:2544
 msgid ""
@@ -5597,6 +5587,23 @@ msgid ""
 "   brightcyan, lightgray and white\n"
 "\n"
 msgstr ""
+"--colors K¥ÚÈ={FORE},{BACK}\n"
+"\n"
+"{FORE} a {BACK} je mo¾né vynecha» a bude pou¾itá ¹tandardná hodnota\n"
+"\n"
+"Kµúèe:\n"
+"   Globálne:       errors, reverse, gauge, input\n"
+"   Zobrazenie súborov: normal, selected, marked, markselect\n"
+"   Dialógy: dnormal, dfocus, dhotnormal, dhotfocus\n"
+"   Menu:        menu, menuhot, menusel, menuhotsel\n"
+"   Pomocník:         helpnormal, helpitalic, helplink, helpslink\n"
+"   Typy súborov:   directory, execute, link, device, special, core\n"
+"\n"
+"Farby:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
 
 #: src/main.c:2596
 #, c-format
@@ -5703,19 +5710,18 @@ msgid "No windows opened at startup"
 msgstr "®iadne okná neboli otvorené poèas ¹tartovania"
 
 #: src/main.c:2756
-#, fuzzy
 msgid "No desktop icons"
-msgstr "Obnov ikony pracovnej plochy"
+msgstr "®iadne ikony pracovnej plochy"
 
 #: src/main.c:2757
 msgid "Look more like traditional gmc"
-msgstr ""
+msgstr "Vyzera» viac ako tradiènı gmc"
 
 #: src/main.c:2759
 msgid "Display the directory that holds the .links startup files and exit"
 msgstr "Zobrazi» adresár, aby obsadil odkazy ¹tartovacích súborov a konca"
 
-#: src/main.c:3077
+#: src/main.c:3086
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -5723,11 +5729,11 @@ msgstr ""
 "Nemohol som otvori» tty riadok. Máte spustenı mc bez oznaèenia -P .\n"
 "Na niektorıch systémoch mo¾no budete chcie» spusti» # `ktorı mc`\n"
 
-#: src/main.c:3155
+#: src/main.c:3164
 msgid " Notice "
 msgstr " Správa "
 
-#: src/main.c:3156
+#: src/main.c:3165
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -5900,11 +5906,11 @@ msgstr "Zobrazi» struènı pou¾. oznam"
 
 #: src/screen.c:227
 msgid "SUB-DIR"
-msgstr ""
+msgstr "SUB-DIR"
 
 #: src/screen.c:227
 msgid "UP--DIR"
-msgstr ""
+msgstr "UP--DIR"
 
 #: src/screen.c:417
 msgid "MTime"
@@ -6057,15 +6063,15 @@ msgstr ""
 
 #: src/user.c:137
 msgid " Format error on file Extensions File "
-msgstr ""
+msgstr " Chyba formátu v súbore prípon"
 
 #: src/user.c:138
 msgid " The %%var macro does not have a default "
-msgstr ""
+msgstr " Makro %%var nemá ¹tandardnú hodnotu"
 
 #: src/user.c:139
 msgid " The %%var macros does not have a variable "
-msgstr ""
+msgstr " Makrá %%var nemajú premennú"
 
 #: src/user.c:273
 #, c-format
@@ -6108,7 +6114,7 @@ msgstr " Nemô¾em spusti» programy, pokiaµ je èinnı v nemiestnom adresári "
 #: src/user.c:770
 #, c-format
 msgid " No appropriative entries found in %s "
-msgstr ""
+msgstr " Nenájdené ¾iadne odpovedajúce polo¾ky v %s"
 
 #. Create listbox
 #: src/user.c:776
@@ -6516,12 +6522,12 @@ msgid "NumLock on keypad"
 msgstr "NumLock na kláves."
 
 #: vfs/cpio.c:141 vfs/cpio.c:157
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Couldn't open cpio archive\n"
 "%s"
 msgstr ""
-"Nemohol som otvori» %s archív\n"
+"Nemohol som otvori» cpio archív\n"
 "%s"
 
 #: vfs/cpio.c:224
@@ -6530,6 +6536,8 @@ msgid ""
 "Premature end of cpio archive\n"
 "%s"
 msgstr ""
+"Predèasnı koniec cpio archívu\n"
+"%s"
 
 #: vfs/cpio.c:309 vfs/cpio.c:358
 #, c-format
@@ -6537,15 +6545,20 @@ msgid ""
 "Corrupt cpio header encountered in\n"
 "%s"
 msgstr ""
+"Po¹kodená hlavièka cpio v\n"
+"%s"
 
 #: vfs/cpio.c:427
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr "Neúplnı tar archív"
+msgstr ""
+"Nekonzistentné tvrdé odkazy\n"
+"%sv cpio archíve\n"
+"%s"
 
 #. In case entry is already there
 #. This shouldn't happen! (well, it can happen if there is a record for a
@@ -6555,43 +6568,42 @@ msgstr "Neúplnı tar archív"
 #: vfs/cpio.c:450
 #, c-format
 msgid "%s contains duplicit entries! Skiping!"
-msgstr ""
+msgstr "%s obsahuje duplicitné polo¾ky! Preskakujem!"
 
 #: vfs/cpio.c:517
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr "Neoèakávanı koniec Archivovaného súboru"
+msgstr ""
+"Neoèakávanı koniec súboru\n"
+"%s"
 
 #: vfs/direntry.c:301
 #, c-format
 msgid "Dir cache expired for %s"
-msgstr ""
+msgstr "Ke¹ adresárov vypr¹ala pre %s"
 
 #: vfs/direntry.c:431 vfs/direntry.c:434
-#, fuzzy
 msgid " Direntry warning "
-msgstr " Cesta k adresáru "
+msgstr " Vyrovanie polo¾ky adresára"
 
 #: vfs/direntry.c:431
 #, c-format
 msgid "Super ino_usage is %d, memory leak"
-msgstr ""
+msgstr "Super ino_usage je %d, uniká pamä»"
 
 #: vfs/direntry.c:434
 msgid "Super has want_stale set"
-msgstr ""
+msgstr "Super má nastavené want_stale"
 
 #: vfs/direntry.c:812
-#, fuzzy
 msgid "Starting linear transfer..."
-msgstr "Preru¹ujem prenos..."
+msgstr "Zaèínam lineárny prenos..."
 
 #: vfs/direntry.c:957
-#, fuzzy
 msgid "Getting file"
-msgstr "Ma¾em súbor: "
+msgstr "Získavam súbor"
 
 #: vfs/extfs.c:270
 #, c-format
@@ -6620,9 +6632,8 @@ msgid "Sorry, we can not do password authenticated connections for now."
 msgstr "¥utujem, nemô¾eme overi» heslo pre teraj¹ie spojenie."
 
 #: vfs/fish.c:233
-#, fuzzy
 msgid " fish: Password required for "
-msgstr " FTP: Vy¾aduje heslo "
+msgstr " fish: Vy¾aduje heslo "
 
 #: vfs/fish.c:242
 msgid "fish: Sending password..."
@@ -6671,7 +6682,7 @@ msgstr "fish: Ukladám %s %d (%d)"
 
 #: vfs/fish.c:509
 msgid "zeros"
-msgstr ""
+msgstr "nuly"
 
 #: vfs/fish.c:556
 msgid "Aborting transfer..."
@@ -6794,17 +6805,17 @@ msgid "Resolving symlink..."
 msgstr "Lú¹tim symb. linku..."
 
 #: vfs/ftpfs.c:1178
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: Èítam FTP adresár %s..."
+msgstr "ftpfs: Èítam FTP adresár %s... %s%s"
 
 #: vfs/ftpfs.c:1179
 msgid "(strict rfc959)"
-msgstr ""
+msgstr "(striktné rfc959)"
 
 #: vfs/ftpfs.c:1180
 msgid "(chdir first)"
-msgstr ""
+msgstr "(naprv cd)"
 
 #: vfs/ftpfs.c:1304
 msgid "ftpfs: failed"
@@ -6822,7 +6833,7 @@ msgstr "ftpfs: ukladám súbor do pamäte %d (%d)"
 #. This is place of next pointer
 #: vfs/ftpfs.c:1682
 msgid "File Transfer Protocol (ftp)"
-msgstr ""
+msgstr "File Transfer Protocol (ftp)"
 
 #: vfs/ftpfs.c:1795
 msgid ""
@@ -6871,23 +6882,19 @@ msgid " Invalid password "
 msgstr " Neplatné heslo "
 
 #: vfs/mcfs.c:235
-#, fuzzy, c-format
+#, c-format
 msgid " Can't locate hostname: %s "
-msgstr ""
-" Nemô¾em urèi» cieµ \n"
-" %s "
+msgstr " Nemô¾em urèi» hostiteµa: %s "
 
 #: vfs/mcfs.c:253
-#, fuzzy, c-format
+#, c-format
 msgid " Can't create socket: %s "
-msgstr ""
-"Nemô¾em zmeni» adresár na \"%s\" \n"
-" %s "
+msgstr " Nemô¾em vytvori» soket: %s "
 
 #: vfs/mcfs.c:259
-#, fuzzy, c-format
+#, c-format
 msgid " Can't connect to server: %s "
-msgstr "ftpfs: pripojenie k serveru neúspe¹né: %s"
+msgstr " Nemô¾em sa pripoji» k serveru: %s"
 
 #: vfs/mcfs.c:324
 msgid " Too many open connections "
@@ -6896,7 +6903,7 @@ msgstr " Je otvorenıch príli¹ veµa pripojení "
 #. This is place of next pointer
 #: vfs/mcfs.c:1127
 msgid "Midnight Commander's private remote filesystem"
-msgstr ""
+msgstr "Súkromnı vzdialenı súborovı systém Midnight Commander"
 
 #: vfs/smbfs.c:116
 msgid "Domain:"
@@ -6926,7 +6933,7 @@ msgstr ""
 
 #: vfs/smbfs.c:1243
 msgid " Authentication failed "
-msgstr ""
+msgstr " Overenie zlyhalo "
 
 #: vfs/smbfs.c:1738
 #, c-format
@@ -6977,29 +6984,24 @@ msgstr ""
 "to nevyzerá ako tar archív."
 
 #: vfs/vfs.c:1139
-#, fuzzy
 msgid "Changes to file lost"
-msgstr "&Dlhı vıpis súborov "
+msgstr "Zmeny súboru stratené"
 
 #: vfs/vfs.c:1781
-#, fuzzy
 msgid "Could not parse:"
-msgstr ""
-"Nemohol som urèi» %s\n"
-"%s"
+msgstr "Nemohol som spracova»:"
 
 #: vfs/vfs.c:1783
 msgid "More parsing errors will be ignored."
-msgstr ""
+msgstr "Ïal¹ie chyby pracovania budú ignorované."
 
 #: vfs/vfs.c:1783
 msgid "(sorry)"
-msgstr ""
+msgstr "(µutujem)"
 
 #: vfs/vfs.c:1794
-#, fuzzy
 msgid "Internal error:"
-msgstr " Interná chyba: vezmi_súbor \n"
+msgstr "Interná chyba:"
 
 #: vfs/vfs.c:1804
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
@@ -7011,71 +7013,71 @@ msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld bitov prenesenıch"
 
 #: vfs/undelfs.c:81
-#, fuzzy
 msgid " undelfs: error "
-msgstr "chyba v súbore"
+msgstr " undelfs: chyba"
 
 #: vfs/undelfs.c:184
 msgid " not enough memory "
-msgstr ""
+msgstr " nedostatok pamäti"
 
 #: vfs/undelfs.c:189
 msgid " while allocating block buffer "
-msgstr ""
+msgstr " poèas alokovanie bufferu pre bloky "
 
 #: vfs/undelfs.c:193
 #, c-format
 msgid " open_inode_scan: %d "
-msgstr ""
+msgstr " open_inode_scan: %d "
 
 #: vfs/undelfs.c:197
 #, c-format
 msgid " while starting inode scan %d "
-msgstr ""
+msgstr " poèas ¹tartovania prechodu po inode %d "
 
 #: vfs/undelfs.c:204
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr ""
+msgstr "undelfs: naèítavam informácie o odstranenıch  %d inode"
 
 #: vfs/undelfs.c:219
 #, c-format
 msgid " while calling ext2_block_iterate %d "
-msgstr ""
+msgstr " poèas volania ext2_block_iterate %d "
 
 #: vfs/undelfs.c:227
 msgid " no more memory while reallocating array "
-msgstr ""
+msgstr " nie viac pamäti poèas zmeny alokácie poµa "
 
 #: vfs/undelfs.c:246
 #, c-format
 msgid " while doing inode scan %d "
-msgstr ""
+msgstr " poèas prechádzania inode %d "
 
 #: vfs/undelfs.c:270
-#, fuzzy
 msgid " Ext2lib error "
-msgstr "chyba v súbore"
+msgstr " Ext2lib: chyba"
 
 #: vfs/undelfs.c:297
-#, fuzzy, c-format
+#, c-format
 msgid " Could not open file %s "
-msgstr " Nemohol som otvori» súbor "
+msgstr " Nemohol som otvori» súbor %s"
 
 #: vfs/undelfs.c:300
 msgid "undelfs: reading inode bitmap..."
-msgstr ""
+msgstr "undelfs: èítam bitovú mapu inode..."
 
 #: vfs/undelfs.c:303
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Could not load inode bitmap from: \n"
 " %s \n"
-msgstr "Nemohol som chdir na %s  "
+msgstr ""
+" Nemohol som naèíta» bitmapu inode z: \n"
+" %s \n"
 
 #: vfs/undelfs.c:306
 msgid "undelfs: reading block bitmap..."
-msgstr ""
+msgstr "undelfs: èítam bitovú mapu blokov..."
 
 #: vfs/undelfs.c:309
 #, c-format
@@ -7083,92 +7085,35 @@ msgid ""
 " Could not load block bitmap from: \n"
 " %s \n"
 msgstr ""
+" Nemô¾em naèíta» bitovú mapu blokov z: \n"
+" %s \n"
 
 #: vfs/undelfs.c:315
 msgid "undelfs: done."
-msgstr ""
+msgstr "undelfs: hotovo."
 
 #: vfs/undelfs.c:318
-#, fuzzy
 msgid "undelfs: failure"
-msgstr " Vnútorná porucha "
+msgstr "undelfs: zlyhanie"
 
 #: vfs/undelfs.c:342
 msgid " vfs_info is not fs! "
-msgstr ""
+msgstr " vfs_info nie je fs! "
 
 #: vfs/undelfs.c:398 vfs/undelfs.c:582
 msgid " You have to chdir to extract files first "
-msgstr ""
+msgstr " Musíte zmeni» adresár pre extrakciu súborov"
 
 #: vfs/undelfs.c:521
 msgid " while iterating over blocks "
-msgstr ""
+msgstr " poèas prechodu cez bloky"
 
 #: vfs/undelfs.c:626
-#, fuzzy, c-format
+#, c-format
 msgid " Could not open file: %s "
-msgstr " Nemohol som otvori» súbor "
+msgstr " Nemohol som otvori» súbor: %s"
 
 #. This is place of next pointer
 #: vfs/undelfs.c:684
-#, fuzzy
 msgid "Undelete filesystem for ext2"
-msgstr "Obnovi» &Súbory (iba ext2fs)"
-
-#~ msgid "New _File..."
-#~ msgstr "V¹etky súbory"
-
-#~ msgid "Creates a new file here"
-#~ msgstr "Vytvori» tu novı súbor"
-
-#~ msgid " Error allocating memory "
-#~ msgstr " Chyba alokácie v pameti "
-
-#~ msgid "key '%d 0': "
-#~ msgstr "klávesa '%d 0': "
-
-#~ msgid " Error trying to open file for reading "
-#~ msgstr " Chyba poèas otvárania súboru urèeného na èítanie "
-
-#~ msgid "Usage: fixhlp <width> <tocname>\n"
-#~ msgstr "Pou¾itie: fixhlp <formát> <tocname>\n"
-
-#~ msgid "fixhlp: Cannot open toc for writing"
-#~ msgstr "fixhlp: Nemô¾em otvori» toc pre zapisovanie"
-
-#~ msgid ""
-#~ "[Contents]\n"
-#~ " Topics:\n"
-#~ "\n"
-#~ msgstr ""
-#~ ".[Obsahy]\n"
-#~ " Témy:\n"
-#~ "\n"
-
-#~ msgid " and the Linux console"
-#~ msgstr " a Linuxovskej konzole"
-
-#~ msgid "  %s bytes in %d file%s"
-#~ msgstr "  %s bitov v %d súboroch%"
-
-#~ msgid " Empty file %s "
-#~ msgstr " Prázdny súbor %s "
-
-#~ msgid "fish: got listing"
-#~ msgstr "fish: dostávam vıpis %s..."
-
-#~ msgid "ftpfs: could not setup passive mode for source routing"
-#~ msgstr "ftpfs: nemohol som nastavi» pasívny mód pre prvotnú trasu"
-
-#~ msgid "ftpfs: Reading FTP directory %s... (don't use UNIX ls options)"
-#~ msgstr "ftpfs: Èítam FTP adresár %s... (nepou¾ívaj UNIX ls voµby)"
-
-#~ msgid "ftpfs: FAIL"
-#~ msgstr "ftpfs: ZLYHANIE"
-
-#~ msgid "ftpfs: reading FTP directory interrupt by user"
-#~ msgstr "ftpfs: èítanie FTP adresára je preru¹ené pou¾ívateµom"
-
-#~ msgid "ftpfs: got listing"
-#~ msgstr "ftpfs: dostal som vıpis"
+msgstr "Obnovi» súbory (iba ext2fs)"
