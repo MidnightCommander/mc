@@ -20,12 +20,12 @@ like to see what's inside it, path will be
 /anypath/my.zip#uzip/some_path/...
 
 Then you add a line extfs.ini file containing just that extension. If
-your vfs does not require file to work on, add ':' to the of name.
+your vfs does not require file to work on, add ':' to the end of name.
 
 In this example, .zip is suffix, but I call vfs 'uzip'. Why? Well,
 what this vfs essentially does is UNzip. UN is too long, so I choosed
 U. Note that sometime in future filesystem like zip may exist: It will
-take whole tree and create .zip file from it. So /usr:zip will be
+take whole tree and create .zip file from it. So /usr#zip will be
 zipfile containing whole /usr tree.
 
 The second one may require some your knowledge of shell/c programming:
