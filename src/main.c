@@ -630,7 +630,7 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
 		     panel->reverse, panel->case_sensitive, panel->filter);
     try_to_select (panel, get_parent_dir_name (panel->cwd, olddir));
     load_hint (0);
-    panel_update_contents (panel);
+    panel->dirty = 1;
     update_xterm_title_path ();
 
     g_free (olddir);
@@ -1570,7 +1570,7 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
     case DLG_HOTKEY_HANDLED:
 	if ((get_current_type () == view_listing) && cpanel->searching) {
 	    cpanel->searching = 0;
-	    panel_update_contents (cpanel);
+	    cpanel->dirty = 1;
 	}
 	return MSG_HANDLED;
 
@@ -1605,6 +1605,10 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	    show_console_contents (output_start_y,
 				   LINES - output_lines - keybar_visible -
 				   1, LINES - keybar_visible - 1);
+	return MSG_HANDLED;
+
+    case DLG_POST_KEY:
+	update_dirty_panels ();
 	return MSG_HANDLED;
 
     default:

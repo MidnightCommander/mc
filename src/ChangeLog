@@ -1,3 +1,11 @@
+2003-09-10  Pavel Roskin  <proski@gnu.org>
+
+	* screen.c (update_dirty_panels): New function - update panels
+	with the dirty flag.
+	(panel_update_contents): Make static, don't call directly.
+	* main.c: Don't call panel_update_contents(), use dirty flag.
+	(midnight_callback): Call update_dirty_panels().
+
 2003-09-09  Pavel Roskin  <proski@gnu.org>
 
 	* find.c (find_parameters): Make "filename" entry focused on

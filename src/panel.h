@@ -91,7 +91,7 @@ void panel_reload         (WPanel *panel);
 void panel_set_sort_order (WPanel *panel, sortfn *sort_order);
 void panel_re_sort        (WPanel *panel);
 
-void panel_update_contents (WPanel *panel);
+void update_dirty_panels (void);
 void panel_update_cols (Widget *widget, int frame_size);
 int set_panel_formats (WPanel *p);
 

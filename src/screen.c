@@ -775,8 +775,12 @@ adjust_top_file (WPanel *panel)
 	panel->top_file = panel->count - llines (panel);
 }
 
-/* Repaints the information that changes after a command */
-void
+/*
+ * Repaint everything that can change on the panel - title, entries and
+ * mini status.  The rest of the frame and the mini status separator are
+ * not repainted.
+ */
+static void
 panel_update_contents (WPanel *panel)
 {
     show_dir (panel);
@@ -784,12 +788,29 @@ panel_update_contents (WPanel *panel)
     display_mini_info (panel);
 }
 
+/* Repaint everything, including frame and separator */
 void
 paint_panel (WPanel *panel)
 {
     paint_frame (panel);
     panel_update_contents (panel);
     mini_info_separator (panel);
+}
+
+/*
+ * Repaint the contents of the panels without frames.  To schedule panel
+ * for repainting, set panel->dirty to 1.  There are many reasons why
+ * the panels need to be repainted, and this is a costly operation, so
+ * it's done once per event.
+ */
+void
+update_dirty_panels (void)
+{
+    if (cpanel->dirty)
+	panel_update_contents (cpanel);
+
+    if ((get_other_type () == view_listing) && opanel->dirty)
+	panel_update_contents (opanel);
 }
 
 static void
@@ -2364,7 +2385,7 @@ panel_re_sort (WPanel *panel)
     if (panel->top_file < 0)
 	panel->top_file = 0;
     select_item (panel);
-    panel_update_contents (panel);
+    panel->dirty = 1;
 }
 
 void
