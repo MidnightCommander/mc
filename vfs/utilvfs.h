@@ -11,8 +11,8 @@
 #define URL_ALLOW_ANON 1
 #define URL_NOSLASH 2
 
-int vfs_finduid (char *name);
-int vfs_findgid (char *name);
+int vfs_finduid (const char *name);
+int vfs_findgid (const char *name);
 
 char *vfs_split_url (const char *path, char **host, char **user, int *port,
 		     char **pass, int default_port, int flags);
