@@ -1,5 +1,13 @@
 1999-03-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gdesktop.c (update_url): Made static.
+	(desktop_reload_icons): Call update_url() when updating an
+	existing icon.
+
+	* gpopup2.c (handle_properties): Do not update the icon url here.
+
+1999-03-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
 	This is a semi-big slew of changes to integrate the DESKTOP_BRANCH
 	into the main trunk.  Now the gdesktop code creates a temprary
 	WPanel structure and passes it on to the core file management

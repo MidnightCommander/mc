@@ -687,12 +687,6 @@ handle_properties (GtkWidget *widget, WPanel *panel)
 		retval = gnome_file_property_dialog_make_changes (
 			GNOME_FILE_PROPERTY_DIALOG (dialog));
 
-	if (is_a_desktop_panel (panel)) {
-		dii = desktop_icon_info_get_by_filename (selection (panel)->fname);
-		g_assert (dii != NULL);
-		desktop_icon_update_url (dii);
-	}
-
 	gtk_widget_destroy (dialog);
 	g_free (full_name);
 	if (retval && !is_a_desktop_panel (panel))

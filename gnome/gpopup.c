@@ -102,12 +102,6 @@ dicon_properties (GtkWidget *widget, DesktopIconInfo *dii)
 	if (gnome_dialog_run (GNOME_DIALOG (dlg)) == 0)
 		retval = gnome_file_property_dialog_make_changes (GNOME_FILE_PROPERTY_DIALOG (dlg));
 
-	/*
-	 * Apply: desktop icon name change and url change
-	 */
-	if (dii->url)
-		desktop_icon_update_url (dii);
-	
 	gtk_widget_destroy (dlg);
 	g_free(path);
 

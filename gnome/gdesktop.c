@@ -364,6 +364,31 @@ icon_exists_in_list (GList *list, char *filename)
 	return NULL;
 }
 
+/* Loads from the metadata updated versions of the caption and the url */
+static void
+update_url (DesktopIconInfo *dii)
+{
+	char *fullname = g_concat_dir_and_file (desktop_directory, dii->filename);
+	char *caption = NULL;
+	char *url = NULL;
+	int size;
+	
+	gnome_metadata_get (fullname, "icon-caption", &size, &caption);
+	if (caption){
+		desktop_icon_set_text (DESKTOP_ICON (dii->dicon), caption);
+		g_free (caption);
+	}
+
+	gnome_metadata_get (fullname, "desktop-url", &size, &url);
+	if (url){
+		if (dii->url)
+			g_free (dii->url);
+		dii->url = url;
+	}
+	
+	g_free (fullname);
+}
+
 typedef struct {
 	char *filename;
 	char *url;
@@ -436,6 +461,8 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 
 			dii = l->data;
 			desktop_icon_set_icon (DESKTOP_ICON (dii->dicon), im);
+
+			update_url (dii);
 
 			/* Leave the icon in the desktop by removing it from the list */
 
@@ -1956,37 +1983,6 @@ desktop_icon_info_new (char *filename, char *url, char *caption, int xpos, int y
 
 	desktop_icon_info_place (dii, xpos, ypos);
 	return dii;
-}
-
-/**
- * desktop_icon_update_url:
- * @dii: the desktop icon
- *
- * Loads from the metadata updated versions of the caption
- * and the url
- */
-void
-desktop_icon_update_url (DesktopIconInfo *dii)
-{
-	char *fullname = g_concat_dir_and_file (desktop_directory, dii->filename);
-	char *caption = NULL;
-	char *url = NULL;
-	int size;
-	
-	gnome_metadata_get (fullname, "icon-caption", &size, &caption);
-	if (caption){
-		desktop_icon_set_text (DESKTOP_ICON (dii->dicon), caption);
-		g_free (caption);
-	}
-
-	gnome_metadata_get (fullname, "desktop-url", &size, &url);
-	if (url){
-		if (dii->url)
-			g_free (dii->url);
-		dii->url = url;
-	}
-	
-	g_free (fullname);
 }
 
 /* Creates the layout information array */
