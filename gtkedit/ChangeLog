@@ -1,3 +1,7 @@
+2001-08-17  Pavel Roskin  <proski@gnu.org>
+
+	* syntax.c (syntax_text): Add support for PO files.
+
 2001-08-12  Pavel Roskin  <proski@gnu.org>
 
 	* edit.c: Handle CK_Shell.
