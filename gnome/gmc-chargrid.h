@@ -34,7 +34,7 @@ struct _GmcCharGrid {
 	void *chars;
 	void *attrs;
 
-	int frozen;
+	int frozen : 1;
 
 	GdkFont *font;
 	GdkGC   *gc;

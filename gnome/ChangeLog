@@ -1,3 +1,15 @@
+1998-03-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gmc-chargrid.c: Changed the struct attr with pointers mess with
+	something saner.
+	Added an in_resize flag to avoid calling our internal signal
+	handlers recursively.
+	(gmc_char_grid_draw): Added proper draw handler for our case; the
+	widget's window does not fill its allocation.
+	(paint): New wrapper for update_region(); it converts window
+	coordinates to row/column character coordinates.
+	(gmc_char_grid_expose): Use paint().
+
 1998-03-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gmc-chargrid.c (update_strip): Doh.  Fixed painting of

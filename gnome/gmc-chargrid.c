@@ -19,8 +19,10 @@
 #define ATTRS(cgrid) ((struct attr *) cgrid->attrs)
 
 struct attr {
-	GdkColor *fg;
-	GdkColor *bg;
+	gulong fg;
+	gulong bg;
+	int fg_set : 1;
+	int bg_set : 1;
 };
 
 
@@ -48,6 +50,8 @@ static void gmc_char_grid_size_request      (GtkWidget        *widget,
 					     GtkRequisition   *requisition);
 static void gmc_char_grid_size_allocate     (GtkWidget        *widget,
 					     GtkAllocation    *allocation);
+static void gmc_char_grid_draw              (GtkWidget        *widget,
+					     GdkRectangle     *area);
 static gint gmc_char_grid_expose            (GtkWidget        *widget,
 					     GdkEventExpose   *event);
 static void gmc_char_grid_real_size_changed (GmcCharGrid      *cgrid,
@@ -110,6 +114,7 @@ gmc_char_grid_class_init (GmcCharGridClass *class)
 	widget_class->realize = gmc_char_grid_realize;
 	widget_class->size_request = gmc_char_grid_size_request;
 	widget_class->size_allocate = gmc_char_grid_size_allocate;
+	widget_class->draw = gmc_char_grid_draw;
 	widget_class->expose_event = gmc_char_grid_expose;
 
 	class->size_changed = gmc_char_grid_real_size_changed;
@@ -122,7 +127,7 @@ gmc_char_grid_init (GmcCharGrid *cgrid)
 	cgrid->height        = 0;
 	cgrid->chars         = NULL;
 	cgrid->attrs         = NULL;
-	cgrid->frozen        = 0;
+	cgrid->frozen        = FALSE;
 	cgrid->font          = NULL;
 	cgrid->gc            = NULL;
 	cgrid->char_width    = 0;
@@ -144,28 +149,6 @@ gmc_char_grid_new (void)
 }
 
 static void
-free_attrs (GmcCharGrid *cgrid)
-{
-	int i;
-	struct attr *attrs;
-
-	attrs = ATTRS (cgrid);
-
-	if (!cgrid->attrs)
-		return;
-
-	for (i = 0; i < (cgrid->width * cgrid->height); i++) {
-		if (attrs[i].fg)
-			g_free (attrs[i].fg);
-
-		if (attrs[i].bg)
-			g_free (attrs[i].bg);
-	}
-
-	g_free (attrs);
-}
-
-static void
 gmc_char_grid_destroy (GtkObject *object)
 {
 	GmcCharGrid *cgrid;
@@ -178,7 +161,8 @@ gmc_char_grid_destroy (GtkObject *object)
 	if (cgrid->chars)
 		g_free (cgrid->chars);
 
-	free_attrs (cgrid);
+	if (cgrid->attrs)
+		g_free (cgrid->attrs);
 
 	if (cgrid->font)
 		gdk_font_unref (cgrid->font);
@@ -265,8 +249,7 @@ gmc_char_grid_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 					cgrid->width * cgrid->char_width,
 					cgrid->height * cgrid->char_height);
 
-	if ((w != cgrid->width) || (h != cgrid->height))
-		gmc_char_grid_set_size (cgrid, MAX (w, 1), MAX (h, 1));
+	gmc_char_grid_set_size (cgrid, MAX (w, 1), MAX (h, 1));
 }
 
 static void
@@ -291,7 +274,7 @@ update_strip (GmcCharGrid *cgrid, int x, int y, int width)
 
 	while (i < width) {
 		first = i;
-		ocolor = attrs[i].bg ? attrs[i].bg->pixel : GTK_WIDGET (cgrid)->style->bg[GTK_STATE_NORMAL].pixel;
+		ocolor = attrs[i].bg_set ? attrs[i].bg : GTK_WIDGET (cgrid)->style->bg[GTK_STATE_NORMAL].pixel;
 		color = ocolor;
 
 		do {
@@ -316,7 +299,7 @@ update_strip (GmcCharGrid *cgrid, int x, int y, int width)
 
 	while (i < width) {
 		first = i;
-		ocolor = attrs[i].fg ? attrs[i].fg->pixel : GTK_WIDGET (cgrid)->style->fg[GTK_STATE_NORMAL].pixel;
+		ocolor = attrs[i].fg_set ? attrs[i].fg : GTK_WIDGET (cgrid)->style->fg[GTK_STATE_NORMAL].pixel;
 		color = ocolor;
 
 		do {
@@ -344,47 +327,79 @@ update_region (GmcCharGrid *cgrid, int x, int y, int width, int height)
 	if ((width == 0) || (height == 0))
 		return;
 
+	/* sanity checks */
+
+	g_assert ((x + width) <= cgrid->width);
+	g_assert ((y + height) <= cgrid->height);
+
 	for (i = 0; i < height; i++)
 		update_strip (cgrid, x, y + i, width);
+}
+
+static void
+paint (GmcCharGrid *cgrid, GdkRectangle *area)
+{
+	int x1, y1, x2, y2;
+
+	/* This logic is shamelessly ripped from gtkterm :-)  - Federico */
+
+	if (area->width > 1)
+		area->width--;
+	else if (area->x > 0)
+		area->x--;
+
+	if (area->height > 1)
+		area->height--;
+	else if (area->y > 0)
+		area->y--;
+
+	x1 = area->x / cgrid->char_width;
+	y1 = area->y / cgrid->char_height;
+
+	x2 = (area->x + area->width) / cgrid->char_width;
+	y2 = (area->y + area->height) / cgrid->char_height;
+
+	update_region (cgrid, x1, y1, (x2 - x1) + 1, (y2 - y1) + 1);
+}
+
+static void
+gmc_char_grid_draw (GtkWidget *widget, GdkRectangle *area)
+{
+	GmcCharGrid *cgrid;
+	GdkRectangle w_area;
+	GdkRectangle p_area;
+
+	g_return_if_fail (widget != NULL);
+	g_return_if_fail (GMC_IS_CHAR_GRID (widget));
+	g_return_if_fail (area != NULL);
+
+	if (GTK_WIDGET_DRAWABLE (widget)) {
+		cgrid = GMC_CHAR_GRID (widget);
+
+		/* Offset the area because the window does not fill thea allocation */
+
+		area->x -= widget->allocation.x + (widget->allocation.width - cgrid->char_width * cgrid->width) / 2;
+		area->y -= widget->allocation.y + (widget->allocation.height - cgrid->char_height * cgrid->height) / 2;
+
+		w_area.x = 0;
+		w_area.y = 0;
+		w_area.width = cgrid->char_width * cgrid->width;
+		w_area.height = cgrid->char_height * cgrid->height;
+
+		if (gdk_rectangle_intersect (area, &w_area, &p_area))
+			paint (cgrid, &p_area);
+	}
 }
 
 static gint
 gmc_char_grid_expose (GtkWidget *widget, GdkEventExpose *event)
 {
-	GmcCharGrid *cgrid;
-	GdkRectangle *area;
-	int x1, y1, x2, y2;
-	gint w, h;
-
 	g_return_val_if_fail (widget != NULL, FALSE);
 	g_return_val_if_fail (GMC_IS_CHAR_GRID (widget), FALSE);
 	g_return_val_if_fail (event != NULL, FALSE);
 
-	if (GTK_WIDGET_DRAWABLE (widget)) {
-		cgrid = GMC_CHAR_GRID (widget);
-
-		area = &event->area;
-
-		/* This logic is shamelessly ripped from gtkterm :-)  - Federico */
-
-		if (area->width > 1)
-			area->width--;
-		else if (area->x > 0)
-			area->x--;
-
-		if (area->height > 1)
-			area->height--;
-		else if (area->y > 0)
-			area->y--;
-
-		x1 = area->x / cgrid->char_width;
-		y1 = area->y / cgrid->char_height;
-
-		x2 = (area->x + area->width) / cgrid->char_width;
-		y2 = (area->y + area->height) / cgrid->char_height;
-
-		update_region (cgrid, x1, y1, (x2 - x1) + 1, (y2 - y1) + 1);
-	}
+	if (GTK_WIDGET_DRAWABLE (widget))
+		paint (GMC_CHAR_GRID (widget), &event->area);
 
 	return FALSE;
 }
@@ -412,17 +427,8 @@ gmc_char_grid_clear (GmcCharGrid *cgrid, int x, int y, int width, int height, Gd
 		for (xx = x1; xx < x2; xx++) {
 			ch[xx] = ' ';
 
-			if (bg) {
-				if (!attrs[xx].bg)
-					attrs[xx].bg = g_new (GdkColor, 1);
-
-				*attrs[xx].bg = *bg;
-			} else {
-				if (attrs[xx].bg)
-					g_free (attrs[xx].bg);
-
-				attrs[xx].bg = NULL;
-			}
+			attrs[xx].bg = bg ? bg->pixel : 0;
+			attrs[xx].bg_set = bg ? TRUE : FALSE;
 		}
 
 		ch += cgrid->width;
@@ -451,29 +457,11 @@ gmc_char_grid_put_char (GmcCharGrid *cgrid, int x, int y, GdkColor *fg, GdkColor
 
 	*chars = ch;
 
-	if (fg) {
-		if (!attrs->fg)
-			attrs->fg = g_new (GdkColor, 1);
+	attrs->fg = fg ? fg->pixel : 0;
+	attrs->fg_set = fg ? TRUE : FALSE;
 
-		*attrs->fg = *fg;
-	} else {
-		if (attrs->fg)
-			g_free (attrs->fg);
-
-		attrs->fg = NULL;
-	}
-
-	if (bg) {
-		if (!attrs->bg)
-			attrs->bg = g_new (GdkColor, 1);
-
-		*attrs->bg = *bg;
-	} else {
-		if (attrs->bg)
-			g_free (attrs->bg);
-
-		attrs->bg = NULL;
-	}
+	attrs->bg = bg ? bg->pixel : 0;
+	attrs->bg_set = bg ? TRUE : FALSE;
 
 	if (GTK_WIDGET_DRAWABLE (cgrid) && !cgrid->frozen)
 		update_region (cgrid, x, y, 1, 1);
@@ -508,29 +496,11 @@ gmc_char_grid_put_text (GmcCharGrid *cgrid, int x, int y, GdkColor *fg, GdkColor
 	for (i = 0, pos = x; (i < length) && (pos < cgrid->width); i++, pos++) {
 		*chars++ = *text++;
 
-		if (fg) {
-			if (!attrs->fg)
-				attrs->fg = g_new (GdkColor, 1);
+		attrs->fg = fg ? fg->pixel : 0;
+		attrs->fg_set = fg ? TRUE : FALSE;
 
-			*attrs->fg = *fg;
-		} else {
-			if (attrs->fg)
-				g_free (attrs->fg);
-
-			attrs->fg = NULL;
-		}
-
-		if (bg) {
-			if (!attrs->bg)
-				attrs->bg = g_new (GdkColor, 1);
-
-			*attrs->bg = *bg;
-		} else {
-			if (attrs->bg)
-				g_free (attrs->bg);
-
-			attrs->bg = NULL;
-		}
+		attrs->bg = bg ? bg->pixel : 0;
+		attrs->bg_set = bg ? TRUE : FALSE;
 
 		attrs++;
 	}
@@ -627,7 +597,8 @@ gmc_char_grid_real_size_changed (GmcCharGrid *cgrid, guint width, guint height)
 	if (cgrid->chars)
 		g_free (cgrid->chars);
 
-	free_attrs (cgrid);
+	if (cgrid->attrs)
+		g_free (cgrid->attrs);
 
 	cgrid->width = width;
 	cgrid->height = height;
@@ -640,8 +611,10 @@ gmc_char_grid_real_size_changed (GmcCharGrid *cgrid, guint width, guint height)
 
 	for (i = 0; i < (width * height); i++) {
 		chars[i] = ' ';
-		attrs[i].fg = NULL;
-		attrs[i].bg = NULL;
+		attrs[i].fg = 0;
+		attrs[i].bg = 0;
+		attrs[i].fg_set = FALSE;
+		attrs[i].bg_set = FALSE;
 	}
 
 	gtk_widget_queue_resize (GTK_WIDGET (cgrid));
