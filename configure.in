@@ -281,15 +281,19 @@ linux*)
 esac
 
 dnl
-dnl Check for the -mandoc package
+dnl Check nroff and the options it supports
 dnl
 AC_CHECK_PROG(HAVE_nroff, nroff, true, false)
+
+dnl Default values
+MANDOC=-man
+MAN_FLAGS=
+
 if $HAVE_nroff; then
     AC_MSG_CHECKING([for manual formatting macros])
     AC_CACHE_VAL(ac_cv_mandoc, [
     nroff -mandoc < /dev/null > /dev/null 2>&1
-    if test $? = 0
-    then
+    if test $? = 0; then
 	ac_cv_mandoc=-mandoc
     else
 	ac_cv_mandoc=-man
@@ -297,39 +301,39 @@ if $HAVE_nroff; then
     ])
     MANDOC=$ac_cv_mandoc
     AC_MSG_RESULT([$MANDOC])
-else
-    MANDOC=-man
-fi
-AC_SUBST(MANDOC)
 
-dnl
-dnl Check if nroff accepts -Tlatin1 or -Tascii
-dnl
-if $HAVE_nroff; then
+    AC_MSG_CHECKING([for option to disable ANSI color in manuals])
+    AC_CACHE_VAL(ac_cv_man_nocolor, [
+    nroff -c < /dev/null > /dev/null 2>&1
+    if test $? = 0; then
+	ac_cv_man_nocolor=-c
+    else
+	ac_cv_man_nocolor=
+    fi
+    ])
+    MAN_FLAGS=$ac_cv_man_nocolor
+    AC_MSG_RESULT([${MAN_NOCOLOR-none}])
+
     AC_MSG_CHECKING([if nroff accepts -Tlatin1 or -Tascii])
     AC_CACHE_VAL(ac_cv_nroff_tascii, [
+    ac_cv_nroff_tascii=
     nroff -Tlatin1 < /dev/null > /dev/null 2>&1 /dev/null
-    if test $? = 0
-    then
-	ac_cv_nroff_tascii=" -Tlatin1"
+    if test $? = 0; then
+	ac_cv_nroff_tascii=-Tlatin1
     else
         nroff -Tascii < /dev/null > /dev/null 2>&1 /dev/null
-        if test $? = 0
-        then
-	    ac_cv_nroff_tascii=" -Tascii"
-        else
-    	    ac_cv_nroff_tascii=""
+        if test $? = 0; then
+	    ac_cv_nroff_tascii=-Tascii
 	fi
     fi
     ])
-    if test "x$ac_cv_nroff_tascii" = x; then
-	AC_MSG_RESULT([no])
-    else
-	AC_MSG_RESULT([yes,$ac_cv_nroff_tascii])
-    fi
+    AC_MSG_RESULT([${ac_cv_nroff_tascii-no}])
+    MAN_FLAGS="$MAN_FLAGS $ac_cv_nroff_tascii"
 fi
-TROFFASCII="$ac_cv_nroff_tascii"
-AC_SUBST(TROFFASCII)
+
+AC_SUBST(MANDOC)
+AC_SUBST(MAN_FLAGS)
+
 
 dnl
 dnl Check for - option to file

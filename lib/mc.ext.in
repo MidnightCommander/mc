@@ -149,8 +149,8 @@ regex/\.(so|so\.[0-9\.]*)$
 	View=%view{ascii} file %f && nm %f
 
 regex/(([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|n)|\.man)$
-	Open=nroff @TROFFASCII@ @MANDOC@ %f | %var{PAGER:more}
-	View=%view{ascii,nroff} nroff @TROFFASCII@ @MANDOC@ %f
+	Open=nroff @MAN_FLAGS@ @MANDOC@ %f | %var{PAGER:more}
+	View=%view{ascii,nroff} nroff @MAN_FLAGS@ @MANDOC@ %f
 
 # Troff with me macros.
 # Exception - "read.me" is not a nroff file.
@@ -159,26 +159,26 @@ shell/read.me
 	View=
 
 shell/.me
-	Open=nroff @TROFFASCII@ -me %f | %var{PAGER:more}
-	View=%view{ascii,nroff} nroff @TROFFASCII@ -me %f
+	Open=nroff @MAN_FLAGS@ -me %f | %var{PAGER:more}
+	View=%view{ascii,nroff} nroff @MAN_FLAGS@ -me %f
 
 # Troff with ms macros.
 shell/.ms
-	Open=nroff @TROFFASCII@ -ms %f | %var{PAGER:more}
-	View=%view{ascii,nroff} nroff @TROFFASCII@ -ms %f
+	Open=nroff @MAN_FLAGS@ -ms %f | %var{PAGER:more}
+	View=%view{ascii,nroff} nroff @MAN_FLAGS@ -ms %f
 
 # Manual page - compressed
 regex/([^0-9]|^[^\.]*)\.([1-9][a-z]?|n)\.g?[Zz]$
-	Open=gzip -dc %f | nroff @TROFFASCII@ @MANDOC@ | %var{PAGER:more}
-	View=%view{ascii,nroff} gzip -dc %f | nroff @TROFFASCII@ @MANDOC@
+	Open=gzip -dc %f | nroff @MAN_FLAGS@ @MANDOC@ | %var{PAGER:more}
+	View=%view{ascii,nroff} gzip -dc %f | nroff @MAN_FLAGS@ @MANDOC@
 
 regex/([^0-9]|^[^\.]*)\.([1-9][a-z]?|n)\.bz$
-	Open=bzip -dc %f | nroff @TROFFASCII@ @MANDOC@ | %var{PAGER:more}
-	View=%view{ascii,nroff} bzip -dc %f | nroff @TROFFASCII@ @MANDOC@
+	Open=bzip -dc %f | nroff @MAN_FLAGS@ @MANDOC@ | %var{PAGER:more}
+	View=%view{ascii,nroff} bzip -dc %f | nroff @MAN_FLAGS@ @MANDOC@
 
 regex/([^0-9]|^[^\.]*)\.([1-9][a-z]?|n)\.bz2$
-	Open=bzip2 -dc %f | nroff @TROFFASCII@ @MANDOC@ | %var{PAGER:more}
-	View=%view{ascii,nroff} bzip2 -dc %f | nroff @TROFFASCII@ @MANDOC@
+	Open=bzip2 -dc %f | nroff @MAN_FLAGS@ @MANDOC@ | %var{PAGER:more}
+	View=%view{ascii,nroff} bzip2 -dc %f | nroff @MAN_FLAGS@ @MANDOC@
 
 
 ### Images ###

@@ -1,5 +1,9 @@
 2002-10-29  Pavel Roskin  <proski@gnu.org>
 
+	* lib/mc.ext.in: Rename TROFFASCII to MAN_FLAGS.
+	* configure.in: Likewise.  Add "-c" (disable ANSI color) to
+	MAN_FLAGS if supported.
+
 	* acinclude.m4 (MC_WITH_SLANG): Reject S-Lang with UTF-8
 	support, unless external S-Lang was explicitly requested.
 

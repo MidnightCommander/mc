@@ -1,8 +1,6 @@
 Before 4.6.0-pre2
 =================
 
-Test for groff and for -P-c option to groff to disable ANSI colors.
-
 Use paranoid quoting in subshell_name_quote() only when absolutely
 necessary - it's slow, especially in UTF-8 locales.
 
