@@ -239,8 +239,7 @@ Az egérgomb automatikus ismétlésének határértéke alapesetben
 
 Ha a Commander-t egér támogatás után indítottad - kikerülve a
 Commander-t - visszakaphatod az eredeti egér tulajdonságokat
-(szöveg kivágás és beillesztés) a Shift gomb lenyomásával.[]
-
+(szöveg kivágás és beillesztés) a Shift gomb lenyomásával.
 
 [Keys]
 Billentyûzet
@@ -1741,9 +1740,6 @@ Ezek beállításához használd a kedvenc fájlszerkesztõdet.
 Lásd a Speciális BeállításokSpecial Settings részt a
 további információkért.
 
-[]
-
-
 [Executing operating system commands]
 Az operációs rendszer parancsainak futtatása
 
@@ -2771,9 +2767,6 @@ szekvenciát, amely a leállító folyamatot indítja el, az
 M-tab-bal indítható el, de definiálhatsz más gombokat is
 ugyanerre a folyamatra (azokon a billentyûzeteken, ahol
 valamelyik gomb nem használható).
-
-[]
-
 
 [FILES]
 Fájlok
