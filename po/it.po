@@ -3393,9 +3393,9 @@ msgid ""
 "running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"GNU Midnight Commander è già\n"
-"in funzione su questo terminale.\n"
-"Il support alla subshell verrà disabilitato."
+"GNU Midnight Commander è già in funzione su\n"
+"questo terminale.\n"
+"Il supporto alla subshell verrà disabilitato."
 
 #: src/subshell.c:425
 #, c-format
