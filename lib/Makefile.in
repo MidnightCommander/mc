@@ -20,7 +20,10 @@ DISTLIB = $(LIBFILES_IN) $(LIBFILES_CONST) $(TIFILES) \
 	Makefile.in tdiff xnc.hlp ncurses.h mc.sh mc.csh mcserv.init \
 	mcserv.pamd tkmc.wmconfig mc.ext.in.qnx.diff mc.global
 
-all:
+all: Makefile
+
+Makefile.in: ../config.status
+	(cd ..; CONFIG_FILES=lib/Makefile CONFIG_HEADERS= ./config.status)
 
 check:
 	@echo no tests are supplied.
@@ -44,7 +47,7 @@ install:
 	do $(INSTALL_DATA) $(builddir)/lib/$$I $(DESTDIR)$(libdir)/$$I; done
 	for I in $(TIFILES); \
 	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(tidir)/$$I; done
-	$(INSTALL_DATA) $(srcdir)/special.dirs $(DESTDIR)$(confdir)
+	$(INSTALL_DATA) $(srcdir)/mc.global $(DESTDIR)$(confdir)
 
 uninstall:
 	for I in $(LIBFILES_OUT) $(LIBFILES_CONST); \
