@@ -234,8 +234,8 @@ static int cpio_find_head(struct vfs_class *me, struct vfs_s_super *super)
 	if(ptr + MAGIC_LENGTH >= top) {
 	    if(top > 128) {
 		memmove(buf, buf + top - 128, 128);
-		top = 128;
 		ptr -= top - 128;
+		top = 128;
 	    }
 	    if((tmp = mc_read(super->u.arch.fd, buf, top)) == 0 || tmp == -1) {
 		message (1, MSG_ERROR, _("Premature end of cpio archive\n%s"), super->name);

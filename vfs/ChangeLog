@@ -1,3 +1,8 @@
+2005-03-29  Pavel Roskin  <proski@gnu.org>
+
+	* cpio.c (cpio_find_head): Fix for logical error that can cause
+	crash on broken cpio archives.
+
 2005-02-22  Roland Illig  <roland.illig@gmx.de>
 
 	* *.c: Declared unused variables with (void) to avoid the gcc
@@ -37,7 +42,7 @@
 	* samba/libsmb/nmblib.c: Comment out matching_bits(), sort_ip,
 	name_query_comp() and sort_query_replies().
 
-2005-02-12  Jindrich Novy <jnovy@redhat.com>
+2005-02-12  Jindrich Novy  <jnovy@redhat.com>
 
 	* vfs.c (vfs_translate_url): Add support for smb://, sh://,
 	ssh:// and mc:// filesystem requests. Introduced separate table
@@ -49,8 +54,8 @@
 
 2005-02-12  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-       * samba/lib/netmask.c [HAVE_NETMASK_AIX && HAVE_UNISTD_H]: Include
-       <unistd.h> to fix gcc 3.3 warnings about undeclared close().
+	* samba/lib/netmask.c [HAVE_NETMASK_AIX && HAVE_UNISTD_H]: Include
+	<unistd.h> to fix gcc 3.3 warnings about undeclared close().
 
 2005-02-09  Roland Illig  <roland.illig@gmx.de>
 
