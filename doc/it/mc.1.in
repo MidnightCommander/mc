@@ -398,13 +398,13 @@ e va alla directory selezionata.
 .B + \ (più).
 Viene utilizzato per selezionare (marcare) un gruppo di file. Il Midnight 
 Commander richiederà un'espressione regolare per descrivere il gruppo.
-Quando le 
-.I pattern della shell
-sono abilitate, le espressioni regolari sono molto simili alle espressioni
+Quando i 
+.I modelli della shell
+sono abilitati, le espressioni regolari sono molto simili alle espressioni
 regolari in una shell (* significa zero o più caratteri e ? un carattere). Se
-le 
-.I pattern della shell 
-sono disabilitate, la marcatura dei file viene fatta con le normali espressioni
+i 
+.I modelli della shell 
+sono disabilitati, la marcatura dei file viene fatta con le normali espressioni
 regolari (vedere (1)).
 .PP
 Se l'espressione comincia o finisce con una barra (/), allora selezionerà
@@ -910,7 +910,7 @@ i file marcati, se c'e n'è almeno uno) sulla directory specificata dall'utente
 nella finestra di dialogo. Durante il processo è possibile
 premere C-c o ESC per abortire l'operazione. Per maggiori dettagli
 sulla maschera sorgente (che sarà normalmente * o ^\\(.*\\)$ a seconda
-dell'impostazione di 'pattern della shell') o sui caratteri jolly sulla destinazione
+dell'impostazione di 'modelli della shell') o sui caratteri jolly sulla destinazione
 vedere
 .\"LINK2"
 Maschera copia/rinomina.
@@ -994,10 +994,10 @@ se si vuole cambiare directory corrente e si ha la riga di comando occupata.
 Viene utilizzato per selezionare (marcare) un gruppo di file. Il
 Midnight Commander richiedera un'espressione regolare per descrivere il
 gruppo; se l'opzione
-.I pattern della shell
+.I modelli della shell
 è abilitata, l'espressione regolare è simile al file globbing nella shell
 (* significa zero o più caratteri e ? significa un carattere). Se l'opzione
-.I pattern della shell
+.I modelli della shell
 è disabilitata, allora la selezione dei file viene eseguita con le normali
 espressioni regolari (vedere ed (1)).
 .PP
@@ -1357,145 +1357,148 @@ corrispondere tutte le azioni.
 .PP
 .\"NODE "    Background jobs"
 .SH "    Processi in Background"
-This lets you control the state of any background Midnight Commander
-process (only copy and move files operations can be done in the
-background).  You can stop, restart and kill a background job from
-here. 
+Questo comando permette di controllare lo stato di ogni processo
+in background del Midnight Commander (in background possono essere
+eseguite solo operazioni di copia e rinomina). Da qui si può bloccare, 
+far ripartire e uccidere un lavoro in background.
 .PP
-.SH "    Menu File Edit"
-The user menu is a menu of useful actions that can be customized by
-the user. When you access the user menu, the
-file .mc.menu from the current directory is used if it exists,
-but only if it is owned by user or root and is not world-writable.
-If no such file found, ~/.mc/menu is tried in the same way, 
-and otherwise mc uses the default system-wide menu
+.\"NODE "    Menu File Edit"
+.SH "    Modifica file Menu"
+Il menu utente è un menu di comandi utili che possono essere 
+personalizzati dall'utente. Quando si accede al menu utente, viene 
+utilizzato, se esiste, il file .mc.menu dalla directory corrente,
+ma solo se è di proprietà dell'utente o di root e se non è scrivibile
+a tutti. Se tale file non viene trovato, mc alla stessa maniera 
+prova con ~/.mc/menu altrimenti usa il menu di sistema
 @prefix@/lib/mc/mc.menu.
 .PP
-The format of the menu file is very simple. Lines that start with
-anything but space or tab are considered entries for the menu (in
-order to be able to use it like a hot key, the first character should
-be a letter). All the lines that start with a space or a tab are the
-commands that will be executed when the entry is selected.
+Il formato del file menu è molto semplice. Le righe che cominciano
+con qualsiasi cosa che non sia uno spazio o una tabulazione sono
+considerate voci per il menu (per fare in modo di usarle anche come
+scelta rapida, il primo carattere deve essere una lettera). Tutte le
+righe che cominciano con uno spazio o un tab sono i comandi che verranno
+eseguiti quando la voce viene selezionata.
 .PP
-When an option is selected all the command lines of the option are
-copied to a temporary file in the temporary directory (usually
-/usr/tmp) and then that file is executed. This allows the user to put
-normal shell constructs in the menus. Also simple macro substitution
-takes place before executing the menu code. For more information, see
+Quando un'opzione viene selezionata tutte le linee di comando dell'opzione
+vengono copiate in un file temporaneo nella directory temporanea (normalmente
+/usr/tmp) e poi il file viene eseguito. Ciò permette all'utente di mettere
+normali costrutti shell nei menu. Prima dell'esecuzione del codice del menu
+ha luogo una semplice sostituzione di macro. Per ulteriori informazioni vedere
 .\"LINK2"
-macro substitution.
+sostituzioni macro.
 .\"Macro Substitution"
 .PP
-Here is a sample mc.menu file:
+Ecco un esempio di un file mc.menu:
 .PP
 .nf
-A	Dump the currently selected file
+A	Mostra un dump del file correntemente selezionato
 	od -c %f
 
-B	Edit a bug report and send it to root
+B	Modifica un rapporto bachi e lo spedisce a root
 	vi /tmp/mail.$$
 	mail -s "Midnight Commander bug" root < /tmp/mail.$$
 
-M	Read mail
+M	Legge la posta
 	emacs -f rmail
 
-N	Read Usenet news
+N	Legge le news 
 	emacs -f gnus
 
-H	Call the info hypertext browser
+H	Chiama il visualizzatore ipertestuale info
 	info
 
-J	Copy current directory to other panel recursively
+J	Copia la directory corrente nell'altro pannello ricorsivamente
 	tar cf - . | (cd %D && tar xvpf -)
 
-K	Make a release of the current subdirectory
-	echo -n "Name of distribution file: "
+K	Crea un rilascio della directory corrente
+	echo -n "Nome del file di distribuzione: "
 	read tar
 	ln -s %d `dirname %d`/$tar 
 	cd ..
 	tar cvhf ${tar}.tar $tar
 
 = f *.tar.gz | f *.tgz & t n
-X       Extract the contents of a compressed tar file
+X       Estrae il contenuto di un file tar compresso
 	tar xzvf %f
 .fi
 .PP
-.B Default Conditions
+.B Condizioni predefinite
 .PP
-Each menu entry may be preceded by a condition. The condition must
-start from the first column with a '=' character. If the condition is
-true, the menu entry will be the default entry.
+Ogni voce di menu può essere preceduta da una condizione. La condizione
+deve cominciare nella prima colonna con un carattere '='. Se la condizione
+è vera, la voce di menu sarà la voce predefinita.
 .PP
 .nf
-Condition syntax: 	= <sub-cond>
-  or:			= <sub-cond> | <sub-cond> ...
-  or:			= <sub-cond> & <sub-cond> ... 
+Sintassi condizione: 	= <sotto-cond>
+  oppure:		= <sotto-cond> | <sotto-cond> ...
+  oppure:		= <sotto-cond> & <sotto-cond> ... 
 
-Sub-condition is one of following:
+Sotto-condizione è una delle seguenti:
 
-  y <pattern>		syntax of current file matching pattern?
-                        for edit menu only.
-  f <pattern>		current file matching pattern?
-  F <pattern>		other file matching pattern?
-  d <pattern>		current directory matching pattern?
-  D <pattern>		other directory matching pattern?
-  t <type>		current file of type?
-  T <type>		other file of type?
-  x <filename>		is it executable filename?
-  ! <sub-cond>		negate the result of sub-condition
+  y <modello>	        sintassi della corrispondenza modello file corrente?
+                        solo per modifica menu.
+  f <modello>	        corrispondenza modello file corrente?
+  F <modello>	        corrispondenza modello altro file?
+  d <modello>	        corrispondenza modello directory corrente?
+  D <modello>	        corrispondenza modello altra directory?
+  t <tipo>		file corrente di tipo?
+  T <tipo>		altro file di tipo?
+  x <nomefile>		nomefile è eseguibile?
+  ! <sotto-cond>	nega il risultato di una sotto-condizione
 .fi
 .PP
-Pattern is a normal shell pattern or a regular expression, according
-to the shell patterns option. You can override the global value of
-the shell patterns option by writing "shell_patterns=x" on the first
-line of the menu file (where "x" is either 0 or 1).
+
+Modello è un normale modello della shell o un'espressione regolare,
+a seconda dell'opzione modelli della shell. E' possibile scavalcare
+il valore globale dell'opzione modelli della shell scrivendo 
+"shell_patterns=x" sulla prima riga del file menu (dove "x" è 0 o 1).
 .PP
 .nf
-Type is one or more of the following characters:
+Tipo è uno o più dei seguenti caratteri:
 
-  n	not directory
-  r	regular file
+  n	non directory
+  r	file regolare 
   d	directory
-  l	link
-  c	char special
-  b	block special
+  l	collegamento
+  c	carattere speciale
+  b	blocco speciale
   f	fifo (pipe)
   s	socket
-  x	executable
-  t	tagged
+  x	eseguibile
+  t	marcato
 .fi
 .PP
-For example 'rlf' means either regular file, link or fifo. The 't'
-type is a little special because it acts on the panel instead of the
-file. The condition '=t t' is true if there are tagged files in the
-current panel and false if not.
+Per esempio 'rlf' significa file regolare, collegamento o fifo. Il
+tipo 't' è particolare perché agisce sul pannello invece che sul file.
+La condizione '=t t' è vera se ci sono file marcati nel pannello corrente
+e falsa se non ce ne sono.
 .PP
-If the condition starts with '=?' instead of '=' a debug trace will be
-shown whenever the value of the condition is calculated.
+Se la condizione comincia con '=?' invece che '=' una traccia di debug
+sarà mostrata ogniqualvolta viene calcolato il valore della condizione.
 .PP
-The conditions are calculated from left to right. This means
+Le condizioni sono calcolate da sinistra a destra. Ciò significa che
 .nf
 	= f *.tar.gz | f *.tgz & t n
 .fi
-is calculated as
+viene calcolata come
 .nf
 	( (f *.tar.gz) | (f *.tgz) ) & (t n)
 .fi
 .PP
-Here is a sample of the use of conditions:
+Ecco un esempio dell'uso delle condizioni:
 .PP
 .nf
 = f *.tar.gz | f *.tgz & t n
-L	List the contents of a compressed tar-archive
+L	Elenca il contenuti di un archivio compresso tar
 	gzip -cd %f | tar xvf -
 .fi
 .PP
-.B Addition Conditions
+.B Condizioni Addizione
 .PP
-If the condition begins with '+' (or '+?') instead of '=' (or '=?') it
-is an addition condition. If the condition is true the menu entry will
-be included in the menu. If the condition is false the menu entry will
-not be included in the menu.
+Se la condizione comincia con '+' (o '+?') invece che '=' (o '=?') è
+una condizione addizione. Se la condizione è vera la voce di menu sarà
+inclusa nel menu. Se la condizione è falsa la voce di menu non sarà 
+inclusa nel menu.
 .PP
 You can combine default and addition conditions by starting condition
 with '+=' or '=+' (or '+=?' or '=+?' if you want debug trace). If you

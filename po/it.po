@@ -2245,7 +2245,7 @@ msgstr "a:"
 
 #: src/filegui.c:743
 msgid "&Using shell patterns"
-msgstr "&Usa shell patterns"
+msgstr "&Usa modelli shell"
 
 #: src/filegui.c:764
 msgid "&Background"
@@ -2266,7 +2266,7 @@ msgid ""
 "Invalid source pattern `%s' \n"
 " %s "
 msgstr ""
-"Formato sorgente non valido `%s' \n"
+"Modello sorgente non valido `%s' \n"
 " %s "
 
 #: src/find.c:101
@@ -3428,7 +3428,7 @@ msgstr "salva setu&P automaticamente"
 
 #: src/option.c:82
 msgid "shell &Patterns"
-msgstr "pattern della s&Hell"
+msgstr "modelli della s&Hell"
 
 #: src/option.c:83
 msgid "Compute &Totals"
@@ -3880,7 +3880,7 @@ msgstr " Le macro %%var non hanno una variabile "
 #: src/user.c:284
 #, c-format
 msgid " Invalid shell pattern definition \"%c\". "
-msgstr " Definizione inesatta dei pattern della shell \"%c\". "
+msgstr " Definizione inesatta dei modelli della shell \"%c\". "
 
 #: src/user.c:437
 msgid " Debug "
