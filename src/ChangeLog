@@ -1,3 +1,7 @@
+2003-10-25  Pavel Roskin  <proski@gnu.org>
+
+	* key.c (init_key_x11): Warning fix for gcc 3.3.2.
+
 2003-10-24  Pavel Roskin  <proski@gnu.org>
 
 	* fs.h (compute_namelen): Fix warning about unused argument.

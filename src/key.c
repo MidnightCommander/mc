@@ -360,11 +360,11 @@ init_key_x11 (void)
 	return;
 
     if (g_module_symbol
-	(x11_module, "XOpenDisplay", (gpointer *) & func_XOpenDisplay)
+	(x11_module, "XOpenDisplay", (void *) &func_XOpenDisplay)
 	&& g_module_symbol (x11_module, "XCloseDisplay",
-			    (gpointer *) & func_XCloseDisplay)
+			    (void *) &func_XCloseDisplay)
 	&& g_module_symbol (x11_module, "XQueryPointer",
-			    (gpointer *) & func_XQueryPointer)) {
+			    (void *) &func_XQueryPointer)) {
 	x11_display = (*func_XOpenDisplay) (0);
     }
 #else
