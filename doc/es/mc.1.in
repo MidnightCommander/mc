@@ -2494,11 +2494,11 @@ la entrada correcta. También podemos seguir escribiendo caracteres con lo
 que la línea se sigue completando tanto como sea posible y simultáneamente
 la primera entrada coincidente de la lista se va resaltando. Si volvemos
 a pulsar
-.B M-Tab,
+.BR M-Tab ,
 sólo las coincidencias permanecen en la lista. Tan pronto
 como no haya ambigüedad, la lista desaparece; también podemos quitarla
 con las teclas de cancelación
-.B Esc,
+.BR Esc ,
 .B F10
 y las teclas de movimiento a izquierda y derecha. Si
 .\"LINK2"
@@ -2509,25 +2509,41 @@ está desactivado, la lista aparece cuando pulsamos
 por segunda vez; con la primera MC sólo emite un pitido.
 .\"NODE "Virtual File System"
 .SH "Sistemas de Archivos Virtuales (VFS)"
-Midnight Commander dispone de una capa de código de acceso
-al sistema de archivos; esta capa se denomina Sistema de Archivos Virtual (VFS).
-El Sistema de Archivos Virtual permite a Midnight Commander
-manipular archivos no ubicados en el sistema de archivos Unix.
+Midnight Commander dispone de una capa de código de acceso al sistema
+de archivos; esta capa se denomina Sistema de Archivos Virtual (VFS).
+El Sistema de Archivos Virtual permite a Midnight Commander manipular
+archivos no ubicados en el sistema de archivos Unix.
 .PP
 Midnight Commander incluye actualmente varios Sistemas de Archivos
-Virtuales: el sistema de archivos local, utilizado para acceder al sistema
-de archivos Unix habitual; tarfs para manipular empaquetados con el comando
-tar y acaso comprimidos; undelfs para recuperar archivos borrados
-en sistemas de archivos de tipo ext2 (sistema de archivos habitual en
-Linux); ftpfs para manipular archivos en sistemas
-remotos a través de FTP; fish para manipular archivos a través de conexiones a shell como
-rsh o ssh y finalmente mcfs (Midnight Commander file system), un sistema
-de archivos para red. Si el programa se compiló incluyendo smbfs se pueden
-manipular archivos en sistemas remotos empleando el protocolo SMB (CIFS).
+Virtuales: el sistema de archivos
+.IR local ,
+utilizado para acceder al sistema de archivos Unix habitual;
+.I tarfs
+para manipular archivos empaquetados con el comando tar y acaso
+comprimidos;
+.I undelfs
+para recuperar archivos borrados en sistemas de archivos de tipo ext2
+(sistema de archivos habitual en Linux);
+.I ftpfs
+para manipular archivos en sistemas remotos a través de FTP;
+.I fish
+para manipular archivos a través de conexiones a shell como rsh o ssh
+y finalmente
+.I mcfs
+(Midnight Commander file system), un sistema de archivos para red. Si
+el programa se compiló incluyendo
+.I smbfs
+se pueden manipular archivos en sistemas remotos empleando el protocolo
+SMB (CIFS).
 .PP
-El código VFS interpretará todos los nombres de ruta usados y
-los dirigirá al sistema de archivos correcto. El formato usado para cada uno
-de los sistemas de archivos se describe más adelante en su propia sección.
+Se facilita también un sistema de archivos genérico
+.I extfs
+(EXternal virtual File System) para extender con facilidad las
+posibilidades de VFS empleando guiones y programas externos.
+.PP
+El código VFS interpretará todos los nombres de ruta usados y los dirigirá
+al sistema de archivos correcto. El formato usado para cada uno de los
+sistemas de archivos se describe más adelante en su propia sección.
 .\"NODE "  Tar File System"
 .SH "  Sistema de archivos Tar (tarfs)"
 El sistema de archivos tar y los archivos tar comprimidos pueden consultarse usando
@@ -2631,7 +2647,7 @@ directorio virtual cuyo nombre sea de la forma:
 .I /#sh:[usuario@]maquina[:opciones]/[directorio-remoto]
 .PP
 Los elementos
-.I usuario,
+.IR usuario ,
 .I opciones
 y
 .I directorio-remoto
@@ -2644,7 +2660,7 @@ Como
 .I opciones
 se puede poner 'C' para usar compresión y 'rsh' para utilizar una
 conexión rsh en vez de ssh. Si se indica el
-.I directorio-remoto,
+.IR directorio-remoto ,
 se buscará éste como primer directorio al conectar con la máquina
 remota.
 .PP
@@ -2668,7 +2684,7 @@ directorio especial cuyo nombre sigue el siguiente formato:
 .I /#mc:[usuario@]máquina[:puerto][directorio-remoto]
 .PP
 Los elementos
-.I usuario,
+.IR usuario ,
 .I puerto
 y
 .I directorio-remoto
@@ -2679,10 +2695,10 @@ máquina como ese usuario, si no, usará nuestro login.
 .PP
 El elemento
 .I puerto
-es utilizado cuando la máquina remota se ejecuta en un puerto especial
-(véase la página del manual de mcserv(8) para mayor información sobre puertos);
-finalmente, si el elemento
-.I directorio remoto
+es necesario cuando el servidor remoto se ejecuta en un puerto especial
+(véase la página del manual de mcserv(8) para más información acerca de
+puertos); finalmente, si el elemento
+.I directorio-remoto
 está presente, nuestro directorio actual en la máquina remota
 será éste.
 .PP
@@ -2704,9 +2720,15 @@ sea de la forma:
 .I /#smb:[usuario@]maquina[/recurso][/directorio-remoto]
 .PP
 Los elementos
-.IR "usuario" , " recurso " y " directorio-remoto"
+.IR usuario ,
+.I recurso
+y
+.I directorio-remoto
 son opcionales. El
-.IR "usuario" , " dominio " y " contraseña"
+.IR usuario ,
+.I dominio
+y
+.I contraseña
 se pueden especificar en un cuadro de diálogo.
 .PP
 Ejemplos:
@@ -2739,6 +2761,127 @@ primer disco scsi en Linux, usaríamos el siguiente nombre de ruta:
 .PP
 Esto le llevaría un tiempo a undelfs para cargar la información
 antes de empezar a navegar por los archivos allí contenidos.
+.\"NODE "  EXTernal File System"
+.SH "  Sistema de archivos EXTerno (extfs)"
+'extfs' permite incorporar a GNU Midnight Commander numerosas utilidades
+y tipos de archivos de manera sencilla, simplemente escribiendo guiones
+(scripts).
+.PP
+Los sistemas de archivos Extfs son de dos tipos:
+.PP
+1. Sistemas de archivos autónomos, que no están asociados a ningún
+archivo existente. Representan algún tipo de información relacionada con
+el sistema en forma de árbol de directorios. Se accede a ellos ejecutando
+.RI ' "cd #nombrefs" '
+donde nombrefs es el nombre corto que identifica el extfs (ver más
+adelante).  Ejemplos de estos son audio (lista de pistas de sonido en
+el CD) o apt (lista de paquetes de tipo Debian en el sistema).
+.PP
+Por ejemplo, para listar las pistas de música del CD, escribir
+.PP
+.nf
+  cd #audio
+.fi
+.PP
+2. Sistemas de archivos en un archivo (como rpm, patchfs y más), que
+muestran los contenidos de un archivo en forma de árbol de directorios.
+Puede tratarse de archivos reales empaquetados o comprimidos en un archivo
+(urar, rpm) o archivos virtuales, como puede ser el caso de mensajes
+en un archivo de correo electrónico (mailfs) o partes de un archivo de
+modificaciones o parches (patchfs). Para acceder a ellos se añade
+.RI ' #nombrefs '
+al nombre del archivo a abrir. Éste archivo podría él mismo estar en
+otro sistema de archivos virtual.
+.PP
+Por ejemplo, para listar los contenidos un archivo documentos.zip comprimido
+hay que escribir
+.PP
+.nf
+  cd documentos.zip#uzip
+.fi
+.PP
+En muchos aspectos, se puede tratar un sistema de archivos externo como
+cualquier otro directorio. Podríamos añadirlo a la lista de favoritos o
+cambiar a él desde la historia de directorios. Una limitación importante
+es que, estando dentro de él, no se puede ejecutar órdenes del sistema,
+como por otra parte ocurre en cualquier sistema de archivos VFS no local.
+.PP
+Midnigth Commander incluye inicialmente guiones para algunos sistemas de
+archivos externos:
+.TP
+.B a
+acceder a un disquete DOS/Windows 'A:'
+.RI ( "cd #a" ).
+.TP
+.B apt
+monitor del sistema de gestión de paquetes APT de Debian
+.RI ( "cd #apt" ).
+.TP
+.B audio
+acceso y audición de CDs
+.RI ( "cd #audio"
+o
+.IR "cd dispositivo#audio" ).
+.TP
+.B bpp
+paquete de la distribución GNU/Linux Bad Penguin
+.RI ( "cd archivo.bpp#bpp" ).
+.TP
+.B deb
+paquete de la distribución GNU/Linux Debian
+.RI ( "cd archivo.deb#deb" ).
+.TP
+.B dpkg
+paquetes instalados en Debian GNU/Linux
+.RI ( "cd #deb" ).
+.TP
+.B hp48
+ver o copiar archivos a/desde una calculadora HP48
+.RI ( "cd #hp48" ).
+.TP
+.B lslR
+navegación en listados lslR empleados en bastantes sitios FTP
+.RI ( "cd filename#lslR" ).
+.TP
+.B mailfs
+soporte para archivos de correo electrónico tipo mbox
+.RI ( "cd archivo_mbox#mailfs" ).
+.TP
+.B patchfs
+manipulación de archivos de cambios/parches tipo diff
+.RI ( "cd archivo#patchfs" ).
+.TP
+.B rpm
+paquete RPM
+.RI ( "cd archivo#rpm" ).
+.TP
+.B rpms
+base de datos de paquetes RPM instalados
+.RI ( "cd #rpms" ).
+.TP
+.B ulha, urar, uzip, uzoo, uar, uha
+herramientas de compresión
+.RI ( "cd archivo#xxxx"
+siendo xxxx uno de estos:
+.IR ulha ,
+.IR urar ,
+.IR uzip ,
+.IR uzoo ,
+.IR uar ,
+.IR uha ).
+.PP
+Se pueden asociar extensiones o tipos de archivo a un determinado sistema
+de archivos externo tal como se describe en la sección sobre cómo
+.\"LINK2"
+Editar el Archivo de Extensiones
+.\"Extension File Edit"
+de Midnight Commander. He aquí, a modo de ejemplo, una entrada para
+paquetes Debian:
+.PP
+.nf
+  regex/\.deb$
+          Open=%cd %p#deb
+.fi
 .\"NODE "Colors"
 .SH "Colores"
 Midnight Commander intentará determinar si nuestro terminal soporta
