@@ -125,7 +125,12 @@ do_window_close(GtkWidget *widget, gpointer _servant)
 	CORBA_exception_init(&ev);
 	objid = PortableServer_POA_servant_to_id (servant->poa, _servant, &ev);
 	PortableServer_POA_deactivate_object (servant->poa, objid, &ev);
+#if 1
+#warning Remove this ifdef when the new ORBit is released.
+	g_warning ("Developer Warning: when a new ORBIt is released, remove this code\n");
+#else
 	CORBA_free (objid);
+#endif
 	POA_GNOME_FileManagerWindow__fini(_servant, &ev);
 	
 	g_free(servant);
