@@ -328,8 +328,9 @@ char *command_line_colors;
 /* File name to view if argument was supplied */
 char *view_one_file = 0;
 
-/* File name to view if argument was supplied */
+/* File name to edit if argument was supplied */
 char *edit_one_file = 0;
+static int edit_one_file_start_line = 1;
 
 /* Used so that widgets know if they are being destroyed or
    shut down */
@@ -1172,7 +1173,7 @@ maybe_cd (int char_code, int move_up_dir)
     }
     return 0;
 }
-
+#if 0
 static void
 set_sort_to (WPanel *p, sortfn *sort_order)
 {
@@ -1189,7 +1190,7 @@ set_sort_to (WPanel *p, sortfn *sort_order)
     }
     do_re_sort (p);
 }
-
+#endif
 void
 sort_cmd (void)
 {
@@ -2212,26 +2213,24 @@ mc_maybe_editor_or_viewer (void)
 	    setup_dummy_mc (path);
 	    view_file (path, 0, 1);
     }
-#ifdef USE_INTERNAL_EDIT
     else {
 	    path = prepend_cwd_on_local ("");
 #ifndef HAVE_GNOME
 	    setup_dummy_mc (path);
 #endif
-	    edit (edit_one_file, 1);
+	    edit (edit_one_file, edit_one_file_start_line);
 #ifdef HAVE_GNOME
 	    gtk_main ();
 	    exit (1);
 #endif
     }
-#endif
     g_free (path);
     midnight_shutdown = 1;
     done_mc ();
     return 1;
 }
 
-#endif
+#endif	/* USE_INTERNAL_EDIT */
 
 static void
 do_nc (void)
@@ -2870,12 +2869,24 @@ handle_args (int argc, char *argv [])
     base = x_basename (argv[0]);
     if (!STRNCOMP (base, "mce", 3) || !STRCOMP(base, "vi")) {
 	edit_one_file = "";
-        if (tmp)
+	edit_one_file_start_line = 1;
+        if (tmp) {
+	    if (*tmp == '+' && isdigit (tmp[1])){
+		int start_line = atoi (tmp);
+		if (start_line > 0) {
+		    char *file = poptGetArg (ctx);
+		    if (file) {
+			tmp = file;
+			edit_one_file_start_line = start_line;
+		    }
+		}
+	    }
 	    edit_one_file = g_strdup (tmp);
+	}
     } else
-	if (!STRNCOMP (base, "mcv", 3) || !STRCOMP(base, "view")) {
-	    if (tmp)
-		view_one_file = g_strdup (tmp);
+    if (!STRNCOMP (base, "mcv", 3) || !STRCOMP(base, "view")) {
+	if (tmp)
+	    view_one_file = g_strdup (tmp);
     } else {
        	/* sets the current dir and the other dir */
 	if (tmp) {

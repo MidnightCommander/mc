@@ -5,7 +5,7 @@ mcedit \- Full featured terminal text editor for Unix-like systems.
 .\"SKIP_SECTION"
 .SH USAGE
 .B mcedit
-[ file [\-bcCdfhstVx?]]
+[[+number] file [\-bcCdfhstVx?]]
 .SH DESCRIPTION
 .LP
 Mcedit is a link to 
@@ -17,6 +17,10 @@ version of the
 standalone X Window editor.
 .\".\"DONT_SPLIT"
 .SH OPTIONS
+.TP
+.I "\+number"
+Go  to the line specified by number (do not insert
+a space between the "+" sign and the number).
 .TP
 .I "\-b"
 Forces black and white display.
@@ -167,7 +171,7 @@ format of the file \fB~/.cedit/syntax\fP.
 
 The file \fB~/.cedit/syntax\fP is rescanned on opening of a any new
 editor file. The file contains rules for highlighting, each of which is
-given on a seperate line, and define which keywords will be highlighted
+given on a separate line, and define which keywords will be highlighted
 to what colour. The file is also divided into sections, each beginning
 with a line with the \fBfile\fP command, followed by a regular
 expression. The regular expression dictates the file name that that set
@@ -244,7 +248,7 @@ command. The \fBwholechars\fP command at the top just sets the
 set exactly to its default and could therefore have been omitted. To
 specify that a word must be whole on the left only, you can use
 the \fBwholeleft\fP option, and similarly on the right. The left and
-right set of characters can be set seperately with,
+right set of characters can be set separately with,
 .br
 \fBwholechars\fP [\fBleft\fP|\fBright\fP] \fIcharacters\fP
 
@@ -260,7 +264,7 @@ Each rule is a line of the form:
 Context or keyword strings are interpreted so that you can include tabs
 and spaces with the sequences \\t and \\s. Newlines and the \\ are
 specified with \\n and \\\\ respectively. Since whitespace is used as a
-seperator, it may not be used explicitedly. Also, \\* must be used to
+separator, it may not be used explicitedly. Also, \\* must be used to
 specify a *. The * itself is a wildcard that matches any length of
 characters. For example,
 .nf
@@ -286,7 +290,7 @@ line ends in a \\ thus allowing C preprocessor directive to continue
 across multiple lines.
 
 The colours themselves are numbered 0 to 26 and are explained below in
-\fBFURTHER BEHAVIOURAL OPTIONS\fP. You can also use \fBany\fP of the named
+\fBFURTHER BEHAVIORAL OPTIONS\fP. You can also use \fBany\fP of the named
 colors specified in \fB/usr/lib/X11/rgb.txt\fP, though only one word
 versions of them. It is better to stick to the numerical colors
 to limit use of the color palette.
@@ -306,7 +310,7 @@ support, because this is flatly impossible.
 
 A useful hint is to work with as much as possible with the things
 you \fIcan\fP do rather than try to do things that this
-implimentation can't cope with. Also remember that the aim of
+implementation can't cope with. Also remember that the aim of
 syntax highlighting is to make programming less prone to error,
 \fInot\fP to make code look pretty.
 .PP
@@ -326,12 +330,12 @@ editmarked=black,cyan"
 Most options can now be set from the editors options dialog
 box. See the \fBOptions\fP menu. The following options are defined in 
 \fB.mc.ini\fP, and have obvious correspondences in the dialog box.
-You can modifiy them to change the editor behaviour, by editing the file. 
+You can modify them to change the editor behavior, by editing the file. 
 Unless specified, a 1 sets the option to on, and a 0 sets it to
 off, as is usual.
 .TP
 .I use_internal_edit
-This option is ignored when envoking 
+This option is ignored when invoking 
 .B mcedit.
 .TP
 .I editor_key_emulation
@@ -403,8 +407,8 @@ and
 .B sprintf 
 man pages to see what a format string
 is and how it works. An example is as follows: Suppose you want
-to replace all occurances of say, an open bracket, three
-comma seperated numbers, and a close bracket, with the
+to replace all occurrences of say, an open bracket, three
+comma separated numbers, and a close bracket, with the
 word 
 .I apples, 
 the third number, the word 
