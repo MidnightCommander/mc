@@ -125,36 +125,18 @@ dnl Private define
 AC_DEFUN([MC_WITH_VFS],[
   MC_EXTFS_CHECKS
 
-  dnl FIXME: network checks should probably be in their own macro.
-  AC_CHECK_LIB(nsl, t_accept)
-  AC_CHECK_LIB(socket, socket)
-
-  have_socket=no
-  AC_CHECK_FUNCS(socket, have_socket=yes)
-  if test $have_socket = no; then
-    # socket is not in the default libraries.  See if it's in some other.
-    for lib in bsd socket inet; do
-      AC_CHECK_LIB([$lib], [socket], [
-	  LIBS="$LIBS -l$lib"
-	  have_socket=yes
-	  AC_DEFINE(HAVE_SOCKET)
-	  break])
-    done
-  fi
-
-  have_gethostbyname=no
-  AC_CHECK_FUNC(gethostbyname, have_gethostbyname=yes)
-  if test $have_gethostbyname = no; then
-    # gethostbyname is not in the default libraries.  See if it's in some other.
-    for lib in bsd socket inet; do
-      AC_CHECK_LIB([$lib], [gethostbyname],
-		   [LIBS="$LIBS -l$lib"; have_gethostbyname=yes; break])
-    done
-  fi
-
   vfs_flags="cpiofs, extfs, tarfs"
   use_net_code=false
-  if test $have_socket = yes; then
+
+  AC_ARG_ENABLE([netcode],
+		[  --enable-netcode         Support for networking [[yes]]])
+
+  if test "x$enable_netcode" != xno; then
+    dnl FIXME: network checks should probably be in their own macro.
+    AC_CHECK_LIB(nsl, main)
+    AC_SEARCH_LIBS(socket, [xnet bsd socket inet], [have_socket=yes])
+    if test x$have_socket = xyes; then
+      AC_SEARCH_LIBS(gethostbyname, [bsd socket inet netinet])
       AC_STRUCT_LINGER
       AC_CHECK_FUNCS(pmap_set, , [
 	 AC_CHECK_LIB(rpc, pmap_set, [
@@ -184,6 +166,7 @@ AC_DEFUN([MC_WITH_VFS],[
       )
       vfs_flags="$vfs_flags, ftpfs, fish"
       use_net_code=true
+    fi
   fi
 
   dnl
