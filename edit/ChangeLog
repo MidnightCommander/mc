@@ -1,3 +1,7 @@
+2002-02-18  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* syntax.c (convert): Fix buffer overflow for ".*\" cases.
+
 2002-01-22  Pavel Roskin  <proski@gnu.org>
 
 	* editdraw.c (edit_scroll_screen_over_cursor): Do nothing if the

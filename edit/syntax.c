@@ -471,6 +471,9 @@ static char *convert (char *s)
 	    case '}':
 		*p = '\004';
 		break;
+	    case 0:
+		*p = *s;
+		return r;
 	    default:
 		*p = *s;
 		break;
