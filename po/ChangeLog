@@ -1,3 +1,7 @@
+1999-09-09  Federico Mena Quintero  <federico@redhat.com>
+
+	* POTFILES.in: Added gnome/gmc-client.c.
+
 1999-09-09  Kjartan Maraas  <kmaraas@online.no>
 
 	* no.po: Updated translation. All done.
