@@ -11,6 +11,8 @@ Changes made after 4.6.0-pre1.
 - mc now complies with the Filesystem Hierarchy Standard and uses
   @prefix@/share/mc for the data files.
 - Editor shows control characters in the caret notation.
+- Fixed segmentation fault when displaying messages from background
+  process.
 
 
 Version 4.6.0-pre1.
