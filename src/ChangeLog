@@ -1,3 +1,8 @@
+2002-09-13  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* main.c (process_args) [WITH_SMBFS]: Call smbfs_set_debugf()
+	for "-l" option.
+
 2002-09-13  Pavel Roskin  <proski@gnu.org>
 
 	* main.c: Fully remove obsolete "-m" option.

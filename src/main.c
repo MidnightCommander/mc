@@ -2202,6 +2202,9 @@ process_args (int c, const char *option_arg)
 #ifdef USE_NETCODE
     case 'l':
 	ftpfs_set_debug (option_arg);
+#ifdef WITH_SMBFS
+	smbfs_set_debugf (option_arg);
+#endif
 	break;
 
 #ifdef WITH_SMBFS
