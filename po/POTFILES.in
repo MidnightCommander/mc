@@ -2,14 +2,15 @@ edit/edit_key_translator.c
 gnome/gaction.c
 gnome/gcmd.c
 gnome/gcustom-layout.c
-gnome/gdesktop.c
-gnome/gdesktop-prefs.c
 gnome/gdesktop-init.c
+gnome/gdesktop-prefs.c
+gnome/gdesktop.c
 gnome/gdialogs.c
 gnome/gdnd.c
 gnome/gicon.c
 gnome/glayout.c
 gnome/gmain.c
+gnome/gmc-client.c
 gnome/gmc-window.c
 gnome/gmount.c
 gnome/gnome-file-property-dialog.c
@@ -20,7 +21,6 @@ gnome/gscreen.c
 gnome/gtools.c
 gnome/gview.c
 gnome/gwidget.c
-gnome/gmc-client.c
 gtkedit/edit.c
 gtkedit/edit.h
 gtkedit/editcmd.c
@@ -32,6 +32,7 @@ gtkedit/syntax.c
 src/achown.c
 src/background.c
 src/boxes.c
+src/charsets.c
 src/chmod.c
 src/chown.c
 src/cmd.c
@@ -40,7 +41,6 @@ src/dialog.c
 src/dir.c
 src/dlg.c
 src/ext.c
-src/textconf.c
 src/file.c
 src/filegui.c
 src/find.c
@@ -58,7 +58,10 @@ src/popt.c
 src/popthelp.c
 src/poptint.h
 src/screen.c
+src/selcodepage.c
+src/setup.c
 src/subshell.c
+src/textconf.c
 src/tree.c
 src/treestore.c
 src/user.c
@@ -77,5 +80,5 @@ vfs/mcfs.c
 vfs/sfs.c
 vfs/smbfs.c
 vfs/tar.c
-vfs/vfs.c
 vfs/undelfs.c
+vfs/vfs.c
