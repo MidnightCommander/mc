@@ -457,7 +457,7 @@ msgstr "Ordina icone"
 
 #: gnome/gdesktop.c:2879
 msgid "_Tidy Icons"
-msgstr "Icone piccole"
+msgstr "Icone grandi"
 
 #: gnome/gdesktop.c:2880
 msgid "Create _New Window"
