@@ -1,13 +1,13 @@
 # Spanish locale - Midnight Commander
-# Copyright (C) 1998-2002 Free Software Foundation, Inc.
-# David Martín <dmartina@excite.com>, 1998-2002.
+# Copyright (C) 1998-2003 Free Software Foundation, Inc.
+# David Martín <dmartina@excite.com>, 1998-2003.
 # Ismael Olea <olea@hispafuentes.com>, 2000.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.0\n"
-"POT-Creation-Date: 2002-12-26 16:32-0500\n"
-"PO-Revision-Date: 2002-12-26 17:00+0100\n"
+"POT-Creation-Date: 2002-12-27 14:46+0100\n"
+"PO-Revision-Date: 2002-12-26 23:40+0100\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2449,9 +2449,8 @@ msgid "&Horizontal"
 msgstr "&Horizontal"
 
 #: src/layout.c:164
-#, fuzzy
 msgid "&Xterm window title"
-msgstr "sugerencias en &Xterm"
+msgstr "titular las ventanas &Xterm"
 
 #: src/layout.c:165
 msgid "h&Intbar visible"
