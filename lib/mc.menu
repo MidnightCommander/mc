@@ -6,9 +6,9 @@ shell_patterns=0
 
 + t t
 @       Do something on the tagged files
-	set %u; CMD=%{Enter command}
+	set %t; CMD=%{Enter command}
 	while [ -n "$1" ]; do
-	  $CMD "$1" || echo tag "$1" >>$MC_CONTROL_FILE
+	  $CMD "$1"
 	  shift
 	done
 	
@@ -55,9 +55,9 @@ a       Append file to opposite
 
 + t t
 A       Append files to opposite files
-	set %u
+	set %t
 	while [ -n "$1" ]; do
-	  cat $1 >>%D/$1 || echo tag $1 >>$MC_CONTROL_FILE
+	  cat $1 >>%D/$1
 	  shift
 	done
 
@@ -123,7 +123,7 @@ h       Strip headers from current newsarticle
 
 + t t
 H       Strip headers from the marked newsarticles
-	set %u
+	set %t
 	while [ -n "$1" ]; do
 	  CHECK=`awk '{print $1 ; exit}' $1` 2>/dev/null
 	  WFILE=/tmp/${1}.$$
@@ -133,13 +133,11 @@ H       Strip headers from the marked newsarticles
               if [ "$?" = "0" ]; then
 		rm $WFILE; echo $1 header removed. OK.
 	      else
-	        echo tag $1 >>$MC_CONTROL_FILE
 		echo "Oops! Please check $1 against $WFILE"
 	      fi
 		;;
 	    *)
 	      echo $1 skipped: Not a news article.
-	      echo tag $1 >>$MC_CONTROL_FILE
 		;;
 	  esac
 	  shift
@@ -170,7 +168,7 @@ t       Run latex on file and show it with xdvi
 =+ f ^part | f ^Part | f uue & t r
 + t t
 U       Uudecode marked news articles (needs work)
-	set %u
+	set %t
         (
 	while [ -n "$1" ]; do # strip headers
 	  FIRST=`awk '{print $1 ; exit}' $1`
@@ -179,10 +177,6 @@ U       Uudecode marked news articles (needs work)
 	) |sed '/^$/d' |sed -n '/^begin 6/,/^end$/p' | uudecode
 	if [ "$?" != "0" ]; then
 	  echo "Could not decode %t"
-	  for i in %t; do
-	    echo tag $i >>$MC_CONTROL_FILE
-	    shift
-	  done
 	fi
 	echo "Please test the output file before deleting anything"
 
@@ -256,7 +250,7 @@ z       Extract compressed tar file to subdirectory
 
 + t t
 Z       Extract compressed tar files to subdirectories
-	for i in %u
+	for i in %t
         do
 	  set gzip -dc
           unset D
@@ -269,7 +263,7 @@ Z       Extract compressed tar files to subdirectories
 	    *.tar.F)   D="`basename $i .tar.F`"; set freeze -dc;;
 	    *.tar.bz2) D="`basename $i .tar.bz2`"; set bunzip2 -c;;
           esac
-	  mkdir $D; (cd $D && $1 $2 ../$i | tar xvf -)||echo tag $i >>$MC_CONTROL_FILE
+	  mkdir $D; (cd $D && $1 $2 ../$i | tar xvf -)
         done
 
 + f \.gz$ | f \.tgz$ | f \.tpz$ | f \.Z$ | f \.z$ | f \.bz2$ & t r & ! t t
@@ -296,7 +290,7 @@ c       Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
 
 + t t
 C       Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
-	set %u
+	set %t
 	while [ -n "$1" ]
         do
           unset D
@@ -315,9 +309,11 @@ C       Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
 	      bz2)    D="`basename $1 .bz2`";;
 	  esac
 	  if [ "$EXT" = "bz2" ]; then
-	    (bunzip2 -v $1 ; gzip -f9 -v $D)||echo tag $1 >>$MC_CONTROL_FILE
+	    bunzip2 -v $1
+	    gzip -f9 -v $D
 	  else
-	    (gunzip -v $1 ; bzip2 -v --repetitive-best $D)||echo tag $1 >>$MC_CONTROL_FILE
+	    gunzip -v $1
+	    bzip2 -v --repetitive-best $D
 	  fi
 	  shift
         done
