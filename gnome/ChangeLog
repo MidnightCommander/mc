@@ -1,4 +1,9 @@
-Mon Dec 14 11:39:38 1998  Owen Taylor  <otaylor@redhat.com>
+1998-12-14  Owen Taylor  <otaylor@redhat.com>
+
+	* gnome.TODO: Added a number of tree and icon
+	view todos.
+
+1998-12-14  Owen Taylor  <otaylor@redhat.com>
 
 	* gscreen.c (x_create_panel): Keep up with changes
 	to GtkDockItem.

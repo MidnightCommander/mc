@@ -10,6 +10,25 @@ New task list:
 	
 	- Add focus management to the tree
 
+	- tree should not move the selected menu item when
+	  auto-expanding/collapsing.
+
+	- Auto-expand, and the timeout need to be optional
+ 	  (and possibly disabled by default)
+	
+	- Options - "Show hidden files" needs to work for
+  	  the tree as well as for the icon list.
+
+	- Right button on icon list (not on icon) should also
+	  bring up menu. Should have back-forward (like
+   	  Netscape, create folder, etc... Eventually 
+	  Explorer style "create new word document" would
+   	  be nice). Rubber banding is silly.
+
+	- Dragging within icon list should reorder or do
+	  nothing. Copying is silly. (But can be done
+	  on ACTION_ASK)
+
 	- Add to the gnome-panel mime-type support
 
 	- Drop the MC event handling off for the main window.
@@ -54,7 +73,7 @@ Other features requested:
 
 	- Add an advanced/simple checkbox.
 
-	- Al of the configuration pages should be in a single
+	- All of the configuration pages should be in a single
 	  GnomePropertyBox.
 
 	- Optional "hidden menu" option.
