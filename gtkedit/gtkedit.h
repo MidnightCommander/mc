@@ -58,7 +58,6 @@ struct _GtkEdit
   void (*destroy_me) (void *);
   void *destroy_me_user_data;
   struct editor_widget *editor;
-  struct mouse_funcs *funcs;
   gulong options;
   gint timer;
 };

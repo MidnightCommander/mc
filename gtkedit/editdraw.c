@@ -78,7 +78,7 @@ void edit_status (WEdit * edit)
 	widget_move (edit, edit->have_frame, edit->have_frame);
 	i = w > 24 ? 18 : w - 6;
 	i = i < 13 ? 13 : i;
-	sprintf (s, "%s", name_trunc (edit->filename ? edit->filename : "", i));
+	sprintf (s, "%s", (char *) name_trunc (edit->filename ? edit->filename : "", i));
 	i += strlen (s);
 	s[strlen (s)] = ' ';
 	t = w - 20;
@@ -103,8 +103,10 @@ void rerender_text (CWidget * wdt);
 
 #ifdef GTK
 
-void edit_status (WEdit *edit)
+void edit_status (WEdit * edit)
 {
+    GtkEntry *entry;
+    GtkWidget *widget;
     int w, i, t;
     char id[33];
     char s[160];
@@ -127,8 +129,9 @@ void edit_status (WEdit *edit)
 	status_string (edit, s + i + 2, t, 0, FONT_MEAN_WIDTH);
     }
     s[w] = 0;
-    if (strcmp (s, GTK_LABEL(edit->widget->status)->label))
-	gtk_label_set (GTK_LABEL(edit->widget->status), s);
+    entry = GTK_ENTRY (edit->widget->status);
+    if (strcmp (s, gtk_entry_get_text (entry)))
+	gtk_entry_set_text (entry, s);
 }
 
 #else
@@ -467,8 +470,6 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
 #ifndef MIDNIGHT
     static unsigned long prev_win = 0;
 #endif
-    int fg, bg;
-
     int force = edit->force;
     long b;
 

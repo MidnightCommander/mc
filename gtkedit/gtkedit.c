@@ -40,6 +40,7 @@
 #define GDK_FONT_XFONT(font) (((GdkFontPrivate*) font)->xfont)
 
 int edit_key_emulation = 0;
+int column_highlighting = 0;
 
 static GtkWidgetClass *parent_class = NULL;
 
@@ -51,6 +52,7 @@ static void gtk_edit_set_position (GtkEditable *editable, gint position);
 void edit_mouse_mark (WEdit * edit, XEvent * event, int double_click);
 void edit_move_to_prev_col (WEdit * edit, long p);
 int edit_load_file_from_filename (WEdit *edit, char *exp);
+static void gtk_edit_set_selection (GtkEditable * editable, gint start, gint end);
 
 
 guchar gtk_edit_font_width_per_char[256];
@@ -298,11 +300,11 @@ static void gtk_edit_destroy (GtkObject * object)
 	gtk_timeout_remove (edit->timer);
 	edit->timer = 0;
     }
-    if (edit->funcs) {
-	free (edit->funcs);
+    edit_clean (edit->editor);
+    if (edit->editor) {
+	free (edit->editor);
+	edit->editor = NULL;
     }
-    edit_destroy_callback (edit);
-
     GTK_OBJECT_CLASS (parent_class)->destroy (object);
 }
 
@@ -525,16 +527,84 @@ static gint
     return FALSE;
 }
 
-static gint
- gtk_edit_button_press_release (GtkWidget * widget,
-				GdkEventButton * event)
+void edit_update_screen (WEdit * e)
 {
-    int double_click = 0;
-    XEvent xevent;
-    GtkEdit *edit;
+    if (!e)
+	return;
+    if (!e->force)
+	return;
+
+    edit_scroll_screen_over_cursor (e);
+    edit_update_curs_row (e);
+    edit_update_curs_col (e);
+#if 0
+    update_scroll_bars (e);
+#endif
+    edit_status (e);
+
+    if (e->force & REDRAW_COMPLETELY)
+	e->force |= REDRAW_PAGE;
+
+/* pop all events for this window for internal handling */
+    if (e->force & (REDRAW_CHAR_ONLY | REDRAW_COMPLETELY)) {
+	edit_render_keypress (e);
+#if 0
+    } else if (CCheckWindowEvent (e->widget->winid, ButtonPressMask | ButtonReleaseMask | ButtonMotionMask, 0)
+	       || CKeyPending ()) {
+	e->force |= REDRAW_PAGE;
+	return;
+#endif
+    } else {
+	edit_render_keypress (e);
+    }
+}
+
+
+void gtk_edit_mouse_redraw (WEdit * edit, long click)
+{
+    edit->force |= REDRAW_PAGE | REDRAW_LINE;
+    edit_update_curs_row (edit);
+    edit_update_curs_col (edit);
+    edit->prev_col = edit_get_col (edit);
+    edit_update_screen (edit);
+    edit->search_start = click;
+}
+
+/* returns the position in the edit buffer of a window click */
+static long edit_get_click_pos (WEdit * edit, int x, int y)
+{
+    long click;
+/* (1) goto to left margin */
+    click = edit_bol (edit, edit->curs1);
+
+/* (1) move up or down */
+    if (y > (edit->curs_row + 1))
+	click = edit_move_forward (edit, click, y - (edit->curs_row + 1), 0);
+    if (y < (edit->curs_row + 1))
+	click = edit_move_backward (edit, click, (edit->curs_row + 1) - y);
+
+/* (3) move right to x pos */
+    click = edit_move_forward3 (edit, click, x - edit->start_col - 1, 0);
+    return click;
+}
+
+static void edit_translate_xy (int xs, int ys, int *x, int *y)
+{
+    *x = xs - EDIT_TEXT_HORIZONTAL_OFFSET;
+    *y = (ys - EDIT_TEXT_VERTICAL_OFFSET - option_text_line_spacing / 2 - 1) / FONT_PIX_PER_LINE + 1;
+}
+
+static gint gtk_edit_button_press_release (GtkWidget * widget,
+					   GdkEventButton * event)
+{
     GtkEditable *editable;
+    GtkEdit *edit;
+    WEdit *e;
     static GdkAtom ctext_atom = GDK_NONE;
-    long start_mark = 0, end_mark = 0;
+    int x_text = 0, y_text = 0;
+    long mouse_pos;
+    static long button_down_pos;
+    static long dragging = 0;
 
     g_return_val_if_fail (widget != NULL, FALSE);
     g_return_val_if_fail (GTK_IS_EDIT (widget), FALSE);
@@ -544,45 +614,73 @@ static gint
 	ctext_atom = gdk_atom_intern ("COMPOUND_TEXT", FALSE);
 
     edit = GTK_EDIT (widget);
+    e = edit->editor;
     editable = GTK_EDITABLE (widget);
 
     if (!GTK_WIDGET_HAS_FOCUS (widget))
 	if (!(event->state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK)))
 	    gtk_widget_grab_focus (widget);
 
+    edit_translate_xy (event->x, event->y, &x_text, &y_text);
+    mouse_pos = edit_get_click_pos (e, x_text, y_text);
+
     switch (event->type) {
+    case GDK_BUTTON_RELEASE:
+	if (!dragging)
+	    return FALSE;
     case GDK_MOTION_NOTIFY:
-	xevent.type = MotionNotify;
+	if (mouse_pos == button_down_pos)
+	    return FALSE;
+	dragging = 1;
+	edit_cursor_move (e, mouse_pos - e->curs1);
+	gtk_edit_set_selection (GTK_EDITABLE (widget), mouse_pos, button_down_pos);
+	gtk_edit_mouse_redraw (e, mouse_pos);
 	break;
     case GDK_BUTTON_PRESS:
-	xevent.type = ButtonPress;
+	dragging = 0;
+	if (event->button == 2) {
+	    edit_cursor_move (e, mouse_pos - e->curs1);
+	    editable->current_pos = mouse_pos;
+	    gtk_selection_convert (GTK_WIDGET (edit), GDK_SELECTION_PRIMARY,
+				   ctext_atom, event->time);
+	    gtk_edit_mouse_redraw (e, mouse_pos);
+	    editable->selection_start_pos = e->mark1;
+	    editable->selection_end_pos = e->mark2;
+	    return FALSE;
+	}
+	button_down_pos = mouse_pos;
+#if 0
+	if (editable->has_selection)
+	    if (mouse_pos >= editable->selection_start_pos
+		&& mouse_pos < editable->selection_end_pos)
+		gtk_edit_set_selection (GTK_EDITABLE (widget), mouse_pos, mouse_pos);
+#endif
+	edit_cursor_move (e, mouse_pos - e->curs1);
+	gtk_edit_mouse_redraw (e, mouse_pos);
 	break;
     case GDK_2BUTTON_PRESS:
-	xevent.type = ButtonPress;
-	double_click = 1;
-	break;
-    case GDK_BUTTON_RELEASE:
-	xevent.type = ButtonRelease;
+	dragging = 0;
+	edit_cursor_move (e, mouse_pos - e->curs1);
+	edit_right_word_move (e);
+	mouse_pos = e->curs1;
+	edit_left_word_move (e);
+	button_down_pos = e->curs1;
+	gtk_edit_set_selection (GTK_EDITABLE (widget), mouse_pos, button_down_pos);
+	gtk_edit_mouse_redraw (e, mouse_pos);
 	break;
     case GDK_3BUTTON_PRESS:
+	dragging = 0;
+	mouse_pos = edit_bol (e, mouse_pos);
+	edit_cursor_move (e, mouse_pos - e->curs1);
+	button_down_pos = edit_eol (e, mouse_pos) + 1;
+	gtk_edit_set_selection (GTK_EDITABLE (widget), mouse_pos, button_down_pos);
+	gtk_edit_mouse_redraw (e, mouse_pos);
+	break;
     default:
-	return FALSE;
+	dragging = 0;
 	break;
     }
-    xevent.xbutton.window = (guint32) event->window;
-    xevent.xbutton.x = event->x;
-    xevent.xbutton.y = event->y;
-    xevent.xbutton.state = event->state;
-
-    edit_mouse_mark (edit->editor, &xevent, double_click);
-
-    editable->current_pos = edit->editor->curs1;
-    editable->has_selection = !eval_marks (edit->editor, &start_mark, &end_mark);
-    editable->selection_start_pos = start_mark;
-    editable->selection_end_pos = end_mark;
-    if (event->type == GDK_BUTTON_PRESS && event->button == 2)
-	gtk_selection_convert (GTK_WIDGET (edit), GDK_SELECTION_PRIMARY,
-			       ctext_atom, event->time);
+    editable->current_pos = e->curs1;
     return FALSE;
 }
 
@@ -638,22 +736,19 @@ short key_sym_mod (gint key, gint state)
     return key;
 }
 
-static gint
- gtk_edit_key_press (GtkWidget * widget,
-		     GdkEventKey * event)
+static gint gtk_edit_key_press (GtkWidget * widget, GdkEventKey * event)
 {
-    GtkEdit *edit;
     GtkEditable *editable;
+    GtkEdit *edit;
+    WEdit *e;
     gint command = 0, insert = -1, r = 0;
     guint key, state;
-
     g_return_val_if_fail (widget != NULL, FALSE);
     g_return_val_if_fail (GTK_IS_EDIT (widget), FALSE);
     g_return_val_if_fail (event != NULL, FALSE);
-
     edit = GTK_EDIT (widget);
     editable = GTK_EDITABLE (widget);
-
+    e = edit->editor;
     if (!edit_translate_key (0, event->keyval, event->state, &command, &insert)) {
 	return FALSE;
     }
@@ -661,17 +756,20 @@ static gint
     state = event->state;
     if (!command && insert < 0) {	/* no translation took place, so lets see if we have a macro */
 	if ((key == GDK_r || key == GDK_R) && (state & ControlMask)) {
-	    command = edit->editor->macro_i < 0 ? CK_Begin_Record_Macro : CK_End_Record_Macro;
+	    command = e->macro_i < 0 ? CK_Begin_Record_Macro : CK_End_Record_Macro;
 	} else {
 	    command = key_sym_mod (key, state);
 	    if (command > 0)
 		command = CK_Macro (command);
 	}
     }
-    r = edit_execute_key_command (edit->editor, command, insert);
+    r = edit_execute_key_command (e, command, insert);
     if (r)
-	edit_update_screen (edit->editor);
-
+	edit_update_screen (e);
+    editable->selection_start_pos = e->mark1;
+    editable->selection_end_pos = ((e->mark2 < 0) ? e->curs1 : e->mark2);
+    editable->has_selection = editable->selection_start_pos != editable->selection_end_pos;
+    editable->current_pos = e->curs1;
     return r;
 }
 
@@ -729,26 +827,15 @@ static void gtk_edit_set_selection (GtkEditable * editable,
 				    gint end)
 {
     GtkEdit *edit = GTK_EDIT (editable);
-    guint start1, end1, start2, end2;
+    WEdit *e;
+    e = edit->editor;
     if (end < 0)
 	end = edit->editor->last_byte;
-    start1 = MIN (start, end);
-    end1 = MAX (start, end);
-    start2 = MIN (editable->selection_start_pos, editable->selection_end_pos);
-    end2 = MAX (editable->selection_start_pos, editable->selection_end_pos);
-    if (start2 < start1) {
-	guint tmp;
-	tmp = start1;
-	start1 = start2;
-	start2 = tmp;
-	tmp = end1;
-	end1 = end2;
-	end2 = tmp;
-    }
-    editable->selection_start_pos = start;
-    editable->selection_end_pos = end;
-    editable->has_selection = TRUE;
-    return;
+    editable->selection_start_pos = e->mark1 = MIN (start, end);
+    editable->selection_end_pos = e->mark2 = MAX (start, end);
+    editable->has_selection = (e->mark2 != e->mark1);
+    gtk_edit_mouse_redraw (e, e->curs1);
+    gtk_editable_claim_selection (editable, TRUE, GDK_CURRENT_TIME);
 }
 
 static void gtk_edit_insert_text (GtkEditable * editable,
@@ -818,8 +905,6 @@ static void gtk_edit_class_init (GtkEditClass * class)
     get_home_dir ();
 }
 
-extern struct mouse_funcs edit_mouse_funcs;
-
 static void gtk_edit_init (GtkEdit * edit)
 {
     static made_directory = 0;
@@ -833,7 +918,6 @@ static void gtk_edit_init (GtkEdit * edit)
     edit->menubar = 0;
     edit->status = 0;
     edit->options = 0;
-    edit->funcs = mouse_funcs_new (edit->editor, &edit_mouse_funcs);
 
     gtk_edit_configure_font_dimensions (edit);
 
@@ -1261,7 +1345,7 @@ int edit (const char *file, int line)
 	{
 	    {
 		GNOME_APP_UI_ITEM,
-		N_ ("About..."), N_ ("Info about GNOME hello"),
+		N_ ("About..."), N_ ("Info about Mcedit"),
 		about_cb, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
 		0, (GdkModifierType) 0, NULL
@@ -1283,7 +1367,8 @@ int edit (const char *file, int line)
 	};
 
 	gtk_widget_realize (app);
-	statusbar = gtk_label_new (file ? file : "<no-filename>");
+	statusbar = gtk_entry_new ();
+	gtk_entry_set_editable (GTK_ENTRY (statusbar), 0);
 	gtk_widget_set_usize (app, 400, 400);
 	gnome_app_create_menus (GNOME_APP (app), main_menu);
 	gnome_app_set_contents (GNOME_APP (app), edit);
@@ -1303,7 +1388,7 @@ int edit (const char *file, int line)
 		    return 1;
 		}
 	gtk_edit_set_cursor_line (edit, line);
-	gtk_widget_show (app);
+	gtk_widget_show_all (app);
 	gtk_widget_grab_focus (edit);
     }
     return 0;

@@ -25,10 +25,8 @@
 #ifndef MIDNIGHT
 #include <X11/Xmd.h>		/* CARD32 */
 #include <X11/Xatom.h>
-#ifndef GTK
 #include "app_glob.c"
 #include "coollocal.h"
-#endif
 #include "editcmddef.h"
 #include "mousemark.h"
 #endif
@@ -51,11 +49,7 @@ void edit_destroy_callback (CWidget * w)
 	CError ("Trying to destroy non-existing editor widget.\n");
 }
 
-#ifdef GTK
-
-#else
 void link_hscrollbar_to_editor (CWidget * scrollbar, CWidget * editor, XEvent * xevent, CEvent * cwevent, int whichscrbutton);
-#endif
 
 /* returns the position in the edit buffer of a window click */
 long edit_get_click_pos (WEdit * edit, int x, int y)
@@ -83,7 +77,7 @@ void edit_translate_xy (int xs, int ys, int *x, int *y)
 
 extern int just_dropped_something;
 
-static void mouse_redraw (WEdit * edit, long click)
+void mouse_redraw (WEdit * edit, long click)
 {
     edit->force |= REDRAW_PAGE | REDRAW_LINE;
     edit_update_curs_row (edit);
@@ -145,20 +139,7 @@ static void release_mark (WEdit * edit, XEvent * event)
 	edit_mark_cmd (edit, 1);
     if (edit->mark1 != edit->mark2 && event) {
 	edit_get_selection (edit);
-#ifdef GTK
-	{
-#if 0
-	    long start_mark = 0, end_mark = 0;
-	    edit->widget->editable.has_selection = !eval_marks (edit, &start_mark, &end_mark);
-	    edit->widget->editable.selection_start_pos = start_mark;
-	    edit->widget->editable.selection_end_pos = end_mark;
-	    if (edit->widget->editable.has_selection)
-#endif
-		gtk_selection_owner_set (GTK_WIDGET (edit->widget), GDK_SELECTION_PRIMARY, GDK_CURRENT_TIME);
-	}
-#else
 	XSetSelectionOwner (CDisplay, XA_PRIMARY, CWindowOf (edit->widget), event->xbutton.time);
-#endif
     } else {
 	edit->widget->editable.has_selection = TRUE;
     }
@@ -211,7 +192,6 @@ char *filename_from_url (char *data, int size, int i)
 
 static int insert_drop (WEdit * e, Window from, unsigned char *data, int size, int xs, int ys, Atom type, Atom action)
 {
-#ifndef GTK
     long start_mark = 0, end_mark = 0;
     int x, y;
 
@@ -256,7 +236,6 @@ static int insert_drop (WEdit * e, Window from, unsigned char *data, int size, i
 	}
     }
     CExpose (e->widget->ident);
-#endif
     return 0;
 }
 
@@ -283,8 +262,6 @@ struct mouse_funcs edit_mouse_funcs =
     DndText,
     mime_majors
 };
-
-#ifndef GTK
 
 extern int option_editor_bg_normal;
 void edit_tri_cursor (Window win);
@@ -360,17 +337,6 @@ CWidget *CDrawEditor (const char *identifier, Window parent, int x, int y,
     return w;
 }
 
-#endif
-
-#ifdef GTK
-
-void update_scroll_bars (WEdit * e)
-{
-
-}
-
-#else
-
 void update_scroll_bars (WEdit * e)
 {
     int i, x1, x2;
@@ -412,8 +378,6 @@ void update_scroll_bars (WEdit * e)
     }
 }
 
-#endif
-
 void edit_mouse_mark (WEdit * edit, XEvent * event, int double_click)
 {
     edit_update_curs_row (edit);
@@ -433,10 +397,6 @@ void edit_mouse_mark (WEdit * edit, XEvent * event, int double_click)
 	edit->widget->funcs
     );
 }
-
-#ifdef GTK
-
-#else
 
 void link_scrollbar_to_editor (CWidget * scrollbar, CWidget * editor, XEvent * xevent, CEvent * cwevent, int whichscrbutton)
 {
@@ -489,12 +449,6 @@ void link_scrollbar_to_editor (CWidget * scrollbar, CWidget * editor, XEvent * x
     }
 }
 
-#endif
-
-#ifdef GTK
-
-#else
-
 void link_hscrollbar_to_editor (CWidget * scrollbar, CWidget * editor, XEvent * xevent, CEvent * cwevent, int whichscrbutton)
 {
     int i, start_col;
@@ -543,8 +497,6 @@ void link_hscrollbar_to_editor (CWidget * scrollbar, CWidget * editor, XEvent * 
 	edit_status (e);
     }
 }
-
-#endif
 
 /* 
    This section comes from rxvt-2.21b1/src/screen.c by
@@ -597,7 +549,6 @@ void selection_send (XSelectionRequestEvent * rq)
 
 /*{{{ paste selection */
 
-#ifndef GTK
 /*
  * Respond to a notification that a primary selection has been sent
  */
@@ -641,8 +592,6 @@ void selection_paste (WEdit * edit, Window win, unsigned prop, int delete)
     edit->force |= REDRAW_COMPLETELY | REDRAW_LINE;
 }
 
-#endif
-
 /*}}} */
 
 void selection_clear (void)
@@ -670,25 +619,15 @@ void edit_update_screen (WEdit * e)
 /* pop all events for this window for internal handling */
     if (e->force & (REDRAW_CHAR_ONLY | REDRAW_COMPLETELY)) {
 	edit_render_keypress (e);
-#ifdef GTK
-    } else if (
-#if 0
-/* *** */
-    gtk_edit_key_pending () || gtk_edit_mouse_pending ()
-#else
-    0
-#endif
-    ) {
-#else
     } else if (CCheckWindowEvent (e->widget->winid, ButtonPressMask | ButtonReleaseMask | ButtonMotionMask, 0)
 	       || CKeyPending ()) {
-#endif
 	e->force |= REDRAW_PAGE;
 	return;
     } else {
 	edit_render_keypress (e);
     }
 }
+
 
 extern int space_width;
 
@@ -795,8 +734,6 @@ void handle_client_message (CWidget * w, XEvent * xevent)
     free_data;
 }
 #endif
-
-#ifndef GTK
 
 int eh_editor (CWidget * w, XEvent * xevent, CEvent * cwevent)
 {
@@ -908,8 +845,6 @@ int eh_editor (CWidget * w, XEvent * xevent, CEvent * cwevent)
     edit_update_screen (e);
     return r;
 }
-
-#endif	/* ! GTK */
 
 #else
 
