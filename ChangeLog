@@ -1,3 +1,20 @@
+1999-09-22  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* lib/mc.sh.in, mc.csh.in: renamed from mc.sh resp. mc.csh. Adapt
+	path to the mc binary according to @prefix@.
+
+	* lib/Makefile.in (srcdir): mc.sh and mc.csh are now created by
+	configure. Install mc.sh and mc.csh in $(suppbindir).
+
+	* doc/mc.1.in, mc.sgml: Updated the mc function definition for bash
+	and zsh. Suggest to source mc.sh or mc.csh instead of adding verbatim
+	copies of the included function definitions.
+
+	* mcfn_install.in: Comment out definitions of the mc functions. Source
+	mc.sh instead of adding an outdated mc function definition.
+
+	* configure.in: output mc.sh and mc.csh
+
 1999-09-20  Federico Mena Quintero  <federico@redhat.com>
 
 	* lib/startup.links: Changed the news link to Gnotices

@@ -13,14 +13,17 @@ INSTALL_DATA = @INSTALL_DATA@
 #
 
 LIBFILES_IN = mc.ext.in mc-gnome.ext.in
-LIBFILES_OUT = mc.ext mc-gnome.ext
+LIBFILES_OUT = mc.ext mc-gnome.ext mc.csh mc.sh
 LIBFILES_CONST = mc.hint mc.hint.es mc.lib mc.menu
+SUPPBIN_IN = mc.csh.in mc.sh.in
+SUPPBIN_OUT =  mc.csh mc.sh
 DESKTOP_FILES = startup.links README.desktop
 TIFILES = README.xterm linux.ti xterm.ad xterm.ti ansi.ti vt100.ti xterm.tcap
 
 DISTLIB = \
 	$(LIBFILES_IN) 		\
 	$(LIBFILES_CONST) 	\
+	$(SUPPBIN_IN)           \
 	$(TIFILES) 		\
 	$(DESKTOP_FILES)	\
 	Makefile.in tdiff 	\
@@ -51,12 +54,15 @@ realclean:
 distclean:
 	$(RMF) $(srcdir)/*~ $(srcdir)/Makefile
 	for I in $(LIBFILES_OUT); do $(RMF) $(srcdir)/$$I; done
+	for I in $(SUPPBIN_OUT); do $(RMF) $(srcdir)/$$I; done
 
 install:
 	for I in $(LIBFILES_CONST); \
 	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(mclibdir)/$$I; done
 	for I in $(LIBFILES_OUT); \
 	do $(INSTALL_DATA) $(builddir)/lib/$$I $(DESTDIR)$(mclibdir)/$$I; done
+	for I in $(SUPPBIN_OUT); \
+	do $(INSTALL_PROGRAM) -m 755 $(builddir)/lib/$$I $(DESTDIR)$(suppbindir)//$$I; done
 	for I in $(TIFILES); \
 	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(tidir)/$$I; done
 	$(MKINSTALLDIRS) $(DESTDIR)$(confdir)

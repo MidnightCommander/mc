@@ -1,3 +1,8 @@
+1999-09-22  Bjorn Eriksson <mdeans@algonet.se>
+
+	* extfs/uzip.in: Better handling of zip-archives that contain files 
+	which contain spaces.
+
 1999-09-19  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* ftpfs.c (ftpfs_set_debug), vfs.h: added const qualifier.

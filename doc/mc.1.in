@@ -53,13 +53,21 @@ directory; this, along with the shell function below, will allow you
 to browse through your directories and automatically move to the last
 directory you were in (thanks to Torben Fjerdingstad and Sergey for
 contributing this function and the code which implements this option).
+
+Please don't add verbatim copies of the function definitions below. Source the 
+files @prefix@/lib/mc/bin/mc.sh (bash and zsh users) respectively 
+@prefix@/lib/mc/bin/mc.csh (tcsh users) instead. This way you will not
+need to change your profiles if the function definitions are improved, 
+provided that you don't compile MC with a different prefix.
 .nf
 
 bash and zsh users:
 
 mc ()
 {
-        MC=/tmp/mc$$-"$RANDOM"
+        mkdir -p ~/.mc/tmp 2> /dev/null
+	chmod 700 ~/.mc/tmp
+	MC=~/.mc/tmp/mc-$$
         @prefix@/bin/mc -P "$@" > "$MC"
         cd "`cat $MC`"
         rm "$MC"
@@ -72,7 +80,8 @@ alias mc 'setenv MC `@prefix@/bin/mc -P \!*`; cd $MC; unsetenv MC'
 .TP
 I know the bash function could be shorter for zsh and bash but the
 backquotes on bash won't accept your suspension the program with
-C-z. 
+C-z. The temporary file is created in the private directory ~/.mc/tmp 
+in order to avoid symlink attachs in a world writable /tmp.
 .TP
 .I "\-s"
 Turns on the slow terminal mode, in this mode the program will not
