@@ -1,5 +1,9 @@
 2002-08-21  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Bump version to 4.6.0-pre1a.  Don't use
+	arguments in AM_INIT_AUTOMAKE to avoid defining the version in
+	two places.
+
 	Release mc-4.6.0-pre1.
 
 	* configure.in: Bump version to 4.6.0-pre1.
