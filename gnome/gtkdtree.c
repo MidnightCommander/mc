@@ -154,9 +154,6 @@ gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 
 	parent_class->tree_select_row (ctree, row, column);
 
-	while (row == dtree->root_node)
-		return;
-
 	if (row == dtree->last_node)
 		return;
 
