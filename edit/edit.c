@@ -54,7 +54,7 @@ int option_edit_left_extreme = 0;
 int option_edit_top_extreme = 0;
 int option_edit_bottom_extreme = 0;
 
-char *option_whole_chars_search = "0123456789abcdefghijklmnopqrstuvwxyz_";
+const char *option_whole_chars_search = "0123456789abcdefghijklmnopqrstuvwxyz_";
 char *option_backup_ext = "~";
 
 /*
@@ -175,7 +175,7 @@ edit_load_file_fast (WEdit *edit, const char *filename)
    whether you read everything or not. */
 /* FIXME: add proper `triple_pipe_open' to read, write and check errors. */
 static const struct edit_filters {
-    char *read, *write, *extension;
+    const char *read, *write, *extension;
 } all_filters[] = {
 
     {

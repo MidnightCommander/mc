@@ -32,14 +32,14 @@
 #define USE_INTERNAL_EDIT 1
 #endif
 
-static char *key_emu_str[] =
+static const char *key_emu_str[] =
 {N_("Intuitive"), N_("Emacs"), NULL};
 
-static char *wrap_str[] =
+static const char *wrap_str[] =
 {N_("None"), N_("Dynamic paragraphing"), N_("Type writer wrap"), NULL};
 
 static void
-i18n_translate_array (char *array[])
+i18n_translate_array (const char *array[])
 {
     while (*array!=NULL) {
 	*array = _(*array);
@@ -106,14 +106,14 @@ edit_options_dialog (void)
 	 OPT_DLG_H, N_("&Fake half tabs"), 0, 0, 0, 0, NULL},
 	/* 13 */
 	{quick_radio, 5, OPT_DLG_W, OPT_DLG_H - 7, OPT_DLG_H, "", 3, 0, 0,
-	 wrap_str, "wrapm"},
+	 const_cast(char **, wrap_str), "wrapm"},
 	/* 14 */
 	{quick_label, 4, OPT_DLG_W, OPT_DLG_H - 8, OPT_DLG_H,
 	 N_("Wrap mode"), 0, 0,
 	 0, 0, NULL},
 	/* 15 */
 	{quick_radio, 5, OPT_DLG_W, OPT_DLG_H - 13, OPT_DLG_H, "", 2, 0, 0,
-	 key_emu_str, "keyemu"},
+	 const_cast(char **, key_emu_str), "keyemu"},
 	/* 16 */
 	{quick_label, 4, OPT_DLG_W, OPT_DLG_H - 14, OPT_DLG_H,
 	 N_("Key emulation"), 0, 0, 0, 0, NULL},

@@ -33,7 +33,7 @@ typedef struct WRadio {
     unsigned int state;		/* radio button state */
     int pos, sel;
     int count;			/* number of members */
-    char **texts;		/* texts of labels */
+    const char **texts;		/* texts of labels */
     int upper_letter_is_hotkey; /* If true, then the capital letter is a hk */
 } WRadio;
 

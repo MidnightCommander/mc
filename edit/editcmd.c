@@ -371,7 +371,7 @@ void menu_save_mode_cmd (void)
 #define DLG_Y 10
     static char *str_result;
     static int save_mode_new;
-    static char *str[] =
+    static const char *str[] =
     {
 	N_("Quick save "),
 	N_("Safe save "),
@@ -554,7 +554,7 @@ raw_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
    will return the next key pressed.  ctrl-a (=B_CANCEL), ctrl-g, ctrl-c,
    and Esc are cannot returned */
 int
-edit_raw_key_query (char *heading, char *query, int cancel)
+edit_raw_key_query (const char *heading, const char *query, int cancel)
 {
     int w = strlen (query) + 7;
     struct Dlg_head *raw_dlg =
@@ -1617,7 +1617,7 @@ edit_find (long search_start, unsigned char *exp, int *len, long last_byte, int 
 		*p1++ = *p++; \
 		*p1 = '\0'; \
 		n = snprintf(s,e-s,q1,v); \
-		if (n >= e - s) goto nospc; \
+		if (n >= (size_t) (e - s)) goto nospc; \
 		s += n; \
 	    }
 
@@ -1643,7 +1643,7 @@ static int snprintf_p (char *str, size_t size, const char *fmt,...)
 
     while ((p = strchr (p, '%'))) {
 	n = p - q;
-	if (n >= e - s)
+	if (n >= (size_t) (e - s))
 	  goto nospc;
 	memcpy (s, q, n);	/* copy stuff between format specifiers */
 	s += n;
@@ -1721,7 +1721,7 @@ static int snprintf_p (char *str, size_t size, const char *fmt,...)
     }
     va_end (ap);
     n = strlen (q);
-    if (n >= e - s)
+    if (n >= (size_t) (e - s))
 	return -1;
     memcpy (s, q, n + 1);
     return s + n - str;

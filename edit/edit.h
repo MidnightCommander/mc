@@ -130,7 +130,7 @@ void edit_init_menu_emacs (void);
 void edit_init_menu_normal (void);
 void edit_done_menu (void);
 void menu_save_mode_cmd (void);
-int edit_raw_key_query (char *heading, char *query, int cancel);
+int edit_raw_key_query (const char *heading, const char *query, int cancel);
 int edit (const char *_file, int line);
 int edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch);
 
@@ -234,7 +234,7 @@ void edit_paste_from_history (WEdit *edit);
 
 void edit_set_filename (WEdit *edit, const char *name);
 
-void edit_load_syntax (WEdit * edit, char **names, char *type);
+void edit_load_syntax (WEdit * edit, char **names, const char *type);
 void edit_free_syntax_rules (WEdit * edit);
 void edit_get_syntax_color (WEdit * edit, long byte_index, int *color);
 
@@ -318,7 +318,7 @@ extern int option_edit_left_extreme;
 extern int option_edit_top_extreme;
 extern int option_edit_bottom_extreme;
 
-extern char *option_whole_chars_search;
+extern const char *option_whole_chars_search;
 extern char *option_backup_ext;
 
 extern int edit_confirm_save;

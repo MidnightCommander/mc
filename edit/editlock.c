@@ -50,9 +50,10 @@ struct lock_s {
 
 /* Build user@host.domain.pid string (need to be freed) */
 static char *
-lock_build_name (char *fname)
+lock_build_name (const char *fname)
 {
-    char host[BUF_SIZE], *user;
+    char host[BUF_SIZE];
+    const char *user;
 
     if (!
 	((user = getpwuid (getuid ())->pw_name) || (user = getenv ("USER"))
@@ -68,10 +69,10 @@ lock_build_name (char *fname)
 
 /* Extract pid from user@host.domain.pid string */
 static struct lock_s *
-lock_extract_info (char *str)
+lock_extract_info (const char *str)
 {
     int i;
-    char *p, *s;
+    const char *p, *s;
     static char pid[PID_BUF_SIZE], who[BUF_SIZE];
     static struct lock_s lock;
 
@@ -99,7 +100,7 @@ lock_extract_info (char *str)
 
 /* Extract user@host.domain.pid from lock file (static string)  */
 static char *
-lock_get_info (char *lockfname)
+lock_get_info (const char *lockfname)
 {
     int cnt;
     static char buf[BUF_SIZE];
@@ -116,7 +117,7 @@ lock_get_info (char *lockfname)
    Returns 1 on success,  0 on failure, -1 if abort 
    Warning: Might do screen refresh and lose edit->force */
 int
-edit_lock_file (char *fname)
+edit_lock_file (const char *fname)
 {
     char *lockfname, *newlock, *msg, *lock;
     struct stat statbuf;
@@ -181,7 +182,7 @@ edit_lock_file (char *fname)
 /* Lowers file lock if possible 
    Always returns 0 to make 'lock = edit_unlock_file (f)' possible */
 int
-edit_unlock_file (char *fname)
+edit_unlock_file (const char *fname)
 {
     char *lockfname, *lock;
     struct stat statbuf;

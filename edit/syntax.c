@@ -1096,7 +1096,7 @@ static char *get_first_editor_line (WEdit * edit)
  * NULL, then the type will be selected according to the filename.
  */
 void
-edit_load_syntax (WEdit *edit, char **names, char *type)
+edit_load_syntax (WEdit *edit, char **names, const char *type)
 {
     int r;
     char *f;

@@ -35,20 +35,20 @@ typedef struct {
     int relative_y;
     int y_divisions;
 
-    char *text;			/* Text */
+    const char *text;		/* Text */
     int  hotkey_pos;		/* the hotkey position */
     int  value;			/* Buttons only: value of button */
     int  *result;		/* Checkbutton: where to store result */
     char **str_result;		/* Input lines: destination  */
-    char *histname;		/* Name of the section for saving history */
+    const char *histname;	/* Name of the section for saving history */
 } QuickWidget;
 #define NULL_QuickWidget { 0, 0, 0, 0, 0, NULL, 0, 0, NULL, NULL, NULL }
     
 typedef struct {
     int  xlen, ylen;
     int  xpos, ypos; /* if -1, then center the dialog */
-    char *title;
-    char *help;
+    const char *title;
+    const char *help;
     QuickWidget *widgets;
     int  i18n;			/* If true, internationalization has happened */
 } QuickDialog;

@@ -63,7 +63,7 @@ static struct Dlg_head *ch_dlg;
 
 static struct {
     int ret_cmd, flags, y, x;
-    char *text;
+    const char *text;
 } chown_advanced_but [BUTTONS] = {
     { B_CANCEL, NORMAL_BUTTON, 4, 53, N_("&Cancel") },
     { B_ENTER,  DEFPUSH_BUTTON,4, 40, N_("&Set") },
@@ -94,7 +94,7 @@ static char *fname;
 
 static void get_ownership (void)
 {				/* set buttons  - ownership */
-    char *name_t;
+    const char *name_t;
 
     name_t = name_trunc (get_owner (sf_stat->st_uid), 15);
     memset (b_user->text, ' ', 15);
