@@ -1,5 +1,7 @@
 2003-09-07  Pavel Roskin  <proski@gnu.org>
 
+	* listmode.c: Use groupboxes.
+
 	* layout.c (init_layout): Use groupboxes.
 
 	* widget.c: Implement new widget - groupbox.

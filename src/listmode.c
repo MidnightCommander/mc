@@ -53,8 +53,6 @@
 #define BX		5
 #define BY		18
 
-#define BUTTONS		6
-#define LABELS          4
 #define B_ADD		B_USER
 #define B_REMOVE        B_USER + 1
 
@@ -118,17 +116,6 @@ select_new_item (void)
 	return NULL;
 }
 
-static void
-listmode_refresh (Dlg_head *h)
-{
-    common_dialog_repaint (h);
-
-    attrset (COLOR_NORMAL);
-    draw_box (h, UY, UX, 4, 63);
-    draw_box (h, UY + 4, UX, 11, 18);
-    draw_box (h, UY + 4, UX + 20, 11, 43);
-}
-
 static int
 bplus_cback (int action)
 {
@@ -158,20 +145,6 @@ bremove_cback (int action)
     return 0;
 }
 
-static cb_ret_t
-listmode_callback (Dlg_head *h, dlg_msg_t msg, int parm)
-{
-    switch (msg) {
-
-    case DLG_DRAW:
-	listmode_refresh (h);
-	return MSG_HANDLED;
-
-    default:
-	return default_dlg_callback (h, msg, parm);
-    }
-}
-
 static Dlg_head *
 init_listmode (char *oldlistformat)
 {
@@ -181,14 +154,11 @@ init_listmode (char *oldlistformat)
     int format_columns = 0;
     Dlg_head *listmode_dlg;
 
-    static struct listmode_label listmode_labels[LABELS] = {
-	{UY, UX + 1, " General options "},
-	{UY + 4, UX + 1, " Items "},
-	{UY + 4, UX + 21, " Item options "},
+    static struct listmode_label listmode_labels[] = {
 	{UY + 13, UX + 22, "Item width:"}
     };
 
-    static struct listmode_button listmode_but[BUTTONS] = {
+    static struct listmode_button listmode_but[] = {
 	{B_CANCEL, NORMAL_BUTTON, BY, BX + 53, "&Cancel", NULL},
 	{B_ADD, NORMAL_BUTTON, BY, BX + 22, "&Add item", badd_cback},
 	{B_REMOVE, NORMAL_BUTTON, BY, BX + 10, "&Remove", bremove_cback},
@@ -200,10 +170,17 @@ init_listmode (char *oldlistformat)
     do_refresh ();
 
     listmode_dlg =
-	create_dlg (0, 0, 22, 74, dialog_colors, listmode_callback,
-		    listmode_section, "Listing format edit", DLG_CENTER);
+	create_dlg (0, 0, 22, 74, dialog_colors, NULL, listmode_section,
+		    "Listing format edit", DLG_CENTER);
 
-    for (i = 0; i < BUTTONS; i++)
+    add_widget (listmode_dlg,
+		groupbox_new (UX, UY, 63, 4, "General options"));
+    add_widget (listmode_dlg, groupbox_new (UX, UY + 4, 18, 11, "Items"));
+    add_widget (listmode_dlg,
+		groupbox_new (UX + 20, UY + 4, 43, 11, "Item options"));
+
+    for (i = 0;
+	 i < sizeof (listmode_but) / sizeof (struct listmode_button); i++)
 	add_widget (listmode_dlg,
 		    button_new (listmode_but[i].y, listmode_but[i].x,
 				listmode_but[i].ret_cmd,
@@ -212,7 +189,9 @@ init_listmode (char *oldlistformat)
 				listmode_but[i].callback));
 
     /* We add the labels. */
-    for (i = 0; i < LABELS; i++) {
+    for (i = 0;
+	 i < sizeof (listmode_labels) / sizeof (struct listmode_label);
+	 i++) {
 	pname =
 	    label_new (listmode_labels[i].y, listmode_labels[i].x,
 		       listmode_labels[i].text);
