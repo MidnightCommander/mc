@@ -151,6 +151,7 @@ int SLsig_unblock_signals (void)
 #endif
 }
 
+#if 0
 #ifdef MSWINDOWS
 int SLsystem (char *cmd)
 {
@@ -288,7 +289,6 @@ int SLsystem (char *cmd)
 }
 #endif
 
-#if 0
 #include <windows.h>
 static int msw_system (char *cmd)
 {

@@ -1,3 +1,8 @@
+2003-09-26  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* sldisply.c (RGB_to_BGR): Make const.
+	* slsignal.c (SLsystem): Commented out.
+
 2003-09-11  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* slerr.c (SLang_doerror): Fix possible off-by-one error.

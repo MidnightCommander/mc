@@ -164,7 +164,7 @@ static Ansi_Color_Type Ansi_Color_Map[JMAX_COLORS] =
 static int Is_Fg_BGR = 0;
 static int Is_Bg_BGR = 0;
 #define COLOR_ARG(color, is_bgr) (is_bgr ? RGB_to_BGR[color] : color)
-static int RGB_to_BGR[] =
+static int const RGB_to_BGR[] =
 {
      0, 4, 2, 6, 1, 5, 3, 7
 };
