@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.51\n"
-"POT-Creation-Date: 2000-12-11 15:27+0100\n"
-"PO-Revision-Date: 2000-12-11 15:27+01:00\n"
+"POT-Creation-Date: 2001-01-11 12:11+0100\n"
+"PO-Revision-Date: 2001-01-11 12:11+01:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -501,6 +501,10 @@ msgstr "Skrivebord"
 #: gnome/gdesktop-init.c:146
 msgid "Home directory"
 msgstr "Hjemmekatalog"
+
+#: gnome/gdesktop-init.c:158
+msgid "Trash"
+msgstr "Søppelkurv"
 
 #: gnome/gdialogs.c:60
 msgid "To: "
@@ -1812,6 +1816,10 @@ msgstr "Brukermenyen er kun tilgjengelig i mcedit hvis startet fra mc"
 #: gtkedit/edit.c:2792 gtkedit/editcmd.c:2940
 msgid "Error trying to stat file:"
 msgstr "Feil under kjøring av stat på fil:"
+
+#: gtkedit/editcmd.c:168 src/cmd.c:1206 src/tree.c:654 src/view.c:1821
+msgid "mc.hlp"
+msgstr "mc.hlp"
 
 #: gtkedit/editcmd.c:305
 msgid " Error writing to pipe: "
@@ -6107,12 +6115,12 @@ msgid "name_trunc: too big"
 msgstr "name_trunc: for stor"
 
 #. strftime() format string for recent dates
-#: src/util.c:599 src/util.c:624
+#: src/util.c:600 src/util.c:625
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
 #. strftime() format string for old dates
-#: src/util.c:600 src/util.c:622
+#: src/util.c:601 src/util.c:623
 msgid "%b %e  %Y"
 msgstr "%b %e %Y"
 
