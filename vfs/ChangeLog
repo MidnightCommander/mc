@@ -1,5 +1,7 @@
 2000-09-14  Pavel Roskin  <proski@gnu.org>
 
+	* Make-mc.in: direntry.c was listed twice in VFSSRCS
+
 	* Make-mc.in: removed commands to build standalone libvfs -
 	they are now in Makefile.am. Create links in the build
 	directory - source directory may be read-only. Removed hack

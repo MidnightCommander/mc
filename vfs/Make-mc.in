@@ -176,7 +176,6 @@ VFSSRCS = \
 	extfs.c 		\
 	ftpfs.c 		\
 	fish.c 			\
-	direntry.c		\
 	local.c 		\
 	local.h			\
 	mcfs.c			\
