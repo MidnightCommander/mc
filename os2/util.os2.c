@@ -48,6 +48,10 @@
 #include <fs.h>
 #include <util.h>
 
+#ifdef __BORLANDC__
+#define ENOTEMPTY ERROR_DIR_NOT_EMPTY
+#endif
+
 char *
 get_owner (int uid)
 {
@@ -108,6 +112,7 @@ check_error_pipe (void)
 static int 
 StartWindowsProg (char *name, SHORT type)
 {
+#if 0 /* FIXME: PM DDL's should be loaded (or not loaded) at run time */
    PROGDETAILS  pDetails;
 
    memset(&pDetails, 0, sizeof(PROGDETAILS)) ;
@@ -140,6 +145,7 @@ StartWindowsProg (char *name, SHORT type)
                NULL, 
                NULL, 
                SAF_INSTALLEDCMDLINE|SAF_STARTCHILDAPP) ;
+#endif
    return 0;
 }
 
@@ -669,7 +675,7 @@ vfs_file_is_ftp (char *filename)
 }
 
 int
-mc_utime (char *path, struct utimbuf *times)
+mc_utime (char *path, void *times)
 {
 	return 0;
 }

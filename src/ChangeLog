@@ -1,3 +1,17 @@
+Mon Mar 23 08:17:55 1998 Pavel Roskin <pavel@absolute.spb.su>
+
+	* src/main.c: mcedit can be named mce or mcedit.exe - only
+	3 first letters are significant. The same for mcview.
+	Console is always saved in do_execute() if it was saved there.
+	
+	* src/util.h: STRNOMP introduced (strncmp on unix and strnicmp
+	on OS2_NT)
+	
+	* slang/slgetkey.c: SLang_getkey() and SLang_input_pending()
+	enabled for OS2_NT
+	
+	* myslang.h: using fast one_vline() and one_hline() for OS2_NT
+	
 1998-03-19  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* screen.c: Remove KEY_DC forever.  This should have never been

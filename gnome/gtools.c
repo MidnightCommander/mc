@@ -3,6 +3,7 @@
  *
  * Written by Miguel de Icaza
  */
+#include <config.h>
 #include "util.h"
 #include <gnome.h>
 #include <gdk/gdkkeysyms.h>

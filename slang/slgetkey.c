@@ -26,7 +26,7 @@ int SLang_Ignore_User_Abort = 0;
 # endif
 #endif
 
-#if 0 /* see the replacement in src/slint.c */
+#ifdef OS2_NT /* see the replacement in src/slint.c */
 unsigned int SLang_getkey (void)
 {
    unsigned int imax;
@@ -58,7 +58,7 @@ unsigned int SLang_getkey (void)
 #endif
    return(ch);
 }
-#endif /* 0 */
+#endif /* OS2_NT */
 
 void SLang_ungetkey_string (unsigned char *s, unsigned int n)
 {
@@ -89,7 +89,7 @@ void SLang_ungetkey (unsigned char ch)
    SLang_ungetkey_string(&ch, 1);
 }
 
-#if 0 /* see the replacement in src/slint.c */
+#ifdef OS2_NT /* see the replacement in src/slint.c */
 int SLang_input_pending (int tsecs)
 {
    int n;
@@ -105,7 +105,7 @@ int SLang_input_pending (int tsecs)
    
    return n;
 }
-#endif /* 0 */
+#endif /* OS2_NT */
 
 void SLang_flush_input (void)
 {

@@ -44,15 +44,6 @@ int double_click_speed;		/* they are here to keep linker happy */
 int mou_auto_repeat;
 int use_8th_bit_as_meta = 0;
 
-/*  Prototypes */
-static int EscapeKey (char* seq);
-static int ControlKey (char* seq);
-static int AltKey (char *seq);
-
-static int VKtoCurses (int vkcode);
-static int correct_key_code (int c);
-
-
 /* Static Tables */
 struct {
     int key_code;
@@ -81,13 +72,6 @@ struct {
     { KEY_IC,    VK_INSERT },		
     { KEY_DC,    VK_DELETE },
     { KEY_BACKSPACE, VK_BACK },
-    { '\t',      VK_TAB },
-//    { KEY_ENTER, VK_RETURN },
-//    { KEY_ENTER, VK_EXECUTE },
-    { '\n', VK_RETURN },
-    { '\n', VK_EXECUTE },
-    { ' ',    	 VK_SPACE },
-//    { KEY_PRINT, VK_SNAPSHOT },
 
     { KEY_PPAGE, VK_PRIOR },		// Movement keys
     { KEY_NPAGE, VK_NEXT },
@@ -98,71 +82,77 @@ struct {
     { KEY_HOME,  VK_HOME },
     { KEY_END,	 VK_END },
 
-    { KEY_KP_MULTIPLY,  VK_MULTIPLY },		// Numeric pad
-    { KEY_KP_ADD,  VK_ADD },
-    { KEY_KP_SUBTRACT,  VK_SUBTRACT },
+    { ALT('*'),  VK_MULTIPLY },		// Numeric pad
+    { ALT('+'),  VK_ADD },
+    { ALT('-'),  VK_SUBTRACT },
 
-/* Control key codes */
-    { 0, VK_CONTROL },			/* Control */
-    { 0, VK_MENU },			/* Alt     */
-//    { 0, VK_ESCAPE },			/* ESC	   */
-    { ESC_CHAR, VK_ESCAPE },			/* ESC	   */
+    { ESC_CHAR, VK_ESCAPE },		/* ESC	   */
 
-/* Key codes to ignore */
-    { -1, VK_SHIFT },			/* Shift when released generates a key event */
-    { -1, VK_CAPITAL },			/* Caps-lock */
-
-#if WINVER >= 0x400			/* new Chicago key codes (not in 3.x headers) */
-    { -1, VK_APPS },			/* "Application key" */
-    { -1, VK_LWIN },			/* Left "Windows" key */
-    { -1, VK_RWIN },			/* Right "Windows" key */
-#endif
     { 0, 0}
 };		
-
-/* Special handlers for control key codes 
-	Note that howmany must be less than seq_buffer len
-*/
-struct {
-    int vkcode;
-    int (*func_hdlr)(char *);	
-    int howmany;
-} key_control_table[] = {
-    { VK_ESCAPE, EscapeKey, 1 },
-    { VK_CONTROL, ControlKey, 1 },
-    { VK_MENU, AltKey, 1 },
-    { 0, NULL, 0},
-};
 
 /*  init_key  - Called in main.c to initialize ourselves
 		Get handle to console input
 */
 void init_key (void)
 {
-    win32APICALL_HANDLE (hConsoleInput, /* = */ GetStdHandle (STD_INPUT_HANDLE));
+    win32APICALL_HANDLE (hConsoleInput, GetStdHandle (STD_INPUT_HANDLE));
 }
 
-/* The maximum sequence length (32 + null terminator) */
-static int seq_buffer[33];
-static int *seq_append = 0;
-
-static int push_char (int c)
+int ctrl_pressed ()
 {
-    if (!seq_append)
-	seq_append = seq_buffer;
-    
-    if (seq_append == &(seq_buffer [sizeof (seq_buffer)-2]))
+    return dwSaved_ControlState & (RIGHT_CTRL_PRESSED | LEFT_CTRL_PRESSED);
+}
+
+int shift_pressed ()
+{
+    return dwSaved_ControlState & SHIFT_PRESSED;
+}
+
+int alt_pressed ()
+{
+    return dwSaved_ControlState & (RIGHT_ALT_PRESSED | LEFT_ALT_PRESSED);
+}
+
+static int VKtoCurses (int a_vkc)
+{
+    int i;
+
+    for (i = 0; key_table[i].vkcode != 0; i++) 
+	if (a_vkc == key_table[i].vkcode) {
+	    return key_table[i].key_code;
+	}
+    return 0;
+}
+
+static int translate_key_code(int asc, int scan)
+{
+    int c;
+    c = VKtoCurses (scan);
+    if (!asc && !c)
 	return 0;
-    *(seq_append++) = c;
-    *seq_append = 0;
-    return 1;
+    if (asc && c)
+	return c;
+    if (!asc)
+    {
+	if (shift_pressed() && (c >= KEY_F(1)) && (c <= KEY_F(10)))
+	    c += 10;
+	if (alt_pressed() && (c >= KEY_F(1)) && (c <= KEY_F(2)))
+	    c += 10;
+	if (alt_pressed() && (c == KEY_F(7)))
+	    c = ALT('?');
+	if (ctrl_pressed() && c == '\t')
+	    c = ALT('\t');
+	return c;
+    }
+    if (ctrl_pressed())
+	return XCTRL(asc);
+    if (alt_pressed())
+	return ALT(asc);
+    if (asc == 13)
+	return 10;
+    return asc;
 }
-
-void define_sequence (int code, char* vkcode, int action)
-{
-}
-
-static int *pending_keys;
 
 int get_key_code (int no_delay)
 {
@@ -178,18 +168,6 @@ int get_key_code (int no_delay)
 	    return 0;
     }
  
-
-pend_send:
-    if (pending_keys) {
-	int d = *pending_keys++;
-	if (!*pending_keys){
-	    pending_keys = 0;
-	    seq_append = 0;
-	}
-	return d;
-    }
-
-
     do {
 	win32APICALL(ReadConsoleInput(hConsoleInput, &ir, 1, &dw));
 	switch (ir.EventType) {
@@ -200,9 +178,10 @@ pend_send:
 		vkcode = ir.Event.KeyEvent.wVirtualKeyCode;
 		ch = ir.Event.KeyEvent.uChar.AsciiChar;
 		dwSaved_ControlState = ir.Event.KeyEvent.dwControlKeyState;
-
-		j = VKtoCurses(vkcode);
-		return j ? j : ch;
+		j = translate_key_code (ch, vkcode);
+		if (j)
+		    return j;
+		break;
 
 	case MOUSE_EVENT:
 		// Save event as a GPM-like event
@@ -226,58 +205,6 @@ pend_send:
     return 0;
 }
 
-static int VKtoCurses (int a_vkc)
-{
-    int i;
-
-    // Replace key code with that in table
-    for (i=0;  key_table[i].vkcode != 0 || key_table[i].key_code != 0; i++) 
-	if (a_vkc == key_table[i].vkcode) {
-		if (key_table[i].key_code)
-			return correct_key_code (key_table[i].key_code);
-	}
-	return 0;
-}
-
-static int correct_key_code (int c)
-{
-    /* Check Control State */
-    if (ctrl_pressed())
-	if (c == '\t')
-	/* Make Ctrl-Tab same as reserved Alt-Tab */
-	    c = ALT('\t');
-	else
-	    c = XCTRL(c);
-
-    if (alt_pressed())
-	c = ALT(c);
-
-    if (shift_pressed() && (c >= KEY_F(1)) && (c <= KEY_F(10)))
-		c += 10;
-    if (alt_pressed() && (c >= KEY_F(1)) && (c <= KEY_F(2)))
-		c += 10;
-    if (alt_pressed() && (c == KEY_F(7)))
-		c = ALT('?');
-    switch (c) {
-        case KEY_KP_ADD: 
-        	c = alternate_plus_minus ? ALT('+') : '+'; 
-        	break;
-        case KEY_KP_SUBTRACT: 
-        	c = alternate_plus_minus ? ALT('-') : '-'; 
-        	break;
-        case KEY_KP_MULTIPLY: 
-        	c = alternate_plus_minus ? ALT('*') : '*'; 
-        	break;
-	case -1:
-		c = 0;
-		break;
-	default:
-		break;
-    }
-
-    return c;
-}
-
 static int getch_with_delay (void)
 {
     int c;
@@ -291,9 +218,6 @@ static int getch_with_delay (void)
     /* Success -> return the character */
     return c;
 }
-
-
-extern int max_dirt_limit;
 
 /* Returns a character read from stdin with appropriate interpretation */
 int get_event (Gpm_Event *event, int redo_event, int block)
@@ -311,25 +235,11 @@ int get_event (Gpm_Event *event, int redo_event, int block)
 
     vfs_timeout_handler ();
     
-    /* Repeat if using mouse */
-#ifdef HAVE_SLANG
-    while ((xmouse_flag) && !pending_keys)
-    {
-//	SLms_GetEvent (event);
-	*event = evSaved_Event;
-    }
-#endif
-
-
     c = block ? getch_with_delay () : get_key_code (1);
-    if (!c) { 				/* Code is 0, so this is a Control key or mouse event */
-#ifdef HAVE_SLANG
-//	SLms_GetEvent (event);
-	*event = evSaved_Event;
-#else
-	ms_GetEvent (event);	/* my curses */
-#endif
-        return EV_NONE; /* FIXME: when should we return EV_MOUSE ? */
+
+    if (!c) {
+        /* Code is 0, so this is a Control key or mouse event */
+        return EV_NONE; /* FIXME: mouse not supported */
     }
 
     return c;
@@ -344,44 +254,6 @@ int mi_getch ()
     while ((key = get_event (&ev, 0, 1)) == 0)
 	;
     return key;
-}
-
-/* 
-  Special handling of ESC key when old_esc_mode:
-	ESC+ a-z,\n\t\v\r! = ALT(c)
-	ESC + ' '|ESC = ESC
-	ESC+0-9 = F(c-'0')
-*/
-static int EscapeKey (char* seq)
-{
-    int c = *seq;
-
-    if (old_esc_mode) {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
-	  || (c == '\n') || (c == '\t') || (c == XCTRL('h'))
-	  || (c == KEY_BACKSPACE) || (c == '!') || (c == '\r')
-	  || c == 127 || c == '+' || c == '-' || c == '\\' 
-	  || c == '?')
-	    c = ALT(c);
-	else if (isdigit(c))
-	    c = KEY_F (c-'0');
-	else if (c == ' ')
- 	    c = ESC_CHAR;
-	return c;
-    }
-    else
-    	return 0;	/* i.e. return esc then c */
-}
-
-/* Control and Alt
- */
-static int ControlKey (char* seq)
-{
-    return XCTRL(*seq);
-}
-static int AltKey (char *seq)
-{
-    return ALT(*seq);
 }
 
 /* 
@@ -418,23 +290,8 @@ int get_modifier()
     return retval;
 }
 
-int ctrl_pressed ()
-{
-    return dwSaved_ControlState & (RIGHT_CTRL_PRESSED | LEFT_CTRL_PRESSED);
-}
-
-int shift_pressed ()
-{
-    return dwSaved_ControlState & SHIFT_PRESSED;
-}
-
-int alt_pressed ()
-{
-    return dwSaved_ControlState & (RIGHT_ALT_PRESSED | LEFT_ALT_PRESSED);
-}
-
-/* void functions for UNIX copatibility */
-void try_channels (int set_timeout)
+/* void functions for UNIX compatibility */
+void define_sequence (int code, char* vkcode, int action)
 {
 }
 void channels_up()
@@ -443,11 +300,11 @@ void channels_up()
 void channels_down()
 {
 }
-void learn_keys()
-{
-	message (1, "Learn Keys", "Sorry, no learn keys on Win32");
-}
 void init_key_input_fd (void)
 {
 }
+/* mouse is not yet supported, sorry */
+void init_mouse (void) {}
+void shut_mouse (void) {}
+
 #endif /* _OS_NT */

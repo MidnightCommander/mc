@@ -8,7 +8,7 @@
 
 include ../Make.common
 
-FILES = Makefile Makefile.EMX Makefile.OS2 chmod.os2.c config.h \
+FILES = Makefile Makefile.EMX Makefile.BC2 Makefile.OS2 chmod.os2.c config.h \
 	cons.handler.os2.c cons.saver.h direct.h dirent.h dirent.os2.c \
 	drive.h drive.os2.c inst.cmd key.os2.c mc.def mc.ico slint.os2.c \
 	util.os2.c

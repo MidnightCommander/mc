@@ -749,16 +749,6 @@ do_execute (const char *shell, const char *command, int internal_command)
 
 #ifndef HAVE_GNOME
     if (!internal_command){
-	/* .ado: ask Juan why CONSOLE_SAVE not work here */
-#ifndef _OS_NT
-	if (console_flag){
-	    if (output_lines && keybar_visible)
-		putchar('\n');
-		fflush(stdout);
-	    handle_console (CONSOLE_SAVE);
-	}
-#endif
-
 	if ((pause_after_run == pause_always ||
 	    (pause_after_run == pause_on_dumb_terminals &&
 	     !xterm_flag && !console_flag)) && !quit){
@@ -768,16 +758,17 @@ do_execute (const char *shell, const char *command, int internal_command)
 	    mc_raw_mode ();
 	    xgetch ();
 	}
-#ifdef _OS_NT
 	if (console_flag){
-	    if (output_lines && keybar_visible)
+	    if (output_lines && keybar_visible) {
 		putchar('\n');
-	    handle_console (CONSOLE_SAVE);
+		fflush(stdout);
+	    }
 	}
-#endif
     }
 #endif
 
+    if (console_flag)
+	handle_console (CONSOLE_SAVE);
     edition_post_exec ();
 
 #ifdef HAVE_SUBSHELL_SUPPORT
@@ -2665,13 +2656,14 @@ static void handle_args (int argc, char *argv [])
      * directory from the command line arguments
      */
     tmp = poptGetArg (optCon);
-    if (strstr (argv[0], "mcedit") == argv[0] + strlen(argv[0]) - 6) {
+    if (!STRNCOMP (argv [0], "mce", 3)) {
 	edit_one_file = "";
         if (tmp)
 	    edit_one_file = strdup (tmp);
-    } else if (strstr (argv [0], "mcview") == argv [0] + strlen (argv [0]) - 6) {
-	if (tmp)
-	    view_one_file = strdup (tmp);
+    } else
+	if (!STRNCOMP (argv [0], "mcv", 3)) {
+	    if (tmp)
+		view_one_file = strdup (tmp);
     } else {
        	/* sets the current dir and the other dir */
 	if (tmp) {

@@ -56,10 +56,11 @@
 // ---------------------------------------------------------------------------
 // Headers
 #define STDC_HEADERS
+#define HAVE_STDLIB_H
 #define HAVE_STRING_H
 #define HAVE_DIRENT_H
 #define HAVE_LIMITS_H
-
+#define HAVE_FCNTL_H
 #define NO_UNISTD_H
 
 // ---------------------------------------------------------------------------
@@ -72,13 +73,11 @@
 #define HAVE_STRDUP
 #define HAVE_STRERROR
 #define HAVE_TRUNCATE
+
 #define REGEX_MALLOC
 
 #define NO_TERM
 #define NO_INFOMOUNT
-#ifndef __EMX__
-#define HAVE_SHORT_MKDIR
-#endif
 
 // ---------------------------------------------------------------------------
 // Windowing library
@@ -92,33 +91,28 @@
 
 // ---------------------------------------------------------------------------
 // Typedefs (some useless under NT)
-typedef unsigned int umode_t;
 #ifndef __EMX__
 typedef int gid_t;                 // Not defined in <sys/types.h>
 typedef int uid_t;
-typedef int mode_t;
 typedef int pid_t;
+#endif
+typedef unsigned int umode_t;
+
+#ifndef __BORLANDC__
+typedef int mode_t;
 typedef unsigned int nlink_t;
+#endif
 
 #define INLINE
 #define inline
-#define ENOTDIR -1
-#endif /* not __EMX__ */
 
 // ---------------------------------------------------------------------------
 // File attributes
-#define S_ISBLK(m)      0               /* Some of these are not actual values*/
-#define S_ISLNK(x)      0
-#ifndef __EMX__
+#define S_ISLNK(x) 0
 
-#define S_ISFIFO(x)     0
-#define S_IFBLK         0010000                         /* but don't worry, these are yet not possible on NT */
+#ifndef __WATCOMC__                     // Already defined in Watcom C headers
+
 #define S_IFLNK         0010000
-
-#define S_IRWXU         0000700
-#define S_IRUSR         0000400
-#define S_IWUSR         0000200
-#define S_IXUSR         0000100
 
 #define S_IRWXG         0000070
 #define S_IRGRP         0000040
@@ -134,24 +128,40 @@ typedef unsigned int nlink_t;
 #define S_ISGID         0002000
 #define S_ISVTX         0001000
 
-#define S_IFMT          0xFF00
+#ifndef __BORLANDC__
 
-#ifndef FILE_DIRECTORY
-#   define FILE_DIRECTORY  0x0010
-#endif
+#define S_ISBLK( m )    0               /* Some of these are not actual values*/
+#define S_IFBLK         0010000                         /* but don't worry, these are yet not possible on NT */
 
-#define S_ISCHR(m)    (((m) & S_IFMT) == S_IFCHR)
-#define S_ISDIR(m)    ( (m & 0xF000) ? m & S_IFDIR : m & FILE_DIRECTORY)
-/* .ado: 0x8000 is regular file. 0x4xxx is DIR */
-#define S_ISREG(m)    (((m) & 0x8000) == S_IFREG)
-/* #define S_ISFIFO(m)   (((m) & S_IFMT) == S_IFIFO) */
+#define S_IRWXU         0000700
+#define S_IRUSR         0000400
+#define S_IWUSR         0000200
+#define S_IXUSR         0000100
+
+#define S_IFIFO         _S_IFIFO         /* pipe */
+
+#define S_ISCHR( m )    (((m) & S_IFMT) == S_IFCHR)
+#define S_ISDIR( m )    (((m) & S_IFMT) == S_IFDIR)
+#define S_ISREG( m )    (((m) & S_IFMT) == S_IFREG)
+#define S_ISFIFO( m )   (((m) & S_IFMT) == S_IFIFO)
+
+/* Missing mask definition */
+#define O_ACCMODE	  0003
+
+#endif /* not __BORLANDC__ */
 
 /* Symbolic constants for the access() function */
 #define R_OK    4       /*  Test for read permission    */
 #define W_OK    2       /*  Test for write permission   */
 #define X_OK    1       /*  Test for execute permission */
 #define F_OK    0       /*  Test for existence of file  */
-#endif /* __EMX__ */
+
+
+/* Missing Errno definitions */
+#define	ELOOP		40	/* Too many symbolic links encountered */
+
+#endif  /* not __WATCOMC__ */
+
 
 // ---------------------------------------------------------------------------
 // Inline definitions
@@ -167,4 +177,4 @@ typedef unsigned int nlink_t;
 #  define MAX_PATH          260
 #endif
 
-#endif  /* Config.h */
+#endif //__CONFIG_H

@@ -30,48 +30,6 @@
 
 #ifdef HAVE_SLANG
 
-/* {{{  Copied from ../slang/slgetkey.c, removed the DEC_8Bit_HACK, */
-extern unsigned int SLang_Input_Buffer_Len;
-extern unsigned char SLang_Input_Buffer [];
-extern unsigned int SLsys_getkey (void);
-extern int SLsys_input_pending (int);
-
-static unsigned int SLang_getkey2 (void)
-{
-   unsigned int imax;
-   unsigned int ch;
-   
-   if (SLang_Input_Buffer_Len)
-     {
-	ch = (unsigned int) *SLang_Input_Buffer;
-	SLang_Input_Buffer_Len--;
-	imax = SLang_Input_Buffer_Len;
-   
-	memcpy ((char *) SLang_Input_Buffer, 
-		(char *) (SLang_Input_Buffer + 1), imax);
-	return(ch);
-     }
-   else return(SLsys_getkey ());
-}
-
-static int SLang_input_pending2 (int tsecs)
-{
-   int n;
-   unsigned char c;
-   if (SLang_Input_Buffer_Len) return (int) SLang_Input_Buffer_Len;
-   
-   n = SLsys_input_pending (tsecs);
-   
-   if (n <= 0) return 0;
-   
-   c = (unsigned char) SLang_getkey2 ();
-   SLang_ungetkey_string (&c, 1);
-   
-   return n;
-}
-/* }}} */
-
-//??
 static void slang_sigterm ()
 {
     SLsmg_reset_smg ();
@@ -233,10 +191,10 @@ void load_terminfo_keys ()
 int getch ()
 {
     if (no_slang_delay)
-	if (SLang_input_pending2 (0) == 0)
+	if (SLang_input_pending (0) == 0)
 	    return -1;
 
-    return SLang_getkey2 ();
+    return SLang_getkey ();
 }
 
 extern int slow_terminal;

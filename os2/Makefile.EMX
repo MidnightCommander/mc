@@ -10,10 +10,6 @@
 
 MC_LIBS=
 
-# ---- Path (case-sensitive!) is searched for executables
-#      If the command line contains quotes, it is passed to shell
-#      Errors are ignored in this case!
-Path=d:/emx/bin
 CC=gcc.exe
 #      Just comment RSC out if you have problems with resources
 # RSC=rc.exe

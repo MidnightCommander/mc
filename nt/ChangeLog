@@ -1,3 +1,7 @@
+Mon Mar 23 08:16:12 1998  Pavel Roskin <pavel@absolute.spb.su>
+
+	* nt/key.nt.c: cleanup, more keys work (not all)
+
 Sat Mar  7 14:43:27 1998  Pavel Roskin <pavel@absolute.spb.su>
 
         * nt/Makefile.NT, nt/Makefile.VC4: rewritten for GNU make.

@@ -126,9 +126,9 @@ void init_pair (int, char *, char *);
 
 #define SLsmg_draw_double_box(r,c,dr,dc) SLsmg_draw_box ((r), (c), (dr), (dc))
 
-#if 0
-#   define one_vline() {acs (); addch (ACS_VLINE); noacs ();}
-#   define one_hline() {acs (); addch (ACS_HLINE); noacs ();}
+#ifdef OS2_NT
+#   define one_vline() addch(ACS_VLINE)
+#   define one_hline() addch(ACS_HLINE)
     /* This is fast, but unusefull if ! pc_system - doesn't use
        Alt_Char_Pairs [] :( */
 #else

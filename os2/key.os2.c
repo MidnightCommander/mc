@@ -40,8 +40,6 @@
 #include "../vfs/vfs.h"
 #include "tty.h"
 
-KBDINFO	initialKbdInfo;	/* keyboard info */
-
 /* Code to read keystrokes in a separate thread */
 
 typedef struct kbdcodes {
@@ -240,7 +238,7 @@ int get_key_code (int no_delay)
     if (no_delay) {
         /* Check if any input pending, otherwise return */
 	nodelay (stdscr, TRUE);
-        inp_ch = SLsys_input_pending();
+        inp_ch = SLang_input_pending(0);
         if (inp_ch == 0) {
            return 0;
         } /* endif */
@@ -264,7 +262,9 @@ int get_key_code (int no_delay)
     } /* endif */
 
     do {
-       inp_ch = SLsys_getkey();
+       inp_ch = SLang_getkey();
+       if (!inp_ch)
+	  inp_ch = (SLang_getkey() << 8);
        if (inp_ch) return (VKtoCurses(inp_ch));
     } while (!no_delay);
     return 0;
@@ -315,7 +315,7 @@ static int VKtoCurses (int a_vkc)
    } /* endif */
 
    // Scan Movement codes
-   if (asciiCode == 0xE0) {
+   if (asciiCode == 0) {
       // Replace key code with that in table
       for (i=0;  movement[i].vkcode != 0 || movement[i].key_code != 0; i++) 
 	if (scanCode == movement[i].vkcode) 
@@ -328,7 +328,7 @@ static int VKtoCurses (int a_vkc)
 	if (scanCode == fkt_table[i].vkcode) 
   	     return (fkt_table[i].key_code);
       // ALT - KEY
-      if (altState) {
+      /* if (altState) */ {
          for (i=0;  ALT_table[i].vkcode != 0 || ALT_table[i].key_code != 0; i++) 
                 if (scanCode == ALT_table[i].vkcode) 
                  	     return (ALT_table[i].key_code);
@@ -357,20 +357,18 @@ static int getch_with_delay (void)
     return c;
 }
 
-
-extern int max_dirt_limit;
-
-/* Returns a character read from stdin with appropriate interpretation */
-/* Also takes care of generated mouse events */
-/* Returns 0 if it is a mouse event */
-/* The current behavior is to block allways */
 int get_event (Gpm_Event *event, int redo_event, int block)
 {
     int c;
+    static int flag;			/* Return value from select */
+    static int dirty = 3;
 
-    /* .ado: For OS/2, for each event a refresh is required */
-    mc_refresh ();
-    doupdate ();
+    if ((dirty == 1) || is_idle ()){
+	refresh ();
+	doupdate ();
+	dirty = 1;
+    } else
+	dirty++;
 
     vfs_timeout_handler ();
     
@@ -384,7 +382,7 @@ int get_event (Gpm_Event *event, int redo_event, int block)
 #endif
 
 
-    c = getch_with_delay ();
+    c = block ? getch_with_delay () : get_key_code (1);
     if (!c) { 				/* Code is 0, so this is a Control key or mouse event */
 #ifdef HAVE_SLANG
 //	SLms_GetEvent (event);
@@ -392,6 +390,7 @@ int get_event (Gpm_Event *event, int redo_event, int block)
 #else
 	ms_GetEvent (event);	/* my curses */
 #endif
+        return EV_NONE; /* FIXME: when should we return EV_MOUSE ? */
     }
 
     return c;
@@ -441,11 +440,11 @@ void channels_up()
 void channels_down()
 {
 }
-void learn_keys()
-{
-	message (1, "Learn Keys", "Sorry, no learn keys on OS/2");
-}
 void init_key_input_fd (void)
 {
 }
+/* mouse is not yet supported, sorry */
+void init_mouse (void) {}
+void shut_mouse (void) {}
+
 #endif /* __os2__ */
