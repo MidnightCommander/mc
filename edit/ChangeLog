@@ -1,5 +1,7 @@
 2001-09-07  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.am: Don't define "MIDNIGHT" - it's unused now.
+
 	* edit.c: Eliminate all code disabled for the text edition.
 	* editcmddef.h: Likewise.
 	* editmenu.c: Likewise.

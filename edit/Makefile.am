@@ -1,5 +1,4 @@
 AM_CFLAGS = $(GLIB_CFLAGS)
-AM_CPPFLAGS = -DMIDNIGHT
 
 if USE_EDIT
 noinst_LIBRARIES = libedit.a
