@@ -1573,92 +1573,99 @@ int vfs_parse_filemode (const char *p)
     return res;
 }
 
-int vfs_parse_filedate(int idx, time_t *t)
-{	/* This thing parses from idx in columns[] array */
-
+/* This function parses from idx in the columns[] array */
+int
+vfs_parse_filedate (int idx, time_t *t)
+{
     char *p;
     struct tm tim;
     int d[3];
-    int	got_year = 0;
+    int got_year = 0;
 
     /* Let's setup default time values */
     tim.tm_year = current_year;
-    tim.tm_mon  = current_mon;
+    tim.tm_mon = current_mon;
     tim.tm_mday = current_mday;
     tim.tm_hour = 0;
-    tim.tm_min  = 0;
-    tim.tm_sec  = 0;
-    tim.tm_isdst = -1; /* Let mktime() try to guess correct dst offset */
-    
-    p = columns [idx++];
-    
+    tim.tm_min = 0;
+    tim.tm_sec = 0;
+    tim.tm_isdst = -1;		/* Let mktime() try to guess correct dst offset */
+
+    p = columns[idx++];
+
     /* We eat weekday name in case of extfs */
-    if(is_week(p, &tim))
-	p = columns [idx++];
+    if (is_week (p, &tim))
+	p = columns[idx++];
 
     /* Month name */
-    if(is_month(p, &tim)){
+    if (is_month (p, &tim)) {
 	/* And we expect, it followed by day number */
 	if (is_num (idx))
-    	    tim.tm_mday = (int)atol (columns [idx++]);
+	    tim.tm_mday = (int) atol (columns[idx++]);
 	else
-	    return 0; /* No day */
+	    return 0;		/* No day */
 
     } else {
-        /* We usually expect:
-           Mon DD hh:mm
-           Mon DD  YYYY
+	/* We usually expect:
+	   Mon DD hh:mm
+	   Mon DD  YYYY
 	   But in case of extfs we allow these date formats:
-           Mon DD YYYY hh:mm
+	   Mon DD YYYY hh:mm
 	   Mon DD hh:mm YYYY
 	   Wek Mon DD hh:mm:ss YYYY
-           MM-DD-YY hh:mm
-           where Mon is Jan-Dec, DD, MM, YY two digit day, month, year,
-           YYYY four digit year, hh, mm, ss two digit hour, minute or second. */
+	   MM-DD-YY hh:mm
+	   where Mon is Jan-Dec, DD, MM, YY two digit day, month, year,
+	   YYYY four digit year, hh, mm, ss two digit hour, minute or second. */
 
 	/* Here just this special case with MM-DD-YY */
-        if (is_dos_date(p)){
-            p[2] = p[5] = '-';
-	    
-	    if(sscanf(p, "%2d-%2d-%2d", &d[0], &d[1], &d[2]) == 3){
-	    /*  We expect to get:
-		1. MM-DD-YY
-		2. DD-MM-YY
-		3. YY-MM-DD
-		4. YY-DD-MM  */
-		
-		/* Hmm... maybe, next time :)*/
-		
+	if (is_dos_date (p)) {
+	    p[2] = p[5] = '-';
+
+	    if (sscanf (p, "%2d-%2d-%2d", &d[0], &d[1], &d[2]) == 3) {
+		/*  We expect to get:
+		   1. MM-DD-YY
+		   2. DD-MM-YY
+		   3. YY-MM-DD
+		   4. YY-DD-MM  */
+
+		/* Hmm... maybe, next time :) */
+
 		/* At last, MM-DD-YY */
-		d[0]--; /* Months are zerobased */
+		d[0]--;		/* Months are zerobased */
 		/* Y2K madness */
-		if(d[2] < 70)
+		if (d[2] < 70)
 		    d[2] += 100;
 
-        	tim.tm_mon  = d[0];
-        	tim.tm_mday = d[1];
-        	tim.tm_year = d[2];
+		tim.tm_mon = d[0];
+		tim.tm_mday = d[1];
+		tim.tm_year = d[2];
 		got_year = 1;
 	    } else
-		return 0; /* sscanf failed */
-        } else
-            return 0; /* unsupported format */
+		return 0;	/* sscanf failed */
+	} else
+	    return 0;		/* unsupported format */
     }
 
     /* Here we expect to find time and/or year */
-    
+
     if (is_num (idx)) {
-        if(is_time(columns[idx], &tim) || (got_year = is_year(columns[idx], &tim))) {
+	if (is_time (columns[idx], &tim)
+	    || (got_year = is_year (columns[idx], &tim))) {
 	    idx++;
 
-	/* This is a special case for ctime() or Mon DD YYYY hh:mm */
-	if(is_num (idx) && (columns[idx+1][0]) &&
-	    ((got_year |= is_year(columns[idx], &tim)) || is_time(columns[idx], &tim)))
-		idx++; /* time & year or reverse */
-	} /* only time or date */
-    }
-    else 
-        return 0; /* Nor time or date */
+	    /* This is a special case for ctime() or Mon DD YYYY hh:mm */
+	    if (is_num (idx) && (columns[idx + 1][0])) {
+		if (got_year) {
+		    if (is_time (columns[idx], &tim))
+			idx++;	/* time also */
+		} else {
+		    if ((got_year = is_year (columns[idx], &tim)))
+			idx++;	/* year also */
+		}
+	    }
+	}			/* only time or date */
+    } else
+	return 0;		/* Nor time or date */
 
     /*
      * If the date is less than 6 months in the past, it is shown without year
@@ -1666,14 +1673,13 @@ int vfs_parse_filedate(int idx, time_t *t)
      * This does not check for years before 1900 ... I don't know, how
      * to represent them at all
      */
-    if (!got_year &&
-	current_mon < 6 && current_mon < tim.tm_mon && 
-	tim.tm_mon - current_mon >= 6)
+    if (!got_year && current_mon < 6 && current_mon < tim.tm_mon
+	&& tim.tm_mon - current_mon >= 6)
 
 	tim.tm_year--;
 
-    if ((*t = mktime(&tim)) < 0)
-        *t = 0;
+    if ((*t = mktime (&tim)) < 0)
+	*t = 0;
     return idx;
 }
 
