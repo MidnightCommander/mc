@@ -8,7 +8,8 @@ Another release candidate for 4.6.0.
 	  section header in the corrupted initialization file.
 
 - Screen libraries.
-	- Fixed incorrect processing on AltGr introduced in -pre2.
+	- Fixed incorrect processing of AltGr on Linux console
+	  introduced in -pre2.
 
 - Documentation.
 	- Fixed a bug in man2hlp that could randomly prevent correct
