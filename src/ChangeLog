@@ -1,3 +1,9 @@
+2001-08-15  Pavel Roskin  <proski@gnu.org>
+
+	* textconf.c (features): Fix interpretation of
+	HAVE_SYSTEM_SLANG.
+	From David Martin <dmartina@excite.es>
+
 2001-08-14  Pavel Roskin  <proski@gnu.org>
 
 	* key.h (define_sequence): Change declaration to return int.

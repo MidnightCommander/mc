@@ -44,9 +44,9 @@ static const char * const features [] =  {
 #ifdef HAVE_SLANG
 
 #   ifdef HAVE_SYSTEM_SLANG
-    N_("Using S-Lang library"),
-#   else
     N_("Using system-installed S-Lang library"),
+#   else
+    N_("Using S-Lang library"),
 #   endif
 
     " ",
