@@ -34,7 +34,8 @@ static:
 configure: configure.in aclocal.m4
 	chmod 755 configure
 
-GNOME_M4_FILES = macros/gnome.m4 macros/gnome-vfs.m4 macros/gnome-undelfs.m4
+GNOME_M4_FILES = macros/gnome.m4 macros/gnome-vfs.m4 macros/gnome-undelfs.m4 \
+	macros/linger.m4
 aclocal.m4: mc-aclocal.m4 $(GNOME_M4_FILES) gettext.m4
 	cd $(srcdir); cat $(GNOME_M4_FILES) mc-aclocal.m4 gettext.m4 > aclocal.m4
 

@@ -1,3 +1,9 @@
+Fri Jul 24 00:44:37 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* mc-local.m4 (AC_STRUCT_LINGER): Moved into macros/linger.m4.
+	* autogen.sh: Include linger.m4 in aclocal.m4.
+	* Makefile.in (GNOME_M4_FILES): Include linger.m4.
+
 Thu Jul 23 22:44:16 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* Makefile.in (aclocal.m4): Depend on all source files.  Include
