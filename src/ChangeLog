@@ -1,5 +1,8 @@
 2003-09-10  Pavel Roskin  <proski@gnu.org>
 
+	* find.c: Remove useless calls to paint_panel().
+	* panelize.c: Likewise.
+
 	* screen.c (use_display_format): Set dirty flag.  Remove calls
 	to paint_panel() where they become unneeded.
 

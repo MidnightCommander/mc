@@ -423,5 +423,4 @@ void do_external_panelize (char *command)
     close_error_pipe (0, 0);
     try_to_select (cpanel, NULL);
     panel_re_sort (cpanel);
-    paint_panel (cpanel);
 }

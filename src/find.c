@@ -998,7 +998,6 @@ do_find (void)
 			   (strchr (filename + 4, ':') - filename + 1) : 4) );
 		} else if (filename)
 		    do_cd (filename, cd_exact);
-		paint_panel (cpanel);
 		select_item (cpanel);
 	    }
 	    if (dirname)  
@@ -1019,7 +1018,6 @@ do_find (void)
 	    if (dir_and_file_set){
 	        try_to_select (cpanel, NULL);
 		panel_re_sort (cpanel);
-	        paint_panel (cpanel);
 	    }
 	    break;
 	}
