@@ -746,6 +746,9 @@ panel_drop_enter (GtkWidget *widget, GdkEvent *event)
 {
 }
 
+/*
+ * Invoked when a drop has happened on the panel
+ */
 static void
 panel_drop_data_available (GtkWidget *widget, GdkEventDropDataAvailable *data, WPanel *panel)
 {
@@ -835,6 +838,10 @@ load_transparent_xpm (char *base)
 	return w;
 }
 
+/*
+ * Pixmaps can only be loaded once the window has been realized, so
+ * this is why this hook is here
+ */
 static void
 panel_realized (GtkWidget *file_list, WPanel *panel)
 {
@@ -881,6 +888,9 @@ panel_realized (GtkWidget *file_list, WPanel *panel)
 	fixed_gtk_widget_dnd_drop_set (GTK_CLIST (file_list), TRUE, drop_types, ELEMENTS (drop_types), FALSE);
 }
 
+/*
+ * Create, setup the file listing display.
+ */
 static GtkWidget *
 panel_create_file_list (WPanel *panel)
 {
@@ -912,6 +922,31 @@ panel_create_file_list (WPanel *panel)
 			    GTK_SIGNAL_FUNC (panel_file_list_select_row),
 			    panel);
 	return file_list;
+}
+
+/*
+ * Callback: icon selected
+ */
+static void
+panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPanel *panel)
+{
+	printf ("ícono %d seleccionado\n", index);
+}
+
+/*
+ * Create and setup the icon field display
+ */
+static GtkWidget *
+panel_create_icon_display (WPanel *panel)
+{
+	GtkWidget *icon_field;
+
+	icon_field = gnome_icon_list_new ();
+
+	gtk_signal_connect (GTK_OBJECT (icon_field), "select_icon",
+			    GTK_SIGNAL_FUNC (panel_icon_list_select_icon),
+			    panel);
+	return icon_field;
 }
 
 void
@@ -1241,13 +1276,16 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
 	GtkWidget *status_line, *filter, *vbox;
 	GtkWidget *frame, *cwd, *back, *home, *fwd, *back_p, *fwd_p;
-	GtkWidget *very_top;
+	GtkWidget *very_top, *display;
 
 	very_top = gtk_widget_get_toplevel (GTK_WIDGET (panel->widget.wdata));
 	
 	panel->table = gtk_table_new (2, 1, 0);
-	
-	panel->list  = panel_create_file_list (panel);
+
+	if (panel->list_type == list_icons)
+		display = panel->icons = panel_create_icon_display (panel);
+	else
+		display = panel->list  = panel_create_file_list (panel);
 
 	filter = panel_create_filter (h, panel, &panel->filter_w);
 	cwd = panel_create_cwd (h, panel, &panel->current_dir);
@@ -1293,7 +1331,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_container_add (GTK_CONTAINER (frame), panel->status);
 	gtk_label_set_justify (GTK_LABEL (panel->status), GTK_JUSTIFY_LEFT);
 			       
-	gtk_table_attach (GTK_TABLE (panel->table), panel->list, 0, 1, 1, 2,
+	gtk_table_attach (GTK_TABLE (panel->table), display, 0, 1, 1, 2,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK, 
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0);

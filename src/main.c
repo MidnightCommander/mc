@@ -938,50 +938,9 @@ directory_history_add (WPanel * panel, char *s)
     panel_update_marks (panel);
 }
 
-int do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type);
-
-void
-directory_history_next (WPanel * panel)
-{
-    if (!panel->dir_history->next)
-	return;
-    if (do_panel_cd (panel, panel->dir_history->next->text, cd_exact))
-	panel->dir_history = panel->dir_history->next;
-    panel_update_marks (panel);
-}
-
-void
-directory_history_prev (WPanel * panel)
-{
-    if (!panel->dir_history->prev)
-	return;
-    if (do_panel_cd (panel, panel->dir_history->prev->text, cd_exact))
-	panel->dir_history = panel->dir_history->prev;
-    panel_update_marks (panel);
-}
-
-void
-directory_history_list (WPanel * panel)
-{
-    char *s;
-/* must be at least two to show a history */
-    if (panel->dir_history) {
-	if (panel->dir_history->prev || panel->dir_history->next) {
-	    s = show_hist (panel->dir_history, panel->widget.x, panel->widget.y);
-	    if (s) {
-		int r;
-		r = do_panel_cd (panel, s, cd_exact);
-		if (r)
-		    directory_history_add (panel, panel->cwd);
-		free (s);
-	    }
-	}
-    }
-}
-
 /* Changes the current panel directory */
 int
-do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
+_do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
 {
     char *directory, *olddir;
     char temp [MC_MAXPATHLEN];
@@ -1044,13 +1003,59 @@ do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
 }
 
 int
-do_cd (char *new_dir, enum cd_enum exact)
+do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
 {
     int r;
-    r = do_panel_cd (cpanel, new_dir, exact);
+    
+    r = _do_panel_cd (panel, new_dir, cd_type);
     if (r)
 	directory_history_add (cpanel, cpanel->cwd);
     return r;
+}
+
+int
+do_cd (char *new_dir, enum cd_enum exact)
+{
+    return (do_panel_cd (cpanel, new_dir, exact));
+}
+
+void
+directory_history_next (WPanel * panel)
+{
+    if (!panel->dir_history->next)
+	return;
+    if (_do_panel_cd (panel, panel->dir_history->next->text, cd_exact))
+	panel->dir_history = panel->dir_history->next;
+    panel_update_marks (panel);
+}
+
+void
+directory_history_prev (WPanel * panel)
+{
+    if (!panel->dir_history->prev)
+	return;
+    if (_do_panel_cd (panel, panel->dir_history->prev->text, cd_exact))
+	panel->dir_history = panel->dir_history->prev;
+    panel_update_marks (panel);
+}
+
+void
+directory_history_list (WPanel * panel)
+{
+    char *s;
+/* must be at least two to show a history */
+    if (panel->dir_history) {
+	if (panel->dir_history->prev || panel->dir_history->next) {
+	    s = show_hist (panel->dir_history, panel->widget.x, panel->widget.y);
+	    if (s) {
+		int r;
+		r = _do_panel_cd (panel, s, cd_exact);
+		if (r)
+		    directory_history_add (panel, panel->cwd);
+		free (s);
+	    }
+	}
+    }
 }
 
 #ifdef HAVE_SUBSHELL_SUPPORT

@@ -1,3 +1,8 @@
+Fri Apr 10 17:35:23 1998  Philippe De Muyter  <phdm@macqel.be>
+
+	* configure.in (AC_NCURSES): When checking for library location,
+	put -L option before -l option, not after.
+
 Fri Apr 10 10:35:06 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* file.c (file_mask_dialog): When the shell patterns option was

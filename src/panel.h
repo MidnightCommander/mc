@@ -11,7 +11,8 @@ enum list_types {
     list_full,			/* Name, size, perm/date */
     list_brief,			/* Name */
     list_long,			/* Like ls -l */
-    list_user			/* User defined */
+    list_user,			/* User defined */
+    list_icons			/* iconic display */
 };
 
 enum view_modes {
@@ -115,6 +116,7 @@ typedef struct {
     /* These are standard GtkWidgets */
     void *table;
     void *list;
+    void *icons;
     void *status;
     void *ministatus;
 
