@@ -43,7 +43,6 @@ vfs_s_new_inode (vfs *me, vfs_s_super *super, struct stat *initstat)
     if (!ino)
 	return NULL;
 
-
     ino->linkname = ino->localname = NULL;
     ino->subdir = NULL;
     if (initstat)
@@ -193,7 +192,6 @@ struct vfs_s_entry *
 vfs_s_generate_entry (vfs *me, char *name, struct vfs_s_inode *parent, mode_t mode)
 {
     struct vfs_s_inode *inode;
-    struct vfs_s_entry *entry;
     struct stat *st;
 
     st = vfs_s_default_stat (me, mode);
@@ -201,9 +199,7 @@ vfs_s_generate_entry (vfs *me, char *name, struct vfs_s_inode *parent, mode_t mo
     if (S_ISDIR (mode))
         vfs_s_add_dots (me, inode, parent);
 
-    entry = vfs_s_new_entry (me, name, inode);
-
-    return entry;
+    return vfs_s_new_entry (me, name, inode);
 }
 
 /* We were asked to create entries automagically */
@@ -300,13 +296,11 @@ vfs_s_find_entry_linear (vfs *me, vfs_s_inode *root, char *path, int follow, int
     if (!(flags & FL_DIR)){
 	char *dirname, *name, *save;
 	vfs_s_inode *ino;
-	vfs_s_entry *ent;
 	split_dir_name (me, path, &dirname, &name, &save);
 	ino = vfs_s_find_inode (me, root, dirname, follow, flags | FL_DIR);
 	if (save)
 	    *save = PATH_SEP;
-	ent = vfs_s_find_entry_tree (me, ino, name, follow, flags);
-	return ent;
+	return vfs_s_find_entry_tree (me, ino, name, follow, flags);
     }
 
     for (ent = root->subdir; ent != NULL; ent = ent->next)
@@ -374,6 +368,9 @@ vfs_s_resolve_symlink (vfs *me, vfs_s_entry *entry, char *path, int follow)
 	return entry;
 
     linkname = entry->ino->linkname;
+
+    if (linkname == NULL)
+	ERRNOR (EFAULT, NULL);
 
     if (MEDATA->find_entry == vfs_s_find_entry_linear) {
         if (*linkname == PATH_SEP)
@@ -535,11 +532,10 @@ vfs_s_get_path (vfs *me, char *inname, struct vfs_s_super **archive, int flags)
 {
     char *buf = g_strdup( inname );
     char *res = vfs_s_get_path_mangle (me, buf, archive, flags);
-    char *res2 = NULL;
     if (res)
-        res2 = g_strdup(res);
+        res = g_strdup(res);
     g_free(buf);
-    return res2;
+    return res;
 }
 
 void
@@ -740,6 +736,10 @@ vfs_s_readlink (vfs *me, char *path, char *buf, int size)
 
     if (!S_ISLNK (ino->st.st_mode))
 	ERRNOR (EINVAL, -1);
+
+    if (ino->linkname == NULL)
+	ERRNOR (EFAULT, -1);
+
     strncpy (buf, ino->linkname, size);
     *(buf+size-1) = 0;
     return strlen (buf);
@@ -955,12 +955,10 @@ vfs_s_retrieve_file(vfs *me, struct vfs_s_inode *ino)
 
     /* Clear the interrupt status */
     
-    while (1) {
-	n = MEDATA->linear_read (me, &fh, buffer, sizeof(buffer));
+    while ((n = MEDATA->linear_read (me, &fh, buffer, sizeof(buffer)))) {
+
 	if (n < 0)
 	    goto error_1;
-	if (!n)
-	    break;
 
 	total += n;
 	vfs_print_stats (me->name, _("Getting file"), ino->ent->name, total, stat_size);
@@ -1017,20 +1015,16 @@ vfs_s_dump (vfs *me, char *prefix, vfs_s_inode *ino)
     printf ("%s %s %d ", prefix, S_ISDIR (ino->st.st_mode) ? "DIR" : "FILE", ino->st.st_mode);
     if (!ino->subdir)
 	printf ("FILE\n");
-
     else
     {
 	struct vfs_s_entry *ent;
-	ent = ino->subdir;
-	while (ent){
-	    char *s;
-	    s = g_strconcat (prefix, "/", ent->name, NULL);
+	for (ent = ino->subdir; ent ; ent = ent->next){
+	    char *s = g_strconcat (prefix, "/", ent->name, NULL);
 	    if (ent->name[0] == '.')
 		printf ("%s IGNORED\n", s);
 	    else
 		vfs_s_dump (me, s, ent->ino);
 	    g_free(s);
-	    ent = ent->next;
 	}
     }
 }
@@ -1176,7 +1170,7 @@ int
 vfs_s_get_line_interruptible (vfs *me, char *buffer, int size, int fd)
 {
     int n;
-    int i = 0;
+    int i;
 
     enable_interrupt_key ();
     for (i = 0; i < size-1; i++){
