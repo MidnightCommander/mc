@@ -1093,30 +1093,79 @@ setup_icon_dnd_source (struct desktop_icon_info *dii)
 			    dii);
 }
 
+/**
+ * drop_on_file_entry
+ */
 static void
-icon_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
-			 GtkSelectionData *data, guint info, guint time, gpointer user_data)
+desktop_icon_drop_uri_list (struct desktop_icon_info *dii,
+			    GdkDragContext           *context,
+			    GtkSelectionData         *data);
 {
-	struct desktop_icon_info *dii;
 	char *filename;
 	file_entry *fe;
-
-	dii = user_data;
+	int size;
+	char *buf, *mime_type;
+	
 	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
 
 	fe = file_entry_from_file (filename);
 	if (!fe)
 		return; /* eek */
 
+	/*
+	 * 1. If it is directory, drop the files there
+	 */
+	if (fe->f.link_to_dir){
+		gdnd_drop_on_directory (context, data, filename);
+		goto out;
+	}
+
+	/*
+	 * 2. Try to use a metadata-based drop action 
+	 */
+	if (gnome_metadata_get (filename, "drop-action", &size, &buf) == 0){
+		action_drop (filename, buf, context, data);
+		free (buf);
+		goto out;
+	}
+
+	/* 
+	 * 3. Try a drop action from the mime-type
+	 */
+	mime_type = gnome_mime_type_or_default (filename, NULL);
+	if (mime_type){
+		char *action;
+		
+		action = gnome_mime_get_value (mime_type, "drop-action");
+		
+		if (action){
+			action_drop (filename, action, context, data);
+			goto out;
+		}
+	}
+
+	/*
+	 * 4. Executable.  Try metadata keys for "open" and mime type for "open"
+	 */
+	if (is_exe (fe->buf.st_mode) && if_link_is_exe (fe)){
+		
+	}
+
+out:
+	file_entry_free (fe);
+}
+
+static void
+icon_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
+			 GtkSelectionData *data, guint info, guint time, gpointer user_data)
+{
+	struct desktop_icon_info *dii;
+
+	dii = user_data;
+
 	switch (info) {
 	case TARGET_URI_LIST:
-		if (fe->f.link_to_dir)
-			gdnd_drop_on_directory (context, data, filename);
-		else if (is_exe (fe->buf.st_mode) && if_link_is_exe (fe))
-			printf ("Implement execution of desktop icons!\n"); /* FIXME: launch with the dropped files */
-		else
-			g_assert_not_reached ();
-
+		desktop_icon_drop_uri_list (dii, context, data);
 		break;
 
 	default:

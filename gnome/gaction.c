@@ -26,25 +26,25 @@ gmc_execute (file_entry *fe, char *buf)
 }
 
 int
-gmc_open (file_entry *fe)
+gmc_open_filename (char *fname, GList *args)
 {
 	char *mime_type, *cmd;
 	char *buf;
 	int size;
 
-	if (gnome_metadata_get (fe->fname, "fm-open", &size, &buf) == 0){
+	if (gnome_metadata_get (fname, "fm-open", &size, &buf) == 0){
 		gmc_execute (fe, buf);
 		free (buf);
 		return 1;
 	}
 
-	if (gnome_metadata_get (fe->fname, "open", &size, &buf) == 0){
+	if (gnome_metadata_get (fname, "open", &size, &buf) == 0){
 		gmc_execute (fe, buf);
 		free (buf);
 		return 1;
 	}
 
-	mime_type = gnome_mime_type_or_default (fe->fname, NULL);
+	mime_type = gnome_mime_type_or_default (fname, NULL);
 	if (!mime_type)
 		return 0;
 	
@@ -62,6 +62,12 @@ gmc_open (file_entry *fe)
 		return 1;
 	}
 	return 0;
+}
+
+int
+gmc_open (file_entry *fe)
+{
+	return gmc_open_filename (fe->fname, NULL);
 }
 
 static void
