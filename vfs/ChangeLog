@@ -1,3 +1,8 @@
+2002-12-14  Adam Byrtek  <alpha@debian.org>
+
+	* extfs/mailfs.in: Fixed bug when opening empty mailbox.  Added
+	proper message size (not number of lines, like before) counting.
+
 2002-12-13  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/uha.in (mchafs_list): Don't parse the month, use
