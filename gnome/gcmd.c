@@ -909,3 +909,27 @@ set_cursor_normal (WPanel *panel)
 	gdk_cursor_destroy (cursor);
 	gdk_flush ();
 }
+
+void
+gnome_new_link (GtkWidget *widget, WPanel *panel)
+{
+	char *template;
+	char *url;
+
+	url = input_expand_dialog (_("Creating a desktop link"),
+				   _("Enter the URL:"), "");
+	if (!url)
+		return;
+	
+	template = g_concat_dir_and_file (desktop_directory, "urlXXXXXX");
+
+	if (mktemp (template)) {
+		char *icon;
+
+		icon = g_concat_dir_and_file (ICONDIR, "gnome-http-url.png");
+		desktop_create_url (template, url, url, icon);
+		g_free (icon);
+	}
+	g_free (template);
+	g_free (url);
+}

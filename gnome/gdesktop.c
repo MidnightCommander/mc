@@ -2379,6 +2379,7 @@ handle_rescan_desktop (GtkWidget *widget, gpointer data)
 {
 	desktop_reload_icons (FALSE, 0, 0);
 }
+
 static void
 set_background_image (GtkWidget *widget, gpointer data)
 {
@@ -2406,6 +2407,7 @@ static GnomeUIInfo gnome_panel_new_menu [] = {
 	GNOMEUIINFO_ITEM_NONE(N_("_Terminal"), N_("Launch a new terminal in the current directory"), gnome_open_terminal),
 	/* If this ever changes, make sure you update create_new_menu accordingly. */
 	GNOMEUIINFO_ITEM_NONE( N_("_Directory..."), N_("Creates a new directory"), gnome_mkdir_cmd ),
+	GNOMEUIINFO_ITEM_NONE( N_("URL L_ink..."),  N_("Creates a new URL link"), gnome_new_link ),
 	GNOMEUIINFO_ITEM_NONE( N_("_Launcher..."), N_("Creates a new launcher"), gnome_new_launcher ),
 	GNOMEUIINFO_END
 };
