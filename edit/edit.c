@@ -309,12 +309,9 @@ long edit_write_stream (WEdit * edit, FILE * f)
 	if (c == '\n') {
 	    if (fputc ('\r', f) < 0)
 		break;
-	    if (fputc ('\n', f) < 0)
-		break;
-	} else {
-	    if (fputc (c, f) < 0)
-		break;
 	}
+	if (fputc (c, f) < 0)
+	    break;
     }
     return i;
 }
@@ -504,7 +501,7 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
 	    option_whole_chars_search = option_whole_chars_search_buf;
 	}
 #endif	/* ENABLE_NLS */
-	edit = malloc (sizeof (WEdit));
+	edit = g_malloc (sizeof (WEdit));
 	memset (edit, 0, sizeof (WEdit));
 	to_free = 1;
     }
@@ -528,14 +525,14 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
 	if (edit_open_file (edit, f, text, text_size)) {
 /* edit_load_file already gives an error message */
 	    if (to_free)
-		free (edit);
+		g_free (edit);
 	    return 0;
 	}
     } else {
 	use_filter = 1;
 	if (edit_open_file (edit, 0, "", 0)) {
 	    if (to_free)
-		free (edit);
+		g_free (edit);
 	    return 0;
 	}
     }
@@ -552,19 +549,13 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
     edit->undo_stack = malloc ((edit->stack_size + 10) * sizeof (long));
     edit->total_lines = edit_count_lines (edit, 0, edit->last_byte);
     if (use_filter) {
-	struct stat st;
 	push_action_disabled = 1;
-	if (check_file_access (edit, filename, &st)) {
+	if (check_file_access (edit, filename, &(edit->stat1))
+	    || !edit_insert_file (edit, f))
+	{
 	    edit_clean (edit);
 	    if (to_free)
-		free (edit);
-	    return 0;
-	}
-	edit->stat1 = st;
-	if (!edit_insert_file (edit, f)) {
-	    edit_clean (edit);
-	    if (to_free)
-		free (edit);
+		g_free (edit);
 	    return 0;
 	}
 /* FIXME: this should be an unmodification() function */
@@ -631,17 +622,17 @@ int edit_reload (WEdit * edit, const char *filename, const char *text, const cha
     WEdit *e;
     int lines = edit->num_widget_lines;
     int columns = edit->num_widget_columns;
-    e = malloc (sizeof (WEdit));
+    e = g_malloc (sizeof (WEdit));
     memset (e, 0, sizeof (WEdit));
     e->widget = edit->widget;
     e->macro_i = -1;
     if (!edit_init (e, lines, columns, filename, text, dir, text_size)) {
-	free (e);
+	g_free (e);
 	return 0;
     }
     edit_clean (edit);
     memcpy (edit, e, sizeof (WEdit));
-    free (e);
+    g_free (e);
     return 1;
 }
 
@@ -2136,7 +2127,7 @@ int edit_execute_key_command (WEdit * edit, int command, int char_for_insertion)
     return r;
 }
 
-static const char *shell_cmd[] = SHELL_COMMANDS_i
+static const char * const shell_cmd[] = SHELL_COMMANDS_i
 void edit_mail_dialog (WEdit * edit);
 
 /* 
