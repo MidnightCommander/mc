@@ -1,3 +1,8 @@
+1998-12-11  Matt Wilson  <msw@redhat.com>
+
+	* dir-open.xpm, dir-close.xpm: Away with the tacky yellow folders -
+	I like these brown ones from tigert better.
+
 1998-12-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gpopup.c (create_actions): The tests for F_PANEL and F_DICON
