@@ -1420,7 +1420,7 @@ dirsizes_cmd (void)
 	         strcmp (panel->dir.list [i].fname, "..") != 0) {
 	    total = 0.0l;
 	    compute_dir_size (panel->dir.list [i].fname, &marked, &total);
-            panel->dir.list [i].buf.st_size = (long)total;
+	    panel->dir.list [i].buf.st_size = (off_t) total;
 	    panel->dir.list [i].f.dir_size_computed = 1;
 	}
 	
