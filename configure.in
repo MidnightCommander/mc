@@ -576,10 +576,8 @@ m4/Makefile
 lib/mc.ext
 
 vfs/extfs/deb
-vfs/extfs/ftplist
 vfs/extfs/lslR
 vfs/extfs/uar
-vfs/extfs/ucpio
 vfs/extfs/ulha 
 vfs/extfs/uha
 vfs/extfs/urar
