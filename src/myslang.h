@@ -1,7 +1,7 @@
 #ifndef __MYSLANG_H
 #define __MYSLANG_H
 
-#ifdef SLANG_H_INSIDE_SLANG_DIR
+#ifdef HAVE_SLANG_SLANG_H
 #    include <slang/slang.h>
 #else
 #    include "slang.h"

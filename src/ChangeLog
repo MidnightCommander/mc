@@ -1,5 +1,8 @@
 2001-05-28  Pavel Roskin  <proski@gnu.org>
 
+	* myslang.h: Use HAVE_SLANG_SLANG_H instead of non-standard
+	SLANG_H_INSIDE_SLANG_DIR.
+
 	* xslint.c: Remove unused functions.
 
 	* color.c (init_colors) [HAVE_SLANG]: Use SLtt_set_color() to
