@@ -111,7 +111,7 @@
 	* background.c: Remove mymsg.
 
 	* util.c (msglen): Constify first argument.
-	* wtools.c (query_dialog): Constify string argments.
+	* wtools.c (query_dialog): Constify string arguments.
 	(create_message): New function, forked from message().
 	(message): Return void.  Allocate memory dynamically.
 	* wtools.h: Eliminate D_INSERT.  Adjust all users.
@@ -177,7 +177,7 @@
 	* cmd.h: Remove unused declarations.
 
 	* chmod.c (stat_file): Eliminate.  Use mc_stat().
-	* chmod.h: Remove unneded code.
+	* chmod.h: Remove unneeded code.
 	* chown.h: Likewise.
 	* main.c: Include achown.h.
 
@@ -257,7 +257,7 @@
 	* glibcompat.h: Define g_try_malloc as malloc for glib 1.2.x.
 
 	* view.c (load_view_file): Use g_try_malloc() because the
-	failure to allcate memory is acceptable here.
+	failure to allocate memory is acceptable here.
 	Reported by Pavel S. Shirshov <pavelsh@mail.ru>
 
 2003-10-14  Pavel Roskin  <proski@gnu.org>
