@@ -1,3 +1,11 @@
+2005-03-10  Roland Illig  <roland.illig@gmx.de>
+
+	* x11conn.c: Separated X11 connection handling from key.c. Added
+	error handling for X11 errors and connection errors.
+	* x11conn.h: The interface for x11conn.h.
+	* key.c: Now using the x11conn code.
+	* Makefile.am: Added x11conn.{h,c}.
+
 2005-02-26  Miguel de Icaza  <miguel@novell.com>
 
 	* screen.c (chdir_other_panel): Restored original functionality.

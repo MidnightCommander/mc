@@ -45,10 +45,7 @@
 #endif
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
-#ifdef HAVE_GMODULE
-#include <gmodule.h>
-#endif /* HAVE_GMODULE */
-#include <X11/Xlib.h>
+#    include "x11conn.h"
 #endif
 
 #ifdef __linux__
@@ -406,52 +403,16 @@ define_sequences (key_define_t *kd)
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
 
-#ifdef HAVE_GMODULE
-static int (*func_XCloseDisplay) (Display *);
-static Bool (*func_XQueryPointer) (Display *, Window, Window *, Window *,
-				   int *, int *, int *, int *,
-				   unsigned int *);
-
-static GModule *x11_module;
-#endif				/* HAVE_GMODULE */
-
 static Display *x11_display;
 static Window x11_window;
 
 static void
 init_key_x11 (void)
 {
-#ifdef HAVE_GMODULE
-    static Display *(*func_XOpenDisplay) (_Xconst char *);
-    gchar *x11_module_fname;
-#endif				/* HAVE_GMODULE */
-
     if (!getenv ("DISPLAY"))
 	return;
 
-#ifdef HAVE_GMODULE
-    x11_module_fname = g_module_build_path (NULL, "X11");
-
-    if (!x11_module_fname)
-	return;
-
-    x11_module = g_module_open (x11_module_fname, G_MODULE_BIND_LAZY);
-    g_free (x11_module_fname);
-
-    if (!x11_module)
-	return;
-
-    if (g_module_symbol
-	(x11_module, "XOpenDisplay", (void *) &func_XOpenDisplay)
-	&& g_module_symbol (x11_module, "XCloseDisplay",
-			    (void *) &func_XCloseDisplay)
-	&& g_module_symbol (x11_module, "XQueryPointer",
-			    (void *) &func_XQueryPointer)) {
-	x11_display = (*func_XOpenDisplay) (0);
-    }
-#else
-    x11_display = XOpenDisplay (0);
-#endif				/* HAVE_GMODULE */
+    x11_display = mc_XOpenDisplay (0);
 
     if (x11_display)
 	x11_window = DefaultRootWindow (x11_display);
@@ -1324,13 +1285,8 @@ get_modifier (void)
 	int win_x, win_y;
 	unsigned int mask;
 
-#ifdef HAVE_GMODULE
-	(*func_XQueryPointer) (x11_display, x11_window, &root, &child,
-			       &root_x, &root_y, &win_x, &win_y, &mask);
-#else
-	XQueryPointer (x11_display, x11_window, &root, &child, &root_x,
+	mc_XQueryPointer (x11_display, x11_window, &root, &child, &root_x,
 		       &root_y, &win_x, &win_y, &mask);
-#endif				/* HAVE_GMODULE */
 
 	if (mask & ShiftMask)
 	    result |= KEY_M_SHIFT;
@@ -1440,14 +1396,7 @@ void done_key ()
     s_dispose (select_list);
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
-#ifdef HAVE_GMODULE
     if (x11_display)
-	(*func_XCloseDisplay) (x11_display);
-    if (x11_module)
-	g_module_close (x11_module);
-#else
-    if (x11_display)
-	XCloseDisplay (x11_display);
-#endif /* HAVE_GMODULE */
-#endif /* HAVE_TEXTMODE_X11_SUPPORT */
+	mc_XCloseDisplay (x11_display);
+#endif
 }
