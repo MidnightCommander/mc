@@ -1,5 +1,8 @@
 2001-05-18  Pavel Roskin  <proski@gnu.org>
 
+	* FAQ: Update status of Tk, XView. and GNOME editions. Update
+	homepage of gpm.
+
 	* INSTALL: Remove information about Tk and XView. Change the
 	mailing list addresses again.
 	* FAQ: Change the mailing list addresses again.

@@ -30,7 +30,7 @@ Questions and Answers
      * 3 Mouse
           + 3.1 How do I enable mouse support?
           + 3.2 How do I cut and paste text with mouse?
-          + 3.3 [NEW] How do I get the extension dependant pop-up menu to
+          + 3.3 How do I get the extension dependant pop-up menu to
             pop up?
      * 4 Display
           + 4.1 Why do I keep getting "Terminal not powerful enough for
@@ -157,31 +157,29 @@ Questions and Answers
    your terminal works with vi, emacs, elm or pine it will work with
    Midnight Commander.
    
-   The XView and Tk editions currently under development will require an
-   X terminal.
+   The GNOME edition requires an X terminal.
    
 1.4 What else do I need to run MC?
 
-   You need an Unix compatible operating system or Windows 95/NT or OS/2.
+   You need an Unix compatible operating system. Support for Windows 95/NT
+   and OS/2 is incomplete - you should be prepared to fix things.
+
+   To compile any edition you need to have glib installed. It's available
+   in ftp://ftp.gtk.org/pub/gtk.
    
    If you want to use mouse on the Linux console you need General Purpose
-   Mouse server from iride.unipv.it: /pub/gpm/. You need nothing extra to
-   use mouse on xterm.
+   Mouse server from ftp://ftp.systemy.it/pub/develop/. You need nothing
+   extra to use mouse on xterm.
    
-   To compile the XView edition (currently under development) you need
-   XView library. Xpm library and X11 non-rectangular shape extensions
-   are recommended.
-   
-   To compile the Tk edition (currently under development) you need
-   Tk-4.0 libraries. Compilation of the Tk version won't be easy. Contact
-   Miguel for details.
+   To compile the GNOME edition you need GNOME libraries as well as the
+   libraries they depend on. See http://www.gnome.org/ for details.
    
    If you do not want to use the slang library you could try using
    ncurses (we recommend only version 4.1 and above).
    
    You can get it along with other curses libraries, too, but results may
    not be pretty or even usable.
-   
+
 1.5 Is Midnight Commander PD? Copyrighted?
 
    Midnight Commander is under GNU Public License which basically means
@@ -285,8 +283,7 @@ Questions and Answers
    (if we want to be able to use arrows keys and function keys).
    
    X terminals allow more control over keyboard, so these ESC limitations
-   might not concern the forthcoming XView and Tk editions of the
-   Midnight Commander.
+   does not concern the GNOME edition of the Midnight Commander.
    
 2.5 How can I add the plus sign (+) on the command line?
 
@@ -326,15 +323,14 @@ Questions and Answers
 
    Hold down shift key while using mouse to cut'n'paste.
    
-3.3 [NEW] How do I get the extension dependant pop-up menu to pop up?
+3.3 How do I get the extension dependant pop-up menu to pop up?
 
-   You need a tk or xview edition (use the --with-tk or --with-xview
-   configure option when compiling). Normal MC (text-mode edition)
-   doesn't support this feature yet.
-   
-   In the tk and xview editions you can access the extension dependent
+   You need a GNOME edition. Normal MC (text-mode edition) doesn't
+   support this feature yet.
+
+   In the GNOME edition you can access the extension dependent
    pop-up menu by pressing the right mouse button.
-   
+
 4 Display
 
 4.1 Why do I keep getting "Terminal not powerful enough for SLang"?
@@ -567,12 +563,14 @@ enough?
 
 5.1 [UPDATED] Xview, Tk and Gnome editions?
 
-   Get the newest development version, give the "--with-xview" or
-   "--with-tk" or "--with-gnome" option to the configure and otherwise
-   compile as usual. See Download.
+   Xview and Tk editions have been removed from the sources.
+
+   GNOME edition will compile by default if the necessary libraries are
+   present on the system. If it's not desired, give the "--without-gnome"
+   option to the configure script and otherwise compile as usual.
    
-   Xview, Tk and Gnome editions are work in progress, they are not as
-   robust as the text mode edition.
+   The GNOME edition is work in progress. It may lack some functionality
+   of the text edition.
    
 6 Command line problems
 
