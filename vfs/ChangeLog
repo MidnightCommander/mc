@@ -1,3 +1,7 @@
+2003-10-13  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.c (_vfs_add_noncurrent_stamps): Fix incorrect casts.
+
 2003-10-12  Pavel Roskin  <proski@gnu.org>
 
 	* extfs.c: Switch to self-registration.

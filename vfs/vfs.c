@@ -769,7 +769,8 @@ is_parent (struct vfs_class * nvfs, vfsid nvfsid, struct vfs_stamping *parent)
 }
 
 static void
-_vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid, struct vfs_stamping *parent)
+_vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid,
+			    struct vfs_stamping *parent)
 {
     struct vfs_class *nvfs, *n2vfs, *n3vfs;
     vfsid nvfsid, n2vfsid, n3vfsid;
@@ -787,7 +788,7 @@ _vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid, struct vfs
        cpanel->cwd and opanel->cwd. Athough most of the time either
        current_dir and cpanel->cwd or current_dir and opanel->cwd are the
        same, it's possible that all three are different -- Norbert */
-       
+
     if (!cpanel)
 	return;
 
@@ -797,52 +798,55 @@ _vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid, struct vfs
 
     f = is_parent (oldvfs, oldvfsid, par);
     vfs_rm_parents (par);
-    if ((nvfs == oldvfs && nvfsid == oldvfsid) || oldvfsid == (vfsid *)-1 || f){
+    if ((nvfs == oldvfs && nvfsid == oldvfsid) || oldvfsid == (vfsid *) - 1
+	|| f) {
 	return;
     }
 
-    if (get_current_type () == view_listing){
+    if (get_current_type () == view_listing) {
 	n2vfs = vfs_get_class (cpanel->cwd);
 	n2vfsid = vfs_ncs_getid (n2vfs, cpanel->cwd, &par);
-        f = is_parent (oldvfs, oldvfsid, par);
+	f = is_parent (oldvfs, oldvfsid, par);
 	vfs_rm_parents (par);
-	if ((n2vfs == oldvfs && n2vfsid == oldvfsid) || f) 
+	if ((n2vfs == oldvfs && n2vfsid == oldvfsid) || f)
 	    return;
     } else {
 	n2vfs = (struct vfs_class *) -1;
-	n2vfsid = (struct vfs_class *) -1;
+	n2vfsid = (vfsid) - 1;
     }
-    
-    if (get_other_type () == view_listing){
+
+    if (get_other_type () == view_listing) {
 	n3vfs = vfs_get_class (opanel->cwd);
 	n3vfsid = vfs_ncs_getid (n3vfs, opanel->cwd, &par);
-        f = is_parent (oldvfs, oldvfsid, par);
+	f = is_parent (oldvfs, oldvfsid, par);
 	vfs_rm_parents (par);
 	if ((n3vfs == oldvfs && n3vfsid == oldvfsid) || f)
 	    return;
     } else {
-	n3vfs = (struct vfs_class *)-1;
-	n3vfsid = (struct vfs_class *)-1;
+	n3vfs = (struct vfs_class *) -1;
+	n3vfsid = (vfsid) - 1;
     }
-    
-    if ((*oldvfs->nothingisopen) (oldvfsid)){
-#if 0 /* need setctl for this */
-	if (oldvfs == &vfs_extfs_ops && ((extfs_archive *) oldvfsid)->name == 0){
+
+    if ((*oldvfs->nothingisopen) (oldvfsid)) {
+#if 0				/* need setctl for this */
+	if (oldvfs == &vfs_extfs_ops
+	    && ((extfs_archive *) oldvfsid)->name == 0) {
 	    /* Free the resources immediatly when we leave a mtools fs
 	       ('cd a:') instead of waiting for the vfs-timeout */
 	    (oldvfs->free) (oldvfsid);
 	} else
 #endif
 	    vfs_addstamp (oldvfs, oldvfsid, parent);
-	for (stamp = parent; stamp != NULL; stamp = stamp->parent){
-	    if ((stamp->v == nvfs && stamp->id == nvfsid) ||
-		(stamp->v == n2vfs && stamp->id == n2vfsid) ||
-		(stamp->v == n3vfs && stamp->id == n3vfsid) ||
-		stamp->id == (vfsid) - 1 ||
-		!(*stamp->v->nothingisopen) (stamp->id))
+	for (stamp = parent; stamp != NULL; stamp = stamp->parent) {
+	    if ((stamp->v == nvfs && stamp->id == nvfsid)
+		|| (stamp->v == n2vfs && stamp->id == n2vfsid)
+		|| (stamp->v == n3vfs && stamp->id == n3vfsid)
+		|| stamp->id == (vfsid) - 1
+		|| !(*stamp->v->nothingisopen) (stamp->id))
 		break;
 #if 0
-	    if (stamp->v == &vfs_extfs_ops && ((extfs_archive *) stamp->id)->name == 0){
+	    if (stamp->v == &vfs_extfs_ops
+		&& ((extfs_archive *) stamp->id)->name == 0) {
 		(stamp->v->free) (stamp->id);
 		vfs_rmstamp (stamp->v, stamp->id, 0);
 	    } else
