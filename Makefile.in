@@ -5,7 +5,7 @@ rootdir = $(srcdir)
 @MCFGR@@MCF@
 
 foreigndirs=pc
-codedirs=vfs lib doc slang edit src tk xv gnome icons 
+codedirs=vfs lib doc slang edit gtkedit src tk xv gnome icons
 unixdirs=intl $(codedirs) @POSUB@
 alldirs=$(unixdirs) $(foreigndirs) 
 subdirs=$(alldirs)
@@ -101,21 +101,9 @@ distclean:
 
 distdirs:
 	mkdir ../mc-$(VERSION); \
-	mkdir ../mc-$(VERSION)/src; \
-	mkdir ../mc-$(VERSION)/lib; \
-	mkdir ../mc-$(VERSION)/doc; \
-	mkdir ../mc-$(VERSION)/slang; \
-	mkdir ../mc-$(VERSION)/vfs; \
-	mkdir ../mc-$(VERSION)/vfs/extfs; \
-	mkdir ../mc-$(VERSION)/icons; \
-	mkdir ../mc-$(VERSION)/xv; \
-	mkdir ../mc-$(VERSION)/xv/support; \
-	mkdir ../mc-$(VERSION)/xv/support/xview_private; \
-	mkdir ../mc-$(VERSION)/tk; \
-	mkdir ../mc-$(VERSION)/gnome; \
-	mkdir ../mc-$(VERSION)/pc; \
-	mkdir ../mc-$(VERSION)/po; \
-	mkdir ../mc-$(VERSION)/edit;
+	for I in $(alldirs) extfs support support/xview_private; do \
+		mkdir ../mc-$(VERSION)/$$I; \
+	done
 
 distcopy:
 	sed -e "s/^%define ver .*/%define ver      $(VERSION)/; s/^%define rel .*/%define rel      1/" mc.spec > Specfile
