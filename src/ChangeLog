@@ -1,3 +1,8 @@
+2001-09-10  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.am (mc_LDADD): Use INTLLIBS provided by gettext
+	instead of LINTL.
+
 2001-09-09  Pavel Roskin  <proski@gnu.org>
 
 	* hotlist.c (load_hotlist): If cannot open hotlist, don't assume
