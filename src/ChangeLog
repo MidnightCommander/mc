@@ -1,3 +1,8 @@
+2001-08-18  Pavel Roskin  <proski@gnu.org>
+
+	* x.h: Instead of undefining MIX and MAX after <gnome.h> make
+	sure that <sys/param.h> is included before <gnome.h>.
+
 2001-08-17  Pavel Roskin  <proski@gnu.org>
 
 	* key.c (mc_bindings) [linux]: Remove old hack - recognizing

@@ -6,11 +6,12 @@
 #endif
 
 #ifdef HAVE_GNOME
+#   ifdef HAVE_SYS_PARAM_H
+#      include <sys/param.h>
+#   endif
 #   define GNOME_REGEX_H
 #   include <gnome.h>
 #   include "gconf.h"
-#   undef MIN
-#   undef MAX
 #   include "gmain.h"
 #endif
 
