@@ -227,3 +227,4 @@ image/*:
 
 text/*:
 	icon-filename=@icondir@/gnome-textfile.png
+	open=gnome-edit %f
