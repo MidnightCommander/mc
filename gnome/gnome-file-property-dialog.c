@@ -456,7 +456,7 @@ generate_actions_box (GnomeFilePropertyDialog *fp_dlg)
 
 	/* Here's the Logic: */
 	/* All tops of files (other then folders) should let us edit "open" */
-	/* If we are a file, and an executable, we want to edit our "drop-target" */
+	/* If we are a file, and an executable, we want to edit our "drop-action" */
 	/* Metadata, as it is meaningful to us.  */
 	/* If we are non-executable, we want to edit our "edit" and "view" fields. */
 	/* Sym links want to have the same options as above, but use their Target's */
@@ -981,7 +981,7 @@ init_metadata (GnomeFilePropertyDialog *fp_dlg)
 	if (gnome_metadata_get (fp_dlg->file_name, "fm-view", &size, &fp_dlg->fm_view) != 0)
 		gnome_metadata_get (fp_dlg->file_name, "view", &size, &fp_dlg->fm_view);
 	gnome_metadata_get (fp_dlg->file_name, "edit", &size, &fp_dlg->edit);
-	gnome_metadata_get (fp_dlg->file_name, "drop-target", &size, &fp_dlg->drop_target);
+	gnome_metadata_get (fp_dlg->file_name, "drop-action", &size, &fp_dlg->drop_target);
 
 	/*
 	 * Fetch the needs-terminal setting
@@ -1023,7 +1023,7 @@ init_metadata (GnomeFilePropertyDialog *fp_dlg)
 	if (!fp_dlg->mime_fm_view)
 		fp_dlg->mime_fm_view = gnome_mime_get_value (mime_type, "view");
 	fp_dlg->mime_edit = gnome_mime_get_value (mime_type, "edit");
-	fp_dlg->mime_drop_target = gnome_mime_get_value (mime_type, "drop-target");
+	fp_dlg->mime_drop_target = gnome_mime_get_value (mime_type, "drop-action");
 
 	gnome_metadata_get (fp_dlg->file_name, "icon-filename", &size, &fp_dlg->icon_filename);
 	if (fp_dlg->icon_filename)
@@ -1257,16 +1257,16 @@ apply_metadata_change (GnomeFilePropertyDialog *fpd)
 				text = gtk_entry_get_text (GTK_ENTRY (fpd->prop1_entry));
 				if (text && text[0])
 					gnome_metadata_set (fpd->file_name,
-							    "drop-target",
+							    "drop-action",
 							    strlen (text) + 1,
 							    text);
 				else
 					gnome_metadata_remove (fpd->file_name,
-							       "drop-target");
+							       "drop-action");
 			} else {
 				if (fpd->drop_target)
 					gnome_metadata_remove (fpd->file_name,
-							       "drop-target");
+							       "drop-action");
 			}
 		} else {
 			if (!GTK_TOGGLE_BUTTON (fpd->prop1_cbox)->active) {
