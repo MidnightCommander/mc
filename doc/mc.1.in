@@ -2561,15 +2561,33 @@ switch.  The virtual file system switch allows the Midnight Commander
 to manipulate files not located on the Unix file system.
 .PP
 Currently the Midnight Commander is packaged with some Virtual File
-Systems (VFS): the local file system, used for accessing the regular
-Unix file system; the ftpfs, used to manipulate files on remote
-systems with the FTP protocol; the tarfs, used to manipulate tar and
-compressed tar files; the undelfs, used to recover deleted files on
-ext2 file systems (the default file system for Linux systems), fish
+Systems (VFS): the
+.I local
+file system, used for accessing the regular
+Unix file system; the
+.IR ftpfs ,
+used to manipulate files on remote
+systems with the FTP protocol; the
+.IR tarfs ,
+used to manipulate tar and
+compressed tar files; the
+.IR undelfs ,
+used to recover deleted files on
+ext2 file systems (the default file system for Linux systems),
+.I fish
 (for manipulating files over shell connections such as rsh and ssh) and
-finally the mcfs (Midnight Commander file system), a network based
-file system.  If the code was compiled with smbfs support, you can
+finally the
+.I mcfs
+(Midnight Commander file system), a network based
+file system.  If the code was compiled with
+.I smbfs
+support, you can
 manipulate files on remote systems with the SMB (CIFS) protocol.
+.PP
+A generic
+.I extfs
+(EXternal virtual File System) is provided in order to easily expand
+VFS capabilities using scripts and external software.
 .PP
 The VFS switch code will interpret all of the path names used and will
 forward them to the correct file system, the formats used for each one
@@ -2656,9 +2674,8 @@ To connect to a remote machine, you just need to chdir
 into a special directory which name is in the following
 format:
 .PP
-.nf
-/#sh:[user@]machine[:options]/[remote-dir]
-.fi
+.I /#sh:[user@]machine[:options]/[remote-dir]
+.PP
 The
 .I user,
 .I options
@@ -2774,6 +2791,120 @@ Examples:
     /#smb:machine/Share
     /#smb:other_machine
     /#smb:guest@machine/Public/Irlex
+.fi
+.\"NODE "  EXTernal File System"
+.SH "  EXTernal File System"
+'extfs' allows to integrate numerous features and file types into GNU
+Midnight Commander in an easy way, by writing scripts.
+.PP
+Extfs filesystems can be divided into two categories:
+.PP
+1. Stand-alone filesystems, which are not associated with any existing
+file.  They represent certain system-wide data as a directory tree.
+You can invoke them by typing
+.RI ' "cd #fsname" '
+where fsname is an extfs short name (see below).  Examples of such
+filesystems include audio (list audio tracks on the CD) or apt (list of
+all Debian packages in the system).
+.PP
+For example, to list CD-Audio tracks on your CD-ROM drive, type
+.PP
+.nf
+  cd #audio
+.fi
+.PP
+2. 'Archive' filesystems (like rpm, patchfs and more), which represent
+contents of a file as a directory tree.  It can consist of 'real' files
+compressed in an archive (urar, rpm) or virtual files, like messages
+in a mailbox (mailfs) or parts of a patch (patchfs).  To access such
+filesystems
+.RI ' #fsname '
+should be appended to the archive name.  Note that the archive itself
+can be on another vfs.
+.PP
+For example, to list contents of a zip archive documents.zip type
+.PP
+.nf
+  cd documents.zip#uzip
+.fi
+.PP
+In many aspects, you could treat extfs like any other directory.
+For instance, you can add it to the hotlist or change to it from
+directory history.  An important limitation is that you cannot invoke
+shell commands inside extfs, just like any other non-local VFS.
+.PP
+Common extfs scripts included with Midnight Commander are:
+.TP
+.B a
+access 'A:' DOS/Windows diskette
+.RI ( "cd #a" ).
+.TP
+.B apt
+front end to Debian's APT package management system
+.RI ( "cd #apt" ).
+.TP
+.B audio
+audio CD ripping and playing
+.RI ( "cd #audio"
+or
+.IR "cd device#audio" ).
+.TP
+.B bpp
+package of Bad Penguin GNU/Linux distribution
+.RI ( "cd file.bpp#bpp" ).
+.TP
+.B deb
+package of Debian GNU/Linux distribution
+.RI ( "cd file.deb#deb" ).
+.TP
+.B dpkg
+Debian GNU/Linux installed packages
+.RI ( "cd #deb" ).
+.TP
+.B hp48
+view and copy files to/from a HP48 calculator
+.RI ( "cd #hp48" ).
+.TP
+.B lslR
+browsing of lslR listings as found on many FTPs
+.RI ( "cd filename#lslR" ).
+.TP
+.B mailfs
+mbox-style mailbox files support
+.RI ( "cd mailbox#mailfs" ).
+.TP
+.B patchfs
+extfs to handle unified and context diffs
+.RI ( "cd filename#patchfs" ).
+.TP
+.B rpm
+RPM package
+.RI ( "cd filename#rpm" ).
+.TP
+.B rpms
+RPM database management
+.RI ( "cd #rpms" ).
+.TP
+.B ulha, urar, uzip, uzoo, uar, uha
+archivers
+.RI ( "cd archive#xxxx"
+where xxxx is one of:
+.IR ulha ,
+.IR urar ,
+.IR uzip ,
+.IR uzoo ,
+.IR uar ,
+.IR uha ).
+.PP
+You could bind file type/extension to specified extfs as described in the
+.\"LINK2"
+Extension File Edit
+.\"Extension File Edit"
+section.  Here is an example entry for Debian packages:
+.PP
+.nf
+  regex/\.deb$
+          Open=%cd %p#deb
 .fi
 .\"NODE "Colors"
 .SH "Colors"
