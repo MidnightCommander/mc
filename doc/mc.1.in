@@ -1264,8 +1264,10 @@ internal cd command
 description.
 .\"NODE "    Extension File Edit"
 .SH "    Extension File Edit"
-This will invoke your editor on the file ~/.mc/bindings. The format of this
-file is as follows (the format has changed with version 3.0):
+This will invoke your editor on the file
+.IR ~/.mc/bindings .
+The format of this file is as follows (the format has changed with
+version 3.0):
 .PP
 All lines starting with # or empty lines are thrown away.
 .PP
@@ -1278,50 +1280,45 @@ until new line is
 .I desc
 .PP
 keyword can be:
-.PP
+.TP
 .I shell
-.IP
 (desc is then any extension (no wildcards), i.e. matches all the files
 *desc . Example: .tar matches *.tar)
-.PP
+.TP
 .I regex
-.IP
 (desc is a regular expression)
-.PP
+.TP
 .I type
-.IP
 (file matches this if `file %f` matches regular expression desc
 (the filename: part from `file %f` is removed))
-.PP
+.TP
 .I default
-.IP
 (matches any file no matter what desc is)
 .PP
 Other lines should start with a space or tab and should be of the format:
-.PP
 .I keyword=command
 (with no spaces around =), where
 .I keyword
 should be:
-.PP
 .I Open
 (if the user presses Enter or doubleclicks it),
 .I View
-(F3),
+(F3) or
 .I Edit
 (F4).
-.PP
 .I command
 is any one-line shell command, with the simple
 .\"LINK2"
 macro substitution\&.
 .\"Macro Substitution"
 .PP
-Target are evaluated from top to bottom (order is thus important).
-If some actions are missing, search continues as if this target didn't
-match (i.e. if a file matches the first and second entry and View action
-is missing in the first one, then on pressing F3 the View action from
-the second entry will be used. default should catch all the actions.
+Rules are matched from top to bottom, thus the order is important.  If
+the appropriate action is missing, search continues as if this rule
+didn't match (i.e. if a file matches the first and second entry and View
+action is missing in the first one, then on pressing F3 the View action
+from the second entry will be used.
+.I default
+should match all the actions.
 .\"NODE "    Background jobs"
 .SH "    Background Jobs"
 This lets you control the state of any background Midnight Commander
@@ -1926,93 +1923,69 @@ or executing an
 .\"LINK2"
 extension dependent command\&,
 .\"Extension File Edit"
-or running a command from the command line input,
-a simple macro substitution takes place.
+or running a command from the command line input, a simple macro
+substitution takes place.
 .PP
 The macros are:
-.PP
-.I "%i"
-.IP
-The indent of blank space, equal the cursor column
-position. For edit menu only.
-.PP
-.I "%y"
-.IP
+.TP
+.I %i
+The indent of blank space, equal the cursor column position.  For edit
+menu only.
+.TP
+.I %y
 The syntax type of current file. For edit menu only.
-.PP
-.I "%k"
-.IP
+.TP
+.I %k
 The block file name.
-.PP
-.I "%e"
-.IP
+.TP
+.I %e
 The error file name.
-.PP
-.I "%m"
-.IP
+.TP
+.I %m
 The current menu name.
-.PP
-.I "%f"
-and
-.I "%p"
-.IP
+.TP
+.IR %f " and " %p
 The current file name.
-.PP
-.I "%x"
-.IP
+.TP
+.I %x
 The extension of current file name.
-.PP
-.I "%b"
-.IP
+.TP
+.I %b
 The current file name without extension.
-.PP
-.I "%d"
-.IP
+.TP
+.I %d
 The current directory name.
-.PP
-.I "%F"
-.IP
+.TP
+.I %F
 The current file in the unselected panel.
-.PP
-.I "%D"
-.IP
+.TP
+.I %D
 The directory name of the unselected panel.
-.PP
-.I "%t"
-.IP
+.TP
+.I %t
 The currently tagged files.
-.PP
-.I "%T"
-.IP
+.TP
+.I %T
 The tagged files in the unselected panel.
-.PP
-.I "%u"
-and
-.I "%U"
-.IP
-Similar to the %t and %T macros, but in addition the files are
-untagged. You can use this macro only once per menu file entry or
-extension file entry, because next time there will be no tagged
-files.
-.PP
-.I "%s"
-and
-.I "%S"
-.IP
+.TP
+.IR %u " and " %U
+Similar to the %t and %T macros, but in addition the files are untagged.
+You can use this macro only once per menu file entry or extension file
+entry, because next time there will be no tagged files.
+.TP
+.IR %s " and " %S
 The selected files: The tagged files if there are any. Otherwise the
 current file.
-.PP
-.I "%cd"
-.IP
+.TP
+.I %cd
 This is a special macro that is used to change the current directory
 to the directory specified in front of it.  This is used primarily as
 an interface to the
 .\"LINK2"
 Virtual File System\&.
 .\"Virtual File System"
-.PP
-.I "%view"
-.IP
+.TP
+.I %view
 This macro is used to invoke the internal viewer.  This macro can be
 used alone, or with arguments.  If you pass any arguments to this
 macro, they should be enclosed in brackets.
@@ -2028,20 +2001,17 @@ sequences of nroff;
 .I unformatted
 to tell the viewer to not interpret nroff commands for making the text
 bold or underlined.
-.PP
-.I "%%"
-.IP
+.TP
+.I %%
 The % character
-.PP
-.I "%{some text}"
-.IP
+.TP
+.I %{some text}
 Prompt for the substitution. An input box is shown and the text inside
 the braces is used as a prompt. The macro is substituted by the text
 typed by the user. The user can press ESC or F10 to cancel. This macro
 doesn't work on the command line yet.
-.PP
-.I "%var{ENV:default}"
-.IP
+.TP
+.I %var{ENV:default}
 If environment variable
 .I ENV
 is unset, the
@@ -2936,35 +2906,30 @@ menus. However, there are a small number of settings which can only be
 changed by editing the setup file.
 .PP
 These variables may be set in your ~/.mc/ini file:
-.PP
+.TP
 .I clear_before_exec
-.IP
 By default the Midnight Commander clears the screen before executing a
 command. If you would prefer to see the output of the command at the
 bottom of the screen, edit your ~/.mc/ini file and change the value of
 the field clear_before_exec to 0.
-.PP
+.TP
 .I confirm_view_dir
-.IP
 If you press F3 on a directory, normally MC enters that directory. If
 this flag is set to 1, then MC will ask for confirmation before
 changing the directory if you have files tagged.
-.PP
+.TP
 .I ftpfs_retry_seconds
-.IP
 This value is the number of seconds the Midnight Commander will wait
 before attempting to reconnect to an ftp server that has denied the login.
 If the value is zero, the login will no be retried.
-.PP
+.TP
 .I ftpfs_use_passive_connections
-.IP
 This option is off by default.  This makes the ftpfs code use the
 passive open mode for transferring files.  This is used by people that
 are behind a filtering packet router.  This option just works if you
 are not using an ftp proxy.
-.PP
+.TP
 .I max_dirt_limit
-.IP
 Specifies how many screen updates can be skipped at most in the internal
 file viewer.  Normally this value is not significant, because the code
 automatically adjusts the number of updates to skip according to the rate
@@ -2974,48 +2939,41 @@ too jumpy.
 .IP
 It seems that setting max_dirt_limit to 10 causes the best behavior,
 and that is the default value.
-.PP
+.TP
 .I mouse_move_pages
-.IP
 Controls whenever scrolling with the mouse is done by pages or line by
 line on the panels.
-.PP
+.TP
 .I mouse_move_pages_viewer
-.IP
 Controls if scrolling with the mouse is done by pages or line by line
 on the internal file viewer.
-.PP
+.TP
 .I old_esc_mode
-.IP
 By default the Midnight Commander treats the ESC key as a key prefix
 (old_esc_mode=0), if you set this option (old_esc_mode=1), then the
 ESC key will act as a prefix key for one second, and if no extra keys
 have arrived, then the ESC key is interpreted as a cancel key (ESC
 ESC).
-.PP
+.TP
 .I only_leading_plus_minus
-.IP
 Allow special treatment for '+', '-', '*' in the command line (select,
 unselect, reverse selection) only if the command line is empty.  You
 don't need to quote those characters in the middle of the command line.
 On the other hand, you cannot use them to change selection when the
 command line is not empty.
-.PP
+.TP
 .I panel_scroll_pages
-.IP
 If set (the default), panel will scroll by half the display when the
 cursor reaches the end or the beginning of the panel, otherwise it
 will just scroll a file at a time.
-.PP
+.TP
 .I show_output_starts_shell
-.IP
 This variable only works if you are not using the subshell support.
 When you use the C-o keystroke to go back to the user screen, if this
 one is set, you will get a fresh shell.  Otherwise, pressing any key
 will bring you back to the Midnight Commander.
-.PP
+.TP
 .I torben_fj_mode
-.IP
 If this flag is set, then the home and end keys will work slightly
 different on the panels, instead of moving the selection to the first
 and last files in the panels, they will act as follows:
@@ -3028,17 +2986,15 @@ The end key has a similar behavior: Go down to the middle line, if
 over it; else go to the bottom line unless you already are at the
 bottom line, in such case it will move the selection to the last file
 name in the panel.
-.PP
+.TP
 .I use_file_to_guess_type
-.IP
 If this variable is on (the default) it will spawn the file command to
 match the file types listed on the
 .\"LINK2"
 mc.ext file\&.
 .\"Extension File Edit"
-.PP
+.TP
 .I xterm_mode
-.IP
 If this variable is on (default is off) when you browse the file
 system on a Tree panel, it will automatically reload the other panel
 with the contents of the selected directory.
