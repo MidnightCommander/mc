@@ -2,9 +2,9 @@ AM_CFLAGS = @CFLAGS@ @GLIB_CFLAGS@
 AM_CPPFLAGS = -DMIDNIGHT
 
 if USE_EDIT
-lib_LIBRARIES = libedit.a
+noinst_LIBRARIES = libedit.a
 else
-lib_LIBRARIES =
+noinst_LIBRARIES =
 endif
 
 libedit_a_SOURCES = edit.c editcmd.c editwidget.c editdraw.c \

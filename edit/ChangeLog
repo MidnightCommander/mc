@@ -1,5 +1,7 @@
 2001-08-26  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.am: Don't install libedit.a.
+
 	* Makefile.in: Converted to ...
 	* Makefile.am: ... this.
 
