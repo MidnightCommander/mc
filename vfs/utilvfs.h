@@ -20,7 +20,7 @@ int vfs_split_text (char *p);
 
 int vfs_mkstemps (char **pname, const char *prefix, const char *basename);
 void vfs_die (const char *msg);
-char *vfs_get_password (char *msg);
+char *vfs_get_password (const char *msg);
 
 int vfs_parse_ls_lga (const char *p, struct stat *s, char **filename,
 		      char **linkname);

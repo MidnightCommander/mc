@@ -857,8 +857,8 @@ vfs_die (const char *m)
 }
 
 char *
-vfs_get_password (char *msg)
+vfs_get_password (const char *msg)
 {
-    return (char *) input_dialog (msg, _("Password:"), INPUT_PASSWORD);
+    return input_dialog (msg, _("Password:"), INPUT_PASSWORD);
 }
 

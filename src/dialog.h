@@ -143,7 +143,7 @@ void draw_double_box (Dlg_head *h, int y, int x, int ys, int xs);
 /* Creates a dialog head  */
 Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 		      const int *color_set, dlg_cb_fn callback,
-		      char *help_ctx, const char *title, int flags);
+		      const char *help_ctx, const char *title, int flags);
 
 
 /* The flags: */

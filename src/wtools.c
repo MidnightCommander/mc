@@ -39,11 +39,11 @@
 
 
 Listbox *
-create_listbox_window (int cols, int lines, char *title, char *help)
+create_listbox_window (int cols, int lines, const char *title, const char *help)
 {
     int xpos, ypos, len;
     Listbox *listbox = g_new (Listbox, 1);
-    char *cancel_string = _("&Cancel");
+    const char *cancel_string = _("&Cancel");
 
     /* Adjust sizes */
     lines = (lines > LINES - 6) ? LINES - 6 : lines;
@@ -68,7 +68,7 @@ create_listbox_window (int cols, int lines, char *title, char *help)
 
     add_widget (listbox->dlg,
 		button_new (lines + 3, (cols / 2 + 2) - len / 2, B_CANCEL,
-			    NORMAL_BUTTON, cancel_string, 0));
+			    NORMAL_BUTTON, const_cast(char *, cancel_string), 0));
     add_widget (listbox->dlg, listbox->list);
 
     return listbox;
@@ -431,8 +431,8 @@ int quick_dialog (QuickDialog *qd)
 
 /* Show dialog, not background safe */
 static char *
-fg_input_dialog_help (char *header, char *text, char *help,
-			char *def_text)
+fg_input_dialog_help (const char *header, const char *text, const char *help,
+			const char *def_text)
 {
     QuickDialog Quick_input;
     QuickWidget quick_widgets[] = {
@@ -483,11 +483,11 @@ fg_input_dialog_help (char *header, char *text, char *help,
 
     Quick_input.xlen = len;
     Quick_input.xpos = -1;
-    Quick_input.title = header;
-    Quick_input.help = help;
+    Quick_input.title = const_cast(char *, header);
+    Quick_input.help = const_cast(char *, help);
     Quick_input.i18n = 0;
     quick_widgets[INPUT_INDEX + 1].text = g_strstrip (g_strdup (text));
-    quick_widgets[INPUT_INDEX].text = def_text;
+    quick_widgets[INPUT_INDEX].text = const_cast(char *, def_text);
 
     for (i = 0; i < 4; i++)
 	quick_widgets[i].y_divisions = lines + 6;
@@ -510,7 +510,7 @@ fg_input_dialog_help (char *header, char *text, char *help,
 
 /* Show input dialog, background safe */
 char *
-input_dialog_help (char *header, char *text, char *help, char *def_text)
+input_dialog_help (const char *header, const char *text, const char *help, const char *def_text)
 {
 #ifdef WITH_BACKGROUND
     if (we_are_background)
@@ -524,13 +524,13 @@ input_dialog_help (char *header, char *text, char *help, char *def_text)
 }
 
 /* Show input dialog with default help, background safe */
-char *input_dialog (char *header, char *text, char *def_text)
+char *input_dialog (const char *header, const char *text, const char *def_text)
 {
     return input_dialog_help (header, text, "[Input Line Keys]", def_text);
 }
 
 char *
-input_expand_dialog (char *header, char *text, char *def_text)
+input_expand_dialog (const char *header, const char *text, const char *def_text)
 {
     char *result;
     char *expanded;

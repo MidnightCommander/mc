@@ -10,7 +10,7 @@ typedef struct {
     struct WListbox *list;
 } Listbox;
 
-Listbox *create_listbox_window (int cols, int lines, char *title, char *help);
+Listbox *create_listbox_window (int cols, int lines, const char *title, const char *help);
 #define LISTBOX_APPEND_TEXT(l,h,t,d) \
     listbox_add_item (l->list, 0, h, t, d);
 
@@ -61,9 +61,9 @@ int quick_dialog_skip (QuickDialog *qd, int nskip);
 /* Pass this as def_text to request a password */
 #define INPUT_PASSWORD ((char *) -1)
 
-char *input_dialog (char *header, char *text, char *def_text);
-char *input_dialog_help (char *header, char *text, char *help, char *def_text);
-char *input_expand_dialog (char *header, char *text, char *def_text);
+char *input_dialog (const char *header, const char *text, const char *def_text);
+char *input_dialog_help (const char *header, const char *text, const char *help, const char *def_text);
+char *input_expand_dialog (const char *header, const char *text, const char *def_text);
 
 void query_set_sel (int new_sel);
 
