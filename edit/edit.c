@@ -228,6 +228,9 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
 	return 0;
     }
     memset (&(edit->from_here), 0, (unsigned long) &(edit->to_here) - (unsigned long) &(edit->from_here));
+#ifndef MIDNIGHT
+    edit->max_column = columns * FONT_MEAN_WIDTH;
+#endif
     edit->num_widget_lines = lines;
     edit->num_widget_columns = columns;
     edit->stat.st_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
@@ -261,6 +264,11 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
 	return 0;
     }
     edit->total_lines = edit_count_lines (edit, 0, edit->last_byte);
+    edit_load_syntax (edit, 0, 0);
+    {
+	int fg, bg;
+	edit_get_syntax_color (edit, -1, &fg, &bg);
+    }
     return edit;
 }
 
@@ -270,6 +278,7 @@ int edit_clean (WEdit * edit)
 {
     if (edit) {
 	int j = 0;
+	edit_free_syntax_rules (edit);
 	for (; j <= MAXBUFF; j++) {
 	    if (edit->buffers1[j] != NULL)
 		free (edit->buffers1[j]);
@@ -524,6 +533,7 @@ void edit_insert (WEdit * edit, int c)
 /* update markers */
     edit->mark1 += (edit->mark1 > edit->curs1);
     edit->mark2 += (edit->mark2 > edit->curs1);
+    edit->last_get_rule += (edit->last_get_rule > edit->curs1);
 
 /* add a new buffer if we've reached the end of the last one */
     if (!(edit->curs1 & M_EDIT_BUF_SIZE))
@@ -559,6 +569,7 @@ void edit_insert_ahead (WEdit * edit, int c)
 
     edit->mark1 += (edit->mark1 >= edit->curs1);
     edit->mark2 += (edit->mark2 >= edit->curs1);
+    edit->last_get_rule += (edit->last_get_rule >= edit->curs1);
 
     if (!((edit->curs2 + 1) & M_EDIT_BUF_SIZE))
 	edit->buffers2[(edit->curs2 + 1) >> S_EDIT_BUF_SIZE] = malloc (EDIT_BUF_SIZE);
@@ -577,6 +588,7 @@ int edit_delete (WEdit * edit)
 
     edit->mark1 -= (edit->mark1 > edit->curs1);
     edit->mark2 -= (edit->mark2 > edit->curs1);
+    edit->last_get_rule -= (edit->last_get_rule > edit->curs1);
 
     p = edit->buffers2[(edit->curs2 - 1) >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - ((edit->curs2 - 1) & M_EDIT_BUF_SIZE) - 1];
 
@@ -611,6 +623,7 @@ int edit_backspace (WEdit * edit)
 
     edit->mark1 -= (edit->mark1 >= edit->curs1);
     edit->mark2 -= (edit->mark2 >= edit->curs1);
+    edit->last_get_rule -= (edit->last_get_rule >= edit->curs1);
 
     p = *(edit->buffers1[(edit->curs1 - 1) >> S_EDIT_BUF_SIZE] + ((edit->curs1 - 1) & M_EDIT_BUF_SIZE));
     if (!((edit->curs1 - 1) & M_EDIT_BUF_SIZE)) {
