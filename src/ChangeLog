@@ -1,3 +1,12 @@
+2001-04-27  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* find.c (search_content): Redo recent change without infinite loop ;-),
+	egrep_path hardcoded to "egrep" as it is done in locate_egrep ()  
+
+	(locate_egrep): commented out
+
+	(rotating_dash) [!HAVE_X]: moved into do_search to prevent warning
+
 2001-04-26  Pavel Roskin  <proski@gnu.org>
 
 	* find.c (search_content): Undo a recent change that caused an
@@ -8,7 +17,7 @@
 	* view.c (get_line_at): previous newline is right condition 
 	for regexp '^' pattern also, fixed
 
-	(search) [HAVE_GNOME]: gnome_message_box_new don't expand printf
+	(search) [HAVE_GNOME]: gnome_message_box_new doesn't expand printf
 	pattern, so g_strdup_printf used
 
 	* find.c (find_parameters): don't use stat structure if mc_stat failed

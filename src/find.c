@@ -111,9 +111,6 @@ static WLabel *status_label;	/* Finished, Searching etc. */
 static WListbox *find_list;	/* Listbox with the file list */
 #endif
 
-/* For nice updating */
-static char *rotating_dash = "|/-\\";
-
 /* This keeps track of the directory stack */
 typedef struct dir_stack {
     char *name;
@@ -388,12 +385,12 @@ find_add_match (Dlg_head *h, char *dir, char *file)
 #endif	    
 }
 
+#if 0
 static char *
 locate_egrep (void)
 {
 /* commented out because mc runs egrep via execvp() which searches PATH
     itself. It is likely that egrep in PATH is better than in /bin */
-#if 0
     char *paths [] = {
 	"/bin/egrep",
 	"/usr/bin/egrep",
@@ -408,9 +405,9 @@ locate_egrep (void)
 	if (stat (*p, &s) == 0)
 	    return *p;
     }
-#endif
     return "egrep";
 }
+#endif
 
 /* 
  * search_content:
@@ -428,7 +425,7 @@ search_content (Dlg_head *h, char *directory, char *filename)
     char c;
     int i;
     pid_t pid;
-    static char *egrep_path;
+    char *egrep_path = "egrep";
     char *egrep_opts = case_sensitive ? "-n" : "-in";
 
     fname = concat_dir_and_file (directory, filename);
@@ -440,39 +437,33 @@ search_content (Dlg_head *h, char *directory, char *filename)
 
     file_fd = mc_open (fname, O_RDONLY);
     g_free (fname);
-    
+
     if (file_fd == -1)
 	return;
-
-    if (!egrep_path)
-	egrep_path = locate_egrep ();
 
 #ifndef GREP_STDIN
     pipe = mc_doublepopen (file_fd, -1, &pid, egrep_path, egrep_path, egrep_opts, content_pattern, NULL);
 #else /* GREP_STDIN */
     pipe = mc_doublepopen (file_fd, -1, &pid, egrep_path, egrep_path, egrep_opts, content_pattern, "-", NULL);
 #endif /* GREP STDIN */
-	
+
     if (pipe == -1){
 	mc_close (file_fd);
 	return;
     }
-    
+
     g_snprintf (buffer, sizeof (buffer), _("Grepping in %s"), name_trunc (filename, FIND2_X_USE));
 
     status_update (buffer);
     mc_refresh ();
     p = buffer;
     ignoring = 0;
-    
+
     enable_interrupt_key ();
     got_interrupt ();
 
-    while (1){
-	i = read (pipe, &c, 1);
-	if (i == 0)
-	    break;
-	
+    while ((i = read (pipe, &c, 1)) == 1){
+
 	if (c == '\n'){
 	    p = buffer;
 	    ignoring = 0;
@@ -480,10 +471,10 @@ search_content (Dlg_head *h, char *directory, char *filename)
 
 	if (ignoring)
 	    continue;
-	
+
 	if (c == ':'){
 	    char *the_name;
-	    
+
 	    *p = 0;
 	    ignoring = 1;
 	    the_name = g_strconcat (buffer, ":", filename, NULL);
@@ -494,7 +485,7 @@ search_content (Dlg_head *h, char *directory, char *filename)
 		*p++ = c;
 	    else
 		*p = 0;
-	} 
+	}
     }
     disable_interrupt_key ();
     if (i == -1)
@@ -564,7 +555,7 @@ do_search (struct Dlg_head *h)
 	    } 
 	    
 	    strcpy (directory, tmp);
-	   g_free (tmp);
+	    g_free (tmp);
 
 	    if (verbose){
 		    char buffer [BUF_SMALL];
@@ -614,9 +605,12 @@ do_search (struct Dlg_head *h)
 
     /* Displays the nice dot */
     count++;
-    if (!(count & 31)){
-	if (verbose){
 #ifndef HAVE_X
+    if (!(count & 31)){
+	/* For nice updating */
+	char *rotating_dash = "|/-\\";
+
+	if (verbose){
 	    pos = (pos + 1) % 4;
 	    attrset (NORMALC);
 	    dlg_move (h, FIND2_Y-6, FIND2_X - 4);
@@ -625,9 +619,6 @@ do_search (struct Dlg_head *h)
 	}
     } else
 	goto do_search_begin;
-#else
-        }
-    }
 #endif
     x_flush_events ();
     return 1;
@@ -895,7 +886,7 @@ get_list_info (char **file, char **dir)
 	gtk_clist_get_text (GTK_CLIST (g_clist), current_row, 0, file);
 	*dir = gtk_clist_get_row_data (GTK_CLIST (g_clist), current_row);
 }
-#else
+#else	/* HAVE_GNOME */
 
 static void
 get_list_info (char **file, char **dir)
@@ -1091,7 +1082,7 @@ kill_gui (void)
     set_idle_proc (find_dlg, 0);
     destroy_dlg (find_dlg);
 }
-#endif
+#endif	/* HAVE_GNOME */
 
 static int
 find_file (char *start_dir, char *pattern, char *content, char **dirname,  char **filename)
