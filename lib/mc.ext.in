@@ -373,37 +373,37 @@ type/PostScript\ text
 	View with GhostView=ghostview %f
 
 type/GIF\ image
-	Open=xv %f
+	Open=ee %f
 	Icon=gif.xpm
 	Include=image-options
 	
 type/GIF\ picture
-	Open=xv %f
+	Open=ee %f
 	Icon=gif.xpm
 	Include=image-options
 	
 type/JPEG\ picture
-	Open=xv %f
+	Open=ee %f
 	Icon=jpeg.xpm
 	Include=image-options
 	
 type/TIFF\ file
-	Open=xv %f
+	Open=ee %f
 	Icon=tiff.xpm
 	Include=image-options
 	
 type/PBM
-	Open=xv %f
+	Open=ee %f
 	Icon=pbm.xpm
 	Include=image-options
 	
 type/PGM
-	Open=xv %f
+	Open=ee %f
 	Icon=pgm.xpm
 	Include=image-options
 	
 type/PPM
-	Open=xv %f
+	Open=ee %f
 	Icon=ppm.xpm
 	Include=image-options
 
@@ -412,14 +412,14 @@ shell/.xbm
 	Icon=xbm.xpm
 
 shell/.xpm
-	Open=xv %f
+	Open=ee %f
 	View=sxpm %f
 	Include=image-options
 	Icon=xpm.xpm
 
 include/image-options
-	Set root window to this image=xv -root %f &
-	Display this file=xv %f &
+	Set root window to this image=ee -root %f &
+	Display this file=ee %f &
 
 # Sound files
 shell/.mod

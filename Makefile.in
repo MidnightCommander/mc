@@ -116,7 +116,7 @@ distcopy:
 	cp po/Makefile.in.in ../mc-$(VERSION)/po;
 	cp po/POTFILES.in ../mc-$(VERSION)/po;
 	cp po/*.po ../mc-$(VERSION)/po;
-	mkdir ../mc-$(VERSION)/intl
+	-mkdir ../mc-$(VERSION)/intl
 	for I in $(alldirs); do \
 	    cd $$I ; \
 	    $(MAKE) distcopy VERSION=$(VERSION) PACKAGE=mc || exit 1; \

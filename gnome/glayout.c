@@ -350,7 +350,7 @@ new_panel_at (char *dir)
 	Dlg_head *h = current_panel_ptr->panel->widget.parent;
 	
 	mc_chdir (dir);
-	panel = create_container (h, "Other");
+	panel = create_container (h, dir);
 	add_widget (h, panel);
 
 	set_new_current_panel (panel);

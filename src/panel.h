@@ -114,6 +114,9 @@ typedef struct {
 
 #ifdef HAVE_GNOME
     /* These are standard GtkWidgets */
+	
+    void *xwindow;		/* The toplevel window */
+	
     void *table;
     void *list;
     void *icons;

@@ -74,6 +74,7 @@ show_dir (WPanel *panel)
 {
 	assign_text (panel->current_dir, panel->cwd);
 	update_input (panel->current_dir, 1);
+	gtk_window_set_title (GTK_WINDOW (panel->xwindow), panel->cwd);
 }
 
 static void
@@ -1278,7 +1279,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	GtkWidget *frame, *cwd, *back, *home, *fwd, *back_p, *fwd_p;
 	GtkWidget *very_top, *display;
 
-	very_top = gtk_widget_get_toplevel (GTK_WIDGET (panel->widget.wdata));
+	panel->xwindow = gtk_widget_get_toplevel (GTK_WIDGET (panel->widget.wdata));
 	
 	panel->table = gtk_table_new (2, 1, 0);
 
@@ -1294,8 +1295,8 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	h->current = h->current->prev;
 
 	/* buttons */
-	back_p = gnome_stock_pixmap_widget_new (very_top, GNOME_STOCK_MENU_BACK);
-	fwd_p  = gnome_stock_pixmap_widget_new (very_top, GNOME_STOCK_MENU_FORWARD);
+	back_p = gnome_stock_pixmap_widget_new (panel->xwindow, GNOME_STOCK_MENU_BACK);
+	fwd_p  = gnome_stock_pixmap_widget_new (panel->xwindow, GNOME_STOCK_MENU_FORWARD);
 	
 	panel->up_b    = gtk_button_new_with_label ("up");
 	panel->back_b   = gtk_button_new ();
@@ -1416,3 +1417,5 @@ x_reset_sort_labels (WPanel *panel)
 {
 	panel_switch_new_display_mode (panel);
 }
+
+

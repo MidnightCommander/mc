@@ -1243,7 +1243,7 @@ static void nice_cd (char *text, char *xtext, char *help, char *prefix, int to_h
     if (do_panel_cd (MENU_PANEL, cd_path, 0))
 	directory_history_add (MENU_PANEL, (MENU_PANEL)->cwd);
     else
-	message (1, MSG_ERROR, N_(" Could not chdir to %s ", cd_path);
+	message (1, MSG_ERROR, N_(" Could not chdir to %s "), cd_path);
     free (cd_path);
     free (machine);
 }

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Date: 1998-04-15 01:22:02-0500\n"
+"Date: 1998-04-15 15:30:40-0500\n"
 "From: Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>\n"
 "Content-Type: text/plain; charset=\n"
 "Xgettext-Options: --default-domain=mc --directory=.. --add-comments --keyword=_ --keyword=N_ --files-from=./POTFILES.in\n"
@@ -304,11 +304,11 @@ msgstr ""
 msgid "Cancel quit"
 msgstr ""
 
-#: edit/editcmd.c:1961 gnome/gdesktop.c:1023 src/cmd.c:240 src/file.c:2116 src/file.c:2469 src/file.c:2549 src/hotlist.c:887 src/main.c:838 src/screen.c:1976 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:411
+#: edit/editcmd.c:1961 gnome/gdesktop.c:1023 src/cmd.c:240 src/file.c:2116 src/file.c:2469 src/file.c:2549 src/hotlist.c:1027 src/main.c:838 src/screen.c:1976 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:411
 msgid "&Yes"
 msgstr ""
 
-#: edit/editcmd.c:1961 gnome/gdesktop.c:1023 src/cmd.c:240 src/file.c:2116 src/file.c:2466 src/file.c:2549 src/hotlist.c:887 src/main.c:838 src/screen.c:1976 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:411
+#: edit/editcmd.c:1961 gnome/gdesktop.c:1023 src/cmd.c:240 src/file.c:2116 src/file.c:2466 src/file.c:2549 src/hotlist.c:1027 src/main.c:838 src/screen.c:1976 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:411
 msgid "&No"
 msgstr ""
 
@@ -805,7 +805,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/achown.c:72 src/boxes.c:138 src/boxes.c:273 src/boxes.c:370 src/boxes.c:457 src/boxes.c:636 src/boxes.c:757 src/boxes.c:799 src/chmod.c:115 src/chown.c:81 src/cmd.c:832 src/file.c:1953 src/find.c:158 src/hotlist.c:140 src/hotlist.c:696 src/hotlist.c:777 src/layout.c:365 src/learn.c:58 src/option.c:143 src/panelize.c:89 src/view.c:411 src/wtools.c:114 src/wtools.c:401 src/wtools.c:574 src/wtools.c:654
+#: src/achown.c:72 src/boxes.c:138 src/boxes.c:273 src/boxes.c:370 src/boxes.c:457 src/boxes.c:636 src/boxes.c:757 src/boxes.c:799 src/chmod.c:115 src/chown.c:81 src/cmd.c:832 src/file.c:1953 src/find.c:158 src/hotlist.c:140 src/hotlist.c:810 src/hotlist.c:903 src/layout.c:365 src/learn.c:58 src/option.c:143 src/panelize.c:89 src/view.c:411 src/wtools.c:114 src/wtools.c:408 src/wtools.c:581 src/wtools.c:661
 msgid "&Cancel"
 msgstr ""
 
@@ -865,7 +865,7 @@ msgid ""
 " %s "
 msgstr ""
 
-#: src/achown.c:647 src/achown.c:651 src/chmod.c:329 src/chmod.c:333 src/chown.c:256 src/chown.c:260 src/panelize.c:267 src/user.c:623
+#: src/achown.c:647 src/achown.c:651 src/chmod.c:329 src/chmod.c:333 src/chown.c:256 src/chown.c:260 src/panelize.c:298 src/user.c:623
 msgid " Oops... "
 msgstr ""
 
@@ -927,7 +927,7 @@ msgstr ""
 msgid "user &Mini status"
 msgstr ""
 
-#: gnome/gtools.c:129 src/boxes.c:137 src/boxes.c:272 src/boxes.c:372 src/boxes.c:459 src/boxes.c:638 src/boxes.c:758 src/boxes.c:801 src/boxes.c:910 src/file.c:1960 src/find.c:158 src/layout.c:364 src/option.c:142 src/wtools.c:295 src/wtools.c:576
+#: gnome/gtools.c:129 src/boxes.c:137 src/boxes.c:272 src/boxes.c:372 src/boxes.c:459 src/boxes.c:638 src/boxes.c:758 src/boxes.c:801 src/boxes.c:910 src/file.c:1960 src/find.c:158 src/layout.c:364 src/option.c:142 src/wtools.c:302 src/wtools.c:583
 msgid "&Ok"
 msgstr ""
 
@@ -1429,7 +1429,7 @@ msgstr ""
 msgid "Show directory sizes"
 msgstr ""
 
-#: src/cmd.c:1379 src/panelize.c:425
+#: src/cmd.c:1379 src/panelize.c:456
 msgid "Pipe close failed"
 msgstr ""
 
@@ -2094,15 +2094,15 @@ msgstr ""
 msgid "&Move"
 msgstr ""
 
-#: src/hotlist.c:135 src/hotlist.c:1291 src/panelize.c:91 src/wtools.c:398
+#: src/hotlist.c:135 src/hotlist.c:1431 src/panelize.c:91 src/wtools.c:405
 msgid "&Remove"
 msgstr ""
 
-#: src/hotlist.c:136 src/hotlist.c:700 src/hotlist.c:781
+#: src/hotlist.c:136 src/hotlist.c:814 src/hotlist.c:907
 msgid "&Append"
 msgstr ""
 
-#: src/hotlist.c:137 src/hotlist.c:698 src/hotlist.c:779
+#: src/hotlist.c:137 src/hotlist.c:812 src/hotlist.c:905
 msgid "&Insert"
 msgstr ""
 
@@ -2126,153 +2126,153 @@ msgstr ""
 msgid "Change &To"
 msgstr ""
 
-#: src/hotlist.c:201
+#: src/hotlist.c:203
 msgid "Subgroup - press ENTER to see list"
 msgstr ""
 
-#: src/hotlist.c:535
+#: src/hotlist.c:620
 msgid "Active VFS directories"
 msgstr ""
 
-#: src/hotlist.c:535
+#: src/hotlist.c:620
 msgid "Directory hotlist"
 msgstr ""
 
-#: src/hotlist.c:554
+#: src/hotlist.c:639
 msgid " Directory path "
 msgstr ""
 
 #. This one holds the displayed pathname
-#: src/hotlist.c:557 src/hotlist.c:603
+#: src/hotlist.c:642 src/hotlist.c:689
 msgid " Directory label "
 msgstr ""
 
-#: src/hotlist.c:578
+#: src/hotlist.c:663
 msgid "Moving "
 msgstr ""
 
-#: src/hotlist.c:758
+#: src/hotlist.c:884
 msgid "New hotlist entry"
 msgstr ""
 
-#: src/hotlist.c:758
+#: src/hotlist.c:884
 msgid "Directory label"
 msgstr ""
 
-#: src/hotlist.c:758
+#: src/hotlist.c:884
 msgid "Directory path"
 msgstr ""
 
-#: src/hotlist.c:826
+#: src/hotlist.c:964
 msgid " New hotlist group "
 msgstr ""
 
-#: src/hotlist.c:826
+#: src/hotlist.c:964
 msgid "Name of new group"
 msgstr ""
 
-#: src/hotlist.c:843
+#: src/hotlist.c:979
 msgid "Label for \"%s\":"
 msgstr ""
 
-#: src/hotlist.c:844
+#: src/hotlist.c:984
 msgid " Add to hotlist "
 msgstr ""
 
-#: src/hotlist.c:881
+#: src/hotlist.c:1021
 msgid " Remove: "
 msgstr ""
 
-#: src/hotlist.c:885
+#: src/hotlist.c:1025
 msgid ""
 "\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
 
-#: src/hotlist.c:1229
+#: src/hotlist.c:1369
 msgid " Top level group "
 msgstr ""
 
-#: src/hotlist.c:1245
+#: src/hotlist.c:1385
 msgid "Hotlist is now kept in file ~/"
 msgstr ""
 
-#: src/hotlist.c:1246
+#: src/hotlist.c:1386
 msgid "MC will load hotlist from ~/"
 msgstr ""
 
-#: src/hotlist.c:1247
+#: src/hotlist.c:1387
 msgid " and then delete [Hotlist] section there"
 msgstr ""
 
-#: src/hotlist.c:1248 src/hotlist.c:1267 src/hotlist.c:1290 src/hotlist.c:1315
+#: src/hotlist.c:1388 src/hotlist.c:1407 src/hotlist.c:1430 src/hotlist.c:1455
 msgid " Hotlist Load "
 msgstr ""
 
-#: src/hotlist.c:1264 src/hotlist.c:1312
+#: src/hotlist.c:1404 src/hotlist.c:1452
 msgid "MC was unable to write ~/"
 msgstr ""
 
-#: src/hotlist.c:1265
+#: src/hotlist.c:1405
 msgid " file, your old hotlist entries were not deleted"
 msgstr ""
 
-#: src/hotlist.c:1279
+#: src/hotlist.c:1419
 msgid "You have ~/"
 msgstr ""
 
-#: src/hotlist.c:1279
+#: src/hotlist.c:1419
 msgid " file and [Hotlist] section in ~/"
 msgstr ""
 
-#: src/hotlist.c:1280
+#: src/hotlist.c:1420
 msgid "Your ~/"
 msgstr ""
 
-#: src/hotlist.c:1280
+#: src/hotlist.c:1420
 msgid " most probably was created\n"
 msgstr ""
 
-#: src/hotlist.c:1281
+#: src/hotlist.c:1421
 msgid ""
 "by an earlier development version of MC\n"
 "and is more actual than ~/"
 msgstr ""
 
-#: src/hotlist.c:1282
+#: src/hotlist.c:1422
 msgid ""
 " entries\n"
 "\n"
 msgstr ""
 
-#: src/hotlist.c:1283
+#: src/hotlist.c:1423
 msgid ""
 "You can choose between\n"
 "\n"
 "  Remove - remove old hotlist entries from ~/"
 msgstr ""
 
-#: src/hotlist.c:1285
+#: src/hotlist.c:1425
 msgid ""
 "  Keep   - keep your old entries; you will be asked\n"
 "           the same question next time\n"
 "  Merge  - add old entries to hotlist as group \"Entries from ~/"
 msgstr ""
 
-#: src/hotlist.c:1291
+#: src/hotlist.c:1431
 msgid "&Keep"
 msgstr ""
 
-#: src/hotlist.c:1291
+#: src/hotlist.c:1431
 msgid "&Merge"
 msgstr ""
 
-#: src/hotlist.c:1303
+#: src/hotlist.c:1443
 msgid " Entries from ~/"
 msgstr ""
 
-#: src/hotlist.c:1313
+#: src/hotlist.c:1453
 msgid " file your old hotlist entries were not deleted"
 msgstr ""
 
@@ -3018,45 +3018,49 @@ msgstr ""
 msgid "&Add new"
 msgstr ""
 
-#: src/panelize.c:113
+#: src/panelize.c:102
 msgid " External panelize "
 msgstr ""
 
 #. SCO_FLAVOR
 #. SCO_FLAVOR
-#: gnome/glayout.c:240 src/panelize.c:164 src/panelize.c:425
+#: gnome/glayout.c:240 src/panelize.c:194 src/panelize.c:456
 msgid "External panelize"
 msgstr ""
 
-#: src/panelize.c:175
+#: src/panelize.c:205
 msgid "Command"
 msgstr ""
 
-#: src/panelize.c:189 src/panelize.c:244 src/panelize.c:314 src/panelize.c:335
+#: src/panelize.c:219 src/panelize.c:275 src/panelize.c:345 src/panelize.c:366
 msgid "Other command"
 msgstr ""
 
-#: src/panelize.c:229
+#: src/panelize.c:259
 msgid " Add to external panelize "
 msgstr ""
 
-#: src/panelize.c:268
-msgid " I can't run external panalize while logged on a non local directory "
+#: src/panelize.c:260
+msgid " Enter command label: "
 msgstr ""
 
-#: src/panelize.c:317
+#: src/panelize.c:299
+msgid " I can't run external panelize while logged on a non local directory "
+msgstr ""
+
+#: src/panelize.c:348
 msgid "Find rejects after patching"
 msgstr ""
 
-#: src/panelize.c:318
+#: src/panelize.c:349
 msgid "Find *.orig after patching"
 msgstr ""
 
-#: src/panelize.c:319
+#: src/panelize.c:350
 msgid "Find SUID and SGID programs"
 msgstr ""
 
-#: src/panelize.c:370
+#: src/panelize.c:401
 msgid "Cannot invoke command."
 msgstr ""
 
@@ -3619,11 +3623,11 @@ msgstr ""
 msgid "NumLock on keypad"
 msgstr ""
 
-#: src/wtools.c:602
+#: src/wtools.c:609
 msgid "Password"
 msgstr ""
 
-#: src/wtools.c:656
+#: src/wtools.c:663
 msgid "Ok"
 msgstr ""
 
