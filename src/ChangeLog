@@ -1,5 +1,8 @@
 2003-10-25  Pavel Roskin  <proski@gnu.org>
 
+	* background.c (do_background): Use pipe() instead of less
+	portable socketpair().  Close comm[0] in the child.
+
 	* wtools.c (mc_message): Fix argument expansion.
 
 	* background.c: Leave only code used when WITH_BACKGROUND is

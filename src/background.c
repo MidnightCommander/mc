@@ -41,11 +41,6 @@
 #include "widget.h"
 #include "wtools.h"
 
-/*
- * We currenlty only support one way of comunicating the background
- * and foreground process by using the socketpair system call
- */
-#include <sys/socket.h>
 #include "fileopctx.h"
 #include "key.h"	/* For add_select_channel(), delete_select_channel() */
 #include "eregex.h"
@@ -54,10 +49,6 @@
 
 /* If true, this is a background process */
 int we_are_background = 0;
-
-#ifndef HAVE_SOCKETPAIR
-int socketpair(int, int, int, int fd[2]);
-#endif /* HAVE_SOCKETPAIR */
 
 /* File descriptor for talking to our parent */
 static int parent_fd;
@@ -120,7 +111,7 @@ do_background (struct FileOpContext *ctx, char *info)
     int comm[2];		/* control connection stream */
     pid_t pid;
 
-    if (socketpair (AF_UNIX, SOCK_STREAM, 0, comm) == -1)
+    if (pipe (comm) == -1)
 	return -1;
 
     if ((pid = fork ()) == -1)
@@ -129,6 +120,7 @@ do_background (struct FileOpContext *ctx, char *info)
     if (pid == 0) {
 	int nullfd;
 
+	close (comm[0]);
 	parent_fd = comm[1];
 	we_are_background = 1;
 
