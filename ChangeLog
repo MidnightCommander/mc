@@ -1,3 +1,8 @@
+2003-05-08  Pavel Roskin  <proski@gnu.org>
+
+	* mc.spec.in: Strip pre-1998 changelog to work around a bug in
+	rpm 4.2, which doesn't like %install inside %changelog.
+
 2003-04-29  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Add vfs/extfs/iso9660 to AC_CONFIG_FILES.
