@@ -7,3 +7,10 @@ mc.metadata
 image.metadata
 mc.keys.in
 mc.keys
+gmc
+FileManager.h
+FileManager-common.c
+FileManager-stubs.c
+FileManager-skels.c
+FileManager-impl.c
+make-thumb
