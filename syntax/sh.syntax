@@ -35,8 +35,7 @@ context default
     keyword wholeleft linestart function\[\s\]+ brightmagenta
     keyword wholeright +() brightmagenta
 
-wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
-wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
+wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
     keyword whole alias yellow
     keyword whole bg yellow
@@ -160,8 +159,7 @@ wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.
     keyword whole zcat cyan
     keyword whole zsh cyan
 
-wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
-wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
+wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
 
 context # \n brown
     spellcheck
@@ -219,8 +217,7 @@ context exclusive ` ` white black
 
     keyword $ brightgreen
 
-wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
-wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
+wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
     keyword whole break yellow
     keyword whole case yellow
