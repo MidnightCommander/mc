@@ -94,7 +94,7 @@ dicon_properties (GtkWidget *widget, DesktopIconInfo *dii)
 	char *path;
 	GtkWidget *dlg;
 	
-	path = g_strconcat (getenv("HOME"), "/desktop/", dii->filename, NULL);
+	path = concat_dir_and_file (desktop_directory, dii->filename);
 /*	retval = item_properties (dii->dicon, path, dii);*/
 	dlg = gnome_file_property_dialog_new (path, TRUE);
 	gtk_widget_show_all (dlg);

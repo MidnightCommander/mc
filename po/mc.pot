@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-02-24 19:06-0600\n"
+"POT-Creation-Date: 1999-02-25 00:35-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -212,19 +212,19 @@ msgstr ""
 msgid "Could not symlink %s to %s; will not have initial desktop icons."
 msgstr ""
 
-#: gnome/gdesktop.c:2146 gnome/glayout.c:410
+#: gnome/gdesktop.c:2148 gnome/glayout.c:410
 msgid "Arrange Icons"
 msgstr ""
 
-#: gnome/gdesktop.c:2148
+#: gnome/gdesktop.c:2150
 msgid "Create New Window"
 msgstr ""
 
-#: gnome/gdesktop.c:2150 gnome/glayout.c:412
+#: gnome/gdesktop.c:2152
 msgid "Rescan Mountable Devices"
 msgstr ""
 
-#: gnome/gdesktop.c:2151 gnome/glayout.c:413
+#: gnome/gdesktop.c:2153 gnome/glayout.c:413
 msgid "Rescan Desktop"
 msgstr ""
 
@@ -577,6 +577,10 @@ msgstr ""
 
 #: gnome/glayout.c:397
 msgid "Terminates the file manager and the desktop"
+msgstr ""
+
+#: gnome/glayout.c:412
+msgid "Rescan System Devices"
 msgstr ""
 
 #: gnome/glayout.c:420 gnome/glayout.c:430
