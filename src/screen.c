@@ -256,12 +256,12 @@ string_file_type (file_entry *fe, int len)
 	buffer[0] = '+';
     else if (S_ISFIFO (fe->buf.st_mode))
 	buffer[0] = '|';
+    else if (!S_ISREG (fe->buf.st_mode))
+	buffer[0] = '?';	/* non-regular of unknown kind */
     else if (is_exe (fe->buf.st_mode))
 	buffer[0] = '*';
-    else if (S_ISREG (fe->buf.st_mode))
-	buffer[0] = ' ';
     else
-	buffer[0] = '?';	/* non-regular of unknown kind */
+	buffer[0] = ' ';
     buffer[1] = '\0';
     return buffer;
 }
@@ -498,17 +498,15 @@ file_compute_color (int attr, file_entry *fe)
 	return (SPECIAL_COLOR);
     else if (S_ISDOOR (fe->buf.st_mode))
 	return (SPECIAL_COLOR);
+    else if (!S_ISREG (fe->buf.st_mode))
+	return (STALE_LINK_COLOR);	/* non-regular file of unknown kind */
     else if (is_exe (fe->buf.st_mode))
 	return (EXECUTABLE_COLOR);
-    else if (fe->fname
-	     && (!strcmp (fe->fname, "core")
-		 || !strcmp (extension (fe->fname), "core")))
+    else if (fe->fname && (!strcmp (fe->fname, "core")
+			   || !strcmp (extension (fe->fname), "core")))
 	return (CORE_COLOR);
-    else if (S_ISREG (fe->buf.st_mode))
-	return (NORMAL_COLOR);
 
-    /* non-regular file of unknown kind */
-    return (STALE_LINK_COLOR);
+    return (NORMAL_COLOR);
 }
 
 /* Formats the file number file_index of panel in the buffer dest */

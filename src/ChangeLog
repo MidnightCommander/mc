@@ -1,5 +1,9 @@
 2003-01-20  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c (string_file_type): Check for "regularity" before
+	checking for executable bit.
+	(file_compute_color): Likewise.
+
 	* dir.c (handle_dirent): Fix cleaning the stat buffer if
 	mc_lstat() fails.  Leave buf1->st_mode to be 0, so that the
 	entry is marked as a "non-regular file of unknown kind".
