@@ -462,7 +462,7 @@ vfs_s_stamp_me (vfs *me, struct vfs_s_super *psup, char *fs_name)
     vfs *v;
  
     v = vfs_get_class (fs_name);
-    if (v == &vfs_local_ops){
+    if (v->flags & VFSF_LOCAL){
 	parent = NULL;
     } else {
 	parent = g_new (struct vfs_stamping, 1);
@@ -887,7 +887,7 @@ vfs_s_close (void *fh)
         vfs *v;
         
 	v = vfs_get_class (FH_SUPER->name);
-	if (v == &vfs_local_ops){
+	if (v->flags & VFSF_LOCAL) {
 	    parent = NULL;
 	} else {
 	    parent = g_new (struct vfs_stamping, 1);

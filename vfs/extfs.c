@@ -453,7 +453,7 @@ get_path_mangle (char *inname, struct archive **archive, int is_dir,
 
     if (archive_name) {
 	v = vfs_get_class (archive_name);
-	if (v == &vfs_local_ops) {
+	if (v->flags & VFSF_LOCAL) {
 	    parent = NULL;
 	} else {
 	    parent = g_new (struct vfs_stamping, 1);
@@ -718,22 +718,25 @@ static int extfs_read (void *data, char *buffer, int count)
     return read (file->local_handle, buffer, count);
 }
 
-static int extfs_close (void *data)
+static int
+extfs_close (void *data)
 {
     struct pseudofile *file;
-    int    errno_code = 0;
-    file = (struct pseudofile *)data;
-    
+    int errno_code = 0;
+    file = (struct pseudofile *) data;
+
     close (file->local_handle);
 
     /* Commit the file if it has changed */
     if (file->has_changed) {
-	if (extfs_cmd (" copyin ", file->archive, file->entry,
-		       file->entry->inode->local_filename))
+	if (extfs_cmd
+	    (" copyin ", file->archive, file->entry,
+	     file->entry->inode->local_filename))
 	    errno_code = EIO;
 	{
 	    struct stat file_status;
-	    if (stat (file->entry->inode->local_filename, &file_status) != 0)
+	    if (stat (file->entry->inode->local_filename, &file_status) !=
+		0)
 		errno_code = EIO;
 	    else
 		file->entry->inode->size = file_status.st_size;
@@ -744,23 +747,28 @@ static int extfs_close (void *data)
 
     file->archive->fd_usage--;
     if (!file->archive->fd_usage) {
-        struct vfs_stamping *parent;
-        vfs *v;
-        
-	if (!file->archive->name || !*file->archive->name || (v = vfs_get_class (file->archive->name)) == &vfs_local_ops) {
+	struct vfs_stamping *parent;
+	vfs *v;
+
+	if (!file->archive->name || !*file->archive->name
+	    || (v =
+		vfs_get_class (file->archive->name))->flags & VFSF_LOCAL) {
 	    parent = NULL;
 	} else {
 	    parent = g_new (struct vfs_stamping, 1);
 	    parent->v = v;
 	    parent->next = 0;
-	    parent->id = (*v->getid) (v, file->archive->name, &(parent->parent));
+	    parent->id =
+		(*v->getid) (v, file->archive->name, &(parent->parent));
 	}
-        vfs_add_noncurrent_stamps (&vfs_extfs_ops, (vfsid) (file->archive), parent);
+	vfs_add_noncurrent_stamps (&vfs_extfs_ops, (vfsid) (file->archive),
+				   parent);
 	vfs_rm_parents (parent);
     }
 
     g_free (data);
-    if (errno_code) ERRNOR (EIO, -1);
+    if (errno_code)
+	ERRNOR (EIO, -1);
     return 0;
 }
 

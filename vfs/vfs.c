@@ -90,15 +90,11 @@ get_bucket (void)
     return 0;
 }
 
-/* vfs_local_ops needs to be the first one */
-static vfs *vfs_list = &vfs_local_ops;
+static vfs *vfs_list;
 
 int
-vfs_register_class (vfs *vfs)
+vfs_register_class (struct vfs_class *vfs)
 {
-    if (!vfs)
-	vfs_die("You cannot register NULL.");
-    
     if (vfs->init)		/* vfs has own initialization function */
 	if (!(*vfs->init)(vfs))	/* but it failed */
 	    return 0;
@@ -279,7 +275,7 @@ vfs_timeouts ()
 static void
 vfs_addstamp (vfs *v, vfsid id, struct vfs_stamping *parent)
 {
-    if (v != &vfs_local_ops && id != (vfsid)-1){
+    if (!(v->flags & VFSF_LOCAL) && id != (vfsid)-1){
         struct vfs_stamping *stamp;
 	struct vfs_stamping *last_stamp = NULL;
         
@@ -1215,7 +1211,8 @@ vfs_init (void)
     current_mon  = t->tm_mon;
     current_year = t->tm_year;
 
-    /* We do not want to register vfs_local_ops */
+    /* vfs_local_ops needs to be the first one */
+    vfs_register_class (&vfs_local_ops);
 
 #ifdef USE_NETCODE
     tcp_init();
