@@ -39,6 +39,12 @@
 #define MOD_MARKED		(1 << 10)
 #define MOD_CURSOR		(1 << 11)
 
+#define FONT_OFFSET_X 0
+#define FONT_OFFSET_Y 0
+#define FIXED_FONT 1
+#define FONT_PIX_PER_LINE 1
+#define FONT_MEAN_WIDTH 1
+
 
 static void status_string (WEdit * edit, char *s, int w, int fill)
 {
@@ -335,8 +341,6 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
     int force = edit->force;
     long b;
 
-    CPushFont ("editor", 0);
-
 /*
  * If the position of the page has not moved then we can draw the cursor
  * character only.  This will prevent line flicker when using arrow keys.
@@ -432,7 +436,6 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
   exit_render:
     edit->screen_modified = 0;
     prev_start = edit->start_line;
-    CPopFont ();
     return;
 }
 

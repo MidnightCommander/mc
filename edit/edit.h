@@ -66,8 +66,6 @@
 
 #define EDIT_TEXT_HORIZONTAL_OFFSET 0
 #define EDIT_TEXT_VERTICAL_OFFSET 1
-#define FONT_OFFSET_X 0
-#define FONT_OFFSET_Y 0
 
 #define EDIT_RIGHT_EXTREME option_edit_right_extreme
 #define EDIT_LEFT_EXTREME option_edit_left_extreme
@@ -264,12 +262,6 @@ void format_paragraph (WEdit *edit, int force);
 /* either command or char_for_insertion must be passed as -1 */
 int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion);
 
-#define CPushFont(x,y)
-#define CPopFont()
-#define FIXED_FONT 1
-#define FONT_PIX_PER_LINE 1
-#define FONT_MEAN_WIDTH 1
-     
 #define get_sys_error(s) (s)
 
 #define edit_error_dialog(h,s) query_dialog (h, s, 0, 1, _("&Dismiss"))

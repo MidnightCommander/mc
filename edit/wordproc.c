@@ -25,6 +25,7 @@
 #define tab_width option_tab_spacing
 
 #define NO_FORMAT_CHARS_START "-+*\\,.;:&>"
+#define FONT_MEAN_WIDTH 1
 
 static long
 line_start (WEdit *edit, long line)
