@@ -102,6 +102,8 @@ edit_status (WEdit *edit)
     if (edit->filename)
         fname = edit->filename;
     fname_len = strlen(fname);
+    if (fname_len < 16)
+        fname_len = 16;
 
     if (fname_len + gap + status_len + 2 >= w) {
     	if (16 + gap + status_len + 2 >= w)

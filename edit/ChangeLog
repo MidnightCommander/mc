@@ -1,3 +1,8 @@
+2004-10-23  Roland Illig  <roland.illig@gmx.de>
+
+	* editdraw.c (edit_status): Expand the filename field in the status
+	line to 16 characters even if the actual filename is shorter.
+
 2004-10-16  Roland Illig  <roland.illig@gmx.de>
 
 	* syntax.c (read_one_line): Fixed SEGV when reading syntax file
