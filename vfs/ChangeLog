@@ -1,5 +1,8 @@
 2001-02-07  Pavel Roskin  <proski@gnu.org>
 
+	* Make-mc.in: Don't distribute samba/tests/trapdoor.c and
+	samba/tests/ftruncroot.c.
+
 	* samba/configure.in: Remove tests for setresuid and setresgid.
 	* samba/include/includes.h: Remove declarations of setresuid and
 	setresgid.

@@ -143,12 +143,10 @@ SAMBA_DIST_TESTS =		\
 	crypttest.c		\
 	fcntl_lock.c		\
 	ftruncate.c		\
-	ftruncroot.c		\
 	getgroups.c		\
 	shared_mmap.c		\
 	summary.c		\
 	sysv_ipc.c		\
-	trapdoor.c		\
 	trivial.c
 
 SAMBA_DIST_UBIQX =		\
