@@ -1001,7 +1001,7 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
 #ifndef __os2__
 	retry_mknod_chmod:
 	    if (preserve && mc_chmod (dst_path, sb.st_mode & umask_kill) < 0){
-		temp_status = file_error (_(" Cannnot chmod target file \"%s\" \n %s "), dst_path);
+		temp_status = file_error (_(" Cannot chmod target file \"%s\" \n %s "), dst_path);
 		if (temp_status == FILE_RETRY)
 		    goto retry_mknod_chmod;
 		return temp_status;

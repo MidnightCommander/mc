@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc VERSION\n"
-"POT-Creation-Date: 1998-06-20 16:07+0200\n"
+"POT-Creation-Date: 1998-06-26 14:54+0200\n"
 "PO-Revision-Date: 1998-03-27 01:22+0100\n"
 "Last-Translator: Vincent Renardias <vincent@waw.com>\n"
 "Language-Team: Vincent Renardias <vincent@waw.com>\n"
@@ -86,7 +86,7 @@ msgid " Error "
 msgstr " Erreur "
 
 #: edit/edit.c:113 edit/edit.c:168
-msgid " Fail trying to open file for reading: "
+msgid " Failed trying to open file for reading: "
 msgstr " Impossible d'ouvrir le fichier en lecture: "
 
 #: edit/edit.c:175
@@ -1865,10 +1865,10 @@ msgstr ""
 " Impossible d'exécuter chown sur le fichier cible \"%s\" \n"
 " %s "
 
-#: src/file.c:1004
+#: src/file.c:1004 src/file.c:1285
 #, c-format
 msgid ""
-" Cannnot chmod target file \"%s\" \n"
+" Cannot chmod target file \"%s\" \n"
 " %s "
 msgstr ""
 " Impossible d'exécuter chmod sur le fichier cible \"%s\" \n"
@@ -1956,15 +1956,6 @@ msgid ""
 " %s "
 msgstr ""
 " Impossible de fermer le fichier cible \"%s\" \n"
-" %s "
-
-#: src/file.c:1285
-#, c-format
-msgid ""
-" Cannot chmod target file \"%s\" \n"
-" %s "
-msgstr ""
-" Impossible d'exécuter chmod sur le fichier cible \"%s\" \n"
 " %s "
 
 #: src/file.c:1322
@@ -4598,3 +4589,4 @@ msgstr "quitter"
 #: gnome/gwidget.c:104
 msgid "abort"
 msgstr "arréter"
+

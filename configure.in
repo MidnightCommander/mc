@@ -67,7 +67,7 @@ if test x"$X11_WWW" = x; then
     X11_WWW=lynx
 fi
 
-ALL_LINGUAS="es fr ru ko it"
+ALL_LINGUAS="es fr ru ko it de"
 AM_GNU_GETTEXT
 AC_LINK_FILES($nls_cv_header_libgt, $nls_cv_header_intl)
 

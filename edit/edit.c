@@ -110,7 +110,7 @@ int init_dynamic_edit_buffers (WEdit * edit, const char *filename, const char *t
     if (filename)
 	if ((file = open ((char *) filename, O_RDONLY | MY_O_TEXT)) == -1) {
 /* The file-name is printed after the ':' */
-	    edit_error_dialog (_(" Error "), get_sys_error (catstrs (_(" Fail trying to open file for reading: "), filename, " ", 0)));
+	    edit_error_dialog (_(" Error "), get_sys_error (catstrs (_(" Failed trying to open file for reading: "), filename, " ", 0)));
 	    return 1;
 	}
     edit->curs2 = edit->last_byte;
@@ -165,7 +165,7 @@ int edit_load_file (WEdit * edit, const char *filename, const char *text, unsign
 	}
 #else
 	if ((file = open ((char *) filename, O_RDONLY)) < 0) {
-	    edit_error_dialog (_(" Error "), get_sys_error (catstrs (_(" Fail trying to open file for reading: "), filename, " ", 0)));
+	    edit_error_dialog (_(" Error "), get_sys_error (catstrs (_(" Failed trying to open file for reading: "), filename, " ", 0)));
 	    return 1;
 	}
 #endif
