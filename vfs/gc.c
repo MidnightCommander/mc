@@ -109,30 +109,20 @@ vfs_rmstamp (struct vfs_class *v, vfsid id)
 }
 
 
-/* Wrapper around getid methods */
+/* Find VFS id for given directory name */
 vfsid
-vfs_getid (struct vfs_class *vclass, const char *path)
+vfs_getid (struct vfs_class *vclass, const char *dir)
 {
+    char *dir1;
     vfsid id = NULL;
 
-    if (vclass->getid)
-	id = (*vclass->getid) (vclass, path);
-
-    return id;
-}
-
-
-/* Same as vfs_getid, but append slash to the path if needed */
-vfsid
-vfs_ncs_getid (struct vfs_class *nvfs, const char *dir)
-{
-    vfsid nvfsid;
-    char *dir1;
-
+    /* append slash if needed */
     dir1 = concat_dir_and_file (dir, "");
-    nvfsid = vfs_getid (nvfs, dir1);
+    if (vclass->getid)
+	id = (*vclass->getid) (vclass, dir1);
+
     g_free (dir1);
-    return nvfsid;
+    return id;
 }
 
 
@@ -143,7 +133,7 @@ vfs_stamp_path (char *path)
     vfsid id;
 
     vfs = vfs_get_class (path);
-    id = vfs_ncs_getid (vfs, path);
+    id = vfs_getid (vfs, path);
     vfs_addstamp (vfs, id);
 }
 
@@ -166,7 +156,7 @@ vfs_stamp_create (struct vfs_class *oldvfs, vfsid oldvfsid)
 	return;
 
     nvfs = vfs_get_class (vfs_get_current_dir ());
-    nvfsid = vfs_ncs_getid (nvfs, vfs_get_current_dir ());
+    nvfsid = vfs_getid (nvfs, vfs_get_current_dir ());
     vfs_rmstamp (nvfs, nvfsid);
 
     if ((nvfs == oldvfs && nvfsid == oldvfsid) || oldvfsid == NULL) {
@@ -175,7 +165,7 @@ vfs_stamp_create (struct vfs_class *oldvfs, vfsid oldvfsid)
 
     if (get_current_type () == view_listing) {
 	n2vfs = vfs_get_class (current_panel->cwd);
-	n2vfsid = vfs_ncs_getid (n2vfs, current_panel->cwd);
+	n2vfsid = vfs_getid (n2vfs, current_panel->cwd);
 	if (n2vfs == oldvfs && n2vfsid == oldvfsid)
 	    return;
     } else {
@@ -185,7 +175,7 @@ vfs_stamp_create (struct vfs_class *oldvfs, vfsid oldvfsid)
 
     if (get_other_type () == view_listing) {
 	n3vfs = vfs_get_class (other_panel->cwd);
-	n3vfsid = vfs_ncs_getid (n3vfs, other_panel->cwd);
+	n3vfsid = vfs_getid (n3vfs, other_panel->cwd);
 	if (n3vfs == oldvfs && n3vfsid == oldvfsid)
 	    return;
     } else {
@@ -285,7 +275,7 @@ vfs_release_path (const char *dir)
     vfsid oldvfsid;
 
     oldvfs = vfs_get_class (dir);
-    oldvfsid = vfs_ncs_getid (oldvfs, dir);
+    oldvfsid = vfs_getid (oldvfs, dir);
     vfs_stamp_create (oldvfs, oldvfsid);
 }
 

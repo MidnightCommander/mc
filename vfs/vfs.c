@@ -684,7 +684,7 @@ mc_chdir (const char *path)
 	return -1;
     }
 
-    old_vfsid = vfs_ncs_getid (current_vfs, current_dir);
+    old_vfsid = vfs_getid (current_vfs, current_dir);
     old_vfs = current_vfs;
 
     /* Actually change directory */

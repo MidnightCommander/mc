@@ -1,5 +1,7 @@
 2003-11-26  Pavel Roskin  <proski@gnu.org>
 
+	* gc.c (vfs_ncs_getid): Merge with vfs_getid().
+
 	* gc.c: Eliminate all code for timestamping parent filesystems.
 	It's broken and undocumented.  Adjust all dependencies.
 

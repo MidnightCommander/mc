@@ -10,16 +10,15 @@ struct vfs_stamping {
 
 extern int vfs_timeout;
 
-void vfs_stamp (struct vfs_class *v, vfsid id);
-void vfs_rmstamp (struct vfs_class *v, vfsid id);
+void vfs_stamp (struct vfs_class *vclass, vfsid id);
+void vfs_rmstamp (struct vfs_class *vclass, vfsid id);
 void vfs_stamp_create (struct vfs_class *vclass, vfsid id);
 void vfs_add_current_stamps (void);
 void vfs_timeout_handler (void);
 void vfs_expire (int now);
 int vfs_timeouts (void);
 void vfs_release_path (const char *dir);
-vfsid vfs_getid (struct vfs_class *vclass, const char *path);
-vfsid vfs_ncs_getid (struct vfs_class *nvfs, const char *dir);
+vfsid vfs_getid (struct vfs_class *vclass, const char *dir);
 void vfs_gc_done (void);
 
 #endif				/* __GC_H */
