@@ -1,3 +1,10 @@
+2003-03-21  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* view.c (get_line_at): Return unreversed line for backward
+	search to restore backward regexp search feature.
+	(icase_search_p): Fix for the above.
+	Reported by Adam Byrtek <alpha@debian.org>
+
 2003-03-19  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* view.c (icase_search_p): Add backward search support.

@@ -1484,13 +1484,17 @@ icase_search_p (WView *view, char *text, char *data, int nothing)
     int direction = view->direction;
 
     /* If we are searching backwards, reverse the string */
-    if (direction == -1)
+    if (direction == -1) {
 	g_strreverse (text);
+	g_strreverse (data);
+    }
 
     q = _icase_search (text, data, &lng);
 
-    if (direction == -1)
+    if (direction == -1) {
 	g_strreverse (text);
+	g_strreverse (data);
+    }
 
     if (q != 0) {
 	if (direction > 0)
@@ -1569,6 +1573,11 @@ get_line_at (WView *view, unsigned long *p, unsigned long *skipped)
     if (buffer) {
 	buffer[0] = prev;
 	buffer[i] = 0;
+
+	/* If we are searching backwards, reverse the string */
+	if (direction < 0) {
+	    g_strreverse (buffer + 1);
+	}
     }
 
     *p = pos;
@@ -1727,7 +1736,6 @@ block_search (WView *view, char *buffer, int len)
     update_activate = 0;
 
     if (direction == -1) {
-
 	for (d += len - 1;; e--) {
 	    if (e <= update_activate) {
 		update_activate -= update_steps;
@@ -1753,7 +1761,7 @@ block_search (WView *view, char *buffer, int len)
 	    if (e == 0)
 		break;
 	}
-    } else
+    } else {
 	while (e < view->last_byte) {
 	    if (e >= update_activate) {
 		update_activate += update_steps;
@@ -1777,6 +1785,7 @@ block_search (WView *view, char *buffer, int len)
 		d = buffer;
 	    }
 	}
+    }
     disable_interrupt_key ();
     return -1;
 }
