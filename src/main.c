@@ -1672,18 +1672,28 @@ done_mc_profile (void)
     free_profiles ();
 }
 
-/* This routine only handles cpanel, and opanel, it is easy to
- * change to use npanels, just loop over the number of panels
- * and use get_panel_widget (i) and make the test done below
+/*
+ * Partly repaint the contents of the panels.
+ * Ideally, all painting should be done in the panel's callback.
+ * Since we are bypassing the standard widget library by forcing
+ * the repaint, the cursor position needs to be preserved.
  */
 static void
 make_panels_dirty (void)
 {
+    int col, row;
+
+    /* Preserve current cursor position */
+    getyx (stdscr, row, col);
+
     if (cpanel->dirty)
 	panel_update_contents (cpanel);
 
     if ((get_other_type () == view_listing) && opanel->dirty)
 	panel_update_contents (opanel);
+
+    /* Restore cursor position */
+    move (row, col);
 }
 
 /* In Windows people want to actually type the '\' key frequently */
