@@ -136,25 +136,25 @@ static const struct {
     { 0, 0 }
 };
 
+#ifndef HAVE_GNOME
 static const struct {
     char *opt_name;
     int *opt_addr;
 } layout [] = {
-#ifndef HAVE_GNOME
     { "equal_split", &equal_split },
     { "first_panel_size", &first_panel_size },
     { "message_visible", &message_visible },
     { "keybar_visible", &keybar_visible },
     { "xterm_hintbar", &xterm_hintbar },
     { "output_lines", &output_lines },
-#endif
-    { "menubar_visible", &menubar_visible },
     { "command_prompt", &command_prompt },
+    { "menubar_visible", &menubar_visible },
     { "show_mini_info", &show_mini_info },
     { "permission_mode", &permission_mode },
     { "filetype_mode", &filetype_mode },
     { 0, 0 }
 };
+#endif
 
 
 #undef SAVE_CHANGES_OUTSIDE_OPTIONS_MENU
@@ -339,6 +339,7 @@ panel_save_setup (WPanel *panel, char *section)
 			       profile_name);
 }
 
+#ifndef HAVE_X
 void
 save_layout (void)
 {
@@ -356,6 +357,7 @@ save_layout (void)
 
     g_free (profile);
 }
+#endif /* !HAVE_X */
 
 void
 save_configure (void)
@@ -414,7 +416,9 @@ save_setup (void)
     saving_setup = 1;
     profile = concat_dir_and_file (home_dir, PROFILE_NAME);
 
+#ifndef HAVE_X
     save_layout ();
+#endif /* !HAVE_X */
     save_configure ();
     save_string ("Dirs", "other_dir",
 			       get_other_type () == view_listing
@@ -500,6 +504,7 @@ panel_load_setup (WPanel *panel, char *section)
 
 }
 
+#ifndef HAVE_X
 static void
 load_layout (char *profile_name)
 {
@@ -510,6 +515,7 @@ load_layout (char *profile_name)
 	    load_int ("Layout", layout [i].opt_name,
 				  *layout [i].opt_addr);
 }
+#endif /* !HAVE_X */
 
 static int
 load_mode (char *section)
@@ -580,12 +586,12 @@ load_setup (void)
 	*options [i].opt_addr =
 	    get_int (profile, options [i].opt_name, *options [i].opt_addr);
 
-#ifdef HAVE_GNOME
+#ifdef HAVE_X
     g_free (default_user_format);
     default_user_format = do_load_string (app_text, "default_user_format", DEFAULT_USER_FORMAT);
-#endif
-
+#else
     load_layout (profile);
+#endif
 
     load_panelize ();
 

@@ -84,7 +84,12 @@ WPanel *the_info_panel = 0;
 Hook *select_file_hook = 0;
 
 static int panel_callback (Dlg_head *h, WPanel *p, int Msg, int Par);
+
+#ifndef HAVE_X
 static int panel_event (Gpm_Event *event, WPanel *panel);
+#else
+#define panel_event NULL
+#endif /* HAVE_X */
 
 #ifndef PORT_HAS_PANEL_ADJUST_TOP_FILE
 #   define x_adjust_top_file(p)
@@ -2188,6 +2193,7 @@ do_enter (WPanel *panel)
     return do_enter_on_file_entry (selection (panel));
 }
 
+#ifndef HAVE_X
 static void
 chdir_other_panel (WPanel *panel)
 {
@@ -2253,6 +2259,7 @@ chdir_to_readlink (WPanel *panel)
 	g_free (new_dir);
     }
 }
+#endif /* !HAVE_X */
 
 static const key_map panel_keymap [] = {
     { KEY_DOWN,   move_down },
@@ -2289,8 +2296,10 @@ static const key_map panel_keymap [] = {
     { XCTRL('s'), start_search },	/* C-s like emacs */
     { ALT('s'),   start_search },	/* M-s not like emacs */
     { XCTRL('t'), mark_file },
+#ifndef HAVE_X
     { ALT('o'),   chdir_other_panel },
     { ALT('l'),   chdir_to_readlink },
+#endif /* HAVE_X */
     { KEY_F(13),  view_simple_cmd },
     { KEY_F(14),  edit_cmd_new },
     { ALT('y'),   directory_history_prev },
@@ -2362,7 +2371,10 @@ panel_key (WPanel *panel, int key)
 	    return 1;
 	}
 
-	if (!command_prompt) {
+#ifndef HAVE_X
+	if (!command_prompt)
+#endif /* !HAVE_X */
+	{
 	    start_search (panel);
 	    do_search (panel, key);
 	    return 1;
@@ -2485,7 +2497,7 @@ file_mark (WPanel *panel, int index, int val)
     x_panel_select_item (panel, index, val);
 }
 
-#ifdef PORT_WANTS_GET_SORT_FN
+#ifdef HAVE_X
 sortfn *
 get_sort_fn (char *name)
 {
@@ -2502,54 +2514,6 @@ get_sort_fn (char *name)
 	    return formats [i].sort_routine;
     }
     return NULL;
-}
-
-static int
-panel_event (Gpm_Event *event, WPanel *panel)
-{
-    const int lines = panel->count;
-
-    int my_index;
-
-    event->y -= 2;
-    if ((event->type & (GPM_DOWN|GPM_DRAG))){
-
-	if (panel != (WPanel *) current_dlg->current->widget)
-	    change_panel ();
-
-	if (event->y <= 0){
-	    mark_if_marking (panel, event);
-	    return MOU_REPEAT;
-	}
-
-	if (!((panel->top_file + event->y <= panel->count) &&
-	      event->y <= lines)){
-	    mark_if_marking (panel, event);
-	    return MOU_REPEAT;
-	}
-	my_index = panel->top_file + event->y - 1;
-	if (panel->split){
-	    if (event->x > ((panel->widget.cols-2)/2))
-		my_index += llines (panel);
-	}
-
-	if (my_index >= panel->count)
-	    my_index = panel->count - 1;
-
-	if (my_index != panel->selected){
-	    unselect_item (panel);
-	    panel->selected = my_index;
-	    select_item (panel);
-	}
-
-	/* This one is new */
-	mark_if_marking (panel, event);
-
-    } else if ((event->type & (GPM_UP|GPM_DOUBLE)) == (GPM_UP|GPM_DOUBLE)){
-            if (event->y > 0 && event->y <= lines)
-		do_enter (panel);
-    }
-    return MOU_NORMAL;
 }
 
 #else
@@ -2624,7 +2588,7 @@ panel_event (Gpm_Event *event, WPanel *panel)
     }
     return MOU_NORMAL;
 }
-#endif
+#endif /* !HAVE_X */
 
 void
 panel_update_marks (WPanel *panel)

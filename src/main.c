@@ -848,12 +848,14 @@ execute (char *command)
     shell_execute (command, 0);
 }
 
+#ifndef HAVE_X
 void
 change_panel (void)
 {
     free_completions (input_w (cmdline));
     dlg_one_down (midnight_dlg);
 }
+#endif /* !HAVE_X */
 
 static int
 quit_cmd_internal (int quiet)
@@ -1033,7 +1035,9 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
 
     /* Success: save previous directory, shutdown status of previous dir */
     strcpy (panel->lwd, olddir);
+#ifndef HAVE_X
     free_completions (input_w (cmdline));
+#endif /* !HAVE_X */
     
     mc_get_current_wd (panel->cwd, sizeof (panel->cwd) - 2);
 
@@ -1164,6 +1168,7 @@ menu_bar_event (Gpm_Event *event, void *x)
 int
 maybe_cd (int char_code, int move_up_dir)
 {
+#ifndef HAVE_X
     if (navigate_with_arrows){
 	if (!input_w (cmdline)->buffer [0]){
 	    if (!move_up_dir){
@@ -1177,8 +1182,10 @@ maybe_cd (int char_code, int move_up_dir)
 	    }
 	}
     }
+#endif /* !HAVE_X */
     return 0;
 }
+
 #if 0
 static void
 set_sort_to (WPanel *p, sortfn *sort_order)
@@ -1593,7 +1600,6 @@ static void copy_other_pathname (void)
     if (cpanel->cwd [strlen (opanel->cwd) - 1] != PATH_SEP)
         stuff (input_w (cmdline), PATH_SEP_STR, 0);
 }
-#endif /* !HAVE_GNOME */
 
 static void copy_readlink (WPanel *panel)
 {
@@ -1642,7 +1648,6 @@ void copy_prog_name (void)
     g_free (tmp);
 }   
 
-#ifndef HAVE_GNOME
 static void copy_tagged (WPanel *panel)
 {
     int i;
@@ -1741,13 +1746,13 @@ static const key_map ctl_x_map [] = {
 #ifndef OS2_NT
 #ifndef HAVE_GNOME
     { 'o',          chown_cmd },
+    { 'r',          copy_current_readlink },
+    { XCTRL('r'),   copy_other_readlink },
 #endif /* !HAVE_GNOME */
     { 'l',          link_cmd },
     { XCTRL('l'),   other_symlink_cmd },
     { 's',          symlink_cmd },
     { XCTRL('s'),   edit_symlink_cmd },
-    { 'r',          copy_current_readlink },
-    { XCTRL('r'),   copy_other_readlink },
 #endif /* !OS2_NT */
 #ifndef HAVE_GNOME
     { 'i',          info_cmd_no_menu },
@@ -2060,6 +2065,7 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	break;
 	
     case DLG_UNHANDLED_KEY:
+#ifndef HAVE_X
 	if (command_prompt){
 	    int v;
 	    
@@ -2067,6 +2073,7 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	    if (v)
 		return v;
 	}
+#endif /* HAVE_X */
 	if (ctl_x_map_enabled){
 		ctl_x_map_enabled = 0;
 		for (i = 0; ctl_x_map [i].key_code; i++)

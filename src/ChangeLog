@@ -1,5 +1,15 @@
 2001-06-18  Pavel Roskin  <proski@gnu.org>
 
+	* main.c [HAVE_X]: Disable change_panel(),
+	copy_current_readlink() and copy_other_readlink().
+	Don't do anything with cmdline and command_prompt.
+	* screen.c [HAVE_X]: Disable panel_event(), chdir_other_panel()
+	and chdir_to_readlink(). Adjust all callers.
+	(panel_key) [HAVE_X]: Don't use command_prompt - always
+	start search on alphanumeric keys.
+	* setup.c [HAVE_X]: Disable save_layout(), load_layout(), struct
+	layout. Adjust all dependencies.
+
 	* utilunix.c (init_my_statfs): Move this ...
 	* util.c (my_statfs): ... and this ...
 	* mountlist.c: ... here.
