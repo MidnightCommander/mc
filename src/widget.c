@@ -990,7 +990,15 @@ void history_put (char *input_name, Hist *h)
 
 /* {{{ history display */
 
-static const char history_title[] = " History ";
+static char *
+i18n_htitle (void)
+{
+    static char *history_title = NULL;
+
+    if (history_title == NULL)
+	history_title = _(" History ");
+    return history_title;	
+}
 
 static int
 history_callback (Dlg_head * h, int Par, int Msg)
@@ -1002,8 +1010,8 @@ history_callback (Dlg_head * h, int Par, int Msg)
 	dlg_erase (h);
 	draw_box (h, 0, 0, h->lines, h->cols);
 	attrset (COLOR_HOT_NORMAL);
-	dlg_move (h, 0, (h->cols - strlen (history_title)) / 2);
-	printw ((char *) history_title);
+	dlg_move (h, 0, (h->cols - strlen (i18n_htitle())) / 2);
+	printw (i18n_htitle());
 	break;
     }
 #endif
@@ -1015,7 +1023,7 @@ static inline int listbox_fwd (WListbox *l);
 char *show_hist (Hist *history, int widget_x, int widget_y)
 {
     Hist *hi, *z;
-    int maxlen = strlen(history_title), i, count = 0;
+    size_t maxlen = strlen (i18n_htitle()), i, count = 0;
     int x, y, w, h;
     char *q, *r = 0;
     Dlg_head *query_dlg;

@@ -451,7 +451,7 @@ mc_open (char *file, int flags, ...)
 #define MC_HANDLEOP(name, inarg, callarg) \
   MC_OP (name, inarg, callarg, if (handle == -1) return -1; vfs = vfs_op (handle);, )
 
-MC_HANDLEOP(read, (int handle, char *buffer, int count), (vfs_info (handle), buffer, count) );
+MC_HANDLEOP(read, (int handle, char *buffer, int count), (vfs_info (handle), buffer, count) )
 
 int
 mc_ctl (int handle, int ctlop, int arg)
@@ -665,10 +665,10 @@ int mc_##name (char *name1, char *name2) \
     return result; \
 }
 
-MC_RENAMEOP (link);
-MC_RENAMEOP (rename);
+MC_RENAMEOP (link)
+MC_RENAMEOP (rename)
 
-MC_HANDLEOP (write, (int handle, char *buf, int nbyte), (vfs_info (handle), buf, nbyte));
+MC_HANDLEOP (write, (int handle, char *buf, int nbyte), (vfs_info (handle), buf, nbyte))
 
 off_t mc_lseek (int fd, off_t offset, int whence)
 {
@@ -1055,7 +1055,7 @@ mc_munmap (caddr_t addr, size_t len)
             	mc_mmaparray = mcm->next;
             else
             	mcm2->next = mcm->next;
-	    if (*mcm->vfs->munmap)
+	    if (mcm->vfs->munmap)
 	        (*mcm->vfs->munmap)(mcm->vfs, addr, len, mcm->vfs_info);
             g_free (mcm);
             return 0;

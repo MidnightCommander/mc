@@ -1,3 +1,8 @@
+1999-08-01  David Martin <dmartina@usa.net>
+
+	* gcmd.c (gnome_about_cmd): Change strings in gmc "about" to
+	static as they only translated once. 
+
 1999-08-01    <jrb@redhat.com>
 
 	* glayout.c: moved Preferences to a settings menu.

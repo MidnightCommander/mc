@@ -1,3 +1,12 @@
+1999-08-01  David Martin <dmartina@usa.net>
+
+	* menu.c (create_menu, menubar_drop_compute, menubar_paint_idx): 
+	Discount '&' for hotkeys when checking menu widths to avoid the
+	extra blank space. 
+	Moved this accounting from the drawing to the creating function.
+
+	* widget.c: Translate History box tittle.
+
 1999-07-21  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* popt.c, popt.h, poptconfig.c, popthelp.c, poptparse.c: updated

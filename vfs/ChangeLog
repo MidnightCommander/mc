@@ -1,3 +1,13 @@
+1999-08-01  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* vfs.c: Don't close a function definition with "};". SunCC from
+	2.5.1 chokes on the extra semicolon 
+
+	(mc_munmap): Don't dereference function pointer when checking for
+	NULL (this check is supposed to prevent a segfault instead of
+	causing one). This haven't got noticed up to now becaue there's no
+	file system with mmap but without munmap.
+
 Tue Jul  6 11:22:40 1999  Timur I. Bakeyev  <mc@bat.ru>
 
 	* samba/include/config.h: Removed. Should be generated.

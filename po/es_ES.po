@@ -5655,6 +5655,10 @@ msgstr "SinForm"
 msgid "Format"
 msgstr "Formato"
 
+#: src/widget.c:998
+msgid " History "
+msgstr " Histórico "
+
 #. KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
 #. to define f0 as well. Also, it makes Learn keys a bunch of problems :(
 #: src/win.c:224

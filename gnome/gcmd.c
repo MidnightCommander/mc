@@ -105,7 +105,7 @@ gnome_about_cmd (void)
 {
         GtkWidget *about;
 	static int translated;
-        const gchar *authors[] = {
+        static const gchar *authors[] = {
 		N_("The Midnight Commander Team"),
 		"http://www.gnome.org/mc/",
 		N_("bug reports: http://bugs.gnome.org, or use gnome-bug"),

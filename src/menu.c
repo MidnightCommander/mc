@@ -50,6 +50,7 @@ static void menu_scan_hotkey(Menu menu)
 Menu create_menu (char *name, menu_entry *entries, int count)
 {
     Menu menu;
+    char *cp;
 
     menu = (Menu) g_malloc (sizeof (*menu));
     menu->count = count;
@@ -57,17 +58,24 @@ Menu create_menu (char *name, menu_entry *entries, int count)
     menu->entries = entries;
 
 #ifdef ENABLE_NLS
-	if (entries != (menu_entry*) NULL)
-	{
-		register menu_entry* mp;
-		for (mp = entries; count--; mp++)
-		{
-			if (mp->text[0] == '\0')
-				continue;
+    if (entries != (menu_entry*) NULL) {
+	register menu_entry* mp;
+	for (mp = entries; count--; mp++) {
+	    if (mp->text[0] != '\0') {
+	        mp->text = _(mp->text);
+	        cp = strchr (mp->text,'&');
 
-			mp->text = _(mp->text);
+		if (cp != NULL && *(cp+1) != '\0') {
+		    mp->hot_key = tolower (*(cp+1));
+		    menu->max_entry_len = max (strlen (mp->text) - 1,
+			menu->max_entry_len);
+		} else {
+		    menu->max_entry_len = max (strlen (mp->text),
+			menu->max_entry_len);
 		}
+	    }
 	}
+    }
 #endif /* ENABLE_NLS */
 
     menu->name = g_strdup ( _(name) );
@@ -78,13 +86,7 @@ Menu create_menu (char *name, menu_entry *entries, int count)
 
 static void menubar_drop_compute (WMenu *menubar)
 {
-    const Menu menu = menubar->menu [menubar->selected];
-    int   max_entry_len = 0;
-    int i;
-
-    for (i = 0; i < menu->count; i++)
-	max_entry_len = max (max_entry_len, strlen (menu->entries [i].text));
-    menubar->max_entry_len = max_entry_len = max (max_entry_len, 20);
+    menubar->max_entry_len = menubar->menu [menubar->selected]->max_entry_len;
 }
 
 static void menubar_paint_idx (WMenu *menubar, int idx, int color)
@@ -99,27 +101,24 @@ static void menubar_paint_idx (WMenu *menubar, int idx, int color)
     widget_move (&menubar->widget, y, x);
     attrset (color);
     hline (' ', menubar->max_entry_len+2);
-    if (!*menu->entries [idx].text){
+    if (!*menu->entries [idx].text) {
     	attrset (SELECTED_COLOR);
         widget_move (&menubar->widget, y, x + 1);
     	hline (slow_terminal ? ' ' : ACS_HLINE, menubar->max_entry_len);
     } else {
-	unsigned char *text = menu->entries [idx].text;
+	unsigned char *text;
 
 	addch((unsigned char)menu->entries [idx].first_letter);
 	for (text = menu->entries [idx].text; *text; text++)
 	{
-		if (*text == '&')
-		{
-			++text;
-			menu->entries [idx].hot_key = tolower(*text);
-			attrset (color == MENU_SELECTED_COLOR ?
-				MENU_HOTSEL_COLOR : MENU_HOT_COLOR);
-			addch(*text);
-			attrset(color);
-			continue;
+		if (*text != '&')
+		    addch(*text);
+		else {
+		    attrset (color == MENU_SELECTED_COLOR ?
+			MENU_HOTSEL_COLOR : MENU_HOT_COLOR);
+		    addch(*(++text));
+		    attrset(color);
 		}
-		addch(*text);
 	}
     }
     widget_move (&menubar->widget, y, x + 1);
