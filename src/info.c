@@ -63,7 +63,7 @@ info_show_info (WInfo *info)
     static int i18n_adjust=0;
     static char *file_label;
     
-    struct stat buf;
+    struct stat st;
 
     if (!is_idle ())
 	return;
@@ -82,8 +82,8 @@ info_show_info (WInfo *info)
 	return;
     
     my_statfs (&myfs_stats, cpanel->cwd);
-    buf = cpanel->dir.list [cpanel->selected].buf;
-    
+    st = cpanel->dir.list [cpanel->selected].st;
+
     /* Print only lines which fit */
     
     if(!i18n_adjust) {
@@ -137,53 +137,53 @@ info_show_info (WInfo *info)
 
     case 11:
 	widget_move (&info->widget, 11, 3);
-	printw (_("Accessed:  %s"), file_date (buf.st_atime));
+	printw (_("Accessed:  %s"), file_date (st.st_atime));
 	
     case 10:
 	widget_move (&info->widget, 10, 3);
-	printw (_("Modified:  %s"), file_date (buf.st_mtime));
+	printw (_("Modified:  %s"), file_date (st.st_mtime));
 	
     case 9:
 	widget_move (&info->widget, 9, 3);
-	printw (_("Created:   %s"), file_date (buf.st_ctime));
+	printw (_("Created:   %s"), file_date (st.st_ctime));
 
     case 8:
 	widget_move (&info->widget, 8, 3);
 #if 0
 #ifdef HAVE_ST_RDEV
-	if (buf.st_rdev)
+	if (st.st_rdev)
 	    printw ("Inode dev: major: %d, minor: %d",
-		    buf.st_rdev >> 8, buf.st_rdev & 0xff);
+		    st.st_rdev >> 8, st.st_rdev & 0xff);
 	else
 #endif
 #endif
 	{
 	    char buffer[10];
-	    size_trunc_len(buffer, 9, buf.st_size, 0);
+	    size_trunc_len(buffer, 9, st.st_size, 0);
 	    printw (_("Size:      %s"), buffer);
 #ifdef HAVE_ST_BLOCKS
-	    printw ((buf.st_blocks==1) ?
-		_(" (%d block)") : _(" (%d blocks)"), buf.st_blocks);
+	    printw ((st.st_blocks==1) ?
+		_(" (%d block)") : _(" (%d blocks)"), st.st_blocks);
 #endif
 	}
 	
     case 7:
 	widget_move (&info->widget, 7, 3);
-	printw (_("Owner:     %s/%s"), get_owner (buf.st_uid),
-		get_group (buf.st_gid));
+	printw (_("Owner:     %s/%s"), get_owner (st.st_uid),
+		get_group (st.st_gid));
 	
     case 6:
 	widget_move (&info->widget, 6, 3);
-	printw (_("Links:     %d"), (int) buf.st_nlink);
+	printw (_("Links:     %d"), (int) st.st_nlink);
 	
     case 5:
 	widget_move (&info->widget, 5, 3);
 	printw (_("Mode:      %s (%04o)"),
-		string_perm (buf.st_mode), buf.st_mode & 07777);
+		string_perm (st.st_mode), st.st_mode & 07777);
 	
     case 4:
 	widget_move (&info->widget, 4, 3);
-	printw (_("Location:  %Xh:%Xh"), (int)buf.st_dev, (int)buf.st_ino);
+	printw (_("Location:  %Xh:%Xh"), (int)st.st_dev, (int)st.st_ino);
 	
     case 3:
 	widget_move (&info->widget, 3, 2);

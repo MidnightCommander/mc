@@ -319,7 +319,7 @@ static char *extract_arg (char *p, char *arg)
 static int test_type (WPanel *panel, char *arg)
 {
     int result = 0; /* False by default */
-    int st_mode = panel->dir.list [panel->selected].buf.st_mode;
+    int st_mode = panel->dir.list [panel->selected].st.st_mode;
 
     for (;*arg != 0; arg++){
 	switch (*arg){

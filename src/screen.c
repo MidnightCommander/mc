@@ -137,7 +137,7 @@ add_permission_string (char *dest, int width, file_entry *fe, int attr, int colo
 {
     int i, r, l;
 
-    l = get_user_permissions (&fe->buf);
+    l = get_user_permissions (&fe->st);
 
     if (is_octal){
 	/* Place of the access bit in octal mode */
@@ -200,14 +200,14 @@ string_file_size (file_entry *fe, int len)
     }
 
 #ifdef HAVE_ST_RDEV
-    if (S_ISBLK (fe->buf.st_mode) || S_ISCHR (fe->buf.st_mode))
+    if (S_ISBLK (fe->st.st_mode) || S_ISCHR (fe->st.st_mode))
         g_snprintf (buffer, sizeof (buffer), "%3d,%3d",
-		    (int) ((fe->buf.st_rdev >> 8) & 0xff),
-		    (int) (fe->buf.st_rdev & 0xff));
+		    (int) ((fe->st.st_rdev >> 8) & 0xff),
+		    (int) (fe->st.st_rdev & 0xff));
     else
 #endif
     {
-	size_trunc_len (buffer, len, fe->buf.st_size, 0);
+	size_trunc_len (buffer, len, fe->st.st_size, 0);
     }
     return buffer;
 }
@@ -216,11 +216,11 @@ string_file_size (file_entry *fe, int len)
 static const char *
 string_file_size_brief (file_entry *fe, int len)
 {
-    if (S_ISLNK (fe->buf.st_mode) && !fe->f.link_to_dir) {
+    if (S_ISLNK (fe->st.st_mode) && !fe->f.link_to_dir) {
 	return _("SYMLINK");
     }
 
-    if ((S_ISDIR (fe->buf.st_mode) || fe->f.link_to_dir) && strcmp (fe->fname, "..")) {
+    if ((S_ISDIR (fe->st.st_mode) || fe->f.link_to_dir) && strcmp (fe->fname, "..")) {
 	return _("SUB-DIR");
     }
 
@@ -234,28 +234,28 @@ string_file_type (file_entry *fe, int len)
 {
     static char buffer[2];
 
-    if (S_ISDIR (fe->buf.st_mode))
+    if (S_ISDIR (fe->st.st_mode))
 	buffer[0] = PATH_SEP;
-    else if (S_ISLNK (fe->buf.st_mode)) {
+    else if (S_ISLNK (fe->st.st_mode)) {
 	if (fe->f.link_to_dir)
 	    buffer[0] = '~';
 	else if (fe->f.stale_link)
 	    buffer[0] = '!';
 	else
 	    buffer[0] = '@';
-    } else if (S_ISCHR (fe->buf.st_mode))
+    } else if (S_ISCHR (fe->st.st_mode))
 	buffer[0] = '-';
-    else if (S_ISSOCK (fe->buf.st_mode))
+    else if (S_ISSOCK (fe->st.st_mode))
 	buffer[0] = '=';
-    else if (S_ISDOOR (fe->buf.st_mode))
+    else if (S_ISDOOR (fe->st.st_mode))
 	buffer[0] = '>';
-    else if (S_ISBLK (fe->buf.st_mode))
+    else if (S_ISBLK (fe->st.st_mode))
 	buffer[0] = '+';
-    else if (S_ISFIFO (fe->buf.st_mode))
+    else if (S_ISFIFO (fe->st.st_mode))
 	buffer[0] = '|';
-    else if (!S_ISREG (fe->buf.st_mode))
+    else if (!S_ISREG (fe->st.st_mode))
 	buffer[0] = '?';	/* non-regular of unknown kind */
-    else if (is_exe (fe->buf.st_mode))
+    else if (is_exe (fe->st.st_mode))
 	buffer[0] = '*';
     else
 	buffer[0] = ' ';
@@ -270,7 +270,7 @@ string_file_mtime (file_entry *fe, int len)
     if (!strcmp (fe->fname, "..")) {
        return "";
     }
-    return file_date (fe->buf.st_mtime);
+    return file_date (fe->st.st_mtime);
 }
 
 /* atime */
@@ -280,7 +280,7 @@ string_file_atime (file_entry *fe, int len)
     if (!strcmp (fe->fname, "..")) {
        return "";
     }
-    return file_date (fe->buf.st_atime);
+    return file_date (fe->st.st_atime);
 }
 
 /* ctime */
@@ -290,14 +290,14 @@ string_file_ctime (file_entry *fe, int len)
     if (!strcmp (fe->fname, "..")) {
        return "";
     }
-    return file_date (fe->buf.st_ctime);
+    return file_date (fe->st.st_ctime);
 }
 
 /* perm */
 static const char *
 string_file_permission (file_entry *fe, int len)
 {
-    return string_perm (fe->buf.st_mode);
+    return string_perm (fe->st.st_mode);
 }
 
 /* mode */
@@ -306,7 +306,7 @@ string_file_perm_octal (file_entry *fe, int len)
 {
     static char buffer [10];
 
-    g_snprintf (buffer, sizeof (buffer), "0%06o", fe->buf.st_mode);
+    g_snprintf (buffer, sizeof (buffer), "0%06o", fe->st.st_mode);
     return buffer;
 }
 
@@ -316,7 +316,7 @@ string_file_nlinks (file_entry *fe, int len)
 {
     static char buffer[BUF_TINY];
 
-    g_snprintf (buffer, sizeof (buffer), "%16d", (int) fe->buf.st_nlink);
+    g_snprintf (buffer, sizeof (buffer), "%16d", (int) fe->st.st_nlink);
     return buffer;
 }
 
@@ -327,7 +327,7 @@ string_inode (file_entry *fe, int len)
     static char buffer [10];
 
     g_snprintf (buffer, sizeof (buffer), "%lu",
-		(unsigned long) fe->buf.st_ino);
+		(unsigned long) fe->st.st_ino);
     return buffer;
 }
 
@@ -338,7 +338,7 @@ string_file_nuid (file_entry *fe, int len)
     static char buffer [10];
 
     g_snprintf (buffer, sizeof (buffer), "%lu",
-		(unsigned long) fe->buf.st_uid);
+		(unsigned long) fe->st.st_uid);
     return buffer;
 }
 
@@ -349,7 +349,7 @@ string_file_ngid (file_entry *fe, int len)
     static char buffer [10];
 
     g_snprintf (buffer, sizeof (buffer), "%lu",
-		(unsigned long) fe->buf.st_gid);
+		(unsigned long) fe->st.st_gid);
     return buffer;
 }
 
@@ -357,14 +357,14 @@ string_file_ngid (file_entry *fe, int len)
 static const char *
 string_file_owner (file_entry *fe, int len)
 {
-    return get_owner (fe->buf.st_uid);
+    return get_owner (fe->st.st_uid);
 }
 
 /* group */
 static const char *
 string_file_group (file_entry *fe, int len)
 {
-    return get_group (fe->buf.st_gid);
+    return get_group (fe->st.st_gid);
 }
 
 /* mark */
@@ -476,28 +476,28 @@ file_compute_color (int attr, file_entry *fe)
     }
 
     /* if filetype_mode == true  */
-    if (S_ISDIR (fe->buf.st_mode))
+    if (S_ISDIR (fe->st.st_mode))
 	return (DIRECTORY_COLOR);
-    else if (S_ISLNK (fe->buf.st_mode)) {
+    else if (S_ISLNK (fe->st.st_mode)) {
 	if (fe->f.link_to_dir)
 	    return (DIRECTORY_COLOR);
 	else if (fe->f.stale_link)
 	    return (STALE_LINK_COLOR);
 	else
 	    return (LINK_COLOR);
-    } else if (S_ISSOCK (fe->buf.st_mode))
+    } else if (S_ISSOCK (fe->st.st_mode))
 	return (SPECIAL_COLOR);
-    else if (S_ISCHR (fe->buf.st_mode))
+    else if (S_ISCHR (fe->st.st_mode))
 	return (DEVICE_COLOR);
-    else if (S_ISBLK (fe->buf.st_mode))
+    else if (S_ISBLK (fe->st.st_mode))
 	return (DEVICE_COLOR);
-    else if (S_ISFIFO (fe->buf.st_mode))
+    else if (S_ISFIFO (fe->st.st_mode))
 	return (SPECIAL_COLOR);
-    else if (S_ISDOOR (fe->buf.st_mode))
+    else if (S_ISDOOR (fe->st.st_mode))
 	return (SPECIAL_COLOR);
-    else if (!S_ISREG (fe->buf.st_mode))
+    else if (!S_ISREG (fe->st.st_mode))
 	return (STALE_LINK_COLOR);	/* non-regular file of unknown kind */
-    else if (is_exe (fe->buf.st_mode))
+    else if (is_exe (fe->st.st_mode))
 	return (EXECUTABLE_COLOR);
     else if (fe->fname && (!strcmp (fe->fname, "core")
 			   || !strcmp (extension (fe->fname), "core")))
@@ -664,7 +664,7 @@ display_mini_info (WPanel *panel)
     /* Status resolves links and show them */
     set_colors (panel);
 
-    if (S_ISLNK (panel->dir.list [panel->selected].buf.st_mode)){
+    if (S_ISLNK (panel->dir.list [panel->selected].st.st_mode)){
 	char *link, link_target [MC_MAXPATHLEN];
 	int  len;
 
@@ -1696,7 +1696,7 @@ next_page (WPanel *panel)
 static void
 ctrl_next_page (WPanel *panel)
 {
-    if ((S_ISDIR (selection (panel)->buf.st_mode)
+    if ((S_ISDIR (selection (panel)->st.st_mode)
 	 || link_isdir (selection (panel)))) {
 	do_cd (selection (panel)->fname, cd_exact);
     }
@@ -1815,20 +1815,20 @@ do_file_mark (WPanel *panel, int idx, int mark)
 	file_mark (panel, idx, mark);
         if (panel->dir.list [idx].f.marked){
             panel->marked++;
-            if (S_ISDIR (panel->dir.list [idx].buf.st_mode)) {
+            if (S_ISDIR (panel->dir.list [idx].st.st_mode)) {
 		if (panel->dir.list [idx].f.dir_size_computed)
-		    panel->total += panel->dir.list [idx].buf.st_size;
+		    panel->total += panel->dir.list [idx].st.st_size;
                 panel->dirs_marked++;
 	    } else
-		panel->total += panel->dir.list [idx].buf.st_size;
+		panel->total += panel->dir.list [idx].st.st_size;
             set_colors (panel);
         } else {
-            if (S_ISDIR(panel->dir.list [idx].buf.st_mode)) {
+            if (S_ISDIR(panel->dir.list [idx].st.st_mode)) {
 		if (panel->dir.list [idx].f.dir_size_computed)
-		    panel->total -= panel->dir.list [idx].buf.st_size;
+		    panel->total -= panel->dir.list [idx].st.st_size;
                 panel->dirs_marked--;
 	    } else
-		panel->total -= panel->dir.list [idx].buf.st_size;
+		panel->total -= panel->dir.list [idx].st.st_size;
             panel->marked--;
         }
     }
@@ -1925,8 +1925,8 @@ do_enter_on_file_entry (file_entry *fe)
      * Directory or link to directory - change directory.
      * Try the same for the entries on which mc_lstat() has failed.
      */
-    if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe)
-	|| (fe->buf.st_mode == 0)) {
+    if (S_ISDIR (fe->st.st_mode) || link_isdir (fe)
+	|| (fe->st.st_mode == 0)) {
 	if (!do_cd (fe->fname, cd_exact))
 	    message (1, MSG_ERROR, _("Cannot change directory"));
 	return 1;
@@ -1938,7 +1938,7 @@ do_enter_on_file_entry (file_entry *fe)
 
     /* Check if the file is executable */
     full_name = concat_dir_and_file (cpanel->cwd, fe->fname);
-    if (!is_exe (fe->buf.st_mode) || !if_link_is_exe (full_name, fe)) {
+    if (!is_exe (fe->st.st_mode) || !if_link_is_exe (full_name, fe)) {
 	g_free (full_name);
 	return 0;
     }
@@ -2010,18 +2010,18 @@ chdir_to_readlink (WPanel *panel)
     if (get_other_type () != view_listing)
 	return;
 
-    if (S_ISLNK (panel->dir.list [panel->selected].buf.st_mode)) {
+    if (S_ISLNK (panel->dir.list [panel->selected].st.st_mode)) {
 	char buffer [MC_MAXPATHLEN], *p;
 	int i;
-	struct stat mybuf;
+	struct stat st;
 
 	i = readlink (selection (panel)->fname, buffer, MC_MAXPATHLEN);
 	if (i < 0)
 	    return;
-	if (mc_stat (selection (panel)->fname, &mybuf) < 0)
+	if (mc_stat (selection (panel)->fname, &st) < 0)
 	    return;
 	buffer [i] = 0;
-	if (!S_ISDIR (mybuf.st_mode)) {
+	if (!S_ISDIR (st.st_mode)) {
 	    p = strrchr (buffer, PATH_SEP);
 	    if (p && !p[1]) {
 		*p = 0;

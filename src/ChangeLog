@@ -1,3 +1,8 @@
+2003-08-17  Pavel Roskin  <proski@gnu.org>
+
+	* dir.h (file_entry): Rename "buf" to "st".  Adjust all
+	dependencies.
+
 2003-08-01  Pavel Roskin  <proski@gnu.org>
 
 	* main.c: Rename PanelMenu to LeftMenu.  Don't assume that

@@ -11,7 +11,7 @@ typedef struct {
 
     int  fnamelen;
     char *fname;
-    struct stat  buf;
+    struct stat st;
 
     /* Flags */
     struct { 

@@ -900,7 +900,7 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
 	int status, link_to_dir, stale_link;
 	int next_free = 0;
 	int i;
-	struct stat buf;
+	struct stat st;
 	WLEntry *entry = find_list->list;
 	dir_list *list = &cpanel->dir;
 	char *dir, *name;
@@ -923,7 +923,7 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
 		name = concat_dir_and_file (dir + 2, filename);
 	    else
 		name = concat_dir_and_file (dir, filename);
-	    status = handle_path (list, name, &buf, next_free, &link_to_dir,
+	    status = handle_path (list, name, &st, next_free, &link_to_dir,
 	        &stale_link);
 	    if (status == 0) {
 		g_free (name);
@@ -950,7 +950,7 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
 	    list->list [next_free].f.link_to_dir = link_to_dir;
 	    list->list [next_free].f.stale_link = stale_link;
 	    list->list [next_free].f.dir_size_computed = 0;
-	    list->list [next_free].buf = buf;
+	    list->list [next_free].st = st;
 	    next_free++;
            if (!(next_free & 15))
 	       rotate_dash ();

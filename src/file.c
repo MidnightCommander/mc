@@ -1548,11 +1548,11 @@ panel_get_file (WPanel *panel, struct stat *stat_buf)
     if (panel->marked) {
 	for (i = 0; i < panel->count; i++)
 	    if (panel->dir.list[i].f.marked) {
-		*stat_buf = panel->dir.list[i].buf;
+		*stat_buf = panel->dir.list[i].st;
 		return panel->dir.list[i].fname;
 	    }
     } else {
-	*stat_buf = panel->dir.list[panel->selected].buf;
+	*stat_buf = panel->dir.list[panel->selected].st;
 	return panel->dir.list[panel->selected].fname;
     }
     g_assert_not_reached ();
@@ -1634,7 +1634,7 @@ panel_compute_totals (WPanel *panel, off_t *ret_marked, double *ret_total)
 	if (!panel->dir.list[i].f.marked)
 	    continue;
 
-	s = &panel->dir.list[i].buf;
+	s = &panel->dir.list[i].st;
 
 	if (S_ISDIR (s->st_mode)) {
 	    char *dir_name;
@@ -2014,7 +2014,7 @@ panel_operate (void *source_panel, FileOperation operation,
 		continue;	/* Skip the unmarked ones */
 
 	    source = panel->dir.list[i].fname;
-	    src_stat = panel->dir.list[i].buf;
+	    src_stat = panel->dir.list[i].st;
 
 #ifdef WITH_FULL_PATHS
 	    if (source_with_path)

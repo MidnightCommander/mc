@@ -44,7 +44,7 @@ static int reverse = 1;
 /* Are the files sorted case sensitively? */
 static int case_sensitive = OS_SORT_CASE_SENSITIVE_DEFAULT;
 
-#define MY_ISDIR(x) ( (S_ISDIR (x->buf.st_mode) || x->f.link_to_dir) ? 1 : 0)
+#define MY_ISDIR(x) ( (S_ISDIR (x->st.st_mode) || x->f.link_to_dir) ? 1 : 0)
 
 sort_orders_t sort_orders [SORT_TYPES_TOTAL] = {
     { N_("&Unsorted"),    unsorted },
@@ -151,7 +151,7 @@ sort_owner (const file_entry *a, const file_entry *b)
     int bd = MY_ISDIR (b);
 
     if (ad == bd || mix_all_files)
-	return string_sortcomp (get_owner (a->buf.st_uid), get_owner (a->buf.st_uid)) * reverse;
+	return string_sortcomp (get_owner (a->st.st_uid), get_owner (a->st.st_uid)) * reverse;
     return bd-ad;
 }
 
@@ -162,7 +162,7 @@ sort_group (const file_entry *a, const file_entry *b)
     int bd = MY_ISDIR (b);
 
     if (ad == bd || mix_all_files)
-	return string_sortcomp (get_group (a->buf.st_gid), get_group (a->buf.st_gid)) * reverse;
+	return string_sortcomp (get_group (a->st.st_gid), get_group (a->st.st_gid)) * reverse;
     return bd-ad;
 }
 
@@ -173,7 +173,7 @@ sort_time (const file_entry *a, const file_entry *b)
     int bd = MY_ISDIR (b);
 
     if (ad == bd || mix_all_files)
-	return (a->buf.st_mtime - b->buf.st_mtime) * reverse;
+	return (a->st.st_mtime - b->st.st_mtime) * reverse;
     else
 	return bd-ad;
 }
@@ -185,7 +185,7 @@ sort_ctime (const file_entry *a, const file_entry *b)
     int bd = MY_ISDIR (b);
 
     if (ad == bd || mix_all_files)
-	return (a->buf.st_ctime - b->buf.st_ctime) * reverse;
+	return (a->st.st_ctime - b->st.st_ctime) * reverse;
     else
 	return bd-ad;
 }
@@ -197,7 +197,7 @@ sort_atime (const file_entry *a, const file_entry *b)
     int bd = MY_ISDIR (b);
 
     if (ad == bd || mix_all_files)
-	return (a->buf.st_atime - b->buf.st_atime) * reverse;
+	return (a->st.st_atime - b->st.st_atime) * reverse;
     else
 	return bd-ad;
 }
@@ -209,7 +209,7 @@ sort_inode (const file_entry *a, const file_entry *b)
     int bd = MY_ISDIR (b);
 
     if (ad == bd || mix_all_files)
-	return (a->buf.st_ino - b->buf.st_ino) * reverse;
+	return (a->st.st_ino - b->st.st_ino) * reverse;
     else
 	return bd-ad;
 }
@@ -223,7 +223,7 @@ sort_size (const file_entry *a, const file_entry *b)
     if (ad != bd && !mix_all_files)
 	return bd - ad;
 
-    return (2 * (b->buf.st_size > a->buf.st_size) - 1) * reverse;
+    return (2 * (b->st.st_size > a->st.st_size) - 1) * reverse;
 }
 
 int
@@ -233,7 +233,7 @@ sort_links (const file_entry *a, const file_entry *b)
     int bd = MY_ISDIR (b);
 
     if (ad == bd || mix_all_files)
-	return (b->buf.st_nlink - a->buf.st_nlink) * reverse;
+	return (b->st.st_nlink - a->st.st_nlink) * reverse;
     else
 	return bd-ad;
 }
@@ -245,7 +245,7 @@ sort_ngid (const file_entry *a, const file_entry *b)
     int bd = MY_ISDIR (b);
 
     if (ad == bd || mix_all_files)
-	return (b->buf.st_gid - a->buf.st_gid) * reverse;
+	return (b->st.st_gid - a->st.st_gid) * reverse;
     else
 	return bd-ad;
 }
@@ -257,7 +257,7 @@ sort_nuid (const file_entry *a, const file_entry *b)
     int bd = MY_ISDIR (b);
 
     if (ad == bd || mix_all_files)
-	return (b->buf.st_uid - a->buf.st_uid) * reverse;
+	return (b->st.st_uid - a->st.st_uid) * reverse;
     else
 	return bd-ad;
 }
@@ -265,7 +265,7 @@ sort_nuid (const file_entry *a, const file_entry *b)
 inline static int
 file_type_to_num (const file_entry *fe)
 {
-    const struct stat *s = &fe->buf;
+    const struct stat *s = &fe->st;
 
     if (S_ISDIR (s->st_mode))
 	return 0;
@@ -355,7 +355,7 @@ add_dotdot_to_list (dir_list *list, int index)
     (list->list) [index].f.stale_link = 0;
     (list->list) [index].f.dir_size_computed = 0;
     (list->list) [index].f.marked = 0;
-    (list->list) [index].buf.st_mode = 040755;
+    (list->list) [index].st.st_mode = 040755;
     return 1;
 }
 
@@ -469,7 +469,7 @@ do_load_dir (char *path, dir_list *list, sortfn *sort, int reverse,
     struct dirent *dp;
     int status, link_to_dir, stale_link;
     int next_free = 0;
-    struct stat buf;
+    struct stat st;
 
     tree_store_start_check_cwd ();
 
@@ -481,7 +481,7 @@ do_load_dir (char *path, dir_list *list, sortfn *sort, int reverse,
     }
     for (dp = mc_readdir (dirp); dp; dp = mc_readdir (dirp)) {
 	status =
-	    handle_dirent (list, filter, dp, &buf, next_free, &link_to_dir,
+	    handle_dirent (list, filter, dp, &st, next_free, &link_to_dir,
 			   &stale_link);
 	if (status == 0)
 	    continue;
@@ -496,7 +496,7 @@ do_load_dir (char *path, dir_list *list, sortfn *sort, int reverse,
 	list->list[next_free].f.link_to_dir = link_to_dir;
 	list->list[next_free].f.stale_link = stale_link;
 	list->list[next_free].f.dir_size_computed = 0;
-	list->list[next_free].buf = buf;
+	list->list[next_free].st = st;
 	next_free++;
 	if (!(next_free % 32))
 	    rotate_dash ();
@@ -532,7 +532,7 @@ if_link_is_exe (char *full_name, file_entry *file)
 {
     struct stat b;
 
-    if (S_ISLNK (file->buf.st_mode)) {
+    if (S_ISLNK (file->st.st_mode)) {
 	mc_stat (full_name, &b);
 	return is_exe (b.st_mode);
     } else
@@ -574,7 +574,7 @@ do_reload_dir (char *path, dir_list *list, sortfn *sort, int count,
     struct dirent *dp;
     int next_free = 0;
     int i, status, link_to_dir, stale_link;
-    struct stat buf;
+    struct stat st;
     int marked_cnt;
     GHashTable *marked_files = g_hash_table_new (g_str_hash, g_str_equal);
 
@@ -605,7 +605,7 @@ do_reload_dir (char *path, dir_list *list, sortfn *sort, int count,
 
     for (dp = mc_readdir (dirp); dp; dp = mc_readdir (dirp)) {
 	status =
-	    handle_dirent (list, filter, dp, &buf, next_free, &link_to_dir,
+	    handle_dirent (list, filter, dp, &st, next_free, &link_to_dir,
 			   &stale_link);
 	if (status == 0)
 	    continue;
@@ -646,7 +646,7 @@ do_reload_dir (char *path, dir_list *list, sortfn *sort, int count,
 	list->list[next_free].f.link_to_dir = link_to_dir;
 	list->list[next_free].f.stale_link = stale_link;
 	list->list[next_free].f.dir_size_computed = 0;
-	list->list[next_free].buf = buf;
+	list->list[next_free].st = st;
 	next_free++;
 	if (!(next_free % 16))
 	    rotate_dash ();

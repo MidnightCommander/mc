@@ -308,7 +308,7 @@ reload_panelized (WPanel *panel)
 	     */
 	    do_file_mark (panel, i, 0);
 	}
-	if (mc_lstat (list->list[i].fname, &list->list[i].buf)) {
+	if (mc_lstat (list->list[i].fname, &list->list[i].st)) {
 	    g_free (list->list[i].fname);
 	    continue;
 	}
@@ -755,7 +755,7 @@ maybe_cd (int char_code, int move_up_dir)
 		do_cd ("..", cd_exact);
 		return 1;
 	    }
-	    if (S_ISDIR (selection (cpanel)->buf.st_mode)
+	    if (S_ISDIR (selection (cpanel)->st.st_mode)
 		|| link_isdir (selection (cpanel))) {
 		do_cd (selection (cpanel)->fname, cd_exact);
 		return 1;
@@ -1137,7 +1137,7 @@ copy_readlink (WPanel *panel)
 {
     if (!command_prompt)
 	return;
-    if (S_ISLNK (selection (panel)->buf.st_mode)) {
+    if (S_ISLNK (selection (panel)->st.st_mode)) {
 	char buffer[MC_MAXPATHLEN];
 	char *p =
 	    concat_dir_and_file (panel->cwd, selection (panel)->fname);

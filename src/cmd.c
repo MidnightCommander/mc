@@ -174,7 +174,7 @@ static int scan_for_file (WPanel *panel, int idx, int direction)
 	    i = panel->count - 1;
 	if (i == panel->count)
 	    i = 0;
-	if (!S_ISDIR (panel->dir.list [i].buf.st_mode))
+	if (!S_ISDIR (panel->dir.list [i].st.st_mode))
 	    return i;
 	i += direction;
     }
@@ -191,7 +191,7 @@ do_view_cmd (int normal)
     int dir, file_idx;
 
     /* Directories are viewed by changing to them */
-    if (S_ISDIR (selection (cpanel)->buf.st_mode)
+    if (S_ISDIR (selection (cpanel)->st.st_mode)
 	|| link_isdir (selection (cpanel))) {
 	if (confirm_view_dir && (cpanel->marked || cpanel->dirs_marked)) {
 	    if (query_dialog
@@ -459,7 +459,7 @@ void reverse_selection_cmd (void)
 
     for (i = 0; i < cpanel->count; i++){
 	file = &cpanel->dir.list [i];
-	if (S_ISDIR (file->buf.st_mode))
+	if (S_ISDIR (file->st.st_mode))
 	    continue;
 	do_file_mark (cpanel, i, !file->f.marked);
     }
@@ -492,7 +492,7 @@ void select_cmd (void)
     for (i = 0; i < cpanel->count; i++){
         if (!strcmp (cpanel->dir.list [i].fname, ".."))
             continue;
-	if (S_ISDIR (cpanel->dir.list [i].buf.st_mode)){
+	if (S_ISDIR (cpanel->dir.list [i].st.st_mode)){
 	    if (!dirflag)
                 continue;
         } else {
@@ -538,7 +538,7 @@ void unselect_cmd (void)
     for (i = 0; i < cpanel->count; i++){
         if (!strcmp (cpanel->dir.list [i].fname, "..")) 
             continue;
-	if (S_ISDIR (cpanel->dir.list [i].buf.st_mode)){
+	if (S_ISDIR (cpanel->dir.list [i].st.st_mode)){
 	    if (!dirflag)
 	        continue;
         } else {
@@ -794,7 +794,7 @@ compare_dir (WPanel *panel, WPanel *other, enum CompareMode mode)
 	file_mark (panel, i, 0);
 
 	/* Skip directories */
-	if (S_ISDIR (source->buf.st_mode))
+	if (S_ISDIR (source->st.st_mode))
 	    continue;
 
 	/* Search the corresponding entry from the other panel */
@@ -812,12 +812,12 @@ compare_dir (WPanel *panel, WPanel *other, enum CompareMode mode)
 
 	    if (mode != compare_size_only){
 		/* Older version is not marked */
-		if (source->buf.st_mtime < target->buf.st_mtime)
+		if (source->st.st_mtime < target->st.st_mtime)
 		    continue;
 	    }
 	    
 	    /* Newer version with different size is marked */
-	    if (source->buf.st_size != target->buf.st_size){
+	    if (source->st.st_size != target->st.st_size){
 		do_file_mark (panel, i, 1);
 		continue;
 		
@@ -828,7 +828,7 @@ compare_dir (WPanel *panel, WPanel *other, enum CompareMode mode)
 	    if (mode == compare_quick){
 		/* Thorough compare off, compare only time stamps */
 		/* Mark newer version, don't mark version with the same date */
-		if (source->buf.st_mtime > target->buf.st_mtime){
+		if (source->st.st_mtime > target->st.st_mtime){
 		    do_file_mark (panel, i, 1);
 		}
 		continue;
@@ -837,7 +837,7 @@ compare_dir (WPanel *panel, WPanel *other, enum CompareMode mode)
 	    /* Thorough compare on, do byte-by-byte comparison */
 	    src_name = concat_dir_and_file (panel->cwd, source->fname);
 	    dst_name = concat_dir_and_file (other->cwd, target->fname);
-	    if (compare_files (src_name, dst_name, source->buf.st_size))
+	    if (compare_files (src_name, dst_name, source->st.st_size))
 		do_file_mark (panel, i, 1);
 	    g_free (src_name);
 	    g_free (dst_name);
@@ -1004,7 +1004,7 @@ void symlink_cmd (void)
 
 void edit_symlink_cmd (void)
 {
-    if (S_ISLNK (selection (cpanel)->buf.st_mode)) {
+    if (S_ISLNK (selection (cpanel)->st.st_mode)) {
 	char buffer [MC_MAXPATHLEN];
 	char *p = NULL;
 	int i;
@@ -1244,13 +1244,13 @@ dirsizes_cmd (void)
     double total;
 
     for (i = 0; i < panel->count; i++) 
-	if (S_ISDIR (panel->dir.list [i].buf.st_mode) &&
+	if (S_ISDIR (panel->dir.list [i].st.st_mode) &&
 	         ((panel->dirs_marked && panel->dir.list [i].f.marked) || 
                    !panel->dirs_marked) &&
 	         strcmp (panel->dir.list [i].fname, "..") != 0) {
 	    total = 0.0l;
 	    compute_dir_size (panel->dir.list [i].fname, &marked, &total);
-	    panel->dir.list [i].buf.st_size = (off_t) total;
+	    panel->dir.list [i].st.st_size = (off_t) total;
 	    panel->dir.list [i].f.dir_size_computed = 1;
 	}
 	

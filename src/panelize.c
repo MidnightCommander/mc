@@ -356,7 +356,7 @@ void do_external_panelize (char *command)
 {
     int status, link_to_dir, stale_link;
     int next_free = 0;
-    struct stat buf;
+    struct stat st;
     dir_list *list = &cpanel->dir;
     char line [MC_MAXPATHLEN];
     char *name;
@@ -387,7 +387,7 @@ void do_external_panelize (char *command)
 	    name = line + 2;
 	else
 	    name = line;
-        status = handle_path (list, name, &buf, next_free, &link_to_dir,
+        status = handle_path (list, name, &st, next_free, &link_to_dir,
     	    &stale_link);
 	if (status == 0)
 	    continue;
@@ -399,7 +399,7 @@ void do_external_panelize (char *command)
 	list->list [next_free].f.link_to_dir = link_to_dir;
 	list->list [next_free].f.stale_link = stale_link;
 	list->list [next_free].f.dir_size_computed = 0;
-	list->list [next_free].buf = buf;
+	list->list [next_free].st = st;
 	next_free++;
 	if (!(next_free & 32))
 	    rotate_dash ();
