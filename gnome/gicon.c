@@ -247,6 +247,8 @@ gicon_get_icon_for_file (file_entry *fe)
 		 */
 		if (gnome_metadata_get (fe->fname, "icon-filename", &size, &buf) == 0){
 			image = gicon_get_by_filename (buf);
+
+			free (buf);
 			
 			if (image)
 				return image;

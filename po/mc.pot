@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Date: 1998-12-11 03:58:53-0600\n"
+"Date: 1998-12-15 04:49:13-0600\n"
 "From: Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>\n"
 "Content-Type: text/plain; charset=\n"
 "Xgettext-Options: --default-domain=mc --directory=.. --add-comments --keyword=_ --keyword=N_ --files-from=./POTFILES.in\n"
@@ -39,7 +39,7 @@ msgstr ""
 msgid "The GNOME edition of the Midnight Commander file manager."
 msgstr ""
 
-#: gnome/gcmd.c:93 src/main.c:813 src/screen.c:2047
+#: gnome/gcmd.c:93 src/main.c:813 src/screen.c:2050
 msgid " The Midnight Commander "
 msgstr ""
 
@@ -47,11 +47,11 @@ msgstr ""
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr ""
 
-#: gnome/gcmd.c:95 gtkedit/editcmd.c:2235 src/cmd.c:249 src/file.c:1715 src/file.c:2078 src/hotlist.c:1029 src/main.c:815 src/screen.c:2049 src/subshell.c:701 src/subshell.c:727 src/tree.c:1205 src/view.c:408
+#: gnome/gcmd.c:95 gtkedit/editcmd.c:2235 src/cmd.c:249 src/file.c:1715 src/file.c:2078 src/hotlist.c:1029 src/main.c:815 src/screen.c:2052 src/subshell.c:701 src/subshell.c:727 src/tree.c:1205 src/view.c:408
 msgid "&Yes"
 msgstr ""
 
-#: gnome/gcmd.c:95 gtkedit/editcmd.c:2235 src/cmd.c:249 src/file.c:1715 src/file.c:2078 src/hotlist.c:1029 src/main.c:815 src/screen.c:2049 src/subshell.c:701 src/subshell.c:727 src/tree.c:1205 src/view.c:408
+#: gnome/gcmd.c:95 gtkedit/editcmd.c:2235 src/cmd.c:249 src/file.c:1715 src/file.c:2078 src/hotlist.c:1029 src/main.c:815 src/screen.c:2052 src/subshell.c:701 src/subshell.c:727 src/tree.c:1205 src/view.c:408
 msgid "&No"
 msgstr ""
 
@@ -487,96 +487,95 @@ msgstr ""
 msgid "Select icon"
 msgstr ""
 
-#: gnome/gscreen.c:1199
+#: gnome/gscreen.c:1323
 msgid "All files"
 msgstr ""
 
-#: gnome/gscreen.c:1201
+#: gnome/gscreen.c:1325
 msgid "Archives and compressed files"
 msgstr ""
 
-#: gnome/gscreen.c:1203
+#: gnome/gscreen.c:1327
 msgid "RPM/DEB files"
 msgstr ""
 
-#: gnome/gscreen.c:1205
+#: gnome/gscreen.c:1329
 msgid "Text/Document files"
 msgstr ""
 
-#: gnome/gscreen.c:1207
+#: gnome/gscreen.c:1331
 msgid "HTML and SGML files"
 msgstr ""
 
-#: gnome/gscreen.c:1209
+#: gnome/gscreen.c:1333
 msgid "Postscript and PDF files"
 msgstr ""
 
-#: gnome/gscreen.c:1211
+#: gnome/gscreen.c:1335
 msgid "Spreadsheet files"
 msgstr ""
 
-#: gnome/gscreen.c:1213
+#: gnome/gscreen.c:1337
 msgid "Image files"
 msgstr ""
 
-#: gnome/gscreen.c:1216
+#: gnome/gscreen.c:1340
 msgid "Video/animation files"
 msgstr ""
 
-#: gnome/gscreen.c:1218
+#: gnome/gscreen.c:1342
 msgid "Audio files"
 msgstr ""
 
-#: gnome/gscreen.c:1220
+#: gnome/gscreen.c:1344
 msgid "C program files"
 msgstr ""
 
-#: gnome/gscreen.c:1222
+#: gnome/gscreen.c:1346
 msgid "C++ program files"
 msgstr ""
 
-#: gnome/gscreen.c:1224
+#: gnome/gscreen.c:1348
 msgid "Objective-C program files"
 msgstr ""
 
-#: gnome/gscreen.c:1226
+#: gnome/gscreen.c:1350
 msgid "Scheme program files"
 msgstr ""
 
-#: gnome/gscreen.c:1228
+#: gnome/gscreen.c:1352
 msgid "Assembler program files"
 msgstr ""
 
-#: gnome/gscreen.c:1230
+#: gnome/gscreen.c:1354
 msgid "Misc. program files"
 msgstr ""
 
-#: gnome/gscreen.c:1232
+#: gnome/gscreen.c:1356
 msgid "Font files"
 msgstr ""
 
-#: gnome/gscreen.c:1359
+#: gnome/gscreen.c:1483
 msgid "Search: %s"
 msgstr ""
 
-#: gnome/gscreen.c:1368
+#: gnome/gscreen.c:1492
 msgid "%s bytes in %d file"
 msgstr ""
 
-#: gnome/gscreen.c:1368
+#: gnome/gscreen.c:1492
 msgid "%s bytes in %d files"
 msgstr ""
 
-#. free (str);
-#: gnome/gscreen.c:1393 src/screen.c:673
+#: gnome/gscreen.c:1515 src/screen.c:673
 msgid "<readlink failed>"
 msgstr ""
 
-#: gnome/gscreen.c:1444
+#: gnome/gscreen.c:1566
 msgid "Filter"
 msgstr ""
 
-#: gnome/gscreen.c:1895
+#: gnome/gscreen.c:2075
 msgid "Location:"
 msgstr ""
 
@@ -702,7 +701,7 @@ msgid "abort"
 msgstr ""
 
 #. The file-name is printed after the ':'
-#: gtkedit/edit.c:127 gtkedit/edit.c:222 gtkedit/edit.c:229 gtkedit/edit.c:236 gtkedit/edit.c:243 gtkedit/edit.c:249 gtkedit/edit.c:306 gtkedit/edit.c:342 gtkedit/editcmd.c:1932 gtkedit/editwidget.c:1016 src/dir.c:378 src/screen.c:2298 src/tree.c:1145 src/tree.c:1151 src/wtools.c:225 vfs/fish.c:226
+#: gtkedit/edit.c:127 gtkedit/edit.c:222 gtkedit/edit.c:229 gtkedit/edit.c:236 gtkedit/edit.c:243 gtkedit/edit.c:249 gtkedit/edit.c:306 gtkedit/edit.c:342 gtkedit/editcmd.c:1932 gtkedit/editwidget.c:1016 src/dir.c:377 src/screen.c:2304 src/tree.c:1145 src/tree.c:1151 src/wtools.c:225 vfs/fish.c:226
 msgid " Error "
 msgstr ""
 
@@ -737,7 +736,7 @@ msgid " Save As "
 msgstr ""
 
 #. the file exists
-#: gtkedit/editcmd.c:482 gtkedit/editcmd.c:801 gtkedit/editcmd.c:831 gtkedit/editcmd.c:978 gtkedit/editcmd.c:1075 src/ext.c:295 src/file.c:674 src/help.c:321 src/main.c:660 src/screen.c:2063 src/subshell.c:700 src/subshell.c:726 src/utilunix.c:384 src/utilunix.c:388 src/utilunix.c:454 vfs/mcfs.c:171
+#: gtkedit/editcmd.c:482 gtkedit/editcmd.c:801 gtkedit/editcmd.c:831 gtkedit/editcmd.c:978 gtkedit/editcmd.c:1075 src/ext.c:295 src/file.c:674 src/help.c:321 src/main.c:660 src/screen.c:2066 src/subshell.c:700 src/subshell.c:726 src/utilunix.c:384 src/utilunix.c:388 src/utilunix.c:454 vfs/mcfs.c:171
 msgid " Warning "
 msgstr ""
 
@@ -1432,7 +1431,7 @@ msgstr ""
 msgid "Error initialising editor.\n"
 msgstr ""
 
-#: gtkedit/editwidget.c:1129 gtkedit/gtkedit.c:1210 src/help.c:809 src/main.c:1678 src/screen.c:2276 src/screen.c:2306 src/tree.c:1478 src/view.c:1963
+#: gtkedit/editwidget.c:1129 gtkedit/gtkedit.c:1210 src/help.c:809 src/main.c:1678 src/screen.c:2282 src/screen.c:2312 src/tree.c:1478 src/view.c:1963
 msgid "Help"
 msgstr ""
 
@@ -1444,7 +1443,7 @@ msgstr ""
 msgid "Replac"
 msgstr ""
 
-#: gtkedit/editwidget.c:1133 gtkedit/gtkedit.c:1160 src/screen.c:2280 src/screen.c:2310 src/tree.c:1484
+#: gtkedit/editwidget.c:1133 gtkedit/gtkedit.c:1160 src/screen.c:2286 src/screen.c:2316 src/tree.c:1484
 msgid "Copy"
 msgstr ""
 
@@ -1452,7 +1451,7 @@ msgstr ""
 msgid "Move"
 msgstr ""
 
-#: gtkedit/editwidget.c:1136 src/screen.c:2283 src/screen.c:2313
+#: gtkedit/editwidget.c:1136 src/screen.c:2289 src/screen.c:2319
 msgid "Delete"
 msgstr ""
 
@@ -1584,7 +1583,7 @@ msgstr ""
 msgid "Info about GNOME hello"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1208 src/screen.c:2279 src/screen.c:2309 src/view.c:1972
+#: gtkedit/gtkedit.c:1208 src/screen.c:2285 src/screen.c:2315 src/view.c:1972
 msgid "Edit"
 msgstr ""
 
@@ -2286,67 +2285,68 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/dir.c:57
+#: src/dir.c:56
 msgid "&Unsorted"
 msgstr ""
 
-#: src/dir.c:58
+#: src/dir.c:57
 msgid "&Name"
 msgstr ""
 
-#: src/dir.c:59
+#: src/dir.c:58
 msgid "&Extension"
 msgstr ""
 
-#: src/dir.c:60
+#: src/dir.c:59
 msgid "&Modify time"
 msgstr ""
 
-#: src/dir.c:61
+#: src/dir.c:60
 msgid "&Access time"
 msgstr ""
 
-#: src/dir.c:62
+#: src/dir.c:61
 msgid "&Change time"
 msgstr ""
 
-#: src/dir.c:63
+#: src/dir.c:62
 msgid "&Size"
 msgstr ""
 
-#: src/dir.c:64
+#: src/dir.c:63
 msgid "&Inode"
 msgstr ""
 
-#: src/dir.c:67
+#. New sort orders
+#: src/dir.c:66
 msgid "&Type"
 msgstr ""
 
-#: src/dir.c:68
+#: src/dir.c:67
 msgid "&Links"
 msgstr ""
 
-#: src/dir.c:69
+#: src/dir.c:68
 msgid "N&GID"
 msgstr ""
 
-#: src/dir.c:70
+#: src/dir.c:69
 msgid "N&UID"
 msgstr ""
 
-#: src/dir.c:71
+#: src/dir.c:70
 msgid "&Owner"
 msgstr ""
 
-#: src/dir.c:72
+#: src/dir.c:71
 msgid "&Group"
 msgstr ""
 
-#: src/dir.c:378
+#: src/dir.c:377
 msgid "File exists but can not be stat-ed: %s %s"
 msgstr ""
 
-#: src/dir.c:635
+#: src/dir.c:632
 msgid "Unknown"
 msgstr ""
 
@@ -3551,7 +3551,7 @@ msgid ""
 " the details.                                           "
 msgstr ""
 
-#: src/main.c:1679 src/screen.c:2277 src/screen.c:2307
+#: src/main.c:1679 src/screen.c:2283 src/screen.c:2313
 msgid "Menu"
 msgstr ""
 
@@ -3814,31 +3814,31 @@ msgstr ""
 msgid "  %s bytes in %d file%s"
 msgstr ""
 
-#: src/screen.c:1311
+#: src/screen.c:1314
 msgid "Unknow tag on display format: "
 msgstr ""
 
-#: src/screen.c:2048
+#: src/screen.c:2051
 msgid " Do you really want to execute? "
 msgstr ""
 
-#: src/screen.c:2063
+#: src/screen.c:2066
 msgid " No action taken "
 msgstr ""
 
-#: src/screen.c:2278 src/screen.c:2308
+#: src/screen.c:2284 src/screen.c:2314
 msgid "View"
 msgstr ""
 
-#: src/screen.c:2281 src/screen.c:2311 src/tree.c:1486
+#: src/screen.c:2287 src/screen.c:2317 src/tree.c:1486
 msgid "RenMov"
 msgstr ""
 
-#: src/screen.c:2282 src/screen.c:2312 src/tree.c:1490
+#: src/screen.c:2288 src/screen.c:2318 src/tree.c:1490
 msgid "Mkdir"
 msgstr ""
 
-#: src/screen.c:2298
+#: src/screen.c:2304
 msgid ""
 " Can't chdir to %s \n"
 " %s "

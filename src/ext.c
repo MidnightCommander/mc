@@ -53,6 +53,7 @@
 #include <sys/wait.h>
 #endif /* SCO_FLAVOR */
 
+#include <glib.h>
 /* "$Id$" */
 
 /* If set, we execute the file command to check the file type */
@@ -102,7 +103,7 @@ quote_block (quote_func_t quote_func, char **quoting_block)
 	return result;
 }
 	     
-static void
+void
 exec_extension (char *filename, char *data, char **drops, int *move_dir, int start_line)
 {
     char *file_name;
@@ -123,6 +124,9 @@ exec_extension (char *filename, char *data, char **drops, int *move_dir, int sta
     time_t localmtime = 0;
     struct stat mystat;
     quote_func_t quote_func = name_quote;
+
+    g_return_if_fail (filename != NULL);
+    g_return_if_fail (data != NULL);
 
     /* Avoid making a local copy if we are doing a cd */
     if (!vfs_file_is_local(filename))
