@@ -776,13 +776,6 @@ int edit_check_spelling (WEdit * edit)
     return 0;
 }
 
-void (*syntax_change_callback) (CWidget *) = 0;
-
-void edit_set_syntax_change_callback (void (*callback) (CWidget *))
-{
-    syntax_change_callback = callback;
-}
-
 void edit_free_syntax_rules (WEdit * edit)
 {
     int i, j;
@@ -793,8 +786,6 @@ void edit_free_syntax_rules (WEdit * edit)
     edit_get_rule (edit, -1);
     syntax_free (edit->syntax_type);
     edit->syntax_type = 0;
-    if (syntax_change_callback)
-	(*syntax_change_callback) (&edit->widget);
     for (i = 0; edit->rules[i]; i++) {
 	if (edit->rules[i]->keyword) {
 	    for (j = 0; edit->rules[i]->keyword[j]; j++) {
@@ -905,9 +896,6 @@ static int edit_read_syntax_file (WEdit * edit, char **names, char *syntax_file,
 			    edit_free_syntax_rules (edit);
 			    break;
 			}
-/* notify the callback of a change in rule set */
-		    if (syntax_change_callback)
-			(*syntax_change_callback) (&edit->widget);
 		}
 		break;
 	    }

@@ -1,5 +1,8 @@
 2002-11-12  Pavel Roskin  <proski@gnu.org>
 
+	* syntax.c (syntax_change_callback): Remove, it's unused.
+	(edit_set_syntax_change_callback): Likewise.
+
 	* edit.c (edit_execute_cmd): Fool gcc to prevent Y2K warning.
 
 	* editwidget.c (edit_adjust_size): Use find_buttonbar().

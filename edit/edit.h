@@ -285,8 +285,6 @@ void edit_paste_from_history (WEdit *edit);
 
 void edit_split_filename (WEdit * edit, const char *name);
 
-#define CWidget Widget
-void edit_set_syntax_change_callback (void (*callback) (CWidget *));
 void edit_load_syntax (WEdit * edit, char **names, char *type);
 void edit_free_syntax_rules (WEdit * edit);
 void edit_get_syntax_color (WEdit * edit, long byte_index, int *color);
