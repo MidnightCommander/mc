@@ -1,5 +1,7 @@
 2002-01-17  Pavel Roskin  <proski@gnu.org>
 
+	* config.h: Remove all HAS_NO_* definitions, they are unused.
+
 	* chmod.c: Remove OS/2 specific code.
 	* config.h: Likewise.
 

@@ -37,10 +37,6 @@
 #define NEEDS_IO_H
 #define NEEDS_DRIVE_H
 #define NEEDS_FCNTL_H
-#define HAS_NO_GRP_PWD_H
-#define HAS_NO_TERMIOS_H
-#define HAS_NO_SYS_PARAM_H
-#define HAS_NO_SYS_IOCTL_H
 
 #define USE_O_TEXT
 #define HAS_ACS_AS_PCCHARS
