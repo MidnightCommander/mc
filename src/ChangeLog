@@ -1,3 +1,8 @@
+2001-09-08  Pavel Roskin  <proski@gnu.org>
+
+	* subshell.c: Move definitions of WEXITSTATUS and WIFEXITED
+	below all includes so that they can be defined elsewhere.
+
 2001-09-07  Pavel Roskin  <proski@gnu.org>
 
 	* myslang.h: Specify arguments to function-like macros or remove

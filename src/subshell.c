@@ -45,14 +45,6 @@
 #   include <unistd.h>	/* For pipe, fork, setsid, access etc */
 #endif
 
-#ifndef WEXITSTATUS
-#   define WEXITSTATUS(stat_val) ((unsigned)(stat_val) >> 8)
-#endif
-
-#ifndef WIFEXITED
-#   define WIFEXITED(stat_val) (((stat_val) & 255) == 0)
-#endif
-
 #ifdef HAVE_STROPTS_H
 #   include <stropts.h> /* For I_PUSH */
 #endif /* HAVE_STROPTS_H */
@@ -71,6 +63,14 @@
 #include "cons.saver.h"	/* For handle_console(), etc.	      */
 #include "key.h"	/* XCTRL and ALT macros		      */
 #include "subshell.h"
+
+#ifndef WEXITSTATUS
+#   define WEXITSTATUS(stat_val) ((unsigned)(stat_val) >> 8)
+#endif
+
+#ifndef WIFEXITED
+#   define WIFEXITED(stat_val) (((stat_val) & 255) == 0)
+#endif
 
 /* Local functions */
 static void init_raw_mode (void);
