@@ -719,6 +719,14 @@ extern char *home_dir;
 
 #define NUM_SELECTION_HISTORY 32
 
+#ifndef MAX_PATH_LEN
+#ifdef PATH_MAX
+#define MAX_PATH_LEN PATH_MAX
+#else
+#define MAX_PATH_LEN 1024
+#endif
+#endif
+
 #ifdef _EDIT_C
 
 struct selection selection =

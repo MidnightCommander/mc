@@ -851,7 +851,13 @@ int eh_editor (CWidget * w, XEvent * xevent, CEvent * cwevent)
 	if (!xevent->xmotion.state && xevent->type == MotionNotify)
 	    return 0;
 	resolve_button (xevent, cwevent);
-	edit_mouse_mark (e, xevent, cwevent->double_click);
+	if ((cwevent->button == Button4 || cwevent->button == Button5)
+	    && (xevent->type == ButtonRelease)) {
+	    /* ahaack: wheel mouse mapped as button 4 and 5 */
+	    r = edit_execute_key_command (e, (cwevent->button == Button5) ? CK_Page_Down : CK_Page_Up, -1);
+	    break;
+	}
+	edit_mouse_mark (e, xevent, cwevent);
 	break;
     case Expose:
 	edit_render_expose (e, &(xevent->xexpose));
