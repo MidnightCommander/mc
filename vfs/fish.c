@@ -323,7 +323,7 @@ archive_same(vfs *me, vfs_s_super *super, char *archive_name, char *op, void *co
     return flags;
 }
 
-int
+static int
 fish_which (vfs *me, char *path)
 {
     if (!strncmp (path, "/#sh:", 5))

@@ -1,3 +1,7 @@
+2002-11-12  Pavel Roskin  <proski@gnu.org>
+
+	* fish.c (fish_which): Make static.
+
 2002-11-12  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* ftpfs.c (linear_abort): Close data socket dsock.
