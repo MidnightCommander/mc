@@ -24,7 +24,7 @@ if test -n "$XZIPINFO"; then
     $XZIPINFO -l "$1" | @AWK@ -v uid=${UID-0} -v zipfile="$1" -v xunzip=${XUNZIP-unzip} '
 /^Archive/ { next }
 /^[0-9]*\ file/ { next }
-/unx/ { 
+/(unx|fat|ntf)/ { 
 split($0,a,":")
 nam = substr(a[2],4)
 if ($1 ~ /^l/ ) {
@@ -36,6 +36,11 @@ if ($1 ~ /^l/ ) {
     arrow=""
     linkname=""
 }
+#if ($1 ~ /^d/ )  -- not okay -- this would break empty directories --pavel
+#    next
+
+if (length($1) == 7)
+    $1 = "-rw-r--r--"
 
 if (nam ~ /^\^/)
     nam=substr(nam, 2)

@@ -3,6 +3,9 @@
 	* ftpfs.c (dir_load): taken it out, it needs to correctly provide
 	parent, this way it breaks things.
 
+	* uzip.in: change by Dmitry Borodaenko <d.borodaenko@belcaf.com> to
+	display zip files in fat and ntf formats
+
 2000-08-04  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* ftpfs.c (dir_load): add . and .. to ftpfs listings, courtesy of
