@@ -106,6 +106,8 @@ gmc_color_init (void)
 int
 xtoolkit_init (int *argc, char *argv [])
 {
+	signal (SIGTTIN, SIG_IGN);
+	signal (SIGTTOU, SIG_IGN);
 	gmc_color_init ();
 	return 0;
 }

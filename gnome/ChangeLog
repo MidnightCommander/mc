@@ -1,3 +1,7 @@
+1999-06-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gmain.c (xtoolkit_init): Ignore SIGTTIN and SIGTTOU.
+
 1999-06-01  Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>
 
 	* gnome/gdesktop-icon.h:
