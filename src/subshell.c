@@ -49,15 +49,13 @@
 #   include <stropts.h> /* For I_PUSH */
 #endif /* HAVE_STROPTS_H */
 
-#include "global.h"	/* For home_dir			      */
-#include "tty.h"
-#include "dir.h"	/* Required by panel.h below	      */
-#include "util.h"	/* Required by panel.h		      */
-#include "panel.h"	/* For WPanel and current_panel	      */
-#include "dialog.h"	/* For query_dialog()		      */
-#include "main.h"	/* For cpanel, quit & init_sigchld()  */
-#include "cons.saver.h"	/* For handle_console(), etc.	      */
-#include "key.h"	/* XCTRL and ALT macros		      */
+#include "global.h"
+#include "tty.h"	/* LINES */
+#include "panel.h"	/* cpanel */
+#include "wtools.h"	/* query_dialog() */
+#include "main.h"	/* update_prompt() */
+#include "cons.saver.h"	/* handle_console() */
+#include "key.h"	/* XCTRL */
 #include "subshell.h"
 
 #ifndef WEXITSTATUS
