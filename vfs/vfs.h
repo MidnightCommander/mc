@@ -130,7 +130,6 @@
     void vfs_init (void);
     void vfs_shut (void);
 
-    extern int vfs_type_absolute;
     vfs *vfs_type (char *path);
     vfs *vfs_split (char *path, char **inpath, char **op);
     vfsid vfs_ncs_getid (vfs *nvfs, char *dir, struct vfs_stamping **par);
@@ -207,15 +206,10 @@
         int mc_setctl (char *path, int ctlop, char *arg);
 #ifdef HAVE_MMAP
 	caddr_t mc_mmap (caddr_t, size_t, int, int, int, off_t);
-	int mc_unmap (caddr_t, size_t);
         int mc_munmap (caddr_t addr, size_t len);
 #endif /* HAVE_MMAP */
 
 #else
-
-#ifdef USE_NETCODE
-#    undef USE_NETCODE
-#endif
 
 #    undef USE_NETCODE
 
@@ -267,7 +261,6 @@ static inline int mc_setctl(char *path, int ctlop, char *arg) { return 0; }
 #   define mc_link link
 #   define mc_mkdir mkdir
 #   define mc_rmdir rmdir
-#   define is_special_prefix(x) 0
 #   define vfs_type(x) (vfs *)(NULL)
 #   define vfs_init() do { } while (0)
 #   define vfs_shut() do { } while (0)
@@ -276,8 +269,6 @@ static inline int mc_setctl(char *path, int ctlop, char *arg) { return 0; }
 #   define vfs_timeouts() 0
 #   define vfs_force_expire() do { } while (0)
 
-    typedef int vfs;
-    
 #   define mc_getlocalcopy(x) NULL
 #   define mc_ungetlocalcopy(x,y,z) do { } while (0)
 
@@ -285,8 +276,6 @@ static inline int mc_setctl(char *path, int ctlop, char *arg) { return 0; }
 #   define ftpfs_flushdir() do { } while (0)
 
 #endif /* USE_VFS */
-
-#define mc_errno errno
 
 /* These functions are meant for use by vfs modules */
 
