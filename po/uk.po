@@ -114,36 +114,36 @@ msgstr ""
 
 #: gnome/gcmd.c:298
 msgid "Sort files by "
-msgstr ""
+msgstr "Сортувати файли за"
 
 #: gnome/gcmd.c:303 gnome/gcustom-layout.c:41 src/chmod.c:150 src/screen.c:413
 msgid "Name"
-msgstr ""
+msgstr "Назвою"
 
 #: gnome/gcmd.c:310
 msgid "File Type"
-msgstr ""
+msgstr "Типом"
 
 #: gnome/gcmd.c:316 gnome/gcustom-layout.c:45 src/screen.c:414
 #: src/screen.c:415
 msgid "Size"
-msgstr ""
+msgstr "Розм╕ром"
 
 #: gnome/gcmd.c:322
 msgid "Time Last Accessed"
-msgstr ""
+msgstr "Часом останнього доступу"
 
 #: gnome/gcmd.c:328
 msgid "Time Last Modified"
-msgstr ""
+msgstr "Часом останньо╖ модификац╕╖"
 
 #: gnome/gcmd.c:334
 msgid "Time Last Changed"
-msgstr ""
+msgstr "Часом останньо╖ зм╕ни"
 
 #: gnome/gcmd.c:348
 msgid "Reverse the order."
-msgstr ""
+msgstr "Зм╕нити порядок"
 
 #: gnome/gcmd.c:395
 msgid "Enter name."
@@ -163,7 +163,7 @@ msgstr ""
 
 #: gnome/gcmd.c:554
 msgid "Run Command"
-msgstr ""
+msgstr "Запустити команду"
 
 #. Frame 1
 #: gnome/gcmd.c:559
@@ -182,11 +182,11 @@ msgstr ""
 #. Frame 2
 #: gnome/gcmd.c:588
 msgid "Run this Command"
-msgstr ""
+msgstr "Запустити цю команду"
 
 #: gnome/gcmd.c:595
 msgid "Command: "
-msgstr ""
+msgstr "Команда: "
 
 #: gnome/gcmd.c:674
 msgid "Set Filter"
@@ -195,7 +195,7 @@ msgstr ""
 #: gnome/gcmd.c:679 gnome/gcmd.c:720 gnome/gcmd.c:725 gnome/gcmd.c:729
 #: gnome/gscreen.c:2416
 msgid "Show all files"
-msgstr ""
+msgstr "Показати вс╕ файли"
 
 #: gnome/gcmd.c:686
 msgid "."
@@ -1843,7 +1843,7 @@ msgstr ""
 
 #: gtkedit/editcmd.c:1185 gtkedit/editcmd.c:1607
 msgid " Replace with: "
-msgstr ""
+msgstr " Зам╕нити на: "
 
 #: gtkedit/editcmd.c:1189
 msgid " Confirm replace "
@@ -1859,7 +1859,7 @@ msgstr "&Зам╕нити все"
 
 #: gtkedit/editcmd.c:1225
 msgid "pr&Ompt on replace"
-msgstr "&П╕дтвердження на зам╕ну"
+msgstr "&П╕дтвердження"
 
 #: gtkedit/editcmd.c:1227 gtkedit/editcmd.c:1308
 msgid "&Backwards"
@@ -1905,11 +1905,11 @@ msgstr " Пошук "
 #. An input line comes after the ':'
 #: gtkedit/editcmd.c:1382
 msgid " Enter search text : "
-msgstr ""
+msgstr " Введ╕ть текст для пошуку : "
 
 #: gtkedit/editcmd.c:1389
 msgid " Enter replace text : "
-msgstr ""
+msgstr " Введ╕ть текст для зам╕ни : "
 
 #: gtkedit/editcmd.c:1392 gtkedit/editcmd.c:1393
 #, c-format
@@ -1955,7 +1955,7 @@ msgstr " Назад "
 #. Tool hint
 #: gtkedit/editcmd.c:1420 gtkedit/editcmd.c:1421
 msgid "Warning: Searching backward can be slow"
-msgstr ""
+msgstr "Увага: Пошук назад може бути пов╕льним"
 
 #: gtkedit/editcmd.c:1434
 msgid " Prompt on replace "
@@ -3452,40 +3452,40 @@ msgstr ""
 
 #: src/dir.c:61
 msgid "&Unsorted"
-msgstr ""
+msgstr "&Не сортувати"
 
 #: src/dir.c:62
 msgid "&Name"
-msgstr ""
+msgstr "За &назвою"
 
 #: src/dir.c:63
 msgid "&Extension"
-msgstr ""
+msgstr "За роз&ширенням"
 
 #: src/dir.c:64
 msgid "&Modify time"
-msgstr ""
+msgstr "За часом &модиф╕кац╕╖"
 
 #: src/dir.c:65
 msgid "&Access time"
-msgstr ""
+msgstr "За часом &доступу"
 
 #: src/dir.c:66
 msgid "&Change time"
-msgstr ""
+msgstr "За часом &зм╕ни"
 
 #: src/dir.c:67
 msgid "&Size"
-msgstr ""
+msgstr "За &розм╕ром"
 
 #: src/dir.c:68
 msgid "&Inode"
-msgstr ""
+msgstr "За i-&вузлом"
 
 #. New sort orders
 #: src/dir.c:71
 msgid "&Type"
-msgstr ""
+msgstr "За &типом"
 
 #: src/dir.c:72
 msgid "&Links"
@@ -3501,11 +3501,11 @@ msgstr ""
 
 #: src/dir.c:75
 msgid "&Owner"
-msgstr ""
+msgstr "За &власником"
 
 #: src/dir.c:76
 msgid "&Group"
-msgstr ""
+msgstr "За &групою"
 
 #: src/dir.c:386
 #, c-format
