@@ -13,9 +13,6 @@ extern int use_subshell;
 /* File descriptor of the pseudoterminal used by the subshell */
 extern int subshell_pty;
 
-/* The key to switch back to MC from the subshell */
-extern char subshell_switch_key;
-
 /* State of the subshell; see subshell.c for an explanation */
 enum subshell_state_enum {INACTIVE, ACTIVE, RUNNING_COMMAND};
 extern enum subshell_state_enum subshell_state;
