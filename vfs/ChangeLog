@@ -1,4 +1,4 @@
-2004-0?-??  Andrew V. Samoilov  <sav@bcs.zp.ua>
+2004-08-31  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
         * utilvfs.c (vfs_parse_ls_lga): Use atoll()/atof() instead of atol()
         for st_size to show file sizes > 2G.
@@ -12,7 +12,7 @@
 	* Code cleanup: Added const qualifier for variables and
 	function declarations where possible. No functional changes.
 
-2004-08-27  Andrew V. Samoilov  <sav bcs zp ua>
+2004-08-27  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* smbfs.c (smbfs_open_readwrite): Implement O_APPEND via smbfs_lseek().
 
@@ -21,11 +21,12 @@
 	* undelfs.c (undelfs_lstat): Adjusted declaration.
 	(undelfs_stat): Defined to undelfs_lstat.
 
-	From Andrew V. Samoilov <andrew email zp ua>
+	From Andrew V. Samoilov <sav@bcs.zp.ua>.
 
 2004-08-26  Pavel S. Shirshov  <pavelsh@mail.ru>
 
-	* direntry.c: Use g_strlcpy() instead strncpy() for fix buffer overrun
+	* direntry.c: Use g_strlcpy() instead of strncpy() to fix buffer
+	overflow.
 	* extfs.c: Likewise.
 	* mcfs.c: Likewise.
 	* smbfs.c: Likewise.
@@ -56,7 +57,7 @@
 
 	* extfs/urar.in: Fix non-POSIX constructs.
 
-	From Koblinger Egmont <egmont uhulinux hu>
+	From Koblinger Egmont <egmont@uhulinux.hu>
 
 2004-08-21  Pavel S. Shirshov  <pavelsh@mail.ru>
 
