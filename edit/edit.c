@@ -362,6 +362,20 @@ int edit_insert_file (WEdit * edit, const char *filename)
 static int check_file_access (WEdit *edit, const char *filename, struct stat *st)
 {
     int file;
+    int stat_ok = 0;
+
+    /* Try stat first to prevent getting stuck on pipes */
+    if (mc_stat ((char *) filename, st) == 0) {
+	stat_ok = 1;
+    }
+
+    /* Only regular files are allowed */
+    if (stat_ok && !S_ISREG (st->st_mode)) {
+	edit_error_dialog (_ (" Error "), catstrs (_ (" Not an ordinary file: "), filename, " ", 0));
+	return 1;
+    }
+
+    /* Open the file, create it if needed */
     if ((file = open ((char *) filename, O_RDONLY)) < 0) {
 	close (creat ((char *) filename, 0666));
 	if ((file = open ((char *) filename, O_RDONLY)) < 0) {
@@ -369,19 +383,14 @@ static int check_file_access (WEdit *edit, const char *filename, struct stat *st
 	    return 2;
 	}
     }
-    if (mc_stat ((char *) filename, st) < 0) {
+
+    /* If the file has just been created, we don't have valid stat yet, so do it now */
+    if (!stat_ok && mc_fstat (file, st) < 0) {
 	close (file);
-/* The file-name is printed after the ':' */
 	edit_error_dialog (_ (" Error "), get_sys_error (catstrs (_ (" Cannot get size/permissions info on file: "), filename, " ", 0)));
 	return 1;
     }
-    if (S_ISDIR (st->st_mode) || S_ISSOCK (st->st_mode)
-	|| S_ISFIFO (st->st_mode)) {
-	close (file);
-/* The file-name is printed after the ':' */
-	edit_error_dialog (_ (" Error "), catstrs (_ (" Not an ordinary file: "), filename, " ", 0));
-	return 1;
-    }
+
     if (st->st_size >= SIZE_LIMIT) {
 	close (file);
 /* The file-name is printed after the ':' */
