@@ -51,14 +51,11 @@
 /* }}} */
 
 /* {{{ Common dialog callback */
-#ifdef HAVE_X
-void dialog_repaint (struct Dlg_head *h, int back, int title_fore)
-{
-}
-#else
+
 void
 dialog_repaint (struct Dlg_head *h, int back, int title_fore)
 {
+#ifndef HAVE_X
     attrset (back);
     dlg_erase (h);
     draw_box (h, 1, 1, h->lines - 2, h->cols - 2);
@@ -67,8 +64,9 @@ dialog_repaint (struct Dlg_head *h, int back, int title_fore)
 	dlg_move (h, 1, (h->cols-strlen (h->title))/2);
 	addstr (h->title);
     }
-}
 #endif
+}
+
 void
 common_dialog_repaint (struct Dlg_head *h)
 {
@@ -89,11 +87,7 @@ common_dialog_callback (struct Dlg_head *h, int id, int msg)
 #ifdef HAVE_X
 #define listbox_refresh(h)
 #else
-static void
-listbox_refresh (Dlg_head *h)
-{
-    dialog_repaint (h, COLOR_NORMAL, COLOR_HOT_NORMAL);
-}
+#define listbox_refresh(h)	common_dialog_repaint(h)
 #endif
 
 static int listbox_callback (Dlg_head *h, int id, int msg)
@@ -170,12 +164,12 @@ struct text_struct {
 
 static int query_callback (struct Dlg_head *h, int Id, int Msg)
 {
+#ifndef HAVE_X    
     struct text_struct *info;
 
     info = (struct text_struct *) h->data;
     
     switch (Msg){
-#ifndef HAVE_X    
     case DLG_DRAW:
 	/* designate window */
 	attrset (NORMALC);
@@ -185,8 +179,8 @@ static int query_callback (struct Dlg_head *h, int Id, int Msg)
 	dlg_move (h, 1, (h->cols-strlen (info->header))/2);
 	addstr (info->header);
 	break;
-#endif
     }
+#endif
     return 0;
 }
 
@@ -219,14 +213,14 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
     query_colors [3] = (flags & D_ERROR) ? COLOR_HOT_NORMAL :  COLOR_HOT_FOCUS;
     
     if (header == MSG_ERROR)
-	    header = _(" Error ");
+	header = _(" Error ");
     
     if (count > 0){
 	va_start (ap, count);
 	for (i = 0; i < count; i++)
 	{
 		char* cp = va_arg (ap, char *);
-	    win_len += strlen (cp) + 6;
+		win_len += strlen (cp) + 6;
 		if (strchr (cp, '&') != NULL)
 			win_len--;
 	}
@@ -321,7 +315,7 @@ Dlg_head *message (int error, char *header, const char *text, ...)
     /* Setup the display information */
     strcpy (buffer, "\n");
     va_start (args, text);
-    g_vsnprintf (&buffer [1], sizeof (buffer), text, args);
+    g_vsnprintf (&buffer [1], sizeof (buffer) - 1, text, args);
     strcat (buffer, "\n");
     va_end (args);
     
@@ -578,7 +572,8 @@ char *real_input_dialog_help (char *header, char *text, char *help, char *def_te
     
     /* Translators should take care as "Password" or its translations
     are used to identify password boxes and hide characters with "*" */
-    if (strncmp (text, _("Password:"), strlen (_("Password:"))-1) == 0){
+    my_str = _("Password:");
+    if (strncmp (text, my_str, strlen (my_str)-1) == 0){
 	quick_widgets [INPUT_INDEX].value = 1;
 	tk_name[3]=0;
     } else {
@@ -638,8 +633,7 @@ char *input_expand_dialog (char *header, char *text, char *def_text)
 	if (expanded){
 	    g_free (result);
 	    return expanded;
-	} else 
-	    return result;
+	}
     }
     return result;
 }
