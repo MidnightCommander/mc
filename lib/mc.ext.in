@@ -35,10 +35,8 @@
 #    View (F3), Edit (F4), Drop (user drops some files on it) or any other
 #
 #    user defined name (those will be listed in the extension dependent pop-up
-#    menu). 
-#
-#    Icon name is name of the corresponding icon (XPM). If it has no path,
-#    the default path for mc icons @prefix@/lib/mc/icons is assumed.
+#    menu). This is not implemented yet for the text edition but will be
+#    implemented some day so feel free to add useful actions here.
 #
 #    Title is the default icon title for objects. %p is expanded into the
 #    name of that file and %d/%p to a name with full path. Default title
@@ -125,50 +123,41 @@
 
 shell/rm
 	Open=if test ! -d ~/.trash; then mkdir ~/.trash; fi; I=%{Enter file to be safely deleted}; if test -n "$I"; then mv -f -b -V numbered %q ~/.trash; fi
-	Icon=rubbish.xpm
 	Drop=if test ! -d ~/.trash; then mkdir ~/.trash; fi; mv -f -b -V numbered %q ~/.trash
 	Flush=rm -rf ~/.trash
 	Title=Safe delete
 
 shell/lpr
 	Open=lpr %{Enter file(s) to print}
-	Icon=printer.xpm
 	Drop=lpr %q
 	Print=lpr %{Enter file(s) to print}
 
 shell/gzip
 	Open=gzip %{Enter file to gzip}
-	Icon=compressed.xpm
 	Drop=gzip %q
 
 shell/bzip
 	Open=bzip %{Enter file to bzip}
-	Icon=compressed.xpm
 	Drop=bzip %q
 
 shell/bzip2
 	Open=bzip2 %{Enter file to bzip}
-	Icon=compressed.xpm
 	Drop=bzip2 %q
 
 shell/gunzip
 	Open=gunzip %{Enter file to gunzip}
-	Icon=compressed.xpm
 	Drop=gunzip %q
 
 shell/bunzip
 	Open=bunzip %{Enter file to bunzip}
-	Icon=compressed.xpm
 	Drop=bunzip %q
 
 shell/bunzip2
 	Open=bunzip2 %{Enter file to bunzip}
-	Icon=compressed.xpm
 	Drop=bunzip2 %q
 
 shell/gdb
 	Open=gdb
-	Icon=bug.xpm
 	Drop=gdb %q
 
 
@@ -180,7 +169,6 @@ shell/.c
 	View=%view{ascii}
 	Compile=%var{CC:cc} -O -c %f
 	Link=%var{CC:cc} -O -o %d/`basename %f .c` %f
-	Icon=c.xpm
 
 # Fortran
 shell/.f
@@ -192,13 +180,11 @@ shell/.f
 # Header
 shell/.h
 	Open=%var{EDITOR:vi} %f
-	Icon=h.xpm
 
 # Object
 shell/.o
 	#Open=%var{PAGER:more} %f
 	Link=%var{CC:cc} -O %f
-	Icon=o.xpm
 	Display object file symbols=%view{ascii} nm %f
 	Disassemble=%view{ascii} objdump -d -r %f
 
@@ -207,7 +193,6 @@ shell/.s
 	Open=%var{EDITOR:vi} %f
 	Assemble=%var{CC:cc} -O -c %f
 	Link=%var{CC:cc} -O -o %d/`basename %f .s` %f
-	Icon=s.xpm
 
 # C++
 regex/\.(C|cc)$
@@ -215,107 +200,85 @@ regex/\.(C|cc)$
 	View=%view{ascii}
 	Compile=c++ -O -c %f
 	Link=c++ -O -o %d/`basename %f .c` %f
-	Icon=cc.xpm
 
 ### Documentation ###
 
 # Texinfo
 regex/\.(te?xi)|(texinfo)$
-	Icon=tex.xpm
 
 # GNU Info page
 type/Info\ text
 	Open=info --directory %d -f %p
-	Icon=info.xpm
 
 # Manual page
 regex/(([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|n)|\.man)$
 	Open=nroff @TROFFASCII@ @MANDOC@ %f | %var{PAGER:more}
 	View=%view{ascii,nroff} nroff @TROFFASCII@ @MANDOC@ %f
-	Icon=man.xpm
 
 # Troff with me macros.
 shell/.me
 	Open=nroff @TROFFASCII@ -me %f | %var{PAGER:more}
 	View=%view{ascii,nroff} nroff @TROFFASCII@ -me %f
-	Icon=man.xpm
 
 # Troff with ms macros.
 shell/.ms
 	Open=nroff @TROFFASCII@ -ms %f | %var{PAGER:more}
 	View=%view{ascii,nroff} nroff @TROFFASCII@ -ms %f
-	Icon=man.xpm
 
 # Manual page - compressed
 regex/([^0-9]|^[^\.]*)\.([1-9][a-z]?|n)\.g?[Zz]$
 	Open=gzip -dc %f | nroff @TROFFASCII@ @MANDOC@ | %var{PAGER:more}
 	View=%view{ascii,nroff} gzip -dc %f | nroff @TROFFASCII@ @MANDOC@
-	Icon=man.xpm
 
 regex/([^0-9]|^[^\.]*)\.([1-9][a-z]?|n)\.bz$
 	Open=bzip -dc %f | nroff @TROFFASCII@ @MANDOC@ | %var{PAGER:more}
 	View=%view{ascii,nroff} bzip -dc %f | nroff @TROFFASCII@ @MANDOC@
-	Icon=man.xpm
 
 regex/([^0-9]|^[^\.]*)\.([1-9][a-z]?|n)\.bz2$
 	Open=bzip2 -dc %f | nroff @TROFFASCII@ @MANDOC@ | %var{PAGER:more}
 	View=%view{ascii,nroff} bzip2 -dc %f | nroff @TROFFASCII@ @MANDOC@
-	Icon=man.xpm
 
 regex/(read\.?me$)|(README)
-	Icon=info.xpm
 
 
 ### Images ###
 
 type/GIF\ image
 	Include=image-options
-	Icon=gif.xpm
 	
 type/GIF\ picture
 	Include=image-options
-	Icon=gif.xpm
 	
 type/JPEG\ image
 	Include=image-options
-	Icon=jpeg.xpm
 	
 type/JPEG\ picture
 	Include=image-options
-	Icon=jpeg.xpm
 
 type/PC\ bitmap
 	Include=image-options
-	Icon=bitmap.xpm
 
 type/PNG\ image
 	Include=image-options
-	Icon=gif.xpm
 
 type/TIFF\ file
 	Include=image-options
-	Icon=tiff.xpm
 	
 type/PBM
 	Include=image-options
-	Icon=pbm.xpm
 	
 type/PGM
 	Include=image-options
-	Icon=pgm.xpm
 	
 type/PPM
 	Include=image-options
-	Icon=ppm.xpm
 
 shell/.xbm
 	Open=bitmap %f
-	Icon=xbm.xpm
 
 shell/.xpm
 	Include=image-options
 	View=sxpm %f
-	Icon=xpm.xpm
 
 include/image-options
 	Open=if [ "$DISPLAY" = "" ]; then zgv %f; else (ee %f &); fi
@@ -329,21 +292,17 @@ include/image-options
 
 regex/\.(wav|WAV|Wav|snd|SND|Snd|voc|VOC|Voc|au|AU|Au)$
        Open=play %f
-       Icon=sound.xpm
 
 regex/\.(mod|MOD|Mod|s3m|S3M|S3m|xm|XM|Xm)$
        Open=mikmod %f
        #Open=tracker %f
-       Icon=sound.xpm
 
 regex/\.(wav22|WAV22)$
        Open=vplay -s 22 %f
-       Icon=wav.xpm
 
 regex/\.(mp3|MP3|Mp3)$
 	Open=mpg123 %f
 	View=%view{ascii} mpg123 -tn1 %f 2>&1|grep -E "^(Title|Album|Comment|MPEG|$)"
-	Icon=sound.xpm
 
 
 ### Multimedia ###
@@ -369,7 +328,6 @@ regex/\.(rm|RM|Rm|ram|RAM|Ram)$
 # Postscript
 type/PostScript
 	Open=gv %f&
-	Icon=postscript.xpm
 	View=%view{ascii} ps2ascii %f
 	View with GhostView=gv %f
 
@@ -385,7 +343,6 @@ regex/\.([Hh]tml?|HTML?)$
 	#Open=if echo "%d/%p" | grep ^ftp; then $viewer %d/%p; else $viewer file:%p; fi
 	Open=if [ x$DISPLAY = x ]; then lynx -force_html %f; else (@X11_WWW@ %f &); fi
 	View=%view{ascii} lynx -dump -force_html %f; 
-	Icon=html.xpm
 	Run with AppletViewer=appletviewer %f
 	View with @X11_WWW@=@X11_WWW@ file://%f
 
@@ -393,28 +350,23 @@ regex/\.([Hh]tml?|HTML?)$
 regex/\.([Dd]oc|DOC)$
 	#View=%view{ascii} catdoc -w %f
 	View=%view{ascii} word2x -f text %f -
-	Icon=word.xpm
 type/Microsoft Word Document
 	#View=%view{ascii} catdoc -w %f
 	View=%view{ascii} word2x -f text %f -
-	Icon=word.xpm
  
 # Framemaker
 type/FrameMaker
 	Open=fmclient -f %f
-	Icon=framemaker.xpm
 
 # DVI
 regex/\.([Dd]vi|DVI)$
 	Open=if [ x$DISPLAY = x ]; then dvisvga %f; else (xdvi %f &); fi
 	View=%view{ascii} dvi2tty %f
-	Icon=binary.xpm
 	Convert file to Postscript=dvips %f
 
 # TeX
 regex/\.([Tt]ex|TEX|TeX)$
 	Open=%var{EDITOR:vi} %f
-	Icon=tex.xpm
 	TeX this file=tex %f
 	LaTeX this file=latex %f
 
@@ -427,22 +379,18 @@ shell/^RMAIL$
 
 type/mail
 	Open=elm -f %f
-	Icon=mail.xpm
 	View=%view{ascii} mcmfmt < %f
 
 # core
 shell/core
-	Icon=core.xpm
 
 # Makefile
 regex/[Mm]akefile
 	Open=make -f %f %{Enter parameters}
-	Icon=makefile.xpm
 
 # Imakefile
 shell/Imakefile
 	Open=xmkmf -a
-	Icon=makefile.xpm
 
 # Executables
 type/executable
@@ -452,7 +400,6 @@ type/executable
 	Execute in XTerm=xterm -e %f &
 	View Required Libraries=%view{ascii} ldd %f
 	Strip binary=strip %f
-	Icon=application.xpm
 
 # dbf
 regex/\.(dbf|DBF)$
@@ -462,7 +409,6 @@ regex/\.(dbf|DBF)$
 # REXX script
 regex/\.(rexx)|(rex)|(cmd)$
        Open=rexx %f %{Enter parameters};echo "Press ENTER";read y
-       Icon=rexx.xpm
 
 
 ### Archives ###
@@ -472,30 +418,25 @@ regex/\.t([gp]?z|ar\.g?[zZ])$
 	Open=%cd %p#utar
 	View=%view{ascii} gzip -dc %f 2>/dev/null | tar tvvf -
 	Extract=gzip -dc %f 2>/dev/null | tar xf -
-	Icon=compressed.xpm
 regex/\.tar\.bz$
 	# Open=%cd %p#utar
 	View=%view{ascii} bzip -dc %f 2>/dev/null | tar tvvf -
 	Extract=bzip -dc %f 2>/dev/null | tar xf -
-	Icon=compressed.xpm
 regex/\.tar\.bz2$
 	Open=%cd %p#utar
 	View=%view{ascii} bzip2 -dc %f 2>/dev/null | tar tvvf -
 	Extract=bzip2 -dc %f 2>/dev/null | tar xf -
-	Icon=compressed.xpm
 
 # tar
 regex/\.(tar|TAR)$
 	Open=%cd %p#utar
 	View=%view{ascii} tar tvvf %f
 	Extract=tar xf %f
-	Icon=tar.xpm
 
 # zip
 regex/\.(zip|ZIP|jar|JAR)$
 	Open=%cd %p#uzip
 	View=%view{ascii} unzip -v %f
-	Icon=zip.xpm
 	Extract=unzip %f
 	Extract (with flags)=I=%{Enter any Unzip flags:}; if test -n "$I"; then unzip $I %f; fi
 	Unzip=unzip %f '*'
@@ -504,14 +445,12 @@ regex/\.(zip|ZIP|jar|JAR)$
 regex/\.(zoo|ZOO)$
 	Open=%cd %p#uzoo
 	View=%view{ascii} zoo l %f
-	Icon=zoo.xpm
 	Extract=zoo x %f '*'
 	
 # lha
 regex/\.(lha|LHA|lzh|LZH)$
 	Open=%cd %p#ulha
 	View=%view{ascii} lharc l %f
-	Icon=lharc.xpm
 	Extract=lharc x %f '*'
 	Extract (with flags)=I=%{Enter any LHarc flags:}; if test -n "$I"; then lharc x $I %f; fi
 
@@ -519,7 +458,6 @@ regex/\.(lha|LHA|lzh|LZH)$
 regex/\.a(rj|[0-9][0-9])$
 	Open=%cd %p#uarj
 	View=%view{ascii} unarj l %f
-	Icon=zip.xpm
 	Extract=unarj x %f '*'
 	Extract (with flags)=I=%{Enter any Unarj flags:}; if test -n "$I"; then unarj x $I %f; fi
 
@@ -527,7 +465,6 @@ regex/\.a(rj|[0-9][0-9])$
 regex/\.(ha|HA|Ha)$
 	Open=%cd %p#uha
 	View=%view{ascii} ha lf %f
-	Icon=ha.xpm
 	Extract=ha xy %f '*'
 	Extract (with flags)=I=%{Enter any HA flags:}; if test -n "$I"; then ha xy $I %f; fi
 
@@ -543,17 +480,14 @@ shell/.cpio.Z
 	Open=%cd %d/%p#ucpio/
 	View=%view{ascii} compress -dc '%f' | cpio -ictv
 	Extract=compress -dc '%f' | cpio -ic
-	Icon=compressed.xpm
 shell/.cpio.gz
 	Open=%cd %d/%p#ucpio/
 	View=%view{ascii} gzip -dc '%f' | cpio -ictv
 	Extract=gzip -dc '%f' | cpio -ic
-	Icon=compressed.xpm
 shell/.cpio
 	Open=%cd %d/%p#ucpio/
 	View=%view{ascii} cat '%f' | cpio -ictv
 	Extract=cat '%f' | cpio -ic
-	Icon=cpio.xpm
 
 # gzip
 type/gzip
@@ -561,7 +495,6 @@ type/gzip
 	View=%view{ascii} gzip -dc %f 2>/dev/null
 	Edit=I=`date +%%s`; export I; gzip -cd %f >/tmp/gzed.$I && %var{EDITOR:vi} /tmp/gzed.$I && gzip -c /tmp/gzed.$I > %f; rm -f /tmp/gzed.$I
 	Uncompress=gunzip %f
-	Icon=compressed.xpm
 
 # bzip2
 type/bzip2
@@ -569,7 +502,6 @@ type/bzip2
 	View=%view{ascii} bzip2 -dc %f 2>/dev/null
 	Edit=I=`date +%%s`; export I; bzip2 -cd %f >/tmp/bzed.$I && %var{EDITOR:vi} /tmp/bzed.$I && bzip2 -c /tmp/bzed.$I > %f; rm -f /tmp/bzed.$I
 	Uncompress=bunzip2 %f
-	Icon=compressed.xpm
 
 # bzip
 type/bzip
@@ -577,36 +509,30 @@ type/bzip
 	View=%view{ascii} bzip -dc %f 2>/dev/null
 	Edit=I=`date +%%s`; export I; bzip -cd %f >/tmp/bzed.$I && %var{EDITOR:vi} /tmp/bzed.$I && bzip -c /tmp/bzed.$I > %f; rm -f /tmp/bzed.$I
 	Uncompress=bunzip %f
-	Icon=compressed.xpm
 
 # compress
 type/compress
 	Open=gzip -dc %f | %var{PAGER:more}
 	View=%view{ascii} gzip -dc %f 2>/dev/null
 	Edit=I=`date +%%s`; export I; gzip -cd %f >/tmp/gzed.$I && %var{EDITOR:vi} /tmp/gzed.$I && gzip -c /tmp/gzed.$I > %f; rm -f /tmp/gzed.$I
-	Icon=compressed.xpm
 
 # ar library
 regex/\.s?a$
 	Open=%cd %p#uar
 	#Open=%view{ascii} ar tv %f
 	View=%view{ascii} nm %f
-	Icon=a.xpm
 
 # .so libraries are not manual pages
 regex/\.(so|so\.[0-9\.]*)$
 	View=%view{hex}
-	Icon=so.xpm
 
 # ls-lR
 regex/^ls-?lR$
 	Open=%cd %p#lslR
 	View=%view{ascii}
-	Icon=plain_dir.xpm
 regex/^ls-?lR\.(g?z|Z)$
 	Open=%cd %p#lslR
 	View=%view{ascii} gunzip -c %f
-	Icon=plain_dir.xpm
 
 # ftplist
 regex/\.ftplist$
@@ -617,17 +543,19 @@ regex/\.trpm$
 	Open=%cd %p#trpm
 	View=%view{ascii} rpm -qivl --scripts `basename %p .trpm`
 
-# rpm
+# Source RPMs (SuSE uses *.spm, others use *.src.rpm)
+regex/\.(spm|src\.rpm)$
+	Open=%cd %p#rpm
+	Install this RPM=rpm -i %f
+	Rebuild this RPM=rpm --rebuild %f
+	Check signature=rpm --checksig %f
+
+# Compiled RPMs
 regex/\.rpm$
 	Open=%cd %p#rpm
 	Install this RPM=rpm -i %f
 	Upgrade this RPM=rpm -U %f
-
-# SuSE src rpms
-regex/\.spm$
-	Open=%cd %p#rpm
-	Install this RPM=rpm -i %f
-	Upgrade this RPM=rpm -U %f
+	Check signature=rpm --checksig %f
 
 # deb
 regex/\.deb$
@@ -638,17 +566,12 @@ regex/\.deb$
 ### Directories ###
 
 directory/^\.\.$
-	Icon=parent_dir.xpm
 directory/^News$
-	Icon=news_dir.xpm
 directory/^Mail$
-	Icon=mail_dir.xpm
 directory/^\..*$
-	Icon=hidden_dir.xpm
 directory/^.*$
 	Start XTerm here=cd %p; exec xterm &
 	Make tar.gz=I=%{Enter destination file name:}; if test -n "$I"; then tar cvf - %p | gzip > $I; fi
-	Icon=plain_dir.xpm
 
 
 ### Default ###
@@ -658,7 +581,6 @@ default/*
 	Open=
 	View=%view{ascii}
 	Drop=
-	Icon=plain.xpm
 	Title=%p
 
 

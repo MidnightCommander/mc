@@ -1,3 +1,10 @@
+2000-10-09  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Removed references to icons. Source RPMs
+	grouped to one regex. Removed "Update" for source RPMs, added
+	"Rebuild" instead. Added "Check signature" for all RPMs.
+	Added a comment about pop-up menus in the text edition.
+
 2000-10-06  Pavel Roskin  <proski@gnu.org>
 
 	* gnome/Makefile.in, src/Makefile.in, vfs/Make-mc.in: Required
