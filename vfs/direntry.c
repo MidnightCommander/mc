@@ -800,7 +800,7 @@ vfs_s_open (vfs *me, char *file, int flags, int mode)
 	}
 
     if (fh->ino->localname){
-	fh->handle = open (fh->ino->localname, flags, mode);
+	fh->handle = open (fh->ino->localname, NO_LINEAR(flags), mode);
 	if (fh->handle == -1){
 	    g_free(fh);
 	    ERRNOR (errno, NULL);

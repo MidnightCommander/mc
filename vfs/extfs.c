@@ -657,7 +657,8 @@ static void *extfs_open (vfs *me, char *file, int flags, int mode)
         g_free (cmd);
     }
     
-    local_handle = open (entry->inode->local_filename, flags, mode);
+    local_handle = open (entry->inode->local_filename, NO_LINEAR(flags),
+			 mode);
     if (local_handle == -1) ERRNOR (EIO, NULL);
     
     extfs_info = g_new (struct pseudofile, 1);

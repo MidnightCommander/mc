@@ -157,7 +157,7 @@ sfs_open (vfs *me, char *path, int flags, int mode)
     int fd;
 
     path = redirect (me, path);
-    fd = open (path, flags, mode);
+    fd = open (path, NO_LINEAR(flags), mode);
     if (fd == -1)
 	return 0;
 

@@ -1,3 +1,11 @@
+2002-07-10  Pavel Roskin  <proski@gnu.org>
+
+	* direntry.c (vfs_s_open): Don't pass O_LINEAR to open() -
+	this flag is for VFS only, and causes side effects in Cygwin.
+	* extfs.c (extfs_open): Likewise.
+	* sfs.c (sfs_open): Likewise.
+	Reported by Pavel Tsekov <ptsekov@gmx.net>
+
 2002-07-03  Pavel Roskin  <proski@gnu.org>
 
 	* ftpfs.c (setup_passive): Cast arguments to isdigit() to
