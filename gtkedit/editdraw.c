@@ -4,6 +4,8 @@
 
    Authors: 1996, 1997 Paul Sheer
 
+   $Id$
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
@@ -555,12 +557,12 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
 #endif
 #endif
 	) {
+#if !defined(MIDNIGHT) && !defined(GTK)
 	int time_division = 5;
 #if 0
 	if (CPending ())
 	    time_division--;
 #endif
-#if !defined(MIDNIGHT) && !defined(GTK)
 	if (prev_start < 0)
 	    prev_start = edit->start_line;
 	if (option_smooth_scrolling && prev_win == CWindowOf (edit->widget) && !edit->screen_modified) {
@@ -766,9 +768,7 @@ extern int option_long_whitespace;
 void edit_render (WEdit * edit, int page, int row_start, int col_start, int row_end, int col_end)
 {
     int f = 0;
-#ifdef GTK
-    GtkEdit *win;
-#endif
+
     if (page)			/* if it was an expose event, 'page' would be set */
 	edit->force |= REDRAW_PAGE | REDRAW_IN_BOUNDS;
     f = edit->force & (REDRAW_PAGE | REDRAW_COMPLETELY);
@@ -781,9 +781,7 @@ void edit_render (WEdit * edit, int page, int row_start, int col_start, int row_
 	edit_set_space_width (FONT_PER_CHAR[' '] * 2);
     else
 	edit_set_space_width (FONT_PER_CHAR[' ']);
-#ifdef GTK
-    win = (GtkEdit *) edit->widget;
-#endif
+
     edit_set_foreground_colors (
 				 color_palette (option_editor_fg_normal),
 				   color_palette (option_editor_fg_bold),
