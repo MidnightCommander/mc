@@ -81,6 +81,8 @@ gnome_file_property_dialog_class_init (GnomeFilePropertyDialogClass *klass)
 static void
 gnome_file_property_dialog_init (GnomeFilePropertyDialog *file_property_dialog)
 {
+	gnome_dialog_close_hides (GNOME_DIALOG (file_property_dialog), TRUE);
+
 	file_property_dialog->file_name = NULL;
 	file_property_dialog->file_entry = NULL;
 	file_property_dialog->group_name = NULL;

@@ -1,5 +1,8 @@
 1999-03-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gnome-file-property-dialog.c (gnome_file_property_dialog_init):
+	Set the dialog to not destroy-on-close.
+
 	* gpopup2.c (gpopup_do_popup2): Fixed Miguel's code.
 
 1999-03-11  Miguel de Icaza  <miguel@nuclecu.unam.mx>
