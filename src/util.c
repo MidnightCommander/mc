@@ -585,15 +585,8 @@ char *file_date (time_t when)
 {
     static char timebuf [40];
     time_t current_time = time ((time_t) 0);
+    static char *fmt;
 
-#ifdef OS2_NT
-    char   *p;
-
-    p = ctime (&when);
-    strcpy (timebuf, p ? p : "-----");
-#else
-    strcpy (timebuf, ctime (&when));
-#endif
     if (current_time > when + 6L * 30L * 24L * 60L * 60L /* Old. */
 	|| current_time < when - 60L * 60L) /* In the future. */
     {
@@ -603,8 +596,16 @@ char *file_date (time_t when)
 	   Allow a 1 hour slop factor for what is considered "the future",
 	   to allow for NFS server/client clock disagreement.
 	   Show the year instead of the time of day.  */
-	strcpy (timebuf + 11, timebuf + 19);
+
+
+        fmt = "%b %e  %Y";
     }
+    else
+    {
+	fmt = "%b %e %H:%M";
+    }
+    
+    strftime(timebuf+4,16,fmt,localtime(&when));
     timebuf[16] = 0;
     return &timebuf [4];
 }

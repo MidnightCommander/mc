@@ -267,7 +267,7 @@ gnome_sort_cmd (GtkWidget *widget, WPanel *panel)
 	cbox1 = gtk_check_button_new_with_label (_("Ignore case sensitivity."));
 	hbox = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (sort_box)->vbox), hbox, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new ("Sort files by "), FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("Sort files by ")), FALSE, FALSE, 0);
 
 	omenu = gtk_option_menu_new ();
         gtk_box_pack_start (GTK_BOX (hbox), omenu, FALSE, FALSE, 0);

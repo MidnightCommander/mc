@@ -16,6 +16,7 @@ gnome/gscreen.c
 gnome/gtools.c
 gnome/gview.c
 gnome/gwidget.c
+gnome/gmount.c
 gtkedit/edit.c
 gtkedit/edit.h
 gtkedit/editcmd.c

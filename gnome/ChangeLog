@@ -1,3 +1,7 @@
+1999-04-06  David Martin <dmartina@usa.net>
+
+	* gcmd.c: marked message for translation.
+	
 1999-04-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gmetadata.c (gmeta_del_icon_pos): New function to delete the

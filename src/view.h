@@ -114,6 +114,7 @@ typedef struct {
 /* Creation/initialization of a new view widget */
 WView *view_new (int y, int x, int cols, int lines, int is_panel);
 int view_init (WView *view, char *_command, char *_file, int start_line);
+void view_update_bytes_per_line(WView *view);
 int view_file (char *filename, int normal, int internal);
 
 /* Internal view routines */

@@ -616,11 +616,8 @@ do_view_init (WView *view, char *_command, char *_file, int start_line)
     return 0;
 }
 
-
-/* Both views */
-/* Return zero on success, -1 on failure */
-int
-view_init (WView *view, char *_command, char *_file, int start_line)
+void
+view_update_bytes_per_line(WView *view)
 {
     int cols;
 
@@ -632,7 +629,20 @@ view_init (WView *view, char *_command, char *_file, int start_line)
     view->bottom_first = -1;
     view->bytes_per_line = 2 * (cols - 7) / 9;
     view->bytes_per_line &= 0xfffc;
+    
+    if (view->bytes_per_line == 0)
+	view->bytes_per_line++;		/* To avoid division by 0 */
+    
     view->dirty = max_dirt_limit + 1;	/* To force refresh */
+}
+
+/* Both views */
+/* Return zero on success, -1 on failure */
+int
+view_init (WView *view, char *_command, char *_file, int start_line)
+{
+    view_update_bytes_per_line(view);
+    
     if (!view->view_active || strcmp (_file, view->filename) || altered_magic_flag)
 	return do_view_init (view, _command, _file, start_line);
     else
@@ -661,31 +671,43 @@ view_percent (WView *view, int p, int w, gboolean update_gui)
 #endif
     
     widget_move (view, view->have_frame, w - 5);
-    printw ("%3d%% ", percent);
+    printw ("%3d%%", percent);
 }
 
 void
 view_status (WView *view, gboolean update_gui)
 {
+    static int i18n_adjust=0;
+    static char *file_label;
+
     int w = view->widget.cols - (view->have_frame * 2);
     int i;
 
     attrset (SELECTED_COLOR);
     widget_move (view, view->have_frame, view->have_frame);
     hline (' ', w);
-    if (w > 6){
-    	i = w > 24 ? 18 : w - 6;
-    	printw (_("File: %s"), name_trunc (view->filename ? view->filename:
+
+    if (!i18n_adjust) {
+       file_label = _("File: %s");
+       i18n_adjust = strlen(file_label) - 2;
+    }
+
+    if (w < i18n_adjust + 6)
+    	printw ("%s", name_trunc (view->filename ? view->filename:
+					view->command ? view->command:"", w));
+    else{
+    	i = (w > 22 ? 22 : w ) - i18n_adjust ;
+    	printw (file_label, name_trunc (view->filename ? view->filename:
 					view->command ? view->command:"", i));
-    	if (w > 30){
-    	    widget_move (view, view->have_frame, 24);
+    	if (w > 46){
+    	    widget_move (view, view->have_frame, 24 + view->have_frame );
             if (view->hex_mode)
                 printw (_("Offset 0x%08x"), view->edit_cursor);
             else
 		printw (_("Col %d"), -view->start_col);
     	}
-    	if (w > 60){
-	    widget_move (view, view->have_frame, 42);
+    	if (w > 62){
+	    widget_move (view, view->have_frame, 43 + view->have_frame);
 	    printw (_("%s bytes"), size_trunc (view->s.st_size));
         }
 	if (w > 70){
@@ -693,11 +715,11 @@ view_status (WView *view, gboolean update_gui)
 	    if (view->growing_buffer)
 		addstr (_("  [grow]"));
 	}
-        if (w - i > 4)
+        if (w > 26)
             if (view->hex_mode)
-                view_percent (view, view->edit_cursor - view->first, w, update_gui);
+                view_percent (view, view->edit_cursor - view->first, view->widget.cols - view->have_frame + 1, update_gui);
             else
-	        view_percent (view, view->start_display - view->first, w, update_gui);
+	        view_percent (view, view->start_display - view->first, view->widget.cols - view->have_frame + 1, update_gui);
     }
     attrset (SELECTED_COLOR);
 }
@@ -2298,6 +2320,8 @@ view_mode_callback (struct Dlg_head *h, int id, int msg)
 void
 view_adjust_size (Dlg_head *h)
 {
+    int cols;
+    
     WView      *view;
     WButtonBar *bar;
 
@@ -2306,6 +2330,8 @@ view_adjust_size (Dlg_head *h)
     bar  = (WButtonBar *) view->widget.parent->current->next->widget;
     widget_set_size (&view->widget, 0, 0, LINES-1, COLS);
     widget_set_size (&bar->widget, LINES-1, 0, 1, COLS);
+
+    view_update_bytes_per_line(view);
 }
 
 /* Only the text mode edition uses this */

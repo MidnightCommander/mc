@@ -142,7 +142,8 @@ static int _filetype_mode;
 
 static int height;
 
-#define MINWIDTH 10
+/* Width 12 for a wee Quick (Hex) View */
+#define MINWIDTH 12
 #define MINHEIGHT 5
 
 #define BY      12
@@ -631,6 +632,10 @@ panel_do_cols (int index)
 	set_panel_formats ((WPanel *) panels [index].widget);
     else {
 	panel_update_cols (panels [index].widget, frame_half);
+
+	/* In case of an Hex Quick View must review line length */
+	if (get_display_type (index) == view_quick)
+	    view_update_bytes_per_line ((WView *) panels [index].widget);
     }
 }
 

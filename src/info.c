@@ -68,6 +68,9 @@ static void info_box (Dlg_head *h, WInfo *info)
 static void
 info_show_info (WInfo *info)
 {
+    static int i18n_adjust=0;
+    static char *file_label;
+    
     struct stat buf;
 
 #ifndef HAVE_X
@@ -101,7 +104,14 @@ info_show_info (WInfo *info)
     
 #ifndef HAVE_X
     /* Print only lines which fit */
-    switch (info->widget.y-2){
+    
+    if(!i18n_adjust) {
+	file_label=_("File:       %s");
+	i18n_adjust=strlen(file_label)+2;
+    }
+    /*The printf pattern string is used as a reference for size*/
+    
+    switch (info->widget.lines-2){
 	/* Note: all cases are fall-throughs */
 	
     default:
@@ -137,11 +147,11 @@ info_show_info (WInfo *info)
     case 13:
 	widget_move (&info->widget, 13, 3);
 	printw (_("Device:    %s"),
-		name_trunc (myfs_stats.device, info->widget.cols - 15));
+		name_trunc (myfs_stats.device, info->widget.cols - i18n_adjust));
     case 12:
 	widget_move (&info->widget, 12, 3);
 	printw (_("Filesystem: %s"),
-		name_trunc (myfs_stats.mpoint, info->widget.cols - 15));
+		name_trunc (myfs_stats.mpoint, info->widget.cols - i18n_adjust));
 
     case 11:
 	widget_move (&info->widget, 11, 3);
@@ -195,9 +205,9 @@ info_show_info (WInfo *info)
 	widget_move (&info->widget, 3, 2);
 	/* .ado: fname is invalid if selected == 0 && ifno called from current panel */
 	if (cpanel->selected){
-		printw (_("File:       %s"),
+		printw (file_label,
 			name_trunc (cpanel->dir.list [cpanel->selected].fname,
-				    info->widget.cols - 15));
+				    info->widget.cols - i18n_adjust));
 	} else
 		printw (_("File:       None"));
      

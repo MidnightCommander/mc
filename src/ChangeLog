@@ -1,3 +1,15 @@
+1999-04-06  David Martin <dmartina@usa.net>
+
+	* info.c (text out of box and locale layout).
+
+	* util.c: If gmc uses strftime() why mc doesn't?
+	
+	* view.c: a) Tune status line so it does fit in a Quick View Panel
+	b) Let Hex View resize cleanly. I think it's fixed for panel
+	re-split and SIGWINCH signal in xterm. gmc still fails. There was
+	a tiny risk of division by zero when pressing F4 in a very small
+	box. True hard work... Must try and check it.
+
 1999-04-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* main.c (main): Call mc_tree_store_save() when the program
