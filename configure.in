@@ -636,45 +636,6 @@ then
     AC_NCURSES(/usr/local/include/ncurses, curses.h, -L/usr/local/lib -lncurses, -I/usr/local/include/ncurses -DRENAMED_NCURSES, "renamed ncurses on /usr/local/.../ncurses")
 
     AC_NCURSES(/usr/include/ncurses, curses.h, -lncurses, -I/usr/include/ncurses -DRENAMED_NCURSES, "renamed ncurses on /usr/include/ncurses")
-
-    if $search_ncurses
-    then
-	:
-    else
-        # check for ncurses version, to properly ifdef mouse-fix
-	AC_MSG_CHECKING([for ncurses version])
-	ncurses_version=unknown
-cat > conftest.$ac_ext <<EOF
-[#]line __oline__ "configure"
-#include "confdefs.h"
-#ifdef RENAMED_NCURSES
-#include <curses.h>
-#else
-#include <ncurses.h>
-#endif
-#undef VERSION
-VERSION:NCURSES_VERSION
-EOF
-        if (eval "$ac_cpp conftest.$ac_ext") 2>&AS_MESSAGE_LOG_FD |
-  egrep "VERSION:" >conftest.out 2>&1; then
-            ncurses_version=`cat conftest.out|sed -e 's/^[[^"]]*"//' -e 's/".*//'`
-	fi
-	rm -rf conftest*
-        AC_MSG_RESULT([$ncurses_version])
-	case "$ncurses_version" in
-	4.[[01]])
-            AC_DEFINE(NCURSES_970530,2,
-		      [Define according to ncurses version,
-see configure.in for details])
-            ;;
-	1.9.9g)
-            AC_DEFINE(NCURSES_970530,1)
-            ;;
-	1*)
-            AC_DEFINE(NCURSES_970530,0)
-            ;;
-	esac
-    fi
 fi
 
 
@@ -704,7 +665,7 @@ if test -n "$ncurses_version"; then
 	      [Define if ncurses has ESCDELAY variable])
   fi
 
-  AC_CHECK_FUNCS(resizeterm keyok)
+  AC_CHECK_FUNCS(resizeterm)
   LIBS="$save_LIBS"
 fi
 

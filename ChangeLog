@@ -1,3 +1,8 @@
+2001-09-14  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Don't check for ncurses version and for keyok()
+	because the mouse support code doesn't need this hack anymore.
+
 2001-09-13  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Fix some cases of overquoting and underquoting.
