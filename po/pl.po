@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"POT-Creation-Date: 2001-10-14 16:51+0200\n"
-"PO-Revision-Date: 2001-10-14 16:51+0200\n"
+"POT-Creation-Date: 2001-10-22 12:20+0200\n"
+"PO-Revision-Date: 2001-10-22 12:21+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -63,12 +63,12 @@ msgid " Error reading file: "
 msgstr " B³±d przy odczycie z pliku: "
 
 #: edit/edit.c:1
-msgid " Cannot get size/permissions info on file: "
-msgstr " Nie mo¿na pobraæ informacji o rozmiarze/uprawnieniach do pliku: "
-
-#: edit/edit.c:1
 msgid " Not an ordinary file: "
 msgstr " To nie jest zwyk³y plik: "
+
+#: edit/edit.c:1
+msgid " Cannot get size/permissions info on file: "
+msgstr " Nie mo¿na pobraæ informacji o rozmiarze/uprawnieniach do pliku: "
 
 #: edit/edit.c:1
 msgid " File is too large: "
@@ -4030,16 +4030,13 @@ msgid " Could not open file "
 msgstr " Nie mo¿na otworzyæ pliku "
 
 #: src/view.c:1
-msgid " Cannot open file \""
-msgstr " Nie mo¿na otworzyæ pliku \""
-
-#: src/view.c:1
+#, c-format
 msgid ""
-" Cannot stat file \n"
-" "
+" Cannot stat \"%s\"\n"
+" %s "
 msgstr ""
-" Nie mo¿na wykonaæ operacji stat na pliku \n"
-" "
+" Nie mo¿na wykonaæ operacji stat na \"%s\"\n"
+" %s "
 
 #: src/view.c:1
 msgid " Cannot view: not a regular file "
@@ -4052,15 +4049,6 @@ msgid ""
 " %s "
 msgstr ""
 " Nie mo¿na otworzyæ \"%s\"\n"
-" %s "
-
-#: src/view.c:1
-#, c-format
-msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
-msgstr ""
-" Nie mo¿na wykonaæ operacji stat na \"%s\"\n"
 " %s "
 
 #: src/view.c:1
@@ -4531,8 +4519,8 @@ msgstr "fish: Lokalny odczyt nie powiód³ sie, wysy³anie zer"
 
 #: vfs/fish.c:1
 #, c-format
-msgid "fish: storing %s %d (%d)"
-msgstr "fish: zapisywanie %s %d (%d)"
+msgid "fish: storing %s %d (%lu)"
+msgstr "fish: zapisywanie %s %d (%lu)"
 
 #: vfs/fish.c:1
 msgid "zeros"
@@ -4681,8 +4669,8 @@ msgstr "ftpfs: niepowodzenie; brak mo¿liwo¶ci wycofania"
 
 #: vfs/ftpfs.c:1
 #, c-format
-msgid "ftpfs: storing file %d (%d)"
-msgstr "ftpfs: zapisywanie pliku %d (%d)"
+msgid "ftpfs: storing file %d (%lu)"
+msgstr "ftpfs: zapisywanie pliku %d (%lu)"
 
 #: vfs/ftpfs.c:1
 msgid ""
