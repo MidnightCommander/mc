@@ -1,3 +1,7 @@
+2003-02-27  Marco Ciampa  <ciampix@libero.it>
+
+	* doc/it/mc.1.in: updated manual with -e switch description.
+
 2003-02-26  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/syntax.syntax: Highlight "define".

@@ -26,7 +26,7 @@ mc \- interfaccia visuale per sistemi tipo Unix.
 .\"SKIP_SECTION"
 .SH "USO"
 .B mc
-[\-abcCdfhPstuUVx] [\-l log] [dir1 [dir2]] [-v file]
+[\-abcCdfhPstuUVx] [\-l log] [dir1 [dir2]] [-e [file]] [-v file]
 .\"NODE "DESCRIPTION"
 .SH "DESCRIZIONE"
 Il Midnight Commander è un file manager per sistemi operativi di tipo Unix.  
@@ -56,6 +56,11 @@ colori\&.
 .TP
 .I "\-d"
 Disabilita il supporto mouse.
+.TP
+.I "\-e [file]"
+Esegue l'editor interno. Se il file viene specificato, lo apre alla
+partenza. Vedere anche
+.BR "mcedit (1)" .
 .TP
 .I "\-f"
 Mostra i percorsi di ricerca compilati per i file del Midnight Commander.
