@@ -168,7 +168,7 @@ TAGS: $(GNOMESRCS)
 	etags $(GNOMESRCS)
 
 clean:
-	$(RMF) @tkmc@ *.o core a.out mx @LIBVFS@ libgtkedit.a libmcslang.a
+	$(RMF) @gmc@ *.o core a.out mx @LIBVFS@ libgtkedit.a libmcslang.a
 
 realclean: clean
 	$(RMF) .depend
@@ -176,7 +176,7 @@ realclean: clean
 	$(RMF) *~
 
 distclean: cleansourcelinks
-	-$(RMF) $(srcdir)/*~ $(srcdir)/*.o $(srcdir)/tkmc $(srcdir)/core
+	-$(RMF) $(srcdir)/*~ $(srcdir)/*.o $(srcdir)/gmc $(srcdir)/core
 	-$(RMF) $(srcdir)/a.out
 	-if test $(srcdir) = .; then $(MAKE) realclean; fi
 	-$(RMF) $(srcdir)/Makefile gui.tcl
