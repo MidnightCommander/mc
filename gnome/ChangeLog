@@ -1,5 +1,8 @@
 2001-05-29  Pavel Roskin  <proski@gnu.org>
 
+	* gcmd.c (gnome_listing_cmd): Remove, it unused.
+	(gnome_compare_panels): Likewise.
+
 	* Makefile.in: Don't use subshell.o.
 
 2001-05-26  Pavel Roskin  <proski@gnu.org>

@@ -30,30 +30,6 @@
 static char *panelize_section = "Panelize";
 
 void
-gnome_listing_cmd (GtkWidget *widget, WPanel *panel)
-{
-	int   view_type, use_msformat;
-	char  *user, *status;
-
-	view_type = display_box (panel, &user, &status, &use_msformat, get_current_index ());
-
-	if (view_type == -1)
-		return;
-
-	configure_panel_listing (panel, view_type, use_msformat, user, status);
-}
-
-void
-gnome_compare_panels (void)
-{
-	if (get_other_panel () == NULL){
-		message (1, MSG_ERROR, _(" There is no other panel to compare contents to "));
-		return;
-	}
-	compare_dirs_cmd ();
-}
-
-void
 gnome_open_terminal_with_cmd (const char *command)
 {
 	char *p;
