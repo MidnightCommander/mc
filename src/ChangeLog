@@ -4,6 +4,10 @@
 	Cyryllic with ncurses.
 	[HAS_ACS_AS_PCCHARS] (acs2pc_table): Make const.
 
+	* user.c (expand_format): Cast the argument to functions
+	for character classification to unsigned int.
+	(execute_menu_command): Likewise.
+
 2002-08-15  Pavel Roskin  <proski@gnu.org>
 
 	* treestore.c (tree_store_remove_entry): Don't use ts.check_name

@@ -181,7 +181,7 @@ char *expand_format (WEdit *edit_widget, char c, int quote)
     if (c == '%')
 	return g_strdup ("%");
     
-    if (islower (c))
+    if (islower ((unsigned)c))
 	panel = cpanel;
     else {
 	if (get_other_type () != view_listing)
@@ -594,9 +594,9 @@ execute_menu_command (WEdit *edit_widget, char *commands)
 	    }
 	} else if (expand_prefix_found){
 	    expand_prefix_found = 0;
-	    if (isdigit (*commands)) {
+	    if (isdigit ((unsigned)*commands)) {
 		do_quote = atoi (commands);
-		while (isdigit (*commands))
+		while (isdigit ((unsigned)*commands))
 		    commands++;
 	    }
 	    if (*commands == '{')
