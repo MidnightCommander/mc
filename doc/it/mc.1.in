@@ -1919,7 +1919,7 @@ programma che si vuole eseguire con la barra di selezione in uno
 dei pannelli e premendo Invio.
 .PP
 Se si preme Invio su di un file che non è eseguibile, il Midnight
-Commander controllerà l'estensione del file selezionato con ciò 
+Commander confronta l'estensione del file selezionato con ciò 
 che trova nel
 .\"LINK2"
 File Estensioni\&.
