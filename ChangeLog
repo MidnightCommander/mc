@@ -1,3 +1,7 @@
+2003-03-06  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/spec.syntax: Add BuildArch.
+
 2003-03-05  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Check availability of setsid().

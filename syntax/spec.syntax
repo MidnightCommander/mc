@@ -2,6 +2,7 @@ context default
     keyword whole Auto\{Pp\}rov: green
     keyword whole Auto\{Rr\}eq\{Pp\}rov: green
     keyword whole Auto\{Rr\}eq: green
+    keyword whole BuildArch: green
     keyword whole BuildPre\{Rr\}eq: green
     keyword whole Build\{Rr\}oot: green
     keyword whole BuildRequires: green
