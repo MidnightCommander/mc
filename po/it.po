@@ -951,7 +951,7 @@ msgstr "Usa operazione di Vista predefinita"
 #: gnome/gnome-file-property-dialog.c:513 gnome/gpopup2.c:196
 #: src/screen.c:2353 src/screen.c:2383 src/view.c:2013
 msgid "Edit"
-msgstr "Modifica"
+msgstr "Cambia"
 
 #: gnome/gnome-file-property-dialog.c:523
 msgid "Use default Edit action"
@@ -2188,7 +2188,7 @@ msgstr "Sostit"
 
 #: gtkedit/editwidget.c:1074 src/main.c:1698
 msgid "PullDn"
-msgstr "MenGiù"
+msgstr "Menu"
 
 #: gtkedit/editwidget.c:1075 src/help.c:818 src/main.c:1699 src/view.c:2006
 #: src/view.c:2026
@@ -3594,7 +3594,7 @@ msgstr ""
 
 #: src/file.c:802
 msgid "Incomplete file was retrieved. Keep it?"
-msgstr ""
+msgstr "Il file recuperato è incompleto. Lo vuoi tenere?"
 
 #: src/file.c:803
 msgid "&Delete"
@@ -4875,7 +4875,7 @@ msgstr ""
 
 #: src/main.c:1697 src/screen.c:2351 src/screen.c:2381
 msgid "Menu"
-msgstr "Menu"
+msgstr "MenuUt"
 
 #: src/main.c:1902
 msgid "Thank you for using GNU Midnight Commander"
@@ -5066,11 +5066,11 @@ msgstr "auto menu"
 
 #: src/option.c:88
 msgid "&Auto save setup"
-msgstr "salvataggio &Automatico"
+msgstr "salva setup automatico"
 
 #: src/option.c:89
 msgid "shell &Patterns"
-msgstr "&Patterns della shell"
+msgstr "pattern della s&Hell"
 
 #: src/option.c:90
 msgid "Compute &Totals"
@@ -5094,7 +5094,7 @@ msgstr "menu a &Cascata"
 
 #: src/option.c:95
 msgid "ma&Rk moves down"
-msgstr "cursore in basso mentre seleziona"
+msgstr "cursore &In basso mentre seleziona"
 
 #: src/option.c:96
 msgid "show &Hidden files"
@@ -5106,7 +5106,7 @@ msgstr "mostra files di &Backup"
 
 #: src/option.c:104
 msgid "&Never"
-msgstr "Mai"
+msgstr "&Mai"
 
 #: src/option.c:105
 msgid "on dumb &Terminals"
