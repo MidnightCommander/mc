@@ -1,3 +1,14 @@
+1999-02-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* widget.c (push_history): Only do check the history headings if
+	the widget has a history entry bound to it.
+
+1999-02-03  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* treestore.c (tree_store_start_check, tree_store_mark_checked,
+	tree_store_end_check): Use a stack for check_name.  There are far
+	too many instances that might call the end_check.
+
 Wed Feb  3 23:55:54 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* widget.c (history_put): set the access rights correctly when

@@ -24,10 +24,12 @@ typedef struct {
 	tree_entry *tree_first;     	/* First entry in the list */
 	tree_entry *tree_last;          /* Last entry in the list */
 	tree_entry *check_start;	/* Start of checked subdirectories */
-	char       *check_name;		/* Directory which is been checked */
+	GList      *check_name_list;
 	unsigned int loaded : 1;
 	unsigned int dirty : 1;
 } TreeStore;
+
+#define TREE_CHECK_NAME ts.check_name_list->data
 
 extern void (*tree_store_dirty_notify)(int state);
 

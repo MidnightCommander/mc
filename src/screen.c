@@ -425,7 +425,7 @@ static struct {
 { "name",  12, 1, J_LEFT_FIT,	N_("Name"),	1, string_file_name,	   (sortfn *) sort_name },
 { "size",  7,  0, J_RIGHT,	N_("Size"),	1, string_file_size,	   (sortfn *) sort_size },
 { "bsize", 7,  0, J_RIGHT,	N_("Size"),	1, string_file_size_brief, (sortfn *) sort_size },
-{ "type",  GT, 0, J_LEFT,	"",		1, string_file_type,	   (sortfn *) sort_type },
+{ "type",  GT, 0, J_LEFT,	"",		2, string_file_type,	   (sortfn *) sort_type },
 { "mtime", 12, 0, J_RIGHT,	N_("MTime"),	1, string_file_mtime,	   (sortfn *) sort_time },
 { "atime", 12, 0, J_RIGHT,	N_("ATime"),	1, string_file_atime,	   (sortfn *) sort_atime },
 { "ctime", 12, 0, J_RIGHT,	N_("CTime"),	1, string_file_ctime,	   (sortfn *) sort_ctime },

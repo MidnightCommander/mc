@@ -1169,16 +1169,18 @@ push_history (WInput *in, char *text)
     new->next = 0;
     new->prev = in->history;
     new->text = g_strdup (text);
+    if (in->history_name){
 #ifdef HAVE_GNOME
-    if (strcmp (in->history_name + 4, _(" Link to a remote machine ")) == 0 ||
-        strcmp (in->history_name + 4, _(" FTP to machine ")) == 0)
+	    if (strcmp (in->history_name + 4, _(" Link to a remote machine ")) == 0 ||
+		strcmp (in->history_name + 4, _(" FTP to machine ")) == 0)
 #else
-    if (strcmp (in->history_name + 3, _(" Link to a remote machine ")) == 0 ||
-        strcmp (in->history_name + 3, _(" FTP to machine ")) == 0)
+		    if (strcmp (in->history_name + 3, _(" Link to a remote machine ")) == 0 ||
+			strcmp (in->history_name + 3, _(" FTP to machine ")) == 0)
 #endif
-        strip_password (new->text, 0);
-    else
-        strip_password (new->text, 1);
+			    strip_password (new->text, 0);
+		    else
+			    strip_password (new->text, 1);
+    }
     in->history = new;
     return 2;
 }
