@@ -31,6 +31,7 @@ typedef struct {
     int    count;
     int    max_entry_len;
     int    selected;
+    int    hotkey;
     menu_entry *entries;
     int    start_x;		/* position relative to menubar start */
 } sMenu;

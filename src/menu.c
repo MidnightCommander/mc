@@ -38,6 +38,18 @@
 extern int is_right;
 int menubar_visible = 1;	/* This is the new default */
 
+static void menu_scan_hotkey(Menu menu)
+{
+    char* cp = strchr (menu->name, '&');
+
+    if (cp != NULL && cp[1] != '\0'){
+	strcpy (cp, cp+1);
+	menu->hotkey = tolower(*cp);
+    }
+    else
+	menu->hotkey = 0;
+}
+
 Menu create_menu (char *name, menu_entry *entries, int count)
 {
     Menu menu;
@@ -61,8 +73,9 @@ Menu create_menu (char *name, menu_entry *entries, int count)
 	}
 #endif /* ENABLE_NLS */
 
-    menu->name = _(name);
-	menu->start_x = 0;
+    menu->name = strdup( _(name) );
+    menu_scan_hotkey(menu);
+    menu->start_x = 0;
     return menu;
 }
 
@@ -272,8 +285,7 @@ static int menubar_handle_key (WMenu *menubar, int key)
 	for (i = 0; i < items; i++){
 	    const Menu menu = menubar->menu [i];
 
-	    /* Hack, we should check for the upper case letter */
-	    if (tolower (menu->name [1]) == key){
+	    if (menu->hotkey == key){
 		menubar_drop (menubar, i);
 		return 1; 
 	    }
@@ -505,6 +517,7 @@ menubar_arrange(WMenu* menubar)
 void
 destroy_menu (Menu menu)
 {
+    free (menu->name);
     free (menu);
 }
 

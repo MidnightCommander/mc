@@ -1335,19 +1335,19 @@ init_menu (void)
     int i;
 
 #ifdef HAVE_X    
-    MenuBar [0] = create_menu (_(" Left "), PanelMenu, menu_entries (PanelMenu));
+    MenuBar [0] = create_menu (_(" &Left "), PanelMenu, menu_entries (PanelMenu));
 #else
-    MenuBar [0] = create_menu ( horizontal_split ? _(" Above ") : _(" Left "), 
+    MenuBar [0] = create_menu ( horizontal_split ? _(" &Above ") : _(" &Left "), 
                                 PanelMenu, menu_entries (PanelMenu));
 #endif
-    MenuBar [1] = create_menu (_(" File "), FileMenu, menu_entries (FileMenu));
-    MenuBar [2] = create_menu (_(" Command "), CmdMenu, menu_entries (CmdMenu));
-    MenuBar [3] = create_menu (_(" Options "), OptMenu, menu_entries (OptMenu));
+    MenuBar [1] = create_menu (_(" &File "), FileMenu, menu_entries (FileMenu));
+    MenuBar [2] = create_menu (_(" &Command "), CmdMenu, menu_entries (CmdMenu));
+    MenuBar [3] = create_menu (_(" &Options "), OptMenu, menu_entries (OptMenu));
 #ifndef HAVE_XVIEW
 #ifdef HAVE_X
-    MenuBar [4] = create_menu (_(" Right "), RightMenu, menu_entries (PanelMenu));
+    MenuBar [4] = create_menu (_(" &Right "), RightMenu, menu_entries (PanelMenu));
 #else
-    MenuBar [4] = create_menu (horizontal_split ? _(" Below ") : _(" Right "), 
+    MenuBar [4] = create_menu (horizontal_split ? _(" &Below ") : _(" &Right "), 
 			       RightMenu, menu_entries (PanelMenu));
     for (i = 0; i < 5; i++)
 	MenuBarEmpty [i] = create_menu (MenuBar [i]->name, 0, 0);
