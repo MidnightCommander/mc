@@ -196,12 +196,12 @@ msgid ""
 "Enter a filter here for files in the panel view.\n"
 "\n"
 "For example:\n"
-"*.gif will show just gif images"
+"*.png will show just png images"
 msgstr ""
 "Indique un filtro para escoger los archivos del panel.\n"
 "\n"
 "Así, por ejemplo:\n"
-"*.gif mostrará sólo imágenes tipo GIF"
+"*.png mostrará sólo imágenes tipo PNG"
 
 #: gnome/gcmd.c:676
 msgid "Enter a Regular Expression to filter files in the panel view."
@@ -1421,7 +1421,7 @@ msgstr "Actualizar la presentación del directorio"
 
 #: gnome/gscreen.c:2358
 msgid "Home"
-msgstr "Directorio Personal"
+msgstr "Hogar"
 
 #: gnome/gscreen.c:2358
 msgid "Go to your home directory"

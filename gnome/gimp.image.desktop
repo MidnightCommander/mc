@@ -1,6 +1,12 @@
 [Desktop Entry]
 Name=Image
+Name[es]=Imagen
+Name[fr]=Image
+Name[wa]=Imådje
 Comment=Create a new Image
+Comment[es]=Crear una imagen
+Comment[fr]=Créer une image
+Comment[wa]=Fé on imådje
 TryExec=gimp
 Exec=gimp
 Icon=gnome-gimp.png
