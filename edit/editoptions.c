@@ -22,7 +22,7 @@
 
 #include <config.h>
 #include "edit.h"
-#include "src/dlg.h"		/* B_CANCEL */
+#include "src/dialog.h"		/* B_CANCEL */
 #include "src/wtools.h"		/* QuickDialog */
 
 #define OPT_DLG_H 17

@@ -32,10 +32,9 @@
 #include "find.h"
 
 /* Dialog manager and widgets */
-#include "dlg.h"
+#include "dialog.h"
 #include "widget.h"
 
-#include "dialog.h"     /* For do_refresh() */
 #include "dir.h"
 #include "panel.h"		/* current_panel */
 #include "main.h"		/* do_cd, try_to_select */

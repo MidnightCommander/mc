@@ -35,7 +35,7 @@
 #include "tty.h"
 #include "color.h"
 #include "mouse.h"
-#include "dlg.h"
+#include "dialog.h"
 #include "widget.h"
 #include "win.h"
 #include "complete.h"

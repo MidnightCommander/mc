@@ -45,10 +45,9 @@
 #include "win.h"
 #include "color.h"
 #include "key.h"
-#include "dlg.h"
+#include "dialog.h"
 #include "widget.h"
 #include "command.h"
-#include "dialog.h"		/* For do_refresh() */
 #include "profile.h"		/* For sync_profiles() */
 #include "mouse.h"
 #define WANT_WIDGETS

@@ -30,9 +30,8 @@
 #include "global.h"
 #include "tty.h"	/* A_REVERSE */
 #include "color.h"	/* dialog_colors */
-#include "dlg.h"	/* add_widget() */
+#include "dialog.h"	/* add_widget() */
 #include "widget.h"	/* NORMAL_BUTTON */
-#include "dialog.h"	/* do_refresh() */
 #include "wtools.h"	/* message() */
 #include "panel.h"	/* do_file_mark() */
 #include "main.h"	/* update_panels() */

@@ -24,7 +24,6 @@
 #include <stdio.h>
 
 #include "global.h"
-#include "dlg.h"
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"

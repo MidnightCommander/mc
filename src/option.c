@@ -30,10 +30,9 @@
 #include "tty.h"
 #include "win.h"
 #include "color.h"
-#include "dlg.h"
+#include "dialog.h"
 #include "widget.h"
 #include "setup.h"		/* For save_setup() */
-#include "dialog.h"		/* For do_refresh() */
 #include "main.h"
 #include "profile.h"		/* For sync_profiles */
 

@@ -1,7 +1,7 @@
 #ifndef __TREE_H
 #define __TREE_H
 
-#include "dlg.h"
+#include "dialog.h"
 
 struct WTree;
 typedef struct WTree WTree;

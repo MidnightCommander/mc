@@ -31,9 +31,8 @@
 #include "tty.h"
 #include "win.h"
 #include "color.h"
-#include "dlg.h"
+#include "dialog.h"
 #include "widget.h"
-#include "dialog.h"	/* For do_refresh() */
 
 /* Needed for the extern declarations of integer parameters */
 #include "dir.h"

@@ -1,7 +1,7 @@
 #ifndef __LAYOUT_H
 #define __LAYOUT_H
 
-#include "dlg.h"
+#include "dialog.h"
 
 void layout_cmd (void);
 void init_curses (void);

@@ -38,12 +38,11 @@
 #include "win.h"
 #include "color.h"
 #include "mouse.h"
-#include "dlg.h"
+#include "dialog.h"
 #include "widget.h"
 #include "menu.h"
 #include "wtools.h"
 #include "key.h"	/* For mi_getch() */
-#include "dialog.h"	/* For do_refresh() */
 #include "complete.h"   /* INPUT_COMPLETE_CD */
 
 /* }}} */

@@ -39,9 +39,8 @@
 #include "global.h"
 #include "tty.h"		/* COLS */
 #include "color.h"		/* dialog_colors */
-#include "dlg.h"
+#include "dialog.h"
 #include "widget.h"
-#include "dialog.h"		/* do_refresh() */
 #include "setup.h"		/* For profile_bname */
 #include "profile.h"		/* Load/save directories hotlist */
 #include "wtools.h"		/* QuickDialog */

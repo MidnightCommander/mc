@@ -36,7 +36,7 @@
 #include "color.h"
 #include "wtools.h"	/* message() */
 #include "dir.h"
-#include "dlg.h"
+#include "dialog.h"
 #include "widget.h"
 #include "panel.h"
 #include "mouse.h"

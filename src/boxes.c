@@ -31,9 +31,8 @@
 #include "tty.h"
 #include "win.h"		/* Our window tools */
 #include "color.h"		/* Color definitions */
-#include "dlg.h"		/* The nice dialog manager */
+#include "dialog.h"		/* The nice dialog manager */
 #include "widget.h"		/* The widgets for the nice dialog manager */
-#include "dialog.h"		/* For do_refresh() */
 #include "wtools.h"
 #include "setup.h"		/* For profile_name */
 #include "profile.h"		/* Load/save user formats */

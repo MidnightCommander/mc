@@ -71,12 +71,10 @@
 #include "global.h"
 #include "tty.h"
 #include "eregex.h"
-#include "dialog.h"
 #include "setup.h"
-/* Needed by query_replace */
 #include "color.h"
 #include "win.h"
-#include "dlg.h"
+#include "dialog.h"
 #include "widget.h"
 #define WANT_WIDGETS
 #include "main.h"		/* WANT_WIDGETS-> we get the the_hint def */

@@ -39,10 +39,9 @@
 #include "global.h"
 #include "tty.h"
 #include "cmd.h"		/* For view_other_cmd */
-#include "dlg.h"		/* Needed by widget.h */
+#include "dialog.h"		/* Needed by widget.h */
 #include "widget.h"		/* Needed for buttonbar_new */
 #include "color.h"
-#include "dialog.h"
 #include "mouse.h"
 #include "help.h"
 #include "key.h"		/* For mi_getch() */

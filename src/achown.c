@@ -31,9 +31,8 @@
 #include "tty.h"
 #include "win.h"
 #include "color.h"
-#include "dlg.h"
+#include "dialog.h"
 #include "widget.h"
-#include "dialog.h"		/* For do_refresh() */
 #include "wtools.h"		/* For init_box_colors() */
 #include "key.h"		/* XCTRL and ALT macros */
 

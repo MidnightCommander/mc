@@ -34,7 +34,7 @@
 
 #include "global.h"
 #include "tty.h"
-#include "dlg.h"
+#include "dialog.h"
 #include "widget.h"
 #include "wtools.h"
 
@@ -45,7 +45,6 @@
 #ifdef WITH_BACKGROUND
 #    include <sys/socket.h>
 #endif
-#include "dialog.h"
 #include "fileopctx.h"
 #include "key.h"	/* For add_select_channel(), delete_select_channel() */
 #include "eregex.h"

@@ -1,5 +1,11 @@
 2003-10-24  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.h: Merge with ...
+	* dialog.h: ... this.  Adjust all dependencies.
+	* dlg.c: Merge with ...
+	* dialog.c: ... this.
+	* Makefile.am (SRCS): Remove dlg.h and dlg.c.
+
 	* dlg.h: Declare idle_hook here.
 
 	* dialog.c: Eliminate typedef Refresh, unneeded includes.

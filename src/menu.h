@@ -1,7 +1,7 @@
 #ifndef __MENU_H
 #define __MENU_H
 
-#include "dlg.h"
+#include "dialog.h"
 #include "widget.h"
 
 typedef void (*callfn) (void);

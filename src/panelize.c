@@ -33,9 +33,8 @@
 #include "tty.h"		/* attrset() */
 #include "win.h"
 #include "color.h"
-#include "dlg.h"
+#include "dialog.h"
 #include "widget.h"
-#include "dialog.h"		/* For do_refresh() */
 #include "wtools.h"		/* For common_dialog_repaint() */
 #include "setup.h"		/* For profile_bname */
 #include "profile.h"		/* Load/save directories panelize */

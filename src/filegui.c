@@ -73,9 +73,8 @@
 
 #include "global.h"
 #include "setup.h"		/* verbose */
-#include "dialog.h"		/* do_refresh */
+#include "dialog.h"		/* do_refresh() */
 #include "color.h"		/* dialog_colors */
-#include "dlg.h"		/* B_ENTER */
 #include "background.h"		/* message_3s */
 #include "widget.h"		/* WLabel */
 #define WANT_WIDGETS

@@ -23,7 +23,6 @@
 
 #include "global.h"
 #include "tty.h"
-#include "dialog.h"
 #include "color.h"
 #include "dir.h"
 #include "panel.h"
@@ -38,7 +37,7 @@
 #include "edit/edit-widget.h"	/* WEdit */
 
 /* For the simple listbox manager */
-#include "dlg.h"
+#include "dialog.h"
 #include "widget.h"
 #include "wtools.h"
 

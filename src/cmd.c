@@ -48,13 +48,12 @@
 #include "subshell.h"		/* use_subshell */
 #include "cons.saver.h"		/* console_flag */
 #include "tty.h"		/* LINES */
-#include "dlg.h"		/* Widget */
+#include "dialog.h"		/* Widget */
 #include "view.h"		/* view() */
 #include "wtools.h"		/* message() */
 #include "widget.h"		/* push_history() */
 #include "key.h"		/* application_keypad_mode() */
 #include "win.h"		/* do_enter_ca_mode() */
-#include "dialog.h"		/* do_refresh() */
 #include "main.h"		/* change_panel() */
 #include "panel.h"		/* cpanel */
 #include "help.h"		/* interactive_display() */

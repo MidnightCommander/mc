@@ -1,7 +1,7 @@
 #ifndef __WIDGET_H
 #define __WIDGET_H
 
-#include "dlg.h"		/* Widget */
+#include "dialog.h"		/* Widget */
 
 #define C_BOOL		1
 #define C_CHANGE	2

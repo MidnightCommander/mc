@@ -45,12 +45,11 @@
 #include "global.h"
 #include "tty.h"
 #include "color.h"
-#include "dialog.h"
 #include "win.h"
 #include "mouse.h"
-#include "key.h"	/* For mi_getch() */
+#include "key.h"		/* For mi_getch() */
 #include "help.h"
-#include "dlg.h"		/* For Dlg_head */
+#include "dialog.h"		/* For Dlg_head */
 #include "widget.h"		/* For Widget */
 #include "wtools.h"		/* For common_dialog_repaint() */
 

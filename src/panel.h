@@ -2,7 +2,7 @@
 #define __PANEL_H
 
 #include "dir.h"		/* dir_list */
-#include "dlg.h"		/* Widget */
+#include "dialog.h"		/* Widget */
 
 #define selection(p) (&(p->dir.list[p->selected]))
 #define other_panel get_other_panel()
