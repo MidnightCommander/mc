@@ -4,6 +4,8 @@ Another release candidate for 4.6.0.
 
 - Core functionality.
 	- ".." is no longer shown in the root directory.
+	- Fixed segmentation fault when processing truncated
+	  section header in the corrupted initialization file.
 
 - Screen libraries.
 	- Fixed incorrect processing on AltGr introduced in -pre2.
@@ -60,7 +62,6 @@ Release candidate for 4.6.0.
 - Documentation.
 	- Polish manual has been added.
 
-
 Version 4.6.0-pre1.
 
 - Security release.  Massive code cleanup.  Most improvements didn't
@@ -107,6 +108,9 @@ Version 4.6.0-pre1.
 	- Added manuals in Spanish, Italian and Russian.
 	- Help files are not distributed, but generated during the
 	  build from the manual pages.
+
+- Translations.
+	- Belarussian translation has been added.
 
 
 Version 4.5.55
