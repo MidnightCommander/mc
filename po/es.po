@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-02-03 21:58-0500\n"
+"POT-Creation-Date: 1999-02-08 08:12-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -165,22 +165,22 @@ msgstr "Otro comando"
 msgid "Command: "
 msgstr " &Comando "
 
-#: gnome/gcmd.c:557
+#: gnome/gcmd.c:574
 #, fuzzy
 msgid "Set Filter"
 msgstr "&Filtro..."
 
-#: gnome/gcmd.c:562 gnome/gcmd.c:603 gnome/gcmd.c:608 gnome/gcmd.c:612
-#: gnome/gscreen.c:2489
+#: gnome/gcmd.c:579 gnome/gcmd.c:620 gnome/gcmd.c:625 gnome/gcmd.c:629
+#: gnome/gscreen.c:2484
 #, fuzzy
 msgid "Show all files"
 msgstr "me&Zclar todos los archivos"
 
-#: gnome/gcmd.c:569
+#: gnome/gcmd.c:586
 msgid "."
 msgstr ""
 
-#: gnome/gcmd.c:585
+#: gnome/gcmd.c:602
 msgid ""
 "Enter a filter here for files in the panel view.\n"
 "\n"
@@ -188,39 +188,39 @@ msgid ""
 "*.gif will show just gif images"
 msgstr ""
 
-#: gnome/gcmd.c:587
+#: gnome/gcmd.c:604
 msgid "Enter a Regular Expression to filter files in the panel view."
 msgstr ""
 
-#: gnome/gcmd.c:644 gnome/gpopup.c:49
+#: gnome/gcmd.c:661 gnome/gpopup.c:49
 #, fuzzy
 msgid " Open with..."
 msgstr "Abrir con..."
 
-#: gnome/gcmd.c:645 gnome/gpopup.c:50
+#: gnome/gcmd.c:662 gnome/gpopup.c:50
 msgid "Enter extra arguments:"
 msgstr ""
 
-#: gnome/gdesktop.c:347 gnome/gdesktop.c:1485
+#: gnome/gdesktop.c:350 gnome/gdesktop.c:1553
 msgid "Warning"
 msgstr ""
 
-#: gnome/gdesktop.c:348
+#: gnome/gdesktop.c:351
 #, c-format
 msgid "Could not open %s; will not have desktop icons"
 msgstr ""
 
-#: gnome/gdesktop.c:1451
+#: gnome/gdesktop.c:1519
 msgid "Trashcan"
 msgstr ""
 
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop.c:1481
+#: gnome/gdesktop.c:1549
 #, fuzzy
 msgid "Home directory"
 msgstr "Mover el directorio \"%s\" a:"
 
-#: gnome/gdesktop.c:1486
+#: gnome/gdesktop.c:1554
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial desktop icons."
 msgstr ""
@@ -287,8 +287,8 @@ msgstr ""
 msgid "Replace it?"
 msgstr ""
 
-#: gnome/gdialogs.c:532 gtkedit/editwidget.c:1064 gtkedit/gtkedit.c:1318
-#: src/file.c:784 src/screen.c:2288 src/screen.c:2318 src/tree.c:1024
+#: gnome/gdialogs.c:532 gtkedit/editwidget.c:1064 src/file.c:784
+#: src/screen.c:2288 src/screen.c:2318 src/tree.c:1024
 #, fuzzy
 msgid "Copy"
 msgstr "C_opiar"
@@ -374,24 +374,24 @@ msgstr " Sí "
 msgid " Done."
 msgstr ""
 
-#: gnome/gdnd.c:50
+#: gnome/gdnd.c:51
 msgid "_Move here"
 msgstr ""
 
-#: gnome/gdnd.c:51
+#: gnome/gdnd.c:52
 msgid "_Copy here"
 msgstr ""
 
-#: gnome/gdnd.c:52
+#: gnome/gdnd.c:53
 msgid "_Link here"
 msgstr ""
 
-#: gnome/gdnd.c:54
+#: gnome/gdnd.c:55
 msgid "Cancel drag"
 msgstr ""
 
 #. FIXME: this error message sucks
-#: gnome/gdnd.c:190
+#: gnome/gdnd.c:191
 #, c-format
 msgid ""
 "Could not stat %s\n"
@@ -657,59 +657,58 @@ msgstr ""
 msgid "File/New/Directory..."
 msgstr ""
 
-#: gnome/gpopup.c:215 gnome/gpopup.c:216
+#: gnome/gpopup.c:222 gnome/gpopup.c:223
 msgid "Properties"
 msgstr ""
 
-#: gnome/gpopup.c:218 gnome/gpopup.c:219
+#: gnome/gpopup.c:225 gnome/gpopup.c:226
 msgid "Open"
 msgstr ""
 
-#: gnome/gpopup.c:220
+#: gnome/gpopup.c:227
 #, fuzzy
 msgid "Open with"
 msgstr "Abrir con..."
 
-#: gnome/gpopup.c:221 src/screen.c:2286 src/screen.c:2316
+#: gnome/gpopup.c:228 src/screen.c:2286 src/screen.c:2316
 #, fuzzy
 msgid "View"
 msgstr "_Ver"
 
-#: gnome/gpopup.c:222
+#: gnome/gpopup.c:229
 msgid "View unfiltered"
 msgstr ""
 
-#: gnome/gpopup.c:223 gtkedit/gtkedit.c:1366 src/screen.c:2287
-#: src/screen.c:2317 src/view.c:1968
+#: gnome/gpopup.c:230 src/screen.c:2287 src/screen.c:2317 src/view.c:1968
 #, fuzzy
 msgid "Edit"
 msgstr "Sali_r"
 
-#: gnome/gpopup.c:225
+#: gnome/gpopup.c:232
 #, fuzzy
 msgid "Link..."
 msgstr "Enlace"
 
-#: gnome/gpopup.c:226
+#: gnome/gpopup.c:233
 #, fuzzy
 msgid "Symlink..."
 msgstr "Conexión por FTP..."
 
-#: gnome/gpopup.c:227
+#: gnome/gpopup.c:234
 #, fuzzy
 msgid "Edit symlink..."
 msgstr "Conexión por FTP..."
 
-#: gnome/gpopup.c:234 gnome/gpopup.c:245
+#: gnome/gpopup.c:241 gnome/gpopup.c:252
 msgid "Move/rename..."
 msgstr ""
 
-#: gnome/gpopup.c:235 gnome/gpopup.c:246
+#: gnome/gpopup.c:242 gnome/gpopup.c:253
 #, fuzzy
 msgid "Copy..."
 msgstr "C_opiar"
 
-#: gnome/gpopup.c:236 gnome/gpopup.c:248 gtkedit/editwidget.c:1067
+#: gnome/gpopup.c:243 gnome/gpopup.c:255 gtkedit/editwidget.c:1067
 #: src/screen.c:2291 src/screen.c:2321
 #, fuzzy
 msgid "Delete"
@@ -779,7 +778,7 @@ msgid "FTP directory cache timeout :"
 msgstr ""
 
 #: gnome/gprefs.c:167
-msgid "Allow customization of icons in panels"
+msgid "Allow customization of icons in icon view"
 msgstr ""
 
 #: gnome/gprefs.c:176
@@ -1063,7 +1062,7 @@ msgstr "Tecla Inicio"
 msgid "Go to your home directory"
 msgstr ""
 
-#: gnome/gscreen.c:2438
+#: gnome/gscreen.c:2429
 #, fuzzy
 msgid "Location:"
 msgstr "Lugar:      %Xh:%Xh"
@@ -1314,8 +1313,7 @@ msgstr ""
 msgid " Save file "
 msgstr " Fallo en la tubería "
 
-#: gtkedit/editcmd.c:774 gtkedit/editwidget.c:1061 gtkedit/gtkedit.c:1296
-#: src/view.c:1964
+#: gtkedit/editcmd.c:774 gtkedit/editwidget.c:1061 src/view.c:1964
 #, fuzzy
 msgid "Save"
 msgstr "&Guardar"
@@ -1620,384 +1618,6 @@ msgstr ""
 msgid " Mail "
 msgstr " &Archivo "
 
-#: gtkedit/editmenu.c:56
-msgid " Word wrap "
-msgstr ""
-
-#. Not essential to translate
-#: gtkedit/editmenu.c:58
-msgid " Enter line length, 0 for off: "
-msgstr ""
-
-#: gtkedit/editmenu.c:69
-#, fuzzy
-msgid " About "
-msgstr " Presentación "
-
-#: gtkedit/editmenu.c:70
-msgid ""
-"\n"
-"                 Cooledit  v2.1\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-
-#: gtkedit/editmenu.c:118 gtkedit/editmenu.c:134
-msgid "&Open/load...     C-o"
-msgstr ""
-
-#: gtkedit/editmenu.c:119
-#, fuzzy
-msgid "&New              C-n"
-msgstr "&Ver                           F3"
-
-#: gtkedit/editmenu.c:121 gtkedit/editmenu.c:137
-#, fuzzy
-msgid "&Save              F2"
-msgstr "&Ver                           F3"
-
-#: gtkedit/editmenu.c:122 gtkedit/editmenu.c:138
-#, fuzzy
-msgid "save &As...       F12"
-msgstr "&Disco...            M-d"
-
-#: gtkedit/editmenu.c:124 gtkedit/editmenu.c:140
-msgid "&Insert file...   F15"
-msgstr ""
-
-#: gtkedit/editmenu.c:125
-msgid "copy to &File...  C-f"
-msgstr ""
-
-#: gtkedit/editmenu.c:127 gtkedit/editmenu.c:143
-#, fuzzy
-msgid "a&Bout...            "
-msgstr "&Información       C-x i"
-
-#: gtkedit/editmenu.c:129 gtkedit/editmenu.c:145
-#, fuzzy
-msgid "&Quit             F10"
-msgstr "sali&R                        F10"
-
-#: gtkedit/editmenu.c:135
-#, fuzzy
-msgid "&New            C-x k"
-msgstr "crear en&Lace...            C-x l"
-
-#: gtkedit/editmenu.c:141
-msgid "copy to &File...     "
-msgstr ""
-
-#: gtkedit/editmenu.c:150 gtkedit/editmenu.c:167
-msgid "&Toggle Mark       F3"
-msgstr ""
-
-#: gtkedit/editmenu.c:151 gtkedit/editmenu.c:168
-msgid "&Mark Columns    S-F3"
-msgstr ""
-
-#: gtkedit/editmenu.c:153 gtkedit/editmenu.c:170
-msgid "toggle &Ins/overw Ins"
-msgstr ""
-
-#: gtkedit/editmenu.c:155 gtkedit/editmenu.c:172
-#, fuzzy
-msgid "&Copy              F5"
-msgstr "&Copiar...                     F5"
-
-#: gtkedit/editmenu.c:156 gtkedit/editmenu.c:173
-#, fuzzy
-msgid "&Move              F6"
-msgstr "&Ver                           F3"
-
-#: gtkedit/editmenu.c:157 gtkedit/editmenu.c:174
-#, fuzzy
-msgid "&Delete            F8"
-msgstr "&Borrar                        F8"
-
-#: gtkedit/editmenu.c:159 gtkedit/editmenu.c:176
-#, fuzzy
-msgid "&Undo             C-u"
-msgstr "&Información       C-x i"
-
-#: gtkedit/editmenu.c:161 gtkedit/editmenu.c:178
-msgid "&Beginning     C-PgUp"
-msgstr ""
-
-#: gtkedit/editmenu.c:162 gtkedit/editmenu.c:179
-#, fuzzy
-msgid "&End           C-PgDn"
-msgstr "&Información       C-x i"
-
-#: gtkedit/editmenu.c:184 gtkedit/editmenu.c:191
-#, fuzzy
-msgid "&Search...         F7"
-msgstr "ver arc&Hivo..."
-
-#: gtkedit/editmenu.c:185 gtkedit/editmenu.c:192
-msgid "search &Again     F17"
-msgstr ""
-
-#: gtkedit/editmenu.c:186 gtkedit/editmenu.c:193
-#, fuzzy
-msgid "&Replace...        F4"
-msgstr "ver arc&Hivo..."
-
-#: gtkedit/editmenu.c:198 gtkedit/editmenu.c:220
-#, fuzzy
-msgid "&Goto line...            M-l"
-msgstr "crear en&Lace...            C-x l"
-
-#: gtkedit/editmenu.c:200 gtkedit/editmenu.c:222
-#, fuzzy
-msgid "insert &Literal...       C-q"
-msgstr "ver arc&Hivo..."
-
-#: gtkedit/editmenu.c:202 gtkedit/editmenu.c:224
-#, fuzzy
-msgid "&Refresh screen          C-l"
-msgstr "&Releer              C-r"
-
-#: gtkedit/editmenu.c:204 gtkedit/editmenu.c:226
-msgid "&Start record macro      C-r"
-msgstr ""
-
-#: gtkedit/editmenu.c:205 gtkedit/editmenu.c:227
-msgid "&Finish record macro...  C-r"
-msgstr ""
-
-#: gtkedit/editmenu.c:206
-msgid "&Execute macro...   C-a, KEY"
-msgstr ""
-
-#: gtkedit/editmenu.c:207 gtkedit/editmenu.c:229
-#, fuzzy
-msgid "delete macr&O...            "
-msgstr "&Borrar                        F8"
-
-#: gtkedit/editmenu.c:209 gtkedit/editmenu.c:231
-#, fuzzy
-msgid "insert &Date/time           "
-msgstr "me&Nú de usuario               F2"
-
-#: gtkedit/editmenu.c:211 gtkedit/editmenu.c:233
-msgid "format p&Aragraph        M-p"
-msgstr ""
-
-#: gtkedit/editmenu.c:212
-msgid "'ispell' s&Pell check    C-p"
-msgstr ""
-
-#: gtkedit/editmenu.c:213 gtkedit/editmenu.c:235
-#, fuzzy
-msgid "sor&T...                 M-t"
-msgstr "&Ver                           F3"
-
-#: gtkedit/editmenu.c:214 gtkedit/editmenu.c:236
-msgid "'indent' &C Formatter    F19"
-msgstr ""
-
-#: gtkedit/editmenu.c:215
-#, fuzzy
-msgid "&Mail...                    "
-msgstr "&Ver                           F3"
-
-#: gtkedit/editmenu.c:228
-msgid "&Execute macro... C-x e, KEY"
-msgstr ""
-
-#: gtkedit/editmenu.c:234
-msgid "'ispell' s&Pell check    M-$"
-msgstr ""
-
-#: gtkedit/editmenu.c:243 gtkedit/editmenu.c:252
-msgid "&General...  "
-msgstr ""
-
-#: gtkedit/editmenu.c:244 gtkedit/editmenu.c:253
-#, fuzzy
-msgid "&Save mode..."
-msgstr "&Ordenar..."
-
-#: gtkedit/editmenu.c:246 gtkedit/editmenu.c:255 src/main.c:1302
-#, fuzzy
-msgid "&Layout..."
-msgstr "Presentación"
-
-#. The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t'
-#: gtkedit/editmenu.c:265 gtkedit/editmenu.c:274 gtkedit/editmenu.c:391
-#: src/chmod.c:164 src/chown.c:130
-#, fuzzy
-msgid " File "
-msgstr " &Archivo "
-
-#: gtkedit/editmenu.c:266 gtkedit/editmenu.c:275 gtkedit/editmenu.c:407
-#, fuzzy
-msgid " Edit "
-msgstr " Crear directorio "
-
-#: gtkedit/editmenu.c:267 gtkedit/editmenu.c:276
-msgid " Sear/Repl "
-msgstr ""
-
-#: gtkedit/editmenu.c:268 gtkedit/editmenu.c:277 gtkedit/editmenu.c:442
-#, fuzzy
-msgid " Command "
-msgstr " &Comando "
-
-#: gtkedit/editmenu.c:269 gtkedit/editmenu.c:278
-#, fuzzy
-msgid " Options "
-msgstr " &Opciones "
-
-#: gtkedit/editmenu.c:392
-#, fuzzy
-msgid "Open...\tC-o"
-msgstr "Abrir con..."
-
-#: gtkedit/editmenu.c:393
-msgid "New\tC-n"
-msgstr ""
-
-#: gtkedit/editmenu.c:395
-#, fuzzy
-msgid "Save\tF2"
-msgstr "&Guardar"
-
-#: gtkedit/editmenu.c:396
-msgid "Save as...\tF12"
-msgstr ""
-
-#: gtkedit/editmenu.c:398
-msgid "Insert file...\tF15"
-msgstr ""
-
-#: gtkedit/editmenu.c:399
-msgid "Copy to file...\tC-f"
-msgstr ""
-
-#. Tool hint
-#: gtkedit/editmenu.c:402
-#, fuzzy
-msgid "Disk operations"
-msgstr "ope&Ración detallada"
-
-#: gtkedit/editmenu.c:408
-msgid "Toggle mark\tF3"
-msgstr ""
-
-#: gtkedit/editmenu.c:409
-msgid "Toggle mark columns\tC-b"
-msgstr ""
-
-#: gtkedit/editmenu.c:411
-msgid "Toggle insert/overwrite\tIns"
-msgstr ""
-
-#: gtkedit/editmenu.c:413
-msgid "Copy block to cursor\tF5"
-msgstr ""
-
-#: gtkedit/editmenu.c:414
-msgid "Move block to cursor\tF6"
-msgstr ""
-
-#: gtkedit/editmenu.c:415
-msgid "Delete block\tF8/C-Del"
-msgstr ""
-
-#: gtkedit/editmenu.c:417
-msgid "Copy block to clipbrd\tC-Ins"
-msgstr ""
-
-#: gtkedit/editmenu.c:418
-msgid "Cut block to clipbrd\tS-Del"
-msgstr ""
-
-#: gtkedit/editmenu.c:419
-msgid "Paste block from clipbrd\tS-Ins"
-msgstr ""
-
-#: gtkedit/editmenu.c:420
-msgid "Selection history\tM-Ins"
-msgstr ""
-
-#: gtkedit/editmenu.c:422
-msgid "Undo\tC-BackSpace"
-msgstr ""
-
-#. Tool hint
-#: gtkedit/editmenu.c:425
-msgid "Manipulating blocks of text"
-msgstr ""
-
-#: gtkedit/editmenu.c:430
-msgid " Srch/Replce "
-msgstr ""
-
-#: gtkedit/editmenu.c:431
-#, fuzzy
-msgid "Search...\tF7"
-msgstr "Buscar de nuevo..."
-
-#: gtkedit/editmenu.c:432
-#, fuzzy
-msgid "Search again\tF17"
-msgstr "Buscar de nuevo..."
-
-#: gtkedit/editmenu.c:433
-msgid "Replace...\tF4"
-msgstr ""
-
-#: gtkedit/editmenu.c:434
-msgid "Replace again\tF14"
-msgstr ""
-
-#. Tool hint
-#: gtkedit/editmenu.c:437
-msgid "Search for and replace text"
-msgstr ""
-
-#: gtkedit/editmenu.c:443
-msgid "Goto line...\tM-l"
-msgstr ""
-
-#: gtkedit/editmenu.c:445
-msgid "Start record macro\tC-r"
-msgstr ""
-
-#: gtkedit/editmenu.c:446
-msgid "Finish record macro...\tC-r"
-msgstr ""
-
-#: gtkedit/editmenu.c:447
-msgid "Execute macro...\tC-a, KEY"
-msgstr ""
-
-#: gtkedit/editmenu.c:448
-msgid "Delete macro...\t"
-msgstr ""
-
-#: gtkedit/editmenu.c:450
-msgid "Insert date/time\tC-d"
-msgstr ""
-
-#: gtkedit/editmenu.c:451
-msgid "Format paragraph\tM-p"
-msgstr ""
-
-#: gtkedit/editmenu.c:453
-msgid "Refresh display\tC-l"
-msgstr ""
-
-#. Tool hint
-#: gtkedit/editmenu.c:456
-msgid "Macros and internal commands"
-msgstr ""
-
 #: gtkedit/editoptions.c:37
 msgid "None"
 msgstr ""
@@ -2026,9 +1646,8 @@ msgstr ""
 msgid "Error initialising editor.\n"
 msgstr ""
 
-#: gtkedit/editwidget.c:1060 gtkedit/gtkedit.c:1368 src/help.c:806
-#: src/main.c:1668 src/screen.c:2284 src/screen.c:2314 src/tree.c:1018
-#: src/view.c:1959
+#: gtkedit/editwidget.c:1060 src/help.c:806 src/main.c:1668 src/screen.c:2284
+#: src/screen.c:2314 src/tree.c:1018 src/view.c:1959
 msgid "Help"
 msgstr ""
 
@@ -2068,131 +1687,30 @@ msgid ""
 msgstr ""
 
 #: gtkedit/gtkedit.c:1289
-msgid "Open/Load"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1289
-msgid "Load a different/new file"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1292
-msgid "New"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1292
 msgid "Clear the edit buffer"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1296
-msgid "Save the current edit buffer to filename"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1299
-#, fuzzy
-msgid "Save As"
-msgstr "Guardar configuración"
-
-#: gtkedit/gtkedit.c:1299
-msgid "Save the current edit buffer as filename"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1303
+#: gtkedit/gtkedit.c:1294
 #, fuzzy
 msgid "Insert File"
 msgstr "Tecla Ins"
 
-#: gtkedit/gtkedit.c:1303
+#: gtkedit/gtkedit.c:1294
 msgid "Insert text from a file"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1306
+#: gtkedit/gtkedit.c:1296
 #, fuzzy
 msgid "Copy to file"
 msgstr " No puedo abrir el archivo "
 
-#: gtkedit/gtkedit.c:1306
+#: gtkedit/gtkedit.c:1296
 msgid "copy a block to a file"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1310
-#, fuzzy
-msgid "Exit"
-msgstr "Sali_r"
-
-#: gtkedit/gtkedit.c:1310
-msgid "Quit editor"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1318
-msgid "Copy selection to clipboard"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1321
-#, fuzzy
-msgid "Cut"
-msgstr "_Cortar"
-
-#: gtkedit/gtkedit.c:1321
-msgid "Cut selection to clipboard"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1324
-#, fuzzy
-msgid "Paste"
-msgstr "_Pegar"
-
-#: gtkedit/gtkedit.c:1324
-msgid "Paste clipboard"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1328
-#, fuzzy
-msgid "Undo"
-msgstr "SinForm"
-
-#: gtkedit/gtkedit.c:1328
-msgid "Go back in time one key press"
-msgstr ""
-
 #: gtkedit/gtkedit.c:1336
-#, fuzzy
-msgid "Find"
-msgstr "Ventana"
-
-#: gtkedit/gtkedit.c:1336
-#, fuzzy
-msgid "Find string/regular expression"
-msgstr " Expresión regular inválida "
-
-#: gtkedit/gtkedit.c:1339
-msgid "Find again"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1339
-msgid "Repeat most recent search"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1342 gtkedit/gtkedit.c:1367
 msgid "Search/Replace"
 msgstr ""
-
-#: gtkedit/gtkedit.c:1342
-#, fuzzy
-msgid "Find and replace text/regular expressions"
-msgstr " Expresión regular inválida "
-
-#: gtkedit/gtkedit.c:1351
-msgid "About..."
-msgstr ""
-
-#: gtkedit/gtkedit.c:1351
-msgid "Info about Mcedit"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1365 src/filegui.c:404
-#, fuzzy
-msgid "File"
-msgstr " &Archivo "
 
 #: gtkedit/syntax.c:3180 gtkedit/syntax.c:3187
 #, fuzzy
@@ -2579,6 +2097,11 @@ msgstr " &Comando "
 msgid " Permission "
 msgstr "Permiso"
 
+#: src/chmod.c:164 src/chown.c:130
+#, fuzzy
+msgid " File "
+msgstr " &Archivo "
+
 #: src/chmod.c:169
 msgid "Use SPACE to change"
 msgstr ""
@@ -2805,13 +2328,10 @@ msgstr ""
 
 #: src/cmd.c:967
 #, fuzzy
-msgid ""
-"Type `exit' to return to the Midnight Commander\n"
-"\r\n"
-"\r"
+msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Directorio para archivos del Midnight Commander: %s\n"
 
-#: src/cmd.c:1020
+#: src/cmd.c:1022
 #, fuzzy, c-format
 msgid ""
 " Couldn't stat %s \n"
@@ -2820,110 +2340,110 @@ msgstr ""
 " No puedo cambiar al directorio '%s' \n"
 " %s "
 
-#: src/cmd.c:1029 src/cmd.c:1031
+#: src/cmd.c:1031 src/cmd.c:1033
 #, fuzzy
 msgid " Link "
 msgstr "Enlace"
 
-#: src/cmd.c:1030 src/cmd.c:1135 src/file.c:1621
+#: src/cmd.c:1032 src/cmd.c:1137 src/file.c:1621
 msgid " to:"
 msgstr ""
 
-#: src/cmd.c:1041
+#: src/cmd.c:1043
 #, c-format
 msgid " link: %s "
 msgstr ""
 
-#: src/cmd.c:1074
+#: src/cmd.c:1076
 #, c-format
 msgid " symlink: %s "
 msgstr ""
 
-#: src/cmd.c:1100
+#: src/cmd.c:1102
 msgid " Symlink "
 msgstr ""
 
-#: src/cmd.c:1100
+#: src/cmd.c:1102
 msgid " points to:"
 msgstr ""
 
-#: src/cmd.c:1105
+#: src/cmd.c:1107
 #, fuzzy
 msgid " Edit symlink "
 msgstr "edi&Tar enlace simbólico  C-x C-s"
 
-#: src/cmd.c:1111
+#: src/cmd.c:1113
 #, fuzzy, c-format
 msgid " edit symlink: %s "
 msgstr "edi&Tar enlace simbólico  C-x C-s"
 
-#: src/cmd.c:1135
+#: src/cmd.c:1137
 msgid " Link symbolically "
 msgstr ""
 
-#: src/cmd.c:1136
+#: src/cmd.c:1138
 msgid " Relative symlink "
 msgstr ""
 
-#: src/cmd.c:1147
+#: src/cmd.c:1149
 #, c-format
 msgid " relative symlink: %s "
 msgstr ""
 
-#: src/cmd.c:1250
+#: src/cmd.c:1252
 msgid " Enter machine name (F1 for details): "
 msgstr ""
 
-#: src/cmd.c:1274
+#: src/cmd.c:1276
 #, fuzzy, c-format
 msgid " Could not chdir to %s "
 msgstr ""
 " No puedo cambiar al directorio '%s' \n"
 " %s "
 
-#: src/cmd.c:1281
+#: src/cmd.c:1283
 #, fuzzy
 msgid " Link to a remote machine "
 msgstr "Conecta a una máquina remota"
 
-#: src/cmd.c:1287
+#: src/cmd.c:1289
 msgid " FTP to machine "
 msgstr ""
 
-#: src/cmd.c:1297
+#: src/cmd.c:1299
 #, fuzzy
 msgid " Socket source routing setup "
 msgstr " No pude preestablecer la ruta (%s)"
 
-#: src/cmd.c:1298
+#: src/cmd.c:1300
 msgid " Enter host name to use as a source routing hop: "
 msgstr ""
 
-#: src/cmd.c:1305
+#: src/cmd.c:1307
 #, fuzzy
 msgid " Host name "
 msgstr " Cargar favoritos "
 
-#: src/cmd.c:1305
+#: src/cmd.c:1307
 msgid " Error while looking up IP address "
 msgstr ""
 
-#: src/cmd.c:1316
+#: src/cmd.c:1318
 #, fuzzy
 msgid " Undelete files on an ext2 file system "
 msgstr "&Recuperar archivos (ext2fs)..."
 
-#: src/cmd.c:1317
+#: src/cmd.c:1319
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
 msgstr ""
 
-#: src/cmd.c:1367
+#: src/cmd.c:1369
 msgid " Setup saved to ~/"
 msgstr ""
 
-#: src/cmd.c:1372
+#: src/cmd.c:1374
 msgid " Setup "
 msgstr ""
 
@@ -3552,6 +3072,11 @@ msgstr ""
 #: src/file.c:2187
 msgid " Background process: Recursive Delete "
 msgstr ""
+
+#: src/filegui.c:404
+#, fuzzy
+msgid "File"
+msgstr " &Archivo "
 
 #: src/filegui.c:425
 #, fuzzy
@@ -4464,6 +3989,11 @@ msgstr "editar archivo de &Menú..."
 #: src/main.c:1301
 msgid "&Configuration..."
 msgstr "&Configuración..."
+
+#: src/main.c:1302
+#, fuzzy
+msgid "&Layout..."
+msgstr "Presentación"
 
 #: src/main.c:1303
 msgid "c&Onfirmation..."
@@ -5418,7 +4948,7 @@ msgstr "Fin de archivo inesperado"
 msgid "Inconsistent tar archive"
 msgstr "Archivo de tipo tar inconsistente"
 
-#: vfs/tar.c:412
+#: vfs/tar.c:411
 #, c-format
 msgid ""
 "Hmm,...\n"
@@ -5428,6 +4958,158 @@ msgstr ""
 "Hmm,...\n"
 "%s\n"
 "no parece un archivo de tipo tar."
+
+#, fuzzy
+#~ msgid " About "
+#~ msgstr " Presentación "
+
+#, fuzzy
+#~ msgid "&New              C-n"
+#~ msgstr "&Ver                           F3"
+
+#, fuzzy
+#~ msgid "&Save              F2"
+#~ msgstr "&Ver                           F3"
+
+#, fuzzy
+#~ msgid "save &As...       F12"
+#~ msgstr "&Disco...            M-d"
+
+#, fuzzy
+#~ msgid "a&Bout...            "
+#~ msgstr "&Información       C-x i"
+
+#, fuzzy
+#~ msgid "&Quit             F10"
+#~ msgstr "sali&R                        F10"
+
+#, fuzzy
+#~ msgid "&New            C-x k"
+#~ msgstr "crear en&Lace...            C-x l"
+
+#, fuzzy
+#~ msgid "&Copy              F5"
+#~ msgstr "&Copiar...                     F5"
+
+#, fuzzy
+#~ msgid "&Move              F6"
+#~ msgstr "&Ver                           F3"
+
+#, fuzzy
+#~ msgid "&Delete            F8"
+#~ msgstr "&Borrar                        F8"
+
+#, fuzzy
+#~ msgid "&Undo             C-u"
+#~ msgstr "&Información       C-x i"
+
+#, fuzzy
+#~ msgid "&End           C-PgDn"
+#~ msgstr "&Información       C-x i"
+
+#, fuzzy
+#~ msgid "&Search...         F7"
+#~ msgstr "ver arc&Hivo..."
+
+#, fuzzy
+#~ msgid "&Replace...        F4"
+#~ msgstr "ver arc&Hivo..."
+
+#, fuzzy
+#~ msgid "&Goto line...            M-l"
+#~ msgstr "crear en&Lace...            C-x l"
+
+#, fuzzy
+#~ msgid "insert &Literal...       C-q"
+#~ msgstr "ver arc&Hivo..."
+
+#, fuzzy
+#~ msgid "&Refresh screen          C-l"
+#~ msgstr "&Releer              C-r"
+
+#, fuzzy
+#~ msgid "delete macr&O...            "
+#~ msgstr "&Borrar                        F8"
+
+#, fuzzy
+#~ msgid "insert &Date/time           "
+#~ msgstr "me&Nú de usuario               F2"
+
+#, fuzzy
+#~ msgid "sor&T...                 M-t"
+#~ msgstr "&Ver                           F3"
+
+#, fuzzy
+#~ msgid "&Mail...                    "
+#~ msgstr "&Ver                           F3"
+
+#, fuzzy
+#~ msgid "&Save mode..."
+#~ msgstr "&Ordenar..."
+
+#, fuzzy
+#~ msgid " Edit "
+#~ msgstr " Crear directorio "
+
+#, fuzzy
+#~ msgid " Command "
+#~ msgstr " &Comando "
+
+#, fuzzy
+#~ msgid " Options "
+#~ msgstr " &Opciones "
+
+#, fuzzy
+#~ msgid "Open...\tC-o"
+#~ msgstr "Abrir con..."
+
+#, fuzzy
+#~ msgid "Save\tF2"
+#~ msgstr "&Guardar"
+
+#, fuzzy
+#~ msgid "Disk operations"
+#~ msgstr "ope&Ración detallada"
+
+#, fuzzy
+#~ msgid "Search...\tF7"
+#~ msgstr "Buscar de nuevo..."
+
+#, fuzzy
+#~ msgid "Search again\tF17"
+#~ msgstr "Buscar de nuevo..."
+
+#, fuzzy
+#~ msgid "Save As"
+#~ msgstr "Guardar configuración"
+
+#, fuzzy
+#~ msgid "Exit"
+#~ msgstr "Sali_r"
+
+#, fuzzy
+#~ msgid "Cut"
+#~ msgstr "_Cortar"
+
+#, fuzzy
+#~ msgid "Paste"
+#~ msgstr "_Pegar"
+
+#, fuzzy
+#~ msgid "Undo"
+#~ msgstr "SinForm"
+
+#, fuzzy
+#~ msgid "Find"
+#~ msgstr "Ventana"
+
+#, fuzzy
+#~ msgid "Find string/regular expression"
+#~ msgstr " Expresión regular inválida "
+
+#, fuzzy
+#~ msgid "Find and replace text/regular expressions"
+#~ msgstr " Expresión regular inválida "
 
 #~ msgid "|"
 #~ msgstr "|"

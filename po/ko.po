@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.6\n"
-"POT-Creation-Date: 1999-02-03 21:58-0500\n"
+"POT-Creation-Date: 1999-02-08 08:12-0500\n"
 "PO-Revision-Date: 1999-02-04 14:20:02+0900\n"
 "Last-Translator: Sung-Hyun Nam <namsh@lgic.co.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -146,20 +146,20 @@ msgstr "이 명령 실행"
 msgid "Command: "
 msgstr "명령: "
 
-#: gnome/gcmd.c:557
+#: gnome/gcmd.c:574
 msgid "Set Filter"
 msgstr "필터 설정"
 
-#: gnome/gcmd.c:562 gnome/gcmd.c:603 gnome/gcmd.c:608 gnome/gcmd.c:612
-#: gnome/gscreen.c:2489
+#: gnome/gcmd.c:579 gnome/gcmd.c:620 gnome/gcmd.c:625 gnome/gcmd.c:629
+#: gnome/gscreen.c:2484
 msgid "Show all files"
 msgstr "모든 파일 보여주기"
 
-#: gnome/gcmd.c:569
+#: gnome/gcmd.c:586
 msgid "."
 msgstr "."
 
-#: gnome/gcmd.c:585
+#: gnome/gcmd.c:602
 msgid ""
 "Enter a filter here for files in the panel view.\n"
 "\n"
@@ -171,37 +171,37 @@ msgstr ""
 "예를 들면:\n"
 "*.gif는 gif 그림만을 보여줄 것입니다"
 
-#: gnome/gcmd.c:587
+#: gnome/gcmd.c:604
 msgid "Enter a Regular Expression to filter files in the panel view."
 msgstr "패널 보기에서 파일 필터링을 위한 정규 표현식 입력."
 
-#: gnome/gcmd.c:644 gnome/gpopup.c:49
+#: gnome/gcmd.c:661 gnome/gpopup.c:49
 msgid " Open with..."
 msgstr " Open with..."
 
-#: gnome/gcmd.c:645 gnome/gpopup.c:50
+#: gnome/gcmd.c:662 gnome/gpopup.c:50
 msgid "Enter extra arguments:"
 msgstr "extra 인자 입력:"
 
-#: gnome/gdesktop.c:347 gnome/gdesktop.c:1485
+#: gnome/gdesktop.c:350 gnome/gdesktop.c:1553
 msgid "Warning"
 msgstr "경고"
 
-#: gnome/gdesktop.c:348
+#: gnome/gdesktop.c:351
 #, c-format
 msgid "Could not open %s; will not have desktop icons"
 msgstr "%s 열 수 없음; 초기 데스크탑 아이콘을 가질 수 없을 것임"
 
-#: gnome/gdesktop.c:1451
+#: gnome/gdesktop.c:1519
 msgid "Trashcan"
 msgstr "휴지통"
 
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop.c:1481
+#: gnome/gdesktop.c:1549
 msgid "Home directory"
 msgstr "홈 자료방"
 
-#: gnome/gdesktop.c:1486
+#: gnome/gdesktop.c:1554
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial desktop icons."
 msgstr ""
@@ -267,8 +267,8 @@ msgstr "대상 파일이 이미 있습니다: %s"
 msgid "Replace it?"
 msgstr "바꿀까요?"
 
-#: gnome/gdialogs.c:532 gtkedit/editwidget.c:1064 gtkedit/gtkedit.c:1318
-#: src/file.c:784 src/screen.c:2288 src/screen.c:2318 src/tree.c:1024
+#: gnome/gdialogs.c:532 gtkedit/editwidget.c:1064 src/file.c:784
+#: src/screen.c:2288 src/screen.c:2318 src/tree.c:1024
 msgid "Copy"
 msgstr "복사"
 
@@ -348,24 +348,24 @@ msgstr " is "
 msgid " Done."
 msgstr " Done."
 
-#: gnome/gdnd.c:50
+#: gnome/gdnd.c:51
 msgid "_Move here"
 msgstr "여기로 이동(_M)"
 
-#: gnome/gdnd.c:51
+#: gnome/gdnd.c:52
 msgid "_Copy here"
 msgstr "여기로 복사(_C)"
 
-#: gnome/gdnd.c:52
+#: gnome/gdnd.c:53
 msgid "_Link here"
 msgstr "여기로 연결(_L)"
 
-#: gnome/gdnd.c:54
+#: gnome/gdnd.c:55
 msgid "Cancel drag"
 msgstr "드래그 취소"
 
 #. FIXME: this error message sucks
-#: gnome/gdnd.c:190
+#: gnome/gdnd.c:191
 #, c-format
 msgid ""
 "Could not stat %s\n"
@@ -602,52 +602,51 @@ msgstr "도움말(_H)"
 msgid "File/New/Directory..."
 msgstr "파일/새 것/자료방..."
 
-#: gnome/gpopup.c:215 gnome/gpopup.c:216
+#: gnome/gpopup.c:222 gnome/gpopup.c:223
 msgid "Properties"
 msgstr "속성"
 
-#: gnome/gpopup.c:218 gnome/gpopup.c:219
+#: gnome/gpopup.c:225 gnome/gpopup.c:226
 msgid "Open"
 msgstr "열기"
 
-#: gnome/gpopup.c:220
+#: gnome/gpopup.c:227
 msgid "Open with"
 msgstr "Open with"
 
-#: gnome/gpopup.c:221 src/screen.c:2286 src/screen.c:2316
+#: gnome/gpopup.c:228 src/screen.c:2286 src/screen.c:2316
 msgid "View"
 msgstr "보기"
 
-#: gnome/gpopup.c:222
+#: gnome/gpopup.c:229
 msgid "View unfiltered"
 msgstr "필터없이 보기"
 
-#: gnome/gpopup.c:223 gtkedit/gtkedit.c:1366 src/screen.c:2287
-#: src/screen.c:2317 src/view.c:1968
+#: gnome/gpopup.c:230 src/screen.c:2287 src/screen.c:2317 src/view.c:1968
 msgid "Edit"
 msgstr "편집"
 
-#: gnome/gpopup.c:225
+#: gnome/gpopup.c:232
 msgid "Link..."
 msgstr "링크..."
 
-#: gnome/gpopup.c:226
+#: gnome/gpopup.c:233
 msgid "Symlink..."
 msgstr "심볼릭링크..."
 
-#: gnome/gpopup.c:227
+#: gnome/gpopup.c:234
 msgid "Edit symlink..."
 msgstr "심볼릭링크 수정..."
 
-#: gnome/gpopup.c:234 gnome/gpopup.c:245
+#: gnome/gpopup.c:241 gnome/gpopup.c:252
 msgid "Move/rename..."
 msgstr "이동/이름바꾸기..."
 
-#: gnome/gpopup.c:235 gnome/gpopup.c:246
+#: gnome/gpopup.c:242 gnome/gpopup.c:253
 msgid "Copy..."
 msgstr "복사..."
 
-#: gnome/gpopup.c:236 gnome/gpopup.c:248 gtkedit/editwidget.c:1067
+#: gnome/gpopup.c:243 gnome/gpopup.c:255 gtkedit/editwidget.c:1067
 #: src/screen.c:2291 src/screen.c:2321
 msgid "Delete"
 msgstr "지우기"
@@ -713,7 +712,8 @@ msgid "FTP directory cache timeout :"
 msgstr "FTP 자료방 캐쉬 타임아웃:"
 
 #: gnome/gprefs.c:167
-msgid "Allow customization of icons in panels"
+#, fuzzy
+msgid "Allow customization of icons in icon view"
 msgstr "패널의 아이콘 바꾸기 허용"
 
 #: gnome/gprefs.c:176
@@ -980,7 +980,7 @@ msgstr "홈"
 msgid "Go to your home directory"
 msgstr "홈 자료방으로 가기"
 
-#: gnome/gscreen.c:2438
+#: gnome/gscreen.c:2429
 msgid "Location:"
 msgstr "위치:"
 
@@ -1212,8 +1212,7 @@ msgstr " 저장하시겠습니까? "
 msgid " Save file "
 msgstr " 파일 저장 "
 
-#: gtkedit/editcmd.c:774 gtkedit/editwidget.c:1061 gtkedit/gtkedit.c:1296
-#: src/view.c:1964
+#: gtkedit/editcmd.c:774 gtkedit/editwidget.c:1061 src/view.c:1964
 msgid "Save"
 msgstr "저장"
 
@@ -1496,359 +1495,6 @@ msgstr " Error trying to stat file "
 msgid " Mail "
 msgstr " 전자우편 "
 
-#: gtkedit/editmenu.c:56
-msgid " Word wrap "
-msgstr " Word wrap "
-
-#. Not essential to translate
-#: gtkedit/editmenu.c:58
-msgid " Enter line length, 0 for off: "
-msgstr " 라인 길이를 입력, 0은 off: "
-
-#: gtkedit/editmenu.c:69
-msgid " About "
-msgstr " 이 프로그램은 "
-
-#: gtkedit/editmenu.c:70
-msgid ""
-"\n"
-"                 Cooledit  v2.1\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                 Cooledit  v2.1\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"         Midnight Commander를 위해 개발된\n"
-"          사용자와 친근한 텍스트 편집기.\n"
-
-#: gtkedit/editmenu.c:118 gtkedit/editmenu.c:134
-msgid "&Open/load...     C-o"
-msgstr "열기/불러오기(&O)...      C-o"
-
-#: gtkedit/editmenu.c:119
-msgid "&New              C-n"
-msgstr "새 파일(&N)               C-n"
-
-#: gtkedit/editmenu.c:121 gtkedit/editmenu.c:137
-msgid "&Save              F2"
-msgstr "저장(_S)                   F3"
-
-#: gtkedit/editmenu.c:122 gtkedit/editmenu.c:138
-msgid "save &As...       F12"
-msgstr "다른 이름으로 저장(&A)... M-d"
-
-#: gtkedit/editmenu.c:124 gtkedit/editmenu.c:140
-msgid "&Insert file...   F15"
-msgstr "파일 끼워넣기(&I)...      F15"
-
-#: gtkedit/editmenu.c:125
-msgid "copy to &File...  C-f"
-msgstr "파일로 복사(&F)...        C-f"
-
-#: gtkedit/editmenu.c:127 gtkedit/editmenu.c:143
-msgid "a&Bout...            "
-msgstr "이 프로그램은(&B)...         "
-
-#: gtkedit/editmenu.c:129 gtkedit/editmenu.c:145
-msgid "&Quit             F10"
-msgstr "종료(&Q)                  F10"
-
-#: gtkedit/editmenu.c:135
-msgid "&New            C-x k"
-msgstr "새 파일(&N)             C-x l"
-
-#: gtkedit/editmenu.c:141
-msgid "copy to &File...     "
-msgstr "파일로 복사(&F)...           "
-
-#: gtkedit/editmenu.c:150 gtkedit/editmenu.c:167
-msgid "&Toggle Mark       F3"
-msgstr "마크 토글(&T)              F3"
-
-#: gtkedit/editmenu.c:151 gtkedit/editmenu.c:168
-msgid "&Mark Columns    S-F3"
-msgstr "컬럼 마크(&M)            S-F3"
-
-#: gtkedit/editmenu.c:153 gtkedit/editmenu.c:170
-msgid "toggle &Ins/overw Ins"
-msgstr "삽입/겹침 토글(&I)        Ins"
-
-#: gtkedit/editmenu.c:155 gtkedit/editmenu.c:172
-msgid "&Copy              F5"
-msgstr "복사(&C)                   F5"
-
-#: gtkedit/editmenu.c:156 gtkedit/editmenu.c:173
-msgid "&Move              F6"
-msgstr "이동(&M)                   F6"
-
-#: gtkedit/editmenu.c:157 gtkedit/editmenu.c:174
-msgid "&Delete            F8"
-msgstr "지우기(&D)                 F8"
-
-#: gtkedit/editmenu.c:159 gtkedit/editmenu.c:176
-msgid "&Undo             C-u"
-msgstr "취소(&U)                  C-u"
-
-#: gtkedit/editmenu.c:161 gtkedit/editmenu.c:178
-msgid "&Beginning     C-PgUp"
-msgstr "파일 처음(&B)          C-PgUp"
-
-#: gtkedit/editmenu.c:162 gtkedit/editmenu.c:179
-msgid "&End           C-PgDn"
-msgstr "파일 끝(&E)            C-PgDn"
-
-#: gtkedit/editmenu.c:184 gtkedit/editmenu.c:191
-msgid "&Search...         F7"
-msgstr "찾기(&S)...                F7"
-
-#: gtkedit/editmenu.c:185 gtkedit/editmenu.c:192
-msgid "search &Again     F17"
-msgstr "다시 찾기(&A)             F17"
-
-#: gtkedit/editmenu.c:186 gtkedit/editmenu.c:193
-msgid "&Replace...        F4"
-msgstr "바꾸기(&R)...              F4"
-
-#: gtkedit/editmenu.c:198 gtkedit/editmenu.c:220
-msgid "&Goto line...            M-l"
-msgstr "라인 찾아가기(&G)...      M-l"
-
-#: gtkedit/editmenu.c:200 gtkedit/editmenu.c:222
-msgid "insert &Literal...       C-q"
-msgstr "Literal 입력(&L)          C-q"
-
-#: gtkedit/editmenu.c:202 gtkedit/editmenu.c:224
-msgid "&Refresh screen          C-l"
-msgstr "화면 갱신(&R)             C-l"
-
-#: gtkedit/editmenu.c:204 gtkedit/editmenu.c:226
-msgid "&Start record macro      C-r"
-msgstr "매크로 저장 시작(&S)      C-r"
-
-#: gtkedit/editmenu.c:205 gtkedit/editmenu.c:227
-msgid "&Finish record macro...  C-r"
-msgstr "매크로 저장 끝(&F)        C-r"
-
-#: gtkedit/editmenu.c:206
-msgid "&Execute macro...   C-a, KEY"
-msgstr "매크로 실행(&E)...   C-a, KEY"
-
-#: gtkedit/editmenu.c:207 gtkedit/editmenu.c:229
-msgid "delete macr&O...            "
-msgstr "매크로 삭제(&O)...           "
-
-#: gtkedit/editmenu.c:209 gtkedit/editmenu.c:231
-msgid "insert &Date/time           "
-msgstr "날짜/시간 삽입(&D)           "
-
-#: gtkedit/editmenu.c:211 gtkedit/editmenu.c:233
-msgid "format p&Aragraph        M-p"
-msgstr "format p&Aragraph         M-p"
-
-#: gtkedit/editmenu.c:212
-msgid "'ispell' s&Pell check    C-p"
-msgstr "'ispell' 철자 검사(&P)    C-p"
-
-#: gtkedit/editmenu.c:213 gtkedit/editmenu.c:235
-msgid "sor&T...                 M-t"
-msgstr "정렬(&T)                  M-t"
-
-#: gtkedit/editmenu.c:214 gtkedit/editmenu.c:236
-msgid "'indent' &C Formatter    F19"
-msgstr "'indent' &C Formatter     F19"
-
-#: gtkedit/editmenu.c:215
-msgid "&Mail...                    "
-msgstr "전자우편(&M)...              "
-
-#: gtkedit/editmenu.c:228
-msgid "&Execute macro... C-x e, KEY"
-msgstr "매크로 실행(&E)... C-x e, KEY"
-
-#: gtkedit/editmenu.c:234
-msgid "'ispell' s&Pell check    M-$"
-msgstr "'ispell' 철자 검사(&P)    M-$"
-
-#: gtkedit/editmenu.c:243 gtkedit/editmenu.c:252
-msgid "&General...  "
-msgstr "일반(&G)...  "
-
-#: gtkedit/editmenu.c:244 gtkedit/editmenu.c:253
-msgid "&Save mode..."
-msgstr "모드 저장(&S)..."
-
-#: gtkedit/editmenu.c:246 gtkedit/editmenu.c:255 src/main.c:1302
-msgid "&Layout..."
-msgstr "배치(&L)..."
-
-#. The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t'
-#: gtkedit/editmenu.c:265 gtkedit/editmenu.c:274 gtkedit/editmenu.c:391
-#: src/chmod.c:164 src/chown.c:130
-msgid " File "
-msgstr " 파일 "
-
-#: gtkedit/editmenu.c:266 gtkedit/editmenu.c:275 gtkedit/editmenu.c:407
-msgid " Edit "
-msgstr " 편집 "
-
-#: gtkedit/editmenu.c:267 gtkedit/editmenu.c:276
-msgid " Sear/Repl "
-msgstr " 찾기/바꿈 "
-
-#: gtkedit/editmenu.c:268 gtkedit/editmenu.c:277 gtkedit/editmenu.c:442
-msgid " Command "
-msgstr " 명령 "
-
-#: gtkedit/editmenu.c:269 gtkedit/editmenu.c:278
-msgid " Options "
-msgstr " 선택항목 "
-
-#: gtkedit/editmenu.c:392
-msgid "Open...\tC-o"
-msgstr "열기...\tC-o"
-
-#: gtkedit/editmenu.c:393
-msgid "New\tC-n"
-msgstr "새 글\tC-n"
-
-#: gtkedit/editmenu.c:395
-msgid "Save\tF2"
-msgstr "저장\tF2"
-
-#: gtkedit/editmenu.c:396
-msgid "Save as...\tF12"
-msgstr "새이름으로 저장\tF12"
-
-#: gtkedit/editmenu.c:398
-msgid "Insert file...\tF15"
-msgstr "파일 끼워넣기...\tF15"
-
-#: gtkedit/editmenu.c:399
-msgid "Copy to file...\tC-f"
-msgstr "파일로 복사...\tC-f"
-
-#. Tool hint
-#: gtkedit/editmenu.c:402
-msgid "Disk operations"
-msgstr "디스크 조작"
-
-#: gtkedit/editmenu.c:408
-msgid "Toggle mark\tF3"
-msgstr "마크 토글\tF3"
-
-#: gtkedit/editmenu.c:409
-msgid "Toggle mark columns\tC-b"
-msgstr "컬럼 마크 토글\tC-b"
-
-#: gtkedit/editmenu.c:411
-msgid "Toggle insert/overwrite\tIns"
-msgstr "삽입/겹침 토글\tIns"
-
-#: gtkedit/editmenu.c:413
-msgid "Copy block to cursor\tF5"
-msgstr "블럭을 커서위치로 복사\tF5"
-
-#: gtkedit/editmenu.c:414
-msgid "Move block to cursor\tF6"
-msgstr "블럭을 커서위치로 이동\tF6"
-
-#: gtkedit/editmenu.c:415
-msgid "Delete block\tF8/C-Del"
-msgstr "블럭 삭제\tF8/C-Del"
-
-#: gtkedit/editmenu.c:417
-msgid "Copy block to clipbrd\tC-Ins"
-msgstr "블럭을 클립보드로 복사\tC-Ins"
-
-#: gtkedit/editmenu.c:418
-msgid "Cut block to clipbrd\tS-Del"
-msgstr "블럭을 클립보드로 오려두기\tS-Del"
-
-#: gtkedit/editmenu.c:419
-msgid "Paste block from clipbrd\tS-Ins"
-msgstr "클립보드에서 블럭 붙이기\tS-Ins"
-
-#: gtkedit/editmenu.c:420
-msgid "Selection history\tM-Ins"
-msgstr "선택 히스토리\tM-Ins"
-
-#: gtkedit/editmenu.c:422
-msgid "Undo\tC-BackSpace"
-msgstr "취소\tC-BackSpace"
-
-#. Tool hint
-#: gtkedit/editmenu.c:425
-msgid "Manipulating blocks of text"
-msgstr "텍스트 블럭 조작"
-
-#: gtkedit/editmenu.c:430
-msgid " Srch/Replce "
-msgstr " 찾기/바꿈 "
-
-#: gtkedit/editmenu.c:431
-msgid "Search...\tF7"
-msgstr "찾기...\tF7"
-
-#: gtkedit/editmenu.c:432
-msgid "Search again\tF17"
-msgstr "다시 찾기\tF17"
-
-#: gtkedit/editmenu.c:433
-msgid "Replace...\tF4"
-msgstr "바꿈...\tF4"
-
-#: gtkedit/editmenu.c:434
-msgid "Replace again\tF14"
-msgstr "모두 바꿈\tF14"
-
-#. Tool hint
-#: gtkedit/editmenu.c:437
-msgid "Search for and replace text"
-msgstr "찾아서 바꿀 문자열"
-
-#: gtkedit/editmenu.c:443
-msgid "Goto line...\tM-l"
-msgstr "라인 찾아가기...\tM-l"
-
-#: gtkedit/editmenu.c:445
-msgid "Start record macro\tC-r"
-msgstr "매크로 저장 시작\tC-r"
-
-#: gtkedit/editmenu.c:446
-msgid "Finish record macro...\tC-r"
-msgstr "매크로 저장 끝...\tC-r"
-
-#: gtkedit/editmenu.c:447
-msgid "Execute macro...\tC-a, KEY"
-msgstr "매크로 실행...\tC-a, KEY"
-
-#: gtkedit/editmenu.c:448
-msgid "Delete macro...\t"
-msgstr "매크로 삭제...\t"
-
-#: gtkedit/editmenu.c:450
-msgid "Insert date/time\tC-d"
-msgstr "날짜/시간 삽입\tC-d"
-
-#: gtkedit/editmenu.c:451
-msgid "Format paragraph\tM-p"
-msgstr "Format paragraph\tM-p"
-
-#: gtkedit/editmenu.c:453
-msgid "Refresh display\tC-l"
-msgstr "화면 갱신\tC-l"
-
-#. Tool hint
-#: gtkedit/editmenu.c:456
-msgid "Macros and internal commands"
-msgstr "매크로와 내장 명령"
-
 #: gtkedit/editoptions.c:37
 msgid "None"
 msgstr ""
@@ -1876,9 +1522,8 @@ msgstr "글쇠 에뮬레이션"
 msgid "Error initialising editor.\n"
 msgstr "Error initialising editor.\n"
 
-#: gtkedit/editwidget.c:1060 gtkedit/gtkedit.c:1368 src/help.c:806
-#: src/main.c:1668 src/screen.c:2284 src/screen.c:2314 src/tree.c:1018
-#: src/view.c:1959
+#: gtkedit/editwidget.c:1060 src/help.c:806 src/main.c:1668 src/screen.c:2284
+#: src/screen.c:2314 src/tree.c:1018 src/view.c:1959
 msgid "Help"
 msgstr "도움말"
 
@@ -1918,120 +1563,28 @@ msgstr ""
 "gtkedit.c: HOME 환경변수가 설정되지 않았고, passwd 파일에도 없음 - 중단\n"
 
 #: gtkedit/gtkedit.c:1289
-msgid "Open/Load"
-msgstr "열기/가져오기"
-
-#: gtkedit/gtkedit.c:1289
-msgid "Load a different/new file"
-msgstr "다른 혹은 새로운 파일 읽어오기"
-
-#: gtkedit/gtkedit.c:1292
-msgid "New"
-msgstr "새 글"
-
-#: gtkedit/gtkedit.c:1292
 msgid "Clear the edit buffer"
 msgstr "편집 버퍼 지우기"
 
-#: gtkedit/gtkedit.c:1296
-msgid "Save the current edit buffer to filename"
-msgstr "현재의 편집 버퍼를 파일이름으로 저장"
-
-#: gtkedit/gtkedit.c:1299
-msgid "Save As"
-msgstr "새이름으로 저장"
-
-#: gtkedit/gtkedit.c:1299
-msgid "Save the current edit buffer as filename"
-msgstr "현재의 편집 버퍼를 파일이름으로서 저장"
-
-#: gtkedit/gtkedit.c:1303
+#: gtkedit/gtkedit.c:1294
 msgid "Insert File"
 msgstr "파일 끼워넣기"
 
-#: gtkedit/gtkedit.c:1303
+#: gtkedit/gtkedit.c:1294
 msgid "Insert text from a file"
 msgstr "파일에서 글월 끼워넣기"
 
-#: gtkedit/gtkedit.c:1306
+#: gtkedit/gtkedit.c:1296
 msgid "Copy to file"
 msgstr "파일로 복사"
 
-#: gtkedit/gtkedit.c:1306
+#: gtkedit/gtkedit.c:1296
 msgid "copy a block to a file"
 msgstr "블럭을 파일로 복사"
 
-#: gtkedit/gtkedit.c:1310
-msgid "Exit"
-msgstr "종료"
-
-#: gtkedit/gtkedit.c:1310
-msgid "Quit editor"
-msgstr "편집기 종료"
-
-#: gtkedit/gtkedit.c:1318
-msgid "Copy selection to clipboard"
-msgstr "선택된 내용을 클립보드로 복사"
-
-#: gtkedit/gtkedit.c:1321
-msgid "Cut"
-msgstr "자르기"
-
-#: gtkedit/gtkedit.c:1321
-msgid "Cut selection to clipboard"
-msgstr "선택된 내용을 클립보드로 오려두기"
-
-#: gtkedit/gtkedit.c:1324
-msgid "Paste"
-msgstr "붙이기"
-
-#: gtkedit/gtkedit.c:1324
-msgid "Paste clipboard"
-msgstr "클립보드에서 붙이기"
-
-#: gtkedit/gtkedit.c:1328
-msgid "Undo"
-msgstr "편집 취소"
-
-#: gtkedit/gtkedit.c:1328
-msgid "Go back in time one key press"
-msgstr "하나의 글쇠입력을 취소"
-
 #: gtkedit/gtkedit.c:1336
-msgid "Find"
-msgstr "찾기"
-
-#: gtkedit/gtkedit.c:1336
-msgid "Find string/regular expression"
-msgstr "문자열/정규식 찾기"
-
-#: gtkedit/gtkedit.c:1339
-msgid "Find again"
-msgstr "다시 찾기"
-
-#: gtkedit/gtkedit.c:1339
-msgid "Repeat most recent search"
-msgstr "가장 최근의 찾기를 반복"
-
-#: gtkedit/gtkedit.c:1342 gtkedit/gtkedit.c:1367
 msgid "Search/Replace"
 msgstr "찾기/바꿈"
-
-#: gtkedit/gtkedit.c:1342
-msgid "Find and replace text/regular expressions"
-msgstr "글월/정규식을 찾아서 바꾸기"
-
-#: gtkedit/gtkedit.c:1351
-msgid "About..."
-msgstr "이 프로그램은..."
-
-#: gtkedit/gtkedit.c:1351
-msgid "Info about Mcedit"
-msgstr "Mcedit에 대한 정보"
-
-#: gtkedit/gtkedit.c:1365 src/filegui.c:404
-msgid "File"
-msgstr "파일"
 
 #: gtkedit/syntax.c:3180 gtkedit/syntax.c:3187
 msgid " Load syntax file "
@@ -2395,6 +1948,10 @@ msgstr " Chmod 명령 "
 msgid " Permission "
 msgstr " 허용 "
 
+#: src/chmod.c:164 src/chown.c:130
+msgid " File "
+msgstr " 파일 "
+
 #: src/chmod.c:169
 msgid "Use SPACE to change"
 msgstr "바꿀려면 SPACE 사용"
@@ -2602,16 +2159,11 @@ msgstr ""
 " 패널을 서로 바꿀 수 없습니다. "
 
 #: src/cmd.c:967
-msgid ""
-"Type `exit' to return to the Midnight Commander\n"
-"\r\n"
-"\r"
-msgstr ""
-"The Midnight Commander로 돌아가려면 'exit'을 입력하십시오\n"
-"\r\n"
-"\r"
+#, fuzzy
+msgid "Type `exit' to return to the Midnight Commander"
+msgstr "The Midnight Commander로 돌아가려면 'exit'을 입력하십시오"
 
-#: src/cmd.c:1020
+#: src/cmd.c:1022
 #, c-format
 msgid ""
 " Couldn't stat %s \n"
@@ -2620,92 +2172,92 @@ msgstr ""
 " %s 파일정보를 얻을 수 없어요 \n"
 " %s "
 
-#: src/cmd.c:1029 src/cmd.c:1031
+#: src/cmd.c:1031 src/cmd.c:1033
 msgid " Link "
 msgstr " 링크 "
 
-#: src/cmd.c:1030 src/cmd.c:1135 src/file.c:1621
+#: src/cmd.c:1032 src/cmd.c:1137 src/file.c:1621
 msgid " to:"
 msgstr " 대상:"
 
-#: src/cmd.c:1041
+#: src/cmd.c:1043
 #, c-format
 msgid " link: %s "
 msgstr " 링크: %s "
 
-#: src/cmd.c:1074
+#: src/cmd.c:1076
 #, c-format
 msgid " symlink: %s "
 msgstr " 심볼릭링크: %s "
 
-#: src/cmd.c:1100
+#: src/cmd.c:1102
 msgid " Symlink "
 msgstr " 심볼릭링크 "
 
-#: src/cmd.c:1100
+#: src/cmd.c:1102
 msgid " points to:"
 msgstr " 가 가리킬 파일:"
 
-#: src/cmd.c:1105
+#: src/cmd.c:1107
 msgid " Edit symlink "
 msgstr " 심볼릭링크 수정 "
 
-#: src/cmd.c:1111
+#: src/cmd.c:1113
 #, c-format
 msgid " edit symlink: %s "
 msgstr " 심볼릭링크 수정: %s "
 
-#: src/cmd.c:1135
+#: src/cmd.c:1137
 msgid " Link symbolically "
 msgstr " Link symbolically "
 
-#: src/cmd.c:1136
+#: src/cmd.c:1138
 msgid " Relative symlink "
 msgstr " Relative symlink "
 
-#: src/cmd.c:1147
+#: src/cmd.c:1149
 #, c-format
 msgid " relative symlink: %s "
 msgstr " relative symlink: %s "
 
-#: src/cmd.c:1250
+#: src/cmd.c:1252
 msgid " Enter machine name (F1 for details): "
 msgstr " 호스트 이름 입력 (도움말 F1): "
 
-#: src/cmd.c:1274
+#: src/cmd.c:1276
 #, c-format
 msgid " Could not chdir to %s "
 msgstr " %s로 자료방을 바꿀 수 없음 "
 
-#: src/cmd.c:1281
+#: src/cmd.c:1283
 msgid " Link to a remote machine "
 msgstr " 원격 호스트에 연결 "
 
-#: src/cmd.c:1287
+#: src/cmd.c:1289
 msgid " FTP to machine "
 msgstr " FTP 연결 "
 
-#: src/cmd.c:1297
+#: src/cmd.c:1299
 msgid " Socket source routing setup "
 msgstr " 소켓 소스 라우팅 설정 "
 
-#: src/cmd.c:1298
+#: src/cmd.c:1300
 msgid " Enter host name to use as a source routing hop: "
 msgstr " 원천 라우팅 홉을 사용하기 위한 호스트 이름: "
 
-#: src/cmd.c:1305
+#: src/cmd.c:1307
 msgid " Host name "
 msgstr " 호스트 이름 "
 
-#: src/cmd.c:1305
+#: src/cmd.c:1307
 msgid " Error while looking up IP address "
 msgstr " IP 주소 찾는 중 오류 발생 "
 
-#: src/cmd.c:1316
+#: src/cmd.c:1318
 msgid " Undelete files on an ext2 file system "
 msgstr " ext2 파일체계에서 파일 되살림 "
 
-#: src/cmd.c:1317
+#: src/cmd.c:1319
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -2713,11 +2265,11 @@ msgstr ""
 " 파일을 복구하기 위해 '/dev/'를 생략한 디바이스명\n"
 "   입력: (자세히 알기 원하면 F1)"
 
-#: src/cmd.c:1367
+#: src/cmd.c:1369
 msgid " Setup saved to ~/"
 msgstr " Setup saved to ~/"
 
-#: src/cmd.c:1372
+#: src/cmd.c:1374
 msgid " Setup "
 msgstr " 환경설정 "
 
@@ -3343,6 +2895,10 @@ msgstr " Recursive 지우기 "
 #: src/file.c:2187
 msgid " Background process: Recursive Delete "
 msgstr " 백그라운드 프로세스: Recursive 지우기 "
+
+#: src/filegui.c:404
+msgid "File"
+msgstr "파일"
 
 #: src/filegui.c:425
 msgid "Count"
@@ -4241,6 +3797,10 @@ msgstr "메뉴 파일 수정(&M)"
 #: src/main.c:1301
 msgid "&Configuration..."
 msgstr "환경설정(&C)..."
+
+#: src/main.c:1302
+msgid "&Layout..."
+msgstr "배치(&L)..."
 
 #: src/main.c:1303
 msgid "c&Onfirmation..."
@@ -5194,7 +4754,7 @@ msgstr "아카이브 파일에서 기대되지 않은 EOF"
 msgid "Inconsistent tar archive"
 msgstr "잘못된 테잎 아카이브"
 
-#: vfs/tar.c:412
+#: vfs/tar.c:411
 #, c-format
 msgid ""
 "Hmm,...\n"
@@ -5204,3 +4764,326 @@ msgstr ""
 "흠,...\n"
 "%s\n"
 "테잎 아카이브 파일같지 않습니다."
+
+#~ msgid " Word wrap "
+#~ msgstr " Word wrap "
+
+#~ msgid " Enter line length, 0 for off: "
+#~ msgstr " 라인 길이를 입력, 0은 off: "
+
+#~ msgid " About "
+#~ msgstr " 이 프로그램은 "
+
+#~ msgid ""
+#~ "\n"
+#~ "                 Cooledit  v2.1\n"
+#~ "\n"
+#~ " Copyright (C) 1996 the Free Software Foundation\n"
+#~ "\n"
+#~ "       A user friendly text editor written\n"
+#~ "           for the Midnight Commander.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "                 Cooledit  v2.1\n"
+#~ "\n"
+#~ " Copyright (C) 1996 the Free Software Foundation\n"
+#~ "\n"
+#~ "         Midnight Commander를 위해 개발된\n"
+#~ "          사용자와 친근한 텍스트 편집기.\n"
+
+#~ msgid "&Open/load...     C-o"
+#~ msgstr "열기/불러오기(&O)...      C-o"
+
+#~ msgid "&New              C-n"
+#~ msgstr "새 파일(&N)               C-n"
+
+#~ msgid "&Save              F2"
+#~ msgstr "저장(_S)                   F3"
+
+#~ msgid "save &As...       F12"
+#~ msgstr "다른 이름으로 저장(&A)... M-d"
+
+#~ msgid "&Insert file...   F15"
+#~ msgstr "파일 끼워넣기(&I)...      F15"
+
+#~ msgid "copy to &File...  C-f"
+#~ msgstr "파일로 복사(&F)...        C-f"
+
+#~ msgid "a&Bout...            "
+#~ msgstr "이 프로그램은(&B)...         "
+
+#~ msgid "&Quit             F10"
+#~ msgstr "종료(&Q)                  F10"
+
+#~ msgid "&New            C-x k"
+#~ msgstr "새 파일(&N)             C-x l"
+
+#~ msgid "copy to &File...     "
+#~ msgstr "파일로 복사(&F)...           "
+
+#~ msgid "&Toggle Mark       F3"
+#~ msgstr "마크 토글(&T)              F3"
+
+#~ msgid "&Mark Columns    S-F3"
+#~ msgstr "컬럼 마크(&M)            S-F3"
+
+#~ msgid "toggle &Ins/overw Ins"
+#~ msgstr "삽입/겹침 토글(&I)        Ins"
+
+#~ msgid "&Copy              F5"
+#~ msgstr "복사(&C)                   F5"
+
+#~ msgid "&Move              F6"
+#~ msgstr "이동(&M)                   F6"
+
+#~ msgid "&Delete            F8"
+#~ msgstr "지우기(&D)                 F8"
+
+#~ msgid "&Undo             C-u"
+#~ msgstr "취소(&U)                  C-u"
+
+#~ msgid "&Beginning     C-PgUp"
+#~ msgstr "파일 처음(&B)          C-PgUp"
+
+#~ msgid "&End           C-PgDn"
+#~ msgstr "파일 끝(&E)            C-PgDn"
+
+#~ msgid "&Search...         F7"
+#~ msgstr "찾기(&S)...                F7"
+
+#~ msgid "search &Again     F17"
+#~ msgstr "다시 찾기(&A)             F17"
+
+#~ msgid "&Replace...        F4"
+#~ msgstr "바꾸기(&R)...              F4"
+
+#~ msgid "&Goto line...            M-l"
+#~ msgstr "라인 찾아가기(&G)...      M-l"
+
+#~ msgid "insert &Literal...       C-q"
+#~ msgstr "Literal 입력(&L)          C-q"
+
+#~ msgid "&Refresh screen          C-l"
+#~ msgstr "화면 갱신(&R)             C-l"
+
+#~ msgid "&Start record macro      C-r"
+#~ msgstr "매크로 저장 시작(&S)      C-r"
+
+#~ msgid "&Finish record macro...  C-r"
+#~ msgstr "매크로 저장 끝(&F)        C-r"
+
+#~ msgid "&Execute macro...   C-a, KEY"
+#~ msgstr "매크로 실행(&E)...   C-a, KEY"
+
+#~ msgid "delete macr&O...            "
+#~ msgstr "매크로 삭제(&O)...           "
+
+#~ msgid "insert &Date/time           "
+#~ msgstr "날짜/시간 삽입(&D)           "
+
+#~ msgid "format p&Aragraph        M-p"
+#~ msgstr "format p&Aragraph         M-p"
+
+#~ msgid "'ispell' s&Pell check    C-p"
+#~ msgstr "'ispell' 철자 검사(&P)    C-p"
+
+#~ msgid "sor&T...                 M-t"
+#~ msgstr "정렬(&T)                  M-t"
+
+#~ msgid "'indent' &C Formatter    F19"
+#~ msgstr "'indent' &C Formatter     F19"
+
+#~ msgid "&Mail...                    "
+#~ msgstr "전자우편(&M)...              "
+
+#~ msgid "&Execute macro... C-x e, KEY"
+#~ msgstr "매크로 실행(&E)... C-x e, KEY"
+
+#~ msgid "'ispell' s&Pell check    M-$"
+#~ msgstr "'ispell' 철자 검사(&P)    M-$"
+
+#~ msgid "&General...  "
+#~ msgstr "일반(&G)...  "
+
+#~ msgid "&Save mode..."
+#~ msgstr "모드 저장(&S)..."
+
+#~ msgid " Edit "
+#~ msgstr " 편집 "
+
+#~ msgid " Sear/Repl "
+#~ msgstr " 찾기/바꿈 "
+
+#~ msgid " Command "
+#~ msgstr " 명령 "
+
+#~ msgid " Options "
+#~ msgstr " 선택항목 "
+
+#~ msgid "Open...\tC-o"
+#~ msgstr "열기...\tC-o"
+
+#~ msgid "New\tC-n"
+#~ msgstr "새 글\tC-n"
+
+#~ msgid "Save\tF2"
+#~ msgstr "저장\tF2"
+
+#~ msgid "Save as...\tF12"
+#~ msgstr "새이름으로 저장\tF12"
+
+#~ msgid "Insert file...\tF15"
+#~ msgstr "파일 끼워넣기...\tF15"
+
+#~ msgid "Copy to file...\tC-f"
+#~ msgstr "파일로 복사...\tC-f"
+
+#~ msgid "Disk operations"
+#~ msgstr "디스크 조작"
+
+#~ msgid "Toggle mark\tF3"
+#~ msgstr "마크 토글\tF3"
+
+#~ msgid "Toggle mark columns\tC-b"
+#~ msgstr "컬럼 마크 토글\tC-b"
+
+#~ msgid "Toggle insert/overwrite\tIns"
+#~ msgstr "삽입/겹침 토글\tIns"
+
+#~ msgid "Copy block to cursor\tF5"
+#~ msgstr "블럭을 커서위치로 복사\tF5"
+
+#~ msgid "Move block to cursor\tF6"
+#~ msgstr "블럭을 커서위치로 이동\tF6"
+
+#~ msgid "Delete block\tF8/C-Del"
+#~ msgstr "블럭 삭제\tF8/C-Del"
+
+#~ msgid "Copy block to clipbrd\tC-Ins"
+#~ msgstr "블럭을 클립보드로 복사\tC-Ins"
+
+#~ msgid "Cut block to clipbrd\tS-Del"
+#~ msgstr "블럭을 클립보드로 오려두기\tS-Del"
+
+#~ msgid "Paste block from clipbrd\tS-Ins"
+#~ msgstr "클립보드에서 블럭 붙이기\tS-Ins"
+
+#~ msgid "Selection history\tM-Ins"
+#~ msgstr "선택 히스토리\tM-Ins"
+
+#~ msgid "Undo\tC-BackSpace"
+#~ msgstr "취소\tC-BackSpace"
+
+#~ msgid "Manipulating blocks of text"
+#~ msgstr "텍스트 블럭 조작"
+
+#~ msgid " Srch/Replce "
+#~ msgstr " 찾기/바꿈 "
+
+#~ msgid "Search...\tF7"
+#~ msgstr "찾기...\tF7"
+
+#~ msgid "Search again\tF17"
+#~ msgstr "다시 찾기\tF17"
+
+#~ msgid "Replace...\tF4"
+#~ msgstr "바꿈...\tF4"
+
+#~ msgid "Replace again\tF14"
+#~ msgstr "모두 바꿈\tF14"
+
+#~ msgid "Search for and replace text"
+#~ msgstr "찾아서 바꿀 문자열"
+
+#~ msgid "Goto line...\tM-l"
+#~ msgstr "라인 찾아가기...\tM-l"
+
+#~ msgid "Start record macro\tC-r"
+#~ msgstr "매크로 저장 시작\tC-r"
+
+#~ msgid "Finish record macro...\tC-r"
+#~ msgstr "매크로 저장 끝...\tC-r"
+
+#~ msgid "Execute macro...\tC-a, KEY"
+#~ msgstr "매크로 실행...\tC-a, KEY"
+
+#~ msgid "Delete macro...\t"
+#~ msgstr "매크로 삭제...\t"
+
+#~ msgid "Insert date/time\tC-d"
+#~ msgstr "날짜/시간 삽입\tC-d"
+
+#~ msgid "Format paragraph\tM-p"
+#~ msgstr "Format paragraph\tM-p"
+
+#~ msgid "Refresh display\tC-l"
+#~ msgstr "화면 갱신\tC-l"
+
+#~ msgid "Macros and internal commands"
+#~ msgstr "매크로와 내장 명령"
+
+#~ msgid "Open/Load"
+#~ msgstr "열기/가져오기"
+
+#~ msgid "Load a different/new file"
+#~ msgstr "다른 혹은 새로운 파일 읽어오기"
+
+#~ msgid "New"
+#~ msgstr "새 글"
+
+#~ msgid "Save the current edit buffer to filename"
+#~ msgstr "현재의 편집 버퍼를 파일이름으로 저장"
+
+#~ msgid "Save As"
+#~ msgstr "새이름으로 저장"
+
+#~ msgid "Save the current edit buffer as filename"
+#~ msgstr "현재의 편집 버퍼를 파일이름으로서 저장"
+
+#~ msgid "Exit"
+#~ msgstr "종료"
+
+#~ msgid "Quit editor"
+#~ msgstr "편집기 종료"
+
+#~ msgid "Copy selection to clipboard"
+#~ msgstr "선택된 내용을 클립보드로 복사"
+
+#~ msgid "Cut"
+#~ msgstr "자르기"
+
+#~ msgid "Cut selection to clipboard"
+#~ msgstr "선택된 내용을 클립보드로 오려두기"
+
+#~ msgid "Paste"
+#~ msgstr "붙이기"
+
+#~ msgid "Paste clipboard"
+#~ msgstr "클립보드에서 붙이기"
+
+#~ msgid "Undo"
+#~ msgstr "편집 취소"
+
+#~ msgid "Go back in time one key press"
+#~ msgstr "하나의 글쇠입력을 취소"
+
+#~ msgid "Find"
+#~ msgstr "찾기"
+
+#~ msgid "Find string/regular expression"
+#~ msgstr "문자열/정규식 찾기"
+
+#~ msgid "Find again"
+#~ msgstr "다시 찾기"
+
+#~ msgid "Repeat most recent search"
+#~ msgstr "가장 최근의 찾기를 반복"
+
+#~ msgid "Find and replace text/regular expressions"
+#~ msgstr "글월/정규식을 찾아서 바꾸기"
+
+#~ msgid "About..."
+#~ msgstr "이 프로그램은..."
+
+#~ msgid "Info about Mcedit"
+#~ msgstr "Mcedit에 대한 정보"

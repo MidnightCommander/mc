@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc VERSION\n"
-"POT-Creation-Date: 1999-02-03 21:58-0500\n"
+"POT-Creation-Date: 1999-02-08 08:12-0500\n"
 "PO-Revision-Date: 1998-04-28 12:50+0300\n"
 "Last-Translator: Alex Tkachenko <alex@bcs.zp.ua>\n"
 "Language-Team: russian <LL@li.org>\n"
@@ -157,22 +157,22 @@ msgstr " Команда "
 msgid "Command: "
 msgstr "Команда"
 
-#: gnome/gcmd.c:557
+#: gnome/gcmd.c:574
 #, fuzzy
 msgid "Set Filter"
 msgstr " Фильтр "
 
-#: gnome/gcmd.c:562 gnome/gcmd.c:603 gnome/gcmd.c:608 gnome/gcmd.c:612
-#: gnome/gscreen.c:2489
+#: gnome/gcmd.c:579 gnome/gcmd.c:620 gnome/gcmd.c:625 gnome/gcmd.c:629
+#: gnome/gscreen.c:2484
 #, fuzzy
 msgid "Show all files"
 msgstr "Смешивать &файлы/каталоги"
 
-#: gnome/gcmd.c:569
+#: gnome/gcmd.c:586
 msgid "."
 msgstr ""
 
-#: gnome/gcmd.c:585
+#: gnome/gcmd.c:602
 msgid ""
 "Enter a filter here for files in the panel view.\n"
 "\n"
@@ -180,39 +180,39 @@ msgid ""
 "*.gif will show just gif images"
 msgstr ""
 
-#: gnome/gcmd.c:587
+#: gnome/gcmd.c:604
 msgid "Enter a Regular Expression to filter files in the panel view."
 msgstr ""
 
-#: gnome/gcmd.c:644 gnome/gpopup.c:49
+#: gnome/gcmd.c:661 gnome/gpopup.c:49
 msgid " Open with..."
 msgstr ""
 
-#: gnome/gcmd.c:645 gnome/gpopup.c:50
+#: gnome/gcmd.c:662 gnome/gpopup.c:50
 msgid "Enter extra arguments:"
 msgstr ""
 
-#: gnome/gdesktop.c:347 gnome/gdesktop.c:1485
+#: gnome/gdesktop.c:350 gnome/gdesktop.c:1553
 #, fuzzy
 msgid "Warning"
 msgstr " Предупреждение "
 
-#: gnome/gdesktop.c:348
+#: gnome/gdesktop.c:351
 #, c-format
 msgid "Could not open %s; will not have desktop icons"
 msgstr ""
 
-#: gnome/gdesktop.c:1451
+#: gnome/gdesktop.c:1519
 msgid "Trashcan"
 msgstr ""
 
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop.c:1481
+#: gnome/gdesktop.c:1549
 #, fuzzy
 msgid "Home directory"
 msgstr "каталог"
 
-#: gnome/gdesktop.c:1486
+#: gnome/gdesktop.c:1554
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial desktop icons."
 msgstr ""
@@ -284,8 +284,8 @@ msgstr "Файл-приемник \"%s\" уже существует!"
 msgid "Replace it?"
 msgstr " Заменить "
 
-#: gnome/gdialogs.c:532 gtkedit/editwidget.c:1064 gtkedit/gtkedit.c:1318
-#: src/file.c:784 src/screen.c:2288 src/screen.c:2318 src/tree.c:1024
+#: gnome/gdialogs.c:532 gtkedit/editwidget.c:1064 src/file.c:784
+#: src/screen.c:2288 src/screen.c:2318 src/tree.c:1024
 msgid "Copy"
 msgstr "Копия"
 
@@ -373,28 +373,28 @@ msgstr " &Да "
 msgid " Done."
 msgstr ""
 
-#: gnome/gdnd.c:50
+#: gnome/gdnd.c:51
 #, fuzzy
 msgid "_Move here"
 msgstr " Перемещение "
 
-#: gnome/gdnd.c:51
+#: gnome/gdnd.c:52
 #, fuzzy
 msgid "_Copy here"
 msgstr " Копирование "
 
-#: gnome/gdnd.c:52
+#: gnome/gdnd.c:53
 #, fuzzy
 msgid "_Link here"
 msgstr "Строка"
 
-#: gnome/gdnd.c:54
+#: gnome/gdnd.c:55
 #, fuzzy
 msgid "Cancel drag"
 msgstr " Прервать "
 
 #. FIXME: this error message sucks
-#: gnome/gdnd.c:190
+#: gnome/gdnd.c:191
 #, fuzzy, c-format
 msgid ""
 "Could not stat %s\n"
@@ -655,52 +655,51 @@ msgstr "Помощь"
 msgid "File/New/Directory..."
 msgstr "каталог"
 
-#: gnome/gpopup.c:215 gnome/gpopup.c:216
+#: gnome/gpopup.c:222 gnome/gpopup.c:223
 msgid "Properties"
 msgstr ""
 
-#: gnome/gpopup.c:218 gnome/gpopup.c:219
+#: gnome/gpopup.c:225 gnome/gpopup.c:226
 msgid "Open"
 msgstr ""
 
-#: gnome/gpopup.c:220
+#: gnome/gpopup.c:227
 msgid "Open with"
 msgstr ""
 
-#: gnome/gpopup.c:221 src/screen.c:2286 src/screen.c:2316
+#: gnome/gpopup.c:228 src/screen.c:2286 src/screen.c:2316
 msgid "View"
 msgstr ""
 
-#: gnome/gpopup.c:222
+#: gnome/gpopup.c:229
 msgid "View unfiltered"
 msgstr ""
 
-#: gnome/gpopup.c:223 gtkedit/gtkedit.c:1366 src/screen.c:2287
-#: src/screen.c:2317 src/view.c:1968
+#: gnome/gpopup.c:230 src/screen.c:2287 src/screen.c:2317 src/view.c:1968
 msgid "Edit"
 msgstr "Правка"
 
-#: gnome/gpopup.c:225
+#: gnome/gpopup.c:232
 msgid "Link..."
 msgstr ""
 
-#: gnome/gpopup.c:226
+#: gnome/gpopup.c:233
 msgid "Symlink..."
 msgstr ""
 
-#: gnome/gpopup.c:227
+#: gnome/gpopup.c:234
 msgid "Edit symlink..."
 msgstr ""
 
-#: gnome/gpopup.c:234 gnome/gpopup.c:245
+#: gnome/gpopup.c:241 gnome/gpopup.c:252
 msgid "Move/rename..."
 msgstr ""
 
-#: gnome/gpopup.c:235 gnome/gpopup.c:246
+#: gnome/gpopup.c:242 gnome/gpopup.c:253
 msgid "Copy..."
 msgstr ""
 
-#: gnome/gpopup.c:236 gnome/gpopup.c:248 gtkedit/editwidget.c:1067
+#: gnome/gpopup.c:243 gnome/gpopup.c:255 gtkedit/editwidget.c:1067
 #: src/screen.c:2291 src/screen.c:2321
 msgid "Delete"
 msgstr ""
@@ -772,7 +771,7 @@ msgid "FTP directory cache timeout :"
 msgstr ""
 
 #: gnome/gprefs.c:167
-msgid "Allow customization of icons in panels"
+msgid "Allow customization of icons in icon view"
 msgstr ""
 
 #: gnome/gprefs.c:176
@@ -1049,7 +1048,7 @@ msgstr "&Домашний"
 msgid "Go to your home directory"
 msgstr "каталог"
 
-#: gnome/gscreen.c:2438
+#: gnome/gscreen.c:2429
 msgid "Location:"
 msgstr ""
 
@@ -1287,8 +1286,7 @@ msgstr " Подтверждаете запись файла?: "
 msgid " Save file "
 msgstr " Сохранить файл "
 
-#: gtkedit/editcmd.c:774 gtkedit/editwidget.c:1061 gtkedit/gtkedit.c:1296
-#: src/view.c:1964
+#: gtkedit/editcmd.c:774 gtkedit/editwidget.c:1061 src/view.c:1964
 msgid "Save"
 msgstr "Запись"
 
@@ -1573,373 +1571,6 @@ msgstr ""
 msgid " Mail "
 msgstr " Почта "
 
-#: gtkedit/editmenu.c:56
-msgid " Word wrap "
-msgstr ""
-
-#. Not essential to translate
-#: gtkedit/editmenu.c:58
-msgid " Enter line length, 0 for off: "
-msgstr ""
-
-#: gtkedit/editmenu.c:69
-#, fuzzy
-msgid " About "
-msgstr "&Прервать"
-
-#: gtkedit/editmenu.c:70
-msgid ""
-"\n"
-"                 Cooledit  v2.1\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-
-#: gtkedit/editmenu.c:118 gtkedit/editmenu.c:134
-msgid "&Open/load...     C-o"
-msgstr "&Открыть файл...      C-o"
-
-#: gtkedit/editmenu.c:119
-msgid "&New              C-n"
-msgstr "&Новый файл           C-n"
-
-#: gtkedit/editmenu.c:121 gtkedit/editmenu.c:137
-msgid "&Save              F2"
-msgstr "&Сохранить             F2"
-
-#: gtkedit/editmenu.c:122 gtkedit/editmenu.c:138
-msgid "save &As...       F12"
-msgstr "Сохранить &как...     F12"
-
-#: gtkedit/editmenu.c:124 gtkedit/editmenu.c:140
-msgid "&Insert file...   F15"
-msgstr "&Вставить файл...     F15"
-
-#: gtkedit/editmenu.c:125
-msgid "copy to &File...  C-f"
-msgstr "&Копировать в файл... C-f"
-
-#: gtkedit/editmenu.c:127 gtkedit/editmenu.c:143
-msgid "a&Bout...            "
-msgstr "Об &авторах..."
-
-#: gtkedit/editmenu.c:129 gtkedit/editmenu.c:145
-msgid "&Quit             F10"
-msgstr "Вы&ход                F10"
-
-#: gtkedit/editmenu.c:135
-msgid "&New            C-x k"
-msgstr "&Новый файл         C-x k"
-
-#: gtkedit/editmenu.c:141
-msgid "copy to &File...     "
-msgstr "&Копировать в файл...     "
-
-#: gtkedit/editmenu.c:150 gtkedit/editmenu.c:167
-msgid "&Toggle Mark       F3"
-msgstr "&Выделение блока        F3"
-
-#: gtkedit/editmenu.c:151 gtkedit/editmenu.c:168
-msgid "&Mark Columns    S-F3"
-msgstr ""
-
-#: gtkedit/editmenu.c:153 gtkedit/editmenu.c:170
-msgid "toggle &Ins/overw Ins"
-msgstr "&Режим вставки/замены  Ins"
-
-#: gtkedit/editmenu.c:155 gtkedit/editmenu.c:172
-msgid "&Copy              F5"
-msgstr "&Копировать блок        F5"
-
-#: gtkedit/editmenu.c:156 gtkedit/editmenu.c:173
-msgid "&Move              F6"
-msgstr "&Переместить блок       F6"
-
-#: gtkedit/editmenu.c:157 gtkedit/editmenu.c:174
-msgid "&Delete            F8"
-msgstr "&Удалить блок           F8"
-
-#: gtkedit/editmenu.c:159 gtkedit/editmenu.c:176
-msgid "&Undo             C-u"
-msgstr "&Откат операции        C-u"
-
-#: gtkedit/editmenu.c:161 gtkedit/editmenu.c:178
-msgid "&Beginning     C-PgUp"
-msgstr "&Начало файла       C-PgUp"
-
-#: gtkedit/editmenu.c:162 gtkedit/editmenu.c:179
-msgid "&End           C-PgDn"
-msgstr "Конец &файла        C-PgDn"
-
-#: gtkedit/editmenu.c:184 gtkedit/editmenu.c:191
-msgid "&Search...         F7"
-msgstr "&Поиск...          F7"
-
-#: gtkedit/editmenu.c:185 gtkedit/editmenu.c:192
-msgid "search &Again     F17"
-msgstr "&Искать дальше    F17"
-
-#: gtkedit/editmenu.c:186 gtkedit/editmenu.c:193
-msgid "&Replace...        F4"
-msgstr "&Замена...         F4"
-
-#: gtkedit/editmenu.c:198 gtkedit/editmenu.c:220
-msgid "&Goto line...            M-l"
-msgstr "&Перейти к строке           M-l"
-
-#: gtkedit/editmenu.c:200 gtkedit/editmenu.c:222
-msgid "insert &Literal...       C-q"
-msgstr "Вставить &литерал...        C-q"
-
-#: gtkedit/editmenu.c:202 gtkedit/editmenu.c:224
-msgid "&Refresh screen          C-l"
-msgstr "Пере&рисовать экран         C-l"
-
-#: gtkedit/editmenu.c:204 gtkedit/editmenu.c:226
-msgid "&Start record macro      C-r"
-msgstr "&Начать запись макроса      C-r"
-
-#: gtkedit/editmenu.c:205 gtkedit/editmenu.c:227
-msgid "&Finish record macro...  C-r"
-msgstr "&Окончить запись макроса... C-r"
-
-#: gtkedit/editmenu.c:206
-msgid "&Execute macro...   C-a, KEY"
-msgstr "&Выполнить макрос...   C-a, KEY"
-
-#: gtkedit/editmenu.c:207 gtkedit/editmenu.c:229
-msgid "delete macr&O...            "
-msgstr "&Удалить макрос"
-
-#: gtkedit/editmenu.c:209 gtkedit/editmenu.c:231
-msgid "insert &Date/time           "
-msgstr "Вставить &Дату/время"
-
-#: gtkedit/editmenu.c:211 gtkedit/editmenu.c:233
-msgid "format p&Aragraph        M-p"
-msgstr "Форматировать &абзац        M-p"
-
-#: gtkedit/editmenu.c:212
-msgid "'ispell' s&Pell check    C-p"
-msgstr "&Контроль орфографии        C-p"
-
-#: gtkedit/editmenu.c:213 gtkedit/editmenu.c:235
-msgid "sor&T...                 M-t"
-msgstr "&Сортировка                 M-t"
-
-#: gtkedit/editmenu.c:214 gtkedit/editmenu.c:236
-msgid "'indent' &C Formatter    F19"
-msgstr "&Форматировать С-программу  F19"
-
-#: gtkedit/editmenu.c:215
-msgid "&Mail...                    "
-msgstr "&Электронная почта...          "
-
-#: gtkedit/editmenu.c:228
-msgid "&Execute macro... C-x e, KEY"
-msgstr "&Выполнить макро...  C-x e, KEY"
-
-#: gtkedit/editmenu.c:234
-msgid "'ispell' s&Pell check    M-$"
-msgstr "&Контроль орфографии        M-$"
-
-#: gtkedit/editmenu.c:243 gtkedit/editmenu.c:252
-msgid "&General...  "
-msgstr "&Разное..."
-
-#: gtkedit/editmenu.c:244 gtkedit/editmenu.c:253
-msgid "&Save mode..."
-msgstr "Режим &сохранения..."
-
-#: gtkedit/editmenu.c:246 gtkedit/editmenu.c:255 src/main.c:1302
-msgid "&Layout..."
-msgstr "&Внешний вид"
-
-#. The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t'
-#: gtkedit/editmenu.c:265 gtkedit/editmenu.c:274 gtkedit/editmenu.c:391
-#: src/chmod.c:164 src/chown.c:130
-msgid " File "
-msgstr " Файл "
-
-#: gtkedit/editmenu.c:266 gtkedit/editmenu.c:275 gtkedit/editmenu.c:407
-msgid " Edit "
-msgstr " Редактирование "
-
-#: gtkedit/editmenu.c:267 gtkedit/editmenu.c:276
-#, fuzzy
-msgid " Sear/Repl "
-msgstr " Поиск "
-
-#: gtkedit/editmenu.c:268 gtkedit/editmenu.c:277 gtkedit/editmenu.c:442
-msgid " Command "
-msgstr " Команда "
-
-#: gtkedit/editmenu.c:269 gtkedit/editmenu.c:278
-#, fuzzy
-msgid " Options "
-msgstr " Настройка "
-
-#: gtkedit/editmenu.c:392
-msgid "Open...\tC-o"
-msgstr "Открыть...\tC-o"
-
-#: gtkedit/editmenu.c:393
-#, fuzzy
-msgid "New\tC-n"
-msgstr "Новый\tC-n"
-
-#: gtkedit/editmenu.c:395
-msgid "Save\tF2"
-msgstr "Сохранить\tF2"
-
-#: gtkedit/editmenu.c:396
-msgid "Save as...\tF12"
-msgstr "Сохранить как...\tF12"
-
-#: gtkedit/editmenu.c:398
-msgid "Insert file...\tF15"
-msgstr "Вставить файл...\tF15"
-
-#: gtkedit/editmenu.c:399
-#, fuzzy
-msgid "Copy to file...\tC-f"
-msgstr "&Копировать в файл... C-f"
-
-#. Tool hint
-#: gtkedit/editmenu.c:402
-msgid "Disk operations"
-msgstr "Дисковые операции"
-
-#: gtkedit/editmenu.c:408
-msgid "Toggle mark\tF3"
-msgstr "Выделение блока\tF3"
-
-#: gtkedit/editmenu.c:409
-#, fuzzy
-msgid "Toggle mark columns\tC-b"
-msgstr "Выделение блока\tF3"
-
-#: gtkedit/editmenu.c:411
-#, fuzzy
-msgid "Toggle insert/overwrite\tIns"
-msgstr "&Режим вставки/замены  Ins"
-
-#: gtkedit/editmenu.c:413
-msgid "Copy block to cursor\tF5"
-msgstr ""
-
-#: gtkedit/editmenu.c:414
-msgid "Move block to cursor\tF6"
-msgstr ""
-
-#: gtkedit/editmenu.c:415
-msgid "Delete block\tF8/C-Del"
-msgstr ""
-
-#: gtkedit/editmenu.c:417
-#, fuzzy
-msgid "Copy block to clipbrd\tC-Ins"
-msgstr " Скопировать в буфер "
-
-#: gtkedit/editmenu.c:418
-#, fuzzy
-msgid "Cut block to clipbrd\tS-Del"
-msgstr " Вырезать в буфер "
-
-#: gtkedit/editmenu.c:419
-msgid "Paste block from clipbrd\tS-Ins"
-msgstr ""
-
-#: gtkedit/editmenu.c:420
-msgid "Selection history\tM-Ins"
-msgstr ""
-
-#: gtkedit/editmenu.c:422
-msgid "Undo\tC-BackSpace"
-msgstr ""
-
-#. Tool hint
-#: gtkedit/editmenu.c:425
-msgid "Manipulating blocks of text"
-msgstr ""
-
-#: gtkedit/editmenu.c:430
-#, fuzzy
-msgid " Srch/Replce "
-msgstr " Поиск "
-
-#: gtkedit/editmenu.c:431
-#, fuzzy
-msgid "Search...\tF7"
-msgstr "Поиск"
-
-#: gtkedit/editmenu.c:432
-#, fuzzy
-msgid "Search again\tF17"
-msgstr "&Искать дальше    F17"
-
-#: gtkedit/editmenu.c:433
-#, fuzzy
-msgid "Replace...\tF4"
-msgstr "&Замена...         F4"
-
-#: gtkedit/editmenu.c:434
-#, fuzzy
-msgid "Replace again\tF14"
-msgstr "Заменить все"
-
-#. Tool hint
-#: gtkedit/editmenu.c:437
-#, fuzzy
-msgid "Search for and replace text"
-msgstr " Введите текст для замены: "
-
-#: gtkedit/editmenu.c:443
-#, fuzzy
-msgid "Goto line...\tM-l"
-msgstr "&Перейти к строке           M-l"
-
-#: gtkedit/editmenu.c:445
-#, fuzzy
-msgid "Start record macro\tC-r"
-msgstr "&Начать запись макроса      C-r"
-
-#: gtkedit/editmenu.c:446
-#, fuzzy
-msgid "Finish record macro...\tC-r"
-msgstr "&Окончить запись макроса... C-r"
-
-#: gtkedit/editmenu.c:447
-#, fuzzy
-msgid "Execute macro...\tC-a, KEY"
-msgstr "&Выполнить макрос...   C-a, KEY"
-
-#: gtkedit/editmenu.c:448
-#, fuzzy
-msgid "Delete macro...\t"
-msgstr " Удалить макрос "
-
-#: gtkedit/editmenu.c:450
-msgid "Insert date/time\tC-d"
-msgstr ""
-
-#: gtkedit/editmenu.c:451
-#, fuzzy
-msgid "Format paragraph\tM-p"
-msgstr "Форматировать &абзац        M-p"
-
-#: gtkedit/editmenu.c:453
-msgid "Refresh display\tC-l"
-msgstr ""
-
-#. Tool hint
-#: gtkedit/editmenu.c:456
-msgid "Macros and internal commands"
-msgstr ""
-
 #: gtkedit/editoptions.c:37
 msgid "None"
 msgstr ""
@@ -1967,9 +1598,8 @@ msgstr ""
 msgid "Error initialising editor.\n"
 msgstr ""
 
-#: gtkedit/editwidget.c:1060 gtkedit/gtkedit.c:1368 src/help.c:806
-#: src/main.c:1668 src/screen.c:2284 src/screen.c:2314 src/tree.c:1018
-#: src/view.c:1959
+#: gtkedit/editwidget.c:1060 src/help.c:806 src/main.c:1668 src/screen.c:2284
+#: src/screen.c:2314 src/tree.c:1018 src/view.c:1959
 msgid "Help"
 msgstr "Помощь"
 
@@ -2008,133 +1638,32 @@ msgid ""
 msgstr ""
 
 #: gtkedit/gtkedit.c:1289
-msgid "Open/Load"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1289
-msgid "Load a different/new file"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1292
-#, fuzzy
-msgid "New"
-msgstr "Новый\tC-n"
-
-#: gtkedit/gtkedit.c:1292
 msgid "Clear the edit buffer"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1296
-msgid "Save the current edit buffer to filename"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1299
-#, fuzzy
-msgid "Save As"
-msgstr " Сохранить как "
-
-#: gtkedit/gtkedit.c:1299
-msgid "Save the current edit buffer as filename"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1303
+#: gtkedit/gtkedit.c:1294
 #, fuzzy
 msgid "Insert File"
 msgstr " Вставить файл "
 
-#: gtkedit/gtkedit.c:1303
+#: gtkedit/gtkedit.c:1294
 #, fuzzy
 msgid "Insert text from a file"
 msgstr " Вставить литерал "
 
-#: gtkedit/gtkedit.c:1306
+#: gtkedit/gtkedit.c:1296
 #, fuzzy
 msgid "Copy to file"
 msgstr "Копировать в файл...\tC-f"
 
-#: gtkedit/gtkedit.c:1306
+#: gtkedit/gtkedit.c:1296
 msgid "copy a block to a file"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1310
-msgid "Exit"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1310
-msgid "Quit editor"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1318
-#, fuzzy
-msgid "Copy selection to clipboard"
-msgstr " Скопировать в буфер "
-
-#: gtkedit/gtkedit.c:1321
-msgid "Cut"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1321
-#, fuzzy
-msgid "Cut selection to clipboard"
-msgstr " Вырезать в буфер "
-
-#: gtkedit/gtkedit.c:1324
-msgid "Paste"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1324
-#, fuzzy
-msgid "Paste clipboard"
-msgstr " Вырезать в буфер "
-
-#: gtkedit/gtkedit.c:1328
-msgid "Undo"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1328
-msgid "Go back in time one key press"
-msgstr ""
-
 #: gtkedit/gtkedit.c:1336
-#, fuzzy
-msgid "Find"
-msgstr "&FTP-соединение"
-
-#: gtkedit/gtkedit.c:1336
-#, fuzzy
-msgid "Find string/regular expression"
-msgstr " Регулярные выражения "
-
-#: gtkedit/gtkedit.c:1339
-#, fuzzy
-msgid "Find again"
-msgstr " Поиск файла "
-
-#: gtkedit/gtkedit.c:1339
-msgid "Repeat most recent search"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1342 gtkedit/gtkedit.c:1367
 #, fuzzy
 msgid "Search/Replace"
 msgstr " Поиск "
-
-#: gtkedit/gtkedit.c:1342
-msgid "Find and replace text/regular expressions"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1351
-#, fuzzy
-msgid "About..."
-msgstr "&Внешний вид"
-
-#: gtkedit/gtkedit.c:1351
-msgid "Info about Mcedit"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1365 src/filegui.c:404
-msgid "File"
-msgstr "Файл"
 
 #: gtkedit/syntax.c:3180 gtkedit/syntax.c:3187
 #, fuzzy
@@ -2494,6 +2023,10 @@ msgstr ""
 msgid " Permission "
 msgstr ""
 
+#: src/chmod.c:164 src/chown.c:130
+msgid " File "
+msgstr " Файл "
+
 #: src/chmod.c:169
 msgid "Use SPACE to change"
 msgstr ""
@@ -2705,108 +2238,103 @@ msgstr ""
 "    Панели не могут быть отключены. "
 
 #: src/cmd.c:967
-msgid ""
-"Type `exit' to return to the Midnight Commander\n"
-"\r\n"
-"\r"
-msgstr ""
-"Введите `exit' для возврата в Midnight Commander\n"
-"\r\n"
-"\r"
+#, fuzzy
+msgid "Type `exit' to return to the Midnight Commander"
+msgstr "Введите `exit' для возврата в Midnight Commander"
 
-#: src/cmd.c:1020
+#: src/cmd.c:1022
 #, c-format
 msgid ""
 " Couldn't stat %s \n"
 " %s "
 msgstr ""
 
-#: src/cmd.c:1029 src/cmd.c:1031
+#: src/cmd.c:1031 src/cmd.c:1033
 msgid " Link "
 msgstr ""
 
-#: src/cmd.c:1030 src/cmd.c:1135 src/file.c:1621
+#: src/cmd.c:1032 src/cmd.c:1137 src/file.c:1621
 msgid " to:"
 msgstr ""
 
-#: src/cmd.c:1041
+#: src/cmd.c:1043
 #, c-format
 msgid " link: %s "
 msgstr ""
 
-#: src/cmd.c:1074
+#: src/cmd.c:1076
 #, c-format
 msgid " symlink: %s "
 msgstr ""
 
-#: src/cmd.c:1100
+#: src/cmd.c:1102
 msgid " Symlink "
 msgstr ""
 
-#: src/cmd.c:1100
+#: src/cmd.c:1102
 msgid " points to:"
 msgstr ""
 
-#: src/cmd.c:1105
+#: src/cmd.c:1107
 msgid " Edit symlink "
 msgstr ""
 
-#: src/cmd.c:1111
+#: src/cmd.c:1113
 #, c-format
 msgid " edit symlink: %s "
 msgstr ""
 
-#: src/cmd.c:1135
+#: src/cmd.c:1137
 msgid " Link symbolically "
 msgstr ""
 
-#: src/cmd.c:1136
+#: src/cmd.c:1138
 msgid " Relative symlink "
 msgstr ""
 
-#: src/cmd.c:1147
+#: src/cmd.c:1149
 #, c-format
 msgid " relative symlink: %s "
 msgstr ""
 
-#: src/cmd.c:1250
+#: src/cmd.c:1252
 msgid " Enter machine name (F1 for details): "
 msgstr " Введите имя машины (детали по F1): "
 
-#: src/cmd.c:1274
+#: src/cmd.c:1276
 #, c-format
 msgid " Could not chdir to %s "
 msgstr " Не могу перейти в %s "
 
-#: src/cmd.c:1281
+#: src/cmd.c:1283
 msgid " Link to a remote machine "
 msgstr " Соединение с удаленной машиной "
 
-#: src/cmd.c:1287
+#: src/cmd.c:1289
 msgid " FTP to machine "
 msgstr " FTP-соединение с удаленной машиной "
 
-#: src/cmd.c:1297
+#: src/cmd.c:1299
 msgid " Socket source routing setup "
 msgstr ""
 
-#: src/cmd.c:1298
+#: src/cmd.c:1300
 msgid " Enter host name to use as a source routing hop: "
 msgstr ""
 
-#: src/cmd.c:1305
+#: src/cmd.c:1307
 msgid " Host name "
 msgstr ""
 
-#: src/cmd.c:1305
+#: src/cmd.c:1307
 msgid " Error while looking up IP address "
 msgstr ""
 
-#: src/cmd.c:1316
+#: src/cmd.c:1318
 msgid " Undelete files on an ext2 file system "
 msgstr " Восстановление файлов на файловой системе ext2 "
 
-#: src/cmd.c:1317
+#: src/cmd.c:1319
 #, fuzzy
 msgid ""
 " Enter device (without /dev/) to undelete\n"
@@ -2815,11 +2343,11 @@ msgstr ""
 " Введите имя устройства, связанного с файловой системой,\n"
 " на которой Вы хотите восстановить файл: (детали по F1)"
 
-#: src/cmd.c:1367
+#: src/cmd.c:1369
 msgid " Setup saved to ~/"
 msgstr " Параметры сохранены в ~/"
 
-#: src/cmd.c:1372
+#: src/cmd.c:1374
 msgid " Setup "
 msgstr " Настройка "
 
@@ -3378,6 +2906,10 @@ msgstr " Рекурсивное удаление "
 #: src/file.c:2187
 msgid " Background process: Recursive Delete "
 msgstr " Фоновый процесс: Рекурсивное удаление "
+
+#: src/filegui.c:404
+msgid "File"
+msgstr "Файл"
 
 #: src/filegui.c:425
 msgid "Count"
@@ -4264,6 +3796,10 @@ msgstr "Файл &меню"
 #: src/main.c:1301
 msgid "&Configuration..."
 msgstr "&Конфигурация"
+
+#: src/main.c:1302
+msgid "&Layout..."
+msgstr "&Внешний вид"
 
 #: src/main.c:1303
 msgid "c&Onfirmation..."
@@ -5197,13 +4733,271 @@ msgstr ""
 msgid "Inconsistent tar archive"
 msgstr ""
 
-#: vfs/tar.c:412
+#: vfs/tar.c:411
 #, c-format
 msgid ""
 "Hmm,...\n"
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
+
+#, fuzzy
+#~ msgid " About "
+#~ msgstr "&Прервать"
+
+#~ msgid "&Open/load...     C-o"
+#~ msgstr "&Открыть файл...      C-o"
+
+#~ msgid "&New              C-n"
+#~ msgstr "&Новый файл           C-n"
+
+#~ msgid "&Save              F2"
+#~ msgstr "&Сохранить             F2"
+
+#~ msgid "save &As...       F12"
+#~ msgstr "Сохранить &как...     F12"
+
+#~ msgid "&Insert file...   F15"
+#~ msgstr "&Вставить файл...     F15"
+
+#~ msgid "copy to &File...  C-f"
+#~ msgstr "&Копировать в файл... C-f"
+
+#~ msgid "a&Bout...            "
+#~ msgstr "Об &авторах..."
+
+#~ msgid "&Quit             F10"
+#~ msgstr "Вы&ход                F10"
+
+#~ msgid "&New            C-x k"
+#~ msgstr "&Новый файл         C-x k"
+
+#~ msgid "copy to &File...     "
+#~ msgstr "&Копировать в файл...     "
+
+#~ msgid "&Toggle Mark       F3"
+#~ msgstr "&Выделение блока        F3"
+
+#~ msgid "toggle &Ins/overw Ins"
+#~ msgstr "&Режим вставки/замены  Ins"
+
+#~ msgid "&Copy              F5"
+#~ msgstr "&Копировать блок        F5"
+
+#~ msgid "&Move              F6"
+#~ msgstr "&Переместить блок       F6"
+
+#~ msgid "&Delete            F8"
+#~ msgstr "&Удалить блок           F8"
+
+#~ msgid "&Undo             C-u"
+#~ msgstr "&Откат операции        C-u"
+
+#~ msgid "&Beginning     C-PgUp"
+#~ msgstr "&Начало файла       C-PgUp"
+
+#~ msgid "&End           C-PgDn"
+#~ msgstr "Конец &файла        C-PgDn"
+
+#~ msgid "&Search...         F7"
+#~ msgstr "&Поиск...          F7"
+
+#~ msgid "search &Again     F17"
+#~ msgstr "&Искать дальше    F17"
+
+#~ msgid "&Replace...        F4"
+#~ msgstr "&Замена...         F4"
+
+#~ msgid "&Goto line...            M-l"
+#~ msgstr "&Перейти к строке           M-l"
+
+#~ msgid "insert &Literal...       C-q"
+#~ msgstr "Вставить &литерал...        C-q"
+
+#~ msgid "&Refresh screen          C-l"
+#~ msgstr "Пере&рисовать экран         C-l"
+
+#~ msgid "&Start record macro      C-r"
+#~ msgstr "&Начать запись макроса      C-r"
+
+#~ msgid "&Finish record macro...  C-r"
+#~ msgstr "&Окончить запись макроса... C-r"
+
+#~ msgid "&Execute macro...   C-a, KEY"
+#~ msgstr "&Выполнить макрос...   C-a, KEY"
+
+#~ msgid "delete macr&O...            "
+#~ msgstr "&Удалить макрос"
+
+#~ msgid "insert &Date/time           "
+#~ msgstr "Вставить &Дату/время"
+
+#~ msgid "format p&Aragraph        M-p"
+#~ msgstr "Форматировать &абзац        M-p"
+
+#~ msgid "'ispell' s&Pell check    C-p"
+#~ msgstr "&Контроль орфографии        C-p"
+
+#~ msgid "sor&T...                 M-t"
+#~ msgstr "&Сортировка                 M-t"
+
+#~ msgid "'indent' &C Formatter    F19"
+#~ msgstr "&Форматировать С-программу  F19"
+
+#~ msgid "&Mail...                    "
+#~ msgstr "&Электронная почта...          "
+
+#~ msgid "&Execute macro... C-x e, KEY"
+#~ msgstr "&Выполнить макро...  C-x e, KEY"
+
+#~ msgid "'ispell' s&Pell check    M-$"
+#~ msgstr "&Контроль орфографии        M-$"
+
+#~ msgid "&General...  "
+#~ msgstr "&Разное..."
+
+#~ msgid "&Save mode..."
+#~ msgstr "Режим &сохранения..."
+
+#~ msgid " Edit "
+#~ msgstr " Редактирование "
+
+#, fuzzy
+#~ msgid " Sear/Repl "
+#~ msgstr " Поиск "
+
+#~ msgid " Command "
+#~ msgstr " Команда "
+
+#, fuzzy
+#~ msgid " Options "
+#~ msgstr " Настройка "
+
+#~ msgid "Open...\tC-o"
+#~ msgstr "Открыть...\tC-o"
+
+#, fuzzy
+#~ msgid "New\tC-n"
+#~ msgstr "Новый\tC-n"
+
+#~ msgid "Save\tF2"
+#~ msgstr "Сохранить\tF2"
+
+#~ msgid "Save as...\tF12"
+#~ msgstr "Сохранить как...\tF12"
+
+#~ msgid "Insert file...\tF15"
+#~ msgstr "Вставить файл...\tF15"
+
+#, fuzzy
+#~ msgid "Copy to file...\tC-f"
+#~ msgstr "&Копировать в файл... C-f"
+
+#~ msgid "Disk operations"
+#~ msgstr "Дисковые операции"
+
+#~ msgid "Toggle mark\tF3"
+#~ msgstr "Выделение блока\tF3"
+
+#, fuzzy
+#~ msgid "Toggle mark columns\tC-b"
+#~ msgstr "Выделение блока\tF3"
+
+#, fuzzy
+#~ msgid "Toggle insert/overwrite\tIns"
+#~ msgstr "&Режим вставки/замены  Ins"
+
+#, fuzzy
+#~ msgid "Copy block to clipbrd\tC-Ins"
+#~ msgstr " Скопировать в буфер "
+
+#, fuzzy
+#~ msgid "Cut block to clipbrd\tS-Del"
+#~ msgstr " Вырезать в буфер "
+
+#, fuzzy
+#~ msgid " Srch/Replce "
+#~ msgstr " Поиск "
+
+#, fuzzy
+#~ msgid "Search...\tF7"
+#~ msgstr "Поиск"
+
+#, fuzzy
+#~ msgid "Search again\tF17"
+#~ msgstr "&Искать дальше    F17"
+
+#, fuzzy
+#~ msgid "Replace...\tF4"
+#~ msgstr "&Замена...         F4"
+
+#, fuzzy
+#~ msgid "Replace again\tF14"
+#~ msgstr "Заменить все"
+
+#, fuzzy
+#~ msgid "Search for and replace text"
+#~ msgstr " Введите текст для замены: "
+
+#, fuzzy
+#~ msgid "Goto line...\tM-l"
+#~ msgstr "&Перейти к строке           M-l"
+
+#, fuzzy
+#~ msgid "Start record macro\tC-r"
+#~ msgstr "&Начать запись макроса      C-r"
+
+#, fuzzy
+#~ msgid "Finish record macro...\tC-r"
+#~ msgstr "&Окончить запись макроса... C-r"
+
+#, fuzzy
+#~ msgid "Execute macro...\tC-a, KEY"
+#~ msgstr "&Выполнить макрос...   C-a, KEY"
+
+#, fuzzy
+#~ msgid "Delete macro...\t"
+#~ msgstr " Удалить макрос "
+
+#, fuzzy
+#~ msgid "Format paragraph\tM-p"
+#~ msgstr "Форматировать &абзац        M-p"
+
+#, fuzzy
+#~ msgid "New"
+#~ msgstr "Новый\tC-n"
+
+#, fuzzy
+#~ msgid "Save As"
+#~ msgstr " Сохранить как "
+
+#, fuzzy
+#~ msgid "Copy selection to clipboard"
+#~ msgstr " Скопировать в буфер "
+
+#, fuzzy
+#~ msgid "Cut selection to clipboard"
+#~ msgstr " Вырезать в буфер "
+
+#, fuzzy
+#~ msgid "Paste clipboard"
+#~ msgstr " Вырезать в буфер "
+
+#, fuzzy
+#~ msgid "Find"
+#~ msgstr "&FTP-соединение"
+
+#, fuzzy
+#~ msgid "Find string/regular expression"
+#~ msgstr " Регулярные выражения "
+
+#, fuzzy
+#~ msgid "Find again"
+#~ msgstr " Поиск файла "
+
+#, fuzzy
+#~ msgid "About..."
+#~ msgstr "&Внешний вид"
 
 #, fuzzy
 #~ msgid "_View"

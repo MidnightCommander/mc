@@ -1230,13 +1230,9 @@ msgstr ""
 
 #: src/cmd.c:937
 msgid ""
-"Type `exit' to return to the Midnight Commander\n"
-"\r\n"
-"\r"
+"Type `exit' to return to the Midnight Commander"
 msgstr ""
-"Napi¹ `exit' pro návrat do Midnight Commander-u\n"
-"\r\n"
-"\r"
+"Napi¹ `exit' pro návrat do Midnight Commander-u"
 
 #: src/cmd.c:989
 msgid ""
