@@ -68,10 +68,14 @@ Menu create_menu (char *name, menu_entry *entries, int count)
 
 static void menubar_drop_compute (WMenu *menubar)
 {
-    const Menu menu = menubar->menu [menubar->selected];
+    Menu menu; 
     int   max_entry_len = 0;
     int i;
+
+    if (menubar->selected == -1)
+	    return;
     
+    menu = menubar->menu [menubar->selected];
     for (i = 0; i < menu->count; i++)
 	max_entry_len = max (max_entry_len, strlen (menu->entries [i].text));
     menubar->max_entry_len = max_entry_len = max (max_entry_len, 20);
