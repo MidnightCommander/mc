@@ -1,5 +1,9 @@
 2003-11-27  Pavel Roskin  <proski@gnu.org>
 
+	* utilunix.c (tilde_expand): Preserve tilde if the username
+	could not be found.  Don't ever return NULL.  Change callers not
+	to check for NULL.
+
 	* dialog.c (do_select_widget): New function that it the only one
 	calling dlg_focus() and dlg_unfocus().  Incorporate code from
 	other functions that did it.

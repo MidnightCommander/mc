@@ -253,39 +253,44 @@ int my_system (int flags, const char *shell, const char *command)
     return WEXITSTATUS(status);
 }
 
-/* Returns a newly allocated string, if directory does not exist, return 0 */
-char *tilde_expand (const char *directory)
+
+/*
+ * Perform tilde expansion if possible.
+ * Always return a newly allocated string, even if it's unchanged.
+ */
+char *
+tilde_expand (const char *directory)
 {
     struct passwd *passwd;
     const char *p;
     char *name;
-    
+
     if (*directory != '~')
 	return g_strdup (directory);
 
     directory++;
-    
+
     p = strchr (directory, PATH_SEP);
-    
+
     /* d = "~" or d = "~/" */
-    if (!(*directory) || (*directory == PATH_SEP)){
+    if (!(*directory) || (*directory == PATH_SEP)) {
 	passwd = getpwuid (geteuid ());
-	p = (*directory == PATH_SEP) ? directory+1 : "";
+	p = (*directory == PATH_SEP) ? directory + 1 : "";
     } else {
-	if (!p){
+	if (!p) {
 	    passwd = getpwnam (directory);
 	} else {
 	    name = g_malloc (p - directory + 1);
 	    strncpy (name, directory, p - directory);
-	    name [p - directory] = 0;
+	    name[p - directory] = 0;
 	    passwd = getpwnam (name);
 	    g_free (name);
 	}
     }
 
-    /* If we can't figure the user name, return NULL */
+    /* If we can't figure the user name, leave tilde unexpanded */
     if (!passwd)
-	return 0;
+	return g_strdup (directory);
 
     return g_strconcat (passwd->pw_dir, PATH_SEP_STR, p, NULL);
 }

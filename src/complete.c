@@ -87,12 +87,6 @@ filename_completion_function (char *text, int state)
         users_dirname = dirname;
         {
 	    dirname = tilde_expand (dirname);
-	    if (!dirname){
-		g_free (users_dirname);
-		g_free (filename);
-		users_dirname = filename = NULL;
-		return NULL;
-	    }
 	    canonicalize_pathname (dirname);
 	    /* Here we should do something with variable expansion
 	       and `command`.
@@ -485,11 +479,6 @@ command_completion_function (char *text, int state)
 		    if (cur_path >= path_end)
 	            	break;
 		    expanded = tilde_expand (*cur_path ? cur_path : ".");
-		    if (!expanded){
-			g_free (path);
-			path = NULL;
-			return NULL;
-		    }
 	            p = canonicalize_pathname (expanded);
 		    cur_word = concat_dir_and_file (p, text);
 	            g_free (p);

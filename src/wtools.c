@@ -524,18 +524,17 @@ char *input_dialog (char *header, char *text, char *def_text)
     return input_dialog_help (header, text, "[Input Line Keys]", def_text);
 }
 
-char *input_expand_dialog (char *header, char *text, char *def_text)
+char *
+input_expand_dialog (char *header, char *text, char *def_text)
 {
     char *result;
     char *expanded;
 
     result = input_dialog (header, text, def_text);
-    if (result){
+    if (result) {
 	expanded = tilde_expand (result);
-	if (expanded){
-	    g_free (result);
-	    return expanded;
-	}
+	g_free (result);
+	return expanded;
     }
     return result;
 }
