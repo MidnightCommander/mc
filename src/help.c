@@ -778,8 +778,13 @@ interactive_display (char *filename, char *node)
     if (!(main_node = search_string (data, node))) {
 	message (1, MSG_ERROR, _(" Cannot find node %s in help file "),
 		 node);
-	interactive_display_finish ();
-	return;
+
+	/* Fallback to [main], return if it also cannot be found */
+	main_node = search_string (data, "[main]");
+	if (!main_node) {
+	    interactive_display_finish ();
+	    return;
+	}
     }
 
     help_lines = min (LINES - 4, max (2 * LINES / 3, 18));
