@@ -1,5 +1,7 @@
 2002-08-14  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (do_execute) [!HAVE_SUBSHELL_SUPPORT]: Compile fix.
+
 	* view.c (display): Use only declared color pairs to fix hex
 	editor appearance with ncurses.  Eliminate some useless defines.
 

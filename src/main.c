@@ -685,8 +685,11 @@ do_execute (const char *shell, const char *command, int flags)
     if (!(flags & EXECUTE_INTERNAL)) {
 	if ((pause_after_run == pause_always ||
 	    (pause_after_run == pause_on_dumb_terminals &&
-	     !xterm_flag && !console_flag)) && !quit &&
-	     subshell_state != RUNNING_COMMAND) {
+	     !xterm_flag && !console_flag)) && !quit
+#ifdef HAVE_SUBSHELL_SUPPORT
+	     && subshell_state != RUNNING_COMMAND
+#endif /* HAVE_SUBSHELL_SUPPORT */
+	   ) {
 	    printf ("%s\r\n", _("Press any key to continue..."));
 	    last_paused = 1;
 	    fflush (stdout);
