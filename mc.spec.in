@@ -99,7 +99,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/share/mc/term
 
 %changelog
-* Tue 08 2002 Pavel Roskin <proski@gnu.org>
+* Tue Oct 08 2002 Pavel Roskin <proski@gnu.org>
 - Use the included S-Lang again, since we include a better version now.
   This should avoid incompatibility with Red Hat 7.x.
 - Add _with_glib2 option.
