@@ -3,10 +3,9 @@ INSTALL			Installing directions
 INSTALL.FAST		Short directions for busy people
 NEWS			List of new features by version
 README			Mini documentation
-create_vcs		Creates /dev/vcs? entries for Linux > 1.1.92
 mcfn_install.in		Templace for a script to install mc () function into your /etc/profile or ~/.profile
 mc.spec.in		Template for rpm specification file 
-mc.spec			rpm secification file
+mc.spec			rpm specification file
 doc/			Directory: Documentation files
 doc/DEVEL		Development hints
 doc/FILES		List of the files included in the distribution

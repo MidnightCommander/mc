@@ -1,3 +1,8 @@
+2001-05-20  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.am (EXTRA_DIST): Remove create_vcs.
+	* doc/FILES: Likewise. Typo fix.
+
 2001-05-19  Pavel Roskin  <proski@gnu.org>
 
 	* doc-gnome/C/mkhtml: New file. Create HTML files from gmc.sgml.
