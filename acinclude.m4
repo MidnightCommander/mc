@@ -725,14 +725,14 @@ it doesn't work well])
 	    AC_CHECK_LIB([slang], [SLang_init_tty], [MCLIBS="$MCLIBS -lslang"],
 			 [with_screen=mcslang], ["$MCLIBS"])
 	fi
+    else
+	m4_if([$1], strict,
+	    [if test $with_screen != slang; then
+		AC_MSG_ERROR([S-Lang library not found])
+	    fi],
+	    [MC_WITH_MCSLANG]
+	)
     fi
-
-    m4_if([$1], strict,
-	[if test $with_screen != slang; then
-	    AC_MSG_ERROR([S-Lang library not found])
-	fi],
-	[MC_WITH_MCSLANG]
-    )
 
     _MC_WITH_XSLANG
 ])
