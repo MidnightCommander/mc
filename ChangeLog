@@ -1,5 +1,8 @@
 2001-02-07  Pavel Roskin  <proski@gnu.org>
 
+	* autogen.sh: Create vfs/samba/include/stamp-h.in.
+	* vfs/samba/include/stamp-h.in: Remove.
+
 	* macros/curses.m4: Quote first argument to AC_DEFUN.
 	* macros/gnome-cxx-check.m4: Likewise.
 	* macros/gnome-gettext.m4: Likewise.

@@ -20,6 +20,7 @@ autoheader || exit 1
 autoconf || exit 1
 automake -a || exit 1
 cd vfs/samba || exit 1
+date -u >include/stamp-h.in
 autoheader || exit 1
 autoconf || exit 1
 ) || exit 1
