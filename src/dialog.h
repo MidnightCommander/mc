@@ -217,7 +217,7 @@ void dlg_erase            (Dlg_head *h);
 void dlg_stop             (Dlg_head *h);
 
 /* Widget selection */
-int  dlg_select_widget     (Dlg_head *h, void *widget);
+void dlg_select_widget     (Dlg_head *h, void *widget);
 void dlg_one_up            (Dlg_head *h);
 void dlg_one_down          (Dlg_head *h);
 int  dlg_focus             (Dlg_head *h);

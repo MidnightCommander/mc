@@ -1,3 +1,10 @@
+2003-11-27  Pavel Roskin  <proski@gnu.org>
+
+	* dialog.c (do_select_widget): New function that it the only one
+	calling dlg_focus() and dlg_unfocus().  Incorporate code from
+	other functions that did it.
+	(dlg_select_widget): Change return type to void.
+
 2003-11-26  Pavel Roskin  <proski@gnu.org>
 
 	* dialog.h (dlg_widget_active): New function - check if the

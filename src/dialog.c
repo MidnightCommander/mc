@@ -359,52 +359,6 @@ int dlg_overlap (Widget *a, Widget *b)
 }
 
 
-/*
- * Try to select another widget.  If forward is set, follow tab order.
- * Otherwise go to the previous widget.
- */
-static void
-select_other_widget (Dlg_head *h, int forward)
-{
-    Widget *old;
-
-    old = h->current;
-    if (!old)
-	return;
-
-    if (!dlg_unfocus (h))
-	return;
-
-    do {
-	if (forward)
-	    h->current = h->current->next;
-	else
-	    h->current = h->current->prev;
-    } while (!dlg_focus (h));
-
-    if (dlg_overlap (old, h->current)) {
-	send_message (h->current, WIDGET_DRAW, 0);
-	send_message (h->current, WIDGET_FOCUS, 0);
-    }
-}
-
-
-/* Try to select previous widget in the tab order */
-void
-dlg_one_up (Dlg_head *h)
-{
-    select_other_widget (h, 0);
-}
-
-
-/* Try to select next widget in the tab order */
-void
-dlg_one_down (Dlg_head *h)
-{
-    select_other_widget (h, 1);
-}
-
-
 /* Find the widget with the given callback in the dialog h */
 Widget *
 find_widget_type (Dlg_head *h, void *callback)
@@ -452,21 +406,79 @@ dlg_select_by_id (Dlg_head *h, int id)
 	dlg_select_widget(h, w_found);
 }
 
-int dlg_select_widget (Dlg_head *h, void *w)
+
+/* What to do if the requested widget doesn't take focus */
+typedef enum {
+    SELECT_NEXT,		/* go the the next widget */
+    SELECT_PREV,		/* go the the previous widget */
+    SELECT_EXACT		/* use current widget */
+} select_dir_t;
+
+/*
+ * Try to select another widget.  If forward is set, follow tab order.
+ * Otherwise go to the previous widget.
+ */
+static void
+do_select_widget (Dlg_head *h, Widget *w, select_dir_t dir)
 {
-    if (!h->current)
-       return 0;
+    Widget *w0 = h->current;
 
-    if (dlg_unfocus (h)){
-	while (h->current != w)
-	    h->current = h->current->next;
-	while (!dlg_focus (h))
-	    h->current = h->current->next;
+    if (!dlg_unfocus (h))
+	return;
 
-	return 1;
+    h->current = w;
+    while (h->current != w0) {
+	if (dlg_focus (h))
+	    break;
+
+	switch (dir) {
+	case SELECT_NEXT:
+	    h->current = h->current->next;
+	    break;
+	case SELECT_PREV:
+	    h->current = h->current->prev;
+	    break;
+	case SELECT_EXACT:
+	    h->current = w0;
+	    dlg_focus (h);
+	    return;
+	}
     }
-    return 0;
+
+    if (dlg_overlap (w0, h->current)) {
+	send_message (h->current, WIDGET_DRAW, 0);
+	send_message (h->current, WIDGET_FOCUS, 0);
+    }
 }
+
+
+/*
+ * Try to select widget in the dialog.
+ */
+void
+dlg_select_widget (Dlg_head *h, void *w)
+{
+    do_select_widget (h, w, SELECT_NEXT);
+}
+
+
+/* Try to select previous widget in the tab order */
+void
+dlg_one_up (Dlg_head *h)
+{
+    if (h->current)
+	do_select_widget (h, h->current->prev, SELECT_PREV);
+}
+
+
+/* Try to select next widget in the tab order */
+void
+dlg_one_down (Dlg_head *h)
+{
+    if (h->current)
+	do_select_widget (h, h->current->next, SELECT_NEXT);
+}
+
 
 void update_cursor (Dlg_head *h)
 {
@@ -558,7 +570,6 @@ static int
 dlg_try_hotkey (Dlg_head *h, int d_key)
 {
     Widget *hot_cur;
-    Widget *previous;
     int handled, c;
 
     if (!h->current)
@@ -602,15 +613,7 @@ dlg_try_hotkey (Dlg_head *h, int d_key)
     if (!handled)
 	return 0;
 
-    previous = h->current;
-    if (!dlg_unfocus (h))
-	return handled;
-
-    h->current = hot_cur;
-    if (!dlg_focus (h)) {
-	h->current = previous;
-	dlg_focus (h);
-    }
+    do_select_widget (h, hot_cur, SELECT_EXACT);
     return handled;
 }
 
