@@ -1,3 +1,10 @@
+2002-11-10  Pavel Roskin  <proski@gnu.org>
+
+	* screen.c (chdir_other_panel): Change behavior of Alt-O -
+	change the other panel to the current directory, put it to the
+	listing mode if needed.  Based on a patch from PLD Linux
+	Distribution.
+
 2002-11-06  Pavel Roskin  <proski@gnu.org>
 
 	* myslang.h: Don't define ERR - it conflicts with sys/ucontext.h
