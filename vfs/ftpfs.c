@@ -572,6 +572,7 @@ load_no_proxy_list (void)
     g_free (mc_file);
 }
 
+/* Return 1 if FTP proxy should be used for this host, 0 otherwise */
 static int
 ftpfs_check_proxy (const char *host)
 {
