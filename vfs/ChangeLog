@@ -1,3 +1,8 @@
+2004-09-26  Roland Illig  <roland.illig@gmx.de>
+
+	* vfs.c (_vfs_get_class): Reverted my last patch because
+	Leonard reported it to make mc crash.
+
 2004-09-25  Roland Illig  <roland.illig@gmx.de>
 
 	* ftpfs.c (ftpfs_find_machine): Added const qualifier.
