@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
-"POT-Creation-Date: 2000-05-07 04:48+0200\n"
+"POT-Creation-Date: 2000-05-07 17:18+0200\n"
 "PO-Revision-Date: 2000-05-07 17:37+01:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -667,7 +667,7 @@ msgstr "færdig."
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
-#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1834
+#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1833
 msgid "Password:"
 msgstr "Adgangskode:"
 
@@ -6479,29 +6479,29 @@ msgstr ""
 "Uventet EOF\n"
 "%s"
 
-#: vfs/direntry.c:310
+#: vfs/direntry.c:300
 #, c-format
 msgid "Dir cache expired for %s"
 msgstr "Katalog-cache udløbet for %s"
 
-#: vfs/direntry.c:440 vfs/direntry.c:443
+#: vfs/direntry.c:430 vfs/direntry.c:433
 msgid " Direntry warning "
 msgstr " Katalogindgang advarsel "
 
-#: vfs/direntry.c:440
+#: vfs/direntry.c:430
 #, c-format
 msgid "Super ino_usage is %d, memory leak"
 msgstr "Super ino_usage er %d, lagerlækage"
 
-#: vfs/direntry.c:443
+#: vfs/direntry.c:433
 msgid "Super has want_stale set"
 msgstr "Super har want_stale sat"
 
-#: vfs/direntry.c:823
+#: vfs/direntry.c:811
 msgid "Starting linear transfer..."
 msgstr "Begynder lineær overførsel..."
 
-#: vfs/direntry.c:968
+#: vfs/direntry.c:956
 msgid "Getting file"
 msgstr "Henter fil: "
 
@@ -6717,20 +6717,20 @@ msgstr "(følg rfc959)"
 msgid "(chdir first)"
 msgstr "(chdir først)"
 
-#: vfs/ftpfs.c:1286
+#: vfs/ftpfs.c:1287
 msgid "ftpfs: failed"
 msgstr "ftpfs: fejlede"
 
-#: vfs/ftpfs.c:1296
+#: vfs/ftpfs.c:1297
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: fejlede; ingen steder at falde tilbage på"
 
-#: vfs/ftpfs.c:1359
+#: vfs/ftpfs.c:1360
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs: gemmer fil %d (%d)"
 
-#: vfs/ftpfs.c:1774
+#: vfs/ftpfs.c:1775
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -6878,31 +6878,31 @@ msgstr ""
 "%s\n"
 "ser ikke ud til at være et tar-arkiv."
 
-#: vfs/vfs.c:1152
+#: vfs/vfs.c:1151
 msgid "Changes to file lost"
 msgstr "Ændringer til fil tabt"
 
-#: vfs/vfs.c:1795
+#: vfs/vfs.c:1794
 msgid "Could not parse:"
 msgstr "Kunne ikke fortolke:"
 
-#: vfs/vfs.c:1797
+#: vfs/vfs.c:1796
 msgid "More parsing errors will be ignored."
 msgstr "Flere fortolkningsfejl vil blive ignoreret."
 
-#: vfs/vfs.c:1797
+#: vfs/vfs.c:1796
 msgid "(sorry)"
 msgstr "(beklager)"
 
-#: vfs/vfs.c:1808
+#: vfs/vfs.c:1807
 msgid "Internal error:"
 msgstr " Intern fejl:"
 
-#: vfs/vfs.c:1818
+#: vfs/vfs.c:1817
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
 msgstr "%s: %s: %s %3d%% (%ld byte overført)"
 
-#: vfs/vfs.c:1819
+#: vfs/vfs.c:1818
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld byte overført"
