@@ -72,9 +72,10 @@ char *vfs_split_url (char *path, char **host, char **user, int *port, char **pas
     *pass = NULL;
     *port = default_port;
     *user = NULL;
+    retval = NULL;
     
     dir = pcopy;
-    if (!flags & URL_NOSLASH) {
+    if (!(flags & URL_NOSLASH)) {
 	/* locate path component */
 	for (; *dir != '/' && *dir; dir++)
 	    ;

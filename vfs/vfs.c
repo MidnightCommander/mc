@@ -475,8 +475,6 @@ mc_opendir (char *dirname)
     char *p = NULL;
     int i = strlen (dirname);
 
-message_1s(1, " Opening ", dirname );
-
     if (dirname [i - 1] != '/'){ 
     /* We should make possible reading of the root directory in a tar file */
         p = xmalloc (i + 2, "slash");
@@ -1486,7 +1484,7 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
     if (strncmp (p, "total", 5) == 0)
         return 0;
 
-    p_copy = strdup (p);
+    p_copy = strdup(p);
     if ((i = vfs_parse_filetype(*(p++))) == -1)
         goto error;
 
@@ -1506,7 +1504,9 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
         s->st_mode |= i;
 	p += 9;
     }
-	
+
+    free(p_copy);
+    p_copy = strdup(p);
     num_cols = vfs_split_text (p);
 
     s->st_nlink = atol (columns [0]);
@@ -1644,7 +1644,8 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 
 error:
     message_1s (1, "Could not parse:", p_copy);
-    free (p_copy);
+    if (p_copy != p)		/* Carefull! */
+	free (p_copy);
     return 0;
 }
 

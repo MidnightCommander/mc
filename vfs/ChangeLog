@@ -1,3 +1,13 @@
+Sat Nov 21 21:38:08 1998  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* vfs.c (vfs_parse_ls_lga): corrected stupid bug in parse_ls_lga,
+ 	thanks to Pavel Roskin for reporting
+
+	* direntry.c (vfs_s_lseek): -1 is invalid filehandle, not 0
+
+	* utilvfs.c (vfs_split_url): initialize variables so that we do
+ 	not return garbage
+
 Sat Nov  7 20:19:14 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* vfs.c: Converted g_return_if_fail into vfs_dies(), removed them

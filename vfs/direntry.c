@@ -750,7 +750,7 @@ int vfs_s_lseek (void *fh, off_t offset, int whence)
 {
     off_t size = FH->ino->st.st_size;
 
-    if (FH->handle) {	/* If we have local file opened, we want to work with it */
+    if (FH->handle != -1) {	/* If we have local file opened, we want to work with it */
 	int retval = lseek(FH->handle, offset, whence);
 	if (retval == -1)
 	    FH->ino->super->me->verrno = errno;
