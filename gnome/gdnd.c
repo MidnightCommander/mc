@@ -13,6 +13,7 @@
 #include "fileopctx.h"
 #include "main.h"
 #include "panel.h"
+#include "ext.h"
 #include "gscreen.h"
 #include "../vfs/vfs.h"
 #include <gdk/gdkprivate.h>
@@ -96,21 +97,20 @@ get_action (GdkDragContext *context)
 	return action;
 }
 
-/*
- * Performs a drop action on the specified panel.  Only supports copy
- * and move operations.  The files are moved or copied to the
- * specified destination directory.
+/* Performs a drop action on the specified panel.  Only supports copy and move
+ * operations.  The files are moved or copied to the specified destination
+ * directory.
  */
 static void
-perform_action_on_panel (WPanel *source_panel, GdkDragAction action, char *destdir, int ask)
+perform_action_on_panel (WPanel *source_panel, GdkDragAction action, char *destdir)
 {
 	switch (action) {
 	case GDK_ACTION_COPY:
-		panel_operate (source_panel, OP_COPY, destdir, ask);
+		panel_operate (source_panel, OP_COPY, destdir, FALSE);
 		break;
 
 	case GDK_ACTION_MOVE:
-		panel_operate (source_panel, OP_MOVE, destdir, ask);
+		panel_operate (source_panel, OP_MOVE, destdir, FALSE);
 		break;
 
 	default:
@@ -146,11 +146,10 @@ perform_links (GList *names, char *destdir)
 	}
 }
 
-/*
- * Performs a drop action manually, by going through the list of files
- * to operate on.  The files are copied or moved to the specified
- * directory.  This should also encompass symlinking when the file
- * operations window supports links.
+/* Performs a drop action manually, by going through the list of files to
+ * operate on.  The files are copied or moved to the specified directory.  This
+ * should also encompass symlinking when the file operations window supports
+ * links.
  */
 static void
 perform_action (GList *names, GdkDragAction action, char *destdir)
@@ -226,46 +225,24 @@ perform_action (GList *names, GdkDragAction action, char *destdir)
 	file_op_context_destroy (ctx);
 }
 
-/**
- * gdnd_drop_on_directory:
- * @context: The drag context received from the drag_data_received callback
- * @selection_data: The selection data from the drag_data_received callback
- * @dirname: The name of the directory to drop onto
- * 
- * Extracts an URI list from the selection data and drops all the files in the
- * specified directory.
- *
- * Return Value: TRUE if the drop was sucessful, FALSE if it was not.
- **/
-int
-gdnd_drop_on_directory (GdkDragContext *context, GtkSelectionData *selection_data, char *destdir)
+/* Drop a URI list on a directory.  If the data comes from a panel, use the nice
+ * MC progress display; otherwise `do it by hand'.
+ */
+static void
+drop_uri_list_on_directory (GdkDragContext *context, GtkSelectionData *selection_data,
+			    GdkDragAction action, char *destdir)
 {
-	GdkDragAction action;
 	WPanel *source_panel;
 	GtkWidget *source_widget;
 	GList *names;
 
-	if (context->action == GDK_ACTION_ASK) {
-		action = get_action (context);
-
-		if (action == GDK_ACTION_ASK)
-			return FALSE;
-		
-	} else
-		action = context->action;
-
-	/* If we are dragging from a file panel, we can display a nicer status
-	 * display.  But if the drag was from the tree, we cannot do this.
-	 */
 	source_panel = gdnd_find_panel_by_drag_context (context, &source_widget);
-	if (source_widget == source_panel->tree)
-		source_panel = NULL;
 
-	/* Symlinks do not use file.c */
-
-	if (source_panel && action != GDK_ACTION_LINK)
-		perform_action_on_panel (source_panel, action, destdir,
-					 context->action == GDK_ACTION_ASK);
+	/* We cannot use file.c if we are going to symlink or if we are dragging
+         * from a tree.
+	 */
+	if (source_panel && source_widget != source_panel->tree && action != GDK_ACTION_LINK)
+		perform_action_on_panel (source_panel, action, destdir);
 	else {
 		names = gnome_uri_list_extract_uris (selection_data->data);
 
@@ -276,8 +253,151 @@ gdnd_drop_on_directory (GdkDragContext *context, GtkSelectionData *selection_dat
 
 		gnome_uri_list_free_strings (names);
 	}
+}
+
+/* Drop a Netscape URL in a directory */
+static void
+drop_url_on_directory (GdkDragContext *context, GtkSelectionData *selection_data, char *destdir)
+{
+	char *template;
+
+	template = g_concat_dir_and_file (destdir, "urlXXXXXX");
+
+	if (mktemp (template)) {
+		FILE *f;
+
+		f = fopen (template, "w");
+		if (f) {
+			fprintf (f, "URL: %s\n", selection_data->data);
+			fclose (f);
+
+			gnome_metadata_set (template, "desktop-url",
+					    strlen (selection_data->data) + 1,
+					    selection_data->data);
+		}
+	}
+
+	g_free (template);
+}
+
+/* Drop stuff on a directory */
+static int
+drop_on_directory (GdkDragContext *context, GtkSelectionData *selection_data, char *destdir)
+{
+	GdkDragAction action;
+
+	if (context->action == GDK_ACTION_ASK) {
+		action = get_action (context);
+
+		if (action == GDK_ACTION_ASK)
+			return FALSE;
+	} else
+		action = context->action;
+
+	if (gdnd_drag_context_has_target (context, TARGET_URI_LIST))
+		drop_uri_list_on_directory (context, selection_data, action, destdir);
+	else if (gdnd_drag_context_has_target (context, TARGET_URL))
+		drop_url_on_directory (context, selection_data, destdir);
+	else
+		return FALSE;
 
 	return TRUE;
+}
+
+/* Drop stuff on a non-directory file.  This uses metadata and MIME as well. */
+static int
+drop_on_file (GdkDragContext *context, GtkSelectionData *selection_data,
+	      file_entry *dest_fe, char *dest_name)
+{
+	int size;
+	char *buf;
+	const char *mime_type;
+
+	/* 1. Try to use a metadata-based drop action */
+
+	if (gnome_metadata_get (dest_name, "drop-action", &size, &buf) == 0) {
+		/*action_drop (dest_name, buf, context, selection_data);*/ /* Fixme: i'm undefined */
+		g_free (buf);
+		return TRUE;
+	}
+
+	/* 2. Try a drop action from the MIME-type */
+
+	mime_type = gnome_mime_type_or_default (dest_name, NULL);
+	if (mime_type) {
+		char *action;
+
+		action = gnome_mime_get_value (mime_type, "drop-action");
+		if (action) {
+			/* Fixme: i'm undefined */
+			/*action_drop (dest_name, action, context, selection_data);*/
+			return TRUE;
+		}
+	}
+
+	/* 3. If executable, try metadata keys for "open" */
+
+	if (is_exe (dest_fe->buf.st_mode) && if_link_is_exe (dest_fe)) {
+		GList *names, *l;
+		int len, i;
+		char **drops;
+
+		/* FIXME: handle the case for Netscape URLs */
+
+		/* Convert the data list into an array of strings */
+
+		names = gnome_uri_list_extract_uris (selection_data->data);
+		len = g_list_length (names);
+		drops = g_new (char *, len + 1);
+
+		for (l = names, i = 0; i < len; i++, l = l->next) {
+			char *text = l->data;
+
+			if (strncmp (text, "file:", 5) == 0)
+				text += 5;
+
+			drops[i] = text;
+		}
+		drops[i] = NULL;
+
+		if (gnome_metadata_get (dest_name, "open", &size, &buf) == 0)
+			exec_extension (dest_name, buf, drops, NULL, 0);
+		else
+			exec_extension (dest_name, "%f %q", drops, NULL, 0);
+
+		g_free (drops);
+		gnome_uri_list_free_strings (names);
+		g_free (buf);
+
+		return TRUE;
+	}
+
+	return FALSE; /* could not drop */
+}
+
+int
+gdnd_perform_drop (GdkDragContext *context, GtkSelectionData *selection_data,
+		   file_entry *dest_fe, char *dest_name)
+{
+	GdkDragAction action;
+
+	g_return_val_if_fail (context != NULL, FALSE);
+	g_return_val_if_fail (selection_data != NULL, FALSE);
+	g_return_val_if_fail (dest_fe != NULL, FALSE);
+
+	/* Get action */
+
+	if (context->action == GDK_ACTION_ASK) {
+		action = get_action (context);
+		if (action == GDK_ACTION_ASK)
+			return FALSE;
+	} else
+		action = context->action;
+	
+	if (S_ISDIR (dest_fe->buf.st_mode) || dest_fe->f.link_to_dir)
+		return drop_on_directory (context, selection_data, dest_name);
+	else
+		return drop_on_file (context, selection_data, dest_fe, dest_name);
 }
 
 /**
@@ -348,6 +468,7 @@ gdnd_find_panel_by_drag_context (GdkDragContext *context, GtkWidget **source_wid
 /**
  * gdnd_validate_action:
  * @context: The drag context for this drag operation.
+ * @on_desktop: Whether we are dragging onto the desktop or a desktop icon.
  * @same_process: Whether the drag comes from the same process or not.
  * @same_source: If same_process, then whether the source and dest widgets are the same.
  * @dest: The destination file entry, or NULL if dropping on empty space.
@@ -359,48 +480,70 @@ gdnd_find_panel_by_drag_context (GdkDragContext *context, GtkWidget **source_wid
  * Return value: The computed action, meant to be passed to gdk_drag_action().
  **/
 GdkDragAction
-gdnd_validate_action (GdkDragContext *context, int same_process, int same_source,
+gdnd_validate_action (GdkDragContext *context,
+		      int on_desktop, int same_process, int same_source,
 		      file_entry *dest_fe, int dest_selected)
 {
 	int on_directory;
 	int on_exe;
 
-	if (dest_fe) {
-		on_directory = dest_fe->f.link_to_dir || S_ISDIR (dest_fe->buf.st_mode);
-		on_exe = is_exe (dest_fe->buf.st_mode) && if_link_is_exe (dest_fe);
-	}
+	g_return_val_if_fail (context != NULL, 0);
 
-	if (dest_fe) {
-		if (same_source && dest_selected)
-			return 0;
+	/* If we are dragging a desktop icon onto the desktop or onto a selected
+	 * desktop icon, unconditionally specify MOVE.
+	 */
+	if (on_desktop
+	    && gdnd_drag_context_has_target (context, TARGET_MC_DESKTOP_ICON)
+	    && (!dest_fe || dest_selected))
+		return GDK_ACTION_MOVE;
 
-		if (on_directory) {
-			if ((same_source || same_process)
-			    && (context->actions & GDK_ACTION_MOVE)
-			    && context->suggested_action != GDK_ACTION_ASK)
+	if (gdnd_drag_context_has_target (context, TARGET_URI_LIST)) {
+		if (dest_fe) {
+			on_directory = S_ISDIR (dest_fe->buf.st_mode) || dest_fe->f.link_to_dir;
+			on_exe = is_exe (dest_fe->buf.st_mode) && if_link_is_exe (dest_fe);
+		}
+
+		if (dest_fe) {
+			if (same_source && dest_selected)
+				return 0;
+
+			if (on_directory) {
+				if ((same_source || same_process)
+				    && (context->actions & GDK_ACTION_MOVE)
+				    && context->suggested_action != GDK_ACTION_ASK)
+					return GDK_ACTION_MOVE;
+				else
+					return context->suggested_action;
+			} else if (on_exe) {
+				if (context->actions & GDK_ACTION_COPY)
+					return GDK_ACTION_COPY;
+			} else if (same_source)
+				return 0;
+			else if (same_process
+				 && (context->actions & GDK_ACTION_MOVE)
+				 && context->suggested_action != GDK_ACTION_ASK)
 				return GDK_ACTION_MOVE;
 			else
 				return context->suggested_action;
-		} else if (on_exe) {
-			if (context->actions & GDK_ACTION_COPY)
-				return GDK_ACTION_COPY;
-		} else if (same_source)
-			return 0;
-		else if (same_process
-			 && (context->actions & GDK_ACTION_MOVE)
-			 && context->suggested_action != GDK_ACTION_ASK)
-			return GDK_ACTION_MOVE;
-		else
-			return context->suggested_action;
-	} else {
-		if (same_source)
-			return 0;
-		else if (same_process
-			 && (context->actions & GDK_ACTION_MOVE)
-			 && context->suggested_action != GDK_ACTION_ASK)
-			return GDK_ACTION_MOVE;
-		else
-			return context->suggested_action;
+		} else {
+			if (same_source)
+				return 0;
+			else if (same_process
+				 && (context->actions & GDK_ACTION_MOVE)
+				 && context->suggested_action != GDK_ACTION_ASK)
+				return GDK_ACTION_MOVE;
+			else
+				return context->suggested_action;
+		}
+	}
+
+	if (gdnd_drag_context_has_target (context, TARGET_URL)) {
+		/* FIXME: right now we only allow links.  We should see if we
+		 * can move or copy stuff instead (for ftp instead of http
+		 * sites, for example).
+		 */
+		if (context->actions & GDK_ACTION_LINK)
+			return GDK_ACTION_LINK;
 	}
 
 	return 0;

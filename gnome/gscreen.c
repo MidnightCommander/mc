@@ -776,25 +776,38 @@ panel_icon_list_drag_data_received (GtkWidget          *widget,
 				    WPanel              *panel)
 {
 	GnomeIconList *gil = GNOME_ICON_LIST (widget);
-	char *dir;
+	file_entry *fe;
+	char *file;
+	int free_file, free_fe;
 	int idx;
 	gboolean reload;
-	
+
 	idx = gnome_icon_list_get_icon_at (gil, x, y);
-	if (idx == -1)
-		dir = g_strdup (panel->cwd);
-	else {
-		if (panel->dir.list [idx].f.link_to_dir ||
-		    S_ISDIR (panel->dir.list [idx].buf.st_mode))
-			dir = concat_dir_and_file (panel->cwd, panel->dir.list [idx].fname);
-		else
-			dir = g_strdup (panel->cwd);
+	if (idx == -1) {
+		file = panel->cwd;
+		fe = file_entry_from_file (file);
+		if (!fe)
+			return; /* eeeek */
+
+		free_file = FALSE;
+		free_fe = TRUE;
+	} else {
+		file = g_concat_dir_and_file (panel->cwd, panel->dir.list[idx].fname);
+		fe = &panel->dir.list[idx];
+
+		free_file = TRUE;
+		free_fe = FALSE;
 	}
 
-	reload = gdnd_drop_on_directory (context, selection_data, dir);
-	g_free (dir);
+	reload = gdnd_perform_drop (context, selection_data, fe, file);
 
-	if (reload){
+	if (free_file)
+		g_free (file);
+
+	if (free_fe)
+		file_entry_free (fe);
+
+	if (reload) {
 		update_one_panel_widget (panel, 0, UP_KEEPSEL);
 		panel_update_contents (panel);
 	}
@@ -817,26 +830,42 @@ panel_clist_drag_data_received (GtkWidget          *widget,
 				WPanel              *panel)
 {
 	GtkCList *clist = GTK_CLIST (widget);
-	char *dir;
+	file_entry *fe;
+	char *file;
+	int free_file, free_fe;
 	int row;
+	int reload;
 
-	if (gtk_clist_get_selection_info (clist, x, y, &row, NULL) == 0)
-		dir = g_strdup (panel->cwd);
-	else {
+	if (gtk_clist_get_selection_info (clist, x, y, &row, NULL) == 0) {
+		file = panel->cwd;
+		fe = file_entry_from_file (file);
+		if (!fe)
+			return; /* eeeek */
+
+		free_file = FALSE;
+		free_fe = TRUE;
+	} else {
 		g_assert (row < panel->count);
 
-		if (S_ISDIR (panel->dir.list [row].buf.st_mode) ||
-		    panel->dir.list [row].f.link_to_dir)
-			dir = concat_dir_and_file (panel->cwd, panel->dir.list [row].fname);
-		else
-			dir = g_strdup (panel->cwd);
+		file = g_concat_dir_and_file (panel->cwd, panel->dir.list[row].fname);
+		fe = &panel->dir.list[row];
+
+		free_file = TRUE;
+		free_fe = FALSE;
 	}
 
-	gdnd_drop_on_directory (context, selection_data, dir);
-	g_free (dir);
+	reload = gdnd_perform_drop (context, selection_data, fe, file);
 
-	update_one_panel_widget (panel, 0, UP_KEEPSEL);
-	panel_update_contents (panel);
+	if (free_file)
+		g_free (file);
+
+	if (free_fe)
+		file_entry_free (fe);
+
+	if (reload) {
+		update_one_panel_widget (panel, 0, UP_KEEPSEL);
+		panel_update_contents (panel);
+	}
 }
 
 /**
@@ -857,6 +886,7 @@ panel_tree_drag_data_received (GtkWidget          *widget,
 	GtkDTree *dtree = GTK_DTREE (widget);
 	GtkCTreeNode *node;
 	int row, col;
+	file_entry *fe;
 	char *path;
 
 	if (!gtk_clist_get_selection_info (GTK_CLIST (dtree), x, y, &row, &col))
@@ -866,10 +896,15 @@ panel_tree_drag_data_received (GtkWidget          *widget,
 	if (!node)
 		return;
 	gtk_ctree_expand_recursive (GTK_CTREE (dtree), node);
+
 	path = gtk_dtree_get_row_path (dtree, node, 0);
+	fe = file_entry_from_file (path);
+	if (!fe)
+		return; /* eeeek */
 
-	gdnd_drop_on_directory (context, selection_data, path);
+	gdnd_perform_drop (context, selection_data, fe, path);
 
+	file_entry_free (fe);
 	g_free (path);
 }
 
@@ -1073,6 +1108,7 @@ panel_clist_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gin
 		fe = &panel->dir.list[idx];
 
 	action = gdnd_validate_action (context,
+				       FALSE,
 				       source_widget != NULL,
 				       source_widget == widget,
 				       fe,
@@ -1187,6 +1223,7 @@ panel_icon_list_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x,
 	fe = (idx == -1) ? NULL : &panel->dir.list[idx];
 
 	action = gdnd_validate_action (context,
+				       FALSE,
 				       source_widget != NULL,
 				       source_widget == widget,
 				       fe,

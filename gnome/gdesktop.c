@@ -73,6 +73,7 @@ static GtkTargetEntry dnd_icon_sources[] = {
 static GtkTargetEntry dnd_icon_targets[] = {
 	{ TARGET_MC_DESKTOP_ICON_TYPE, 0, TARGET_MC_DESKTOP_ICON },
 	{ TARGET_URI_LIST_TYPE, 0, TARGET_URI_LIST },
+	{ TARGET_URL_TYPE, 0, TARGET_URL }
 };
 
 static GtkTargetEntry dnd_desktop_targets[] = {
@@ -1163,8 +1164,7 @@ setup_icon_dnd_source (DesktopIconInfo *dii)
 			    dii);
 }
 
-/*
- * Callback used when we get a drag_motion event from a desktop icon.  We have
+/* Callback used when we get a drag_motion event from a desktop icon.  We have
  * to decide which operation to perform based on the type of the data the user
  * is dragging.
  */
@@ -1176,27 +1176,25 @@ icon_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gint y, gu
 	char *filename;
 	file_entry *fe;
 	GdkDragAction action;
+	GtkWidget *source_widget;
+	int is_desktop_icon;
 
 	dii = data;
-
 	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
 	fe = file_entry_from_file (filename);
 	g_free (filename);
+	if (!fe)
+		return 0; /* eeek */
 
-	action = 0; /* be pessimistic by defaulting to nothing */
+	gdnd_find_panel_by_drag_context (context, &source_widget);
+	is_desktop_icon = gdnd_drag_context_has_target (context, TARGET_MC_DESKTOP_ICON);
 
-	if (dii->selected
-	    && gdnd_drag_context_has_target (context, TARGET_MC_DESKTOP_ICON)
-	    && (context->actions & GDK_ACTION_MOVE))
-		action = GDK_ACTION_MOVE;
-	else if (gdnd_drag_context_has_target (context, TARGET_URI_LIST)) {
-		if (S_ISDIR (fe->buf.st_mode) || fe->f.link_to_dir)
-			action = context->suggested_action;
-		else if (is_exe (fe->buf.st_mode)
-			 && if_link_is_exe (fe)
-			 && (context->actions & GDK_ACTION_COPY))
-			action = GDK_ACTION_COPY;
-	}
+	action = gdnd_validate_action (context,
+				       TRUE,
+				       source_widget != NULL,
+				       source_widget && is_desktop_icon,
+				       fe,
+				       dii->selected);
 
 	gdk_drag_status (context, action, time);
 	return TRUE;
@@ -1245,11 +1243,6 @@ drop_desktop_icons (GdkDragContext *context, GtkSelectionData *data, int x, int 
 	GList *l;
 	GSList *sel_icons, *sl;
 
-	/*
-	 * FIXME: this needs to do the right thing (what Windows does)
-	 * when desktop_auto_placement is enabled.
-	 */
-
 	/* Find the icon that the user is dragging */
 
 	source_dii = find_icon_by_drag_context (context);
@@ -1292,94 +1285,6 @@ drop_desktop_icons (GdkDragContext *context, GtkSelectionData *data, int x, int 
 	g_slist_free (sel_icons);
 }
 
-/**
- * drop_on_file_entry
- */
-static void
-desktop_icon_drop_uri_list (DesktopIconInfo *dii, GdkDragContext *context, GtkSelectionData *data)
-{
-	char *filename;
-	file_entry *fe;
-	int size;
-	char *buf;
-	const char *mime_type;
-
-	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
-
-	fe = file_entry_from_file (filename);
-	if (!fe)
-		return; /* eek */
-
-	/* 1. If it is a directory, drop the files there */
-
-	if (fe->f.link_to_dir) {
-		gdnd_drop_on_directory (context, data, filename);
-		goto out;
-	}
-
-	/* 2. Try to use a metadata-based drop action */
-
-	if (gnome_metadata_get (filename, "drop-action", &size, &buf) == 0) {
-		/*action_drop (filename, buf, context, data);*/ /* Fixme: i'm undefined */
-		g_free (buf);
-		goto out;
-	}
-
-	/* 3. Try a drop action from the mime-type */
-
-	mime_type = gnome_mime_type_or_default (filename, NULL);
-	if (mime_type) {
-		char *action;
-
-		action = gnome_mime_get_value (mime_type, "drop-action");
-
-		if (action) {
-			/*action_drop (filename, action, context, data);*/ /* Fixme: i'm undefined */
-			goto out;
-		}
-	}
-
-	/* 4. Executable.  Try metadata keys for "open" */
-
-	if (is_exe (fe->buf.st_mode) && if_link_is_exe (fe)) {
-		GList *names, *l;
-		int len, i;
-		char **drops;
-
-		/* Convert the list of filenames into an array of char */
-
-		names = gnome_uri_list_extract_uris (data->data);
-		len = g_list_length (names);
-		drops = (char **) g_malloc (sizeof (char *) * (len+1));
-
-		for (l = names, i = 0; i < len; i++, l = l->next) {
-			char *text = l->data;
-
-			if (strncmp (text, "file:", 5) == 0)
-				text += 5;
-
-			drops [i] = text;
-		}
-		drops [i] = NULL;
-
-		if (gnome_metadata_get (filename, "open", &size, &buf) == 0) {
-			exec_extension (filename, buf, drops, NULL, 0);
-			goto out2;
-		}
-
-		exec_extension (filename, "%f %q", drops, NULL, 0);
-
-		g_free (drops);
-	out2:
-		gnome_uri_list_free_strings (names);
-		g_free (buf);
-
-	}
-
- out:
-	file_entry_free (fe);
-}
-
 static void
 icon_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
 			 GtkSelectionData *data, guint info, guint time, gpointer user_data)
@@ -1388,22 +1293,21 @@ icon_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gin
 
 	dii = user_data;
 
-	switch (info) {
-	case TARGET_MC_DESKTOP_ICON:
-		if (dii->selected)
-			drop_desktop_icons (context, data, x + dii->x, y + dii->y);
-		else
-			printf ("FIXME: what do drop?\n"); /* FIXME */
+	if (gdnd_drag_context_has_target (context, TARGET_MC_DESKTOP_ICON) && dii->selected)
+		drop_desktop_icons (context, data, x + dii->x, y + dii->y);
+	else {
+		char *full_name;
+		file_entry *fe;
 
-		break;
+		full_name = g_concat_dir_and_file (desktop_directory, dii->filename);
+		fe = file_entry_from_file (full_name);
+		if (!fe)
+			return; /* eeeek */
 
-	case TARGET_URI_LIST:
-		printf ("Wheeeeee!\n");
-		desktop_icon_drop_uri_list (dii, context, data);
-		break;
+		if (gdnd_perform_drop (context, data, fe, full_name))
+			reload_desktop_icons (TRUE, x, y);
 
-	default:
-		break;
+		file_entry_free (fe);
 	}
 }
 
@@ -1727,65 +1631,20 @@ desktop_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
 {
 	GdkDragAction action;
 	GtkWidget *source_widget;
+	int is_desktop_icon;
 
-	action = context->suggested_action; /* this is the default */
+	gdnd_find_panel_by_drag_context (context, &source_widget);
+	is_desktop_icon = gdnd_drag_context_has_target (context, TARGET_MC_DESKTOP_ICON);
 
-	if (gdnd_drag_context_has_target (context, TARGET_MC_DESKTOP_ICON))
-		action = GDK_ACTION_MOVE;
-	else if (gdnd_drag_context_has_target (context, TARGET_URI_LIST)) {
-		source_widget = gtk_drag_get_source_widget (context);
-
-		/* If it comes from ourselves, make move the default unless the
-		 * user is explicitly asking for ASK.
-		 */
-		if (source_widget
-		    && context->suggested_action != GDK_ACTION_ASK
-		    && (context->actions & GDK_ACTION_MOVE))
-			action = GDK_ACTION_MOVE;
-	} else if (gdnd_drag_context_has_target (context, TARGET_URL)) {
-		/* FIXME: right now we only allow links.  We should see if we
-		 * can move or copy stuff instead (for ftp instead of http
-		 * sites, for example).
-		 */
-		if (context->actions & GDK_ACTION_LINK)
-			action = GDK_ACTION_LINK;
-		else
-			action = 0;
-	} else
-		action = 0; /* we cannot handle that type of data */
+	action = gdnd_validate_action (context,
+				       TRUE,
+				       source_widget != NULL,
+				       source_widget && is_desktop_icon,
+				       NULL,
+				       FALSE);
 
 	gdk_drag_status (context, action, time);
 	return TRUE;
-}
-
-/*
- * drop_url: Invoked when we have received an URL from Netscape.
- * Install the url on the ~/desktop directory
- */
-static void
-drop_url (GdkDragContext *context, GtkSelectionData *data, gint x, gint y)
-{
-	char *template;
-
-	template = g_concat_dir_and_file (desktop_directory, "urlXXXXXX");
-
-	if (mktemp (template)) {
-		FILE *f;
-
-		f = fopen (template, "w");
-		if (f){
-			fprintf (f, "URL: %s\n", data->data);
-			fclose (f);
-
-			gnome_metadata_set (template, "desktop-url",
-					    strlen (data->data) + 1,
-					    data->data);
-
-			reload_desktop_icons (TRUE, x, y);
-		}
-	}
-
-	g_free (template);
 }
 
 /* Callback used when the root window receives a drop */
@@ -1793,7 +1652,6 @@ static void
 desktop_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
 			    GtkSelectionData *data, guint info, guint time, gpointer user_data)
 {
-	int retval;
 	gint dx, dy;
 
 	/* Fix the proxy window offsets */
@@ -1802,23 +1660,19 @@ desktop_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, 
 	x += dx;
 	y += dy;
 
-	switch (info) {
-	case TARGET_MC_DESKTOP_ICON:
+	if (gdnd_drag_context_has_target (context, TARGET_MC_DESKTOP_ICON))
 		drop_desktop_icons (context, data, x, y);
-		break;
+	else {
+		file_entry *desktop_fe;
 
-	case TARGET_URI_LIST:
-		retval = gdnd_drop_on_directory (context, data, desktop_directory);
-		if (retval)
+		desktop_fe = file_entry_from_file (desktop_directory);
+		if (!desktop_fe)
+			return; /* eeek */
+
+		if (gdnd_perform_drop (context, data, desktop_fe, desktop_directory))
 			reload_desktop_icons (TRUE, x, y);
-		break;
 
-	case TARGET_URL:
-		drop_url (context, data, x, y);
-		break;
-
-	default:
-		break;
+		file_entry_free (desktop_fe);
 	}
 }
 
@@ -1983,11 +1837,6 @@ icon_is_in_area (DesktopIconInfo *dii, int x1, int y1, int x2, int y2)
 	DesktopIcon *dicon;
 
 	dicon = DESKTOP_ICON (dii->dicon);
-
-	/* FIXME: this only intersects the rectangle with the icon image's
-	 * bounds.  Doing the "hard" intersection with the actual shape of the
-	 * image is left as an exercise to the reader.
-	 */
 
 	x1 -= dii->x;
 	y1 -= dii->y;

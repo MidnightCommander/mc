@@ -35,8 +35,12 @@ extern GdkAtom dnd_target_atoms[];
 /* Initializes drag and drop by interning the target convenience atoms */
 void gdnd_init (void);
 
-/* Drop the list of URIs in the selection data to the specified directory */
-int gdnd_drop_on_directory (GdkDragContext *context, GtkSelectionData *selection_data, char *dirname);
+/* Perform a drop on the specified file entry.  This function takes care of
+ * determining how to drop the stuff epending on the type of the file entry.
+ * Returns TRUE if an action was performed, FALSE otherwise (i.e. invalid drop).
+ */
+int gdnd_perform_drop (GdkDragContext *context, GtkSelectionData *selection_data,
+		       file_entry *dest_fe, char *dest_name);
 
 /* Test whether the specified context has a certain target type */
 int gdnd_drag_context_has_target (GdkDragContext *context, TargetType type);
@@ -47,7 +51,8 @@ WPanel *gdnd_find_panel_by_drag_context (GdkDragContext *context, GtkWidget **so
 /* Computes the final drag action based on the suggested actions and the
  * specified conditions.
  */
-GdkDragAction gdnd_validate_action (GdkDragContext *context, int same_process, int same_source,
+GdkDragAction gdnd_validate_action (GdkDragContext *context,
+				    int on_desktop, int same_process, int same_source,
 				    file_entry *dest_fe, int dest_selected);
 
 

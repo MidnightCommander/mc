@@ -1,3 +1,37 @@
+1999-02-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdnd.c (gdnd_validate_action): Added an "on_desktop" argument;
+	this specifies that the user is dragging over the desktop.  Added
+	cases for drags of desktop icons and URLs.
+	(gdnd_perform_drop): New public function to handle drops.  This is
+	now the master function to handle drops -- use this to make all of
+	MC consistent.
+	(drop_on_directory): Made static and renamed from
+	gdnd_drop_on_directory().  Made it fit for use by
+	gdnd_perform_drop().
+	(drop_url_on_directory): New function to drop an url on a
+	directory, moved over from gdesktop.c.
+	(drop_uri_list_on_directory): New function to handle drops of URI
+	lists on a directory.
+	(drop_on_file): New function to handle drops on a non-directory
+	file entry.  This is moved over from gdesktop.c,
+	desktop_icon_drop_uri_list().  This is yet to be finished.
+
+	* gdesktop.c (desktop_icon_drop_uri_list): Fix memory leak.
+	(desktop_drag_motion): Use gdnd_validate_action().
+	(dnd_icon_targets): Allow dropping URLs on icons.
+	(icon_drag_motion): Use gdnd_validate_action().
+	(desktop_drag_data_received): Use gdnd_perform_drop().
+	(icon_drag_data_received): Use gdnd_perform_drop().
+
+	* gscreen.c (panel_icon_list_drag_data_received): Use
+	gdnd_perform_drop().
+	(panel_clist_drag_data_received): Use gdnd_perform_drop().
+	(panel_tree_drag_data_received): Use gdnd_perform_drop().
+
+	* gcmd.c (gnome_about_cmd): Fixed Foundation typo, and updated the
+	copyright date.
+
 1999-02-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-file-property-dialog.c (create_general_properties): Use
