@@ -1629,7 +1629,8 @@ compute_dir_size (char *dirname, long *ret_marked, double *ret_total)
  *
  * compute the number of files and the number of bytes
  * used up by the whole selection, recursing directories
- * as required.
+ * as required.  In addition, it checks to see if it will
+ * overwrite any files by doing the copy.
  */
 static void
 panel_compute_totals (WPanel *panel, long *ret_marked, double *ret_total)
@@ -1868,7 +1869,9 @@ panel_operate_flags (void *source_panel, FileOperation operation, char *thedefau
 	    unmark_files (panel);
 
     } else {
-	/* Many files */
+        /* Many files */
+	/* Need to determine this.*/
+	int policy_over_write_necessary = 1;
 
 	/* Check destination for copy or move operation */
 	if (operation != OP_DELETE){
@@ -1889,12 +1892,19 @@ panel_operate_flags (void *source_panel, FileOperation operation, char *thedefau
 		file_progress_count = panel->marked;
 		file_progress_bytes = panel->total;
 	}
+	
 
 #ifdef HAVE_GNOME
-	
 	/* FIXME: we need to determine if this dialog is actually needed. */
-	if (file_progress_query_replace_policy () == FILE_ABORT)
-	  goto clean_up;
+	/* We need to pre-copy all the files and see if there are any 
+	 * over-writes.  Ugh, this sounds yucky.  )-: */
+	if (policy_over_write_necessary) {
+		if (file_progress_query_replace_policy (TRUE) == FILE_ABORT)
+			goto clean_up;
+		else
+			/* this will initialize some variables */
+			file_progress_query_replace_policy (FALSE);
+	}
 #endif
 	/* We now have ETA in all cases */
 	create_op_win (operation, 1);

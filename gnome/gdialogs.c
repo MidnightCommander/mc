@@ -37,7 +37,6 @@ static gint minor_copy_status;
 
 
 
-
 /* Callbacks go here... */
 static void
 fmd_check_box_callback (GtkWidget *widget, gpointer data)
@@ -177,11 +176,11 @@ file_progress_show_bytes (double done, double total)
 static void
 option_menu_policy_callback (GtkWidget *menu, gpointer data)
 {
-        g_print ("ork ork:%d\n", (gint) data);
         minor_copy_status = (gint) data;
         copy_status = (gint) data;
         gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (op_radio), TRUE);
 }
+
 static void
 policy_callback (GtkWidget *button, gpointer data)
 {
@@ -194,7 +193,7 @@ policy_callback (GtkWidget *button, gpointer data)
         }
 }
 FileProgressStatus
-file_progress_query_replace_policy ()
+file_progress_query_replace_policy (gboolean dialog_needed)
 {
         GtkWidget *qrp_dlg;
         GtkWidget *radio;
@@ -209,6 +208,8 @@ file_progress_query_replace_policy ()
         GtkWidget *menu_item;
 
         copy_status = REPLACE_PROMPT;
+        if (dialog_needed == FALSE)
+                return FILE_CONT;
         minor_copy_status = REPLACE_ALWAYS;
         g_print ("in file_progress_query_replace_policy\n");
         qrp_dlg = gnome_dialog_new (_("Files Exist"),

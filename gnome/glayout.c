@@ -266,63 +266,60 @@ GtkCheckMenuItem *gnome_toggle_snap (void);
 
 GnomeUIInfo gnome_panel_file_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("_New window"),        N_("Opens a new window"), gnome_open_panel },
-	{ GNOME_APP_UI_ITEM, N_("New _Terminal"),     N_("Opens a terminal"), gnome_open_terminal },
+#if 0
+	/* We want to make a new menu entry here... */
+#endif
 	{ GNOME_APP_UI_SEPARATOR },	
+	{ GNOME_APP_UI_ITEM, N_("_Open"),              N_("Open selected files"), NULL },
 	{ GNOME_APP_UI_ITEM, N_("_Copy..."),           N_("Copy files"),       copy_cmd },
-	{ GNOME_APP_UI_ITEM, N_("Rename/_Move..."),    N_("Rename or move files"), ren_cmd },
-	{ GNOME_APP_UI_ITEM, N_("New di_rectory..."),  N_("Creates a new folder"), mkdir_cmd },
+	{ GNOME_APP_UI_ITEM, N_("_Move..."),           N_("Rename or move files"), ren_cmd },
 	{ GNOME_APP_UI_ITEM, N_("_Delete..."),         N_("Delete files from disk"), delete_cmd },
 	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_ITEM, N_("_View"),              N_("View file"), view_cmd },
-	{ GNOME_APP_UI_ITEM, N_("View r_aw"),          N_("View the file without further processing"), view_simple_cmd },
-	{ GNOME_APP_UI_SEPARATOR },	
-	{ GNOME_APP_UI_ITEM, N_("_Select group by pattern..."),   N_("Select a group of files"), select_cmd },
-	{ GNOME_APP_UI_ITEM, N_("_Unselect group by pattern..."), N_("Un-selects a group of marked files"), unselect_cmd },
-	{ GNOME_APP_UI_ITEM, N_("R_everse selection"), N_("Reverses the list of tagged files"), reverse_selection_cmd },
-	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("C_lose"),             N_("Close this panel"), gnome_close_panel },
-#if 0
-	{ GNOME_APP_UI_ITEM, N_("E_xit"),              N_("Exit program"), gnome_quit_cmd, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_EXIT },
-#endif
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 
-GnomeUIInfo gnome_panel_panel_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("_Display mode..."),   N_("Set the display mode for the panel"),  gnome_listing_cmd },
-	{ GNOME_APP_UI_ITEM, N_("_Sort order..."),     N_("Changes the sort order of the files"), sort_cmd },
-	{ GNOME_APP_UI_ITEM, N_("_Filter..."),         N_("Set a filter for the files"), filter_cmd },
-	{ GNOME_APP_UI_ITEM, N_("_Rescan"),            N_("Rescan the directory contents"), reread_cmd },
+GnomeUIInfo gnome_panel_edit_menu [] = {
+	{ GNOME_APP_UI_ITEM, N_("_Cut"),               N_("Cuts the selected files into the cut buffer."),  NULL },
+	{ GNOME_APP_UI_ITEM, N_("C_opy"),              N_("Copies the selected files into the cut buffer."),  NULL },
+	{ GNOME_APP_UI_ITEM, N_("_Paste"),             N_("Pastes files from the cut buffer into the current directory"),  NULL },
 	{ GNOME_APP_UI_SEPARATOR },
-#ifdef USE_NETCODE
-	{ GNOME_APP_UI_ITEM, N_("_Network link..."),   N_("Connect to a remote machine"), netlink_cmd },
-	{ GNOME_APP_UI_ITEM, N_("FT_P link..."),       N_("Connect to a remote machine with FTP"), ftplink_cmd },
-#endif
+	{ GNOME_APP_UI_ITEM, N_("_Select Files..."),   N_("Select a group of files"), select_cmd },
+	{ GNOME_APP_UI_ITEM, N_("_Invert Selection"),  N_("Reverses the list of tagged files"), reverse_selection_cmd },
+	{ GNOME_APP_UI_ITEM, N_("_Rescan Directory"),  N_("Rescan the directory contents"), reread_cmd },
+	{ GNOME_APP_UI_SEPARATOR },
+	{ GNOME_APP_UI_ITEM, N_("Preferences..."),     N_("Configure the GNOME Midnight Commander"), configure_box, NULL,
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP},
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 
-GnomeUIInfo gnome_panel_options_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("_Confirmation..."),   N_("Confirmation settings"), confirm_box },
-	{ GNOME_APP_UI_ITEM, N_("_Options..."),        N_("Global option settings"), configure_box, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP },
-#ifdef USE_VFS
-	{ GNOME_APP_UI_ITEM, N_("_Virtual FS..."),     N_("Virtual File System settings"), configure_vfs },
-#endif
+GnomeUIInfo gnome_panel_view_menu [] = {
+	{ GNOME_APP_UI_ITEM, N_("Icon View"), NULL, NULL},
+	{ GNOME_APP_UI_ITEM, N_("Partial View"), NULL, NULL},
+	{ GNOME_APP_UI_ITEM, N_("Full View"), NULL, NULL},
+	{ GNOME_APP_UI_ITEM, N_("Custom View"), NULL, NULL},
+	{GNOME_APP_UI_ENDOFINFO, NULL, NULL, NULL, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL}
+};
+
+GnomeUIInfo gnome_panel_layout_menu [] = {
+	{ GNOME_APP_UI_ITEM, N_("_Sort Order..."),     N_("Confirmation settings"), sort_cmd },
+	{ GNOME_APP_UI_ITEM, N_("_Filter View..."),    N_("Global option settings"), NULL },
 	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_ITEM, N_("_Save setup"),        NULL, save_setup_cmd },
+	{ GNOME_APP_UI_RADIOITEMS, NULL , NULL, gnome_panel_view_menu},
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 
 GnomeUIInfo gnome_panel_commands_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("_Find..."),           N_("Locate files on disk"),   find_cmd },
-	{ GNOME_APP_UI_ITEM, N_("_Hotlist..."),        N_("List of favorite sites"), quick_chdir_cmd },
-	{ GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare panel contents"), gnome_compare_panels },
-	{ GNOME_APP_UI_ITEM, N_("_External panelize..."), NULL, external_panelize },
+	{ GNOME_APP_UI_ITEM, N_("_Find File..."),      N_("Locate files on disk"),   find_cmd },
+	{ GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
+	{ GNOME_APP_UI_ITEM, N_("_Run Command..."),    N_("Run a command and put the results in a panel"), external_panelize },
 #ifdef USE_VFS					  
-	{ GNOME_APP_UI_ITEM, N_("_Active VFS list..."),   N_("List of active virtual file systems"), reselect_vfs },
-#endif						  
+	{ GNOME_APP_UI_ITEM, N_("_Active VFS list..."),N_("List of active virtual file systems"), reselect_vfs },
+#endif
 #ifdef USE_EXT2FSLIB
-	{ GNOME_APP_UI_ITEM, N_("_Undelete files (ext2fs only)..."), N_("Recover deleted files"), undelete_cmd },
+	/*does this do anything?*/
+/*	{ GNOME_APP_UI_ITEM, N_("_Undelete files (ext2fs only)..."), N_("Recover deleted files"), undelete_cmd },*/
 #endif
 #ifdef WITH_BACKGROUND
 	{ GNOME_APP_UI_ITEM, N_("_Background jobs..."),   N_("List of background operations"), jobs_cmd },
@@ -330,27 +327,19 @@ GnomeUIInfo gnome_panel_commands_menu [] = {
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 
-GnomeUIInfo gnome_panel_desktop_menu [] = {
-#if 0
-	{ GNOME_APP_UI_ITEM, N_("_Arrange icons"),     N_("Arranges the icons on the desktop"), gnome_arrange_icons },
-#endif
-/*	{ GNOME_APP_UI_TOGGLEITEM, N_("Desktop grid"), N_("Use a grid for laying out icons"), gnome_toggle_snap }, */
-	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
-};
 
 GnomeUIInfo gnome_panel_about_menu [] = {
+/*	GNOMEUIINFO_HELP ("midnight-commander"), */
 	{ GNOME_APP_UI_ITEM, N_("_About"),              N_("Information on this program"), gnome_about_cmd, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT },
-/*	GNOMEUIINFO_HELP ("midnight-commander"), */
 	GNOMEUIINFO_END
 };
 
 GnomeUIInfo gnome_panel_menu [] = {
 	{ GNOME_APP_UI_SUBTREE, N_("_File"),     NULL, &gnome_panel_file_menu },
-	{ GNOME_APP_UI_SUBTREE, N_("_Window"),    NULL, &gnome_panel_panel_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("_Edit"),     NULL, &gnome_panel_edit_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("_Layout"),   NULL, &gnome_panel_layout_menu },
 	{ GNOME_APP_UI_SUBTREE, N_("_Commands"), NULL, &gnome_panel_commands_menu },
-	{ GNOME_APP_UI_SUBTREE, N_("_Options"),  NULL, &gnome_panel_options_menu },
-	{ GNOME_APP_UI_SUBTREE, N_("_Desktop"),  NULL, &gnome_panel_desktop_menu },
 	{ GNOME_APP_UI_SUBTREE, N_("_Help"),     NULL, &gnome_panel_about_menu },
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
@@ -358,7 +347,7 @@ GnomeUIInfo gnome_panel_menu [] = {
 GtkCheckMenuItem *
 gnome_toggle_snap (void)
 {
-	return GTK_CHECK_MENU_ITEM (gnome_panel_desktop_menu [1].widget);
+	return NULL; /*GTK_CHECK_MENU_ITEM (gnome_panel_desktop_menu [1].widget);*/
 }
 
 void
