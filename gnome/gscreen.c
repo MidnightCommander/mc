@@ -1270,6 +1270,20 @@ panel_icon_list_unselect_icon (GtkWidget *widget, int index, GdkEvent *event, WP
 		panel->selected = 0;
 }
 
+static int
+panel_icon_renamed (GtkWidget *widget, int index, char *dest, WPanel *panel)
+{
+	char *source;
+
+	source = panel->dir.list [index].fname;
+	if (mc_rename (source, dest) == 0){
+		free (panel->dir.list [index].fname);
+		panel->dir.list [index].fname = strdup (dest);
+		return TRUE;
+	} else
+		return FALSE;
+}
+
 static GdkImlibImage *
 load_image_icon_view (char *base)
 {
@@ -1409,7 +1423,10 @@ panel_create_icon_display (WPanel *panel)
 	gtk_signal_connect (
 		GTK_OBJECT (icon_field), "unselect_icon",
 		GTK_SIGNAL_FUNC (panel_icon_list_unselect_icon), panel);
-
+	gtk_signal_connect (
+		GTK_OBJECT (icon_field), "text_changed",
+		GTK_SIGNAL_FUNC (panel_icon_renamed), panel);
+	
 	gtk_signal_connect (
 		GTK_OBJECT (icon_field), "realize",
 		GTK_SIGNAL_FUNC (panel_icon_list_realized), panel);

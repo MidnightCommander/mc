@@ -1,3 +1,7 @@
+1998-10-14  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (panel_icon_renamed): Add support for renaming files. 
+
 1998-10-13  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c: Use the new icon list. 
