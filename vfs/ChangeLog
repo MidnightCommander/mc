@@ -1,3 +1,8 @@
+2003-03-10  Pavel Roskin  <proski@gnu.org>
+
+	* extfs.c (extfs_cmd): Quote localname - it's based on the entry
+	name, so it can contain dangerous symbols like "&".
+
 2003-02-26  Adam Byrtek  <alpha@debian.org>
 
 	* extfs.c (extfs_open): Retain original filename as a suffix

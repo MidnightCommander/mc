@@ -584,6 +584,7 @@ extfs_cmd (const char *extfs_cmd, struct archive *archive,
 {
     char *file;
     char *quoted_file;
+    char *quoted_localname;
     char *archive_name;
     char *mc_extfsdir;
     char *cmd;
@@ -593,12 +594,14 @@ extfs_cmd (const char *extfs_cmd, struct archive *archive,
     quoted_file = name_quote (file, 0);
     g_free (file);
     archive_name = name_quote (get_archive_name (archive), 0);
+    quoted_localname = name_quote (localname, 0);
 
     mc_extfsdir = concat_dir_and_file (mc_home, "extfs" PATH_SEP_STR);
     cmd = g_strconcat (mc_extfsdir, extfs_prefixes[archive->fstype],
 		       extfs_cmd, archive_name, " ", quoted_file, " ",
-		       localname, NULL);
+		       quoted_localname, NULL);
     g_free (quoted_file);
+    g_free (quoted_localname);
     g_free (mc_extfsdir);
     g_free (archive_name);
 
