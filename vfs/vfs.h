@@ -36,6 +36,12 @@ struct utimbuf {
  */ 
 #endif
 
+/*
+ * The following line is needed, because as usual, AIX polutes every single
+ * name space they can get their hands on
+ */
+#undef vfs_type
+
     /* Our virtual file system layer */
 
     typedef void * vfsid;

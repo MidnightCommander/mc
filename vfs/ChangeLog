@@ -1,3 +1,8 @@
+1999-03-11  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* vfs.h: Make it compile in AIX.  Boy do those guys polute the
+	name space.
+
 1999-03-09  Shooby Ban <bansz@szif.hu>
 
 	* extfs/extfs.ini: Corrected rpms -> rpms:
