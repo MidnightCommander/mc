@@ -342,10 +342,6 @@ clean_dir (dir_list *list, int count)
 static int
 add_dotdot_to_list (dir_list *list, int index)
 {
-    char buffer [MC_MAXPATHLEN + MC_MAXPATHLEN];
-    char *p;
-    int i = 0;
-
     /* Need to grow the *list? */
     if (index == list->size) {
 	list->list = g_realloc (list->list, sizeof (file_entry) *
@@ -355,40 +351,14 @@ add_dotdot_to_list (dir_list *list, int index)
 	list->size += RESIZE_STEPS;
     }
 
+    memset (&(list->list) [index], 0, sizeof(file_entry));
     (list->list) [index].fnamelen = 2;
     (list->list) [index].fname = g_strdup ("..");
     (list->list) [index].f.link_to_dir = 0;
     (list->list) [index].f.stalled_link = 0;
     (list->list) [index].f.dir_size_computed = 0;
-
-    /* FIXME: We need to get the panel definition! to use file_mark */
     (list->list) [index].f.marked = 0;
-    mc_get_current_wd (buffer, sizeof (buffer) - 1 );
-    if (buffer [strlen (buffer) - 1] == PATH_SEP)
-    	buffer [strlen (buffer) - 1] = 0;
-    for (;;) {
-    	strcat (buffer, PATH_SEP_STR "..");
-        p = vfs_canon (buffer);
-        if (mc_stat (p, &((list->list) [index].buf)) != -1){
-	    g_free (p);
-            break;
-	}
-        i = 1;
-        if (!strcmp (p, PATH_SEP_STR)){
-	    g_free (p);
-            return 1;
-	}
-	strcpy (buffer, p);
-	g_free (p);
-    }
-
-/* Commented out to preserve a usable '..'. What's the purpose of this
- * three lines? (Norbert) */
-#if 0
-    if (i) { /* So there is bogus information on the .. directory's stat */
-        (list->list) [index].buf.st_mode &= ~0444;
-    }
-#endif
+    (list->list) [index].buf.st_mode = 040755;
     return 1;
 }
 

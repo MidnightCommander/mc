@@ -1,5 +1,8 @@
 2002-01-20  Pavel Roskin  <proski@gnu.org>
 
+	* dir.c (add_dotdot_to_list): Don't use costly stat() - just put
+	realistic (i.e. bogus) data to the list.
+
 	* screen.c (string_file_size): Don't display size of ".." - it
 	may take too much time to calculate it on VFS.  Show "UP--DIR"
 	instead.
