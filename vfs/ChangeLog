@@ -1,3 +1,7 @@
+Mon Feb  1 02:55:07 1999  Timur I. Bakeyev <mc@bat.ru>
+
+	* tcputil.c: One more my bug with '\0' -> NULL. Oops..
+
 Mon Feb  1 01:45:08 1999  Timur I. Bakeyev <mc@bat.ru>
 
 	* mcserv.c: If setuid() is avaliable, use it, even, streuid() also

@@ -212,7 +212,7 @@ int rpc_get (int sock, ...)
 		return 0;
 	    str_dest = va_arg (ap, char **);
 	    *str_dest = text;
-	    text [len] = NULL;
+	    text [len] = '\0';
 	    break;	    
 
 	case RPC_BLOCK:
