@@ -50,7 +50,7 @@ static void invokeCallbacks(poptContext con,
     
     while (opt->longName || opt->shortName || opt->arg) {
 	if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INCLUDE_TABLE) {
-	    invokeCallbacks(con, opt->arg, post);
+	    invokeCallbacks(con, 0, opt->arg, post);
 	} else if (((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_CALLBACK) &&
 		   ((!post && (opt->argInfo & POPT_CBFLAG_PRE)) ||
 		    ( post && (opt->argInfo & POPT_CBFLAG_POST)))) {
@@ -88,7 +88,7 @@ poptContext poptGetContext(char * name, int argc, char ** argv,
     if (name)
 	con->appName = strcpy(malloc(strlen(name) + 1), name);
 
-    invokeCallbacks(con, con->options, 0);
+    invokeCallbacks(con, 0, con->options, 0);
 
     return con;
 }
@@ -292,7 +292,7 @@ int poptGetNextOpt(poptContext con) {
 		&& con->os > con->optionStack)
 	    con->os--;
 	if (!con->os->nextCharArg && con->os->next == con->os->argc) {
-	    invokeCallbacks(con, con->options, 1);
+	    invokeCallbacks(con, 0, con->options, 1);
 	    if (con->doExec) execCommand(con);
 	    return -1;
 	}
