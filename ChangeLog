@@ -3,6 +3,8 @@
 	* mc.qpg.in: Synchronization with the latest file has been added
 	to the distro.
 	* configure.ac: Added information about status of charset enabling.
+	* syntax/Syntax: Treat QNX6 specific files with extensions qpg and
+	qpg.in as xml files.
 
 2004-11-02  Roland Illig  <roland.illig@gmx.de>
 

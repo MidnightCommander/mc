@@ -47,7 +47,7 @@ include nroff.syntax
 file ..\*\\.(htm|html|HTM|HTML)$ HTML\sFile
 include html.syntax
 
-file ..\*\\.(xml|XML|xsd|XSD|xslt?|XSLT?|dtd|DTD)$ XML\sdocument (\\?xml\sversion|!DOCTYPE\s)
+file ..\*\\.(xml|XML|xsd|XSD|xslt?|XSLT?|dtd|DTD|qpg|qpg.in)$ XML\sdocument (\\?xml\sversion|!DOCTYPE\s)
 include xml.syntax
 
 file ..\*\\.(pp|PP|pas|PAS|dpr|DPR|inc|INC)$ Pascal\sProgram
