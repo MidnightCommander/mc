@@ -48,7 +48,7 @@ static void menu_scan_hotkey(Menu menu)
 	menu->hotkey = 0;
 }
 
-Menu create_menu (char *name, menu_entry *entries, int count)
+Menu create_menu (char *name, menu_entry *entries, int count, char *help_node)
 {
     Menu menu;
     char *cp;
@@ -82,6 +82,7 @@ Menu create_menu (char *name, menu_entry *entries, int count)
     menu->name = g_strdup (name);
     menu_scan_hotkey(menu);
     menu->start_x = 0;
+    menu->help_node = g_strdup (help_node);
     return menu;
 }
 
@@ -272,20 +273,8 @@ static int menubar_handle_key (WMenu *menubar, int key)
 
     if (key == KEY_F(1)) {
 	if (menubar->dropped) {
-	    switch (menubar->selected) {
-	    case 1:
-		interactive_display (NULL, "[File Menu]");
-		break;
-	    case 2:
-		interactive_display (NULL, "[Command Menu]");
-		break;
-	    case 3:
-		interactive_display (NULL, "[Options Menu]");
-		break;
-	    default:
-		interactive_display (NULL, "[Left and Right Menus]");
-		break;
-	    }
+	    interactive_display (NULL,
+		    (menubar->menu [menubar->selected])->help_node);
 	} else {
 	    interactive_display (NULL, "[Menu Bar]");
 	}
@@ -545,6 +534,7 @@ void
 destroy_menu (Menu menu)
 {
     g_free (menu->name);
+    g_free (menu->help_node);
     g_free (menu);
 }
 

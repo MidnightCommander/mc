@@ -1095,12 +1095,17 @@ void
 init_menu (void)
 {
     MenuBar [0] = create_menu ( horizontal_split ? _(" &Above ") : _(" &Left "), 
-                                PanelMenu, menu_entries (PanelMenu));
-    MenuBar [1] = create_menu (_(" &File "), FileMenu, menu_entries (FileMenu));
-    MenuBar [2] = create_menu (_(" &Command "), CmdMenu, menu_entries (CmdMenu));
-    MenuBar [3] = create_menu (_(" &Options "), OptMenu, menu_entries (OptMenu));
+                                PanelMenu, menu_entries (PanelMenu),
+				"[Left and Right Menus]");
+    MenuBar [1] = create_menu (_(" &File "), FileMenu, menu_entries (FileMenu),
+				"[File Menu]");
+    MenuBar [2] = create_menu (_(" &Command "), CmdMenu, menu_entries (CmdMenu),
+				"[Command Menu]");
+    MenuBar [3] = create_menu (_(" &Options "), OptMenu, menu_entries (OptMenu),
+				"[Options Menu]");
     MenuBar [4] = create_menu (horizontal_split ? _(" &Below ") : _(" &Right "), 
-			       RightMenu, menu_entries (PanelMenu));
+			       RightMenu, menu_entries (PanelMenu),
+			       "[Left and Right Menus]");
 }
 
 void

@@ -24,6 +24,7 @@ typedef struct {
     int    hotkey;
     menu_entry *entries;
     int    start_x;		/* position relative to menubar start */
+    char   *help_node;
 } sMenu;
 typedef sMenu *Menu;
 
@@ -43,7 +44,8 @@ typedef struct {
     int    previous_selection;	/* Selected widget before activating menu */
 } WMenu;
 
-Menu   create_menu     (char *name, menu_entry *entries, int count);
+Menu   create_menu     (char *name, menu_entry *entries, int count,
+			char *help_node);
 void   destroy_menu    (Menu menu);
 WMenu *menubar_new     (int y, int x, int cols, Menu menu [], int items);
 void   menubar_arrange (WMenu* menubar);
