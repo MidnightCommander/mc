@@ -3987,9 +3987,9 @@
 
 2000-04-12  Timur Bakeyev  <mc@bat.ru>
 
-	* widget.c ([forward|backward]_word): Changed one more time - now it
-	skips alpnums and THEN spaces+punct. That gives almost the same
-	results, but twice quicker. Hope, this will be accepted.
+	* widget.c ([forward|backward]_word): Changed one more time -
+	now it skips alnums and THEN spaces+punct. That gives almost the
+	same results, but twice quicker. Hope, this will be accepted.
 
 2000-04-06  Timur Bakeyev  <mc@bat.ru>
 
