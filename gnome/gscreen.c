@@ -1592,6 +1592,10 @@ do_switch_to_iconic (GtkWidget *widget, WPanel *panel)
 {
 	if (panel->list_type == list_icons)
 		return;
+	panel->list_type = list_icons;
+	set_panel_formats (panel);
+	paint_panel (panel);
+	do_refresh ();
 }
 
 static void
@@ -1599,6 +1603,10 @@ do_switch_to_listing (GtkWidget *widget, WPanel *panel)
 {
 	if (panel->list_type != list_icons)
 		return;
+	panel->list_type = list_full;
+	set_panel_formats (panel);
+	paint_panel (panel);
+	do_refresh ();
 }
 
 static GtkWidget *
