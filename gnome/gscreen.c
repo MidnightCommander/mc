@@ -53,6 +53,7 @@ GdkPixmap *icon_link_pixmap;
 GdkBitmap *icon_link_mask;
 GdkPixmap *icon_dev_pixmap;
 GdkBitmap *icon_dev_mask;
+
 static GtkTargetEntry drag_types [] = {
 	{ "text/uri-list", 0, TARGET_URI_LIST },
 	{ "text/plain",    0, TARGET_TEXT_PLAIN },
@@ -1018,6 +1019,85 @@ panel_clist_drag_leave (GtkWidget *widget, GdkDragContext *ctx, guint time, void
 	}
 }
 
+/**
+ * panel_icon_list_scrolling_is_desirable:
+ *
+ * If the cursor is in a position close to either edge (top or bottom)
+ * and there is possible to scroll the window, this routine returns
+ * true.
+ */
+static gboolean
+panel_icon_list_scrolling_is_desirable (WPanel *panel, int x, int y)
+{
+	GtkAdjustment *va;
+
+	va = GNOME_ICON_LIST (panel->icons)->adj;
+
+	if (y < 10){
+		if (va->value > va->lower)
+			return TRUE;
+	} else {
+		if (y > (GTK_WIDGET (panel->icons)->allocation.height-20)){
+			if (va->value < va->upper)
+				return TRUE;
+		}
+	}
+
+	return FALSE;
+}
+
+
+/**
+ * panel_icon_list_scroll:
+ *
+ * Timer callback invoked to scroll the clist window
+ */
+static gboolean
+panel_icon_list_scroll (gpointer data)
+{
+	WPanel *panel = data;
+	GtkAdjustment *va;
+
+	va = GNOME_ICON_LIST (panel->icons)->adj;
+
+	if (panel->drag_motion_y < 10)
+		gtk_adjustment_set_value (va, va->value - va->step_increment);
+	else{
+		gtk_adjustment_set_value (va, va->value + va->step_increment);
+	}
+	return TRUE;
+}
+/**
+ * panel_icon_list_drag_motion:
+ *
+ * Invoked when an application dragging over us has the the cursor moved.
+ * If we are close to the top or bottom, we scroll the window
+ */
+static gboolean
+panel_icon_list_drag_motion (GtkWidget *widget, GdkDragContext *ctx, int x, int y, guint time, void *data)
+{
+	WPanel *panel = data;
+	
+	panel_setup_drag_motion (panel, x, y, panel_icon_list_scrolling_is_desirable, panel_icon_list_scroll);
+	return TRUE;
+}
+
+/**
+ * panel_icon_list_drag_leave:
+ *
+ * Invoked when the dragged object has left our region
+ */
+static void
+panel_icon_list_drag_leave (GtkWidget *widget, GdkDragContext *ctx, guint time, void *data)
+{
+	WPanel *panel = data;
+
+	if (panel->timer_id != -1){
+		gtk_timeout_remove (panel->timer_id);
+		panel->timer_id = -1;
+	}
+}
+
 /*
  * Create, setup the file listing display.
  */
@@ -1061,6 +1141,10 @@ panel_create_file_list (WPanel *panel)
 	gtk_drag_dest_set (GTK_WIDGET (file_list), GTK_DEST_DEFAULT_ALL,
 			   drop_types, ELEMENTS (drop_types),
 			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
+
+	gtk_drag_source_set (GTK_WIDGET (file_list), GDK_BUTTON1_MASK,
+			     drag_types, ELEMENTS (drag_types),
+			     GDK_ACTION_LINK | GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_ASK);
 
 	gtk_signal_connect (GTK_OBJECT (file_list), "drag_data_get",
 			    GTK_SIGNAL_FUNC (panel_drag_data_get), panel);
@@ -1254,6 +1338,10 @@ panel_create_icon_display (WPanel *panel)
 			   drop_types, ELEMENTS (drop_types),
 			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
 
+	gtk_drag_source_set (GTK_WIDGET (ilist), GDK_BUTTON1_MASK,
+			     drag_types, ELEMENTS (drag_types),
+			     GDK_ACTION_LINK | GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_ASK);
+
 	gtk_signal_connect (GTK_OBJECT (ilist), "drag_data_get",
 			    GTK_SIGNAL_FUNC (panel_drag_data_get),
 			    panel);
@@ -1280,6 +1368,15 @@ panel_create_icon_display (WPanel *panel)
 			    GTK_SIGNAL_FUNC (panel_widget_motion),
 			    panel);
 
+	/*
+	 * This signal is provide for scrolling the main window if
+	 * data is being dragged
+	 */
+	gtk_signal_connect (GTK_OBJECT (ilist), "drag_motion",
+			    GTK_SIGNAL_FUNC (panel_icon_list_drag_motion), panel);
+	gtk_signal_connect (GTK_OBJECT (ilist), "drag_leave",
+			    GTK_SIGNAL_FUNC (panel_icon_list_drag_leave), panel);
+	
 	return GTK_WIDGET (ilist);
 }
 

@@ -79,6 +79,8 @@ void do_refresh (void)
 {
     if (we_are_background)
 	return;
+
+#ifndef HAVE_GNOME
     if (!refresh_list)
 	return;
     else {
@@ -88,6 +90,7 @@ void do_refresh (void)
 	    do_complete_refresh (refresh_list);
 	}
     }
+#endif
 }
 
 

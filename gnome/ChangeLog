@@ -1,3 +1,8 @@
+1998-12-31  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (panel_create_icon_display): Provide auto-scroll
+	handlers for the drag stuff.
+
 1998-12-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gmain.c (create_panels): Register corba server here.
