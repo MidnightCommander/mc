@@ -2914,44 +2914,45 @@ Esempi:
 .PP
 .\"NODE "Colors"
 .SH "Colori"
-The Midnight Commander will try to detect if your terminal supports
-color using the terminal database and your terminal name.  Sometimes
-it gets confused, so you may force color mode or disable color mode
-using the -c and -b flag respectively.  
+Il Midnight Commander tenta di stabilire se il terminale corrente
+supporta i colori usando il database dei terminali e il nome del
+terminale corrente. Capita che possa sbagliarsi, così si può essere
+costretti a forzare la modalità a colori o a disabilitarla usando
+rispettivamente le opzioni -c e -b.
 .PP
-If the program is compiled with the Slang screen manager instead of
-ncurses, it will also check the variable 
+Se il programma è compilato con il manager dei schermo Slang invece
+che ncurses, controllerà se è impostata anche la variabile
 .B COLORTERM,
-if it is set, it has the same effect as the -c flag.
+con lo stesso effetto dell'opzione -c.
 .PP
-You may specify terminals that always force color mode
-by adding the 
+E' possibile specificare i terminali su cui si vuole forzare sempre 
+la modalità colore aggiungendo la variabile
 .I color_terminals
-variable to the Colors
-section of the initialization file. This will prevent the
-Midnight Commander from trying to detect if your terminal
-supports color. Example:
+nella sezione Color del file di inizializzazione.
+Questo previene il Midnight Commander dal tentare di controllare se
+il terminale supporta i colori. Per esempio:
 .nf
 [Colors]
 color_terminals=linux,xterm
 .fi
 .nf
-color_terminals=terminal-name1,terminal-name2...
+color_terminals=nome_terminale-1,nome-terminale-2...
 .fi
 .PP
-The program can be compiled with both ncurses and slang, ncurses does
-not provide a way to force color mode: ncurses uses just the
-information in the terminal database.
+Il programma può essere compilato sia con il supporto di ncurses che
+di slang ma ncurses non fornisce alcun modo per forzare la modalità
+colore: ncurses userà solo le informazioni nel database dei terminali.
 .PP
-The Midnight Commander provides a way to change the default colors.
-Currently the colors are configured using the environment variable
+Il Midnight Commander fornisce un modo per cambiare i colori predefiniti.
+Attualmente i colori sono configurati usando la variabile ambiente
 .B MC_COLOR_TABLE 
-or the Colors section in the initialization file.
+o la sezione Color nel file di inizializzazione.
 .PP
-In the Colors section, the default color map is loaded from the 
+Nella sezione Color, la mappa dei colori predefinita viene caricata 
+dalla variabile 
 .I base_color 
-variable.  You can specify an alternate color map for a terminal by
-using the terminal name as the key in this section.  Example:
+ . Si può specificare una mappa colori alternativa per un terminale
+usando il nome del terminale come chiave nella sezione. Esempio:
 .PP
 .nf
 [Colors]
@@ -2959,88 +2960,93 @@ base_color=
 xterm=menu=magenta:marked=,magenta:markselect=,red
 .fi
 .PP
-The format for the color definition is:
+Il cormato della definizione dei colori è:
 .PP
 .nf
-  <keyword>=<foregroundcolor>,<backgroundcolor>:<keyword>= ...
+  <parolachiave>=<coloreprimopiano>,<coloresfondo>:<parolachiave>= ...
 .fi
 .PP
-The colors are optional, and the keywords are: normal,
+I colori sono opzionali e le parolechiave sono: normal,
 selected, marked, markselect, errors, input, reverse, gauge;
-Menu colors are: menu, menusel, menuhot, menuhotsel;  Dialog colors
-are: dnormal, dfocus, dhotnormal, dhotfocus;  Help colors
-are: helpnormal, helpitalic, helpbold, helplink, helpslink;  
-Viewer color is: viewunderline; Special highlighting colors are: 
-executable, directory, link, device, special, core; Editor colors
-are: editnormal, editbold, editmarked.
+I colori dei menu sono: menu, menusel, menuhot, menuhotsel;  
+I colori delle finestre di dialogo sono: dnormal, dfocus, dhotnormal, 
+dhotfocus; 
+I colori dell'aiuto sono: helpnormal, helpitalic, helpbold, 
+helplink, helpslink; 
+Il colore del visualizzatore è: viewunderline; 
+Colori speciali di evidenziazione: executable, directory, link, device, 
+special, core; 
+I colori dell'editor sono: editnormal, editbold, editmarked.
 .PP
 .I input 
-determines the color of input lines used in query dialogs.
+determina il colore delle righe di input usate delle finestre di dialogo.
 .PP
 .I gauge 
-determines the color of the filled part of the progress bar
-(gauge), which shows how many percent of files were copied
-etc. in a graphical way.
+determina il colore della parte riempita della barra di progressione
+(gauge), che mostra quanta percentuale del file è stata copiata o 
+altro in forma grafica.
 .PP
-The dialog boxes use the following colors:
+Le finestre di dialogo usano i colori seguenti:
 .I dnormal 
-is used for the normal text,
+usata per il testo normale,
 .I dfocus
-is the color used for the currently selected component,
+è il colore usato per il componente correntemente selezionato,
 .I dhotnormal
-is the color used to differentiate the hotkey color in normal
-components, whereas the
+è il colore usato per differenziare il tasto di scelta rapida
+nei componenti normali, mentre il colore
 .I dhotfocus
-color is used for the highlighted color in the currently selected
-component.
+viene usato per il colore evidenziato nel componente correntemente
+selezionato.
 .PP
-Menus use the same scheme but uses the menu, menusel, menuhot and
-menuhotsel tags instead.
+I menu usano lo stesso schema ma usano invece i selettori menu, menusel, 
+menuhot e menuhotsel.
 .PP
-Help uses the following colors:
+L'aiuto usa i seguenti colori:
 .I helpnormal
-is used for normal text,
+viene usato per il testo normale,
 .I helpitalic
-is used for text which is emphasized in italic in the manual page,
+viene usato per il testo enfatizzato con il corsivo nelle pagine del manuale,
 .I helpbold
-is used for text which is emphasized in bold in the manual page,
+viene usato per il testo enfatizzato con il grassetto nelle pagine del manuale,
 .I helplink
-is used for not selected hyperlinks and
+viene usato per un collegamento non selezionato e
 .I helpslink
-is used for selected hyperlink.
+viene usato per un collegamento selezionato.
 .PP
-Special highlight colors determine how files are displayed 
-when file highlighting is enabled (see the section on
+I colori speciali di evidenziazione determinano come i file
+vengono visualizzati quando l'evidenziazione dei file è 
+abilitata (vedere sezione 
 .\"LINK2"
-Layout).
+Aspetto).
 .\"Layout
 .I directory
-is used for directories or symbolic links to directories; 
+usata per directory o collegamenti simbolici a directory;
 .I executable
-for executable files;
+per il file eseguibili;
 .I link
-is used for symbolic links which are neither stalled nor linked
-to a directory; 
+viene usata per i collegamenti simbolici che non sono nè interrotti
+nè connessi a directory;
 .I stalledlink
-is used for stalled symbolic links; 
+usata per collegamenti simbolici interrotti;
 .I device
-- character and block devices; 
+- dispositivi a caratteri e blocchi;
 .I special
-is used for special files, such as pipes and sockets; 
+usata per file speciali, come pipe e socket;
 .I core
-is for core files.
+usata per il file core.
 .PP
-The possible colors are: black, gray, red, brightred, green,
+I colori possibili sono: black, gray, red, brightred, green,
 brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
-cyan, brightcyan, lightgray and white. And there is a special keyword
-for transparent background. It is 'default'. The 'default' can only be
-used for background color. Example:
+cyan, brightcyan, lightgray e white. Inoltre c'è una speciale parola
+chiave per lo sfondo trasparente. Essa è 'default'. Il 'default' può
+essere usato solo come colore di sfondo. Esempio:
 .nf
 [Colors]
 base_color=normal=white,default:marked=magenta,default
 .fi
 .PP
-.SH "Special Settings"
+.\"NODE "Special Settings"
+.SH "Impostazioni Speciali"
 Most of the settings of the Midnight Commander can be changed from the
 menus. However, there are a small number of settings which can only be
 changed by editing the setup file.
