@@ -181,7 +181,7 @@ undelfs_loaddel (void)
 	message_1s (1, undelfserr, " not enough memory ");
 	return 0;
     }
-    block_buf = g_new (fs->blocksize, 3);
+    block_buf = g_malloc (fs->blocksize * 3);
     if (!block_buf) {
 	message_1s (1, undelfserr, " while allocating block buffer ");
 	goto free_delarray;
@@ -413,7 +413,7 @@ undelfs_open (vfs *me, char *fname, int flags, int mode)
 	    g_free (f);
 	    return 0;
 	}
-	p->buf = g_new (fs->blocksize, 1);
+	p->buf = g_malloc (fs->blocksize);
 	if (!p->buf){
 	    g_free (p);
 	    g_free (file);
