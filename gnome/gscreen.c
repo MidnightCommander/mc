@@ -1092,7 +1092,7 @@ load_image_icon_view (char *base)
 	GdkImlibImage *im;
 	char *f = concat_dir_and_file (ICONDIR, base);
 
-	im = gdk_imlib_load_image (base);
+	im = gdk_imlib_load_image (f);
 	g_free (f);
 	return im;
 }
