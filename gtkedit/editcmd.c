@@ -440,27 +440,23 @@ void edit_split_filename (WEdit * edit, const char *f)
 
 #ifdef GTK
 
-static char cwd[1040];
 
 static char *edit_canonicalize_pathname (const char *p)
 {
     char *q, *r;
     char *t = NULL;
+    char *cwd;
 
     if (*p != '/') {
-	if (strlen (cwd) == 0) {
-#ifdef HAVE_GETCWD
-	    getcwd (cwd, MAX_PATH_LEN);
-#else
-	    getwd (cwd);
-#endif
-	}
-	t = malloc (strlen (cwd) + strlen (p) + 2);
+	cwd = g_get_current_dir ();
+	t = g_malloc (strlen (cwd) + strlen (p) + 2);
 	strcpy (t, cwd);
 	strcat (t, "/");
 	strcat (t, p);
+	g_free (cwd);
 	p = t;
     }
+
     r = q = malloc (strlen (p) + 2);
     while (*p) {
 	if (*p != '/') {
@@ -484,8 +480,7 @@ static char *edit_canonicalize_pathname (const char *p)
 	    q++;
 	}
     }
-    if (t)
-	free (t);
+    g_free (t);
     *q = '\0';
 /* get rid of trailing / */
     if (r[0] && r[1])

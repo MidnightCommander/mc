@@ -1,5 +1,8 @@
 2001-07-19  Pavel Roskin  <proski@gnu.org>
 
+	* editcmd.c (edit_canonicalize_pathname): Don't ever use
+	getwd(), use g_get_current_dir() instead.
+
 	* editoptions.c (edit_options_dialog): Call edit_load_syntax()
 	if user	turned syntax highlighting off to unload the rules.
 
