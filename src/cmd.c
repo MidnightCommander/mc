@@ -1169,7 +1169,7 @@ void mkdir_panel_cmd (void)
 /* value should be freed by calling function g_free() */
 char *guess_message_value (void)
 {
-    const char *var[] = {
+    static const char * const var[] = {
 	/* The highest priority value is the `LANGUAGE' environment
         variable.  This is a GNU extension.  */
 	"LANGUAGE",
@@ -1298,13 +1298,13 @@ void ftplink_cmd (void)
     nice_cd (_(" FTP to machine "), _(machine_str),
 	     "[FTP File System]", "/#ftp:", 1);
 }
-
+#ifdef WITH_SMBFS
 void smblink_cmd (void)
 {
     nice_cd (_(" SMB link to machine "), _(machine_str),
 	     "[SMB File System]", "/#smb:", 0);
 }
-
+#endif
 #ifdef HAVE_SETSOCKOPT
 void source_routing (void)
 {
