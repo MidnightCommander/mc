@@ -1,10 +1,20 @@
+2001-05-22  Pavel Roskin  <proski@gnu.org>
+
+	* ext.c (exec_extension): Use g_free() on the result of
+	mc_mkstemps(). Don't free it if mc_mkstemps() fails - it's not
+	needed anymore.
+	* user.c (execute_menu_command): Likewise.
+	* util.c (mc_mkstemps): Return NULL in the filename in the case
+	of failure. Remove support for NULL as the first argument.
+	From Andrew V. Samoilov.
+
 2001-05-21  Pavel Roskin  <proski@gnu.org>
 
-	* src/ext.c (exec_extension): Use mc_mkstemps().
-	* src/user.c (execute_menu_command): Use mc_mkstemps().
-	* src/util.c (mc_mkstemps): New function - safely create and
+	* ext.c (exec_extension): Use mc_mkstemps().
+	* user.c (execute_menu_command): Use mc_mkstemps().
+	* util.c (mc_mkstemps): New function - safely create and
 	open temporary file. Return the handle and the name.
-	* src/util.h: Declarations for init_tmpdir() and mc_mkstemps().
+	* util.h: Declarations for init_tmpdir() and mc_mkstemps().
 	Define TMPDIR_DEFAULT and SCRIPT_SUFFIX.
 
 2001-05-18  Pavel Roskin  <proski@gnu.org>

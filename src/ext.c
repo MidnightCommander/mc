@@ -145,7 +145,6 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
     if (cmd_file_fd == -1){
 	message (1, MSG_ERROR, _(" Can't create temporary command file \n %s "),
 		 unix_error_string (errno));
-	free (file_name);
 	return;
     }
     cmd_file = fdopen (cmd_file_fd, "w");
@@ -166,7 +165,7 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
 		    if (localcopy) {
 		        mc_ungetlocalcopy (filename, localcopy, 0);
 		    }
-		    free (file_name);
+		    g_free (file_name);
 		    return;
 		}
 		fputs (parameter, cmd_file);
@@ -210,7 +209,7 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
 			    if (localcopy == NULL) {
 				fclose(cmd_file);
 				unlink(file_name);
-				free (file_name);
+				g_free (file_name);
 				return;
 			    }
 			    mc_stat (localcopy, &mystat);
@@ -318,7 +317,7 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
         mc_stat (localcopy, &mystat);
         mc_ungetlocalcopy (filename, localcopy, localmtime != mystat.st_mtime);
     }
-    free (file_name);
+    g_free (file_name);
 }
 
 #ifdef FILE_L

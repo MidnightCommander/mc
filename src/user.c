@@ -545,7 +545,6 @@ execute_menu_command (char *commands)
     if (cmd_file_fd == -1){
 	message (1, MSG_ERROR, _(" Can't create temporary command file \n %s "),
 		 unix_error_string (errno));
-        free (file_name);
 	return;
     }
     cmd_file = fdopen (cmd_file_fd, "w");
@@ -570,7 +569,7 @@ execute_menu_command (char *commands)
 		    /* User canceled */
 		    fclose (cmd_file);
 		    unlink (file_name);
-                    free (file_name);
+                    g_free (file_name);
 		    return;
 		}
 		if (do_quote) {
@@ -611,7 +610,7 @@ execute_menu_command (char *commands)
     chmod (file_name, S_IRWXU);
     execute (file_name);
     unlink (file_name);
-    free (file_name);
+    g_free (file_name);
 }
 
 /* 

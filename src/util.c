@@ -1288,9 +1288,10 @@ typedef unsigned long gcc_uint64_t;
 
 /*
  * Arguments:
- * pname - if not NULL, put the filename here.
- * prefix - filename only, temporary directory is prepended.
- * suffix - if not NULL, appended after the random part.
+ * pname (output) - pointer to the name of the temp file (needs g_free).
+ *                  NULL if the function fails.
+ * prefix - part of the filename before the random part (without directory).
+ * suffix - if not NULL, part of the filename after the random part.
  *
  * Result:
  * handle of the open file or -1 if couldn't open any.
@@ -1316,8 +1317,7 @@ int mc_mkstemps(char **pname, const char *prefix, const char *suffix)
     tmpbase = concat_dir_and_file (tmpdir, prefix);
 
     tmpname = g_strconcat (tmpbase, "XXXXXX", suffix, NULL);
-    if (pname)
-	*pname = tmpname;
+    *pname = tmpname;
     XXXXXX = &tmpname[strlen (tmpbase)];
     g_free(tmpbase);
 
@@ -1345,8 +1345,6 @@ int mc_mkstemps(char **pname, const char *prefix, const char *suffix)
 	fd = open (tmpname, O_RDWR|O_CREAT|O_EXCL, 0600);
 	if (fd >= 0) {
 	    /* Successfully created.  */
-	    if (!pname)
-		g_free (tmpname);
 	    return fd;
 	}
 
@@ -1356,12 +1354,9 @@ int mc_mkstemps(char **pname, const char *prefix, const char *suffix)
 	value += 7777;
     }
 
-    /* We return the null string if we can't find a unique file name.
-       Of course, only if the caller wants any string.  */
-    if (!pname)
-	g_free (tmpname);
-    else
-	tmpname[0] = '\0';
+    /* Unsuccessful. Free the filename. */
+    g_free (tmpname);
+    tmpname = NULL;
 
     return -1;
 }
