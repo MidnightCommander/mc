@@ -45,6 +45,10 @@ static FILE *f_out;		/* Output file */
 
 static const char *c_in;	/* Current input filename */
 
+static int indentation;		/* Indentation level, n spaces */
+static int tp_flag;		/* Flag: .TP paragraph
+				   1 = this line is .TP label,
+				   2 = first line of label description. */
 static char *topics = NULL;
 
 struct node {
@@ -226,7 +230,7 @@ print_string (char *buffer)
 		continue;
 	    }
 	    backslash_flag = 0;
-	    fprintf (f_out, "%c", c);
+	    fputc (c, f_out);
 	}
     } else {
 	/* Split into words */
@@ -241,8 +245,11 @@ print_string (char *buffer)
 		    newline ();
 		/* Words are separated by spaces */
 		if (col > 0) {
-		    fprintf (f_out, " ");
+		    fputc (' ', f_out);
 		    col++;
+		} else if (indentation) {
+		    while (col++ < indentation)
+			fputc (' ', f_out);
 		}
 		/* Attempt to handle backslash quoting */
 		while (*(buffer)) {
@@ -252,7 +259,7 @@ print_string (char *buffer)
 			continue;
 		    }
 		    backslash_flag = 0;
-		    fprintf (f_out, "%c", c);
+		    fputc (c, f_out);
 		}
 		/* Increase column */
 		col += len;
@@ -438,6 +445,22 @@ handle_alt_font (char *buffer)
     return 1;
 }
 
+/* Handle .IP and .TP commands.  is_tp is 1 for .TP, 0 for .IP */
+/* buffer is not used now */
+static void
+handle_tp_ip (char *buffer, int is_tp)
+{
+    if (col > 0)
+	newline ();
+    newline ();
+    if (is_tp) {
+	tp_flag = 1;
+	indentation = 0;
+    }
+    else
+	indentation = 8;
+}
+
 /* Handle all the roff dot commands.  See man groff_man for details */
 static void
 handle_command (char *buffer)
@@ -448,6 +471,7 @@ handle_command (char *buffer)
     strtok (buffer, " \t");
 
     if (strcmp (buffer, ".SH") == 0) {
+	indentation = 0;
 	handle_node (buffer, 1);
     } else if (strcmp (buffer, ".\\\"NODE") == 0) {
 	handle_node (buffer, 0);
@@ -460,6 +484,7 @@ handle_command (char *buffer)
 	link_flag = 2;
     } else if ((strcmp (buffer, ".PP") == 0) || (strcmp (buffer, ".P") == 0)
 	       || (strcmp (buffer, ".LP") == 0)) {
+	indentation = 0;
 	/* End of paragraph */
 	if (col > 0)
 	    newline ();
@@ -504,12 +529,10 @@ handle_command (char *buffer)
 	*w++ = CHAR_FONT_NORMAL;
 	*w = 0;
 	print_string (buffer);
-    } else if ((strcmp (buffer, ".TP") == 0)
-	       || (strcmp (buffer, ".IP") == 0)) {
-	/* TODO: Implement these indented paragraphs */
-	if (col > 0)
-	    newline ();
-	newline ();
+    } else if (strcmp (buffer, ".TP") == 0) {
+	handle_tp_ip (buffer, 1);
+    } else if (strcmp (buffer, ".IP") == 0) {
+	handle_tp_ip (buffer, 0);
     } else if (strcmp (buffer, ".\\\"TOPICS") == 0) {
 	if (out_row > 1) {
 	    print_error
@@ -675,15 +698,29 @@ main (int argc, char **argv)
 		print_string (input_line);
 		newline ();
 	    }
-	} else if (link_flag)
+	} else if (link_flag) {
 	    /* The line is a link */
 	    handle_link (input_line);
-	else if (buffer[0] == '.')
+	} else if (buffer[0] == '.') {
 	    /* The line is a roff command */
 	    handle_command (input_line);
-	else {
+	} else {
 	    /* A normal line, just output it */
 	    print_string (input_line);
+	}
+	/* .TP label processed as usual line */
+	if (tp_flag) {
+	    if (tp_flag == 1) {
+		tp_flag = 2;
+	    } else {
+	        tp_flag = 0;
+		indentation = 8;
+		if (col >= indentation)
+		    newline ();
+		else
+		    while (++col < indentation)
+			fputc (' ', f_out);
+	    }
 	}
     }
 
