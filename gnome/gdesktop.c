@@ -53,7 +53,6 @@ struct desktop_icon_info {
 	int x, y;		/* Position in the desktop */
 	int slot;		/* Index of the slot the icon is in, or -1 for none */
 	char *filename;		/* The file this icon refers to (relative to the desktop_directory) */
-	int press_x, press_y;	/* Button press position to compute hot spot offset */
 	int selected : 1;	/* Is the icon selected? */
 };
 
@@ -104,6 +103,9 @@ static int dnd_ntargets = sizeof (dnd_targets) / sizeof (dnd_targets[0]);
 
 /* Proxy window for DnD on the root window */
 static GtkWidget *dnd_proxy_window;
+
+/* Offsets for the DnD cursor hotspot */
+static int dnd_press_x, dnd_press_y;
 
 
 static struct desktop_icon_info *desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos);
@@ -212,10 +214,14 @@ desktop_icon_info_place (struct desktop_icon_info *dii, int auto_pos, int xpos, 
 			get_icon_snap_pos (&xpos, &ypos);
 	}
 
-	if (xpos > layout_screen_width)
+	if (xpos < 0)
+		xpos = 0;
+	else if (xpos > layout_screen_width)
 		xpos = layout_screen_width - DESKTOP_SNAP_X;
 
-	if (ypos > layout_screen_height)
+	if (ypos < 0)
+		ypos = 0;
+	else if (ypos > layout_screen_height)
 		ypos = layout_screen_height - DESKTOP_SNAP_Y;
 
 	/* Increase the number of icons in the corresponding slot */
@@ -680,8 +686,8 @@ button_press (GtkWidget *widget, GdkEventButton *event, gpointer data)
 	struct desktop_icon_info *dii;
 
 	dii = data;
-	dii->press_x = event->x;
-	dii->press_y = event->y;
+	dnd_press_x = event->x;
+	dnd_press_y = event->y;
 
 	return FALSE;
 }
@@ -721,8 +727,8 @@ drag_begin (GtkWidget *widget, GdkDragContext *context, gpointer data)
 				  gtk_widget_get_colormap (dicon->canvas),
 				  pixmap,
 				  mask,
-				  dii->press_x - x,
-				  dii->press_y - y);
+				  dnd_press_x - x,
+				  dnd_press_y - y);
 
 	gdk_pixmap_unref (pixmap);
 	gdk_bitmap_unref (mask);
@@ -1078,6 +1084,10 @@ drop_desktop_icons (GdkDragContext *context, GtkSelectionData *data, int x, int 
 	GList *l;
 	GSList *sel_icons, *sl;
 
+	/* FIXME: this needs to do the right thing (what Windows does) when desktop_auto_placement
+	 * is enabled.
+	 */
+
 	/* Find the icon that the user is dragging */
 
 	source_dii = find_icon_by_drag_context (context);
@@ -1088,8 +1098,11 @@ drop_desktop_icons (GdkDragContext *context, GtkSelectionData *data, int x, int 
 
 	/* Compute the distance to move icons */
 
-	dx = x - source_dii->x;
-	dy = y - source_dii->y;
+	if (desktop_snap_icons)
+		get_icon_snap_pos (&x, &y);
+
+	dx = x - source_dii->x - dnd_press_x;
+	dy = y - source_dii->y - dnd_press_y;
 
 	/* Build a list of selected icons */
 
@@ -1122,21 +1135,19 @@ drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
 	int retval;
 	gint dx, dy;
 
+	/* Fix the proxy window offsets */
+
+	gdk_window_get_position (widget->window, &dx, &dy);
+	x += dx;
+	y += dy;
+
 	switch (info) {
 	case TARGET_MC_DESKTOP_ICON:
 		drop_desktop_icons (context, data, x, y);
 		break;
 
 	case TARGET_URI_LIST:
-		/* Fix the proxy window offsets */
-		gdk_window_get_position (widget->window, &dx, &dy);
-		x += dx;
-		y += dy;
-
-		/* Drop! */
-
 		retval = gdnd_drop_on_directory (context, data, desktop_directory);
-
 		if (retval)
 			reload_desktop_icons (TRUE, x, y);
 

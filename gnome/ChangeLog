@@ -1,5 +1,20 @@
 1998-12-07  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gdesktop.c (desktop_icon_info_place): Doh, do not place icons
+	past the edge of the *whole* screen :-)
+	(dnd_press_x dnd_press_y): New variables to store the cursor
+	hotspot for DnD icons.  Moved these over from the
+	desktop_icon_info structure, as it does not make sense to have
+	this inside every icon.
+	(button_press): Use dnd_press_x and dnd_press_y.
+	(drag_begin): Likewise.
+	(drop_desktop_icons): Use dnd_press_x and dnd_press_y to fix the offsets.
+	(drag_data_received): Fix the proxy window offsets for all types
+	of targets.
+	(drop_desktop_icons): Snap the coordinates as appropriate.
+
+1998-12-07  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
 	* gdesktop.c (drop_desktop_icons): New function to perform a drop
 	from desktop icons to the desktop.  It effectively moves the icons
 	around.
