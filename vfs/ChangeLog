@@ -1,4 +1,9 @@
 Wed Jun 17 Pavel Machek <pavel@ucw.cz>
+	* Rename helper scripts (extfs/{rar|lha|...}.in), so their names
+	are more logical (and so that things actually work, because new
+	names are currently in extfs.ini). 
+	
+Wed Jun 17 Pavel Machek <pavel@ucw.cz>
 	* Modified code to use tempnam() instead of tmpnam(), fixed
 	tempnam() to use NULL instead of 0. 
 
