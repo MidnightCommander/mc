@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.34\n"
-"POT-Creation-Date: 1999-07-01 01:00+0200\n"
-"PO-Revision-Date: 1999-06-21 23:06+0200\n"
+"POT-Creation-Date: 1999-07-02 02:14+0200\n"
+"PO-Revision-Date: 1999-07-04 10:33+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -144,7 +144,7 @@ msgid "Set Filter"
 msgstr "Sett filter"
 
 #: gnome/gcmd.c:667 gnome/gcmd.c:708 gnome/gcmd.c:713 gnome/gcmd.c:717
-#: gnome/gscreen.c:2561
+#: gnome/gscreen.c:2403
 msgid "Show all files"
 msgstr "Vis alle filer"
 
@@ -675,7 +675,7 @@ msgstr ""
 "Trykk OK for å terminere applikasjonen, eller avbryt for å fortsette."
 
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
-#: gnome/glayout.c:384 gnome/gscreen.c:2230
+#: gnome/glayout.c:384 gnome/gscreen.c:2072
 msgid "_Copy..."
 msgstr "Kopier..."
 
@@ -683,7 +683,7 @@ msgstr "Kopier..."
 msgid "Copy files"
 msgstr "Kopier filer"
 
-#: gnome/glayout.c:385 gnome/gscreen.c:2231
+#: gnome/glayout.c:385 gnome/gscreen.c:2073
 msgid "_Delete..."
 msgstr "Slett..."
 
@@ -691,7 +691,7 @@ msgstr "Slett..."
 msgid "Delete files"
 msgstr "Slett filer"
 
-#: gnome/glayout.c:386 gnome/gscreen.c:2232
+#: gnome/glayout.c:386 gnome/gscreen.c:2074
 msgid "_Move..."
 msgstr "Flytt..."
 
@@ -836,7 +836,7 @@ msgstr "_Hjelp"
 msgid "File/New/Directory..."
 msgstr "Fil/Ny/Katalog..."
 
-#: gnome/gmain.c:558
+#: gnome/gmain.c:551
 msgid ""
 "You are running the GNOME File Manager as root.\n"
 "\n"
@@ -1308,146 +1308,78 @@ msgstr "Ny _Katalog..."
 msgid "Creates a new directory here"
 msgstr "Oppretter en ny katalog her"
 
-#: gnome/gscreen.c:1628
-msgid "All files"
-msgstr "Alle filer"
-
 #: gnome/gscreen.c:1630
-msgid "Archives and compressed files"
-msgstr "Arkiver og komprimerte filer"
-
-#: gnome/gscreen.c:1632
-msgid "RPM/DEB files"
-msgstr "RPM/DEB filer"
-
-#: gnome/gscreen.c:1634
-msgid "Text/Document files"
-msgstr "Tekst-/dokumentfiler"
-
-#: gnome/gscreen.c:1636
-msgid "HTML and SGML files"
-msgstr "HTML- og SGML-filer"
-
-#: gnome/gscreen.c:1638
-msgid "Postscript and PDF files"
-msgstr "Postscript- of PDF-filer"
-
-#: gnome/gscreen.c:1640
-msgid "Spreadsheet files"
-msgstr "Regnearkfiler"
-
-#: gnome/gscreen.c:1642
-msgid "Image files"
-msgstr "Bildefiler"
-
-#: gnome/gscreen.c:1645
-msgid "Video/animation files"
-msgstr "Video-/animasjonsfiler"
-
-#: gnome/gscreen.c:1647
-msgid "Audio files"
-msgstr "Lydfiler"
-
-#: gnome/gscreen.c:1649
-msgid "C program files"
-msgstr "C programfiler"
-
-#: gnome/gscreen.c:1651
-msgid "C++ program files"
-msgstr "C++ programfiler"
-
-#: gnome/gscreen.c:1653
-msgid "Objective-C program files"
-msgstr "Objektiv-C programfiler"
-
-#: gnome/gscreen.c:1655
-msgid "Scheme program files"
-msgstr "Scheme programfiler"
-
-#: gnome/gscreen.c:1657
-msgid "Assembler program files"
-msgstr "Assembler programfiler"
-
-#: gnome/gscreen.c:1659
-msgid "Misc. program files"
-msgstr "Forskj. programfiler"
-
-#: gnome/gscreen.c:1661
-msgid "Font files"
-msgstr "Skrifttypefiler"
-
-#: gnome/gscreen.c:1788
 #, c-format
 msgid "Search: %s"
 msgstr "Søk: %s"
 
-#: gnome/gscreen.c:1798
+#: gnome/gscreen.c:1640
 #, c-format
 msgid "%s bytes in %d file"
 msgstr "%s bytes i %d fil"
 
-#: gnome/gscreen.c:1798
+#: gnome/gscreen.c:1640
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s bytes i %d filer"
 
-#: gnome/gscreen.c:1824 src/screen.c:670
+#: gnome/gscreen.c:1666 src/screen.c:670
 msgid "<readlink failed>"
 msgstr "<readlink feilet>"
 
-#: gnome/gscreen.c:2230
+#: gnome/gscreen.c:2072
 msgid "Copy directory"
 msgstr "Kopier katalog"
 
-#: gnome/gscreen.c:2231
+#: gnome/gscreen.c:2073
 msgid "Delete directory"
 msgstr "Slett katalog"
 
-#: gnome/gscreen.c:2232
+#: gnome/gscreen.c:2074
 msgid "Rename or move directory"
 msgstr "Omdøp eller flytt katalog"
 
-#: gnome/gscreen.c:2388
+#: gnome/gscreen.c:2230
 msgid "Back"
 msgstr "Tilbake"
 
-#: gnome/gscreen.c:2388
+#: gnome/gscreen.c:2230
 msgid "Go to the previously visited directory"
 msgstr "Gå til tidligere vist katalog"
 
-#: gnome/gscreen.c:2390
+#: gnome/gscreen.c:2232
 msgid "Up"
 msgstr "Opp"
 
-#: gnome/gscreen.c:2390
+#: gnome/gscreen.c:2232
 msgid "Go up a level in the directory heirarchy"
 msgstr "Gå opp ett nivå i kataloghierarkiet"
 
-#: gnome/gscreen.c:2392
+#: gnome/gscreen.c:2234
 msgid "Forward"
 msgstr "Fram"
 
-#: gnome/gscreen.c:2392
+#: gnome/gscreen.c:2234
 msgid "Go to the next directory"
 msgstr "Gå til neste katalog"
 
-#: gnome/gscreen.c:2395 src/tree.c:1011
+#: gnome/gscreen.c:2237 src/tree.c:1011
 msgid "Rescan"
 msgstr "Oppdater"
 
-#: gnome/gscreen.c:2395
+#: gnome/gscreen.c:2237
 msgid "Rescan the current directory"
 msgstr "Oppdater aktiv katalog"
 
-#: gnome/gscreen.c:2398
+#: gnome/gscreen.c:2240
 msgid "Home"
 msgstr "Hjem"
 
-#: gnome/gscreen.c:2398
+#: gnome/gscreen.c:2240
 msgid "Go to your home directory"
 msgstr "Gå til din hjemmekatalog"
 
-#: gnome/gscreen.c:2539
+#: gnome/gscreen.c:2381
 msgid "Location:"
 msgstr "Plassering:"
 
