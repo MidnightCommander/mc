@@ -1,3 +1,8 @@
+2004-11-16  Roland Illig  <roland.illig@gmx.de>
+
+	* extfs/patchfs.in: Allow extraction and deletion of patches
+	whose filenames start with "../" or "./".
+
 2004-11-15  Leonard den Ottolander  <leonard * den ottolander nl>
 
 	* vfs.c: Changed types for mc_chmod, mc_chown, mc_mknod to mode_t,

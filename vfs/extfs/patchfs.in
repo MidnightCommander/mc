@@ -31,6 +31,12 @@ my $context_contents=qr/^([!+\-\\ \n]|-{3} .* -{4}|\*{3} .* \*{4}|\*{15})/;
 my $ls_extract_id=qr/^[^\s]+\s+[^\s]+\s+([^\s]+)\s+([^\s]+)/;
 my $basename=qr|^(.*/)*([^/]+)$|;
 
+sub patchfs_canonicalize_path ($) {
+  my ($fname) = @_;
+  $fname =~ s,/+,/,g;
+  $fname =~ s,(^|/)(?:\.?\./)+,$1,;
+  return $fname;
+}
 
 # output unix date in a mc-readable format
 sub timef
@@ -92,8 +98,9 @@ sub myout
 # select diff filename conforming with rules found in diff.info
 sub diff_filename
 {
-    my ($fsrc,$fdst)=@_;
-
+    my ($fsrc,$fdst)= @_;
+    $fsrc = patchfs_canonicalize_path ($fsrc);
+    $fdst = patchfs_canonicalize_path ($fdst);
     if (!$fdst && !$fsrc) {
 	error 'Index: not yet implemented';
     } elsif (!$fsrc || $fsrc eq '/dev/null') {
@@ -203,6 +210,7 @@ sub copyout
     my ($unified,$context)=(0,0);
 
     $file=~s/^(PATCH-(CREATE|REMOVE)\/)?(.*)\.diff$/$3/;
+    $file = patchfs_canonicalize_path ($file);
     
     # state==1 means diff contents, state==0 mens comments
     $state=0; $found=0; $buf='';
@@ -223,6 +231,8 @@ sub copyout
 	    $state=1;
 
 	    ($fsrc,$fdst,)=parse_header($unified,$context,\$_);
+	    $fsrc = patchfs_canonicalize_path ($fsrc);
+	    $fdst = patchfs_canonicalize_path ($fdst);
 	    $found=1 if (($fsrc eq $file) || ($fdst eq $file));
 
 	} elsif ($state==1 && (($unified && !/$unified_contents/) || ($context && !/$context_contents/))) {
