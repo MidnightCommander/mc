@@ -1,5 +1,10 @@
 2001-09-07  Pavel Roskin  <proski@gnu.org>
 
+	* Make.common.in: Remove.
+	* configure.in: Remove all references to Make.common.in and
+	MCCPPFLAGS.
+	* aclocal.m4: Likewise.
+
 	* configure.in: Require Autoconf 2.52.  Remove hacks for
 	Autoconf 2.13.
 	* Makefile.am: Require Automake 1.5.

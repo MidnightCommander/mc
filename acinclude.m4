@@ -654,7 +654,6 @@ AC_DEFUN([AC_WITH_SLANG], [
 	    [LIBS="$ac_save_LIBS"; AC_USE_TERMINFO], 
 	    [LIBS="$ac_save_LIBS"; AC_USE_TERMCAP])
 	else
-	    MCCPPFLAGS="$MCCPPFLAGS -I\$(slangdir)"
     	    LIBSLANG="libmcslang.a"
 	    screen_manager="SLang"
 	    LSLANG="-lmcslang"

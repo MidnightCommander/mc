@@ -291,7 +291,6 @@ if test $use_vfs = yes
 then
 	LIBVFS="libvfs-mc.a"
 	LVFS="-lvfs-mc"
-	MCCPPFLAGS="$MCCPPFLAGS -I\$(vfsdir)"
 	AC_MSG_RESULT([Using the VFS switch code])
 	vfs_type="Midnight Commander Virtual File System"
 fi
@@ -809,12 +808,8 @@ LIBS="$LIBS $posix_libs"
 
 AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
-AC_SUBST(MCCPPFLAGS)
 AC_SUBST(LDFLAGS)
 AC_SUBST(LIBS)
-
-MCF=./Make.common
-AC_SUBST_FILE(MCF)
 
 if test "x$SAMBAFILES" != x; then
   AC_CONFIG_SUBDIRS([vfs/samba])
@@ -832,7 +827,6 @@ AM_CONDITIONAL(CHARSET, [test -n "$have_charset"])
 AM_CONDITIONAL(CONS_SAVER, [test -n "$cons_saver"])
 
 AC_OUTPUT([
-Make.common 
 Makefile 
 mc.spec
 doc/Makefile 
