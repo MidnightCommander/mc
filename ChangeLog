@@ -1,5 +1,8 @@
 2002-07-10  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Remove --with-netrc, it is now default and can
+	be disabled at the runtime.
+
 	* syntax/tcl.syntax: New file.
 	* syntax/Syntax: Add tcl.syntax.
 	* syntax/Makefile.am: Likewise.

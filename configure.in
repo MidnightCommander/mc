@@ -591,15 +591,6 @@ AC_SUBST(LIBEDIT_A)
 AC_SUBST(MCEDIT)
 AC_SUBST(LEDIT)
 
-AC_ARG_WITH(netrc,
-	[--with-netrc               Compile with ftp .netrc support],[
-	if test x$withval = xyes; then
-		AC_DEFINE(USE_NETRC, 1,
-			  [Define to use .netrc for FTP connections])
-		AC_MSG_NOTICE([ftpfs will use .netrc])
-	fi
-])
-
 undelfs_o=""
 
 if test $use_vfs = yes; then
