@@ -2,14 +2,15 @@
 /* Copyright (C) 1998 Redhat Software Inc. 
  * Authors: Jonathan Blandford <jrb@redhat.com>
  */
+#include "mime-data.h"
 #ifndef _EDIT_WINDOW_H_
 #define _EDIT_WINDOW_H_
 
-#include "mime-data.h"
 
 void launch_edit_window (MimeInfo *mi);
-void initialize_main_win_vals ();
-void hide_edit_window ();
-void show_edit_window ();
-void edit_clicked ();
+void initialize_main_win_vals (void);
+void hide_edit_window (void);
+void show_edit_window (void);
+void edit_clicked (void);
+
 #endif

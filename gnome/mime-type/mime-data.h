@@ -17,8 +17,8 @@ typedef struct {
         GList    *keys;
 } MimeInfo;
 
-GtkWidget *get_mime_clist ();
-void init_mime_type ();
+GtkWidget *get_mime_clist (void);
+void init_mime_type (void);
 
 
 #endif

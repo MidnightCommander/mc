@@ -10,6 +10,7 @@
 #include <dirent.h>
 #include <regex.h>
 #include <ctype.h>
+#include "mime-info.h"
 #include "mime-data.h"
 #include <errno.h>
 #include <sys/stat.h>
@@ -312,7 +313,7 @@ set_mime_key_value (gchar *mime_type, gchar *key, gchar *value)
 	
 }
 void
-init_mime_info ()
+init_mime_info (void)
 {
 	gchar *filename;
 	
@@ -448,17 +449,17 @@ write_keys (GHashTable *spec_hash, GHashTable *generic_hash)
 	fclose (file);
 }
 void
-write_initial_keys ()
+write_initial_keys (void)
 {
 	write_keys (initial_generic_types, initial_specific_types);
 }
 void
-write_user_keys ()
+write_user_keys (void)
 {
 	write_keys (generic_types, specific_types);
 }
 void
-discard_mime_info ()
+discard_mime_info (void)
 {
 	gchar *filename;
 	

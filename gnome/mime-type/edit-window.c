@@ -1,4 +1,6 @@
 #include "edit-window.h"
+#include "mime-data.h"
+#include "mime-info.h"
 #include "capplet-widget.h"
 
 
@@ -37,7 +39,7 @@ entry_changed (GtkWidget *widget, gpointer data)
 static void
 apply_entry_change (GtkWidget *entry, gchar *key, MimeInfo *mi)
 {
-	gchar *buf; 
+	const gchar *buf; 
 	gchar *text;
 	/* buf is the value that existed before when we 
 	 * started the capplet */
@@ -198,7 +200,7 @@ initialize_main_win ()
 static void
 setup_entry (gchar *key, GtkWidget *g_entry, MimeInfo *mi)
 {
-	gchar *buf;
+	const gchar *buf;
 	GtkWidget *entry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (g_entry));
 	buf = local_mime_get_value (mi->mime_type, key);
 	if (buf == NULL)
@@ -209,7 +211,7 @@ setup_entry (gchar *key, GtkWidget *g_entry, MimeInfo *mi)
 		gtk_entry_set_text (GTK_ENTRY (entry), "");
 }
 void
-initialize_main_win_vals ()
+initialize_main_win_vals (void)
 {
 	MimeInfo *mi = main_win->mi;
 	gchar *title;
@@ -283,13 +285,13 @@ launch_edit_window (MimeInfo *mi)
 }
 
 void
-hide_edit_window ()
+hide_edit_window (void)
 {
 	if (main_win && main_win->mi && main_win->window)
 		gtk_widget_hide (main_win->window);
 }
 void
-show_edit_window ()
+show_edit_window (void)
 {
 	if (main_win && main_win->mi && main_win->window)
 		gtk_widget_show (main_win->window);

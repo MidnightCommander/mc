@@ -10,6 +10,7 @@
 #include <dirent.h>
 #include <regex.h>
 #include <ctype.h>
+#include "edit-window.h"
 #include "mime-data.h"
 #include "mime-info.h"
 /* Prototypes */
@@ -274,17 +275,19 @@ void
 edit_clicked ()
 {
         MimeInfo *mi;
-        gint row;
+        gint row = 0;
 
         if (GTK_CLIST (clist)->selection)
-                row = GINT_TO_POINTER ((GTK_CLIST (clist)->selection)->data);
+                row = GPOINTER_TO_INT ((GTK_CLIST (clist)->selection)->data);
+        else
+                return;
         mi = (MimeInfo *) gtk_clist_get_row_data (GTK_CLIST (clist), row);
         if (mi)
                 launch_edit_window (mi);
 }
 
 GtkWidget *
-get_mime_clist ()
+get_mime_clist (void)
 {
         GtkWidget *retval;
         gchar *titles[2];
@@ -310,7 +313,7 @@ get_mime_clist ()
         return retval;
 }
 void
-init_mime_type ()
+init_mime_type (void)
 {
 	char *mime_info_dir;
 	
