@@ -1,5 +1,7 @@
 2002-09-02  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.c: Remove unused code, make functions static if possible.
+
 	* chmod.c: Use common_dialog_repaint().
 	* chown.c: Likewise.
 	* layout.c: Likewise.

@@ -142,8 +142,6 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 #define DLG_NONE         0	/* No options */
 
 int  add_widget           (Dlg_head *dest, void *Widget);
-int  remove_widget        (Dlg_head *dest, void *Widget);
-int  destroy_widget       (Widget *w);
 
 /* Runs dialog d */       
 int run_dlg               (Dlg_head *d);
@@ -156,14 +154,11 @@ void init_dlg             (Dlg_head *h);
 void set_idle_proc        (Dlg_head *d, int state);
 		          
 void dlg_redraw           (Dlg_head *h);
-void dlg_refresh          (void *parameter);
 void destroy_dlg          (Dlg_head *h);
 		          
 void widget_set_size      (Widget *widget, int x1, int y1, int x2, int y2);
 
-void dlg_broadcast_msg_to (Dlg_head *h, int message, int reverse, int flags);
 void dlg_broadcast_msg    (Dlg_head *h, int message, int reverse);
-void dlg_mouse            (Dlg_head *h, Gpm_Event *event);
 
 typedef void  (*destroy_fn)(void *);
 typedef int   (*callback_fn)(Dlg_head *, void *, int, int);
@@ -203,7 +198,6 @@ int  dlg_select_widget     (Dlg_head *h, void *widget);
 void dlg_one_up            (Dlg_head *h);
 void dlg_one_down          (Dlg_head *h);
 int  dlg_focus             (Dlg_head *h);
-int  dlg_unfocus           (Dlg_head *h);
 int  dlg_select_nth_widget (Dlg_head *h, int n);
 int  dlg_item_number       (Dlg_head *h);
 Widget *find_widget_type   (Dlg_head *h, callback_fn signature);
@@ -222,8 +216,7 @@ typedef void (*movefn)(void *, int);
 
 void x_set_dialog_title (Dlg_head *h, const char *title);
 
-/* The inner workings of run_dlg, exported for the Tk and XView toolkits */
-int  dlg_key_event (Dlg_head *h, int d_key);
+/* Used in load_prompt() */
 void update_cursor (Dlg_head *h);
 
 #endif /* MC_DLG_H */

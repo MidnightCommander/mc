@@ -35,9 +35,6 @@
 #include "layout.h"
 #include "main.h"
 
-/* This is the current frame, used to group Tk packings */
-char *the_frame = "";
-
 #define waddc(w,y1,x1,c) move (w->y+y1, w->x+x1); addch (c)
 
 /* Primitive way to check if the the current dialog is our dialog */
@@ -46,6 +43,8 @@ Dlg_head *current_dlg = 0;
 
 /* A hook list for idle events */
 Hook *idle_hook = 0;
+
+static void dlg_broadcast_msg_to (Dlg_head *h, int message, int reverse, int flags);
 
 static void slow_box (Dlg_head *h, int y, int x, int ys, int xs)
 {
@@ -304,45 +303,6 @@ int add_widget (Dlg_head *where, void *what)
     return (where->count - 1);
 }
 
-int remove_widget (Dlg_head *h, void *what)
-{
-    Widget_Item *first, *p;
-
-    if (!h->current)
-	    return 0;
-
-    first = p = h->current;
-
-    do {
-	if (p->widget == what){
-	    /* Remove links to this Widget_Item */
-	    p->prev->next = p->next;
-	    p->next->prev = p->prev;
-
-	    /* Make sure h->current is always valid */
-	    if (p == h->current){
-		h->current = h->current->next;
-		if (h->current == p)
-		    h->current = 0;
-	    }
-	    h->count--;
-	    g_free (p);
-	    return 1;
-	}
-	p = p->next;
-    } while (p != first);
-    return 0;
-}
-
-int destroy_widget (Widget *w)
-{
-    send_message (w->parent, w, WIDGET_DESTROY, 0);
-    if (w->destroy)
-	w->destroy (w);
-    g_free (w);
-    return 1;
-}
-
 int send_message (Dlg_head *h, Widget *w, int msg, int par)
 {
     return (*(w->callback))(h, w, msg, par);
@@ -351,7 +311,8 @@ int send_message (Dlg_head *h, Widget *w, int msg, int par)
 /* broadcast a message to all the widgets in a dialog that have
  * the options set to flags.
  */
-void dlg_broadcast_msg_to (Dlg_head *h, int message, int reverse, int flags)
+static void
+dlg_broadcast_msg_to (Dlg_head *h, int message, int reverse, int flags)
 {
     Widget_Item *p, *first, *wi;
 
@@ -391,7 +352,8 @@ int dlg_focus (Dlg_head *h)
     return 0;
 }
 
-int dlg_unfocus (Dlg_head *h)
+static int
+dlg_unfocus (Dlg_head *h)
 {
     if (!h->current)
         return 0;
@@ -563,7 +525,8 @@ void dlg_redraw (Dlg_head *h)
     update_cursor (h);
 }
 
-void dlg_refresh (void *parameter)
+static void
+dlg_refresh (void *parameter)
 {
     dlg_redraw ((Dlg_head *) parameter);
 }
@@ -688,7 +651,7 @@ static int dlg_try_hotkey (Dlg_head *h, int d_key)
     return handled;
 }
 
-int
+static int
 dlg_key_event (Dlg_head * h, int d_key)
 {
     int handled;
