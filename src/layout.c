@@ -521,11 +521,7 @@ void layout_change (void)
 	how the panel are split (horizontal/vertical). */
     done_menu();
     init_menu();
-
-#ifdef RESIZABLE_MENUBAR
-	menubar_arrange(the_menubar);
-#endif
-
+    menubar_arrange(the_menubar);
 #endif
 }
 
