@@ -12,7 +12,7 @@
 #include <unistd.h>
 #include <signal.h>
 #include <errno.h>
-
+#include <dirent.h>
 #include "../src/fs.h"
 #include "../src/util.h"
 #include "../src/mem.h"

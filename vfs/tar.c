@@ -20,7 +20,7 @@
 
 /* Namespace: vfs_tarfs_ops */
 
-#include "direntry.h"
+#include "xdirentry.h"
 #include <errno.h>
 #ifdef SCO_FLAVOR
 #include <sys/timeb.h>	/* alex: for struct timeb definition */

@@ -6,7 +6,7 @@
  * Based on tar.c from midnight and archives.[ch] from avfs by Miklos
  * Szeredi (mszeredi@inf.bme.hu) */
 
-#include "direntry.h"
+#include "xdirentry.h"
 
 #define CALL(x) if (MEDATA->x) MEDATA->x
 

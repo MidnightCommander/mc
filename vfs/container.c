@@ -23,6 +23,7 @@
 #include <unistd.h>
 #include "../src/mad.h"
 #include "../src/util.h"
+#include "xdirentry.h"
 #include "container.h"
 
 
