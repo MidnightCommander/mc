@@ -1,3 +1,8 @@
+2003-05-29  Koblinger Egmont  <egmont@uhulinux.hu>
+
+	* text.c (default_edition_colors): Change the default for
+	dhotfocus to be blue on cyan for consistency with dhotnormal.
+
 2003-05-27  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* info.c (info_show_info): Cast myfs_stats.avail to double to
