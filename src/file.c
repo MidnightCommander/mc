@@ -2124,8 +2124,7 @@ panel_operate (void *source_panel, FileOperation operation,
     /* Let our parent know we are saying bye bye */
     if (we_are_background) {
 	vfs_shut ();
-	tell_parent (MSG_CHILD_EXITING);
-	_exit (1);
+	_exit (0);
     }
 #endif				/* WITH_BACKGROUND */
 

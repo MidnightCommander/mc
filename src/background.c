@@ -43,6 +43,11 @@
 #include "fileopctx.h"	/* FileOpContext */
 #include "key.h"	/* add_select_channel(), delete_select_channel() */
 
+enum ReturnType {
+    Return_String,
+    Return_Integer
+};
+
 /* If true, this is a background process */
 int we_are_background = 0;
 
@@ -195,24 +200,23 @@ background_attention (int fd, void *closure)
     ctx = closure;
 
     bytes = read (fd, &routine, sizeof (routine));
-    if (bytes < (sizeof (routine))){
+    if (bytes < (sizeof (routine))) {
 	char *background_process_error = _(" Background process error ");
 
 	unregister_task_running (ctx->pid, fd);
-	waitpid (ctx->pid, &status, 0);
-
-	if (errno == ECHILD)
-	    message (1, background_process_error, _(" Child died unexpectedly "));
-	else
+	if (!waitpid (ctx->pid, &status, WNOHANG)) {
+	    /* the process is still running, but it misbehaves - kill it */
+	    kill (ctx->pid, SIGTERM);
 	    message (1, background_process_error, _(" Unknown error in child "));
+	    return 0;
+	}
 
-	return 0;
-    }
+	/* 0 means happy end */
+	if (WIFEXITED (status) && (WEXITSTATUS (status) == 0))
+	    return 0;
 
-    /* If the routine is zero, then the child is telling us that he is dying */
-    if ((long) routine == MSG_CHILD_EXITING){
-	unregister_task_running (ctx->pid, fd);
-	waitpid (ctx->pid, &status, 0);
+	message (1, background_process_error, _(" Child died unexpectedly "));
+
 	return 0;
     }
 
@@ -401,12 +405,6 @@ parent_call_string (void *routine, int argc, ...)
     read (parent_fd, str, i);
     str [i] = 0;
     return str;
-}
-
-void
-tell_parent (int msg)
-{
-    write (parent_fd, &msg, sizeof (int));
 }
 
 #endif				/* WITH_BACKGROUND */

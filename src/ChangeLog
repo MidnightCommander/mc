@@ -1,5 +1,9 @@
 2003-10-26  Pavel Roskin  <proski@gnu.org>
 
+	* background.c (tell_parent): Eliminate.
+	(background_attention): Use error code instead.
+	* file.c (panel_operate): Exit with code 0, not 1.
+
 	* wtools.c: Merge mc_message() and message() into one background
 	safe function message().  Fix all callers.
 
