@@ -50,39 +50,39 @@
 
 /* {{{ Listbox utility functions */
 
-Listbox *create_listbox_window (int cols, int lines, char *title, char *help)
+Listbox *
+create_listbox_window (int cols, int lines, char *title, char *help)
 {
     int xpos, ypos, len;
-    Listbox  *listbox = g_new (Listbox, 1);
-    char* cancel_string = _("&Cancel");
+    Listbox *listbox = g_new (Listbox, 1);
+    char *cancel_string = _("&Cancel");
 
     /* Adjust sizes */
-    lines = (lines > LINES-6) ? LINES - 6 : lines;
+    lines = (lines > LINES - 6) ? LINES - 6 : lines;
 
-	if (title && (cols < (len = strlen(title) + 2)))
-		cols = len;
+    if (title && (cols < (len = strlen (title) + 2)))
+	cols = len;
 
-	/* no &, but 4 spaces around button for brackets and such */
-	if (cols < (len = strlen(cancel_string) + 3))
-		cols = len;
-	
-    cols = cols > COLS-6 ? COLS-6 : cols;
+    /* no &, but 4 spaces around button for brackets and such */
+    if (cols < (len = strlen (cancel_string) + 3))
+	cols = len;
 
-    /* I'm not sure if this -2 is safe, should test it */
-    xpos = (COLS-cols)/2;
-    ypos = (LINES-lines)/2 - 2;
+    cols = cols > COLS - 6 ? COLS - 6 : cols;
+    xpos = (COLS - cols) / 2;
+    ypos = (LINES - lines) / 2 - 2;
 
     /* Create components */
-    listbox->dlg = create_dlg (ypos, xpos, lines+6, cols+4, dialog_colors,
-			       NULL, help, title, DLG_CENTER);
-    
+    listbox->dlg =
+	create_dlg (ypos, xpos, lines + 6, cols + 4, dialog_colors, NULL,
+		    help, title, DLG_CENTER);
+
     listbox->list = listbox_new (2, 2, cols, lines, 0);
 
     add_widget (listbox->dlg,
-		button_new (lines+3, (cols/2 + 2) - len/2, 
-		B_CANCEL, NORMAL_BUTTON, cancel_string, 0));
+		button_new (lines + 3, (cols / 2 + 2) - len / 2, B_CANCEL,
+			    NORMAL_BUTTON, cancel_string, 0));
     add_widget (listbox->dlg, listbox->list);
-    common_dialog_repaint (listbox->dlg);
+
     return listbox;
 }
 
