@@ -1,3 +1,8 @@
+2002-07-03  Pavel Roskin  <proski@gnu.org>
+
+	* subshell.c (sigchld_handler): Remove subshell_pty from the
+	channel list if the subshell has died.
+
 2002-07-03  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* mad.[ch] [__GNUC__] (mad_strconcat): Use macro varargs.

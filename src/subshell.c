@@ -912,6 +912,7 @@ void sigchld_handler (int sig)
 #  endif
 	{
 	    subshell_alive = FALSE;
+	    delete_select_channel (subshell_pty);
 	    if (WIFEXITED (status) && WEXITSTATUS (status) != FORK_FAILURE)
 		quit |= SUBSHELL_EXIT;  /* Exited normally */
 	}
