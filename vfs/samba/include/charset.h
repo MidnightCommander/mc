@@ -19,8 +19,6 @@
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 
-extern void charset_initialise(void);
-
 #ifndef CHARSET_C
 
 extern char *dos_char_map;

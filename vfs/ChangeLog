@@ -1,3 +1,9 @@
+2003-09-03  Pavel Roskin  <proski@gnu.org>
+
+	* samba/include/charset.h: Remove declaration already present in
+	proto.h.
+	* samba/include/proto.h: Run through uniq.
+
 2003-08-30  Pavel Roskin  <proski@gnu.org>
 
 	* samba/tests/summary.c: Remove.  The test is now included ...
