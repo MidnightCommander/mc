@@ -2,10 +2,11 @@
 #
 # skeleton      Example file to build /etc/init.d scripts.
 #
-# Version:      @(#) /etc/init.d/mcserv  09-Apr-1997
+# Version:      @(#) /etc/init.d/mcserv  07/10/2000
 #
 # Author:       Tomasz K³oczko, <kloczek@rudy.mif.pg.gda.pl>
 #               Michele Marziani <marziani@fe.infn.it>
+#		Preston Brown <pbrown@redhat.com>
 #
 # chkconfig: - 86 30
 # description: The Midnight Commander server allows users on remote machines \
@@ -16,37 +17,52 @@
 # processname: mcserv
 
 # Source function library.
-. /etc/rc.d/init.d/functions
+. /etc/init.d/functions
 
 RETVAL=0
+
+prog="mcserv"
+
+start() {
+        echo -n $"Starting $prog: "
+       daemon /usr/bin/mcserv -d
+       RETVAL=$?
+       touch /var/lock/subsys/mcserv
+       echo
+}
+
+stop() {
+        echo -n $"Stopping $prog: "
+       killproc mcserv
+       RETVAL=$?
+       rm -f /var/lock/subsys/mcserv
+       echo
+}
 
 # See how we were called.
 case "$1" in
   start)
-        echo -n "Starting mcserv services: "
-	daemon /usr/bin/mcserv -d
-	RETVAL=$?
-	touch /var/lock/subsys/mcserv
-	echo
+	start
 	;;
   status)
         status mcserv
 	;;
   restart|reload)
-        $0 stop
-	$0 start
+        stop
+	start
         ;;
+  condrestart)
+	if [ -f /var/lock/subsys/mcserv ]; then
+    	    stop
+	    start
+	fi
+	;;
   stop)
-        echo -n "Shutting down mcserv services: "
-	killproc mcserv
-	RETVAL=$?
-	rm -f /var/lock/subsys/mcserv
-	echo
+	stop
 	;;
   *)
-	echo "Usage: mcserv.init {start|stop|status|restart|reload}"
+	echo $"Usage: $0 {start|stop|status|restart|reload|condrestart}"
 	exit 1
 esac
 
 exit $RETVAL
-
