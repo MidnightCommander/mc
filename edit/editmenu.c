@@ -58,7 +58,7 @@ void edit_wrap_cmd (void)
 	if (*f) {
 	    option_word_wrap_line_length = atoi (f);
 	}
-	free (f);
+	g_free (f);
     }
 }
 

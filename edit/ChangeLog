@@ -1,6 +1,11 @@
+2001-11-27  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* editmenu.c (edit_wrap_cmd): Use g_free() on the result
+	of input_dialog().
+
 2001-11-22  Andrew V. Samoilov  <kai@cmail.ru>
 
-	* editcmd.c (edit_save_file): Use g_free() on the result of                 
+	* editcmd.c (edit_save_file): Use g_free() on the result of
 	mc_mkstemps().
 
 2001-11-19  Andrew V. Samoilov  <kai@cmail.ru>
