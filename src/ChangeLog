@@ -1,6 +1,10 @@
 2003-10-23  Pavel Roskin  <proski@gnu.org>
 
-	* view.c: Eliminate struct block_ptr_t and enum ViewSide. 
+	* view.c: (put_editkey): Rename to ...
+	(view_handle_editkey): ... this.  Move here some logic from ...
+	(view_handle_key): ... here.
+
+	* view.c: Eliminate struct block_ptr_t and enum ViewSide.
 	Rename ascii mode to text mode.
 
 	* view.c (WView): Remove unused fields localcopy and file_dirty.

@@ -342,20 +342,16 @@ enqueue_change (struct hexedit_change_node **head,
 
 static void move_right (WView *);
 
-static void
-put_editkey (WView *view, unsigned char key)
+static cb_ret_t
+view_handle_editkey (WView *view, unsigned char key)
 {
     struct hexedit_change_node *node;
     unsigned char byte_val;
 
-    if (!view->hexedit_mode || view->growing_buffer != 0)
-	return;
-
     /* Has there been a change at this position ? */
     node = view->change_list;
-    while (node && (node->offset != view->edit_cursor)) {
+    while (node && (node->offset != view->edit_cursor))
 	node = node->next;
-    }
 
     if (!view->hexedit_text) {
 	/* Hex editing */
@@ -367,7 +363,7 @@ put_editkey (WView *view, unsigned char key)
 	else if (key >= 'a' && key <= 'f')
 	    key -= 'W';
 	else
-	    return;
+	    return MSG_NOT_HANDLED;
 
 	if (node)
 	    byte_val = node->value;
@@ -381,7 +377,10 @@ put_editkey (WView *view, unsigned char key)
 	}
     } else {
 	/* Text editing */
-	byte_val = key;
+	if (key < 256 && (is_printable (key) || (key == '\n')))
+	    byte_val = key;
+	else
+	    return MSG_NOT_HANDLED;
     }
     if (!node) {
 	node = (struct hexedit_change_node *)
@@ -405,6 +404,7 @@ put_editkey (WView *view, unsigned char key)
     view->dirty++;
     view_update (view, TRUE);
     move_right (view);
+    return MSG_HANDLED;
 }
 
 static void
@@ -2337,22 +2337,9 @@ view_handle_key (WView *view, int c)
 	    return MSG_HANDLED;
 	}
 
-	if (!view->hexedit_text) {
-	    /* Trap 0-9,A-F,a-f for left side data entry */
-	    if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'F')
-		|| (c >= 'a' && c <= 'f')) {
-
-		put_editkey (view, c);
-		return MSG_HANDLED;
-	    }
-	} else {
-	    /* Trap all printable characters for right side data entry */
-	    /* Also enter the value of the Enter key */
-	    if (c < 256 && (is_printable (c) || (c == '\n'))) {
-		put_editkey (view, c);
-		return MSG_HANDLED;
-	    }
-	}
+	if (view->hexedit_mode
+	    && view_handle_editkey (view, c) == MSG_HANDLED)
+	    return MSG_HANDLED;
     }
 
     if (check_left_right_keys (view, c))
