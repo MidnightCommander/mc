@@ -1464,7 +1464,10 @@ panel_icon_renamed (GtkWidget *widget, int index, char *dest, WPanel *panel)
 	char *fullname;
 	int retval;
 
-	source = g_concat_dir_and_file (cpanel->cwd, panel->dir.list [index].fname);
+	if (strcmp (dest, panel->dir.list[index].fname) == 0)
+		return TRUE; /* do nothing if the name did not change */
+
+	source = g_concat_dir_and_file (cpanel->cwd, panel->dir.list[index].fname);
 	fullname = g_concat_dir_and_file (cpanel->cwd, dest);
 
 	if (rename_file_with_context (source, dest) == FILE_CONT) {

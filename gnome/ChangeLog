@@ -1,3 +1,8 @@
+1999-09-01  Federico Mena Quintero  <federico@redhat.com>
+
+	* gscreen.c (panel_icon_renamed): Do nothing if the name did not
+	change.
+
 1999-08-30  Federico Mena Quintero  <federico@redhat.com>
 
 	* gdnd.c (file_has_drop_action): New function to test whether a
