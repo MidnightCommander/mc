@@ -11,6 +11,12 @@ text/C++:
 application/x-compressed-tar
 	fm-open=%cd %p#utar
 	fm-view=%view{ascii} gzip -dc %f 2>/dev/null | tar tvvf -
+	icon-filename=@icondir@/gnome-package.png
+
+application/x-bzip-compressed-tar
+	fm-open=%cd %p#utar
+	fm-view=%view{ascii} bzip2 -dc %f 2>/dev/null | tar tvvf -
+	icon-filename=@icondir@/gnome-package.png
 
 application/x-bzip:
 	icon-filename=@icondir@/compressed.xpm
@@ -21,6 +27,7 @@ application/x-tar:
 	fm-open=%cd %p#utar
 	fm-view=%view{ascii} tar tvvf %f
 	open.extract.Extract=tar xf %f
+	icon-filename=@icondir@/gnome-package.png
 
 application/x-rpm:
 	fm-open=%cd %p#rpm
@@ -34,7 +41,7 @@ application/x-deb:
 	icon-filename=@icondir@/gnome-pack-deb.png
 	
 application/zip:
-	icon-filename=@icondir@/zip.xpm
+	icon-filename=@icondir@/gnome-package.png
 	fm-open=%cd %p#uzip
 	fm-view=%view{ascii} unzip -v %f
 	open.extract.Extract=unzip %f
@@ -44,18 +51,21 @@ application/x-zoo:
 	fm-open=%cd %p#uzoo
 	fm-view=%view{ascii} zoo l %f
 	open.extract.Extract=zoo x %f '*'
+	icon-filename=@icondir@/gnome-package.png
 
 application/x-lha:
 	fm-open=%cd %p#ulha
 	fm-view=%view{ascii} lharc l %f
 	open.extract.Extract=lharc x %f '*'
 	open.extractf.Extract (with flags)=I=%{Enter any LHarc flags:}; if test -n "$I"; then lharc x $I %f; fi
+	icon-filename=@icondir@/gnome-package.png
 
 application/x-arj:
 	fm-open=%cd %p#uarj
 	fm-view=%view{ascii} unarj l %f
 	open.extract.Extract=unarj x %f '*'
 	open.extractf.Extract (with flags)=I=%{Enter any Unarj flags:}; if test -n "$I"; then unarj x $I %f; fi
+	icon-filename=@icondir@/gnome-package.png
 
 application/x-unix-archive:	
 	fm-open=%cd %p#uar

@@ -84,8 +84,10 @@ int my_system_get_child_pid (int flags, const char *shell, const char *command, 
 			_exit (127);		/* Exec error */
 		} else {
 			int status;
+
+			if (flags & (EXECUTE_WAIT|EXECUTE_TEMPFILE))
+				waitpid (*pid, &status, 0);
 			
-			waitpid (*pid, &status, 0);
 			if (flags & EXECUTE_TEMPFILE)
 				unlink (command);
 		}
