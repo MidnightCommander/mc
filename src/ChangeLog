@@ -1,5 +1,11 @@
 2003-01-20  Pavel Roskin  <proski@gnu.org>
 
+	* dir.c (handle_dirent): Fix cleaning the stat buffer if
+	mc_lstat() fails.  Leave buf1->st_mode to be 0, so that the
+	entry is marked as a "non-regular file of unknown kind".
+	* screen.c (do_enter_on_file_entry): Try to change directory
+	when pressing Enter on a non-stat()able file.
+
 	* screen.c (string_file_size_brief): Represent non-regular files
 	of unknown kind by '?'.
 	(file_compute_color): Use for them the same color as for stale

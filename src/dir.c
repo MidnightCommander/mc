@@ -383,12 +383,11 @@ handle_dirent (dir_list *list, char *filter, struct dirent *dp,
 	return 0;
     if (mc_lstat (dp->d_name, buf1) == -1) {
 	/*
-	 * lstat() fails - wildly assume that it's a directory.
-	 * It can happen on QNX Neutrino for /fs/cd0 if no CD is inserted.
+	 * lstat() fails - such entries should be identified by
+	 * buf1->st_mode being 0.
+	 * It happens on QNX Neutrino for /fs/cd0 if no CD is inserted.
 	 */
-	memset (buf1, 0, sizeof (buf1));
-	buf1->st_mode = S_IFDIR | 0777;
-	buf1->st_nlink = 2;
+	memset (buf1, 0, sizeof (*buf1));
     }
 
     if (S_ISDIR (buf1->st_mode))

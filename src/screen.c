@@ -1929,8 +1929,12 @@ do_enter_on_file_entry (file_entry *fe)
 {
     char *full_name;
 
-    /* Directory or link to directory - change directory */
-    if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe)) {
+    /*
+     * Directory or link to directory - change directory.
+     * Try the same for the entries on which mc_lstat() has failed.
+     */
+    if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe)
+	|| (fe->buf.st_mode == 0)) {
 	if (!do_cd (fe->fname, cd_exact))
 	    message (1, MSG_ERROR, _("Cannot change directory"));
 	return 1;
