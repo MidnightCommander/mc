@@ -675,76 +675,77 @@ formátumot megadó szöveghez.
 .PP
 Ezután az opcionális fájl jellemzõk neveit kell megadnod. Az itt
 megjelenített értékek használhatóak:
-.PP
+.TP
 .B name
 a fájl nevét jeleníti meg.
-.PP
+.TP
 .B size
 a fájl méretét jeleníti meg.
-.PP
+.TP
 .B bsize
 ez a
 .B size
 formátum egyik formája. Megjeleníti a fájlok és könyvtárak méretét, ha
 az utóbbi tartalmaz SUB-DIR-t vagy UP--DIR-t.
-.PP
+.TP
 .B type
 megjelenít egy egykarakteres érték típust. Ez a karakter állítja be azt,
-hogy mit jelenítsen meg az ls -F flaggel. A csillag-jel a futtatható
-fájlokhoz, a "slash" jel (törtvonal) a könyvtárakhoz, a "at-sign" a
-linkekhez, az "equal" (egyenlõség) jel a socket-ekhez, a "hyphen" a
-karakteres eszközökhöz, a pluszjel a blokk eszközökhöz, a "pipe" a
-fifo-hoz, a "tilde" a könyvtárak szimbolikus linkjeihez és a
-felkiáltójel a stalled szimlinkekhez (linkek, amik sehova sem mutatnak)
-használhatók.
-.PP
+hogy mit jelenítsen meg az
+.B "ls -F"
+flaggel. A csillag-jel a futtatható fájlokhoz, a "slash" jel (törtvonal)
+a könyvtárakhoz, a "at-sign" a linkekhez, az "equal" (egyenlõség) jel a
+socket-ekhez, a "hyphen" a karakteres eszközökhöz, a pluszjel a blokk
+eszközökhöz, a "pipe" a fifo-hoz, a "tilde" a könyvtárak szimbolikus
+linkjeihez és a felkiáltójel a stalled szimlinkekhez (linkek, amik
+sehova sem mutatnak) használhatók.
+.TP
+.B mark
+a kijelölt fájl megjelölése, csillagozása, space, ha a fájl nem
+kijelölt.
+.TP
 .B mtime
 a fájl utolsó módosításának (modify) ideje.
-.PP
+.TP
 .B atime
 a fájl utolsó hozzáférésének (access) ideje.
-.PP
+.TP
 .B ctime
 a fájl készítésének (create) ideje.
-.PP
+.TP
 .B perm
 a megjelenített szöveg a fájl jelenlegi hozzáférési jogainak
 (permission) bitjeit mutatja.
-.PP
+.TP
 .B mode
 a fájl jelenlegi nyolcas számrendszerbeli hozzáférését mutató bit
 értéke.
-.PP
+.TP
 .B nlink
 a fájlra mutató linkek száma.
-.PP
+.TP
 .B ngid
 a GID (a csoport azonosító kódja; szám).
-.PP
+.TP
 .B nuid
 a UID  (felhasználó azonosító kódja; szám).
-.PP
+.TP
 .B owner
 a fájl tulajdonosa.
-.PP
+.TP
 .B group
 a fájl csoportja.
-.PP
+.TP
 .B inode
 a fájl inódja (helyfoglalása a harddiszken).
 .PP
 Ezeken kívül még a következõ érték megnevezések adhatók meg az értékek
 megjelenítéskori rendezéséhez:
-.PP
+.TP
 .B space
 helykitöltõ a megjelenítési formátumban.
-.PP
-.B mark
-a kijelölt fájl megjelölése, csillagozása, space, ha a fájl nem
-kijelölt.
-.PP
+.TP
 .B |
-Ez a karakter használható arra, hogy függõleges vonalat jelenítsünk meg.
+ez a karakter használható arra, hogy függõleges vonalat jelenítsünk meg.
 .PP
 Egy érték fix méretének megadásához (mezõszélesség megadás), csak egy
 ':'-ra van szükséged és azt követõen a megjelenített érték karaktereinek
@@ -757,33 +758,33 @@ Például a
 .B Hosszú lista
 megjelenítés ehhez a formátumhoz hasonló:
 .PP
-half type,name,|,size,|,mtime
+half type name | size | mtime
 .PP
 A
 .B Részletes lista
 megjelenítés ennek a formátumnak megfelelõ:
 .PP
-full perm,space,nlink,space,owner,space,group,space,size,space,
-mtime,space,name
+full perm space nlink space owner space group space size space mtime
+space name
 .PP
 Érdemes például ezt kipróbálni:
 .PP
-half name,|,size:7,|,type,mode:3
+half name | size:7 | type mode:3
 .PP
 A Paneleket még a következõ módokba lehet állítani:
-.PP
-.B "Infó"
+.TP
+.B Infó
 Az infó nézet a jelenleg kiválasztott fájlra vonatkozó adatokat mutatja,
 és, ha látható információ a jelenlegi fájlrendszerrõl, akkor azt is.
-.PP
+.TP
 .B Könyvtárfa
 A könyvtárfa nézet azonos a
 .\"LINK2"
 Könyvtárfa
 .\"Directory Tree"
 eszközzel. Lásd az errõl szóló részt további információkért.
-.PP
-.B "Gyorsnézõke"
+.TP
+.B Gyorsnézõke
 Ebben a módban a panel átvált
 .\"LINK2"
 Belsõ fájlnézõre\&,
