@@ -4011,7 +4011,7 @@ msgstr "&Uscire"
 
 #: src/find.c:135 src/panelize.c:89
 msgid "Pane&lize"
-msgstr "Panne&lizzare"
+msgstr "&Pannellizzare"
 
 #: src/find.c:136
 msgid "&View - F3"
@@ -4165,11 +4165,11 @@ msgstr "&Sposta"
 
 #: src/hotlist.c:133 src/hotlist.c:1443 src/panelize.c:88 src/wtools.c:383
 msgid "&Remove"
-msgstr "Elimina"
+msgstr "&Elimina"
 
 #: src/hotlist.c:134 src/hotlist.c:818 src/hotlist.c:915
 msgid "&Append"
-msgstr "Aggiungi"
+msgstr "Aggiungi in &Fondo"
 
 #: src/hotlist.c:135 src/hotlist.c:816 src/hotlist.c:913
 msgid "&Insert"
@@ -4177,7 +4177,7 @@ msgstr "&Inserisci"
 
 #: src/hotlist.c:136
 msgid "New &Entry"
-msgstr "Nuova voce"
+msgstr "&Nuova voce"
 
 #: src/hotlist.c:137
 msgid "New &Group"
@@ -4185,15 +4185,15 @@ msgstr "Nuovo &Gruppo"
 
 #: src/hotlist.c:139
 msgid "&Up"
-msgstr "Su"
+msgstr "&Prima voce"
 
 #: src/hotlist.c:140
 msgid "&Add current"
-msgstr "Aggiungi corrente posizione"
+msgstr "Aggiungi &Corrente"
 
 #: src/hotlist.c:141
 msgid "Change &To"
-msgstr "Cambia in"
+msgstr "&Vai a"
 
 #: src/hotlist.c:201
 msgid "Subgroup - press ENTER to see list"
@@ -4778,7 +4778,7 @@ msgstr "&Storico comandi"
 
 #: src/main.c:1309
 msgid "di&Rectory hotlist    C-\\"
-msgstr "Directory &Visitate           C-\\"
+msgstr "Directory &Favorite           C-\\"
 
 #: src/main.c:1311
 msgid "&Active VFS list      C-x a"
@@ -5050,7 +5050,7 @@ msgstr "barre che &Girano"
 
 #: src/option.c:84
 msgid "co&Mplete: show all"
-msgstr "completo: visualizza tutto"
+msgstr "completo: visuali&Zza tutto"
 
 #: src/option.c:85
 msgid "&Use internal view"
@@ -5062,11 +5062,11 @@ msgstr "usa &Editor interno"
 
 #: src/option.c:87
 msgid "auto m&Enus"
-msgstr "auto menu"
+msgstr "auto men&U"
 
 #: src/option.c:88
 msgid "&Auto save setup"
-msgstr "salva setup automatico"
+msgstr "salva setu&P automaticamente"
 
 #: src/option.c:89
 msgid "shell &Patterns"
@@ -5086,7 +5086,7 @@ msgstr "aggiornamento &Rapido directory"
 
 #: src/option.c:93
 msgid "mi&X all files"
-msgstr "mescola tutti i file"
+msgstr "mescola tutti i &File"
 
 #: src/option.c:94
 msgid "&Drop down menus"
@@ -5135,7 +5135,7 @@ msgstr "Configura opzioni"
 
 #: src/panelize.c:87
 msgid "&Add new"
-msgstr "&Aggiungi nuovo"
+msgstr "Aggiungi &Nuovo"
 
 #: src/panelize.c:99
 msgid " External panelize "
@@ -5155,11 +5155,11 @@ msgstr " Aggiungi al visual. esterno..."
 
 #: src/panelize.c:261
 msgid " Enter command label: "
-msgstr " Linea: "
+msgstr " Etichetta per il comando: "
 
 #: src/panelize.c:301
 msgid " I can't run external panelize while logged on a non local directory "
-msgstr "Posso eseguire il visualizzatore esterno solo in locale"
+msgstr " Posso eseguire il visualizzatore esterno solo su una directory locale"
 
 #: src/panelize.c:351
 msgid "Find *.orig after patching"
