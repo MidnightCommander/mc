@@ -2277,7 +2277,7 @@ go_home (GtkWidget *widget, WPanel *panel)
 static GnomeUIInfo toolbar[] = {
 	GNOMEUIINFO_ITEM_STOCK (N_("Back"), N_("Go to the previously visited directory"),
 				panel_back, GNOME_STOCK_PIXMAP_BACK),
-	GNOMEUIINFO_ITEM_STOCK (N_("Up"), N_("Go up a level in the directory heirarchy"),
+	GNOMEUIINFO_ITEM_STOCK (N_("Up"), N_("Go up a level in the directory hierarchy"),
 				panel_up, GNOME_STOCK_PIXMAP_UP),
 	GNOMEUIINFO_ITEM_STOCK (N_("Forward"), N_("Go to the next directory"),
 				panel_fwd, GNOME_STOCK_PIXMAP_FORWARD),
