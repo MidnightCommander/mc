@@ -2449,6 +2449,34 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
     return default_proc (h, msg, par);
 }
 
+void
+file_mark (WPanel *panel, int index, int val)
+{
+    panel->dir.list [index].f.marked = val;
+    x_panel_select_item (panel, index, val);
+}
+
+#ifdef HAVE_X
+sortfn *
+get_sort_fn (char *name)
+{
+    int i;
+
+    /* First, try the long name options, from dir.c */
+    for (i = 0; i < SORT_TYPES_TOTAL; i++)
+	if (strcmp (name, sort_orders [i].sort_name) == 0)
+	    return (sortfn *)sort_orders [i].sort_fn;
+
+    /* Then try the short name options, from our local table */
+    for (i = 0; i < ELEMENTS (formats); i++){
+	if (strcmp (name, formats [i].id) == 0 && formats [i].sort_routine)
+	    return formats [i].sort_routine;
+    }
+    return NULL;
+}
+
+#else
+
 /*                                     */
 /* Panel mouse events support routines */
 /*                                     */
@@ -2482,34 +2510,6 @@ mark_if_marking (WPanel *panel, Gpm_Event *event)
     }
     return 0;
 }
-
-void
-file_mark (WPanel *panel, int index, int val)
-{
-    panel->dir.list [index].f.marked = val;
-    x_panel_select_item (panel, index, val);
-}
-
-#ifdef HAVE_X
-sortfn *
-get_sort_fn (char *name)
-{
-    int i;
-
-    /* First, try the long name options, from dir.c */
-    for (i = 0; i < SORT_TYPES_TOTAL; i++)
-	if (strcmp (name, sort_orders [i].sort_name) == 0)
-	    return (sortfn *)sort_orders [i].sort_fn;
-
-    /* Then try the short name options, from our local table */
-    for (i = 0; i < ELEMENTS (formats); i++){
-	if (strcmp (name, formats [i].id) == 0 && formats [i].sort_routine)
-	    return formats [i].sort_routine;
-    }
-    return NULL;
-}
-
-#else
 
 static int
 panel_event (Gpm_Event *event, WPanel *panel)

@@ -1,5 +1,7 @@
 2001-08-19  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c [HAVE_X]: Disable unused code.
+
 	* fs.h: Correctly include <sys/param.h>.
 	* x.h: Include "global.h".  Move all contents ...
 	* global.h: Here.
