@@ -1,5 +1,9 @@
 2001-02-23  Pavel Roskin  <proski@gnu.org>
 
+	* extfs/lslR (mclslRfs_list): Don't use gawk-specific features.
+	Don't hardcode gawk. Don't rely on the date format occupying a
+	fixed number of fields.
+
 	* extfs/uzip.in (mczipfs_list): Don't check zipinfo support on
 	the real file - check usage info instead. Use more robust checks
 	for valid lines. Suppress stderr from unzip. Workaround for jar
