@@ -24,7 +24,6 @@
 #ifdef OS2_NT
 #include <io.h>
 #include <fcntl.h>
-#include <sys/stat.h>
 #endif
 #include <ctype.h>
 #include "edit.h"

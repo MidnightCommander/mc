@@ -24,7 +24,6 @@
 #if defined(OS2_NT)
 #    include <io.h>
 #    include <fcntl.h>
-#    include <sys\stat.h>
 #endif
 #include "edit.h"
 

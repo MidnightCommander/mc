@@ -58,12 +58,12 @@ void drive_cmd_a(WPanel *p)
     if (p == this_panel) {
        if (get_current_type() != view_listing) {
           return;
-       } /* endif */
+       }
     } else {
        if (get_other_type() != view_listing) {
           return;
-       } /* endif */
-    } /* endif */
+       }
+    }
     drive_cmd();
 }
 
@@ -75,12 +75,12 @@ void drive_cmd_b(WPanel *p)
     if (p == this_panel) {
        if (get_current_type() != view_listing) {
           return;
-       } /* endif */
+       }
     } else {
        if (get_other_type() != view_listing) {
           return;
-       } /* endif */
-    } /* endif */
+       }
+    }
     drive_cmd();
 }
 
@@ -122,15 +122,15 @@ static void drive_cmd()
    if (rc != NO_ERROR) {
       message(0, " ERROR ", " Internal Error with drive_cmd ");
       return;
-   } /* endif */
+   }
 
    j = 0;
    for (i=0; i < 26; i++) {
       if ( (uDriveMap<<(31-i)) >> 31) {
          sDrvs[j++] = (char) ((int) 'A' + i);
          nDrivesAvail++;
-      } /* endif */
-   } /* endfor */
+      }
+   }
 
    /* Create Dialog */
    do_refresh ();
@@ -210,7 +210,7 @@ static void drive_cmd()
                 this_panel->total = 0;
                 show_dir(this_panel);
                 reread_cmd();
-           } /* endif */
+           }
            // rc = DosSetDefaultDisk(uDriveNum);
        }
    }

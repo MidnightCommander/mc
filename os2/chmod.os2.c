@@ -259,7 +259,7 @@ static void init_chmod (void)
     }
 }
 
-static int stat_file (char *filename, struct stat *st)
+int stat_file (char *filename, struct stat *st)
 {
     HFILE       fHandle    = 0L;
     ULONG       fInfoLevel = 1;  /* 1st Level Info: Standard attributs */
@@ -279,7 +279,7 @@ static int stat_file (char *filename, struct stat *st)
                  (PEAOP2) NULL);
     if (rc != 0) {
        return 0;
-    } /* endif */
+    }
 
     rc = DosQueryFileInfo(fHandle, fInfoLevel, &fInfoBuf, fInfoBufSize);
     DosClose(fHandle);
@@ -287,7 +287,7 @@ static int stat_file (char *filename, struct stat *st)
        return 0;  /* error ! */
     } else {
        st->st_mode = fInfoBuf.attrFile;
-    } /* endif */
+    }
 
     if (st->st_mode & FILE_DIRECTORY)
     	return 0;
@@ -329,13 +329,13 @@ static int os2_chmod (char *filename, ULONG st)
                  0L);
     if (rc != 0) {
        return rc;
-    } /* endif */
+    }
 
     rc = DosQueryFileInfo(fHandle, fInfoLevel, &fInfoBuf, fInfoBufSize);
     if (rc!=0) {
        DosClose(fHandle);
        return rc;
-    } /* endif */
+    }
     fInfoBuf.attrFile = st;
     rc = DosSetFileInfo(fHandle, fInfoLevel, &fInfoBuf, fInfoBufSize);
     rc = DosClose(fHandle);
@@ -375,7 +375,7 @@ static void mk_chmod (char *filename, ULONG st)
        rc = chmod(filename, fileMode);
        // Then set the other flags
        os2_chmod(filename, st);
-    } /* endif */
+    }
     return;
 }
 

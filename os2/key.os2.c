@@ -241,7 +241,7 @@ int get_key_code (int no_delay)
         inp_ch = SLang_input_pending(0);
         if (inp_ch == 0) {
            return 0;
-        } /* endif */
+        }
     } 
 
     /* .ado: I don't know what these codes mean: */
@@ -259,7 +259,7 @@ int get_key_code (int no_delay)
     /* .ado: We have already the key-code */
     if (no_delay) {
        return (VKtoCurses(inp_ch));
-    } /* endif */
+    }
 
     do {
        inp_ch = SLang_getkey();
@@ -299,7 +299,7 @@ static int VKtoCurses (int a_vkc)
    if (ctrlState) {
       // CTRL pressed
       rtnCode = XCTRL(asciiCode);
-   } /* endif */
+   }
 
    if (altState) {
       // ALT pressed
@@ -311,8 +311,8 @@ static int VKtoCurses (int a_vkc)
       // With the normal ALT key, the asciiCode will always be zero.
       if (asciiCode) {
          return asciiCode;
-      } /* endif */
-   } /* endif */
+      }
+   }
 
    // Scan Movement codes
    if (asciiCode == 0) {
@@ -320,7 +320,7 @@ static int VKtoCurses (int a_vkc)
       for (i=0;  movement[i].vkcode != 0 || movement[i].key_code != 0; i++) 
 	if (scanCode == movement[i].vkcode) 
   	     return (movement[i].key_code);
-   } /* endif */
+   }
 
    if (asciiCode == 0) {
       // Function-key detected
@@ -332,12 +332,12 @@ static int VKtoCurses (int a_vkc)
          for (i=0;  ALT_table[i].vkcode != 0 || ALT_table[i].key_code != 0; i++) 
                 if (scanCode == ALT_table[i].vkcode) 
                  	     return (ALT_table[i].key_code);
-      } /* endif */
-   } /* endif */
+      }
+   }
 
    if (asciiCode == 0x0d) {
       return '\n';
-   } /* endif */
+   }
 
    return rtnCode;
 }
@@ -372,16 +372,6 @@ int get_event (Gpm_Event *event, int redo_event, int block)
 
     vfs_timeout_handler ();
     
-    /* Repeat if using mouse */
-#ifdef HAVE_SLANG
-    while ((xmouse_flag) && !pending_keys)
-    {
-//	SLms_GetEvent (event);
-	*event = evSaved_Event;
-    }
-#endif
-
-
     c = block ? getch_with_delay () : get_key_code (1);
     if (!c) { 				/* Code is 0, so this is a Control key or mouse event */
 #ifdef HAVE_SLANG

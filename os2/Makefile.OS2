@@ -111,7 +111,6 @@ SRCS= 	$(EXTRA_MC_SRCS) \
 	dirhist.c \
 	main.c \
 	popt.c \
-	mouse.c \
 	text.c \
 	screen.c
 

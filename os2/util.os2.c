@@ -139,7 +139,7 @@ StartWindowsProg (char *name, SHORT type)
    default:
       pDetails.progt.progc = PROG_31_ENHSEAMLESSCOMMON ;
      break;
-   } /* endswitch */
+   }
    WinStartApp(NULLHANDLE, 
                &pDetails, 
                NULL, 
@@ -151,7 +151,7 @@ StartWindowsProg (char *name, SHORT type)
 
 
 static int 
-os2_system (int as_shell_command, const char *shell, const char *command, const char *parm);
+os2_system (int as_shell_command, const char *shell, const char *command, char *parm);
 
 /* 
   as_shell_command = 1: If a program is started during input line, CTRL-O
@@ -186,11 +186,11 @@ my_system (int as_shell_command, const char *shell, const char *command)
                length--;
             } else 
                 break;
-         } /* endfor */
+         }
          if (i==-1) {
             /* only blanks */
             return -1;
-         } /* endif */
+         }
          if (parm = strchr(temp, (char) ' ')) {
             *parm = (char) 0;
             parm++;
@@ -199,8 +199,8 @@ my_system (int as_shell_command, const char *shell, const char *command)
       } else {
          /* command is NULL */
          cmd = parm = NULL;
-      } /* endif */
-   } /* endif */
+      }
+   }
    /* .ado: Konvertierung wenn shell <> get_default_shell */
    os2_system (as_shell_command, sh, cmd, parm);
 }
@@ -223,19 +223,19 @@ ux_startp (const char *shell, const char *command, const char *parm)
               "/c", 
               (char *) command, 
               (char *) 0);
-    } /* endif */
+    }
     return 0;
 }
 
 
 static int 
-os2_system (int as_shell_command, const char *shell, const char *command, const char *parm)
+os2_system (int as_shell_command, const char *shell, const char *command, char *parm)
 {
    register int i, j;
    ULONG        AppType = 0;                    /* Application type flags (returned) */
    APIRET       rc = NO_ERROR;                  /* Return Code */
    char         pathValue[5] = "PATH";          /* For DosSearchPath */
-   UCHAR        searchResult[MAX_PATH * 2 + 1];     /* For DosSearchPath */
+   UCHAR        searchResult[MC_MAXPATHLEN * 2 + 1];     /* For DosSearchPath */
    
    char         *cmdString;
    char         *postFix[3];
@@ -278,11 +278,11 @@ os2_system (int as_shell_command, const char *shell, const char *command, const 
    if (command[i-1] == ' ') {
       /* The user has used ALT-RETURN */
       i--;
-   } /* endif */
+   }
    cmdString = (char *) malloc(i+1);
    for (j=0; j<i; j++) {
       cmdString[j] = command[j];
-   } /* endfor */
+   }
    cmdString[j] = (char) 0;
 
    if ((i < 5) || ((i > 4) && (cmdString[i-4]) != '.')) {
@@ -298,7 +298,7 @@ os2_system (int as_shell_command, const char *shell, const char *command, const 
                             line,
                             searchResult,
                             sizeof(searchResult));
-      } /* endfor */
+      }
       free (line);
    } else {         
       /* Just search */
@@ -307,12 +307,12 @@ os2_system (int as_shell_command, const char *shell, const char *command, const 
                          cmdString,
                          searchResult,
                          sizeof(searchResult));
-   } /* endif */
+   }
    free(cmdString);
    if (rc != 0) {
       /* Internal command or the program was written with absolut path */
       return ux_startp(shell, command, parm);
-   } /* endif */
+   }
 
    /* Application to be started */
    StartData.PgmName            = searchResult;
@@ -324,28 +324,28 @@ os2_system (int as_shell_command, const char *shell, const char *command, const 
          /* Window API */
          StartData.SessionType = PROG_PM;
          return DosStartSession(&StartData, &SessionID, &pid);
-      } /* endif */
+      }
       if ((AppType & 0x00000007) == FAPPTYP_WINDOWCOMPAT) {
          /* Window compat */
          return ux_startp(shell, command, parm);
-      } /* endif */
+      }
       if (AppType & 0x0000ffff & FAPPTYP_DOS) {
          /* PC/DOS Format */
         StartData.SessionType = PROG_WINDOWEDVDM;
         return DosStartSession(&StartData, &SessionID, &pid);
-      } /* endif */
+      }
       if (AppType & 0x0000ffff & FAPPTYP_WINDOWSREAL) {
          /* Windows real mode app */
         return StartWindowsProg(searchResult, 0);
-      } /* endif */
+      }
       if (AppType & 0x0000ffff & FAPPTYP_WINDOWSPROT) {
          /* Windows Protect mode app*/
         return StartWindowsProg(searchResult, 1);
-      } /* endif */
+      }
       if (AppType & 0x0000ffff & FAPPTYP_WINDOWSPROT31) {
          /* Windows 3.1 Protect mode app*/
         return StartWindowsProg(searchResult, 2);
-      } /* endif */
+      }
       rc = DosStartSession(&StartData, &SessionID, &pid) ;
    } else {
       /* It's not a known exe type or it's a CMD/BAT file */
@@ -358,8 +358,8 @@ os2_system (int as_shell_command, const char *shell, const char *command, const 
         rc = DosStartSession(&StartData, &SessionID, &pid) ;
       } else {
          rc = ux_startp (shell, command, parm);
-      } /* endif */
-   } /* endif */
+      }
+   }
    return rc;
 }
 
@@ -367,14 +367,6 @@ char *tilde_expand (char *directory)
 {
     return strdup (directory);
 }
-
-#ifndef __EMX__
-void 
-sleep(unsigned long dwMiliSecs)
-{
-    DosSleep(dwMiliSecs);
-}
-#endif
 
 
 /* Canonicalize path, and return a new path. Do everything in situ.
@@ -527,7 +519,7 @@ my_statfs (struct my_statfs *myfs_stats, char *path)
     } else {
        myfs_stats->typename = (char *) malloc(13);
        strcpy(myfs_stats->typename, "Other Device");
-    } /* endif */
+    }
 
     free(pBuf);
     free(pFsInfo);
@@ -565,33 +557,30 @@ look_for_exe(const char* pathname)
       p = (char *) pathname;
       for (j=0; j<lgh-4; j++) {
          p++;
-      } /* endfor */
+      }
       if (!stricmp(p, ".exe") || 
           !stricmp(p, ".bat") || 
           !stricmp(p, ".com") || 
           !stricmp(p, ".cmd")) {
          return 1;
-      } /* endif */
-   } /* endif */
+      }
+   }
    return 0;
 }
 
-/* lstat - Because of symlinks in Unix, stat will give info 
- *   on the file pointed to and lstat on the symlink itself.
- *   We have no such a difference/trouble.
- */
 int 
 lstat (const char* pathname, struct stat *buffer)
 {
    int rc = stat (pathname, buffer);
+#ifdef __BORLANDC__
    if (rc == 0) {
-     if (!(buffer->st_mode & S_IFDIR)) { 
-        if (look_for_exe(pathname)) {
-           buffer->st_mode |= S_IXUSR | S_IXGRP | \
-                              S_IXOTH;
-        }
+     if (!(buffer->st_mode & S_IFDIR)) {
+        if (!look_for_exe(pathname)) {
+           buffer->st_mode &= !S_IXUSR & !S_IXGRP & !S_IXOTH;
+	}
      }
-   } /* endif */
+   }
+#endif
    return rc;
 }
 
@@ -693,35 +682,6 @@ geteuid(void)
    return 0;
 }
 
-#ifndef __EMX__
-char *
-getcwd(char *buffer, int size)
-{
-   APIRET rc;
-   ULONG  lgh = size;
-   ULONG   uDriveNum = 0;               /* Drive number (A=1, B=2 ...) */
-   ULONG   uDriveMap = 0;               /* Mapping */
-   CHAR    p[4] = "A:\\";
-   char    *tmpBuf;
-
-   rc = DosQueryCurrentDisk(&uDriveNum, &uDriveMap);
-   p[0] = (char) (uDriveNum + (int) 'A' - 1);
-
-   rc = DosQueryCurrentDir(0L,
-                           (PBYTE) buffer,
-                           &lgh);
-   if (rc == NO_ERROR) {
-      tmpBuf = (char *) malloc(strlen(buffer) + 1);
-      strcpy(tmpBuf, buffer);
-      strcpy(buffer, p);
-      strcat(buffer, tmpBuf);
-      free(tmpBuf);
-      return strdup(buffer);
-   } else {
-      return NULL;
-   } /* endif */
-}
-#endif
 
 int
 mc_chdir(char *pathname)
@@ -737,11 +697,11 @@ mc_chdir(char *pathname)
       if (lgh > 1) {
          if (pathname[1] == ':') {
              ret = DosSetDefaultDisk(toupper(pathname[0]) - 'A' + 1); 
-         } /* endif */
-      } /* endif */
+         }
+      }
       /* After that, set the current dir! */
       ret = DosSetCurrentDir(pathname);
-   } /* endif */
+   }
    return ret;
 }
  
@@ -775,7 +735,7 @@ conv_os2_unx_rc(int os2rc)
       default: 
          errCode = EINVAL;
         break;
-   } /* endswitch */
+   }
    return errCode;
 }
 
@@ -794,7 +754,7 @@ mc_unlink(char *pathName)
    rc = DosDelete(pathName);
    if (!rc) {
       return 0;
-   } /* endif */ 
+   }
    if (rc == ERROR_ACCESS_DENIED) {
       chmod(pathName, (S_IREAD|S_IWRITE));
       rc = DosDelete(pathName);
@@ -803,11 +763,11 @@ mc_unlink(char *pathName)
          return -1;
       } else {
          return 0;
-      } /* endif */
+      }
    } else {
       errno = conv_os2_unx_rc(rc) ;
       return -1;
-   } /* endif */
+   }
 }
 
 int
@@ -845,7 +805,7 @@ get_default_editor (void)
 	char *tmp;
 	APIRET  rc;
 	char    pathValue[5] = "PATH";
-	UCHAR   searchResult[MAX_PATH + 1];
+	UCHAR   searchResult[MC_MAXPATHLEN + 1];
 	
         /* EPM is not always be installed */
 	rc = DosSearchPath((SEARCH_IGNORENETERRS | SEARCH_ENVIRONMENT | SEARCH_CUR_DIRECTORY),
@@ -859,7 +819,7 @@ get_default_editor (void)
 	} else {
                 /* Let it be searched from my_system */
 		return strdup("epm.exe");
-	} /* endif */
+	}
 }
 
 /* get_default_shell
@@ -894,7 +854,7 @@ get_mc_lib_dir ()
       return "D:\\mc";
    } else {
       return mchome;
-   } /* endif */
+   }
 }
 
 int get_user_rights (struct stat *buf)

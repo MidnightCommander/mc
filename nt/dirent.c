@@ -87,5 +87,6 @@ int closedir (DIR *dd_dir)
 {
 	FindClose(dd_dir->d_handle);
 	free (dd_dir);
+	return 1;
 }
 

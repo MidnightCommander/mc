@@ -52,7 +52,7 @@ DIR *opendir (const char * a_dir)
            free(dd_dir);
            return NULL;
           break;
-        } /* endswitch */
+        }
 	dd_dir->d_attr = FindBuffer.attrFile;
 	/* dd_dir->d_attr = (wfd.dwFileAttributes == FILE_ATTRIBUTE_NORMAL)
                    		? 0 : wfd.dwFileAttributes; */
@@ -100,7 +100,7 @@ DIR *readdir( DIR * dd_dir)
            errno = EINVAL;
            return NULL;
           break;
-        } /* endswitch */
+        }
 	/* dd_dir->d_attr = (wfd.dwFileAttributes == FILE_ATTRIBUTE_NORMAL)
                    		? 0 : wfd.dwFileAttributes; */
         /*    #define FILE_NORMAL     0x0000
@@ -123,7 +123,7 @@ int closedir (DIR *dd_dir)
 {
    if (dd_dir->d_handle != 0xFFFF) {
 	DosFindClose(dd_dir->d_handle);
-   } /* endif */
+   }
    free (dd_dir);
    return 1;
 }

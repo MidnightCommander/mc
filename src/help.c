@@ -61,14 +61,6 @@
 #    include "tkmain.h"
 #endif
 
-#ifndef USE_NCURSES
-#   define ACS_MAP(x) '*'
-#else
-#   ifndef ACS_MAP
-#       define ACS_MAP(x) acs_map [x]
-#   endif
-#endif
-
 #define MAXLINKNAME 80
 #define HISTORY_SIZE 20
 #define HELP_WINDOW_WIDTH 62
@@ -103,6 +95,37 @@ static Link_Area *link_area = NULL;
 static int inside_link_area = 0;
 
 static int help_callback (struct Dlg_head *h, int id, int msg);
+
+#ifdef OS2_NT
+struct {
+    int acscode;
+    int pccode;
+} acs2pc_table [] = {
+    { 'q',  0xC4 },
+    { 'x',  0xB3 },
+    { 'l',  0xDA },
+    { 'k',  0xBF },
+    { 'm',  0xC0 },
+    { 'j',  0xD9 },
+    { 'a',  0xB0 },
+    { 'u',  0xB4 },
+    { 't',  0xC3 },
+    { 'w',  0xC2 },
+    { 'v',  0xC1 },
+    { 'n',  0xC5 },
+    { 0, 0 } };
+
+static int acs2pc (int acscode)
+{
+    int i;
+
+    for (i = 0; acs2pc_table[i].acscode != 0; i++)
+	if (acscode == acs2pc_table[i].acscode) {
+	    return acs2pc_table[i].pccode;
+	}
+    return 0;
+}
+#endif
 
 /* returns the position where text was found in the start buffer */
 /* or 0 if not found */
@@ -424,11 +447,15 @@ static void show (Dlg_head *h, char *paint_start)
 		    if (c == ' ' || c == '.')
 			addch (c);
 		    else
+#ifndef OS2_NT
 #ifndef HAVE_SLANG
-			addch (ACS_MAP(c));
+			addch (acs_map [c]);
 #else
-		    SLsmg_draw_object (h->y + line + 2, h->x + col + 2, c);
-#endif		    
+			SLsmg_draw_object (h->y + line + 2, h->x + col + 2, c);
+#endif
+#else
+			addch (acs2pc (c));
+#endif /* OS2_NT */
 		} else
 		    addch (c);
 		col++;

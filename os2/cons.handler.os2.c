@@ -1,5 +1,4 @@
 /* Client interface for General purpose OS/2 console save/restore server.
-/* Client interface for General purpose OS/2 console save/restore server.
         1997 Alexander Dong <ado@software-ag.de>
    Having the same interface as its Linux counterpart:
    	Copyright (C) 1994 Janne Kukonlehto <jtklehto@stekt.oulu.fi> 
@@ -40,7 +39,7 @@
 #include "win.h"
 #include "cons.saver.h"
 
-extern signed char console_flag = 1;
+signed char console_flag = 1;
 static unsigned char *scr_buffer;
 static unsigned char *pointer;
 
@@ -73,7 +72,7 @@ void show_console_contents (int starty, unsigned char begin_line, unsigned char 
    pointer = scr_buffer;
    for (z=0; z<(begin_line * col); z++) {
       pointer++; pointer++;
-   } /* endfor */
+   }
    n = (end_line - begin_line + 1) * col;
    VioWrtCellStr((PCH) pointer, (USHORT) n, begin_line, 0, 0);
    return; /* .ado */
@@ -108,9 +107,8 @@ void handle_console (unsigned char action)
       /* This is not possible, but if we are here, just save the screen */
       handle_console(CONSOLE_SAVE);
      break;
-   } /* endswitch */
+   }
    return; /* .ado */
 }
 
 #endif // !__os2__
-

@@ -532,13 +532,44 @@ int gettimeofday (struct timeval* tvp, void *p)
 
 // FAKE funcs
 
-/* lstat - Because of symlinks in Unix, stat will give info 
-	   on the file pointed to and lstat on the symlink itself.
-	   We have no such a difference/trouble.
- */
-int lstat (const char* pathname, struct stat *buffer)
+int 
+look_for_exe(const char* pathname)
 {
-	return stat (pathname, buffer);
+   int j;
+   char *p;
+   int lgh = strlen(pathname);
+
+   if (lgh < 4) {
+      return 0;
+   } else {
+      p = (char *) pathname;
+      for (j=0; j<lgh-4; j++) {
+         p++;
+      } /* endfor */
+      if (!stricmp(p, ".exe") || 
+          !stricmp(p, ".bat") || 
+          !stricmp(p, ".com") || 
+          !stricmp(p, ".cmd")) {
+         return 1;
+      }
+   }
+   return 0;
+}
+
+int 
+lstat (const char* pathname, struct stat *buffer)
+{
+   int rc = stat (pathname, buffer);
+#ifdef __BORLANDC__
+   if (rc == 0) {
+     if (!(buffer->st_mode & S_IFDIR)) {
+        if (!look_for_exe(pathname)) {
+           buffer->st_mode &= !S_IXUSR & !S_IXGRP & !S_IXOTH;
+	}
+     }
+   }
+#endif
+   return rc;
 }
 
 int getuid ()	      
