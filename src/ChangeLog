@@ -1,3 +1,12 @@
+2001-11-12  Pavel Roskin  <proski@gnu.org>
+
+	* main.c: Remove support for subshell debugging.  Firstly, it
+	was broken.  Secondly, every developer should be able to add
+	this code when needed.  Finally, there is no need to expose the
+	option to the user and translate it into 30 languages.
+	* subshell.h: Remove debug_subshell.
+	* subshell.c: Likewise.
+
 2001-11-12  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* mad.h: Enable glib support.
@@ -47,7 +56,7 @@
 	* key.c (push_char): Fix buffer length calculation.
 	By drk@sgi.com.
 	http://bugzilla.gnome.org/show_bug.cgi?id=60932
-	
+
 	(define_sequence): Likewise.
 	(key_define_t): Add const declaration.
 

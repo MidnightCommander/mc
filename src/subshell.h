@@ -13,9 +13,6 @@ extern int use_subshell;
 /* File descriptor of the pseudoterminal used by the subshell */
 extern int subshell_pty;
 
-/* If true, the child forked in init_subshell will wait in a loop to be attached by gdb */
-extern int debug_subshell;
-
 /* The key to switch back to MC from the subshell */
 extern char subshell_switch_key;
 

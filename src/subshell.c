@@ -105,9 +105,6 @@ TRUE;
 /* File descriptor of the pseudoterminal used by the subshell */
 int subshell_pty = 0;
 
-/* If true, the child forked in init_subshell will wait in a loop to be attached by gdb */
-int debug_subshell = 0;
-
 /* The key for switching back to MC from the subshell */
 char subshell_switch_key = XCTRL('o');
 

@@ -2340,9 +2340,6 @@ print_mc_usage (void)
        "-V, --version      Report version and configuration options.\n"
        "-x, --xterm        Force xterm mouse support and screen save/restore.\n"
        "+number            number it is the start line number of file for `mcedit'.\n"),
-#ifdef HAVE_SUBSHELL_SUPPORT
-    N_("-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"),
-#endif
     N_("\n"
        "Please send any bug reports (including the output of `mc -V')\n"
        "to mc-devel@gnome.org\n"),
@@ -2471,9 +2468,6 @@ static const struct poptOption argument_table [] = {
       N_("Request to run in color mode") },
     { "colors", 	'C', POPT_ARG_STRING, 	&command_line_colors, 	 0,
       N_("Specifies a color configuration") },
-#ifdef HAVE_SUBSHELL_SUPPORT
-    { "dbgsubshell", 	'X', POPT_ARG_NONE, 	&debug_subshell, 	 0 },
-#endif
 
 #ifdef USE_INTERNAL_EDIT
     { "edit", 		'e', POPT_ARG_STRING, 	&edit_one_file, 	 0,
