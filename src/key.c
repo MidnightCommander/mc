@@ -283,6 +283,7 @@ xmouse_get_event (Gpm_Event *ev)
     static struct timeval tv1 = { 0, 0 }; /* Force first click as single */
     static struct timeval tv2;
     static int clicks;
+    static int last_btn = 0;
 
     /* Decode Xterm mouse information to a GPM style event */
 
@@ -294,10 +295,16 @@ xmouse_get_event (Gpm_Event *ev)
     /* So we assume all the buttons were released */
 
     if (btn == 3){
-        ev->type = GPM_UP | (GPM_SINGLE << clicks);
-        ev->buttons = 0;
-	GET_TIME (tv1);
-	clicks = 0;
+	if (last_btn) {
+	    ev->type = GPM_UP | (GPM_SINGLE << clicks);
+	    ev->buttons = 0;
+	    last_btn = 0;
+	    GET_TIME (tv1);
+	    clicks = 0;
+	} else {
+	    /* Bogus event, maybe mouse wheel */
+	    ev->type = 0;
+	}
     } else {
         ev->type = GPM_DOWN;
 	GET_TIME (tv2);
@@ -319,8 +326,11 @@ xmouse_get_event (Gpm_Event *ev)
             break;
 	default:
             /* Nothing */
+	    ev->type = 0;
+	    ev->buttons = 0;
             break;
         }
+	last_btn = ev->buttons;
     }
     /* Coordinates are 33-based */
     /* Transform them to 1-based */
@@ -788,7 +798,10 @@ int get_event (Gpm_Event *event, int redo_event, int block)
     
     if (c == MCKEY_MOUSE) { /* Mouse event */
         xmouse_get_event (event);
-        return EV_MOUSE;
+	if (event->type)
+	    return EV_MOUSE;
+	else
+	    return EV_NONE;
     }
 
     return c;

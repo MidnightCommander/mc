@@ -1,5 +1,11 @@
 2001-08-18  Pavel Roskin  <proski@gnu.org>
 
+	* key.c (xmouse_get_event): Filter out GPM_UP events that don't
+	follow a GPM_DOWN event.  Filter out events with unknown button
+	numbers, such as mouse wheel events.
+	(get_event): Return EV_NONE if xmouse_get_event() decided to
+	ignore the event.
+
 	* main.c (init_sigchld): Disable subshell if SIGCHLD handler
 	cannot be installed.
 
