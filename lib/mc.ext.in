@@ -623,6 +623,12 @@ regex/\.rpm$
 	Install this RPM=rpm -i %f
 	Upgrade this RPM=rpm -U %f
 
+# SuSE src rpms
+regex/\.spm$
+	Open=%cd %p#rpm
+	Install this RPM=rpm -i %f
+	Upgrade this RPM=rpm -U %f
+
 # deb
 regex/\.deb$
 	Open=%cd %p#deb

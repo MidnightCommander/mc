@@ -1,3 +1,7 @@
+2000-10-05  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* lib/mc.ext.in: .spm is used by SuSE to mark src rpms
+
 2000-10-04  Christophe Merlet  <christophe@merlet.net>
 
 	* gnome/*.desktop: Updated french strings.
