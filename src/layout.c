@@ -1054,9 +1054,9 @@ void swap_panels ()
             current_panel = panel2;
         else
             current_panel = panel1;
-        if (midnight_dlg->current->widget == panels [0].widget)
+        if (midnight_dlg->current == panels[0].widget)
             dlg_select_widget (midnight_dlg, (void *) panels [1].widget);
-        else if (midnight_dlg->current->widget == panels [1].widget)
+        else if (midnight_dlg->current == panels[1].widget)
             dlg_select_widget (midnight_dlg, (void *) panels [0].widget);
     } else {
 	WPanel *tmp_panel;

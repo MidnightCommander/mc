@@ -827,16 +827,16 @@ query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	    } else {
 		WLEntry *e, *e1;
 
-		e1 = e = ((WListbox *) (h->current->widget))->list;
+		e1 = e = ((WListbox *) (h->current))->list;
 		do {
 		    if (!strncmp
 			(input->buffer + start, e1->text,
 			 end - start - 1)) {
-			listbox_select_entry ((WListbox *) (h->current->
-							    widget), e1);
+			listbox_select_entry ((WListbox *) (h->current),
+					      e1);
 			handle_char (input, parm);
 			end--;
-			send_message (h->current->widget, WIDGET_DRAW, 0);
+			send_message (h->current, WIDGET_DRAW, 0);
 			break;
 		    }
 		    e1 = e1->next;
@@ -861,7 +861,7 @@ query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 		int low = 4096;
 		char *last_text = NULL;
 
-		e1 = e = ((WListbox *) (h->current->widget))->list;
+		e1 = e = ((WListbox *) (h->current))->list;
 		do {
 		    if (!strncmp
 			(input->buffer + start, e1->text, end - start)) {
@@ -881,8 +881,7 @@ query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 			    } else {
 				need_redraw = 1;
 				listbox_select_entry ((WListbox *) (h->
-								    current->
-								    widget),
+								    current),
 						      e1);
 				last_text = e1->text;
 			    }
@@ -892,7 +891,7 @@ query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 		} while (e != e1);
 		if (need_redraw == 2) {
 		    insert_text (input, last_text, low);
-		    send_message (h->current->widget, WIDGET_DRAW, 0);
+		    send_message (h->current, WIDGET_DRAW, 0);
 		} else if (need_redraw == 1) {
 		    h->ret_value = B_ENTER;
 		    dlg_stop (h);

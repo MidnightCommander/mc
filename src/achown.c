@@ -214,7 +214,7 @@ static void update_mode (Dlg_head * h)
     attrset (COLOR_NORMAL);
     dlg_move (h, BY + 2, 9);
     printw ("%12o", get_mode ());
-    send_message (h->current->widget, WIDGET_FOCUS, 0);
+    send_message (h->current, WIDGET_FOCUS, 0);
 }
 
 static cb_ret_t
@@ -453,7 +453,7 @@ advanced_chown_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	    x_toggle ^= (1 << parm);
 	    update_mode (h);
 	    dlg_broadcast_msg (h, WIDGET_DRAW, 0);
-	    send_message (h->current->widget, WIDGET_FOCUS, 0);
+	    send_message (h->current, WIDGET_FOCUS, 0);
 	    break;
 
 	case XCTRL ('x'):
@@ -470,7 +470,7 @@ advanced_chown_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	    x_toggle ^= (1 << parm);
 	    update_mode (h);
 	    dlg_broadcast_msg (h, WIDGET_DRAW, 0);
-	    send_message (h->current->widget, WIDGET_FOCUS, 0);
+	    send_message (h->current, WIDGET_FOCUS, 0);
 	    break;
 
 	case 'x':
@@ -483,7 +483,7 @@ advanced_chown_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	    if (f_pos > 2)
 		break;
 	    flag_pos = f_pos * 3 + i;	/* (strchr(ch_perm,parm)-ch_perm); */
-	    if (((WButton *) h->current->widget)->text[(flag_pos % 3)] ==
+	    if (((WButton *) h->current)->text[(flag_pos % 3)] ==
 		'-')
 		ch_flags[flag_pos] = '+';
 	    else

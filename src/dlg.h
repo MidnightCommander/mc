@@ -84,8 +84,9 @@ typedef struct Dlg_head {
     int refresh_pushed;		/* Did the dialog actually run? */
 
     /* Internal variables */
-    int count;			/* number of widgets */
-    struct Widget_Item *current, *first;
+    int count;			/* Number of widgets */
+    struct Widget *current;	/* Curently active widget */
+    struct Widget *first;	/* First widget added to the dialog */
     dlg_cb_fn callback;
     void *previous_dialog;	/* Pointer to the previously running Dlg_head */
 
@@ -102,6 +103,9 @@ struct Widget {
     int x, y;
     int cols, lines;
     int options;
+    int dlg_id;		   /* Number of the widget, starting with 0 */
+    struct Widget *next;
+    struct Widget *prev;
     callback_fn callback;  /* The callback function */
     mouse_h mouse;
     struct Dlg_head *parent;
@@ -112,14 +116,6 @@ struct Widget {
 #define  W_WANT_CURSOR       4
 #define  W_WANT_IDLE         8
 #define  W_IS_INPUT         16
-
-/* Items in the circular buffer.  Each item refers to a widget.  */
-typedef struct Widget_Item {
-    int dlg_id;
-    struct Widget_Item *next;
-    struct Widget_Item *prev;
-    Widget *widget;
-} Widget_Item;
 
 /* draw box in window */
 void draw_box (Dlg_head *h, int y, int x, int ys, int xs);

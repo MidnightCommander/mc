@@ -131,7 +131,7 @@ static int learn_move (int right)
     
     totalcols = (learn_total - 1) / ROWS + 1;
     for (i = 0; i < learn_total; i++)
-        if (learnkeys [i].button == learn_dlg->current->widget) {
+        if (learnkeys [i].button == learn_dlg->current) {
             if (right) {
                 if (i < learn_total - ROWS)
                     i += ROWS;

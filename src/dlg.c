@@ -236,7 +236,6 @@ set_idle_proc (Dlg_head *d, int enable)
 int
 add_widget (Dlg_head *h, void *w)
 {
-    Widget_Item *new_item;
     Widget *widget = (Widget *) w;
 
     /* Don't accept 0 widgets, and running dialogs */
@@ -246,26 +245,23 @@ add_widget (Dlg_head *h, void *w)
     widget->x += h->x;
     widget->y += h->y;
     widget->parent = h;
-
-    new_item = g_new (Widget_Item, 1);
-    new_item->dlg_id = h->count++;
-    new_item->widget = widget;
+    widget->dlg_id = h->count++;
 
     if (h->current) {
-	new_item->next = h->current;
-	new_item->prev = h->current->prev;
-	h->current->prev->next = new_item;
-	h->current->prev = new_item;
+	widget->next = h->current;
+	widget->prev = h->current->prev;
+	h->current->prev->next = widget;
+	h->current->prev = widget;
     } else {
-	new_item->prev = new_item;
-	new_item->next = new_item;
-	h->first = new_item;
+	widget->prev = widget;
+	widget->next = widget;
+	h->first = widget;
     }
 
     if ((h->flags & DLG_REVERSE) || !h->current)
-	h->current = new_item;
+	h->current = widget;
 
-    return new_item->dlg_id;
+    return widget->dlg_id;
 }
 
 /* broadcast a message to all the widgets in a dialog that have
@@ -274,7 +270,7 @@ add_widget (Dlg_head *h, void *w)
 static void
 dlg_broadcast_msg_to (Dlg_head *h, int message, int reverse, int flags)
 {
-    Widget_Item *p, *first, *wi;
+    Widget *p, *first, *wi;
 
     if (!h->current)
 	    return;
@@ -290,7 +286,7 @@ dlg_broadcast_msg_to (Dlg_head *h, int message, int reverse, int flags)
 	    p = p->prev;
 	else
 	    p = p->next;
-	send_message (wi->widget, message, 0);
+	send_message (wi, message, 0);
     } while (first != p);
 }
 
@@ -305,7 +301,7 @@ int dlg_focus (Dlg_head *h)
     if (!h->current)
         return 0;
 
-    if (send_message (h->current->widget, WIDGET_FOCUS, 0)){
+    if (send_message (h->current, WIDGET_FOCUS, 0)){
 	(*h->callback) (h, DLG_FOCUS, 0);
 	return 1;
     }
@@ -318,7 +314,7 @@ dlg_unfocus (Dlg_head *h)
     if (!h->current)
         return 0;
 
-    if (send_message (h->current->widget, WIDGET_UNFOCUS, 0)){
+    if (send_message (h->current, WIDGET_UNFOCUS, 0)){
 	(*h->callback) (h, DLG_UNFOCUS, 0);
 	return 1;
     }
@@ -356,7 +352,7 @@ Widget *
 find_widget_type (Dlg_head *h, void *callback)
 {
     Widget *w;
-    Widget_Item *item;
+    Widget *item;
     int i;
 
     if (!h)
@@ -366,8 +362,8 @@ find_widget_type (Dlg_head *h, void *callback)
 
     w = 0;
     for (i = 0, item = h->current; i < h->count; i++, item = item->next) {
-	if (item->widget->callback == callback) {
-	    w = item->widget;
+	if (item->callback == callback) {
+	    w = item;
 	    break;
 	}
     }
@@ -376,7 +372,7 @@ find_widget_type (Dlg_head *h, void *callback)
 
 void dlg_one_up (Dlg_head *h)
 {
-    Widget_Item *old;
+    Widget *old;
 
     old = h->current;
 
@@ -388,15 +384,15 @@ void dlg_one_up (Dlg_head *h)
 	return;
 
     select_a_widget (h, 0);
-    if (dlg_overlap (old->widget, h->current->widget)){
-	send_message (h->current->widget, WIDGET_DRAW, 0);
-	send_message (h->current->widget, WIDGET_FOCUS, 0);
+    if (dlg_overlap (old, h->current)){
+	send_message (h->current, WIDGET_DRAW, 0);
+	send_message (h->current, WIDGET_FOCUS, 0);
     }
 }
 
 void dlg_one_down (Dlg_head *h)
 {
-    Widget_Item *old;
+    Widget *old;
 
     old = h->current;
     if (!old)
@@ -406,9 +402,9 @@ void dlg_one_down (Dlg_head *h)
 	return;
 
     select_a_widget (h, 1);
-    if (dlg_overlap (old->widget, h->current->widget)){
-	send_message (h->current->widget, WIDGET_DRAW, 0);
-	send_message (h->current->widget, WIDGET_FOCUS, 0);
+    if (dlg_overlap (old, h->current)){
+	send_message (h->current, WIDGET_DRAW, 0);
+	send_message (h->current, WIDGET_FOCUS, 0);
     }
 }
 
@@ -418,7 +414,7 @@ int dlg_select_widget (Dlg_head *h, void *w)
        return 0;
 
     if (dlg_unfocus (h)){
-	while (h->current->widget != w)
+	while (h->current != w)
 	    h->current = h->current->next;
 	while (!dlg_focus (h))
 	    h->current = h->current->next;
@@ -428,20 +424,20 @@ int dlg_select_widget (Dlg_head *h, void *w)
     return 0;
 }
 
-#define callback(h) (h->current->widget->callback)
+#define callback(h) (h->current->callback)
 
 void update_cursor (Dlg_head *h)
 {
     if (!h->current)
          return;
-    if (h->current->widget->options & W_WANT_CURSOR)
-	send_message (h->current->widget, WIDGET_CURSOR, 0);
+    if (h->current->options & W_WANT_CURSOR)
+	send_message (h->current, WIDGET_CURSOR, 0);
     else {
-	Widget_Item *p = h->current;
+	Widget *p = h->current;
 
 	do {
-	    if (p->widget->options & W_WANT_CURSOR)
-		if ((*p->widget->callback)(p->widget, WIDGET_CURSOR, 0)){
+	    if (p->options & W_WANT_CURSOR)
+		if ((*p->callback)(p, WIDGET_CURSOR, 0)){
 		    break;
 		}
 	    p = p->next;
@@ -522,33 +518,34 @@ static inline void dialog_handle_key (Dlg_head *h, int d_key)
     }
 }
 
-static int dlg_try_hotkey (Dlg_head *h, int d_key)
+static int
+dlg_try_hotkey (Dlg_head *h, int d_key)
 {
-    Widget_Item *hot_cur;
-    Widget_Item *previous;
-    int    handled, c;
+    Widget *hot_cur;
+    Widget *previous;
+    int handled, c;
 
     if (!h->current)
-        return 0;
+	return 0;
 
     /*
      * Explanation: we don't send letter hotkeys to other widgets if
      * the currently selected widget is an input line
      */
 
-    if (h->current->widget->options & W_IS_INPUT){
-		if(d_key < 255 && isalpha(d_key))
-			return 0;
+    if (h->current->options & W_IS_INPUT) {
+	if (d_key < 255 && isalpha (d_key))
+	    return 0;
     }
 
     /* If it's an alt key, send the message */
-    c = d_key & ~ALT(0);
-    if (d_key & ALT(0) && c < 255 && isalpha(c))
-	d_key = tolower(c);
+    c = d_key & ~ALT (0);
+    if (d_key & ALT (0) && c < 255 && isalpha (c))
+	d_key = tolower (c);
 
     handled = 0;
-    if (h->current->widget->options & W_WANT_HOTKEY)
-	handled = callback (h) (h->current->widget, WIDGET_HOTKEY, d_key);
+    if (h->current->options & W_WANT_HOTKEY)
+	handled = callback (h) (h->current, WIDGET_HOTKEY, d_key);
 
     /* If not used, send hotkey to other widgets */
     if (handled)
@@ -558,9 +555,9 @@ static int dlg_try_hotkey (Dlg_head *h, int d_key)
 
     /* send it to all widgets */
     do {
-	if (hot_cur->widget->options & W_WANT_HOTKEY)
-	    handled |= (*hot_cur->widget->callback)
-		(hot_cur->widget, WIDGET_HOTKEY, d_key);
+	if (hot_cur->options & W_WANT_HOTKEY)
+	    handled |=
+		(*hot_cur->callback) (hot_cur, WIDGET_HOTKEY, d_key);
 
 	if (!handled)
 	    hot_cur = hot_cur->next;
@@ -574,7 +571,7 @@ static int dlg_try_hotkey (Dlg_head *h, int d_key)
 	return handled;
 
     h->current = hot_cur;
-    if (!dlg_focus (h)){
+    if (!dlg_focus (h)) {
 	h->current = previous;
 	dlg_focus (h);
     }
@@ -610,7 +607,7 @@ dlg_key_event (Dlg_head *h, int d_key)
 
 	/* not used - then try widget_callback */
 	if (!handled)
-	    handled = callback (h) (h->current->widget, WIDGET_KEY, d_key);
+	    handled = callback (h) (h->current, WIDGET_KEY, d_key);
 
 	/* not used- try to use the unhandled case */
 	if (!handled)
@@ -628,8 +625,8 @@ dlg_key_event (Dlg_head *h, int d_key)
 static inline int
 dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
 {
-    Widget_Item *item;
-    Widget_Item *starting_widget = h->current;
+    Widget *item;
+    Widget *starting_widget = h->current;
     Gpm_Event new_event;
     int x = event->x;
     int y = event->y;
@@ -641,7 +638,7 @@ dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
 
     item = starting_widget;
     do {
-	Widget *widget = item->widget;
+	Widget *widget = item;
 
 	item = item->next;
 
@@ -775,17 +772,16 @@ void
 destroy_dlg (Dlg_head *h)
 {
     int i;
-    Widget_Item *c;
+    Widget *c;
 
     if (h->refresh_pushed)
 	pop_refresh ();
 
     dlg_broadcast_msg (h, WIDGET_DESTROY, 0);
     c = h->current;
-    for (i = 0; i < h->count; i++){
+    for (i = 0; i < h->count; i++) {
 	c = c->next;
-	if (h->current){
-	    g_free (h->current->widget);
+	if (h->current) {
 	    g_free (h->current);
 	}
 	h->current = c;
@@ -804,34 +800,35 @@ void widget_set_size (Widget *widget, int y, int x, int lines, int cols)
     widget->lines = lines;
 }
 
-/* Replace widget old for widget new in the h dialog */
-void dlg_replace_widget (Dlg_head *h, Widget *old, Widget *new)
+/* Replace widget old_w for widget new_w in the dialog h */
+void
+dlg_replace_widget (Dlg_head *h, Widget *old_w, Widget *new_w)
 {
-    Widget_Item *p = h->current;
+    Widget *p = h->current;
     int should_focus = 0;
 
     if (!h->current)
-        return;
+	return;
 
     do {
-	if (p->widget == old){
+	if (p == old_w) {
 
-	    if (old == h->current->widget)
+	    if (old_w == h->current)
 		should_focus = 1;
 
 	    /* We found the widget */
 	    /* First kill the widget */
-	    new->parent  = h;
-	    send_message (old, WIDGET_DESTROY, 0);
+	    new_w->parent = h;
+	    send_message (old_w, WIDGET_DESTROY, 0);
 
-	    /* We insert the new widget */
-	    p->widget = new;
-	    send_message (new, WIDGET_INIT, 0);
-	    if (should_focus){
+	    /* We insert the new_w widget */
+	    p = new_w;
+	    send_message (new_w, WIDGET_INIT, 0);
+	    if (should_focus) {
 		if (dlg_focus (h) == 0)
 		    select_a_widget (h, 1);
 	    }
-	    send_message (new, WIDGET_DRAW, 0);
+	    send_message (new_w, WIDGET_DRAW, 0);
 	    break;
 	}
 	p = p->next;

@@ -450,7 +450,7 @@ edit_drop_menu_cmd (WEdit *e, int which)
 	edit_menubar->selected = which;
     }
 
-    edit_menubar->previous_widget = e->widget.parent->current->widget;
+    edit_menubar->previous_widget = e->widget.parent->current;
     dlg_select_widget (e->widget.parent, edit_menubar);
 }
 

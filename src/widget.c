@@ -63,7 +63,7 @@ button_callback (WButton *b, widget_msg_t msg, int parm)
 	 * when hotkeys are sent to all widgets before the key is
 	 * handled by the current widget.
 	 */
-	if (parm == '\n' && h->current->widget == &b->widget) {
+	if (parm == '\n' && h->current == &b->widget) {
 	    button_callback (b, WIDGET_KEY, ' ');
 	    return MSG_HANDLED;
 	}

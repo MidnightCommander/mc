@@ -399,7 +399,7 @@ menubar_event    (Gpm_Event *event, WMenu *menubar)
 	return MOU_NORMAL;
     
     if (!menubar->dropped){
-	menubar->previous_widget = menubar->widget.parent->current->widget;
+	menubar->previous_widget = menubar->widget.parent->current;
 	menubar->active = 1;
 	menubar->dropped = 1;
 	was_active = 0;
