@@ -1,3 +1,9 @@
+2001-06-13  Pavel Roskin  <proski@gnu.org>
+
+	* slint.c (slang_init): Check screen dimensions and exit if they
+	are abnormal. This may happen due to a S-Lang bug when the TERM
+	is set to a value not listed in termcap or terminfo.
+
 2001-06-12  Pavel Roskin  <proski@gnu.org>
 
 	* boxes.c [HAVE_CHARSET]: Localize more strings. Lay out the

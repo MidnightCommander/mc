@@ -186,6 +186,22 @@ slang_init (void)
     struct sigaction act, oact;
     
     SLtt_get_terminfo ();
+
+   /*
+    * If the terminal in not in terminfo but begins with a well-known
+    * string such as "linux" or "xterm" S-Lang will go on, but the
+    * terminal size and several other variables won't be initialized
+    * (as of S-Lang 1.4.4). Detect it and abort. Also detect extremely
+    * small, large and negative screen dimensions.
+    */
+    if ((COLS < 10) || (LINES < 5) || (COLS > 1024) || (LINES > 1024)) {
+	fprintf (stderr,
+		 _("Screen size %dx%d is not supported.\n"
+		   "Check the TERM environment variable.\n"),
+		 COLS, LINES);
+	exit (1);
+    }
+
     tcgetattr (fileno (stdin), &boot_mode);
     /* 255 = ignore abort char; XCTRL('g') for abort char = ^g */
     SLang_init_tty (XCTRL('c'), 1, 0);	
