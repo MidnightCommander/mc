@@ -1,5 +1,8 @@
 2002-09-26  Pavel Roskin  <proski@gnu.org>
 
+	* hotlist.c (load_hotlist): Remove compatibility code with
+	hotlist files created by ancient versions of mc.
+
 	* command.c (do_cd_command): Reuse translated message.
 
 	* user.c (check_patterns): Ignore invalid shell_patterns and

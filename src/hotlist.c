@@ -1352,8 +1352,6 @@ clean_up_hotlist_groups (char *section)
 
 void load_hotlist (void)
 {
-    char	*grp_section;
-    int		has_old_list = 0;
     int		remove_old_list = 0;
     struct stat stat_buf;
 
@@ -1376,11 +1374,6 @@ void load_hotlist (void)
      * compatibility :-(
      */
     hotlist->directory = g_strdup ("Hotlist");
-
-    grp_section = g_strconcat ("Hotlist", ".Group", NULL);
-    has_old_list = profile_has_section ("Hotlist", profile_name) ||
-		   profile_has_section (grp_section, profile_name);
-    g_free (grp_section);
 
     if ((hotlist_file = fopen (hotlist_file_name, "r")) == 0) {
 	int	result;
@@ -1408,54 +1401,6 @@ void load_hotlist (void)
 	hot_load_file (hotlist);
 	fclose (hotlist_file);
 	hotlist_state.loaded = 1;
-	if (has_old_list) {
-	    int		result;
-	    char        *msg;
-
-	    msg = g_strconcat (
-		    _("You have ~/"), HOTLIST_FILENAME, _(" file and [Hotlist] section in ~/"), PROFILE_NAME, "\n",
-		    _("Your ~/"), HOTLIST_FILENAME, _(" most probably was created\n"),
-		    _("by an earlier development version of MC\nand is more actual than ~/"),
-		    PROFILE_NAME, _(" entries\n\n"),
-		    _("You can choose between\n\n"
-		      "  Remove - remove old hotlist entries from ~/"), PROFILE_NAME, "\n",
-		    _("  Keep   - keep your old entries; you will be asked\n"
-		      "           the same question next time\n"
-		      "  Merge  - add old entries to hotlist as group \"Entries from ~/"),
-		    PROFILE_NAME, "\"\n\n", NULL);
-
-	    result = query_dialog (_(" Hotlist Load "),
-				   msg, D_ERROR, 3, _("&Remove"), _("&Keep"), _("&Merge"));
-	    if (result == 0)
-		remove_old_list = 1;
-	    else if (result == 2) {
-		struct hotlist	*grp = hotlist->head;
-		struct hotlist	*old;
-
-		hotlist->head = 0;
-		load_group (hotlist);
-
-		old            = new_hotlist ();
-		old->type      = HL_TYPE_GROUP;
-		old->label     = g_strconcat (_(" Entries from ~/"), PROFILE_NAME, NULL);
-		old->up	       = hotlist;
-		old->head      = hotlist->head;
-		old->next      = grp;
-		hotlist->head  = old;
-		hotlist_state.modified = 1;
-		if (!save_hotlist ()){
-		    char *str;
-
-		    str = g_strconcat (_("MC was unable to write ~/"), HOTLIST_FILENAME,
-					_(" file, your old hotlist entries were not deleted"), NULL);
-
-		    message (D_ERROR, _(" Hotlist Load "), str);
-		    g_free (str);
-		} else
-		    remove_old_list = 1;
-		hotlist_state.modified = 0;
-	    }
-	}
     }
 
     if (remove_old_list) {
