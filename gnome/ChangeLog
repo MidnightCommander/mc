@@ -1,5 +1,8 @@
 1998-04-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gwidget.c (remove_hotkey, x_create_radio): Radio buttons should
+	not display the special Hotkey specificator.
+
 	* gcmd.c (gnome_close_panel): Implement the close-the-panel
 	functionality. 
 

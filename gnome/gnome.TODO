@@ -61,11 +61,6 @@ General Comments
    I think the thumb should follow in both cases. This is a gtk comment
    I'm sure.
 
-DONE - some dialogs only had a single entry box (like the ftp link one),
-DONE   when you hit return in the entrybox it would be nice if that mapped
-DONE   to hitting 'Ok' so you wouldnt have to hit Ok manually.
-
-
 Panel comments
 ---------------
 
@@ -81,12 +76,6 @@ Panel comments
    know the string is truncated in that column. I think its a really nice
    touch, but not a complete show stopper.
 
->  - I take it the shaped-window DnD isnt working, obviously we want to have
->    nice looking drag cursor behavior at some point.
-
-=========> This works on my machine.  When you start a drag from a file,
-=========> or a group of files it should show a little icon.  Same applies
-=========> to dragging the desktop icons. 
 
  - the user needs some feedback that something is happening - for example,
    on  an ftp link, the cursor needs to change or a modal dialog popping
@@ -95,29 +84,11 @@ Panel comments
  - 'Compare panels' doesnt appear to do anything - i didnt see any feedback
    after I chose the compare method.
 
->  - No matter what the sort mode, the directories seem to always get listed
->    first. Maybe this should be personal preference?
-======> this is a setting.  It is called mix files.  If it is set, then you
-======> get a mixed directory/file listing, if not, you get the directories first. 
-
  - Alt-t didnt seem to change the listing mode.
 
  - the pull-downs on the entry boxes under the floating menubar dont
    seem to do anything. I thought they might act as a history of the
    last few directories visited or something.
-
-DONE - a toobar with a 'back' type button would be handy - I realize the '..'
-DONE   folder does the same thing, but in a long file listing its nice to
-DONE   just have a button to do it.
-
-DONE - I got several 'sigpipes' when trying to view a ftpfs file, or
-DONE   when trying to view RPM tags via the rpmfs.
-DONE
-DONE   Open a RPM, then got into the INFO pseudo-dir, the VIEW a RPM tag. It
-DONE   will sigpipe.
-
-DONE - is there a way to click and drag and select all the files you drag
-DONE   over? Sortof a interactive 'select group' option.
 
  - the internal viewer, in hex mode, seems to shove the ASCII side of the
    view (the rightmost column) off the side of the window.
@@ -125,16 +96,6 @@ DONE   over? Sortof a interactive 'select group' option.
  - internal viewer - search didnt seem to work in hex mode
  
  - internal viewer - search should hilight the matching text
-
-DONE - some files when I try to 'Open' them, it just does nothing. I'm
-DONE   guessing no association existed - if so it should tell me and let
-DONE   me create an association
-
-DONE - I couldnt view files inside of a RPM which I was browsing via the ftpfs
-DONE   is this just cause I'm nuts to try?
-
-DONE - it might be good to do a rescan after a panel accepts a drag event. Is
-DONE   that an option?
 
  - I didnt get an error message when I tried to change the file modes
    on a file I didnt own.
@@ -150,15 +111,6 @@ DONE   that an option?
 
 Configure Options
 -----------------
-
-DONE - Buttons at bottom (Ok, Save, Cancel) - Save overlays the Ok button
-
-DONE - the 'Pause after run' radio buttons - you can select 'on dumb Terminals'
-DONE   and Never at the same time, etc etc. I only one should be selectable
-DONE   at a time. I could get several combinations where multiple were selected.
-
-DONE - no matter if I hit 'Ok' or 'Save', if I immediately reenter the Options 
-DONE   dialog, the check buttons are all reset, ie. it didnt 'keep' my settings.
 
  - need some sort of help for all these options, they aren't too intuitive.
    We can't assume people are going to read the man page.
@@ -178,10 +130,5 @@ VFS Options
  - it was nice to get feedback when grabbing a file via ftp - this sort
    of feedback while grabbing a ls listing from a ftp server would be
    cool.
-
-Internal Viewer
----------------
-
-DONE - no vertical scrollbar!
 
 

@@ -152,19 +152,45 @@ x_radio_focus_item (WRadio *radio)
 	}
 }
 
+void
+x_radio_toggle (WRadio *radio)
+{
+	GList  *children = GTK_BOX (radio->widget.wdata)->children;
+	int    i;
+	
+	for (i = 0; i < radio->count; i++){
+		GtkBoxChild *bc = (GtkBoxChild *) children->data;
+
+		if (GTK_TOGGLE_BUTTON (bc->widget)->active)
+			gtk_toggle_button_toggled
+		gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (bc->widget), (i == radio->sel) ? 1 : 0);
+		children = children->next;
+	}
+}
+
 static void
 radio_toggle (GtkObject *object, WRadio *r)
 {
 	int idx = (int) gtk_object_get_data (object, "index");
 
-	printf ("WEEEEE RADIO!\n");
-	
 	if (!GTK_TOGGLE_BUTTON (object)->active)
 		return;
 
 	g_return_if_fail (idx != 0);
 	idx--;
 	r->sel = idx;
+}
+
+static char *
+remove_hotkey (char *text)
+{
+	char *t = g_strdup (text);
+	char *p = strchr (t,'&');
+
+	if (p)
+		strcpy (p, p+1);
+
+	return t;
 }
 
 int
@@ -176,12 +202,16 @@ x_create_radio (Dlg_head *h, widget_data parent, WRadio *r)
 
         vbox = gtk_vbox_new (0, 0);
 	for (i = 0; i < r->count; i++){
+		char *text = remove_hotkey (_(r->texts [i]));
+		
 		if (i == 0){
-			w = gtk_radio_button_new_with_label (NULL, r->texts [i]);
+			w = gtk_radio_button_new_with_label (NULL, text);
 			group = gtk_radio_button_group (GTK_RADIO_BUTTON (w));
+			r->first_gtk_radio = w;
 		} else {
-			w = gtk_radio_button_new_with_label (group, r->texts [i]);
+			w = gtk_radio_button_new_with_label (group, text);
 		}
+		g_free (text);
 		gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (w), (i == r->sel));
 		gtk_signal_connect (GTK_OBJECT (w), "toggled", GTK_SIGNAL_FUNC (radio_toggle), r);
 		gtk_object_set_data (GTK_OBJECT (w), "index", (void *) (i+1));
@@ -190,6 +220,7 @@ x_create_radio (Dlg_head *h, widget_data parent, WRadio *r)
 	gtk_widget_show_all (vbox);
 			    
 	r->widget.wdata = (widget_data) vbox;
+
 	return 1;
 }
 
