@@ -5,7 +5,9 @@
  * Author: Federico Mena <federico@nuclecu.unam.mx>
  */
 
-#include <config.h>
+/* #include <config.h> */
+#include <gnome.h>
+#include "gdesktop.h"
 #include "gmc-window.h"
 
 
@@ -36,9 +38,9 @@ gmc_window_get_type (void)
 	if (!gmc_window_type) {
 		GtkTypeInfo gmc_window_info = {
 			"GmcWindow",
-			sizeof (Gmcwindow),
+			sizeof (GmcWindow),
 			sizeof (GmcWindowClass),
-			(GtkClassInitFunc) gmc_window_class_init,
+			(GtkClassInitFunc) NULL,
 			(GtkObjectInitFunc) gmc_window_init,
 			NULL, /* reserved_1 */
 			NULL, /* reserved_2 */
@@ -49,6 +51,28 @@ gmc_window_get_type (void)
 	}
 
 	return gmc_window_type;
+}
+
+/* Displays GMC's About dialog */
+static void
+about_dialog (GtkWidget *widget, gpointer data)
+{
+	GtkWidget *about;
+	const gchar *authors[] = {
+		"The Midnight Commander Team",
+		"http://www.gnome.org/mc",
+		"Bug reports:  mc-bugs@nuclecu.unam.mx",
+		NULL
+	};
+#if 0
+	about = gnome_about_new (_("GNU Midnight Commander"), VERSION,
+#endif
+	about = gnome_about_new (_("GNU Midnight Commander"), "1.0",
+				 _("Copyright (C) 1998 The Free Software Foundation"),
+				 authors,
+				 _("The GNOME edition of the Midnight Commander file manager."),
+				 NULL);
+	gnome_dialog_run_modal (GNOME_DIALOG (about));
 }
 
 /* FIXME: put in the callbacks */
@@ -63,7 +87,7 @@ static GnomeUIInfo file_menu[] = {
 	{ GNOME_APP_UI_ITEM, N_("_Close this window"), NULL, NULL, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE, 'w', GDK_CONTROL_MASK, NULL },
 	{ GNOME_APP_UI_ITEM, N_("E_xit"), NULL, NULL, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_EXIT, 'q', GDK_CONTROL_MASK, NULL }
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_EXIT, 'q', GDK_CONTROL_MASK, NULL },
 	GNOMEUIINFO_END
 };
 
@@ -86,7 +110,7 @@ static GnomeUIInfo view_menu[] = {
 
 /* Help menu */
 static GnomeUIInfo help_menu[] = {
-	{ GNOME_APP_UI_ITEM, N_("_About the Midnight Commander..."), NULL, about, NULL, NULL,
+	{ GNOME_APP_UI_ITEM, N_("_About the Midnight Commander..."), NULL, about_dialog, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT, 0, 0, NULL },
 	GNOMEUIINFO_END
 };
@@ -141,7 +165,7 @@ setup_contents (GmcWindow *gmc)
 
 	gmc->clist_sw = gtk_scrolled_window_new (NULL, NULL);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (gmc->clist_sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_notebook_append_page (GTK_NOTEBOOK (gmc->notebook), gmc->clist_sw);
+	gtk_notebook_append_page (GTK_NOTEBOOK (gmc->notebook), gmc->clist_sw, NULL);
 	gtk_widget_show (gmc->clist_sw);
 
 	gmc->clist = gtk_clist_new (1); /* FIXME: how many columns? */
@@ -152,7 +176,7 @@ setup_contents (GmcWindow *gmc)
 
 	gmc->ilist_sw = gtk_scrolled_window_new (NULL, NULL);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (gmc->ilist_sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_notebook_append_page (GTK_NOTEBOOK (gmc->notebook), gmc->ilist_sw);
+	gtk_notebook_append_page (GTK_NOTEBOOK (gmc->notebook), gmc->ilist_sw, NULL);
 	gtk_widget_show (gmc->ilist_sw);
 
 	gmc->ilist = gnome_icon_list_new (DESKTOP_SNAP_X, NULL, TRUE);
@@ -181,4 +205,17 @@ gmc_window_init (GmcWindow *gmc)
 	setup_menus (gmc);
 	setup_toolbar (gmc);
 	setup_contents (gmc);
+}
+
+/**
+ * gmc_window_new:
+ *
+ * Creates a new GMC toplevel file window.
+ * 
+ * Return Value: the newly-created window.
+ **/
+GtkWidget *
+gmc_window_new (void)
+{
+	return gtk_type_new (gmc_window_get_type ());
 }
