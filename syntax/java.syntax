@@ -107,6 +107,7 @@ context default
 
     keyword /\* brown/22
     keyword \*/ brown/22
+    keyword // brown/22
 
     keyword '\s' brightgreen/16
     keyword '+' brightgreen/16
@@ -115,7 +116,7 @@ context default
     keyword \+ yellow/24
     keyword - yellow/24
     keyword \* yellow/24
-#    keyword / yellow/24
+    keyword / yellow/24
     keyword % yellow/24
     keyword = yellow/24
     keyword != yellow/24
@@ -131,7 +132,7 @@ context default
     keyword ; brightmagenta/19
 context exclusive /\* \*/ brown/22
     spellcheck
-context // \n brown/22
+context exclusive // \n brown/22
     spellcheck
 context linestart # \n brightred/18
     keyword \\\n yellow/24

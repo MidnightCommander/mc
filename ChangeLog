@@ -1,5 +1,12 @@
 2002-07-18  Pavel Roskin  <proski@gnu.org>
 
+	* syntax/c.syntax: Reenable highlighting for "/" and preserve
+	highlighting for "//" comments by using exclusive context.
+	* syntax/java.syntax: Likewise.
+	* syntax/swig.syntax: Likewise.
+	* syntax/slang.syntax: Reenable highlighting for "/".
+	* syntax/sql.syntax: Enable highlighting for "/" and "-".
+
 	* syntax/sql.syntax: New file.
 	* syntax/Syntax: Add sql.syntax.
 	* syntax/Makefile.am: Likewise.

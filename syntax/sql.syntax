@@ -460,12 +460,16 @@ context default
     keyword whole year yellow/24
     keyword whole zone yellow/24
 
+    keyword /\* brown/22
+    keyword \*/ brown/22
+    keyword -- brown/22
+
     keyword > brightcyan/14
     keyword < brightcyan/14
     keyword \+ brightcyan/14
-    keyword \s-\s brightcyan/14
+    keyword - brightcyan/14
     keyword \* brightcyan/14
-    keyword \s/\s brightcyan/14
+    keyword / brightcyan/14
     keyword % brightcyan/14
     keyword = brightcyan/14
     keyword ( brightcyan/14
@@ -476,10 +480,10 @@ context default
 context # \n brown/22
     spellcheck
 
-context -- \n brown/22
+context exclusive -- \n brown/22
     spellcheck
 
-context /\* \*/ brown/22
+context exclusive /\* \*/ brown/22
     spellcheck
 
 context ' ' green/6

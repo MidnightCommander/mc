@@ -99,12 +99,13 @@ context default yellow/24
     keyword whole xor white/25
     keyword whole .. white/25
     
+    keyword // brightgreen/22
+
     keyword > cyan/5
     keyword < cyan/5
     keyword \+ cyan/5
     keyword - cyan/5
-#  the following must be commented out for the sake of singleline comments(//)
-#    keyword / cyan/5
+    keyword / cyan/5
     keyword % lightgray/5
     keyword = lightgray/5
     keyword [ lightgray/5
@@ -118,7 +119,7 @@ context default yellow/24
 #    keyword {$*} brightred/19
 
 context ' ' brightcyan/22
-context // \n brightgreen/22
+context exclusive // \n brightgreen/22
 	keyword $+:*$ black/13 green/13
 context exclusive (\*\* \*) brightgreen/22 black/22
 	keyword $+:*$ black/13 green/13

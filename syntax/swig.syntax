@@ -104,6 +104,7 @@ context default
 
     keyword /\* brown/22
     keyword \*/ brown/22
+    keyword // brown/22
 
     keyword '\\\{"abtnvfr\}' brightgreen/16
     keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen/16
@@ -117,7 +118,7 @@ context default
     keyword \+ yellow/24
     keyword - yellow/24
     keyword \* yellow/24
-#    keyword / yellow/24
+    keyword / yellow/24
     keyword % yellow/24
     keyword = yellow/24
     keyword != yellow/24
@@ -133,7 +134,7 @@ context default
     keyword ; brightmagenta/19
 context exclusive /\* \*/ brown/22
     spellcheck
-context // \n brown/22
+context exclusive // \n brown/22
     spellcheck
 context linestart # \n brightred/18
     keyword \\\n yellow/24

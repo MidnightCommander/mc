@@ -72,7 +72,7 @@ context default
     keyword \+ white/24
     keyword - white/24
     keyword \* white/24
-#    keyword / white/24
+    keyword / white/24
     keyword = white/24
     keyword != white/24
     keyword == white/24
