@@ -1,3 +1,10 @@
+2001-11-29  Pavel Roskin  <proski@gnu.org>
+
+	* cons.saver.c: Define LINUX_CONS_SAVER_C so that some parts
+	of cons.saver.h can be omitted.
+	* cons.saver.h: Declare nothing but constants if
+	LINUX_CONS_SAVER_C is defined.
+
 2001-11-14  Pavel Roskin  <proski@gnu.org>
 
 	Fully eliminate all references to HAVE_X and HAVE_GNOME.
@@ -952,7 +959,7 @@
 	* command.c: Reorder includes. Include "x.h".
 	* complete.c: Likewise.
 	* find.c: Likewise.
-	* user.h: Declare user_menu_cmd() inconditionally.
+	* user.h: Declare user_menu_cmd() unconditionally.
 	* i18n.h [GAVE_GNOME]: Remove code that is now in x.h.
 
 	* tty.h [HAVE_X]: Define beep() to gdk_beep().

@@ -43,7 +43,8 @@
 #include <stdio.h>
 #include <ctype.h>	/* For isdigit() */
 #include <string.h>
-typedef struct WINDOW WINDOW;
+
+#define LINUX_CONS_SAVER_C
 #include "cons.saver.h"
 
 #define cmd_input 0
