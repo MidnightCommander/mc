@@ -135,7 +135,8 @@ vfs_s_free_entry (vfs *me, vfs_s_entry *ent)
     g_free(ent);
 }
 
-void vfs_s_insert_entry (vfs *me, vfs_s_inode *dir, vfs_s_entry *ent)
+void
+vfs_s_insert_entry (vfs *me, vfs_s_inode *dir, vfs_s_entry *ent)
 {
     vfs_s_entry **ep;
 
@@ -149,7 +150,8 @@ void vfs_s_insert_entry (vfs *me, vfs_s_inode *dir, vfs_s_entry *ent)
     ent->ino->st.st_nlink++;
 }
 
-struct stat *vfs_s_default_stat (vfs *me, mode_t mode)
+struct stat *
+vfs_s_default_stat (vfs *me, mode_t mode)
 {
     static struct stat st;
     int myumask;
@@ -290,6 +292,9 @@ vfs_s_find_entry_linear (vfs *me, vfs_s_inode *root, char *path, int follow, int
 {
     vfs_s_entry* ent = NULL;
 
+    if (root->super->root != root)
+        vfs_die ("We have to use _real_ root. Always. Sorry." );
+
     if (!(flags & FL_DIR)){
 	char *dirname, *name, *save;
 	vfs_s_inode *ino;
@@ -308,9 +313,11 @@ vfs_s_find_entry_linear (vfs *me, vfs_s_inode *root, char *path, int follow, int
 
     if (ent && (! (MEDATA->dir_uptodate) (me, ent->ino))){
 #if 1
-	message_1s (1, "Dir cache expired for", path);
+	print_vfs_message ("Dir cache expired for %s", path);
+	sleep(1);
 #endif
 	vfs_s_free_entry (me, ent);
+	ent = NULL;
     }
 
     if (!ent){
@@ -349,9 +356,13 @@ vfs_s_find_inode (vfs *me, vfs_s_inode *root, char *path, int follow, int flags)
     return ent->ino;
 }
 
+/* Ouch - vfs_s_resolve symlink does not work for filesystems like ftp & fish:
+   you may not lookup with some other root! */
 vfs_s_entry *
 vfs_s_resolve_symlink (vfs *me, vfs_s_entry *entry, char *path, int follow)
 {
+    char buf[MC_MAXPATHLEN], *linkname;
+
     if (follow == LINK_NO_FOLLOW)
 	return entry;
     if (follow == 0)
@@ -361,25 +372,36 @@ vfs_s_resolve_symlink (vfs *me, vfs_s_entry *entry, char *path, int follow)
     if (!S_ISLNK (entry->ino->st.st_mode))
 	return entry;
 
-    if (*entry->ino->linkname != PATH_SEP)
-	return (MEDATA->find_entry) (me, entry->dir, entry->ino->linkname, follow - 1, 0);
-    else {
-/* convert the linkname to relative linkname with some leading ../ */
-	char linkname[MC_MAXPATHLEN] = "", *p, *q;
+    linkname = entry->ino->linkname;
+
+    if (MEDATA->find_entry == vfs_s_find_entry_linear) {
+        if (*linkname == PATH_SEP)
+	    return (MEDATA->find_entry) (me, entry->dir->super->root, linkname, follow - 1, 0);
+	else { /* FIXME: this does not work */ 
+	    sprintf(buf, "%s/%s", vfs_s_fullpath(me, entry->dir), linkname);
+	    return (MEDATA->find_entry) (me, entry->dir->super->root, buf, follow - 1, 0);
+	}
+    }
+
+    /* Convert absolute paths to relative ones */
+    if (*linkname == PATH_SEP) {
+	char *p, *q;
 	for (p = path, q = entry->ino->linkname; *p == *q; p++, q++);
 	while (*(--q) != PATH_SEP);
 	q++;
 	for (;; p++){
 	    p = strchr (p, PATH_SEP);
 	    if (!p){
-		strcat (linkname, q);
+		strcat (buf, q);
 		break;
 	    }
-	    strcat (linkname, "..");
-	    strcat (linkname, PATH_SEP_STR);
+	    strcat (buf, "..");
+	    strcat (buf, PATH_SEP_STR);
 	}
-	return (MEDATA->find_entry) (me, entry->dir, linkname, follow - 1, 0);
+	linkname = buf;
     }
+
+    return (MEDATA->find_entry) (me, entry->dir, linkname, follow - 1, 0);
 }
 
 /* Ook, these were functions around direcory entries / inodes */
@@ -456,7 +478,7 @@ vfs_s_stamp_me (vfs *me, struct vfs_s_super *psup, char *fs_name)
 	parent->next = 0;
 	parent->id = (*v->getid) (v, fs_name, &(parent->parent));
     }
-    vfs_add_noncurrent_stamps (&vfs_tarfs_ops, (vfsid) psup, parent);
+    vfs_add_noncurrent_stamps (me, (vfsid) psup, parent);
     vfs_rm_parents (parent);
 }
 
@@ -534,8 +556,14 @@ vfs_s_fullpath (vfs *me, vfs_s_inode *ino)
 /* For now, usable only on filesystems with _linear structure */
     if (MEDATA->find_entry != vfs_s_find_entry_linear)
 	vfs_die ("Implement me!");
-    if ((!ino->ent) || (!ino->ent->dir) || (!ino->ent->dir->ent))
+    if (!ino->ent) /* That must be directory... */
+        
+    if (!ino->ent)
 	ERRNOR (EAGAIN, NULL);
+
+    if ((!ino->ent->dir) || (!ino->ent->dir->ent)) /* It must be directory */
+        return g_strconcat( ino->ent->name, NULL );
+
     return  g_strconcat (ino->ent->dir->ent->name, PATH_SEP_STR, 
 			    ino->ent->name, NULL);
 }
@@ -575,7 +603,7 @@ struct dirhandle {
 };
 
 void *
- vfs_s_opendir (vfs *me, char *dirname)
+vfs_s_opendir (vfs *me, char *dirname)
 {
     struct vfs_s_inode *dir;
     struct dirhandle *info;
@@ -765,8 +793,10 @@ vfs_s_open (vfs *me, char *file, int flags, int mode)
     fh->handle = -1;
     fh->changed = was_changed;
     fh->linear = 0;
-    if (MEDATA->fh_open)
-	if (MEDATA->fh_open (me, fh, flags, mode)){
+
+    if (IS_LINEAR(flags)) {
+	fh->linear = LS_LINEAR_CLOSED;
+    } else if ((MEDATA->fh_open) && (MEDATA->fh_open (me, fh, flags, mode))){
 	    g_free(fh);
 	    return NULL;
 	}
@@ -780,7 +810,7 @@ vfs_s_open (vfs *me, char *file, int flags, int mode)
     }
 
      /* i.e. we had no open files and now we have one */
-    vfs_rmstamp (&vfs_tarfs_ops, (vfsid) super, 1);
+    vfs_rmstamp (me, (vfsid) super, 1);
     super->fd_usage++;
     fh->ino->st.st_nlink++;
     return fh;
@@ -881,7 +911,7 @@ vfs_s_close (void *fh)
 	    parent->next = 0;
 	    parent->id = (*v->getid) (v, FH_SUPER->name, &(parent->parent));
 	}
-        vfs_add_noncurrent_stamps (&vfs_tarfs_ops, (vfsid) (FH_SUPER), parent);
+        vfs_add_noncurrent_stamps (me, (vfsid) (FH_SUPER), parent);
 	vfs_rm_parents (parent);
     }
     if (FH->linear == LS_LINEAR_OPEN)
@@ -902,6 +932,66 @@ vfs_s_close (void *fh)
     vfs_s_free_inode (me, FH->ino);
     g_free (fh);
     return res;
+}
+
+int 
+vfs_s_retrieve_file(vfs *me, struct vfs_s_inode *ino)
+{
+    /* If you want reget, you'll have to open file with O_LINEAR */
+    int total = 0;
+    char buffer[8192];
+    int handle, n;
+    int stat_size = ino->st.st_size;
+    struct vfs_s_fh fh;
+
+    memset(&fh, 0, sizeof(fh));
+    
+    fh.ino = ino;
+    if (!(ino->localname = tempnam (NULL, me->name))) ERRNOR (ENOMEM, 0);
+
+    handle = open(ino->localname, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, 0600);
+    if (handle == -1) {
+	me->verrno = errno;
+	goto error_4;
+    }
+
+    if (!MEDATA->linear_start (me, &fh, 0))
+        goto error_3;
+
+    /* Clear the interrupt status */
+    
+    while (1) {
+	n = MEDATA->linear_read (me, &fh, buffer, sizeof(buffer));
+	if (n < 0)
+	    goto error_1;
+	if (!n)
+	    break;
+
+	total += n;
+	vfs_print_stats (me->name, "Getting file", ino->ent->name, total, stat_size);
+
+        if (write(handle, buffer, n) < 0) {
+	    me->verrno = errno;
+	    goto error_1;
+	}
+    }
+    MEDATA->linear_close (me, &fh);
+    close(handle);
+
+    if (stat (ino->localname, &ino->u.fish.local_stat) < 0)
+        ino->u.fish.local_stat.st_mtime = 0;
+    
+    return 0;
+error_1:
+    MEDATA->linear_close (me, &fh);
+error_3:
+    disable_interrupt_key();
+    close(handle);
+    unlink(ino->localname);
+error_4:
+    g_free(ino->localname);
+    ino->localname = NULL;
+    return -1;
 }
 
 /* ------------------------------- mc support ---------------------------- */
@@ -1021,10 +1111,8 @@ vfs_s_getid (vfs *me, char *path, struct vfs_stamping **parent)
 int
 vfs_s_nothingisopen (vfsid id)
 {
-    if (((vfs_s_super *)id)->fd_usage <= 0)
-    	return 1;
-    else
-    	return 0;
+  /* Our data structures should survive free of superblock at any time */
+    return 1;
 }
 
 void
