@@ -1,12 +1,14 @@
 Bugzilla: 3436
 
 bugs.gnome.org:
-  Important: 216, 382, 707, 1006, 1035/1412/1416, 1414, etc.
+  Important: 216, 382, 707, 1006, 1035/1412/1416, 1414, 1549, 1796
   Major cosmetic: 272/875, 487, 825, 845, 1845, 899, 923, 1072/1336,
-		  1299, 1415
+		  1299, 1415, 1457, 1545, 1559, 1582, 1656, 1758, 1789
   Minor cosmetic: 55/208, 115, 308, 383, 398, 449, 479, 597, 781,
-		  874, 931, 956/1126, 1022.1, 1045, 1047, 904, 1329
-  Non-essential: 779?, 448, 1133, 1121, 1122, 1251
+		  874, 931, 956/1126, 1022.1, 1045, 1047, 904, 1329,
+		  1468, 1508, 1750
+  Non-essential or feature: 779?, 448, 1133, 1121, 1122, 1251
+  Look at bug yourself: 1613, 1458, 1773
 
   216: If you drag a file into a directory that you don't have
        permissions to move the file to, gmc goes boom. (Not sure if
@@ -25,8 +27,3 @@ bugs.gnome.org:
         something.
 
   The drop-non-existent-file-from-panel bug.
-
-  The "try to view /etc/X11/XF86Config" bug.
-
-  The "drag a file to desktop while holding down Ctrl" bug.
-
