@@ -1494,7 +1494,7 @@ msgstr "Côper li texe"
 #. Can not use this one yet, as it destroys the viewer, need to fix that
 #: gnome/gview.c:329
 msgid "_Parsed view"
-msgstr ""
+msgstr "Vey _Relî"
 
 #: gnome/gview.c:332
 msgid "_Formatted"
@@ -2764,11 +2764,11 @@ msgstr "Vey &Imådjetes"
 
 #: src/boxes.c:137
 msgid "user &Mini status"
-msgstr ""
+msgstr "&Mini statut ûzeu"
 
 #: src/boxes.c:186
 msgid "Listing mode"
-msgstr ""
+msgstr "Môde listing"
 
 #: src/boxes.c:280
 msgid "&Reverse"
@@ -4239,7 +4239,7 @@ msgstr "Ovrants ridants VFS"
 
 #: src/hotlist.c:620
 msgid "Directory hotlist"
-msgstr ""
+msgstr "Ridant pol Djîveye Rascoûrti"
 
 #: src/hotlist.c:639
 msgid " Directory path "
@@ -4256,7 +4256,7 @@ msgstr "Dji bodje"
 
 #: src/hotlist.c:892
 msgid "New hotlist entry"
-msgstr ""
+msgstr "Novele intreye el djîveye rascoûrti"
 
 #: src/hotlist.c:892
 msgid "Directory label"
@@ -4268,7 +4268,7 @@ msgstr "Tchimin viè li ridant"
 
 #: src/hotlist.c:973
 msgid " New hotlist group "
-msgstr ""
+msgstr " Novea hopê el djîveye rascoûrti "
 
 #: src/hotlist.c:973
 msgid "Name of new group"
@@ -4281,7 +4281,7 @@ msgstr "Etikete po \"%s\":"
 
 #: src/hotlist.c:992
 msgid " Add to hotlist "
-msgstr ""
+msgstr " Radjouter el djîveye rascoûrti "
 
 #: src/hotlist.c:1029
 msgid " Remove: "
@@ -4303,19 +4303,19 @@ msgstr " Hopê do pus hôt livea "
 
 #: src/hotlist.c:1394
 msgid "Hotlist is now kept in file ~/"
-msgstr ""
+msgstr "Asteure, li djîveye rascoûrti si trove è fitchî ~/"
 
 #: src/hotlist.c:1396
 msgid "MC will load hotlist from ~/"
-msgstr ""
+msgstr "MC va tcherdjî li djîveye rascoûrti foû di ~/"
 
 #: src/hotlist.c:1398
 msgid "and then delete [Hotlist] section there"
-msgstr ""
+msgstr "adon, i disfaçrè li pårteye [Hotlist]"
 
 #: src/hotlist.c:1400 src/hotlist.c:1419 src/hotlist.c:1442 src/hotlist.c:1467
 msgid " Hotlist Load "
-msgstr ""
+msgstr " Dji tchedje li djîveye rascoûrti "
 
 #: src/hotlist.c:1416 src/hotlist.c:1464
 msgid "MC was unable to write ~/"
@@ -4323,15 +4323,15 @@ msgstr "MC n' a savu scrire li fitchî ~/"
 
 #: src/hotlist.c:1417
 msgid " file, your old hotlist entries were not deleted"
-msgstr ""
+msgstr "Do côp, vos vîyès intreyes el djîveye rascoûrti n' ont nén stî disfaceyes"
 
 #: src/hotlist.c:1431
 msgid "You have ~/"
-msgstr ""
+msgstr "Vos avoz li fitchî ~/"
 
 #: src/hotlist.c:1431
 msgid " file and [Hotlist] section in ~/"
-msgstr ""
+msgstr " eyèt ene pårteye [Hotlist] divins ~/"
 
 #: src/hotlist.c:1432
 msgid "Your ~/"
@@ -4716,27 +4716,27 @@ msgstr "&Aspougnî               F4"
 
 #: src/main.c:1280
 msgid "&Copy               F5"
-msgstr ""
+msgstr "&Copyî               F5"
 
 #: src/main.c:1281
 msgid "c&Hmod           C-x c"
-msgstr ""
+msgstr "c&Hmod           C-x c"
 
 #: src/main.c:1283
 msgid "&Link            C-x l"
-msgstr ""
+msgstr "&Loyén            C-x l"
 
 #: src/main.c:1284
 msgid "&SymLink         C-x s"
-msgstr ""
+msgstr "Loyén &Simbolike         C-x s"
 
 #: src/main.c:1285
 msgid "edit s&Ymlink  C-x C-s"
-msgstr ""
+msgstr "candjî lo&yén simbolike  C-x C-s"
 
 #: src/main.c:1286
 msgid "ch&Own           C-x o"
-msgstr ""
+msgstr "ch&Own           C-x o"
 
 #: src/main.c:1287
 msgid "&Advanced chown       "
@@ -4744,15 +4744,15 @@ msgstr ""
 
 #: src/main.c:1289
 msgid "&Rename/Move        F6"
-msgstr ""
+msgstr "&Rilomes/bodjî        F6"
 
 #: src/main.c:1290
 msgid "&Mkdir              F7"
-msgstr ""
+msgstr "&Mkdir              F7"
 
 #: src/main.c:1291
 msgid "&Delete             F8"
-msgstr ""
+msgstr "&Disfacer             F8"
 
 #: src/main.c:1292
 msgid "&Quick cd          M-c"
@@ -4760,19 +4760,19 @@ msgstr ""
 
 #: src/main.c:1294
 msgid "select &Group      M-+"
-msgstr ""
+msgstr "tchwezi &Hopê     M-+"
 
 #: src/main.c:1295
 msgid "u&Nselect group    M-\\"
-msgstr ""
+msgstr "di&Stchwezi hopê    M-\\"
 
 #: src/main.c:1296
 msgid "reverse selec&Tion M-*"
-msgstr ""
+msgstr "reverse selec&Tion M-*"
 
 #: src/main.c:1298
 msgid "e&Xit              F10"
-msgstr ""
+msgstr "moussî &Foû             F10"
 
 #: src/main.c:1308
 msgid "&Directory tree"
@@ -4780,11 +4780,11 @@ msgstr ""
 
 #: src/main.c:1310
 msgid "&Find file            M-?"
-msgstr ""
+msgstr "&Trover Fitchî          M-?"
 
 #: src/main.c:1311
 msgid "s&Wap panels          C-u"
-msgstr ""
+msgstr "discandjî les &Paneas   C-u"
 
 #: src/main.c:1312
 msgid "switch &Panels on/off C-o"
@@ -4792,7 +4792,7 @@ msgstr ""
 
 #: src/main.c:1313
 msgid "&Compare directories  C-x d"
-msgstr ""
+msgstr "ri&mete des ridants    C-x d"
 
 #: src/main.c:1314
 msgid "e&Xternal panelize    C-x !"
@@ -4800,11 +4800,11 @@ msgstr ""
 
 #: src/main.c:1315
 msgid "show directory s&Izes"
-msgstr ""
+msgstr "mostrer grandeu des r&Idants"
 
 #: src/main.c:1317
 msgid "command &History"
-msgstr ""
+msgstr "ist&were des cmandes"
 
 #: src/main.c:1318
 msgid "di&Rectory hotlist    C-\\"
@@ -4816,11 +4816,11 @@ msgstr ""
 
 #: src/main.c:1323
 msgid "&Background jobs      C-x j"
-msgstr ""
+msgstr "&Bouyes di fond      C-x j"
 
 #: src/main.c:1327
 msgid "&Undelete files (ext2fs only)"
-msgstr ""
+msgstr "Disra&Facer des fitchîs (seulmint ext2fs)"
 
 #: src/main.c:1330
 msgid "&Listing format edit"
@@ -4836,7 +4836,7 @@ msgstr ""
 
 #: src/main.c:1338
 msgid "&Configuration..."
-msgstr ""
+msgstr "&Apontiaedje..."
 
 #: src/main.c:1340
 msgid "c&Onfirmation..."
@@ -4848,7 +4848,7 @@ msgstr ""
 
 #: src/main.c:1343
 msgid "learn &Keys..."
-msgstr ""
+msgstr "a&Prinde des tapes..."
 
 #: src/main.c:1346
 msgid "&Virtual FS..."
@@ -4856,35 +4856,35 @@ msgstr ""
 
 #: src/main.c:1349
 msgid "&Save setup"
-msgstr ""
+msgstr "&Schaper l' apontiaedje"
 
 #: src/main.c:1365 src/main.c:1367
 msgid " &Left "
-msgstr ""
+msgstr " &Hintche "
 
 #: src/main.c:1367
 msgid " &Above "
-msgstr ""
+msgstr " Diz&eu "
 
 #: src/main.c:1370
 msgid " &File "
-msgstr ""
+msgstr " &Fitchî "
 
 #: src/main.c:1371
 msgid " &Command "
-msgstr ""
+msgstr " &Comande "
 
 #: src/main.c:1372
 msgid " &Options "
-msgstr ""
+msgstr " &Tchûzes "
 
 #: src/main.c:1374 src/main.c:1376
 msgid " &Right "
-msgstr ""
+msgstr " &Droete "
 
 #: src/main.c:1376
 msgid " &Below "
-msgstr ""
+msgstr " Diz&o "
 
 #: src/main.c:1431
 msgid " Information "
@@ -4900,11 +4900,11 @@ msgstr ""
 
 #: src/main.c:1706 src/screen.c:2362 src/screen.c:2392
 msgid "Menu"
-msgstr ""
+msgstr "Menu"
 
 #: src/main.c:1911
 msgid "Thank you for using GNU Midnight Commander"
-msgstr ""
+msgstr "Merci di vos siervi do GNU Midnight Commander"
 
 #: src/main.c:2270
 #, c-format
@@ -4943,15 +4943,15 @@ msgstr ""
 
 #: src/main.c:2674
 msgid "Edits one file"
-msgstr ""
+msgstr "Aspougne on fitchî"
 
 #: src/main.c:2678
 msgid "Displays this help message"
-msgstr ""
+msgstr "Mostere ci messaedje d' aide chal"
 
 #: src/main.c:2681
 msgid "Displays a help screen on how to change the color scheme"
-msgstr ""
+msgstr "Po v' mostrer comint-ce k' on candje l' arindjmint des coleurs"
 
 #: src/main.c:2684
 msgid "Log ftp dialog to specified file"
@@ -4959,7 +4959,7 @@ msgstr ""
 
 #: src/main.c:2691
 msgid "Obsolete"
-msgstr ""
+msgstr "Vî vî"
 
 #: src/main.c:2693
 msgid "Requests to run in black and white"
@@ -4967,7 +4967,7 @@ msgstr ""
 
 #: src/main.c:2695
 msgid "Disable mouse support in text version"
-msgstr ""
+msgstr "Ni nén sopoirter li soris dvins li modeye texe"
 
 #: src/main.c:2698
 msgid "Disables subshell support"
@@ -4983,7 +4983,7 @@ msgstr ""
 
 #: src/main.c:2706
 msgid "To run on slow terminals"
-msgstr ""
+msgstr "Po-aler so des londjins terminås"
 
 #: src/main.c:2709
 msgid "Use stickchars to draw"
@@ -4999,7 +4999,7 @@ msgstr ""
 
 #: src/main.c:2722
 msgid "Displays the current version"
-msgstr ""
+msgstr "Håyenye li modeye do moumint"
 
 #: src/main.c:2724
 msgid "Launches the file viewer on a file"
@@ -5019,7 +5019,7 @@ msgstr ""
 
 #: src/main.c:2729
 msgid "No windows opened at startup"
-msgstr ""
+msgstr "I gn a nou purnea ki s' a drovu a l' enondeye"
 
 #: src/main.c:2731
 msgid "Display the directory that holds the .links startup files and exit"
@@ -5044,7 +5044,7 @@ msgstr ""
 
 #: src/option.c:75
 msgid "safe de&Lete"
-msgstr ""
+msgstr "disf&Acer a såvrité"
 
 #: src/option.c:76
 msgid "cd follows lin&Ks"
