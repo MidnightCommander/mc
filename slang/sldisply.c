@@ -1195,7 +1195,7 @@ static int make_color_fgbg (char *fg, char *bg, SLtt_Char_Type *fgbg)
    return 0;
 }
 
-void SLtt_set_color (int obj, char *what, char *fg, char *bg)
+void SLtt_set_color (int obj, const char *what, const char *fg, const char *bg)
 {
    SLtt_Char_Type fgbg;
 
@@ -2022,7 +2022,7 @@ static char *fixup_tgetstr (char *what)
    return what;
 }
 
-char *SLtt_tgetstr (char *cap)
+char *SLtt_tgetstr (const char *cap)
 {
    char *s;
 
@@ -2045,7 +2045,7 @@ char *SLtt_tgetstr (char *cap)
    return fixup_tgetstr (s);
 }
 
-int SLtt_tgetnum (char *s)
+int SLtt_tgetnum (const char *s)
 {
    if (Termcap_Initalized == 0)
      return -1;
@@ -2056,7 +2056,7 @@ int SLtt_tgetnum (char *s)
 #endif
 }
 
-int SLtt_tgetflag (char *s)
+int SLtt_tgetflag (const char *s)
 {
    if (Termcap_Initalized == 0)
      return -1;

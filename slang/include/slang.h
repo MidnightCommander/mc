@@ -697,7 +697,7 @@ extern void SLang_vmessage (char *, ...);
      messages are displayed on stderr. */
 
   extern void (*SLang_Exit_Error_Hook)(char *, va_list);
-  extern void SLang_exit_error (char *, ...);
+  extern void SLang_exit_error (const char *, ...);
   extern void (*SLang_Dump_Routine)(char *);
   /* Called if S-Lang traceback is enabled as well as other debugging
      routines (e.g., trace).  By default, these messages go to stderr. */
@@ -1297,22 +1297,22 @@ extern void SLtt_disable_status_line (void);
 /* These are termcap/terminfo routines that assume SLtt_initialize has
  * been called.
  */
-extern char *SLtt_tgetstr (char *);
-extern int SLtt_tgetnum (char *);
-extern int SLtt_tgetflag (char *);
+extern char *SLtt_tgetstr (const char *);
+extern int SLtt_tgetnum (const char *);
+extern int SLtt_tgetflag (const char *);
 
 /* The following are terminfo-only routines -- these prototypes will change
  * in V2.x.
  */
 extern char *SLtt_tigetent (char *);
-extern char *SLtt_tigetstr (char *, char **);
+extern char *SLtt_tigetstr (const char *, char **);
 extern int SLtt_tigetnum (char *, char **);
 # endif
 #endif
 
 extern SLtt_Char_Type SLtt_get_color_object (int);
 extern void SLtt_set_color_object (int, SLtt_Char_Type);
-extern void SLtt_set_color (int, char *, char *, char *);
+extern void SLtt_set_color (int, const char *, const char *, const char *);
 extern void SLtt_set_mono (int, char *, SLtt_Char_Type);
 extern void SLtt_add_color_attribute (int, SLtt_Char_Type);
 extern void SLtt_set_color_fgbg (int, SLtt_Char_Type, SLtt_Char_Type);
@@ -1359,12 +1359,12 @@ extern void SLsmg_erase_eos (void);
 extern void SLsmg_reverse_video (void);
 extern void SLsmg_set_color (int);
 extern void SLsmg_normal_video (void);
-extern void SLsmg_printf (char *, ...);
-extern void SLsmg_vprintf (char *, va_list);
-extern void SLsmg_write_string (char *);
+extern void SLsmg_printf (const char *, ...);
+extern void SLsmg_vprintf (const char *, va_list);
+extern void SLsmg_write_string (const char *);
 extern void SLsmg_write_nstring (char *, unsigned int);
 extern void SLsmg_write_char (char);
-extern void SLsmg_write_nchars (char *, unsigned int);
+extern void SLsmg_write_nchars (const char *, unsigned int);
 extern void SLsmg_write_wrapped_string (char *, int, int, unsigned int, unsigned int, int);
 extern void SLsmg_cls (void);
 extern void SLsmg_refresh (void);

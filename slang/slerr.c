@@ -139,7 +139,7 @@ void SLang_verror (int err_code, char *fmt, ...)
    SLang_doerror (fmt);
 }
 
-void SLang_exit_error (char *fmt, ...)
+void SLang_exit_error (const char *fmt, ...)
 {
    va_list ap;
 

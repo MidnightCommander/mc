@@ -1,3 +1,7 @@
+2004-08-29  Roland Illig  <roland.illig@gmx.de>
+
+	* slang.h: Added const qualifier to some of the SLang functions.
+
 2003-09-26  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* sldisply.c (RGB_to_BGR): Make const.
