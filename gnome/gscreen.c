@@ -1828,8 +1828,10 @@ panel_tree_scroll (gpointer data)
 	
 	if (GTK_DTREE (panel->tree)->drag_motion_y < 10)
 		gtk_adjustment_set_value (va, va->value - va->step_increment);
-	else
+	else{
 		gtk_adjustment_set_value (va, va->value + va->step_increment);
+	}
+	return FALSE;
 }
 
 /** 
@@ -1846,8 +1848,10 @@ panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *ctx, int x, int y, gu
 	WPanel *panel = data;
 	int r, row, col;
 	
-        if (dtree->timer_id != -1)
+        if (dtree->timer_id != -1){
 		gtk_timeout_remove (dtree->timer_id);
+		dtree->timer_id = -1;
+	}
 
 	dtree->drag_motion_x = x;
 	dtree->drag_motion_y = y;
@@ -1875,7 +1879,8 @@ static void
 panel_tree_drag_leave (GtkWidget *widget, GdkDragContext *ctx, int x, int y, guint time, void *data)
 {
 	GtkDTree *dtree = GTK_DTREE (widget);
-	
+
+	printf ("Got drag_leave\n");
 	if (dtree->timer_id == -1){
 		gtk_timeout_remove (dtree->timer_id);
 		dtree->timer_id = -1;
