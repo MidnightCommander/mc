@@ -229,7 +229,8 @@ init_configure (void)
     /* Add checkboxes for "panel options" */
     for (i = 0; i < PANEL_OPTIONS; i++) {
 	check_options[i + OTHER_OPTIONS].widget =
-	    check_new (PY + (6 - i), PX + 2, XTRACT (i + OTHER_OPTIONS));
+	    check_new (PY + (PANEL_OPTIONS - i), PX + 2,
+		       XTRACT (i + OTHER_OPTIONS));
 	add_widget (conf_dlg, check_options[i + OTHER_OPTIONS].widget);
     }
 }

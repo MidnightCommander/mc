@@ -1,3 +1,8 @@
+2003-02-19  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* option.c (init_configure): Use OTHER_OPTIONS consistently.
+	By Mike Smithson <dooligan@intergate.ca>.
+
 2003-02-18  Pavel Roskin  <proski@gnu.org>
 
 	* util.c (list_append_unique): Free removed links.
