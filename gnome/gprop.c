@@ -37,7 +37,7 @@ free_stuff (GtkWidget *widget, gpointer data)
 /***** Filename *****/
 
 GpropFilename *
-gprop_filename_new (char *complete_filename, char *filename)
+gprop_filename_new (const char *complete_filename, const char *filename)
 {
 	GpropFilename *gp;
 	GtkWidget *frame;
@@ -475,7 +475,7 @@ change_icon (GtkEntry *entry, GpropGeneral *gp)
 }
 
 GpropGeneral *
-gprop_general_new (char *title, char *icon_filename)
+gprop_general_new (const char *title, const char *icon_filename)
 {
 	GpropGeneral *gp;
 	GtkWidget *frame;

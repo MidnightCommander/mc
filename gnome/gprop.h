@@ -22,7 +22,7 @@ typedef struct {
 	GtkWidget *filename;
 } GpropFilename;
 
-GpropFilename *gprop_filename_new (char *complete_filename, char *filename);
+GpropFilename *gprop_filename_new (const char *complete_filename, const char *filename);
 void gprop_filename_get_data (GpropFilename *gp, char **filename);
 
 /***** Permissions *****/
@@ -54,7 +54,7 @@ typedef struct {
 	GtkWidget *icon_pixmap;
 } GpropGeneral;
 
-GpropGeneral *gprop_general_new (char *title, char *icon_filename);
+GpropGeneral *gprop_general_new (const char *title, const char *icon_filename);
 void gprop_general_get_data (GpropGeneral *gp, char **title, char **icon_filename);
 
 typedef struct {

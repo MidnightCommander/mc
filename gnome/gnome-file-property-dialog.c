@@ -211,6 +211,7 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 		if (n < 0)
 			label = gtk_label_new (_("Target Name: INVALID LINK"));
 		else {
+			buf [n] = 0;
 			gen_string = g_strconcat (_("Target Name: "), buf, NULL);
 			label = gtk_label_new (gen_string);
 			g_free (gen_string);
@@ -433,7 +434,7 @@ static GtkWidget *
 generate_icon_sel (GnomeFilePropertyDialog *fp_dlg)
 {
 	GtkWidget *retval;
-	gchar *icon;
+	const gchar *icon;
 	
 	retval = gnome_icon_entry_new ("gmc_file_icon", "Select an Icon");
 	icon = gicon_get_filename_for_icon (fp_dlg->im);
@@ -441,11 +442,9 @@ generate_icon_sel (GnomeFilePropertyDialog *fp_dlg)
 		return retval;
 	
 	if (!icon[0]){
-		g_free (icon);
 		return retval;
 	}
 	gnome_icon_entry_set_icon (GNOME_ICON_ENTRY (retval), icon);
-	g_free (icon);
 	return retval;
 }
 
@@ -962,8 +961,10 @@ init_metadata (GnomeFilePropertyDialog *fp_dlg)
 	file_name = fp_dlg->file_name;
 	if (S_ISLNK (fp_dlg->st.st_mode)) {
 		n = mc_readlink (fp_dlg->file_name, link_name, MC_MAXPATHLEN);
-		if (n > 0)
+		if (n > 0){
+			link_name [n] = 0;
 			file_name = link_name;
+		}
 	}
 	
 	if (gnome_metadata_get (fp_dlg->file_name, "desktop-url", &size, &desktop_url) == 0)
@@ -1281,22 +1282,9 @@ apply_metadata_change (GnomeFilePropertyDialog *fpd)
 	/* And finally, we set the metadata on the icon filename */
 	text = gnome_icon_entry_get_filename (GNOME_ICON_ENTRY (fpd->button));
 	/*gtk_entry_get_text (GTK_ENTRY (gnome_icon_entry_gtk_entry (GNOME_ICON_ENTRY (fpd->button))));*/
-	
-	icon_name = gicon_get_filename_for_icon (fpd->im);
+
 	if (text) {
-		if (strcmp (text, icon_name))
-			/* FIXME: We make a big assumption here.  If the file doesn't exist, it will
-			 * default to the basic icon.  We prolly should check that this is a valid
-			 * file here, but I'm too tired to do it now -- jrb */
-			gnome_metadata_set (fpd->file_name, "icon-filename", strlen (text) + 1, text);
-		else {
-			/* If text is equal to icon_name it means the user did not
-			 * touch it, not that he did remove it
-			 */
-			/*
-			  gnome_metadata_remove (fpd->file_name, "icon-filename");
-			*/
-		}
+		gnome_metadata_set (fpd->file_name, "icon-filename", strlen (text) + 1, text);
 		g_free (text);
 	}
 	/* I suppose we should only do this if we know there's been a change -- I'll try to figure it

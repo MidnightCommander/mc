@@ -94,6 +94,7 @@ item_properties (GtkWidget *parent, char *fname, DesktopIconInfo *dii)
 		file_entry *fe;
 		char *dirname;
 		char *p;
+		const char *ifile;
 
 		p = strrchr (fname, PATH_SEP);
 		g_assert (p != NULL);
@@ -103,9 +104,11 @@ item_properties (GtkWidget *parent, char *fname, DesktopIconInfo *dii)
 		icon = gicon_get_icon_for_file (dirname, fe, FALSE);
 		g_free (dirname);
 		file_entry_free (fe);
-		icon_filename = gicon_get_filename_for_icon (icon);
-		if (icon_filename == NULL)
+		ifile = gicon_get_filename_for_icon (icon);
+		if (ifile == NULL)
 			icon_filename = g_strdup (ICONDIR "i-regular.png");
+		else
+			icon_filename = g_strdup (ifile);
 		
 		gene = gprop_general_new (fname, icon_filename);
 					 

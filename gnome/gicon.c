@@ -130,7 +130,7 @@ get_icon_set (const char *filename)
 	if (iset)
 		return iset;
 
-	im = gdk_imlib_load_image (filename);
+	im = gdk_imlib_load_image ((char *) filename);
 	if (!im)
 		return NULL;
 
@@ -141,7 +141,7 @@ get_icon_set (const char *filename)
 
 	/* Insert the icon information into the hash tables */
 
-	g_hash_table_insert (name_hash, filename, iset);
+	g_hash_table_insert (name_hash, (char *) filename, iset);
 	g_hash_table_insert (image_hash, iset->plain, iset);
 
 	return iset;
@@ -436,7 +436,7 @@ gicon_get_icon_for_file (char *directory, file_entry *fe, gboolean do_quick)
  * 
  * Return value: The filename that contains the icon for the specified image.
  **/
-char *
+const char *
 gicon_get_filename_for_icon (GdkImlibImage *image)
 {
 	IconSet *iset;

@@ -64,6 +64,7 @@ void free (void *ptr);
 #endif
 
 #ifdef MOUNTED_VMOUNT		/* AIX.  */
+#include <stdio.h>
 #include <fshelp.h>
 #include <sys/vfs.h>
 #endif

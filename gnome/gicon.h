@@ -17,7 +17,7 @@
 void gicon_init (void);
 
 GdkImlibImage *gicon_get_icon_for_file (char *directory, file_entry *fe, gboolean do_quick);
-char *gicon_get_filename_for_icon (GdkImlibImage *image);
+const char *gicon_get_filename_for_icon (GdkImlibImage *image);
 
 
 #endif

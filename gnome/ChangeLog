@@ -1,3 +1,22 @@
+1999-02-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gicon.c (gicon_get_filename_for_icon): Return const char *, this
+	tells the user of this routine "you better not touch or free this
+	you dofus".
+
+	* gnome-file-property-dialog.c (apply_metadata_change): Always set
+	the name of the icon to the new value, as the entry will always
+	match the imlib image anyways (due to the fixes I did to const
+	correctness). 
+	(generate_icon_sel): Do not free the value.  We do not own this
+	return value. 
+
+	* gdesktop.c (is_mountable): NULL terminate string returned from
+	readlink.  Yes guys, readlink does not NULL terminate things. 
+	(do_mount_umount): ditto.
+	
+	* gnome-file-property-dialog.c (init_metadata): ditto
+
 Tue Feb 23 17:41:45 1999  George Lebl  <jirka@5z.com>
 
 	* gmain.c: set the restart property of the gnome client to

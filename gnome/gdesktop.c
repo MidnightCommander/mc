@@ -914,7 +914,8 @@ is_mountable (char *filename, file_entry *fe, int *is_mounted, char **point)
 	char buffer [128], *p;
 	umode_t mode;
 	struct stat s;
-
+	int len;
+	
 	if (point)
 		*point = NULL;
 	
@@ -928,9 +929,11 @@ is_mountable (char *filename, file_entry *fe, int *is_mounted, char **point)
 	if (!S_ISBLK (mode))
 		return FALSE;
 
-	if (readlink (filename, buffer, sizeof (buffer)) == -1)
+	len = readlink (filename, buffer, sizeof (buffer));
+	if (len == -1)
 		return FALSE;
-
+	buffer [len] = 0;
+	
 	p = is_block_device_mountable (buffer);
 	if (!p)
 		return FALSE;
@@ -952,7 +955,8 @@ do_mount_umount (char *filename, gboolean is_mount)
 	static char *umount_command;
 	char *op;
 	char buffer [128];
-
+	int count;
+	
 	if (is_mount){
 		if (!mount_command)
 			mount_command = find_command (mount_known_locations);
@@ -963,8 +967,10 @@ do_mount_umount (char *filename, gboolean is_mount)
 		op = umount_command;
 	}
 
-	if (readlink (filename, buffer, sizeof (buffer)) == -1)
+	count = readlink (filename, buffer, sizeof (buffer));
+	if (count == -1)
 		return FALSE;
+	buffer [count] = 0;
 	
 	if (op){
 		char *command;
