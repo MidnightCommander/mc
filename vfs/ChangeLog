@@ -1,3 +1,8 @@
+2004-10-16  Roland Illig  <roland.illig@gmx.de>
+
+	* tar.c (tar_read_header): Fixed handling of filenames starting
+	with "./".
+
 2004-10-06  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* cpio.c (cpio_find_head): Check mc_read() return value.

@@ -479,6 +479,11 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
 	} else {
 	    *(p++) = 0;
 	    q = current_file_name;
+	    /* FIXME: should be q = vfs_normalize_dir(q) */
+	    while (q[0] == '.' && q[1] == '/')
+	        q += 2;
+	    if (*q == '.' && *(q+1) == '\0')
+	        q = "";
 	}
 
 	parent =
