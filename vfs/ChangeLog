@@ -1,3 +1,9 @@
+Mon May  4 10:27:49 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* ftpfs.c (retrieve_file_start2): Don't create target file O_EXCL, 
+	in copy_file_file we check existance of the target file and know
+	that we want to truncate it.
+
 1998-04-29  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* tar.c (read_header): Mark regular files with S_IFREG.

@@ -1078,8 +1078,8 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
 	    goto ret;
         }
 	resources |= 2; /* dst_path exists/dst_path opened */
+	resources |= 4; /* remove short file */
     }
-    resources |= 4; /* remove short file */
     appending = do_append;
     do_append = 0;
 
@@ -1163,6 +1163,14 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
                     i = 0;
                     break;
             }
+
+            /* the first time we reach this line the target file has been created 
+	       or truncated and we actually have a short target file.
+	       Do we really want to delete the target file when the ftp transfer
+	       fails? If we don't delete it we would be able to use reget later.
+               (Norbert) */
+	    resources |= 4; /* remove short file */
+
 	    if (i && size != MCERR_DATA_ON_STDIN){
 		n_read_total += size;
 

@@ -1630,7 +1630,7 @@ int retrieve_file_start(struct ftpentry *fe)
 
 int retrieve_file_start2(struct ftpentry *fe)
 {
-    remotelocal_handle = open(fe->local_filename, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, 0600);
+    remotelocal_handle = open(fe->local_filename, O_RDWR | O_CREAT | O_TRUNC, 0600);
     if (remotelocal_handle == -1) {
 	ftpfserrno = EIO;
 	free(fe->local_filename);
