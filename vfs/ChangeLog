@@ -1,5 +1,8 @@
 2002-10-02  Pavel Roskin  <proski@gnu.org>
 
+	* tcputil.c (check_hooks): Remove, it does nothing.  Also remove
+	all related data structures.
+
 	* tcputil.c (get_remote_port): Move to mcfs.c.
 	(send_string): Move to mcserv.c.
 	(rpc_add_get_callback): Remove, it's unused.

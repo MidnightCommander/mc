@@ -59,13 +59,14 @@ int got_sigpipe;
 #ifdef	WITH_MCFS
 /* Reads a block on dest for len bytes from sock */
 /* Returns a boolean indicating the success status */
-int socket_read_block (int sock, char *dest, int len)
+int
+socket_read_block (int sock, char *dest, int len)
 {
     int nread, n;
 
-    for (nread = 0; nread < len;){
-	n = read (sock, dest+nread, len-nread);
-	if (n <= 0){
+    for (nread = 0; nread < len;) {
+	n = read (sock, dest + nread, len - nread);
+	if (n <= 0) {
 	    tcp_invalidate_socket (sock);
 	    return 0;
 	}
@@ -74,11 +75,12 @@ int socket_read_block (int sock, char *dest, int len)
     return 1;
 }
 
-int socket_write_block (int sock, char *buffer, int len)
+int
+socket_write_block (int sock, char *buffer, int len)
 {
     int left, status;
 
-    for (left = len; left > 0;){
+    for (left = len; left > 0;) {
 	status = write (sock, buffer, left);
 	CHECK_SIG_PIPE (sock);
 	if (status < 0)
@@ -89,7 +91,8 @@ int socket_write_block (int sock, char *buffer, int len)
     return 1;
 }
 
-int rpc_send (int sock, ...)
+int
+rpc_send (int sock, ...)
 {
     long int tmp, len, cmd;
     char *text;
@@ -97,9 +100,9 @@ int rpc_send (int sock, ...)
 
     va_start (ap, sock);
 
-    for (;;){
+    for (;;) {
 	cmd = va_arg (ap, int);
-	switch (cmd){
+	switch (cmd) {
 	case RPC_END:
 	    va_end (ap);
 	    return 1;
@@ -118,7 +121,7 @@ int rpc_send (int sock, ...)
 	    CHECK_SIG_PIPE (sock);
 	    write (sock, text, len);
 	    CHECK_SIG_PIPE (sock);
-	    break;	    
+	    break;
 
 	case RPC_BLOCK:
 	    len = va_arg (ap, int);
@@ -134,55 +137,25 @@ int rpc_send (int sock, ...)
     }
 }
 
-typedef struct sock_callback_t {
-    int  sock;
-    void (*cback)(int);
-    struct sock_callback_t *link;
-} sock_callback_t;
-
-sock_callback_t *sock_callbacks = 0;
-
-static void check_hooks (int sock)
-{
-    sock_callback_t *callback, *prev;
-
-    for (prev=callback = sock_callbacks; callback; callback = callback->link){
-	if (callback->sock != sock){
-	    prev = callback;
-	    continue;
-	}
-	callback->sock = -1;
-	(callback->cback)(sock);
-	if (callback == sock_callbacks){
-	    sock_callbacks = callback->link;
-	} else {
-	    prev->link = callback->link;
-	}
-	g_free (callback);
-	return;
-    }
-}
-
-int rpc_get (int sock, ...)
+int
+rpc_get (int sock, ...)
 {
     long int tmp, len;
     char *text, **str_dest;
-    int  *dest, cmd;
+    int *dest, cmd;
     va_list ap;
 
     va_start (ap, sock);
 
-    check_hooks (sock);
-
-    for (;;){
+    for (;;) {
 	cmd = va_arg (ap, int);
-	switch (cmd){
+	switch (cmd) {
 	case RPC_END:
 	    va_end (ap);
 	    return 1;
 
 	case RPC_INT:
-	    if (socket_read_block (sock, (char *) &tmp, sizeof (tmp)) == 0){
+	    if (socket_read_block (sock, (char *) &tmp, sizeof (tmp)) == 0) {
 		va_end (ap);
 		return 0;
 	    }
@@ -193,33 +166,33 @@ int rpc_get (int sock, ...)
 	    /* returns an allocated string */
 	case RPC_LIMITED_STRING:
 	case RPC_STRING:
-	    if (socket_read_block (sock, (char *)&tmp, sizeof (tmp)) == 0){
+	    if (socket_read_block (sock, (char *) &tmp, sizeof (tmp)) == 0) {
 		va_end (ap);
 		return 0;
 	    }
 	    len = ntohl (tmp);
 	    if (cmd == RPC_LIMITED_STRING)
-		if (len > 16*1024){
+		if (len > 16 * 1024) {
 		    /* silently die */
 		    abort ();
 		}
-	    if (len > 128*1024)
-		    abort ();
-	    text = g_new0 (char, len+1);
-	    if (socket_read_block (sock, text, len) == 0){
+	    if (len > 128 * 1024)
+		abort ();
+	    text = g_new0 (char, len + 1);
+	    if (socket_read_block (sock, text, len) == 0) {
 		g_free (text);
 		va_end (ap);
 		return 0;
 	    }
 	    str_dest = va_arg (ap, char **);
 	    *str_dest = text;
-	    text [len] = '\0';
-	    break;	    
+	    text[len] = '\0';
+	    break;
 
 	case RPC_BLOCK:
 	    len = va_arg (ap, int);
 	    text = va_arg (ap, char *);
-	    if (socket_read_block (sock, text, len) == 0){
+	    if (socket_read_block (sock, text, len) == 0) {
 		va_end (ap);
 		return 0;
 	    }
@@ -230,21 +203,22 @@ int rpc_get (int sock, ...)
 	}
     }
 }
-#endif	/* WITH_MCFS */
+#endif				/* WITH_MCFS */
 
-static void sig_pipe (int unused)
+static void
+sig_pipe (int unused)
 {
     got_sigpipe = 1;
 }
 
-void tcp_init (void)
+void
+tcp_init (void)
 {
     struct sigaction sa;
-    
+
     got_sigpipe = 0;
     sa.sa_handler = sig_pipe;
     sa.sa_flags = 0;
     sigemptyset (&sa.sa_mask);
     sigaction (SIGPIPE, &sa, NULL);
 }
-
