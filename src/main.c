@@ -2080,63 +2080,22 @@ init_sigchld (void)
 #endif /* NATIVE_WIN32, UNIX */
 
 static void
-print_mc_usage (FILE *stream)
+print_mc_usage (poptContext ctx, FILE * stream)
 {
-    const char * const * ptr;
-    const char * const usage [] = {
-	    
-    N_("Usage is:\n\n"
-       "mc [flags] [this_dir] [other_panel_dir]\n\n"),
-#ifndef NATIVE_WIN32
-    N_("-a, --stickchars   Force use of +, -, | for line drawing.\n"),
-#endif /* !NATIVE_WIN32 */
-    N_("-b, --nocolor      Force black and white display.\n"),
-#ifdef WITH_BACKGROUND
-    N_("-B, --background   [DEVEL-ONLY: Debug the background code]\n"),
-#endif
-    N_("-c, --color        Force color mode.\n"
-       "-C, --colors       Specify colors (use --help-colors to get a list).\n"
-       "-d, --nomouse      Disable mouse support.\n"),
-#ifdef USE_INTERNAL_EDIT
-    N_("-e, --edit         Startup the internal editor.\n"),
-#endif
-    N_("-f, --libdir       Print configured paths.\n"
-       "-h, --help         Shows this help message.\n"
-       "-k, --resetsoft    Reset softkeys (HP terminals only) to their terminfo/termcap\n"
-       "                   default.\n"),
-#ifdef USE_NETCODE
-    N_("-l, --ftplog file  Log ftpfs commands to the file.\n"),
-#ifdef WITH_SMBFS
-    N_("-D, --debuglevel N Set Smbfs debug level to N (0-10).\n"),
-#endif
-#endif
-    N_("-P, --printwd      At exit, print the last working directory.\n"
-       "-s, --slow         Disables verbose operation (for slow terminals).\n"),
-#if defined(HAVE_SLANG) && !defined(NATIVE_WIN32)
-    N_("-t, --termcap      Activate support for the TERMCAP variable.\n"),
-#endif
-#if defined(HAVE_SLANG) && defined(NATIVE_WIN32)
-    N_("-S, --createcmdile Create command file to set default directory upon exit.\n"),
-#endif
-#ifdef HAVE_SUBSHELL_SUPPORT
-    N_("-u, --nosubshell   Disable the concurrent subshell mode.\n"
-       "-U, --subshell     Force the concurrent subshell mode.\n"
-       "-r, --forceexec    Force subshell execution.\n"),
-#endif
-    N_("-v, --view fname   Start up into the viewer mode.\n"
-       "-V, --version      Report version and configuration options.\n"
-       "-x, --xterm        Force xterm mouse support and screen save/restore.\n"
-       "+number            number it is the start line number of file for `mcedit'.\n"),
-    N_("\n"
-       "Please send any bug reports (including the output of `mc -V')\n"
-       "to mc-devel@gnome.org\n"),
-    NULL    
-    };
+    fprintf (stream,
+	     _("Usage is:\n\n"
+	       "mc [flags] [this_dir] [other_panel_dir]\n\n"));
 
+    /* print help for options */
+    poptPrintHelp (ctx, stream, 0);
+
+    fprintf (stream, "  %s             %s", _("+number"),
+	     _("number is the start line number of file for `mcedit'.\n"));
+    fprintf (stream,
+	     _("\n"
+	       "Please send any bug reports (including the output of `mc -V')\n"
+	       "to mc-devel@gnome.org\n"));
     version (0);
-    
-    for (ptr = usage; *ptr; ptr++)
-	fputs (_(*ptr), stream);
 }
 
 static void
@@ -2175,7 +2134,7 @@ enum {
 };
 
 static void
-process_args (int c, const char *option_arg)
+process_args (poptContext ctx, int c, const char *option_arg)
 {
     switch (c) {
     case 'V':
@@ -2233,7 +2192,7 @@ process_args (int c, const char *option_arg)
 	break;
 	    
     case 'h':
-	print_mc_usage (stdout);
+	print_mc_usage (ctx, stdout);
 	finish_program = 1;
     }
 }
@@ -2321,11 +2280,11 @@ handle_args (int argc, char *argv [])
 #endif
 
     while ((c = poptGetNextOpt (ctx)) > 0){
-	process_args (c, poptGetOptArg (ctx));
+	process_args (ctx, c, poptGetOptArg (ctx));
     }
 
     if (c < -1){
-	print_mc_usage (stderr);
+	print_mc_usage (ctx, stderr);
 	fprintf(stderr, "%s: %s\n", 
 		poptBadOption (ctx, POPT_BADOPTION_NOALIAS), 
 		poptStrerror (c));
