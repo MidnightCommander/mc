@@ -1844,7 +1844,7 @@ update_xterm_title_path (void)
     if (xterm_flag && xterm_title) {
 	p = s = g_strdup (strip_home_and_password (cpanel->cwd));
 	do {
-	    if (*s <= 32)
+	    if (!is_printable (*s))
 		*s = '?';
 	} while (*++s);
 	fprintf (stdout, "\33]0;mc - %s\7", p);

@@ -1,3 +1,7 @@
+2003-01-27  Pavel Roskin  <proski@gnu.org>
+
+	* main.c (update_xterm_title_path): Use is_printable().
+
 2003-01-24  Pavel Roskin  <proski@gnu.org>
 
 	* slint.c (slang_reset_softkeys): Cast arguments from size_t to
