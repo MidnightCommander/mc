@@ -88,6 +88,10 @@
 #include "charsets.h"
 #endif				/* HAVE_CHARSET */
 
+#ifdef USE_VFS
+#include "../vfs/gc.h"
+#endif
+
 #include "popt.h"
 
 /* When the modes are active, left_panel, right_panel and tree_panel */

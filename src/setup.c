@@ -41,6 +41,10 @@
 #include "cmd.h"
 #include "file.h"		/* safe_delete */
 
+#ifdef USE_VFS
+#include "../vfs/gc.h"
+#endif
+
 #ifdef HAVE_CHARSET
 #include "charsets.h"
 #endif

@@ -39,6 +39,10 @@
 #include "win.h"
 #include "cons.saver.h"
 
+#ifdef USE_VFS
+#include "../vfs/gc.h"
+#endif
+
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
 #ifdef HAVE_GMODULE
 #include <gmodule.h>

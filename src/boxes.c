@@ -55,6 +55,10 @@
 #   include "../vfs/ftpfs.h"
 #endif
 
+#ifdef USE_VFS
+#include "../vfs/gc.h"
+#endif
+
 static int DISPLAY_X = 45, DISPLAY_Y = 14;
 
 static Dlg_head *dd;

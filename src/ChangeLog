@@ -1,5 +1,11 @@
 2003-11-07  Pavel Roskin  <proski@gnu.org>
 
+	* boxes.c: Include "../vfs/gc.h" if VFS is used.
+	* hotlist.c: Likewise.
+	* key.c: Likewise.
+	* main.c: Likewise.
+	* setup.c: Likewise.
+
 	* view.c (free_file): Don't use check_error_pipe(), display
 	error messages in close_error_pipe().
 	* utilunix.c (check_error_pipe): Remove, it's unused.

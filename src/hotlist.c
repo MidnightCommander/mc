@@ -67,7 +67,8 @@
 #define B_APPEND	(B_USER + 6)
 #define B_MOVE		(B_USER + 7)
 
-#ifdef	USE_VFS
+#ifdef USE_VFS
+#include "../vfs/gc.h"
 #define B_FREE_ALL_VFS	(B_USER + 8)
 #define B_REFRESH_VFS	(B_USER + 9)
 #endif
