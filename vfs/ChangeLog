@@ -1,3 +1,13 @@
+2003-08-29  Pavel Roskin  <proski@gnu.org>
+
+	* samba/lib/system.c: Remove all unused code.
+	* samba/include/proto.h: Remove some unused prototypes.
+	* samba/include/includes.h: Don't include sys/capability.h,
+	it's not needed.
+	* samba/configure.in: Remove tests for capabilities and groups,
+	which are unused now.  Also remove the trivial test.
+	* Makefile.am: Remove unused Samba tests.
+
 2003-08-29  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* direntry.c (vfs_s_dump): Commented out.

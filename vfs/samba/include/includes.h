@@ -305,10 +305,6 @@
 #include <poll.h>
 #endif
 
-#ifdef HAVE_SYS_CAPABILITY_H
-#include <sys/capability.h>
-#endif
-
 #if defined(HAVE_RPC_RPC_H)
 /*
  * Check for AUTH_ERROR define conflict with rpc/rpc.h in prot.h.

@@ -51,7 +51,7 @@ AC_CHECK_HEADERS(sys/mount.h sys/vfs.h sys/fs/s5param.h sys/filsys.h termios.h t
 AC_CHECK_HEADERS(sys/termio.h sys/statfs.h sys/dustat.h sys/statvfs.h stdarg.h sys/sockio.h)
 AC_CHECK_HEADERS(netinet/tcp.h netinet/in_systm.h netinet/in_ip.h)
 AC_CHECK_HEADERS(sys/security.h security/pam_appl.h)
-AC_CHECK_HEADERS(stropts.h poll.h sys/capability.h syscall.h sys/syscall.h)
+AC_CHECK_HEADERS(stropts.h poll.h syscall.h sys/syscall.h)
 AC_CHECK_HEADERS(sys/acl.h sys/cdefs.h glob.h)
 
 AC_CHECK_SIZEOF(int)
@@ -299,24 +299,6 @@ if test x"$samba_cv_HAVE_KERNEL_OPLOCKS" = x"yes"; then
     AC_DEFINE(HAVE_KERNEL_OPLOCKS, 1, [Define to use kernel oplock capabilities])
 fi
 
-AC_CACHE_CHECK([for irix specific capabilities],samba_cv_HAVE_IRIX_SPECIFIC_CAPABILITIES,[
-AC_TRY_RUN([#include <sys/types.h>
-#include <sys/capability.h>
-main() {
- cap_t cap;
- if ((cap = cap_get_proc()) == NULL)
-   exit(1);
- cap->cap_effective |= CAP_NETWORK_MGT;
- cap->cap_inheritable |= CAP_NETWORK_MGT;
- cap_set_proc(cap);
- exit(0);
-}
-],
-samba_cv_HAVE_IRIX_SPECIFIC_CAPABILITIES=yes,samba_cv_HAVE_IRIX_SPECIFIC_CAPABILITIES=no,samba_cv_HAVE_IRIX_SPECIFIC_CAPABILITIES=cross)])
-if test x"$samba_cv_HAVE_IRIX_SPECIFIC_CAPABILITIES" = x"yes"; then
-    AC_DEFINE(HAVE_IRIX_SPECIFIC_CAPABILITIES, 1, [Define to support IRIX specific capabilities])
-fi
-
 #
 # Check for int16, uint16, int32 and uint32 in rpc/types.h included from rpc/rpc.h
 # This is *really* broken but some systems (DEC OSF1) do this.... JRA.
@@ -386,19 +368,6 @@ AC_TRY_COMPILE([#include <sys/types.h>
 samba_cv_HAVE_RPC_AUTH_ERROR_CONFLICT=no,samba_cv_HAVE_RPC_AUTH_ERROR_CONFLICT=yes)])
 if test x"$samba_cv_HAVE_RPC_AUTH_ERROR_CONFLICT" = x"yes"; then
     AC_DEFINE(HAVE_RPC_AUTH_ERROR_CONFLICT, 1, [Define if rpc/rpc.h defines AUTH_ERROR])
-fi
-
-AC_MSG_CHECKING([for test routines])
-AC_TRY_RUN([#include "${srcdir-.}/tests/trivial.c"],
-           AC_MSG_RESULT(yes),
-	   AC_MSG_ERROR([cant find test code. Aborting config]),
-	   AC_MSG_WARN([cannot run when cross-compiling]))
-
-AC_CACHE_CHECK([for broken getgroups],samba_cv_HAVE_BROKEN_GETGROUPS,[
-AC_TRY_RUN([#include "${srcdir-.}/tests/getgroups.c"],
-           samba_cv_HAVE_BROKEN_GETGROUPS=yes,samba_cv_HAVE_BROKEN_GETGROUPS=no,samba_cv_HAVE_BROKEN_GETGROUPS=cross)])
-if test x"$samba_cv_HAVE_BROKEN_GETGROUPS" = x"yes"; then
-    AC_DEFINE(HAVE_BROKEN_GETGROUPS, 1, [Define if getgroups() is broken])
 fi
 
 netmask=no;

@@ -164,7 +164,5 @@ SAMBA_DIST =			\
 	param/loadparm.c	\
 	param/params.c		\
 	tests/README		\
-	tests/getgroups.c	\
-	tests/summary.c		\
-	tests/trivial.c
+	tests/summary.c
 

@@ -140,40 +140,6 @@ int sys_select(int maxfd, fd_set *fds,struct timeval *tval)
 #endif /* NO_SELECT */
 
 /*******************************************************************
- A wrapper for usleep in case we don't have one.
-********************************************************************/
-
-int sys_usleep(long usecs)
-{
-#ifndef HAVE_USLEEP
-  struct timeval tval;
-#endif
-
-  /*
-   * We need this braindamage as the glibc usleep
-   * is not SPEC1170 complient... grumble... JRA.
-   */
-
-  if(usecs < 0 || usecs > 1000000) {
-    errno = EINVAL;
-    return -1;
-  }
-
-#if HAVE_USLEEP
-  usleep(usecs);
-  return 0;
-#else /* HAVE_USLEEP */
-  /*
-   * Fake it with select...
-   */
-  tval.tv_sec = 0;
-  tval.tv_usec = usecs/1000;
-  select(0,NULL,NULL,NULL,&tval);
-  return 0;
-#endif /* HAVE_USLEEP */
-}
-
-/*******************************************************************
 A stat() wrapper that will deal with 64 bit filesizes.
 ********************************************************************/
 
@@ -183,39 +149,12 @@ int sys_stat(const char *fname,SMB_STRUCT_STAT *sbuf)
 }
 
 /*******************************************************************
- An fstat() wrapper that will deal with 64 bit filesizes.
-********************************************************************/
-
-int sys_fstat(int fd,SMB_STRUCT_STAT *sbuf)
-{
-  return fstat(fd, sbuf);
-}
-
-/*******************************************************************
  An lstat() wrapper that will deal with 64 bit filesizes.
 ********************************************************************/
 
 int sys_lstat(const char *fname,SMB_STRUCT_STAT *sbuf)
 {
   return lstat(fname, sbuf);
-}
-
-/*******************************************************************
- An ftruncate() wrapper that will deal with 64 bit filesizes.
-********************************************************************/
-#if 0
-int sys_ftruncate(int fd, SMB_OFF_T offset)
-{
-  return ftruncate(fd, offset);
-}
-#endif
-/*******************************************************************
- An lseek() wrapper that will deal with 64 bit filesizes.
-********************************************************************/
-
-SMB_OFF_T sys_lseek(int fd, SMB_OFF_T offset, int whence)
-{
-  return lseek(fd, offset, whence);
 }
 
 /*******************************************************************
@@ -237,15 +176,6 @@ SMB_OFF_T sys_ftell(FILE *fp)
 }
 
 /*******************************************************************
- A creat() wrapper that will deal with 64 bit filesizes.
-********************************************************************/
-
-int sys_creat(const char *path, mode_t mode)
-{
-  return sys_open(path, O_WRONLY | O_CREAT | O_TRUNC, mode);
-}
-
-/*******************************************************************
  An open() wrapper that will deal with 64 bit filesizes.
 ********************************************************************/
 
@@ -263,19 +193,6 @@ FILE *sys_fopen(const char *path, const char *type)
   return fopen(path, type);
 }
 
-#if defined(HAVE_MMAP)
-
-/*******************************************************************
- An mmap() wrapper that will deal with 64 bit filesizes.
-********************************************************************/
-
-void *sys_mmap(void *addr, size_t len, int prot, int flags, int fd, SMB_OFF_T offset)
-{
-  return mmap(addr, len, prot, flags, fd, offset);
-}
-
-#endif /* HAVE_MMAP */
-
 /*******************************************************************
  A readdir wrapper that will deal with 64 bit filesizes.
 ********************************************************************/
@@ -285,19 +202,6 @@ SMB_STRUCT_DIRENT *sys_readdir(DIR *dirp)
   return readdir(dirp);
 }
 
-/*******************************************************************
-The wait() calls vary between systems
-********************************************************************/
-#if 0
-int sys_waitpid(pid_t pid,int *status,int options)
-{
-#ifdef HAVE_WAITPID
-  return waitpid(pid,status,options);
-#else /* HAVE_WAITPID */
-  return wait4(pid, status, options, NULL);
-#endif /* HAVE_WAITPID */
-}
-#endif
 /*******************************************************************
 system wrapper for getwd
 ********************************************************************/
@@ -370,81 +274,6 @@ struct hostent *sys_gethostbyname(const char *name)
 #endif /* REDUCE_ROOT_DNS_LOOKUPS */
 }
 
-
-/**************************************************************************
- Try and abstract process capabilities (for systems that have them).
-****************************************************************************/
-
-BOOL set_process_capability( uint32 cap_flag, BOOL enable )
-{
-#if defined(HAVE_IRIX_SPECIFIC_CAPABILITIES)
-  if(cap_flag == KERNEL_OPLOCK_CAPABILITY)
-  {
-    cap_t cap = cap_get_proc();
-
-    if (cap == NULL) {
-      DEBUG(0,("set_process_capability: cap_get_proc failed. Error was %s\n",
-            strerror(errno)));
-      return False;
-    }
-
-    if(enable)
-      cap->cap_effective |= CAP_NETWORK_MGT;
-    else
-      cap->cap_effective &= ~CAP_NETWORK_MGT;
-
-    if (cap_set_proc(cap) == -1) {
-      DEBUG(0,("set_process_capability: cap_set_proc failed. Error was %s\n",
-            strerror(errno)));
-      cap_free(cap);
-      return False;
-    }
-
-    cap_free(cap);
-
-    DEBUG(10,("set_process_capability: Set KERNEL_OPLOCK_CAPABILITY.\n"));
-  }
-#endif
-  return True;
-}
-
-/**************************************************************************
- Try and abstract inherited process capabilities (for systems that have them).
-****************************************************************************/
-
-BOOL set_inherited_process_capability( uint32 cap_flag, BOOL enable )
-{
-#if defined(HAVE_IRIX_SPECIFIC_CAPABILITIES)
-  if(cap_flag == KERNEL_OPLOCK_CAPABILITY)
-  {
-    cap_t cap = cap_get_proc();
-
-    if (cap == NULL) {
-      DEBUG(0,("set_inherited_process_capability: cap_get_proc failed. Error was %s\n",
-            strerror(errno)));
-      return False;
-    }
-
-    if(enable)
-      cap->cap_inheritable |= CAP_NETWORK_MGT;
-    else
-      cap->cap_inheritable &= ~CAP_NETWORK_MGT;
-
-    if (cap_set_proc(cap) == -1) {
-      DEBUG(0,("set_inherited_process_capability: cap_set_proc failed. Error was %s\n", 
-            strerror(errno)));
-      cap_free(cap);
-      return False;
-    }
-
-    cap_free(cap);
-
-    DEBUG(10,("set_inherited_process_capability: Set KERNEL_OPLOCK_CAPABILITY.\n"));
-  }
-#endif
-  return True;
-}
-
 /**************************************************************************
  Wrapper for random().
 ****************************************************************************/
@@ -477,109 +306,3 @@ void sys_srandom(unsigned int seed)
 #endif
 }
 
-/**************************************************************************
- Wrapper for getgroups. Deals with broken (int) case.
-****************************************************************************/
-
-int sys_getgroups(int setlen, gid_t *gidset)
-{
-#if !defined(HAVE_BROKEN_GETGROUPS)
-  return getgroups(setlen, gidset);
-#else
-
-  GID_T gid;
-  GID_T *group_list;
-  int i, ngroups;
-
-  if(setlen == 0) {
-    return getgroups(setlen, &gid);
-  }
-
-  /*
-   * Broken case. We need to allocate a
-   * GID_T array of size setlen.
-   */
-
-  if(setlen < 0) {
-    errno = EINVAL; 
-    return -1;
-  } 
-
-  if (setlen == 0)
-    setlen = 1;
-
-  if((group_list = (GID_T *)malloc(setlen * sizeof(GID_T))) == NULL) {
-    DEBUG(0,("sys_getgroups: Malloc fail.\n"));
-    return -1;
-  }
-
-  if((ngroups = getgroups(setlen, group_list)) < 0) {
-    int saved_errno = errno;
-    free((char *)group_list);
-    errno = saved_errno;
-    return -1;
-  }
-
-  for(i = 0; i < ngroups; i++)
-    gidset[i] = (gid_t)group_list[i];
-
-  free((char *)group_list);
-  return ngroups;
-#endif /* HAVE_BROKEN_GETGROUPS */
-}
-
-#ifdef HAVE_SETGROUPS
-
-/**************************************************************************
- Wrapper for setgroups. Deals with broken (int) case. Automatically used
- if we have broken getgroups.
-****************************************************************************/
-
-int sys_setgroups(int setlen, gid_t *gidset)
-{
-#if !defined(HAVE_BROKEN_GETGROUPS)
-  return setgroups(setlen, gidset);
-#else
-
-  GID_T *group_list;
-  int i ; 
-
-  if (setlen == 0)
-    return 0 ;
-
-#ifdef NGROUPS_MAX
-  if (setlen > NGROUPS_MAX) {
-    errno = EINVAL; 
-    return -1;   
-  }
-#endif
-
-  /*
-   * Broken case. We need to allocate a
-   * GID_T array of size setlen.
-   */
-
-  if (setlen == 0)
-    setlen = 1;
-
-  if((group_list = (GID_T *)malloc(setlen * sizeof(GID_T))) == NULL) {
-    DEBUG(0,("sys_setgroups: Malloc fail.\n"));
-    return -1;    
-  }
- 
-  for(i = 0; i < setlen; i++) 
-    group_list[i] = (GID_T) gidset[i]; 
-
-  if(setgroups(setlen, group_list) != 0) {
-    int saved_errno = errno;
-    free((char *)group_list);
-    errno = saved_errno;
-    return -1;
-  }
- 
-  free((char *)group_list);
-  return 0 ;
-#endif /* HAVE_BROKEN_GETGROUPS */
-}
-
-#endif /* HAVE_SETGROUPS */
