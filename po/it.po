@@ -9,14 +9,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.0a\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-17 19:06+0100\n"
-"PO-Revision-Date: 2003-11-17 19:13+0100\n"
+"POT-Creation-Date: 2004-01-07 17:35+0100\n"
+"PO-Revision-Date: 2004-01-07 17:31+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>,<it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: edit/edit.c:146 edit/edit.c:277 edit/edit.c:285 edit/edit.c:333
 #: edit/edit.c:348 edit/edit.c:359 edit/edit.c:375 edit/edit.c:2665
@@ -59,10 +59,10 @@ msgstr "&Chiudi"
 
 #: edit/edit.h:264 edit/editcmd.c:382 edit/editcmd.c:1228 edit/editcmd.c:1310
 #: edit/editcmd.c:2569 edit/editmenu.c:37 edit/editoptions.c:71
-#: src/boxes.c:140 src/boxes.c:277 src/boxes.c:373 src/boxes.c:465
-#: src/boxes.c:591 src/boxes.c:714 src/boxes.c:836 src/boxes.c:946
-#: src/boxes.c:1014 src/filegui.c:763 src/find.c:184 src/layout.c:348
-#: src/option.c:113 src/subshell.c:323 src/view.c:2107 src/wtools.c:436
+#: src/boxes.c:139 src/boxes.c:276 src/boxes.c:372 src/boxes.c:464
+#: src/boxes.c:590 src/boxes.c:713 src/boxes.c:835 src/boxes.c:945
+#: src/boxes.c:1013 src/filegui.c:763 src/find.c:184 src/layout.c:348
+#: src/option.c:113 src/subshell.c:323 src/view.c:2107 src/wtools.c:441
 msgid "&OK"
 msgstr "&OK"
 
@@ -92,13 +92,13 @@ msgstr "Fai i salvataggi -->"
 
 #: edit/editcmd.c:380 edit/editcmd.c:1169 edit/editcmd.c:1226
 #: edit/editcmd.c:1308 edit/editcmd.c:2567 edit/editoptions.c:68
-#: src/achown.c:68 src/boxes.c:141 src/boxes.c:278 src/boxes.c:371
-#: src/boxes.c:463 src/boxes.c:589 src/boxes.c:712 src/boxes.c:834
-#: src/boxes.c:1014 src/chmod.c:96 src/chown.c:72 src/cmd.c:856
+#: src/achown.c:68 src/boxes.c:140 src/boxes.c:277 src/boxes.c:370
+#: src/boxes.c:462 src/boxes.c:588 src/boxes.c:711 src/boxes.c:833
+#: src/boxes.c:1013 src/chmod.c:96 src/chown.c:72 src/cmd.c:856
 #: src/filegui.c:745 src/find.c:184 src/hotlist.c:121 src/hotlist.c:523
 #: src/hotlist.c:830 src/hotlist.c:926 src/layout.c:349 src/learn.c:58
 #: src/option.c:114 src/panelize.c:66 src/view.c:441 src/view.c:2104
-#: src/wtools.c:46 src/wtools.c:434
+#: src/wtools.c:46 src/wtools.c:439
 msgid "&Cancel"
 msgstr "&Annulla"
 
@@ -117,7 +117,7 @@ msgstr " Salva come "
 #: edit/editcmd.c:482 edit/editcmd.c:804 edit/editcmd.c:841
 #: edit/editcmd.c:1000 edit/editcmd.c:1113 src/file.c:599 src/help.c:318
 #: src/main.c:424 src/screen.c:1415 src/selcodepage.c:105 src/subshell.c:319
-#: src/subshell.c:653 src/utilunix.c:396 src/utilunix.c:400 src/utilunix.c:422
+#: src/subshell.c:653 src/utilunix.c:401 src/utilunix.c:405 src/utilunix.c:427
 #: vfs/mcfs.c:138
 msgid "Warning"
 msgstr "Attenzione"
@@ -462,7 +462,7 @@ msgstr " Ins. letteralmente "
 msgid " Press any key: "
 msgstr " Premere un tasto: "
 
-#: edit/editlock.c:147
+#: edit/editlock.c:148
 #, c-format
 msgid ""
 "File \"%s\" is already being edited\n"
@@ -473,15 +473,15 @@ msgstr ""
 "Utente: %s\n"
 "ID Processo: %d"
 
-#: edit/editlock.c:152
+#: edit/editlock.c:153
 msgid "File locked"
 msgstr "File bloccato da lock"
 
-#: edit/editlock.c:152
+#: edit/editlock.c:153
 msgid "&Grab lock"
 msgstr "&Cattura lock"
 
-#: edit/editlock.c:153
+#: edit/editlock.c:154
 msgid "&Ignore lock"
 msgstr "&Ignora lock"
 
@@ -796,11 +796,11 @@ msgstr "Elimina"
 msgid "PullDn"
 msgstr "Menu"
 
-#: edit/syntax.c:1098 edit/syntax.c:1105
+#: edit/syntax.c:1100 edit/syntax.c:1107
 msgid " Load syntax file "
 msgstr " Carica file sintassi "
 
-#: edit/syntax.c:1099 src/help.c:764 src/user.c:711
+#: edit/syntax.c:1101 src/help.c:764 src/user.c:711
 #, c-format
 msgid ""
 " Cannot open file %s \n"
@@ -809,7 +809,7 @@ msgstr ""
 " Non posso aprire il file %s \n"
 " %s "
 
-#: edit/syntax.c:1106
+#: edit/syntax.c:1108
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Errore nel file %s alla linea %d "
@@ -879,23 +879,23 @@ msgstr ""
 " Impossibile eseguire chown su \"%s\" \n"
 " %s "
 
-#: src/background.c:204 src/file.c:2145
+#: src/background.c:205 src/file.c:2145
 msgid " Background process error "
 msgstr " Errore del processo in background"
 
-#: src/background.c:210
+#: src/background.c:211
 msgid " Unknown error in child "
 msgstr " Errore sconosciuto nel processo figlio "
 
-#: src/background.c:218
+#: src/background.c:219
 msgid " Child died unexpectedly "
 msgstr " Il processo figlio è uscito prematuramente"
 
-#: src/background.c:225
+#: src/background.c:226
 msgid " Background protocol error "
 msgstr " Errore del protocollo in background "
 
-#: src/background.c:226
+#: src/background.c:227
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -919,172 +919,172 @@ msgstr "Lista &lunga"
 msgid "&User defined:"
 msgstr "&Definita dall'utente:"
 
-#: src/boxes.c:137
+#: src/boxes.c:136
 msgid "Listing mode"
 msgstr "Modalità lista"
 
-#: src/boxes.c:139
+#: src/boxes.c:138
 msgid "user &Mini status"
 msgstr "&Mini stato utente"
 
-#: src/boxes.c:279
+#: src/boxes.c:278
 msgid "&Reverse"
 msgstr "Inve&rso"
 
-#: src/boxes.c:280
+#: src/boxes.c:279
 msgid "case sensi&tive"
 msgstr "Controlla mai&uscole/minuscole"
 
-#: src/boxes.c:281
+#: src/boxes.c:280
 msgid "Sort order"
 msgstr "Modalità ordinamento"
 
-#: src/boxes.c:376
+#: src/boxes.c:375
 msgid " confirm &Exit "
 msgstr "&Uscita"
 
-#: src/boxes.c:378
+#: src/boxes.c:377
 msgid " confirm e&Xecute "
 msgstr "&Esecuzione "
 
-#: src/boxes.c:380
+#: src/boxes.c:379
 msgid " confirm o&Verwrite "
 msgstr "&Sovrascrittura "
 
-#: src/boxes.c:382
+#: src/boxes.c:381
 msgid " confirm &Delete "
 msgstr "E&liminazione "
 
-#: src/boxes.c:388 src/cmd.c:194
+#: src/boxes.c:387 src/cmd.c:194
 msgid " Confirmation "
 msgstr " Conferme "
 
-#: src/boxes.c:460
+#: src/boxes.c:459
 msgid "Full 8 bits output"
 msgstr "Uscita completa 8 bit"
 
-#: src/boxes.c:460
+#: src/boxes.c:459
 msgid "ISO 8859-1"
 msgstr "ISO 8859-1"
 
-#: src/boxes.c:460
+#: src/boxes.c:459
 msgid "7 bits"
 msgstr "7 bit"
 
-#: src/boxes.c:467 src/boxes.c:595
+#: src/boxes.c:466 src/boxes.c:594
 msgid "F&ull 8 bits input"
 msgstr "Accetta in &ingresso 8 bit"
 
-#: src/boxes.c:475 src/boxes.c:576
+#: src/boxes.c:474 src/boxes.c:575
 msgid " Display bits "
 msgstr " Mostra bit "
 
-#: src/boxes.c:557 src/boxes.c:582 src/selcodepage.c:70
+#: src/boxes.c:556 src/boxes.c:581 src/selcodepage.c:70
 msgid "Other 8 bit"
 msgstr "Altri 8 bit"
 
-#: src/boxes.c:579
+#: src/boxes.c:578
 msgid "Input / display codepage:"
 msgstr "Ingresso / mostra codepage:"
 
-#: src/boxes.c:598
+#: src/boxes.c:597
 msgid "&Select"
 msgstr "&Seleziona"
 
-#: src/boxes.c:717
+#: src/boxes.c:716
 msgid "Use &passive mode"
 msgstr "Usa modalità &passiva"
 
-#: src/boxes.c:719
+#: src/boxes.c:718
 msgid "&Use ~/.netrc"
 msgstr "&Usa ~/.netrc"
 
-#: src/boxes.c:723
+#: src/boxes.c:722
 msgid "&Always use ftp proxy"
 msgstr "Usa &sempre ftp proxy"
 
-#: src/boxes.c:725
+#: src/boxes.c:724
 msgid "sec"
 msgstr "sec"
 
-#: src/boxes.c:729
+#: src/boxes.c:728
 msgid "ftpfs directory cache timeout:"
 msgstr "Scadenza cache directory ftpfs:"
 
-#: src/boxes.c:733
+#: src/boxes.c:732
 msgid "ftp anonymous password:"
 msgstr "Password ftp anonimo:"
 
-#: src/boxes.c:740
+#: src/boxes.c:739
 msgid "Timeout for freeing VFSs:"
 msgstr "Cadenza svuotamento dei VFS:"
 
-#: src/boxes.c:746
+#: src/boxes.c:745
 msgid " Virtual File System Setting "
 msgstr " Impostazione File System Virtuale (VFS) "
 
-#: src/boxes.c:800
+#: src/boxes.c:799
 msgid "Quick cd"
 msgstr "Cambia dir rapido "
 
-#: src/boxes.c:803
+#: src/boxes.c:802
 msgid "cd"
 msgstr "cd"
 
-#: src/boxes.c:838
+#: src/boxes.c:837
 msgid "Symbolic link filename:"
 msgstr "Nome del collegamento simbolico:"
 
-#: src/boxes.c:842
+#: src/boxes.c:841
 msgid "Existing filename (filename symlink will point to):"
 msgstr "Nome file esistente (sul quale punta il coll. simbolico):"
 
-#: src/boxes.c:849
+#: src/boxes.c:848
 msgid "Symbolic link"
 msgstr "Collegamento simbolico"
 
-#: src/boxes.c:882
+#: src/boxes.c:881
 msgid "Running "
 msgstr "Attivo "
 
-#: src/boxes.c:883 src/find.c:721
+#: src/boxes.c:882 src/find.c:721
 msgid "Stopped"
 msgstr "Sospeso "
 
-#: src/boxes.c:943
+#: src/boxes.c:942
 msgid "&Stop"
 msgstr "&Pausa"
 
-#: src/boxes.c:944
+#: src/boxes.c:943
 msgid "&Resume"
 msgstr "&Continua"
 
-#: src/boxes.c:945
+#: src/boxes.c:944
 msgid "&Kill"
 msgstr "&Ferma"
 
-#: src/boxes.c:982
+#: src/boxes.c:981
 msgid "Background Jobs"
 msgstr "Processi in background"
 
-#: src/boxes.c:1013
+#: src/boxes.c:1012
 msgid "Domain:"
 msgstr "Dominio:"
 
-#: src/boxes.c:1013
+#: src/boxes.c:1012
 msgid "Username:"
 msgstr "Nome utente:"
 
-#: src/boxes.c:1013
+#: src/boxes.c:1012
 msgid "Password:"
 msgstr "Password:"
 
-#: src/boxes.c:1064
+#: src/boxes.c:1063
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "Password per \\\\%s\\%s"
 
-#: src/charsets.c:51 vfs/extfs.c:1279 vfs/sfs.c:346
+#: src/charsets.c:51 vfs/extfs.c:1260 vfs/sfs.c:318
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Attenzione: file %s non trovato\n"
@@ -1460,7 +1460,7 @@ msgstr " Configurazione salvata su ~/"
 msgid " Setup "
 msgstr " Configurazione "
 
-#: src/command.c:168 src/screen.c:2174 src/tree.c:823
+#: src/command.c:177 src/screen.c:2174 src/tree.c:823
 #, c-format
 msgid ""
 " Cannot chdir to \"%s\" \n"
@@ -1469,11 +1469,11 @@ msgstr ""
 " Non posso entrare in `%s' \n"
 " %s "
 
-#: src/command.c:201 src/user.c:694
+#: src/command.c:210 src/user.c:694
 msgid " Cannot execute commands on non-local filesystems"
 msgstr " Non è possibile eseguire comandi su filesystem non locali "
 
-#: src/command.c:210 src/execute.c:182
+#: src/command.c:219 src/execute.c:183
 msgid " The shell is already running a command "
 msgstr " La shell sta già eseguendo un comando "
 
@@ -1537,15 +1537,15 @@ msgstr "&Gruppo"
 msgid "Cannot read directory contents"
 msgstr "Impossibile leggere il contenuto della directory"
 
-#: src/execute.c:132 src/utilunix.c:375
+#: src/execute.c:133 src/utilunix.c:380
 msgid "Press any key to continue..."
 msgstr "Premi un tasto per continuare..."
 
-#: src/execute.c:234
+#: src/execute.c:235
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Premi `exit' per tornare a Midnight Commander"
 
-#: src/execute.c:342
+#: src/execute.c:343
 #, c-format
 msgid " Cannot fetch a local copy of %s "
 msgstr " Impossibile ottenere una copia locale di %s "
@@ -1947,7 +1947,7 @@ msgstr "%o %f \"%s\"%m"
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-#: src/file.c:1676 vfs/fish.c:566
+#: src/file.c:1676 vfs/fish.c:561
 msgid "file"
 msgstr "file"
 
@@ -3556,48 +3556,48 @@ msgstr " Non trovo voci appropriate in %s "
 msgid " User menu "
 msgstr " Menu utente "
 
-#: src/util.c:667 src/util.c:693
+#: src/util.c:671 src/util.c:697
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
-#: src/util.c:668 src/util.c:691
+#: src/util.c:672 src/util.c:695
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
-#: src/utilunix.c:328
+#: src/utilunix.c:333
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s non è una directory\n"
 
-#: src/utilunix.c:330
+#: src/utilunix.c:335
 #, c-format
 msgid "Directory %s is not owned by you\n"
 msgstr "La directory %s non è di Vostra proprietà\n"
 
-#: src/utilunix.c:333
+#: src/utilunix.c:338
 #, c-format
 msgid "Cannot set correct permissions for directory %s\n"
 msgstr "Impossibile impostare correttamente i permessi per la directory %s\n"
 
-#: src/utilunix.c:338
+#: src/utilunix.c:343
 #, c-format
 msgid "Cannot create temporary directory %s: %s\n"
 msgstr "Non posso creare la directory temporanea %s: %s\n"
 
-#: src/utilunix.c:368
+#: src/utilunix.c:373
 #, c-format
 msgid "Temporary files will be created in %s\n"
 msgstr "I file temporanei verranno creati in %s\n"
 
-#: src/utilunix.c:371
+#: src/utilunix.c:376
 msgid "Temporary files will not be created\n"
 msgstr "I file temporanei non verranno creati\n"
 
-#: src/utilunix.c:396
+#: src/utilunix.c:401
 msgid " Pipe failed "
 msgstr " Pipe fallita "
 
-#: src/utilunix.c:400
+#: src/utilunix.c:405
 msgid " Dup failed "
 msgstr " Dup fallita "
 
@@ -3642,8 +3642,8 @@ msgstr "File: %s"
 
 #: src/view.c:790
 #, c-format
-msgid "Offset 0x%08x"
-msgstr "Offset: 0x%08x"
+msgid "Offset 0x%08lx"
+msgstr "Offset 0x%08lx"
 
 #: src/view.c:792
 #, c-format
@@ -4044,81 +4044,81 @@ msgstr "Archivio extfs inconsistente"
 msgid "fish: Disconnecting from %s"
 msgstr "fish: disconnessione da %s"
 
-#: vfs/fish.c:237
+#: vfs/fish.c:232
 msgid "fish: Waiting for initial line..."
 msgstr "fish: attesa linea iniziale..."
 
-#: vfs/fish.c:249
+#: vfs/fish.c:244
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Spiacente, non posso fare connessioni autenticate per adesso."
 
-#: vfs/fish.c:254
+#: vfs/fish.c:249
 msgid " fish: Password required for "
 msgstr " fish: password richiesta per "
 
-#: vfs/fish.c:263
+#: vfs/fish.c:258
 msgid "fish: Sending password..."
 msgstr "fish: spedizione password..."
 
-#: vfs/fish.c:269
+#: vfs/fish.c:264
 msgid "fish: Sending initial line..."
 msgstr "fish: spedizione linea iniziale..."
 
-#: vfs/fish.c:280
+#: vfs/fish.c:275
 msgid "fish: Handshaking version..."
 msgstr "fish: versione handshaking..."
 
-#: vfs/fish.c:294
+#: vfs/fish.c:289
 msgid "fish: Setting up current directory..."
 msgstr "fish: impostazione directory corrente..."
 
-#: vfs/fish.c:296
+#: vfs/fish.c:291
 #, c-format
 msgid "fish: Connected, home %s."
 msgstr "fish: connesso a %s"
 
-#: vfs/fish.c:380
+#: vfs/fish.c:375
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr "fish: lettura directory FTP %s..."
 
-#: vfs/fish.c:482 vfs/ftpfs.c:1276 vfs/undelfs.c:337
+#: vfs/fish.c:477 vfs/ftpfs.c:1277 vfs/undelfs.c:343
 #, c-format
 msgid "%s: done."
 msgstr "%s: fatto."
 
-#: vfs/fish.c:487 vfs/ftpfs.c:1246 vfs/undelfs.c:340
+#: vfs/fish.c:482 vfs/ftpfs.c:1247 vfs/undelfs.c:346
 #, c-format
 msgid "%s: failure"
 msgstr "%s: errore"
 
-#: vfs/fish.c:512
+#: vfs/fish.c:507
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr "fish: memorizza %s: spedizione comando..."
 
-#: vfs/fish.c:553
+#: vfs/fish.c:548
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: lettura locale fallita, spedizione zeri"
 
-#: vfs/fish.c:565
+#: vfs/fish.c:560
 #, c-format
 msgid "fish: storing %s %d (%lu)"
 msgstr "fish: memorizzazione %s %d (%lu)"
 
-#: vfs/fish.c:566
+#: vfs/fish.c:561
 msgid "zeros"
 msgstr "zeri"
 
-#: vfs/fish.c:618
+#: vfs/fish.c:613
 msgid "Aborting transfer..."
 msgstr "Interruzione trasferimento..."
 
-#: vfs/fish.c:627
+#: vfs/fish.c:622
 msgid "Error reported after abort."
 msgstr "Errori dopo l'interruzione."
 
-#: vfs/fish.c:629
+#: vfs/fish.c:624
 msgid "Aborted transfer would be successful."
 msgstr "L'interruzione trasferimento sarebbe riuscita."
 
@@ -4127,7 +4127,7 @@ msgstr "L'interruzione trasferimento sarebbe riuscita."
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: disconnessione da %s"
 
-#: vfs/ftpfs.c:431
+#: vfs/ftpfs.c:433
 msgid " FTP: Password required for "
 msgstr " FTP: password richiesta per "
 
@@ -4152,94 +4152,94 @@ msgstr "Account:"
 msgid "ftpfs: sending user account"
 msgstr "ftpfs: spedizione account utente"
 
-#: vfs/ftpfs.c:494
+#: vfs/ftpfs.c:495
 msgid "ftpfs: logged in"
 msgstr "ftpfs: connessione effettuata"
 
-#: vfs/ftpfs.c:508
+#: vfs/ftpfs.c:509
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: login errato per utente %s "
 
-#: vfs/ftpfs.c:632
+#: vfs/ftpfs.c:633
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: nome host non valido."
 
-#: vfs/ftpfs.c:650
+#: vfs/ftpfs.c:651
 msgid "ftpfs: Invalid host address."
 msgstr "ftpfs: indirizzo host non valido."
 
-#: vfs/ftpfs.c:672
+#: vfs/ftpfs.c:673
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: mi sto connettendo a %s"
 
-#: vfs/ftpfs.c:682
+#: vfs/ftpfs.c:683
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: connessione interrotta dall'utente"
 
-#: vfs/ftpfs.c:684
+#: vfs/ftpfs.c:685
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: connessione al server fallita: %s"
 
-#: vfs/ftpfs.c:725
+#: vfs/ftpfs.c:726
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "In attesa di riprovare...%d (Control-C per annullare)"
 
-#: vfs/ftpfs.c:905
+#: vfs/ftpfs.c:906
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: non è possibile impostare la modalità passiva"
 
-#: vfs/ftpfs.c:984
+#: vfs/ftpfs.c:985
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: interruzione del trasferimento."
 
-#: vfs/ftpfs.c:986
+#: vfs/ftpfs.c:987
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: errore di interruzione: %s"
 
-#: vfs/ftpfs.c:994
+#: vfs/ftpfs.c:995
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: interruzione fallita"
 
-#: vfs/ftpfs.c:1098 vfs/ftpfs.c:1202
+#: vfs/ftpfs.c:1099 vfs/ftpfs.c:1203
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: CWD fallito."
 
-#: vfs/ftpfs.c:1108 vfs/ftpfs.c:1115
+#: vfs/ftpfs.c:1109 vfs/ftpfs.c:1116
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: non posso risolvere i collegamenti simbolici"
 
-#: vfs/ftpfs.c:1166
+#: vfs/ftpfs.c:1167
 msgid "Resolving symlink..."
 msgstr "Sto risolvendo il collegamenti simbolici..."
 
-#: vfs/ftpfs.c:1188
+#: vfs/ftpfs.c:1189
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: lettura directory FTP %s... %s%s"
 
-#: vfs/ftpfs.c:1191
+#: vfs/ftpfs.c:1192
 msgid "(strict rfc959)"
 msgstr "(strettamente rfc959)"
 
-#: vfs/ftpfs.c:1192
+#: vfs/ftpfs.c:1193
 msgid "(chdir first)"
 msgstr "(antepone chdir)"
 
-#: vfs/ftpfs.c:1289
+#: vfs/ftpfs.c:1290
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: fallito; non so dove rileggere"
 
-#: vfs/ftpfs.c:1354
+#: vfs/ftpfs.c:1355
 #, c-format
 msgid "ftpfs: storing file %lu (%lu)"
 msgstr "ftpfs: memorizzazione file %lu (%lu)"
 
-#: vfs/ftpfs.c:1739
+#: vfs/ftpfs.c:1740
 msgid ""
 "~/.netrc file has incorrect mode.\n"
 "Remove password or correct mode."
@@ -4292,7 +4292,7 @@ msgstr " Non riesco a connettermi al server: %s "
 msgid " Too many open connections "
 msgstr " Troppe connessioni aperte "
 
-#: vfs/sfs.c:374
+#: vfs/sfs.c:346
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
@@ -4301,7 +4301,7 @@ msgstr ""
 "Attenzione: linea non valida in %s:\n"
 "%s\n"
 
-#: vfs/sfs.c:386
+#: vfs/sfs.c:358
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
@@ -4376,61 +4376,61 @@ msgstr ""
 "%s\n"
 "non sembra un archivio tar."
 
-#: vfs/undelfs.c:76
+#: vfs/undelfs.c:82
 msgid " undelfs: error "
 msgstr " undelfs: errore "
 
-#: vfs/undelfs.c:183
+#: vfs/undelfs.c:189
 msgid " not enough memory "
 msgstr " memoria insufficente "
 
-#: vfs/undelfs.c:188
+#: vfs/undelfs.c:194
 msgid " while allocating block buffer "
 msgstr " durante l'allocazione buffer blocchi "
 
-#: vfs/undelfs.c:192
+#: vfs/undelfs.c:198
 #, c-format
 msgid " open_inode_scan: %d "
 msgstr " open_inode_scan: %d "
 
-#: vfs/undelfs.c:196
+#: vfs/undelfs.c:202
 #, c-format
 msgid " while starting inode scan %d "
 msgstr " durante inizio scansione inode %d "
 
-#: vfs/undelfs.c:205
+#: vfs/undelfs.c:211
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr "undelfs: caricamento informazioni file eliminati %d inode"
 
-#: vfs/undelfs.c:223
+#: vfs/undelfs.c:229
 #, c-format
 msgid " while calling ext2_block_iterate %d "
 msgstr " durante la chiamata ext2_block_iterate %d "
 
-#: vfs/undelfs.c:235
+#: vfs/undelfs.c:241
 msgid " no more memory while reallocating array "
 msgstr " memoria esaurita durante riallocazione array "
 
-#: vfs/undelfs.c:256
+#: vfs/undelfs.c:262
 #, c-format
 msgid " while doing inode scan %d "
 msgstr " durante scansione inode %d "
 
-#: vfs/undelfs.c:291
+#: vfs/undelfs.c:297
 msgid " Ext2lib error "
 msgstr " Errore ext2lib "
 
-#: vfs/undelfs.c:319 vfs/undelfs.c:639
+#: vfs/undelfs.c:325 vfs/undelfs.c:644
 #, c-format
 msgid " Cannot open file %s "
 msgstr " Non posso aprire il file %s "
 
-#: vfs/undelfs.c:322
+#: vfs/undelfs.c:328
 msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs: lettura bitmap inode..."
 
-#: vfs/undelfs.c:325
+#: vfs/undelfs.c:331
 #, c-format
 msgid ""
 " Cannot load inode bitmap from: \n"
@@ -4439,11 +4439,11 @@ msgstr ""
 " Impossibile caricare bitmap inode da: \n"
 " %s \n"
 
-#: vfs/undelfs.c:328
+#: vfs/undelfs.c:334
 msgid "undelfs: reading block bitmap..."
 msgstr "undelfs: lettura bitmap blocchi..."
 
-#: vfs/undelfs.c:331
+#: vfs/undelfs.c:337
 #, c-format
 msgid ""
 " Cannot load block bitmap from: \n"
@@ -4452,19 +4452,18 @@ msgstr ""
 " Impossibile caricare bitmap blocchi da: \n"
 " %s \n"
 
-#: vfs/undelfs.c:354
+#: vfs/undelfs.c:360
 msgid " vfs_info is not fs! "
 msgstr " vfs_info non è fs! "
 
-#: vfs/undelfs.c:411 vfs/undelfs.c:595
+#: vfs/undelfs.c:416 vfs/undelfs.c:600
 msgid " You have to chdir to extract files first "
 msgstr " Devi prima fare chdir per estrarre i file "
 
-#: vfs/undelfs.c:534
+#: vfs/undelfs.c:539
 msgid " while iterating over blocks "
 msgstr " durante l'iterazione sui blocchi "
 
-#: vfs/vfs.c:881
+#: vfs/vfs.c:880
 msgid "Changes to file lost"
 msgstr "Cambiamenti al file persi"
-
