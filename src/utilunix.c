@@ -325,8 +325,8 @@ mc_tmpdir (void)
 	g_snprintf (buffer, sizeof (buffer), "%s/mc-%s", sys_tmp,
 		pwd->pw_name);
     else
-	g_snprintf (buffer, sizeof (buffer), "%s/mc-%d", sys_tmp,
-		(int) getuid ());
+	g_snprintf (buffer, sizeof (buffer), "%s/mc-%lu", sys_tmp,
+		(unsigned long) getuid ());
 
     canonicalize_pathname (buffer);
 

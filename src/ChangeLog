@@ -1,8 +1,8 @@
 2004-10-23  Roland Illig  <roland.illig@gmx.de>
 
 	* complete.c (environ): Don't declare environ on Cygwin.
-	* utilunix.c (mc_tmpdir): Convert uid to int for pathname
-	of the temporary directory.
+	* utilunix.c (mc_tmpdir): Convert uid to unsigned long for
+	pathname of the temporary directory.
 
 	From Pavel Tsekov <ptsekov gmx net>.
 
