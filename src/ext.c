@@ -421,7 +421,6 @@ regex_check_type (char *filename, int file_len, char *ptr, int *have_type)
 		    /* Skip "filename: " */
 		    content_shift = file_len;
 		    if (content_string[content_shift] == ':') {
-			content_shift++;
 			/* Solaris' file prints tab(s) after ':' */
 			for (content_shift++;
 			     content_string[content_shift] == ' '

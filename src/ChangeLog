@@ -1,3 +1,8 @@
+2003-07-08  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* ext.c (regex_check_type): Handle case when there are no tabs
+	or spaces after the colon.
+
 2003-07-02  Pavel Roskin  <proski@gnu.org>
 
 	* ext.c (regex_check_type): Set content_shift to skip the
