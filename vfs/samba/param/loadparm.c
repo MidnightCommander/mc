@@ -2745,7 +2745,7 @@ void lp_set_name_resolve_order(char *new_order)
 { 
   Globals.szNameResolveOrder = new_order;
 }
-
+#if 0
 /***********************************************************
  Set the flag that says if kernel oplocks are available 
  (called by smbd).
@@ -2756,7 +2756,7 @@ static BOOL kernel_oplocks_available = False;
 void lp_set_kernel_oplocks(BOOL val)
 {
   /*
-   * Only set this to True if kerenl
+   * Only set this to True if kernel
    * oplocks are really available and were
    * turned on in the smb.conf file.
    */
@@ -2776,3 +2776,4 @@ BOOL lp_kernel_oplocks(void)
 {
   return kernel_oplocks_available;
 }
+#endif
