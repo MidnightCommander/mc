@@ -10,7 +10,7 @@ Hint: If your terminal lacks functions keys, use the ESC+number sequence.
 Hint: There is a Midnight Commander URL: http://mc.blackdown.org/mc/
 Hint: The latest version of the Commander is in: ftp://prep.ai.mit.edu/pub/gnu
 Hint: Please send any bug reports to mc-bugs@nuclecu.unam.mx
-Hint: Midnight Commander home site: ftp.nuclecu.unam.mx:/linux/local
+Hint: Midnight Commander home site: ftp://ftp.nuclecu.unam.mx/linux/local
 Hint: Tab changes your current panel.
 Hint: VFS coolness: tap enter on a tar file to examine its contents.
 Hint: We also have a nice manual page.
@@ -39,11 +39,10 @@ Hint: You may specify the editor for F4 with the shell variable EDITOR.
 Hint: You may specify the external viewer with the shell variable PAGER.
 Hint: You can disable all requests for confirmation in Options/Confirmation.
 Hint: Leap to frequently used directories in a single bound with C-\.
-Hint: You can do anonymous FTP with mc by typing 'cd ftp://machine.edu'
+Hint: You can do anonymous FTP with mc by typing 'cd /#ftp:machine.edu'
 Hint: FTP is built in the Midnight Commander, check the File/FTP link menu.
-Hint: If you have mtools installed, try cd a: and cd b: to browse floppies.
-Hint: Alt-t changes quickly the listing mode.
-Hint: You can specify the username when doing ftps: 'cd ftp://user@machine.edu'
+Hint: M-t changes quickly the listing mode.
+Hint: You can specify the username when doing ftps: 'cd /#ftp:user@machine.edu'
 Hint: You can browse RPM files by tapping enter on top of an rpm file.
 Hint: To mark directories on the select dialog box, append a slash.
 Hint: To use the mouse cut and paste may require holding the shift key
