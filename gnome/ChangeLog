@@ -1,5 +1,10 @@
 1999-08-12  Federico Mena Quintero  <federico@redhat.com>
 
+	* gnome-file-property-dialog.c (perm_group_new): If the file
+	belongs to an unknown user/group, use the group's number as a
+	string for the entry box.  BUGFIX: GNOME bug tracker #1414.
+	(perm_owner_new): Do the same thing for the user.
+
 	* gdialogs.c (file_mask_dialog): Destroy the dialog if it was
 	closed by the window manager, as well.
 	(file_op_context_create_ui): Make the operation window modal so

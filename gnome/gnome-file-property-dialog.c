@@ -809,8 +809,12 @@ perm_owner_new (GnomeFilePropertyDialog *fp_dlg)
 	if (passwd) {
 		fp_dlg->user_name = passwd->pw_name;
 		gtk_entry_set_text (GTK_ENTRY (gentry), passwd->pw_name);
-	} else
-		gtk_entry_set_text (GTK_ENTRY (gentry), "<Unknown>");
+	} else {
+		char buf[100];
+
+		g_snprintf (buf, sizeof (buf), _("<Unknown> (%d)"), (int) fp_dlg->st.st_uid);
+		gtk_entry_set_text (GTK_ENTRY (gentry), buf);
+	}
 
 	return gentry;
 }
@@ -891,8 +895,16 @@ perm_group_new (GnomeFilePropertyDialog *fp_dlg)
 		/* we're neither so we just put an entry down */
 		gentry = gtk_entry_new ();
 		gtk_widget_set_sensitive (gentry, FALSE);
+
 		grp = getgrgid (fp_dlg->st.st_gid);
-		gtk_entry_set_text (GTK_ENTRY (gentry), grp->gr_name);
+		if (grp)
+			gtk_entry_set_text (GTK_ENTRY (gentry), grp->gr_name);
+		else {
+			char buf[100];
+
+			g_snprintf (buf, sizeof (buf), _("<Unknown> (%d)"), fp_dlg->st.st_gid);
+			gtk_entry_set_text (GTK_ENTRY (gentry), buf);
+		}
 	}
 	g_free (grpname);
 	return gentry;
