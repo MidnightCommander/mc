@@ -4,7 +4,7 @@
 #include "fileopctx.h"
 #include "background.h"
 
-extern int know_not_what_am_i_doing;
+extern int safe_delete;
 
 struct link;
 

@@ -61,7 +61,7 @@ static struct {
     char   *tk;
 } check_options [] = {
    /* other options */
-   {N_("safe de&Lete"),       &know_not_what_am_i_doing, TOGGLE_VARIABLE,0, "safe-del" },
+   {N_("safe de&Lete"),       &safe_delete,       TOGGLE_VARIABLE,       0, "safe-del" },
    {N_("cd follows lin&Ks"),  &cd_symlinks,       TOGGLE_VARIABLE,       0, "cd-follow" },
    {N_("l&Ynx-like motion"),  &navigate_with_arrows,TOGGLE_VARIABLE,     0, "lynx" },
    {N_("rotatin&G dash"),     &nice_rotating_dash,TOGGLE_VARIABLE,       0, "rotating" },

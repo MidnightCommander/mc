@@ -104,8 +104,8 @@ int verbose = 1;
  */
 int file_op_compute_totals = 1;
 
-/* If on, it gets a little scrict with dangerous operations */
-int know_not_what_am_i_doing = 0;
+/* If on, default for "No" in delete operations */
+int safe_delete = 0;
 
 /* This is a hard link cache */
 struct link {
@@ -1825,7 +1825,7 @@ panel_operate (void *source_panel, FileOperation operation,
 
     /* Show confirmation dialog */
     if (operation == OP_DELETE && confirm_delete) {
-	if (know_not_what_am_i_doing)
+	if (safe_delete)
 	    query_set_sel (1);
 
 	i = query_dialog (_(op_names[operation]), cmd_buf,
@@ -2204,47 +2204,31 @@ files_error (char *format, char *file1, char *file2)
 static int
 real_query_recursive (FileOpContext *ctx, enum OperationMode mode, char *s)
 {
-    char *confirm;
     gchar *text;
 
-    if (ctx->recursive_result < RECURSIVE_ALWAYS){
+    if (ctx->recursive_result < RECURSIVE_ALWAYS) {
 	char *msg =
-	    mode == Foreground ? _("\n   Directory not empty.   \n   Delete it recursively? ")
-	                       : _("\n   Background process: Directory not empty \n   Delete it recursively? ");
+	    mode ==
+	    Foreground ?
+	    _("\n   Directory not empty.   \n"
+	      "   Delete it recursively? ")
+	    : _("\n   Background process: Directory not empty \n"
+		"   Delete it recursively? ");
 	text = g_strconcat (_(" Delete: "), name_trunc (s, 30), " ", NULL);
 
-        if (know_not_what_am_i_doing)
+	if (safe_delete)
 	    query_set_sel (1);
-        ctx->recursive_result = query_dialog (text, msg, D_ERROR, 5,
+	ctx->recursive_result = query_dialog (text, msg, D_ERROR, 5,
 					      _("&Yes"), _("&No"),
 					      _("a&ll"), _("non&E"),
 					      _("&Abort"));
-	
+
 	if (ctx->recursive_result != RECURSIVE_ABORT)
 	    do_refresh ();
 	g_free (text);
-	if (know_not_what_am_i_doing){
-	    if (ctx->recursive_result == RECURSIVE_YES ||
-		ctx->recursive_result == RECURSIVE_ALWAYS){
-		text = g_strconcat (
-		    _(" Type 'yes' if you REALLY want to delete "),
-		    ctx->recursive_result == RECURSIVE_YES
-		    ? name_trunc (s, 19) : _("all the directories "), " ", NULL);
-		confirm = input_dialog (
-		    mode == Foreground ? _(" Recursive Delete ")
-		    : _(" Background process: Recursive Delete "),
-		    text, NULL);
-		do_refresh ();
-		/* TRANSLATORS: user types this text to confirm deletion */
-		if (!confirm || strcmp (confirm, _("yes")))
-		    ctx->recursive_result = RECURSIVE_NEVER;
-		g_free (confirm);
-		g_free (text);
-	    }
-	}
     }
 
-    switch (ctx->recursive_result){
+    switch (ctx->recursive_result) {
     case RECURSIVE_YES:
     case RECURSIVE_ALWAYS:
 	return FILE_CONT;

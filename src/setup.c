@@ -161,7 +161,7 @@ static const struct {
     { "confirm_overwrite", &confirm_overwrite },
     { "confirm_execute", &confirm_execute },
     { "confirm_exit", &confirm_exit },
-    { "safe_delete", &know_not_what_am_i_doing },
+    { "safe_delete", &safe_delete },
     { "mouse_repeat_rate", &mou_auto_repeat },
     { "double_click_speed", &double_click_speed },
 #ifndef HAVE_CHARSET

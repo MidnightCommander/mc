@@ -1,5 +1,9 @@
 2002-10-21  Pavel Roskin  <proski@gnu.org>
 
+	* file.h: Rename know_not_what_am_i_doing to safe_delete.
+	* file.c (real_query_recursive): Don't ask to enter "yes" - it's
+	ugly and requires changing input method in some locales.
+
 	* file.c (real_query_recursive): Default to empty string, not to
 	"no" when asking to enter "yes".  Add note for translators.
 
