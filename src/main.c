@@ -1525,7 +1525,7 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 		    reverse_selection_cmd ();
 		    return MSG_HANDLED;
 		}
-	    } else if (command_prompt && !strlen (cmdline->buffer)) {
+	    } else if (!command_prompt || !strlen (cmdline->buffer)) {
 		/* Special treatement '+', '-', '\', '*' only when this is 
 		 * first char on input line
 		 */
