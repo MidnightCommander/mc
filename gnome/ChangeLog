@@ -1,5 +1,9 @@
 1998-03-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gscreen.c (x_select_item): Make it use GTK_VISIBILITY_FULL
+	instead of a plain boolean value.
+	* gwidget.c (x_listbox_select_nth): Likewise.
+
 	* gscreen.c (filter_items): New global variable full of filters.
 	Please, someone fill in the regexp parts, as I was too lazy to do
 	them :-)

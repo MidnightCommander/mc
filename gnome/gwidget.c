@@ -267,7 +267,7 @@ x_listbox_select_nth (WListbox *l, int nth)
 	clist = GTK_CLIST (l->widget.wdata);
 	
 	gtk_clist_select_row (clist, nth, 0);
-	if (!gtk_clist_row_is_visible (clist, nth))
+	if (gtk_clist_row_is_visible (clist, nth) != GTK_VISIBILITY_FULL)
 		gtk_clist_moveto (clist, nth, 0, 0.5, 0.0);
 	
 	inside = 0;
