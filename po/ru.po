@@ -1,19 +1,21 @@
 # Russian translation of Midnight Commander
-# Copyright (C) 1998-2000 Free Software Foundation, Inc.
+# Copyright (C) 1998-2001 Free Software Foundation, Inc.
 # 
-# Current translator Andrew V. Samoilov <sav@bcs.zp.ua>, 2000
-# Based on work of Valek Filippov <frob@df.ru>, 2000
-# Evgeny Bulgakov <bgav@netvision.net.il>, 1999,
-# Sergey Panov <sipan@mit.edu>, 1999,
-# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999, 
+# Current translator Andrew V. Samoilov <kai@cmail.ru>, 2000, 2001,
+# 	Pavel Roskin <proski@gnu.org>, 2001
+# Based on work of
+# 	Valek Filippov <frob@df.ru>, 2000
+# 	Evgeny Bulgakov <bgav@netvision.net.il>, 1999,
+# 	Sergey Panov <sipan@mit.edu>, 1999,
+# 	Andrew V. Samoilov <sav@bcs.zp.ua>, 1999, 
 # and Alex Tkachenko <alex@bcs.zp.ua>, 1998.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.5.51\n"
+"Project-Id-Version: mc 4.5.55\n"
 "POT-Creation-Date: 2001-09-15 20:20-0400\n"
 "PO-Revision-Date: 2000-08-21 12:24+00:00\n"
-"Last-Translator: Andrew V. Samoilov <sav@bcs.zp.ua>\n"
+"Last-Translator: Andrew V. Samoilov <kai@cmail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=koi8-r\n"
@@ -3721,7 +3723,7 @@ msgid ""
 msgstr ""
 "Чтобы использовать перекодировку, установите\n"
 "кодировку в меню Настройки / Биты символов...!\n"
-"Не забудте сохранить настройки."
+"Не забудьте сохранить настройки."
 
 #: src/slint.c:190
 #, c-format
@@ -4816,7 +4818,7 @@ msgstr " %s при удалении файла %s с удаленной машины "
 #: vfs/smbfs.c:1843
 #, c-format
 msgid " %s renaming files\n"
-msgstr " %s при переименовывании файлов\n"
+msgstr " %s при переименовывании файлa\n"
 
 #: vfs/tar.c:81 vfs/tar.c:98
 #, c-format
