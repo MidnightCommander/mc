@@ -1,0 +1,43 @@
+#!/bin/sh
+#
+# It is the uhafs Valery Kornienkov vlk@st.simbirsk.su 2:5051/30@fidonet
+# ver ? :)
+
+HA=ha # for HA 0.999 Copyright (c) 1995 Harri Hirvola
+      # Source: ftp://sunsite.unc.edu/pub/Linux/compress/ha0999p-linux.tar.gz
+
+mchafs_list ()
+{
+ eval $HA lf $1 2>/dev/null |@AWK@ -v uid=${UID-0} '
+{ date="JanFebMarAprMayJunJulAugSepOctNovDec" }
+/^===========/ {next}
+{
+ if ($5="%" && $8~/DIR|ASC|CPY/) { 
+   split($6, a, "-")
+   split($7, t, ":")
+   filename=$1
+   filesize=$2
+   getline
+   if ($2=="(none)") $2=""
+   path=$2
+   getline
+   if ($1~/^d.*/) next
+   printf "%s %s %-8d %-8d %8d %3s %2d %4d %s:%s %s%s \n",\
+   $1,1,0,0,filesize, substr(date,(a[2]-1)*3+1,3),a[3],a[1],t[1],t[2],\
+   path,filename
+  }
+}' 2>/dev/null
+}
+
+mchafs_copyout ()
+{
+    cd /tmp
+    eval $HA xy $1 $2 >/dev/null 2>&1
+    mv -f $2 $3
+}
+
+case "$1" in
+  list) shift; mchafs_list $1; exit 0;;
+  copyout) shift; mchafs_copyout $1 $2 $3; exit 0;;
+esac
+exit 1
