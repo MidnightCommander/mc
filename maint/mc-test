@@ -47,7 +47,7 @@ mc_cflags=""
 
 mc_ldflags=""
 
-mc_tests="plain charset no_charset vfs no_vfs mcfs no_mcfs samba "\
+mc_tests="plain glib12 charset no_charset vfs no_vfs mcfs no_mcfs samba "\
 "no_samba ext2undel no_ext2undel slang mcslang ncurses maintainer "\
 "no_maintainer i18n no_i18n no_features all_features all_warnings"
 
@@ -338,6 +338,12 @@ confbuild() {
 test_plain() {
 	testname="plain"
 	configure_args=""
+	confbuild
+}
+
+test_glib12() {
+	testname="glib12"
+	configure_args="--with-glib12"
 	confbuild
 }
 
