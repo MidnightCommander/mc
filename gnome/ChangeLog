@@ -1,3 +1,7 @@
+2001-07-12  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.in (EXTRALIBS): Add @LIBICONV@.
+
 2001-07-12  Andrew V. Samoilov <kai@cmail.ru>
 
 	* glayout.c (create_new_menu): Don't release file2 if it is NULL.

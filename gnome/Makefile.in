@@ -23,7 +23,7 @@ LDFLAGS       = $(XLDFLAGS) @GNOME_LIBDIR@ @GNOMEUI_LIBS@
 CORBA_LDFLAGS = $(XLDFLAGS) @GNOME_LIBDIR@ @GNOMEGNORBA_LIBS@
 DEFS = $(XDEFS)
 LIBS = $(XLIBS) @TERMNET@
-EXTRALIBS = -L../vfs @LVFS@ -L../gtkedit -lgtkedit @LINTL@
+EXTRALIBS = -L../vfs @LVFS@ -L../gtkedit -lgtkedit @LINTL@ @LIBICONV@
 DEPLIBS = $(top_builddir)/vfs/@LIBVFS@ \
 	$(top_builddir)/gtkedit/@libgtkedit@ @INTLDEPS@
 INSTALL = @INSTALL@
