@@ -745,7 +745,7 @@ vfs_canon (const char *path)
     }
 }
 
-vfsid
+static vfsid
 vfs_ncs_getid (vfs *nvfs, char *dir, struct vfs_stamping **par)
 {
     vfsid nvfsid;
@@ -1871,4 +1871,18 @@ vfs_translate_url (char *url)
         return  g_strdup ("/#a");
     else
         return g_strdup (url);
+}
+
+
+void
+vfs_release_path (char *dir)
+{
+    struct vfs_class *oldvfs;
+    vfsid oldvfsid;
+    struct vfs_stamping *parent;
+
+    oldvfs = vfs_get_class (dir);
+    oldvfsid = vfs_ncs_getid (oldvfs, dir, &parent);
+    vfs_add_noncurrent_stamps (oldvfs, oldvfsid, parent);
+    vfs_rm_parents (parent);
 }

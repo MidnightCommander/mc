@@ -64,7 +64,7 @@ struct vfs_class {
     int (*lseek) (void *vfs_info, off_t offset, int whence);
     int (*mknod) (vfs *me, char *path, int mode, int dev);
 
-     vfsid (*getid) (vfs *me, char *path, struct vfs_stamping ** parent);
+    vfsid (*getid) (vfs *me, char *path, struct vfs_stamping ** parent);
 
     int (*nothingisopen) (vfsid id);
     void (*free) (vfsid id);
@@ -122,7 +122,6 @@ void vfs_shut (void);
 
 struct vfs_class *vfs_get_class (char *path);
 vfs *vfs_split (char *path, char **inpath, char **op);
-vfsid vfs_ncs_getid (vfs *nvfs, char *dir, struct vfs_stamping **par);
 void vfs_rm_parents (struct vfs_stamping *stamp);
 char *vfs_path (char *path);
 char *vfs_strip_suffix_from_filename (const char *filename);
@@ -143,6 +142,7 @@ void vfs_add_current_stamps (void);
 void vfs_timeout_handler (void);
 void vfs_expire (int);
 int vfs_timeouts (void);
+void vfs_release_path (char *dir);
 
 void vfs_fill_names (void (*)(char *));
 char *vfs_translate_url (char *);
@@ -215,6 +215,7 @@ int mc_munmap (caddr_t addr, size_t len);
 #define vfs_current_is_extfs() 0
 #define vfs_path(x) x
 #define vfs_strip_suffix_from_filename(x) g_strdup(x)
+#define vfs_release_path(x)
 #define mc_close close
 #define mc_read read
 #define mc_write write
