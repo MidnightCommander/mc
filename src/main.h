@@ -166,7 +166,8 @@ void untouch_bar    (void);
 void touch_bar      (void);
 void load_hint      (void);
 
-void print_vfs_message(char *msg, ...);
+void print_vfs_message(char *msg, ...)
+    __attribute__ ((format (printf, 1, 2)));
 
 void edit_user_menu_cmd (void);
 

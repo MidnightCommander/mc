@@ -1,3 +1,7 @@
+2001-10-20  Pavel Roskin  <proski@gnu.org>
+
+	* main.h (print_vfs_message): Specify __attribute__.
+
 2001-10-19  Pavel Roskin  <proski@gnu.org>
 
 	* global.h: Define __attribute__ to an empty string for non-gcc
