@@ -147,19 +147,19 @@ local_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
 }
 
 static int
-local_readlink (struct vfs_class *me, char *path, char *buf, int size)
+local_readlink (struct vfs_class *me, const char *path, char *buf, int size)
 {
     return readlink (path, buf, size);
 }
 
 static int
-local_unlink (struct vfs_class *me, char *path)
+local_unlink (struct vfs_class *me, const char *path)
 {
     return unlink (path);
 }
 
 static int
-local_symlink (struct vfs_class *me, char *n1, char *n2)
+local_symlink (struct vfs_class *me, const char *n1, const char *n2)
 {
     return symlink (n1, n2);
 }
@@ -187,7 +187,7 @@ local_write (void *data, const char *buf, int nbyte)
 }
 
 static int
-local_rename (struct vfs_class *me, char *a, char *b)
+local_rename (struct vfs_class *me, const char *a, const char *b)
 {
     return rename (a, b);
 }
@@ -207,25 +207,25 @@ local_lseek (void *data, off_t offset, int whence)
 }
 
 static int
-local_mknod (struct vfs_class *me, char *path, int mode, int dev)
+local_mknod (struct vfs_class *me, const char *path, int mode, int dev)
 {
     return mknod (path, mode, dev);
 }
 
 static int
-local_link (struct vfs_class *me, char *p1, char *p2)
+local_link (struct vfs_class *me, const char *p1, const char *p2)
 {
     return link (p1, p2);
 }
 
 static int
-local_mkdir (struct vfs_class *me, char *path, mode_t mode)
+local_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 {
     return mkdir (path, mode);
 }
 
 static int
-local_rmdir (struct vfs_class *me, char *path)
+local_rmdir (struct vfs_class *me, const char *path)
 {
     return rmdir (path);
 }

@@ -422,7 +422,7 @@ mcfs_handle_simple_error (int sock, int return_status)
 
 /* Nice wrappers */
 static int
-mcfs_rpc_two_paths (int command, char *s1, char *s2)
+mcfs_rpc_two_paths (int command, const char *s1, const char *s2)
 {
     mcfs_connection *mc;
     char *r1, *r2;
@@ -443,7 +443,7 @@ mcfs_rpc_two_paths (int command, char *s1, char *s2)
 }
 
 static int
-mcfs_rpc_path (int command, char *path)
+mcfs_rpc_path (int command, const char *path)
 {
     mcfs_connection *mc;
     char *remote_file;
@@ -963,7 +963,7 @@ mcfs_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
 }
 
 static int
-mcfs_readlink (struct vfs_class *me, char *path, char *buf, int size)
+mcfs_readlink (struct vfs_class *me, const char *path, char *buf, int size)
 {
     char *remote_file, *stat_str;
     int status, error;
@@ -993,19 +993,19 @@ mcfs_readlink (struct vfs_class *me, char *path, char *buf, int size)
 }
 
 static int
-mcfs_unlink (struct vfs_class *me, char *path)
+mcfs_unlink (struct vfs_class *me, const char *path)
 {
     return mcfs_rpc_path (MC_UNLINK, path);
 }
 
 static int
-mcfs_symlink (struct vfs_class *me, char *n1, char *n2)
+mcfs_symlink (struct vfs_class *me, const char *n1, const char *n2)
 {
     return mcfs_rpc_two_paths (MC_SYMLINK, n1, n2);
 }
 
 static int
-mcfs_rename (struct vfs_class *me, char *a, char *b)
+mcfs_rename (struct vfs_class *me, const char *a, const char *b)
 {
     return mcfs_rpc_two_paths (MC_RENAME, a, b);
 }
@@ -1048,25 +1048,25 @@ mcfs_lseek (void *data, off_t offset, int whence)
 }
 
 static int
-mcfs_mknod (struct vfs_class *me, char *path, int mode, int dev)
+mcfs_mknod (struct vfs_class *me, const char *path, int mode, int dev)
 {
     return mcfs_rpc_path_int_int (MC_MKNOD, path, mode, dev);
 }
 
 static int
-mcfs_mkdir (struct vfs_class *me, char *path, mode_t mode)
+mcfs_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 {
     return mcfs_rpc_path_int (MC_MKDIR, path, mode);
 }
 
 static int
-mcfs_rmdir (struct vfs_class *me, char *path)
+mcfs_rmdir (struct vfs_class *me, const char *path)
 {
     return mcfs_rpc_path (MC_RMDIR, path);
 }
 
 static int
-mcfs_link (struct vfs_class *me, char *p1, char *p2)
+mcfs_link (struct vfs_class *me, const char *p1, const char *p2)
 {
     return mcfs_rpc_two_paths (MC_LINK, p1, p2);
 }
@@ -1075,7 +1075,7 @@ mcfs_link (struct vfs_class *me, char *p1, char *p2)
  * now
  */
 static void
-mcfs_forget (char *path)
+mcfs_forget (const char *path)
 {
     char *host, *user, *pass, *p;
     int port, i, vers;
@@ -1117,7 +1117,7 @@ mcfs_forget (char *path)
 }
 
 static int
-mcfs_setctl (struct vfs_class *me, char *path, int ctlop, void *arg)
+mcfs_setctl (struct vfs_class *me, const char *path, int ctlop, void *arg)
 {
     switch (ctlop) {
     case VFS_SETCTL_FORGET:

@@ -849,7 +849,7 @@ smbfs_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
 }
 
 static int
-smbfs_readlink (struct vfs_class *me, char *path, char *buf, int size)
+smbfs_readlink (struct vfs_class *me, const char *path, char *buf, int size)
 {
 	DEBUG(3, ("smbfs_readlink(path:%s, buf:%s, size:%d)\n", path, buf, size));
 	my_errno = EOPNOTSUPP;
@@ -857,7 +857,7 @@ smbfs_readlink (struct vfs_class *me, char *path, char *buf, int size)
 }
 
 static int
-smbfs_symlink (struct vfs_class *me, char *n1, char *n2)
+smbfs_symlink (struct vfs_class *me, const char *n1, const char *n2)
 {
 	DEBUG(3, ("smbfs_symlink(n1:%s, n2:%s)\n", n1, n2));
 	my_errno = EOPNOTSUPP;
@@ -1608,7 +1608,7 @@ smbfs_lseek (void *data, off_t offset, int whence)
 }
 
 static int
-smbfs_mknod (struct vfs_class *me, char *path, int mode, int dev)
+smbfs_mknod (struct vfs_class *me, const char *path, int mode, int dev)
 {
 	DEBUG(3, ("smbfs_mknod(path:%s, mode:%d, dev:%d)\n", path, mode, dev));
 	my_errno = EOPNOTSUPP;
@@ -1616,54 +1616,56 @@ smbfs_mknod (struct vfs_class *me, char *path, int mode, int dev)
 }
 
 static int
-smbfs_mkdir (struct vfs_class * me, char *path, mode_t mode)
+smbfs_mkdir (struct vfs_class * me, const char *path, mode_t mode)
 {
     smbfs_connection *sc;
     char *remote_file;
+    char *cpath = g_strdup(path);
 
     DEBUG (3, ("smbfs_mkdir(path:%s, mode:%d)\n", path, (int) mode));
     if ((remote_file = smbfs_get_path (&sc, path)) == 0)
 	return -1;
     g_free (remote_file);
-    smbfs_convert_path (&path, FALSE);
+    smbfs_convert_path (&cpath, FALSE);
 
-    if (!cli_mkdir (sc->cli, path)) {
+    if (!cli_mkdir (sc->cli, cpath)) {
 	my_errno = cli_error (sc->cli, NULL, &err, NULL);
 	message (1, MSG_ERROR, _(" Error %s creating directory %s "),
-		    cli_errstr (sc->cli), CNV_LANG (path));
-	g_free (path);
+		    cli_errstr (sc->cli), CNV_LANG (cpath));
+	g_free (cpath);
 	return -1;
     }
-    g_free (path);
+    g_free (cpath);
     return 0;
 }
 
 static int
-smbfs_rmdir (struct vfs_class *me, char *path)
+smbfs_rmdir (struct vfs_class *me, const char *path)
 {
 	smbfs_connection *sc;
 	char *remote_file;
+	char *cpath = g_strdup(path);
 
 	DEBUG(3, ("smbfs_rmdir(path:%s)\n", path));
 	if ((remote_file = smbfs_get_path (&sc, path)) == 0)
 		return -1;
 	g_free (remote_file);
-	smbfs_convert_path(&path, FALSE);
+	smbfs_convert_path(&cpath, FALSE);
 
-	if (!cli_rmdir(sc->cli, path)) {
+	if (!cli_rmdir(sc->cli, cpath)) {
 		my_errno = cli_error(sc->cli, NULL, &err, NULL);
 		message (1, MSG_ERROR, _(" Error %s removing directory %s "), 
-			cli_errstr(sc->cli), CNV_LANG(path));
-		g_free (path);
+			cli_errstr(sc->cli), CNV_LANG(cpath));
+		g_free (cpath);
 		return -1;
 	} 
 
-	g_free (path);
+	g_free (cpath);
 	return 0;
 }
 
 static int
-smbfs_link (struct vfs_class *me, char *p1, char *p2)
+smbfs_link (struct vfs_class *me, const char *p1, const char *p2)
 {
     DEBUG (3, ("smbfs_link(p1:%s, p2:%s)\n", p1, p2));
     my_errno = EOPNOTSUPP;
@@ -1681,7 +1683,7 @@ smbfs_free (vfsid id)
  * now
  */
 static void
-smbfs_forget (char *path)
+smbfs_forget (const char *path)
 {
     char *host, *user, *p;
     int  port, i;
@@ -1716,7 +1718,7 @@ smbfs_forget (char *path)
 }
 
 static int
-smbfs_setctl (struct vfs_class *me, char *path, int ctlop, void *arg)
+smbfs_setctl (struct vfs_class *me, const char *path, int ctlop, void *arg)
 {
     DEBUG (3, ("smbfs_setctl(path:%s, ctlop:%d)\n", path, ctlop));
     switch (ctlop) {
@@ -1801,7 +1803,7 @@ smbfs_open (struct vfs_class *me, const char *file, int flags, int mode)
 }
 
 static int
-smbfs_unlink (struct vfs_class *me, char *path)
+smbfs_unlink (struct vfs_class *me, const char *path)
 {
     smbfs_connection *sc;
     char *remote_file, *p;
@@ -1824,7 +1826,7 @@ smbfs_unlink (struct vfs_class *me, char *path)
 }
 
 static int
-smbfs_rename (struct vfs_class *me, char *a, char *b)
+smbfs_rename (struct vfs_class *me, const char *a, const char *b)
 {
     smbfs_connection *sc;
     char *ra, *rb;

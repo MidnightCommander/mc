@@ -151,7 +151,7 @@ static struct vfs_class vfs_ftpfs_ops;
  */
 
 static char *ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super);
-static int ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super, char *remote_path);
+static int ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super, const char *remote_path);
 static int ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const char *fmt, ...)
     __attribute__ ((format (printf, 4, 5)));
 static int ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super);
@@ -1506,7 +1506,7 @@ static int ftpfs_chown (struct vfs_class *me, const char *path, int owner, int g
 #endif    
 }
 
-static int ftpfs_unlink (struct vfs_class *me, char *path)
+static int ftpfs_unlink (struct vfs_class *me, const char *path)
 {
     return ftpfs_send_command(me, path, "DELE /%s", OPT_FLUSH);
 }
@@ -1523,7 +1523,7 @@ ftpfs_is_same_dir (struct vfs_class *me, struct vfs_s_super *super, const char *
 }
 
 static int
-ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super, char *remote_path)
+ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super, const char *remote_path)
 {
     int r;
     char *p;
@@ -1545,18 +1545,18 @@ ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super, char *rem
     return r;
 }
 
-static int ftpfs_rename (struct vfs_class *me, char *path1, char *path2)
+static int ftpfs_rename (struct vfs_class *me, const char *path1, const char *path2)
 {
     ftpfs_send_command(me, path1, "RNFR /%s", OPT_FLUSH);
     return ftpfs_send_command(me, path2, "RNTO /%s", OPT_FLUSH);
 }
 
-static int ftpfs_mkdir (struct vfs_class *me, char *path, mode_t mode)
+static int ftpfs_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 {
     return ftpfs_send_command(me, path, "MKD /%s", OPT_FLUSH);
 }
 
-static int ftpfs_rmdir (struct vfs_class *me, char *path)
+static int ftpfs_rmdir (struct vfs_class *me, const char *path)
 {
     return ftpfs_send_command(me, path, "RMD /%s", OPT_FLUSH);
 }

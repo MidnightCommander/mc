@@ -48,16 +48,16 @@ struct vfs_class {
     int (*utime) (struct vfs_class *me, const char *path,
 		  struct utimbuf * times);
 
-    int (*readlink) (struct vfs_class *me, /*FIXME:const*/ char *path, char *buf,
+    int (*readlink) (struct vfs_class *me, const char *path, char *buf,
 		     int size);
-    int (*symlink) (struct vfs_class *me, /*FIXME:const*/ char *n1, /*FIXME:const*/ char *n2);
-    int (*link) (struct vfs_class *me, /*FIXME:const*/ char *p1, /*FIXME:const*/ char *p2);
-    int (*unlink) (struct vfs_class *me, /*FIXME:const*/ char *path);
-    int (*rename) (struct vfs_class *me, /*FIXME:const*/ char *p1, /*FIXME:const*/ char *p2);
+    int (*symlink) (struct vfs_class *me, const char *n1, const char *n2);
+    int (*link) (struct vfs_class *me, const char *p1, const char *p2);
+    int (*unlink) (struct vfs_class *me, const char *path);
+    int (*rename) (struct vfs_class *me, const char *p1, const char *p2);
     int (*chdir) (struct vfs_class *me, const char *path);
     int (*ferrno) (struct vfs_class *me);
     int (*lseek) (void *vfs_info, off_t offset, int whence);
-    int (*mknod) (struct vfs_class *me, /*FIXME:const*/ char *path, int mode, int dev);
+    int (*mknod) (struct vfs_class *me, const char *path, int mode, int dev);
 
     vfsid (*getid) (struct vfs_class *me, const char *path);
 
@@ -68,11 +68,11 @@ struct vfs_class {
     int (*ungetlocalcopy) (struct vfs_class *me, const char *filename,
 			   const char *local, int has_changed);
 
-    int (*mkdir) (struct vfs_class *me, /*FIXME:const*/ char *path, mode_t mode);
-    int (*rmdir) (struct vfs_class *me, /*FIXME:const*/ char *path);
+    int (*mkdir) (struct vfs_class *me, const char *path, mode_t mode);
+    int (*rmdir) (struct vfs_class *me, const char *path);
 
     int (*ctl) (void *vfs_info, int ctlop, void *arg);
-    int (*setctl) (struct vfs_class *me, /*FIXME:const*/ char *path, int ctlop,
+    int (*setctl) (struct vfs_class *me, const char *path, int ctlop,
 		   void *arg);
 #ifdef HAVE_MMAP
     caddr_t (*mmap) (struct vfs_class *me, caddr_t addr, size_t len,

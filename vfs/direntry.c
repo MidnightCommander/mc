@@ -672,7 +672,7 @@ vfs_s_fstat (void *fh, struct stat *buf)
 }
 
 static int
-vfs_s_readlink (struct vfs_class *me, char *path, char *buf, int size)
+vfs_s_readlink (struct vfs_class *me, const char *path, char *buf, int size)
 {
     struct vfs_s_inode *ino;
 
@@ -1014,7 +1014,7 @@ vfs_s_ungetlocalcopy (struct vfs_class *me, const char *path,
 }
 
 static int
-vfs_s_setctl (struct vfs_class *me, char *path, int ctlop, void *arg)
+vfs_s_setctl (struct vfs_class *me, const char *path, int ctlop, void *arg)
 {
     switch (ctlop) {
     case VFS_SETCTL_STALE_DATA:

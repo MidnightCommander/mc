@@ -677,7 +677,7 @@ fish_ctl (void *fh, int ctlop, void *arg)
 }
 
 static int
-fish_send_command(struct vfs_class *me, struct vfs_s_super *super, char *cmd, int flags)
+fish_send_command(struct vfs_class *me, struct vfs_s_super *super, const char *cmd, int flags)
 {
     int r;
 
@@ -715,20 +715,22 @@ fish_chmod (struct vfs_class *me, const char *path, int mode)
 }
 
 #define FISH_OP(name, chk, string) \
-static int fish_##name (struct vfs_class *me, char *path1, char *path2) \
+static int fish_##name (struct vfs_class *me, const char *path1, const char *path2) \
 { \
     char buf[BUF_LARGE]; \
-    char *rpath1, *rpath2; \
+    char *rpath1, *rpath2, *mpath1, *mpath2; \
     struct vfs_s_super *super1, *super2; \
-    if (!(rpath1 = vfs_s_get_path_mangle(me, path1, &super1, 0))) \
+    if (!(rpath1 = vfs_s_get_path_mangle(me, mpath1 = g_strdup(path1), &super1, 0))) \
 	return -1; \
-    if (!(rpath2 = vfs_s_get_path_mangle(me, path2, &super2, 0))) \
+    if (!(rpath2 = vfs_s_get_path_mangle(me, mpath2 = g_strdup(path2), &super2, 0))) \
 	return -1; \
     rpath1 = name_quote (rpath1, 0); \
     rpath2 = name_quote (rpath2, 0); \
     g_snprintf(buf, sizeof(buf), string "\n", rpath1, rpath2, rpath1, rpath2); \
     g_free (rpath1); \
     g_free (rpath2); \
+    g_free (mpath1); \
+    g_free (mpath2); \
     return fish_send_command(me, super2, buf, OPT_FLUSH); \
 }
 
@@ -740,16 +742,17 @@ FISH_OP(link,   XTEST, "#LINK /%s /%s\n"
 		       "ln /%s /%s 2>/dev/null\n"
 		       "echo '### 000'" )
 
-static int fish_symlink (struct vfs_class *me, char *setto, char *path)
+static int fish_symlink (struct vfs_class *me, const char *setto, const char *path)
 {
+    char *qsetto;
     PREFIX
-    setto = name_quote (setto, 0);
+    qsetto = name_quote (setto, 0);
     g_snprintf(buf, sizeof(buf),
             "#SYMLINK %s /%s\n"
 	    "ln -s %s /%s 2>/dev/null\n"
 	    "echo '### 000'\n",
-	    setto, rpath, setto, rpath);
-    g_free (setto);
+	    qsetto, rpath, qsetto, rpath);
+    g_free (qsetto);
     POSTFIX(OPT_FLUSH);
 }
 
@@ -787,7 +790,7 @@ fish_chown (struct vfs_class *me, const char *path, int owner, int group)
     POSTFIX(OPT_FLUSH)
 }
 
-static int fish_unlink (struct vfs_class *me, char *path)
+static int fish_unlink (struct vfs_class *me, const char *path)
 {
     PREFIX
     g_snprintf(buf, sizeof(buf),
@@ -798,7 +801,7 @@ static int fish_unlink (struct vfs_class *me, char *path)
     POSTFIX(OPT_FLUSH);
 }
 
-static int fish_mkdir (struct vfs_class *me, char *path, mode_t mode)
+static int fish_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 {
     PREFIX
     g_snprintf(buf, sizeof(buf),
@@ -809,7 +812,7 @@ static int fish_mkdir (struct vfs_class *me, char *path, mode_t mode)
     POSTFIX(OPT_FLUSH);
 }
 
-static int fish_rmdir (struct vfs_class *me, char *path)
+static int fish_rmdir (struct vfs_class *me, const char *path)
 {
     PREFIX
     g_snprintf(buf, sizeof(buf),
