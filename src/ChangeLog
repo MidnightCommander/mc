@@ -1,5 +1,7 @@
 2001-07-14  Pavel Roskin  <proski@gnu.org>
 
+	* panelize.c [HAVE_X]: Disable unused code.
+
 	* main.c [HAVE_X]: Disable Ctrl-X sequences.
 
 	* find.c: Remove code unused in the text edition.

@@ -69,37 +69,36 @@ void do_external_panelize (char *command);
 #define B_ADD		B_USER
 #define B_REMOVE        B_USER + 1
 
+#ifndef HAVE_X
 static WListbox *l_panelize;
-
 static Dlg_head *panelize_dlg;
-
+static int last_listitem;
 static WInput *pname;
 
-static char *panelize_section = "Panelize";
-
-static int last_listitem;
-
-struct {
+static struct {
     int ret_cmd, flags, y, x;
     char *text;
     char *tkname;
-} panelize_but[BUTTONS] = {
+} panelize_but [BUTTONS] = {
     { B_CANCEL, NORMAL_BUTTON, 0, 53, N_("&Cancel"),  "c"},
     { B_ADD, NORMAL_BUTTON,    0, 28, N_("&Add new"), "a"},
     { B_REMOVE, NORMAL_BUTTON, 0, 16, N_("&Remove"),  "r"},
     { B_ENTER, DEFPUSH_BUTTON, 0,  0, N_("Pane&lize"),"l"},
 };
+#endif /* !HAVE_X */
+
+static char *panelize_section = "Panelize";
 
 /* Directory panelize */
-static struct panelize{
+static struct panelize {
     char *command;
     char *label;
     struct panelize *next;
 } *panelize = NULL;
 
+#ifndef HAVE_X
 static char* panelize_title = N_(" External panelize ");
 
-#ifndef HAVE_X
 static void
 panelize_refresh (void)
 {
@@ -113,7 +112,6 @@ panelize_refresh (void)
     dlg_move (panelize_dlg, 1, (panelize_dlg->cols - strlen(panelize_title)) / 2);
     addstr (panelize_title);
 }
-#endif
 
 static void
 update_command (void)
@@ -131,11 +129,9 @@ static int
 panelize_callback (Dlg_head * h, int Par, int Msg)
 {
     switch (Msg) {
-#ifndef HAVE_X    
     case DLG_DRAW:
 	panelize_refresh ();
 	break;
-#endif	
 
     case DLG_POST_KEY:
 	/* fall */
@@ -224,6 +220,7 @@ static void panelize_done (void)
     destroy_dlg (panelize_dlg);
     repaint_screen ();
 }
+#endif /* !HAVE_X */
 
 static void add2panelize (char *label, char *command)
 {
@@ -251,6 +248,7 @@ static void add2panelize (char *label, char *command)
     }
 }
 
+#ifndef HAVE_X
 void
 add2panelize_cmd (void)
 {
@@ -336,6 +334,7 @@ external_panelize (void)
 
     panelize_done ();
 }
+#endif /* !HAVE_X */
 
 void load_panelize (void)
 {
