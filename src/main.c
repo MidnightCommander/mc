@@ -1735,33 +1735,33 @@ init_labels (Widget *paneletc)
 
 static const key_map ctl_x_map [] = {
     { XCTRL('c'),   (callfn) quit_cmd },
-#ifdef USE_VFS
-    { 'a',          reselect_vfs },
-#endif
     { 'd',          compare_dirs_cmd },
 #ifndef HAVE_GNOME
+#ifdef USE_VFS
+    { 'a',          reselect_vfs },
+#endif /* USE_VFS */
     { 'p',          copy_current_pathname },
     { XCTRL('p'),   copy_other_pathname },
     { 't',          copy_current_tagged },
     { XCTRL('t'),   copy_other_tagged },
     { 'c',          chmod_cmd },
-#endif
+#endif /* !HAVE_GNOME */
 #ifndef OS2_NT
 #ifndef HAVE_GNOME
     { 'o',          chown_cmd },
-#endif
+#endif /* !HAVE_GNOME */
     { 'l',          link_cmd },
     { XCTRL('l'),   other_symlink_cmd },
     { 's',          symlink_cmd },
     { XCTRL('s'),   edit_symlink_cmd },
     { 'r',          copy_current_readlink },
     { XCTRL('r'),   copy_other_readlink },
-#endif
+#endif /* !OS2_NT */
 #ifndef HAVE_GNOME
     { 'i',          info_cmd_no_menu },
     { 'q',          quick_cmd_no_menu },
-#endif
     { 'h',          add2hotlist_cmd },
+#endif /* !HAVE_GNOME */
     { '!',          external_panelize },
 #if defined(WITH_BACKGROUND) && !defined(HAVE_GNOME)
     { 'j',          jobs_cmd },
@@ -1930,8 +1930,10 @@ static void done_mc ()
      */
     if (auto_save_setup)
 	save_setup ();   /* does also call save_hotlist */
+#ifndef HAVE_X
     else
 	save_hotlist();
+#endif /* !HAVE_X */
     done_screen ();
     vfs_add_current_stamps ();
     if (xterm_flag && xterm_hintbar)

@@ -1,3 +1,12 @@
+2001-06-02  Pavel Roskin  <proski@gnu.org>
+
+	* cmd.c (free_vfs_now) [HAVE_GNOME]: Eliminate.
+	(reselect_vfs) [HAVE_GNOME]: Likewise.
+	* main.c (ctl_x_map) [HAVE_GNOME]: Disable add2hotlist_cmd.
+	(done_mc) [HAVE_X]: Don't call save_hotlist().
+	* setup.c (save_setup) [HAVE_X]: Likewise.
+	(done_setup) [HAVE_X]: Don't call done_hotlist().
+
 2001-06-01  Pavel Roskin  <proski@gnu.org>
 
 	* hotlist.c [HAVE_X]: Don't use ctrl_pressed().

@@ -714,7 +714,6 @@ void quick_chdir_cmd (void)
 	    message (1, MSG_ERROR, _("Could not change directory") );
     g_free (target);
 }
-#endif /* !HAVE_GNOME */
 
 #ifdef USE_VFS
 void free_vfs_now (void)
@@ -735,6 +734,7 @@ void reselect_vfs (void)
     g_free (target);
 }
 #endif /* USE_VFS */
+#endif /* !HAVE_GNOME */
 
 static int compare_files (char *name1, char *name2, long size)
 {

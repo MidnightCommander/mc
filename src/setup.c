@@ -425,7 +425,9 @@ save_setup (void)
     if (get_current_panel () != NULL)
 	    WritePrivateProfileString ("Dirs", "current_is_left",
 				       get_current_index () == 0 ? "1" : "0", profile);
+#ifndef HAVE_X
     save_hotlist ();
+#endif /* !HAVE_X */
     save_panelize ();
     save_panel_types ();
 /*     directory_history_save (); */
@@ -659,7 +661,9 @@ load_anon_passwd ()
 void done_setup (void)
 {
     g_free (profile_name);
+#ifndef HAVE_X
     done_hotlist ();
+#endif /* HAVE_X */
     done_panelize ();
 /*    directory_history_free (); */
 }
