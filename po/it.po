@@ -3196,7 +3196,7 @@ msgstr " Conferme "
 
 #: src/boxes.c:459
 msgid "Full 8 bits output"
-msgstr "Uscita completa a 8 bit"
+msgstr "Uscita completa 8 bit"
 
 #: src/boxes.c:459
 msgid "ISO 8859-1"
@@ -6334,83 +6334,83 @@ msgstr "&Storico comandi"
 #. to define f0 as well. Also, it makes Learn keys a bunch of problems :(
 #: src/win.c:224
 msgid "Function key 1"
-msgstr "Tasto funzione F1"
+msgstr "Tasto Funzione 1"
 
 #: src/win.c:225
 msgid "Function key 2"
-msgstr "Tasto funzione F2"
+msgstr "Tasto Funzione 2"
 
 #: src/win.c:226
 msgid "Function key 3"
-msgstr "Tasto funzione F3"
+msgstr "Tasto Funzione 3"
 
 #: src/win.c:227
 msgid "Function key 4"
-msgstr "Tasto funzione F4"
+msgstr "Tasto Funzione 4"
 
 #: src/win.c:228
 msgid "Function key 5"
-msgstr "Tasto funzione F5"
+msgstr "Tasto Funzione 5"
 
 #: src/win.c:229
 msgid "Function key 6"
-msgstr "Tasto funzione F6"
+msgstr "Tasto Funzione 6"
 
 #: src/win.c:230
 msgid "Function key 7"
-msgstr "Tasto funzione F7"
+msgstr "Tasto Funzione 7"
 
 #: src/win.c:231
 msgid "Function key 8"
-msgstr "Tasto funzione F8"
+msgstr "Tasto Funzione 8"
 
 #: src/win.c:232
 msgid "Function key 9"
-msgstr "Tasto funzione F9"
+msgstr "Tasto Funzione 9"
 
 #: src/win.c:233
 msgid "Function key 10"
-msgstr "Tasto funzione F10"
+msgstr "Tasto Funzione 10"
 
 #: src/win.c:234
 msgid "Function key 11"
-msgstr "Tasto funzione F11"
+msgstr "Tasto Funzione 11"
 
 #: src/win.c:235
 msgid "Function key 12"
-msgstr "Tasto funzione F12"
+msgstr "Tasto Funzione 12"
 
 #: src/win.c:236
 msgid "Function key 13"
-msgstr "Tasto funzione F13"
+msgstr "Tasto Funzione 13"
 
 #: src/win.c:237
 msgid "Function key 14"
-msgstr "Tasto funzione F14"
+msgstr "Tasto Funzione 14"
 
 #: src/win.c:238
 msgid "Function key 15"
-msgstr "Tasto funzione F15"
+msgstr "Tasto Funzione 15"
 
 #: src/win.c:239
 msgid "Function key 16"
-msgstr "Tasto funzione F16"
+msgstr "Tasto Funzione 16"
 
 #: src/win.c:240
 msgid "Function key 17"
-msgstr "Tasto funzione F17"
+msgstr "Tasto Funzione 17"
 
 #: src/win.c:241
 msgid "Function key 18"
-msgstr "Tasto funzione F18"
+msgstr "Tasto Funzione 18"
 
 #: src/win.c:242
 msgid "Function key 19"
-msgstr "Tasto funzione F19"
+msgstr "Tasto Funzione 19"
 
 #: src/win.c:243
 msgid "Function key 20"
-msgstr "Tasto funzione F20"
+msgstr "Tasto Funzione 20"
 
 #: src/win.c:244
 msgid "Backspace key"
@@ -6422,31 +6422,31 @@ msgstr "Tasto Fine"
 
 #: src/win.c:246
 msgid "Up arrow key"
-msgstr "Freccia su"
+msgstr "Freccia Su"
 
 #: src/win.c:247
 msgid "Down arrow key"
-msgstr "Freccia giu"
+msgstr "Freccia Giù"
 
 #: src/win.c:248
 msgid "Left arrow key"
-msgstr "Freccia sinistra"
+msgstr "Freccia Sinistra"
 
 #: src/win.c:249
 msgid "Right arrow key"
-msgstr "Freccia destra"
+msgstr "Freccia Destra"
 
 #: src/win.c:250
 msgid "Home key"
-msgstr "Tasto home"
+msgstr "Tasto Inizio"
 
 #: src/win.c:251
 msgid "Page Down key"
-msgstr "Tasto pagina giu"
+msgstr "Tasto Pag. giù"
 
 #: src/win.c:252
 msgid "Page Up key"
-msgstr "tasto Pagina su"
+msgstr "Tasto Pagina su"
 
 #: src/win.c:253
 msgid "Insert key"
@@ -6454,11 +6454,11 @@ msgstr "Tasto Ins"
 
 #: src/win.c:254
 msgid "Delete key"
-msgstr "Tasto delete"
+msgstr "Tasto Canc"
 
 #: src/win.c:255
 msgid "Completion/M-tab"
-msgstr "Completion/M-Tab"
+msgstr "Completam./M-Tab"
 
 #: src/win.c:256
 msgid "+ on keypad"
