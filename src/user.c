@@ -32,6 +32,9 @@
 #include "user.h"
 #include "layout.h"
 #include "setup.h"
+
+#include "edit/edit.h"		/* BLOCK_FILE */
+#include "edit/edit-widget.h"	/* WEdit */
 #include "../vfs/vfs.h"
 
 /* For the simple listbox manager */
@@ -170,7 +173,7 @@ strip_ext(char *ss)
 }
 
 char *
-expand_format (WEdit * edit_widget, char c, int quote)
+expand_format (struct WEdit *edit_widget, char c, int quote)
 {
     WPanel *panel;
     char *(*quote_func) (const char *, int);
@@ -665,7 +668,8 @@ menu_file_own(char* path)
  * If edit_widget is NULL then we are called from the mc menu,
  * otherwise we are called from the mcedit menu.
  */
-void user_menu_cmd (WEdit *edit_widget)
+void
+user_menu_cmd (struct WEdit *edit_widget)
 {
     char *p;
     char *data, **entries;

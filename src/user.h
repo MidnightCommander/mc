@@ -2,10 +2,10 @@
 #define __USER_H
 
 #include "panel.h"
-#include "edit/edit-widget.h"
 
-void user_menu_cmd (WEdit *edit_widget);
-char *expand_format (WEdit *edit_widget, char c, int quote);
+struct WEdit;
+void user_menu_cmd (struct WEdit *edit_widget);
+char *expand_format (struct WEdit *edit_widget, char c, int quote);
 int check_format_view (const char *);
 int check_format_var (const char *, char **);
 int check_format_cd (const char *);

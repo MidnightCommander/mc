@@ -1,5 +1,8 @@
 2002-11-28  Pavel Roskin  <proski@gnu.org>
 
+	* user.h: Don't include edit/edit-widget.h.
+	* user.c: Include edit/edit-widget.h and edit/edit.h.
+
 	* slint.c (getch): Return -1, not SLANG_GETKEY_ERROR, otherwise
 	get_key_code() crashes when calling isalpha().
 
