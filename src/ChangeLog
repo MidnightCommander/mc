@@ -1,3 +1,10 @@
+2002-09-11  Pavel Roskin  <proski@gnu.org>
+
+	* utilunix.c (mc_tmpdir): New function that returns temporary
+	directory for mc.
+	* util.c (mc_mkstemps): Use mc_tmpdir().
+	* main.c (main): Call mc_tmpdir().
+
 2002-09-10  Pavel Roskin  <proski@gnu.org>
 
 	* util.c (trim): Handle short strings even better - don't use

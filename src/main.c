@@ -2449,7 +2449,10 @@ main (int argc, char *argv [])
 
     /* Initialize list of all user group for timur_clr_mode */
     init_groups ();
-    
+
+    /* Set up temporary directory */
+    mc_tmpdir ();
+
     OS_Setup ();
 
     /* This variable is used by the subshell */

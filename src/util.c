@@ -1205,15 +1205,8 @@ int mc_mkstemps(char **pname, const char *prefix, const char *suffix)
     int count;
 
     if (strchr(prefix, PATH_SEP) == NULL) {
-	char *tmpdir;
-
-	tmpdir = getenv("TMPDIR");
-	if (!tmpdir) {
-	    tmpdir = TMPDIR_DEFAULT;
-	}
-
 	/* Add prefix first to find the position of XXXXXX */
-	tmpbase = concat_dir_and_file (tmpdir, prefix);
+	tmpbase = concat_dir_and_file (mc_tmpdir (), prefix);
     } else {
 	tmpbase = g_strdup (prefix);
     }

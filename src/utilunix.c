@@ -298,6 +298,44 @@ char *tilde_expand (const char *directory)
 }
 
 
+/*
+ * Return the directory where mc should keep its temporary files.
+ * This directory is (in Bourne shell terms) "${TMPDIR=/tmp}-$USER"
+ * When called the first time, the directory is created if needed.
+ * The first call should be done early, since we are using fprintf()
+ * and not message() to report possible problems.
+ */
+const char *
+mc_tmpdir (void)
+{
+    static char tmpdir[64];
+    const char *sys_tmp;
+    struct passwd *pwd;
+
+    if (*tmpdir)
+	return tmpdir;
+
+    sys_tmp = getenv ("TMPDIR");
+    if (!sys_tmp) {
+	sys_tmp = TMPDIR_DEFAULT;
+    }
+
+    pwd = getpwuid (getuid ());
+    g_snprintf (tmpdir, sizeof (tmpdir), "%s/mc-%s", sys_tmp,
+		pwd->pw_name);
+    canonicalize_pathname (tmpdir);
+
+    /* No recursion or VFS here.  If $TMPDIR is missing, exit.  */
+    if (mkdir (tmpdir, 0700) != 0 && errno != EEXIST) {
+	fprintf (stderr, _("Cannot create temporary directory %s: %s\n"),
+		 tmpdir, unix_error_string (errno));
+	exit (1);
+    }
+
+    return tmpdir;
+}
+
+
 /* Pipes are guaranteed to be able to hold at least 4096 bytes */
 /* More than that would be unportable */
 #define MAX_PIPE_SIZE 4096

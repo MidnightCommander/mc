@@ -88,6 +88,7 @@ char *canonicalize_pathname (char *);
 
 /* Misc Unix functions */
 char *get_current_wd (char *buffer, int size);
+const char *mc_tmpdir (void);
 int my_mkdir (char *s, mode_t mode);
 int my_rmdir (char *s);
 
