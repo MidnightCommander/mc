@@ -1,7 +1,7 @@
 # Slovenian translation file for mc.
 # Copyright (C) 2000 Free Software Foundation, Inc.
 # Andraz Tori <andraz.tori1@guest.arnes.si> 2000
-#
+
 msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
