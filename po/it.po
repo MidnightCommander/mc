@@ -134,7 +134,7 @@ msgstr "Ignora maiuscole/minuscole."
 
 #: gnome/gcmd.c:298
 msgid "Sort files by "
-msgstr "Ordina files per "
+msgstr "Ordina file per "
 
 #: gnome/gcmd.c:303 gnome/gcustom-layout.c:41 src/chmod.c:150 src/screen.c:413
 msgid "Name"
@@ -273,7 +273,7 @@ msgstr ""
 
 #: gnome/gcmd.c:917 src/cmd.c:543 src/cmd.c:594
 msgid "  Malformed regular expression  "
-msgstr " Espressione regolare errata "
+msgstr " Espressione regolare malformata "
 
 #: gnome/gcmd.c:962
 msgid "Creating a desktop link"
@@ -513,7 +513,7 @@ msgstr "Sto eliminando: "
 
 #: gnome/gdialogs.c:371
 msgid "Files Exist"
-msgstr "Il file esiste"
+msgstr "I file esistono"
 
 #: gnome/gdialogs.c:386
 msgid ""
@@ -545,7 +545,7 @@ msgstr "Solo se la dimensione è diversa."
 
 #: gnome/gdialogs.c:441
 msgid "All files."
-msgstr "Tutti i files."
+msgstr "Tutti i file."
 
 #: gnome/gdialogs.c:481
 msgid "File Exists"
@@ -809,7 +809,7 @@ msgstr "_Copia..."
 
 #: gnome/glayout.c:389
 msgid "Copy files"
-msgstr "Copia files"
+msgstr "Copia file"
 
 #: gnome/glayout.c:390 gnome/gscreen.c:2086
 msgid "_Delete..."
@@ -825,7 +825,7 @@ msgstr "_Sposta..."
 
 #: gnome/glayout.c:391
 msgid "Rename or move files"
-msgstr "Rinomina o sposta files"
+msgstr "Rinomina o sposta file"
 
 #: gnome/glayout.c:393
 msgid "Show directory sizes"
@@ -857,15 +857,15 @@ msgstr "_Seleziona file..."
 
 #: gnome/glayout.c:404
 msgid "Select a group of files"
-msgstr "Seleziona un gruppo di files"
+msgstr "Seleziona un gruppo di file"
 
 #: gnome/glayout.c:405
 msgid "_Invert Selection"
-msgstr "_Inverti selezione files"
+msgstr "_Inverti selezione file"
 
 #: gnome/glayout.c:405
 msgid "Reverses the list of tagged files"
-msgstr "Inverti selezione files"
+msgstr "Inverti la selezione file"
 
 #: gnome/glayout.c:408 gtkedit/editwidget.c:1099 src/view.c:2083
 msgid "Search"
@@ -905,7 +905,7 @@ msgstr "_Cerca File"
 
 #: gnome/glayout.c:429
 msgid "Locate files on disk"
-msgstr "Cerca files su disco"
+msgstr "Cerca file su disco"
 
 #. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
 #: gnome/glayout.c:432
@@ -1073,20 +1073,20 @@ msgstr "Dimensione file: "
 
 #: gnome/gnome-file-property-dialog.c:238
 msgid " bytes"
-msgstr " bytes"
+msgstr " byte"
 
 #: gnome/gnome-file-property-dialog.c:242
 msgid " KBytes  ("
-msgstr " KBytes  ("
+msgstr " KByte ("
 
 #: gnome/gnome-file-property-dialog.c:243
 #: gnome/gnome-file-property-dialog.c:249
 msgid " bytes)"
-msgstr " bytes)"
+msgstr " byte)"
 
 #: gnome/gnome-file-property-dialog.c:248
 msgid " MBytes  ("
-msgstr " MBytes  ("
+msgstr " MByte ("
 
 #: gnome/gnome-file-property-dialog.c:256
 msgid "File Size: N/A"
@@ -1336,7 +1336,7 @@ msgstr "Proprietà..."
 
 #: gnome/gprefs.c:92
 msgid "Show backup files"
-msgstr "mostra files di backup"
+msgstr "Mostra file di backup"
 
 #: gnome/gprefs.c:96
 msgid "Show hidden files"
@@ -1344,7 +1344,7 @@ msgstr "Mostra file nascosti"
 
 #: gnome/gprefs.c:100
 msgid "Mix files and directories"
-msgstr "Mescola files e directory"
+msgstr "Mescola file e directory"
 
 #: gnome/gprefs.c:104
 msgid "Use shell patterns instead of regular expressions"
@@ -1388,7 +1388,7 @@ msgstr "Visualizzazione rapida directory"
 
 #: gnome/gprefs.c:155
 msgid "Compute totals before copying files"
-msgstr "Calcola totali prima di copiare i files"
+msgstr "Calcola totali prima di copiare i file"
 
 #: gnome/gprefs.c:159
 msgid "FTP directory cache timeout :"
@@ -1486,12 +1486,12 @@ msgstr "Cerca: %s"
 #: gnome/gscreen.c:1630
 #, c-format
 msgid "%s bytes in %d file"
-msgstr " %s bytes in %d file"
+msgstr " %s byte in %d file"
 
 #: gnome/gscreen.c:1630
 #, c-format
 msgid "%s bytes in %d files"
-msgstr "%s bytes in %d file"
+msgstr "%s byte in %d file"
 
 #: gnome/gscreen.c:1656 src/screen.c:688
 msgid "<readlink failed>"
@@ -1507,7 +1507,7 @@ msgstr "Directory home"
 
 #: gnome/gscreen.c:2087
 msgid "Rename or move directory"
-msgstr "Rinomina o sposta files"
+msgstr "Rinomina o sposta file"
 
 #: gnome/gscreen.c:2245
 msgid "Back"
@@ -1576,7 +1576,7 @@ msgstr "Col %d"
 #: gnome/gview.c:142 src/view.c:734
 #, c-format
 msgid "%s bytes"
-msgstr "%s bytes"
+msgstr "%s byte"
 
 #: gnome/gview.c:306
 msgid "_Goto line"
@@ -1718,7 +1718,7 @@ msgid ""
 " Increase edit.h:MAXBUF and recompile the editor. "
 msgstr ""
 " \n"
-" Incrementa la variabile di edit.h:MAXBUF e ricompia l'editor"
+"Incrementare MAXBUF in edit.h e ricompilare l'editor."
 
 #: gtkedit/edit.c:311 gtkedit/edit.c:347
 msgid " Error allocating memory "
@@ -1863,7 +1863,7 @@ msgid ""
 " Continue discards these changes. "
 msgstr ""
 " Il testo corrente è stato modificato senza salvare \n"
-" Continuando si perdono tutte le modiiche. "
+" Continuando si perdono tutte le modifiche. "
 
 #: gtkedit/editcmd.c:836 gtkedit/editcmd.c:869 gtkedit/editcmd.c:1020
 msgid "Continue"
@@ -1880,7 +1880,7 @@ msgstr " Errore nell'apertura del file in lettura "
 
 #: gtkedit/editcmd.c:1020 gtkedit/editcmd.c:1117
 msgid " Block is large, you may not be able to undo this action. "
-msgstr " Il blocco è molto grande, non riuscirai ad usare l'undo. "
+msgstr " Il blocco è grande, potresti non riuscire ad annullare l'azione. "
 
 #: gtkedit/editcmd.c:1117
 msgid " Continue "
@@ -2123,7 +2123,7 @@ msgstr "Annulla uscita"
 #: src/filegui.c:603 src/hotlist.c:1035 src/main.c:858 src/screen.c:2165
 #: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:404
 msgid "&Yes"
-msgstr "&Si"
+msgstr " &Sì"
 
 #: gtkedit/editcmd.c:2288 src/cmd.c:249 src/file.c:1878 src/file.c:2252
 #: src/filegui.c:602 src/hotlist.c:1035 src/main.c:858 src/screen.c:2165
@@ -2805,7 +2805,7 @@ msgstr "Inserisci testo da un file"
 
 #: gtkedit/gtkedit.c:1297
 msgid "Copy to file"
-msgstr "Copia in files"
+msgstr "Copia in file"
 
 #: gtkedit/gtkedit.c:1297
 msgid "copy a block to a file"
@@ -2965,7 +2965,7 @@ msgstr "Processo in background"
 
 #: src/background.c:287 src/file.c:2192
 msgid " Background process error "
-msgstr " Errore sul processo in background"
+msgstr " Errore del processo in background"
 
 #: src/background.c:294
 msgid " Child died unexpectedly "
@@ -2977,15 +2977,15 @@ msgstr " Errore sconosciuto nel processo figlio "
 
 #: src/background.c:311
 msgid " Background protocol error "
-msgstr " Errore di protocollo nel processo in background "
+msgstr " Errore del protocollo in background "
 
 #: src/background.c:312
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
 msgstr ""
-" Il processo in background ha richiesto diversi argomenti \n"
-" che possiamo eseguire. \n"
+" Il processo in background ha richiesto più argomenti di \n"
+" quelli che si possono gestire. \n"
 
 #: src/boxes.c:63
 msgid " Listing mode "
@@ -3061,15 +3061,15 @@ msgstr "ISO 8859-1"
 
 #: src/boxes.c:461
 msgid "7 bits"
-msgstr "7 bits"
+msgstr "7 bit"
 
 #: src/boxes.c:468
 msgid "F&ull 8 bits input"
-msgstr "Accetta in &Ingresso 8 bits"
+msgstr "Accetta in &Ingresso 8 bit"
 
 #: src/boxes.c:476
 msgid " Display bits "
-msgstr " Mostra bits "
+msgstr " Mostra bit "
 
 #: src/boxes.c:651
 msgid "&Always use ftp proxy"
@@ -3380,7 +3380,7 @@ msgstr "&Home"
 
 #: src/cmd.c:853
 msgid " Compare directories "
-msgstr " Conftonta directories"
+msgstr " Confronta directory"
 
 #: src/cmd.c:853
 msgid " Select compare method: "
@@ -3546,7 +3546,7 @@ msgid ""
 " Can't chdir to '%s' \n"
 " %s "
 msgstr ""
-" Non posso cambiare directory ( '%s') \n"
+" Non posso entrare in '%s' \n"
 " %s "
 
 #: src/command.c:198
@@ -3641,7 +3641,7 @@ msgid ""
 " Can't generate unique filename \n"
 " %s "
 msgstr ""
-" Non posso aprire il file %s \n"
+" Non posso creare nomefile unico \n"
 " %s "
 
 #: src/ext.c:150 src/user.c:511
@@ -3650,12 +3650,12 @@ msgid ""
 " Can't create temporary command file \n"
 " %s "
 msgstr ""
-"Non posso creare un file temporaneo di comandi \n"
+"Non posso creare file comandi temporaneo \n"
 " %s "
 
 #: src/ext.c:165 src/user.c:533
 msgid " Parameter "
-msgstr "Parametro"
+msgstr " Parametro "
 
 #: src/ext.c:315
 msgid " Can't execute commands on a Virtual File System directory "
@@ -4065,7 +4065,7 @@ msgstr "file"
 
 #: src/file.c:1703
 msgid "files"
-msgstr "files"
+msgstr "file"
 
 #: src/file.c:1703
 msgid "directory"
@@ -4077,19 +4077,19 @@ msgstr "directory"
 
 #: src/file.c:1704
 msgid "files/directories"
-msgstr "files/directory"
+msgstr "file/directory"
 
 #: src/file.c:1704
 msgid " with source mask:"
-msgstr " con maschera:"
+msgstr " con maschera sorgente:"
 
 #: src/file.c:1856
 msgid " Can't operate on \"..\"! "
-msgstr " Non posso operare su \"..\" "
+msgstr " Non posso operare su \"..\"! "
 
 #: src/file.c:1875 src/screen.c:2117
 msgid "Yes"
-msgstr "Si"
+msgstr "Sì"
 
 #: src/file.c:1875 src/screen.c:2117
 msgid "No"
@@ -4112,7 +4112,8 @@ msgstr " Operazione su file sconosciuta "
 msgid ""
 " Destination \"%s\" must be a directory \n"
 " %s "
-msgstr " La destinazione `%s' deve essere una directory "
+msgstr " La destinazione \"%s\" deve essere una directory \n"
+" %s "
 
 #: src/file.c:2193
 msgid "&Retry"
@@ -4152,7 +4153,7 @@ msgstr "non&E"
 
 #: src/file.c:2263
 msgid " Type 'yes' if you REALLY want to delete "
-msgstr " Batti `si' se vuoi REALMENTE cancellare "
+msgstr " Batti `si' se VERAMENTE vuoi cancellare "
 
 #: src/file.c:2265
 msgid "all the directories "
@@ -4164,7 +4165,7 @@ msgstr " Cancella Ricorsivamente "
 
 #: src/file.c:2268
 msgid " Background process: Recursive Delete "
-msgstr " Processo in background: cancella ricorsivamente "
+msgstr " Processo in background: cancellazione ricorsiva "
 
 #: src/filegui.c:424
 msgid "File"
@@ -4176,7 +4177,7 @@ msgstr "Totale"
 
 #: src/filegui.c:468
 msgid "Bytes"
-msgstr "Bytes"
+msgstr "Byte"
 
 #: src/filegui.c:505
 msgid "Source"
@@ -4366,7 +4367,7 @@ msgstr "Cercando"
 
 #: src/find.c:750 src/find.c:1031
 msgid "Find file"
-msgstr "Trova files"
+msgstr "Trova file"
 
 #. The buttons
 #: src/find.c:755
@@ -4626,9 +4627,9 @@ msgid ""
 "           the same question next time\n"
 "  Merge  - add old entries to hotlist as group \"Entries from ~/"
 msgstr ""
-"    Mantenere    - Mantiene la vecchia lista; vi sarà richiesto\n"
-"\t          la possima volta\n"
-"    Sincronizzare - aggiungere i vecchi link come gruppo \"Vecchi archivi ~/"
+"  Conserva - conserva le vecchie voci; vi sarà richiesto\n"
+"             la possima volta\n"
+"  Unisci   - aggiunge le vecchie voci ai favoriti come gruppo \"Vecchi archivi ~/"
 
 #: src/hotlist.c:1443
 msgid "&Merge"
@@ -5084,7 +5085,7 @@ msgstr "Processsi in &Background    C-x j"
 
 #: src/main.c:1337
 msgid "&Undelete files (ext2fs only)"
-msgstr "&Ripristina files (solo ext2fs)"
+msgstr "&Ripristina file (solo ext2fs)"
 
 #: src/main.c:1340
 msgid "&Listing format edit"
@@ -5108,7 +5109,7 @@ msgstr "C&Onferme..."
 
 #: src/main.c:1351
 msgid "&Display bits..."
-msgstr "&Mostra bits..."
+msgstr "&Mostra bit..."
 
 #: src/main.c:1353
 msgid "learn &Keys..."
@@ -5192,7 +5193,7 @@ msgstr "Directory delle librerie di Midnight Commander: %s\n"
 #: src/main.c:2600
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
-msgstr "L'opzione -m è obsoleta.  Controlla Display Bits... nel menu opzioni\n"
+msgstr "L'opzione -m è obsoleta.  Controlla Display Bit... nel menu opzioni\n"
 
 #: src/main.c:2677
 msgid "Use to debug the background code"
@@ -5308,10 +5309,10 @@ msgid ""
 " are now stored in the ~/.mc directory, the \n"
 " files have been moved now\n"
 msgstr ""
-" I files di configurazione di Midnight Commander \n"
+" I file di configurazione di Midnight Commander \n"
 " da questo momento son in ~/.mc.\n"
 "\n"
-" I files sono appena stati spostati.\n"
+" I file sono appena stati spostati.\n"
 
 #: src/option.c:74
 msgid "safe de&Lete"
@@ -5391,7 +5392,7 @@ msgstr "mostra file &Nascosti"
 
 #: src/option.c:96
 msgid "show &Backup files"
-msgstr "mostra files di &Backup"
+msgstr "mostra file di &Backup"
 
 #: src/option.c:103
 msgid "&Never"
@@ -5509,7 +5510,7 @@ msgstr "GID"
 #: src/screen.c:661
 #, c-format
 msgid "  %s bytes in %d file%s"
-msgstr " %s bytes in %d file %s"
+msgstr " %s byte in %d file"
 
 #: src/screen.c:1325
 msgid "Unknow tag on display format: "
@@ -5679,7 +5680,7 @@ msgstr " Impossibile eseguire programmi su una directory non locale"
 #: src/user.c:720
 #, c-format
 msgid " Empty file %s "
-msgstr "Copia files"
+msgstr "Copia file"
 
 #. Create listbox
 #: src/user.c:730
@@ -5756,7 +5757,7 @@ msgstr "Non posso avere informazioni sul file "
 
 #: src/view.c:488
 msgid " Can't view: not a regular file "
-msgstr " Non posso vederlo: non è un file standard "
+msgstr " Non posso vederlo: non è un file regolare "
 
 #: src/view.c:569
 #, c-format
@@ -6221,7 +6222,7 @@ msgstr "ftpfs: login errato per utente %s "
 #: vfs/ftpfs.c:523
 #, c-format
 msgid " Could not set source routing (%s)"
-msgstr " Impossibile instradamento sorgente (%s)"
+msgstr " Impossibile impostare instradamento sorgente (%s)"
 
 #: vfs/ftpfs.c:652
 msgid "ftpfs: Invalid host name."
@@ -6412,7 +6413,7 @@ msgstr " %s apertura file remoto %s "
 #: vfs/smbfs.c:1971
 #, c-format
 msgid " %s renaming files\n"
-msgstr " %s rinomina files\n"
+msgstr " %s rinomina file\n"
 
 #: vfs/tar.c:84 vfs/tar.c:101
 #, c-format
@@ -6443,9 +6444,9 @@ msgstr ""
 
 #: vfs/vfs.c:1792
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
-msgstr "%s: %s: %s %3d%% (%ld bytes trasferiti)"
+msgstr "%s: %s: %s %3d%% (%ld byte trasferiti)"
 
 #: vfs/vfs.c:1793
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
-msgstr "%s: %s: %s %ld bytes trasferiti"
+msgstr "%s: %s: %s %ld byte trasferiti"
