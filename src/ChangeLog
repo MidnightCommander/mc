@@ -1,3 +1,8 @@
+2004-09-28  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* util.c (convert_controls): Fix possible buffer overflow
+	for ".*^" strings.
+
 2004-09-27  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* complete.c [__linux__ && !__USE_GNU]: Fix compilation on Red Hat 7.3
