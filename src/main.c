@@ -87,6 +87,10 @@
 
 #include "../vfs/vfs.h"
 
+#ifdef WITH_SMBFS
+#include "../vfs/smbfs.h"	/* smbfs_set_debug() */
+#endif
+
 #ifdef	HAVE_CHARSET
 #include "charsets.h"
 #endif  /* HAVE_CHARSET */
@@ -2106,6 +2110,9 @@ print_mc_usage (FILE *stream)
        "                   default.\n"),
 #ifdef USE_NETCODE
     N_("-l, --ftplog file  Log ftpfs commands to the file.\n"),
+#ifdef WITH_SMBFS
+    N_("-D, --debuglevel N Set Smbfs debug level to N (0-10).\n"),
+#endif
 #endif
     N_("-P, --printwd      At exit, print the last working directory.\n"
        "-s, --slow         Disables verbose operation (for slow terminals).\n"),
@@ -2195,10 +2202,13 @@ process_args (int c, const char *option_arg)
 #ifdef USE_NETCODE
     case 'l':
 	ftpfs_set_debug (option_arg);
-#ifdef WITH_SMBFS
-/*	smbfs_set_debug (option_arg); */
-#endif
 	break;
+
+#ifdef WITH_SMBFS
+    case 'D':
+	smbfs_set_debug (atoi (option_arg));
+	break;
+#endif
 #endif
 
     case 'm':
@@ -2259,6 +2269,9 @@ static const struct poptOption argument_table [] = {
 #ifdef USE_NETCODE
     { "ftplog", 	'l', POPT_ARG_STRING, 	NULL, 			 'l',
       N_("Log ftp dialog to specified file") },
+#ifdef WITH_SMBFS
+    { "debuglevel",	'D', POPT_ARG_STRING,	NULL,			 'D'},
+#endif
 #endif
     { "libdir", 	'f', POPT_ARG_NONE, 	NULL, 			 'f' },
     { NULL, 		'm', POPT_ARG_NONE, 	NULL, 			 'm',
@@ -2305,7 +2318,7 @@ handle_args (int argc, char *argv [])
 {
     char   *tmp;
     poptContext   ctx;
-    char   *option_arg, *base;
+    char   *base;
     int    c;
 
     ctx = poptGetContext ("mc", argc, argv, argument_table,
@@ -2316,9 +2329,7 @@ handle_args (int argc, char *argv [])
 #endif
 
     while ((c = poptGetNextOpt (ctx)) > 0){
-	option_arg = poptGetOptArg (ctx);
-
-	process_args (c, option_arg);
+	process_args (c, poptGetOptArg (ctx));
     }
 
     if (c < -1){

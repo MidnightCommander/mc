@@ -1,3 +1,11 @@
+2002-09-11  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* main.c [WITH_SMBFS]: Include ../vfs/smbfs.h.
+	(argument_table) [WITH_SMBFS]: Add -D, --debuglevel option for 
+	smbfs debug level.
+	(process_args) [WITH_SMBFS]: Handle new -D option.
+	(print_mc_usage) [WITH_SMBFS]: Describe -D, --debuglevel option.
+
 2002-09-11  Pavel Roskin  <proski@gnu.org>
 
 	* subshell.c: Move tcsh_fifo to the file scope.  Use mc_tmpdir()
@@ -67,7 +75,7 @@
 
 	* fs.h: Only redefine S_IS* macros if they are undefined, and
 	then define them to 0.  S_IF* constants should be avoided.
-	* util.c : Whenever possible, use standard POSIX macros to test
+	* util.c: Whenever possible, use standard POSIX macros to test
 	for the file type.
 	Reported by Andrew V. Samoilov <sav@bcs.zp.ua>
 
@@ -1166,7 +1174,7 @@
 2001-11-07  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* cmd.c (guess_message_value): Make val static const array.
-	(smblink_cmd) [!WITH_SAMBA]: Eliminated.
+	(smblink_cmd) [!WITH_SMBFS]: Eliminated.
 
 	* dlg.c (add_widget): Check for what is not NULL
 	before everything else.
