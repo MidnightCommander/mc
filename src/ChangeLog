@@ -1,5 +1,8 @@
 2001-08-12  Pavel Roskin  <proski@gnu.org>
 
+	* cmd.c (guess_message_value): Typo - replace "LC_MESSAGE" with
+	"LC_MESSAGES".
+
 	* dir.c (string_sortcomp) [HAVE_STRCOLL]: Always use strcmp()
 	for case sensitive sort.  For case insensitive sort use
 	strcoll() if it's case insensitive for ASCII and g_strcasecmp()

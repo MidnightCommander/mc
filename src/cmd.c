@@ -1206,8 +1206,8 @@ void mkdir_panel_cmd (void)
     mkdir_cmd (cpanel);
 }
 
-/* partly taken from dcgettect.c, returns "" for C locale */
-/* value should be gfreed by calling function */
+/* partly taken from dcigettext.c, returns "" for default locale */
+/* value should be freed by calling function g_free() */
 char *guess_message_value (unsigned want_info)
 {
     const char *var[] = {
@@ -1217,7 +1217,7 @@ char *guess_message_value (unsigned want_info)
 	/* Setting of LC_ALL overwrites all other.  */
 	"LC_ALL",
 	/* Next comes the name of the desired category.  */
-	"LC_MESSAGE",
+	"LC_MESSAGES",
         /* Last possibility is the LANG environment variable.  */
 	"LANG",
 	/* NULL exit loops */
