@@ -1,3 +1,9 @@
+2001-03-14  Pavel Roskin  <proski@gnu.org>
+
+	* samba/configure.in: Use AC_CHECK_TOOL to find AR.
+	* samba/Makefile.in: Remove useless rules, including defunct
+	dependency tracking. Create libsamba.a from the object files.
+
 2001-03-07  Pavel Roskin  <proski@gnu.org>
 
 	* cpio.c (cpio_skip_padding): Warning fix.

@@ -20,6 +20,7 @@ dnl Checks for programs.
 AC_PROG_CC
 AC_PROG_INSTALL
 AC_PROG_AWK
+AC_CHECK_TOOL(AR, ar, ar)
 
 dnl Check if C compiler understands -c and -o at the same time
 AC_PROG_CC_C_O

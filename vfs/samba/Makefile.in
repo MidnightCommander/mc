@@ -12,13 +12,14 @@ CFLAGS=@CFLAGS@
 CPPFLAGS=@CPPFLAGS@
 LDFLAGS=@LDFLAGS@
 AWK=@AWK@
+AR=@AR@
 
 INSTALLCMD=@INSTALL@
 
 VPATH=@srcdir@
 srcdir=@srcdir@
 builddir=@builddir@
-SHELL=/bin/sh
+SHELL=@SHELL@
 
 BASEDIR= @prefix@
 BINDIR = @bindir@
@@ -109,21 +110,11 @@ SAMBAFILES=			\
 	libsmb/nterr.o 	\
 	libsmb/smberr.o
 
-LIB_OBJ = lib/charcnv.o lib/charset.o lib/debug.o lib/fault.o \
-          lib/getsmbpass.o lib/interface.o lib/kanji.o lib/md4.o \
-          lib/netmask.o lib/pidfile.o lib/replace.o \
-          lib/signal.o lib/slprintf.o lib/system.o lib/doscalls.o lib/time.o \
-	  lib/ufc.o lib/genrand.o lib/username.o lib/access.o lib/smbrun.o \
-	  lib/bitmap.o lib/crc32.o lib/snprintf.o \
-	  lib/util_str.o lib/util_sid.o \
-	  lib/util_unistr.o lib/util_file.o \
-	  lib/util.o lib/util_sock.o lib/util_sec.o smbd/ssl.o
-
 ######################################################################
 # now the rules...
 ######################################################################
 
-all : CHECK $(SAMBAFILES)
+all : CHECK libsamba.a
 
 .SUFFIXES:
 .SUFFIXES: .c .o
@@ -139,27 +130,16 @@ MAKEDIR = || exec false; \
 	  mkdir "$$dir" || \
 	  exec false; fi || exec false
 
-# the lines below containing `@MAINT@' are for atomatic dependency tracking
-# they will only work with GNU make, gcc and --enable-maintainer-mode
-# without --enable-maintainer-mode, they do nothing
-.c.o: @MAINT@ .deps/.dummy
+libsamba.a: $(SAMBAFILES)
+	$(AR) cr libsamba.a $(SAMBAFILES)
+
+.c.o:
 	@if (: >> $@ || : > $@) >/dev/null 2>&1; then rm -f $@; else \
 	 dir=`echo $@ | sed 's,/[^/]*$$,,;s,^$$,.,'` $(MAKEDIR); fi
-@MAINT@	@if (: >> .deps/$@ || : > .deps/$@) >/dev/null 2>&1; then :; \
-@MAINT@	 else dir=.deps/`echo $@ | sed 's,/[^/]*$$,,;s,^$$,.,'` \
-@MAINT@	      $(MAKEDIR); fi; rm -f .deps/$@ .deps/$@d
 	@echo Compiling $*.c
 	@$(CC) -I. -I$(srcdir) $(FLAGS) -c $< \
-	  -o $@ @MAINT@ -Wp,-MD,.deps/$@
+	  -o $@
 @BROKEN_CC@	-mv `echo $@ | sed 's%^.*/%%g'` $@
-@MAINT@	@sed 's|^'`echo $@ | sed 's,.*/,,'`':|$@:|' \
-@MAINT@	  <.deps/$@ >.deps/$@d && \
-@MAINT@	rm -f .deps/$@ && : >.deps/.stamp
-
-bin/.dummy:
-	@if (: >> $@ || : > $@) >/dev/null 2>&1; then :; else \
-	  dir=bin $(MAKEDIR); fi
-	@: >> $@ || : > $@ # what a fancy emoticon!
 
 install:
 
@@ -175,13 +155,12 @@ ctags:
 	ctags `find . -name "*.[ch]"`
 
 realclean: clean
-	-rm -f config.log bin/.dummy
+	-rm -f config.log
 	-rmdir bin
 
 distclean: realclean
 	-rm -f include/config.h include/stamp-h Makefile
 	-rm -f config.status config.cache so_locations
-	-rm -rf .deps
 
 #
 # This target is for documenation updators. It regenerates
@@ -229,18 +208,3 @@ $(srcdir)/include/config.h.in: $(srcdir)/include/stamp-h.in
 $(srcdir)/include/stamp-h.in: @MAINT@ $(srcdir)/acconfig.h $(srcdir)/configure.in
 	cd $(srcdir) && $(AUTOHEADER)
 	@date -u > $@
-
-# automatic dependency tracking rules
-.deps/.dummy:
-	@if (: >> $@ || : > $@) >/dev/null 2>&1; then :; else \
-	  dir=.deps $(MAKEDIR); fi
-	@: >> $@ || : > $@ # what a fancy emoticon!
-
-.deps/.stamp: .deps/.dummy
-	@:
-
-.deps/depend: .deps/.stamp
-	@echo Updating dependencies
-	@: | cat `find .deps -type f -name \*d` >$@ 2>/dev/null || true
-
-@MAINT@-include .deps/depend
