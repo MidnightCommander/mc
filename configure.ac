@@ -583,6 +583,7 @@ AM_CONDITIONAL(CONS_SAVER, [test -n "$cons_saver"])
 AC_CONFIG_FILES([
 Makefile 
 mc.spec
+mc.qpg
 doc/Makefile 
 vfs/Makefile
 vfs/extfs/Makefile
@@ -592,9 +593,7 @@ slang/Makefile
 edit/Makefile 
 syntax/Makefile
 m4/Makefile
-
 lib/mc.ext
-
 vfs/extfs/a
 vfs/extfs/apt
 vfs/extfs/audio

@@ -1,0 +1,213 @@
+<QPG:Generation>
+   <QPG:Options>
+      <QPG:User unattended="no" verbosity="2" listfiles="yes"/>
+      <QPG:Defaults type="qnx_package"/>
+      <QPG:Source></QPG:Source>
+      <QPG:Release number="+"/>
+      <QPG:Build></QPG:Build>
+      <QPG:FileSorting strip="yes"/>
+      <QPG:Package targets="combine"/>
+      <QPG:Repository generate="yes"/>
+      <QPG:FinalDir></QPG:FinalDir>
+      <QPG:Cleanup></QPG:Cleanup>
+   </QPG:Options>
+
+   <QPG:Responsible>
+      <QPG:Company>QNX.ORG.RU Community</QPG:Company>
+      <QPG:Department>R and D</QPG:Department>
+      <QPG:Group></QPG:Group>
+      <QPG:Team>QNX.ORG.RU Team</QPG:Team>
+      <QPG:Employee xmlmultiple="true">Dmitry Alexeyev</QPG:Employee>
+      <QPG:EmailAddress xmlmultiple="true">dmi@qnx.org.ru</QPG:EmailAddress>
+      <QPG:Employee xmlmultiple="true">Mike Gorchak</QPG:Employee>
+      <QPG:EmailAddress xmlmultiple="true">mike@malva.ua</QPG:EmailAddress>
+   </QPG:Responsible>
+
+   <QPG:Values>
+      <QPG:Files>
+         <QPG:Add file="./COPYING" install="LicenseUrl/" handling="repdata"/>
+         <QPG:Add file="./doc/mc.1" permissions="0644" install="/opt/man/man1/"/>
+         <QPG:Add file="./doc/mcedit.1" permissions="0644" install="/opt/man/man1/"/>
+         <QPG:Add file="./lib/mc-wrapper.csh" permissions="0755" install="/opt/share/mc/bin/"/>
+         <QPG:Add file="./lib/mc-wrapper.sh" permissions="0755" install="/opt/share/mc/bin/"/>
+         <QPG:Add file="./lib/mc.csh" permissions="0755" install="/opt/share/mc/bin/"/>
+         <QPG:Add file="./lib/mc.sh" permissions="0755" install="/opt/share/mc/bin/"/>
+         <QPG:Add file="./lib/cedit.menu" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./lib/edit.indent.rc" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./lib/edit.spell.rc" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./vfs/extfs/README" permissions="0644" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/a" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/apt" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/audio" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/bpp" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/deb" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/deba" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/debd" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/dpkg" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/extfs.ini" permissions="0644" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/hp48" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/iso9660" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/lslR" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/mailfs" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/patchfs" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/rpm" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/rpms" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/sfs.ini" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/trpm" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/uar" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/uarj" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/uha" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/ulha" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/urar" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/uzip" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./vfs/extfs/uzoo" permissions="0755" install="/opt/share/mc/extfs/"/>
+         <QPG:Add file="./lib/mc.charsets" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./lib/mc.ext" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./lib/mc.hint" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./lib/mc.hint.cs" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./lib/mc.hint.es" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./lib/mc.hint.hu" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./lib/mc.hint.it" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./lib/mc.hint.nl" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./lib/mc.hint.pl" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./lib/mc.hint.ru" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./lib/mc.hint.uk" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./lib/mc.hint.zh" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./doc/mc.hlp" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./lib/mc.lib" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./lib/mc.menu" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./syntax/Syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/ada95.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/c.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/changelog.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/diff.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/dos.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/fortran.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/html.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/java.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/js.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/latex.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/lisp.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/lsm.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/m4.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/mail.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/makefile.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/ml.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/nroff.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/octave.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/pascal.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/perl.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/php.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/po.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/python.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/sh.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/slang.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/smalltalk.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/spec.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/sql.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/swig.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/syntax.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/tcl.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/texinfo.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/unknown.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/xml.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./lib/README.xterm" permissions="0644" install="/opt/share/mc/term/"/>
+         <QPG:Add file="./lib/ansi.ti" permissions="0644" install="/opt/share/mc/term/"/>
+         <QPG:Add file="./lib/linux.ti" permissions="0644" install="/opt/share/mc/term/"/>
+         <QPG:Add file="./lib/vt100.ti" permissions="0644" install="/opt/share/mc/term/"/>
+         <QPG:Add file="./lib/xterm.ad" permissions="0644" install="/opt/share/mc/term/"/>
+         <QPG:Add file="./lib/xterm.tcap" permissions="0644" install="/opt/share/mc/term/"/>
+         <QPG:Add file="./lib/xterm.ti" permissions="0644" install="/opt/share/mc/term/"/>
+         <QPG:Add file="./src/mc" permissions="0755" install="/opt/bin/"/>
+         <QPG:Add file="./src/mcmfmt" permissions="0755" install="/opt/bin/"/>
+	 <QPG:Add file="mcedit" install="/opt/bin/" filetype="symlink" linkto="mc"/>
+ 	 <QPG:Add file="mcview" install="/opt/bin/" filetype="symlink" linkto="mc"/>
+      </QPG:Files>
+
+      <QPG:PackageFilter>
+         <QPM:PackageManifest>
+            <QPM:PackageDescription>
+               <QPM:PackageType>Application</QPM:PackageType>
+               <QPM:PackageRepository></QPM:PackageRepository>
+               <QPM:FileVersion>2.0</QPM:FileVersion>
+            </QPM:PackageDescription>
+
+            <QPM:ProductDescription>
+               <QPM:ProductName>Midnight Commander</QPM:ProductName>
+               <QPM:ProductIdentifier>mc</QPM:ProductIdentifier>
+               <QPM:ProductEmail></QPM:ProductEmail>
+               <QPM:VendorName>Public</QPM:VendorName>
+               <QPM:VendorInstallName>public</QPM:VendorInstallName>
+               <QPM:VendorURL></QPM:VendorURL>
+               <QPM:VendorEmbedURL></QPM:VendorEmbedURL>
+               <QPM:VendorEmail></QPM:VendorEmail>
+               <QPM:AuthorName></QPM:AuthorName>
+               <QPM:ProductIconSmall></QPM:ProductIconSmall>
+               <QPM:ProductIconLarge></QPM:ProductIconLarge>
+               <QPM:ProductDescriptionShort>GNU Midnight Commander (also referred to as mc) - is a user shell with text-mode full-screen interface.</QPM:ProductDescriptionShort>
+               <QPM:ProductDescriptionLong>GNU Midnight Commander (also referred to as mc) - is a user shell with text-mode full-screen interface. It can be run on the OS console, in xterm and other terminal emulators.</QPM:ProductDescriptionLong>
+               <QPM:ProductDescriptionURL>http://www.ibiblio.org/mc/</QPM:ProductDescriptionURL>
+               <QPM:ProductDescriptionEmbedURL></QPM:ProductDescriptionEmbedURL>
+            </QPM:ProductDescription>
+
+            <QPM:ReleaseDescription>
+               <QPM:ReleaseVersion>@VERSION@</QPM:ReleaseVersion>
+               <QPM:ReleaseUrgency>Medium</QPM:ReleaseUrgency>
+               <QPM:ReleaseStability>Stable</QPM:ReleaseStability>
+               <QPM:ReleaseNoteMinor></QPM:ReleaseNoteMinor>
+               <QPM:ReleaseNoteMajor></QPM:ReleaseNoteMajor>
+               <QPM:CountryExclude></QPM:CountryExclude>
+               <QPM:ReleaseCopyright>GNU General Public License</QPM:ReleaseCopyright>
+            </QPM:ReleaseDescription>
+
+            <QPM:ContentDescription>
+               <QPM:ContentTopic xmlmultiple="true">System/File Utilities/File Management</QPM:ContentTopic>
+               <QPM:ContentKeyword>mc, midnight, commander, mcedit, mcview</QPM:ContentKeyword>
+               <QPM:TargetOS>qnx6</QPM:TargetOS>
+               <QPM:HostOS>none</QPM:HostOS>
+               <QPM:DisplayEnvironment xmlmultiple="true">Console</QPM:DisplayEnvironment>
+               <QPM:TargetAudience xmlmultiple="true">User</QPM:TargetAudience>
+            </QPM:ContentDescription>
+
+            <QPM:LicenseUrl>repdata://LicenseUrl/COPYING</QPM:LicenseUrl>
+         </QPM:PackageManifest>
+      </QPG:PackageFilter>
+
+      <QPG:PackageFilter proc="none" target="none">
+         <QPM:PackageManifest>
+            <QPM:ProductInstallationDependencies>
+               <QPM:ProductRequirements></QPM:ProductRequirements>
+            </QPM:ProductInstallationDependencies>
+
+            <QPM:ProductInstallationProcedure>
+               <QPM:Script xmlmultiple="true">
+                  <QPM:ScriptName>/usr/photon/bin/launchmenu_notify</QPM:ScriptName>
+                  <QPM:ScriptTiming>Post</QPM:ScriptTiming>
+                  <QPM:ScriptType>Use</QPM:ScriptType>
+               </QPM:Script>
+
+               <QPM:Script xmlmultiple="true">
+                  <QPM:ScriptName>/usr/photon/bin/launchmenu_notify</QPM:ScriptName>
+                  <QPM:ScriptTiming>Post</QPM:ScriptTiming>
+                  <QPM:ScriptType>Unuse</QPM:ScriptType>
+               </QPM:Script>
+            </QPM:ProductInstallationProcedure>
+         </QPM:PackageManifest>
+
+         <QPM:Launch name="Midnight Commander" xmlmultiple="true">
+            <QPM:String name="Topic" value="Applications/Utilities" xmlmultiple="true"/>
+            <QPM:String name="Command" value="pterm mc" xmlmultiple="true"/>
+         </QPM:Launch>
+      </QPG:PackageFilter>
+
+      <QPG:PackageFilter proc="x86" target="none">
+         <QPM:PackageManifest>
+            <QPM:ProductInstallationDependencies>
+               <QPM:ProductRequirements></QPM:ProductRequirements>
+            </QPM:ProductInstallationDependencies>
+         </QPM:PackageManifest>
+      </QPG:PackageFilter>
+
+   </QPG:Values>
+</QPG:Generation>
+
