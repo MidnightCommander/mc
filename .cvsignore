@@ -8,3 +8,4 @@ config.log
 configure
 mcfn_install
 aclocal.m4
+VERSION

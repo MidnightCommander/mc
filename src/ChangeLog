@@ -1,3 +1,16 @@
+Thu Aug 27 19:52:45 1998  Pavel Roskin <pavel.roskin@escoft.co.uk>
+
+	* Make.common.in: Don't define VERSION anymore
+
+	* configure.in: this is the right place for VERSION definition
+
+	* acconfig.h: does not include file "VERSION" anymore
+
+	* config.h.in: rebuilt by autoheader
+
+	* VERSION: removed from CVS and added to .cvsignore since it
+	is rebuilt every time as configure is run
+
 1998-08-20  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* mad.h: Include stdlib.h/malloc.h first, to prevent prototypes
