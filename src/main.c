@@ -868,7 +868,7 @@ load_prompt (int fd, void *unused)
 	prompt_len = strlen (prompt);
 
 	/* Check for prompts too big */
-	if (prompt_len > COLS - 8) {
+	if (COLS > 8 && prompt_len > COLS - 8) {
 	    prompt [COLS - 8 ] = 0;
 	    prompt_len = COLS - 8;
 	}
