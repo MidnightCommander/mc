@@ -513,31 +513,27 @@ dnl
 AC_CHECK_PROG(HAVE_FILECMD, file, true, false)
 if $HAVE_FILECMD; then
     AC_MSG_CHECKING([for - option to file command])
-    AC_CACHE_VAL(ac_cv_filestdin, [
-    cat > conftest.c <<EOF
+    AC_CACHE_VAL(ac_cv_filestdin, [[
+    cat > conftest.c <<\EOF
 /* A comment */
 #if 0
 #endif
 void main(void)
 { return; }
 EOF
-    changequote(, )
-    cat > conftest.sed <<EOF
-s/^[^:]*:[\ \	]*//
-s/[\ \	]*$//
+    cat > conftest.sed <<\EOF
+s/^[^:]*:[ 	]*//
+s/[ 	]*$//
 EOF
     filehyphen_1=`file conftest.c 2>/dev/null | sed -f conftest.sed`
     filehyphen_2=`cat conftest.c | file - 2>/dev/null | sed -f conftest.sed`
-    if test "$filehyphen_1" = "$filehyphen_2"; then
+    if test "x$filehyphen_1" = "x$filehyphen_2"; then
 	ac_cv_filestdin=yes
     else
 	ac_cv_filestdin=no
     fi
-    changequote([, ])
     rm conftest.c conftest.sed
-    unset filehyphen_1
-    unset filehyphen_2
-    ])
+    ]])
 
     if test x$ac_cv_filestdin = xyes; then
 	AC_DEFINE(FILE_STDIN)
@@ -571,7 +567,7 @@ dnl Check to see if grep program allowes dash to denote stdin
 dnl
 AC_MSG_CHECKING([for - option to grep command])
 AC_CACHE_VAL(ac_cv_grep_stdin, [
-    grep ac_cv_grep_stdin - > /dev/null 2>&1 < ./configure
+    echo "grep_test" | grep grep_test - >/dev/null 2>&1
     if test $? = 0; then
 	ac_cv_grep_stdin=yes
     else
@@ -841,16 +837,12 @@ VERSION:NCURSES_VERSION
 EOF
         if (eval "$ac_cpp conftest.$ac_ext") 2>&AC_FD_CC |
   egrep "VERSION:" >conftest.out 2>&1; then
-changequote(,)dnl
-            ncurses_version=`cat conftest.out|sed -e 's/^[^"]*"//' -e 's/".*//'`
-changequote([,])dnl
+            ncurses_version=`cat conftest.out|sed -e 's/^[[^"]]*"//' -e 's/".*//'`
 	fi
 	rm -rf conftext*
         AC_MSG_RESULT([$ncurses_version])
 	case "$ncurses_version" in
-changequote(,)dnl
-	4.[01])
-changequote([,])dnl
+	4.[[01]])
             AC_DEFINE(NCURSES_970530,2)
             ;;
 	1.9.9g)

@@ -1,5 +1,10 @@
 2001-05-26  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Fix incorrect test for stdin support in grep -
+	it would always fail when configuring in an empty directory.
+	Portability fixes - unset, backslashed space in here-documents.
+	Eliminate all instances of "changeqoute".
+
 	* configure.in: Define SCO_FLAVOR based on $host_os, not on the
 	user choice.
 	* acconfig.h: Changes for the above.
