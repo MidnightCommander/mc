@@ -17,6 +17,10 @@ set -e
 # Make sure to have it unpacked in /usr/src
 BASE_VERSION="4.6.0-pre1"
 
+# Local directories
+MC_BASE_DIR="/usr/src/mc-$BASE_VERSION"
+RPM_SRC_DIR="/usr/src/redhat"
+
 # Location of the snapshot directory
 SITE="login.ibiblio.org"
 DIR="/public/ftp/pub/Linux/utils/file/managers/mc/snapshots"
@@ -30,9 +34,9 @@ if test -z "$MCVERSION" || test ! -f "$MCTARBALL"; then
   exit 1
 fi
 
-rm -f /usr/src/redhat/RPMS/i386/mc-*.i386.rpm
+rm -f $RPM_SRC_DIR/RPMS/i386/mc-*.i386.rpm
 rpm -tb "$MCTARBALL"
-MC_RPM=`echo /usr/src/redhat/RPMS/i386/mc-*.i386.rpm`
+MC_RPM=`echo $RPM_SRC_DIR/RPMS/i386/mc-*.i386.rpm`
 if test ! -f $MC_RPM; then
   echo "Failed to compile package!!!"
   exit 1
@@ -40,7 +44,7 @@ fi
 
 # Make a patch against the latest released version
 MC_PATCH="mc-$BASE_VERSION-current.diff.bz2"
-if test ! -d /usr/src/mc-$BASE_VERSION; then
+if test ! -d $MC_BASE_DIR; then
   echo "Cannot find unpacked base version!!!"
   exit 1
 fi
@@ -50,7 +54,7 @@ rm -f mc-$BASE_VERSION-current.diff mc-$BASE_VERSION-current.diff.bz2
 make distdir MSGMERGE=
 
 # Sometimes GNU diff returns 1 for unclear reasons
-diff -urN -x po /usr/src/mc-$BASE_VERSION mc-*/ >mc-$BASE_VERSION-current.diff || :
+diff -urN -x po $MC_BASE_DIR mc-*/ >mc-$BASE_VERSION-current.diff || :
 bzip2 mc-$BASE_VERSION-current.diff
 
 echo "Copying $MCTARBALL to $SITE"
