@@ -98,8 +98,8 @@ int keybar_visible = 1;
 /* Set if the nice message (hint) bar is visible */
 int message_visible = 1;
 
-/* Set if you want the message bar shown in xterm title bar to save space */
-int xterm_hintbar = 0;
+/* Set to show current working dir in xterm window title */
+int xterm_title = 1;
 
 /* The starting line for the output of the subprogram */
 int output_start_y = 0;
@@ -129,7 +129,7 @@ static int _output_lines;
 static int _command_prompt;
 static int _keybar_visible;
 static int _message_visible;
-static int _xterm_hintbar;
+static int _xterm_title;
 static int _permission_mode;
 static int _filetype_mode;
 
@@ -161,7 +161,7 @@ static struct {
     WCheck *widget;
     char   *tkname;
 } check_options [] = {
-    { N_("&Xterm hintbar"),    &xterm_hintbar,   0, "h" },
+    { N_("&Xterm window title"), &xterm_title,   0, "t" },
     { N_("h&Intbar visible"),  &message_visible, 0, "v" },
     { N_("&Keybar visible"),   &keybar_visible,  0, "k" },
     { N_("command &Prompt"),   &command_prompt,  0, "p" },
@@ -312,14 +312,13 @@ static int layout_callback (struct Dlg_head *h, int Id, int Msg)
 	_command_prompt = check_options [4].widget->state & C_BOOL;
 	_keybar_visible = check_options [2].widget->state & C_BOOL;
 	_message_visible = check_options [1].widget->state & C_BOOL;
-	_xterm_hintbar = check_options [0].widget->state & C_BOOL;
+	_xterm_title = check_options [0].widget->state & C_BOOL;
 	if (console_flag){
 	    int minimum;
 	    if (_output_lines < 0)
 		_output_lines = 0;
 	    height = LINES - _keybar_visible - _command_prompt -
 		     _menubar_visible - _output_lines - _message_visible;
-	    if (_message_visible && _xterm_hintbar && xterm_flag) height++;
 	    minimum = MINHEIGHT * (1 + _horizontal_split);
 	    if (height < minimum){
 		_output_lines -= minimum - height;
@@ -328,7 +327,6 @@ static int layout_callback (struct Dlg_head *h, int Id, int Msg)
 	} else {
 	    height = LINES - _keybar_visible - _command_prompt -
 		_menubar_visible - _output_lines - _message_visible;
-	    if (_message_visible && _xterm_hintbar && xterm_flag) height++;
 	}
 	if (_horizontal_split != radio_widget->sel){
 	    _horizontal_split = radio_widget->sel;
@@ -472,7 +470,7 @@ static void init_layout (void)
     _command_prompt = command_prompt;
     _keybar_visible = keybar_visible;
     _message_visible = message_visible;
-    _xterm_hintbar = xterm_hintbar;
+    _xterm_title = xterm_title;
     bright_widget = button_new(6, 15, B_2RIGHT, NARROW_BUTTON, "&>", b2right_cback, 0, ">");
     add_widget (layout_dlg, bright_widget);
     bleft_widget = button_new (6, 9, B_2LEFT, NARROW_BUTTON, "&<", b2left_cback, 0, "<");
@@ -647,8 +645,6 @@ setup_panels (void)
 	    output_lines = 0;
 	height = LINES - keybar_visible - command_prompt - menubar_visible
 	    - output_lines - message_visible;
-	if (message_visible && xterm_hintbar && xterm_flag)
-	    height++;
 	minimum = MINHEIGHT * (1 + horizontal_split);
 	if (height < minimum) {
 	    output_lines -= minimum - height;
@@ -657,8 +653,6 @@ setup_panels (void)
     } else {
 	height = LINES - menubar_visible - command_prompt -
 	    keybar_visible - message_visible;
-	if (message_visible && xterm_hintbar && xterm_flag)
-	    height++;
     }
     check_split ();
     start_y = menubar_visible;
@@ -710,12 +704,13 @@ setup_panels (void)
 			       LINES - output_lines - keybar_visible - 1,
 			       LINES - keybar_visible - 1);
     }
-    if (message_visible && (!xterm_hintbar || !xterm_flag))
+    if (message_visible)
 	widget_set_size (&the_hint->widget, height + start_y, 0, 1, COLS);
     else
 	widget_set_size (&the_hint->widget, 0, 0, 0, 0);
 
     load_hint ();
+    update_xterm_title_path ();
 }
 
 void flag_winch (int dummy)
@@ -803,14 +798,9 @@ void use_dash (int flag)
 
 void set_hintbar(char *str) 
 {
-    if (xterm_flag && xterm_hintbar) {
-	fprintf (stdout, "\33]0;mc - %s\7", str);
-	fflush (stdout);
-    } else {
-        label_set_text (the_hint, str);
-        if (ok_to_refresh > 0)
-	    refresh();
-    }
+    label_set_text (the_hint, str);
+    if (ok_to_refresh > 0)
+        refresh();
 }
 
 void print_vfs_message (char *msg, ...)
@@ -845,7 +835,7 @@ void print_vfs_message (char *msg, ...)
 	return;
     }
 
-    if (message_visible || (xterm_flag && xterm_hintbar)) {
+    if (message_visible) {
         set_hintbar(str);
     }
 }

@@ -121,7 +121,7 @@ static const struct {
     { "first_panel_size", &first_panel_size },
     { "message_visible", &message_visible },
     { "keybar_visible", &keybar_visible },
-    { "xterm_hintbar", &xterm_hintbar },
+    { "xterm_title", &xterm_title },
     { "output_lines", &output_lines },
     { "command_prompt", &command_prompt },
     { "menubar_visible", &menubar_visible },

@@ -788,6 +788,7 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
     try_to_select (panel, get_parent_dir_name (panel->cwd, olddir));
     load_hint ();
     panel_update_contents (panel);
+    update_xterm_title_path ();
 
     g_free (olddir);
 
@@ -1652,8 +1653,6 @@ done_mc (void)
 	save_hotlist ();
     done_screen ();
     vfs_add_current_stamps ();
-    if (xterm_flag && xterm_hintbar)
-	set_hintbar (_("Thank you for using GNU Midnight Commander"));
 }
 
 /* This should be called after destroy_dlg since panel widgets
@@ -1837,6 +1836,22 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 #define xtoolkit_panel_setup()
 
 void
+update_xterm_title_path (void)
+{
+    unsigned char *p, *s;
+
+    if (xterm_flag && xterm_title) {
+	p = s = g_strdup (strip_home_and_password (cpanel->cwd));
+	do {
+	    if (*s <= 32)
+		*s = '?';
+	} while (*++s);
+	fprintf (stdout, "\33]0;mc - %s\7", p);
+	fflush (stdout);
+	g_free (p);
+    }
+}
+void
 load_hint (void)
 {
     char *hint;
@@ -1844,7 +1859,7 @@ load_hint (void)
     if (!the_hint->widget.parent)
 	return;
 
-    if (!message_visible && (!xterm_flag || !xterm_hintbar)) {
+    if (!message_visible) {
 	label_set_text (the_hint, 0);
 	return;
     }

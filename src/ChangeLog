@@ -1,3 +1,13 @@
+2002-12-21  Adam Byrtek  <alpha@debian.org>
+
+	* main.c (update_xterm_title_path): New function, display
+	current path in the xterm window title.
+	(_do_panel_cd): Call update_xterm_title_path().
+	(done_mc): Remove final message for the titlebar.
+	* layout.c: Replace "Xterm hintbar" option with more generic
+	"Xterm window title".  Update all dependencies.
+	(setup_panels): Call update_xterm_title_path().
+
 2002-12-26  Pavel Roskin  <proski@gnu.org>
 
 	* utilunix.c (mc_tmpdir): Check temporary directory more

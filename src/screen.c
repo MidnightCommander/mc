@@ -2171,6 +2171,7 @@ panel_callback (WPanel *panel, int msg, int par)
 	} else
 	    subshell_chdir (panel->cwd);
 
+	update_xterm_title_path ();
 	show_dir (panel);
 	select_item (panel);
 
