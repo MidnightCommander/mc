@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
 "POT-Creation-Date: 1999-09-06 13:13+0200\n"
-"PO-Revision-Date: 1999-09-03 20:45+0100\n"
+"PO-Revision-Date: 1999-09-16 21:43+02:00\n"
 "Last-Translator: Birger Langkjer <birger.langkjer@image.dk>\n"
 "Language-Team: Danish <sslug-locale@sslug.dk>\n"
 "MIME-Version: 1.0\n"
@@ -358,7 +358,7 @@ msgstr "Kunne ikke åbne %s; kan ikke få skrivebordsikoner"
 
 #: gnome/gdesktop.c:1178
 msgid "While running the mount/umount command"
-msgstr ""
+msgstr "Under kørsel af monter/afmonter kommando"
 
 #: gnome/gdesktop.c:1247
 msgid "While running the eject command"
@@ -486,11 +486,11 @@ msgstr "Sæt ikoner på række"
 
 #: gnome/gdesktop-prefs.c:277
 msgid "Use shaped icons"
-msgstr ""
+msgstr "Brug gennemsigtige ikoner"
 
 #: gnome/gdesktop-prefs.c:281
 msgid "Use shaped text"
-msgstr ""
+msgstr "Brug gennemsigtig tekst"
 
 #: gnome/gdesktop-prefs.c:335
 msgid "Desktop"
@@ -1553,7 +1553,7 @@ msgstr "&Ok"
 #: gnome/gview.c:136
 #, c-format
 msgid "Offset 0x%08lx"
-msgstr "Offset 0x%081x"
+msgstr "Offset 0x%08lx"
 
 #: gnome/gview.c:138 src/view.c:730
 #, c-format
@@ -1600,7 +1600,7 @@ msgstr "Tekstombrydning"
 #. Can not use this one yet, as it destroys the viewer, need to fix that
 #: gnome/gview.c:330
 msgid "_Parsed view"
-msgstr ""
+msgstr "Fortolket visning"
 
 #: gnome/gview.c:333
 msgid "_Formatted"
@@ -1936,6 +1936,8 @@ msgid ""
 "You can enter regexp substrings with %s\n"
 "(not \\1, \\2 like sed) then use \"Enter...order\""
 msgstr ""
+"Du kan indtaste regex understrenge med %s\n"
+"(ikke \\1, \\2 ligesom sed) og så bruge \"Enter...orden\""
 
 #: gtkedit/editcmd.c:1373
 msgid " Enter argument (or substring) order : "
@@ -2461,7 +2463,7 @@ msgstr "Næste bogmærke\tC-M-Ned"
 
 #: gtkedit/editmenu.c:419
 msgid "Flush book marks"
-msgstr ""
+msgstr "Smid bogmærker væk"
 
 #: gtkedit/editmenu.c:421
 msgid "Toggle insert/overwrite\tIns"
@@ -2613,12 +2615,12 @@ msgstr "fyld Tab med &Mellemrum"
 #. 9
 #: gtkedit/editoptions.c:100
 msgid "&Return does autoindent"
-msgstr ""
+msgstr "&Return laver autoindryk"
 
 #. 10
 #: gtkedit/editoptions.c:103
 msgid "&Backspace through tabs"
-msgstr ""
+msgstr "&Baglæns slet gennem tabs"
 
 #. 11
 #: gtkedit/editoptions.c:106
@@ -2927,7 +2929,7 @@ msgstr ""
 
 #: src/boxes.c:63
 msgid " Listing mode "
-msgstr ""
+msgstr "Listemåde "
 
 #: src/boxes.c:68
 msgid "&Full file list"
@@ -2955,7 +2957,7 @@ msgstr "brugers &Ministatus"
 
 #: src/boxes.c:186
 msgid "Listing mode"
-msgstr ""
+msgstr "Listemåde"
 
 #: src/boxes.c:280
 msgid "&Reverse"
@@ -3400,7 +3402,7 @@ msgstr " Rediger symlænke "
 #: src/cmd.c:1138
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
-msgstr " rediger symlænke: %s "
+msgstr " rediger symlænke, kunne ikke fjerne %s: %s "
 
 #: src/cmd.c:1142
 #, c-format
@@ -3498,7 +3500,7 @@ msgid ""
 "refresh stack underflow!\n"
 "\n"
 "\n"
-msgstr ""
+msgstr "\n\n\ngenopfrisk stak underflow!\n\n\n"
 
 #: src/dir.c:61
 msgid "&Unsorted"
@@ -3572,7 +3574,7 @@ msgid ""
 " Can't generate unique filename \n"
 " %s "
 msgstr ""
-" Kan ikke oprette filnavn %s \n"
+" Kan ikke oprette unikt filnavn  \n"
 " %s "
 
 #: src/ext.c:150 src/user.c:518
@@ -3656,7 +3658,7 @@ msgid ""
 " Cannot read source link \"%s\" \n"
 " %s "
 msgstr ""
-" Kan ikke lese kildelænken \"%s\" \n"
+" Kan ikke læse kildelænken \"%s\" \n"
 " %s "
 
 #: src/file.c:394
@@ -3707,7 +3709,7 @@ msgid ""
 " Cannot create special file \"%s\" \n"
 " %s "
 msgstr ""
-" Kan ikke opprette specialfilen \"%s\" \n"
+" Kan ikke oprette specialfilen \"%s\" \n"
 " %s "
 
 #: src/file.c:583 src/file.c:812
@@ -3826,7 +3828,7 @@ msgid ""
 " Cannot stat source directory \"%s\" \n"
 " %s "
 msgstr ""
-" Kan ikke køre stat på kildemappen \"%s\" \n"
+" Kan ikke køre status på kildemappen \"%s\" \n"
 " %s "
 
 #: src/file.c:899
@@ -3873,7 +3875,7 @@ msgid ""
 " Cannot stat file \"%s\" \n"
 " %s "
 msgstr ""
-" Kan ikke køre stat på filen \"%s\" \n"
+" Kan ikke køre status på filen \"%s\" \n"
 " %s "
 
 #: src/file.c:1122
@@ -4063,7 +4065,7 @@ msgid ""
 "   Delete it recursively? "
 msgstr ""
 "\n"
-"   Mappen er ikke tom. \n"
+"   Mappen er ikke tom.     \n"
 "   Slet den med undermapper? "
 
 #: src/file.c:2246
@@ -6064,15 +6066,15 @@ msgstr ""
 #: vfs/fish.c:476
 #, c-format
 msgid "fish: storing %s %d (%d)"
-msgstr "fisk: gemmer fil %d (%d)"
+msgstr "fisk: gemmer fil %s %d (%d)"
 
 #: vfs/fish.c:516
 msgid "Aborting transfer..."
-msgstr "Afbryder overførsel."
+msgstr "Afbryder overførsel..."
 
 #: vfs/fish.c:525
 msgid "Error reported after abort."
-msgstr ""
+msgstr "Fejl meldt tilbage efter afbrydelse."
 
 #: vfs/fish.c:527
 msgid "Aborted transfer would be successful."
