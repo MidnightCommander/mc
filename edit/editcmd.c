@@ -2291,13 +2291,13 @@ int edit_print_string (WEdit * e, const char *s)
     return i;
 }
 
-int edit_printf (WEdit * e, const char *fmt,...)
+int edit_printf (WEdit * e, const char *fmt, ...)
 {
     int i;
     va_list pa;
     char s[1024];
     va_start (pa, fmt);
-    sprintf (s, fmt, pa);
+    g_vsnprintf (s, sizeof (s), fmt, pa);
     i = edit_print_string (e, s);
     va_end (pa);
     return i;

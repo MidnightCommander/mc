@@ -1,3 +1,7 @@
+2002-08-27  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* editcmd.c (edit_printf): Use g_vsnprintf() instead of sprintf().
+
 2002-08-24  Pavel Roskin  <proski@gnu.org>
 
 	* edit-widget.h: Eliminate ERROR_FILE.
@@ -165,8 +169,8 @@
 	* syntax.c (syntax_g_free): New macro to release and NULLify
 	glib allocated memory area(s).
 	(strdup_convert): Rename to ...
-	(convert): ... this.  Don't strdup passed string.
-	(get_args): Use convert instead of strdup_convert.
+	(convert): ... this.  Don't strdup() passed string.
+	(get_args): Use convert() instead of strdup_convert().
 	(free_args): Make it do notning macro.
 	(open_include_file): Eliminate p array. Use glib function to
 	construct error_file_name. Use PATH_SEP instead of '/';
@@ -182,16 +186,16 @@
 
 2001-12-22  Andrew V. Samoilov  <kai@cmail.ru>
 
-	* editcmd.c (edit_goto_cmd): Use g_free to release f.
+	* editcmd.c (edit_goto_cmd): Use g_free() to release f.
 	(edit_save_file): Use PATH_SEP instead of '/'.
 	Undefine "close" before closing file created by mc_mkstemps.
-	Define close to mc_close after it - temporary fix.
+	Define close to mc_close() after it - temporary fix.
 
 	(sprintf_p): Don't cast (char *) to (unsigned long).
 
 	* syntax.c (read_one_line): Undo last patch - errno is a
 	function on some systems.  Check ferror() status before
-	everithing else if fgetc returns EOF.
+	everything else if fgetc() returns EOF.
 	Accept last line without trailing newline.
 
 	(compare_word_to_right): Don't cast p and q to unsigned long.
