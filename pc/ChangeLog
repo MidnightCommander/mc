@@ -1,3 +1,7 @@
+2001-06-26  Pavel Roskin  <proski@gnu.org>
+
+	* dirent_nt.c: Include <config.h>.
+
 2001-06-14  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.am: Remove src/param.h.
@@ -25,7 +29,7 @@
 1999-01-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* chmod.c (chmod_cmd): Killed the tk_end_frame and tk_new_frame
-	macros. 
+	macros.
 
 Wed Oct 14 14:51:23 1998  Franco Bez <franco.bez@augsburg.baynet.de>
 
@@ -44,7 +48,7 @@ Wed Oct 14 14:51:23 1998  Franco Bez <franco.bez@augsburg.baynet.de>
 Tue May 12 17:16:43 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* Makefile.RSX, mc.rc: Resources support for RSX
-	
+
 	* Makefile.PC, *.c: Some includes corrected for MinGW
 	compatability (dir.h exists both in mc and MinGW)
 
@@ -52,11 +56,11 @@ Fri May  8 10:49:21 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* Makefile.PC, Makefile.MIN: support for custom extension
 	for compiled resourses
-	
+
 	* key_nt.c: Minor changes for MinGW
-	
+
 	* mc.rc: WindRes support
-	
+
 	* slint_pc.c: support for syntax highlighting
 
 Fri May  1 17:33:11 1998  Pavel Roskin <pavel_roskin@geocities.com>
