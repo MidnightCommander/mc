@@ -6,18 +6,19 @@
 
 # Note that this is NOT a relocatable package
 %define ver     @VERSION@
+%define rhver   @RH_VERSION@
 %define  RELEASE 1
 %define  rel     %{?CUSTOM_RELEASE} %{!?CUSTOM_RELEASE:%RELEASE}
 
 Summary:   Midnight Commander visual shell
 Name:      mc
-Version:   %ver
+Version:   %rhver
 Release:   %rel
 Epoch:     1
 Copyright: GPL
 Group:     Applications/File
-Source0:   ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/mc-%{PACKAGE_VERSION}.tar.gz
-URL:       http://www.gnome.org/mc/
+Source0:   ftp://ftp.ibiblio.org/pub/Linux/utils/file/managers/mc/mc-%{ver}.tar.gz
+URL:       http://www.ibiblio.org/mc/
 BuildRoot: /var/tmp/mc-%{PACKAGE_VERSION}-root
 Prereq:    /sbin/chkconfig
 BuildRequires: glib-devel
@@ -25,13 +26,16 @@ BuildRequires: glib-devel
 %{?_with_ncurses:BuildRequires: ncurses-devel}
 
 %description
-Midnight Commander is a visual shell much like a file manager, only with way
-more features.  It is text mode, but also includes mouse support if you are
-running GPM.  Its coolest feature is the ability to ftp, view tar, zip
-files, and poke into RPMs for specific files.  :-)
+GNU Midnight Commander is a visual file manager.  It's a feature rich
+full-screen text mode application that allows you to copy, move and
+delete files and whole directory trees, search for files and run
+commands in the subshell.  Internal viewer and editor are included.
+Mouse is supported under X Window System and on Linux console.  VFS
+(Virtual Filesystem) allows you to view archives and files on remote
+servers.
 
 %prep
-%setup -q
+%setup -q -n mc-%{ver}
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure \
@@ -88,6 +92,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/lib/mc/syntax
 
 %changelog
+* Wed Aug 21 2002 Pavel Roskin <proski@gnu.org>
+- Change description, update URLs, allow dash in the version.
+
 * Tue Aug 20 2002 Pavel Roskin <proski@gnu.org>
 - Support conditional builds.
 
