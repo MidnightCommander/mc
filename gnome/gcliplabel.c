@@ -61,34 +61,7 @@ void
 gtk_clip_label_set (GtkLabel *label,
 		    const char *str)
 {
-	char* p;
-	
-	g_return_if_fail (label != NULL);
-	g_return_if_fail (GTK_IS_LABEL (label));
-	g_return_if_fail (str != NULL);
-	
-	if (label->label)
-		g_free (label->label);
-	label->label = g_strdup (str);
-	
-	if (label->row)
-		g_slist_free (label->row);
-	label->row = NULL;
-	label->row = g_slist_append (label->row, label->label);
-	p = label->label;
-	while ((p = strchr(p, '\n')))
-		label->row = g_slist_append (label->row, ++p);
-	
-	if (GTK_WIDGET_VISIBLE (label))
-	{
-		if (GTK_WIDGET_MAPPED (label))
-			gdk_window_clear_area (GTK_WIDGET (label)->window,
-					       GTK_WIDGET (label)->allocation.x,
-					       GTK_WIDGET (label)->allocation.y,
-					       GTK_WIDGET (label)->allocation.width,
-					       GTK_WIDGET (label)->allocation.height);
-		gtk_widget_queue_draw (GTK_WIDGET (label));
-    }
+	gtk_label_set (label, str);
 }
 
 GtkWidget*

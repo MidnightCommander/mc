@@ -1,5 +1,54 @@
+Other features requested:
 
+	- Make the default action on drop configurable.
 
+	- Remove extra space on the panels (the in-between
+	  icons)
+
+	- Default font for the icon list 
+
+	- Remove the bottom scrollabar on the views.
+
+	- Status line uses too much space, it might be fixed
+	  by changing it to merge both status in a single
+	  status line.
+
+	[   Status        | 0 bytes in nnnnnnn ]
+	   ^		    ^
+	   |		    + miniinfo.
+	   |
+	   print_vfs_message
+	  
+	- The input line and the navigations icons should be part of an
+	  expert mode.
+
+	- Layout of dialog boxes suck.
+
+	- Add help button to dialog boxes.
+
+	- Add an advanced/simple checkbox.
+
+	- Al of the configuration pages should be in a single
+	  GnomePropertyBox.
+
+	- Optional "hidden menu" option.
+
+	- Fix the progress dialog box to be nicer.
+
+	- Adding more things to the toolbar.
+
+	- Dialogs are popping in the wrong place, this should be fixed
+	  by using:
+
+		gtk_window_position (GDK_WINDOW_POSITION)
+
+	- Entering compressed tar files crashes the program.
+
+	- Substructure notify is taking too much time of processing
+	  I need to a dd a filter and discard everything non-ClientMessage
+	  that is sent to the wroot window.
+
+	
 IMPORTANTE:
 
 >>>>> When something is dragged, the panel is not being refreshed <<<<
