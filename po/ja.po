@@ -8,9 +8,9 @@
 #: gtkedit/editcmd.c:2893 gtkedit/editcmd.c:2898 gtkedit/editcmd.c:2943
 msgid ""
 msgstr ""
-"Project-Id-Version: mc CVS-20000516\n"
-"POT-Creation-Date: 2000-05-22 02:21+0900\n"
-"PO-Revision-Date: 2000-05-22 02:54+0900\n"
+"Project-Id-Version: mc CVS-20000604\n"
+"POT-Creation-Date: 2000-06-04 04:45+0900\n"
+"PO-Revision-Date: 2000-06-04 05:10+0900\n"
 "Last-Translator: Akira TAGOH <at@ff.iij4u.or.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -499,7 +499,7 @@ msgid "Desktop"
 msgstr "デスクトップ"
 
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop-init.c:141
+#: gnome/gdesktop-init.c:146
 msgid "Home directory"
 msgstr "ホームディレクトリ"
 
@@ -665,7 +665,7 @@ msgstr "を処理しました"
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
-#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1823
+#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1820
 msgid "Password:"
 msgstr "パスワード:"
 
@@ -3033,7 +3033,7 @@ msgstr ""
 " %s "
 
 #: src/achown.c:666 src/achown.c:670 src/chmod.c:320 src/chmod.c:324
-#: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:669
+#: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:671
 msgid " Oops... "
 msgstr " あうう... "
 
@@ -3586,15 +3586,15 @@ msgstr " マシン名を入力してください(詳細はF1キー): "
 msgid " Could not chdir to %s "
 msgstr " ディレクトリを%sへ変更できません "
 
-#: src/cmd.c:1382 src/widget.c:1163
+#: src/cmd.c:1382 src/widget.c:1162
 msgid " Link to a remote machine "
 msgstr " リモート・マシンへのリンク "
 
-#: src/cmd.c:1388 src/widget.c:1164
+#: src/cmd.c:1388 src/widget.c:1163
 msgid " FTP to machine "
 msgstr " マシンへのFTP "
 
-#: src/cmd.c:1394 src/widget.c:1165
+#: src/cmd.c:1394 src/widget.c:1164
 msgid " SMB link to machine "
 msgstr " マシンへのSMBリンク "
 
@@ -3729,7 +3729,7 @@ msgstr "ファイル '%s' は存在しますが stat-ed できません: %s"
 msgid "Unknown"
 msgstr "不明"
 
-#: src/ext.c:143 src/user.c:542
+#: src/ext.c:143 src/user.c:544
 #, c-format
 msgid ""
 " Can't generate unique filename \n"
@@ -3738,7 +3738,7 @@ msgstr ""
 " 一意なファイル名を生成できません \n"
 " %s "
 
-#: src/ext.c:150 src/user.c:554
+#: src/ext.c:150 src/user.c:556
 #, c-format
 msgid ""
 " Can't create temporary command file \n"
@@ -3747,7 +3747,7 @@ msgstr ""
 " 一時的なコマンド・ファイルを作成できません \n"
 " %s "
 
-#: src/ext.c:165 src/user.c:576
+#: src/ext.c:165 src/user.c:578
 msgid " Parameter "
 msgstr " パラメータ "
 
@@ -3755,23 +3755,37 @@ msgstr " パラメータ "
 msgid " Can't execute commands on a Virtual File System directory "
 msgstr " 仮想ファイルシステムのディレクトリでコマンドは実行できません "
 
-#: src/ext.c:412
+#: src/ext.c:414
 msgid " file error"
 msgstr " ファイルエラー"
 
-#: src/ext.c:413
+#: src/ext.c:415
 msgid "Format of the "
 msgstr "Format of the "
 
-#: src/ext.c:431
+#: src/ext.c:417
+msgid ""
+"mc.ext file has changed\n"
+"with version 3.0. It seems that installation\n"
+"failed. Please fetch a fresh new copy from the\n"
+"Midnight Commander package or in case you don't\n"
+"have any, get it from ftp://ftp.nuclecu.unam.mx."
+msgstr ""
+"mc.ext ファイルはバージョン 3.0 になって\n"
+"変更されました．インストールに失敗したようです．\n"
+"Midnight Commander パッケージから新鮮な新しい\n"
+"コピーを取ってくるか，万一に備えてどれも取らずに\n"
+"ftp://ftp.nuclecu.unam.mx から入手して下さい．"
+
+#: src/ext.c:432
 msgid " file error "
 msgstr " ファイルエラー "
 
-#: src/ext.c:432
+#: src/ext.c:433
 msgid "Format of the ~/"
 msgstr "ファイル ~/"
 
-#: src/ext.c:432
+#: src/ext.c:433
 msgid ""
 " file has changed\n"
 "with version 3.0. You may want either to\n"
@@ -3781,7 +3795,7 @@ msgstr ""
 "\n"
 " "
 
-#: src/ext.c:434
+#: src/ext.c:435
 msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
@@ -3789,7 +3803,7 @@ msgstr ""
 "mc.ext からコピーするか、それを書き方の\n"
 "サンプルとしてください\n"
 
-#: src/ext.c:436
+#: src/ext.c:437
 msgid "mc.ext will be used for this moment."
 msgstr "mc.ext をとりあえず使います。"
 
@@ -4628,7 +4642,7 @@ msgstr " ヘルプファイルでノード [Contents] を見付けられません "
 msgid " Help "
 msgstr " ヘルプ "
 
-#: src/help.c:766 src/user.c:687
+#: src/help.c:766 src/user.c:689
 #, c-format
 msgid ""
 " Can't open file %s \n"
@@ -6010,32 +6024,44 @@ msgstr ""
 "ファイル %s に書き込めません:\n"
 "%s\n"
 
-#: src/user.c:271
+#: src/user.c:137
+msgid " Format error on file Extensions File "
+msgstr "拡張子ファイル上のフォーマットエラーです"
+
+#: src/user.c:138
+msgid " The %%var macro does not have a default "
+msgstr " %%var マクロはデフォルトを持っていません "
+
+#: src/user.c:139
+msgid " The %%var macros does not have a variable "
+msgstr " %%var マクロは値を持っていません "
+
+#: src/user.c:273
 #, c-format
 msgid " Invalid shell pattern definition \"%c\". "
 msgstr " 不正なシェルパターン定義です \"%c\". "
 
-#: src/user.c:424
+#: src/user.c:426
 msgid " Debug "
 msgstr " デバッグ "
 
-#: src/user.c:433
+#: src/user.c:435
 msgid " ERROR: "
 msgstr " エラー: "
 
-#: src/user.c:437
+#: src/user.c:439
 msgid " True:  "
 msgstr " 真: "
 
-#: src/user.c:439
+#: src/user.c:441
 msgid " False: "
 msgstr " 偽: "
 
-#: src/user.c:645
+#: src/user.c:647
 msgid " Warning -- ignoring file "
 msgstr " 警告 -- ファイルを無視 "
 
-#: src/user.c:646
+#: src/user.c:648
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
@@ -6044,18 +6070,17 @@ msgstr ""
 "ファイル %s は root やあなたの所有物ではないのに誰でも書き込み\n"
 "可能です.利用するとあなたのセキュリティを侵害する恐れがあります"
 
-#: src/user.c:670
+#: src/user.c:672
 msgid " I can't run programs while logged on a non local directory "
 msgstr "  ローカルでないディレクトリにいる時にプログラムの実行はできません "
 
-#. FIXME: this message is not quite right
 #: src/user.c:770
 #, c-format
-msgid " Empty file %s "
-msgstr " 空のファイル %s "
+msgid " No appropriative entries found in %s "
+msgstr " %s に特定のエントリーは見つかりませんでした "
 
 #. Create listbox
-#: src/user.c:779
+#: src/user.c:776
 msgid " User menu "
 msgstr " ユーザー・メニュー "
 
@@ -6258,7 +6283,7 @@ msgstr "Unform"
 msgid "Format"
 msgstr "Format"
 
-#: src/widget.c:995
+#: src/widget.c:994
 msgid " History "
 msgstr "履歴"
 
@@ -6912,31 +6937,31 @@ msgstr ""
 "%s\n"
 "これはtarアーカイブではないようです"
 
-#: vfs/vfs.c:1141
+#: vfs/vfs.c:1139
 msgid "Changes to file lost"
 msgstr "紛失したファイルに変更します"
 
-#: vfs/vfs.c:1784
+#: vfs/vfs.c:1781
 msgid "Could not parse:"
 msgstr "構文解析が出来ません:"
 
-#: vfs/vfs.c:1786
+#: vfs/vfs.c:1783
 msgid "More parsing errors will be ignored."
 msgstr "多くの構文解析エラーがでましたが無視します"
 
-#: vfs/vfs.c:1786
+#: vfs/vfs.c:1783
 msgid "(sorry)"
 msgstr "(sorry)"
 
-#: vfs/vfs.c:1797
+#: vfs/vfs.c:1794
 msgid "Internal error:"
 msgstr "内部エラー:"
 
-#: vfs/vfs.c:1807
+#: vfs/vfs.c:1804
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
 msgstr "%s: %s: %s %3d%% (%ld バイト転送)"
 
-#: vfs/vfs.c:1808
+#: vfs/vfs.c:1805
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld バイト転送しました"
