@@ -17,8 +17,9 @@ GNU Library General Public License for more details.
  */
 
 /*
- * Look up user and/or group names.
- *
+ * Look up a user or group name from a uid/gid, maintaining a cache.
+ * FIXME, for now it's a one-entry cache.
+ * FIXME2, the "-993" is to reduce the chance of a hit on the first lookup.
  * This file should be modified for non-unix systems to do something
  * reasonable.
  */
@@ -27,15 +28,13 @@ GNU Library General Public License for more details.
 #include <sys/types.h>
 #include <string.h>
 #include <unistd.h>
-#define TAR_NAMES
-#include "tar.h"
-#include "names.h"
-
 #include <stdio.h>
 #include <pwd.h>
 #include <grp.h>
 
-#ifndef TUNMLEN 
+#include "names.h"
+
+#ifndef TUNMLEN
 #define TUNMLEN 256
 #endif
 #ifndef TGNMLEN
@@ -53,31 +52,12 @@ static int my_gid = -993;
 #define myuid	( my_uid < 0? (my_uid = getuid()): my_uid )
 #define	mygid	( my_gid < 0? (my_gid = getgid()): my_gid )
 
-/*
- * Look up a user or group name from a uid/gid, maintaining a cache.
- * FIXME, for now it's a one-entry cache.
- * FIXME2, the "-993" is to reduce the chance of a hit on the first lookup.
- */
-void finduname (char *uname, int uid)
+int
+finduid (char *uname)
 {
     struct passwd *pw;
 
-    if (uid != saveuid) {
-	saveuid = uid;
-	saveuname[0] = '\0';
-	pw = getpwuid (uid);
-	if (pw)
-	    strncpy (saveuname, pw->pw_name, TUNMLEN);
-    }
-    strncpy (uname, saveuname, TUNMLEN);
-}
-
-int finduid (char *uname)
-{
-    struct passwd *pw;
-    extern struct passwd *getpwnam ();
-    
-    if (uname[0] != saveuname[0]/* Quick test w/o proc call */
+    if (uname[0] != saveuname[0]	/* Quick test w/o proc call */
 	||0 != strncmp (uname, saveuname, TUNMLEN)) {
 	strncpy (saveuname, uname, TUNMLEN);
 	pw = getpwnam (uname);
@@ -90,29 +70,12 @@ int finduid (char *uname)
     return saveuid;
 }
 
-
-void findgname (char *gname, int gid)
+int
+findgid (char *gname)
 {
     struct group *gr;
 
-    if (gid != savegid) {
-	savegid = gid;
-	savegname[0] = '\0';
-	(void) setgrent ();
-	gr = getgrgid (gid);
-	if (gr)
-	    strncpy (savegname, gr->gr_name, TGNMLEN);
-    }
-    (void) strncpy (gname, savegname, TGNMLEN);
-}
-
-
-int findgid (char *gname)
-{
-    struct group *gr;
-    extern struct group *getgrnam ();
-    
-    if (gname[0] != savegname[0]/* Quick test w/o proc call */
+    if (gname[0] != savegname[0]	/* Quick test w/o proc call */
 	||0 != strncmp (gname, savegname, TUNMLEN)) {
 	strncpy (savegname, gname, TUNMLEN);
 	gr = getgrnam (gname);
