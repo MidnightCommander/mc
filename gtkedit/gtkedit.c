@@ -1285,74 +1285,43 @@ int edit (const char *file, int line)
     {
 	GnomeUIInfo file_menu[] =
 	{
-	    {
-		GNOME_APP_UI_ITEM, N_ ("Open/Load"), N_ ("Load a different/new file"), gtk_edit_load_file, edit, 0, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN, 'O', GDK_CONTROL_MASK, 0
-	    },
-	    {
-		GNOME_APP_UI_ITEM, N_ ("New"), N_ ("Clear the edit buffer"), gtk_edit_new_file, edit, 0, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW, 'N', GDK_CONTROL_MASK, 0
-	    },
+	    GNOMEUIINFO_MENU_OPEN_ITEM( gtk_edit_load_file, edit),
+            GNOMEUIINFO_MENU_NEW_ITEM( "_New", N_ ("Clear the edit buffer"), gtk_edit_new_file, edit),
 	    GNOMEUIINFO_SEPARATOR,
-	    {
-		GNOME_APP_UI_ITEM, N_ ("Save"), N_ ("Save the current edit buffer to filename"), gtk_edit_save_file, edit, 0, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE, 'S', GDK_CONTROL_MASK, 0
-	    },
-	    {
-		GNOME_APP_UI_ITEM, N_ ("Save As"), N_ ("Save the current edit buffer as filename"), gtk_edit_save_as_file, edit, 0, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE_AS, 'A', GDK_CONTROL_MASK, 0
-	    },
+            GNOMEUIINFO_MENU_SAVE_ITEM( gtk_edit_save_file, edit),
+	    GNOMEUIINFO_MENU_SAVE_AS_ITEM( gtk_edit_save_as_file, edit),
 	    GNOMEUIINFO_SEPARATOR,
-	    {
-		GNOME_APP_UI_ITEM, N_ ("Insert File"), N_ ("Insert text from a file"), gtk_edit_insert_file, edit, 0, 0, 0, 'I', GDK_CONTROL_MASK, 0
-	    },
-	    {
-		GNOME_APP_UI_ITEM, N_ ("Copy to file"), N_ ("copy a block to a file"), gtk_edit_copy_to_file, edit, 0, 0, 0, 'C', GDK_CONTROL_MASK, 0
-	    },
+            GNOMEUIINFO_ITEM_DATA( N_ ("Insert File"), N_ ("Insert text from a file"),
+				   gtk_edit_insert_file, edit, NULL),
+	    GNOMEUIINFO_ITEM_DATA( N_ ("Copy to file"), N_ ("copy a block to a file"),
+				   gtk_edit_copy_to_file, edit, NULL),
 	    GNOMEUIINFO_SEPARATOR,
-	    {
-		GNOME_APP_UI_ITEM, N_ ("Exit"), N_ ("Quit editor"), gtk_edit_quit, edit, 0, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_QUIT, 'Q', GDK_CONTROL_MASK, NULL
-	    },
+	    GNOMEUIINFO_MENU_EXIT_ITEM(gtk_edit_quit,edit),
 	    GNOMEUIINFO_END
+
 	};
 
 	GnomeUIInfo edit_menu[] =
 	{
-	    {
-		GNOME_APP_UI_ITEM, N_ ("Copy"), N_ ("Copy selection to clipboard"), gtk_edit_clip_copy, edit, 0, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_COPY, 'C', GDK_CONTROL_MASK, 0
-	    },
-	    {
-		GNOME_APP_UI_ITEM, N_ ("Cut"), N_ ("Cut selection to clipboard"), gtk_edit_clip_cut, edit, 0, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CUT, 'X', GDK_CONTROL_MASK, 0
-	    },
-	    {
-		GNOME_APP_UI_ITEM, N_ ("Paste"), N_ ("Paste clipboard"), gtk_edit_clip_paste, edit, 0, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PASTE, 'V', GDK_CONTROL_MASK, 0
-	    },
+	    GNOMEUIINFO_MENU_COPY_ITEM(gtk_edit_clip_copy, edit),
+	    GNOMEUIINFO_MENU_CUT_ITEM( gtk_edit_clip_cut, edit),
+	    GNOMEUIINFO_MENU_PASTE_ITEM( gtk_edit_clip_paste, edit),
 	    GNOMEUIINFO_SEPARATOR,
-	    {
-		GNOME_APP_UI_ITEM, N_ ("Undo"), N_ ("Go back in time one key press"), gtk_edit_undo, edit, 0, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PASTE, 'U', GDK_CONTROL_MASK, 0
-	    },
+	    GNOMEUIINFO_MENU_UNDO_ITEM(gtk_edit_undo, edit),
 	    GNOMEUIINFO_END
 	};
 
 	GnomeUIInfo search_menu[] =
 	{
-	    {
-		GNOME_APP_UI_ITEM, N_ ("Find"), N_ ("Find string/regular expression"), gtk_edit_search, edit, 0, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN, 'F', GDK_MOD1_MASK, 0
-	    },
-	    {
-		GNOME_APP_UI_ITEM, N_ ("Find again"), N_ ("Repeat most recent search"), gtk_edit_search_again, edit, 0, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW, 'A', GDK_MOD1_MASK, 0
-	    },
-	    {
-		GNOME_APP_UI_ITEM, N_ ("Search/Replace"), N_ ("Find and replace text/regular expressions"), gtk_edit_replace, edit, 0, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE, 'R', GDK_MOD1_MASK, 0
-	    },
+	    GNOMEUIINFO_MENU_FIND_ITEM(gtk_edit_search, edit),
+	    GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(gtk_edit_search_again, edit),
+	    GNOMEUIINFO_MENU_REPLACE_ITEM(gtk_edit_replace, edit),
 	    GNOMEUIINFO_END
 	};
 
 	GnomeUIInfo help_menu[] =
 	{
-	    {
-		GNOME_APP_UI_ITEM,
-		N_ ("About..."), N_ ("Info about Mcedit"),
-		about_cb, NULL, NULL,
-		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
-		0, (GdkModifierType) 0, NULL
-	    },
+	    GNOMEUIINFO_MENU_ABOUT_ITEM(about_cb, NULL),
 #if 0
 	    GNOMEUIINFO_SEPARATOR,
 	    GNOMEUIINFO_HELP ("hello"),
@@ -1362,10 +1331,10 @@ int edit (const char *file, int line)
 
 	GnomeUIInfo main_menu[] =
 	{
-	    GNOMEUIINFO_SUBTREE (N_ ("File"), file_menu),
-	    GNOMEUIINFO_SUBTREE (N_ ("Edit"), edit_menu),
+	    GNOMEUIINFO_MENU_FILE_TREE(file_menu),
+	    GNOMEUIINFO_MENU_EDIT_TREE(edit_menu),
 	    GNOMEUIINFO_SUBTREE (N_ ("Search/Replace"), search_menu),
-	    GNOMEUIINFO_SUBTREE (N_ ("Help"), help_menu),
+	    GNOMEUIINFO_MENU_HELP_TREE(help_menu),
 	    GNOMEUIINFO_END
 	};
 
