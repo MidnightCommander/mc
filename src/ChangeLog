@@ -1,3 +1,8 @@
+1999-02-16  Alexaander Savelyev <fano@ham.kiev.ua>
+
+	* subshell.c (exit_subshell): Use the size of the buffer, not
+	sizeof of the pointer to the buffer.
+
 Sun Feb 14 02:59:09 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* utilunix.c (my_system): Fix the order of preferenses, as setuid 

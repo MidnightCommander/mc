@@ -694,7 +694,7 @@ tree_store_rescan (char *dir)
 	struct dirent *dp;
 	struct stat buf;
 	tree_entry *entry;
-	
+
 	entry = tree_store_start_check (dir);
 
 	if (!entry)

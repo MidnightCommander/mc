@@ -705,10 +705,10 @@ int exit_subshell (void)
     else
     {
 	if (subshell_type == TCSH)
-	    g_snprintf (pty_buffer, sizeof (pty_buffer), " echo -n Jobs:>/tmp/mc.pipe.%d;jobs>/tmp/"
+	    g_snprintf (pty_buffer, pty_buffer_size, " echo -n Jobs:>/tmp/mc.pipe.%d;jobs>/tmp/"
 		     "mc.pipe.%d;kill -STOP $$\n", getpid (), getpid ());
 	else
-	    g_snprintf (pty_buffer, sizeof (pty_buffer), " echo -n Jobs:>&%d;jobs>&%d;kill -STOP $$\n",
+	    g_snprintf (pty_buffer, pty_buffer_size, " echo -n Jobs:>&%d;jobs>&%d;kill -STOP $$\n",
 		     subshell_pipe[WRITE], subshell_pipe[WRITE]);
 	write (subshell_pty, pty_buffer, strlen (pty_buffer));
 
@@ -735,7 +735,7 @@ int exit_subshell (void)
     if (quit && subshell_type == TCSH)
     {
 	/* We abuse of pty_buffer here, but it doesn't matter at this stage */
-	g_snprintf (pty_buffer, sizeof (pty_buffer), "/tmp/mc.pipe.%d", getpid ());
+	g_snprintf (pty_buffer, pty_buffer_size, "/tmp/mc.pipe.%d", getpid ());
 	if (unlink (pty_buffer) == -1)
 	    perror (__FILE__": couldn't remove named pipe /tmp/mc.pipe.NNN");
     }

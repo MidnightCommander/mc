@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-02-15 17:04-0600\n"
+"POT-Creation-Date: 1999-02-15 21:59-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -181,7 +181,7 @@ msgstr ""
 msgid "Enter extra arguments:"
 msgstr ""
 
-#: gnome/gdesktop.c:375 gnome/gdesktop.c:1603
+#: gnome/gdesktop.c:375 gnome/gdesktop.c:1604
 msgid "Warning"
 msgstr ""
 
@@ -190,25 +190,25 @@ msgstr ""
 msgid "Could not open %s; will not have desktop icons"
 msgstr ""
 
-#: gnome/gdesktop.c:1566
+#: gnome/gdesktop.c:1567
 msgid "Trashcan"
 msgstr ""
 
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop.c:1599
+#: gnome/gdesktop.c:1600
 msgid "Home directory"
 msgstr ""
 
-#: gnome/gdesktop.c:1604
+#: gnome/gdesktop.c:1605
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial desktop icons."
 msgstr ""
 
-#: gnome/gdesktop.c:1910
+#: gnome/gdesktop.c:1911
 msgid "Arrange Icons"
 msgstr ""
 
-#: gnome/gdesktop.c:1911
+#: gnome/gdesktop.c:1912
 msgid "Rescan Desktop"
 msgstr ""
 
@@ -3739,43 +3739,43 @@ msgstr ""
 msgid "The TERM environment variable is unset!\n"
 msgstr ""
 
-#: src/main.c:2539
+#: src/main.c:2541
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr ""
 
-#: src/main.c:2550
+#: src/main.c:2552
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
 
-#: src/main.c:2676
+#: src/main.c:2678
 msgid "Geometry for the window"
 msgstr ""
 
-#: src/main.c:2676
+#: src/main.c:2678
 msgid "GEOMETRY"
 msgstr ""
 
-#: src/main.c:2677
+#: src/main.c:2679
 msgid "No windows opened at startup"
 msgstr ""
 
-#: src/main.c:2678
+#: src/main.c:2680
 msgid "Force activation even if a server is already running"
 msgstr ""
 
-#: src/main.c:2950
+#: src/main.c:2952
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 
-#: src/main.c:3024
+#: src/main.c:3026
 msgid " Notice "
 msgstr ""
 
-#: src/main.c:3025
+#: src/main.c:3027
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
