@@ -1,5 +1,8 @@
 2002-08-15  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Remove check for SIGTSTP, it's not needed for
+	the subshell support.
+
 	* acinclude.m4 (AC_SHORT_D_NAME_LEN): Remove, this test is now
 	done at runtime.
 	* configure.in: Don't use AC_SHORT_D_NAME_LEN.

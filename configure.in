@@ -466,18 +466,6 @@ AC_MSG_RESULT([$filel])
 fi 
 
 
-AC_CACHE_CHECK([for SIGTSTP and SIGCONT signals],
-	       [mc_cv_have_sigtstp],
-	       [AC_TRY_LINK(
-[#include <signal.h>
-],
-[kill(1, SIGTSTP);
-kill(1, SIGCONT);
-],
-[mc_cv_have_sigtstp=yes],
-[mc_cv_have_sigtstp=no])])
-
-
 AC_MSG_CHECKING([for subshell support])
 AC_ARG_WITH(subshell,
 	[--with-subshell=optional   To disable concurrent shell by default
@@ -499,8 +487,7 @@ AC_ARG_WITH(subshell,
 		result="no"
 		;;
 	*)
-		dnl If SIGTSTP is missing, then no subshell
-		result="$mc_cv_have_sigtstp"
+		result="yes"
 		;;
 	esac
 ])
