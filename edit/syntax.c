@@ -88,9 +88,6 @@ int option_syntax_highlighting = 1;
 
 #define syntax_g_free(x) do {if(x) {g_free(x); (x)=0;}} while (0)
 
-/* List of defines */
-static GTree *defines;
-
 static gint
 mc_defines_destroy (gpointer key, gpointer value, gpointer data)
 {
@@ -106,11 +103,11 @@ mc_defines_destroy (gpointer key, gpointer value, gpointer data)
 
 /* Completely destroys the defines tree */
 static inline void
-destroy_defines (void)
+destroy_defines (GTree **defines)
 {
-    g_tree_traverse (defines, mc_defines_destroy, G_POST_ORDER, NULL);
-    g_tree_destroy (defines);
-    defines = 0;
+    g_tree_traverse (*defines, mc_defines_destroy, G_POST_ORDER, NULL);
+    g_tree_destroy (*defines);
+    *defines = 0;
 }
 
 static void
@@ -668,8 +665,8 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
 
     r = edit->rules = g_malloc0 (MAX_CONTEXTS * sizeof (struct context_rule *));
 
-    if (!defines)
-	defines = g_tree_new ((GCompareFunc) strcmp);
+    if (!edit->defines)
+	edit->defines = g_tree_new ((GCompareFunc) strcmp);
 
     for (;;) {
 	char **a;
@@ -778,7 +775,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
 #endif
 	    num_words = 1;
 	    c->keyword[0] = g_malloc0 (sizeof (struct key_word));
-	    subst_defines (defines, a, &args[1024]);
+	    subst_defines (edit->defines, a, &args[1024]);
 	    fg = *a;
 	    if (*a)
 		a++;
@@ -827,7 +824,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
 	    }
 	    k->keyword = g_strdup (*a++);
 	    k->first = *k->keyword;
-	    subst_defines (defines, a, &args[1024]);
+	    subst_defines (edit->defines, a, &args[1024]);
 	    fg = *a;
 	    if (*a)
 		a++;
@@ -851,13 +848,13 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
 
 	    if (argc < 3)
 		break_a;
-	    if ((argv = g_tree_lookup (defines, key))) {
+	    if ((argv = g_tree_lookup (edit->defines, key))) {
 		mc_defines_destroy (NULL, argv, NULL);
 	    } else {
 		key = g_strdup (key);
 	    }
 	    argv = g_new (char *, argc - 1);
-	    g_tree_insert (defines, key, argv);
+	    g_tree_insert (edit->defines, key, argv);
 	    while (*a) {
 		*argv++ = g_strdup (*a++);
 	    };
@@ -902,8 +899,8 @@ void edit_free_syntax_rules (WEdit * edit)
     int i, j;
     if (!edit)
 	return;
-    if (defines)
-	destroy_defines ();
+    if (edit->defines)
+	destroy_defines (&edit->defines);
     if (!edit->rules)
 	return;
     edit_get_rule (edit, -1);

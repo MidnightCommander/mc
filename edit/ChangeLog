@@ -1,3 +1,8 @@
+2003-10-23  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* edit-widget.h (struct WEdit): Add GTree *defines field.
+	* syntax.c: Use edit->defines instead of static defines.
+
 2003-10-16  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* syntax.c (compare_word_to_right): More checks for braces and
