@@ -2137,12 +2137,11 @@ panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *ctx, int x, int y, gu
 		GtkCTreeNode *current;
 		current = gtk_ctree_node_nth (GTK_CTREE (widget), row);
 		panel_tree_check_auto_expand (panel, current);
+		GTK_DTREE (widget)->internal = TRUE;
+		gtk_clist_select_row (GTK_CLIST (widget), row, 0);
+		GTK_DTREE (widget)->internal = FALSE;
 	} else
 		panel_tree_check_auto_expand (panel, NULL);
-	GTK_DTREE (widget)->internal = TRUE;
-	gtk_clist_select_row (GTK_CLIST (widget), row, 0);
-	GTK_DTREE (widget)->internal = FALSE;
-	
 	panel->timer_id = gtk_timeout_add (400, tree_drag_open_directory, data);
 	return TRUE;
 }

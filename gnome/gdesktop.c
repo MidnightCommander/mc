@@ -2394,8 +2394,28 @@ handle_rescan_desktop (GtkWidget *widget, gpointer data)
 {
 	desktop_reload_icons (FALSE, 0, 0);
 }
+static void
+set_background_image (GtkWidget *widget, gpointer data)
+{
+	gchar *bg_capplet;
+	gchar *argv[1];
+	bg_capplet = gnome_is_program_in_path ("background-properties-capplet");
+	if (bg_capplet) {
+		argv[0] = bg_capplet;
+		gnome_execute_async (bg_capplet, 1, argv);
+		g_free (bg_capplet);
+	} else {
+		GtkWidget *msg_box;
+		msg_box = gnome_message_box_new (_("Unable to locate the file:\nbackground-properties-capplet\n"
+						   "in your path.\n\nWe are unable to set the background."),
+						 GNOME_MESSAGE_BOX_WARNING,
+						 GNOME_STOCK_BUTTON_OK,
+						 NULL);
+		gnome_dialog_run (msg_box);
+	}
+}
 static GnomeUIInfo gnome_panel_new_menu [] = {
-	 GNOMEUIINFO_ITEM_NONE(N_("_Terminal"), N_("Launch a new terminal in the current directory"), gnome_open_terminal),
+	GNOMEUIINFO_ITEM_NONE(N_("_Terminal"), N_("Launch a new terminal in the current directory"), gnome_open_terminal),
 	/* If this ever changes, make sure you update create_new_menu accordingly. */
 	GNOMEUIINFO_ITEM_NONE( N_("_Directory..."), N_("Creates a new directory"), gnome_mkdir_cmd ),
 	GNOMEUIINFO_ITEM_NONE( N_("_Launcher..."), N_("Creates a new launcher"), gnome_new_launcher ),
@@ -2411,6 +2431,7 @@ GnomeUIInfo desktop_popup_items[] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_NONE (N_("Recreate Desktop Shortcuts"), NULL, handle_rescan_devices),
 	GNOMEUIINFO_ITEM_NONE (N_("Rescan Desktop"), NULL, handle_rescan_desktop),
+	GNOMEUIINFO_ITEM_NONE (N_("Configure Background Image"), NULL, set_background_image),
 	GNOMEUIINFO_END
 };
 

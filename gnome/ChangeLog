@@ -1,3 +1,8 @@
+1999-03-25  Jonathan Blandford  <jrb@redhat.com>
+
+	* gdesktop.c (set_background_image): now we can set the background
+	from GMC.
+
 1999-03-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* glayout.c (create_new_menu_from): closedir after running.
