@@ -38,7 +38,7 @@ struct utimbuf {
 #endif
 
     /* Our virtual file system layer */
-    
+
     typedef void * vfsid;
 
     struct vfs_stamping;
@@ -404,6 +404,7 @@ extern void mc_vfs_done( void );
 #endif
 
 #define DIR_SEP_CHAR '/'
+#define DIR_SEP_STRING "/"
 
 /* And now some defines for our errors. */
 
