@@ -53,7 +53,7 @@ distcheck 4 enable_largefile=no enable_nls=no with_vfs=no \
 
 echo "Checking the configuration with experimental and rarely used options"
 distcheck 5 with_screen=mcslang with_termcap=yes \
-     with_mmap=no with_subshell=optional
+     with_mmap=no with_subshell=optional enable_netcode=no
 
 if test -x /usr/bin/rpmbuild; then
 	echo "Building RPM package"
