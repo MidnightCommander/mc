@@ -88,6 +88,10 @@ preserve it when the search is suspended.
 Lock files in the editor to prevent opening them more than once.  Warn
 user when opening locked file.
 
+Use KDGKBENT ioctl on Linux console to find the mapping for shifted
+functional keys.  Two mappings are widely used (Shift-F1 = F11 and
+Shift-F1 = F13).  mc should adjust the keys to the mapping.
+
 
 
 After 4.6.1 on 4.6.x branch
