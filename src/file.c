@@ -1330,7 +1330,7 @@ erase_file (FileOpContext *ctx, char *s, long *progress_count, double *progress_
 	return FILE_ABORT;
     mc_refresh ();
 
-    if (progress_count && mc_stat (s, &buf)) {
+    if (progress_count && mc_lstat (s, &buf)) {
         /* ignore, most likely the mc_unlink fails, too */
         buf.st_size = 0;
     }

@@ -1494,6 +1494,9 @@ select_item (WPanel *panel)
     int old_top;
     old_top = panel->top_file;
 #endif
+
+    if (is_a_desktop_panel (panel))
+	return;
     
     if (panel->top_file < 0){
 	repaint = 1;

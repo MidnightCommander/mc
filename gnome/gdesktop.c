@@ -1341,10 +1341,12 @@ create_panel_from_desktop (void)
 					marked_count++;
 					fe->f.marked = TRUE;
 
-					if (S_ISDIR (fe->buf.st_mode))
+					if (S_ISDIR (fe->buf.st_mode)) {
 						dir_marked_count++;
-
-					total += fe->buf.st_size;
+						if (fe->f.dir_size_computed)
+							total += fe->buf.st_size;
+					} else
+						total += fe->buf.st_size;
 				}
 
 				g_free (full_name);

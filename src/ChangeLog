@@ -1,3 +1,13 @@
+1999-03-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* file.c (erase_file): Here we need to mc_lstat(), not mc_stat().
+	Since we use the resulting buf.st_size to update the progress, we
+	need the size of unresolved links.  This also makes it consistent
+	with screen.c:do_file_mark().
+
+	* screen.c (select_item): Return immediately if this is a desktop
+	panel.
+
 1999-03-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* subshell.c (pty_open_slave): Glibc-2.1-based Linux kernels have

@@ -4,6 +4,8 @@
 	panel->count > 0, because we may actually not have any icons in
 	the desktop.
 	(desktop_popup): Reload the desktop once the popup menu is done.
+	(create_panel_from_desktop): Be consistent with the way totals are
+	computed in screen.c:do_file_mark().
 
 	* gnome-file-property-dialog.c (gnome_file_property_dialog_init):
 	Set the dialog to not destroy-on-close.
