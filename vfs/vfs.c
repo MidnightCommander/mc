@@ -318,10 +318,13 @@ mc_open (const char *filename, int flags, ...)
     char *file = vfs_canon (filename);
     struct vfs_class *vfs = vfs_get_class (file);
 
-    /* Get the mode flag */	/* FIXME: should look if O_CREAT is present */
-    va_start (ap, flags);
-    mode = va_arg (ap, int);
-    va_end (ap);
+    /* Get the mode flag */
+    if (flags & O_CREAT) {
+    	va_start (ap, flags);
+    	mode = va_arg (ap, int);
+    	va_end (ap);
+    } else
+        mode = 0;
     
     if (!vfs->open) {
 	g_free (file);

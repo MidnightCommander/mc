@@ -1,5 +1,10 @@
 2004-09-24  Roland Illig  <roland.illig@gmx.de>
 
+	* vfs.c (mc_open): Corrected FIXME. Now the "mode" parameter is
+	only accessed when flags contains O_CREAT.
+
+2004-09-24  Roland Illig  <roland.illig@gmx.de>
+
 	* cpio.c: Replaced NULL with (char *) NULL. Likewise for 0, where
 	NULL was meant.
 	* direntry.c: Likewise.
