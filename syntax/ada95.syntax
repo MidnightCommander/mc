@@ -36,9 +36,12 @@ context default
 
 	keyword whole begin	brightred
 	keyword whole end	brightred
+	keyword whole exit	brightred
 	keyword whole for	brightred
 	keyword whole while	brightred
 	keyword whole if	brightred
+	keyword whole then	brightred
+	keyword whole else	brightred
 	keyword whole case	brightred
 	keyword whole when	brightred
 	keyword whole elsif	brightred
@@ -63,5 +66,4 @@ context default
 
 context exclusive -- \n	brown
 context " "	green/green
-
 
