@@ -3,8 +3,12 @@
 # the warranty are quite big, we leave them at the end of the help file,
 # the index will be consulted quite frequently, so we put it at the beginning. 
 
-if ($#ARGV != 2) {
-    die "Three arguments required";
+if ($#ARGV == 3) {
+    $Topics = "$ARGV[3]";
+} elsif ($#ARGV == 2) {
+    $Topics = 'Topics:';
+} else {
+    die "Usage: gindex.pl man_file tmpl_file out_file [Topic section header]";
 }
 
 $man_file = "$ARGV[0]";
@@ -47,11 +51,11 @@ if (-e "$out_file") {
 
 open (OUTPUT, "> $out_file") or die "Cannot open $out_file: $!\n";
 
-print OUTPUT "\x04[Contents]\nTopics:\n\n";
+print OUTPUT "\x04[Contents]\n$Topics\n\n";
 foreach $node (@nodes){
     if (length $node){
 	$node =~ m/^( *)(.*)\x02(.*)$/;
-	printf OUTPUT ("  %s\x01 %s \x02%s\x03", $1, $3, $2);
+	print OUTPUT ("  $1\x01 $3 \x02$2\x03");
     }
     print OUTPUT "\n";
 }

@@ -1,3 +1,8 @@
+2002-03-01  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* gindex.pl: Add optional 4th argument for translated
+	Content section name.
+	
 2002-02-28  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* mad.c: Make mem_areas dynamically growing.
