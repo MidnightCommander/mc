@@ -8530,178 +8530,178 @@ msgstr "Recuperar sistema de arquivos pata ext2"
 
 # gtkedit/editcmd.c:641 gtkedit/editcmd.c:649 gtkedit/editcmd.c:685
 # gtkedit/editcmd.c:740
-#~ msgid "key '%d 0': "
-#~ msgstr "tecla '%d 0':"
+msgid "key '%d 0': "
+msgstr "tecla '%d 0':"
 
 # gnome/gpopup.c:263 src/screen.c:2292 src/screen.c:2322
 #
-#~ msgid "XView"
-#~ msgstr "XView"
+msgid "XView"
+msgstr "XView"
 
-#~ msgid "Tk"
-#~ msgstr "Tk"
+msgid "Tk"
+msgstr "Tk"
 
 # src/fixhlp.c:171
-#~ msgid "Usage: fixhlp <width> <tocname>\n"
-#~ msgstr "Uso: fixhlp <largura> <nome>\n"
+msgid "Usage: fixhlp <width> <tocname>\n"
+msgstr "Uso: fixhlp <largura> <nome>\n"
 
 # src/fixhlp.c:176
-#~ msgid "fixhlp: Cannot open toc for writing"
-#~ msgstr "fixhlp: impossível abrir nome para escrita"
+msgid "fixhlp: Cannot open toc for writing"
+msgstr "fixhlp: impossível abrir nome para escrita"
 
 # src/fixhlp.c:179
-#~ msgid ""
-#~ "[Contents]\n"
-#~ " Topics:\n"
-#~ "\n"
-#~ msgstr ""
-#~ "[Conteúdo]\n"
-#~ " Tópicos:\n"
-#~ "\n"
+msgid ""
+"[Contents]\n"
+" Topics:\n"
+"\n"
+msgstr ""
+"[Conteúdo]\n"
+" Tópicos:\n"
+"\n"
 
 # gnome/glayout.c:391
-#~ msgid "New _File..."
-#~ msgstr "Novo Arquivo"
+msgid "New _File..."
+msgstr "Novo Arquivo"
 
 # gnome/gscreen.c:1471
-#~ msgid "Creates a new file here"
-#~ msgstr "Cria um novo arquivo aqui"
+msgid "Creates a new file here"
+msgstr "Cria um novo arquivo aqui"
 
 # gtkedit/edit.c:308 gtkedit/edit.c:344
-#~ msgid " Error allocating memory "
-#~ msgstr " Erro ao alocar memória "
+msgid " Error allocating memory "
+msgstr " Erro ao alocar memória "
 
 # gtkedit/editcmd.c:829
-#~ msgid " Error trying to open file for reading "
-#~ msgstr " Erro ao tentar abrir arquivo para leitura "
+msgid " Error trying to open file for reading "
+msgstr " Erro ao tentar abrir arquivo para leitura "
 
 # src/main.c:2254
-#~ msgid " and the Linux console"
-#~ msgstr " e na Console Linux"
+msgid " and the Linux console"
+msgstr " e na Console Linux"
 
 # src/screen.c:650
-#~ msgid "  %s bytes in %d file%s"
-#~ msgstr " %s bytes em %d arquivo%s"
+msgid "  %s bytes in %d file%s"
+msgstr " %s bytes em %d arquivo%s"
 
 # gnome/glayout.c:378
-#~ msgid " Empty file %s "
-#~ msgstr "Arquivo %s vazio "
+msgid " Empty file %s "
+msgstr "Arquivo %s vazio "
 
-#~ msgid "fish: got listing"
-#~ msgstr "peixe: listagem"
+msgid "fish: got listing"
+msgstr "peixe: listagem"
 
 # vfs/ftpfs.c:521
-#~ msgid "ftpfs: could not setup passive mode for source routing"
-#~ msgstr "ftpfs: não foi possível configurar modo passivo para rota de origem"
+msgid "ftpfs: could not setup passive mode for source routing"
+msgstr "ftpfs: não foi possível configurar modo passivo para rota de origem"
 
-#~ msgid "ftpfs: Reading FTP directory %s... (don't use UNIX ls options)"
-#~ msgstr "ftpfs: Lendo diretório FTP %s... (não use opções do ls do UNIX)"
+msgid "ftpfs: Reading FTP directory %s... (don't use UNIX ls options)"
+msgstr "ftpfs: Lendo diretório FTP %s... (não use opções do ls do UNIX)"
 
-#~ msgid "ftpfs: FAIL"
-#~ msgstr "ftpfs: FALHOU"
+msgid "ftpfs: FAIL"
+msgstr "ftpfs: FALHOU"
 
-#~ msgid "ftpfs: reading FTP directory interrupt by user"
-#~ msgstr "ftpfs: leitura do diretório FTP interrompida pelo usuário"
+msgid "ftpfs: reading FTP directory interrupt by user"
+msgstr "ftpfs: leitura do diretório FTP interrompida pelo usuário"
 
-#~ msgid "ftpfs: got listing"
-#~ msgstr "ftpfs: listagem"
+msgid "ftpfs: got listing"
+msgstr "ftpfs: listagem"
 
 # gnome/gdesktop.c:2415
-#~ msgid "Rescan Mountable Devices"
-#~ msgstr "Atualizar dispositivos montáveis"
+msgid "Rescan Mountable Devices"
+msgstr "Atualizar dispositivos montáveis"
 
 # gnome/gdesktop.c:2416 gnome/glayout.c:443
-#~ msgid "Rescan Desktop"
-#~ msgstr "Atualizar Área de Trabalho"
+msgid "Rescan Desktop"
+msgstr "Atualizar Área de Trabalho"
 
 # gnome/gpopup.c:262
-#~ msgid "Open with"
-#~ msgstr "Abrir com"
+msgid "Open with"
+msgstr "Abrir com"
 
 # gnome/gpopup.c:267
-#~ msgid "Move/rename..."
-#~ msgstr "Mover/Renomear..."
+msgid "Move/rename..."
+msgstr "Mover/Renomear..."
 
 # gnome/gscreen.c:1471
-#~ msgid "New folder"
-#~ msgstr "Nova pasta"
+msgid "New folder"
+msgstr "Nova pasta"
 
 # gnome/gscreen.c:1649
-#~ msgid "All files"
-#~ msgstr "Todos os arquivos"
+msgid "All files"
+msgstr "Todos os arquivos"
 
 # gnome/gscreen.c:1651
-#~ msgid "Archives and compressed files"
-#~ msgstr "Arquivos comprimidos"
+msgid "Archives and compressed files"
+msgstr "Arquivos comprimidos"
 
 # gnome/gscreen.c:1653
-#~ msgid "RPM/DEB files"
-#~ msgstr "Pacotes RPM/DEB"
+msgid "RPM/DEB files"
+msgstr "Pacotes RPM/DEB"
 
 # gnome/gscreen.c:1655
-#~ msgid "Text/Document files"
-#~ msgstr "Arquivos Texto/Documento"
+msgid "Text/Document files"
+msgstr "Arquivos Texto/Documento"
 
 # gnome/gscreen.c:1657
-#~ msgid "HTML and SGML files"
-#~ msgstr "Arquivos HTML/SGML"
+msgid "HTML and SGML files"
+msgstr "Arquivos HTML/SGML"
 
 # gnome/gscreen.c:1659
-#~ msgid "Postscript and PDF files"
-#~ msgstr "Arquivos Postscript e PDF"
+msgid "Postscript and PDF files"
+msgstr "Arquivos Postscript e PDF"
 
 # gnome/gscreen.c:1661
-#~ msgid "Spreadsheet files"
-#~ msgstr "Arquivos de planilha"
+msgid "Spreadsheet files"
+msgstr "Arquivos de planilha"
 
 # gnome/gscreen.c:1663
-#~ msgid "Image files"
-#~ msgstr "Arquivos de imagem"
+msgid "Image files"
+msgstr "Arquivos de imagem"
 
 # gnome/gscreen.c:1666
-#~ msgid "Video/animation files"
-#~ msgstr "Arquivos de vídeo/animação"
+msgid "Video/animation files"
+msgstr "Arquivos de vídeo/animação"
 
 # gnome/gscreen.c:1668
-#~ msgid "Audio files"
-#~ msgstr "Arquivos de áudio"
+msgid "Audio files"
+msgstr "Arquivos de áudio"
 
 # gnome/gscreen.c:1670
-#~ msgid "C program files"
-#~ msgstr "Fontes de programas C"
+msgid "C program files"
+msgstr "Fontes de programas C"
 
 # gnome/gscreen.c:1672
-#~ msgid "C++ program files"
-#~ msgstr "Fontes de programas C++"
+msgid "C++ program files"
+msgstr "Fontes de programas C++"
 
 # gnome/gscreen.c:1674
-#~ msgid "Objective-C program files"
-#~ msgstr "Fontes de programas Objective-C"
+msgid "Objective-C program files"
+msgstr "Fontes de programas Objective-C"
 
 # gnome/gscreen.c:1676
-#~ msgid "Scheme program files"
-#~ msgstr "Arquivos de programas Scheme"
+msgid "Scheme program files"
+msgstr "Arquivos de programas Scheme"
 
 # gnome/gscreen.c:1678
-#~ msgid "Assembler program files"
-#~ msgstr "Arquivos de programas Assembler"
+msgid "Assembler program files"
+msgstr "Arquivos de programas Assembler"
 
 # gnome/gscreen.c:1680
-#~ msgid "Misc. program files"
-#~ msgstr "Outros arquivos de programas"
+msgid "Misc. program files"
+msgstr "Outros arquivos de programas"
 
 # gnome/gscreen.c:1899
-#~ msgid "Filter"
-#~ msgstr "Filtro"
+msgid "Filter"
+msgstr "Filtro"
 
 # gtkedit/editmenu.c:402
-#~ msgid "Disk operations"
-#~ msgstr "Operações de Disco"
+msgid "Disk operations"
+msgstr "Operações de Disco"
 
 # src/cmd.c:1117
-#~ msgid " Symlink "
-#~ msgstr " Ligação simbólica "
+msgid " Symlink "
+msgstr " Ligação simbólica "
 
 # src/main.c:2715
-#~ msgid "Force activation even if a server is already running"
-#~ msgstr "Força ativação mesmo que um servidor já esteja sendo executado"
+msgid "Force activation even if a server is already running"
+msgstr "Força ativação mesmo que um servidor já esteja sendo executado"
