@@ -592,8 +592,8 @@ int this_allocate_color (WEdit *edit, char *fg)
 	return allocate_color (fg);
     return allocate_color (p + 1);
 }
-#endif
-#endif
+#endif	/* GTK */
+#endif	/* MIDNIGHT */
 
 static char *error_file_name = 0;
 
@@ -613,7 +613,12 @@ static FILE *open_include_file (char *filename)
     f = fopen (p, "r");
     if (f)
 	return f;
+#ifndef	MIDNIGHT
     strcpy (p, LIBDIR "/syntax/");
+#else
+    strcpy (p, mc_home);
+    strcat (p, "/syntax/");
+#endif
     strcat (p, filename);
     syntax_free (error_file_name);
     error_file_name = (char *) strdup (p);
@@ -1207,7 +1212,7 @@ static const char * const syntax_text[] = {
 "file ..\\*\\\\.sh$ Shell\\sScript ^#!\\s\\*/.\\*/(ksh|bash|sh|pdkzsh)",
 "include sh.syntax",
 "",
-"file ..\\*\\\\.(pl|PL])$ Perl\\sProgram ^#!\\s\\*/.\\*/perl",
+"file ..\\*\\\\.(pl|PL|pm|PM])$ Perl\\sProgram ^#!\\s\\*/.\\*/perl",
 "include perl.syntax",
 "",
 "file ..\\*\\\\.(py|PY])$ Python\\sProgram ^#!\\s\\*/.\\*/python",
@@ -1556,6 +1561,4 @@ int edit_check_spelling (WEdit * edit)
 }
 
 #endif		/* !defined(MIDNIGHT) || defined(HAVE_SYNTAXH) */
-
-
 

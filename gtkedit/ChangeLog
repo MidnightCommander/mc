@@ -1,3 +1,11 @@
+2001-05-30  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* syntax.c (open_include_file) [MIDNIGHT]: Don't hardcode location 
+	of syntax file(s) with LIBDIR, use mc_home instead.
+	From Ludovic Drolez <ludovic.drolez@freealter.com>.
+
+	(syntax_text): Use perl.syntax to highlight perl modules (.pm).
+
 2001-05-18  Pavel Roskin  <proski@gnu.org>
 
 	* editcmd.c (edit_replace_prompt): Warning fix.
