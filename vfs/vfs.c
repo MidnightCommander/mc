@@ -1150,8 +1150,15 @@ timeoutcmp (struct timeval *t1, struct timeval *t2)
 void
 vfs_timeout_handler (void)
 {
+    static int locked;
     struct timeval time;
     struct vfs_stamping *stamp, *st;
+
+    /* Avoid recursive invocation, e.g. when one of the free functions
+       calls message_1s */
+    if (locked)
+	return;
+    locked = 1;
 
     gettimeofday (&time, NULL);
     time.tv_sec -= vfs_timeout;
@@ -1165,6 +1172,7 @@ vfs_timeout_handler (void)
         } else
             stamp = stamp->next;
     }
+    locked = 0;
 }
 
 void

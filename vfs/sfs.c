@@ -201,21 +201,20 @@ static int sfs_readlink (vfs *me, char *path, char *buf, int size)
     return readlink (path, buf, size);
 }
 
-#define CUR (*cur)
 static vfsid sfs_getid (vfs *me, char *path, struct vfs_stamping **parent)
 {	/* FIXME: what should I do? */
     vfs *v;
     vfsid id;
     struct vfs_stamping *par;
-    struct cachedfile **cur = &head;
+    struct cachedfile *cur = head;
 
-    while (CUR) {
-        if ((!strcmp( path, CUR->name )) &&
-	    (vfs_uid == CUR->uid))
+    while (cur) {
+        if ((!strcmp( path, cur->name )) &&
+	    (vfs_uid == cur->uid))
 	    break;
-	CUR = CUR->next;
+	cur = cur->next;
     }
-    if (!CUR)
+    if (!cur)
         vfs_die( "sfs_getid of noncached thingie?" );
 
     *parent = NULL;
@@ -240,19 +239,19 @@ static vfsid sfs_getid (vfs *me, char *path, struct vfs_stamping **parent)
 static void sfs_free (vfsid id)
 {
     struct cachedfile *which = (struct cachedfile *) id;
-    struct cachedfile **cur = &head;
+    struct cachedfile *cur, *prev;
 
-    unlink( CUR->cache );
-    while (CUR) {
-        if (CUR == which)
-	    break;
-	CUR = CUR->next;
-    }
-    if (!CUR)
+    for (cur = head, prev = 0; cur && cur != which; prev = cur, cur = cur->next)
+	;
+    if (!cur)
     	vfs_die( "Free of thing which is unknown to me\n" );
-    *cur = CUR->next;
+    unlink (cur->cache);
+
+    if (prev)
+	prev->next = cur->next;
+    else
+	head = cur->next;
 }
-#undef CUR
 
 static void sfs_fill_names (vfs *me, void (*func)(char *))
 {

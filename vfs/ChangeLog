@@ -1,3 +1,14 @@
+Sat Jan  9 19:15:00 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* vfs.c (vfs_timeout_handler): Guard from recursive invocation.
+
+Sat Jan  9 19:13:28 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* sfs.c (sfs_free): Fixed wrong linked list handling (head was
+	lost after the first iteration).
+
+	(sfs_getid): dito, return value was wrong.
+
 Sat Jan  9 22:49:02 1999  Timur I. Bakeyev <timur@com.bat.ru>
 
 	* vfs.c (parse_ls_lga): Rewrite function to make it more stright.
