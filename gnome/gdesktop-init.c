@@ -14,6 +14,7 @@
 #include "gdesktop-init.h"
 #include "gprint.h"
 #include "gmount.h"
+#include "../vfs/vfs.h"
 
 static void
 desktop_load_init_from (const char *file)
@@ -133,7 +134,15 @@ desktop_init_at (const char *dir)
 void
 gdesktop_links_init (void)
 {
+	char *home_link_name;
 	char *dir;
+
+	/* Create the link to the user's home directory so that he will have an icon */
+	home_link_name = g_concat_dir_and_file (desktop_directory, _("Home directory"));
+	mc_symlink (gnome_user_home_dir, home_link_name);
+	g_free (home_link_name);
+
+	/* Create custom links */
 
 	desktop_init_at (DESKTOP_INIT_DIR);
 

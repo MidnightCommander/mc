@@ -71,6 +71,7 @@ gboolean    do_mount_umount (char *filename, gboolean is_mount);
 gboolean    do_eject (char *filename);
 
 void desktop_rescan_devices (void);
+void desktop_recreate_default_icons (void);
 void desktop_reload_icons (int user_pos, int xpos, int ypos);
 void desktop_create_url (const char *filename, const char *title, const char *url, const char *icon);
 

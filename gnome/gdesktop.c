@@ -2188,8 +2188,6 @@ create_layout_info (void)
 static void
 create_desktop_dir (void)
 {
-	char *home_link_name;
-
 	if (getenv ("GNOME_DESKTOP_DIR") != NULL)
 		desktop_directory = g_strdup (getenv ("GNOME_DESKTOP_DIR"));
 	else
@@ -2197,20 +2195,7 @@ create_desktop_dir (void)
 
 	if (!g_file_exists (desktop_directory)) {
 		/* Create the directory */
-
 		mkdir (desktop_directory, 0777);
-
-		/* Create the link to the user's home directory so that he will have an icon */
-		home_link_name = g_concat_dir_and_file (desktop_directory, _("Home directory"));
-
-		if (mc_symlink (gnome_user_home_dir, home_link_name) != 0) {
-			message (FALSE,
-				 _("Warning"),
-				 _("Could not symlink %s to %s; "
-				   "will not have initial home desktop icon."),
-				 gnome_user_home_dir, home_link_name);
-		}
-		g_free (home_link_name);
 
 		/* Create the default set of icons */
 
@@ -2551,6 +2536,13 @@ handle_new_window (GtkWidget *widget, gpointer data)
 	new_panel_at (gnome_user_home_dir);
 }
 
+/* Callback for rescanning the desktop directory */
+static void
+handle_rescan_desktop (GtkWidget *widget, gpointer data)
+{
+	desktop_reload_icons (FALSE, 0, 0);
+}
+
 /* Rescans the mountable devices in the desktop and re-creates their icons */
 void
 desktop_rescan_devices (void)
@@ -2567,11 +2559,18 @@ handle_rescan_devices (GtkWidget *widget, gpointer data)
 	desktop_rescan_devices ();
 }
 
-/* Callback for rescanning the desktop directory */
-static void
-handle_rescan_desktop (GtkWidget *widget, gpointer data)
+void
+desktop_recreate_default_icons (void)
 {
-	desktop_reload_icons (FALSE, 0, 0);
+	gdesktop_links_init ();
+	gprint_setup_devices ();
+}
+
+/* Callback for re-creating the default icons */
+static void
+handle_recreate_default_icons (GtkWidget *widget, gpointer data)
+{
+	desktop_recreate_default_icons ();
 }
 
 static void
@@ -2638,8 +2637,10 @@ GnomeUIInfo desktop_popup_items[] = {
 	GNOMEUIINFO_SUBTREE (N_("_Arrange Icons"), desktop_arrange_icons_items),
 	GNOMEUIINFO_ITEM_NONE (N_("Create _New Window"), NULL, handle_new_window),
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_ITEM_NONE (N_("Rescan Desktop De_vices"), NULL, handle_rescan_devices),
-	GNOMEUIINFO_ITEM_NONE (N_("Rescan _Desktop"), NULL, handle_rescan_desktop),
+	GNOMEUIINFO_ITEM_NONE (N_("Rescan _Desktop Directory"), NULL, handle_rescan_desktop),
+	GNOMEUIINFO_ITEM_NONE (N_("Rescan De_vices"), NULL, handle_rescan_devices),
+	GNOMEUIINFO_ITEM_NONE (N_("Re-create Default _Icons"), NULL, handle_recreate_default_icons),
+	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_NONE (N_("Configure _Background Image"), NULL, set_background_image),
 	GNOMEUIINFO_END
 };

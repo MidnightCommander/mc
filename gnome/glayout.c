@@ -343,7 +343,7 @@ gnome_exit (void)
 }
 
 static void
-do_desktop_rescan_devices (void)
+do_rescan_desktop (void)
 {
 	desktop_reload_icons (FALSE, 0, 0);
 }
@@ -461,8 +461,9 @@ GnomeUIInfo gnome_panel_about_menu [] = {
 GnomeUIInfo gnome_panel_desktop_menu [] = {
 	GNOMEUIINFO_SUBTREE(N_("_Arrange Icons"), desktop_arrange_icons_items),
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_ITEM_NONE (N_("Recreate Desktop _Shortcuts"), NULL, desktop_rescan_devices),
-	GNOMEUIINFO_ITEM_NONE (N_("Rescan _Desktop"), NULL, do_desktop_rescan_devices),
+	GNOMEUIINFO_ITEM_NONE (N_("Rescan _Desktop Directory"), NULL, do_rescan_desktop),
+	GNOMEUIINFO_ITEM_NONE (N_("Rescan De_vices"), NULL, desktop_rescan_devices),
+	GNOMEUIINFO_ITEM_NONE (N_("Re-create Default _Icons"), NULL, desktop_recreate_default_icons),
 	GNOMEUIINFO_END
 };
 
