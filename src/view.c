@@ -1091,11 +1091,10 @@ view_update (WView *view, gboolean update_gui)
 }
 
 static inline void
-my_define (Dlg_head *h, int idx, char *text,
-	   void (*fn) (WView *), WView *view)
+my_define (Dlg_head *h, int idx, char *text, void (*fn) (WView *),
+	   WView *view)
 {
-    define_label_data (h, (Widget *) view, idx, text, (buttonbarfn) fn,
-		       view);
+    define_label_data (h, idx, text, (buttonbarfn) fn, view);
 }
 
 /* If the last parameter is nonzero, it means we want get the count of lines
@@ -2044,7 +2043,7 @@ view_labels (WView *view)
 {
     Dlg_head *h = view->widget.parent;
 
-    define_label (h, (Widget *) view, 1, _("Help"), view_help_cmd);
+    define_label (h, 1, _("Help"), view_help_cmd);
 
     my_define (h, 10, _("Quit"), view_quit_cmd, view);
     my_define (h, 4, view->hex_mode ? _("Ascii") : _("Hex"),
@@ -2074,7 +2073,7 @@ view_labels (WView *view)
 	my_define (h, 3, _("Quit"), view_quit_cmd, view);
     }
 
-    redraw_labels (h, (Widget *) view);
+    redraw_labels (h);
 }
 
 /* Both views */
@@ -2399,7 +2398,7 @@ view_adjust_size (Dlg_head *h)
 
     /* Look up the viewer and the buttonbar, we assume only two widgets here */
     view = (WView *) find_widget_type (h, (callback_fn) view_callback);
-    bar = (WButtonBar *) view->widget.parent->current->next->widget;
+    bar = find_buttonbar (h);
     widget_set_size (&view->widget, 0, 0, LINES - 1, COLS);
     widget_set_size (&bar->widget, LINES - 1, 0, 1, COLS);
 

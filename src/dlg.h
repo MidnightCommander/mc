@@ -114,11 +114,12 @@ typedef struct Widget {
 #define  W_IS_INPUT         16
 #define  W_PANEL_HIDDEN     32
 
+/* Items in the circular buffer.  Each item refers to a widget.  */
 typedef struct Widget_Item {
     int dlg_id;
-    struct Widget_Item *next;	/* next in circle buffer */
-    struct Widget_Item *prev;	/* previous in circle buffer */
-    Widget *widget;		/* point to the component */
+    struct Widget_Item *next;
+    struct Widget_Item *prev;
+    Widget *widget;
 } Widget_Item;
 
 /* draw box in window */
@@ -189,7 +190,6 @@ extern Dlg_head *current_dlg;
 int  send_message         (Dlg_head *h, Widget *w, int msg, int par);
 int  send_message_to      (Dlg_head *h, Widget *w, int msg, int par);
 void dlg_replace_widget   (Dlg_head *h, Widget *old, Widget *new);
-void widget_redraw        (Dlg_head *h, Widget_Item *w);
 int  dlg_overlap          (Widget *a, Widget *b);
 void widget_erase         (Widget *);
 void dlg_erase            (Dlg_head *h);

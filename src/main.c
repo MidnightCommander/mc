@@ -1410,14 +1410,12 @@ suspend_cmd (void)
 }
 
 static void
-init_labels (Widget *paneletc)
+init_labels (void)
 {
-    define_label (midnight_dlg, paneletc, 1, _("Help"), help_cmd);
-    define_label (midnight_dlg, paneletc, 2, _("Menu"),
-		  user_file_menu_cmd);
-    define_label (midnight_dlg, paneletc, 9, _("PullDn"), menu_cmd);
-    define_label (midnight_dlg, paneletc, 10, _("Quit"),
-		  (voidfn) quit_cmd);
+    define_label (midnight_dlg, 1, _("Help"), help_cmd);
+    define_label (midnight_dlg, 2, _("Menu"), user_file_menu_cmd);
+    define_label (midnight_dlg, 9, _("PullDn"), menu_cmd);
+    define_label (midnight_dlg, 10, _("Quit"), (voidfn) quit_cmd);
 }
 
 static const key_map ctl_x_map[] = {
@@ -1877,8 +1875,7 @@ setup_panels_and_run_mc (void)
     add_widget (midnight_dlg, get_panel_widget (second));
     add_widget (midnight_dlg, the_menubar);
 
-    init_labels (get_panel_widget (0));
-    init_labels (get_panel_widget (1));
+    init_labels ();
 
     /* Run the Midnight Commander if no file was specified in the command line */
     run_dlg (midnight_dlg);

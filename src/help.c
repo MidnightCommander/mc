@@ -810,20 +810,19 @@ interactive_display (char *filename, char *node)
     add_widget (whelp, help_bar);
     add_widget (whelp, md);
 
-    define_label_data (whelp, (Widget *) NULL, 1, _("Help"),
-		       (buttonbarfn) help_help_cmd, whelp);
-    define_label_data (whelp, (Widget *) NULL, 2, _("Index"),
-		       (buttonbarfn) help_index_cmd, whelp);
-    define_label_data (whelp, (Widget *) NULL, 3, _("Prev"),
-		       (buttonbarfn) prev_node_cmd, whelp);
-    define_label (whelp, (Widget *) NULL, 4, "", 0);
-    define_label (whelp, (Widget *) NULL, 5, "", 0);
-    define_label (whelp, (Widget *) NULL, 6, "", 0);
-    define_label (whelp, (Widget *) NULL, 7, "", 0);
-    define_label (whelp, (Widget *) NULL, 8, "", 0);
-    define_label (whelp, (Widget *) NULL, 9, "", 0);
-    define_label_data (whelp, (Widget *) NULL, 10, _("Quit"), quit_cmd,
+    define_label_data (whelp, 1, _("Help"), (buttonbarfn) help_help_cmd,
 		       whelp);
+    define_label_data (whelp, 2, _("Index"), (buttonbarfn) help_index_cmd,
+		       whelp);
+    define_label_data (whelp, 3, _("Prev"), (buttonbarfn) prev_node_cmd,
+		       whelp);
+    define_label (whelp, 4, "", 0);
+    define_label (whelp, 5, "", 0);
+    define_label (whelp, 6, "", 0);
+    define_label (whelp, 7, "", 0);
+    define_label (whelp, 8, "", 0);
+    define_label (whelp, 9, "", 0);
+    define_label_data (whelp, 10, _("Quit"), quit_cmd, whelp);
 
     run_dlg (whelp);
     interactive_display_finish ();

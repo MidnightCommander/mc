@@ -1,5 +1,13 @@
 2002-11-12  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.c (widget_redraw): Remove.
+	* widget.c (find_buttonbar): Use find_widget_type().  Make
+	global.
+	(define_label): Remove paneletc argument.  Change all callers.
+	(define_label_data): Likewise.
+	(redraw_labels): Likewise.  Use find_buttonbar().
+	* view.c (view_adjust_size): Use find_buttonbar().
+
 	* menu.h: Remove "*" from the definition of the type "Menu"
 	for consistency with other types.  Change all dependencies.
 	(menubar_event): Make static.

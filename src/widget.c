@@ -2288,29 +2288,23 @@ set_label_text (WButtonBar * bb, int index, char *text)
     bb->labels[index - 1].text = g_strdup (text);
 }
 
-/* paneletc is either the panel widget, or info or view or tree widget */
-static WButtonBar *
-find_buttonbar (Dlg_head * h, Widget * paneletc)
+/* Find ButtonBar widget in the dialog */
+WButtonBar *
+find_buttonbar (Dlg_head *h)
 {
     WButtonBar *bb;
-    Widget_Item *item;
-    int i;
 
-    bb = 0;
-    for (i = 0, item = h->current; i < h->count; i++, item = item->next) {
-	if (item->widget->callback == (callback_fn) buttonbar_callback) {
-	    bb = (WButtonBar *) item->widget;
-	    break;
-	}
-    }
+    bb = (WButtonBar *) find_widget_type (h, (callback_fn)
+					  buttonbar_callback);
     return bb;
 }
 
 void
-define_label_data (Dlg_head * h, Widget * paneletc, int idx, char *text,
-		   buttonbarfn cback, void *data)
+define_label_data (Dlg_head *h, int idx, char *text, buttonbarfn cback,
+		   void *data)
 {
-    WButtonBar *bb = find_buttonbar (h, paneletc);
+    WButtonBar *bb = find_buttonbar (h);
+
     if (!bb)
 	return;
 
@@ -2320,23 +2314,20 @@ define_label_data (Dlg_head * h, Widget * paneletc, int idx, char *text,
 }
 
 void
-define_label (Dlg_head * h, Widget * paneletc, int idx, char *text,
-	      void (*cback) (void))
+define_label (Dlg_head *h, int idx, char *text, void (*cback) (void))
 {
-    define_label_data (h, paneletc, idx, text, (buttonbarfn) cback, 0);
+    define_label_data (h, idx, text, (buttonbarfn) cback, 0);
 }
 
+/* Redraw labels of the buttonbar */
 void
-redraw_labels (Dlg_head *h, Widget *paneletc)
+redraw_labels (Dlg_head *h)
 {
-    Widget_Item *item;
-    int i;
+    WButtonBar *bb = find_buttonbar (h);
 
-    for (i = 0, item = h->current; i < h->count; i++, item = item->next){
-	if (item->widget->callback == (callback_fn) buttonbar_callback){
-	    widget_redraw (h, item);
-	    return;
-	}
-    }
+    if (!bb)
+	return;
+
+    send_message (h, (Widget *) bb, WIDGET_DRAW, 0);
 }
 

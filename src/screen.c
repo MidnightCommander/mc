@@ -2177,15 +2177,15 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
 	show_dir (panel);
 	select_item (panel);
 
-	define_label (h, (Widget *)panel, 1, _("Help"), help_cmd);
-	define_label (h, (Widget *)panel, 2, _("Menu"), user_file_menu_cmd);
-	define_label (h, (Widget *)panel, 3, _("View"), view_panel_cmd);
-	define_label (h, (Widget *)panel, 4, _("Edit"), edit_panel_cmd);
-	define_label (h, (Widget *)panel, 5, _("Copy"), copy_cmd);
-	define_label (h, (Widget *)panel, 6, _("RenMov"), ren_cmd);
-	define_label (h, (Widget *)panel, 7, _("Mkdir"), mkdir_panel_cmd);
-	define_label (h, (Widget *)panel, 8, _("Delete"), delete_cmd);
-	redraw_labels (h, (Widget *)panel);
+	define_label (h, 1, _("Help"), help_cmd);
+	define_label (h, 2, _("Menu"), user_file_menu_cmd);
+	define_label (h, 3, _("View"), view_panel_cmd);
+	define_label (h, 4, _("Edit"), edit_panel_cmd);
+	define_label (h, 5, _("Copy"), copy_cmd);
+	define_label (h, 6, _("RenMov"), ren_cmd);
+	define_label (h, 7, _("Mkdir"), mkdir_panel_cmd);
+	define_label (h, 8, _("Delete"), delete_cmd);
+	redraw_labels (h);
 
 	/* Chain behaviour */
 	default_proc (h, WIDGET_FOCUS, par);

@@ -782,8 +782,8 @@ tree_toggle_navig (WTree *tree)
 static void
 set_navig_label (WTree *tree)
 {
-    define_label_data (tree->widget.parent, (Widget *) tree,
-		       4, tree_navigation_flag ? _("Static") : _("Dynamc"),
+    define_label_data (tree->widget.parent, 4,
+		       tree_navigation_flag ? _("Static") : _("Dynamc"),
 		       (buttonbarfn) tree_toggle_navig, tree);
 }
 
@@ -1004,7 +1004,7 @@ tree_frame (Dlg_head *h, WTree *tree)
 static int
 tree_callback (Dlg_head *h, WTree *tree, int msg, int par)
 {
-    switch (msg){
+    switch (msg) {
     case WIDGET_DRAW:
 	tree_frame (h, tree);
 	show_tree (tree);
@@ -1015,26 +1015,26 @@ tree_callback (Dlg_head *h, WTree *tree, int msg, int par)
 
     case WIDGET_FOCUS:
 	tree->active = 1;
-	define_label (h, (Widget *)tree, 1, _("Help"), (voidfn) tree_help_cmd);
-	define_label_data (h, (Widget *)tree,
-	    2, _("Rescan"), (buttonbarfn)tree_rescan_cmd, tree);
-	define_label_data (h, (Widget *)tree,
-	    3, _("Forget"), (buttonbarfn)tree_forget_cmd, tree);
-	define_label_data (h, (Widget *)tree,
-	    5, _("Copy"),   (buttonbarfn) tree_copy_cmd, tree);
-	define_label_data (h, (Widget *)tree,
-	    6, _("RenMov"), (buttonbarfn) tree_move_cmd, tree);
+	define_label (h, 1, _("Help"), (voidfn) tree_help_cmd);
+	define_label_data (h, 2, _("Rescan"),
+			   (buttonbarfn) tree_rescan_cmd, tree);
+	define_label_data (h, 3, _("Forget"),
+			   (buttonbarfn) tree_forget_cmd, tree);
+	define_label_data (h, 5, _("Copy"), (buttonbarfn) tree_copy_cmd,
+			   tree);
+	define_label_data (h, 6, _("RenMov"), (buttonbarfn) tree_move_cmd,
+			   tree);
 #if 0
 	/* FIXME: mkdir is currently defunct */
-	define_label_data (h, (Widget *)tree,
-	    7, _("Mkdir"),  (buttonbarfn) tree_mkdir_cmd, tree);
+	define_label_data (h, 7, _("Mkdir"), (buttonbarfn) tree_mkdir_cmd,
+			   tree);
 #else
-        define_label (h, (Widget *)tree, 7, "", 0);
+	define_label (h, 7, "", 0);
 #endif
-	define_label_data (h, (Widget *)tree,
-	    8, _("Rmdir"),  (buttonbarfn) tree_rmdir_cmd, tree);
+	define_label_data (h, 8, _("Rmdir"), (buttonbarfn) tree_rmdir_cmd,
+			   tree);
 	set_navig_label (tree);
-	redraw_labels (h, (Widget *)tree);
+	redraw_labels (h);
 
 
 	/* FIXME: Should find a better way of only displaying the

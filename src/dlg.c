@@ -924,18 +924,6 @@ void dlg_replace_widget (Dlg_head *h, Widget *old, Widget *new)
     } while (p != h->current);
 }
 
-void widget_redraw (Dlg_head *h, Widget_Item *w)
-{
-    Widget_Item *save = h->current;
-
-    if (!h->current)
-        return;
-
-    h->current = w;
-    (*w->widget->callback)(h, h->current->widget, WIDGET_DRAW, 0);
-    h->current = save;
-}
-
 /* Returns the index of h->current from h->first */
 int dlg_item_number (Dlg_head *h)
 {

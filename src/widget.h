@@ -8,7 +8,6 @@
 
 /* Please note that the first element in all the widgets is a     */
 /* widget variable of type Widget.  We abuse this fact everywhere */
-/* Widget_Items */
 
 #define HIDDEN_BUTTON		0
 #define NARROW_BUTTON		1
@@ -202,11 +201,12 @@ char *listbox_add_item (WListbox *l, enum append_pos pos, int
 
 /* Buttonbar routines */
 WButtonBar *buttonbar_new (int visible);
+WButtonBar *find_buttonbar (Dlg_head *h);
 typedef void (*voidfn)(void);
-void define_label (Dlg_head *, Widget *paneletc, int index, char *text, voidfn);
-void define_label_data (Dlg_head *h, Widget *paneletc, int idx, char *text,
+void define_label (Dlg_head *, int index, char *text, voidfn);
+void define_label_data (Dlg_head *h, int idx, char *text,
 			buttonbarfn cback, void *data);
-void redraw_labels (Dlg_head *h, Widget *paneletc);
+void redraw_labels (Dlg_head *h);
 void buttonbar_hint (WButtonBar *bb, char *s);
 
 #endif	/* __WIDGET_H */
