@@ -831,6 +831,7 @@ destroy_dlg (Dlg_head *h)
     if (h->refresh_pushed)
 	pop_refresh (); 
 
+    x_destroy_dlg_start (h);
     dlg_broadcast_msg (h, WIDGET_DESTROY, 0);
     c = h->current;
     for (i = 0; i < h->count; i++){

@@ -761,6 +761,9 @@ panel_drop_data_available (GtkWidget *widget, GdkEventDropDataAvailable *data, W
 
 	if (drop_dir != panel->cwd)
 		free (drop_dir);
+
+	update_one_panel_widget (panel, 0, UP_KEEPSEL);
+	panel_update_contents (panel);
 }
 
 /* Workaround for the CList that is not adding its clist-window to the DND windows */

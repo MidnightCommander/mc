@@ -220,6 +220,7 @@ x_add_widget (Dlg_head *h, Widget_Item *w)
 static int
 gnome_dlg_send_destroy (GtkWidget *widget, GdkEvent *event, Dlg_head *h)
 {
+	gtk_widget_hide (GTK_WIDGET (h->wdata));
 	h->ret_value = B_CANCEL;
 	dlg_stop (h);
 	return TRUE;
@@ -242,7 +243,7 @@ x_init_dlg (Dlg_head *h)
 		gtk_grab_add (GTK_WIDGET (ted));
 		
 		if (!ted->need_gui)
-			gtk_window_set_policy (GTK_WINDOW (ted), 0, 0, 0);
+			gtk_window_set_policy (GTK_WINDOW (h->wdata), 0, 0, 0);
 		
 		gtk_widget_show (GTK_WIDGET (h->wdata));
 	}
@@ -251,7 +252,23 @@ x_init_dlg (Dlg_head *h)
 	x_focus_widget (h->current);
 }
 
+/*
+ * This function is invoked when the dialog is started to be
+ * destroyed, before any widgets have been destroyed.
+ *
+ * We only hide the toplevel Gtk widget to avoid the flickering
+ * of the destruction process
+ */
+void
+x_destroy_dlg_start (Dlg_head *h)
+{
+	gtk_widget_hide (GTK_WIDGET (h->wdata));
+}
 
+/*
+ * Called when the Dlg_head has been destroyed.  This only cleans
+ * up/releases the frontend resources
+ */
 void
 x_destroy_dlg (Dlg_head *h)
 {
@@ -298,8 +315,11 @@ gnome_idle_handler (gpointer data)
 {
 	Dlg_head *h = data;
 
-	(*h->callback)(h, 0, DLG_IDLE);
-	return TRUE;
+	if (h->send_idle_msg){
+		(*h->callback)(h, 0, DLG_IDLE);
+		return TRUE;
+	} else
+		return FALSE;
 }
 
 /* Turn on and off the idle message sending */
@@ -315,6 +335,7 @@ x_set_idle (Dlg_head *h, int enable_idle)
 			return;
 		gtk_idle_remove (h->idle_fn_tag);
 		h->idle_fn_tag = -1;
+		gnome_idle_handler (h);
 	}
 }
 

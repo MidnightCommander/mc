@@ -1,3 +1,20 @@
+1998-04-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (panel_drop_data_available): Reload the panel contents
+	upon a drop. 
+
+	* gmain.c (gnome_dlg_send_destroy): Hide the widgets just before
+	they are going to get destroyed, to avoid the shutdown
+	flickering. 
+	(x_destroy_dlg_start): New routine/hook invoked when the destroy
+	has just started
+	(x_set_idle): Cancel the idle handlers properly.
+
+	* gwidget.c (x_create_check): Finish the checkbox implementation.
+
+	* gdesktop.c (get_desktop_icon): Fix this routine: it was
+	cretating a file name when the filename was not set properly.
+
 1998-04-01  Marc Ewing  <marc@redhat.com>
 
 	* gscreen.c: Added #include <gdk/gdkprivate.h>

@@ -191,6 +191,13 @@ x_create_radio (Dlg_head *h, widget_data parent, WRadio *r)
 	return 1;
 }
 
+static void
+x_check_changed (GtkToggleButton *t, WCheck *c)
+{
+	c->state ^= C_BOOL;
+	c->state ^= C_CHANGE;
+}
+
 /* Check buttons */
 int
 x_create_check (Dlg_head *h, widget_data parent, WCheck *c)
@@ -199,6 +206,8 @@ x_create_check (Dlg_head *h, widget_data parent, WCheck *c)
 	int i;
 
 	w = gtk_check_button_new_with_label (c->text);
+	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (w), (c->state & C_BOOL));
+	gtk_signal_connect (GTK_OBJECT (w), "toggled", GTK_SIGNAL_FUNC (x_check_changed), c);
 	gtk_widget_show (w);
 	c->widget.wdata = (widget_data) w;
 	return 1;

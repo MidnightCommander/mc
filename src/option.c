@@ -228,8 +228,9 @@ static void init_configure (void)
 
     pause_radio = radio_new (RY+1, RX+2, 3, pause_options, 1, "pause-radio");
     pause_radio->sel = pause_after_run;
+#ifndef HAVE_GNOME
     add_widgetl (conf_dlg, pause_radio, XV_WLAY_BELOWCLOSE);
-
+#endif
     for (i = 0; i < 6; i++){
 	check_options [i+12].widget = check_new (PY + (6-i), PX+2,
 						  XTRACT(i+12));

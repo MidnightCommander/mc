@@ -7,6 +7,8 @@ All:
 Desktop:
 
 - Add special destkop entries ("Network neighborhood")
+- Double clicking on some objects on the desktop does not do anything.
+- Solid icons on the desktop are required
 
 Panels:
 
@@ -85,10 +87,12 @@ Panel comments
    know the string is truncated in that column. I think its a really nice
    touch, but not a complete show stopper.
 
- - I take it the shaped-window DnD isnt working, obviously we want to have
-   nice looking drag cursor behavior at some point.
+>  - I take it the shaped-window DnD isnt working, obviously we want to have
+>    nice looking drag cursor behavior at some point.
 
- - The panel refreshes VERY quickly, nice job!
+=========> This works on my machine.  When you start a drag from a file,
+=========> or a group of files it should show a little icon.  Same applies
+=========> to dragging the desktop icons. 
 
  - the user needs some feedback that something is happening - for example,
    on  an ftp link, the cursor needs to change or a modal dialog popping
@@ -97,8 +101,10 @@ Panel comments
  - 'Compare panels' doesnt appear to do anything - i didnt see any feedback
    after I chose the compare method.
 
- - No matter what the sort mode, the directories seem to always get listed
-   first. Maybe this should be personal preference?
+>  - No matter what the sort mode, the directories seem to always get listed
+>    first. Maybe this should be personal preference?
+======> this is a setting.  It is called mix files.  If it is set, then you
+======> get a mixed directory/file listing, if not, you get the directories first. 
 
  - Alt-t didnt seem to change the listing mode.
 
@@ -149,10 +155,8 @@ DONE   is this just cause I'm nuts to try?
 
    When the drag entered the other window, I got a 'Setting current panel to...'
 
- - it might be good to do a rescan after a panel accepts a drag event. Is
-   that an option?
-
- - I like the different colors for the different file types in the listing.
+DONE - it might be good to do a rescan after a panel accepts a drag event. Is
+DONE   that an option?
 
  - I didnt get an error message when I tried to change the file modes
    on a file I didnt own.
@@ -169,14 +173,14 @@ DONE   is this just cause I'm nuts to try?
 Configure Options
 -----------------
 
- - Buttons at bottom (Ok, Save, Cancel) - Save overlays the Ok button
+DONE - Buttons at bottom (Ok, Save, Cancel) - Save overlays the Ok button
 
- - the 'Pause after run' radio buttons - you can select 'on dumb Terminals'
-   and Never at the same time, etc etc. I only one should be selectable
-   at a time. I could get several combinations where multiple were selected.
+DONE - the 'Pause after run' radio buttons - you can select 'on dumb Terminals'
+DONE   and Never at the same time, etc etc. I only one should be selectable
+DONE   at a time. I could get several combinations where multiple were selected.
 
- - no matter if I hit 'Ok' or 'Save', if I immediately reenter the Options 
-   dialog, the check buttons are all reset, ie. it didnt 'keep' my settings.
+DONE - no matter if I hit 'Ok' or 'Save', if I immediately reenter the Options 
+DONE   dialog, the check buttons are all reset, ie. it didnt 'keep' my settings.
 
  - need some sort of help for all these options, they aren't too intuitive.
    We can't assume people are going to read the man page.

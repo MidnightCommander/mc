@@ -454,6 +454,12 @@ tk_dispatch_all (void)
 }
 
 void
+x_destroy_dlg_start (Dlg_head *h)
+{
+	/* nothing */
+}
+
+void
 x_destroy_dlg (Dlg_head *h)
 {
     tk_evalf ("destroy %s", (char *) h->wdata);

@@ -234,5 +234,6 @@ void x_select_item (WPanel *panel);
 void x_unselect_item (WPanel *panel);
 sortfn *get_sort_fn (char *name);
 int panel_callback (Dlg_head *h, WPanel *panel, int msg, int par);
+void update_one_panel_widget (WPanel *panel, int force_update, char *current_file);
 
 #endif	/* __PANEL_H */

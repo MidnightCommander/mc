@@ -102,13 +102,15 @@ get_desktop_icon (char *pathname)
 			return full_fname;
 		g_free (full_fname);
 	}
-	
-	/* Try a mc icon */
-	full_fname = concat_dir_and_file (ICONDIR, fname);
-	if (exist_file (full_fname))
-		return full_fname;
 
-	free (full_fname);
+	/* Try a mc icon */
+	if (fname){
+		full_fname = concat_dir_and_file (ICONDIR, fname);
+		if (exist_file (full_fname))
+			return full_fname;
+
+		free (full_fname);
+	}
 	
 	return gnome_unconditional_pixmap_file ("launcher-program.xpm");
 }
@@ -119,13 +121,13 @@ get_desktop_icon (char *pathname)
 static void
 gdk_dnd_drag_begin (GdkWindow *initial_window)
 {
-  GdkEventDragBegin tev;
-  tev.type = GDK_DRAG_BEGIN;
-  tev.window = initial_window;
-  tev.u.allflags = 0;
-  tev.u.flags.protocol_version = DND_PROTOCOL_VERSION;
-
-  gdk_event_put ((GdkEvent *) &tev);
+	GdkEventDragBegin tev;
+	tev.type = GDK_DRAG_BEGIN;
+	tev.window = initial_window;
+	tev.u.allflags = 0;
+	tev.u.flags.protocol_version = DND_PROTOCOL_VERSION;
+	
+	gdk_event_put ((GdkEvent *) &tev);
 }
 
 void
@@ -142,7 +144,6 @@ artificial_drag_start (GdkWindow *window, int x, int y)
 	if (gdk_dnd.drag_really)
 		return;
 	
-	printf ("Pushing artificial drag\n");
 	gdk_dnd_drag_addwindow (window);
 	gdk_dnd_drag_begin (window);
 	XGrabPointer (gdk_display, wp->xwindow, False,
@@ -355,9 +356,11 @@ drop_on_directory (GdkEventDropDataAvailable *event, char *dest, int force_manua
 		return;
 	}
 	
-	if (source_panel  && !force_manually)
+	if (source_panel  && !force_manually){
 		perform_drop_on_directory (source_panel, operation, dest);
-	else
+		update_one_panel_widget (source_panel, 0, UP_KEEPSEL);
+		panel_update_contents (source_panel);
+	} else
 		perform_drop_manually (operation, event, dest);
 	return;
 }

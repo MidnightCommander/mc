@@ -228,11 +228,6 @@ geometry=4,0,4,15
 flags=snew
 text=Other options
 
-[option-Frame-Frame-2]
-geometry=0,9,4,5
-flags=snew
-text=Pause after run
-
 [option-Frame-Frame-0]
 geometry=0,0,4,9
 flags=snew
@@ -458,11 +453,11 @@ flags=snew
 
 [mfind-Widget-button-edit]
 geometry=2,5,1,1
-flags=
+flags=ew
 
 [mfind-Widget-button-view]
 geometry=1,5,1,1
-flags=
+flags=ew
 
 [mfind-Widget-button-quit]
 geometry=4,4,1,1
@@ -470,23 +465,23 @@ flags=
 
 [mfind-Widget-button-again]
 geometry=1,4,1,1
-flags=
+flags=ew
 
 [mfind-Widget-button-panelize]
 geometry=0,5,1,1
-flags=
+flags=ew
 
 [mfind-Widget-start-stop]
 geometry=2,4,1,1
-flags=
+flags=ew
 
 [mfind-Widget-label-search]
-geometry=0,3,1,1
-flags=
+geometry=0,3,7,1
+flags=w
 
 [mfind-Widget-button-chdir]
 geometry=0,4,1,1
-flags=
+flags=ew
 
 [quick_confirm-Widget-c]
 geometry=3,2,1,1

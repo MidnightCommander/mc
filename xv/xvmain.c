@@ -1082,6 +1082,11 @@ x_init_dlg (Dlg_head *h)
 }
 
 void
+x_destroy_dlg_start (Dlg_head *h)
+{
+}
+
+void
 x_destroy_dlg (Dlg_head *h)
 {
 }

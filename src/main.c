@@ -440,15 +440,9 @@ reload_panelized (WPanel *panel)
 }
 
 void
-update_one_panel (int which, int force_update, char *current_file)
+update_one_panel_widget (WPanel *panel, int force_update, char *current_file)
 {
     int free_pointer;
-    WPanel *panel;
-
-    if (get_display_type (which) != view_listing)
-	return;
-
-    panel = (WPanel *) get_panel_widget (which);
 
     if (force_update & UP_RELOAD){
 	panel->is_panelized = 0;
@@ -474,6 +468,18 @@ update_one_panel (int which, int force_update, char *current_file)
 
     if (free_pointer)
 	free (current_file);
+}
+
+void
+update_one_panel (int which, int force_update, char *current_file)
+{
+    WPanel *panel;
+
+    if (get_display_type (which) != view_listing)
+	return;
+
+    panel = (WPanel *) get_panel_widget (which);
+    update_one_panel_widget (panel, force_update, current_file);
 }
 
 /* This routine reloads the directory in both panels. It tries to
@@ -2309,7 +2315,7 @@ OS_Setup ()
 	termvalue = "";
     }
 #ifndef HAVE_X
-    if (force_xterm || strncmp (termvalue, "xterm", 5) == 0){
+    if (force_xterm || (strncmp (termvalue, "xterm", 5) == 0 || strcmp (termvalue, "dtterm") == 0){
 	use_mouse_p = XTERM_MOUSE;
 	xterm_flag = 1;
 #    ifdef SET_TITLE

@@ -779,6 +779,7 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
 	}
     }
 
+    set_idle_proc (find_dlg, 0);
     destroy_dlg (find_dlg);
     do_search (0); /* force do_search to release resources */
     if (old_dir){
