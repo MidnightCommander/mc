@@ -21,9 +21,6 @@
 #include <config.h>
 #include "tty.h"
 #include "fs.h"
-#ifdef __os2__
-#    include <direct.h>
-#endif
 #include <sys/param.h>
 #include <string.h>
 #include <stdlib.h>	/* For malloc() and free() */

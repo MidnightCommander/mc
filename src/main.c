@@ -31,8 +31,6 @@
 #    define INCL_DOSFILEMGR
 #    define INCL_DOSERRORS
 #    include <os2.h>
-#    include <io.h>
-#    include <direct.h>
 #endif
 
 #include "tty.h"
@@ -126,6 +124,7 @@
 #include "chown.h"
 
 #ifdef OS2_NT
+#    include <io.h>
 #    include <drive.h>
 #endif
 
@@ -2702,10 +2701,7 @@ compatibility_move_mc_files (void)
 
 int main (int argc, char *argv [])
 {
-#ifdef OS2_NT
-    char *drv;
-    char *drv_path;
-#else
+#ifndef OS2_NT
     /* Backward compatibility: Gives up privileges in case someone
        installed the mc as setuid */
     setuid (getuid ());

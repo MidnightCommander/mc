@@ -27,8 +27,8 @@
 #include <config.h>
 #include "x.h"
 #include <stdio.h>
-#ifdef __os2__
-#    include <io.h>
+#ifdef OS2_NT
+#   include <io.h>
 #endif
 #include <sys/types.h>
 #ifdef HAVE_UNISTD_H

@@ -20,6 +20,9 @@
 #ifdef HAVE_UNISTD_H
 #    include <unistd.h>
 #endif
+#ifdef OS2_NT
+#    include <io.h>
+#endif
 
 #include "popt.h"
 

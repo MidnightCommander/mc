@@ -39,6 +39,10 @@
 #include <fcntl.h>		/* open, O_RDWR */
 #include <errno.h>
 
+#ifdef OS2_NT
+#   include <io.h>
+#endif
+
 #ifdef USE_NETCODE
 #include <netdb.h>
 #endif

@@ -22,9 +22,8 @@
 #include "tty.h"
 #include <string.h>
 #include <stdio.h>
-#ifdef __os2__
+#ifdef OS2_NT
 #    include <io.h>
-#    include <direct.h>
 #endif
 #include "fs.h"
 #include <malloc.h>	/* For free() */

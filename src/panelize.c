@@ -23,9 +23,6 @@
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>
 #endif
-#ifdef __os2__
-#   include <direct.h>
-#endif
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>		/* For malloc() */

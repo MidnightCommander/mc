@@ -27,9 +27,6 @@
 
    */
 #include <config.h>
-#ifdef __os2__
-#    include <direct.h>
-#endif
 #include <sys/types.h>
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
@@ -60,6 +57,9 @@
 #include "tree.h"
 #include "cmd.h"
 #include "../vfs/vfs.h"
+#ifdef OS2_NT
+#   include <io.h>
+#endif
 
 extern int command_prompt;
 

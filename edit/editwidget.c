@@ -31,10 +31,6 @@
 #include "mousemark.h"
 #endif
 
-#ifdef __os2__
-#  include <direct.h>
-#endif
-
 #ifndef MIDNIGHT
 
 extern int EditExposeRedraw;

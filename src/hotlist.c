@@ -46,7 +46,6 @@
 #    include <pwd.h>
 #else
 #    include <io.h>
-#    include <direct.h>
 #endif
 #include "tty.h"
 #include "mad.h"
