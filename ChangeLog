@@ -1,5 +1,6 @@
 2002-03-21  Andrew V. Samoilov  <kai@cmail.ru>
 
+	* syntax/Syntax: Match ^Syntax$ for Syntax Highlighting.
 	* syntax/c.syntax: Highlight "%p" printf format.
 	Allow '*' as width and precision for strings and numbers.
 
