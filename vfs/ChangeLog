@@ -1,3 +1,9 @@
+2003-04-29  Michael Shigorin  <mike@osdn.org.ua>
+
+	* extfs/iso9660.in: Determine presence of Rock Ridge and Joliet
+	extensions by running "isoinfo -R".  Use current charset for
+	Joliet extensions.
+
 2003-04-29  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/iso9660.in: New filesystem for ISO-9660 images.

@@ -1,19 +1,29 @@
 #! /bin/sh
 
-# ISO9660 VFS for MC by Michael Shigorin <mike@altlinux.org>   April 2003
+# ISO9660 VFS for MC by Michael Shigorin <mike@altlinux.org>,
+#   modifications by Grigory Milev <week@altlinux.org>
+#   and Kachalov Anton <mouse@linux.ru.net>   April 2003
 # based on lslR by Tomas Novak <tnovak@ipex.cz>   April 2000
 # -- look there for additional parsing comments if needed
 
 # tested to comply with isoinfo 2.0's output
 
 test_iso () {
-    for i in '-J -R' '-J' '-R'; do
-	ISOINFO="isoinfo $i"
-	$ISOINFO "$1" >/dev/null 2>&1 && break
-    done
+    CHARSET=`echo $save_ctype | sed -n -e 's/.*\.\(.*\)"$/\1/p' |tr '[A-Z]' '[a-z]'`
+    if test -n "$CHARSET"; then
+	isoinfo -j $CHARSET 2>&1 | grep "Unknown charset" >/dev/null && CHARSET=
+    fi
+    if test -n "$CHARSET"; then
+	JOLIET_OPT="-j $CHARSET -J"
+    else
+	JOLIET_OPT="-J"
+    fi
+    ISOINFO="isoinfo -R"
+    isoinfo -d -i "$1" | grep "NO Joliet" > /dev/null || ISOINFO="$ISOINFO $JOLIET_OPT"
 }
 
 mcisofs_list () {
+# left as a reminder to implement compressed image support =)
 case "$1" in
   *.bz2) MYCAT="bzip2 -dc";;
   *.gz)  MYCAT="gzip -dc";;
@@ -44,6 +54,7 @@ BEGIN {
   sub(irx, "", name)
   sub("^----------   0    0    0", "-r--r--r--   1 root root", attr)
   sub(" $", "", name)
+  ## sub(";[0-9]+$", "", name) ## would break copyout
   # skip . and ..
   if (name ~ /^\.\.?/) next;
   printf "%s%s%s\n", attr, dir, name
@@ -54,7 +65,8 @@ mcisofs_copyout () {
 	$ISOINFO -i "$1" -x "/$2" > "$3" 
 }
 
-export LC_ALL="C"
+save_ctype=`locale | grep LC_CTYPE`
+LC_ALL=C
 
 cmd="$1"
 shift
