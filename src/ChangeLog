@@ -1,5 +1,9 @@
 2003-09-12  Pavel Roskin  <proski@gnu.org>
 
+	* complete.c (complete_engine): Don't need DLG_REVERSE.
+	* widget.c (show_hist): Likewise.
+	* view.c (view): User straight widget order.
+
 	* dlg.h: Replace DLG_BACKWARD to DLG_REVERSE with a better
 	defined meaning.  Make it default to populate dialogs from the
 	top.  Change all calls to create_dlg().

@@ -2625,14 +2625,14 @@ view (const char *_command, const char *_file, int *move_dir_p, int start_line)
     /* Create dialog and widgets, put them on the dialog */
     view_dlg =
 	create_dlg (0, 0, LINES, COLS, NULL, view_dialog_callback,
-		    "[Internal File Viewer]", NULL, DLG_REVERSE);
+		    "[Internal File Viewer]", NULL, DLG_NONE);
 
     wview = view_new (0, 0, COLS, LINES - 1, 0);
 
     bar = buttonbar_new (1);
 
-    add_widget (view_dlg, wview);
     add_widget (view_dlg, bar);
+    add_widget (view_dlg, wview);
 
     error = view_init (wview, _command, _file, start_line);
     if (move_dir_p)
