@@ -1,3 +1,8 @@
+2004-11-10  Roland Illig  <roland.illig@gmx.de>
+
+	* editcmd.c (edit_replace_prompt): Fixed codepage conversion bug
+	introduced in on 2004-09-25 by me.
+
 2004-10-23  Roland Illig  <roland.illig@gmx.de>
 
 	* editdraw.c (edit_status): Expand the filename field in the status

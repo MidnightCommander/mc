@@ -1183,8 +1183,9 @@ edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 
     GString *label_text = g_string_new (_(" Replace with: "));
     if (*replace_text) {
+        size_t label_len = label_text->len;
         g_string_append (label_text, replace_text);
-        convert_to_display (label_text->str + label_text->len);
+        convert_to_display (label_text->str + label_len);
     }
     quick_widgets[5].text = label_text->str;
 
