@@ -64,7 +64,9 @@ What to do with this?
 #ifdef HAVE_SETSOCKOPT
 #    include <netinet/ip.h>	/* IP options */
 #endif
+#ifdef HAVE_ARPA_INET_H
 #include <arpa/inet.h>
+#endif
 #include <arpa/ftp.h>
 #include <arpa/telnet.h>
 #include <sys/param.h>

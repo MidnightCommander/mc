@@ -64,7 +64,9 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
+#ifdef HAVE_ARPA_INET_H
 #include <arpa/inet.h>
+#endif
 #ifdef HAVE_PMAP_SET
 #    include <rpc/rpc.h>
 #    include <rpc/pmap_prot.h>

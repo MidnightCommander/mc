@@ -1,3 +1,11 @@
+2002-09-05  Pavel Roskin  <proski@gnu.org>
+
+	* ftpfs.c: Check for existance of arpa/inet.h when using it.
+	* mcfs.c: Likewise.
+	* mcserv.c: Likewise.
+	* tcputil.c: Likewise.
+	* utilvfs.c: Likewise.
+
 2002-09-03  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.c (vfs_get_password): Use INPUT_PASSWORD to request a
