@@ -68,10 +68,8 @@ static WCheck *check_status;
 static int current_mode;
 
 static char **displays_status;
-static char* display_title = N_(" Listing mode ");
 
 /* Controls whether the array strings have been translated */
-static int i18n_displays_flag;
 static char *displays [LIST_TYPES] = {
     N_("&Full file list"),
     N_("&Brief file list"),
@@ -87,14 +85,7 @@ display_callback (struct Dlg_head *h, int id, int Msg)
 {
     switch (Msg){
     case DLG_DRAW:
-	attrset (COLOR_NORMAL);
-	dlg_erase (h);
-	draw_box (h, 1, 2, h->lines - 2, h->cols - 4);
-
-	attrset (COLOR_HOT_NORMAL);
-	dlg_move (h, 1, (h->cols - strlen(display_title))/2);
-	addstr (display_title);
-	attrset (COLOR_NORMAL);
+	common_dialog_repaint (h);
 	break;
 
     case DLG_UNFOCUS:
@@ -137,79 +128,85 @@ display_callback (struct Dlg_head *h, int id, int Msg)
 }
 
 static void
-display_init (int radio_sel, char *init_text,
-	      int _check_status, char ** _status)
+display_init (int radio_sel, char *init_text, int _check_status,
+	      char **_status)
 {
-	char* user_mini_status = _("user &Mini status");
-	char* ok_button = _("&Ok");
-	char* cancel_button = _("&Cancel");
-	
-	static int button_start = 30;
-	
+    static char *display_title = N_("Listing mode");
+    static int i18n_displays_flag;
+    char *user_mini_status = _("user &Mini status");
+    char *ok_button = _("&Ok");
+    char *cancel_button = _("&Cancel");
+
+    static int button_start = 30;
+
     displays_status = _status;
 
-    if (!i18n_displays_flag){
-		int i, l, maxlen = 0;
-		char* cp;
+    if (!i18n_displays_flag) {
+	int i, l, maxlen = 0;
+	char *cp;
 
- 		display_title = _(display_title);
-		for (i = 0; i < LIST_TYPES; i++)
-		{
-		    displays [i] = _(displays [i]);
-			if ((l = strlen(displays [i])) > maxlen)
-				maxlen = l;
-		}
+	display_title = _(display_title);
+	for (i = 0; i < LIST_TYPES; i++) {
+	    displays[i] = _(displays[i]);
+	    if ((l = strlen (displays[i])) > maxlen)
+		maxlen = l;
+	}
 
-		i = strlen (ok_button) + 5;
-		l = strlen (cancel_button) + 3;
-		l = max(i, l);
+	i = strlen (ok_button) + 5;
+	l = strlen (cancel_button) + 3;
+	l = max (i, l);
 
-		i = maxlen + l + 16;
-		if (i > DISPLAY_X)
-			DISPLAY_X = i;
+	i = maxlen + l + 16;
+	if (i > DISPLAY_X)
+	    DISPLAY_X = i;
 
-		i = strlen (user_mini_status) + 13;
-		if (i > DISPLAY_X)
-			DISPLAY_X = i;
-			
-		i = strlen (display_title) + 8;
-		if (i > DISPLAY_X)
-			DISPLAY_X = i;
+	i = strlen (user_mini_status) + 13;
+	if (i > DISPLAY_X)
+	    DISPLAY_X = i;
 
-		button_start = DISPLAY_X - l - 5;
-		
-		/* get hotkey of user-defined format string */
-		cp = strchr(displays[LIST_TYPES-1],'&');
-		if (cp != NULL && *++cp != '\0')
-			user_hotkey = tolower(*cp);
+	i = strlen (display_title) + 10;
+	if (i > DISPLAY_X)
+	    DISPLAY_X = i;
 
-        i18n_displays_flag = 1;
+	button_start = DISPLAY_X - l - 5;
+
+	/* get hotkey of user-defined format string */
+	cp = strchr (displays[LIST_TYPES - 1], '&');
+	if (cp != NULL && *++cp != '\0')
+	    user_hotkey = tolower (*cp);
+
+	i18n_displays_flag = 1;
     }
     dd = create_dlg (0, 0, DISPLAY_Y, DISPLAY_X, dialog_colors,
 		     display_callback, "[Listing Mode...]", "display",
 		     DLG_CENTER);
 
-    x_set_dialog_title (dd, _("Listing mode"));
+    x_set_dialog_title (dd, display_title);
     add_widget (dd,
-        button_new (4, button_start, B_CANCEL, 
-			NORMAL_BUTTON, cancel_button, 0, 0, "cancel-button"));
+		button_new (4, button_start, B_CANCEL, NORMAL_BUTTON,
+			    cancel_button, 0, 0, "cancel-button"));
 
     add_widget (dd,
-		button_new (3, button_start, B_ENTER, 
-			DEFPUSH_BUTTON, ok_button, 0, 0, "ok-button"));
+		button_new (3, button_start, B_ENTER, DEFPUSH_BUTTON,
+			    ok_button, 0, 0, "ok-button"));
 
-    status = input_new (10, 9, INPUT_COLOR, DISPLAY_X-14, _status [radio_sel], "mini-input");
+    status =
+	input_new (10, 9, INPUT_COLOR, DISPLAY_X - 14, _status[radio_sel],
+		   "mini-input");
     add_widget (dd, status);
     input_set_point (status, 0);
 
-    check_status = check_new (9, 5, _check_status, user_mini_status, "mini-status");
+    check_status =
+	check_new (9, 5, _check_status, user_mini_status, "mini-status");
     add_widget (dd, check_status);
-    
-    user = input_new  (7, 9, INPUT_COLOR, DISPLAY_X-14, init_text, "user-fmt-input");
+
+    user =
+	input_new (7, 9, INPUT_COLOR, DISPLAY_X - 14, init_text,
+		   "user-fmt-input");
     add_widget (dd, user);
     input_set_point (user, 0);
 
-    my_radio = radio_new (3, 5, LIST_TYPES-1, displays, 1, "radio");
+    my_radio = radio_new (3, 5, LIST_TYPES - 1, displays, 1, "radio");
     my_radio->sel = my_radio->pos = current_mode;
     add_widget (dd, my_radio);
 }

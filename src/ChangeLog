@@ -1,3 +1,8 @@
+2002-09-02  Pavel Roskin  <proski@gnu.org>
+
+	* boxes.c (display_callback): Use common_dialog_repaint().
+	(display_init): Avoid using two different translations.
+
 2002-09-01  Pavel Roskin  <proski@gnu.org>
 
 	* help.c (interactive_display): Don't reuse the old value of
