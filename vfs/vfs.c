@@ -1064,11 +1064,11 @@ mc_def_getlocalcopy (vfs *vfs, char *filename)
     fdout = open (tmp, O_CREAT|O_WRONLY|O_TRUNC|O_EXCL, 0600);
     if (fdout == -1)
 	goto fail;
-    while ((i = mc_read (fdin, buffer, sizeof (buffer))) > 0)
-        write (fdout, buffer, i);
+    while ((i = mc_read (fdin, buffer, sizeof (buffer))) > 0){
+	if (write (fdout, buffer, i) != i)
+	    goto fail;
+    }
     if (i == -1)
-	goto fail;
-    if (write (fdout, buffer, i)==-1)
 	goto fail;
     i = mc_close (fdin);
     fdin = -1;
@@ -1117,13 +1117,11 @@ mc_def_ungetlocalcopy (vfs *vfs, char *filename, char *local, int has_changed)
         fdout = mc_open (filename, O_WRONLY | O_TRUNC);
         if (fdout == -1)
 	    goto failed;
-        while ((i = read (fdin, buffer, sizeof (buffer))) == sizeof (buffer)){
-            mc_write (fdout, buffer, i);
-        }
+	while ((i = read (fdin, buffer, sizeof (buffer))) > 0){
+	    if (mc_write (fdout, buffer, i) != i)
+		goto failed;
+	}
 	if (i == -1)
-	    goto failed;
-
-	if (mc_write (fdout, buffer, i) == -1)
 	    goto failed;
 
         if (close (fdin)==-1)
@@ -1321,7 +1319,6 @@ vfs_split_text (char *p)
 {
     char *original = p;
     int  numcols;
-
 
     for (numcols = 0; *p && numcols < MAXCOLS; numcols++){
 	while (*p == ' ' || *p == '\r' || *p == '\n'){

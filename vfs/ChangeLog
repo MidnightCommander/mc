@@ -1,3 +1,7 @@
+2000-05-23  Andrew V. Samoilov <sav@bcs.zp.ua>
+
+	* vfs.c (mc_[un]def_getlocalcopy): better error handling on writing
+
 2000-05-18  Andrew V. Samoilov <sav@bcs.zp.ua>
 
 	* ftpfs.c: (my_get_host_and_username) space between macro name and
