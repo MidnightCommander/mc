@@ -62,6 +62,44 @@
 
 	From Leonard den Ottolander <leonard *den.ottolander.nl>
 
+2004-08-16  Roland Illig  <roland.illig@gmx.de>
+
+	* cpio.c: Renamed various variables called "stat" into "st" to
+	avoid name conflicts with the POSIX function stat. No functional
+	changes.
+
+	* direntry.c: Added const modifier where appropriate. No functional
+	changes.
+
+	* extfs.c: Made the parameters constant, making local copies
+	if needed.
+
+	* fish.c: likewise.
+
+	* ftpfs.c: Changed most char * parameters to const char *, creating
+	local copies if necessary.
+
+	* vfs.c: likewise.
+
+	* local.c: Changed most char * parameters to const char *. No
+	functional changes.
+
+	* mcfs.c: likewise.
+
+	* sfs.c: likewise.
+
+	* smbfs.c: likewise.
+
+	* utilvfs.c: likewise.
+
+	* mcserv.c: Added guards around the #includes for <getopt.h> and
+	<security/pam_misc.h>. No functional changes.
+
+	* smbfs.h: Cleaned up header inclusion guard.
+
+	* vfs.h: Has been split up into vfs.h (for clients) and vfs-impl.h
+	(for filesystem implementors).
+
 2004-08-16  Pavel S. Shirshov  <pavelsh@mail.ru>
 
 	* extfs/deb.in: Security fix patch. Fix insecure temporary file and 
