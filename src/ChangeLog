@@ -1,3 +1,13 @@
+1999-05-12  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* cons.saver.c (main): change cons.saver so it can be run without
+	root privileges. It is well possible to run cons.saver with
+	privileges only to /dev/vcsa: create new user and make vcsa's
+	owned by that user instead of root.
+
+	Distribution maintainers please take this text as idea of what you
+	should do to make your system more secure.
+	
 1999-05-05  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* cmd.c (view_file_at_line): gmc_view never fails, so we handle

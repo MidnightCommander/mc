@@ -21,6 +21,14 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
+/* This code does _not_ need to be setuid root. However, it needs
+   read/write access to /dev/vcsa* (which is priviledged
+   operation). You should create user vcsa, make cons.saver setuid
+   user vcsa, and make all vcsa's owned by user vcsa.
+
+   Seeing other peoples consoles is bad thing, but believe me, full
+   root is even worse. */
+
 #include <config.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -323,8 +331,11 @@ int main (int argc, char **argv)
      */
     close (2);
     stderr_fd = open ("/dev/tty", O_RDWR);
+    if (stderr_fd == -1)	/* This may well happen if program is running non-root */
+	stderr_fd = open ("/dev/null", O_RDWR);
+
     if (stderr_fd == -1)
-	    exit (1);
+	exit (1);
     
     if (stderr_fd != 2)
 	while (dup2 (stderr_fd, 2) == -1 && errno == EINTR)
