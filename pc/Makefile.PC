@@ -117,7 +117,7 @@ MC_SRCS= \
 PC_SRCS= \
 	slint_pc.c \
 	chmod.c \
-        drive.c
+	drive.c
 
 NT_SRCS= \
 	cons_nt.c \

@@ -47,7 +47,7 @@ LOBJS = dir.o util.o \
 # These objects from ../src do depend on HAVE_XVIEW or HAVE_X
 #
 OOBJS = main.o dlg.o screen.o widget.o wtools.o layout.o info.o boxes.o \
-        find.o file.o color.o dialog.o help.o cmd.o key.o view.o \
+	find.o file.o color.o dialog.o help.o cmd.o key.o view.o \
 	panelize.o hotlist.o listmode.o background.o \
 	subshell.o ext.o popt.o chmod.o chown.o xslint.o \
 	option.o 

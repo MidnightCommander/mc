@@ -40,7 +40,7 @@ OBJS =	dir.o util.o screen.o dialog.o key.o keyxdef.o menu.o\
 	tree.o widget.o chmod.o mad.o wtools.o info.o \
 	cons.handler.o chown.o subshell.o terms.o boxes.o \
 	hotlist.o achown.o layout.o fsusage.o mountlist.o \
-        @XCURSES@ @REGEX_O@ complete.o slint.o command.o \
+	@XCURSES@ @REGEX_O@ complete.o slint.o command.o \
 	cmd.o main.o panelize.o learn.o listmode.o utilunix.o \
 	background.o rxvt.o popt.o text.o
 
