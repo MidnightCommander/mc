@@ -883,17 +883,23 @@ vfs_add_current_stamps (void)
 int
 mc_chdir (char *path)
 {
-    char *new_dir;
+    char *new_dir, *new_dir_copy;
     vfs *old_vfs, *new_vfs;
     vfsid old_vfsid;
     struct vfs_stamping *parent;
+    int result;
 
     new_dir = vfs_canon (path);
     new_vfs = vfs_type (new_dir);
     if (!new_vfs->chdir)
 	vfs_die ("No chdir function defined");
 
-    if ((*new_vfs->chdir) (new_vfs, new_dir) == -1) {
+    /* new_vfs->chdir can write to the second argument, use a copy */
+    new_dir_copy = g_strdup (new_dir);
+    result = (*new_vfs->chdir) (new_vfs, new_dir_copy);
+    g_free (new_dir_copy);
+
+    if (result == -1) {
 	errno = ferrno (new_vfs);
 	g_free (new_dir);
 	return -1;
@@ -907,7 +913,7 @@ mc_chdir (char *path)
     current_dir = new_dir;
     current_vfs = new_vfs;
 
-    /* This function uses current_dir internally */
+    /* This function uses the new current_dir implicitly */
     vfs_add_noncurrent_stamps (old_vfs, old_vfsid, parent);
     vfs_rm_parents (parent);
 
