@@ -16,7 +16,9 @@
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
-   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
+   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+   02111-1307, USA.
+*/
 
 /* #define PIPE_BLOCKS_SO_READ_BYTE_BY_BYTE */
 
@@ -54,7 +56,7 @@ int edit_confirm_save = 1;
 int edit_confirm_save = 0;
 #endif
 
-#define NUM_REPL_ARGS 16
+#define NUM_REPL_ARGS 64
 #define MAX_REPL_LEN 1024
 
 #if defined(MIDNIGHT) || defined(GTK)
@@ -807,7 +809,7 @@ int edit_new_cmd (WEdit * edit)
 {
     edit->force |= REDRAW_COMPLETELY;
     if (edit->modified)
-	if (edit_query_dialog2 (_(" Warning "), _(" Current text was modified without a file save. \n Continue discards these changes. "), _("Continue"), _("Cancel")))
+	if (edit_query_dialog2 (_ (" Warning "), _ (" Current text was modified without a file save. \n Continue discards these changes. "), _ ("Continue"), _ ("Cancel")))
 	    return 0;
     edit->modified = 0;
     return edit_renew (edit);	/* if this gives an error, something has really screwed up */
@@ -826,7 +828,7 @@ int edit_load_file_from_filename (WEdit *edit, char *exp)
 	return 0;
     } else {
 /* Heads the 'Load' file dialog box */
-	edit_error_dialog (_(" Load "), get_sys_error (_(" Error trying to open file for reading ")));
+	edit_error_dialog (_ (" Load "), get_sys_error (_ (" Error trying to open file for reading ")));
     }
     return 1;
 }
@@ -837,10 +839,10 @@ int edit_load_cmd (WEdit * edit)
     edit->force |= REDRAW_COMPLETELY;
 
     if (edit->modified)
-	if (edit_query_dialog2 (_(" Warning "), _(" Current text was modified without a file save. \n Continue discards these changes. "), _("Continue"), _("Cancel")))
+	if (edit_query_dialog2 (_ (" Warning "), _ (" Current text was modified without a file save. \n Continue discards these changes. "), _ ("Continue"), _ ("Cancel")))
 	    return 0;
 
-    exp = edit_get_load_file (edit->dir, edit->filename, _(" Load "));
+    exp = edit_get_load_file (edit->dir, edit->filename, _ (" Load "));
 
     if (exp) {
 	if (*exp)
@@ -984,7 +986,7 @@ void edit_block_move_cmd (WEdit * edit)
 	return;
 
     if ((end_mark - start_mark) > option_max_undo / 2)
-	if (edit_query_dialog2 (_(" Warning "), _(" Block is large, you may not be able to undo this action. "), _("Continue"), _("Cancel")))
+	if (edit_query_dialog2 (_ (" Warning "), _ (" Block is large, you may not be able to undo this action. "), _ ("Continue"), _ ("Cancel")))
 	    return;
 
     edit_push_markers (edit);
@@ -1081,7 +1083,7 @@ int edit_block_delete (WEdit * edit)
 	edit_mark_cmd (edit, 0);
     if ((end_mark - start_mark) > option_max_undo / 2)
 /* Warning message with a query to continue or cancel the operation */
-	if (edit_query_dialog2 (_(" Warning "), _(" Block is large, you may not be able to undo this action. "), _(" Continue "), _(" Cancel ")))
+	if (edit_query_dialog2 (_ (" Warning "), _ (" Block is large, you may not be able to undo this action. "), _ (" Continue "), _ (" Cancel ")))
 	    return 1;
     edit_push_markers (edit);
     edit_cursor_move (edit, start_mark - edit->curs1);
@@ -1315,7 +1317,6 @@ void edit_search_dialog (WEdit * edit, char **search_text)
     }
 }
 
-
 #else
 
 #define B_ENTER 0
@@ -1355,13 +1356,15 @@ void edit_search_replace_dialog (Window parent, int x, int y, char **search_text
 	(CDrawText ("replace.t2", win, xh, yh, _(" Enter replace text : ")))->hotkey = 'n';
 	CGetHintPos (0, &yh);
 	(CDrawTextInput ("replace.rinp", win, xh, yh, 10, AUTO_HEIGHT, 256, *replace_text))->hotkey = 'n';
+	CSetToolHint ("replace.t2", _("You can enter regexp substrings with %s (not \\1, \\2 like sed) then use \"Enter...order\""));
+	CSetToolHint ("replace.rinp", _("You can enter regexp substrings with %s (not \\1, \\2 like sed) then use \"Enter...order\""));
 	CGetHintPos (0, &yh);
-	(CDrawText ("replace.t3", win, xh, yh, _(" Enter argument order : ")))->hotkey = 'o';
+	(CDrawText ("replace.t3", win, xh, yh, _(" Enter argument (or substring) order : ")))->hotkey = 'o';
 	CGetHintPos (0, &yh);
 	(CDrawTextInput ("replace.ainp", win, xh, yh, 10, AUTO_HEIGHT, 256, *arg_order))->hotkey = 'o';
 /* Tool hint */
-	CSetToolHint ("replace.ainp", _("Enter the order of replacement of your scanf format specifiers"));
-	CSetToolHint ("replace.t3", _("Enter the order of replacement of your scanf format specifiers"));
+	CSetToolHint ("replace.ainp", _("Enter the order of replacement of your scanf format specifiers or regexp substrings"));
+	CSetToolHint ("replace.t3", _("Enter the order of replacement of your scanf format specifiers or regexp substrings"));
     }
     CGetHintPos (0, &yh);
     ys = yh;
@@ -1609,14 +1612,20 @@ long sargs[NUM_REPL_ARGS][256 / sizeof (long)];
 		     sargs[argord[8]], sargs[argord[9]], sargs[argord[10]], sargs[argord[11]], \
 		     sargs[argord[12]], sargs[argord[13]], sargs[argord[14]], sargs[argord[15]]
 
+
 /* This function is a modification of mc-3.2.10/src/view.c:regexp_view_search() */
 /* returns -3 on error in pattern, -1 on not found, found_len = 0 if either */
-int string_regexp_search (char *pattern, char *string, int len, int match_type, int match_bol, int icase, int *found_len)
+int string_regexp_search (char *pattern, char *string, int len, int match_type, int match_bol, int icase, int *found_len, void *d)
 {
     static regex_t r;
-    regmatch_t pmatch[1];
     static char *old_pattern = NULL;
     static int old_type, old_icase;
+    regmatch_t *pmatch;
+    static regmatch_t s[1];
+
+    pmatch = (regmatch_t *) d;
+    if (!pmatch)
+	pmatch = s;
 
     if (!old_pattern || strcmp (old_pattern, pattern) || old_type != match_type || old_icase != icase) {
 	if (old_pattern) {
@@ -1632,7 +1641,7 @@ int string_regexp_search (char *pattern, char *string, int len, int match_type, 
 	old_type = match_type;
 	old_icase = icase;
     }
-    if (regexec (&r, string, 1, pmatch, ((match_bol || match_type != match_normal) ? 0 : REG_NOTBOL)) != 0) {
+    if (regexec (&r, string, d ? NUM_REPL_ARGS : 1, pmatch, ((match_bol || match_type != match_normal) ? 0 : REG_NOTBOL)) != 0) {
 	*found_len = 0;
 	return -1;
     }
@@ -1643,7 +1652,7 @@ int string_regexp_search (char *pattern, char *string, int len, int match_type, 
 /* thanks to  Liviu Daia <daia@stoilow.imar.ro>  for getting this
    (and the above) routines to work properly - paul */
 
-long edit_find_string (long start, unsigned char *exp, int *len, long last_byte, int (*get_byte) (void *, long), void *data, int once_only)
+long edit_find_string (long start, unsigned char *exp, int *len, long last_byte, int (*get_byte) (void *, long), void *data, int once_only, void *d)
 {
     long p, q = 0;
     long l = strlen ((char *) exp), f = 0;
@@ -1734,7 +1743,7 @@ long edit_find_string (long start, unsigned char *exp, int *len, long last_byte,
 
 		buf = mbuf;
 		while (q) {
-		    found_start = string_regexp_search ((char *) exp, (char *) buf, q, match_normal, match_bol, !replace_case, len);
+		    found_start = string_regexp_search ((char *) exp, (char *) buf, q, match_normal, match_bol, !replace_case, len, d);
 
 		    if (found_start <= -2) {	/* regcomp/regexec error */
 			*len = 0;
@@ -1800,13 +1809,13 @@ long edit_find_string (long start, unsigned char *exp, int *len, long last_byte,
 }
 
 
-long edit_find_forwards (long search_start, unsigned char *exp, int *len, long last_byte, int (*get_byte) (void *, long), void *data, int once_only)
+long edit_find_forwards (long search_start, unsigned char *exp, int *len, long last_byte, int (*get_byte) (void *, long), void *data, int once_only, void *d)
 {				/*front end to find_string to check for
 				   whole words */
     long p;
     p = search_start;
 
-    while ((p = edit_find_string (p, exp, len, last_byte, get_byte, data, once_only)) >= 0) {
+    while ((p = edit_find_string (p, exp, len, last_byte, get_byte, data, once_only, d)) >= 0) {
 	if (replace_whole) {
 /*If the bordering chars are not in option_whole_chars_search then word is whole */
 	    if (!strcasechr (option_whole_chars_search, (*get_byte) (data, p - 1))
@@ -1823,18 +1832,18 @@ long edit_find_forwards (long search_start, unsigned char *exp, int *len, long l
     return p;
 }
 
-long edit_find (long search_start, unsigned char *exp, int *len, long last_byte, int (*get_byte) (void *, long), void *data)
+long edit_find (long search_start, unsigned char *exp, int *len, long last_byte, int (*get_byte) (void *, long), void *data, void *d)
 {
     long p;
     if (replace_backwards) {
 	while (search_start >= 0) {
-	    p = edit_find_forwards (search_start, exp, len, last_byte, get_byte, data, 1);
+	    p = edit_find_forwards (search_start, exp, len, last_byte, get_byte, data, 1, d);
 	    if (p == search_start)
 		return p;
 	    search_start--;
 	}
     } else {
-	return edit_find_forwards (search_start, exp, len, last_byte, get_byte, data, 0);
+	return edit_find_forwards (search_start, exp, len, last_byte, get_byte, data, 0, d);
     }
     return -2;
 }
@@ -1948,6 +1957,7 @@ static void regexp_error (WEdit *edit)
 /* call with edit = 0 before shutdown to close memory leaks */
 void edit_replace_cmd (WEdit * edit, int again)
 {
+    static regmatch_t pmatch[NUM_REPL_ARGS];
     static char *old1 = NULL;
     static char *old2 = NULL;
     static char *old3 = NULL;
@@ -1976,7 +1986,6 @@ void edit_replace_cmd (WEdit * edit, int again)
 	}
 	return;
     }
-
     last_search = edit->last_byte;
 
     edit->force |= REDRAW_COMPLETELY;
@@ -2045,7 +2054,7 @@ void edit_replace_cmd (WEdit * edit, int again)
 	int len = 0;
 	long new_start;
 	new_start = edit_find (edit->search_start, (unsigned char *) exp1, &len, last_search,
-			(int (*) (void *, long)) edit_get_byte, (void *) edit);
+	   (int (*)(void *, long)) edit_get_byte, (void *) edit, pmatch);
 	if (new_start == -3) {
 	    regexp_error (edit);
 	    break;
@@ -2095,8 +2104,20 @@ void edit_replace_cmd (WEdit * edit, int again)
 		}
 	    }
 	    if (replace_yes) {	/* delete then insert new */
-		if (replace_scanf) {
+		if (replace_scanf || replace_regexp) {
 		    char repl_str[MAX_REPL_LEN + 2];
+		    if (replace_regexp) {	/* we need to fill in sargs just like with scanf */
+			int k, j;
+			for (k = 1; k < NUM_REPL_ARGS && pmatch[k].rm_eo >= 0; k++) {
+			    unsigned char *t;
+			    t = (unsigned char *) &sargs[k - 1][0];
+			    for (j = 0; j < pmatch[k].rm_eo - pmatch[k].rm_so && j < 255; j++, t++)
+				*t = (unsigned char) edit_get_byte (edit, edit->search_start - pmatch[0].rm_so + pmatch[k].rm_so + j);
+			    *t = '\0';
+			}
+			for (; k <= NUM_REPL_ARGS; k++)
+			    sargs[k - 1][0] = 0;
+		    }
 		    if (sprintf_p (repl_str, exp2, PRINTF_ARGS) >= 0) {
 			times_replaced++;
 			while (i--)
@@ -2104,9 +2125,9 @@ void edit_replace_cmd (WEdit * edit, int again)
 			while (repl_str[++i])
 			    edit_insert (edit, repl_str[i]);
 		    } else {
-			edit_error_dialog (_(" Replace "), 
+			edit_error_dialog (_ (" Replace "),
 /* "Invalid regexp string or scanf string" */
-			_(" Error in replacement format string. "));
+			    _ (" Error in replacement format string. "));
 			replace_continue = 0;
 		    }
 		} else {
@@ -2134,10 +2155,10 @@ void edit_replace_cmd (WEdit * edit, int again)
 	    edit->force |= REDRAW_PAGE;
 	    edit_render_keypress (edit);
 	    if (times_replaced) {
-		sprintf (fin_string, _(" %ld replacements made. "), times_replaced);
-		edit_message_dialog (_(" Replace "), fin_string);
+		sprintf (fin_string, _ (" %ld replacements made. "), times_replaced);
+		edit_message_dialog (_ (" Replace "), fin_string);
 	    } else
-		edit_message_dialog (_(" Replace "), _(" Search string not found. "));
+		edit_message_dialog (_ (" Replace "), _ (" Search string not found. "));
 	    replace_continue = 0;
 	}
     } while (replace_continue);
@@ -2189,7 +2210,7 @@ void edit_search_cmd (WEdit * edit, int again)
 		edit->search_start++;
 
 	    edit->search_start = edit_find (edit->search_start, (unsigned char *) exp, &len, edit->last_byte,
-		   (int (*)(void *, long)) edit_get_byte, (void *) edit);
+		   (int (*)(void *, long)) edit_get_byte, (void *) edit, 0);
 
 	    if (edit->search_start >= 0) {
 		edit->found_start = edit->search_start;

@@ -13,7 +13,8 @@
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
-   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  
+   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+   02111-1307, USA.
  */
 
 #ifndef _X_DND_H
@@ -23,7 +24,10 @@
 extern "C" {
 #endif
 
+/* you can set this to either 2 (which support 0 and 1 as well) or 3 */
 #define XDND_VERSION 2
+/* #define XDND_VERSION 3 */
+
 
 /* XdndEnter */
 #define XDND_THREE 3

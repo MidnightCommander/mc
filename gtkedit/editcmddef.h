@@ -47,13 +47,25 @@
 #define CK_Remove 		204
 #define CK_Unmark 		206
 #define CK_Save_Block		207
-#define CK_Column_Mark 	208
+#define CK_Column_Mark		208
 
 /* search and replace */
 #define CK_Find			301
 #define CK_Find_Again		302
 #define CK_Replace		303
 #define CK_Replace_Again	304
+
+/* debugger commands */
+#define CK_Debug_Start		350
+#define CK_Debug_Stop		351
+#define CK_Debug_Toggle_Break 	352
+#define CK_Debug_Clear 		353
+#define CK_Debug_Next		354
+#define CK_Debug_Step		355
+#define CK_Debug_Back_Trace 	356
+#define CK_Debug_Continue	357
+#define CK_Debug_Enter_Command	358
+#define CK_Debug_Until_Curser	359
 
 /* misc */
 #define CK_Insert_File		401
@@ -72,6 +84,9 @@
 #define CK_Cancel		414
 #define CK_Complete		415
 #define CK_Paragraph_Format	416
+#define CK_Util			417
+#define CK_Type_Load_Python	418
+#define CK_Find_File		419
 
 /* application control */
 #define CK_Save_Desktop		451
@@ -81,12 +96,18 @@
 #define CK_Save_And_Quit	455
 #define CK_Run_Another		456
 #define CK_Check_Save_And_Quit	457
-#define CK_Maximise		458
+#define CK_Maximize		458
 
 /* macro */
 #define CK_Begin_Record_Macro	501
 #define CK_End_Record_Macro	502
 #define CK_Delete_Macro		503
+
+/* book mark */
+#define CK_Toggle_Bookmark	550
+#define CK_Flush_Bookmarks	551
+#define CK_Next_Bookmark	552
+#define CK_Prev_Bookmark	553
 
 /* highlight commands */
 #define CK_Page_Up_Highlight 		604
@@ -108,8 +129,8 @@
 #define CK_Paragraph_Up_Highlight	620
 #define CK_Paragraph_Down_Highlight	621
 
-/* X clipboard operations */
 
+/* X clipboard operations */
 #define CK_XStore		701
 #define CK_XCut			702
 #define CK_XPaste		703

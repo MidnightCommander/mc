@@ -16,7 +16,9 @@
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
-   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
+   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+   02111-1307, USA.
+*/
 
 #include <config.h>
 #include "edit.h"
@@ -103,12 +105,10 @@ void rerender_text (CWidget * wdt);
 
 #ifdef GTK
 
-void edit_status (WEdit * edit)
+void edit_status (WEdit *edit)
 {
     GtkEntry *entry;
-    GtkWidget *widget;
     int w, i, t;
-    char id[33];
     char s[160];
     w = edit->num_widget_columns - 1;
     if (w > 150)
@@ -119,7 +119,7 @@ void edit_status (WEdit * edit)
     if (w > 1) {
 	i = w > 24 ? 18 : w - 6;
 	i = i < 13 ? 13 : i;
-	sprintf (s, "%s", name_trunc (edit->filename ? edit->filename : "", i));
+	sprintf (s, "%s", (char *) name_trunc (edit->filename ? edit->filename : "", i));
 	i = strlen (s);
 	s[i] = ' ';
 	s[i + 1] = ' ';
@@ -291,11 +291,6 @@ void edit_set_cursor_color (unsigned long c)
 
 #else
 
-#define BOLD_COLOR        MARKED_COLOR
-#define UNDERLINE_COLOR   VIEW_UNDERLINED_COLOR
-#define MARK_COLOR        SELECTED_COLOR
-#define DEF_COLOR         NORMAL_COLOR
-
 static void set_color (int font)
 {
     attrset (font);
@@ -309,7 +304,7 @@ static void print_to_widget (WEdit * edit, long row, int start_col, float start_
     int x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET;
     int y = row + EDIT_TEXT_VERTICAL_OFFSET;
 
-    set_color (DEF_COLOR);
+    set_color (EDITOR_NORMAL_COLOR);
     edit_move (x1, y);
     hline (' ', end_col + 1 - EDIT_TEXT_HORIZONTAL_OFFSET - x1);
 
@@ -329,15 +324,15 @@ static void print_to_widget (WEdit * edit, long row, int start_col, float start_
 	    if (style & MOD_ABNORMAL)
 		textchar = '.';
 	    if (style & MOD_HIGHLIGHTED) {
-		set_color (BOLD_COLOR);
+		set_color (EDITOR_BOLD_COLOR);
 	    } else if (style & MOD_MARKED) {
-		set_color (MARK_COLOR);
+		set_color (EDITOR_MARKED_COLOR);
 	    }
 	    if (style & MOD_UNDERLINED) {
-		set_color (UNDERLINE_COLOR);
+		set_color (EDITOR_UNDERLINED_COLOR);
 	    }
 	    if (style & MOD_BOLD) {
-		set_color (BOLD_COLOR);
+		set_color (EDITOR_BOLD_COLOR);
 	    }
 	    addch (textchar);
 	    p++;
@@ -354,7 +349,12 @@ static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col,
     int col, start_col_real;
     unsigned int c;
     int fg, bg;
-    int i;
+    int i, book_mark = -1;
+
+#if 0
+    if (!book_mark_query (edit, edit->start_line + row, &book_mark))
+	book_mark = -1;
+#endif
 
     edit_get_syntax_color (edit, b - 1, &fg, &bg);
     q = edit_move_forward3 (edit, b, start_col - edit->start_col, 0);
@@ -384,9 +384,13 @@ static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col,
 		if (q >= edit->found_start && q < edit->found_start + edit->found_len)
 		    *p |= MOD_HIGHLIGHTED * 256;
 		c = edit_get_byte (edit, q);
-		edit_get_syntax_color (edit, q, &fg, &bg);
 /* we don't use bg for mc - fg contains both */
-		*p |= fg << 16;
+		if (book_mark == -1) {
+		    edit_get_syntax_color (edit, q, &fg, &bg);
+		    *p |= fg << 16;
+		} else {
+		    *p |= book_mark << 16;
+		}
 		q++;
 		switch (c) {
 		case '\n':
@@ -470,6 +474,7 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
 #ifndef MIDNIGHT
     static unsigned long prev_win = 0;
 #endif
+
     int force = edit->force;
     long b;
 
@@ -585,6 +590,7 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
 #endif
 #endif
   exit_render:
+    return;
 }
 
 

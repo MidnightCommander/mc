@@ -13,7 +13,9 @@
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
-   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
+   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+   02111-1307, USA.
+*/
 
 #include <config.h>
 #include "edit.h"
@@ -57,6 +59,7 @@ void set_style_color (
 {
     int fgp, bgp;
     fgp = (s & 0xFF000000UL) >> 24;
+/* NO_COLOR would give fgp == 255 */
     if (fgp < 255)
 	*fg = color_palette (fgp);
     else
@@ -277,23 +280,41 @@ static inline cache_type get_style (WEdit * edit, long q, int c, long m1, long m
     return s | ((fg & 0xFF) << 24) | ((bg & 0xFF) << 16);
 }
 
-void convert_text (WEdit * edit, long q, cache_type *p, int x, int x_max)
+void convert_text (WEdit * edit, long q, cache_type * p, int x, int x_max, int row)
 {
     int c;
     cache_type s;
     long m1, m2;
     unsigned char *r, text[4];
+    int book_mark_colors[10], book_mark, book_mark_cycle = 0, the_end = 0;
+
     eval_marks (edit, &m1, &m2);
+
+    book_mark = book_mark_query_all (edit, edit->start_line + row, book_mark_colors);
+
     for (;;) {
 	c = edit_get_byte (edit, q);
-	*p = get_style (edit, q, c, m1, m2, x);
+	if (!the_end)
+	    *p = get_style (edit, q, c, m1, m2, x);
+	if (book_mark) {
+	    if (the_end)
+		*p = 0;
+	    *p = (*p & 0x0000FFFF) | (book_mark_colors[book_mark_cycle++ % book_mark] << 16);
+	}
 	switch (c) {
 	case '\n':
-	    *p++ |= ' ';
-	    *p = 0;
-	    if (x > edit->max_column)
-		edit->max_column = x;
-	    return;
+	    if (book_mark) {	/* bookmarks must show right across the screen */
+		the_end = 1;
+		c = ' ';
+		q--;
+		goto the_default;
+	    } else {
+		*p++ |= ' ';
+		*p = 0;
+		if (x > edit->max_column)
+		    edit->max_column = x;
+		return;
+	    }
 	case '\t':
 	    if (fixed_font) {
 		int t;
@@ -301,6 +322,10 @@ void convert_text (WEdit * edit, long q, cache_type *p, int x, int x_max)
 		t = min (t, x_max);
 		s = *p;
 		while (x < t) {
+#if 0
+		    if (book_mark)
+			*p = (*p & 0x0000FFFF) | (book_mark_colors[book_mark_cycle++ % book_mark] << 16);
+#endif
 		    x += per_char[' '];
 		    *p++ = s | ' ';
 		}
@@ -310,6 +335,7 @@ void convert_text (WEdit * edit, long q, cache_type *p, int x, int x_max)
 	    }
 	    break;
 	default:
+	  the_default:
 	    x += convert_to_long_printable (c, text);
 	    r = text;
 	    s = *p;
@@ -557,7 +583,7 @@ cache_type mode_spacing = 0;
 #define NOT_VALID (-2000000000)
 
 void edit_draw_proportional (void *data,
-	   void (*converttext) (void *, long, cache_type *, int, int),
+	   void (*converttext) (void *, long, cache_type *, int, int, int),
 	   int calctextpos (void *, long, long *, int),
 				int scroll_right,
 				Window win,
@@ -594,7 +620,7 @@ void edit_draw_proportional (void *data,
 /* q contains the offset in the edit buffer */
 
 /* translate this line into printable characters with a style (=color) high byte */
-    (*converttext) (data, q, line, x0, x_max - scroll_right - EDIT_TEXT_HORIZONTAL_OFFSET);
+    (*converttext) (data, q, line, x0, x_max - scroll_right - EDIT_TEXT_HORIZONTAL_OFFSET, row);
 
 /* adjust for the horizontal scroll and border */
     x0 += scroll_right + EDIT_TEXT_HORIZONTAL_OFFSET;
@@ -693,7 +719,7 @@ void edit_draw_this_line_proportional (WEdit * edit, long b, int row, int start_
     edit_get_syntax_color (edit, b - 1, &fg, &bg);
 
     edit_draw_proportional (edit,
-			    (void (*) (void *, long, cache_type *, int, int)) convert_text,
+			    (void (*) (void *, long, cache_type *, int, int, int)) convert_text,
 			    (int (*) (void *, long, long *, int)) calc_text_pos,
 			    edit->start_col, CWindowOf (edit->widget),
 			    end_column, b, row, row * FONT_PIX_PER_LINE + EDIT_TEXT_VERTICAL_OFFSET,
@@ -799,7 +825,7 @@ int calc_text_len2 (CWidget *w, long b, long upto)
 int highlight_this_line;
 
 /* this is for the text widget (i.e. nroff formatting) */
-void convert_text2 (CWidget * w, long q, cache_type *line, int x, int x_max)
+void convert_text2 (CWidget * w, long q, cache_type *line, int x, int x_max, int row)
 {
     int c = 0, d;
     cache_type s, *p;

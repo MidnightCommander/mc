@@ -16,15 +16,17 @@
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
-   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA. */
+   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+   02111-1307, USA.
+*/
 
 #define _EDIT_C THIS_IS
 
 #include <config.h>
 #if defined(NEEDS_IO_H)
 #    include <io.h>
+#    include <fcntl.h>
 #endif
-#include <fcntl.h>
 #ifdef NEEDS_CR_LF_TRANSLATION
 #    define CR_LF_TRANSLATION
 #endif
@@ -255,10 +257,10 @@ int edit_load_file (WEdit * edit, const char *filename, const char *text, unsign
 
 /* Lastbyte calculation in TEXT mode FRANCO */
 #if defined CR_LF_TRANSLATION
-	if(file && (!text)){
+	if(file && (!text)) {
 		real_size=0;
-		tmp_buf[sizeof (tmp_buf)-1]=0;
-		while((bytes_read = read(file,tmp_buf,1024)) > 0){
+		tmp_buf[sizeof (tmp_buf) - 1] = 0;
+		while ((bytes_read = read (file, tmp_buf, 1024)) > 0) {
 			real_size += bytes_read;
 		}
 		s.st_size = real_size;
@@ -362,6 +364,7 @@ int edit_clean (WEdit * edit)
     if (edit) {
 	int j = 0;
 	edit_free_syntax_rules (edit);
+	book_mark_flush (edit, -1);
 	for (; j <= MAXBUFF; j++) {
 	    if (edit->buffers1[j] != NULL)
 		free (edit->buffers1[j]);
@@ -602,6 +605,8 @@ void edit_insert (WEdit * edit, int c)
     }
 /* now we must update some info on the file and check if a redraw is required */
     if (c == '\n') {
+	if (edit->book_mark)
+	    book_mark_inc (edit, edit->curs_line);
 	edit->curs_line++;
 	edit->total_lines++;
 	edit->force |= REDRAW_LINE_ABOVE | REDRAW_AFTER_CURSOR;
@@ -643,6 +648,8 @@ void edit_insert_ahead (WEdit * edit, int c)
 	    edit->start_line++;
     }
     if (c == '\n') {
+	if (edit->book_mark)
+	    book_mark_inc (edit, edit->curs_line);
 	edit->total_lines++;
 	edit->force |= REDRAW_AFTER_CURSOR;
     }
@@ -682,6 +689,8 @@ int edit_delete (WEdit * edit)
     edit->curs2--;
 
     if (p == '\n') {
+	if (edit->book_mark)
+	    book_mark_dec (edit, edit->curs_line);
 	edit->total_lines--;
 	edit->force |= REDRAW_AFTER_CURSOR;
     }
@@ -716,6 +725,8 @@ int edit_backspace (WEdit * edit)
     edit->curs1--;
 
     if (p == '\n') {
+	if (edit->book_mark)
+	    book_mark_dec (edit, edit->curs_line);
 	edit->curs_line--;
 	edit->total_lines--;
 	edit->force |= REDRAW_AFTER_CURSOR;
@@ -1169,6 +1180,10 @@ long edit_find_line (WEdit * edit, int line)
 	edit->line_offsets[2] = edit_bol (edit, edit->last_byte);
 	edit->caches_valid = 1;
     }
+    if (line >= edit->total_lines)
+	return edit->line_offsets[2];
+    if (line <= 0)
+	return 0;
 /* find the closest known point */
     for (i = 0; i < N_LINE_CACHES; i++) {
 	int n;
@@ -2122,6 +2137,43 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	edit_mark_cmd (edit, 1);
 	break;
 
+    case CK_Toggle_Bookmark:
+	if (book_mark_query_color (edit, edit->curs_line, BOOK_MARK_COLOR))
+	    book_mark_clear (edit, edit->curs_line, BOOK_MARK_COLOR);
+	else
+	    book_mark_insert (edit, edit->curs_line, BOOK_MARK_COLOR);
+	break;
+    case CK_Flush_Bookmarks:
+	book_mark_flush (edit, BOOK_MARK_COLOR);
+	edit->force |= REDRAW_PAGE;
+	break;
+    case CK_Next_Bookmark:
+	if (edit->book_mark) {
+	    struct _book_mark *p;
+	    p = (struct _book_mark *) book_mark_find (edit, edit->curs_line);
+	    if (p->next) {
+		p = p->next;
+		if (p->line >= edit->start_line + edit->num_widget_lines || p->line < edit->start_line)
+		    edit_move_display (edit, p->line - edit->num_widget_lines / 2);
+		edit_move_to_line (edit, p->line);
+	    }
+	}
+	break;
+    case CK_Prev_Bookmark:
+	if (edit->book_mark) {
+	    struct _book_mark *p;
+	    p = (struct _book_mark *) book_mark_find (edit, edit->curs_line);
+	    while (p->line == edit->curs_line)
+		if (p->prev)
+		    p = p->prev;
+	    if (p->line >= 0) {
+		if (p->line >= edit->start_line + edit->num_widget_lines || p->line < edit->start_line)
+		    edit_move_display (edit, p->line - edit->num_widget_lines / 2);
+		edit_move_to_line (edit, p->line);
+	    }
+	}
+	break;
+
     case CK_Beginning_Of_Text:
     case CK_Beginning_Of_Text_Highlight:
 	edit_move_to_top (edit);
@@ -2241,6 +2293,7 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 #ifndef MIDNIGHT
     case CK_Sort:
     case CK_Mail:
+    case CK_Find_File:
 #endif
     case CK_Complete:
     case CK_Cancel:
@@ -2250,6 +2303,16 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
     case CK_Save_And_Quit:
     case CK_Check_Save_And_Quit:
     case CK_Run_Another:
+    case CK_Debug_Start:
+    case CK_Debug_Stop:
+    case CK_Debug_Toggle_Break:
+    case CK_Debug_Clear:
+    case CK_Debug_Next:
+    case CK_Debug_Step:
+    case CK_Debug_Back_Trace:
+    case CK_Debug_Continue:
+    case CK_Debug_Enter_Command:
+    case CK_Debug_Until_Curser:
 	result = 0;
 	break;
     case CK_Menu:

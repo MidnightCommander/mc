@@ -16,7 +16,9 @@
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
-   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
+   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+   02111-1307, USA.
+*/
 
 #ifndef __EDIT_H
 #define __EDIT_H
@@ -79,7 +81,11 @@
 #    	 endif
 #    endif
  
+#ifdef GTK
 #    include <regex.h>
+#else
+#    include "regex.h"
+#endif
 
 #endif
 
@@ -110,6 +116,7 @@
 #else
 
 #    include "src/main.h"		/* for char *shell */
+#    include "src/mad.h"
 #    include "src/dlg.h"
 #    include "src/widget.h"
 #    include "src/color.h"
@@ -166,7 +173,7 @@
 #define SEARCH_DIALOG_OPTION_NO_CASE	4
 #define SEARCH_DIALOG_OPTION_BACKWARDS	8
 
-#define SYNTAX_FILE "/.cedit/syntax"
+#define SYNTAX_FILE "/.cedit/Syntax"
 #define CLIP_FILE "/.cedit/cooledit.clip"
 #define MACRO_FILE "/.cedit/cooledit.macros"
 #define BLOCK_FILE "/.cedit/cooledit.block"
@@ -281,7 +288,7 @@ struct key_word {
     char last;
     char *whole_word_chars_left;
     char *whole_word_chars_right;
-#define NO_COLOR ((unsigned long) -1);
+#define NO_COLOR 0xFFFFFFFF
     int line_start;
     int bg;
     int fg;
@@ -311,6 +318,14 @@ struct _syntax_marker {
     long offset;
     unsigned long rule;
     struct _syntax_marker *next;
+};
+
+struct _book_mark {
+    int line;		/* line number */
+#define BOOK_MARK_COLOR ((5 << 8) + 26)		/* cyan on white */
+    int c;		/* colour */
+    struct _book_mark *next;
+    struct _book_mark *prev;
 };
 
 struct editor_widget {
@@ -381,6 +396,8 @@ struct editor_widget {
     int line_numbers[N_LINE_CACHES];
     long line_offsets[N_LINE_CACHES];
 
+    struct _book_mark *book_mark;
+
 /* undo stack and pointers */
     unsigned long stack_pointer;
     long *undo_stack;
@@ -420,7 +437,7 @@ void edit_change_directory (void);
 int edit_man_page_cmd (WEdit * edit);
 void edit_search_replace_dialog (Window parent, int x, int y, char **search_text, char **replace_text, char **arg_order, char *heading, int option);
 void edit_search_dialog (WEdit * edit, char **search_text);
-long edit_find (long search_start, unsigned char *expr, int *len, long last_byte, int (*get_byte) (void *, long), void *data);
+long edit_find (long search_start, unsigned char *expr, int *len, long last_byte, int (*get_byte) (void *, long), void *data, void *d);
 void edit_set_foreground_colors (unsigned long normal, unsigned long bold, unsigned long italic);
 void edit_set_background_colors (unsigned long normal, unsigned long abnormal, unsigned long marked, unsigned long marked_abnormal, unsigned long highlighted);
 void edit_set_cursor_color (unsigned long c);
@@ -555,6 +572,16 @@ void edit_set_syntax_change_callback (void (*callback) (CWidget *));
 void edit_load_syntax (WEdit * edit, char **names, char *type);
 void edit_free_syntax_rules (WEdit * edit);
 void edit_get_syntax_color (WEdit * edit, long byte_index, int *fg, int *bg);
+
+
+void book_mark_insert (WEdit * edit, int line, int c);
+int book_mark_query_color (WEdit * edit, int line, int c);
+int book_mark_query_all (WEdit * edit, int line, int *c);
+struct _book_mark *book_mark_find (WEdit * edit, int line);
+void book_mark_clear (WEdit * edit, int line, int c);
+void book_mark_flush (WEdit * edit, int c);
+void book_mark_inc (WEdit * edit, int line);
+void book_mark_dec (WEdit * edit, int line);
 
 
 #ifdef MIDNIGHT

@@ -16,8 +16,9 @@
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
-   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA. */
-
+   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+   02111-1307, USA.
+*/
 
 #include <config.h>
 #include "edit.h"
@@ -389,37 +390,42 @@ void CDrawEditMenuButtons (const char *ident, Window parent, Window focus_return
     CDrawMenuButton (catstrs (ident, ".filemenu", 0), parent, focus_return, x, y, AUTO_WIDTH, AUTO_HEIGHT, 8,
 /* The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t' */
 		     _(" File "),
-		     _("Open...\tC-o"), '~', menu_cmd, CK_Load,
-		     _("New\tC-n"), '~', menu_cmd, CK_New,
-		     "", ' ', 0, 0,
-		     _("Save\tF2"), '~', menu_cmd, CK_Save,
-		     _("Save as...\tF12"), '~', menu_cmd, CK_Save_As,
-		     "", ' ', 0, 0,
-		     _("Insert file...\tF15"), '~', menu_cmd, CK_Insert_File,
-		     _("Copy to file...\tC-f"), '~', menu_cmd, CK_Save_Block
+		     _("Open...\tC-o"), '~', menu_cmd, (unsigned long) CK_Load,
+		     _("New\tC-n"), '~', menu_cmd, (unsigned long) CK_New,
+		     "", ' ', (void *) 0, 0L,
+		     _("Save\tF2"), '~', menu_cmd, (unsigned long) CK_Save,
+		     _("Save as...\tF12"), '~', menu_cmd, (unsigned long) CK_Save_As,
+		     "", ' ', (void *) 0, 0L,
+		     _("Insert file...\tF15"), '~', menu_cmd, (unsigned long) CK_Insert_File,
+		     _("Copy to file...\tC-f"), '~', menu_cmd, (unsigned long) CK_Save_Block
 	);
 /* Tool hint */
     CSetToolHint (catstrs (ident, ".filemenu", 0), _("Disk operations"));
 
     CGetHintPos (&x, &d);
 
-    CDrawMenuButton (catstrs (ident, ".editmenu", 0), parent, focus_return, x, y, AUTO_WIDTH, AUTO_HEIGHT, 15,
+    CDrawMenuButton (catstrs (ident, ".editmenu", 0), parent, focus_return, x, y, AUTO_WIDTH, AUTO_HEIGHT, 20,
 		     _(" Edit "),
-		     _("Toggle mark\tF3"), '~', menu_cmd, CK_Mark,
-		     _("Toggle mark columns\tC-b"), '~', menu_cmd, CK_Column_Mark,
-		     "", ' ', 0, 0,
-		     _("Toggle insert/overwrite\tIns"), '~', menu_cmd, CK_Toggle_Insert,
-		     "", ' ', 0, 0,
-		     _("Copy block to cursor\tF5"), '~', menu_cmd, CK_Copy,
-		     _("Move block to cursor\tF6"), '~', menu_cmd, CK_Move,
-		     _("Delete block\tF8/C-Del"), '~', menu_cmd, CK_Remove,
-		     "", ' ', 0, 0,
-		     _("Copy block to clipbrd\tC-Ins"), '~', menu_cmd, CK_XStore,
-		     _("Cut block to clipbrd\tS-Del"), '~', menu_cmd, CK_XCut,
-		     _("Paste block from clipbrd\tS-Ins"), '~', menu_cmd, CK_XPaste,
-		     _("Selection history\tM-Ins"), '~', menu_cmd, CK_Selection_History,
-		     "", ' ', 0, 0,
-		     _("Undo\tC-BackSpace"), '~', menu_cmd, CK_Undo
+		     _("Toggle mark\tF3"), '~', menu_cmd, (unsigned long) CK_Mark,
+		     _("Toggle mark columns\tC-b"), '~', menu_cmd, (unsigned long) CK_Column_Mark,
+		     "", ' ', (void *) 0, 0L,
+		     _("Toggle book mark\tC-M-Ins"), '~', menu_cmd, (unsigned long) CK_Toggle_Bookmark,
+		     _("Previous book mark\tC-M-Up"), '~', menu_cmd, (unsigned long) CK_Prev_Bookmark,
+		     _("Next book mark\tC-M-Down"), '~', menu_cmd, (unsigned long) CK_Next_Bookmark,
+		     _("Flush book marks"), '~', menu_cmd, (unsigned long) CK_Flush_Bookmarks,
+		     "", ' ', (void *) 0, 0L,
+		     _("Toggle insert/overwrite\tIns"), '~', menu_cmd, (unsigned long) CK_Toggle_Insert,
+		     "", ' ', (void *) 0, 0L,
+		     _("Copy block to cursor\tF5"), '~', menu_cmd, (unsigned long) CK_Copy,
+		     _("Move block to cursor\tF6"), '~', menu_cmd, (unsigned long) CK_Move,
+		     _("Delete block\tF8/C-Del"), '~', menu_cmd, (unsigned long) CK_Remove,
+		     "", ' ', (void *) 0, 0L,
+		     _("Copy block to clipbrd\tC-Ins"), '~', menu_cmd, (unsigned long) CK_XStore,
+		     _("Cut block to clipbrd\tS-Del"), '~', menu_cmd, (unsigned long) CK_XCut,
+		     _("Paste block from clipbrd\tS-Ins"), '~', menu_cmd, (unsigned long) CK_XPaste,
+		     _("Selection history\tM-Ins"), '~', menu_cmd, (unsigned long) CK_Selection_History,
+		     "", ' ', (void *) 0, 0L,
+		     _("Undo\tC-BackSpace"), '~', menu_cmd, (unsigned long) CK_Undo
 	);
 /* Tool hint */
     CSetToolHint (catstrs (ident, ".editmenu", 0), _("Manipulating blocks of text"));
@@ -428,10 +434,10 @@ void CDrawEditMenuButtons (const char *ident, Window parent, Window focus_return
 
     CDrawMenuButton (catstrs (ident, ".searchmenu", 0), parent, focus_return, x, y, AUTO_WIDTH, AUTO_HEIGHT, 4,
 		     _(" Srch/Replce "),
-		     _("Search...\tF7"), '~', menu_cmd, CK_Find,
-		     _("Search again\tF17"), '~', menu_cmd, CK_Find_Again,
-		     _("Replace...\tF4"), '~', menu_cmd, CK_Replace,
-		     _("Replace again\tF14"), '~', menu_cmd, CK_Replace_Again
+		     _("Search...\tF7"), '~', menu_cmd, (unsigned long) CK_Find,
+		     _("Search again\tF17"), '~', menu_cmd, (unsigned long) CK_Find_Again,
+		     _("Replace...\tF4"), '~', menu_cmd, (unsigned long) CK_Replace,
+		     _("Replace again\tF14"), '~', menu_cmd, (unsigned long) CK_Replace_Again
 	);
 /* Tool hint */
     CSetToolHint (catstrs (ident, ".searchmenu", 0), _("Search for and replace text"));
@@ -440,17 +446,17 @@ void CDrawEditMenuButtons (const char *ident, Window parent, Window focus_return
 
     CDrawMenuButton (catstrs (ident, ".commandmenu", 0), parent, focus_return, x, y, AUTO_WIDTH, AUTO_HEIGHT, 11,
 		     _(" Command "),
-		     _("Goto line...\tM-l"), '~', menu_cmd, CK_Goto,
-		     "", ' ', 0, 0,
-		     _("Start record macro\tC-r"), '~', menu_cmd, CK_Begin_Record_Macro,
-		     _("Finish record macro...\tC-r"), '~', menu_cmd, CK_End_Record_Macro,
-		     _("Execute macro...\tC-a, KEY"), '~', menu_ctrl_key, XK_a,
-		     _("Delete macro...\t"), '~', menu_cmd, CK_Delete_Macro,
-		     "", ' ', 0, 0,
-		     _("Insert date/time\tC-d"), '~', menu_cmd, CK_Date,
-		     _("Format paragraph\tM-p"), '~', menu_cmd, CK_Paragraph_Format,
-		     "", ' ', 0, 0,
-		     _("Refresh display\tC-l"), '~', menu_cmd, CK_Refresh
+		     _("Goto line...\tM-l"), '~', menu_cmd, (unsigned long) CK_Goto,
+		     "", ' ', (void *) 0, 0L,
+		     _("Start record macro\tC-r"), '~', menu_cmd, (unsigned long) CK_Begin_Record_Macro,
+		     _("Finish record macro...\tC-r"), '~', menu_cmd, (unsigned long) CK_End_Record_Macro,
+		     _("Execute macro...\tC-a, KEY"), '~', menu_ctrl_key, (unsigned long) XK_a,
+		     _("Delete macro...\t"), '~', menu_cmd, (unsigned long) CK_Delete_Macro,
+		     "", ' ', (void *) 0, 0L,
+		     _("Insert date/time\tC-d"), '~', menu_cmd, (unsigned long) CK_Date,
+		     _("Format paragraph\tM-p"), '~', menu_cmd, (unsigned long) CK_Paragraph_Format,
+		     "", ' ', (void *) 0, 0L,
+		     _("Refresh display\tC-l"), '~', menu_cmd, (unsigned long) CK_Refresh
 	);
 /* Tool hint */
     CSetToolHint (catstrs (ident, ".commandmenu", 0), _("Macros and internal commands"));
