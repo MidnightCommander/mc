@@ -1,5 +1,13 @@
 1999-03-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gpopup2.c (escape_underlines): New function to escape the
+	underlines in a string so that GtkLabel will include them in the
+	final result.
+	(create_mime_actions): Escape the underlines from the MIME action
+	descriptions.
+
+1999-03-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
 	Fix bug #261: inconsistent labels in view menu and toolbar,
 	unsynchronized items.
 

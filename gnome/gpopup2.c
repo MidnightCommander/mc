@@ -25,6 +25,7 @@
 #include "gnome-file-property-dialog.h"
 #include "gnome-open-dialog.h"
 #include "gmain.h"
+#include "gmount.h"
 #define CLIST_FROM_SW(panel_list) GTK_CLIST (GTK_BIN (panel_list)->child)
 
 
@@ -341,6 +342,27 @@ mime_action_callback (GtkWidget *widget, gpointer data)
 	exec_extension (filename, value, NULL, NULL, 0, needs_terminal);
 }
 
+/* Escapes the underlines in the specified string for use by GtkLabel */
+static char *
+escape_underlines (char *str)
+{
+	char *buf;
+	char *p;
+
+	buf = g_new (char, 2 * strlen (str) + 1);
+	
+	for (p = buf; *str; str++) {
+		if (*str == '_')
+			*p++ = '_';
+
+		*p++ = *str;
+	}
+
+	*p = '\0';
+
+	return buf;
+}
+
 /* Creates the menu items for actions based on the MIME type of the selected
  * file in the panel.
  */
@@ -390,6 +412,8 @@ create_mime_actions (GtkWidget *menu, WPanel *panel, int pos, DesktopIconInfo *d
 
 		/* Create the item for that entry */
 
+		str = escape_underlines (str);
+
 		uiinfo[0].type = GNOME_APP_UI_ITEM;
 		uiinfo[0].label = str;
 		uiinfo[0].hint = NULL;
@@ -403,6 +427,8 @@ create_mime_actions (GtkWidget *menu, WPanel *panel, int pos, DesktopIconInfo *d
 		uiinfo[0].widget = NULL;
 
 		fill_menu (GTK_MENU_SHELL (menu), uiinfo, pos++);
+		g_free (str);
+
 		gtk_object_set_user_data (GTK_OBJECT (uiinfo[0].widget), key);
 
 		/* Remember to free this memory */
