@@ -1676,15 +1676,6 @@ desktop_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, 
 		break;
 
 	case TARGET_URI_LIST:
-		/*
-		 * Unless the user is dragging with button-2 (ask action)
-		 * drops on the desktop will be symlinks.
-		 *
-		 * I have got enough complaints as it is.
-		 */
-		if (context->suggested_action != GDK_ACTION_ASK)
-			context->suggested_action = GDK_ACTION_LINK;
-				
 		retval = gdnd_drop_on_directory (context, data, desktop_directory);
 		if (retval)
 			reload_desktop_icons (x, y);

@@ -8,7 +8,9 @@
 
 #ifndef GDESKTOP_H
 #define GDESKTOP_H
+
 #include "dir.h"
+
 
 /* Snap granularity for desktop icons -- maybe these should be calculated in
  * terms of the font size?
@@ -47,22 +49,6 @@ typedef struct {
 void desktop_icon_info_destroy   (DesktopIconInfo *dii);
 void desktop_icon_info_open      (DesktopIconInfo *dii);
 void desktop_icon_info_delete    (DesktopIconInfo *dii);
-
-typedef enum {
-	application,
-	directory,
-	file
-} icon_t;
-
-/* A structure that describes each icon on the desktop */
-typedef struct {
-	GnomeDesktopEntry *dentry;
-	GtkWidget         *widget;
-	icon_t            type;
-	int               x, y;
-	int               grid_x, grid_y;
-	char              *pathname;
-} desktop_icon_t;
 
 file_entry *file_entry_from_file (char *filename);
 void        file_entry_free      (file_entry *fe);

@@ -1,3 +1,19 @@
+1999-01-21  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (desktop_drag_data_received): Do not force links on
+	the desktop.
+
+	* gscreen.c (panel_create_file_list): Do not use
+	GTK_DEST_DEFAULT_ALL for the drop site.  Only use
+	GTK_DEST_DEFAULT_DROP, since we need to check motion ourselves.
+	(panel_clist_drag_motion): Do not allow dropping on the clist buttons.
+	(panel_clist_button_press): Do not assign the
+	panel->maybe_drag_start flag if the user clicked outside the clist_window.
+
+	* gdesktop.h: Removed old crud (desktop_icon_t, icon_t).
+
+	* gscreen.c (drag_types, drop_types): Use the constants from gdnd.h.
+
 1999-01-21  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-file-property-dialog.c (apply_uid_group_change): uh, lets

@@ -62,13 +62,13 @@ GdkPixmap *icon_dev_pixmap;
 GdkBitmap *icon_dev_mask;
 
 static GtkTargetEntry drag_types [] = {
-	{ "text/uri-list", 0, TARGET_URI_LIST },
-	{ "text/plain",    0, TARGET_TEXT_PLAIN },
-	{ "_NETSCAPE_URL", 0, TARGET_URL }
+	{ TARGET_URI_LIST_TYPE, 0, TARGET_URI_LIST },
+	{ TARGET_TEXT_PLAIN_TYPE, 0, TARGET_TEXT_PLAIN },
+	{ TARGET_URL_TYPE, 0, TARGET_URL }
 };
 
 static GtkTargetEntry drop_types [] = {
-	{ "text/uri-list", 0, TARGET_URI_LIST }
+	{ TARGET_URI_LIST_TYPE, 0, TARGET_URI_LIST }
 };
 
 #define ELEMENTS(x) (sizeof (x) / sizeof (x[0]))
@@ -899,6 +899,9 @@ load_dnd_icons (void)
 static int
 panel_clist_button_press (GtkWidget *widget, GdkEventButton *event, WPanel *panel)
 {
+	if (event->window != GTK_CLIST (widget)->clist_window)
+		return FALSE;
+
 	panel->maybe_start_drag = event->button;
 
 	panel->click_x = event->x;
@@ -1029,8 +1032,15 @@ static gboolean
 panel_clist_drag_motion (GtkWidget *widget, GdkDragContext *ctx, int x, int y, guint time, void *data)
 {
 	WPanel *panel = data;
-	
-	panel_setup_drag_motion (panel, x, y, panel_clist_scrolling_is_desirable, panel_clist_scroll);
+
+	if (ctx->dest_window != GTK_CLIST (widget)->clist_window)
+		gdk_drag_status (ctx, 0, time);
+	else {
+		panel_setup_drag_motion (panel, x, y,
+					 panel_clist_scrolling_is_desirable, panel_clist_scroll);
+		gdk_drag_status (ctx, ctx->suggested_action, time);
+	}
+
 	return TRUE;
 }
 
@@ -1189,7 +1199,7 @@ panel_create_file_list (WPanel *panel)
 
 	load_dnd_icons ();
 
-	gtk_drag_dest_set (GTK_WIDGET (file_list), GTK_DEST_DEFAULT_ALL,
+	gtk_drag_dest_set (GTK_WIDGET (file_list), GTK_DEST_DEFAULT_DROP,
 			   drop_types, ELEMENTS (drop_types),
 			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
 
