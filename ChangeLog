@@ -1,5 +1,10 @@
 2003-10-29  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Define SLANG_POSIX_SIGNALS if all 4 required
+	functions are present.  Remove references to extraconf.h.
+	* extraconf.h: Eliminate.
+	* Makefile.am: Remove extraconf.h.
+
 	* configure.in: Move ext2fs undelete support ...
 	* acinclude.m4 (MC_WITH_VFS): ... here.
 	* extraconf.h: Remove VFS logic, it's enforced in configure now.
