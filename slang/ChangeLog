@@ -1,3 +1,9 @@
+2002-11-28  Pavel Roskin  <proski@gnu.org>
+
+	* sldisply.c: Fix for the previous patch.  Only swap colors if
+	setf and setb are not empty.
+	Reported by Andras Barthazi <andras@barthazi.hu>
+
 2002-10-25  Pavel Roskin  <proski@gnu.org>
 
 	* sldisply.c: Patch to swap blue and red colors for setf/setb
