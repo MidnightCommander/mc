@@ -280,8 +280,6 @@ program like this:
 
 export CC="cc -posix"
 configure --without-subshell --with-termcap
-Edie config.h and make sure you have #undef HAVE_GETWD
-make
 
 
 

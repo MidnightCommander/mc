@@ -110,7 +110,7 @@ dnl
 dnl Check availability of some functions 
 dnl 
 
-AC_CHECK_FUNCS([strerror statfs getwd strcasecmp strncasecmp strcoll strftime \
+AC_CHECK_FUNCS([strerror statfs strcasecmp strncasecmp strcoll strftime \
 		strdup memmove pwdauth truncate initgroups putenv \
 		memset memcpy tcsetattr tcgetattr cfgetospeed \
 		sigaction sigemptyset sigprocmask sigaddset \

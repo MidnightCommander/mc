@@ -1,5 +1,9 @@
 2001-07-19  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Don't check for getwd, it's completely
+	eliminated.
+	* INSTALL: Remove reference to HAVE_GETWD.
+
 	* lib/mc.ext.in: Fix opening info pages on VFS.  Modernize
 	entries for compressed cpio archives.
 
