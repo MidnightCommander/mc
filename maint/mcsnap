@@ -87,7 +87,7 @@ rm -f $MC_PATCH $MC_PATCH_BZ2
 make distdir MSGMERGE=false
 
 # Sometimes GNU diff returns 1 for unclear reasons
-diff -urN -x po $MC_BASE_DIR mc-*/ >$MC_PATCH || :
+diff -urN -x '*.po' -x '*.gmo' $MC_BASE_DIR mc-*/ >$MC_PATCH || :
 bzip2 $MC_PATCH
 
 upload "$MCTARBALL" "mc*.tar.gz"
