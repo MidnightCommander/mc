@@ -5,7 +5,7 @@ extfsdir = $(mclibdir)/extfs
 EXTFS_MISC  = README extfs.ini unarj.diff sfs.ini
 
 # Filters that don't need adaptation to the local system
-EXTFS_CONST = a apt audio deba debd dpkg hp48 mailfs patchfs rpm \
+EXTFS_CONST = a apt audio deba debd dpkg hp48 mailfs patchfs rpm bpp \
 	rpms trpm uarj
 
 # Filters that need adaptation to the local system - source files
