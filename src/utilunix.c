@@ -460,7 +460,6 @@ int mc_doublepopen (int inhandle, int inlen, pid_t *the_pid, char *command, ...)
     pid_t pid;
 
 #define closepipes() close(pipe0[0]);close(pipe0[1]);close(pipe1[0]);close(pipe1[1])
-#define is_a_pipe_fd(f) ((pipe0[0] == f) || (pipe0[1] == f) || (pipe1[0] == f) || (pipe1[1] == f))
     
     pipe (pipe0); pipe (pipe1);
     ignore.sa_handler = SIG_IGN;
@@ -481,7 +480,7 @@ int mc_doublepopen (int inhandle, int inlen, pid_t *the_pid, char *command, ...)
 	    switch (pid = fork ()) {
 	    	case -1:
 	    	    closepipes ();
-	    	    exit (1);
+	    	    _exit (1);
 	    	case 0: {
 #define MAXARGS 16
 		     int argno;
@@ -489,8 +488,6 @@ int mc_doublepopen (int inhandle, int inlen, pid_t *the_pid, char *command, ...)
 		     va_list ap;
 		     int nulldevice;
 
-		     port_shutdown_extra_fds ();
-	    
 		     nulldevice = open ("/dev/null", O_WRONLY);
 		     close (0);
 		     dup (pipe0 [0]);
@@ -509,7 +506,9 @@ int mc_doublepopen (int inhandle, int inlen, pid_t *the_pid, char *command, ...)
 		         }
 		     va_end (ap);
 		     execvp (command, args);
-		     exit (0);
+
+		     /* If we are here exec has failed */
+		     _exit (0);
 		}
 	    	default:
 	    	    {
@@ -529,13 +528,13 @@ int mc_doublepopen (int inhandle, int inlen, pid_t *the_pid, char *command, ...)
 				    break;
 			    }
 	    	    	}
+			close (inhandle);
 	    	    	close (pipe0 [1]);
 	   		while (waitpid (pid, &i, 0) < 0)
 			    if (errno != EINTR)
 				break;
 
-			port_shutdown_extra_fds ();
-	   		exit (i);
+	   		_exit (i);
 	    	    }
 	    }
     }

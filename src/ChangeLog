@@ -1,3 +1,9 @@
+2001-07-16  Pavel Roskin  <proski@gnu.org>
+
+	* utilunix.c (mc_doublepopen): Use _exit() instead of exit()
+	and don't close any unrelated file descriptors.  Explicitly
+	close inhandle.
+
 2001-07-15  Pavel Roskin  <proski@gnu.org>
 
 	* mad.h: Include stdio.h to prevent redefining mad_tempnam().
