@@ -47,13 +47,14 @@ static const char *c_in;	/* Current input filename */
 static char *topics = NULL;
 
 struct node {
-    char *node;
-    char *lname;
+    char *node;			/* Section name */
+    char *lname;		/* Translated .SH, NULL if not translated */
     struct node *next;
+    int heading_level;
 };
 
 static struct node nodes;
-static struct node *cnode;
+static struct node *cnode;	/* Current node */
 
 #define MAX_STREAM_BLOCK 8192
 
@@ -162,7 +163,7 @@ newline (void)
 
 /* Calculate the length of string */
 static int
-string_len (char *buffer)
+string_len (const char *buffer)
 {
     static int anchor_flag = 0;	/* Flag: Inside hypertext anchor name */
     static int link_flag = 0;	/* Flag: Inside hypertext link target name */
@@ -316,11 +317,11 @@ handle_node (char *buffer, int is_sh)
 	    /* Skipping title and marking text for skipping */
 	    skip_flag = 2;
 	} else {
+	    buffer += heading_level;
 	    if (!is_sh || !node) {
 		/* Start a new section, but omit empty section names */
-		if (*(buffer + heading_level)) {
-			fprintf (f_out, "%c[%s]", CHAR_NODE_END,
-				 buffer + heading_level);
+		if (*buffer) {
+			fprintf (f_out, "%c[%s]", CHAR_NODE_END, buffer);
 			col++;
 			newline ();
 		}
@@ -328,18 +329,19 @@ handle_node (char *buffer, int is_sh)
 		/* Add section to the linked list */
 		if (!cnode) {
 		    cnode = &nodes;
-		    cnode->next = NULL;
 		} else {
 		    cnode->next = malloc (sizeof (nodes));
 		    cnode = cnode->next;
 		}
 		cnode->node = strdup (buffer);
 		cnode->lname = NULL;
+		cnode->next = NULL;
+		cnode->heading_level = heading_level;
 	    }
 	    if (is_sh) {
 		/* print_string() strtok()es buffer, so */
-		cnode->lname = strdup (buffer + heading_level);
-		print_string (buffer + heading_level);
+		cnode->lname = strdup (buffer);
+		print_string (buffer);
 		newline ();
 		newline ();
 	    }
@@ -554,6 +556,13 @@ handle_command (char *buffer)
     }
 }
 
+static struct links {
+    char *linkname;		/* Section name */
+    int  line;			/* Input line in ... */
+    const char *filename;
+    struct links *next;
+} links, *current_link;
+
 static void
 handle_link (char *buffer)
 {
@@ -587,6 +596,19 @@ handle_link (char *buffer)
 	printf_string ("%c%s%c%s%c\n", CHAR_LINK_START, old,
 		       CHAR_LINK_POINTER, buffer, CHAR_LINK_END);
 	link_flag = 0;
+	/* Add to the linked list */
+	if (current_link) {
+	    current_link->next = malloc (sizeof (links));
+	    current_link = current_link->next;
+	    current_link->next = NULL;
+	} else {
+	    current_link = &links;
+	}
+	while (*buffer == ' ')
+	    buffer++;
+	current_link->linkname = strdup (buffer);
+	current_link->filename = c_in;
+	current_link->line = in_row;
 	break;
     }
 }
@@ -672,11 +694,8 @@ main (int argc, char **argv)
     c_in = c_tmpl;
 
     /* Repeat for each input line */
-    while (!feof (f_tmpl)) {
-	/* Read a line */
-	if (!fgets (buffer, BUFFER_SIZE, f_tmpl)) {
-	    break;
-	}
+    /* Read a line */
+    while (fgets (buffer, BUFFER_SIZE, f_tmpl)) {
 	if (node) {
 	    if (*buffer && *buffer != '\n') {
 		cnode->lname = strdup (buffer);
@@ -688,22 +707,24 @@ main (int argc, char **argv)
 	} else {
 	    node = strchr (buffer, CHAR_NODE_END);
 	    if (node && (node[1] == '[')) {
-		char *p = strrchr (node, ']');
-		if (p && strncmp (node + 2, "main", 4) == 0
-		    && node[6] == ']') {
-		    node = 0;
-		} else {
-		    if (!cnode) {
-			cnode = &nodes;
-			cnode->next = NULL;
+		char *p = strchr (node, ']');
+		if (p) {
+		    if (strncmp (node + 1, "[main]", 6) == 0) {
+			node = 0;
 		    } else {
-			cnode->next = malloc (sizeof (nodes));
-			cnode = cnode->next;
+			if (!cnode) {
+			    cnode = &nodes;
+			} else {
+			    cnode->next = malloc (sizeof (nodes));
+			    cnode = cnode->next;
+			}
+			cnode->node = strdup (node + 2);
+			cnode->node[p - node - 2] = 0;
+			cnode->lname = NULL;
+			cnode->next = NULL;
 		    }
-		    cnode->node = strdup (node + 2);
-		    cnode->node[p - node - 2] = 0;
-		    cnode->lname = NULL;
-		}
+		} else
+		    node = NULL;
 	    } else
 		node = NULL;
 	}
@@ -716,18 +737,39 @@ main (int argc, char **argv)
     else
 	fprintf (f_out, "\004[Contents]\n");
 
+    for (current_link = &links; current_link && current_link->linkname;) {
+	int found = 0;
+	struct links *next = current_link->next;
+
+	if (strcmp (current_link->linkname, "Contents") == 0) {
+	    found = 1;
+	} else {
+	    for (cnode = &nodes; cnode && cnode->node; cnode = cnode->next) {
+		if (strcmp (cnode->node, current_link->linkname) == 0) {
+		    found = 1;
+		    break;
+		}
+	    }
+	}
+	if (!found) {
+	    sprintf (buffer, "Stale link \"%s\"", current_link->linkname);
+	    c_in = current_link->filename;
+	    in_row = current_link->line;
+	    print_error (buffer);
+	}
+	free (current_link->linkname);
+	if (current_link != &links)
+	    free (current_link);
+	current_link = next;
+    }
+
     for (cnode = &nodes; cnode && cnode->node;) {
 	char *node = cnode->node;
-	int heading_level = 0;
 	struct node *next = cnode->next;
 
-	while (*node == ' ') {
-	    heading_level++;
-	    node++;
-	}
 	if (*node)
-	    fprintf (f_out, "  %*s\001 %s \002%s\003", heading_level, "",
-		     cnode->lname ? cnode->lname : node, node);
+	    fprintf (f_out, "  %*s\001 %s \002%s\003", cnode->heading_level,
+		     "", cnode->lname ? cnode->lname : node, node);
 	fprintf (f_out, "\n");
 
 	free (cnode->node);
