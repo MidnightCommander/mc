@@ -1,3 +1,11 @@
+Mon Aug 31 10:46:32 1998  Owen Taylor  <otaylor@redhat.com>
+
+	* gscreen.c (display_mini_info): Removed calls to
+	gtk_clip_label_set() hack, since its cut-n-paste code didn't work
+	with new GTK's. If excessive resizes are a problem, they can be
+	solved by adding an adjustment around the label, and calling
+	gtk_container_set_resize_mode().
+
 1998-08-20  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* gdesktop.c: Include "mad.h", for xmalloc.

@@ -1608,7 +1608,7 @@ display_mini_info (WPanel *panel)
 	if (panel->searching){
 		char *str = copy_strings (N_("Search: "), panel->search_buffer, NULL);
 		
-		gtk_clip_label_set (label, str);
+		gtk_label_set (label, str);
 		free (str);
 		return;
 	}
@@ -1620,7 +1620,7 @@ display_mini_info (WPanel *panel)
 			 size_trunc_sep (panel->total), panel->marked,
 			 panel->marked == 1 ? "" : "s");
 		
-		gtk_clip_label_set (label, buffer);
+		gtk_label_set (label, buffer);
 		return;
 	}
 
@@ -1637,10 +1637,10 @@ display_mini_info (WPanel *panel)
 
 			link_target [len] = 0;
 			str = copy_strings ("-> ", link_target, NULL);
-			gtk_clip_label_set (label, str);
+			gtk_label_set (label, str);
 			free (str);
 		} else 
-			gtk_clip_label_set (label, N_("<readlink failed>"));
+			gtk_label_set (label, N_("<readlink failed>"));
 		return;
 	}
 
@@ -1651,12 +1651,12 @@ display_mini_info (WPanel *panel)
 		buffer = xmalloc (len + 2, "display_mini_info");
 		format_file (buffer, panel, panel->selected, panel->estimated_total-2, 0, 1);
 		buffer [len] = 0;
-		gtk_clip_label_set (label, buffer);
+		gtk_label_set (label, buffer);
 		free (buffer);
 	}
 	if (panel->list_type == list_icons){
 		if (panel->marked == 0){
-			gtk_clip_label_set (label, "");
+			gtk_label_set (label, "");
 		}
 	}
 }
