@@ -1,3 +1,10 @@
+Tue Oct 13 00:22:52 1998  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* extfs/*: marked obvious security holes with FIXME: TMP RACE
+
+	* vfs.c (mc_def_getlocalcopy): creat->open(..,O_EXCL), to prevent
+ 	symlink attack, fixed memory leak along the path
+
 1998-10-13  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* vfs.c, vfs.h: Indentation chages, ugly macros removed.  I am
