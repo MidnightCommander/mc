@@ -21,19 +21,22 @@ upload() {
 set -e
 
 # Version to make patches against.
-# Make sure to have it unpacked in /usr/src
+# The source tree should be available in uncompressed form
 BASE_VERSION="4.6.0"
 
 # Local directories
-MC_BASE_DIR="/usr/src/mc-$BASE_VERSION"
-MC_CVS_DIR="/usr/src/mc"
-MC_BUILD_DIR="/usr/src/mc.snap"
+MC_BASE_DIR="$HOME/src/mc-$BASE_VERSION"
+MC_CVS_DIR="$HOME/src/mc"
+MC_BUILD_DIR="$HOME/src/mc.snap"
 RPM_SRC_DIR="$MC_BUILD_DIR/rpm"
 
 # Location of the snapshot directory
 SITE="login.ibiblio.org"
 DIR="/public/ftp/pub/Linux/utils/file/managers/mc/snapshots"
 # DIR="/public/html/mc/snapshots"
+
+# Command for building RPM
+RPMBUILD=lsb-rpm
 
 cd "$MC_CVS_DIR"
 cvs up -dPA
@@ -72,7 +75,8 @@ mkdir "$RPM_SRC_DIR/BUILD"
 mkdir "$RPM_SRC_DIR/RPMS"
 mkdir "$RPM_SRC_DIR/RPMS/i386"
 mkdir "$RPM_SRC_DIR/SPECS"
-rpmbuild -tb --define="_topdir $RPM_SRC_DIR" "$MCTARBALL"
+$RPMBUILD -tb --define="_topdir $RPM_SRC_DIR" \
+  --define="_with_included_slang 1" "$MCTARBALL"
 MC_RPM_VERSION=`echo $MCVERSION | sed s/-//g`
 MC_RPM=$RPM_SRC_DIR/RPMS/i386/mc-$MC_RPM_VERSION-1.i386.rpm
 if test ! -f $MC_RPM; then
