@@ -1152,6 +1152,7 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 			new_panel_at (point);
 		g_free (point);
 	} else {
+#if 0
 		if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe))
 			new_panel_at (filename);
 		else {
@@ -1185,6 +1186,12 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 			} else
 				gmc_open_filename (filename, NULL);
 		}
+#endif
+		/* we need to special case the new dir.  Otherwise we'd try to cd */
+		if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe))
+			new_panel_at (filename);
+		else
+			do_enter_on_file_entry (fe);
 	}
 
  out:

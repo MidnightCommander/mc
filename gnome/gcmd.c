@@ -672,7 +672,7 @@ gnome_filter_cmd (GtkWidget *widget, WPanel *panel)
 		gtk_entry_set_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (entry))), text3);
 
 	if (easy_patterns)
-		label = gtk_label_new (_("Enter a filter here for files in the panel view.\n\nFor example:\n*.gif will show just gif images"));
+		label = gtk_label_new (_("Enter a filter here for files in the panel view.\n\nFor example:\n*.png will show just png images"));
 	else
 		label = gtk_label_new (_("Enter a Regular Expression to filter files in the panel view."));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
@@ -807,4 +807,79 @@ gnome_new_launcher (GtkWidget *widget, WPanel *panel)
 	gtk_widget_show(dialog);
 
 
+}
+void
+gnome_select (GtkWidget *widget, WPanel *panel)
+{
+    char *reg_exp, *reg_exp_t;
+    int i;
+    int c;
+    int dirflag = 0;
+    GtkWidget *select_dialog;
+    GtkWidget *entry;
+    GtkWidget *label;
+    
+    select_dialog = gnome_dialog_new (_("Select File"), GNOME_STOCK_BUTTON_OK, 
+				      GNOME_STOCK_BUTTON_CANCEL, NULL);
+    gtk_window_set_position (GTK_WINDOW (select_dialog), GTK_WIN_POS_MOUSE);
+    entry = gnome_entry_new ("mc_select");
+    gtk_entry_set_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (entry))), easy_patterns ? "*" : ".");
+    gnome_entry_load_history (GNOME_ENTRY (entry));
+
+    if (easy_patterns)
+	    label = gtk_label_new (_("Enter a filter here to select files in the panel view with.\n\nFor example:\n*.png will select all png images"));
+    else
+	    label = gtk_label_new (_("Enter a regular expression here to select files in the panel view with."));
+    
+    gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+    gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+    
+    gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+    gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (select_dialog)->vbox), label, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (select_dialog)->vbox), entry, FALSE, FALSE, 0);
+    gtk_widget_show_all (GNOME_DIALOG (select_dialog)->vbox);
+    reg_exp = NULL;
+    if (gnome_dialog_run (GNOME_DIALOG (select_dialog)) == 0) {
+	    gtk_widget_hide (select_dialog);
+	    reg_exp = g_strdup (gtk_entry_get_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (entry)))));
+    }
+    gtk_widget_destroy (select_dialog);
+    if ((reg_exp == NULL) || (*reg_exp == '\000')) {
+	    g_free (reg_exp);
+	    return;
+    }
+    reg_exp_t = reg_exp;
+
+    /* Check if they specified a directory */
+    if (*reg_exp_t == PATH_SEP){
+        dirflag = 1;
+        reg_exp_t++;
+    }
+    if (reg_exp_t [strlen(reg_exp_t) - 1] == PATH_SEP){
+        dirflag = 1;
+        reg_exp_t [strlen(reg_exp_t) - 1] = 0;
+    }
+
+    for (i = 0; i < panel->count; i++){
+        if (!strcmp (panel->dir.list [i].fname, ".."))
+            continue;
+	if (S_ISDIR (panel->dir.list [i].buf.st_mode)){
+	    if (!dirflag)
+                continue;
+        } else {
+            if (dirflag)
+                continue;
+	}
+	c = regexp_match (reg_exp_t, panel->dir.list [i].fname, match_file);
+	if (c == -1){
+	    message (1, MSG_ERROR, _("  Malformed regular expression  "));
+	    g_free (reg_exp);
+	    return;
+	}
+	if (c){
+	    do_file_mark (panel, i, 1);
+	}
+    }
+    paint_panel (panel);
+    g_free (reg_exp);
 }

@@ -87,6 +87,7 @@ gmc_open_filename (char *fname, GList *args)
 		if (entry){
 			gnome_desktop_entry_launch (entry);
 			gnome_desktop_entry_free (entry);
+			return 1;
 		}
 	}
 

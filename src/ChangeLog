@@ -1,3 +1,8 @@
+1999-04-07  Jonathan Blandford  <jrb@redhat.com>
+
+	* screen.c (do_enter_on_file_entry): added a consistent behaviour
+	for GNOME stuff.
+
 1999-04-06  David Martin <dmartina@usa.net>
 
 	* info.c (text out of box and locale layout).

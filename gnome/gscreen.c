@@ -645,7 +645,7 @@ panel_configure_file_list (WPanel *panel, GtkWidget *sw, GtkWidget *file_list)
 	gtk_clist_set_selection_mode (GTK_CLIST (file_list), GTK_SELECTION_EXTENDED);
 
 	for (i = 0, format = panel->format; format; format = format->next) {
-		GtkJustification just;
+		GtkJustification just = GTK_JUSTIFY_LEFT;
 
 		if (!format->use_in_gui)
 			continue;
@@ -1434,8 +1434,9 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 		break;
 		
 	case GDK_2BUTTON_PRESS:
-		if (event->button.button == 1)
+		if (event->button.button == 1) {
 			do_enter (panel);
+		}
 		break;
 
 	default:

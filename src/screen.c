@@ -2084,20 +2084,21 @@ do_enter_on_file_entry (file_entry *fe)
 #endif /* USE_VFS */	    
 	    return 1;
 	} else {
-	    char *p;
 
 #ifdef HAVE_GNOME
-	    if (gmc_open (fe))
-		    return 1;
-	    else
+	    if (gmc_open (fe) == 0) {
+		    return (gmc_open_with (fe->fname));
+	    } else
 		    return 0;
 #else
+	    char *p;
+
 	    p = regex_command (fe->fname, "Open", NULL, 0);
-#endif
 	    if (p && (strcmp (p, "Success") == 0))
 		    return 1;
 	    else
 		    return 0;
+#endif
 	}
     }
 }	

@@ -573,12 +573,13 @@ gpopup_do_popup2 (GdkEventButton *event, WPanel *panel, DesktopIconInfo *dii)
 static void
 handle_open (GtkWidget *widget, WPanel *panel)
 {
-	gchar *full_name;
-	DesktopIconInfo *dii;
 
-	full_name = get_full_filename (panel);
 
 	if (is_a_desktop_panel (panel)) {
+		gchar *full_name;
+		DesktopIconInfo *dii;
+		
+		full_name = get_full_filename (panel);
 		dii = desktop_icon_info_get_by_filename (x_basename (full_name));
 		g_assert (dii != NULL);
 
@@ -586,11 +587,7 @@ handle_open (GtkWidget *widget, WPanel *panel)
 		g_free (full_name);
 		return;
 	}
-
-	if (gmc_open_filename (full_name, 0))
-		return;
-	gmc_open_with (full_name);
-	g_free (full_name);
+	do_enter (panel);
 }
 
 static void

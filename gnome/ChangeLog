@@ -1,3 +1,13 @@
+1999-04-06  Jonathan Blandford  <jrb@redhat.com>
+
+	* gscreen.c: make sure that we bring up an open_with if 
+	open it.
+
+	* gcmd.c (gnome_select): new selection dialog.
+
+	* gdesktop-init.c (desktop_init_at): do not use access for it is
+	poor when you are root.
+
 1999-04-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* glayout.c (create_container): Use gtk_window_set_default_size(),

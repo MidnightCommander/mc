@@ -81,6 +81,7 @@ desktop_init_at (const char *dir)
 {
 	DIR *d;
 	struct dirent *dent;
+	struct stat s;
 	const int links_extlen = sizeof (".links")-1;
 
 	d = opendir (dir);
@@ -92,11 +93,16 @@ desktop_init_at (const char *dir)
 		char *fname;
 
 		fname = g_concat_dir_and_file (dir, dent->d_name);
-
-		/*
-		 * If it is an executable
-		 */
-		if (access (fname, X_OK) == 0){
+		if (stat (fname, &s) < 0) {
+			g_free (fname);
+			continue;
+		}
+		if (S_ISDIR (s.st_mode)) {
+			g_free (fname);
+			continue;
+		}
+		if (is_exe (s.st_mode)) {
+			/* let's try running it */
 			char *desktop_quoted;
 			char *command;
 
