@@ -1,3 +1,8 @@
+1999-03-14  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gmount.c (get_mountable_devices): Show error message if the
+	/etc/fstab is not readable by the user.
+
 1999-03-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gview.c (scrollbar_moved): Better, but still shaggy when you

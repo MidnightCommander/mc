@@ -188,8 +188,10 @@ get_mountable_devices (void)
 	GList *list = NULL;
 	
 	f = setmntent ("/etc/fstab", "r");
-	if (f == NULL)
+	if (f == NULL){
+		message (1, MSG_ERROR, _("Could not open the /etc/fstab file"));
 		return NULL;
+	}
 
 	while ((mnt = getmntent (f))){
 		if (option_has_user (mnt->mnt_opts)){
