@@ -6,6 +6,7 @@
  */
 
 #include <config.h>
+#include "gdesktop.h"
 #include <gnome.h>
 #include <sys/stat.h>
 #include <X11/Xlib.h>
@@ -13,7 +14,6 @@
 #include <gdk/gdkx.h>
 #include "gdesktop-icon.h"
 #include "dir.h"
-#include "gdesktop.h"
 
 
 /* Spacing between icon and text */

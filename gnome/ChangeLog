@@ -1,3 +1,17 @@
+2000-01-26  Federico Mena Quintero  <federico@helixcode.com>
+
+	* gmc-client.c (options): Added the --arrange-desktop-icons
+	option.
+	(arrange_desktop_icons): Implemented.
+
+	* gcorba.c (Desktop_arrange_icons): Implemented.
+	(Desktop_class_init): Put the function in the desktop_epv.
+
+	* gdesktop.c (desktop_arrange_icons): Made public.
+
+	* gnome-file-property-dialog.c (align_label_new): Renamed from
+	label_new() to avoid a conflict with widget.h.
+
 2000-01-02  Federico Mena Quintero  <federico@helixcode.com>
 
 	* gaction.c (gmc_open_filename): Use gnome_mime_needsterminal()

@@ -5,8 +5,18 @@ module GNOME {
 		exception POSIX_ERROR { string errorstr; };
 
 		interface Desktop {
+			enum ArrangeType {
+				BY_NAME,
+				BY_TYPE,
+				BY_SIZE,
+				BY_ATIME,
+				BY_MTIME,
+				BY_CTIME
+			};
+
 			void rescan ();
 			void rescan_devices ();
+			void arrange_icons (in ArrangeType type);
 		};
 
 		interface Window {

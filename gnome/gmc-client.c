@@ -119,6 +119,39 @@ rescan_desktop_devices (CORBA_Environment *ev)
 	return TRUE;
 }
 
+/* Arrange the desktop icons */
+static int
+arrange_desktop_icons (const char *type, CORBA_Environment *ev)
+{
+	CORBA_Object obj;
+	GNOME_FileManager_Desktop_ArrangeType arr_type;
+
+	if (strcmp (type, "name") == 0)
+		arr_type = GNOME_FileManager_Desktop_BY_NAME;
+	else if (strcmp (type, "type") == 0)
+		arr_type = GNOME_FileManager_Desktop_BY_TYPE;
+	else if (strcmp (type, "size") == 0)
+		arr_type = GNOME_FileManager_Desktop_BY_SIZE;
+	else if (strcmp (type, "atime") == 0)
+		arr_type = GNOME_FileManager_Desktop_BY_ATIME;
+	else if (strcmp (type, "mtime") == 0)
+		arr_type = GNOME_FileManager_Desktop_BY_MTIME;
+	else if (strcmp (type, "ctime") == 0)
+		arr_type = GNOME_FileManager_Desktop_BY_CTIME;
+	else {
+		fprintf (stderr, _("Unknown arrange type `%s'\n"), type);
+		return FALSE;
+	}
+
+	obj = get_desktop ();
+	if (obj == CORBA_OBJECT_NIL)
+		return FALSE;
+
+	GNOME_FileManager_Desktop_arrange_icons (obj, arr_type, ev);
+	CORBA_Object_release (obj, ev);
+	return TRUE;
+}
+
 /* Close invalid windows */
 static int
 close_invalid_windows (CORBA_Environment *ev)
@@ -143,11 +176,13 @@ enum {
 	ARG_RESCAN_DIRECTORY,
 	ARG_RESCAN_DESKTOP,
 	ARG_RESCAN_DESKTOP_DEVICES,
+	ARG_ARRANGE_DESKTOP_ICONS,
 	ARG_CLOSE_INVALID_WINDOWS
 };
 
 static int selected_option = -1;
 static char *directory;
+static char *arrange_type;
 
 /* Parse an argument */
 static void
@@ -175,6 +210,9 @@ static const struct poptOption options[] = {
 	  N_("Rescan the desktop icons"), NULL },
 	{ "rescan-desktop-devices", '\0', POPT_ARG_NONE, NULL, ARG_RESCAN_DESKTOP_DEVICES,
 	  N_("Rescan the desktop device icons"), NULL },
+	{ "arrange-desktop-icons", '\0', POPT_ARG_STRING, &arrange_type, ARG_ARRANGE_DESKTOP_ICONS,
+	  N_("Arrange the desktop icons"),
+	  N_("name | type | size | atime | mtime | ctime") },
 	{ "close-invalid-windows", '\0', POPT_ARG_NONE, NULL, ARG_CLOSE_INVALID_WINDOWS,
 	  N_("Close windows whose directories cannot be reached"), NULL },
 	{ NULL, '\0', 0, NULL, 0, NULL, NULL }
@@ -213,6 +251,10 @@ main (int argc, char **argv)
 
 	case ARG_RESCAN_DESKTOP_DEVICES:
 		result = rescan_desktop_devices (&ev);
+		break;
+
+	case ARG_ARRANGE_DESKTOP_ICONS:
+		result = arrange_desktop_icons (arrange_type, &ev);
 		break;
 
 	case ARG_CLOSE_INVALID_WINDOWS:

@@ -12,7 +12,6 @@
 #include "../vfs/vfs.h"
 #include <libgnorba/gnorba.h>
 #include "FileManager.h"
-#include "gcmd.h"
 #include "gcorba.h"
 #include "gdesktop.h"
 #include "global.h"
@@ -85,6 +84,46 @@ Desktop_rescan_devices (PortableServer_Servant servant, CORBA_Environment *ev)
 	desktop_rescan_devices ();
 }
 
+/* Desktop::arrange_icons method */
+static void
+Desktop_arrange_icons (PortableServer_Servant servant,
+		       GNOME_FileManager_Desktop_ArrangeType type,
+		       CORBA_Environment *ev)
+{
+	SortType sort_type;
+
+	switch (type) {
+	case GNOME_FileManager_Desktop_BY_NAME:
+		sort_type = SORT_NAME;
+		break;
+
+	case GNOME_FileManager_Desktop_BY_TYPE:
+		sort_type = SORT_EXTENSION;
+		break;
+
+	case GNOME_FileManager_Desktop_BY_SIZE:
+		sort_type = SORT_SIZE;
+		break;
+
+	case GNOME_FileManager_Desktop_BY_ATIME:
+		sort_type = SORT_ACCESS;
+		break;
+
+	case GNOME_FileManager_Desktop_BY_MTIME:
+		sort_type = SORT_MODIFY;
+		break;
+
+	case GNOME_FileManager_Desktop_BY_CTIME:
+		sort_type = SORT_CHANGE;
+		break;
+
+	default:
+		return; /* Should we raise an exception instead? */
+	}
+
+	desktop_arrange_icons (sort_type);
+}
+
 /* Fills the vepv structure for the desktop object */
 static void
 Desktop_class_init (void)
@@ -98,6 +137,7 @@ Desktop_class_init (void)
 
 	desktop_epv.rescan = Desktop_rescan;
 	desktop_epv.rescan_devices = Desktop_rescan_devices;
+	desktop_epv.arrange_icons = Desktop_arrange_icons;
 
 	desktop_vepv._base_epv = &desktop_base_epv;
 	desktop_vepv.GNOME_FileManager_Desktop_epv = &desktop_epv;

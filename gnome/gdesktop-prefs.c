@@ -6,9 +6,9 @@
  */
 
 #include <config.h>
+#include "gdesktop.h"
 #include <gnome.h>
 #include "gdesktop-prefs.h"
-#include "gdesktop.h"
 
 
 /* Size of the icon position box */

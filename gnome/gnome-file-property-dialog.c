@@ -634,10 +634,9 @@ create_settings_pane (GnomeFilePropertyDialog *fp_dlg)
 }
 
 /* Permissions Pane */
-/* Name changed to dialog_label_new so it doesn't conflict with something
-in widget.h */
+
 static GtkWidget *
-dialog_label_new (char *text, double xalign, double yalign)
+align_label_new (char *text, double xalign, double yalign)
 {
 	GtkWidget *label;
 
@@ -731,15 +730,15 @@ gtk_table_attach (GTK_TABLE (table), widget,		\
 		  GTK_FILL | GTK_SHRINK,		\
 		  0, 0);
 
-#define PERMSET(name, r, w, x, rmask, wmask, xmask, y) do {		\
-	r = perm_check_new (NULL, fp_dlg->st.st_mode & rmask, fp_dlg);			\
-	w = perm_check_new (NULL, fp_dlg->st.st_mode & wmask, fp_dlg);			\
-	x = perm_check_new (NULL, fp_dlg->st.st_mode & xmask, fp_dlg);			\
-									\
-	ATTACH (table, dialog_label_new (name, 0.0, 0.5), 0, 1, y, y + 1);\
-	ATTACH (table, r, 1, 2, y, y + 1);				\
-	ATTACH (table, w, 2, 3, y, y + 1);				\
-	ATTACH (table, x, 3, 4, y, y + 1);				\
+#define PERMSET(name, r, w, x, rmask, wmask, xmask, y) do {			\
+	r = perm_check_new (NULL, fp_dlg->st.st_mode & rmask, fp_dlg);		\
+	w = perm_check_new (NULL, fp_dlg->st.st_mode & wmask, fp_dlg);		\
+	x = perm_check_new (NULL, fp_dlg->st.st_mode & xmask, fp_dlg);		\
+										\
+	ATTACH (table, align_label_new (name, 0.0, 0.5), 0, 1, y, y + 1);	\
+	ATTACH (table, r, 1, 2, y, y + 1);					\
+	ATTACH (table, w, 2, 3, y, y + 1);					\
+	ATTACH (table, x, 3, 4, y, y + 1);					\
 } while (0);
 
 static GtkWidget *
@@ -762,9 +761,10 @@ perm_mode_new (GnomeFilePropertyDialog *fp_dlg)
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 	gtk_widget_show (hbox);
 
-	gtk_box_pack_start (GTK_BOX (hbox), dialog_label_new (_("Current mode: "), 0.0, 0.5), FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), align_label_new (_("Current mode: "), 0.0, 0.5),
+			    FALSE, FALSE, 0);
 
-	fp_dlg->mode_label = dialog_label_new ("0000", 0.0, 0.5);
+	fp_dlg->mode_label = align_label_new ("0000", 0.0, 0.5);
 	gtk_box_pack_start (GTK_BOX (hbox), fp_dlg->mode_label, FALSE, FALSE, 0);
 
 	table = gtk_table_new (4, 5, FALSE);
@@ -777,10 +777,10 @@ perm_mode_new (GnomeFilePropertyDialog *fp_dlg)
 
 	/* Headings */
 
-	ATTACH (table, dialog_label_new (_("Read"), 0.0, 0.5),     1, 2, 0, 1);
-	ATTACH (table, dialog_label_new (_("Write"), 0.0, 0.5),    2, 3, 0, 1);
-	ATTACH (table, dialog_label_new (_("Exec"), 0.0, 0.5),     3, 4, 0, 1);
-	ATTACH (table, dialog_label_new (_("Special"), 0.0, 0.5),  4, 5, 0, 1);
+	ATTACH (table, align_label_new (_("Read"), 0.0, 0.5),     1, 2, 0, 1);
+	ATTACH (table, align_label_new (_("Write"), 0.0, 0.5),    2, 3, 0, 1);
+	ATTACH (table, align_label_new (_("Exec"), 0.0, 0.5),     3, 4, 0, 1);
+	ATTACH (table, align_label_new (_("Special"), 0.0, 0.5),  4, 5, 0, 1);
 
 	/* Permissions */
 
@@ -939,7 +939,7 @@ perm_ownership_new (GnomeFilePropertyDialog *fp_dlg)
 
 	/* Owner */
 
-	gtk_table_attach (GTK_TABLE (table), dialog_label_new (_("Owner"), 0.0, 0.5),
+	gtk_table_attach (GTK_TABLE (table), align_label_new (_("Owner"), 0.0, 0.5),
 			  0, 1, 0, 1,
 			  GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK,
 			  0, 0);
@@ -954,7 +954,7 @@ perm_ownership_new (GnomeFilePropertyDialog *fp_dlg)
 
 	/* Group */
 
-	gtk_table_attach (GTK_TABLE (table), dialog_label_new (_("Group"), 0.0, 0.5),
+	gtk_table_attach (GTK_TABLE (table), align_label_new (_("Group"), 0.0, 0.5),
 			  0, 1, 1, 2,
 			  GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK,
 			  0, 0);

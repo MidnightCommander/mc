@@ -56,7 +56,9 @@ int desktop_arr_rows = FALSE;
  * 1 -- Enable shaped text always
  * 2 -- Disable shaped text
  *
- * This might seem a bit stra
+ * This might seem a bit strange, but it is like that for compatibility reasons.
+ */
+
 int desktop_use_shaped_text = 0;
 
 /* The computed name of the user's desktop directory */
@@ -727,7 +729,7 @@ static WPanel *create_panel_from_desktop(); /* Fwd decl */
 static void free_panel_from_desktop(WPanel *panel);
 
 /* Perform automatic arrangement of the desktop icons */
-static void
+void
 desktop_arrange_icons (SortType type)
 {
 	WPanel *panel;

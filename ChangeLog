@@ -1,3 +1,8 @@
+2000-01-26  Federico Mena Quintero  <federico@helixcode.com>
+
+	* idl/FileManager.idl (Desktop): Added arrange_icons() method and
+	an ArrangeType enum.
+
 2000-01-03  Aaron Lehmann  <aaronl@vitelus.com>
 
 	* gdesktop.c, gdnd.c, gaction.c, gicon.c, 
