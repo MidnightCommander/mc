@@ -720,7 +720,6 @@ char *unix_error_string (int error_num)
     return buffer;
 }
 
-#ifdef HAVE_MAD
 char *copy_strings (const char *first, ...)
 {
     va_list ap;
@@ -750,7 +749,6 @@ char *copy_strings (const char *first, ...)
 
     return result;
 }
-#endif /* HAVE_MAD */
 
 #ifndef VFS_STANDALONE	
 long blocks2kilos (int blocks, int bsize)
