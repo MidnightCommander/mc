@@ -749,7 +749,7 @@ msgstr "Preklopi pogled, da prika¾e podrobno stanje datotek"
 
 #: gnome/glayout.c:50
 msgid "_Custom View"
-msgstr "Pogled po _meri"
+msgstr "P_rikrojen pogled"
 
 #: gnome/glayout.c:51 gnome/glayout.c:67
 msgid "Switch view to show user-defined statistics"
@@ -5399,7 +5399,7 @@ msgstr " &Levo "
 
 #: src/main.c:1397
 msgid " &Above "
-msgstr " &Zgoraj "
+msgstr " &Nad "
 
 #: src/main.c:1400
 msgid " &File "
@@ -6933,7 +6933,7 @@ msgstr ""
 
 #: vfs/smbfs.c:1243
 msgid " Authentication failed "
-msgstr " Identifikacija je bila neuspe¹na "
+msgstr " Avtentifikacija je bila neuspe¹na "
 
 #: vfs/smbfs.c:1738
 #, c-format
