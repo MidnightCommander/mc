@@ -1,3 +1,8 @@
+2002-08-22  Pavel Roskin  <proski@gnu.org>
+
+	* editcmd.c (raw_callback): Use standard common_dialog_repaint()
+	to handle DLG_DRAW.
+
 2002-08-21  Pavel Roskin  <proski@gnu.org>
 
 	* editwidget.c (edit): Make edit_bar a local variable.

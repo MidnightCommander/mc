@@ -467,13 +467,7 @@ int raw_callback (struct Dlg_head *h, int key, int Msg)
 {
     switch (Msg) {
     case DLG_DRAW:
-	attrset (REVERSE_COLOR);
-	dlg_erase (h);
-	draw_box (h, 1, 1, h->lines - 2, h->cols - 2);
-
-	attrset (COLOR_HOT_NORMAL);
-	dlg_move (h, 1, 2);
-	printw (h->title);
+	common_dialog_repaint (h);
 	break;
 
     case DLG_KEY:
