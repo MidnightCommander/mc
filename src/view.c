@@ -336,7 +336,7 @@ get_byte (WView *view, unsigned int byte_index)
 	    }
 	    view->blocks = page;
 	}
-	if (byte_index > view->bytes_read) {
+	if (byte_index >= view->bytes_read) {
 	    return -1;
 	} else
 	    return view->block_ptr[page - 1].data[offset];

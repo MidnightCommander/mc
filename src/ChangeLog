@@ -1,5 +1,7 @@
 2003-06-06  Pavel Roskin  <proski@gnu.org>
 
+	* view.c (get_byte): Fix off-by-one error.  Found by Valgrind.
+
 	* command.c (command_new): Fix memory leak.
 	* subshell.c (exit_subshell): Free pty_buffer.
 
