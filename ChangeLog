@@ -1,3 +1,7 @@
+2004-12-03  Pavel S. Shirshov  <me@pavelsh.pp.ru>
+
+	* configure.ac: Bump version to 4.6.1a
+
 2004-11-17  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* acinclude.m4: Fix compiling mc with system slang on FreeBSD.
