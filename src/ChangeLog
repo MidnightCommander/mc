@@ -5,6 +5,7 @@
 	(save_edit_changes): Use messages from ../po/mc.pot.
 
 	* mad.c (mad_tempnam): Commented out to make linker happy.
+	* main.c [HAVE_MAD && !_OS_NT] (main): G_free mc_home.
 
 2002-05-27  Andrew V. Samoilov  <kai@cmail.ru>
 

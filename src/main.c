@@ -2774,6 +2774,9 @@ main (int argc, char *argv [])
     }
 
 #ifdef HAVE_MAD
+#ifndef _OS_NT
+    g_free (mc_home);
+#endif /* (_OS_NT) */
     done_key ();
 #ifdef HAVE_CHARSET
     free_codepages_list ();
