@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.0a\n"
-"POT-Creation-Date: 2003-04-04 15:23+0200\n"
-"PO-Revision-Date: 2003-04-04 15:40+0200\n"
+"POT-Creation-Date: 2003-04-17 08:36+0200\n"
+"PO-Revision-Date: 2003-04-17 08:35+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Generator: KBabel 0.9.6\n"
 
 #: edit/edit.c:151 edit/edit.c:282 edit/edit.c:290 edit/edit.c:338
-#: edit/edit.c:353 edit/edit.c:364 edit/edit.c:380 edit/edit.c:2691
+#: edit/edit.c:353 edit/edit.c:364 edit/edit.c:380 edit/edit.c:2693
 #: edit/editcmd.c:265 edit/editcmd.c:273 edit/editcmd.c:1694 src/wtools.c:132
 #: vfs/vfs.c:1832
 msgid "Error"
@@ -49,11 +49,11 @@ msgstr " Non è un file normale: "
 msgid " File is too large: "
 msgstr " File troppo grande: "
 
-#: edit/edit.c:2557
+#: edit/edit.c:2559
 msgid "User menu available only in mcedit invoked from mc"
 msgstr "Menu utente disponibile solo in mcedit se chiamato da mc"
 
-#: edit/edit.c:2691
+#: edit/edit.c:2693
 msgid "Macro recursion is too deep"
 msgstr "La ricorsione macro è troppo profonda"
 
@@ -284,7 +284,8 @@ msgid "Search"
 msgstr "Cerca"
 
 #: edit/editcmd.c:1694
-msgid " Invalid regular expression, or scanf expression with to many conversions "
+msgid ""
+" Invalid regular expression, or scanf expression with to many conversions "
 msgstr ""
 " L'espressione regolare non è valida, o espressione di scanf con troppe "
 "conversioni "
@@ -449,20 +450,26 @@ msgstr " Ins. letteralmente "
 msgid " Press any key: "
 msgstr " Premere un tasto: "
 
-#: edit/editlock.c:129
+#: edit/editlock.c:147
 #, c-format
-msgid "File %s is locked by lock %s"
-msgstr "Il file %s è bloccato dal lock %s"
+msgid ""
+"File \"%s\" is already being edited\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+"Il file \"%s\" è già stato modificato\n"
+"Utente: %s\n"
+"ID Processo: %d"
 
-#: edit/editlock.c:133
+#: edit/editlock.c:152
 msgid "File locked"
 msgstr "File bloccato da lock"
 
-#: edit/editlock.c:133
+#: edit/editlock.c:152
 msgid "&Grab lock"
 msgstr "&Cattura lock"
 
-#: edit/editlock.c:134
+#: edit/editlock.c:153
 msgid "&Ignore lock"
 msgstr "&Ignora lock"
 
@@ -1028,7 +1035,7 @@ msgstr "Nome file esistente (sul quale punta il coll. simbolico):"
 msgid "Running "
 msgstr "Attivo "
 
-#: src/boxes.c:875 src/find.c:733
+#: src/boxes.c:875 src/find.c:736
 msgid "Stopped"
 msgstr "Sospeso "
 
@@ -2204,25 +2211,25 @@ msgstr "Contenuto: "
 msgid "&Tree"
 msgstr "A&lbero"
 
-#: src/find.c:225 src/find.c:803
+#: src/find.c:225 src/find.c:806
 msgid "Find File"
 msgstr " Trova file "
 
-#: src/find.c:464
+#: src/find.c:467
 #, c-format
 msgid "Grepping in %s"
 msgstr "Cercando in %s"
 
-#: src/find.c:535
+#: src/find.c:538
 msgid "Finished"
 msgstr "Terminato"
 
-#: src/find.c:559 src/view.c:1631
+#: src/find.c:562 src/view.c:1631
 #, c-format
 msgid "Searching %s"
 msgstr "Cercando %s"
 
-#: src/find.c:733 src/find.c:837
+#: src/find.c:736 src/find.c:840
 msgid "Searching"
 msgstr "Cercando"
 
@@ -3204,7 +3211,8 @@ msgstr " Etichetta per il comando: "
 
 #: src/panelize.c:266
 msgid " Cannot run external panelize in a non-local directory "
-msgstr " È possibile eseguire il visualizzatore esterno solo su una directory locale "
+msgstr ""
+" È possibile eseguire il visualizzatore esterno solo su una directory locale "
 
 #: src/panelize.c:315
 msgid "Find rejects after patching"
@@ -4509,7 +4517,3 @@ msgstr "%s: %s: %s %3d%% (%lu byte trasferiti)"
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu byte trasferiti"
-
-#~ msgid "Force subshell execution"
-#~ msgstr "Forza l'esecuzione delle subshell"
-
