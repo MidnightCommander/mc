@@ -4,6 +4,7 @@ Changes made after 4.6.0-pre1.
 - glib is now properly detected on FreeBSD.
 - New syntax rules - RPM specfile.
 - Termnet support has heen removed.
+- mc now creates its own temporary directory, separate for each user.
 
 
 Version 4.6.0-pre1.
