@@ -71,17 +71,28 @@
          <QPG:Add file="./lib/mc.hint.nl" permissions="0644" install="/opt/share/mc/"/>
          <QPG:Add file="./lib/mc.hint.pl" permissions="0644" install="/opt/share/mc/"/>
          <QPG:Add file="./lib/mc.hint.ru" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./lib/mc.hint.sr" permissions="0644" install="/opt/share/mc/"/>
          <QPG:Add file="./lib/mc.hint.uk" permissions="0644" install="/opt/share/mc/"/>
          <QPG:Add file="./lib/mc.hint.zh" permissions="0644" install="/opt/share/mc/"/>
          <QPG:Add file="./doc/mc.hlp" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./doc/es/mc.hlp.es" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./doc/hu/mc.hlp.hu" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./doc/it/mc.hlp.it" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./doc/pl/mc.hlp.pl" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./doc/ru/mc.hlp.ru" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./doc/sr/mc.hlp.sr" permissions="0644" install="/opt/share/mc/"/>
          <QPG:Add file="./lib/mc.lib" permissions="0644" install="/opt/share/mc/"/>
          <QPG:Add file="./lib/mc.menu" permissions="0644" install="/opt/share/mc/"/>
+         <QPG:Add file="./lib/mc.menu.sr" permissions="0644" install="/opt/share/mc/"/>
          <QPG:Add file="./syntax/Syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/ada95.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/aspx.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/c.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/changelog.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/cs.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/diff.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/dos.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/eiffel.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/fortran.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/html.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/java.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
@@ -100,6 +111,7 @@
          <QPG:Add file="./syntax/php.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/po.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/python.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/ruby.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/sh.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/slang.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/smalltalk.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
