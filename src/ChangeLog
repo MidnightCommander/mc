@@ -1,3 +1,8 @@
+1999-02-07  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* treestore.c (tree_store_notify_add): A tree_store_add_fn wants a
+	string, not a tree_entry, so pass a string to it.
+
 1999-02-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* treestore.c: Revert all of the stack changes.  Now the treestore

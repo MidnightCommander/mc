@@ -769,7 +769,7 @@ tree_store_notify_add (tree_entry *entry)
 	
 	while (p) {
 		r = (tree_store_add_fn) p->hook_fn;
-		r (entry, p->hook_data);
+		r (entry->name, p->hook_data);
 		p = p->next;
 	}
 }
