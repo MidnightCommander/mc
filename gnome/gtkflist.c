@@ -7,7 +7,9 @@
 
 #include <config.h>
 #include <stdlib.h>
+#include "x.h"
 #include "gtkflist.h"
+#include "gmain.h"
 
 
 enum {
@@ -333,6 +335,19 @@ gtk_flist_button_release (GtkWidget *widget, GdkEventButton *event)
 			select_row (flist, row, flist->dnd_select_pending_state);
 			flist->dnd_select_pending = FALSE;
 			flist->dnd_select_pending_state = 0;
+		} else if (event->button == 2) {
+			/* Middle click opens another window */
+			char *fullname;
+			file_entry *fe;
+
+			fe = &flist->panel->dir.list [row];
+
+			if (S_ISDIR (fe->buf.st_mode) || fe->f.link_to_dir) {
+				fullname = concat_dir_and_file (flist->panel->cwd,
+								fe->fname);
+				new_panel_at (fullname);
+				g_free (fullname);
+			}
 		}
 
 		retval = TRUE;

@@ -1321,19 +1321,6 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 
 		break;
 
-	case GDK_BUTTON_RELEASE:
-		if (event->button.button == 2){
-			char *fullname;
-
-			if (S_ISDIR (panel->dir.list [index].buf.st_mode) ||
-			    panel->dir.list [index].f.link_to_dir){
-				fullname = concat_dir_and_file (panel->cwd, panel->dir.list [index].fname);
-				new_panel_at (fullname);
-				g_free (fullname);
-			}
-		}
-		break;
-
 	case GDK_2BUTTON_PRESS:
 		if (event->button.button == 1) {
 			do_enter (panel);
@@ -1521,6 +1508,23 @@ static int
 panel_icon_list_button_release (GtkWidget *widget, GdkEventButton *event, WPanel *panel)
 {
 	panel->maybe_start_drag = 0;
+	if (event->button == 2){
+		char *fullname;
+		int icon;
+		file_entry *fe;
+
+		GnomeIconList *gil = GNOME_ICON_LIST (widget);
+		icon = gnome_icon_list_get_icon_at (gil, event->x, event->y);
+		fe = &panel->dir.list [icon];
+
+		if (S_ISDIR (fe->buf.st_mode) || fe->f.link_to_dir){
+			fullname = concat_dir_and_file (panel->cwd, fe->fname);
+			new_panel_at (fullname);
+			g_free (fullname);
+		}
+		return TRUE;
+	}
+
 	return FALSE;
 }
 
