@@ -1460,8 +1460,11 @@ ftpfs_send_command(struct vfs_class *me, const char *filename, const char *cmd, 
     vfs_stamp_create (&vfs_ftpfs_ops, super);
     if (flags & OPT_IGNORE_ERROR)
 	r = COMPLETE;
-    if (r != COMPLETE)
-	    ERRNOR (EPERM, -1);
+    if (r != COMPLETE) {
+        me->verrno = EPERM;
+        g_free (mpath);
+        return -1;
+    }
     if (flush_directory_cache)
 	vfs_s_invalidate(me, super);
     g_free(mpath);

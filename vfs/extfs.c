@@ -937,17 +937,21 @@ static int extfs_internal_stat (const char *path, struct stat *buf, int resolve)
     struct entry *entry;
     struct inode *inode;
     char *path2 = g_strdup(path);
+    int result = -1;
 
     if ((q = extfs_get_path_mangle (path2, &archive, 0, 0)) == NULL)
-	return -1;
+        goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, 0, 0);
     if (entry == NULL)
-    	return -1;
+        goto cleanup;
     if (resolve && (entry = extfs_resolve_symlinks (entry)) == NULL)
-	return -1;
+        goto cleanup;
     inode = entry->inode;
     extfs_stat_move( buf, inode );
-    return 0;
+    result = 0;
+cleanup:
+    g_free (path2);
+    return result;
 }
 
 static int extfs_stat (struct vfs_class *me, const char *path, struct stat *buf)
@@ -1032,6 +1036,7 @@ static int extfs_unlink (struct vfs_class *me, const char *file)
     }
     if (extfs_cmd (" rm ", archive, entry, "")){
         my_errno = EIO;
+        goto cleanup;
     }
     extfs_remove_entry (entry);
     result = 0;
