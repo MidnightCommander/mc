@@ -174,7 +174,7 @@ mcfs_login_server (int my_socket, char *user, int port,
 }
 
 static int
-get_remote_port (struct sockaddr_in *sin, int *version)
+mcfs_get_remote_port (struct sockaddr_in *sin, int *version)
 {
 #ifdef HAVE_PMAP_GETMAPS
     int port;
@@ -205,7 +205,7 @@ get_remote_port (struct sockaddr_in *sin, int *version)
 /* This used to be in utilvfs.c, but as it deals with portmapper, it
    is probably useful for mcfs */
 static int
-open_tcp_link (char *host, int *port, int *version, char *caller)
+mcfs_create_tcp_link (char *host, int *port, int *version, char *caller)
 {
     struct sockaddr_in server_address;
     unsigned long inaddr;
@@ -234,7 +234,7 @@ open_tcp_link (char *host, int *port, int *version, char *caller)
 
     /* Try to contact a remote portmapper to obtain the listening port */
     if (*port == 0) {
-	*port = get_remote_port (&server_address, version);
+	*port = mcfs_get_remote_port (&server_address, version);
 	if (*port < 1)
 	    return 0;
     } else
@@ -264,7 +264,7 @@ mcfs_open_tcp_link (char *host, char *user,
     int my_socket;
     int old_port = *port;
 
-    my_socket = open_tcp_link (host, port, version, " MCfs ");
+    my_socket = mcfs_create_tcp_link (host, port, version, " MCfs ");
     if (my_socket <= 0)
 	return 0;
 
@@ -341,7 +341,7 @@ mcfs_open_link (char *host, char *user, int *port, char *netrcpass)
 }
 
 static int
-is_error (int result, int errno_num)
+mcfs_is_error (int result, int errno_num)
 {
     if (!(result == -1))
 	return my_errno = 0;
@@ -351,7 +351,7 @@ is_error (int result, int errno_num)
 }
 
 static int
-the_error (int result, int errno_num)
+mcfs_set_error (int result, int errno_num)
 {
     if (result == -1)
 	my_errno = errno_num;
@@ -372,7 +372,7 @@ mcfs_get_path (mcfs_connection **mc, char *path)
 	return NULL;
     path += 5;
 
-    /* Port = 0 means that open_tcp_link will try to contact the
+    /* Port = 0 means that mcfs_create_tcp_link will try to contact the
      * remote portmapper to get the port number
      */
     port = 0;
@@ -411,9 +411,9 @@ mcfs_handle_simple_error (int sock, int return_status)
     int status, error;
 
     if (0 == rpc_get (sock, RPC_INT, &status, RPC_INT, &error, RPC_END))
-	return the_error (-1, EIO);
+	return mcfs_set_error (-1, EIO);
 
-    if (is_error (status, error))
+    if (mcfs_is_error (status, error))
 	return -1;
     if (return_status)
 	return status;
@@ -528,7 +528,7 @@ mcfs_open (struct vfs_class *me, char *file, int flags, int mode)
 	rpc_get (mc->sock, RPC_INT, &result, RPC_INT, &error_num, RPC_END))
 	return 0;
 
-    if (is_error (result, error_num))
+    if (mcfs_is_error (result, error_num))
 	return 0;
 
     remote_handle = g_new (mcfs_handle, 2);
@@ -554,13 +554,13 @@ mcfs_read (void *data, char *buffer, int count)
 
     if (0 ==
 	rpc_get (mc->sock, RPC_INT, &result, RPC_INT, &error, RPC_END))
-	return the_error (-1, EIO);
+	return mcfs_set_error (-1, EIO);
 
-    if (is_error (result, error))
+    if (mcfs_is_error (result, error))
 	return 0;
 
     if (0 == rpc_get (mc->sock, RPC_BLOCK, result, buffer, RPC_END))
-	return the_error (-1, EIO);
+	return mcfs_set_error (-1, EIO);
 
     return result;
 }
@@ -600,9 +600,9 @@ mcfs_close (void *data)
 
     if (0 ==
 	rpc_get (mc->sock, RPC_INT, &result, RPC_INT, &error, RPC_END))
-	return the_error (-1, EIO);
+	return mcfs_set_error (-1, EIO);
 
-    is_error (result, error);
+    mcfs_is_error (result, error);
 
     g_free (data);
     return result;
@@ -648,7 +648,7 @@ mcfs_opendir (struct vfs_class *me, char *dirname)
 	rpc_get (mc->sock, RPC_INT, &result, RPC_INT, &error_num, RPC_END))
 	return 0;
 
-    if (is_error (result, error_num))
+    if (mcfs_is_error (result, error_num))
 	return 0;
 
     handle = result;
@@ -662,7 +662,7 @@ mcfs_opendir (struct vfs_class *me, char *dirname)
     return mcfs_info;
 }
 
-static int get_stat_info (mcfs_connection * mc, struct stat *buf);
+static int mcfs_get_stat_info (mcfs_connection * mc, struct stat *buf);
 
 static int
 mcfs_loaddir (opendir_info *mcfs_info)
@@ -706,11 +706,11 @@ mcfs_loaddir (opendir_info *mcfs_info)
 	if (!rpc_get (link, RPC_INT, &status, RPC_INT, &error, RPC_END))
 	    return 0;
 
-	if (is_error (status, error))
+	if (mcfs_is_error (status, error))
 	    new_entry->merrno = error;
 	else {
 	    new_entry->merrno = 0;
-	    if (!get_stat_info (mc, &(new_entry->my_stat)))
+	    if (!mcfs_get_stat_info (mc, &(new_entry->my_stat)))
 		return 0;
 	}
     }
@@ -815,7 +815,7 @@ mcfs_get_time (mcfs_connection *mc)
 }
 
 static int
-get_stat_info (mcfs_connection *mc, struct stat *buf)
+mcfs_get_stat_info (mcfs_connection *mc, struct stat *buf)
 {
     long mylong;
     int sock = mc->sock;
@@ -863,15 +863,15 @@ mcfs_stat_cmd (int cmd, char *path, struct stat *buf)
     rpc_send (mc->sock, RPC_INT, cmd, RPC_STRING, remote_file, RPC_END);
     g_free (remote_file);
     if (!rpc_get (mc->sock, RPC_INT, &status, RPC_INT, &error, RPC_END))
-	return the_error (-1, errno);
+	return mcfs_set_error (-1, errno);
 
-    if (is_error (status, error))
+    if (mcfs_is_error (status, error))
 	return -1;
 
-    if (get_stat_info (mc, buf))
+    if (mcfs_get_stat_info (mc, buf))
 	return 0;
     else
-	return the_error (-1, EIO);
+	return mcfs_set_error (-1, EIO);
 }
 
 static int
@@ -907,15 +907,15 @@ mcfs_fstat (void *data, struct stat *buf)
 
     rpc_send (sock, RPC_INT, MC_FSTAT, RPC_INT, handle, RPC_END);
     if (!rpc_get (sock, RPC_INT, &result, RPC_INT, &error, RPC_END))
-	return the_error (-1, EIO);
+	return mcfs_set_error (-1, EIO);
 
-    if (is_error (result, error))
+    if (mcfs_is_error (result, error))
 	return -1;
 
-    if (get_stat_info (info->conn, buf))
+    if (mcfs_get_stat_info (info->conn, buf))
 	return 0;
     else
-	return the_error (-1, EIO);
+	return mcfs_set_error (-1, EIO);
 }
 
 static int
@@ -976,13 +976,13 @@ mcfs_readlink (struct vfs_class *me, char *path, char *buf, int size)
 	      RPC_END);
     g_free (remote_file);
     if (!rpc_get (mc->sock, RPC_INT, &status, RPC_INT, &error, RPC_END))
-	return the_error (-1, EIO);
+	return mcfs_set_error (-1, EIO);
 
-    if (is_error (status, errno))
+    if (mcfs_is_error (status, errno))
 	return -1;
 
     if (!rpc_get (mc->sock, RPC_STRING, &stat_str, RPC_END))
-	return the_error (-1, EIO);
+	return mcfs_set_error (-1, EIO);
 
     status = strlen (stat_str);
     if (status < size)
@@ -1024,9 +1024,9 @@ mcfs_chdir (struct vfs_class *me, char *path)
 	      RPC_END);
     g_free (remote_dir);
     if (!rpc_get (mc->sock, RPC_INT, &status, RPC_INT, &error, RPC_END))
-	return the_error (-1, EIO);
+	return mcfs_set_error (-1, EIO);
 
-    if (is_error (status, error))
+    if (mcfs_is_error (status, error))
 	return -1;
     return 0;
 }
@@ -1098,7 +1098,7 @@ mcfs_free (vfsid id)
  * now
  */
 static void
-my_forget (char *path)
+mcfs_forget (char *path)
 {
     char *host, *user, *pass, *p;
     int port, i, vers;
@@ -1144,7 +1144,7 @@ mcfs_setctl (struct vfs_class *me, char *path, int ctlop, void *arg)
 {
     switch (ctlop) {
     case VFS_SETCTL_FORGET:
-	my_forget (path);
+	mcfs_forget (path);
 	return 0;
     }
     return 0;

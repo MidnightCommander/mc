@@ -97,11 +97,13 @@ static int cpio_read(void *fh, char *buffer, int count);
 #define CPIO_SEEK_SET(super, where) mc_lseek((super)->u.arch.fd, CPIO_POS(super) = (where), SEEK_SET)
 #define CPIO_SEEK_CUR(super, where) mc_lseek((super)->u.arch.fd, CPIO_POS(super) += (where), SEEK_SET)
 
-static struct defer_inode * defer_find(struct defer_inode *l, struct defer_inode *i)
+static struct defer_inode *
+cpio_defer_find (struct defer_inode *l, struct defer_inode *i)
 {
-    if(!l) return NULL;
-    return l->inumber == i->inumber && l->device == i->device ? l : 
-	   defer_find(l->next, i);
+    if (!l)
+	return NULL;
+    return l->inumber == i->inumber
+	&& l->device == i->device ? l : cpio_defer_find (l->next, i);
 }
 
 static int cpio_skip_padding(struct vfs_s_super *super)
@@ -386,14 +388,16 @@ static int cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *super)
     return cpio_create_entry(me, super, &stat, name);
 }
 
-static int cpio_create_entry(struct vfs_class *me, struct vfs_s_super *super, struct stat *stat, char *name)
+static int
+cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super,
+		   struct stat *stat, char *name)
 {
     struct vfs_s_inode *inode = NULL;
     struct vfs_s_inode *root = super->root;
     struct vfs_s_entry *entry = NULL;
     char *tn;
 
-    switch (stat->st_mode & S_IFMT) { /* For case of HP/UX archives */
+    switch (stat->st_mode & S_IFMT) {	/* For case of HP/UX archives */
     case S_IFCHR:
     case S_IFBLK:
 #ifdef S_IFSOCK
@@ -402,8 +406,7 @@ static int cpio_create_entry(struct vfs_class *me, struct vfs_s_super *super, st
 #ifdef S_IFIFO
     case S_IFIFO:
 #endif
-	if((stat->st_size != 0) &&
-	   (stat->st_rdev == 0x0001)) {
+	if ((stat->st_size != 0) && (stat->st_rdev == 0x0001)) {
 	    stat->st_rdev = (unsigned) stat->st_size;
 	    stat->st_size = 0;
 	}
@@ -412,40 +415,44 @@ static int cpio_create_entry(struct vfs_class *me, struct vfs_s_super *super, st
 	break;
     }
 
-    if((stat->st_nlink > 1) &&
-       (super->u.arch.type == CPIO_NEWC ||
-	super->u.arch.type == CPIO_CRC)) { /* For case of hardlinked files */
+    if ((stat->st_nlink > 1) && (super->u.arch.type == CPIO_NEWC || super->u.arch.type == CPIO_CRC)) {	/* For case of hardlinked files */
 	struct defer_inode i, *l;
 	i.inumber = stat->st_ino;
 	i.device = stat->st_dev;
 	i.inode = NULL;
-	if((l = defer_find(super->u.arch.deferred, &i)) != NULL) {
+	if ((l = cpio_defer_find (super->u.arch.deferred, &i)) != NULL) {
 	    inode = l->inode;
-	    if(inode->st.st_size && stat->st_size && (inode->st.st_size != stat->st_size)) {
-		message (1, MSG_ERROR, _("Inconsistent hardlinks of\n%s\nin cpio archive\n%s"),
-			   name, super->name);
+	    if (inode->st.st_size && stat->st_size
+		&& (inode->st.st_size != stat->st_size)) {
+		message (1, MSG_ERROR,
+			 _
+			 ("Inconsistent hardlinks of\n%s\nin cpio archive\n%s"),
+			 name, super->name);
 		inode = NULL;
 	    }
 	}
     }
 
-    while(name[strlen(name)-1] == PATH_SEP) name[strlen(name)-1] = 0;
-    if((tn = strrchr(name, PATH_SEP))) {
+    while (name[strlen (name) - 1] == PATH_SEP)
+	name[strlen (name) - 1] = 0;
+    if ((tn = strrchr (name, PATH_SEP))) {
 	*tn = 0;
-	root = vfs_s_find_inode(me, super, name, LINK_FOLLOW, FL_MKDIR);
+	root = vfs_s_find_inode (me, super, name, LINK_FOLLOW, FL_MKDIR);
 	*tn = PATH_SEP;
 	tn++;
     } else
 	tn = name;
 
-    entry = vfs_s_find_entry_tree(me, root, tn, LINK_FOLLOW, FL_NONE); /* In case entry is already there */
+    entry = vfs_s_find_entry_tree (me, root, tn, LINK_FOLLOW, FL_NONE);	/* In case entry is already there */
 
-    if(entry) { /* This shouldn't happen! (well, it can happen if there is a record for a 
-		   file and than a record for a directory it is in; cpio would die with
-		   'No such file or directory' is such case) */
+    if (entry) {		/* This shouldn't happen! (well, it can happen if there is a record for a 
+				   file and than a record for a directory it is in; cpio would die with
+				   'No such file or directory' is such case) */
 
-	if(!S_ISDIR(entry->ino->st.st_mode)) { /* This can be considered archive inconsistency */
-	    message (1, MSG_ERROR, _("%s contains duplicate entries! Skipping!"), super->name);
+	if (!S_ISDIR (entry->ino->st.st_mode)) {	/* This can be considered archive inconsistency */
+	    message (1, MSG_ERROR,
+		     _("%s contains duplicate entries! Skipping!"),
+		     super->name);
 	} else {
 	    entry->ino->st.st_mode = stat->st_mode;
 	    entry->ino->st.st_uid = stat->st_uid;
@@ -455,15 +462,13 @@ static int cpio_create_entry(struct vfs_class *me, struct vfs_s_super *super, st
 	    entry->ino->st.st_ctime = stat->st_ctime;
 	}
 
-    } else { /* !entry */
+    } else {			/* !entry */
 
-	if(!inode) {
-	    inode = vfs_s_new_inode(me, super, stat);
-	    if((stat->st_nlink > 0) &&
-	       (super->u.arch.type == CPIO_NEWC ||
-		super->u.arch.type == CPIO_CRC)) { /* For case of hardlinked files */
+	if (!inode) {
+	    inode = vfs_s_new_inode (me, super, stat);
+	    if ((stat->st_nlink > 0) && (super->u.arch.type == CPIO_NEWC || super->u.arch.type == CPIO_CRC)) {	/* For case of hardlinked files */
 		struct defer_inode *i;
-		i = g_new(struct defer_inode, 1);
+		i = g_new (struct defer_inode, 1);
 		i->inumber = stat->st_ino;
 		i->device = stat->st_dev;
 		i->inode = inode;
@@ -471,27 +476,28 @@ static int cpio_create_entry(struct vfs_class *me, struct vfs_s_super *super, st
 		super->u.arch.deferred = i;
 	    }
 	}
-	
-	if(stat->st_size)
-	    inode->data_offset = CPIO_POS(super);
-	
-	entry = vfs_s_new_entry(me, tn, inode);
-	vfs_s_insert_entry(me, root, entry);
 
-	if(S_ISLNK(stat->st_mode)) {
-	    inode->linkname = g_malloc(stat->st_size + 1);
-	    if(mc_read(super->u.arch.fd, inode->linkname, stat->st_size) < stat->st_size) {
+	if (stat->st_size)
+	    inode->data_offset = CPIO_POS (super);
+
+	entry = vfs_s_new_entry (me, tn, inode);
+	vfs_s_insert_entry (me, root, entry);
+
+	if (S_ISLNK (stat->st_mode)) {
+	    inode->linkname = g_malloc (stat->st_size + 1);
+	    if (mc_read (super->u.arch.fd, inode->linkname, stat->st_size)
+		< stat->st_size) {
 		inode->linkname[0] = 0;
 		return STATUS_EOF;
 	    }
-	    inode->linkname[stat->st_size] = 0; /* Linkname stored without terminating \0 !!! */
-	    CPIO_POS(super) += stat->st_size;
-	    cpio_skip_padding(super);
+	    inode->linkname[stat->st_size] = 0;	/* Linkname stored without terminating \0 !!! */
+	    CPIO_POS (super) += stat->st_size;
+	    cpio_skip_padding (super);
 	} else {
-	    CPIO_SEEK_CUR(super, stat->st_size);
+	    CPIO_SEEK_CUR (super, stat->st_size);
 	}
 
-    } /* !entry */
+    }				/* !entry */
 
     g_free (name);
     return STATUS_OK;
@@ -580,19 +586,19 @@ static int cpio_fh_open(struct vfs_class *me, struct vfs_s_fh *fh, int flags, in
 void
 init_cpiofs (void)
 {
-    static struct vfs_s_subclass cpiofs_subclass;
+    static struct vfs_s_subclass cpio_subclass;
 
-    cpiofs_subclass.archive_check = cpio_super_check;
-    cpiofs_subclass.archive_same = cpio_super_same;
-    cpiofs_subclass.open_archive = cpio_open_archive;
-    cpiofs_subclass.free_archive = cpio_free_archive;
-    cpiofs_subclass.fh_open = cpio_fh_open;
-    cpiofs_subclass.find_entry = vfs_s_find_entry_tree;
+    cpio_subclass.archive_check = cpio_super_check;
+    cpio_subclass.archive_same = cpio_super_same;
+    cpio_subclass.open_archive = cpio_open_archive;
+    cpio_subclass.free_archive = cpio_free_archive;
+    cpio_subclass.fh_open = cpio_fh_open;
+    cpio_subclass.find_entry = vfs_s_find_entry_tree;
 
     vfs_s_init_class (&vfs_cpiofs_ops);
     vfs_cpiofs_ops.name = "cpiofs";
     vfs_cpiofs_ops.prefix = "ucpio";
-    vfs_cpiofs_ops.data = &cpiofs_subclass;
+    vfs_cpiofs_ops.data = &cpio_subclass;
     vfs_cpiofs_ops.read = cpio_read;
     vfs_cpiofs_ops.write = NULL;
     vfs_cpiofs_ops.setctl = NULL;

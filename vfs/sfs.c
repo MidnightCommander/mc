@@ -43,12 +43,12 @@ static int sfs_flags[ MAXFS ];
 #define F_NOLOCALCOPY 4
 #define F_FULLMATCH 8
 
-static int uptodate (char *name, char *cache)
+static int sfs_uptodate (char *name, char *cache)
 {
     return 1;
 }
 
-static int vfmake (struct vfs_class *me, char *name, char *cache)
+static int sfs_vfmake (struct vfs_class *me, char *name, char *cache)
 {
     char *inpath, *op;
     int w;
@@ -105,17 +105,15 @@ static int vfmake (struct vfs_class *me, char *name, char *cache)
 }
 
 static char *
-redirect (struct vfs_class *me, char *name)
+sfs_redirect (struct vfs_class *me, char *name)
 {
     struct cachedfile *cur = head;
     char *cache;
     int handle;
 
     while (cur) {
-	/* FIXME: when not uptodate, we might want to kill cache
-	 * file immediately, not to wait until timeout. */
 	if ((!strcmp (name, cur->name))
-	    && (uptodate (cur->name, cur->cache))) {
+	    && (sfs_uptodate (cur->name, cur->cache))) {
 	    vfs_stamp (&vfs_sfs_ops, cur);
 	    return cur->cache;
 	}
@@ -130,7 +128,7 @@ redirect (struct vfs_class *me, char *name)
 
     close (handle);
 
-    if (!vfmake (me, name, cache)) {
+    if (!sfs_vfmake (me, name, cache)) {
 	cur = g_new (struct cachedfile, 1);
 	cur->name = g_strdup (name);
 	cur->cache = cache;
@@ -153,7 +151,7 @@ sfs_open (struct vfs_class *me, char *path, int flags, int mode)
     int *sfs_info;
     int fd;
 
-    path = redirect (me, path);
+    path = sfs_redirect (me, path);
     fd = open (path, NO_LINEAR(flags), mode);
     if (fd == -1)
 	return 0;
@@ -166,13 +164,13 @@ sfs_open (struct vfs_class *me, char *path, int flags, int mode)
 
 static int sfs_stat (struct vfs_class *me, char *path, struct stat *buf)
 {
-    path = redirect (me, path);
+    path = sfs_redirect (me, path);
     return stat (path, buf);
 }
 
 static int sfs_lstat (struct vfs_class *me, char *path, struct stat *buf)
 {
-    path = redirect (me, path);
+    path = sfs_redirect (me, path);
 #ifndef HAVE_STATLSTAT
     return lstat (path, buf);
 #else
@@ -182,25 +180,25 @@ static int sfs_lstat (struct vfs_class *me, char *path, struct stat *buf)
 
 static int sfs_chmod (struct vfs_class *me, char *path, int mode)
 {
-    path = redirect (me, path);
+    path = sfs_redirect (me, path);
     return chmod (path, mode);
 }
 
 static int sfs_chown (struct vfs_class *me, char *path, int owner, int group)
 {
-    path = redirect (me, path);
+    path = sfs_redirect (me, path);
     return chown (path, owner, group);
 }
 
 static int sfs_utime (struct vfs_class *me, char *path, struct utimbuf *times)
 {
-    path = redirect (me, path);
+    path = sfs_redirect (me, path);
     return utime (path, times);
 }
 
 static int sfs_readlink (struct vfs_class *me, char *path, char *buf, int size)
 {
-    path = redirect (me, path);
+    path = sfs_redirect (me, path);
     return readlink (path, buf, size);
 }
 
@@ -286,7 +284,7 @@ static int sfs_nothingisopen (vfsid id)
 
 static char *sfs_getlocalcopy (struct vfs_class *me, char *path)
 {
-    path = redirect (me, path);
+    path = sfs_redirect (me, path);
     return g_strdup (path);
 }
 

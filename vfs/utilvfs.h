@@ -14,7 +14,7 @@
 char *vfs_split_url (const char *path, char **host, char **user, int *port,
 		     char **pass, int default_port, int flags);
 
-int finduid (char *name);
-int findgid (char *name);
+int vfs_finduid (char *name);
+int vfs_findgid (char *name);
 
 #endif				/* !__UTILVFS_H */

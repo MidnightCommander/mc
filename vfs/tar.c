@@ -165,7 +165,7 @@ union record {
  *
  * Result is -1 if the field is invalid (all blank, or nonoctal).
  */
-static long from_oct (int digs, char *where)
+static long tar_from_oct (int digs, char *where)
 {
     register long value;
 
@@ -198,7 +198,7 @@ static void tar_free_archive (struct vfs_class *me, struct vfs_s_super *archive)
 static int current_tar_position = 0;
 
 /* Returns fd of the open tar file */
-static int tar_open_archive (struct vfs_class *me, char *name, struct vfs_s_super *archive)
+static int tar_tar_open_archive (struct vfs_class *me, char *name, struct vfs_s_super *archive)
 {
     int result, type;
     mode_t mode;
@@ -250,7 +250,7 @@ static int tar_open_archive (struct vfs_class *me, char *name, struct vfs_s_supe
 static union record rec_buf;
 
 static union record *
-get_next_record (struct vfs_s_super *archive, int tard)
+tar_get_next_record (struct vfs_s_super *archive, int tard)
 {
     int n;
 
@@ -261,15 +261,16 @@ get_next_record (struct vfs_s_super *archive, int tard)
     return &rec_buf;
 }
 
-static void skip_n_records (struct vfs_s_super *archive, int tard, int n)
+static void tar_skip_n_records (struct vfs_s_super *archive, int tard, int n)
 {
     mc_lseek (tard, n * RECORDSIZE, SEEK_CUR);
     current_tar_position += n * RECORDSIZE;
 }
 
-static void fill_stat_from_header (struct vfs_class *me, struct stat *st, union record *header) 
+static void
+tar_fill_stat (struct vfs_class *me, struct stat *st, union record *header)
 {
-    st->st_mode = from_oct (8, header->header.mode);
+    st->st_mode = tar_from_oct (8, header->header.mode);
 
     /* Adjust st->st_mode because there are tar-files with
      * linkflag==LF_SYMLINK and S_ISLNK(mod)==0. I don't 
@@ -286,29 +287,38 @@ static void fill_stat_from_header (struct vfs_class *me, struct stat *st, union 
 	st->st_mode |= S_IFBLK;
     } else if (header->header.linkflag == LF_FIFO) {
 	st->st_mode |= S_IFIFO;
-    } else 
+    } else
 	st->st_mode |= S_IFREG;
 
     st->st_rdev = 0;
     if (!strcmp (header->header.magic, TMAGIC)) {
-	st->st_uid = *header->header.uname ? finduid (header->header.uname) :
-	    from_oct (8, header->header.uid);
-	st->st_gid = *header->header.gname ? findgid (header->header.gname) :
-	    from_oct (8, header->header.gid);
+	st->st_uid =
+	    *header->header.uname ? vfs_finduid (header->header.
+						 uname) : tar_from_oct (8,
+									header->
+									header.
+									uid);
+	st->st_gid =
+	    *header->header.gname ? vfs_findgid (header->header.
+						 gname) : tar_from_oct (8,
+									header->
+									header.
+									gid);
 	switch (header->header.linkflag) {
 	case LF_BLK:
 	case LF_CHR:
-	    st->st_rdev = (from_oct (8, header->header.devmajor) << 8) |
-		from_oct (8, header->header.devminor);
+	    st->st_rdev =
+		(tar_from_oct (8, header->header.devmajor) << 8) |
+		tar_from_oct (8, header->header.devminor);
 	}
-    } else { /* Old Unix tar */
-	st->st_uid = from_oct (8, header->header.uid);
-	st->st_gid = from_oct (8, header->header.gid);
+    } else {			/* Old Unix tar */
+	st->st_uid = tar_from_oct (8, header->header.uid);
+	st->st_gid = tar_from_oct (8, header->header.gid);
     }
     st->st_size = hstat.st_size;
-    st->st_mtime = from_oct (1 + 12, header->header.mtime);
-    st->st_atime = from_oct (1 + 12, header->header.atime);
-    st->st_ctime = from_oct (1 + 12, header->header.ctime);
+    st->st_mtime = tar_from_oct (1 + 12, header->header.mtime);
+    st->st_atime = tar_from_oct (1 + 12, header->header.atime);
+    st->st_ctime = tar_from_oct (1 + 12, header->header.ctime);
 }
 
 
@@ -324,7 +334,7 @@ typedef enum {
  *
  */
 static ReadStatus
-read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard)
+tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard)
 {
     register int i;
     register long sum, signed_sum, recsum;
@@ -334,11 +344,11 @@ read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard)
 
   recurse:
 
-    header = get_next_record (archive, tard);
+    header = tar_get_next_record (archive, tard);
     if (NULL == header)
 	return STATUS_EOF;
 
-    recsum = from_oct (8, header->header.chksum);
+    recsum = tar_from_oct (8, header->header.chksum);
 
     sum = 0; signed_sum = 0;
     p = header->charptr;
@@ -383,7 +393,7 @@ read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard)
     if (header->header.linkflag == LF_LINK || header->header.linkflag == LF_DIR)
 	hstat.st_size = 0;	/* Links 0 size on tape */
     else
-	hstat.st_size = from_oct (1 + 12, header->header.size);
+	hstat.st_size = tar_from_oct (1 + 12, header->header.size);
 
     header->header.arch_name[NAMSIZ - 1] = '\0';
     if (header->header.linkflag == LF_LONGNAME
@@ -403,7 +413,7 @@ read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard)
 	for (size = hstat.st_size;
 	     size > 0;
 	     size -= written) {
-	    data = get_next_record (archive, tard)->charptr;
+	    data = tar_get_next_record (archive, tard)->charptr;
 	    if (data == NULL) {
 		message (1, MSG_ERROR, _("Unexpected EOF on archive file"));
 		return STATUS_BADCHECKSUM;
@@ -473,7 +483,7 @@ read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard)
 	    }
 	}
 
-	fill_stat_from_header (me, &st, header);
+	tar_fill_stat (me, &st, header);
 	inode = vfs_s_new_inode (me, archive, &st);
 
 	inode->data_offset = data_position;
@@ -491,7 +501,7 @@ read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard)
 	next_long_link = next_long_name = NULL;
 
 	if (header->header.isextended) {
-	    while (get_next_record (archive, tard)->ext_hdr.isextended);
+	    while (tar_get_next_record (archive, tard)->ext_hdr.isextended);
 	    inode->data_offset = current_tar_position;
 	}
 	return STATUS_SUCCESS;
@@ -502,25 +512,31 @@ read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard)
  * Main loop for reading an archive.
  * Returns 0 on success, -1 on error.
  */
-static int open_archive (struct vfs_class *me, struct vfs_s_super *archive, char *name, char *op)
+static int
+tar_open_archive (struct vfs_class *me, struct vfs_s_super *archive,
+		  char *name, char *op)
 {
-    ReadStatus status = STATUS_EOFMARK;		/* Initial status at start of archive */
+    /* Initial status at start of archive */
+    ReadStatus status = STATUS_EOFMARK;
     ReadStatus prev_status;
     int tard;
 
     current_tar_position = 0;
-    if ((tard = tar_open_archive (me, name, archive)) == -1)	/* Open for reading */
+    /* Open for reading */
+    if ((tard = tar_tar_open_archive (me, name, archive)) == -1)
 	return -1;
 
     for (;;) {
 	prev_status = status;
-	status = read_header (me, archive, tard);
+	status = tar_read_header (me, archive, tard);
 
 
 	switch (status) {
 
 	case STATUS_SUCCESS:
-	    skip_n_records (archive, tard, (hstat.st_size + RECORDSIZE - 1) / RECORDSIZE);
+	    tar_skip_n_records (archive, tard,
+				(hstat.st_size + RECORDSIZE -
+				 1) / RECORDSIZE);
 	    continue;
 
 	    /*
@@ -529,12 +545,15 @@ static int open_archive (struct vfs_class *me, struct vfs_s_super *archive, char
 	     * If the previous header was good, tell them
 	     * that we are skipping bad ones.
 	     */
-	case STATUS_BADCHECKSUM:	
-	    switch (prev_status){
+	case STATUS_BADCHECKSUM:
+	    switch (prev_status) {
 
 		/* Error on first record */
 	    case STATUS_EOFMARK:
-		message (1, MSG_ERROR, _("Hmm,...\n%s\ndoesn't look like a tar archive."), name);
+		message (1, MSG_ERROR,
+			 _
+			 ("Hmm,...\n%s\ndoesn't look like a tar archive."),
+			 name);
 		/* FALL THRU */
 
 		/* Error after header rec */
@@ -549,7 +568,7 @@ static int open_archive (struct vfs_class *me, struct vfs_s_super *archive, char
 	    }
 
 	    /* Record of zeroes */
-	case STATUS_EOFMARK:	
+	case STATUS_EOFMARK:
 	    status = prev_status;	/* If error after 0's */
 	    /* FALL THRU */
 
@@ -620,7 +639,7 @@ init_tarfs (void)
 
     tarfs_subclass.archive_check = tar_super_check;
     tarfs_subclass.archive_same = tar_super_same;
-    tarfs_subclass.open_archive = open_archive;
+    tarfs_subclass.open_archive = tar_open_archive;
     tarfs_subclass.free_archive = tar_free_archive;
     tarfs_subclass.fh_open = tar_fh_open;
     tarfs_subclass.find_entry = vfs_s_find_entry_tree;

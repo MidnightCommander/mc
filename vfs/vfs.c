@@ -1681,7 +1681,7 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
         goto error;
 
     if (!is_num (1))
-	s->st_uid = finduid (columns [1]);
+	s->st_uid = vfs_finduid (columns [1]);
     else
         s->st_uid = (uid_t) atol (columns [1]);
 
@@ -1702,7 +1702,7 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
 	if (is_num (2))
 	    s->st_gid = (gid_t) atol (columns [2]);
 	else
-	    s->st_gid = findgid (columns [2]);
+	    s->st_gid = vfs_findgid (columns [2]);
 	idx2 = 3;
     }
 

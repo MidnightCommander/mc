@@ -165,7 +165,7 @@ vfs_split_url (const char *path, char **host, char **user, int *port,
 #define	mygid	( my_gid < 0? (my_gid = getgid()): my_gid )
 
 int
-finduid (char *uname)
+vfs_finduid (char *uname)
 {
     static int saveuid = -993;
     static char saveuname[TUNMLEN];
@@ -187,7 +187,7 @@ finduid (char *uname)
 }
 
 int
-findgid (char *gname)
+vfs_findgid (char *gname)
 {
     static int savegid = -993;
     static char savegname[TGNMLEN];

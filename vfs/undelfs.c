@@ -146,7 +146,7 @@ undelfs_get_path (const char *dirname, char **ext2_fname, char **file)
 }
 
 static int
-lsdel_proc(ext2_filsys fs, blk_t *block_nr, int blockcnt, void *private)
+undelfs_lsdel_proc(ext2_filsys fs, blk_t *block_nr, int blockcnt, void *private)
 {
     struct lsdel_struct *lsd = (struct lsdel_struct *) private;
     
@@ -173,8 +173,8 @@ undelfs_loaddel (void)
     int retval, count;
     ext2_ino_t ino;
     struct ext2_inode inode;
-    ext2_inode_scan   scan;
-    
+    ext2_inode_scan scan;
+
     max_delarray = 100;
     num_delarray = 0;
     delarray = g_new (struct deleted_info, max_delarray);
@@ -187,23 +187,26 @@ undelfs_loaddel (void)
 	message (1, undelfserr, _(" while allocating block buffer "));
 	goto free_delarray;
     }
-    if ((retval = ext2fs_open_inode_scan(fs, 0, &scan))){
+    if ((retval = ext2fs_open_inode_scan (fs, 0, &scan))) {
 	message (1, undelfserr, _(" open_inode_scan: %d "), retval);
 	goto free_block_buf;
     }
-    if ((retval = ext2fs_get_next_inode(scan, &ino, &inode))){
-	message (1, undelfserr, _(" while starting inode scan %d "), retval);
+    if ((retval = ext2fs_get_next_inode (scan, &ino, &inode))) {
+	message (1, undelfserr, _(" while starting inode scan %d "),
+		 retval);
 	goto error_out;
     }
 
     count = 0;
     while (ino) {
-	if ((count++ % 1024) == 0) 
-	    print_vfs_message (_("undelfs: loading deleted files information %d inodes"), count);
+	if ((count++ % 1024) == 0)
+	    print_vfs_message (_
+			       ("undelfs: loading deleted files information %d inodes"),
+			       count);
 	if (inode.i_dtime == 0)
 	    goto next;
 
-	if (S_ISDIR(inode.i_mode))
+	if (S_ISDIR (inode.i_mode))
 	    goto next;
 
 	lsd.inode = ino;
@@ -211,22 +214,27 @@ undelfs_loaddel (void)
 	lsd.free_blocks = 0;
 	lsd.bad_blocks = 0;
 
-	retval = ext2fs_block_iterate(fs, ino, 0, block_buf,
-				      lsdel_proc, &lsd);
+	retval =
+	    ext2fs_block_iterate (fs, ino, 0, block_buf,
+				  undelfs_lsdel_proc, &lsd);
 	if (retval) {
-	    message (1, undelfserr, _(" while calling ext2_block_iterate %d "), retval);
+	    message (1, undelfserr,
+		     _(" while calling ext2_block_iterate %d "), retval);
 	    goto next;
 	}
 	if (lsd.free_blocks && !lsd.bad_blocks) {
 	    if (num_delarray >= max_delarray) {
 		max_delarray += 50;
-		delarray = g_renew (struct deleted_info, delarray, max_delarray);
+		delarray =
+		    g_renew (struct deleted_info, delarray, max_delarray);
 		if (!delarray) {
-		    message (1, undelfserr, _(" no more memory while reallocating array "));
+		    message (1, undelfserr,
+			     _
+			     (" no more memory while reallocating array "));
 		    goto error_out;
 		}
 	    }
-	    
+
 	    delarray[num_delarray].ino = ino;
 	    delarray[num_delarray].mode = inode.i_mode;
 	    delarray[num_delarray].uid = inode.i_uid;
@@ -238,23 +246,24 @@ undelfs_loaddel (void)
 	    num_delarray++;
 	}
 
-    next:
-	retval = ext2fs_get_next_inode(scan, &ino, &inode);
+      next:
+	retval = ext2fs_get_next_inode (scan, &ino, &inode);
 	if (retval) {
-	    message (1, undelfserr, _(" while doing inode scan %d "), retval);
+	    message (1, undelfserr, _(" while doing inode scan %d "),
+		     retval);
 	    goto error_out;
 	}
     }
     readdir_ptr = READDIR_PTR_INIT;
     ext2fs_close_inode_scan (scan);
     return 1;
-    
-error_out:    
+
+  error_out:
     ext2fs_close_inode_scan (scan);
-free_block_buf:
+  free_block_buf:
     g_free (block_buf);
     block_buf = NULL;
-free_delarray:
+  free_delarray:
     g_free (delarray);
     delarray = NULL;
     return 0;
@@ -433,7 +442,7 @@ undelfs_close (void *vfs_info)
 }
 
 static int
-dump_read(ext2_filsys fs, blk_t *blocknr, int blockcnt, void *private)
+undelfs_dump_read(ext2_filsys fs, blk_t *blocknr, int blockcnt, void *private)
 {
     int     copy_count;
     undelfs_file *p = (undelfs_file *) private;
@@ -504,7 +513,7 @@ undelfs_read (void *vfs_info, char *buffer, int count)
 	p->count = p->size - p->pos;
     }
     retval = ext2fs_block_iterate(fs, p->inode, 0, NULL,
-				  dump_read, p);
+				  undelfs_dump_read, p);
     if (retval){
 	message (1, undelfserr, _(" while iterating over blocks "));
 	return -1;
@@ -529,7 +538,7 @@ undelfs_getindex (char *path)
 }
 
 static int
-do_stat (int inode_index, struct stat *buf)
+undelfs_stat_int (int inode_index, struct stat *buf)
 {
     buf->st_dev   = 0;
     buf->st_ino   = delarray [inode_index].ino;
@@ -579,7 +588,7 @@ undelfs_lstat(struct vfs_class *me, char *path, struct stat *buf)
     if (inode_index == -1)
 	return -1;
 
-    return do_stat (inode_index, buf);
+    return undelfs_stat_int (inode_index, buf);
 }
 
 static int
@@ -594,7 +603,7 @@ undelfs_fstat (void *vfs_info, struct stat *buf)
 {
     undelfs_file *p = vfs_info;
     
-    return do_stat (p->f_index, buf);
+    return undelfs_stat_int (p->f_index, buf);
 }
 
 static int

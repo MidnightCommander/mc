@@ -1,5 +1,8 @@
 2003-10-27  Pavel Roskin  <proski@gnu.org>
 
+	* *.c: Rename functions that don't have an a prefix indicating
+	what file they are defined in.  This simplifies debugging.
+
 	* vfs.c (mc_def_getlocalcopy): Use O_LINEAR when retrieving the
 	remote file.  This avoids an extra temporary file.
 

@@ -75,10 +75,11 @@ static char reply_str [80];
 static struct vfs_class vfs_fish_ops;
 
 static int
-command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const char *fmt, ...)
+ fish_command (struct vfs_class *me, struct vfs_s_super *super,
+	       int wait_reply, const char *fmt, ...)
     __attribute__ ((format (printf, 4, 5)));
 
-static int decode_reply (char *s, int was_garbage)
+static int fish_decode_reply (char *s, int was_garbage)
 {
     int code;
     if (!sscanf(s, "%d", &code)) {
@@ -90,7 +91,7 @@ static int decode_reply (char *s, int was_garbage)
 }
 
 /* Returns a reply code, check /usr/include/arpa/ftp.h for possible values */
-static int get_reply (struct vfs_class *me, int sock, char *string_buf, int string_len)
+static int fish_get_reply (struct vfs_class *me, int sock, char *string_buf, int string_len)
 {
     char answer[1024];
     int was_garbage = 0;
@@ -107,14 +108,15 @@ static int get_reply (struct vfs_class *me, int sock, char *string_buf, int stri
 	        strncpy(string_buf, answer, string_len - 1);
 		*(string_buf + string_len - 1) = 0;
 	    }
-	} else return decode_reply(answer+4, was_garbage);
+	} else return fish_decode_reply(answer+4, was_garbage);
     }
 }
 
 #define SUP super->u.fish
 
 static int
-command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const char *fmt, ...)
+fish_command (struct vfs_class *me, struct vfs_s_super *super,
+	      int wait_reply, const char *fmt, ...)
 {
     va_list ap;
     char *str;
@@ -126,33 +128,36 @@ command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const 
     str = g_strdup_vprintf (fmt, ap);
     va_end (ap);
 
-    if (logfile){
-        fwrite (str, strlen (str), 1, logfile);
+    if (logfile) {
+	fwrite (str, strlen (str), 1, logfile);
 	fflush (logfile);
     }
 
-    enable_interrupt_key();
+    enable_interrupt_key ();
 
-    status = write(SUP.sockw, str, strlen(str));
+    status = write (SUP.sockw, str, strlen (str));
     g_free (str);
 
-    disable_interrupt_key();
+    disable_interrupt_key ();
     if (status < 0)
 	return TRANSIENT;
-    
+
     if (wait_reply)
-	return get_reply (me, SUP.sockr, (wait_reply & WANT_STRING) ? reply_str : NULL, sizeof (reply_str)-1);
+	return fish_get_reply (me, SUP.sockr,
+			       (wait_reply & WANT_STRING) ? reply_str :
+			       NULL, sizeof (reply_str) - 1);
     return COMPLETE;
 }
 
 static void
-free_archive (struct vfs_class *me, struct vfs_s_super *super)
+fish_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 {
-    if ((SUP.sockw != -1) || (SUP.sockr != -1)){
-	print_vfs_message (_("fish: Disconnecting from %s"), super->name?super->name:"???");
-	command(me, super, NONE, "#BYE\nexit\n");
-	close(SUP.sockw);
-	close(SUP.sockr);
+    if ((SUP.sockw != -1) || (SUP.sockr != -1)) {
+	print_vfs_message (_("fish: Disconnecting from %s"),
+			   super->name ? super->name : "???");
+	fish_command (me, super, NONE, "#BYE\nexit\n");
+	close (SUP.sockw);
+	close (SUP.sockr);
 	SUP.sockw = SUP.sockr = -1;
     }
     g_free (SUP.host);
@@ -162,7 +167,7 @@ free_archive (struct vfs_class *me, struct vfs_s_super *super)
 }
 
 static void
-pipeopen(struct vfs_s_super *super, char *path, char *argv[])
+fish_pipeopen(struct vfs_s_super *super, char *path, char *argv[])
 {
     int fileset1[2], fileset2[2];
     int res;
@@ -194,12 +199,13 @@ pipeopen(struct vfs_s_super *super, char *path, char *argv[])
 /* The returned directory should always contain a trailing slash */
 static char *fish_getcwd(struct vfs_class *me, struct vfs_s_super *super)
 {
-    if (command(me, super, WANT_STRING, "#PWD\npwd; echo '### 200'\n") == COMPLETE)
+    if (fish_command (me, super, WANT_STRING, "#PWD\npwd; echo '### 200'\n") == COMPLETE)
         return  g_strconcat (reply_str, "/", NULL);
     ERRNOR (EIO, NULL);
 }
+
 static int
-open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
+fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 {
     char *argv[100];
     char *xsh = (SUP.flags == FISH_FLAG_RSH ? "rsh" : "ssh");
@@ -213,84 +219,94 @@ open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
     argv[i++] = SUP.user;
     argv[i++] = SUP.host;
     if (SUP.flags == FISH_FLAG_COMPRESSED)
-        argv[i++] = "-C";
+	argv[i++] = "-C";
     argv[i++] = "echo FISH:; /bin/sh";
     argv[i++] = NULL;
 
 #if 0
     /* Debugging hack */
     if (!MEDATA->logfile)
-	MEDATA->logfile = fopen( "/home/pavel/talk.fish", "w+" ); /* FIXME */
+	MEDATA->logfile = fopen ("/home/pavel/talk.fish", "w+");	/* FIXME */
 #endif
 
-    pipeopen(super, xsh, argv );
+    fish_pipeopen (super, xsh, argv);
 
     {
-        char answer[2048];
-	print_vfs_message( _("fish: Waiting for initial line...") );
-        if (!vfs_s_get_line(me, SUP.sockr, answer, sizeof(answer), ':'))
+	char answer[2048];
+	print_vfs_message (_("fish: Waiting for initial line..."));
+	if (!vfs_s_get_line (me, SUP.sockr, answer, sizeof (answer), ':'))
 	    ERRNOR (E_PROTO, -1);
-	print_vfs_message( answer );
-	if (strstr(answer, "assword")) {
+	print_vfs_message (answer);
+	if (strstr (answer, "assword")) {
 
-    /* Currently, this does not work. ssh reads passwords from
-       /dev/tty, not from stdin :-(. */
+	    /* Currently, this does not work. ssh reads passwords from
+	       /dev/tty, not from stdin :-(. */
 
 #ifndef HAVE_HACKED_SSH
-	    message (1, MSG_ERROR, _("Sorry, we cannot do password authenticated connections for now."));
+	    message (1, MSG_ERROR,
+		     _
+		     ("Sorry, we cannot do password authenticated connections for now."));
 	    ERRNOR (EPERM, -1);
 #endif
-	    if (!SUP.password){
+	    if (!SUP.password) {
 		char *p, *op;
-		p = g_strconcat (_(" fish: Password required for "), SUP.user, 
-				  " ", NULL);
+		p = g_strconcat (_(" fish: Password required for "),
+				 SUP.user, " ", NULL);
 		op = vfs_get_password (p);
 		g_free (p);
 		if (op == NULL)
 		    ERRNOR (EPERM, -1);
 		SUP.password = g_strdup (op);
-		wipe_password(op);
+		wipe_password (op);
 	    }
-	    print_vfs_message( _("fish: Sending password...") );
-	    write(SUP.sockw, SUP.password, strlen(SUP.password));
-	    write(SUP.sockw, "\n", 1);
+	    print_vfs_message (_("fish: Sending password..."));
+	    write (SUP.sockw, SUP.password, strlen (SUP.password));
+	    write (SUP.sockw, "\n", 1);
 	}
     }
 
-    print_vfs_message( _("fish: Sending initial line...") );
+    print_vfs_message (_("fish: Sending initial line..."));
     /*
      * Run `start_fish_server'. If it doesn't exist - no problem,
      * we'll talk directly to the shell.
      */
-    if (command (me, super, WAIT_REPLY,
-                 "#FISH\necho; start_fish_server 2>&1;"
-                 " echo '### 200'\n") != COMPLETE)
-        ERRNOR (E_PROTO, -1);
+    if (fish_command
+	(me, super, WAIT_REPLY,
+	 "#FISH\necho; start_fish_server 2>&1;" " echo '### 200'\n") !=
+	COMPLETE)
+	ERRNOR (E_PROTO, -1);
 
-    print_vfs_message( _("fish: Handshaking version...") );
-    if (command (me, super, WAIT_REPLY, "#VER 0.0.0\necho '### 000'\n") != COMPLETE)
-        ERRNOR (E_PROTO, -1);
+    print_vfs_message (_("fish: Handshaking version..."));
+    if (fish_command
+	(me, super, WAIT_REPLY,
+	 "#VER 0.0.0\necho '### 000'\n") != COMPLETE)
+	ERRNOR (E_PROTO, -1);
 
     /* Set up remote locale to C, otherwise dates cannot be recognized */
-    if (command (me, super, WAIT_REPLY, "LANG=C; LC_ALL=C; LC_TIME=C\n"
-					"export LANG; export LC_ALL; export LC_TIME\n"
-					"echo '### 200'\n") != COMPLETE)
-        ERRNOR (E_PROTO, -1);
+    if (fish_command
+	(me, super, WAIT_REPLY,
+	 "LANG=C; LC_ALL=C; LC_TIME=C\n"
+	 "export LANG; export LC_ALL; export LC_TIME\n" "echo '### 200'\n")
+	!= COMPLETE)
+	ERRNOR (E_PROTO, -1);
 
-    print_vfs_message( _("fish: Setting up current directory...") );
+    print_vfs_message (_("fish: Setting up current directory..."));
     SUP.cwdir = fish_getcwd (me, super);
-    print_vfs_message( _("fish: Connected, home %s."), SUP.cwdir );
+    print_vfs_message (_("fish: Connected, home %s."), SUP.cwdir);
 #if 0
-    super->name = g_strconcat ( "/#sh:", SUP.user, "@", SUP.host, "/", NULL );
+    super->name =
+	g_strconcat ("/#sh:", SUP.user, "@", SUP.host, "/", NULL);
 #endif
-    super->name = g_strdup(PATH_SEP_STR);
+    super->name = g_strdup (PATH_SEP_STR);
 
-    super->root = vfs_s_new_inode (me, super, vfs_s_default_stat(me, S_IFDIR | 0755));
+    super->root =
+	vfs_s_new_inode (me, super,
+			 vfs_s_default_stat (me, S_IFDIR | 0755));
     return 0;
 }
 
 static int
-open_archive (struct vfs_class *me, struct vfs_s_super *super, char *archive_name, char *op)
+fish_open_archive (struct vfs_class *me, struct vfs_s_super *super, char *archive_name, char *op)
 {
     char *host, *user, *password, *p;
     int flags;
@@ -308,11 +324,11 @@ open_archive (struct vfs_class *me, struct vfs_s_super *super, char *archive_nam
     SUP.cwdir = NULL;
     if (password)
 	SUP.password = password;
-    return open_archive_int (me, super);
+    return fish_open_archive_int (me, super);
 }
 
 static int
-archive_same(struct vfs_class *me, struct vfs_s_super *super, char *archive_name, char *op, void *cookie)
+fish_archive_same(struct vfs_class *me, struct vfs_s_super *super, char *archive_name, char *op, void *cookie)
 {	
     char *host, *user;
     int flags;
@@ -332,7 +348,7 @@ archive_same(struct vfs_class *me, struct vfs_s_super *super, char *archive_name
 }
 
 static int
-dir_uptodate(struct vfs_class *me, struct vfs_s_inode *ino)
+fish_dir_uptodate(struct vfs_class *me, struct vfs_s_inode *ino)
 {
     struct timeval tim;
 
@@ -347,7 +363,7 @@ dir_uptodate(struct vfs_class *me, struct vfs_s_inode *ino)
 }
 
 static int
-dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
+fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 {
     struct vfs_s_super *super = dir->super;
     char buffer[8192];
@@ -363,7 +379,7 @@ dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     dir->timestamp.tv_sec += 10; /* was 360: 10 is good for
 					   stressing direntry layer a bit */
     quoted_path = name_quote (remote_path, 0);
-    command(me, super, NONE,
+    fish_command (me, super, NONE,
 	    "#LIST /%s\n"
 	    "ls -lLa /%s 2>/dev/null | grep '^[^cbt]' | (\n"
 	      "while read p x u g s m d y n; do\n"
@@ -378,8 +394,7 @@ dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 	    "echo '### 200'\n",
 	    remote_path, quoted_path, quoted_path);
     g_free (quoted_path);
-#define SIMPLE_ENTRY vfs_s_generate_entry(me, NULL, dir, 0)
-    ent = SIMPLE_ENTRY;
+    ent = vfs_s_generate_entry(me, NULL, dir, 0);
     while (1) {
 	int res = vfs_s_get_line_interruptible (me, buffer, sizeof (buffer), SUP.sockr); 
 	if ((!res) || (res == EINTR)) {
@@ -397,7 +412,7 @@ dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 	if ((!buffer[0])) {
 	    if (ent->name) {
 		vfs_s_insert_entry(me, dir, ent);
-		ent = SIMPLE_ENTRY;
+		ent = vfs_s_generate_entry(me, NULL, dir, 0);
 	    }
 	    continue;
 	}
@@ -457,7 +472,7 @@ dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     
     vfs_s_free_entry (me, ent);
     me->verrno = E_REMOTE;
-    if (decode_reply(buffer+4, 0) == COMPLETE) {
+    if (fish_decode_reply(buffer+4, 0) == COMPLETE) {
 	g_free (SUP.cwdir);
 	SUP.cwdir = g_strdup (remote_path);
 	print_vfs_message (_("%s: done."), me->name);
@@ -470,7 +485,7 @@ error:
 }
 
 static int
-file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *localname)
+fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *localname)
 {
     struct vfs_s_super *super = FH_SUPER;
     int n, total;
@@ -495,7 +510,7 @@ file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *localnam
 
     /* FIXME: File size is limited to ULONG_MAX */
     if (!fh->u.fish.append)
-	n = command (me, super, WAIT_REPLY,
+	n = fish_command (me, super, WAIT_REPLY,
 		 "#STOR %lu /%s\n"
 		 "> /%s\n"
 		 "echo '### 001'\n"
@@ -508,7 +523,7 @@ file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *localnam
 		 (unsigned long) s.st_size, name, quoted_name,
 		 (unsigned long) s.st_size, quoted_name);
     else
-	n = command (me, super, WAIT_REPLY,
+	n = fish_command (me, super, WAIT_REPLY,
 		 "#STOR %lu /%s\n"
 		 "echo '### 001'\n"
 		 "(\n"
@@ -548,16 +563,16 @@ file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *localnam
 			  (unsigned long) s.st_size);
     }
     close(h);
-    if ((get_reply (me, SUP.sockr, NULL, 0) != COMPLETE) || was_error)
+    if ((fish_get_reply (me, SUP.sockr, NULL, 0) != COMPLETE) || was_error)
         ERRNOR (E_REMOTE, -1);
     return 0;
 error_return:
     close(h);
-    get_reply(me, SUP.sockr, NULL, 0);
+    fish_get_reply(me, SUP.sockr, NULL, 0);
     return -1;
 }
 
-static int linear_start(struct vfs_class *me, struct vfs_s_fh *fh, int offset)
+static int fish_linear_start(struct vfs_class *me, struct vfs_s_fh *fh, int offset)
 {
     char *name;
     char *quoted_name;
@@ -570,7 +585,7 @@ static int linear_start(struct vfs_class *me, struct vfs_s_fh *fh, int offset)
     g_free (name);
     name = quoted_name;
     fh->u.fish.append = 0;
-    offset = command(me, FH_SUPER, WANT_STRING,
+    offset = fish_command (me, FH_SUPER, WANT_STRING,
 		"#RETR /%s\n"
 		"ls -l /%s 2>/dev/null | (\n"
 		  "read var1 var2 var3 var4 var5 var6\n"
@@ -590,7 +605,7 @@ static int linear_start(struct vfs_class *me, struct vfs_s_fh *fh, int offset)
 }
 
 static void
-linear_abort (struct vfs_class *me, struct vfs_s_fh *fh)
+fish_linear_abort (struct vfs_class *me, struct vfs_s_fh *fh)
 {
     struct vfs_s_super *super = FH_SUPER;
     char buffer[8192];
@@ -604,14 +619,14 @@ linear_abort (struct vfs_class *me, struct vfs_s_fh *fh)
 	        return;
     } while (n);
 
-    if (get_reply (me, SUP.sockr, NULL, 0) != COMPLETE)
+    if (fish_get_reply (me, SUP.sockr, NULL, 0) != COMPLETE)
         print_vfs_message( _("Error reported after abort.") );
     else
         print_vfs_message( _("Aborted transfer would be successful.") );
 }
 
 static int
-linear_read (struct vfs_class *me, struct vfs_s_fh *fh, void *buf, int len)
+fish_linear_read (struct vfs_class *me, struct vfs_s_fh *fh, void *buf, int len)
 {
     struct vfs_s_super *super = FH_SUPER;
     int n = 0;
@@ -625,17 +640,17 @@ linear_read (struct vfs_class *me, struct vfs_s_fh *fh, void *buf, int len)
     enable_interrupt_key();
 
     if (n>0) fh->u.fish.got += n;
-    if (n<0) linear_abort(me, fh);
-    if ((!n) && ((get_reply (me, SUP.sockr, NULL, 0) != COMPLETE)))
+    if (n<0) fish_linear_abort(me, fh);
+    if ((!n) && ((fish_get_reply (me, SUP.sockr, NULL, 0) != COMPLETE)))
         ERRNOR (E_REMOTE, -1);
     ERRNOR (errno, n);
 }
 
 static void
-linear_close (struct vfs_class *me, struct vfs_s_fh *fh)
+fish_linear_close (struct vfs_class *me, struct vfs_s_fh *fh)
 {
     if (fh->u.fish.total != fh->u.fish.got)
-	linear_abort(me, fh);
+	fish_linear_abort(me, fh);
 }
 
 static int
@@ -663,11 +678,11 @@ fish_ctl (void *fh, int ctlop, void *arg)
 }
 
 static int
-send_fish_command(struct vfs_class *me, struct vfs_s_super *super, char *cmd, int flags)
+fish_send_command(struct vfs_class *me, struct vfs_s_super *super, char *cmd, int flags)
 {
     int r;
 
-    r = command (me, super, WAIT_REPLY, cmd);
+    r = fish_command (me, super, WAIT_REPLY, cmd);
     vfs_add_noncurrent_stamps (&vfs_fish_ops, (vfsid) super, NULL);
     if (r != COMPLETE) ERRNOR (E_REMOTE, -1);
     if (flags & OPT_FLUSH)
@@ -685,7 +700,7 @@ send_fish_command(struct vfs_class *me, struct vfs_s_super *super, char *cmd, in
 
 #define POSTFIX(flags) \
     g_free (rpath); \
-    return send_fish_command(me, super, buf, flags);
+    return fish_send_command(me, super, buf, flags);
 
 static int
 fish_chmod (struct vfs_class *me, char *path, int mode)
@@ -714,7 +729,7 @@ static int fish_##name (struct vfs_class *me, char *path1, char *path2) \
     g_snprintf(buf, sizeof(buf), string "\n", rpath1, rpath2, rpath1, rpath2); \
     g_free (rpath1); \
     g_free (rpath2); \
-    return send_fish_command(me, super2, buf, OPT_FLUSH); \
+    return fish_send_command(me, super2, buf, OPT_FLUSH); \
 }
 
 #define XTEST if (bucket1 != bucket2) { ERRNOR (EXDEV, -1); }
@@ -760,7 +775,7 @@ fish_chown (struct vfs_class *me, char *path, int owner, int group)
 	    "echo '### 000'\n", 
 	    sowner, rpath,
 	    sowner, rpath);
-    send_fish_command(me, super, buf, OPT_FLUSH); 
+    fish_send_command(me, super, buf, OPT_FLUSH); 
     /* FIXME: what should we report if chgrp succeeds but chown fails? */
     g_snprintf(buf, sizeof(buf),
             "#CHGRP /%s /%s\n"
@@ -768,7 +783,7 @@ fish_chown (struct vfs_class *me, char *path, int owner, int group)
 	    "echo '### 000'\n", 
 	    sgroup, rpath,
 	    sgroup, rpath);
-    /* send_fish_command(me, super, buf, OPT_FLUSH); */
+    /* fish_send_command(me, super, buf, OPT_FLUSH); */
     POSTFIX(OPT_FLUSH)
 }
 
@@ -863,17 +878,17 @@ init_fish (void)
 {
     static struct vfs_s_subclass fish_subclass;
 
-    fish_subclass.archive_same = archive_same;
-    fish_subclass.open_archive = open_archive;
-    fish_subclass.free_archive = free_archive;
+    fish_subclass.archive_same = fish_archive_same;
+    fish_subclass.open_archive = fish_open_archive;
+    fish_subclass.free_archive = fish_free_archive;
     fish_subclass.fh_open = fish_fh_open;
     fish_subclass.find_entry = vfs_s_find_entry_linear;
-    fish_subclass.dir_load = dir_load;
-    fish_subclass.dir_uptodate = dir_uptodate;
-    fish_subclass.file_store = file_store;
-    fish_subclass.linear_start = linear_start;
-    fish_subclass.linear_read = linear_read;
-    fish_subclass.linear_close = linear_close;
+    fish_subclass.dir_load = fish_dir_load;
+    fish_subclass.dir_uptodate = fish_dir_uptodate;
+    fish_subclass.file_store = fish_file_store;
+    fish_subclass.linear_start = fish_linear_start;
+    fish_subclass.linear_read = fish_linear_read;
+    fish_subclass.linear_close = fish_linear_close;
 
     vfs_s_init_class (&vfs_fish_ops);
     vfs_fish_ops.name = "fish";

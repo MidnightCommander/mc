@@ -98,7 +98,7 @@ typedef struct {
 static GSList *auth_list;
 
 static void 
-authinfo_free (struct smb_authinfo const *a)
+smbfs_auth_free (struct smb_authinfo const *a)
 {
     g_free (a->host);
     g_free (a->share);
@@ -108,17 +108,17 @@ authinfo_free (struct smb_authinfo const *a)
 }
 
 static void
-authinfo_free_all ()
+smbfs_auth_free_all ()
 {
     if (auth_list) {
-        g_slist_foreach (auth_list, (GFunc)authinfo_free, 0);
+        g_slist_foreach (auth_list, (GFunc)smbfs_auth_free, 0);
         g_slist_free (auth_list);
         auth_list = 0;
     }
 }
 
 static gint
-authinfo_compare_host_and_share (gconstpointer _a, gconstpointer _b)
+smbfs_auth_cmp_host_and_share (gconstpointer _a, gconstpointer _b)
 {
     struct smb_authinfo const *a = (struct smb_authinfo const *)_a;
     struct smb_authinfo const *b = (struct smb_authinfo const *)_b;
@@ -133,7 +133,7 @@ authinfo_compare_host_and_share (gconstpointer _a, gconstpointer _b)
 }
 
 static gint
-authinfo_compare_host (gconstpointer _a, gconstpointer _b)
+smbfs_auth_cmp_host (gconstpointer _a, gconstpointer _b)
 {
     struct smb_authinfo const *a = (struct smb_authinfo const *)_a;
     struct smb_authinfo const *b = (struct smb_authinfo const *)_b;
@@ -148,7 +148,7 @@ authinfo_compare_host (gconstpointer _a, gconstpointer _b)
 }
 
 static void
-authinfo_add (const char *host, const char *share, const char *domain,
+smbfs_auth_add (const char *host, const char *share, const char *domain,
               const char *user, const char *password)
 {
     struct smb_authinfo *auth = g_new (struct smb_authinfo, 1);
@@ -166,7 +166,7 @@ authinfo_add (const char *host, const char *share, const char *domain,
 }
 
 static void
-authinfo_remove (const char *host, const char *share)
+smbfs_auth_remove (const char *host, const char *share)
 {
     struct smb_authinfo data;
     struct smb_authinfo *auth;
@@ -176,21 +176,21 @@ authinfo_remove (const char *host, const char *share)
     data.share = g_strdup (share);
     list = g_slist_find_custom (auth_list, 
                                 &data, 
-                                authinfo_compare_host_and_share);
+                                smbfs_auth_cmp_host_and_share);
     g_free (data.host);
     g_free (data.share);
     if (!list)
         return;
     auth = list->data;
     auth_list = g_slist_remove (auth_list, auth);
-    authinfo_free (auth);
+    smbfs_auth_free (auth);
 }
 
 /* Set authentication information in bucket. Return 1 if successful, else 0 */
 /* Information in auth_list overrides user if pass is NULL. */
 /* bucket->host and bucket->service must be valid. */
 static int
-bucket_set_authinfo (smbfs_connection *bucket, 
+smbfs_bucket_set_authinfo (smbfs_connection *bucket, 
         const char *domain, const char *user, const char *pass,
         int fallback_to_host)
 {
@@ -205,17 +205,17 @@ bucket_set_authinfo (smbfs_connection *bucket,
         bucket->domain = g_strdup (domain);
         bucket->user = g_strdup (user);
         bucket->password = g_strdup (pass);
-        authinfo_remove (bucket->host, bucket->service);
-        authinfo_add (bucket->host, bucket->service,
+        smbfs_auth_remove (bucket->host, bucket->service);
+        smbfs_auth_add (bucket->host, bucket->service,
                   domain, user, pass);
         return 1;
     }
 
     data.host = bucket->host;
     data.share = bucket->service;
-    list = g_slist_find_custom (auth_list, &data, authinfo_compare_host_and_share);
+    list = g_slist_find_custom (auth_list, &data, smbfs_auth_cmp_host_and_share);
     if (!list && fallback_to_host)
-        list = g_slist_find_custom (auth_list, &data, authinfo_compare_host);
+        list = g_slist_find_custom (auth_list, &data, smbfs_auth_cmp_host);
     if (list) {
         auth = list->data;
         bucket->domain = g_strdup (auth->domain);
@@ -242,7 +242,7 @@ bucket_set_authinfo (smbfs_connection *bucket,
         bucket->domain = g_strdup (auth->domain);
         bucket->user = g_strdup (auth->user);
         bucket->password = g_strdup (auth->password);
-        authinfo_remove (bucket->host, bucket->service);
+        smbfs_auth_remove (bucket->host, bucket->service);
         auth_list = g_slist_prepend (auth_list, auth);
         return 1;
     }
@@ -425,7 +425,7 @@ static opendir_info
 static gboolean first_direntry;
 
 static dir_entry *
-new_dir_entry (const char *name)
+smbfs_new_dir_entry (const char *name)
 {
     static int inode_counter;
     dir_entry *new_entry;
@@ -446,11 +446,11 @@ new_dir_entry (const char *name)
 
 /* browse for shares on server */
 static void
-browsing_helper (const char *name, uint32 type, const char *comment, void *state)
+smbfs_browsing_helper (const char *name, uint32 type, const char *comment, void *state)
 {
     char *typestr = "";
 
-    dir_entry *new_entry = new_dir_entry (name);
+    dir_entry *new_entry = smbfs_new_dir_entry (name);
 
     switch (type) {
     case STYPE_DISKTREE:
@@ -474,7 +474,7 @@ browsing_helper (const char *name, uint32 type, const char *comment, void *state
 }
 
 static void
-loaddir_helper (file_info * finfo, const char *mask, void *entry)
+smbfs_loaddir_helper (file_info * finfo, const char *mask, void *entry)
 {
     dir_entry *new_entry = (dir_entry *) entry;
     time_t t = finfo->mtime;	/* the time is assumed to be passed as GMT */
@@ -483,7 +483,7 @@ loaddir_helper (file_info * finfo, const char *mask, void *entry)
 	return;			/* don't bother with hidden files, "~$" screws up mc */
 #endif
     if (!entry)
-	new_entry = new_dir_entry (finfo->name);
+	new_entry = smbfs_new_dir_entry (finfo->name);
 
     new_entry->my_stat.st_size = finfo->size;
     new_entry->my_stat.st_mtime = finfo->mtime;
@@ -517,7 +517,7 @@ loaddir_helper (file_info * finfo, const char *mask, void *entry)
 
 /* takes "/foo/bar/file" and gives malloced "\\foo\\bar\\file" */
 static int
-convert_path(char **remote_file, gboolean trailing_asterik)
+smbfs_convert_path(char **remote_file, gboolean trailing_asterik)
 {
 	char *p, *my_remote;
 
@@ -545,20 +545,21 @@ convert_path(char **remote_file, gboolean trailing_asterik)
 }
 
 static void
-server_browsing_helper (const char *name, uint32 m, const char *comment, void *state)
+smbfs_srv_browsing_helper (const char *name, uint32 m, const char *comment,
+			   void *state)
 {
-    dir_entry *new_entry = new_dir_entry (name);
+    dir_entry *new_entry = smbfs_new_dir_entry (name);
 
     /* show this as dir */
     new_entry->my_stat.st_mode =
-	(S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH | S_IXUSR | S_IXGRP | S_IXOTH) &
-	myumask;
+	(S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH | S_IXUSR | S_IXGRP |
+	 S_IXOTH) & myumask;
 
     DEBUG (3, ("\t%-16.16s     %s\n", name, comment));
 }
 
 static BOOL
-reconnect(smbfs_connection *conn, int *retries)
+smbfs_reconnect(smbfs_connection *conn, int *retries)
 {
 	char *host;
 	DEBUG(3, ("RECONNECT\n"));
@@ -572,7 +573,7 @@ reconnect(smbfs_connection *conn, int *retries)
 
    	if (!(conn->cli = smbfs_do_connect(host, conn->service))) {
 		message (1, MSG_ERROR,
-			_(" reconnect to %s failed\n "), conn->host);
+			_(" smbfs_reconnect to %s failed\n "), conn->host);
 		g_free(host);
 		return False;
 	}
@@ -583,7 +584,7 @@ reconnect(smbfs_connection *conn, int *retries)
 }
 
 static BOOL
-smb_send(struct cli_state *cli)
+smbfs_send(struct cli_state *cli)
 {
 	size_t len;
 	size_t nwritten=0;
@@ -606,7 +607,7 @@ See if server has cut us off by checking for EPIPE when writing.
 Taken from cli_chkpath()
 ****************************************************************************/
 static BOOL
-chkpath(struct cli_state *cli, char *path, BOOL send_only)
+smbfs_chkpath(struct cli_state *cli, char *path, BOOL send_only)
 {
 	fstring path2;
 	char *p;
@@ -635,23 +636,23 @@ chkpath(struct cli_state *cli, char *path, BOOL send_only)
 	*p++ = 4;
 	fstrcpy(p,path2);
 
-	if (!smb_send(cli)) {
-		DEBUG(3, ("chkpath: couldnt send\n"));
+	if (!smbfs_send(cli)) {
+		DEBUG(3, ("smbfs_chkpath: couldnt send\n"));
 		return False;
 	}
 	if (send_only) {
 		client_receive_smb(cli->fd, cli->inbuf, cli->timeout);
-		DEBUG(3, ("chkpath: send only OK\n"));
+		DEBUG(3, ("smbfs_chkpath: send only OK\n"));
 		return True;	/* just testing for EPIPE */
 	}
 	if (!client_receive_smb(cli->fd, cli->inbuf, cli->timeout)) {
-		DEBUG(3, ("chkpath: receive error\n"));
+		DEBUG(3, ("smbfs_chkpath: receive error\n"));
 		return False;
 	}
 	if ((my_errno = cli_error(cli, NULL, NULL, NULL))) {
 		if (my_errno == 20 || my_errno == 13)
 			return True;	/* ignore if 'not a directory' error */
-		DEBUG(3, ("chkpath: cli_error: %s\n", g_strerror(my_errno)));
+		DEBUG(3, ("smbfs_chkpath: cli_error: %s\n", g_strerror(my_errno)));
 		return False;
 	}
 
@@ -660,7 +661,7 @@ chkpath(struct cli_state *cli, char *path, BOOL send_only)
 
 #if 1
 static int
-fs (const char *text)
+smbfs_fs (const char *text)
 {
 	const char *p = text;
 	int count = 0;
@@ -678,75 +679,83 @@ fs (const char *text)
 static int
 smbfs_loaddir (opendir_info *smbfs_info)
 {
-	uint16 attribute = aDIR | aSYSTEM | aHIDDEN;
-	int servlen = strlen(smbfs_info->conn->service);
-	char *my_dirname = smbfs_info->dirname;
+    uint16 attribute = aDIR | aSYSTEM | aHIDDEN;
+    int servlen = strlen (smbfs_info->conn->service);
+    char *my_dirname = smbfs_info->dirname;
 
-	DEBUG(3, ("smbfs_loaddir: dirname:%s\n", my_dirname));
-	first_direntry = TRUE;
+    DEBUG (3, ("smbfs_loaddir: dirname:%s\n", my_dirname));
+    first_direntry = TRUE;
 
-	if (current_info) {
-		DEBUG(3, ("smbfs_loaddir: new:'%s', cached:'%s'\n", my_dirname, current_info->dirname));
-		/* if new desired dir is longer than cached in current_info */
-		if (fs(my_dirname) > fs(current_info->dirname)) {
-			DEBUG(3, ("saving to previous_info\n"));
-			previous_info = current_info;
-		}
+    if (current_info) {
+	DEBUG (3,
+	       ("smbfs_loaddir: new:'%s', cached:'%s'\n", my_dirname,
+		current_info->dirname));
+	/* if new desired dir is longer than cached in current_info */
+	if (smbfs_fs (my_dirname) > smbfs_fs (current_info->dirname)) {
+	    DEBUG (3, ("saving to previous_info\n"));
+	    previous_info = current_info;
 	}
+    }
 
-	current_info = smbfs_info;
+    current_info = smbfs_info;
 
-	if (strcmp(my_dirname, "/") == 0) {
-		if (!strcmp(smbfs_info->path, URL_HEADER)) {
-			DEBUG(6, ("smbfs_loaddir: browsing %s\n", IPC));
-			/* browse for servers */
-			if (!cli_NetServerEnum(smbfs_info->conn->cli, smbfs_info->conn->domain,
-				SV_TYPE_ALL, server_browsing_helper, NULL))
-					return 0;
-			else
-				current_server_info = smbfs_info;
-			smbfs_info->server_list = TRUE;
-		} else {
-			/* browse for shares */
-			if (cli_RNetShareEnum(smbfs_info->conn->cli, browsing_helper, NULL) < 1)
-					return 0;
-			else
-				current_share_info = smbfs_info;
-		}
-		goto done;
-	}
-
-	/* do regular directory listing */
-	if(strncmp(smbfs_info->conn->service, my_dirname+1, servlen) == 0) {
-		/* strip share name from dir */
-		char *p = my_dirname = g_strdup(my_dirname + servlen);
-		*p = '/';
-		convert_path(&my_dirname, TRUE);
-		g_free (p);
-	} else
-		convert_path(&my_dirname, TRUE);
-
-	DEBUG(6, ("smbfs_loaddir: service: %s\n", smbfs_info->conn->service));
-	DEBUG(6, ("smbfs_loaddir: cli->share: %s\n", smbfs_info->conn->cli->share));
-	DEBUG(6, ("smbfs_loaddir: calling cli_list with mask %s\n", my_dirname));
-	/* do file listing: cli_list returns number of files */
-	if (cli_list(
-		smbfs_info->conn->cli, my_dirname, attribute, loaddir_helper, NULL) < 0) {
-		/* cli_list returns -1 if directory empty or cannot read socket */
-		my_errno = cli_error(smbfs_info->conn->cli, NULL, &err, NULL);
-		g_free (my_dirname);
+    if (strcmp (my_dirname, "/") == 0) {
+	if (!strcmp (smbfs_info->path, URL_HEADER)) {
+	    DEBUG (6, ("smbfs_loaddir: browsing %s\n", IPC));
+	    /* browse for servers */
+	    if (!cli_NetServerEnum
+		(smbfs_info->conn->cli, smbfs_info->conn->domain,
+		 SV_TYPE_ALL, smbfs_srv_browsing_helper, NULL))
 		return 0;
+	    else
+		current_server_info = smbfs_info;
+	    smbfs_info->server_list = TRUE;
+	} else {
+	    /* browse for shares */
+	    if (cli_RNetShareEnum
+		(smbfs_info->conn->cli, smbfs_browsing_helper, NULL) < 1)
+		return 0;
+	    else
+		current_share_info = smbfs_info;
 	}
-	if (*(my_dirname) == 0)
-		smbfs_info->dirname = smbfs_info->conn->service;
+	goto done;
+    }
+
+    /* do regular directory listing */
+    if (strncmp (smbfs_info->conn->service, my_dirname + 1, servlen) == 0) {
+	/* strip share name from dir */
+	char *p = my_dirname = g_strdup (my_dirname + servlen);
+	*p = '/';
+	smbfs_convert_path (&my_dirname, TRUE);
+	g_free (p);
+    } else
+	smbfs_convert_path (&my_dirname, TRUE);
+
+    DEBUG (6, ("smbfs_loaddir: service: %s\n", smbfs_info->conn->service));
+    DEBUG (6,
+	   ("smbfs_loaddir: cli->share: %s\n",
+	    smbfs_info->conn->cli->share));
+    DEBUG (6,
+	   ("smbfs_loaddir: calling cli_list with mask %s\n", my_dirname));
+    /* do file listing: cli_list returns number of files */
+    if (cli_list
+	(smbfs_info->conn->cli, my_dirname, attribute,
+	 smbfs_loaddir_helper, NULL) < 0) {
+	/* cli_list returns -1 if directory empty or cannot read socket */
+	my_errno = cli_error (smbfs_info->conn->cli, NULL, &err, NULL);
 	g_free (my_dirname);
+	return 0;
+    }
+    if (*(my_dirname) == 0)
+	smbfs_info->dirname = smbfs_info->conn->service;
+    g_free (my_dirname);
 /*	do_dskattr();	*/
 
-done:
+  done:
 /*	current_info->parent = smbfs_info->dirname;	*/
 
-	smbfs_info->current = smbfs_info->entries;
-	return 1; /* 1 = ok */
+    smbfs_info->current = smbfs_info->entries;
+    return 1;			/* 1 = ok */
 }
 
 #ifdef	SMBFS_FREE_DIR
@@ -926,7 +935,7 @@ smbfs_do_connect (const char *server, char *share)
 			       current_bucket->password, strlen(current_bucket->password),
 			       current_bucket->domain)) {
 		DEBUG(1,("session setup failed: %s\n", cli_errstr(c)));
-		authinfo_remove (server, share);
+		smbfs_auth_remove (server, share);
 		break;
 	}
 
@@ -955,7 +964,7 @@ smbfs_do_connect (const char *server, char *share)
 }
 
 static int
-get_master_browser(char **host)
+smbfs_get_master_browser(char **host)
 {
 	int count;
 	struct in_addr *ip_list, bcast_addr;
@@ -981,7 +990,7 @@ get_master_browser(char **host)
 }
 
 static void 
-free_bucket (smbfs_connection *bucket)
+smbfs_free_bucket (smbfs_connection *bucket)
 {
 	g_free (bucket->host);
 	g_free (bucket->service);
@@ -1010,7 +1019,7 @@ smbfs_get_free_bucket ()
 			}
 		}
 		cli_shutdown(smbfs_connections[oldest].cli);
-		free_bucket (&smbfs_connections[oldest]);
+		smbfs_free_bucket (&smbfs_connections[oldest]);
 		return &smbfs_connections[oldest];
 	}
 
@@ -1062,8 +1071,8 @@ smbfs_open_link (char *host, char *path, const char *user, int *port,
 	    int retries = 0;
 	    BOOL inshare = (*host != 0 && *path != 0 && strchr (path, '/'));
 	    /* check if this connection has died */
-	    while (!chkpath (smbfs_connections[i].cli, "\\", !inshare)) {
-		if (!reconnect (&smbfs_connections[i], &retries))
+	    while (!smbfs_chkpath (smbfs_connections[i].cli, "\\", !inshare)) {
+		if (!smbfs_reconnect (&smbfs_connections[i], &retries))
 		    return 0;
 	    }
 	    DEBUG (6, ("smbfs_open_link: returning smbfs_connection[%d]\n", i));
@@ -1092,14 +1101,14 @@ smbfs_open_link (char *host, char *path, const char *user, int *port,
     bucket->service = g_strdup (service);
 
     if (!(*host)) {		/* if blank host name, browse for servers */
-	if (!get_master_browser (&host))	/* set host to ip of master browser */
+	if (!smbfs_get_master_browser (&host))	/* set host to ip of master browser */
 	    return 0;		/* could not find master browser? */
 	g_free (host);
 	bucket->host = g_strdup ("");	/* blank host means master browser */
     } else
 	bucket->host = g_strdup (host);
 
-    if (!bucket_set_authinfo (bucket, 0,	/* domain currently not used */
+    if (!smbfs_bucket_set_authinfo (bucket, 0,	/* domain currently not used */
 			      user, this_pass, 1))
 	return 0;
 
@@ -1111,8 +1120,8 @@ smbfs_open_link (char *host, char *path, const char *user, int *port,
 	message (1, MSG_ERROR, _(" Authentication failed "));
 
 	/* authentication failed, try again */
-	authinfo_remove (bucket->host, bucket->service);
-	if (!bucket_set_authinfo (bucket, bucket->domain, bucket->user, 0, 0))
+	smbfs_auth_remove (bucket->host, bucket->service);
+	if (!smbfs_bucket_set_authinfo (bucket, bucket->domain, bucket->user, 0, 0))
 	    return 0;
 
     }
@@ -1202,7 +1211,7 @@ smbfs_opendir (struct vfs_class *me, char *dirname)
 }
 
 static int
-fake_server_stat (const char *server_url, const char *path, struct stat *buf)
+smbfs_fake_server_stat (const char *server_url, const char *path, struct stat *buf)
 {
     dir_entry *dentry;
     char *p;
@@ -1220,7 +1229,7 @@ fake_server_stat (const char *server_url, const char *path, struct stat *buf)
 	DEBUG (4, ("fake stat for SERVER \"%s\"\n", path));
 	while (dentry) {
 	    if (strcmp (dentry->text, path) == 0) {
-		DEBUG (4, ("fake_server_stat: %s:%4o\n",
+		DEBUG (4, ("smbfs_fake_server_stat: %s:%4o\n",
 			   dentry->text, (int)dentry->my_stat.st_mode));
 		memcpy (buf, &dentry->my_stat, sizeof (struct stat));
 		return 0;
@@ -1233,7 +1242,7 @@ fake_server_stat (const char *server_url, const char *path, struct stat *buf)
 }
 
 static int
-fake_share_stat (const char *server_url, const char *path, struct stat *buf)
+smbfs_fake_share_stat (const char *server_url, const char *path, struct stat *buf)
 {
     dir_entry *dentry;
     if (strlen (path) < strlen (server_url))
@@ -1267,10 +1276,10 @@ fake_share_stat (const char *server_url, const char *path, struct stat *buf)
 	    return -1;
     }
     dentry = current_share_info->entries;
-    DEBUG (3, ("fake_share_stat: %s on %s\n", path, server_url));
+    DEBUG (3, ("smbfs_fake_share_stat: %s on %s\n", path, server_url));
     while (dentry) {
 	if (strcmp (dentry->text, path) == 0) {
-	    DEBUG (6, ("fake_share_stat: %s:%4o\n",
+	    DEBUG (6, ("smbfs_fake_share_stat: %s:%4o\n",
 		       dentry->text, (int) dentry->my_stat.st_mode));
 	    memcpy (buf, &dentry->my_stat, sizeof (struct stat));
 	    return 0;
@@ -1281,19 +1290,19 @@ fake_share_stat (const char *server_url, const char *path, struct stat *buf)
     return -1;
 }
 
-/* stat a single file, get_remote_stat callback  */
+/* stat a single file, smbfs_get_remote_stat callback  */
 static dir_entry *single_entry;
 
 /* stat a single file */
 static int
-get_remote_stat (smbfs_connection * sc, char *path, struct stat *buf)
+smbfs_get_remote_stat (smbfs_connection * sc, char *path, struct stat *buf)
 {
     uint16 attribute = aDIR | aSYSTEM | aHIDDEN;
     char *mypath = path;
 
-    DEBUG (3, ("get_remote_stat(): mypath:%s\n", mypath));
+    DEBUG (3, ("smbfs_get_remote_stat(): mypath:%s\n", mypath));
 
-    convert_path (&mypath, FALSE);
+    smbfs_convert_path (&mypath, FALSE);
 
 #if 0	/* single_entry is never free()d now.  And only my_stat is used */
     single_entry = g_new (dir_entry, 1);
@@ -1306,7 +1315,7 @@ get_remote_stat (smbfs_connection * sc, char *path, struct stat *buf)
 	single_entry = g_new0 (dir_entry, 1);
 
     if (cli_list
-	(sc->cli, mypath, attribute, loaddir_helper, single_entry) < 1) {
+	(sc->cli, mypath, attribute, smbfs_loaddir_helper, single_entry) < 1) {
 	my_errno = ENOENT;
 	g_free (mypath);
 	return -1;		/* cli_list returns number of files */
@@ -1322,7 +1331,7 @@ get_remote_stat (smbfs_connection * sc, char *path, struct stat *buf)
 }
 
 static int
-search_dir_entry (dir_entry *dentry, const char *text, struct stat *buf)
+smbfs_search_dir_entry (dir_entry *dentry, const char *text, struct stat *buf)
 {
 	while (dentry) {
 		if (strcmp(text, dentry->text) == 0) {
@@ -1337,7 +1346,7 @@ search_dir_entry (dir_entry *dentry, const char *text, struct stat *buf)
 }
 
 static int
-get_stat_info (smbfs_connection * sc, char *path, struct stat *buf)
+smbfs_get_stat_info (smbfs_connection * sc, char *path, struct stat *buf)
 {
     char *p;
 #if 0
@@ -1348,7 +1357,7 @@ get_stat_info (smbfs_connection * sc, char *path, struct stat *buf)
     mypath++;			/* cut off leading '/' */
     if ((p = strrchr (mypath, '/')))
 	mypath = p + 1;		/* advance until last file/dir name */
-    DEBUG (3, ("get_stat_info: mypath:%s, current_info->dirname:%s\n",
+    DEBUG (3, ("smbfs_get_stat_info: mypath:%s, current_info->dirname:%s\n",
 	       mypath, current_info->dirname));
 #if 0
     if (!dentry) {
@@ -1359,7 +1368,7 @@ get_stat_info (smbfs_connection * sc, char *path, struct stat *buf)
 #endif
     if (!single_entry)		/* when found, this will be written too */
 	single_entry = g_new (dir_entry, 1);
-    if (search_dir_entry (current_info->entries, mypath, buf) == 0) {
+    if (smbfs_search_dir_entry (current_info->entries, mypath, buf) == 0) {
 	return 0;
     }
     /* now try to identify mypath as PARENT dir */
@@ -1384,7 +1393,7 @@ get_stat_info (smbfs_connection * sc, char *path, struct stat *buf)
     /* now try to identify as CURRENT dir? */
     {
 	char *dnp = current_info->dirname;
-	DEBUG (6, ("get_stat_info: is %s current dir? this dir is: %s\n",
+	DEBUG (6, ("smbfs_get_stat_info: is %s current dir? this dir is: %s\n",
 		   mypath, current_info->dirname));
 	if (*dnp == '/')
 	    dnp++;
@@ -1403,27 +1412,27 @@ get_stat_info (smbfs_connection * sc, char *path, struct stat *buf)
 	       current_info->dirname));
     /* try to find this in the PREVIOUS listing */
     if (previous_info) {
-	if (search_dir_entry (previous_info->entries, mypath, buf) == 0)
+	if (smbfs_search_dir_entry (previous_info->entries, mypath, buf) == 0)
 	    return 0;
 	DEBUG (3, ("'%s' not found in previous_info '%s'\n", path,
 		   previous_info->dirname));
     }
     /* try to find this in the SHARE listing */
     if (current_share_info) {
-	if (search_dir_entry (current_share_info->entries, mypath, buf) == 0)
+	if (smbfs_search_dir_entry (current_share_info->entries, mypath, buf) == 0)
 	    return 0;
 	DEBUG (3, ("'%s' not found in share_info '%s'\n", path,
 		   current_share_info->dirname));
     }
     /* try to find this in the SERVER listing */
     if (current_server_info) {
-	if (search_dir_entry (current_server_info->entries, mypath, buf) == 0)
+	if (smbfs_search_dir_entry (current_server_info->entries, mypath, buf) == 0)
 	    return 0;
 	DEBUG (3, ("'%s' not found in server_info '%s'\n", path,
 		   current_server_info->dirname));
     }
     /* nothing found. get stat file info from server */
-    return get_remote_stat (sc, path, buf);
+    return smbfs_get_remote_stat (sc, path, buf);
 }
 
 static int
@@ -1441,7 +1450,7 @@ smbfs_chdir (struct vfs_class *me, char *path)
 }
 
 static int
-loaddir(struct vfs_class *me, const char *path)
+smbfs_loaddir_by_name (struct vfs_class *me, const char *path)
 {
 	void *info;
 	char *mypath, *p;
@@ -1451,7 +1460,7 @@ loaddir(struct vfs_class *me, const char *path)
 
 	if (p > mypath)
 		*p = 0;
-	DEBUG(6, ("loaddir(%s)\n", mypath));
+	DEBUG(6, ("smbfs_loaddir_by_name(%s)\n", mypath));
 	smbfs_chdir(me, mypath);
 	info = smbfs_opendir (me, mypath);
 	g_free(mypath);
@@ -1474,7 +1483,7 @@ smbfs_stat (struct vfs_class * me, char *path, struct stat *buf)
 
     if (!current_info) {
 	DEBUG (1, ("current_info = NULL: "));
-	if (loaddir (me, path) < 0)
+	if (smbfs_loaddir_by_name (me, path) < 0)
 	    return -1;
     }
 
@@ -1509,14 +1518,14 @@ smbfs_stat (struct vfs_class * me, char *path, struct stat *buf)
 
     if (!pp) {
 	if (!current_info->server_list) {
-	    if (loaddir (me, path) < 0)
+	    if (smbfs_loaddir_by_name (me, path) < 0)
 		return -1;
 	}
-	return fake_server_stat (server_url, path, buf);
+	return smbfs_fake_server_stat (server_url, path, buf);
     }
 
     if (!strchr (++pp, '/')) {
-	return fake_share_stat (server_url, path, buf);
+	return smbfs_fake_share_stat (server_url, path, buf);
     }
 
     /* stating inside share at this point */
@@ -1552,7 +1561,7 @@ smbfs_stat (struct vfs_class * me, char *path, struct stat *buf)
 	pp++;
     if (strncmp (p, pp, strlen (p)) != 0) {
 	DEBUG (6, ("desired '%s' is not loaded, we have '%s'\n", p, pp));
-	if (loaddir (me, path) < 0) {
+	if (smbfs_loaddir_by_name (me, path) < 0) {
 	    g_free (service);
 	    return -1;
 	}
@@ -1560,7 +1569,7 @@ smbfs_stat (struct vfs_class * me, char *path, struct stat *buf)
     }
     g_free (service);
     /* stat dirs & files under shares now */
-    return get_stat_info (sc, path, buf);
+    return smbfs_get_stat_info (sc, path, buf);
 }
 
 #define smbfs_lstat smbfs_stat	/* no symlinks on smb filesystem? */
@@ -1616,7 +1625,7 @@ smbfs_mkdir (struct vfs_class * me, char *path, mode_t mode)
     if ((remote_file = smbfs_get_path (&sc, path)) == 0)
 	return -1;
     g_free (remote_file);
-    convert_path (&path, FALSE);
+    smbfs_convert_path (&path, FALSE);
 
     if (!cli_mkdir (sc->cli, path)) {
 	my_errno = cli_error (sc->cli, NULL, &err, NULL);
@@ -1639,7 +1648,7 @@ smbfs_rmdir (struct vfs_class *me, char *path)
 	if ((remote_file = smbfs_get_path (&sc, path)) == 0)
 		return -1;
 	g_free (remote_file);
-	convert_path(&path, FALSE);
+	smbfs_convert_path(&path, FALSE);
 
 	if (!cli_rmdir(sc->cli, path)) {
 		my_errno = cli_error(sc->cli, NULL, &err, NULL);
@@ -1685,14 +1694,14 @@ smbfs_free (vfsid id)
 {
     DEBUG (3, ("smbfs_free(%p)\n", id));
     /* FIXME: Should not be empty */
-    authinfo_free_all ();
+    smbfs_auth_free_all ();
 }
 
 /* Gives up on a socket and reopens the connection, the child own the socket
  * now
  */
 static void
-my_forget (char *path)
+smbfs_forget (char *path)
 {
     char *host, *user, *p;
     int  port, i;
@@ -1700,7 +1709,7 @@ my_forget (char *path)
     if (strncmp (path, URL_HEADER, HEADER_LEN))
 		return;
 
-	DEBUG(3, ("my_forget(path:%s)\n", path));
+	DEBUG(3, ("smbfs_forget(path:%s)\n", path));
     
     path += 6;
     if (path[0] == '/' && path[1] == '/')
@@ -1732,7 +1741,7 @@ smbfs_setctl (struct vfs_class *me, char *path, int ctlop, void *arg)
     DEBUG (3, ("smbfs_setctl(path:%s, ctlop:%d)\n", path, ctlop));
     switch (ctlop) {
     case VFS_SETCTL_FORGET:
-	my_forget (path);
+	smbfs_forget (path);
 	return 0;
     }
     return 0;
@@ -1740,7 +1749,7 @@ smbfs_setctl (struct vfs_class *me, char *path, int ctlop, void *arg)
 
 
 static smbfs_handle *
-open_readwrite (smbfs_handle *remote_handle, char *rname, int flags, int mode)
+smbfs_open_readwrite (smbfs_handle *remote_handle, char *rname, int flags, int mode)
 {
     size_t size;
 
@@ -1795,14 +1804,14 @@ smbfs_open (struct vfs_class *me, char *file, int flags, int mode)
 	return 0;
 
     p = remote_file;
-    convert_path (&remote_file, FALSE);
+    smbfs_convert_path (&remote_file, FALSE);
     g_free (p);
 
     remote_handle		= g_new (smbfs_handle, 2);
     remote_handle->cli		= sc->cli;
     remote_handle->nread	= 0;
 
-    ret = open_readwrite (remote_handle, remote_file, flags, mode);
+    ret = smbfs_open_readwrite (remote_handle, remote_file, flags, mode);
 
     g_free (remote_file);
     if (!ret)
@@ -1821,7 +1830,7 @@ smbfs_unlink (struct vfs_class *me, char *path)
 	return -1;
 
     p = remote_file;
-    convert_path(&remote_file, FALSE);
+    smbfs_convert_path(&remote_file, FALSE);
     g_free (p);
 
     if (!cli_unlink(sc->cli, remote_file)) {
@@ -1851,10 +1860,10 @@ smbfs_rename (struct vfs_class *me, char *a, char *b)
     }
 
     p = ra;
-    convert_path(&ra, FALSE);
+    smbfs_convert_path(&ra, FALSE);
     g_free (p);
     p = rb;
-    convert_path(&rb, FALSE);
+    smbfs_convert_path(&rb, FALSE);
     g_free (p);
 
     retval = cli_rename(sc->cli, ra, rb);
@@ -1877,7 +1886,7 @@ smbfs_fstat (void *data, struct stat *buf)
 
 	DEBUG(3, ("smbfs_fstat(fnum:%d)\n", remote_handle->fnum));
 
-	/* use left over from previous get_remote_stat, if available */
+	/* use left over from previous smbfs_get_remote_stat, if available */
 	if (single_entry)
 		memcpy(buf, &single_entry->my_stat, sizeof(struct stat));
 	else {	/* single_entry not set up: bug */
