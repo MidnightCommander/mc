@@ -1,5 +1,8 @@
 2001-07-06  Pavel Roskin  <proski@gnu.org>
 
+	* Make.common.in: Remove GNOME-specific and unused definitions.
+	Partly moved to gnome/Makefile.in.
+
 	* configure.in: Remove all references to SEDCMD and SEDCMD2 -
 	they are usused.
 	* Make.common.in: Likewise.
