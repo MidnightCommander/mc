@@ -1,3 +1,7 @@
+2003-02-26  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/syntax.syntax: Highlight "define".
+
 2003-02-23  Marco Ciampa  <ciampix@libero.it>
 
 	* doc/it/mc.1.in: updated manual with some stilistic changes.

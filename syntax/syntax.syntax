@@ -24,6 +24,7 @@ context default
     keyword whole wholechars\[\t\s\]left brightcyan
     keyword whole wholechars\[\t\s\]right brightcyan
     keyword whole wholechars\[\] brightcyan
+    keyword whole define\[\] brightcyan
 
     keyword whole spellcheck\[\] yellow
     keyword whole keyword\[\] yellow
