@@ -24,11 +24,11 @@
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>
 #endif
-#include <signal.h>		/* my_system */
+#include <signal.h>		/* struct sigaction */
 #include <limits.h>		/* INT_MAX */
 #include <sys/stat.h>
 #include <stdarg.h>
-#include <errno.h>		/* my_system */
+#include <errno.h>		/* errno */
 #include <string.h>
 #include <ctype.h>
 #ifdef HAVE_SYS_IOCTL_H
