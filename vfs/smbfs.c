@@ -58,6 +58,7 @@ static uint32 err;
 /* stuff that is same with each connection */
 extern int DEBUGLEVEL;
 extern pstring myhostname;
+static mode_t myumask = 0755;
 extern pstring global_myname;
 static int smbfs_open_connections = 0;
 static gboolean got_user = FALSE;
@@ -292,6 +293,10 @@ smbfs_init (vfs * me)
 
     load_interfaces ();
 
+    myumask = umask (0);
+    umask (myumask);
+    myumask = ~myumask;
+
     if (getenv ("USER")) {
 	char *p;
 
@@ -451,8 +456,8 @@ browsing_helper (const char *name, uint32 type, const char *comment, void *state
 	typestr = "Disk";
 	/*      show this as dir        */
 	new_entry->my_stat.st_mode =
-	    S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH | S_IXUSR | S_IXGRP |
-	    S_IXOTH;
+	    (S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH | S_IXUSR | S_IXGRP |
+	     S_IXOTH) & myumask;
 	break;
     case STYPE_PRINTQ:
 	typestr = "Printer";
@@ -500,6 +505,7 @@ loaddir_helper (file_info * finfo, const char *mask, void *entry)
 /*  if (finfo->mode & aSYSTEM); like a kernel? */
     if (finfo->mode & aRONLY)
 	new_entry->my_stat.st_mode &= ~(S_IWUSR | S_IWGRP | S_IWOTH);
+    new_entry->my_stat.st_mode &= myumask;
 
     DEBUG (entry ? 3 : 6, ("  %-30s%7.7s%8.0f  %s",
 			   CNV_LANG (finfo->name),
@@ -544,7 +550,8 @@ server_browsing_helper (const char *name, uint32 m, const char *comment, void *s
 
     /* show this as dir */
     new_entry->my_stat.st_mode =
-	S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH | S_IXUSR | S_IXGRP | S_IXOTH;
+	(S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH | S_IXUSR | S_IXGRP | S_IXOTH) &
+	myumask;
 
     DEBUG (3, ("\t%-16.16s     %s\n", name, comment));
 }
@@ -1241,8 +1248,8 @@ fake_share_stat (const char *server_url, const char *path, struct stat *buf)
 	    memset (buf, 0, sizeof (*buf));
 	    /*      show this as dir        */
 	    buf->st_mode =
-		S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH | S_IXUSR | S_IXGRP |
-		S_IXOTH;
+		(S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH | S_IXUSR | S_IXGRP |
+		 S_IXOTH) & myumask;
 	    return 0;
 	}
 	return -1;
@@ -1365,7 +1372,7 @@ get_stat_info (smbfs_connection * sc, char *path, struct stat *buf)
 	    mydir = p + 1;	/* advance util last '/' */
 	if (strcmp (mydir, mypath) == 0) {	/* fake a stat for ".." */
 	    memset (buf, 0, sizeof (struct stat));
-	    buf->st_mode = S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH;
+	    buf->st_mode = (S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH) & myumask;
 	    memcpy (&single_entry->my_stat, buf, sizeof (struct stat));
 	    g_free (mdp);
 	    DEBUG (1, ("	PARENT:found in %s\n", current_info->dirname));
@@ -1385,7 +1392,7 @@ get_stat_info (smbfs_connection * sc, char *path, struct stat *buf)
 	}
 	if (strcmp (mypath, dnp) == 0) {
 	    memset (buf, 0, sizeof (struct stat));
-	    buf->st_mode = S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH;
+	    buf->st_mode = (S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH) & myumask;
 	    memcpy (&single_entry->my_stat, buf, sizeof (struct stat));
 	    DEBUG (1, ("	CURRENT:found in %s\n", current_info->dirname));
 	    return 0;
@@ -1523,7 +1530,7 @@ smbfs_stat (vfs * me, char *path, struct stat *buf)
 	    /* make server name appear as directory */
 	    DEBUG (1, ("smbfs_stat: showing server as directory\n"));
 	    memset (buf, 0, sizeof (struct stat));
-	    buf->st_mode = S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH;
+	    buf->st_mode = (S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH) & myumask;
 	    g_free (service);
 	    return 0;
 	}

@@ -1,3 +1,7 @@
+2002-12-20  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* smbfs.c: Resurrect and use myumask for generated permissions.
+
 2002-12-19  Adam Byrtek  <alpha@debian.org>
 
 	* extfs/patchfs.in: Fix patch size calculation.  Use bytes to
