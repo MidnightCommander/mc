@@ -2,3 +2,5 @@ mx
 gmc
 Makefile
 .depend
+mc.metadata
+image.metadata
