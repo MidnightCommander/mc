@@ -46,6 +46,7 @@ static unsigned char get_hotkey( int n )
 int select_charset( int current_charset, int seldisplay )
 {
     int i, menu_lines = n_codepages + 1;
+    char buffer[255];
  
     /* Create listbox */
     Listbox* listbox =
@@ -58,14 +59,12 @@ int select_charset( int current_charset, int seldisplay )
 
     /* insert all the items found */
     for (i = 0; i < n_codepages; i++) {
-	struct codepage_desc cpdesc = codepages[i];
-	char buffer[255];
-	sprintf( buffer, "%c  %s", get_hotkey(i), cpdesc.name );
+	char *name = codepages[i].name;
+	snprintf (buffer, sizeof (buffer), "%c  %s", get_hotkey(i), name);
 	LISTBOX_APPEND_TEXT( listbox, get_hotkey(i), buffer, NULL );
     }
     if (seldisplay) {
-	char buffer[255];
-	sprintf( buffer, "%c  %s", get_hotkey(n_codepages), _("Other 8 bit"));
+	snprintf (buffer, sizeof (buffer), "%c  %s", get_hotkey(n_codepages), _("Other 8 bit"));
 	LISTBOX_APPEND_TEXT( listbox, get_hotkey(n_codepages), buffer, NULL );
     }
 	
@@ -89,15 +88,6 @@ int select_charset( int current_charset, int seldisplay )
 
 int do_select_codepage(void)
 {
-#ifndef HAVE_ICONV
-
-    message( 1, _(" Warning "),
-	    _("Midnight Commander was compiled without iconv support,\n"
-	     "so charsets recoding feature is not available!" ));
-    return -1;
-
-#else
-
     char *errmsg;
 
     if (display_codepage > 0) {
@@ -115,8 +105,6 @@ int do_select_codepage(void)
 	return -1;
     }
     return 0;
-
-#endif /* HAVE_ICONV */
 }
 
 #endif /* HAVE_CHARSET */

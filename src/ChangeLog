@@ -1,3 +1,8 @@
+2002-08-27  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* selcodepage.c (select_charset): Use snprintf instead of sprintf.
+	(do_select_codepage) [!HAVE_ICONV]: Remove.
+
 2002-08-27  Pavel Roskin  <proski@gnu.org>
 
 	* charsets.c: Add disclaimer of warranty.
