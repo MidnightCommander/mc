@@ -73,7 +73,7 @@ static struct {
     { B_ENTER,  NARROW_BUTTON, 0, 29, "               "},
     { B_ENTER,  NARROW_BUTTON, 0, 19, "   "},
     { B_ENTER,  NARROW_BUTTON, 0, 11, "   "},
-    { B_ENTER,  NARROW_BUTTON, 0, 3, "   "},
+    { B_ENTER,  NARROW_BUTTON, 0, 3, "   "}
 };
 
 static WButton *b_att[3];	/* permission */
@@ -535,6 +535,27 @@ static void
 init_chown_advanced (void)
 {
     int i;
+    enum { dlg_h = 13, dlg_w = 74, n_elem = 4 };
+#ifdef ENABLE_NLS
+    static int i18n_len;
+    
+    if (!i18n_len) {
+	int dx, cx;
+	for (i = 0 ; i < n_elem ; i++) {
+	    chown_advanced_but[i].text = _(chown_advanced_but[i].text);
+	    i18n_len += strlen (chown_advanced_but[i].text) + 3;
+	    if (DEFPUSH_BUTTON == chown_advanced_but[i].flags)
+		i18n_len += 2; /* "<>" */ 
+	}
+	cx = dx = (dlg_w - i18n_len - 2) / (n_elem + 1);
+
+	/* Reversed order */
+	for (i = n_elem - 1; i >= 0; i--) {
+	    chown_advanced_but[i].x = cx;
+	    cx += strlen (chown_advanced_but[i].text) + 3 + dx;
+	}
+    }
+#endif /* ENABLE_NLS */
 
     sf_stat = g_new (struct stat, 1);
     do_refresh ();
@@ -545,7 +566,7 @@ init_chown_advanced (void)
     x_toggle = 070;
 
     ch_dlg =
-	create_dlg (0, 0, 13, 74, dialog_colors, advanced_chown_callback,
+	create_dlg (0, 0, dlg_h, dlg_w, dialog_colors, advanced_chown_callback,
 		    "[Advanced Chown]", _(" Chown advanced command "),
 		    DLG_CENTER | DLG_REVERSE);
 

@@ -1,3 +1,7 @@
+2004-03-07  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+    * achown.c (init_chown_advanced) [ENABLE_NLS]: i18n fix.
+
 2004-03-05  Pavel Roskin  <proski@gnu.org>
 
 	* subshell.c: Partly revert previous patch to preserve
