@@ -47,7 +47,7 @@
 #define LINUX_CONS_SAVER_C
 #include "cons.saver.h"
 
-void
+static void
 send_contents (char *buffer, unsigned int columns, unsigned int rows)
 {
   unsigned char begin_line = 0, end_line = 0;
@@ -100,7 +100,7 @@ out:
     write (1, outbuf, p - outbuf);
 }
 
-void __attribute__ ((noreturn))
+static void __attribute__ ((noreturn))
 die (void)
 {
   unsigned char zero = 0;

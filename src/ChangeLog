@@ -1,3 +1,8 @@
+2004-10-21  Roland Illig  <roland.illig@gmx.de>
+
+	* cons.saver.c (die): Declare as "static" to avoid gcc warning.
+	(send_contents): Likewise.
+
 2004-10-20  Jakub Jelinek  <jakub@redhat.com>
 
 	* user.c (user_menu_cmd): Fix error. test_line() doesn't handle
