@@ -1,3 +1,11 @@
+1999-08-08  David Martin <dmartina@usa.net>
+
+	* gtkedit/syntax.c (upgrade_syntax_file): Mark error strings for
+	translation. 
+
+	* gtkedit/editmenu.c (edit_about_cmd): Mark text in "about" for
+	translation as it used to be. 
+
 1999-08-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* doc-gnome/C/gmc.sgml: Set the book element's id to "index" so

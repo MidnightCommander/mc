@@ -1,3 +1,10 @@
+1999-08-08  David Martin <dmartina@usa.net>
+
+	* gaction.c (mainly gmc_unable_to_execute_dlg): Moved g_strconcat
+	to g_strdup_printf, to get compact strings and make coherent
+	translations. Translate atomic actions (open, edit, view) when
+	calling this function. 
+
 1999-08-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (try_rename): New function to rename a desktop icon's

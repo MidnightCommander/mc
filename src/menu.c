@@ -57,12 +57,13 @@ Menu create_menu (char *name, menu_entry *entries, int count)
     menu->max_entry_len = 20;
     menu->entries = entries;
 
-#ifdef ENABLE_NLS
     if (entries != (menu_entry*) NULL) {
 	register menu_entry* mp;
 	for (mp = entries; count--; mp++) {
 	    if (mp->text[0] != '\0') {
+#ifdef ENABLE_NLS
 	        mp->text = _(mp->text);
+#endif /* ENABLE_NLS */
 	        cp = strchr (mp->text,'&');
 
 		if (cp != NULL && *(cp+1) != '\0') {
@@ -76,7 +77,6 @@ Menu create_menu (char *name, menu_entry *entries, int count)
 	    }
 	}
     }
-#endif /* ENABLE_NLS */
 
     menu->name = g_strdup ( _(name) );
     menu_scan_hotkey(menu);

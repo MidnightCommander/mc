@@ -29,34 +29,28 @@ gmc_unable_to_execute_dlg (gchar *fname, const gchar *command, gchar *action, co
 	gchar *msg;
 	gchar *fix = NULL;
 	if (!strcmp (action, "x-gnome-app-info")) {
-		msg = g_strconcat (_("Unable to execute\n\""),
-				   fname,
-				   _("\".\n\nPlease check it to see if it points to a valid command."),
-				   NULL);
+		msg = g_strdup_printf (
+			_("Unable to execute\n\"%s\".\n\n"
+			"Please check it to see if it points to a valid command."),
+			fname);
 		
 	} else {
 		if (mime)
-			fix = g_strconcat (_("\".\n\nTo fix this, bring up the mime-properties editor "
-					     "in the GNOME Control Center, and edit the default "),
-					   action,
-					   _("-action for \""),
-					   mime,
-					   "\".",
-					   NULL);
+			fix = g_strdup_printf (
+				_("\".\n\nTo fix this, bring up the mime-properties editor "
+				"in the GNOME Control Center, and edit the default %s"
+				"-action for \"%s\"."),
+				action, mime);
 		else 
-			fix = g_strconcat (_("\".\n\nTo fix this error, bring up this file's properties "
-					     "and change the default "),
-					   action,
-					   _("-action."),
-					   NULL);
-		msg = g_strconcat (_("Unable to "),
-				   action,
-				   "\n\"",
-				   fname,
-				   _("\"\nwith the command:\n\""),
-				   command,
-				   fix,
-				   NULL);
+			fix = g_strdup_printf (
+				_("\".\n\nTo fix this error, bring up this file's properties "
+				"and change the default %s-action."),
+				action);
+
+		msg = g_strdup_printf (
+			_("Unable to %s\n\"%s\"\nwith the command:\n\"%s\"%s"),
+			action, fname, command, fix);
+			
 		g_free (fix);
 	}
 	msg_dialog = gnome_message_box_new (msg,
@@ -72,7 +66,6 @@ gmc_unable_to_execute_dlg (gchar *fname, const gchar *command, gchar *action, co
 
 	gnome_dialog_run_and_close (GNOME_DIALOG (msg_dialog));
 	g_free (msg);
-	
 }
 
 static void
@@ -80,6 +73,7 @@ gmc_execute (const char *fname, const char *buf, int needs_terminal)
 {
 	exec_extension (fname, buf, NULL, NULL, 0, needs_terminal);
 }
+
 static gboolean
 gmc_check_exec_string (const char *buf)
 {
@@ -137,7 +131,7 @@ gmc_open_filename (char *fname, GList *args)
 		if (gmc_check_exec_string (buf))
 			gmc_execute (fname, buf, needs_terminal);
 		else
-			gmc_unable_to_execute_dlg (fname, buf, "open", NULL);
+			gmc_unable_to_execute_dlg (fname, buf, _("open"), NULL);
 		g_free (buf);
 		return 1;
 	}
@@ -153,7 +147,7 @@ gmc_open_filename (char *fname, GList *args)
 		if (gmc_check_exec_string (cmd))
 			gmc_execute (fname, cmd, needs_terminal);
 		else 
-			gmc_unable_to_execute_dlg (fname, cmd, "open", mime_type);
+			gmc_unable_to_execute_dlg (fname, cmd, _("open"), mime_type);
 		return 1;
 	}
 
@@ -188,7 +182,7 @@ gmc_edit (char *fname)
 		if (gmc_check_exec_string (buf))
 			gmc_execute (fname, buf, 0);
 		else
-			gmc_unable_to_execute_dlg (fname, buf, "edit", NULL);
+			gmc_unable_to_execute_dlg (fname, buf, _("edit"), NULL);
 		g_free (buf);
 		return 1;
 	}
@@ -201,7 +195,7 @@ gmc_edit (char *fname)
 			if (gmc_check_exec_string (cmd))
 				gmc_execute (fname, cmd, 0);
 			else
-				gmc_unable_to_execute_dlg (fname, cmd, "edit", mime_type);
+				gmc_unable_to_execute_dlg (fname, cmd, _("edit"), mime_type);
 			return 1;
 		}
 	}
@@ -334,7 +328,7 @@ gmc_view (char *filename, int start_line)
 		if (gmc_check_exec_string (cmd))
 			gmc_run_view (filename, cmd);
 		else
-			gmc_unable_to_execute_dlg (filename, cmd, "view", mime_type);
+			gmc_unable_to_execute_dlg (filename, cmd, _("view"), mime_type);
 		g_free (cmd);
 		return 1;
 	} else

@@ -1,3 +1,18 @@
+1999-08-08  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* POTFILE.in: Removed gpopup.c as it is not compiled.
+
+1999-08-08  David Martin <dmartina@usa.net>
+
+	* POTFILES.in: Removed symbolic links, and outdated
+	gmc-window.[ch] and olddnd.c. These don't repport any new strings,
+	increase compile time and make po files large. Basically adds
+	gaction.c, g,mount, smbfs.c to the pre-previous file.
+
+	* es.po: Added new strings with latest editor changes. Added
+	strings in gaction.c. Merged with a new mc.pot after the changes
+	in POTFILES.in. 
+
 1999-08-01  David Martin <dmartina@usa.net>
 
 	* es.po, es_ES.po: added translation for history box title
