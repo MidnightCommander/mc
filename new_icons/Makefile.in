@@ -41,6 +41,7 @@ ALLICONS =						\
 	gnome-http-url.png				\
 	gnome-image-generic.png				\
 	gnome-application-encapsulated_postscript.png	\
+	gnome-application-pdf.png			\
 	gnome-application-postscript.png		\
 	gnome-application-x-c-header.png		\
 	gnome-application-x-c-source.png		\
