@@ -90,7 +90,7 @@ main (int argc, char **argv)
         bindtextdomain (PACKAGE, GNOMELOCALEDIR);
         textdomain (PACKAGE);
 
-        init_results = gnome_capplet_init("mouse-properties", VERSION,
+        init_results = gnome_capplet_init("mime-type-capplet", VERSION,
                                           argc, argv, NULL, 0, NULL);
 
 	if (init_results < 0) {
