@@ -933,7 +933,7 @@ msgstr ""
 
 #: src/boxes.c:71
 msgid " Listing mode "
-msgstr " Modalità visualizzazione "
+msgstr " Modalità vista "
 
 #: src/boxes.c:76
 msgid "&Full file list"
@@ -961,7 +961,7 @@ msgstr "&Mini stato utente"
 
 #: src/boxes.c:192
 msgid "Listing mode"
-msgstr "Modalità visualizzazione"
+msgstr "Modalità vista"
 
 #: src/boxes.c:280
 msgid "&Reverse"
