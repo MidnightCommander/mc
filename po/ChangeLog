@@ -1,3 +1,7 @@
+2001-06-09  Pavel Roskin  <proski@gnu.org>
+
+	* ru.po: Update.
+
 2001-06-07  Pavel Roskin  <proski@gnu.org>
 
 	* update.pl: When using `--maintain' only scan ordinary	files.
