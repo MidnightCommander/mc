@@ -627,7 +627,7 @@ label_destroy (WLabel *l)
 }
 
 WLabel *
-label_new (int y, int x, char *text, char *tkname)
+label_new (int y, int x, const char *text, char *tkname)
 {
     WLabel *l = g_new (WLabel, 1);
 

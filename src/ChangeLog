@@ -1,3 +1,14 @@
+2001-07-31  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* util.c [!HAVE_X] (is_printable): Don't duplicate declarations from
+	main.h.
+	(load_file): Use fopen and fstat to prevent race conditions.
+	(size_trunc): Make suffix const array.
+	(strip_password): Make prefixes const array.
+	(file_date): Make fmt auto variable.
+	* color.c (color_table): Make constant array.
+	* widget.[ch] (label_new): Make text parameter const.
+
 2001-07-31  Pavel Roskin  <proski@gnu.org>
 
 	* charsets.c: Warning fixes.
