@@ -1,3 +1,8 @@
+2004-12-07  Roland Illig  <roland.illig@gmx.de>
+
+	* syntax/Makefile.am: Don't install syntax highlighting files if
+	the internal editor is disabled.
+
 2004-12-03  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* configure.ac: Bump version to 4.6.1a

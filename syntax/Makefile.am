@@ -1,6 +1,4 @@
-syntaxdir = $(pkgdatadir)/syntax
-
-syntax_DATA =			\
+SYNTAXFILES =			\
 	Syntax			\
 	ada95.syntax		\
 	aspx.syntax		\
@@ -41,4 +39,9 @@ syntax_DATA =			\
 	unknown.syntax		\
 	xml.syntax
 
-EXTRA_DIST = $(syntax_DATA)
+if USE_EDIT
+syntaxdir =		$(pkgdatadir)/syntax
+syntax_DATA =		$(SYNTAXFILES)
+endif
+
+EXTRA_DIST =		$(SYNTAXFILES)
