@@ -433,15 +433,11 @@ search_content (Dlg_head *h, char *directory, char *filename)
 
     fname = concat_dir_and_file (directory, filename);
 
-    if (mc_stat (fname, &s) != 0 && !S_ISREG (s.st_mode)){
+    if (mc_stat (fname, &s) != 0 || !S_ISREG (s.st_mode)){
 	g_free (fname);
 	return;
     }
-    if (!S_ISREG (s.st_mode)){
-	g_free (fname);
-	return;
-    }
-    
+
     file_fd = mc_open (fname, O_RDONLY);
     g_free (fname);
     
@@ -471,15 +467,14 @@ search_content (Dlg_head *h, char *directory, char *filename)
     
     enable_interrupt_key ();
     got_interrupt ();
-    while (1){
-	i = read (pipe, &c, 1);
-	if (i != 1)
-	    break;
+
+    while ((i = read (pipe, &c, 1)) == 0){
 	
 	if (c == '\n'){
 	    p = buffer;
 	    ignoring = 0;
 	}
+
 	if (ignoring)
 	    continue;
 	
@@ -756,7 +751,7 @@ find_do_edit (void)
 static void
 setup_gui (void)
 {
-	GtkWidget *sw, *b1, *b2, *b3;
+	GtkWidget *sw, *b1, *b2;
 	GtkWidget *box, *box2;
 	
 	g_find_dlg = gnome_dialog_new (

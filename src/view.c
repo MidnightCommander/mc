@@ -1403,49 +1403,48 @@ static char *
 get_line_at (WView *view, unsigned long *p, unsigned long *skipped)
 {
     char *buffer = 0;
-    int  buffer_size, usable_size;
-    int  ch = 0;
-    int  direction;
+    int  buffer_size = 0;
+    int  usable_size = 0;
+    int  ch;
+    int  direction = view->direction;
     unsigned long pos = *p;
     long i = 0;
-    int  prev;
+    int  prev = 0;
 
-    direction = view->direction;
-    buffer_size = usable_size = 0;
-    
-    prev = (pos) ? ((prev = get_byte (view, pos - 1) == -1) ? 0 : prev) : 0;
-    *skipped = 0;
-    while ((ch = get_byte (view, pos)) != -1){
+    /* skip over all the possible zeros in the file */
+    while ((ch = get_byte (view, pos)) == 0) {
+	pos += direction; i++;
+    }
+    *skipped = i;
 
-	/* skip over all the possible zeros in the file */
-	if (ch == 0 && i == 0){
-	    do {
-		pos += direction; i++;
-	    } while ((ch = get_byte (view, pos)) == 0);
-	    *skipped = i;
-	    i = 0;
-	    if (ch == -1)
-		break;
-	}
+    if (pos) {
+	prev = get_byte (view, pos - 1);
+	if ((prev == -1) || (prev == '\n'))
+	    prev = 0;
+    }
+
+    for (i = 0; ch > 0; ch = get_byte (view, pos)){
+
 	if (i == usable_size){
 	    buffer = grow_string_buffer (buffer, &buffer_size);
 	    usable_size = buffer_size - 2;
 	}
 
 	pos += direction; i++;
-	buffer [i] = ch;
 
-	if (ch == '\n' || !ch){
+	if (ch == '\n'){
 	    break;
 	}
+	buffer [i] = ch;
     }
     if (buffer){
 	buffer [0] = prev;
 	buffer [i] = 0;
-	
+
 	/* If we are searching backwards, reverse the string */
-	if (view->direction < 0)
-	    reverse_string (buffer);
+	if (direction < 0) {
+	    reverse_string (buffer + 1);
+	}
     }
 
     *p = pos;
@@ -1492,6 +1491,7 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
     Dlg_head *d = 0;
     int search_status;
 #ifdef HAVE_GNOME
+    char *msg;
     int abort;
     GtkWidget *gd;
 #endif
@@ -1507,10 +1507,12 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
 
 #ifdef HAVE_GNOME
     abort = 0;
-    gd = gnome_message_box_new (_("Searching for `%s'"),
+    msg = g_strdup_printf (_("Searching for `%s'"), text);
+    gd = gnome_message_box_new (msg,
 				GNOME_MESSAGE_BOX_INFO,
 				GNOME_STOCK_BUTTON_CANCEL,
 				NULL);
+    g_free (msg);
     gnome_dialog_button_connect (GNOME_DIALOG (gd), 0, GTK_SIGNAL_FUNC (cancel_pressed), &abort);
     gtk_widget_show (gd);
 #else

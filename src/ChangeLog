@@ -1,3 +1,13 @@
+2001-04-24  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* view.c (get_line_at): previous newline is right condition 
+	for regexp '^' pattern also, fixed
+
+	(search) [HAVE_GNOME]: gnome_message_box_new don't expand printf
+	pattern, so g_strdup_printf used
+
+	* find.c (find_parameters): don't use stat structure if mc_stat failed
+
 2001-04-17  Pavel Roskin  <proski@gnu.org>
 
 	* subshell.c (init_raw_mode): New function, separated from ...
