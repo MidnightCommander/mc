@@ -822,7 +822,7 @@ static void add_widgets_i18n(QuickWidget* qw, int len)
 
 static int
 add_new_entry_input (const char *header, const char *text1, const char *text2,
-		    const char *help, char **r1, char **r2)
+		     const char *help, char **r1, char **r2)
 {
 #define RELATIVE_Y_BUTTONS	4
 #define RELATIVE_Y_LABEL_PTH	3
@@ -892,8 +892,8 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
     
     Quick_input.widgets = quick_widgets;
     if ((i = quick_dialog (&Quick_input)) != B_CANCEL){
-	 *r1 = *(quick_widgets [5].str_result);
-	 *r2 = *(quick_widgets [3].str_result);
+	 *r1 = my_str1;
+	 *r2 = my_str2;
 	 return i;
     } else
 	 return 0;
@@ -901,22 +901,22 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
 
 static void add_new_entry_cmd (void)
 {
-    char *title = 0, *url = 0;
+    char *title, *url;
     int ret;
 
     /* Take current directory as default value for input fields */
     title = url = current_panel->cwd;
 
-    ret = add_new_entry_input (_("New hotlist entry"), _("Directory label"), _("Directory path"),
-	 "[Hotlist]", &title, &url);
+    ret = add_new_entry_input (_("New hotlist entry"), _("Directory label"),
+			       _("Directory path"), "[Hotlist]", &title, &url);
 
     if (!ret || !title || !*title || !url || !*url)
 	return;
 
     if (ret == B_ENTER || ret == B_APPEND)
-	add2hotlist (g_strdup (title),g_strdup (url), HL_TYPE_ENTRY, 2);
+	add2hotlist (title, url, HL_TYPE_ENTRY, 2);
     else
-	add2hotlist (g_strdup (title),g_strdup (url), HL_TYPE_ENTRY, 1);
+	add2hotlist (title, url, HL_TYPE_ENTRY, 1);
 
     hotlist_state.modified = 1;
 }
