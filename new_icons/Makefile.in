@@ -42,11 +42,15 @@ ALLICONS =						\
 	gnome-image-generic.png				\
 	gnome-application-encapsulated_postscript.png	\
 	gnome-application-pdf.png			\
+	gnome-application-pgp.png           \
 	gnome-application-postscript.png		\
 	gnome-application-x-c-header.png		\
 	gnome-application-x-c-source.png		\
 	gnome-application-x-cc-source.png		\
 	gnome-application-x-e-theme.png         \
+	gnome-application-x-kde-app-info.png    \
+	gnome-application-x-generic-spreadsheet.png \
+	gnome-application-x-gnome-app-info.png  \
 	gnome-application-x-java-source.png     \
 	gnome-application-x-php.png             \
 	gnome-application-x-reject.png          \
@@ -59,6 +63,12 @@ ALLICONS =						\
 	gnome-objectfile.png				\
 	gnome-textfile.png				\
 	gnome-tex.png					\
+	gnome-text-x-authors.png        \
+	gnome-text-x-copying.png        \
+	gnome-text-x-credits.png        \
+	gnome-text-x-install.png        \
+	gnome-text-x-makefile.png       \
+	gnome-text-x-readme.png         \
 	gnome-audio.png					\
 	gnome-audio-basic.png				\
 	gnome-audio-midi.png				\
@@ -71,6 +81,11 @@ ALLICONS =						\
 	gnome-audio-x-stm.png                   \
 	gnome-audio-x-voc.png				\
 	gnome-audio-x-wav.png				\
+	gnome-audio-x-xi.png                \
+	gnome-audio-x-xm.png                \
+	gnome-font-afm.png                  \
+	gnome-font-ttf.png                  \
+	gnome-font-x-pcf.png                \
 	gnome-image-psd.png				\
 	gnome-image-xcf.png             \
 	gnome-image-x-xfig.png
