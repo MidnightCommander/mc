@@ -255,6 +255,7 @@ context default
     keyword whole fwrite yellow
     keyword whole get_all_headers yellow
     keyword whole get_browser yellow
+    keyword whole get_class yellow
     keyword whole get_cfg_var yellow
     keyword whole get_current_user yellow
     keyword whole get_html_translation_table yellow
@@ -463,7 +464,6 @@ context default
     keyword whole ltrim yellow
     keyword whole magic_quotes_gpc yellow
     keyword whole magic_quotes_runtime yellow
-    keyword whole mail yellow
     keyword whole mail yellow
     keyword whole mailparse_determine_best_xfer_encoding yellow
     keyword whole mailparse_msg_create yellow
@@ -846,6 +846,7 @@ context default
     keyword whole str_pad yellow
     keyword whole str_repeat yellow
     keyword whole str_replace yellow
+    keyword whole strcasecmp yellow
     keyword whole strchr yellow
     keyword whole strcmp yellow
     keyword whole strcoll yellow
