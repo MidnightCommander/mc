@@ -85,7 +85,6 @@ typedef struct Dlg_head {
     int direction;
     int send_idle_msg;
 
-    char *name;			/* Dialog name Tk code */
     char *help_ctx;
 
     /* Internal variables */
@@ -94,8 +93,7 @@ typedef struct Dlg_head {
     
     struct Widget_Item *initfocus;
 
-    /* Hacks */
-    char *title;
+    char *title;	/* Title of the dialog */
 
     int cols;
     int lines;
@@ -103,9 +101,6 @@ typedef struct Dlg_head {
     
     int  has_menubar;	/* GrossHack: Send events on row 1 to a menubar? */
     int  raw;		/* Should the tab key be sent to the dialog? */
-    
-    widget_data wdata;
-    int  grided;	/* Does it use the automatic layout? */
 } Dlg_head;
 
 /* Every Widget must have this as it's first element */

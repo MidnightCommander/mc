@@ -210,7 +210,6 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
     new_d->y = y1;
     new_d->cols = cols;
     new_d->lines = lines;
-    new_d->name = name;
     return (new_d);
 }
 
