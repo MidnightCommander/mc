@@ -1,5 +1,7 @@
 2002-12-26  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Release 4.6.0-pre2, bump version to 4.6.0-pre2a.
+
 	* configure.in: Fix non-portable operator.  Bump version to
 	4.6.0-pre2.
 
