@@ -1,89 +1,102 @@
 #! /usr/bin/perl
 #
 # External filesystem for mc, using mtools
-# Written Ludek Brukner (lubr@barco.cz), 1997
+# Written Ludek Brukner <lubr@barco.cz>, 1997
+# Much improved by Tom Perkins <968794022@noid.net>, 2000
 #
 # WARNING - This software is ALPHA - Absolutely NO WARRANTY
 # 
 
-### Change this when the commands are outside PATH
-$mdir = "mdir";
+# These mtools components must be in PATH for this to work
+$mmd = "mmd";
+$mrd = "mrd";
+$mdel = "mdel";
+$mdir = "mdir -a";
 $mcopy = "mcopy -noQ";
-###
 
+$0 =~ s|.*/||;
 $disk = $0;
-$disk =~ s/^.*\/([^\/]*)$/\1/;
+
+SWITCH: for ( $ARGV[0] ) {
+  /list/ && do {
+    @dirs = get_dirs("");
+    while ($dir = shift(@dirs)) {
+      push @dirs, get_dirs("$dir/");
+    } exit 0; };
+  /mkdir/ && do {
+    shift; shift;
+    exit 1 if scalar(@ARGV) != 1;
+    system("$mmd $disk:/$ARGV[0] >& /dev/null");
+    exit 0; };
+  /rmdir/ && do {
+    shift; shift;
+    exit 1 if scalar(@ARGV) != 1;
+    system("$mrd $disk:/$ARGV[0] >& /dev/null");
+    exit 0; };
+  /rm/ && do {
+    shift; shift;
+    exit 1 if scalar(@ARGV) != 1;
+    system("$mdel $disk:/$ARGV[0] >& /dev/null");
+    exit 0; };
+  /copyout/ && do {
+    shift; shift;
+    exit 1 if scalar(@ARGV) != 2;
+    ( $src, $dest ) = @ARGV;
+    system("$mcopy $disk:/$src $dest >& /dev/null");
+    exit 0; };
+  /copyin/ && do {
+    shift; shift;
+    exit 1 if scalar(@ARGV) != 2;
+    ( $dest, $src ) = @ARGV;
+    system("$mcopy $src $disk:/$dest >& /dev/null");
+    exit 0; };
+  /.*/ && do {                               # an unfamiliar command
+    exit 1; };
+}
 
 sub get_dirs {
-    my ($path, $name, $size, $date, $time, $longname, @lst, @rv);
+  my ($path, $name, $size, $date, $time, $longname, @lst, @rv);
 
-    $path = shift(@_);
-    @rv = ();
+  $path = shift(@_);
+  @rv = ();
 
-    open(FILE,"$mdir $disk:/$path |");
-    while ( <FILE> ) {
-	chomp();
-	/^ / && next;                            # ignore `non-file' lines
-	/^$/ && next;                            # ignore empty lines
-	/^\.\.?/ && next;                        # ignore `.' and `..'
+  open(FILE,"$mdir $disk:/$path |");
+  while ( <FILE> ) {
+    chomp();
+    /^ / && next;                            # ignore `non-file' lines
+    m{^Directory for $0:/}i && next;         # ignore `non-file' lines
+    /^$/ && next;                            # ignore empty lines
+    /^\.\.?/ && next;                        # ignore `.' and `..'
 
-	$name = substr($_,0,12);
-	$name =~ s/^([^ ]*) +([^ ]+)[ \t]*$/$1.$2/;
-	$name =~ s/[ .]+$//;
+    $name = substr($_,0,12);
+    $name =~ s/^([^ ]*) +([^ ]+)[ \t]*$/$1.$2/;
+    $name =~ s/[ .]+$//;
 
-	$_ = substr($_,12);
-	s/^[ ]+//;
+    $_ = substr($_,12);
+    s/^[ ]+//;
 
-	($size,$date,$time,$longname) = split(/[ \t]+/);
+    ($size,$date,$time,$longname) = split(/[ \t]+/);
 
-        @lst = split(/([:ap])/, $time);
-        $lst[0] += 12 if ($lst[3] eq "p");
-	$time = sprintf("%02d:%02d", $lst[0], $lst[2]);
-	@lst = split(/-/, $date);
-	$lst[2] %= 100 if ($lst[2] > 100);
-	$date = sprintf ("%02d-%02d-%02d", @lst);
+    @lst = split(/([:ap])/, $time);
+    $lst[0] += 12 if ($lst[3] eq "p");
+    $time = sprintf("%02d:%02d", $lst[0], $lst[2]);
+    @lst = split(/-/, $date);
+    $lst[2] %= 100 if ($lst[2] > 100);
+    $date = sprintf ("%02d-%02d-%02d", @lst);
 
-	$name = $path . lc(($longname) ? $longname : $name);
+    $name = $path . lc(($longname) ? $longname : $name);
 
-	if ($size =~ /DIR/) {
-	    printf("drwxr-xr-x   1 %-8d %-8d %8d %s %s %s\n", 0, 0, 0, $date, $time, $name);
-	   push @rv, $name;
-	}
-	else {
-	    printf("-rw-r--r--   1 %-8d %-8d %8d %s %s %s\n", 0, 0, $size, $date, $time, $name);
-	}
+    if ($size =~ /DIR/) {
+      printf("drwxr-xr-x   1 %-8d %-8d %8d %s %s %s\n",
+        0, 0, 0, $date, $time, $name);
+      push @rv, $name;
+    } else {
+      printf("-rw-r--r--   1 %-8d %-8d %8d %s %s %s\n",
+        0, 0, $size, $date, $time, $name);
     }
-    close(FILE);
-    return @rv;
+  }
+  close(FILE);
+  return @rv;
 }
 
-sub a_list
-{
-    my (@files, $file);
-
-    @files = get_dirs("");
-    while ($file = shift(@files)) {
-	    push @files, get_dirs("$file/");
-    }
-}
-
-sub a_copyout
-{
-    my($archname,$filename,$dest) = @_;
-    system "$mcopy $disk:/$filename $dest >& /dev/null";
-}
-
-#    system "touch /tmp/deb";
-
-sub a_copyin
-{
-    my($archname,$filename,$dest) = @_;
-    system "$mcopy $dest $disk:/$filename >& /dev/null";
-}
-
-if($ARGV[0] eq "list") { shift; &a_list(@ARGV); exit 0; }
-elsif($ARGV[0] eq "copyout") { shift; &a_copyout(@ARGV); exit 0; }
-elsif($ARGV[0] eq "copyin") { shift; &a_copyin(@ARGV); exit 0; }
-
-exit 1;
-
+1;

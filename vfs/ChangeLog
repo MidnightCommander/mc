@@ -1,3 +1,7 @@
+2000-09-14  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* vfs.c, extfs/{a,extfs.ini} Improved /#a filesystem
+
 2000-09-14  Pavel Roskin  <proski@gnu.org>
 
 	* Make-mc.in: direntry.c was listed twice in VFSSRCS
