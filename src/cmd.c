@@ -1424,8 +1424,9 @@ void undelete_cmd (void)
 	       "  files on: (F1 for details)"),
 	     "[Undelete File System]", "/#undel:", 0);
 }
-#endif
+#endif /* USE_EXT2FSLIB */
 
+#ifndef HAVE_GNOME
 void quick_cd_cmd (void)
 {
     char *p = cd_dialog ();
@@ -1439,6 +1440,7 @@ void quick_cd_cmd (void)
     if (p)
        g_free (p);
 }
+#endif /* !HAVE_GNOME */
 
 void 
 dirsizes_cmd (void)

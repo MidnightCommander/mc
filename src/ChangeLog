@@ -1,5 +1,9 @@
 2001-05-29  Pavel Roskin  <proski@gnu.org>
 
+	* cmd.c (quick_cd_cmd) [HAVE_GNOME]: Disable.
+	* main.c (sort_cmd) [HAVE_GNOME]: Likewise.
+	(ctl_x_map) [HAVE_GNOME]: Disable "Ctrl-x j" - background jobs.
+
 	* color.c (init_colors) [HAVE_SLANG]: Use "default" instead of
 	NULL as color names - this works even if COLORFGBG is unset.
 	Don't check HAS_DIRECT_COLOR_ACCESS - it's now meaningless.

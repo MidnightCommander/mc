@@ -1193,6 +1193,7 @@ set_sort_to (WPanel *p, sortfn *sort_order)
     do_re_sort (p);
 }
 #endif
+#ifndef HAVE_GNOME
 void
 sort_cmd (void)
 {
@@ -1209,7 +1210,6 @@ sort_cmd (void)
 
 }
 
-#ifndef HAVE_GNOME
 static void
 tree_box (void)
 {
@@ -1763,7 +1763,7 @@ static const key_map ctl_x_map [] = {
 #endif
     { 'h',          add2hotlist_cmd },
     { '!',          external_panelize },
-#ifdef WITH_BACKGROUND
+#if defined(WITH_BACKGROUND) && !defined(HAVE_GNOME)
     { 'j',          jobs_cmd },
 #endif
 #ifdef HAVE_SETSOCKOPT
