@@ -49,4 +49,3 @@
 #undef WITH_NISPLUS
 #undef WITH_NISPLUS_HOME
 #undef WITH_SSL
-#undef WITH_SYSLOG

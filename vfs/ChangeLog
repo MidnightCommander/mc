@@ -1,5 +1,6 @@
 2001-11-13  Andrew V. Samoilov  <kai@cmail.ru>
 
+	* samba/acconfig.h: Remove WITH_SYSLOG.
 	* samba/lib/system.c (sys_chroot): Removed.
 	* samba/configure.in: Remove RUNPROG.  Don't check 
 	for chroot and execl functions.
