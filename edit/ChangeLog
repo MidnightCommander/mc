@@ -1,3 +1,9 @@
+2002-11-06  Pavel Roskin  <proski@gnu.org>
+
+	* editcmd.c (edit_save_file): Restore ownership before access
+	mode, not after.  Otherwise suid bit is lost.
+	Reported by Nerijus Baliunas <nerijus@users.sourceforge.net>
+
 2002-10-30  Pavel Roskin  <proski@gnu.org>
 
 	* edit.c: Include charset.h unconditionally, use new conversion

@@ -229,8 +229,8 @@ int edit_save_file (WEdit * edit, const char *filename)
     } else
 	savename = g_strdup (filename);
 
-    mc_chmod (savename, edit->stat1.st_mode);
     mc_chown (savename, edit->stat1.st_uid, edit->stat1.st_gid);
+    mc_chmod (savename, edit->stat1.st_mode);
 
     if ((fd = mc_open (savename, O_CREAT | O_WRONLY | O_TRUNC | O_BINARY ,
 		    edit->stat1.st_mode)) == -1)
