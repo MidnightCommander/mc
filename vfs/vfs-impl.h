@@ -46,7 +46,7 @@ struct vfs_class {
 		  struct utimbuf * times);
 
     int (*readlink) (struct vfs_class *me, const char *path, char *buf,
-		     int size);
+		     size_t size);
     int (*symlink) (struct vfs_class *me, const char *n1, const char *n2);
     int (*link) (struct vfs_class *me, const char *p1, const char *p2);
     int (*unlink) (struct vfs_class *me, const char *path);

@@ -410,7 +410,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
 	char *bp, *data;
 	int size, written;
 
-	if (h_size > MC_MAXPATHLEN) {
+	if (*h_size > MC_MAXPATHLEN) {
 	    message (1, MSG_ERROR, _("Inconsistent tar archive"));
 	    return STATUS_BADCHECKSUM;
 	}

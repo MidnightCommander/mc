@@ -1669,7 +1669,8 @@ ftpfs_fill_names (struct vfs_class *me, fill_names_f func)
 }
 
 static char buffer[BUF_MEDIUM];
-static char *netrc, *netrcp;
+static char *netrc;
+static const char *netrcp;
 
 /* This should match the keywords[] array below */
 typedef enum {

@@ -974,13 +974,13 @@ static int extfs_fstat (void *data, struct stat *buf)
 }
 
 static int
-extfs_readlink (struct vfs_class *me, const char *path, char *buf, int size)
+extfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
 {
     struct archive *archive;
     char *q;
     size_t len;
     struct entry *entry;
-    char *mpath = g_strdup(path);
+    char *mpath = g_strdup (path);
     int result = -1;
 
     if ((q = extfs_get_path_mangle (mpath, &archive, 0, 0)) == NULL)
@@ -993,8 +993,10 @@ extfs_readlink (struct vfs_class *me, const char *path, char *buf, int size)
     	goto cleanup;
     }
     len = strlen (entry->inode->linkname);
-    result = len > (size - 1) ? size - 1 : len;
-    g_strlcpy (buf, entry->inode->linkname, result + 1);
+    if (size < len)
+       len = size;
+    /* readlink() does not append a NUL character to buf */
+    memcpy (buf, entry->inode->linkname, result = len);
 cleanup:
     g_free (mpath);
     return result;
