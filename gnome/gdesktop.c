@@ -1752,7 +1752,7 @@ desktop_icon_set_busy (DesktopIconInfo *dii, int busy)
 	if (!GTK_WIDGET_REALIZED (dii->dicon))
 		return;
 
-	cursor = gdk_cursor_new (busy ? GDK_WATCH : GDK_TOP_LEFT_ARROW);
+	cursor = gdk_cursor_new (busy ? GDK_WATCH : GDK_LEFT_PTR);
 	gdk_window_set_cursor (dii->dicon->window, cursor);
 	gdk_cursor_destroy (cursor);
 	gdk_flush ();
@@ -3246,7 +3246,7 @@ click_proxy_button_press (GtkWidget *widget, GdkEventButton *event, gpointer dat
 
 		XGrabServer (GDK_DISPLAY ());
 
-		cursor = gdk_cursor_new (GDK_TOP_LEFT_ARROW);
+		cursor = gdk_cursor_new (GDK_LEFT_PTR);
 		gdk_pointer_grab (GDK_ROOT_PARENT (),
 				  FALSE,
 				  GDK_BUTTON_RELEASE_MASK | GDK_POINTER_MOTION_MASK,

@@ -989,9 +989,7 @@ set_cursor_normal (WPanel *panel)
 	if (is_a_desktop_panel (panel))
 		return;
 
-	cursor = gdk_cursor_new (GDK_TOP_LEFT_ARROW);
-	gdk_window_set_cursor (GTK_WIDGET (panel->xwindow)->window, cursor);
-	gdk_cursor_destroy (cursor);
+	gdk_window_set_cursor (GTK_WIDGET (panel->xwindow)->window, NULL);
 	gdk_flush ();
 }
 

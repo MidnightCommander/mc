@@ -1,3 +1,15 @@
+2001-04-14  Federico Mena Quintero  <federico@ximian.com>
+
+	* gdesktop.c (desktop_icon_set_busy): Use a pretty arrow instead
+	of GDK_TOP_LEFT_ARROW.
+	(click_proxy_button_press): Likewise.
+
+	* gcmd.c (set_cursor_normal): Set the cursor to NULL so that we
+	pick up the cursor that the window manager set for us.
+
+	* gscreen.c (panel_tree_scan_begin): Use set_cursor_busy().
+	(panel_tree_scan_end): Uset set_cursor_normal().
+
 2001-04-11  Miguel de Icaza  <miguel@ximian.com>
 
 	* gdesktop.c (should_hide_nautilus_file): New function, used to

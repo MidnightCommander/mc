@@ -1730,26 +1730,21 @@ panel_chdir (GtkDTree *dtree, char *path, WPanel *panel)
 }
 
 static void
-set_cursor (WPanel *panel, GdkCursorType type)
-{
-	GdkCursor *cursor;
-
-	cursor = gdk_cursor_new (type);
-	gdk_window_set_cursor (GTK_WIDGET (panel->xwindow)->window, cursor);
-	gdk_cursor_destroy (cursor);
-	gdk_flush ();
-}
-
-static void
 panel_tree_scan_begin (GtkWidget *widget, gpointer data)
 {
-	set_cursor (data, GDK_WATCH);
+	WPanel *panel;
+
+	panel = data;
+	set_cursor_busy (panel);
 }
 
 static void
 panel_tree_scan_end (GtkWidget *widget, gpointer data)
 {
-	set_cursor (data, GDK_TOP_LEFT_ARROW);
+	WPanel *panel;
+
+	panel = data;
+	set_cursor_normal (panel);
 }
 
 /* Handler for the possibly_ungrab signal of the dtree widget */
