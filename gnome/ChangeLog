@@ -1,3 +1,7 @@
+1999-09-11  Owen Taylor  <otaylor@redhat.com>
+
+	* gcorba.c (Window_close): Fixed typo in cast.
+
 1999-09-10  Federico Mena Quintero  <federico@redhat.com>
 
 	* gmount.c (setup_devices): See if our supported automounter,

@@ -132,7 +132,7 @@ Window_close (PortableServer_Servant servant, CORBA_Environment *ev)
 {
 	WindowServant *ws;
 
-	ws = (WindowServant *) ws;
+	ws = (WindowServant *) servant;
 	gnome_close_panel (GTK_WIDGET (ws->panel->xwindow), ws->panel);
 }
 
