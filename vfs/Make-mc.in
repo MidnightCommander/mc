@@ -107,7 +107,6 @@ SAMBA_DIST =			\
 	lib/debug.c		\
 	lib/doscalls.c		\
 	lib/genrand.c		\
-	lib/getsmbpass.c	\
 	lib/interface.c		\
 	lib/kanji.c		\
 	lib/md4.c		\

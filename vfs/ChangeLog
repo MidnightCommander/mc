@@ -1,3 +1,7 @@
+2001-11-08  Pavel Roskin  <proski@gnu.org>
+
+	* Make-mc.in (SAMBA_DIST): Remove lib/getsmbpass.c.
+
 2001-11-05  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* smbfs.c (smbfs_add_dots): New function. Insert a "." and ".."
@@ -74,7 +78,7 @@
 
 2001-10-16  Andrew V. Samoilov  <kai@cmail.ru>
 
-	* samba/libsmb/clientgen.c (cli_RNetShareEnum): Fix Win2k 
+	* samba/libsmb/clientgen.c (cli_RNetShareEnum): Fix Win2k
 	"out of server memory" error. From samba 2.0.7 patchset.
 
 2001-10-07  Pavel Roskin  <proski@gnu.org>
