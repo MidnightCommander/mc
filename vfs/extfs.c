@@ -210,9 +210,9 @@ static FILE *open_archive (int fstype, char *name, struct archive **pparc)
                         " list ", local_name ? local_name : tmp, NULL);
     if (tmp)
 	g_free (tmp);
+    g_free (mc_extfsdir);
     result = popen (cmd, "r");
     g_free (cmd);
-    g_free (mc_extfsdir);
     if (result == NULL) {
         if (local_name != NULL && uses_archive)
             mc_ungetlocalcopy (name, local_name, 0);
@@ -284,7 +284,7 @@ static int read_archive (int fstype, char *name, struct archive **pparc)
                 if (*cfn == '/')
                     cfn++;
                 p = strchr (cfn, 0);
-                if (p != NULL && p != cfn && *(p - 1) == '/')
+                if (p != cfn && *(p - 1) == '/')
                     *(p - 1) = 0;
                 p = strrchr (cfn, '/');
                 if (p == NULL) {
@@ -465,11 +465,11 @@ static char *get_path_from_entry (struct entry *entry)
     }
 
     if (len == 0)
-	    return g_strdup ("");
+	return g_strdup ("");
     
     localpath = g_malloc (len);
     *localpath = '\0';
-    for ( ; head; ) {
+    while (head) {
 	strcat (localpath, head->name);
 	if (head->next)
 	    strcat (localpath, "/");
@@ -611,7 +611,7 @@ static void *extfs_open (vfs *me, char *file, int flags, int mode)
 
 	    handle = open(entry->inode->local_filename, O_RDWR | O_CREAT | O_EXCL, 0600);
 	    if (handle == -1)
-	      return NULL;
+		return NULL;
 	    close(handle);
 	}
 	p = get_path_from_entry (entry);
@@ -689,18 +689,19 @@ static int extfs_close (void *data)
 			    file->entry->inode->local_filename, NULL);
 	g_free (archive_name);
 	g_free (file_name);
+	g_free (mc_extfsdir);
 	if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID | EXECUTE_WAIT, shell, cmd))
 	    errno_code = EIO;
 	g_free (cmd);
-	g_free (mc_extfsdir);
-        {
-          struct stat file_status;
-          if( stat(file->entry->inode->local_filename,&file_status) != 0 )
-            errno_code = EIO;
-          else  file->entry->inode->size = file_status.st_size;
-       }
+	{
+	    struct stat file_status;
+	    if (stat(file->entry->inode->local_filename,&file_status) != 0)
+    		errno_code = EIO;
+	    else
+		file->entry->inode->size = file_status.st_size;
+	}
 
-      file->entry->inode->mtime = time (NULL);
+	file->entry->inode->mtime = time (NULL);
     }
     
     file->archive->fd_usage--;
@@ -771,9 +772,9 @@ static int extfs_unlink (vfs *me, char *file)
     g_free (mc_extfsdir);
     g_free (archive_name);
     if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID | EXECUTE_WAIT, shell, cmd)){
-            g_free (cmd);
-            my_errno = EIO;
-            return -1;
+        g_free (cmd);
+        my_errno = EIO;
+        return -1;
     }
     g_free (cmd);
     remove_entry (entry);
@@ -791,12 +792,12 @@ static int extfs_mkdir (vfs *me, char *path, mode_t mode)
     char *archive_name, *p;
 
     if ((q = get_path_mangle (path, &archive, 0, 0)) == NULL)
-	    return -1;
+	return -1;
     entry = find_entry (archive->root_entry, q, 0, 0);
     if (entry != NULL) ERRNOR (EEXIST, -1);
     entry = find_entry (archive->root_entry, q, 1, 0);
     if (entry == NULL)
-	    return -1;
+	return -1;
     if ((entry = my_resolve_symlinks (entry)) == NULL)
 	return -1;
     if (!S_ISDIR (entry->inode->mode)) ERRNOR (ENOTDIR, -1);
@@ -813,10 +814,10 @@ static int extfs_mkdir (vfs *me, char *path, mode_t mode)
     g_free (mc_extfsdir);
     g_free (archive_name);
     if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID | EXECUTE_WAIT, shell, cmd)){
-            g_free (cmd);
-            my_errno = EIO;
-	    remove_entry (entry);
-            return -1;
+	g_free (cmd);
+	my_errno = EIO;
+	remove_entry (entry);
+	return -1;
     }
     g_free (cmd);
 
@@ -853,9 +854,9 @@ static int extfs_rmdir (vfs *me, char *path)
     g_free (mc_extfsdir);
     g_free (archive_name);
     if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID | EXECUTE_WAIT, shell, cmd)){
-            g_free (cmd);
-            my_errno = EIO;
-            return -1;
+        g_free (cmd);
+        my_errno = EIO;
+        return -1;
     }
     g_free (cmd);
     remove_entry (entry);
@@ -866,7 +867,7 @@ static int extfs_rmdir (vfs *me, char *path)
 static int extfs_chdir (vfs *me, char *path)
 {
     struct archive *archive;
-    char *q, *res;
+    char *q;
     struct entry *entry;
 
     my_errno = ENOTDIR;
@@ -879,9 +880,6 @@ static int extfs_chdir (vfs *me, char *path)
     if ((!entry) || (!S_ISDIR (entry->inode->mode)))
     	return -1;
     entry->inode->archive->current_dir = entry;
-    res = g_strconcat (
-        entry->inode->archive->name, "#", extfs_prefixes [entry->inode->archive->fstype], 
-	"/", q, NULL);
     my_errno = 0;
     return 0;
 }
@@ -923,8 +921,7 @@ static int extfs_nothingisopen (vfsid id)
 {
     if (((struct archive *)id)->fd_usage <= 0)
     	return 1;
-    else
-    	return 0;
+    return 0;
 }
 
 static void remove_entry (struct entry *e)
@@ -939,19 +936,19 @@ static void remove_entry (struct entry *e)
     }
     pe = e->dir;
     if (e == pe->inode->first_in_subdir)
-	    pe->inode->first_in_subdir = e->next_in_dir;
+	pe->inode->first_in_subdir = e->next_in_dir;
 
     prev = NULL;
     for (ent = pe->inode->first_in_subdir; ent && ent->next_in_dir;
 	 ent = ent->next_in_dir)
 	    if (e == ent->next_in_dir) {
-		    prev = ent;
-		    break;
+		prev = ent;
+		break;
 	    }
     if (prev)
-	    prev->next_in_dir = e->next_in_dir;
+	prev->next_in_dir = e->next_in_dir;
     if (e == pe->inode->last_in_subdir)
-	    pe->inode->last_in_subdir = prev;
+	pe->inode->last_in_subdir = prev;
 
     if (i <= 0) {
         if (e->inode->local_filename != NULL) {
