@@ -1,3 +1,9 @@
+1999-02-11  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gutil.c (my_system_get_child_pid): Implement a erase-temp-file
+	when child dies instead of waiting for child that was launched
+	from shell/temp-file to finish.
+
 1999-02-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_icon_info_place): Better icon placement by
