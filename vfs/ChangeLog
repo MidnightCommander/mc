@@ -1,3 +1,7 @@
+Wed Mar 25 19:01:48 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* extfs/hp48: Added a usage summary
+
 Mon Mar 23 00:42:21 1998  Christofer Edvardsen <ce@earthling.net>
 
 	* Makefile.in, extfs/extfs.ini, extfs/hp48: New external

@@ -177,10 +177,14 @@ free_file (WView *view)
     }
 }
 
+/* Valid parameters for second parameter to set_monitor */
+enum { off, on };
+
 /* Both views */
 void
 view_done (WView *view)
 {
+	set_monitor (view, off);
 #ifndef HAVE_MMAP
 	/* alex: release core, used to replace mmap */
 	if (!view->growing_buffer && view->data != (unsigned char*)0)
@@ -2011,8 +2015,6 @@ check_left_right_keys (WView *view, int c)
 
     return 1;
 }
-
-enum { off, on };
 
 void
 set_monitor (WView *view, int set_on)

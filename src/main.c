@@ -1089,42 +1089,6 @@ sort_cmd (void)
     do_re_sort (p);
 }
 
-#if 0
-/* .ado: 28.05.97:
-   jump to the directory which is .. relative to dir_name.
-   e.g.: dir_name = /a/b/c      ==> jump to /a/b
-*/
-static void
-jump2dotdot(char *dir_name)
-{
-    register int i;
-    int          namelen = strlen (dir_name);
-    static char  tmp_name[MC_MAXPATHLEN];
-    
-    i = namelen - 1;
-    while (i) {
-	if (dir_name[i--] == PATH_SEP){
-	    break;  /* break out of while */
-	}
-    }
-    strcpy (tmp_name, dir_name);
-    if (i == 0)                                             /* On the top PATH_SEP */
-	tmp_name [1] = 0;
-    else {
-#ifdef OS2_NT	
-        /* Important for NT and OS/2: */
-	if (dir_name [i] == ':') {       /* on top <DRV_LETTER>: */
-	    tmp_name [i+2] = 0;
-	} else 
-#endif    
-	    tmp_name [i+1] = 0;
-
-    }
-    do_cd (tmp_name, cd_exact);
-    return;
-}
-#endif
-
 static void
 tree_box (void)
 {
@@ -1132,12 +1096,7 @@ tree_box (void)
 
     sel_dir = tree (selection (cpanel)->fname);
     if (sel_dir){
-#if 0	
-       	jump2dotdot(sel_dir);
-	try_to_select (cpanel, sel_dir);
-#else
 	do_cd(sel_dir, cd_exact);
-#endif
 	free (sel_dir);
     }
 }

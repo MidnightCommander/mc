@@ -4,9 +4,21 @@
 #
 # This script makes it possible to view and copy files to/from a hp48
 # (tested with a HP48G and the emulator x48)
-# To make "cd hp48:" work add this to extfs.ini: hp48:=hp48
-# 
-
+#
+# To use the hp48 external filesystem:
+#      - read the relevant parts of your HP48 manual
+#      - install kermit
+#      - connect the HP48 to your computer or start x48
+#      - below change the line which reflects the serial device you use
+#      - configure your HP48 (<left shift> - i/o - iopar): 
+#        port: wire
+#        baud: 9600 
+#        transfer format: binary (fast transfers) or
+#                         ascii (editable on the pc)
+#      - start the server on the HP48: <left shift> - i/o - srvr - serve
+#        or the shortcut <right shift> - <right arrow>
+#      - on MC's commandline enter "cd hp48:"
+#
 # Make sure you have kermit installed and that it's using the right serial
 # device by changing /dev/ttyXX on the next line
 KERMIT="kermit -l /dev/ttyS1 -b 9600"

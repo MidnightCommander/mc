@@ -502,7 +502,7 @@ void init_subshell (void)
 	goto write_it;
 
 	case TCSH:
-	sprintf (precmd, "alias precmd 'echo $cwd>>%s;kill -STOP $$'\n", tcsh_fifo);
+	sprintf (precmd, "alias precmd 'echo $cwd:q >>%s;kill -STOP $$'\n", tcsh_fifo);
 
 	write_it:
 	write (subshell_pty, precmd, strlen (precmd));

@@ -1,3 +1,16 @@
+Wed Mar 25 19:05:31 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* view.c (view_done): Set monitor off before deleting the view
+	file dialog.
+
+	* subshell.c (init_subshell): Added ':q' to $cwd in the precmd for 
+	tcsh. It preventes command and filename substitution (e.g. for
+	a directory named "[word] words")
+
+Mon Mar 23 18:06:10 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* main.c: Deleted some old and unused code
+
 1998-03-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* All over the src/ directory: Internationalization changes.
