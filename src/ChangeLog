@@ -1,3 +1,7 @@
+2001-08-19  Pavel Roskin  <proski@gnu.org>
+
+	* regex.c (regex_compile): Warning fix for ambiguous else.
+
 2001-08-18  Pavel Roskin  <proski@gnu.org>
 
 	* key.c (xmouse_get_event): Filter out GPM_UP events that don't
