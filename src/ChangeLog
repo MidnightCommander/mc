@@ -1,5 +1,8 @@
 2002-09-24  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c (string_file_nuid): Fix a warning with uClibc.
+	(string_file_ngid): Likewise.
+
 	* mountlist.c: Restore sys/param.h before sys/mount.h - it's
 	required on FreeBSD.
 	Reported by Pavel Shirshov <pavelsh@mail.ru>

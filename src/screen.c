@@ -302,7 +302,8 @@ string_inode (file_entry *fe, int len)
 {
     static char buffer [10];
 
-    g_snprintf (buffer, sizeof (buffer), "%lu", (unsigned long) fe->buf.st_ino);
+    g_snprintf (buffer, sizeof (buffer), "%lu",
+		(unsigned long) fe->buf.st_ino);
     return buffer;
 }
 
@@ -312,7 +313,8 @@ string_file_nuid (file_entry *fe, int len)
 {
     static char buffer [10];
 
-    g_snprintf (buffer, sizeof (buffer), "%d", fe->buf.st_uid);
+    g_snprintf (buffer, sizeof (buffer), "%lu",
+		(unsigned long) fe->buf.st_uid);
     return buffer;
 }
 
@@ -322,7 +324,8 @@ string_file_ngid (file_entry *fe, int len)
 {
     static char buffer [10];
 
-    g_snprintf (buffer, sizeof (buffer), "%d", fe->buf.st_gid);
+    g_snprintf (buffer, sizeof (buffer), "%lu",
+		(unsigned long) fe->buf.st_gid);
     return buffer;
 }
 
