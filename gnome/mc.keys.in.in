@@ -41,6 +41,7 @@ application/*spreadsheet*:
 
 application/x-gzip:
 	icon-filename=@icondir@/gnome-compressed.png
+	open.extract.Extract=gzip -d %f
 
 application/x-object-file:
 	icon-filename=@icondir@/gnome-objectfile.png
@@ -101,6 +102,7 @@ application/x-compressed-tar
 	fm-open=%cd %p#utar
 	fm-view=%view{ascii} gzip -dc %f 2>/dev/null | tar tvvf -
 	icon-filename=@icondir@/gnome-package.png
+	open.extract.Extract=gzip -dc %f 2>/dev/null | tar xf -
 
 application/x-bzip-compressed-tar
 	fm-open=%cd %p#utar
@@ -174,9 +176,9 @@ application/x-kde-app-info:
 	icon-filename=@icondir@/gnome-application-x-kde-app-info.png
 
 application/x-tex:
-	open.tex."TeX this file"=tex %f
+	open.tex.TeX this file=tex %f
 	flags.tex.flags=needsterminal
-	open.latex."LaTeX this file"=latex %f
+	open.latex.LaTeX this file=latex %f
 	flags.latex.flags=needsterminal
 	icon-filename=@icondir@/gnome-tex.png
 
