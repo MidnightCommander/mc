@@ -2154,7 +2154,6 @@ La finestra Permessi serve a cambiare i bit di attributo in gruppi di
 file o directory. La si può invocare con la combinazione di tasti C-x c.
 .PP
 La finestra dei Permessi ha due parti -
-The Chmod window has two parts -
 .I Permessi
 e
 .I File
