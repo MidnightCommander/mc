@@ -8,8 +8,8 @@
 
 
 #include <config.h>
-#include <gnome.h>
 #include "global.h"
+#include <gnome.h>
 #include "panel.h"
 #include "cmd.h"
 #include "dialog.h"

@@ -355,8 +355,6 @@ switch_metadata_box (GnomeFilePropertyDialog *fp_dlg)
 
 	if (fp_dlg->desktop_url){
 		gtk_entry_set_text (GTK_ENTRY (fp_dlg->desktop_entry), fp_dlg->desktop_url);
-		fp_dlg->changing = FALSE;
-		return;
 	}
 	
 	if (fp_dlg->executable) {
@@ -998,25 +996,23 @@ gnome_file_property_dialog_new (gchar *file_name, gboolean can_set_icon)
 		gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
 					  create_url_properties (fp_dlg),
 					  gtk_label_new (_("URL")));
-	else {
-		gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
-					  create_general_properties (fp_dlg),
-					  gtk_label_new (_("Statistics")));
+	gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
+				  create_general_properties (fp_dlg),
+				  gtk_label_new (_("Statistics")));
 	
-		new_page = create_settings_pane (fp_dlg);
-		if (new_page)
-			gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
-						  new_page,
-						  gtk_label_new (_("Options")));
+	new_page = create_settings_pane (fp_dlg);
+	if (new_page)
 		gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
-					  create_perm_properties (fp_dlg),
-					  gtk_label_new (_("Permissions")));
-		gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (fp_dlg)->vbox),
-				    notebook, TRUE, TRUE, 0);
-		title_string = g_strconcat (rindex (file_name, '/') + 1, _(" Properties"), NULL);
-		gtk_window_set_title (GTK_WINDOW (fp_dlg), title_string);
-		g_free (title_string);
-	}
+					  new_page,
+					  gtk_label_new (_("Options")));
+	gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
+				  create_perm_properties (fp_dlg),
+				  gtk_label_new (_("Permissions")));
+	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (fp_dlg)->vbox),
+			    notebook, TRUE, TRUE, 0);
+	title_string = g_strconcat (rindex (file_name, '/') + 1, _(" Properties"), NULL);
+	gtk_window_set_title (GTK_WINDOW (fp_dlg), title_string);
+	g_free (title_string);
 	
 	gnome_dialog_append_button ( GNOME_DIALOG(fp_dlg), 
 				     GNOME_STOCK_BUTTON_OK);
@@ -1098,9 +1094,9 @@ apply_uid_group_change (GnomeFilePropertyDialog *fpd)
 static gint
 apply_name_change (GnomeFilePropertyDialog *fpd)
 {
-	gchar *new_name;
-	gchar *base_name;
-	gchar *full_target;
+	char *new_name;
+	char *base_name;
+	char *full_target;
 	FileOpContext *ctx;
 	long   count = 0;
 	double bytes = 0;
