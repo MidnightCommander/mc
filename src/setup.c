@@ -573,7 +573,6 @@ load_setup (void)
 	    display_codepage = get_codepage_index( cpname );
     }
 
-    init_printable_table( display_codepage );
     init_translation_table( source_codepage, display_codepage );
 #endif /* HAVE_CHARSET */
 }

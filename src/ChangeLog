@@ -1,3 +1,16 @@
+2002-02-04  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* util.c [!HAVE_TRUNCATE] (truncate): Close fd if my_ftruncate
+	fails.
+
+	* util.c [HAVE_CHARSET] (is_printable): Eliminate printable.
+	* setup.c [HAVE_CHARSET] (load_setup): Don't use
+	init_printable_table.
+
+	* charsets.h: Don't declare init_printable_table ().
+	* charset.c (printable): Removed.
+	(init_printable_table): Removed.
+
 2002-01-30  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* file.c (recursive_erase): Use mc_closedir() if mc_lstat()

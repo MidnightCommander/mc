@@ -15,7 +15,6 @@ struct codepage_desc *codepages;
 
 uchar conv_displ[256];
 uchar conv_input[256];
-uchar printable[256];
 
 int load_codepages_list(void)
 {
@@ -142,21 +141,6 @@ char errbuf[255];
  * in mc.charsets
  */
 #define CP_ASCII 0
-
-char* init_printable_table( int cpdisplay )
-{
-    int i;
-
-    /* Fill printable characters table */
-    for (i=0; i<=127; ++i)
-	printable[i] = (i > 31 && i != 127);
-
-    for (i=128; i<=255; ++i) {
-	printable[i] = 1;
-    }
-
-    return NULL;
-}
 
 char* init_translation_table( int cpsource, int cpdisplay )
 {

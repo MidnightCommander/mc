@@ -78,13 +78,10 @@ int is_printable (int c)
 
     c &= 0xff;
 #ifdef HAVE_CHARSET
-    if (display_codepage < 0) {
-	if (xterm_flag)
-	    return xterm_printable[c];
-	else
-	    return (c > 31 && c != 127 && c != 155);
-    } else
-	return printable[ c ];
+    if (xterm_flag)
+	return xterm_printable[c];
+    else
+	return (c > 31 && c != 127 && c != 155);
 #else
     if (eight_bit_clean){
         if (full_eight_bits){
@@ -1258,9 +1255,9 @@ int truncate (const char *path, long size)
     if (fd < 0)
 	return fd;
     res = my_ftruncate (fd, size);
+    close (fd);
     if (res < 0)
 	return res;
-    close (fd);
     return 0;
 
 }
