@@ -99,6 +99,7 @@ extern Hook *idle_hook;
 
 /* Our callback */
 static int view_callback (Dlg_head *h, WView *view, int msg, int par);
+static int regexp_view_search (WView *view, char *pattern, char *string, int match_type);
 
 /* If set, show a ruler */
 int ruler = 0;
@@ -650,10 +651,9 @@ view_update_bytes_per_line(WView *view)
 	cols = view->widget.cols - 2;
     else
 	cols = view->widget.cols;
-    
+
     view->bottom_first = -1;
-    view->bytes_per_line = 2 * (cols - 8) / 9;
-    view->bytes_per_line &= 0xfffc;
+    view->bytes_per_line = ((2 * (cols - 8) / 9) & 0xfffc);
     
     if (view->bytes_per_line == 0)
 	view->bytes_per_line++;		/* To avoid division by 0 */
@@ -741,16 +741,10 @@ view_status (WView *view, gboolean update_gui)
 		addstr (_("  [grow]"));
 	}
         if (w > 26) {
-            if (view->hex_mode)
-                view_percent (view,
-			      view->edit_cursor - view->first,
-			      view->widget.cols - view->have_frame + 1,
-			      update_gui);
-            else
-	        view_percent (view,
-			      view->start_display - view->first,
-			      view->widget.cols - view->have_frame + 1,
-			      update_gui);
+            view_percent (view,
+			  view->hex_mode ? view->edit_cursor : view->start_display,
+			  view->widget.cols - view->have_frame + 1,
+			  update_gui);
 	}
     }
     attrset (SELECTED_COLOR);
@@ -861,18 +855,15 @@ display (WView *view)
 	else
 	    height -= 2;    
     }
-    
+
     /* Find the first displayable changed byte */
-    while (curr) {
-        if (curr->offset < from)
-            curr = curr->next;
-        else
-            break;
+    while (curr && (curr->offset < from)) {
+        curr = curr->next;
     }
     if (view->hex_mode){
         char hex_buff[10];   /* A temporary buffer for sprintf and mvwaddstr */
         int bytes;	     /* Number of bytes already printed on the line */
-	
+
 	/* Start of text column */
         int text_start = width - view->bytes_per_line - 1 + frame_shift;
 
@@ -1383,73 +1374,74 @@ move_left (WView *view)
 static int
 icase_search_p (WView *view, char *text, char *data, int nothing)
 {
-    int p = 0, lng;
     char *q;
+    int lng;
 
-    p = (q = _icase_search (text, data, &lng)) != 0; 
-    if (p) {
+    if ((q = _icase_search (text, data, &lng)) != 0) {
 	view->found_len = lng;
-	view->search_start = q - data - view->found_len;
+	view->search_start = q - data - lng;
+	return 1;
     }
-    return p;
+    return 0;
 }
 
 static char *
 grow_string_buffer (char *text, int *size)
 {
     char *new;
-    int  old_size = *size;
 
     /* The grow steps */
     *size += 160;
-    new = g_malloc (*size);
-    if (text){
-	strncpy (new, text, old_size);
-	g_free (text);
-    } else {
+    new = g_realloc (text, *size);
+    if (!text){
         *new = 0;
     }
     return new;
 }
 
 static char *
-get_line_at (WView *view, unsigned long *p)
+get_line_at (WView *view, unsigned long *p, unsigned long *skipped)
 {
     char *buffer = 0;
     int  buffer_size, usable_size;
-    int  ch;
+    int  ch = 0;
     int  direction;
     unsigned long pos = *p;
-    long i;
+    long i = 0;
+    int  prev;
 
     direction = view->direction;
     buffer_size = usable_size = 0;
     
-    i = ch = 0;
-    for (;pos >= 0 && (ch = get_byte (view, pos))!= -1; pos += direction, i++){
+    prev = (pos) ? ((prev = get_byte (view, pos - 1) == -1) ? 0 : prev) : 0;
+    *skipped = 0;
+    while ((ch = get_byte (view, pos)) != -1){
 
 	/* skip over all the possible zeros in the file */
 	if (ch == 0 && i == 0){
-	    while (pos >= 0 && ((ch = get_byte (view, pos)) != -1) && ch == 0)
-		pos+= direction;
+	    do {
+		pos += direction; i++;
+	    } while ((ch = get_byte (view, pos)) == 0);
+	    *skipped = i;
+	    i = 0;
 	    if (ch == -1)
 		break;
 	}
 	if (i == usable_size){
 	    buffer = grow_string_buffer (buffer, &buffer_size);
 	    usable_size = buffer_size - 2;
-	    buffer [0] = ' '; /* This makes possible strcpy of buffer */
 	}
-	buffer [i+1] = ch;
-	if (ch == '\n' || !ch || ch == -1){
-	    pos += direction; i++;
+
+	pos += direction; i++;
+	buffer [i] = ch;
+
+	if (ch == '\n' || !ch){
 	    break;
 	}
     }
     if (buffer){
-	i--;
-	buffer [0] = ' ';
-	buffer [i+1] = 0;
+	buffer [0] = prev;
+	buffer [i] = 0;
 	
 	/* If we are searching backwards, reverse the string */
 	if (view->direction < 0)
@@ -1496,13 +1488,11 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
 
     char *s = NULL;		/*  The line we read from the view buffer */
     long p, beginning;
-    int  ch;
-    int isatbeg; /* Nonzero means we start search at beginning of some line */
     int found_len, search_start;
     Dlg_head *d = 0;
     int search_status;
-    int abort;
 #ifdef HAVE_GNOME
+    int abort;
     GtkWidget *gd;
 #endif
     
@@ -1515,8 +1505,8 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
     /* Clear interrupt status */
     got_interrupt ();
 
-    abort = 0;
 #ifdef HAVE_GNOME
+    abort = 0;
     gd = gnome_message_box_new (_("Searching for `%s'"),
 				GNOME_MESSAGE_BOX_INFO,
 				GNOME_STOCK_BUTTON_CANCEL,
@@ -1529,23 +1519,22 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
 	mc_refresh ();
     }
 #endif
-    ch = 0;
-    if (view->direction == 1){
-	p = view->found_len ? view->search_start + 1 : view->search_start;
-    } else {
-	p = (view->found_len ? view->search_start : view->last) - 1;
-    }
-    beginning = p;
 
-    isatbeg = view->found_len == 0;
     found_len = view->found_len;
     search_start = view->search_start;
+
+    if (view->direction == 1){
+	p = found_len ? search_start + 1 : search_start;
+    } else {
+	p = (found_len ? search_start : view->last) - 1;
+    }
+    beginning = p;
 
     /* Compute the percent steps */
     search_update_steps (view);
     update_activate = 0;
 
-    for (; ; isatbeg = 1, g_free (s)){
+    for (; ; g_free (s)){
 #ifdef PORT_HAS_FLUSH_EVENTS
 	static int count;
 
@@ -1570,38 +1559,37 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
 	}
 	forward_line_start = p;
 	disable_interrupt_key ();
-	s = get_line_at (view, &p);
+	s = get_line_at (view, &p, &t);
 	reverse_line_start = p;
 	enable_interrupt_key ();
+
 	if (!s)
 	    break;
-	
+
 	search_status = (*search) (view, text, s + 1, match_normal);
-	if (search_status < 0)
+	if (search_status < 0){
+	    g_free (s);
 	    break;
+	}
 
 	if (search_status == 0)
 	    continue;
 
 	/* We found the string */
 	
-	if (!isatbeg && !view->search_start){
+	if (*s && !view->search_start && (search == regexp_view_search) && (*text == '^')){
 	    
 	    /* We do not want to match a
 	     * ^ regexp when not at the real
 	     * beginning of some line
 	     */
-	    view->found_len = found_len;
-	    view->search_start = search_start;
-	    if ((*search) (view, text, s, match_normal) <= 0)
-		continue;
-	    (*search) (view, text, s + 1, match_normal);
+	    continue;
 	}
 	/* Record the position used to continue the search */
 	if (view->direction == 1)
-	    t = forward_line_start;
+	    t += forward_line_start;
 	else
-	    t = reverse_line_start ? reverse_line_start + 3 : 0;
+	    t += reverse_line_start ? reverse_line_start + 3 : 0;
 	view->search_start += t;
 
 	if (t != beginning){
@@ -1610,7 +1598,7 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
 	    else
 		view->start_display = t;
 	}
-	
+
 	g_free (s);
 	break;
     }
@@ -1966,7 +1954,11 @@ regexp_search (WView *view, int direction)
     
     regexp = old ? old : regexp;
     regexp = input_dialog (_(" Search "), _(" Enter regexp:"), regexp);
-    if ((!regexp) || (!*regexp)){
+    if ((!regexp)){
+	return;
+    }
+    if ((!*regexp)){
+	g_free (regexp);
 	return;
     }
     if (old)
@@ -1998,7 +1990,11 @@ normal_search (WView *view, int direction)
 
     exp = old ? old : exp;
     exp = input_dialog (_(" Search "), _(" Enter search string:"), exp);
-    if ((!exp) || (!*exp)){
+    if ((!exp)){
+	return;
+    }
+    if ((!*exp)){
+	g_free (exp);
 	return;
     }
     if (old)
