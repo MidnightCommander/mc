@@ -1,5 +1,8 @@
 2001-09-04  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.am (AM_CFLAGS): Remove CFLAGS, don't use substituted
+	values directly.
+
 	* syntax.c (syntax_text): Remove useless ']' in the Perl and
 	Python rules.  Change shell script rule to use more portable
 	regular expression.
