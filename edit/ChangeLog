@@ -1,3 +1,8 @@
+2002-10-20  Pavel Roskin  <proski@gnu.org>
+
+	* wordproc.c (line_start): Remove incorrect optimization abusing
+	static varaibles.  Internal formatting should be usable now.
+
 2002-10-18  Pavel Roskin  <proski@gnu.org>
 
 	* wordproc.c (begin_paragraph): Fix the same off-by-one error as

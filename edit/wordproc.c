@@ -27,21 +27,21 @@ int line_is_blank (WEdit * edit, long line);
 
 #define NO_FORMAT_CHARS_START "-+*\\,.;:&>"
 
-static long line_start (WEdit * edit, long line)
+static long
+line_start (WEdit *edit, long line)
 {
-    static long p = -1, l = 0;
-    int c;
-    if (p == -1 || abs (l - line) > abs (edit->curs_line - line)) {
-	l = edit->curs_line;
-	p = edit->curs1;
-    }
+    long p, l;
+
+    l = edit->curs_line;
+    p = edit->curs1;
+
     if (line < l)
 	p = edit_move_backward (edit, p, l - line);
     else if (line > l)
 	p = edit_move_forward (edit, p, line - l, 0);
-    l = line;
+
     p = edit_bol (edit, p);
-    while (strchr ("\t ", c = edit_get_byte (edit, p)))
+    while (strchr ("\t ", edit_get_byte (edit, p)))
 	p++;
     return p;
 }
