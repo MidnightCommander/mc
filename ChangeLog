@@ -1,3 +1,11 @@
+2000-09-21  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.sh.in: Use $HOME instead of '~' because the tilde
+	is not expanded in all shells.
+	* doc/mc.sgml: Updated the example script to reflect the above
+	changes.
+	* doc/mc.in.1: Likewise.
+
 2000-09-19  Pavel Roskin  <proski@gnu.org>
 
 	* lib/Makefile.in (LIBFILES_CONST): Added mc.hint.it from

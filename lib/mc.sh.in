@@ -1,8 +1,8 @@
 mc ()
 {
-        mkdir -p ~/.mc/tmp 2> /dev/null
-	chmod 700 ~/.mc/tmp
-	MC=~/.mc/tmp/mc-$$
+        mkdir -p $HOME/.mc/tmp 2> /dev/null
+	chmod 700 $HOME/.mc/tmp
+	MC=$HOME/.mc/tmp/mc-$$
 	@prefix@/bin/mc -P "$@" > "$MC"
 	cd "`cat $MC`"
 	rm "$MC"
