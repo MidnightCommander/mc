@@ -30,7 +30,11 @@
 #ifndef __CONFIG_HPP                    //Prevent multiple includes
 #define __CONFIG_HPP
 
-#include <../VERSION>
+#ifndef __BORLANDC__
+#   include <../VERSION>
+#else
+#   include <../VERSION.>
+#endif
 
 #ifndef WIN32
 #   define WIN32

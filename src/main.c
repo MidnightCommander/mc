@@ -2869,16 +2869,6 @@ int main (int argc, char *argv [])
 	    init_subshell ();  
 #   endif
 
-    /* The directory hot list */
-    load_hotlist ();
-
-    if (show_change_notice){
-	message (1, " Notice ",
-		 " The Midnight Commander configuration files \n"
-		 " are now stored in the ~/.mc directory, the \n"
-		 " files have been moved now\n");
-    }
-    
 #   ifndef HAVE_X
     /* Removing this from the X code let's us type C-c */
     load_key_defs ();
@@ -2891,6 +2881,16 @@ int main (int argc, char *argv [])
     }
 #   endif
 
+    /* The directory hot list */
+    load_hotlist ();
+
+    if (show_change_notice){
+	message (1, " Notice ",
+		 " The Midnight Commander configuration files \n"
+		 " are now stored in the ~/.mc directory, the \n"
+		 " files have been moved now\n");
+    }
+    
 #   ifdef HAVE_SUBSHELL_SUPPORT
 	if (use_subshell){
 	    prompt = strip_ctrl_codes (subshell_prompt);

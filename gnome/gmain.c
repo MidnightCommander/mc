@@ -324,7 +324,7 @@ dialog_panel_callback (struct Dlg_head *h, int id, int msg)
 	WInput *in;
 	
 	if (msg == DLG_KEY && id == '\n'){
-		if (h->current->widget->callback == panel_callback)
+		if (h->current->widget->callback == (callback_fn) panel_callback)
 			return 0;
 
 		/*

@@ -98,7 +98,7 @@ void handle_console (unsigned char action)
 	win32APICALL(SetConsoleScreenBufferSize(hNew, csbi.dwSize));
 
 	win32APICALL(SetConsoleActiveScreenBuffer(hNew));		// ... that becomes standard handle
-	win32APICALL(SetConsoleMode(hNew, ENABLE_PROCESSED_INPUT | ENABLE_MOUSE_INPUT));
+	win32APICALL(SetConsoleMode(hNew, ENABLE_PROCESSED_INPUT));
 	win32APICALL(SetStdHandle(STD_OUTPUT_HANDLE, hNew));
 	break;
 
