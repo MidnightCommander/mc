@@ -1413,9 +1413,9 @@ to the shell patterns option. You can override the global value of
 the shell patterns option by writing "shell_patterns=x" on the first
 line of the menu file (where "x" is either 0 or 1).
 .PP
-.nf
 Type is one or more of the following characters:
-
+.PP
+.nf
   n	not directory
   r	regular file
   d	directory
@@ -1642,20 +1642,17 @@ internal file viewer.
 .\"Internal File Viewer"
 .PP
 .I Complete: show all.
-By default the Midnight Commander
-pops up all possible
+By default the Midnight Commander pops up all possible
 .\"LINK2"
 completions
 .\"Completion"
-if the completion is
-ambiguous if you press
+if the completion is ambiguous only when you press
 .B M-Tab
-for the second time, for the
-first time it just completes as much as possible and in
-the case of ambiguity beeps. If you want to see all the
-possible completions already after the first
+for the second time.  For the first time, it just completes as much as
+possible and beeps in the case of ambiguity.  Enable this option if you
+want to see all possible completions even after pressing
 .B M-Tab
-pressing, enable this option.
+the first time.
 .PP
 .I Rotating dash.
 If this option is enabled, the
@@ -2822,15 +2819,13 @@ if it is set, it has the same effect as the -c flag.
 You may specify terminals that always force color mode
 by adding the
 .I color_terminals
-variable to the Colors
-section of the initialization file. This will prevent the
-Midnight Commander from trying to detect if your terminal
-supports color. Example:
+variable to the Colors section of the initialization file.  This will
+prevent the Midnight Commander from trying to detect if your terminal
+supports color.  Example:
+.PP
 .nf
 [Colors]
 color_terminals=linux,xterm
-.fi
-.nf
 color_terminals=terminal-name1,terminal-name2...
 .fi
 .PP
@@ -2929,6 +2924,7 @@ brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
 cyan, brightcyan, lightgray and white. And there is a special keyword
 for transparent background. It is 'default'. The 'default' can only be
 used for background color. Example:
+.PP
 .nf
 [Colors]
 base_color=normal=white,default:marked=magenta,default
