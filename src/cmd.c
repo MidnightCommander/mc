@@ -326,7 +326,7 @@ void do_edit_at_line (const char *what, int start_line)
 #ifdef USE_INTERNAL_EDIT
     if (use_internal_edit){
 	edit (what, start_line);
-	reread_cmd ();
+	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	return;
     }
 #endif
@@ -336,7 +336,7 @@ void do_edit_at_line (const char *what, int start_line)
 	    editor = get_default_editor ();
     }
     execute_internal (editor, what);
-    reread_cmd ();
+    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 }
 
 void

@@ -1,3 +1,8 @@
+Mon Jan 18 21:23:29 1999 Paul Sheer <psheer@obsidian.co.za>
+
+	* cmd.c: update_panels (UP_OPTIMIZE, UP_KEEPSEL); instead
+	of reread after editing a file.
+
 1999-01-18  Arturo Espinosa  <arturo@nuclecu.unam.mx>
 
 	* file.c: Use N_ instead of _ for some of miguel's last tags.
