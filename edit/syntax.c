@@ -68,6 +68,7 @@ static void *syntax_malloc (size_t x)
 }
 
 #define syntax_free(x) {if(x){free(x);(x)=0;}}
+#define syntax_g_free(x) {if(x){g_free(x);(x)=0;}}
 
 static long compare_word_to_right (WEdit * edit, long i, char *text, char *whole_left, char *whole_right, int line_start)
 {
@@ -431,10 +432,10 @@ static int read_one_line (char **line, FILE * f)
     return r;
 }
 
-static char *strdup_convert (char *s)
+static char *convert (char *s)
 {
     char *r, *p;
-    p = r = (char *) strdup (s);
+    p = r = s;
     while (*s) {
 	switch (*s) {
 	case '\\':
@@ -506,21 +507,14 @@ static void get_args (char *l, char **args, int *argc)
 	for (l = p + 1; *l && !whiteness (*l); l++);
 	if (*l)
 	    *l++ = '\0';
-	*args = strdup_convert (p);
+	*args = convert (p);
 	(*argc)++;
 	args++;
     }
     *args = 0;
 }
 
-static void free_args (char **args)
-{
-    while (*args) {
-	syntax_free (*args);
-	args++;
-    }
-}
-
+#define free_args(x)
 #define break_a	{result=line;break;}
 #define check_a {if(!*a){result=line;break;}}
 #define check_not_a {if(*a){result=line;break;}}
@@ -560,25 +554,23 @@ extern char *mc_home;
 static FILE *open_include_file (char *filename)
 {
     FILE *f;
-    char p[MAX_PATH_LEN];
-    syntax_free (error_file_name);
-    error_file_name = (char *) strdup (filename);
-    if (*filename == '/')
+
+    syntax_g_free (error_file_name);
+    error_file_name = g_strdup (filename);
+    if (*filename == PATH_SEP)
 	return fopen (filename, "r");
-    strcpy (p, home_dir);
-    strcat (p, EDIT_DIR "/");
-    strcat (p, filename);
-    syntax_free (error_file_name);
-    error_file_name = (char *) strdup (p);
-    f = fopen (p, "r");
+
+    g_free (error_file_name);
+    error_file_name = g_strconcat (home_dir, EDIT_DIR PATH_SEP_STR,
+				   filename, NULL);
+    f = fopen (error_file_name, "r");
     if (f)
 	return f;
-    strcpy (p, mc_home);
-    strcat (p, "/syntax/");
-    strcat (p, filename);
-    syntax_free (error_file_name);
-    error_file_name = (char *) strdup (p);
-    return fopen (p, "r");
+
+    g_free (error_file_name);
+    error_file_name = g_strconcat (mc_home, PATH_SEP_STR "syntax" PATH_SEP_STR,
+				   filename, NULL);
+    return fopen (error_file_name, "r");
 }
 
 /* returns line number on error */
@@ -613,7 +605,7 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 		f = g;
 		g = 0;
 		line = save_line + 1;
-		syntax_free (error_file_name);
+		syntax_g_free (error_file_name);
 		if (l)
 		    syntax_free (l);
 		if (!read_one_line (&l, f))
@@ -634,7 +626,7 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 	    g = f;
 	    f = open_include_file (args[1]);
 	    if (!f) {
-		syntax_free (error_file_name);
+		syntax_g_free (error_file_name);
 		result = line;
 		break;
 	    }
@@ -869,7 +861,7 @@ static int edit_read_syntax_file (WEdit * edit, char **names, char *syntax_file,
     int count = 0;
     char *lib_file;
 
-    lib_file = concat_dir_and_file (mc_home, "syntax/Syntax");
+    lib_file = concat_dir_and_file (mc_home, "syntax" PATH_SEP_STR "Syntax");
     check_for_default (lib_file, syntax_file);
     g_free (lib_file);
 
@@ -1004,7 +996,7 @@ void edit_load_syntax (WEdit * edit, char **names, char *type)
 	message (0, _(" Load syntax file "), 
 		    _(" Error in file %s on line %d "),
 		    error_file_name ? error_file_name : f, r);
-	syntax_free (error_file_name);
+	syntax_g_free (error_file_name);
 	return;
     }
 }

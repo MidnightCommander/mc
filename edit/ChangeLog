@@ -1,3 +1,17 @@
+2002-01-15  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* syntax.c (syntax_g_free): New macro to release and NULLify
+	glib allocated memory area(s).
+	(strdup_convert): Rename to ...
+	(convert): ... this.  Don't strdup passed string.
+	(get_args): Use convert instead of strdup_convert.
+	(free_args): Make it do notning macro.
+	(open_include_file): Eliminate p array. Use glib function to
+	construct error_file_name. Use PATH_SEP instead of '/';
+	(edit_read_syntax_file): Use PATH_SEP_STR.
+	(edit_load_syntax): Use syntax_g_free to release error_file_name.
+	(edit_read_syntax_rules): Likewise.
+
 2001-12-22  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* editcmd.c (edit_goto_cmd): Use g_free to release f.
