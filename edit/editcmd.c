@@ -420,7 +420,7 @@ int edit_save_as_cmd (WEdit * edit)
 
     if (exp) {
 	if (!*exp) {
-	    free (exp);
+	    g_free (exp);
 	    edit->force |= REDRAW_COMPLETELY;
 	    return 0;
 	} else {
@@ -434,13 +434,14 @@ int edit_save_as_cmd (WEdit * edit)
 /* Push buttons to over-write the current file, or cancel the operation */
 		    _("Overwrite"), _("Cancel"))) {
 			edit->force |= REDRAW_COMPLETELY;
+			g_free (exp);
 			return 0;
 		    }
 		}
 	    }
 	    if (edit_save_file (edit, exp)) {
 		edit_split_filename (edit, exp);
-		free (exp);
+		g_free (exp);
 		edit->modified = 0;
 	        edit->delete_file = 0;
 		if (different_filename && !edit->explicit_syntax)
@@ -448,7 +449,7 @@ int edit_save_as_cmd (WEdit * edit)
 		edit->force |= REDRAW_COMPLETELY;
 		return 1;
 	    } else {
-		free (exp);
+		g_free (exp);
 		edit_error_dialog (_(" Save as "), get_sys_error (_(" Error trying to save file. ")));
 		edit->force |= REDRAW_COMPLETELY;
 		return 0;
@@ -754,7 +755,7 @@ int edit_load_cmd (WEdit * edit)
     if (exp) {
 	if (*exp)
 	    edit_load_file_from_filename (edit, exp);
-	free (exp);
+	g_free (exp);
     }
     edit->force |= REDRAW_COMPLETELY;
     return 0;
@@ -2101,15 +2102,15 @@ int edit_save_block_cmd (WEdit * edit)
     edit_push_action (edit, KEY_PRESS + edit->start_display);
     if (exp) {
 	if (!*exp) {
-	    free (exp);
+	    g_free (exp);
 	    return 0;
 	} else {
 	    if (edit_save_block (edit, exp, start_mark, end_mark)) {
-		free (exp);
+		g_free (exp);
 		edit->force |= REDRAW_COMPLETELY;
 		return 1;
 	    } else {
-		free (exp);
+		g_free (exp);
 		edit_error_dialog (_ (" Save Block "), get_sys_error (_ (" Error trying to save file. ")));
 	    }
 	}
@@ -2126,15 +2127,15 @@ int edit_insert_file_cmd (WEdit * edit)
     edit_push_action (edit, KEY_PRESS + edit->start_display);
     if (exp) {
 	if (!*exp) {
-	    free (exp);
+	    g_free (exp);
 	    return 0;
 	} else {
 	    if (edit_insert_file (edit, exp)) {
-		free (exp);
+		g_free (exp);
 		edit->force |= REDRAW_COMPLETELY;
 		return 1;
 	    } else {
-		free (exp);
+		g_free (exp);
 		edit_error_dialog (_ (" Insert file "), get_sys_error (_ (" Error trying to insert file. ")));
 	    }
 	}
