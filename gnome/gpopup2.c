@@ -385,10 +385,11 @@ create_mime_actions (GtkWidget *menu, WPanel *panel, int pos, DesktopIconInfo *d
 		full_name = g_concat_dir_and_file (panel->cwd,
 						   panel->dir.list[panel->selected].fname);
 	mime_type = gnome_mime_type_or_default (full_name, NULL);
-	g_free (full_name);
 
-	if (!mime_type)
+	if (!mime_type) {
+		g_free (full_name);
 		return pos;
+	}
 
 	keys = gnome_mime_get_keys (mime_type);
 	for (l = keys; l; l = l->next) {
@@ -437,11 +438,13 @@ create_mime_actions (GtkWidget *menu, WPanel *panel, int pos, DesktopIconInfo *d
 				    (GtkSignalFunc) free_on_destroy,
 				    full_name);
 	}
+
 	if (pos_init != pos) {
 		uiinfo[0].type = GNOME_APP_UI_SEPARATOR;
 		fill_menu (GTK_MENU_SHELL (menu), uiinfo, pos++);
 		g_list_free (keys);
 	}
+
 	return pos;
 }
 

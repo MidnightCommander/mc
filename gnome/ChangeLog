@@ -1,5 +1,9 @@
 1999-03-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gpopup2.c (create_mime_actions): Do not free the file name here,
+	since it is passed on to the callback.  It will be freed on the
+	destroy handler instead.
+
 	* gpopup2.c (escape_underlines): New function to escape the
 	underlines in a string so that GtkLabel will include them in the
 	final result.
