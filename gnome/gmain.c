@@ -32,11 +32,13 @@ char *default_edition_colors =
 "selected=red:"
 "viewunderline=brightred,blue:"
 "directory=blue:"
-"marked=white,seagreen:"
+"markselect=red,yellow:"
+"marked=yellow,seagreen:"
 "execute=slateblue:"
 "link=green:"
 "device=magenta:"
 "core=red:"
+"menuhotsel=cyan,black:"
 "special=black";
 
 void
@@ -139,7 +141,10 @@ xtoolkit_create_dialog (Dlg_head *h, int flags)
 {
 	GtkWidget *win, *ted;
 
-	win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+	if (flags & DLG_GNOME_APP)
+		win = gnome_app_new ("mc", h->name);
+	else 
+		win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 	h->grided = flags;
 	h->idle_fn_tag = -1;
 	if (!(flags & DLG_NO_TED)){

@@ -866,16 +866,16 @@ static int query_callback (Dlg_head * h, int Par, int Msg)
 	    switch (Par) {
 		case KEY_LEFT:
 		case KEY_RIGHT:
-	    	    h->running = 0;
 	    	    h->ret_value = 0;
+		    dlg_stop (h);
 	    	    return 1;
 	    	    
 	    	case 0177:
 	    	case KEY_BACKSPACE:
 	    	case XCTRL('h'):
 	    	    if (end == min_end){
-	    	    	h->running = 0;
 	    	    	h->ret_value = 0;
+			dlg_stop (h);
 	    	    	return 1;
 	    	    } else {
 	    	    	WLEntry *e, *e1;
@@ -900,9 +900,9 @@ static int query_callback (Dlg_head * h, int Par, int Msg)
 	    	    	if (is_in_input_map (input, Par) == 2){
 	    	    	    if (end == min_end)
 	    	    	        return 1;
-	    	    	    h->running = 0;
 	    	    	    h->ret_value = B_USER; /* This means we want to refill the
 	    	    	         	              list box and start again */
+			    dlg_stop (h);
 	    	    	    return 1;
 	    	    	} else
 	    	    	    return 0;
@@ -941,8 +941,8 @@ static int query_callback (Dlg_head * h, int Par, int Msg)
 	    	    	    insert_text (input, last_text, low);
 	    	    	    send_message (h, h->current->widget,WIDGET_DRAW,0);
 	    	    	} else if (need_redraw == 1){
-	    	    	    h->running = 0;
 	    	    	    h->ret_value = B_ENTER;
+			    dlg_stop (h);
 	    	    	}
 	    	    }
 	    	    return 1;

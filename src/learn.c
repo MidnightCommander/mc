@@ -181,7 +181,7 @@ static int learn_check_key (int c)
 			Great! You have a complete terminal database!\n\
 			All your keys work well.");
 	            }
-	            learn_dlg->running = 0;
+		    dlg_stop (learn_dlg);
 	        }
 	        return 1;
 	    }

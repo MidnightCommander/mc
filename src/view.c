@@ -104,9 +104,6 @@ int max_dirt_limit =
 static int view_callback (Dlg_head *h, WView *view, int msg, int par);
 static void move_forward (WView *view, int i);
 
-/* Wrap mode */
-int wrap_mode = 1;
-
 /* If set, show a ruler */
 int ruler = 0;
 
@@ -115,6 +112,9 @@ int mouse_move_pages_viewer = 1;
 
 /* Used to compute the bottom first variable */
 int have_fast_cpu = 0;
+
+/* wrap mode default */
+int global_wrap_mode = 1;
 
 int default_hex_mode = 0;
 int default_hexedit_mode = 0;
@@ -592,8 +592,6 @@ do_view_init (WView *view, char *_command, char *_file, int start_line)
     
 
     if (!view->have_frame){
-	/* hex_mode = 0; */
-	/* wrap_mode = 1; */
 	view->start_col = 0;
     }
     if (_command && (view->viewer_magic_flag || _file[0] == '\0'))
@@ -763,6 +761,12 @@ view_display_clean (WView *view, int height, int width)
 #    define view_thaw(view)
 #endif
 
+#ifdef HAVE_GNOME
+#    define PICK_COLOR(a,b) BOLD_COLOR : DEF_COLOR
+#else
+#    define PICK_COLOR(a,b) a : b
+#endif
+
 /* Shows the file pointed to by *start_display on view_win */
 static long
 display (WView *view)
@@ -873,7 +877,7 @@ display (WView *view)
 			view->cursor_col = col;
 		    }
                     boldflag = 2;
-                    view_set_color (view, view->view_side == view_side_left ? 15 : 31);
+                    view_set_color (view, view->view_side == view_side_left ? PICK_COLOR (15, 31));
                 }
 
                 /* Print a hex number (sprintf is too slow) */
@@ -919,7 +923,7 @@ display (WView *view)
                         view_set_color (view, BOLD_COLOR);
                         goto setcursor;
                     case 2:
-                        view_set_color (view, view->view_side == view_side_left ? 31 : 15);
+                        view_set_color (view, view->view_side == view_side_left ? PICK_COLOR (31, 15));
                         goto setcursor;
                     case 3:
                         view_set_color (view, 7);
@@ -943,7 +947,7 @@ display (WView *view)
             get_byte (view, from);
     	for (; row < height && from < view->last_byte; from++){
 	    c = get_byte (view, from);
-    	    if ((c == '\n') || (col == width && wrap_mode)){
+    	    if ((c == '\n') || (col == width && view->wrap_mode)){
        	        col = frame_shift;
        	        row++;
 		if (c == '\n' || row >= height)
@@ -1111,7 +1115,7 @@ move_forward2 (WView *view, long current, int lines, long upto)
 
 	    c = get_byte (view, p);
 	    
-	    if (wrap_mode){
+	    if (view->wrap_mode){
 	    	if (c == '\r')
 	    	    continue; /* This characters is never displayed */
 	    	else if (c == '\t')
@@ -1188,7 +1192,7 @@ move_backward2 (WView *view, long current, int lines)
   	    line = 0;
         for (q = p = current - 1; p > view->first; p--)
 	    if (get_byte (view, p) == '\n')
-	    	if (!wrap_mode){
+	    	if (!view->wrap_mode){
 	            if (line == lines)
 	            	return p + 1;
 	            line++;
@@ -1287,7 +1291,7 @@ move_to_bottom (WView *view)
 static void
 move_right (WView *view)
 {
-    if (wrap_mode && !view->hex_mode)
+    if (view->wrap_mode && !view->hex_mode)
         return;
     if (view->hex_mode) {
         view->last = view->first + ((LINES-2) * view->bytes_per_line);
@@ -1312,7 +1316,7 @@ move_right (WView *view)
 static void
 move_left (WView *view)
 {
-    if (wrap_mode && !view->hex_mode)
+    if (view->wrap_mode && !view->hex_mode)
         return;
     if (view->hex_mode) {
         if (view->hex_mode && view->view_side == view_side_left) {
@@ -1780,9 +1784,9 @@ void toggle_wrap_mode (WView *view)
         view_update (view);
 		return;
     } 
-    wrap_mode = 1 - wrap_mode;
+    view->wrap_mode = 1 - view->wrap_mode;
     get_bottom_first (view, 1, 0);
-    if (wrap_mode)
+    if (view->wrap_mode)
 	view->start_col = 0;
     else {
 	if (have_fast_cpu){
@@ -1943,7 +1947,7 @@ change_viewer (WView *view)
     }
 }
 
-static void
+void
 change_nroff (WView *view)
 {
     view->viewer_nroff_flag = !view->viewer_nroff_flag;
@@ -1977,7 +1981,7 @@ view_labels (WView *view)
     my_define (h, 2, view->hex_mode ? view->hexedit_mode ?
                      view->view_side == view_side_left ? "EdText" : "EdHex" :
                      view->growing_buffer ? "" : "Edit" :
-                     wrap_mode ? "UnWrap" : "Wrap",
+                     view->wrap_mode ? "UnWrap" : "Wrap",
                      toggle_wrap_mode, view);
    
     my_define (h, 7, view->hex_mode ? "HxSrch" : "Search",
@@ -2010,7 +2014,7 @@ check_left_right_keys (WView *view, int c)
 
 enum { off, on };
 
-static void
+void
 set_monitor (WView *view, int set_on)
 {
     int old = view->monitor;
@@ -2024,6 +2028,17 @@ set_monitor (WView *view, int set_on)
     } else {
 	if (old)
 	    set_idle_proc (view->widget.parent, 0);
+    }
+}
+
+void
+continue_search (WView *view)
+{
+    if (view->last_search){
+	(*view->last_search)(view, view->search_exp);
+    } else {
+	/* if not... then ask for an expression */
+	normal_search (view, 1);
     }
 }
 
@@ -2104,12 +2119,7 @@ view_handle_key (WView *view, int c)
     case XCTRL('s'):
     case 'n':
     case KEY_F(17):
-	if (view->last_search){
-	    (*view->last_search)(view, view->search_exp);
-	} else {
-	    /* if not... then ask for an expression */
-	    normal_search (view, 1);
-	}
+	continue_search (view);
 	return 1;
 
     case XCTRL('r'):
@@ -2226,7 +2236,7 @@ view_event (WView *view, Gpm_Event *event, int *result)
 {
     *result = MOU_NORMAL;
     if (event->type & (GPM_DOWN|GPM_DRAG)){
-    	if (!wrap_mode){
+    	if (!view->wrap_mode){
     	    if (event->x < view->widget.cols / 4){
     	    	move_left (view);
     	    	*result = MOU_REPEAT;
@@ -2433,7 +2443,7 @@ view_callback (Dlg_head *h, WView *v, int msg, int par)
     case WIDGET_KEY:
 	i = view_handle_key ((WView *)view, par);
 	if (view->view_quit)
-	    h->running = 0;
+	    dlg_stop (h);
 	else {
 	    view_update (view);
 	}
@@ -2481,6 +2491,7 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->have_frame = is_panel;
     view->last_byte = -1;
     view->monitor = 0;
+    view->wrap_mode = global_wrap_mode;
     
     x_init_view (view);
 

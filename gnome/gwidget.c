@@ -28,6 +28,12 @@ get_gtk_widget (Widget_Item *p)
 }
 
 void
+x_dialog_stop (Dlg_head *h)
+{
+	gtk_main_quit ();
+}
+
+void
 x_focus_widget (Widget_Item *p)
 {
 	GtkWidget *w = get_gtk_widget (p);
@@ -65,9 +71,8 @@ gbutton_callback (GtkWidget *w, void *data)
 		stop = (*b->callback)(b->action, b->callback_data);
 	
 	if (!b->callback || stop){
-		h->running = 0;
 		h->ret_value = b->action;
-		gtk_main_quit (); 
+		dlg_stop (h);
 	}
 }
 
@@ -397,19 +402,57 @@ x_label_set_text (WLabel *label, char *text)
 }
 
 /* Buttonbar */
+static void
+buttonbar_clicked (GtkWidget *widget, WButtonBar *bb)
+{
+	GtkBox *box = GTK_BOX (widget->parent);
+	GList *children = box->children;
+	int i;
+	
+	/* Find out which button we are (number) */
+	for (i = 0; children; children = children->next, i++){
+		if (((GtkBoxChild *)children->data)->widget == widget){
+			if (bb->labels [i].function)
+				(*bb->labels [i].function)(bb->labels [i].data);
+			return;
+		}
+	}
+	printf ("Mhm, should not happen\n");
+}
+
 int
 x_create_buttonbar (Dlg_head *h, widget_data parent, WButtonBar *bb)
 {
+	GtkWidget *hbox;
+	int i;
+	
+	hbox = gtk_hbox_new (0, 0);
+	for (i = 0; i < 10; i++){
+		char buffer [40];
+		GtkButton *b;
+
+		sprintf (buffer, "F%d %s", bb->labels [i].text ? bb->labels [i].text : "      ");
+		b = gtk_button_new_with_label (buffer);
+		gtk_signal_connect (GTK_OBJECT (b), "clicked",
+				    GTK_SIGNAL_FUNC (buttonbar_clicked), bb);
+		gtk_widget_show (b);
+		gtk_box_pack_start_defaults (GTK_BOX (hbox), b);
+	}
+	gtk_widget_show (hbox);
+	bb->widget.wdata = (widget_data) hbox;
 }
 
 void
 x_redefine_label (WButtonBar *bb, int idx)
 {
-}
+	GtkBox *box = GTK_BOX (bb->widget.wdata);
+	GtkBoxChild *bc = (GtkBoxChild *)g_list_nth (box->children, idx)->data;
+	GtkButton *button = GTK_BUTTON (bc->widget);
+	GtkWidget *label = gtk_label_new (bb->labels [idx].text);
 
-int
-x_find_buttonbar_check (WButtonBar *bb, Widget *paneletc)
-{
+	gtk_widget_show (label);
+	gtk_container_remove (GTK_CONTAINER (button), button->child);
+	gtk_container_add (GTK_CONTAINER (button), label);
 }
 
 /* Gauges */

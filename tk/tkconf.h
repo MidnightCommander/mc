@@ -9,6 +9,8 @@
 #define PORT_HAS_FILTER_CHANGED     	 1
 #define PORT_HAS_PANEL_ADJUST_TOP_FILE   1
 #define PORT_HAS_PANEL_RESET_SORT_LABELS 1
+#define PORT_HAS_DESTROY_CMD             1
+#define PORT_HAS_RADIO_FOCUS_ITEM        1
 
 #define frontend_run_dlg(x)        tkrundlg_event (x)
 

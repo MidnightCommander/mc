@@ -300,13 +300,13 @@ panel_action_open_with (GtkWidget *widget, WPanel *panel)
 	free (command);
 }
 
-static void
+void
 panel_action_view (GtkWidget *widget, WPanel *panel)
 {
 	view_cmd (panel);
 }
 
-static void
+void
 panel_action_view_unfiltered (GtkWidget *widget, WPanel *panel)
 {
 	view_simple_cmd (panel);
@@ -1000,13 +1000,13 @@ filter_item_select (GtkWidget *widget, gpointer data)
 {
 	struct filter_item *fi = gtk_object_get_user_data (GTK_OBJECT (widget));
 
-	set_hintbar (easy_patterns ? fi->glob : fi->regexp);
+/*	set_hintbar (easy_patterns ? fi->glob : fi->regexp); */
 }
 
 static void
 filter_item_deselect (GtkWidget *widget, gpointer data)
 {
-	set_hintbar ("");
+/*	set_hintbar (""); */
 }
 
 static void

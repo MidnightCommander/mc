@@ -1,3 +1,16 @@
+Fri Mar 13 16:01:28 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gwidget.c (buttonbar_clicked, x_create_buttonbar): Button bar
+	widget implemented.
+
+	* gtools.c: Implement the non-modal version of the message
+	routine.
+	
+	* gview.c: Create a GnomeApp widget to contain the viewer.
+
+	* gmain.c (xtoolkit_create_dialog): Add a new mode where the
+	container window is a GNOME_APP window. 
+
 1998-03-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gscreen.c (x_select_item): Make it use GTK_VISIBILITY_FULL

@@ -17,6 +17,7 @@
 #include "dialog.h"
 #include "color.h"
 
+Dlg_head *last_query_dlg;
 static int sel_pos;
 
 void query_set_sel (int new_sel)
@@ -44,7 +45,8 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	h = create_dlg (0, 0, 0, 0, dialog_colors, default_dlg_callback, "[QueryBox]", "query",
 			DLG_NO_TED);
 	dialog = GTK_DIALOG (gtk_dialog_new ());
-	
+	h->wdata = dialog;
+
 	x_set_dialog_title (h, header);
 	
 	label = label_new (0, 0, text, NULL);
@@ -71,7 +73,8 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	
 	/* Init the widgets */
 	init_dlg (h);
-	gtk_grab_add (GTK_WIDGET (dialog));
+	if (!(flags & D_INSERT))
+		gtk_grab_add (GTK_WIDGET (dialog));
 
 	/* Now do the GTK stuff */
 	gtk_container_add (GTK_CONTAINER (dialog->vbox), GTK_WIDGET (label->widget.wdata));
@@ -82,11 +85,17 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	
 	gtk_widget_show (GTK_WIDGET (dialog));
 
+	if (flags & D_INSERT){
+		last_query_dlg = h;
+		return 0;
+	}
+	
 	frontend_run_dlg (h);
 	dlg_run_done (h);
+	last_query_dlg = h;
 	gtk_grab_remove (GTK_WIDGET (dialog));
 	gtk_widget_destroy (GTK_WIDGET (dialog));
-	
+
 	switch (h->ret_value){
 	case B_CANCEL:
 		break;
@@ -114,10 +123,13 @@ Dlg_head *message (int error, char *header, char *text, ...)
 	va_end (args);
 	
 	query_dialog (header, buffer, error, 1, "&Ok");
+	d = last_query_dlg;
 
-	/* FIXME: return what? */
-
-	return NULL;
+	if (error & D_INSERT){
+		x_flush_events ();
+		return d;
+	}
+	return d;
 }
 
 int

@@ -23,6 +23,9 @@
 #define PORT_WANTS_VIEW                  1
 #define PORT_HAS_VIEW_FREEZE             1
 #define PORT_HAS_SAVE_PANEL_TYPES        1
+#define PORT_HAS_DESTROY_CMD             1
+#define PORT_HAS_RADIO_FOCUS_ITEM        1
+#define PORT_HAS_DIALOG_STOP             1
 
 #define mi_getch() fprintf (stderr, "mi_getch is not implemented in this port\n")
 #define frontend_run_dlg(x)        gtkrundlg_event (x)

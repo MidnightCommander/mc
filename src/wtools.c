@@ -433,8 +433,8 @@ static int quick_callback (struct Dlg_head *h, int id, int Msg)
 
     case DLG_KEY:
 	if (id == '\n'){
-	    h->running = 0;
 	    h->ret_value = B_ENTER;
+	    dlg_stop (h);
 	    break;
 	}
 #endif	

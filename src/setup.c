@@ -178,7 +178,7 @@ static struct {
     { "navigate_with_arrows", &navigate_with_arrows },
     { "advanced_chown", &advanced_chfns },
     { "drop_menus", &drop_menus },
-    { "wrap_mode",  &wrap_mode},
+    { "wrap_mode",  &global_wrap_mode},
     { "old_esc_mode", &old_esc_mode },
     { "cd_symlinks", &cd_symlinks },
     { "show_all_if_ambiguous", &show_all_if_ambiguous },

@@ -50,7 +50,8 @@ typedef struct {
     struct hexedit_change_node *change_list;   /* Linked list of changes */
 
     int dirty;			/* Number of skipped updates */
-
+    int wrap_mode;		/* wrap_mode */
+	
     /* Mode variables */
     int hex_mode;		/* Hexadecimal mode flag */
     int bytes_per_line;		/* Number of bytes per line in hex mode */
@@ -123,7 +124,9 @@ void toggle_hex_mode (WView *);
 void goto_line (WView *);
 void regexp_search_cmd (WView *);
 void normal_search_cmd (WView *);
-
+void continue_search (WView *);
+void change_nroff (WView *view);
+void set_monitor (WView *view, int set_on);
 #endif
 
 /* Command: view a file, if _command != NULL we use popen on _command */
@@ -133,7 +136,7 @@ int view (char *_command, char *_file, int *move_direction, int start_line);
 
 extern int mouse_move_pages_viewer;
 extern int max_dirt_limit;
-extern int wrap_mode;
+extern int global_wrap_mode;
 extern int have_fast_cpu;
 extern int default_hex_mode;
 extern int default_magic_flag;

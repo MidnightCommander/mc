@@ -146,20 +146,20 @@ static int display_callback (struct Dlg_head *h, int id, int Msg)
     case DLG_KEY:
 	if (id == '\n'){
 	    if((WRadio *) h->current->widget == my_radio){
-		h->running = 0;
 		assign_text (status, displays_status [my_radio->sel]);
+		dlg_stop (h);
 		break;
 	    }
 	    
 	    if ((WInput *) h->current->widget == user){
-		h->running = 0;
 		h->ret_value = B_USER + 6;
+		dlg_stop (h);
 		break;
 	    }
 	
 	    if ((WInput *) h->current->widget == status){
-		h->running = 0;
 		h->ret_value = B_USER + 7;
+		dlg_stop (h);
 		break;
 	    }
 	}
@@ -437,8 +437,8 @@ static int tree_callback (struct Dlg_head *h, int id, int msg)
     case DLG_POST_KEY:
 	/* The enter key will be processed by the tree widget */
 	if (id == '\n' || ((WTree *)(h->current->widget))->done){
-	    h->running = 0;
 	    h->ret_value = B_ENTER;
+	    dlg_stop (h);
 	}
 	return MSG_HANDLED;
 	

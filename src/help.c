@@ -557,7 +557,7 @@ static void quit_cmd (void *x)
 {
     Dlg_head *h = (Dlg_head *) x;
     
-    h->running = 0;
+    dlg_stop (x);
 }
 
 static void prev_node_cmd (Dlg_head *h)
@@ -699,7 +699,7 @@ static int help_handle_key (struct Dlg_head *h, int c)
 	
     case ESC_CHAR:
     case XCTRL('g'):
-	h->running = 0;
+	dlg_stop (h);
 	break;
 
     default:

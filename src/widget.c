@@ -58,11 +58,11 @@
 #   define x_redefine_label(a,b)
 #endif
 
-#ifndef HAVE_TK
+#ifndef PORT_HAS_DESTROY_CMD
 #   define x_destroy_cmd(w)
 #endif
 
-#ifndef HAVE_GNOME
+#ifndef PORT_HAS_RADIO_FOCUS_ITEM
 #   define x_radio_focus_item(r)
 #endif
 
@@ -96,8 +96,8 @@ button_callback (Dlg_head *h, WButton *b, int Msg, int Par)
 	if (b->callback)
 	    stop = (*b->callback)(b->action, b->callback_data);
 	if (!b->callback || stop){
-	    h->running = 0;
 	    h->ret_value = b->action;
+	    dlg_stop (h);
 	}
 	return 1;
 
@@ -2121,8 +2121,8 @@ listbox_event (Gpm_Event *event, WListbox *l)
 	    break;
 
 	case listbox_finish:
-	    h->running   = 0;
 	    h->ret_value = B_ENTER;
+	    dlg_stop (h);
 	    return MOU_ENDLOOP;
 
 	case listbox_cback:

@@ -244,8 +244,8 @@ static int chl_callback (Dlg_head * h, int Par, int Msg)
 	switch (Par) {
 	case KEY_LEFT:
 	case KEY_RIGHT:
-	    h->running = 0;
 	    h->ret_value = Par;
+	    dlg_stop (h);
 	}
     }
     return 0;

@@ -433,7 +433,7 @@ static int hotlist_callback (Dlg_head * h, int Par, int Msg)
 	case KEY_RIGHT:
 	    if (hotlist_button_callback (B_ENTER, 0)) {
 		h->ret_value = B_ENTER;
-		h->running = 0;
+		dlg_stop (h);
 	    };
 	    return 1;
 	    break;
@@ -455,7 +455,7 @@ l1:
 			    char *tmp = copy_strings( "cd ", hlp->directory, NULL);
 			    stuff (input_w (cmdline), tmp, 0);
 			    free (tmp);
-			    h->running = 0;
+			    dlg_stop (h);
 			    h->ret_value = B_CANCEL;
 			    return 1;
 		        }
@@ -493,8 +493,8 @@ static int l_call (void *l)
 	if (list->current->data) {
 	    struct hotlist *hlp = (struct hotlist*) list->current->data;
 	    if (hlp->type == HL_TYPE_ENTRY) {
-		dlg->running = 0;
 		dlg->ret_value = B_ENTER;
+		dlg_stop (dlg);
 		return listbox_finish;
 	    } else {
 		hotlist_button_callback (B_ENTER, (void *)0);
@@ -502,8 +502,8 @@ static int l_call (void *l)
 		return listbox_nothing;
 	    }
 	} else {
-	    dlg->running = 0;
 	    dlg->ret_value = B_ENTER;
+	    dlg_stop (dlg);
 	    return listbox_finish;
 	}
     }

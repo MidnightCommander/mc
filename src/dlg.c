@@ -54,6 +54,10 @@ Hook *idle_hook = 0;
 #    define x_set_idle(d,x)
 #endif
 
+#ifndef PORT_HAS_DIALOG_STOP
+#   define x_dialog_stop(d)
+#endif
+
 static void slow_box (Dlg_head *h, int y, int x, int ys, int xs)
 {
     move (h->y+y, h->x+x);
@@ -511,6 +515,12 @@ void dlg_refresh (void *parameter)
     dlg_redraw ((Dlg_head *) parameter);
 }
 
+void dlg_stop (Dlg_head *h)
+{
+    h->running = 0;
+    x_dialog_stop (h);	
+}
+
 static INLINE void dialog_handle_key (Dlg_head *h, int d_key)
 {
    char *hlpfile;
@@ -553,6 +563,7 @@ static INLINE void dialog_handle_key (Dlg_head *h, int d_key)
     case KEY_ENTER:
 	h->ret_value = B_ENTER;
 	h->running = 0;
+	x_dialog_stop (h);
 	break;
 
     case ESC_CHAR:
@@ -560,6 +571,7 @@ static INLINE void dialog_handle_key (Dlg_head *h, int d_key)
     case XCTRL ('c'):
     case XCTRL ('g'):
 	h->running = 0;
+	x_dialog_stop (h);
 	h->ret_value = B_CANCEL;
 	break;
     }

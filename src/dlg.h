@@ -199,7 +199,8 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 		      char *help_ctx, char *name, int flags);
 
 /* The flags: */
-#define DLG_NO_TED      8       /* Gnome only: use a regular window, without ted */
+#define DLG_GNOME_APP  16       /* GNOME only: use a gnome-app for the toplevel window */
+#define DLG_NO_TED      8       /* GNOME only: do not manage layout with a GNOME GtkTed widget */
 #define DLG_GRID        4       /* Widgets should be created under .widgets */
 #define DLG_TRYUP       2	/* Try to move two lines up the dialog */
 #define DLG_CENTER      1	/* Center the dialog */
@@ -260,6 +261,7 @@ void widget_redraw (Dlg_head *h, Widget_Item *w);
 int dlg_overlap (Widget *a, Widget *b);
 void widget_erase (Widget *);
 void dlg_erase (Dlg_head *h);
+void dlg_stop (Dlg_head *h);
 
 /* Widget selection */
 int  dlg_select_widget (struct Dlg_head *h, void *widget);

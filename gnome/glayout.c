@@ -187,10 +187,14 @@ void configure_box (void);
 
 GnomeUIInfo gnome_panel_file_menu [] = {
 	{ GNOME_APP_UI_ITEM, "Open Terminal",     "Opens a terminal", gnome_open_terminal },
+	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, "Copy",              "Copy files",       copy_cmd },
 	{ GNOME_APP_UI_ITEM, "Rename/Move",       "Rename or move files", ren_cmd },
 	{ GNOME_APP_UI_ITEM, "Mkdir",             "Creates a new folder", mkdir_cmd },
 	{ GNOME_APP_UI_ITEM, "Delete",            "Delete files from disk", delete_cmd },
+	{ GNOME_APP_UI_SEPARATOR },
+	{ GNOME_APP_UI_ITEM, "View",              "View file", panel_action_view },
+	{ GNOME_APP_UI_ITEM, "View raw",          "View the file without further processing",panel_action_view_unfiltered},
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, "Select group",      "Selects a group of files", select_cmd },
 	{ GNOME_APP_UI_ITEM, "Unselect group",    "Un-selects a group of marked files", select_cmd },
