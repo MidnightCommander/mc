@@ -388,7 +388,7 @@ handle_dirent (dir_list *list, char *filter, struct dirent *dp,
     if (!show_backups && dp->d_name [NLENGTH (dp)-1] == '~')
 	return 0;
     if (mc_lstat (dp->d_name, buf1) == -1) {
-	message(1, _(" Error "), _("File '%s' exists but can not be stat-ed: %s"), dp->d_name, strerror(errno));
+	message(1, MSG_ERROR, _("File '%s' exists but can not be stat-ed: %s"), dp->d_name, strerror(errno));
         return 0;
     }
 
