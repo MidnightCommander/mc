@@ -182,7 +182,7 @@ int init_dynamic_edit_buffers (WEdit * edit, const char *filename, const char *t
     }
 
     if (filename)
-	if ((file = open ((char *) filename, O_RDONLY)) == -1) {
+	if ((file = mc_open (filename, O_RDONLY)) == -1) {
 /* The file-name is printed after the ':' */
 	    edit_error_dialog (_ (" Error "), get_sys_error (catstrs (_ (" Failed trying to open file for reading: "), filename, " ", 0)));
 	    return 1;
@@ -194,7 +194,7 @@ int init_dynamic_edit_buffers (WEdit * edit, const char *filename, const char *t
     edit->buffers2[buf2] = CMalloc (EDIT_BUF_SIZE);
 
     if (filename) {
-	read (file, (char *) edit->buffers2[buf2] + EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE), edit->curs2 & M_EDIT_BUF_SIZE);
+	mc_read (file, (char *) edit->buffers2[buf2] + EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE), edit->curs2 & M_EDIT_BUF_SIZE);
     } else {
 	memcpy (edit->buffers2[buf2] + EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE), text, edit->curs2 & M_EDIT_BUF_SIZE);
 	text += edit->curs2 & M_EDIT_BUF_SIZE;
@@ -203,7 +203,7 @@ int init_dynamic_edit_buffers (WEdit * edit, const char *filename, const char *t
     for (buf = buf2 - 1; buf >= 0; buf--) {
 	edit->buffers2[buf] = CMalloc (EDIT_BUF_SIZE);
 	if (filename) {
-	    read (file, (char *) edit->buffers2[buf], EDIT_BUF_SIZE);
+	    mc_read (file, (char *) edit->buffers2[buf], EDIT_BUF_SIZE);
 	} else {
 	    memcpy (edit->buffers2[buf], text, EDIT_BUF_SIZE);
 	    text += EDIT_BUF_SIZE;
@@ -212,7 +212,7 @@ int init_dynamic_edit_buffers (WEdit * edit, const char *filename, const char *t
 
     edit->curs1 = 0;
     if (file != -1)
-	close (file);
+	mc_close (file);
     return 0;
 }
 
@@ -381,16 +381,16 @@ int edit_insert_file (WEdit * edit, const char *filename)
 	int i, file, blocklen;
 	long current = edit->curs1;
 	unsigned char *buf;
-	if ((file = open ((char *) filename, O_RDONLY)) == -1)
+	if ((file = mc_open (filename, O_RDONLY)) == -1)
 	    return 0;
 	buf = malloc (TEMP_BUF_LEN);
-	while ((blocklen = read (file, (char *) buf, TEMP_BUF_LEN)) > 0) {
+	while ((blocklen = mc_read (file, (char *) buf, TEMP_BUF_LEN)) > 0) {
 	    for (i = 0; i < blocklen; i++)
 		edit_insert (edit, buf[i]);
 	}
 	edit_cursor_move (edit, current - edit->curs1);
 	free (buf);
-	close (file);
+	mc_close (file);
 	if (blocklen)
 	    return 0;
 #endif
@@ -415,21 +415,18 @@ static int check_file_access (WEdit *edit, const char *filename, struct stat *st
     }
 
     /* Open the file, create it if needed */
-    if ((file = open ((char *) filename, O_RDONLY)) < 0) {
-	close (creat ((char *) filename, 0666));
-	if ((file = open ((char *) filename, O_RDONLY)) < 0) {
-	    edit_error_dialog (_ (" Error "), get_sys_error (catstrs (_ (" Failed trying to open file for reading: "), filename, " ", 0)));
-	    return 2;
-	}
+    if ((file = mc_open (filename, O_RDONLY | O_CREAT, 0666)) < 0) {
+	edit_error_dialog (_ (" Error "), get_sys_error (catstrs (_ (" Failed trying to open file for reading: "), filename, " ", 0)));
+	return 2;
     }
 
     /* If the file has just been created, we don't have valid stat yet, so do it now */
     if (!stat_ok && mc_fstat (file, st) < 0) {
-	close (file);
+	mc_close (file);
 	edit_error_dialog (_ (" Error "), get_sys_error (catstrs (_ (" Cannot get size/permissions info on file: "), filename, " ", 0)));
 	return 1;
     }
-    close (file);
+    mc_close (file);
 
     if (st->st_size >= SIZE_LIMIT) {
 /* The file-name is printed after the ':' */
@@ -472,9 +469,10 @@ int edit_open_file (WEdit * edit, const char *filename, const char *text, unsign
 /* fills in the edit struct. returns 0 on fail. Pass edit as NULL for this */
 WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, const char *text, const char *dir, unsigned long text_size)
 {
-    char *f;
+    const char *f;
     int to_free = 0;
     int use_filter = 0;
+
     if (!edit) {
 #ifdef ENABLE_NLS
 	/* 
@@ -504,7 +502,7 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
 	memset (edit, 0, sizeof (WEdit));
 	to_free = 1;
     }
-    memset (&(edit->from_here), 0, (unsigned long) &(edit->to_here) - (unsigned long) &(edit->from_here));
+    memset (&(edit->from_here), 0, &(edit->to_here) - &(edit->from_here));
     edit->num_widget_lines = lines;
     edit->num_widget_columns = columns;
     edit->stat1.st_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
@@ -513,7 +511,7 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
     edit->bracket = -1;
     if (!dir)
 	dir = "";
-    f = (char *) filename;
+    f = filename;
     if (filename) {
 	f = catstrs (dir, filename, 0);
     }
@@ -538,7 +536,7 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
     edit->force |= REDRAW_PAGE;
     if (filename) {
 	filename = catstrs (dir, filename, 0);
-	edit_split_filename (edit, (char *) filename);
+	edit_split_filename (edit, filename);
     } else {
 	edit->filename = (char *) strdup ("");
 	edit->dir = (char *) strdup (dir);
@@ -590,7 +588,7 @@ int edit_clean (WEdit * edit)
 	if (edit->dir)
 	    free (edit->dir);
 /* we don't want to clear the widget */
-	memset (&(edit->from_here), 0, (unsigned long) &(edit->to_here) - (unsigned long) &(edit->from_here));
+	memset (&(edit->from_here), 0, &(edit->to_here) - &(edit->from_here));
 	return 1;
     }
     return 0;
@@ -1675,7 +1673,7 @@ static unsigned long my_type_of (int c)
     if (!q)
 	return 0xFFFFFFFFUL;
     do {
-	for (x = 1, p = option_chars_move_whole_word; (unsigned long) p < (unsigned long) q; p++)
+	for (x = 1, p = option_chars_move_whole_word; p < q; p++)
 	    if (*p == '!')
 		x <<= 1;
 	r |= x;

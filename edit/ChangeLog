@@ -1,3 +1,11 @@
+2002-05-13  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* edit.h: Remove open, close, write, read and mkdir declaration.
+	* edit.c: Use mc_open, mc_close, mc_write, mc_read, mc_rename,
+	mc_chmod and mc_chown. Don't cast (char *) to (unsigned long)
+	in pointer arithmetics.
+	* editcmd.c: Likewise.
+
 2002-03-25  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* syntax.c (edit_read_syntax_file): Use system wide Syntax

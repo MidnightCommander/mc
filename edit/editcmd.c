@@ -188,14 +188,14 @@ int edit_save_file (WEdit * edit, const char *filename)
     if (!*filename)
 	return 0;
 
-    if ((fd = open (filename, O_WRONLY)) == -1) {
+    if ((fd = mc_open (filename, O_WRONLY)) == -1) {
 	/*
 	 * The file does not exists yet, so no safe save or
 	 * backup are necessary.
 	 */
 	this_save_mode = 0;
     } else {
-	close (fd);
+	mc_close (fd);
 	this_save_mode = option_save_mode;
     }
 
@@ -213,30 +213,27 @@ int edit_save_file (WEdit * edit, const char *filename)
 	g_free (saveprefix);
 	if (!savename)
 	    return 0;
-/*
- * FIXME: mc_mkstemps use pure open system call to create temporary file...
- * This file handle must be close()d, but there is next line in edit.h:
- * #define close mc_close
- * So this hack needed.
- */
-#undef	close
+	/* FIXME:
+	 * Close for now because mc_mkstemps use pure open system call 
+	 * to create temporary file and it needs to be reopened by
+	 * VFS-aware mc_open() and MY_O_TEXT should be used.
+	 */
 	close (fd);
-#define close mc_close
     } else
 	savename = g_strdup (filename);
 
-    if ((fd = open (savename, O_CREAT | O_WRONLY | O_TRUNC | MY_O_TEXT,
+    if ((fd = mc_open (savename, O_CREAT | O_WRONLY | O_TRUNC | MY_O_TEXT,
 		    edit->stat1.st_mode)) == -1)
 	goto error_save;
 
-    chmod (savename, edit->stat1.st_mode);
-    chown (savename, edit->stat1.st_uid, edit->stat1.st_gid);
+    mc_chmod (savename, edit->stat1.st_mode);
+    mc_chown (savename, edit->stat1.st_uid, edit->stat1.st_gid);
 
 /* pipe save */
     if ((p = (char *) edit_get_write_filter (savename, filename))) {
 	FILE *file;
 
-	close (fd);
+	mc_close (fd);
 	file  = (FILE *) popen (p, "w");
 
 	if (file) {
@@ -267,22 +264,22 @@ int edit_save_file (WEdit * edit, const char *filename)
 	buf = 0;
 	filelen = edit->last_byte;
 	while (buf <= (edit->curs1 >> S_EDIT_BUF_SIZE) - 1) {
-	    if (write (fd, (char *) edit->buffers1[buf], EDIT_BUF_SIZE) != EDIT_BUF_SIZE) {
-		close (fd);
+	    if (mc_write (fd, (char *) edit->buffers1[buf], EDIT_BUF_SIZE) != EDIT_BUF_SIZE) {
+		mc_close (fd);
 		goto error_save;
 	    }
 	    buf++;
 	}
-	if (write (fd, (char *) edit->buffers1[buf], edit->curs1 & M_EDIT_BUF_SIZE) != (edit->curs1 & M_EDIT_BUF_SIZE)) {
+	if (mc_write (fd, (char *) edit->buffers1[buf], edit->curs1 & M_EDIT_BUF_SIZE) != (edit->curs1 & M_EDIT_BUF_SIZE)) {
 	    filelen = -1;
 	} else if (edit->curs2) {
 	    edit->curs2--;
 	    buf = (edit->curs2 >> S_EDIT_BUF_SIZE);
-	    if (write (fd, (char *) edit->buffers2[buf] + EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE) - 1, 1 + (edit->curs2 & M_EDIT_BUF_SIZE)) !=  1 + (edit->curs2 & M_EDIT_BUF_SIZE)) {
+	    if (mc_write (fd, (char *) edit->buffers2[buf] + EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE) - 1, 1 + (edit->curs2 & M_EDIT_BUF_SIZE)) !=  1 + (edit->curs2 & M_EDIT_BUF_SIZE)) {
 		filelen = -1;
 	    } else {
 		while (--buf >= 0) {
-		    if (write (fd, (char *) edit->buffers2[buf], EDIT_BUF_SIZE) != EDIT_BUF_SIZE) {
+		    if (mc_write (fd, (char *) edit->buffers2[buf], EDIT_BUF_SIZE) != EDIT_BUF_SIZE) {
 			filelen = -1;
 			break;
 		    }
@@ -290,7 +287,7 @@ int edit_save_file (WEdit * edit, const char *filename)
 	    }
 	    edit->curs2++;
 	}
-	if (close (fd))
+	if (mc_close (fd))
 	    goto error_save;
 #endif /* !CR_LF_TRANSLATION */
     }
@@ -298,10 +295,10 @@ int edit_save_file (WEdit * edit, const char *filename)
     if (filelen != edit->last_byte)
 	goto error_save;
     if (this_save_mode == 2)
-	if (rename (filename, catstrs (filename, option_backup_ext, 0)) == -1)
+	if (mc_rename (filename, catstrs (filename, option_backup_ext, 0)) == -1)
 	    goto error_save;
     if (this_save_mode > 0)
-	if (rename (savename, filename) == -1)
+	if (mc_rename (savename, filename) == -1)
 	    goto error_save;
     if (savename)
 	g_free (savename);
@@ -419,8 +416,8 @@ int edit_save_as_cmd (WEdit * edit)
 	    if (strcmp(catstrs (edit->dir, edit->filename, 0), exp)) {
 		int file;
 		different_filename = 1;
-		if ((file = open ((char *) exp, O_RDONLY)) != -1) {	/* the file exists */
-		    close (file);
+		if ((file = mc_open ((char *) exp, O_RDONLY)) != -1) {	/* the file exists */
+		    mc_close (file);
 		    if (edit_query_dialog2 (_(" Warning "), 
 		    _(" A file already exists with this name. "), 
 /* Push buttons to over-write the current file, or cancel the operation */
@@ -1977,7 +1974,7 @@ int edit_save_block (WEdit * edit, const char *filename, long start, long finish
 {
     int len, file;
 
-    if ((file = open ((char *) filename, O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
+    if ((file = mc_open ((char *) filename, O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
 	return 0;
 
     if (column_highlighting) {
@@ -1985,7 +1982,7 @@ int edit_save_block (WEdit * edit, const char *filename, long start, long finish
 	int r;
 	p = block = edit_get_block (edit, start, finish, &len);
 	while (len) {
-	    r = write (file, p, len);
+	    r = mc_write (file, p, len);
 	    if (r < 0)
 		break;
 	    p += r;
@@ -2001,12 +1998,12 @@ int edit_save_block (WEdit * edit, const char *filename, long start, long finish
 	    end = min (finish, start + TEMP_BUF_LEN);
 	    for (; i < end; i++)
 		buf[i - start] = edit_get_byte (edit, i);
-	    len -= write (file, (char *) buf, end - start);
+	    len -= mc_write (file, (char *) buf, end - start);
 	    start = end;
 	}
 	free (buf);
     }
-    close (file);
+    mc_close (file);
     if (len)
 	return 0;
     return 1;
