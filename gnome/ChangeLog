@@ -1,3 +1,10 @@
+1999-11-29  Federico Mena Quintero  <federico@redhat.com>
+
+	* gdesktop.c (desktop_arrange_icons): Return immediately if there
+	are no icons in the desktop.  BUGFIX: bugs.gnome.org #3789.
+	(desktop_popup): Desensitize the "arrange icons" commands if there
+	are no icons in the desktop.
+
 1999-11-01  Pavel Machek     <pavel@ucw.cz>
 
 	* make_thumb.c: close symlink hole

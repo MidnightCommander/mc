@@ -721,6 +721,11 @@ desktop_arrange_icons (SortType type)
 	int xpos, ypos;
 
 	panel = create_panel_from_desktop ();
+	if (panel->count == 0) {
+		free_panel_from_desktop (panel);
+		return;
+	}
+
 	sfn = sort_get_func_from_type (type);
 	g_assert (sfn != NULL);
 
@@ -2699,6 +2704,13 @@ desktop_popup (GdkEventButton *event)
 	g_free (file2);
 
 	panel = push_desktop_panel_hack ();
+
+	/* Disable the "arrange icons" commands if there are no icons */
+
+	if (panel->count == 0)
+		for (i = 0; desktop_arrange_icons_items[i].type != GNOME_APP_UI_ENDOFINFO; i++)
+			gtk_widget_set_sensitive (desktop_arrange_icons_items[i].widget, FALSE);
+
 	gnome_popup_menu_do_popup_modal (popup, NULL, NULL, event, NULL);
 	layout_panel_gone (panel);
 	free_panel_from_desktop (panel);
