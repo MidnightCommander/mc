@@ -818,9 +818,25 @@ AC_DEFUN(AC_WITH_SLANG,
 	then
 	    AC_DEFINE(HAVE_SYSTEM_SLANG)
 	    LSLANG="-lslang"
-	    screen_manager="SLang (using system-installed library)"
+	    screen_manager="SLang (system-installed library)"
 	    AC_MSG_RESULT(Using system installed SLang library)
 	    rm slang/slang.h
+	    ac_save_LIBS="$LIBS"
+	    LIBS="$LIBS $LSLANG"
+	    AC_TRY_RUN(
+	    [ 
+	    #ifdef SLANG_H_INSIDE_SLANG_DIR
+	    #include <slang/slang.h>
+	    #else
+	    #include <slang.h>
+	    #endif
+	    int main(void){
+		SLtt_initialize("");
+		SLtt_tgetflag("");
+		return 0;
+	    } ], 
+	    [LIBS="$ac_save_LIBS"; AC_USE_TERMINFO], 
+	    [LIBS="$ac_save_LIBS"; AC_USE_TERMCAP])
 	else
 	    MCCPPFLAGS="$MCCPPFLAGS -I\$(slangdir)"
     	    LIBSLANG="libmcslang.a"
@@ -834,24 +850,14 @@ AC_DEFUN(AC_WITH_SLANG,
 	if $slang_check_lib
 	then
 	    use_terminfo=false
-	    if test -d /usr/lib/terminfo; then
-		use_terminfo=true;
-	    fi
-	    if test -d /usr/share/lib/terminfo; then
-		use_terminfo=true;
-	    fi
-	    if test -d /usr/local/lib/terminfo; then
-		use_terminfo=true;
-	    fi
-	    if test -d /lib/terminfo; then
-		use_terminfo=true;
-	    fi
-	    if test -d /usr/local/share/terminfo; then
-		use_terminfo=true;
-	    fi
-	    if test -d /usr/share/terminfo; then
-		use_terminfo=true;
-	    fi
+	    for dir in 	/usr/lib /usr/share/lib /usr/local/lib /lib \
+			/usr/local/share /usr/share
+	    do
+		if test -d $dir/terminfo; then
+		use_terminfo=true; 
+		break
+		fi
+	    done
 	    if $use_terminfo; then
 		AC_USE_TERMINFO
 	    else
@@ -1262,7 +1268,7 @@ if test x$srcdir != x; then
     fi
 fi
 
-if test "x$screen_manager" = xSLang; then
+if echo "$screen_manager" | grep -q "SLang" ; then
     screen_manager="${screen_manager}${slang_term}"
 fi
 

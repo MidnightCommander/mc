@@ -1,3 +1,10 @@
+Wed Feb 10 02:48:51 1999  Timur Bakeyev  <mc@bat.ru>
+
+	* configure.in: Add check, which, in case of system-installed SLang
+	library tries to run a test program, which determines, does we need
+	linking with libtermcap.a. Also, set of if's for finding terminfo
+	dir changed do for cycle - a bit nicer :)
+
 Tue Feb  9 20:52:19 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* README.QNX: Deleted documention about mc.menu.qnx.diff.
