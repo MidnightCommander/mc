@@ -370,13 +370,6 @@ extern char *edit_init_error_msg;
 #define edit_query_dialog3(h,t,a,b,c) query_dialog(h,t,0,3,a,b,c)
 #define edit_query_dialog4(h,t,a,b,c,d) query_dialog(h,t,0,4,a,b,c,d)
 
-#define COLOR_BLACK 0
-#define COLOR_WHITE 1
-#define CURSOR_TYPE_EDITOR 0
-
-#define option_text_line_spacing 1
-#define fixed_font 0
-
 #define color_palette(x) win->color[x].pixel
 
 extern char *home_dir;

@@ -1,3 +1,7 @@
+2001-09-08  Pavel Roskin  <proski@gnu.org>
+
+	* edit.h: Remove some useless definitions.
+
 2001-09-07  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.am: Don't define "MIDNIGHT" - it's unused now.
