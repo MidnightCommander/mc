@@ -1201,34 +1201,34 @@ smbfs_opendir (vfs *me, char *dirname)
 }
 
 static int
-fake_server_stat(const char *server_url, const char *path, struct stat *buf)
+fake_server_stat (const char *server_url, const char *path, struct stat *buf)
 {
-	dir_entry *dentry;
-	char *p;
+    dir_entry *dentry;
+    char *p;
 
-	if ((p = strrchr(path, '/')))
-		path = p + 1;		/* advance until last '/' */
+    if ((p = strrchr (path, '/')))
+	path = p + 1;		/* advance until last '/' */
 
-	if (!current_info->entries) {
-		if (!smbfs_loaddir(current_info));	/* browse host */
-			return -1;
-	}
+    if (!current_info->entries) {
+	if (!smbfs_loaddir (current_info));	/* browse host */
+	return -1;
+    }
 
     if (current_info->server_list == True) {
 	dentry = current_info->entries;
-	DEBUG(4, ("fake stat for SERVER \"%s\"\n", path));
+	DEBUG (4, ("fake stat for SERVER \"%s\"\n", path));
 	while (dentry) {
-		if (strcmp(dentry->text, path) == 0) {
-			DEBUG(4, ("fake_server_stat: %s:%4o\n",
-				dentry->text, dentry->my_stat.st_mode));
-			memcpy(buf, &dentry->my_stat, sizeof(struct stat));
-			return 0;
-		}
-		dentry = dentry->next;
+	    if (strcmp (dentry->text, path) == 0) {
+		DEBUG (4, ("fake_server_stat: %s:%4o\n",
+			   dentry->text, (int)dentry->my_stat.st_mode));
+		memcpy (buf, &dentry->my_stat, sizeof (struct stat));
+		return 0;
+	    }
+	    dentry = dentry->next;
 	}
     }
-	my_errno = ENOENT;
-	return -1;
+    my_errno = ENOENT;
+    return -1;
 }
 
 static int
@@ -1270,7 +1270,7 @@ fake_share_stat (const char *server_url, const char *path, struct stat *buf)
     while (dentry) {
 	if (strcmp (dentry->text, path) == 0) {
 	    DEBUG (6, ("fake_share_stat: %s:%4o\n",
-		       dentry->text, dentry->my_stat.st_mode));
+		       dentry->text, (int) dentry->my_stat.st_mode));
 	    memcpy (buf, &dentry->my_stat, sizeof (struct stat));
 	    return 0;
 	}
@@ -1439,7 +1439,7 @@ smbfs_chdir (vfs *me, char *path)
     return 0;
 }
 
-static int 
+static int
 loaddir(vfs *me, const char *path)
 {
 	void *info;
@@ -1567,9 +1567,34 @@ smbfs_stat (vfs * me, char *path, struct stat *buf)
 static int
 smbfs_lseek (void *data, off_t offset, int whence)
 {
-	DEBUG(3, ("smbfs_lseek()\n"));
-	my_errno = EOPNOTSUPP;
-    return -1;
+    smbfs_handle *info = (smbfs_handle *) data;
+    size_t size;
+
+    DEBUG (3,
+	   ("smbfs_lseek(info->nread => %d, offset => %d, whence => %d) \n",
+	    (int) info->nread, (int) offset, whence));
+
+    switch (whence) {
+    case SEEK_SET:
+	info->nread = offset;
+	break;
+    case SEEK_CUR:
+	info->nread += offset;
+	break;
+    case SEEK_END:
+	if (!cli_qfileinfo (info->cli, info->fnum,
+			    NULL, &size, NULL, NULL, NULL,
+			    NULL, NULL) &&
+	    !cli_getattrE (info->cli, info->fnum,
+			   NULL, &size, NULL, NULL, NULL)) {
+	    errno = EINVAL;
+	    return -1;
+	}
+	info->nread = size + offset;
+	break;
+    }
+
+    return info->nread;
 }
 
 static int
@@ -1581,26 +1606,26 @@ smbfs_mknod (vfs *me, char *path, int mode, int dev)
 }
 
 static int
-smbfs_mkdir (vfs *me, char *path, mode_t mode)
+smbfs_mkdir (vfs * me, char *path, mode_t mode)
 {
-	smbfs_connection *sc;
-	char *remote_file;
+    smbfs_connection *sc;
+    char *remote_file;
 
-	DEBUG(3, ("smbfs_mkdir(path:%s, mode:%d)\n", path, mode));
-	if ((remote_file = smbfs_get_path (&sc, path)) == 0)
-		return -1;
-	g_free (remote_file);
-	convert_path(&path, FALSE);
+    DEBUG (3, ("smbfs_mkdir(path:%s, mode:%d)\n", path, (int) mode));
+    if ((remote_file = smbfs_get_path (&sc, path)) == 0)
+	return -1;
+    g_free (remote_file);
+    convert_path (&path, FALSE);
 
-	if (!cli_mkdir(sc->cli, path)) {
-		my_errno = cli_error(sc->cli, NULL, &err, NULL);
-		message_3s (1, MSG_ERROR, _(" Error %s creating directory %s "), 
-			cli_errstr(sc->cli), CNV_LANG(path));
-		g_free (path);
-		return -1;
-	} 
+    if (!cli_mkdir (sc->cli, path)) {
+	my_errno = cli_error (sc->cli, NULL, &err, NULL);
+	message_3s (1, MSG_ERROR, _(" Error %s creating directory %s "),
+		    cli_errstr (sc->cli), CNV_LANG (path));
 	g_free (path);
-	return 0;
+	return -1;
+    }
+    g_free (path);
+    return 0;
 }
 
 static int
