@@ -204,7 +204,9 @@ static struct {
     { "drop_menus", &drop_menus },
     { "wrap_mode",  &global_wrap_mode},
     { "old_esc_mode", &old_esc_mode },
+#ifndef HAVE_GNOME
     { "cd_symlinks", &cd_symlinks },
+#endif
     { "show_all_if_ambiguous", &show_all_if_ambiguous },
     { "have_fast_cpu", &have_fast_cpu },
     { "iconify_on_exec", &iconify_on_exec },

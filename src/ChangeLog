@@ -1,3 +1,11 @@
+1999-08-31  Federico Mena Quintero  <federico@redhat.com>
+
+	* main.c: In the GNOME version, we want cd_symlinks to be FALSE.
+	The VFS should never have to look at this variable, but alas, it
+	does.  BUGFIX:  Red Hat Bugzilla #2344.
+
+	* setup.c: Disable cd_symlinks in the GNOME version.
+
 1999-08-30  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* main.c (print_mc_usage): Print the bug reporting address.

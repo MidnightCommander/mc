@@ -174,7 +174,11 @@ volatile int quit = 0;
 int show_all_if_ambiguous = 0;
 
 /* Set when cd symlink following is desirable (bash mode) */
+#ifndef HAVE_GNOME
 int cd_symlinks = 1;
+#else
+int cd_symlinks = 0;
+#endif
 
 /* If set then dialogs just clean the screen when refreshing, else */
 /* they do a complete refresh, refreshing all the parts of the program */
