@@ -1,3 +1,7 @@
+Mon Oct 19 11:44:47 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
+
+	* mcfs.c: prefix is mc:, not mcfs:. So now mcfs actually works.
+
 Thu Oct 15 17:17:17 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
 	* shared_ftp_fish.c (s_write): stupid bug fixed

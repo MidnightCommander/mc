@@ -1126,7 +1126,7 @@ vfs vfs_mcfs_ops = {
     NULL,	/* This is place of next pointer */
     "Midnight Commander's private remote filesystem",
     F_NET,	/* flags */
-    "mcfs:",	/* prefix */
+    "mc:",	/* prefix */
     NULL,	/* data */
     0,		/* errno */
     NULL,
