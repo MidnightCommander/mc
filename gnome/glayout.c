@@ -492,7 +492,7 @@ create_new_menu_from (GnomeApp *app, WPanel *panel, char *file)
 			
 			gde = gnome_desktop_entry_load (file2);
 
-			test = rindex(dirstruc->d_name, '.');
+			test = strrchr(dirstruc->d_name, '.');
 
 			if (test == NULL || gde == NULL || strcmp (test, ".desktop")){
 				g_free (file2);

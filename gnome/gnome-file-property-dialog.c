@@ -172,7 +172,7 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 	label = gtk_label_new (_("File Name"));
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 	fp_dlg->file_entry = gtk_entry_new ();
-	gen_string = rindex (fp_dlg->file_name, '/');
+	gen_string = strrchr (fp_dlg->file_name, '/');
 	if (gen_string)
 		gtk_entry_set_text (GTK_ENTRY (fp_dlg->file_entry), gen_string + 1);
 	else
@@ -1039,7 +1039,7 @@ gnome_file_property_dialog_new (gchar *file_name, gboolean can_set_icon)
 				  gtk_label_new (_("Permissions")));
 	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (fp_dlg)->vbox),
 			    notebook, TRUE, TRUE, 0);
-	title_string = g_strconcat (rindex (file_name, '/') + 1, _(" Properties"), NULL);
+	title_string = g_strconcat (strrchr (file_name, '/') + 1, _(" Properties"), NULL);
 	gtk_window_set_title (GTK_WINDOW (fp_dlg), title_string);
 	g_free (title_string);
 	
@@ -1136,14 +1136,14 @@ apply_name_change (GnomeFilePropertyDialog *fpd)
 		return 0;
 	}
 	/* has it changed? */
-	if (strcmp (rindex(fpd->file_name, '/') + 1, new_name)) {
+	if (strcmp (strrchr(fpd->file_name, '/') + 1, new_name)) {
 		if (strchr (new_name, '/')) {
 			message (1, "Error", _("You cannot rename a file to something containing a '/' character"));
 			return 0;
 		} else {
 			/* create the files. */
 			base_name = g_strdup (fpd->file_name);
-			rindex (base_name, '/')[0] = '\0';
+			strrchr (base_name, '/')[0] = '\0';
 			full_target = concat_dir_and_file (base_name, new_name);
 
 			ctx = file_op_context_new ();

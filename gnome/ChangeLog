@@ -1,3 +1,8 @@
+1999-02-07  Tomas Ogren  <stric@ing.umu.se>
+
+	* glayout.c, gnome-file-property-dialog.c: s/rindex/strrchr/
+	To get rid of BSDism and make it compile on solaris 2.6
+
 1999-02-06  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gscreen.c (x_create_panel): The location bar is now a simple
