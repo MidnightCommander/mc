@@ -71,6 +71,24 @@ typedef struct
 typedef GtkWidget* (*CustomCreateFunc) (PrefsDlg *dlg, Property *prop);
 typedef void (*CustomApplyFunc) (PrefsDlg *dlg, Property *prop);
 
+static void
+gnome_toggle_show_backup (void)
+{
+    show_backups = !show_backups;
+}
+
+static void
+gnome_toggle_show_hidden (void)
+{
+    show_dot_files = !show_dot_files;
+}
+
+static void
+toggle_mix_all_files (void)
+{
+    mix_all_files = !mix_all_files;
+}
+
 static Property file_display_props [] = 
 {
         {
@@ -82,7 +100,7 @@ static Property file_display_props [] =
                 &show_dot_files, NULL, NULL, NULL
         },
         {
-                N_("Mix files and directories"), PROPERTY_BOOL, 
+                N_("Mix files and directories"), PROPERTY_BOOL,
                 &mix_all_files, NULL, NULL, NULL
         },
         {
@@ -254,6 +272,10 @@ apply_callback (GtkWidget *prop_box, gint pagenum, PrefsDlg *dlg)
         if (pagenum != -1) {
                 apply_page_changes (dlg, pagenum);
         } else {
+		/* FIXME: can be optimized.  Only if some of the
+		 * boolean flags changed this makes sense
+		 */
+		update_panels (UP_RELOAD, UP_KEEPSEL);
                 save_setup ();
         }
 }
@@ -372,7 +394,10 @@ static GtkWidget*
 create_prop_custom (PrefsDlg *dlg, Property *prop)
 {
         CustomCreateFunc create = (CustomCreateFunc) prop->extra_data1;
-        
+
+	if (!create)
+		return create_prop_bool (dlg, prop);
+	
         return create (dlg, prop);
 }
 

@@ -1,3 +1,8 @@
+1999-01-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gprefs.c (apply_callback): Update the directory contents after
+	the settings have changed.
+
 1999-01-19  Jonathan Blandford  <jrb@redhat.com>
 
 	* gdialogs.c (file_op_context_create_ui): OP_DELETE now has it's
