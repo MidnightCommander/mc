@@ -1,3 +1,8 @@
+2002-09-05  Pavel Roskin  <proski@gnu.org>
+
+	* help.c (help_handle_key): Sanity check for broken help files.
+	From David Martin <dmartina@excite.com>
+
 2002-09-03  Pavel Roskin  <proski@gnu.org>
 
 	* global.h: Eliminate xgetch, update all dependencies.
