@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.34\n"
-"POT-Creation-Date: 1999-09-23 20:39+0200\n"
-"PO-Revision-Date: 1999-09-20 20:38+02:00\n"
+"POT-Creation-Date: 1999-09-26 21:39+0200\n"
+"PO-Revision-Date: 1999-09-26 21:40+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -6444,13 +6444,3 @@ msgstr "%s: %s: %s %3d%% (%ld bytes overført)"
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld bytes overført"
-
-#~ msgid "Home directory"
-#~ msgstr "Hjemmekatalog"
-
-#~ msgid "Could not symlink %s to %s; will not have initial home desktop icon."
-#~ msgstr ""
-#~ "Kunne ikke lage symbolsk lenke fra %s til %s; får ikke skrivebordsikoner."
-
-#~ msgid "Rescan _Desktop"
-#~ msgstr "Oppdater skrivebor_det"
