@@ -1,5 +1,8 @@
 2003-09-09  Pavel Roskin  <proski@gnu.org>
 
+	* find.c (find_parameters): Make "filename" entry focused on
+	startup - it's used more often than "start at".
+
 	* widget.c (button_callback): Don't let the default button steal
 	Enter from the current button.
 

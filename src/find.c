@@ -253,6 +253,8 @@ find_parameters (char **start_dir, char **pattern, char **content)
     add_widget (find_dlg, label_new (5, 3, labs[1]));
     add_widget (find_dlg, label_new (3, 3, labs[0]));
 
+    dlg_select_widget (find_dlg, in_name);
+
     run_dlg (find_dlg);
 
     switch (find_dlg->ret_value) {
