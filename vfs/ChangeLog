@@ -1,3 +1,9 @@
+2002-04-12  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/trpm: update to work with rpm 4.x.
+	Reported by m.lusini@palazzochigi.it
+	https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=62306
+
 2002-04-12  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* cpio.c (cpio_skip_padding): Handle old ASCII format.
