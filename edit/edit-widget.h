@@ -93,7 +93,9 @@ struct WEdit {
     unsigned long stack_size;
     unsigned long stack_size_mask;
     unsigned long stack_bottom;
-    struct stat stat1;
+    int stack_disable;		/* If not 0, don't save events in the undo stack */
+
+    struct stat stat1;		/* Result of mc_fstat() on the file */
 
     /* syntax higlighting */
     struct _syntax_marker *syntax_marker;

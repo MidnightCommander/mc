@@ -66,9 +66,6 @@ static int current_selection = 0;
 /* Note: selection.text = selection_history[current_selection].text */
 static struct selection selection_history[NUM_SELECTION_HISTORY];
 
-static char *option_chars_move_whole_word =
-    "!=&|<>^~ !:;, !'!`!.?!\"!( !) !Aa0 !+-*/= |<> ![ !] !\\#! ";
-
 /*
  *
  * here's a quick sketch of the layout: (don't run this through indent.)
@@ -99,12 +96,6 @@ static char *option_chars_move_whole_word =
  *
  */
 
-/*
-   returns a byte from any location in the file.
-   Returns '\n' if out of bounds.
- */
-
-static int push_action_disabled = 0;
 
 static void edit_move_to_prev_col (WEdit *edit, long p);
 
@@ -439,23 +430,18 @@ edit_load_file (WEdit *edit)
     if (fast_load) {
 	edit->last_byte = edit->stat1.st_size;
 	edit_load_file_fast (edit, edit->filename);
+	/* If fast load was used, the number of lines wasn't calculated */
+	edit->total_lines = edit_count_lines (edit, 0, edit->last_byte);
     } else {
 	edit->last_byte = 0;
-    }
-
-    if (!fast_load) {
 	if (*edit->filename) {
-	    push_action_disabled = 1;
+	    edit->stack_disable = 1;
 	    if (!edit_insert_file (edit, edit->filename)) {
 		edit_clean (edit);
 		return 1;
 	    }
-	    /* FIXME: this should be an unmodification() function */
-	    push_action_disabled = 0;
+	    edit->stack_disable = 0;
 	}
-    } else {
-	/* If fast load was used, the number of lines wasn't calculated */
-	edit->total_lines = edit_count_lines (edit, 0, edit->last_byte);
     }
     return 0;
 }
@@ -720,7 +706,7 @@ void edit_push_action (WEdit * edit, long c,...)
 	}
     }
     spm1 = (edit->stack_pointer - 1) & edit->stack_size_mask;
-    if (push_action_disabled)
+    if (edit->stack_disable)
 	return;
 
 #ifdef FAST_MOVE_CURSOR
@@ -1677,10 +1663,14 @@ void edit_mark_cmd (WEdit * edit, int unmark)
     }
 }
 
-static unsigned long my_type_of (int c)
+static unsigned long
+my_type_of (int c)
 {
     int x, r = 0;
-    char *p, *q;
+    const char *p, *q;
+    const char option_chars_move_whole_word[] =
+	"!=&|<>^~ !:;, !'!`!.?!\"!( !) !Aa0 !+-*/= |<> ![ !] !\\#! ";
+
     if (!c)
 	return 0;
     if (c == '!') {
@@ -1801,7 +1791,7 @@ edit_do_undo (WEdit * edit)
     long ac;
     long count = 0;
 
-    push_action_disabled = 1;	/* don't record undo's onto undo stack! */
+    edit->stack_disable = 1;	/* don't record undo's onto undo stack! */
 
     while ((ac = pop_action (edit)) < KEY_PRESS) {
 	switch ((int) ac) {
@@ -1853,7 +1843,7 @@ edit_do_undo (WEdit * edit)
     edit_update_curs_row (edit);
 
   done_undo:;
-    push_action_disabled = 0;
+    edit->stack_disable = 0;
 }
 
 static void edit_delete_to_line_end (WEdit * edit)
