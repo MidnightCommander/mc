@@ -25,7 +25,10 @@ mcrpmfs_list ()
       MCFASTRPM=$MCFASTRPM_DFLT
     fi
     FILEPREF="-r--r--r--   1 root     root    "
-    DESC=`rpm -qip "$1"`
+    DESC=`rpm -qip "$1" 2>/dev/null` || {
+	echo "$FILEPREF 0 "`date +"%b %d %H:%M"`" ERROR"
+	exit 1
+    }
     DATE=`rpm -qp --qf "%{BUILDTIME:date}\n" "$1" | cut -c 5-11,21-24`
     HEADERSIZE=`echo "$DESC" | wc -c`
     echo "-r--r--r--   1 root     root  $HEADERSIZE $DATE HEADER"
@@ -120,6 +123,7 @@ mcrpmfs_copyout ()
 	HEADER) rpm -qip "$1" > "$3"; exit 0;;
 	INSTALL) echo "# Run this to install this RPM package" > "$3"; exit 0;;
 	UPGRADE) echo "# Run this to upgrade this RPM package" > "$3"; exit 0;;
+	ERROR) rpm -qip "$1" > /dev/null 2> "$3"; exit 0;;
 	INFO/NAME-VERSION-RELEASE)	rpm -qp --qf "%{NAME}-%{VERSION}-%{RELEASE}\n" "$1" > "$3"; exit 0;;
 	INFO/RELEASE)		rpm -qp --qf "%{RELEASE}\n" "$1" > "$3"; exit 0;;
 	INFO/GROUP)		rpm -qp --qf "%{GROUP}\n" "$1" > "$3"; exit 0;;

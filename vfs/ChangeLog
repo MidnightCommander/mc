@@ -1,3 +1,8 @@
+2000-10-05  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/rpm: If rpm indicates an error create a virtual file
+	ERROR and put error messages there.
+
 2000-09-25  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* extfs/mcunarj.diff: better version from Christian Gennerat
