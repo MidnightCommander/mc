@@ -1,5 +1,8 @@
 2003-05-29  Koblinger Egmont  <egmont@uhulinux.hu>
 
+	* util.c (unix_error_string): Convert error string from UTF-8 is
+	glib 2 is used.
+
 	* text.c (default_edition_colors): Change the default for
 	dhotfocus to be blue on cyan for consistency with dhotnormal.
 
