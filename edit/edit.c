@@ -374,8 +374,6 @@ check_file_access (WEdit *edit, const char *filename, struct stat *st)
 	return 1;
     }
 
-    mc_close (file);
-
     /*
      * Don't delete non-empty files.
      * O_EXCL should prevent it, but let's be on the safe side.
@@ -392,6 +390,7 @@ check_file_access (WEdit *edit, const char *filename, struct stat *st)
 	return 1;
     }
 
+    mc_close (file);
     return 0;
 }
 
