@@ -1,3 +1,10 @@
+Wed May 20 16:27:56 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* widget.c (history_put): input line history was defunct because
+	there was an #ifndef where an #ifdef should be. 
+	Btw. PORT_WIDGET_WANTS_HISTORY seems incomplete because a lot of
+	history code is included even when this define is undefined.
+
 1998-05-19  Tamasi Gyorgy <gt_cosy@usa.net>
 
 	* src/*: Until I get a better ChangeLog:  Tamasi's port of the

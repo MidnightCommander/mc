@@ -936,7 +936,7 @@ Hist *history_get (char *input_name)
     return new;			/* return pointer to last entry in list */
 }
 
-#ifndef PORT_WIDGET_WANTS_HISTORY
+#ifdef PORT_WIDGET_WANTS_HISTORY
 void history_put (char *input_name, Hist *h)
 {
     int i;
