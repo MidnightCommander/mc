@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.51\n"
-"POT-Creation-Date: 2000-11-20 16:46+0200\n"
+"POT-Creation-Date: 2000-11-29 13:19+0200\n"
 "PO-Revision-Date: 2000-11-08 15:38+0200\n"
 "Last-Translator: Yuri Syrota <rasta@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -602,7 +602,7 @@ msgstr "Коп╕ювати файли на як╕ вказують посилання зам╕сть посилань"
 
 #: gnome/gdialogs.c:654
 msgid "Preserve file attributes."
-msgstr "Збер╕гати атрибути"
+msgstr "Збер╕гати атрибути файл╕в."
 
 #: gnome/gdialogs.c:660
 msgid "Preserves the permissions and the UID/GID if possible"
@@ -853,7 +853,7 @@ msgstr "╤нвертувати виб╕р"
 msgid "Reverses the list of tagged files"
 msgstr "╤нвертувати виб╕р файл╕в"
 
-#: gnome/glayout.c:412 gtkedit/editwidget.c:1143 src/view.c:2085
+#: gnome/glayout.c:412 gtkedit/editwidget.c:1143 src/view.c:2081
 msgid "Search"
 msgstr "Пошук"
 
@@ -1184,7 +1184,7 @@ msgid "Use default View action"
 msgstr "Використовувати типовий перегляд"
 
 #: gnome/gnome-file-property-dialog.c:523 gnome/gpopup2.c:289
-#: src/screen.c:2396 src/screen.c:2426 src/view.c:2081
+#: src/screen.c:2396 src/screen.c:2426 src/view.c:2077
 msgid "Edit"
 msgstr "Виправити"
 
@@ -1292,7 +1292,7 @@ msgstr "Ви ввели нев╕рне ╕м'я користувача"
 
 #: gnome/gnome-file-property-dialog.c:1220
 msgid "You must rename your file to something"
-msgstr ""
+msgstr "Необх╕дно перейменувати ваш файл"
 
 #: gnome/gnome-file-property-dialog.c:1226
 msgid "You cannot rename a file to something containing a '/' character"
@@ -1387,11 +1387,11 @@ msgstr "Сум╕ш файл╕в та каталог╕в"
 
 #: gnome/gprefs.c:104
 msgid "Use shell patterns instead of regular expressions"
-msgstr ""
+msgstr "Використовувати шаблони оболонки зам╕сть ре╜улярних вираз╕в"
 
 #: gnome/gprefs.c:108
 msgid "Determine file types from file content instead of extensions"
-msgstr ""
+msgstr "Визначати типи файл╕в з ╖х вм╕сту зам╕сть розширень"
 
 #: gnome/gprefs.c:117
 msgid "Confirm when deleting file"
@@ -1824,7 +1824,7 @@ msgstr "Робити резервн╕ коп╕╖ -->"
 #: src/chmod.c:114 src/chown.c:79 src/cmd.c:861 src/filegui.c:822
 #: src/find.c:171 src/hotlist.c:138 src/hotlist.c:801 src/hotlist.c:898
 #: src/layout.c:376 src/learn.c:59 src/option.c:144 src/panelize.c:86
-#: src/view.c:406 src/wtools.c:111 src/wtools.c:386 src/wtools.c:561
+#: src/view.c:407 src/wtools.c:111 src/wtools.c:386 src/wtools.c:561
 #: vfs/smbfs.c:117
 msgid "&Cancel"
 msgstr "В╕дм╕на"
@@ -1926,7 +1926,7 @@ msgid " Save file "
 msgstr " Збереження файлу "
 
 #: gtkedit/editcmd.c:838 gtkedit/editwidget.c:1138 gtkedit/gtkedit.c:1249
-#: src/view.c:2077
+#: src/view.c:2073
 msgid "Save"
 msgstr "Запис"
 
@@ -2018,7 +2018,7 @@ msgstr " Введ╕ть порядок аргумент╕в зам╕ни, напр. 3,2,1,4 "
 msgid " Enter replacement string:"
 msgstr " Введ╕ть рядок для зам╕ни:"
 
-#: gtkedit/editcmd.c:1268 gtkedit/editcmd.c:1341 src/view.c:2000
+#: gtkedit/editcmd.c:1268 gtkedit/editcmd.c:1341 src/view.c:1992
 msgid " Enter search string:"
 msgstr " Введ╕ть рядок для пошуку:"
 
@@ -2030,8 +2030,8 @@ msgstr " Зам╕на "
 
 #. Heads the 'Search' dialog box
 #: gtkedit/editcmd.c:1355 gtkedit/editcmd.c:1585 gtkedit/editcmd.c:2320
-#: gtkedit/editcmd.c:2322 gtkedit/editcmd.c:2350 src/view.c:1528
-#: src/view.c:1627 src/view.c:1750 src/view.c:1968 src/view.c:2000
+#: gtkedit/editcmd.c:2322 gtkedit/editcmd.c:2350 src/view.c:1518
+#: src/view.c:1615 src/view.c:1738 src/view.c:1956 src/view.c:1992
 msgid " Search "
 msgstr " Пошук "
 
@@ -2205,13 +2205,13 @@ msgstr "Не виходити"
 
 #: gtkedit/editcmd.c:2390 src/cmd.c:249 src/file.c:1878 src/file.c:2249
 #: src/filegui.c:603 src/hotlist.c:1022 src/main.c:869 src/screen.c:2162
-#: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:406
+#: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:407
 msgid "&Yes"
 msgstr "Так"
 
 #: gtkedit/editcmd.c:2390 src/cmd.c:249 src/file.c:1878 src/file.c:2249
 #: src/filegui.c:602 src/hotlist.c:1022 src/main.c:869 src/screen.c:2162
-#: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:406
+#: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:407
 msgid "&No"
 msgstr "Н╕"
 
@@ -2241,7 +2241,7 @@ msgid " Cut to clipboard "
 msgstr " Вир╕зання у буфер обм╕ну "
 
 #: gtkedit/editcmd.c:2736 gtkedit/editcmd.c:2740 gtkedit/editcmd.c:2745
-#: gtkedit/editcmd.c:2748 src/view.c:1915
+#: gtkedit/editcmd.c:2748 src/view.c:1903
 msgid " Goto line "
 msgstr " Перех╕д на рядок "
 
@@ -2360,7 +2360,7 @@ msgstr ""
 "\n"
 "                  Cooledit  v3.11.5\n"
 "\n"
-"   Copyright (C) 1996 the Free Software Foundation\n"
+"    Copyright © 1996 the Free Software Foundation\n"
 "\n"
 "Текстовий редактор з дружн╕м ╕нтерфейсом користувача.\n"
 "           Створено для Midnight Commander.\n"
@@ -2795,7 +2795,7 @@ msgstr "Помилка ╕н╕ц╕ал╕зац╕╖ редактора.\n"
 
 #: gtkedit/editwidget.c:1137 gtkedit/gtkedit.c:1248 src/help.c:806
 #: src/main.c:1735 src/screen.c:2393 src/screen.c:2423 src/tree.c:1008
-#: src/view.c:2070
+#: src/view.c:2066
 msgid "Help"
 msgstr "Дов╕дка"
 
@@ -2813,7 +2813,7 @@ msgstr "МенюMC"
 
 #. gtk_edit_menu
 #: gtkedit/editwidget.c:1147 gtkedit/gtkedit.c:1258 src/help.c:818
-#: src/main.c:1738 src/view.c:2072 src/view.c:2094
+#: src/main.c:1738 src/view.c:2068 src/view.c:2090
 msgid "Quit"
 msgstr "Вих╕д"
 
@@ -3018,6 +3018,8 @@ msgid ""
 " Couldn't chmod \"%s\" \n"
 " %s "
 msgstr ""
+" Не вдалося зм╕нити режим доступу \"%s\" \n"
+" %s "
 
 #: src/achown.c:634 src/achown.c:649 src/achown.c:712 src/chown.c:223
 #: src/chown.c:345
@@ -4402,7 +4404,7 @@ msgstr " Процес на тл╕: Файл ╕сну╓ "
 #. follow symlinks and preserve Attributes must be the first
 #: src/filegui.c:805
 msgid "preserve &Attributes"
-msgstr ""
+msgstr "Збер╕гати атрибути"
 
 #. &op_preserve
 #: src/filegui.c:807
@@ -4507,7 +4509,7 @@ msgstr " Проблема зчитування з нащадка "
 msgid "Finished"
 msgstr "Завершено"
 
-#: src/find.c:561 src/view.c:1528
+#: src/find.c:561 src/view.c:1518
 #, c-format
 msgid "Searching %s"
 msgstr "Пошук %s"
@@ -4547,7 +4549,7 @@ msgstr "Редагувати цей файл"
 
 #: src/find.c:763
 msgid "Send the results to a Panel"
-msgstr ""
+msgstr "В╕д╕слати результат на панель"
 
 #: src/help.c:279
 msgid ""
@@ -4999,7 +5001,7 @@ msgstr ""
 
 #: src/learn.c:179
 msgid "&Discard"
-msgstr "&В╕дмова"
+msgstr "В╕дмова"
 
 #: src/learn.c:183
 msgid ""
@@ -5436,7 +5438,7 @@ msgstr ""
 #: src/main.c:2596
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
-msgstr ""
+msgstr "Каталог б╕бл╕отек Midnight Commander: %s\n"
 
 #: src/main.c:2610
 msgid ""
@@ -5961,7 +5963,7 @@ msgstr " Зб╕й каналу "
 msgid " Dup failed "
 msgstr " Зб╕й дублювання дескриптору "
 
-#: src/view.c:403
+#: src/view.c:404
 msgid ""
 "File: \n"
 "\n"
@@ -5971,7 +5973,7 @@ msgstr ""
 "\n"
 "    "
 
-#: src/view.c:404
+#: src/view.c:405
 msgid ""
 "\n"
 "\n"
@@ -5981,37 +5983,37 @@ msgstr ""
 "\n"
 "було зм╕нено, хочете зберегти зм╕ни?\n"
 
-#: src/view.c:406
+#: src/view.c:407
 msgid " Save changes "
 msgstr " Зберегти зм╕ни "
 
-#: src/view.c:448
+#: src/view.c:449
 msgid " Can't spawn child program "
 msgstr " Неможливо породити процес-нащадок "
 
-#: src/view.c:457
+#: src/view.c:458
 msgid " Empty output from child filter "
 msgstr " Пустий вив╕д з ф╕льтру "
 
-#: src/view.c:462
+#: src/view.c:463
 msgid " Could not open file "
 msgstr " Неможливо в╕дкрити файл "
 
-#: src/view.c:477
+#: src/view.c:478
 msgid " Can't open file \""
 msgstr " Неможливо в╕дкрити файл \""
 
-#: src/view.c:484
+#: src/view.c:485
 msgid ""
 " Can't stat file \n"
 " "
 msgstr ""
 
-#: src/view.c:490
+#: src/view.c:491
 msgid " Can't view: not a regular file "
 msgstr " Неможливо показати: не звичайний файл "
 
-#: src/view.c:571
+#: src/view.c:572
 #, c-format
 msgid ""
 " Can't open \"%s\"\n"
@@ -6020,7 +6022,7 @@ msgstr ""
 " Неможливо в╕дкрити \"%s\"\n"
 " %s "
 
-#: src/view.c:580
+#: src/view.c:581
 #, c-format
 msgid ""
 " Can't stat \"%s\"\n"
@@ -6041,20 +6043,20 @@ msgstr "Зм╕щення 0x%08x"
 msgid "  [grow]"
 msgstr "  [р╕ст]"
 
-#: src/view.c:1520
+#: src/view.c:1510
 #, c-format
 msgid "Searching for `%s'"
 msgstr "Пошук \"%s\""
 
-#: src/view.c:1627 src/view.c:1750
+#: src/view.c:1615 src/view.c:1738
 msgid " Search string not found "
 msgstr " Рядок незнайдено "
 
-#: src/view.c:1789
+#: src/view.c:1777
 msgid " Invalid regular expression "
 msgstr " Нев╕рний ре╜улярний вираз "
 
-#: src/view.c:1913
+#: src/view.c:1901
 #, c-format
 msgid ""
 " The current line number is %d.\n"
@@ -6063,7 +6065,7 @@ msgstr ""
 " Поточний номер рядка - %d.\n"
 " Введ╕ть новий номер рядка:"
 
-#: src/view.c:1935
+#: src/view.c:1923
 #, c-format
 msgid ""
 " The current address is 0x%lx.\n"
@@ -6072,67 +6074,67 @@ msgstr ""
 " Поточне зм╕щення - 0x%lx.\n"
 " Введ╕ть нове зм╕щення:"
 
-#: src/view.c:1937
+#: src/view.c:1925
 msgid " Goto Address "
 msgstr " Перех╕д за адресою "
 
-#: src/view.c:1968
+#: src/view.c:1956
 msgid " Enter regexp:"
 msgstr " Введ╕ть ре╜улярний вираз:"
 
-#: src/view.c:2073
+#: src/view.c:2069
 msgid "Ascii"
 msgstr "ASCII"
 
-#: src/view.c:2073
+#: src/view.c:2069
 msgid "Hex"
 msgstr ""
 
-#: src/view.c:2074
+#: src/view.c:2070
 msgid "Goto"
 msgstr "Перейти"
 
-#: src/view.c:2074
+#: src/view.c:2070
 msgid "Line"
 msgstr "Рядок"
 
-#: src/view.c:2077
+#: src/view.c:2073
 msgid "RxSrch"
 msgstr ""
 
-#: src/view.c:2080
+#: src/view.c:2076
 msgid "EdText"
 msgstr ""
 
-#: src/view.c:2080
+#: src/view.c:2076
 msgid "EdHex"
 msgstr ""
 
-#: src/view.c:2082
+#: src/view.c:2078
 msgid "UnWrap"
 msgstr ""
 
-#: src/view.c:2082
+#: src/view.c:2078
 msgid "Wrap"
 msgstr ""
 
-#: src/view.c:2085
+#: src/view.c:2081
 msgid "HxSrch"
 msgstr ""
 
-#: src/view.c:2088
+#: src/view.c:2084
 msgid "Raw"
 msgstr ""
 
-#: src/view.c:2088
+#: src/view.c:2084
 msgid "Parse"
 msgstr ""
 
-#: src/view.c:2092
+#: src/view.c:2088
 msgid "Unform"
 msgstr ""
 
-#: src/view.c:2092
+#: src/view.c:2088
 msgid "Format"
 msgstr ""
 
