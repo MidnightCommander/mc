@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Mime Types
+Comment=Configure how files are associated and started.
+Exec=mime-type-capplet
+Terminal=0
+Type=Application

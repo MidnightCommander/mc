@@ -1,0 +1,23 @@
+INCLUDES = -I. -I$(srcdir) 				\
+	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
+	-I$(srcdir)/../../control-center		\
+	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
+	-I$(includedir) $(GNOME_INCLUDEDIR)
+
+bin_PROGRAMS = mime-type-capplet
+
+mime_type_capplet_SOURCES = mime-type-capplet.c mime-data.c edit-window.c
+
+mime_type_capplet_LDADD = ../../control-center/libcapplet.la \
+			     $(GNOME_LIBDIR) $(ORB_LIBS) \
+			     $(GNOMEUI_LIBS) $(INTLLIBS) -lgnorba
+
+EXTRA_DIST = \
+	mime-type.desktop
+
+
+sysdir = $(datadir)/control-center
+sys_DATA = mime-type.desktop 
+
+install-data-local:
+	$(INSTALL_DATA) $(srcdir)/mime-type.desktop $(datadir)/gnome/apps/Settings/mime-type.desktop
