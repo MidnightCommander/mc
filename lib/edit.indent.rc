@@ -1,12 +1,10 @@
 #! /bin/sh
-# *** External Formatter (Indenter) for key F19 cooledit.
-# args: 
-#	$1 - edit file name  
-#       $2 - highlight block file name
-#	$3 - error file name
+# *** External Formatter (Indenter) for GNU Midnight Commander.
+# arguments:
+#    $1 - Name of the file being edited
+#    $2 - Name of the file to be processed
 
 exec >/dev/null
-exec 2>"$3"
 
 case `echo $1 |sed 's/^.*\.//'` in
     c|h)

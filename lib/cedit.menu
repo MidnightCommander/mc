@@ -7,7 +7,6 @@ shell_patterns=0    # expression type
 #    position. For edit menu only.
 # %y The syntax type of current file. For edit menu only.
 # %b The block file name.
-# %e The error file name.
 # %f The current file name.
 # %n Only the current file name without extension.
 # %x The extension of current file name.
