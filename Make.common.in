@@ -27,6 +27,7 @@ tidir      = $(libdir)/term
 extfsdir   = $(libdir)/extfs
 datadir    = @datadir@
 icondir    = $(datadir)/pixmaps/mc
+gnomeicondir = @gnomeicondir@
 localedir  = $(datadir)/locale
 mandir     = @mandir@
 man1dir    = $(mandir)/man1

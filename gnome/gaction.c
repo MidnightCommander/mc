@@ -26,7 +26,8 @@ gmc_execute (char *fname, char *buf)
 int
 gmc_open_filename (char *fname, GList *args)
 {
-	char *mime_type, *cmd;
+	const char *mime_type;
+	const char *cmd;
 	char *buf;
 	int size;
 
@@ -59,6 +60,17 @@ gmc_open_filename (char *fname, GList *args)
 		gmc_execute (fname, cmd);
 		return 1;
 	}
+
+	if (strcmp (mime_type, "application/x-gnome-app-info")  == 0){
+		GnomeDesktopEntry *entry;
+
+		entry = gnome_desktop_entry_load (fname);
+		if (entry){
+			gnome_desktop_entry_launch (entry);
+			gnome_desktop_entry_free (entry);
+		}
+	}
+	
 	return 0;
 }
 
@@ -77,7 +89,7 @@ gmc_run_view (char *filename, char *buf)
 int
 gmc_view (char *filename, int start_line)
 {
-	char *mime_type, *cmd;
+	const char *mime_type, *cmd;
 	char *buf;
 	int size;
 

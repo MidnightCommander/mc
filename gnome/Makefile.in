@@ -212,7 +212,9 @@ corba-gmc: @LIBVFS@ $(OBJS) $(CORBAOBJS) libgtkedit.a
 	$(CC) -o corba-gmc $(CORBAOBJS) $(OBJS) $(EXTRALIBS) $(CORBA_LDFLAGS) $(LIBS) 
 
 mc.keys: mc.keys.in Makefile
-	sed -e 's^\@icondir\@^$(icondir)^g' < mc.keys.in > mc.keys.tmp \
+	sed -e 's^\@icondir\@^$(icondir)^g' \
+	    -e 's^\@gnomeicondir\@^$(gnomeicondir)^g' \
+	< mc.keys.in > mc.keys.tmp \
 	&& mv mc.keys.tmp mc.keys 
 
 mc.keys.in: mc.keys.in.in Makefile.in ../config.status

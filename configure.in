@@ -5,7 +5,7 @@ AC_INIT(create_vcs)
 AC_CONFIG_HEADER(config.h)
 
 PACKAGE=mc
-VERSION=4.5.11
+VERSION=4.5.13
 AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
 AC_DEFINE_UNQUOTED(VERSION, "$VERSION")
 AC_SUBST(VERSION)
@@ -489,6 +489,7 @@ dnl
 mx=""
 gmcdep=""
 libgtkedit=""
+
 AC_SUBST(insticons)
 GNOME_INIT_HOOK([
 	mx=mx
@@ -500,7 +501,9 @@ GNOME_INIT_HOOK([
 	else
 	    xvers="Gnome+$xvers"
 	fi
+	gnomeicondir=`gnome-config --prefix`/share/pixmaps
 ])
+AC_SUBST(gnomeicondir)
 AC_SUBST(mx)
 AC_SUBST(gmcdep)
 AC_SUBST(libgtkedit)

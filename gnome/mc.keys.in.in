@@ -131,7 +131,7 @@ text/html:
 	open.netscape.View this file with Netscape=gnome-moz-remote %f
 
 application/vcard:
-	icon-filename=@icondir@/calendar.xpm
+	icon-filename=@gnomeicons@/gnome-calendar.png
 
 x-url/http:
 	icon-filename=@icondir@/gnome-text-url.png
