@@ -2,7 +2,7 @@
 .\"     Marco Ciampa <ciampix@libero.it>
 .\" Chi vuole contribuire aggiunga il nome qui sotto.
 .\"
-.\" Come tutte le traduzioni ho dovuto fare dei compromessi.
+.\" Come succede per tutte le traduzioni ho dovuto fare dei compromessi.
 .\" Il più importante (e che mi provoca tuttora dei dubbi) è stato la
 .\" traduzione dei comandi Chmod, Chown e Advanced Chown con Permessi,
 .\" Proprietario e Proprietario avanzato rispettivamente. Lo spirito che
@@ -11,6 +11,10 @@
 .\" è conquistato soprattutto nei nuovi utenti.
 .\" Altro esempio è l'uso (per questioni 'estetiche') indifferente di
 .\" selezionato e marcato, quando il contesto rendeva ovvio il significato.
+.\" E ancora (ma vedo che è diventata una saggia abitudine anche nella
+.\" traduzione di altri programmi) il non rispettare l'uso delle maiuscole 
+.\" per marcare particolari comandi, uso che crea soprattutto confusione 
+.\" secondo il mio modesto parere.
 .\"
 .\" Prego mantenere la linea di traduzione generale (per quanto possibile).
 .\"
@@ -39,7 +43,7 @@ Forza la visualizzazione in bianco e nero.
 .I "\-c"
 Forza la modalità colore, prego consultare la sezione 
 .\"LINK2"
-Colori
+colori
 .\"Colors"
 per ulteriori informazioni.
 .TP
@@ -47,7 +51,7 @@ per ulteriori informazioni.
 Usato per specificare un set di colori differente a riga di comando.
 Il formato di arg è documentato nella sezione
 .\"LINK2"
-Colori\&.
+colori\&.
 .\"Colors"
 .TP
 .I "\-d"
@@ -133,15 +137,15 @@ Copia usano la directory del pannello non selezionato come valore
 predefinito di destinazione (ma si richiede sempre una conferma prima).
 Per informazioni aggiuntive, vedere le sezioni sui 
 .\"LINK2"
-Pannelli Directory\&,
+pannelli directory\&,
 .\"Directory Panels"
 i
 .\"LINK2"
-menu Sinistra e Destra
+menu sinistra e destra
 .\"Left and Right Menus"
 e
 .\"LINK2"
-menu File\&.
+menu file\&.
 .\"File Menu"
 .PP
 E' possibile eseguire comandi di sistema dal Midnight Commander 
@@ -149,11 +153,11 @@ semplicemente battendoli. Ogni cosa scritta apparirà sulla linea di
 comando e quando si preme l'invio il Midnight Commander eseguirà la
 riga di comando appena battuta; leggere le sezioni
 .\"LINK2"
-Shell a Riga di Comando
+shell a riga di comando
 .\"Shell Command Line"
 e
 .\"LINK2"
-Tasti di Ingresso
+tasti della riga di ingresso
 .\"Input Line Keys"
 per saperne di più sulla riga di comando.
 .\"NODE "Mouse Support"
@@ -187,15 +191,15 @@ il pannello sfoglia di una pagina in alto. Allo stesso modo, un click sulla
 riga in basso provocherà un cambio di pagina in basso. Questo metodo dei bordi
 funziona anche nel
 .\"LINK2"
-Visualizzatore dell'Aiuto
+visualizzatore dell'aiuto
 .\"Contents"
 e nell' 
 .\"LINK2"
-Albero directory\&.
+albero directory\&.
 .\"Directory Tree"
 .PP
-L'auto ripetizione predefinita per il mouse è di 400 millisecondi. Questa
-può essere cambiata in valori differenti modificando il file
+L'auto ripetizione predefinita per il mouse è di 400 millisecondi. Questo
+valore può essere cambiato modificando il file
 .\"LINK2"
 \&~/.mc/ini
 .\"Save Setup"
@@ -236,22 +240,22 @@ principali.
 .PP
 La sezione
 .\"LINK2"
-Menu File
+menu file
 .\"File Menu"
 documenta le abbreviazioni di tasti per i comandi che appaiono nel
-menu File. Questa sezione include i tasti funzione. Molti di questi comandi
+menu file. Questa sezione include i tasti funzione. Molti di questi comandi
 lavorano sui file selezionati o sui marcati.
 .PP
 La sezione
 .\"LINK2"
-Pannelli Directory
+pannelli directory
 .\"Directory Panels"
 documenta i tasti che selezionano o marcano i file come oggetto
 per una seguente azione (l'azione normalmente deriva dal menu file).
 .PP
 La sezione
 .\"LINK2"
-Shell a Riga di Comando
+shell a riga di comando
 .\"Shell Command Line"
 elenca i tasti utilizzati per immettere e modificare linee di comando.
 Molti di questi copiano nomi di file o altro dal pannello directory
@@ -260,10 +264,10 @@ accedere allo storico comandi.
 .PP
 I
 .\"LINK2"
-Tasti Linea di Ingresso
+tasti della riga di ingresso
 .\"Input Line Keys"
-sono usati per modificare le linee di ingresso. Cioè sia la linea di comando
-che le linee di ingresso nelle finestre di interrogazione.
+sono usati per modificare le righe di ingresso. Cioè sia la riga di comando
+che le righe di ingresso nelle finestre di interrogazione.
 .\"NODE "  Miscellaneous Keys"
 .SH "  Tasti vari"
 Qua ci sono alcuni tasti che non sono classificabili in nessuna delle
@@ -290,14 +294,14 @@ ridisegna tutto nel Midnight Commander.
 .B C-x c
 esegue il comando
 .\"LINK2"
-Chmod
+chmod
 .\"Chmod"
 su un file o su un gruppo di file marcati.
 .TP
 .B C-x o
 esegue il comando
 .\"LINK2"
-Chown
+chown
 .\"Chown"
 sul file corrente o sui file marcati.
 .TP
@@ -316,7 +320,7 @@ imposta la modalità della visualizzazione dell'altro pannello a vista rapida.
 .B C-x !
 esegue il comando
 .\"LINK2"
-Pannellizza comando\&.
+pannellizza comando\&.
 .\"External panelize"
 .TP
 .B C-x h
@@ -326,15 +330,15 @@ aggiungi directory alla lista directory favorite\&.
 .\"Hotlist"
 .TP
 .B M-!
-esegue il comando Vista filtrata, descritto in
+esegue il comando vista filtrata, descritto in
 .\"LINK2"
-Vista filtrata\&.
+visualizzatore di file interno\&.
 .\"Internal File Viewer"
 .TP
 .B M-?
 esegue il comando
 .\"LINK2"
-Trova file\&.
+trova file\&.
 .\"Find File"
 .TP
 .B M-c
@@ -361,7 +365,7 @@ Questa sezione elenca i tasti che operano sui pannelli directory.
 Se si desidera sapere come cambiare la visualizzazione dei pannelli,
 date un'occhiata alla sezione su
 .\"LINK2"
-menu Sinistra e Destra\&.
+menu sinistra e destra\&.
 .\"Left and Right Menus"
 .TP
 .B Tab, C-i
@@ -500,7 +504,7 @@ precedente, M-n va alla successiva.
 mostra lo storico per la riga di ingresso corrente.
 .\"NODE "  General Movement Keys"
 .SH "  Tasti generali di movimento"
-Il visualizzatore dell'aiuto, il visualizzato dei file e l'albero directory
+Il visualizzatore dell'aiuto, il visualizzatore dei file e l'albero directory
 usano un codice comune per gestire il movimento. Per questa ragione essi
 accettano esattamente gli stessi tasti. Ognuno di questi però accetta anche
 altri tasti indipendenti.
@@ -612,54 +616,54 @@ superiore dello schermo. La barra menu possiede cinque menu: "Sinistra", "File",
 .PP
 I
 .\"LINK2"
-menu Sinistra e Destra 
+menu sinistra e destra 
 .\"Left and Right Menus"
 permettono di modificare l'aspetto dei pannelli directory di 
 sinistra e di destra.
 .PP
 Il
 .\"LINK2"
-Menu File
+menu file
 .\"File Menu"
 elenca le azioni che possono essere condotte sui file correntemente selezionati 
 o marcati.
 .PP
 Il
 .\"LINK2"
-Menu Comando 
+menu comando 
 .\"Command Menu"
 elenca le azioni più generali e non ha relazione con il file correntemente
 selezionati o marcati.
 .PP
 Il
 .\"LINK2"
-Menu Opzioni
+menu opzioni
 .\"Options Menu"
 elenca le azioni che permettono di personalizzare il Midnight Commander.
 .\"NODE "  Left and Right Menus"
-.SH "  Menu Sinistra e Destra (Sopra e Sotto)"
+.SH "  Menu sinistra e destra (sopra e sotto)"
 L'apparenza dei pannelli directory è modificabile tramite i menu
-.B Sinistra
+.B sinistra
 e
-.B Destra 
+.B destra 
 (vengono chiamati
-.B Sopra
+.B sopra
 e
-.B Sotto
+.B sotto
 se la divisione pannello nella finestra
 .\"LINK2"
-Aspetto
+aspetto
 .\"Layout"
-del menu Opzioni è Orizzontale).
+del menu opzioni è orizzontale).
 .\"NODE "    Listing Mode..."
 .SH "    Modalità lista..."
 La modalità lista serve a mostrare un elenco di file; ci sono quattro
 modalità elenco disponibili:
-.BR Completa ,
-.BR Breve ,
-.B Lunga
+.BR completa ,
+.BR breve ,
+.B lunga
 e
-.BR "Definita dall'utente" .
+.BR "definita dall'utente" .
 La modalità completa mostra il nome del file, l'ampiezza del file e
 la data di modifica.
 .PP
@@ -770,13 +774,13 @@ allora la specifica definisce l'ampiezza minima - se il programma
 trova che serve più spazio sullo schermo, espanderà il campo.
 .PP
 Per esempio la modalità 
-.B Completa
+.B completa
 corrisponde a questo formato:
 .PP
 half type name | size | mtime
 .PP
 E quella
-.B Lunga
+.B lunga
 corrisponde a questo formato:
 .PP
 full perm space nlink space owner space group space size space mtime
@@ -820,7 +824,7 @@ la voce inverso.
 Normalmente le directory sono ordinare prima dei file ma quest'impostazione
 può essere modificata dal
 .\"LINK2"
-Menu Opzioni
+menu opzioni
 .\"Options Menu"
 (opzione  
 .BR "mescola tutti i file" ).
@@ -839,11 +843,11 @@ si ha pannellizzato dei nomi di file in un pannello, questo ricaricherà
 il contenuto della directory e rimuoverà le informazioni pannellizzate
 (vedere sezione 
 .\"LINK2"
-Pannellizza comando
+pannellizza comando
 .\"External panelize"
 per ulteriori informazioni).
 .\"NODE "  File Menu"
-.SH "  Menu File"
+.SH "  Menu file"
 Il Midnight Commander usa i tasti F1 - F10 come tasti veloci 
 per i comandi che appaiono nel menu file. Le sequenze di escape
 per i tasti funzione sono capacità terminfo da kf1 a kf10. Su terminali
@@ -879,9 +883,9 @@ aggiungere nuove funzionalità al Midnight Commander.
 Visualizza il file correntemente selezionato. Nell'ipostazione predefinita
 viene invocato il  
 .\"LINK2"
-Visualizzatore Interno di File
+visualizzatore interno di file
 .\"Internal File Viewer"
-ma se l'opzione "Usa Visualizzatore interno" è deselezionata, verrà invocato
+ma se l'opzione "Usa visualizzatore interno" è deselezionata, verrà invocato
 un visualizzatore esterno specificato dalla variabile ambiente
 .BR PAGER .
 Se 
@@ -890,7 +894,7 @@ non è definita, verrà invocato il comando "view". Se si usa invece il comando
 Maiusc-F3, il visualizzatore verrà invocato senza nessun tipo di formattazione
 o preprocessamento sul file.
 .PP
-.B Vista Filtrata (M-!)
+.B Vista filtrata (M-!)
 .PP
 Questo tasto richiede all'utente un comando ed i suoi argomenti (l'argomento
 predefinito è il nome del file attualmente selezionato), il risultato di tale
@@ -902,11 +906,11 @@ Invoca l'editor
 .B vi 
 o l'editor specificato nella variabile d'ambiente 
 .B EDITOR
-oppure l'
+oppure
 .\"LINK2"
-Editor di file interno
+l'editor di file interno
 .\"Internal File Editor"
-se l'opzione, "Usa Editor interno" è stata impostata.
+se l'opzione, "usa editor interno" è stata impostata.
 .PP
 .B Copia (F5)
 .PP
@@ -919,14 +923,14 @@ sulla maschera sorgente (che sarà normalmente * o ^\\(.*\\)$ a seconda
 dell'impostazione di 'modelli della shell') o sui caratteri jolly sulla destinazione
 vedere
 .\"LINK2"
-Maschera copia/rinomina\&.
+maschera copia/rinomina\&.
 .\"Mask Copy/Rename"
 .PP
 In alcuni sistemi è possibile eseguire la copia in background cliccando
 sul bottone background (o premendo M-b nella finestra di dialogo). Il
 comando 
 .\"LINK2"
-Processi in background
+processi in background
 .\"Background jobs"
 è utile per controllarne l'andamento.
 .PP
@@ -974,7 +978,7 @@ In alcuni sistemi è possibile eseguire la copia in background cliccando
 sul bottone background (o premendo M-b nella finestra di dialogo). Il
 comando 
 .\"LINK2"
-Processi in background
+processi in background
 .\"Background jobs"
 è utile per controllarne l'andamento.
 .PP
@@ -988,7 +992,7 @@ Cancella il file correntemente selezionato o i file marcati nel
 pannello corrente. Durante il processo è possibile premere C-c 
 o ESC per abortire l'operazione.
 .PP
-.B Cambia Dir veloce (M-c)
+.B Cambia dir veloce (M-c)
 Usare il comando
 .\"LINK2"
 Cambia Dir veloce
@@ -1039,16 +1043,16 @@ comando
 comando interno cd\&.
 .\"The cd internal command"
 .\"NODE "  Command Menu"
-.SH "  Menu Comando"
+.SH "  Menu comando"
 Il comando
 .\"LINK2"
-Albero directory
+albero directory
 .\"Directory Tree"
 mostra un disegno ad albero delle directory.
 .PP
 Il comando
 .\"LINK2"
-Trova file
+trova file
 .\"Find File"
 permette di cercare un file specifico. Il comando "Scambia pannelli"
 scambia il contenuto dei due pannelli directory.
@@ -1072,28 +1076,28 @@ può accedere premendo M-p o M-n.
 .PP
 Il comando
 .\"LINK2"
-Directory favorite (C-\\)
+directory favorite (C-\\)
 .\"Hotlist"
 permette un cambio più veloce dalla directory corrente ad una di quelle usate 
 più spesso.
 .PP
 Il comando
 .\"LINK2"
-Pannellizza comando
+pannellizza comando
 .\"External panelize"
 permette di eseguire un coamndo esterno e di mettere il risultato nel pannello
 corrente.
 .PP
 Il comando
 .\"LINK2"
-Modifica file estensioni
+modifica file estensioni
 .\"Extension File Edit"
 permette di specificare i programmi che devono essere eseguiti quando
 si prova ad eseguire, visualizzare, modificare e un mucchio di altre
 cose, file con una specifica estensione (la fine del nome del file).
 Il comando
 .\"LINK2"
-Modifica file menu
+modifica file menu
 .\"Menu File Edit"
 serve a modificare il menu utente (che appare premendo F2).
 .\"NODE "    Directory Tree"
@@ -1115,7 +1119,7 @@ E' possibile utilizzare i tasti seguenti:
 .PP
 Sono accettati i
 .\"LINK2"
-Tasti Generali di movimento\&.
+tasti generali di movimento\&.
 .\"General Movement Keys"
 .PP
 .B Invio.
@@ -1134,7 +1138,7 @@ Cancella questa directory dalla rappresentazione ad albero. Usare questo
 comando per eliminare la confusione dal'albero. Se si vuole nuovamente
 visualizzare l'albero completo premere F2 nella sua directory genitrice.
 .PP
-.B F4 (Statico/Dynamico).
+.B F4 (Statico/Dinamico).
 Cambia tra modo di navigazione dinamico (predefinito) e statico.
 .PP
 Nella navigazione statica si usano i tasti Su e Giù per 
@@ -1188,11 +1192,11 @@ supporto mouse\&.
 .\"Mouse Support"
 .\"NODE "    Find File"
 .SH "    Trova file"
-Il comando Trova file domanda prima la directory di inizio per la
+Il comando trova file domanda prima la directory di inizio per la
 ricerca ed il nome del file da cercare. Premendo il tasto albero
-puoi selezionare la directory di partenza dall'
+puoi selezionare la directory di partenza
 .\"LINK2"
-albero directory\&.
+dall'albero directory\&.
 .\"Directory Tree"
 .PP
 Il campo contenuo accetta espressioni regolari simili a egrep(1). Ciò
@@ -1213,14 +1217,14 @@ possa svolgere ulteriori operazioni su di essi (visualizzazione, copia,
 spostamento, e così via). Dopo la pannellizzazione è possibile premere C-r
 per ripristinare la vista normale dei file.
 .PP
-E' possibile avere una lista di directory che il comando Trova file dovrebbe
+E' possibile avere una lista di directory che il comando trova file dovrebbe
 saltare durante la ricerca (per esempio, si può evitare di fare ricerche su
 un CDROM o su una directory NFS montata attraverso un collegamento lento).
 .PP
 Le directory che devono essere saltate devono essere impostate nella variabile
 .B find_ignore_dirs 
 nella sezione
-.B Misc 
+.B Misc
 del file ~/.mc/ini.
 .PP
 Le directory devono essere separate da una virgola, come nell'esempio:
@@ -1232,18 +1236,18 @@ find_ignore_dirs=/cdrom:/nfs/wuarchive:/afs
 .PP
 Si può prendere in considerazione l'uso del comando
 .\"LINK2"
-Pannellizza comando
+pannellizza comando
 .\"External panelize"
-per operazioni particolari. Il comando Trova file serve solo per 
-ricerche semplici mentre usando Pannellizza comando si può fare 
+per operazioni particolari. Il comando trova file serve solo per 
+ricerche semplici mentre usando pannellizza comando si può fare 
 ricerche complesse come si vuole.
 .\"NODE "    External panelize"
 .SH "    Pannellizza comando"
-Il Pannellizza comando permette di eseguire un programma esterno, e
+Pannellizza comando permette di eseguire un programma esterno, e
 mettere il risultato del programma nel pannello corrente.
 .PP
 Per esempio, se si vuole manipolare in uno dei pannelli tutti i collegamenti
-simbolici nella directory corrente, basta usare Pannellizza comando per
+simbolici nella directory corrente, basta usare pannellizza comando per
 eseguire il seguente:
 .PP
 .nf
@@ -1347,7 +1351,7 @@ in background del Midnight Commander (in background possono essere
 eseguite solo operazioni di copia e rinomina). Da qui si può bloccare, 
 far ripartire e uccidere un lavoro in background.
 .\"NODE "    Menu File Edit"
-.SH "    Modifica file Menu"
+.SH "    Modifica file menu"
 Il menu utente è un menu di comandi utili che possono essere 
 personalizzati dall'utente. Quando si accede al menu utente, viene 
 utilizzato, se esiste, il file .mc.menu dalla directory corrente,
@@ -1492,7 +1496,7 @@ di condizione, una che comincia con '+' e l'altra con '='.
 I commenti cominciano con '#'. Linee di commento aggiuntive devono cominciare con
 '#', spazi o tabulazioni.
 .\"NODE "  Options Menu"
-.SH "  Menu Opzioni"
+.SH "  Menu opzioni"
 Il Midnight Commander possiede alcune opzioni che possono essere
 abilitate e disabilitate in molte finestre di dialogo accessibili 
 da questo menu. Le opzioni sono abilitate se hanno un "x" di fronte 
@@ -1500,35 +1504,35 @@ ad esse.
 .PP
 Il comando
 .\"LINK2"
-Configurazione
+configurazione
 .\"Configuration"
 mostra una finestra di dialogo dalla quale è possibile cambiare 
 molte delle inpostazioni del Midnight Commander.
 .PP
 Il comando
 .\"LINK2"
-Aspetto
+aspetto
 .\"Layout"
 mostra una finestra di dialogo con la quale è possibile impostare molte
 opzioni relative a come mc appare sullo schermo.
 .PP
 Il comando
 .\"LINK2"
-Conferme
+conferme
 .\"Confirmation"
 mostra una finestra di dialogo dalla quale è possibile specificare per 
 quali azioni si vuole una richiesta di conferma.
 .PP
 Il comando
 .\"LINK2"
-Mostra bit
+mostra bit
 .\"Display bits"
 mostra una finestra di dialogo dalla quale è possibile selezionare quali
 caratteri il vostro terminale è capace di mostrare.
 .PP
 Il comando
 .\"LINK2"
-Impara tasti
+impara tasti
 .\"Learn keys"
 mostra una finestra di dialogo dalla quale è possibile controllare i tasti
 che non appaiono funzionare su alcuni terminali ed è possibile aggiustare.
@@ -1542,9 +1546,9 @@ opzioni relative al VFS.
 .PP
 Il comando 
 .\"LINK2"
-Salva configurazione
+salva configurazione
 .\"Save Setup"
-salva le impostazioni correnti dei menu Sinistra, Destra e Opzioni. Viene salvato
+salva le impostazioni correnti dei menu sinistra, destra e opzioni. Viene salvato
 anche un piccolo numero di altre opzioni.
 .\"NODE "    Configuration"
 .SH "    Configurazione"
@@ -1726,7 +1730,7 @@ e i
 .I tipi di file
 siano evidenziati con speciali
 .\"LINK2"
-Colori\&.
+colori\&.
 .\"Colors"
 Se l'evidenziazione dei permessi è abilitata, i campi
 .I permessi
@@ -1889,26 +1893,26 @@ posizionato in @prefix@/share/mc/mc.ini. Se il file di configurazione di
 sistema non esiste, MC userà le impostazioni predefinite.
 .PP
 Il comando
-.I Salva configurazione
+.I salva configurazione
 crea il file ~/.mc/ini salvando le impostazioni correnti 
 dei menu
 .\"LINK2"
-Sinistra, Destra
+sinistra, destra
 .\"Left and Right Menus"
 e
 .\"LINK2"
-Opzioni\&.
+opzioni\&.
 .\"Options Menu"
 .PP
 Se si attiva l'opzione
-.I autosalva configurazione
-, MC salverà sempre le impostazioni correnti all'uscita.
+.IR "autosalva configurazione" ,
+MC salverà sempre le impostazioni correnti all'uscita.
 .PP
 Esistono anche impostazioni che non possono essere cambiate dai menu.
 Per cambiare queste impostazioni è necessario modificare il file di
 configurazione con il vostro editor preferito. Vedere sezione 
 .\"LINK2"
-Impostazioni speciali
+impostazioni speciali
 .\"Special Settings"
 per ulteriori informazioni.
 .SH ""
@@ -1923,7 +1927,7 @@ Se si preme Invio su di un file che non è eseguibile, il Midnight
 Commander confronta l'estensione del file selezionato con ciò 
 che trova nel
 .\"LINK2"
-File Estensioni\&.
+file estensioni\&.
 .\"Extension File Edit"
 Se viene trovata una corrispondenza, verrà eseguito il codice associato.
 Verrà eseguita una semplice 
@@ -1935,10 +1939,10 @@ prima di eseguire il comando.
 .SH "Il comando cd interno"
 Il comando 
 .I cd
-non viene passato alla shell per l'esecuzione ma è iterpretato dal 
-Midnight Commander. Perciò può non gestire tutte quelle simpatiche 
-espansioni di macro e sostituzioni che fa la shell, malgrado alcune
-le possa fare:
+non viene passato alla shell per l'esecuzione ma viene interpretato 
+dal Midnight Commander. Perciò esso non può gestire tutte quelle 
+simpatiche espansioni di macro e sostituzioni che fa la shell, malgrado 
+alcune le possa ancora fare:
 .PP
 .I Sostituzione della tilde.
 La (~) verrà sostituita con la vostra directory home e se si appende
@@ -2177,11 +2181,11 @@ file. Il tasto di scelta rapida per questo comando è C-x o.
 .SH "Proprietario avanzato"
 Il comando Proprietario avanzato consiste nel comando 
 .\"LINK2"
-Permessi
+permessi
 .\"Chmod"
 e
 .\"LINK2"
-Proprietario
+proprietario
 .\"Chown"
 combinati assieme in una finestra. E' così possibile cambiare i permessi
 ed il proprietario/gruppo dei file in un sol colpo.
@@ -2448,7 +2452,7 @@ Abilita/disabilita il righello.
 E' anche possibile istruire il visualizzatore su come mostrare un file,
 vedere la sezione
 .\"LINK2"
-Editor File Estensioni\&.
+modifica file estensioni\&.
 .\"Extension File Edit"
 .\"NODE "Internal File Editor"
 .SH "Editor di file interno"
@@ -2575,10 +2579,10 @@ specifico della riga di comando.
 Se il completamento è ambiguo (ci sono più possibilità differenti),
 MC emette un suono e l'azione seguente dipenderà a seconda delle impostazioni 
 dell'opzione
-.I Completamento: visualizza tutto
+.I completamento: visualizza tutto
 nella finestra
 .\"LINK2"
-Configurazione\&.
+configurazione\&.
 .\"Configuration"
 Se è abilitata, un elenco di tutte le possibilità viene mostrato vicino 
 alla posizione corrente per poter selezionare con i tasti freccia e
@@ -2595,7 +2599,7 @@ con i tasti di cancellamento
 .B F10
 e i tasti di freccia sinistra e destra. Se
 .\"LINK2"
-Completamento: visualizza tutto
+completamento: visualizza tutto
 .\"Configuration"
 è disabilitato, la finestra viene mostrata solo se si preme 
 .B M-Tab
@@ -2684,7 +2688,7 @@ Il file mc.ext già fornisce un collegamento per il file tar; ciò
 significa che normalmente basta selezionare un file tar e premere invio
 per entrare nel file tar, vedere la sezione
 .\"LINK2"
-Editor File Estensioni
+modifica file estensioni
 .\"Extension File Edit"
 per i dettagli su come questo viene fatto.
 .PP
@@ -2699,7 +2703,7 @@ L'ultima riga, specifica il percorso completo dell'archivio tar.
 .\"NODE "  FIle transfer over SHell filesystem"
 .SH "  Trasferimento di file su FIlesystem di SHell (FISH)"
 Il file system fish è un file system basato sulla rete che permette di
-manipolare i file di una macchina remota come fossero locali. Per usarlo
+manipolare i file di una macchina remota come fossero locali. Per usarlo,
 l'altra parte deve avere un server fish o avere una shell compatibile
 bash.
 .PP
@@ -2839,7 +2843,7 @@ con lo stesso effetto dell'opzione -c.
 E' possibile specificare i terminali su cui si vuole forzare sempre 
 la modalità colore aggiungendo la variabile
 .I color_terminals
-nella sezione Color del file di inizializzazione.
+nella sezione Colors del file di inizializzazione.
 Questo previene il Midnight Commander dal tentare di controllare se
 il terminale supporta i colori. Per esempio:
 .nf
@@ -2857,9 +2861,9 @@ colore: ncurses userà solo le informazioni nel database dei terminali.
 Il Midnight Commander fornisce un modo per cambiare i colori predefiniti.
 Attualmente i colori sono configurati usando la variabile ambiente
 .B MC_COLOR_TABLE 
-o la sezione Color nel file di inizializzazione.
+o la sezione Colors nel file di inizializzazione.
 .PP
-Nella sezione Color, la mappa dei colori predefinita viene caricata 
+Nella sezione Colors, la mappa dei colori predefinita viene caricata 
 dalla variabile 
 .IR base_color . 
 Si può specificare una mappa colori alternativa per un terminale
@@ -2926,7 +2930,7 @@ I colori speciali di evidenziazione determinano come i file
 vengono visualizzati quando l'evidenziazione dei file è 
 abilitata (vedere sezione 
 .\"LINK2"
-Aspetto\&).
+aspetto\&).
 .\"Layout
 .I directory
 usata per directory o collegamenti simbolici a directory;

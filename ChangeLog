@@ -1,3 +1,7 @@
+2003-02-23  Marco Ciampa  <ciampix@libero.it>
+
+	* doc/it/mc.1.in: updated manual with some stilistic changes.
+
 2003-02-23  Dmitry Alexeyev  <dmi_a@qnx.org.ru>
 
 	* lib/mc.ext.in: Add entry for QNX Neutrino packages.
