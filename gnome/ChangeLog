@@ -1,3 +1,8 @@
+1999-02-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (drag_end): Reload the desktop when a drag from the
+	desktop terminates (the user may have moved something away).
+
 1999-02-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gcorba.c (do_window_close): Removed call to CORBA_free, as
@@ -37,6 +42,7 @@
 	scan_begin and scan_end signals of the tree -- these will set the
 	cursor to a watch while the tree is being scanned.
 
+>>>>>>> 1.321
 1999-02-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_icon_info_destroy): Delete the metadata

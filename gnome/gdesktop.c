@@ -1178,6 +1178,15 @@ drag_data_get (GtkWidget *widget, GdkDragContext *context, GtkSelectionData *sel
 	g_free (filelist);
 }
 
+/* Callback used when a drag from the desktop is finished.  We need to reload
+ * the desktop.
+ */
+static void
+drag_end (GtkWidget *widget, GdkDragContext *context, gpointer data)
+{
+	reload_desktop_icons (FALSE, 0, 0);
+}
+
 /* Set up a desktop icon as a DnD source */
 static void
 setup_icon_dnd_source (DesktopIconInfo *dii)
@@ -1189,6 +1198,9 @@ setup_icon_dnd_source (DesktopIconInfo *dii)
 			    dii);
 	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "drag_data_get",
 			    GTK_SIGNAL_FUNC (drag_data_get),
+			    dii);
+	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "drag_end",
+			    GTK_SIGNAL_FUNC (drag_end),
 			    dii);
 }
 
