@@ -1,3 +1,8 @@
+1998-05-31  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* complete.c (filename_completion_function): Use the vfs routines
+	for name completion.
+
 1998-05-31  Jakub Jelinek <jj@ultra.linux.cz>
 
 	* complete.c (complete_engine): Fix completions.

@@ -137,13 +137,13 @@ char *filename_completion_function (char *text, int state)
 	       and `command`.
 	       Maybe a dream - UNIMPLEMENTED yet. */
         }
-        directory = opendir (dirname);
+        directory = mc_opendir (dirname);
         filename_len = strlen (filename);
     }
 
     /* Now that we have some state, we can read the directory. */
 
-    while (directory && (entry = readdir (directory))){
+    while (directory && (entry = mc_readdir (directory))){
         /* Special case for no filename.
 	   All entries except "." and ".." match. */
         if (!filename_len){
@@ -167,7 +167,7 @@ char *filename_completion_function (char *text, int state)
 	    strcat (tmp, entry->d_name);
 	    canonicalize_pathname (tmp);
 	    /* Unix version */
-	    if (!stat (tmp, &tempstat)){
+	    if (!mc_stat (tmp, &tempstat)){
 	    	uid_t my_uid = getuid ();
 	    	gid_t my_gid = getgid ();
 	    	
@@ -198,7 +198,7 @@ char *filename_completion_function (char *text, int state)
 
     if (!entry){
         if (directory){
-	    closedir (directory);
+	    mc_closedir (directory);
 	    directory = NULL;
 	}
         if (dirname){
