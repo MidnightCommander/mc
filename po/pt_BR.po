@@ -122,7 +122,7 @@ msgstr " Impossível iniciar um terminal"
 # gnome/gcmd.c:127 src/main.c:844 src/screen.c:2053
 #: gnome/gcmd.c:101
 msgid "The Midnight Commander Team"
-msgstr "O Time do Comandante da Meia Noite"
+msgstr "O Time do Midnight Commander"
 
 #: gnome/gcmd.c:103
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
@@ -131,7 +131,7 @@ msgstr "bugs: http://bugs.gnome.org, ou use o programa `gnome-bug'"
 # gnome/gcmd.c:112
 #: gnome/gcmd.c:115 gnome/gmc-window.c:68
 msgid "GNU Midnight Commander"
-msgstr "GNU Comandante da Meia Noite"
+msgstr "GNU Midnight Commander"
 
 # gnome/gcmd.c:115
 #: gnome/gcmd.c:118 gnome/gmc-window.c:71
@@ -2899,7 +2899,7 @@ msgstr ""
 " Copyright (C) 1996 the Free Software Foundation\n"
 "\n"
 "       Um editor de texto fácil escrito para o \n"
-"            Comandante da Meia Noite.\n"
+"                  Midnight Commander.\n"
 
 # gtkedit/editmenu.c:118 gtkedit/editmenu.c:134
 #: gtkedit/editmenu.c:128 gtkedit/editmenu.c:147
@@ -8696,3 +8696,4 @@ msgstr " Ligação simbólica "
 # src/main.c:2715
 msgid "Force activation even if a server is already running"
 msgstr "Força ativação mesmo que um servidor já esteja sendo executado"
+
