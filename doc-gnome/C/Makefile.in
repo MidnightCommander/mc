@@ -307,7 +307,7 @@ clean-generic:
 
 distclean-generic:
 	-rm -f Makefile gmc.html $(CONFIG_CLEAN_FILES)
-	-rm -f gmc
+	-rm -rf gmc
 maintainer-clean-generic:
 mostlyclean-am:  mostlyclean-generic
 
