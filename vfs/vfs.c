@@ -1120,8 +1120,11 @@ mc_def_ungetlocalcopy (vfs *vfs, char *filename, char *local, int has_changed)
 	if (i == -1)
 	    goto failed;
 
-        if (close (fdin)==-1)
+        if (close (fdin)==-1) {
+	    fdin = -1;
 	    goto failed;
+	}
+	fdin = -1;
         if (mc_close (fdout)==-1) {
 	    fdout = -1;
 	    goto failed;
@@ -1133,8 +1136,8 @@ mc_def_ungetlocalcopy (vfs *vfs, char *filename, char *local, int has_changed)
 
  failed:
     message_1s (1, _("Changes to file lost"), filename);
-    if (fdout) mc_close(fdout);
-    if (fdin) close(fdin);
+    if (fdout!=-1) mc_close(fdout);
+    if (fdin!=-1) close(fdin);
     unlink (local);
     g_free (local);
     return -1;

@@ -1,3 +1,7 @@
+2001-02-28  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* vfs.c (mc_def_ungetlocalcopy): Cleanup of error handling.
+
 2001-02-27  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* vfs.c (mc_ungetlocalcopy): Do not ignore errors. (Courtesy of
