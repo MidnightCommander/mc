@@ -2828,7 +2828,7 @@ static struct poptOption argumentTable[] = {
 static void
 handle_args (int argc, char *argv [])
 {
-    char   *tmp, *option_arg;
+    char   *tmp, *option_arg, *base;
     int    c;
     poptContext   optCon;
 
@@ -2860,12 +2860,13 @@ handle_args (int argc, char *argv [])
      * directory from the command line arguments
      */
     tmp = poptGetArg (optCon);
-    if (!STRNCOMP (argv [0], "mce", 3)) {
+    base = x_basename (argv[0]);
+    if (!STRNCOMP (base, "mce", 3) || !STRCOMP(base, "vi")) {
 	edit_one_file = "";
         if (tmp)
 	    edit_one_file = strdup (tmp);
     } else
-	if (!STRNCOMP (argv [0], "mcv", 3)) {
+	if (!STRNCOMP (base, "mcv", 3) || !STRCOMP(base, "view")) {
 	    if (tmp)
 		view_one_file = strdup (tmp);
     } else {

@@ -111,7 +111,9 @@ distdirs:
 
 distcopy:
 	sed -e "s/^%define ver .*/%define ver      $(VERSION)/; s/^%define rel .*/%define rel      1/" mc.spec > Specfile
-	sed "s/@VERSION@/$(VERSION)/" VERSION.in > VERSION
+	sed "s/@VERSION@/$(VERSION)/" VERSION.in > VERSION.tmp
+	if cmp -s VERSION VERSION.tmp; then rm -f VERSION.tmp; \
+	else mv -f VERSION.tmp VERSION; fi
 	cp $(DISTMAIN) ../mc-$(VERSION);
 	cp po/Makefile.in.in ../mc-$(VERSION)/po;
 	cp po/POTFILES.in ../mc-$(VERSION)/po;
