@@ -384,9 +384,11 @@ strip_password (char *p, int has_prefix)
 
 char *strip_home_and_password(char *dir)
 {
+    size_t len;
     static char newdir [MC_MAXPATHLEN];
 
-    if (home_dir && !strncmp (dir, home_dir, strlen (home_dir))){
+    if (home_dir && !strncmp (dir, home_dir, len = strlen (home_dir)) && 
+	(dir[len] == PATH_SEP || dir[len] == '\0')){
 	newdir [0] = '~';
 	strcpy (&newdir [1], &dir [strlen (home_dir)]);
 	return newdir;

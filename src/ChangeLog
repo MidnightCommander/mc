@@ -1,3 +1,9 @@
+Tue Apr 27 20:31:13 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* util.c (strip_home_and_password): Don't split the path in the
+	middle of a directory, e.g. "/home/bofh" will not be translated to
+	"~h" (fixes the bug reported by Alex Fortuna <alex@rdc.ru>)
+
 1999-04-25  Sergei Ivanov <svivanov@pdmi.ras.ru>
 
 	* find.c: The origin of the bug is in the function do_search (file
