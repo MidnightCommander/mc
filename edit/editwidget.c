@@ -24,7 +24,6 @@
 #include "edit.h"
 
 WEdit *wedit;
-WButtonBar *edit_bar;
 Dlg_head *edit_dlg;
 WMenu *edit_menubar;
 
@@ -97,6 +96,7 @@ int edit (const char *_file, int line)
     int framed = 0;
     int midnight_colors[4];
     char *text = 0;
+    WButtonBar *edit_bar;
 
     if (option_backup_ext_int != -1) {
 	option_backup_ext = malloc (sizeof (int) + 1);
