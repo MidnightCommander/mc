@@ -829,7 +829,6 @@ void change_screen_size (void)
 }
 #endif /* HAVE_X */
 
-extern int verbose;
 static int ok_to_refresh = 1;
 
 void use_dash (int flag)

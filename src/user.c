@@ -37,6 +37,7 @@
 #include "main.h"
 #include "user.h"
 #include "layout.h"
+#include "setup.h"
 #include "../vfs/vfs.h"
 
 /* For the simple listbox manager */
@@ -601,7 +602,6 @@ menu_file_own(char* path)
 	}
 	else
 	{
-		extern int verbose;
 		if (verbose)
 		{
 			message (0, _(" Warning -- ignoring file "),

@@ -58,12 +58,12 @@
 #include "widget.h"		/* Needed for buttonbar_new */
 #include "color.h"
 #include "dialog.h"
-#include "file.h"
 #include "mouse.h"
 #include "global.h"
 #include "help.h"
 #include "key.h"		/* For mi_getch() */
 #include "layout.h"
+#include "setup.h"
 #include "wtools.h"		/* For query_set_sel() */
 #if defined(HAVE_RX_H) && defined(HAVE_REGCOMP)
 #    include <rx.h>

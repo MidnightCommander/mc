@@ -38,8 +38,7 @@
 #include "win.h"
 #include "color.h"
 #include "global.h"
-
-extern int verbose;		/* Should be in a more sensible header file */
+#include "setup.h"
 
 /* Dialog manager and widgets */
 #include "dlg.h"

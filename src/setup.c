@@ -25,7 +25,6 @@
 #include <stdio.h>
 #include "mad.h"
 #include "dir.h"
-#include "file.h"
 #include "global.h"
 #include "util.h"		/* Functions and externs */
 #include "panel.h"
@@ -43,6 +42,7 @@
 #include "menu.h"		/* menubar_visible declaration */
 #include "win.h"		/* lookup_key */
 #include "cmd.h"
+#include "file.h"
 #include "x.h"
 
 #ifdef HAVE_GNOME

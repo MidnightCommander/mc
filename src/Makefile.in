@@ -16,36 +16,36 @@ INSTALL  = @INSTALL@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
 
-SRCS =	dir.c util.c main.c screen.c dialog.c key.c keyxdef.c menu.c\
-	file.c win.c color.c help.c find.c profile.c user.c view.c \
-	ext.c mouse.c setup.c dlg.c option.c info.c \
-	tree.c widget.c chmod.c mad.c xcurses.c xslint.c \
-	wtools.c cons.handler.c chown.c subshell.c terms.c boxes.c \
-	hotlist.c achown.c layout.c fsusage.c mountlist.c regex.c \
-	complete.c slint.c command.c cmd.c panelize.c learn.c \
-	listmode.c utilunix.c background.c rxvt.c \
-	text.c popt.c findme.c poptparse.c poptconfig.c popthelp.c
+SRCS =	dir.c util.c main.c screen.c dialog.c key.c keyxdef.c menu.c	\
+	file.c win.c color.c help.c find.c profile.c user.c view.c	\
+	ext.c mouse.c setup.c dlg.c option.c info.c			\
+	tree.c widget.c chmod.c mad.c xcurses.c xslint.c		\
+	wtools.c cons.handler.c chown.c subshell.c terms.c boxes.c	\
+	hotlist.c achown.c layout.c fsusage.c mountlist.c regex.c	\
+	complete.c slint.c command.c cmd.c panelize.c learn.c		\
+	listmode.c utilunix.c background.c rxvt.c			\
+	text.c popt.c findme.c poptparse.c poptconfig.c popthelp.c	\
+	filegui.c
 
-HDRS =	color.h file.h mouse.h user.h dialog.h find.h main.h \
-	util.h dir.h global.h menu.h panel.h win.h mem.h \
-	help.h profile.h dlg.h option.h tree.h info.h \
-	widget.h chmod.h cons.saver.h mad.h wtools.h chown.h  \
-	subshell.h view.h setup.h key.h ext.h boxes.h \
-	hotlist.h layout.h fsusage.h mountlist.h regex.h complete.h \
-	myslang.h command.h cmd.h tty.h fs.h panelize.h achown.h \
-	learn.h listmode.h features.inc background.h \
-	x.h textconf.h i18n.h findme.h popt.h
+HDRS =	color.h file.h mouse.h user.h dialog.h find.h main.h		\
+	util.h dir.h global.h menu.h panel.h win.h mem.h		\
+	help.h profile.h dlg.h option.h tree.h info.h			\
+	widget.h chmod.h cons.saver.h mad.h wtools.h chown.h		\
+	subshell.h view.h setup.h key.h ext.h boxes.h			\
+	hotlist.h layout.h fsusage.h mountlist.h regex.h complete.h	\
+	myslang.h command.h cmd.h tty.h fs.h panelize.h achown.h	\
+	learn.h listmode.h features.inc background.h			\
+	x.h textconf.h i18n.h findme.h popt.h filegui.h
 
-OBJS =	dir.o util.o screen.o dialog.o key.o keyxdef.o menu.o\
-	file.o win.o color.o help.o find.o profile.o user.o view.o \
-	ext.o mouse.o setup.o dlg.o option.o \
-	tree.o widget.o chmod.o mad.o wtools.o info.o \
-	cons.handler.o chown.o subshell.o terms.o boxes.o \
-	hotlist.o achown.o layout.o fsusage.o mountlist.o \
-	@XCURSES@ @REGEX_O@ complete.o slint.o command.o \
-	cmd.o main.o panelize.o learn.o listmode.o utilunix.o \
-	background.o rxvt.o text.o \
-	popt.o findme.o poptparse.o poptconfig.o popthelp.o
+OBJS =	dir.o util.o screen.o dialog.o key.o keyxdef.o menu.o		\
+	file.o win.o color.o help.o find.o profile.o user.o view.o	\
+	ext.o mouse.o setup.o dlg.o option.o tree.o widget.o chmod.o	\
+	mad.o wtools.o info.o cons.handler.o chown.o subshell.o		\
+	terms.o boxes.o hotlist.o achown.o layout.o fsusage.o		\
+	mountlist.o @XCURSES@ @REGEX_O@ complete.o slint.o command.o	\
+	cmd.o main.o panelize.o learn.o listmode.o utilunix.o		\
+	background.o rxvt.o text.o popt.o findme.o poptparse.o		\
+	poptconfig.o popthelp.o filegui.o
 
 #
 # Distribution variables
@@ -61,7 +61,8 @@ DISTFILES = \
 all: mc mcmfmt @saver_target@ Makefile
 
 Makefile: $(srcdir)/Makefile.in $(builddir)/config.status
-	cd $(builddir) && CONFIG_FILES=$@ CONFIG_HEADERS= $(SHELL) ./config.status
+	cd $(builddir) && CONFIG_FILES=src/Makefile CONFIG_HEADERS= $(SHELL) ./config.status
+
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<
 

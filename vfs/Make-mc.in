@@ -38,6 +38,7 @@ VFSSRCS = \
 	extfs.c 		\
 	ftpfs.c 		\
 	fish.c 			\
+	direntry.c		\
 	local.c 		\
 	mcfs.c			\
 	names.c 		\

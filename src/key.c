@@ -47,7 +47,6 @@
 #include "mouse.h"
 #include "key.h"
 #include "main.h"
-#include "file.h"
 #include "win.h"
 #include "cons.saver.h"
 #include "../vfs/vfs.h"

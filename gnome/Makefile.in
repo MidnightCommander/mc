@@ -81,7 +81,7 @@ OOBJS = main.o dlg.o screen.o widget.o wtools.o info.o boxes.o \
 	win.o color.o profile.o user.o ext.o setup.o tree.o \
 	subshell.o terms.o achown.o fsusage.o mountlist.o \
 	@XCURSES@ @REGEX_O@ complete.o command.o \
-	option.o cmd.o utilunix.o xslint.o
+	option.o cmd.o utilunix.o xslint.o filegui.o
 
 OBJS = $(LOBJS) $(OOBJS) \
 	gdesktop-icon.o	\
@@ -158,7 +158,7 @@ checklinks:
 links:
 	for I in $(LOBJS); do $(RMF) $$I; $(LN_S) ../src/$$I $$I >/dev/null 2>&1; done; true
 
-sourcelinks:
+maksourcelinks:
 	-cd $(gnomedir); $(LN_S) ../src/*.[ch] . >/dev/null 2>&1; $(LN_S) ../src/*.inc .; true
 
 cleansourcelinks:

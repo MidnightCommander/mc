@@ -1,3 +1,9 @@
+1998-11-17  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* filegui.c: New file.  We keep all of the user interface code for
+	the text edition in this file now.  This should be a per-GUI port
+	file. 
+
 1998-11-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* panel.h (WPanel): Instead of the "#ifdef GNOME" mess in the

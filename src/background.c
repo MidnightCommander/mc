@@ -51,10 +51,12 @@
 #endif
 #include "util.h"
 #include "dialog.h"
-#include "file.h"
 #include "background.h"
 #include "mad.h"
 #include "key.h"	/* For add_select_channel(), delete_select_channel() */
+#include "regex.h"
+#include "file.h"
+#include "filegui.h"
 
 /* If true, this is a background process */
 int we_are_background = 0;
@@ -340,9 +342,9 @@ background_attention (int fd, void *xpid)
 	}
 	
 	/* Send the result code and the value for shared variables */
-	write (fd, &result,           sizeof (int));
-	write (fd, &do_append,        sizeof (do_append));
-	write (fd, &recursive_result, sizeof (recursive_result));
+	write (fd, &result,                  sizeof (int));
+	write (fd, &file_progress_do_append, sizeof (file_progress_do_append));
+	write (fd, &file_progress_recursive_result, sizeof (file_progress_recursive_result));
 	
     } else if (type == Return_String) {
 	int len;
@@ -423,8 +425,8 @@ parent_call (void *routine, int argc, ...)
      * variables that may be modified in the parent that affect our behaviour
      */
     read (parent_fd, &i,         sizeof (int));
-    read (parent_fd, &do_append, sizeof (do_append));
-    read (parent_fd, &recursive_result, sizeof (recursive_result));
+    read (parent_fd, &file_progress_do_append, sizeof (file_progress_do_append));
+    read (parent_fd, &file_progress_recursive_result, sizeof (file_progress_recursive_result));
     return i;
 }
 

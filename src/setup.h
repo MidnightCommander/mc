@@ -25,6 +25,7 @@ extern char color_terminal_string [];
 
 extern int startup_left_mode;
 extern int startup_right_mode;
+extern int verbose;
 
 #ifdef OS2_NT
 #    define PROFILE_NAME     "mc.ini"
