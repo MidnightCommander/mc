@@ -260,7 +260,7 @@ local_munmap (struct vfs_class *me, caddr_t addr, size_t len, void *data)
 #endif
 
 static int
-local_which (struct vfs_class *me, char *path)
+local_which (struct vfs_class *me, const char *path)
 {
     return 0;		/* Every path which other systems do not like is expected to be ours */
 }

@@ -27,7 +27,7 @@ struct vfs_class {
     void (*done) (struct vfs_class *me);
     void (*fill_names) (struct vfs_class *me, fill_names_f);
 
-    int (*which) (struct vfs_class *me, /*FIXME:const*/ char *path);
+    int (*which) (struct vfs_class *me, const char *path);
 
     void *(*open) (struct vfs_class *me, const char *fname, int flags,
 		   int mode);

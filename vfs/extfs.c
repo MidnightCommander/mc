@@ -90,7 +90,7 @@ struct archive {
 
 static struct entry *extfs_find_entry (struct entry *dir, char *name,
 				       int make_dirs, int make_file);
-static int extfs_which (struct vfs_class *me, char *path);
+static int extfs_which (struct vfs_class *me, const char *path);
 static void extfs_remove_entry (struct entry *e);
 static void extfs_free (vfsid id);
 
@@ -1302,7 +1302,7 @@ static int extfs_init (struct vfs_class *me)
 }
 
 /* Do NOT use me argument in this function */
-static int extfs_which (struct vfs_class *me, char *path)
+static int extfs_which (struct vfs_class *me, const char *path)
 {
     int i;
 

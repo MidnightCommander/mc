@@ -388,7 +388,7 @@ sfs_done (struct vfs_class *me)
 }
 
 static int
-sfs_which (struct vfs_class *me, char *path)
+sfs_which (struct vfs_class *me, const char *path)
 {
     int i;
 
