@@ -1,5 +1,12 @@
 2001-06-14  Pavel Roskin  <proski@gnu.org>
 
+	* cons.handler.c (handle_console): Remove useless default.
+	* ext.c (regex_command): Initialize include_target_len.
+	* find.c [HAVE_GNOME]: Eliminate untyped declarations.
+	* fsusage.c: Remove untyped declaration of statfs().
+	[_AIX && _I386]: Rename statfs to aix_statfs and move
+	it before get_fs_usage(). Define statfs to aix_statfs.
+
 	* achown.c: Eliminate untyped declarations.
 	* boxes.c: Likewise.
 	* cons.saver.c: Likewise.

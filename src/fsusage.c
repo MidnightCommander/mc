@@ -28,8 +28,6 @@
 
 #include "fsusage.h"
 
-int statfs ();  /* We leave the type ambiguous intentionally here */
-
 #ifdef HAVE_SYS_PARAM_H
 #include <sys/param.h>
 #endif
@@ -83,6 +81,31 @@ fs_adjust_blocks (long blocks, int fromsize, int tosize)
     else			/* E.g., from 256 to 512.  */
 	return (blocks + (blocks < 0 ? -1 : 1)) / (tosize / fromsize);
 }
+
+#if defined(_AIX) && defined(_I386)
+/* AIX PS/2 does not supply statfs.  */
+static int aix_statfs (char *path, struct statfs *fsb)
+{
+    struct stat stats;
+    struct dustat fsd;
+
+    if (stat (path, &stats))
+	return -1;
+    if (dustat (stats.st_dev, 0, &fsd, sizeof (fsd)))
+	return -1;
+    fsb->f_type = 0;
+    fsb->f_bsize = fsd.du_bsize;
+    fsb->f_blocks = fsd.du_fsize - fsd.du_isize;
+    fsb->f_bfree = fsd.du_tfree;
+    fsb->f_bavail = fsd.du_tfree;
+    fsb->f_files = (fsd.du_isize - 2) * fsd.du_inopb;
+    fsb->f_ffree = fsd.du_tinode;
+    fsb->f_fsid.val[0] = fsd.du_site;
+    fsb->f_fsid.val[1] = fsd.du_pckno;
+    return 0;
+}
+#define statfs(path,fsb) aix_statfs(path,fsb)
+#endif				/* _AIX && _I386 */
 
 /* Fill in the fields of FSP with information about space usage for
    the filesystem on which PATH resides.
@@ -168,28 +191,4 @@ int get_fs_usage (char *path, struct fs_usage *fsp)
     return 0;
 }
 
-#if defined(_AIX) && defined(_I386)
-/* AIX PS/2 does not supply statfs.  */
-
-int statfs (char *path, struct statfs *fsb)
-{
-    struct stat stats;
-    struct dustat fsd;
-
-    if (stat (path, &stats))
-	return -1;
-    if (dustat (stats.st_dev, 0, &fsd, sizeof (fsd)))
-	return -1;
-    fsb->f_type = 0;
-    fsb->f_bsize = fsd.du_bsize;
-    fsb->f_blocks = fsd.du_fsize - fsd.du_isize;
-    fsb->f_bfree = fsd.du_tfree;
-    fsb->f_bavail = fsd.du_tfree;
-    fsb->f_files = (fsd.du_isize - 2) * fsd.du_inopb;
-    fsb->f_ffree = fsd.du_tinode;
-    fsb->f_fsid.val[0] = fsd.du_site;
-    fsb->f_fsid.val[1] = fsd.du_pckno;
-    return 0;
-}
-#endif				/* _AIX && _I386 */
 #endif /* NO_INFOMOUNT */

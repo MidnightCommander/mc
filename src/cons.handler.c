@@ -189,8 +189,6 @@ void handle_console (unsigned char action)
 	    console_flag = 0;
 	}
 	break;
-    default:
-	/* Nothing */
     }
 }
 

@@ -834,7 +834,7 @@ setup_gui (void)
 }
 
 static int
-run_process ()
+run_process (void)
 {
 	idle_tag = gtk_idle_add ((GtkFunction)do_search, g_find_dlg);
 
@@ -845,7 +845,7 @@ run_process ()
 }
 
 static void
-kill_gui ()
+kill_gui (void)
 {
 	gtk_object_destroy (GTK_OBJECT (g_find_dlg));
 }

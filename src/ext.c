@@ -444,6 +444,7 @@ file as an example of how to write it.\n\
     old_patterns = easy_patterns;
     easy_patterns = 0; /* Real regular expressions are needed :) */
     include_target = NULL;
+    include_target_len = 0;
     for (p = data; *p; p++) {
     	for (q = p; *q == ' ' || *q == '\t'; q++)
 		;
