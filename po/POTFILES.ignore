@@ -1,0 +1,5 @@
+gnome/mime-type/edit-window.c
+gnome/mime-type/mime-data.c
+gnome/mime-type/mime-info.c
+gnome/mime-type/mime-type-capplet.c
+gnome/mime-type/new-mime-window.c

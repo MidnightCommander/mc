@@ -1,3 +1,8 @@
+2001-07-10  Pavel Roskin  <proski@gnu.org>
+
+	* POTFILES.ignore: New file.
+	* POTFILES.in: Add src/slint.c.
+
 2001-06-29  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.in.in: Upgrade to gettext-0.10.38.

@@ -60,6 +60,7 @@ src/poptint.h
 src/screen.c
 src/selcodepage.c
 src/setup.c
+src/slint.c
 src/subshell.c
 src/textconf.c
 src/tree.c
