@@ -167,7 +167,7 @@ void do_cd_command (char *cmd)
 	}
     } else
 	if (!examine_cd (&cmd [3])) {
-	    message (1, MSG_ERROR, _(" Cannot chdir to '%s' \n %s "),
+	    message (1, MSG_ERROR, _(" Cannot chdir to \"%s\" \n %s "),
 		     &cmd [3], unix_error_string (errno));
 	    return;
 	}
