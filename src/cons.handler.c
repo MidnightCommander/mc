@@ -145,7 +145,7 @@ handle_console_linux (unsigned char action)
 	    if (tty_name) {
 		/* Exec the console save/restore handler */
 		mc_conssaver = concat_dir_and_file (LIBDIR, "cons.saver");
-		execl (mc_conssaver, "cons.saver", tty_name, NULL);
+		execl (mc_conssaver, "cons.saver", tty_name, (char *) NULL);
 	    }
 	    /* Console is not a tty or execl() failed */
 	    console_flag = 0;

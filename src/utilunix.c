@@ -234,9 +234,9 @@ int my_system (int flags, const char *shell, const char *command)
 	signal (SIGCHLD, SIG_DFL);
 
 	if (flags & EXECUTE_AS_SHELL)
-	    execl (shell, shell, "-c", command, NULL);
+	    execl (shell, shell, "-c", command, (char *) NULL);
 	else
-	    execlp (shell, shell, command, NULL);
+	    execlp (shell, shell, command, (char *) NULL);
 
 	_exit (127);		/* Exec error */
     } else {

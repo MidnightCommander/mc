@@ -266,17 +266,17 @@ init_subshell_child (const char *pty_name)
 
     switch (subshell_type) {
     case BASH:
-	execl (shell, "bash", "-rcfile", init_file, NULL);
+	execl (shell, "bash", "-rcfile", init_file, (char *) NULL);
 	break;
 
     case TCSH:
-	execl (shell, "tcsh", NULL);
+	execl (shell, "tcsh", (char *) NULL);
 	break;
 
     case ZSH:
 	/* Use -g to exclude cmds beginning with space from history
 	 * and -Z to use the line editor on non-interactive term */
-	execl (shell, "zsh", "-Z", "-g", NULL);
+	execl (shell, "zsh", "-Z", "-g", (char *) NULL);
 
 	break;
     }
