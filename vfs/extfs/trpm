@@ -1,5 +1,8 @@
 #! /bin/sh
 #
+# Browse contents of an installed RPM package.
+# This filesystem works on the entries of the "rpms" filesystem.
+#
 # Written by Erik Troan (ewt@redhat.com) 1996
 #            Jakub Jelinek (jj@sunsite.mff.cuni.cz) 1996
 #            Tomasz K³oczko (kloczek@rudy.mif.pg.gda.pl) 1997
@@ -103,7 +106,7 @@ mcrpmfs_list ()
         echo "$FILEPREF 0 $DATE INFO/CHANGELOG"
     fi
 
-    rpm -qlv $1
+    rpm -qlv $1 | grep '^[A-Za-z0-9-]'
 }
 
 mcrpmfs_copyout ()
@@ -149,13 +152,8 @@ mcrpmfs_run ()
     esac
 }
 
-name=$2
-if [ ${name%%.trpm} = $name ]; then
-	name=`head -1 $name`
-fi
-#echo "TRPM: $@ ($name)" >> /tmp/tt
-#name=`echo $(basename $2 .trpm) | sed "s/^\(.*\)\.[^\.]*/\1/"`
-name=`basename $name .trpm`
+name=`sed 's/.*\///;s/\.trpm$//' "$2"`
+
 case "$1" in
   list) mcrpmfs_list $name; exit 0;;
   copyout) mcrpmfs_copyout $name $3 $4; exit 0;;
