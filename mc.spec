@@ -1,5 +1,5 @@
 # Note that this is NOT a relocatable package
-%define ver      4.1.30
+%define ver      4.1.31
 %define rel      SNAP
 %define prefix   /usr
 
@@ -34,7 +34,7 @@ The tk version of Midnight Commander is not yet finished though. :-(
  
 %package -n gmc
 Summary:  Midnight Commander visual shell (GNOME version)
-Requires: mc >= 4.1.30
+Requires: mc >= 4.1.31
 Group:    X11/Shells
 %description -n gmc
 Midnight Commander is a visual shell much like a file manager, only with
