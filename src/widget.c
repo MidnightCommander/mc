@@ -1536,7 +1536,10 @@ is_in_input_map (WInput *in, int c_code)
 static void
 port_region_marked_for_delete (WInput *in)
 {
+	if (in->first == 1 && (in->point == in->mark))
+		in->point = strlen (in->buffer);
 	kill_region (in);
+	in->first = 0;
 }
 #else
 static void
@@ -1731,7 +1734,6 @@ input_new (int y, int x, int color, int len, char *def_text, char *tkname)
 
     strcpy (in->buffer, def_text);
     in->point = strlen (in->buffer);
-    in->first = 1;
     return in;
 }
 

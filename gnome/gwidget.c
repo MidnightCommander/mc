@@ -260,7 +260,8 @@ entry_release (GtkEditable *entry, GdkEvent *event, WInput *in)
 	in->point = entry->current_pos;
 	in->mark  = (entry->current_pos == entry->selection_start_pos) ?
 		entry->selection_end_pos : entry->selection_start_pos;
-	in->first = 1;
+	if (in->point != in->mark)
+		in->first = 1;
 }
 
 int
