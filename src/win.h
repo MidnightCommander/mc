@@ -4,9 +4,6 @@
 /* Window utilities */
 #include "dlg.h"
 
-void print_bytesize (int size, int scale);
-void sprint_bytesize (char *buffer, int size, int scale);
-
 /* Labels at the screen bottom */
 
 /* Keys managing */

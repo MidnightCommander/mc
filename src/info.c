@@ -30,7 +30,7 @@
 #include "dir.h"		/* required by panel */
 #include "panel.h"		/* for the panel structure */
 #include "main.h"		/* opanel, cpanel definitions */
-#include "win.h"		/* print_bytesize */
+#include "util.h"		/* size_trunc_len */
 #include "layout.h"
 #include "key.h"		/* is_idle() */
 #include "x.h"
@@ -110,7 +110,7 @@ info_show_info (WInfo *info)
     case 16:
 	widget_move (&info->widget, 16, 3);
 	if (myfs_stats.nfree >0 || myfs_stats.nodes > 0)
-	    printw (_("Free nodes %d (%d%%) of %d"),
+	    printw (_("Free nodes: %d (%d%%) of %d"),
 		    myfs_stats.nfree,
 		    myfs_stats.total
 		    ? 100 * myfs_stats.nfree / myfs_stats.nodes : 0,
@@ -121,11 +121,11 @@ info_show_info (WInfo *info)
     case 15:
 	widget_move (&info->widget, 15, 3);
 	if (myfs_stats.avail > 0 || myfs_stats.total > 0){
-	    addstr (_("Free space "));
-	    print_bytesize (myfs_stats.avail, 1);
-	    printw (_(" (%d%%) of "), myfs_stats.total
-		    ? 100 * myfs_stats.avail / myfs_stats.total : 0);
-	    print_bytesize (myfs_stats.total, 1);
+	    char buffer1 [6], buffer2[6];
+	    size_trunc_len (buffer1, 5, myfs_stats.avail, 1);
+	    size_trunc_len (buffer2, 5, myfs_stats.total, 1);
+	    printw (_("Free space: %s (%d%%) of %s"), buffer1, myfs_stats.total ?
+		    100 * myfs_stats.avail / myfs_stats.total : 0, buffer2);
 	} else
 	    addstr (_("No space information"));
 
@@ -167,10 +167,12 @@ info_show_info (WInfo *info)
 #endif
 #endif
 	{
-	    printw (_("Size:      "));
-	    print_bytesize (buf.st_size, 0);
+	    char buffer[10];
+	    size_trunc_len(buffer, 9, buf.st_size, 0);
+	    printw (_("Size:      %s"), buffer);
 #ifdef HAVE_ST_BLOCKS
-	    printw (_(" (%d blocks)"), buf.st_blocks);
+	    printw ((buf.st_blocks==1) ?
+		_(" (%d block)") : _(" (%d blocks)"), buf.st_blocks);
 #endif
 	}
 	
@@ -194,7 +196,7 @@ info_show_info (WInfo *info)
 	
     case 3:
 	widget_move (&info->widget, 3, 2);
-	/* .ado: fname is invalid if selected == 0 && ifno called from current panel */
+	/* .ado: fname is invalid if selected == 0 && info called from current panel */
 	if (cpanel->selected){
 		printw (file_label,
 			name_trunc (cpanel->dir.list [cpanel->selected].fname,

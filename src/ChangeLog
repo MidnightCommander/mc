@@ -1,5 +1,12 @@
 2001-08-30  David Martin  <dmartina@excite.es>
 
+	* info.c (info_show_info): Use size_trunc_len() instead of
+	print_bytesize().  Don't assume English word ordering.  Add
+	singular message when single block.
+	* win.c (print_bytesize): Remove.
+	(sprint_bytesize): Remove.
+	* win.h: Remove print_bytesize() and sprint_bytesize().
+
 	* util.c (size_trunc_len): Add units parameter.  Change all
 	callers.
 

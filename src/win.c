@@ -44,31 +44,6 @@ typedef struct Fkey_Table_List {
 
 static Fkey_Table_List *fkey_table_list = NULL;
 
-/* Width of output is always seven characters */
-void sprint_bytesize (char *buffer, int size, int scale)
-{
-    char scales[] = " kMGT";
-
-    if (size > 0){
-	while (size > 9999 && scale < sizeof (scales)){
-	    size = (size + 512) / 1024;
-	    scale ++;
-	}
-    }
-    if (scale > 0)
-	g_snprintf (buffer, 10, "%4d %cb", size, scales[scale]);
-    else
-	g_snprintf (buffer, 10, "%4d b ", size);
-}
-
-void print_bytesize (int size, int scale)
-{
-    char buffer [10];
-    
-    sprint_bytesize (buffer, size, scale);
-    printw (buffer);
-}
-
 /* Return values: 0 = not a fkey, other = was a fkey */
 int check_fkeys (int c)
 {
