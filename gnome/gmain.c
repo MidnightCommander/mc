@@ -523,7 +523,9 @@ void
 gmc_window_setup_from_panel (GnomeDialog *dialog, WPanel *panel)
 {
 	gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_MOUSE);
-	gnome_dialog_set_parent (dialog, GTK_WINDOW (panel->xwindow));
+	if (panel && panel->xwindow) {
+		gnome_dialog_set_parent (dialog, GTK_WINDOW (panel->xwindow));
+	}
 }
 
 /**
