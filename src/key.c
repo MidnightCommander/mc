@@ -220,31 +220,45 @@ static key_define_t xterm_key_defines [] = {
     { KEY_F(9),   ESC_STR "[20~", MCKEY_NOACTION },
     { KEY_F(10),  ESC_STR "[21~", MCKEY_NOACTION },
 
-    /* xterm keys with modifiers */
+    /* old xterm Shift-arrows */
     { KEY_M_SHIFT | KEY_UP,    ESC_STR "O2A",   MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_DOWN,  ESC_STR "O2B",   MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_RIGHT, ESC_STR "O2C",   MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_LEFT,  ESC_STR "O2D",   MCKEY_NOACTION },
-    { KEY_M_CTRL  | KEY_PPAGE, ESC_STR "[5;5~", MCKEY_NOACTION },
-    { KEY_M_CTRL  | KEY_NPAGE, ESC_STR "[6;5~", MCKEY_NOACTION },
-    { KEY_M_CTRL  | KEY_IC,    ESC_STR "[2;5~", MCKEY_NOACTION },
-    { KEY_M_CTRL  | KEY_DC,    ESC_STR "[3;5~", MCKEY_NOACTION },
 
-    /* xterm (by Thomas Dickey) keys with modifiers */
+    /* new xterm Shift-arrows */
     { KEY_M_SHIFT | KEY_UP,    ESC_STR "[1;2A", MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_DOWN,  ESC_STR "[1;2B", MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_RIGHT, ESC_STR "[1;2C", MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_LEFT,  ESC_STR "[1;2D", MCKEY_NOACTION },
+
+    /* more xterm keys with modifiers */
+    { KEY_M_CTRL  | KEY_PPAGE, ESC_STR "[5;5~", MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_NPAGE, ESC_STR "[6;5~", MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_IC,    ESC_STR "[2;5~", MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_DC,    ESC_STR "[3;5~", MCKEY_NOACTION },
     { KEY_M_CTRL  | KEY_HOME,  ESC_STR "[1;5H", MCKEY_NOACTION },
     { KEY_M_CTRL  | KEY_END,   ESC_STR "[1;5F", MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_HOME,  ESC_STR "[1;2H", MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_END,   ESC_STR "[1;2F", MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_UP,    ESC_STR "[1;5A", MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_DOWN,  ESC_STR "[1;5B", MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_RIGHT, ESC_STR "[1;5C", MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_LEFT,  ESC_STR "[1;5D", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_M_CTRL | KEY_UP,    ESC_STR "[1;6A", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_M_CTRL | KEY_DOWN,  ESC_STR "[1;6B", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_M_CTRL | KEY_RIGHT, ESC_STR "[1;6C", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_M_CTRL | KEY_LEFT,  ESC_STR "[1;6D", MCKEY_NOACTION },
 
     /* rxvt keys with modifiers */
     { KEY_M_SHIFT | KEY_UP,    ESC_STR "[a",  MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_DOWN,  ESC_STR "[b",  MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_RIGHT, ESC_STR "[c",  MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_LEFT,  ESC_STR "[d",  MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_UP,    ESC_STR "Oa",  MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_DOWN,  ESC_STR "Ob",  MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_RIGHT, ESC_STR "Oc",  MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_LEFT,  ESC_STR "Od",  MCKEY_NOACTION },
     { KEY_M_CTRL  | KEY_PPAGE, ESC_STR "[5^", MCKEY_NOACTION },
     { KEY_M_CTRL  | KEY_NPAGE, ESC_STR "[6^", MCKEY_NOACTION },
     { KEY_M_CTRL  | KEY_HOME,  ESC_STR "[7^", MCKEY_NOACTION },
@@ -259,6 +273,16 @@ static key_define_t xterm_key_defines [] = {
     { KEY_M_SHIFT | KEY_HOME,  ESC_STR "O2H",   MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_END,   ESC_STR "O2F",   MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_DC,    ESC_STR "[3;2~", MCKEY_NOACTION },
+
+    /* gnome-terminal */
+    { KEY_M_SHIFT | KEY_UP,    ESC_STR "[2A",  MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_DOWN,  ESC_STR "[2B",  MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_RIGHT, ESC_STR "[2C",  MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_LEFT,  ESC_STR "[2D",  MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_UP,    ESC_STR "[5A",  MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_DOWN,  ESC_STR "[5B",  MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_RIGHT, ESC_STR "[5C",  MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_LEFT,  ESC_STR "[5D",  MCKEY_NOACTION },
 
     /* keypad keys */
     { KEY_IC,                  ESC_STR "Op",  MCKEY_NOACTION },

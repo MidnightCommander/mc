@@ -1,3 +1,7 @@
+2003-09-23  Pavel Roskin  <proski@gnu.org>
+
+	* key.c (xterm_key_defines): Add more sequences.
+
 2003-09-22  Pavel Roskin  <proski@gnu.org>
 
 	* find.c (find_file): Don't call file_mark(), it would use
