@@ -132,7 +132,9 @@ static FILE *logfile = NULL;
 /* If true, the directory cache is forced to reload */
 static int force_expiration = 0;
 
+#ifdef FIXME_LATER_ALIGATOR
 static struct linklist *connections_list;
+#endif
 
 /* command wait_flag: */
 #define NONE        0x00
@@ -1167,7 +1169,10 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
 {
     vfs_s_entry *ent;
     vfs_s_super *super = dir->super;
-    int sock, has_symlinks = 0, num_entries = 0;
+    int sock, num_entries = 0;
+#ifdef FIXME_LATER
+    int has_symlinks = 0;
+#endif
     char buffer[BUF_8K];
     
     int cd_first = (strchr (remote_path, ' ') != NULL) || ftpfs_first_cd_then_ls || (SUP.strict == RFC_STRICT);

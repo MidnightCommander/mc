@@ -1,5 +1,7 @@
 2001-05-14  Pavel Roskin  <proski@gnu.org>
 
+	* ftpfs.c: Warning fixes.
+
 	* utilvfs.h: Include background.h.
 	* cpio.c: Include utilvfs.h.
 
