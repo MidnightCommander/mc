@@ -457,25 +457,21 @@ regex/\.ftplist$
 type/^gzip
 	Open=gzip -dc %f | %var{PAGER:more}
 	View=%view{ascii} gzip -dc %f 2>/dev/null
-	Edit=I=`date +%%s`; export I; gzip -cd %f >/tmp/gzed.$I && %var{EDITOR:vi} /tmp/gzed.$I && gzip -c /tmp/gzed.$I > %f; rm -f /tmp/gzed.$I
 
 # bzip2
 type/^bzip2
 	Open=bzip2 -dc %f | %var{PAGER:more}
 	View=%view{ascii} bzip2 -dc %f 2>/dev/null
-	Edit=I=`date +%%s`; export I; bzip2 -cd %f >/tmp/bzed.$I && %var{EDITOR:vi} /tmp/bzed.$I && bzip2 -c /tmp/bzed.$I > %f; rm -f /tmp/bzed.$I
 
 # bzip
 type/^bzip
 	Open=bzip -dc %f | %var{PAGER:more}
 	View=%view{ascii} bzip -dc %f 2>/dev/null
-	Edit=I=`date +%%s`; export I; bzip -cd %f >/tmp/bzed.$I && %var{EDITOR:vi} /tmp/bzed.$I && bzip -c /tmp/bzed.$I > %f; rm -f /tmp/bzed.$I
 
 # compress
 type/^compress
 	Open=gzip -dc %f | %var{PAGER:more}
 	View=%view{ascii} gzip -dc %f 2>/dev/null
-	Edit=I=`date +%%s`; export I; gzip -cd %f >/tmp/gzed.$I && %var{EDITOR:vi} /tmp/gzed.$I && gzip -c /tmp/gzed.$I > %f; rm -f /tmp/gzed.$I
 
 # ar library
 regex/\.s?a$
