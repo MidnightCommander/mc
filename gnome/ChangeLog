@@ -1,5 +1,9 @@
 2001-07-12  Pavel Roskin  <proski@gnu.org>
 
+	* gnome-open-dialog.c (gnome_open_dialog_get_tree): Don't set
+	styles for lines and expanders - use default tree settings.
+	From Ximian patches.
+
 	* Makefile.in (EXTRALIBS): Add @LIBICONV@.
 
 2001-07-12  Andrew V. Samoilov <kai@cmail.ru>

@@ -347,8 +347,6 @@ gnome_open_dialog_get_tree (GnomeOpenDialog *dialog)
 	/* widget stuff */
 	retval = gtk_ctree_new (1, 0);
         gtk_clist_set_row_height(GTK_CLIST (retval),20);
-        gtk_ctree_set_line_style (GTK_CTREE (retval), GTK_CTREE_LINES_DOTTED);
-        gtk_ctree_set_expander_style (GTK_CTREE (retval), GTK_CTREE_EXPANDER_SQUARE);
         gtk_clist_set_column_width(GTK_CLIST (retval), 0, 150);
         gtk_signal_connect( GTK_OBJECT (retval),
 			    "tree_select_row",
