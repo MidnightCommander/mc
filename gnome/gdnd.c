@@ -91,8 +91,20 @@ find_panel_owning_window (GdkDragContext *context)
 
 		panel_toplevel_widget = panel->xwindow;
 
-		if (panel->xwindow == source_widget)
+		if (panel->xwindow == source_widget){
+
+			/*
+			 * Now a WPanel actually contains a number of
+			 * drag sources.  If the drag source is the
+			 * Tree, we must report that it was not the
+			 * contents of the WPanel
+			 */
+
+			if (source_widget == panel->tree)
+				return NULL;
+			
 			return panel;
+		}
 	}
 
 	return NULL;
@@ -190,16 +202,30 @@ perform_action (GList *names, GdkDragAction action, char *destdir)
 				if (file_error (_("Could not stat %s\n%s"), dest_name) != FILE_RETRY)
 					result = 0;
 				else {
+					long count = 0;
+					double bytes = 0;
+					
 					if (S_ISDIR (s.st_mode)) {
 						if (action == GDK_ACTION_COPY)
-							copy_dir_dir (name, dest_name, TRUE, FALSE, FALSE, FALSE);
+							copy_dir_dir (
+								name, dest_name,
+								TRUE, FALSE,
+								FALSE, FALSE,
+								&count, &bytes);
 						else
-							move_dir_dir (name, dest_name);
+							move_dir_dir (
+								name, dest_name,
+								&count, &bytes);
 					} else {
 						if (action == GDK_ACTION_COPY)
-							copy_file_file (name, dest_name, TRUE);
+							copy_file_file (
+								name, dest_name,
+								TRUE,
+								&count, &bytes);
 						else
-							move_file_file (name, dest_name);
+							move_file_file (
+								name, dest_name,
+								&count, &bytes);
 					}
 				}
 			}

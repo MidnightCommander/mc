@@ -209,6 +209,7 @@ static struct {
     { "panel_scroll_pages", &panel_scroll_pages },
     { "xtree_mode", &xtree_mode },
     { "num_history_items_recorded", &num_history_items_recorded },
+    { "file_op_compute_totals", &file_op_compute_totals },
 #ifdef SAVE_CHANGES_OUTSIDE_OPTIONS_MENU
     { "dive_into_subdirs", &dive_into_subdirs },
     { "preserve_uidgid", &preserve_uidgid },

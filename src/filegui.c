@@ -379,7 +379,7 @@ file_progress_show_count (long done, long total)
 }
 
 FileProgressStatus
-file_progress_show_bytes (long done, long total)
+file_progress_show_bytes (double done, double total)
 {
     if (!verbose)
 	return file_progress_check_buttons ();

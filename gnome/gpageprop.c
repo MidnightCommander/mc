@@ -200,9 +200,11 @@ item_properties (GtkWidget *parent, char *fname, desktop_icon_t *di)
 		if (strchr (new_name, '/'))
 			message (1, "Error", "The new name includes the `/' character");
 		else if (strcmp (new_name, base) != 0) {
-			char *base = x_basename (fname);
-			char save = *base;
-			char *full_target;
+			char  *base = x_basename (fname);
+			char   save = *base;
+			char  *full_target;
+			long   count = 0;
+			double bytes = 0;
 			
 			*base = 0;
 			full_target = concat_dir_and_file (fname, new_name);
@@ -210,7 +212,7 @@ item_properties (GtkWidget *parent, char *fname, desktop_icon_t *di)
 			
 			create_op_win (OP_MOVE, 0);
 			file_mask_defaults ();
-			move_file_file (fname, full_target);
+			move_file_file (fname, full_target, &count, &bytes);
 			destroy_op_win ();
 			
 			if (di) {

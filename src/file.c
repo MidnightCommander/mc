@@ -135,6 +135,13 @@ int erase_at_end = 1;
 int file_mask_preserve;
 
 /*
+ * Whether the Midnight Commander tries to provide more
+ * information about copy/move sizes and bytes transfered
+ * at the expense of some speed
+ */
+int file_op_compute_totals = 1;
+
+/*
  * If running as root, preserve the original uid/gid
  * (we don't want to try chwon for non root)
  * preserve_uidgid = preserve && uid == 0 */
@@ -160,6 +167,10 @@ double file_progress_eta_secs;
 
 /* The reget flag */
 int file_progress_do_reget = 1;
+
+/* Status reporting flags */
+long file_progress_count;
+double file_progress_bytes;
 
 /* mapping operations into names */
 char *operation_names [] = { "Copy", "Move", "Delete" };
@@ -502,9 +513,28 @@ make_symlink (char *src_path, char *dst_path)
     return return_status;
 }
 
+static int
+progress_update_one (long *progress_count, double *progress_bytes, int add)
+{
+    int ret;
+    
+    (*progress_count)++;
+    (*progress_bytes) += add;
+
+    /* Apply some heuristic here to not call the update stuff very often */
+    ret = file_progress_show_count (*progress_count, file_progress_count);
+
+    if (ret != FILE_CONT)
+	    return ret;
+    
+    ret = file_progress_show_bytes (*progress_bytes, file_progress_bytes);
+
+    return ret;
+}
 
 int
-copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
+copy_file_file (char *src_path, char *dst_path, int ask_overwrite,
+		long  *progress_count, double *progress_bytes)
 {
 #ifndef OS2_NT
     uid_t src_uid;
@@ -705,8 +735,11 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
 
     file_progress_eta_secs = 0.0;
     file_progress_bps = 0;
+
     return_status = file_progress_show (0, file_size);
+
     mc_refresh ();
+
     if (return_status != FILE_CONT)
 	goto ret;
 
@@ -849,7 +882,8 @@ ret:
 	}
 #endif
 
-     /* .ado: according to the XPG4 standard, the file must be closed before
+     /*
+      * .ado: according to the XPG4 standard, the file must be closed before
       * chmod can be invoked
       */
      retry_dst_chmod:
@@ -864,6 +898,10 @@ ret:
 	if (!appending && file_mask_preserve)
 	    mc_utime (dst_path, &utb);
     }
+
+    if (return_status == FILE_CONT)
+        return_status = progress_update_one (progress_count, progress_bytes, file_size);
+    
     return return_status;
 }
 
@@ -874,8 +912,11 @@ ret:
 /* FIXME: This function needs to check the return values of the
    function calls */
 int
-copy_dir_dir (char *s, char *d, int toplevel, int move_over, int delete,
-              struct link *parent_dirs)
+copy_dir_dir (char *s, char *d, int toplevel,
+	      int move_over, int delete,
+              struct link *parent_dirs,
+	      long *progress_count,
+	      double *progress_bytes)
 {
 #ifdef __os2__
     DIR    *next;
@@ -1030,11 +1071,15 @@ copy_dir_dir (char *s, char *d, int toplevel, int move_over, int delete,
              * dir already exists. So, we give the recursive call the flag 0
              * meaning no toplevel.
              */
-            return_status = copy_dir_dir (path, mdpath, 0, 0, delete, parent_dirs);
+            return_status = copy_dir_dir (
+		    path, mdpath, 0, 0, delete, parent_dirs,
+		    progress_count, progress_bytes);
 	    free (mdpath);
 	} else {
 	    dest_file = concat_dir_and_file (dest_dir, x_basename (path));
-            return_status = copy_file_file (path, dest_file, 1);
+            return_status = copy_file_file (
+		    path, dest_file, 1,
+		    progress_count, progress_bytes);
 	    free (dest_file);
 	}    
 	if (delete && return_status == FILE_CONT){
@@ -1089,7 +1134,7 @@ ret:
 /* {{{ Move routines */
 
 int
-move_file_file (char *s, char *d)
+move_file_file (char *s, char *d, long *progress_count, double *progress_bytes)
 {
     struct stat src_stats, dst_stats;
     int return_status = FILE_CONT;
@@ -1175,8 +1220,10 @@ move_file_file (char *s, char *d)
 #endif    
 
     /* Failed because filesystem boundary -> copy the file instead */
-    if ((return_status = copy_file_file (s, d, 0)) != FILE_CONT)
+    return_status = copy_file_file (s, d, 0, progress_count, progress_bytes);
+    if (return_status != FILE_CONT)
 	return return_status;
+
     if ((return_status = file_progress_show_source (NULL)) != FILE_CONT
 	|| (return_status = file_progress_show (0, 0)) != FILE_CONT)
 	return return_status;
@@ -1191,11 +1238,14 @@ move_file_file (char *s, char *d)
 	return return_status;
     }
 
-    return FILE_CONT;
+    if (return_status == FILE_CONT)
+        return_status = progress_update_one (progress_count, progress_bytes, src_stats.st_size);
+    
+    return return_status;
 }
 
 int
-move_dir_dir (char *s, char *d)
+move_dir_dir (char *s, char *d, long *progress_count, double *progress_bytes)
 {
     struct stat sbuf, dbuf, destbuf;
     struct link *lp;
@@ -1222,7 +1272,11 @@ move_dir_dir (char *s, char *d)
  retry_dst_stat:
     if (!mc_stat (destdir, &destbuf)){
 	if (move_over){
-	    if ((return_status = copy_dir_dir (s, destdir, 0, 1, 1, 0)) != FILE_CONT)
+	    return_status = copy_dir_dir (
+		    s, destdir, 0, 1, 1, 0,
+		    progress_count, progress_bytes);
+	    
+	    if (return_status != FILE_CONT)
 		goto ret;
 	    goto oktoret;
 	} else {
@@ -1260,7 +1314,9 @@ move_dir_dir (char *s, char *d)
 
 w32try:
     /* Failed because of filesystem boundary -> copy dir instead */
-    if ((return_status = copy_dir_dir (s, destdir, 0, 0, 1, 0)) != FILE_CONT)
+    return_status = copy_dir_dir (s, destdir, 0, 0, 1, 0, progress_count, progress_bytes);
+    
+    if (return_status != FILE_CONT)
 	goto ret;
 oktoret:
     if ((return_status = file_progress_show_source (NULL)) != FILE_CONT
@@ -1525,8 +1581,106 @@ file_mask_defaults (void)
     file_mask_preserve_uidgid = (geteuid () == 0) ? 1 : 0;
 }
 
-/* Returns 1 if did change the directory structure,
-   Returns 0 if user aborted */
+/**
+ * compute_dir_size:
+ *
+ * Computes the number of bytes used by the files in a directory
+ */
+static void
+compute_dir_size (char *dirname, long *ret_marked, double *ret_total)
+{
+	DIR *dir;
+	struct dirent *dirent;
+	
+	dir = mc_opendir (dirname);
+
+	if (!dir)
+		return;
+
+	while ((dirent = mc_readdir (dir)) != NULL){
+		struct stat s;
+		char *fullname;
+		int res;
+		
+		if (strcmp (dirent->d_name, ".") == 0)
+			continue;
+		if (strcmp (dirent->d_name, "..") == 0)
+			continue;
+
+		fullname = concat_dir_and_file (dirname, dirent->d_name); 
+		
+		res = mc_lstat (fullname, &s);
+
+		if (res != 0){
+			free (fullname);
+			continue;
+		}
+
+		if (S_ISDIR (s.st_mode)){
+			long   subdir_count = 0;
+			double subdir_bytes = 0;
+
+			compute_dir_size (fullname, &subdir_count, &subdir_bytes);
+
+			*ret_marked += subdir_count;
+			*ret_total  += subdir_bytes;
+		} else {
+			(*ret_marked)++;
+			*ret_total += s.st_size;
+		}
+		free (fullname);
+	}
+	
+	mc_closedir (dir);
+}
+
+/**
+ * panel_compute_totals:
+ *
+ * compute the number of files and the number of bytes
+ * used up by the whole selection, recursing directories
+ * as required.
+ */
+static void
+panel_compute_totals (WPanel *panel, long *ret_marked, double *ret_total)
+{
+	int i;
+	
+	for (i = 0; i < panel->count; i++){
+		struct stat *s;
+		
+		if (!panel->dir.list [i].f.marked)
+			continue;
+
+		s = &panel->dir.list [i].buf;
+
+		if (S_ISDIR (s->st_mode)){
+			char   *dir_name;
+			long   subdir_count = 0;
+			double subdir_bytes = 0;
+
+			dir_name = concat_dir_and_file (panel->cwd, panel->dir.list [i].fname);
+			compute_dir_size (dir_name, &subdir_count, &subdir_bytes);
+
+			*ret_marked += subdir_count;
+			*ret_total  += subdir_bytes;
+			free (dir_name);
+		} else {
+			(*ret_marked)++;
+			*ret_total += s->st_size;
+		}
+	}
+}
+
+/**
+ * panel_operate:
+ *
+ * Performs one of the operations on the selection on the source_panel
+ * (copy, delete, move).  
+ *
+ * Returns 1 if did change the directory
+ * structure, Returns 0 if user aborted
+ */
 int
 panel_operate (void *source_panel, FileOperation operation, char *thedefault)
 {
@@ -1542,8 +1696,10 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault)
     int only_one = (get_current_type () == view_tree) || (panel->marked <= 1);
     struct stat src_stat, dst_stat;
     int i, value;
-    long marked, total;
-    long count = 0, bytes = 0;
+
+    long   count = 0;
+    double bytes = 0;
+
     int  dst_result;
     int  do_bg;			/* do background operation? */
 
@@ -1614,17 +1770,22 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault)
 	}
     }
 #endif
+
     /* Initialize things */
     /* We now have ETA in all cases */
     create_op_win (operation, 1);
-    /* We do not want to trash cache every time file is
-       created/touched. However, this will make our cache contain
-       invalid data. */
+
+    /*
+     * We do not want to trash cache every time file is
+     * created/touched. However, this will make our cache contain
+     * invalid data.
+     */
     if (dest)
         mc_setctl (dest, MCCTL_WANT_STALE_DATA, NULL);
     ftpfs_hint_reread (0);
     
     /* Now, let's do the job */
+
     /* This code is only called by the tree and panel code */
     if (only_one){
 	/* One file: FIXME mc_chdir will take user out of any vfs */
@@ -1636,18 +1797,22 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault)
 	source_with_path = concat_dir_and_file (panel->cwd, source);
 #endif
 	
-	if (operation == OP_DELETE){
-	    /* Delete operation */
+	if (operation == OP_DELETE)
+	{
 	    if (S_ISDIR (src_stat.st_mode))
 		value = erase_dir (source_with_path);
 	    else
 		value = erase_file (source_with_path);
-	} else {
-	    /* Copy or move operation */
+	}
+	else
+	{
 	    temp = transform_source (source_with_path);
+
 	    if (temp == NULL){
 		value = transform_error;
-	    } else {
+	    }
+	    else
+	    {
 		temp = get_full_name (dest, temp);
 		free (dest);
 		dest = temp;
@@ -1655,20 +1820,28 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault)
 
 	        switch (operation){
 	        case OP_COPY:
-		    /* we use file_mask_op_follow_links only with OP_COPY,
+		    /*
+		     * we use file_mask_op_follow_links only with OP_COPY,
 		      */
 		    (*file_mask_xstat) (source_with_path, &src_stat);
+
 		    if (S_ISDIR (src_stat.st_mode))
-		        value = copy_dir_dir (source_with_path, dest, 1, 0, 0, 0);
+		        value = copy_dir_dir (
+				source_with_path, dest, 1, 0, 0, 0, &count, &bytes);
 		    else
-		        value = copy_file_file (source_with_path, dest, 1);
+		        value = copy_file_file (
+				source_with_path, dest, 1, &count, &bytes);
 		    break;
+
 	        case OP_MOVE:
 		    if (S_ISDIR (src_stat.st_mode))
-		        value = move_dir_dir (source_with_path, dest);
+		        value = move_dir_dir (
+				source_with_path, dest, &count, &bytes);
 		    else
-		        value = move_file_file (source_with_path, dest);
+		        value = move_file_file (
+				source_with_path, dest, &count, &bytes);
 		    break;
+
 	        default:
 		    value = FILE_CONT;
 		    message_1s (1, _(" Internal failure "), _(" Unknown file operation "));
@@ -1682,8 +1855,8 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault)
     } else {
 	/* Many files */
 
+	/* Check destination for copy or move operation */
 	if (operation != OP_DELETE){
-	    /* Check destination for copy or move operation */
 	retry_many_dst_stat:
 	    dst_result = mc_stat (dest, &dst_stat);
 	    if (dst_result == 0 && !S_ISDIR (dst_stat.st_mode)){
@@ -1694,75 +1867,104 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault)
 	}
 
 	/* Initialize variables for progress bars */
-	marked = panel->marked;
-	total = panel->total;
+	if (file_op_compute_totals)
+		panel_compute_totals (
+			panel, &file_progress_count, &file_progress_bytes);
+	else {
+		file_progress_count = panel->marked;
+		file_progress_bytes = panel->total;
+	}
 
-	/* Loop for every file */
+	/* Loop for every file, perform the actual copy operation */
 	for (i = 0; i < panel->count; i++){
+
 	    if (!panel->dir.list [i].f.marked)
 		continue;	/* Skip the unmarked ones */
+
 	    source = panel->dir.list [i].fname;
 	    src_stat = panel->dir.list [i].buf;	/* Inefficient, should we use pointers? */
+
 #ifdef WITH_FULL_PATHS
 	    if (source_with_path)
 	    	free (source_with_path);
 	    source_with_path = concat_dir_and_file (panel->cwd, source);
 #endif
+
 	    if (operation == OP_DELETE){
-		/* Delete operation */
 		if (S_ISDIR (src_stat.st_mode))
 		    value = erase_dir (source_with_path);
 		else
 		    value = erase_file (source_with_path);
-	    } else {
-		/* Copy or move operation */
+	    }
+	    else
+	    {
 		if (temp)
 		    free (temp);
+
 		temp = transform_source (source_with_path);
-		if (temp == NULL){
+		if (temp == NULL)
 		    value = transform_error;
-		} else {
+		else
+		{
 		    temp = get_full_name (dest, temp);
+
 		    switch (operation){
 		    case OP_COPY:
-		       /* we use file_mask_op_follow_links only with OP_COPY,
+		       /*
+			* we use file_mask_op_follow_links only with OP_COPY,
 		        */
 			(*file_mask_xstat) (source_with_path, &src_stat);
 		    	if (S_ISDIR (src_stat.st_mode))
-			    value = copy_dir_dir (source_with_path, temp, 1, 0, 0, 0);
+			    value = copy_dir_dir (
+				    source_with_path, temp, 1, 0, 0, 0,
+				    &count, &bytes);
 		    	else
-			    value = copy_file_file (source_with_path, temp, 1);
+			    value = copy_file_file (
+				    source_with_path, temp, 1,
+				    &count, &bytes);
 			free_linklist (&dest_dirs);
 		    	break;
+
 		    case OP_MOVE:
 		    	if (S_ISDIR (src_stat.st_mode))
-			    value = move_dir_dir (source_with_path, temp);
+			    value = move_dir_dir (
+				    source_with_path, temp,
+				    &count, &bytes);
 		    	else
-		            value = move_file_file (source_with_path, temp);
+		            value = move_file_file (
+				    source_with_path, temp,
+				    &count, &bytes);
 		        break;
+
 		    default:
 		    	message_1s (1, _(" Internal failure "),
 			         _(" Unknown file operation "));
 		    	goto clean_up;
 		    }
 		}
+
 	    } /* Copy or move operation */
 
 	    if (value == FILE_ABORT)
 		goto clean_up;
-	    if (value == FILE_CONT){
+
+	    if (value == FILE_CONT)
 		do_file_mark (panel, i, 0);
-	    }
-	    count ++;
-	    if (file_progress_show_count (count, marked) == FILE_ABORT)
+
+	    count++;
+
+	    if (file_progress_show_count (count, file_progress_count) == FILE_ABORT)
 		goto clean_up;
+
 	    bytes += src_stat.st_size;
 	    if (verbose &&
-	        file_progress_show_bytes (bytes, total) == FILE_ABORT)
+	        file_progress_show_bytes (bytes, file_progress_bytes) == FILE_ABORT)
 		goto clean_up;
+
 	    if (operation != OP_DELETE && verbose
 		&& file_progress_show (0, 0) == FILE_ABORT)
 		goto clean_up;
+
 	    mc_refresh ();
 	} /* Loop for every file */
     } /* Many files */
@@ -1770,23 +1972,30 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault)
  clean_up:
     /* Clean up */
     destroy_op_win ();
+
     if (dest)
         mc_setctl (dest, MCCTL_NO_STALE_DATA, NULL);
+
     ftpfs_hint_reread (1);
+
     free_linklist (&linklist);
     free_linklist (&dest_dirs);
 #if WITH_FULL_PATHS
     if (source_with_path)
     	free (source_with_path);
 #endif
+
     if (dest)
 	free (dest);
+
     if (temp)
 	free (temp);
+
     if (file_mask_rx.buffer){
 	free (file_mask_rx.buffer);
 	file_mask_rx.buffer = NULL;
     }
+
     if (file_mask_dest_mask){
 	free (file_mask_dest_mask);
 	file_mask_dest_mask = NULL;
@@ -1820,9 +2029,11 @@ real_do_file_error (enum OperationMode mode, char *error)
     case 0:
 	do_refresh ();
 	return FILE_SKIP;
+
     case 1:
 	do_refresh ();
 	return FILE_RETRY;
+
     case 2:
     default:
 	return FILE_ABORT;
@@ -1835,6 +2046,7 @@ file_error (char *format, char *file)
 {
     sprintf (cmd_buf, format,
 	     name_trunc (file, 30), unix_error_string (errno));
+
     return do_file_error (cmd_buf);
 }
 
@@ -1849,6 +2061,7 @@ files_error (char *format, char *file1, char *file2)
     strcpy (nfile2, name_trunc (file2, 15));
     
     sprintf (cmd_buf, format, nfile1, nfile2, unix_error_string (errno));
+
     return do_file_error (cmd_buf);
 }
 

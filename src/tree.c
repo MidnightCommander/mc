@@ -1093,8 +1093,10 @@ static int toggle_nav_mode (void)
 
 void tree_copy (WTree *tree, char *default_dest)
 {
-    char *dest;
-
+    char   *dest;
+    long   count = 0;
+    double bytes = 0;
+    
     if (!tree->selected_ptr)
 	return;
     sprintf (cmd_buf, _("Copy \"%s\" directory to:"),
@@ -1105,7 +1107,8 @@ void tree_copy (WTree *tree, char *default_dest)
     }
     create_op_win (OP_COPY, 0);
     file_mask_defaults ();
-    copy_dir_dir (tree->selected_ptr->name, dest, 1, 0, 0, 0);
+
+    copy_dir_dir (tree->selected_ptr->name, dest, 1, 0, 0, 0, &count, &bytes);
     destroy_op_win ();
     free (dest);
 }
@@ -1125,9 +1128,11 @@ static int tree_copy_cmd (WTree *tree)
 
 void tree_move (WTree *tree, char *default_dest)
 {
-    char *dest;
+    char   *dest;
     struct stat buf;
-
+    double bytes = 0;
+    long   count = 0;
+    
     if (!tree->selected_ptr)
 	return;
     sprintf (cmd_buf, _("Move \"%s\" directory to:"),
@@ -1149,7 +1154,7 @@ void tree_move (WTree *tree, char *default_dest)
     }
     create_op_win (OP_MOVE, 0);
     file_mask_defaults ();
-    move_dir_dir (tree->selected_ptr->name, dest);
+    move_dir_dir (tree->selected_ptr->name, dest, &count, &bytes);
     destroy_op_win ();
     free (dest);
 }

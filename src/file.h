@@ -30,13 +30,17 @@ extern int know_not_what_am_i_doing;
 
 struct link;
 
-int copy_file_file      (char *s, char *d, int ask_overwrite);
-int move_file_file      (char *s, char *d);
+int copy_file_file      (char *s, char *d, int ask_overwrite,
+			 long *progres_count, double *progress_bytes);
+int move_file_file      (char *s, char *d,
+			 long *progres_count, double *progress_bytes);
+int move_dir_dir        (char *s, char *d,
+			 long *progres_count, double *progress_bytes);
+int copy_dir_dir        (char *s, char *d, int toplevel, int move_over,
+			 int delete, struct link *parent_dirs,
+			 long *progres_count, double *progress_bytes);
 int erase_dir           (char *s);
 int erase_dir_iff_empty (char *s);
-int move_dir_dir        (char *s, char *d);
-int copy_dir_dir        (char *s, char *d, int toplevel, int move_over,
-			 int delete, struct link *parent_dirs);
 
 /*
  * Manually creating the copy/move/delte dialogs
@@ -57,6 +61,7 @@ char *panel_operate_generate_prompt (char* cmd_buf,
 #endif
 
 extern int dive_into_subdirs;
+extern int file_op_compute_totals;
 
 /* Error reporting routines */
     /* Skip/Retry/Abort routine */
@@ -80,6 +85,7 @@ extern int dive_into_subdirs;
 
 /* Callback routine for background activity */
 int background_attention (int fd, void *info);
+
 extern int background_wait;
 
 int is_wildcarded (char *p);

@@ -134,7 +134,7 @@ file_progress_show_count (long done, long total)
 }
 
 FileProgressStatus
-file_progress_show_bytes (long done, long total)
+file_progress_show_bytes (double done, double total)
 {
         if (!total)
                 gtk_progress_bar_update (GTK_PROGRESS_BAR (byte_prog), 0.0);

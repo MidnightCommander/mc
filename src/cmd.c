@@ -622,13 +622,16 @@ void unselect_cmd (void)
 static int check_for_default(char *default_file, char *file)
 {
     struct stat s;
+    long   count = 0;
+    double bytes = 0;
+    
     if (mc_stat (file, &s)){
 	if (mc_stat (default_file, &s)){
 	    return -1;
 	}
 	create_op_win (OP_COPY, 0);
         file_mask_defaults ();
-	copy_file_file (default_file, file, 1);
+	copy_file_file (default_file, file, 1, &count, &bytes);
 	destroy_op_win ();
     }
     return 0;
