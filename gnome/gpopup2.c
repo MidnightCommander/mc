@@ -413,7 +413,7 @@ create_mime_actions (GtkWidget *menu, WPanel *panel, int pos, DesktopIconInfo *d
 	}
 
 	/* Remember to free this memory */
-	gtk_signal_connect (GTK_OBJECT (uiinfo[0].widget), "destroy",
+	gtk_signal_connect (GTK_OBJECT (menu), "destroy",
 			    (GtkSignalFunc) free_on_destroy,
 			    full_name);
 	

@@ -1,3 +1,7 @@
+1999-03-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gpopup2.c (create_mime_actions): Attach to the menu, not the uiinfo.
+
 1999-03-19  Jonathan Blandford  <jrb@redhat.com>
 
 	* gscreen.c (panel_tree_drag_motion): Dragging now automatically
