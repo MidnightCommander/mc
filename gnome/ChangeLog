@@ -1,3 +1,7 @@
+1998-11-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (select_icon): Raise the icon when it is selected.
+
 1998-11-02  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (select_range): Doh.  Fix dii -> ldii typo.  Also,

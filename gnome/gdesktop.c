@@ -255,7 +255,7 @@ select_range (struct desktop_icon_info *dii, int sel)
 		max_vdii = dii;
 	}
 
-	/* Select! */
+	/* Select all the icons in the rectangle */
 
 	for (u = min_u; u <= max_u; u++)
 		for (v = min_v; v <= max_v; v++)
@@ -296,6 +296,9 @@ select_icon (struct desktop_icon_info *dii, GdkEventButton *event)
 		}
 
 		last_selected_icon = dii;
+
+		if (dii->selected)
+			gdk_window_raise (dii->dicon->window);
 	} else
 		select_range (dii, TRUE);
 }
