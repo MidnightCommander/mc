@@ -72,6 +72,7 @@ rm -rf $RPM_BUILD_ROOT
 %config %{_prefix}/lib/mc/mc.ext
 %config %{_prefix}/lib/mc/mc.lib
 %config %{_prefix}/lib/mc/mc.menu
+%config %{_prefix}/lib/mc/mc.charsets
 %{_prefix}/lib/mc/mc.hint*
 %{_prefix}/lib/mc/mc.hlp*
 %{_prefix}/lib/mc/syntax/*
@@ -81,6 +82,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/lib/mc/syntax
 
 %changelog
+* Tue Aug 20 2002 Andrew V. Samoilov <sav@bcs.zp.ua>
+- Add /usr/lib/mc/mc.charsets.
+
 * Fri Aug 16 2002 Pavel Roskin <proski@gnu.org>
 - Remove mc.global.
 
