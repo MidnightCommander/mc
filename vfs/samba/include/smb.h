@@ -783,7 +783,7 @@ struct passdb_ops {
   BOOL (*mod_smbpwd_entry)(struct smb_passwd *, BOOL);
 
   /*
-   * Functions that manupulate a struct sam_passwd.
+   * Functions that manipulate a struct sam_passwd.
    */
   struct sam_passwd *(*getsam21pwent)(void *);
 

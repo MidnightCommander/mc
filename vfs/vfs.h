@@ -378,7 +378,7 @@ extern void vfs_print_stats (const char *fs_name, const char *action,
 #define NO_LINEAR(a) (((a) == (O_RDONLY | O_LINEAR)) ? O_RDONLY : (a))
 #endif
 
-/* O_LINEAR is strange beast, be carefull. If you open file asserting
+/* O_LINEAR is strange beast, be careful. If you open file asserting
  * O_RDONLY | O_LINEAR, you promise:
  *
  *     	a) to read file linearly from beginning to the end

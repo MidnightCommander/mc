@@ -164,7 +164,7 @@ dd bs=<offset%4096> count=1 > /dev/null;
 dd bs=4096 count=<offset/4096>;
 dd bs=<offset%4096> count=1; )
 
-Returns ### 200 on successfull exit, ### 291 on successfull exit when
+Returns ### 200 on successful exit, ### 291 on successful exit when
 reading ended at eof, ### 292 on successfull exit when reading did not
 end at eof.
 
