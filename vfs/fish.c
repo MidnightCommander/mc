@@ -623,7 +623,7 @@ static int fish_##name (vfs *me, char *path1, char *path2) \
 	return -1; \
     if (!(rpath2 = vfs_s_get_path_mangle(me, path2, &super2, 0))) \
 	return -1; \
-    snprintf(buf, 1023, string "\n", rpath1, rpath2, rpath1, rpath2 ); \
+    g_snprintf(buf, 1023, string "\n", rpath1, rpath2, rpath1, rpath2 ); \
     return send_fish_command(me, super2, buf, OPT_FLUSH); \
 }
 

@@ -1,3 +1,19 @@
+1998-12-02  Sebastian Wilhelmi  <wilhelmi@ira.uka.de>
+
+	* fish.c (FISH_OP): changed snprintf to g_snprintf, as glib is
+	used anyway.
+
+	* xdirentry.h (LINK_NO_FOLLOW): 
+	* tar.c (read_header): 
+	* direntry.c (vfs_s_resolve_symlink):
+	(vfs_s_inode_from_path):
+	(vfs_s_open): renamed NO_FOLLOW and FOLLOW to LINK_NO_FOLLOW and
+	LINK_FOLLOW resp. to avoid problems on solaris, where FOLLOW and
+	NO_FOLLOW are defined in an enum.
+
+	* vfs.h (ELAST): define it to 300, if not already defined, thats a
+	bad hack, but what can we do....
+
 Wed Dec  2 14:06:49 KST 1998  Sung-Hyun Nam  <namsh@lgic.co.kr>
 
 	* direntry.c (vfs_s_new_super): Added the missing return value.

@@ -319,7 +319,7 @@ vfs_s_inode *vfs_s_find_root(vfs *me, vfs_s_entry *entry)
 vfs_s_entry *vfs_s_resolve_symlink (vfs *me, vfs_s_entry *entry, int follow)
 {
     vfs_s_inode *dir;
-    if (follow == -1)
+    if (follow == LINK_NO_FOLLOW)
 	return entry;
     if (follow == 0)
 	ERRNOR (ELOOP, NULL);
@@ -500,7 +500,7 @@ vfs_s_inode *vfs_s_inode_from_path (vfs *me, char *name, int flags)
     if (!(q = vfs_s_get_path_mangle (me, name, &super, 0))) 
 	return NULL;
 
-    ino = vfs_s_find_inode (me, super->root, q, flags & FL_FOLLOW ? FOLLOW : NO_FOLLOW, flags & ~FL_FOLLOW);
+    ino = vfs_s_find_inode (me, super->root, q, flags & FL_FOLLOW ? LINK_FOLLOW : LINK_NO_FOLLOW, flags & ~FL_FOLLOW);
     if (ino) return ino;
 
     return ino;
@@ -653,7 +653,7 @@ void *vfs_s_open (vfs *me, char *file, int flags, int mode)
 
     if ((q = vfs_s_get_path_mangle (me, file, &super, 0)) == NULL)
 	return NULL;
-    ino = vfs_s_find_inode (me, super->root, q, FOLLOW, FL_NONE);
+    ino = vfs_s_find_inode (me, super->root, q, LINK_FOLLOW, FL_NONE);
     if (ino && ((flags & (O_CREAT | O_EXCL)) == (O_CREAT | O_EXCL)))
 	ERRNOR (EEXIST, NULL);
     if (!ino) { 
@@ -664,7 +664,7 @@ void *vfs_s_open (vfs *me, char *file, int flags, int mode)
 	    return NULL;
 
 	split_dir_name(me, q, &dirname, &name, &save);
-	dir = vfs_s_find_inode(me, super->root, dirname, FOLLOW, FL_DIR);
+	dir = vfs_s_find_inode(me, super->root, dirname, LINK_FOLLOW, FL_DIR);
 	if (save)
 	    *save = DIR_SEP_CHAR;
 	ent = vfs_s_generate_entry (me, name, dir, 0755);

@@ -327,14 +327,14 @@ static int read_header (vfs *me, vfs_s_super *archive, int tard)
 	    q = current_file_name;
 	}
 
-	parent = vfs_s_find_inode (me, archive->root, q, NO_FOLLOW, FL_MKDIR);
+	parent = vfs_s_find_inode (me, archive->root, q, LINK_NO_FOLLOW, FL_MKDIR);
 	if (parent == NULL) {
 	    message_1s (1, MSG_ERROR, _("Inconsistent tar archive"));
 	    return 0;
 	}
 
 	if (header->header.linkflag == LF_LINK) {
-	    parent = vfs_s_find_inode (me, archive->root, current_link_name, NO_FOLLOW, 0);
+	    parent = vfs_s_find_inode (me, archive->root, current_link_name, LINK_NO_FOLLOW, 0);
 	    if (parent == NULL) {
 	        message_1s (1, MSG_ERROR, _("Inconsistent tar archive"));
 	    } else {

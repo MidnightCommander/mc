@@ -22,8 +22,8 @@
 #include "vfs.h"
 
 
-#define FOLLOW 15
-#define NO_FOLLOW -1
+#define LINK_FOLLOW 15
+#define LINK_NO_FOLLOW -1
 
 /* For vfs_s_find_entry */
 #define FL_NONE 0

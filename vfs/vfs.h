@@ -403,6 +403,10 @@ extern void mc_vfs_done( void );
 
 /* And now some defines for our errors. */
 
+#ifndef ELAST
+#define ELAST 300 /* bad hack, but what can we do */
+#endif
+
 #ifdef ENOSYS
 #define E_NOTSUPP ENOSYS	/* for use in vfs when module does not provide function */
 #else
