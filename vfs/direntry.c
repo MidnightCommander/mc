@@ -1014,19 +1014,19 @@ vfs_s_ferrno (vfs *me)
 void
 vfs_s_dump (vfs *me, char *prefix, vfs_s_inode *ino)
 {
-    printf ("%s %s %d ", prefix, S_ISDIR (ino->st.st_mode) ? "DIR" : "FILE", ino->st.st_mode);
+    printf ("%s %s %d ", prefix, S_ISDIR (ino->st.st_mode) ? "DIR" : "FILE",
+	    (int) ino->st.st_mode);
     if (!ino->subdir)
-	printf ("FILE\n");
-    else
-    {
+	puts ("FILE");
+    else {
 	struct vfs_s_entry *ent;
-	for (ent = ino->subdir; ent ; ent = ent->next){
+	for (ent = ino->subdir; ent; ent = ent->next) {
 	    char *s = g_strconcat (prefix, "/", ent->name, NULL);
 	    if (ent->name[0] == '.')
 		printf ("%s IGNORED\n", s);
 	    else
 		vfs_s_dump (me, s, ent->ino);
-	    g_free(s);
+	    g_free (s);
 	}
     }
 }

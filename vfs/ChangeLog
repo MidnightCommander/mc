@@ -1,9 +1,10 @@
 2003-02-19  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* smbfs.c (smbfs_lseek): Backport from Samba 2.2.7 Suite.
-	(fake_server_stat): Warning fix for AIX.  Reformat function.
+	(fake_server_stat): Warning fix for SunOS.  Reformat function.
 	(fake_share_stat): Likewise.
 	(smbfs_mkdir): Likewise.
+	* direntry.c (vfs_s_dump): Likewise.
 
 	* vfs.c (is_localized_month): New function for locale's
 	abbreviated month name as any 3 bytes long string without digits
