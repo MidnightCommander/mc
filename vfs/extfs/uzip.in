@@ -202,7 +202,7 @@ sub mczipfs_list {
 	} else {
 		while (<PIPE>) {
 			chomp;
-			my @match = /^ *(\d+) +([^ ]+) +(\d+) +(\d+\%) +(\d?\d)-(\d?\d)-(\d\d) (\d?\d):(\d\d) +([0-9a-f]+) +(.*)$/;
+			my @match = /^ *(\d+) +([^ ]+) +(\d+) +(-?\d+\%) +(\d?\d)-(\d?\d)-(\d\d) (\d?\d):(\d\d) +([0-9a-f]+) +(.*)$/;
 			next if ($#match != 10);
 			my @rmatch = ('', '', 'unknown', $match[0], '', $match[2], $match[1],
 					$match[6] + ($match[6] < 70 ? 2000 : 1900), $match[4], $match[5],
