@@ -1,5 +1,5 @@
 GNU Midnight Commander
-Questions and Answers
+Frequently Asked Questions
 
    The newest version of this document is available at
    http://cvs.gnome.org/lxr/source/mc/FAQ?raw=1
@@ -11,7 +11,9 @@ Questions and Answers
           + 1.4 What else do I need to run MC?
           + 1.5 Is GNU Midnight Commander Public Domain?  Copyrighted?
           + 1.6 Where can I get GNU Midnight Commander?
-          + 1.7 I don't have FTP access. Where can I get MC?
+          + 1.7 I don't have FTP access.  Where can I get MC?
+          + 1.8 I cannot compile MC.  What should I do?
+
      * 2 Keyboard
           + 2.1 What does documentation mean with the C-?, M-? and F?
             keys?
@@ -23,11 +25,13 @@ Questions and Answers
           + 2.7 What 'keys' are the "a1" and "c1" keys mentioned in the
             manual?
           + 2.8 How do I change the key bindings?
+
      * 3 Mouse
           + 3.1 How do I enable mouse support?
           + 3.2 How do I cut and paste text with mouse?
           + 3.3 How do I get the extension dependent pop-up menu to
             pop up?
+
      * 4 Display
           + 4.1 Why do I keep getting "Terminal not powerful enough for
             SLang" or "Terminal not powerful enough for SLsmg"?
@@ -40,20 +44,24 @@ Questions and Answers
           + 4.7 Where can I get xterm or rxvt?
           + 4.8 I got colors working with MC but the other programs don't
             work at all anymore!
-          + 4.9 Why are there both terminfo and termcap? Wouldn't one
+          + 4.9 Why are there both terminfo and termcap?  Wouldn't one
             database be enough?
+
      * 5 Graphical user interface
           + 5.1 Xview, Tk and Gnome editions?
+          + 5.2 Why is MC linked with X libraries?
+
      * 6 Command line problems
           + 6.1 How do I stay in the last directory when I exit Midnight
             Commander?
           + 6.2 How can I access command line history?
           + 6.3 How can I complete commands, file names, variable names
             and so on?
-          + 6.4 I am using ksh. Can I use functions defined in the .kshrc
-            within MC?
+          + 6.4 I am using ksh.  Can I use functions defined in the
+            .kshrc within MC?
           + 6.5 Is there any way to include additional options or hot
             keys to MC?
+
      * 7 Virtual file systems
           + 7.1 How can I see the contents of a tar archive?
           + 7.2 How do I get out of a tar archive?
@@ -62,27 +70,34 @@ Questions and Answers
           + 7.5 How do I close an ftp connection?
           + 7.6 Why aren't the contents of ftp panel updated?
           + 7.7 What kind of proxy server works with Midnight Commander?
+
      * 8 Other common problems
           + 8.1 How do I get the internal editor to work?
           + 8.2 Is there any way to 'bookmark' favorite ftp-fs links?
           + 8.3 Why I keep getting: "There is no disk in the drive.
             Please insert a disk into drive D:"?
           + 8.4 When I start Midnight Commander, nothing happens!
+          + 8.5 When I try pasting to the internal editor, it indents
+            the amount of indenting increases with each line!
+
      * 9 Development
           + 9.1 Who has written Midnight Commander?
           + 9.2 Do I dare to use a development version?
           + 9.3 How can I report a bug/request for a feature?
           + 9.4 How can I join the development?
+
      * 10 More information
           + 10.1 This document didn't answer my question. Where else can
             I look for an answer?
           + 10.2 What mailing lists are there for Midnight Commander?
           + 10.3 Where should I look on the World Wide Web for MC stuff?
           + 10.4 Are the mailing lists archived anywhere?
+
      * 11 Legal issues
           + 11.1 Authorship
           + 11.2 Feedback is invited
           + 11.3 Disclaimer and copyright
+
 
 1 Getting started
 
@@ -100,13 +115,15 @@ Questions and Answers
 
 1.2 Does it run on my machine?
 
-   Yes, Midnight Commander can run on almost any machine, including Unix
-   clones, Windows 95/NT and OS/2. Midnight Commander does not run on
-   Macintosh.
+   GNU Midnight Commander runs on POSIX (Unix-like) operating systems,
+   such as GNU/Linux, FreeBSD, Mac OS X, Solaris, HP-UX and others.  It
+   can also be compiled under Cygwin on Windows.  There is an unfinished
+   Windows port.
 
-   Midnight Commander uses GNU Autoconf which can automatically
-   configure Midnight Commander for use on almost any (if not every)
-   Unix clone. Following configurations have been tested:
+   GNU Midnight Commander uses GNU Autoconf which should automatically
+   configure it for every Unix clone.  Following configurations have
+   been tested:
+
      * i386-*-linux1.x, 2.x
      * alpha-linux-linux2
      * sparc-linux-linux2.x
@@ -124,9 +141,6 @@ Questions and Answers
      * mc88110-aviion-dgux5.4R2.01
      * i386-*-sco3.2v4.2
      * i386-*-sco3.2v5
-     * i386-*-windows-nt-3.51, 4.0
-     * i386-*-windows95
-     * i386-*-os2
 
    Windows 95/NT port can be compiled with Microsoft Visual C++, Borland
    C++, RSX and Mingw32.
@@ -142,19 +156,20 @@ Questions and Answers
 
 1.4 What else do I need to run MC?
 
-   You need an Unix compatible operating system. Support for Windows 95/NT
-   and OS/2 is incomplete - you should be prepared to fix things.
+   You need a POSIX (Unix compatible) operating system.  Native support
+   for Windows is incomplete - you should be prepared to fix things.
 
-   To compile any edition you need to have GLib installed. It's available
-   at ftp://ftp.gtk.org/pub/gtk/.  Only GLib versions 1.2.x will be
-   currently detected.
+   To compile any edition you need to have glib 1.2.x or newer
+   installed.  It's available at ftp://ftp.gtk.org/pub/gtk/.  If you
+   don't have glib installed already, please note that glib 2.x is much
+   harder to compile, so your first choice should be glib 1.2.10.
 
    If you want to use mouse on the Linux console you need the gpm daemon
    from ftp://ftp.systemy.it/pub/develop/. You need nothing extra to use
    mouse on xterm.
 
    If you do not want to use the S-Lang library you could try using
-   ncurses (we recommend only version 4.1 and above).
+   ncurses version 4.1 and above.
 
 1.5 Is GNU Midnight Commander Public Domain? Copyrighted?
 
@@ -178,6 +193,16 @@ Questions and Answers
    Most GNU/Linux distributions include GNU Midnight Commander. For
    example, Debian, Mandrake, Red Hat, Slackware and SuSE.
 
+1.8 I cannot compile MC.  What should I do?
+
+   Make sure you have read the INSTALL file in the sources.  Report the
+   error messages exactly as they appear, mention the versions of your
+   OS, your compiler and whatever else software you think is relevant. 
+   If you have compile problems in the VFS code, try disabling it by
+   using "--without-vfs" switch.  As the last resort, you can use
+   precompiled binaries from the GNU Midnight Commander website.
+
+
 2 Keyboard
 
 2.1 What does documentation mean with the C-?, M-? and F? keys?
@@ -185,18 +210,21 @@ Questions and Answers
    GNU Midnight Commander documentation uses emacs style names for
    keyboard keys.
 
-   C stands for the Ctrl key. For example, C-f means that you should hold
-   down the Ctrl key and press the f key.
+   C stands for the Ctrl key.  For example, C-f means that you should
+   hold down the Ctrl key and press the f key.
 
-   M stands for the Meta key. Your terminal might call it Alt or Compose
-   instead of Meta. For example, M-f means that you should hold down the
-   Meta/Alt/Compose key and press the f key. If your terminal doesn't
-   have Meta, Alt or Compose or they don't work you can use Esc. For M-f
-   press the Esc key and then press the f key.
+   M stands for the Meta key.  Your terminal might call it Alt or
+   Compose instead of Meta. For example, M-f means that you should hold
+   down the Meta/Alt/Compose key and press the f key.  If your terminal
+   doesn't have Meta, Alt or Compose or they don't work you can use Esc.
+   For M-f press the Esc key and then press the f key.
+
+   Sometimes Ctrl and Alt are used instead of C and M for simplicity. 
+   Keep in mind that Alt can actually be Meta on some keyboards.
 
    F? stands for a function key. If your terminal doesn't have function
-   keys or they don't work you can use Esc. For example, for F3 press the
-   Esc key and then press the 3 key.
+   keys or they don't work you can use Esc.  For example, for F3 press
+   the Esc key and then press the 3 key.
 
 2.2 Why don't function keys (or some other key) work?
 
@@ -235,9 +263,9 @@ Questions and Answers
    the keys this way in the Options menu. The convention for PC keyboards
    is that F11-20 always means Shift with F1-10
 
-   Note! Windows 95/NT and OS/2 ports use F11 and F12 keys to change the
-   current disk drive. In this case F11 and F12 mean the real F11 and F12
-   keys, not shift-F1 and shift-F2.
+   Note!  The native Windows port uses F11 and F12 keys to change the
+   current disk drive.  In this case F11 and F12 mean the real F11 and
+   F12 keys, not shift-F1 and shift-F2.
 
 2.4 Why does the ESC key behave funny?
 
@@ -286,6 +314,7 @@ Questions and Answers
    dialog.  However, most actions cannot be redefined to use different
    keys.
 
+
 3 Mouse
 
 3.1 How do I enable mouse support?
@@ -303,6 +332,7 @@ Questions and Answers
 
    It was developed for the GNOME edition. The text-mode edition doesn't
    support this feature yet.
+
 
 4 Display
 
@@ -534,11 +564,21 @@ enough?
    don't specify them, the configure script will try to use terminfo if
    available otherwise it will use termcap.
 
+
 5 Graphical user interface
 
 5.1 Xview, Tk and Gnome editions?
 
    Xview and Tk and GNOME editions have been removed from the sources.
+
+5.2 Why is MC linked with X libraries?
+
+   GNU Midnight Commander is linked with X libraries to read key
+   modifiers from the X Server.  It may be helpful to distinguish
+   between keys that the terminal emulator reports in the same way, e.g.
+   PgUp and Ctrl-PgUp.  Versions of GNU Midnight Commander after 4.6.0
+   will load X libraries dynamically on the systems that support it.
+
 
 6 Command line problems
 
@@ -549,8 +589,12 @@ enough?
 
 6.2 How can I access command line history?
 
-   You can browse previous commands with M-p and M-n. Alternatively, you
-   can summon the command history listbox by pressing F9 c h.
+   Alt-h shows the last commands you executed from the command line. 
+   Duplicates are suppressed from the history.  Commands executed from
+   the subshell prompt are not shown.
+
+   You can put previous commands to the command line with Alt-p.  Alt-n
+   moves you forward in history.
 
    Since version 4.1.15 all the input widgets have permanent history. You
    can summon the history listbox by pressing M-h.
@@ -583,16 +627,11 @@ enough?
    some limitations to make sure MC stays free. See GNU General Public
    License for details.
 
+
 7 Virtual file systems
 
-   Note! Virtual file systems are supported by Unix ports only. The
-   Windows 95/NT and OS/2 ports do NOT support virtual file systems. This
-   means you haven't got ftp, zip or tar support on Windows 95/NT and
-   OS/2.
-
-   This chapter describes the behavior of the 4.1.x versions of the
-   Midnight Commander. The behavior of the 4.5.x versions is somewhat
-   different. More on that when the 4.5.x versions get more stable.
+   Note! Virtual file systems are supported by Unix ports only.  The
+   native Windows port doesn't support virtual file systems.
 
 7.1 How can I see the contents of a tar archive?
 
@@ -612,9 +651,9 @@ enough?
 
 7.2 How do I get out of a tar archive?
 
-   Just press enter on the toplevel ".." file or chdir to a non-tar
-   directory. Just typing "cd" with no parameters is enough (it will take
-   you to your home directory).
+   Just press enter on the toplevel ".." file or change to a non-tar
+   directory.  Just typing "cd" with no parameters is enough (it will
+   take you to your home directory).
 
 7.3 How do I do anonymous ftp with MC?
 
@@ -650,16 +689,17 @@ enough?
    proxies for web browsers.
 
    Midnight Commander only supports ftp proxies which are meant for ftp
-   clients. Common WWW proxies (like Squid) are not supported. A rule of
-   thumb is that if a ftp proxy works with a web browser, it won't work
+   clients.  Common WWW proxies (like Squid) are not supported.  A rule
+   of thumb is that if a ftp proxy requires a web browser, it won't work
    with Midnight Commander.
+
 
 8 Other common problems
 
 8.1 How do I get the internal editor to work?
 
    The F4 key used to default to an external editor because that was what
-   most people were used to. The newer versions use internal editor by
+   most people were used to.  The newer versions use internal editor by
    default.
 
    To use the internal editor with an old version, select Configuration
@@ -679,9 +719,9 @@ enough?
    The internal editor will now be invoked for anything not specified
    elsewhere in the mc.ext file.
 
-   Make sure that you edit the correct mc.ext file. The Midnight
-   Commander first checks the existence of $HOME/.mc.ext. If this file is
-   missing MC will use $prefix/lib/mc/mc.ext instead ($prefix can be
+   Make sure that you edit the correct mc.ext file.  The Midnight
+   Commander first checks the existence of $HOME/.mc.ext.  If this file
+   is missing MC will use $prefix/lib/mc/mc.ext instead ($prefix can be
    changed with configure before compilation and it defaults to
    /usr/local).
 
@@ -695,7 +735,7 @@ enough?
 
 8.2 Is there any way to 'bookmark' favorite ftp-fs links?
 
-   Use the directory hotlist. Just press control-backslash. If your
+   Use the directory hotlist.  Just press control-backslash.  If your
    national keyboard layout doesn't have backslash key, just press the
    control key with the key which is the backslash key in the English
    keyboard layout.
@@ -703,7 +743,7 @@ enough?
 8.3 Why I keep getting: "There is no disk in the drive. Please insert a disk
 into drive D:"?
 
-   This is a known bug of the Windows 95/NT and OS/2 ports. MC looks its
+   This is a known bug of the native Windows port.  MC looks its
    configuration files from the D:\MC directory and if the D: drive is a
    removable drive (like a CD ROM drive) and there is no disk in drive
    you get this message every time you try to do anything.
@@ -715,26 +755,33 @@ into drive D:"?
 8.4 When I start Midnight Commander, nothing happens!
 
    First, invoke MC without subshell support: "mc -u". If this helps
-   check the shell you are using. Subshell support works best with bash
-   although tcsh and zsh are also supported. You might want to upgrade
-   your shell to a newer version. If you use something else than bash,
-   tcsh or zsh, subshell support is disabled automatically.
+   check the shell you are using.  Subshell support works best with
+   bash, although tcsh and zsh are also supported.  You might want to
+   upgrade your shell to a newer version.  If you use something else
+   than bash, tcsh or zsh, subshell support is disabled automatically.
 
    If disabling subshell doesn't help, try to reconfigure MC with
    "--with-included-slang" and "--with-termcap" options and recompile.
-   If this helps, there is something wrong with your terminfo database
-   or shared S-Lang library. For better terminfo databases see chapter
-   4. For a better S-Lang library, upgrade to a newer version or keep
-   using the "--with-included-slang" option.
+   If this helps, something is wrong with your terminfo database or
+   shared S-Lang library.  For better terminfo databases see chapter 4
+   of this FAQ.  For a better S-Lang library, upgrade to a newer version
+   or keep using the "--with-included-slang" option.
 
-   This problem can also be caused by gpm as noted by Luis Espinoza:
+   Another reason is problems with gpm.  Try using "--nomouse" option to
+   see if it makes any difference.  Restarting gpm can help.  Sometimes
+   it's enough to move the mouse.
 
-     In regards to why Midnight Commander does nothing when invoked. I
-     recently had the same problem. At the same time gpm was not loading
-     properly with my patched kernel (now 2.0.33 from 2.0.30).
-     Downloading version 1.13 of gpm, and got it working :-) MC still
-     appeared locked.... However moving the mouse, brought MC to life.
-     The mouse I am using is a Kensington Expert Mouse (Trackball).
+   Also, if you have the DISPLAY environment variable set, but the X
+   server is unreachable (e.g. it's firewalled), this can also cause a
+   delay at startup.  Unset DISPLAY to see if that's the case.
+
+8.5 When I try pasting to the internal editor, it indents the amount of
+indenting increases with each line!
+
+   Either turn of 'Return does autoindent' in the editor options or
+   update GNU Midnight Commander to version 4.6.0 or above - it doesn't
+   autoindent when you are holding Shift.
+
 
 9 Development
 
@@ -782,21 +829,22 @@ into drive D:"?
 
 9.2 Do I dare to use a development version?
 
-   I am afraid you have to answer to this question yourself. Development
-   versions seldom cause data loss but they have usually got many bugs.
-   It's up to you to judge whether new features outweigh the bugs.
+   That's up to you to decide.  Development versions may have nasty bugs
+   at some points of time.  It's up to you to judge whether the new
+   features and fixes for the bugs you know outweigh the risk of unknown
+   bugs.
 
 9.3 How can I report a bug/request for a feature?
 
    You might first want to get the newest development version to see if
    the bug is fixed or the feature is added already.
 
-   Send your report/request to mc-devel@gnome.org or mc@gnome.org. These
-   mailing lists are the most certain way to contact the
-   developers. Remember to mention if you are not on the mailing list
+   Send your report/request to mc-devel@gnome.org or mc@gnome.org. 
+   These mailing lists are the most certain way to contact the
+   developers.  Remember to mention if you are not on the mailing list
    to make sure that you will receive a copy of replies.
 
-   Give as much details as possible. A too long message is a lot better
+   Give as much details as possible.  A too long message is a lot better
    than a too short message.
 
    For segmentation faults a stack backtrace is appreciated. You can
@@ -828,6 +876,7 @@ into drive D:"?
    rights on the program to the Free Software Foundation. You will have
    to do the same if you contribute non-trivial patches. Otherwise we
    have to reject your patches in order to avoid copyright problems.
+
 
 10 More information
 
@@ -868,11 +917,12 @@ answer?
    The mc and mc-devel lists are archived on the World Wide Web. There are
    links to the archives on the mailing list pages (see 10.2).
 
+
 11 Legal issues
 
 11.1 Authorship
 
-   Questions and Answers was written by Janne Kukonlehto. Parts of it
+   Questions and Answers was written by Janne Kukonlehto.  Parts of it
    originate from Ian Jackson, Miguel de Icaza, Dugan Porter, Norbert
    Warmuth and Paul Sheer.
 
