@@ -469,7 +469,7 @@ loaddir_helper(file_info *finfo, const char *mask)
 		asctime(LocalTime(&t)))); 
 }
 
-/* takes "/foo/bar/file" and gives "\\foo\\bar\\file" */
+/* takes "/foo/bar/file" and gives malloced "\\foo\\bar\\file" */
 static int
 convert_path(char **remote_file, gboolean trailing_asterik)
 {
@@ -523,7 +523,6 @@ reconnect(smbfs_connection *conn, int *retries)
 	cli_shutdown(conn->cli);
 
    	if (!(conn->cli = do_connect(host, conn->service))) {
-		my_errno = cli_error(conn->cli, NULL, &err, NULL);
 		message_2s (1, MSG_ERROR,
 			_(" reconnect to %s failed\n "), conn->host);
 		g_free(host);
@@ -633,8 +632,6 @@ smbfs_loaddir (opendir_info *smbfs_info)
 {
 	uint16 attribute = aDIR | aSYSTEM | aHIDDEN;
 	int servlen = strlen(smbfs_info->conn->service);
-	char *p;
-/*	int retries = 0;	*/
 	char *my_dirname = smbfs_info->dirname;
 
 	DEBUG(3, ("smbfs_loaddir: dirname:%s\n", my_dirname));
@@ -670,14 +667,16 @@ smbfs_loaddir (opendir_info *smbfs_info)
 		}
 		goto done;
 	}
-	p = my_dirname = g_strdup (my_dirname);
+
 	/* do regular directory listing */
 	if(strncmp(smbfs_info->conn->service, my_dirname+1, servlen) == 0) {
 		/* strip share name from dir */
-		my_dirname += servlen;
-		*my_dirname = '/';
-	}
-	convert_path(&my_dirname, TRUE);
+		char *p = my_dirname = g_strdup(my_dirname + servlen);
+		*p = '/';
+		convert_path(&my_dirname, TRUE);
+		g_free (p);
+	} else
+		convert_path(&my_dirname, TRUE);
 
 	DEBUG(6, ("smbfs_loaddir: service: %s\n", smbfs_info->conn->service));
 	DEBUG(6, ("smbfs_loaddir: cli->share: %s\n", smbfs_info->conn->cli->share));
@@ -687,12 +686,12 @@ smbfs_loaddir (opendir_info *smbfs_info)
 		smbfs_info->conn->cli, my_dirname, attribute, loaddir_helper) < 0) {
 		/* cli_list returns -1 if directory empty or cannot read socket */
 		my_errno = cli_error(smbfs_info->conn->cli, NULL, &err, NULL);
-		g_free (p);
+		g_free (my_dirname);
 		return 0;
 	}
 	if (*(my_dirname) == 0)
 		smbfs_info->dirname = smbfs_info->conn->service;
-	g_free (p);
+	g_free (my_dirname);
 /*	do_dskattr();	*/
 
 done:
@@ -966,8 +965,6 @@ get_master_browser(char **host)
 	return 0;
 }
 
-static int smbfs_get_free_bucket_init = 1;
-
 static void 
 free_bucket (smbfs_connection *bucket)
 {
@@ -985,11 +982,6 @@ smbfs_get_free_bucket ()
 {
     int i;
     
-    if (smbfs_get_free_bucket_init) {
-		smbfs_get_free_bucket_init = 0;
-		for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++)
-	    	bzero (&smbfs_connections[i], sizeof (smbfs_connection));
-    }
     for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++)
 		if (!smbfs_connections [i].cli) return &smbfs_connections [i];
 
@@ -1044,11 +1036,7 @@ smbfs_open_link(char *host, char *path, const char *user, int *port, char *this_
 		user = username;	/* global from getenv */
 
     /* Is the link actually open? */
-    if (smbfs_get_free_bucket_init) {
-        smbfs_get_free_bucket_init = 0;
-        for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++)
-	    	bzero (&smbfs_connections[i], sizeof (smbfs_connection));
-    } else for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++) {
+    for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++) {
 		if (!smbfs_connections[i].cli)
 		    continue;
 		if ((strcmp (host, smbfs_connections [i].host) == 0) &&
@@ -1089,6 +1077,7 @@ smbfs_open_link(char *host, char *path, const char *user, int *port, char *this_
 	if (!(*host)) {		/* if blank host name, browse for servers */
 		if (!get_master_browser(&host))	/* set host to ip of master browser */
 			return 0;		/* couldnt find master browser? */
+		g_free (host);
 		bucket->host = g_strdup("");	/* blank host means master browser */
 	} else
 		bucket->host = g_strdup(host);
@@ -1348,12 +1337,11 @@ search_dir_entry (dir_entry *dentry, const char *text, struct stat *buf)
 static int
 get_stat_info (smbfs_connection *sc, char *path, struct stat *buf)
 {
-	char *p, *mpp;
+	char *p;
 #if 0
 	dir_entry *dentry = current_info->entries;
 #endif
-	char *mypath;
-	mpp = mypath = g_strdup(path);
+	const char *mypath = path;
 
 	mypath++;				/* cut off leading '/' */
 	if ((p = strrchr(mypath, '/')))
@@ -1369,7 +1357,6 @@ get_stat_info (smbfs_connection *sc, char *path, struct stat *buf)
 	if (!single_entry)	/* when found, this will be written too */
 		single_entry = g_new (dir_entry, 1);
 	if (search_dir_entry(current_info->entries, mypath, buf) == 0) {
-		g_free (mpp);
 		return 0;
 	}
 		/* now try to identify mypath as PARENT dir */
@@ -1386,7 +1373,6 @@ get_stat_info (smbfs_connection *sc, char *path, struct stat *buf)
 			buf->st_mode = S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH;
 			memcpy(&single_entry->my_stat, buf, sizeof(struct stat));
 			g_free(mdp);
-			g_free(mpp);
 			DEBUG(1, ("	PARENT:found in %s\n", current_info->dirname));
 			return 0;
 		}
@@ -1400,14 +1386,12 @@ get_stat_info (smbfs_connection *sc, char *path, struct stat *buf)
 		if (*dnp == '/')
 			dnp++;
 		else {
-			g_free(mpp);
 			return -1;
 		}
 		if (strcmp(mypath, dnp) == 0) {
 			bzero(buf, sizeof(struct stat));
 			buf->st_mode = S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH;
 			memcpy(&single_entry->my_stat, buf, sizeof(struct stat));
-			g_free(mpp);
 			DEBUG(1, ("	CURRENT:found in %s\n", current_info->dirname));
 			return 0;
 		}
@@ -1428,7 +1412,6 @@ get_stat_info (smbfs_connection *sc, char *path, struct stat *buf)
 		return 0;
 	DEBUG(3, ("'%s' not found in server_info '%s'\n", path, current_server_info->dirname));
 	/* nothing found. get stat file info from server */
-	g_free(mpp);
 	return get_remote_stat(sc, path, buf);
 }
 
@@ -1538,7 +1521,7 @@ smbfs_stat (vfs *me, char *path, struct stat *buf)
 	}
 	/* check if current_info is in share requested */
 	p = path;
-	if (strcmp(p, URL_HEADER))
+	if (strncmp(p, URL_HEADER, HEADER_LEN) == 0)
 		p += HEADER_LEN;
 	if (*p == '/')
 		p++;
@@ -1604,11 +1587,13 @@ smbfs_mkdir (vfs *me, char *path, mode_t mode)
 
 	if (!cli_mkdir(sc->cli, path)) {
 		my_errno = cli_error(sc->cli, NULL, &err, NULL);
-        message_3s (1, MSG_ERROR, _(" %s mkdir'ing %s "), 
+		message_3s (1, MSG_ERROR, _(" %s mkdir'ing %s "), 
 			cli_errstr(sc->cli), CNV_LANG(path));
+		g_free (path);
 		return -1;
 	} 
-    return 0;
+	g_free (path);
+	return 0;
 }
 
 static int
@@ -1625,11 +1610,14 @@ smbfs_rmdir (vfs *me, char *path)
 
 	if (!cli_rmdir(sc->cli, path)) {
 		my_errno = cli_error(sc->cli, NULL, &err, NULL);
-        message_3s (1, MSG_ERROR, _(" %s rmdir'ing %s "), 
+		message_3s (1, MSG_ERROR, _(" %s rmdir'ing %s "), 
 			cli_errstr(sc->cli), CNV_LANG(path));
+		g_free (path);
 		return -1;
 	} 
-    return 0;
+
+	g_free (path);
+	return 0;
 }
 
 static int
@@ -1772,7 +1760,7 @@ open_read (smbfs_handle *remote_handle, char *rname, int flags, int mode)
 static void *
 smbfs_open (vfs *me, char *file, int flags, int mode)
 {
-    char *remote_file;
+    char *remote_file, *p;
     void *ret;
     smbfs_connection	*sc;
     smbfs_handle	*remote_handle;
@@ -1782,7 +1770,9 @@ smbfs_open (vfs *me, char *file, int flags, int mode)
     if (!(remote_file = smbfs_get_path (&sc, file)))
 	return 0;
 
+    p = remote_file;
     convert_path(&remote_file, FALSE);
+    g_free (p);
 
     remote_handle		= g_new (smbfs_handle, 2);
     remote_handle->cli		= sc->cli;
@@ -1802,15 +1792,17 @@ static int
 smbfs_unlink (vfs *me, char *path)
 {
     smbfs_connection *sc;
-    char *remote_file;
+    char *remote_file, *p;
 
     if ((remote_file = smbfs_get_path (&sc, path)) == 0)
 	return -1;
- 
+
+    p = remote_file;
     convert_path(&remote_file, FALSE);
+    g_free (p);
 
     if (!cli_unlink(sc->cli, remote_file)) {
-        message_3s (1, MSG_ERROR, _(" %s opening remote file %s "), 
+	message_3s (1, MSG_ERROR, _(" %s removing remote file %s "), 
 			cli_errstr(sc->cli), CNV_LANG(remote_file));
 	g_free (remote_file);
 	return -1;
@@ -1824,6 +1816,7 @@ smbfs_rename (vfs *me, char *a, char *b)
 {
     smbfs_connection *sc;
     char *ra, *rb;
+    char *p;
     int retval;
 
     if ((ra = smbfs_get_path (&sc, a)) == 0)
@@ -1834,8 +1827,12 @@ smbfs_rename (vfs *me, char *a, char *b)
 	return -1;
     }
 
+    p = ra;
     convert_path(&ra, FALSE);
+    g_free (p);
+    p = rb;
     convert_path(&rb, FALSE);
+    g_free (p);
 
     retval = cli_rename(sc->cli, ra, rb);
 
