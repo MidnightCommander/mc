@@ -54,7 +54,7 @@ struct inode {
     mode_t mode;
     uid_t uid;
     gid_t gid;
-    int size;
+    off_t size;
     time_t mtime;
     char linkflag;
     char *linkname;
