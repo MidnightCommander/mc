@@ -1,3 +1,11 @@
+2001-04-19  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/rpm (mcrpmfs_list): Use cpio for the listing since the
+	rpm output varies between versions.
+	(mcrpmfs_copyout): Fix processing of CONTENTS.cpio. Match
+	filenames beginning with "./" - they are used in the version 4
+	packages.
+
 2001-04-17  Pavel Roskin  <proski@gnu.org>
 
 	* fish.c (open_archive_int): Redirect stderr of start_fish_server
