@@ -1,5 +1,8 @@
 2003-10-23  Pavel Roskin  <proski@gnu.org>
 
+	* view.c: Eliminate struct block_ptr_t and enum ViewSide. 
+	Rename ascii mode to text mode.
+
 	* view.c (WView): Remove unused fields localcopy and file_dirty.
 	Make boolean fields 1 bit wide.
 

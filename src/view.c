@@ -77,21 +77,11 @@
 #define vwidth (view->widget.cols - (view->have_frame ? 2 : 0))
 #define vheight (view->widget.lines - (view->have_frame ? 2 : 0))
 
-/* The growing buffers data types */
-typedef struct block_ptr_t {
-    unsigned char *data;
-} block_ptr_t;
-
 /* A node for building a change list on change_list */
 struct hexedit_change_node {
    struct hexedit_change_node *next;
    long                       offset;
    unsigned char              value;
-};
-
-enum ViewSide {
-    view_side_left,
-    view_side_right
 };
 
 struct WView {
@@ -118,14 +108,14 @@ struct WView {
     long bottom_first;	/* First byte shown when very last page is displayed */
 				/* For the case of WINCH we should reset it to -1 */
     unsigned long start_display;/* First char displayed */
-    int  start_col;		/* First displayed column, negative */
+    int start_col;		/* First displayed column, negative */
     unsigned long edit_cursor;  /* HexEdit cursor position in file */
     int hexedit_mode:1;		/* Hexidecimal editing mode flag */ 
     int nib_shift:1;		/* Set if editing the least significant nibble */
-    enum ViewSide view_side;	/* A flag for the active editing panel */
-    int  start_save;            /* Line start shift between Ascii and Hex */ 
-    int  cursor_col;		/* Cursor column */
-    int  cursor_row;		/* Cursor row */
+    int hexedit_text:1;		/* Set if hexedit is in the text mode */ 
+    int start_save;		/* Line start shift between text and hex */ 
+    int cursor_col;		/* Cursor column */
+    int cursor_row;		/* Cursor row */
     struct hexedit_change_node *change_list;   /* Linked list of changes */
 
     int dirty;			/* Number of skipped updates */
@@ -139,7 +129,7 @@ struct WView {
     
     /* Growing buffers information */
     int growing_buffer;		/* Use the growing buffers? */
-    struct block_ptr_t *block_ptr;	/* Pointer to the block pointers */
+    char **block_ptr;		/* Pointer to the block pointers */
     int          blocks;	/* The number of blocks in *block_ptr */
 
     
@@ -243,7 +233,7 @@ free_file (WView *view)
     /* Block_ptr may be zero if the file was a file with 0 bytes */
     if (view->growing_buffer && view->block_ptr) {
 	for (i = 0; i < view->blocks; i++) {
-	    g_free (view->block_ptr[i].data);
+	    g_free (view->block_ptr[i]);
 	}
 	g_free (view->block_ptr);
     }
@@ -289,10 +279,10 @@ get_byte (WView *view, unsigned int byte_index)
     if (view->growing_buffer) {
 	if (page > view->blocks) {
 	    view->block_ptr = g_realloc (view->block_ptr,
-					 sizeof (block_ptr_t) * page);
+					 page * sizeof (char *));
 	    for (i = view->blocks; i < page; i++) {
 		char *p = g_malloc (VIEW_PAGE_SIZE);
-		view->block_ptr[i].data = p;
+		view->block_ptr[i] = p;
 		if (!p)
 		    return '\n';
 		if (view->stdfile != NULL)
@@ -322,7 +312,7 @@ get_byte (WView *view, unsigned int byte_index)
 	if (byte_index >= view->bytes_read) {
 	    return -1;
 	} else
-	    return view->block_ptr[page - 1].data[offset];
+	    return view->block_ptr[page - 1][offset];
     } else {
 	if (byte_index >= view->last_byte)
 	    return -1;
@@ -367,7 +357,7 @@ put_editkey (WView *view, unsigned char key)
 	node = node->next;
     }
 
-    if (view->view_side == view_side_left) {
+    if (!view->hexedit_text) {
 	/* Hex editing */
 
 	if (key >= '0' && key <= '9')
@@ -402,7 +392,7 @@ put_editkey (WView *view, unsigned char key)
 	    /* alex@bcs.zaporizhzhe.ua: here we are using file copy
 	     * completely loaded into memory, so we can replace bytes in
 	     * view->data array to allow changes to be reflected when
-	     * user switches back to ascii mode */
+	     * user switches back to text mode */
 	    view->data[view->edit_cursor] = byte_val;
 #endif				/* !HAVE_MMAP */
 	    node->offset = view->edit_cursor;
@@ -711,7 +701,7 @@ do_view_init (WView *view, const char *_command, const char *_file,
     }
     view->edit_cursor = view->first;
     view->nib_shift = 0;
-    view->view_side = view_side_left;
+    view->hexedit_text = 0;
     view->change_list = NULL;
 
     return 0;
@@ -966,14 +956,14 @@ display (WView *view)
 		}
 		/* Display the navigation cursor */
 		if (from == view->edit_cursor) {
-		    if (view->view_side == view_side_left) {
+		    if (!view->hexedit_text) {
 			view->cursor_row = row;
 			view->cursor_col = col;
 		    }
 		    boldflag = MARK_CURSOR;
-		    attrset (view->view_side ==
-			     view_side_left ? VIEW_UNDERLINED_COLOR :
-			     MARKED_SELECTED_COLOR);
+		    attrset (view->
+			     hexedit_text ? MARKED_SELECTED_COLOR :
+			     VIEW_UNDERLINED_COLOR);
 		}
 
 		/* Print a hex number (sprintf is too slow) */
@@ -998,8 +988,8 @@ display (WView *view)
 		    view_gotoyx (view, row, col - 1);
 		    view_add_character (view, ' ');
 		    view_gotoyx (view, row, col);
-		    if ((view->have_frame && view->widget.cols < 82) ||
-			view->widget.cols < 80)
+		    if ((view->have_frame && view->widget.cols < 82)
+			|| view->widget.cols < 80)
 			col += 1;
 		    else {
 			view_add_one_vline ();
@@ -1019,7 +1009,7 @@ display (WView *view)
 		    view_add_character (view, ' ');
 		}
 
-		/* Print the corresponding ascii character */
+		/* Print corresponding character on the text side */
 		view_gotoyx (view, row, text_start + bytes);
 
 		c = convert_to_display_c (c);
@@ -1033,7 +1023,7 @@ display (WView *view)
 		    attrset (MARKED_COLOR);
 		    break;
 		case MARK_CURSOR:
-		    if (view->view_side == view_side_right) {
+		    if (view->hexedit_text) {
 			/* Our side is active */
 			view->cursor_col = text_start + bytes;
 			view->cursor_row = row;
@@ -1137,7 +1127,7 @@ view_place_cursor (WView *view)
 {
     int shift;
 
-    if ((view->view_side == view_side_left) && view->nib_shift)
+    if (!view->hexedit_text && view->nib_shift)
 	shift = 1;
     else
 	shift = 0;
@@ -1417,7 +1407,7 @@ move_right (WView *view)
     if (view->hex_mode) {
 	view->last = view->first + ((LINES - 2) * view->bytes_per_line);
 
-	if (view->hex_mode && view->view_side == view_side_left) {
+	if (view->hex_mode && !view->hexedit_text) {
 	    view->nib_shift = !view->nib_shift;
 	    if (view->nib_shift)
 		return;
@@ -1439,7 +1429,7 @@ move_left (WView *view)
     if (view->wrap_mode && !view->hex_mode)
 	return;
     if (view->hex_mode) {
-	if (view->hex_mode && view->view_side == view_side_left) {
+	if (view->hex_mode && !view->hexedit_text) {
 	    view->nib_shift = !view->nib_shift;
 	    if (!view->nib_shift)
 		return;
@@ -1950,9 +1940,9 @@ toggle_hexedit_mode (WView *view)
 {
     get_bottom_first (view, 1, 1);
     if (view->hexedit_mode) {
-	view->view_side = 1 - view->view_side;
+	view->hexedit_text = !view->hexedit_text;
     } else {
-	view->hexedit_mode = 1 - view->hexedit_mode;
+	view->hexedit_mode = !view->hexedit_mode;
     }
     view_labels (view);
     view->dirty++;
@@ -1987,7 +1977,7 @@ toggle_hex_mode (WView *view)
     view->hex_mode = 1 - view->hex_mode;
 
     if (view->hex_mode) {
-	/* Shift the line start to 0x____0 on entry, restore it for Ascii */
+	/* Shift the line start to 0x____0 on entry, restore it for text */
 	view->start_save = view->start_display;
 	view->start_display -= view->start_display % view->bytes_per_line;
 	view->edit_cursor = view->start_display;
@@ -2005,7 +1995,7 @@ toggle_hex_mode (WView *view)
     view_update (view, TRUE);
 }
 
-/* Ascii view */
+/* Text view */
 static void
 goto_line (WView *view)
 {
@@ -2241,9 +2231,7 @@ view_labels (WView *view)
 
     if (view->hex_mode)
 	if (view->hexedit_mode)
-	    my_define (h, 2,
-		       (view->view_side ==
-			view_side_left) ? _("EdText") : _("EdHex"),
+	    my_define (h, 2, view->hexedit_text ? _("EdHex") : _("EdText"),
 		       toggle_hexedit_mode, view);
 	else {
 	    if (view->growing_buffer || view->have_frame)
@@ -2325,7 +2313,7 @@ view_handle_key (WView *view, int c)
     if (view->hex_mode) {
 	switch (c) {
 	case 0x09:		/* Tab key */
-	    view->view_side = 1 - view->view_side;
+	    view->hexedit_text = !view->hexedit_text;
 	    view->dirty++;
 	    return MSG_HANDLED;
 
@@ -2349,19 +2337,17 @@ view_handle_key (WView *view, int c)
 	    return MSG_HANDLED;
 	}
 
-	/* Trap 0-9,A-F,a-f for left side data entry (hex editing) */
-	if (view->view_side == view_side_left) {
-	    if ((c >= '0' && c <= '9') ||
-		(c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f')) {
+	if (!view->hexedit_text) {
+	    /* Trap 0-9,A-F,a-f for left side data entry */
+	    if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'F')
+		|| (c >= 'a' && c <= 'f')) {
 
 		put_editkey (view, c);
 		return MSG_HANDLED;
 	    }
-	}
-
-	/* Trap all printable characters for right side data entry */
-	/* Also enter the value of the Enter key */
-	if (view->view_side == view_side_right) {
+	} else {
+	    /* Trap all printable characters for right side data entry */
+	    /* Also enter the value of the Enter key */
 	    if (c < 256 && (is_printable (c) || (c == '\n'))) {
 		put_editkey (view, c);
 		return MSG_HANDLED;
