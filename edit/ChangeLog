@@ -1,3 +1,7 @@
+2001-09-06  Pavel Roskin  <proski@gnu.org>
+
+	* syntax.c (syntax_text): Add PHP support from Cooledit.
+
 2001-09-04  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.am (AM_CFLAGS): Remove CFLAGS, don't use substituted
