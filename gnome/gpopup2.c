@@ -410,13 +410,13 @@ create_mime_actions (GtkWidget *menu, WPanel *panel, int pos, DesktopIconInfo *d
 
 		gtk_object_set_user_data (GTK_OBJECT (uiinfo[0].widget), key);
 
-		/* Remember to free this memory */
-
-		gtk_signal_connect (GTK_OBJECT (uiinfo[0].widget), "destroy",
-				    (GtkSignalFunc) free_on_destroy,
-				    full_name);
 	}
 
+	/* Remember to free this memory */
+	gtk_signal_connect (GTK_OBJECT (uiinfo[0].widget), "destroy",
+			    (GtkSignalFunc) free_on_destroy,
+			    full_name);
+	
 	if (pos_init != pos) {
 		uiinfo[0].type = GNOME_APP_UI_SEPARATOR;
 		fill_menu (GTK_MENU_SHELL (menu), uiinfo, pos++);
