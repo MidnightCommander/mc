@@ -1,3 +1,25 @@
+1999-08-06  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* screen.c (string_file_[amc]time): These three functions use 
+	file_date which returns a pointer to a static buffer. In the 
+	Gnome edition this buffer has to be coppied to a static buffer
+ 	which isn't used in the other two functions (Fix Bug #1766).
+
+	* util.c, util.h: Moved some constants to util.h
+
+1999-08-04  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* widget.c (push_history): Add SMB Link to the list of input dialogs
+	where urls are input without vfs prefix.
+
+	Translate the titles of these input dialogs only once.
+
+	Removed Gnome specific code because the Gnome edition doesn't use
+	the input history any more.
+
+	* util.c (strip_password): Add /#smb: to the list of urls which might
+	be input with password.
+
 1999-08-03  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* poptalloca.h: New file with definitions for alloca. Note: alloca

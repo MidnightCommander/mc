@@ -1,3 +1,8 @@
+1999-08-06  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* tar.c (read_header): Don't segfault when a symlink points to the
+	root directory.
+
 1999-08-01  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* vfs.c: Don't close a function definition with "};". SunCC from

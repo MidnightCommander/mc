@@ -84,8 +84,13 @@ void init_uid_gid_cache (void);
 char *get_group (int);
 char *get_owner (int);
 
+#define MAX_I18NTIMELENGTH 14
+#define MIN_I18NTIMELENGTH 10
+#define STD_I18NTIMELENGTH 12
+
 size_t i18n_checktimelength (void);
 char *file_date (time_t);
+
 char *file_date_pck (time_t);
 int exist_file (char *name);
 

@@ -267,21 +267,39 @@ string_file_type (file_entry *fe, int len)
 char *
 string_file_mtime (file_entry *fe, int len)
 {
+#ifdef PORT_STATIC_IN_STRING_FILE_XTIME
+    static char timebuf [MAX_I18NTIMELENGTH + 1];
+
+    return strcpy (timebuf, file_date (fe->buf.st_mtime));
+#else
     return file_date (fe->buf.st_mtime);
+#endif
 }
 
 /* atime */
 char *
 string_file_atime (file_entry *fe, int len)
 {
+#ifdef PORT_STATIC_IN_STRING_FILE_XTIME
+    static char timebuf [MAX_I18NTIMELENGTH + 1];
+
+    return strcpy (timebuf, file_date (fe->buf.st_atime));
+#else
     return file_date (fe->buf.st_atime);
+#endif
 }
 
 /* ctime */
 char *
 string_file_ctime (file_entry *fe, int len)
 {
+#ifdef PORT_STATIC_IN_STRING_FILE_XTIME
+    static char timebuf [MAX_I18NTIMELENGTH + 1];
+
+    return strcpy (timebuf, file_date (fe->buf.st_ctime));
+#else
     return file_date (fe->buf.st_ctime);
+#endif
 }
 
 /* perm */

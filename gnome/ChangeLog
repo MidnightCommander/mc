@@ -1,3 +1,11 @@
+1999-08-06  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* gconf.h (PORT_STATIC_IN_STRING_FILE_XTIME): new port specific 
+	feature. The Gnome edition first calls all string_file functions 
+	and then uses the return values of these functions. This needs 
+	some static buffers in string_file_[acm]time. Therefore additional 
+	static buffers in string_file_[acm]time are needed.
+
 1999-08-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-file-property-dialog.c (perm_group_new): Set the correct

@@ -318,7 +318,7 @@ read_header (vfs *me, vfs_s_super *archive, int tard)
 			     ? next_long_link
 			     : g_strdup (header->header.arch_linkname));
 	len = strlen (current_link_name);
-	if (len && current_link_name [len - 1] == '/')
+	if (len > 1 && current_link_name [len - 1] == '/')
 	    current_link_name[len - 1] = 0;
 
 	next_long_link = next_long_name = NULL;

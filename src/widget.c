@@ -1155,11 +1155,28 @@ input_enable_update (WInput *in)
     update_input (in, 0);
 }
 
+#define ELEMENTS(a)    (sizeof(a)/sizeof(a[0]))
+
 int
 push_history (WInput *in, char *text)
 {
+    static int i18n;
+    /* input widget where urls with passwords are entered without any
+       vfs prefix */
+    static const char *password_input_fields[] = {
+	" Link to a remote machine ",
+	" FTP to machine ",
+	" SMB link to machine "
+    };
     Hist *new;
     char *p;
+    int i;
+
+    if (!i18n) {
+	i18n = 1;
+        for (i = 0; i < ELEMENTS(password_input_fields); i++)
+	    password_input_fields[i] = _(password_input_fields[i]);
+    }
     
     for (p = text; *p == ' ' || *p == '\t'; p++);
     if (!*p)
@@ -1177,21 +1194,22 @@ push_history (WInput *in, char *text)
     new->next = 0;
     new->prev = in->history;
     new->text = g_strdup (text);
-    if (in->history_name){
-#ifdef HAVE_GNOME
-	    if (strcmp (in->history_name + 4, _(" Link to a remote machine ")) == 0 ||
-		strcmp (in->history_name + 4, _(" FTP to machine ")) == 0)
-#else
-		    if (strcmp (in->history_name + 3, _(" Link to a remote machine ")) == 0 ||
-			strcmp (in->history_name + 3, _(" FTP to machine ")) == 0)
-#endif
-			    strip_password (new->text, 0);
-		    else
-			    strip_password (new->text, 1);
+    if (in->history_name) {
+        p = in->history_name + 3;
+        for (i = 0; i < ELEMENTS(password_input_fields); i++)
+            if (strcmp (p, password_input_fields[i]) == 0)
+                break;
+        if (i < ELEMENTS(password_input_fields))
+            strip_password (new->text, 0);
+        else
+            strip_password (new->text, 1);
     }
+    
     in->history = new;
     return 2;
 }
+
+#undef ELEMENTS
 
 /* Cleans the input line and adds the current text to the history */
 void

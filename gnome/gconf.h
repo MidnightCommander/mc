@@ -36,6 +36,7 @@
 #define PORT_WINPUT_DELETES_MARKED       1
 #define PORT_LIST_MODE_NAME              "gnome_list_mode"
 #define PORT_LIST_MODE_DEFAULT           "icons"
+#define PORT_STATIC_IN_STRING_FILE_XTIME 1
 
 #define CLIST_FROM_SW(panel_list) GTK_CLIST (GTK_BIN (panel_list)->child)
 #define ILIST_FROM_SW(panel_list) GNOME_ICON_LIST (GTK_BIN (panel_list)->child)

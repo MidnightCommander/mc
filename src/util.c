@@ -350,7 +350,8 @@ strip_password (char *p, int has_prefix)
         size_t len;
     } prefixes[] = { {"/#ftp:", 6},
 		     {"/#mc:", 5},
-		     {"ftp://", 6}
+		     {"ftp://", 6},
+		     {"/#smb:", 6},
     };
     char *at, *inner_colon, *dir;
     int i;
@@ -591,10 +592,6 @@ char *load_file (char *filename)
 short-month-name sizes for different locales */ 
 size_t i18n_checktimelength (void)
 {
-#define MAX_I18NTIMELENGTH 14
-#define MIN_I18NTIMELENGTH 10
-#define STD_I18NTIMELENGTH 12
-
     size_t length, a, b;
     char buf [MAX_I18NTIMELENGTH + 1];
     time_t testtime = time (NULL);
