@@ -19,6 +19,7 @@ src/cmd.c
 src/command.c
 src/dialog.c
 src/dir.c
+src/execute.c
 src/ext.c
 src/file.c
 src/filegui.c

@@ -1,3 +1,7 @@
+2003-06-22  Pavel Roskin  <proski@gnu.org>
+
+	* POTFILES.in: Add src/execute.c.
+
 2003-06-09  Pavel Roskin  <proski@gnu.org>
 
 	* Makevars: Add MSGID_BUGS_ADDRESS from gettext-0.12.1 template.
