@@ -1,11 +1,11 @@
 /* Setup loading/saving.
    Copyright (C) 1994 Miguel de Icaza
-   
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -134,7 +134,7 @@ static struct {
     { "tree",      view_tree },
     { 0, 0 }
 };
-    
+
 static struct {
     char *opt_name;
     int *opt_addr;
@@ -226,7 +226,7 @@ static struct {
        (follow links, stable symlinks) -Norbert */
     { "tree_navigation_flag", &tree_navigation_flag },
 #endif
-#ifdef USE_VFS    
+#ifdef USE_VFS
     { "vfs_timeout", &vfs_timeout },
 #ifdef USE_NETCODE
     { "ftpfs_directory_timeout", &ftpfs_directory_timeout },
@@ -264,6 +264,29 @@ static struct {
     { "desktop_arr_rows", &desktop_arr_rows },
     { "tree_panel_visible", &tree_panel_visible },
     { "we_can_afford_the_speed", &we_can_afford_the_speed },
+
+    /* Keep the following in sync with panel.h */
+    { "column_width_brief_icon", &default_column_width[0] },
+    { "column_width_brief_filename", &default_column_width[1] },
+    { "column_width_detailed_icon", &default_column_width[2] },
+    { "column_width_detailed_filename", &default_column_width[3] },
+    { "column_width_detailed_size", &default_column_width[4] },
+    { "column_width_detailed_mtime", &default_column_width[5] },
+    { "column_width_custom_0", &default_column_width[6] },
+    { "column_width_custom_1", &default_column_width[7] },
+    { "column_width_custom_2", &default_column_width[8] },
+    { "column_width_custom_3", &default_column_width[9] },
+    { "column_width_custom_4", &default_column_width[10] },
+    { "column_width_custom_5", &default_column_width[11] },
+    { "column_width_custom_6", &default_column_width[12] },
+    { "column_width_custom_7", &default_column_width[13] },
+    { "column_width_custom_8", &default_column_width[14] },
+    { "column_width_custom_9", &default_column_width[15] },
+    { "column_width_custom_10", &default_column_width[16] },
+    { "column_width_custom_11", &default_column_width[17] },
+    { "column_width_custom_12", &default_column_width[18] },
+    { "column_width_custom_13", &default_column_width[19] },
+    { "column_width_custom_14", &default_column_width[20] },
 #else
     { "nice_rotating_dash", &nice_rotating_dash },
     { "horizontal_split",   &horizontal_split },
@@ -276,7 +299,7 @@ panel_save_setup (WPanel *panel, char *section)
 {
     char buffer [BUF_TINY];
     int  i;
-    
+
     g_snprintf (buffer, sizeof (buffer), "%d", panel->reverse);
     save_string (section, "reverse", buffer, profile_name);
     g_snprintf (buffer, sizeof (buffer), "%d", panel->case_sensitive);
@@ -293,16 +316,16 @@ panel_save_setup (WPanel *panel, char *section)
 	    save_string (section, PORT_LIST_MODE_NAME, list_types [i].key, profile_name);
 	    break;
 	}
-    
+
     save_string (section, "user_format",
 			       panel->user_format, profile_name);
-			       
+
     for (i = 0; i < LIST_TYPES; i++){
 	g_snprintf (buffer, sizeof (buffer), "user_status%d", i);
-	save_string (section, buffer, 
+	save_string (section, buffer,
 	    panel->user_status_format [i], profile_name);
     }
-			       
+
     g_snprintf (buffer, sizeof (buffer), "%d", panel->user_mini_status);
     save_string (section, "user_mini_status", buffer,
 			       profile_name);
@@ -338,6 +361,10 @@ save_configure (void)
     for (i = 0; options [i].opt_name; i++)
 	set_int (profile, options [i].opt_name, *options [i].opt_addr);
 
+#ifdef HAVE_GNOME
+    save_string (app_text, "default_user_format", default_user_format, profile_name);
+#endif
+
     g_free (profile);
 }
 
@@ -345,7 +372,7 @@ static void
 panel_save_type (char *section, int type)
 {
     int i;
-    
+
     for (i = 0; panel_types [i].opt_name; i++)
 	if (panel_types [i].opt_type == type){
 	    save_string (section, "display", panel_types [i].opt_name,
@@ -396,7 +423,7 @@ save_setup (void)
     save_panelize ();
     save_panel_types ();
 /*     directory_history_save (); */
-    
+
 #ifdef USE_VFS
 #ifdef USE_NETCODE
     WritePrivateProfileString ("Misc", "ftpfs_password",
@@ -415,10 +442,10 @@ panel_load_setup (WPanel *panel, char *section)
 {
     int i;
     char buffer [BUF_TINY];
-    
+
     panel->reverse = load_int (section, "reverse", 0);
     panel->case_sensitive = load_int (section, "case_sensitive", OS_SORT_CASE_SENSITIVE_DEFAULT);
-    
+
     /* Load sort order */
     load_string (section, "sort_order", "name", buffer, sizeof (buffer));
     panel->sort_type = (sortfn *) sort_name;
@@ -456,7 +483,7 @@ panel_load_setup (WPanel *panel, char *section)
 	    g_strdup (get_profile_string (section, buffer,
 			DEFAULT_USER_FORMAT, profile_name));
     }
-    
+
     panel->user_mini_status =
 	load_int (section, "user_mini_status", 0);
 
@@ -466,7 +493,7 @@ static void
 load_layout (char *profile_name)
 {
     int i;
-    
+
     for (i = 0; layout [i].opt_name; i++)
 	*layout [i].opt_addr =
 	    load_int ("Layout", layout [i].opt_name,
@@ -478,9 +505,9 @@ load_mode (char *section)
 {
     char buffer [20];
     int  i;
-    
+
     int mode = view_listing;
-    
+
     /* Load the display mode */
     load_string (section, "display", "listing", buffer, sizeof (buffer));
 
@@ -498,7 +525,7 @@ do_load_string (char *s, char *ss, char *def)
 {
     char *buffer = g_malloc (128);
     char *p;
-    
+
     load_string (s, ss, def, buffer, 128);
 
     p = g_strdup (buffer);
@@ -515,7 +542,7 @@ setup_init (void)
 
     if (profile_name)
 	    return profile_name;
-    
+
     buffer = concat_dir_and_file (home_dir, PROFILE_NAME);
     inifile = concat_dir_and_file (mc_home, "mc.ini");
     if (exist_file (buffer)){
@@ -527,7 +554,7 @@ setup_init (void)
 	profile = buffer;
     }
     g_free (inifile);
-    
+
     profile_name = profile;
 
     return profile;
@@ -537,7 +564,7 @@ void
 load_setup (void)
 {
     char *profile;
-    
+
     int    i;
 #ifdef USE_NETCODE
     extern char *ftpfs_proxy_host;
@@ -549,6 +576,11 @@ load_setup (void)
 	*options [i].opt_addr =
 	    get_int (profile, options [i].opt_name, *options [i].opt_addr);
 
+#ifdef HAVE_GNOME
+    g_free (default_user_format);
+    default_user_format = do_load_string (app_text, "default_user_format", DEFAULT_USER_FORMAT);
+#endif
+
     load_layout (profile);
 
     load_panelize ();
@@ -559,10 +591,10 @@ load_setup (void)
     /* At least one of the panels is a listing panel */
     if (startup_left_mode != view_listing && startup_right_mode!=view_listing)
 	startup_left_mode = view_listing;
-    
+
     if (!other_dir){
 	char *buffer;
-	
+
 	buffer = (char*) g_malloc (MC_MAXPATHLEN);
 	load_string ("Dirs", "other_dir", ".", buffer,
 			     MC_MAXPATHLEN);
@@ -576,12 +608,12 @@ load_setup (void)
 #endif
     boot_current_is_left =
 	GetPrivateProfileInt ("Dirs", "current_is_left", 1, profile);
-    
+
     load_string ("Misc", "find_ignore_dirs", "", setup_color_string,
 		 sizeof (setup_color_string));
     if (setup_color_string [0])
 	find_ignore_dirs = g_strconcat (":", setup_color_string, ":", NULL);
-    
+
     /* The default color and the terminal dependent color */
     load_string ("Colors", "base_color", "", setup_color_string,
 			     sizeof (setup_color_string));
@@ -643,7 +675,7 @@ load_keys_from_section (char *terminal, char *profile_name)
 	g_free (section_name);
 	return;
     }
-    
+
     while (profile_keys){
 	profile_keys = profile_iterator_next (profile_keys, &key, &value);
 	key_code = lookup_key (key);

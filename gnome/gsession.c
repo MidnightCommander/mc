@@ -24,6 +24,8 @@ static GnomeClient *master_client;
 /* Structure to hold information for a panel to be created */
 typedef struct {
 	char *cwd;
+	int column_width[GMC_COLUMNS];
+	char *user_format;
 } PanelInfo;
 
 
@@ -31,16 +33,27 @@ typedef struct {
 static void
 save_panel_info (WPanel *panel)
 {
-	char section[50];
-	char *key;
+ 	char section[50];
+	char key[50];
+	char *path;
+	int i;
 
-	sprintf (section, "panel %d", panel->id);
+	g_snprintf (section, sizeof (section), "panel %d", panel->id);
 
-	key = g_strconcat (section, "/cwd", NULL);
-	gnome_config_set_string (key, panel->cwd);
-	g_free (key);
+	path = g_strconcat (section, "/cwd", NULL);
+	gnome_config_set_string (path, panel->cwd);
+	g_free (path);
 
-	/* FIXME: save information about list column sizes, etc. */
+	path = g_strconcat (section, "/user_format", NULL);
+	gnome_config_set_string (path, panel->user_format);
+	g_free (path);
+
+	for (i = 0; i < GMC_COLUMNS; i++) {
+		g_snprintf (key, sizeof (key), "/column_width_%i", i);
+		path = g_strconcat (section, key, NULL);
+		gnome_config_set_int (path, panel->column_width[i]);
+		g_free (path);
+	}
 }
 
 /* Loads a panel from the information in the specified gnome-config file/section */
@@ -49,7 +62,9 @@ load_panel_info (char *file, char *section)
 {
 	PanelInfo *pi;
 	char *prefix;
-	char *cwd;
+	char *cwd, *user_format;
+	char key[50];
+	int i;
 
 	pi = NULL;
 
@@ -59,10 +74,25 @@ load_panel_info (char *file, char *section)
 
 	cwd = gnome_config_get_string ("cwd");
 	if (cwd) {
-		pi = g_new (PanelInfo, 1);
-		pi->cwd = cwd;
-	} else
 		g_warning ("Could not read panel data for \"%s\"", prefix);
+		gnome_config_pop_prefix ();
+		g_free (prefix);
+		return NULL;
+	}
+
+	pi = g_new (PanelInfo, 1);
+	pi->cwd = cwd;
+
+	user_format = gnome_config_get_string ("user_format");
+	if (!user_format)
+		user_format = g_strdup (DEFAULT_USER_FORMAT);
+
+	pi->user_format = user_format;
+
+	for (i = 0; i < GMC_COLUMNS; i++) {
+		g_snprintf (key, sizeof (key), "column_width_%i=0", i);
+		pi->column_width[i] = gnome_config_get_int_with_default (key, NULL);
+	}
 
 	gnome_config_pop_prefix ();
 	g_free (prefix);
@@ -75,6 +105,7 @@ static void
 free_panel_info (PanelInfo *pi)
 {
 	g_free (pi->cwd);
+	g_free (pi->user_format);
 	g_free (pi);
 }
 
@@ -84,12 +115,18 @@ idle_create_panels (gpointer data)
 {
 	GSList *panels, *p;
 	PanelInfo *pi;
+	WPanel *panel;
 
 	panels = data;
 
 	for (p = panels; p; p = p->next) {
 		pi = p->data;
-		new_panel_at (pi->cwd);
+		panel = new_panel_at (pi->cwd);
+
+		g_free (panel->user_format);
+		panel->user_format = g_strdup (pi->user_format);
+		memcpy (panel->column_width, pi->column_width, sizeof (pi->column_width));
+
 		free_panel_info (pi);
 	}
 
@@ -149,7 +186,7 @@ create_default_panel (const char *startup_dir)
 		mc_get_current_wd (buf, MC_MAXPATHLEN);
 	else
 		dir = startup_dir;
-	
+
 	gtk_idle_add_priority (GTK_PRIORITY_DEFAULT + 1, idle_create_default_panel, g_strdup (dir));
 }
 
@@ -194,7 +231,7 @@ session_die (GnomeClient *client, gpointer data)
 /**
  * session_init:
  * @void:
- * 
+ *
  * Initializes session management.  Contacts the master client and
  * connects the appropriate signals.
  **/
@@ -217,8 +254,8 @@ session_init ()
 
 /**
  * session_load:
- * @void: 
- * 
+ * @void:
+ *
  * Loads the saved session.
  **/
 void
@@ -237,7 +274,7 @@ session_load (void)
  * session_set_restart:
  * @restart: TRUE if it should restart immediately, FALSE if it should restart
  * never.
- * 
+ *
  * Sets the restart style of the session-managed client.
  **/
 void

@@ -1,5 +1,29 @@
 1999-09-20  Federico Mena Quintero  <federico@redhat.com>
 
+	The following is a patch from Volker Braun
+	<volker.braun@physik.hu-berlin.de> to fix column resizing in the
+	file panels.
+
+	* gcustom-layout.c (custom_layout_apply): Set the
+	default_user_format to the new format.
+
+	* gscreen.c (panel_fill_panel_list): Set the column widths
+	according to the previously stored values.
+	Nuked the old and hideous panel_file_list_configure_contents().
+	(panel_file_list_configure): Connect to resize_column in the clist.
+	(panel_create_file_list): Do not connect to size_allocate.
+	(x_create_panel): Set the column width array for this panel.  Set
+	the user format from the default one if it exists.
+
+	* gsession.c (PanelInfo): Added information about column widths
+	and the user format.
+	(save_panel_info): Save the complete information.
+	(load_panel_info): Load the complete information.
+	(free_panel_info): Free the user format.
+	(idle_create_panels): Set the user format and column widths.
+
+1999-09-20  Federico Mena Quintero  <federico@redhat.com>
+
 	* gdesktop.c (desktop_rescan_devices): Call gmount_setup_devices().
 
 	* gdesktop-init.c (gdesktop_links_init): Renamed from
@@ -23,7 +47,7 @@
 1999-09-16  Owen Taylor  <otaylor@redhat.com>
 
         * gmount.c: Remove the HAVE_MAGICDEV conditional.
-	
+
 	* Makefile.in magicdev.idl: Add the magicdev.idl file
 	here to avoid creating dependency loops.
 

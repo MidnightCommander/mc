@@ -9,6 +9,22 @@
 
 #define LIST_TYPES	5
 
+#ifdef HAVE_GNOME
+/* Keep the following in sync with setup.c */
+
+/* Number of columns that each mode requires */
+#define GMC_COLUMNS_BRIEF 2     /* brief view    */
+#define GMC_COLUMNS_DETAILED 4  /* detailed view */
+#define GMC_COLUMNS_CUSTOM 15   /* custom view   */
+#define GMC_COLUMNS (GMC_COLUMNS_BRIEF + GMC_COLUMNS_DETAILED + GMC_COLUMNS_CUSTOM)
+
+/* Default column widths */
+extern int default_column_width[GMC_COLUMNS];
+
+/* custom listing format */
+extern char *default_user_format;
+#endif
+
 enum list_types {
     list_full,			/* Name, size, perm/date */
     list_brief,			/* Name */
@@ -143,6 +159,9 @@ typedef struct {
     void *filter_w;		/* A WInput* */
     void *current_dir;		/* A WInput* */
     int estimated_total;
+
+    /* default column layout */
+    int column_width[GMC_COLUMNS];
 
     /* navigation buttons */
     void *back_b;

@@ -1,3 +1,15 @@
+1999-09-20  Federico Mena Quintero  <federico@redhat.com>
+
+	The following is a patch from Volker Braun
+	<volker.braun@physik.hu-berlin.de> to fix column resizing in the
+	file panels.
+
+	* setup.c (options): Declare the column width option values.
+	(save_configure): Save the default user format.
+	(load_setup): Load the default user format.
+
+	* panel.h (WPanel): Added a field for the column widths.
+
 1999-09-19  Andrew V. Samoilov <sav@bcs.zp.ua>
 
 	* user.c (check_patterns): char* is used instead of char [] in sizeof
@@ -10,7 +22,7 @@
 	to mad.[ch]
 
 	* option.c: Include files reordered in order to make it compile with
-	--with-debug 
+	--with-debug
 
 	* mad.c (mad_init): New function. Initialize debug FILE pointer to
 	stderr (moved to a function because not on every system stderr is

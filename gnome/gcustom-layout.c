@@ -63,7 +63,7 @@ custom_layout_add_clicked (GtkWidget *widget, GCustomLayout *layout)
 
 		tmp_name = gettext (info->name);
 		new_row = gtk_clist_append (GTK_CLIST (layout->destList), &tmp_name);
-		gtk_clist_set_row_data (GTK_CLIST (layout->destList), 
+		gtk_clist_set_row_data (GTK_CLIST (layout->destList),
 					new_row,
 					info);
 		gtk_clist_select_row (GTK_CLIST (layout->destList), new_row, 0);
@@ -105,7 +105,7 @@ custom_layout_select_row (GtkWidget *widget, gint row, gint col, GdkEvent *event
 			return;
 		}
 	}
-	
+
 	gtk_widget_set_sensitive (layout->addButton, TRUE);
 }
 
@@ -154,7 +154,7 @@ custom_layout_create(GCustomLayout *layout, ColumnInfo *columns, gint ncolumns)
 				     GTK_SELECTION_BROWSE);
 	gtk_clist_set_column_auto_resize(GTK_CLIST(layout->srcList), 0, 1);
 	gtk_table_attach(GTK_TABLE(layout->table), vbox2, 0, 1, 0, 1,
-			 GTK_FILL | GTK_EXPAND | GTK_SHRINK, 
+			 GTK_FILL | GTK_EXPAND | GTK_SHRINK,
 			 GTK_FILL | GTK_EXPAND | GTK_SHRINK, 0, 0);
 
 	/* make list of currently displayed column types */
@@ -176,9 +176,9 @@ custom_layout_create(GCustomLayout *layout, ColumnInfo *columns, gint ncolumns)
 	gtk_clist_set_reorderable (GTK_CLIST (layout->destList), TRUE);
 
 	gtk_table_attach(GTK_TABLE(layout->table), vbox2, 2, 3, 0, 1,
-			 GTK_FILL | GTK_EXPAND | GTK_SHRINK, 
+			 GTK_FILL | GTK_EXPAND | GTK_SHRINK,
 			 GTK_FILL | GTK_EXPAND | GTK_SHRINK, 0, 0);
-	
+
 	/* add add/remove buttons in center */
 	layout->addButton = gtk_button_new_with_label(_("Add"));
 	layout->delButton = gtk_button_new_with_label(_("Remove"));
@@ -195,23 +195,23 @@ custom_layout_create(GCustomLayout *layout, ColumnInfo *columns, gint ncolumns)
 	for (i = 0; i < ncolumns; i++) {
 	        tmp_name = gettext(columns[i].name);
 		gtk_clist_append (GTK_CLIST (layout->srcList), &tmp_name);
-		gtk_clist_set_row_data (GTK_CLIST (layout->srcList), 
+		gtk_clist_set_row_data (GTK_CLIST (layout->srcList),
 					i,
 					&columns[i]);
-		
+
 		g_hash_table_insert (layout->hash,
 				     columns[i].value,
 				     &columns[i]);
 	}
 
 	gtk_signal_connect(GTK_OBJECT(layout->addButton), "clicked",
-			   GTK_SIGNAL_FUNC(custom_layout_add_clicked), 
+			   GTK_SIGNAL_FUNC(custom_layout_add_clicked),
 			   layout);
 	gtk_signal_connect(GTK_OBJECT(layout->delButton), "clicked",
-			   GTK_SIGNAL_FUNC(custom_layout_del_clicked), 
+			   GTK_SIGNAL_FUNC(custom_layout_del_clicked),
 			   layout);
 	gtk_signal_connect(GTK_OBJECT(layout->srcList), "select_row",
-			   GTK_SIGNAL_FUNC(custom_layout_select_row), 
+			   GTK_SIGNAL_FUNC(custom_layout_select_row),
 			   layout);
 	gtk_signal_connect(GTK_OBJECT(layout->destList), "row_move",
 			   GTK_SIGNAL_FUNC(custom_layout_row_move),
@@ -231,7 +231,7 @@ custom_layout_set (GCustomLayout *layout, gchar *string)
 	gchar **strings;
 	ColumnInfo *info;
 	gchar *tmp_name;
-	
+
 	gtk_clist_clear (GTK_CLIST (layout->destList));
 
 	/* skip over initial half or full */
@@ -239,15 +239,15 @@ custom_layout_set (GCustomLayout *layout, gchar *string)
 		string++;
 	while (*string && isspace(*string))
 		string++;
-		
+
 	strings = g_strsplit (string, ",", -1);
-	
+
 	for (i=0; strings[i]; i++) {
 		info = g_hash_table_lookup (layout->hash, strings[i]);
 		if (info) {
 		        tmp_name = gettext (info->name);
 			new_row = gtk_clist_append (GTK_CLIST (layout->destList), &tmp_name);
-			gtk_clist_set_row_data (GTK_CLIST (layout->destList), 
+			gtk_clist_set_row_data (GTK_CLIST (layout->destList),
 						new_row, info);
 		}
 	}
@@ -273,9 +273,9 @@ custom_layout_get (GCustomLayout *layout)
 	GString *result;
 	gchar *string;
 	ColumnInfo *info;
-	
+
 	result = g_string_new ("full ");
-	
+
 	for (i=0; i<GTK_CLIST (layout->destList)->rows; i++) {
 		if (i != 0)
 			g_string_append_c (result, ',');
@@ -298,7 +298,7 @@ custom_layout_create_page (GnomePropertyBox *prop_box, WPanel *panel)
 	custom_layout_create (layout, possible_columns, n_possible_columns);
 	layout->prop_box = prop_box;
 	layout->panel = panel;
-	
+
 	gnome_property_box_append_page (GNOME_PROPERTY_BOX (prop_box),
                                         layout->table,
                                         gtk_label_new (_("Custom View")));
@@ -308,7 +308,7 @@ custom_layout_create_page (GnomePropertyBox *prop_box, WPanel *panel)
 	return layout;
 }
 
-void           
+void
 custom_layout_apply (GCustomLayout    *layout)
 {
 	gchar *format;
@@ -324,8 +324,11 @@ custom_layout_apply (GCustomLayout    *layout)
 		g_free (container->panel->user_format);
 		container->panel->user_format = g_strdup (format);
 
+		g_free (default_user_format);
+		default_user_format = g_strdup (format);
+
 		set_panel_formats (container->panel);
-		
+
 		tmp_list = tmp_list->next;
 	}
 

@@ -45,6 +45,21 @@
 #   define MAX(a,b) ((a) > (b) ? a : b)
 #endif
 
+/* Offsets within the default_column_width array for the different listing types */
+static const int column_width_pos[LIST_TYPES] = {
+	GMC_COLUMNS_BRIEF,
+	0,
+	-1,
+	GMC_COLUMNS_BRIEF + GMC_COLUMNS_DETAILED,
+	-1
+};
+
+/* Default column widths for file listings */
+int default_column_width[GMC_COLUMNS];
+
+/* default format for custom view */
+char* default_user_format = NULL;
+
 /* Whether to display the tree view on the left */
 int tree_panel_visible = -1;
 
@@ -184,9 +199,10 @@ panel_fill_panel_list (WPanel *panel)
 	const int selected  = panel->selected;
 	GtkCList *cl        = CLIST_FROM_SW (panel->list);
 	int i, col, type_col, color;
+	int width, p;
 	char  **texts;
 
-	texts = g_new (char *, items+1);
+	texts = g_new (char *, items + 1);
 
 	gtk_clist_freeze (GTK_CLIST (cl));
 	gtk_clist_clear (GTK_CLIST (cl));
@@ -240,6 +256,16 @@ panel_fill_panel_list (WPanel *panel)
 
 	/* This is needed as the gtk_clist_append changes selected under us :-( */
 	panel->selected = selected;
+
+	p = column_width_pos[panel->list_type]; /* offset in column_width */
+	g_assert (p >= 0);
+	for (i = 0; i < items; i++) {
+		width = panel->column_width[p + i];
+		if (width == 0)
+			width = gtk_clist_optimal_column_width (cl, i);
+
+		gtk_clist_set_column_width (cl, i, width);
+	}
 
 	gtk_clist_thaw (GTK_CLIST (cl));
 }
@@ -391,104 +417,6 @@ x_adjust_top_file (WPanel *panel)
 /*	gtk_clist_moveto (GTK_CLIST (panel->list), panel->top_file, 0, 0.0, 0.0); */
 }
 
-/*
- * These two constants taken from Gtk sources, hack to figure out how much
- * of the clist is visible
- */
-#define COLUMN_INSET 3
-#define CELL_SPACING 1
-
-/*
- * Configures the columns title sizes for the panel->list CList widget
- */
-static void
-panel_file_list_configure_contents (GtkWidget *sw, WPanel *panel, int main_width, int height)
-{
-	GtkCList *clist;
-	format_e *format = panel->format;
-	int i, used_columns, expandables, items;
-	int char_width, usable_pixels, extra_pixels, width;
-	int total_columns, extra_columns;
-	int expand_space, extra_space, shrink_space;
-	int lost_pixels, display_the_mini_info;
-
-	/* Pass 1: Count minimum columns,
-	 * set field_len to default to the requested_field_len
-	 * and compute how much space we lost to the column decorations
-	 */
-	lost_pixels = used_columns = expandables = items = 0;
-	char_width = gdk_string_width (sw->style->font, "xW") / 2;
-	for (format = panel->format; format; format = format->next) {
-		format->field_len = format->requested_field_len;
-		if (!format->use_in_gui)
-			continue;
-
-		if (format->use_in_gui == 2)
-			used_columns += 2;
-		else
-			used_columns += format->field_len;
-
-		items++;
-		if (format->expand)
-			expandables++;
-		lost_pixels += CELL_SPACING + (2 * COLUMN_INSET);
-	}
-
-	/* The left scrollbar might take some space from us, use this information */
-	if (GTK_WIDGET_VISIBLE (GTK_SCROLLED_WINDOW (sw)->vscrollbar)) {
-		int scrollbar_width = GTK_WIDGET (GTK_SCROLLED_WINDOW (sw)->vscrollbar)->requisition.width;
-		int scrollbar_space = GTK_SCROLLED_WINDOW_CLASS (GTK_OBJECT (sw)->klass)->scrollbar_spacing;
-
-		lost_pixels += scrollbar_space + scrollbar_width;
-	}
-
-	width = main_width - lost_pixels;
-
-	extra_pixels  = width % char_width;
-	usable_pixels = width - extra_pixels;
-	total_columns = usable_pixels / char_width;
-	extra_columns = total_columns - used_columns;
-	if (extra_columns > 0 && expandables > 0) {
-		expand_space  = extra_columns / expandables;
-		extra_space   = extra_columns % expandables;
-	} else
-		extra_space = expand_space = 0;
-
-	/*
-	 * Hack: the default mini-info display only gets displayed
-	 * if panel->estimated_total is not zero, ie, if this has been
-	 * initialized for the first time.
-	 */
-
-	display_the_mini_info = (panel->estimated_total == 0);
-	panel->estimated_total = total_columns;
-
-	if (display_the_mini_info)
-		display_mini_info (panel);
-
-	/* If we dont have enough space, shorten the fields */
-	if (used_columns > total_columns) {
-		expand_space = 0;
-		shrink_space = (used_columns - total_columns) / items;
-	} else
-		shrink_space = 0;
-
-	clist = CLIST_FROM_SW (sw);
-
-	gtk_clist_freeze (clist);
-
-	for (i = 0, format = panel->format; format; format = format->next) {
-		if (!format->use_in_gui)
-			continue;
-
-		format->field_len += (format->expand ? expand_space : 0) - shrink_space;
-		gtk_clist_set_column_width (clist, i, format->field_len * char_width);
-		i++;
-	}
-
-	gtk_clist_thaw (clist);
-}
-
 static void
 panel_file_list_select_row (GtkWidget *file_list, gint row, gint column,
 			    GdkEvent *event, gpointer data)
@@ -516,28 +444,19 @@ panel_file_list_unselect_row (GtkWidget *widget, int row, int columns, GdkEvent 
 		panel->selected = 0;
 }
 
-/* Figure out the number of visible lines in the panel */
 static void
-panel_file_list_compute_lines (GtkScrolledWindow *sw, WPanel *panel, int height)
+panel_file_list_resize_callback (GtkCList *clist, gint column, gint width, WPanel *panel)
 {
-	int lost_pixels = 0;
-	if (GTK_WIDGET_VISIBLE (sw->hscrollbar)) {
-		int scrollbar_width = GTK_WIDGET (sw->hscrollbar)->requisition.width;
-		int scrollbar_space = GTK_SCROLLED_WINDOW_CLASS (GTK_OBJECT (sw)->klass)->scrollbar_spacing;
+	format_e *format = panel->format;
+	int i, p;
 
-		lost_pixels = scrollbar_space + scrollbar_width;
-	}
-	panel->widget.lines = (height-lost_pixels) / (CLIST_FROM_SW (sw)->row_height + CELL_SPACING);
-}
+	p = column_width_pos[panel->list_type]; /* offset in column_width */
+	g_assert (p >= 0);
 
-static void
-panel_file_list_size_allocate_hook (GtkWidget *sw, GtkAllocation *allocation, WPanel *panel)
-{
-	gtk_signal_handler_block_by_data (GTK_OBJECT (sw), panel);
-	panel_file_list_configure_contents (sw, panel, allocation->width, allocation->height);
-	gtk_signal_handler_unblock_by_data (GTK_OBJECT (sw), panel);
+	panel->column_width[p + column] = width;
 
-	panel_file_list_compute_lines (GTK_SCROLLED_WINDOW (sw), panel, allocation->height);
+	/* make this default */
+	memcpy (default_column_width, panel->column_width, sizeof (default_column_width));
 }
 
 static void
@@ -619,6 +538,10 @@ panel_file_list_configure (WPanel *panel, GtkWidget *sw, GtkWidget *file_list)
 	/* Set sorting callback */
 	gtk_signal_connect (GTK_OBJECT (file_list), "click_column",
 			    GTK_SIGNAL_FUNC (panel_file_list_column_callback), panel);
+
+	/* Set column resize callback */
+	gtk_signal_connect (GTK_OBJECT (file_list), "resize_column",
+			    GTK_SIGNAL_FUNC (panel_file_list_resize_callback), panel);
 
 	/* Avoid clist's broken focusing behavior */
 	GTK_WIDGET_UNSET_FLAGS (file_list, GTK_CAN_FOCUS);
@@ -1308,10 +1231,6 @@ panel_create_file_list (WPanel *panel)
 
 	panel_file_list_configure (panel, sw, file_list);
 	g_free (titles);
-
-	gtk_signal_connect_after (GTK_OBJECT (sw), "size_allocate",
-				  GTK_SIGNAL_FUNC (panel_file_list_size_allocate_hook),
-				  panel);
 
 	gtk_signal_connect (GTK_OBJECT (file_list), "select_row",
 			    GTK_SIGNAL_FUNC (panel_file_list_select_row),
@@ -2384,6 +2303,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	panel->icons = panel_create_icon_display (panel);
 	gtk_widget_show (panel->icons);
 
+	memcpy (panel->column_width, default_column_width, sizeof (default_column_width));
 	panel->list  = panel_create_file_list (panel);
 	gtk_widget_ref (panel->icons);
 	gtk_widget_ref (panel->list);
@@ -2471,8 +2391,8 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	dock =  gnome_dock_item_new ("gmc-toolbar1",
                                      (GNOME_DOCK_ITEM_BEH_EXCLUSIVE
                                       | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL));
-	gtk_container_add (GTK_CONTAINER(dock), status_line);
-	gnome_dock_add_item (GNOME_DOCK(GNOME_APP (panel->xwindow)->dock),
+	gtk_container_add (GTK_CONTAINER (dock), status_line);
+	gnome_dock_add_item (GNOME_DOCK (GNOME_APP (panel->xwindow)->dock),
 			     GNOME_DOCK_ITEM (dock), GNOME_DOCK_TOP, 1, 0, 0, FALSE);
 
 	gtk_widget_show_all (dock);
@@ -2484,14 +2404,14 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	 * The status bar.
 	 */
 	ministatus_box = gtk_frame_new (NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME(ministatus_box), GTK_SHADOW_IN);
+	gtk_frame_set_shadow_type (GTK_FRAME (ministatus_box), GTK_SHADOW_IN);
 
 	panel->status = gtk_label_new (_("Show all files"));
 	gtk_misc_set_alignment (GTK_MISC (panel->status), 0.0, 0.0);
 	gtk_misc_set_padding (GTK_MISC (panel->status), 2, 0);
 
 	gtk_box_pack_start (GTK_BOX (panel->ministatus), ministatus_box, FALSE, FALSE, 0);
-	gtk_container_add (GTK_CONTAINER(ministatus_box), panel->status);
+	gtk_container_add (GTK_CONTAINER (ministatus_box), panel->status);
 
 	gtk_widget_show (ministatus_box);
 	gtk_widget_show (panel->status);
@@ -2562,6 +2482,12 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	panel->estimated_total = 0;
 
 	panel->timer_id = -1;
+
+	/* re-set the user_format explicitly */
+	if (default_user_format != NULL) {
+		g_free (panel->user_format);
+		panel->user_format = g_strdup (default_user_format);
+	}
 }
 
 void
