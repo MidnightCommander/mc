@@ -15,6 +15,7 @@ syntax_DATA =			\
 	makefile.syntax		\
 	ml.syntax		\
 	nroff.syntax		\
+	octave.syntax		\
 	pascal.syntax		\
 	perl.syntax		\
 	python.syntax		\

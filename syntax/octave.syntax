@@ -1,0 +1,369 @@
+
+context default
+    keyword whole function white/24
+    keyword whole endfunction white/24
+    keyword whole global white/24
+    keyword whole for white/24
+    keyword whole end white/24
+    keyword whole while white/24
+    keyword whole if white/24
+    keyword whole else white/24
+    keyword whole elseif white/24
+    keyword whole endif white/24
+    keyword whole break white/24
+    keyword whole switch white/24
+    keyword whole case white/24
+    keyword whole and white/24
+    keyword whole or white/24
+    keyword whole and white/24
+
+    keyword ) brightcyan/17
+    keyword ( brightcyan/17
+    keyword [ brightcyan/17
+    keyword ] brightcyan/17
+    keyword , brightcyan/17
+    keyword ; brightcyan/17
+    keyword = brightcyan/17
+    keyword \+ brightcyan/17
+    keyword - brightcyan/17
+    keyword \* brightcyan/17
+    keyword / brightcyan/17
+    keyword \^ brightcyan/17
+    keyword ! brightcyan/17
+    keyword & brightcyan/17
+    keyword | brightcyan/17
+    keyword > brightcyan/17
+    keyword < brightcyan/17
+
+# STD functions
+
+    keyword whole info yellow/24
+    keyword whole whatsnew yellow/24
+    keyword whole hostid yellow/24
+    keyword whole help yellow/24
+    keyword whole lookfor yellow/24
+    keyword whole what yellow/24
+    keyword whole which yellow/24
+    keyword whole type yellow/24
+    keyword whole edit yellow/24
+    keyword whole pcode yellow/24
+    keyword whole quit yellow/24
+    keyword whole exit yellow/24
+    keyword whole who yellow/24
+    keyword whole whos yellow/24
+    keyword whole save yellow/24
+    keyword whole load yellow/24
+    keyword whole memory yellow/24
+    keyword whole clear yellow/24
+    keyword whole pack yellow/24
+    keyword whole workspace yellow/24
+    keyword whole pathdef yellow/24
+    keyword whole path yellow/24
+    keyword whole addpath yellow/24
+    keyword whole echo yellow/24
+    keyword whole format yellow/24
+    keyword whole diary yellow/24
+    keyword whole pwd yellow/24
+    keyword whole cd yellow/24
+    keyword whole dir yellow/24
+
+# Data/Type functions
+
+    keyword whole logical yellow/24
+    keyword whole isnumeric yellow/24
+    keyword whole islogical yellow/24
+    keyword whole isempty yellow/24
+    keyword whole isequal yellow/24
+    keyword whole reshape yellow/24
+    keyword whole repmat yellow/24
+    keyword whole find yellow/24
+    keyword whole length yellow/24
+    keyword whole size yellow/24
+    keyword whole cross yellow/24
+    keyword whole kron yellow/24
+    keyword whole linspace yellow/24
+    keyword whole logspace yellow/24
+    keyword whole meshgrid yellow/24
+    keyword whole zeros yellow/24
+    keyword whole ones yellow/24
+    keyword whole rand yellow/24
+    keyword whole randn yellow/24
+    keyword whole end yellow/24
+    keyword whole ind2sub yellow/24
+    keyword whole sub2ind yellow/24
+    keyword whole repmat yellow/24
+    keyword whole cat yellow/24
+    keyword whole ndims yellow/24
+    keyword whole ndgrid yellow/24
+    keyword whole permute yellow/24
+    keyword whole ipermute yellow/24
+    keyword whole shiftdim yellow/24
+    keyword whole flipdim yellow/24
+    keyword whole squeeze yellow/24
+    keyword whole struct yellow/24
+    keyword whole fieldnames yellow/24
+    keyword whole getfield yellow/24
+    keyword whole setfield yellow/24
+    keyword whole rmfield yellow/24
+    keyword whole isfield yellow/24
+    keyword whole isstruct yellow/24
+    keyword whole cell yellow/24
+    keyword whole celldisp yellow/24
+    keyword whole cellplot yellow/24
+    keyword whole cellstr yellow/24
+    keyword whole deal yellow/24
+    keyword whole iscell yellow/24
+    keyword whole num2cell yellow/24
+    keyword whole cell2struct yellow/24
+    keyword whole struct2cell yellow/24
+    keyword whole lists yellow/24
+    keyword whole varargin yellow/24
+    keyword whole varargout yellow/24
+    keyword whole inline yellow/24
+    keyword whole argnames yellow/24
+    keyword whole formula yellow/24
+    keyword whole char yellow/24
+    keyword whole vectorsize yellow/24
+    keyword whole class yellow/24
+    keyword whole isa yellow/24
+    keyword whole isobject yellow/24
+    keyword whole methods yellow/24
+    keyword whole inferioto yellow/24
+    keyword whole superioto yellow/24
+    keyword whole horzcat yellow/24
+    keyword whole vertcat yellow/24
+    keyword whole subsref yellow/24
+    keyword whole subsasgn yellow/24
+    keyword whole subsindex yellow/24
+
+#   <!-- Misc functions -->
+
+    keyword whole ans yellow/24
+    keyword whole inf yellow/24
+    keyword whole NaN yellow/24
+    keyword whole Pi yellow/24
+    keyword whole eps yellow/24
+    keyword whole log2 yellow/24
+    keyword whole pow2 yellow/24
+    keyword whole realmin yellow/24
+    keyword whole realmax yellow/24
+    keyword whole all yellow/24
+    keyword whole any yellow/24
+    keyword whole exist yellow/24
+    keyword whole bitset yellow/24
+    keyword whole bitget yellow/24
+    keyword whole bitmax yellow/24
+    keyword whole bitcmp yellow/24
+    keyword whole bitand yellow/24
+    keyword whole bitor yellow/24
+    keyword whole bitxor yellow/24
+    keyword whole bitshift yellow/24
+    keyword whole ismember yellow/24
+    keyword whole unique yellow/24
+    keyword whole union yellow/24
+    keyword whole intersect yellow/24
+    keyword whole setdiff yellow/24
+    keyword whole setxor yellow/24
+    keyword whole eval yellow/24
+    keyword whole feval yellow/24
+    keyword whole builtin yellow/24
+    keyword whole assignin yellow/24
+    keyword whole evalin yellow/24
+    keyword whole run yellow/24
+    keyword whole nargchk yellow/24
+    keyword whole nargin yellow/24
+    keyword whole nargout yellow/24
+    keyword whole inputname yellow/24
+    keyword whole input yellow/24
+    keyword whole pause yellow/24
+    keyword whole error yellow/24
+    keyword whole warning yellow/24
+    keyword whole lasterr yellow/24
+    keyword whole lastwarn yellow/24
+    keyword whole disp yellow/24
+    keyword whole fprintf yellow/24
+    keyword whole sprintf yellow/24
+
+#   <!-- Math functions -->
+
+    keyword whole abs yellow/24
+    keyword whole angle yellow/24
+    keyword whole real yellow/24
+    keyword whole imag yellow/24
+    keyword whole conj yellow/24
+    keyword whole cplxpair yellow/24
+    keyword whole ceil yellow/24
+    keyword whole fix yellow/24
+    keyword whole floor yellow/24
+    keyword whole round yellow/24
+    keyword whole mod yellow/24
+    keyword whole rem yellow/24
+    keyword whole sign yellow/24
+    keyword whole factor yellow/24
+    keyword whole primes yellow/24
+    keyword whole gcd yellow/24
+    keyword whole lcm yellow/24
+    keyword whole rat yellow/24
+    keyword whole rats yellow/24
+    keyword whole perms yellow/24
+    keyword whole nchoosek yellow/24
+    keyword whole sqrt yellow/24
+    keyword whole exp yellow/24
+    keyword whole log yellow/24
+    keyword whole pow2 yellow/24
+    keyword whole nextpow yellow/24
+    keyword whole log2 yellow/24
+    keyword whole log10 yellow/24
+    keyword whole sin yellow/24
+    keyword whole sinh yellow/24
+    keyword whole asin yellow/24
+    keyword whole asinh yellow/24
+    keyword whole csc yellow/24
+    keyword whole csch yellow/24
+    keyword whole ascc yellow/24
+    keyword whole ascch yellow/24
+    keyword whole cos yellow/24
+    keyword whole cosh yellow/24
+    keyword whole acos yellow/24
+    keyword whole acosh yellow/24
+    keyword whole sec yellow/24
+    keyword whole sech yellow/24
+    keyword whole asec yellow/24
+    keyword whole asech yellow/24
+    keyword whole tan yellow/24
+    keyword whole tanh yellow/24
+    keyword whole atan yellow/24
+    keyword whole atan2 yellow/24
+    keyword whole atanh yellow/24
+    keyword whole cot yellow/24
+    keyword whole coth yellow/24
+    keyword whole acot yellow/24
+    keyword whole acoth yellow/24
+    keyword whole cart2pol yellow/24
+    keyword whole cart2sph yellow/24
+    keyword whole pol2cartsph2cart yellow/24
+    keyword whole besselj yellow/24
+    keyword whole bessely yellow/24
+    keyword whole besseli yellow/24
+    keyword whole besselk yellow/24
+    keyword whole besselh yellow/24
+    keyword whole airy yellow/24
+    keyword whole beta yellow/24
+    keyword whole betainc yellow/24
+    keyword whole betaln yellow/24
+    keyword whole ellipj yellow/24
+    keyword whole ellipke yellow/24
+    keyword whole erf yellow/24
+    keyword whole erfc yellow/24
+    keyword whole erfcx yellow/24
+    keyword whole erfinv yellow/24
+    keyword whole gamma yellow/24
+    keyword whole gammainc yellow/24
+    keyword whole gammaln yellow/24
+    keyword whole expint yellow/24
+    keyword whole legendre yellow/24
+
+#   <!-- Matrix functions -->
+
+    keyword whole eye yellow/24
+    keyword whole diag yellow/24
+    keyword whole tril yellow/24
+    keyword whole triu yellow/24
+    keyword whole fliplr yellow/24
+    keyword whole flipud yellow/24
+    keyword whole rot90 yellow/24
+    keyword whole compan yellow/24
+    keyword whole cond yellow/24
+    keyword whole normest yellow/24
+    keyword whole norm yellow/24
+    keyword whole det yellow/24
+    keyword whole see yellow/24
+    keyword whole rank yellow/24
+    keyword whole trace yellow/24
+    keyword whole null yellow/24
+    keyword whole orth yellow/24
+    keyword whole inv yellow/24
+    keyword whole lu yellow/24
+    keyword whole qr yellow/24
+    keyword whole svd yellow/24
+    keyword whole gsvd yellow/24
+    keyword whole roots yellow/24
+    keyword whole poly yellow/24
+
+#   <!-- Data analize functions -->
+
+    keyword whole sum yellow/24
+    keyword whole cumsum yellow/24
+    keyword whole prod yellow/24
+    keyword whole cumprod yellow/24
+    keyword whole sort yellow/24
+    keyword whole sortrows yellow/24
+    keyword whole max yellow/24
+    keyword whole min yellow/24
+    keyword whole median yellow/24
+    keyword whole mean yellow/24
+    keyword whole std yellow/24
+    keyword whole cov yellow/24
+    keyword whole corrcoef yellow/24
+    keyword whole diff yellow/24
+    keyword whole gradient yellow/24
+    keyword whole polyfit yellow/24
+    keyword whole interpft yellow/24
+    keyword whole spline yellow/24
+    keyword whole ppval yellow/24
+    keyword whole fft yellow/24
+    keyword whole ifft yellow/24
+    keyword whole fft2 yellow/24
+    keyword whole ifft2 yellow/24
+    keyword whole fftn yellow/24
+    keyword whole ifftn yellow/24
+    keyword whole filter yellow/24
+    keyword whole filter2 yellow/24
+
+#   <!-- Plotting functions -->
+
+    keyword whole root yellow/24
+    keyword whole figure yellow/24
+    keyword whole axes yellow/24
+    keyword whole line yellow/24
+    keyword whole patch yellow/24
+    keyword whole surface yellow/24
+    keyword whole text yellow/24
+    keyword whole plot yellow/24
+    keyword whole fplot yellow/24
+    keyword whole ezplot yellow/24
+    keyword whole loglog yellow/24
+    keyword whole semilogx yellow/24
+    keyword whole semilogy yellow/24
+    keyword whole polar yellow/24
+    keyword whole piotyy yellow/24
+    keyword whole plot3 yellow/24
+    keyword whole meshgrid yellow/24
+    keyword whole mesh yellow/24
+    keyword whole meshc yellow/24
+    keyword whole meshz yellow/24
+    keyword whole axis yellow/24
+    keyword whole hold yellow/24
+    keyword whole grid yellow/24
+    keyword whole bar yellow/24
+    keyword whole barh yellow/24
+    keyword whole pie yellow/24
+    keyword whole subplot yellow/24
+    keyword whole zoom yellow/24
+    keyword whole colormap yellow/24
+    keyword whole label yellow/24
+    keyword whole legend yellow/24
+    keyword whole errorbar yellow/24
+    keyword whole hist yellow/24
+    keyword whole stem yellow/24
+    keyword whole stairs yellow/24
+    keyword whole scatter yellow/24
+    keyword whole roze yellow/24
+
+context # \n brown/22
+    spellcheck
+
+context % \n brown/22
+    spellcheck
+
+context " " green/6

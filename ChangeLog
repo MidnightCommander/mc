@@ -1,5 +1,9 @@
 2001-05-26  Pavel Roskin  <proski@gnu.org>
 
+	* gtkedit/syntax.c (syntax_text): Add support for Octave files.
+	* syntax/octave.syntax: New file. From Walery Studennikov.
+	* syntax/Makefile.am: Add octave.syntax.
+
 	* configure.in: Fix incorrect test for stdin support in grep -
 	it would always fail when configuring in an empty directory.
 	Portability fixes - unset, backslashed space in here-documents.
