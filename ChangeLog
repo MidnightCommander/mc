@@ -1,5 +1,9 @@
 2001-07-31  Pavel Roskin  <proski@gnu.org>
 
+	* lib/edit.spell.rc: New file.  Invoke ispell on Ctrl-p in the
+	editor.
+	* lib/Makefile.am: Add lib/edit.spell.rc.
+
 	* autogen.sh: Use gettextize.
 	* ABOUT-NLS: Remove from CVS, it's installed by autogen.sh.
 	* po/Makefile.in.in: Likewise.
