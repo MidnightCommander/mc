@@ -20,6 +20,7 @@
 
 	* gnome-file-property-dialog.c (create_settings_pane): change the
 	wording to be a tad clearer.
+	(apply_metadata_change): only set the icon if it has changed.
 
 1999-03-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 

@@ -437,14 +437,15 @@ generate_icon_sel (GnomeFilePropertyDialog *fp_dlg)
 	const gchar *icon;
 	
 	retval = gnome_icon_entry_new ("gmc_file_icon", "Select an Icon");
-	icon = gicon_get_filename_for_icon (fp_dlg->im);
-	if (!icon)
+	icon = g_strdup (gicon_get_filename_for_icon (fp_dlg->im));
+	if (icon)
 		return retval;
 	
-	if (!icon[0]){
+	if (icon[0]){
 		return retval;
 	}
 	gnome_icon_entry_set_icon (GNOME_ICON_ENTRY (retval), icon);
+	fp_dlg->icon_filename = g_strdup (icon);
 	return retval;
 }
 
@@ -1024,11 +1025,6 @@ init_metadata (GnomeFilePropertyDialog *fp_dlg)
 		fp_dlg->mime_fm_view = gnome_mime_get_value (mime_type, "view");
 	fp_dlg->mime_edit = gnome_mime_get_value (mime_type, "edit");
 	fp_dlg->mime_drop_target = gnome_mime_get_value (mime_type, "drop-action");
-
-	gnome_metadata_get (fp_dlg->file_name, "icon-filename", &size, &fp_dlg->icon_filename);
-	if (fp_dlg->icon_filename)
-		g_print ("we have an icon-filename:%s:\n", fp_dlg->icon_filename);
-
 }
 
 GtkWidget *
@@ -1370,9 +1366,10 @@ apply_metadata_change (GnomeFilePropertyDialog *fpd)
 	/* And finally, we set the metadata on the icon filename */
 	text = gnome_icon_entry_get_filename (GNOME_ICON_ENTRY (fpd->button));
 	/*gtk_entry_get_text (GTK_ENTRY (gnome_icon_entry_gtk_entry (GNOME_ICON_ENTRY (fpd->button))));*/
-
+	
 	if (text) {
-		gnome_metadata_set (fpd->file_name, "icon-filename", strlen (text) + 1, text);
+		if (fpd->icon_filename == NULL || (!strcmp (fpd->icon_filename, text)))
+			gnome_metadata_set (fpd->file_name, "icon-filename", strlen (text) + 1, text);
 		g_free (text);
 	}
 	/* I suppose we should only do this if we know there's been a change -- I'll try to figure it
