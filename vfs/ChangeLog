@@ -1,3 +1,8 @@
+2002-09-16  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* smbfs.c: Don't define BOOL_DEFINED to fix compilation on
+	SunOS 5.8.
+
 2002-09-13  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* (get_stat_info): Fix some possible NULL dereferences.
