@@ -1695,13 +1695,13 @@ static void
 smbfs_forget (const char *path)
 {
     char *host, *user, *p;
-    int  port, i;
+    int port, i;
 
     if (strncmp (path, URL_HEADER, HEADER_LEN))
-		return;
+	return;
 
-	DEBUG(3, ("smbfs_forget(path:%s)\n", path));
-    
+    DEBUG (3, ("smbfs_forget(path:%s)\n", path));
+
     path += 6;
     if (path[0] == '/' && path[1] == '/')
 	path += 2;
@@ -1709,17 +1709,18 @@ smbfs_forget (const char *path)
     if ((p = smbfs_get_host_and_username (&path, &host, &user, &port, NULL))) {
 	g_free (p);
 	for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++) {
-		if ((strcmp (host, smbfs_connections [i].host) == 0) &&
-		    (strcmp (user, smbfs_connections [i].user) == 0) &&
-		    (port == smbfs_connections [i].port)) {
+	    if (smbfs_connections[i].cli
+		&& (strcmp (host, smbfs_connections[i].host) == 0)
+		&& (strcmp (user, smbfs_connections[i].user) == 0)
+		&& (port == smbfs_connections[i].port)) {
 
-		    /* close socket: the child owns it now */
-		    cli_shutdown(smbfs_connections [i].cli);
+		/* close socket: the child owns it now */
+		cli_shutdown (smbfs_connections[i].cli);
 
-		    /* reopen the connection */
-		    smbfs_connections [i].cli =
-				smbfs_do_connect(host, smbfs_connections[i].service);
-		}
+		/* reopen the connection */
+		smbfs_connections[i].cli =
+		    smbfs_do_connect (host, smbfs_connections[i].service);
+	    }
 	}
     }
     g_free (host);

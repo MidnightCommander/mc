@@ -1,3 +1,10 @@
+2004-09-27  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* smbfs.c (smbfs_forget): Check smbfs_connections[i].cli
+	to avoid possible segmentation fault.  Close
+	https://savannah.gnu.org/bugs/index.php?func=detailitem&item_id=8974
+
+
 2004-09-26  Roland Illig  <roland.illig@gmx.de>
 
 	* vfs.c (_vfs_get_class): Reverted my last patch because
