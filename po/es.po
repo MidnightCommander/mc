@@ -3,9 +3,9 @@
 # David Martín <dmartina@mailexcite.com>, 1998-1999.
 msgid ""
 msgstr ""
-"Project-Id-Version: 4.5.43\n"
-"POT-Creation-Date: 2000-03-16 19:20+0100\n"
-"PO-Revision-Date: 2000-03-16 20:00+0100\n"
+"Project-Id-Version: 4.5.45\n"
+"POT-Creation-Date: 2000-04-15 23:03+0200\n"
+"PO-Revision-Date: 2000-04-16 00:00+0100\n"
 "Last-Translator: David Martín <dmartina@mailexcite.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -86,15 +86,15 @@ msgstr ""
 "con el comando:\n"
 "\"%s\"%s"
 
-#: gnome/gaction.c:135 gnome/gaction.c:151
+#: gnome/gaction.c:137 gnome/gaction.c:154
 msgid "open"
 msgstr "abrir"
 
-#: gnome/gaction.c:188 gnome/gaction.c:205
+#: gnome/gaction.c:194 gnome/gaction.c:211
 msgid "edit"
 msgstr "editar"
 
-#: gnome/gaction.c:345
+#: gnome/gaction.c:351
 msgid "view"
 msgstr "ver"
 
@@ -1551,11 +1551,11 @@ msgstr "Ubicación:"
 
 #. 1
 #: gnome/gtools.c:105 gtkedit/editcmd.c:386 gtkedit/editcmd.c:1234
-#: gtkedit/editcmd.c:1319 gtkedit/editcmd.c:2983 gtkedit/editoptions.c:71
+#: gtkedit/editcmd.c:1319 gtkedit/editcmd.c:2983 gtkedit/editoptions.c:69
 #: src/boxes.c:138 src/boxes.c:278 src/boxes.c:378 src/boxes.c:466
 #: src/boxes.c:646 src/boxes.c:728 src/boxes.c:783 src/boxes.c:898
 #: src/filegui.c:839 src/find.c:171 src/layout.c:370 src/option.c:143
-#: src/wtools.c:289 src/wtools.c:563 vfs/smbfs.c:116
+#: src/wtools.c:289 src/wtools.c:563 vfs/smbfs.c:117
 msgid "&Ok"
 msgstr "&Aceptar"
 
@@ -1764,14 +1764,14 @@ msgstr "Dejar copias->"
 
 #. NLS  for hotkeys?
 #: gtkedit/editcmd.c:384 gtkedit/editcmd.c:1188 gtkedit/editcmd.c:1232
-#: gtkedit/editcmd.c:1317 gtkedit/editcmd.c:2981 gtkedit/editoptions.c:68
+#: gtkedit/editcmd.c:1317 gtkedit/editcmd.c:2981 gtkedit/editoptions.c:66
 #: src/achown.c:71 src/boxes.c:139 src/boxes.c:279 src/boxes.c:376
 #: src/boxes.c:464 src/boxes.c:644 src/boxes.c:727 src/boxes.c:781
 #: src/chmod.c:114 src/chown.c:79 src/cmd.c:859 src/filegui.c:822
 #: src/find.c:171 src/hotlist.c:138 src/hotlist.c:814 src/hotlist.c:911
 #: src/layout.c:371 src/learn.c:59 src/option.c:144 src/panelize.c:86
 #: src/view.c:409 src/wtools.c:111 src/wtools.c:386 src/wtools.c:561
-#: vfs/smbfs.c:116
+#: vfs/smbfs.c:117
 msgid "&Cancel"
 msgstr "&Cancelar"
 
@@ -2686,55 +2686,55 @@ msgid "Type writer wrap"
 msgstr "Máquina de escribir"
 
 #. 2
-#: gtkedit/editoptions.c:74
+#: gtkedit/editoptions.c:72
 msgid "Word wrap line length : "
 msgstr "Ancho del parrafo auto: "
 
 #. 4
-#: gtkedit/editoptions.c:80
+#: gtkedit/editoptions.c:78
 msgid "Tab spacing : "
 msgstr "Tamaño de tabulaciones: "
 
-#: gtkedit/editoptions.c:88
+#: gtkedit/editoptions.c:86
 msgid "synta&X highlighting"
 msgstr "sinta&Xis coloreada"
 
 #. 7
-#: gtkedit/editoptions.c:94
+#: gtkedit/editoptions.c:92
 msgid "confir&M before saving"
 msgstr "confir&Mar al guardar"
 
 #. 8
-#: gtkedit/editoptions.c:97
+#: gtkedit/editoptions.c:95
 msgid "fill tabs with &Spaces"
 msgstr "tabulaciones x e&Spacios"
 
 #. 9
-#: gtkedit/editoptions.c:100
+#: gtkedit/editoptions.c:98
 msgid "&Return does autoindent"
 msgstr "autoindenta&R"
 
 #. 10
-#: gtkedit/editoptions.c:103
+#: gtkedit/editoptions.c:101
 msgid "&Backspace through tabs"
 msgstr "&Borrar en tabulaciones"
 
 #. 11
-#: gtkedit/editoptions.c:106
+#: gtkedit/editoptions.c:104
 msgid "&Fake half tabs"
 msgstr "&Fingir medias tabulaciones"
 
 #. 13
-#: gtkedit/editoptions.c:112
+#: gtkedit/editoptions.c:110
 msgid "Wrap mode"
 msgstr "Autoajuste de párrafo"
 
 #. 15
-#: gtkedit/editoptions.c:118
+#: gtkedit/editoptions.c:116
 msgid "Key emulation"
 msgstr "Emulación de teclas"
 
-#: gtkedit/editoptions.c:159
+#: gtkedit/editoptions.c:157
 msgid " Editor options "
 msgstr " Opciones del editor "
 
@@ -3466,8 +3466,8 @@ msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
 msgstr ""
-" No se está usando ni xterm ni la consola de Linux; \n"
-" Los paneles no pueden ser ocultados. "
+" No se está usando ni xterm ni la consola Linux; \n"
+" los paneles no pueden ser ocultados. "
 
 #: src/cmd.c:970
 msgid "Type `exit' to return to the Midnight Commander"
@@ -3532,48 +3532,57 @@ msgstr " Enlace simbólico relativo "
 msgid " relative symlink: %s "
 msgstr " enlace simbólico relativo: %s "
 
-#: src/cmd.c:1336
+#: src/cmd.c:1261
+msgid "Using default locale"
+msgstr "Empleando localización genérica"
+
+#: src/cmd.c:1263
+#, c-format
+msgid "Using locale \"%s\" (from environment variable %s)"
+msgstr "Empleando localización \"%s\" (por la variable de entorno %s)"
+
+#: src/cmd.c:1349
 msgid " Enter machine name (F1 for details): "
 msgstr " Teclee el nombre de la máquina (F1 para más detalles): "
 
-#: src/cmd.c:1363
+#: src/cmd.c:1376
 #, c-format
 msgid " Could not chdir to %s "
 msgstr " No puedo cambiar al directorio %s "
 
-#: src/cmd.c:1370
+#: src/cmd.c:1383
 msgid " Link to a remote machine "
 msgstr " Conexión por red "
 
-#: src/cmd.c:1376
+#: src/cmd.c:1389
 msgid " FTP to machine "
 msgstr " Conexión por FTP "
 
-#: src/cmd.c:1382
+#: src/cmd.c:1395
 msgid " SMB link to machine "
 msgstr " Conexión por SMB "
 
-#: src/cmd.c:1392
+#: src/cmd.c:1405
 msgid " Socket source routing setup "
 msgstr " Configuración del ruteo específico "
 
-#: src/cmd.c:1393
+#: src/cmd.c:1406
 msgid " Enter host name to use as a source routing hop: "
 msgstr " Teclee el nombre de la máquina que será la intermediaria: "
 
-#: src/cmd.c:1400
+#: src/cmd.c:1413
 msgid " Host name "
 msgstr " Nombre de la máquina "
 
-#: src/cmd.c:1400
+#: src/cmd.c:1413
 msgid " Error while looking up IP address "
 msgstr " Error al buscar la dirección IP "
 
-#: src/cmd.c:1411
+#: src/cmd.c:1424
 msgid " Undelete files on an ext2 file system "
 msgstr " Recuperar archivos de un sistema de archivos ext2 "
 
-#: src/cmd.c:1412
+#: src/cmd.c:1425
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -3581,11 +3590,11 @@ msgstr ""
 " Introduzca el dispositivo (sin /dev/) donde quiere\n"
 "  recuperar archivos: (F1 para más detalles)"
 
-#: src/cmd.c:1462
+#: src/cmd.c:1475
 msgid " Setup saved to ~/"
 msgstr " Configuración almacenada en ~/"
 
-#: src/cmd.c:1467
+#: src/cmd.c:1480
 msgid " Setup "
 msgstr " Configuración "
 
@@ -3765,7 +3774,7 @@ msgstr "modo texto"
 
 #: src/features.inc:18
 msgid " with X11 support to read modifiers"
-msgstr " con soporte teclado de X11"
+msgstr " con soporte para teclado de X11"
 
 #: src/features.inc:24
 msgid "Virtual File System: tarfs, extfs"
@@ -3797,7 +3806,7 @@ msgstr ", undelfs"
 
 #: src/features.inc:45
 msgid "With builtin Editor\n"
-msgstr "Con Editor propio incorporado\n"
+msgstr "Editor de texto propio incluido\n"
 
 #: src/features.inc:48
 msgid "Using "
@@ -3805,11 +3814,11 @@ msgstr "Usando "
 
 #: src/features.inc:51
 msgid "system-installed "
-msgstr "instalada en el sistema "
+msgstr "(estaba ya instalado) "
 
 #: src/features.inc:53
 msgid "S-lang library with "
-msgstr "biblioteca S-lang con "
+msgstr "S-lang con "
 
 #: src/features.inc:56
 msgid "terminfo"
@@ -3825,7 +3834,7 @@ msgstr "un terminal desconocido"
 
 #: src/features.inc:64
 msgid " database"
-msgstr " base de datos"
+msgstr " como origen de datos"
 
 #: src/features.inc:67
 msgid "the ncurses library"
@@ -3837,7 +3846,7 @@ msgstr "alguna biblioteca tipo curses desconocida"
 
 #: src/features.inc:74
 msgid "With subshell support: "
-msgstr "Con soporte subshell: "
+msgstr "Soporte subshell: "
 
 #: src/features.inc:76
 msgid "optional"
@@ -3849,7 +3858,7 @@ msgstr "por defecto"
 
 #: src/features.inc:84
 msgid "With support for background operations\n"
-msgstr "Con soporte para operaciones  en 2º plano\n"
+msgstr "Soporte para operaciones en 2º plano\n"
 
 #: src/file.c:154 src/tree.c:639
 msgid " Copy "
@@ -4215,7 +4224,7 @@ msgstr "%o %f \"%s\"%e"
 msgid "%o %d %f%e"
 msgstr "%o %d %f%e"
 
-#: src/file.c:1703 vfs/fish.c:476
+#: src/file.c:1703 vfs/fish.c:509
 msgid "file"
 msgstr "archivo"
 
@@ -5334,20 +5343,19 @@ msgstr ""
 msgid "Thank you for using GNU Midnight Commander"
 msgstr "Gracias por usar el GNU Midnight Commander"
 
-#: src/main.c:2284
-#, c-format
-msgid "with mouse support on xterm%s.\n"
-msgstr "con soporte para ratón en xterm%s.\n"
+#: src/main.c:2286
+msgid "with mouse support on xterm and the Linux console.\n"
+msgstr "Soporte para ratón en xterm y consola Linux\n"
 
-#: src/main.c:2285
-msgid " and the Linux console"
-msgstr " y la consola Linux"
+#: src/main.c:2287
+msgid "with mouse support on xterm.\n"
+msgstr "Soporte para ratón en xterm\n"
 
-#: src/main.c:2381
+#: src/main.c:2388
 msgid "The TERM environment variable is unset!\n"
 msgstr "¡La variable de entorno TERM está sin definir!\n"
 
-#: src/main.c:2487
+#: src/main.c:2494
 msgid ""
 "Usage is:\n"
 "\n"
@@ -5359,19 +5367,19 @@ msgstr ""
 "mc [OPCIONES] [DIRECTORIO] [SEGUNDO_DIRECTORIO]\n"
 "\n"
 
-#: src/main.c:2490
+#: src/main.c:2497
 msgid "-a, --stickchars   Force use of +, -, | for line drawing.\n"
 msgstr "-a, --stickchars   Trazar líneas con +, -, |.\n"
 
-#: src/main.c:2492
+#: src/main.c:2499
 msgid "-b, --nocolor      Force black and white display.\n"
 msgstr "-b, --nocolor      Visualización modo monocromo.\n"
 
-#: src/main.c:2494
+#: src/main.c:2501
 msgid "-B, --background   [DEVEL-ONLY: Debug the background code]\n"
-msgstr "-B, --background   [SOLO-PROGRAMADORES: Depurar código 2º plano]\n"
+msgstr "-B, --background   [SOLO-PROGRAMADORES: Depurar código 2º plano.]\n"
 
-#: src/main.c:2496
+#: src/main.c:2503
 msgid ""
 "-c, --color        Force color mode.\n"
 "-C, --colors       Specify colors (use --help-colors to get a list).\n"
@@ -5381,11 +5389,11 @@ msgstr ""
 "-C, --colors       Configurar colores (--help-colors muestra la lista).\n"
 "-d, --nomouse      Deshabilitar soporte para ratón.\n"
 
-#: src/main.c:2500
+#: src/main.c:2507
 msgid "-e, --edit         Startup the internal editor.\n"
 msgstr "-e, --edit         Ejecutar el editor interno.\n"
 
-#: src/main.c:2502
+#: src/main.c:2509
 msgid ""
 "-f, --libdir       Print configured paths.\n"
 "-h, --help         Shows this help message.\n"
@@ -5398,15 +5406,15 @@ msgstr ""
 "-k, --resetsoft    Reponer teclas (sólo terminales HP) a los valores\n"
 "                   comunes establecidos en terminfo/termcap\n"
 
-#: src/main.c:2507
+#: src/main.c:2514
 msgid "-l, --ftplog file  Log ftpfs commands to the file.\n"
 msgstr "-l, --ftplog archivo  Registrar las conexiones ftpfs en el archivo.\n"
 
-#: src/main.c:2510
+#: src/main.c:2517
 msgid "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
 msgstr "-M, --memory archivo  [SOLO-PROGRAMADORES: Registrar mensajes MAD.]\n"
 
-#: src/main.c:2512
+#: src/main.c:2519
 msgid ""
 "-P, --printwd      At exit, print the last working directory.\n"
 "-s, --slow         Disables verbose operation (for slow terminals).\n"
@@ -5415,18 +5423,18 @@ msgstr ""
 "-s, --slow         Deshabilitar operación detallada (para terminales "
 "lentos).\n"
 
-#: src/main.c:2515
+#: src/main.c:2522
 msgid "-t, --termcap      Activate support for the TERMCAP variable.\n"
 msgstr "-t, --termcap      Activar soporte para la variable TERMCAP.\n"
 
-#: src/main.c:2518
+#: src/main.c:2525
 msgid ""
 "-S, --createcmdile Create command file to set default directory upon exit.\n"
 msgstr ""
 "-S, --createcmdile Crear archivo de comandos para fijar directorio al "
 "salir.\n"
 
-#: src/main.c:2521
+#: src/main.c:2528
 msgid ""
 "-u, --nosubshell   Disable the concurrent subshell mode.\n"
 "-U, --subshell     Force the concurrent subshell mode.\n"
@@ -5436,7 +5444,7 @@ msgstr ""
 "-U, --subshell     Activar el modo de subshell concurrente.\n"
 "-r, --forceexec    Forzar ejecución de subshell.\n"
 
-#: src/main.c:2525
+#: src/main.c:2532
 msgid ""
 "-v, --view fname   Start up into the viewer mode.\n"
 "-V, --version      Report version and configuration options.\n"
@@ -5446,11 +5454,11 @@ msgstr ""
 "-V, --version      Mostrar versión y opciones de configuración.\n"
 "-x, --xterm        Activar ratón y restauración de pantalla en xterm.\n"
 
-#: src/main.c:2529
+#: src/main.c:2536
 msgid "-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
-msgstr "-X, --dbgsubshell  [SOLO-PROGRAMADORES: Depurar subshell].\n"
+msgstr "-X, --dbgsubshell  [SOLO-PROGRAMADORES: Depurar subshell.]\n"
 
-#: src/main.c:2531
+#: src/main.c:2538
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -5458,9 +5466,9 @@ msgid ""
 msgstr ""
 "\n"
 "Si detecta algún fallo puede comunicarlo a mc-bugs@nuclecu.unam.mx\n"
-"incluyendo la descripción obtenida con `mc -V'\n"
+"incluyendo la descripción obtenida con `mc -V'.\n"
 
-#: src/main.c:2547
+#: src/main.c:2554
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -5498,123 +5506,123 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2596
+#: src/main.c:2603
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr "Directorio para archivos del Midnight Commander: %s\n"
 
-#: src/main.c:2610
+#: src/main.c:2617
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
 "La opción -m está obsoleta. Vea \"Juego de caracteres...\" en el menú "
 "\"Opciones\"\n"
 
-#: src/main.c:2687
+#: src/main.c:2694
 msgid "Use to debug the background code"
 msgstr "Se usa para depurar código de 2º plano"
 
-#: src/main.c:2693
+#: src/main.c:2700
 msgid "Request to run in color mode"
 msgstr "Solicitar la ejecución en color"
 
-#: src/main.c:2695
+#: src/main.c:2702
 msgid "Specifies a color configuration"
 msgstr "Indicar una configuración de colores"
 
-#: src/main.c:2700
+#: src/main.c:2707
 msgid "Edits one file"
 msgstr "Editar un archivo"
 
-#: src/main.c:2704
+#: src/main.c:2711
 msgid "Displays this help message"
 msgstr "Mostrar este mensaje de ayuda"
 
-#: src/main.c:2707
+#: src/main.c:2714
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Mostrar ayuda sobre cómo cambiar colores"
 
-#: src/main.c:2710
+#: src/main.c:2717
 msgid "Log ftp dialog to specified file"
 msgstr "Registrar diálogos ftp en un archivo"
 
-#: src/main.c:2717
+#: src/main.c:2724
 msgid "Obsolete"
 msgstr "Obsoleto"
 
-#: src/main.c:2719
+#: src/main.c:2726
 msgid "Requests to run in black and white"
 msgstr "Solicitar ejecución en blanco y negro"
 
-#: src/main.c:2721
+#: src/main.c:2728
 msgid "Disable mouse support in text version"
 msgstr "Desactivar ratón en la versión texto"
 
-#: src/main.c:2724
+#: src/main.c:2731
 msgid "Disables subshell support"
 msgstr "Desactivar el uso de subshell"
 
-#: src/main.c:2728
+#: src/main.c:2735
 msgid "Prints working directory at program exit"
 msgstr "Mostrar el nombre del directorio al salir"
 
-#: src/main.c:2730
+#: src/main.c:2737
 msgid "Resets soft keys on HP terminals"
 msgstr "Restablecer teclas en terminales HP"
 
-#: src/main.c:2732
+#: src/main.c:2739
 msgid "To run on slow terminals"
 msgstr "Para ejecutar en terminales lentos"
 
-#: src/main.c:2735
+#: src/main.c:2742
 msgid "Use stickchars to draw"
 msgstr "Usar caracteres simples para recuadros"
 
-#: src/main.c:2739
+#: src/main.c:2746
 msgid "Enables subshell support (default)"
 msgstr "Activar uso de subshell (por defecto)"
 
-#: src/main.c:2744
+#: src/main.c:2751
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Intentar utilizar termcap en vez de terminfo"
 
-#: src/main.c:2748
+#: src/main.c:2755
 msgid "Displays the current version"
 msgstr "Mostrar el número de versión"
 
-#: src/main.c:2750
+#: src/main.c:2757
 msgid "Launches the file viewer on a file"
 msgstr "Abrir un archivo con el visor"
 
-#: src/main.c:2752
+#: src/main.c:2759
 msgid "Forces xterm features"
 msgstr "Utilizar las posibilidades de xterm"
 
-#: src/main.c:2754
+#: src/main.c:2761
 msgid "Geometry for the window"
 msgstr "Geometría de la ventana"
 
-#: src/main.c:2754
+#: src/main.c:2761
 msgid "GEOMETRY"
 msgstr "GEOMETRIA"
 
-#: src/main.c:2755
+#: src/main.c:2762
 msgid "No windows opened at startup"
 msgstr "No abrir ninguna ventana al inicio"
 
-#: src/main.c:2756
+#: src/main.c:2763
 msgid "No desktop icons"
 msgstr "No hay iconos de escritorio"
 
-#: src/main.c:2757
+#: src/main.c:2764
 msgid "Look more like traditional gmc"
 msgstr "Aparentar el gmc tradicional"
 
-#: src/main.c:2759
+#: src/main.c:2766
 msgid "Display the directory that holds the .links startup files and exit"
 msgstr "Mostrar el directorio con archivos de inicio y salir"
 
-#: src/main.c:3071
+#: src/main.c:3078
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -5622,11 +5630,11 @@ msgstr ""
 "No se pudo abrir la línea del terminal. Debe ejecutar \"mc\" sin\n"
 "la opción -P. En algunos sistemas, basta con ejecutar `which mc`\n"
 
-#: src/main.c:3149
+#: src/main.c:3156
 msgid " Notice "
 msgstr " Aviso "
 
-#: src/main.c:3150
+#: src/main.c:3157
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -6471,29 +6479,29 @@ msgstr ""
 "Fin de archivo inesperado\n"
 "%s"
 
-#: vfs/direntry.c:312
+#: vfs/direntry.c:310
 #, c-format
 msgid "Dir cache expired for %s"
 msgstr "El cache para %s ha expirado"
 
-#: vfs/direntry.c:444 vfs/direntry.c:447
+#: vfs/direntry.c:440 vfs/direntry.c:443
 msgid " Direntry warning "
 msgstr " Aviso en una entrada de directorio "
 
-#: vfs/direntry.c:444
+#: vfs/direntry.c:440
 #, c-format
 msgid "Super ino_usage is %d, memory leak"
 msgstr "Super ino_usage vale %d, fuga de memoria"
 
-#: vfs/direntry.c:447
+#: vfs/direntry.c:443
 msgid "Super has want_stale set"
 msgstr "Super tiene want_stale activo"
 
-#: vfs/direntry.c:821
+#: vfs/direntry.c:817
 msgid "Starting linear transfer..."
 msgstr "Iniciando transferencia en línea..."
 
-#: vfs/direntry.c:964
+#: vfs/direntry.c:962
 msgid "Getting file"
 msgstr "Trayendo archivo"
 
@@ -6510,132 +6518,132 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Archivo extfs inconsistente"
 
-#: vfs/fish.c:139
+#: vfs/fish.c:140
 #, c-format
 msgid "fish: Disconnecting from %s"
 msgstr "fish: Desconectando de %s"
 
-#: vfs/fish.c:217
+#: vfs/fish.c:218
 msgid "fish: Waiting for initial line..."
 msgstr "fish: Esperando línea de inicio..."
 
-#: vfs/fish.c:227
+#: vfs/fish.c:228
 msgid "Sorry, we can not do password authenticated connections for now."
 msgstr "Lo siento, las conexiones con contraseña aún no son posibles."
 
-#: vfs/fish.c:232
+#: vfs/fish.c:233
 msgid " fish: Password required for "
 msgstr " fish: Contraseña requerida para "
 
-#: vfs/fish.c:241
+#: vfs/fish.c:242
 msgid "fish: Sending password..."
 msgstr "fish: Enviando contraseña de usuario"
 
-#: vfs/fish.c:247
+#: vfs/fish.c:248
 msgid "fish: Sending initial line..."
 msgstr "fish: Enviando línea de inicio..."
 
-#: vfs/fish.c:251
+#: vfs/fish.c:252
 msgid "fish: Handshaking version..."
 msgstr "fish: Negociando versión..."
 
-#: vfs/fish.c:255
+#: vfs/fish.c:256
 msgid "fish: Setting up current directory..."
 msgstr "fish: Preparando directorio actual..."
 
-#: vfs/fish.c:257
+#: vfs/fish.c:258
 #, c-format
 msgid "fish: Connected, home %s."
 msgstr "fish: Conectado, inicio en %s"
 
-#: vfs/fish.c:333
+#: vfs/fish.c:347
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr "fish: Leyendo el directorio %s..."
 
-#: vfs/fish.c:429
+#: vfs/fish.c:451
 msgid "fish: failed"
 msgstr "fish: falló"
 
 #. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
-#: vfs/fish.c:449
+#: vfs/fish.c:471
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr "fish: guardar %s: enviando comando..."
 
-#: vfs/fish.c:463
+#: vfs/fish.c:496
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Fallo de lectura local, enviando ceros"
 
-#: vfs/fish.c:475
+#: vfs/fish.c:508
 #, c-format
 msgid "fish: storing %s %d (%d)"
 msgstr "fish: guardando %s %d (%d)"
 
-#: vfs/fish.c:476
+#: vfs/fish.c:509
 msgid "zeros"
 msgstr "ceros"
 
-#: vfs/fish.c:515
+#: vfs/fish.c:556
 msgid "Aborting transfer..."
 msgstr "Abortando transferencia."
 
-#: vfs/fish.c:524
+#: vfs/fish.c:565
 msgid "Error reported after abort."
 msgstr "Error denunciado tras abortar."
 
-#: vfs/fish.c:526
+#: vfs/fish.c:567
 msgid "Aborted transfer would be successful."
 msgstr "Abortada transferencia con éxito."
 
-#: vfs/ftpfs.c:316
+#: vfs/ftpfs.c:318
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: Desconectando de %s"
 
-#: vfs/ftpfs.c:374
+#: vfs/ftpfs.c:376
 msgid " FTP: Password required for "
 msgstr " FTP: Contraseña requerida para "
 
-#: vfs/ftpfs.c:407
+#: vfs/ftpfs.c:409
 msgid " Proxy: Password required for "
 msgstr " Proxy: Contraseña requerida para "
 
-#: vfs/ftpfs.c:433
+#: vfs/ftpfs.c:435
 msgid "ftpfs: sending proxy login name"
 msgstr "ftpfs: Enviando nombre de usuario al proxy"
 
-#: vfs/ftpfs.c:437
+#: vfs/ftpfs.c:439
 msgid "ftpfs: sending proxy user password"
 msgstr "ftpfs: Enviando contraseña de usuario al proxy"
 
-#: vfs/ftpfs.c:441
+#: vfs/ftpfs.c:443
 msgid "ftpfs: proxy authentication succeeded"
 msgstr "ftpfs: La identificación ante el proxy tuvo éxito"
 
-#: vfs/ftpfs.c:445
+#: vfs/ftpfs.c:447
 #, c-format
 msgid "ftpfs: connected to %s"
 msgstr "ftpfs: Conectado a %s"
 
-#: vfs/ftpfs.c:462
+#: vfs/ftpfs.c:464
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: Enviando nombre de usuario"
 
-#: vfs/ftpfs.c:467
+#: vfs/ftpfs.c:469
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: Enviando contraseña de usuario"
 
-#: vfs/ftpfs.c:472
+#: vfs/ftpfs.c:474
 msgid "ftpfs: logged in"
 msgstr "ftpfs: Autorizados"
 
-#: vfs/ftpfs.c:487
+#: vfs/ftpfs.c:489
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: denegada autorización al usuario %s"
 
-#: vfs/ftpfs.c:519
+#: vfs/ftpfs.c:521
 #, c-format
 msgid " Could not set source routing (%s)"
 msgstr " No se pudo prefijar la ruta (%s)"
@@ -6667,62 +6675,62 @@ msgstr "ftpfs: Conexión al servidor fracasó: %s"
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Esperando antes de insistir... %d (Ctrl-C para cancelar)"
 
-#: vfs/ftpfs.c:917
+#: vfs/ftpfs.c:930
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: No se pudo aplicar el \"modo pasivo\""
 
-#: vfs/ftpfs.c:992
+#: vfs/ftpfs.c:1005
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: Abortando transferencia."
 
-#: vfs/ftpfs.c:994
+#: vfs/ftpfs.c:1007
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: Error al abortar: %s"
 
-#: vfs/ftpfs.c:999
+#: vfs/ftpfs.c:1012
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: Aborto fracasado"
 
-#: vfs/ftpfs.c:1088 vfs/ftpfs.c:1185
+#: vfs/ftpfs.c:1101 vfs/ftpfs.c:1200
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: Fallo al ejecutar CWD"
 
-#: vfs/ftpfs.c:1098 vfs/ftpfs.c:1105
+#: vfs/ftpfs.c:1111 vfs/ftpfs.c:1118
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: No se pudo resolver el enlace simbólico"
 
-#: vfs/ftpfs.c:1156
+#: vfs/ftpfs.c:1169
 msgid "Resolving symlink..."
 msgstr "Resolviendo enlace simbólico..."
 
-#: vfs/ftpfs.c:1174
+#: vfs/ftpfs.c:1188
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: Leyendo vía FTP el directorio %s... %s%s"
 
-#: vfs/ftpfs.c:1175
+#: vfs/ftpfs.c:1189
 msgid "(strict rfc959)"
 msgstr "(rfc959)"
 
-#: vfs/ftpfs.c:1176
+#: vfs/ftpfs.c:1190
 msgid "(chdir first)"
 msgstr "(chdir)"
 
-#: vfs/ftpfs.c:1270
+#: vfs/ftpfs.c:1286
 msgid "ftpfs: failed"
 msgstr "ftpfs: Falló"
 
-#: vfs/ftpfs.c:1280
+#: vfs/ftpfs.c:1296
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: Falló; no hay dónde replegarse"
 
-#: vfs/ftpfs.c:1343
+#: vfs/ftpfs.c:1359
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs: Guardando archivo %d (%d)"
 
-#: vfs/ftpfs.c:1758
+#: vfs/ftpfs.c:1774
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -6792,24 +6800,24 @@ msgstr " Demasiadas conexiones en curso "
 msgid "Midnight Commander's private remote filesystem"
 msgstr "Sistema de archivos remoto de Midnight Commander"
 
-#: vfs/smbfs.c:115
+#: vfs/smbfs.c:116
 msgid "Domain:"
 msgstr "Dominio:"
 
-#: vfs/smbfs.c:115
+#: vfs/smbfs.c:116
 msgid "Username:"
 msgstr "Usuario:"
 
-#: vfs/smbfs.c:115
+#: vfs/smbfs.c:116
 msgid "Password: "
 msgstr "Contraseña: "
 
-#: vfs/smbfs.c:170
+#: vfs/smbfs.c:171
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr " Contraseña para \\\\%s\\%s "
 
-#: vfs/smbfs.c:666
+#: vfs/smbfs.c:667
 #, c-format
 msgid ""
 " reconnect to %s failed\n"
@@ -6818,26 +6826,26 @@ msgstr ""
 " falló la reconexión con %s\n"
 " "
 
-#: vfs/smbfs.c:1242
+#: vfs/smbfs.c:1243
 msgid " Authentication failed "
 msgstr " Autentificación fallida "
 
-#: vfs/smbfs.c:1737
+#: vfs/smbfs.c:1738
 #, c-format
 msgid " %s mkdir'ing %s "
 msgstr " %s creando %s "
 
-#: vfs/smbfs.c:1758
+#: vfs/smbfs.c:1759
 #, c-format
 msgid " %s rmdir'ing %s "
 msgstr " %s eliminando %s "
 
-#: vfs/smbfs.c:1867 vfs/smbfs.c:1887 vfs/smbfs.c:1948
+#: vfs/smbfs.c:1868 vfs/smbfs.c:1888 vfs/smbfs.c:1949
 #, c-format
 msgid " %s opening remote file %s "
 msgstr " %s abriendo archivo remoto %s "
 
-#: vfs/smbfs.c:1971
+#: vfs/smbfs.c:1972
 #, c-format
 msgid " %s renaming files\n"
 msgstr " %s renombrando archivos\n"
@@ -6899,61 +6907,61 @@ msgstr "%s: %s: %s %3d%% (%ld bytes transferidos)"
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld bytes transfered"
 
-#: vfs/undelfs.c:80
+#: vfs/undelfs.c:81
 msgid " undelfs: error "
 msgstr " undelfs: error "
 
-#: vfs/undelfs.c:183
+#: vfs/undelfs.c:184
 msgid " not enough memory "
 msgstr " memoria insuficiente "
 
-#: vfs/undelfs.c:188
+#: vfs/undelfs.c:189
 msgid " while allocating block buffer "
 msgstr " al reservar buffer de bloque "
 
-#: vfs/undelfs.c:192
+#: vfs/undelfs.c:193
 #, c-format
 msgid " open_inode_scan: %d "
 msgstr " open_inode_scan: %d "
 
-#: vfs/undelfs.c:196
+#: vfs/undelfs.c:197
 #, c-format
 msgid " while starting inode scan %d "
 msgstr " al iniciar rastreo de inodos %d "
 
-#: vfs/undelfs.c:203
+#: vfs/undelfs.c:204
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr "undelfs: cargando información de archivos eliminados %d inodos"
 
-#: vfs/undelfs.c:218
+#: vfs/undelfs.c:219
 #, c-format
 msgid " while calling ext2_block_iterate %d "
 msgstr " al llamar a ext2_block_iterate %d "
 
-#: vfs/undelfs.c:226
+#: vfs/undelfs.c:227
 msgid " no more memory while reallocating array "
 msgstr " se agotó la memoria mientras se reubicaba la tabla "
 
-#: vfs/undelfs.c:245
+#: vfs/undelfs.c:246
 #, c-format
 msgid " while doing inode scan %d "
 msgstr " mientras se hacía el rastreo de inodos %d"
 
-#: vfs/undelfs.c:269
+#: vfs/undelfs.c:270
 msgid " Ext2lib error "
 msgstr " error Ext2lib "
 
-#: vfs/undelfs.c:296
+#: vfs/undelfs.c:297
 #, c-format
 msgid " Could not open file %s "
 msgstr " No puedo abrir el archivo %s "
 
-#: vfs/undelfs.c:299
+#: vfs/undelfs.c:300
 msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs: leyendo mapa de inodos..."
 
-#: vfs/undelfs.c:302
+#: vfs/undelfs.c:303
 #, c-format
 msgid ""
 " Could not load inode bitmap from: \n"
@@ -6962,11 +6970,11 @@ msgstr ""
 " No puedo cargar el inodo de: \n"
 "  %s \n"
 
-#: vfs/undelfs.c:305
+#: vfs/undelfs.c:306
 msgid "undelfs: reading block bitmap..."
 msgstr "undelfs: leyendo mapa de bloques..."
 
-#: vfs/undelfs.c:308
+#: vfs/undelfs.c:309
 #, c-format
 msgid ""
 " Could not load block bitmap from: \n"
@@ -6975,32 +6983,32 @@ msgstr ""
 " No puedo cargar bloques de: \n"
 "  %s \n"
 
-#: vfs/undelfs.c:314
+#: vfs/undelfs.c:315
 msgid "undelfs: done."
 msgstr "undelfs: hecho."
 
-#: vfs/undelfs.c:317
+#: vfs/undelfs.c:318
 msgid "undelfs: failure"
 msgstr "undelfs: fallo"
 
-#: vfs/undelfs.c:341
+#: vfs/undelfs.c:342
 msgid " vfs_info is not fs! "
 msgstr " ¡vfs_info no es fs! "
 
-#: vfs/undelfs.c:397 vfs/undelfs.c:581
+#: vfs/undelfs.c:398 vfs/undelfs.c:582
 msgid " You have to chdir to extract files first "
 msgstr " Tiene que ir al directorio antes de extraer archivos "
 
-#: vfs/undelfs.c:520
+#: vfs/undelfs.c:521
 msgid " while iterating over blocks "
 msgstr " al iterar entre bloques "
 
-#: vfs/undelfs.c:625
+#: vfs/undelfs.c:626
 #, c-format
 msgid " Could not open file: %s "
 msgstr " No puedo abrir el archivo: %s "
 
 #. This is place of next pointer
-#: vfs/undelfs.c:683
+#: vfs/undelfs.c:684
 msgid "Undelete filesystem for ext2"
 msgstr "Sistema de archivos ext2 en recuperación"
