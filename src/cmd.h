@@ -1,8 +1,6 @@
 #ifndef __CMD_H
 #define __CMD_H
 
-#include "panel.h"
-
 void netlink_cmd (void);
 void ftplink_cmd (void);
 void fishlink_cmd (void);
@@ -17,25 +15,21 @@ void view_cmd (void);
 void view_file_cmd (void);
 void view_simple_cmd (void);
 void filtered_view_cmd (void);
-void do_edit (const char *what);
 void do_edit_at_line (const char *what, int start_line);
-void edit_cmd (WPanel *panel);
-void edit_cmd_new (WPanel *panel);
+void edit_cmd (void);
+void edit_cmd_new (void);
 void copy_cmd (void);
 void ren_cmd (void);
 void copy_cmd_local (void);
 void ren_cmd_local (void);
 void free_vfs_now (void);
 void reselect_vfs (void);
-void mkdir_cmd (WPanel *panel);
+void mkdir_cmd (void);
 void delete_cmd (void);
 void find_cmd (void);
 void tree_mode_cmd (void);
 void filter_cmd (void);
-void set_panel_filter (WPanel *panel);
-void set_panel_filter_to (WPanel *p, char *allocated_filter_string);
 void reread_cmd (void);
-void do_re_sort (WPanel *panel);
 void tree_view_cmd (void);
 void ext_cmd (void);
 void menu_edit_cmd (int select);
@@ -47,39 +41,25 @@ void tree_cmd (void);
 void link_cmd (void);
 void symlink_cmd (void);
 void edit_symlink_cmd (void);
-void reverse_selection_cmd_panel (WPanel *);
-void unselect_cmd_panel (WPanel *);
-void select_cmd_panel (WPanel *);
 void reverse_selection_cmd (void);
 void unselect_cmd (void);
 void select_cmd (void);
 void swap_cmd (void);
 void view_other_cmd (void);
-void mkdir_panel_cmd (void);
-void edit_panel_cmd (void);
 void quick_cd_cmd (void);
 void save_setup_cmd (void);
 char *get_random_hint (void);
 void source_routing (void);
 void user_file_menu_cmd (void);
 char *guess_message_value (void);
-int check_for_default(char *default_file, char *file);
 
 /* Display mode code */
 void info_cmd (void);
 void tree_cmd (void);
 void listing_cmd (void);
-void switch_to_listing (int panel_index);
 void quick_cmd_no_menu (void);
 void info_cmd_no_menu (void);
 void quick_view_cmd (void);
 void toggle_listing_cmd (void);
-void configure_panel_listing (WPanel * p, int view_type, int use_msformat,
-			      char *user, char *status);
-
-#ifdef  USE_INTERNAL_EDIT
-extern int edit (const char *file, int line);
-extern int edit_run;
-#endif
 
 #endif /* __CMD_H */

@@ -2090,13 +2090,13 @@ static const key_map panel_keymap [] = {
     { KEY_F(16),  ren_cmd_local },
     { ALT('y'),   directory_history_prev },
     { ALT('u'),   directory_history_next },
-    { ALT('+'),	  select_cmd_panel },
-    { KEY_KP_ADD, select_cmd_panel },
-    { ALT('\\'),  unselect_cmd_panel },
-    { ALT('-'),	  unselect_cmd_panel },
-    { KEY_KP_SUBTRACT, unselect_cmd_panel },
-    { ALT('*'),	  reverse_selection_cmd_panel },
-    { KEY_KP_MULTIPLY, reverse_selection_cmd_panel },
+    { ALT('+'),	  select_cmd },
+    { KEY_KP_ADD, select_cmd },
+    { ALT('\\'),  unselect_cmd },
+    { ALT('-'),	  unselect_cmd },
+    { KEY_KP_SUBTRACT, unselect_cmd },
+    { ALT('*'),	  reverse_selection_cmd },
+    { KEY_KP_MULTIPLY, reverse_selection_cmd },
     { 0, 0 }
 };
 
@@ -2182,10 +2182,10 @@ panel_callback (WPanel *panel, int msg, int par)
 	define_label (h, 1, _("Help"), help_cmd);
 	define_label (h, 2, _("Menu"), user_file_menu_cmd);
 	define_label (h, 3, _("View"), view_cmd);
-	define_label (h, 4, _("Edit"), edit_panel_cmd);
+	define_label (h, 4, _("Edit"), edit_cmd);
 	define_label (h, 5, _("Copy"), copy_cmd);
 	define_label (h, 6, _("RenMov"), ren_cmd);
-	define_label (h, 7, _("Mkdir"), mkdir_panel_cmd);
+	define_label (h, 7, _("Mkdir"), mkdir_cmd);
 	define_label (h, 8, _("Delete"), delete_cmd);
 	redraw_labels (h);
 

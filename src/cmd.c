@@ -39,39 +39,29 @@
 #endif
 
 #include "global.h"
-#include "tty.h"
-#include "dir.h"
 #include "panel.h"
 #include "cmd.h"		/* Our definitions */
 #include "view.h"		/* view() */
-#include "dialog.h"		/* query_dialog, message */
 #include "file.h"		/* the file operations */
-#include "fileopctx.h"
 #include "find.h"		/* do_find */
 #include "hotlist.h"
-#include "tree.h"
+#include "tree.h"		/* tree_chdir */
 #include "subshell.h"		/* use_subshell */
 #include "cons.saver.h"
-#include "dlg.h"		/* required by wtools.h */
 #include "widget.h"		/* required by wtools.h */
-#include "wtools.h"		/* listbox */
 #include "command.h"		/* for cmdline */
-#include "win.h"		/* do_exit_ca_mode */
 #include "layout.h"		/* get_current/other_type */
 #include "ext.h"		/* regex_command */
-#include "key.h"		/* get_key_code */
-#include "help.h"		/* interactive_display */
 #include "boxes.h"		/* cd_dialog */
-#include "color.h"
-#include "user.h"
 #include "setup.h"
 #include "profile.h"
 
-#include "vfs/vfs.h"
-#define WANT_WIDGETS
-#include "main.h"		/* global variables, global functions */
 #ifndef MAP_FILE
 #   define MAP_FILE 0
+#endif
+
+#ifdef USE_INTERNAL_EDIT
+#   include "../edit/edit.h"
 #endif
 
 /* If set and you don't have subshell support,then C-o will give you a shell */
@@ -87,21 +77,6 @@ int use_internal_edit = 1;
 int is_right;
 #define MENU_PANEL_IDX  (is_right ? 1 : 0)
 
-
-/* This is used since the parameter panel on some of the commands */
-/* defined in this file may receive a 0 parameter if they are invoked */
-/* The drop down menu */
-
-static WPanel *
-get_a_panel (WPanel *panel)
-{
-    if (panel)
-	return panel;
-    if (get_current_type () == view_listing){
-	return cpanel;
-    } else
-	return other_panel;
-}
 
 /* view_file (filename, normal, internal)
  *
@@ -321,22 +296,21 @@ void do_edit_at_line (const char *what, int start_line)
     repaint_screen ();
 }
 
-void
+static void
 do_edit (const char *what)
 {
     do_edit_at_line (what, 1);
 }
 
 void
-edit_cmd (WPanel *panel)
+edit_cmd (void)
 {
-    panel = get_a_panel (panel);
-    if (regex_command (selection (panel)->fname, "Edit", 0) == 0)
-	do_edit (selection (panel)->fname);
+    if (regex_command (selection (cpanel)->fname, "Edit", 0) == 0)
+	do_edit (selection (cpanel)->fname);
 }
 
 void
-edit_cmd_new (WPanel *panel)
+edit_cmd_new (void)
 {
     do_edit ("");
 }
@@ -382,12 +356,11 @@ void ren_cmd_local (void)
     }
 }
 
-void mkdir_cmd (WPanel *panel)
+void mkdir_cmd (void)
 {
     char *tempdir;
     char *dir;
     
-    panel = get_a_panel (panel);
     dir = input_expand_dialog (_("Create a new Directory"), _(" Enter directory name:") , "");
     
     if (!dir)
@@ -396,7 +369,7 @@ void mkdir_cmd (WPanel *panel)
     if (dir [0] && (dir [0] == '/' || dir [0] == '~'))
 	    tempdir = g_strdup (dir);
     else
-	    tempdir = concat_dir_and_file (panel->cwd, dir);
+	    tempdir = concat_dir_and_file (cpanel->cwd, dir);
     g_free (dir);
     
     save_cwds_stat ();
@@ -426,7 +399,7 @@ void find_cmd (void)
     do_find ();
 }
 
-void
+static void
 set_panel_filter_to (WPanel *p, char *allocated_filter_string)
 {
     if (p->filter){
@@ -441,7 +414,8 @@ set_panel_filter_to (WPanel *p, char *allocated_filter_string)
 }
 
 /* Set a given panel filter expression */
-void set_panel_filter (WPanel *p)
+static void
+set_panel_filter (WPanel *p)
 {
     char *reg_exp;
     char *x;
@@ -482,33 +456,21 @@ void reread_cmd (void)
     repaint_screen ();
 }
 
-/* Panel sorting related routines */
-void do_re_sort (WPanel *panel)
-{
-    panel = get_a_panel (panel);
-    panel_re_sort (panel);
-}
-
-void reverse_selection_cmd_panel (WPanel *panel)
+void reverse_selection_cmd (void)
 {
     file_entry *file;
     int i;
 
-    for (i = 0; i < panel->count; i++){
-	file = &panel->dir.list [i];
+    for (i = 0; i < cpanel->count; i++){
+	file = &cpanel->dir.list [i];
 	if (S_ISDIR (file->buf.st_mode))
 	    continue;
-	do_file_mark (panel, i, !file->f.marked);
+	do_file_mark (cpanel, i, !file->f.marked);
     }
-    paint_panel (panel);
+    paint_panel (cpanel);
 }
 
-void reverse_selection_cmd (void)
-{
-    reverse_selection_cmd_panel (cpanel);
-}
-
-void select_cmd_panel (WPanel *panel)
+void select_cmd (void)
 {
     char *reg_exp, *reg_exp_t;
     int i;
@@ -531,36 +493,31 @@ void select_cmd_panel (WPanel *panel)
         reg_exp_t [strlen(reg_exp_t) - 1] = 0;
     }
 
-    for (i = 0; i < panel->count; i++){
-        if (!strcmp (panel->dir.list [i].fname, ".."))
+    for (i = 0; i < cpanel->count; i++){
+        if (!strcmp (cpanel->dir.list [i].fname, ".."))
             continue;
-	if (S_ISDIR (panel->dir.list [i].buf.st_mode)){
+	if (S_ISDIR (cpanel->dir.list [i].buf.st_mode)){
 	    if (!dirflag)
                 continue;
         } else {
             if (dirflag)
                 continue;
 	}
-	c = regexp_match (reg_exp_t, panel->dir.list [i].fname, match_file);
+	c = regexp_match (reg_exp_t, cpanel->dir.list [i].fname, match_file);
 	if (c == -1){
 	    message (1, MSG_ERROR, _("  Malformed regular expression  "));
 	    g_free (reg_exp);
 	    return;
 	}
 	if (c){
-	    do_file_mark (panel, i, 1);
+	    do_file_mark (cpanel, i, 1);
 	}
     }
-    paint_panel (panel);
+    paint_panel (cpanel);
     g_free (reg_exp);
 }
 
-void select_cmd (void)
-{
-	select_cmd_panel (cpanel);
-}
-
-void unselect_cmd_panel (WPanel *panel)
+void unselect_cmd (void)
 {
     char *reg_exp, *reg_exp_t;
     int i;
@@ -582,38 +539,34 @@ void unselect_cmd_panel (WPanel *panel)
         dirflag = 1;
         reg_exp_t [strlen(reg_exp_t) - 1] = 0;
     }
-    for (i = 0; i < panel->count; i++){
-        if (!strcmp (panel->dir.list [i].fname, "..")) 
+    for (i = 0; i < cpanel->count; i++){
+        if (!strcmp (cpanel->dir.list [i].fname, "..")) 
             continue;
-	if (S_ISDIR (panel->dir.list [i].buf.st_mode)){
+	if (S_ISDIR (cpanel->dir.list [i].buf.st_mode)){
 	    if (!dirflag)
 	        continue;
         } else {
             if (dirflag)
                 continue;
         }
-	c = regexp_match (reg_exp_t, panel->dir.list [i].fname, match_file);
+	c = regexp_match (reg_exp_t, cpanel->dir.list [i].fname, match_file);
 	if (c == -1){
 	    message (1, MSG_ERROR, _("  Malformed regular expression  "));
 	    g_free (reg_exp);
 	    return;
 	}
 	if (c){
-	    do_file_mark (panel, i, 0);
+	    do_file_mark (cpanel, i, 0);
 	}
     }
-    paint_panel (panel);
+    paint_panel (cpanel);
     g_free (reg_exp);
-}
-
-void unselect_cmd (void)
-{
-	unselect_cmd_panel (cpanel);
 }
 
 /* Check if the file exists */
 /* If not copy the default */
-int check_for_default(char *default_file, char *file)
+static int
+check_for_default(char *default_file, char *file)
 {
     struct stat s;
     off_t  count = 0;
@@ -814,8 +767,6 @@ compare_dir (WPanel *panel, WPanel *other, enum CompareMode mode)
     int i, j;
     char *src_name, *dst_name;
 
-    panel = get_a_panel (panel);
-    
     /* No marks by default */
     panel->marked = 0;
     panel->total = 0;
@@ -1157,16 +1108,6 @@ void help_cmd (void)
    interactive_display (NULL, "[main]");
 }
 
-void edit_panel_cmd (void)
-{
-    edit_cmd (cpanel);
-}
-
-void mkdir_panel_cmd (void)
-{
-    mkdir_cmd (cpanel);
-}
-
 /* partly taken from dcigettext.c, returns "" for default locale */
 /* value should be freed by calling function g_free() */
 char *guess_message_value (void)
@@ -1404,7 +1345,7 @@ save_setup_cmd (void)
     g_free (str);
 }
 
-void
+static void
 configure_panel_listing (WPanel *p, int view_type, int use_msformat, char *user, char *status)
 {
     p->user_mini_status = use_msformat; 
@@ -1452,7 +1393,7 @@ quick_cmd_no_menu (void)
 	set_display_type (cpanel == left_panel ? 1 : 0, view_quick);
 }
 
-void
+static void
 switch_to_listing (int panel_index)
 {
     if (get_display_type (panel_index) != view_listing)
