@@ -1,3 +1,7 @@
+2004-10-05  Miroslav Rudisin  <miero+gnu@atrey.karlin.mff.cuni.cz>
+
+        * util.c(strip_password): Add support for '@' in username.
+
 2004-10-05  Jakub Jelinek  <jakub@redhat.com>
 
 	* cons.saver.c: Partly rewritten cons.saver.c.

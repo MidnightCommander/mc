@@ -435,7 +435,7 @@ strip_password (char *p, int has_prefix)
         if ((dir = strchr (p, PATH_SEP)) != NULL)
    	    *dir = '\0';
         /* search for any possible user */
-        at = strchr (p, '@');
+        at = strrchr (p, '@');
 
         /* We have a username */
         if (at) {
