@@ -148,7 +148,7 @@ struct vfs_s_subclass {
 		       char *path, char *localname);
 
     int (*linear_start) (struct vfs_class *me, struct vfs_s_fh *fh,
-			 int from);
+			 off_t from);
     int (*linear_read) (struct vfs_class *me, struct vfs_s_fh *fh,
 			void *buf, int len);
     void (*linear_close) (struct vfs_class *me, struct vfs_s_fh *fh);
