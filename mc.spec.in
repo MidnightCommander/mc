@@ -66,32 +66,36 @@ rm -rf $RPM_BUILD_ROOT
 %{_prefix}/bin/mc
 %{_prefix}/bin/mcedit
 %{_prefix}/bin/mcview
-%{_prefix}/lib/mc/bin/cons.saver
-%{_prefix}/lib/mc/term/*
+%{_prefix}/bin/mcmfmt
+%{_prefix}/lib/mc/cons.saver
 %{_mandir}/man1/*
 %{_mandir}/*/man1/*
-%config /etc/profile.d/*
-%dir %{_prefix}/lib/mc/bin
-%dir %{_prefix}/lib/mc/term
 
-%defattr(-, root, root)
-%{_prefix}/bin/mcmfmt
-%config %{_prefix}/lib/mc/cedit.menu
-%config %{_prefix}/lib/mc/edit.indent.rc
-%config %{_prefix}/lib/mc/extfs/*
-%config %{_prefix}/lib/mc/mc.ext
-%config %{_prefix}/lib/mc/mc.lib
-%config %{_prefix}/lib/mc/mc.menu
-%{?_with_charset: %config %{_prefix}/lib/mc/mc.charsets}
-%{_prefix}/lib/mc/mc.hint*
-%{_prefix}/lib/mc/mc.hlp*
-%{_prefix}/lib/mc/syntax/*
+%config /etc/profile.d/*
+%config %{_prefix}/share/mc/cedit.menu
+%config %{_prefix}/share/mc/edit.indent.rc
+%config %{_prefix}/share/mc/extfs/*
+%config %{_prefix}/share/mc/mc.ext
+%config %{_prefix}/share/mc/mc.lib
+%config %{_prefix}/share/mc/mc.menu
+%{?_with_charset: %config %{_prefix}/share/mc/mc.charsets}
+
+%{_prefix}/share/mc/mc.hint*
+%{_prefix}/share/mc/mc.hlp*
+%{_prefix}/share/mc/syntax/*
+%{_prefix}/share/mc/term/*
 %{_prefix}/share/locale/*/LC_MESSAGES/*
+
 %dir %{_prefix}/lib/mc
-%dir %{_prefix}/lib/mc/extfs
-%dir %{_prefix}/lib/mc/syntax
+%dir %{_prefix}/share/mc
+%dir %{_prefix}/share/mc/extfs
+%dir %{_prefix}/share/mc/syntax
+%dir %{_prefix}/share/mc/term
 
 %changelog
+* Sat Sep 21 2002 Pavel Roskin <proski@gnu.org>
+- Use FHS-compliant paths.
+
 * Wed Aug 21 2002 Pavel Roskin <proski@gnu.org>
 - Change description, update URLs, allow dash in the version.
 
