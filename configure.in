@@ -2,7 +2,7 @@ dnl
 dnl Configure.in file for the Midnight Commander
 dnl
 AC_INIT(src/main.c)
-AC_PREREQ(2.13)
+AC_PREREQ(2.52)
 AC_CANONICAL_HOST
 
 AM_INIT_AUTOMAKE(mc, 4.5.99a)
@@ -19,14 +19,12 @@ AC_AIX
 AC_MINIX
 AC_ISC_POSIX
 
-dnl Accomodate both Autoconf 2.13 and the 2.5x series,
-ifdef([AC_PROG_CC_STDC], [AC_PROG_CC_STDC], [AM_PROG_CC_STDC])
+AC_PROG_CC_STDC
 
 AC_HEADER_MAJOR
 AC_C_CONST
 
-dnl AC_SYS_LARGEFILE is missing in Autoconf-2.13
-ifelse(AC_ACVERSION, [2.13], [], [AC_SYS_LARGEFILE])
+AC_SYS_LARGEFILE
 
 AC_CHECK_TOOL(AR, ar, ar)
 
@@ -818,19 +816,9 @@ AC_SUBST(LIBS)
 MCF=./Make.common
 AC_SUBST_FILE(MCF)
 
-dnl
-dnl Output configuration files
-dnl
-dnl Accomodate both Autoconf 2.13 and the 2.5x series.
-ifelse(AC_ACVERSION, [2.13],
-[mc_subdirs=
 if test "x$SAMBAFILES" != x; then
-  mc_subdirs=vfs/samba
-  AC_CONFIG_SUBDIRS([$mc_subdirs])
-fi],
-[if test "x$SAMBAFILES" != x; then
   AC_CONFIG_SUBDIRS([vfs/samba])
-fi])
+fi
 
 AM_CONDITIONAL(USE_EDIT, [test -n "$LIBEDIT_A"])
 AM_CONDITIONAL(USE_VFS, [test -n "$LIBVFS"])
