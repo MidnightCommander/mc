@@ -19,8 +19,8 @@ static void revert_callback ();
 static void ok_callback ();
 static void cancel_callback ();
 static void help_callback ();
-GtkWidget *capplet;
-GtkWidget *delete_button;
+GtkWidget *capplet = NULL;
+GtkWidget *delete_button = NULL;
 
 static GtkWidget *
 left_aligned_button (gchar *label)
@@ -45,6 +45,7 @@ revert_callback ()
 {
         write_initial_keys ();
         write_initial_mime ();
+        discard_key_info ();
         discard_mime_info ();
         initialize_main_win_vals ();
 }
@@ -52,11 +53,13 @@ static void
 ok_callback ()
 {
         write_user_keys ();
+        write_user_mime ();
 }
 static void
 cancel_callback ()
 {
         write_initial_keys ();
+        write_initial_mime ();
 }
 static void
 help_callback ()
@@ -71,6 +74,10 @@ init_mime_capplet ()
         GtkWidget *button;
 
 	capplet = capplet_widget_new ();
+        delete_button = left_aligned_button (_("Delete"));
+        gtk_signal_connect (GTK_OBJECT (delete_button), "clicked",
+                            delete_clicked, NULL);
+                            
         hbox = gtk_hbox_new (FALSE, GNOME_PAD);
 	gtk_container_set_border_width (GTK_CONTAINER (hbox), GNOME_PAD_SMALL);
         gtk_container_add (GTK_CONTAINER (capplet), hbox);
@@ -85,7 +92,6 @@ init_mime_capplet ()
         gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
         gtk_signal_connect (GTK_OBJECT (button), "clicked",
                             edit_clicked, NULL);
-        delete_button = left_aligned_button (_("Delete"));
         gtk_box_pack_start (GTK_BOX (vbox), delete_button, FALSE, FALSE, 0);
         gtk_widget_show_all (capplet);
         gtk_signal_connect(GTK_OBJECT(capplet), "try",

@@ -307,10 +307,8 @@ set_mime_key_value (gchar *mime_type, gchar *key, gchar *value)
 		GString *str = g_string_new (mime_type);
 		context = context_new (str, FALSE);
 		g_string_free (str, TRUE);
-		g_hash_table_insert (specific_types, mime_type, context);
 	}
 	context_add_key (context, key, value);
-	
 }
 void
 init_mime_info (void)
@@ -326,7 +324,6 @@ init_mime_info (void)
 	filename = g_concat_dir_and_file (gnome_util_user_home (), "/.gnome/mime-info/user.keys");
 	load_mime_type_info_from (filename);
 	g_free (filename);
-
 }
 
 const char *
@@ -458,23 +455,34 @@ write_user_keys (void)
 {
 	write_keys (generic_types, specific_types);
 }
+static void
+print_mime_foreach (gpointer mime_info, gpointer mi, gpointer data)
+{
+        g_print ("mime_info:%s:\n", (char *)mime_info);
+        g_print ("\t:%s:\n", ((MimeInfo *)mi)->mime_type);
+}
 void
-discard_mime_info (void)
+discard_key_info (void)
 {
 	gchar *filename;
 	
 	current_lang = getenv ("LANG");
 	g_hash_table_foreach (generic_types, clean_mime_foreach, NULL);
+/*        g_hash_table_foreach (specific_types, print_mime_foreach, NULL);*/
 	g_hash_table_foreach (specific_types, clean_mime_foreach, NULL);
 	g_hash_table_destroy (generic_types);
 	g_hash_table_destroy (specific_types);
 	specific_types = g_hash_table_new (g_str_hash, g_str_equal);
 	generic_types  = g_hash_table_new (g_str_hash, g_str_equal);
-	initial_specific_types = g_hash_table_new (g_str_hash, g_str_equal);
-	initial_generic_types  = g_hash_table_new (g_str_hash, g_str_equal);
 
 	filename = g_concat_dir_and_file (gnome_util_user_home (), "/.gnome/mime-info/user.keys");
 	load_mime_type_info_from (filename);
+        reread_list ();
 	g_free (filename);
-
+}
+void
+remove_mime_info (gchar *mime_type)
+{
+        g_hash_table_remove (generic_types, mime_type);
+        g_hash_table_remove (specific_types, mime_type);
 }

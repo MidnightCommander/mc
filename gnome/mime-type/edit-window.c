@@ -213,8 +213,11 @@ setup_entry (gchar *key, GtkWidget *g_entry, MimeInfo *mi)
 void
 initialize_main_win_vals (void)
 {
-	MimeInfo *mi = main_win->mi;
+	MimeInfo *mi;
 	gchar *title;
+	if (main_win == NULL)
+		return;
+	mi = main_win->mi;
 	if (mi == NULL)
 		return;
 	/* now we fill in the fields with the mi stuff. */

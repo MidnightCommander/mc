@@ -95,7 +95,6 @@ launch_new_mime_window (void)
 				   gtk_entry_get_text (GTK_ENTRY (ext_entry)),
 				   gtk_entry_get_text (GTK_ENTRY (regex1_entry)),
 				   gtk_entry_get_text (GTK_ENTRY (regex2_entry)));
-				   
         case 1:
                 gtk_widget_destroy (add_dialog);
         default:;

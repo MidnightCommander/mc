@@ -32,7 +32,8 @@ static GHashTable *mime_types = NULL;
 static GHashTable *initial_user_mime_types = NULL;
 static GHashTable *user_mime_types = NULL;
 static GtkWidget *clist = NULL;
-
+extern GtkWidget *delete_button;
+extern GtkWidget *capplet;
 /* Initialization functions */
 static char *
 get_priority (char *def, int *priority)
@@ -54,6 +55,11 @@ get_priority (char *def, int *priority)
 		def++;
 
 	return def;
+}
+static void
+free_mime_info (MimeInfo *mi)
+{
+
 }
 static void
 add_to_key (char *mime_type, char *def, GHashTable *table)
@@ -221,7 +227,7 @@ mime_load_from_dir (const char *mime_info_dir, gboolean system_dir)
 	}
 	closedir (dir);
 }
-static void
+static int
 add_mime_vals_to_clist (gchar *mime_type, gpointer mi, gpointer cl)
 {
         /* we also finalize the MimeInfo structure here, now that we're done
@@ -266,6 +272,7 @@ add_mime_vals_to_clist (gchar *mime_type, gpointer mi, gpointer cl)
         row = gtk_clist_insert (GTK_CLIST (cl), 1, text);
         gtk_clist_set_row_data (GTK_CLIST (cl), row, mi);
         g_string_free (extension, TRUE);
+        return row;
 }
 
 static void
@@ -279,11 +286,35 @@ selected_row_callback (GtkWidget *widget, gint row, gint column, GdkEvent *event
         
         if (event && event->type == GDK_2BUTTON_PRESS)
                 launch_edit_window (mi);
+        if (g_hash_table_lookup (user_mime_types, mi->mime_type)) {
+                gtk_widget_set_sensitive (delete_button, TRUE);
+        } else
+                gtk_widget_set_sensitive (delete_button, FALSE);
 }
 
 /* public functions */
 void
-edit_clicked ()
+delete_clicked (GtkWidget *widget, gpointer data)
+{
+        MimeInfo *mi;
+        gint row = 0;
+
+        if (GTK_CLIST (clist)->selection)
+                row = GPOINTER_TO_INT ((GTK_CLIST (clist)->selection)->data);
+        else
+                return;
+        mi = (MimeInfo *) gtk_clist_get_row_data (GTK_CLIST (clist), row);
+
+        gtk_clist_remove (GTK_CLIST (clist), row);
+        g_hash_table_remove (user_mime_types, mi->mime_type);
+        remove_mime_info (mi->mime_type);
+        free_mime_info (mi);
+        capplet_widget_state_changed (CAPPLET_WIDGET (capplet),
+                                      TRUE);
+}
+
+void
+edit_clicked (GtkWidget *widget, gpointer data)
 {
         MimeInfo *mi;
         gint row = 0;
@@ -328,6 +359,51 @@ get_mime_clist (void)
         gtk_container_add (GTK_CONTAINER (retval), clist);
         return retval;
 }
+
+static void
+finalize_mime_type_foreach (gpointer mime_type, gpointer info, gpointer data)
+{
+        MimeInfo *mi = (MimeInfo *)info;
+        GList *list;
+        GString *extension;
+        gint row;
+        
+        extension = g_string_new ("");
+        for (list = ((MimeInfo *) mi)->ext[0];list; list=list->next) {
+                g_string_append (extension, (gchar *) list->data);
+                if (list->next != NULL)
+                        g_string_append (extension, ", ");
+        }
+        ((MimeInfo *) mi)->ext_readable[0] = extension->str;
+        g_string_free (extension, FALSE);
+        
+        extension = g_string_new ("");
+        for (list = ((MimeInfo *) mi)->ext[1];list; list=list->next) {
+                g_string_append (extension, (gchar *) list->data);
+                if (list->next)
+                        g_string_append (extension, ", ");
+        }
+        ((MimeInfo *) mi)->ext_readable[1] = extension->str;
+        g_string_free (extension, FALSE);
+
+        if (((MimeInfo *) mi)->ext[0]) {
+                extension = g_string_new ((((MimeInfo *) mi)->ext_readable[0]));
+                if (((MimeInfo *) mi)->ext[1]) {
+                        g_string_append (extension, ", ");
+                        g_string_append (extension, (((MimeInfo *) mi)->ext_readable[1]));
+                }
+        } else if (((MimeInfo *) mi)->ext[1])
+                extension = g_string_new ((((MimeInfo *) mi)->ext_readable[1]));
+        else
+                extension = g_string_new ("");
+        g_string_free (extension, TRUE);
+}
+static void
+finalize_user_mime ()
+{
+        g_hash_table_foreach (user_mime_types, finalize_mime_type_foreach, NULL);
+        g_hash_table_foreach (initial_user_mime_types, finalize_mime_type_foreach, NULL);
+}
 void
 init_mime_type (void)
 {
@@ -344,21 +420,21 @@ init_mime_type (void)
 	mime_info_dir = g_concat_dir_and_file (gnome_util_user_home (), ".gnome/mime-info");
 	mime_load_from_dir (mime_info_dir, FALSE);
 	g_free (mime_info_dir);
+        finalize_user_mime ();
         init_mime_info ();
 }
 void
 add_new_mime_type (gchar *mime_type, gchar *ext, gchar *regexp1, gchar *regexp2)
 {
         gchar *temp;
-        MimeInfo *mi;
+        MimeInfo *mi = NULL;
+        gint row;
         /* first we make sure that the information is good */
-
         /* passed check, now we add it. */
         if (ext) {
                 temp = g_strconcat ("ext: ", ext, NULL);
                 add_to_key (mime_type, temp, user_mime_types);
                 mi = (MimeInfo *) g_hash_table_lookup (user_mime_types, mime_type);
-                mi->ext_readable[0] = g_strdup (ext);
                 g_free (temp);
         }
         if (regexp1) {
@@ -371,13 +447,18 @@ add_new_mime_type (gchar *mime_type, gchar *ext, gchar *regexp1, gchar *regexp2)
                 add_to_key (mime_type, temp, user_mime_types);
                 g_free (temp);
         }
+        /* Finally add it to the clist */
+        if (mi) {
+                row = add_mime_vals_to_clist (mime_type, mi, clist);
+                gtk_clist_select_row (GTK_CLIST (clist), row, 0);
+                gtk_clist_moveto (GTK_CLIST (clist), row, 0, 0.5, 0.0);
+        }
 }
 static void
 write_mime_foreach (gpointer mime_type, gpointer info, gpointer data)
 {
 	gchar *buf;
 	MimeInfo *mi = (MimeInfo *) info;
-        g_print ("in write_mime_foreach:%s:\n", (gchar *) mime_type);
 	fwrite ((char *) mi->mime_type, 1, strlen ((char *) mi->mime_type), (FILE *) data);
 	fwrite ("\n", 1, 1, (FILE *) data);
         if (mi->ext_readable[0]) {
@@ -450,17 +531,49 @@ write_mime (GHashTable *hash)
 		return;
 	}
 	g_hash_table_foreach (hash, write_mime_foreach, file);
-	g_hash_table_foreach (hash, write_mime_foreach, file);
 	fclose (file);
 }
 
-void write_user_mime (void)
+void
+write_user_mime (void)
 {
         write_mime (user_mime_types);
 }
 
-void write_initial_mime (void)
+void
+write_initial_mime (void)
 {
         write_mime (initial_user_mime_types);
+}
+
+void
+reread_list ()
+{
+        gtk_clist_freeze (GTK_CLIST (clist));
+        gtk_clist_clear (GTK_CLIST (clist));
+        g_hash_table_foreach (mime_types, (GHFunc) add_mime_vals_to_clist, clist);
+        gtk_clist_thaw (GTK_CLIST (clist));
+}
+static void
+clean_mime_type (gpointer mime_type, gpointer mime_info, gpointer data)
+{
+        /* we should write this )-: */
+}
+void
+discard_mime_info ()
+{
+        gchar *filename;
+	g_hash_table_foreach (user_mime_types, clean_mime_type, NULL);
+	g_hash_table_destroy (user_mime_types);
+	g_hash_table_foreach (initial_user_mime_types, clean_mime_type, NULL);
+	g_hash_table_destroy (initial_user_mime_types);
+	user_mime_types = g_hash_table_new (g_str_hash, g_str_equal);
+        initial_user_mime_types = g_hash_table_new (g_str_hash, g_str_equal);
+        
+	filename = g_concat_dir_and_file (gnome_util_user_home (), "/.gnome/mime-info/user.keys");
+	mime_fill_from_file (filename, TRUE);
+        finalize_user_mime ();
+        reread_list ();
+	g_free (filename);
 }
 
