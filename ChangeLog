@@ -1,5 +1,10 @@
 2002-08-18  Pavel Roskin  <proski@gnu.org>
 
+	* lib/mc.ext.in: Try links before lynx.  Force full path when
+	invoking X11 browsers - it breaks VFS, but VFS support in mc.ext
+	is already broken if the program starts in background.  Add a
+	comment discouraging taking this code as example.
+
 	* doc/mc.1.in (Controlling Midnight Commander): Remove, it's
 	obsolete.
 	* doc/es/mc.1.in: Likewise.

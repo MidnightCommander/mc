@@ -280,11 +280,13 @@ type/^PDF
 	#Open=(ghostview %f &)
 	View=%view{ascii} pdftotext %f -
 
+# The following code very ugly and should not be taken as example.
+# It should be cleaned up when the new format of mc.ext is developed.
+
 # html
 regex/\.([Hh]tml?|HTML?)$
-	#Open=if echo "%d/%p" | grep ^ftp; then $viewer %d/%p; else $viewer file:%p; fi
-	Open=if test -n "@X11_WWW@" && test -n "$DISPLAY"; then echo @X11_WWW@ %f; (@X11_WWW@ %f &) >/dev/null 2>&1; else lynx -force_html %f; fi
-	View=%view{ascii} lynx -dump -force_html %f
+	Open=if test -n "@X11_WWW@" && test -n "$DISPLAY"; then (@X11_WWW@ file://%d/%p &) >/dev/null 2>&1; else links %f || lynx -force_html %f; fi
+	View=%view{ascii} links -dump %f || lynx -dump -force_html %f
 
 # StarOffice and OpenOffice
 shell/.sdw
