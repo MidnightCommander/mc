@@ -17,7 +17,7 @@ uchar conv_displ[256];
 uchar conv_input[256];
 uchar printable[256];
 
-int load_codepages_list()
+int load_codepages_list(void)
 {
     int result = -1;
     FILE *f;
@@ -104,7 +104,7 @@ static char translate_character( iconv_t cd, char c )
     char outbuf[4], *obuf;
     size_t ibuflen, obuflen, count;
 
-    const char *ibuf = &c; 
+    char *ibuf = &c; 
     obuf = outbuf;
     ibuflen = 1; obuflen = 4;
 
@@ -126,7 +126,6 @@ char errbuf[255];
 char* init_printable_table( int cpdisplay )
 {
     int i;
-    uchar ch = (cpdisplay == CP_ASCII) ? 0 : 1;
 
     /* Fill printable characters table */
     for (i=0; i<=127; ++i)
@@ -143,7 +142,6 @@ char* init_translation_table( int cpsource, int cpdisplay )
 {
     int i;
     iconv_t cd;
-    uchar ch;
     char *cpsour, *cpdisp;
 
     /* Fill inpit <-> display tables */
@@ -186,6 +184,7 @@ char* init_translation_table( int cpsource, int cpdisplay )
     }
 
     for (i=128; i<=255; ++i) {
+	uchar ch;
 	ch = translate_character( cd, i );
 	conv_input[i] = (ch == UNKNCHAR) ? i : ch;
     }

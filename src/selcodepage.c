@@ -9,6 +9,7 @@
 #include "widget.h"
 #include "wtools.h"
 #include "charsets.h"
+#include "selcodepage.h"
 #include "main.h"
 
 #define ENTRY_LEN 35
@@ -17,7 +18,7 @@
 int source_codepage = -1;
 int display_codepage = -1;
 
-unsigned char get_hotkey( int n )
+static unsigned char get_hotkey( int n )
 {
     return (n <= 9) ? '0' + n : 'a' + n - 10;
 }
@@ -66,7 +67,7 @@ int select_charset( int current_charset, int seldisplay )
 /* Helper functions for codepages support */
 
 
-int do_select_codepage()
+int do_select_codepage(void)
 {
 #ifndef HAVE_ICONV
 

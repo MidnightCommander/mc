@@ -1,5 +1,10 @@
 2001-07-31  Pavel Roskin  <proski@gnu.org>
 
+	* charsets.c: Warning fixes.
+	* charsets.h: Likewise.
+	* selcodepage.c: Likewise.
+	* selcodepage.h: Likewise.
+
 	* Makefile.in: Move most logic around gindex.pl into gindex.pl.
 	Don't use maintainer-only rules since mc.hlp won't be removed
 	now if perl is missing or gindex.pl fails.
