@@ -205,6 +205,8 @@
 #undef HAVE_GETTEXT
 #undef HAVE_LC_MESSAGES
 
+#undef WITH_SMBFS
+
 @BOTTOM@
 
 #ifdef HAVE_LIBPT

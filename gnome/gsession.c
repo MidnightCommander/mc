@@ -140,13 +140,17 @@ idle_create_default_panel (gpointer data)
 
 /* Queues the creation of the default panel */
 static void
-create_default_panel (void)
+create_default_panel (const char *startup_dir)
 {
 	char buf[MC_MAXPATHLEN];
+	char *dir = buf;
 
-	mc_get_current_wd (buf, MC_MAXPATHLEN);
-
-	gtk_idle_add_priority (GTK_PRIORITY_DEFAULT + 1, idle_create_default_panel, g_strdup (buf));
+	if (startup_dir == NULL)
+		mc_get_current_wd (buf, MC_MAXPATHLEN);
+	else
+		dir = startup_dir;
+	
+	gtk_idle_add_priority (GTK_PRIORITY_DEFAULT + 1, idle_create_default_panel, g_strdup (dir));
 }
 
 /* Callback from the master client to save the session */
@@ -226,7 +230,7 @@ session_load (void)
 		filename = gnome_client_get_config_prefix (master_client);
 		load_session_info (filename);
 	} else if (!nowindows)
-		create_default_panel ();
+		create_default_panel (this_dir);
 }
 
 /**

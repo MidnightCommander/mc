@@ -21,7 +21,7 @@ AR = @AR@
 #
 # VFS code
 #
-NETFILES   = tcputil.o fish.o ftpfs.o smbfs.o mcfs.o utilvfs.o
+NETFILES   = tcputil.o fish.o ftpfs.o @smbfs@ mcfs.o utilvfs.o
 
 SAMBAFILES=         \
     samba/param/loadparm.o  \

@@ -794,7 +794,7 @@ create_container (Dlg_head *h, char *name, char *geometry)
 }
 
 WPanel *
-new_panel_with_geometry_at (char *dir, char *geometry)
+new_panel_with_geometry_at (const char *dir, const char *geometry)
 {
 	WPanel *panel;
 
@@ -810,7 +810,7 @@ new_panel_with_geometry_at (char *dir, char *geometry)
 }
 
 WPanel *
-new_panel_at (char *dir)
+new_panel_at (const char *dir)
 {
 	return new_panel_with_geometry_at (dir, NULL);
 }

@@ -967,6 +967,7 @@ vfs_file_is_ftp (char *filename)
 #endif
 }
 
+#ifdef WITH_SMBFS
 int
 vfs_file_is_smb (char *filename)
 {
@@ -981,6 +982,13 @@ vfs_file_is_smb (char *filename)
     return 0;
 #endif
 }
+#else
+int
+vfs_file_is_smb (char *filename)
+{
+	return 0;
+}
+#endif
 
 char *vfs_get_current_dir (void)
 {
@@ -1205,7 +1213,9 @@ vfs_init (void)
 #ifdef USE_NETCODE
     tcp_init();
     vfs_register (&vfs_ftpfs_ops);
+#ifdef WITH_SMBFS
     vfs_register (&vfs_smbfs_ops);
+#endif
     vfs_register (&vfs_mcfs_ops);
 #endif
 

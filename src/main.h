@@ -133,6 +133,9 @@ void do_update_prompt (void);
 extern char control_file [];
 extern char *shell;
 
+/* directory specified on command line for startup */
+extern char *this_dir;
+
 /* FIXME: remove this when using slang */
 extern const int status_using_ncurses;
 

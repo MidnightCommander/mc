@@ -468,7 +468,7 @@ idle_destroy_panel (gpointer data)
  * when we do not have a CORBA server.
  */
 static void
-non_corba_create_panels (void)
+non_corba_create_panels (char *startup_dir)
 {
 	WPanel *panel;
 
@@ -488,7 +488,7 @@ non_corba_create_panels (void)
 	 * at a higher priority than the one used in session_load().
 	 */
 
-	panel = new_panel_at (".");
+	panel = new_panel_at (startup_dir);
 	gtk_idle_add_priority (GTK_PRIORITY_DEFAULT, idle_destroy_panel, panel);
 	panel->widget.options |= W_PANEL_HIDDEN;
 
@@ -508,10 +508,10 @@ void
 create_panels (void)
 {
 	if (!corba_have_server)
-		non_corba_create_panels ();
+		non_corba_create_panels (this_dir ? this_dir : ".");
 	else {
 		if (!nowindows)
-			corba_create_window ();
+			corba_create_window (this_dir);
 
 		session_set_restart (FALSE);
 	}

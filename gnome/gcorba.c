@@ -16,6 +16,7 @@
 #include "gcorba.h"
 #include "global.h"
 #include "gmain.h"
+#include "main.h"
 
 /*** Global variables ***/
 
@@ -362,14 +363,18 @@ corba_init_server (void)
  * Creates a GMC window using a CORBA call to the server.
  **/
 void
-corba_create_window (void)
+corba_create_window (const char *startup_dir)
 {
 	CORBA_Environment ev;
 	char cwd[MC_MAXPATHLEN];
-
-	mc_get_current_wd (cwd, MC_MAXPATHLEN);
-
+	char *dir = cwd;
+	
+	if (this_dir == NULL)
+		mc_get_current_wd (cwd, MC_MAXPATHLEN);
+	else
+		dir = this_dir;
+	
 	CORBA_exception_init (&ev);
-	GNOME_FileManagerFactory_create_window (gmc_server, cwd, &ev);
+	GNOME_FileManagerFactory_create_window (gmc_server, startup_dir, &ev);
 	CORBA_exception_free (&ev);
 }
