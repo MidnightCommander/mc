@@ -475,6 +475,7 @@ extern char *re_comp _RE_ARGS ((const char *));
 extern int re_exec _RE_ARGS ((const char *));
 #endif
 
+#if 0
 /* POSIX compatibility.  */
 extern int regcomp _RE_ARGS ((regex_t *preg, const char *pattern, int cflags));
 extern int regexec
@@ -484,6 +485,7 @@ extern size_t regerror
   _RE_ARGS ((int errcode, const regex_t *preg, char *errbuf,
              size_t errbuf_size));
 extern void regfree _RE_ARGS ((regex_t *preg));
+#endif
 
 #endif /* not __REGEXP_LIBRARY_H__ */
 

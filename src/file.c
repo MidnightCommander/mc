@@ -82,7 +82,7 @@
 #include <time.h>
 #include <utime.h>
 #include "mad.h"
-#include "regex.h"
+#include "eregex.h"
 #include "util.h"
 #include "dialog.h"
 #include "global.h"

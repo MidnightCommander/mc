@@ -79,7 +79,7 @@
 #    	 endif
 #    endif
  
-#    include "regex.h"
+#    include <regex.h>
 
 #endif
 
@@ -123,7 +123,7 @@
 #    include "src/win.h"
 #    include "vfs/vfs.h"
 #    include "src/menu.h"
-#    include "src/regex.h"
+#    include <regex.h>
 #    define WANT_WIDGETS
      
 #    define WIDGET_COMMAND (WIDGET_USER + 10)

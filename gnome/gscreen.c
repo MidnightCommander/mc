@@ -2399,7 +2399,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 				   evbox,
 				   NULL, NULL);
 	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("Location:")), FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), cwd, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), cwd, TRUE, TRUE, 0);
 	dock =  gnome_dock_item_new ("gmc-toolbar1", GNOME_DOCK_ITEM_BEH_EXCLUSIVE | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
 	gtk_container_add (GTK_CONTAINER(dock),status_line);
 	gnome_dock_add_item (GNOME_DOCK(GNOME_APP (panel->xwindow)->dock),

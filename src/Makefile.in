@@ -32,7 +32,7 @@ HDRS =	color.h file.h mouse.h user.h dialog.h find.h main.h		\
 	help.h profile.h dlg.h option.h tree.h info.h			\
 	widget.h chmod.h cons.saver.h mad.h wtools.h chown.h		\
 	subshell.h view.h setup.h key.h ext.h boxes.h			\
-	hotlist.h layout.h fsusage.h mountlist.h regex.h complete.h	\
+	hotlist.h layout.h fsusage.h mountlist.h eregex.h complete.h	\
 	myslang.h command.h cmd.h tty.h fs.h panelize.h achown.h	\
 	learn.h listmode.h features.inc background.h			\
 	x.h textconf.h i18n.h findme.h popt.h filegui.h keys.h xtty.h	\
