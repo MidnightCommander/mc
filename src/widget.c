@@ -840,9 +840,24 @@ update_input (WInput *in, int clear_first)
 
     attrset (in->color);
     
+#ifdef HAVE_SLANG
+    /*
+     * acs() and noacs() here are a workaround for what seems to be
+     * a bug in SLang 1.x (up to 1.4.4, but not in 0.99.38). Without
+     * them, the first dialog box to appear may have part of its
+     * frame displayed in ASCII characters instead of line drawing
+     * characters. Subshell support and color terminal are needed for
+     * the bug to show up.
+     */
+    acs ();
+    SLsmg_fill_region (in->widget.y, in->widget.x,
+		       1, in->field_len - has_history, ' ');
+    noacs ();
+#else
     widget_move (&in->widget, 0, 0);
     for (i = 0; i < in->field_len - has_history; i++)
 	addch (' ');
+#endif
     widget_move (&in->widget, 0, 0);
     
     for (i = 0, j = in->first_shown; i < in->field_len - has_history && in->buffer [j]; i++){

@@ -1,3 +1,8 @@
+2001-05-24  Pavel Roskin  <proski@gnu.org>
+
+	* widget.c (update_input) [HAVE_SLANG]: Work around a bug in
+	SLang 1.x - set charset to alternative when printing spaces.
+
 2001-05-22  Pavel Roskin  <proski@gnu.org>
 
 	* ext.c (exec_extension): Use g_free() on the result of
