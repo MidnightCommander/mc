@@ -3,11 +3,12 @@ dnl
 dnl Adjust the CPPFLAGS, CFLAGS and CXXFLAGS for various GCC versions
 
 AC_DEFUN([ri_GCC_WARNINGS],
-  [AC_ARG_ENABLE([gcc-warnings],
-    [AC_HELP_STRING([--enable-gcc-warnings[[[[=error]]]]],
-                    [enable additional gcc warning flags])],
-[
+[AC_ARG_ENABLE([gcc-warnings],
+               [AC_HELP_STRING([--enable-gcc-warnings[[[[=error]]]]],
+                               [enable additional gcc warning flags])])
+
 if test x"$GCC" = x"yes"; then
+if test x"$enable_gcc_warnings" = x"yes" -o x"$enable_gcc_warnings" = x"error"; then
   ri_gcc_main=`echo __GNUC__ | $CPP -E - | grep -v ^\#`
   ri_gcc_minor=`echo __GNUC_MINOR__ | $CPP -E - | grep -v ^\#`
   
@@ -78,5 +79,5 @@ if test x"$GCC" = x"yes"; then
   CFLAGS="$ri_bothflags $ri_cflags $CFLAGS"
   CXXFLAGS="$ri_bothflags $ri_cxxflags $CXXFLAGS"
 fi
-
-])])
+fi
+])
