@@ -141,7 +141,7 @@ mcfs_login_server (int my_socket, char *user, int port,
 			      (" The remote server is not running on a system port \n"
 			       " you need a password to log in, but the information may \n"
 			       " not be safe on the remote side.  Continue? \n"),
-			      3, 2, _(" Yes "), _(" No "));
+			      3, 2, _("&Yes"), _("&No"));
 
 	    if (v == 1) {
 		close (my_socket);
