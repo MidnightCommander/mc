@@ -11,6 +11,8 @@
    to achieve   |  Normal use  |  Inside tag (tag, em, tt, etc.)  |  Verbatim
      [		     &lsqb;            &lsqb;                          [
      ]		     &rsqb;            &rsqb;                          ]
+     {               &lcub;            &lcub;                        &lcub;
+     }               &rcub;            &rcub;                        &rcub;
      \               &bsol;            &bsol;                        &bsol;
      <               &lt;              &lt;                            <
      >               &gt;              &gt;                            >
@@ -82,12 +84,12 @@ files @prefix@/lib/mc/bin/mc.sh (bash and zsh users) respectively
 @prefix@/lib/mc/bin/mc.csh (tcsh users) instead. This way you will not
 need to change your profiles if the function definitions are improved,
 provided that you don't compile MC with a different prefix.
-<tscreen><verb>
 
 bash and zsh users:
 
+<tscreen><verb>
 mc ()
-{
+&lcub;
         mkdir -p ~/.mc/tmp 2> /dev/null
 	chmod 700 ~/.mc/tmp
 	MC=~/.mc/tmp/mc$$-"$RANDOM"
@@ -95,12 +97,15 @@ mc ()
         cd "`cat $MC`"
         rm "$MC"
         unset MC;
-}
-
-tcsh usres:
-alias mc 'setenv MC `@prefix@/bin/mc -P \!*`; cd $MC; unsetenv MC'
-
+&rcub;
 </verb></tscreen>
+
+tcsh users:
+
+<tscreen><verb>
+alias mc 'setenv MC `@prefix@/bin/mc -P \!*`; cd $MC; unsetenv MC'
+</verb></tscreen>
+
 I know the bash function could be shorter for zsh and bash but the
 backquotes on bash won't accept your suspension the program with
 C-z. The temporary file is created in the private directory ~/.mc/tmp 
@@ -338,7 +343,7 @@ If <em/Shell Patterns/ is off, then the tagging of files is done with
 normal regular expressions (see <bf/ed (1)/).
 If the expression starts or ends with a slash (<tt>/</tt>), then it
 will select directories instead of files.
-<tag/&bsol; (backslash)/ Use the "&bsol;" key to unselect a group of
+<tag/&bsol; (backslash)/ Use the <tt/&bsol;/ key to unselect a group of
 files. This is the opposite of the Plus key.
 <tag/up-key, C-p/ Move the selection bar to the previous entry
 in the panel.
@@ -357,14 +362,14 @@ currently selected directory (like Emacs' dired C-o key)
 otherwise the other panel contents are set to the parent
 dir of the current dir.
 <tag/C-PageUp, C-PageDown/ Only when ran on the Linux console:
-does a chdir to &dquot;..&dquot; and to the currently selected
+does a chdir to <tt/../ and to the currently selected
 directory respectively.
 <tag/M-y/ Moves to the previous directory in the history, equivalent 
-to depressing the '<' with the mouse.
+to depressing the <tt/&lt;/ with the mouse.
 <tag/M-u/ Moves to the next directory in the history, equivalent 
-to depressing the '>' with the mouse.
+to depressing the <tt/&gt;/ with the mouse.
 <tag/M-S-h, M-H/ Displays the directory history, equivalent to 
-depressing the 'v' with the mouse.
+depressing the <tt/v/ with the mouse.
 </descrip>
 
 <sect1>Shell Command Line<label id="Shell Command Line">
@@ -660,7 +665,7 @@ the <ref name="Internal File Viewer" id="Internal File Viewer"> but if the optio
 by the <tt/PAGER/ environment variable. If <tt/PAGER/ is undefined,
 the <bf/view/ command is invoked. If you use <tt/Shift-F3/
 instead, the viewer will be invoked without doing any
-formatting or pre processing to the file.
+formatting or preprocessing to the file.
 <tag/Filtered View (M-!)/ this command prompts for a command and it's arguments (the
 argument defaults to the currently selected file name),
 the output from such command is shown in the internal file
@@ -883,8 +888,8 @@ directory from the <ref name="directory tree" id="Directory Tree"> figure.
 
 The contents field accepts regular expressions similar to egrep(1). That
 means you have to escape characters with a special meaning to egrep with
-"&bsol;", e.g. if you search for "strcmp (" you will have to input 
-"strcmp &bsol;(" (without the double quotes).
+<tt/&bsol;/, e.g. if you search for <tt/strcmp (/ you will have to input 
+<tt/strcmp &bsol;(/ (without the double quotes).
 
 You can start the search by pressing the Ok button. During the search you 
 can stop from the Stop button and continue from the Start button.
@@ -947,7 +952,7 @@ command to extract the file name from the transfer log
 files:
 
 <tscreen><verb>
-awk '$9 ~! /incoming/ { print $9 }' < /usr/adm/xferlog
+awk '$9 ~! /incoming/ &lcub; print $9 &rcub;' < /usr/adm/xferlog
 </verb></tscreen>
 
 You may want to save often used panelize commands under a
@@ -998,8 +1003,7 @@ matches all the files *desc. Example: .tar matches *.tar)
 <em/regex/ (desc is a regular expression)
 
 <em/type/ (file matches this if `file &percnt;f` matches regular
-expression desc (the filename: part from `file &percnt;f` islatex cur
-removed))
+expression desc (the filename: part from `file &percnt;f` is removed))
 
 <em/default/ (matches any file no matter what desc is)
 
@@ -1085,7 +1089,7 @@ K	Make a release of the current subdirectory
 	read tar
 	ln -s %d `dirname %d`/$tar 
 	cd ..
-	tar cvhf ${tar}.tar $tar
+	tar cvhf $&lcub;tar&rcub;.tar $tar
 
 = f *.tar.gz | f *.tgz & t n
 X       Extract the contents of a compressed tar file
@@ -1125,7 +1129,7 @@ Pattern is a normal shell pattern or a regular expression,
 according to the shell patterns option. You can override
 the global value of the shell patterns option by writing
 <tt/shell_patterns=x/ on the first line of the menu file
-(where "x" is either 0 or 1).
+(where <tt/x/ is either 0 or 1).
 
 Type is one or more of the following characters:
 
@@ -1195,7 +1199,7 @@ lines must start with <tt/&num;/, space or tab.
 <p>
 The Midnight Commander has some options that may be toggled on and
 off in several dialogs which are accessible from this menu. Options 
-are enabled if they have an asterisk or "x" in front of them. 
+are enabled if they have an asterisk or <tt/x/ in front of them. 
 
 <p>
 The <ref name="Configuration" id="Configuration"> command pops up a dialog from which you
@@ -1232,7 +1236,7 @@ Pause after run and Other Options.
 
 <descrip>
 <tag/Show Backup Files/ By default the Midnight Commander
-doesn't show files ending in '&tilde;' (like GNU's <tt/ls/ option
+doesn't show files ending in <tt/&tilde;/ (like GNU's <tt/ls/ option
 <tt/-B/).
 <tag/Show Hidden Files/ By default the Midnight Commander will
 show all files that start with a dot (like <tt/ls -a/).
@@ -1296,8 +1300,8 @@ is disabled.
 <tag/Shell Patterns/ By default the Select, Unselect and Filter
 commands will use shell-like regular expressions. The
 following conversions are performed to achieve this: the
-'*' is replaced by '.*' (zero or more characters); the '?'
-is replaced by '.' (exactly one character) and '.' by the
+<tt/*/ is replaced by <tt/.*/ (zero or more characters); the <tt/?/
+is replaced by <tt/./ (exactly one character) and <tt/./ by the
 literal dot. If the option is disabled, then the regular
 expressions are the ones described in <bf/ed(1)/.
 <tag/Auto Save Setup/ If this option is enabled, when you exit
@@ -1378,7 +1382,7 @@ etc. work properly on your terminal. They often don't,
 since many terminal databases are broken.
 
 You can move around with the <bf/Tab/ key, with the <tt/vi/ moving
-keys ('h' left, 'j' down, 'k' up and 'l' right) and after
+keys (<tt/h/ left, <tt/j/ down, <tt/k/ up and <tt/l/ right) and after
 you press any arrow key once (this will mark it OK), then
 you can use that key as well.
 
@@ -1538,31 +1542,31 @@ it may not handle all of the nice macro expansion and
 substitution that your shell does, although it does some of
 them:
 
-<em/Tilde substitution/ The (&tilde;) will be substituted with your
+<em/Tilde substitution/ The tilde (<tt/&tilde;/) will be substituted with your
 home directory, if you append a username after the tilde,
 then it will be substituted with the login directory of
 the the specified user.
 
-For example, &tilde;guest is the home directory for the user
-guest, while &tilde;/guest is the directory guest in your home
+For example, <tt>&tilde;guest</tt> is the home directory for the user
+guest, while <tt>&tilde;/guest</tt> is the directory guest in your home
 directory.
 
 <em/Previous directory/ You can jump to the directory you were
-previously by using the special directory name '-' like
+previously by using the special directory name <tt/-/ like
 this: <tt/cd -/
 
-<em/CDPATH directories/ If the directory specified to the <tt/cd /
+<em/CDPATH directories/ If the directory specified to the <tt/cd/
 command is not in the current directory, then The Midnight
 Commander uses the value in the environment variable
 <tt/CDPATH/ to search for the directory in any of the named
 directories.
 
 For example you could set your <tt/CDPATH/ variable to
-&tilde;/src:/usr/src, allowing you to change your directory to
-any of the directories inside the &tilde;/src and /usr/src
+<tt>&tilde;/src:/usr/src</tt>, allowing you to change your directory to
+any of the directories inside the <tt>&tilde;/src</tt> and <tt>/usr/src</tt>
 directories, from any place in the file system by using
 it's relative name (for example cd linux could take you to
-/usr/src/linux).
+<tt>/usr/src/linux</tt>).
 
 <sect1>Macro Substitution<label id="Macro Substitution">
 
@@ -1574,56 +1578,56 @@ line input, a simple macro substitution takes place.
 
 The macros are:
 
-<em/"&percnt;i"/ The indent of blank space, equal the cursor column 
-position. For edit menu only.
-
-<em/"&percnt;y"/ The syntax type of current file. For edit menu only.
-
-<em/"&percnt;k"/ The block file name.
-
-<em/"&percnt;e"/ The error file name.
-
-<em/"&percnt;m"/ The current menu name.
-
-<em/"&percnt;f"/ The current file name.
-
-<em/"&percnt;n"/ Only the current file name without extension.
-
-<em/"&percnt;x"/ The extension of current file name.
-
-<em/"&percnt;d"/ The current directory name.
-
-<em/"&percnt;F"/ The current file in the unselected panel.
-
-<em/"&percnt;D"/ The directory name of the unselected panel.
-
-<em/"&percnt;t"/ The currently tagged files.
-
-<em/"&percnt;T"/ The tagged files in the unselected panel.
-
 <descrip>
 
-<tag/"&percnt;u"/ and <em/"&percnt;U"/ Similar to the &percnt;t and &percnt;T macros, but in
+<tag/&percnt;i/ The indent of blank space, equal the cursor column 
+position. For edit menu only.
+
+<tag/&percnt;y/ The syntax type of current file. For edit menu only.
+
+<tag/&percnt;k/ The block file name.
+
+<tag/&percnt;e/ The error file name.
+
+<tag/&percnt;m/ The current menu name.
+
+<tag/&percnt;f/ The current file name.
+
+<tag/&percnt;n/ Only the current file name without extension.
+
+<tag/&percnt;x/ The extension of current file name.
+
+<tag/&percnt;d/ The current directory name.
+
+<tag/&percnt;F/ The current file in the unselected panel.
+
+<tag/&percnt;D/ The directory name of the unselected panel.
+
+<tag/&percnt;t/ The currently tagged files.
+
+<tag/&percnt;T/ The tagged files in the unselected panel.
+
+<tag/&percnt;u and &percnt;U/ Similar to the <tt/&percnt;t/ and <tt/&percnt;T/ macros, but in
 addition the files are untagged. You can use this macro
 only once per menu file entry or extension file entry,
 because next time there will be no tagged files.
 
-<tag/"&percnt;s"/ and <em/"&percnt;S"/ The selected files: The tagged files if
+<tag/&percnt;s and &percnt;S/ The selected files: The tagged files if
 there are any. Otherwise the current file.
 
-<tag/"&percnt;q"/ Dropped files. In all places except in the Drop
+<tag/&percnt;q/ Dropped files. In all places except in the Drop
 action of the <ref name="mc.ext file" id="Extension File Edit">, this will become a null
 string, in the Drop action it will be replaced with a
 space separated list of files that were dropped on the
 file.
 
-<tag/"&percnt;cd"/ This is a special macro that is used to change the
+<tag/&percnt;cd/ This is a special macro that is used to change the
 current directory to the directory specified in front of
 it. This is used primarily as an interface to the <ref name="Virtual
 File System" id="Virtual File System">.
 Possible to use only in mc.ext .
 
-<tag/"&percnt;view"/ This macro is used to invoke the internal viewer.
+<tag/&percnt;view/ This macro is used to invoke the internal viewer.
 This macro can be used alone, or with arguments. If you
 pass any arguments to this macro, they should be enclosed
 in brackets. The arguments are: <em/ascii/ to force the viewer
@@ -1634,9 +1638,9 @@ viewer to not interpret nroff commands for making the text
 bold or underlined.
 Possible to use only in mc.ext .
 
-<tag/"&percnt;&percnt;"/ The &percnt; character
+<tag/&percnt;&percnt;/ The <tt/&percnt;/ character
 
-<tag/"&percnt;{some text}"/ Prompt for the substitution. An input box
+<tag/&percnt;&lcub;some text&rcub;/ Prompt for the substitution. An input box
 is shown and the text inside the braces is used as a
 prompt. The macro is substituted by the text typed by the
 user. The user can press ESC or F10 to cancel. This macro
@@ -1869,32 +1873,32 @@ will be respected.
 
 <tag/Use shell patterns on/
 
-When the shell patterns option is on you can use the '*'
-and '?' wildcards in the source mask. They work like they
-do in the shell. In the target mask only the '*' and
-'&bsol;&lt;digit&gt;' wildcards are allowed. The first '*' wildcard in
+When the shell patterns option is on you can use the <tt/*/
+and <tt/?/ wildcards in the source mask. They work like they
+do in the shell. In the target mask only the <tt/*/ and
+<tt/&bsol;&lt;digit&gt;/ wildcards are allowed. The first <tt/*/ wildcard in
 the target mask corresponds to the first wildcard group in
-the source mask, the second '*' corresponds to the second
-group and so on. The '&bsol;1' wildcard corresponds to the
-first wildcard group in the source mask, the '&bsol;2' wildcard
+the source mask, the second <tt/*/ corresponds to the second
+group and so on. The <tt/&bsol;1/ wildcard corresponds to the
+first wildcard group in the source mask, the <tt/&bsol;2/ wildcard
 corresponds to the second group and so on all the way up
-to '&bsol;9'. The '&bsol;0' wildcard is the whole filename of the
+to <tt/&bsol;9/. The <tt/&bsol;0/ wildcard is the whole filename of the
 source file.
 
 Two examples:
 
-If the source mask is "*.tar.gz", the destination is
-"/bla/*.tgz" and the file to be copied is "foo.tar.gz",
-the copy will be "foo.tgz" in "/bla".
+If the source mask is <tt/*.tar.gz/, the destination is
+<tt>/bla/*.tgz</tt> and the file to be copied is <tt/foo.tar.gz/,
+the copy will be <tt/foo.tgz/ in <tt>/bla</tt>.
 
 Let's suppose you want to swap basename and extension so
-that "file.c" will become "c.file" and so on. The source
-mask for this is "*.*" and the destination is "&bsol;2.&bsol;1".
+that <tt/file.c/ will become <tt/c.file/ and so on. The source
+mask for this is <tt/*.*/ and the destination is <tt/&bsol;2.&bsol;1/.
 
 <tag/Use shell patterns off/
 
 When the shell patterns option is off the MC doesn't do
-automatic grouping anymore. You must use '&bsol;(...&bsol;)'
+automatic grouping anymore. You must use <tt/&bsol;(...&bsol;)/
 expressions in the source mask to specify meaning for the
 wildcards in the target mask. This is more flexible but
 also requires more typing. Otherwise target masks are
@@ -1903,37 +1907,37 @@ on.
 
 Two examples:
 
-If the source mask is "^&bsol;(.*&bsol;)&bsol;.tar&bsol;.gz&dollar;", the destination
-is "/bla/*.tgz" and the file to be copied is "foo.tar.gz",
-the copy will be "/bla/foo.tgz".
+If the source mask is <tt/^&bsol;(.*&bsol;)&bsol;.tar&bsol;.gz&dollar;/, the destination
+is <tt>/bla/*.tgz</tt> and the file to be copied is <tt/foo.tar.gz/,
+the copy will be <tt>/bla/foo.tgz</tt>.
 
 Let's suppose you want to swap basename and extension so
-that "file.c" will become "c.file" and so on. The source
-mask for this is "^&bsol;(.*&bsol;)&bsol;.&bsol;(.*&bsol;)&dollar;" and the destination is
-"&bsol;2.&bsol;1".
+that <tt/file.c/ will become <tt/c.file/ and so on. The source
+mask for this is <tt/^&bsol;(.*&bsol;)&bsol;.&bsol;(.*&bsol;)&dollar;/ and the destination is
+<tt/&bsol;2.&bsol;1/.
 
 <tag/Case Conversions/
 
 You can also change the case of the filenames. If you use
-'&bsol;u' or '&bsol;l' in the target mask the next character will be
+<tt/&bsol;u/ or <tt/&bsol;l/ in the target mask the next character will be
 converted to uppercase or lowercase correspondingly.
 
-If you use '&bsol;U' or '&bsol;L' in the target mask the next
+If you use <tt/&bsol;U/ or <tt/&bsol;L/ in the target mask the next
 characters will be converted to uppercase or lowercase
-correspondingly up to the next '&bsol;E' or next '&bsol;U', '&bsol;L' or
+correspondingly up to the next <tt/&bsol;E/ or next <tt/&bsol;U/, <tt/&bsol;L/ or
 the end of the file name.
 
-The '&bsol;u' and '&bsol;l' are stronger than '&bsol;U' and '&bsol;L'.
+The <tt/&bsol;u/ and <tt/&bsol;l/ are stronger than <tt/&bsol;U/ and <tt/&bsol;L/.
 
-For example, if the source mask is '*' (shell patterns on)
-or '^&bsol;(.*&bsol;)&dollar;' (shell patterns off) and the target mask is
-'&bsol;L&bsol;u*' the file names will be converted to have initial
+For example, if the source mask is <tt/*/ (shell patterns on)
+or <tt/^&bsol;(.*&bsol;)&dollar;/ (shell patterns off) and the target mask is
+<tt/&bsol;L&bsol;u*/ the file names will be converted to have initial
 upper case and otherwise lower case.
 
 </descrip>
 
-You can also use '&bsol;' as a quote character. For example,
-'&bsol;&bsol;' is a backslash and '&bsol;*' is an asterisk.
+You can also use <tt/&bsol;/ as a quote character. For example,
+<tt/&bsol;&bsol;/ is a backslash and <tt/&bsol;*/ is an asterisk.
 
 <sect>Internal File Viewer<label id="Internal File Viewer">
 
@@ -2076,8 +2080,8 @@ and <bf>sprintf</bf> man pages to see what a <bf>format string</bf>
 is and how it works. An example is as follows: Suppose I want 
 to replace all occurrences of say, an open bracket, three 
 comma separated numbers, and a close bracket, with the 
-word &dquot;apples&dquot;, the third number, the word 
-&dquot;oranges&dquot; and then the second number, I would 
+word <tt/apples/, the third number, the word 
+<tt/oranges/ and then the second number, I would 
 fill in the <bf>Replace</bf> dialog 
 box as follows:
 
@@ -2278,7 +2282,7 @@ you specify the <em/user/ element then the Midnight Commander
 will try to logon on the remote machine as that user,
 otherwise it will use your login name.
 
-The <em/options/ are 'C' - use compression and 'rsh' use rsh instead
+The <em/options/ are <tt/C/ - use compression and <tt/rsh/ use rsh instead
 of ssh. If the <em/remote-dir/ element is present, your current
 directory on the remote machine will be set to this one.
 
@@ -2450,7 +2454,7 @@ sockets; <em/core/ is for core files.
 The possible colors are: black, gray, red, brightred, green,
 brightgreen, brown, yellow, blue, brightblue, magenta,
 brightmagenta, cyan, brightcyan, lightgray and white. An there is a special
-keyword for transparent background. It is 'default'. The 'default' can only
+keyword for transparent background. It is <em/default/. The <em/default/ can only
 be used for background color. Example:
 
 <tscreen><verb>
@@ -2472,7 +2476,7 @@ These variables may be set in your <tt>&tilde;/.mc/ini</tt> file:
 <tag/clear_before_exec/ By default the Midnight Commander
 clears the screen before executing a command. If you would
 prefer to see the output of the command at the bottom of
-the screen, edit your &tilde;/mc.ini file and change the value
+the screen, edit your <tt>&tilde;/.mc/ini</tt> file and change the value
 of the field clear_before_exec to 0.
 <tag/confirm_view_dir/ If you press <tt/F3/ on a directory, normally
 MC enters that directory. If this flag is set to 1, then
@@ -2510,7 +2514,7 @@ prefix key for one second, and if no extra keys have
 arrived, then the <tt/ESC/ key is interpreted as a cancel key
 (<tt/ESC ESC/).
 <tag/only_leading_plus_minus/
-set special treatment for '+', '-', '*' in command line (select,
+set special treatment for <tt/+/, <tt/-/, <tt/*/ in command line (select,
 unselect, reverse selection) only if command line is empty. No need to
 quote this characters in the middle of the command line. But we can not
 change selection when command line is not empty.
@@ -2554,12 +2558,12 @@ terminal database without requiring root privileges. The
 Midnight Commander searches in the system initialization
 file (the mc.lib file located in the Midnight Commander
 library directory) or in the <tt>&tilde;/.mc/ini</tt> file for the
-section "terminal:your-terminal-name" and then for the
-section "terminal:general", each line of the section
+section <tt/terminal:your-terminal-name/ and then for the
+section <tt/terminal:general/, each line of the section
 contains a key symbol that you want to define, followed by
 an equal sign and the definition for the key. You can use
-the special &bsol;E form to represent the escape character and
-the ^x to represent the control-x character.
+the special <tt/&bsol;E/ form to represent the escape character and
+the <tt/^x/ to represent the <tt/control-x/ character.
 
 The possible key symbols are:
 
@@ -2640,27 +2644,27 @@ The full key list of the help viewer:
 <tag>@prefix@/lib/mc.hlp</tag> The help file for the program.
 <tag>@prefix@/lib/mc/mc.ext</tag> The default system-wide extensions
 file.
-<tag><tt>&tilde;/.mc/ext</tt></tag> User's own extension, view configuration and
+<tag>&tilde;/.mc/ext</tag> User's own extension, view configuration and
 edit configuration file. They override the contents of the
 system wide files if present.
 <tag>@prefix@/lib/mc/mc.ini</tag> The default system-wide setup for
 the Midnight Commander, used only if the user lacks his
-own &tilde;/.mc/ini file.
+own <tt>&tilde;/.mc/ini</tt> file.
 <tag>@prefix@/lib/mc/mc.lib</tag> Global settings for the Midnight
 Commander. Settings in this file are global to any
 Midnight Commander, it is useful to define site-global
 terminal settings.
-<tag><tt>&tilde;/.mc/ini</tt></tag> User's own setup. If this file is present
+<tag>&tilde;/.mc/ini</tag> User's own setup. If this file is present
 then the setup is loaded from here instead of the
 system-wide startup file.
 <tag>@prefix@/lib/mc/mc.hint</tag> This file contains the hints
 (cookies) displayed by the program.
 <tag>@prefix@/lib/mc/mc.menu</tag> This file contains the default
 system-wide applications menu.
-<tag><tt>&tilde;/.mc/menu</tt></tag> User's own application menu. If this file
+<tag>&tilde;/.mc/menu</tag> User's own application menu. If this file
 is present it is used instead of the system-wide
 applications menu.
-<tag><tt>&tilde;/.mc/tree</tt></tag> The directory list for the directory tree
+<tag>&tilde;/.mc/tree</tag> The directory list for the directory tree
 and tree view features. Each line is one entry. The lines
 starting with a slash are full directory names. The lines
 starting with a number have that many characters equal to

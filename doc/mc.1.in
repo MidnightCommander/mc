@@ -853,7 +853,7 @@ environment variable. If
 .B PAGER
 is undefined, the "view" command is invoked.  If you use Shift-F3
 instead, the viewer will be invoked without doing any formatting or
-pre processing to the file.
+preprocessing to the file.
 .PP
 .B Filtered View (M-!)
 .PP

@@ -1,5 +1,10 @@
 2000-08-17  Pavel Roskin  <proski@gnu.org>
 
+	* doc/mc.sgml: Curly braces replaced with &lcub; and &rcub;
+	Fixed all misuses of single and double quotes. Typo fixes.
+	Ensured compatability with sgml2html, sgml2txt and sgml2latex
+	* doc/mc.1.in: Typo fix
+
 	* doc/mc.sgml: made compatible with sgml-tools 1.0.9
 	* doc/linuxdoc-sgml.diff: removed
 	* doc/Makefile.in: don't distribute linuxdoc-sgml.diff,
