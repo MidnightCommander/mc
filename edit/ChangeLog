@@ -1,3 +1,13 @@
+2001-12-22  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* syntax.c (read_one_line): Undo last patch - errno is a
+	function on some systems.  Check ferror() status before
+	everithing else if fgetc returns EOF.
+	Accept last line without trailing newline.
+
+	(compare_word_to_right): Don't cast p and q to unsigned long.
+	(apply_rules_going_right): Likewise.
+
 2001-12-21  Pavel Roskin  <proski@gnu.org>
 
 	* edit.c (user_menu): Don't move the cursor before and after

@@ -82,7 +82,7 @@ static long compare_word_to_right (WEdit * edit, long i, char *text, char *whole
     if (whole_left)
 	if (strchr (whole_left, c))
 	    return -1;
-    for (p = (unsigned char *) text, q = p + strlen ((char *) p); (unsigned long) p < (unsigned long) q; p++, i++) {
+    for (p = (unsigned char *) text, q = p + strlen ((char *) p); p < q; p++, i++) {
 	switch (*p) {
 	case '\001':
 	    p++;
@@ -243,7 +243,7 @@ static inline struct syntax_rule apply_rules_going_right (WEdit * edit, long i, 
 	    struct key_word *k;
 	    int count;
 	    long e;
-	    count = (unsigned long) p - (unsigned long) r->keyword_first_chars;
+	    count = p - r->keyword_first_chars;
 	    k = r->keyword[count];
 	    e = compare_word_to_right (edit, i, k->keyword, k->whole_word_chars_left, k->whole_word_chars_right, k->line_start);
 	    if (e > 0) {
@@ -310,7 +310,7 @@ static inline struct syntax_rule apply_rules_going_right (WEdit * edit, long i, 
 	    struct key_word *k;
 	    int count;
 	    long e;
-	    count = (unsigned long) p - (unsigned long) r->keyword_first_chars;
+	    count = p - r->keyword_first_chars;
 	    k = r->keyword[count];
 	    e = compare_word_to_right (edit, i, k->keyword, k->whole_word_chars_left, k->whole_word_chars_right, k->line_start);
 	    if (e > 0) {
@@ -401,13 +401,15 @@ static int read_one_line (char **line, FILE * f)
 #else
     p = syntax_malloc (len);
 #endif
-    errno = 0;
+
     for (;;) {
 	c = fgetc (f);
-	if (errno == EINTR)
-	    continue;
 	if (c == EOF) {
-	    r = 0;
+	    if (ferror (f)) {
+		if (errno == EINTR)
+		    continue;
+		r = 0;
+	    }
 	    break;
 	} else if (c == '\n') {
 	    r = i + 1;		/* extra 1 for the newline just read */
