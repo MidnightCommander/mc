@@ -627,11 +627,6 @@ load_setup (void)
     /* Remove the temporal entries */
     profile_clean_section ("Temporal:New Left Panel", profile_name);
     profile_clean_section ("Temporal:New Right Panel", profile_name);
-#ifdef USE_VFS
-#ifdef USE_NETCODE
-    ftpfs_init_passwd ();
-#endif
-#endif
 }
 
 #ifdef USE_VFS

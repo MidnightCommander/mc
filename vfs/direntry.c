@@ -440,7 +440,7 @@ vfs_s_free_super (vfs *me, vfs_s_super *super)
 	super->root = NULL;
     }
 
-#if 1
+#if 0
     /* We currently leak small ammount of memory, sometimes. Fix it if you can. */
     if (super->ino_usage)
 	message_1s1d (1, " Direntry warning ", "Super ino_usage is %d, memory leak", super->ino_usage);

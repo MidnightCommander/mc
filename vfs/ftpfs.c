@@ -33,31 +33,6 @@
 
 /* Namespace pollution: horrible */
 
-#include <config.h>
-#include <stdio.h>
-#include <errno.h>
-#include <string.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <stdarg.h>
-#include <fcntl.h>
-#include <pwd.h>
-#include <ctype.h>	/* For isdigit */
-#ifdef SCO_FLAVOR
-#	include <sys/timeb.h>	/* alex: for struct timeb definition */
-#endif /* SCO_FLAVOR */
-#include <time.h>
-#include <sys/types.h>
-#if defined(HAVE_UNISTD_H)
-#include <unistd.h>
-#endif
-#if HAVE_SYS_SELECT_H
-#   include <sys/select.h>
-#endif
-
-#include "../src/setup.h"
-
 #include <netdb.h>		/* struct hostent */
 #include <sys/socket.h>		/* AF_INET */
 #include <netinet/in.h>		/* struct in_addr */
@@ -78,6 +53,7 @@
 
 #include "utilvfs.h"
 
+#include "xdirentry.h"
 #include "vfs.h"
 #include "tcputil.h"
 #include "../src/dialog.h"
@@ -87,8 +63,9 @@
 #    define MAXHOSTNAMELEN 64
 #endif
 
-#define ERRNOR(x,y) do { my_errno = x; return y; } while(0)
 #define UPLOAD_ZERO_LENGTH_FILE
+#define SUP super->u.ftp
+#define FH_SOCK fh->u.ftp.sock
 
 static int my_errno;
 static int code;
@@ -115,11 +92,11 @@ int use_netrc = 1;
 extern char *home_dir;
 
 /* Anonymous setup */
-char *ftpfs_anonymous_passwd = 0;
+char *ftpfs_anonymous_passwd = NULL;
 int ftpfs_directory_timeout;
 
 /* Proxy host */
-char *ftpfs_proxy_host = 0;
+char *ftpfs_proxy_host = NULL;
 
 /* wether we have to use proxy by default? */
 int ftpfs_always_use_proxy;
@@ -141,20 +118,6 @@ static struct linklist *connections_list;
 #define WANT_STRING 0x02
 static char reply_str [80];
 
-static struct direntry *_get_file_entry     (struct connection *bucket, 
-					     char *file_name, int op, int flags);
-
-static char    *ftpfs_get_current_directory (struct connection *bucket);
-static int      ftpfs_chdir_internal        (struct connection *bucket,
-					     char *remote_path);
-static void     free_bucket                 (void *data);
-static void     connection_destructor       (void *data);
-static void     flush_all_directory         (struct connection *bucket);
-static int      get_line                    (int sock, char *buf, int buf_len,
-					     char term);
-static char    *get_path                    (struct connection **bucket,
-					     char *path);
-
 /* char *translate_path (struct ftpfs_connection *bucket, char *remote_path)
    Translate a Unix path, i.e. MC's internal path representation (e.g. 
    /somedir/somefile) to a path valid for the remote server. Every path 
@@ -169,12 +132,12 @@ static char    *get_path                    (struct connection **bucket,
  */
 
 static char *
-translate_path (struct connection *bucket, char *remote_path)
+translate_path (vfs *me, vfs_s_super *super, char *remote_path)
 {
     char *p;
     
-    if (!bucket->remote_is_amiga)
-	return g_strdup (remote_path);
+    if (!SUP.remote_is_amiga)
+	return remote_path;
     else {
 	char *ret;
 
@@ -220,21 +183,23 @@ translate_path (struct connection *bucket, char *remote_path)
  *
  */
 
+#define PORT 21
+
 static char *
 my_get_host_and_username (char *path, char **host, char **user, int *port, char **pass)
 {
-    return vfs_split_url (path, host, user, port, pass, 21, URL_DEFAULTANON);
+    return vfs_split_url (path, host, user, port, pass, PORT, URL_DEFAULTANON);
 }
 
 /* Returns a reply code, check /usr/include/arpa/ftp.h for possible values */
 static int
-get_reply (int sock, char *string_buf, int string_len)
+get_reply (vfs *me, int sock, char *string_buf, int string_len)
 {
     char answer[1024];
     int i;
     
     for (;;) {
-        if (!get_line (sock, answer, sizeof (answer), '\n')){
+        if (!vfs_s_get_line (me, sock, answer, sizeof (answer), '\n')){
 	    if (string_buf)
 		*string_buf = 0;
 	    code = 421;
@@ -251,7 +216,7 @@ get_reply (int sock, char *string_buf, int string_len)
 	    case 1:
  		if (answer[3] == '-') {
 		    while (1) {
-			if (!get_line (sock, answer, sizeof(answer), '\n')){
+			if (!vfs_s_get_line (me, sock, answer, sizeof(answer), '\n')){
 			    if (string_buf)
 				*string_buf = 0;
 			    code = 421;
@@ -272,12 +237,12 @@ get_reply (int sock, char *string_buf, int string_len)
 }
 
 static int
-command (struct connection *bucket, int wait_reply, char *fmt, ...)
+command (vfs *me, vfs_s_super *super, int wait_reply, char *fmt, ...)
 {
     va_list ap;
     char *str, *fmt_str;
     int status;
-    int sock = qsock (bucket);
+    int sock = SUP.sock;
     
     va_start (ap, fmt);
 
@@ -300,7 +265,7 @@ command (struct connection *bucket, int wait_reply, char *fmt, ...)
 
     got_sigpipe = 0;
     enable_interrupt_key ();
-    status = write (sock, str, strlen (str));
+    status = write (SUP.sock, str, strlen (str));
     g_free (str);
     
     if (status < 0){
@@ -315,20 +280,23 @@ command (struct connection *bucket, int wait_reply, char *fmt, ...)
     disable_interrupt_key ();
     
     if (wait_reply)
-	return get_reply (sock, (wait_reply & WANT_STRING) ? reply_str : NULL, sizeof (reply_str)-1);
+	return get_reply (me, sock, (wait_reply & WANT_STRING) ? reply_str : NULL, sizeof (reply_str)-1);
     return COMPLETE;
 }
 
 static void
-connection_close (void *data)
+free_archive (vfs *me, vfs_s_super *super)
 {
-    struct connection *bucket = data;
-
-    if (qsock (bucket) != -1){
-	print_vfs_message (_("ftpfs: Disconnecting from %s"), qhost (bucket));
-	command(bucket, NONE, "QUIT");
-	close(qsock(bucket));
+    if (SUP.sock != -1){
+	print_vfs_message (_("ftpfs: Disconnecting from %s"), SUP.host);
+	command(me, super, NONE, "QUIT");
+	close(SUP.sock);
     }
+    ifree (SUP.host);
+    ifree (SUP.home);
+    ifree (SUP.user);
+    ifree (SUP.cwdir);
+    ifree (SUP.password);
 }
 
 /* some defines only used by changetype */
@@ -341,19 +309,19 @@ connection_close (void *data)
 #define TYPE_UNKNOWN -1 
 
 static int
-changetype (struct connection *bucket, int binary)
+changetype (vfs *me, vfs_s_super *super, int binary)
 {
-    if (binary != bucket->isbinary) {
-        if (command (bucket, WAIT_REPLY, "TYPE %c", binary ? 'I' : 'A') != COMPLETE)
+    if (binary != SUP.isbinary) {
+        if (command (me, super, WAIT_REPLY, "TYPE %c", binary ? 'I' : 'A') != COMPLETE)
 		ERRNOR (EIO, -1);
-        bucket->isbinary = binary;
+        SUP.isbinary = binary;
     }
     return binary;
 }
 
 /* This routine logs the user in */
 static int 
-login_server (struct connection *bucket, char *netrcpass)
+login_server (vfs *me, vfs_s_super *super, char *netrcpass)
 {
 #if defined(HSC_PROXY)
     char *proxypass, *proxyname;
@@ -364,27 +332,29 @@ login_server (struct connection *bucket, char *netrcpass)
     int  anon = 0;
     char reply_string[255];
 
-    bucket->isbinary = TYPE_UNKNOWN;    
+    SUP.isbinary = TYPE_UNKNOWN;    
     if (netrcpass)
         op = g_strdup (netrcpass);
     else {
-        if (!strcmp (quser (bucket), "anonymous") || 
-            !strcmp (quser (bucket), "ftp")) {
+        if (!strcmp (SUP.user, "anonymous") || 
+            !strcmp (SUP.user, "ftp")) {
+	    if (!ftpfs_anonymous_passwd)
+	        ftpfs_init_passwd();
 	    op = g_strdup (ftpfs_anonymous_passwd);
 	    anon = 1;
          } else {
             char *p;
 
-	    if (!bucket->password){
-		p = g_strconcat (_(" FTP: Password required for "), quser (bucket), 
+	    if (!SUP.password){
+		p = g_strconcat (_(" FTP: Password required for "), SUP.user, 
 				  " ", NULL);
 		op = vfs_get_password (p);
 		g_free (p);
 		if (op == NULL)
 			ERRNOR (EPERM, 0);
-		bucket->password = g_strdup (op);
+		SUP.password = g_strdup (op);
 	    } else
-		op = g_strdup (bucket->password);
+		op = g_strdup (SUP.password);
         }
     }
 
@@ -392,11 +362,12 @@ login_server (struct connection *bucket, char *netrcpass)
 	pass = g_strdup (op);
     else
 	pass = g_strconcat ("-", op, NULL);
-    wipe_password (op);
+    if (op)
+        wipe_password (op);
 
     
     /* Proxy server accepts: username@host-we-want-to-connect*/
-    if (qproxy (bucket)){
+    if (SUP.proxy){
 #if defined(HSC_PROXY)
 	char *p, *host;
 	int port;
@@ -417,39 +388,39 @@ login_server (struct connection *bucket, char *netrcpass)
 	    g_free (proxyname);
 	    ERRNOR (EPERM, 0);
 	}
-	name = g_strdup (quser (bucket));
+	name = g_strdup (SUP.user);
 #else
-	name = g_strconcat (quser (bucket), "@", 
-		qhost (bucket)[0] == '!' ? qhost (bucket)+1 : qhost (bucket), NULL);
+	name = g_strconcat (SUP.user, "@", 
+		SUP.host[0] == '!' ? SUP.host+1 : SUP.host, NULL);
 #endif
     } else 
-	name = g_strdup (quser (bucket));
+	name = g_strdup (SUP.user);
     
-    if (get_reply (qsock(bucket), reply_string, sizeof (reply_string) - 1) == COMPLETE) {
+    if (get_reply (me, SUP.sock, reply_string, sizeof (reply_string) - 1) == COMPLETE) {
 	g_strup (reply_string);
-	bucket->remote_is_amiga = strstr (reply_string, "AMIGA") != 0;
+	SUP.remote_is_amiga = strstr (reply_string, "AMIGA") != 0;
 	if (logfile) {
-	    fprintf (logfile, "MC -- remote_is_amiga =  %d\n", bucket->remote_is_amiga);
+	    fprintf (logfile, "MC -- remote_is_amiga =  %d\n", SUP.remote_is_amiga);
 	    fflush (logfile);
 	}
 #if defined(HSC_PROXY)
-	if (qproxy (bucket)){
+	if (SUP.proxy){
 	    print_vfs_message (_("ftpfs: sending proxy login name"));
-	    if (command (bucket, 1, "USER %s", proxyname) != CONTINUE)
+	    if (command (me, super, 1, "USER %s", proxyname) != CONTINUE)
 		goto proxyfail;
 
 	    print_vfs_message (_("ftpfs: sending proxy user password"));
-	    if (command (bucket, 1, "PASS %s", proxypass) != COMPLETE)
+	    if (command (me, super, 1, "PASS %s", proxypass) != COMPLETE)
 		goto proxyfail;
 
 	    print_vfs_message (_("ftpfs: proxy authentication succeeded"));
-	    if (command (bucket, 1, "SITE %s", qhost (bucket)+1) != COMPLETE)
+	    if (command (me, super, 1, "SITE %s", SUP.host+1) != COMPLETE)
 		goto proxyfail;
 
-	    print_vfs_message (_("ftpfs: connected to %s"), qhost (bucket)+1);
+	    print_vfs_message (_("ftpfs: connected to %s"), SUP.host+1);
 	    if (0) {
 	    proxyfail:
-		bucket->failed_on_login = 1;
+		SUP.failed_on_login = 1;
 		/* my_errno = E; */
 		if (proxypass)
 		    wipe_password (proxypass);
@@ -464,12 +435,12 @@ login_server (struct connection *bucket, char *netrcpass)
 	}
 #endif
 	print_vfs_message (_("ftpfs: sending login name"));
-	code = command (bucket, WAIT_REPLY, "USER %s", name);
+	code = command (me, super, WAIT_REPLY, "USER %s", name);
 
 	switch (code){
 	case CONTINUE:
 	    print_vfs_message (_("ftpfs: sending user password"));
-            if (command (bucket, WAIT_REPLY, "PASS %s", pass) != COMPLETE)
+            if (command (me, super, WAIT_REPLY, "PASS %s", pass) != COMPLETE)
 		break;
 
 	case COMPLETE:
@@ -479,16 +450,16 @@ login_server (struct connection *bucket, char *netrcpass)
 	    return 1;
 
 	default:
-	    bucket->failed_on_login = 1;
+	    SUP.failed_on_login = 1;
 	    /* my_errno = E; */
-	    if (bucket->password)
-		wipe_password (bucket->password);
-	    bucket->password = 0;
+	    if (SUP.password)
+		wipe_password (SUP.password);
+	    SUP.password = 0;
 	    
 	    goto login_fail;
 	}
     }
-    print_vfs_message (_("ftpfs: Login incorrect for user %s "), quser (bucket));
+    message_1s (1, _("ftpfs: Login incorrect for user %s "), SUP.user);
 login_fail:
     wipe_password (pass);
     g_free (name);
@@ -636,17 +607,17 @@ ftpfs_get_proxy_host_and_port (char *proxy, char **host, int *port)
 }
 
 static int
-ftpfs_open_socket (struct connection *bucket)
+ftpfs_open_socket (vfs *me, vfs_s_super *super)
 {
     struct   sockaddr_in server_address;
     struct   hostent *hp;
     int      my_socket;
     char     *host;
-    int      port;
+    int      port = SUP.port;
     int      free_host = 0;
     
     /* Use a proxy host? */
-    host = qhost (bucket);
+    host = SUP.host;
 
     if (!host || !*host){
 	print_vfs_message (_("ftpfs: Invalid host name."));
@@ -655,7 +626,7 @@ ftpfs_open_socket (struct connection *bucket)
     }
 
     /* Hosts to connect to that start with a ! should use proxy */
-    if (qproxy (bucket)){
+    if (SUP.proxy){
 	ftpfs_get_proxy_host_and_port (ftpfs_proxy_host, &host, &port);
 	free_host = 1;
     }
@@ -681,9 +652,7 @@ ftpfs_open_socket (struct connection *bucket)
 	bcopy ((char *) hp->h_addr, (char *) &server_address.sin_addr, 4);
     }
 
-#define THE_PORT qproxy(bucket) ? port : qport (bucket)
-
-    server_address.sin_port = htons (THE_PORT);
+    server_address.sin_port = htons (port);
 
     /* Connect */
     if ((my_socket = socket (AF_INET, SOCK_STREAM, 0)) < 0) {
@@ -716,75 +685,33 @@ ftpfs_open_socket (struct connection *bucket)
     return my_socket;
 }
 
-static struct connection *
-open_command_connection (char *host, char *user, int port, char *netrcpass)
+int
+open_archive_int (vfs *me, vfs_s_super *super)
 {
-    struct connection *bucket;
     int retry_seconds, count_down;
-
-    bucket = g_new (struct connection, 1);
-    
-    if (bucket == NULL)
-	    ERRNOR (ENOMEM, NULL);
-#ifdef HAVE_MAD
-    {
-	extern void *watch_free_pointer;
-
-	if (!watch_free_pointer)
-	    watch_free_pointer = host;
-    }
-#endif
-    qhost (bucket) = g_strdup (host);
-    quser (bucket) = g_strdup (user);
-    qcdir (bucket) = NULL;
-    qport (bucket) = port;
-    qlock (bucket) = 0;
-    qhome (bucket) = NULL;
-    qproxy (bucket)= 0;
-    qupdir (bucket)= 0;
-    qdcache (bucket)=0;
-    bucket->__inode_counter = 0;
-    bucket->lock = 0;
-    bucket->use_proxy = ftpfs_check_proxy (host);
-    bucket->password = 0;
-    bucket->use_passive_connection = ftpfs_use_passive_connections | source_route;
-    bucket->use_source_route = source_route;
-    bucket->strict_rfc959_list_cmd = !ftpfs_use_unix_list_options;
-    bucket->isbinary = TYPE_UNKNOWN;
-    bucket->remote_is_amiga = 0;
+    char *netrcpass = NULL;
 
     /* We do not want to use the passive if we are using proxies */
-    if (bucket->use_proxy)
-	bucket->use_passive_connection = 0;
-
-    if ((qdcache (bucket) = linklist_init ()) == NULL) {
-	my_errno = ENOMEM;
-	g_free (qhost (bucket));
-	g_free (quser (bucket));
-	g_free (bucket);
-	return NULL;
-    }
+    if (SUP.use_proxy)
+	SUP.use_passive_connection = 0;
     
     retry_seconds = 0;
     do { 
-	bucket->failed_on_login = 0;
+	SUP.failed_on_login = 0;
 
-	qsock (bucket) = ftpfs_open_socket (bucket);
-	if (qsock (bucket) == -1)  {
-	    free_bucket (bucket);
-	    return NULL;
-	}
+	SUP.sock = ftpfs_open_socket (me, super);
+	if (SUP.sock == -1)
+	    return -1;
 
-	if (login_server (bucket, netrcpass)) {
+	if (login_server (me, super, netrcpass)) {
 	    /* Logged in, no need to retry the connection */
 	    break;
 	} else {
-	    if (bucket->failed_on_login){
+	    if (SUP.failed_on_login){
 		/* Close only the socket descriptor */
-		close (qsock (bucket));
+		close (SUP.sock);
 	    } else {
-		connection_destructor (bucket);
-		return NULL;
+		return -1;
 	    } 
 	    if (ftpfs_retry_seconds){
 		retry_seconds = ftpfs_retry_seconds;
@@ -795,8 +722,7 @@ open_command_connection (char *host, char *user, int port, char *netrcpass)
 		    if (got_interrupt ()){
 			/* my_errno = E; */
 			disable_interrupt_key ();
-			free_bucket (bucket);
-			return NULL;
+			return 0;
 		    }
 		}
 		disable_interrupt_key ();
@@ -804,96 +730,76 @@ open_command_connection (char *host, char *user, int port, char *netrcpass)
 	}
     } while (retry_seconds);
     
-    qhome (bucket) = ftpfs_get_current_directory (bucket);
-    if (!qhome (bucket))
-        qhome (bucket) = g_strdup (PATH_SEP_STR);
-    qupdir (bucket) = g_strdup (PATH_SEP_STR); /* FIXME: I changed behavior to ignore last_current_dir */
-    return bucket;
+    SUP.home = ftpfs_get_current_directory (me, super);
+    if (!SUP.home)
+        SUP.home = g_strdup (PATH_SEP_STR);
+    return 0;
 }
 
 static int
-is_connection_closed (struct connection *bucket)
+open_archive (vfs *me, vfs_s_super *super, char *archive_name, char *op)
 {
-    fd_set rset;
-    struct timeval t;
+    char *host, *user, *password;
+    int port;
 
-    if (got_sigpipe){
-	return 1;
-    }
-    t.tv_sec = 0;
-    t.tv_usec = 0;
-    FD_ZERO (&rset);
-    FD_SET (qsock (bucket), &rset);
-    while (1) {
-	if (select (qsock (bucket) + 1, &rset, NULL, NULL, &t) < 0)
-	    if (errno != EINTR)
-		return 1;
-	return 0;
+    vfs_split_url (strchr(op, ':')+1, &host, &user, &port, &password, PORT, URL_DEFAULTANON);
+
+    SUP.host = g_strdup (host);
+    SUP.user = g_strdup (user);
+    SUP.port = port;
+    SUP.home = NULL;
+    SUP.proxy= 0;
+    SUP.use_proxy = ftpfs_check_proxy (host);
+    SUP.password = NULL;
+    SUP.use_passive_connection = ftpfs_use_passive_connections | source_route;
+    SUP.use_source_route = source_route;
+    SUP.strict = ftpfs_use_unix_list_options?RFC_AUTODETECT:RFC_STRICT;
+    SUP.isbinary = TYPE_UNKNOWN;
+    SUP.remote_is_amiga = 0;
+    super->name = g_strdup("/");
 #if 0
-	if (FD_ISSET (qsock(bucket), &rset)) {
-	    n = read (qsock(bucket), &read_ahead, sizeof (read_ahead));
-	    if (n <= 0) 
-		return 1;
-	} 	else
+    super->name = g_strconcat( "/#ftp:", SUP.user, "@", SUP.host, "/", NULL );
 #endif
-    }
+    super->root = vfs_s_new_inode (me, super, vfs_s_default_stat(me, S_IFDIR | 0755)); 
+    if (password)
+	SUP.password = g_strdup (password);
+    return open_archive_int (me, super);
 }
 
-/* This routine keeps track of open connections */
-/* Returns a connected socket to host */
-static struct connection *
-open_link (char *host, char *user, int port, char *netrcpass)
+static int
+archive_same(vfs *me, vfs_s_super *super, char *archive_name, char *op, void *cookie)
+{	
+    char *host, *user, *dummy2;
+    int port;
+    vfs_split_url (strchr(op, ':')+1, &host, &user, &port, &dummy2, 21, URL_DEFAULTANON);
+    return ((strcmp (host, SUP.host) == 0) &&
+	    (strcmp (user, SUP.user) == 0) &&
+	    (port == SUP.port));
+}
+
+static int
+dir_uptodate(vfs *me, vfs_s_inode *ino)
 {
-    int sock;
-    struct connection *bucket;
-    struct linklist *lptr;
-    
-    for (lptr = connections_list->next; 
-	 lptr != connections_list; lptr = lptr->next) {
-	bucket = lptr->data;
-	if ((strcmp (host, qhost (bucket)) == 0) &&
-	    (strcmp (user, quser (bucket)) == 0) &&
-	    (port == qport (bucket))) {
-	    
-	    /* check the connection is closed or not, just hack */
-	    if (is_connection_closed (bucket)) {
-		flush_all_directory (bucket);
-		sock = ftpfs_open_socket (bucket);
-		if (sock != -1) {
-		    close (qsock (bucket));
-		    qsock (bucket) = sock;
-		    if (login_server (bucket, netrcpass))
-			return bucket;
-		} 
-		
-		/* connection refused */
-		lptr->prev->next = lptr->next;
-		lptr->next->prev = lptr->prev;
-		connection_destructor (bucket);
-		return NULL;
-	    }
-	    return bucket;
-	}
+    struct timeval tim;
+
+    gettimeofday(&tim, NULL);
+    if (force_expiration) {
+	force_expiration = 0;
+	return 0;
     }
-    bucket = open_command_connection (host, user, port, netrcpass);
-    if (bucket == NULL)
-	return NULL;
-    if (!linklist_insert (connections_list, bucket)) {
-	my_errno = ENOMEM;
-	connection_destructor (bucket);
-	return NULL;
-    }
-    return bucket;
+    if (tim.tv_sec < ino->u.ftp.timestamp.tv_sec)
+	return 1;
+    return 0;
 }
 
 /* The returned directory should always contain a trailing slash */
 static char *
-ftpfs_get_current_directory (struct connection *bucket)
+ftpfs_get_current_directory (vfs *me, vfs_s_super *super)
 {
     char buf[4096], *bufp, *bufq;
 
-    if (command (bucket, NONE, "PWD") == COMPLETE &&
-        get_reply(qsock(bucket), buf, sizeof(buf)) == COMPLETE) {
+    if (command (me, super, NONE, "PWD") == COMPLETE &&
+        get_reply(me, SUP.sock, buf, sizeof(buf)) == COMPLETE) {
     	bufp = NULL;
 	for (bufq = buf; *bufq; bufq++)
 	    if (*bufq == '"') {
@@ -928,13 +834,13 @@ ftpfs_get_current_directory (struct connection *bucket)
     
 /* Setup Passive ftp connection, we use it for source routed connections */
 static int
-setup_passive (int my_socket, struct connection *bucket, struct sockaddr_in *sa)
+setup_passive (vfs *me, vfs_s_super *super, int my_socket, struct sockaddr_in *sa)
 {
     int xa, xb, xc, xd, xe, xf;
     char n [6];
     char *c = reply_str;
     
-    if (command (bucket, WAIT_REPLY | WANT_STRING, "PASV") != COMPLETE)
+    if (command (me, super, WAIT_REPLY | WANT_STRING, "PASV") != COMPLETE)
 	return 0;
 
     /* Parse remote parameters */
@@ -962,13 +868,13 @@ setup_passive (int my_socket, struct connection *bucket, struct sockaddr_in *sa)
 }
 
 static int
-initconn (struct connection *bucket)
+initconn (vfs *me, vfs_s_super *super)
 {
     struct sockaddr_in data_addr;
     int data, len = sizeof(data_addr);
     struct protoent *pe;
 
-    getsockname(qsock(bucket), (struct sockaddr *) &data_addr, &len);
+    getsockname(SUP.sock, (struct sockaddr *) &data_addr, &len);
     data_addr.sin_port = 0;
     
     pe = getprotobyname("tcp");
@@ -978,25 +884,15 @@ initconn (struct connection *bucket)
     if (data < 0)
 	    ERRNOR (EIO, -1);
 
-#ifdef ORIGINAL_CONNECT_CODE
-    if (bucket->use_source_route){
-	int c;
-	
-	if ((c = setup_passive (data, bucket, &data_addr)))
-	    return data;
-	print_vfs_message(_("ftpfs: could not setup passive mode for source routing"));
-	bucket->use_source_route = 0;
-    }
-#else
-    if (bucket->use_passive_connection){
-	if ((bucket->use_passive_connection = setup_passive (data, bucket, &data_addr)))
+    if (SUP.use_passive_connection){
+	if ((SUP.use_passive_connection = setup_passive (me, super, data, &data_addr)))
 	    return data;
 
-	bucket->use_source_route = 0;
-	bucket->use_passive_connection = 0;
+	SUP.use_source_route = 0;
+	SUP.use_passive_connection = 0;
 	print_vfs_message (_("ftpfs: could not setup passive mode"));
     }
-#endif
+
     /* If passive setup fails, fallback to active connections */
     /* Active FTP connection */
     if (bind (data, (struct sockaddr *)&data_addr, len) < 0)
@@ -1008,7 +904,7 @@ initconn (struct connection *bucket)
 	unsigned char *a = (unsigned char *)&data_addr.sin_addr;
 	unsigned char *p = (unsigned char *)&data_addr.sin_port;
 	
-	if (command (bucket, WAIT_REPLY, "PORT %d,%d,%d,%d,%d,%d", a[0], a[1], 
+	if (command (me, super, WAIT_REPLY, "PORT %d,%d,%d,%d,%d,%d", a[0], a[1], 
 		     a[2], a[3], p[0], p[1]) != COMPLETE)
 	    goto error_return;
     }
@@ -1020,32 +916,30 @@ error_return:
 }
 
 static int
-open_data_connection (struct connection *bucket, char *cmd, char *remote, 
+open_data_connection (vfs *me, vfs_s_super *super, char *cmd, char *remote, 
 		int isbinary, int reget)
 {
     struct sockaddr_in from;
     int s, j, data, fromlen = sizeof(from);
     
-    if ((s = initconn (bucket)) == -1)
+    if ((s = initconn (me, super)) == -1)
         return -1;
-    if (changetype (bucket, isbinary) == -1)
+    if (changetype (me, super, isbinary) == -1)
         return -1;
     if (reget > 0){
-	j = command (bucket, WAIT_REPLY, "REST %d", reget);
+	j = command (me, super, WAIT_REPLY, "REST %d", reget);
 	if (j != CONTINUE)
 	    return -1;
     }
-    if (remote){
-	char *path = translate_path (bucket, remote);
-	
-        j = command (bucket, WAIT_REPLY, "%s %s", cmd, path);
-	g_free (path);
-    } else
-    	j = command (bucket, WAIT_REPLY, "%s", cmd);
+    if (remote)
+        j = command (me, super, WAIT_REPLY, "%s /%s", cmd, 
+		translate_path (me, super, remote));
+    else
+    	j = command (me, super, WAIT_REPLY, "%s", cmd);
     if (j != PRELIM)
 	    ERRNOR (EPERM, -1);
     enable_interrupt_key();
-    if (bucket->use_passive_connection)
+    if (SUP.use_passive_connection)
 	data = s;
     else {
 	data = accept (s, (struct sockaddr *)&from, &fromlen);
@@ -1061,19 +955,22 @@ open_data_connection (struct connection *bucket, char *cmd, char *remote,
 }
 
 static void
-my_abort (struct connection *bucket, int dsock)
+linear_abort (vfs *me, vfs_s_fh *fh)
 {
+    vfs_s_super *super = FH_SUPER;
     static unsigned char ipbuf[3] = { IAC, IP, IAC };
     fd_set mask;
     char buf[1024];
+    int dsock = FH_SOCK;
+    FH_SOCK = -1;
 
     print_vfs_message(_("ftpfs: aborting transfer."));
-    if (send(qsock(bucket), ipbuf, sizeof(ipbuf), MSG_OOB) != sizeof(ipbuf)) {
+    if (send(SUP.sock, ipbuf, sizeof(ipbuf), MSG_OOB) != sizeof(ipbuf)) {
 	print_vfs_message(_("ftpfs: abort error: %s"), unix_error_string(errno));
 	return;
     }
     
-    if (command(bucket, NONE, "%cABOR", DM) != COMPLETE){
+    if (command(me, super, NONE, "%cABOR", DM) != COMPLETE){
 	print_vfs_message (_("ftpfs: abort failed"));
 	return;
     }
@@ -1083,12 +980,13 @@ my_abort (struct connection *bucket, int dsock)
 	if (select(dsock + 1, &mask, NULL, NULL, NULL) > 0)
 	    while (read(dsock, buf, sizeof(buf)) > 0);
     }
-    if ((get_reply(qsock(bucket), NULL, 0) == TRANSIENT) && (code == 426))
-	get_reply(qsock(bucket), NULL, 0);
+    if ((get_reply(me, SUP.sock, NULL, 0) == TRANSIENT) && (code == 426))
+	get_reply(me, SUP.sock, NULL, 0);
 }
 
+#if 0
 static void
-resolve_symlink_without_ls_options(struct connection *bucket, struct dir *dir)
+resolve_symlink_without_ls_options(vfs *me, vfs_s_super *super, vfs_s_inode *dir)
 {
     struct linklist *flist;
     struct direntry *fe, *fel;
@@ -1149,7 +1047,7 @@ resolve_symlink_without_ls_options(struct connection *bucket, struct dir *dir)
 }
 
 static void
-resolve_symlink_with_ls_options(struct connection *bucket, struct dir *dir)
+resolve_symlink_with_ls_options(vfs *me, vfs_s_super *super, vfs_s_inode *dir)
 {
     char  buffer[2048] = "", *filename;
     int sock;
@@ -1198,6 +1096,7 @@ resolve_symlink_with_ls_options(struct connection *bucket, struct dir *dir)
 		fputs (buffer, logfile);
 	        fflush (logfile);
 	    }
+vfs_die("This code should be commented out\n");
 	    if (vfs_parse_ls_lga (buffer, &s, &filename, NULL)) {
 		int r = strcmp(fe->name, filename);
 		g_free(filename);
@@ -1223,322 +1122,144 @@ done:
     while (fgets(buffer, sizeof(buffer), fp) != NULL);
     disable_interrupt_key();
     fclose(fp);
-    get_reply(qsock(bucket), NULL, 0);
-    if (switch_method) {
-        bucket->strict_rfc959_list_cmd = 1;
-	resolve_symlink_without_ls_options(bucket, dir);
-    }
+    get_reply(me, SUP.sock, NULL, 0);
 }
 
 static void
-resolve_symlink(struct connection *bucket, struct dir *dir)
+resolve_symlink(vfs *me, vfs_s_super *super, vfs_s_inode *dir)
 {
     print_vfs_message(_("Resolving symlink..."));
 
-    if (bucket->strict_rfc959_list_cmd) 
-	resolve_symlink_without_ls_options(bucket, dir);
+    if (SUP.strict_rfc959_list_cmd) 
+	resolve_symlink_without_ls_options(me, super, dir);
     else
-        resolve_symlink_with_ls_options(bucket, dir);
+        resolve_symlink_with_ls_options(me, super, dir);
 }
-
-
-#define X "ftp"
-#define X_myname "/#ftp:"
-#define vfs_X_ops vfs_ftpfs_ops
-#define X_fill_names ftpfs_fill_names
-#define X_hint_reread ftpfs_hint_reread
-#define X_flushdir ftpfs_flushdir
-#define X_done ftpfs_done
-#include "shared_ftp_fish.c"
-
-static char*
-get_path (struct connection **bucket, char *path)
-{
-    return s_get_path (bucket, path, "/#ftp:");
-}
-
-/* Inserts an entry for "." (and "..") into the linked list. Ignore any 
-   errors because "." isn't important (as fas as you don't try to save a
-   file in the root dir of the ftp server).
-   Actually the dot is needed when stating the root directory, e.g.
-   mc_stat ("/ftp#localhost", &buf). Down the call tree _get_file_entry
-   gets called with filename = "/" which will be transformed into "."
-   before searching for a fileentry. Whithout "." in the linked list
-   this search fails.  -- Norbert. */
-static void
-insert_dots (struct linklist *file_list, struct connection *bucket)
-{
-    struct direntry *fe;
-    int i;
-    char buffer[][58] = { 
-          "drwxrwxrwx   1 0        0            1024 Jan  1  1970 .",
-          "drwxrwxrwx   1 0        0            1024 Jan  1  1970 .."
-    };
-
-    for (i = 0; i < 2; i++ ) {
-        fe = g_new (struct direntry, 1);
-        if (fe == NULL)
-	    return;
-        if (vfs_parse_ls_lga (buffer[i], &fe->s, &fe->name, &fe->linkname)) {
-	    fe->freshly_created = 0;
-	    fe->count = 1;
-	    fe->local_filename = fe->remote_filename = NULL;
-	    fe->l_stat = NULL;
-	    fe->bucket = bucket;
-	    (fe->s).st_ino = bucket->__inode_counter++;
-
-	    if (!linklist_insert(file_list, fe))
-	        g_free(fe);
-        } else
-	    g_free (fe);
-    }
-}
-
-static struct dir *
-retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
-{
-#ifdef OLD_READ
-    FILE *fp;
 #endif
-    int sock, has_symlinks;
-    struct linklist *file_list, *p;
-    struct direntry *fe;
+
+static int
+dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
+{
+    vfs_s_entry *ent;
+    vfs_s_super *super = dir->super;
+    int sock, has_symlinks = 0, num_entries = 0;
     char buffer[8192];
-    struct dir *dcache;
-    int got_intr = 0;
-    int dot_found = 0;
-    int has_spaces = (strchr (remote_path, ' ') != NULL);
+    int cd_first = (strchr (remote_path, ' ') != NULL) || ftpfs_first_cd_then_ls || (SUP.strict == RFC_STRICT);
 
-    canonicalize_pathname (remote_path);
-    for (p = qdcache(bucket)->next;p != qdcache(bucket);
-	 p = p->next) {
-	dcache = p->data;
-	if (strcmp(dcache->remote_path, remote_path) == 0) {
-	    struct timeval tim;
+    print_vfs_message(_("ftpfs: Reading FTP directory %s... %s%s"), remote_path, 
+		      SUP.strict == RFC_STRICT ? _("(strict rfc959)") : "", 
+		      cd_first ? _("(chdir first)"):"");
 
-	    gettimeofday(&tim, NULL);
-	    if (((tim.tv_sec < dcache->timestamp.tv_sec) && !force_expiration)
-                || dcache->symlink_status == FTPFS_RESOLVING_SYMLINKS) {
-                if (resolve_symlinks && dcache->symlink_status == FTPFS_UNRESOLVED_SYMLINKS)
-	            resolve_symlink(bucket, dcache);
-		return dcache;
-	    } else {
-		force_expiration = 0;
-		p->next->prev = p->prev;
-		p->prev->next = p->next;
-		dir_destructor(dcache);
-		g_free (p);
-		break;
-	    }
-	}
-    }
-
-    has_symlinks = 0;
-    if (bucket->strict_rfc959_list_cmd)
-        print_vfs_message(_("ftpfs: Reading FTP directory %s... (don't use UNIX ls options)"), remote_path);
-    else
-        print_vfs_message(_("ftpfs: Reading FTP directory %s..."), remote_path);
-    if (has_spaces || bucket->strict_rfc959_list_cmd || ftpfs_first_cd_then_ls) {
-        if (ftpfs_chdir_internal (bucket, remote_path) != COMPLETE) {
+    if (cd_first) {
+        char *p;
+    
+        p = translate_path (me, super, remote_path);
+        if (ftpfs_chdir_internal (me, super, p) != COMPLETE) {
             my_errno = ENOENT;
 	    print_vfs_message(_("ftpfs: CWD failed."));
-	    return NULL;
+	    return -1;
         }
     }
 
-    file_list = linklist_init();
-    if (file_list == NULL)
-	    ERRNOR (ENOMEM, NULL);
-    dcache = g_new (struct dir, 1);
-    if (dcache == NULL) {
-	my_errno = ENOMEM;
-	linklist_destroy(file_list, NULL);
-	print_vfs_message(_("ftpfs: FAIL"));
-	return NULL;
-    }
-    gettimeofday(&dcache->timestamp, NULL);
-    dcache->timestamp.tv_sec += ftpfs_directory_timeout;
-    dcache->file_list = file_list;
-    dcache->remote_path = g_strdup(remote_path);
-    dcache->count = 1;
-    dcache->symlink_status = FTPFS_NO_SYMLINKS;
+    gettimeofday(&dir->u.ftp.timestamp, NULL);
+    dir->u.ftp.timestamp.tv_sec += 10; /* was 360: 10 is good for
+					   stressing direntry layer a bit */
 
-    if (bucket->strict_rfc959_list_cmd == 1) 
-        sock = open_data_connection (bucket, "LIST", 0, TYPE_ASCII, 0);
-    else if (has_spaces || ftpfs_first_cd_then_ls)
-        sock = open_data_connection (bucket, "LIST -la", ".", TYPE_ASCII, 0);
+    if (SUP.strict == RFC_STRICT) 
+        sock = open_data_connection (me, super, "LIST", 0, TYPE_ASCII, 0);
+    else if (cd_first)
+        sock = open_data_connection (me, super, "LIST -la", ".", TYPE_ASCII, 0);
     else {
 	/* Trailing "/." is necessary if remote_path is a symlink
            but don't generate "//." */
 	char *path = g_strconcat (remote_path, 
-			remote_path[1] == '\0' ? "" : PATH_SEP_STR, 
-			".", (char *) 0);
+				  (!*remote_path) ? "" : PATH_SEP_STR,
+				  ".", 
+				  NULL);
 
-        sock = open_data_connection (bucket, "LIST -la", path, TYPE_ASCII, 0);
+        sock = open_data_connection (me, super, "LIST -la", path, TYPE_ASCII, 0);
 	g_free (path);
     }
 
     if (sock == -1)
 	goto fallback;
 
-#ifdef OLD_READ
-#define close_this_sock(x,y) fclose (x)
-    fp = fdopen(sock, "r");
-    if (fp == NULL) {
-	my_errno = errno;
-	close(sock);
-        goto error_2;
-    }
-#else
-#define close_this_sock(x,y) close (y)
-#endif
-    
     /* Clear the interrupt flag */
     enable_interrupt_key ();
     
-    errno = 0;
-#ifdef OLD_READ
-    while (fgets (buffer, sizeof (buffer), fp) != NULL) {
-	if (got_intr = got_interrupt ())
+    while (1) {
+        int i, j;
+	int res = vfs_s_get_line_interruptible (me, buffer, sizeof (buffer), sock);
+	if (!res)
 	    break;
-#else
-    while ((got_intr = get_line_interruptible (buffer, sizeof (buffer), sock)) != EINTR){
-#endif
-	int eof = got_intr == 0;
-
+	if (res == EINTR) {
+	    me->verrno = ECONNRESET;
+	    goto error;
+	}
 	if (logfile){
 	    fputs (buffer, logfile);
             fputs ("\n", logfile);
 	    fflush (logfile);
 	}
-	if (buffer [0] == 0 && eof)
-	    break;
-	fe = g_new (struct direntry, 1);
-	fe->freshly_created = 0;
-	fe->local_filename = NULL;
-	if (fe == NULL) {
-	    my_errno = ENOMEM;
-	    goto error_1;
+
+	ent = vfs_s_generate_entry(me, NULL, dir, 0);
+	i = ent->ino->st.st_nlink;
+        j = vfs_parse_ls_lga (buffer, &ent->ino->st, &ent->name, &ent->ino->linkname);
+	ent->ino->st.st_nlink = i; /* Ouch, we need to preserve our counts :-( */
+	if (!j) {
+	    vfs_s_free_entry (me, ent);
+	    continue;
 	}
-        if (vfs_parse_ls_lga (buffer, &fe->s, &fe->name, &fe->linkname)) {
-	    if (strcmp (fe->name, ".") == 0)
-		dot_found = 1;
-	    fe->count = 1;
-	    fe->local_filename = fe->remote_filename = NULL;
-	    fe->l_stat = NULL;
-	    fe->bucket = bucket;
-            (fe->s).st_ino = bucket->__inode_counter++;
-	    if (S_ISLNK(fe->s.st_mode))
-		has_symlinks = 1;
-	    
-	    if (!linklist_insert(file_list, fe)) {
-		g_free(fe);
-		my_errno = ENOMEM;
-	        goto error_1;
-	    }
+	num_entries++;
+	if ((!strcmp(ent->name, ".")) || (!strcmp (ent->name, ".."))) {
+	    ent->name = NULL;	/* Ouch, vfs_s_free_entry "knows" about . and .. being special :-( */
+	    vfs_s_free_entry (me, ent);
+	    continue;
 	}
-	else
-	    g_free(fe);
-	if (eof)
-	    break;
+
+	vfs_s_insert_entry(me, dir, ent);
+	continue;
     }
-    if (got_intr){
-	disable_interrupt_key();
-	print_vfs_message(_("ftpfs: reading FTP directory interrupt by user"));
-#ifdef OLD_READ
-	my_abort(bucket, fileno(fp));
-#else
-	my_abort(bucket, sock);
-#endif
-	close_this_sock(fp, sock);
-	my_errno = EINTR;
-	goto error_3;
-    }
-    close_this_sock(fp, sock);
-    disable_interrupt_key();
-    if ((get_reply (qsock (bucket), NULL, 0) != COMPLETE) || 
-        (file_list->next == file_list))
+
+    close(sock);
+    me->verrno = E_REMOTE;
+    if ((get_reply (me, SUP.sock, NULL, 0) != COMPLETE) || !num_entries)
         goto fallback;
 
-ok:
-    if (!dot_found)
-	insert_dots (file_list, bucket);
+    if (SUP.strict == RFC_AUTODETECT)
+	SUP.strict = RFC_DARING;
 
-    if (!linklist_insert(qdcache(bucket), dcache)) {
-	my_errno = ENOMEM;
-        goto error_3;
-    }
+#ifdef FIXME_LATER
     if (has_symlinks) {
         if (resolve_symlinks)
-	    resolve_symlink(bucket, dcache);
+	    resolve_symlink(me, super, dcache);
         else
            dcache->symlink_status = FTPFS_UNRESOLVED_SYMLINKS;
     }
-    print_vfs_message(_("ftpfs: got listing"));
-    return dcache;
-error_1:
-    disable_interrupt_key();
-    close_this_sock(fp, sock);
-#ifdef OLD_READ
-error_2: 
 #endif
-    get_reply(qsock(bucket), NULL, 0);
-error_3:
-    g_free(dcache->remote_path);
-    g_free(dcache);
-    linklist_destroy(file_list, direntry_destructor);
+    return 0;
+
+error:
+    disable_interrupt_key();
+    get_reply(me, SUP.sock, NULL, 0);
     print_vfs_message(_("ftpfs: failed"));
-    return NULL;
+    return -1;
 
 fallback:
-    if (bucket->__inode_counter == 0 && (!bucket->strict_rfc959_list_cmd)) {
+    if (SUP.strict == RFC_AUTODETECT) {
         /* It's our first attempt to get a directory listing from this
 	server (UNIX style LIST command) */
-        bucket->strict_rfc959_list_cmd = 1;
-	g_free(dcache->remote_path);
-	g_free(dcache);
-	linklist_destroy(file_list, direntry_destructor);
-	return retrieve_dir (bucket, remote_path, resolve_symlinks);
+        SUP.strict = RFC_STRICT;
+	return dir_load (me, dir, remote_path);
     }
-
-    /* Ok, maybe the directory exists but the remote server doesn't
-       list "." and "..". 
-       Check whether the directory exists:
-     */
-    if (has_spaces || bucket->strict_rfc959_list_cmd || 
-	ftpfs_first_cd_then_ls) /* CWD has been already performed, i.e. 
-                                   we know that remote_path exists */
-	goto ok;
-    else {
-	if (bucket->remote_is_amiga) {
-	    /* The Amiga ftp server needs extra processing because it
-               always gets relative pathes instead of absolute pathes
-               like anyone else */
-	    char *p = ftpfs_get_current_directory (bucket);
-	
-	    if (ftpfs_chdir_internal (bucket, remote_path) == COMPLETE) {
-	        ftpfs_chdir_internal (bucket, p);
-	        g_free (p);
-	        goto ok;
-	    }
-        } else {
-	    if (ftpfs_chdir_internal (bucket, remote_path) == COMPLETE)
-	        goto ok;
-	}
-    }
-
-    my_errno = EACCES;
-    g_free(dcache->remote_path);
-    g_free(dcache);
-    linklist_destroy(file_list, direntry_destructor);
     print_vfs_message(_("ftpfs: failed; nowhere to fallback to"));
-    return NULL;
+    ERRNOR(-1, EACCES);
 }
 
 static int
-store_file(struct direntry *fe)
+file_store(vfs *me, vfs_s_super *super, char *name, char *localname)
 {
-    int local_handle, sock, n, total;
+    int h, sock, n, total;
 #ifdef HAVE_STRUCT_LINGER
     struct linger li;
 #else
@@ -1547,14 +1268,13 @@ store_file(struct direntry *fe)
     char buffer[8192];
     struct stat s;
 
-    local_handle = open(fe->local_filename, O_RDONLY);
-    unlink (fe->local_filename);
-    if (local_handle == -1)
+    h = open(localname, O_RDONLY);
+    if (h == -1)
 	    ERRNOR (EIO, 0);
-    fstat(local_handle, &s);
-    sock = open_data_connection(fe->bucket, "STOR", fe->remote_filename, TYPE_BINARY, 0);
+    fstat(h, &s);
+    sock = open_data_connection(me, super, "STOR", name, TYPE_BINARY, 0);
     if (sock < 0) {
-	close(local_handle);
+	close(h);
 	return 0;
     }
 #ifdef HAVE_STRUCT_LINGER
@@ -1568,7 +1288,7 @@ store_file(struct direntry *fe)
     
     enable_interrupt_key();
     while (1) {
-	while ((n = read(local_handle, buffer, sizeof(buffer))) < 0) {
+	while ((n = read(h, buffer, sizeof(buffer))) < 0) {
 	    if (errno == EINTR) {
 		if (got_interrupt()) {
 		    my_errno = EINTR;
@@ -1600,82 +1320,79 @@ store_file(struct direntry *fe)
     }
     disable_interrupt_key();
     close(sock);
-    close(local_handle);
-    if (get_reply (qsock (fe->bucket), NULL, 0) != COMPLETE)
+    close(h);
+    if (get_reply (me, SUP.sock, NULL, 0) != COMPLETE)
 	    ERRNOR (EIO, 0);
     return 1;
 error_return:
     disable_interrupt_key();
     close(sock);
-    close(local_handle);
-    get_reply(qsock(fe->bucket), NULL, 0);
-    return 0;
+    close(h);
+    get_reply(me, SUP.sock, NULL, 0);
+    return -1;
 }
 
+#define FH_SOCK fh->u.ftp.sock
+
 static int 
-linear_start(struct direntry *fe, int offset)
+linear_start(vfs *me, vfs_s_fh *fh, int offset)
 {
-    fe->local_stat.st_mtime = 0;
-    fe->data_sock = open_data_connection(fe->bucket, "RETR", fe->remote_filename, TYPE_BINARY, offset);
-    if (fe->data_sock == -1)
+    char *name = vfs_s_fullpath (me, fh->ino);
+
+    if (!name)
+	return 0;
+    FH_SOCK = open_data_connection(me, FH_SUPER, "RETR", name, TYPE_BINARY, offset);
+    if (FH_SOCK == -1)
 	ERRNOR (EACCES, 0);
-    fe->linear_state = LS_LINEAR_OPEN;
+    fh->linear = LS_LINEAR_OPEN;
     return 1;
 }
 
-static void
-linear_abort (struct direntry *fe)
-{
-    my_abort(fe->bucket, fe->data_sock);
-    fe->data_sock = -1;
-}
-
 static int
-linear_read (struct direntry *fe, void *buf, int len)
+linear_read (vfs *me, vfs_s_fh *fh, void *buf, int len)
 {
     int n;
-    while ((n = read (fe->data_sock, buf, len))<0) {
+    vfs_s_super *super = FH_SUPER;
+
+    while ((n = read (FH_SOCK, buf, len))<0) {
         if ((errno == EINTR) && !got_interrupt())
 	    continue;
 	break;
     }
 
     if (n<0)
-	    linear_abort(fe);
+	linear_abort(me, fh);
 
     if (!n) {
-	close (fe->data_sock);
-	fe->data_sock = -1;
-	
-        if ((get_reply (qsock (fe->bucket), NULL, 0) != COMPLETE)) {
-	    my_errno = EIO;
-	    n=-1;
-	}
+	close (FH_SOCK);
+	FH_SOCK = -1;
+        if ((get_reply (me, SUP.sock, NULL, 0) != COMPLETE))
+	    ERRNOR (E_REMOTE, -1);
+	return 0;
     }
     ERRNOR (errno, n);
 }
 
 static void
-linear_close (struct direntry *fe)
+linear_close (vfs *me, vfs_s_fh *fh)
 {
-    if (fe->data_sock != -1)
-        linear_abort(fe);
+    if (FH_SOCK != -1)
+        linear_abort(me, fh);
 }
 
-int ftpfs_ctl (void *data, int ctlop, int arg)
+int ftpfs_ctl (void *fh, int ctlop, int arg)
 {
-    struct filp *fp = data;
     switch (ctlop) {
         case MCCTL_IS_NOTREADY:
 	    {
 	        int v;
 		
-		if (!fp->fe->linear_state)
+		if (!FH->linear)
 		    vfs_die ("You may not do this");
-		if (fp->fe->linear_state == LS_LINEAR_CLOSED)
+		if (FH->linear == LS_LINEAR_CLOSED)
 		    return 0;
 
-		v = select_on_two (fp->fe->data_sock, 0);
+		v = vfs_s_select_on_two (FH->u.ftp.sock, 0);
 		if (((v < 0) && (errno == EINTR)) || v == 0)
 		    return 1;
 		return 0;
@@ -1685,27 +1402,27 @@ int ftpfs_ctl (void *data, int ctlop, int arg)
     }
 }
 
+/* Warning: filename passed to this command is damaged */
 static int
-send_ftp_command(char *filename, char *cmd, int flags)
+send_ftp_command(vfs *me, char *filename, char *cmd, int flags)
 {
-    char *remote_path, *p;
-    struct connection *bucket;
+    char *rpath, *p;
+    vfs_s_super *super;
     int r;
-    int flush_directory_cache = (flags & OPT_FLUSH) && (normal_flush > 0);
+    int flush_directory_cache = (flags & OPT_FLUSH);
 
-    if (!(remote_path = get_path(&bucket, filename)))
+    if (!(rpath = vfs_s_get_path_mangle(me, filename, &super, 0)))
 	return -1;
-    p = translate_path (bucket, remote_path);
-    r = command (bucket, WAIT_REPLY, cmd, p);
-    g_free (p);
-    g_free(remote_path);
-    vfs_add_noncurrent_stamps (&vfs_ftpfs_ops, (vfsid) bucket, NULL);
+    p = translate_path (me, super, rpath);
+    r = command (me, super, WAIT_REPLY, cmd, p);
+    g_free(rpath);
+    vfs_add_noncurrent_stamps (&vfs_ftpfs_ops, (vfsid) super, NULL);
     if (flags & OPT_IGNORE_ERROR)
 	r = COMPLETE;
     if (r != COMPLETE)
 	    ERRNOR (EPERM, -1);
     if (flush_directory_cache)
-	flush_all_directory(bucket);
+	vfs_s_invalidate(me, super);
     return 0;
 }
 
@@ -1732,14 +1449,7 @@ ftpfs_init_passwd(void)
     else
 	ftpfs_anonymous_passwd = g_strconcat (p, "@", hostname, NULL);
     endpwent ();
-}
-
-int
-ftpfs_init (vfs *me)
-{
-    connections_list = linklist_init();
-    ftpfs_directory_timeout = FTPFS_DIRECTORY_TIMEOUT;
-    return 1;
+    return; 
 }
 
 static int ftpfs_chmod (vfs *me, char *path, int mode)
@@ -1747,7 +1457,7 @@ static int ftpfs_chmod (vfs *me, char *path, int mode)
     char buf[BUF_SMALL];
     
     g_snprintf(buf, sizeof(buf), "SITE CHMOD %4.4o %%s", mode & 07777);
-    return send_ftp_command(path, buf, OPT_IGNORE_ERROR | OPT_FLUSH);
+    return send_ftp_command(me, path, buf, OPT_IGNORE_ERROR | OPT_FLUSH);
 }
 
 static int ftpfs_chown (vfs *me, char *path, int owner, int group)
@@ -1764,58 +1474,57 @@ static int ftpfs_chown (vfs *me, char *path, int owner, int group)
 
 static int ftpfs_unlink (vfs *me, char *path)
 {
-    return send_ftp_command(path, "DELE %s", OPT_FLUSH);
+    return send_ftp_command(me, path, "DELE %s", OPT_FLUSH);
 }
 
 /* Return true if path is the same directoy as the one we are on now */
 static int
-is_same_dir (char *path, struct connection *bucket)
+is_same_dir (vfs *me, vfs_s_super *super, char *path)
 {
-    if (!qcdir (bucket))
+    if (!SUP.cwdir)
 	return 0;
-    if (strcmp (path, qcdir (bucket)) == 0)
+    if (strcmp (path, SUP.cwdir) == 0)
 	return 1;
     return 0;
 }
 
 static int
-ftpfs_chdir_internal (struct connection *bucket ,char *remote_path)
+ftpfs_chdir_internal (vfs *me, vfs_s_super *super, char *remote_path)
 {
     int r;
     char *p;
     
-    if (!bucket->cwd_defered && is_same_dir (remote_path, bucket))
+    if (!SUP.cwd_defered && is_same_dir (me, super, remote_path))
 	return COMPLETE;
 
-    p = translate_path (bucket, remote_path);
-    r = command (bucket, WAIT_REPLY, "CWD %s", p);
-    g_free (p);
-    
+    p = translate_path (me, super, remote_path);
+    r = command (me, super, WAIT_REPLY, "CWD /%s", p);
+
     if (r != COMPLETE) {
 	my_errno = EIO;
     } else {
-	if (qcdir(bucket))
-	    g_free(qcdir(bucket));
-	qcdir(bucket) = g_strdup (remote_path);
-	bucket->cwd_defered = 0;
+	if (SUP.cwdir)
+	    g_free(SUP.cwdir);
+	SUP.cwdir = g_strdup (remote_path);
+	SUP.cwd_defered = 0;
     }
     return r;
 }
 
 static int ftpfs_rename (vfs *me, char *path1, char *path2)
 {
-    send_ftp_command(path1, "RNFR %s", OPT_FLUSH);
-    return send_ftp_command(path2, "RNTO %s", OPT_FLUSH);
+    send_ftp_command(me, path1, "RNFR %s", OPT_FLUSH);
+    return send_ftp_command(me, path2, "RNTO %s", OPT_FLUSH);
 }
 
 static int ftpfs_mkdir (vfs *me, char *path, mode_t mode)
 {
-    return send_ftp_command(path, "MKD %s", OPT_FLUSH);
+    return send_ftp_command(me, path, "MKD %s", OPT_FLUSH);
 }
 
 static int ftpfs_rmdir (vfs *me, char *path)
 {
-    return send_ftp_command(path, "RMD %s", OPT_FLUSH);
+    return send_ftp_command(me, path, "RMD %s", OPT_FLUSH);
 }
 
 void ftpfs_set_debug (const char *file)
@@ -1823,6 +1532,7 @@ void ftpfs_set_debug (const char *file)
     logfile = fopen (file, "w+");
 }
 
+#ifdef FIXME_LATER_ALIGATOR
 static void my_forget (char *file)
 {
     struct linklist *l;
@@ -1852,9 +1562,9 @@ static void my_forget (char *file)
     for (l = connections_list->next; l != connections_list; l = l->next){
 	struct connection *bucket = l->data;
 	
-	if ((strcmp (host, qhost (bucket)) == 0) &&
-	    (strcmp (user, quser (bucket)) == 0) &&
-	    (port == qport (bucket))){
+	if ((strcmp (host, SUP.host) == 0) &&
+	    (strcmp (user, SUP.user) == 0) &&
+	    (port == SUP.port)){
 	    
 	    /* close socket: the child owns it now */
 	    close (bucket->sock);
@@ -1872,60 +1582,99 @@ static void my_forget (char *file)
     if (pass)
         wipe_password (pass);
 }
+#endif
+
+static int ftpfs_fh_open (vfs *me, vfs_s_fh *fh, int flags, int mode)
+{
+    if (!fh->ino->localname)
+	if (vfs_s_retrieve_file (me, fh->ino)==-1)
+	    return -1;
+    if (!fh->ino->localname)
+	vfs_die( "retrieve_file failed to fill in localname" );
+    return 0;
+}
+
+static struct vfs_s_data ftp_data = {
+    NULL,
+    0,
+    0,
+    NULL,
+
+    NULL, /* init_inode */
+    NULL, /* free_inode */
+    NULL, /* init_entry */
+
+    NULL, /* archive_check */
+    archive_same,
+    open_archive,
+    free_archive,
+
+    ftpfs_fh_open, /* fh_open */
+    NULL, /* fh_close */
+
+    vfs_s_find_entry_linear,
+    dir_load,
+    dir_uptodate,
+    file_store,
+
+    linear_start,
+    linear_read,
+    linear_close
+};
 
 vfs vfs_ftpfs_ops = {
     NULL,	/* This is place of next pointer */
     "File Tranfer Protocol (ftp)",
     F_NET,	/* flags */
     "ftp:",	/* prefix */
-    NULL,	/* data */
+    &ftp_data,	/* data */
     0,		/* errno */
-    ftpfs_init,
-    ftpfs_done,
-    ftpfs_fill_names,
+    NULL,
+    NULL,
+    vfs_s_fill_names,
     NULL,
 
-    s_open,
-    s_close,
-    s_read,
-    s_write,
+    vfs_s_open,
+    vfs_s_close,
+    vfs_s_read,
+    vfs_s_write,
     
-    s_opendir,
-    s_readdir,
-    s_closedir,
-    s_telldir,
-    s_seekdir,
+    vfs_s_opendir,
+    vfs_s_readdir,
+    vfs_s_closedir,
+    vfs_s_telldir,
+    vfs_s_seekdir,
 
-    s_stat,
-    s_lstat,
-    s_fstat,
+    vfs_s_stat,
+    vfs_s_lstat,
+    vfs_s_fstat,
 
     ftpfs_chmod,
     ftpfs_chown,	/* not really implemented but returns success */
     NULL,
 
-    s_readlink,
+    vfs_s_readlink,
     NULL,
     NULL,
     ftpfs_unlink,
 
     ftpfs_rename,
-    s_chdir,
-    s_errno,
-    s_lseek,
+    vfs_s_chdir,
+    vfs_s_ferrno,
+    vfs_s_lseek,
     NULL,
     
-    s_getid,
-    s_nothingisopen,
-    s_free,
+    vfs_s_getid,
+    vfs_s_nothingisopen,
+    vfs_s_free,
     
-    s_getlocalcopy,
-    s_ungetlocalcopy,
+    NULL,
+    NULL,
 
     ftpfs_mkdir,
     ftpfs_rmdir,
     ftpfs_ctl,
-    s_setctl
+    vfs_s_setctl
 
 MMAPNULL
 };

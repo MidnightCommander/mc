@@ -3,6 +3,8 @@
 #if !defined(__FTPFS_H)
 #define __FTPFS_H
 
+#include "vfs/xdirentry.h"
+
 struct direntry
 {
     char *name;
@@ -87,5 +89,11 @@ extern char *ftpfs_proxy_host;
 extern int ftpfs_directory_timeout;
 extern int ftpfs_always_use_proxy;
 
-void ftpfs_init_passwd ();
+void ftpfs_init_passwd (void);
+static char *ftpfs_get_current_directory (vfs *me, vfs_s_super *super);
+static int ftpfs_chdir_internal (vfs *me, vfs_s_super *super, char *remote_path);
+
+#define OPT_FLUSH        1
+#define OPT_IGNORE_ERROR 2
+
 #endif
