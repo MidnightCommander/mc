@@ -31,7 +31,7 @@ typedef struct {
 	int progress_totals_computed;
 
 	/* Counters for progress indicators */
-	long progress_count;
+	off_t progress_count;
 	double progress_bytes;
 
 	/* The value of the "preserve Attributes" checkbox in the copy file dialog.
@@ -139,8 +139,8 @@ enum OperationMode {
 void file_op_context_create_ui (FileOpContext *ctx, FileOperation op, int with_eta);
 void file_op_context_destroy_ui (FileOpContext *ctx);
 
-FileProgressStatus file_progress_show (FileOpContext *ctx, long done, long total);
-FileProgressStatus file_progress_show_count (FileOpContext *ctx, long done, long total);
+FileProgressStatus file_progress_show (FileOpContext *ctx, off_t done, off_t total);
+FileProgressStatus file_progress_show_count (FileOpContext *ctx, off_t done, off_t total);
 FileProgressStatus file_progress_show_bytes (FileOpContext *ctx, double done, double total);
 FileProgressStatus file_progress_show_source (FileOpContext *ctx, char *path);
 FileProgressStatus file_progress_show_target (FileOpContext *ctx, char *path);

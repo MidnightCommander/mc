@@ -1,3 +1,15 @@
+2001-09-21  Pavel Roskin  <proski@gnu.org>
+
+	* cmd.c: Change all "long" variables to "off_t" whenever they
+	are used to store file sizes.
+	* file.c: Likewise.
+	* file.h: Likewise.
+	* fileopctx.h: Likewise.
+	* tree.c: Likewise.
+	* filegui.c: Likewise.
+	(show_bar): Take "double" arguments.  Normalize arguments of
+	gauge_set_value() before converting them to "int".
+
 2001-09-17  Pavel Roskin  <proski@gnu.org>
 
 	* mouse.h: Major cleanup and interface change.  init_mouse()

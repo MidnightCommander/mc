@@ -309,7 +309,7 @@ show_no_bar (FileOpContext *ctx, int n)
 }
 
 static FileProgressStatus
-show_bar (FileOpContext *ctx, int n, long done, long total)
+show_bar (FileOpContext *ctx, int n, double done, double total)
 {
     FileOpContextUI *ui;
 
@@ -318,7 +318,11 @@ show_bar (FileOpContext *ctx, int n, long done, long total)
     
     ui = ctx->ui;
 
-    gauge_set_value (ui->progress_gauge[n], (int) total, (int) done);
+    /*
+     * Gauge needs integers, so give it with integers between 0 and 1023.
+     * This precision should be quite reasonable.
+     */
+    gauge_set_value (ui->progress_gauge[n], 1024, (int) (1024 * done / total));
     gauge_show (ui->progress_gauge[n], 1);
     return check_progress_buttons (ctx);
 }
@@ -376,7 +380,7 @@ file_bps_show (FileOpContext *ctx)
 }
 
 FileProgressStatus
-file_progress_show (FileOpContext *ctx, long done, long total)
+file_progress_show (FileOpContext *ctx, off_t done, off_t total)
 {
     FileOpContextUI *ui;
 
@@ -399,7 +403,7 @@ file_progress_show (FileOpContext *ctx, long done, long total)
 }
 
 FileProgressStatus
-file_progress_show_count (FileOpContext *ctx, long done, long total)
+file_progress_show_count (FileOpContext *ctx, off_t done, off_t total)
 {
     FileOpContextUI *ui;
 

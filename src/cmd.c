@@ -593,7 +593,7 @@ void unselect_cmd (void)
 int check_for_default(char *default_file, char *file)
 {
     struct stat s;
-    long   count = 0;
+    off_t  count = 0;
     double bytes = 0;
     FileOpContext *ctx;
     
@@ -714,7 +714,7 @@ void reselect_vfs (void)
 }
 #endif /* USE_VFS */
 
-static int compare_files (char *name1, char *name2, long size)
+static int compare_files (char *name1, char *name2, off_t size)
 {
     int file1, file2;
     int result = -1;		/* Different by default */
@@ -1357,7 +1357,7 @@ dirsizes_cmd (void)
 {
     WPanel *panel = cpanel;
     int i;
-    long marked;
+    off_t marked;
     double total;
 
     for (i = 0; i < panel->count; i++) 

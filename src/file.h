@@ -9,17 +9,17 @@ extern int know_not_what_am_i_doing;
 struct link;
 
 int copy_file_file      (FileOpContext *ctx, char *s, char *d, int ask_overwrite,
-			 long *progres_count, double *progress_bytes, 
+			 off_t *progress_count, double *progress_bytes, 
                          int is_toplevel_file);
 int move_file_file      (FileOpContext *ctx, char *s, char *d,
-			 long *progres_count, double *progress_bytes);
+			 off_t *progress_count, double *progress_bytes);
 int move_dir_dir        (FileOpContext *ctx, char *s, char *d,
-			 long *progres_count, double *progress_bytes);
+			 off_t *progress_count, double *progress_bytes);
 int copy_dir_dir        (FileOpContext *ctx, char *s, char *d, int toplevel, int move_over,
 			 int delete, struct link *parent_dirs,
-			 long *progres_count, double *progress_bytes);
-int erase_dir           (FileOpContext *ctx, char *s, long *progres_count, double *progress_bytes);
-int erase_file          (FileOpContext *ctx, char *s, long *progress_count, double *progress_bytes,
+			 off_t *progress_count, double *progress_bytes);
+int erase_dir           (FileOpContext *ctx, char *s, off_t *progress_count, double *progress_bytes);
+int erase_file          (FileOpContext *ctx, char *s, off_t *progress_count, double *progress_bytes,
 			 int is_toplevel_file);
 int erase_dir_iff_empty (FileOpContext *ctx, char *s);
 
@@ -42,7 +42,6 @@ extern int file_op_compute_totals;
 extern int background_wait;
 
 int is_wildcarded (char *p);
-void compute_dir_size (char *dirname, long *ret_marked, double *ret_total);
-#endif
+void compute_dir_size (char *dirname, off_t *ret_marked, double *ret_total);
 
-
+#endif /* !__FILE_H */

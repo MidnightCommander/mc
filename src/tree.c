@@ -630,7 +630,7 @@ static int tree_forget_cmd (WTree *tree)
 static void tree_copy (WTree *tree, char *default_dest)
 {
     char   *dest;
-    long   count = 0;
+    off_t  count = 0;
     double bytes = 0;
     FileOpContext *ctx;
 
@@ -672,7 +672,7 @@ static void tree_move (WTree *tree, char *default_dest)
     char   *dest;
     struct stat buf;
     double bytes = 0;
-    long   count = 0;
+    off_t  count = 0;
     FileOpContext *ctx;
 
     if (!tree->selected_ptr)
@@ -738,7 +738,7 @@ static void
 tree_rmdir_cmd (WTree *tree)
 {
     char old_dir [MC_MAXPATHLEN];
-    long count = 0;
+    off_t count = 0;
     double bytes = 0;
     FileOpContext *ctx;
 

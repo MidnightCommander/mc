@@ -147,7 +147,7 @@ char *op_names [3] = {
 };
 
 static int recursive_erase (FileOpContext *ctx, char *s,
-			    long *progress_count, double *progress_bytes);
+			    off_t *progress_count, double *progress_bytes);
 
 /* }}} */
 
@@ -437,7 +437,7 @@ make_symlink (FileOpContext *ctx, char *src_path, char *dst_path)
 
 static int
 progress_update_one (FileOpContext *ctx,
-		     long *progress_count, 
+		     off_t *progress_count, 
                      double *progress_bytes, 
                      int add,
                      int is_toplevel_file)
@@ -460,7 +460,7 @@ progress_update_one (FileOpContext *ctx,
 
 int
 copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_overwrite,
-		long  *progress_count, double *progress_bytes, 
+		off_t *progress_count, double *progress_bytes, 
                 int is_toplevel_file)
 {
 #ifndef OS2_NT
@@ -475,7 +475,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
     struct stat sb, sb2;
     struct utimbuf utb;
     int  dst_exists = 0, appending = 0;
-    long n_read_total = 0, file_size = -1;
+    off_t n_read_total = 0, file_size = -1;
     int  return_status, temp_status;
     struct timeval tv_transfer_start;
 
@@ -845,7 +845,7 @@ int
 copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 	      int move_over, int delete,
               struct link *parent_dirs,
-	      long *progress_count,
+	      off_t *progress_count,
 	      double *progress_bytes)
 {
 #ifdef __os2__
@@ -1070,7 +1070,8 @@ ret:
 /* {{{ Move routines */
 
 int
-move_file_file (FileOpContext *ctx, char *s, char *d, long *progress_count, double *progress_bytes)
+move_file_file (FileOpContext *ctx, char *s, char *d,
+		off_t *progress_count, double *progress_bytes)
 {
     struct stat src_stats, dst_stats;
     int return_status = FILE_CONT;
@@ -1198,7 +1199,8 @@ move_file_file (FileOpContext *ctx, char *s, char *d, long *progress_count, doub
 }
 
 int
-move_dir_dir (FileOpContext *ctx, char *s, char *d, long *progress_count, double *progress_bytes)
+move_dir_dir (FileOpContext *ctx, char *s, char *d,
+	      off_t *progress_count, double *progress_bytes)
 {
     struct stat sbuf, dbuf, destbuf;
     struct link *lp;
@@ -1328,7 +1330,7 @@ move_dir_dir (FileOpContext *ctx, char *s, char *d, long *progress_count, double
 /* {{{ Erase routines */
 /* Don't update progress status if progress_count==NULL */
 int
-erase_file (FileOpContext *ctx, char *s, long *progress_count, double *progress_bytes,
+erase_file (FileOpContext *ctx, char *s, off_t *progress_count, double *progress_bytes,
 	    int is_toplevel_file)
 {
     int return_status;
@@ -1359,7 +1361,7 @@ erase_file (FileOpContext *ctx, char *s, long *progress_count, double *progress_
 }
 
 static int
-recursive_erase (FileOpContext *ctx, char *s, long *progress_count, double *progress_bytes)
+recursive_erase (FileOpContext *ctx, char *s, off_t *progress_count, double *progress_bytes)
 {
     struct dirent *next;
     struct stat	buf;
@@ -1442,7 +1444,7 @@ check_dir_is_empty(char *path)
 }
 
 int
-erase_dir (FileOpContext *ctx, char *s, long *progress_count, double *progress_bytes)
+erase_dir (FileOpContext *ctx, char *s, off_t *progress_count, double *progress_bytes)
 {
     int error;
 
@@ -1568,7 +1570,7 @@ is_wildcarded (char *p)
  * Computes the number of bytes used by the files in a directory
  */
 void
-compute_dir_size (char *dirname, long *ret_marked, double *ret_total)
+compute_dir_size (char *dirname, off_t *ret_marked, double *ret_total)
 {
 	DIR *dir;
 	struct dirent *dirent;
@@ -1598,7 +1600,7 @@ compute_dir_size (char *dirname, long *ret_marked, double *ret_total)
 		}
 
 		if (S_ISDIR (s.st_mode)){
-			long   subdir_count = 0;
+			off_t  subdir_count = 0;
 			double subdir_bytes = 0;
 
 			compute_dir_size (fullname, &subdir_count, &subdir_bytes);
@@ -1624,7 +1626,7 @@ compute_dir_size (char *dirname, long *ret_marked, double *ret_total)
  * overwrite any files by doing the copy.
  */
 static void
-panel_compute_totals (WPanel *panel, long *ret_marked, double *ret_total)
+panel_compute_totals (WPanel *panel, off_t *ret_marked, double *ret_total)
 {
 	int i;
 
@@ -1641,7 +1643,7 @@ panel_compute_totals (WPanel *panel, long *ret_marked, double *ret_total)
 
 		if (S_ISDIR (s->st_mode)){
 			char   *dir_name;
-			long   subdir_count = 0;
+			off_t  subdir_count = 0;
 			double subdir_bytes = 0;
 
 			dir_name = concat_dir_and_file (panel->cwd, panel->dir.list [i].fname);
@@ -1832,7 +1834,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
     int i, value;
     FileOpContext *ctx;
 
-    long   count = 0;         
+    off_t  count = 0;         
     double bytes = 0;
 
     int  dst_result;
