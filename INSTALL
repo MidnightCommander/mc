@@ -290,14 +290,13 @@ hppa-hp-hpux9
 hppa-hp-hpux7
 m68k-apple-aux
 mc88110-aviion-dgux5.4
-i386-*-{bsdi2,freebsd,openbsd}
+i386-*-bsdi2
+i386-*-freebsd4.3
+i386-*-openbsd2.9
 
 Midnight Commander is written in a portable manner and uses GNU Autoconf
 for configuration, so it is expected to compile without changes on many
 other operating systems.
-
-If you're using AIX, with the cc6000 compiler, you have to specify the
-`--with-mmap' command line option. 
 
 You will need GNU C (or an ANSI C Compiler) and glib library to compile
 the source.  The Midnight Commander now comes with the S-Lang screen

@@ -1,6 +1,6 @@
 Authors of GNU Midnight Commander:
 
-Miguel de Icaza <miguel@roxanne.nuclecu.unam.mx>
+Miguel de Icaza <miguel@ximian.com>
 Janne Kukonlehto <jtklehto@paju.oulu.fi>
 Radek Doulik <rodo@ucw.cz>
 Fred Leeflang <fredl@nebula.ow.org>
@@ -12,5 +12,9 @@ Norbert Warmuth <nwarmuth@privat.circular.de>
 Mauricio Plaza <mok@roxanne.nuclecu.unam.mx>
 Paul Sheer <psheer@icon.co.za>
 Pavel Machek <pavel@ucw.cz>
+Pavel Roskin <proski@gnu.org>
 
 See the documentation for the list of key contributors.
+
+Any questions about the software should not be sent to the authors.
+They should be sent to the mailing list mc@gnome.org

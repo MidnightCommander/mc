@@ -1,5 +1,11 @@
 2001-08-20  Pavel Roskin  <proski@gnu.org>
 
+	* AUTHORS: Updated.
+	* INSTALL: Likewise.
+	* NEWS: Likewise.
+	* doc/mc.1.in: Likewise.
+	* doc/mcserv.8.in: Likewise.
+
 	* acinclude.m4 (AC_GET_FS_INFO): Specify includes when checking
 	for sys/mount.h.
 

@@ -1,3 +1,20 @@
+Version 4.5.55
+
+- Mostly bugfixes and portability fixes.  QNX Neutrino support.
+
+- Text edition improvements.
+	- Ctrl-O suported in the viewer and editor.
+	- Better terminal support.
+
+- GNOME edition improvements.
+	- Find dialog rewritten.
+	- Editor askes whether to save file when it's closed.
+
+- Experimental features (disabled by default).
+	- Charset conversion support.
+	- Large (64-bit) file supportr on 32-bit systems.
+
+
 Version 4.5
 
 - Too many new features to list.
