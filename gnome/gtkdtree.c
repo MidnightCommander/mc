@@ -281,6 +281,8 @@ gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
 		
 		if (node){
 			gtk_ctree_expand (GTK_CTREE (dtree), node);
+			while (gtk_events_pending ())
+				gtk_main_iteration ();
 			current_node = node;
 		} else
 			break;
@@ -507,7 +509,7 @@ gtk_dtree_construct (GtkDTree *dtree)
 	gtk_clist_columns_autosize (clist);
 	
 	gtk_ctree_set_line_style (ctree, GTK_CTREE_LINES_DOTTED);
-	gtk_ctree_set_reorderable (ctree, TRUE);
+	gtk_ctree_set_reorderable (ctree, FALSE);
 
 	gdk_dtree_load_pixmaps (dtree);
 	gtk_dtree_load_root_tree (dtree);

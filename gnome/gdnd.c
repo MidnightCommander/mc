@@ -70,7 +70,7 @@ find_panel_owning_window (GdkDragContext *context)
 {
 	GList *list;
 	WPanel *panel;
-	GtkWidget *source_widget;
+	GtkWidget *source_widget, *toplevel_widget;
 
 	source_widget = gtk_drag_get_source_widget (context);
 	if (!source_widget)
@@ -82,7 +82,7 @@ find_panel_owning_window (GdkDragContext *context)
 	 * widget for each WPanel and compare this to the
 	 * toplevel source_widget
 	 */
-	source_widget = gtk_widget_get_toplevel (source_widget);
+	toplevel_widget = gtk_widget_get_toplevel (source_widget);
 
 	for (list = containers; list; list = list->next) {
 		GtkWidget *panel_toplevel_widget;
@@ -91,7 +91,7 @@ find_panel_owning_window (GdkDragContext *context)
 
 		panel_toplevel_widget = panel->xwindow;
 
-		if (panel->xwindow == source_widget){
+		if (panel->xwindow == toplevel_widget){
 
 			/*
 			 * Now a WPanel actually contains a number of
@@ -267,6 +267,7 @@ gdnd_drop_on_directory (GdkDragContext *context, GtkSelectionData *selection_dat
 	/* If we are dragging from a file panel, we can display a nicer status display */
 	source_panel = find_panel_owning_window (context);
 
+	printf ("Panel found for this source: %p\n", source_panel);
 	/* Symlinks do not use file.c */
 
 	if (source_panel && action != GDK_ACTION_LINK)

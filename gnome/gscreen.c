@@ -43,6 +43,7 @@
 #include "dev.xpm"
 #include "listing-list.xpm"
 #include "listing-iconic.xpm"
+
 /* This is used to initialize our pixmaps */
 static int pixmaps_ready;
 GdkPixmap *icon_directory_pixmap;
@@ -51,15 +52,6 @@ GdkPixmap *icon_link_pixmap;
 GdkBitmap *icon_link_mask;
 GdkPixmap *icon_dev_pixmap;
 GdkBitmap *icon_dev_mask;
-
-/* These are big images used in the Icon View,  for the gnome_icon_list */
-static GdkImlibImage *icon_view_directory;
-static GdkImlibImage *icon_view_executable;
-static GdkImlibImage *icon_view_symlink;
-static GdkImlibImage *icon_view_device;
-static GdkImlibImage *icon_view_regular;
-static GdkImlibImage *icon_view_core;
-static GdkImlibImage *icon_view_sock;
 
 static GtkTargetEntry drag_types [] = {
 	{ "text/uri-list", 0, TARGET_URI_LIST },
@@ -218,37 +210,7 @@ panel_fill_panel_icons (WPanel *panel)
 	for (i = 0; i < top; i++){
 		file_entry *fe = &panel->dir.list [i];
 
-		
-		switch (file_entry_color (fe)){
-		case DIRECTORY_COLOR:
-			image = icon_view_directory;
-			break;
-			
-		case LINK_COLOR:
-			image = icon_view_symlink;
-			break;
-			
-		case DEVICE_COLOR:
-			image = icon_view_device;
-			break;
-			
-		case SPECIAL_COLOR:
-			image = icon_view_sock;
-			break;
-			
-		case EXECUTABLE_COLOR:
-			image = icon_view_executable;
-			break;
-				
-		case CORE_COLOR:
-			image = icon_view_core;
-			break;
-			
-		case STALLED_COLOR:
-		case NORMAL_COLOR:
-		default:
-			image = icon_view_regular;
-		}
+		image = gicon_get_icon_for_file (fe);
 		gnome_icon_list_append_imlib (icons, image, fe->fname);
 	}
 	/* This is needed as the gtk_clist_append changes selected under us :-( */
@@ -1056,17 +1018,6 @@ panel_icon_renamed (GtkWidget *widget, int index, char *dest, WPanel *panel)
 		return FALSE;
 }
 
-static GdkImlibImage *
-load_image_icon_view (char *base)
-{
-	GdkImlibImage *im;
-	char *f = concat_dir_and_file (ICONDIR, base);
-
-	im = gdk_imlib_load_image (f);
-	g_free (f);
-	return im;
-}
-
 static void
 load_imlib_icons (void)
 {
@@ -1075,14 +1026,6 @@ load_imlib_icons (void)
 	if (loaded)
 		return;
 	
-	icon_view_directory  = load_image_icon_view ("i-directory.png");
-	icon_view_executable = load_image_icon_view ("i-executable.png");
-	icon_view_symlink    = load_image_icon_view ("i-symlink.png");
-	icon_view_device     = load_image_icon_view ("i-device.png");
-	icon_view_regular    = load_image_icon_view ("i-regular.png");
-	icon_view_core       = load_image_icon_view ("i-core.png");
-	icon_view_sock       = load_image_icon_view ("i-sock.png");
-
 	loaded = 1;
 }
 
@@ -1580,7 +1523,7 @@ panel_tree_scroll (gpointer data)
 	else{
 		gtk_adjustment_set_value (va, va->value + va->step_increment);
 	}
-	return FALSE;
+	return TRUE;
 }
 
 /** 

@@ -286,17 +286,27 @@ gnome_monitor (GtkWidget *widget, WView *view)
 }
 
 GnomeUIInfo gview_file_menu [] = {
-	GNOMEUIINFO_ITEM (N_("Goto line"),    N_("Jump to a specified line number"), &gnome_goto_line, NULL),
+	GNOMEUIINFO_ITEM_STOCK (N_("Goto line"),
+				N_("Jump to a specified line number"),
+				&gnome_goto_line, GNOME_STOCK_PIXMAP_JUMP_TO),
 	GNOMEUIINFO_ITEM (N_("Monitor file"), N_("Monitor file growing"),            &gnome_monitor, NULL),
-	GNOMEUIINFO_ITEM (N_("Quit"),         N_("Terminate the viewer"), &gview_quit, NULL),
+	GNOMEUIINFO_ITEM_STOCK (N_("Quit"),
+				N_("Terminate the viewer"),
+				&gview_quit, GNOME_STOCK_PIXMAP_QUIT),
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 
 GnomeUIInfo gview_search_menu [] = {
-	GNOMEUIINFO_ITEM (N_("Search"),          N_("String search"),             gnome_normal_search_cmd, NULL),
-	GNOMEUIINFO_ITEM (N_("Regexp search"),   N_("Regular expression search"), gnome_regexp_search_cmd, NULL),
+	GNOMEUIINFO_ITEM_STOCK (N_("Search"),
+				N_("String search"),
+				gnome_normal_search_cmd, GNOME_STOCK_MENU_SEARCH),
+	GNOMEUIINFO_ITEM_STOCK (N_("Regexp search"),
+				N_("Regular expression search"),
+				gnome_regexp_search_cmd, GNOME_STOCK_MENU_SEARCH),
 	GNOMEUIINFO_SEPARATOR,			 
-	GNOMEUIINFO_ITEM (N_("Search again..."), N_("Continue searching"),        gnome_continue_search, NULL),
+	GNOMEUIINFO_ITEM_STOCK (N_("Search again..."),
+				N_("Continue searching"),
+				gnome_continue_search, GNOME_STOCK_MENU_SRCHRPL),
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 

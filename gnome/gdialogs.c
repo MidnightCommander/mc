@@ -210,9 +210,11 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_
         cbox = gtk_check_button_new_with_label (N_("Copy as a background process"));
         gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (cbox), *do_background);
         gtk_signal_connect (GTK_OBJECT (cbox), "toggled", (GtkSignalFunc) fmd_check_box_callback, do_background);
+#if 0
         gnome_widget_add_help (cbox, "Selecting this will run the copying in the background.  "
                                "This is useful for transfers over networks that might take a long "
                                "time to complete.");
+#endif
         gtk_box_pack_end (GTK_BOX (vbox), cbox, FALSE, FALSE, 0);
         gtk_box_pack_end (GTK_BOX (vbox), gtk_hseparator_new (), FALSE, FALSE, 0);
         gtk_box_pack_end (GTK_BOX (vbox), fentry, FALSE, FALSE, 0);
@@ -232,7 +234,9 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_
         cbox = gtk_check_button_new_with_label (N_("Preserve symlinks"));
         gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (cbox), file_mask_stable_symlinks);
         gtk_signal_connect (GTK_OBJECT (cbox), "toggled", (GtkSignalFunc) fmd_check_box_callback, &file_mask_stable_symlinks);
+#if 0
         gnome_widget_add_help (cbox, "FIXME: Add something here Miguel");
+#endif
         gtk_box_pack_start (GTK_BOX (vbox), cbox, FALSE, FALSE, 0);
 
 
