@@ -592,6 +592,10 @@ edit_clean (WEdit *edit)
     if (option_save_position)
 	edit_save_position (edit);
 
+    /* File specified on the mcedit command line and never saved */
+    if (edit->delete_file)
+	unlink (edit->filename);
+
     edit_free_syntax_rules (edit);
     book_mark_flush (edit, -1);
     for (; j <= MAXBUFF; j++) {

@@ -1,5 +1,11 @@
 2003-07-20  Pavel Roskin  <proski@gnu.org>
 
+	* editcmd.c (edit_quit_cmd): Don't save this command in the undo
+	stack.  Don't force any refresh.  Don't delete unsaved files, do
+	it ...
+	* edit.c (edit_clean): ... here.  This ensures that unsaved
+	files from the mcedit command line are erased on Ctrl-n.
+
 	* editwidget.c (edit): Remove unused variable "framed".
 
 2003-07-08  Adam Byrtek  <alpha@debian.org>

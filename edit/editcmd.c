@@ -2052,9 +2052,6 @@ void edit_search_cmd (WEdit * edit, int again)
 /* Real edit only */
 void edit_quit_cmd (WEdit * edit)
 {
-    edit_push_action (edit, KEY_PRESS + edit->start_display);
-
-    edit->force |= REDRAW_COMPLETELY;
     if (edit->modified) {
 	switch (edit_query_dialog3 (_ ("Quit"), _ (" File was modified, Save with exit? "), _ ("Cancel quit"), _ ("&Yes"), _ ("&No"))) {
 	case 1:
@@ -2074,8 +2071,6 @@ void edit_quit_cmd (WEdit * edit)
 	    return;
 	}
     }
-    else if (edit->delete_file)
-	unlink (edit->filename);
     dlg_stop (edit->widget.parent);
 }
 
