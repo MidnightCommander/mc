@@ -1,11 +1,12 @@
 # Originally by Yury Sirota <rasta@renome.rovno.ua>
+# 2002 Volodymyr M. Lisivka <lvm@mystery.lviv.net
+
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "POT-Creation-Date: 2002-12-26 16:32-0500\n"
 "PO-Revision-Date: 2002-04-11 16:36+0300\n"
-"Last-Translator: Volodymyr M. Lisivka <lvm@mystery.lviv.net>, Andrew V. "
-"Samoilov <sav@bcs.zp.ua>\n"
+"Last-Translator: Andrew V. Samoilov <sav@bcs.zp.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=KOI8-U\n"
@@ -683,9 +684,8 @@ msgid "Synta&x highlighting"
 msgstr "&П╕дсв╕тка синтаксису"
 
 #: edit/editoptions.c:91
-#, fuzzy
 msgid "Save file &position"
-msgstr " Зберегти файл "
+msgstr "Зберегти позиц╕ю в файл╕"
 
 #: edit/editoptions.c:94
 msgid "Confir&m before saving"
@@ -948,9 +948,8 @@ msgid "&Select"
 msgstr "&Вибрати"
 
 #: src/boxes.c:715
-#, fuzzy
 msgid "Use &passive mode"
-msgstr "Режим &збереження..."
+msgstr "Використовувати пасивний режим"
 
 #: src/boxes.c:717
 msgid "&Use ~/.netrc"
@@ -1527,9 +1526,8 @@ msgid "File '%s' exists but cannot be stat-ed: %s"
 msgstr "Файл \"%s\" ╕сну╓, але його властивост╕ не можна отримати: %s"
 
 #: src/dir.c:474 src/dir.c:582
-#, fuzzy
 msgid "Cannot read directory contents"
-msgstr "Не вдалося зм╕нити каталог"
+msgstr "Не вдалося отримати зм╕ст каталога"
 
 #: src/ext.c:106 src/user.c:568
 #, c-format
@@ -2448,9 +2446,8 @@ msgid "&Horizontal"
 msgstr "&Горизонтальне"
 
 #: src/layout.c:164
-#, fuzzy
 msgid "&Xterm window title"
-msgstr "Поради у &xterm"
+msgstr "Заголовок в╕кна &xterm"
 
 #: src/layout.c:165
 msgid "h&Intbar visible"
@@ -3012,9 +3009,8 @@ msgid "Force subshell execution"
 msgstr "Примусове виконання через п╕доболонку"
 
 #: src/main.c:2263
-#, fuzzy
 msgid "Print last working directory to specified file"
-msgstr "Друкуватиме робочий каталог при виход╕ з програми"
+msgstr "Друкуватиме останн╕й робочий каталог у вказаний файл"
 
 #: src/main.c:2265
 msgid "Resets soft keys on HP terminals"
@@ -3550,7 +3546,7 @@ msgstr ""
 #: src/user.c:781
 #, c-format
 msgid " No suitable entries found in %s "
-msgstr " Не знайдено запис╕в, як╕ п╕дходять, у %s"
+msgstr " Не знайдено запис╕в, як╕ п╕дходять, у %s "
 
 #: src/user.c:787
 msgid " User menu "
@@ -3565,19 +3561,19 @@ msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
 #: src/utilunix.c:333
-#, fuzzy, c-format
+#, c-format
 msgid "%s is not a directory\n"
-msgstr "Надрукувати каталог даних"
+msgstr "%s не ╓ каталогом\n"
 
 #: src/utilunix.c:335
 #, c-format
 msgid "Directory %s is not owned by you\n"
-msgstr ""
+msgstr "Каталог %s не належить вам\n"
 
 #: src/utilunix.c:338
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Не вда╓ться створити тимчасовый каталог \"%s\": %s\n"
+msgstr "Не вда╓ться встановити в╕рн╕ права для каталога %s\n"
 
 #: src/utilunix.c:343
 #, c-format
@@ -3587,11 +3583,11 @@ msgstr "Не вда╓ться створити тимчасовый каталог \"%s\": %s\n"
 #: src/utilunix.c:373
 #, c-format
 msgid "Temporary files will be created in %s\n"
-msgstr ""
+msgstr "Тимчасов╕ файли будуть створюватися у %s\n"
 
 #: src/utilunix.c:376
 msgid "Temporary files will not be created\n"
-msgstr ""
+msgstr "Тимчасов╕ файли створюватися не будуть\n"
 
 #: src/utilunix.c:401
 msgid " Pipe failed "
@@ -3607,7 +3603,7 @@ msgstr " Не вда╓ться породити процес-нащадок "
 
 #: src/view.c:548
 msgid "Empty output from child filter"
-msgstr ""
+msgstr "Ф╕льтр-нащадок не повернув даних"
 
 #: src/view.c:554
 msgid " Cannot open file "
