@@ -1,6 +1,6 @@
 2002-11-12  Pavel Roskin  <proski@gnu.org>
 
-	* fish.c (fish_which): Make static.
+	* fish.c (fish_which): Remove.
 
 2002-11-12  Andrew V. Samoilov  <sav@bcs.zp.ua>
 

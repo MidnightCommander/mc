@@ -324,18 +324,6 @@ archive_same(vfs *me, vfs_s_super *super, char *archive_name, char *op, void *co
 }
 
 static int
-fish_which (vfs *me, char *path)
-{
-    if (!strncmp (path, "/#sh:", 5))
-        return 1;
-    if (!strncmp (path, "/#ssh:", 6))
-        return 1;
-    if (!strncmp (path, "/#rsh:", 6))
-        return 1;
-    return 0;
-}
-
-static int
 dir_uptodate(vfs *me, vfs_s_inode *ino)
 {
     struct timeval tim;
