@@ -19,6 +19,9 @@
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
    02111-1307 USA.  */
 
+#ifndef USE_INCLUDED_REGEX
+#include <regex.h>
+#else
 #ifndef _REGEX_H
 #define _REGEX_H 1
 
@@ -563,3 +566,4 @@ version-control: t
 trim-versions-without-asking: nil
 End:
 */
+#endif

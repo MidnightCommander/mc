@@ -32,6 +32,7 @@
 # include <config.h>
 #endif
 
+#ifdef USE_INCLUDED_REGEX
 #ifndef PARAMS
 # if defined __GNUC__ || (defined __STDC__ && __STDC__)
 #  define PARAMS(args) args
@@ -8358,3 +8359,4 @@ weak_alias (__regfree, regfree)
 # undef WCHAR
 
 # define DEFINED_ONCE
+#endif /* USE_INCLUDED_REGEX */

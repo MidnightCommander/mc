@@ -1,3 +1,8 @@
+2002-03-26  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* eregex.h [!USE_INCLUDED_REGEX]: Include <regex.h>.
+	* regex.c: Compile only if USE_INCLUDED_REGEX is defined.
+
 2002-03-25  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* complete.c (insert_text): Fix buffer overflow.
