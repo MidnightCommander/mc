@@ -1,3 +1,11 @@
+1998-03-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gmc-chargrid.c (update_strip): Doh.  Fixed painting of
+	background rectangles.
+	(gmc_char_grid_expose): Fixed off-by-one errors in area
+	calculation.  Ripped off the code from gtkterm to do this :-)
+	(free_attrs): New internal convenience function.
+
 Thu Mar 12 00:08:06 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gview.c (view_percent): Added status display.

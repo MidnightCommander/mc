@@ -144,6 +144,28 @@ gmc_char_grid_new (void)
 }
 
 static void
+free_attrs (GmcCharGrid *cgrid)
+{
+	int i;
+	struct attr *attrs;
+
+	attrs = ATTRS (cgrid);
+
+	if (!cgrid->attrs)
+		return;
+
+	for (i = 0; i < (cgrid->width * cgrid->height); i++) {
+		if (attrs[i].fg)
+			g_free (attrs[i].fg);
+
+		if (attrs[i].bg)
+			g_free (attrs[i].bg);
+	}
+
+	g_free (attrs);
+}
+
+static void
 gmc_char_grid_destroy (GtkObject *object)
 {
 	GmcCharGrid *cgrid;
@@ -156,8 +178,7 @@ gmc_char_grid_destroy (GtkObject *object)
 	if (cgrid->chars)
 		g_free (cgrid->chars);
 
-	if (cgrid->attrs)
-		g_free (cgrid->attrs);
+	free_attrs (cgrid);
 
 	if (cgrid->font)
 		gdk_font_unref (cgrid->font);
@@ -285,7 +306,7 @@ update_strip (GmcCharGrid *cgrid, int x, int y, int width)
 				    TRUE,
 				    (first + x) * cgrid->char_width,
 				    y * cgrid->char_height,
-				    cgrid->char_width,
+				    cgrid->char_width * (i - first),
 				    cgrid->char_height);
 	}
 	
@@ -331,7 +352,9 @@ static gint
 gmc_char_grid_expose (GtkWidget *widget, GdkEventExpose *event)
 {
 	GmcCharGrid *cgrid;
+	GdkRectangle *area;
 	int x1, y1, x2, y2;
+	gint w, h;
 
 	g_return_val_if_fail (widget != NULL, FALSE);
 	g_return_val_if_fail (GMC_IS_CHAR_GRID (widget), FALSE);
@@ -340,13 +363,27 @@ gmc_char_grid_expose (GtkWidget *widget, GdkEventExpose *event)
 	if (GTK_WIDGET_DRAWABLE (widget)) {
 		cgrid = GMC_CHAR_GRID (widget);
 
-		x1 = event->area.x / cgrid->char_width;
-		y1 = event->area.y / cgrid->char_height;
+		area = &event->area;
 
-		x2 = (event->area.x + event->area.width) / cgrid->char_width;
-		y2 = (event->area.y + event->area.height) / cgrid->char_height;
+		/* This logic is shamelessly ripped from gtkterm :-)  - Federico */
 
-		update_region (cgrid, x1, y1, (x2 - x1) + 1, (y2 - y1));
+		if (area->width > 1)
+			area->width--;
+		else if (area->x > 0)
+			area->x--;
+
+		if (area->height > 1)
+			area->height--;
+		else if (area->y > 0)
+			area->y--;
+
+		x1 = area->x / cgrid->char_width;
+		y1 = area->y / cgrid->char_height;
+
+		x2 = (area->x + area->width) / cgrid->char_width;
+		y2 = (area->y + area->height) / cgrid->char_height;
+
+		update_region (cgrid, x1, y1, (x2 - x1) + 1, (y2 - y1) + 1);
 	}
 
 	return FALSE;
@@ -401,7 +438,6 @@ gmc_char_grid_put_char (GmcCharGrid *cgrid, int x, int y, GdkColor *fg, GdkColor
 {
 	char *chars;
 	struct attr *attrs;
-	int idx;
 		
 	g_return_if_fail (cgrid != NULL);
 	g_return_if_fail (GMC_IS_CHAR_GRID (cgrid));
@@ -410,10 +446,8 @@ gmc_char_grid_put_char (GmcCharGrid *cgrid, int x, int y, GdkColor *fg, GdkColor
 	    || (y < 0) || (y >= cgrid->height))
 		return;
 
-	idx = y * cgrid->width + x;
-
-	chars = CHARS (cgrid) + idx;
-	attrs = ATTRS (cgrid) + idx;
+	chars = CHARS (cgrid) + (y * cgrid->width + x);
+	attrs = ATTRS (cgrid) + (y * cgrid->width + x);
 
 	*chars = ch;
 
@@ -458,7 +492,7 @@ gmc_char_grid_put_text (GmcCharGrid *cgrid, int x, int y, GdkColor *fg, GdkColor
 {
 	char *chars;
 	struct attr *attrs;
-	int i, pos, idx;
+	int i, pos;
 
 	g_return_if_fail (cgrid != NULL);
 	g_return_if_fail (GMC_IS_CHAR_GRID (cgrid));
@@ -590,14 +624,13 @@ gmc_char_grid_real_size_changed (GmcCharGrid *cgrid, guint width, guint height)
 	if ((width == cgrid->width) && (height == cgrid->height))
 		return;
 
-	cgrid->width = width;
-	cgrid->height = height;
-
 	if (cgrid->chars)
 		g_free (cgrid->chars);
 
-	if (cgrid->attrs)
-		g_free (cgrid->attrs);
+	free_attrs (cgrid);
+
+	cgrid->width = width;
+	cgrid->height = height;
 
 	chars = g_new (char, width * height);
 	cgrid->chars = chars;
