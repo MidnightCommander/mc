@@ -42,8 +42,6 @@ struct vfs_class {
     void *(*opendir) (struct vfs_class *me, char *dirname);
     void *(*readdir) (void *vfs_info);
     int (*closedir) (void *vfs_info);
-    int (*telldir) (void *vfs_info);
-    void (*seekdir) (void *vfs_info, int offset);
 
     int (*stat) (struct vfs_class *me, char *path, struct stat * buf);
     int (*lstat) (struct vfs_class *me, char *path, struct stat * buf);
@@ -163,8 +161,6 @@ int mc_chdir (char *);
 DIR *mc_opendir (char *dirname);
 struct dirent *mc_readdir (DIR * dirp);
 int mc_closedir (DIR * dir);
-int mc_telldir (DIR * dir);
-void mc_seekdir (DIR * dir, int offset);
 
 int mc_stat (const char *path, struct stat *buf);
 int mc_lstat (const char *path, struct stat *buf);

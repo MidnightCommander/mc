@@ -628,33 +628,6 @@ vfs_s_readdir(void *data)
 }
 
 static int
-vfs_s_telldir (void *data)
-{
-    struct dirhandle *info = (struct dirhandle *) data;
-    struct vfs_s_entry *cur;
-    int num = 0;
-
-    cur = info->dir->subdir;
-    while (cur!=NULL){
-        if (cur == info->cur)
-	    return num;
-	num++;
-	cur = cur->next;
-    }
-    return -1;
-}
-
-static void
-vfs_s_seekdir (void *data, int offset)
-{
-    struct dirhandle *info = (struct dirhandle *) data;
-    int i;
-    info->cur = info->dir->subdir;
-    for (i=0; i<offset; i++)
-        vfs_s_readdir (data);
-}
-
-static int
 vfs_s_closedir (void *data)
 {
     struct dirhandle *info = (struct dirhandle *) data;
@@ -1095,8 +1068,6 @@ vfs_s_init_class (struct vfs_class *vclass)
     vclass->opendir = vfs_s_opendir;
     vclass->readdir = vfs_s_readdir;
     vclass->closedir = vfs_s_closedir;
-    vclass->telldir = vfs_s_telldir;
-    vclass->seekdir = vfs_s_seekdir;
     vclass->stat = vfs_s_stat;
     vclass->lstat = vfs_s_lstat;
     vclass->fstat = vfs_s_fstat;

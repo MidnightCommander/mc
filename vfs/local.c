@@ -89,29 +89,6 @@ local_opendir (struct vfs_class *me, char *dirname)
     return local_info;
 }
 
-static int
-local_telldir (void *data)
-{
-#ifdef HAVE_TELLDIR
-    return telldir( *(DIR **) data );
-#else
- #warning "Native telldir() not available, emulation not implemented"
-    abort();
-    return 0; /* for dumb compilers */
-#endif /* !HAVE_TELLDIR */
-}
-
-static void
-local_seekdir (void *data, int offset)
-{
-#ifdef HAVE_SEEKDIR
-    seekdir( *(DIR **) data, offset );
-#else
- #warning "Native seekdir() not available, emulation not implemented"
-    abort();
-#endif /* !HAVE_SEEKDIR */
-}
-
 static void *
 local_readdir (void *data)
 {
@@ -318,8 +295,6 @@ init_localfs (void)
     vfs_local_ops.opendir = local_opendir;
     vfs_local_ops.readdir = local_readdir;
     vfs_local_ops.closedir = local_closedir;
-    vfs_local_ops.telldir = local_telldir;
-    vfs_local_ops.seekdir = local_seekdir;
     vfs_local_ops.stat = local_stat;
     vfs_local_ops.lstat = local_lstat;
     vfs_local_ops.fstat = local_fstat;

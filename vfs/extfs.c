@@ -909,30 +909,6 @@ static void * s_readdir(void *data)
     return (void *) &dir;
 }
 
-static int s_telldir (void *data)
-{
-    struct entry **info = (struct entry **) data;
-    struct entry *cur;
-    int num = 0;
-
-    cur = info[1];
-    while (cur!=NULL) {
-        if (cur == info[0]) return num;
-	num++;
-	cur = cur->next_in_dir;
-    }
-    return -1;
-}
-
-static void s_seekdir (void *data, int offset)
-{
-    struct entry **info = (struct entry **) data;
-    int i;
-    info[0] = info[1];
-    for (i=0; i<offset; i++)
-        s_readdir( data );
-}
-
 static int s_closedir (void *data)
 {
     g_free (data);
@@ -1393,8 +1369,6 @@ init_extfs (void)
     vfs_extfs_ops.opendir = s_opendir;
     vfs_extfs_ops.readdir = s_readdir;
     vfs_extfs_ops.closedir = s_closedir;
-    vfs_extfs_ops.telldir = s_telldir;
-    vfs_extfs_ops.seekdir = s_seekdir;
     vfs_extfs_ops.stat = s_stat;
     vfs_extfs_ops.lstat = s_lstat;
     vfs_extfs_ops.fstat = s_fstat;

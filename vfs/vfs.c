@@ -505,24 +505,6 @@ mc_opendir (char *dirname)
     return (DIR *) handlep;
 }
 
-void
-mc_seekdir (DIR *dirp, int offset)
-{
-    int handle;
-    struct vfs_class *vfs;
-
-    if (!dirp){
-	errno = EFAULT;
-	return;
-    }
-    handle = *(int *) dirp;
-    vfs = vfs_op (handle);
-    if (vfs->seekdir)
-        (*vfs->seekdir) (vfs_info (handle), offset);
-    else
-        errno = E_NOTSUPP;
-}
-
 #define MC_DIROP(name, type, onerr ) \
 type mc_##name (DIR *dirp) \
 { \
@@ -543,7 +525,6 @@ type mc_##name (DIR *dirp) \
 }
 
 MC_DIROP (readdir, struct dirent *, NULL)
-MC_DIROP (telldir, int, -1)
 
 int
 mc_closedir (DIR *dirp)

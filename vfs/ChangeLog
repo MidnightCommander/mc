@@ -1,3 +1,8 @@
+2003-10-14  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.h: Remove all references to seekdir and telldir.  Adjust
+	all dependencies.
+
 2003-10-13  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.c (_vfs_add_noncurrent_stamps): Fix incorrect casts.
