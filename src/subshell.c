@@ -68,6 +68,9 @@
 #   define WIFEXITED(stat_val) (((stat_val) & 255) == 0)
 #endif
 
+/* tcsh closes all non-standard file descriptors, so we have to use a pipe */
+static char tcsh_fifo[128];
+
 /* Local functions */
 static void init_raw_mode (void);
 static int feed_subshell (int how, int fail_on_error);
@@ -336,9 +339,6 @@ void init_subshell (void)
     static char pty_name[BUF_SMALL];
     int pty_slave = -1;
 
-    /* Braindead tcsh can't redirect output to a file descriptor? */
-    char tcsh_fifo[sizeof "/tmp/mc.pipe.1234567890"];
-
     
 #ifdef SYNC_PTY_SIDES
 	/* Used to wait for a SIGUSR1 signal from the subprocess */
@@ -401,7 +401,8 @@ void init_subshell (void)
 
 	if (subshell_type == TCSH)
 	{
-	    g_snprintf (tcsh_fifo, sizeof (tcsh_fifo), "/tmp/mc.pipe.%d", getpid ());
+	    g_snprintf (tcsh_fifo, sizeof (tcsh_fifo), "%s/mc.pipe.%d",
+			mc_tmpdir(), getpid ());
 	    if (mkfifo (tcsh_fifo, 0600) == -1)
 	    {
 		perror (__FILE__": mkfifo");
@@ -704,9 +705,7 @@ int exit_subshell (void)
 
     if (quit && subshell_type == TCSH)
     {
-	/* We abuse of pty_buffer here, but it doesn't matter at this stage */
-	g_snprintf (pty_buffer, pty_buffer_size, "/tmp/mc.pipe.%d", getpid ());
-	if (unlink (pty_buffer) == -1)
+	if (unlink (tcsh_fifo) == -1)
 	    perror (__FILE__": couldn't remove named pipe /tmp/mc.pipe.NNN");
     }
 
