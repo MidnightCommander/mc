@@ -8,7 +8,7 @@ Name:      mc
 Version:   %ver
 Release:   %rel
 Copyright: GPL
-Group:     Shells
+Group:     System Environment/Shells
 Source0:   ftp://ftp.nuclecu.unam.mx/linux/local/devel/mc-%{PACKAGE_VERSION}.tar.gz
 URL:       http://www.gnome.org/mc/
 BuildRoot: /var/tmp/mc-%{PACKAGE_VERSION}-root
@@ -24,7 +24,7 @@ files, and poke into RPMs for specific files.  :-)
 %package -n gmc
 Summary:  Midnight Commander visual shell (GNOME version)
 Requires: mc >= %{PACKAGE_VERSION}
-Group:    X11/Shells
+Group:    Interface/Desktops
 %description -n gmc
 Midnight Commander is a visual shell much like a file manager, only with
 way more features.  This is the GNOME version. It's coolest feature is the
@@ -33,7 +33,7 @@ The GNOME version of Midnight Commander is not yet finished though. :-(
  
 %package -n mcserv
 Summary:  Midnight Commander file server
-Group:    X11/Shells
+Group:    System Environment/Daemons
 Requires: portmap
 %description -n mcserv
 mcserv is the server program for the Midnight Commander networking file
@@ -45,7 +45,7 @@ Midnight file system (currently, only the Midnight Commander file manager).
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure \
-	--prefix=%{prefix} \
+	--prefix=%{prefix} --with-included-slang \
 	--with-gnome \
 	--without-debug \
         --sysconfdir=/etc
@@ -62,17 +62,14 @@ echo $RPM_BUILD_ROOT
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,profile.d,X11/wmconfig}
 
-mkdir -p $RPM_BUILD_ROOT/etc/CORBA/servers
 
-make prefix=$RPM_BUILD_ROOT%{prefix} install
+make prefix=$RPM_BUILD_ROOT%{prefix} sysconfdir=$RPM_BUILD_ROOT/etc install
 (cd icons; make prefix=$RPM_BUILD_ROOT%{prefix} install_icons)
 install lib/mcserv.init $RPM_BUILD_ROOT/etc/rc.d/init.d/mcserv
 
 install lib/mcserv.pamd $RPM_BUILD_ROOT/etc/pam.d/mcserv
 install lib/{mc.sh,mc.csh} $RPM_BUILD_ROOT/etc/profile.d
-
-#musta's kludge
-install gnome/gmc.gnorba $RPM_BUILD_ROOT/etc/CORBA/servers/gmc.gnorba
+install lib/mc.global $RPM_BUILD_ROOT/etc
 
 
 # clean up this setuid problem for now
@@ -122,9 +119,12 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/lib/mc/mc-gnome.ext
 %{prefix}/share/pixmaps/mc/*
 %{prefix}/share/mime-info/mc.keys
-%config %{prefix}/../etc/CORBA/servers/gmc.gnorba
+%config /etc/CORBA/servers/*
 
 %changelog
+* Sun Apr 18 1999 Gregory McLean <gregm@comstar.net>
+- Updated the specfile, removed some kludges.
+
 * Thu Aug 20 1998 Michael Fulbright <msf@redhat.com>
 - rebuilt against gnome-libs 0.27 and gtk+-1.1
 

@@ -1,3 +1,8 @@
+Sun Apr 18 17:51:54 EDT 1999 Gregory McLean <gregm@comstar.net>
+
+	* mc.spec.in : Folded in some changes from the 'offical' rpm 
+	spec file.
+
 1999-04-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* configure.in (SHELL): Do not use grep -q, as it is not portable
