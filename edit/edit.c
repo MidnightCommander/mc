@@ -144,8 +144,7 @@ int edit_get_byte (WEdit * edit, long byte_index)
  * Return 1 on error.
  */
 static int
-init_dynamic_edit_buffers (WEdit *edit, const char *filename,
-			   const char *text)
+init_dynamic_edit_buffers (WEdit *edit, const char *filename)
 {
     long buf;
     int j, file = -1, buf2;
@@ -165,37 +164,27 @@ init_dynamic_edit_buffers (WEdit *edit, const char *filename,
 					       filename, " ", 0)));
 	    return 1;
 	}
+    edit->curs1 = 0;
     edit->curs2 = edit->last_byte;
 
     buf2 = edit->curs2 >> S_EDIT_BUF_SIZE;
 
     edit->buffers2[buf2] = g_malloc (EDIT_BUF_SIZE);
 
-    if (filename) {
-	mc_read (file,
-		 (char *) edit->buffers2[buf2] + EDIT_BUF_SIZE -
-		 (edit->curs2 & M_EDIT_BUF_SIZE),
-		 edit->curs2 & M_EDIT_BUF_SIZE);
-    } else {
-	memcpy (edit->buffers2[buf2] + EDIT_BUF_SIZE -
-		(edit->curs2 & M_EDIT_BUF_SIZE), text,
-		edit->curs2 & M_EDIT_BUF_SIZE);
-	text += edit->curs2 & M_EDIT_BUF_SIZE;
-    }
+    if (!filename)
+	return 0;
+
+    mc_read (file,
+	     (char *) edit->buffers2[buf2] + EDIT_BUF_SIZE -
+	     (edit->curs2 & M_EDIT_BUF_SIZE),
+	     edit->curs2 & M_EDIT_BUF_SIZE);
 
     for (buf = buf2 - 1; buf >= 0; buf--) {
 	edit->buffers2[buf] = g_malloc (EDIT_BUF_SIZE);
-	if (filename) {
-	    mc_read (file, (char *) edit->buffers2[buf], EDIT_BUF_SIZE);
-	} else {
-	    memcpy (edit->buffers2[buf], text, EDIT_BUF_SIZE);
-	    text += EDIT_BUF_SIZE;
-	}
+	mc_read (file, (char *) edit->buffers2[buf], EDIT_BUF_SIZE);
     }
 
-    edit->curs1 = 0;
-    if (file != -1)
-	mc_close (file);
+    mc_close (file);
     return 0;
 }
 
@@ -411,7 +400,7 @@ edit_open_file (WEdit *edit, const char *filename)
 	filename = 0;
 #endif
     }
-    return init_dynamic_edit_buffers (edit, filename, "");
+    return init_dynamic_edit_buffers (edit, filename);
 }
 
 /* Restore saved cursor position in the file */
