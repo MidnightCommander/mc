@@ -1,3 +1,8 @@
+2002-12-19  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/perl.syntax: Add separate context for function
+	declarations and definitions, highlight prototypes.
+
 2002-12-11  Pavel Roskin  <proski@gnu.org>
 
 	* acinclude.m4 (MC_EXTFS_CHECKS): Add check for Perl.

@@ -353,4 +353,10 @@ context exclusive ` ` white black
 
 context whole __END__ guacomale_pudding brown
 
+context linestart sub\{\s\t\} \n
+    keyword whole sub yellow
+    keyword (*) cyan
+    keyword { brightcyan
+    keyword } brightcyan
+    keyword ; brightmagenta
 
