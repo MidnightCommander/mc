@@ -25,6 +25,8 @@
 
 #include <config.h>
 #include <ctype.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 #include "edit.h"
 #include "editlock.h"
@@ -41,6 +43,7 @@
 #include "../src/dialog.h"	/* do_refresh() */
 #include "../src/wtools.h"	/* message() */
 #include "../src/charsets.h"
+#include "../src/pipethrough.h"
 
 #define edit_get_load_file(f,h) input_expand_dialog (h, _(" Enter file name: "), f)
 #define edit_get_save_file(f,h) input_expand_dialog (h, _(" Enter file name: "), f)
@@ -2393,36 +2396,71 @@ int edit_sort_cmd (WEdit * edit)
     return 0;
 }
 
-/*
- * Ask user for a command, execute it and paste its output back to the
- * editor.
- */
+/* Pipes the selected block through an external command and inserts the
+ * program's output. */
 int
 edit_ext_cmd (WEdit *edit)
 {
-    char *exp;
-    int e;
+    const char *title_i18n = _(" External Command ");
+    char *command = NULL;
+    char *block = NULL;
+    const char *error = NULL;
+    long start_mark, end_mark;
+    struct pipe_inbuffer inbuf = {NULL, 0};
+    struct pipe_outbuffer outbuf = {NULL, 0};
+    struct pipe_outbuffer errbuf = {NULL, 0};
+    int block_len;
+    int status;
 
-    exp =
-	input_dialog (_("Paste output of external command"),
-		      _("Enter shell command(s):"), NULL);
-
-    if (!exp)
-	return 1;
-
-    e = system (catstrs (exp, " > ", home_dir, TEMP_FILE, (char *) NULL));
-    g_free (exp);
-
-    if (e) {
-	edit_error_dialog (_("External command"),
-			   get_sys_error (_("Cannot execute command")));
-	return -1;
+    if (eval_marks (edit, &start_mark, &end_mark) == 0 /* OK */) {
+        block = edit_get_block (edit, start_mark, end_mark, &block_len);
+        if (block == NULL) {
+    	    error = _(" Could not get the current block. ");
+            goto cleanup;
+        }
     }
 
-    edit->force |= REDRAW_COMPLETELY;
+    command = input_dialog (title_i18n, _(" Enter a shell command: "), "");
+    if (command == NULL)
+        goto cleanup;
 
-    edit_insert_file (edit, catstrs (home_dir, TEMP_FILE, (char *) NULL));
-    return 0;
+    inbuf.data = block;
+    inbuf.size = block_len;
+    if (pipethrough(command, &inbuf, &outbuf, &errbuf, &status) == -1) {
+    	error = get_sys_error (_(" Error executing the shell command. "));
+    	goto cleanup;
+    }
+
+    if (WIFEXITED(status)) {
+    	if (WEXITSTATUS(status) != 0) {
+            if (query_dialog(title_i18n, _(" The command returned unsuccessfully. Continue anyway? "),
+                             D_ERROR, 2, _(" &Yes "), _(" &No ")) != 0 /* first button */)
+                goto cleanup;
+    	}
+    } else {
+    	error = _(" The command died unexpectedly. ");
+    	goto cleanup;
+    }
+
+    if (edit_block_delete_cmd (edit) != 0)
+        goto cleanup;
+
+    if (outbuf.data != NULL) {
+        size_t i;
+        for (i = 0; i < outbuf.size; i++)
+            edit_insert (edit, ((char *) outbuf.data)[i]);
+    }
+    edit->force |= REDRAW_COMPLETELY;
+cleanup:
+    if (error != NULL) {
+        edit_error_dialog (title_i18n, error);
+    }
+    	
+    pipe_outbuffer_finalize (&outbuf);
+    pipe_outbuffer_finalize (&errbuf);
+    g_free (block);
+    g_free (command);
+    return (error == NULL);
 }
 
 /* if block is 1, a block must be highlighted and the shell command

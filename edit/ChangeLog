@@ -1,5 +1,15 @@
 2004-09-25  Roland Illig  <roland.illig@gmx.de>
 
+	* editcmd.c (edit_ext_cmd): Replaced the old version with a new
+	one that uses ../src/pipethrough. The new version feeds the
+	currently selected block (or an empty input) into the command
+	which reduces the chance of a deadlock when the command tried
+	to read from stdin. It also allows the user to insert the output
+	of a command that has exited with a nonzero result. Another
+	feature is that it does not use temporary files.
+
+2004-09-25  Roland Illig  <roland.illig@gmx.de>
+
 	* syntax.c (this_try_alloc_color_pair): Added const qualifiers.
 	* editcmd.c (snprintf_p): Likewise. (edit_replace_prompt):
 	Simplified the code.
