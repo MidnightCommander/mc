@@ -580,11 +580,7 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
     char *directory, *olddir;
     char temp[MC_MAXPATHLEN];
     char *translated_url;
-#ifdef USE_VFS
-    vfs *oldvfs;
-    vfsid oldvfsid;
-    struct vfs_stamping *parent;
-#endif
+
     olddir = g_strdup (panel->cwd);
     translated_url = new_dir = vfs_translate_url (new_dir);
 
@@ -615,12 +611,7 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
 
     mc_get_current_wd (panel->cwd, sizeof (panel->cwd) - 2);
 
-#ifdef USE_VFS
-    oldvfs = vfs_get_class (olddir);
-    oldvfsid = vfs_ncs_getid (oldvfs, olddir, &parent);
-    vfs_add_noncurrent_stamps (oldvfs, oldvfsid, parent);
-    vfs_rm_parents (parent);
-#endif
+    vfs_release_path (olddir);
 
     subshell_chdir (panel->cwd);
 

@@ -1,5 +1,7 @@
 2003-10-11  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (_do_panel_cd): Use vfs_release_path().
+
 	* file.c: Use struct vfs_class, not type vfs, which should be
 	internal to VFS code.
 
