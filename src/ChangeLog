@@ -1,5 +1,8 @@
 2003-08-31  Pavel Roskin  <proski@gnu.org>
 
+	* widget.h: Completely get rid of tkname.  Rename it to histname
+	for the input widget.  Adjust all dependencies.
+
 	* dlg.h (struct Widget): Remove tkname field.
 	(init_widget): Remove tkname argument.
 	* widget.h (listbox_new): Likewise.

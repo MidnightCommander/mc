@@ -65,12 +65,11 @@ static WInput *pname;
 static struct {
     int ret_cmd, flags, y, x;
     char *text;
-    char *tkname;
 } panelize_but [BUTTONS] = {
-    { B_CANCEL, NORMAL_BUTTON, 0, 53, N_("&Cancel"),  "c"},
-    { B_ADD, NORMAL_BUTTON,    0, 28, N_("&Add new"), "a"},
-    { B_REMOVE, NORMAL_BUTTON, 0, 16, N_("&Remove"),  "r"},
-    { B_ENTER, DEFPUSH_BUTTON, 0,  0, N_("Pane&lize"),"l"},
+    { B_CANCEL, NORMAL_BUTTON, 0, 53, N_("&Cancel")   },
+    { B_ADD, NORMAL_BUTTON,    0, 28, N_("&Add new")  },
+    { B_REMOVE, NORMAL_BUTTON, 0, 16, N_("&Remove")   },
+    { B_ENTER, DEFPUSH_BUTTON, 0,  0, N_("Pane&lize") },
 };
 
 static char *panelize_section = "Panelize";
@@ -119,69 +118,78 @@ static int l_call (void *data)
 	return listbox_nothing;
 }
 
-static void init_panelize (void)
+static void
+init_panelize (void)
 {
     int i, panelize_cols = COLS - 6;
     struct panelize *current = panelize;
 
 #ifdef ENABLE_NLS
-	static int i18n_flag = 0;
-	static int maxlen = 0;
-	
-	if (!i18n_flag)
-	{
-		i = sizeof(panelize_but) / sizeof(panelize_but[0]);
-		while (i--)
-		{
-			panelize_but [i].text = _(panelize_but [i].text);
-			maxlen += strlen (panelize_but [i].text) + 5;
-		}
-		maxlen += 10;
+    static int i18n_flag = 0;
+    static int maxlen = 0;
 
-		i18n_flag = 1;
+    if (!i18n_flag) {
+	i = sizeof (panelize_but) / sizeof (panelize_but[0]);
+	while (i--) {
+	    panelize_but[i].text = _(panelize_but[i].text);
+	    maxlen += strlen (panelize_but[i].text) + 5;
 	}
-	panelize_cols = max(panelize_cols, maxlen);
-		
-	panelize_but [2].x = panelize_but [3].x 
-		+ strlen (panelize_but [3].text) + 7;
-	panelize_but [1].x = panelize_but [2].x 
-		+ strlen (panelize_but [2].text) + 5;
-	panelize_but [0].x = panelize_cols 
-		- strlen (panelize_but[0].text) - 8 - BX;
+	maxlen += 10;
 
-#endif /* ENABLE_NLS */
-    
+	i18n_flag = 1;
+    }
+    panelize_cols = max (panelize_cols, maxlen);
+
+    panelize_but[2].x =
+	panelize_but[3].x + strlen (panelize_but[3].text) + 7;
+    panelize_but[1].x =
+	panelize_but[2].x + strlen (panelize_but[2].text) + 5;
+    panelize_but[0].x =
+	panelize_cols - strlen (panelize_but[0].text) - 8 - BX;
+
+#endif				/* ENABLE_NLS */
+
     last_listitem = 0;
-    
+
     do_refresh ();
 
-    panelize_dlg = create_dlg (0, 0, 22, panelize_cols, dialog_colors,
-			      panelize_callback, "[External panelize]",
-			      _("External panelize"), DLG_CENTER);
-
-#define XTRACT(i) BY+panelize_but[i].y, BX+panelize_but[i].x, panelize_but[i].ret_cmd, panelize_but[i].flags, panelize_but[i].text, 0, 0, panelize_but[i].tkname
+    panelize_dlg =
+	create_dlg (0, 0, 22, panelize_cols, dialog_colors,
+		    panelize_callback, "[External panelize]",
+		    _("External panelize"), DLG_CENTER);
 
     for (i = 0; i < BUTTONS; i++)
-	add_widget(panelize_dlg, button_new (XTRACT (i)));
+	add_widget (panelize_dlg,
+		    button_new (BY + panelize_but[i].y,
+				BX + panelize_but[i].x,
+				panelize_but[i].ret_cmd,
+				panelize_but[i].flags,
+				panelize_but[i].text, 0, 0));
 
-    pname = input_new (UY+14, UX, INPUT_COLOR, panelize_dlg->cols-10, "", "in");
+    pname =
+	input_new (UY + 14, UX, INPUT_COLOR, panelize_dlg->cols - 10, "",
+		   "in");
     add_widget (panelize_dlg, pname);
 
-    add_widget (panelize_dlg, label_new (UY+13, UX, _("Command"), "label-command"));
+    add_widget (panelize_dlg,
+		label_new (UY + 13, UX, _("Command")));
 
     /* get new listbox */
-    l_panelize = listbox_new (UY + 1, UX + 1, panelize_dlg->cols-12, 10, 0, l_call);
+    l_panelize =
+	listbox_new (UY + 1, UX + 1, panelize_dlg->cols - 12, 10, 0,
+		     l_call);
 
-    while (current){
+    while (current) {
 	listbox_add_item (l_panelize, 0, 0, current->label, current);
 	current = current->next;
     }
 
     /* add listbox to the dialogs */
-    add_widget (panelize_dlg, l_panelize); 
+    add_widget (panelize_dlg, l_panelize);
 
-    listbox_select_entry (l_panelize, 
-        listbox_search_text (l_panelize, _("Other command")));
+    listbox_select_entry (l_panelize,
+			  listbox_search_text (l_panelize,
+					       _("Other command")));
 }
 
 static void panelize_done (void)

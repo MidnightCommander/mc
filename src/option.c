@@ -202,17 +202,17 @@ init_configure (void)
 
     add_widget (conf_dlg,
 		button_new (BY, b3, B_CANCEL, NORMAL_BUTTON,
-			    cancel_button, 0, 0, "button-cancel"));
+			    cancel_button, 0, 0));
 
     add_widget (conf_dlg,
 		button_new (BY, b2, B_EXIT, NORMAL_BUTTON,
-			    save_button, 0, 0, "button-save"));
+			    save_button, 0, 0));
 
     add_widget (conf_dlg,
 		button_new (BY, b1, B_ENTER, DEFPUSH_BUTTON,
-			    ok_button, 0, 0, "button-ok"));
+			    ok_button, 0, 0));
 
-#define XTRACT(i) *check_options[i].variable, check_options[i].text, check_options [i].tk
+#define XTRACT(i) *check_options[i].variable, check_options[i].text
 
     /* Add checkboxes for "other options" */
     for (i = 0; i < OTHER_OPTIONS; i++) {
@@ -222,7 +222,7 @@ init_configure (void)
     }
 
     pause_radio =
-	radio_new (RY + 1, RX + 2, 3, pause_options, 1, "pause-radio");
+	radio_new (RY + 1, RX + 2, 3, pause_options, 1);
     pause_radio->sel = pause_after_run;
     add_widget (conf_dlg, pause_radio);
 

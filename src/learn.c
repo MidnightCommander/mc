@@ -224,51 +224,51 @@ static int learn_callback (Dlg_head * h, int Par, int Msg)
     return 0;
 }
 
-static void init_learn (void)
+static void
+init_learn (void)
 {
     int x, y, i, j;
     key_code_name_t *key;
-    char buffer [BUF_TINY];
+    char buffer[BUF_TINY];
 
 #ifdef ENABLE_NLS
-	static int i18n_flag = 0;
-	if (!i18n_flag)
-	{
-		char* cp;
-		
-		learn_but [0].text = _(learn_but [0].text);
-		learn_but [0].x = 78 / 2 + 4;
+    static int i18n_flag = 0;
+    if (!i18n_flag) {
+	char *cp;
 
-		learn_but [1].text = _(learn_but [1].text);
-		learn_but [1].x = 78 / 2 - (strlen (learn_but [1].text) + 9);
+	learn_but[0].text = _(learn_but[0].text);
+	learn_but[0].x = 78 / 2 + 4;
 
-		for (i = 0; i < BUTTONS; i++)
-		{
-			cp = strchr(learn_but [i].text, '&');
-			if (cp != NULL && *++cp != '\0')
-				learn_but [i].hotkey = toupper(*cp);
-		}
+	learn_but[1].text = _(learn_but[1].text);
+	learn_but[1].x = 78 / 2 - (strlen (learn_but[1].text) + 9);
 
-		learn_title = _(learn_title);
-		i18n_flag = 1;
+	for (i = 0; i < BUTTONS; i++) {
+	    cp = strchr (learn_but[i].text, '&');
+	    if (cp != NULL && *++cp != '\0')
+		learn_but[i].hotkey = toupper (*cp);
 	}
-#endif /* ENABLE_NLS */
+
+	learn_title = _(learn_title);
+	i18n_flag = 1;
+    }
+#endif				/* ENABLE_NLS */
 
     do_refresh ();
 
-    learn_dlg = create_dlg (0, 0, 23, 78, dialog_colors,
-			      learn_callback, "[Learn keys]",
-			      learn_title, DLG_CENTER);
-
-#define XTRACT(i) BY+learn_but[i].y, learn_but[i].x, learn_but[i].ret_cmd, learn_but[i].flags, _(learn_but[i].text), 0, 0, NULL
+    learn_dlg =
+	create_dlg (0, 0, 23, 78, dialog_colors, learn_callback,
+		    "[Learn keys]", learn_title, DLG_CENTER);
 
     for (i = 0; i < BUTTONS; i++)
-	add_widget (learn_dlg, button_new (XTRACT (i)));
-    
+	add_widget (learn_dlg,
+		    button_new (BY + learn_but[i].y, learn_but[i].x,
+				learn_but[i].ret_cmd, learn_but[i].flags,
+				_(learn_but[i].text), 0, 0));
+
     x = UX;
     y = UY;
-    for (key = key_name_conv_tab, j = 0; key->name != NULL &&
-        strcmp (key->name, "kpleft"); key++, j++);
+    for (key = key_name_conv_tab, j = 0;
+	 key->name != NULL && strcmp (key->name, "kpleft"); key++, j++);
     learnkeys = g_new (learnkey, j);
     x += ((j - 1) / ROWS) * COLSHIFT;
     y += (j - 1) % ROWS;
@@ -276,13 +276,14 @@ static void init_learn (void)
     learnok = 0;
     learnchanged = 0;
     for (i = j - 1, key = key_name_conv_tab + j - 1; i >= 0; i--, key--) {
-    	learnkeys [i].ok = 0;
-    	learnkeys [i].sequence = NULL;
-        g_snprintf (buffer, sizeof (buffer), "%-16s", _(key->longname));
-	add_widget (learn_dlg, learnkeys [i].button = (Widget *)
-	    button_new (y, x, B_USER + i, NARROW_BUTTON, buffer, learn_button, 0, NULL));
-	add_widget (learn_dlg, learnkeys [i].label = (Widget *)
-	    label_new (y, x + 19, "", NULL));
+	learnkeys[i].ok = 0;
+	learnkeys[i].sequence = NULL;
+	g_snprintf (buffer, sizeof (buffer), "%-16s", _(key->longname));
+	add_widget (learn_dlg, learnkeys[i].button = (Widget *)
+		    button_new (y, x, B_USER + i, NARROW_BUTTON, buffer,
+				learn_button, 0));
+	add_widget (learn_dlg, learnkeys[i].label = (Widget *)
+		    label_new (y, x + 19, ""));
 	if (i % 13)
 	    y--;
 	else {
@@ -291,11 +292,17 @@ static void init_learn (void)
 	}
     }
     add_widget (learn_dlg,
-		label_new (UY+14, 5, _("Press all the keys mentioned here. After you have done it, check"), NULL));
+		label_new (UY + 14, 5,
+			   _
+			   ("Press all the keys mentioned here. After you have done it, check")));
     add_widget (learn_dlg,
-		label_new (UY+15, 5, _("which keys are not marked with OK.  Press space on the missing"), NULL));
+		label_new (UY + 15, 5,
+			   _
+			   ("which keys are not marked with OK.  Press space on the missing")));
     add_widget (learn_dlg,
-		label_new (UY+16, 5, _("key, or click with the mouse to define it. Move around with Tab."), NULL));
+		label_new (UY + 16, 5,
+			   _
+			   ("key, or click with the mouse to define it. Move around with Tab.")));
 }
 
 static void learn_done (void)

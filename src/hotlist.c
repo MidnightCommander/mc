@@ -110,23 +110,22 @@ static struct {
 static struct _hotlist_but {
     int ret_cmd, flags, y, x;
     char *text;
-    char *tkname;
     int   type;
 } hotlist_but[] = {
-    { B_MOVE, NORMAL_BUTTON,         1,   42, N_("&Move"),       "move", LIST_HOTLIST},
-    { B_REMOVE, NORMAL_BUTTON,       1,   30, N_("&Remove"),     "r",    LIST_HOTLIST},
-    { B_APPEND, NORMAL_BUTTON,       1,   15, N_("&Append"),     "e",    LIST_MOVELIST},
-    { B_INSERT, NORMAL_BUTTON,       1,    0, N_("&Insert"),     "g",    LIST_MOVELIST},
-    { B_NEW_ENTRY, NORMAL_BUTTON,    1,   15, N_("New &Entry"),  "e",    LIST_HOTLIST},
-    { B_NEW_GROUP, NORMAL_BUTTON,    1,    0, N_("New &Group"),  "g",    LIST_HOTLIST},
-    { B_CANCEL, NORMAL_BUTTON,       0,   53, N_("&Cancel"),     "cc",   LIST_HOTLIST|LIST_VFSLIST|LIST_MOVELIST},
-    { B_UP_GROUP, NORMAL_BUTTON,     0,   42, N_("&Up"),         "up",   LIST_HOTLIST|LIST_MOVELIST},
-    { B_ADD_CURRENT, NORMAL_BUTTON,  0,   20, N_("&Add current"),"ad",   LIST_HOTLIST},
+    { B_MOVE, NORMAL_BUTTON,         1,   42, N_("&Move"),       LIST_HOTLIST},
+    { B_REMOVE, NORMAL_BUTTON,       1,   30, N_("&Remove"),     LIST_HOTLIST},
+    { B_APPEND, NORMAL_BUTTON,       1,   15, N_("&Append"),     LIST_MOVELIST},
+    { B_INSERT, NORMAL_BUTTON,       1,    0, N_("&Insert"),     LIST_MOVELIST},
+    { B_NEW_ENTRY, NORMAL_BUTTON,    1,   15, N_("New &Entry"),  LIST_HOTLIST},
+    { B_NEW_GROUP, NORMAL_BUTTON,    1,    0, N_("New &Group"),  LIST_HOTLIST},
+    { B_CANCEL, NORMAL_BUTTON,       0,   53, N_("&Cancel"),     LIST_HOTLIST|LIST_VFSLIST|LIST_MOVELIST},
+    { B_UP_GROUP, NORMAL_BUTTON,     0,   42, N_("&Up"),         LIST_HOTLIST|LIST_MOVELIST},
+    { B_ADD_CURRENT, NORMAL_BUTTON,  0,   20, N_("&Add current"), LIST_HOTLIST},
 #ifdef	USE_VFS
-    { B_REFRESH_VFS, NORMAL_BUTTON,  0,   43, N_("&Refresh"), "r",       LIST_VFSLIST},
-    { B_FREE_ALL_VFS, NORMAL_BUTTON, 0,   20, N_("Fr&ee VFSs now"), "f", LIST_VFSLIST},
+    { B_REFRESH_VFS, NORMAL_BUTTON,  0,   43, N_("&Refresh"),    LIST_VFSLIST},
+    { B_FREE_ALL_VFS, NORMAL_BUTTON, 0,   20, N_("Fr&ee VFSs now"), LIST_VFSLIST},
 #endif
-    { B_ENTER, DEFPUSH_BUTTON,       0,    0, N_("Change &To"),  "ct",   LIST_HOTLIST|LIST_VFSLIST|LIST_MOVELIST},
+    { B_ENTER, DEFPUSH_BUTTON,       0,    0, N_("Change &To"),  LIST_HOTLIST|LIST_VFSLIST|LIST_MOVELIST},
 };
 
 /* Directory hotlist */
@@ -623,23 +622,22 @@ init_hotlist (int list_type)
 				    hotlist_but[i].ret_cmd,
 				    hotlist_but[i].flags,
 				    hotlist_but[i].text,
-				    hotlist_button_callback, 0,
-				    hotlist_but[i].tkname));
+				    hotlist_button_callback, 0));
     }
 
     /* We add the labels. 
      *    pname       will hold entry's pathname;
      *    pname_group will hold name of current group
      */
-    pname = label_new (UY - 11 + LINES, UX + 2, "", "the-lab");
+    pname = label_new (UY - 11 + LINES, UX + 2, "");
     add_widget (hotlist_dlg, pname);
     if (!hotlist_state.moving) {
 	add_widget (hotlist_dlg,
 		    label_new (UY - 12 + LINES, UX + 1,
-			       _(" Directory path "), NULL));
+			       _(" Directory path ")));
 
 	/* This one holds the displayed pathname */
-	pname_group = label_new (UY, UX + 1, _(" Directory label "), NULL);
+	pname_group = label_new (UY, UX + 1, _(" Directory label "));
 	add_widget (hotlist_dlg, pname_group);
     }
     /* get new listbox */
@@ -682,14 +680,13 @@ init_movelist (int list_type, struct hotlist *item)
 				    hotlist_but[i].ret_cmd,
 				    hotlist_but[i].flags,
 				    hotlist_but[i].text,
-				    hotlist_button_callback, 0,
-				    hotlist_but[i].tkname));
+				    hotlist_button_callback, 0));
     }
 
     /* We add the labels.  We are interested in the last one,
      * that one will hold the path name label
      */
-    movelist_group = label_new (UY, UX + 1, _(" Directory label "), NULL);
+    movelist_group = label_new (UY, UX + 1, _(" Directory label "));
     add_widget (movelist_dlg, movelist_group);
     /* get new listbox */
     l_movelist =

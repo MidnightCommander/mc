@@ -204,7 +204,7 @@ button_scan_hotkey(WButton* b)
 
 WButton *
 button_new (int y, int x, int action, int flags, char *text, 
-	    int (*callback)(int, void *), void *callback_data, char *tkname)
+	    int (*callback)(int, void *), void *callback_data)
 {
     WButton *b = g_new (WButton, 1);
 
@@ -348,7 +348,7 @@ radio_event (Gpm_Event *event, WRadio *r)
 }
 
 WRadio *
-radio_new (int y, int x, int count, char **texts, int use_hotkey, char *tkname)
+radio_new (int y, int x, int count, char **texts, int use_hotkey)
 {
     WRadio *r = g_new (WRadio, 1);
     int i, max, m;
@@ -450,7 +450,7 @@ check_destroy (WCheck *c)
 }
 
 WCheck *
-check_new (int y, int x, int state, char *text, char *tkname)
+check_new (int y, int x, int state, char *text)
 {
     WCheck *c =  g_new (WCheck, 1);
     char *s, *t;
@@ -562,7 +562,7 @@ label_destroy (WLabel *l)
 }
 
 WLabel *
-label_new (int y, int x, const char *text, char *tkname)
+label_new (int y, int x, const char *text)
 {
     WLabel *l;
     int width;
@@ -662,7 +662,7 @@ gauge_destroy (WGauge *g)
 }
 
 WGauge *
-gauge_new (int y, int x, int shown, int max, int current, char *tkname)
+gauge_new (int y, int x, int shown, int max, int current)
 {
     WGauge *g = g_new (WGauge, 1);
 
@@ -1599,28 +1599,28 @@ input_event (Gpm_Event * event, WInput * in)
 }
 
 WInput *
-input_new (int y, int x, int color, int len, const char *def_text, char *tkname)
+input_new (int y, int x, int color, int len, const char *def_text,
+	   char *histname)
 {
     WInput *in = g_new (WInput, 1);
     int initial_buffer_len;
 
-    init_widget (&in->widget, y, x, 1, len,
-		 (callback_fn) input_callback,
-	      (destroy_fn) input_destroy, (mouse_h) input_event);
+    init_widget (&in->widget, y, x, 1, len, (callback_fn) input_callback,
+		 (destroy_fn) input_destroy, (mouse_h) input_event);
 
     /* history setup */
     in->history = NULL;
     in->history_name = 0;
-    if (tkname) {
-	if (*tkname) {
-	    in->history_name = g_strdup (tkname);
-	    in->history = history_get (tkname);
+    if (histname) {
+	if (*histname) {
+	    in->history_name = g_strdup (histname);
+	    in->history = history_get (histname);
 	}
     }
-    
+
     if (!def_text)
 	def_text = "";
-    
+
     if (def_text == INPUT_LAST_TEXT) {
 	def_text = "";
 	if (in->history)

@@ -159,18 +159,17 @@ static struct {
     char   *text;
     int    *variable;
     WCheck *widget;
-    char   *tkname;
 } check_options [] = {
-    { N_("&Xterm window title"), &xterm_title,   0, "t" },
-    { N_("h&Intbar visible"),  &message_visible, 0, "v" },
-    { N_("&Keybar visible"),   &keybar_visible,  0, "k" },
-    { N_("command &Prompt"),   &command_prompt,  0, "p" },
-    { N_("show &Mini status"), &show_mini_info,  0, "m" },
-    { N_("menu&Bar visible"),  &menubar_visible, 0, "me" },
-    { N_("&Equal split"),      &equal_split,     0, "eq" },
-    { N_("pe&Rmissions"),      &permission_mode, 0, "pr" },
-    { N_("&File types"),       &filetype_mode,   0, "ft" },
-    { 0, 0, 0, 0 }
+    { N_("&Xterm window title"), &xterm_title,   0 },
+    { N_("h&Intbar visible"),  &message_visible, 0 },
+    { N_("&Keybar visible"),   &keybar_visible,  0 },
+    { N_("command &Prompt"),   &command_prompt,  0 },
+    { N_("show &Mini status"), &show_mini_info,  0 },
+    { N_("menu&Bar visible"),  &menubar_visible, 0 },
+    { N_("&Equal split"),      &equal_split,     0 },
+    { N_("pe&Rmissions"),      &permission_mode, 0 },
+    { N_("&File types"),       &filetype_mode,   0 },
+    { 0, 0, 0 }
 };
 
 static int first_width, second_width;
@@ -438,21 +437,21 @@ static void init_layout (void)
 		"[Layout]", _("Layout"), DLG_CENTER);
 
     add_widget (layout_dlg,
-		button_new (BY, b3, B_CANCEL, NORMAL_BUTTON, cancel_button, 0, 0, "c"));
+		button_new (BY, b3, B_CANCEL, NORMAL_BUTTON, cancel_button, 0, 0));
     add_widget (layout_dlg,
-		button_new (BY, b2, B_EXIT, NORMAL_BUTTON, save_button, 0, 0, "s"));
+		button_new (BY, b2, B_EXIT, NORMAL_BUTTON, save_button, 0, 0));
     add_widget (layout_dlg,
-		button_new (BY, b1, B_ENTER, DEFPUSH_BUTTON, ok_button, 0, 0, "o"));
+		button_new (BY, b1, B_ENTER, DEFPUSH_BUTTON, ok_button, 0, 0));
     if (console_flag){
 	add_widget (layout_dlg,
 		    button_new (9, 12 + first_width, B_MINUS, NARROW_BUTTON, "&-",
-			bminus_cback, 0, NULL));
+			bminus_cback, 0));
 	add_widget (layout_dlg,
 		    button_new (9, 7 + first_width, B_PLUS, NARROW_BUTTON, "&+", 
-			bplus_cback, 0, NULL));
+			bplus_cback, 0));
     }
 
-#define XTRACT(i) *check_options[i].variable, check_options[i].text, check_options[i].tkname
+#define XTRACT(i) *check_options[i].variable, check_options[i].text
 
     for (i = 0; i < 6; i++){
 	check_options [i].widget = check_new (8 - i, 7 + first_width, XTRACT(i));
@@ -471,9 +470,9 @@ static void init_layout (void)
     _keybar_visible = keybar_visible;
     _message_visible = message_visible;
     _xterm_title = xterm_title;
-    bright_widget = button_new(6, 15, B_2RIGHT, NARROW_BUTTON, "&>", b2right_cback, 0, ">");
+    bright_widget = button_new(6, 15, B_2RIGHT, NARROW_BUTTON, "&>", b2right_cback, 0);
     add_widget (layout_dlg, bright_widget);
-    bleft_widget = button_new (6, 9, B_2LEFT, NARROW_BUTTON, "&<", b2left_cback, 0, "<");
+    bleft_widget = button_new (6, 9, B_2LEFT, NARROW_BUTTON, "&<", b2left_cback, 0);
     add_widget (layout_dlg, bleft_widget);
     check_options [6].widget = check_new (5, 6, XTRACT(6));
     old_first_panel_size = -1;
@@ -483,7 +482,7 @@ static void init_layout (void)
     _first_panel_size = first_panel_size;
     _output_lines = output_lines;
     add_widget (layout_dlg, check_options [6].widget);
-    radio_widget = radio_new (3, 6, 2, s_split_direction, 1, "r");
+    radio_widget = radio_new (3, 6, 2, s_split_direction, 1);
     add_widget (layout_dlg, radio_widget);
     radio_widget->sel = horizontal_split;
 }

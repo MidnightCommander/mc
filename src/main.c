@@ -1095,11 +1095,11 @@ create_panels (void)
 
     /* Create the nice widgets */
     cmdline = command_new (0, 0, 0);
-    the_prompt = label_new (0, 0, prompt, NULL);
+    the_prompt = label_new (0, 0, prompt);
     the_prompt->transparent = 1;
     the_bar = buttonbar_new (keybar_visible);
 
-    the_hint = label_new (0, 0, 0, NULL);
+    the_hint = label_new (0, 0, 0);
     the_hint->transparent = 1;
     the_hint->auto_adjust_cols = 0;
     the_hint->widget.cols = COLS;

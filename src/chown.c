@@ -167,12 +167,12 @@ init_chown (void)
 	add_widget (ch_dlg,
 		    button_new (BY + chown_but[i].y, BX + chown_but[i].x,
 				chown_but[i].ret_cmd, chown_but[i].flags,
-				_(chown_but[i].text), 0, 0, NULL));
+				_(chown_but[i].text), 0, 0));
 
     /* Add the widgets for the file information */
     for (i = 0; i < LABELS; i++) {
 	chown_label[i].l =
-	    label_new (chown_label[i].y, chown_label[i].x, "", NULL);
+	    label_new (chown_label[i].y, chown_label[i].x, "");
 	add_widget (ch_dlg, chown_label[i].l);
     }
 

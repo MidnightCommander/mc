@@ -205,13 +205,13 @@ init_chmod (void)
 				    BX + chmod_but[i].x,
 				    chmod_but[i].ret_cmd,
 				    chmod_but[i].flags,
-				    _(chmod_but[i].text), 0, 0, NULL));
+				    _(chmod_but[i].text), 0, 0));
     }
 
     for (i = 0; i < PERMISSIONS; i++) {
 	check_perm[i].check =
 	    check_new (PY + (PERMISSIONS - i), PX + 2, 0,
-		       _(check_perm[i].text), NULL);
+		       _(check_perm[i].text));
 	add_widget (ch_dlg, check_perm[i].check);
     }
 
@@ -300,13 +300,13 @@ void chmod_cmd (void)
 
 	/* Set the labels */
 	c_fname = name_trunc (fname, 21);
-	add_widget (ch_dlg, label_new (FY+2, FX+2, c_fname, NULL));
+	add_widget (ch_dlg, label_new (FY+2, FX+2, c_fname));
 	c_fown = name_trunc (get_owner (sf_stat.st_uid), 21);
-	add_widget (ch_dlg, label_new (FY+6, FX+2, c_fown, NULL));
+	add_widget (ch_dlg, label_new (FY+6, FX+2, c_fown));
 	c_fgrp = name_trunc (get_group (sf_stat.st_gid), 21);
-	add_widget (ch_dlg, label_new (FY+8, FX+2, c_fgrp, NULL));
+	add_widget (ch_dlg, label_new (FY+8, FX+2, c_fgrp));
 	g_snprintf (buffer, sizeof (buffer), "%o", c_stat);
-	statl = label_new (FY+4, FX+2, buffer, NULL);
+	statl = label_new (FY+4, FX+2, buffer);
 	add_widget (ch_dlg, statl);
 	
 	run_dlg (ch_dlg);	/* retrieve an action */

@@ -184,11 +184,11 @@ display_init (int radio_sel, char *init_text, int _check_status,
 
     add_widget (dd,
 		button_new (4, button_start, B_CANCEL, NORMAL_BUTTON,
-			    cancel_button, 0, 0, "cancel-button"));
+			    cancel_button, 0, 0));
 
     add_widget (dd,
 		button_new (3, button_start, B_ENTER, DEFPUSH_BUTTON,
-			    ok_button, 0, 0, "ok-button"));
+			    ok_button, 0, 0));
 
     status =
 	input_new (10, 9, INPUT_COLOR, DISPLAY_X - 14, _status[radio_sel],
@@ -197,7 +197,7 @@ display_init (int radio_sel, char *init_text, int _check_status,
     input_set_point (status, 0);
 
     check_status =
-	check_new (9, 5, _check_status, user_mini_status, "mini-status");
+	check_new (9, 5, _check_status, user_mini_status);
     add_widget (dd, check_status);
 
     user =
@@ -206,7 +206,7 @@ display_init (int radio_sel, char *init_text, int _check_status,
     add_widget (dd, user);
     input_set_point (user, 0);
 
-    my_radio = radio_new (3, 5, LIST_TYPES, displays, 1, "radio");
+    my_radio = radio_new (3, 5, LIST_TYPES, displays, 1);
     my_radio->sel = my_radio->pos = current_mode;
     add_widget (dd, my_radio);
 }
@@ -330,18 +330,18 @@ sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive)
 
     add_widget (dd, 
 		button_new (10, button_pos, B_CANCEL, NORMAL_BUTTON, cancel_button, 
-		0, 0, "cancel-button"));
+		0, 0));
 
     add_widget (dd, 
 		button_new (9, button_pos, B_ENTER, DEFPUSH_BUTTON, ok_button,
-		0, 0, "ok-button"));
+		0, 0));
 
-    case_sense = check_new (4, check_pos, *case_sensitive, case_label, "case-check");
+    case_sense = check_new (4, check_pos, *case_sensitive, case_label);
     add_widget (dd, case_sense);
-    c = check_new (3, check_pos, *reverse, reverse_label, "reverse-check");
+    c = check_new (3, check_pos, *reverse, reverse_label);
     add_widget (dd, c);
 
-    my_radio = radio_new (3, 3, SORT_TYPES, sort_orders_names, 1, "radio-1");
+    my_radio = radio_new (3, 3, SORT_TYPES, sort_orders_names, 1);
     my_radio->sel = my_radio->pos = current_mode;
     
     add_widget (dd, my_radio);
@@ -929,14 +929,13 @@ static struct
 	int xpos;
 	int value;
 	int (*callback)(int, void *);
-	char* tkname;
 } 
 job_buttons [] =
 {
-	{N_("&Stop"),   3,  B_STOP,   task_cb, "button-stop"},
-	{N_("&Resume"), 12, B_RESUME, task_cb, "button-cont"},
-	{N_("&Kill"),   23, B_KILL,   task_cb, "button-kill"},
-	{N_("&OK"),     35, B_CANCEL, NULL,    "button-ok"},
+	{N_("&Stop"),   3,  B_STOP,   task_cb},
+	{N_("&Resume"), 12, B_RESUME, task_cb},
+	{N_("&Kill"),   23, B_KILL,   task_cb},
+	{N_("&OK"),     35, B_CANCEL, NULL   }
 };
 
 void
@@ -984,8 +983,7 @@ jobs_cmd (void)
 		add_widget (jobs_dlg, button_new (JOBS_Y-4, 
 			job_buttons [i].xpos, job_buttons [i].value,
 			NORMAL_BUTTON, job_buttons [i].name, 
-			job_buttons [i].callback, 0,
-			job_buttons [i].tkname));
+			job_buttons [i].callback, 0));
 	}
 	
     /* Insert all of task information in the list */

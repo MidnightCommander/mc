@@ -221,40 +221,40 @@ file_op_context_create_ui (FileOpContext *ctx, FileOperation op,
 
     add_widget (ui->op_dlg,
 		button_new (BY - minus, WX - 19 + eta_offset, FILE_ABORT,
-			    NORMAL_BUTTON, _("&Abort"), 0, 0, "abort"));
+			    NORMAL_BUTTON, _("&Abort"), 0, 0));
     add_widget (ui->op_dlg,
 		button_new (BY - minus, 14 + eta_offset, FILE_SKIP,
-			    NORMAL_BUTTON, _("&Skip"), 0, 0, "skip"));
+			    NORMAL_BUTTON, _("&Skip"), 0, 0));
 
     add_widget (ui->op_dlg, ui->progress_gauge[2] =
-		gauge_new (7, FCOPY_GAUGE_X, 0, 100, 0, "g-1"));
+		gauge_new (7, FCOPY_GAUGE_X, 0, 100, 0));
     add_widget (ui->op_dlg, ui->progress_label[2] =
-		label_new (7, FCOPY_LABEL_X, fifteen, "l-1"));
+		label_new (7, FCOPY_LABEL_X, fifteen));
     add_widget (ui->op_dlg, ui->bps_label =
-		label_new (7, WX, "", "bps-label"));
+		label_new (7, WX, ""));
 
     add_widget (ui->op_dlg, ui->progress_gauge[1] =
-		gauge_new (8, FCOPY_GAUGE_X, 0, 100, 0, "g-2"));
+		gauge_new (8, FCOPY_GAUGE_X, 0, 100, 0));
     add_widget (ui->op_dlg, ui->progress_label[1] =
-		label_new (8, FCOPY_LABEL_X, fifteen, "l-2"));
+		label_new (8, FCOPY_LABEL_X, fifteen));
     add_widget (ui->op_dlg, ui->stalled_label =
-		label_new (8, WX, "", "stalled"));
+		label_new (8, WX, ""));
 
     add_widget (ui->op_dlg, ui->progress_gauge[0] =
-		gauge_new (6, FCOPY_GAUGE_X, 0, 100, 0, "g-3"));
+		gauge_new (6, FCOPY_GAUGE_X, 0, 100, 0));
     add_widget (ui->op_dlg, ui->progress_label[0] =
-		label_new (6, FCOPY_LABEL_X, fifteen, "l-3"));
+		label_new (6, FCOPY_LABEL_X, fifteen));
     add_widget (ui->op_dlg, ui->eta_label =
-		label_new (6, WX, "", "eta_label"));
+		label_new (6, WX, ""));
 
     add_widget (ui->op_dlg, ui->file_string[1] =
-		label_new (4, FCOPY_GAUGE_X, sixty, "fs-l-1"));
+		label_new (4, FCOPY_GAUGE_X, sixty));
     add_widget (ui->op_dlg, ui->file_label[1] =
-		label_new (4, FCOPY_LABEL_X, fifteen, "fs-l-2"));
+		label_new (4, FCOPY_LABEL_X, fifteen));
     add_widget (ui->op_dlg, ui->file_string[0] =
-		label_new (3, FCOPY_GAUGE_X, sixty, "fs-x-1"));
+		label_new (3, FCOPY_GAUGE_X, sixty));
     add_widget (ui->op_dlg, ui->file_label[0] =
-		label_new (3, FCOPY_LABEL_X, fifteen, "fs-x-2"));
+		label_new (3, FCOPY_LABEL_X, fifteen));
 
     /* We will manage the dialog without any help, that's why
        we have to call init_dlg */
@@ -528,34 +528,33 @@ static struct {
     char *text;
     int ypos, xpos;
     int value;			/* 0 for labels */
-    char *tkname;
 } rd_widgets[] = {
     {
-    N_("Target file \"%s\" already exists!"), 3, 4, 0, "target-e"}, {
-    N_("&Abort"), BY + 3, 25, REPLACE_ABORT, "abort"}, {
-    N_("If &size differs"), BY + 1, 28, REPLACE_SIZE, "if-size"}, {
-    N_("Non&e"), BY, 47, REPLACE_NEVER, "none"}, {
-    N_("&Update"), BY, 36, REPLACE_UPDATE, "update"}, {
-    N_("A&ll"), BY, 28, REPLACE_ALWAYS, "all"}, {
-    N_("Overwrite all targets?"), BY, 4, 0, "over-label"}, {
-    N_("&Reget"), BY - 1, 28, REPLACE_REGET, "reget"}, {
-    N_("A&ppend"), BY - 2, 45, REPLACE_APPEND, "append"}, {
-    N_("&No"), BY - 2, 37, REPLACE_NO, "no"}, {
-    N_("&Yes"), BY - 2, 28, REPLACE_YES, "yes"}, {
-    N_("Overwrite this target?"), BY - 2, 4, 0, "overlab"}, {
-    N_("Target date: %s, size %d"), 6, 4, 0, "target-date"}, {
-    N_("Source date: %s, size %d"), 5, 4, 0, "source-date"}
+    N_("Target file \"%s\" already exists!"), 3, 4, 0}, {
+    N_("&Abort"), BY + 3, 25, REPLACE_ABORT}, {
+    N_("If &size differs"), BY + 1, 28, REPLACE_SIZE}, {
+    N_("Non&e"), BY, 47, REPLACE_NEVER}, {
+    N_("&Update"), BY, 36, REPLACE_UPDATE}, {
+    N_("A&ll"), BY, 28, REPLACE_ALWAYS}, {
+    N_("Overwrite all targets?"), BY, 4, 0}, {
+    N_("&Reget"), BY - 1, 28, REPLACE_REGET}, {
+    N_("A&ppend"), BY - 2, 45, REPLACE_APPEND}, {
+    N_("&No"), BY - 2, 37, REPLACE_NO}, {
+    N_("&Yes"), BY - 2, 28, REPLACE_YES}, {
+    N_("Overwrite this target?"), BY - 2, 4, 0}, {
+    N_("Target date: %s, size %d"), 6, 4, 0}, {
+    N_("Source date: %s, size %d"), 5, 4, 0}
 };
 
 #define ADD_RD_BUTTON(i)\
 	add_widget (ui->replace_dlg,\
 		button_new (rd_widgets [i].ypos, rd_widgets [i].xpos, rd_widgets [i].value,\
-		NORMAL_BUTTON, rd_widgets [i].text, 0, 0, rd_widgets [i].tkname))
+		NORMAL_BUTTON, rd_widgets [i].text, 0, 0))
 
 #define ADD_RD_LABEL(ui,i,p1,p2)\
 	g_snprintf (buffer, sizeof (buffer), rd_widgets [i].text, p1, p2);\
 	add_widget (ui->replace_dlg,\
-		label_new (rd_widgets [i].ypos, rd_widgets [i].xpos, buffer, rd_widgets [i].tkname))
+		label_new (rd_widgets [i].ypos, rd_widgets [i].xpos, buffer))
 
 static void
 init_replace (FileOpContext *ctx, enum OperationMode mode)

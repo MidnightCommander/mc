@@ -553,8 +553,8 @@ edit_raw_key_query (char *heading, char *query, int cancel)
     if (cancel)
 	add_widget (raw_dlg,
 		    button_new (4, w / 2 - 5, B_CANCEL, NORMAL_BUTTON,
-				_("Cancel"), 0, 0, 0));
-    add_widget (raw_dlg, label_new (3 - cancel, 2, query, 0));
+				_("Cancel"), 0, 0));
+    add_widget (raw_dlg, label_new (3 - cancel, 2, query));
     add_widget (raw_dlg,
 		input_new (3 - cancel, w - 5, INPUT_COLOR, 2, "", 0));
     run_dlg (raw_dlg);

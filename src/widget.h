@@ -135,12 +135,12 @@ typedef struct {
 
 /* Constructors */
 WButton *button_new   (int y, int x, int action, int flags, char *text, 
-			int (*callback)(int, void *), void *extra, char *tkname);
-WRadio  *radio_new    (int y, int x, int count, char **text, int use_hotkey, char *tkname);
-WCheck  *check_new    (int y, int x, int state,  char *text, char *tkname);
-WInput  *input_new    (int y, int x, int color, int len, const char *text, char *tkname);
-WLabel  *label_new    (int y, int x, const char *text, char *tkname);
-WGauge  *gauge_new    (int y, int x, int shown, int max, int current, char *tkname);
+			int (*callback)(int, void *), void *extra);
+WRadio  *radio_new    (int y, int x, int count, char **text, int use_hotkey);
+WCheck  *check_new    (int y, int x, int state,  char *text);
+WInput  *input_new    (int y, int x, int color, int len, const char *text, char *histname);
+WLabel  *label_new    (int y, int x, const char *text);
+WGauge  *gauge_new    (int y, int x, int shown, int max, int current);
 WListbox *listbox_new (int x, int y, int width, int height, int action, lcback callback);
 
 /* Input lines */

@@ -80,7 +80,7 @@ Listbox *create_listbox_window (int cols, int lines, char *title, char *help)
 
     add_widget (listbox->dlg,
 		button_new (lines+3, (cols/2 + 2) - len/2, 
-		B_CANCEL, NORMAL_BUTTON, cancel_string, 0, 0, "c"));
+		B_CANCEL, NORMAL_BUTTON, cancel_string, 0, 0));
     add_widget (listbox->dlg, listbox->list);
     common_dialog_repaint (listbox->dlg);
     return listbox;
@@ -164,14 +164,14 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 			xpos--;
 	    add_widget (query_dlg, button_new
 			(lines-3, cols, B_USER+i, NORMAL_BUTTON, cur_name,
-			 0, 0, NULL));
+			 0, 0));
 	    cols += xpos;
 	    if (i == sel_pos)
 		query_dlg->initfocus = query_dlg->current;
 	}
 	va_end (ap);
 
-	add_widget (query_dlg, label_new (2, 3, text, NULL));
+	add_widget (query_dlg, label_new (2, 3, text));
 	
 	/* run dialog and make result */
 	run_dlg (query_dlg);
@@ -185,8 +185,8 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	/* free used memory */
 	destroy_dlg (query_dlg);
     } else {
-	add_widget (query_dlg, label_new (2, 3, text, NULL));
-	add_widget (query_dlg, button_new(0, 0, 0, HIDDEN_BUTTON, "-", 0, 0, NULL));
+	add_widget (query_dlg, label_new (2, 3, text));
+	add_widget (query_dlg, button_new(0, 0, 0, HIDDEN_BUTTON, "-", 0, 0));
 	last_query_dlg = query_dlg;
     }
     sel_pos = 0;
@@ -302,13 +302,11 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 	switch (qw->widget_type) {
 	case quick_checkbox:
 	    widget =
-		check_new (ypos, xpos, *qw->result, I18N (qw->text),
-			   qw->tkname);
+		check_new (ypos, xpos, *qw->result, I18N (qw->text));
 	    break;
 
 	case quick_radio:
-	    r = radio_new (ypos, xpos, qw->hotkey_pos, qw->str_result, 1,
-			   qw->tkname);
+	    r = radio_new (ypos, xpos, qw->hotkey_pos, qw->str_result, 1);
 	    r->pos = r->sel = qw->value;
 	    widget = r;
 	    break;
@@ -318,13 +316,13 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 		button_new (ypos, xpos, qw->value,
 			    (qw->value ==
 			     B_ENTER) ? DEFPUSH_BUTTON : NORMAL_BUTTON,
-			    I18N (qw->text), 0, 0, qw->tkname);
+			    I18N (qw->text), 0, 0);
 	    break;
 
 	    /* We use the hotkey pos as the field length */
 	case quick_input:
 	    input = input_new (ypos, xpos, INPUT_COLOR,
-			       qw->hotkey_pos, qw->text, qw->tkname);
+			       qw->hotkey_pos, qw->text, qw->histname);
 	    input->is_password = qw->value == 1;
 	    input->point = 0;
 	    if (qw->value & 2)
@@ -333,7 +331,7 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 	    break;
 
 	case quick_label:
-	    widget = label_new (ypos, xpos, I18N (qw->text), qw->tkname);
+	    widget = label_new (ypos, xpos, I18N (qw->text));
 	    break;
 
 	default:
@@ -409,12 +407,12 @@ real_input_dialog_help (char *header, char *text, char *help,
     char *my_str;
     char tk_name[64] = "inp|";
 
-/* we need a unique name for tkname because widget.c:history_tool()
+/* we need a unique name for histname because widget.c:history_tool()
    needs a unique name for each dialog - using the header is ideal */
 
     strncpy (tk_name + 3, header, 60);
     tk_name[63] = '\0';
-    quick_widgets[2].tkname = tk_name;
+    quick_widgets[2].histname = tk_name;
 
     len = max (strlen (header), msglen (text, &lines)) + 4;
     len = max (len, 64);
