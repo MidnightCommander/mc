@@ -521,7 +521,11 @@ void layout_change (void)
 	how the panel are split (horizontal/vertical). */
     done_menu();
     init_menu();
+
+#ifdef RESIZABLE_MENUBAR
 	menubar_arrange(the_menubar);
+#endif
+
 #endif
 }
 
@@ -752,21 +756,14 @@ void flag_winch (int dummy)
 
 void edit_adjust_size (Dlg_head * h);
 
-void change_screen_size (void)
+#ifdef PORT_NEEDS_CHANGE_SCREEN_SIZE
+void low_level_change_screen_size (void)
 {
-#ifndef HAVE_X
 #if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
 #if defined TIOCGWINSZ && !defined SCO_FLAVOR
     struct winsize winsz;
-    extern Dlg_head *view_dlg;
-    extern Dlg_head *edit_dlg;
-    
-#ifndef NCURSES_VERSION
-    mc_noraw_mode ();
-    endwin ();
-#endif
-    winsz.ws_col = winsz.ws_row = 0;
 
+    winsz.ws_col = winsz.ws_row = 0;
     /* Ioctl on the STDIN_FILENO */
     ioctl (0, TIOCGWINSZ, &winsz);
     if (winsz.ws_col && winsz.ws_row){
@@ -781,7 +778,22 @@ void change_screen_size (void)
 	    resize_subshell ();
 #endif
     }
+#endif /* TIOCGWINSZ && !SCO_FLAVOR */
+#endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
+}
 
+void change_screen_size (void)
+{
+#if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
+#if defined TIOCGWINSZ && !defined SCO_FLAVOR
+    extern Dlg_head *view_dlg;
+    extern Dlg_head *edit_dlg;
+    
+#ifndef NCURSES_VERSION
+    mc_noraw_mode ();
+    endwin ();
+#endif
+    low_level_change_screen_size ();
     check_split ();
 #ifndef NCURSES_VERSION
     /* XSI Curses spec states that portable applications shall not invoke
@@ -800,16 +812,18 @@ void change_screen_size (void)
 	edit_adjust_size (edit_dlg);
 #endif
     
+#ifdef RESIZABLE_MENUBAR
 	menubar_arrange(the_menubar);
+#endif
 		
     /* Now, force the redraw */
     do_refresh ();
     touchwin (stdscr);
 #endif /* TIOCGWINSZ && !SCO_FLAVOR */
 #endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
-#endif /* HAVE_X */
     winch_flag = 0;
 }
+#endif /* HAVE_X */
 
 extern int verbose;
 static int ok_to_refresh = 1;

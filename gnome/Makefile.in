@@ -33,7 +33,8 @@ GNOMESRCS = 		\
 	gmc-chargrid.c	\
 	gpageprop.c	\
 	gcliplabel.c	\
-	gcache.c
+	gcache.c	\
+	gblist.c
 
 GNOMEHDRS = 		\
 	gmain.h 	\
@@ -46,7 +47,8 @@ GNOMEHDRS = 		\
 	gpageprop.h	\
 	gmc-chargrid.h	\
 	gcliplabel.h	\
-	gcache.h
+	gcache.h	\
+	gblist.h
 
 ICONS = 				\
 	$(srcdir)/directory-ok.xpm	\
@@ -54,7 +56,14 @@ ICONS = 				\
 	$(srcdir)/multi.xpm		\
 	$(srcdir)/multi-ok.png		\
 	$(srcdir)/not.png		\
-	$(srcdir)/multi-ok.xpm
+	$(srcdir)/multi-ok.xpm		\
+	$(srcdir)/i-directory.png	\
+	$(srcdir)/i-executable.png	\
+	$(srcdir)/i-symlink.png		\
+	$(srcdir)/i-device.png		\
+	$(srcdir)/i-regular.png		\
+	$(srcdir)/i-core.png		\
+	$(srcdir)/i-sock.png
 
 #
 # These objects from ../src do not depend on HAVE_X / HAVE_GNOME??
@@ -91,7 +100,8 @@ OBJS = $(LOBJS) $(OOBJS) \
 	gprop.o		\
 	gpageprop.o	\
 	gcliplabel.o	\
-	gcache.o
+	gcache.o	\
+	gblist.o
 
 #
 # Distribution variables

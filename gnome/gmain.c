@@ -31,16 +31,18 @@ struct gmc_color_pairs_s gmc_color_pairs [MAX_COLOR_PAIRS];
 
 char *default_edition_colors =
 "normal=black:"
-"selected=red:"
+"selected=white,darkblue:"
 "viewunderline=brightred,blue:"
 "directory=blue:"
-"markselect=red,yellow:"
+"markselect=yellow,darkblue:"
 "marked=yellow,seagreen:"
 "execute=slateblue:"
 "link=green:"
 "device=magenta:"
 "core=red:"
 "menuhotsel=cyan,black:"
+"errors=white,red:"
+"reverse=black,lightcyan:"
 "special=black";
 
 /* The Dlg_head for the whole desktop */

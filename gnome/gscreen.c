@@ -30,6 +30,7 @@
 #include "gdesktop.h"
 #include "gpageprop.h"
 #include "gcliplabel.h"
+#include "gblist.h"
 #include "../vfs/vfs.h"
 #include <gdk/gdkprivate.h>
 
@@ -47,6 +48,15 @@ GdkBitmap *icon_link_mask;
 GdkPixmap *icon_dev_pixmap;
 GdkBitmap *icon_dev_mask;
 
+/* These are big images used in the Icon View,  for the gnome_icon_list */
+static GdkImlibImage *icon_view_directory;
+static GdkImlibImage *icon_view_executable;
+static GdkImlibImage *icon_view_symlink;
+static GdkImlibImage *icon_view_device;
+static GdkImlibImage *icon_view_regular;
+static GdkImlibImage *icon_view_core;
+static GdkImlibImage *icon_view_sock;
+
 static char *drag_types [] = { "text/plain", "url:ALL" };
 static char *drop_types [] = { "url:ALL" };
 
@@ -60,17 +70,25 @@ GtkWidget *drag_multiple_ok  = NULL;
 
 typedef void (*context_menu_callback)(GtkWidget *, WPanel *);
 
+/*
+ * Flags for the context-sensitive popup menus
+ */
 #define F_ALL         1
 #define F_REGULAR     2
 #define F_SYMLINK     4
 #define F_SINGLE      8
 #define F_NOTDIR     16
 
+static void panel_file_list_configure_contents (GtkWidget *file_list, WPanel *panel, int main_width, int height);
+
 void
 repaint_file (WPanel *panel, int file_index, int move, int attr, int isstatus)
 {
 }
 
+/*
+ * Invoked by the generic code:  show current working directory
+ */
 void
 show_dir (WPanel *panel)
 {
@@ -79,6 +97,9 @@ show_dir (WPanel *panel)
 	gtk_window_set_title (GTK_WINDOW (panel->xwindow), panel->cwd);
 }
 
+/*
+ * Utility routine:  Try to load a bitmap for a file_entry
+ */
 static void
 panel_file_list_set_type_bitmap (GtkCList *cl, int row, int column, int color, file_entry *fe)
 {
@@ -96,6 +117,9 @@ panel_file_list_set_type_bitmap (GtkCList *cl, int row, int column, int color, f
 	}
 }
 
+/*
+ * Sets the color attributes for a given row.
+ */
 static void
 panel_file_list_set_row_colors (GtkCList *cl, int row, int color_pair)
 {
@@ -103,6 +127,10 @@ panel_file_list_set_row_colors (GtkCList *cl, int row, int color_pair)
 	gtk_clist_set_background (cl, row, gmc_color_pairs [color_pair].back);
 }
 
+/*
+ * Update the status of the back and forward history buttons.
+ * Called from the generic code 
+ */
 void
 x_panel_update_marks (WPanel *panel)
 {
@@ -116,8 +144,11 @@ x_panel_update_marks (WPanel *panel)
 	gtk_widget_set_sensitive (panel->back_b, bf);
 }
 
-void
-x_fill_panel (WPanel *panel)
+/*
+ * Listing view: Load the contents
+ */
+static void
+panel_fill_panel_list (WPanel *panel)
 {
 	const int top       = panel->count;
 	const int items     = panel->format->items;
@@ -166,6 +197,75 @@ x_fill_panel (WPanel *panel)
 	free (texts);
 }
 
+/*
+ * Icon view: load the panel contents
+ */
+static void
+panel_fill_panel_icons (WPanel *panel)
+{
+	GnomeIconList *icons = GNOME_ICON_LIST (panel->icons);
+	const int top       = panel->count;
+	const int selected  = panel->selected;
+	int i;
+	GdkImlibImage *image;
+	
+	gnome_icon_list_freeze (icons);
+	gnome_icon_list_clear (icons);
+	
+	for (i = 0; i < top; i++){
+		file_entry *fe = &panel->dir.list [i];
+
+		
+		switch (file_entry_color (fe)){
+		case DIRECTORY_COLOR:
+			image = icon_view_directory;
+			break;
+			
+		case LINK_COLOR:
+			image = icon_view_symlink;
+			break;
+			
+		case DEVICE_COLOR:
+			image = icon_view_device;
+			break;
+			
+		case SPECIAL_COLOR:
+			image = icon_view_sock;
+			break;
+			
+		case EXECUTABLE_COLOR:
+			image = icon_view_executable;
+			break;
+				
+		case CORE_COLOR:
+			image = icon_view_core;
+			break;
+			
+		case STALLED_COLOR:
+		case NORMAL_COLOR:
+		default:
+			image = icon_view_regular;
+		}
+		gnome_icon_list_append_imlib (icons, image, fe->fname);
+	}
+	/* This is needed as the gtk_clist_append changes selected under us :-( */
+	panel->selected = selected;
+	select_item (panel);
+	gnome_icon_list_thaw (icons);
+}
+
+/*
+ * Invoked from the generic code to fill the display 
+ */
+void
+x_fill_panel (WPanel *panel)
+{
+	if (panel->list_type == list_icons)
+		panel_fill_panel_icons (panel);
+	else
+		panel_fill_panel_list (panel);
+}
+
 static void
 gmc_panel_set_size (int index, int boot)
 {
@@ -192,13 +292,15 @@ x_panel_set_size (int index)
 	gmc_panel_set_size (index, 1);
 }
 
+/*
+ * Invoked when the f.mark field of a file item changes
+ */
 void
 x_panel_select_item (WPanel *panel, int index, int value)
 {
 	int color;
 
 	color = file_compute_color (value ? MARKED : NORMAL, &panel->dir.list[index]);
-
 	panel_file_list_set_row_colors (GTK_CLIST (panel->list), index, color);
 }
 
@@ -206,18 +308,30 @@ void
 x_select_item (WPanel *panel)
 {
 	GtkCList *clist = GTK_CLIST (panel->list);
+	int color, marked;
 
-	gtk_clist_select_row (clist, panel->selected, 0);
+	if (panel->dir.list [panel->selected].f.marked)
+		marked = 1;
+	else
+		marked = 0;
+	
+	color = file_compute_color (marked ? MARKED_SELECTED : SELECTED, &panel->dir.list [panel->selected]);
+	panel_file_list_set_row_colors (GTK_CLIST (panel->list), panel->selected, color);
 
-	if (gtk_clist_row_is_visible (clist, panel->selected) != GTK_VISIBILITY_FULL){
+	/* Make it visible */
+	if (gtk_clist_row_is_visible (clist, panel->selected) != GTK_VISIBILITY_FULL)
 		gtk_clist_moveto (clist, panel->selected, 0, 0.5, 0.0);
-	}
 }
 
 void
 x_unselect_item (WPanel *panel)
 {
-	gtk_clist_unselect_row (GTK_CLIST (panel->list), panel->selected, 0);
+	int color;
+	int val;
+
+	val = panel->dir.list [panel->selected].f.marked ? MARKED : NORMAL;
+	color = file_compute_color (val, &panel->dir.list [panel->selected]);
+	panel_file_list_set_row_colors (GTK_CLIST (panel->list), panel->selected, color);
 }
 
 void
@@ -233,10 +347,17 @@ x_adjust_top_file (WPanel *panel)
 /*	gtk_clist_moveto (GTK_CLIST (panel->list), panel->top_file, 0, 0.0, 0.0); */
 }
 
+/*
+ * These two constants taken from Gtk sources, hack to figure out how much
+ * of the clist is visible
+ */
 #define COLUMN_INSET 3
 #define CELL_SPACING 1
 
-void
+/*
+ * Configures the columns title sizes for the panel->list CList widget
+ */
+static void
 panel_file_list_configure_contents (GtkWidget *file_list, WPanel *panel, int main_width, int height)
 {
 	format_e *format = panel->format;
@@ -357,6 +478,10 @@ panel_action_properties (GtkWidget *widget, WPanel *panel)
 	free (full_name);
 }
 
+/*
+ * The context menu: text displayed, condition that must be met and
+ * the routine that gets invoked upon activation.
+ */
 static struct {
 	char *text;
 	int  flags;
@@ -375,6 +500,8 @@ static struct {
 	{ NULL, 0, NULL },
 };
 
+/*
+ * context menu, constant entries */
 static struct {
 	char *text;
 	context_menu_callback callback;
@@ -563,6 +690,7 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 	
 	switch (event->type) {
 	case GDK_BUTTON_PRESS:
+		gtk_clist_unselect_row (GTK_CLIST (panel->list), row, 0);
 		internal_select_item (file_list, panel, row);
 
 		switch (event->button.button) {
@@ -585,6 +713,7 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 		break;
 
 	case GDK_2BUTTON_PRESS:
+		gtk_clist_unselect_row (GTK_CLIST (panel->list), row, 0);
 		if (event->button.button == 1)
 			do_enter (panel);
 		break;
@@ -681,7 +810,7 @@ panel_configure_file_list (WPanel *panel, GtkWidget *file_list)
 
 	/* Configure the CList */
 
-	gtk_clist_set_selection_mode (cl, GTK_SELECTION_BROWSE);
+	gtk_clist_set_selection_mode (cl, GTK_SELECTION_SINGLE);
 	gtk_clist_set_policy (cl, GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 	
 	for (i = 0, format = panel->format; format; format = format->next){
@@ -738,7 +867,7 @@ panel_build_selected_file_list (WPanel *panel, int *file_list_len)
 }
 
 static void
-panel_drag_request (GtkWidget *widget, GdkEventDragRequest *event, WPanel *panel)
+panel_clist_drag_request (GtkWidget *widget, GdkEventDragRequest *event, WPanel *panel)
 {
 	void *data;
 	int  len;
@@ -758,16 +887,11 @@ panel_drag_request (GtkWidget *widget, GdkEventDragRequest *event, WPanel *panel
 	}
 }
 
-static void
-panel_drop_enter (GtkWidget *widget, GdkEvent *event)
-{
-}
-
 /*
  * Invoked when a drop has happened on the panel
  */
 static void
-panel_drop_data_available (GtkWidget *widget, GdkEventDropDataAvailable *data, WPanel *panel)
+panel_clist_drop_data_available (GtkWidget *widget, GdkEventDropDataAvailable *data, WPanel *panel)
 {
 	gint winx, winy;
 	gint dropx, dropy;
@@ -800,27 +924,12 @@ panel_drop_data_available (GtkWidget *widget, GdkEventDropDataAvailable *data, W
 	panel_update_contents (panel);
 }
 
-/* Workaround for the CList that is not adding its clist-window to the DND windows */
-static void
-fixed_gtk_widget_dnd_drop_set (GtkCList *clist, int drop_enable, char **drop_types, int count, int is_destructive)
-{
-/*	gtk_widget_dnd_drop_set (GTK_WIDGET (clist), drop_enable, drop_types, count, is_destructive); */
-	gdk_window_dnd_drop_set (clist->clist_window, drop_enable, drop_types, count, is_destructive);
-}
-
-static void
-fixed_gtk_widget_dnd_drag_set (GtkCList *clist, int drag_enable, gchar **type_accept_list, int numtypes)
-{
-/*	gtk_widget_dnd_drag_set (GTK_WIDGET (clist), drag_enable, type_accept_list, numtypes); */
-	gdk_window_dnd_drag_set (clist->clist_window, drag_enable, type_accept_list, numtypes);
-}
-
 static void
 panel_drag_begin (GtkWidget *widget, GdkEvent *event, WPanel *panel)
 {
 	GdkPoint hotspot = { 15, 15 };
 
-	if (panel->marked){
+	if (panel->marked > 1){
 		if (drag_multiple && drag_multiple_ok){
 			gdk_dnd_set_drag_shape (drag_multiple->window, &hotspot,
 						drag_multiple_ok->window, &hotspot);
@@ -855,14 +964,9 @@ load_transparent_image (char *base)
 	return w;
 }
 
-/*
- * Pixmaps can only be loaded once the window has been realized, so
- * this is why this hook is here
- */
 static void
-panel_realized (GtkWidget *file_list, WPanel *panel)
+load_dnd_icons (void)
 {
-	GtkObject *obj = GTK_OBJECT (file_list);
 	GdkPoint hotspot = { 5, 5 };
 
 	if (!drag_directory)
@@ -880,29 +984,32 @@ panel_realized (GtkWidget *file_list, WPanel *panel)
 	if (drag_directory && drag_directory_ok)
 		gdk_dnd_set_drag_shape (drag_directory->window, &hotspot,
 					drag_directory_ok->window, &hotspot);	
+}
+
+/*
+ * Pixmaps can only be loaded once the window has been realized, so
+ * this is why this hook is here
+ */
+static void
+panel_realized (GtkWidget *file_list, WPanel *panel)
+{
+	GtkObject *obj = GTK_OBJECT (file_list);
+
+	load_dnd_icons ();
 	
 	/* DND: Drag setup */
-	gtk_signal_connect (obj, "drag_request_event",
-			    GTK_SIGNAL_FUNC (panel_drag_request), panel);
-	gtk_signal_connect (obj, "drag_begin_event",
-			    GTK_SIGNAL_FUNC (panel_drag_begin), panel);
+	gtk_signal_connect (obj, "drag_request_event", GTK_SIGNAL_FUNC (panel_clist_drag_request), panel);
+	gtk_signal_connect (obj, "drag_begin_event",   GTK_SIGNAL_FUNC (panel_drag_begin), panel);
 
-	fixed_gtk_widget_dnd_drag_set (GTK_CLIST (file_list), TRUE, drag_types, ELEMENTS (drag_types));
+	gdk_window_dnd_drag_set (GTK_CLIST (file_list)->clist_window, TRUE, drag_types, ELEMENTS (drag_types));
  
 	/* DND: Drop setup */
-	gtk_signal_connect (obj, "drop_enter_event",
-			    GTK_SIGNAL_FUNC (panel_drop_enter), panel);
-	
-	gtk_signal_connect (obj, "drop_leave_event",
-			    GTK_SIGNAL_FUNC (panel_drop_enter), panel);
-
-	gtk_signal_connect (obj, "drop_data_available_event",
-			    GTK_SIGNAL_FUNC (panel_drop_data_available), panel);
+	gtk_signal_connect (obj, "drop_data_available_event", GTK_SIGNAL_FUNC (panel_clist_drop_data_available), panel);
 
 	/* Artificial way of getting drag to start without leaving the widget boundary */
 	gtk_signal_connect (obj, "motion_notify_event",
 			    GTK_SIGNAL_FUNC (panel_artificial_drag_start), panel);
-	fixed_gtk_widget_dnd_drop_set (GTK_CLIST (file_list), TRUE, drop_types, ELEMENTS (drop_types), FALSE);
+	gdk_window_dnd_drop_set (GTK_CLIST (file_list)->clist_window, TRUE, drop_types, ELEMENTS (drop_types), FALSE);
 }
 
 /*
@@ -923,7 +1030,7 @@ panel_create_file_list (WPanel *panel)
 		if (format->use_in_gui)
 			titles [i++] = format->title;
 
-	file_list = gtk_clist_new_with_titles (items, titles);
+	file_list = gtk_blist_new_with_titles (items, titles);
 	clist = GTK_CLIST (file_list);
 	panel_configure_file_list (panel, file_list);
 	free (titles);
@@ -947,7 +1054,152 @@ panel_create_file_list (WPanel *panel)
 static void
 panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPanel *panel)
 {
-	printf ("ícono %d seleccionado\n", index);
+	panel->selected = index;
+	do_file_mark (panel, index, 1);
+	display_mini_info (panel);
+	execute_hooks (select_file_hook);
+
+	switch (event->type){
+	case GDK_BUTTON_PRESS:
+		if (event->button.button == 3){
+			file_popup (event, panel, index, panel->dir.list [index].fname);
+			return;
+		}
+		break;
+
+	case GDK_2BUTTON_PRESS:
+		if (event->button.button == 1)
+			do_enter (panel);
+		break;
+
+	default:
+		break;
+	}
+}
+
+static void
+panel_icon_list_unselect_icon (GtkWidget *widget, int index, GdkEvent *event, WPanel *panel)
+{
+	do_file_mark (panel, index, 0);
+	display_mini_info (panel);
+	if (panel->marked == 0)
+		panel->selected = 0;
+}
+
+static GdkImlibImage *
+load_image_icon_view (char *base)
+{
+	GdkImlibImage *im;
+	char *f = concat_dir_and_file (ICONDIR, base);
+
+	im = gdk_imlib_load_image (base);
+	g_free (f);
+	return im;
+}
+
+void
+load_imlib_icons (void)
+{
+	static int loaded;
+
+	if (loaded)
+		return;
+	
+	icon_view_directory  = load_image_icon_view ("i-directory.png");
+	icon_view_executable = load_image_icon_view ("i-executable.png");
+	icon_view_symlink    = load_image_icon_view ("i-symlink.png");
+	icon_view_device     = load_image_icon_view ("i-device.png");
+	icon_view_regular    = load_image_icon_view ("i-regular.png");
+	icon_view_core       = load_image_icon_view ("i-core.png");
+	icon_view_sock       = load_image_icon_view ("i-sock.png");
+
+	loaded = 1;
+}
+		  
+static void
+panel_icon_list_artificial_drag_start (GtkObject *obj, GdkEventMotion *event)
+{
+	GnomeIconList *ilist = GNOME_ICON_LIST (obj);
+
+	artificial_drag_start (ilist->ilist_window, event->x, event->y);
+}
+
+static void
+panel_icon_list_drag_request (GtkWidget *widget, GdkEventDragRequest *event, WPanel *panel)
+{
+	GnomeIconList *ilist = GNOME_ICON_LIST (widget);
+	void *data;
+	int len;
+	
+	if (!((strcmp (event->data_type, "text/plain") == 0) ||
+	      (strcmp (event->data_type, "url:ALL")    == 0)))
+		return;
+		
+	data = panel_build_selected_file_list (panel, &len);
+		
+	gdk_window_dnd_data_set (ilist->ilist_window, (GdkEvent *) event, data, len);
+	free (data);
+}
+
+static void
+panel_icon_list_drop_data_available (GtkWidget *widget, GdkEventDropDataAvailable *data, WPanel *panel)
+{
+	GnomeIconList *ilist = GNOME_ICON_LIST (widget);
+	gint winx, winy;
+	gint dropx, dropy;
+	gint item;
+	char *drop_dir;
+	
+	gdk_window_get_origin (ilist->ilist_window, &winx, &winy);
+	dropx = data->coords.x - winx;
+	dropy = data->coords.y - winy;
+
+	if (dropx < 0 || dropy < 0)
+		return;
+
+	item = gnome_icon_list_get_icon_at (ilist, dropx, dropy);
+	if (item == -1)
+		drop_dir = panel->cwd;
+	else {
+		g_assert (item < panel->count);
+
+		if (S_ISDIR (panel->dir.list [item].buf.st_mode))
+			drop_dir = concat_dir_and_file (panel->cwd, panel->dir.list [item].fname);
+		else 
+			drop_dir = panel->cwd;
+	}
+	drop_on_directory (data, drop_dir, 0);
+
+	if (drop_dir != panel->cwd)
+		free (drop_dir);
+
+	update_one_panel_widget (panel, 0, UP_KEEPSEL);
+	panel_update_contents (panel);
+}
+
+/*
+ * Setup for the icon view
+ */
+static void
+panel_icon_list_realized (GtkObject *obj, WPanel *panel)
+{
+	GnomeIconList *icon = GNOME_ICON_LIST (obj);
+	
+	load_imlib_icons ();
+	load_dnd_icons ();
+
+	/* DND: Drag setup */
+	gtk_signal_connect (obj, "drag_request_event", GTK_SIGNAL_FUNC (panel_icon_list_drag_request), panel);
+	gtk_signal_connect (obj, "drag_begin_event", GTK_SIGNAL_FUNC (panel_drag_begin), panel);
+	gdk_window_dnd_drag_set (icon->ilist_window, TRUE, drag_types, ELEMENTS (drag_types));
+	
+	/* DND: Drop setup */
+	gtk_signal_connect (obj, "drop_data_available_event",
+			    GTK_SIGNAL_FUNC (panel_icon_list_drop_data_available), panel);
+	
+	gtk_signal_connect (obj, "motion_notify_event",
+			    GTK_SIGNAL_FUNC (panel_icon_list_artificial_drag_start), panel);
+	gdk_window_dnd_drop_set (icon->ilist_window, TRUE, drop_types, ELEMENTS (drop_types), FALSE);
 }
 
 /*
@@ -956,14 +1208,19 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 static GtkWidget *
 panel_create_icon_display (WPanel *panel)
 {
-	GtkWidget *icon_field;
+	GnomeIconList *icon_field;
 
-	icon_field = gnome_icon_list_new ();
-
+	icon_field = GNOME_ICON_LIST (gnome_icon_list_new ());
+	
+	gnome_icon_list_set_selection_mode (icon_field, GTK_SELECTION_MULTIPLE);
+				     
 	gtk_signal_connect (GTK_OBJECT (icon_field), "select_icon",
-			    GTK_SIGNAL_FUNC (panel_icon_list_select_icon),
-			    panel);
-	return icon_field;
+			    GTK_SIGNAL_FUNC (panel_icon_list_select_icon), panel);
+	gtk_signal_connect (GTK_OBJECT (icon_field), "unselect_icon",
+			    GTK_SIGNAL_FUNC (panel_icon_list_unselect_icon), panel);
+	gtk_signal_connect (GTK_OBJECT (icon_field), "realize",
+			    GTK_SIGNAL_FUNC (panel_icon_list_realized), panel);
+	return GTK_WIDGET (icon_field);
 }
 
 void
@@ -1211,6 +1468,11 @@ display_mini_info (WPanel *panel)
 		gtk_clip_label_set (label, buffer);
 		free (buffer);
 	}
+	if (panel->list_type == list_icons){
+		if (panel->marked == 0){
+			gtk_clip_label_set (label, "");
+		}
+	}
 }
 
 static GtkWidget *
@@ -1290,10 +1552,23 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	
 	panel->table = gtk_table_new (2, 1, 0);
 
+	panel->list_type = list_icons;
+	printf ("\n\n          ***  NOTICE  ***\n\n\n"
+		"   You are running a version of GNOME/mc with a hardcoded\n"
+		"   value for running in the under-development icon-view mode.\n"
+		"   To fix this you have to edit gnome/gscreen.c around line %d \n"
+		"   and remove the line that reads: panel->list_type = list_icons\n\n"
+		"   You can alternatively wait for me to finish this.\n", __LINE__ -6);
+
+	panel->icons = panel_create_icon_display (panel);
+	panel->list  = panel_create_file_list (panel);
+	gtk_widget_ref (panel->icons);
+	gtk_widget_ref (panel->list);
+
 	if (panel->list_type == list_icons)
-		display = panel->icons = panel_create_icon_display (panel);
+		display = panel->icons;
 	else
-		display = panel->list  = panel_create_file_list (panel);
+		display = panel->list;
 
 	filter = panel_create_filter (h, panel, &panel->filter_w);
 	cwd = panel_create_cwd (h, panel, &panel->current_dir);
@@ -1319,6 +1594,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	panel->ministatus = gtk_clip_label_new ("");
 	gtk_misc_set_alignment (GTK_MISC (panel->ministatus), 0.0, 0.0);
 	gtk_misc_set_padding (GTK_MISC (panel->ministatus), 3, 0);
+	gtk_widget_show (panel->ministatus);
 	
 	status_line = gtk_hbox_new (0, 0);
 	gtk_label_set_justify (GTK_LABEL (panel->ministatus), GTK_JUSTIFY_LEFT);
@@ -1327,6 +1603,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_box_pack_start (GTK_BOX (status_line), panel->fwd_b, 0, 0, 2);
 	gtk_box_pack_start (GTK_BOX (status_line), cwd, 1, 1, 5);
 	gtk_box_pack_end   (GTK_BOX (status_line), filter, 0, 0, 0);
+	gtk_widget_show_all (status_line);
 	
 	/* The statusbar */
 	frame = gtk_frame_new (NULL);
@@ -1338,11 +1615,18 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_misc_set_padding (GTK_MISC (panel->status), 3, 0);
 	gtk_container_add (GTK_CONTAINER (frame), panel->status);
 	gtk_label_set_justify (GTK_LABEL (panel->status), GTK_JUSTIFY_LEFT);
-			       
-	gtk_table_attach (GTK_TABLE (panel->table), display, 0, 1, 1, 2,
+	gtk_widget_show_all (frame);
+
+	/* Add both the icon view and the listing view */
+	gtk_table_attach (GTK_TABLE (panel->table), panel->icons, 0, 1, 1, 2,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK, 
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0);
+	gtk_table_attach (GTK_TABLE (panel->table), panel->list, 0, 1, 1, 2,
+			  GTK_EXPAND | GTK_FILL | GTK_SHRINK, 
+			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
+			  0, 0);
+	gtk_widget_show (display);
 	
 	gtk_table_attach (GTK_TABLE (panel->table), status_line, 0, 1, 0, 1,
 			  GTK_EXPAND | GTK_FILL, GTK_SHRINK, 0, 0);
@@ -1362,9 +1646,14 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	
 	/* Now, insert our table in our parent */
 	gtk_container_add (GTK_CONTAINER (vbox), panel->table);
+	gtk_widget_show (vbox);
+	gtk_widget_show (panel->table);
 
 	if (!(panel->widget.options & W_PANEL_HIDDEN))
-		gtk_widget_show_all (gtk_widget_get_toplevel (panel->table));
+		gtk_widget_show (gtk_widget_get_toplevel (panel->table));
+
+	/* This is a bug workaround for the icon list, as the icon */
+	gtk_widget_queue_resize (panel->icons);
 			     
 	if (!pixmaps_ready){
 		if (!GTK_WIDGET_REALIZED (panel->list))

@@ -710,7 +710,7 @@ void user_menu_cmd (void)
     max_cols = min (max (max_cols, col), MAX_ENTRY_LEN);
 
     /* Create listbox */
-    listbox = create_listbox_window (max_cols+2, menu_lines, " User menu ",
+    listbox = create_listbox_window (max_cols+2, menu_lines, _(" User menu "),
 				     "[Menu File Edit]");
     
     /* insert all the items found */

@@ -1,3 +1,21 @@
+1998-05-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (panel_icon_list_realized): Add drag and drop support
+	to the icon list view;
+
+1998-05-06  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (panel_fill_panel_icons): New function:  Fill up the
+	icon list.
+	(x_create_panel): Change in the approach:  we create both of the
+	widget views at creation time and we now carefully show every
+	component.  I attach everything to the table, but not necesarly
+	show it. 
+
+	* gblist.c (blist_select_row): New widget derived from GtkClist.
+	replace select_row and unselect_row with null functions, as the
+	gmc code takes care of the rest. 
+
 1998-05-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_icon_drag_start): Do not attempt to use

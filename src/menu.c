@@ -462,8 +462,21 @@ static void menubar_destroy (WMenu *menubar)
 void
 menubar_arrange(WMenu* menubar)
 {
-	register int i, start_x;
+	register int i, start_x = 1;
 	int items = menubar->items;
+
+#ifndef RESIZABLE_MENUBAR
+	int gap = 3;
+
+	for (i = 0; i < items; i++)
+	{
+		int len = strlen(menubar->menu[i]->name);
+		menubar->menu[i]->start_x = start_x;
+		start_x += len + gap;
+	}
+
+#else /* RESIZABLE_MENUBAR */
+
 	int gap = menubar->widget.cols - 2;
 
 	/* First, calculate gap between items... */
@@ -472,6 +485,7 @@ menubar_arrange(WMenu* menubar)
 		/* preserve length here, to be used below */
 		gap -= (menubar->menu[i]->start_x = strlen(menubar->menu[i]->name));
 	}
+
 	gap /= (items - 1);
 
 	if (gap <= 0)
@@ -481,13 +495,14 @@ menubar_arrange(WMenu* menubar)
 	}
 
 	/* ...and now fix start positions of menubar items */
-	for (i = 0, start_x = 1; i < items; i++)
+	for (i = 0; i < items; i++)
 	{
 		int len = menubar->menu[i]->start_x;
 		menubar->menu[i]->start_x = start_x;
 		start_x += len + gap;
 	}
- }
+#endif /* RESIZABLE_MENUBAR */
+}
 
 void
 destroy_menu (Menu menu)
