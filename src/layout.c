@@ -852,7 +852,7 @@ void print_vfs_message (char *msg, ...)
 void rotate_dash (void)
 {
     static const char rotating_dash [] = "|/-\\";
-    static int pos = 0;
+    static size_t pos = 0;
 
     if (!nice_rotating_dash || (ok_to_refresh <= 0))
 	return;

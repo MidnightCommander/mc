@@ -202,7 +202,7 @@ enter (WInput *cmdline)
 	return MSG_HANDLED;
     } else {
 	char *command, *s;
-	int i, j;
+	size_t i, j;
 
 	if (!vfs_current_is_local ()) {
 	    message (1, MSG_ERROR,

@@ -195,13 +195,13 @@ background_attention (int fd, void *closure)
     void *routine;
     int  argc, i, result, status;
     char *data [MAXCALLARGS];
-    int bytes;
+    ssize_t bytes;
     enum ReturnType type;
 
     ctx = closure;
 
     bytes = read (fd, &routine, sizeof (routine));
-    if (bytes < (sizeof (routine))) {
+    if (bytes == -1 || (size_t) bytes < (sizeof (routine))) {
 	char *background_process_error = _(" Background process error ");
 
 	unregister_task_running (ctx->pid, fd);

@@ -131,7 +131,7 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 		written_nonspace = 1;
 		g_free (parameter);
 	    } else {
-		int len = strlen (prompt);
+		size_t len = strlen (prompt);
 
 		if (len < sizeof (prompt) - 1) {
 		    prompt[len] = *data;

@@ -192,12 +192,11 @@ static const struct edit_filters {
 /* Return index of the filter or -1 is there is no appropriate filter */
 static int edit_find_filter (const char *filename)
 {
-    int i, l;
+    size_t i, l, e;
     if (!filename)
 	return -1;
     l = strlen (filename);
-    for (i = 0; i < sizeof (all_filters) / sizeof (struct edit_filters); i++) {
-	int e;
+    for (i = 0; i < sizeof (all_filters) / sizeof (all_filters[0]); i++) {
 	e = strlen (all_filters[i].extension);
 	if (l > e)
 	    if (!strcmp (all_filters[i].extension, filename + l - e))
@@ -511,8 +510,8 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
 	static char option_whole_chars_search_buf[256];
 
 	if (option_whole_chars_search_buf != option_whole_chars_search) {
-	    int i;
-	    int len = strlen (option_whole_chars_search);
+	    size_t i;
+	    size_t len = strlen (option_whole_chars_search);
 
 	    strcpy (option_whole_chars_search_buf,
 		    option_whole_chars_search);
@@ -701,7 +700,7 @@ void edit_push_action (WEdit * edit, long c,...)
     if (sp > edit->stack_size - 10) {	/* say */
 	if (option_max_undo < 256)
 	    option_max_undo = 256;
-	if (edit->stack_size < option_max_undo) {
+	if (edit->stack_size < (unsigned long) option_max_undo) {
 	    t = g_realloc (edit->undo_stack, (edit->stack_size * 2 + 10) * sizeof (long));
 	    if (t) {
 		edit->undo_stack = t;
@@ -770,9 +769,12 @@ void edit_push_action (WEdit * edit, long c,...)
 
     edit->stack_pointer = (edit->stack_pointer + 1) & edit->stack_size_mask;
 
-/*if the sp wraps round and catches the stack_bottom then erase the first set of actions on the stack to make space - by moving stack_bottom forward one "key press" */
+    /* if the sp wraps round and catches the stack_bottom then erase
+     * the first set of actions on the stack to make space - by moving
+     * stack_bottom forward one "key press" */
     c = (edit->stack_pointer + 2) & edit->stack_size_mask;
-    if (c == edit->stack_bottom || ((c + 1) & edit->stack_size_mask) == edit->stack_bottom)
+    if ((unsigned long) c == edit->stack_bottom ||
+       (((unsigned long) c + 1) & edit->stack_size_mask) == edit->stack_bottom)
 	do {
 	    edit->stack_bottom = (edit->stack_bottom + 1) & edit->stack_size_mask;
 	} while (edit->undo_stack[edit->stack_bottom] < KEY_PRESS && edit->stack_bottom != edit->stack_pointer);
@@ -1297,7 +1299,7 @@ void edit_update_curs_col (WEdit * edit)
 /*moves the display start position up by i lines */
 void edit_scroll_upward (WEdit * edit, unsigned long i)
 {
-    int lines_above = edit->start_line;
+    unsigned long lines_above = edit->start_line;
     if (i > lines_above)
 	i = lines_above;
     if (i) {
@@ -1380,7 +1382,7 @@ edit_move_to_prev_col (WEdit * edit, long p)
 /* move i lines */
 void edit_move_up (WEdit * edit, unsigned long i, int scroll)
 {
-    long p, l = edit->curs_line;
+    unsigned long p, l = edit->curs_line;
 
     if (i > l)
 	i = l;

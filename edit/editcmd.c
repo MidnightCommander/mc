@@ -165,7 +165,7 @@ char *catstrs (const char *first,...)
 /* Free temporary strings */
 void freestrs(void)
 {
-    int i;
+    size_t i;
 
     for (i = 0; i < sizeof(stacked) / sizeof(stacked[0]); i++) {
 	g_free (stacked[i]);
@@ -394,10 +394,10 @@ void menu_save_mode_cmd (void)
     static int i18n_flag = 0;
 
     if (!i18n_flag) {
-        int i;
-	int maxlen = 0;
+        size_t i;
+	size_t maxlen = 0;
 	int dlg_x;
-	int l1;
+	size_t l1;
 
 	/* OK/Cancel buttons */
 	l1 = strlen (_(widgets[0].text)) + strlen (_(widgets[1].text)) + 5;
@@ -2726,8 +2726,8 @@ edit_completion_dialog (WEdit *edit, int max_len, int word_len,
     char *curr = NULL;
     Dlg_head *compl_dlg;
     WListbox *compl_list;
-    unsigned int compl_dlg_h;	/* completion dialog height */
-    unsigned int compl_dlg_w;	/* completion dialog width */
+    int compl_dlg_h;	/* completion dialog height */
+    int compl_dlg_w;	/* completion dialog width */
 
     /* calculate the dialog metrics */
     compl_dlg_h = num_compl + 2;

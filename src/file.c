@@ -163,7 +163,7 @@ static int transform_error = 0;
 static unsigned char *
 do_transform_source (FileOpContext *ctx, unsigned char *source)
 {
-    int j, k, l, len;
+    size_t j, k, l, len;
     unsigned char *fnsource = x_basename (source);
     int next_reg;
     enum CaseConvs case_conv = NO_CONV;
@@ -218,8 +218,8 @@ do_transform_source (FileOpContext *ctx, unsigned char *source)
 		transform_error = FILE_ABORT;
 		return NULL;
 	    }
-	    for (l = ctx->regs.start[next_reg];
-		 l < ctx->regs.end[next_reg]; l++)
+	    for (l = (size_t) ctx->regs.start[next_reg];
+		 l < (size_t) ctx->regs.end[next_reg]; l++)
 		fntarget[k++] = convert_case (fnsource[l], &case_conv);
 	    next_reg++;
 	    break;

@@ -593,7 +593,7 @@ init_i18n_stuff(int list_type, int cols)
 static void
 init_hotlist (int list_type)
 {
-    int i;
+    size_t i;
     char *title, *help_node;
     int hotlist_cols;
 
@@ -664,7 +664,7 @@ init_hotlist (int list_type)
 static void
 init_movelist (int list_type, struct hotlist *item)
 {
-    int i;
+    size_t i;
     char *hdr = g_strdup_printf (_("Moving %s"), item->label);
     int movelist_cols = init_i18n_stuff (list_type, COLS - 6);
 
@@ -843,7 +843,7 @@ static int add_new_entry_input (char *header, char *text1, char *text2, char *he
 	  0, 0, "label-lbl" },
     NULL_QuickWidget };
     
-    int len;
+    size_t len;
     int i;
     int lines1, lines2;
     char *my_str1, *my_str2;
@@ -852,8 +852,8 @@ static int add_new_entry_input (char *header, char *text1, char *text2, char *he
 	static int i18n_flag = 0;
 #endif /* ENABLE_NLS */
 
-    len = max (strlen (header), msglen (text1, &lines1));
-    len = max (len, msglen (text2, &lines2)) + 4;
+    len = max (strlen (header), (size_t) msglen (text1, &lines1));
+    len = max (len, (size_t) msglen (text2, &lines2)) + 4;
     len = max (len, 64);
 
 #ifdef ENABLE_NLS
@@ -943,7 +943,7 @@ static int add_new_group_input (char *header, char *label, char **result)
 	static int i18n_flag = 0;
 #endif /* ENABLE_NLS */
     
-    len = max (strlen (header), msglen (label, &lines)) + 4;
+    len = max (strlen (header), (size_t) msglen (label, &lines)) + 4;
     len = max (len, 64);
 
 #ifdef ENABLE_NLS

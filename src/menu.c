@@ -67,10 +67,10 @@ create_menu (char *name, menu_entry *entries, int count, char *help_node)
 
 		if (cp != NULL && *(cp+1) != '\0') {
 		    mp->hot_key = tolower (*(cp+1));
-		    menu->max_entry_len = max (strlen (mp->text) - 1,
+		    menu->max_entry_len = max ((int) (strlen (mp->text) - 1),
 			menu->max_entry_len);
 		} else {
-		    menu->max_entry_len = max (strlen (mp->text),
+		    menu->max_entry_len = max ((int) strlen (mp->text),
 			menu->max_entry_len);
 		}
 	    }

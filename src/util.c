@@ -217,7 +217,7 @@ name_trunc (const char *txt, int trunc_len)
     int txt_len;
     char *p;
 
-    if (trunc_len > sizeof (x) - 1) {
+    if ((size_t) trunc_len > sizeof (x) - 1) {
 	trunc_len = sizeof (x) - 1;
     }
     txt_len = strlen (txt);
@@ -410,7 +410,7 @@ strip_password (char *p, int has_prefix)
 		     {"/#smb:", 6},
     };
     char *at, *inner_colon, *dir;
-    int i;
+    size_t i;
     char *result = p;
     
     for (i = 0; i < sizeof (prefixes)/sizeof (prefixes[0]); i++) {
@@ -719,7 +719,7 @@ char *extract_line (char *s, char *top)
     static char tmp_line [BUF_MEDIUM];
     char *t = tmp_line;
     
-    while (*s && *s != '\n' && (t - tmp_line) < sizeof (tmp_line)-1 && s < top)
+    while (*s && *s != '\n' && (size_t) (t - tmp_line) < sizeof (tmp_line)-1 && s < top)
 	*t++ = *s++;
     *t = 0;
     return tmp_line;

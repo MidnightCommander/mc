@@ -168,7 +168,7 @@ static char *default_colors =
 
 static void get_color (char *cpp, CTYPE *colp)
 {
-    int i;
+    size_t i;
     
     for (i = 0; i < ELEMENTS(color_table); i++){
 	if (strcmp (cpp, color_name (i)) == 0){
@@ -208,7 +208,8 @@ static void get_two_colors (char **cpp, struct colorpair *colorpairp)
 static void configure_colors_string (char *the_color_string)
 {
     char *color_string, *p;
-    int  i, found;
+    size_t i;
+    int found;
 
     if (!the_color_string)
 	return;
@@ -274,7 +275,7 @@ load_dialog_colors (void)
 
 void init_colors (void)
 {
-    int i;
+    size_t i;
     
     int hascolors;
 
