@@ -1,5 +1,7 @@
 2002-12-26  Pavel Roskin  <proski@gnu.org>
 
+	* key,c (get_modifier): Warning fix.
+
 	* file.c: Never access internals of ctx->rx directly.
 	* fileopctx.c (file_op_context_destroy): Use regfree() to free
 	ctx->rx.

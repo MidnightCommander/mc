@@ -1080,7 +1080,7 @@ get_modifier (void)
 	return result;
     }
 #else
-    return 0;
+    return result;
 #endif
 }
 
