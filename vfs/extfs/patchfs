@@ -1,80 +1,151 @@
-#! /bin/sh
+#! /usr/bin/perl -w
+#
+# Written by Adam Byrtek <alpha@debian.org>, 2002
+# 
+# extfs to handle patches in unified diff format
 
-# Peter Daum <gator@cs.tu-berlin.de> (Jan 1998, mc-4.1.22)
+use bytes;
+use strict;
+use POSIX;
 
-# override any locale for dates. But LANG override LC_TIME (at least in glibc)
-# unset LC_ALL
-# LC_TIME=C
-# export LC_TIME
-LC_ALL=C
-export LC_ALL
+# standard binaries
+my $bzcat = "bzip2 -dc";
+my $gzcat = "zcat";
+my $file = "file";
 
-# paths to used programs:
-ncat=cat                  # regular cat
-zcat=zcat                 # gunzip to stdout
-bzcat="bzip2 -dc"         # bunzip2 to stdout
-file=file                 # "file" command
-sed=sed
+# date parsing requires Date::Parse from TimeDate module
+my $parsedates = eval "require Date::Parse";
 
-filelist=FILELIST         # names for "special" files
-
-patchfs_list ()
+sub timef
 {
-    date=`date +"%b %d %H:%M"`
-    perm="-r--r--r--"
-    uid=00000000
-    gid=00000000
-    size=00000000
-    nlink="  1"
-
-    echo "$perm $nlink $uid $gid $size $date $filelist"
-    $cat $1 | 
-    $sed -n "/^diff /{
-	s|^.* \([^ ]*\)$|$perm $nlink $uid $gid $size $date \1|gp
-    }"
+    # format unix time
+    my @time=localtime($_[0]);
+    return sprintf "%02d-%02d-%02d %02d:%02d", $time[4]+1, $time[3], $time[5]%100, $time[2], $time[1];
 }
 
-patchfs_copyout ()
+sub datetime
 {
-    if [ "$2" = "$filelist" ]; then  # list of all affected files
-	$cat $1 | 
-	$sed -n "/^diff /{
-	    s|^.* \([^ ]*\)$|\1|gp
-	}" > $3
-	exit 0
-     fi
+    # in case of problems fall back to 0 in unix time
+    # note: str2time interprets some wrong values (eg. " ") as 'today'
+    if ($parsedates && defined (my $t=str2time($_[0]))) {
+	return timef($t);
+    }
+    return timef(0);
+}
+
+sub list
+{
+    my ($f,$d,$state,$pos,$npos);
+    my ($uid,$gid)=(`id -nu` || "0",`id -ng` || "0");
+    chomp ($uid, $gid);
+
+    import Date::Parse if ($parsedates);
     
-    fn=`echo $2|$sed 's|/|\\\/|g'`   # escape '/' in filename
-    $cat $1 | 
-    $sed -n "/^diff .*$fn/,/^diff /{
-	/^diff ./{
-	    /$fn/p
-	    d
+    # state==1 means diff contents, state==0 mens comments
+    $state=1;
+    $f="";
+    while (<I>) {
+	if (/^--- /) {
+	    # start of a new file
+	    if ($state==1) {
+		$npos=tell(I)-length;
+		printf "-rw-r--r-- 1 %s %s %d %s %s\n", $uid, $gid, $npos-$pos, datetime($d), $f
+		  if $f;
+		$pos=$npos;
+	    }
+	    $state=1;
+	    s/^--- ([^\s]+).*$/$1/;
+	    chomp;
+	    $f=$_;
+	    $d="";
+	} elsif (/^\+\+\+ /) {
+	    # take date from the +++ field
+	    s/^\+\+\+ ([^\s]+)\s*//;
+	    s/^([^\t]+).*$/$1/;
+	    chomp;
+	    $d=$_;
+	} elsif ($state==1 && !/^([+\- ]|@@)/) {
+	    # start of comments, end of diff contents
+	    $npos=tell(I)-length;
+	    printf "-rw-r--r-- 1 %s %s %d %s %s\n", $uid, $gid, $npos-$pos, datetime($d), $f
+	      if $f;
+	    $pos=$npos;
+	    $state=0;
 	}
-	p
-    }" > $3
+    }
+    $npos=tell(I);
+    printf "-rw-r--r-- 1 %s %s %d %s %s\n", $uid, $gid, $npos-$pos, datetime($d), $f
+      if $f && $state!=0;
+
+    close I;
 }
 
-patchfs_run ()
+sub copyout
 {
-    exit 0
+    my ($file,$out)=@_;
+    my ($f,$state,$pos);
+
+    open O, "> $out";
+    $state=1;
+    $f="";
+    while (<I>) {
+	if (/^--- /) {
+	    # start of a new file
+	    if ($state==1) {
+		if ($f eq $file) {
+		    seek(I,-length,1);
+		    last;
+		}
+		$pos=tell(I)-length;
+	    }
+	    $state=1;
+	    s/^--- ([^\s]+).*$/$1/;
+	    chomp;
+	    $f=$_;
+	} elsif ($state==1 && !/^([+\- ]|@@)/) {
+	    # start of comments, end of diff contents
+	    if ($f eq $file) {
+		seek(I,-length,1);
+		last;
+	    }
+	    $pos=tell(I)-length;
+	    $state=0;
+	}
+    }
+    if ($f eq $file) {
+	my $here=tell(I);
+	seek(I,$pos,0);
+	read(I,my $buf,$here-$pos);
+	print O $buf;
+    }
+
+    close O;
 }
 
-type=`$file $2`
-case $type in
-    *bzip*) cat=$bzcat ;;
-    *gzip*) cat=$zcat ;;
-    *text*) cat=$ncat ;;
-    *) exit 1
-esac
 
-umask 077
-case "$1" in
-    list) patchfs_list $2; exit 0;;
-    copyout) patchfs_copyout $2 $3 $4; exit 0;;
-    run) patchfs_run; exit 0;;
-esac
+my $tmp;
+$_=`$file $ARGV[1]`;
+if (/bzip/) {
+    $tmp=tmpnam();
+    system "$bzcat $ARGV[1] > $tmp";
+    open I, "< $tmp";
+} elsif (/gzip/) {
+    $tmp=tmpnam();
+    system "$gzcat $ARGV[1] > $tmp";
+    open I, "< $tmp";
+} else {
+    open I, "< $ARGV[1]";
+}
 
-exit 1
+if ($ARGV[0] eq "list") {
+    list;
+    exit(0);
+} if ($ARGV[0] eq "copyout") {
+    copyout ($ARGV[2], $ARGV[3]);
+    exit(0);
+}
+exit(1);
 
-
+END {
+    system "rm $tmp" if ($tmp);
+}

@@ -1,3 +1,8 @@
+2002-12-09  Adam Byrtek  <alpha@debian.org>
+
+	* extfs/patchfs: Rewritten is Perl.  File size is now displayed
+	properly.
+
 2002-12-09  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/ftplist.in: Remove, it's obsoleted by the hotlist.
