@@ -58,7 +58,7 @@ static int len;
 static char *buffer = NULL;
 static int buffer_size = 0;
 static int columns, rows;
-static char vcs_name [BUF_TINY];
+static char vcs_name [128];
 static int vcs_fd;
 
 static void dwrite (int fd, char *buffer)
@@ -86,7 +86,7 @@ static void tty_getsize ()
 
 inline void tty_cursormove(int y, int x)
 {
-    char buffer [BUF_TINY];
+    char buffer [128];
 
     /* Standard ANSI escape sequence for cursor positioning */
     snprintf (buffer, sizeof (buffer), "\33[%d;%dH", y + 1, x + 1);
