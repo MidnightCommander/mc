@@ -5,6 +5,7 @@ AC_CONFIG_HEADER(include/config.h)
 AC_CONFIG_AUX_DIR(../../config)
 # we want to be compatibe with older versions of Samba
 AC_PREFIX_DEFAULT(/usr/local/samba)
+AC_SYS_LARGEFILE
 
 dnl Unique-to-Samba variables we'll be playing with.
 AC_SUBST(SHELL)
@@ -145,7 +146,7 @@ AC_CHECK_FUNCS(memmove vsnprintf snprintf setsid glob strpbrk pipe crypt16 getau
 AC_CHECK_FUNCS(strftime sigprocmask sigblock sigaction innetgr setnetgrent getnetgrent endnetgrent)
 AC_CHECK_FUNCS(initgroups select rdchk getgrnam pathconf setreuid setregid seteuid setegid)
 AC_CHECK_FUNCS(setpriv setgidx setuidx setgroups mktime rename ftruncate)
-AC_CHECK_FUNCS(atexit grantpt dup2)
+AC_CHECK_FUNCS(grantpt dup2)
 AC_CHECK_FUNCS(setluid yp_get_default_domain getpwanam)
 AC_CHECK_FUNCS(srandom random srand rand setenv usleep strcasecmp)
 

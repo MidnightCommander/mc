@@ -1,3 +1,8 @@
+2002-05-11  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* samba/configure.in: Add AC_SYS_LARGEFILE.
+	Don't check atexit.
+
 2002-04-31  Pavel Roskin  <proski@gnu.org>
 
 	* samba/acconfig.h: Remove.
