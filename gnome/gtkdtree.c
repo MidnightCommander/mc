@@ -107,7 +107,6 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 	g_assert (parent);
 	g_assert (dtree);
 
-	printf ("OPEN: %s\n", path);
 	dir = mc_opendir (path);
 	if (!dir)
 		return FALSE;
@@ -128,7 +127,6 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 		}
 
 		full_name = g_concat_dir_and_file (path, dirent->d_name);
-		printf ("Stating: %s\n", full_name);
 		res = mc_stat (full_name, &s);
 
 		if (res == -1){
@@ -160,9 +158,11 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 
 		if (level)
 			gtk_dtree_load_path (dtree, full_name, sibling, level-1);
-		
+
 		g_free (full_name);
 
+		if (!level)
+			break;
 	}
 
 	mc_closedir (dir);
