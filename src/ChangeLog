@@ -1,3 +1,8 @@
+2001-07-27  Pavel Roskin  <proski@gnu.org>
+
+	* util.c (mc_mkstemps): Don't prepend $TMPDIR if prefix contains
+	path separator.
+
 2001-07-26  Pavel Roskin  <proski@gnu.org>
 
 	* cmd.c (do_link): Append filename to the default symlink

@@ -1316,7 +1316,8 @@ concat_dir_and_file (const char *dir, const char *file)
  * Arguments:
  * pname (output) - pointer to the name of the temp file (needs g_free).
  *                  NULL if the function fails.
- * prefix - part of the filename before the random part (without directory).
+ * prefix - part of the filename before the random part.
+ *          Prepend $TMPDIR or /tmp if there are no path separators.
  * suffix - if not NULL, part of the filename after the random part.
  *
  * Result:
@@ -1328,19 +1329,24 @@ int mc_mkstemps(char **pname, const char *prefix, const char *suffix)
 	= "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     static unsigned long value;
     struct timeval tv;
-    char *tmpdir;
     char *tmpbase;
     char *tmpname;
     char *XXXXXX;
     int count;
 
-    tmpdir = getenv("TMPDIR");
-    if (!tmpdir) {
-	tmpdir = TMPDIR_DEFAULT;
-    }
+    if (strchr(prefix, PATH_SEP) == NULL) {
+	char *tmpdir;
 
-    /* Add prefix first to find the position of XXXXXX */
-    tmpbase = concat_dir_and_file (tmpdir, prefix);
+	tmpdir = getenv("TMPDIR");
+	if (!tmpdir) {
+	    tmpdir = TMPDIR_DEFAULT;
+	}
+
+	/* Add prefix first to find the position of XXXXXX */
+	tmpbase = concat_dir_and_file (tmpdir, prefix);
+    } else {
+	tmpbase = g_strdup (prefix);
+    }
 
     tmpname = g_strconcat (tmpbase, "XXXXXX", suffix, NULL);
     *pname = tmpname;
