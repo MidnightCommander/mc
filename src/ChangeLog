@@ -1,3 +1,15 @@
+Mon May 18 22:24:09 1998  Norbert Warmuth  <k3190@fh-sw.de>
+	* lib/mc.ini.in: s/reges/regex/
+
+	* main.c (process_args): return void, the return value was only
+	used once but wrong (-h displayed help twice).
+	(handle_args): -h: don't display help twice
+	(print_usage): Don't print program name and version, that's
+	already done by version(0).
+
+	* menu.c (menubar_paint_idx): Highlight Hotkeys also on slow
+	terminals (hotkeys were not displayed at all).
+
 1998-05-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* menu.c (menubar_drop_compute): Check for inrange items.

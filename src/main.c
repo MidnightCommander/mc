@@ -2237,7 +2237,7 @@ do_nc (void)
 static void
 version (int verbose)
 {
-    fprintf (stderr, "Midnight Commander %s\n", VERSION);
+    fprintf (stderr, "The Midnight Commander %s\n", VERSION);
     if (!verbose)
 	return;
     
@@ -2488,7 +2488,7 @@ print_usage (void)
 {
     version (0);
     fprintf (stderr,
-	"The Midnight Commander " VERSION "\nUsage is:\n\n"
+	"Usage is:\n\n"
         "mc [flags] [this_dir] [other_panel_dir]\n\n"	
 #if defined(HAVE_SLANG) && !defined(OS2_NT)
     "-a, --stickchars   Force use of +, -, | for line drawing.\n"
@@ -2572,7 +2572,7 @@ enum {
 	NOWIN_KEY    = -2
 };
 
-static int
+static void
 process_args (int c, char *option_arg)
 {
     switch (c) {
@@ -2649,9 +2649,7 @@ process_args (int c, char *option_arg)
 	print_usage ();
 	finish_program = 1;
 #endif
-	return 1;
     }
-    return 0;
 }
 
 #ifdef PORT_WANTS_ARGP
@@ -2841,8 +2839,7 @@ handle_args (int argc, char *argv [])
     while ((c = poptGetNextOpt (optCon)) > 0) {
 	option_arg = poptGetOptArg(optCon);
 
-	if (process_args (c, option_arg) == 1)
-		process_args ('h', 0);
+	process_args (c, option_arg);
     }
 
     if (c < -1){

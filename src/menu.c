@@ -107,13 +107,10 @@ static void menubar_paint_idx (WMenu *menubar, int idx, int color)
 		{
 			++text;
 			menu->entries [idx].hot_key = tolower(*text);
-			if (!slow_terminal)
-			{
-				attrset (color == MENU_SELECTED_COLOR ?
-					MENU_HOTSEL_COLOR : MENU_HOT_COLOR);
-				addch(*text);
-				attrset(color);
-			}
+			attrset (color == MENU_SELECTED_COLOR ?
+				MENU_HOTSEL_COLOR : MENU_HOT_COLOR);
+			addch(*text);
+			attrset(color);
 			continue;
 		}
 		addch(*text);
