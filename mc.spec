@@ -109,6 +109,7 @@ rm -rf $RPM_BUILD_ROOT
 
 /usr/bin/gmc
 /usr/lib/mc/layout
+/usr/share/icons/mc/*
 
 %changelog
 * Sun Apr 19 1998 Marc Ewing <marc@redhat.com>
