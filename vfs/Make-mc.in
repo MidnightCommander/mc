@@ -129,7 +129,7 @@ Makefile: $(srcdir)/Make-mc.in $(builddir)/config.status
 # Distribution variables
 #
 
-DISTVFS = 	Make-mc.in ChangeLog $(VFSSRCS) $(VFSHDRS)
+DISTVFS = 	Make-mc.in ChangeLog $(VFSSRCS) $(VFSHDRS) callback.h README README.fish
 
 all: @LIBVFS@ @mcserv@
 
