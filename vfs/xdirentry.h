@@ -32,25 +32,6 @@
 #define FL_FOLLOW 1
 #define FL_DIR 4
 
-/* Single virtual file - high level */
-struct vfs_s_entry {
-    struct vfs_s_entry **prevp, *next;
-    struct vfs_s_inode *dir;	/* Directory we are in - needed for invalidating directory when file in it changes */
-    char *name;			/* Name of this entry */
-    struct vfs_s_inode *ino;	/* ... and its inode */
-};
-
-/* Single virtual file - low level */
-struct vfs_s_inode {
-    struct vfs_s_entry *ent;
-    struct vfs_s_entry *subdir;
-    struct vfs_s_super *super;
-    struct stat st;		/* Parameters of this inode */
-    char *linkname;		/* Symlink's contents */
-    char *localname;		/* Filename of local file, if we have one */
-    struct timeval timestamp;
-    long data_offset;
-};
 
 /* Single connection or archive */
 struct vfs_s_super {
@@ -99,6 +80,31 @@ struct vfs_s_super {
     } u;
 };
 
+/*
+ * Single virtual file - directory entry.  The same inode can have many
+ * entries (i.e. hard links), but usually has only one.
+ */
+struct vfs_s_entry {
+    struct vfs_s_entry **prevp, *next;	/* Pointers in the entry list */
+    struct vfs_s_inode *dir;	/* Directory we are in, i.e. our parent */
+    char *name;			/* Name of this entry */
+    struct vfs_s_inode *ino;	/* ... and its inode */
+};
+
+/* Single virtual file - inode */
+struct vfs_s_inode {
+    struct vfs_s_super *super;	/* Archive the file is on */
+    struct vfs_s_entry *ent;	/* Our entry in the parent directory -
+				   use only for directories because they
+				   cannot be hardlinked */
+    struct vfs_s_entry *subdir; /* If this is a directory, its entry */
+    struct stat st;		/* Parameters of this inode */
+    char *linkname;		/* Symlink's contents */
+    char *localname;		/* Filename of local file, if we have one */
+    struct timeval timestamp;	/* Subclass specific */
+    long data_offset;		/* Subclass specific */
+};
+
 /* Data associated with an open file */
 struct vfs_s_fh {
     struct vfs_s_inode *ino;
@@ -118,7 +124,7 @@ struct vfs_s_fh {
 
 /*
  * One of our subclasses (tar, cpio, fish, ftpfs) with data and methods.
- * Extension of vfs_class.  Stored in the data field of vfs_class.
+ * Extends vfs_class.  Stored in the "data" field of vfs_class.
  */
 struct vfs_s_data {
     struct vfs_s_super *supers;
@@ -157,6 +163,7 @@ struct vfs_s_data {
 			void *buf, int len);
     void (*linear_close) (struct vfs_class *me, struct vfs_s_fh *fh);
 };
+
 
 /* entries and inodes */
 struct vfs_s_inode *vfs_s_new_inode (struct vfs_class *me,
