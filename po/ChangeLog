@@ -1,6 +1,8 @@
 Sun,  1 Mar 1998 05:05:34 +0100  Vincent Renardias  <vincent@waw.com>
 
 	* ChangeLog: New File (the one you're reading now).
-	* fr.po: New file.
+	* fr.po: New file (many translations still missing).
 	* corrected typos in edit/editcmd.c:1187,1188.
+	* some more typos in es.po.
+	* "fr" added to ALL_LINGUAS in ../configure.in.
 

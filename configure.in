@@ -8,7 +8,7 @@ PACKAGE=mc
 VERSION=dummy
 AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
 AC_DEFINE_UNQUOTED(VERSION, "dummy")
-ALL_LINGUAS="es"
+ALL_LINGUAS="fr es"
 
 dnl This is path where we're looking for headers in addition to /usr/include
 dnl and whatever cpp defaults to.
