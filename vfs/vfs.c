@@ -1499,10 +1499,14 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 	    s->st_mode |= (S_IRUSR | S_IRGRP | S_IROTH | S_IWUSR);
 	p += 9;
     } else {
-	if ((i = vfs_parse_filemode(p)) ==-1)
+	if ((i = vfs_parse_filemode(p)) == -1)
 	    goto error;
         s->st_mode |= i;
 	p += 9;
+
+        /* This is for an extra ACL attribute (HP-UX) */
+        if (*p == '+')
+            p++;
     }
 
     free(p_copy);

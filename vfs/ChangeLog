@@ -1,3 +1,8 @@
+Tue 24 Nov 12:43:20 1998  Peter Kleiweg  <kleiweg@let.rug.nl>
+
+	* vfs.c (vfs_parse_ls_lga): ignore trailing + in permission string
+	which indicate a file with extented attributes (ACL)
+
 Mon Nov 23 21:19:43 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* ftpfs.c (resolve_symlink_with_ls_options): that's resolve_symlinks

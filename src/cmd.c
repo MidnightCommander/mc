@@ -1364,7 +1364,11 @@ void dirsizes_cmd (void)
     for (i = 0; i < panel->count; i++)
         if (S_ISDIR (panel->dir.list [i].buf.st_mode) && 
             strcmp (panel->dir.list [i].fname, "..")) {
-            strcpy (p, panel->dir.list [i].fname);
+            /* The quotes will be removed from the shell when invoking
+               du, i.e. no need to remove quotes when reading the
+               directory sizes from du. */
+            strcpy (p, r = name_quote (panel->dir.list [i].fname, 0));
+            free (r);
             p = strchr (p, 0);
             *(p++) = ' ';
         }
