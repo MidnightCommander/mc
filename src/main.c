@@ -704,10 +704,7 @@ restore_console (void)
 void
 exec_shell ()
 {
-    int old_use_subshell = use_subshell;
-
     do_execute (shell, 0, 1);
-    use_subshell = old_use_subshell;
 }
 
 void

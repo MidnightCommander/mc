@@ -40,7 +40,7 @@ void subshell_get_console_attributes (void);
 void sigchld_handler (int sig);
 
 #else
-int use_subshell = 0;
+#define use_subshell 0
 #endif /* not HAVE_SUBSHELL_SUPPORT */
 
 #endif /* __SUBSHELL_H */

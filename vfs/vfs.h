@@ -257,7 +257,6 @@ struct utimbuf {
 
 #ifdef _OS_NT
 #   undef mc_rmdir
-#   undef mc_rename
 #endif
 
 #ifdef OS2_NT

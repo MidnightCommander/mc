@@ -440,7 +440,7 @@ char *convert_pattern (char *pattern, int match_type, int do_group)
     int was_wildcard = 0;
 
     if (easy_patterns){
-	new_pattern = malloc (sizeof (char) * strlen (pattern) * 4); /* times 4 to be safe */
+	new_pattern = malloc (MC_MAXPATHLEN);
 	d = new_pattern;
 	if (match_type == match_file)
 	    *d++ = '^';
