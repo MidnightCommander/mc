@@ -1,13 +1,13 @@
 This file contains:
 
-- Installation instructions and notes for the Midnight Commander
-- Where to get more information on the Midnight Commander
+- Installation instructions and notes for GNU Midnight Commander
+- Where to get more information on GNU Midnight Commander
 - Common problems
 - Information on porting the program
-- Obtaining the missing pieces of the Midnight Commander
+- Obtaining the missing pieces of GNU Midnight Commander
 
 
-Installation instructions for the Midnight Commander
+Installation instructions for GNU Midnight Commander
 ----------------------------------------------------
 
    The `configure' shell script attempts to guess correct values for
@@ -134,10 +134,11 @@ the directory base where you installed the gpm package.
      transparent tar File system manipulation as well nor the
      networked Midnight Commander file system.
 
-`--enable-largefile'
-     This option enables support for large files (2 gigabytes and more)
-     on the systems where file operation use 32-bit offsets by default,
-     but support for 64-bit file operations is available.
+`--disable-largefile'
+     This option disables support for large files (2 gigabytes and more)
+     on the systems where file operations use 32-bit offsets by default,
+     but support for 64-bit offsets is available.  May be useful for
+     slow processors and embedded systems.
 
 You may also tell configure which display library you want to use with the
 Midnight Commander.  The configure script will use S-Lang as default, but
@@ -147,7 +148,7 @@ better than everything else),
 
 `--with-slang' (default)
      This is used to configure the program to use the S-Lang screen
-     library.  This is included as part of the Midnight Commander,
+     library.  This is included as part of GNU Midnight Commander,
      you don't need it installed on your system.  If S-Lang is installed
      on your system it will be used if possible.  You can force usage of
      the included S-Lang with the `--with-included-slang' option.
@@ -234,7 +235,7 @@ in the archive, issue `make distclean'.  If you've run configure in a
 different directory than the source tree, distclean won't remove your *.o
 and linked programs in that directory.
 
-6.  The Midnight Commander allows you to stay in the last current
+6.  GNU Midnight Commander allows you to stay in the last current
 directory after exiting MC.  This is done with a shell function, the man
 page has more information about this.  If you want to let the install
 program make the change to your /etc/profile or your ~/.profile or
@@ -255,12 +256,12 @@ export CC="cc -posix"
 configure --without-subshell --with-termcap
 
 
-Where to get more information on the Midnight Commander
+Where to get more information on GNU Midnight Commander
 -------------------------------------------------------
 
 There are two mailing lists for the program:
 
-mc:         Discussion on the Midnight Commander file manager.
+mc:         Discussion on GNU Midnight Commander file manager.
 mc-devel:   For discussion between the developers of the program.
 
 to subscribe to the mailing lists, visit their respective pages:
@@ -269,10 +270,10 @@ http://mail.gnome.org/mailman/listinfo/mc/
 http://mail.gnome.org/mailman/listinfo/mc-devel/
 
 
-Notes about the Midnight Commander installation
+Notes about GNU Midnight Commander installation
 ------------------------------------------------
 
-The Midnight Commander has been run in the following configurations:
+GNU Midnight Commander has been run in the following configurations:
 
 i386-*-linux
 sparc-*-linux
@@ -299,7 +300,7 @@ for configuration, so it is expected to compile without changes on many
 other operating systems.
 
 You will need GNU C (or an ANSI C Compiler) and glib library version
-1.2.x to compile the source.  The Midnight Commander now comes with the
+1.2.x to compile the source.  GNU Midnight Commander now comes with the
 S-Lang screen manager, a fast screen manager, so don't need to worry
 about screen libraries.
 
@@ -310,7 +311,7 @@ window.
 GNU Midnight Commander comes with the mouse support on xterms and in the
 Linux console.  In order to take advantage of the mouse support on the
 Linux console you will need the gpm mouse server (see the section
-"Obtaining the missing pieces of the Midnight Commander" in this file).
+"Obtaining the missing pieces of GNU Midnight Commander" in this file).
 
 Once you get the Mouse Server, compile it and install it, then you
 will have to specify the `--with-gpm-mouse' flag to the configure
@@ -335,31 +336,31 @@ Porting the program
 
 Random notes on porting to other architectures.  
 
-The Midnight Commander uses now by default the S-Lang library for handling
-the display.  You may want to download the latest version of S-Lang or use
-a slightly modified S-Lang version 0.99.38 included with the Midnight
-Commander.  The later is very stable and has been used for years without
-problems.  You shouldn't expect any problems porting S-Lang to your
-platform.
+GNU Midnight Commander uses by default the S-Lang library for handling
+the display.  You may want to download the latest version of S-Lang
+or use a slightly modified S-Lang version 0.99.38 included with the
+Midnight Commander.  The included library is very stable and has been
+used for years without problems.  You shouldn't expect any problems
+porting S-Lang to your platform.
 
 Another possibility is to download and install ncurses on your OS. The
 Midnight Commander can use ncurses as well as the display engine. However,
 you may encounter minor differences, for instance, you will be unable to
-force the color mode by giving the "-c" switch to the Midnight Commander.
+force the color mode by giving the "-c" switch to GNU Midnight Commander.
 
 As the last resort, you may try to use the curses library supplied with
 your OS. Beware that some systems, e.g. SystemV Release 4, include the
-curses library with bugs critical to the Midnight Commander. You may try
+curses library with bugs critical to GNU Midnight Commander. You may try
 to recompile all your source code with the symbol BUGGY_CURSES defined,
 i.e.
 
 make clean; make CFLAGS="-g -O -DBUGGY_CURSES"
 
 
-Obtaining the missing pieces of the Midnight Commander
+Obtaining the missing pieces of GNU Midnight Commander
 ------------------------------------------------------
 
-The Midnight Commander will build without requiring you to get any other
+GNU Midnight Commander will build without requiring you to get any other
 software packages, however, you may be interested in enhancing the
 Midnight Commander environment with some of these:
 
@@ -386,7 +387,7 @@ o GLib
   even be detected.  Newer versions won't be detected either - they use a
   new package system that is not supported yet by GNU Midnight Commander.
 
-o In the past the Midnight Commander required the ncurses library to
+o In the past GNU Midnight Commander required the ncurses library to
   build, now it's optional.  You can get ncurses from
 
   ftp://ftp.gnu.org/gnu/ncurses/
@@ -405,7 +406,7 @@ http://gcc.gnu.org/mirrors.html
 Unsupported, deprecated and possibly broken options to configure:
 -----------------------------------------------------------------
 `--with-vcurses[=directory]'
-     Use this flag to force the Midnight Commander to use a SystemV
+     Use this flag to force GNU Midnight Commander to use a SystemV
      type curses, the optional directory specifies where the compiler 
      should look for the include files.
 

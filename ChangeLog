@@ -1,5 +1,9 @@
 2001-08-24  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Enable large file support by default.
+	* NEWS: Mention it.
+	* INSTALL: Document it.  Minor fixes.
+
 	* FAQ: Remove information about GNOME edition.  Minor fixes.
 	* README: Likewise.
 	* NEWS: Mention removing the GNOME edition.
