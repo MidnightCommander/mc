@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc VERSION\n"
-"POT-Creation-Date: 1999-04-20 15:45+0200\n"
+"POT-Creation-Date: 1999-04-28 14:41+0200\n"
 "PO-Revision-Date: 1998-03-27 01:22+0100\n"
 "Last-Translator: Vincent Renardias <vincent@ldsol.com>\n"
 "Language-Team: Vincent Renardias <vincent@ldsol.com>\n"
@@ -23,7 +23,7 @@ msgstr " Exécuter Macro "
 
 #. Input line for a single key press follows the ':'
 #: edit/edit_key_translator.c:133 edit/edit_key_translator.c:148
-#: gtkedit/editcmd.c:709 gtkedit/editcmd.c:718
+#: gtkedit/editcmd.c:706 gtkedit/editcmd.c:715
 msgid " Press macro hotkey: "
 msgstr " Tapez la touche raccourcis pour la macro: "
 
@@ -507,7 +507,7 @@ msgstr "terminé."
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
-#: gnome/gdialogs.c:980 src/wtools.c:587 vfs/vfs.c:1768
+#: gnome/gdialogs.c:980 src/wtools.c:587 vfs/vfs.c:1775
 msgid "Password:"
 msgstr "Mot de passe:"
 
@@ -1395,8 +1395,8 @@ msgid "Location:"
 msgstr "Emplacement: "
 
 #. 1
-#: gnome/gtools.c:105 gtkedit/editcmd.c:344 gtkedit/editcmd.c:1187
-#: gtkedit/editcmd.c:1272 gtkedit/editcmd.c:2868 gtkedit/editoptions.c:71
+#: gnome/gtools.c:105 gtkedit/editcmd.c:341 gtkedit/editcmd.c:1184
+#: gtkedit/editcmd.c:1269 gtkedit/editcmd.c:2865 gtkedit/editoptions.c:71
 #: src/boxes.c:138 src/boxes.c:278 src/boxes.c:378 src/boxes.c:466
 #: src/boxes.c:646 src/boxes.c:728 src/boxes.c:783 src/boxes.c:898
 #: src/filegui.c:838 src/find.c:171 src/layout.c:370 src/option.c:144
@@ -1534,7 +1534,7 @@ msgstr "Périphérique %d"
 #. The file-name is printed after the ':'
 #: gtkedit/edit.c:131 gtkedit/edit.c:226 gtkedit/edit.c:233 gtkedit/edit.c:240
 #: gtkedit/edit.c:247 gtkedit/edit.c:253 gtkedit/edit.c:310 gtkedit/edit.c:346
-#: gtkedit/editcmd.c:1954 gtkedit/editwidget.c:952 src/dir.c:386
+#: gtkedit/editcmd.c:1951 gtkedit/editwidget.c:952 src/dir.c:386
 #: src/screen.c:2373 src/tree.c:683 src/tree.c:689 src/wtools.c:222
 #: vfs/fish.c:224
 msgid " Error "
@@ -1568,21 +1568,21 @@ msgstr ""
 msgid " Error allocating memory "
 msgstr " Erreur d'allocation mémoire "
 
-#: gtkedit/editcmd.c:337
+#: gtkedit/editcmd.c:334
 msgid "Quick save "
 msgstr "Sauvegarde rapide "
 
-#: gtkedit/editcmd.c:338
+#: gtkedit/editcmd.c:335
 msgid "Safe save "
 msgstr "Sauvegarde sécurisée"
 
-#: gtkedit/editcmd.c:339
+#: gtkedit/editcmd.c:336
 msgid "Do backups -->"
 msgstr "Faire des sauvegardes -->"
 
 #. NLS  for hotkeys?
-#: gtkedit/editcmd.c:342 gtkedit/editcmd.c:1139 gtkedit/editcmd.c:1185
-#: gtkedit/editcmd.c:1270 gtkedit/editcmd.c:2866 gtkedit/editoptions.c:68
+#: gtkedit/editcmd.c:339 gtkedit/editcmd.c:1136 gtkedit/editcmd.c:1182
+#: gtkedit/editcmd.c:1267 gtkedit/editcmd.c:2863 gtkedit/editoptions.c:68
 #: src/achown.c:71 src/boxes.c:139 src/boxes.c:279 src/boxes.c:376
 #: src/boxes.c:464 src/boxes.c:644 src/boxes.c:727 src/boxes.c:781
 #: src/chmod.c:114 src/chown.c:79 src/cmd.c:856 src/filegui.c:821
@@ -1592,114 +1592,114 @@ msgstr "Faire des sauvegardes -->"
 msgid "&Cancel"
 msgstr "&Annuler"
 
-#: gtkedit/editcmd.c:348
+#: gtkedit/editcmd.c:345
 msgid "Extension:"
 msgstr "Extension:"
 
 #. NLS ?
-#: gtkedit/editcmd.c:355
+#: gtkedit/editcmd.c:352
 msgid " Edit Save Mode "
 msgstr ""
 
-#: gtkedit/editcmd.c:479
+#: gtkedit/editcmd.c:476
 msgid " Save As "
 msgstr " Enregistrer Sous "
 
 #. Warning message with a query to continue or cancel the operation
-#: gtkedit/editcmd.c:493 gtkedit/editcmd.c:812 gtkedit/editcmd.c:842
-#: gtkedit/editcmd.c:989 gtkedit/editcmd.c:1086 src/ext.c:301 src/file.c:619
+#: gtkedit/editcmd.c:490 gtkedit/editcmd.c:809 gtkedit/editcmd.c:839
+#: gtkedit/editcmd.c:986 gtkedit/editcmd.c:1083 src/ext.c:303 src/file.c:619
 #: src/help.c:318 src/main.c:699 src/screen.c:2093 src/screen.c:2136
 #: src/subshell.c:705 src/subshell.c:731 src/utilunix.c:390 src/utilunix.c:394
 #: src/utilunix.c:465 vfs/mcfs.c:170
 msgid " Warning "
 msgstr " Attention "
 
-#: gtkedit/editcmd.c:494
+#: gtkedit/editcmd.c:491
 msgid " A file already exists with this name. "
 msgstr " Un fichier portant le meme nom existe déjà. "
 
 #. Push buttons to over-write the current file, or cancel the operation
-#: gtkedit/editcmd.c:496
+#: gtkedit/editcmd.c:493
 msgid "Overwrite"
 msgstr "Ecraser"
 
-#: gtkedit/editcmd.c:496 gtkedit/editcmd.c:558 gtkedit/editcmd.c:785
-#: gtkedit/editcmd.c:812 gtkedit/editcmd.c:842 gtkedit/editcmd.c:989
-#: gtkedit/editcmd.c:1581
+#: gtkedit/editcmd.c:493 gtkedit/editcmd.c:555 gtkedit/editcmd.c:782
+#: gtkedit/editcmd.c:809 gtkedit/editcmd.c:839 gtkedit/editcmd.c:986
+#: gtkedit/editcmd.c:1578
 msgid "Cancel"
 msgstr "Annuler"
 
-#: gtkedit/editcmd.c:512
+#: gtkedit/editcmd.c:509
 msgid " Save as "
 msgstr " Enregistrer Sous "
 
-#: gtkedit/editcmd.c:512 gtkedit/editcmd.c:2636
+#: gtkedit/editcmd.c:509 gtkedit/editcmd.c:2633
 msgid " Error trying to save file. "
 msgstr " Erreur lors de l'enregistrement du fichier. "
 
 #. This heads the delete macro error dialog box
-#: gtkedit/editcmd.c:628 gtkedit/editcmd.c:636 gtkedit/editcmd.c:661
+#: gtkedit/editcmd.c:625 gtkedit/editcmd.c:633 gtkedit/editcmd.c:658
 msgid " Delete macro "
 msgstr " Effacer macro "
 
 #. 'Open' = load temp file
-#: gtkedit/editcmd.c:630
+#: gtkedit/editcmd.c:627
 msgid " Error trying to open temp file "
 msgstr " Erreur en essayant d'ouvrir un fichier temporaire "
 
 #. 'Open' = load temp file
-#: gtkedit/editcmd.c:638 gtkedit/editcmd.c:699 gtkedit/editcmd.c:767
+#: gtkedit/editcmd.c:635 gtkedit/editcmd.c:696 gtkedit/editcmd.c:764
 msgid " Error trying to open macro file "
 msgstr " Erreur lors de l'ouverture du fichier de macros "
 
-#: gtkedit/editcmd.c:643 gtkedit/editcmd.c:651 gtkedit/editcmd.c:687
-#: gtkedit/editcmd.c:742
+#: gtkedit/editcmd.c:640 gtkedit/editcmd.c:648 gtkedit/editcmd.c:684
+#: gtkedit/editcmd.c:739
 #, c-format
 msgid "key '%d 0': "
 msgstr "touche '%d 0': "
 
-#: gtkedit/editcmd.c:662
+#: gtkedit/editcmd.c:659
 msgid " Error trying to overwrite macro file "
 msgstr " Erreur lors de l'écrasement du fichier de macros "
 
 #. This heads the 'Macro' dialog box
-#: gtkedit/editcmd.c:679
+#: gtkedit/editcmd.c:676
 msgid " Macro "
 msgstr " Macro "
 
 #. Input line for a single key press follows the ':'
-#: gtkedit/editcmd.c:681
+#: gtkedit/editcmd.c:678
 msgid " Press the macro's new hotkey: "
 msgstr " Pressez sur la touche a assigner à la macro: "
 
 #. This heads the 'Save Macro' dialog box
-#: gtkedit/editcmd.c:699
+#: gtkedit/editcmd.c:696
 msgid " Save macro "
 msgstr " Enregistrer macro "
 
-#: gtkedit/editcmd.c:709 gtkedit/editcmd.c:716
+#: gtkedit/editcmd.c:706 gtkedit/editcmd.c:713
 msgid " Delete Macro "
 msgstr " Effacer Macro "
 
 #. This heads the 'Load Macro' dialog box
-#: gtkedit/editcmd.c:766
+#: gtkedit/editcmd.c:763
 msgid " Load macro "
 msgstr " Charger macro "
 
-#: gtkedit/editcmd.c:780 gtkedit/editcmd.c:782
+#: gtkedit/editcmd.c:777 gtkedit/editcmd.c:779
 msgid " Confirm save file? : "
 msgstr " Voulez-vous vraiment enregistrer? : "
 
 #. Buttons to 'Confirm save file' query
-#: gtkedit/editcmd.c:785
+#: gtkedit/editcmd.c:782
 msgid " Save file "
 msgstr " Enregistrer fichier "
 
-#: gtkedit/editcmd.c:785 gtkedit/editwidget.c:1066 src/view.c:2023
+#: gtkedit/editcmd.c:782 gtkedit/editwidget.c:1066 src/view.c:2023
 msgid "Save"
 msgstr "Sauver"
 
-#: gtkedit/editcmd.c:812 gtkedit/editcmd.c:842
+#: gtkedit/editcmd.c:809 gtkedit/editcmd.c:839
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
@@ -1707,131 +1707,131 @@ msgstr ""
 " Le fichier courant a été modifié sans avoir été sauvé. \n"
 " Continuer annule les changements. "
 
-#: gtkedit/editcmd.c:812 gtkedit/editcmd.c:842 gtkedit/editcmd.c:989
+#: gtkedit/editcmd.c:809 gtkedit/editcmd.c:839 gtkedit/editcmd.c:986
 msgid "Continue"
 msgstr "Continuer"
 
 #. Heads the 'Load' file dialog box
-#: gtkedit/editcmd.c:831 gtkedit/editcmd.c:845
+#: gtkedit/editcmd.c:828 gtkedit/editcmd.c:842
 msgid " Load "
 msgstr " Ouvrir "
 
-#: gtkedit/editcmd.c:831
+#: gtkedit/editcmd.c:828
 msgid " Error trying to open file for reading "
 msgstr " Erreur en essayant d'ouvrir le fichier en lecture "
 
-#: gtkedit/editcmd.c:989 gtkedit/editcmd.c:1086
+#: gtkedit/editcmd.c:986 gtkedit/editcmd.c:1083
 msgid " Block is large, you may not be able to undo this action. "
 msgstr ""
 " Le block est gros et il est possible que vous ne puissiez pas annuler ce "
 "changement. "
 
-#: gtkedit/editcmd.c:1086
+#: gtkedit/editcmd.c:1083
 msgid " Continue "
 msgstr " Continuer "
 
-#: gtkedit/editcmd.c:1086
+#: gtkedit/editcmd.c:1083
 msgid " Cancel "
 msgstr " Annuler "
 
-#: gtkedit/editcmd.c:1141 src/filegui.c:596
+#: gtkedit/editcmd.c:1138 src/filegui.c:596
 msgid "al&L"
 msgstr ""
 
-#: gtkedit/editcmd.c:1143 src/file.c:2174 src/filegui.c:266
+#: gtkedit/editcmd.c:1140 src/file.c:2174 src/filegui.c:266
 msgid "&Skip"
 msgstr "&Suivant"
 
-#: gtkedit/editcmd.c:1145
+#: gtkedit/editcmd.c:1142
 msgid "&Replace"
 msgstr "&Remplacer"
 
 #. This is for the confirm replace dialog box. The replaced string comes after the ':'
-#: gtkedit/editcmd.c:1151 gtkedit/editcmd.c:1579
+#: gtkedit/editcmd.c:1148 gtkedit/editcmd.c:1576
 msgid " Replace with: "
 msgstr " Remplacer avec: "
 
-#: gtkedit/editcmd.c:1155
+#: gtkedit/editcmd.c:1152
 msgid " Confirm replace "
 msgstr " Confirmer remplacement "
 
-#: gtkedit/editcmd.c:1189 gtkedit/editcmd.c:1274
+#: gtkedit/editcmd.c:1186 gtkedit/editcmd.c:1271
 msgid "scanf &Expression"
 msgstr "&Expression scanf"
 
-#: gtkedit/editcmd.c:1191
+#: gtkedit/editcmd.c:1188
 msgid "replace &All"
 msgstr "Tout rempl&acer"
 
-#: gtkedit/editcmd.c:1193
+#: gtkedit/editcmd.c:1190
 msgid "pr&Ompt on replace"
 msgstr "C&onfirmation avant remplacement"
 
-#: gtkedit/editcmd.c:1195 gtkedit/editcmd.c:1276
+#: gtkedit/editcmd.c:1192 gtkedit/editcmd.c:1273
 msgid "&Backwards"
 msgstr "Vers le &haut"
 
-#: gtkedit/editcmd.c:1197 gtkedit/editcmd.c:1278
+#: gtkedit/editcmd.c:1194 gtkedit/editcmd.c:1275
 msgid "&Regular expression"
 msgstr "Expression &régulière"
 
-#: gtkedit/editcmd.c:1199 gtkedit/editcmd.c:1280
+#: gtkedit/editcmd.c:1196 gtkedit/editcmd.c:1277
 msgid "&Whole words only"
 msgstr "&Mots entiers seulement"
 
-#: gtkedit/editcmd.c:1201 gtkedit/editcmd.c:1282
+#: gtkedit/editcmd.c:1198 gtkedit/editcmd.c:1279
 msgid "case &Sensitive"
 msgstr "re&spect de la case"
 
-#: gtkedit/editcmd.c:1205
+#: gtkedit/editcmd.c:1202
 msgid " Enter replacement argument order eg. 3,2,1,4 "
 msgstr " Entrez l'ordre des arguments (ex: 3,2,1,4): "
 
-#: gtkedit/editcmd.c:1209
+#: gtkedit/editcmd.c:1206
 #, fuzzy
 msgid " Enter replacement string:"
 msgstr " Entrez le texte à rechercher:"
 
-#: gtkedit/editcmd.c:1213 gtkedit/editcmd.c:1286 src/view.c:1948
+#: gtkedit/editcmd.c:1210 gtkedit/editcmd.c:1283 src/view.c:1948
 msgid " Enter search string:"
 msgstr " Entrez le texte à rechercher:"
 
 #. Heads the 'Replace' dialog box
-#: gtkedit/editcmd.c:1232 gtkedit/editcmd.c:1483 gtkedit/editcmd.c:1577
-#: gtkedit/editcmd.c:2128 gtkedit/editcmd.c:2159 gtkedit/editcmd.c:2161
+#: gtkedit/editcmd.c:1229 gtkedit/editcmd.c:1480 gtkedit/editcmd.c:1574
+#: gtkedit/editcmd.c:2125 gtkedit/editcmd.c:2156 gtkedit/editcmd.c:2158
 msgid " Replace "
 msgstr " Remplacer "
 
 #. Heads the 'Search' dialog box
-#: gtkedit/editcmd.c:1300 gtkedit/editcmd.c:1477 gtkedit/editcmd.c:2230
+#: gtkedit/editcmd.c:1297 gtkedit/editcmd.c:1474 gtkedit/editcmd.c:2227
 #: src/view.c:1502 src/view.c:1601 src/view.c:1723 src/view.c:1916
 #: src/view.c:1948
 msgid " Search "
 msgstr " Rechercher "
 
 #. An input line comes after the ':'
-#: gtkedit/editcmd.c:1349
+#: gtkedit/editcmd.c:1346
 msgid " Enter search text : "
 msgstr " Entrez le texte à rechercher : "
 
-#: gtkedit/editcmd.c:1356
+#: gtkedit/editcmd.c:1353
 msgid " Enter replace text : "
 msgstr " Entrez le texte de substitution : "
 
-#: gtkedit/editcmd.c:1359 gtkedit/editcmd.c:1360
+#: gtkedit/editcmd.c:1356 gtkedit/editcmd.c:1357
 #, c-format
 msgid ""
 "You can enter regexp substrings with %s (not \\1, \\2 like sed) then use "
 "\"Enter...order\""
 msgstr ""
 
-#: gtkedit/editcmd.c:1362
+#: gtkedit/editcmd.c:1359
 #, fuzzy
 msgid " Enter argument (or substring) order : "
 msgstr " Entrez l'ordre des arguments : "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1366 gtkedit/editcmd.c:1367
+#: gtkedit/editcmd.c:1363 gtkedit/editcmd.c:1364
 #, fuzzy
 msgid ""
 "Enter the order of replacement of your scanf format specifiers or regexp "
@@ -1839,104 +1839,104 @@ msgid ""
 msgstr "Entrer l'ordre de remplacement des spécificateurs de format scanf"
 
 #. The following are check boxes
-#: gtkedit/editcmd.c:1372
+#: gtkedit/editcmd.c:1369
 msgid " Whole words only "
 msgstr " Mots entiers seulement "
 
-#: gtkedit/editcmd.c:1374
+#: gtkedit/editcmd.c:1371
 msgid " Case sensitive "
 msgstr " Respect de la case "
 
-#: gtkedit/editcmd.c:1377
+#: gtkedit/editcmd.c:1374
 msgid " Regular expression "
 msgstr " Expression régulière "
 
-#: gtkedit/editcmd.c:1378 gtkedit/editcmd.c:1379
+#: gtkedit/editcmd.c:1375 gtkedit/editcmd.c:1376
 msgid "See the regex man page for how to compose a regular expression"
 msgstr ""
 "Consultez la page de manuel 'regex' pour savoir comment composer une "
 "expression regulière"
 
-#: gtkedit/editcmd.c:1385
+#: gtkedit/editcmd.c:1382
 msgid " Backwards "
 msgstr " Vers le haut "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1387 gtkedit/editcmd.c:1388
+#: gtkedit/editcmd.c:1384 gtkedit/editcmd.c:1385
 msgid "Warning: Searching backward can be slow"
 msgstr "Attention: La recherche vers le haut peut être lente"
 
-#: gtkedit/editcmd.c:1401
+#: gtkedit/editcmd.c:1398
 msgid " Prompt on replace "
 msgstr " Confirmation avant remplacement "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1403
+#: gtkedit/editcmd.c:1400
 msgid "Ask before making each replacement"
 msgstr " Confirmation avant chaque remplacement"
 
-#: gtkedit/editcmd.c:1405
+#: gtkedit/editcmd.c:1402
 msgid " Replace all "
 msgstr " Tout remplacer "
 
-#: gtkedit/editcmd.c:1408
+#: gtkedit/editcmd.c:1405
 msgid " Scanf expression "
 msgstr " Expression scanf "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1410
+#: gtkedit/editcmd.c:1407
 msgid "Allows entering of a C format string, see the scanf man page"
 msgstr "Permet d'entrer une chaine en format C, cf la page de manuel scanf"
 
 #. Tool hint
-#: gtkedit/editcmd.c:1415
+#: gtkedit/editcmd.c:1412
 msgid "Begin search, Enter"
 msgstr "Tapez Entrée pour commencer la recherche"
 
 #. Tool hint
-#: gtkedit/editcmd.c:1418
+#: gtkedit/editcmd.c:1415
 msgid "Abort this dialog, Esc"
 msgstr "Tapez Echap., pour fermer ce dialogue"
 
 #. Buttons for the confirm replace dialog box.
-#: gtkedit/editcmd.c:1581
+#: gtkedit/editcmd.c:1578
 msgid "Replace"
 msgstr "Remplacer"
 
-#: gtkedit/editcmd.c:1581
+#: gtkedit/editcmd.c:1578
 msgid "Skip"
 msgstr "Suivant"
 
-#: gtkedit/editcmd.c:1581
+#: gtkedit/editcmd.c:1578
 msgid "Replace all"
 msgstr "Tout remplacer"
 
-#: gtkedit/editcmd.c:1954
+#: gtkedit/editcmd.c:1951
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
 msgstr ""
 " Expression régulière invalide, ou expression scanf avec trop de conversions "
 
 #. "Invalid regexp string or scanf string"
-#: gtkedit/editcmd.c:2130
+#: gtkedit/editcmd.c:2127
 msgid " Error in replacement format string. "
 msgstr " Erreur dans la chaine de remplacement de format. "
 
-#: gtkedit/editcmd.c:2158
+#: gtkedit/editcmd.c:2155
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld remplacements effectués. "
 
-#: gtkedit/editcmd.c:2161 gtkedit/editcmd.c:2230
+#: gtkedit/editcmd.c:2158 gtkedit/editcmd.c:2227
 msgid " Search string not found. "
 msgstr " Chaine non trouvée. "
 
 #. Confirm 'Quit' dialog box
-#: gtkedit/editcmd.c:2254 gtkedit/editcmd.c:2269 gtkedit/editcmd.c:2272
+#: gtkedit/editcmd.c:2251 gtkedit/editcmd.c:2266 gtkedit/editcmd.c:2269
 msgid " Quit "
 msgstr " Quiter "
 
-#: gtkedit/editcmd.c:2255 gtkedit/editcmd.c:2273
+#: gtkedit/editcmd.c:2252 gtkedit/editcmd.c:2270
 msgid ""
 " Current text was modified without a file save. \n"
 " Save with exit? "
@@ -1944,137 +1944,137 @@ msgstr ""
 " Ce texte a été modifié sans etre sauvé. \n"
 " Sauver en sortant? "
 
-#: gtkedit/editcmd.c:2269
+#: gtkedit/editcmd.c:2266
 msgid " File was modified, Save with exit? "
 msgstr " Le fichier a été modifié, Sauver et quitter? "
 
-#: gtkedit/editcmd.c:2269
+#: gtkedit/editcmd.c:2266
 msgid "Cancel quit"
 msgstr "Annuler quitter"
 
-#: gtkedit/editcmd.c:2269 src/cmd.c:251 src/file.c:1859 src/file.c:2233
+#: gtkedit/editcmd.c:2266 src/cmd.c:251 src/file.c:1859 src/file.c:2233
 #: src/filegui.c:602 src/hotlist.c:1035 src/main.c:854 src/screen.c:2122
 #: src/subshell.c:706 src/subshell.c:732 src/tree.c:746 src/view.c:404
 msgid "&Yes"
 msgstr "&Oui"
 
-#: gtkedit/editcmd.c:2269 src/cmd.c:251 src/file.c:1859 src/file.c:2233
+#: gtkedit/editcmd.c:2266 src/cmd.c:251 src/file.c:1859 src/file.c:2233
 #: src/filegui.c:601 src/hotlist.c:1035 src/main.c:854 src/screen.c:2122
 #: src/subshell.c:706 src/subshell.c:732 src/tree.c:746 src/view.c:404
 msgid "&No"
 msgstr "&Non"
 
-#: gtkedit/editcmd.c:2273
+#: gtkedit/editcmd.c:2270
 msgid " &Cancel quit "
 msgstr " &Annuler quitter "
 
-#: gtkedit/editcmd.c:2273
+#: gtkedit/editcmd.c:2270
 msgid " &Yes "
 msgstr " &Oui "
 
-#: gtkedit/editcmd.c:2273
+#: gtkedit/editcmd.c:2270
 msgid " &No "
 msgstr " &Non "
 
-#: gtkedit/editcmd.c:2476 gtkedit/editcmd.c:2551
+#: gtkedit/editcmd.c:2473 gtkedit/editcmd.c:2548
 msgid " Copy to clipboard "
 msgstr " Copier dans le presse-papiers "
 
-#: gtkedit/editcmd.c:2476 gtkedit/editcmd.c:2498 gtkedit/editcmd.c:2551
-#: gtkedit/editcmd.c:2564
+#: gtkedit/editcmd.c:2473 gtkedit/editcmd.c:2495 gtkedit/editcmd.c:2548
+#: gtkedit/editcmd.c:2561
 msgid " Unable to save to file. "
 msgstr " Impossible de sauver dans un fichier. "
 
-#: gtkedit/editcmd.c:2498 gtkedit/editcmd.c:2564
+#: gtkedit/editcmd.c:2495 gtkedit/editcmd.c:2561
 msgid " Cut to clipboard "
 msgstr " Couper vers le presse-papiers "
 
-#: gtkedit/editcmd.c:2586 gtkedit/editcmd.c:2590 gtkedit/editcmd.c:2595
-#: gtkedit/editcmd.c:2598 src/view.c:1888
+#: gtkedit/editcmd.c:2583 gtkedit/editcmd.c:2587 gtkedit/editcmd.c:2592
+#: gtkedit/editcmd.c:2595 src/view.c:1888
 msgid " Goto line "
 msgstr " Aller à la ligne "
 
-#: gtkedit/editcmd.c:2586 gtkedit/editcmd.c:2590 gtkedit/editcmd.c:2595
-#: gtkedit/editcmd.c:2598
+#: gtkedit/editcmd.c:2583 gtkedit/editcmd.c:2587 gtkedit/editcmd.c:2592
+#: gtkedit/editcmd.c:2595
 msgid " Enter line: "
 msgstr " Entrez la ligne: "
 
-#: gtkedit/editcmd.c:2619 gtkedit/editcmd.c:2636
+#: gtkedit/editcmd.c:2616 gtkedit/editcmd.c:2633
 msgid " Save Block "
 msgstr " Sauver le Block "
 
-#: gtkedit/editcmd.c:2670
+#: gtkedit/editcmd.c:2667
 msgid " Insert File "
 msgstr " Insérer Fichier "
 
-#: gtkedit/editcmd.c:2685
+#: gtkedit/editcmd.c:2682
 msgid " Insert file "
 msgstr " Insérer fichier "
 
-#: gtkedit/editcmd.c:2685
+#: gtkedit/editcmd.c:2682
 msgid " Error trying to insert file. "
 msgstr " Erreur en essayant d'insérer le fichier. "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2705
+#: gtkedit/editcmd.c:2702
 msgid " Sort block "
 msgstr " Trier block "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2705 gtkedit/editcmd.c:2759
+#: gtkedit/editcmd.c:2702 gtkedit/editcmd.c:2756
 msgid " You must first highlight a block of text. "
 msgstr " You devez d'abord sélectionner un bloc de texte. "
 
-#: gtkedit/editcmd.c:2712
+#: gtkedit/editcmd.c:2709
 msgid " Run Sort "
 msgstr " Trier "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2714
+#: gtkedit/editcmd.c:2711
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr " Entrez les options de tri (cf: sort(1)) séparées par des espaces: "
 
-#: gtkedit/editcmd.c:2725 gtkedit/editcmd.c:2731
+#: gtkedit/editcmd.c:2722 gtkedit/editcmd.c:2728
 msgid " Sort "
 msgstr " Trier "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2727
+#: gtkedit/editcmd.c:2724
 msgid " Error trying to execute sort command "
 msgstr " Erreur lors de l'exécution de la commande de tri "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2733
+#: gtkedit/editcmd.c:2730
 msgid " Sort returned non-zero: "
 msgstr " Le code de retour du tri est non nul: "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2757 gtkedit/editcmd.c:2787
+#: gtkedit/editcmd.c:2754 gtkedit/editcmd.c:2784
 msgid " Process block "
 msgstr " Process block "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2789
+#: gtkedit/editcmd.c:2786
 msgid " Error trying to stat file "
 msgstr " Error trying to stat file "
 
-#: gtkedit/editcmd.c:2859
+#: gtkedit/editcmd.c:2856
 msgid " Mail "
 msgstr " Mail "
 
-#: gtkedit/editcmd.c:2872
+#: gtkedit/editcmd.c:2869
 msgid " Copies to"
 msgstr " Copies vers"
 
-#: gtkedit/editcmd.c:2876
+#: gtkedit/editcmd.c:2873
 msgid " Subject"
 msgstr " Sujet"
 
-#: gtkedit/editcmd.c:2880
+#: gtkedit/editcmd.c:2877
 msgid " To"
 msgstr " Vers"
 
-#: gtkedit/editcmd.c:2882
+#: gtkedit/editcmd.c:2879
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <sujet> -c <cc> <destinataire>"
 
@@ -2668,7 +2668,7 @@ msgstr ""
 " %s "
 
 #: src/achown.c:666 src/achown.c:670 src/chmod.c:320 src/chmod.c:324
-#: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:624
+#: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:639
 msgid " Oops... "
 msgstr " Argh... "
 
@@ -2831,7 +2831,7 @@ msgstr "Lien symbolique"
 msgid "Running "
 msgstr "En cours "
 
-#: src/boxes.c:834 src/find.c:716 src/find.c:957
+#: src/boxes.c:834 src/find.c:719 src/find.c:960
 msgid "Stopped"
 msgstr "Stoppé"
 
@@ -3342,7 +3342,16 @@ msgstr ""
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: src/ext.c:137 src/user.c:507
+#: src/ext.c:131 src/user.c:506
+#, fuzzy, c-format
+msgid ""
+" Can't generate unique filename \n"
+" %s "
+msgstr ""
+" Impossible d'ouvrir %s \n"
+" %s "
+
+#: src/ext.c:138 src/user.c:518
 #, c-format
 msgid ""
 " Can't create temporary command file \n"
@@ -3351,46 +3360,46 @@ msgstr ""
 " Impossible de créér un fichier de commandes temporaire \n"
 " %s "
 
-#: src/ext.c:151 src/user.c:534
+#: src/ext.c:153 src/user.c:547
 msgid " Parameter "
 msgstr " Paramétre "
 
-#: src/ext.c:301
+#: src/ext.c:303
 msgid " Can't execute commands on a Virtual File System directory "
 msgstr ""
 " Impossible d'exécuter une commande sur un répertoire du Système de Fichiers "
 "Virtuel"
 
-#: src/ext.c:398
+#: src/ext.c:400
 msgid " file error"
 msgstr " erreur de fichier"
 
-#: src/ext.c:399
+#: src/ext.c:401
 msgid "Format of the "
 msgstr "Format du "
 
-#: src/ext.c:417
+#: src/ext.c:419
 msgid " file error "
 msgstr " erreur de fichier "
 
-#: src/ext.c:418
+#: src/ext.c:420
 msgid "Format of the ~/"
 msgstr "Format du ~/"
 
-#: src/ext.c:418
+#: src/ext.c:420
 msgid ""
 " file has changed\n"
 "with version 3.0. You may want either to\n"
 "copy it from "
 msgstr ""
 
-#: src/ext.c:420
+#: src/ext.c:422
 msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
 msgstr ""
 
-#: src/ext.c:422
+#: src/ext.c:424
 msgid "mc.ext will be used for this moment."
 msgstr "mc.ext sera utilisé pour l'instant."
 
@@ -4034,40 +4043,40 @@ msgstr "Terminé"
 msgid "Searching %s"
 msgstr "Recherche de %s"
 
-#: src/find.c:714 src/find.c:754
+#: src/find.c:717 src/find.c:757
 msgid "Suspend"
 msgstr "Suspendre"
 
-#: src/find.c:714
+#: src/find.c:717
 msgid "Restart"
 msgstr "Re-essayer"
 
-#: src/find.c:716 src/find.c:818 src/find.c:957 src/find.c:1053
+#: src/find.c:719 src/find.c:821 src/find.c:960 src/find.c:1056
 msgid "Searching"
 msgstr ""
 
-#: src/find.c:747 src/find.c:1028
+#: src/find.c:750 src/find.c:1031
 msgid "Find file"
 msgstr "Trouver fichier"
 
 #. The buttons
-#: src/find.c:752
+#: src/find.c:755
 msgid "Change to this directory"
 msgstr "Aller dans ce répertoire"
 
-#: src/find.c:753
+#: src/find.c:756
 msgid "Search again"
 msgstr "Chercher à nouveau"
 
-#: src/find.c:758
+#: src/find.c:761
 msgid "View this file"
 msgstr "Voir ce fichier"
 
-#: src/find.c:759
+#: src/find.c:762
 msgid "Edit this file"
 msgstr "Editer ce fichier"
 
-#: src/find.c:760
+#: src/find.c:763
 msgid "Send the results to a Panel"
 msgstr ""
 
@@ -4109,7 +4118,7 @@ msgstr " Impossible de trouver le noeud [Sommaire] dans le fichier d'aide "
 msgid " Help "
 msgstr " Aide "
 
-#: src/help.c:766 src/user.c:640
+#: src/help.c:766 src/user.c:655
 #, c-format
 msgid ""
 " Can't open file %s \n"
@@ -4948,17 +4957,17 @@ msgstr "Pas de fenêtre ouverte au lancement"
 msgid "Display the directory that holds the .links startup files and exit"
 msgstr ""
 
-#: src/main.c:3011
+#: src/main.c:3015
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 
-#: src/main.c:3089
+#: src/main.c:3093
 msgid " Notice "
 msgstr " Note "
 
-#: src/main.c:3090
+#: src/main.c:3094
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -5304,11 +5313,11 @@ msgstr " Vrai: "
 msgid " False: "
 msgstr " Faux: "
 
-#: src/user.c:606
+#: src/user.c:621
 msgid " Warning -- ignoring file "
 msgstr " Avertissement -- fichier ignoré "
 
-#: src/user.c:607
+#: src/user.c:622
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
@@ -5318,14 +5327,14 @@ msgstr ""
 "écrire.\n"
 "Son utilisation peux compromettre votre sécurité"
 
-#: src/user.c:625
+#: src/user.c:640
 msgid " I can't run programs while logged on a non local directory "
 msgstr ""
 " Je ne peux pas exécuter de programmes lors d'une connexion à un répertoire "
 "distant "
 
 #. Create listbox
-#: src/user.c:712
+#: src/user.c:727
 msgid " User menu "
 msgstr " Menu utilisateur "
 
@@ -5805,7 +5814,7 @@ msgstr ""
 msgid "ftpfs: abort failed"
 msgstr ""
 
-#: vfs/ftpfs.c:1159 vfs/ftpfs.c:1332
+#: vfs/ftpfs.c:1159 vfs/ftpfs.c:1329
 #, fuzzy
 msgid "ftpfs: CWD failed."
 msgstr " Echec de la duplication "
@@ -5828,32 +5837,32 @@ msgstr ""
 msgid "ftpfs: Reading FTP directory %s..."
 msgstr "ftpfs: Lecture du répertoire FTP %s..."
 
-#: vfs/ftpfs.c:1344
+#: vfs/ftpfs.c:1341
 msgid "ftpfs: FAIL"
 msgstr "ftpfs: ÉCHEC"
 
-#: vfs/ftpfs.c:1435
+#: vfs/ftpfs.c:1432
 msgid "ftpfs: reading FTP directory interrupt by user"
 msgstr "ftpfs: lecture du répertoire FTP interrompue par l'utilisateur"
 
-#: vfs/ftpfs.c:1464
+#: vfs/ftpfs.c:1462
 msgid "ftpfs: got listing"
 msgstr "ftpfs: liste obtenue"
 
-#: vfs/ftpfs.c:1477
+#: vfs/ftpfs.c:1475
 msgid "ftpfs: failed"
 msgstr "ftpfs: échec"
 
-#: vfs/ftpfs.c:1494
+#: vfs/ftpfs.c:1519
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr ""
 
-#: vfs/ftpfs.c:1558
+#: vfs/ftpfs.c:1583
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
 msgstr ""
 
-#: vfs/ftpfs.c:1994 vfs/ftpfs.c:2009
+#: vfs/ftpfs.c:2019 vfs/ftpfs.c:2034
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -5930,4 +5939,3 @@ msgstr ""
 "Hmm,...\n"
 "%s\n"
 "ne ressemble pas à une archive tar."
-
