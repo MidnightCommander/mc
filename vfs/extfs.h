@@ -18,39 +18,6 @@ You should have received a copy of the GNU General Public License
 along with this program; see the file COPYING.  If not, write to
 the Free Software Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-#include <sys/types.h>
-
-struct inode;
-
-struct entry {
-    struct entry *next_in_dir;
-    struct entry *dir;
-    char *name;
-    struct inode *inode;
-};
-
-struct archive;
-
-struct inode {
-    nlink_t nlink;
-    struct entry *first_in_subdir; /* only used if this is a directory */
-    struct entry *last_in_subdir;
-    ino_t inode;        /* This is inode # */
-    dev_t dev;		/* This is an internal identification of the extfs archive */
-    struct archive *archive; /* And this is an archive structure */
-    dev_t rdev;
-    mode_t mode;	/* What is umode_t? It will not compile for me, changed it t mode_t */
-    uid_t uid;
-    gid_t gid;
-    int size;
-    time_t mtime;
-    char linkflag;
-    char *linkname;
-    time_t atime;
-    time_t ctime;
-    char *local_filename;
-};
-
 struct archive {
     int fstype;
     char *name;

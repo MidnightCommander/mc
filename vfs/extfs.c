@@ -47,6 +47,40 @@
 #undef ERRNOR
 #define ERRNOR(x,y) do { my_errno = x; return y; } while(0)
 
+struct inode {
+    nlink_t nlink;
+    struct entry *first_in_subdir; /* only used if this is a directory */
+    struct entry *last_in_subdir;
+    ino_t inode;        /* This is inode # */
+    dev_t dev;		/* This is an internal identification of the extfs archive */
+    struct archive *archive; /* And this is an archive structure */
+    dev_t rdev;
+    mode_t mode;
+    uid_t uid;
+    gid_t gid;
+    int size;
+    time_t mtime;
+    char linkflag;
+    char *linkname;
+    time_t atime;
+    time_t ctime;
+    char *local_filename;
+};
+
+struct entry {
+    struct entry *next_in_dir;
+    struct entry *dir;
+    char *name;
+    struct inode *inode;
+};
+
+struct pseudofile {
+    struct archive *archive;
+    unsigned int has_changed:1;
+    int local_handle;
+    struct entry *entry;
+};
+
 static struct entry *
 find_entry (struct entry *dir, char *name, int make_dirs, int make_file);
 static int extfs_which (vfs *me, char *path);
@@ -523,13 +557,6 @@ static struct entry *my_resolve_symlinks (struct entry *entry)
     }
     return res;
 }
-
-struct pseudofile {
-    struct archive *archive;
-    unsigned int has_changed:1;
-    int local_handle;
-    struct entry *entry;
-};
 
 static char *get_archive_name (struct archive *archive)
 {

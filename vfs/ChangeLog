@@ -1,5 +1,8 @@
 2001-08-07  Pavel Roskin  <proski@gnu.org>
 
+	* extfs.h: Move private structures ...
+	* extfs.c: ... here.
+
 	* extfs.h (struct entry): Remove unused `has_changed' field.
 	It's only written but never read.
 	(struct inode): Likewise.
