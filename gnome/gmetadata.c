@@ -78,18 +78,3 @@ gmeta_set_icon_pos (char *filename, int x, int y)
 	if (gnome_metadata_set (filename, ICON_POSITION, strlen (buf) + 1, buf) != 0)
 		g_warning ("Error setting the icon position metadata for \"%s\"", filename);
 }
-
-/**
- * gmeta_del_icon_pos:
- * @filename: The filename for which to delete icon position information.
- * 
- * Deletes the icon position information for the specified file.
- **/
-void
-gmeta_del_icon_pos (char *filename)
-{
-	g_return_if_fail (filename != NULL);
-
-	gnome_metadata_remove (filename, ICON_POSITION);
-}
-

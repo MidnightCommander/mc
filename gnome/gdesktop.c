@@ -463,7 +463,7 @@ reload_desktop_icons (int user_pos, int xpos, int ypos)
 	for (l = all_icons; l; l = l->next) {
 		dii = l->data;
 		full_name = g_concat_dir_and_file (desktop_directory, dii->filename);
-		gmeta_del_icon_pos (full_name);
+		gnome_metadata_delete (full_name);
 		g_free (full_name);
 		desktop_icon_info_destroy (dii);
 	}
@@ -884,7 +884,7 @@ desktop_icon_info_delete (DesktopIconInfo *dii)
 				erase_file (ctx, full_name, &progress_count, &progress_bytes, TRUE);
 		}
 
-		gmeta_del_icon_pos (full_name);
+		gnome_metadata_delete (full_name);
 	}
 
 	g_free (full_name);
@@ -1541,7 +1541,6 @@ desktop_icon_info_destroy (DesktopIconInfo *dii)
 	gtk_widget_destroy (dii->dicon);
 	remove_from_slot (dii);
 
-	gnome_metadata_delete (dii->filename);
 	g_free (dii->url);
 	g_free (dii->filename);
 	g_free (dii);

@@ -1,3 +1,13 @@
+1999-02-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gmetadata.c: Removed the gmeta_del_icon_pos() function, since it
+	is no longer used anywhere.
+
+	* gdesktop.c (reload_desktop_icons): Use gnome_metadata_delete()
+	instead of gmeta_del_icon_pos().
+	(desktop_icon_info_delete): Likewise.
+	(desktop_icon_info_destroy): Do not call gnome_metadata_delete().
+
 1999-02-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (arrange_desktop_icons): I am such a doofus, I did

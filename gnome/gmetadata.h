@@ -17,8 +17,5 @@ int gmeta_get_icon_pos (char *filename, int *x, int *y);
 /* Saves the icon position for the specified file */
 void gmeta_set_icon_pos (char *filename, int x, int y);
 
-/* Deletes the icon position information for the specified file */
-void gmeta_del_icon_pos (char *filename);
-
 
 #endif
