@@ -1,5 +1,8 @@
 Tue Sep  8 13:10:32 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
+	* autogen.sh: Don't destroy aclocal.m4 if "macros" directory
+	is missing
+
 	* layout.c: Use stdout instead of stderr in set_hintbar()
 
 Mon Aug 31 12:40:29 1998  Pavel Machek <pavel@ucw.cz>
