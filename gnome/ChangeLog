@@ -1,3 +1,14 @@
+1999-01-26  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gscreen.c (panel_clist_motion): Stop the emission of the
+	motion_notify_event signal so that it does not reach the clist.
+	We do not want it to select rows while dragging.
+	Replaced copy_strings() with g_strconcat().
+
+	* gdnd.c (gdnd_validate_action): Do not override GDK_ACTION_ASK.
+
+	* gdesktop.c: Updated the TODO list at the top of the file.
+
 Wed Jan 27 03:14:46 1999  Timur Bakeyev <mc@bat.ru>
 
 	* Converted memory managment to Glib - where it wasn't done. Now we 

@@ -1,3 +1,7 @@
+1999-01-26  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* panel.h: Fixup #includes.
+
 1999-01-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* cons.saver.c: Removed glib from the suid app

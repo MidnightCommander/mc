@@ -1,8 +1,10 @@
 #ifndef __PANEL_H
 #define __PANEL_H
 
+#include "fs.h"
 #include "dir.h"     /* file_entry */
 #include "dlg.h"
+#include "util.h"
 #include "widget.h"	/* for history loading and saving */
 
 #define LIST_TYPES	5

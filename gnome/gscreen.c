@@ -691,7 +691,7 @@ panel_build_selected_file_list (WPanel *panel, int *file_list_len)
 
 		fullname = concat_dir_and_file (panel->cwd, panel->dir.list [panel->selected].fname);
 
-		uri = copy_strings ("file:", fullname, NULL);
+		uri = g_strconcat ("file:", fullname, NULL);
 		g_free (fullname);
 
 		*file_list_len = strlen (uri) + 1;
@@ -959,7 +959,15 @@ panel_clist_motion (GtkWidget *widget, GdkEventMotion *event, gpointer data)
 	if (event->window != GTK_CLIST (widget)->clist_window)
 		return FALSE;
 
-	return panel_widget_motion (widget, event, data);
+	panel_widget_motion (widget, event, data);
+
+	/* We have to stop the motion event from ever reaching the clist.
+	 * Otherwise it will begin dragging/selecting rows when we don't want
+	 * that.  Yes, the clist widget sucks.
+	 */
+
+	gtk_signal_emit_stop_by_name (GTK_OBJECT (widget), "motion_notify_event");
+	return TRUE;
 }
 
 /**
@@ -1717,7 +1725,7 @@ display_mini_info (WPanel *panel)
 		if (len > 0){
 			link_target [len] = 0;
 			/* FIXME: Links should be handled differently */
-			/* str = copy_strings ("-> ", link_target, NULL); */
+			/* str = g_strconcat ("-> ", link_target, NULL); */
 			gnome_appbar_pop (bar);
 			gnome_appbar_push (bar, " ");
 			/* g_free (str); */
@@ -2061,7 +2069,7 @@ panel_tree_drag_data_get (GtkWidget *widget, GdkDragContext *context,
 	switch (info){
 	case TARGET_URI_LIST:
 	case TARGET_TEXT_PLAIN:
-		data = copy_strings ("file:", dtree->drag_dir, NULL);
+		data = g_strconcat ("file:", dtree->drag_dir, NULL);
 		gtk_selection_data_set (
 			selection_data, selection_data->target, 8,
 			data, strlen (data)+1);

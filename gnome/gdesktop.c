@@ -11,19 +11,6 @@
  *
  * - Put an InputOnly window over icons to be able to select them even if the user clicks on
  *   the transparent area.
- *
- * - DnD from file windows to icons.
- *
- * - DnD from icons to desktop (move icon).
- *
- * - DnD from icons to windows.
- *
- * - DnD from icons to icons (file->directory or file->executable).
- *
- * - Popup menus for icons.
- *
- * - Select icons with rubberband on the root window.
- *
  */
 
 #include <config.h>

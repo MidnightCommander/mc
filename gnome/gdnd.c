@@ -375,7 +375,9 @@ gdnd_validate_action (GdkDragContext *context, int same_process, int same_source
 			return 0;
 
 		if (on_directory) {
-			if ((same_source || same_process) && (context->actions & GDK_ACTION_MOVE))
+			if ((same_source || same_process)
+			    && (context->actions & GDK_ACTION_MOVE)
+			    && context->suggested_action != GDK_ACTION_ASK)
 				return GDK_ACTION_MOVE;
 			else
 				return context->suggested_action;
@@ -384,14 +386,18 @@ gdnd_validate_action (GdkDragContext *context, int same_process, int same_source
 				return GDK_ACTION_COPY;
 		} else if (same_source)
 			return 0;
-		else if (same_process && (context->actions & GDK_ACTION_MOVE))
+		else if (same_process
+			 && (context->actions & GDK_ACTION_MOVE)
+			 && context->suggested_action != GDK_ACTION_ASK)
 			return GDK_ACTION_MOVE;
 		else
 			return context->suggested_action;
 	} else {
 		if (same_source)
 			return 0;
-		else if (same_process && (context->actions & GDK_ACTION_MOVE))
+		else if (same_process
+			 && (context->actions & GDK_ACTION_MOVE)
+			 && context->suggested_action != GDK_ACTION_ASK)
 			return GDK_ACTION_MOVE;
 		else
 			return context->suggested_action;
