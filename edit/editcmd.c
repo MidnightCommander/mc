@@ -2347,6 +2347,33 @@ int edit_sort_cmd (WEdit * edit)
     return 0;
 }
 
+int
+edit_ext_cmd (WEdit *edit)
+{
+    char *exp;
+    int e;
+
+    exp =
+	input_dialog (_("Paste output of external command"),
+		      _("Enter shell command(s):"), NULL);
+
+    if (!exp)
+	return 1;
+
+    e = system (catstrs (exp, " ", " > ", home_dir, TEMP_FILE, 0));
+
+    if (e) {
+	edit_error_dialog (_("External command"),
+			   get_sys_error (_("Cannot execute command")));
+	return -1;
+    }
+
+    edit->force |= REDRAW_COMPLETELY;
+
+    edit_insert_file (edit, catstrs (home_dir, TEMP_FILE, 0));
+    return 0;
+}
+
 /* if block is 1, a block must be highlighted and the shell command
    processes it. If block is 0 the shell command is a straight system
    command, that just produces some output which is to be inserted */

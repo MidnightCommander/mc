@@ -92,6 +92,7 @@
 #define CK_Match_Bracket	421
 #define CK_Terminal		422
 #define CK_Terminal_App		423
+#define CK_ExtCmd		424
 
 #define CK_User_Menu		425
 /* application control */

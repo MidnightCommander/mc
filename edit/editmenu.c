@@ -205,6 +205,12 @@ menu_sort_cmd (void)
     menu_cmd (CK_Sort);
 }
 
+static void 
+menu_ext_cmd (void)
+{
+    menu_cmd (CK_ExtCmd);
+}
+
 static void
 menu_date_cmd (void)
 {
@@ -353,6 +359,7 @@ static menu_entry CmdMenu[] =
     {' ', N_("Format p&aragraph        M-p"), 'A', menu_format_paragraph},
     {' ', N_("'ispell' s&pell check    C-p"), 'P', menu_ispell_cmd},
     {' ', N_("Sor&t...                 M-t"), 'T', menu_sort_cmd},
+    {' ', N_("Paste o&utput of...      M-u"), 'U', menu_ext_cmd},
     {' ', N_("E&xternal Formatter      F19"), 'C', menu_c_form_cmd},
     {' ', N_("&Mail...                    "), 'M', menu_mail_cmd}
 };
@@ -376,6 +383,7 @@ static menu_entry CmdMenuEmacs[] =
     {' ', N_("Format p&aragraph        M-p"), 'a', menu_format_paragraph},
     {' ', N_("'ispell' s&pell check    M-$"), 'P', menu_ispell_cmd},
     {' ', N_("Sor&t...                 M-t"), 'T', menu_sort_cmd},
+    {' ', N_("Paste o&utput of...      M-u"), 'U', menu_ext_cmd},
     {' ', N_("E&xternal Formatter      F19"), 'C', menu_c_form_cmd},
     {' ', N_("&Mail...                    "), 'M', menu_mail_cmd}
 };

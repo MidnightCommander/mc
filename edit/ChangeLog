@@ -1,3 +1,10 @@
+2003-05-30  Michal Szwaczko  <mikey@scene.pl>
+
+	* editcmd.c: Implement pasting the output of any external
+	command.
+	* editmenu.c: Add menu entries for that.
+	* editcmddef.h: Add new command CK_ExtCmd.
+
 2003-04-04  Adam Byrtek  <alpha@debian.org>
 
 	* edit.c: Move edit_modification() before actions to provide

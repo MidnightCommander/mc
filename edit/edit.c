@@ -2565,6 +2565,9 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
     case CK_Sort:
 	edit_sort_cmd (edit);
 	break;
+    case CK_ExtCmd:
+	edit_ext_cmd (edit);
+	break;
     case CK_Mail:
 	edit_mail_dialog (edit);
 	break;
@@ -2580,6 +2583,7 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
     case CK_Ctags:
     case CK_Terminal:
     case CK_Terminal_App:
+    case CK_ExtCmd:
 #endif
     case CK_Complete:
     case CK_Cancel:

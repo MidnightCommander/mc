@@ -232,6 +232,7 @@ void edit_move_display (WEdit * e, long line);
 void edit_word_wrap (WEdit * edit);
 unsigned char *edit_get_block (WEdit * edit, long start, long finish, int *l);
 int edit_sort_cmd (WEdit * edit);
+int edit_ext_cmd (WEdit * edit);
 void edit_help_cmd (WEdit * edit);
 void edit_left_word_move (WEdit * edit, int s);
 void edit_right_word_move (WEdit * edit, int s);
