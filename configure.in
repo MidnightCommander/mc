@@ -30,6 +30,25 @@ AC_CHECK_TOOL(AR, ar, ar)
 dnl Only list browsers here that can be run in background (i.e. with `&')
 AC_CHECK_PROGS(X11_WWW, [gnome-moz-remote mozilla konqueror opera netscape])
 
+dnl
+dnl Ovverriding mmap support.  This has to be before AC_FUNC_MMAP is used.
+dnl We use only part of the functionality of mmap, so on AIX,
+dnl it's possible to use mmap, even if it doesn't pass the autoconf test.
+dnl
+AC_ARG_WITH(mmap, 
+	[--with-mmap                To force using the mmap call (AIX)],
+	[case $withval in
+yes)
+	ac_cv_func_mmap_fixed_mapped=yes
+	AC_MSG_NOTICE([forcing MMAP support])
+	;;
+no)
+	ac_cv_func_mmap_fixed_mapped=no
+	AC_MSG_NOTICE([disabling MMAP support])
+	;;
+esac])
+AC_FUNC_MMAP
+
 if test x$ALL_LINGUAS = x; then
 ALL_LINGUAS="az ca cs da de el es es_ES fi fr hu it ja ko lv nl no pl pt_BR ro ru sk sl sv uk ta tr wa zh_TW zh_CN.GB2312"
 fi
@@ -189,7 +208,6 @@ AC_TYPE_PID_T
 AC_TYPE_UID_T
 AC_CHECK_TYPE(nlink_t, unsigned int)
 
-AC_FUNC_MMAP
 AC_FUNC_ALLOCA
 AC_FUNC_STRCOLL
 
@@ -490,18 +508,6 @@ AC_ARG_WITH(efence,
 	LIBS="$LIBS -lefence"
 	AC_MSG_NOTICE([compiling with Electric fence])
 	mem_debug="Electric Fence"
-fi])
-
-dnl
-dnl To force mmap support
-dnl We use only part of the functionality of mmap, so on AIX,
-dnl it's possible to use mmap, even if it doesn't pass the autoconf test.
-dnl
-AC_ARG_WITH(mmap, 
-	[--with-mmap                To force using the mmap call (AIX)],
-	[if test x$withval = xyes; then
-	AC_DEFINE(HAVE_MMAP)
-        AC_MSG_NOTICE([forcing MMAP support])
 fi])
 
 slang_check_lib=true

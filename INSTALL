@@ -108,8 +108,11 @@ the directory base where you installed the gpm package.
 `--with-hsc'
      Compiles support for HSC firewall into the ftp virtual file system.
 
-`--with-mmap'
-     Needed when compiling under AIX if you want the fast viewer.
+`--with-mmap', `--without-mmap'
+     Force using or not using the mmap function.  It is currently used
+     in the internal viewer.  `--with-mmap' may be useful on some
+     versions of AIX where the `configure' script decides that mmap is
+     broken, but it's actually suitable for the internal viewer.
 
 `--with-subshell[=optional]', `--without-subshell' 
      The subshell support is by default turned on, you can disable

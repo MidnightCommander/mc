@@ -1,3 +1,9 @@
+2001-10-24  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Move AC_FUNC_MMAP before it's used indirectly.
+	Allow using --without-mmap.
+	* INSTALL: Document --without-mmap.
+
 2001-10-24  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* configure.in: Resurrect ALL_LINGUAS test, to allow specify list
