@@ -36,8 +36,6 @@
 #endif
 
 #include "global.h"
-#include "fsusage.h"
-#include "mountlist.h"
 #include "execute.h"
 #include "wtools.h"		/* message() */
 
