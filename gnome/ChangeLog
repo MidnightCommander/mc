@@ -1,5 +1,9 @@
 2001-06-06  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.in: Don't use terms.o.
+	* glayout.c: Remove unused global variables. Set command_prompt
+	to 0.
+
 	* gprefs.c [!USE_VFS]: Disable VFS code to allow compilation.
 
 	* gmc-client.c (main): Warning fix.

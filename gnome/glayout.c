@@ -70,11 +70,7 @@ GnomeUIInfo panel_view_toolbar_uiinfo[] = {
 
 GList *containers = 0;
 
-int output_lines = 0;
-int command_prompt = 1;
-int keybar_visible = 1;
-int message_visible = 1;
-int xterm_hintbar = 0;
+int command_prompt = 0;
 
 PanelContainer *current_panel_ptr, *other_panel_ptr;
 
