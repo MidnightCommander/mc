@@ -33,9 +33,15 @@ enum icon_type {
 struct desktop_icon_info {
 	GtkWidget *dicon;	/* The desktop icon widget */
 	int x, y;		/* Position in the desktop */
+	int slot;		/* Index of the slot the icon is in, or -1 for none */
 	char *filename;		/* The file this icon refers to (relative to the desktop_directory) */
 	enum icon_type type;	/* Type of icon, used to determine menu and DnD behavior */
 	int selected : 1;	/* Is the icon selected? */
+};
+
+struct layout_slot {
+	int num_icons;		/* Number of icons in this slot */
+	GList *icons;		/* The list of icons in this slot */
 };
 
 
@@ -53,12 +59,12 @@ static char *desktop_directory;
  */
 static int layout_cols;
 static int layout_rows;
-static int *layout_slots;
-
-/* The list of desktop icons (desktop_icon_info structures) */
-static GList *desktop_icons;
+static struct layout_slot *layout_slots;
 
 #define l_slots(x, y) (layout_slots[(x) * layout_rows + (y)])
+
+/* The last icon to be selected */
+static struct desktop_icon_info *last_selected_icon;
 
 
 /* Looks for a free slot in the layout_slots array and returns the coordinates that coorespond to
@@ -72,12 +78,12 @@ get_icon_auto_pos (int *x, int *y)
 	int u, v;
 	int val;
 
-	min = l_slots (0, 0);
+	min = l_slots (0, 0).num_icons;
 	min_x = min_y = 0;
 
 	for (u = 0; u < layout_cols; u++)
 		for (v = 0; v < layout_rows; v++) {
-			val = l_slots (u, v);
+			val = l_slots (u, v).num_icons;
 
 			if (val == 0) {
 				/* Optimization: if it is zero, return immediately */
@@ -109,16 +115,16 @@ get_icon_snap_pos (int *x, int *y)
 	int val, dist;
 	int dx, dy;
 
-	min = l_slots (0, 0);
+	min = l_slots (0, 0).num_icons;
 	min_x = min_y = 0;
 	min_dist = INT_MAX;
 
-	sx = DESKTOP_SNAP_X * (*x / DESKTOP_SNAP_X);
-	sy = DESKTOP_SNAP_Y * (*y / DESKTOP_SNAP_Y);
+	sx = DESKTOP_SNAP_X * ((*x + DESKTOP_SNAP_X / 2) / DESKTOP_SNAP_X);
+	sy = DESKTOP_SNAP_Y * ((*y + DESKTOP_SNAP_Y / 2) / DESKTOP_SNAP_Y);
 
 	for (u = 0; u < layout_cols; u++)
 		for (v = 0; v < layout_rows; v++) {
-			val = l_slots (u, v);
+			val = l_slots (u, v).num_icons;
 
 			dx = sx - u;
 			dy = sy - v;
@@ -133,6 +139,20 @@ get_icon_snap_pos (int *x, int *y)
 
 	*x = min_x * DESKTOP_SNAP_X;
 	*y = min_y * DESKTOP_SNAP_Y;
+}
+
+/* Removes an icon from the slot it is in, if any */
+static void
+remove_from_slot (struct desktop_icon_info *dii)
+{
+	if (dii->slot == -1)
+		return;
+
+	g_assert (layout_slots[dii->slot].num_icons >= 1);
+	g_assert (layout_slots[dii->slot].icons != NULL);
+
+	layout_slots[dii->slot].num_icons--;
+	layout_slots[dii->slot].icons = g_list_remove (layout_slots[dii->slot].icons, dii);
 }
 
 /* Places a desktop icon.  If auto_pos is true, then the function will look for a place to position
@@ -151,9 +171,14 @@ desktop_icon_info_place (struct desktop_icon_info *dii, int auto_pos, int xpos, 
 
 	/* Increase the number of icons in the corresponding slot */
 
+	remove_from_slot (dii);
+
 	u = xpos / DESKTOP_SNAP_X;
 	v = ypos / DESKTOP_SNAP_Y;
-	l_slots (u, v)++;
+
+	dii->slot = u * layout_rows + v;
+	layout_slots[dii->slot].num_icons++;
+	layout_slots[dii->slot].icons = g_list_append (layout_slots[dii->slot].icons, dii);
 
 	/* Move the icon */
 	
@@ -166,35 +191,89 @@ desktop_icon_info_place (struct desktop_icon_info *dii, int auto_pos, int xpos, 
 static void
 unselect_all (void)
 {
+	int i;
 	GList *l;
 	struct desktop_icon_info *dii;
 
-	for (l = desktop_icons; l; l = l->next) {
-		dii = l->data;
+	for (i = 0; i < (layout_cols * layout_rows); i++)
+		for (l = layout_slots[i].icons; l; l = l->next) {
+			dii = l->data;
 
-		if (dii->selected) {
-			desktop_icon_select (dii->dicon, FALSE);
-			dii->selected = FALSE;
+			if (dii->selected) {
+				desktop_icon_select (DESKTOP_ICON (dii->dicon), FALSE);
+				dii->selected = FALSE;
+			}
 		}
+}
+
+/* Sets the selection state of a range to the specified value.  The range starts at the
+ * last_selected_icon and ends at the specified icon.
+ */
+static void
+select_range (struct desktop_icon_info *dii, int sel)
+{
+	int min, max;
+	int i;
+	GList *l;
+	struct desktop_icon_info *ldii, *min_dii, *max_dii;
+
+	/* Find out the selection range */
+
+	if (!last_selected_icon)
+		last_selected_icon = dii;
+
+	if (last_selected_icon->slot < dii->slot) {
+		min = last_selected_icon->slot;
+		max = dii->slot;
+		min_dii = last_selected_icon;
+		max_dii = dii;
+	} else {
+		min = dii->slot;
+		max = last_selected_icon->slot;
+		min_dii = dii;
+		max_dii = last_selected_icon;
 	}
+
+	/* Select! */
+
+	for (i = min; i <= max; i++)
+		for (l = layout_slots[i].icons; l; l = l->next) {
+			ldii = l->data;
+
+			if (((i == min) && ((ldii->x < min_dii->x) || (ldii->y < min_dii->y)))
+			    || ((i == max) && ((ldii->x > max_dii->x) || (ldii->y > max_dii->y))))
+				continue;
+
+			desktop_icon_select (DESKTOP_ICON (dii->dicon), sel);
+			dii->selected = sel;
+		}
 }
 
 /* Handles icon selection and unselection due to button presses */
 static void
 select_icon (struct desktop_icon_info *dii, GdkEventButton *event)
 {
-	if (!(event->state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK))) {
-		/* Click on an unselected icon unselects everything and selects the icon */
+	int range;
+	int additive;
+
+	range = ((event->state & GDK_SHIFT_MASK) != 0);
+	additive = ((event->state & GDK_CONTROL_MASK) != 0);
+
+	if (!additive)
 		unselect_all ();
-		desktop_icon_select (dii->dicon, TRUE);
-		dii->selected = TRUE;
-	} else if (event->state & GDK_SHIFT_MASK) {
-		; /* FIXME: handle range selection */
-	} else if (event->state & GDK_CONTROL_MASK) {
-		/* Control-click on an icon toggles its selected state */
-		desktop_icon_select (dii->dicon, !dii->selected);
-		dii->selected = !dii->selected;
-	}
+
+	if (!range) {
+		if (additive) {
+			desktop_icon_select (DESKTOP_ICON (dii->dicon), !dii->selected);
+			dii->selected = !dii->selected;
+		} else if (!dii->selected) {
+			desktop_icon_select (DESKTOP_ICON (dii->dicon), TRUE);
+			dii->selected = TRUE;
+		}
+
+		last_selected_icon = dii;
+	} else
+		select_range (dii, TRUE);
 }
 
 /* Handler for events on desktop icons.  The on_text flag specifies whether the event ocurred on the
@@ -283,6 +362,9 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 
 	dii = g_new (struct desktop_icon_info, 1);
 	dii->dicon = desktop_icon_new (icon_name, filename);
+	dii->x = 0;
+	dii->y = 0;
+	dii->slot = -1;
 	dii->filename = g_strdup (filename);
 	dii->type = S_ISDIR (s.st_mode) ? ICON_DIRECTORY : ICON_FILE;
 	dii->selected = FALSE;
@@ -305,8 +387,6 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 	/* Place the icon and append it to the list */
 
 	desktop_icon_info_place (dii, auto_pos, xpos, ypos);
-	desktop_icons = g_list_append (desktop_icons, dii);
-
 	return dii;
 }
 
@@ -316,16 +396,8 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 static void
 desktop_icon_info_free (struct desktop_icon_info *dii)
 {
-	int u, v;
-
 	gtk_widget_destroy (dii->dicon);
-
-	/* Decrease the number of icons in the corresponding slot */
-
-	u = dii->x / DESKTOP_SNAP_X;
-	v = dii->y / DESKTOP_SNAP_Y;
-	l_slots (u, v)--;
-	g_assert (l_slots (u, v) >= 0);
+	remove_from_slot (dii);
 
 	g_free (dii->filename);
 	g_free (dii);
@@ -337,7 +409,7 @@ create_layout_info (void)
 {
 	layout_cols = (gdk_screen_width () + DESKTOP_SNAP_X - 1) / DESKTOP_SNAP_X;
 	layout_rows = (gdk_screen_height () + DESKTOP_SNAP_Y - 1) / DESKTOP_SNAP_Y;
-	layout_slots = g_new0 (int, layout_cols * layout_rows);
+	layout_slots = g_new0 (struct layout_slot, layout_cols * layout_rows);
 }
 
 /* Check that the user's desktop directory exists, and if not, create it with a symlink to the
@@ -380,7 +452,8 @@ load_initial_desktop_icons (void)
 	DIR *dir;
 	char *full_name;
 	int have_pos, x, y;
-	GList *list;
+	int i;
+	GList *l;
 	struct desktop_icon_info *dii;
 
 	dir = mc_opendir (desktop_directory);
@@ -409,10 +482,11 @@ load_initial_desktop_icons (void)
 
 	/* Show all the icons */
 
-	for (list = desktop_icons; list; list = list->next) {
-		dii = list->data;
-		gtk_widget_show (dii->dicon);
-	}
+	for (i = 0; i < (layout_cols * layout_rows); i++)
+		for (l = layout_slots[i].icons; l; l = l->next) {
+			dii = l->data;
+			gtk_widget_show (dii->dicon);
+		}
 }
 
 /**
@@ -429,22 +503,30 @@ desktop_init (void)
 	load_initial_desktop_icons ();
 }
 
-/** desktop_destroy
+/**
+ * desktop_destroy
  *
  * Shuts the desktop down by destroying the desktop icons.
  */
 void
 desktop_destroy (void)
 {
-	GList *list;
+	int i;
+	GList *l;
+	struct desktop_icon_info *dii;
 
 	/* Destroy the desktop icons */
 
-	for (list = desktop_icons; list; list = list->next)
-		desktop_icon_info_free (list->data);
+	for (i = 0; i < (layout_cols * layout_rows); i++) {
+		l = layout_slots[i].icons;
 
-	g_list_free (desktop_icons);
-	desktop_icons = NULL;
+		while (l) {
+			dii = l->data;
+			l = l->next;
+
+			desktop_icon_info_free (dii);
+		}
+	}
 
 	/* Cleanup */
 

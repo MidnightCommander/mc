@@ -1,3 +1,25 @@
+1998-11-02  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c: Now desktop icons are stored in the layout_slots
+	array.  We need to know which icons are in which slots.
+	(unselect_all): Use the layout_slots array.
+	(desktop_icon_info_place): Append the icon to the list in the
+	proper slot.
+	(desktop_icon_info_new): Initialize the position and slot fields
+	in the desktop icon info structure.
+	(desktop_icon_info_free): Remove the icon from its slot.
+	(desktop_destroy): Destroy the layout slots and the icons
+	properly.
+	(remove_from_slot): New convenience function to remove an icon
+	from the slot it is in.
+	(get_icon_snap_pos): Do a bit nicer snapping by really using the
+	closest slot.
+	Added a last_selected_icon variable to keep track of the icon that
+	was last selected, for shift+click selections.
+	(select_icon): Finish selection semantics and clean up.  Now it is
+	nice and simple and complete.
+	(select_range): New function that handles range selections.
+
 1998-11-01  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop-icon.h (DesktopIcon): Added a child item for stippling
