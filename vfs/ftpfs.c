@@ -1271,14 +1271,10 @@ again:
 	/* Wu-ftpd produces strange output for '/' if 'LIST -la .' used */
         sock = open_data_connection (me, super, "LIST -la", 0, TYPE_ASCII, 0);
     else {
-	/* Trailing "/." is necessary if remote_path is a symlink
-           but don't generate "//." */
-	char *path = (*remote_path) ? concat_dir_and_file (remote_path, ".")
-				    : NULL;
-
+	/* Trailing "/." is necessary if remote_path is a symlink */
+	char *path = concat_dir_and_file (remote_path, ".");
 	sock = open_data_connection (me, super, "LIST -la", path, TYPE_ASCII, 0);
-	if (path)
-	    g_free (path);
+	g_free (path);
     }
 
     if (sock == -1)

@@ -1,3 +1,8 @@
+2002-08-21  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* ftpfs.c (dir_load): Don't handle empty remote_path in special
+	way.
+
 2002-08-19  Pavel Roskin  <proski@gnu.org>
 
 	* direntry.c (vfs_s_get_line): Fix off-by-one buffer overflow.
