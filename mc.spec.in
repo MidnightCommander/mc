@@ -1,6 +1,7 @@
 # Note that this is NOT a relocatable package
-%define ver      4.5.16
-%define prefix   /usr
+%define ver     @VERSION@
+%define rel     1
+%define prefix  /usr
 
 Summary:   Midnight Commander visual shell
 Name:      mc
@@ -46,7 +47,8 @@ Midnight file system (currently, only the Midnight Commander file manager).
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure \
 	--prefix=%{prefix} \
 	--with-gnome \
-	--without-debug
+	--without-debug \
+        --sysconfdir=/etc
 
 if [ "$SMP" != "" ]; then
   (make "MAKE=make -k -j $SMP"; exit 0)
@@ -56,8 +58,11 @@ else
 fi
 
 %install
+echo $RPM_BUILD_ROOT
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,profile.d,X11/wmconfig}
+
+mkdir -p $RPM_BUILD_ROOT/etc/CORBA/servers
 
 make prefix=$RPM_BUILD_ROOT%{prefix} install
 (cd icons; make prefix=$RPM_BUILD_ROOT%{prefix} install_icons)
@@ -65,6 +70,10 @@ install lib/mcserv.init $RPM_BUILD_ROOT/etc/rc.d/init.d/mcserv
 
 install lib/mcserv.pamd $RPM_BUILD_ROOT/etc/pam.d/mcserv
 install lib/{mc.sh,mc.csh} $RPM_BUILD_ROOT/etc/profile.d
+
+#musta's kludge
+install gnome/gmc.gnorba $RPM_BUILD_ROOT/etc/CORBA/servers/gmc.gnorba
+
 
 # clean up this setuid problem for now
 chmod 755 $RPM_BUILD_ROOT/usr/lib/mc/bin/cons.saver
@@ -113,10 +122,7 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/lib/mc/mc-gnome.ext
 %{prefix}/share/pixmaps/mc/*
 %{prefix}/share/mime-info/mc.keys
-%dir %{prefix}/etc
-%dir %{prefix}/etc/CORBA
-%dir %{prefix}/etc/CORBA/servers
-%config %{prefix}/etc/CORBA/servers/*
+%config %{prefix}/../etc/CORBA/servers/gmc.gnorba
 
 %changelog
 * Thu Aug 20 1998 Michael Fulbright <msf@redhat.com>

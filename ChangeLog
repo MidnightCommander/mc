@@ -1,3 +1,9 @@
+Sat Feb 27 21:00:45 1999 Gregory McLean <gregm@comstar.net>
+
+	* applied a patch from Duncan Mak <mustapha@wegythu.res.cmu.edu>
+	to get the mc spec file to work.
+	* hacked configure to generate a properly versioned spec file.
+
 Fri Feb 26 22:06:51 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* gtkedit/editcmd.c (menu_save_mode_cmd): translate strings for

@@ -1233,6 +1233,7 @@ dnl
 AC_OUTPUT([
 Make.common 
 Makefile 
+mc.spec
 VERSION
 doc/Makefile 
 vfs/Makefile:vfs/Make-mc.in
