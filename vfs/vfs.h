@@ -1,6 +1,10 @@
 #ifndef __VFS_H
 #define __VFS_H
 
+/* Flags of VFS classes */
+#define VFSF_LOCAL 1		/* Class is local (not virtual) filesystem */
+#define VFSF_NOLINKS 2		/* Hard links not supported */
+
 #ifdef USE_VFS
 #ifdef HAVE_MMAP
 #include <sys/mman.h>
@@ -23,8 +27,6 @@ struct vfs_class {
     vfs *next;
     char *name;			/* "FIles over SHell" */
     int flags;
-#define F_EXEC 1		/* Filesystem needs to execute external programs */
-#define F_NET 2			/* Filesystem needs to access network */
     char *prefix;		/* "fish:" */
     void *data;			/* this is for filesystem's own use */
     int verrno;			/* can't use errno because glibc2 might define errno as function */
@@ -127,11 +129,15 @@ char *vfs_path (const char *path);
 char *vfs_strip_suffix_from_filename (const char *filename);
 char *vfs_canon (const char *path);
 char *mc_get_current_wd (char *buffer, int bufsize);
-int vfs_current_is_local (void);
-int vfs_file_is_local (const char *name);
-int vfs_file_is_ftp (const char *filename);
-int vfs_file_is_smb (const char *filename);
 char *vfs_get_current_dir (void);
+int vfs_current_is_local (void);
+int vfs_file_class_flags (const char *filename);
+
+static inline int
+vfs_file_is_local (const char *filename)
+{
+    return vfs_file_class_flags (filename) & VFSF_LOCAL;
+}
 
 extern int vfs_timeout;
 
@@ -208,11 +214,7 @@ int mc_munmap (caddr_t addr, size_t len);
 #define vfs_add_current_stamps() do { } while (0)
 #define vfs_current_is_local() 1
 #define vfs_file_is_local(x) 1
-#define vfs_file_is_ftp(x) 0
-#define vfs_file_is_smb(x) 0
-#define vfs_current_is_tarfs() 0
-#define vfs_current_is_cpiofs() 0
-#define vfs_current_is_extfs() 0
+#define vfs_file_class_flags(x) (VFSF_LOCAL)
 #define vfs_path(x) x
 #define vfs_strip_suffix_from_filename(x) g_strdup(x)
 #define vfs_release_path(x)

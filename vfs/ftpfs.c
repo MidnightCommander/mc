@@ -1771,7 +1771,7 @@ ftpfs_fill_names (vfs *me, void (*func)(char *))
 vfs vfs_ftpfs_ops = {
     NULL,	/* This is place of next pointer */
     "ftpfs",
-    F_NET,	/* flags */
+    VFSF_NOLINKS, /* flags */
     "ftp:",	/* prefix */
     &ftp_data,	/* data */
     0,		/* errno */

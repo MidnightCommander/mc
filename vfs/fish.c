@@ -899,7 +899,6 @@ init_fish (void)
 {
     vfs_s_init_class (&vfs_fish_ops);
     vfs_fish_ops.name = "fish";
-    vfs_fish_ops.flags = F_EXEC;
     vfs_fish_ops.prefix = "sh:";
     vfs_fish_ops.data = &fish_data;
     vfs_fish_ops.fill_names = fish_fill_names;

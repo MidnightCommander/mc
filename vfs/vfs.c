@@ -933,34 +933,24 @@ mc_chdir (char *path)
     return 0;
 }
 
+/* Return 1 is the current VFS class is local */
 int
 vfs_current_is_local (void)
 {
-    return current_vfs == &vfs_local_ops;
+    return (current_vfs->flags & VFSF_LOCAL) != 0;
 }
 
+/* Return flags of the VFS class of the given filename */
 int
-vfs_file_is_local (const char *file)
+vfs_file_class_flags (const char *filename)
 {
-    char *filename = vfs_canon (file);
-    vfs *vfs = vfs_get_class (filename);
-    
-    g_free (filename);
-    return vfs == &vfs_local_ops;
-}
+    struct vfs_class *vfs;
+    char *fname;
 
-int
-vfs_file_is_ftp (const char *filename)
-{
-#ifdef USE_NETCODE
-    vfs *vfs;
-    char *fname = vfs_canon (filename);
+    fname = vfs_canon (filename);
     vfs = vfs_get_class (fname);
     g_free (fname);
-    return vfs == &vfs_ftpfs_ops;
-#else
-    return 0;
-#endif
+    return vfs->flags;
 }
 
 int

@@ -1890,7 +1890,7 @@ smbfs_fstat (void *data, struct stat *buf)
 vfs vfs_smbfs_ops = {
     NULL,	/* This is place of next pointer */
     "smbfs",
-    F_NET,	/* flags */
+    VFSF_NOLINKS, /* flags */
     "smb:",	/* prefix */
     NULL,	/* data */
     0,		/* errno */

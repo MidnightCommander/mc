@@ -396,7 +396,7 @@ sfs_which (vfs *me, char *path)
 vfs vfs_sfs_ops = {
     NULL,	/* This is place of next pointer */
     "sfs",
-    F_EXEC,	/* flags */
+    0,		/* flags */
     NULL,	/* prefix */
     NULL,	/* data */
     0,		/* errno */

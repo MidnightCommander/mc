@@ -1154,7 +1154,7 @@ mcfs_setctl (vfs *me, char *path, int ctlop, char *arg)
 vfs vfs_mcfs_ops = {
     NULL,			/* This is place of next pointer */
     "mcfs",
-    F_NET,			/* flags */
+    0,				/* flags */
     "mc:",			/* prefix */
     NULL,			/* data */
     0,				/* errno */

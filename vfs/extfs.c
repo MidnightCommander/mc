@@ -1375,7 +1375,7 @@ static int extfs_setctl (vfs *me, char *path, int ctlop, char *arg)
 vfs vfs_extfs_ops = {
     NULL,	/* This is place of next pointer */
     "extfs",
-    F_EXEC,	/* flags */
+    0,		/* flags */
     NULL,	/* prefix */
     NULL,	/* data */
     0,		/* errno */

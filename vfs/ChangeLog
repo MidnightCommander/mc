@@ -1,5 +1,12 @@
 2003-10-11  Pavel Roskin  <proski@gnu.org>
 
+	* vfs.h: Introduce new VFS flags instead of the old unused ones.
+	* vfs.c (vfs_file_class_flags): New function.
+	(vfs_file_is_ftp): Eliminate.
+	(vfs_file_is_smb): Likewise.
+	(vfs_file_is_local): Likewise.
+	(vfs_current_is_local): Use new VFSF_LOCAL flag.
+
 	* vfs.c: Constify arguments of many functions.
 
 	* undelfs.c (undelfs_get_path): Constify first argument.

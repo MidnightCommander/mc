@@ -306,7 +306,7 @@ local_which (vfs *me, char *path)
 vfs vfs_local_ops = {
     NULL,	/* This is place of next pointer */
     "localfs",
-    0,		/* flags */
+    VFSF_LOCAL,	/* flags */
     NULL,	/* prefix */
     NULL,	/* data */
     0,		/* errno */
