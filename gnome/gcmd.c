@@ -700,8 +700,8 @@ gnome_filter_cmd (GtkWidget *widget, WPanel *panel)
 		else
 			text2 = NULL;
 	} else {
-		text1 = ("mc_filter_regexps");
-		text3 = _(".");
+		text1 = "mc_filter_regexps";
+		text3 = "^.*$";
 		if (!panel->filter)
 			text2 = NULL;
 		else
@@ -960,8 +960,6 @@ set_cursor_busy (WPanel *panel)
 void
 set_cursor_normal (WPanel *panel)
 {
-	GdkCursor *cursor;
-
 	if (is_a_desktop_panel (panel))
 		return;
 
