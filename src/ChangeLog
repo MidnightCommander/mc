@@ -1,3 +1,12 @@
+1999-02-17  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* dir.c (if_link_is_exe): Made this function take in a directory
+	argument as well -- the sought file may not be in the cwd, and
+	file entries do not carry the directory the file refers to.
+
+	* screen.c (do_enter_on_file_entry): Pass in the cpanel->cwd to
+	if_link_is_exe().
+
 1999-02-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* treestore.c (tree_store_rescan): Add code to skip scanning

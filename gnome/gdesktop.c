@@ -482,7 +482,9 @@ reload_desktop_icons (int user_pos, int xpos, int ypos)
 	orig_xpos = orig_ypos = 0;
 
 	for (sl = need_position_list; sl; sl = sl->next) {
-		file_and_url_t *fau = sl->data;
+		file_and_url_t *fau;
+
+		fau = sl->data;
 
 		if (user_pos && sl == need_position_list) {
 			/* If we are on the first icon, place it "by hand".
@@ -503,40 +505,46 @@ reload_desktop_icons (int user_pos, int xpos, int ypos)
 			get_icon_auto_pos (&xpos, &ypos);
 		}
 
-		/*
-		 * If the file dropped was a .desktop file, pull the suggested
+		/* If the file dropped was a .desktop file, pull the suggested
 		 * title and icon from there
 		 */
 		mime = gnome_mime_type_or_default (fau->filename, NULL);
-		if (mime && strcmp (mime, "application/x-gnome-app-info") == 0){
+		if (mime && strcmp (mime, "application/x-gnome-app-info") == 0) {
 			GnomeDesktopEntry *entry;
-			char *fullname = g_concat_dir_and_file (desktop_directory, fau->filename);
-			
+			char *fullname;
+
+			fullname = g_concat_dir_and_file (desktop_directory, fau->filename);
 			entry = gnome_desktop_entry_load (fullname);
-			if (entry){
-				if (entry->name){
+			if (entry) {
+				if (entry->name) {
 					if (fau->caption)
 						g_free (fau->caption);
+
 					fau->caption = g_strdup (entry->name);
 					gnome_metadata_set (fullname, "icon-caption",
-							    strlen (fau->caption)+1, fau->caption);
+							    strlen (fau->caption) + 1,
+							    fau->caption);
 				}
-				if (entry->icon){
+
+				if (entry->icon)
 					gnome_metadata_set (fullname, "icon-filename",
-							    strlen (entry->icon)+1, entry->icon);
-				}
+							    strlen (entry->icon) + 1,
+							    entry->icon);
+
 				gnome_desktop_entry_free (entry);
 			}
 			g_free (fullname);
 		}
-		
+
 		dii = desktop_icon_info_new (fau->filename, fau->url, fau->caption, xpos, ypos);
 		gtk_widget_show (dii->dicon);
 
 		if (fau->url)
 			g_free (fau->url);
+
 		if (fau->caption)
 			g_free (fau->caption);
+
 		g_free (fau->filename);
 		g_free (fau);
 	}
@@ -914,7 +922,7 @@ do_mount_umount (char *filename, gboolean is_mount)
 {
 	static char *mount_command;
 	static char *umount_command;
-	char *command, *op;
+	char *op;
 	char buffer [128];
 
 	if (is_mount){
@@ -979,9 +987,10 @@ do_eject (char *filename)
 	char *eject_command = find_command (eject_known_locations);
 	char *command;
 	FILE *f;
-	
+
 	if (!eject_command)
-		return;
+		return FALSE;
+
 	command = g_strconcat (eject_command, " ", filename, NULL);
 	open_error_pipe ();
 	f = popen (command, "r");
@@ -989,6 +998,7 @@ do_eject (char *filename)
 		close_error_pipe (1, _("While running the eject command"));
 	else
 		close_error_pipe (0, 0);
+
 	pclose (f);
 
 	return TRUE;
@@ -1029,8 +1039,8 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 	if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe))
 		new_panel_at (filename);
 	else {
-		if (!try_to_mount (filename, fe)){
-			if (is_exe (fe->buf.st_mode) && if_link_is_exe (fe))
+		if (!try_to_mount (filename, fe)) {
+			if (is_exe (fe->buf.st_mode) && if_link_is_exe (desktop_directory, fe))
 				my_system (EXECUTE_AS_SHELL, shell, filename);
 			else
 				gmc_open_filename (filename, NULL);
@@ -1450,6 +1460,7 @@ icon_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gint y, gu
 				       TRUE,
 				       source_widget != NULL,
 				       source_widget && is_desktop_icon,
+				       desktop_directory,
 				       fe,
 				       dii->selected);
 
@@ -1559,10 +1570,11 @@ icon_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gin
 
 		full_name = g_concat_dir_and_file (desktop_directory, dii->filename);
 		fe = file_entry_from_file (full_name);
+		g_free (full_name);
 		if (!fe)
 			return; /* eeeek */
 
-		if (gdnd_perform_drop (context, data, fe, full_name))
+		if (gdnd_perform_drop (context, data, desktop_directory, fe))
 			reload_desktop_icons (FALSE, 0, 0);
 
 		file_entry_free (fe);
@@ -1783,8 +1795,6 @@ setup_devices (void)
 		int count;
 		
 		if (strncmp (short_dev_name, "fd", 2) == 0){
-			char *full;
-
 			format = _("floppy %d");
 			count = floppy++;
 		} else if (strncmp (short_dev_name, "hd", 2) == 0 || strncmp (short_dev_name, "sd", 2) == 0){
@@ -2028,6 +2038,7 @@ desktop_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
 				       TRUE,
 				       source_widget != NULL,
 				       source_widget && is_desktop_icon,
+				       desktop_directory,
 				       NULL,
 				       FALSE);
 
@@ -2052,14 +2063,20 @@ desktop_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, 
 		drop_desktop_icons (context, data, x, y);
 	else {
 		file_entry *desktop_fe;
+		char *directory, *p;
 
 		desktop_fe = file_entry_from_file (desktop_directory);
 		if (!desktop_fe)
 			return; /* eeek */
 
-		if (gdnd_perform_drop (context, data, desktop_fe, desktop_directory))
+		p = strrchr (desktop_directory, PATH_SEP);
+		g_assert (p);
+		directory = g_strndup (desktop_directory, p - desktop_directory);
+
+		if (gdnd_perform_drop (context, data, directory, desktop_fe))
 			reload_desktop_icons (TRUE, x, y);
 
+		g_free (directory);
 		file_entry_free (desktop_fe);
 	}
 }

@@ -805,7 +805,7 @@ panel_icon_list_drag_data_received (GtkWidget          *widget,
 		free_fe = FALSE;
 	}
 
-	reload = gdnd_perform_drop (context, selection_data, fe, file);
+	reload = gdnd_perform_drop (context, selection_data, panel->cwd, fe);
 
 	if (free_file)
 		g_free (file);
@@ -860,7 +860,7 @@ panel_clist_drag_data_received (GtkWidget          *widget,
 		free_fe = FALSE;
 	}
 
-	reload = gdnd_perform_drop (context, selection_data, fe, file);
+	reload = gdnd_perform_drop (context, selection_data, panel->cwd, fe);
 
 	if (free_file)
 		g_free (file);
@@ -908,7 +908,7 @@ panel_tree_drag_data_received (GtkWidget          *widget,
 	if (!fe)
 		return; /* eeeek */
 
-	gdnd_perform_drop (context, selection_data, fe, path);
+	gdnd_perform_drop (context, selection_data, panel->cwd, fe);
 
 	file_entry_free (fe);
 	g_free (path);
@@ -1117,6 +1117,7 @@ panel_clist_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gin
 				       FALSE,
 				       source_widget != NULL,
 				       source_widget == widget,
+				       panel->cwd,
 				       fe,
 				       fe ? fe->f.marked : FALSE);
 
@@ -1232,6 +1233,7 @@ panel_icon_list_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x,
 				       FALSE,
 				       source_widget != NULL,
 				       source_widget == widget,
+				       panel->cwd,
 				       fe,
 				       fe ? fe->f.marked : FALSE);
 

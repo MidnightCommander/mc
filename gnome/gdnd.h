@@ -40,7 +40,7 @@ void gdnd_init (void);
  * Returns TRUE if an action was performed, FALSE otherwise (i.e. invalid drop).
  */
 int gdnd_perform_drop (GdkDragContext *context, GtkSelectionData *selection_data,
-		       file_entry *dest_fe, char *dest_name);
+		       char *directory, file_entry *dest_fe);
 
 /* Test whether the specified context has a certain target type */
 int gdnd_drag_context_has_target (GdkDragContext *context, TargetType type);
@@ -53,7 +53,7 @@ WPanel *gdnd_find_panel_by_drag_context (GdkDragContext *context, GtkWidget **so
  */
 GdkDragAction gdnd_validate_action (GdkDragContext *context,
 				    int on_desktop, int same_process, int same_source,
-				    file_entry *dest_fe, int dest_selected);
+				    char *directory, file_entry *dest_fe, int dest_selected);
 
 
 #endif

@@ -293,7 +293,8 @@ do_sort (dir_list *list, sortfn *sort, int top, int reverse_f, int case_sensitiv
     qsort (&(list->list) [1], top, sizeof (file_entry), sort);
 }
 
-void clean_dir (dir_list *list, int count)
+void
+clean_dir (dir_list *list, int count)
 {
     int i;
 
@@ -357,16 +358,18 @@ add_dotdot_to_list (dir_list *list, int index)
 }
 
 /* Used to set up a directory list when there is no access to a directory */
-int set_zero_dir (dir_list *list)
+int
+set_zero_dir (dir_list *list)
 {
     return (add_dotdot_to_list (list, 0));
 }
 
 /* If you change handle_dirent then check also handle_path. */
 /* Return values: -1 = failure, 0 = don't add, 1 = add to the list */
-int handle_dirent (dir_list *list, char *filter, struct dirent *dp,
-		   struct stat *buf1, int next_free, int *link_to_dir,
-		   int *stalled_link)
+int
+handle_dirent (dir_list *list, char *filter, struct dirent *dp,
+	       struct stat *buf1, int next_free, int *link_to_dir,
+	       int *stalled_link)
 {
     if (dp->d_name [0] == '.' && dp->d_name [1] == 0)
 	return 0;
@@ -417,9 +420,10 @@ int handle_dirent (dir_list *list, char *filter, struct dirent *dp,
    Moreover handle_path can't be used with a filemask. 
    If you change handle_path then check also handle_dirent. */
 /* Return values: -1 = failure, 0 = don't add, 1 = add to the list */
-int handle_path (dir_list *list, char *path,
-		   struct stat *buf1, int next_free, int *link_to_dir,
-		   int *stalled_link)
+int
+handle_path (dir_list *list, char *path,
+	     struct stat *buf1, int next_free, int *link_to_dir,
+	     int *stalled_link)
 {
     if (path [0] == '.' && path [1] == 0)
 	return 0;
@@ -451,7 +455,8 @@ int handle_path (dir_list *list, char *path,
     return 1;
 }
 
-int do_load_dir(dir_list *list, sortfn *sort, int reverse, int case_sensitive, char *filter)
+int
+do_load_dir (dir_list *list, sortfn *sort, int reverse, int case_sensitive, char *filter)
 {
     DIR           *dirp;
     struct dirent *dp;
@@ -504,7 +509,8 @@ int do_load_dir(dir_list *list, sortfn *sort, int reverse, int case_sensitive, c
     return next_free;
 }
 
-int link_isdir (file_entry *file)
+int
+link_isdir (file_entry *file)
 {
     if (file->f.link_to_dir)
 	return 1;
@@ -512,20 +518,25 @@ int link_isdir (file_entry *file)
 	return 0;
 }
  
-int if_link_is_exe (file_entry *file)
+int
+if_link_is_exe (char *directory, file_entry *file)
 {
     struct stat b;
+    char *full_name;
 
-    if (S_ISLNK (file->buf.st_mode)){
-	mc_stat (file->fname, &b);
+    if (S_ISLNK (file->buf.st_mode)) {
+	full_name = concat_dir_and_file (directory, file->fname);
+	mc_stat (full_name, &b);
+	g_free (full_name);
 	return is_exe (b.st_mode);
-    }
-    return 1;
+    } else
+	return 1;
 }
 
 static dir_list dir_copy = { 0, 0 };
 
-static void alloc_dir_copy (int size)
+static void
+alloc_dir_copy (int size)
 {
     int i;
 	    
@@ -549,8 +560,9 @@ static void alloc_dir_copy (int size)
 }
 
 /* If filter is null, then it is a match */
-int do_reload_dir (dir_list *list, sortfn *sort, int count, int rev,
-		   int case_sensitive, char *filter)
+int
+do_reload_dir (dir_list *list, sortfn *sort, int count, int rev,
+	       int case_sensitive, char *filter)
 {
     DIR           *dirp;
     struct dirent *dp;
@@ -636,7 +648,8 @@ int do_reload_dir (dir_list *list, sortfn *sort, int count, int rev,
     return next_free;
 }
 
-char *sort_type_to_name (sortfn *sort_fn)
+char *
+sort_type_to_name (sortfn *sort_fn)
 {
     int i;
 
@@ -647,7 +660,8 @@ char *sort_type_to_name (sortfn *sort_fn)
     return _("Unknown");
 }
 
-sortfn *sort_name_to_type (char *sname)
+sortfn *
+sort_name_to_type (char *sname)
 {
     int i;
 

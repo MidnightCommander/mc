@@ -1,3 +1,29 @@
+1999-02-17  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (do_mount_umount): Removed unused variable.
+	(do_eject): Return FALSE if there is no eject command.
+	(setup_devices): Removed unused variable.
+
+	* gdnd.c (drop_on_file): Pass the directory to if_link_is_exe().
+	(gdnd_validate_action): Likewise.
+	(gdnd_perform_drop): Made consistent with the rest of the code by
+	taking the directory name along with the file entry.
+	(gdnd_validate_action): Likewise.
+
+	* gdesktop.c (icon_drag_motion): Pass the directory to the gdnd
+	functions.
+	(icon_drag_data_received): Likewise.
+	(desktop_drag_motion): Likewise.
+	(desktop_drag_data_received): Likewise.
+	(desktop_icon_info_open): Pass the directory to if_link_is_exe().
+
+	* gscreen.c (panel_icon_list_drag_data_received): Pass the
+	directory to gdnd functions.
+	(panel_clist_drag_data_received): Likewise.
+	(panel_tree_drag_data_received): Likewise.
+	(panel_clist_drag_motion): Likewise.
+	(panel_icon_list_drag_motion): Likewise.
+
 1999-02-17  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (reload_desktop_icons): Load the information provided

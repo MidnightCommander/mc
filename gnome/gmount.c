@@ -1,3 +1,10 @@
+/* Mount/umount support for the Midnight Commander
+ *
+ * Copyright (C) 1998-1999 The Free Software Foundation
+ *
+ * Author: Miguel de Icaza <miguel@nuclecu.unam.mx>
+ */
+
 #include <config.h>
 
 #ifdef STDC_HEADERS

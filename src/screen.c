@@ -2036,9 +2036,8 @@ do_enter_on_file_entry (file_entry *fe)
     if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe)) {
 	do_cd (fe->fname, cd_exact);
 	return 1;
-    } else { 
-	if (is_exe (fe->buf.st_mode) &&
-	    if_link_is_exe (fe)) {
+    } else {
+	if (is_exe (fe->buf.st_mode) && if_link_is_exe (cpanel->cwd, fe)) {
 #ifdef USE_VFS	    
 	    if (vfs_current_is_local ()) 
 #endif	    
