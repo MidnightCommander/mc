@@ -1,3 +1,7 @@
+2001-08-10  Pavel Roskin  <proski@gnu.org>
+
+	* gnome.TODO: Remove already fixed problem in the find dialog.
+
 2001-08-07  Pavel Roskin  <proski@gnu.org>
 
 	* gnome-open-dialog.c (get_presorted_from): Don't use PATH_MAX.

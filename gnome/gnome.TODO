@@ -99,11 +99,6 @@ Configure Options
  - need some sort of help for all these options, they aren't too intuitive.
    We can't assume people are going to read the man page.
 
- -  Also, during a find, the dialog violently resizes as it lists the
-    directories it is searching through. Seems like the label showing
-    the currently searched dir needs to be a separate container or something.
-    It looks like its in the first column of the table of buttons below it.
-
 VFS Options
 -----------
 
