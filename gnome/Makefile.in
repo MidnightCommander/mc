@@ -117,7 +117,7 @@ ICONS = 			\
 #
 OOBJS = dlg.o screen.o widget.o wtools.o			\
 	file.o find.o dialog.o view.o				\
-	panelize.o hotlist.o background.o dir.o util.o		\
+	panelize.o background.o dir.o util.o			\
 	win.o color.o profile.o user.o ext.o setup.o		\
 	terms.o fsusage.o mountlist.o				\
 	regex.o complete.o command.o				\
@@ -233,12 +233,6 @@ mx: checklinks
 	$(MAKE) plain-gmc
 	$(MAKE) corba-gmc
 	$(MAKE) gmc-client
-	@echo ----------------------------------------------------------
-	@echo -
-	@echo - GMC no longer exists here.  Use plain-gmc or corba-gmc
-	@echo - if you are debugging/working on this.
-	@echo -
-	@echo -----------------------------------------------------------
 	@touch mx
 
 plain-gmc: $(OBJS) $(NORMALOBJS) $(DEPLIBS)
