@@ -18,7 +18,7 @@ cd $srcdir
 rm -rf autom4te.cache vfs/samba/autom4te.cache
 
 # Ensure that gettext is reasonably new.
-gettext_ver=`$GETTEXTIZE --version | sed -n '1s/\.//g;1s/.* //;1s/^\(...\)$/\100/p;1s/^\(...\)\(.\)$/\10\2/p'`
+gettext_ver=`$GETTEXTIZE --version | sed -n '1s/\.//g;1s/.* //;1s/^\(...\)$/\100/;1s/^\(...\)\(.\)$/\10\2/;1p'`
 if test $gettext_ver -lt 01038; then
   echo "Don't use gettext older than 0.10.38" 2>&1
   exit 1
