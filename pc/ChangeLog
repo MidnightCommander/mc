@@ -1,5 +1,8 @@
 2002-01-21  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.PC: Remove OS/2-specific parts.  Substitute
+	TARGET_OS - it is always NT now.
+
 	* config.h: Remove definitions for UNIX-specific permission
 	bits - they are now in fs.h.
 	* dirent_nt.c: Trim includes, disable code under MSVC.

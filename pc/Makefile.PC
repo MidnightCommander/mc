@@ -11,16 +11,10 @@
 #
 # Supported Compilers:
 #
-#    For Windows NT:
 #	Makefile.VC4:	Microsoft Visual C++ 4.0 and above
 #	Makefile.BC5:	Borland C++ 5.x
 #	Makefile.MIN:	MinGW
 #	Makefile.RSX:	RSX
-#    For OS/2:
-#	Makefile.EMX:	EMX/GCC
-#	Makefile.BC2:	Borland C++ 2.x
-#	Makefile.IBM:	IBM CSet or Visual Age C++
-#	...
 
 # ---- Directories
 MC_PC_DIR=.
@@ -34,7 +28,7 @@ SLANG_OBJS_DIR=$(OBJS_DIR)/slang
 MC_EXE=$(OBJS_DIR)/mc.exe
 
 # --- Midnight Defines
-COMMON_DEFINES=-DMC_$(TARGET_OS) $(SPECIFIC_DEFINES)
+COMMON_DEFINES=-DMC_NT $(SPECIFIC_DEFINES)
 MC_DEFINES=$(COMMON_DEFINES) -DHAVE_CONFIG_H
 MC_INCLUDES=-I$(MC_PC_DIR) -I$(SLANG_SRC_DIR)
 SLANG_DEFINES=$(COMMON_DEFINES)
@@ -122,33 +116,22 @@ MC_SRCS= \
 	screen.c
 
 PC_SRCS= \
-	slint_pc.c 	\
 	chmod.c 	\
-	drive.c
-
-NT_SRCS= \
 	cons_nt.c 	\
+	drive.c		\
 	dirent_nt.c 	\
 	key_nt.c 	\
+	slint_pc.c 	\
 	util_win32.c 	\
 	util_winnt.c 	\
 	util_nt.c
-
-OS2_SRCS= \
-	cons_os2.c 	\
-	dirent_os2.c 	\
-	key_os2.c 	\
-	util_os2.c
-
-SLANG_NT=slw32tty.c
-SLANG_OS2=slos2tty.c
 
 SLANG_SRCS= 		\
 	slerr.c 	\
 	slgetkey.c 	\
 	slsmg.c 	\
 	slvideo.c 	\
-	$(SLANG_$(TARGET_OS))
+	slw32tty.c
 
 MCEDIT_SRCS= 		\
 	edit.c 		\
@@ -160,7 +143,7 @@ MCEDIT_SRCS= 		\
 	syntax.c 	\
 	wordproc.c
 
-SRCS=$(MC_SRCS) $(PC_SRCS) $($(TARGET_OS)_SRCS) $(EXTRA_MC_SRCS)
+SRCS=$(MC_SRCS) $(PC_SRCS) $(EXTRA_MC_SRCS)
 
 OBJS=$(addprefix $(OBJS_DIR)/, \
 	$(patsubst %.c,%.$(OBJ_SUFFIX),$(SRCS)))
