@@ -3022,7 +3022,7 @@ msgstr "Forzar ejecución de subshell"
 
 #: src/main.c:2237
 msgid "Print last working directory to specified file"
-msgstr "Guardar el nombre del directorio en un fichero"
+msgstr "Guardar el nombre del directorio en un archivo"
 
 #: src/main.c:2239
 msgid "Resets soft keys on HP terminals"
