@@ -390,7 +390,8 @@ gtk_dtree_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 	char *request;
 
 	GTK_WIDGET_CLASS (parent_class)->size_allocate (widget, allocation);
-	if (allocation->width > 8 && allocation->height != 0)
+
+	if (allocation->width > 1 && allocation->height > 1)
 		dtree->visible = TRUE;
 	else
 		dtree->visible = FALSE;
