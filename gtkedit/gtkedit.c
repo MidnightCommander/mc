@@ -783,7 +783,7 @@ char *gtk_edit_dialog_get_save_file (guchar * dir, guchar * def, guchar * title)
 {
     char *s;
     s = gtk_dialog_cauldron (
-				title, GTK_CAULDRON_TOPLEVEL,
+				title, GTK_CAULDRON_TOPLEVEL | GTK_CAULDRON_GRAB,
 	    " ( ( (Filename:)d | %Fgxf )f )xf / ( %Bxfgrq || %Bxfgq )f ",
 				&def, "filename", title,
 				GNOME_STOCK_BUTTON_OK,
@@ -798,7 +798,7 @@ char *gtk_edit_dialog_get_load_file (guchar * dir, guchar * def, guchar * title)
 {
     char *s;
     s = gtk_dialog_cauldron (
-				title, GTK_CAULDRON_TOPLEVEL,
+				title, GTK_CAULDRON_TOPLEVEL | GTK_CAULDRON_GRAB,
 	    " ( ( (Filename:)d | %Fgxf )f )xf / ( %Bxfgrq || %Bxfgq )f ",
 				&def, "filename", title,
 				GNOME_STOCK_BUTTON_OK,
@@ -817,7 +817,7 @@ void gtk_edit_dialog_message (guchar * heading, char *fmt,...)
     vsprintf (s, fmt, ap);
     va_end (ap);
     gtk_dialog_cauldron (
-			    heading, GTK_CAULDRON_TOPLEVEL,
+			    heading, GTK_CAULDRON_TOPLEVEL | GTK_CAULDRON_GRAB,
 			    " [ ( %Ld )xf ]xf / ( %Bxfgq )f ",
 			    s,
 			    GNOME_STOCK_BUTTON_CANCEL
@@ -846,7 +846,7 @@ int gtk_edit_dialog_query (guchar * heading, guchar * first,...)
 	n++;
     }
     strcat (s, " )f");
-    r = gtk_dialog_cauldron (heading, GTK_CAULDRON_TOPLEVEL | GTK_CAULDRON_IGNOREENTER, s, first,
+    r = gtk_dialog_cauldron (heading, GTK_CAULDRON_TOPLEVEL | GTK_CAULDRON_IGNOREENTER | GTK_CAULDRON_GRAB, s, first,
 			  buttons[0], buttons[1], buttons[2], buttons[3],
 			  buttons[4], buttons[5], buttons[6], buttons[7],
 			buttons[8], buttons[9], buttons[10], buttons[11],
@@ -871,7 +871,7 @@ void gtk_edit_dialog_error (guchar * heading, char *fmt, ...)
     vsprintf (s, fmt, ap);
     va_end (ap);
     gtk_dialog_cauldron (
-			    heading, GTK_CAULDRON_TOPLEVEL,
+			    heading, GTK_CAULDRON_TOPLEVEL | GTK_CAULDRON_GRAB,
 			    " [ ( %Ld )xf ]xf / ( %Bxfgq )f",
 			    s,
 			    GNOME_STOCK_BUTTON_CANCEL
@@ -988,7 +988,7 @@ void gtk_edit_set_cursor_line (GtkWidget * e, int line)
 
 void about_cb (GtkWidget * widget, void *data)
 {
-    gtk_dialog_cauldron ("About", GTK_CAULDRON_TOPLEVEL, " [ (Mcedit - an editor for the midnight commander\n\
+    gtk_dialog_cauldron ("About", GTK_CAULDRON_TOPLEVEL | GTK_CAULDRON_GRAB, " [ (Mcedit - an editor for the midnight commander\n\
 ported from Cooledit - a user friendly text editor for the X Window System.)xf ]xf / ( %Bgqxf )f ", GNOME_STOCK_BUTTON_OK);
     return;
 }
