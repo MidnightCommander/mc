@@ -530,7 +530,7 @@ create_regexp_actions (GtkWidget *menu, WPanel *panel,
 
 	/* Fill in the common part of the menus */
 
-	for (i = 0; i < 5; i++)
+	for (i = 0; a_uiinfo [i].type != GNOME_APP_UI_ENDOFINFO; i++)
 		a_uiinfo[i].user_data = closure;
 
 	fill_menu (GTK_MENU_SHELL (menu), a_uiinfo, insert_pos);

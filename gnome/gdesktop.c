@@ -423,6 +423,10 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 
 			full_name = g_concat_dir_and_file (desktop_directory, dirent->d_name);
 			fe = file_entry_from_file (full_name);
+			if (!fe){
+				g_free (full_name);
+				continue;
+			}
 			im = gicon_get_icon_for_file (desktop_directory, fe, FALSE);
 			file_entry_free (fe);
 			g_free (full_name);
@@ -1056,7 +1060,11 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
 
 	fe = file_entry_from_file (filename);
-
+	if (!fe){
+		message (1, _("Error"), "I could not fetch the information from the file");
+		return;
+	}
+	
 	if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe))
 		new_panel_at (filename);
 	else {
@@ -1650,7 +1658,9 @@ desktop_icon_info_new (char *filename, char *url, char *caption, int xpos, int y
 
 	full_name = g_concat_dir_and_file (desktop_directory, filename);
 	fe = file_entry_from_file (full_name);
-
+	if (!fe)
+		return NULL;
+	
 	dii = g_new (DesktopIconInfo, 1);
 	dii->x = 0;
 	dii->y = 0;

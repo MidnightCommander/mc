@@ -1268,7 +1268,9 @@ apply_metadata_change (GnomeFilePropertyDialog *fpd)
 	if (!fpd->can_set_icon)
 		return 1;
 	/* And finally, we set the metadata on the icon filename */
-	text = gnome_icon_entry_get_filename (GNOME_ICON_ENTRY (fpd->button)); /*gtk_entry_get_text (GTK_ENTRY (gnome_icon_entry_gtk_entry (GNOME_ICON_ENTRY (fpd->button))));*/
+	text = gnome_icon_entry_get_filename (GNOME_ICON_ENTRY (fpd->button));
+	/*gtk_entry_get_text (GTK_ENTRY (gnome_icon_entry_gtk_entry (GNOME_ICON_ENTRY (fpd->button))));*/
+	
 	icon_name = gicon_get_filename_for_icon (fpd->im);
 	if (text) {
 		if (strcmp (text, icon_name))
@@ -1284,6 +1286,7 @@ apply_metadata_change (GnomeFilePropertyDialog *fpd)
 			  gnome_metadata_remove (fpd->file_name, "icon-filename");
 			*/
 		}
+		g_free (text);
 	}
 	/* I suppose we should only do this if we know there's been a change -- I'll try to figure it
 	 * out later if it turns out to be important. */

@@ -94,6 +94,19 @@ void free (void *ptr);
 #include "util.h"
 
 
+static gboolean
+option_has_user (char *str)
+{
+	if ((p = strstr (mnt->mnt_opts, "user")) != NULL){
+		if ((p - 2) >= str){
+			if (strncmp (p - 2, "nouser", 6) == 0)
+				return FALSE;
+		}
+		return TRUE;
+	}
+	return FALSE;
+}
+
 #ifdef MOUNTED_GETMNTENT1
 
 /*
@@ -116,7 +129,7 @@ is_block_device_mountable (char *devname)
 		return FALSE;
 
 	while ((mnt = getmntent (f))){
-		if (strstr (mnt->mnt_opts, "user")){
+		if (option_has_user (mnt->mt_opts)){
 			retval = g_strdup (mnt->mnt_dir);
 			break;
 		}
@@ -156,7 +169,7 @@ get_mountable_devices (void)
 		return NULL;
 
 	while ((mnt = getmntent (f))){
-		if (strstr (mnt->mnt_opts, "user")){
+		if (option_has_user (mnt->mnt_opts)){
 			list = g_list_prepend (list, g_strdup (mnt->mnt_fsname));
 			break;
 		}
