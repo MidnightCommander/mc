@@ -26,6 +26,11 @@ open (HELP2, "< $tmpl_file") or die "Cannot open $tmpl_file: $!\n";
 push @help_file, <HELP2>;
 close (HELP2);
 
+if ($Topics eq ''){
+    $Topics = shift (@help_file);
+    chomp ($Topics);
+}
+
 foreach $line (@help_file){
     if ($line =~ /\x04\[(.*)\]/ && $line !~ /\x04\[main\]/){
 	if (length $1) {

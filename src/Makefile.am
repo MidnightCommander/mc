@@ -75,7 +75,7 @@ $(srcdir)/mc.hlp: $(top_srcdir)/doc/mc.1 $(top_srcdir)/lib/xnc.hlp $(srcdir)/gin
 
 $(srcdir)/mc.hlp.ru: $(top_srcdir)/doc/ru/mc.1 $(top_srcdir)/doc/ru/xnc.hlp $(srcdir)/gindex.pl man2hlp
 	- perl $(srcdir)/gindex.pl $(top_srcdir)/doc/ru/mc.1 \
-	       $(top_srcdir)/doc/ru/xnc.hlp $(srcdir)/mc.hlp.ru 'Разделы помощи:'
+	       $(top_srcdir)/doc/ru/xnc.hlp $(srcdir)/mc.hlp.ru ''
 
 install-exec-hook:
 	$(MAKE) install_mcview

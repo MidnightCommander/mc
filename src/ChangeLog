@@ -1,5 +1,13 @@
 2002-03-20  Andrew V. Samoilov  <kai@cmail.ru>
 
+	* man2hlp.c (handle_command): Handle '.\"TOPICS' comment.
+	Use it for translated 'Topics:' message.
+	* gindex.pl: Use first line of man2hlp output as
+	translated 'Topics:' message if fourth argument
+	is empty string.
+	* Makefile.am (mc.hlp.ru): Use empty string as gindex.pl's
+	fourth argument.
+
 	* textconf.c (version): Write to stdout.
 	* main.c (print_mc_usage): Add "stream" parameter to specify
 	file stream.

@@ -267,6 +267,18 @@ static void handle_command (char *buffer)
 	if (col > 0) newline ();
 	newline ();
     }
+    else if (strcmp (buffer, ".\\\"TOPICS") == 0){
+	if (out_row > 1){
+	    print_error ("Syntax error: .\\\"TOPICS must be first command");
+	    return;
+	}
+	buffer = strtok (NULL, "");
+	if (buffer == NULL){
+	    print_error ("Syntax error: .\\\"TOPICS: no text");
+	    return;
+	}
+	printf ("%s\n", buffer);
+    }
     else {
 	/* Other commands are ignored */
     }
