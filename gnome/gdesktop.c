@@ -1279,7 +1279,7 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 
 	full_name = g_concat_dir_and_file (desktop_directory, filename);
 	fe = file_entry_from_file (full_name);
-	icon_im = gicon_get_icon_for_file_speed (fe, FALSE);
+	icon_im = gicon_get_icon_for_file_speed (desktop_directory, fe, FALSE);
 
 	dii = g_new (DesktopIconInfo, 1);
 	dii->dicon = desktop_icon_new (icon_im, filename);

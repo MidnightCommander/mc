@@ -173,13 +173,14 @@ gnome_file_entry_color (file_entry *fe)
  * icon for it.  Including a lookup in the metadata.
  */
 GdkImlibImage *
-gicon_get_icon_for_file_speed (file_entry *fe, gboolean do_quick)
+gicon_get_icon_for_file_speed (char *directory, file_entry *fe, gboolean do_quick)
 {
 	GdkImlibImage *image;
 	int            size;
 	char          *buf, *mime_type;
 	mode_t        mode;
 	
+	g_return_val_if_fail (directory != NULL, NULL);
 	g_return_val_if_fail (fe != NULL, NULL);
 
 	if (!gicon_inited)
@@ -232,30 +233,40 @@ gicon_get_icon_for_file_speed (file_entry *fe, gboolean do_quick)
 	/*
 	 * 2. Expensive tests
 	 */
-	if (!do_quick || we_can_affort_the_speed){
+	if (!do_quick || we_can_affort_the_speed) {
+		char *full_name;
+
+		full_name = g_concat_dir_and_file (directory, fe->fname);
+
 		/*
 		 * 2.1 Try to fetch the icon as an inline png from the metadata.
 		 */
-		if (gnome_metadata_get (fe->fname, "icon-inline-png", &size, &buf) == 0){
+		if (gnome_metadata_get (full_name, "icon-inline-png", &size, &buf) == 0){
 			image = gdk_imlib_inlined_png_to_image (buf, size);
 			
 			g_free (buf);
 			
-			if (image)
+			if (image) {
+				g_free (full_name);
 				return image;
+			}
 		}
 		
 		/*
 		 * 2.2. Try to fetch the icon from the metadata.
 		 */
-		if (gnome_metadata_get (fe->fname, "icon-filename", &size, &buf) == 0){
+		if (gnome_metadata_get (full_name, "icon-filename", &size, &buf) == 0){
 			image = gicon_get_by_filename (buf);
 
 			g_free (buf);
 			
-			if (image)
+			if (image) {
+				g_free (full_name);
 				return image;
+			}
 		}
+
+		g_free (full_name);
 	}
 	
 	/*
@@ -287,9 +298,9 @@ gicon_get_icon_for_file_speed (file_entry *fe, gboolean do_quick)
 }
 
 GdkImlibImage *
-gicon_get_icon_for_file (file_entry *fe)
+gicon_get_icon_for_file (char *directory, file_entry *fe)
 {
-	return gicon_get_icon_for_file_speed (fe, TRUE);
+	return gicon_get_icon_for_file_speed (directory, fe, TRUE);
 }
 
 typedef struct {

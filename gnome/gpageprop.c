@@ -68,8 +68,6 @@ item_properties (GtkWidget *parent, char *fname, DesktopIconInfo *dii)
 	char          *new_name;
 	char          *base;
 	char          *icon_filename;
-	int            size;
-		
 
 	struct stat s;
 	int retval = 0;
@@ -96,10 +94,16 @@ item_properties (GtkWidget *parent, char *fname, DesktopIconInfo *dii)
 	if (dii) {
 		GdkImlibImage *icon;
 		file_entry *fe;
-		char *name;
-		
+		char *dirname;
+		char *p;
+
+		p = strrchr (fname, PATH_SEP);
+		g_assert (p != NULL);
+		dirname = g_strndup (fname, p - fname);
+
 		fe = file_entry_from_file (fname);
-		icon = gicon_get_icon_for_file_speed (fe, FALSE);
+		icon = gicon_get_icon_for_file_speed (dirname, fe, FALSE);
+		g_free (dirname);
 		file_entry_free (fe);
 		icon_filename = gicon_image_to_name (icon);
 		if (icon_filename == NULL)

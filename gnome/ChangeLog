@@ -1,3 +1,42 @@
+1999-01-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gicon.h (gicon_image_to_name): Added prototype for
+	gicon_image_to_name().
+
+	* gicon.c (gicon_get_icon_for_file): 
+	(gicon_get_icon_for_file_speed): Added a "directory" argument.
+	It is needed because the file_entry structure only contains the
+	pruned filename, and we need the complete name for the metadata
+	functions.
+
+	* gdesktop.c (desktop_icon_info_new): Pass the directory to
+	gicon_get_icon_for_file_speed().
+
+	* gpageprop.c (item_properties): Build the directory name and pass
+	it to gicon_get_icon_for_file_speed().
+
+	* gscreen.c: Do not #include "directory.xpm".  Do #include "setup.h".
+	Removed unused function button_switch_to().
+
+	* gscreen.c (panel_fill_panel_icons): Pass the directory to
+	gicon_get_icon_for_file().
+
+	* gscreen.c (panel_create_tree_view): Allow button 2 to start the
+	drag as well.
+	(panel_clist_scrolling_is_desirable): Make both scrolling
+	thresholds consistent.  Also, do not allow scrolling past the
+	correct limit.
+	(panel_icon_list_scrolling_is_desirable): Likewise.
+	(panel_tree_scrolling_is_desirable): Likewise.
+	(panel_clist_scroll): Do not allow scrolling past the correct limits.
+	(panel_icon_list_scroll): Likewise.
+	(panel_tree_scroll): Likewise.
+
+1999-01-19  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gscreen.c (panel_create_icon_display): Do not set the style of
+	the icon list.
+
 1999-01-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gprefs.c (apply_callback): Update the directory contents after

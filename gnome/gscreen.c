@@ -27,6 +27,7 @@
 #include "gscreen.h"
 #include "dir.h"
 #include "dialog.h"
+#include "setup.h"
 #include "gdesktop.h"
 #include "gdnd.h"
 #include "gtkdtree.h"
@@ -42,7 +43,6 @@
 int tree_panel_visible = -1;
 
 /* The pixmaps */
-#include "directory.xpm"
 #include "dir-close.xpm"
 #include "link.xpm"
 #include "dev.xpm"
@@ -233,7 +233,7 @@ panel_fill_panel_icons (WPanel *panel)
 		file_entry *fe = &panel->dir.list [i];
 		int p;
 		
-		image = gicon_get_icon_for_file (fe);
+		image = gicon_get_icon_for_file (panel->cwd, fe);
 		p = gnome_icon_list_append_imlib (icons, image, fe->fname);
 		if (fe->f.marked)
 			gnome_icon_list_select_icon (icons, p);
@@ -946,7 +946,7 @@ panel_widget_motion (GtkWidget *widget, GdkEventMotion *event, WPanel *panel)
 	if (panel->maybe_start_drag == 2)
 		action = GDK_ACTION_ASK;
 	else
-		action = GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK;
+		action = GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_ASK;
 	
 	context = gtk_drag_begin (widget, list, action,
 				  panel->maybe_start_drag, (GdkEvent *) event);
@@ -995,8 +995,8 @@ panel_clist_scrolling_is_desirable (WPanel *panel, int x, int y)
 		if (va->value > va->lower)
 			return TRUE;
 	} else {
-		if (y > (GTK_WIDGET (panel->list)->allocation.height-20)){
-			if (va->value < va->upper)
+		if (y > (GTK_WIDGET (panel->list)->allocation.height - 10)){
+			if (va->value < va->upper - va->page_size)
 				return TRUE;
 		}
 	}
@@ -1015,14 +1015,24 @@ panel_clist_scroll (gpointer data)
 {
 	WPanel *panel = data;
 	GtkAdjustment *va;
+	double v;
 
 	va = scrolled_window_get_vadjustment (panel->list);
 
-	if (panel->drag_motion_y < 10)
-		gtk_adjustment_set_value (va, va->value - va->step_increment);
-	else{
-		gtk_adjustment_set_value (va, va->value + va->step_increment);
+	if (panel->drag_motion_y < 10) {
+		v = va->value - va->step_increment;
+		if (v < va->lower)
+			v = va->lower;
+
+		gtk_adjustment_set_value (va, v);
+	} else {
+		v = va->value + va->step_increment;
+		if (v > va->upper - va->page_size)
+			v = va->upper - va->page_size;
+
+		gtk_adjustment_set_value (va, v);
 	}
+
 	return TRUE;
 }
 
@@ -1075,8 +1085,8 @@ panel_icon_list_scrolling_is_desirable (WPanel *panel, int x, int y)
 		if (va->value > va->lower)
 			return TRUE;
 	} else {
-		if (y > (GTK_WIDGET (panel->icons)->allocation.height-20)){
-			if (va->value < va->upper)
+		if (y > (GTK_WIDGET (panel->icons)->allocation.height - 10)){
+			if (va->value < va->upper - va->page_size)
 				return TRUE;
 		}
 	}
@@ -1095,14 +1105,24 @@ panel_icon_list_scroll (gpointer data)
 {
 	WPanel *panel = data;
 	GtkAdjustment *va;
+	double v;
 
 	va = GNOME_ICON_LIST (panel->icons)->adj;
 
-	if (panel->drag_motion_y < 10)
-		gtk_adjustment_set_value (va, va->value - va->step_increment);
-	else{
-		gtk_adjustment_set_value (va, va->value + va->step_increment);
+	if (panel->drag_motion_y < 10) {
+		v = va->value - va->step_increment;
+		if (v < va->lower)
+			v = va->lower;
+
+		gtk_adjustment_set_value (va, v);
+	} else {
+		v = va->value + va->step_increment;
+		if (v > va->upper - va->page_size)
+			v = va->upper - va->page_size;
+
+		gtk_adjustment_set_value (va, v);
 	}
+
 	return TRUE;
 }
 /**
@@ -1347,14 +1367,9 @@ static GtkWidget *
 panel_create_icon_display (WPanel *panel)
 {
 	GnomeIconList *ilist;
-	GtkStyle *style;
 			       
 	ilist = GNOME_ICON_LIST (gnome_icon_list_new (90, NULL, TRUE));
-	/* Set the background of the icon list to white */
-	style = gtk_style_copy (gtk_widget_get_style (GTK_WIDGET (ilist)));
-	style->bg [GTK_STATE_NORMAL] = style->bg [GTK_STATE_PRELIGHT];
-	gtk_widget_set_style (GTK_WIDGET (ilist), style);
-		
+
 	gnome_icon_list_set_separators (ilist, " /-_.");
 	gnome_icon_list_set_row_spacing (ilist, 2);
 	gnome_icon_list_set_col_spacing (ilist, 2);
@@ -1790,8 +1805,8 @@ panel_tree_scrolling_is_desirable (WPanel *panel, int x, int y)
 		if (va->value > va->lower)
 			return TRUE;
 	} else {
-		if (y > (GTK_WIDGET (dtree)->allocation.height-20)){
-			if (va->value < va->upper)
+		if (y > (GTK_WIDGET (dtree)->allocation.height - 10)){
+			if (va->value < va->upper - va->page_size)
 				return TRUE;
 		}
 	}
@@ -1878,14 +1893,24 @@ panel_tree_scroll (gpointer data)
 {
 	WPanel *panel = data;
 	GtkAdjustment *va;
+	double v;
 
 	va = scrolled_window_get_vadjustment (panel->tree_scrolled_window);
 
-	if (panel->drag_motion_y < 10)
-		gtk_adjustment_set_value (va, va->value - va->step_increment);
-	else{
-		gtk_adjustment_set_value (va, va->value + va->step_increment);
+	if (panel->drag_motion_y < 10) {
+		v = va->value - va->step_increment;
+		if (v < va->lower)
+			v = va->lower;
+
+		gtk_adjustment_set_value (va, v);
+	} else {
+		v = va->value + va->step_increment;
+		if (v > va->upper - va->page_size)
+			v = va->upper - va->page_size;
+
+		gtk_adjustment_set_value (va, v);
 	}
+
 	return TRUE;
 }
 
@@ -2030,9 +2055,9 @@ panel_create_tree_view (WPanel *panel)
 			    GTK_SIGNAL_FUNC (panel_tree_drag_data_get), panel);
 
 	/* Make directories draggable */
-	gtk_drag_source_set (GTK_WIDGET (tree), GDK_BUTTON1_MASK,
+	gtk_drag_source_set (GTK_WIDGET (tree), GDK_BUTTON1_MASK | GDK_BUTTON2_MASK,
 			     drag_types, ELEMENTS (drag_types),
-			     GDK_ACTION_LINK | GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_ASK);
+			     GDK_ACTION_LINK | GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_ASK | GDK_ACTION_DEFAULT);
 
 	/* Mouse is being moved over ourselves */
 	gtk_signal_connect (GTK_OBJECT (tree), "drag_motion",
@@ -2096,19 +2121,6 @@ static void
 panel_up (GtkWidget *button, WPanel *panel)
 {
 	do_panel_cd (panel, "..", cd_exact);
-}
-
-static GtkWidget *
-button_switch_to (char **icon, GtkSignalFunc fn, void *closure)
-{
-	GtkWidget *button, *pix;
-
-	button = gtk_button_new ();
-	pix = gnome_pixmap_new_from_xpm_d (icon);
-	gtk_container_add (GTK_CONTAINER (button), pix);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", fn, closure);
-
-	return button;
 }
 
 static void
@@ -2204,9 +2216,6 @@ do_ui_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name,
 static void
 tree_size_allocate (GtkWidget *widget, GtkAllocation *allocation, WPanel *panel)
 {
-	GtkWidget *tree = panel->tree;
-	GdkFont *tree_font = tree->style->font;
-	
 	if (allocation->width <= 0){
 		tree_panel_visible = 0;
 	} else {
