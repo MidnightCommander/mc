@@ -1,5 +1,8 @@
 2001-10-01  Pavel Roskin  <proski@gnu.org>
 
+	* setup.c [!USE_VFS]: Warning fix.
+	* hotlist.c [!USE_VFS]: Likewise.
+
 	* tree.c (tree_navigation_flag): Should not be static.
 
 	* screen.c (panel_format_modified): Use more portable cast.

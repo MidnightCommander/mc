@@ -473,10 +473,12 @@ static int l_call (void *l)
     return listbox_nothing;
 }
 
+#ifdef USE_VFS
 static void add_name_to_list (char *path)
 {
     listbox_add_item (l_hotlist, 0, 0, path, 0);
 }
+#endif /* !USE_VFS */
 
 /*
  * Expands all button names (once) and recalculates button positions.
@@ -603,10 +605,12 @@ static void init_hotlist (int list_type)
     l_hotlist = listbox_new (UY + 1, UX + 1, COLS-2*UX-8, LINES-14, listbox_cback, l_call, "listbox");
 
     /* Fill the hotlist with the active VFS or the hotlist */
+#ifdef USE_VFS
     if (list_type == LIST_VFSLIST){
 	listbox_add_item (l_hotlist, 0, 0, home_dir, 0);
 	vfs_fill_names (add_name_to_list);
     } else
+#endif /* !USE_VFS */
 	fill_listbox ();
 
     add_widget (hotlist_dlg, l_hotlist); 

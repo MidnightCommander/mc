@@ -462,6 +462,7 @@ load_mode (char *section)
     return mode;
 }
 
+#ifdef USE_NETCODE
 static char *
 do_load_string (char *s, char *ss, char *def)
 {
@@ -474,6 +475,7 @@ do_load_string (char *s, char *ss, char *def)
     g_free (buffer);
     return p;
 }
+#endif /* !USE_NETCODE */
 
 char *
 setup_init (void)
