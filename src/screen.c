@@ -683,44 +683,35 @@ mini_info_separator (WPanel *panel)
 	return;
 
     standend ();
-    widget_move (&panel->widget, llines (panel)+2, 1);
+    widget_move (&panel->widget, llines (panel) + 2, 1);
 #ifdef HAVE_SLANG
     attrset (NORMAL_COLOR);
-    hline (ACS_HLINE, panel->widget.cols-2);
+    hline (ACS_HLINE, panel->widget.cols - 3);
 #else
     hline ((slow_terminal ? '-' : ACS_HLINE) | NORMAL_COLOR,
-	  panel->widget.cols-2);
-#endif /* !HAVE_SLANG */
+	   panel->widget.cols - 3);
+#endif				/* !HAVE_SLANG */
 }
 
 static void
 show_dir (WPanel *panel)
 {
-    char tmp [200];
+    char tmp[200];
 
     set_colors (panel);
     draw_double_box (panel->widget.parent,
-	            panel->widget.y,    panel->widget.x,
-	            panel->widget.lines, panel->widget.cols);
+		     panel->widget.y, panel->widget.x,
+		     panel->widget.lines, panel->widget.cols);
 
 #ifdef HAVE_SLANG
     if (show_mini_info) {
-#ifdef linux_unicode
-    	if (SLtt_Unicode) {
-            SLsmg_draw_unicode (panel->widget.y + llines (panel) + 2,
-                panel->widget.x, SLUNI_DSLTEE_CHAR);
-            SLsmg_draw_unicode (panel->widget.y + llines (panel) + 2,
-                panel->widget.x + panel->widget.cols - 1, SLUNI_DSRTEE_CHAR);
-    	} else
-#endif /* linux_unicode */
-	{
-            SLsmg_draw_object (panel->widget.y + llines (panel) + 2,
-                panel->widget.x, SLSMG_LTEE_CHAR);
-            SLsmg_draw_object (panel->widget.y + llines (panel) + 2,
-                panel->widget.x + panel->widget.cols - 1, SLSMG_RTEE_CHAR);
-        }
+	SLsmg_draw_object (panel->widget.y + llines (panel) + 2,
+			   panel->widget.x, SLSMG_LTEE_CHAR);
+	SLsmg_draw_object (panel->widget.y + llines (panel) + 2,
+			   panel->widget.x + panel->widget.cols - 1,
+			   SLSMG_RTEE_CHAR);
     }
-#endif /* HAVE_SLANG */
+#endif				/* HAVE_SLANG */
 
     if (panel->active)
 	attrset (REVERSE_COLOR);
@@ -732,9 +723,9 @@ show_dir (WPanel *panel)
     addstr (tmp);
     widget_move (&panel->widget, 0, 1);
     addstr ("<");
-    widget_move (&panel->widget, 0, panel->widget.cols-2);
+    widget_move (&panel->widget, 0, panel->widget.cols - 2);
     addstr (">");
-    widget_move (&panel->widget, 0, panel->widget.cols-3);
+    widget_move (&panel->widget, 0, panel->widget.cols - 3);
     addstr ("v");
 
     if (panel->active)
