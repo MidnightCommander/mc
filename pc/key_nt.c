@@ -20,7 +20,7 @@
    */
 #include <config.h>
 #ifndef _OS_NT
-#error This file is for Win32 systems.
+ #error "This file is for Win32 systems only"
 #else
 
 #include <windows.h>

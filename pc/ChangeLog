@@ -1,3 +1,10 @@
+2001-06-14  Pavel Roskin  <proski@gnu.org>
+
+	* src/param.h: Remove. Should use HAVE_SYS_PARAM_H everywhere
+	instead.
+	* key_nt.c: Use indented #error.
+	* key_os2.c: Use indented #error.
+
 2001-06-11  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.MIN: Add "-mno-cygwin" to MC_MISC_CFLAGS.

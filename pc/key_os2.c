@@ -21,7 +21,7 @@
 
 #include <config.h>
 #ifndef __os2__
-#error This file is for OS/2 systems.
+ #error "This file is for OS/2 systems only"
 #else
 
 #define INCL_BASE
