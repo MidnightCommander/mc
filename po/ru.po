@@ -77,7 +77,7 @@ msgstr " Сортировать по"
 #. we define this up here so we can pass it in to our callback
 #: gnome/gcmd.c:225
 msgid "Ignore case sensitivity."
-msgstr "Без учёта регистра"
+msgstr "Без учета регистра"
 
 #: gnome/gcmd.c:233 gnome/gcustom-layout.c:40 src/chmod.c:150 src/screen.c:425
 msgid "Name"
@@ -106,7 +106,7 @@ msgstr "Время последнего изменения"
 
 #: gnome/gcmd.c:278
 msgid "Reverse the order."
-msgstr "Обратить полядок."
+msgstr "Обратить порядок."
 
 #: gnome/gcmd.c:340
 msgid "Enter name."
@@ -224,7 +224,6 @@ msgid "Create New Window"
 msgstr "Создать новое окно"
 
 #: gnome/gdesktop.c:2177
-#, fuzzy
 msgid "Rescan Mountable Devices"
 msgstr "Пересканировать подсоединяемые устройства"
 
@@ -483,7 +482,7 @@ msgstr "Переместить..."
 
 #: gnome/glayout.c:342
 msgid "Rename or move files"
-msgstr "Передвинуть или переименовать файлы"
+msgstr "Переместить или переименовать файлы"
 
 #: gnome/glayout.c:344
 msgid "Show directory sizes"
@@ -499,7 +498,7 @@ msgstr "Выделить все"
 
 #: gnome/glayout.c:351
 msgid "Select all files in the current Panel"
-msgstr "Выделить все файлы ва данной панели"
+msgstr "Выделить все файлы на данной панели"
 
 #: gnome/glayout.c:353
 msgid "_Select Files..."
@@ -555,7 +554,7 @@ msgstr "Избирательный"
 
 #: gnome/glayout.c:372
 msgid "Global option settings"
-msgstr "Свойства глобальных параметров"
+msgstr "Значения глобальных параметров"
 
 #: gnome/glayout.c:379
 msgid "_Find File..."
@@ -580,7 +579,7 @@ msgstr "Исполнить на панели..."
 
 #: gnome/glayout.c:384
 msgid "Run a command and put the results in a panel"
-msgstr "Запустить команду и положить результат на панель"
+msgstr "Запустить команду и поместить результат на панель"
 
 #: gnome/glayout.c:394
 msgid "_Background jobs..."
@@ -591,9 +590,8 @@ msgid "List of background operations"
 msgstr "Список фоновых операций"
 
 #: gnome/glayout.c:397
-#, fuzzy
 msgid "Exit"
-msgstr "Правка"
+msgstr "Выход"
 
 #: gnome/glayout.c:397
 msgid "Terminates the file manager and the desktop"
@@ -696,11 +694,11 @@ msgstr "Показывать скрытые файлы"
 
 #: gnome/gprefs.c:89
 msgid "Mix files and directories"
-msgstr "Файлы и каталоги в перемешку"
+msgstr "Файлы и каталоги вперемешку"
 
 #: gnome/gprefs.c:93
 msgid "Use shell patterns instead of regular expressions"
-msgstr "Образцы коммандной строки вместо регулярных выражений"
+msgstr "Образцы командной строки вместо регулярных выражений"
 
 #: gnome/gprefs.c:102
 msgid "Confirm when deleting file"
@@ -926,7 +924,7 @@ msgstr "Пересмотреть каталог"
 
 #: gnome/gscreen.c:1452
 msgid "Reloads the current directory"
-msgstr "Перегрудает текущий каталог"
+msgstr "Перегружает текущий каталог"
 
 #: gnome/gscreen.c:1454
 msgid "New folder"
@@ -1129,7 +1127,7 @@ msgstr "Перейти к строке "
 
 #: gnome/gview.c:293
 msgid "Jump to a specified line number"
-msgstr "Перейти на строку с заданым номером"
+msgstr "Перейти на строку с заданным номером"
 
 #: gnome/gview.c:295
 msgid "_Monitor file"
@@ -1162,7 +1160,7 @@ msgstr ""
 
 #: gnome/gview.c:319
 msgid "_Formatted"
-msgstr "Сформатированный"
+msgstr "Форматированный"
 
 #: gnome/gview.c:321
 msgid "_Hex"
