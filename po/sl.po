@@ -639,7 +639,7 @@ msgstr ""
 
 #: gnome/gdialogs.c:790 src/file.c:2244
 msgid " Delete: "
-msgstr " Izbri¹i: "
+msgstr " Zbri¹i: "
 
 #: gnome/gdialogs.c:794
 msgid "Do the same for the rest"
@@ -821,11 +821,11 @@ msgstr "Kopiraj datoteke"
 
 #: gnome/glayout.c:390 gnome/gscreen.c:2119
 msgid "_Delete..."
-msgstr "_Izbri¹i..."
+msgstr "_Zbri¹i..."
 
 #: gnome/glayout.c:390
 msgid "Delete files"
-msgstr "Izbri¹i datoteke"
+msgstr "Zbri¹i datoteke"
 
 #: gnome/glayout.c:391 gnome/gscreen.c:2120
 msgid "_Move..."
@@ -1333,7 +1333,7 @@ msgstr "Prestavi v smeti"
 #: gnome/gpopup2.c:293 gtkedit/editwidget.c:1143 src/screen.c:2400
 #: src/screen.c:2430
 msgid "Delete"
-msgstr "Izbri¹i"
+msgstr "Zbri¹i"
 
 #: gnome/gpopup2.c:294
 msgid "Move..."
@@ -1528,7 +1528,7 @@ msgstr "Kopiraj imenik"
 
 #: gnome/gscreen.c:2119
 msgid "Delete directory"
-msgstr "Izbri¹i imenik"
+msgstr "Zbri¹i imenik"
 
 #: gnome/gscreen.c:2120
 msgid "Rename or move directory"
@@ -1605,11 +1605,11 @@ msgstr "%s bajtov"
 
 #: gnome/gview.c:306
 msgid "_Goto line"
-msgstr "Pojdi v vrstico"
+msgstr "_Skoèi na vrstico"
 
 #: gnome/gview.c:307
 msgid "Jump to a specified line number"
-msgstr "Pojdi v doloèeno ¹tevilko vrstice"
+msgstr "Skoèi na doloèeno ¹tevilko vrstice"
 
 #: gnome/gview.c:309
 msgid "_Monitor file"
@@ -1860,7 +1860,7 @@ msgstr " Napaka ob poskusu shranjenja datoteke. "
 #. This heads the delete macro error dialog box
 #: gtkedit/editcmd.c:679 gtkedit/editcmd.c:687 gtkedit/editcmd.c:712
 msgid " Delete macro "
-msgstr " Izbri¹i makro "
+msgstr " Zbri¹i makro "
 
 #. 'Open' = load temp file
 #: gtkedit/editcmd.c:681
@@ -1899,7 +1899,7 @@ msgstr " Shrani makro"
 
 #: gtkedit/editcmd.c:760 gtkedit/editcmd.c:767
 msgid " Delete Macro "
-msgstr " Izbri¹i Makro "
+msgstr " Zbri¹i Makro "
 
 #. This heads the 'Load Macro' dialog box
 #: gtkedit/editcmd.c:817
@@ -2238,7 +2238,7 @@ msgstr " Izre¾i in postavi na odlo¾i¹èe "
 #: gtkedit/editcmd.c:2725 gtkedit/editcmd.c:2729 gtkedit/editcmd.c:2734
 #: gtkedit/editcmd.c:2737 src/view.c:1915
 msgid " Goto line "
-msgstr " Pojdi v vrstico "
+msgstr " Skoèi na vrstico "
 
 #: gtkedit/editcmd.c:2725 gtkedit/editcmd.c:2729 gtkedit/editcmd.c:2734
 #: gtkedit/editcmd.c:2737
@@ -2433,7 +2433,7 @@ msgstr "&Prestavi          F6"
 
 #: gtkedit/editmenu.c:173 gtkedit/editmenu.c:190
 msgid "&Delete            F8"
-msgstr "&Izbri¹i           F8"
+msgstr "&Zbri¹i            F8"
 
 #: gtkedit/editmenu.c:175 gtkedit/editmenu.c:192
 msgid "&Undo             C-u"
@@ -2489,7 +2489,7 @@ msgstr "&Izvedi makro... C-a, TIPKA"
 
 #: gtkedit/editmenu.c:224 gtkedit/editmenu.c:247
 msgid "delete macr&O...            "
-msgstr "izbri¹i makr&O...           "
+msgstr "zbri¹i makr&O...            "
 
 #: gtkedit/editmenu.c:226 gtkedit/editmenu.c:249
 msgid "insert &Date/time           "
@@ -2624,7 +2624,7 @@ msgstr "Premakni blok na kazalec\tF6"
 
 #: gtkedit/editmenu.c:438
 msgid "Delete block\tF8/C-Del"
-msgstr "Izbri¹i blok\tF8/C-Del"
+msgstr "Zbri¹i blok\tF8/C-Del"
 
 #: gtkedit/editmenu.c:440
 msgid "Copy block to clipbrd\tC-Ins"
@@ -2698,7 +2698,7 @@ msgstr "Izvedi makro...\tC-a, TIPKA"
 
 #: gtkedit/editmenu.c:472
 msgid "Delete macro...\t"
-msgstr "Izbri¹i makro...\t"
+msgstr "Zbri¹i makro...\t"
 
 #: gtkedit/editmenu.c:474
 msgid "Insert date/time\tC-d"
@@ -2880,7 +2880,7 @@ msgstr "Bri¹i"
 
 #: gtkedit/gtkedit.c:1254
 msgid "Delete highlighted text"
-msgstr "Izbri¹i osvetljeno besedilo"
+msgstr "Zbri¹i osvetljeno besedilo"
 
 #: gtkedit/gtkedit.c:1255 src/main.c:1727 src/screen.c:2394 src/screen.c:2424
 msgid "Menu"
@@ -3940,7 +3940,7 @@ msgstr " Prestavi "
 
 #: src/file.c:156 src/tree.c:745
 msgid " Delete "
-msgstr " Izbri¹i "
+msgstr " Zbri¹i "
 
 #: src/file.c:244
 msgid " Invalid target mask "
@@ -4115,7 +4115,7 @@ msgstr "Datoteka je bila prene¹ena nepopolno. Naj ostane?"
 
 #: src/file.c:803
 msgid "&Delete"
-msgstr "&Izbri¹i"
+msgstr "&Zbri¹i"
 
 #: src/file.c:803 src/hotlist.c:1443
 msgid "&Keep"
@@ -4235,7 +4235,7 @@ msgid ""
 " Cannot delete file \"%s\" \n"
 " %s "
 msgstr ""
-" Ne morem izbrisati datoteke \"%s\" \n"
+" Ne morem zbrisati datoteke \"%s\" \n"
 " %s "
 
 #: src/file.c:1418 src/file.c:1488 src/file.c:1520
@@ -4270,7 +4270,7 @@ msgstr "1Prestavi"
 
 #: src/file.c:1680
 msgid "1Delete"
-msgstr "1Izbri¹i"
+msgstr "1Zbri¹i"
 
 #: src/file.c:1695
 #, c-format
@@ -4365,7 +4365,7 @@ msgid ""
 msgstr ""
 "\n"
 "   Imenik ni prazen.   \n"
-"   Naj ga izbri¹em rekurzivno? "
+"   Naj ga zbri¹em rekurzivno? "
 
 #: src/file.c:2243
 msgid ""
@@ -4375,7 +4375,7 @@ msgid ""
 msgstr ""
 "\n"
 "   Proces iz ozadja: Imenik ni prazen \n"
-"   Naj ga izbri¹em rekurzivno? "
+"   Naj ga zbri¹em rekurzivno? "
 
 #: src/file.c:2250
 msgid "a&ll"
@@ -4387,19 +4387,19 @@ msgstr "br&Ez"
 
 #: src/file.c:2260
 msgid " Type 'yes' if you REALLY want to delete "
-msgstr " Vpi¹ite 'yes', èe RESNIÈNO ¾elite izbrisati"
+msgstr " Vpi¹ite 'yes', èe RESNIÈNO ¾elite zbrisati "
 
 #: src/file.c:2262
 msgid "all the directories "
-msgstr "vse imenike"
+msgstr "vse imenike "
 
 #: src/file.c:2264
 msgid " Recursive Delete "
-msgstr " Rekurzivno Brisanje"
+msgstr " Rekurzivno brisanje "
 
 #: src/file.c:2265
 msgid " Background process: Recursive Delete "
-msgstr " Proces v ozadju: Rekurzivno Brisanje"
+msgstr " Proces v ozadju: Rekurzivno brisanje "
 
 #: src/filegui.c:424
 msgid "File"
@@ -4593,7 +4593,7 @@ msgstr "Izkljuèi"
 
 #: src/find.c:717
 msgid "Restart"
-msgstr "Zaèni znova"
+msgstr "Znova za¾eni"
 
 #: src/find.c:719 src/find.c:821 src/find.c:960 src/find.c:1056
 msgid "Searching"
@@ -4802,7 +4802,7 @@ msgstr "Polnoèni Poveljnik bo nalo¾il vroèi seznam iz  ~/"
 
 #: src/hotlist.c:1398
 msgid "and then delete [Hotlist] section there"
-msgstr "in nato izbrisal [Hotlist] sekcijo tam"
+msgstr "in nato zbrisal [Hotlist] sekcijo tam"
 
 #: src/hotlist.c:1400 src/hotlist.c:1419 src/hotlist.c:1442 src/hotlist.c:1467
 msgid " Hotlist Load "
@@ -5138,7 +5138,7 @@ msgid ""
 " extra access permissions with the \"su\" command? "
 msgstr ""
 " Poveljnik ne more iti v imenik za katerega\n"
-" podlupina trdi, da ste v njem.  Morda ste izbrisali \n"
+" podlupina trdi, da ste v njem.  Morda ste zbrisali \n"
 " va¹ delovni imenik ali pa ste si dali dodatna \n"
 " dostopna dovoljenja z ukazom \"su\"? "
 
@@ -5256,7 +5256,7 @@ msgstr "Ustvari &Imenik     F7"
 
 #: src/main.c:1309
 msgid "&Delete             F8"
-msgstr "&Izbri¹i            F8"
+msgstr "&Zbri¹i             F8"
 
 #: src/main.c:1310
 msgid "&Quick cd          M-c"
@@ -5320,7 +5320,7 @@ msgstr "dej&Avni VFS seznam   C-x a"
 
 #: src/main.c:1339
 msgid "Fr&ee VFSs now"
-msgstr "s&Edaj sprosti VFS-je"
+msgstr "&Takoj sprosti VFS-je"
 
 #: src/main.c:1342
 msgid "&Background jobs      C-x j"
@@ -6303,7 +6303,7 @@ msgstr "Neformatirano"
 
 #: src/view.c:2092
 msgid "Format"
-msgstr "Naèin Izpisa"
+msgstr "Oblikuj izpis"
 
 #: src/widget.c:994
 msgid " History "
@@ -6758,7 +6758,7 @@ msgstr "ftpfs: povezava do stre¾nika ni bila uspe¹na: %s"
 #: vfs/ftpfs.c:736
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "Èakam na ponovni poizkus... (Control-C za preklic)"
+msgstr "Èakam na ponovni poizkus... %d (Control-C za preklic)"
 
 #: vfs/ftpfs.c:922
 msgid "ftpfs: could not setup passive mode"
@@ -6813,7 +6813,7 @@ msgstr "ftpfs: spodletel; ni veè mo¾nih re¹itev"
 #: vfs/ftpfs.c:1352
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
-msgstr "ftpfs: shranjujem datoteko (%d) %D"
+msgstr "ftpfs: shranjujem datoteko %d (%d)"
 
 #: vfs/ftpfs.c:1767
 msgid ""
