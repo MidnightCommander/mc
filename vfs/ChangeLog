@@ -1,3 +1,10 @@
+2004-10-05  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* cpio.c (cpio_find_head): Check mc_read() return value.
+	(cpio_read_crc_head): Handle mc_read() return value properly.
+	(cpio_read_oldc_head): Use union for "st" and "buf".
+	(cpio_read_crc_head): Likewise.
+
 2004-10-06  Alexander Savelyev  <i@fano.com.ua>
 
 	* xdirentry.h (linear_start): Use off_t for offset.

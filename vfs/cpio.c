@@ -214,11 +214,12 @@ static int cpio_find_head(struct vfs_class *me, struct vfs_s_super *super)
 {
     char buf[256];
     int ptr = 0;
-    int top = 0;
+    int top;
     int tmp;
 
-    top = mc_read(super->u.arch.fd, buf, 256);
-    CPIO_POS(super) += top;
+    top = mc_read (super->u.arch.fd, buf, 256);
+    if (top > 0)
+	CPIO_POS (super) += top;
     for(;;) {
 	if(ptr + MAGIC_LENGTH >= top) {
 	    if(top > 128) {
@@ -308,17 +309,19 @@ static int cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *super)
 static int cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *super)
 {
     struct new_cpio_header hd;
-    struct stat st;
-    char buf[HEAD_LENGTH + 1];
+    union {
+	struct stat st;
+	char buf[HEAD_LENGTH + 1];
+    } u;
     int len;
     char *name;
 
-    if((len = mc_read(super->u.arch.fd, buf, HEAD_LENGTH)) < HEAD_LENGTH)
+    if (mc_read (super->u.arch.fd, u.buf, HEAD_LENGTH) != HEAD_LENGTH)
 	return STATUS_EOF;
-    CPIO_POS(super) += len;
-    buf[HEAD_LENGTH] = 0;
+    CPIO_POS (super) += HEAD_LENGTH;
+    u.buf[HEAD_LENGTH] = 0;
 
-    if(sscanf(buf, "070707%6lo%6lo%6lo%6lo%6lo%6lo%6lo%11lo%6lo%11lo",
+    if (sscanf (u.buf, "070707%6lo%6lo%6lo%6lo%6lo%6lo%6lo%11lo%6lo%11lo",
 	      &hd.c_dev, &hd.c_ino, &hd.c_mode, &hd.c_uid, &hd.c_gid,
 	      &hd.c_nlink, &hd.c_rdev, &hd.c_mtime,
 	      &hd.c_namesize, &hd.c_filesize) < 10) {
@@ -347,17 +350,17 @@ static int cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *super)
 	return STATUS_TRAIL;
     }
 
-    st.st_dev = hd.c_dev;
-    st.st_ino = hd.c_ino;
-    st.st_mode = hd.c_mode;
-    st.st_nlink = hd.c_nlink;
-    st.st_uid = hd.c_uid;
-    st.st_gid = hd.c_gid;
-    st.st_rdev = hd.c_rdev;
-    st.st_size = hd.c_filesize;
-    st.st_atime = st.st_mtime = st.st_ctime = hd.c_mtime;
+    u.st.st_dev = hd.c_dev;
+    u.st.st_ino = hd.c_ino;
+    u.st.st_mode = hd.c_mode;
+    u.st.st_nlink = hd.c_nlink;
+    u.st.st_uid = hd.c_uid;
+    u.st.st_gid = hd.c_gid;
+    u.st.st_rdev = hd.c_rdev;
+    u.st.st_size = hd.c_filesize;
+    u.st.st_atime = u.st.st_mtime = u.st.st_ctime = hd.c_mtime;
 
-    return cpio_create_entry(me, super, &st, name);
+    return cpio_create_entry (me, super, &u.st, name);
 }
 #undef HEAD_LENGTH
 
@@ -365,17 +368,19 @@ static int cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *super)
 static int cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *super)
 {
     struct new_cpio_header hd;
-    struct stat st;
-    char buf[HEAD_LENGTH + 1];
+    union {
+	struct stat st;
+	char buf[HEAD_LENGTH + 1];
+    } u;
     int len;
     char *name;
 
-    if((len = mc_read(super->u.arch.fd, buf, HEAD_LENGTH)) < HEAD_LENGTH)
+    if (mc_read (super->u.arch.fd, u.buf, HEAD_LENGTH) != HEAD_LENGTH)
 	return STATUS_EOF;
-    CPIO_POS(super) += len;
-    buf[HEAD_LENGTH] = 0;
+    CPIO_POS (super) += HEAD_LENGTH;
+    u.buf[HEAD_LENGTH] = 0;
 
-    if(sscanf(buf, "%6ho%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx",
+    if (sscanf (u.buf, "%6ho%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx",
 	      &hd.c_magic, &hd.c_ino, &hd.c_mode, &hd.c_uid, &hd.c_gid,
 	      &hd.c_nlink,  &hd.c_mtime, &hd.c_filesize,
 	      &hd.c_dev, &hd.c_devmin, &hd.c_rdev, &hd.c_rdevmin,
@@ -396,7 +401,7 @@ static int cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *super)
     }
 
     name = g_malloc(hd.c_namesize);
-    if((len = mc_read(super->u.arch.fd, name, hd.c_namesize)) != -1 &&
+    if((len = mc_read (super->u.arch.fd, name, hd.c_namesize)) == -1 ||
        (unsigned long) len < hd.c_namesize) {
 	g_free (name);
 	return STATUS_EOF;
@@ -410,17 +415,17 @@ static int cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *super)
 	return STATUS_TRAIL;
     }
 
-    st.st_dev = (hd.c_dev << 8) + hd.c_devmin;
-    st.st_ino = hd.c_ino;
-    st.st_mode = hd.c_mode;
-    st.st_nlink = hd.c_nlink;
-    st.st_uid = hd.c_uid;
-    st.st_gid = hd.c_gid;
-    st.st_rdev = (hd.c_rdev << 8) + hd.c_rdevmin;
-    st.st_size = hd.c_filesize;
-    st.st_atime = st.st_mtime = st.st_ctime = hd.c_mtime;
+    u.st.st_dev = (hd.c_dev << 8) + hd.c_devmin;
+    u.st.st_ino = hd.c_ino;
+    u.st.st_mode = hd.c_mode;
+    u.st.st_nlink = hd.c_nlink;
+    u.st.st_uid = hd.c_uid;
+    u.st.st_gid = hd.c_gid;
+    u.st.st_rdev = (hd.c_rdev << 8) + hd.c_rdevmin;
+    u.st.st_size = hd.c_filesize;
+    u.st.st_atime = u.st.st_mtime = u.st.st_ctime = hd.c_mtime;
 
-    return cpio_create_entry(me, super, &st, name);
+    return cpio_create_entry (me, super, &u.st, name);
 }
 
 static int
