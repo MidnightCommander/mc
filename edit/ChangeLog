@@ -1,3 +1,11 @@
+2004-12-03  Roland Illig  <roland.illig@gmx.de>
+
+	* edit.h: Renamed multiple inclusion guards that started with a
+	double underscore. Added #includes for dependent files.
+	* editcmddef.h: Likewise.
+	* editlock.h: Likewise.
+	* edit-widget.h: Likewise.
+
 2004-12-02  Roland Illig  <roland.illig@gmx.de>
 
 	* editcmd.c (edit_replace_cmd): Separated input and output arguments.

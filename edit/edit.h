@@ -20,8 +20,8 @@
    02111-1307, USA.
 */
 
-#ifndef __EDIT_H
-#define __EDIT_H
+#ifndef MC_EDIT_H
+#define MC_EDIT_H
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -332,4 +332,4 @@ extern int column_highlighting;
 #define BLOCK_FILE         EDIT_DIR PATH_SEP_STR "cooledit.block"
 #define TEMP_FILE          EDIT_DIR PATH_SEP_STR "cooledit.temp"
 
-#endif 				/* __EDIT_H */
+#endif

@@ -1,7 +1,8 @@
-#ifndef __EDIT_WIDGET_H
-#define __EDIT_WIDGET_H
+#ifndef MC_EDIT_WIDGET_H
+#define MC_EDIT_WIDGET_H
 
 #include "../src/dialog.h"		/* Widget */
+#include "edit.h"
 
 #define MAX_MACRO_LENGTH 1024
 #define N_LINE_CACHES 32
@@ -103,4 +104,4 @@ struct WEdit {
     struct macro macro[MAX_MACRO_LENGTH];
 };
 
-#endif				/* !__EDIT_WIDGET_H */
+#endif

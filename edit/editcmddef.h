@@ -1,30 +1,30 @@
-#ifndef __EDIT_CMD_DEF_H
-#define __EDIT_CMD_DEF_H
+#ifndef MC_EDIT_CMD_DEF_H
+#define MC_EDIT_CMD_DEF_H
 
 /*  in the distant future, keyboards will be invented with a
     separate key for each one of these commands   *sigh*      */
 
 /* special commands */
-#define CK_Insert_Char 		-1
-#define CK_Ignore_Key 		0
+#define CK_Insert_Char		-1
+#define CK_Ignore_Key		0
 
 /* cursor movements */
-#define CK_BackSpace 		1
-#define CK_Delete 		2
-#define CK_Enter 		3
-#define CK_Page_Up 		4
-#define CK_Page_Down 		5
-#define CK_Left 		6
-#define CK_Right 		7
-#define CK_Word_Left 		8
-#define CK_Word_Right 		9
-#define CK_Up 			10
-#define CK_Down 		11
+#define CK_BackSpace		1
+#define CK_Delete		2
+#define CK_Enter		3
+#define CK_Page_Up		4
+#define CK_Page_Down		5
+#define CK_Left			6
+#define CK_Right		7
+#define CK_Word_Left		8
+#define CK_Word_Right		9
+#define CK_Up			10
+#define CK_Down			11
 #define CK_Home			12
-#define CK_End 			13
-#define CK_Tab 			14
+#define CK_End			13
+#define CK_Tab			14
 #define CK_Undo			15
-#define CK_Beginning_Of_Text    16
+#define CK_Beginning_Of_Text	16
 #define CK_End_Of_Text		17
 #define CK_Scroll_Up		18
 #define CK_Scroll_Down		19
@@ -38,17 +38,17 @@
 
 
 /* file commands */
-#define CK_Save 		101
-#define CK_Load 		102
-#define CK_New  		103
+#define CK_Save			101
+#define CK_Load			102
+#define CK_New			103
 #define CK_Save_As		104
 
 /* block commands */
-#define CK_Mark 		201
-#define CK_Copy 		202
-#define CK_Move 		203
-#define CK_Remove 		204
-#define CK_Unmark 		206
+#define CK_Mark			201
+#define CK_Copy			202
+#define CK_Move			203
+#define CK_Remove		204
+#define CK_Unmark		206
 #define CK_Save_Block		207
 #define CK_Column_Mark		208
 
@@ -62,11 +62,11 @@
 /* debugger commands */
 #define CK_Debug_Start		350
 #define CK_Debug_Stop		351
-#define CK_Debug_Toggle_Break 	352
-#define CK_Debug_Clear 		353
+#define CK_Debug_Toggle_Break	352
+#define CK_Debug_Clear		353
 #define CK_Debug_Next		354
 #define CK_Debug_Step		355
-#define CK_Debug_Back_Trace 	356
+#define CK_Debug_Back_Trace	356
 #define CK_Debug_Continue	357
 #define CK_Debug_Enter_Command	358
 #define CK_Debug_Until_Curser	359
@@ -120,16 +120,16 @@
 #define CK_Prev_Bookmark	553
 
 /* highlight commands */
-#define CK_Page_Up_Highlight 		604
-#define CK_Page_Down_Highlight 		605
-#define CK_Left_Highlight 		606
-#define CK_Right_Highlight 		607
-#define CK_Word_Left_Highlight 		608
-#define CK_Word_Right_Highlight 	609
-#define CK_Up_Highlight 		610
-#define CK_Down_Highlight 		611
+#define CK_Page_Up_Highlight		604
+#define CK_Page_Down_Highlight		605
+#define CK_Left_Highlight		606
+#define CK_Right_Highlight		607
+#define CK_Word_Left_Highlight		608
+#define CK_Word_Right_Highlight		609
+#define CK_Up_Highlight			610
+#define CK_Down_Highlight		611
 #define CK_Home_Highlight		612
-#define CK_End_Highlight 		613
+#define CK_End_Highlight		613
 #define CK_Beginning_Of_Text_Highlight	614
 #define CK_End_Of_Text_Highlight	615
 #define CK_Begin_Page_Highlight		616
@@ -168,4 +168,4 @@
 #define CK_Macro(i)		((i) | (1 << 17))
 #define IS_MACRO_COMMAND(i)	((i) & (1 << 17))
 
-#endif /* !__EDIT_CMD_DEF_H */
+#endif
