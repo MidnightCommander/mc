@@ -89,6 +89,9 @@ include cs.syntax
 file ..\*\\.(js|JS)$ JavaScript\sProgram
 include js.syntax
 
+file ..\*\\.(asax|aspx|ascx|asmx|ashx)$ ASPX\sFile
+include aspx.syntax
+
 file ..\*\\.st$ SmallTalk\sProgram
 include smalltalk.syntax
 

@@ -1,0 +1,49 @@
+# ASP.NET syntax highlighting
+#
+# Author: Juan C. Olivares <juancri@juancri.com>
+# http://www.juancri.com
+
+context default
+	keyword "*" lightgray
+	keyword '*' lightgray
+
+	spellcheck
+
+context <!-- --> brightgreen
+	spellcheck
+
+context <! > yellow
+	keyword '+' brightcyan
+	keyword "+" brightcyan
+	keyword \( lightgray
+	keyword \) lightgray
+	keyword \* lightgray
+	keyword \? lightgray
+	keyword \+ lightgray
+	keyword \| lightgray
+	keyword \, lightgray
+	spellcheck
+
+context <% %> brightgreen
+	keyword Application white
+	keyword Assembly white
+	keyword Control white
+	keyword Implements white
+	keyword Import white
+	keyword Inherits white
+	keyword OutputCache white
+	keyword Page white
+	keyword Reference white
+	keyword Register white
+	keyword WebService white
+	keyword \s+\= yellow
+	keyword '*' brightcyan
+	keyword "*" brightcyan
+	spellcheck
+
+context < > white
+	keyword \s+\= yellow
+	keyword "server" brightgreen
+	keyword '*' brightcyan
+	keyword "*" brightcyan
+	spellcheck

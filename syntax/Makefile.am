@@ -3,6 +3,7 @@ syntaxdir = $(pkgdatadir)/syntax
 syntax_DATA =			\
 	Syntax			\
 	ada95.syntax		\
+	aspx.syntax		\
 	c.syntax		\
 	cs.syntax		\
 	changelog.syntax	\
