@@ -2738,7 +2738,7 @@ msgstr "Ulo¾it pod souèasným jménem"
 
 #: gtkedit/gtkedit.c:1248
 msgid "Toggle In/Off invisible marker to highlight text"
-msgstr ""
+msgstr "Zapni/vypni oznaèování textu"
 
 #: gtkedit/gtkedit.c:1249
 msgid "Replc"
@@ -6151,16 +6151,16 @@ msgstr "fish: selhání"
 #: vfs/fish.c:450
 #, c-format
 msgid "fish: store %s: sending command..."
-msgstr ""
+msgstr "fish: ukládám %s: posílám pøíkaz..."
 
 #: vfs/fish.c:464
 msgid "fish: Local read failed, sending zeros"
-msgstr ""
+msgstr "fish: Selhalo ètení lokálního souboru, posílám nuly"
 
 #: vfs/fish.c:476
 #, c-format
 msgid "fish: storing %s %d (%d)"
-msgstr ""
+msgstr "fish: ukládám %s %d (%d)"
 
 #: vfs/fish.c:516
 msgid "Aborting transfer..."
