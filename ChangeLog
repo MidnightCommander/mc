@@ -1,3 +1,7 @@
+2003-09-11  Strahinya Radich  <mr99164@alas.matf.bg.ac.yu>
+
+	* lib/mc.hint.sr: New file - Serbian hints.
+
 2003-09-04  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.menu: Add entry for viewing manual pages.
