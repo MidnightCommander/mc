@@ -1,3 +1,11 @@
+1999-09-29  Federico Mena Quintero  <federico@redhat.com>
+
+	* gcorba.c (corba_activate_server): New function.  Activate the
+	POA manager here, when we are actually ready to process requests,
+	instead of at the beginning of initialization.
+
+	* gmain.c (create_panels): Call corba_activate_server().
+
 1999-09-22  Federico Mena Quintero  <federico@redhat.com>
 
 	* gscreen.c (panel_chdir): Clear the lists if the chdir operation

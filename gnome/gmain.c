@@ -484,8 +484,6 @@ idle_destroy_panel (gpointer data)
 static void
 non_corba_create_panels (char *startup_dir)
 {
-	WPanel *panel;
-
 	desktop_init ();
 	gnome_init_panels ();
 
@@ -503,6 +501,8 @@ non_corba_create_panels (char *startup_dir)
 void
 create_panels (void)
 {
+	corba_activate_server ();
+
 	if (!corba_have_server)
 		non_corba_create_panels (this_dir ? this_dir : ".");
 	else {

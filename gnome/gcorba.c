@@ -483,7 +483,6 @@ corba_init_server (void)
 {
 	int retval;
 	CORBA_Environment ev;
-	PortableServer_POAManager poa_manager;
 
 	retval = FALSE;
 	CORBA_exception_init (&ev);
@@ -491,14 +490,6 @@ corba_init_server (void)
 	/* Get the POA and create the server */
 
 	poa = (PortableServer_POA) CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
-	if (ev._major != CORBA_NO_EXCEPTION)
-		goto out;
-
-	poa_manager = PortableServer_POA__get_the_POAManager (poa, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION)
-		goto out;
-
-	PortableServer_POAManager_activate (poa_manager, &ev);
 	if (ev._major != CORBA_NO_EXCEPTION)
 		goto out;
 
@@ -526,6 +517,38 @@ corba_init_server (void)
 
  out:
 	return retval;
+}
+
+/**
+ * corba_activate_server:
+ * @void:
+ *
+ * Activates the POA manager and thus makes the services available to the
+ * outside world.
+ **/
+void
+corba_activate_server (void)
+{
+	CORBA_Environment ev;
+	PortableServer_POAManager poa_manager;
+
+	/* Do nothing if the server is already running */
+	if (corba_have_server)
+		return;
+
+	CORBA_exception_init (&ev);
+
+	poa_manager = PortableServer_POA__get_the_POAManager (poa, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION)
+		goto out;
+
+	PortableServer_POAManager_activate (poa_manager, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION)
+		goto out;
+
+ out:
+
+	CORBA_exception_free (&ev);
 }
 
 /**

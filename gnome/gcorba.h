@@ -19,6 +19,7 @@ PortableServer_POA poa;
 
 
 int corba_init_server (void);
+void corba_activate_server (void);
 void corba_create_window (char *dir);
 
 
