@@ -161,7 +161,7 @@ int edit_translate_key (unsigned int x_keycode, long x_key, int x_state, int *cm
 	    goto fin;
 	}
 
-    if ((x_state & MyAltMask)) {
+    if ((x_state & MyAltMask) && !(x_state & ShiftMask)) {
 	switch ((int) x_key) {
 	case GDK_Left:
 	case GDK_KP_Left:

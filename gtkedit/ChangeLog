@@ -1,3 +1,8 @@
+2001-07-10  Pavel Roskin  <proski@gnu.org>
+
+	* gtkeditkey.c (edit_translate_key): When processing bindings
+	with Alt check that Shift is not pressed - it's handled later.
+
 2001-07-05  Pavel Roskin  <proski@gnu.org>
 
 	* editdraw.c: Comment fixes.
