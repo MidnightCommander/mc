@@ -1,3 +1,10 @@
+2003-02-26  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* syntax.c (edit_read_syntax_rules): Add args argument and it
+	use instead of own auto args array to share this area with ...
+	(edit_read_syntax_file): ... this.  Adjust for the above.
+	Use strncpy() instead of unsafe strcpy().
+
 2003-02-25  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* syntax.c (defines): New static variable for list of defines.
