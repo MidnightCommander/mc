@@ -442,7 +442,6 @@ create_prop_box (PrefsDlg *dlg)
         gtk_signal_connect (GTK_OBJECT (dlg->prop_box), "apply",
                             GTK_SIGNAL_FUNC (apply_callback), dlg);
 }
-                
 void
 gnome_configure_box (GtkWidget *widget, WPanel *panel)
 {
@@ -450,7 +449,7 @@ gnome_configure_box (GtkWidget *widget, WPanel *panel)
 
         dlg.panel = panel;
         dlg.prefs_pages = prefs_pages;
-        
+
         create_prop_box (&dlg);
 
         gtk_widget_show (dlg.prop_box);

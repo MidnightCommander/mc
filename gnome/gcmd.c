@@ -122,7 +122,7 @@ int
 gnome_close_panel (GtkWidget *widget, WPanel *panel)
 {
 	Dlg_head *h = panel->widget.parent;
-
+	g_print ("closing the panel\n");
 	if (panel->timer_id){
 		gtk_timeout_remove (panel->timer_id);
 		panel->timer_id = -1;

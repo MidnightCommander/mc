@@ -1,3 +1,11 @@
+1999-01-19  Jonathan Blandford  <jrb@redhat.com>
+
+	* gdialogs.c (file_op_context_create_ui): OP_DELETE now has it's
+	very own dialog. whee.
+
+	* gscreen.c (panel_create_pixmaps): now we use dir-open.xpm
+	instead of the (apparently) ugly yellow one.
+
 1999-01-19  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtkdtree.c (gtk_dtree_select_row): Wonder why the code was
@@ -7,7 +15,6 @@
 
 	* gprefs.c: applied a heavily modified patch by Dave Camp
 	<campd@oit.edu>  The preference box now works.
-
 
 1999-01-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 

@@ -43,6 +43,7 @@ int tree_panel_visible = -1;
 
 /* The pixmaps */
 #include "directory.xpm"
+#include "dir-close.xpm"
 #include "link.xpm"
 #include "dev.xpm"
 #include "listing-list.xpm"
@@ -604,7 +605,7 @@ panel_create_pixmaps (void)
 {
 	pixmaps_ready = TRUE;
 
-	create_pixmap (directory_xpm, &icon_directory_pixmap, &icon_directory_mask);
+	create_pixmap (DIRECTORY_CLOSE_XPM, &icon_directory_pixmap, &icon_directory_mask);
 	create_pixmap (link_xpm, &icon_link_pixmap, &icon_link_mask);
 	create_pixmap (dev_xpm, &icon_dev_pixmap, &icon_dev_mask);
 }
@@ -2170,7 +2171,7 @@ static GnomeUIInfo viewbar[] = {
 		GNOME_APP_PIXMAP_DATA, listing_brief_list_xpm, 0, (GdkModifierType) 0, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Detailed"), N_("Switch view to show detailed file statistics"), do_switch_to_full_listing, NULL, NULL, \
 		GNOME_APP_PIXMAP_DATA, listing_list_xpm, 0, (GdkModifierType) 0, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Custom"), N_("Switch view to show custom determined statistics"), do_switch_to_custom_listing, NULL, NULL, \
+	{ GNOME_APP_UI_ITEM, N_("Custom"), N_("Switch view to show custom determined statistics.  You can set this in the "), do_switch_to_custom_listing, NULL, NULL, \
 		GNOME_APP_PIXMAP_DATA, listing_custom_xpm, 0, (GdkModifierType) 0, NULL },
 	GNOMEUIINFO_END
 };
@@ -2218,7 +2219,7 @@ void
 x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
 	GtkWidget *status_line, *filter, *vbox, *ministatus_box;
-	GtkWidget *cwd, *back_p, *fwd_p, *up_p;
+	GtkWidget *cwd;
 	GtkWidget *hbox, *evbox, *dock, *box;
 	GnomeUIBuilderData uibdata;
 
@@ -2316,6 +2317,13 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	panel->up_b     = toolbar[1].widget;
 	panel->fwd_b    = toolbar[2].widget;
 	panel_update_marks (panel);
+	if (panel->list_type == list_brief)
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (viewbar[1].widget), TRUE);
+	else if (panel->list_type == list_full)
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (viewbar[2].widget), TRUE);
+	else if (panel->list_type == list_user)
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (viewbar[3].widget), TRUE);
+
 	/*
 	 * Here we make the view buttons.
 	 */
