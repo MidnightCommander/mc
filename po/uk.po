@@ -2331,11 +2331,11 @@ msgstr ""
 
 #: gtkedit/editmenu.c:156 gtkedit/editmenu.c:173
 msgid "&Toggle Mark       F3"
-msgstr ""
+msgstr "&Перемикнути в╕дм╕тку   F3"
 
 #: gtkedit/editmenu.c:157 gtkedit/editmenu.c:174
 msgid "&Mark Columns    S-F3"
-msgstr ""
+msgstr "В╕дм╕чати &стовпчики  S-F3"
 
 #: gtkedit/editmenu.c:159 gtkedit/editmenu.c:176
 msgid "toggle &Ins/overw Ins"
@@ -2343,27 +2343,27 @@ msgstr ""
 
 #: gtkedit/editmenu.c:161 gtkedit/editmenu.c:178
 msgid "&Copy              F5"
-msgstr "&Скоп╕ювати        F5"
+msgstr "&Скоп╕ювати             F5"
 
 #: gtkedit/editmenu.c:162 gtkedit/editmenu.c:179
 msgid "&Move              F6"
-msgstr "Пере&нести         F6"
+msgstr "Пере&нести              F6"
 
 #: gtkedit/editmenu.c:163 gtkedit/editmenu.c:180
 msgid "&Delete            F8"
-msgstr "&Стерти            F8"
+msgstr "&Стерти                 F8"
 
 #: gtkedit/editmenu.c:165 gtkedit/editmenu.c:182
 msgid "&Undo             C-u"
-msgstr "В╕д&кат           C-u"
+msgstr "В╕д&кат                C-u"
 
 #: gtkedit/editmenu.c:167 gtkedit/editmenu.c:184
 msgid "&Beginning     C-PgUp"
-msgstr "На &початок    C-PgUp"
+msgstr "На &початок         C-PgUp"
 
 #: gtkedit/editmenu.c:168 gtkedit/editmenu.c:185
 msgid "&End           C-PgDn"
-msgstr "На &к╕нець     C-PgDn"
+msgstr "На &к╕нець          C-PgDn"
 
 #: gtkedit/editmenu.c:190 gtkedit/editmenu.c:197
 msgid "&Search...         F7"
