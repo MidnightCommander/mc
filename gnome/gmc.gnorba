@@ -1,0 +1,11 @@
+[gmc_filemanager_factory]
+type=exe
+repo_id=IDL:GNOME/FileManagerFactory:1.0 IDL:GNOME/GenericFactory:1.0
+description=GNOME Midnight Commander
+location_info=gmc
+
+[gmc_filemanager_window]
+type=factory
+repo_id=IDL:GNOME/FileManagerWindow:1.0
+description=File manager window
+location_info=gmc_filemanager_factory
