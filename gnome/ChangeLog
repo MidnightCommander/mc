@@ -1,5 +1,8 @@
 2001-04-06  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.in: Add dependencies between gmc and static libraries
+	in the source tree.
+
 	* layout: New widget "findfile-Widget-find-case-check".
 
 2001-02-28  Christian Meyer  <chrisime@gnome.org>

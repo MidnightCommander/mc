@@ -16,6 +16,8 @@ CORBA_LDFLAGS = $(XLDFLAGS) @GNOME_LIBDIR@ @GNOMEGNORBA_LIBS@
 DEFS = $(XDEFS)
 LIBS = $(XLIBS) @TERMNET@
 EXTRALIBS = -L../vfs @LVFS@ -L../gtkedit -lgtkedit @LINTL@
+DEPLIBS = $(top_builddir)/vfs/@LIBVFS@ \
+	$(top_builddir)/gtkedit/@libgtkedit@ @INTLDEPS@
 INSTALL = @INSTALL@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
@@ -256,10 +258,10 @@ mx: checklinks
 	@echo -----------------------------------------------------------
 	@touch mx
 
-plain-gmc: $(OBJS) $(NORMALOBJS)
+plain-gmc: $(OBJS) $(NORMALOBJS) $(DEPLIBS)
 	$(CC) -o plain-gmc $(NORMALOBJS) $(OBJS) $(EXTRALIBS) $(LDFLAGS) $(LIBS)
 
-corba-gmc: $(OBJS) $(CORBAOBJS)
+corba-gmc: $(OBJS) $(CORBAOBJS) $(DEPLIBS)
 	$(CC) -o corba-gmc $(CORBAOBJS) $(OBJS) $(EXTRALIBS) $(CORBA_LDFLAGS) $(LIBS)
 
 gmc-client: $(CLIENTOBJS)
