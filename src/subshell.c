@@ -894,12 +894,13 @@ void sigchld_handler (int sig)
 
 	if (WIFSTOPPED (status))
 	{
-	    if (WSTOPSIG (status) == SIGTSTP)
-		/* The user has suspended the subshell.  Revive it */
-		kill (subshell_pid, SIGCONT);
-	    else
+	    if (WSTOPSIG (status) == SIGSTOP) {
 		/* The subshell has received a SIGSTOP signal */
 		subshell_stopped = TRUE;
+	    } else {
+		/* The user has suspended the subshell.  Revive it */
+		kill (subshell_pid, SIGCONT);
+	    }
 	}
 	else  /* The subshell has either exited normally or been killed */
 	{

@@ -2165,13 +2165,10 @@ sigchld_handler_no_subshell (int sig)
     
     if (pid == cons_saver_pid){
 
-#ifdef SIGTSTP
-	if (WIFSTOPPED (status))
+	if (WIFSTOPPED (status)) {
 	    /* Someone has stopped cons.saver - restart it */
 	    kill (pid, SIGCONT);
-	else
-#endif /* SIGTSTP */
-	{
+	} else {
 	    /* cons.saver has died - disable console saving */
 	    handle_console (CONSOLE_DONE);
 	    console_flag = 0;

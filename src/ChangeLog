@@ -1,5 +1,10 @@
 2002-08-09  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (sigchld_handler_no_subshell) [linux]: SIGTSTP is
+	always defined on Linux.
+	* subshell.c (sigchld_handler): No need to use SIGTSTP
+	explicitly when we really care about SIGCONT.
+
 	* ncurses.patch: Remove, it's obsolete.
 	* Makefile.am: Remove ncurses.patch.
 
