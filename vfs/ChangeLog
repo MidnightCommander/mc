@@ -1,5 +1,8 @@
 1999-11-11  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
+	* shared_ftp_fish.c (s_ungetlocalcopy): need to supply some return
+	value, too. This code is going to be killed, the sooner the better.
+
 	* *.c (mc_[un]getlocalcopy): we really need some return value,
 	because we can have errors
 

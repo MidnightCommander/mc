@@ -800,12 +800,12 @@ static char *s_getlocalcopy (vfs *me, char *path)
     return p;
 }
 
-static void s_ungetlocalcopy (vfs *me, char *path, char *local, int has_changed)
+static int s_ungetlocalcopy (vfs *me, char *path, char *local, int has_changed)
 {
     struct filp *fp = (struct filp *) s_open (me, path, O_WRONLY, 0);
     
     if (fp == NULL)
-        return;
+        return 0;
     if (!strcmp (fp->fe->local_filename, local)) {
         fp->has_changed = has_changed;
         qlock(fp->fe->bucket)--;
@@ -816,6 +816,7 @@ static void s_ungetlocalcopy (vfs *me, char *path, char *local, int has_changed)
         s_close ((void *) fp);
         mc_def_ungetlocalcopy (me, path, local, has_changed);
     }
+    return 0;
 }
 
 static void
