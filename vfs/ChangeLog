@@ -1,3 +1,7 @@
+2001-10-24  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* smbfs.h: Declare smbfs_set_debug.
+
 2001-10-20  Pavel Roskin  <proski@gnu.org>
 
 	* ftpfs.c (command): Declare with the printf attribute.
