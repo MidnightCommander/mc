@@ -1,5 +1,9 @@
 2003-11-20  Pavel Roskin  <proski@gnu.org>
 
+	* build-glib1.sh: Use more portable syntax for functions.  Fall
+	back to "ftp" for download, useful on BSD.
+	* build-glib2.sh: Likewise.
+
 	* build-glib1.sh: New file - download and compile glib 1.2.x,
 	then compile mc against it.
 	* build-glib2.sh: New file - download and compile glib 2.x with

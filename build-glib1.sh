@@ -26,10 +26,11 @@ GLIB_TARBALL="glib-$GLIB_VERSION.tar.gz"
 GLIB_URL="ftp://ftp.gtk.org/pub/gtk/v1.2/$GLIB_TARBALL"
 GLIB_INSTDIR="$MC_TOPDIR/glib-inst"
 
-function get_file() {
+get_file() {
   curl --remote-name "$1" || \
   wget --passive-ftp "$1" || \
   wget "$1" || \
+  ftp "$1" || \
   exit 1
 }
 

@@ -36,10 +36,11 @@ GETTEXT_DIR="gettext-$GETTEXT_VERSION"
 GETTEXT_TARBALL="gettext-$GETTEXT_VERSION.tar.gz"
 GETTEXT_URL="ftp://ftp.gnu.org/gnu/gettext/$GETTEXT_TARBALL"
 
-function get_file() {
+get_file() {
   curl --remote-name "$1" || \
   wget --passive-ftp "$1" || \
   wget "$1" || \
+  ftp "$1" || \
   exit 1
 }
 
