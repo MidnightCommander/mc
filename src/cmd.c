@@ -1241,7 +1241,8 @@ static void nice_cd (char *text, char *xtext, char *help, char *prefix, int to_h
     else 
 	cd_path = copy_strings (prefix, machine, to_home ? "/~/" : NULL, NULL);
     
-    do_panel_cd (MENU_PANEL, cd_path, 0);
+    if (do_panel_cd (MENU_PANEL, cd_path, 0))
+	directory_history_add (MENU_PANEL, (MENU_PANEL)->cwd);
     free (cd_path);
     free (machine);
 }
