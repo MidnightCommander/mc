@@ -1,3 +1,8 @@
+2000-08-18  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.in: adjusted list of distributed files.
+	Added rule for rebuilding Makefile
+
 2000-08-08  Pavel Roskin <proski@gnu.org>
 
 	* gtkedit.c [GTK]: don't include mousemark.h

@@ -26,9 +26,12 @@ EDITSRC = edit.c editcmd.c editdraw.c gtkedit.c gtkeditkey.c \
 EDITOBJS = edit.o editcmd.o editdraw.o gtkedit.o gtkeditkey.o \
 	propfont.o syntax.o wordproc.o bookmark.o
 
-DIST = 	Makefile.in $(EDITSRC)
+DIST = 	ChangeLog Makefile.in $(EDITSRC)
 
 all: @libgtkedit@
+
+Makefile: $(srcdir)/Makefile.in $(builddir)/config.status
+	cd $(builddir) && CONFIG_FILES=gtkedit/Makefile CONFIG_HEADERS= $(SHELL) ./config.status
 
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) -DGTK $<

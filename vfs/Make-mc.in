@@ -71,7 +71,6 @@ SAMBA_DIST_INCLUDE =		\
 	byteorder.h		\
 	charset.h		\
 	client.h		\
-	config.h		\
 	config.h.in		\
 	dlinklist.h		\
 	includes.h		\
@@ -92,7 +91,7 @@ SAMBA_DIST_INCLUDE =		\
 	rpc_wkssvc.h		\
 	rpcclient.h		\
 	smb.h			\
-	stamp-h			\
+	stamp-h.in		\
 	trans2.h		\
 	version.h
 
@@ -269,7 +268,7 @@ libvfs.a: $(VFSSOOBJS)
 	-$(RANLIB) $@
 
 Makefile: $(srcdir)/Make-mc.in $(builddir)/config.status
-	cd $(builddir) && CONFIG_FILES=$@ CONFIG_HEADERS= $(SHELL) ./config.status
+	cd $(builddir) && CONFIG_FILES=vfs/Makefile:vfs/Make-mc.in CONFIG_HEADERS= $(SHELL) ./config.status
 
 
 #

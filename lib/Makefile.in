@@ -28,7 +28,6 @@ DISTLIB = \
 	$(DESKTOP_FILES)	\
 	Makefile.in tdiff 	\
 	xnc.hlp ncurses.h 	\
-	mc.sh mc.csh 		\
 	mcserv.init 		\
 	mcserv.pamd 		\
 	tkmc.wmconfig 		\

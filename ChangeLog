@@ -1,5 +1,8 @@
 2000-08-18  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.in, lib/Makefile.in: adjusted lists of distributed
+	files
+
 	* configure.in: Simplified dependency tracking by using
 	"-include" with GNU Make
 	* autogen.sh: Exit on all failures
