@@ -1008,7 +1008,7 @@ void ftpfs_fill_names (void (*func)(char *))
     do {
 	if ((bucket = lptr->data) != 0){
 
-	    path_name = copy_strings ("/#ftp.", quser (bucket),
+	    path_name = copy_strings ("/#ftp:", quser (bucket),
 				      "@",      qhost (bucket), 
 				      qcdir(bucket), 0);
 	    (*func)(path_name);

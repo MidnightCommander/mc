@@ -926,18 +926,32 @@ directory_history_add (WPanel * panel, char *s)
     panel_update_marks (panel);
 }
 
+/* Translate ftp://user:password@host/directory to 
+              #ftp:user:password@host/directory.
+ */
+static char *
+translate_url_to_new_syntax (const char *p)
+{
+    if (strncmp (p, "ftp://", 6) == 0)
+        return copy_strings ("#ftp:", p + 6, 0);
+    else
+        return strdup (p);
+}
+
 /* Changes the current panel directory */
 int
 _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
 {
     char *directory, *olddir;
     char temp [MC_MAXPATHLEN];
+    char *translated_url;
 #ifdef USE_VFS    
     vfs *oldvfs;
     vfsid oldvfsid;
     struct vfs_stamping *parent;
 #endif    
     olddir = strdup (panel->cwd);
+    translated_url = new_dir = translate_url_to_new_syntax (new_dir);
 
     /* Convert *new_path to a suitable pathname, handle ~user */
     
@@ -951,12 +965,14 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
 	}
     }
     directory = *new_dir ? new_dir : home_dir;
-
+    
     if (mc_chdir (directory) == -1){
 	strcpy (panel->cwd, olddir);
 	free (olddir);
+        free (translated_url);
 	return 0;
     }
+    free (translated_url);
 
     /* Success: save previous directory, shutdown status of previous dir */
     strcpy (panel->lwd, olddir);

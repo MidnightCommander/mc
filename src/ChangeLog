@@ -1,3 +1,14 @@
+Mon Jun  1 15:41:20 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* main.c (translate_url_to_new_syntax): translate the common
+	ftp url syntax to the syntax used by the new vfs code.
+
+	(_do_panel_cd): First translate the path if necessary. This makes
+	it possible to enter ftp://host on the commandline and in the
+	directory hotlist. We might need to move the translation code 
+	to the vfs layer if there are other places where we want to enter 
+	ftp://host.
+
 Mon Jun  1 12:33:08 1998  Alexander V. Lukyanov <lav@yars.free.net>
 
 	* configure.in: allowed to use `configure --with-included-gettext' 

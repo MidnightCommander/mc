@@ -1,3 +1,8 @@
+Mon Jun  1 16:00:19 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* ftpfs.c (ftpfs_fill_names): use right character to seperate
+	prefix and username
+
 Mon Jun  1 14:19:20 1998  Bakeyev I. Timur <timur@comtat.kazan.ru>
 	* vfs.c (parse_ls_lga): allow a bit wider range of listings.
 
