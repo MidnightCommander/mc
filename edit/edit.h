@@ -341,11 +341,6 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion);
 #define FONT_MEAN_WIDTH 1
      
 #define get_sys_error(s) (s)
-#define open mc_open
-#define close(f) mc_close(f)
-#define read(f,b,c) mc_read(f,b,c)
-#define write(f,b,c) mc_write(f,b,c)
-#define mkdir(s,m) mc_mkdir(s,m)
 #define itoa MY_itoa
 
 #define edit_get_load_file(d,f,h) input_dialog (h, _(" Enter file name: "), f)
