@@ -22,7 +22,7 @@ set -e
 
 # Version to make patches against.
 # Make sure to have it unpacked in /usr/src
-BASE_VERSION="4.6.0-pre2"
+BASE_VERSION="4.6.0-pre3"
 
 # Local directories
 MC_BASE_DIR="/usr/src/mc-$BASE_VERSION"
