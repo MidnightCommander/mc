@@ -110,7 +110,6 @@
 #else
 
 #    include "src/main.h"		/* for char *shell */
-#    include "src/mad.h"
 #    include "src/dlg.h"
 #    include "src/widget.h"
 #    include "src/color.h"

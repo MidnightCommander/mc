@@ -1,3 +1,8 @@
+Wed Jan 27 03:34:44 1999  Timur Bakeyev  <mc@bat.ru>
+
+	* gtkedit/edit.h: including of <malloc.h> and <stdlib.h> swaped by
+	#include "global.h".
+
 1999-01-13  Jonathan Blandford  <jrb@redhat.com>
 
 	* Make.common.in (gnewdir): new path.
