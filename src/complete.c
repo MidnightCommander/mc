@@ -57,7 +57,7 @@ filename_completion_function (char *text, int state)
     static char *filename = NULL;
     static char *dirname = NULL;
     static char *users_dirname = NULL;
-    static int filename_len;
+    static size_t filename_len;
     int isdir = 1, isexec = 0;
 
     struct dirent *entry = NULL;
@@ -781,10 +781,10 @@ static WInput *input;
 static int min_end;
 static int start, end;
 
-static int insert_text (WInput *in, char *text, int len)
+static int insert_text (WInput *in, char *text, ssize_t len)
 {
-    len = min (len, strlen (text)) + start - end;
-    if (strlen (in->buffer) + len >= in->current_max_len){
+    len = min (len, (ssize_t) strlen (text)) + start - end;
+    if (strlen (in->buffer) + len >= (size_t) in->current_max_len){
     /* Expand the buffer */
     	char *narea = g_realloc (in->buffer, in->current_max_len + len + in->field_len);
 	if (narea){
@@ -792,7 +792,7 @@ static int insert_text (WInput *in, char *text, int len)
 	    in->current_max_len += len + in->field_len;
 	}
     }
-    if (strlen (in->buffer)+1 < in->current_max_len){
+    if (strlen (in->buffer)+1 < (size_t) in->current_max_len){
     	if (len > 0){
 	    int i = strlen (&in->buffer [end]);
 	    for (; i >= 0; i--)

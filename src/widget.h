@@ -201,7 +201,7 @@ WButtonBar *buttonbar_new (int visible);
 WButtonBar *find_buttonbar (Dlg_head *h);
 typedef void (*voidfn)(void);
 void define_label (Dlg_head *, int index, char *text, voidfn);
-void define_label_data (Dlg_head *h, int idx, char *text,
+void define_label_data (Dlg_head *h, int idx, const char *text,
 			buttonbarfn cback, void *data);
 void redraw_labels (Dlg_head *h);
 void buttonbar_hint (WButtonBar *bb, char *s);

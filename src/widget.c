@@ -1054,7 +1054,7 @@ push_history (WInput *in, char *text)
     };
     char *t;
     char *p;
-    int i;
+    size_t i;
 
     if (!i18n) {
 	i18n = 1;
@@ -1111,13 +1111,13 @@ new_input (WInput *in)
 static cb_ret_t
 insert_char (WInput *in, int c_code)
 {
-    int i;
+    size_t i;
 
     if (c_code == -1)
 	return MSG_NOT_HANDLED;
     
     in->need_push = 1;
-    if (strlen (in->buffer)+1 == in->current_max_len){
+    if (strlen (in->buffer)+1 == (size_t) in->current_max_len){
 	/* Expand the buffer */
 	char *narea = g_realloc (in->buffer, in->current_max_len + in->field_len);
 	if (narea){
@@ -1125,8 +1125,8 @@ insert_char (WInput *in, int c_code)
 	    in->current_max_len += in->field_len;
 	}
     }
-    if (strlen (in->buffer)+1 < in->current_max_len){
-	int l = strlen (&in->buffer [in->point]);
+    if (strlen (in->buffer)+1 < (size_t) in->current_max_len){
+	size_t l = strlen (&in->buffer [in->point]);
 	for (i = l+1; i > 0; i--)
 	    in->buffer [in->point+i] = in->buffer [in->point+i-1];
 	in->buffer [in->point] = c_code;
@@ -1626,7 +1626,7 @@ input_new (int y, int x, int color, int len, const char *def_text,
 	    if (in->history->data)
 		def_text = (char *) in->history->data;
     }
-    initial_buffer_len = 1 + max (len, strlen (def_text));
+    initial_buffer_len = 1 + max ((size_t) len, strlen (def_text));
     in->widget.options |= W_IS_INPUT;
     in->completions = NULL;
     in->completion_flags =
@@ -2304,7 +2304,7 @@ buttonbar_new (int visible)
 }
 
 static void
-set_label_text (WButtonBar * bb, int index, char *text)
+set_label_text (WButtonBar * bb, int index, const char *text)
 {
     if (bb->labels[index - 1].text)
 	g_free (bb->labels[index - 1].text);
@@ -2323,7 +2323,7 @@ find_buttonbar (Dlg_head *h)
 }
 
 void
-define_label_data (Dlg_head *h, int idx, char *text, buttonbarfn cback,
+define_label_data (Dlg_head *h, int idx, const char *text, buttonbarfn cback,
 		   void *data)
 {
     WButtonBar *bb = find_buttonbar (h);
