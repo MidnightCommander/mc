@@ -5,6 +5,10 @@
 #   (to allow spaces in filenames)
 #
 # It's assumed that lslR was generated in C locale.
+LC_ALL=C
+export LC_ALL=C
+
+AWK=@AWK@
 
 mclslRfs_list () {
 case "$1" in
@@ -15,7 +19,7 @@ case "$1" in
   *)     MYCAT="cat";;
 esac
 
-$MYCAT "$1" | @AWK@ '
+$MYCAT "$1" | $AWK '
 BEGIN {
   dir="";
   # Pattern to match 8 first fields.
@@ -31,7 +35,7 @@ BEGIN {
   else sub(/:$/, "/", dir);
   next;
 }
-{ $9 != "" } {
+( $9 != "" ) {
   # gensub() is not portable.
   name=$0
   sub(rx, "", name)
@@ -40,8 +44,6 @@ BEGIN {
   printf "%s%s%s\n", attr, dir, name
 }' 
 }
-
-export LC_ALL="C"
 
 case "$1" in
   list) mclslRfs_list "$2"; exit 0;;

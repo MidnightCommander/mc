@@ -1,3 +1,7 @@
+2003-06-24  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* extfs/lslR.in: Portability fixes.
+
 2003-06-21  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
 
 	* ftpfs.c (command): Fix misuse of the status variable.  Don't
