@@ -1,6 +1,10 @@
 Before 4.6.0
 ============
 
+Review all patches and bugs from savannah.gnu.org.
+
+Add -lcurses only is necessary.
+
 Update translations and documentation.
 
 Portability testing.
