@@ -1361,9 +1361,9 @@ msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Введ╕ть \"exit\" для повернення у Midnight Commander"
 
 #: src/cmd.c:1024
-#, fuzzy, c-format
+#, c-format
 msgid "Link %s to:"
-msgstr " посилання: %s "
+msgstr " Зробити посилання на %s: "
 
 #: src/cmd.c:1025
 msgid " Link "
@@ -2994,11 +2994,11 @@ msgstr ""
 
 #: src/main.c:2082
 msgid "+number"
-msgstr ""
+msgstr "+число"
 
 #: src/main.c:2083
 msgid "Set initial line number for the internal editor"
-msgstr ""
+msgstr "Встановити номер початкового рядка для редактора"
 
 #: src/main.c:2085
 msgid ""
@@ -3078,12 +3078,11 @@ msgstr "Журналювати д╕алог по FTP у вказаний файл"
 
 #: src/main.c:2207
 msgid "Set debug level"
-msgstr ""
+msgstr "Встановити р╕вень налагодження"
 
 #: src/main.c:2211
-#, fuzzy
 msgid "Print data directory"
-msgstr "каталог"
+msgstr "Надрукувати каталог даних"
 
 #: src/main.c:2213
 msgid "Requests to run in black and white"
@@ -3098,9 +3097,8 @@ msgid "Disables subshell support"
 msgstr "Вимика╓ п╕дтримку п╕доболонки"
 
 #: src/main.c:2220
-#, fuzzy
 msgid "Force subshell execution"
-msgstr "вст. UID при виконанн╕"
+msgstr "Примусове виконання через п╕доболонку"
 
 #: src/main.c:2223
 msgid "Prints working directory at program exit"
