@@ -34,7 +34,6 @@ the GNOME editions.
 %package -n gmc
 Summary:  Midnight Commander visual shell (GNOME version)
 Requires: mc-common >= %{PACKAGE_VERSION}
-BuildPrereq: stylesheets
 Group:    Interface/Desktops
 
 %description -n gmc
@@ -115,6 +114,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{prefix}/share/pixmaps/mc
 
 %changelog
+* Sun May 20 2001 Pavel Roskin <proski@gnu.org>
+- Don't require stylesheets, since HTML files are now in the tarball.
+
 * Thu Apr 19 2001 Pavel Roskin <proski@gnu.org>
 - Remove package mcserv. Drop dependency on PAM.
 
