@@ -1,3 +1,8 @@
+2002-09-18  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* slerr.c (SLang_doerror): Use error parameter.  Eliminate
+	err[] array.
+
 2002-08-21  Pavel Roskin  <proski@gnu.org>
 
 	* slsmg.c (Fake_Alt_Char_Pairs): Update from slang-1.4.5.  This

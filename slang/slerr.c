@@ -27,22 +27,12 @@ volatile int SLKeyBoard_Quit = 0;
 
 void SLang_doerror (char *error)
 {
-   char err [1024];
-   char *str = NULL;
-
-   *err = 0;
-   
-   str = "Slang/Midnight Commander unknown error";
-
-   g_snprintf(err, sizeof (err), "S-Lang Error: %s", str);
-   
    if (SLang_Error_Routine == NULL)
      {
-	fputs (err, stderr);
-	fputs("\r\n", stderr);
+	fprintf (stderr, "S-Lang Error: %s\r\n", error);
      }
    else
-     (*SLang_Error_Routine)(err);
+     (*SLang_Error_Routine)(error);
 }
 
 
