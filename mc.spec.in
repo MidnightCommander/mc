@@ -25,7 +25,7 @@ files, and poke into RPMs for specific files.  :-)
 %package -n gmc
 Summary:  Midnight Commander visual shell (GNOME version)
 Requires: mc >= %{PACKAGE_VERSION}
-BuildPreq: stylesheets
+BuildPrereq: stylesheets
 Group:    Interface/Desktops
 
 %description -n gmc
