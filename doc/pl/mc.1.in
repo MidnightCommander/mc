@@ -200,7 +200,9 @@ zawiera funkcjê klawiszy. Wiêkszo¶æ z tych komend wywo³uje jak±¶ akcjê przede
 wszystkim na jednym lub kilku wybranych plikach.
 .PP
 Sekcja
+.\"LINK2"
 .I Panele katalogowe
+.\"Directory Panels"
 opisuje klawisze, które zaznaczaj± plik lub pliki jako docelowe do dalszych
 dzia³añ (akcj± jest najczê¶ciej jedna z tych przedstawionych w menu plików).
 .PP
@@ -1337,7 +1339,7 @@ menu bêdzie aktywowane, w przeciwnym wypadku zostaniesz tylko przeniosiony
 do tytu³ów w tym menu i bêdziesz musia³ wybraæ opcjê rêcznie przy u¿yciu
 strza³ek b±d¼ te¿ przy u¿yciu pierwszej litery z nazwy konkretnego menu.
 .PP
-.IR Mix all files .
+.I Mix all files.
 Je¶li ta opcja jest w³±czona, wszystkie pliki i katalogi s± pomieszane razem.
 Je¶li za¶ jest wy³±czona, katalogi (i dowi±zania do nich), s± listowane na
 pocz±tku a pozosta³e pliki dopiero za nimi.
