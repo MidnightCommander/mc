@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"POT-Creation-Date: 2001-11-29 23:51+0800\n"
-"PO-Revision-Date: 2001-12-01 21:30+0800\n"
+"POT-Creation-Date: 2001-12-01 22:18+0800\n"
+"PO-Revision-Date: 2001-12-01 22:57+0800\n"
 "Last-Translator: Wang Jian <lark@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -75,10 +75,12 @@ msgid ""
 " \n"
 " Increase edit.h:MAXBUF and recompile the editor. "
 msgstr ""
+" \n"
+" 请增大 edit.h:MAXBUF 并重新编译编辑器。"
 
 #: edit/edit.c:2535
 msgid "User menu available only in mcedit invoked from mc"
-msgstr ""
+msgstr "用户菜单仅在从 mc 中启动的 mcedit 中才有"
 
 #: edit/edit.h:355
 msgid "&Dismiss"
@@ -89,18 +91,18 @@ msgstr "取消(&D)"
 #: edit/editcmd.c:2338 edit/editmenu.c:37 edit/editoptions.c:69
 #: src/boxes.c:144 src/boxes.c:278 src/boxes.c:378 src/boxes.c:469
 #: src/boxes.c:616 src/boxes.c:753 src/boxes.c:986 src/boxes.c:1056
-#: src/filegui.c:798 src/find.c:151 src/layout.c:365 src/option.c:135
+#: src/filegui.c:798 src/find.c:151 src/layout.c:366 src/option.c:135
 #: src/wtools.c:522
 msgid "&Ok"
 msgstr "确认(&O)"
 
 #: edit/editcmd.c:241
 msgid " Error writing to pipe: "
-msgstr ""
+msgstr " 写入管道时发生错误："
 
 #: edit/editcmd.c:247
 msgid " Failed trying to open pipe for writing: "
-msgstr ""
+msgstr " 试图打开管道写入时失败："
 
 #: edit/editcmd.c:321
 msgid "Quick save "
@@ -121,7 +123,7 @@ msgstr "备份 -->"
 #: src/boxes.c:467 src/boxes.c:613 src/boxes.c:751 src/boxes.c:1056
 #: src/chmod.c:107 src/chown.c:77 src/cmd.c:839 src/filegui.c:781
 #: src/find.c:151 src/hotlist.c:123 src/hotlist.c:495 src/hotlist.c:785
-#: src/hotlist.c:882 src/layout.c:366 src/learn.c:59 src/option.c:136
+#: src/hotlist.c:882 src/layout.c:367 src/learn.c:59 src/option.c:136
 #: src/panelize.c:73 src/view.c:398 src/wtools.c:101 src/wtools.c:352
 #: src/wtools.c:520
 msgid "&Cancel"
@@ -133,7 +135,7 @@ msgstr "扩展名："
 
 #: edit/editcmd.c:338
 msgid " Edit Save Mode "
-msgstr ""
+msgstr " 编辑保存模式 "
 
 #: edit/editcmd.c:403
 msgid " Save As "
@@ -151,7 +153,7 @@ msgstr " 警告 "
 
 #: edit/editcmd.c:418
 msgid " A file already exists with this name. "
-msgstr ""
+msgstr " 同名文件已存在。"
 
 #. Push buttons to over-write the current file, or cancel the operation
 #: edit/editcmd.c:420
@@ -198,7 +200,7 @@ msgstr " 宏 "
 #. Input line for a single key press follows the ':'
 #: edit/editcmd.c:592
 msgid " Press the macro's new hotkey: "
-msgstr ""
+msgstr " 按下宏的新的热键："
 
 #. This heads the 'Save Macro' dialog box
 #: edit/editcmd.c:611
@@ -216,7 +218,7 @@ msgstr " 加载宏 "
 
 #: edit/editcmd.c:680
 msgid " Confirm save file? : "
-msgstr ""
+msgstr " 确认保存文件？："
 
 #. Buttons to 'Confirm save file' query
 #: edit/editcmd.c:682
@@ -232,6 +234,8 @@ msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
 msgstr ""
+" 当前文字被修改但没有保存。\n"
+" 选择继续将丢失这些修改。"
 
 #: edit/editcmd.c:706 edit/editcmd.c:731 edit/editcmd.c:878
 msgid "Continue"
@@ -243,7 +247,7 @@ msgstr " 加载 "
 
 #: edit/editcmd.c:878 edit/editcmd.c:976
 msgid " Block is large, you may not be able to undo this action. "
-msgstr ""
+msgstr " 块过大，您可能无法撤消这个动作。"
 
 #: edit/editcmd.c:976
 msgid " Continue "
@@ -279,7 +283,7 @@ msgstr " 确认替换 "
 
 #: edit/editcmd.c:1086 edit/editcmd.c:1167
 msgid "scanf &Expression"
-msgstr ""
+msgstr "scanf 表达式(&E)"
 
 #: edit/editcmd.c:1088
 msgid "replace &All"
@@ -291,11 +295,11 @@ msgstr "替换时提示(&O)"
 
 #: edit/editcmd.c:1092 edit/editcmd.c:1169
 msgid "&Backwards"
-msgstr ""
+msgstr "向上(&B)"
 
 #: edit/editcmd.c:1094 edit/editcmd.c:1171
 msgid "&Regular expression"
-msgstr ""
+msgstr "正则表达式(&R)"
 
 #: edit/editcmd.c:1096 edit/editcmd.c:1173
 msgid "&Whole words only"
@@ -307,15 +311,15 @@ msgstr "大小写敏感(&S)"
 
 #: edit/editcmd.c:1102
 msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr ""
+msgstr " 输入替换参数的顺序，例如 3,2,1,4 "
 
 #: edit/editcmd.c:1106
 msgid " Enter replacement string:"
-msgstr ""
+msgstr " 输入替换字符串："
 
 #: edit/editcmd.c:1110 edit/editcmd.c:1179 src/view.c:1932
 msgid " Enter search string:"
-msgstr ""
+msgstr " 输入查找字符串："
 
 #: edit/editcmd.c:1129 edit/editcmd.c:1763 edit/editcmd.c:1794
 #: edit/editcmd.c:1796
@@ -326,176 +330,176 @@ msgstr " 替换 "
 #: edit/editcmd.c:1904 src/view.c:1463 src/view.c:1542 src/view.c:1662
 #: src/view.c:1674 src/view.c:1890 src/view.c:1932
 msgid " Search "
-msgstr ""
+msgstr " 查找 "
 
 #: edit/editcmd.c:1565
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
-msgstr ""
+msgstr " 无效的正则表达式，或者有太多转换符的 scanf 表达式 "
 
 #. "Invalid regexp string or scanf string"
 #: edit/editcmd.c:1765
 msgid " Error in replacement format string. "
-msgstr ""
+msgstr " 在替换格式串中有错误。"
 
 #: edit/editcmd.c:1793
 #, c-format
 msgid " %ld replacements made. "
-msgstr ""
+msgstr " 替换了 %ld 处。"
 
 #: edit/editcmd.c:1796 edit/editcmd.c:1876 edit/editcmd.c:1904
 msgid " Search string not found. "
-msgstr ""
+msgstr " 没有找到字符串。"
 
 #. in response to number of bookmarks added because of string being found %d times
 #: edit/editcmd.c:1873
 #, c-format
 msgid " %d finds made, %d bookmarks added "
-msgstr ""
+msgstr " 找到 %d 匹配项，添加了 %d 个书签 "
 
 #: edit/editcmd.c:1922
 msgid " Quit "
-msgstr ""
+msgstr " 退出 "
 
 #: edit/editcmd.c:1922
 msgid " File was modified, Save with exit? "
-msgstr ""
+msgstr " 文件被修改，保存并退出？"
 
 #: edit/editcmd.c:1922
 msgid "Cancel quit"
-msgstr ""
+msgstr "取消退出"
 
 #: edit/editcmd.c:1922 src/cmd.c:228 src/file.c:1798 src/file.c:2157
 #: src/filegui.c:564 src/hotlist.c:1006 src/main.c:808 src/screen.c:1979
 #: src/subshell.c:724 src/subshell.c:750 src/tree.c:755 src/view.c:398
 msgid "&Yes"
-msgstr ""
+msgstr "是(&Y)"
 
 #: edit/editcmd.c:1922 src/cmd.c:228 src/file.c:1798 src/file.c:2157
 #: src/filegui.c:563 src/hotlist.c:1006 src/main.c:808 src/screen.c:1979
 #: src/subshell.c:724 src/subshell.c:750 src/tree.c:755 src/view.c:398
 msgid "&No"
-msgstr ""
+msgstr "否(&N)"
 
 #: edit/editcmd.c:2029
 msgid " Copy to clipboard "
-msgstr ""
+msgstr " 复制到剪贴板 "
 
 #: edit/editcmd.c:2029 edit/editcmd.c:2042
 msgid " Unable to save to file. "
-msgstr ""
+msgstr " 无法保存到文件。"
 
 #: edit/editcmd.c:2042
 msgid " Cut to clipboard "
-msgstr ""
+msgstr " 剪切到剪贴板 "
 
 #: edit/editcmd.c:2062 src/view.c:1837
 msgid " Goto line "
-msgstr ""
+msgstr " 转到行 "
 
 #: edit/editcmd.c:2062
 msgid " Enter line: "
-msgstr ""
+msgstr " 输入行号："
 
 #: edit/editcmd.c:2081 edit/editcmd.c:2094
 msgid " Save Block "
-msgstr ""
+msgstr " 保存块 "
 
 #: edit/editcmd.c:2106
 msgid " Insert File "
-msgstr ""
+msgstr " 插入文件 "
 
 #: edit/editcmd.c:2119
 msgid " Insert file "
-msgstr ""
+msgstr " 插入文件 "
 
 #: edit/editcmd.c:2119
 msgid " Error trying to insert file. "
-msgstr ""
+msgstr " 试图插入文件时发生错误。"
 
 #: edit/editcmd.c:2136
 msgid " Sort block "
-msgstr ""
+msgstr " 排序块 "
 
 #: edit/editcmd.c:2136 edit/editcmd.c:2220
 msgid " You must first highlight a block of text. "
-msgstr ""
+msgstr " 您必需先突出显示一个文字块。"
 
 #: edit/editcmd.c:2143
 msgid " Run Sort "
-msgstr ""
+msgstr " 运行 sort "
 
 #: edit/editcmd.c:2144
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr ""
+msgstr " 输入排序选项(查看manpage)，用空格分隔："
 
 #: edit/editcmd.c:2155 edit/editcmd.c:2160
 msgid " Sort "
-msgstr ""
+msgstr " 排序 "
 
 #: edit/editcmd.c:2156
 msgid " Error trying to execute sort command "
-msgstr ""
+msgstr " 试图执行 sort 命令时发生错误 "
 
 #: edit/editcmd.c:2161
 msgid " Sort returned non-zero: "
-msgstr ""
+msgstr " Sort 返回非零值："
 
 #: edit/editcmd.c:2194
 msgid "Error create script:"
-msgstr ""
+msgstr " 创建脚本时发生错误："
 
 #: edit/editcmd.c:2200
 msgid "Error read script:"
-msgstr ""
+msgstr " 读取脚本时发生错误："
 
 #: edit/editcmd.c:2207
 msgid "Error close script:"
-msgstr ""
+msgstr " 关闭脚本时发生错误："
 
 #: edit/editcmd.c:2212
 msgid "Script created:"
-msgstr ""
+msgstr "脚本被创建："
 
 #: edit/editcmd.c:2219
 msgid "Process block"
-msgstr ""
+msgstr "处理块"
 
 #: edit/editcmd.c:2262
 msgid "Error trying to stat file:"
-msgstr ""
+msgstr "试图 stat 文件时发生错误："
 
 #: edit/editcmd.c:2331
 msgid " Mail "
-msgstr ""
+msgstr " 邮件 "
 
 #: edit/editcmd.c:2342
 msgid " Copies to"
-msgstr ""
+msgstr " 复制到 "
 
 #: edit/editcmd.c:2346
 msgid " Subject"
-msgstr ""
+msgstr " 标题 "
 
 #: edit/editcmd.c:2350
 msgid " To"
-msgstr ""
+msgstr " 收件人 "
 
 #: edit/editcmd.c:2352
 msgid " mail -s <subject> -c <cc> <to>"
-msgstr ""
+msgstr " mail -s <subject> -c <cc> <to>"
 
 #: edit/editmenu.c:55
 msgid " Word wrap "
-msgstr ""
+msgstr " 自动换行 "
 
 #: edit/editmenu.c:56
 msgid " Enter line length, 0 for off: "
-msgstr ""
+msgstr " 输入行长度，0 表示不指定："
 
 #: edit/editmenu.c:67
 msgid " About "
-msgstr ""
+msgstr " 关于 "
 
 #: edit/editmenu.c:68
 msgid ""
@@ -507,98 +511,105 @@ msgid ""
 "       A user friendly text editor written\n"
 "           for the Midnight Commander.\n"
 msgstr ""
+"\n"
+"        Cooledit   v3.11.5\n"
+"\n"
+" 版权所有 (C) 1996 自由软件基金会(FSF)\n"
+"\n"
+"     为 Midnight Commander 开发的\n"
+"       对用户友好的文字编辑器。\n"
 
 #: edit/editmenu.c:120 edit/editmenu.c:139
 msgid "&Open file..."
-msgstr "打开文件(&O)"
+msgstr "打开文件(&O)..."
 
 #: edit/editmenu.c:121
 msgid "&New              C-n"
-msgstr ""
+msgstr "新建(&N)         C-n"
 
 #: edit/editmenu.c:123 edit/editmenu.c:142
 msgid "&Save              F2"
-msgstr ""
+msgstr "保存(&S)           F2"
 
 #: edit/editmenu.c:124 edit/editmenu.c:143
 msgid "save &As...       F12"
-msgstr ""
+msgstr "保存为(&A)...     F12"
 
 #: edit/editmenu.c:126 edit/editmenu.c:145
 msgid "&Insert file...   F15"
-msgstr ""
+msgstr "插入文件(&I)...   F15"
 
 #: edit/editmenu.c:127
 msgid "copy to &File...  C-f"
-msgstr ""
+msgstr "复制到文件(&F)... C-f"
 
 #: edit/editmenu.c:129 edit/editmenu.c:148
 msgid "&User menu...     F11"
-msgstr ""
+msgstr "用户菜单(&U)...   F11"
 
 #: edit/editmenu.c:132 edit/editmenu.c:151
 msgid "a&Bout...            "
-msgstr ""
+msgstr "关于(&B)...          "
 
 #: edit/editmenu.c:134 edit/editmenu.c:153
 msgid "&Quit             F10"
-msgstr ""
+msgstr "退出(&Q)          F10"
 
 #: edit/editmenu.c:140
 msgid "&New            C-x k"
-msgstr ""
+msgstr "新建(&N)        C-x k"
 
 #: edit/editmenu.c:146
 msgid "copy to &File...     "
-msgstr ""
+msgstr "复制到文件(&F)...    "
 
 #: edit/editmenu.c:158 edit/editmenu.c:175
 msgid "&Toggle Mark       F3"
-msgstr ""
+msgstr "翻转标记(&T)       F3"
 
 #: edit/editmenu.c:159 edit/editmenu.c:176
 msgid "&Mark Columns    S-F3"
-msgstr ""
+msgstr "标记列(&M)       S-F3"
 
 #: edit/editmenu.c:161 edit/editmenu.c:178
 msgid "toggle &Ins/overw Ins"
-msgstr ""
+msgstr "翻转插入/覆盖(&I) Ins"
 
 #: edit/editmenu.c:163 edit/editmenu.c:180
 msgid "&Copy              F5"
-msgstr ""
+msgstr "复制(&C)           F5"
 
 #: edit/editmenu.c:164 edit/editmenu.c:181
 msgid "&Move              F6"
-msgstr ""
+msgstr "移动(&M)           F6"
 
 #: edit/editmenu.c:165 edit/editmenu.c:182
 msgid "&Delete            F8"
-msgstr ""
+msgstr "删除(&D)           F8"
 
 #: edit/editmenu.c:167 edit/editmenu.c:184
 msgid "&Undo             C-u"
-msgstr ""
+msgstr "撤消(&U)          C-u"
 
 #: edit/editmenu.c:169 edit/editmenu.c:186
 msgid "&Beginning     C-PgUp"
-msgstr ""
+msgstr "开始(&B)       C-PgUp"
 
 #: edit/editmenu.c:170 edit/editmenu.c:187
 msgid "&End           C-PgDn"
-msgstr ""
+msgstr "结尾(&E)       C-PgDn"
 
 #: edit/editmenu.c:192 edit/editmenu.c:199
 msgid "&Search...         F7"
-msgstr ""
+msgstr "查找(&S)...        F7"
 
 #: edit/editmenu.c:193 edit/editmenu.c:200
 msgid "search &Again     F17"
-msgstr ""
+msgstr "再次查找(&A)      F17"
 
 #: edit/editmenu.c:194 edit/editmenu.c:201
 msgid "&Replace...        F4"
-msgstr ""
+msgstr "替换(&R)...        F4"
 
 #: edit/editmenu.c:206 edit/editmenu.c:229
 msgid "&Goto line...            M-l"
@@ -714,12 +725,12 @@ msgstr "动态划分段落"
 
 #: edit/editoptions.c:39
 msgid "Type writer wrap"
-msgstr ""
+msgstr "打字机换行"
 
 #. 2
 #: edit/editoptions.c:72
 msgid "Word wrap line length : "
-msgstr "自动换行位置："
+msgstr "换行位置："
 
 #. 4
 #: edit/editoptions.c:78
@@ -758,7 +769,7 @@ msgstr ""
 #. 13
 #: edit/editoptions.c:110
 msgid "Wrap mode"
-msgstr ""
+msgstr "换行模式"
 
 #. 15
 #: edit/editoptions.c:116
@@ -909,8 +920,7 @@ msgstr " 后台协议错误 "
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
-msgstr ""
-" 后台进程发来一个请求，参数过多无法处理。 \n"
+msgstr " 后台进程发来一个请求，参数过多无法处理。 \n"
 
 #: src/boxes.c:71
 msgid " Listing mode "
@@ -1380,8 +1390,7 @@ msgstr " 命令历史 "
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
-msgstr ""
-" 不是一个 xterm 或 Linux 控制台；\n"
+msgstr " 不是一个 xterm 或 Linux 控制台；\n"
 
 #: src/cmd.c:942
 msgid "Type `exit' to return to the Midnight Commander"
@@ -2494,7 +2503,7 @@ msgstr ""
 
 #: src/hotlist.c:1404
 msgid "&Merge"
-msgstr ""
+msgstr "合并(&M)"
 
 #: src/hotlist.c:1416
 msgid " Entries from ~/"
@@ -2570,118 +2579,118 @@ msgstr "创建： %s"
 #: src/info.c:171
 #, c-format
 msgid "Size:      %s"
-msgstr ""
+msgstr "大小：     %s"
 
 #: src/info.c:174
 #, c-format
 msgid " (%d block)"
-msgstr ""
+msgstr " (%d 个块)"
 
 #: src/info.c:174
 #, c-format
 msgid " (%d blocks)"
-msgstr ""
+msgstr " (%d 个块)"
 
 #: src/info.c:180
 #, c-format
 msgid "Owner:     %s/%s"
-msgstr ""
+msgstr "所有者：   %s/%s"
 
 #: src/info.c:185
 #, c-format
 msgid "Links:     %d"
-msgstr ""
+msgstr "链接：     %d"
 
 #: src/info.c:189
 #, c-format
 msgid "Mode:      %s (%04o)"
-msgstr ""
+msgstr "模式：     %s (%04o)"
 
 #: src/info.c:194
 #, c-format
 msgid "Location:  %Xh:%Xh"
-msgstr ""
+msgstr "位置：     %Xh:%Xh"
 
 #: src/info.c:204
 msgid "File:       None"
-msgstr ""
+msgstr "文件：      无"
 
 #: src/layout.c:155
 msgid "&Vertical"
-msgstr ""
+msgstr "垂直(&V)"
 
 #: src/layout.c:156
 msgid "&Horizontal"
-msgstr ""
-
-#: src/layout.c:166
-msgid "&Xterm hintbar"
-msgstr ""
+msgstr "水平(&H)"
 
 #: src/layout.c:167
-msgid "h&Intbar visible"
-msgstr ""
+msgid "&Xterm hintbar"
+msgstr "Xterm 提示栏(&X)"
 
 #: src/layout.c:168
+msgid "h&Intbar visible"
+msgstr "提示栏可见(&I)"
+
+#: src/layout.c:169
 msgid "&Keybar visible"
 msgstr ""
 
-#: src/layout.c:169
-msgid "command &Prompt"
-msgstr ""
-
 #: src/layout.c:170
-msgid "show &Mini status"
-msgstr ""
+msgid "command &Prompt"
+msgstr "命令提示(&P)"
 
 #: src/layout.c:171
-msgid "menu&Bar visible"
-msgstr ""
+msgid "show &Mini status"
+msgstr "显示简单状态(&M)"
 
 #: src/layout.c:172
-msgid "&Equal split"
-msgstr ""
+msgid "menu&Bar visible"
+msgstr "菜单可见(&B)"
 
 #: src/layout.c:173
-msgid "pe&Rmissions"
-msgstr ""
+msgid "&Equal split"
+msgstr "平分(&E)"
 
 #: src/layout.c:174
-msgid "&File types"
-msgstr ""
+msgid "pe&Rmissions"
+msgstr "权限(&R)"
 
-#: src/layout.c:367 src/learn.c:60 src/learn.c:183 src/option.c:137
+#: src/layout.c:175
+msgid "&File types"
+msgstr "文件类型(&F)"
+
+#: src/layout.c:368 src/learn.c:60 src/learn.c:183 src/option.c:137
 msgid "&Save"
-msgstr ""
+msgstr "保存(&S)"
 
 #. length of line with '<' '>' buttons
-#: src/layout.c:375
-msgid " Layout "
-msgstr ""
-
 #: src/layout.c:376
-msgid " Panel split "
-msgstr ""
+msgid " Layout "
+msgstr " 布局 "
 
 #: src/layout.c:377
+msgid " Panel split "
+msgstr " 显示分隔 "
+
+#: src/layout.c:378
 msgid " Highlight... "
-msgstr ""
+msgstr " 突出显示... "
 
-#: src/layout.c:378 src/option.c:148
+#: src/layout.c:379 src/option.c:148
 msgid " Other options "
-msgstr ""
+msgstr " 其它选项 "
 
-#: src/layout.c:379
+#: src/layout.c:380
 msgid "output lines"
-msgstr ""
+msgstr "输出行"
 
-#: src/layout.c:446
+#: src/layout.c:447
 msgid "Layout"
-msgstr ""
+msgstr "布局"
 
 #: src/learn.c:74
 msgid " Learn keys "
-msgstr ""
+msgstr " 学习键 "
 
 #: src/learn.c:91
 msgid " Teach me a key "
@@ -2756,6 +2765,9 @@ msgid ""
 " deleted your working directory, or given yourself \n"
 " extra access permissions with the \"su\" command? "
 msgstr ""
+" Commander 无法进入 subshell 声称的您所在的目录。 \n"
+" 也许您删除了工作目录，或者通过“su”命令给您的   \n"
+" 进程额外的访问权限？"
 
 #: src/main.c:729
 msgid "Press any key to continue..."
@@ -2984,7 +2996,7 @@ msgstr "确认(&O)..."
 
 #: src/main.c:1248
 msgid "&Display bits..."
-msgstr ""
+msgstr "显示位(&D)..."
 
 #: src/main.c:1250
 msgid "learn &Keys..."
@@ -3050,38 +3062,45 @@ msgstr "没有设置 TERM 环境变量！\n"
 msgid "Thank you for using GNU Midnight Commander"
 msgstr "感谢您使用 GNU Midnight Commander"
 
-#: src/main.c:2301
+#: src/main.c:2306
 msgid ""
 "Usage is:\n"
 "\n"
 "mc [flags] [this_dir] [other_panel_dir]\n"
 "\n"
 msgstr ""
+"用法：\n"
+"\n"
+"mc [flags] [this_dir] [other_panel_dir]\n"
+"\n"
 
-#: src/main.c:2304
+#: src/main.c:2309
 msgid "-a, --stickchars   Force use of +, -, | for line drawing.\n"
-msgstr ""
+msgstr "-a, --stickchars   强制使用 +, -, | 来画线。\n"
 
-#: src/main.c:2306
+#: src/main.c:2311
 msgid "-b, --nocolor      Force black and white display.\n"
-msgstr ""
+msgstr "-b, --nocolor      强制使用黑白显示。\n"
 
-#: src/main.c:2308
+#: src/main.c:2313
 msgid "-B, --background   [DEVEL-ONLY: Debug the background code]\n"
-msgstr ""
+msgstr "-B, --background   [仅开发使用：调试后台代码]\n"
 
-#: src/main.c:2310
+#: src/main.c:2315
 msgid ""
 "-c, --color        Force color mode.\n"
 "-C, --colors       Specify colors (use --help-colors to get a list).\n"
 "-d, --nomouse      Disable mouse support.\n"
 msgstr ""
+"-c, --color        强制使用彩色模式。\n"
+"-C, --colors       指定颜色(使用 --help-colors 以获取列表)。\n"
+"-d, --nomouse      禁用鼠标支持。\n"
 
-#: src/main.c:2314
+#: src/main.c:2319
 msgid "-e, --edit         Startup the internal editor.\n"
-msgstr ""
+msgstr "-e, --edit         启动内部编辑器。\n"
 
-#: src/main.c:2316
+#: src/main.c:2321
 msgid ""
 "-f, --libdir       Print configured paths.\n"
 "-h, --help         Shows this help message.\n"
@@ -3089,53 +3108,69 @@ msgid ""
 "termcap\n"
 "                   default.\n"
 msgstr ""
-
-#: src/main.c:2321
-msgid "-l, --ftplog file  Log ftpfs commands to the file.\n"
-msgstr ""
-
-#: src/main.c:2324
-msgid "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
-msgstr ""
+"-f, --libdir       打印配置的目录。\n"
+"-h, --help         显示帮助信息。\n"
+"-k, --resetsoft    复位软键(仅用于 HP 终端)到 terminfo/termcap 默认值。\n"
 
 #: src/main.c:2326
+msgid "-l, --ftplog file  Log ftpfs commands to the file.\n"
+msgstr "-l, --ftplog file  记录 ftpfs 命令到文件。\n"
+
+#: src/main.c:2329
+msgid "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
+msgstr "-M, --memory file  [仅开发使用：记录大量信息到文件。]\n"
+
+#: src/main.c:2331
 msgid ""
 "-P, --printwd      At exit, print the last working directory.\n"
 "-s, --slow         Disables verbose operation (for slow terminals).\n"
 msgstr ""
+"-P, --printwd      退出时，打印最后的工作目录。\n"
+"-s, --slow         禁用冗余操作(用于慢速终端)。\n"
 
-#: src/main.c:2329
+#: src/main.c:2334
 msgid "-t, --termcap      Activate support for the TERMCAP variable.\n"
-msgstr ""
+msgstr "-t, --termcap      激活 TERMCAP 变量支持。\n"
 
-#: src/main.c:2332
+#: src/main.c:2337
 msgid ""
 "-S, --createcmdile Create command file to set default directory upon exit.\n"
 msgstr ""
+"-S, --createcmdile 创建命令行文件，在退出时设置默认目录。\n"
 
-#: src/main.c:2335
+#: src/main.c:2340
 msgid ""
 "-u, --nosubshell   Disable the concurrent subshell mode.\n"
 "-U, --subshell     Force the concurrent subshell mode.\n"
 "-r, --forceexec    Force subshell execution.\n"
 msgstr ""
+"-u, --nosubshell   禁用并发 subshell 模式。\n"
+"-U, --subshell     强制使用并发 subshell 模式。\n"
+"-r, --forceexec    强制 subshell 执行。\n"
 
-#: src/main.c:2339
+#: src/main.c:2344
 msgid ""
 "-v, --view fname   Start up into the viewer mode.\n"
 "-V, --version      Report version and configuration options.\n"
 "-x, --xterm        Force xterm mouse support and screen save/restore.\n"
 "+number            number it is the start line number of file for `mcedit'.\n"
 msgstr ""
+"-v, --view fname   启动到查看器模式。\n"
+"-V, --version      报告版本和配置选项。\n"
+"-x, --xterm        强制使用 xterm 鼠标支持和屏幕保存/恢复。\n"
+"+number            “mcedit”开始编辑文件的行号。\n"
 
-#: src/main.c:2343
+#: src/main.c:2348
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
 "to mc-devel@gnome.org\n"
 msgstr ""
+"\n"
+"请发送错误报告(包含有`mc -V`的输出)\n"
+"到 mc-devel@gnome.org\n"
 
-#: src/main.c:2358
+#: src/main.c:2363
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -3155,98 +3190,117 @@ msgid ""
 "   brightcyan, lightgray and white\n"
 "\n"
 msgstr ""
+"--colors KEYWORDS={FORE},{BACK}\n"
+"\n"
+"{FORE} 和 {BACK} 可被忽略，默认值将被使用\n"
+"\n"
+"关键字：\n"
+"  全局：       errors, reverse, gauge, input\n"
+"  文件显示：   normal, selected, marked, markselect\n"
+"  对话框：     dnormal, dfocus, dhotnormal, dhotfocus\n"
+"  菜单：       menu, menuhot, menusel, menuhotsel\n"
+"  帮助：       helpnormal, helpitalic, helplink, helpslink\n"
+"  文件类型：   directory, execute, link, device, special, core\n"
+"\n"
+"颜色：\n"
+"  black, gray, red, brightred, green, brightgreen, brown,\n"
+"  yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"  brightcyan, lightgray and white\n"
+"\n"
 
-#: src/main.c:2407
+#: src/main.c:2412
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr "Midnight Commander 的库文件目录：%s\n"
 
-#: src/main.c:2421
+#: src/main.c:2426
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
+"选项 -m 过时了。请在选项菜单中查看“显示位...”\n"
 
-#: src/main.c:2462
+#: src/main.c:2467
+#, fuzzy
 msgid "Use to debug the background code"
-msgstr ""
+msgstr "用来调试后台代码"
 
-#: src/main.c:2468
+#: src/main.c:2473
 msgid "Request to run in color mode"
 msgstr "请求运行在彩色模式"
 
-#: src/main.c:2470
+#: src/main.c:2475
 msgid "Specifies a color configuration"
 msgstr "指定颜色配置"
 
-#: src/main.c:2474
+#: src/main.c:2479
 msgid "Edits one file"
 msgstr "编辑一个文件"
 
-#: src/main.c:2478
+#: src/main.c:2483
 msgid "Displays this help message"
 msgstr "显示该帮助信息"
 
-#: src/main.c:2480
+#: src/main.c:2485
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "显示如何修改配色方案的帮助"
 
-#: src/main.c:2483
+#: src/main.c:2488
 msgid "Log ftp dialog to specified file"
 msgstr "记录 ftp 对话到指定的文件"
 
-#: src/main.c:2490
+#: src/main.c:2495
 msgid "Obsolete"
 msgstr "过时"
 
-#: src/main.c:2492
+#: src/main.c:2497
 msgid "Requests to run in black and white"
 msgstr "请求运行在黑白模式"
 
-#: src/main.c:2494
+#: src/main.c:2499
 msgid "Disable mouse support in text version"
 msgstr "在文字版本中禁用鼠标支持"
 
-#: src/main.c:2497
+#: src/main.c:2502
 msgid "Disables subshell support"
 msgstr "禁用子 shell 支持"
 
-#: src/main.c:2501
+#: src/main.c:2506
 msgid "Prints working directory at program exit"
 msgstr "在程序退出时打印工作目录"
 
-#: src/main.c:2503
+#: src/main.c:2508
 msgid "Resets soft keys on HP terminals"
 msgstr "在 HP 终端上复位软键"
 
-#: src/main.c:2505
+#: src/main.c:2510
 msgid "To run on slow terminals"
 msgstr "要在慢速的终端上运行"
 
-#: src/main.c:2508
+#: src/main.c:2513
 msgid "Use stickchars to draw"
 msgstr ""
 
-#: src/main.c:2512
+#: src/main.c:2517
 msgid "Enables subshell support (default)"
 msgstr "启用子 shell 支持(默认)"
 
-#: src/main.c:2516
+#: src/main.c:2521
 msgid "Tries to use termcap instead of terminfo"
 msgstr "尝试使用 termcap 而不是 terminfo"
 
-#: src/main.c:2519
+#: src/main.c:2524
 msgid "Displays the current version"
 msgstr "显示当前版本"
 
-#: src/main.c:2521
+#: src/main.c:2526
 msgid "Launches the file viewer on a file"
 msgstr "在文件上使用文件查看器"
 
-#: src/main.c:2523
+#: src/main.c:2528
 msgid "Forces xterm features"
 msgstr "强制使用 xterm 特性"
 
-#: src/main.c:2715
+#: src/main.c:2720
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -3254,11 +3308,11 @@ msgstr ""
 "无法打开 tty 线。您不能用 -P 标记。\n"
 "在某些系统上，您可以运行 # `which mc`\n"
 
-#: src/main.c:2778
+#: src/main.c:2783
 msgid " Notice "
 msgstr " 注意 "
 
-#: src/main.c:2779
+#: src/main.c:2784
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -3405,7 +3459,6 @@ msgid " Oops... "
 msgstr " 糟糕... "
 
 #: src/panelize.c:285
-#, fuzzy
 msgid " I can't run external panelize while logged on a non local directory "
 msgstr ""
 
@@ -3631,7 +3684,7 @@ msgstr "，smbfs"
 
 #: src/textconf.c:25
 msgid ", undelfs"
-msgstr ""
+msgstr "，undelfs"
 
 #: src/textconf.c:31
 msgid "With builtin Editor\n"
@@ -3770,7 +3823,7 @@ msgstr ""
 
 #: src/user.c:134
 msgid " Format error on file Extensions File "
-msgstr ""
+msgstr " 扩展文件格式错误 "
 
 #: src/user.c:135
 #, c-format
@@ -4002,11 +4055,11 @@ msgstr "编辑代码"
 
 #: src/view.c:2022
 msgid "UnWrap"
-msgstr ""
+msgstr "不折行"
 
 #: src/view.c:2022
 msgid "Wrap"
-msgstr ""
+msgstr "折行"
 
 #: src/view.c:2025
 msgid "HxSrch"
@@ -4315,11 +4368,11 @@ msgstr "不完整的 extfs 归档"
 #: vfs/fish.c:147
 #, c-format
 msgid "fish: Disconnecting from %s"
-msgstr ""
+msgstr "fish：正在从 %s 断口连接"
 
 #: vfs/fish.c:226
 msgid "fish: Waiting for initial line..."
-msgstr ""
+msgstr "fish：正在等待初始化行..."
 
 #: vfs/fish.c:236
 msgid "Sorry, we can not do password authenticated connections for now."
@@ -4327,56 +4380,56 @@ msgstr "抱歉，目前无法创建口令验证连接。"
 
 #: vfs/fish.c:241
 msgid " fish: Password required for "
-msgstr ""
+msgstr " fish：需要口令 "
 
 #: vfs/fish.c:250
 msgid "fish: Sending password..."
-msgstr ""
+msgstr "fish：正在发送口令..."
 
 #: vfs/fish.c:256
 msgid "fish: Sending initial line..."
-msgstr ""
+msgstr "fish：正在发送初始化行..."
 
 #: vfs/fish.c:266
 msgid "fish: Handshaking version..."
-msgstr ""
+msgstr "fish：正在握手版本..."
 
 #: vfs/fish.c:270
 msgid "fish: Setting up current directory..."
-msgstr ""
+msgstr "fish：正在设置当前目录..."
 
 #: vfs/fish.c:272
-#, c-format
+#, fuzzy, c-format
 msgid "fish: Connected, home %s."
-msgstr ""
+msgstr "fish：已连接，"
 
 #: vfs/fish.c:361
 #, c-format
 msgid "fish: Reading directory %s..."
-msgstr ""
+msgstr "fish：正在读取目录 %s..."
 
 #: vfs/fish.c:465
 msgid "fish: failed"
-msgstr ""
+msgstr "fish：失败"
 
 #. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
 #: vfs/fish.c:485
 #, c-format
 msgid "fish: store %s: sending command..."
-msgstr ""
+msgstr "fish：正在保存 %s：正在发送命令..."
 
 #: vfs/fish.c:513
 msgid "fish: Local read failed, sending zeros"
-msgstr ""
+msgstr "fish：本地读取失败，正在发送零"
 
 #: vfs/fish.c:525
 #, c-format
 msgid "fish: storing %s %d (%lu)"
-msgstr ""
+msgstr "fish：正在保存 %s %d (%lu)"
 
 #: vfs/fish.c:526
 msgid "zeros"
-msgstr ""
+msgstr "零"
 
 #: vfs/fish.c:574
 msgid "Aborting transfer..."
@@ -4388,7 +4441,7 @@ msgstr "中止后有错误。"
 
 #: vfs/fish.c:585
 msgid "Aborted transfer would be successful."
-msgstr ""
+msgstr "被中止的传输可能成功完成了。"
 
 #: vfs/ftpfs.c:315
 #, c-format
@@ -4624,27 +4677,27 @@ msgstr " 验证失败 "
 #: vfs/smbfs.c:1611
 #, c-format
 msgid " %s mkdir'ing %s "
-msgstr ""
+msgstr " %s 正在创建目录 %s "
 
 #: vfs/smbfs.c:1634
 #, c-format
 msgid " %s rmdir'ing %s "
-msgstr ""
+msgstr " %s 正在删除目录 %s "
 
 #: vfs/smbfs.c:1738 vfs/smbfs.c:1758
 #, c-format
 msgid " %s opening remote file %s "
-msgstr ""
+msgstr " %s 正在打开远程文件 %s "
 
 #: vfs/smbfs.c:1826
 #, c-format
 msgid " %s removing remote file %s "
-msgstr ""
+msgstr " %s 正在删除远程文件 %s "
 
 #: vfs/smbfs.c:1864
 #, c-format
 msgid " %s renaming files\n"
-msgstr ""
+msgstr " %s 正在重命名文件\n"
 
 #: vfs/tar.c:81 vfs/tar.c:98
 #, c-format
@@ -4675,7 +4728,7 @@ msgstr ""
 
 #: vfs/undelfs.c:79
 msgid " undelfs: error "
-msgstr ""
+msgstr " undelfs：错误 "
 
 #: vfs/undelfs.c:182
 msgid " not enough memory "
@@ -4698,7 +4751,7 @@ msgstr " 当开始 inode 扫描 %d "
 #: vfs/undelfs.c:202
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr ""
+msgstr "undelfs：正在载入被删除文件的信息 %d inode"
 
 #: vfs/undelfs.c:217
 #, c-format
@@ -4725,7 +4778,7 @@ msgstr " 无法打开文件 %s "
 
 #: vfs/undelfs.c:298
 msgid "undelfs: reading inode bitmap..."
-msgstr ""
+msgstr "undelfs：正在读取 inode bitmap..."
 
 #: vfs/undelfs.c:301
 #, c-format
@@ -4738,7 +4791,7 @@ msgstr ""
 
 #: vfs/undelfs.c:304
 msgid "undelfs: reading block bitmap..."
-msgstr ""
+msgstr "undelfs：正在读取 block bitmap..."
 
 #: vfs/undelfs.c:307
 #, c-format
@@ -4746,14 +4799,16 @@ msgid ""
 " Could not load block bitmap from: \n"
 " %s \n"
 msgstr ""
+" 无法载入 block bitmap 自：\n"
+" %s \n"
 
 #: vfs/undelfs.c:313
 msgid "undelfs: done."
-msgstr ""
+msgstr "undelfs：完成"
 
 #: vfs/undelfs.c:316
 msgid "undelfs: failure"
-msgstr ""
+msgstr "undelfs：失败"
 
 #: vfs/undelfs.c:340
 msgid " vfs_info is not fs! "
@@ -4761,11 +4816,11 @@ msgstr "vfs_info 不是 fs！ "
 
 #: vfs/undelfs.c:396 vfs/undelfs.c:580
 msgid " You have to chdir to extract files first "
-msgstr " "
+msgstr " 您必须先更改目录来解开文件 "
 
 #: vfs/undelfs.c:519
 msgid " while iterating over blocks "
-msgstr ""
+msgstr " "
 
 #: vfs/undelfs.c:624
 #, c-format
@@ -4795,9 +4850,9 @@ msgstr "内部错误："
 #: vfs/vfs.c:1848
 #, c-format
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
-msgstr "%s：%s：%s %3d%% (传送了 %ld 字节)"
+msgstr "%s：%s：%s %3d%% (传输了 %ld 字节)"
 
 #: vfs/vfs.c:1849
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
-msgstr "%s：%s：%s 传送了 %ld 字节"
+msgstr "%s：%s：%s 传输了 %ld 字节"
