@@ -116,11 +116,14 @@ audio/x-mp3:
 	open=mpg123 %f
 
 text/html:
-	icon-filename=@icondir@/html.xpm
+	icon-filename=@icondir@/gnome-text-html.png
 	open.netscape.View this file with Netscape=gnome-moz-remote %f
 
 application/vcard:
 	icon-filename=@icondir@/calendar.xpm
+
+application/x-url:
+	icon-filename=@icondir@/gnome-text-url.png
 
 application/x-troff-man:
 	icon-filename=@icondir@/man.xpm
