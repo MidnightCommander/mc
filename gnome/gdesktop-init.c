@@ -44,16 +44,21 @@ desktop_load_init_from (const char *file)
 		if (strcmp (type, "url") == 0){
 			int  used;
 			char *icon = NULL, *url;
+			char *icon2 = NULL;
 			
 			url = gnome_config_get_string ("url");
 			icon = gnome_config_get_string_with_default ("icon=", &used);
 			if (!icon)
-				icon = g_concat_dir_and_file (ICONDIR, "gnome-http-url.png");
-			
+				icon2 = g_concat_dir_and_file (ICONDIR, "gnome-http-url.png");
+			else {
+				icon2 = gnome_pixmap_file (icon);
+				if (!icon2)
+					icon2 = g_concat_dir_and_file (ICONDIR, "gnome-http-url.png");
+			}
 			if (url && *url){
 				char *filename = g_concat_dir_and_file (desktop_directory, key);
 													
-				desktop_create_url (filename, title, url, icon);
+				desktop_create_url (filename, title, url, icon2);
 
 				g_free (filename);
 			}
@@ -61,6 +66,7 @@ desktop_load_init_from (const char *file)
 			if (url)
 				g_free (url);
 			g_free (icon);
+			g_free (icon2);
 		}
 		g_free (title);
 		g_free (file_and_section);
@@ -125,11 +131,12 @@ gdesktop_init (void)
 	char *dir;
 
 	desktop_init_at (DESKTOP_INIT_DIR);
-	
-	dir = gnome_util_home_file ("desktop-init");
-	desktop_init_at (dir);
-	g_free (dir);
 
+	dir = gnome_libdir_file ("desktop-links");
+	if (dir) {
+		desktop_init_at (dir);
+		g_free (dir);
+	}
 	gmount_setup_devices ();
 	gprint_setup_devices ();
 }

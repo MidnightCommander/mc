@@ -1,3 +1,11 @@
+1999-03-23  Jonathan Blandford  <jrb@redhat.com>
+
+	* gscreen.c (panel_tree_drag_motion): lets try to cut down on the flickers.
+
+1999-03-22  Jonathan Blandford  <jrb@redhat.com>
+
+	* gdesktop-init.c (gdesktop_init): Do what the documentation says.
+
 1999-03-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop-init.c (desktop_load_init_from): New file that loads
