@@ -57,8 +57,8 @@
 int vfs_timeout = 60; /* VFS timeout in seconds */
 
 /* They keep track of the current directory */
-static vfs *current_vfs = &vfs_local_ops;
-static char *current_dir = NULL;
+static struct vfs_class *current_vfs;
+static char *current_dir;
 
 /*
  * FIXME: this is broken. It depends on mc not crossing border on month!
@@ -105,22 +105,20 @@ vfs_register_class (struct vfs_class *vfs)
     return 1;
 }
 
-static vfs *
-vfs_type_from_op (char *path)
+/* Return VFS class for the given prefix */
+static struct vfs_class *
+vfs_prefix_to_class (char *prefix)
 {
-    vfs *vfs;
+    struct vfs_class *vfs;
 
-    if (!path)
-	vfs_die ("vfs_type_from_op got NULL: impossible");
-
-    for (vfs = vfs_list; vfs != &vfs_local_ops; vfs = vfs->next) {
+    for (vfs = vfs_list; vfs; vfs = vfs->next) {
 	if (vfs->which) {
-	    if ((*vfs->which) (vfs, path) == -1)
+	    if ((*vfs->which) (vfs, prefix) == -1)
 		continue;
 	    return vfs;
 	}
 	if (vfs->prefix
-	    && !strncmp (path, vfs->prefix, strlen (vfs->prefix)))
+	    && !strncmp (prefix, vfs->prefix, strlen (vfs->prefix)))
 	    return vfs;
     }
     return NULL;
@@ -132,7 +130,7 @@ vfs_type_from_op (char *path)
 char *
 vfs_strip_suffix_from_filename (const char *filename)
 {
-    vfs *vfs;
+    struct vfs_class *vfs;
     char *semi;
     char *p;
 
@@ -143,7 +141,8 @@ vfs_strip_suffix_from_filename (const char *filename)
     if (!(semi = strrchr (p, '#')))
 	return p;
 
-    for (vfs = vfs_list; vfs != &vfs_local_ops; vfs = vfs->next) {
+    /* Avoid last class (localfs) that would accept any prefix */
+    for (vfs = vfs_list; vfs->next; vfs = vfs->next) {
 	if (vfs->which) {
 	    if ((*vfs->which) (vfs, semi + 1) == -1)
 		continue;
@@ -201,7 +200,7 @@ vfs_split (const char *path, char **inpath, char **op)
     if (slash)
 	*slash = 0;
 
-    if ((ret = vfs_type_from_op (semi+1))){
+    if ((ret = vfs_prefix_to_class (semi+1))){
 	if (op) 
 	    *op = semi + 1;
 	if (inpath)
@@ -235,7 +234,7 @@ _vfs_get_class (const char *path)
     if (slash)
 	*slash = 0;
     
-    ret = vfs_type_from_op (semi+1);
+    ret = vfs_prefix_to_class (semi+1);
 
     if (slash)
 	*slash = PATH_SEP;
@@ -631,6 +630,8 @@ vfs_setup_wd (void)
 
     if (strlen (current_dir) > MC_MAXPATHLEN - 2)
 	vfs_die ("Current dir too long.\n");
+
+    current_vfs = vfs_get_class (current_dir);
 }
 
 /*

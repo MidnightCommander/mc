@@ -1,5 +1,11 @@
 2003-10-11  Pavel Roskin  <proski@gnu.org>
 
+	* vfs.c (vfs_setup_wd): Initialize current_vfs here, not
+	globally.
+	(vfs_type_from_op): Rename to vfs_prefix_to_class(), avoid using
+	vfs_local_fs.
+	(vfs_strip_suffix_from_filename): Don't use vfs_local_fs.
+
 	* vfs.h (ftpfs_hint_reread): Remove, it's unused.
 
 	* vfs.c (vfs_add_noncurrent_stamps): Call vfs_rm_parents() at
