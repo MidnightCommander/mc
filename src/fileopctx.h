@@ -14,6 +14,8 @@
 #include "eregex.h"
 
 
+typedef int (*mc_stat_fn) (char *filename, struct stat *buf);
+
 /* This structure describes a context for file operations.  It is used to update
  * the progress windows and pass around options.
  */
@@ -54,7 +56,7 @@ typedef struct {
 	int follow_links;
 
 	/* Pointer to the stat function we will use */
-	int (*stat_func) (char *filename, struct stat *buf);
+	mc_stat_fn stat_func;
 
 	/* Whether to recompute symlinks */
 	int stable_symlinks;

@@ -1,3 +1,10 @@
+2001-10-01  Pavel Roskin  <proski@gnu.org>
+
+	* fileopctx.h: Define new type mc_stat_fn.
+	* filegui.c (file_mask_dialog): Cast mc_stat and mc_lstat to
+	mc_stat_fn to prevent warnings without VFS support.
+	* fileopctx.c (file_op_context_new): Likewise.
+
 2001-09-23  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* find.c: Include rx.h or regex.h

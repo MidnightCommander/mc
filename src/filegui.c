@@ -924,9 +924,9 @@ ask_file_mask:
 	return 0;
 
     if (ctx->follow_links && operation != OP_MOVE)
-	ctx->stat_func = mc_stat;
+	ctx->stat_func = (mc_stat_fn) mc_stat;
     else
-	ctx->stat_func = mc_lstat;
+	ctx->stat_func = (mc_stat_fn) mc_lstat;
 
     if (ctx->op_preserve || operation == OP_MOVE) {
 	ctx->preserve = 1;
