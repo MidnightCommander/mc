@@ -2,6 +2,7 @@
 Name=Spreadsheet
 Name[pt_BR]=planilha
 Name[da]=Regneark
+Name[de]=Tabellenkalkulation
 Name[es]=Hoja de cálculo
 Name[fi]=Taulukko
 Name[fr]=Tableur Gnumeric
@@ -15,6 +16,7 @@ Name[uk]=åÌÅËÔÒÏÎÎÁ ÔÁÂÌÉÃÑ
 Comment=Create a new spreadsheet
 Comment[pt_BR]=Criar uma nova planilha
 Comment[da]=Opret nyt regneark
+Comment[de]=Ein neues Dokument für Tabellenkalkulation erstellen
 Comment[es]=Crea una nueva hoja de cálculo
 Comment[fi]=Luo uusi taulukko
 Comment[fr]=Crée une nouvelle feuille de calcul Gnumeric
