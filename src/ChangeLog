@@ -1,5 +1,8 @@
 2003-09-10  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (menu_cmd): If the current panel is inactive, use the
+	opposite side to start menu.
+
 	* dlg.h: Use cb_ret_t and widget_msg_t in widget callbacks.
 	Massive adjustment for the above.
 

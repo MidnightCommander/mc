@@ -990,7 +990,7 @@ menu_cmd (void)
     if (the_menubar->active)
 	return;
 
-    if (get_current_index () == 0)
+    if ((get_current_index () == 0) ^ (!cpanel->active))
 	the_menubar->selected = 0;
     else
 	the_menubar->selected = 4;
