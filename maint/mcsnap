@@ -30,6 +30,7 @@ if test -z "$MCVERSION" || test ! -f "$MCTARBALL"; then
   exit 1
 fi
 
+rm -f /usr/src/redhat/RPMS/i386/mc-*.i386.rpm
 rpm -tb "$MCTARBALL"
 MC_RPM=`echo /usr/src/redhat/RPMS/i386/mc-*.i386.rpm`
 if test ! -f $MC_RPM; then
