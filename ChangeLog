@@ -1,3 +1,12 @@
+2002-04-09  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* autogen.sh: Fix for gettext 0.11 family (and newer).
+
+2002-04-08  Pavel Roskin  <proski@gnu.org>
+
+	* autogen.sh: Allow gettext newer than 0.10.39.
+	From Björn Eriksson <bjorn@bjornen.nu>
+
 2002-04-03  Pavel Roskin  <proski@gnu.org>
 
 	* doc/ru/Makefile.am: Distribute mc.ru.hlp and don't remove it

@@ -18,18 +18,23 @@ cd $srcdir
 rm -rf autom4te.cache vfs/samba/autom4te.cache
 
 # Ensure that gettext is reasonably new.
-gettext_ver=`$GETTEXTIZE --version | sed -n '1s/^.* //p'`
+gettext_ver=`$GETTEXTIZE --version | sed -n '1s/\.//g;1s/.* //;1s/^\(...\)$/\100/p;1s/^\(....\)$/\10/p'`
+if test $gettext_ver -lt 01038; then
+  echo "Don't use gettext older than 0.10.38" 2>&1
+  exit 1
+fi
 
-case $gettext_ver in
-  0.10.3[89]) ;;
-  *) echo "Don't use gettext other than versions 0.10.38 and 0.10.39"
-     exit 1;;
-esac
+if test $gettext_ver -ge 01100; then
+  GETTEXTIZE_ARGS='--intl --no-changelog'
+fi
 
 rm -rf intl
-$GETTEXTIZE --copy --force >tmpout || exit 1
-rm -f po/ChangeLog
-mv po/ChangeLog~ po/ChangeLog
+$GETTEXTIZE $GETTEXTIZE_ARGS --copy --force >tmpout || exit 1
+
+if test -e po/ChangeLog~; then
+  rm -f po/ChangeLog
+  mv po/ChangeLog~ po/ChangeLog
+fi
 
 if test ! -d config; then
   mkdir config || exit 1
