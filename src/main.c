@@ -3128,22 +3128,26 @@ main (int argc, char *argv [])
 
 #ifdef HAVE_GNOME
     init_colors ();
-    use_subshell = 0;
 #else
     init_curses ();
-    if (edit_one_file || view_one_file)
-	use_subshell = 0;
 #endif
 
-#   ifdef HAVE_SUBSHELL_SUPPORT
-	/* Done here to ensure that the subshell doesn't  */
-	/* inherit the file descriptors opened below, etc */
+#ifdef HAVE_SUBSHELL_SUPPORT
 
-	if (use_subshell)
-	    init_subshell ();  
-#   endif
+    /* Don't use subshell in GNOME and when invoked as a viewer or editor */
+#ifndef HAVE_GNOME
+    if (edit_one_file || view_one_file)
+#endif /* !HAVE_GNOME */
+	use_subshell = 0;
 
-#   ifndef HAVE_X
+    /* Done here to ensure that the subshell doesn't  */
+    /* inherit the file descriptors opened below, etc */
+    if (use_subshell)
+	init_subshell ();  
+
+#endif /* HAVE_SUBSHELL_SUPPORT */
+
+#ifndef HAVE_X
     /* Removing this from the X code let's us type C-c */
     load_key_defs ();
 
@@ -3153,7 +3157,7 @@ main (int argc, char *argv [])
     
     if (alternate_plus_minus)
         application_keypad_mode ();
-#   endif
+#endif /* !HAVE_X */
 
 #ifdef HAVE_GNOME
     gnome_check_super_user ();

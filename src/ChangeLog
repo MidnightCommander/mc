@@ -1,3 +1,8 @@
+2001-02-09  Pavel Roskin  <proski@gnu.org>
+
+	* main.c (main): Fix compilation error when configured without
+	subshell support.
+
 2001-02-07  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* main.c (main): Do not fork subshell for mcedit/mcview.
