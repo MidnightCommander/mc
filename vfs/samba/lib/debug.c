@@ -92,9 +92,6 @@ int     DEBUGLEVEL = 1;
  *                    stdout and debug output will go to dbf only, and not
  *                    to syslog.  Set in setup_logging() and read in Debug1().
  *
- *  debug_count     - Number of debug messages that have been output.
- *                    Used to check log size.
- *
  *  syslog_level    - Internal copy of the message debug level.  Written by
  *                    dbghdr() and read by Debug1().
  *
@@ -107,57 +104,13 @@ int     DEBUGLEVEL = 1;
  */
 
 static BOOL    stdout_logging = False;
-static int     debug_count    = 0;
 static pstring format_bufr    = { '\0' };
-static size_t     format_pos     = 0;
+static size_t  format_pos     = 0;
 
 
 /* -------------------------------------------------------------------------- **
  * Functions...
  */
-#if 0
-#if defined(SIGUSR2)
-/* ************************************************************************** **
- * catch a sigusr2 - decrease the debug log level.
- * ************************************************************************** **
- */
-void sig_usr2( int sig )
-  {
-  DEBUGLEVEL--;
-  if( DEBUGLEVEL < 0 )
-    DEBUGLEVEL = 0;
-
-  DEBUG( 0, ( "Got SIGUSR2; set debug level to %d.\n", DEBUGLEVEL ) );
-
-#if !defined(HAVE_SIGACTION)
-  CatchSignal( SIGUSR2, SIGNAL_CAST sig_usr2 );
-#endif
-
-  } /* sig_usr2 */
-#endif /* SIGUSR2 */
-
-#if defined(SIGUSR1)
-/* ************************************************************************** **
- * catch a sigusr1 - increase the debug log level. 
- * ************************************************************************** **
- */
-void sig_usr1( int sig )
-  {
-
-  DEBUGLEVEL++;
-
-  if( DEBUGLEVEL > 10 )
-    DEBUGLEVEL = 10;
-
-  DEBUG( 0, ( "Got SIGUSR1; set debug level to %d.\n", DEBUGLEVEL ) );
-
-#if !defined(HAVE_SIGACTION)
-  CatchSignal( SIGUSR1, SIGNAL_CAST sig_usr1 );
-#endif
-
-  } /* sig_usr1 */
-#endif /* SIGUSR1 */
-#endif
 
 /* ************************************************************************** **
  * get ready for syslog stuff
@@ -171,110 +124,6 @@ void setup_logging( char *pname, BOOL interactive )
     dbf = stderr;
     }
   } /* setup_logging */
-
-/* ************************************************************************** **
- * reopen the log files
- * ************************************************************************** **
- */
-void reopen_logs( void )
-  {
-  pstring fname;
-  
-  if( DEBUGLEVEL > 0 )
-    {
-    pstrcpy( fname, debugf );
-    if( lp_loaded() && (*lp_logfile()) )
-      pstrcpy( fname, lp_logfile() );
-
-    if( !strcsequal( fname, debugf ) || !dbf || !file_exist( debugf, NULL ) )
-      {
-      mode_t oldumask = umask( 022 );
-
-      pstrcpy( debugf, fname );
-      if( dbf )
-        (void)fclose( dbf );
-      if( append_log )
-        dbf = sys_fopen( debugf, "a" );
-      else
-        dbf = sys_fopen( debugf, "w" );
-      /* Fix from klausr@ITAP.Physik.Uni-Stuttgart.De
-       * to fix problem where smbd's that generate less
-       * than 100 messages keep growing the log.
-       */
-      force_check_log_size();
-      if( dbf )
-        setbuf( dbf, NULL );
-      (void)umask( oldumask );
-      }
-    }
-  else
-    {
-    if( dbf )
-      {
-      (void)fclose( dbf );
-      dbf = NULL;
-      }
-    }
-  } /* reopen_logs */
-
-/* ************************************************************************** **
- * Force a check of the log size.
- * ************************************************************************** **
- */
-void force_check_log_size( void )
-  {
-  debug_count = 100;
-  } /* force_check_log_size */
-
-/* ************************************************************************** **
- * Check to see if the log has grown to be too big.
- * ************************************************************************** **
- */
-static void check_log_size( void )
-{
-  int         maxlog;
-  SMB_STRUCT_STAT st;
-
-  if( debug_count++ < 100 || geteuid() != 0 )
-    return;
-
-  maxlog = lp_max_log_size() * 1024;
-  if( !dbf || maxlog <= 0 )
-    return;
-
-  if( sys_fstat( fileno( dbf ), &st ) == 0 && st.st_size > maxlog )
-    {
-    (void)fclose( dbf );
-    dbf = NULL;
-    reopen_logs();
-    if( dbf && file_size( debugf ) > maxlog )
-      {
-      pstring name;
-
-      (void)fclose( dbf );
-      dbf = NULL;
-      slprintf( name, sizeof(name)-1, "%s.old", debugf );
-      (void)rename( debugf, name );
-      reopen_logs();
-      }
-    }
-  /*
-   * Here's where we need to panic if dbf == NULL..
-   */
-  if(dbf == NULL) {
-    dbf = sys_fopen( "/dev/console", "w" );
-    if(dbf) {
-      DEBUG(0,("check_log_size: open of debug file %s failed - using console.\n",
-            debugf ));
-    } else {
-      /*
-       * We cannot continue without a debug file handle.
-       */
-      abort();
-    }
-  }
-  debug_count = 0;
-} /* check_log_size */
 
 /* ************************************************************************** **
  * Write an debug message on the debugfile.
@@ -307,7 +156,6 @@ va_dcl
     return( 0 );
     }
   
-    {
     if( !dbf )
       {
       mode_t oldumask = umask( 022 );
@@ -327,9 +175,6 @@ va_dcl
         return(0);
         }
       }
-    }
-
-  check_log_size();
 
     {
 #ifdef HAVE_STDARG_H
