@@ -257,7 +257,7 @@ void tk_layout (void *first_widget, ...);
 void tk_new_frame (Dlg_head *, char *);
 void tk_frame (Dlg_head *, char *);
 void tk_end_frame (void);
-void x_set_dialog_title (Dlg_head *h, char *title);
+void x_set_dialog_title (Dlg_head *h, const char *title);
 
 /* The inner workings of run_dlg, exported for the Tk and XView toolkits */
 int  dlg_key_event (Dlg_head *h, int d_key);

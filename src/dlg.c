@@ -233,26 +233,16 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
     if ((flags & DLG_TRYUP) && (y1 > 3))
 	y1 -= 2;
 
-    new_d = g_new (Dlg_head, 1);
-    new_d->current = NULL;
-    new_d->count = 0;
+    new_d = g_new0 (Dlg_head, 1);
     new_d->direction = DIR_FORWARD;
     new_d->color = color_set;
     new_d->help_ctx = help_ctx;
     new_d->callback = callback ? callback : default_dlg_callback;
-    new_d->send_idle_msg = 0;
     new_d->x = x1;
     new_d->y = y1;
-    new_d->title = 0;
     new_d->cols = cols;
     new_d->lines = lines;
-    new_d->refresh_pushed = 0;
-    new_d->has_menubar = 0;
     new_d->name = name;
-    new_d->raw = 0;
-    new_d->grided = 0;
-    new_d->initfocus = NULL;
-    new_d->running = 0;
 #ifdef HAVE_X
     if (callback != midnight_callback)
         new_d->wdata = xtoolkit_create_dialog (new_d, flags);
@@ -1074,7 +1064,7 @@ int dlg_select_nth_widget (Dlg_head *h, int n)
 
 #ifndef PORT_HAS_DIALOG_TITLE
 void
-x_set_dialog_title (Dlg_head *h, char *title)
+x_set_dialog_title (Dlg_head *h, const char *title)
 {
   h->title = g_strdup (title);
 }
