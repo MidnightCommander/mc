@@ -1,3 +1,8 @@
+2002-07-04  Pavel Roskin  <proski@gnu.org>
+
+	* AUTHORS: Add Andrew V. Samoilov <kai@cmail.ru>, alphabetically
+	sort authors.
+
 2002-06-24  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/dos.syntax: New file - highlighting for DOS batch
