@@ -1183,9 +1183,8 @@ edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 
     GString *label_text = g_string_new (_(" Replace with: "));
     if (*replace_text) {
-        size_t label_text_len = label_text->len;
         g_string_append (label_text, replace_text);
-        convert_to_display (label_text->str + label_text_len);
+        convert_to_display (label_text->str + label_text->len);
     }
     quick_widgets[5].text = label_text->str;
 
@@ -1633,13 +1632,14 @@ static int snprintf_p (char *str, size_t size, const char *fmt,...)
 {
     va_list ap;
     size_t n;
-    char *q, *p, *s = str, *e = str + size;
+    const char *q, *p;
+    char *s = str, *e = str + size;
     char q1[40];
     char *p1;
     int nargs = 0;
 
     va_start (ap, fmt);
-    p = q = (char *) fmt;
+    p = q = fmt;
 
     while ((p = strchr (p, '%'))) {
 	n = p - q;

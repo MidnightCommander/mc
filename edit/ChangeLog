@@ -1,6 +1,8 @@
 2004-09-25  Roland Illig  <roland.illig@gmx.de>
 
 	* syntax.c (this_try_alloc_color_pair): Added const qualifiers.
+	* editcmd.c (snprintf_p): Likewise. (edit_replace_prompt):
+	Simplified the code.
 
 2004-09-25  Pavel S. Shirshov <pavelsh@mail.ru>
 
