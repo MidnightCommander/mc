@@ -3,7 +3,7 @@
 #define PORT_HAS_FRONTEND_RUN_DLG   1
 #define PORT_HAS_FILE_HANDLERS      1
 #define PORT_HAS_GETCH              1
-
+#define PORT_HAS_MY_SYSTEM          1
 #define PORT_HAS_DIALOG_TITLE       1
 #define PORT_WANTS_CLEAN_BUTTON     1
 #define PORT_HAS_CREATE_PANELS      1

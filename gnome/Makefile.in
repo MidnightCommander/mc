@@ -14,10 +14,25 @@ INSTALL = @INSTALL@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
 
-GNOMESRCS = gkey.c gmain.c gscreen.c gwidget.c \
-	gmenu.c ginfo.c ghelp.c glayout.c gtools.c gdesktop.c
+GNOMESRCS = 		\
+	gkey.c 		\
+	gmain.c 	\
+	gscreen.c 	\
+	gwidget.c 	\
+	gmenu.c		\
+	ginfo.c 	\
+	ghelp.c 	\
+	glayout.c 	\
+	gtools.c 	\
+	gdesktop.c 	\
+	gutil.c		\
+	gtrans.c
 
-GNOMEHDRS = gmain.h gscreen.h  gwidget.h gconf.h
+GNOMEHDRS = 		\
+	gmain.h 	\
+	gscreen.h	\
+	gwidget.h 	\
+	gconf.h
 
 #
 # These objects from ../src do not depend on HAVE_X / HAVE_GNOME??
@@ -37,7 +52,7 @@ OOBJS = main.o dlg.o screen.o widget.o wtools.o info.o boxes.o \
 
 OBJS = $(LOBJS) $(OOBJS) \
 	gkey.o gmain.o gscreen.o gwidget.o gmenu.o ghelp.o ginfo.o \
-	glayout.o gtools.o gdesktop.o
+	glayout.o gtools.o gdesktop.o gtrans.o gutil.o
 
 #
 # Distribution variables

@@ -88,10 +88,7 @@ set_new_current_panel (WPanel *panel)
 void
 set_hintbar (char *str)
 {
-	g_panel_contents *gp;
-
-	gp = (g_panel_contents *) current_panel_ptr->panel->widget.wdata;
-	gtk_label_set (GTK_LABEL (gp->status), str);
+	gtk_label_set (GTK_LABEL (current_panel_ptr->panel->status), str);
 }
 
 void

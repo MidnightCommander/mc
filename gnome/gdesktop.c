@@ -56,47 +56,6 @@ enum {
 static GList *desktop_icons;
 
 /*
- * Creates a shaped window, toplevel, non-wm managed window from a given file
- * uses the all-mighty Imlib to do all the difficult work for us
- */
-GtkWidget *
-shaped_icon_new_from_file (char *file, int extra_events)
-{
-	GtkWidget *window;
-	GdkImlibImage *im;
-	GdkWindowPrivate *private;
-
-	if (!g_file_exists (file))
-		return;
-	
-	im = gdk_imlib_load_image (file);
-	if (!im)
-		return NULL;
-
-	gtk_widget_push_visual (gdk_imlib_get_visual ());
-	gtk_widget_push_colormap (gdk_imlib_get_colormap ());
-
-	window = gtk_window_new (GTK_WINDOW_POPUP);
-
-	gtk_widget_set_events (window, gtk_widget_get_events (window) | extra_events);
-	
-	gtk_widget_pop_colormap ();
-	gtk_widget_pop_visual ();
-
-	gtk_widget_set_usize (window, im->rgb_width, im->rgb_height);
-	gtk_widget_realize (window);
-	gdk_window_resize (window->window, im->rgb_width, im->rgb_height);
-	private = (GdkWindowPrivate *) window->window;
-	private->width = im->rgb_width;
-	private->height = im->rgb_height;
-	gdk_imlib_apply_image (im, window->window);
-
-	gdk_imlib_destroy_image (im);
-
-	return window;
-}
-
-/*
  * If the dentry is zero, then no information from the on-disk .desktop file is used
  * In this case, we probably will have to store the geometry for a file somewhere
  * else.
@@ -125,15 +84,16 @@ desktop_icon_set_position (desktop_icon_t *di, GtkWidget *widget)
 		x = current_x;
 		y = current_y;
 
-		current_y += 64;
+		gtk_widget_size_request (widget, &widget->requisition);
+		current_y += widget->requisition.height + 8;
 		if (current_y > gdk_screen_height ()){
-			current_x += 64;
+			current_x += 0;
 			current_y = 0;
 		}
 	}
 	di->x = x;
 	di->y = y;
-	gtk_widget_set_uposition (widget, x, y);
+	gtk_widget_set_uposition (widget, 6 + x, y);
 }
 
 static int operation_value;
@@ -210,8 +170,7 @@ check_window_id_in_one_panel (gpointer data, gpointer user_data)
 	PanelContainer *pc    = (PanelContainer *) data;
 	int id                = (int) user_data;
 	WPanel *panel         = pc->panel;
-	g_panel_contents *gpc = (g_panel_contents *) panel->widget.wdata;
-	GtkCList *clist       = GTK_CLIST (gpc->list);
+	GtkCList *clist       = GTK_CLIST (panel->list);
 	GdkWindowPrivate  *gdk_wp;
 
 	gdk_wp = (GdkWindowPrivate *) clist->clist_window;
@@ -385,14 +344,16 @@ desktop_load_dentry (char *filename)
 	GnomeDesktopEntry  *dentry;
 	desktop_icon_t *di;
 	GtkWidget *window;
-
+	char      *icon_label;
+	
 	dentry = gnome_desktop_entry_load (filename);
 
 	if (!dentry)
 		return;
 
+	icon_label = dentry->name ? dentry->name : x_basename (dentry->exec);
 	if (dentry->icon)
-		window = shaped_icon_new_from_file (dentry->icon, GDK_BUTTON_PRESS_MASK);
+		window = create_transparent_text_window (dentry->icon, icon_label, GDK_BUTTON_PRESS_MASK);
 	else {
 		static char *default_icon_path;
 		static char exists;
@@ -404,7 +365,7 @@ desktop_load_dentry (char *filename)
 		}
 
 		if (exists)
-			window = shaped_icon_new_from_file (default_icon_path, GDK_BUTTON_PRESS_MASK);
+			window = create_transparent_text_window (default_icon_path, icon_label, GDK_BUTTON_PRESS_MASK);
 		else {
 			window = gtk_window_new (GTK_WINDOW_POPUP);
 			gtk_widget_set_usize (window, 20, 20);
@@ -500,7 +461,7 @@ desktop_create_launch_entry (char *pathname, char *short_name)
 	char *icon;
 
 	icon = get_desktop_icon (pathname);
-	window = shaped_icon_new_from_file (icon, GDK_BUTTON_PRESS_MASK);
+	window = create_transparent_text_window (icon, x_basename (pathname), GDK_BUTTON_PRESS_MASK);
 	g_free (icon);
 	di = xmalloc (sizeof (desktop_icon_t), "dcle");
 	di->dentry = NULL;

@@ -82,10 +82,9 @@ panel_file_list_set_row_colors (GtkCList *cl, int row, int color_pair)
 void
 x_fill_panel (WPanel *panel)
 {
-	g_panel_contents *g = (g_panel_contents *) panel->widget.wdata;
 	const int top       = panel->count;
 	const int items     = panel->format->items;
-	GtkCList *cl        = GTK_CLIST (g->list);
+	GtkCList *cl        = GTK_CLIST (panel->list);
 	int i, col, type_col, color;
 	char  **texts;
 
@@ -169,8 +168,7 @@ static int will_select;
 void
 x_select_item (WPanel *panel)
 {
-	g_panel_contents *g = (g_panel_contents *) panel->widget.wdata;
-	GtkCList *clist = GTK_CLIST (g->list);
+	GtkCList *clist = GTK_CLIST (panel->list);
 
 	if (will_select)
 		return;
@@ -184,31 +182,26 @@ x_select_item (WPanel *panel)
 void
 x_unselect_item (WPanel *panel)
 {
-	g_panel_contents *g = (g_panel_contents *) panel->widget.wdata;
-	gtk_clist_unselect_row (GTK_CLIST (g->list), panel->selected, 0);
+	gtk_clist_unselect_row (GTK_CLIST (panel->list), panel->selected, 0);
 }
 
 void
 x_filter_changed (WPanel *panel)
 {
-	g_panel_contents *g = (g_panel_contents *) panel->widget.wdata;
-
 	if (panel->filter){
 		char *string;
 		
 		string = g_copy_strings ("Filter: ", panel->filter, NULL);
-		gtk_label_set (GTK_LABEL (g->filter), string);
+		gtk_label_set (GTK_LABEL (panel->filter), string);
 		g_free (string);
 	} else
-		gtk_label_set (GTK_LABEL (g->filter), "No filter");
+		gtk_label_set (GTK_LABEL (panel->filter), "No filter");
 }
 
 void
 x_adjust_top_file (WPanel *panel)
 {
-	g_panel_contents *g = (g_panel_contents *) panel->widget.wdata;
-
-	gtk_clist_moveto (GTK_CLIST (g->list), panel->top_file, 0, 0.0, 0.0);
+	gtk_clist_moveto (GTK_CLIST (panel->list), panel->top_file, 0, 0.0, 0.0);
 }
 
 #define COLUMN_INSET 3
@@ -788,56 +781,55 @@ panel_create_filter (WPanel *panel, GtkWidget **label)
 void
 x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
-	g_panel_contents *g = g_new (g_panel_contents, 1);
 	GtkWidget *status_line, *filter_w, *statusbar, *vbox;
 	
-	g->table = gtk_table_new (2, 1, 0);
-	gtk_widget_show (g->table);
+	panel->table = gtk_table_new (2, 1, 0);
+	gtk_widget_show (panel->table);
 	
-	g->list  = panel_create_file_list (panel);
-	gtk_widget_show (g->list);
+	panel->list  = panel_create_file_list (panel);
+	gtk_widget_show (panel->list);
 
-	g->current_dir = panel_create_cwd (panel);
-	gtk_widget_show (g->current_dir);
+	panel->current_dir = panel_create_cwd (panel);
+	gtk_widget_show (panel->current_dir);
 
-	filter_w = panel_create_filter (panel, &g->filter);
+	filter_w = panel_create_filter (panel, &panel->filter_w);
 	gtk_widget_show (filter_w);
 
 	status_line = gtk_hbox_new (0, 0);
 	gtk_widget_show (status_line);
 	
-	gtk_box_pack_start (GTK_BOX (status_line), g->current_dir, 0, 0, 0);
+	gtk_box_pack_start (GTK_BOX (status_line), panel->current_dir, 0, 0, 0);
 	gtk_box_pack_end   (GTK_BOX (status_line), filter_w, 0, 0, 0);
 
-	g->status = statusbar = gtk_label_new ("");
+	panel->status = statusbar = gtk_label_new ("");
 	gtk_widget_show (statusbar);
 	
-	gtk_table_attach (GTK_TABLE (g->table), g->list, 0, 1, 1, 2,
+	gtk_table_attach (GTK_TABLE (panel->table), panel->list, 0, 1, 1, 2,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK, 
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0);
 	
-	gtk_table_attach (GTK_TABLE (g->table), status_line, 0, 1, 0, 1,
+	gtk_table_attach (GTK_TABLE (panel->table), status_line, 0, 1, 0, 1,
 			  GTK_EXPAND | GTK_FILL, GTK_SHRINK, 0, 0);
 
-	gtk_table_attach (GTK_TABLE (g->table), statusbar, 0, 1, 2, 3,
+	gtk_table_attach (GTK_TABLE (panel->table), statusbar, 0, 1, 2, 3,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0, 0);
 	
-	gtk_widget_show (g->table);
+	gtk_widget_show (panel->table);
 
 	/* Ultra nasty hack: pull the vbox from wdata */
 	vbox =  GTK_WIDGET (panel->widget.wdata);
 	
-	panel->widget.wdata = (widget_data) g;
+	panel->widget.wdata = (widget_data) panel->table;
 	
 	/* Now, insert our table in our parent */
-	gtk_container_add (GTK_CONTAINER (vbox), g->table);
+	gtk_container_add (GTK_CONTAINER (vbox), panel->table);
 	
 	if (!pixmaps_ready){
-		if (!GTK_WIDGET_REALIZED (g->list))
-			gtk_widget_realize (g->list);
-		panel_create_pixmaps (g->list);
+		if (!GTK_WIDGET_REALIZED (panel->list))
+			gtk_widget_realize (panel->list);
+		panel_create_pixmaps (panel->list);
 	}
 }
 

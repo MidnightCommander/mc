@@ -9,14 +9,6 @@ void x_add_sort_label (WPanel *panel, int index, char *text, char *tag, void *sr
 void x_sort_label_start (WPanel *panel);
 void x_reset_sort_labels (WPanel *panel);
 
-typedef struct {
-	GtkWidget *table;
-	GtkWidget *list;
-	GtkWidget *current_dir;
-	GtkWidget *filter;
-	GtkWidget *status;
-} g_panel_contents;
-
 WPanel *create_container (Dlg_head *h, char *str);
 
 typedef struct {

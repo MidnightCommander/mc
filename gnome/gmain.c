@@ -178,15 +178,7 @@ x_panel_container_show (widget_data wdata)
 void
 x_focus_widget (Widget_Item *p)
 {
-	/* Ok, ultra hack again: the top-level containers dont have regular
-	 * widgets in p->widget->wdata, but a g_panel_contents in there
-	 */
-	if (((void *)p->widget->callback) == ((void *)panel_callback)){
-		g_panel_contents *g = (g_panel_contents *) p->widget->wdata;
-
-		gtk_widget_grab_focus (GTK_WIDGET (g->list));
-	} else 
-		gtk_widget_grab_focus (GTK_WIDGET (p->widget->wdata));
+	gtk_widget_grab_focus (GTK_WIDGET (p->widget->wdata));
 }
 
 void
@@ -224,8 +216,8 @@ x_init_dlg (Dlg_head *h)
 void
 x_destroy_dlg (Dlg_head *h)
 {
-	printf ("me llaman!\n");
-	gtk_grab_remove (GTK_WIDGET (GTK_BIN (h->wdata)->child));
+	if (!(h->grided & DLG_NO_TED))
+		gtk_grab_remove (GTK_WIDGET (GTK_BIN (h->wdata)->child));
 	gtk_widget_destroy (GTK_WIDGET(h->wdata));
 }
 
@@ -280,3 +272,4 @@ create_panels (void)
 	set_current_panel (0);
 	run_dlg (h);
 }
+

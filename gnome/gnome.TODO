@@ -7,3 +7,7 @@
 - Menu organization
 - Intenrationalization
 - All of the dialogs.
+
+Possibly make a way to bind a toplevel widget to the Dlg_head part of the
+system so that grab_add/ungrab and the widget destruction reuse all of that
+code for NON_TED dialogs.
