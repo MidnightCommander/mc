@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#! /usr/bin/perl -w
 # Since we use a linear search trought the block and the license and
 # the warranty are quite big, we leave them at the end of the help file,
 # the index will be consulted quite frequently, so we put it at the beginning. 
@@ -24,8 +24,19 @@ close (HELP2);
 
 foreach $line (@help_file){
     if ($line =~ /\x04\[(.*)\]/ && $line !~ /\x04\[main\]/){
-	push @nodes, $1;
+	if (length $1) {
+	    $node = $1;
+	} else {
+	    push @nodes, '';
+	}
 	$line =~ s/(\x04\[) */$1/;
+    } elsif (defined ($node)){
+	if ($line ne "\n") {
+	    push @nodes, "$node\x02$line";
+	} else {
+	    push @nodes, "$node\x02$node";
+	}
+	undef ($node);
     }
 }
 
@@ -39,8 +50,8 @@ open (OUTPUT, "> $out_file") or die "Cannot open $out_file: $!\n";
 print OUTPUT "\x04[Contents]\nTopics:\n\n";
 foreach $node (@nodes){
     if (length $node){
-	$node =~ m/^( *)(.*)$/;
-	printf OUTPUT ("  %s\x01 %s \x02%s\x03", $1, $2, $2);
+	$node =~ m/^( *)(.*)\x02(.*)$/;
+	printf OUTPUT ("  %s\x01 %s \x02%s\x03", $1, $3, $2);
     }
     print OUTPUT "\n";
 }
