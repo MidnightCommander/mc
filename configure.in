@@ -500,30 +500,6 @@ subshell="$result"
 
 AC_DEFINE(REGEX_MALLOC, 1, [Define to make regex use malloc(), not alloca()])
 
-dnl
-dnl Memory Allocation Debugger
-dnl
-mem_debug="none"
-AC_ARG_WITH(mad,
-[--with-mad                 Developers only: activates MAD (memory debugger)],
-	[if test x$withval = xyes; then
-	mem_debug="Janne's MAD library"
-	AC_DEFINE(HAVE_MAD, 1,
-		  [Define to use Memory Allocation Debugger (MAD)])
-	AC_MSG_NOTICE([compiling with memory leak detector])
-fi])
-
-dnl
-dnl Electric Fence - another memory debugger
-dnl
-AC_ARG_WITH(efence, 
-[--with-efence              Developers only: activates Electric Fence],
-	[if test x$withval = xyes; then
-	LIBS="$LIBS -lefence"
-	AC_MSG_NOTICE([compiling with Electric fence])
-	mem_debug="Electric Fence"
-fi])
-
 if test "x$screen_type" != xncurses; then
 	slang_check_lib=true
 	slang_term=""

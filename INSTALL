@@ -78,10 +78,6 @@ the directory base where you installed the gpm package.
      Print the version of Autoconf used to generate the `configure'
      script, and exit.
 
-`--with-mad'
-     Enables the built-in memory allocation debugger.  This option is only
-     intended for the developers.
-
 `--without-edit'
      Configures the program to be compiled without the built-in file
      editor.  The built-in editor is compiled in by default.
