@@ -46,6 +46,12 @@
 #include "cmd.h"		/* view_file_at_line */
 #include "../vfs/vfs.h"
 
+#if defined(HAVE_RX_H) && defined(HAVE_REGCOMP)
+#    include <rx.h>
+#else
+#    include <regex.h>
+#endif
+
 /* Size of the find parameters window */
 #define FIND_Y 14
 static int FIND_X = 50;
@@ -348,10 +354,60 @@ find_add_match (Dlg_head *h, char *dir, char *file)
 	    mc_refresh ();
 }
 
+/*
+ * get_line_at:
+ *
+ * Returns malloced null-terminated line from file file_fd.
+ * Input is buffered in buf_size long buffer.
+ * Current pos in buf is stored in pos.
+ * n_read - number of read chars.
+ * has_newline - is there newline ?
+ */
+static char *
+get_line_at (int file_fd, char *buf, int *pos, int *n_read, int buf_size, int *has_newline)
+{
+    char *buffer = 0;
+    int  buffer_size = 0;
+    char ch = 0;
+    int  i = 0;
+
+    do {
+	if (*pos >= *n_read){
+	    *pos = 0;
+	    if ((*n_read = mc_read (file_fd, buf, buf_size)) <= 0)
+		break;
+	}
+
+	ch = buf [(*pos)++];
+	if (ch == 0) {
+	    /* skip possible leading zero(s) */
+	    if (i == 0)
+		continue;
+	    else
+		break;
+	}
+
+	if (i >= buffer_size - 1){
+	    buffer = g_realloc (buffer, buffer_size += 80);
+	}
+
+	buffer [i++] = ch;
+
+    } while (ch != '\n');
+
+    *has_newline = ch ? 1 : 0;
+
+    if (buffer){
+	buffer [i] = 0;
+    }
+
+    return buffer;
+}
+
 /* 
  * search_content:
  *
- * Search with egrep the global (FIXME) content_pattern string in the
+ * Search the global (FIXME) content_pattern string in the
  * DIRECTORY/FILE.  It will add the found entries to the find listbox.
  */
 static void
@@ -359,13 +415,10 @@ search_content (Dlg_head *h, char *directory, char *filename)
 {
     struct stat s;
     char buffer [BUF_SMALL];
-    char *fname, *p;
-    int file_fd, pipe, ignoring;
-    char c;
-    int i;
-    pid_t pid;
-    char *egrep_path = "egrep";
-    char *egrep_opts = case_sensitive ? "-n" : "-in";
+    char *fname;
+    int file_fd;
+    regex_t r; /* FIXME: move from search_content and make static */
+    int flags = REG_EXTENDED|REG_NOSUB;
 
     fname = concat_dir_and_file (directory, filename);
 
@@ -380,57 +433,46 @@ search_content (Dlg_head *h, char *directory, char *filename)
     if (file_fd == -1)
 	return;
 
-#ifndef GREP_STDIN
-    pipe = mc_doublepopen (file_fd, -1, &pid, egrep_path, egrep_path, egrep_opts, content_pattern, NULL);
-#else /* GREP_STDIN */
-    pipe = mc_doublepopen (file_fd, -1, &pid, egrep_path, egrep_path, egrep_opts, content_pattern, "-", NULL);
-#endif /* GREP STDIN */
-
-    if (pipe == -1){
-	mc_close (file_fd);
-	return;
-    }
-
     g_snprintf (buffer, sizeof (buffer), _("Grepping in %s"), name_trunc (filename, FIND2_X_USE));
 
     status_update (buffer);
     mc_refresh ();
-    p = buffer;
-    ignoring = 0;
 
     enable_interrupt_key ();
     got_interrupt ();
 
-    while ((i = read (pipe, &c, 1)) == 1){
+    if (!case_sensitive)
+	flags |= REG_ICASE;
 
-	if (c == '\n'){
-	    p = buffer;
-	    ignoring = 0;
+    /* FIXME: Move regcomp/regfree from search_content;
+     *	      Inform user about malformed regular expression.
+     */
+    if (regcomp (&r, content_pattern, flags) == 0){
+	int line = 1;
+	int pos = 0;
+	int n_read = 0;
+	int has_newline;
+	char *p;
+	int found = 0;
+
+	while ((p = get_line_at (file_fd, buffer, &pos, &n_read, sizeof (buffer), &has_newline))){
+	    if (found == 0){	/* Search in binary line once */
+		if (regexec (&r, p, 1, 0, 0) == 0){
+		    g_free (p);
+		    p = g_strdup_printf ("%d:%s", line, filename);
+		    find_add_match (h, directory, p);
+		    found = 1;
+		}
+	    }
+	    if (has_newline){
+		line++;
+		found = 0;
+	    }
+	    g_free (p);
 	}
-
-	if (ignoring)
-	    continue;
-
-	if (c == ':'){
-	    char *the_name;
-
-	    *p = 0;
-	    ignoring = 1;
-	    the_name = g_strconcat (buffer, ":", filename, NULL);
-	    find_add_match (h, directory, the_name);
-	    g_free (the_name);
-	} else {
-	    if (p - buffer < (sizeof (buffer)-1) && ISASCII (c) && isdigit (c))
-		*p++ = c;
-	    else
-		*p = 0;
-	}
+	regfree (&r);
     }
     disable_interrupt_key ();
-    if (i == -1)
-	message (1, _(" Find/read "), _(" Problem reading from child "));
-
-    mc_doublepclose (pipe, pid);
     mc_close (file_fd);
 }
 
@@ -443,7 +485,7 @@ do_search (struct Dlg_head *h)
     struct stat tmp_stat;
     static int pos;
     static int subdirs_left = 0;
-    char *tmp_name;		/* For bulding file names */
+    char *tmp_name;		/* For building file names */
 
     if (!h) { /* someone forces me to close dirp */
 	if (dirp) {

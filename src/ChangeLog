@@ -1,3 +1,12 @@
+2001-09-23  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* find.c: Include rx.h or regex.h
+	(get_line_at): New function.  Returns malloc()ed null-terminated
+	line from file file_fd.  Input is buffered in buf_size long
+	buffer.
+	(search_content): Don't use external egrep.
+	Use get_line_at and regexp.
+
 2001-09-21  Pavel Roskin  <proski@gnu.org>
 
 	* cmd.c: Change all "long" variables to "off_t" whenever they
