@@ -5,8 +5,8 @@ To compile MC from CVS, the following software is required:
 
 Autoconf 2.52 and above
 Automake 1.5 and above
-Gettext 0.10.38 - 0.10.40 or (preferrably) 0.11.5 and above.
-Glib 1.2.6 and above on the 1.2.x branch or 2.0.x.
+Gettext 0.11.5 and above
+Glib 1.2.6 and above (2.x is OK)
 
 It is recommended that all those tools are installed with the same
 prefix.  Make sure that the tools with the right version are first in
@@ -22,5 +22,8 @@ This command can take a while.
 Tools currently used for snapshots:
 
 Autoconf 2.57
-Automake 1.7.6
-Gettext 0.11.5
+Automake 1.7.7
+
+The version of gettext doesn't affect the snapshot because the
+distributed files are installed by gettext from archives for the version
+used in the AM_GNU_GETTEXT_VERSION macro, which is 0.11.5.
