@@ -5,11 +5,13 @@ AC_INIT(create_vcs)
 AC_CONFIG_HEADER(config.h)
 
 PACKAGE=mc
-VERSION=4.5.34
+VERSION=4.5.35
 AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
 AC_DEFINE_UNQUOTED(VERSION, "$VERSION")
 AC_SUBST(VERSION)
 AC_SUBST(PACKAGE)
+top_srcdir=`dirname $0`
+AC_SUBST(top_srcdir)
 
 AC_CANONICAL_SYSTEM
 
@@ -69,7 +71,13 @@ if test x"$X11_WWW" = x; then
 fi
 
 ALL_LINGUAS="ca cs da de es es_ES fi fr hu it ja ko no pl ro ru wa zh_TW.Big5"
+
+dnl ultra ulgy hack to get MKINSTALLDIRS right
+o=$ac_aux_dir
+ac_aux_dir=
 AM_GNU_GETTEXT
+ac_aux_dir=$o
+
 AC_LINK_FILES($nls_cv_header_libgt, $nls_cv_header_intl)
 
 dnl

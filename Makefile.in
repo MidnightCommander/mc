@@ -109,6 +109,7 @@ distcopy:
 	for I in $(alldirs); do \
 	    mkdir ../mc-$(VERSION)/$$I; \
 	    cd $$I ; \
+	    echo Processing $$I; \
 	    $(MAKE) distcopy VERSION=$(VERSION) PACKAGE=mc || exit 1; \
 	    cd ..; done
 	mkdir ../mc-$(VERSION)/macros

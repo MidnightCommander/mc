@@ -79,7 +79,7 @@ vfsdir      = $(rootdir)/vfs
 xvdir       = $(rootdir)/xv
 tkdir	    = $(rootdir)/tk
 gnomedir    = $(rootdir)/gnome
-icodir      = $(rootdir)/icons
+icondir      = $(rootdir)/icons
 
 hpath = -I$(mcsrcdir) -I$(slangdir) -I$(vfsdir) -I$(xvdir) -I$(xvdir)/support/xview_private -I$(tkdir)
 
