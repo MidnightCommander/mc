@@ -25,6 +25,10 @@
 #include <sys/types.h>
 
 #undef	USE_NCURSES	/* Don't include *curses.h */
+#include "../src/global.h"
+#include "../src/tty.h"		/* enable/disable interrupt key */
+#include "../src/wtools.h"	/* message() */
+#include "../src/main.h"	/* print_vfs_message */
 #include "utilvfs.h"
 
 #undef	PACKAGE_BUGREPORT

@@ -19,6 +19,11 @@
 
 #include <config.h>
 #include <errno.h>
+
+#include "../src/global.h"
+#include "../src/tty.h"		/* enable/disable interrupt key */
+#include "../src/wtools.h"	/* message() */
+#include "../src/main.h"	/* print_vfs_message */
 #include "utilvfs.h"
 #include "vfs-impl.h"
 #include "gc.h"		/* vfs_rmstamp */

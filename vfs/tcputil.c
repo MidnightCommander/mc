@@ -23,7 +23,6 @@
 #include <sys/types.h>
 
 #include "tcputil.h"
-#include "utilvfs.h"
 
 int got_sigpipe;
 

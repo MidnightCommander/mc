@@ -1,11 +1,7 @@
 #ifndef MC_VFS_UTILVFS_H
 #define MC_VFS_UTILVFS_H
 
-#include "../src/global.h"
-
-#include "../src/tty.h"		/* enable/disable interrupt key */
-#include "../src/wtools.h"	/* message() */
-#include "../src/main.h"	/* print_vfs_message */
+#include <sys/stat.h>
 
 /* Flags for vfs_split_url() */
 #define URL_ALLOW_ANON 1
