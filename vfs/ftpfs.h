@@ -5,7 +5,7 @@
 #if !defined(__FTPFS_H)
 #define __FTPFS_H
 
-#include "vfs/xdirentry.h"
+#include "xdirentry.h"
 
 struct direntry
 {
