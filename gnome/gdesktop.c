@@ -35,6 +35,7 @@
 #define DIR_H_INCLUDE_HANDLE_DIRENT /* bleah */
 #include "dir.h"
 #include "file.h"
+#include "gconf.h"
 #include "gdesktop.h"
 #include "gdesktop-icon.h"
 #include "gicon.h"
@@ -230,7 +231,7 @@ desktop_icon_info_place (DesktopIconInfo *dii, int auto_pos, int xpos, int ypos)
 	char *filename;
 
 	if (auto_pos) {
-		if (desktop_auto_placement)
+		if (desktop_auto_placement || !desktop_snap_icons)
 			get_icon_auto_pos (&xpos, &ypos);
 		else if (desktop_snap_icons)
 			get_icon_snap_pos (&xpos, &ypos);
@@ -270,27 +271,45 @@ desktop_icon_info_place (DesktopIconInfo *dii, int auto_pos, int xpos, int ypos)
 	g_free (filename);
 }
 
-/*
- * Returns TRUE if there is already an icon in the desktop for the
- * specified filename, FALSE otherwise.
- */
-static int
-icon_exists (char *filename)
+/* Destroys all the current desktop icons */
+static void
+destroy_desktop_icons (void)
 {
 	int i;
 	GList *l;
 	DesktopIconInfo *dii;
 
-	for (i = 0; i < (layout_cols * layout_rows); i++)
-		for (l = layout_slots[i].icons; l; l = l->next) {
-			dii = l->data;
-			if (strcmp (filename, dii->filename) == 0)
-				return TRUE;
-		}
+	for (i = 0; i < (layout_cols * layout_rows); i++) {
+		l = layout_slots[i].icons;
 
-	return FALSE;
+		while (l) {
+			dii = l->data;
+			l = l->next;
+
+			desktop_icon_info_destroy (dii);
+		}
+	}
 }
 
+/* Returns a list with all of the icons on the desktop */
+static GList *
+get_all_icons (void)
+{
+	GList *l, *res;
+	int i;
+
+	res = NULL;
+
+	for (i = 0; i < (layout_cols * layout_rows); i++)
+		for (l = layout_slots [i].icons; l; l = l->next)
+			res = g_list_prepend (res, l->data);
+
+	return res;
+}
+
+/* Returns the node in the list of DesktopIconInfo structures that contains the
+ * icon for the specified filename.  If no icon is found, then returns NULL.
+ */
 static GList *
 icon_exists_in_list (GList *list, char *filename)
 {
@@ -307,40 +326,20 @@ icon_exists_in_list (GList *list, char *filename)
 	return NULL;
 }
 
-/*
- * Returns a GList with all of the icons on the desktop
- */
-GList *
-desktop_get_all_icons (void)
-{
-	GList *l, *res;
-	int i;
-
-	res = NULL;
-	for (i = 0; i < (layout_cols * layout_rows); i++)
-		for (l = layout_slots [i].icons; l; l = l->next){
-			res = g_list_prepend (res, l->data);
-		}
-
-	return res;
-}
-
-/*
- * Reads the ~/desktop directory and creates the desktop icons.  If
- * incremental is TRUE, then an icon will not be created for a file if
- * there is already an icon for it, and icons will be created starting
- * at the specified position.
+/* Reloads the desktop icons efficiently.  If there are "new" files for which no
+ * icons have been created, then icons for them will be created started at the
+ * specified position -- this is used when dragging new icons to the desktop.
  */
 static void
-load_desktop_icons (int incremental, int xpos, int ypos)
+reload_desktop_icons (int xpos, int ypos)
 {
 	struct dirent *dirent;
 	DIR *dir;
 	char *full_name;
 	int have_pos, x, y;
 	DesktopIconInfo *dii;
-	GSList *need_position_list, *l;
-	GList *all_icons;
+	GSList *need_position_list, *sl;
+	GList *all_icons, *l;
 
 	dir = mc_opendir (desktop_directory);
 	if (!dir) {
@@ -351,35 +350,30 @@ load_desktop_icons (int incremental, int xpos, int ypos)
 		return;
 	}
 
-	/*
-	 * First create the icons for all the files that do have their
-	 * icon position set.  Build a list of the icons that do not
-	 * have their position set.
+	/* Read the directory.  For each file for which we do have an existing
+	 * icon, do nothing.  Otherwise, if the file has its metadata for icon
+	 * position set, create an icon for it.  Otherwise, store it in a list
+	 * of new icons for which positioning is pending.
 	 */
 
 	need_position_list = NULL;
-
-	all_icons = desktop_get_all_icons ();
+	all_icons = get_all_icons ();
 	
 	while ((dirent = mc_readdir (dir)) != NULL) {
-		if (((dirent->d_name[0] == '.') && (dirent->d_name[1] == 0))
-		    || ((dirent->d_name[0] == '.') && (dirent->d_name[1] == '.') && (dirent->d_name[2] == 0)))
+		/* Skip . and .. */
+
+		if ((dirent->d_name[0] == '.' && dirent->d_name[1] == 0)
+		    || (dirent->d_name[0] == '.' && dirent->d_name[1] == '.'
+			&& dirent->d_name[2] == 0))
 			continue;
 
-		if (incremental){
-			GList *element;
-
-			element = icon_exists_in_list (all_icons, dirent->d_name);
-			
-			if (element){
-				g_list_remove_link (all_icons, element);
-				continue;
-			}
-
+		l = icon_exists_in_list (all_icons, dirent->d_name);
+		if (l) {
+			all_icons = g_list_remove_link (all_icons, l);
+			continue;
 		}
-		
-		full_name = g_concat_dir_and_file (desktop_directory, dirent->d_name);
 
+		full_name = g_concat_dir_and_file (desktop_directory, dirent->d_name);
 		have_pos = gmeta_get_icon_pos (full_name, &x, &y);
 
 		if (have_pos) {
@@ -388,74 +382,44 @@ load_desktop_icons (int incremental, int xpos, int ypos)
 
 			g_free (full_name);
 		} else
-			need_position_list = g_slist_prepend (need_position_list, g_strdup (dirent->d_name));
+			need_position_list = g_slist_prepend (need_position_list,
+							      g_strdup (dirent->d_name));
 	}
 
 	mc_closedir (dir);
 
-	/*
-	 * all_icons now contains a list of all of the icons that were not found
-	 * in the ~/desktop directory, remove them.
+	/* all_icons now contains a list of all of the icons that were not found
+	 * in the ~/desktop directory, remove them.  To be paranoically tidy,
+	 * also delete the icon position information -- someone may have deleted
+	 * a file under us.
 	 */
-	if (incremental){
-		GList *l;
-		
-		for (l = all_icons; l; l = l->next){
-			DesktopIconInfo *dii = l->data;
 
-			desktop_icon_destroy (dii);
-		}
+	for (l = all_icons; l; l = l->next) {
+		dii = l->data;
+		full_name = g_concat_dir_and_file (desktop_directory, dii->filename);
+		gmeta_del_icon_pos (full_name);
+		g_free (full_name);
+		desktop_icon_info_destroy (dii);
 	}
+
 	g_list_free (all_icons);
 
-	/*
-	 * Now create the icons for all the files that did not have their position set.  This makes
-	 * auto-placement work correctly without overlapping icons.
+	/* Now create the icons for all the files that did not have their
+	 * position set.  This makes auto-placement work correctly without
+	 * overlapping icons.
 	 */
 
 	need_position_list = g_slist_reverse (need_position_list);
 
-	for (l = need_position_list; l; l = l->next) {
-		dii = desktop_icon_info_new (l->data, TRUE, xpos, ypos);
+	for (sl = need_position_list; sl; sl = sl->next) {
+		dii = desktop_icon_info_new (sl->data, TRUE, xpos, ypos);
 		gtk_widget_show (dii->dicon);
-		g_free (l->data);
+		g_free (sl->data);
 	}
 
 	g_slist_free (need_position_list);
-}
 
-/* Destroys all the current desktop icons */
-static void
-destroy_desktop_icons (void)
-{
-	int i;
-	GList *l;
-	DesktopIconInfo *dii;
-
-	for (i = 0; i < (layout_cols * layout_rows); i++) {
-		l = layout_slots[i].icons;
-
-		while (l) {
-			dii = l->data;
-			l = l->next;
-
-			desktop_icon_destroy (dii);
-		}
-	}
-}
-
-/*
- * Reloads the desktop icons.  If incremental is TRUE, then the
- * existing icons will not be destroyed first, and the new icons will
- * be put at the specified position.
- */
-static void
-reload_desktop_icons (int incremental, int x, int y)
-{
-	if (!incremental)
-		destroy_desktop_icons ();
-
-	load_desktop_icons (incremental, x, y);
+	/* Flush events to make the icons paint themselves */
 	x_flush_events ();
 }
 
@@ -511,8 +475,17 @@ select_range (DesktopIconInfo *dii, int sel)
 	} else {
 		min_u = lu;
 		max_u = du;
-		min_udii = last_selected_icon;
-		max_udii = dii;
+
+		/* Even if the icons are on the same slot, their positions may
+		 * need adjusting with respect to each other.
+		 */
+		if (du != lu || last_selected_icon->x < dii->x) {
+			min_udii = last_selected_icon;
+			max_udii = dii;
+		} else {
+			min_udii = dii;
+			max_udii = last_selected_icon;
+		}
 	}
 
 	if (dv < lv) {
@@ -523,8 +496,15 @@ select_range (DesktopIconInfo *dii, int sel)
 	} else {
 		min_v = lv;
 		max_v = dv;
-		min_vdii = last_selected_icon;
-		max_vdii = dii;
+
+		/* Same as above */
+		if (dv != lv || last_selected_icon->y < dii->y) {
+			min_vdii = last_selected_icon;
+			max_vdii = dii;
+		} else {
+			min_vdii = dii;
+			max_vdii = last_selected_icon;
+		}
 	}
 
 	/* Select all the icons in the rectangle */
@@ -721,9 +701,14 @@ editing_stopped (GnomeIconTextItem *iti, gpointer data)
 	setup_icon_dnd_actions (dii);
 }
 
-/* Used to open a desktop icon when the user double-clicks on it */
+/**
+ * desktop_icon_info_open:
+ * @dii: The desktop icon to open.
+ * 
+ * Opens the specified desktop icon when the user double-clicks on it.
+ **/
 void
-desktop_icon_open (DesktopIconInfo *dii)
+desktop_icon_info_open (DesktopIconInfo *dii)
 {
 	char *filename;
 	file_entry *fe;
@@ -741,7 +726,7 @@ desktop_icon_open (DesktopIconInfo *dii)
 }
 
 void
-desktop_icon_delete (DesktopIconInfo *dii)
+desktop_icon_info_delete (DesktopIconInfo *dii)
 {
 	char *full_name;
 	struct stat s;
@@ -758,11 +743,13 @@ desktop_icon_delete (DesktopIconInfo *dii)
 		erase_dir (full_name, &progress_count, &progress_bytes);
 	else
 		erase_file (full_name, &progress_count, &progress_bytes, TRUE);
+
+	gmeta_del_icon_pos (full_name);
 	g_free (full_name);
 	destroy_op_win ();
 
 	/* 2. Destroy the dicon */
-	desktop_icon_destroy (dii);
+	desktop_icon_info_destroy (dii);
 }
 
 /* Used to execute the popup menu for desktop icons */
@@ -774,7 +761,7 @@ do_popup_menu (DesktopIconInfo *dii, GdkEventButton *event)
 	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
 
 	if (gpopup_do_popup (event, NULL, dii, 0, filename) != -1)
-		reload_desktop_icons (TRUE, 0, 0); /* bleah */
+		reload_desktop_icons (0, 0);
 
 	g_free (filename);
 }
@@ -860,7 +847,7 @@ icon_button_press (GtkWidget *widget, GdkEventButton *event, gpointer data)
 		if (event->button != 1)
 			break;
 
-		desktop_icon_open (dii);
+		desktop_icon_info_open (dii);
 		retval = TRUE;
 		break;
 
@@ -1285,12 +1272,14 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 	return dii;
 }
 
-/*
- * Frees a desktop icon information structure, and destroy the icon
- * widget.  Does not remove the structure from the desktop_icons list!
- */
+/**
+ * desktop_icon_info_destroy:
+ * @dii: The desktop icon to destroy
+ *
+ * Destroys the specified desktop icon.
+ **/
 void
-desktop_icon_destroy (DesktopIconInfo *dii)
+desktop_icon_info_destroy (DesktopIconInfo *dii)
 {
 	gtk_widget_destroy (dii->dicon);
 	remove_from_slot (dii);
@@ -1553,7 +1542,7 @@ desktop_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, 
 	case TARGET_URI_LIST:
 		retval = gdnd_drop_on_directory (context, data, desktop_directory);
 		if (retval)
-			reload_desktop_icons (TRUE, x, y);
+			reload_desktop_icons (x, y);
 
 		break;
 
@@ -2073,7 +2062,7 @@ desktop_init (void)
 {
 	create_layout_info ();
 	create_desktop_dir ();
-	load_desktop_icons (FALSE, 0, 0);
+	reload_desktop_icons (0, 0);
 	setup_desktop_dnd ();
 	setup_desktop_clicks ();
 }

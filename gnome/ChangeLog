@@ -1,3 +1,17 @@
+1999-01-01  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (select_range): Fixed selection of ranges where the
+	starting and ending icons are in the same vertical or horizontal
+	slot.
+	(reload_desktop_icons): Fixed incorrect usage of
+	g_list_remove_link().  Also, moved the functionality from the old
+	load_desktop_icons() here.  Now all icons are always loaded
+	efficiently, and there is no need for the "incremental" flag.
+	(desktop_icon_info_delete): Delete the icon position information.
+
+	* gmetadata.c (gmeta_del_icon_pos): New public function to delete
+	the icon position information from a file.
+
 1999-01-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gwidget.c (x_create_listbox): Temporary hack
@@ -22,6 +36,19 @@
 	* gcmd.c ((GtkWidget *widget, WPanel *panel): Now hooked up
 	correctly.  Still needs to set the option menu correctly.  Oh
 	well...
+
+1998-12-31  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gpopup.c (dicon_properties): Made static, and renamed from
+	desktop_icon_properties().
+	(dicon_execute): Likewise.
+	(dicon_actions): Renamed from desktop_icon_actions.
+
+	* gdesktop.c (desktop_icon_info_destroy): Renamed from
+	desktop_icon_destroy(), for consistency with the rest of the
+	functions that handle DesktopIconInfo structures.
+	(desktop_icon_info_open): Likewise.
+	(desktop_icon_info_delete): Likewise.
 
 1998-12-31  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 

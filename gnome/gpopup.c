@@ -78,15 +78,9 @@ panel_action_edit (GtkWidget *widget, WPanel *panel)
 	edit_cmd (panel);
 }
 
-static void
-desktop_icon_view(GtkWidget *widget, DesktopIconInfo *dii)
-{
-	g_warning ("Not yet implemented\n");
-}
-
 /* Pops up the icon properties pages */
-void
-desktop_icon_properties (GtkWidget *widget, DesktopIconInfo *dii)
+static void
+dicon_properties (GtkWidget *widget, DesktopIconInfo *dii)
 {
 	int retval;
 	char *path;
@@ -98,10 +92,11 @@ desktop_icon_properties (GtkWidget *widget, DesktopIconInfo *dii)
 		reread_cmd ();
 }
 
-void
-desktop_icon_execute (GtkWidget *ignored, DesktopIconInfo *dii)
+/* Executes a desktop icon */
+static void
+dicon_execute (GtkWidget *widget, DesktopIconInfo *dii)
 {
-	desktop_icon_open (dii);
+	desktop_icon_info_open (dii);
 }
 
 static void
@@ -131,7 +126,7 @@ dicon_copy (GtkWidget *widget, DesktopIconInfo *dii)
 static void
 dicon_delete (GtkWidget *widget, DesktopIconInfo *dii)
 {
-	desktop_icon_delete (dii);
+	desktop_icon_info_delete (dii);
 }
 
 /* This is our custom signal connection function for popup menu items -- see below for the
@@ -202,10 +197,10 @@ fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, int pos)
  */
 static struct action file_actions[] = {
 	{ N_("Properties"),      F_SINGLE | F_PANEL,   	  	 (GtkSignalFunc) panel_action_properties },
-	{ N_("Properties"),      F_SINGLE | F_DICON,  	  	 (GtkSignalFunc) desktop_icon_properties },
+	{ N_("Properties"),      F_SINGLE | F_DICON,  	  	 (GtkSignalFunc) dicon_properties },
 	{ "",                    F_SINGLE,   	    	  	 NULL },
 	{ N_("Open"),            F_PANEL | F_ALL,      	  	 (GtkSignalFunc) panel_action_open },
-	{ N_("Open"),            F_DICON | F_ALL, 	  	 (GtkSignalFunc) desktop_icon_execute },
+	{ N_("Open"),            F_DICON | F_ALL, 	  	 (GtkSignalFunc) dicon_execute },
 	{ N_("Open with"),       F_PANEL | F_ALL,      	  	 (GtkSignalFunc) panel_action_open_with },
 	{ N_("View"),            F_PANEL | F_NOTDIR,      	 (GtkSignalFunc) panel_action_view },
 	{ N_("View unfiltered"), F_PANEL | F_NOTDIR,      	 (GtkSignalFunc) panel_action_view_unfiltered },  
@@ -228,7 +223,7 @@ static GnomeUIInfo panel_actions[] = {
 };
 
 /* Menu entries for files from desktop icons */
-static GnomeUIInfo desktop_icon_actions[] = {
+static GnomeUIInfo dicon_actions[] = {
 	GNOMEUIINFO_SEPARATOR,
 #if 0
 	GNOMEUIINFO_ITEM_NONE (N_("Move/rename..."), NULL, dicon_move),
@@ -413,7 +408,7 @@ create_regexp_actions (GtkWidget *menu, WPanel *panel,
 		regex_callback = mime_command_from_desktop_icon;
 		regex_closure = filename;
 	} else {
-		a_uiinfo = desktop_icon_actions;
+		a_uiinfo = dicon_actions;
 		closure = dii;
 		regex_callback = mime_command_from_desktop_icon;
 		regex_closure = filename;
