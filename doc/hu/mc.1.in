@@ -1789,23 +1789,19 @@ parancssor elérhetõ. Alapértelmezésben ez a beállítás ki van
 kapcsolva.
 .PP
 .I Cd követi a linket
-Ez az opció, ha be van állítva, akkor
-a Midnight Commander követi a könyvtárak logikai kapcsolatait
-ha könyvtárat váltasz valamelyik panelben, vagy a cd parancsot
-használod. Ez alapértelmezésben a bash jellemzõje. Amikor ez
-nincs beállítva, a Midnight Commander a valós
-könyvtárszerkezetet követi, úgy, mint amikor a cd..-t
-gépeled be, a könyvtáron keresztül átlépsz a "szülõ"
-könyvtárba, és nem abba a könyvtárba, amelyre a link mutat.
+Ez az opció, ha be van állítva, akkor a Midnight Commander követi a
+könyvtárak logikai kapcsolatait ha könyvtárat váltasz valamelyik
+panelben, vagy a cd parancsot használod. Ez alapértelmezésben a bash
+jellemzõje. Amikor ez nincs beállítva, a Midnight Commander a valós
+könyvtárszerkezetet követi, úgy, mint amikor a cd..-t gépeled be, a
+könyvtáron keresztül átlépsz a "szülõ" könyvtárba, és nem abba a
+könyvtárba, amelyre a link mutat.
 .PP
 .I Biztonságos törlés
 Ha ezt az opciót engedélyezted, a fájlok közvetlen szándék nélkül
 törlését megnehezíted.  Alapesetben egy "Megerõsítés" dialógus ablaknan
-választhatunk az "Igen" és "Nem" gombok között törléskor.  A nem üres
-könyvtár esetén az
-.I Igen
-szóval kell engedélyeztetni a törlést. Alapesetben ez az opció nem
-engedélyezett.
+választhatunk az "Igen" és "Nem" gombok között törléskor. Alapesetben ez
+az opció nem engedélyezett.
 .\"NODE "    Layout"
 .SH "    Megjelenés"
 A Megjelenés dialógus ablakban megváltoztathatod a képernyõ-megjelenés
