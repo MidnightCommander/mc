@@ -308,7 +308,7 @@ shell/.sdw
 	Open=(ooffice %f &)
 
 # StarOffice 6 and OpenOffice.org formats
-shell/.(sxw|stw|sxc|stc|sxi|sti|sxd|std|sxm|sxg)
+regex/\.(sxw|stw|sxc|stc|sxi|sti|sxd|std|sxm|sxg)$
 	Open=(ooffice %f &)
 
 # AbiWord
@@ -446,9 +446,7 @@ shell/.cpio
 	View=%view{ascii} cpio -itv <'%f' 2>/dev/null
 
 # ls-lR
-regex/(^|\.)ls-?lR$
-	Open=%cd %p#lslR
-regex/(^|\.)ls-?lR\.(g?z|Z|bz2)$
+regex/(^|\.)ls-?lR(\.g?z|Z|bz2)?$
 	Open=%cd %p#lslR
 
 # patch
@@ -489,7 +487,7 @@ regex/\.trpm$
 # RPM packages (SuSE uses *.spm for source packages)
 regex/\.(rpm|spm)$
 	Open=%cd %p#rpm
-	View=%view{ascii} rpm -qivlp --nosignature --scripts %f
+	View=%view{ascii} if rpm --nosignature --version >/dev/null 2>&1; then RPM="rpm --nosignature" ; else RPM="rpm" fi ; $RPM -qivlp --scripts %f
 
 # deb
 regex/\.deb$
