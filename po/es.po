@@ -4730,6 +4730,7 @@ msgid ""
 "Couldn't open %s archive\n"
 "%s"
 msgstr "No pude abrir la tubería con nombre %s\n"
+"%s"
 
 #: vfs/extfs.c:303 vfs/extfs.c:323
 msgid "Inconsistent extfs archive"
@@ -4807,6 +4808,7 @@ msgid ""
 "Couldn't open tar archive\n"
 "%s"
 msgstr "No pude abrir la tubería con nombre %s\n"
+"%s"
 
 # , fuzzy, c-format
 #: vfs/tar.c:388
@@ -4814,6 +4816,7 @@ msgid ""
 "Couldn't load compressed tar\n"
 "%s"
 msgstr "No pude abrir la tubería con nombre %s\n"
+"%s"
 
 # , fuzzy, c-format
 #: vfs/tar.c:395
@@ -4821,6 +4824,7 @@ msgid ""
 "Couldn't uncompress tar archive\n"
 "%s"
 msgstr "No pude abrir la tubería con nombre %s\n"
+"%s"
 
 #: vfs/tar.c:554
 msgid "Unexpected EOF on archive file"

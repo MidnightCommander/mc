@@ -1,3 +1,7 @@
+1998-10-25  Kjartan Maraas  <kmaraas@fib.hl.no>
+
+	* no.po: Added norwegian translation.
+	
 Sun May 31 22:02:33 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* it.po: deleted additional "\n" in one msgstr

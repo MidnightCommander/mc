@@ -21,10 +21,10 @@ mad.c: mc-src/mad.c
 mad.h: mc-src/mad.h
 	$(LN_S) $< $@
 
-libvfs_la_SOURCES = callback.h container.c container.h extfs.c extfs.h \
-ftpfs.c ftpfs.h fish.c fish.h local.c mad.c mad.h mcfs.c mcfs.h mcserv.c \
-names.c names.h shared_ftp_fish.c shared_tar_ext.c tar.c tar.h sfs.c \
-tcputil.c tcputil.h undelfs.c undelfs.h util-alone.c util-alone.h \
-utilvfs.c vfs.c vfs.h
+libvfs_la_SOURCES = callback.h container.c direntry.c container.h extfs.c \
+extfs.h ftpfs.c ftpfs.h fish.c fish.h local.c mad.c mad.h mcfs.c mcfs.h \
+mcserv.c names.c names.h shared_ftp_fish.c shared_tar_ext.c tar.c tar.h \
+sfs.c tcputil.c tcputil.h undelfs.c undelfs.h util-alone.c util-alone.h \
+utilvfs.c vfs.c vfs.h xdirentry.h
 
 libvfs_la_LDFLAGS = -version-info 27:0:27

@@ -24,6 +24,7 @@ NETFILES   = tcputil.o fish.o ftpfs.o mcfs.o utilvfs.o
 
 NONETFILES = 			\
 	container.o		\
+	direntry.o		\
 	extfs.o 		\
 	local.o 		\
 	names.o			\
@@ -33,6 +34,7 @@ NONETFILES = 			\
 
 VFSSRCS = \
 	container.c 		\
+	direntry.c		\
 	extfs.c 		\
 	ftpfs.c 		\
 	fish.c 			\
