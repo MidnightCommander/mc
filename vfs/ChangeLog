@@ -1,8 +1,13 @@
+2000-03-29  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* fish.c: Patch by <rebel@atrey.karlin.mff.cuni.cz>: make 
+	fish work better with files files like "this is sentence"	
+
 2000-03-28  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* extfs/*rpm: Patch by <rebel@atrey.karlin.mff.cuni.cz>: set
 	locale to C so that rpm does not confuse us
-
+	
 2000-03-06  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	Patch by  Andrew V. Samoilov <sav@bcs.zp.ua>

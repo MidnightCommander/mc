@@ -4,6 +4,7 @@
    Copyright (C) 1998 The Free Software Foundation
    
    Written by: 1998 Pavel Machek
+   Spaces fix: 2000 Michal Svec
 
    $Id$
 
@@ -337,10 +338,18 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
 					   stressing direntry layer a bit */
 
     command(me, super, NONE,
-    "#LIST /%s\nls -lLa /%s | grep '^[^cbt]' | ( while read p x u g s m d y n; do echo \"P$p $u.$g\n"
-    "S$s\nd$m $d $y\n:$n\n\"; done )\n"
-    "ls -lLa /%s | grep '^[cb]' | ( while read p x u g a i m d y n; do echo \"P$p $u.$g\n"
-    "E$a$i\nd$m $d $y\n:$n\n\"; done ); echo '### 200'\n",
+	    "#LIST /%s\n"
+	    "ls -lLa \"/%s\" | grep '^[^cbt]' | (\n"
+	      "while read p x u g s m d y n; do\n"
+	        "echo \"P$p $u.$g\nS$s\nd$m $d $y\n:$n\n\"\n"
+	      "done\n"
+	    ")\n"
+	    "ls -lLa \"/%s\" | grep '^[cb]' | (\n"
+	      "while read p x u g a i m d y n; do\n"
+	        "echo \"P$p $u.$g\nE$a$i\nd$m $d $y\n:$n\n\"\n"
+	      "done\n"
+	    ")\n"
+	    "echo '### 200'\n",
 	    remote_path, remote_path, remote_path);
 
 #define SIMPLE_ENTRY vfs_s_generate_entry(me, NULL, dir, 0)
@@ -375,8 +384,8 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
 		      if (!strcmp(buffer+1, ".") || !strcmp(buffer+1, ".."))
 			  break;  /* We'll do . and .. ourself */
 		      ent->name = g_strdup(buffer+1); 
-		      if ((c=strchr(ent->name, ' ')))
-			  *c = 0; /* this is ugly, but we can not handle " " in name */
+		      /* if ((c=strchr(ent->name, ' ')))
+			  *c = 0; / * this is ugly, but we can not handle " " in name */
 		      break;
 	          }
 	case 'S': ST.st_size = atoi(buffer+1); break;
@@ -447,8 +456,19 @@ file_store(vfs *me, vfs_s_super *super, char *name, char *localname)
     /* Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null ) */
 
     print_vfs_message(_("fish: store %s: sending command..."), name );
-    if (command (me, super, WAIT_REPLY, 
-		 "#STOR %d /%s\n> /%s; echo '### 001'; ( dd bs=4096 count=%d; dd bs=%d count=1 ) 2>/dev/null | ( cat > /%s; cat > /dev/null ); echo '### 200'\n",
+    if (command (me, super, WAIT_REPLY,
+		 "#STOR %d /%s\n"
+		 "> \"/%s\"\n"
+		 "echo '### 001'\n"
+		 "(\n"
+		   "dd bs=4096 count=%d\n"
+		   "dd bs=%d count=1\n"
+		 ") 2>/dev/null | (\n"
+		   "cat > \"/%s\"\n"
+		   "cat > /dev/null\n"
+		 "); echo '### 200'\n",
+	      /* ")\n"                       Why can't it be like this?
+	         "echo '### 200'\n", */
 		 s.st_size, name, name,
 		 s.st_size / 4096, s.st_size % 4096, name)
 	!= PRELIM) 
@@ -495,7 +515,14 @@ static int linear_start(vfs *me, vfs_s_fh *fh, int offset)
     if (!name)
 	return 0;
     if (command(me, FH_SUPER, WANT_STRING, 
-		"#RETR /%s\nls -l /%s | ( read var1 var2 var3 var4 var5 var6; echo $var5 ); echo '### 100'; cat /%s; echo '### 200'\n", 
+		"#RETR /%s\n"
+		"ls -l \"/%s\" | (\n"
+		  "read var1 var2 var3 var4 var5 var6\n"
+		  "echo \"$var5\"\n"
+		")\n"
+		"echo '### 100'\n"
+		"cat \"/%s\"\n"
+		"echo '### 200'\n", 
 		name, name, name )
 	!= PRELIM) ERRNOR (E_REMOTE, 0);
     fh->linear = LS_LINEAR_OPEN;
@@ -605,7 +632,7 @@ static int
 fish_chmod (vfs *me, char *path, int mode)
 {
     PREFIX
-    g_snprintf(buf, sizeof(buf), "#CHMOD %4.4o /%s\nchmod %4.4o /%s; echo '### 000'\n", 
+    g_snprintf(buf, sizeof(buf), "#CHMOD %4.4o /%s\nchmod %4.4o \"/%s\"; echo '### 000'\n", 
 	    mode & 07777, rpath,
 	    mode & 07777, rpath);
     POSTFIX(OPT_FLUSH);
@@ -626,13 +653,17 @@ static int fish_##name (vfs *me, char *path1, char *path2) \
 }
 
 #define XTEST if (bucket1 != bucket2) { ERRNOR (EXDEV, -1); }
-FISH_OP(rename, XTEST, "#RENAME /%s /%s\nmv /%s /%s; echo '### 000'" );
-FISH_OP(link,   XTEST, "#LINK /%s /%s\nln /%s /%s; echo '### 000'" );
+FISH_OP(rename, XTEST, "#RENAME /%s /%s\nmv \"/%s\" \"/%s\"; echo '### 000'" );
+FISH_OP(link,   XTEST, "#LINK /%s /%s\nln \"/%s\" \"/%s\"; echo '### 000'" );
 
 static int fish_symlink (vfs *me, char *setto, char *path)
 {
     PREFIX
-    g_snprintf(buf, sizeof(buf), "#SYMLINK %s /%s\nln -s %s /%s; echo '### 000'\n", setto, rpath, setto, rpath);
+    g_snprintf(buf, sizeof(buf),
+            "#SYMLINK %s /%s\n"
+	    "ln -s \"%s\" \"/%s\"\n"
+	    "echo '### 000'\n",
+	    setto, rpath, setto, rpath);
     POSTFIX(OPT_FLUSH);
 }
 
@@ -643,35 +674,54 @@ fish_chown (vfs *me, char *path, int owner, int group)
     PREFIX
     sowner = getpwuid( owner )->pw_name;
     sgroup = getgrgid( group )->gr_name;
-    g_snprintf(buf, sizeof(buf), "#CHOWN /%s /%s\nchown /%s /%s; echo '### 000'\n", 
+    g_snprintf(buf, sizeof(buf),
+            "#CHOWN /%s /%s\n"
+	    "chown %s \"/%s\"\n"
+	    "echo '### 000'\n", 
 	    sowner, rpath,
 	    sowner, rpath);
     send_fish_command(me, super, buf, OPT_FLUSH); 
                   /* FIXME: what should we report if chgrp succeeds but chown fails? */
-    g_snprintf(buf, sizeof(buf), "#CHGRP /%s /%s\nchgrp /%s /%s; echo '### 000'\n", 
+    g_snprintf(buf, sizeof(buf),
+            "#CHGRP /%s /%s\n"
+	    "chgrp %s \"/%s\"\n"
+	    "echo '### 000'\n", 
 	    sgroup, rpath,
 	    sgroup, rpath);
+    //send_fish_command(me, super, buf, OPT_FLUSH); 
     POSTFIX(OPT_FLUSH)
 }
 
 static int fish_unlink (vfs *me, char *path)
 {
     PREFIX
-    g_snprintf(buf, sizeof(buf), "#DELE /%s\nrm -f /%s; echo '### 000'\n", rpath, rpath);
+    g_snprintf(buf, sizeof(buf),
+            "#DELE /%s\n"
+	    "rm -f \"/%s\"\n"
+	    "echo '### 000'\n",
+	    rpath, rpath);
     POSTFIX(OPT_FLUSH);
 }
 
 static int fish_mkdir (vfs *me, char *path, mode_t mode)
 {
     PREFIX
-    g_snprintf(buf, sizeof(buf), "#MKD /%s\nmkdir /%s; echo '### 000'\n", rpath, rpath);
+    g_snprintf(buf, sizeof(buf),
+            "#MKD /%s\n"
+	    "mkdir \"/%s\"\n"
+	    "echo '### 000'\n",
+	    rpath, rpath);
     POSTFIX(OPT_FLUSH);
 }
 
 static int fish_rmdir (vfs *me, char *path)
 {
     PREFIX
-    g_snprintf(buf, sizeof(buf), "#RMD /%s\nrmdir /%s; echo '### 000'\n", rpath, rpath);
+    g_snprintf(buf, sizeof(buf),
+            "#RMD /%s\n"
+	    "rmdir \"/%s\"\n"
+	    "echo '### 000'\n",
+	    rpath, rpath);
     POSTFIX(OPT_FLUSH);
 }
 
