@@ -114,7 +114,7 @@ struct vfs_s_fh {
  * One of our subclasses (tar, cpio, fish, ftpfs) with data and methods.
  * Extends vfs_class.  Stored in the "data" field of vfs_class.
  */
-struct vfs_s_data {
+struct vfs_s_subclass {
     struct vfs_s_super *supers;
     int inode_counter;
     dev_t rdev;
@@ -202,7 +202,7 @@ int vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino);
 
 #define ERRNOR(a, b) do { me->verrno = a; return b; } while (0)
 
-#define MEDATA ((struct vfs_s_data *) me->data)
+#define MEDATA ((struct vfs_s_subclass *) me->data)
 
 #define FH ((struct vfs_s_fh *) fh)
 #define FH_SUPER FH->ino->super

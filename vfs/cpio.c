@@ -594,41 +594,22 @@ static int cpio_fh_open(struct vfs_class *me, struct vfs_s_fh *fh, int flags, in
     return 0;
 }
 
-static struct vfs_s_data cpiofs_data = {
-    NULL,
-    0,
-    0,
-    NULL,
-
-    NULL, /* init inode */
-    NULL, /* free inode */
-    NULL, /* init entry */
-
-    cpio_super_check,
-    cpio_super_same,
-    cpio_open_archive,
-    cpio_free_archive,
-
-    cpio_fh_open,
-    NULL,
-
-    vfs_s_find_entry_tree,
-    NULL,
-    NULL,
-    NULL,
-
-    NULL,
-    NULL,
-    NULL
-};
-
 void
 init_cpiofs (void)
 {
+    static struct vfs_s_subclass cpiofs_subclass;
+
+    cpiofs_subclass.archive_check = cpio_super_check;
+    cpiofs_subclass.archive_same = cpio_super_same;
+    cpiofs_subclass.open_archive = cpio_open_archive;
+    cpiofs_subclass.free_archive = cpio_free_archive;
+    cpiofs_subclass.fh_open = cpio_fh_open;
+    cpiofs_subclass.find_entry = vfs_s_find_entry_tree;
+
     vfs_s_init_class (&vfs_cpiofs_ops);
     vfs_cpiofs_ops.name = "cpiofs";
     vfs_cpiofs_ops.prefix = "ucpio";
-    vfs_cpiofs_ops.data = &cpiofs_data;
+    vfs_cpiofs_ops.data = &cpiofs_subclass;
     vfs_cpiofs_ops.read = cpio_read;
     vfs_cpiofs_ops.write = NULL;
     vfs_cpiofs_ops.setctl = NULL;

@@ -496,41 +496,22 @@ static int tar_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags, in
     return 0;
 }
 
-static struct vfs_s_data tarfs_data = {
-    NULL,
-    0,
-    0,
-    NULL, /* logfile */
-
-    NULL, /* init_inode */
-    NULL, /* free_inode */
-    NULL, /* init_entry */
-
-    tar_super_check,
-    tar_super_same,
-    open_archive,
-    tar_free_archive,
-
-    tar_fh_open, /* fh_open */
-    NULL, /* fh_close */
-
-    vfs_s_find_entry_tree,
-    NULL,
-    NULL,
-    NULL,
-
-    NULL,
-    NULL,
-    NULL
-};
-
 void
 init_tarfs (void)
 {
+    static struct vfs_s_subclass tarfs_subclass;
+
+    tarfs_subclass.archive_check = tar_super_check;
+    tarfs_subclass.archive_same = tar_super_same;
+    tarfs_subclass.open_archive = open_archive;
+    tarfs_subclass.free_archive = tar_free_archive;
+    tarfs_subclass.fh_open = tar_fh_open;
+    tarfs_subclass.find_entry = vfs_s_find_entry_tree;
+
     vfs_s_init_class (&vfs_tarfs_ops);
     vfs_tarfs_ops.name = "tarfs";
     vfs_tarfs_ops.prefix = "utar";
-    vfs_tarfs_ops.data = &tarfs_data;
+    vfs_tarfs_ops.data = &tarfs_subclass;
     vfs_tarfs_ops.read = tar_read;
     vfs_tarfs_ops.write = NULL;
     vfs_tarfs_ops.ungetlocalcopy = tar_ungetlocalcopy;

@@ -833,38 +833,10 @@ static int fish_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags, i
     return 0;
 }
 
-static struct vfs_s_data fish_data = {
-    NULL,
-    0,
-    0,
-    NULL,
-
-    NULL, /* init_inode */
-    NULL, /* free_inode */
-    NULL, /* init_entry */
-
-    NULL, /* archive_check */
-    archive_same,
-    open_archive,
-    free_archive,
-
-    fish_fh_open, /* fh_open */
-    NULL, /* fh_close */
-
-    vfs_s_find_entry_linear,
-    dir_load,
-    dir_uptodate,
-    file_store,
-
-    linear_start,
-    linear_read,
-    linear_close
-};
-
 static void
 fish_fill_names (struct vfs_class *me, void (*func)(char *))
 {
-    struct vfs_s_super *super = fish_data.supers;
+    struct vfs_s_super *super = MEDATA->supers;
     char *flags;
     char *name;
     
@@ -895,10 +867,24 @@ fish_fill_names (struct vfs_class *me, void (*func)(char *))
 void
 init_fish (void)
 {
+    static struct vfs_s_subclass fish_subclass;
+
+    fish_subclass.archive_same = archive_same;
+    fish_subclass.open_archive = open_archive;
+    fish_subclass.free_archive = free_archive;
+    fish_subclass.fh_open = fish_fh_open;
+    fish_subclass.find_entry = vfs_s_find_entry_linear;
+    fish_subclass.dir_load = dir_load;
+    fish_subclass.dir_uptodate = dir_uptodate;
+    fish_subclass.file_store = file_store;
+    fish_subclass.linear_start = linear_start;
+    fish_subclass.linear_read = linear_read;
+    fish_subclass.linear_close = linear_close;
+
     vfs_s_init_class (&vfs_fish_ops);
     vfs_fish_ops.name = "fish";
     vfs_fish_ops.prefix = "sh:";
-    vfs_fish_ops.data = &fish_data;
+    vfs_fish_ops.data = &fish_subclass;
     vfs_fish_ops.fill_names = fish_fill_names;
     vfs_fish_ops.chmod = fish_chmod;
     vfs_fish_ops.chown = fish_chown;

@@ -1,5 +1,11 @@
 2003-10-16  Pavel Roskin  <proski@gnu.org>
 
+	* xdirentry.h: Rename vfs_s_data to vfs_s_subclass.
+	* cpio.c: Initialize only non-zero fields in vfs_s_subclass.
+	* fish.c: Likewise.
+	* ftpfs.c: Likewise.
+	* tar.c: Likewise.
+
 	* vfs.h: Rename commands for mc_ctl() and mc_setctl() to make it
 	clear which function they are used with.
 	* vfs.c (mc_ctl): Change last argument to (void*).
