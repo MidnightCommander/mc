@@ -32,6 +32,7 @@ ALLICONS = 				\
 	gnome-image-xpm.png		\
 	gnome-image-xwd.png		\
 	gnome-pack-deb.png		\
+	gnome-pack-rpm.png		\
 	gnome-video-mpeg.png		\
 	gnome-video-quicktime.png 	\
 	gnome-video-x-msvideo.png 	\
