@@ -16,8 +16,8 @@ save_IFS="$IFS"; IFS=:
 for dir in $PATH; do
     IFS="$save_IFS"
     test -z "$dir" && dir=.
-    if test -x $dir/unrar -a -f $dir/unrar; then
-	UNRAR=$dir/unrar
+    if test -x "$dir/unrar" -a -f "$dir/unrar"; then
+	UNRAR="$dir/unrar"
 	break
     fi
 done
@@ -58,12 +58,12 @@ mcrarfs_copyin ()
     cd "$3.dir"
     di="${2%/*}"
 # if file is to be written upper in the archive tree, make fake dir
-    if test "$di" != "${2##*/}" ; then
-        mkdir -p "$di" 
+    if test x"$di" != x"${2##*/}" ; then
+        mkdir -p "$di"
     fi
     cp -fp "$3" "$3.dir/$2" 
     $RAR a "$1" "$2" >/dev/null
-    cd $pwd
+    cd "$pwd"
     rm -rf "$3.dir"
 }
 
@@ -77,15 +77,15 @@ mcrarfs_mkdir ()
 # preserve pwd. It is clean, but is it necessary?
     pwd=`pwd`
 # Create a directory and create in it a tmp directory with the good name     
-    dir=`mktemp -d ${MC_TMPDIR:-/tmp}/mctmpdir-urar.XXXXXX` || exit 1
-    cd $dir
+    dir=`mktemp -d "${MC_TMPDIR:-/tmp}/mctmpdir-urar.XXXXXX"` || exit 1
+    cd "$dir"
     mkdir -p "$2"  
 # rar cannot create an empty directory    
     touch "$2"/.rarfs
     $RAR a -r "$1" "$2" >/dev/null
     $RAR d "$1" "$2/.rarfs" >/dev/null
-    cd $pwd
-    rm -rf $dir
+    cd "$pwd"
+    rm -rf "$dir"
 }
 
 mcrarfs_rm ()

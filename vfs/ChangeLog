@@ -1,3 +1,9 @@
+2005-01-07  Roland Illig <roland.illig@gmx.de>
+
+	* extfs/urar.in: Fixed some quoting issues.
+
+	Original patch by Leonard den Ottolander.
+
 2004-12-29  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* extfs.c (struct inode): Remove unused linkflag field.
