@@ -5,6 +5,7 @@
 
 	* doc-gnome/Makefile.in: Fixed some abuses of $(srcdir)
 	Removed all XVIEW-related stuff
+	Fixed placement of png files on "make dist"
 
 	* doc/mc.1.in: Updated info about the internal editor
 

@@ -252,7 +252,12 @@ distdir: $(DISTFILES)
 
 distcopy:
 	mkdir $(top_srcdir)/mc-$(VERSION)/doc-gnome/C/figs
-	for I in $(DISTDOCS) $(DISTFIGS); do $(CP) $(top_srcdir)/doc-gnome/C/$$I $(top_srcdir)/mc-$(VERSION)/doc-gnome/C; done
+	for I in $(DISTDOCS); do\
+	  $(CP) $(top_srcdir)/doc-gnome/C/$$I $(top_srcdir)/mc-$(VERSION)/doc-gnome/C; \
+	done
+	for I in $(DISTFIGS); do \
+	  $(CP) $(top_srcdir)/doc-gnome/C/$$I $(top_srcdir)/mc-$(VERSION)/doc-gnome/C/figs; \
+	done
 
 info-am:
 info: info-am
