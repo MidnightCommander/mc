@@ -1,6 +1,6 @@
 /* Icon loading support for the Midnight Commander
  *
- * Copyright (C) 1998-1999 The Free Software Foundation
+ * Copyright (C) 1998-2000 The Free Software Foundation
  *
  * Authors: Miguel de Icaza <miguel@nuclecu.unam.mx>
  *          Federico Mena <federico@nuclecu.unam.mx>
@@ -278,8 +278,10 @@ gicon_init (void)
 
 	if (!iset_directory || !iset_dirclosed || !iset_executable ||
 	    !iset_regular || !iset_core || !iset_fifo || !iset_chardev ||
-	    !iset_blockdev || !symlink_overlay || !stalled_overlay)
-		message (1, _("Warning"), _("Default set of icons not found, check your installation"));
+	    !iset_blockdev || !symlink_overlay || !stalled_overlay) {
+		message (1, _("Error"), _("Default set of icons not found, check your installation"));
+		exit(1);
+	}
 
 	our_uid = getuid ();
 	our_gid = getgid ();
