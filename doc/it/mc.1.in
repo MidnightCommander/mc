@@ -25,10 +25,9 @@ mc \- interfaccia visuale per sistemi tipo Unix.
 [\-abcCdfhPstuUVx] [\-l log] [dir1 [dir2]] [-v file]
 .\"NODE "DESCRIPTION"
 .SH "DESCRIZIONE"
-.LP
 Il Midnight Commander è un file manager per sistemi operativi di tipo Unix.  
-.\".\"DONT_SPLIT"
 .\"NODE "OPTIONS"
+.\".\"DONT_SPLIT"
 .SH "OPZIONI"
 .TP
 .I "\-a"
@@ -65,18 +64,18 @@ Utile solo su terminali HP quando non vanno i tasti funzione.
 Salva il dialogo ftpfs con il server in file.
 .TP
 .I "\-P file"
-All'uscita, il Midnight Commander stampa l'ultima directory in uso 
-sul file specificato.
+Quest'opzione indica al Midnight Commander di stampare l'ultima
+directory di lavoro sul file specificato.
 Questa funzione non è fatta per un uso diretto, ma dovrebbe essere 
 utilizzata da una speciale funzione shell che imposti automaticamente 
 l'ultima directory corrente della shell come l'ultima directory in cui
-stava il Midnight Commander (grazie a Torben Fjerdingstad e Sergey per
-il contributo di questa funzione e per il codice che la implementa).
-Prelevate i file
+stava il Midnight Commander. Prelevate i file
 .B @prefix@/share/mc/bin/mc.sh
-(utenti bash e zsh) e rispettivamente
+(utenti bash e zsh) o rispettivamente
 .B @prefix@/share/mc/bin/mc.csh
-(utenti tcsh) per avere questa funzione definita.
+(utenti tcsh) per definire
+.B mc
+come un alias allo script di shell appropriato.
 .TP
 .I "\-s"
 Abilita il modo terminale lento, in questa modalità il programma
@@ -113,7 +112,6 @@ mouse di escape).
 Se specificato, il primo percorso è la directory mostrata nel
 pannello selezionato; il secondo è la directory mostrata nell'altro
 pannello.
-.PP
 .\"NODE "Overview"
 .SH "Panoramica"
 Lo schermo del Midnight Commander è diviso in quattro parti.
@@ -158,13 +156,12 @@ e
 Tasti di Ingresso
 .\"Input Line Keys"
 per saperne di più sulla riga di comando.
-.PP
 .\"NODE "Mouse Support"
 .SH "Supporto Mouse"
 Il Midnight Commander è fornito di supporto mouse. Esso viene
 attivato ogniqualvolta lo si esegue in un terminale
 .B xterm(1)
-(funziona anche se si fa una connessione telnet o rlogin con
+(funziona anche se si fa una connessione telnet, ssh o rlogin con
 un'altra macchina da un xterm) o se sta funzionando su una console Linux
 e si ha il mouse server
 .B gpm
@@ -219,17 +216,20 @@ Alcuni comandi nel Midnight Commander presuppongono l'uso dei tasti
 le seguenti abbreviazioni:
 .TP
 .B C-<chr>
-significa premere il tasto control mentre si batte il carattere
-<chr>. Perciò C-f sarà: premi e tieni premuto il tasto Control e premi f.
+significa premere il tasto control mentre si batte il carattere <chr>. 
+Perciò C-f sarà: premi e tieni premuto il tasto Control e premi f.
 .TP
 .B M-<chr>
-significa premere il tasto Meta o Alt mentre si batte <chr>. Se
-non c'è un tasto Meta o Alt, premere
+significa premere il tasto Meta o Alt mentre si batte <chr>.
+Se non c'è un tasto Meta o Alt, premere
 .IR ESC ,
 rilasciarlo, poi premere il carattere <chr>. 
+.TP
+.B S-<chr>
+significa premere il tasto Maiuscole mentre si batte il carattere <chr>.
 .PP
 Tutte le linee di ingresso nel Midnight Commander usano un'approssimazione
-dei tasti del GNU Emacs.
+dei tasti usati dall'editor GNU Emacs.
 .PP
 Ci sono molte sezioni che parlano dei tasti. Le seguenti sono le 
 principali.
@@ -264,7 +264,6 @@ Tasti Linea di Ingresso
 .\"Input Line Keys"
 sono usati per modificare le linee di ingresso. Cioè sia la linea di comando
 che le linee di ingresso nelle finestre di interrogazione.
-.PP
 .\"NODE "  Miscellaneous Keys"
 .SH "  Tasti Vari"
 Qua ci sono alcuni tasti che non sono classificabili in nessuna delle
@@ -349,14 +348,13 @@ quando il programma viene eseguito in una console Linux o SCO o in un xterm,
 mostrerà il risultato del comando precedente. Eseguito in console Linux, il
 Midnight Commander usa un programma esterno (cons.saver) per gestire il
 salvataggio e recupero delle informazioni sullo schermo.
-.IP
+.PP
 Se è stato compilato il supporto alla subsell, è possibile premere C-o
 in ogni momento per tornare alla schermata principale del Midnight Commander;
 per tornare all'applicazione basta premere C-o. Se si ha un'applicazione
 sospesa usando questo trucco, non si sarà in grado di eseguire altri
 programmi dal Midnight Commander finchè non si terminerà l'applicazione
 sospesa.
-.PP
 .\"NODE "  Directory Panels"
 .SH "  Pannelli Directory"
 Questa sezione elenca i tasti che operano sui pannelli directory. 
@@ -415,7 +413,7 @@ sono abilitati, le espressioni regolari sono molto simili alle espressioni
 regolari in una shell (* significa zero o più caratteri e ? un carattere). Se i 
 .I modelli della shell
 sono disabilitati, la marcatura dei file viene fatta con le normali espressioni
-regolari (vedere (1)).
+regolari (vedere ed (1)).
 .IP
 Se l'espressione comincia o finisce con una barra (/), allora selezionerà
 directory invece che file.
@@ -443,12 +441,10 @@ sposta la barra di selezione di una pagina in basso.
 sposta la barra di selezione di una pagina in alto.
 .TP
 .B M-o
-se l'altro pannello è un elenco e si è su una directory nel
-pannello corrente, allora il contenuto dell'altro pannello viene
-impostato al contenuto della directory correntemente selezionata
-(come con il tasto C-o dired in Emacs) altrimenti il contenuto 
-dell'altro pannello viene impostato sulla directory madre della 
-dir corrente.
+rende la directory corrente del pannello corrente, la directory
+corrente dell'altro pannello. Mette l'altro pannello in modalità
+elenco se necessario. Se il pannello corrente è pannellizzato,
+l'altro non diventa pannellizzato.
 .TP
 .B C-PaginaSu, C-PaginaGiù
 solo quando si esegue in console Linux: rispettivamente cambia 
@@ -464,7 +460,6 @@ premere '>' con il mouse.
 .TP
 .B M-S-h, M-H
 mostra lo storico directory, equivalente a premere 'v' con il mouse.
-.PP
 .\"NODE "  Shell Command Line"
 .SH "  Shell a riga di comando"
 Questa sezione elenca i tasti utili ad evitare troppe battiture
@@ -503,12 +498,11 @@ precedente, M-n va alla successiva.
 .TP
 .B M-h
 mostra lo storico per la riga di ingresso corrente.
-.PP
 .\"NODE "  General Movement Keys"
 .SH "  Tasti Generali di Movimento"
 Il visualizzatore dell'aiuto, il visualizzato dei file e l'albero directory
 usano un codice comune per gestire il movimento. Per questa ragione essi
-accettano esattamente gli stessi tasti. Ogniuno di questi però accetta anche
+accettano esattamente gli stessi tasti. Ognuno di questi però accetta anche
 altri tasti indipendenti.
 .PP
 Diverse parti del Midnight Commander usano gli stessi tasti di
@@ -520,10 +514,10 @@ si sposta di una linea indietro.
 .B Giu, C-n
 si sposta di una linea avanti.
 .TP
-.B Pagina Su, M-v
+.B Pag. Prec., Pagina Su, M-v
 si sposta di una pagina in alto.
 .TP
-.B Pagina Giu, C-v
+.B Pag. Succ., Pagina Giu, C-v
 si sposta di una pagina in basso.
 .TP
 .B Home, A1
@@ -546,7 +540,6 @@ si sposta di mezza pagina in alto o in basso.
 .TP
 .B g, G
 si sposta all'inizio o alla fine.
-.PP
 .\"NODE "  Input Line Keys"
 .SH "  Tasti di Riga di Ingresso"
 I tasti di riga di ingresso (sono usati
@@ -610,7 +603,6 @@ fa del nomefile, comando, variabile, nomeutente e nomehost il
 completamento
 .\"Completion"
 automatico.
-.PP
 .SH ""
 .\"NODE "Menu Bar"
 .SH "Barra dei Menu"
@@ -644,7 +636,6 @@ Il
 Menu Opzioni
 .\"Options Menu"
 elenca le azioni che permettono di personalizzare il Midnight Commander.
-.PP
 .\"NODE "  Left and Right Menus"
 .SH "  Menu Sinistra e Destra (Sopra e Sotto)"
 L'apparenza dei pannelli directory è modificabile tramite i menu
@@ -660,7 +651,6 @@ se la divisione pannello nella finestra
 Aspetto
 .\"Layout"
 del menu Opzioni è Orizzontale).
-.PP
 .\"NODE "    Listing Mode..."
 .SH "    Modalità Lista..."
 La modalità lista serve a mostrare un elenco di file; ci sono quattro
@@ -704,7 +694,7 @@ mostra l'ampiezza del file.
 mostra l'ampiezza del file e per le directory mostra solo 
 SUB-DIR o UP--DIR.
 .TP
-.BR type
+.B type
 mostra un campo di un carattere. Questo carattere è simile a quello
 mostrato dal comando ls con la flag -F -
 .B *
@@ -725,6 +715,9 @@ per le pipe,
 per i collegamenti simbolici a directory e 
 .B !
 per i collegamenti simbolici stallati (che non puntano a niente).
+.TP
+.B mark
+un asterisco se il file è marcato, uno spazio se non lo è.
 .TP
 .B mtime
 la data dell'ultima modifica al file.
@@ -764,41 +757,41 @@ Puoi usare ache questi campi per sistemare la visualizzazione:
 .B space
 uno spazio nel formato visualizzazione.
 .TP
-.B mark
-un asterico se il file è marcato, uno spazio se non lo è.
-.TP
 .B |
-questo carattere viene utilizzato per aggiungere una linea verticale
-al formato di visualizzazione.
+aggiunge una linea verticale al formato di visualizzazione.
 .PP
-Per forzare un campo ad un'ampiezza fissa (una specifica di ampiezza)
-basta semplicemente aggiungere un ':' ed il numero dei caratteri che
-si vuole che il campo abbia; e se il numero è seguito dal simbolo '+',
-allora la specifica definisce l'ampiezza minima e se il programma
+Per forzare un campo ad un'ampiezza fissa (una specifica di ampiezza),
+basta semplicemente aggiungere 
+.B : 
+ed il numero dei caratteri che si vuole che il campo abbia. Se il 
+numero è seguito dal simbolo 
+.BR + ,
+allora la specifica definisce l'ampiezza minima - se il programma
 trova che serve più spazio sullo schermo, espanderà il campo.
 .PP
 Per esempio la modalità 
 .B Completa
 corrisponde a questo formato:
 .PP
-half type,name,|,size,|,mtime
+half type name | size | mtime
 .PP
 E quella
 .B Lunga
 corrisponde a questo formato:
 .PP
-full perm,space,nlink,space,owner,space,group,space,size,space,
-mtime,space,name
+full perm space nlink space owner space group space size space mtime
+space name
 .PP
 Questa è una modalità interessante:
 .PP
-half name,|,size:7,|,type,mode:3
+half name | size:7 | type mode:3
 .PP
 I pannelli possono anche essere impostati alle modalità seguenti:
 .TP
 .B "Informazioni"
-La modalità informazioni mostra alcuni dati relativi al file correntemente selezionato
-e se possibile informazioni circa il file system corrente.
+La modalità informazioni mostra alcuni dati relativi al file 
+correntemente selezionato e se possibile informazioni circa il file 
+system corrente.
 .TP
 .B "Albero" 
 La vista ad albero è abbastanza simile al comando
@@ -815,7 +808,6 @@ visualizzatore
 ridotto che mostra i contenuti del file correntemente selezionato;
 se si seleziona il pannello (con il tasto tab o con il mouse), si ha
 accesso ai normali comandi del visualizzatore.
-.PP
 .\"NODE "    Sort Order..."
 .SH "    Ordina per..."
 Gli otto possibili ordinamenti sono per nome, estensione, data 
@@ -832,7 +824,6 @@ Menu Opzioni
 .\"Options Menu"
 (opzione  
 .BR "mescola tutti i file" ).
-.PP
 .\"NODE "    Filter..."
 .SH "    Filtro..."
 Il comando di filtro permette di specificare un modello (per esempio
@@ -840,7 +831,6 @@ Il comando di filtro permette di specificare un modello (per esempio
 che il file deve corrispondere per essere visualizzato. Malgrado
 il modello del filtro, le directory e i collegamenti a directory
 vengono sempre visualizzati sul pannello directory.
-.PP
 .\"NODE "    Reread"
 .SH "    Ricarica"
 Il comando ricarica l'elenco dei file nella directory. E' utile
@@ -852,7 +842,6 @@ il contenuto della directory e rimuoverà le informazioni pannellizzate
 Pannellizza comando
 .\"External panelize"
 per ulteriori informazioni).
-.PP
 .\"NODE "  File Menu"
 .SH "  Menu File"
 Il Midnight Commander usa i tasti F1 - F10 come tasti veloci 
@@ -1033,7 +1022,6 @@ si esce e si sta usando lo shell wrapper. Maiusc-F10 in tal caso non
 vi porterà all'ultima directory utilizzata dal Midnight Commander ma
 vi lascerà nella directory dalla quale avete fatto partire il Midnight
 Commander.
-.PP
 .\"NODE "    Quick cd"
 .SH "    Cambia dir veloce"
 Questo comando è utile se si ha la riga di comando piena e si vuole
@@ -1050,7 +1038,6 @@ comando
 .\"LINK2"
 comando interno cd\&.
 .\"The cd internal command"
-.PP
 .\"NODE "  Command Menu"
 .SH "  Menu Comando"
 Il comando
@@ -1109,7 +1096,6 @@ Il comando
 Modifica file menu
 .\"Menu File Edit"
 serve a modificare il menu utente (che appare premendo F2).
-.PP
 .\"NODE "    Directory Tree"
 .SH "    Albero Directory"
 Il comando albero directory mostra una rappresentazione ad albero delle
@@ -1200,7 +1186,6 @@ Vedere anche la sezione
 .\"LINK2"
 supporto mouse\&.
 .\"Mouse Support"
-.PP
 .\"NODE "    Find File"
 .SH "    Trova File"
 Il comando Trova file domanda prima la directory di inizio per la
@@ -1252,7 +1237,6 @@ Pannellizza comando
 per operazioni particolari. Il comando Trova file serve solo per 
 ricerche semplici mentre usando Pannellizza comando si può fare 
 ricerche complesse come si vuole.
-.PP
 .\"NODE "    External panelize"
 .SH "    Pannellizza comando"
 Il Pannellizza comando permette di eseguire un programma esterno, e
@@ -1284,7 +1268,6 @@ Per fare ciò basta battere il comando sulla riga di ingresso e premere il tasto
 Aggiungi nuovo. Poi si deve dare un nome al quale associare il comando che si
 desidera salvare. La prossima volta sarà possibile scegliere quel comando 
 dall'elenco e non servirà ribatterlo nuovamente.
-.PP
 .\"NODE "    Hotlist"
 .SH "    Directory Favorite"
 Il comando Directory favorite mostra le etichette delle directory nell'elenco
@@ -1300,7 +1283,6 @@ variabile CDPATH come descritto in
 .\"LINK2"
 comando cd interno\&.
 .\"The cd internal command"
-.PP
 .\"NODE "    Extension File Edit"
 .SH "    Modifica File Estensioni"
 Questo comando invocherà l'editor sul file 
@@ -1358,14 +1340,12 @@ alla seconda voce e manca la voce View in cima, allora premendo F3 verrà
 usata l'azione View della seconda voce.
 .I Normalmente 
 dovrebbero corrispondere tutte le azioni.
-.PP
 .\"NODE "    Background jobs"
 .SH "    Processi in Background"
 Questo comando permette di controllare lo stato di ogni processo
 in background del Midnight Commander (in background possono essere
 eseguite solo operazioni di copia e rinomina). Da qui si può bloccare, 
 far ripartire e uccidere un lavoro in background.
-.PP
 .\"NODE "    Menu File Edit"
 .SH "    Modifica file Menu"
 Il menu utente è un menu di comandi utili che possono essere 
@@ -1451,7 +1431,6 @@ Sotto-condizione è una delle seguenti:
   ! <sotto-cond>	nega il risultato di una sotto-condizione
 .fi
 .PP
-
 Modello è un normale modello della shell o un'espressione regolare,
 a seconda dell'opzione modelli della shell. E' possibile scavalcare
 il valore globale dell'opzione modelli della shell scrivendo 
@@ -1512,7 +1491,6 @@ di condizione, una che comincia con '+' e l'altra con '='.
 .PP
 I commenti cominciano con '#'. Linee di commento aggiuntive devono cominciare con
 '#', spazi o tabulazioni.
-.PP
 .\"NODE "  Options Menu"
 .SH "  Menu Opzioni"
 Il Midnight Commander possiede alcune opzioni che possono essere
@@ -1557,7 +1535,7 @@ che non appaiono funzionare su alcuni terminali ed è possibile aggiustare.
 .PP
 Il comando
 .\"LINK2"
-Opzioni VFS
+FS Virtuale
 .\"Virtual FS"
 mostra una finestra di dialogo con la quale è possibile impostare alcune
 opzioni relative al VFS.
@@ -1568,7 +1546,6 @@ Salva configurazione
 .\"Save Setup"
 salva le impostazioni correnti dei menu Sinistra, Destra e Opzioni. Viene salvato
 anche un piccolo numero di altre opzioni.
-.PP
 .\"NODE "    Configuration"
 .SH "    Configurazione"
 Le opzioni in questa finestra sono divise in tre gruppi:
@@ -1729,7 +1706,6 @@ Se quest'opzione è abilitata, la cancellazione non intenzionale dei file
 sarà più difficile. La preimpostazione della finestra di dialogo della
 conferma cambia da "Si" a "No". Normalmente quest'opzione è
 disabilitata.
-.PP
 .\"NODE "    Layout"
 .SH "    Aspetto"
 La finestra di aspetto da la possibilità di cambiare l'aspetto generale
@@ -1769,13 +1745,11 @@ Se l'opzione
 .I Mostra mini-stato
 è abilitata, una linea di informazioni di stato circa la voce correntemente
 selezionata viene mostrata sul fondo dei pannelli.
-.PP
 .\"NODE "    Confirmation"
 .SH "    Conferme"
 In questo menu è possibile configurare le opzioni di conferma per la
 cancellazione e sovrascrittura dei file, esecuzione dei file premendo invio e
 per l'uscita dal programma. 
-.PP
 .\"NODE "    Display bits"
 .SH "    Mostra bit"
 Viene usata per configurare la quantità dei caratteri visibili sullo
@@ -1783,7 +1757,6 @@ schermo. Quest'impostazione può essere 7 bit, se il terminale/libreria_curses
 supporta solo sette bit in uscita, ISO-8859-1 se mostra tutti i caratteri
 nella mappa ISO-8859-1 e uscita completa a 8 bit per quei terminali che possono
 visualizzare tutti i caratteri a 8 bit.
-.PP
 .\"NODE "    Learn keys"
 .SH "    Impara tasti"
 Questa finestra di dialogo permette di controllare e ridefinire i tasti
@@ -1815,7 +1788,6 @@ Quando si è finito con tutti i tasti, è possibile salvarli. Le definizioni
 dei tasti che si è ridefinito saranno scritte nella sezione [terminal:TERM]
 del vostro ~/.mc/ini file (dove TERM è il nome del terminale corrente). Le
 definizioni dei tasti che già funzionavano correttamente non vengono salvate.
-.PP
 .\"NODE "    Virtual FS"
 .SH "    FS Virtuale "
 Quest'opzione permette di controllare l'impostazione della cache informazioni del
@@ -1837,47 +1809,76 @@ disco occupano risorse, si può voler impostare i parametri delle
 informazioni della cache per ridurre l'uso delle risorse o per
 massimizzare la velocità di accesso ai file system usati spesso.
 .PP
-Il file system Tar è piuttosto furbo riguardo la gestione
-dei file tar: semplicemente carica le voci delle directory
-e quando si ha bisogno di usare le informazioni nel file tar,
-va e se le carica.
+A causa del formato degli archivi tar, il
+.I filesystem tar
+abbisogna di leggere l'intero file solo per caricare le voci dei 
+file. dato che molti file tar sono compressi (i file
+tar non compressi sono una specie in via di estinzione), 
+il file system tar deve decomprimere il file su disco, 
+in una locazione temporanea per poi accedervi come un file tar 
+normale.
 .PP
-Nella pratica, i file tar sono normalmente compressi (file
-tar non compressi sono una specie in via di estinzione), e 
-data la natura di questi file (le voci delle directory nei 
-file tar non sono accessibili direttamente), il file system 
-tar deve decomprimere il file su disco, in una locazione
-temporanea per poi accedervi come un file tar normale.
-.PP
-Ora, visto che noi tutti amiamo navigare nei file e nei
-file tar dappertutto su disco, succede spesso che si lascia
-un file tar per poi rientrarvi successivamente. Siccome la
-decompressione è lenta, il Midnight Commander conserverà
-l'informazione in memoria per un tempo limitato, allo 
-scadere del quale, tutte le risorse associate al file
-system verranno liberate. La scadenza predefinita è
-impostata a un minuto.
+Ora, visto che noi tutti amiamo navigare nei file e nei file tar 
+dappertutto su disco, succede spesso che si lascia un file tar per 
+poi rientrarvi successivamente. Siccome la decompressione è lenta, 
+il Midnight Commander conserverà l'informazione in memoria per un 
+tempo limitato, allo scadere del quale, tutte le risorse associate 
+al file system verranno liberate. La scadenza predefinita è impostata 
+a un minuto.
 .PP
 Il
 .\"LINK2"
 File System FTP
 .\"FTP File System"
-mantiene l'elenco della directory che scarica dal server ftp
+(ftpfs) permette di navigare le directory su server FTP remoti. Esso
+possiede diverse opzioni.
+.PP
+.I password ftp anonimo
+è la password utilizzata per accedere come "anonimo". Alcuni siti
+richiedono un indirizzo email valido. Daltra parte, probabilmente
+non si vuole dare il vostro indirizzo email reale a siti non di fiducia,
+specialmente se non si sta usando filtri anti spam.
+.PP
+L'ftpfs mantiene l'elenco della directory che scarica dal server ftp
 in una cache. Il tempo di scadenza della cache è configurabile
 con l'opzione 
-.IR Scadenza cache directory ftpfs .  
+.IR "Scadenza cache directory ftpfs" .  
 Un valore basso per quest'opzione può rallentare ogni operazione sul
 file system ftp perché ogni operazione è accompagnata da una
 richiesta al server ftp.
 .PP
-Inoltre è possibile definire un host proxy per fare trasferimenti ftp
-e configurare il Midnight Commander per usare sempre il proxy.
-Vedere la sezione
+E' possibile definire un host proxy per fare trasferimenti ftp.
+Notare che molti firewall moderni sono totalmente trasparenti almeno
+per i trasferimenti FTP passivi (vedere di seguito), perciò i proxy
+ftp sono considerati obsoleti. 
+.PP
+Se 
+.I usa sempre ftp proxy
+non è impostata, è possibile usare il punto escamativo per abilitare
+il proxy per certi host. Vedere la sezione
 .\"LINK2"
 File System FTP
 .\"FTP File System"
-per ulteriori informazioni.
+per gli esempi.
 .PP
+Se quest'opzione è impostata, il programma farà due cose: consulterà 
+il file @prefix@/lib/mc/mc.no_proxy per le righe contenenti nomi host
+locali (se il nome host comincia con un punto, è considerato un 
+dominio) e assumendo che ogni nome host senza punti nel nome sia
+direttamente accessibile. Tutti gli altri host verranno contattati
+attraverso il proxy host specificato.
+.PP
+E' possibile abilitare l'uso del file
+.I ~/.netrc
+che mantiene i nomi di accesso e le password per i server ftp. Vedere
+netrc (5) per una descrizione del formato .netrc.
+.PP
+.I usa modalità passiva
+abilita l'uso della modalità FTP passiva, quando la connessione per 
+il trasferimento file è iniziata dal client, non dal server. 
+Quest'opzione è raccomandata e preimpostata. Se quest'opzione è spenta,
+la connessione dati viene iniziata dal server. Questo potrebbe non 
+funzionare con alcuni firewall.
 .\"NODE "    Save Setup"
 .SH "    Salva configurazione"
 Alla partenza il Midnight Commander prova a caricare le informazioni di
@@ -1909,7 +1910,6 @@ configurazione con il vostro editor preferito. Vedere sezione
 Impostazioni speciali
 .\"Special Settings"
 per ulteriori informazioni.
-.PP
 .SH ""
 .\"NODE "Executing operating system commands"
 .SH "Esecuzione comandi del sistema operativo"
@@ -1930,7 +1930,6 @@ Verrà eseguita una semplice
 espansione di macro
 .\"Macro Substitution"
 prima di eseguire il comando.
-.PP
 .\"NODE "  The cd internal command"
 .SH "Il comando cd interno"
 Il comando 
@@ -1967,10 +1966,8 @@ a ~/src:/usr/src, permettendo di cambiare directory verso ogniuna
 delle directory presenti nelle directory ~/src e /usr/src da qualunque
 parte nel file system (per esempio cd linux vi porterà in 
 /usr/src/linux).
-.PP
 .\"NODE "  Macro Substitution"
 .SH "  Sostituzione di Macro"
-.PP
 Quando si accede ad un
 .\"LINK2"
 menu utente\&,
@@ -1983,9 +1980,8 @@ o si esegue un comando dalla riga di ingresso,
 viene eseguita una semplice sostituzione di macro.
 .PP
 Le macro sono:
-.PP
+.TP
 .I "%i"
-.IP
 Indentazione di spazi, uguale alla colonna della
 posizione del cursore. Solo per la modifica menu.
 .TP
@@ -2075,7 +2071,6 @@ non è impostata, la sostituzione prenderà
 .IR default . 
 Altrimenti, verrà sostituito il valore di 
 .IR ENV .
-.PP
 .\"NODE "  The subshell support"
 .SH "  Supporto alla subshell"
 Il supporto alla subshell è una opzione di compilazione che lavora
@@ -2118,7 +2113,6 @@ OPZIONI
 .\"OPTIONS"
 contiene informazioni aggiuntive riguardo come controllare il codice
 della subshell.
-.PP
 .\"NODE "Chmod"
 .SH "Permessi"
 La finestra Permessi serve a cambiare i bit di attributo in gruppi di
@@ -2174,12 +2168,10 @@ imposta gli attributi di un file.
 .PP
 .B [Cancella]
 cancella il comando Permessi.
-.PP
 .\"NODE "Chown"
 .SH "Proprietario"
 Il comando proprietario serve a cambiare il proprietario/gruppo di un 
 file. Il tasto di scelta rapida per questo comando è C-x o.
-.PP
 .\"NODE "Advanced Chown"
 .SH "Proprietario Avanzato"
 Il comando Proprietario Avanzato consiste nel comando 
@@ -2192,7 +2184,6 @@ Proprietario
 .\"Chown"
 combinati assieme in una finestra. E' così possibile cambiare i permessi
 ed il proprietario/gruppo dei file in un sol colpo.
-.PP
 .\"NODE "File Operations"
 .SH "Operazioni sui file"
 Quando si copia, sposta o cancella dei file il Midnight Commander
@@ -2241,7 +2232,6 @@ Se si hanno dei file marcati e si esegue un'operazione su di essi, solo
 i file sui quali l'operazione ha avuto successo verranno deselezionati.
 I file su cui è fallita l'operazione o che sono stati saltati vengono 
 lasciati marcati.
-.PP
 .\"NODE "Mask Copy/Rename"
 .SH "Maschera Copia/Rinomina"
 L'operazione di copia/rinomina permette di cambiare il nomi dei file in
@@ -2337,7 +2327,6 @@ ed il resto minuscolo.
 .PP
 Si può usare '\\' come carattere di protezione. Per esempio, '\\\\' è
 una barra retroversa e '\\*' è un asterisco.
-.PP
 .\"NODE "Internal File Viewer"
 .SH "Visualizzatore di File Interno"
 Il visualizzatore di file interno fornisce due modalità di visualizzazione:
@@ -2361,12 +2350,13 @@ mescolare testo protetto con costanti come nell'esempio:
 .PP
 Notare che 012 è un numero ottale. -1 viene convertito in 0xFF.
 .PP
-Alcuni dettagli interni circa il visualizzatore: su sistemi che forniscono
-la chiamata di sistema mmap(2), il programma mappa il file invece di caricarlo;
-se il sistema non fornisce la chiamata di sistema mmap(2) o il file
-corrisponde ad un'azione che abbisogna di un filtro, allora il visualizzatore
-userà i buffer di accrescimanto (growing), caricando perciò solo le parti
-del file su cui vi si accede (inclusi i file compressi).
+Alcuni dettagli interni circa il visualizzatore: su sistemi che
+forniscono la chiamata di sistema mmap(2), il programma mappa il
+file invece di caricarlo; se il sistema non fornisce la chiamata di
+sistema mmap(2) o il file corrisponde ad un'azione che abbisogna di
+un filtro, allora il visualizzatore userà i buffer di accrescimanto
+(growing), caricando perciò solo le parti del file su cui vi si accede
+(inclusi i file compressi).
 .PP
 Ecco un'elenco di azioni associate ad ogni tasto che il Midnight Commander
 gestisce nel visualizzatore di file interno.
@@ -2398,8 +2388,8 @@ Inizia una ricerca normale, se non c'era già un'espressione di
 ricerca, altrimenti trova la prossima occorrenza.
 .PP
 .B C-r.
-Inizia una ricerca normale in ordine inverso, se non c'era già un'espressione
-di ricerca, altrimenti trova la prossima occorrenza.
+Inizia una ricerca normale in ordine inverso, se non c'era già 
+un'espressione di ricerca, altrimenti trova la prossima occorrenza.
 .PP
 .B F8
 Cambia tra modalità Normale/Filtrata: questo mostrerà il file come si
@@ -2471,7 +2461,7 @@ di sedici megabyte e gestisce i file binari senza problemi.
 .PP
 Le funzioni che allo stato attuale supporta sono: copia,
 spostamento, cancellazione, taglia e incolla di blocchi;
-.I "tasto per l'annullamento"; 
+.IR "tasto per l'annullamento" ; 
 menu a discesa, inserimento file, definizione di macro, ricerca e
 sostituzione di espressioni regolari (e una propria ricerca e
 sostituzione a scanf e printf); evidenziazione di testo maiuscolo-freccia 
@@ -2533,7 +2523,7 @@ per vedere cos'è una stringa di formato e come funziona. Il seguente
 è un esempio: supponiamo di voler sostituire tutte le ricorrenze di,
 poniamo, una parentesi aperta, tre numeri separati da virgole, una 
 parentesi chiusa, con la parola
-.I mele,
+.IR mele ,
 il terzo numero, la parola
 .I arance
 ed il secondo numero, si dovrebbe riempire la finestra di sostituzione
@@ -2555,13 +2545,12 @@ E' consigliabile usare questa caratteristica con l'opzione 'Chiedi sempre'
 abilitata, dato che una corrispondenza viene considerata valida quando
 il numero degli argomenti dati corrisponde al numero dato, che non è sempre
 una reale corrispondenza. Scanf tratta anche gli spazi come elastici. Notare 
-che il formato % è molto uttile per scansionare stringhe, e spazi.
+che il formato % è molto utile per scansionare stringhe, e spazi.
 .PP
 L'editor visualizza snche caratteri non-americani (160+). Quando si modifica
 file binari, si dovrebbe impostare
 .B mostra bit
 a 7 bit nel menu opzioni, per mantenere la spaziatura pulita.
-.PP
 .\"NODE "Completion"
 .SH "Completamento"
 Ovvero lascia che il Midnight Commander scriva per te.
@@ -2569,12 +2558,12 @@ Ovvero lascia che il Midnight Commander scriva per te.
 Tentativi per eseguire un completamento del testo prima della posizione
 corrente. MC tenta il completamento trattando il testo come una variabile
 (se il testo comincia con
-.B $
-), nomeutente (se il testo comincia con
-.B ~
-), nomehost (se il testo comincia con
-.B @
-) o comando (se si è sulla riga di comando nell'atto di battere un comando, 
+.BR $ ),
+nomeutente (se il testo comincia con
+.BR ~ ),
+nomehost (se il testo comincia con
+.BR @ )
+o comando (se si è sulla riga di comando nell'atto di battere un comando, 
 allora possibili completamenti includerebbero parole riservate e comandi 
 integrati della shell). Se nessuno di questi produce una corrispondenza, 
 viene tentato un completamento del nome del file.
@@ -2601,7 +2590,7 @@ verrà mostrato solo il sottoinsieme nella finestra dell'elenco, altrimenti
 la prima voce che corrisponde a tutti i caratteri precedenti verrà evidenziata.
 Non appena non c'è più ambiguità, la finestra scompare, ma la si può nascondere
 con i tasti di cancellamento
-.B Esc,
+.BR Esc ,
 .B F10
 e i tasti di freccia sinistra e destra. Se
 .\"LINK2"
@@ -2610,7 +2599,6 @@ Completamento: visualizza tutto
 è disabilitato, la finestra viene mostrata solo se si preme 
 .B M-Tab
 una seconda volta; la prima volta MC emette solo un suono.
-.PP
 .\"NODE "Virtual File System"
 .SH "File System Virtuale"
 Il Midnight Commander è provvisto di uno strato di codice per 
@@ -2635,86 +2623,59 @@ Il codice di commutazione di file system interpreta tutti i nomi di
 percorso utilizzati e li dirige al file system corretto; il formato
 utilizzato per ogniuno di questi file system viene descritto più avanti
 nella sezioni apposite.
-.PP
 .\"NODE "  FTP File System"
 .SH "  File System FTP"
-L'ftpfs permette di manipolare file su macchine remote; per 
-utilizzarlo, si può usare il pannello del comando di collegamento FTP 
+Il File System FTP (ftpfs) permette di manipolare file su macchine remote.
+Per utilizzarlo, si può usare il pannello del comando
+.I Connessione FTP
 (accessibile dalla barra dei menu) oppure si può cambiare direttamente 
-la directory corrente con un comando cd verso un percorso simile al
-seguente:
+la directory corrente con un comando 
+.I cd
+verso un percorso simile al seguente:
 .PP
 .I /#ftp:[!][utente[:pass]@]macchina[:porta][dir-remota]
 .PP
 Gli elementi
-.I utente, porta
+.IR utente , 
+.I porta
 e
 .I dir-remota
 sono opzionali. Se si specifica l'elemento 
-.I utente
- , allora il Midnight Commander tenterà di collegarsi alla macchina remota
-come quell'utente, altrimenti userà il vostro nome di login.
+.IR utente , 
+allora il Midnight Commander tenterà di collegarsi alla macchina remota
+come quell'utente, altrimenti userà il vostro nome di login o il nome
+di login prelevato dal file
+.IR ~/.netrc .
 L'elemento opzionale
 .I pass
- , se presente, è la parola d'ordine per la connessione. Quest'ultimo non
-è raccomandabile (e neanche tenere le password nella vostro elenco dei
-preferiti, a meno che non si imposti i permessi appropriati, e anche in
-quel caso può non essere completamente sicuro).
+è la parola d'ordine per la connessione. L'uso della password nel nome VFS 
+della directory non è raccomandabile, dato che può apparire sullo schermo in
+chiaro e può essere salvato nello storico directory.
+.PP
+Per abilitare l'uso del proxy FTP, anteporre
+.B !
+(un punto esclamativo) al nome host.
 .PP
 Esempi:
 .PP
 .nf
     /#ftp:ftp.nuclecu.unam.mx/linux/local
     /#ftp:tsx-11.mit.edu/pub/linux/packages
-    /#ftp:!behind.firewall.edu/pub
-    /#ftp:guest@remote-host.com:40/pub
+    /#ftp:!dietro.il.firewall.edu/pub
+    /#ftp:guest@host-remoto.com:40/pub
     /#ftp:miguel:xxx@server/pub
 .fi
 .PP
-Per connettersi a siti dietro ad un firewall, c'è bisogno di usare un
-prefisso ftp://! (cioè con un esclamativo dopo la doppia barra) per fare
-in modo che il Midnight Commander usi una connessione proxy per fare il
-trasferimento ftp.
-E' possibile definire la connessione proxy nella finestra di dialogo
+Prego controllare la finestra di dialogo
 .\"LINK2"
-Impostazione File System Virtuale (VFS)\&.
+File System Virtuale
 .\"Virtual FS"
-.PP
-Un'altra opzione da impostare è
-.I Usa sempre ftp proxy
-nella finestra di dialogo
-.\"LINK2"
-Impostazione File System Virtuale (VFS)\&.
-.\"Virtual FS"
-Quest'ultima configurerà il programma in modo da utilizzare
-sempre la connessione proxy. Se questa variabile è impostata, il programma
-farà due cose: consulterà il file @prefix@/share/mc/mc.no_proxy per
-le linee contenenti nomi di macchine locali (se il nome macchina comincia
-con un punto, si assume che sia un dominio) ed assumerà che ogni
-nomemacchina senza punti nel nome sia accessibile direttamente.
-.PP
-Se si sta usando il codice ftpfs con un router che filtra i pacchetti
-che non permette di usare il modo normale di aprire i file, si può 
-voler forzare il programma ad usare la modalità di apertura passiva.
-Per usarla, si imposti l'opzione ftpfs_use_passive_connections nel
-file di inizializzazione.
-.PP
-Il Midnight Commander mantiene gli elenchi delle directory in una cache.
-Il tempo di validità della cache è configurabile nella finestra di dialogo
-.\"LINK2"
-Impostazione File System Virtuale (VFS)\&.
-.\"Virtual FS"
-Ciò ha come effetto che anche se si fanno dei cambiamenti alla directory,
-questi non verranno riflessi nell'elenco della directory fino a che non
-si forzi una rilettura della cache con il tasto C-r. Questa è una 
-caratteristica voluta (se si pensa che sia un difetto, si pensi al caso 
-di dover gestire file dall'altra parte dell'Atlantico con l'ftpfs).
-.PP
+per le opzioni ftpfs.
 .\"NODE "  Tar File System"
 .SH "  File System Tar"
 Il file system tar fornisce un accesso in sola lettura ai file tar
-e tar compressi; per cambiare la directory corrente al file tar
-usare la seguente sintassi:
+e tar compressi usando il comando chdir. Per cambiare la directory corrente 
+al file tar usare la seguente sintassi:
 .PP
 .I /nomefile.tar#utar/[dir-dentro-tar]
 .PP
@@ -2736,7 +2697,6 @@ Esempi:
 L'ultima specifica il percorso completo dell'archivio tar.
 .\"NODE "  FIle transfer over SHell filesystem"
 .SH "  Trasferimento di File su Filesystem di Shell (FISH)"
-.PP
 Il file system fish è un file system basato sulla rete che permette di
 manipolare i file di una macchina remota come fossero locali. Per usarlo
 l'altra parte deve avere un server fish o avere una shell compatibile
@@ -2749,7 +2709,7 @@ in una speciale directory il cui nome ha il seguente formato:
 /#sh:[utente@]macchina[:opzioni]/[dir-remota]
 .fi
 Gli elementi
-.I utente, 
+.IR utente , 
 .I opzioni
 e
 .I dir-remota
@@ -2773,7 +2733,6 @@ Esempi:
     /#sh:joe@vuole.lacompressione.edu:C/privato
     /#sh:joe@noncompresso.ssh.edu/privato
 .fi
-.PP
 .\"NODE "  Network File System"
 .SH "  File System di Rete"
 Il file system di rete del Midnight Commander è un file system basato 
@@ -2810,16 +2769,15 @@ Esempi:
     /#mc:ftp.nuclecu.unam.mx/linux/locale
     /#mc:joe@foo.edu:11321/privato
 .fi
-.PP
 .\"NODE "  Undelete File System"
 .SH "  Recupero File Cancellati"
-Su sistemi Linux, se si richiede, tramite configure, di usare la 
-caratteristica di undelete del file system ext2, si avrà accesso al file
-system di recupero file cancellati. Il recupero file cancellati è disponibile
-solo su file system di tipo ext2. Il file system è solo un'interfaccia
-alla libreria ext2fs che: recupera tutti i nomi dei file cancellati
-su un fs ext2 e fornisce ed estrae i file selezionati in una
-partizione normale.
+Su sistemi Linux, se si richiede, tramite configure, di usare la
+caratteristica di undelete del file system ext2, si avrà accesso al
+file system di recupero file cancellati. Il recupero file cancellati è
+disponibile solo su file system di tipo ext2. Il file system è solo
+un'interfaccia alla libreria ext2fs che: recupera tutti i nomi dei
+file cancellati su un fs ext2 e fornisce ed estrae i file selezionati
+in una partizione normale.
 .PP
 Per usare questo file system, è necessario entrare nella directory
 con il nome speciale formato dal prefisso "/#undel" e dal nome del
@@ -2834,7 +2792,6 @@ del primo disco SCSI su Linux, si dovrà usare il seguente percorso:
 .PP
 Il recupero può metterci un po' di tempo per caricare le informazioni
 necessarie per poter cominciare a navigare attraverso i file.
-.PP
 .\"NODE "  SMB File System"
 .SH "  File system SMB"
 Il file system smb permette di gestire file su macchine remote con
@@ -2852,7 +2809,7 @@ L'elemento
 e
 .I dir-remota
 sono opzionali.
-Il 
+Il
 .I nome utente, dominio
 e la
 .I password 
@@ -2865,7 +2822,6 @@ Esempi:
     /#smb:altra_macchina
     /#smb:guest@macchina/Public/Irlex
 .fi
-.PP
 .\"NODE "Colors"
 .SH "Colori"
 Il Midnight Commander tenta di stabilire se il terminale corrente
@@ -2920,16 +2876,14 @@ Il formato della definizione dei colori è:
   <parolachiave>=<coloreprimopiano>,<coloresfondo>:<parolachiave>= ...
 .fi
 .PP
-I colori sono opzionali e le parolechiave sono: normal,
-selected, marked, markselect, errors, input, reverse, gauge;
-I colori dei menu sono: menu, menusel, menuhot, menuhotsel;  
-I colori delle finestre di dialogo sono: dnormal, dfocus, dhotnormal, 
-dhotfocus; 
-I colori dell'aiuto sono: helpnormal, helpitalic, helpbold, 
-helplink, helpslink; 
-Il colore del visualizzatore è: viewunderline; 
+I colori sono opzionali e le parolechiave sono: normal, selected, marked,
+markselect, errors, input, reverse, gauge. I colori dei menu sono: menu,
+menusel, menuhot, menuhotsel. I colori delle finestre di dialogo sono:
+dnormal, dfocus, dhotnormal, dhotfocus. I colori dell'aiuto sono:
+helpnormal, helpitalic, helpbold, helplink, helpslink.
+Il colore del visualizzatore è: viewunderline.
 Colori speciali di evidenziazione: executable, directory, link, device, 
-special, core; 
+special, core.
 I colori dell'editor sono: editnormal, editbold, editmarked.
 .PP
 .I input 
@@ -2998,7 +2952,6 @@ essere usato solo come colore di sfondo. Esempio:
 [Colors]
 base_color=normal=white,default:marked=magenta,default
 .fi
-.PP
 .\"NODE "Special Settings"
 .SH "Impostazioni Speciali"
 Molte delle impostazioni del Midnight Commander possono essere cambiate
@@ -3022,13 +2975,6 @@ cambiare directory se si hanno dei file marcati.
 Questo valore è il numero di secondi che il Midnight Commander aspetta
 prima di tentare di riconnettersi ad un ftp server che ha negato
 l'autenticazione. Se il valore è zero, l'autenticazione non verrà ritentata.
-.TP
-.I ftpfs_use_passive_connections
-Il valore predefinito per questa opzione è spento. Essa fa in modo che
-il codice dell'fsftp usi la modalità passiva di apertura per il
-trasferimento dei file. Viene usata dalle persone che stanno dietro
-un router che filtra i pacchetti. Quest'opzione funziona solo se non
-si sta usando un proxy ftp.
 .TP
 .I max_dirt_limit
 Specifica al massimo quanti aggiornamenti possono essere saltati nel
@@ -3091,9 +3037,9 @@ pannello.
 .TP
 .I use_file_to_guess_type
 Se questa variabile è abilitata (valore predefinito) userà il comando
-file per trovare delle corrispondenze sui tipi di file elencati nel file
+file per trovare delle corrispondenze sui tipi di file elencati nel
 .\"LINK2"
-mc.ext\&.
+file mc.ext\&.
 .\"Extension File Edit"
 .TP
 .I xterm_mode
@@ -3101,7 +3047,6 @@ Se questa variabile è impostata (il valore predefinito è no) quando
 si naviga il file system su un pannello ad albero, automaticamente
 ricaricherà l'altro pannello con il contenuto della directory 
 selezionata.
-.PP
 .\"NODE "Terminal databases"
 .SH "Database di terminali"
 Il Midnight Commander fornisce una maniera per correggere il database
@@ -3146,35 +3091,33 @@ rappresenta le sequenze di escape usate per invocare il processo di
 completamento, invocato tramite M-tab, ma ridefinibile ad altri tasti
 per fare lo stesso lavoro (su quelle tastiere con tonnellate di 
 simpatici tasti dappertutto).
-.PP
 .SH ""
 .\"NODE "FILES"
 .SH "FILE"
-.PP
 Il programma recupera tutte le informazioni relative al proprio funzionamento
 dalla variabile ambiente MC_DATADIR, e se la variabile non è impostata,
 passerà alla directory @prefix@/share/mc .
 .PP
-@prefix@/share/mc/mc.hlp
+.I @prefix@/share/mc/mc.hlp
 .IP
 Il file di aiuto per il programma.
 .PP
-@prefix@/share/mc/mc.ext
+.I @prefix@/share/mc/mc.ext
 .IP
 Il file delle estensioni di sistema predefinito.
 .PP
-~/.mc/bindings
+.I ~/.mc/bindings
 .IP
 Le estensioni dell'utente, la configurazione del visualizzatore e
 dell'editor di file. Se presenti, questi file si sovrappongono ai file di 
 sistema.
 .PP
-@prefix@/share/mc/mc.ini
+.I @prefix@/share/mc/mc.ini
 .IP
 La configurazione di sistema predefinita per il Midnight Commander, usata solo
 se l'utente non possiede il proprio file ~/.mc/ini.
 .PP
-@prefix@/share/mc/mc.lib
+.I @prefix@/share/mc/mc.lib
 .IP
 Le impostazioni globali per il Midnight Commander. La modifica di questo
 file influisce su tutti gli utenti, che abbiano o no il file ~/.mc/ini .
@@ -3184,33 +3127,32 @@ impostazioni del terminale
 .\"Terminal databases"
 da mc.lib.
 .PP
-~/.mc/ini
+.I ~/.mc/ini
 .IP
 La configurazione dell'utente. Se questo file è presente, la configurazione
 viene caricata da qui invece che dal file di sistema.
 .PP
-@prefix@/share/mc/mc.hint
+.I @prefix@/share/mc/mc.hint
 .IP
 Questo file contiene i suggerimenti (dritte) mostrate dal programma.
 .PP
-@prefix@/share/mc/mc.menu
+.I @prefix@/share/mc/mc.menu
 .IP
 Questo file contiene il menu di sistema per le applicazioni.
 .PP
-~/.mc/menu
+.I ~/.mc/menu
 .IP
 Il menu utente per le applicazioni. Se presente viene usato al posto
 del menu delle applicazioni di sistema.
 .PP
-~/.mc/Tree
+.I ~/.mc/Tree
 .IP
 L'elenco di directory per l'albero directory e per la vista ad albero.
 .PP
- ./.mc.menu
+.I ./.mc.menu
 .IP
 Menu locale definito dall'utente. Se questo file è presente viene usato
 al posto del menu delle applicazioni utente o di sistema.
-.PP
 .\"SKIP_SECTION"
 .SH "LICENZA"
 Questo programma è distribuito sotto i termini della Licenza Generale
@@ -3230,7 +3172,6 @@ tcsh(1), zsh(1).
 La pagina Web del Midnight Commander:
 	http://www.ibiblio.org/mc/
 .fi
-.PP
 .\"NODE "AUTHORS"
 .SH "AUTORI"
 Miguel de Icaza (miguel@ximian.com), Janne Kukonlehto
@@ -3264,7 +3205,6 @@ Sergey Ya. Korshunoff (root@seyko.msk.su), Thomas Pundt
 (tjchol01@mecca.spd.louisville.edu), Torben Fjerdingstad
 (torben.fjerdingstad@uni-c.dk), Vadim Sinolitis (vvs@nsrd.npi.msu.su)
 e Wim Osterholt (wim@djo.wtm.tudelft.nl).
-.PP
 .\"NODE "BUGS"
 .SH "BACHI"
 Vedere il file TODO nella distribuzione per informazioni su
