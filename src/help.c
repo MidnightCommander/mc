@@ -314,7 +314,7 @@ static void start_link_area (int x, int y, char *link_name)
     Link_Area *new;
 
     if (inside_link_area)
-	message (0, _(" Warning "), _(" Internal bug: Double start of link area "));
+	message (0, _("Warning"), _(" Internal bug: Double start of link area "));
 
     /* Allocate memory for a new link area */
     new = g_new (Link_Area, 1);

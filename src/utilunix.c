@@ -351,11 +351,11 @@ static int old_error;		/* File descriptor of old standard error */
 void open_error_pipe (void)
 {
     if (pipe (error_pipe) < 0){
-	message (0, _(" Warning "), _(" Pipe failed "));
+	message (0, _("Warning"), _(" Pipe failed "));
     }
     old_error = dup (2);
     if(old_error < 0 || close(2) || dup (error_pipe[1]) != 2){
-	message (0, _(" Warning "), _(" Dup failed "));
+	message (0, _("Warning"), _(" Dup failed "));
 	close (error_pipe[0]);
 	close (error_pipe[1]);
     }
@@ -377,7 +377,7 @@ close_error_pipe (int error, char *text)
     if (error)
 	title = MSG_ERROR;
     else
-	title = _(" Warning ");
+	title = _("Warning");
     if (old_error >= 0){
 	close (2);
 	dup (old_error);
@@ -429,7 +429,7 @@ void check_error_pipe (void)
 	close (error_pipe[0]);
     }
     if (len > 0)
-        message (0, _(" Warning "), "%s", error);
+        message (0, _("Warning"), "%s", error);
 }
 
 static struct sigaction ignore, save_intr, save_quit, save_stop;

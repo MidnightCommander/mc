@@ -251,13 +251,13 @@ int edit_save_file (WEdit * edit, const char *filename)
 	    pclose (file);
 #else
 	    if (pclose (file) != 0) {
-		edit_error_dialog (_ (" Error "), catstrs (_ (" Error writing to pipe: "), p, " ", 0));
+		edit_error_dialog (_ ("Error"), catstrs (_ (" Error writing to pipe: "), p, " ", 0));
 		free (p);
 		goto error_save;
 	    }
 #endif
 	} else {
-	    edit_error_dialog (_ (" Error "), get_sys_error (catstrs (_ (" Failed trying to open pipe for writing: "), p, " ", 0)));
+	    edit_error_dialog (_ ("Error"), get_sys_error (catstrs (_ (" Failed trying to open pipe for writing: "), p, " ", 0)));
 	    free (p);
 	    goto error_save;
 	}
@@ -420,7 +420,7 @@ int edit_save_as_cmd (WEdit * edit)
 		different_filename = 1;
 		if ((file = mc_open (exp, O_RDONLY | O_BINARY)) != -1) {	/* the file exists */
 		    mc_close (file);
-		    if (edit_query_dialog2 (_(" Warning "), 
+		    if (edit_query_dialog2 (_("Warning"), 
 		    _(" A file already exists with this name. "), 
 /* Push buttons to over-write the current file, or cancel the operation */
 		    _("Overwrite"), _("Cancel"))) {
@@ -704,7 +704,7 @@ int edit_save_cmd (WEdit * edit)
 int edit_new_cmd (WEdit * edit)
 {
     if (edit->modified) {
-	if (edit_query_dialog2 (_ (" Warning "), _ (" Current text was modified without a file save. \n Continue discards these changes. "), _ ("Continue"), _ ("Cancel"))) {
+	if (edit_query_dialog2 (_ ("Warning"), _ (" Current text was modified without a file save. \n Continue discards these changes. "), _ ("Continue"), _ ("Cancel"))) {
 	    edit->force |= REDRAW_COMPLETELY;
 	    return 0;
 	}
@@ -729,7 +729,7 @@ int edit_load_cmd (WEdit * edit)
     char *exp;
 
     if (edit->modified) {
-	if (edit_query_dialog2 (_ (" Warning "), _ (" Current text was modified without a file save. \n Continue discards these changes. "), _ ("Continue"), _ ("Cancel"))) {
+	if (edit_query_dialog2 (_ ("Warning"), _ (" Current text was modified without a file save. \n Continue discards these changes. "), _ ("Continue"), _ ("Cancel"))) {
 	    edit->force |= REDRAW_COMPLETELY;
 	    return 0;
 	}
@@ -877,7 +877,7 @@ void edit_block_move_cmd (WEdit * edit)
 	return;
 
     if ((end_mark - start_mark) > option_max_undo / 2)
-	if (edit_query_dialog2 (_ (" Warning "), _ (" Block is large, you may not be able to undo this action. "), _ ("Continue"), _ ("Cancel")))
+	if (edit_query_dialog2 (_ ("Warning"), _ (" Block is large, you may not be able to undo this action. "), _ ("Continue"), _ ("Cancel")))
 	    return;
 
     edit_push_markers (edit);
@@ -973,7 +973,7 @@ int edit_block_delete (WEdit * edit)
 	edit_mark_cmd (edit, 0);
     if ((end_mark - start_mark) > option_max_undo / 2)
 /* Warning message with a query to continue or cancel the operation */
-	if (edit_query_dialog2 (_ (" Warning "), _ (" Block is large, you may not be able to undo this action. "), _ (" Continue "), _ (" Cancel ")))
+	if (edit_query_dialog2 (_ ("Warning"), _ (" Block is large, you may not be able to undo this action. "), _ (" Continue "), _ (" Cancel ")))
 	    return 1;
     edit_push_markers (edit);
     edit_cursor_move (edit, start_mark - edit->curs1);
@@ -1190,7 +1190,7 @@ void edit_search_dialog (WEdit * edit, char **search_text)
 
     {
 	QuickDialog Quick_input =
-	{SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT, -1, 0, N_(" Search "),
+	{SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT, -1, 0, N_("Search"),
 	 "[Input Line Keys]", 0 /*quick_widgets */ };
 
 	Quick_input.widgets = quick_widgets;
@@ -1562,7 +1562,7 @@ static int sprintf_p (char *str, const char *fmt,...)
 static void regexp_error (WEdit *edit)
 {
 /* "Error: Syntax error in regular expression, or scanf expression contained too many %'s */
-    edit_error_dialog (_(" Error "), _(" Invalid regular expression, or scanf expression with to many conversions "));
+    edit_error_dialog (_("Error"), _(" Invalid regular expression, or scanf expression with to many conversions "));
 }
 
 /* call with edit = 0 before shutdown to close memory leaks */
@@ -1868,9 +1868,9 @@ void edit_search_cmd (WEdit * edit, int again)
 		}
 		if (found) {
 /* in response to number of bookmarks added because of string being found %d times */
-		    message (0, _(" Search "), _(" %d finds made, %d bookmarks added "), found, books);
+		    message (0, _("Search"), _(" %d finds made, %d bookmarks added "), found, books);
 		} else {
-		    edit_error_dialog (_ (" Search "), _ (" Search string not found "));
+		    edit_error_dialog (_ ("Search"), _ (" Search string not found "));
 		}
 	    } else {
 
@@ -1898,7 +1898,7 @@ void edit_search_cmd (WEdit * edit, int again)
 		    regexp_error (edit);
 		} else {
 		    edit->search_start = edit->curs1;
-		    edit_error_dialog (_ (" Search "), _ (" Search string not found "));
+		    edit_error_dialog (_ ("Search"), _ (" Search string not found "));
 		}
 	    }
 	}
@@ -1916,7 +1916,7 @@ void edit_quit_cmd (WEdit * edit)
 
     edit->force |= REDRAW_COMPLETELY;
     if (edit->modified) {
-	switch (edit_query_dialog3 (_ (" Quit "), _ (" File was modified, Save with exit? "), _ ("Cancel quit"), _ ("&Yes"), _ ("&No"))) {
+	switch (edit_query_dialog3 (_ ("Quit"), _ (" File was modified, Save with exit? "), _ ("Cancel quit"), _ ("&Yes"), _ ("&No"))) {
 	case 1:
 	    edit_push_markers (edit);
 	    edit_set_markers (edit, 0, 0, 0, 0);

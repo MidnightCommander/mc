@@ -460,7 +460,7 @@ void
 do_possible_cd (char *new_dir)
 {
     if (!do_cd (new_dir, cd_exact))
-	message (1, _(" Warning "),
+	message (1, _("Warning"),
 		 _(" The Commander can't change to the directory that \n"
 		   " the subshell claims you are in.  Perhaps you have \n"
 		   " deleted your working directory, or given yourself \n"

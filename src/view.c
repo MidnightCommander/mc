@@ -401,7 +401,7 @@ view_ok_to_quit (WView *view)
     if (!view->change_list)
 	return 1;
 
-    r = query_dialog (_(" Quit "),
+    r = query_dialog (_("Quit"),
 		      _(" File was modified, Save with exit? "), 2, 3,
 		      _("Cancel quit"), _("&Yes"), _("&No"));
 
@@ -1492,7 +1492,7 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
     got_interrupt ();
 
     if (verbose){
-	d = message (D_INSERT, _(" Search "), _("Searching %s"), text);
+	d = message (D_INSERT, _("Search"), _("Searching %s"), text);
 	mc_refresh ();
     }
 
@@ -1571,7 +1571,7 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
 	destroy_dlg (d);
     }
     if (!s) {
-	message (0, _(" Search "), _(" Search string not found "));
+	message (0, _("Search"), _(" Search string not found "));
 	view->found_len = 0;
     }
 }
@@ -1691,7 +1691,7 @@ hex_search (WView *view, char *text)
 
     /* No valid bytes in the user input */
     if (block_len <= 0 || parse_error) {
-	message (0, _(" Search "), _("Invalid hex search expression"));
+	message (0, _("Search"), _("Invalid hex search expression"));
 	g_free (buffer);
 	view->found_len = 0;
 	return;
@@ -1703,7 +1703,7 @@ hex_search (WView *view, char *text)
     g_free (buffer);
 
     if (pos == -1){
-	message (0, _(" Search "), _(" Search string not found "));
+	message (0, _("Search"), _(" Search string not found "));
 	view->found_len = 0;
 	return;
     }
@@ -1920,7 +1920,7 @@ regexp_search (WView *view, int direction)
     }
     
     regexp = old ? old : regexp;
-    regexp = input_dialog (_(" Search "), _(" Enter regexp:"), regexp);
+    regexp = input_dialog (_("Search"), _(" Enter regexp:"), regexp);
     if ((!regexp)){
 	return;
     }
@@ -1962,7 +1962,7 @@ normal_search (WView *view, int direction)
 	convert_to_display( exp );
 #endif
 
-    exp = input_dialog (_(" Search "), _(" Enter search string:"), exp);
+    exp = input_dialog (_("Search"), _(" Enter search string:"), exp);
     if ((!exp)){
 	return;
     }

@@ -136,7 +136,7 @@ mcfs_login_server (int my_socket, char *user, int port,
     if (result == MC_NEED_PASSWORD) {
 	if (port > 1024 && port_autodetected) {
 	    int v;
-	    v = query_dialog (_(" Warning "),
+	    v = query_dialog (_("Warning"),
 			      _
 			      (" The remote server is not running on a system port \n"
 			       " you need a password to log in, but the information may \n"

@@ -162,7 +162,7 @@ static void drive_cmd()
 			errocc = 1;
 	}
     if (errocc)
-	    message (1, " Error ", " Cannot access drive %c: ",
+	    message (1, "Error", " Cannot access drive %c: ",
 		*(szDrivesAvail+(nNewDrive*4)) );
     }
     destroy_dlg (drive_dlg);

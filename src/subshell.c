@@ -699,7 +699,7 @@ int exit_subshell (void)
     int quit = TRUE;
     
     if (subshell_state != INACTIVE && subshell_alive)
-	quit = !query_dialog (_(" Warning "), _(" The shell is still active. Quit anyway? "),
+	quit = !query_dialog (_("Warning"), _(" The shell is still active. Quit anyway? "),
 			      0, 2, _("&Yes"), _("&No"));
 
     if (quit && subshell_type == TCSH)

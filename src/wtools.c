@@ -129,7 +129,7 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	query_colors = dialog_colors;
     
     if (header == MSG_ERROR)
-	header = _(" Error ");
+	header = _("Error");
     
     if (count > 0){
 	va_start (ap, count);

@@ -16,8 +16,8 @@ msgstr ""
 #: edit/edit.c:163 edit/edit.c:289 edit/edit.c:294 edit/edit.c:332
 #: edit/edit.c:338 edit/edit.c:345 edit/edit.c:357 edit/editcmd.c:255
 #: edit/editcmd.c:261 edit/editcmd.c:1564 src/wtools.c:132 vfs/vfs.c:1848
-msgid " Error "
-msgstr " Kïûda "
+msgid "Error"
+msgstr "Kïûda"
 
 #: edit/edit.c:163 edit/edit.c:338
 msgid " Failed trying to open file for reading: "
@@ -143,8 +143,8 @@ msgstr " Glabât Kâ "
 #: src/screen.c:1374 src/screen.c:1944 src/selcodepage.c:101
 #: src/subshell.c:702 src/utilunix.c:351 src/utilunix.c:355 src/utilunix.c:377
 #: src/utilunix.c:429 vfs/mcfs.c:124
-msgid " Warning "
-msgstr " Brîdinâjums "
+msgid "Warning"
+msgstr "Brîdinâjums"
 
 #: edit/editcmd.c:425
 msgid " A file already exists with this name. "

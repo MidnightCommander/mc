@@ -24,8 +24,8 @@ msgstr ""
 #: edit/edit.c:163 edit/edit.c:289 edit/edit.c:294 edit/edit.c:332
 #: edit/edit.c:338 edit/edit.c:345 edit/edit.c:357 edit/editcmd.c:254
 #: edit/editcmd.c:260 edit/editcmd.c:1565 src/wtools.c:132 vfs/vfs.c:1848
-msgid " Error "
-msgstr " Ошибка "
+msgid "Error"
+msgstr "Ошибка"
 
 #: edit/edit.c:163 edit/edit.c:338
 msgid " Failed trying to open file for reading: "
@@ -150,8 +150,8 @@ msgstr " Сохранить как "
 #: src/screen.c:1374 src/screen.c:1947 src/selcodepage.c:106
 #: src/subshell.c:702 src/utilunix.c:351 src/utilunix.c:355 src/utilunix.c:377
 #: src/utilunix.c:429 vfs/mcfs.c:139
-msgid " Warning "
-msgstr " Предупреждение "
+msgid "Warning"
+msgstr "Предупреждение"
 
 #: edit/editcmd.c:424
 msgid " A file already exists with this name. "

@@ -1845,7 +1845,7 @@ error:
       if (++errorcount < 5) {
 	message_1s (1, _("Could not parse:"), (p_copy && *p_copy) ? p_copy : line);
       } else if (errorcount == 5)
-	message_1s (1, _(" Error "), _("More parsing errors will be ignored."));
+	message_1s (1, _("Error"), _("More parsing errors will be ignored."));
     }
 
     g_free (p_copy);

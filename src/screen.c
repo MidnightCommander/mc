@@ -1371,7 +1371,7 @@ set_panel_formats (WPanel *p)
     panel_update_cols (&(p->widget), p->frame_size);
 
     if (retcode)
-      message( 1, _(" Warning " ), _( "User supplied format looks invalid, reverting to default." ) );
+      message( 1, _("Warning" ), _( "User supplied format looks invalid, reverting to default." ) );
     if (retcode & 0x01){
       g_free (p->user_format);
       p->user_format = g_strdup (DEFAULT_USER_FORMAT);
@@ -1944,7 +1944,7 @@ do_enter_on_file_entry (file_entry *fe)
 	tmp = concat_dir_and_file (vfs_get_current_dir (), fe->fname);
 	if (!mc_setctl (tmp, MCCTL_EXTFS_RUN, NULL))
 	    /* Execution on this filesysten is not implemented */
-	    message (1, _(" Warning "), _(" No action taken "));
+	    message (1, _("Warning"), _(" No action taken "));
 	g_free (tmp);
     }
 #endif				/* USE_VFS */

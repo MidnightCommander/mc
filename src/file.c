@@ -610,7 +610,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
 
     if (ctx->do_reget) {
 	if (mc_lseek (src_desc, ctx->do_reget, SEEK_SET) != ctx->do_reget) {
-	    message_1s (1, _(" Warning "),
+	    message_1s (1, _("Warning"),
 			_(" Reget failed, about to overwrite file "));
 	    ctx->do_reget = ctx->do_append = 0;
 	}
