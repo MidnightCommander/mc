@@ -21,8 +21,6 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
    
-#include <VERSION>
-
 
 
 /* Define if on AIX 3.
@@ -118,6 +116,7 @@
 /* Define if the X Window System is missing or not being used.  */
 #undef X_DISPLAY_MISSING
 
+#undef VERSION
 #undef PACKAGE
 
 /* Always defined */

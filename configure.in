@@ -5,9 +5,10 @@ AC_INIT(create_vcs)
 AC_CONFIG_HEADER(config.h)
 
 PACKAGE=mc
-VERSION=dummy
+VERSION=4.1.35
 AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
-AC_DEFINE_UNQUOTED(VERSION, "dummy")
+AC_DEFINE_UNQUOTED(VERSION, "$VERSION")
+AC_SUBST(VERSION)
 
 dnl This is path where we're looking for headers in addition to /usr/include
 dnl and whatever cpp defaults to.
@@ -1412,6 +1413,7 @@ dnl
 AC_OUTPUT([
 Make.common 
 Makefile 
+VERSION
 doc/Makefile 
 vfs/Makefile:vfs/Make-mc.in
 lib/Makefile
