@@ -44,6 +44,10 @@ msgid ""
 "\n"
 "Please check it to see if it points to a valid command."
 msgstr ""
+"Niet uit te voeren\n"
+"\"%s\".\n"
+"\n"
+"Kijk na of het een geldige opdracht betreft"
 
 #: gnome/gaction.c:40
 #, c-format
@@ -53,6 +57,11 @@ msgid ""
 "To fix this, bring up the mime-properties editor in the GNOME Control "
 "Center, and edit the default %s-action for \"%s\"."
 msgstr ""
+"\".\n"
+"\n"
+"Om dit probleem te verhelpen dient u de \"mime-properties editor\" in het "
+"GNOME Control Center te gebruiken om de standaard actie %s voor \"%s\" te "
+"bewerken."
 
 #: gnome/gaction.c:46
 #, c-format
@@ -62,6 +71,10 @@ msgid ""
 "To fix this error, bring up this file's properties and change the default "
 "%s-action."
 msgstr ""
+"\".\n"
+"\n"
+"Om dit probleem te verhelpen dient u de eigenschappen van dit bestand te "
+"bewerken en de standaard %s-actie te wijzigen."
 
 #: gnome/gaction.c:51
 #, c-format
@@ -71,6 +84,10 @@ msgid ""
 "with the command:\n"
 "\"%s\"%s"
 msgstr ""
+"Kan niet %s\n"
+"\"%s\"\n"
+"met de opdracht:\n"
+"\"%s\"%s"
 
 #: gnome/gaction.c:134 gnome/gaction.c:150
 msgid "open"
@@ -258,11 +275,11 @@ msgstr " Incorrecte reguliere expressie  "
 
 #: gnome/gcmd.c:954
 msgid "Creating a desktop link"
-msgstr ""
+msgstr "Een snelkoppeling maken"
 
 #: gnome/gcmd.c:955
 msgid "Enter the URL:"
-msgstr ""
+msgstr "Geef de URL :"
 
 #: gnome/gcustom-layout.c:34
 msgid "Access Time"
@@ -336,12 +353,12 @@ msgstr "Aangepaste weergave"
 #. Icon position
 #: gnome/gdesktop-prefs.c:242
 msgid "Icon position"
-msgstr ""
+msgstr "Positie van het pictogram"
 
 #. Snap and placement
 #: gnome/gdesktop-prefs.c:258
 msgid "Automatic icon placement"
-msgstr ""
+msgstr "Automatische schikking van de pictogrammen"
 
 #: gnome/gdesktop-prefs.c:262
 msgid "Snap icons to grid"
@@ -919,7 +936,7 @@ msgstr "Sluit GMC (Bestandsbeheer) en het bureaublad af"
 
 #: gnome/glayout.c:465 gnome/glayout.c:476
 msgid "_Settings"
-msgstr ""
+msgstr "Instellingen"
 
 #: gnome/glayout.c:466 gnome/glayout.c:477
 msgid "_Layout"
@@ -2415,7 +2432,7 @@ msgstr "Naar bestand kopiëren...\tC-f"
 #. Tool hint
 #: gtkedit/editmenu.c:407
 msgid "Disk operations and file indexing/searching"
-msgstr ""
+msgstr "Disk operaties en bestanden zoeken/indexeren"
 
 #: gtkedit/editmenu.c:413
 msgid "Toggle mark\tF3"
@@ -2667,7 +2684,7 @@ msgstr ""
 
 #: gtkedit/gtkedit.c:1246
 msgid "Interactive help browser"
-msgstr ""
+msgstr "Interactieve help browser"
 
 #: gtkedit/gtkedit.c:1247
 msgid "Save to current file name"
@@ -2751,11 +2768,14 @@ msgid ""
 " Check that it is in your path and works with the -a option. \n"
 " Alternatively, disable spell checking from the Options menu. "
 msgstr ""
+" Kon ispel programma niet openen. \n"
+" Kijk na of het in uw pad aanwezig is en met de -a optie werkt. \n"
+" U kan ook spellingscontrole uitschakelen in het opties menu. "
 
 #: gtkedit/syntax.c:1051 gtkedit/syntax.c:1060 gtkedit/syntax.c:1069
 #: gtkedit/syntax.c:1078
 msgid " Spelling Message "
-msgstr ""
+msgstr " Spelling boodschap "
 
 #: gtkedit/syntax.c:1060
 msgid ""
@@ -2763,6 +2783,9 @@ msgid ""
 " Check that it is in your path and works with the -a option. \n"
 " Alternatively, disable spell checking from the Options menu. "
 msgstr ""
+" Kon ispell pipes niet openen. \n"
+" Kijk na of het in uw pad aanwezig is en met de -a optie werkt. \n"
+" U kan ook spellingscontrole uitschakelen in het opties menu. "
 
 #: gtkedit/syntax.c:1069
 msgid ""
@@ -2770,12 +2793,17 @@ msgid ""
 " Check that it is in your path and works with the -a option. \n"
 " Alternatively, disable spell checking from the Options menu. "
 msgstr ""
+" Kon ispell pipes niet lezen. \n"
+" Kijk na of het in uw pad aanwezig is en met de -a optie werkt. \n"
+" U kan ook spellingscontrole uitschakelen in het opties menu. "
 
 #: gtkedit/syntax.c:1078
 msgid ""
 " Error reading from ispell. \n"
 " Ispell is being restarted. "
 msgstr ""
+" Fout bij het lezen van ispell. \n"
+" Ispell wordt herstart. "
 
 #: gtkedit/syntax.c:1351 gtkedit/syntax.c:1353
 msgid " Load Syntax Rules "
@@ -3904,15 +3932,13 @@ msgstr " `%s' en `%s' zijn dezelfde directory "
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
 msgstr ""
-" Overschrijven van directory \"%s\" mislukt \n"
-" %s "
+" Overschrijven van directory \"%s\" mislukt %s "
 
 #: src/file.c:1267
 #, c-format
 msgid " Cannot overwrite file \"%s\" %s "
 msgstr ""
-" Overschrijven van bestand \"%s\" mislukt \n"
-" %s "
+" Overschrijven van bestand \"%s\" mislukt %s "
 
 #: src/file.c:1294
 #, c-format
@@ -5446,7 +5472,8 @@ msgstr "Onbekende 'tag' in weergaveformaat: "
 
 #: src/screen.c:1450
 msgid "User suplied format looks invalid, reverting to default."
-msgstr ""
+msgstr "Het door de gebruiker gedefinieerde formaat lijkt fout, " 
+"gebruik de standaard."
 
 #: src/screen.c:2115 src/screen.c:2163
 msgid " Do you really want to execute? "
@@ -5624,12 +5651,12 @@ msgstr "name_trunc: te groot"
 #. strftime() format string for recent dates
 #: src/util.c:599 src/util.c:624
 msgid "%b %e %H:%M"
-msgstr ""
+msgstr "%b %e %H:%M"
 
 #. strftime() format string for old dates
 #: src/util.c:600 src/util.c:622
 msgid "%b %e  %Y"
-msgstr ""
+msgstr "%b %e  %Y"
 
 #: src/utilunix.c:390
 msgid " Pipe failed "
@@ -5772,7 +5799,7 @@ msgstr "Hex"
 
 #: src/view.c:2072
 msgid "Goto"
-msgstr ""
+msgstr "Ga naar"
 
 #: src/view.c:2072
 msgid "Line"
@@ -6053,7 +6080,7 @@ msgstr "fish: initiële lijn wordt verstuurd..."
 
 #: vfs/fish.c:248
 msgid "fish: Handshaking version..."
-msgstr ""
+msgstr "fish: versie handshaking..."
 
 #: vfs/fish.c:252
 msgid "fish: Setting up current directory..."
@@ -6351,12 +6378,12 @@ msgstr ""
 
 #: vfs/vfs.c:1792
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
-msgstr ""
+msgstr "%s: %s: %s %3d%% (%ld bytes getransfereerd)"
 
 #: vfs/vfs.c:1793
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
-msgstr ""
+msgstr "%s: %s: %s %ld bytes getransfereerd"
 
 #~ msgid "Rescan System Devices"
 #~ msgstr "Systeemapparaten opnieuw inlezen"
