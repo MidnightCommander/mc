@@ -1,5 +1,8 @@
 2002-12-13  Pavel Roskin  <proski@gnu.org>
 
+	* extfs/uha.in: Strengthen quoting.  Remove unnecessary space
+	after filename.  Update URL.  Use safer temporary directory.
+
 	* extfs/uarj: New list-only implementation that doesn't need
 	patched unarj.
 	* extfs/unarj.diff: Remove.
