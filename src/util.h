@@ -146,6 +146,10 @@ void remove_dash (void);
 
 extern char app_text [];
 
+/* Creating temporary files safely */
+void init_tmpdir(void);
+int mc_mkstemps(char **pname, const char *prefix, const char *suffix);
+
 enum {
 	ISGUNZIPABLE_GUNZIP,
 	ISGUNZIPABLE_BZIP,
@@ -179,6 +183,8 @@ int max_open_files (void);
 #    define PATH_SEP '\\'
 #    define PATH_SEP_STR "\\"
 #    define PATH_ENV_SEP ';'
+#    define TMPDIR_DEFAULT "c:\\temp"
+#    define SCRIPT_SUFFIX ".cmd"
 #    define OS_SORT_CASE_SENSITIVE_DEFAULT 0
 #    define STRCOMP stricmp
 #    define STRNCOMP strnicmp
@@ -190,6 +196,8 @@ int max_open_files (void);
 #    define PATH_SEP '/'
 #    define PATH_SEP_STR "/"
 #    define PATH_ENV_SEP ':'
+#    define TMPDIR_DEFAULT "/tmp"
+#    define SCRIPT_SUFFIX ""
 #    define get_default_editor() "vi"
 #    define OS_SORT_CASE_SENSITIVE_DEFAULT 1
 #    define STRCOMP strcmp

@@ -139,14 +139,10 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
     else
 	do_local_copy = 0;
 
-    if ((file_name = tempnam (NULL, "mcext")) == 0) {
-	message (1, MSG_ERROR, _(" Can't generate unique filename \n %s "),
-		 unix_error_string (errno));
-	return;
-    }
+    cmd_file_fd = mc_mkstemps(&file_name, "mcext", SCRIPT_SUFFIX);
 
     /* #warning FIXME: this is ugly */
-    if ((cmd_file_fd = open (file_name, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, 0600)) == -1){
+    if (cmd_file_fd == -1){
 	message (1, MSG_ERROR, _(" Can't create temporary command file \n %s "),
 		 unix_error_string (errno));
 	free (file_name);

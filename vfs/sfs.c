@@ -126,8 +126,8 @@ redirect (vfs *me, char *name)
 	cur = cur->next;
     }
 
-    cache = tempnam (NULL, "sfs");
-    handle = open (cache, O_RDWR | O_CREAT | O_EXCL, 0600);
+    handle = mc_mkstemps (&cache, "sfs", NULL);
+
     if (handle == -1) {
 	g_free (cache);
 	return "/SOMEONE_PLAYING_DIRTY_TMP_TRICKS_ON_US";

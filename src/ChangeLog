@@ -1,3 +1,12 @@
+2001-05-21  Pavel Roskin  <proski@gnu.org>
+
+	* src/ext.c (exec_extension): Use mc_mkstemps().
+	* src/user.c (execute_menu_command): Use mc_mkstemps().
+	* src/util.c (mc_mkstemps): New function - safely create and
+	open temporary file. Return the handle and the name.
+	* src/util.h: Declarations for init_tmpdir() and mc_mkstemps().
+	Define TMPDIR_DEFAULT and SCRIPT_SUFFIX.
+
 2001-05-18  Pavel Roskin  <proski@gnu.org>
 
 	* TODO: Remove Tk-related entries.
@@ -497,10 +506,10 @@
 
 2000-02-04 "David H.Martin" <dmartina@usa.net> 
 	
-        * src/widget.c (input_new): Change NULL to empty strings and avoid
+	* src/widget.c (input_new): Change NULL to empty strings and avoid
 	  crashing when string functions are called.
-        * src/boxes.c (configure_vfs): Remove local change to empty string.
-        * src/setup.c (load setup): Load anonymous password     
+	* src/boxes.c (configure_vfs): Remove local change to empty string.
+	* src/setup.c (load setup): Load anonymous password     
 
 2000-02-03 Andrew V. Samoilov  <sav@bcs.zp.ua>
 
@@ -2237,10 +2246,10 @@ Tue Sep 15 01:02:34 1998   Paul Sheer <psheer@obsidian.co.za>
 
 1998-09-14  Norbert Warmuth  <k3190@fh-sw.de>
 
-        * file.c (move_dir_dir): Fixed severe bug reported by Andrew Pechenov
-        <zx80@demo.ru> (losing files when moving directories cross filesystem
-        boundaries): make sure erase_list is emptied always not only when we
-        deleted files.
+	* file.c (move_dir_dir): Fixed severe bug reported by Andrew Pechenov
+	<zx80@demo.ru> (losing files when moving directories cross filesystem
+	boundaries): make sure erase_list is emptied always not only when we
+	deleted files.
 
 Sat Sep 12 02:59:43 1998  Timur Bakeyev <mc@bat.ru>
 
@@ -3310,10 +3319,10 @@ Sat Feb 21 16:46:49 1998 Stas Maximov <stmax@u213.srcc.msu.su>
 Mon Mar 16 13:03:45 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* cmd.c: Internal edit is used by default. vi may be
-        confusing for some users.
+	confusing for some users.
 
 	* tree.c: tree_rmdir_cmd() should not return any value,
-        because it is not analyzed for errors.
+	because it is not analyzed for errors.
 
 	* main.c: NT code: use O_BINARY instead of _O_BINARY
 
@@ -3423,42 +3432,42 @@ Tue Mar 10 20:41:45 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 Sat Mar  7 14:33:38 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
-        * src/complete.c: obsolete hack for OS/2 and NT removed.
-        Completion works for NT now (not very good)
+	* src/complete.c: obsolete hack for OS/2 and NT removed.
+	Completion works for NT now (not very good)
 
-        * src/main.c: HOME variable is respected by NT and OS/2
-        versions. If it is missing, we use LIBDIR on OS2_NT and "/"
-        on Unix.
+	* src/main.c: HOME variable is respected by NT and OS/2
+	versions. If it is missing, we use LIBDIR on OS2_NT and "/"
+	on Unix.
 
-        * src/key.h: SHIFT_PRESSED is set to 0x0010 on NT. This value
-        doesn't conflict with definitions for ALT and CTRL, but it is
-        SDK-compatible.
+	* src/key.h: SHIFT_PRESSED is set to 0x0010 on NT. This value
+	doesn't conflict with definitions for ALT and CTRL, but it is
+	SDK-compatible.
 
-        * vfs/vfs.h: Minor changes for OS/2. EMX defines mkdir with
-        2 arguments
+	* vfs/vfs.h: Minor changes for OS/2. EMX defines mkdir with
+	2 arguments
 
-        * vfs/tcputil,c, vfs/utilvfs.c: signal.h was includes twice.
+	* vfs/tcputil,c, vfs/utilvfs.c: signal.h was includes twice.
 
-        * vfs/Makefile.in: undelfs.h is not used and should disapper
+	* vfs/Makefile.in: undelfs.h is not used and should disapper
 
-        * slang/slos2tty.c: new file, copied from SLang-0.99.38,
-        needed for OS/2 port
+	* slang/slos2tty.c: new file, copied from SLang-0.99.38,
+	needed for OS/2 port
 
-        * slang/Makefile.in: added slos2tty.c
+	* slang/Makefile.in: added slos2tty.c
 
-        * vfs/extfs/README: annoying spell errors corrected
+	* vfs/extfs/README: annoying spell errors corrected
 
-        * src/main.c: --termcap disabled for OS2_NT because it doesn't
-        (and cannot) work. ARCH_FLAGS is not needed anymore.
+	* src/main.c: --termcap disabled for OS2_NT because it doesn't
+	(and cannot) work. ARCH_FLAGS is not needed anymore.
 
-        * src/text.c: most includes removed. Added a warning is someone
-        compiles this file with HAVE_X. Improved color scheme for
-        consoles with 16 background colors (e.g. OS/2). Hack for OS/2
-        removed.
+	* src/text.c: most includes removed. Added a warning is someone
+	compiles this file with HAVE_X. Improved color scheme for
+	consoles with 16 background colors (e.g. OS/2). Hack for OS/2
+	removed.
 
-        * src/util.c, src/util.h: STRCOMP and MC_ARCH_FLAGS are moved
-        to util.h. It may be useful to use them for filenames' completion
-        on OS2_NT
+	* src/util.c, src/util.h: STRCOMP and MC_ARCH_FLAGS are moved
+	to util.h. It may be useful to use them for filenames' completion
+	on OS2_NT
 
 Fri Mar  6 19:29:54 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -3559,10 +3568,10 @@ Fri Feb 13 19:59:39 1998  Alexander Savelyev <fano@VCom.kiev.ua>
 
 Wed Feb 11 20:08:50 1998  Norbert Warmuth <k3190@fh-sw.de>
 
-        * user.c (execute_menu_command): Extented the syntax of %-macros
-        used in the user menu in order to switch quoting on (default) and
-        off, e.g. %0f means don't quote the expanded macro, %f and %1f mean
-        quote the expanded macro.
+	* user.c (execute_menu_command): Extented the syntax of %-macros
+	used in the user menu in order to switch quoting on (default) and
+	off, e.g. %0f means don't quote the expanded macro, %f and %1f mean
+	quote the expanded macro.
 
 
 Fri Jan 30 16:43:47 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
@@ -3582,49 +3591,49 @@ Fri Jan 23 07:28:54 1998  Peter Daum <gator@cs.tu-berlin.de>
 
 Fri Jan 23 07:19:18 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
-        * edit/edit.h: mc_mkdir requires 2 arguments for any operation
-        system. Obsolete #ifdef's removed.
+	* edit/edit.h: mc_mkdir requires 2 arguments for any operation
+	system. Obsolete #ifdef's removed.
 
-        * edit/editwidget.c: ansi standard violation removed
+	* edit/editwidget.c: ansi standard violation removed
 
-        * nt/Makefile.NT: default SLang directory is now ../slang. Most
-        of SLang sources are no more compiled for MC.
+	* nt/Makefile.NT: default SLang directory is now ../slang. Most
+	of SLang sources are no more compiled for MC.
 
-        * nt/drive.h: new file. Copied from os2/drive.h with minor changes
+	* nt/drive.h: new file. Copied from os2/drive.h with minor changes
 
-        * nt/ket.nt.c: new way for handling conflicting SHIFT_PRESSED
-        definitions. get_event can work without blocking. Copy, move
-        and delete operations work normally.
+	* nt/ket.nt.c: new way for handling conflicting SHIFT_PRESSED
+	definitions. get_event can work without blocking. Copy, move
+	and delete operations work normally.
 
-        * nt/slint.nt.c: SLang_getkey2 and Slang_input_pending2 are
-        copied from src/slint.c
+	* nt/slint.nt.c: SLang_getkey2 and Slang_input_pending2 are
+	copied from src/slint.c
 
-        * nt/sys/param.h: annoying warnings temporaly suppressed.
+	* nt/sys/param.h: annoying warnings temporaly suppressed.
 
-        * slang/slvideo.c, slang/slw32tty.c: new files. They contain
-        changes by Alexander Dong.
+	* slang/slvideo.c, slang/slw32tty.c: new files. They contain
+	changes by Alexander Dong.
 
-        * src/myslang.h: definitions for acsii symbols removed, since
-        they are available in slang.h. Double lines are not used anymore.
+	* src/myslang.h: definitions for acsii symbols removed, since
+	they are available in slang.h. Double lines are not used anymore.
 
-        * src/panelize.c: sys/wait.h is included only if HAVE_SYS_WAIT_H
-        is defined
+	* src/panelize.c: sys/wait.h is included only if HAVE_SYS_WAIT_H
+	is defined
 
-        * nt/Makefile.NT: text.c is added
+	* nt/Makefile.NT: text.c is added
 
 	* nt/Makefile.VC4: "-debug" switch for linker is not used for
-        release version
+	release version
 
-        * src/screen.c (show_dir): double lines are no more used by NT and
-        OS/2 ports.
+	* src/screen.c (show_dir): double lines are no more used by NT and
+	OS/2 ports.
 
-        * src/wtools.c (real_input_dialog_help): layout of input dialog for
-        XView port is corrected
+	* src/wtools.c (real_input_dialog_help): layout of input dialog for
+	XView port is corrected
 
-        * edit/edit.h: mc_mkdir requires 2 arguments for any operation
-        system. Obsolete #ifdef's removed.
+	* edit/edit.h: mc_mkdir requires 2 arguments for any operation
+	system. Obsolete #ifdef's removed.
 
-        * edit/editwidget.c: ansi standard violation removed
+	* edit/editwidget.c: ansi standard violation removed
 
 Wed Jan 21 14:01:29 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -3638,8 +3647,8 @@ Wed Jan 21 11:58:39 1998  Sung-Hyun Nam <namsh@lgic.co.kr>
 	* ftpfs.c (retrieve_dir): Avoid compiler warning by testing
 	explicitly the value.
 
-        screen.c (format_file): color not initialized when we met
-        empty_line.
+	screen.c (format_file): color not initialized when we met
+	empty_line.
 
 Wed Jan 21 11:28:21 1998  Alex Tkachenko  <alex@bcs.zp.ua>
 
@@ -3692,9 +3701,9 @@ Fri Jan 16 13:47:13 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 Fri Jan 16 12:47:39 1998  Norbert Warmuth <k3190@fh-sw.de>
 
-        * vfs/ftpfs.c (command): Don't log passwords when the dialog between
-        server and client is logged to a file (mc -l logfile).
+	* vfs/ftpfs.c (command): Don't log passwords when the dialog between
+	server and client is logged to a file (mc -l logfile).
 
-        * vfs/ftpfs.c (resolve_symlink, retrieve_dir): When a directory
-        contains spaces send two commands ("CWD path" and  "LIST .") instead of
-        one command ("LIST path") in order to get directory listings.
+	* vfs/ftpfs.c (resolve_symlink, retrieve_dir): When a directory
+	contains spaces send two commands ("CWD path" and  "LIST .") instead of
+	one command ("LIST path") in order to get directory listings.

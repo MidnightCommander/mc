@@ -1,3 +1,16 @@
+2001-05-21  Pavel Roskin  <proski@gnu.org>
+
+	* vfs/direntry.c (vfs_s_open): Use mc_mkstemps. Create and close
+	temporary file to reserve its name on the filesystem.
+	(vfs_s_retrieve_file): Use mc_mkstemps().
+	(g_tempnam): Remove.
+	* vfs/extfs.c (extfs_open): Use mc_mkstemps().
+	* vfs/sfs.c (redirect): Likewise.
+	* vfs/shared_ftp_fish.c (_get_file_entry): Likewise.
+	(retrieve_file): Likewise.
+	* vfs/vfs.c (mc_def_getlocalcopy): Likewise.
+	* vfs/xdirentry.h: Remove declaration of g_tempnam().
+
 2001-05-18  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.c (vfs_addstamp): Rename st1 to last_stamp. Initialize it
@@ -921,7 +934,7 @@ Wed Apr 21 21:59:50 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 1999-03-31 Serge Winitzki <swinitzk@hotmail.com>
 
-        * added copy_in capability to mtools filesystem
+	* added copy_in capability to mtools filesystem
 
 1999-03-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -975,7 +988,7 @@ Mon Mar 22 02:00:16 1999  Valery Kornienkov <vlk@st.simbirsk.su>
 1999-03-09  Shooby Ban <bansz@szif.hu>
 
 	* extfs/extfs.ini: Corrected rpms -> rpms:
-        by Balazs Nagy <julian7@kva.hu>
+	by Balazs Nagy <julian7@kva.hu>
 
 1999-03-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -1871,8 +1884,8 @@ Fri Jan 23 07:27:37 1998  Peter Daum <gator@cs.tu-berlin.de>
 	
 1997-12-21  Yuri Kuzmenko <Yuri.Kuzmenko@f169.n463.z2.fidonet.org>
 
-        * tar.c: fix the bug which core dumps when trying to view tar file
-        with many files (over 60000).
+	* tar.c: fix the bug which core dumps when trying to view tar file
+	with many files (over 60000).
 
 Mon Jul 21 18:47:37 1997  Miguel de Icaza  <miguel@athena.nuclecu.unam.mx>
 
@@ -1888,9 +1901,9 @@ Mon Jun  9 19:00:30 1997  Norbert Warmuth <k3190@fh-sw.de>
 	
 	* vfs/vfs.c (vfs_canon): Fix for the 'cd a:/somedir/..' problem
 
-        * vfs/vfs.c (vfs_add_non_current_stamps): when leaving a mtools fs
-        free the extfs buffers immediatly instead of waiting for the vfs-
-        timeout
+	* vfs/vfs.c (vfs_add_non_current_stamps): when leaving a mtools fs
+	free the extfs buffers immediatly instead of waiting for the vfs-
+	timeout
 
 Thu May 29 14:50:41 1997  Miguel de Icaza  <miguel@athena.nuclecu.unam.mx>
 
@@ -1927,9 +1940,9 @@ Mon Mar 17 12:03:50 1997  Norbert Warmuth <k3190@fh-sw.de>
 
 	* configure.in (--with-hsc): fix.
 	
-        * vfs/ftpfs.c (ftpfs_get_proxy_host_and_port): Fixed wrong parameter
-        passing (HSC_DEFAULT_PORT was passed as pointer to char instead of
-        passing it as integer)
+	* vfs/ftpfs.c (ftpfs_get_proxy_host_and_port): Fixed wrong parameter
+	passing (HSC_DEFAULT_PORT was passed as pointer to char instead of
+	passing it as integer)
  
 Tue Feb 25 20:21:00 1997  Joseph M. Hinkle <jhinkle@rockisland.com>
 

@@ -254,8 +254,6 @@ int vfs_s_get_line_interruptible (vfs *me, char *buffer, int size, int fd);
 
 /* misc */
 int vfs_s_retrieve_file (vfs *me, struct vfs_s_inode *ino);
-/* alloc temp name which can be safely free'd with g_free() */
-char *g_tempnam( const char *dir, const char *prefix );
 
 #if 0
 /* If non-null, FREE */

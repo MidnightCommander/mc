@@ -603,11 +603,10 @@ static void *extfs_open (vfs *me, char *file, int flags, int mode)
         char *cmd;
 	char *archive_name, *p;
         
-        entry->inode->local_filename = g_tempnam (NULL, "extfs");
 	{
 	    int handle;
+	    handle = mc_mkstemps (&entry->inode->local_filename, "extfs", NULL);
 
-	    handle = open(entry->inode->local_filename, O_RDWR | O_CREAT | O_EXCL, 0600);
 	    if (handle == -1)
 		return NULL;
 	    close(handle);

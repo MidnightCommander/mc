@@ -1062,8 +1062,8 @@ mc_def_getlocalcopy (vfs *vfs, char *filename)
     fdin = mc_open (filename, O_RDONLY);
     if (fdin == -1)
         return NULL;
-    tmp = g_tempnam (NULL, "mclocalcopy");
-    fdout = open (tmp, O_CREAT|O_WRONLY|O_TRUNC|O_EXCL, 0600);
+
+    fdout = mc_mkstemps (&tmp, "mclocalcopy", NULL);
     if (fdout == -1)
 	goto fail;
     while ((i = mc_read (fdin, buffer, sizeof (buffer))) > 0){
