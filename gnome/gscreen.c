@@ -286,7 +286,12 @@ x_fill_panel (WPanel *panel)
 	else
 		panel_fill_panel_list (panel);
 
-/*	gtk_dtree_do_select_dir (GTK_DTREE (panel->tree), panel->cwd); */
+	gtk_signal_handler_block_by_data (GTK_OBJECT (panel->tree), panel);
+
+	printf ("Solicitando: %s\n", panel->cwd);
+	gtk_dtree_do_select_dir (GTK_DTREE (panel->tree), panel->cwd); 
+
+	gtk_signal_handler_unblock_by_data (GTK_OBJECT (panel->tree), panel);
 }
 
 static void
@@ -602,7 +607,7 @@ create_popup_submenu (WPanel *panel, desktop_icon_t *di, int row, char *filename
 		submenu_translated = 1;
 	}
 	
-	menu = gtk_menu_new ();
+/*	menu = gtk_menu_new (); */
 	for (i = 0; file_actions [i].text; i++){
 		GtkWidget *item;
 
@@ -2019,6 +2024,13 @@ panel_up (GtkWidget *button, WPanel *panel)
 	do_panel_cd (panel, "..", cd_exact);
 }
 
+/* Signal handler for DTree's "directory_changed" signal */
+static void
+panel_chdir (GtkDTree *dtree, char *path, WPanel *panel)
+{
+	do_panel_cd (panel, path, cd_exact);
+}
+
 static GtkWidget *
 button_switch_to (char **icon, GtkSignalFunc fn, void *closure)
 {
@@ -2085,6 +2097,8 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 		GTK_SCROLLED_WINDOW (tree_scrolled_window),
 		GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 	panel->tree = gtk_dtree_new ();
+	gtk_signal_connect (GTK_OBJECT (panel->tree), "directory_changed",
+			    GTK_SIGNAL_FUNC (panel_chdir), panel);
 	gtk_container_add (GTK_CONTAINER (tree_scrolled_window), panel->tree);
 	gtk_widget_show_all (tree_scrolled_window);
 	

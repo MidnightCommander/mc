@@ -16,6 +16,7 @@ typedef struct {
 	char	     *requested_path;
 
 	int          visible;
+	int          expanding;
 	
 	GtkCTreeNode *root_node;	/* root node */
 	GtkCTreeNode *last_node;	/* last visited node */
