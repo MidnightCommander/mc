@@ -231,7 +231,7 @@ static const struct edit_filters {
 	"gzip -cd %s 2>&1", "gzip > %s", ".gz"
     },
     {
-	"compress -cd %s 2>&1", "compress > %s", ".Z"
+	"gzip -cd %s 2>&1", "gzip > %s", ".Z"
     }
 };
 
