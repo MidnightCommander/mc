@@ -97,9 +97,7 @@ static void drive_cmd()
     }
 
     drive_dlg = create_dlg (y_pos, x_pos, y_height, x_width, dialog_colors,
-	drive_dlg_callback, "[ChDrive]", "drive", DLG_NONE);
-
-    x_set_dialog_title (drive_dlg, "Change Drive");
+	drive_dlg_callback, "[ChDrive]", "Change Drive", DLG_NONE);
 
 	if (nDrivesAvail>MAX_LGH) {
 	    for (i = 0; i < nDrivesAvail - MAX_LGH; i++) {

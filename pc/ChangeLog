@@ -1,8 +1,13 @@
+2002-09-02  Pavel Roskin  <proski@gnu.org>
+
+	* chmod.c: Eliminate x_set_dialog_title().
+	* drive.c: Likewise.
+
 2002-08-01  Pavel Roskin  <proski@gnu.org>
 
-	* (chmod.c): Don't include mad.h.
-	* (drive.c): Likewise.
-	* (slint_pc.c): Likewise.
+	* chmod.c: Don't include mad.h.
+	* drive.c: Likewise.
+	* slint_pc.c: Likewise.
 
 2002-07-15  Pavel Roskin  <proski@gnu.org>
 

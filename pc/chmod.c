@@ -231,10 +231,8 @@ static void init_chmod (void)
     }
 
     ch_dlg = create_dlg (0, 0, 22 - single_set, 70, dialog_colors,
-			 chmod_callback, "[Chmod]", "chmod", DLG_CENTER);
+			 chmod_callback, "[Chmod]", "Chmod command", DLG_CENTER);
 			
-    x_set_dialog_title (ch_dlg, "Chmod command");
-
 #define XTRACT(i) BY+chmod_but[i].y-single_set, BX+chmod_but[i].x, \
      chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text, 0, 0, NULL
 
