@@ -68,14 +68,10 @@ Menu create_menu (char *name, menu_entry *entries, int count)
 
 static void menubar_drop_compute (WMenu *menubar)
 {
-    Menu menu; 
+    const Menu menu = menubar->menu [menubar->selected];
     int   max_entry_len = 0;
     int i;
 
-    if (menubar->selected == -1)
-	    return;
-    
-    menu = menubar->menu [menubar->selected];
     for (i = 0; i < menu->count; i++)
 	max_entry_len = max (max_entry_len, strlen (menu->entries [i].text));
     menubar->max_entry_len = max_entry_len = max (max_entry_len, 20);
@@ -396,7 +392,8 @@ menubar_event    (Gpm_Event *event, WMenu *menubar)
 	)
 		new_selection++;
 
-	--new_selection;
+	if (new_selection) /* Don't set the invalid value -1 */
+		--new_selection;
 	
 	if (!was_active){
 	    menubar->selected = new_selection;

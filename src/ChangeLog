@@ -1,3 +1,11 @@
+Thu May 21 00:09:45 1998  Norbert Warmuth  <k3190@fh-sw.de>
+	
+	* menu.c (menubar_event): Don't set menubar->selected to the
+	invalid value -1. Fix for the bug reported by root@liepa.soften.ktu.lt
+
+	* menu.c (menubar_drop_compute): removed the check for inrange
+	items which isn't necessary any longer.
+
 Wed May 20 16:27:56 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* widget.c (history_put): input line history was defunct because
