@@ -1,3 +1,8 @@
+2003-07-21  Pavel Roskin  <proski@gnu.org>
+
+	* screen.c (panel_key): Redisplay ministatus if the searching
+	was turned off.  Reported by gotar@poczta.onet.pl
+
 2003-07-08  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* ext.c (regex_check_type): Don't skip first character after ":"

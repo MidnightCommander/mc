@@ -2113,15 +2113,21 @@ panel_key (WPanel *panel, int key)
 {
     int i;
 
-    for (i = 0; panel_keymap [i].key_code; i++){
-	if (key == panel_keymap [i].key_code){
-	    if (panel_keymap [i].fn != start_search)
-               panel->searching = 0;
-	    (*panel_keymap [i].fn)(panel);
+    for (i = 0; panel_keymap[i].key_code; i++) {
+	if (key == panel_keymap[i].key_code) {
+	    int old_searching = panel->searching;
+
+	    if (panel_keymap[i].fn != start_search)
+		panel->searching = 0;
+
+	    (*panel_keymap[i].fn) (panel);
+
+	    if (panel->searching != old_searching)
+		display_mini_info (panel);
 	    return 1;
 	}
     }
-    if (torben_fj_mode && key == ALT('h')) {
+    if (torben_fj_mode && key == ALT ('h')) {
 	goto_middle_file (panel);
 	return 1;
     }
@@ -2142,13 +2148,12 @@ panel_key (WPanel *panel, int key)
 
     /* Do not eat characters not meant for the panel below ' ' (e.g. C-l). */
     if ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE) {
-	if (panel->searching){
+	if (panel->searching) {
 	    do_search (panel, key);
 	    return 1;
 	}
 
-	if (!command_prompt)
-	{
+	if (!command_prompt) {
 	    start_search (panel);
 	    do_search (panel, key);
 	    return 1;
