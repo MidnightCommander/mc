@@ -1,5 +1,15 @@
 2002-07-12  Pavel Roskin  <proski@gnu.org>
 
+	* ftpfs.c (ftp_split_url): Don't expect lookup_netrc() to always
+	return a username.
+	(netrc_has_incorrect_mode): Don't free anything, it can result
+	in freeing some variables twice.
+	(find_machine): New function to find matching "machine" or
+	"default" token.
+	(lookup_netrc): Eliminate external loop - scan for login and
+	password, but don't fallback to another string in case of
+	trouble.
+
 	* ftpfs.c: Introduce enum keyword_t to improve readability.
 	(netrc_next): Fix return value for unknown keywords.
 	(lookup_netrc): Remove special processing of "*netrc*".
