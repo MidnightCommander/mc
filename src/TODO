@@ -77,6 +77,8 @@ Dynamic loading for libX11, libgpm.
 
 Process all input internally, use screen libraries only for output.
 
+Support for multi-byte charsets (e.g. UTF-8).
+
 
 ========================================================================
 Everything below this point is the old TODO list.  It doesn't reflect
