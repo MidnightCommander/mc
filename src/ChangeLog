@@ -1,5 +1,10 @@
 2001-06-07  Pavel Roskin  <proski@gnu.org>
 
+	* charsets.c (get_codepage_index): Warning fix.
+	(init_printable_table): New function.
+	* charsets.h: Declare init_printable_table().
+	* setup.c (load_setup): Uncomment init_printable_table().
+
 	* cons.saver.c: Make all functions except main() static.
 	* mfmt.c (omain): Remove, it's unused.
 

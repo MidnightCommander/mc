@@ -99,12 +99,12 @@ int get_codepage_index( const char *id )
     return -1;
 }
 
-static char translate_character( iconv_t cd, const char c )
+static char translate_character( iconv_t cd, char c )
 {
     char outbuf[4], *obuf;
     size_t ibuflen, obuflen, count;
 
-    const char *ibuf = &c; 
+    char *ibuf = &c; 
     obuf = outbuf;
     ibuflen = 1; obuflen = 4;
 
@@ -116,6 +116,31 @@ static char translate_character( iconv_t cd, const char c )
 }
 
 char errbuf[255];
+
+/*
+ * FIXME: This assumes that ASCII is always the first encoding
+ * in mc.charsets
+ */
+#define CP_ASCII 0
+
+char* init_printable_table( int cpdisplay )
+{
+    int i;
+    uchar ch;
+
+    /* Fill printable characters table */
+    for (i=0; i<=127; ++i)
+	printable[i] = (i > 31 && i != 127);
+
+    ch = (cpdisplay == CP_ASCII) ? 0 : 1;
+
+    for (i=128; i<=255; ++i) {
+	printable[i] = 1;
+	printable[i] = (i > 31 && i != 127);
+    }
+
+    return NULL;
+}
 
 char* init_translation_table( int cpsource, int cpdisplay )
 {

@@ -650,7 +650,7 @@ load_setup (void)
 	    char *errmsg;
 
 	    display_codepage = get_codepage_index( cpname );
-/*	    init_printable_table( display_codepage ); */
+	    init_printable_table( display_codepage );
 	    errmsg = init_translation_table( source_codepage, display_codepage );
 	    if (errmsg)
 		message( 1, MSG_ERROR, "%s", errmsg );
