@@ -299,6 +299,7 @@ context default
     keyword whole eval yellow
     keyword whole local yellow
     keyword whole my yellow
+    keyword whole our yellow
     keyword whole ref yellow
     keyword whole reset yellow
     keyword whole scalar yellow
