@@ -1557,10 +1557,6 @@ ha az aktuális kiválasztás egy belsõ könyvtár és a shell
 parancssor elérhetõ. Alapértelmezésben ez a beállítás ki van
 kapcsolva.
 
-Haladó chown Ha ezt az opciót engedélyezted, a Haladó Chown
-Chown-advanced parancs aktivizálódik, ha a 
-ChmodChmod, vagy a ChownChown parancsot futtatod.
-
 Cd követi a linket Ez az opció, ha be van állítva, akkor
 a Midnight Commander követi a könyvtárak logikai kapcsolatait 
 ha könyvtárat váltasz valamelyik panelben, vagy a cd parancsot

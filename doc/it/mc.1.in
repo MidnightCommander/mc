@@ -1713,21 +1713,6 @@ cambiare automaticamente directory se la selezione corrente è
 una subdirectory e se la riga di comando è vuota. Normalmente
 quest'opzione è spenta.
 .PP
-.I proprietario avanzato.
-Se quest'opzione è abilitata, il comando
-.\"LINK2"
-Proprietario avanzato
-.\"Advanced Chown"
-sarà invocate sia se si esegue il comando
-.\"LINK2"
-Permessi
-.\"Chmod"
-che 
-.\"LINK2"
-Proprietario
-.\"Chown"
- .
-.PP
 .I Cd segue i collegamenti.
 Quest'opzione, se impostata, fa in modo che il Midnight Commander
 segua la catena logica delle directory, quando si cambia la directory

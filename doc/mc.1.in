@@ -1675,21 +1675,6 @@ you may use the arrows keys to automatically chdir if the
 current selection is a subdirectory and the shell command
 line is empty. By default, this setting is off.
 .PP
-.I Advanced chown.
-If this option is enabled, the
-.\"LINK2"
-Advanced Chown
-.\"Advanced Chown"
-command will be invoked if you run the
-.\"LINK2"
-Chmod
-.\"Chmod"
-or
-.\"LINK2"
-Chown
-.\"Chown"
-command.
-.PP
 .I Cd follows links.
 This option, if set, causes the Midnight Commander to follow the
 logical chain of directories when changing current directory

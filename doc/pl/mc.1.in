@@ -1437,10 +1437,6 @@ Je¶li ta opcja jest w³±czona, mo¿esz u¿ywaæ strza³ek przemieszczenia
 ¿eby automatycznie zmieniaæ katalog je¶li aktualnie wybrany katalog jest
 podkatalogiem, a linia poleceñ jest pusta. Standardowo ta opcja jest wy³±czona.
 .PP
-.I Zaawansowana zmiana w³a¶ciciela (Advanced chown).
-Je¶li ta opcja jest w³±czona, startowana bêdzie komenda zaawansowanej zmiany
-w³a¶ciciela, za ka¿dym razem kiedy bêdziesz w³±czaæ komendê Chmod lub Chown.
-.PP
 .I Dowi±zania pod±¿aj±ce cd (Cd follows links).
 Ta opcja, je¶li jest w³±czona, zmusza Midnight Commandera ¿eby pod±¿a³
 za ³añcuchem katalogów przy zmienianiu go w panelu czy za pomoc± komendy cd.
