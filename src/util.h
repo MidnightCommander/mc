@@ -148,6 +148,24 @@ void rotate_dash (void);
 const char *mc_tmpdir (void);
 int mc_mkstemps(char **pname, const char *prefix, const char *suffix);
 
+#ifndef PATH_MAX
+#ifdef _POSIX_VERSION
+#define PATH_MAX _POSIX_PATH_MAX
+#else
+#ifdef MAXPATHLEN
+#define PATH_MAX MAXPATHLEN
+#else
+#define PATH_MAX 1024
+#endif
+#endif
+#endif
+
+#ifndef MAXSYMLINKS
+#define MAXSYMLINKS 32
+#endif
+
+char *mc_realpath(const char *path, char resolved_path[]);
+
 enum {
 	COMPRESSION_NONE,
 	COMPRESSION_GZIP,

@@ -1,3 +1,11 @@
+2005-01-14  Pavel Shirshov  <me@pavelsh.pp.ru>
+
+	* subshell.c (do_subshell_chdir): Use mc_realpath() to fix tcsh's
+	problem with symlink.
+	* utilunix.c: Add function mc_realpath(). Is the BSD version of
+	realpath(3).
+	* util.h: Add mc_realpath() declaration.
+
 2004-12-13  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* find.c (find_parameters): Use translated string.

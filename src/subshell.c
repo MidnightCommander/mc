@@ -753,6 +753,8 @@ subshell_name_quote (const char *s)
 void
 do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
 {
+    int bPathNotEq;
+
     if (!
 	(subshell_state == INACTIVE
 	 && strcmp (subshell_cwd, current_panel->cwd))) {
@@ -787,8 +789,20 @@ do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
     subshell_state = RUNNING_COMMAND;
     feed_subshell (QUIETLY, FALSE);
 
-    if (subshell_alive && strcmp (subshell_cwd, current_panel->cwd)
-	&& strcmp (current_panel->cwd, ".")) {
+    if (subshell_type == TCSH) {
+	char rp_subshell_cwd[PATH_MAX];
+	char rp_current_panel_cwd[PATH_MAX];
+
+	if (mc_realpath(subshell_cwd, rp_subshell_cwd) == NULL)
+	    strlcpy(rp_subshell_cwd, subshell_cwd, PATH_MAX);
+
+	if (mc_realpath(current_panel->cwd, rp_current_panel_cwd) == NULL)
+	    strlcpy(rp_current_panel_cwd, current_panel->cwd, PATH_MAX);
+
+	bPathNotEq = strcmp (rp_subshell_cwd, rp_current_panel_cwd);
+    } else bPathNotEq = strcmp (subshell_cwd, current_panel->cwd);
+
+    if (subshell_alive && bPathNotEq && strcmp (current_panel->cwd, ".")) {
 	char *cwd = strip_password (g_strdup (current_panel->cwd), 1);
 	fprintf (stderr, _("Warning: Cannot change to %s.\n"),
 		 cwd);
