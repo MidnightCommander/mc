@@ -6332,9 +6332,8 @@ msgid ""
 " not be safe on the remote side.  Continue? \n"
 msgstr ""
 " Il server remoto non sta funzionando su una porta di sistema \n"
-" necessito di una password per entrare, ma la trasmissione \n"
+" necessiti di una password per entrare, ma la trasmissione \n"
 " potrebbe non essere sicura dal lato remoto. Continuare? \n"
-" not be safe on the remote side.  Continue? \n"
 
 #: vfs/mcfs.c:174
 msgid " Yes "
