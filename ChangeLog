@@ -1,8 +1,10 @@
 2002-02-27  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* doc/mc.1.in (Macro Substitution): Document "%var{ENV-default}".
-	(FILES): Document changes in mc behavior. ~/.mc/ini now override 
+	(FILES): Document changes in mc behavior. ~/.mc/ini now overrides
 	mc.lib settings.
+
+	(Virtual File System): Document SMB File System.
 
 2002-02-26  Pavel Roskin  <proski@gnu.org>
 

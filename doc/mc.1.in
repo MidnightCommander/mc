@@ -628,7 +628,7 @@ The listing mode view is used to display a listing of files, there are
 four different listing modes available:
 .B Full,
 .B Brief,
-.B Long,
+.B Long
 and
 .B User.
 The full directory view shows the file name, the size of the file and
@@ -2626,7 +2626,8 @@ compressed tar files; the undelfs, used to recover deleted files on
 ext2 file systems (the default file system for Linux systems), fish
 (for manipulating files over shell connections such as rsh and ssh) and
 finally the mcfs (Midnight Commander file system), a network based
-file system.
+file system.  If the code was compiled with smbfs support, you can
+manipulate files on remote systems with the SMB (CIFS) protocol.
 .PP
 The VFS switch code will interpret all of the path names used and will
 forward them to the correct file system, the formats used for each one
@@ -2640,7 +2641,7 @@ directory to it using the cd command to a path name that looks like this:
 .PP
 .I /#ftp:[!][user[:pass]@]machine[:port][remote-dir]
 .PP
-The,
+The
 .I user, port
 and
 .I remote-dir
@@ -2825,6 +2826,35 @@ first SCSI disk on Linux, you would use the following path name:
 .PP
 It may take a while for the undelfs to load the required information
 before you start browsing files there. 
+.PP
+.SH "  SMB File System"
+The smbfs allows you to manipulate files on remote machines with SMB
+(or CIFS) protocol.  These include Windows for Workgroups, 
+Windows 9x, Windows NT, Windows 2000, OS/2 and Samba.
+To actually use it, you may try 
+to use the panel command "SMB link..."
+(accessible from the menubar) or you may directly change your current
+directory to it using the cd command to a path name that looks like this:
+.PP
+.I /#smb:machine[/service][/remote-dir]
+.PP
+The
+.I service
+and
+.I remote-dir
+elements are optional.
+The
+.I username, domain
+and
+.I password 
+can be specified in input dialog.
+.PP
+Examples:
+.PP
+.nf
+    /#smb:machine/Share
+    /#ftp:other_machine
+.fi
 .PP
 .SH "Colors"
 The Midnight Commander will try to detect if your terminal supports
