@@ -16,6 +16,8 @@
 	* edit.h (struct context_rule): Comment out single_char field.
 	It is written once but never read.
 
+	* edit-widget.h: Use PATH_SEP_STR.
+
 2001-12-22  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* editcmd.c (edit_goto_cmd): Use g_free to release f.

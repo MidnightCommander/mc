@@ -121,12 +121,12 @@ struct editor_widget {
 
 typedef struct editor_widget WEdit;
 
-#define EDIT_DIR           "/.mc/cedit"
-#define SYNTAX_FILE        EDIT_DIR "/Syntax"
-#define CLIP_FILE          EDIT_DIR "/cooledit.clip"
-#define MACRO_FILE         EDIT_DIR "/cooledit.macros"
-#define BLOCK_FILE         EDIT_DIR "/cooledit.block"
-#define ERROR_FILE         EDIT_DIR "/cooledit.error"
-#define TEMP_FILE          EDIT_DIR "/cooledit.temp"
+#define EDIT_DIR           PATH_SEP_STR ".mc" PATH_SEP_STR "cedit"
+#define SYNTAX_FILE        EDIT_DIR PATH_SEP_STR "Syntax"
+#define CLIP_FILE          EDIT_DIR PATH_SEP_STR "cooledit.clip"
+#define MACRO_FILE         EDIT_DIR PATH_SEP_STR "cooledit.macros"
+#define BLOCK_FILE         EDIT_DIR PATH_SEP_STR "cooledit.block"
+#define ERROR_FILE         EDIT_DIR PATH_SEP_STR "cooledit.error"
+#define TEMP_FILE          EDIT_DIR PATH_SEP_STR "cooledit.temp"
 
 #endif /* !__EDIT_WIDGET_H */
