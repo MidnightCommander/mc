@@ -883,40 +883,43 @@ vfs_add_current_stamps (void)
 int
 mc_chdir (char *path)
 {
-    char *a, *b;
-    int result;
-    char *p = NULL;
-    vfs *oldvfs;
-    vfsid oldvfsid;
+    char *new_dir;
+    vfs *old_vfs, *new_vfs;
+    vfsid old_vfsid;
     struct vfs_stamping *parent;
 
-    a = current_dir;		/* Save a copy for case of failure */
-    current_dir = vfs_canon (path);
-    current_vfs = vfs_type (current_dir);
-    b = g_strdup (current_dir);
-    result =
-	(*current_vfs->chdir) ? (*current_vfs->chdir) (current_vfs,
-						       b) : -1;
-    g_free (b);
-    if (result == -1) {
-	errno = ferrno (current_vfs);
-	g_free (current_dir);
-	current_vfs = vfs_type (a);
-	current_dir = a;
-    } else {
-	oldvfs = vfs_type (a);
-	oldvfsid = vfs_ncs_getid (oldvfs, a, &parent);
-	g_free (a);
-	vfs_add_noncurrent_stamps (oldvfs, oldvfsid, parent);
-	vfs_rm_parents (parent);
+    new_dir = vfs_canon (path);
+    new_vfs = vfs_type (new_dir);
+    if (!new_vfs->chdir)
+	vfs_die ("No chdir function defined");
+
+    if ((*new_vfs->chdir) (new_vfs, new_dir) == -1) {
+	errno = ferrno (new_vfs);
+	g_free (new_dir);
+	return -1;
     }
 
+    old_vfsid = vfs_ncs_getid (current_vfs, current_dir, &parent);
+    old_vfs = current_vfs;
+
+    /* Actually change directory */
+    g_free (current_dir);
+    current_dir = new_dir;
+    current_vfs = new_vfs;
+
+    /* This function uses current_dir internally */
+    vfs_add_noncurrent_stamps (old_vfs, old_vfsid, parent);
+    vfs_rm_parents (parent);
+
+    /* Sometimes we assume no trailing slash on cwd */
     if (*current_dir) {
+	char *p;
 	p = strchr (current_dir, 0) - 1;
 	if (*p == PATH_SEP && p > current_dir)
-	    *p = 0;		/* Sometimes we assume no trailing slash on cwd */
+	    *p = 0;
     }
-    return result;
+
+    return 0;
 }
 
 int

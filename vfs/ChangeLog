@@ -1,5 +1,8 @@
 2002-12-24  Pavel Roskin  <proski@gnu.org>
 
+	* vfs.c (mc_chdir): Don't change current directory until the
+	low-level chdir succeeds.
+
 	* vfs.c (vfs_name): Eliminate - it's unused and wrong.
 
 2002-12-24  Andrew V. Samoilov  <sav@bcs.zp.ua>
