@@ -1083,7 +1083,8 @@ display (WView *view)
 		    && is_printable ((c_next = get_byte (view, from + 1)))
 		    && from > view->first
 		    && is_printable ((c_prev = get_byte (view, from - 1)))
-		    && (c_prev == c_next || c_prev == '_')) {
+		    && (c_prev == c_next || c_prev == '_'
+		        || (c_prev == '+' && c_next == 'o'))) {
 		    if (col <= frame_shift) {
 			/* So it has to be wrap_mode - do not need to check for it */
 			if (row == 1 + frame_shift) {
@@ -1843,7 +1844,7 @@ hex_search (WView *view, const char *text)
 
 	/* Try quoted string, strip quotes */
 	if (*text == '"') {
-	    char *next_quote;
+	    const char *next_quote;
 
 	    text++;
 	    next_quote = strchr (text, '"');
