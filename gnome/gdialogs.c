@@ -825,6 +825,20 @@ cancel_cb (GtkWidget *widget, gpointer data)
         ui->aborting = TRUE;
 }
 
+/* Handler for the close signal from the GnomeDialog in the file operation
+ * context UI.  We mark the operation as "aborted" and ask GnomeDialog not to
+ * close the window for us.
+ */
+static gboolean
+close_cb (GtkWidget *widget, gpointer data)
+{
+        FileOpContextUI *ui;
+
+        ui = data;
+        ui->aborting = TRUE;
+        return TRUE;
+}
+
 void
 file_op_context_create_ui (FileOpContext *ctx, FileOperation op, int with_eta)
 {
@@ -852,7 +866,12 @@ file_op_context_create_ui (FileOpContext *ctx, FileOperation op, int with_eta)
         gtk_window_set_position (GTK_WINDOW (ui->op_win), GTK_WIN_POS_MOUSE);
 
         gnome_dialog_button_connect (GNOME_DIALOG (ui->op_win), 0,
-                                     GTK_SIGNAL_FUNC (cancel_cb), ui);
+                                     GTK_SIGNAL_FUNC (cancel_cb),
+                                     ui);
+
+        gtk_signal_connect (GTK_OBJECT (ui->op_win), "close",
+                            GTK_SIGNAL_FUNC (close_cb),
+                            ui);
 
         if (op != OP_DELETE) {
                 alignment = gtk_alignment_new (0.0, 0.5, 0, 0);
