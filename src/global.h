@@ -103,6 +103,7 @@ struct timeval {
 #endif
 
 #include <glib.h>
+#include "glibcompat.h"
 
 #if defined(HAVE_RX_H) && defined(HAVE_REGCOMP)
 #include <rx.h>

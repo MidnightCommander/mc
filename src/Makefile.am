@@ -48,15 +48,15 @@ SRCS =	achown.c achown.h background.c background.h boxes.c boxes.h	\
 	cons.saver.h dialog.c dialog.h dir.c dir.h dlg.c dlg.h		\
 	eregex.h execute.c execute.h ext.c ext.h file.c filegui.c	\
 	filegui.h file.h filenot.c fileopctx.c fileopctx.h find.c	\
-	find.h findme.c	findme.h fs.h fsusage.c fsusage.h global.h	\
-	help.c help.h hotlist.c hotlist.h i18n.h info.c info.h key.c	\
-	key.h keyxdef.c layout.c layout.h learn.c learn.h listmode.c	\
-	listmode.h main.c main.h menu.c menu.h				\
-	mountlist.c mountlist.h mouse.c mouse.h myslang.h option.c	\
-	option.h panel.h panelize.c panelize.h poptalloca.h popt.c	\
-	poptconfig.c popt.h popthelp.c poptint.h poptparse.c profile.c	\
-	profile.h regex.c rxvt.c screen.c setup.c setup.h slint.c	\
-	subshell.c subshell.h terms.c textconf.c textconf.h		\
+	find.h findme.c	findme.h fs.h fsusage.c fsusage.h		\
+	glibcompat.c glibcompat.h global.h help.c help.h hotlist.c	\
+	hotlist.h i18n.h info.c info.h key.c key.h keyxdef.c layout.c	\
+	layout.h learn.c learn.h listmode.c listmode.h main.c main.h	\
+	menu.c menu.h mountlist.c mountlist.h mouse.c mouse.h myslang.h	\
+	option.c option.h panel.h panelize.c panelize.h poptalloca.h	\
+	popt.c poptconfig.c popt.h popthelp.c poptint.h poptparse.c	\
+	profile.c profile.h regex.c rxvt.c screen.c setup.c setup.h	\
+	slint.c	subshell.c subshell.h terms.c textconf.c textconf.h	\
 	tree.c tree.h treestore.c treestore.h tty.h user.c user.h	\
 	util.c util.h utilunix.c view.c view.h widget.c widget.h	\
 	win.c win.h wtools.c wtools.h

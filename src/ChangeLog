@@ -1,5 +1,11 @@
 2003-09-22  Pavel Roskin  <proski@gnu.org>
 
+	* glibcompat.c: New file for compatibility with older versions
+	of glib.
+	* glibcompat.h: Likewise.
+	* Makefile.am: Add the new files SOURCES.
+	* global.h: Include glibcompat.h.
+
 	* menu.c (menu_scan_hotkey): Use g_strlcpy() to avoid undefined
 	behavior when using strcpy() on overlapping strings.
 	* profile.c (GetSetProfile): Likewise.
