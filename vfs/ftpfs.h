@@ -1,7 +1,5 @@
 /*  ftpfs.h */
 
-/*  $Id$ */
-
 #if !defined(__FTPFS_H)
 #define __FTPFS_H
 

@@ -55,8 +55,6 @@
 #endif
 
 
-/* "$Id$" */
-
 extern char *find_ignore_dirs;
 
 extern int num_history_items_recorded;

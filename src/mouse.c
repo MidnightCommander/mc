@@ -18,8 +18,6 @@
 /* Events received by clients of this library have their coordinates 0 */
 /* based */
 
-/* "$Id$" */
-
 #include <config.h>
 #include <sys/types.h>
 #ifdef HAVE_UNISTD_H

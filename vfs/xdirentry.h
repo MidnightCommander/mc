@@ -1,8 +1,6 @@
 #ifndef DIRENTRY_H
 #define DIRENTRY_H
 
-/* $Id$ */
-
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>

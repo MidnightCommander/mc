@@ -63,8 +63,6 @@ static void tree_rescan_cmd (WTree *tree);
 static int tree_callback (Dlg_head *h, WTree *tree, int msg, int par);
 #define tcallback (callback_fn) tree_callback
 
-/* "$Id$" */
-
 static tree_entry *back_ptr (tree_entry *ptr, int *count)
 {
     int i = 0;

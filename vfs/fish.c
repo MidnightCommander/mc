@@ -6,8 +6,6 @@
    Written by: 1998 Pavel Machek
    Spaces fix: 2000 Michal Svec
 
-   $Id$
-
    Derived from ftpfs.c.
    
    This program is free software; you can redistribute it and/or

@@ -111,8 +111,6 @@ int altered_magic_flag = 0;
 int altered_nroff_flag = 0;
 /* }}} */
 
-/* "$Id$" */
-
 static const char hex_char[] = "0123456789ABCDEF";
 
 /* Our callback */

@@ -32,8 +32,6 @@
 #include "key.h"		/* XCTRL and ALT macros  */
 #include "layout.h"
 
-/* "$Id$" */
-
 typedef void (*fnptr)(void);
 
 typedef struct Fkey_Table_List {

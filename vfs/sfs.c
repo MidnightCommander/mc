@@ -3,8 +3,6 @@
  *
  * Copyright 1998 Pavel Machek, distribute under GPL
  *
- * $Id$
- *
  * This defines whole class of filesystems which contain single file
  * inside. It is somehow similar to extfs, except that extfs makes
  * whole virtual trees and we do only single virtual files. 

@@ -96,8 +96,6 @@
 
 #include "popt.h"
 
-/* "$Id$" */
-
 /* When the modes are active, left_panel, right_panel and tree_panel */
 /* Point to a proper data structure.  You should check with the functions */
 /* get_current_type and get_other_type the types of the panels before using */

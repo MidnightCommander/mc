@@ -30,8 +30,6 @@
 #include "tree.h"
 #include "../vfs/vfs.h"
 
-/* "$Id$" */
-
 /* If true show files starting with a dot */
 int show_dot_files = 1;
 

@@ -69,8 +69,6 @@
 #define WANT_WIDGETS
 #include "setup.h"		/* For save_setup() */
 
-/* "$Id$" */
-
 /* Controls the display of the rotating dash on the verbose mode */
 int nice_rotating_dash = 1;
 

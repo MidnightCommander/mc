@@ -41,8 +41,6 @@
 
 #include "view.h" /* for default_* externs */
 
-/* "$Id$" */
-
 #define MAX_ENTRIES 16
 #define MAX_ENTRY_LEN 60
 

@@ -8,8 +8,6 @@
 # Andreas Hyden <a.hyden@cyberpoint.se>.
 # Christian Rose <menthos@menthos.com>, 2000, 2001, 2002.
 #
-# $Id$
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"

@@ -47,8 +47,6 @@
 #include "charsets.h"
 #endif
 
-/* "$Id$" */
-
 static const char app_text [] = "Midnight-Commander";
 int easy_patterns = 1;
 

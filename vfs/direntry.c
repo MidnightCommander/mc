@@ -3,8 +3,6 @@
  *
  * Written at 1998 by Pavel Machek <pavel@ucw.cz>, distribute under LGPL.
  *
- * $Id$
- *
  * Very loosely based on tar.c from midnight and archives.[ch] from
  * avfs by Miklos Szeredi (mszeredi@inf.bme.hu)
  *

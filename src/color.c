@@ -23,8 +23,6 @@
 #include "setup.h"		/* For the externs */
 #include "color.h"
 
-/* "$Id$" */
-
 /* Set to force black and white display at program startup */
 int   disable_colors = 0;
 
