@@ -2,6 +2,10 @@
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # David Martín <dmartina@mailexcite.com>, 1998.
 #
+# DHMA 19990307:
+# Added last messages in editcmd.c. Some refinements as file dates and
+# translated "stat" as "identificar"
+#
 # DHMA 19990302:
 # Merged with mc.pot in 4.5.23. Minor GNOME "fuzzy" tweaks. 54 "fuzzy" left.
 #
@@ -15,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.23\n"
-"POT-Creation-Date: 1999-02-28 19:38-0600\n"
-"PO-Revision-Date: 1999-03-02 02:00+0100\n"
+"POT-Creation-Date: 1999-03-07 15:56+0100\n"
+"PO-Revision-Date: 1999-03-07 15:56+0100\n"
 "Last-Translator: David Martín <dmartina@mailexcite.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -64,14 +68,14 @@ msgstr " The Midnight Commander "
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr " ¿Realmente quiere salir del Midnight Commander? "
 
-#: gnome/gcmd.c:123 gtkedit/editcmd.c:2246 src/cmd.c:251 src/file.c:1813
+#: gnome/gcmd.c:123 gtkedit/editcmd.c:2248 src/cmd.c:251 src/file.c:1813
 #: src/file.c:2195 src/filegui.c:573 src/hotlist.c:1035 src/main.c:829
 #: src/screen.c:2049 src/subshell.c:701 src/subshell.c:727 src/tree.c:755
 #: src/view.c:404
 msgid "&Yes"
 msgstr "&Sí"
 
-#: gnome/gcmd.c:123 gtkedit/editcmd.c:2246 src/cmd.c:251 src/file.c:1813
+#: gnome/gcmd.c:123 gtkedit/editcmd.c:2248 src/cmd.c:251 src/file.c:1813
 #: src/file.c:2195 src/filegui.c:572 src/hotlist.c:1035 src/main.c:829
 #: src/screen.c:2049 src/subshell.c:701 src/subshell.c:727 src/tree.c:755
 #: src/view.c:404
@@ -438,7 +442,7 @@ msgid ""
 "Could not stat %s\n"
 "%s"
 msgstr ""
-"No puedo hacer stat al archivo %s\n"
+"No puedo identificar archivo %s\n"
 "%s"
 
 #: gnome/gicon.c:154
@@ -1093,11 +1097,13 @@ msgstr "Ir al Directorio Personal"
 msgid "Location:"
 msgstr "Ubicación:"
 
-#: gnome/gtools.c:110 gtkedit/editcmd.c:342 gtkedit/editcmd.c:1183
-#: gtkedit/editcmd.c:1268 src/boxes.c:138 src/boxes.c:278 src/boxes.c:378
-#: src/boxes.c:466 src/boxes.c:646 src/boxes.c:728 src/boxes.c:783
-#: src/boxes.c:897 src/filegui.c:807 src/find.c:171 src/layout.c:369
-#: src/option.c:144 src/wtools.c:289 src/wtools.c:561
+#. 1
+#: gnome/gtools.c:110 gtkedit/editcmd.c:342 gtkedit/editcmd.c:1185
+#: gtkedit/editcmd.c:1270 gtkedit/editcmd.c:2847 gtkedit/editoptions.c:68
+#: src/boxes.c:138 src/boxes.c:278 src/boxes.c:378 src/boxes.c:466
+#: src/boxes.c:646 src/boxes.c:728 src/boxes.c:783 src/boxes.c:897
+#: src/filegui.c:807 src/find.c:171 src/layout.c:369 src/option.c:144
+#: src/wtools.c:289 src/wtools.c:561
 msgid "&Ok"
 msgstr "&Aceptar"
 
@@ -1199,7 +1205,7 @@ msgstr "abortar"
 #. The file-name is printed after the ':'
 #: gtkedit/edit.c:129 gtkedit/edit.c:224 gtkedit/edit.c:231 gtkedit/edit.c:238
 #: gtkedit/edit.c:245 gtkedit/edit.c:251 gtkedit/edit.c:308 gtkedit/edit.c:344
-#: gtkedit/editcmd.c:1943 gtkedit/editwidget.c:950 src/dir.c:386
+#: gtkedit/editcmd.c:1945 gtkedit/editwidget.c:950 src/dir.c:386
 #: src/screen.c:2306 src/tree.c:692 src/tree.c:698 src/wtools.c:222
 #: vfs/fish.c:224
 msgid " Error "
@@ -1245,7 +1251,9 @@ msgstr "Guardar seguro "
 msgid "Do backups -->"
 msgstr "Dejar copias->"
 
-#: gtkedit/editcmd.c:340 gtkedit/editcmd.c:1181 gtkedit/editcmd.c:1266
+#. NLS  for hotkeys?
+#: gtkedit/editcmd.c:340 gtkedit/editcmd.c:1137 gtkedit/editcmd.c:1183
+#: gtkedit/editcmd.c:1268 gtkedit/editcmd.c:2845 gtkedit/editoptions.c:65
 #: src/achown.c:71 src/boxes.c:139 src/boxes.c:279 src/boxes.c:376
 #: src/boxes.c:464 src/boxes.c:644 src/boxes.c:727 src/boxes.c:781
 #: src/chmod.c:114 src/chown.c:79 src/cmd.c:856 src/filegui.c:790
@@ -1288,7 +1296,7 @@ msgid "Overwrite"
 msgstr "Sobrescribir"
 
 #: gtkedit/editcmd.c:494 gtkedit/editcmd.c:783 gtkedit/editcmd.c:810
-#: gtkedit/editcmd.c:840 gtkedit/editcmd.c:987 gtkedit/editcmd.c:1576
+#: gtkedit/editcmd.c:840 gtkedit/editcmd.c:987 gtkedit/editcmd.c:1578
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -1296,7 +1304,7 @@ msgstr "Cancelar"
 msgid " Save as "
 msgstr " Guardar como"
 
-#: gtkedit/editcmd.c:510 gtkedit/editcmd.c:2613
+#: gtkedit/editcmd.c:510 gtkedit/editcmd.c:2615
 msgid " Error trying to save file. "
 msgstr " Error al guardar el archivo. "
 
@@ -1395,157 +1403,172 @@ msgstr " Continuar "
 msgid " Cancel "
 msgstr " Cancelar "
 
+#: gtkedit/editcmd.c:1139 src/filegui.c:567
+msgid "al&L"
+msgstr "&Todos"
+
+#: gtkedit/editcmd.c:1141 src/file.c:2136 src/filegui.c:263
+msgid "&Skip"
+msgstr "&Ignorar"
+
+#: gtkedit/editcmd.c:1143
+msgid "&Replace"
+msgstr "&Reemplazar"
+
 #. This is for the confirm replace dialog box. The replaced string comes after the ':'
-#: gtkedit/editcmd.c:1147 gtkedit/editcmd.c:1574
+#: gtkedit/editcmd.c:1149 gtkedit/editcmd.c:1576
 msgid " Replace with: "
 msgstr " Reemplazar con: "
 
-#. Heads the 'Replace' dialog box
-#: gtkedit/editcmd.c:1151 gtkedit/editcmd.c:1228 gtkedit/editcmd.c:1478
-#: gtkedit/editcmd.c:1572 gtkedit/editcmd.c:2105 gtkedit/editcmd.c:2136
-#: gtkedit/editcmd.c:2138
-msgid " Replace "
-msgstr " Reemplazar "
+#: gtkedit/editcmd.c:1153
+msgid " Confirm replace "
+msgstr " Confirmar cambios "
 
-#: gtkedit/editcmd.c:1185 gtkedit/editcmd.c:1270
+#: gtkedit/editcmd.c:1187 gtkedit/editcmd.c:1272
 msgid "scanf &Expression"
 msgstr "&Expresión scanf"
 
-#: gtkedit/editcmd.c:1187
+#: gtkedit/editcmd.c:1189
 msgid "replace &All"
 msgstr "reemplazar &Todos"
 
-#: gtkedit/editcmd.c:1189
+#: gtkedit/editcmd.c:1191
 msgid "pr&Ompt on replace"
 msgstr "c&Onfirmar cambios"
 
-#: gtkedit/editcmd.c:1191 gtkedit/editcmd.c:1272
+#: gtkedit/editcmd.c:1193 gtkedit/editcmd.c:1274
 msgid "&Backwards"
 msgstr "&Hacia atrás"
 
-#: gtkedit/editcmd.c:1193 gtkedit/editcmd.c:1274
+#: gtkedit/editcmd.c:1195 gtkedit/editcmd.c:1276
 msgid "&Regular expression"
 msgstr "expresión &Regular"
 
-#: gtkedit/editcmd.c:1195 gtkedit/editcmd.c:1276
+#: gtkedit/editcmd.c:1197 gtkedit/editcmd.c:1278
 msgid "&Whole words only"
 msgstr "&Sólo palabras completas"
 
-#: gtkedit/editcmd.c:1197 gtkedit/editcmd.c:1278
+#: gtkedit/editcmd.c:1199 gtkedit/editcmd.c:1280
 msgid "case &Sensitive"
 msgstr "distinguir ma&Yúsculas"
 
-#: gtkedit/editcmd.c:1201
+#: gtkedit/editcmd.c:1203
 msgid " Enter replacement argument order eg. 3,2,1,4 "
 msgstr " Teclee el orden de los argumentos ej. 3,2,1,4 "
 
-#: gtkedit/editcmd.c:1205
+#: gtkedit/editcmd.c:1207
 msgid " Enter replacement string:"
 msgstr " Teclee el cambio a realizar:"
 
-#: gtkedit/editcmd.c:1209 gtkedit/editcmd.c:1282 src/view.c:1917
+#: gtkedit/editcmd.c:1211 gtkedit/editcmd.c:1284 src/view.c:1917
 msgid " Enter search string:"
 msgstr " Teclee el texto a buscar:"
 
+#. Heads the 'Replace' dialog box
+#: gtkedit/editcmd.c:1230 gtkedit/editcmd.c:1480 gtkedit/editcmd.c:1574
+#: gtkedit/editcmd.c:2107 gtkedit/editcmd.c:2138 gtkedit/editcmd.c:2140
+msgid " Replace "
+msgstr " Reemplazar "
+
 #. Heads the 'Search' dialog box
-#: gtkedit/editcmd.c:1296 gtkedit/editcmd.c:1472 gtkedit/editcmd.c:2207
+#: gtkedit/editcmd.c:1298 gtkedit/editcmd.c:1474 gtkedit/editcmd.c:2209
 #: src/view.c:1465 src/view.c:1564 src/view.c:1686 src/view.c:1885
 #: src/view.c:1917
 msgid " Search "
 msgstr " Buscar "
 
 #. An input line comes after the ':'
-#: gtkedit/editcmd.c:1346
+#: gtkedit/editcmd.c:1348
 msgid " Enter search text : "
 msgstr " Teclee el texto a buscar: "
 
-#: gtkedit/editcmd.c:1353
+#: gtkedit/editcmd.c:1355
 msgid " Enter replace text : "
 msgstr " Teclee el reemplazo: "
 
-#: gtkedit/editcmd.c:1357
+#: gtkedit/editcmd.c:1359
 msgid " Enter argument order : "
 msgstr " Teclee el orden de los argumentos: "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1361 gtkedit/editcmd.c:1362
+#: gtkedit/editcmd.c:1363 gtkedit/editcmd.c:1364
 msgid "Enter the order of replacement of your scanf format specifiers"
 msgstr "Teclee el orden de reemplazo de sus formatos de scanf"
 
 #. The following are check boxes
-#: gtkedit/editcmd.c:1367
+#: gtkedit/editcmd.c:1369
 msgid " Whole words only "
 msgstr " Sólo palabras completas "
 
-#: gtkedit/editcmd.c:1369
+#: gtkedit/editcmd.c:1371
 msgid " Case sensitive "
 msgstr " Distinguir Mayúsculas"
 
-#: gtkedit/editcmd.c:1372
+#: gtkedit/editcmd.c:1374
 msgid " Regular expression "
 msgstr " Expresión regular "
 
-#: gtkedit/editcmd.c:1373 gtkedit/editcmd.c:1374
+#: gtkedit/editcmd.c:1375 gtkedit/editcmd.c:1376
 msgid "See the regex man page for how to compose a regular expression"
 msgstr ""
 "Vea la página de manual de regex para más información sobre cómo escribir "
 "expresiones regulares"
 
-#: gtkedit/editcmd.c:1380
+#: gtkedit/editcmd.c:1382
 msgid " Backwards "
 msgstr " Reversa "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1382 gtkedit/editcmd.c:1383
+#: gtkedit/editcmd.c:1384 gtkedit/editcmd.c:1385
 msgid "Warning: Searching backward can be slow"
 msgstr "Cuidado: la búsqueda en reversa puede ser lenta "
 
-#: gtkedit/editcmd.c:1396
+#: gtkedit/editcmd.c:1398
 msgid " Prompt on replace "
 msgstr "Preguntar antes de reemplazar"
 
 #. Tool hint
-#: gtkedit/editcmd.c:1398
+#: gtkedit/editcmd.c:1400
 msgid "Ask before making each replacement"
 msgstr "Preguntar antes de cada reemplazo"
 
-#: gtkedit/editcmd.c:1400
+#: gtkedit/editcmd.c:1402
 msgid " Replace all "
 msgstr " Reemplazar todos "
 
-#: gtkedit/editcmd.c:1403
+#: gtkedit/editcmd.c:1405
 msgid " Scanf expression "
 msgstr " Expresión scanf "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1405
+#: gtkedit/editcmd.c:1407
 msgid "Allows entering of a C format string, see the scanf man page"
 msgstr "Permite teclear una expresión de formato scanf de C"
 
 #. Tool hint
-#: gtkedit/editcmd.c:1410
+#: gtkedit/editcmd.c:1412
 msgid "Begin search, Enter"
 msgstr "Empezar búsqueda, Enter"
 
 #. Tool hint
-#: gtkedit/editcmd.c:1413
+#: gtkedit/editcmd.c:1415
 msgid "Abort this dialog, Esc"
 msgstr "Abortar este diálogo, Esc"
 
 #. Buttons for the confirm replace dialog box.
-#: gtkedit/editcmd.c:1576
+#: gtkedit/editcmd.c:1578
 msgid "Replace"
 msgstr "Reemplazar"
 
-#: gtkedit/editcmd.c:1576
+#: gtkedit/editcmd.c:1578
 msgid "Skip"
 msgstr "Ignorar"
 
-#: gtkedit/editcmd.c:1576
+#: gtkedit/editcmd.c:1578
 msgid "Replace all"
 msgstr "Reemplazar todos"
 
-#: gtkedit/editcmd.c:1943
+#: gtkedit/editcmd.c:1945
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
 msgstr ""
@@ -1553,25 +1576,25 @@ msgstr ""
 "conversiones "
 
 #. "Invalid regexp string or scanf string"
-#: gtkedit/editcmd.c:2107
+#: gtkedit/editcmd.c:2109
 msgid " Error in replacement format string. "
 msgstr " Error en cadena de formato al reemplazar. "
 
-#: gtkedit/editcmd.c:2135
+#: gtkedit/editcmd.c:2137
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld reemplazos hechos. "
 
-#: gtkedit/editcmd.c:2138 gtkedit/editcmd.c:2207
+#: gtkedit/editcmd.c:2140 gtkedit/editcmd.c:2209
 msgid " Search string not found. "
 msgstr " El texto buscado no fue encontrado "
 
 #. Confirm 'Quit' dialog box
-#: gtkedit/editcmd.c:2231 gtkedit/editcmd.c:2246 gtkedit/editcmd.c:2249
+#: gtkedit/editcmd.c:2233 gtkedit/editcmd.c:2248 gtkedit/editcmd.c:2251
 msgid " Quit "
 msgstr " Salir "
 
-#: gtkedit/editcmd.c:2232 gtkedit/editcmd.c:2250
+#: gtkedit/editcmd.c:2234 gtkedit/editcmd.c:2252
 msgid ""
 " Current text was modified without a file save. \n"
 " Save with exit? "
@@ -1579,111 +1602,135 @@ msgstr ""
 " El texto actual fue modificado sin ser guardado. \n"
 " ¿Guardar al salir? "
 
-#: gtkedit/editcmd.c:2246
+#: gtkedit/editcmd.c:2248
 msgid " File was modified, Save with exit? "
 msgstr " El archivo fue modificado. ¿Guardar al salir? "
 
-#: gtkedit/editcmd.c:2246
+#: gtkedit/editcmd.c:2248
 msgid "Cancel quit"
 msgstr "Cancelar salida"
 
-#: gtkedit/editcmd.c:2250
+#: gtkedit/editcmd.c:2252
 msgid " &Cancel quit "
 msgstr " &Cancelar salida "
 
-#: gtkedit/editcmd.c:2250
+#: gtkedit/editcmd.c:2252
 msgid " &Yes "
 msgstr " &Sí "
 
-#: gtkedit/editcmd.c:2250
+#: gtkedit/editcmd.c:2252
 msgid " &No "
 msgstr " &No "
 
-#: gtkedit/editcmd.c:2453 gtkedit/editcmd.c:2528
+#: gtkedit/editcmd.c:2455 gtkedit/editcmd.c:2530
 msgid " Copy to clipboard "
 msgstr " Copiar al portapapeles "
 
-#: gtkedit/editcmd.c:2453 gtkedit/editcmd.c:2475 gtkedit/editcmd.c:2528
-#: gtkedit/editcmd.c:2541
+#: gtkedit/editcmd.c:2455 gtkedit/editcmd.c:2477 gtkedit/editcmd.c:2530
+#: gtkedit/editcmd.c:2543
 msgid " Unable to save to file. "
 msgstr " No pude guardar el archivo. "
 
-#: gtkedit/editcmd.c:2475 gtkedit/editcmd.c:2541
+#: gtkedit/editcmd.c:2477 gtkedit/editcmd.c:2543
 msgid " Cut to clipboard "
 msgstr " Cortar al portapapeles "
 
-#: gtkedit/editcmd.c:2563 gtkedit/editcmd.c:2567 gtkedit/editcmd.c:2572
-#: gtkedit/editcmd.c:2575 src/view.c:1857
+#: gtkedit/editcmd.c:2565 gtkedit/editcmd.c:2569 gtkedit/editcmd.c:2574
+#: gtkedit/editcmd.c:2577 src/view.c:1857
 msgid " Goto line "
 msgstr " Ir a la línea "
 
-#: gtkedit/editcmd.c:2563 gtkedit/editcmd.c:2567 gtkedit/editcmd.c:2572
-#: gtkedit/editcmd.c:2575
+#: gtkedit/editcmd.c:2565 gtkedit/editcmd.c:2569 gtkedit/editcmd.c:2574
+#: gtkedit/editcmd.c:2577
 msgid " Enter line: "
 msgstr " Línea: "
 
-#: gtkedit/editcmd.c:2596 gtkedit/editcmd.c:2613
+#: gtkedit/editcmd.c:2598 gtkedit/editcmd.c:2615
 msgid " Save Block "
 msgstr " Guardar bloque "
 
-#: gtkedit/editcmd.c:2647
+#: gtkedit/editcmd.c:2649
 msgid " Insert File "
 msgstr " Insertar archivo "
 
-#: gtkedit/editcmd.c:2662
+#: gtkedit/editcmd.c:2664
 msgid " Insert file "
 msgstr " Insertar archivo "
 
-#: gtkedit/editcmd.c:2662
+#: gtkedit/editcmd.c:2664
 msgid " Error trying to insert file. "
 msgstr " Error al tratar de insertar el archivo "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2682
+#: gtkedit/editcmd.c:2684
 msgid " Sort block "
 msgstr " Ordenar bloque de texto "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2682 gtkedit/editcmd.c:2736
+#: gtkedit/editcmd.c:2684 gtkedit/editcmd.c:2738
 msgid " You must first highlight a block of text. "
 msgstr " Es necesario tener un bloque seleccionado "
 
-#: gtkedit/editcmd.c:2689
+#: gtkedit/editcmd.c:2691
 msgid " Run Sort "
 msgstr " Ordenar bloque de texto "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2691
+#: gtkedit/editcmd.c:2693
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr " Opciones para \"sort\" (ver manual), separadas por espacios: "
 
-#: gtkedit/editcmd.c:2702 gtkedit/editcmd.c:2708
+#: gtkedit/editcmd.c:2704 gtkedit/editcmd.c:2710
 msgid " Sort "
 msgstr " Ordenar "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2704
+#: gtkedit/editcmd.c:2706
 msgid " Error trying to execute sort command "
 msgstr " Error al tratar de ejectuar el comando \"sort\" "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2710
+#: gtkedit/editcmd.c:2712
 msgid " Sort returned non-zero: "
 msgstr " \"sort\" regresó un valor distinto de cero "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2734 gtkedit/editcmd.c:2764
+#: gtkedit/editcmd.c:2736 gtkedit/editcmd.c:2766
 msgid " Process block "
 msgstr " Procesar bloque "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2766
+#: gtkedit/editcmd.c:2768
 msgid " Error trying to stat file "
-msgstr " Error al tratar de solicitar información sobre el archivo "
+msgstr " Error al tratar de identificar el archivo "
 
-#: gtkedit/editcmd.c:2836
+#: gtkedit/editcmd.c:2838
 msgid " Mail "
 msgstr " Correo "
+
+#: gtkedit/editcmd.c:2851
+msgid " Copies to"
+msgstr " Cursar Copias a"
+
+#: gtkedit/editcmd.c:2855
+msgid " Subject"
+msgstr " Tema"
+
+#: gtkedit/editcmd.c:2859
+msgid " To"
+msgstr " Para"
+
+#: gtkedit/editcmd.c:2861
+msgid " mail -s <subject> -c <cc> <to>"
+msgstr " mail -s <tema> -c <cc> <para>"
+
+#: gtkedit/editoptions.c:34
+msgid "Intuitive"
+msgstr "Intuitivo"
+
+#: gtkedit/editoptions.c:34
+msgid "Emacs"
+msgstr "Emacs"
 
 #: gtkedit/editoptions.c:37
 msgid "None"
@@ -1695,17 +1742,60 @@ msgstr "Párrafos dinámicos"
 
 #: gtkedit/editoptions.c:37
 msgid "Type writer wrap"
-msgstr "Envolver como máquina de escribir"
+msgstr "Máquina de escribir"
+
+#. 2
+#: gtkedit/editoptions.c:71
+msgid "Word wrap line length : "
+msgstr "Ancho del parrafo auto: "
+
+#. 4
+#: gtkedit/editoptions.c:77
+msgid "Tab spacing : "
+msgstr "Tamaño de tabulaciones: "
+
+#: gtkedit/editoptions.c:85
+msgid "synta&X highlighting"
+msgstr "sinta&Xis coloreada"
+
+#. 7
+#: gtkedit/editoptions.c:91
+msgid "confir&M before saving"
+msgstr "confir&Mar al guardar"
+
+#. 8
+#: gtkedit/editoptions.c:94
+msgid "fill tabs with &Spaces"
+msgstr "tabulaciones x e&Spacios"
+
+#. 9
+#: gtkedit/editoptions.c:97
+msgid "&Return does autoindent"
+msgstr "autoindenta&R"
+
+#. 10
+#: gtkedit/editoptions.c:100
+msgid "&Backspace through tabs"
+msgstr "&Borrar en tabulaciones"
+
+#. 11
+#: gtkedit/editoptions.c:103
+msgid "&Fake half tabs"
+msgstr "&Fingir medias tabulaciones"
 
 #. 13
-#: gtkedit/editoptions.c:100
+#: gtkedit/editoptions.c:109
 msgid "Wrap mode"
-msgstr "Modo de envoltura"
+msgstr "Autoajuste de párrafo"
 
 #. 15
-#: gtkedit/editoptions.c:106
+#: gtkedit/editoptions.c:115
 msgid "Key emulation"
 msgstr "Emulación de teclas"
+
+#: gtkedit/editoptions.c:156
+msgid " Editor options "
+msgstr " Opciones del editor "
 
 #. Not essential to translate
 #: gtkedit/editwidget.c:310
@@ -2702,7 +2792,7 @@ msgid ""
 " Couldn't stat %s \n"
 " %s "
 msgstr ""
-" No puedo hacer stat al archivo %s \n"
+" No puedo identificar el archivo %s \n"
 " %s "
 
 #: src/cmd.c:1031 src/cmd.c:1033
@@ -2895,7 +2985,7 @@ msgstr "&Grupo"
 #: src/dir.c:386
 #, c-format
 msgid "File exists but can not be stat-ed: %s %s"
-msgstr "El archivo existe pero no se pudo hacer un stat(): %s %s"
+msgstr "El archivo existe pero no se pudo identificar: %s %s"
 
 #: src/dir.c:662
 msgid "Unknown"
@@ -3020,7 +3110,7 @@ msgid ""
 " Cannot stat source file \"%s\" \n"
 " %s "
 msgstr ""
-" Fallo al solicitar la información sobre el archivo fuente \"%s\" \n"
+" No se pudo identificar el archivo origen \"%s\" \n"
 " %s "
 
 #: src/file.c:532
@@ -3076,7 +3166,7 @@ msgid ""
 " Cannot fstat source file \"%s\" \n"
 " %s "
 msgstr ""
-" No puedo solicitar información sobre el archivo origen \"%s\" \n"
+" No se puede identificar el archivo origen \"%s\" \n"
 " %s "
 
 #: src/file.c:638
@@ -3085,7 +3175,7 @@ msgid ""
 " Cannot create target file \"%s\" \n"
 " %s "
 msgstr ""
-" No puedo crear el archivo destino \"%s\" \n"
+" No se puede crear el archivo destino \"%s\" \n"
 " %s "
 
 #: src/file.c:652
@@ -3094,7 +3184,7 @@ msgid ""
 " Cannot fstat target file \"%s\" \n"
 " %s "
 msgstr ""
-" No puedo solicitar información sobre el archivo destino \"%s\" \n"
+" No se puede identificar el archivo destino \"%s\" \n"
 " %s"
 
 #: src/file.c:683
@@ -3103,7 +3193,7 @@ msgid ""
 " Cannot read source file \"%s\" \n"
 " %s "
 msgstr ""
-" No puedo leer el archivo fuente \"%s\" \n"
+" No se puede leer el archivo origen \"%s\" \n"
 " %s"
 
 #: src/file.c:713
@@ -3112,7 +3202,7 @@ msgid ""
 " Cannot write target file \"%s\" \n"
 " %s "
 msgstr ""
-" No puedo escribir el archivo destino \"%s\" \n"
+" No se puede escribir el archivo destino \"%s\" \n"
 " %s"
 
 #: src/file.c:732
@@ -3125,7 +3215,7 @@ msgid ""
 " Cannot close source file \"%s\" \n"
 " %s "
 msgstr ""
-" No puedo cerrar el archivo fuente \"%s\" \n"
+" No se puede cerrar el archivo origen \"%s\" \n"
 " %s"
 
 #: src/file.c:779
@@ -3134,7 +3224,7 @@ msgid ""
 " Cannot close target file \"%s\" \n"
 " %s "
 msgstr ""
-" No puedo cerrar el archivo destino \"%s\" \n"
+" No se puede cerrar el archivo destino \"%s\" \n"
 " %s"
 
 #: src/file.c:789
@@ -3155,7 +3245,7 @@ msgid ""
 " Cannot stat source directory \"%s\" \n"
 " %s "
 msgstr ""
-" No puedo solicitar información sobre el directorio fuente \"%s\" \n"
+" No se puede identificar el directorio de origen \"%s\" \n"
 " %s"
 
 #: src/file.c:885
@@ -3202,7 +3292,7 @@ msgid ""
 " Cannot stat file \"%s\" \n"
 " %s "
 msgstr ""
-" No puedo solicitar información sobre el archivo \"%s\" \n"
+" No se puede identificar el archivo \"%s\" \n"
 " %s "
 
 #: src/file.c:1096
@@ -3213,7 +3303,7 @@ msgstr " \"%s\" y \"%s\" son el mismo archivo "
 #: src/file.c:1103
 #, c-format
 msgid " Cannot overwrite directory `%s' "
-msgstr " No puedo sobrescribir el directorio \"%s\" "
+msgstr " No se puede sobrescribir el directorio \"%s\" "
 
 #: src/file.c:1140
 #, c-format
@@ -3372,10 +3462,6 @@ msgstr ""
 " El destino \"%s\" debe ser un directorio \n"
 " %s "
 
-#: src/file.c:2136 src/filegui.c:263
-msgid "&Skip"
-msgstr "&Ignorar"
-
 #: src/file.c:2136
 msgid "&Retry"
 msgstr "&Reintentar"
@@ -3464,10 +3550,6 @@ msgstr "si el ta&Maño difiere"
 #: src/filegui.c:566
 msgid "&Update"
 msgstr "actuali&Zar"
-
-#: src/filegui.c:567
-msgid "al&L"
-msgstr "&Todos"
 
 #: src/filegui.c:568
 msgid "Overwrite all targets?"
@@ -3921,15 +4003,15 @@ msgstr "Midnight Commander %s"
 
 #: src/info.c:112
 msgid "Free nodes %d (%d%%) of %d"
-msgstr "Nodos libres %d (%d%%) de %d"
+msgstr " y %d (%d%%) de %d inodos"
 
 #: src/info.c:118
 msgid "No node information"
-msgstr "No hay información sobre nodos"
+msgstr "Sin información sobre inodos"
 
 #: src/info.c:123
 msgid "Free space "
-msgstr "Espacio "
+msgstr "Disponible "
 
 #: src/info.c:125
 msgid " (%d%%) of "
@@ -3937,12 +4019,12 @@ msgstr " (%d%%) de"
 
 #: src/info.c:129
 msgid "No space information"
-msgstr "No hay información sobre espacio"
+msgstr "Espacio libre desconocido"
 
 #: src/info.c:133
 #, c-format
 msgid "Type:      %s "
-msgstr "Tipo:       %s"
+msgstr "  Tipo:     %s"
 
 #: src/info.c:133
 msgid "non-local vfs"
@@ -3951,12 +4033,12 @@ msgstr "VFS no-local"
 #: src/info.c:139
 #, c-format
 msgid "Device:    %s"
-msgstr "Ubicación:  %s"
+msgstr "  Origen:   %s"
 
 #: src/info.c:143
 #, c-format
 msgid "Filesystem: %s"
-msgstr "Sistema:    %s"
+msgstr "Sistema en  %s"
 
 #: src/info.c:148
 #, c-format
@@ -3971,7 +4053,7 @@ msgstr "Modificado: %s"
 #: src/info.c:156
 #, c-format
 msgid "Created:   %s"
-msgstr "Creado:     %s"
+msgstr "Cambiado:   %s"
 
 #: src/info.c:169
 msgid "Size:      "
@@ -3980,7 +4062,7 @@ msgstr "Tamaño:     "
 #: src/info.c:172
 #, c-format
 msgid " (%d blocks)"
-msgstr "(%d bloques)"
+msgstr " (%d bloques)"
 
 #: src/info.c:178
 #, c-format
@@ -3990,7 +4072,7 @@ msgstr "Dueño:      %s/%s"
 #: src/info.c:183
 #, c-format
 msgid "Links:     %d"
-msgstr "Enlaces:      %d"
+msgstr "Nº enlaces: %d"
 
 #: src/info.c:187
 #, c-format
@@ -4000,7 +4082,7 @@ msgstr "Modo:       %s (%04o)"
 #: src/info.c:192
 #, c-format
 msgid "Location:  %Xh:%Xh"
-msgstr "Lugar:      %Xh:%Xh"
+msgstr "Ubicado:    %Xh:%Xh"
 
 #: src/info.c:198
 #, c-format
@@ -4661,19 +4743,19 @@ msgstr "Muestra breve mensaje de ayuda"
 
 #: src/screen.c:429
 msgid "MTime"
-msgstr "TiempoM"
+msgstr "FechaMod"
 
 #: src/screen.c:430
 msgid "ATime"
-msgstr "TiAcceso"
+msgstr "FechaAcc"
 
 #: src/screen.c:431
 msgid "CTime"
-msgstr "TiCambio"
+msgstr "FechaCmb"
 
 #: src/screen.c:432
 msgid "Permission"
-msgstr "Permiso"
+msgstr "Permisos"
 
 #: src/screen.c:433
 msgid "Perm"
@@ -4681,7 +4763,7 @@ msgstr "Perm"
 
 #: src/screen.c:434
 msgid "Nl"
-msgstr "Nl"
+msgstr "Ne"
 
 #: src/screen.c:435
 msgid "Inode"
@@ -4776,7 +4858,7 @@ msgid ""
 " Can't stat the destination \n"
 " %s "
 msgstr ""
-" No puedo solicitar información sobre el destino \n"
+" No se puede identificar el destino \n"
 " %s "
 
 #: src/tree.c:698
@@ -4922,12 +5004,14 @@ msgid ""
 " Can't stat file \n"
 " "
 msgstr ""
-" No puedo solicitar información sobre el archivo \n"
+" No se puede identificar el archivo \n"
 " "
 
 #: src/view.c:488
 msgid " Can't view: not a regular file "
-msgstr " No se puede ver: no es un archivo normal "
+msgstr ""
+" No se puede ver: \n"
+" no es un archivo ordinario "
 
 #: src/view.c:678
 #, c-format

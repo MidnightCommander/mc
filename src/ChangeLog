@@ -1,3 +1,10 @@
+Wed Mar 10 22:21:19 1999  David Martin <dmartina@usa.net>
+
+	* util.c (my_putenv): char* was used to store the length of a string
+
+	* info.c (info_show_info): cast st_dev and st_ino when passing
+	to printw.
+
 1999-03-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* file.c (panel_operate): Always create the ctx->ui.  Federico,

@@ -661,9 +661,8 @@ char *x_basename (char *s)
 void my_putenv (char *name, char *data)
 {
     char *full;
-    char *len = strlen (name) + strlen (data) + 2;
 
-    full = malloc (len);
+    full = malloc (strlen (name) + strlen (data) + 2);
     strcpy (full, name);
     strcat (full, "=");
     strcat (full, data);

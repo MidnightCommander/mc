@@ -1,3 +1,10 @@
+Wed Mar 10 21:52:55 1999  David Martin <dmartina@usa.net>
+
+	* gtkedit/editcmd.c: Added missing translation tags.
+
+	* gtkedit/editoptions.c: Added missing translation tags. Translate
+	radio buttons on first use.
+
 Sat Feb 27 21:00:45 1999 Gregory McLean <gregm@comstar.net>
 
 	* applied a patch from Duncan Mak <mustapha@wegythu.res.cmu.edu>

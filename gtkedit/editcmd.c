@@ -352,7 +352,7 @@ void menu_save_mode_cmd (void)
 /* NLS ? */
     {DLG_X, DLG_Y, -1, -1, N_(" Edit Save Mode "), "[Edit Save Mode]",
      "esm", widgets};
-    static int i18n_flag;
+    static int i18n_flag = 0;
 
     if (!i18n_flag) {
         int i;
@@ -553,7 +553,7 @@ int edit_raw_key_query (char *heading, char *query, int cancel)
     x_set_dialog_title (raw_dlg, heading);
     raw_dlg->raw = 1;		/* to return even a tab key */
     if (cancel)
-	add_widget (raw_dlg, button_new (4, w / 2 - 5, B_CANCEL, NORMAL_BUTTON, "Cancel", 0, 0, 0));
+	add_widget (raw_dlg, button_new (4, w / 2 - 5, B_CANCEL, NORMAL_BUTTON, _("Cancel"), 0, 0, 0));
     add_widget (raw_dlg, label_new (3 - cancel, 2, query, 0));
     add_widget (raw_dlg, input_new (3 - cancel, w - 5, INPUT_COLOR, 2, "", 0));
     run_dlg (raw_dlg);
@@ -807,7 +807,7 @@ int edit_new_cmd (WEdit * edit)
 {
     edit->force |= REDRAW_COMPLETELY;
     if (edit->modified)
-	if (edit_query_dialog2 (_ (" Warning "), _ (" Current text was modified without a file save. \n Continue discards these changes. "), _ ("Continue"), _ ("Cancel")))
+	if (edit_query_dialog2 (_(" Warning "), _(" Current text was modified without a file save. \n Continue discards these changes. "), _("Continue"), _("Cancel")))
 	    return 0;
     edit->modified = 0;
     return edit_renew (edit);	/* if this gives an error, something has really screwed up */
@@ -826,7 +826,7 @@ int edit_load_file_from_filename (WEdit *edit, char *exp)
 	return 0;
     } else {
 /* Heads the 'Load' file dialog box */
-	edit_error_dialog (_ (" Load "), get_sys_error (_ (" Error trying to open file for reading ")));
+	edit_error_dialog (_(" Load "), get_sys_error (_(" Error trying to open file for reading ")));
     }
     return 1;
 }
@@ -837,10 +837,10 @@ int edit_load_cmd (WEdit * edit)
     edit->force |= REDRAW_COMPLETELY;
 
     if (edit->modified)
-	if (edit_query_dialog2 (_ (" Warning "), _ (" Current text was modified without a file save. \n Continue discards these changes. "), _ ("Continue"), _ ("Cancel")))
+	if (edit_query_dialog2 (_(" Warning "), _(" Current text was modified without a file save. \n Continue discards these changes. "), _("Continue"), _("Cancel")))
 	    return 0;
 
-    exp = edit_get_load_file (edit->dir, edit->filename, _ (" Load "));
+    exp = edit_get_load_file (edit->dir, edit->filename, _(" Load "));
 
     if (exp) {
 	if (*exp)
@@ -984,7 +984,7 @@ void edit_block_move_cmd (WEdit * edit)
 	return;
 
     if ((end_mark - start_mark) > option_max_undo / 2)
-	if (edit_query_dialog2 (_ (" Warning "), _ (" Block is large, you may not be able to undo this action. "), _ ("Continue"), _ ("Cancel")))
+	if (edit_query_dialog2 (_(" Warning "), _(" Block is large, you may not be able to undo this action. "), _("Continue"), _("Cancel")))
 	    return;
 
     edit_push_markers (edit);
@@ -1081,7 +1081,7 @@ int edit_block_delete (WEdit * edit)
 	edit_mark_cmd (edit, 0);
     if ((end_mark - start_mark) > option_max_undo / 2)
 /* Warning message with a query to continue or cancel the operation */
-	if (edit_query_dialog2 (_ (" Warning "), _ (" Block is large, you may not be able to undo this action. "), _ (" Continue "), _ (" Cancel ")))
+	if (edit_query_dialog2 (_(" Warning "), _(" Block is large, you may not be able to undo this action. "), _(" Continue "), _(" Cancel ")))
 	    return 1;
     edit_push_markers (edit);
     edit_cursor_move (edit, start_mark - edit->curs1);
@@ -1123,6 +1123,8 @@ int edit_block_delete_cmd (WEdit * edit)
 #define SEARCH_DLG_HEIGHT 10
 #define REPLACE_DLG_WIDTH 58
 #define REPLACE_DLG_HEIGHT 15
+#define CONFIRM_DLG_WIDTH 66
+#define CONFIRM_DLG_HEIGTH 6
 #define B_REPLACE_ALL B_USER+1
 #define B_SKIP_REPLACE B_USER+2
 
@@ -1132,15 +1134,15 @@ int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 	QuickWidget quick_widgets[] =
 	{
 /* NLS  for hotkeys? */
-	    {quick_button, 14, 18, 3, 6, "&Cancel", 0, B_CANCEL, 0,
-	     0, XV_WLAY_DONTCARE, NULL},
-	    {quick_button, 9, 18, 3, 6, "Replace &all", 0, B_REPLACE_ALL, 0,
-	     0, XV_WLAY_DONTCARE, NULL},
-	    {quick_button, 6, 18, 3, 6, "&Skip", 0, B_SKIP_REPLACE, 0,
-	     0, XV_WLAY_DONTCARE, NULL},
-	    {quick_button, 2, 18, 3, 6, "&Replace", 0, B_ENTER, 0,
-	     0, XV_WLAY_DONTCARE, NULL},
-	    {quick_label, 2, 50, 2, 6, 0,
+	    {quick_button, 50, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_("&Cancel"),
+	     0, B_CANCEL, 0, 0, XV_WLAY_DONTCARE, NULL},
+	    {quick_button, 37, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_("al&L"),
+	     0, B_REPLACE_ALL, 0, 0, XV_WLAY_DONTCARE, NULL},
+	    {quick_button, 21, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_("&Skip"),
+	     0, B_SKIP_REPLACE, 0, 0, XV_WLAY_DONTCARE, NULL},
+	    {quick_button, 4, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_("&Replace"),
+	     0, B_ENTER, 0, 0, XV_WLAY_DONTCARE, NULL},
+	    {quick_label, 2, CONFIRM_DLG_WIDTH, 2, CONFIRM_DLG_HEIGTH, 0,
 	     0, 0, 0, XV_WLAY_DONTCARE, 0},
 	    {0}};
 
@@ -1148,7 +1150,7 @@ int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 
 	{
 	    QuickDialog Quick_input =
-	    {66, 6, 0, 0, N_(" Replace "),
+	    {CONFIRM_DLG_WIDTH, CONFIRM_DLG_HEIGTH, 0, 0, N_(" Confirm replace "),
 	     "[Input Line Keys]", "quick_input", 0 /*quick_widgets */ };
 
 	    Quick_input.widgets = quick_widgets;
@@ -2228,8 +2230,8 @@ void edit_quit_cmd (WEdit * edit)
     if (edit->modified) {
 #ifdef GTK
 	char *r;
-	r = gtk_dialog_cauldron (_ (" Quit "), GTK_CAULDRON_TOPLEVEL | GTK_CAULDRON_GRAB, " [ ( %Lxf )xf ]xf / ( %Bgxfq || %Bgxfq || %Bgxfq ) ",
-				     _ (" Current text was modified without a file save. \n Save with exit? "), GNOME_STOCK_BUTTON_CANCEL, GNOME_STOCK_BUTTON_YES, GNOME_STOCK_BUTTON_NO);
+	r = gtk_dialog_cauldron (_(" Quit "), GTK_CAULDRON_TOPLEVEL | GTK_CAULDRON_GRAB, " [ ( %Lxf )xf ]xf / ( %Bgxfq || %Bgxfq || %Bgxfq ) ",
+				     _(" Current text was modified without a file save. \n Save with exit? "), GNOME_STOCK_BUTTON_CANCEL, GNOME_STOCK_BUTTON_YES, GNOME_STOCK_BUTTON_NO);
 	if (!strcmp (r, GNOME_STOCK_BUTTON_YES)) {
 	    edit_push_markers (edit);
 	    edit_set_markers (edit, 0, 0, 0, 0);
@@ -2243,11 +2245,11 @@ void edit_quit_cmd (WEdit * edit)
 	}
 #else
 #ifdef MIDNIGHT
-	switch (edit_query_dialog3 (_ (" Quit "), _ (" File was modified, Save with exit? "), _ ("Cancel quit"), _ ("&Yes"), _ ("&No"))) {
+	switch (edit_query_dialog3 (_(" Quit "), _(" File was modified, Save with exit? "), _("Cancel quit"), _("&Yes"), _("&No"))) {
 #else
 /* Confirm 'Quit' dialog box */
-	switch (edit_query_dialog3 (_ (" Quit "),
-				    _ (" Current text was modified without a file save. \n Save with exit? "), _ (" &Cancel quit "), _ (" &Yes "), _ (" &No "))) {
+	switch (edit_query_dialog3 (_(" Quit "),
+				    _(" Current text was modified without a file save. \n Save with exit? "), _(" &Cancel quit "), _(" &Yes "), _(" &No "))) {
 #endif
 	case 1:
 	    edit_push_markers (edit);
@@ -2472,7 +2474,7 @@ int edit_cut_to_X_buf_cmd (WEdit * edit)
 	return 0;
     edit_XStore_block (edit, start_mark, end_mark);
     if (!edit_save_block_to_clip_file (edit, start_mark, end_mark)) {
-	edit_error_dialog (_ (" Cut to clipboard "), _ (" Unable to save to file. "));
+	edit_error_dialog (_(" Cut to clipboard "), _(" Unable to save to file. "));
 	return 1;
     }
     edit_block_delete_cmd (edit);
@@ -2840,23 +2842,23 @@ void edit_mail_dialog (WEdit * edit)
     QuickWidget quick_widgets[] =
     {
 /* NLS ? */
-	{quick_button, 6, 10, 9, MAIL_DLG_HEIGHT, "&Cancel", 0, B_CANCEL, 0,
+	{quick_button, 6, 10, 9, MAIL_DLG_HEIGHT, N_("&Cancel"), 0, B_CANCEL, 0,
 	 0, XV_WLAY_DONTCARE, NULL},
-	{quick_button, 2, 10, 9, MAIL_DLG_HEIGHT, "&Ok", 0, B_ENTER, 0,
+	{quick_button, 2, 10, 9, MAIL_DLG_HEIGHT, N_("&Ok"), 0, B_ENTER, 0,
 	 0, XV_WLAY_DONTCARE, NULL},
 	{quick_input, 3, 50, 8, MAIL_DLG_HEIGHT, "", 44, 0, 0,
 	 0, XV_WLAY_BELOWCLOSE, "mail-dlg-input"},
-	{quick_label, 2, 50, 7, MAIL_DLG_HEIGHT, " Copies to", 0, 0, 0,
+	{quick_label, 2, 50, 7, MAIL_DLG_HEIGHT, N_(" Copies to"), 0, 0, 0,
 	 0, XV_WLAY_DONTCARE, 0},
 	{quick_input, 3, 50, 6, MAIL_DLG_HEIGHT, "", 44, 0, 0,
 	 0, XV_WLAY_BELOWCLOSE, "mail-dlg-input-2"},
-	{quick_label, 2, 50, 5, MAIL_DLG_HEIGHT, " Subject", 0, 0, 0,
+	{quick_label, 2, 50, 5, MAIL_DLG_HEIGHT, N_(" Subject"), 0, 0, 0,
 	 0, XV_WLAY_DONTCARE, 0},
 	{quick_input, 3, 50, 4, MAIL_DLG_HEIGHT, "", 44, 0, 0,
 	 0, XV_WLAY_BELOWCLOSE, "mail-dlg-input-3"},
-	{quick_label, 2, 50, 3, MAIL_DLG_HEIGHT, " To", 0, 0, 0,
+	{quick_label, 2, 50, 3, MAIL_DLG_HEIGHT, N_(" To"), 0, 0, 0,
 	 0, XV_WLAY_DONTCARE, 0},
-	{quick_label, 2, 50, 2, MAIL_DLG_HEIGHT, " mail -s <subject> -c <cc> <to>", 0, 0, 0,
+	{quick_label, 2, 50, 2, MAIL_DLG_HEIGHT, N_(" mail -s <subject> -c <cc> <to>"), 0, 0, 0,
 	 0, XV_WLAY_DONTCARE, 0},
 	{0}};
 

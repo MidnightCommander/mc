@@ -189,7 +189,7 @@ info_show_info (WInfo *info)
 	
     case 4:
 	widget_move (&info->widget, 4, 3);
-	printw (_("Location:  %Xh:%Xh"), buf.st_dev, buf.st_ino);
+	printw (_("Location:  %Xh:%Xh"), (int)buf.st_dev, (int)buf.st_ino);
 	
     case 3:
 	widget_move (&info->widget, 3, 2);
