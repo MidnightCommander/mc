@@ -314,7 +314,7 @@ gnome_exit (void)
 	w = gnome_message_box_new (
 		_("Notice that if you choose to terminate the file manager, you will\n"
 		  "also terminate the GNOME desktop handler.\n\n"
-		  "Are you sure you want to quit?"),
+		  "Are you sure you want to exit?"),
 		GNOME_MESSAGE_BOX_WARNING,
 		GNOME_STOCK_BUTTON_YES,
 		GNOME_STOCK_BUTTON_NO,

@@ -1311,8 +1311,6 @@ create_panel_from_desktop (void)
 	/* Create the file entry list */
 
 	panel->dir.size = nicons;
-	panel->dir.list = g_new (file_entry, nicons);
-	fe = panel->dir.list;
 
 	count = 0;
 	marked_count = 0;
@@ -1320,37 +1318,40 @@ create_panel_from_desktop (void)
 	total = 0;
 	selected_index = -1;
 
-	for (i = 0; i < layout_cols * layout_rows; i++)
-		for (l = layout_slots[i].icons; l; l = l->next) {
-			DesktopIconInfo *dii;
-			char *full_name;
+	if (nicons != 0) {
+		panel->dir.list = g_new (file_entry, nicons);
 
-			dii = l->data;
-			full_name = g_concat_dir_and_file (desktop_directory, dii->filename);
-			if (mc_lstat (full_name, &s) == -1) {
-				g_warning ("Could not stat %s, bad things will happen", full_name);
-				continue;
+		fe = panel->dir.list;
+
+		for (i = 0; i < layout_cols * layout_rows; i++)
+			for (l = layout_slots[i].icons; l; l = l->next) {
+				DesktopIconInfo *dii;
+				char *full_name;
+
+				dii = l->data;
+				full_name = g_concat_dir_and_file (desktop_directory, dii->filename);
+				if (mc_lstat (full_name, &s) == -1) {
+					g_warning ("Could not stat %s, bad things will happen",
+						   full_name);
+					continue;
+				}
+
+				file_entry_fill (fe, &s, full_name);
+				if (dii->selected) {
+					marked_count++;
+					fe->f.marked = TRUE;
+
+					if (S_ISDIR (fe->buf.st_mode))
+						dir_marked_count++;
+
+					total += fe->buf.st_size;
+				}
+
+				g_free (full_name);
+				fe++;
+				count++;
 			}
-
-			file_entry_fill (fe, &s, full_name);
-			if (dii->selected) {
-#if 0
-				if (selected_index == -1)
-					selected_index = count;
-#endif
-				marked_count++;
-				fe->f.marked = TRUE;
-
-				if (S_ISDIR (fe->buf.st_mode))
-					dir_marked_count++;
-
-				total += fe->buf.st_size;
-			}
-
-			g_free (full_name);
-			fe++;
-			count++;
-		}
+	}
 
 	/* Fill the rest of the panel structure */
 
@@ -1362,11 +1363,7 @@ create_panel_from_desktop (void)
 	panel->total = total;
 	panel->selected = selected_index;
 	panel->is_a_desktop_panel = TRUE;
-	
-	g_assert (panel->count > 0);
-#if 0
-	g_assert (panel->selected != -1);
-#endif
+
 	return panel;
 }
 
@@ -1405,7 +1402,9 @@ free_panel_from_desktop (WPanel *panel)
 	for (i = 0; i < panel->count; i++)
 		g_free (panel->dir.list[i].fname);
 	
-	g_free (panel->dir.list);
+	if (panel->dir.list)
+		g_free (panel->dir.list);
+
 	g_free (panel);
 }
 
@@ -2427,7 +2426,6 @@ desktop_popup (GdkEventButton *event)
 	WPanel *panel;
 	gint i;
 
-
 	popup = gnome_popup_menu_new (desktop_popup_items);
 	/* First thing we want to do is strip off the STUPID tear off menu... S-: */
 	shell = gnome_panel_new_menu[0].widget->parent;
@@ -2451,6 +2449,8 @@ desktop_popup (GdkEventButton *event)
 	layout_panel_gone (panel);
 	free_panel_from_desktop (panel); 
 	gtk_widget_destroy (popup);
+
+	desktop_reload_icons (FALSE, 0, 0);
 }
 
 /* Draws the rubberband rectangle for selecting icons on the desktop */

@@ -1,5 +1,10 @@
 1999-03-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gdesktop.c (create_panel_from_desktop): Do not assert that
+	panel->count > 0, because we may actually not have any icons in
+	the desktop.
+	(desktop_popup): Reload the desktop once the popup menu is done.
+
 	* gnome-file-property-dialog.c (gnome_file_property_dialog_init):
 	Set the dialog to not destroy-on-close.
 
