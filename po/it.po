@@ -2,15 +2,15 @@
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 # mc it.po
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # Giuliano Natali <natali@stone.trew.it>, 1998.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: 4.5.39\n"
-"POT-Creation-Date: 1999-08-30 13:07+0200\n"
+"Project-Id-Version: 4.5.41\n"
+"POT-Creation-Date: 1999-11-01 18:12-0500\n"
 "PO-Revision-Date: 1999-06-24 15:22+1\n"
 "Last-Translator: Marco Ciampa <marco@mc.ismaa.it>\n"
 "Language-Team: Marco Ciampa <marco@mc.ismaa.it>\n"
@@ -63,8 +63,8 @@ msgid ""
 msgstr ""
 "\".\n"
 "\n"
-"Per aggiustare, aprire l'editor delle proprietà mime nel Centro di "
-"Controllo di GNOME, e modificare l'azione %s per \"%s\"."
+"Per aggiustare, aprire l'editor delle proprietà mime nel Centro di Controllo "
+"di GNOME, e modificare l'azione %s per \"%s\"."
 
 #: gnome/gaction.c:46
 #, c-format
@@ -278,11 +278,11 @@ msgstr " Espressione regolare errata "
 
 #: gnome/gcmd.c:962
 msgid "Creating a desktop link"
-msgstr ""
+msgstr "Creazione di un collegamento alla scrivania"
 
 #: gnome/gcmd.c:963
 msgid "Enter the URL:"
-msgstr ""
+msgstr "Immetti l'URL:"
 
 #: gnome/gcustom-layout.c:34
 msgid "Access Time"
@@ -362,19 +362,19 @@ msgstr "Attenzione"
 msgid "Could not open %s; will not have desktop icons"
 msgstr "Non posso aprire %s; non avrà icone sul desktop"
 
-#: gnome/gdesktop.c:1176
+#: gnome/gdesktop.c:1181
 msgid "While running the mount/umount command"
 msgstr "Sta eseguendo il comando mount/unmount"
 
-#: gnome/gdesktop.c:1245
+#: gnome/gdesktop.c:1250
 msgid "While running the eject command"
 msgstr "Sta eseguendo il comando eject"
 
-#: gnome/gdesktop.c:1429 gnome/gicon.c:218 gnome/gtools.c:46
+#: gnome/gdesktop.c:1434 gnome/gicon.c:218 gnome/gtools.c:46
 msgid "Error"
 msgstr "Errore"
 
-#: gnome/gdesktop.c:2588
+#: gnome/gdesktop.c:2593
 msgid ""
 "Unable to locate the file:\n"
 "background-properties-capplet\n"
@@ -388,84 +388,84 @@ msgstr ""
 "\n"
 "Non è stato possibile impostare lo sfondo."
 
-#: gnome/gdesktop.c:2611 gnome/glayout.c:362
+#: gnome/gdesktop.c:2616 gnome/glayout.c:362
 msgid "_Terminal"
 msgstr "_Terminale"
 
-#: gnome/gdesktop.c:2611 gnome/glayout.c:363
+#: gnome/gdesktop.c:2616 gnome/glayout.c:363
 msgid "Launch a new terminal in the current directory"
 msgstr "Esegui un nuovo terminale nella directory corrente"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2613 gnome/glayout.c:365
+#: gnome/gdesktop.c:2618 gnome/glayout.c:365
 msgid "_Directory..."
 msgstr "_Directory..."
 
-#: gnome/gdesktop.c:2613 gnome/glayout.c:366
+#: gnome/gdesktop.c:2618 gnome/glayout.c:366
 msgid "Creates a new directory"
 msgstr "Crea una nuova directory"
 
-#: gnome/gdesktop.c:2614
+#: gnome/gdesktop.c:2619
 msgid "URL L_ink..."
 msgstr "Collegamento URL..."
 
-#: gnome/gdesktop.c:2614
+#: gnome/gdesktop.c:2619
 msgid "Creates a new URL link"
 msgstr "Crea un nuovo collegamento URL"
 
-#: gnome/gdesktop.c:2615
+#: gnome/gdesktop.c:2620
 msgid "_Launcher..."
 msgstr "_Esegui..."
 
-#: gnome/gdesktop.c:2615
+#: gnome/gdesktop.c:2620
 msgid "Creates a new launcher"
 msgstr "Crea un nuovo esecutore di comandi"
 
-#: gnome/gdesktop.c:2621
+#: gnome/gdesktop.c:2626
 msgid "By _Name"
 msgstr "_Nome"
 
-#: gnome/gdesktop.c:2622
+#: gnome/gdesktop.c:2627
 msgid "By File _Type"
 msgstr "_Tipo file"
 
-#: gnome/gdesktop.c:2623
+#: gnome/gdesktop.c:2628
 msgid "By _Size"
 msgstr "Dimen_sione "
 
-#: gnome/gdesktop.c:2624
+#: gnome/gdesktop.c:2629
 msgid "By Time Last _Accessed"
 msgstr "Ora Ultimo _Accesso"
 
-#: gnome/gdesktop.c:2625
+#: gnome/gdesktop.c:2630
 msgid "By Time Last _Modified"
 msgstr "Ora Ultima _Modifica"
 
-#: gnome/gdesktop.c:2626
+#: gnome/gdesktop.c:2631
 msgid "By Time Last _Changed"
 msgstr "Ora Ultimo _Cambiamento"
 
-#: gnome/gdesktop.c:2634 gnome/glayout.c:462
+#: gnome/gdesktop.c:2639 gnome/glayout.c:462
 msgid "_Arrange Icons"
 msgstr "Ordina icone per"
 
-#: gnome/gdesktop.c:2635
+#: gnome/gdesktop.c:2640
 msgid "Create _New Window"
 msgstr "Crea _Nuova finestra"
 
-#: gnome/gdesktop.c:2637 gnome/glayout.c:464
+#: gnome/gdesktop.c:2642 gnome/glayout.c:464
 msgid "Rescan _Desktop Directory"
-msgstr "Aggiorna Directory _Desktop"    
+msgstr "Aggiorna Directory _Desktop"
 
-#: gnome/gdesktop.c:2638 gnome/glayout.c:465
+#: gnome/gdesktop.c:2643 gnome/glayout.c:465
 msgid "Rescan De_vices"
 msgstr "Aggiorna Dispositi_vi"
 
-#: gnome/gdesktop.c:2639 gnome/glayout.c:466
+#: gnome/gdesktop.c:2644 gnome/glayout.c:466
 msgid "Recreate Default _Icons"
 msgstr "Ricrea _Icone Predefinite"
 
-#: gnome/gdesktop.c:2641
+#: gnome/gdesktop.c:2646
 msgid "Configure _Background Image"
 msgstr "Configura immagine di sfondo"
 
@@ -494,6 +494,11 @@ msgstr "Usa testo contornato"
 #: gnome/gdesktop-prefs.c:335
 msgid "Desktop"
 msgstr "Scrivania"
+
+#. Create the link to the user's home directory so that he will have an icon
+#: gnome/gdesktop-init.c:141
+msgid "Home directory"
+msgstr "Directory home"
 
 #: gnome/gdialogs.c:60
 msgid "To: "
@@ -946,7 +951,7 @@ msgstr "Chiude il file manager e la scrivania"
 
 #: gnome/glayout.c:473 gnome/glayout.c:484
 msgid "_Settings"
-msgstr ""
+msgstr "_Impostazioni"
 
 #: gnome/glayout.c:474 gnome/glayout.c:485
 msgid "_Layout"
@@ -1118,7 +1123,7 @@ msgid "Use default Drop Action options"
 msgstr "Usa operazione di Deselezione predefinita"
 
 #: gnome/gnome-file-property-dialog.c:403
-#: gnome/gnome-file-property-dialog.c:491 gnome/gpopup2.c:194
+#: gnome/gnome-file-property-dialog.c:491 gnome/gpopup2.c:203
 #: src/screen.c:2397 src/screen.c:2427
 msgid "View"
 msgstr "Vista"
@@ -1132,7 +1137,7 @@ msgid "Select an Icon"
 msgstr "Scegli icona"
 
 #. we do open first
-#: gnome/gnome-file-property-dialog.c:469 gnome/gpopup2.c:187
+#: gnome/gnome-file-property-dialog.c:469 gnome/gpopup2.c:195
 msgid "Open"
 msgstr "Apri"
 
@@ -1148,7 +1153,7 @@ msgstr "Usa operazione di Deselezione predefinita"
 msgid "Use default View action"
 msgstr "Usa operazione di Vista predefinita"
 
-#: gnome/gnome-file-property-dialog.c:513 gnome/gpopup2.c:196
+#: gnome/gnome-file-property-dialog.c:513 gnome/gpopup2.c:205
 #: src/screen.c:2398 src/screen.c:2428 src/view.c:2079
 msgid "Edit"
 msgstr "Cambia"
@@ -1281,52 +1286,52 @@ msgstr "Applicazioni"
 msgid "Program to run"
 msgstr "Programma da eseguire"
 
-#: gnome/gpopup2.c:188
+#: gnome/gpopup2.c:197
 msgid "Mount device"
 msgstr "Monta dispositivo"
 
-#: gnome/gpopup2.c:189
+#: gnome/gpopup2.c:198
 msgid "Unmount device"
 msgstr "Smonta dispositivo"
 
-#: gnome/gpopup2.c:190
+#: gnome/gpopup2.c:199
 msgid "Eject device"
 msgstr "Espelli dispositivo"
 
-#: gnome/gpopup2.c:193
+#: gnome/gpopup2.c:202
 msgid "Open with..."
 msgstr "Apri con..."
 
-#: gnome/gpopup2.c:195
+#: gnome/gpopup2.c:204
 msgid "View Unfiltered"
 msgstr "Vista non filtrata"
 
-#: gnome/gpopup2.c:198
+#: gnome/gpopup2.c:207
 msgid "Copy..."
 msgstr "Copia..."
 
-#: gnome/gpopup2.c:199 gtkedit/editwidget.c:1100 src/screen.c:2402
+#: gnome/gpopup2.c:208 gtkedit/editwidget.c:1100 src/screen.c:2402
 #: src/screen.c:2432
 msgid "Delete"
 msgstr "Elimina"
 
-#: gnome/gpopup2.c:200
+#: gnome/gpopup2.c:209
 msgid "Move..."
 msgstr "Sposta..."
 
-#: gnome/gpopup2.c:201
+#: gnome/gpopup2.c:210
 msgid "Hard Link..."
 msgstr "Collegamento fisico..."
 
-#: gnome/gpopup2.c:202
+#: gnome/gpopup2.c:211
 msgid "Symlink..."
 msgstr "Collegamento simbolico"
 
-#: gnome/gpopup2.c:203
+#: gnome/gpopup2.c:212
 msgid "Edit Symlink..."
 msgstr "Modifica coll. simb. ..."
 
-#: gnome/gpopup2.c:205
+#: gnome/gpopup2.c:214
 msgid "Properties..."
 msgstr "Proprietà..."
 
@@ -1468,11 +1473,11 @@ msgstr "Crea una nuova directory"
 
 #: gnome/gscreen.c:1419
 msgid "New _File..."
-msgstr ""
+msgstr "Nuovo _File..."
 
 #: gnome/gscreen.c:1419
 msgid "Creates a new file here"
-msgstr ""
+msgstr "Crea un nuovo file qui "
 
 #: gnome/gscreen.c:1620
 #, c-format
@@ -1623,65 +1628,65 @@ msgstr "_Hex"
 msgid "_Search"
 msgstr "_Cerca"
 
-#: gnome/gwidget.c:90
+#: gnome/gwidget.c:95
 msgid "ok"
 msgstr "accetta"
 
-#: gnome/gwidget.c:92
+#: gnome/gwidget.c:97
 msgid "cancel"
 msgstr "annulla"
 
-#: gnome/gwidget.c:94
+#: gnome/gwidget.c:99
 msgid "help"
 msgstr "aiuto"
 
-#: gnome/gwidget.c:96 src/file.c:2271
+#: gnome/gwidget.c:101 src/file.c:2271
 msgid "yes"
 msgstr "si"
 
-#: gnome/gwidget.c:98 src/file.c:2269
+#: gnome/gwidget.c:103 src/file.c:2269
 msgid "no"
 msgstr "no"
 
-#: gnome/gwidget.c:100
+#: gnome/gwidget.c:105
 msgid "exit"
 msgstr "esci"
 
-#: gnome/gwidget.c:102
+#: gnome/gwidget.c:107
 msgid "abort"
 msgstr "annulla"
 
 #: gnome/gmc-client.c:26
 msgid "Could not contact the file manager\n"
-msgstr ""
+msgstr "Non riesco a collegarmi col file manager\n"
 
 #: gnome/gmc-client.c:45
 msgid "Could not get the desktop\n"
-msgstr ""
+msgstr "Non riesco a ottenere la scrivania\n"
 
 #: gnome/gmc-client.c:171
 msgid "Create window showing the specified directory"
-msgstr ""
+msgstr "Crea finestra aperta sulla specifica directory"
 
 #: gnome/gmc-client.c:171 gnome/gmc-client.c:173
 msgid "DIRECTORY"
-msgstr ""
+msgstr "DIRECTORY"
 
 #: gnome/gmc-client.c:173
 msgid "Rescan the specified directory"
-msgstr ""
+msgstr "Rileggi le directory specificate"
 
 #: gnome/gmc-client.c:175
 msgid "Rescan the desktop icons"
-msgstr ""
+msgstr "Rileggi le icone sulla scrivania"
 
 #: gnome/gmc-client.c:177
 msgid "Rescan the desktop device icons"
-msgstr ""
+msgstr "Rileggi le icone dispositivi sulla scrivania"
 
 #: gnome/gmc-client.c:179
 msgid "Close windows whose directories cannot be reached"
-msgstr ""
+msgstr "Chiudi le finestre le cui directory non possono essere raggiunte"
 
 #. The file-name is printed after the ':'
 #: gtkedit/edit.c:132 gtkedit/edit.c:227 gtkedit/edit.c:234 gtkedit/edit.c:241
@@ -1714,7 +1719,7 @@ msgid ""
 " Increase edit.h:MAXBUF and recompile the editor. "
 msgstr ""
 " \n"
-" Incrementa la variabile di edit.h:MAXBUG e ricompia l'editor"
+" Incrementa la variabile di edit.h:MAXBUF e ricompia l'editor"
 
 #: gtkedit/edit.c:311 gtkedit/edit.c:347
 msgid " Error allocating memory "
@@ -2044,8 +2049,8 @@ msgid ""
 "Allows entering of a C format string,\n"
 "see the scanf man page"
 msgstr ""
-"Permetti l'inserimento di una stringa in formato C, controlla la man page di "
-"scanf"
+"Permetti l'inserimento di una stringa in formato C,\n"
+" vedi manuale di scanf"
 
 #. Tool hint
 #: gtkedit/editcmd.c:1448
@@ -2481,7 +2486,7 @@ msgstr "Copia su file...\tC-f"
 #. Tool hint
 #: gtkedit/editmenu.c:407
 msgid "Disk operations and file indexing/searching"
-msgstr ""
+msgstr "Operazioni su disco e elenco/ricerca di file"
 
 #: gtkedit/editmenu.c:413
 msgid "Toggle mark\tF3"
@@ -2891,7 +2896,7 @@ msgstr "&Salta"
 
 #: src/achown.c:74 src/chmod.c:119 src/chown.c:83
 msgid "Set &all"
-msgstr "Modifica &Tutti"
+msgstr "I. &Tutti"
 
 #: src/achown.c:362 src/achown.c:369
 msgid "owner"
@@ -2943,7 +2948,7 @@ msgstr ""
 " %s "
 
 #: src/achown.c:666 src/achown.c:670 src/chmod.c:320 src/chmod.c:324
-#: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:639
+#: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:621
 msgid " Oops... "
 msgstr " Oops... "
 
@@ -3114,15 +3119,15 @@ msgstr "Sospeso "
 
 #: src/boxes.c:895
 msgid "&Stop"
-msgstr "Pausa"
+msgstr "&Pausa"
 
 #: src/boxes.c:896
 msgid "&Resume"
-msgstr "Continua"
+msgstr "&Continua"
 
 #: src/boxes.c:897
 msgid "&Kill"
-msgstr "Ferma"
+msgstr "&Ferma"
 
 #: src/boxes.c:936
 msgid "Background Jobs"
@@ -3178,15 +3183,15 @@ msgstr "imposta UID"
 
 #: src/chmod.c:116
 msgid "C&lear marked"
-msgstr "Cance&lla selez."
+msgstr "&Canc. marc."
 
 #: src/chmod.c:117
 msgid "S&et marked"
-msgstr "Imposta s&elez."
+msgstr "&Imp. marc."
 
 #: src/chmod.c:118
 msgid "&Marked all"
-msgstr "Tutti i file &marcati"
+msgstr "M&od. marc."
 
 #: src/chmod.c:152
 msgid "Permissions (Octal)"
@@ -3631,7 +3636,7 @@ msgstr "Il file esiste ma non può essere eseguito stat su di esso: %s %s"
 msgid "Unknown"
 msgstr "Sconosciuto"
 
-#: src/ext.c:143 src/user.c:506
+#: src/ext.c:143 src/user.c:499
 #, c-format
 msgid ""
 " Can't generate unique filename \n"
@@ -3640,7 +3645,7 @@ msgstr ""
 " Non posso aprire il file %s \n"
 " %s "
 
-#: src/ext.c:150 src/user.c:518
+#: src/ext.c:150 src/user.c:511
 #, c-format
 msgid ""
 " Can't create temporary command file \n"
@@ -3649,7 +3654,7 @@ msgstr ""
 "Non posso creare un file temporaneo di comandi \n"
 " %s "
 
-#: src/ext.c:165 src/user.c:547
+#: src/ext.c:165 src/user.c:533
 msgid " Parameter "
 msgstr "Parametro"
 
@@ -4422,7 +4427,7 @@ msgstr " Non trovo il nodo [Contents] nel file d'aiuto"
 msgid " Help "
 msgstr " Aiuto "
 
-#: src/help.c:766 src/user.c:655
+#: src/help.c:766 src/user.c:637
 #, c-format
 msgid ""
 " Can't open file %s \n"
@@ -4854,7 +4859,9 @@ msgstr "OK"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr "Pare che tutti i tasti siano configurati correttamente"
+msgstr ""
+"Pare che tutti i tasti siano già\n"
+"configurati correttamente. Ottimo!"
 
 #: src/learn.c:179
 msgid "&Discard"
@@ -4874,7 +4881,7 @@ msgstr "Apprendi tasti"
 
 #: src/learn.c:300
 msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr "Premi tutti i tasti riportati in questa finestra, Dopodiché, controlla"
+msgstr "Premi tutti i tasti riportati qui. Una volta completato, controlla"
 
 #: src/learn.c:302
 msgid "which keys are not marked with OK.  Press space on the missing"
@@ -4882,7 +4889,7 @@ msgstr "quali tasti non siano marcati con OK. Premi Barra spazio sui tasti"
 
 #: src/learn.c:304
 msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr "mancanti, o clicka con il mouse per ridefinirli. Spostati con il TAB."
+msgstr "mancanti, o usa il mouse per ridefinirli. Spostati con il Tab."
 
 #: src/main.c:704
 msgid ""
@@ -4891,10 +4898,10 @@ msgid ""
 " deleted your working directory, or given yourself \n"
 " extra access permissions with the \"su\" command? "
 msgstr ""
-" Midnight Commander non puo entrare nella directory nella\n"
-" quale la subshell dichiara di operare. Probabilmente avete\n"
-" rimosso la directory in questione, o vi siete entrati \n"
-" usando il comando `su'?"
+" Midnight Commander non puo entrare nella directory dalla\n"
+" quale la subshell dichiara di operare. Avete forse \n"
+" rimosso la directory in questione o vi siete entrati \n"
+" usando il comando \"su\"?"
 
 #: src/main.c:779
 msgid "Press any key to continue..."
@@ -5284,7 +5291,7 @@ msgstr "Nessuna finestra aperta all'esecuzione"
 msgid "Display the directory that holds the .links startup files and exit"
 msgstr "Mostra la directory che contiene il file di partenza .links e esce"
 
-#: src/main.c:3039
+#: src/main.c:3045
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -5292,11 +5299,11 @@ msgstr ""
 "Non posso aprire il terminale.  Devi eseguire mc senza l'opzione -P\n"
 "Su alcuni sistemi, basta eseguire `which mc`\n"
 
-#: src/main.c:3117
+#: src/main.c:3123
 msgid " Notice "
 msgstr " Avviso "
 
-#: src/main.c:3118
+#: src/main.c:3124
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -5511,11 +5518,11 @@ msgstr "Campo sconosciuto per la visualizzazione: "
 
 #: src/screen.c:1451
 msgid "User suplied format looks invalid, reverting to default."
-msgstr ""
+msgstr "Il formato utente fornito è errato, uso il default."
 
 #: src/screen.c:2116 src/screen.c:2164
 msgid " Do you really want to execute? "
-msgstr " Vuoi eseguire realmente?"
+msgstr " Vuoi veramente eseguirlo?"
 
 #: src/screen.c:2129 src/screen.c:2179
 msgid " No action taken "
@@ -5584,7 +5591,9 @@ msgstr "Muovi la directory `%s' a:"
 msgid ""
 " Can't stat the destination \n"
 " %s "
-msgstr "No puedo solicitar información sobre el destino"
+msgstr ""
+"Non posso ottenere informazioni sulla destinazione \n"
+" %s "
 
 #: src/tree.c:688
 msgid " The destination isn't a directory "
@@ -5629,32 +5638,32 @@ msgstr ""
 "Non posso scrivere sul file `%s':\n"
 "%s\n"
 
-#: src/user.c:261
+#: src/user.c:250
 #, c-format
 msgid " Invalid shell pattern definition \"%c\". "
 msgstr " Definizione inesatta dei pattern della shell %c "
 
-#: src/user.c:394
+#: src/user.c:383
 msgid " Debug "
 msgstr " Debug "
 
-#: src/user.c:403
+#: src/user.c:392
 msgid " ERROR: "
 msgstr " ERRORE: "
 
-#: src/user.c:407
+#: src/user.c:396
 msgid " True:  "
 msgstr " Vero: "
 
-#: src/user.c:409
+#: src/user.c:398
 msgid " False: "
 msgstr " Falso: "
 
-#: src/user.c:621
+#: src/user.c:602
 msgid " Warning -- ignoring file "
 msgstr " Attenzione -- ignoro il file "
 
-#: src/user.c:622
+#: src/user.c:603
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
@@ -5663,17 +5672,18 @@ msgstr ""
 " Il file `%s' non appartiene a root o è scrivibile a tutti\n"
 " Usandolo potrebbe compromettere la sicurezza di sistema."
 
-#: src/user.c:640
+#: src/user.c:622
 msgid " I can't run programs while logged on a non local directory "
 msgstr " Impossibile eseguire programmi su una directory non locale"
 
-#: src/user.c:724
+#. FIXME: this message is not quite right
+#: src/user.c:720
 #, c-format
 msgid " Empty file %s "
 msgstr "Copia files"
 
 #. Create listbox
-#: src/user.c:733
+#: src/user.c:730
 msgid " User menu "
 msgstr " Menu utente "
 
@@ -5684,12 +5694,12 @@ msgstr "name_trunc: troppo grande"
 #. strftime() format string for recent dates
 #: src/util.c:599 src/util.c:624
 msgid "%b %e %H:%M"
-msgstr ""
+msgstr "%b %e %H:%M"
 
 #. strftime() format string for old dates
 #: src/util.c:600 src/util.c:622
 msgid "%b %e  %Y"
-msgstr ""
+msgstr "%b %e  %Y"
 
 #: src/utilunix.c:390
 msgid " Pipe failed "
@@ -5830,7 +5840,7 @@ msgstr "Hex"
 
 #: src/view.c:2072
 msgid "Goto"
-msgstr ""
+msgstr "Vai a"
 
 #: src/view.c:2072
 msgid "Line"
@@ -6239,11 +6249,11 @@ msgstr "ftpfs: connessione al server fallita: %s"
 #: vfs/ftpfs.c:793
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "Pausa per ritentare...%d (Control-C per annullare)"
+msgstr "Pausa per riprovare...%d (Control-C per annullare)"
 
 #: vfs/ftpfs.c:987
 msgid "ftpfs: could not setup passive mode for source routing"
-msgstr "ftpfs: impossibile impostare il modo passivo per l'instradamento"
+msgstr "ftpfs: non è possibile impostare il modo passivo per l'instradamento"
 
 #: vfs/ftpfs.c:997
 msgid "ftpfs: could not setup passive mode"
@@ -6251,7 +6261,7 @@ msgstr "ftpfs: non è possibile impostare la modalità passiva"
 
 #: vfs/ftpfs.c:1070
 msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: interruzione trasferimento."
+msgstr "ftpfs: interruzione del trasferimento."
 
 #: vfs/ftpfs.c:1072
 #, c-format
@@ -6309,7 +6319,7 @@ msgstr "ftpfs: fallito; non so dove rileggere"
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs: memorizzazione file %d (%d)"
 
-#: vfs/ftpfs.c:2036 vfs/ftpfs.c:2051
+#: vfs/ftpfs.c:2037 vfs/ftpfs.c:2052
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -6323,7 +6333,7 @@ msgstr " MCFS "
 
 #: vfs/mcfs.c:154
 msgid " The server does not support this version "
-msgstr " Il server non supporta questa versione "
+msgstr " Il server non supporta questa versione"
 
 #: vfs/mcfs.c:171
 msgid ""
@@ -6440,4 +6450,3 @@ msgstr "%s: %s: %s %3d%% (%ld bytes trasferiti)"
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld bytes trasferiti"
-# 
