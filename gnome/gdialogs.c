@@ -676,23 +676,20 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char 
         }
 
         gtk_widget_show_all (GNOME_DIALOG (fmd_win)->vbox);
-        gtk_window_set_modal (GTK_WINDOW (fmd_win), FALSE);
         gnome_dialog_set_close (GNOME_DIALOG (fmd_win), TRUE);
         gnome_dialog_close_hides (GNOME_DIALOG (fmd_win), TRUE);
 
         /* Off to the races!!! */
         run = gnome_dialog_run (GNOME_DIALOG (fmd_win));
 
-        if (run == 1) {
+        if (run == 1 || run == -1) {
                 gtk_widget_destroy (fmd_win);
                 return NULL;
         }
 
-        if (run == -1)
-                return NULL;
-
         dest_dir = gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (fentry), FALSE);
         gtk_widget_destroy (fmd_win);
+
         easy_patterns = 1;
         if (!dest_dir || !*dest_dir)
                 return NULL;
@@ -957,8 +954,9 @@ file_op_context_create_ui (FileOpContext *ctx, FileOperation op, int with_eta)
         gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (ui->op_win)->vbox),
                             GTK_WIDGET (ui->byte_prog), FALSE, FALSE, 0);
 
-        /*done with things */
+	/* done with things */
         gtk_widget_show_all (GNOME_DIALOG (ui->op_win)->vbox);
+        gtk_window_set_modal (GTK_WINDOW (ui->op_win), TRUE);
         gtk_widget_show_now (ui->op_win);
 }
 
