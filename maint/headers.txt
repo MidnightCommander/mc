@@ -1,0 +1,42 @@
+This file documents some conventions for sorting system header files in
+the #include section.
+
+1. #include <config.h> unconditionally
+
+2. if there are any headers containing "alloca" in the name, include
+   them here. Some systems need them as the first header.
+
+3. #include the Standard C Library headers, sorted alphabetically
+
+   (assert, ctype, errno, float, limits, locale, math, setjmp, signal,
+   stdarg, stddef, stdio, stdlib, string, time)
+
+4. #include the POSIX headers, in the following order
+
+   <sys/types.h>		Needed by many other headers.
+   <sys/*.h>
+   <*.h>
+
+   For every POSIX function you use, make sure that the order of the
+   headers is the same as in the according manpage.
+   
+5. #include other external headers
+
+6. #include "../src/global.h"
+
+7. #include Midnight Commander headers
+
+   Currently, not all headers can be ordered arbitrarily, so try it out.
+
+
+==== Headers that may be included unconditionally ====
+
+<sys/types.h>
+<sys/stat.h>
+<unistd.h>
+<fcntl.h>
+
+==== Headers that need autoconf guards ====
+
+<termios.h>
+<sys/ioctl.h>
