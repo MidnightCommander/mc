@@ -280,7 +280,7 @@ do_complete_refresh (Dlg_head *dlg)
 void
 do_refresh (void)
 {
-    if (we_are_background || !current_dlg)
+    if (!current_dlg)
 	return;
 
     if (fast_refresh)

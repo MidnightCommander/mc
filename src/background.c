@@ -36,16 +36,12 @@
 #include <stdio.h>
 
 #include "global.h"
-#include "tty.h"
-#include "dialog.h"
-#include "widget.h"
+#include "background.h"
+#include "tty.h"	/* doupdate() */
+#include "dialog.h"	/* do_refresh() */
 #include "wtools.h"
-
-#include "fileopctx.h"
-#include "key.h"	/* For add_select_channel(), delete_select_channel() */
-#include "eregex.h"
-#include "file.h"
-#include "filegui.h"
+#include "fileopctx.h"	/* FileOpContext */
+#include "key.h"	/* add_select_channel(), delete_select_channel() */
 
 /* If true, this is a background process */
 int we_are_background = 0;
@@ -123,6 +119,7 @@ do_background (struct FileOpContext *ctx, char *info)
 	close (comm[0]);
 	parent_fd = comm[1];
 	we_are_background = 1;
+	current_dlg = NULL;
 
 	/* Make stdin/stdout/stderr point somewhere */
 	close (0);

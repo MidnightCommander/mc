@@ -1,5 +1,15 @@
 2003-10-25  Pavel Roskin  <proski@gnu.org>
 
+	* background.c: Clean up includes.
+	(do_background): Set current_dlg to NULL for the child process.
+	* dialog.h (do_complete_refresh): Don't use we_are_background.
+	* file.h: Remove dependency on background.h.
+	* background.h: Define we_are_background.  Move mc_message() ...
+	* wtools.h: ... here.
+	* key.h: Don't define we_are_background.
+	* slint.c (mc_refresh): Use current_dialog instead of
+	we_are_background to fix compilation without WITH_BACKGROUND.
+
 	* background.c (do_background): Use pipe() instead of less
 	portable socketpair().  Close comm[0] in the child.
 

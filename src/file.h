@@ -2,7 +2,6 @@
 #define __FILE_H
 
 #include "fileopctx.h"
-#include "background.h"
 
 extern int safe_delete;
 

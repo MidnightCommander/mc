@@ -75,7 +75,6 @@ typedef const struct {
 } key_code_name_t;
 
 extern key_code_name_t key_name_conv_tab [];
-extern int we_are_background;
 
 /* Set keypad mode (xterm and linux console only) */
 void numeric_keypad_mode (void);

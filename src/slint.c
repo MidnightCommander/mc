@@ -35,6 +35,7 @@
 #include "main.h"		/* extern: force_colors */
 #include "win.h"		/* do_exit_ca_mode */
 #include "setup.h"
+#include "dialog.h"		/* current_dlg */
 
 #ifdef HAVE_SLANG
 
@@ -523,6 +524,6 @@ int got_interrupt (void)
 void
 mc_refresh (void)
 {
-    if (!we_are_background)
+    if (current_dlg)
 	refresh ();
 }

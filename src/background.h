@@ -1,7 +1,9 @@
 #ifndef __BACKGROUND_H
 #define __BACKGROUND_H
 
-/* Used for parent/child communication.  These are numbers that
+#ifdef WITH_BACKGROUND
+/*
+ * Used for parent/child communication.  These are numbers that
  * could not possible be a routine address.
  */
 enum {
@@ -19,10 +21,10 @@ enum TaskState {
 };
 
 typedef struct TaskList {
-    int   fd;
+    int fd;
     pid_t pid;
-    int   state;
-    char  *info;
+    int state;
+    char *info;
     struct TaskList *next;
 } TaskList;
 
@@ -36,9 +38,8 @@ int parent_call (void *routine, struct FileOpContext *ctx, int argc, ...);
 char *parent_call_string (void *routine, int argc, ...);
 
 void unregister_task_running (pid_t, int fd);
+extern int we_are_background;
 
-/* Show message box, background safe */
-void mc_message (int flags, char *title, const char *text, ...)
-    __attribute__ ((format (printf, 3, 4)));
+#endif				/* !WITH_BACKGROUND */
 
-#endif
+#endif				/* __BACKGROUND_H */
