@@ -1,3 +1,7 @@
+1999-02-05  Christopher Blizzard  <blizzard@redhat.com>
+
+	* es.po: Remove " from middle of line.
+
 Sun Jan 31 21:09:38 1999  Alexander Savelyev <fano@vcom.kiev.ua>
 
 	* Makefile.in.in: use DESTDIR (makes it possible to move
