@@ -6119,7 +6119,7 @@ msgstr "fish: Posílá se heslo..."
 
 #: vfs/fish.c:244
 msgid "fish: Sending initial line..."
-msgstr ""
+msgstr "fish: Iniciální øádka odeslána..."
 
 #: vfs/fish.c:248
 msgid "fish: Handshaking version..."
