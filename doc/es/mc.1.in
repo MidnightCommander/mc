@@ -3005,90 +3005,94 @@ ficheros en un panel en árbol, será recargado automáticamente el otro panel
 con los contenidos del directorio seleccionado.
 .PP
 .\"NODE "Terminal databases"
-.SH "Bases de Datos del Terminal"
-Midnight Commander ofrece un modo de solucionar nuestra base de datos del terminal
-del sistemas sin necesidad de los privilegios del superusuario. Midnight Commander
-busca en el fichero de inicialización el sistema (el fichero mc.lib localizado en
-directorio de librería de Midnight Commander) o en el fichero ~/.mc/ini
-en la sección "terminal:nuestro-nombre-de-terminal" y si no en la sección
-"terminal:general", cada línea de la sección contiene un símbolo de la tecla que
-queremos definir, seguido de un signo igual y la definición
-para la tecla. Podemos usar el formato especial \\E para representar el carácter
-escape y ^x para representar el carácter control-x.
+.SH "Ajustes del Terminal"
+Midnight Commander permite hacer ajustes a la base de datos de terminales
+del sistema sin necesidad de privilegios de superusuario. El programa
+busca definciones de teclas en el fichero de inicialización del sistema
+.B @prefix@/lib/mc/mc.lib
+o en el del usuario
+.B ~/.mc/ini,
+en la sección "terminal:nuestro-terminal" y si no en "terminal:general".
+Cada línea comienza con el identificador de la tecla, seguido de un signo
+de igual y la definición de la tecla. Para representar el carácter de escape
+se utiliza \\e y ^x para el carácter control-x.
 .PP
-Los símbolos posibles de tecla son:
-.PP
-.nf
-f0 a f20      teclas de función f0-f20
-bs	      retroespacio (BS o <--)
-home          tecla Inicio
-end           tecla Fin
-up            tecla cursor arriba
-down          tecla cursor abajo
-left          tecla cursor izquierda
-right         tecla cursor derecha
-pgdn          tecla Avance de página (Av Pág)
-pgup          tecla Retroceso de página (Re Pág)
-insert        tecla Insertar carácter (Insert)
-delete        tecla Suprimir carácter (Supr)
-complete      tecla de terminación de nombres
-.fi
-.PP
-Por ejemplo, para definir la tecla insert como Escape + [ + O + p, seleccionamos
-esto en el fichero ini:
+Los identificadores de tecla son:
 .PP
 .nf
-insert=\\E[Op
+f0 a f20      teclas de función f0 a f20
+bs            tecla de borrado
+home          tecla de inicio
+end           tecla de fin
+up            tecla de cursor arriba
+down          tecla de cursor abajo
+left          tecla de cursor izquierda
+right         tecla de cursor derecha
+pgdn          tecla de avance de página
+pgup          tecla de retroceso de página
+insert        tecla de insertar
+delete        tecla de suprimir
+complete      tecla para completar
 .fi
 .PP
-El símbolo de tecla
+Ejemplo: para indicar que la secuencia Escape + [ + O + p corresponde
+a la tecla de insertar, hay que colocar en el fichero
+.B ~/.mc/ini:
+.PP
+.nf
+insert=\\e[Op
+.fi
+.PP
+El identificador
 .I complete
-representa la secuencia de escape usada para invocar el
-proceso de terminación de nombres, lo que se hace con M-tab, pero podemos definir
-otras teclas para que realizen el mismo trabajo (en esos teclados con toneladas de
-preciosas e inútiles teclas por todas partes).
+representa la secuencia usada para invocar el mecanismo de completar
+nombres. Esto se hace habitualmente con M-tabulador, pero podemos
+configurar otras teclas para esta función, especialmente en teclados
+que incorporan tantas teclas especiales (bonitas pero inútiles o
+infrautilizadas).
 .SH ""
 .\"NODE "FILES"
-.SH "FICHEROS"
-El programa busca toda su información con relación al contenido de la variable
-de entorno MC_LIBDIR. Si esta variable no está definida se recurre al directorio
+.SH "FICHEROS AUXILIARES"
+El programa localiza toda su información en el directorio designado
+por la variable de entorno MC_LIBDIR, o en su defecto, en el directorio
 @prefix@/lib/mc.
 .PP
 @prefix@/lib/mc.hlp
 .IP
-Fichero de ayuda para el programa.
+Fichero de ayuda.
 .PP
 @prefix@/lib/mc/mc.ext
 .IP
-fichero genérico de extensiones de sistema.
+Fichero de extensiones por defecto del sistema.
 .PP
-~/.mc/ext
+~/.mc/bindings
 .IP
-Fichero de extensiones del usuario, configuración del visor y el editor. Sobreescribe
-el contenido del fichero genérico del sistema si está presente.
+Fichero de usuario de extensiones y configuración de visor y editor. Si
+está presente prevalece sobre el contenido de los ficheros del sistema.
 .PP
 @prefix@/lib/mc/mc.ini
 .IP
-Fichero de configuración genérico de sistema para Midnight Commander, sólo si el usuario estropea su propio fichero
-~/.mc/ini.
+Fichero de configuración del sistema para Midnight Commander, sólo si
+el usuario no dispone de su propio ~/.mc/ini.
 .PP
 @prefix@/lib/mc/mc.lib
 .IP
-Opciones globales de
-Midnight Commander. La configuración de este fichero es global para cualquier
-Midnight Commander, es útil definir las opciones globales de la
-.\"LINK2
-configuración del terminal.
+Opciones globales de Midnight Commander. Se aplican siempre a todos los
+usuarios, tengan ~/.mc/ini o no. Actualmente sólo se emplea para los
+.\"LINK2"
+ajustes de terminal.
 .\"Terminal databases"
 .PP
 ~/.mc/ini
 .IP
-Configuración personal del usuario. Si este fichro está presente entonces se
-cargará la configuración desde aquí en lugar de desde el fichero genérico de configuración para todo el sistema.
+Configuración personal del usuario. Si este fichero está presente entonces
+se cargará la configuración desde aquí en lugar de desde el fichero de
+configuración del sistema.
 .PP
 @prefix@/lib/mc/mc.hint
 .IP
-Este fichero contiene las pistas (caramelos) mostradas por el programa.
+Este fichero contiene los mensajes cortos de ayuda mostrados por el
+programa.
 .PP
 @prefix@/lib/mc/mc.menu
 .IP
@@ -3096,18 +3100,12 @@ Este fichero contiene el menú de aplicaciones por defecto para el sistema.
 .PP
 ~/.mc/menu
 .IP
-Menú personal de aplicaciones del usuario. si este fichero se halla presente
-será utilizado en lugar del fichero genérico de aplicaciones.
+Menú de aplicaciones personal del usuario. Si está presente será utilizado
+en lugar del menú por defecto del sistema.
 .PP
-~/.mc/tree
+~/.mc/Tree
 .IP
-La lista de directorios para el árbol de directorios y las características de la vista de árbol.
-Cada línea es una entrada. Las líneas que comienzan con una barra son
-nombres de directorio completos. Las líneas que comienzan con un número
-caracteres igual al directorio anterior. Si queremos crear
-este fichero dando el comando "find / -type d -print | sort >
-~/.mc.tree". Normalmente no tiene sentido hacerlo porque
-Midnight Commander automáticamente actualiza por nosotros este fichero.
+La lista de directorios para el árbol de directorios y la vista en árbol.
 .PP
 \&./.mc.menu
 .IP
