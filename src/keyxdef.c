@@ -282,7 +282,7 @@
 #ifdef __USE_QNX_TI
     
 /* OS/implementation specific key-define struct */
-typedef struct qnx_key_define_s {
+typedef const struct qnx_key_define_s {
     int mc_code;
     int str_idx;
 } qnx_key_define_t;

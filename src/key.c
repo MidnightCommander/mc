@@ -381,8 +381,8 @@ static key_define_t qansi_key_defines[] =
     {KEY_M_ALT  | 'x',         ESC_STR "Nx",   MCKEY_NOACTION}, /* Alt-x     */
     {KEY_M_ALT  | 'y',         ESC_STR "Ny",   MCKEY_NOACTION}, /* Alt-y     */
     {KEY_M_ALT  | 'z',         ESC_STR "Nz",   MCKEY_NOACTION}, /* Alt-z     */
-    {KEY_KP_ADD,  	       ESC_STR "[S",   MCKEY_NOACTION}, /* Gr-Plus   */
-    {KEY_KP_SUBTRACT,          ESC_STR "[T",   MCKEY_NOACTION}, /* Gr-Minus  */
+    {KEY_KP_SUBTRACT,  	       ESC_STR "[S",   MCKEY_NOACTION}, /* Gr-Minus  */
+    {KEY_KP_ADD,               ESC_STR "[T",   MCKEY_NOACTION}, /* Gr-Plus   */
     {0, 0, MCKEY_NOACTION},
 };
 
@@ -1273,10 +1273,7 @@ get_modifier (void)
     int mod_status, shift_ext_status;
     static int in_photon = 0;
     static int ph_ig = 0;
-    char phlib_path[PATH_MAX];
     PhCursorInfo_t cursor_info;
-    static void *ph_handle;
-    char *ph_env;
 #endif				/* __QNXNTO__ */
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
@@ -1302,12 +1299,9 @@ get_modifier (void)
 	/* First time here, let's load Photon library and attach
 	   to Photon */
 	in_photon = -1;
-	ph_env = getenv ("PHOTON2_PATH");
-	if (ph_env != NULL) {
-	    g_snprintf (phlib_path, sizeof (phlib_path),
-			"%s/lib/libph.so.1", ph_env);
+	if (getenv ("PHOTON2_PATH") != NULL) {
 	    /* QNX 6.x has no support for RTLD_LAZY */
-	    ph_handle = dlopen (phlib_path, RTLD_NOW);
+	    void *ph_handle = dlopen ("/usr/lib/libph.so", RTLD_NOW);
 	    if (ph_handle != NULL) {
 		ph_attach = (ph_dv_f) dlsym (ph_handle, "PhAttach");
 		ph_input_group =
@@ -1365,12 +1359,9 @@ get_modifier (void)
 	    result |= KEY_M_ALT;
 	if (modifiers & CONTROL_PRESSED)
 	    result |= KEY_M_CTRL;
-
-	return result;
     }
-#else
-    return result;
 #endif				/* !__linux__ */
+    return result;
 }
 
 static void k_dispose (key_def *k)
