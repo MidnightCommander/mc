@@ -1,3 +1,8 @@
+2001-12-21  Pavel Roskin  <proski@gnu.org>
+
+	* myslang.h [!HAVE_SYSTEM_SLANG]: Include slang-mc.h directly
+	to avoid relying on symlinks.
+
 2001-12-18  Pavel Roskin  <proski@gnu.org>
 
 	* utilunix.c (init_groups): Don't return prematurely if the

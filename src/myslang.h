@@ -1,11 +1,15 @@
 #ifndef __MYSLANG_H
 #define __MYSLANG_H
 
+#ifdef HAVE_SYSTEM_SLANG
 #ifdef HAVE_SLANG_SLANG_H
 #    include <slang/slang.h>
 #else
 #    include "slang.h"
 #endif
+#else /* !HAVE_SYSTEM_SLANG */
+#    include "slang-mc.h"
+#endif /* !HAVE_SYSTEM_SLANG */
 
 #include "keys.h"
 
