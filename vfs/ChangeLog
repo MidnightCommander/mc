@@ -2,6 +2,7 @@
 
 	* vfs.c: Changed types for mc_chmod, mc_chown, mc_mknod to mode_t,
 	uid_t, gid_t, and dev_t where appropriate.
+	* vfs.h: Likewise.
 
 	Patch extended by Roland Illig.
 
