@@ -1,3 +1,7 @@
+2004-08-19  Pavel Shirshov  <pavelsh@mail.ru>
+
+	* screen.c (paint_frame): Fix possible buffer overflow.
+
 2004-08-18  Pavel Shirshov  <pavelsh@mail.ru>
 
 	* background.c (do_background): Use O_RDWR when opening 

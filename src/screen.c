@@ -1060,7 +1060,7 @@ paint_frame (WPanel *panel)
     int  spaces, extra;
     int  side, width;
 
-    char *txt, buffer[30]; /*Hope that this is enough ;-) */
+    char *txt;
     if (!panel->split)
 	adjust_top_file (panel);
 
@@ -1086,18 +1086,14 @@ paint_frame (WPanel *panel)
                 txt = format->title;
 
 		header_len = strlen (txt);
-		if (header_len > format->field_len){
-		    strcpy (buffer, txt);
-		    txt = buffer;
-		    txt [format->field_len] = 0;
-		    header_len = strlen (txt);
-		}
+		if (header_len > format->field_len)
+		    header_len = format->field_len;
 
                 attrset (MARKED_COLOR);
                 spaces = (format->field_len - header_len) / 2;
                 extra  = (format->field_len - header_len) % 2;
-		printw ("%*s%-s%*s", spaces, "",
-			 txt, spaces+extra, "");
+		printw ("%*s%.*s%*s", spaces, "",
+			 header_len, txt, spaces+extra, "");
 		width -= 2 * spaces + extra + header_len;
 	    } else {
 		attrset (NORMAL_COLOR);
