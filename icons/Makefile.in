@@ -34,11 +34,12 @@ all:
 install: @insticons@
 
 install_icons:
-	-for I in $(ALLICONS); \
+	for I in $(ALLICONS); \
 	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(icondir)/$$I; done
 
 uninstall:
-	-cd $(DESTDIR)$(icondir); $(RMF) $(ALLICONS)
+	for I in $(ALLICONS); \
+	do $(RMF) $(DESTDIR)$(icondir)/$$I; done
 	-rmdir $(DESTDIR)$(icondir)
 
 check:
