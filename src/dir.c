@@ -686,28 +686,3 @@ do_reload_dir (dir_list *list, sortfn *sort, int count, int rev,
     return next_free;
 }
 
-char *
-sort_type_to_name (sortfn *sort_fn)
-{
-    int i;
-
-    for (i = 0; i < SORT_TYPES; i++)
-	if ((sortfn *) (sort_orders [i].sort_fn) == sort_fn)
-	    return _(sort_orders [i].sort_name);
-
-    return _("Unknown");
-}
-
-sortfn *
-sort_name_to_type (char *sname)
-{
-    int i;
-
-    for (i = 0; i < SORT_TYPES; i++)
-	if ( g_strcasecmp (sort_orders [i].sort_name, sname) == 0)
-	    return (sortfn *) sort_orders [i].sort_fn;
-
-    /* default case */
-    return (sortfn *) sort_name;
-}
-

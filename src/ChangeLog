@@ -1,5 +1,10 @@
 2001-11-14  Pavel Roskin  <proski@gnu.org>
 
+	* dir.c (sort_type_to_name): Remove, it's unused in the text
+	edition.
+	(sort_name_to_type): Likewise.
+	* dir.h: Adjust to match.
+
 	* mouse.c: Add default cases to fix warnings with gcc-2.96.
 
 2001-11-12  Pavel Roskin  <proski@gnu.org>

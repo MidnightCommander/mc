@@ -68,7 +68,7 @@ int sort_group (const file_entry *a, const file_entry *b);
 /* This is the number of sort types not available in that dialog box */
 #define SORT_TYPES_EXTRA 6
 
-/* The total, used by Tk version */
+/* The total nnumber of sort types */
 #define SORT_TYPES_TOTAL (SORT_TYPES + SORT_TYPES_EXTRA)
 
 typedef struct {
@@ -85,8 +85,5 @@ extern int show_backups;
 extern int show_dot_files;
 extern int show_backups;
 extern int mix_all_files;
-
-char   *sort_type_to_name (sortfn *);
-sortfn *sort_name_to_type (char *type);
 
 #endif	/* __DIR_H */
