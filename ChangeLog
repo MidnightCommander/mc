@@ -1,3 +1,7 @@
+2000-07-20  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* gtkedit/ChangeLog: There was no ChangeLog there, so I added one.
+
 2000-06-20  Jacob Berkman  <jacob@helixcode.com>
 
 	* configure.in: check for gnome-libs with window icon support
