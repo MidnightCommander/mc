@@ -1,3 +1,11 @@
+2003-09-22  Pavel Roskin  <proski@gnu.org>
+
+	* menu.c (menu_scan_hotkey): Use g_strlcpy() to avoid undefined
+	behavior when using strcpy() on overlapping strings.
+	* profile.c (GetSetProfile): Likewise.
+	* widget.c (button_scan_hotkey): Likewise.
+	Found by Valgrind.
+
 2003-09-13  Pavel Roskin  <proski@gnu.org>
 
 	* dlg.c (dlg_replace_widget): Clean rewrite.  It was broken

@@ -201,12 +201,12 @@ button_len (const char *text, unsigned int flags)
  * the button text is g_malloc()ed, we can safely change and shorten it.
  */
 static void
-button_scan_hotkey(WButton* b)
+button_scan_hotkey (WButton *b)
 {
-    char* cp = strchr (b->text, '&');
+    char *cp = strchr (b->text, '&');
 
-    if (cp != NULL && cp[1] != '\0'){
-	strcpy (cp, cp+1);
+    if (cp != NULL && cp[1] != '\0') {
+	g_strlcpy (cp, cp + 1, strlen (cp));
 	b->hotkey = tolower (*cp);
 	b->hotpos = cp - b->text;
     }

@@ -329,7 +329,7 @@ static short GetSetProfile (int set, const char * AppName, char * KeyName,
     s = GetSetProfileChar (set, AppName, KeyName, Default, FileName);
     if (!set){
 	ReturnedString [Size-1] = 0;
-	strncpy (ReturnedString, s, Size-1);
+	g_strlcpy (ReturnedString, s, Size-1);
    }
     return 1;
 }

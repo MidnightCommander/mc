@@ -34,15 +34,14 @@
 int menubar_visible = 1;	/* This is the new default */
 
 static void
-menu_scan_hotkey(Menu *menu)
+menu_scan_hotkey (Menu *menu)
 {
-    char* cp = strchr (menu->name, '&');
+    char *cp = strchr (menu->name, '&');
 
-    if (cp != NULL && cp[1] != '\0'){
-	strcpy (cp, cp+1);
-	menu->hotkey = tolower(*cp);
-    }
-    else
+    if (cp != NULL && cp[1] != '\0') {
+	g_strlcpy (cp, cp + 1, strlen (cp));
+	menu->hotkey = tolower (*cp);
+    } else
 	menu->hotkey = 0;
 }
 
