@@ -6131,7 +6131,7 @@ msgstr " Ustrezni vpisi za %s niso bili najdeni "
 #. Create listbox
 #: src/user.c:776
 msgid " User menu "
-msgstr " Uporabnikov menu "
+msgstr " Uporabni¹ki menu "
 
 #: src/util.c:232
 msgid "name_trunc: too big"
