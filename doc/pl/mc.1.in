@@ -321,10 +321,12 @@ Prze³±cza tryb wy¶wietlania do nastêpnego mo¿liwego. U¿ywaj±c tej opcji
 ³atwo jest przej¶æ szybko z d³ugiego do krótkiego trybu wy¶wietlania
 jak równie¿ do tego zdefiniowanego przez u¿ytkownika.
 .PP
-.BR C-\\\\ " (control-backslash)."
+.B C-\\\\ 
+(control-backslash).
 Pokazuje hotlistê katalogów i zmienia katalog do wybranego przez u¿ytkownika.
 .PP
-.BR + " (plus)."
+.B + 
+(plus).
 U¿ywane do zaznaczania grupy plików. Midnight Commander zapyta o
 wyra¿enie opisuj±c± grupê. Je¶li opcja
 .I Shell Patterns
@@ -338,7 +340,8 @@ jest wy³±czona, sposób zaznaczania plików jest zgodny z ustawieniami
 Je¶li wyra¿enie zaczyna siê od uko¶nika (/), wtedy zaznaczone zostan± katalogi
 zamiast plików.
 .PP
-.BR \\\\ " (backslash)."
+.B \\\\ 
+(backslash).
 U¿ywaj znaków "\\" do odznaczania grupy plików. Jest to przeciwieñstwo klawisza
 plus.
 .PP
@@ -930,16 +933,20 @@ w prawo w celu dostania siê do katalogu podrzêdnego. Widoczne jest tylko
 najbardziej aktualne drzewo katalogów. Drzewo zmienia siê wiêc dynamicznie
 podczas twojego przemieszczania.
 .PP
-.BR F5 " (Copy)."
+.B F5 
+(Copy).
 Kopiuje katalog.
 .PP
-.BR F6 " (RenMov)."
+.B F6 
+(RenMov).
 Przenosi katalog.
 .PP
-.BR F7 " (Mkdir)."
+.B F7 
+(Mkdir).
 Tworzy nowy katalog poni¿ej aktualnego.
 .PP
-.BR F8 " (Delete)."
+.B F8 
+(Delete).
 Kasuje katalog z systemu plików.
 .PP
 .BR C-s ", " M-s .
@@ -958,7 +965,8 @@ w linii mini-statusu.
 Nastêpuj±ce klawisze s± dostêpne tylko w drzewie katalogów. Nie dzia³aj± one
 w pogl±dzie katalogów.
 .PP
-.BR F1 " (Help)."
+.B F1 
+(Help).
 Wywo³uje podgl±d pomocy i pokazuje tê sekcjê.
 .PP
 .BR Esc ", " F10 .
