@@ -1048,6 +1048,12 @@ void help_cmd (void)
    interactive_display (NULL, "[main]");
 }
 
+void
+user_file_menu_cmd (void)
+{
+    user_menu_cmd (NULL);
+}
+
 /* partly taken from dcigettext.c, returns "" for default locale */
 /* value should be freed by calling function g_free() */
 char *guess_message_value (void)

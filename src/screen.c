@@ -2157,10 +2157,6 @@ panel_key (WPanel *panel, int key)
     return MSG_NOT_HANDLED;
 }
 
-void user_file_menu_cmd (void) {
-    user_menu_cmd (NULL);
-}
-
 static cb_ret_t
 panel_callback (WPanel *panel, widget_msg_t msg, int parm)
 {

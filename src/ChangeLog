@@ -1,5 +1,9 @@
 2003-10-24  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c (user_file_menu_cmd): Move ...
+	* cmd.c: ... here.
+	* cmd.h: Remove unused declarations.
+
 	* chmod.c (stat_file): Eliminate.  Use mc_stat().
 	* chmod.h: Remove unneded code.
 	* chown.h: Likewise.
