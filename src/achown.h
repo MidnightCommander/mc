@@ -1,4 +1,6 @@
-#ifndef __ACHOWN_H
-#define __ACHOWN_H
+#ifndef MC_ACHOWN_H
+#define MC_ACHOWN_H
+
 void chown_advanced_cmd (void);
+
 #endif

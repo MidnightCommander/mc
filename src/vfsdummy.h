@@ -1,7 +1,7 @@
 /* Replacement for vfs.h if VFS support is disabled */
 
-#ifndef __VFSDUMMY_H
-#define __VFSDYMMY_H
+#ifndef MC_VFSDUMMY_H
+#define MC_VFSDYMMY_H
 
 /* Flags of VFS classes */
 #define VFSF_LOCAL 1		/* Class is local (not virtual) filesystem */
@@ -76,4 +76,4 @@ vfs_canon (const char *path)
     return p;
 }
 
-#endif				/* !__VFSDUMMY_H */
+#endif

@@ -15,8 +15,8 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-#ifndef __MC_GLIBCOMPAT_H
-#define __MC_GLIBCOMPAT_H
+#ifndef MC_GLIBCOMPAT_H
+#define MC_GLIBCOMPAT_H
 
 #if GLIB_MAJOR_VERSION < 2
 
@@ -34,4 +34,4 @@ g_slist_delete_link (GSList *list, GSList *link)
 
 #endif				/* GLIB_MAJOR_VERSION < 2 */
 
-#endif				/* !__MC_GLIBCOMPAT_H */
+#endif

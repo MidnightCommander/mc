@@ -1,5 +1,5 @@
-#ifndef __FILE_H
-#define __FILE_H
+#ifndef MC_FILE_H
+#define MC_FILE_H
 
 #include "fileopctx.h"
 
@@ -32,4 +32,4 @@ int file_error (const char *format, const char *file);
 void compute_dir_size (const char *dirname, off_t *ret_marked,
 		       double *ret_total);
 
-#endif				/* !__FILE_H */
+#endif

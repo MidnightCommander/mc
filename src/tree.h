@@ -1,10 +1,8 @@
-#ifndef __TREE_H
-#define __TREE_H
+#ifndef MC_TREE_H
+#define MC_TREE_H
 
 struct WTree;
 typedef struct WTree WTree;
-
-#define tlines(t) (t->is_panel ? t->widget.lines-2 - (show_mini_info ? 2 : 0) : t->widget.lines)
 
 int tree_init (const char *current_dir, int lines);
 void tree_chdir (WTree *tree, const char *dir);

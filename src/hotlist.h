@@ -1,5 +1,5 @@
-#ifndef __HOTLIST_H
-#define __HOTLIST_H
+#ifndef MC_HOTLIST_H
+#define MC_HOTLIST_H
 
 #define LIST_VFSLIST	0x01
 #define LIST_HOTLIST	0x02

@@ -15,7 +15,7 @@
 #define GPM_B_LEFT      4
 #define GPM_B_MIDDLE    2
 #define GPM_B_RIGHT     1
- 
+
 /* Xterm mouse support supports only GPM_DOWN and GPM_UP */
 /* If you use others make sure your code also works without them */
 enum Gpm_Etype {
@@ -29,7 +29,7 @@ enum Gpm_Etype {
   GPM_SINGLE=16,            /* at most one in three is set */
   GPM_DOUBLE=32,
   GPM_TRIPLE=64,
-      
+
   GPM_MFLAG=128,            /* motion during click? */
   GPM_HARD=256             /* if set in the defaultMask, force an already
                               used event to pass over to another handler */
@@ -92,4 +92,4 @@ void show_mouse_pointer (int x, int y);
 
 #endif
 
-#endif /* MC_MOUSE_H */
+#endif

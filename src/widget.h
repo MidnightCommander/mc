@@ -1,5 +1,5 @@
-#ifndef __WIDGET_H
-#define __WIDGET_H
+#ifndef MC_WIDGET_H
+#define MC_WIDGET_H
 
 #include "dialog.h"		/* Widget */
 
@@ -41,7 +41,7 @@ typedef struct WCheck {
     Widget widget;
     unsigned int state;		/* check button state */
     char *text;			/* text of check button */
-    int hotkey;                 /* hot KEY */                    
+    int hotkey;                 /* hot KEY */
     int hotpos;			/* offset hot KEY char in text */
 } WCheck;
 
@@ -206,4 +206,4 @@ void define_label_data (Dlg_head *h, int idx, const char *text,
 void redraw_labels (Dlg_head *h);
 void buttonbar_hint (WButtonBar *bb, const char *s);
 
-#endif	/* __WIDGET_H */
+#endif

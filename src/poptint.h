@@ -1,9 +1,9 @@
 /* (C) 1998 Red Hat Software, Inc. -- Licensing details are in the COPYING
-   file accompanying popt source distributions, available from 
+   file accompanying popt source distributions, available from
    ftp://ftp.redhat.com/pub/code/popt */
 
-#ifndef H_POPTINT
-#define H_POPTINT
+#ifndef MC_POPTINT_H
+#define MC_POPTINT_H
 
 struct optionStackEntry {
     int argc;
@@ -43,7 +43,6 @@ struct poptContext_s {
     char * otherHelp;
 };
 
-#include "global.h"
 #define D_(dom, str) _(str)
 #define POPT_(foo) _(foo)
 

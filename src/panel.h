@@ -1,5 +1,5 @@
-#ifndef __PANEL_H
-#define __PANEL_H
+#ifndef MC_PANEL_H
+#define MC_PANEL_H
 
 #include "dir.h"		/* dir_list */
 #include "dialog.h"		/* Widget */
@@ -57,8 +57,8 @@ typedef struct WPanel {
 
     int      dirty;		/* Should we redisplay the panel? */
 
-    int	     user_mini_status;  	/* Is user_status_format used */
-    char     *user_format;      	/* User format */
+    int	     user_mini_status;	/* Is user_status_format used */
+    char     *user_format;      /* User format */
     char     *user_status_format[LIST_TYPES];/* User format for status line */
 
     struct   format_e *format;		/* Display format */
@@ -112,4 +112,4 @@ void directory_history_next (WPanel *panel);
 void directory_history_prev (WPanel *panel);
 void directory_history_list (WPanel *panel);
 
-#endif	/* __PANEL_H */
+#endif

@@ -1,5 +1,8 @@
-#ifndef __LAYOUT_H
-#define __LAYOUT_H
+#ifndef MC_LAYOUT_H
+#define MC_LAYOUT_H
+
+#include "panel.h"
+#include "widget.h"
 
 void layout_cmd (void);
 void init_curses (void);
@@ -18,10 +21,8 @@ int get_current_index (void);
 int get_other_index (void);
 const char *get_nth_panel_name (int num);
 
-struct Widget;
 struct Widget *get_panel_widget (int index);
 
-struct WPanel;
 struct WPanel *get_other_panel (void);
 
 void set_hintbar (const char *str);
@@ -42,4 +43,4 @@ extern int xterm_title;
 extern int horizontal_split;
 extern int nice_rotating_dash;
 
-#endif /* __LAYOUT_H */
+#endif

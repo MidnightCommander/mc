@@ -1,7 +1,8 @@
-#ifndef __USER_H
-#define __USER_H
+#ifndef MC_USER_H
+#define MC_USER_H
 
-struct WEdit;
+#include "../edit/edit-widget.h"
+
 void user_menu_cmd (struct WEdit *edit_widget);
 char *expand_format (struct WEdit *edit_widget, char c, int quote);
 int check_format_view (const char *);

@@ -1,5 +1,5 @@
-#ifndef __KEY_H
-#define __KEY_H
+#ifndef MC_KEY_H
+#define MC_KEY_H
 
 void init_key (void);
 void init_key_input_fd (void);
@@ -79,4 +79,4 @@ extern key_code_name_t key_name_conv_tab [];
 void numeric_keypad_mode (void);
 void application_keypad_mode (void);
 
-#endif	/* __KEY_H */
+#endif

@@ -1,24 +1,24 @@
-#ifndef __WTOOLS_H
-#define __WTOOLS_H
+#ifndef MC_WTOOLS_H
+#define MC_WTOOLS_H
 
 struct Dlg_head;
 struct WListbox;
 
-/* Listbox utility functions */
 typedef struct {
     struct Dlg_head *dlg;
     struct WListbox *list;
 } Listbox;
 
+/* Listbox utility functions */
 Listbox *create_listbox_window (int cols, int lines, const char *title, const char *help);
 #define LISTBOX_APPEND_TEXT(l,h,t,d) \
-    listbox_add_item (l->list, 0, h, t, d);
+    listbox_add_item (l->list, 0, h, t, d)
 
 int run_listbox (Listbox *l);
 
 /* Quick Widgets */
 enum {
-    quick_end, quick_checkbox, 
+    quick_end, quick_checkbox,
     quick_button, quick_input,
     quick_label, quick_radio
 } /* quick_t */;
@@ -43,7 +43,7 @@ typedef struct {
     const char *histname;	/* Name of the section for saving history */
 } QuickWidget;
 #define NULL_QuickWidget { 0, 0, 0, 0, 0, NULL, 0, 0, NULL, NULL, NULL }
-    
+
 typedef struct {
     int  xlen, ylen;
     int  xpos, ypos; /* if -1, then center the dialog */
@@ -88,4 +88,4 @@ enum {
    D_ERROR  = 1
 } /* dialog options */;
 
-#endif	/* __WTOOLS_H */
+#endif

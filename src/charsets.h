@@ -1,5 +1,5 @@
-#ifndef __CHARSETS_H__
-#define __CHARSETS_H__
+#ifndef MC_CHARSETS_H
+#define MC_CHARSETS_H
 
 #ifdef HAVE_CHARSET
 
@@ -54,4 +54,4 @@ convert_from_input_c (int c)
 
 #endif /* HAVE_CHARSET */
 
-#endif /* __CHARSETS_H__ */
+#endif

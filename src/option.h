@@ -1,4 +1,6 @@
-#ifndef __OPTION_H
-#define __OPTION_H
+#ifndef MC_OPTION_H
+#define MC_OPTION_H
+
 void configure_box (void);
-#endif 
+
+#endif

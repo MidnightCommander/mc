@@ -1,7 +1,7 @@
 /* Include file to use opendir/closedir/readdir */
 
-#ifndef __FS_H
-#define __FS_H
+#ifndef MC_FS_H
+#define MC_FS_H
 
 #include <sys/types.h>
 #ifdef HAVE_UNISTD_H
@@ -84,4 +84,4 @@ compute_namelen (struct dirent *dent __attribute__ ((unused)))
 #endif
 }
 
-#endif /* !__FS_H */
+#endif

@@ -1,5 +1,5 @@
-#ifndef __COLOR_H
-#define __COLOR_H
+#ifndef MC_COLOR_H
+#define MC_COLOR_H
 
 extern int use_colors;
 extern int disable_colors;
@@ -32,12 +32,12 @@ extern int attr_pairs [];
 extern int dialog_colors[4];
 extern int alarm_colors[4];
 
-/* Dialog colors */			   
+/* Dialog colors */
 #define COLOR_NORMAL       IF_COLOR (8, A_REVERSE)
 #define COLOR_FOCUS        IF_COLOR (9, A_BOLD)
 #define COLOR_HOT_NORMAL   IF_COLOR (10, 0)
 #define COLOR_HOT_FOCUS    IF_COLOR (11, 0)
-			   
+
 #define VIEW_UNDERLINED_COLOR IF_COLOR (12, A_UNDERLINE)
 #define MENU_SELECTED_COLOR   IF_COLOR (13, A_BOLD)
 #define MENU_HOT_COLOR        IF_COLOR (14, 0)
@@ -94,4 +94,4 @@ void done_colors (void);
 void mc_init_pair (int index, CTYPE foreground, CTYPE background);
 int try_alloc_color_pair (const char *fg, const char *bg);
 
-#endif /* __COLOR_H */
+#endif

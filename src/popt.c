@@ -17,6 +17,7 @@
 #  include <unistd.h>
 #endif
 
+#include "global.h"
 #include "findme.h"
 #include "popt.h"
 #include "poptint.h"

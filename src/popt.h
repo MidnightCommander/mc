@@ -1,9 +1,9 @@
 /* (C) 1998 Red Hat Software, Inc. -- Licensing details are in the COPYING
-   file accompanying popt source distributions, available from 
+   file accompanying popt source distributions, available from
    ftp://ftp.redhat.com/pub/code/popt */
 
-#ifndef H_POPT
-#define H_POPT
+#ifndef MC_POPT_H
+#define MC_POPT_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -19,8 +19,8 @@ extern "C" {
 #define POPT_ARG_LONG		3
 #define POPT_ARG_INCLUDE_TABLE	4	/* arg points to table */
 #define POPT_ARG_CALLBACK	5	/* table-wide callback... must be
-					   set first in table; arg points 
-					   to callback, descrip points to 
+					   set first in table; arg points
+					   to callback, descrip points to
 					   callback data to pass */
 #define POPT_ARG_INTL_DOMAIN    6       /* set the translation domain
 					   for this table and any
@@ -77,15 +77,15 @@ typedef struct poptContext_s * poptContext;
 typedef struct poptOption * poptOption;
 #endif
 
-enum poptCallbackReason { POPT_CALLBACK_REASON_PRE, 
+enum poptCallbackReason { POPT_CALLBACK_REASON_PRE,
 			  POPT_CALLBACK_REASON_POST,
 			  POPT_CALLBACK_REASON_OPTION };
-typedef void (*poptCallbackType)(poptContext con, 
+typedef void (*poptCallbackType)(poptContext con,
 				 enum poptCallbackReason reason,
 			         const struct poptOption * opt,
 				 const char * arg, void * data);
 
-poptContext poptGetContext(const char * name, int argc, char ** argv, 
+poptContext poptGetContext(const char * name, int argc, char ** argv,
 			   const struct poptOption * options, int flags);
 void poptResetContext(poptContext con);
 
@@ -103,7 +103,7 @@ void poptFreeContext(poptContext con);
 int poptStuffArgs(poptContext con, char ** argv);
 int poptAddAlias(poptContext con, struct poptAlias alias, int flags);
 int poptReadConfigFile(poptContext con, const char * fn);
-/* like above, but reads /etc/popt and $HOME/.popt along with environment 
+/* like above, but reads /etc/popt and $HOME/.popt along with environment
    vars */
 int poptReadDefaultConfig(poptContext con, int useEnv);
 /* argv should be freed -- this allows ', ", and \ quoting, but ' is treated

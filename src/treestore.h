@@ -1,5 +1,5 @@
-#ifndef __TREE_STORE_H
-#define __TREE_STORE_H
+#ifndef MC_TREE_STORE_H
+#define MC_TREE_STORE_H
 
 /* Default filenames for the tree */
 
@@ -45,4 +45,4 @@ void tree_store_add_entry_remove_hook (tree_store_remove_fn callback,
 				       void *data);
 void tree_store_remove_entry_remove_hook (tree_store_remove_fn callback);
 
-#endif				/* !__TREE_STORE_H */
+#endif

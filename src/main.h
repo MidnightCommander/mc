@@ -1,5 +1,10 @@
-#ifndef __MAIN_H
-#define __MAIN_H
+#ifndef MC_MAIN_H
+#define MC_MAIN_H
+
+#include "menu.h"
+#include "panel.h"
+#include "widget.h"
+
 /* Toggling functions */
 void toggle_fast_reload (void);
 void toggle_mix_all_files (void);
@@ -116,7 +121,6 @@ extern WLabel     *the_prompt;
 extern WLabel     *the_hint;
 extern Dlg_head   *midnight_dlg;
 
-struct WMenu;
 extern struct WMenu *the_menubar;
 #endif /* WANT_WIDGETS */
 
@@ -125,8 +129,7 @@ void init_menu (void);
 
 #define MC_BASE "/.mc/"
 
-struct WPanel;
 void directory_history_add   (struct WPanel *panel, const char *dir);
 int  do_panel_cd             (struct WPanel *panel, const char *new_dir, enum cd_enum cd_type);
 
-#endif /* !__MAIN_H */
+#endif

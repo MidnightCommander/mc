@@ -1,5 +1,8 @@
-#ifndef __BOXES_H
-#define __BOXES_H
+#ifndef MC_BOXES_H
+#define MC_BOXES_H
+
+#include "dir.h"
+#include "panel.h"
 
 int     display_box      (WPanel *p, char **user, char **mini,
 			  int *use_msformat, int num);

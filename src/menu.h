@@ -1,5 +1,5 @@
-#ifndef __MENU_H
-#define __MENU_H
+#ifndef MC_MENU_H
+#define MC_MENU_H
 
 #include "widget.h"
 
@@ -45,5 +45,4 @@ void   destroy_menu    (Menu *menu);
 WMenu *menubar_new     (int y, int x, int cols, Menu *menu[], int items);
 void   menubar_arrange (WMenu *menubar);
 
-#endif /* __MENU_H */
-
+#endif

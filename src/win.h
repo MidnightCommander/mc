@@ -1,5 +1,5 @@
-#ifndef __WIN_H
-#define __WIN_H
+#ifndef MC_WIN_H
+#define MC_WIN_H
 
 /* Keys management */
 typedef void (*movefn) (const void *, int);
@@ -14,4 +14,5 @@ void do_exit_ca_mode (void);
 
 void mc_raw_mode (void);
 void mc_noraw_mode (void);
-#endif	/* __WIN_H */
+
+#endif

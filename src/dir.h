@@ -1,10 +1,11 @@
-#ifndef __DIR_H
-#define __DIR_H
+#ifndef MC_DIR_H
+#define MC_DIR_H
 
 #define MIN_FILES 128
 #define RESIZE_STEPS 128
 
 #include <sys/stat.h>
+
 typedef struct {
 
     /* File attributes */
@@ -14,7 +15,7 @@ typedef struct {
     struct stat st;
 
     /* Flags */
-    struct { 
+    struct {
 	unsigned int marked:1;		/* File marked in pane window */
 	unsigned int link_to_dir:1;	/* If this is a link, does it point to directory? */
 	unsigned int stale_link:1;    /* If this is a symlink and points to Charon's land */
@@ -79,4 +80,4 @@ extern int show_backups;
 extern int show_dot_files;
 extern int mix_all_files;
 
-#endif	/* __DIR_H */
+#endif

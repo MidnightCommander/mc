@@ -1,5 +1,5 @@
-#ifndef __MC_TTY_H
-#define __MC_TTY_H
+#ifndef MC_TTY_H
+#define MC_TTY_H
 
 /* This file takes care of loading ncurses or slang */
 
@@ -32,4 +32,4 @@ int got_interrupt (void);
 
 void mc_refresh (void);
 
-#endif /* !__MC_TTY_H */
+#endif

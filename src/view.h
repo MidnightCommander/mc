@@ -1,5 +1,5 @@
-#ifndef __VIEW_H
-#define __VIEW_H
+#ifndef MC_VIEW_H
+#define MC_VIEW_H
 
 struct WView;			/* opaque structure, can be cast to Widget */
 typedef struct WView WView;
@@ -28,4 +28,4 @@ extern int altered_hex_mode;
 extern int altered_magic_flag;
 extern int altered_nroff_flag;
 
-#endif				/* __VIEW_H */
+#endif

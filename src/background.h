@@ -1,5 +1,5 @@
-#ifndef __BACKGROUND_H
-#define __BACKGROUND_H
+#ifndef MC_BACKGROUND_H
+#define MC_BACKGROUND_H
 
 #ifdef WITH_BACKGROUND
 
@@ -28,4 +28,4 @@ extern int we_are_background;
 
 #endif				/* !WITH_BACKGROUND */
 
-#endif				/* __BACKGROUND_H */
+#endif				/* MC_BACKGROUND_H */

@@ -18,6 +18,7 @@
 
 #ifndef MC_DLG_H
 #define MC_DLG_H
+
 #include "mouse.h"
 
 /* Color constants */
@@ -157,19 +158,19 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 
 int  add_widget           (Dlg_head *dest, void *Widget);
 
-/* Runs dialog d */       
+/* Runs dialog d */
 int run_dlg               (Dlg_head *d);
-		          
+
 void dlg_run_done         (Dlg_head *h);
 void dlg_process_event    (Dlg_head *h, int key, Gpm_Event *event);
 void init_dlg             (Dlg_head *h);
 
 /* To activate/deactivate the idle message generation */
 void set_idle_proc        (Dlg_head *d, int enable);
-		          
+
 void dlg_redraw           (Dlg_head *h);
 void destroy_dlg          (Dlg_head *h);
-		          
+
 void widget_set_size      (Widget *widget, int x1, int y1, int x2, int y2);
 
 void dlg_broadcast_msg    (Dlg_head *h, widget_msg_t message, int reverse);
@@ -237,4 +238,4 @@ void do_refresh (void);
 /* Used in load_prompt() */
 void update_cursor (Dlg_head *h);
 
-#endif /* MC_DLG_H */
+#endif

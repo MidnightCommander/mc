@@ -1,5 +1,5 @@
-#ifndef __SUBSHELL_H
-#define __SUBSHELL_H
+#ifndef MC_SUBSHELL_H
+#define MC_SUBSHELL_H
 
 /* Used to distinguish between a normal MC termination and */
 /* one caused by typing `exit' or `logout' in the subshell */
@@ -37,4 +37,4 @@ void sigchld_handler (int sig);
 #define use_subshell 0
 #endif /* not HAVE_SUBSHELL_SUPPORT */
 
-#endif /* __SUBSHELL_H */
+#endif

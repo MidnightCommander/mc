@@ -1,5 +1,5 @@
-#ifndef __HELP_H
-#define __HELP_H
+#ifndef MC_HELP_H
+#define MC_HELP_H
 
 /* This file is included by help.c and man2hlp.c */
 
@@ -18,4 +18,5 @@
 #define CHAR_FONT_ITALIC	'\024'	/* Ctrl-T */
 
 void interactive_display (const char *filename, const char *node);
-#endif				/* __HELP_H */
+
+#endif

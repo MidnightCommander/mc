@@ -1,6 +1,5 @@
-#ifndef __UTIL_H
-#define __UTIL_H
-
+#ifndef MC_UTIL_H
+#define MC_UTIL_H
 
 #include <sys/types.h>
 
@@ -229,4 +228,4 @@ free_after (char *result, char *string_to_free)
 	return result;
 }
 
-#endif				/* !__UTIL_H */
+#endif

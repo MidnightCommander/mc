@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "global.h"
 #include "popt.h"
 #include "poptint.h"
 

@@ -1,5 +1,5 @@
-#ifndef __CMD_H
-#define __CMD_H
+#ifndef MC_CMD_H
+#define MC_CMD_H
 
 void netlink_cmd (void);
 void ftplink_cmd (void);
@@ -57,4 +57,4 @@ void info_cmd_no_menu (void);
 void quick_view_cmd (void);
 void toggle_listing_cmd (void);
 
-#endif /* __CMD_H */
+#endif

@@ -1,5 +1,5 @@
-#ifndef __MYSLANG_H
-#define __MYSLANG_H
+#ifndef MC_MYSLANG_H
+#define MC_MYSLANG_H
 
 #if defined(USE_INCLUDED_SLANG) || !defined (HAVE_SYSTEM_SLANG)
 #    include "../slang/include/slang.h"
@@ -133,11 +133,12 @@ mc_addch (char c)
     /* This is fast, but only useful on PC system as it doesn't use
        Alt_Char_Pairs [] :( */
 #else
-    /* This is slow, but works well :| */ 
-#   define one_vline() SLsmg_draw_object (SLsmg_get_row(), SLsmg_get_column(), slow_terminal ? ' ' : ACS_VLINE) 
-#   define one_hline() SLsmg_draw_object (SLsmg_get_row(), SLsmg_get_column(), slow_terminal ? ' ' : ACS_HLINE) 
-#endif    
+    /* This is slow, but works well :| */
+#   define one_vline() SLsmg_draw_object (SLsmg_get_row(), SLsmg_get_column(), slow_terminal ? ' ' : ACS_VLINE)
+#   define one_hline() SLsmg_draw_object (SLsmg_get_row(), SLsmg_get_column(), slow_terminal ? ' ' : ACS_HLINE)
+#endif
 
 void enable_interrupt_key (void);
 void disable_interrupt_key (void);
-#endif /* !__MYSLANG_H */
+
+#endif

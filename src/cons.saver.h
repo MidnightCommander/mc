@@ -1,5 +1,5 @@
-#ifndef __CONS_SAVER_H
-#define __CONS_SAVER_H
+#ifndef MC_CONS_SAVER_H
+#define MC_CONS_SAVER_H
 
 enum {
     CONSOLE_INIT = '1',
@@ -23,4 +23,4 @@ int look_for_rxvt_extensions (void);
 extern int cons_saver_pid;
 #endif /* !LINUX_CONS_SAVER_C */
 
-#endif				/* __CONS_SAVER_H */
+#endif

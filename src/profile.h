@@ -1,12 +1,13 @@
-#ifndef __PROFILE_H
-#define __PROFILE_H
+#ifndef MC_PROFILE_H
+#define MC_PROFILE_H
+
 /* Prototypes for the profile management functions */
 
 short GetPrivateProfileString (const char * AppName, const char * KeyName,
 			       const char * Default, char * ReturnedString,
 			       short Size, const char * FileName);
 
-int GetProfileString (const char * AppName, const char * KeyName, const char * Default, 
+int GetProfileString (const char * AppName, const char * KeyName, const char * Default,
 		      char * ReturnedString, int Size);
 
 int GetPrivateProfileInt (const char * AppName, const char * KeyName, int Default,
@@ -44,4 +45,4 @@ void profile_forget_profile (const char *file);
 /* Removes information from a profile */
 void free_profile_name (const char *s);
 
-#endif	/* __PROFILE_H */
+#endif

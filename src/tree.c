@@ -48,6 +48,8 @@
 #include "treestore.h"
 #include "cmd.h"
 
+#define tlines(t) (t->is_panel ? t->widget.lines-2 - (show_mini_info ? 2 : 0) : t->widget.lines)
+
 extern int command_prompt;
 
 /* Use the color of the parent widget for the unselected entries */

@@ -15,8 +15,8 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-#ifndef __MOUNTLIST_H
-#define __MOUNTLIST_H
+#ifndef MC_MOUNTLIST_H
+#define MC_MOUNTLIST_H
 
 /* Filesystem status */
 struct my_statfs {
@@ -33,4 +33,4 @@ struct my_statfs {
 void init_my_statfs (void);
 void my_statfs (struct my_statfs *myfs_stats, const char *path);
 
-#endif 	/* __MOUNTLIST_H	*/
+#endif

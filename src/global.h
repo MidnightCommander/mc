@@ -3,8 +3,8 @@
  * all local includes.
  */
 
-#ifndef __MC_GLOBAL_H
-#define __MC_GLOBAL_H
+#ifndef MC_GLOBAL_H
+#define MC_GLOBAL_H
 
 #include <stdlib.h>	/* for free() and other useful routins */
 
@@ -44,13 +44,13 @@
 
 
 /* Replacement for O_NONBLOCK */
-#ifndef O_NONBLOCK 
-#ifdef O_NDELAY /* SYSV */ 
-#define O_NONBLOCK O_NDELAY 
-#else /* BSD */ 
-#define O_NONBLOCK FNDELAY 
-#endif /* !O_NDELAY */ 
-#endif /* !O_NONBLOCK */ 
+#ifndef O_NONBLOCK
+#ifdef O_NDELAY /* SYSV */
+#define O_NONBLOCK O_NDELAY
+#else /* BSD */
+#define O_NONBLOCK FNDELAY
+#endif /* !O_NDELAY */
+#endif /* !O_NONBLOCK */
 
 
 #ifdef HAVE_SYS_TIMEB_H
@@ -190,4 +190,4 @@ void refresh_screen (void *);
 /* C++ style type casts */
 #define const_cast(m_type, m_expr) ((m_type) (m_expr))
 
-#endif /* !__MC_GLOBAL_H */
+#endif
