@@ -1,3 +1,7 @@
+2003-03-10  Adam Byrtek  <alpha@debian.org>
+
+	* extfs/patchfs.in: Minor cleanups.
+
 2003-03-10  Pavel Roskin  <proski@gnu.org>
 
 	* extfs.c (extfs_cmd): Quote localname - it's based on the entry

@@ -2,7 +2,9 @@
 #
 # Written by Adam Byrtek <alpha@debian.org>, 2002
 #
-# extfs to handle patches in context and unified diff format
+# Extfs to handle patches in context and unified diff format.
+# Known issues: When name of file to patch is modified during editing, 
+# hunk is duplicated on copyin. It is unavoidable.
 
 use bytes;
 use strict;
@@ -12,7 +14,7 @@ use File::Temp 'tempfile';
 # standard binaries
 my $bzip = 'bzip2';
 my $gzip = 'gzip';
-my $file = 'file';
+my $fileutil = 'file';
 
 # date parsing requires Date::Parse from TimeDate module
 my $parsedates = eval 'require Date::Parse';
@@ -61,7 +63,7 @@ sub myin
 {
     my ($qfname)=(quotemeta $_[0]);
 
-    $_=`$file $qfname`;
+    $_=`$fileutil $qfname`;
     if (/bzip/) {
 	return "$bzip -dc $qfname";
     } elsif (/gzip/) {
@@ -77,7 +79,7 @@ sub myout
     my ($qfname,$append)=(quotemeta $_[0],$_[1]);
     my ($sep) = $append ? '>>' : '>';
 
-    $_=`$file $qfname`;
+    $_=`$fileutil $qfname`;
     if (/bzip/) {
 	return "$bzip -c $sep $qfname";
     } elsif (/gzip/) {
@@ -309,12 +311,6 @@ sub copyin
     my ($archive,$name,$src)=(@_);
     my ($fsrc,$fdst,$f,@files);
     my ($unified,$context)=(0,0);
-    my ($cmd1,$cmd2);
-
-    error 'File must have .diff or .patch extension'
-      unless $name=~/\.(diff|patch)(\.(bz|bz2|gz|z|Z))?$/;
-
-    $file=~s/^(PATCH-(CREATE|REMOVE)\/)?(.*)\.diff$/$3/;
 
     # build filelist
     open I, myin($src).'|';
@@ -338,8 +334,8 @@ sub copyin
     rm ($archive, map($_.'.diff',@files));
     close I;
 
-    $cmd1=myin($src);
-    $cmd2=myout($archive,1);
+    my $cmd1=myin($src);
+    my $cmd2=myout($archive,1);
     system("$cmd1 | $cmd2")==0
       or error "Can't write to archive";
 }
