@@ -6,11 +6,6 @@ void toggle_mix_all_files (void);
 void toggle_show_backup (void);
 void toggle_show_hidden (void);
 
-enum {
-    RP_NOCLEAR,
-    RP_CLEAR
-};
-
 #define UP_OPTIMIZE 0
 #define UP_RELOAD   1
 #define UP_ONLY_CURRENT  2
@@ -64,15 +59,13 @@ extern int boot_current_is_left;
 extern int acs_vline;
 extern int acs_hline;
 extern int use_file_to_check_type;
-extern int searching;
 extern int vfs_use_limit;
 extern int alternate_plus_minus;
 extern int only_leading_plus_minus;
 extern int output_starts_shell;
 extern int midnight_shutdown;
-extern char search_buffer [256];
 extern char cmd_buf [512];
-extern char *cmdline_geometry;
+extern char *shell;
 
 /* Ugly hack in order to distinguish between left and right panel in menubar */
 extern int is_right;		/* If the selected menu was the right */
@@ -93,13 +86,7 @@ typedef struct {
 
 void update_panels (int force_update, char *current_file);
 void repaint_screen (void);
-void outrefresh_screen (void);
 void do_update_prompt (void);
-
-extern char *shell;
-
-/* directory specified on command line for startup */
-extern char *this_dir;
 
 enum cd_enum {
     cd_parse_command,
@@ -131,8 +118,6 @@ extern WButtonBar *the_bar;
 extern WLabel     *the_prompt;
 extern WLabel     *the_hint;
 extern Dlg_head   *midnight_dlg;
-extern Dlg_head   *edit_dlg;
-extern WLabel     *process_status;
 
 struct WMenu;
 extern struct WMenu *the_menubar;
