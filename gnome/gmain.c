@@ -252,12 +252,6 @@ setup_sigwinch ()
 {
 }
 
-int
-dialog_panel_callback (struct Dlg_head *h, int id, int msg)
-{
-	return default_dlg_callback (h, id, msg);
-}
-
 void
 x_flush_events (void)
 {
@@ -290,6 +284,28 @@ x_set_idle (Dlg_head *h, int enable_idle)
 	}
 }
 
+int
+dialog_panel_callback (struct Dlg_head *h, int id, int msg)
+{
+	WPanel *p;
+	WInput *in;
+	
+	if (msg == DLG_KEY && id == '\n'){
+		if (h->current->widget->callback == panel_callback)
+			return 0;
+
+		/*
+		 * If this was a keystroke, and the current widget is not the
+		 * panel, it is the filter
+		 */
+		p = (WPanel *) h->current->next->widget;
+		in = (WInput *) h->current->widget;
+		
+		set_panel_filter_to (p, strdup (in->buffer));
+	}
+	return default_dlg_callback (h, id, msg);
+}
+
 void
 create_panels (void)
 {
@@ -306,6 +322,7 @@ create_panels (void)
 	
 	panel = create_container (h, "My Panel");
 	add_widget (h, panel);
+	
 	set_current_panel (0);
 	run_dlg (h);
 }

@@ -2169,6 +2169,8 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
 	define_label (h, (Widget *)panel, 8, "Delete", delete_cmd);
 	redraw_labels (h, (Widget *)panel);
 #endif
+	/* Chain behaviour */
+	default_proc (h, WIDGET_FOCUS, par);
 	return 1;
 	
     case WIDGET_UNFOCUS:

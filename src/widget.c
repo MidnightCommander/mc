@@ -1628,7 +1628,13 @@ input_event (Gpm_Event *event, WInput *in)
 #endif
     return MOU_NORMAL; 
 } 
- 
+
+#ifdef HAVE_GNOME
+#    define PORT_WIDGET_WANT_HISTORY 0
+#else
+#    define PORT_WIDGET_WANT_HISTORY 1
+#endif
+
 WInput *
 input_new (int y, int x, int color, int len, char *def_text, char *tkname)
 {
@@ -1642,11 +1648,12 @@ input_new (int y, int x, int color, int len, char *def_text, char *tkname)
     /* history setup */
     in->history = NULL;
     in->history_name = 0;
-    if (tkname)
+    if (tkname && PORT_WIDGET_WANT_HISTORY){
 	if (*tkname) {
 	    in->history_name = strdup (tkname);
 	    in->history = history_get (tkname);
 	}
+    }
     if (def_text == INPUT_LAST_TEXT) {
 	def_text = "";
 	if (in->history)

@@ -171,6 +171,8 @@ int default_proc (Dlg_head *h, int Msg, int Par)
 	return 1;
 	
     case WIDGET_UNFOCUS:	/* We accept loose FOCUSes */
+	if (h->current)
+	    x_unfocus_widget (h->current);
 	return 1;
 	
     case WIDGET_DRAW:

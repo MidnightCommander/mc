@@ -297,10 +297,12 @@ void update_cursor (Dlg_head *h);
 #ifdef HAVE_X
 extern Dlg_head *midnight_dlg;
 void x_focus_widget (Widget_Item *p);
+void x_unfocus_widget (Widget_Item *p);
 void x_init_dlg (Dlg_head *h);
 void x_destroy_dlg (Dlg_head *h);
 #else
 #    define x_focus_widget(x) {}
+#    define x_unfocus_widget(x) {}
 #    define x_init_dlg(x)     {}
 #    define x_destroy_dlg(x)  {}
 #endif

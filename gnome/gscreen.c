@@ -206,7 +206,7 @@ x_unselect_item (WPanel *panel)
 void
 x_filter_changed (WPanel *panel)
 {
-	gtk_entry_set_text (GTK_ENTRY (panel->filter_w),
+	gtk_entry_set_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (panel->filter_w))),
 			    panel->filter ? panel->filter : "");
 }
 
@@ -926,24 +926,8 @@ panel_change_filter (GtkWidget *entry, WPanel *panel)
 {
 	char *reg_exp;
 
-	/* This functionality is duplicated from set_panel_filter().
-	 * We cannot just call set_panel_filter() because in the Gnome
-	 * version we have a nice GnomeEntry in the panel to set the
-	 * filters, instead of having the user have to click on a menu
-	 * item to bring up a "set filter" dialog box.
-	 */
-
-	reg_exp = gtk_entry_get_text (GTK_ENTRY (entry));
-
-	if (panel->filter) {
-		g_free (panel->filter);
-		panel->filter = NULL;
-	}
-
-	if (!((reg_exp[0] == '*') && (reg_exp[1] == 0)))
-		panel->filter = g_strdup (reg_exp);
-
-	reread_cmd ();
+	reg_exp = gtk_entry_get_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (entry))));
+	set_panel_filter_to (panel, strdup (reg_exp));
 }
 
 /* FIXME!!!  These patterns only work if we are using glob (easy_patterns).
@@ -966,10 +950,11 @@ static char *default_filters[] = {
 };
 
 static GtkWidget *
-panel_create_filter (WPanel *panel, GtkWidget **filter_w)
+panel_create_filter (Dlg_head *h, WPanel *panel, GtkWidget **filter_w)
 {
 	GtkWidget *hbox;
 	GtkWidget *label;
+	WInput *in;
 	int i;
 
 	hbox = gtk_hbox_new (FALSE, 0);
@@ -978,10 +963,20 @@ panel_create_filter (WPanel *panel, GtkWidget **filter_w)
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 4);
 	gtk_widget_show (label);
 
-	*filter_w = gnome_entry_new ("filter");
+	in = input_new (0, 0, 0, 10, "", "filter");
+	add_widget (h, in);
+
+	/* Force the creation of the gtk widget */
+	send_message_to (h, (Widget *) in, WIDGET_INIT, 0);
+	*filter_w = (GtkWidget *) in->widget.wdata;
 	
+	/* We do not want the focus by default  (and the previos add_widget just gave it to us) */
+	h->current = h->current->prev;
+	
+#if 0
 	for (i = 0; i < ELEMENTS (default_filters); i++)
 		gnome_entry_append_history (GNOME_ENTRY (*filter_w), FALSE, default_filters[i]);
+#endif
 
 	gtk_signal_connect (GTK_OBJECT (gnome_entry_gtk_entry (GNOME_ENTRY (*filter_w))),
 			    "activate",
@@ -1008,7 +1003,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	panel->current_dir = panel_create_cwd (panel);
 	gtk_widget_show (panel->current_dir);
 
-	filter = panel_create_filter (panel, (GtkWidget **) &panel->filter_w);
+	filter = panel_create_filter (h, panel, (GtkWidget **) &panel->filter_w);
 	gtk_widget_show (filter);
 
 	status_line = gtk_hbox_new (0, 0);
@@ -1047,6 +1042,11 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 			gtk_widget_realize (panel->list);
 		panel_create_pixmaps (panel->list);
 	}
+
+	/* In GNOME the panel wants to have the cursor, to avoid "auto" focusing the
+	 * filter input line
+	 */
+	panel->widget.options |= W_WANT_CURSOR;
 }
 
 void

@@ -16,12 +16,31 @@
 #include "gwidget.h"
 #include "dlg.h"
 
-void
-x_focus_widget (Widget_Item *p)
+GtkWidget *
+get_gtk_widget (Widget_Item *p)
 {
 	GtkWidget *w = GTK_WIDGET (p->widget->wdata);
 
-	gtk_widget_grab_focus (GTK_WIDGET (p->widget->wdata));
+	if (GNOME_IS_ENTRY (w))
+		return (gnome_entry_gtk_entry ((GnomeEntry *)(w)));
+	else 
+		return (GTK_WIDGET (p->widget->wdata));
+}
+
+void
+x_focus_widget (Widget_Item *p)
+{
+	GtkWidget *w = get_gtk_widget (p);
+
+	gtk_widget_grab_focus (w);
+}
+
+void
+x_unfocus_widget (Widget_Item *p)
+{
+	GtkWidget *w = get_gtk_widget (p);
+
+	gtk_window_set_focus (GTK_WINDOW (gtk_widget_get_toplevel (w)), NULL);
 }
 
 void
@@ -192,13 +211,23 @@ entry_release (GtkEditable *entry, GdkEvent *event, WInput *in)
 int
 x_create_input (Dlg_head *h, widget_data parent, WInput *in)
 {
-	GtkWidget *entry;
+	GtkWidget *gnome_entry;
+	GtkEntry *entry;
 
-	entry = gtk_entry_new ();
-	gtk_widget_show (entry);
-	in->widget.wdata = (widget_data) entry;
-	gtk_entry_set_text (GTK_ENTRY (entry), in->buffer);
-	gtk_entry_set_position (GTK_ENTRY (entry), in->point);
+	/* The widget might have been initialized manually.
+	 * Look in gscreen.c for an example
+	 */
+	if (in->widget.wdata)
+		return;
+	
+	gnome_entry = gnome_entry_new (in->widget.tkname);
+	gtk_widget_show (gnome_entry);
+	in->widget.wdata = (widget_data) gnome_entry;
+
+	entry = GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (gnome_entry)));
+	
+	gtk_entry_set_text (entry, in->buffer);
+	gtk_entry_set_position (entry, in->point);
 	
 	gtk_signal_connect (GTK_OBJECT (entry), "button_press_event",
 			    GTK_SIGNAL_FUNC (entry_click), in);
@@ -211,8 +240,9 @@ x_create_input (Dlg_head *h, widget_data parent, WInput *in)
 void
 x_update_input (WInput *in)
 {
-	GtkEntry *entry = GTK_ENTRY (in->widget.wdata);
-
+	GnomeEntry *gnome_entry = GNOME_ENTRY (in->widget.wdata);
+	GtkEntry   *entry = GTK_ENTRY (gnome_entry_gtk_entry (gnome_entry));
+	
 	/* If the widget has not been initialized yet (done by WIDGET_INIT) */
 	if (!entry)
 		return;
@@ -220,7 +250,7 @@ x_update_input (WInput *in)
 	gtk_entry_set_text (entry, in->buffer);
 	printf ("POniendo el putno en %d\n", in->point);
 	gtk_entry_set_position (entry, in->point);
-	gtk_widget_draw (GTK_WIDGET (entry), NULL);
+	gtk_widget_draw (GTK_WIDGET (gnome_entry), NULL);
 }
 
 /* Listboxes */

@@ -1,5 +1,13 @@
-Thu Mar 12 21:08:36 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+Thu Mar 12 23:23:00 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* cmd.c (set_panel_filter_to): Implementation split.  To be used
+	by GNOME.
+
+	* widget.c (input_new): GNOME-entry widget is inspired in the
+	WInput + the history patches from Paul.  Use the GNOME-entry
+	history, as this makes it easier to deal with the filter button on
+	the panel.
+	
 	* setup.c (save_panel_types): Do not use if running on the gnome
 	edition.   This need a lot of fixing for making this work with
 	gnome and session management.

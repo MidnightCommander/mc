@@ -387,6 +387,21 @@ void find_cmd (void)
     do_find ();
 }
 
+void
+set_panel_filter_to (WPanel *p, char *allocated_filter_string)
+{
+    if (p->filter){
+	free (p->filter);
+	p->filter = 0;
+    }
+    if (!(allocated_filter_string [0] == '*' && allocated_filter_string [1] == 0))
+	p->filter = allocated_filter_string;
+    else
+	free (allocated_filter_string);
+    reread_cmd ();
+    x_filter_changed (p);
+}
+
 /* Set a given panel filter expression */
 void set_panel_filter (WPanel *p)
 {
@@ -398,14 +413,7 @@ void set_panel_filter (WPanel *p)
     reg_exp = input_dialog (" Filter ", " Set expression for filtering filenames", x);
     if (!reg_exp)
 	return;
-    if (p->filter){
-	free (p->filter);
-	p->filter = 0;
-    }
-    if (!(reg_exp [0] == '*' && reg_exp [1] == 0))
-	p->filter = reg_exp;
-    reread_cmd ();
-    x_filter_changed (p);
+    set_panel_filter_to (p, reg_exp);
 }
 
 /* Invoked from the left/right menus */

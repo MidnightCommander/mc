@@ -26,6 +26,7 @@ void find_cmd (void);
 void tree_mode_cmd (void);
 void filter_cmd (void);
 void set_panel_filter (WPanel *panel);
+void set_panel_filter_to (WPanel *p, char *allocated_filter_string);
 void reread_cmd (void);
 void do_re_sort (WPanel *panel);
 void quick_view_cmd (void);

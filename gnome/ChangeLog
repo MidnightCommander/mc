@@ -1,4 +1,7 @@
-Thu Mar 12 21:29:33 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+Thu Mar 12 22:11:23 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gwidget.c (x_update_input): Use GnomeEntry widgets instead of
+	the GtkEntry.
 
 	* gwidget.c (listbox_select): Fix for the listbox selection with
 	the mouse.
