@@ -14,11 +14,6 @@ and \0x0D.
 Changing directory while in the editor shouldn't affect the path where
 the editor saves its files.
 
-Allow navigating VFS directories by Enter with non-empty command line. 
-Right now, pressing Enter on a directory on VFS with something on the
-command line cayses and error message "Cannot execute commands on
-non-local filesystems".
-
 Allow entering archives in VFS by Ctrl-PgDown with non-empty command
 line.  Right now, there is no convenient way to enter an archive when
 the command line is not empty.
