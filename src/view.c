@@ -569,9 +569,11 @@ do_view_init (WView *view, char *_command, const char *_file, int start_line)
 	}
     }
 
-    if (_command && (view->viewer_magic_flag || _file[0] == '\0'))
+    if (_command && (view->viewer_magic_flag || _file[0] == '\0')) {
 	error = init_growing_view (view, _command, view->filename);
-    else
+	if (fd != -1)
+	    mc_close (fd);
+    } else
 	error = load_view_file (view, fd);
 
 finish:

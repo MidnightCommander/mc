@@ -1,7 +1,11 @@
+2002-05-15  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* view.c (do_view_init): Close fd if it is unused.
+
 2002-05-14  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* Makefile.am (VFSLIB): Add ../vfs/samba/libsamba.a
-	if USE_WITH_SAMBA is true.
+	if USE_SAMBA_FS is true.
 
 2002-05-07  Pavel Roskin  <proski@gnu.org>
 
