@@ -1,21 +1,21 @@
 .TH mcedit 1 "30 January 1997"
-.\"SKIP_SECTION"
 .SH NAME
-mcedit \- Full featured terminal text editor for Unix-like systems.
-.\"SKIP_SECTION"
+mcedit \- Internal file viewer of GNU Midnight Commander.
 .SH USAGE
 .B mcedit
-[[+number] file [\-bcCdfhstVx?]]
+[\-bcCdfhstVx?] [+number] file
 .SH DESCRIPTION
 .LP
-Mcedit is a link to 
-.B mc,
-the Midnight Commander, forcing it 
-to immediately start its internal editor. The editor is a terminal 
-version of the 
-.B cooledit 
-standalone X Window editor.
-.\".\"DONT_SPLIT"
+mcedit is a link to
+.BR mc ,
+the main GNU Midnight Commander executable.  Executing GNU Midnight
+Commander under this name requests staring the internal editor and
+opening the
+.I file
+specified on the command line.  The editor is based on the terminal
+version of
+.B cooledit
+\- standalone editor for X Window System.
 .SH OPTIONS
 .TP
 .I "+number"
@@ -23,157 +23,148 @@ Go  to the line specified by number (do not insert
 a space between the "+" sign and the number).
 .TP
 .I "\-b"
-Forces black and white display.
+Force black and white display.
 .TP
 .I "\-c"
-Force color mode on terminals where 
-.B mcedit 
+Force color mode on terminals where
+.B mcedit
 defaults to black and white.
 .TP
 .I "\-C <keyword>=<FGcolor>,<BGcolor>:<keyword>= ..."
-Used to specify a different color set, where 
-.I keyword 
-is one of normal, selected, marked, markselect, errors,
-reverse menu, menusel, menuhot, menuhotsel and gauge. The colors
-are optional and are one of black, gray, red, brightred, green,
-brightgreen, brown, yellow, blue, brightblue, magenta,
-brightmagenta, cyan, brightcyan, lightgray and white.
-See the 
-.B Colors 
-section in 
-.B mc.1 
-for more information.
+Specify a different color set.  See the
+.B Colors
+section in mc(1) for more information.
 .TP
 .I "\-d"
-Disables mouse support.
+Disable mouse support.
 .TP
 .I "\-f"
-Displays the compiled-in search paths for Midnight Commander files.
+Display the compiled-in search paths for GNU Midnight Commander files.
 .TP
 .I "\-t"
 Used only if the code was compiled with Slang and terminfo: it makes
-the Midnight Commander use the value of the 
+the Midnight Commander use the value of the
 .B TERMCAP
 variable for the terminal information instead of the information on
-the system wide terminal database
+the system wide terminal database.
 .TP
 .I "\-V"
-Displays the version of the program.
+Display the version of the program.
 .TP
 .I "\-x"
 Forces xterm mode.  Used when running on xterm-capable terminals (two
 screen modes, and able to send mouse escape sequences).
 .PP
-.SH Features
+.SH FEATURES
 The internal file editor provides most of the features of common full
-screen editors.  It has an extendable file size limit of sixteen megabytes
-and edits binary files flawlessly.  The features it presently supports
-are: Block copy, move, delete, cut, paste;
-.I "key for key undo"; 
-pull-down
-menus; file insertion; macro definition; regular expression
-search and replace (and our own scanf-printf search and
-replace); shift-arrow MSW-MAC text highlighting (for the
-linux console only); insert-overwrite toggle; word-wrap;
-a variety of tabbing options; syntax highlighting for
-various file types; and an option
-to pipe text blocks through shell commands like indent and
-ispell.
+screen editors.  It has an extendable file size limit of sixteen
+megabytes and edits binary files flawlessly.  The features it presently
+supports are: Block copy, move, delete, cut, paste;
+.I key for key undo;
+pull-down menus; file insertion; macro definition; regular expression
+search and replace (and our own scanf-printf search and replace);
+shift-arrow MSW-MAC text highlighting (if supported by the terminal);
+insert-overwrite toggle; word-wrap; a variety of tabbing options; syntax
+highlighting for various file types; and an option to pipe text blocks
+through shell commands like indent and ispell.
 .PP
-.SH Keys
-The editor is very easy to use and requires no tutoring.
-To see what keys do what, just consult the appropriate
-pull-down menu. Other keys are: Shift movement
-keys do text highlighting (Linux console only). 
-.B Ctrl-Ins 
-copies to the file 
-.BR ~/.mc/cedit/cooledit.clip,
-and 
-.B Shift-Ins 
-pastes from 
-.BR ~/.mc/cedit/cooledit.clip. 
-.B Shift-Del 
-cuts to 
-.BR ~/.mc/cedit/cooledit.clip, 
-and 
-.B Ctrl-Del 
-deletes highlighted text - all linux console only.  Mouse highlighting
-also works, and you can override the mouse as usual by holding down
-the shift key while dragging the mouse to let normal terminal mouse
-highlighting work.
+.SH KEYS
+The editor is easy to use and can be used without learning.  To see what
+keys do what, just consult the appropriate pull-down menu.  Other keys
+are: Shift movement keys do text highlighting,
+.B Ctrl-Ins
+copies to the file
+.BR ~/.mc/cedit/cooledit.clip ,
+and
+.B Shift-Ins
+pastes from
+.BR ~/.mc/cedit/cooledit.clip .
+.B Shift-Del
+cuts to
+.BR ~/.mc/cedit/cooledit.clip ,
+and
+.B Ctrl-Del
+deletes highlighted text - all if supported by the terminal.  Mouse
+highlighting also works, and you can override the mouse as usual by
+holding down the shift key while dragging the mouse to let normal
+terminal mouse highlighting work.
 .PP
 The completion key (usually
 .B "Alt-Tab"
 or
-.BR "Espace-Tab")
+.BR "Espace-Tab" )
 completes the word under the cursor using the words used earlier in the
 file.
 .PP
-To define a macro, press 
-.B Ctrl-R 
+To define a macro, press
+.B Ctrl-R
 and then type out the key
-strokes you want to be executed. Press 
-.B Ctrl-R 
-again when finished. You can then assign the macro to any key you
-like by pressing that key. The macro is executed when you press
-.B Ctrl-A 
-and then the assigned key. The macro is also executed if
-you press Meta, Ctrl, or Esc and the assigned key, provided that the
-key is not used for any other function. Once defined, the macro
-commands go into the file 
-.BR ~/.mc/cedit/cooledit.macros. 
+strokes you want to be executed.  Press
+.B Ctrl-R
+again when finished.  You can then assign the macro to any key you like
+by pressing that key.  The macro is executed when you press
+.B Ctrl-A
+and then the assigned key.  The macro is also executed if you press
+Meta, Ctrl, or Esc and the assigned key, provided that the key is not
+used for any other function.  Once defined, the macro commands go into
+the file
+.BR ~/.mc/cedit/cooledit.macros .
 Do NOT edit this file if you are going to use macros again in the same
 editing session, because
-.B mcedit 
-caches macro key defines in memory. 
-.B Mcedit 
+.B mcedit
+caches macro key defines in memory.
+.B mcedit
 now overwrites a macro if a macro with the same key already exists,
 so you won't have to edit this file. You will also have to restart
 other running editors for macros to take effect.
 .P
-.B F19 
+.B F19
 will format C, C++, Java or HTML code when it is highlighted.  An executable
-file called 
-.B ~/.mc/cedit/edit.indent.rc 
+file called
+.B ~/.mc/cedit/edit.indent.rc
 will be created for you from the default template.  Feel free to edit it
 if you need.
 .PP
-.B C-p 
+.B C-p
 will run ispell on a block of text in a similar way.  The script file
 will be called
-.B ~/.mc/cedit/edit.spell.rc
-.
+.BR ~/.mc/cedit/edit.spell.rc .
 .PP
-.SH Redefining Keys
-Keys may be redefined from the Midnight Commander options
-menu.
+Keys can be redefined from the Midnight Commander options menu.
 .PP
 .SH SYNTAX HIGHLIGHTING
-As of version 3.6.0, \fBcooledit\fP has syntax highlighting.  This means
-that keywords and contexts (like C comments, string constants, etc)
-are highlighted in different colors.  The following section explains
-the format of the file \fB~/.mc/cedit/Syntax\fP.
-
-The file \fB~/.mc/cedit/Syntax\fP is rescanned on opening of a any new
-editor file. The file contains rules for highlighting, each of which is
-given on a separate line, and define which keywords will be highlighted
-to what color. The file is also divided into sections, each beginning
-with a line with the \fBfile\fP command, followed by a regular
-expression. The regular expression dictates the file name that that set
-of rules applies to. Following this is a description to be printed on the
-left of the editor window explaining the file type to the user. A third
-optional argument is a regular expression to match the first line of
-text of the file. If either the file name matches, or the first line of text,
-then those rules will be loaded.
-
+As of version 3.6.0,
+.B cooledit
+supports syntax highlighting.  This means that keywords and contexts
+(like C comments, string constants, etc) are highlighted in different
+colors.  The following section explains the format of the file
+.BR ~/.mc/cedit/Syntax .
+The file
+.B ~/.mc/cedit/Syntax
+is rescanned on opening of a any new editor file.  The file contains
+rules for highlighting, each of which is given on a separate line, and
+define which keywords will be highlighted to what color.  The file is
+also divided into sections, each beginning with a line with the
+.B file
+command, followed by a regular expression.  The regular expression
+dictates the file name that that set of rules applies to.  Following
+this is a description to be printed on the left of the editor window
+explaining the file type to the user.  A third optional argument is a
+regular expression to match the first line of text of the file.  If
+either the file name matches, or the first line of text, then those
+rules will be loaded.
+.PP
 A section ends with the start of a new section. Each section is divided
 into contexts, and each context contains rules. A context is a scope
 within the text that a particular set of rules belongs to. For instance,
-the region within a C style comment (i.e. between \fB/*\fP and \fB*/\fP)
+the region within a C style comment (i.e. between
+.B /*
+and
+.BR */ )
 has its own color. This is a context, although it will have no further
 rules inside it because there is probably nothing that we want
 highlighted within a C comment.
-
+.PP
 A trivial C programming section might look like this:
 .PP
 .nf
@@ -194,7 +185,7 @@ context default
   keyword  whole  extern   24
   keyword         {        14
   keyword         }        14
-  keyword         '*'      6 
+  keyword         '*'      6
 
 # C comments
 context /\\* \\*/ 22
@@ -213,7 +204,7 @@ context " " 6
 .PP
 Each context starts with a line of the form:
 .br
-\fBcontext\fP [\fBexclusive\fP] [\fBwhole\fP|\fBwholeright\fP|\fBwholeleft\fP] 
+\fBcontext\fP [\fBexclusive\fP] [\fBwhole\fP|\fBwholeright\fP|\fBwholeleft\fP]
 [\fBlinestart\fP] \fIdelim\fP [\fBlinestart\fP] \fIdelim\fP [\fIforeground\fP] [\fIbackground\fP]
 .br
 
@@ -242,7 +233,7 @@ highlighted, but not the delimiters themselves.
 
 Each rule is a line of the form:
 .br
-\fBkeyword\fP [\fBwhole\fP|\fBwholeright\fP|\fBwholeleft\fP] [\fBlinestart\fP] 
+\fBkeyword\fP [\fBwhole\fP|\fBwholeright\fP|\fBwholeleft\fP] [\fBlinestart\fP]
 \fIstring\fP \fIforeground\fP [\fIbackground\fP]
 .br
 
@@ -253,12 +244,12 @@ separator, it may not be used as is.  Also, \\* must be used to specify
 a *.  The * itself is a wildcard that matches any length of characters.
 For example,
 .nf
-  keyword         '*'      6 
+  keyword         '*'      6
 .fi
 colors all C single character constants green. You could also have
 used
 .nf
-  keyword         "*"      6 
+  keyword         "*"      6
 .fi
 to color string constants, except that the matched string may not cross
 newlines. \fIThe wildcard may be used within context delimiters as
@@ -273,16 +264,16 @@ Because keywords have a higher precedence than context delimiters, this
 keyword prevents the context from ending at the end of a line if the
 line ends in a \\ thus allowing C preprocessor directive to continue
 across multiple lines.
-
+.PP
 The colors themselves are numbered 0 to 26 and are explained below in
 \fBFURTHER BEHAVIORAL OPTIONS\fP. You can also use \fBany\fP of the named
 colors specified in \fB/usr/lib/X11/rgb.txt\fP, though only one word
 versions of them. It is better to stick to the numerical colors
 to limit use of the color palette.
-
+.PP
 Comments may be included on a line of there own and begin with
 a #.
-
+.PP
 Because of the simplicity of the implementation, there are a few
 intricacies that will not be coped with correctly but these are a minor
 irritation. On the whole, a broad spectrum of quite complicated
@@ -292,7 +283,7 @@ do with a little imagination. If you can't get by with the rules I have
 coded, and you think you have a rule that would be useful, please email
 me with your request. However, do not ask for regular expression
 support, because this is flatly impossible.
-
+.PP
 A useful hint is to work with as much as possible with the things
 you \fIcan\fP do rather than try to do things that this
 implementation can't cope with. Also remember that the aim of
@@ -313,29 +304,29 @@ editmarked=black,cyan"
 .PP
 .SH OPTIONS
 Most options can now be set from the editors options dialog
-box. See the \fBOptions\fP menu. The following options are defined in 
+box. See the \fBOptions\fP menu. The following options are defined in
 \fB~/.mc/ini\fP and have obvious counterparts in the dialog box.
-You can modify them to change the editor behavior, by editing the file. 
+You can modify them to change the editor behavior, by editing the file.
 Unless specified, a 1 sets the option to on, and a 0 sets it to
 off, as is usual.
 .TP
 .I use_internal_edit
-This option is ignored when invoking 
+This option is ignored when invoking
 .B mcedit.
 .TP
 .I editor_key_emulation
-1 for 
-.B Emacs 
-keys, and 0 for normal 
-.B Cooledit 
+1 for
+.B Emacs
+keys, and 0 for normal
+.B Cooledit
 keys.
 .TP
 .I editor_tab_spacing
 Interpret the tab character as being of this length.
 Default is 8. You should avoid using
 other than 8 since most other editors and text viewers
-assume a tab spacing of 8. Use 
-.B editor_fake_half_tabs 
+assume a tab spacing of 8. Use
+.B editor_fake_half_tabs
 to simulate a smaller tab spacing.
 .TP
 .I editor_fill_tabs_with_spaces
@@ -355,7 +346,7 @@ margin.
 This will emulate a half tab for those who want to program
 with a tab spacing of 4, but do not want the tab size changed
 from 8 (so that the code will be formatted the same when displayed
-by other programs). When editing between text and the left 
+by other programs). When editing between text and the left
 margin, moving and tabbing will be as though a tab space were
 4, while actually using spaces and normal tabs for an optimal fill.
 When editing anywhere else, a normal tab is inserted.
@@ -379,28 +370,22 @@ are made. You can specify your own backup file extension in
 the dialog. Note that saving twice will replace your backup
 as well as your original file.
 .PP
-.SH Miscellaneous
-
-(Scanf search and replace have previously not worked properly.
-With this release, problems with search and replace have been
-fixed.)
-
-You can use scanf search and replace to search and replace
-a C format string. First take a look at the 
-.B sscanf 
-and 
-.B sprintf 
-man pages to see what a format string
-is and how it works. An example is as follows: Suppose you want
-to replace all occurrences of say, an open bracket, three
-comma separated numbers, and a close bracket, with the
-word 
-.I apples, 
-the third number, the word 
+.SH MISCELLANEOUS
+You can use scanf search and replace to search and replace a C format
+string. First take a look at the
+.B sscanf
+and
+.B sprintf
+man pages to see what a format string is and how it works.  Here's an
+example: suppose that you want to replace all occurrences of an open
+bracket, three comma separated numbers, and a close bracket, with the
+word
+.IR apples ,
+the third number, the word
 .I oranges
-and then the second number, you would fill in the Replace dialog
-box as follows:
-
+and then the second number.  You would fill in the Replace dialog box as
+follows:
+.PP
 .nf
 .B Enter search string
 (%d,%d,%d)
@@ -409,40 +394,41 @@ apples %d oranges %d
 .B Enter replacement argument order
 3,2
 .fi
-
-The last line specifies that the third and then the second
-number are to be used in place of the first and second.
-
+.PP
+The last line specifies that the third and then the second number are to
+be used in place of the first and second.
+.PP
 It is advisable to use this feature with Prompt On Replace on, because
 a match is thought to be found whenever the number of arguments found
 matches the number given, which is not always a real match. Scanf also
 treats whitespace as being elastic.  Note that the scanf format %[ is
 very useful for scanning strings, and whitespace.
-
+.PP
 The editor also displays non-us characters (160+). When editing
-binary files, you should set 
-.B display bits 
+binary files, you should set
+.B display bits
 to 7 bits in the Midnight Commander options menu to keep the
 spacing clean.
-
 .PP
 .SH FILES
 @prefix@/share/mc/mc.hlp
 .IP
 The help file for the program.
 .PP
-@prefix@/share/mc/mc.ini
+.I @prefix@/share/mc/mc.ini
 .IP
-The default system-wide setup for the Midnight Commander, used only if
-the user lacks his own ~/.mc/ini file.
+The default system-wide setup for GNU Midnight Commander, used only if
+the user's own ~/.mc/ini file is missing.
 .PP
-@prefix@/share/mc/mc.lib
+.I @prefix@/share/mc/mc.lib
 .IP
-Global settings for the Midnight Commander.  Settings in this file are
-global to any Midnight Commander, it is useful to define site-global
-.\"LINK2
-terminal settings.
-.\"Terminal databases"
+Global settings for the Midnight Commander.  Settings in this file
+affect all users, whether they have ~/.mc/ini or not.
+.PP
+$HOME/.mc/ini
+.IP
+User's own setup.  If this file is present, the setup is loaded from
+here instead of the system-wide startup file.
 .PP
 $HOME/.mc/ini
 .IP
@@ -454,14 +440,13 @@ $HOME/.mc/cedit/
 User's own temporary directory where block commands are processed
 and saved.
 .PP
-.\"SKIP_SECTION"
 .SH LICENSE
 This program is distributed under the terms of the GNU General Public
 License as published by the Free Software Foundation. See the built-in
 help of the Midnight Commander for details on the License and the lack
 of warranty.
 .SH AVAILABILITY
-The latest version of this program can be found at 
+The latest version of this program can be found at
 ftp://ftp.ibiblio.org/pub/Linux/utils/file/managers/mc/.
 .SH SEE ALSO
 cooledit(1), mc(1), gpm(1), terminfo(1), scanf(3).
