@@ -348,6 +348,92 @@ handle_node (char *buffer, int is_sh)
     node = !is_sh;
 }
 
+/* Convert character from the macro name to the font marker */
+static inline char
+char_to_font (char c)
+{
+    switch (c) {
+    case 'R':
+	return CHAR_FONT_NORMAL;
+    case 'B':
+	return CHAR_FONT_BOLD;
+    case 'I':
+	return CHAR_FONT_ITALIC;
+    default:
+	return 0;
+    }
+}
+
+/*
+ * Handle alternate font commands (.BR, .IR, .RB, .RI, .BI, .IB)
+ * Return 0 if the command wasn't recognized, 1 otherwise
+ */
+static int
+handle_alt_font (char *buffer)
+{
+    char *p;
+    char *w;
+    char font[2];
+    int in_quotes = 0;
+    int alt_state = 0;
+
+    if (strlen (buffer) != 3)
+	return 0;
+
+    if (buffer[0] != '.')
+	return 0;
+
+    font[0] = char_to_font (buffer[1]);
+    font[1] = char_to_font (buffer[2]);
+
+    /* Exclude names with unknown characters, .BB, .II and .RR */
+    if (font[0] == 0 || font[1] == 0 || font[0] == font[1])
+	return 0;
+
+    p = strtok (NULL, "");
+    if (p == NULL) {
+	return 1;
+    }
+
+    w = buffer;
+    *w++ = font[0];
+
+    while (*p) {
+
+	if (*p == '"') {
+	    in_quotes = !in_quotes;
+	    p++;
+	    continue;
+	}
+
+	if (*p == ' ' && !in_quotes) {
+	    p++;
+	    /* Don't change font if we are at the end */
+	    if (*p != 0) {
+		alt_state = !alt_state;
+		*w++ = font[alt_state];
+	    }
+
+	    /* Skip more spaces */
+	    while (*p == ' ')
+		p++;
+
+	    continue;
+	}
+
+	*w++ = *p++;
+    }
+
+    /* Turn off attributes if necessary */
+    if (font[alt_state] != CHAR_FONT_NORMAL)
+	*w++ = CHAR_FONT_NORMAL;
+
+    *w = 0;
+    print_string (buffer);
+
+    return 1;
+}
+
 /* Handle all the roff dot commands.  See man groff_man for details */
 static void
 handle_command (char *buffer)
@@ -455,6 +541,8 @@ handle_command (char *buffer)
 	buffer = strtok (NULL, "");
 	if (buffer)
 	    print_string (buffer);
+    } else if (handle_alt_font (buffer) == 1) {
+	return;
     } else {
 	/* Other commands are ignored */
 	/* There is no memmove on some systems */

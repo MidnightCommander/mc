@@ -1,5 +1,9 @@
 2002-09-22  Pavel Roskin  <proski@gnu.org>
 
+	* man2hlp.c (handle_alt_font): Implement .BR, .IR, .RB, .RI, .BI
+	and .IB macros.
+	(handle_command): Call handle_alt_font().
+
 	* man2hlp.c: Take text width from help.h, not from the command
 	line.
 	* help.h: Declare HELP_TEXT_WIDTH.
