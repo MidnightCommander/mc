@@ -100,6 +100,10 @@ D       Delete tagged files if a copy exists in the other directory.
           fi
         done
 
+m       View manual page
+	MAN=%{Enter manual name}
+	%view man -P cat $MAN
+
 = f \.gz$ & t r
 + ! t t
 n       Inspect gzip'ed newsbatch file
