@@ -14,7 +14,7 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <unistd.h>
-
+#include "../vfs/vfs.h"
 #include "dir-open.xpm"
 #include "dir-close.xpm"
 
@@ -67,11 +67,11 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 	g_assert (parent);
 	g_assert (dtree);
 
-	dir = opendir (path);
+	dir = mc_opendir (path);
 	if (!dir)
 		return FALSE;
 
-	for (; (dirent = readdir (dir)) != NULL; ){
+	for (; (dirent = mc_readdir (dir)) != NULL; ){
 		GtkCTreeNode *sibling;
 		struct stat s;
 		char *full_name;
@@ -87,7 +87,7 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 		}
 
 		full_name = g_concat_dir_and_file (path, dirent->d_name);
-		res = stat (full_name, &s);
+		res = mc_stat (full_name, &s);
 
 		if (res == -1){
 			g_free (full_name);
@@ -115,7 +115,7 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 		g_free (full_name);
 	}
 
-	closedir (dir);
+	mc_closedir (dir);
 }
 
 static void

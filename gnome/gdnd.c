@@ -60,9 +60,10 @@ get_action (void)
 	return action;
 }
 
-/* Looks for a panel that has the specified window for its list display.  It is used to figure out
- * if we are receiving a drop from a panel on this MC process.  If no panel is found, it returns
- * NULL.
+/*
+ * Looks for a panel that has the specified window for its list
+ * display.  It is used to figure out if we are receiving a drop from
+ * a panel on this MC process.  If no panel is found, it returns NULL.
  */
 static WPanel *
 find_panel_owning_window (GdkDragContext *context)
@@ -98,8 +99,10 @@ find_panel_owning_window (GdkDragContext *context)
 	return NULL;
 }
 
-/* Performs a drop action on the specified panel.  Only supports copy and move operations.  The
- * files are moved or copied to the specified destination directory.
+/*
+ * Performs a drop action on the specified panel.  Only supports copy
+ * and move operations.  The files are moved or copied to the
+ * specified destination directory.
  */
 static void
 perform_action_on_panel (WPanel *source_panel, GdkDragAction action, char *destdir)
@@ -123,8 +126,9 @@ perform_action_on_panel (WPanel *source_panel, GdkDragAction action, char *destd
 	panel_update_contents (source_panel);
 }
 
-/* Performs handling of symlinks via drag and drop.  This should go away when operation windows
- * support links.
+/*
+ * Performs handling of symlinks via drag and drop.  This should go
+ * away when operation windows support links.
  */
 static void
 perform_links (GList *names, char *destdir)
@@ -143,8 +147,10 @@ perform_links (GList *names, char *destdir)
 	}
 }
 
-/* Performs a drop action manually, by going through the list of files to operate on.  The files are
- * copied or moved to the specified directory.  This should also encompass symlinking when the file
+/*
+ * Performs a drop action manually, by going through the list of files
+ * to operate on.  The files are copied or moved to the specified
+ * directory.  This should also encompass symlinking when the file
  * operations window supports links.
  */
 static void
@@ -234,7 +240,7 @@ gdnd_drop_on_directory (GdkDragContext *context, GtkSelectionData *selection_dat
 		action = context->suggested_action;
 
 	/* If we are dragging from a file panel, we can display a nicer status display */
-	source_panel = find_panel_owning_window (context->source_window);
+	source_panel = find_panel_owning_window (context);
 
 	/* Symlinks do not use file.c */
 

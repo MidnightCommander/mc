@@ -339,7 +339,7 @@ GnomeUIInfo gnome_panel_desktop_menu [] = {
 GnomeUIInfo gnome_panel_about_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("_About"),              N_("Information on this program"), gnome_about_cmd, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT },
-	GNOMEUIINFO_HELP ("midnight-commander"),
+/*	GNOMEUIINFO_HELP ("midnight-commander"), */
 	GNOMEUIINFO_END
 };
 

@@ -28,6 +28,7 @@
 #include "dialog.h"
 #include "gdesktop.h"
 #include "gdnd.h"
+#include "gtree.h"
 #include "gpageprop.h"
 #include "gcliplabel.h"
 #include "gblist.h"
@@ -1055,7 +1056,7 @@ panel_drag_data_get (GtkWidget        *widget,
 static void
 panel_drag_data_delete (GtkWidget *widget, GdkDragContext *context, WPanel *panel)
 {
-	printf ("Destination request we delete the data we sent\n");
+	/* Things is: The File manager already handles file moving */
 }
 
 /**
@@ -1684,8 +1685,7 @@ panel_create_icon_display (WPanel *panel)
 			    GTK_SIGNAL_FUNC (panel_widget_motion),
 			    panel);
 
-	gnome_icon_list_thaw (ilist);
-	return GTK_WIDGET (ilist);
+9	return GTK_WIDGET (ilist);
 }
 
 void
@@ -2064,6 +2064,15 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	
 	panel->table = gtk_table_new (2, 1, 0);
 
+	/*
+	 * Tree View
+	 */
+	panel->tree = gtk_dtree_new ();
+	gtk_widget_show (panel->tree);
+	
+	/*
+	 * Icon and Listing display
+	 */
 	panel->icons = panel_create_icon_display (panel);
 	panel->scrollbar = gtk_vscrollbar_new (GNOME_ICON_LIST (panel->icons)->adj);
 	gtk_widget_show (panel->scrollbar);
@@ -2077,13 +2086,30 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	else
 		display = panel->list;
 
+	/*
+	 * Pane
+	 */
+	panel->pane = gtk_hpaned_new ();
+	gtk_widget_show (panel->pane);
+
+	gtk_paned_add1 (GTK_PANED (panel->pane), panel->tree);
+	
+	/*
+	 * Filter
+	 */
 	filter = panel_create_filter (h, panel, &panel->filter_w);
+
+	/*
+	 * Current Working directory
+	 */
 	cwd = panel_create_cwd (h, panel, &panel->current_dir);
 	
 	/* We do not want the focus by default  (and the previos add_widget just gave it to us) */
 	h->current = h->current->prev;
 
-	/* buttons */
+	/*
+	 * History buttons, and updir.
+	 */
 	back_p = gnome_stock_pixmap_widget_new (panel->xwindow, GNOME_STOCK_MENU_BACK);
 	fwd_p  = gnome_stock_pixmap_widget_new (panel->xwindow, GNOME_STOCK_MENU_FORWARD);
 	
@@ -2097,13 +2123,18 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_signal_connect (GTK_OBJECT (panel->up_b), "clicked", GTK_SIGNAL_FUNC(panel_up), panel);
 	panel_update_marks (panel);
 	
-	/* ministatus */
+	/*
+	 * ministatus
+	 */
 	panel->ministatus = gtk_label_new (""); /* was a cliplabel */
 	gtk_widget_set_usize (panel->ministatus, 0, -1);
 	gtk_misc_set_alignment (GTK_MISC (panel->ministatus), 0.0, 0.0);
 	gtk_misc_set_padding (GTK_MISC (panel->ministatus), 3, 0);
 	gtk_widget_show (panel->ministatus);
-	
+
+	/*
+	 * Status line and packing of all of the toys
+	 */
 	status_line = gtk_hbox_new (0, 0);
 	gtk_container_border_width (GTK_CONTAINER (status_line), 3);
 	
@@ -2120,7 +2151,9 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 #endif
 	gtk_widget_show_all (status_line);
 	
-	/* The statusbar */
+	/*
+	 * The statusbar
+	 */
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
 	gtk_container_border_width (GTK_CONTAINER (frame), 3);
@@ -2132,24 +2165,47 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_label_set_justify (GTK_LABEL (panel->status), GTK_JUSTIFY_LEFT);
 	gtk_widget_show_all (frame);
 
+
+	panel->view_table = gtk_table_new (1, 1, 0);
+	gtk_widget_show (panel->view_table);
+	
 	/* Add both the icon view and the listing view */
-	gtk_table_attach (GTK_TABLE (panel->table), panel->icons, 0, 1, 1, 2,
+	gtk_table_attach (GTK_TABLE (panel->view_table), panel->icons, 0, 1, 0, 1,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK, 
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0);
-	gtk_table_attach (GTK_TABLE (panel->table), panel->scrollbar, 1, 2, 1, 2,
+	gtk_table_attach (GTK_TABLE (panel->view_table), panel->scrollbar, 1, 2, 0, 1,
 			  0,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0);
-	gtk_table_attach (GTK_TABLE (panel->table), panel->list, 0, 1, 1, 2,
+	gtk_table_attach (GTK_TABLE (panel->view_table), panel->list, 0, 1, 0, 1,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK, 
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0);
 	gtk_widget_show (display);
+
+	gtk_table_attach (GTK_TABLE (panel->table), panel->pane, 0, 1, 1, 2,
+			  GTK_EXPAND | GTK_FILL | GTK_SHRINK, 
+			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
+			  0, 0);
+
+	gtk_paned_add2 (GTK_PANED (panel->pane), panel->view_table);
 	
 	gtk_table_attach (GTK_TABLE (panel->table), status_line, 0, 1, 0, 1,
 			  GTK_EXPAND | GTK_FILL, GTK_SHRINK, 0, 0);
 
+	/*
+	 * ministatus_box is a container created just to put the
+	 * panel->ministatus inside.
+	 *
+	 * Then the resize mode for ministatus_box is changed to stop
+	 * any size-changed messages to be propagated above.
+	 *
+	 * This is required as the panel->ministatus Label is changed
+	 * very often (to display status information).  If this hack
+	 * is not made, then the resize is queued and the whole window
+	 * flickers each time this changes
+	 */
 	ministatus_box = gtk_hbox_new (FALSE, 0);
 	gtk_container_add (GTK_CONTAINER (ministatus_box), panel->ministatus);
 	gtk_widget_show (ministatus_box);

@@ -1,3 +1,11 @@
+1998-11-29  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (x_create_panel): Add panel view.  Put the views
+	inside a new table.  Add tree view to the left.
+	(panel_create_icon_display): IconList no longer starts in frozen state.
+
+	Update Makefile.
+
 1998-11-28  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gwidget.c (x_update_input): Use gtk_editable_changed on the entry.

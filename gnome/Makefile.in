@@ -35,6 +35,7 @@ GNOMESRCS = 		\
 	gprop.c		\
 	gscreen.c 	\
 	gtools.c 	\
+	gtree.c		\
 	gutil.c		\
 	gview.c		\
 	gwidget.c
@@ -55,6 +56,7 @@ GNOMEHDRS = 		\
 	gpopup.h	\
 	gprop.h		\
 	gscreen.h	\
+	gtree.h		\
 	gwidget.h
 
 ICONS = 			\
@@ -106,6 +108,7 @@ OBJS = $(LOBJS) $(OOBJS) \
 	gprop.o		\
 	gscreen.o 	\
 	gtools.o 	\
+	gtree.o		\
 	gutil.o 	\
 	gview.o		\
 	gwidget.o
@@ -119,7 +122,9 @@ PIXMAPS =			\
 	link.xpm		\
 	directory.xpm		\
 	listing-list.xpm	\
-	listing-iconic.xpm
+	listing-iconic.xpm	\
+	dir-close.xpm		\
+	dir-open.xpm
 
 DISTGNOME = Makefile.in gnome.TODO layout $(PIXMAPS) $(ICONS) $(GNOMESRCS) $(GNOMEHDRS) 
 
