@@ -310,10 +310,10 @@ undelfs_opendir (vfs *me, char *dirname)
     /* Now load the deleted information */
     if (!undelfs_loaddel ())
 	goto quit_opendir;
-    print_vfs_message (_("undelfs: done."));
+    print_vfs_message (_("%s: done."), me->name);
     return fs;
 quit_opendir:
-    print_vfs_message (_("undelfs: failure"));
+    print_vfs_message (_("%s: failure"), me->name);
     ext2fs_close (fs);
     fs = NULL;
     return 0;

@@ -1,3 +1,11 @@
+2002-07-19  Pavel Roskin  <proski@gnu.org>
+
+	* undelfs.c (undelfs_opendir): Use parametrized messages without
+	VFS name for success and failure.
+	* fish.c (dir_load): Use new messages from undelfs.c, indicate
+	success by printing "done".
+	* ftpfs.c (dir_load): Likewise.
+
 2002-07-15  Pavel Roskin  <proski@gnu.org>
 
 	* cpio.c (cpio_read_crc_head): Undo change in the error message.

@@ -464,11 +464,13 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
     
     vfs_s_free_entry (me, ent);
     me->verrno = E_REMOTE;
-    if (decode_reply(buffer+4, 0) == COMPLETE)
-        return 0;
+    if (decode_reply(buffer+4, 0) == COMPLETE) {
+	print_vfs_message (_("%s: done."), me->name);
+	return 0;
+    }
 
 error:
-    print_vfs_message(_("fish: failed"));
+    print_vfs_message (_("%s: failure"), me->name);
     return 1;
 }
 

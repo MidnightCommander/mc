@@ -1320,7 +1320,7 @@ again:
 	    close (sock);
 	    disable_interrupt_key();
 	    get_reply(me, SUP.sock, NULL, 0);
-	    print_vfs_message(_("ftpfs: failed"));
+	    print_vfs_message (_("%s: failure"), me->name);
 	    return -1;
 	}
 
@@ -1368,6 +1368,7 @@ again:
            dcache->symlink_status = FTPFS_UNRESOLVED_SYMLINKS;
     }
 #endif
+    print_vfs_message (_("%s: done."), me->name);
     return 0;
 
 fallback:
