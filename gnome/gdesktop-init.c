@@ -44,18 +44,17 @@ desktop_load_init_from (const char *file)
 		 */
 		if (strcmp (type, "url") == 0){
 			int  used;
-			char *icon = NULL, *url;
+			char *icon, *url;
 			char *icon2 = NULL;
 
 			url = gnome_config_get_string ("url");
 			icon = gnome_config_get_string_with_default ("icon=", &used);
-			if (!icon)
-				icon2 = g_concat_dir_and_file (ICONDIR, "gnome-http-url.png");
-			else {
+			if (icon){
 				icon2 = gnome_pixmap_file (icon);
-				if (!icon2)
-					icon2 = g_concat_dir_and_file (ICONDIR, "gnome-http-url.png");
+				g_free (icon);
 			}
+			if (!icon2)
+				icon2 = g_concat_dir_and_file (ICONDIR, "gnome-http-url.png");
 			if (url && *url){
 				char *filename = g_concat_dir_and_file (desktop_directory, key);
 
@@ -65,7 +64,6 @@ desktop_load_init_from (const char *file)
 
 			if (url)
 				g_free (url);
-			g_free (icon);
 			g_free (icon2);
 		}
 		g_free (title);
@@ -132,6 +130,7 @@ desktop_init_at (const char *dir)
 		}
 
 		desktop_load_init_from (fname);
+		g_free (fname);
 	}
 	closedir (d);
 }
@@ -152,9 +151,10 @@ gdesktop_links_init (void)
 	link_name = g_concat_dir_and_file (desktop_directory, "Trash");
 	icon = gnome_pixmap_file ("mc/gnome-trashcan.png");
 	mc_mkdir (link_name, S_IRUSR | S_IWUSR | S_IXUSR );
-	if (icon)
+	if (icon){
 		gnome_metadata_set (link_name, "icon-filename", strlen (icon) + 1, icon);
-	g_free (icon);
+		g_free (icon);
+	}
 	g_free (link_name);
 
 	/* Create custom links */
