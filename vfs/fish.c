@@ -44,7 +44,6 @@
 #include "xdirentry.h"
 #include "vfs.h"
 #include "tcputil.h"
-#include "container.h"
 #include "fish.h"
 
 /*

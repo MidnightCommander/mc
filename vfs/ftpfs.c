@@ -76,7 +76,6 @@ What to do with this?
 #include "tcputil.h"
 #include "../src/dialog.h"
 #include "../src/setup.h"	/* for load_anon_passwd */
-#include "container.h"
 #include "ftpfs.h"
 #ifndef MAXHOSTNAMELEN
 #    define MAXHOSTNAMELEN 64

@@ -1,5 +1,7 @@
 2002-10-02  Pavel Roskin  <proski@gnu.org>
 
+	* container.h: Remove, it's unused.
+
 	* utilvfs.c: Remove tests, since get_host_and_username() is
 	missing.
 	* mcfs.c (open_tcp_link): Make static.
