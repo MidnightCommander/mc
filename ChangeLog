@@ -1,3 +1,8 @@
+2004-11-07  Roland Illig  <roland.illig@gmx.de>
+
+	* TODO (4.6.1): Moved the '#' in path names issue to 4.6.2.
+	* TODO: Added issue about hiding passwords in VFS pathnames.
+
 2004-11-05  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* README: Fix typo.

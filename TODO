@@ -1,8 +1,6 @@
 Before 4.6.1
 ============
 
-Untaring files with # in name fails. 
-
 Check the following programs for proper pathname quoting.
 vfs/extfs/audio.in
 vfs/extfs/bpp
@@ -21,6 +19,10 @@ vfs/extfs/uzoo.in
 
 Before 4.6.2
 ============
+
+Hide the passwords when displaying mcvfs path names.
+
+Untaring files with # in name fails. 
 
 Broken pipe warning when viewing large *.tar.gz files.  Warnings should
 be shown before the viewer is started if possible.
