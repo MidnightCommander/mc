@@ -50,7 +50,7 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 		header = _("Error");
 
 	/* extract the buttons from the args */
-	buttons = g_malloc (sizeof (gchar[flags + 1]));
+	buttons = g_malloc (sizeof (char *) * (count+1));
 	va_start (ap, count);
 	for (i = 0; i < count; i++){
 		char *text;

@@ -327,18 +327,24 @@ file_progress_real_query_replace (enum OperationMode mode, char *destname, struc
 
         /* so what's the situation?  Do we prompt or don't we prompt. */
         if (copy_status == REPLACE_PROMPT){
-                qr_dlg = gnome_dialog_new ("File Exists", "Yes", "No", "Cancel", NULL);
+                qr_dlg = gnome_dialog_new (_("File Exists"),
+                                           GNOME_STOCK_BUTTON_YES,
+                                           GNOME_STOCK_BUTTON_NO,
+                                           GNOME_STOCK_BUTTON_CANCEL, NULL);
                 
-                snprintf (msg, 127, "The target file already exists:", destname);
-                label = gtk_label_new ("The target file already exists.");
+                snprintf (msg, sizeof (msg)-1, _("The target file already exists: %s"), destname);
+                label = gtk_label_new (msg);
                 gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
                 gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
                 gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
                 gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (qr_dlg)->vbox),
                                     label, FALSE, FALSE, 0);
-
+                label = gtk_label_new (_("Replace it?"));
+                gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+                gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+                gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (qr_dlg)->vbox),
+                                    label, FALSE, FALSE, 0);
                 gtk_widget_show_all (GNOME_DIALOG (qr_dlg)->vbox);
-                g_print ("here?\n");
                 switch (gnome_dialog_run_and_close (GNOME_DIALOG (qr_dlg))) {
                 case 0:
                         return FILE_CONT;
@@ -396,10 +402,10 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_
         
         /* Basic window */
         if (operation == OP_COPY)
-                fmd_win = gnome_dialog_new ("Copy", GNOME_STOCK_BUTTON_OK, 
+                fmd_win = gnome_dialog_new (_("Copy"), GNOME_STOCK_BUTTON_OK, 
                                             GNOME_STOCK_BUTTON_CANCEL, NULL);
         else if (operation == OP_MOVE)
-                fmd_win = gnome_dialog_new ("Move", GNOME_STOCK_BUTTON_OK, 
+                fmd_win = gnome_dialog_new (_("Move"), GNOME_STOCK_BUTTON_OK, 
                                             GNOME_STOCK_BUTTON_CANCEL, NULL);
 
         hbox = gtk_hbox_new (FALSE, GNOME_PAD);
@@ -460,14 +466,14 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_
                 cbox = gtk_check_button_new_with_label (_("Follow links."));
                 gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (cbox), file_mask_op_follow_links);
                 gtk_signal_connect (GTK_OBJECT (cbox), "toggled", (GtkSignalFunc) fmd_check_box_callback, &file_mask_op_follow_links);
-                gnome_widget_add_help (cbox, "Selecting this will copy the files that symlinks point "
-                                       "to instead of just copying the link.");
+                gnome_widget_add_help (cbox, _("Selecting this will copy the files that symlinks point "
+                                               "to instead of just copying the link."));
                 gtk_box_pack_start (GTK_BOX (vbox), cbox, FALSE, FALSE, 0);
 
                 cbox = gtk_check_button_new_with_label (_("Preserve file attributes."));
                 gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (cbox), op_preserve);
                 gtk_signal_connect (GTK_OBJECT (cbox), "toggled", (GtkSignalFunc) fmd_check_box_callback, &op_preserve);
-                gnome_widget_add_help (cbox, "FIXME: Add something here Miguel");
+                gnome_widget_add_help (cbox, _("Preserves the permissions and the UID/GID if possible"));
                 gtk_box_pack_start (GTK_BOX (vbox), cbox, FALSE, FALSE, 0);
 
                 vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
@@ -475,7 +481,7 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_
                 cbox = gtk_check_button_new_with_label (_("Recursively copy subdirectories."));
                 gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (cbox), dive_into_subdirs);
                 gtk_signal_connect (GTK_OBJECT (cbox), "toggled", (GtkSignalFunc) fmd_check_box_callback, &dive_into_subdirs);
-                gnome_widget_add_help (cbox, "FIXME: Add something here Miguel");
+                gnome_widget_add_help (cbox, _("If set, this will copy the directories recursively"));
                 gtk_box_pack_start (GTK_BOX (vbox), cbox, FALSE, FALSE, 0);
         }
         
