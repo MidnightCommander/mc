@@ -57,13 +57,12 @@ static int string_len (char *buffer)
     static int anchor_flag = 0;	/* Flag: Inside hypertext anchor name */
     static int link_flag = 0;	/* Flag: Inside hypertext link target name */
     int backslash_flag = 0;	/* Flag: Backslash quoting */
-    unsigned int i;		/* Index */
     int c;			/* Current character */
     int len = 0;		/* Result: the length of the string */
 
-    for (i = 0; i < strlen (buffer); i ++)
+    while (*(buffer))
     {
-	c = buffer [i];
+	c = *buffer++;
 	if (c == CHAR_LINK_POINTER) 
 	    link_flag = 1;	/* Link target name starts */
 	else if (c == CHAR_LINK_END)
@@ -98,7 +97,6 @@ static int string_len (char *buffer)
 static void print_string (char *buffer)
 {
     int len;		/* The length of current word */
-    unsigned int i;	/* Index */
     int c;		/* Current character */
     int backslash_flag = 0;
 
@@ -108,8 +106,8 @@ static void print_string (char *buffer)
     /* Copying verbatim? */
     if (verbatim_flag){
 	/* Attempt to handle backslash quoting */
-	for (i = 0; i < strlen (buffer); i++){
-	    c = buffer [i];
+	while (*(buffer)){
+	    c = *buffer++;
 	    if (c == '\\' && !backslash_flag){
 		backslash_flag = 1;
 		continue;
@@ -123,7 +121,7 @@ static void print_string (char *buffer)
 	/* Repeat for each word */
 	while (buffer){
 	    /* Skip empty strings */  
-	    if (strlen (buffer) > 0){
+	    if (*(buffer)){
 		len = string_len (buffer);
 		/* Change the line if about to break the right margin */
 		if (col + len >= width)
@@ -134,9 +132,9 @@ static void print_string (char *buffer)
 		    col ++;
 		}
 		/* Attempt to handle backslash quoting */
-		for (i = 0; i < strlen (buffer); i++)
+		while (*(buffer))
 		{
-		    c = buffer [i];
+		    c = *buffer;
 		    if (c == '\\' && !backslash_flag){
 			backslash_flag = 1;
 			continue;
@@ -304,11 +302,10 @@ int main (int argc, char **argv)
     int len;			/* Length of input line */
     FILE *file;			/* Input file */
     char buffer2 [BUFFER_SIZE];	/* Temp input line */
-    char buffer [BUFFER_SIZE];	/* Input line */
+    char *buffer = buffer2;	/* Input line */
 
     /* Validity check for arguments */
-    width = atoi (argv[1]);
-    if (argc != 3 || (width <= 10)){
+    if (argc != 3 || ((width = atoi (argv[1])) <= 10)){
 	fprintf (stderr, "Usage: man2hlp <width> <file.man>\n");
 	return 3;
     }
@@ -329,9 +326,9 @@ int main (int argc, char **argv)
 	    break;
 	}
 	if (buffer2 [0] == '\\' && buffer2 [1] == '&')
-	    strcpy (buffer, buffer2 + 2);
+	    buffer = buffer2 + 2;
 	else
-	    strcpy (buffer, buffer2);
+	    buffer = buffer2;
 	in_row ++;
 	len = strlen (buffer);
 	/* Remove terminating newline */

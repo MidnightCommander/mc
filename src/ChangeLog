@@ -1,7 +1,10 @@
 2002-02-28  Andrew V. Samoilov  <kai@cmail.ru>
 
+	* man2hlp.c (main): Don't crash if called without argument(s).
+	Make buffer char pointer.
+
 	* find.c (find_parameters): Compile content_pattern here.
-	Inform user about alformed regular expression.
+	Inform user about malformed regular expression.
 	(search_content): Use compiled regular expression.
 	(do_find): Eliminate `done'.  Call regfree for compiled
 	content_pattern.
