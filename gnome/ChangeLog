@@ -1,5 +1,8 @@
 1999-02-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* mc.keys.in.in: Use "gnome-moz-remote file:%d/%f" for the html
+	file actions.
+
 	* gscreen.c (toolbar): Added a "rescan" button.
 
 	* gprefs.c (create_prop_box): Make the preferences dialog modal.

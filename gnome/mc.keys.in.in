@@ -128,16 +128,14 @@ audio/x-mp3:
 
 text/html:
 	icon-filename=@icondir@/gnome-text-html.png
-	open=gnome-moz-remote %f
-	open.netscape.View this file with Netscape=gnome-moz-remote %f
+	open=gnome-moz-remote file:%d/%f
+	open.netscape.View this file with Netscape=gnome-moz-remote file:%d/%f
 
 application/vcard:
 	icon-filename=@gnomeicons@/gnome-calendar.png
 
 x-url/http:
 	icon-filename=@icondir@/gnome-text-url.png
-
-x-url/http:
 	open=gnome-moz-remote %f
 
 x-url/ftp:
