@@ -43,31 +43,21 @@
 #include "key.h"		/* XCTRL and ALT macros  */
 #include "profile.h"	/* for history loading and saving */
 
-#ifndef HAVE_X
-#   define x_create_button(a,b,c)  1
-#   define x_create_radio(a,b,c)   1
-#   define x_create_check(a,b,c)   1
-#   define x_create_label(a,b,c)   1
-#   define x_create_input(a,b,c)   1
-#   define x_create_listbox(a,b,c) 1
-#   define x_create_buttonbar(a,b,c) 1
-#   define x_create_gauge(a,b,c) 1
-#   define x_listbox_select_nth(a,b)
-#   define x_list_insert(a,b,c)
-#   define x_redefine_label(a,b)
-#endif
+#define x_create_button(a,b,c)  1
+#define x_create_radio(a,b,c)   1
+#define x_create_check(a,b,c)   1
+#define x_create_label(a,b,c)   1
+#define x_create_input(a,b,c)   1
+#define x_create_listbox(a,b,c) 1
+#define x_create_buttonbar(a,b,c) 1
+#define x_create_gauge(a,b,c) 1
+#define x_listbox_select_nth(a,b)
+#define x_list_insert(a,b,c)
+#define x_redefine_label(a,b)
 
-#ifndef PORT_HAS_DESTROY_CMD
-#   define x_destroy_cmd(w)
-#endif
-
-#ifndef PORT_HAS_RADIO_FOCUS_ITEM
-#   define x_radio_focus_item(r)
-#endif
-
-#ifndef PORT_HAS_RADIO_TOGGLE
-#   define x_radio_toggle(r)
-#endif
+#define x_destroy_cmd(w)
+#define x_radio_focus_item(r)
+#define x_radio_toggle(r)
 
 static int button_event (Gpm_Event *event, WButton *b);
 
@@ -924,7 +914,6 @@ Hist *history_get (char *input_name)
 
 void history_put (char *input_name, Hist *h)
 {
-#ifdef PORT_WIDGET_WANTS_HISTORY
     int i;
     char *profile;
 
@@ -973,7 +962,6 @@ void history_put (char *input_name, Hist *h)
 	}
     }
     g_free (profile);
-#endif
 }
 
 /* }}} history saving and loading */
@@ -1111,7 +1099,7 @@ input_destroy (WInput *in)
     if (in->history){
 	Hist *current, *old;
 
-	if (!in->is_password && PORT_WIDGET_WANTS_HISTORY)	/* don't save passwords ;-) */
+	if (!in->is_password)	/* don't save passwords ;-) */
 	    history_put (in->history_name, in->history);
 
 	current = in->history;
@@ -1730,7 +1718,7 @@ input_new (int y, int x, int color, int len, const char *def_text, char *tkname)
     /* history setup */
     in->history = NULL;
     in->history_name = 0;
-    if (tkname && PORT_WIDGET_WANTS_HISTORY){
+    if (tkname) {
 	if (*tkname) {
 	    in->history_name = g_strdup (tkname);
 	    in->history = history_get (tkname);

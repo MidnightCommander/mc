@@ -77,26 +77,13 @@ Hook *select_file_hook = 0;
 
 static int panel_callback (Dlg_head *h, WPanel *p, int Msg, int Par);
 
-#ifndef HAVE_X
 static int panel_event (Gpm_Event *event, WPanel *panel);
-#else
-#define panel_event NULL
-#endif /* HAVE_X */
 
-#ifndef PORT_HAS_PANEL_ADJUST_TOP_FILE
-#   define x_adjust_top_file(p)
-#endif
-
-#ifndef PORT_HAS_PANEL_RESET_SORT_LABELS
-#   define x_reset_sort_labels(x)
-#endif
+#define x_adjust_top_file(p)
+#define x_reset_sort_labels(x)
 
 /* This macro extracts the number of available lines in a panel */
-#ifndef PORT_HAS_LLINES
 #define llines(p) (p->widget.lines-3 - (show_mini_info ? 2 : 0))
-#else
-#define llines(p) (p->widget.lines)
-#endif
 
 #ifdef PORT_NOT_FOCUS_SELECT_ITEM
 #   define focus_select_item(x)
@@ -577,7 +564,6 @@ format_file (char *dest, WPanel *panel, int file_index, int width, int attr, int
     }
 }
 
-#ifndef HAVE_X
 void
 repaint_file (WPanel *panel, int file_index, int mv, int attr, int isstatus)
 {
@@ -619,9 +605,7 @@ repaint_file (WPanel *panel, int file_index, int mv, int attr, int isstatus)
 	}
     }
 }
-#endif
 
-#ifndef PORT_HAS_DISPLAY_MINI_INFO
 void
 display_mini_info (WPanel *panel)
 {
@@ -682,9 +666,7 @@ display_mini_info (WPanel *panel)
     repaint_file (panel, panel->selected, 0, STATUS, 1);
     return;
 }
-#endif
 
-#ifndef HAVE_X
 void
 paint_dir (WPanel *panel)
 {
@@ -706,11 +688,7 @@ paint_dir (WPanel *panel)
     standend ();
     panel->dirty = 0;
 }
-#endif
 
-#ifdef HAVE_X
-#define mini_info_separator(x)
-#else
 static void
 mini_info_separator (WPanel *panel)
 {
@@ -774,9 +752,7 @@ show_dir (WPanel *panel)
     if (panel->active)
 	standend ();
 }
-#endif
 
-#ifndef PORT_HAS_PAINT_FRAME
 /* To be used only by long_frame and full_frame to adjust top_file */
 static void
 adjust_top_file (WPanel *panel)
@@ -788,7 +764,6 @@ adjust_top_file (WPanel *panel)
     if (old_top - panel->count > llines (panel))
 	panel->top_file = panel->count - llines (panel);
 }
-#endif
 
 /* Repaints the information that changes after a command */
 void
@@ -854,7 +829,6 @@ Xtry_to_select (WPanel *panel, char *name)
     g_free (subdir);
 }
 
-#ifndef PORT_HAS_PANEL_UPDATE_COLS
 void
 panel_update_cols (Widget *widget, int frame_size)
 {
@@ -881,7 +855,6 @@ panel_update_cols (Widget *widget, int frame_size)
     widget->cols = cols;
     widget->x = origin;
 }
-#endif
 
 static char *
 panel_save_name (WPanel *panel)
@@ -1065,7 +1038,6 @@ panel_reload (WPanel *panel)
     recalculate_panel_summary (panel);
 }
 
-#ifndef PORT_HAS_PAINT_FRAME
 void
 paint_frame (WPanel *panel)
 {
@@ -1124,7 +1096,6 @@ paint_frame (WPanel *panel)
 	    printw ("%*s", width, "");
     }
 }
-#endif
 
 static char *
 parse_panel_size (WPanel *panel, char *format, int isstatus)
@@ -2449,27 +2420,6 @@ file_mark (WPanel *panel, int index, int val)
     x_panel_select_item (panel, index, val);
 }
 
-#ifdef HAVE_X
-sortfn *
-get_sort_fn (char *name)
-{
-    int i;
-
-    /* First, try the long name options, from dir.c */
-    for (i = 0; i < SORT_TYPES_TOTAL; i++)
-	if (strcmp (name, sort_orders [i].sort_name) == 0)
-	    return (sortfn *)sort_orders [i].sort_fn;
-
-    /* Then try the short name options, from our local table */
-    for (i = 0; i < ELEMENTS (formats); i++){
-	if (strcmp (name, formats [i].id) == 0 && formats [i].sort_routine)
-	    return formats [i].sort_routine;
-    }
-    return NULL;
-}
-
-#else
-
 /*                                     */
 /* Panel mouse events support routines */
 /*                                     */
@@ -2574,14 +2524,10 @@ panel_event (Gpm_Event *event, WPanel *panel)
     }
     return MOU_NORMAL;
 }
-#endif /* !HAVE_X */
 
 void
 panel_update_marks (WPanel *panel)
 {
-#ifdef PORT_HAS_UPDATE_MARKS
-	x_panel_update_marks (panel);
-#endif
 }
 
 void

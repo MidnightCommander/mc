@@ -171,7 +171,6 @@ check_progress_buttons (FileOpContext *ctx)
     
     ui = ctx->ui;
 
-    x_flush_events ();
     event.x = -1;         /* Don't show the GPM cursor */
     c = get_event (&event, 0, 0);
     if (c == EV_NONE)

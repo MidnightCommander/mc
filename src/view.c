@@ -778,28 +778,17 @@ view_display_clean (WView *view, int height, int width)
 #define MARK_COLOR        SELECTED_COLOR
 #define DEF_COLOR         NORMAL_COLOR
 
-#ifndef PORT_HAS_VIEW_FREEZE
-#    define view_freeze(view)
-#    define view_thaw(view)
-#endif
+#define view_freeze(view)
+#define view_thaw(view)
 
-#ifdef HAVE_GNOME
-#    define PICK_COLOR(a,b) BOLD_COLOR : DEF_COLOR
-#else
-#    define PICK_COLOR(a,b) a : b
-#endif
+#define PICK_COLOR(a,b) a : b
+#define STATUS_LINES 1
 
 /* Shows the file pointed to by *start_display on view_win */
 static long
 display (WView *view)
 {
-#ifdef HAVE_X
-#   define frame_shift  0
-#   define STATUS_LINES 0
-#else
     const int frame_shift = view->have_frame;
-#   define STATUS_LINES 1
-#endif
     int col = 0 + frame_shift;
     int row = STATUS_LINES + frame_shift;
     int height, width;
@@ -1540,19 +1529,6 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
     update_activate = 0;
 
     for (; ; g_free (s)){
-#ifdef PORT_HAS_FLUSH_EVENTS
-	static int count;
-
-	if ((count++ % 32) == 0)
-	    x_flush_events ();
-#ifdef HAVE_GNOME
-	if (abort)
-	    break;
-#else
-	if (verbose && !d->running)
-	    break;
-#endif
-#endif
 	if (p >= update_activate){
 	    update_activate += update_steps;
 	    if (verbose){

@@ -311,7 +311,6 @@ save_configure (void)
     g_free (profile);
 }
 
-#ifndef PORT_HAS_SAVE_PANEL_TYPES
 static void
 panel_save_type (char *section, int type)
 {
@@ -339,7 +338,6 @@ save_panel_types ()
     if (type == view_listing)
 	panel_save_setup (right_panel, right_panel->panel_name);
 }
-#endif
 
 void
 save_setup (void)
@@ -407,10 +405,10 @@ panel_load_setup (WPanel *panel, char *section)
 	    panel->list_type = list_types [i].list_type;
 	    break;
 	}
-#ifndef PORT_HAS_ICON_VIEW
+
     if (panel->list_type == list_icons)
         panel->list_type = list_full;
-#endif
+
     /* User formats */
     if (panel->user_format){
 	g_free (panel->user_format);

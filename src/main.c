@@ -439,7 +439,6 @@ panel_clean_dir (WPanel *panel)
     clean_dir (&panel->dir, count);
 }
 
-#ifndef PORT_HAS_UPDATE_PANELS
 static void
 update_one_panel (int which, int force_update, char *current_file)
 {
@@ -477,7 +476,6 @@ update_panels (int force_update, char *current_file)
 
     mc_chdir (panel->cwd);
 }
-#endif
 
 #ifdef WANT_PARSE
 static void select_by_index (WPanel *panel, int i);
@@ -1361,7 +1359,6 @@ toggle_align_extensions (void)
  * Just a hack for allowing url-like pathnames to be accepted from the
  * command line.
  */
-#ifndef PORT_HAS_CREATE_PANELS
 static void
 translated_mc_chdir (char *dir)
 {
@@ -1437,7 +1434,6 @@ create_panels (void)
     
     the_menubar = menubar_new (0, 0, COLS, MenuBar, 5);
 }
-#endif
 
 static void copy_current_pathname (void)
 {
@@ -1988,7 +1984,6 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 
 #define xtoolkit_panel_setup()
 
-#ifndef PORT_HAS_LOAD_HINT
 void load_hint (void)
 {
     char *hint;
@@ -2010,7 +2005,6 @@ void load_hint (void)
 			" (C) 1995-1997 the Free Software Foundation");
     }
 }
-#endif
 
 static void
 setup_panels_and_run_mc (void)

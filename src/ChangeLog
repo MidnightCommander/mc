@@ -1,5 +1,8 @@
 2001-09-15  Pavel Roskin  <proski@gnu.org>
 
+	* textconf.h: Get rid of all PORT_HAS_*.  Adjust all users.
+	Continued eliminating GNOME code.
+
 	* cmd.c: Clean up unused GNOME code and some ifdef's.
 	* dlg.c: Likewise.
 	* dlg.h: Likewise.

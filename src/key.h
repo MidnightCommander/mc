@@ -9,9 +9,7 @@ int get_event (Gpm_Event *event, int redo_event, int block);
 int is_idle (void);
 int ctrl_pressed (void);
 
-#ifndef PORT_HAS_GETCH
 int mi_getch (void);
-#endif
 /* Possible return values from get_event: */
 #define EV_MOUSE   -2
 #define EV_NONE    -1

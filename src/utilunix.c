@@ -240,11 +240,6 @@ void save_stop_handler (void)
 }
 #endif /* VFS_STANDALONE */
 
-#ifdef HAVE_GNOME
-#define PORT_HAS_MY_SYSTEM 1
-#endif
-
-#ifndef PORT_HAS_MY_SYSTEM
 int my_system (int flags, const char *shell, const char *command)
 {
     struct sigaction ignore, save_intr, save_quit, save_stop;
@@ -310,7 +305,6 @@ int my_system (int flags, const char *shell, const char *command)
 
     return WEXITSTATUS(status);
 }
-#endif
 
 /* Returns a newly allocated string, if directory does not exist, return 0 */
 char *tilde_expand (const char *directory)
