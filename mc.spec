@@ -21,17 +21,6 @@ more features.  It is text mode, but also includes mouse support if you are
 running GPM.  Its coolest feature is the ability to ftp, view tar, zip
 files, and poke into RPMs for specific files.  :-)
 
-%package -n tkmc
-Summary:  Midnight Commander visual shell (tk version)
-Requires: mc
-Group:    X11/Shells
-%description -n tkmc
-Midnight Commander is a visual shell much like a file manager, only with
-way more features.  This is the Tk X window version.
-It's coolest feature is the
-ability to ftp, view tar, zip files and poke into RPMs for specific files.
-The tk version of Midnight Commander is not yet finished though. :-(
- 
 %package -n gmc
 Summary:  Midnight Commander visual shell (GNOME version)
 Requires: mc >= 4.1.31
@@ -57,7 +46,6 @@ Midnight file system (currently, only the Midnight Commander file manager).
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./autogen.sh \
 	--prefix=%{prefix} \
-	--with-tk \
 	--with-gnome \
 	--without-debug
 
@@ -67,7 +55,6 @@ if [ "$SMP" != "" ]; then
 else
   make
 fi
-(cd tk; make tkmc)
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -79,8 +66,6 @@ install lib/mcserv.init $RPM_BUILD_ROOT/etc/rc.d/init.d/mcserv
 
 install lib/mcserv.pamd $RPM_BUILD_ROOT/etc/pam.d/mcserv
 install lib/{mc.sh,mc.csh} $RPM_BUILD_ROOT/etc/profile.d
-
-install lib/tkmc.wmconfig $RPM_BUILD_ROOT/etc/X11/wmconfig/tkmc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -119,13 +104,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(-, root, man)  /usr/man/man8/mcserv.8
 /usr/bin/mcserv
 
-%files -n tkmc
-%defattr(-, root, root)
-
-/usr/bin/tkmc
-/usr/lib/mc/*.tcl
-%config(missingok) /etc/X11/wmconfig/tkmc
-
 %files -n gmc
 %defattr(-, root, root)
 
@@ -133,6 +111,9 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib/mc/layout
 
 %changelog
+* Sun Apr 19 1998 Marc Ewing <marc@redhat.com>
+- removed tkmc
+
 * Wed Apr 8 1998 Marc Ewing <marc@redhat.com>
 - add /usr/lib/mc/layout to gmc
 
