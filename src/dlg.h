@@ -67,7 +67,7 @@ typedef struct Dlg_head {
     /* Set by the user */
     int flags;			/* User flags */
     char *help_ctx;		/* Name of the help entry */
-    int *color;			/* Color set */
+    const int *color;		/* Color set */
     char *title;		/* Title of the dialog */
 
     /* Set and received by the user */
@@ -128,7 +128,7 @@ void draw_double_box (Dlg_head *h, int y, int x, int ys, int xs);
 
 /* Creates a dialog head  */
 Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
-		      int *col,
+		      const int *color_set,
 		      int (*callback) (struct Dlg_head *, int, int),
 		      char *help_ctx, char *name, int flags);
 

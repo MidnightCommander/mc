@@ -34,7 +34,9 @@ int   disable_colors = 0;
 /* Set if we are actually using colors */
 int use_colors = 0;
 
+/* Color styles for normal and error dialogs */
 int dialog_colors [4];
+int alarm_colors [4];
 
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
 
@@ -235,6 +237,11 @@ load_dialog_colors (void)
     dialog_colors [1] = COLOR_FOCUS;
     dialog_colors [2] = COLOR_HOT_NORMAL;
     dialog_colors [3] = COLOR_HOT_FOCUS;
+
+    alarm_colors [0] = ERROR_COLOR;
+    alarm_colors [1] = REVERSE_COLOR;
+    alarm_colors [2] = ERROR_COLOR;
+    alarm_colors [3] = COLOR_HOT_NORMAL;
 }
 
 void init_colors (void)

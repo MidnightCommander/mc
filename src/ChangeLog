@@ -1,5 +1,13 @@
 2002-08-30  Pavel Roskin  <proski@gnu.org>
 
+	* color.c: Define global array alarm_colors for the colors used
+	in the dialogs that should be most visible (error messages,
+	request to delete or overwrite).
+	(load_dialog_colors): Initialize alarm_colors.
+	* filegui.c: Use alarm_colors.
+	* wtools.c: Likewise.
+	* dlg.c (create_dlg): Make the color_set array constant.
+
 	* wtools.c (common_dialog_repaint): Use colors specific to the
 	current dialog, not fixed colors for "normal" dialogs.
 	* filegui.c (replace_callback): Eliminate, use

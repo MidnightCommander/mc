@@ -34,8 +34,8 @@ extern int attr_pairs [];
 #define Q_SELECTED_COLOR      BEST_COLOR (2, 0)
 #define Q_UNSELECTED_COLOR    REVERSE_COLOR
 
-extern int sel_mark_color  [4];
-extern int dialog_colors   [4];
+extern int dialog_colors[4];
+extern int alarm_colors[4];
 
 /* Dialog colors */			   
 #define COLOR_NORMAL       BEST_COLOR (8, A_REVERSE)

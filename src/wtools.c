@@ -180,13 +180,13 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
     int xpos, ypos;
     int cols, lines;
     char *cur_name;
-    static int query_colors [4];
-    
+    static int *query_colors;
+
     /* set dialog colors */
-    query_colors [0] = (flags & D_ERROR) ? ERROR_COLOR :  Q_UNSELECTED_COLOR;
-    query_colors [1] = (flags & D_ERROR) ? REVERSE_COLOR : Q_SELECTED_COLOR;
-    query_colors [2] = (flags & D_ERROR) ? ERROR_COLOR : COLOR_HOT_NORMAL;
-    query_colors [3] = (flags & D_ERROR) ? COLOR_HOT_NORMAL :  COLOR_HOT_FOCUS;
+    if (flags & D_ERROR)
+	query_colors = alarm_colors;
+    else
+	query_colors = dialog_colors;
     
     if (header == MSG_ERROR)
 	header = _(" Error ");

@@ -186,7 +186,7 @@ int default_dlg_callback (Dlg_head *h, int id, int msg)
 }
 
 Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
-		      int *color_set,
+		      const int *color_set,
 		      int (*callback) (struct Dlg_head *, int, int),
 		      char *help_ctx, char *name,
 		      int flags)

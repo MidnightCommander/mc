@@ -130,9 +130,6 @@ typedef struct {
 } FileOpContextUI;
 
 
-/* Replace dialog: color set */
-static int replace_colors [4];
-
 /* Used to save the hint line */
 static int last_hint_line;
 
@@ -613,12 +610,7 @@ init_replace (FileOpContext *ctx, enum OperationMode mode)
 
     ui = ctx->ui;
 
-    replace_colors [0] = ERROR_COLOR;
-    replace_colors [1] = COLOR_NORMAL;
-    replace_colors [2] = ERROR_COLOR;
-    replace_colors [3] = COLOR_NORMAL;
-    
-    ui->replace_dlg = create_dlg (0, 0, 16, rd_xlen, replace_colors,
+    ui->replace_dlg = create_dlg (0, 0, 16, rd_xlen, alarm_colors,
 				  common_dialog_callback,
 				  "[ Replace ]", "replace", DLG_CENTER);
     
