@@ -170,6 +170,10 @@ check_progress_buttons (FileOpContext *ctx)
     c = get_event (&event, 0, 0);
     if (c == EV_NONE)
       return FILE_CONT;
+
+    /* Reinitialize to avoid old values after incomplete events */
+    ui->op_dlg->ret_value = FILE_CONT;
+
     dlg_process_event (ui->op_dlg, c, &event);
     switch (ui->op_dlg->ret_value) {
     case FILE_SKIP:
