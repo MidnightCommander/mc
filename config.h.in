@@ -239,14 +239,8 @@
 /* Define if you want to turn on SCO-specific code */
 #undef SCO_FLAVOR
 
-/* Define if your system has struct linger */
-#undef HAVE_STRUCT_LINGER
-
 /* Define if your curses has this one (AIX, OSF/1) */
 #undef USE_SETUPTERM
-
-/* Link in ext2fs code for delfs experimental file system */
-#undef USE_EXT2FSLIB
 
 /* Define if you want to use the HSC firewall */
 #undef HSC_PROXY
@@ -324,15 +318,6 @@
 /* Define if you have the munmap function.  */
 #undef HAVE_MUNMAP
 
-/* Define if you have the pmap_getmaps function.  */
-#undef HAVE_PMAP_GETMAPS
-
-/* Define if you have the pmap_getport function.  */
-#undef HAVE_PMAP_GETPORT
-
-/* Define if you have the pmap_set function.  */
-#undef HAVE_PMAP_SET
-
 /* Define if you have the putenv function.  */
 #undef HAVE_PUTENV
 
@@ -341,9 +326,6 @@
 
 /* Define if you have the resizeterm function.  */
 #undef HAVE_RESIZETERM
-
-/* Define if you have the rresvport function.  */
-#undef HAVE_RRESVPORT
 
 /* Define if you have the setenv function.  */
 #undef HAVE_SETENV
@@ -417,9 +399,6 @@
 /* Define if you have the <dirent.h> header file.  */
 #undef HAVE_DIRENT_H
 
-/* Define if you have the <ext2fs/ext2fs.h> header file.  */
-#undef HAVE_EXT2FS_EXT2FS_H
-
 /* Define if you have the <fcntl.h> header file.  */
 #undef HAVE_FCNTL_H
 
@@ -428,9 +407,6 @@
 
 /* Define if you have the <limits.h> header file.  */
 #undef HAVE_LIMITS_H
-
-/* Define if you have the <linux/ext2_fs.h> header file.  */
-#undef HAVE_LINUX_EXT2_FS_H
 
 /* Define if you have the <locale.h> header file.  */
 #undef HAVE_LOCALE_H
@@ -452,9 +428,6 @@
 
 /* Define if you have the <nl_types.h> header file.  */
 #undef HAVE_NL_TYPES_H
-
-/* Define if you have the <rpc/pmap_clnt.h> header file.  */
-#undef HAVE_RPC_PMAP_CLNT_H
 
 /* Define if you have the <shadow.h> header file.  */
 #undef HAVE_SHADOW_H

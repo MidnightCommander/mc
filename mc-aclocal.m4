@@ -1117,7 +1117,7 @@ dnl is not defined. -- Norbert
 dnl Below all tests but the one for HP-UX are removed. They caused more
 dnl problems than they soved, sigh. -- Norbert
 
-AC_DEFUN(fp_PROG_CC_STDC,
+AC_DEFUN(MC_HPUX_PROG_CC_STDC,
 [AC_MSG_CHECKING(for ${CC-cc} option to accept ANSI C)
 AC_CACHE_VAL(ac_cv_prog_cc_stdc,
 [ac_cv_prog_cc_stdc=no

@@ -8,7 +8,7 @@ test -z "$srcdir" && srcdir=.
 cd $srcdir
 if test -d macros; then
 	test -f mc-aclocal.m4 && test -f gettext.m4 && cat mc-aclocal.m4 gettext.m4 > acinclude.m4
-	aclocal $ACLOCAL_FLAGS
+	aclocal -I macros $ACLOCAL_FLAGS
 else
 	echo macros directory not found, skipping generation of aclocal.m4
 fi
