@@ -1,6 +1,12 @@
 1999-01-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* main.c (main): Do not load the hotlist here anymore.
+	* widget.c (listbox_new): Under GNOME, height of the listbox might
+	be less than zero (due to LINES/COLS being set to zero there).  So
+	for bow, set the height to 1.  This needs to be propery computed
+	in x_create_listbox.
+
+	* main.c (main): Do not load the hotlist here anymore.   We
+	auto-load it on the 
 
 1998-12-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 

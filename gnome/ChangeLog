@@ -1,5 +1,7 @@
 1999-01-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gwidget.c (x_create_listbox): Temporary hack
+
 	* gmetadata.c (gmeta_get_icon_pos): Fixed the memory leak here. 
 
 	* gicon.c (gicon_get_icon_for_file): Actually return a value
