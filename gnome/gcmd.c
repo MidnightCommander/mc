@@ -271,7 +271,7 @@ gnome_sort_cmd (GtkWidget *widget, WPanel *panel)
 	gmc_window_setup_from_panel (GNOME_DIALOG (sort_box), panel);
 	
 	/* we define this up here so we can pass it in to our callback */
-	cbox1 = gtk_check_button_new_with_label (N_("Ignore case sensitivity."));
+	cbox1 = gtk_check_button_new_with_label (_("Ignore case sensitivity."));
 	hbox = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (sort_box)->vbox), hbox, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new ("Sort files by "), FALSE, FALSE, 0);
@@ -324,7 +324,7 @@ gnome_sort_cmd (GtkWidget *widget, WPanel *panel)
 	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (sort_box)->vbox),
 			    cbox1, FALSE, FALSE, 0);
 
-	cbox2 = gtk_check_button_new_with_label (N_("Reverse the order."));
+	cbox2 = gtk_check_button_new_with_label (_("Reverse the order."));
 	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (cbox2), panel->reverse);
 	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (sort_box)->vbox),
 			    cbox2, FALSE, FALSE, 0);
