@@ -352,6 +352,12 @@ dir of the current dir.
 <tag/C-PageUp, C-PageDown/ Only when ran on the Linux console:
 does a chdir to &dquot;..&dquot; and to the currently selected
 directory respectively.
+<tag/M-y/ Moves to the previous directory in the history, equivalent 
+to depressing the '<' with the mouse.
+<tag/M-u/ Moves to the next directory in the history, equivalent 
+to depressing the '>' with the mouse.
+<tag/M-S-h, M-H/ Displays the directory history, equivalent to 
+depressing the 'v' with the mouse.
 </descrip>
 
 <sect1>Shell Command Line<label id="Shell Command Line">
