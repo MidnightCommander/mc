@@ -101,7 +101,8 @@ static int cpio_create_entry(vfs *me, vfs_s_super *super, struct stat *stat, cha
 static int cpio_read(void *fh, char *buffer, int count);
 
 #define CPIO_POS(super) cpio_position
-//#define CPIO_POS(super) (super)->u.cpio.fd /* If some time reentrancy should be needed */
+/* If some time reentrancy should be needed change it to */
+/* #define CPIO_POS(super) (super)->u.cpio.fd */
 
 #define CPIO_SEEK_SET(super, where) mc_lseek((super)->u.cpio.fd, CPIO_POS(super) = (where), SEEK_SET)
 #define CPIO_SEEK_CUR(super, where) mc_lseek((super)->u.cpio.fd, CPIO_POS(super) += (where), SEEK_SET)

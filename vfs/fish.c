@@ -702,7 +702,7 @@ fish_chown (vfs *me, char *path, int owner, int group)
 	    "echo '### 000'\n", 
 	    sgroup, rpath,
 	    sgroup, rpath);
-    //send_fish_command(me, super, buf, OPT_FLUSH); 
+    /* send_fish_command(me, super, buf, OPT_FLUSH); */
     POSTFIX(OPT_FLUSH)
 }
 

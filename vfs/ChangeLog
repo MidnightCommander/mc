@@ -1,5 +1,8 @@
 2001-02-08  Pavel Roskin  <proski@gnu.org>
 
+	* cpio.c: Eliminate C++ comments.
+	* fish.c: Likewise.
+
 	* Make-mc.in: Use mkinstalldirs to create $(distdir)/extfs,
 	since CVS Automake already creates that directory.
 
