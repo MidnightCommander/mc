@@ -6,15 +6,14 @@
 #            Andrew V. Samoilov <sav@bcs.zp.ua> 2000
 # beta version 2.0
 #
-DRAR=/usr/bin
-RAR=$DRAR/rar
-UNRAR=$DRAR/unrar # Prefer unrar (freeware)
+RAR=rar
+UNRAR=unrar # Prefer unrar (freeware)
 #
 # NOTE: rar ver 2.0 by Eugene Roshal
 # ftp.elf.stuba.sk/pub/pc/pack
 #
 
-if [ ! -x $UNRAR -a -x $RAR ]; then
+if ! unrar >/dev/null 2>&1; then
     UNRAR=$RAR
 fi
 
@@ -41,7 +40,7 @@ else {
 	    $6="-rw-r--r--"
     printf "%s   1 %-8d %-8d %8d %3s %2d %4d %s %s\n", $6, uid, 0, $1, substr(date, (a[2]-1)*3+1, 3), a[1], a[3], $5, str
 }
-}' 2>/dev/null
+}'
 }
 
 mcrarfs_copyin ()
@@ -50,23 +49,22 @@ mcrarfs_copyin ()
 # preserve pwd. It is clean, but is it necessary?
     pwd=`pwd`
 # Create a directory and copy in it the tmp file with the good name     
-    mkdir $3.dir
-    cd $3.dir
+    mkdir "$3.dir"
+    cd "$3.dir"
     di="${2%/*}"
 # if file is to be written upper in the archive tree, make fake dir
     if test "$di" != "${2##*/}" ; then
         mkdir -p "$di" 
     fi
-# (cp -p) to preserve date, but $2 is dated now!
-    cp -p $3 "$3.dir/$2" 
+    cp -fp "$3" "$3.dir/$2" 
     $RAR a "$1" "$2" >/dev/null
     cd $pwd
-    rm -rf $3.dir
+    rm -rf "$3.dir"
 }
 
 mcrarfs_copyout ()
 {
-    $UNRAR p -c- -inul "$1" "$2" > $3 2>/dev/null
+    $UNRAR p -c- -inul "$1" "$2" > "$3"
 }
 
 mcrarfs_mkdir ()
@@ -80,27 +78,29 @@ mcrarfs_mkdir ()
     mkdir -p "$2"  
 # rar cannot create an empty directory    
     touch "$2"/.rarfs
-    $RAR a -r "$1" "$2" &>/dev/null
-    $RAR d "$1" "$2"/.rarfs &>/dev/null
+    $RAR a -r "$1" "$2" >/dev/null
+    $RAR d "$1" "$2/.rarfs" >/dev/null
     cd $pwd
     rm -rf $dir
 }
 
 mcrarfs_rm ()
 {
-    $RAR d "$1" "$2" &>/dev/null
+    $RAR d "$1" "$2" >/dev/null
 }
 
 umask 077
 
-# uncomment this line for debugging
-#echo "`date +%T` ${0##*/} $1 $2 to=$3 tmp=$4" >>/tmp/${0##*/}.log
-case "$1" in
-  list)    mcrarfs_list    "$2" | sort +9 ; exit 0;;
-  rm)      mcrarfs_rm      "$2" "$3" ; exit 0;;
-  rmdir)   mcrarfs_rm      "$2" "$3" ; exit 0;;
-  mkdir)   mcrarfs_mkdir   "$2" "$3" ; exit 0;;
-  copyin)  mcrarfs_copyin  "$2" "$3" $4; exit 0;;
-  copyout) mcrarfs_copyout "$2" "$3" $4; exit 0;;
+cmd="$1"
+shift
+
+case "$cmd" in
+  list)    mcrarfs_list    "$@" ;;
+  rm)      mcrarfs_rm      "$@" ;;
+  rmdir)   mcrarfs_rm      "$@" ;;
+  mkdir)   mcrarfs_mkdir   "$@" ;;
+  copyin)  mcrarfs_copyin  "$@" ;;
+  copyout) mcrarfs_copyout "$@" ;;
+  *) exit 1 ;;
 esac
-exit 1
+exit 0

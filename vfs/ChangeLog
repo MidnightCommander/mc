@@ -1,5 +1,8 @@
 2002-12-12  Pavel Roskin  <proski@gnu.org>
 
+	* extfs/urar.in: Strengthen quoting.  Don't use full path to rar
+	and unrar.  Don't redirect stderr to /dev/null.
+
 	* extfs/uar.in: Simplify "list" command, don't use current year.
 	Use more careful quoting.
 
