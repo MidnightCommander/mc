@@ -67,6 +67,7 @@
 #include "mad.h"
 #include "dialog.h"		/* message() */
 #include "../vfs/vfs.h"		/* mc_read() */
+#include "x.h"
 
 struct sigaction startup_handler;
 extern struct mount_entry *mount_list;
