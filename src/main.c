@@ -88,11 +88,9 @@
 
 /* Program include files */
 #include "x.h"
-#include "mad.h"
 #include "dir.h"
 #include "color.h"
 #include "global.h"
-#include "util.h"
 #include "dialog.h"
 #include "menu.h"
 #include "file.h"
@@ -100,7 +98,6 @@
 #include "main.h"
 #include "win.h"
 #include "user.h"
-#include "mem.h"
 #include "mouse.h"
 #include "option.h"
 #include "tree.h"
@@ -402,7 +399,7 @@ reload_panelized (WPanel *panel)
 	    do_file_mark (panel, i, 0);
 	}
 	if (mc_lstat (list->list [i].fname, &list->list [i].buf)){
-	    free (list->list [i].fname);
+	    g_free (list->list [i].fname);
 	    continue;
 	}
     	if (list->list [i].f.marked)
@@ -429,13 +426,13 @@ update_one_panel_widget (WPanel *panel, int force_update, char *current_file)
 	panel->is_panelized = 0;
 
 	ftpfs_flushdir ();
-	bzero (&(panel->dir_stat), sizeof (panel->dir_stat));
+	memset (&(panel->dir_stat), 0, sizeof (panel->dir_stat));
     }
     
     /* If current_file == -1 (an invalid pointer) then preserve selection */
     if (current_file == UP_KEEPSEL){
 	free_pointer = 1;
-	current_file = strdup (panel->dir.list [panel->selected].fname);
+	current_file = g_strdup (panel->dir.list [panel->selected].fname);
     } else
 	free_pointer = 0;
     
@@ -448,7 +445,7 @@ update_one_panel_widget (WPanel *panel, int force_update, char *current_file)
     panel->dirty = 1;
 
     if (free_pointer)
-	free (current_file);
+	g_free (current_file);
 
 #ifdef HAVE_X
     paint_panel (panel);
@@ -568,13 +565,13 @@ static void parse_control_file (void)
 	return;
     }
 #endif
-    data = (char *) xmalloc (s.st_size+1, "main, parse_control_file");
+    data = (char *) g_malloc (s.st_size+1);
     if (!data){
 	fclose (file);
 	return;
     }
     if (s.st_size != fread (data, 1, s.st_size, file)){
-	free (data);
+	g_free (data);
 	fclose (file);
 	return;
     }
@@ -632,7 +629,7 @@ static void parse_control_file (void)
 	current = strtok (NULL, " \t\n");
     }
 
-    free (data);
+    g_free (data);
     paint_panel (cpanel);
     paint_panel (opanel);
 }
@@ -706,7 +703,7 @@ do_execute (const char *shell, const char *command, int flags)
     char *old_vfs_dir = 0;
 
     if (!vfs_current_is_local ())
-	old_vfs_dir = strdup (vfs_get_current_dir ());
+	old_vfs_dir = g_strdup (vfs_get_current_dir ());
 #endif
 
     save_cwds_stat ();
@@ -768,7 +765,7 @@ do_execute (const char *shell, const char *command, int flags)
 #ifdef USE_VFS
 	if (old_vfs_dir){
 	    mc_chdir (old_vfs_dir);
-	    free (old_vfs_dir);
+	    g_free (old_vfs_dir);
 	}
 #endif
 
@@ -900,25 +897,23 @@ void
 directory_history_add (WPanel * panel, char *s)
 {
     if (!panel->dir_history) {
-	panel->dir_history = malloc (sizeof (Hist));
-	memset (panel->dir_history, 0, sizeof (Hist));
-	panel->dir_history->text = strdup (s);
+	panel->dir_history = g_new0 (Hist, 1);
+	panel->dir_history->text = g_strdup (s);
 	return;
     }
     if (!strcmp (panel->dir_history->text, s))
 	return;
     if (panel->dir_history->next) {
 	if (panel->dir_history->next->text) {
-	    free (panel->dir_history->next->text);
+	   g_free (panel->dir_history->next->text);
 	    panel->dir_history->next->text = 0;
 	}
     } else {
-	panel->dir_history->next = malloc (sizeof (Hist));
-	memset (panel->dir_history->next, 0, sizeof (Hist));
+	panel->dir_history->next = g_new0 (Hist, 1);
 	panel->dir_history->next->prev = panel->dir_history;
     }
     panel->dir_history = panel->dir_history->next;
-    panel->dir_history->text = strdup (s);
+    panel->dir_history->text = g_strdup (s);
     
     panel_update_marks (panel);
 }
@@ -953,7 +948,7 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
     vfsid oldvfsid;
     struct vfs_stamping *parent;
 #endif    
-    olddir = strdup (panel->cwd);
+    olddir = g_strdup (panel->cwd);
     translated_url = new_dir = vfs_translate_url (new_dir);
 
     /* Convert *new_path to a suitable pathname, handle ~user */
@@ -971,11 +966,11 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
     
     if (mc_chdir (directory) == -1){
 	strcpy (panel->cwd, olddir);
-	free (olddir);
-        free (translated_url);
+	g_free (olddir);
+       g_free (translated_url);
 	return 0;
     }
-    free (translated_url);
+    g_free (translated_url);
 
     /* Success: save previous directory, shutdown status of previous dir */
     strcpy (panel->lwd, olddir);
@@ -1006,7 +1001,7 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
     load_hint ();
     panel_update_contents (panel);
     
-    free (olddir);
+    g_free (olddir);
 
     return 1;
 }
@@ -1061,7 +1056,7 @@ directory_history_list (WPanel * panel)
 		r = _do_panel_cd (panel, s, cd_exact);
 		if (r)
 		    directory_history_add (panel, panel->cwd);
-		free (s);
+		g_free (s);
 	    }
 	}
     }
@@ -1141,10 +1136,10 @@ set_sort_to (WPanel *p, sortfn *sort_order)
     if (sort_order == (sortfn *) unsorted){
 	char *current_file;
 	
-	current_file = strdup (cpanel->dir.list [cpanel->selected].fname);
+	current_file = g_strdup (cpanel->dir.list [cpanel->selected].fname);
 	panel_reload (cpanel);
 	try_to_select (cpanel, current_file);
-	free (current_file);
+	g_free (current_file);
     }
     do_re_sort (p);
 }
@@ -1174,7 +1169,7 @@ tree_box (void)
     sel_dir = tree (selection (cpanel)->fname);
     if (sel_dir){
 	do_cd(sel_dir, cd_exact);
-	free (sel_dir);
+	g_free (sel_dir);
     }
 }
 #endif
@@ -1186,7 +1181,7 @@ static void
     char *newmode;
     newmode = listmode_edit ("half <type,>name,|,size:8,|,perm:4+");
     message (0, " Listing format edit ", " New mode is \"%s\" ", newmode);
-    free (newmode);
+    g_free (newmode);
 }
 #endif
 
@@ -1450,7 +1445,7 @@ translated_mc_chdir (char *dir)
 
 	newdir = vfs_translate_url (dir);
 	mc_chdir (newdir);
-	free (newdir);
+	g_free (newdir);
 }
 
 #ifndef PORT_HAS_CREATE_PANELS
@@ -1556,7 +1551,7 @@ static void copy_readlink (WPanel *panel)
 	int i;
 	
 	i = mc_readlink (p, buffer, MC_MAXPATHLEN);
-	free (p);
+	g_free (p);
 	if (i > 0) {
 	    buffer [i] = 0;
 	    stuff (input_w (cmdline), buffer, 0);
@@ -1590,7 +1585,7 @@ void copy_prog_name (void)
     } else
 	tmp = name_quote (selection (cpanel)->fname, 1);
     stuff (input_w (cmdline), tmp, 1);
-    free (tmp);
+    g_free (tmp);
 }   
 
 static void copy_tagged (WPanel *panel)
@@ -1605,12 +1600,12 @@ static void copy_tagged (WPanel *panel)
 	    if (panel->dir.list [i].f.marked) {
 	    	char *tmp = name_quote (panel->dir.list [i].fname, 1);
 		stuff (input_w (cmdline), tmp, 1);
-		free (tmp);
+		g_free (tmp);
 	    }
     } else {
     	char *tmp = name_quote (panel->dir.list [panel->selected].fname, 1);
 	stuff (input_w (cmdline), tmp, 1);
-	free (tmp);
+	g_free (tmp);
     }
     input_enable_update (input_w (cmdline));
 }
@@ -2085,7 +2080,7 @@ void load_hint ()
     if ((hint = get_random_hint ())){
 	if (*hint)
 	    set_hintbar (hint);
-	free (hint);
+	g_free (hint);
     } else {
 	set_hintbar ("The Midnight Commander " VERSION
 			" (C) 1995-1997 the Free Software Foundation");
@@ -2134,15 +2129,15 @@ prepend_cwd_on_local (char *filename)
 
     if (vfs_file_is_local (filename)){
 	if (*filename == PATH_SEP)	/* an absolute pathname */
-	    return strdup (filename);
-	d = malloc (MC_MAXPATHLEN + strlen (filename) + 2);
+	    return g_strdup (filename);
+	d = g_malloc (MC_MAXPATHLEN + strlen (filename) + 2);
 	mc_get_current_wd (d, MC_MAXPATHLEN);
 	l = strlen(d);
 	d[l++] = PATH_SEP;
 	strcpy (d + l, filename);
 	return canonicalize_pathname (d);
     } else
-	return strdup (filename);
+	return g_strdup (filename);
 }
 
 #ifdef USE_INTERNAL_EDIT
@@ -2171,7 +2166,7 @@ mc_maybe_editor_or_viewer (void)
 	    edit (edit_one_file, 1);
     }
 #endif
-    free (path);
+    g_free (path);
     midnight_shutdown = 1;
     done_mc ();
     return 1;
@@ -2203,9 +2198,9 @@ do_nc (void)
     /* destroy_dlg destroys even cpanel->cwd, so we have to save a copy :) */
     if (print_last_wd) {
 	if (!vfs_current_is_local ())
-	    last_wd_string = strdup (".");
+	    last_wd_string = g_strdup (".");
 	else
-	    last_wd_string = strdup (cpanel->cwd);
+	    last_wd_string = g_strdup (cpanel->cwd);
     }
     done_mc ();
     
@@ -2337,19 +2332,19 @@ OS_Setup ()
 #endif /* ! HAVE_X */
     shell = getenv ("SHELL");
     if (!shell || !*shell)
-	shell = strdup (getpwuid (geteuid ())->pw_shell);
+	shell = g_strdup (getpwuid (geteuid ())->pw_shell);
     if (!shell || !*shell)
 	shell = "/bin/sh";
 
-    sprintf (control_file, CONTROL_FILE, getpid ());
+    g_snprintf (control_file, sizeof (control_file), CONTROL_FILE, getpid ());
     my_putenv ("MC_CONTROL_FILE", control_file);
     
     /* This is the directory, where MC was installed, on Unix this is LIBDIR */
     /* and can be overriden by the MC_LIBDIR environment variable */
     if ((mc_libdir = getenv ("MC_LIBDIR")) != NULL) {
-	mc_home = strdup(mc_libdir);
+	mc_home = g_strdup (mc_libdir);
     } else {
-	mc_home = strdup(LIBDIR);
+	mc_home = g_strdup (LIBDIR);
     }
 }
 
@@ -2436,21 +2431,24 @@ print_mc_usage (void)
 #endif
     "-c, --color        Force color mode.\n"
     "-C, --colors       Specify colors (use --help-colors to get a list).\n"
+    "-d, --nomouse      Disable mouse support.\n"
 #ifdef USE_INTERNAL_EDIT
     "-e, --edit         Startup the internal editor.\n"
 #endif
-    "-d, --nomouse      Disable mouse support.\n"
     "-f, --libdir       Print configured paths.\n"
     "-h, --help         Shows this help message.\n"
     "-k, --resetsoft    Reset softkeys (HP terminals only) to their terminfo/termcap\n"
     "                   default.\n"
+#ifdef USE_NETCODE
+    "-l, --ftplog file  Log ftpfs commands to the file.\n"
+#endif
+#ifdef HAVE_MAD
+    "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
+#endif
     "-P, --printwd      At exit, print the last working directory.\n"
     "-s, --slow         Disables verbose operation (for slow terminals).\n"
 #if defined(HAVE_SLANG) && !defined(OS2_NT)
     "-t, --termcap      Activate support for the TERMCAP variable.\n"
-#endif
-#ifdef USE_NETCODE
-    "-l, --ftplog file  Log ftpfs commands to the file.\n"
 #endif
 #if defined(HAVE_SLANG) && defined(OS2_NT)
     "-S, --createcmdile Create command file to set default directory upon exit.\n"
@@ -2529,14 +2527,20 @@ process_args (int c, char *option_arg)
 	finish_program = 1;
 	break;
 		
+#ifdef USE_NETCODE
+    case 'l':
+	ftpfs_set_debug (option_arg);
+	break;
+#endif
+
     case 'm':
 	fprintf (stderr, _("Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"));
 	finish_program = 1;
 	break;
-		
-#ifdef USE_NETCODE
-    case 'l':
-	ftpfs_set_debug (option_arg);
+
+#ifdef HAVE_MAD
+    case 'M':
+	mad_set_debug (option_arg);
 	break;
 #endif
 		
@@ -2626,6 +2630,9 @@ static struct poptOption argument_table [] = {
     { "help-colors",	'H', POPT_ARG_NONE, 	NULL, 			 'H' },
 #ifdef USE_NETCODE
     { "ftplog", 	'l', POPT_ARG_STRING, 	NULL, 			 'l' },
+#endif
+#ifdef HAVE_MAD
+    { "memory", 	'M', POPT_ARG_STRING, 	NULL, 			 'M' },
 #endif
     { "libdir", 	'f', POPT_ARG_NONE, 	NULL, 			 'f' },
     { NULL, 		'm', POPT_ARG_NONE, 	NULL, 			 'm' },
@@ -2728,19 +2735,19 @@ handle_args (int argc, char *argv [])
     if (!STRNCOMP (base, "mce", 3) || !STRCOMP(base, "vi")) {
 	edit_one_file = "";
         if (tmp)
-	    edit_one_file = strdup (tmp);
+	    edit_one_file = g_strdup (tmp);
     } else
 	if (!STRNCOMP (base, "mcv", 3) || !STRCOMP(base, "view")) {
 	    if (tmp)
-		view_one_file = strdup (tmp);
+		view_one_file = g_strdup (tmp);
     } else {
        	/* sets the current dir and the other dir */
 	if (tmp) {
     	    char buffer[MC_MAXPATHLEN + 2];
-	    this_dir = strdup (tmp);
+	    this_dir = g_strdup (tmp);
 	    mc_get_current_wd (buffer, sizeof (buffer) - 2);
 	    if ((tmp = poptGetArg (ctx)))
-	        other_dir = strdup (tmp);
+	        other_dir = g_strdup (tmp);
 	}
     }
 
@@ -2763,12 +2770,12 @@ static int
 do_mc_filename_rename (char *mc_dir, char *o_name, char *n_name)
 {
 	char *full_o_name = concat_dir_and_file (home_dir, o_name);
-	char *full_n_name = copy_strings (home_dir, MC_BASE, n_name, NULL);
+	char *full_n_name = g_strconcat (home_dir, MC_BASE, n_name, NULL);
 	int move;
 	
 	move = 0 == rename (full_o_name, full_n_name);
-	free (full_o_name);
-	free (full_n_name);
+	g_free (full_o_name);
+	g_free (full_n_name);
 	return move;
 }
 
@@ -2807,7 +2814,7 @@ compatibility_move_mc_files (void)
 	char *mc_dir = concat_dir_and_file (home_dir, ".mc");
 	
 	do_compatibility_move (mc_dir);
-	free (mc_dir);
+	g_free (mc_dir);
 }
 #endif
 
@@ -2819,7 +2826,7 @@ mc_tree_store_load (void)
 	tree_file = concat_dir_and_file (home_dir, MC_TREE);
 	tree_store_init ();
 	tree_store_load (tree_file);
-	free (tree_file);
+	g_free (tree_file);
 }
 
 void
@@ -2830,7 +2837,7 @@ mc_tree_store_save (void)
 	printf ("Saving tree!\n");
 	tree_file = concat_dir_and_file (home_dir, MC_TREE);
 	tree_store_save (tree_file);
-	free (tree_file);
+	g_free (tree_file);
 }
 
 int main (int argc, char *argv [])
@@ -2917,7 +2924,7 @@ int main (int argc, char *argv [])
 	if (open (ttyname (0), O_RDWR) < 0)
 	    if (open ("/dev/tty", O_RDWR) < 0) {
 	    /* Try if stderr is not redirected as the last chance */
-	        char *p = strdup (ttyname (0));
+	        char *p = g_strdup (ttyname (0));
 	        
 	        if (!strcmp (p, ttyname (2)))
 	            dup2 (2, 1);
@@ -2927,7 +2934,7 @@ int main (int argc, char *argv [])
 			       "On some systems you may want to run # `which mc`\n"));
 		    exit (1);
 	        }
-	        free (p);
+	        g_free (p);
 	    }
 #endif
     }
@@ -3049,7 +3056,7 @@ int main (int argc, char *argv [])
 
 #ifdef _OS_NT
     /* On NT, home_dir is malloced */
-    free (home_dir);
+    g_free (home_dir);
 #endif
 #if defined(OS2_NT)
     if (print_last_wd == 2){
@@ -3072,7 +3079,7 @@ int main (int argc, char *argv [])
             write (stdout_fd, ".", 1);
         else
 	    write (stdout_fd, last_wd_string, strlen (last_wd_string));
-	free (last_wd_string);
+	g_free (last_wd_string);
     }
 
 #ifdef HAVE_MAD

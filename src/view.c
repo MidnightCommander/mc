@@ -46,20 +46,15 @@
 #    include <unistd.h>
 #endif
 #include <ctype.h>	/* For toupper() */
-#include <stdlib.h>	/* atoi() */
-#include <malloc.h>
 #include <errno.h>
 #include <limits.h>
 #include <sys/param.h>
-#include "mem.h"
-#include "mad.h"
-#include "util.h"
+#include "global.h"
 #include "dlg.h"		/* Needed by widget.h */
 #include "widget.h"		/* Needed for buttonbar_new */
 #include "color.h"
 #include "dialog.h"
 #include "mouse.h"
-#include "global.h"
 #include "help.h"
 #include "key.h"		/* For mi_getch() */
 #include "layout.h"
@@ -70,7 +65,6 @@
 #else
 #    include <regex.h>
 #endif
-#include "fs.h"
 #include "../vfs/vfs.h"
 #include "dir.h"
 #include "panel.h" /* Needed for current_panel and other_panel */
@@ -100,6 +94,8 @@ int max_dirt_limit =
 #else
 10;
 #endif
+
+extern Hook *idle_hook;
 
 /* Our callback */
 static int view_callback (Dlg_head *h, WView *view, int msg, int par);
@@ -170,9 +166,9 @@ free_file (WView *view)
     /* Block_ptr may be zero if the file was a file with 0 bytes */
     if (view->growing_buffer && view->block_ptr){
 	for (i = 0; i < view->blocks; i++){
-	    free (view->block_ptr [i].data);
+	    g_free (view->block_ptr [i].data);
 	}
-	free (view->block_ptr);
+	g_free (view->block_ptr);
     }
 }
 
@@ -187,7 +183,7 @@ view_done (WView *view)
 
     /* alex: release core, used to replace mmap */
     if (!view->mmapping && !view->growing_buffer && view->data != NULL){
-        free(view->data);
+        g_free (view->data);
 	view->data = NULL;
     }
 
@@ -195,9 +191,9 @@ view_done (WView *view)
 	if (view->localcopy)
 	    mc_ungetlocalcopy (view->filename, view->localcopy, 0);
 	free_file (view);
-	free (view->filename);
+	g_free (view->filename);
 	if (view->command)
-	    free (view->command);
+	    g_free (view->command);
     }
     view->view_active = 0;
     default_hex_mode = view->hex_mode;
@@ -227,15 +223,15 @@ get_byte (WView *view, int byte_index)
     
     if (view->growing_buffer){
 	if (page > view->blocks){
-	    tmp = xmalloc (sizeof (block_ptr_t) * page, "get_byte");
+	    tmp = g_new (block_ptr_t, page);
 	    if (view->block_ptr){
 		bcopy (view->block_ptr, tmp, sizeof (block_ptr_t) *
 		       view->blocks);
-		free (view->block_ptr);
+		g_free (view->block_ptr);
 	    } 
 	    view->block_ptr = tmp;
 	    for (i = view->blocks; i < page; i++){
-		char *p = malloc (VIEW_PAGE_SIZE);
+		char *p = g_malloc (VIEW_PAGE_SIZE);
 		view->block_ptr [i].data = p;
 		if (!p)
 		    return '\n';
@@ -338,7 +334,7 @@ put_editkey (WView *view, unsigned char key)
     }
     if (!node) {
         node = (struct hexedit_change_node *)
-                    xmalloc(sizeof(struct hexedit_change_node), "HexEdit");
+                    g_new (struct hexedit_change_node, 1);
 
         if (node) {
 #ifndef HAVE_MMAP
@@ -367,7 +363,7 @@ free_change_list (WView *view)
 
     while (n) {
         view->change_list = n->next;
-        free (n);
+        g_free (n);
         n = view->change_list;
     }
     view->file_dirty = 0;
@@ -402,11 +398,11 @@ view_ok_to_quit (WView *view)
 	return 1;
     
     query_set_sel (1);
-    text = copy_strings (_("File: \n\n    "), view->filename,
+    text = g_strconcat (_("File: \n\n    "), view->filename,
 			 _("\n\nhas been modified, do you want to save the changes?\n"), NULL);
 	    
     r = query_dialog (_(" Save changes "), text, 2, 3, _("&Yes"), _("&No"), _("&Cancel"));
-    free (text);
+    g_free (text);
     
     switch (r) {
     case 0:
@@ -429,7 +425,7 @@ set_view_init_error (WView *view, char *msg)
     view->last_byte = 0;
     if (msg){
 	view->bytes_read = strlen (msg);
-	return strdup (msg);
+	return g_strdup (msg);
     }
     return 0;
 }
@@ -476,15 +472,15 @@ static char *load_view_file (WView *view, char *filename)
 {
     if ((view->file = mc_open (filename, O_RDONLY)) < 0){
 	set_view_init_error (view, 0);
-	return (copy_strings (_(" Can't open file \""),
+	return ( g_strconcat (_(" Can't open file \""),
 			      filename, "\"\n ",
-			      unix_error_string (errno), " ", 0));
+			      unix_error_string (errno), " ", NULL));
     }
     if (mc_fstat (view->file, &view->s) < 0){
 	set_view_init_error (view, 0);
 	close_view_file (view);
-	return copy_strings (_(" Can't stat file \n "),
-			     unix_error_string (errno), " ", 0);
+	return  g_strconcat (_(" Can't stat file \n "),
+			     unix_error_string (errno), " ", NULL);
     }
     if (S_ISDIR (view->s.st_mode) || S_ISSOCK (view->s.st_mode)
 	|| S_ISFIFO (view->s.st_mode)){
@@ -515,12 +511,12 @@ no_mmap:
      * file into memory (alex@bcs.zaporizhzhe.ua). Also, mmap can fail
      * for any reason, so we use this as fallback (pavel@ucw.cz) */
 
-    view->data = (unsigned char*) xmalloc (view->s.st_size, "load_view_file");
+    view->data = (unsigned char*) g_malloc (view->s.st_size);
     if (view->data == NULL
 	|| mc_lseek(view->file,0,0) != 0
 	|| mc_read(view->file, view->data, view->s.st_size) != view->s.st_size){
         if (view->data != NULL)
-	    free(view->data);
+	    g_free (view->data);
 	close_view_file (view);
 	return init_growing_view (view, 0, filename);
     }
@@ -568,8 +564,8 @@ do_view_init (WView *view, char *_command, char *_file, int start_line)
         int fd;
 	fd = mc_open(_file, O_RDONLY);
 	if (_file[0] && view->viewer_magic_flag && (is_gunzipable (fd, &type)) != 0)
-	    view->filename = copy_strings (_file, decompress_extension(type), NULL);
-	else view->filename = strdup (_file);
+	    view->filename = g_strconcat (_file, decompress_extension(type), NULL);
+	else view->filename = g_strdup (_file);
 	mc_close(fd);
     }
 
@@ -581,14 +577,14 @@ do_view_init (WView *view, char *_command, char *_file, int start_line)
     if (error){
 	if (!view->have_frame){
 	    message (1, MSG_ERROR, error);
-	    free (error);
+	    g_free (error);
 	    return -1;
 	}
     }
 
     view->view_active = 1;
     if (_command)
-    	view->command = strdup (_command);
+    	view->command = g_strdup (_command);
     else
     	view->command = 0;
     view->search_start = view->start_display = view->start_save = view->first;
@@ -779,7 +775,7 @@ display (WView *view)
 
     /* Optionally, display a ruler */
     if ((!view->hex_mode) && (ruler)){
-	char r_buff[4];
+	char r_buff[10];
 	int cl;
 	
 	view_set_color (view, BOLD_COLOR);
@@ -797,7 +793,7 @@ display (WView *view)
 		    r_buff[0] = '*'; 
 	    view_add_character (view, r_buff[0]);
 	    if ((cl != 0) && (cl % 10) == 0){
-		sprintf(r_buff, "%03d", cl);
+		g_snprintf(r_buff, sizeof (r_buff), "%03d", cl);
 		if (ruler == 1)
 		    widget_move (view, row + 1, c - 1);
 		else
@@ -828,7 +824,7 @@ display (WView *view)
 	
         for (;row < height && from < view->last_byte; row++){
             /* Print the hex offset */
-            sprintf (hex_buff, "%05X", (int) (from - view->first));
+            g_snprintf (hex_buff, sizeof (hex_buff), "%05X", (int) (from - view->first));
 	    widget_move (view, row, frame_shift);
             view_add_string (view, hex_buff);
 	    
@@ -1346,10 +1342,10 @@ grow_string_buffer (char *text, int *size)
 
     /* The grow steps */
     *size += 160;
-    new = xmalloc (*size, "grow_string_buffer");
+    new = g_malloc (*size);
     if (text){
 	strncpy (new, text, old_size);
-	free (text);
+	g_free (text);
     } else {
         *new = 0;
     }
@@ -1466,7 +1462,7 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
     search_update_steps (view);
     update_activate = 0;
 
-    for (; ; isatbeg = 1, free (s)){
+    for (; ; isatbeg = 1, g_free (s)){
 #ifdef PORT_HAS_FLUSH_EVENTS
 	static int count;
 
@@ -1527,7 +1523,7 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
 		view->start_display = t;
 	}
 	
-	free (s);
+	g_free (s);
 	break;
     }
     disable_interrupt_key ();
@@ -1687,7 +1683,7 @@ static int regexp_view_search (WView *view, char *pattern, char *string, int mat
     if (!old_pattern || strcmp (old_pattern, pattern) || old_type != match_type){
 	if (old_pattern){
 	    regfree (&r);
-	    free (old_pattern);
+	    g_free (old_pattern);
 	    old_pattern = 0;
 	}
 	for (i = 0; pattern[i] != 0; i++){
@@ -1701,7 +1697,7 @@ static int regexp_view_search (WView *view, char *pattern, char *string, int mat
 	    message (1, MSG_ERROR, _(" Invalid regular expression "));
 	    return -1;
 	}
-	old_pattern = strdup (pattern);
+	old_pattern = g_strdup (pattern);
 	old_type = match_type;
     }
     if (regexec (&r, string, 1, pmatch, 0) != 0)
@@ -1744,7 +1740,7 @@ static void help_cmd (void)
 {
     char *hlpfile = concat_dir_and_file (mc_home, "mc.hlp");
     interactive_display (hlpfile, "[Internal File Viewer]");
-    free (hlpfile);
+    g_free (hlpfile);
     /*
     view_refresh (0);
     */
@@ -1820,7 +1816,7 @@ toggle_hexedit_mode(WView *view)
 void
 goto_line (WView *view)
 {
-    char *line, prompt [100];
+    char *line, prompt [BUF_SMALL];
     int i, oldline = 1;
     int saved_wrap_mode = view->wrap_mode;
 
@@ -1828,15 +1824,15 @@ goto_line (WView *view)
     for (i = view->first; i < view->start_display; i++)
 	if (get_byte (view, i) == '\n')
 	    oldline ++;
-    sprintf (prompt, _(" The current line number is %d.\n"
+    g_snprintf (prompt, sizeof (prompt), _(" The current line number is %d.\n"
 		       " Enter the new line number:"), oldline);
     line = input_dialog (_(" Goto line "), prompt, "");
     if (line){
 	if (*line){
 	    move_to_top (view);
-	    view_move_forward (view, atoi (line) - 1);
+	    view_move_forward (view, atol (line) - 1);
 	}
-	free (line);
+	g_free (line);
     }
     view->dirty++;
     view->wrap_mode = saved_wrap_mode;
@@ -1863,7 +1859,7 @@ regexp_search (WView *view, int direction)
 	return;
     }
     if (old)
-	free (old);
+	g_free (old);
     old = regexp;
 #if 0
     /* Mhm, do we really need to load all the file in the core? */
@@ -1895,7 +1891,7 @@ normal_search (WView *view, int direction)
 	return;
     }
     if (old)
-	free (old);
+	g_free (old);
     old = exp;
 
     view->direction = direction;
@@ -1919,17 +1915,17 @@ change_viewer (WView *view)
     if (*view->filename) {
         altered_magic_flag = 1;
         view->viewer_magic_flag = !view->viewer_magic_flag;
-    	s = strdup (view->filename);
+    	s = g_strdup (view->filename);
         if (view->command)
-  	    t = strdup (view->command);
+  	    t = g_strdup (view->command);
         else
             t = 0;
 
         view_done (view);
     	view_init (view, t, s, 0);
-    	free (s);
+    	g_free (s);
     	if (t)
-            free (t);
+            g_free (t);
         view_labels (view);
         view->dirty++;
         view_update (view);
@@ -2431,7 +2427,7 @@ view_callback (Dlg_head *h, WView *v, int msg, int par)
 WView *
 view_new (int y, int x, int cols, int lines, int is_panel)
 {
-    WView *view = xmalloc (sizeof (WView), "view_new");
+    WView *view = g_new (WView, 1);
     
     init_widget (&view->widget, y, x, lines, cols,
 		 (callback_fn) view_callback,

@@ -18,17 +18,14 @@
 #include <config.h>
 #define DIR_H_INCLUDE_HANDLE_DIRENT
 #include "tty.h"
-#include "fs.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
 #include <sys/stat.h>
 #include "x.h"
-#include "mad.h"
 #include "global.h"
 #include "dir.h"
-#include "util.h"
 #include "dialog.h"
 #include "tree.h"
 #include "../vfs/vfs.h"
@@ -71,7 +68,7 @@ sort_orders_t sort_orders [SORT_TYPES_TOTAL] = {
     { N_("&Group"),       sort_group }
 };
 
-#define string_sortcomp(a,b) (case_sensitive ? strcmp (a,b) : strcasecmp (a,b))
+#define string_sortcomp(a,b) (case_sensitive ? strcmp (a,b) : g_strcasecmp (a,b))
 
 int
 unsorted (const file_entry *a, const file_entry *b)
@@ -293,7 +290,7 @@ void clean_dir (dir_list *list, int count)
     int i;
 
     for (i = 0; i < count; i++){
-	free (list->list [i].fname);
+	g_free (list->list [i].fname);
 	list->list [i].fname = 0;
     }
 }
@@ -307,7 +304,7 @@ add_dotdot_to_list (dir_list *list, int index)
     
     /* Need to grow the *list? */
     if (index == list->size) {
-	list->list = realloc (list->list, sizeof (file_entry) *
+	list->list = g_realloc (list->list, sizeof (file_entry) *
 			      (list->size + RESIZE_STEPS));
 	if (!list->list)
 	    return 0;
@@ -315,7 +312,7 @@ add_dotdot_to_list (dir_list *list, int index)
     }
 
     (list->list) [index].fnamelen = 2;
-    (list->list) [index].fname = strdup ("..");
+    (list->list) [index].fname = g_strdup ("..");
     (list->list) [index].f.link_to_dir = 0;
     (list->list) [index].f.stalled_link = 0;
     (list->list) [index].f.dir_size_computed = 0;
@@ -329,16 +326,16 @@ add_dotdot_to_list (dir_list *list, int index)
     	strcat (buffer, PATH_SEP_STR "..");
         p = vfs_canon (buffer);
         if (mc_stat (p, &((list->list) [index].buf)) != -1){
-	    free (p);
+	    g_free (p);
             break;
 	}
         i = 1;
         if (!strcmp (p, PATH_SEP_STR)){
-	    free (p);
+	    g_free (p);
             return 1;
 	}
 	strcpy (buffer, p);
-	free (p);
+	g_free (p);
     }
 
 /* Commented out to preserve a usable '..'. What's the purpose of this
@@ -398,7 +395,7 @@ int handle_dirent (dir_list *list, char *filter, struct dirent *dp,
 
     /* Need to grow the *list? */
     if (next_free == list->size){
-	list->list = realloc (list->list, sizeof (file_entry) *
+	list->list = g_realloc (list->list, sizeof (file_entry) *
 			      (list->size + RESIZE_STEPS));
 	if (!list->list)
 	    return -1;
@@ -437,7 +434,7 @@ int handle_path (dir_list *list, char *path,
 
     /* Need to grow the *list? */
     if (next_free == list->size){
-	list->list = realloc (list->list, sizeof (file_entry) *
+	list->list = g_realloc (list->list, sizeof (file_entry) *
 			      (list->size + RESIZE_STEPS));
 	if (!list->list)
 	    return -1;
@@ -469,7 +466,7 @@ int do_load_dir(dir_list *list, sortfn *sort, int reverse, int case_sensitive, c
 	if (status == -1)
 	    return next_free;
 	list->list [next_free].fnamelen = NLENGTH (dp);
-	list->list [next_free].fname = strdup (dp->d_name);
+	list->list [next_free].fname = g_strdup (dp->d_name);
 	list->list [next_free].f.marked = 0;
 	list->list [next_free].f.link_to_dir = link_to_dir;
 	list->list [next_free].f.stalled_link = stalled_link;
@@ -525,13 +522,13 @@ static void alloc_dir_copy (int size)
 
 	    for (i = 0; i < dir_copy.size; i++) {
 		if (dir_copy.list [i].fname)
-		    free (dir_copy.list [i].fname);
+		    g_free (dir_copy.list [i].fname);
 	    }
-	    free (dir_copy.list);
+	    g_free (dir_copy.list);
 	    dir_copy.list = 0;
 	}
 
-	dir_copy.list = xmalloc (sizeof (file_entry) * size, "alloc_dir_copy");
+	dir_copy.list = g_new (file_entry, size);
 	for (i = 0; i < size; i++)
 	    dir_copy.list [i].fname = 0;
 
@@ -601,7 +598,7 @@ int do_reload_dir (dir_list *list, sortfn *sort, int count, int rev,
 	    list->list [next_free].f.marked = 0;
 	
 	list->list [next_free].fnamelen = tmp_len;
-	list->list [next_free].fname = strdup (dp->d_name);
+	list->list [next_free].fname = g_strdup (dp->d_name);
 	list->list [next_free].f.link_to_dir = link_to_dir;
 	list->list [next_free].f.stalled_link = stalled_link;
         list->list [next_free].f.dir_size_computed = 0;
@@ -641,7 +638,7 @@ sortfn *sort_name_to_type (char *sname)
     int i;
 
     for (i = 0; i < SORT_TYPES; i++)
-	if (strcasecmp (sort_orders [i].sort_name, sname) == 0)
+	if ( g_strcasecmp (sort_orders [i].sort_name, sname) == 0)
 	    return (sortfn *) sort_orders [i].sort_fn;
 
     /* default case */

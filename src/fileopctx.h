@@ -11,7 +11,7 @@
 
 #include <sys/stat.h>
 #include <sys/types.h>
-#include "regex.h"
+#include "eregex.h"
 
 
 /* This structure describes a context for file operations.  It is used to update

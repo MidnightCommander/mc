@@ -24,16 +24,12 @@
 #include <config.h>
 #include <errno.h>
 #include "tty.h"
-#include "fs.h"
-#include <malloc.h>
 #include <string.h>
-#include <stdlib.h>
-#include "mad.h"
+#include "global.h"		/* home_dir */
 #include "dlg.h"
 #include "widget.h"
 #include "command.h"
 #include "complete.h"		/* completion constants */
-#include "global.h"		/* home_dir */
 #include "dialog.h"		/* message () */
 #include "dir.h"		/* required by panel.h */
 #include "panel.h"		/* view_tree enum. Also, needed by main.h */
@@ -61,8 +57,9 @@ static int examine_cd (char *path)
 {
     char *p;
     int result;
-    char *q = xmalloc (MC_MAXPATHLEN + 10, "examine_cd"), *r, *s, *t, c;
+    char *q, *r, *s, *t, c;
 
+    q = g_malloc (MC_MAXPATHLEN + 10);
     /* Variable expansion */
     for (p = path, r = q; *p && r < q + MC_MAXPATHLEN; ) {
         if (*p != '$' || (p [1] == '[' || p [1] == '('))
@@ -118,13 +115,13 @@ static int examine_cd (char *path)
             if (*p) {
 		r = concat_dir_and_file (p, q);
                 result = do_cd (r, cd_parse_command);
-                free (r);
+                g_free (r);
             }
             *s = c;
             p = s + 1;
         }
     }
-    free (q);
+    g_free (q);
     return result;
 }
 
@@ -166,7 +163,7 @@ void do_cd_command (char *cmd)
 	    char *new;
 	    new = concat_dir_and_file (old, cmd+3);
 	    sync_tree (new);
-	    free (new);
+	    g_free (new);
 	}
     } else
 	if (!examine_cd (&cmd [3])) {
@@ -202,16 +199,16 @@ static int enter (WCommand *cmdline)
 	        
 		return MSG_NOT_HANDLED;
 	    }
-	    command = xmalloc (strlen (cmd) + 1, "main, enter");
+	    command = g_malloc (strlen (cmd) + 1);
 	    command [0] = 0;
 	    for (i = j = 0; i < strlen (cmd); i ++){
 		if (cmd [i] == '%'){
 		    i ++;
 		    s = expand_format (cmd [i], 1);
-		    command = realloc (command, strlen (command) + strlen (s)
+		    command = g_realloc (command, strlen (command) + strlen (s)
 				       + strlen (cmd) - i + 1);
 		    strcat (command, s);
-		    free (s);
+		    g_free (s);
 		    j = strlen (command);
 		} else {
 		    command [j] = cmd [i];
@@ -223,7 +220,7 @@ static int enter (WCommand *cmdline)
 	    current_dlg = 0;
 	    new_input (input_w (cmdline));
 	    execute (command);
-	    free (command);
+	    g_free (command);
 	    
 #ifdef HAVE_SUBSHELL_SUPPORT
 	    if (quit & SUBSHELL_EXIT){
@@ -259,11 +256,11 @@ static int command_callback (Dlg_head *h, WCommand *cmd, int msg, int par)
 WCommand *command_new (int y, int x, int cols)
 {
     WInput *in;
-    WCommand *cmd = xmalloc (sizeof (WCommand), "command_new");
+    WCommand *cmd = g_new (WCommand, 1);
 
     in = input_new (y, x, DEFAULT_COLOR, cols, "", "cmdline");
     cmd->input = *in;
-    free (in);
+    g_free (in);
 
     /* Add our hooks */
     cmd->old_callback = (callback_fn) cmd->input.widget.callback;

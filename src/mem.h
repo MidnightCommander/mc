@@ -9,7 +9,7 @@
 #   endif /* not STDC_HEADERS and HAVE_MEMORY_H */
 
 #   ifndef index
-#define index strchr
+#	define index strchr
 #   endif
 
 #   ifndef rindex 

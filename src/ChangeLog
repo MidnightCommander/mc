@@ -1,3 +1,32 @@
+Wed Jan 27 03:17:44 1999  Timur Bakeyev <mc@bat.ru>
+
+	* Converted memory managment to Glib. Now we use g_new()/g_malloc()/
+	g_strdup()/g_free() routings. Also, copy_strings() replaced by 
+	g_strconcat(), strcasecmp() -> g_strcasecmp(),and sprintf() by 
+	g_snprintf().
+	
+	* Some sequences of malloc()/sprintf() changed to g_strdup_printf().
+	
+	* mad.[ch]: Modified, to work with new GLib's memory managment. Fixed
+	a missing #undef for tempnam, which caused dead loop. Add several new
+	functions to emulate GLib memory managment.
+	
+	*main.c, mad.[ch]: Add a new switch  "-M", which allows to redirect MAD
+	messages to the file.
+	
+	* util.[ch], utilunix.c: Modified, deleted our variants of strcasecmp()
+	and strdup() - we have g_ equivalences. Remove get_full_name() - it is
+	similar to concat_dir_and_file(). Some other tricks with g_* functions.
+	
+	* global.h: Modified, extended. Now it is main memory mangment include -
+	i.e. all inclusions of <stdlib.h>, <malloc.h>, <glib.h>, "fs.h", "mem.h",
+	"util.h" and "mad.h" done there. This elimanates problem with proper or-
+	der of #include's.
+
+	* All around the source - changed order of #include's, most of them gone
+	to global.h (see above), minor changes, like "0" -> NULL in string func-
+	tions.
+
 1999-01-25  Alexander Savelyev <fano@vcom.kiev.ua>
 
 	* ext.c (exec_extension): Always use /bin/sh.  Not the user

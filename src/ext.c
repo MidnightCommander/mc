@@ -21,7 +21,6 @@
 #include <config.h>
 #include <stdio.h>
 #include <ctype.h>
-#include <stdlib.h>
 #ifdef NEEDS_IO_H
 # include <io.h>
 #endif
@@ -31,19 +30,13 @@
 #    include <unistd.h>
 #endif
 #include <fcntl.h>
-#include <malloc.h>
 #include <string.h>
 #include <errno.h>
 
+#include "global.h"
 #include "user.h"
 #include "main.h"
-#include "fs.h"
-
-#include <glib.h>
-#include "util.h"
-#include "mad.h"
 #include "dialog.h"
-#include "global.h"
 #include "ext.h"
 #include "view.h"
 #include "main.h"
@@ -69,7 +62,7 @@ void
 flush_extension_file (void)
 {
     if (data){
-        free (data);
+        g_free (data);
         data = NULL;
     }
    
@@ -91,13 +84,13 @@ quote_block (quote_func_t quote_func, char **quoting_block)
 
 		temp_len = strlen (temp);
 		current_len += temp_len + 2;
-		result = realloc (result, current_len);
+		result = g_realloc (result, current_len);
 		if (!tail)
 			tail = result;
 		strcpy (tail, temp);
 		strcat (tail, " ");
 		tail += temp_len + 1;
-		free (temp);
+		g_free (temp);
 	}
 	
 	return result;
@@ -137,7 +130,7 @@ exec_extension (char *filename, char *data, char **drops, int *move_dir, int sta
     /* Note: this has to be done after the getlocalcopy call,
      * since it uses tmpnam as well
      */
-    file_name = strdup (tmpnam (NULL));
+    file_name = g_strdup (tmpnam (NULL));
 
     /* #warning FIXME: this is ugly */
     if ((cmd_file_fd = open (file_name, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, 0600)) == -1){
@@ -146,6 +139,7 @@ exec_extension (char *filename, char *data, char **drops, int *move_dir, int sta
 	return;
     }
     cmd_file = fdopen (cmd_file_fd, "w");
+    /* FIXME: This is a hack, that makes us sure, we are using the right syntax */
     fprintf (cmd_file, "#!/bin/sh\n");
 	     
     prompt [0] = 0;
@@ -162,12 +156,12 @@ exec_extension (char *filename, char *data, char **drops, int *move_dir, int sta
 		    if (localcopy) {
 		        mc_ungetlocalcopy (filename, localcopy, 0);
 		    }
-		    free (file_name);
+		    g_free (file_name);
 		    return;
 		}
 		fputs (parameter, cmd_file);
 		written_nonspace = 1;
-		free (parameter);
+		g_free (parameter);
 	    } else {
 		int len = strlen (prompt);
 
@@ -195,7 +189,7 @@ exec_extension (char *filename, char *data, char **drops, int *move_dir, int sta
 	    	    data += i - 1;
 		} else if ((i = check_format_var (data, &v)) > 0 && v){
 		    fputs (v, cmd_file);
-		    free (v);
+		    g_free (v);
 		    data += i;
 	        } else {
 		    char *text;
@@ -206,7 +200,7 @@ exec_extension (char *filename, char *data, char **drops, int *move_dir, int sta
 			    if (localcopy == NULL) {
 				fclose(cmd_file);
 				unlink(file_name);
-				free(file_name);
+				g_free (file_name);
 				return;
 			    }
 			    mc_stat (localcopy, &mystat);
@@ -225,7 +219,7 @@ exec_extension (char *filename, char *data, char **drops, int *move_dir, int sta
 		    	strcpy (p, text);
 		    	p = strchr (p, 0);
 		    }
-		    free (text);
+		    g_free (text);
 		    written_nonspace = 1;
 	        }
 	    }
@@ -307,7 +301,7 @@ exec_extension (char *filename, char *data, char **drops, int *move_dir, int sta
         mc_stat (localcopy, &mystat);
         mc_ungetlocalcopy (filename, localcopy, localmtime != mystat.st_mtime);
     }
-    free (file_name);
+    g_free (file_name);
 }
 
 #ifdef FILE_L
@@ -380,13 +374,13 @@ char *regex_command (char *filename, char *action, char **drops, int *move_dir)
 check_stock_mc_ext:
 	    extension_file = concat_dir_and_file (mc_home, MC_LIB_EXT);
         if ((data = load_file (extension_file)) == NULL) {
-	    free (buffer);
+	    g_free (buffer);
 	    return 0;
 	}
 	if (!strstr (data, "default/")) {
 	    if (!strstr (data, "regex/") && !strstr (data, "shell/") &&
 	        !strstr (data, "type/")) {
-	        free (data);
+	        g_free (data);
 	        data = NULL;
 	        if (extension_file == buffer) {
 		    home_error = 1;
@@ -394,18 +388,18 @@ check_stock_mc_ext:
 	        } else {
                     char *msg;
                     char *msg2;
-                    msg = copy_strings(" ", mc_home, MC_LIB_EXT, _(" file error"), NULL);
-                    msg2 = copy_strings(_("Format of the "), 
+                    msg = g_strconcat (" ", mc_home, MC_LIB_EXT, _(" file error"), NULL);
+                    msg2 = g_strconcat (_("Format of the "), 
                                          mc_home, 
 ("mc.ext file has changed\n\
 with version 3.0. It seems that installation\n\
 failed. Please fetch a fresh new copy from the\n\
 Midnight Commander package or in case you don't\n\
-have any, get it from ftp://ftp.nuclecu.unam.mx."), 0);
+have any, get it from ftp://ftp.nuclecu.unam.mx."), NULL);
 	            message (1, msg, msg2);
-                    free (msg);
-                    free (msg2);
-		    free (buffer);
+                    g_free (msg);
+                    g_free (msg2);
+		    g_free (buffer);
 		    return 0;
 	        }
 	    }
@@ -413,22 +407,22 @@ have any, get it from ftp://ftp.nuclecu.unam.mx."), 0);
 	if (home_error) {
             char *msg;
             char *msg2;
-            msg = copy_strings(" ~/", MC_USER_EXT, _(" file error "), NULL);
-            msg2 = copy_strings(_("Format of the ~/"), MC_USER_EXT, _(" file has changed\n\
+            msg = g_strconcat (" ~/", MC_USER_EXT, _(" file error "), NULL);
+            msg2 = g_strconcat (_("Format of the ~/"), MC_USER_EXT, _(" file has changed\n\
 with version 3.0. You may want either to\n\
 copy it from "), mc_home, _("mc.ext or use that\n\
 file as an example of how to write it.\n\
-"), mc_home,  _("mc.ext will be used for this moment."), 0);
+"), mc_home,  _("mc.ext will be used for this moment."), NULL);
 	    message (1, msg, msg2);
-            free (msg);
-            free (msg2);
+            g_free (msg);
+            g_free (msg2);
         }
-        free (buffer);
+        g_free (buffer);
     }
     mc_stat (filename, &mystat);
     
     if (regex_command_title){
-	free (regex_command_title);
+	g_free (regex_command_title);
 	regex_command_title = NULL;
     }
     old_patterns = easy_patterns;
@@ -498,11 +492,11 @@ file as an example of how to write it.\n\
 	    	    if (islocal) {
 			char *tmp = name_quote (filename, 0);
 	    	        char *command =
-			    copy_strings (FILE_CMD, tmp, NULL);
+			    g_strconcat (FILE_CMD, tmp, NULL);
 	    	        FILE *f = popen (command, "r");
 	    	    
-			free (tmp);
-	    	        free (command);
+			g_free (tmp);
+	    	        g_free (command);
 	    	        if (f != NULL) {
 	    	            hasread = (fgets (content_string, 2047, f) 
 	    	                != NULL);
@@ -617,7 +611,7 @@ match_file_output:
     	                        static char *q;
     	                        
     	                        if (to_return == NULL) {
-    	                            to_return = xmalloc (512, "Action list");
+    	                            to_return = g_malloc (512);
     	                            q = to_return;
     	                        } else 
     	                            *(q++) = '='; /* Mark separator */
@@ -630,12 +624,12 @@ match_file_output:
     	            	    *r = c;
     	            	    c = *q;
     	            	    *q = 0;
-    	                    to_return = strdup (r + 1);
+    	                    to_return = g_strdup (r + 1);
     	                } else if (!strcmp (p, "Title") && regex_command_title == NULL) {
     	            	    *r = c;
     	            	    c = *q;
     	            	    *q = 0;
-    	                    regex_command_title = strdup (r + 1);
+    	                    regex_command_title = g_strdup (r + 1);
     	                } else {
     	                    *r = c;
     	                    c = *q;
@@ -657,10 +651,10 @@ match_file_output:
 			 * we get filename as a pointer from cpanel->dir).
 			 */
     	                if (p < q) { 
-			    char *filename_copy = strdup (filename);
+			    char *filename_copy = g_strdup (filename);
 			    
 			    exec_extension (filename_copy, r + 1, drops, move_dir, view_at_line_number);
-			    free (filename_copy);
+			    g_free (filename_copy);
 			    
     	                    to_return = "Success";
     	                }

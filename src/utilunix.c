@@ -23,7 +23,6 @@
 
 #include <config.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <sys/types.h>
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
@@ -62,12 +61,10 @@
 #ifdef __QNX__
 #   include <unix.h>		/* exec*() from <process.h> */
 #endif
-#include "util.h"
 #include "global.h"
 #include "fsusage.h"
 #include "fsusage.h"
 #include "mountlist.h"
-#include "mad.h"
 #include "dialog.h"		/* message() */
 #include "../vfs/vfs.h"		/* mc_read() */
 #include "x.h"
@@ -108,10 +105,11 @@ void init_groups (void)
 
     pwd = getpwuid (current_user_uid=getuid ());
 
-    current_user_gid = (pug = xmalloc (sizeof (user_in_groups), "init_groups"));
-    current_user_gid->gid = getgid (); current_user_gid->next = 0;
+    current_user_gid = (pug = g_new (user_in_groups, 1));
+    current_user_gid->gid = getgid (); 
+    current_user_gid->next = NULL;
 
-    if (pwd == 0)
+    if (pwd == NULL)
        return;
     
     setgrent ();
@@ -119,10 +117,10 @@ void init_groups (void)
        for (i = 0; grp->gr_mem[i]; i++)
            if (!strcmp (pwd->pw_name,grp->gr_mem[i]))
                {
-               cug = xmalloc (sizeof (user_in_groups), "init_groups");
+               cug = g_new (user_in_groups, 1);
                cug->gid  = grp->gr_gid;
                pug->next = cug;
-               cug->next = 0;
+               cug->next = NULL;
                pug = cug;
                break;
                }
@@ -152,7 +150,7 @@ delete_groups (void)
 
     while (cug){
        pug = cug->next;
-       free (cug);
+       g_free (cug);
        cug = pug;
     }
 }
@@ -193,8 +191,8 @@ static void i_cache_add (int id, int_cache *cache, int size, char *text,
 			 int *last)
 {
     if (cache [*last].string)
-	free (cache [*last].string);
-    cache [*last].string = strdup (text);
+	g_free (cache [*last].string);
+    cache [*last].string = g_strdup (text);
     cache [*last].index = id;
     *last = ((*last)+1) % size;
 }
@@ -202,7 +200,7 @@ static void i_cache_add (int id, int_cache *cache, int size, char *text,
 char *get_owner (int uid)
 {
     struct passwd *pwd;
-    static char ibuf [8];
+    static char ibuf [10];
     char   *name;
     static int uid_last;
     
@@ -215,7 +213,7 @@ char *get_owner (int uid)
 	return pwd->pw_name;
     }
     else {
-	sprintf (ibuf, "%d", uid);
+	g_snprintf (ibuf, sizeof (ibuf), "%d", uid);
 	return ibuf;
     }
 }
@@ -223,7 +221,7 @@ char *get_owner (int uid)
 char *get_group (int gid)
 {
     struct group *grp;
-    static char gbuf [8];
+    static char gbuf [10];
     char *name;
     static int  gid_last;
     
@@ -235,7 +233,7 @@ char *get_group (int gid)
 	i_cache_add (gid, gid_cache, GID_CACHE_SIZE, grp->gr_name, &gid_last);
 	return grp->gr_name;
     } else {
-	sprintf (gbuf, "%d", gid);
+	g_snprintf (gbuf, sizeof (gbuf), "%d", gid);
 	return gbuf;
     }
 }
@@ -322,7 +320,7 @@ char *tilde_expand (char *directory)
     int  len;
     
     if (*directory != '~')
-	return strdup (directory);
+	return g_strdup (directory);
 
     directory++;
     
@@ -337,11 +335,11 @@ char *tilde_expand (char *directory)
 	    p = "";
 	    passwd = getpwnam (directory);
 	} else {
-	    name = xmalloc (p - directory + 1, "tilde_expand");
+	    name = g_malloc (p - directory + 1);
 	    strncpy (name, directory, p - directory);
 	    name [p - directory] = 0;
 	    passwd = getpwnam (name);
-	    free (name);
+	   g_free (name);
 	}
     }
 
@@ -350,7 +348,7 @@ char *tilde_expand (char *directory)
 	return 0;
 
     len = strlen (passwd->pw_dir) + strlen (p) + 2;
-    directory = xmalloc (len, "tilde_expand");
+    directory = g_malloc (len);
     strcpy (directory, passwd->pw_dir);
     strcat (directory, PATH_SEP_STR);
     strcat (directory, p);
@@ -744,7 +742,7 @@ putenv (const char *string)
     
     if (*ep == NULL){
 	static char **last_environ = NULL;
-	char **new_environ = (char **) malloc ((size + 2) * sizeof (char *));
+	char **new_environ = g_new (char *, size + 2);
 	if (new_environ == NULL)
 	    return -1;
 	(void) memcpy ((void *) new_environ, (void *) __environ,
@@ -752,7 +750,7 @@ putenv (const char *string)
 	new_environ[size] = (char *) string;
 	new_environ[size + 1] = NULL;
 	if (last_environ != NULL)
-	    free ((void *) last_environ);
+	    g_free ((void *) last_environ);
 	last_environ = new_environ;
 	__environ = new_environ;
     }

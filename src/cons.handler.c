@@ -252,7 +252,7 @@ console_shutdown()
 	}
 	if (screen != NULL)
 	{
-		free(screen);
+		g_free (screen);
 	}
 	console_flag = 0;
 }
@@ -340,7 +340,7 @@ console_init()
 			height = vi.mv_rsz;
 			width = vi.mv_csz;
 
-			screen = (unsigned short*) xmalloc(height * width * 2,"console_init");
+			screen = (unsigned short*) g_malloc (height * width * 2);
 			if (screen == NULL)
 			{
 				console_shutdown();

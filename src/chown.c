@@ -19,7 +19,6 @@
 #include <config.h>
 #include <string.h>
 #include <stdio.h>
-#include <stdlib.h>	/* For malloc() */
 #include <errno.h>	/* For errno on SunOS systems	      */
 
 #include <sys/types.h>
@@ -32,8 +31,7 @@
 #endif
 
 #include "tty.h"
-#include "mad.h"
-#include "util.h"		/* Needed for the externs */
+#include "global.h"
 #include "win.h"
 #include "color.h"
 #include "dlg.h"
@@ -253,7 +251,7 @@ chown_cmd (void)
     WLEntry *fe;
     uid_t new_user;
     gid_t new_group;
-    char  buffer [15];
+    char  buffer [BUF_TINY];
 
 #if 0
     /* Please no */
@@ -296,7 +294,7 @@ chown_cmd (void)
         chown_label (0, name_trunc (fname, 15));
         chown_label (1, name_trunc (get_owner (sf_stat.st_uid), 15));
 	chown_label (2, name_trunc (get_group (sf_stat.st_gid), 15));
-        sprintf (buffer, "%d", c_fsize);
+        g_snprintf (buffer, sizeof (buffer), "%d", c_fsize);
 	chown_label (3, buffer);
 	chown_label (4, string_perm (sf_stat.st_mode));
 

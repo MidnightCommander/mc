@@ -30,13 +30,9 @@
 #if (!defined(__IBMC__) && !defined(__IBMCPP__)) && !defined(HAS_NO_TERMIOS_H)
 #    include <termios.h>
 #endif
-#include <malloc.h>
 #include <stdio.h>
-
-#include "mad.h"
+#include "global.h"
 #include "mouse.h"
-#include "global.h"		/* ESC_STR */
-#include "util.h"		/* xmalloc */
 #include "key.h"		/* define sequence */
 #include "tty.h"		/* get ncurses header */
 
@@ -100,7 +96,7 @@ int _nc_remove_key(struct tries **tree, unsigned short code)
 			}
 			if (ptr->value == code) {
 				*tree = 0;
-				free(ptr);
+				g_free (ptr);
 				return TRUE;
 			}
 			ptr = ptr->sibling;

@@ -10,10 +10,8 @@
 
 #include <config.h>
 #include <string.h>
-#include <malloc.h>
-#include "util.h"
-#include "mad.h"
 #include <errno.h>
+#include "global.h"
 #include "../vfs/vfs.h"
 
 static char *get_absolute_name (char *file)
@@ -21,9 +19,9 @@ static char *get_absolute_name (char *file)
     char dir [MC_MAXPATHLEN];
 
     if (file [0] == PATH_SEP)
-	return strdup (file);
+	return g_strdup (file);
     mc_get_current_wd (dir, MC_MAXPATHLEN);
-    return get_full_name (dir, file);
+    return concat_dir_and_file (dir, file);
 }
 
 static int
@@ -48,12 +46,12 @@ my_mkdir_rec (char *s, mode_t mode)
 
     p = concat_dir_and_file (s, "..");
     q = vfs_canon (p);
-    free (p);
+    g_free (p);
 
     if (!(result = my_mkdir_rec (q, mode))) 
     	result = mc_mkdir (s, mode);
 
-    free (q);
+    g_free (q);
     return result;
 }
 
@@ -72,7 +70,7 @@ my_mkdir (char *s, mode_t mode)
         char *p = vfs_canon (s);
         
         result = my_mkdir_rec (p, mode);
-        free (p);
+        g_free (p);
     }
     if (result == 0){
 	s = get_absolute_name (s);
@@ -81,7 +79,7 @@ my_mkdir (char *s, mode_t mode)
 	tree_add_entry (tree, s);
 #endif
 
-	free (s);
+	g_free (s);
     }
     return result;
 }
@@ -102,7 +100,7 @@ int my_rmdir (char *s)
 	tree_remove_entry (tree, s);
 #endif
 
-	free (s);
+	g_free (s);
     }
     return result;
 }

@@ -207,7 +207,7 @@ void init_subshell (void)
     /* {{{ Local variables */
 
     /* This must be remembered across calls to init_subshell() */
-    static char pty_name[40];
+    static char pty_name[BUF_SMALL];
     int pty_slave;
 
     /* Braindead tcsh can't redirect output to a file descriptor? */
@@ -264,14 +264,14 @@ void init_subshell (void)
 	/* {{{ Initialise the pty's I/O buffer */
 
 	pty_buffer_size = INITIAL_PTY_BUFFER_SIZE;
-	pty_buffer = (char *) malloc (pty_buffer_size);
+	pty_buffer = (char *) g_malloc (pty_buffer_size);
 
 	/* }}} */
 	/* {{{ Create a pipe for receiving the subshell's CWD */
 
 	if (subshell_type == TCSH)
 	{
-	    sprintf (tcsh_fifo, "/tmp/mc.pipe.%d", getpid ());
+	    g_snprintf (tcsh_fifo, sizeof (tcsh_fifo), "/tmp/mc.pipe.%d", getpid ());
 	    if (mkfifo (tcsh_fifo, 0600) == -1)
 	    {
 		perror (__FILE__": mkfifo");
@@ -493,20 +493,20 @@ void init_subshell (void)
 
     switch (subshell_type)
     {
-	char precmd[80];
+	char precmd[BUF_SMALL];
 
 	case BASH:
-	sprintf (precmd, " PROMPT_COMMAND='pwd>&%d;kill -STOP $$'\n",
+	g_snprintf (precmd, sizeof (precmd), " PROMPT_COMMAND='pwd>&%d;kill -STOP $$'\n",
 		 subshell_pipe[WRITE]);
 	goto write_it;
 
 	case ZSH:
-	sprintf (precmd, "precmd(){ pwd>&%d;kill -STOP $$ }\n",
+	g_snprintf (precmd, sizeof (precmd), "precmd(){ pwd>&%d;kill -STOP $$ }\n",
 		 subshell_pipe[WRITE]);
 	goto write_it;
 
 	case TCSH:
-	sprintf (precmd, "alias precmd 'echo $cwd:q >>%s;kill -STOP $$'\n", tcsh_fifo);
+	g_snprintf (precmd, sizeof (precmd), "alias precmd 'echo $cwd:q >>%s;kill -STOP $$'\n", tcsh_fifo);
 
 	write_it:
 	write (subshell_pty, precmd, strlen (precmd));
@@ -617,7 +617,7 @@ int read_subshell_prompt (int how)
 
     if (subshell_prompt == NULL)  /* First time through */
     {
-	subshell_prompt = (char *) malloc (prompt_size);
+	subshell_prompt = (char *) g_malloc (prompt_size);
 	*subshell_prompt = '\0';
 	prompt_pos = 0;
     }
@@ -656,7 +656,7 @@ int read_subshell_prompt (int how)
 		
 		subshell_prompt[prompt_pos++] = pty_buffer[i];
 		if (prompt_pos == prompt_size)
-		    subshell_prompt = (char *) realloc (subshell_prompt,
+		    subshell_prompt = (char *) g_realloc (subshell_prompt,
 							prompt_size *= 2);
 	    }
 
@@ -705,10 +705,10 @@ int exit_subshell (void)
     else
     {
 	if (subshell_type == TCSH)
-	    sprintf (pty_buffer, " echo -n Jobs:>/tmp/mc.pipe.%d;jobs>/tmp/"
+	    g_snprintf (pty_buffer, sizeof (pty_buffer), " echo -n Jobs:>/tmp/mc.pipe.%d;jobs>/tmp/"
 		     "mc.pipe.%d;kill -STOP $$\n", getpid (), getpid ());
 	else
-	    sprintf (pty_buffer, " echo -n Jobs:>&%d;jobs>&%d;kill -STOP $$\n",
+	    g_snprintf (pty_buffer, sizeof (pty_buffer), " echo -n Jobs:>&%d;jobs>&%d;kill -STOP $$\n",
 		     subshell_pipe[WRITE], subshell_pipe[WRITE]);
 	write (subshell_pty, pty_buffer, strlen (pty_buffer));
 
@@ -735,7 +735,7 @@ int exit_subshell (void)
     if (quit && subshell_type == TCSH)
     {
 	/* We abuse of pty_buffer here, but it doesn't matter at this stage */
-	sprintf (pty_buffer, "/tmp/mc.pipe.%d", getpid ());
+	g_snprintf (pty_buffer, sizeof (pty_buffer), "/tmp/mc.pipe.%d", getpid ());
 	if (unlink (pty_buffer) == -1)
 	    perror (__FILE__": couldn't remove named pipe /tmp/mc.pipe.NNN");
     }
@@ -767,7 +767,7 @@ void do_subshell_chdir (char *directory, int do_update, int reset_prompt)
     if (*directory) {
 	temp = name_quote (directory, 0);
 	write (subshell_pty, temp, strlen (temp));    
-        free (temp);
+       g_free (temp);
     } else {
 	write (subshell_pty, "/", 1);
     }
@@ -1030,7 +1030,7 @@ static int pty_open_master (char *pty_name)
     ptr = pty_name+9;
     for (num=0;;num++)
     {
-	sprintf(ptr,"%d",num);	/* surpriiise ... SCO lacks itoa() */
+	g_snprintf(ptr, 9, "%d",num);	/* surpriiise ... SCO lacks itoa() */
 	/* Try to open master */
 	if ((pty_master = open (pty_name, O_RDWR)) == -1)
 	    if (errno == ENOENT)  /* Different from EIO */

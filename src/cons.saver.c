@@ -58,7 +58,7 @@ static int len;
 static char *buffer = NULL;
 static int buffer_size = 0;
 static int columns, rows;
-static char vcs_name [40];
+static char vcs_name [BUF_TINY];
 static int vcs_fd;
 
 static void dwrite (int fd, char *buffer)
@@ -86,10 +86,10 @@ static void tty_getsize ()
 
 inline void tty_cursormove(int y, int x)
 {
-    char buffer [20];
+    char buffer [BUF_TINY];
 
     /* Standard ANSI escape sequence for cursor positioning */
-    sprintf (buffer,"\33[%d;%dH", y + 1, x + 1);
+    g_snprintf (buffer, sizeof (buffer), "\33[%d;%dH", y + 1, x + 1);
     dwrite (console_fd, buffer);
 }
 
@@ -167,7 +167,7 @@ char *detect_console (void)
 	!isdigit(tty_name[len - 1]))
 	return "Doesn't look like console";
 
-    sprintf (vcs_name, "/dev/vcsa%s", tty_name + xlen - 1);
+    g_snprintf (vcs_name, sizeof (vcs_name), "/dev/vcsa%s", tty_name + xlen - 1);
     vcs_fd = check_file (vcs_name, 0, &msg);
     console_fd = check_file (tty_name, 1, &msg);
 
@@ -359,7 +359,7 @@ int main (int argc, char **argv)
 	/* Allocate buffer for screen image */
 	tty_getsize ();
 	buffer_size = 4 + 2 * columns * rows;
-	buffer = (char*) malloc (buffer_size);
+	buffer = (char*) g_malloc (buffer_size);
     }
 
     /* If using /dev/vcs*, we don't need anymore the console fd */
@@ -392,7 +392,7 @@ int main (int argc, char **argv)
     } /* while (read ...) */
 
     if (buffer)
-	free (buffer);
+	g_free (buffer);
     return 0;   
 }
 

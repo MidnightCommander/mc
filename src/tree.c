@@ -31,9 +31,7 @@
 #include <errno.h>
 #include <stdio.h>
 #include "tty.h"
-#include "mad.h"
 #include "global.h"
-#include "util.h"
 #include "color.h"
 #include "dialog.h"
 #include "dir.h"
@@ -106,7 +104,7 @@ static tree_entry *tree_append_entry (WTree *tree, char *name)
 
     /* We assume the directory is not yet in the list */
 
-    new = xmalloc (sizeof (tree_entry), "tree, tree_entry");
+    new = g_new (tree_entry, 1);
     if (!tree->store->tree_first){
         /* Empty list */
         tree->store->tree_first = new;
@@ -119,7 +117,7 @@ static tree_entry *tree_append_entry (WTree *tree, char *name)
     tree->store->tree_last = new;
 
     /* Calculate attributes */
-    new->name = strdup (name);
+    new->name = g_strdup (name);
     len = strlen (new->name);
     new->sublevel = 0;
     for (i = 0; i < len; i++)
@@ -169,7 +167,7 @@ void tree_destroy (WTree *tree)
     tree_store_destroy ();
     
     if (tree->tree_shown){
-	free (tree->tree_shown);
+	g_free (tree->tree_shown);
 	tree->tree_shown = 0;
     }
     tree->selected_ptr = NULL;
@@ -183,7 +181,7 @@ void load_tree (WTree *tree)
     
     filename = concat_dir_and_file (home_dir, MC_TREE);
     v = tree_store_load (filename);
-    free (filename);
+    g_free (filename);
 
     tree->selected_ptr = tree->store->tree_first;
     
@@ -198,7 +196,7 @@ void save_tree (WTree *tree)
     
     filename = concat_dir_and_file (home_dir, MC_TREE);
     error = tree_store_save (filename);
-    free (filename);
+   g_free (filename);
 
     if (error){
 	fprintf (stderr, _("Can't open the %s file for writing:\n%s\n"), MC_TREE,
@@ -260,9 +258,9 @@ void show_tree (WTree *tree)
     }
 
     if (tree->tree_shown)
-	free (tree->tree_shown);
-    tree->tree_shown = (tree_entry**)xmalloc (sizeof (tree_entry*)*tree_lines,
-					      "tree, show_tree");
+	g_free (tree->tree_shown);
+    tree->tree_shown = g_new (tree_entry*, tree_lines);
+
     for (i = 0; i < tree_lines; i++)
 	tree->tree_shown [i] = NULL;
     if (tree->store->tree_first)
@@ -646,7 +644,7 @@ void tree_copy (WTree *tree, char *default_dest)
     
     if (!tree->selected_ptr)
 	return;
-    sprintf (cmd_buf, _("Copy \"%s\" directory to:"),
+    g_snprintf (cmd_buf, sizeof(cmd_buf), _("Copy \"%s\" directory to:"),
 	     name_trunc (tree->selected_ptr->name, 50));
     dest = input_expand_dialog (_(" Copy "), cmd_buf, default_dest);
     if (!dest || !*dest){
@@ -658,14 +656,14 @@ void tree_copy (WTree *tree, char *default_dest)
     copy_dir_dir (ctx, tree->selected_ptr->name, dest, 1, 0, 0, 0, &count, &bytes);
     file_op_context_destroy (ctx);
 
-    free (dest);
+    g_free (dest);
 }
 
 static void tree_help_cmd (void)
 {
     char *hlpfile = concat_dir_and_file (mc_home, "mc.hlp");
     interactive_display (hlpfile,  "[Directory Tree]");
-    free (hlpfile);
+    g_free (hlpfile);
 }
 
 static int tree_copy_cmd (WTree *tree)
@@ -684,7 +682,7 @@ void tree_move (WTree *tree, char *default_dest)
 
     if (!tree->selected_ptr)
 	return;
-    sprintf (cmd_buf, _("Move \"%s\" directory to:"),
+    g_snprintf (cmd_buf, sizeof (cmd_buf), _("Move \"%s\" directory to:"),
 	     name_trunc (tree->selected_ptr->name, 50));
     dest = input_expand_dialog (_(" Move "), cmd_buf, default_dest);
     if (!dest || !*dest){
@@ -693,12 +691,12 @@ void tree_move (WTree *tree, char *default_dest)
     if (stat (dest, &buf)){
 	message (1, _(" Error "), _(" Can't stat the destination \n %s "),
 		 unix_error_string (errno));
-	free (dest);
+	g_free (dest);
 	return;
     }
     if (!S_ISDIR (buf.st_mode)){
 	message (1, _(" Error "), _(" The destination isn't a directory "));
-	free (dest);
+	g_free (dest);
 	return;
     }
 
@@ -707,7 +705,7 @@ void tree_move (WTree *tree, char *default_dest)
     move_dir_dir (ctx, tree->selected_ptr->name, dest, &count, &bytes);
     file_op_context_destroy (ctx);
 
-    free (dest);
+    g_free (dest);
 }
 
 static int
@@ -750,14 +748,12 @@ tree_rmdir_cmd (WTree *tree)
 	if (mc_chdir (PATH_SEP_STR))
 	    return;
 	if (confirm_delete){
-	    char *cmd_buf;
+	    char *buf;
 	    int result;
 
-	    cmd_buf = xmalloc (strlen (tree->selected_ptr->name) + 20,
-			       "tree, rmdir_cmd");
-	    sprintf (cmd_buf, _("  Delete %s?  "), tree->selected_ptr->name);
-	    result = query_dialog (_(" Delete "), cmd_buf, 3, 2, _("&Yes"), _("&No"));
-	    free (cmd_buf);
+	    buf = g_strdup_printf (_("  Delete %s?  "), tree->selected_ptr->name);
+	    result = query_dialog (_(" Delete "), buf, 3, 2, _("&Yes"), _("&No"));
+	    g_free (buf);
 	    if (result != 0){
 		return;
 	    }
@@ -1059,7 +1055,7 @@ tree_callback (Dlg_head *h, WTree *tree, int msg, int par)
 WTree *
 tree_new (int is_panel, int y, int x, int lines, int cols)
 {
-    WTree *tree = xmalloc (sizeof (WTree), "tree_new");
+    WTree *tree = g_new (WTree, 1);
 
     init_widget (&tree->widget, y, x, lines, cols, tcallback,
 		 (destroy_fn) tree_destroy, (mouse_h) event_callback, NULL);

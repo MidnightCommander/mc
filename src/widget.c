@@ -28,12 +28,9 @@
 #include <config.h>
 #include <string.h>
 #include <stdio.h>
-#include <malloc.h>
 #include "tty.h"
 #include <ctype.h>
-#include "mad.h"
 #include "global.h"
-#include "util.h"
 #include "color.h"
 #include "mouse.h"
 #include "dlg.h"
@@ -78,7 +75,7 @@ static int
 button_callback (Dlg_head *h, WButton *b, int Msg, int Par)
 {
 #ifndef HAVE_X
-    char *txt, buf[256];
+    char *txt, buf[BUF_SMALL];
 #endif
     int stop = 0;
     int off = 0;
@@ -136,15 +133,15 @@ button_callback (Dlg_head *h, WButton *b, int Msg, int Par)
 
 	switch (b->flags){
 	    case DEFPUSH_BUTTON:
-		sprintf (buf, "[< %s >]", b->text);
+		g_snprintf (buf, sizeof(buf), "[< %s >]", b->text);
 		off = 3;
 		break;
 	    case NORMAL_BUTTON:
-		sprintf (buf, "[ %s ]", b->text);
+		g_snprintf (buf, sizeof(buf), "[ %s ]", b->text);
 		off = 2;
 		break;
 	    case NARROW_BUTTON:
-		sprintf (buf, "[%s]", b->text);
+		g_snprintf (buf, sizeof(buf), "[%s]", b->text);
 		off = 1;
 		break;
 	    case HIDDEN_BUTTON:
@@ -196,7 +193,7 @@ static void
 button_destroy (WButton *b)
 {
     x_destroy_cmd (b);
-    free (b->text);
+    g_free (b->text);
 }
 
 static int
@@ -246,7 +243,7 @@ WButton *
 button_new (int y, int x, int action, int flags, char *text, 
 	    int (*callback)(int, void *), void *callback_data, char *tkname)
 {
-    WButton *b = xmalloc (sizeof (WButton), "new_button");
+    WButton *b = g_new (WButton, 1);
 
     init_widget (&b->widget, y, x, 1, button_len (text, flags),
 		 (callback_fn) button_callback,
@@ -255,7 +252,7 @@ button_new (int y, int x, int action, int flags, char *text,
     b->action = action;
     b->flags  = flags;
     b->selected = 0;
-    b->text   = strdup (text);
+    b->text   = g_strdup (text);
     b->callback = callback;
     b->callback_data = callback_data;
     widget_want_hotkey (b->widget, 1);
@@ -269,8 +266,8 @@ button_new (int y, int x, int action, int flags, char *text,
 void
 button_set_text (WButton *b, char *text)
 {
-    free (b->text);
-    b->text = strdup (text);
+   g_free (b->text);
+    b->text = g_strdup (text);
     b->widget.cols = button_len (text, b->flags);
     button_scan_hotkey(b);
 #ifdef HAVE_X
@@ -419,7 +416,7 @@ radio_event (Gpm_Event *event, WRadio *r)
 WRadio *
 radio_new (int y, int x, int count, char **texts, int use_hotkey, char *tkname)
 {
-    WRadio *r = xmalloc (sizeof (WRadio), "radio_new");
+    WRadio *r = g_new (WRadio, 1);
     int i, max, m;
 
     /* Compute the longest string */
@@ -518,20 +515,20 @@ static void
 check_destroy (WCheck *c)
 {
 	x_destroy_cmd (c);
-	free (c->text);
+	g_free (c->text);
 }
 
 WCheck *
 check_new (int y, int x, int state, char *text, char *tkname)
 {
-    WCheck *c =  xmalloc (sizeof (WCheck), "check_new");
+    WCheck *c =  g_new (WCheck, 1);
     char *s, *t;
     
     init_widget (&c->widget, y, x, 1, strlen (text),
 		 (callback_fn)check_callback,
 		 (destroy_fn)check_destroy, (mouse_h) check_event, tkname);
     c->state = state ? C_BOOL : 0;
-    c->text = strdup (text);
+    c->text = g_strdup (text);
     c->hotkey = 0;
     c->hotpos = -1;
     widget_want_hotkey (c->widget, 1);
@@ -607,10 +604,10 @@ label_set_text (WLabel *label, char *text)
         return; /* Flickering is not nice */
 
     if (label->text){
-	free (label->text);
+	g_free (label->text);
     }
     if (text){
-	label->text = strdup (text);
+	label->text = g_strdup (text);
 	if (label->auto_adjust_cols) {
 	    newcols = strlen (text);
 	    if (newcols > label->widget.cols)
@@ -634,18 +631,18 @@ label_destroy (WLabel *l)
 {
     x_destroy_cmd (l);
     if (l->text)
-	free (l->text);
+	g_free (l->text);
 }
 
 WLabel *
 label_new (int y, int x, char *text, char *tkname)
 {
-    WLabel *l = xmalloc (sizeof (WLabel), "label_new");
+    WLabel *l = g_new (WLabel, 1);
 
     init_widget (&l->widget, y, x, 1, 1,
 		 (callback_fn) label_callback,
 		 (destroy_fn) label_destroy, NULL, tkname);
-    l->text = text ? strdup (text) : 0;
+    l->text = text ? g_strdup (text) : 0;
     l->auto_adjust_cols = 1;
     l->transparent = 0;
     widget_want_cursor (l->widget, 0);
@@ -745,7 +742,7 @@ gauge_destroy (WGauge *g)
 WGauge *
 gauge_new (int y, int x, int shown, int max, int current, char *tkname)
 {
-    WGauge *g = xmalloc (sizeof (WGauge), "gauge_new");
+    WGauge *g = g_new (WGauge, 1);
 
     init_widget (&g->widget, y, x, 1, gauge_len,
 		 (callback_fn) gauge_callback,
@@ -896,8 +893,10 @@ int num_history_items_recorded = 60;
 Hist *history_get (char *input_name)
 {
     int i;
-    Hist *old = 0, *new = 0;
+    Hist *old, *new;
     char *profile;
+    
+    old = new = NULL;
     
     if (!num_history_items_recorded)	/* this is how to disable */
 	return 0;
@@ -907,21 +906,20 @@ Hist *history_get (char *input_name)
 	return 0;
     profile = concat_dir_and_file (home_dir, HISTORY_FILE_NAME);
     for (i = 0;; i++) {
-	char key_name[32];
-	char this_entry[1024];
-	sprintf (key_name, "%d", i);
+	char key_name[BUF_TINY];
+	char this_entry[BUF_LARGE];
+	g_snprintf (key_name, sizeof (key_name), "%d", i);
 	GetPrivateProfileString (input_name, key_name, "", this_entry, sizeof (this_entry), profile);
 	if (!*this_entry)
 	    break;
-	new = xmalloc (sizeof (Hist), "history_get");
-	memset (new, 0, sizeof (Hist));
-	new->text = strdup (this_entry);
+	new = g_new0 (Hist, 1);
+	new->text = g_strdup (this_entry);
 	new->prev = old;	/* set up list pointers */
 	if (old)
 	    old->next = new;
 	old = new;
     }
-    free (profile);
+    g_free (profile);
     return new;			/* return pointer to last entry in list */
 }
 
@@ -961,14 +959,14 @@ void history_put (char *input_name, Hist *h)
 
 	    /* probably aren't any null entries, but lets be sure */
 	    if (*(h->text)){
-		char key_name[32];
-		sprintf (key_name, "%d", i++);
+		char key_name[BUF_TINY];
+		g_snprintf (key_name, sizeof(key_name), "%d", i++);
 		WritePrivateProfileString (input_name, key_name, h->text, profile);
 	    }
 	}
 	h = h->next;
     }
-    free (profile);
+    g_free (profile);
 }
 #else
 void history_put (char *input_name, Hist *h)
@@ -1073,7 +1071,7 @@ char *show_hist (Hist *history, int widget_x, int widget_y)
     if (query_dlg->ret_value != B_CANCEL) {
 		listbox_get_current (query_list, &q, NULL);
 		if (q)
-		    r = strdup (q);
+		    r = g_strdup (q);
     }
     destroy_dlg (query_dlg);
     return r;
@@ -1085,7 +1083,7 @@ static void do_show_hist (WInput * in)
     r = show_hist (in->history, in->widget.x, in->widget.y);
     if (r) {
 	assign_text (in, r);
-	free (r);
+	g_free (r);
     }
 }
 
@@ -1112,15 +1110,15 @@ input_destroy (WInput *in)
 	while (current){
 	    old = current;
 	    current = current->prev;
-	    free (old->text);
-	    free (old);
+	   g_free (old->text);
+	   g_free (old);
 	}
     }
     x_destroy_cmd (in);
-    free (in->buffer);
+    g_free (in->buffer);
     free_completions (in);
     if (in->history_name)
-	free (in->history_name);
+	g_free (in->history_name);
 }
 
 static char disable_update = 0;
@@ -1152,14 +1150,14 @@ push_history (WInput *in, char *text)
 	    in->history = in->history->next;
 	if (!strcmp (in->history->text, text))
 	    return 1;
-    	new = xmalloc (sizeof (Hist), "push_history");
+    	new = g_new (Hist, 1);
 	in->history->next = new;
     } else
-    	new = xmalloc (sizeof (Hist), "push_history");
+    	new = g_new (Hist, 1);
     in->need_push = 0;
     new->next = 0;
     new->prev = in->history;
-    new->text = strdup (text);
+    new->text = g_strdup (text);
     in->history = new;
     return 2;
 }
@@ -1189,14 +1187,14 @@ insert_char (WInput *in, int c_code)
     in->need_push = 1;
     if (strlen (in->buffer)+1 == in->current_max_len){
 	/* Expand the buffer */
-	char *narea = xmalloc(in->current_max_len + in->field_len, "string expansion");
+	char *narea = g_malloc (in->current_max_len + in->field_len);
 	if (narea){
 	    char *p = in->buffer;
 
 	    strcpy (narea, in->buffer);
 	    in->buffer = narea;
 	    in->current_max_len += in->field_len;
-	    free (p);
+	   g_free (p);
 	}
     }
     if (strlen (in->buffer)+1 < in->current_max_len){
@@ -1315,9 +1313,9 @@ copy_region (WInput *in, int x_first, int x_last)
 	return;
     
     if (kill_buffer)
-	free (kill_buffer);
+	g_free (kill_buffer);
     
-    kill_buffer = xmalloc (last-first + 1, "copy_region");
+    kill_buffer = g_malloc (last-first + 1);
     strncpy (kill_buffer, in->buffer+first, last-first);
     kill_buffer [last-first] = 0;
 }
@@ -1398,8 +1396,8 @@ static void
 kill_line (WInput *in)
 {
     if (kill_buffer)
-	free (kill_buffer);
-    kill_buffer = strdup (&in->buffer [in->point]);
+	g_free (kill_buffer);
+    kill_buffer = g_strdup (&in->buffer [in->point]);
     in->buffer [in->point] = 0;
 }
 
@@ -1407,8 +1405,8 @@ void
 assign_text (WInput *in, char *text)
 {
     free_completions (in);
-    free (in->buffer);
-    in->buffer = strdup (text);	/* was in->buffer->text */
+    g_free (in->buffer);
+    in->buffer = g_strdup (text);	/* was in->buffer->text */
     in->current_max_len = strlen (in->buffer) + 1;
     in->point = strlen (in->buffer);
     in->mark = 0;
@@ -1684,7 +1682,7 @@ input_event (Gpm_Event *event, WInput *in)
 WInput *
 input_new (int y, int x, int color, int len, char *def_text, char *tkname)
 {
-    WInput *in = xmalloc (sizeof (WInput), "input_new");
+    WInput *in = g_new (WInput, 1);
     int initial_buffer_len;
 
     init_widget (&in->widget, y, x, 1, len,
@@ -1696,7 +1694,7 @@ input_new (int y, int x, int color, int len, char *def_text, char *tkname)
     in->history_name = 0;
     if (tkname && PORT_WIDGET_WANTS_HISTORY){
 	if (*tkname) {
-	    in->history_name = strdup (tkname);
+	    in->history_name = g_strdup (tkname);
 	    in->history = history_get (tkname);
 	}
     }
@@ -1713,7 +1711,7 @@ input_new (int y, int x, int color, int len, char *def_text, char *tkname)
 	INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_HOSTNAMES |
 	INPUT_COMPLETE_VARIABLES | INPUT_COMPLETE_USERNAMES;
     in->current_max_len = initial_buffer_len;
-    in->buffer = xmalloc (initial_buffer_len, "create_input: in->buffer");
+    in->buffer = g_malloc (initial_buffer_len);
     in->color = color;
     in->field_len = len;
     in->first = 1;
@@ -1895,8 +1893,8 @@ listbox_remove_list (WListbox *l)
     
     while (l->count--) {
 	q = p->next;
-	free (p->text);
-	free (p);
+	g_free (p->text);
+	g_free (p);
 	p = q;
     }
     l->pos = l->count = 0;
@@ -1949,8 +1947,8 @@ listbox_remove_current (WListbox *l, int force)
 	l->list = l->top = l->current = 0;
     }
 
-    free (p->text);
-    free (p);
+    g_free (p->text);
+    g_free (p);
 }
 
 /* Makes *e the selected entry (sets current and pos) */
@@ -2194,8 +2192,8 @@ listbox_destroy (WListbox *l)
     x_destroy_cmd (l);
     for (i = 0; i < l->count; i++){
 	n = p->next;
-	free (p->text);
-	free (p);
+	g_free (p->text);
+	g_free (p);
 	p = n;
     }
 }
@@ -2204,7 +2202,7 @@ WListbox *
 listbox_new (int y, int x, int width, int height,
 	     int action, lcback callback, char *tkname)
 {
-    WListbox *l = xmalloc (sizeof (WListbox), "listbox_new");
+    WListbox *l = g_new (WListbox, 1);
     extern int slow_terminal;
     
     init_widget (&l->widget, y, x, height, width,
@@ -2279,8 +2277,8 @@ listbox_add_item (WListbox *l, enum append_pos pos, int hotkey, char *text,
 	if (listbox_search_text (l, text))
 	    return 0;
 	    
-    entry = xmalloc (sizeof (WLEntry), "listbox_add_item");
-    entry->text = strdup (text);
+    entry = g_new (WLEntry, 1);
+    entry->text = g_strdup (text);
     entry->data = data;
     entry->hotkey = hotkey;
 
@@ -2379,7 +2377,7 @@ buttonbar_destroy (WButtonBar *bb)
 
     for (i = 0; i < 10; i++){
 	if (bb->labels [i].text)
-	    free (bb->labels [i].text);
+	    g_free (bb->labels [i].text);
     }
 }
 
@@ -2404,7 +2402,7 @@ WButtonBar *
 buttonbar_new (int visible)
 {
     int i;
-    WButtonBar *bb = xmalloc (sizeof (WButtonBar), "buttonbar_new");
+    WButtonBar *bb = g_new (WButtonBar, 1);
 
     init_widget (&bb->widget, LINES-1, 0, 1, COLS,
 		 (callback_fn) buttonbar_callback,
@@ -2425,9 +2423,9 @@ void
 set_label_text (WButtonBar *bb, int index, char *text)
 {
     if (bb->labels [index-1].text)
-	free (bb->labels [index-1].text);
+	g_free (bb->labels [index-1].text);
 
-    bb->labels [index-1].text = strdup (text);
+    bb->labels [index-1].text = g_strdup (text);
 }
 
 /* paneletc is either the panel widget, or info or view or tree widget */

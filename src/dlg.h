@@ -1,7 +1,6 @@
 #ifndef MC_DLG_H
 #define MC_DLG_H
 #include "mouse.h"
-#include "util.h"
 
 /* Color constants */
 #define FOCUSC           h->color[1]
@@ -257,7 +256,6 @@ int default_proc          (Dlg_head *h, int Msg, int Par);
 #endif
 
 extern Dlg_head *current_dlg;
-extern Hook *idle_hook;
 
 int  send_message         (Dlg_head *h, Widget *w, int msg, int par);
 int  send_message_to      (Dlg_head *h, Widget *w, int msg, int par);

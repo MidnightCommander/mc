@@ -27,9 +27,8 @@
 #include <signal.h>
 #include <string.h>
 #include "tty.h"
-#include "mad.h"
+#include "global.h"
 #include "color.h"
-#include "util.h"
 #include "mouse.h"		/* Gpm_Event is required in key.h */
 #include "key.h"		/* define_sequence */
 #include "main.h"		/* extern: force_colors */
@@ -274,13 +273,13 @@ slang_reset_softkeys (void)
     int key;
     char *send;
     char *display = "                ";
-    char tmp[100];
+    char tmp[BUF_SMALL];
     
     for ( key = 1; key < 9; key++ ) {
-	sprintf ( tmp, "k%d", key);
+	g_snprintf (tmp, sizeof (tmp), "k%d", key);
 	send = (char *) SLtt_tgetstr (tmp);
 	if (send) {
-            sprintf(tmp, "\033&f%dk%dd%dL%s%s", key,
+            g_snprintf(tmp, sizeof (tmp), "\033&f%dk%dd%dL%s%s", key,
                     strlen(display), strlen(send), display, send);
     	    SLtt_write_string (tmp);
 	}
@@ -394,11 +393,11 @@ try_alloc_color_pair (char *fg, char *bg)
 	    break;
 	p = p->next;
     }
-    p->next = malloc (sizeof (c));
+    p->next = g_new (struct colors_avail, 1);
     p = p->next;
     p->next = 0;
-    p->fg = fg ? strdup (fg) : 0;
-    p->bg = bg ? strdup (bg) : 0;
+    p->fg = fg ? g_strdup (fg) : 0;
+    p->bg = bg ? g_strdup (bg) : 0;
     if (!fg)
         /* Index in color_map array = COLOR_INDEX - 1 */
 	fg = color_map[EDITOR_NORMAL_COLOR_INDEX - 1].fg;

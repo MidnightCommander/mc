@@ -20,6 +20,8 @@
 #include <config.h>
 #include "mad.h"
 
+#undef tempnam
+
 #undef malloc
 #undef calloc
 #undef realloc
@@ -28,10 +30,10 @@
 #undef free
 
 #undef g_malloc
+#undef g_malloc0
 #undef g_calloc
 #undef g_realloc
 #undef g_strdup
-#undef g_strconcat
 #undef g_free
 
 #include <stdlib.h>
@@ -64,17 +66,26 @@ typedef struct {
 } mad_mem_area;
 
 static mad_mem_area mem_areas [MAD_MAX_AREAS];
+static FILE *memlog = stderr;
+
 void *watch_free_pointer = 0;
+
+void mad_set_debug (char *file)
+{
+    if((memlog=fopen (file, "w+")) == NULL)
+	memlog = stderr;
+}
 
 /* This function is only called by the mad_check function */
 static void mad_abort (char *message, int area, char *file, int line)
 {
-    fprintf (stderr, "MAD: %s in area %d.\r\n", message, area);
-    fprintf (stderr, "     Allocated in file \"%s\" at line %d.\r\n",
+    fprintf (memlog, "MAD: %s in area %d.\r\n", message, area);
+    fprintf (memlog, "     Allocated in file \"%s\" at line %d.\r\n",
 	     mem_areas [area].file, mem_areas [area].line);
-    fprintf (stderr, "     Discovered in file \"%s\" at line %d.\r\n",
+    fprintf (memlog, "     Discovered in file \"%s\" at line %d.\r\n",
 	     file, line);
-    fprintf (stderr, "MAD: Core dumping...\r\n");
+    fprintf (memlog, "MAD: Core dumping...\r\n");
+    fflush (memlog);
     kill (getpid (), 3);
 }
 
@@ -93,6 +104,7 @@ void mad_check (char *file, int line)
 	if (*(mem_areas [i].end_sig) != MAD_SIGNATURE)
 	    mad_abort ("Overwrite error: Bad end signature", i, file, line);
     }
+    fflush (memlog);
 }
 
 /* Allocates a memory area. Used instead of malloc and calloc. */
@@ -108,10 +120,11 @@ void *mad_alloc (int size, char *file, int line)
 	    break;
     }
     if (i >= MAD_MAX_AREAS){
-	fprintf (stderr, "MAD: Out of memory area handles. Increase the value of MAD_MAX_AREAS.\r\n");
-	fprintf (stderr, "     Discovered in file \"%s\" at line %d.\r\n",
+	fprintf (memlog, "MAD: Out of memory area handles. Increase the value of MAD_MAX_AREAS.\r\n");
+	fprintf (memlog, "     Discovered in file \"%s\" at line %d.\r\n",
 		 file, line);
-	fprintf (stderr, "MAD: Aborting...\r\n");
+	fprintf (memlog, "MAD: Aborting...\r\n");
+	fflush (memlog);
 	abort ();
     }
 
@@ -119,10 +132,11 @@ void *mad_alloc (int size, char *file, int line)
     size = (size + 3) & (~3); /* Alignment */
     area = (char*) g_malloc (size + 2 * sizeof (long));
     if (!area){
-	fprintf (stderr, "MAD: Out of memory.\r\n");
-	fprintf (stderr, "     Discovered in file \"%s\" at line %d.\r\n",
+	fprintf (memlog, "MAD: Out of memory.\r\n");
+	fprintf (memlog, "     Discovered in file \"%s\" at line %d.\r\n",
 		 file, line);
-	fprintf (stderr, "MAD: Aborting...\r\n");
+	fprintf (memlog, "MAD: Aborting...\r\n");
+	fflush (memlog);
 	abort ();
     }
 
@@ -158,20 +172,22 @@ void *mad_realloc (void *ptr, int newsize, char *file, int line)
 	    break;
     }
     if (i >= MAD_MAX_AREAS){
-	fprintf (stderr, "MAD: Attempted to realloc unallocated pointer: %p.\r\n", ptr);
-	fprintf (stderr, "     Discovered in file \"%s\" at line %d.\r\n",
+	fprintf (memlog, "MAD: Attempted to realloc unallocated pointer: %p.\r\n", ptr);
+	fprintf (memlog, "     Discovered in file \"%s\" at line %d.\r\n",
 		 file, line);
-	fprintf (stderr, "MAD: Aborting...\r\n");
+	fprintf (memlog, "MAD: Aborting...\r\n");
+	fflush (memlog);
 	abort ();
     }
 
     newsize = (newsize + 3) & (~3); /* Alignment */
     area = (char*) g_realloc (mem_areas [i].start_sig, newsize + 2 * sizeof (long));
     if (!area){
-	fprintf (stderr, "MAD: Out of memory.\r\n");
-	fprintf (stderr, "     Discovered in file \"%s\" at line %d.\r\n",
+	fprintf (memlog, "MAD: Out of memory.\r\n");
+	fprintf (memlog, "     Discovered in file \"%s\" at line %d.\r\n",
 		 file, line);
-	fprintf (stderr, "MAD: Aborting...\r\n");
+	fprintf (memlog, "MAD: Aborting...\r\n");
+	fflush (memlog);
 	abort ();
     }
 
@@ -187,6 +203,16 @@ void *mad_realloc (void *ptr, int newsize, char *file, int line)
     mem_areas [i].line = line;
 
     return mem_areas [i].data;
+}
+
+/* Allocates a memory area. Used instead of malloc and calloc. */
+void *mad_alloc0 (int size, char *file, int line)
+{
+    char *t;
+    
+    t = (char *) mad_alloc (size, file, line);
+    memset (t, 0, size);
+    return (void *) t;
 }
 
 /* Duplicates a character string. Used instead of strdup. */
@@ -207,13 +233,15 @@ void mad_free (void *ptr, char *file, int line)
     mad_check (file, line);
 
     if (watch_free_pointer && ptr == watch_free_pointer){
-	fprintf (stderr, "MAD: Watch free pointer found in file \"%s\" at line %d.\r\n",
+	fprintf (memlog, "MAD: Watch free pointer found in file \"%s\" at line %d.\r\n",
 		 file, line);
+	fflush (memlog);
     }
     
     if (ptr == NULL){
-	fprintf (stderr, "MAD: Attempted to free a NULL pointer in file \"%s\" at line %d.\r\n",
+	fprintf (memlog, "MAD: Attempted to free a NULL pointer in file \"%s\" at line %d.\r\n",
 		 file, line);
+	fflush (memlog);
 	return;
     }
 
@@ -224,13 +252,14 @@ void mad_free (void *ptr, char *file, int line)
 	    break;
     }
     if (i >= MAD_MAX_AREAS){
-	fprintf (stderr, "MAD: Attempted to free an unallocated pointer: %p.\r\n", ptr);
-	fprintf (stderr, "     Discovered in file \"%s\" at line %d.\r\n",
+	fprintf (memlog, "MAD: Attempted to free an unallocated pointer: %p.\r\n", ptr);
+	fprintf (memlog, "     Discovered in file \"%s\" at line %d.\r\n",
 		 file, line);
-	fprintf (stderr, "MAD: Aborting...\r\n");
+	fprintf (memlog, "MAD: Aborting...\r\n");
+	fflush (memlog);
 	abort ();
     }
-
+    
     g_free (mem_areas [i].start_sig);
     mem_areas [i].in_use = 0;
 }
@@ -258,11 +287,12 @@ void mad_finalize (char *file, int line)
     for (i = 0; i < MAD_MAX_AREAS; i++){
  	if (! mem_areas [i].in_use)
 	    continue;
-	fprintf (stderr, "MAD: Unfreed pointer: %p.\r\n", mem_areas [i].data);
-	fprintf (stderr, "     Allocated in file \"%s\" at line %d.\r\n",
+	fprintf (memlog, "MAD: Unfreed pointer: %p.\r\n", mem_areas [i].data);
+	fprintf (memlog, "     Allocated in file \"%s\" at line %d.\r\n",
 		 mem_areas [i].file, mem_areas [i].line);
-	fprintf (stderr, "     Discovered in file \"%s\" at line %d.\r\n",
+	fprintf (memlog, "     Discovered in file \"%s\" at line %d.\r\n",
 		 file, line);
+	fflush (memlog);
     }
 #endif
 }

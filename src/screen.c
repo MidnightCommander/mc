@@ -20,24 +20,15 @@
 
 #include <config.h>
 #include "tty.h"
-#include "fs.h"
 #include <sys/param.h>
 #include <string.h>
-#include <stdlib.h>	/* For malloc() and free() */
 #include <stdio.h>
 #include <errno.h>
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>	/* For chdir(), readlink() and getwd()/getcwd() */
 #endif
-/*#include "mc.h"*/
-
-#include <glib.h>
-
-#include "mem.h"
-#include "mad.h"
 #include "global.h"
 #include "dir.h"
-#include "util.h"
 #include "panel.h"
 #include "color.h"
 #include "tree.h"
@@ -152,7 +143,7 @@ delete_format (format_e *format)
     
     while (format){
         next = format->next;
-        free (format);
+        g_free (format);
         format = next;
      }
 }
@@ -272,34 +263,35 @@ string_file_permission (file_entry *fe, int len)
 char *
 string_file_nlinks (file_entry *fe, int len)
 {
-    static char buffer [20];
+    static char buffer [BUF_TINY];
 
-    sprintf (buffer, "%16d", fe->buf.st_nlink);
+    g_snprintf (buffer, sizeof (buffer), "%16d", fe->buf.st_nlink);
     return buffer;
 }
 
 char *
 string_file_size (file_entry *fe, int len)
 {
-    static char buffer [16];
+    static char buffer [BUF_TINY];
     int i;
 
 #ifdef HAVE_ST_RDEV
     if (S_ISBLK (fe->buf.st_mode) || S_ISCHR (fe->buf.st_mode))
-        sprintf (buffer, "%3d,%3d", (int) ((fe->buf.st_rdev >> 8) & 0xff), 
-            (int) (fe->buf.st_rdev & 0xff));
+        g_snprintf (buffer, sizeof (buffer), "%3d,%3d", 
+		    (int) ((fe->buf.st_rdev >> 8) & 0xff), 
+		    (int) (fe->buf.st_rdev & 0xff));
     else
 #endif 
     {   
-        sprintf (buffer, "%lu", (unsigned long) fe->buf.st_size);
+        g_snprintf (buffer, sizeof (buffer), "%lu", (unsigned long) fe->buf.st_size);
         if (len && (i = strlen (buffer)) > len) {
             if (i - 2 > len) {
                 if (i - 5 > len)
-                    sprintf (buffer, "%luG", (unsigned long) ((fe->buf.st_size) >> 30));
+                    g_snprintf (buffer, sizeof (buffer), "%luG", (unsigned long) ((fe->buf.st_size) >> 30));
                 else
-                    sprintf (buffer, "%luM", (unsigned long) ((fe->buf.st_size) >> 20));
+                    g_snprintf (buffer, sizeof (buffer), "%luM", (unsigned long) ((fe->buf.st_size) >> 20));
             } else
-                sprintf (buffer, "%luK", (unsigned long) ((fe->buf.st_size) >> 10));
+                g_snprintf (buffer, sizeof (buffer), "%luK", (unsigned long) ((fe->buf.st_size) >> 10));
         }
     }
     return buffer;
@@ -392,36 +384,36 @@ string_marked (file_entry *fe, int len)
 char *
 string_file_perm_octal (file_entry *fe, int len)
 {
-    static char buffer [9];
+    static char buffer [10];
 
-    sprintf (buffer, "0%06o", fe->buf.st_mode);
+    g_snprintf (buffer, sizeof (buffer), "0%06o", fe->buf.st_mode);
     return buffer;
 }
 
 char *
 string_inode (file_entry *fe, int len)
 {
-    static char buffer [9];
+    static char buffer [10];
 
-    sprintf (buffer, "%ld", (long) fe->buf.st_ino);
+    g_snprintf (buffer, sizeof (buffer), "%ld", (long) fe->buf.st_ino);
     return buffer;
 }
 
 char *
 string_file_ngid (file_entry *fe, int len)
 {
-    static char buffer [9];
+    static char buffer [10];
 
-    sprintf (buffer, "%d", fe->buf.st_gid);
+    g_snprintf (buffer, sizeof (buffer), "%d", fe->buf.st_gid);
     return buffer;
 }
 
 char *
 string_file_nuid (file_entry *fe, int len)
 {
-    static char buffer [9];
+    static char buffer [10];
 
-    sprintf (buffer, "%d", fe->buf.st_uid);
+    g_snprintf (buffer, sizeof (buffer), "%d", fe->buf.st_uid);
     return buffer;
 }
 
@@ -657,13 +649,13 @@ display_mini_info (WPanel *panel)
 
     /* Status displays total marked size */
     if (panel->marked){
-	char buffer [100];
+	char buffer [BUF_SMALL];
 	char *p;
 	
 	attrset (MARKED_COLOR);
 	printw  ("%*s", panel->widget.cols-2, " ");
 	widget_move (&panel->widget, llines (panel)+3, 1);
-	sprintf (buffer, _("  %s bytes in %d file%s"),
+	g_snprintf (buffer, sizeof (buffer), _("  %s bytes in %d file%s"),
 		 size_trunc_sep (panel->total), panel->marked,
 		 panel->marked == 1 ? "" : "s");
 	p = buffer;
@@ -684,7 +676,7 @@ display_mini_info (WPanel *panel)
 
 	link = concat_dir_and_file (panel->cwd, panel->dir.list [panel->selected].fname);
 	len = mc_readlink (link, link_target, MC_MAXPATHLEN);
-	free (link);
+	g_free (link);
 	if (len > 0){
 	    link_target[len] = 0;
 	    printw ("-> %-*s", panel->widget.cols - 5,
@@ -868,7 +860,7 @@ Xtry_to_select (WPanel *panel, char *name)
     for (i = 0; i < panel->count; i++){
 	if (strcmp (subdir, panel->dir.list [i].fname) == 0) {
 	    do_select (panel, i);
-            free (subdir);
+            g_free (subdir);
 	    return;
         }
     }
@@ -876,7 +868,7 @@ Xtry_to_select (WPanel *panel, char *name)
     /* Try to select a file near the file that is missing */
     if (panel->selected >= panel->count)
         do_select (panel, panel->count-1);
-    free (subdir);
+    g_free (subdir);
 }
 
 #ifndef PORT_HAS_PANEL_UPDATE_COLS
@@ -915,9 +907,9 @@ panel_save_name (WPanel *panel)
     
     /* If the program is shuting down */
     if ((midnight_shutdown && auto_save_setup) || saving_setup)
-	return copy_strings (panel->panel_name, 0);
+	return  g_strconcat (panel->panel_name, NULL);
     else
-	return copy_strings ("Temporal:", panel->panel_name, 0);
+	return  g_strconcat ("Temporal:", panel->panel_name, NULL);
 }
 
 static void
@@ -941,21 +933,21 @@ panel_destroy (WPanel *p)
 	while (current){
 	    old = current;
 	    current = current->prev;
-	    free (old->text);
-	    free (old);
+	    g_free (old->text);
+	    g_free (old);
 	}
     }
-    free (p->hist_name);
+    g_free (p->hist_name);
 
     delete_format (p->format);
     delete_format (p->status_format);
     
-    free (p->user_format);
+    g_free (p->user_format);
     for (i = 0; i < LIST_TYPES; i++)
-	free (p->user_status_format [i]);
-    free (p->dir.list);
-    free (p->panel_name);
-    free (name);
+	g_free (p->user_status_format [i]);
+    g_free (p->dir.list);
+    g_free (p->panel_name);
+    g_free (name);
 }
 
 static void
@@ -982,8 +974,7 @@ panel_new (char *panel_name)
     char *section;
     int i, err;
 
-    panel = xmalloc (sizeof (WPanel), "panel_new");
-    memset (panel, 0, sizeof (WPanel));
+    panel = g_new0 (WPanel, 1);
     
     /* No know sizes of the panel at startup */
     init_widget (&panel->widget, 0, 0, 0, 0, (callback_fn)
@@ -996,11 +987,11 @@ panel_new (char *panel_name)
     mc_get_current_wd (panel->cwd, sizeof (panel->cwd)-2);
     strcpy (panel->lwd, ".");
 
-    panel->hist_name = copy_strings ("Dir Hist ", panel_name, 0);
+    panel->hist_name = g_strconcat ("Dir Hist ", panel_name, NULL);
     panel->dir_history = history_get (panel->hist_name);
     directory_history_add (panel, panel->cwd);
 
-    panel->dir.list         = (file_entry *) malloc (MIN_FILES * sizeof (file_entry));
+    panel->dir.list         = g_new (file_entry, MIN_FILES);
     panel->dir.size         = MIN_FILES;
     panel->active           = 0;
     panel->filter           = 0;
@@ -1018,32 +1009,32 @@ panel_new (char *panel_name)
     panel->status_format    = 0;    
     panel->format_modified  = 1;
     
-    panel->panel_name = strdup (panel_name);
-    panel->user_format = strdup (DEFAULT_USER_FORMAT);
+    panel->panel_name = g_strdup (panel_name);
+    panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
     
     for(i = 0; i < LIST_TYPES; i++)
-	panel->user_status_format [i] = strdup (DEFAULT_USER_FORMAT);
+	panel->user_status_format [i] = g_strdup (DEFAULT_USER_FORMAT);
     
     panel->search_buffer [0] = 0;
     panel->frame_size = frame_half;
-    section = copy_strings ("Temporal:", panel->panel_name, 0);
+    section = g_strconcat ("Temporal:", panel->panel_name, NULL);
     if (!profile_has_section (section, profile_name)){
-	free (section);
-	section = strdup (panel->panel_name);
+	g_free (section);
+	section = g_strdup (panel->panel_name);
     }
     panel_load_setup (panel, section);
-    free (section);
+    g_free (section);
 
     /* Load format strings */
     err = set_panel_formats (panel);
     if (err){
 	if (err & 0x01){
-	    free (panel->user_format);
-	    panel->user_format = strdup (DEFAULT_USER_FORMAT);
+	    g_free (panel->user_format);
+	    panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
 	}
 	if (err & 0x02){
-	    free (panel->user_status_format [panel->list_type]);
-	    panel->user_status_format [panel->list_type] = strdup (DEFAULT_USER_FORMAT);
+	    g_free (panel->user_status_format [panel->list_type]);
+	    panel->user_status_format [panel->list_type] = g_strdup (DEFAULT_USER_FORMAT);
 	}
 	set_panel_formats (panel);
     }
@@ -1078,7 +1069,7 @@ panel_reload (WPanel *panel)
 	    strcpy (panel->cwd, PATH_SEP_STR);
 	else
 	    *last_slash = 0;
-        bzero (&(panel->dir_stat), sizeof (panel->dir_stat));
+        memset (&(panel->dir_stat), 0, sizeof (panel->dir_stat));
 	show_dir (panel);
     }
     
@@ -1223,7 +1214,7 @@ parse_display_format (WPanel *panel, char *format, char **error, int isstatus, i
     while (*format){           /* format can be an empty string */
 	int found = 0;
 
-        darr = xmalloc (sizeof (format_e), "parse_display_format");
+        darr = g_new (format_e, 1);
 	
         /* I'm so ugly, don't look at me :-) */
         if (!home)
@@ -1303,7 +1294,7 @@ parse_display_format (WPanel *panel, char *format, char **error, int isstatus, i
 	    delete_format (home);
 	    old_char = format [pos];
 	    format [pos] = 0;
-	    *error = copy_strings(_("Unknow tag on display format: "), format, 0);
+	    *error = g_strconcat (_("Unknow tag on display format: "), format, NULL);
 	    format [pos] = old_char;
 	    return 0;
 	}
@@ -1399,7 +1390,7 @@ set_panel_formats (WPanel *p)
     form = use_display_format (p, panel_format (p), &err, 0);
 	
     if (err){
-        free (err);
+        g_free (err);
         retcode = 1;
     }
     else {
@@ -1414,7 +1405,7 @@ set_panel_formats (WPanel *p)
 	form = use_display_format (p, mini_status_format (p), &err, 1);
 	
 	if (err){
-	    free (err);
+	    g_free (err);
 	    retcode += 2;
 	}
 	else {
@@ -2061,13 +2052,13 @@ do_enter_on_file_entry (file_entry *fe)
 #endif	    
 	    {
 	        char *tmp = name_quote (fe->fname, 0);
-	        char *cmd = copy_strings (".", PATH_SEP_STR, tmp, 0);
+	        char *cmd = g_strconcat (".", PATH_SEP_STR, tmp, NULL);
 	        if (!confirm_execute || (query_dialog (_(" The Midnight Commander "),
 						       _(" Do you really want to execute? "),
 						       0, 2, _("&Yes"), _("&No")) == 0))
 	            execute (cmd);
-	        free (tmp);
-	        free (cmd);
+	        g_free (tmp);
+	        g_free (cmd);
 	    } 
 #ifdef USE_VFS	    	    
 	    else {
@@ -2080,7 +2071,7 @@ do_enter_on_file_entry (file_entry *fe)
 		if (!mc_setctl (tmp, MCCTL_EXTFS_RUN, NULL))
 		    message (1, _(" Warning "), _(" No action taken "));
 
-	        free (tmp);
+	        g_free (tmp);
 	    }
 #endif /* USE_VFS */	    
 	    return 1;
@@ -2128,7 +2119,7 @@ chdir_other_panel (WPanel *panel)
 
     move_down (panel);
     
-    free (new_dir);
+    g_free (new_dir);
 }
 
 static void
@@ -2161,7 +2152,7 @@ chdir_to_readlink (WPanel *panel)
 	    p[1] = 0;
 	}
 	if (*buffer == PATH_SEP)
-	    new_dir = strdup (buffer);
+	    new_dir = g_strdup (buffer);
 	else
 	    new_dir = concat_dir_and_file (panel->cwd, buffer);
 
@@ -2171,7 +2162,7 @@ chdir_to_readlink (WPanel *panel)
 	
 	move_down (panel);
 	    
-	free (new_dir);
+	g_free (new_dir);
     }
 }
 
@@ -2568,7 +2559,7 @@ panel_re_sort (WPanel *panel)
     if (panel == NULL)
 	    return;
     
-    filename = strdup (selection (panel)->fname);
+    filename = g_strdup (selection (panel)->fname);
     unselect_item (panel);
     do_sort (&panel->dir, panel->sort_type, panel->count-1, panel->reverse, panel->case_sensitive);
     panel->selected = -1;
@@ -2578,7 +2569,7 @@ panel_re_sort (WPanel *panel)
 	    break;
 	}
     }
-    free (filename);
+    g_free (filename);
     panel->top_file = panel->selected - ITEMS (panel)/2;
     if (panel->top_file < 0)
 	panel->top_file = 0;
@@ -2598,10 +2589,10 @@ panel_set_sort_order (WPanel *panel, sortfn *sort_order)
     if (sort_order == (sortfn *) unsorted){
 	char *current_file;
 	
-	current_file = strdup (panel->dir.list [panel->selected].fname);
+	current_file = g_strdup (panel->dir.list [panel->selected].fname);
 	panel_reload (panel);
 	try_to_select (panel, current_file);
-	free (current_file);
+	g_free (current_file);
     }
     panel_re_sort (panel);
 }

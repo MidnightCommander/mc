@@ -41,14 +41,11 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <malloc.h>
 #include <errno.h>
-#include "mad.h"
+#include "global.h"
 #include "color.h"
-#include "util.h"
 #include "dialog.h"
 #include "win.h"
-#include "global.h"
 #include "mouse.h"
 #include "key.h"	/* For mi_getch() */
 #include "help.h"
@@ -321,7 +318,7 @@ static void start_link_area (int x, int y, char *link_name)
 	message (0, _(" Warning "), _(" Internal bug: Double start of link area "));
 
     /* Allocate memory for a new link area */
-    new = (Link_Area*) xmalloc (sizeof (Link_Area), "Help, link_area");
+    new = g_new (Link_Area, 1);
     new->next = link_area;
     link_area = new;
 
@@ -353,7 +350,7 @@ static void clear_link_areas (void)
     while (link_area){
 	current = link_area;
 	link_area = current -> next;
-	free (current);
+	g_free (current);
     }
     inside_link_area = 0;
 }
@@ -602,7 +599,7 @@ static int md_callback (Dlg_head *h, Widget *w, int msg, int par)
 
 static Widget *mousedispatch_new (int y, int x, int yl, int xl)
 {
-    Widget *w = xmalloc (sizeof (Widget), "disp_new");
+    Widget *w = g_new (Widget, 1);
 
     init_widget (w, y, x, yl, xl,
 		 (callback_fn) md_callback, 0, (mouse_h)  help_event, NULL);
@@ -756,7 +753,7 @@ static void
 interactive_display_finish (void)
 {
     clear_link_areas ();
-    free (data);
+    g_free (data);
 }
 
 void

@@ -24,14 +24,12 @@
 #endif
 #include <string.h>
 #include <stdio.h>
-#include <stdlib.h>		/* For malloc() */
 #include <sys/types.h>
 #include <sys/param.h>
 #include <sys/stat.h>
 #include <ctype.h>
 #include "tty.h"
-#include "mad.h"
-#include "util.h"	/* Needed for the externs and convert_controls */
+#include "global.h"
 #include "win.h"
 #include "color.h"
 #include "dlg.h"
@@ -102,7 +100,7 @@ _("Please press the %s\n"
         _(key_name_conv_tab [action - B_USER].longname));
     mc_refresh ();
     if (learnkeys [action - B_USER].sequence != NULL) {
-	free (learnkeys [action - B_USER].sequence);
+	g_free (learnkeys [action - B_USER].sequence);
 	learnkeys [action - B_USER].sequence = NULL;
     }
     seq = learn_key ();
@@ -125,7 +123,7 @@ _("Please press the %s\n"
 		_(" You have entered \"%s\""), seq);
 	}
 	
-    	free (seq);
+    	g_free (seq);
     }
     
     dlg_run_done (d);
@@ -235,7 +233,7 @@ static void init_learn (void)
 {
     int x, y, i, j;
     key_code_name_t *key;
-    char buffer [22];
+    char buffer [BUF_TINY];
 	static int i18n_flag = 0;
 
     do_refresh ();
@@ -277,7 +275,7 @@ static void init_learn (void)
     y = UY;
     for (key = key_name_conv_tab, j = 0; key->name != NULL &&
         strcmp (key->name, "kpleft"); key++, j++);
-    learnkeys = (learnkey *) xmalloc (sizeof (learnkey) * j, "Learn keys");
+    learnkeys = g_new (learnkey, j);
     x += ((j - 1) / ROWS) * COLSHIFT;
     y += (j - 1) % ROWS;
     learn_total = j;
@@ -286,7 +284,7 @@ static void init_learn (void)
     for (i = j - 1, key = key_name_conv_tab + j - 1; i >= 0; i--, key--) {
     	learnkeys [i].ok = 0;
     	learnkeys [i].sequence = NULL;
-        sprintf (buffer, "%-16s", _(key->longname));
+        g_snprintf (buffer, sizeof (buffer), "%-16s", _(key->longname));
 	add_widget (learn_dlg, learnkeys [i].button = (Widget *)
 	    button_new (y, x, B_USER + i, NARROW_BUTTON, buffer, learn_button, 0, NULL));
 	add_widget (learn_dlg, learnkeys [i].label = (Widget *)
@@ -317,7 +315,7 @@ learn_save (void)
 {
     int i;
     int profile_changed = 0;
-    char *section = copy_strings ("terminal:", getenv ("TERM"), NULL);
+    char *section = g_strconcat ("terminal:", getenv ("TERM"), NULL);
 
     for (i = 0; i < learn_total; i++) {
 	if (learnkeys [i].sequence != NULL) {

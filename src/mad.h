@@ -3,7 +3,7 @@
 
 /* To prevent molesting these files with the malloc/calloc/free macros.  */
 #include <stdlib.h>
-#include <malloc.h>
+#include <malloc.h> 
 
 #ifdef HAVE_MAD
 #   define INLINE 
@@ -35,14 +35,25 @@
 #define strdup(x)	mad_strdup (x, __FILE__, __LINE__)
 #define free(x)		mad_free (x, __FILE__, __LINE__)
 
+/* This defenitions are grabbed from GLib.h */
+#define g_new(type, count)	  \
+      ((type *) g_malloc ((unsigned) sizeof (type) * (count)))
+#define g_new0(type, count)	  \
+      ((type *) g_malloc0 ((unsigned) sizeof (type) * (count)))
+#define g_renew(type, mem, count)	  \
+      ((type *) g_realloc (mem, (unsigned) sizeof (type) * (count)))
+
 #define g_malloc(x)	mad_alloc (x, __FILE__, __LINE__)
+#define g_malloc0(x)	mad_alloc0 (x, __FILE__, __LINE__)
 #define g_calloc(x, y)	mad_alloc ((x) * (y), __FILE__, __LINE__)
 #define g_realloc(x, y)	mad_realloc (x, y, __FILE__, __LINE__)
 #define g_strdup(x)	mad_strdup (x, __FILE__, __LINE__)
 #define g_free(x)	mad_free (x, __FILE__, __LINE__)
 
+void mad_set_debug (char *file);
 void mad_check (char *file, int line);
 void *mad_alloc (int size, char *file, int line);
+void *mad_alloc0 (int size, char *file, int line);
 void *mad_realloc (void *ptr, int newsize, char *file, int line);
 char *mad_strdup (const char *s, char *file, int line);
 void mad_free (void *ptr, char *file, int line);

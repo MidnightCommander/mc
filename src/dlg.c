@@ -20,15 +20,12 @@
 /* "$Id$" */
 #include <string.h>
 #include <stdio.h>
-#include <malloc.h>
 #include <ctype.h>
 #include "tty.h"
 #include <stdarg.h>
-#include "mad.h"
-#include "x.h"
-#include "util.h"
-#include "menu.h"
 #include "global.h"
+#include "x.h"
+#include "menu.h"
 #include "win.h"
 #include "color.h"
 #include "mouse.h"
@@ -236,7 +233,7 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
     if ((flags & DLG_TRYUP) && (y1 > 3))
 	y1 -= 2;
 
-    new_d = (Dlg_head *) malloc (sizeof (Dlg_head));
+    new_d = g_new (Dlg_head, 1);
     new_d->current = NULL;
     new_d->count = 0;
     new_d->direction = DIR_FORWARD;
@@ -292,7 +289,7 @@ int add_widgetl (Dlg_head *where, void *what, WLay layout)
     if (where->running){
 	    Widget_Item *point = where->current;
 
-	    where->current = (Widget_Item *) malloc (sizeof (Widget_Item));
+	    where->current = g_new (Widget_Item, 1);
 
 	    if (point){
 		    where->current->next = point->next;
@@ -308,7 +305,7 @@ int add_widgetl (Dlg_head *where, void *what, WLay layout)
 	    }
     } else {
 	    back = where->current;
-	    where->current = (Widget_Item *) malloc (sizeof (Widget_Item));
+	    where->current = g_new (Widget_Item, 1);
 	    if (back){
 		    back->prev = where->current;
 		    where->current->next = back;
@@ -358,7 +355,7 @@ int remove_widget (Dlg_head *h, void *what)
 		    h->current = 0;
 	    }
 	    h->count--;
-	    free (p);
+	    g_free (p);
 	    return 1;
 	}
 	p = p->next;
@@ -371,7 +368,7 @@ int destroy_widget (Widget *w)
     send_message (w->parent, w, WIDGET_DESTROY, 0);
     if (w->destroy)
 	w->destroy (w);
-    free (w);
+    g_free (w);
     return 1;
 }
 
@@ -613,7 +610,7 @@ static INLINE void dialog_handle_key (Dlg_head *h, int d_key)
     case KEY_F(1):
         hlpfile = concat_dir_and_file (mc_home, "mc.hlp");
 	interactive_display (hlpfile, h->help_ctx);
-        free (hlpfile);
+        g_free (hlpfile);
 	do_refresh ();
 	break;
 
@@ -920,14 +917,14 @@ destroy_dlg (Dlg_head *h)
 	if (c->widget->destroy)
 	    c->widget->destroy (c->widget);
 	c = c->next;
-	free (h->current->widget);
-	free (h->current);
+	g_free (h->current->widget);
+	g_free (h->current);
 	h->current = c;
     }
     if (h->title)
-	free (h->title);
+	g_free (h->title);
     x_destroy_dlg (h);
-    free (h);
+    g_free (h);
 
 #ifndef HAVE_X
     if (refresh_list)
@@ -1024,7 +1021,7 @@ int dlg_select_nth_widget (Dlg_head *h, int n)
 void
 x_set_dialog_title (Dlg_head *h, char *title)
 {
-  h->title = strdup(title);
+  h->title = g_strdup (title);
 }
 #endif
 

@@ -23,16 +23,12 @@
 #include "tty.h"
 #include <string.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/param.h>
-#include <malloc.h>
 #include <signal.h>
 #include <ctype.h>
 #include "global.h"
-#include "mad.h"		/* The great mad */
-#include "util.h"		/* Required by panel.h */
 #include "win.h"		/* Our window tools */
 #include "color.h"		/* Color definitions */
 #include "dlg.h"		/* The nice dialog manager */
@@ -227,19 +223,19 @@ display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int n
 
     if (!panel) {
         p = get_nth_panel_name (num);
-        panel = (WPanel *) xmalloc (sizeof (WPanel), "temporary panel");
+        panel = g_new (WPanel, 1);
         panel->list_type = list_full;
-        panel->user_format = strdup (DEFAULT_USER_FORMAT);
+        panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
         panel->user_mini_status = 0;
 	for (i = 0; i < LIST_TYPES; i++)
-    	    panel->user_status_format[i] = strdup (DEFAULT_USER_FORMAT);
-        section = copy_strings ("Temporal:", p, 0);
+    	    panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
+        section = g_strconcat ("Temporal:", p, NULL);
         if (!profile_has_section (section, profile_name)) {
-            free (section);
-            section = strdup (p);
+            g_free (section);
+            section = g_strdup (p);
         }
         panel_load_setup (panel, section);
-        free (section);
+        g_free (section);
     }
 
     current_mode = panel->list_type;
@@ -251,16 +247,16 @@ display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int n
     result = -1;
     
     if (section) {
-        free (panel->user_format);
+        g_free (panel->user_format);
 	for (i = 0; i < LIST_TYPES; i++)
-	    free (panel->user_status_format [i]);
-        free (panel);
+	   g_free (panel->user_status_format [i]);
+        g_free (panel);
     }
     
     if (dd->ret_value != B_CANCEL){
 	result = my_radio->sel;
-	*userp = strdup (user->buffer);
-	*minip = strdup (status->buffer);
+	*userp = g_strdup (user->buffer);
+	*minip = g_strdup (status->buffer);
 	*use_msformat = check_status->state & C_BOOL;
     }
     destroy_dlg (dd);
@@ -595,7 +591,7 @@ tree (char *current_dir)
     
     run_dlg (dlg);
     if (dlg->ret_value == B_ENTER)
-	val = strdup (mytree->selected_ptr->name);
+	val = g_strdup (mytree->selected_ptr->name);
     else
 	val = 0;
     
@@ -686,16 +682,16 @@ static QuickDialog confvfs_dlg =
 void
 configure_vfs (void)
 {
-    char buffer2[15];
+    char buffer2[BUF_TINY];
 #if defined(USE_NETCODE)
-    char buffer3[15];
+    char buffer3[BUF_TINY];
 #endif
 
-    sprintf (buffer2, "%i", vfs_timeout);
+    g_snprintf (buffer2, sizeof (buffer2), "%i", vfs_timeout);
     confvfs_widgets [3 + VFS_WIDGETBASE].text = buffer2;
 #if defined(USE_NETCODE)
     ret_use_netrc = use_netrc;
-    sprintf(buffer3, "%i", ftpfs_directory_timeout);
+    g_snprintf(buffer3, sizeof (buffer3), "%i", ftpfs_directory_timeout);
     confvfs_widgets[5].text = buffer3;
     confvfs_widgets[7].text = ftpfs_anonymous_passwd;
     confvfs_widgets[2].text = ftpfs_proxy_host ? ftpfs_proxy_host : "";
@@ -703,18 +699,18 @@ configure_vfs (void)
 
     if (quick_dialog (&confvfs_dlg) != B_CANCEL) {
         vfs_timeout = atoi (ret_timeout);
-        free (ret_timeout);
+        g_free (ret_timeout);
         if (vfs_timeout < 0 || vfs_timeout > 10000)
             vfs_timeout = 10;
 #if defined(USE_NETCODE)
-	free(ftpfs_anonymous_passwd);
+	g_free (ftpfs_anonymous_passwd);
 	ftpfs_anonymous_passwd = ret_passwd;
 	if (ftpfs_proxy_host)
-	    free(ftpfs_proxy_host);
+	    g_free (ftpfs_proxy_host);
 	ftpfs_proxy_host = ret_ftp_proxy;
 	ftpfs_directory_timeout = atoi(ret_directory_timeout);
 	use_netrc = ret_use_netrc;
-	free(ret_directory_timeout);
+	g_free (ret_directory_timeout);
 #endif
     }
 }
@@ -840,9 +836,9 @@ jobs_fill_listbox (void)
     while (tl){
 	char *s;
 
-	s = copy_strings (state_str [tl->state], " ", tl->info, NULL);
+	s = g_strconcat (state_str [tl->state], " ", tl->info, NULL);
 	listbox_add_item (bg_list, LISTBOX_APPEND_AT_END, 0, s, (void *) tl);
-	free (s);
+	g_free (s);
 	tl = tl->next;
     }
 }

@@ -18,22 +18,18 @@
 #include <config.h>
 #include "tty.h"
 #include <stdio.h>
-#include <stdlib.h>	/* For free() */
 #include <string.h>
 #if (!defined(__IBMC__) && !defined(__IBMCPP__)) && !defined(HAS_NO_TERMIOS_H)
 #    include <termios.h>
 #endif
-#include "mad.h"
+#include "global.h"
 #include "color.h"
 #include "mouse.h"
-#include "util.h"	/* For xmalloc() */
-
 #include "dlg.h"
 #include "widget.h"
 #include "win.h"
 #include "key.h"		/* XCTRL and ALT macros  */
 #include "layout.h"
-#include "global.h"
 
 /* "$Id$" */
 
@@ -60,9 +56,9 @@ void sprint_bytesize (char *buffer, int size, int scale)
 	}
     }
     if (scale > 0)
-	sprintf (buffer, "%4d %cb", size, scales[scale]);
+	g_snprintf (buffer, 10, "%4d %cb", size, scales[scale]);
     else
-	sprintf (buffer, "%4d b ", size);
+	g_snprintf (buffer, 10, "%4d b ", size);
 }
 
 void print_bytesize (int size, int scale)
@@ -283,7 +279,7 @@ int lookup_key (char *keyname)
     int i;
 
     for (i = 0; key_name_conv_tab [i].code; i++){
-	if (strcasecmp (key_name_conv_tab [i].name, keyname))
+	if ( g_strcasecmp (key_name_conv_tab [i].name, keyname))
 	    continue;
 	return key_name_conv_tab [i].code;
     }

@@ -28,11 +28,9 @@
 #endif
 #include <string.h>
 #include <stdio.h>
-#include <stdlib.h>		/* For malloc() */
 #include <errno.h>	/* For errno on SunOS systems	      */
-#include "mad.h"
 #include "tty.h"
-#include "util.h"		/* Needed for the externs */
+#include "global.h"
 #include "win.h"
 #include "color.h"
 #include "dlg.h"
@@ -562,7 +560,7 @@ static void init_chown_advanced (void)
 {
     int i;
 
-    sf_stat = (struct stat *) malloc (sizeof (struct stat));
+    sf_stat = g_new (struct stat, 1);
     do_refresh ();
     end_chown = need_update = current_file = 0;
     single_set = (cpanel->marked < 2) ? 2 : 0;
@@ -597,7 +595,7 @@ static void init_chown_advanced (void)
 static void
 chown_advanced_done (void)
 {
-    free (sf_stat);
+    g_free (sf_stat);
     if (need_update)
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();

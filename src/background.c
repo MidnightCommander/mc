@@ -33,11 +33,11 @@
 #endif
 #include <sys/stat.h>
 #include <sys/param.h>
-#include <stdlib.h>
 #include <string.h>
 #include <fcntl.h>
 #include <stdio.h>
 #include "tty.h"
+#include "global.h"
 #include "dlg.h"
 #include "widget.h"
 #include "wtools.h"
@@ -49,12 +49,10 @@
 #ifdef USE_NETCODE
 #    include <sys/socket.h>
 #endif
-#include "util.h"
 #include "dialog.h"
 #include "fileopctx.h"
-#include "mad.h"
 #include "key.h"	/* For add_select_channel(), delete_select_channel() */
-#include "regex.h"
+#include "eregex.h"
 #include "file.h"
 #include "filegui.h"
 
@@ -84,7 +82,7 @@ register_task_running (FileOpContext *ctx, pid_t pid, int fd, char *info)
 {
     TaskList *new;
 
-    new = xmalloc (sizeof (TaskList), "note_task_running");
+    new = g_new (TaskList, 1);
     new->pid   = pid;
     new->info  = info;
     new->state = Task_Running;
@@ -107,8 +105,8 @@ unregister_task_running (pid_t pid, int fd)
 		prev->next = p->next;
 	    else
 		task_list = p->next;
-	    free (p->info);
-	    free (p);
+	    g_free (p->info);
+	    g_free (p);
 	    break;
 	}
 	prev = p;
@@ -177,7 +175,7 @@ do_background (FileOpContext *ctx, char *info)
 static char *
 background_title (char *str)
 {
-    char *result = copy_strings (_("Background process:"), str, NULL);
+    char *result = g_strconcat (_("Background process:"), str, NULL);
 
     return result;
 }
@@ -196,7 +194,7 @@ real_message_1s (enum OperationMode mode, int *flags, char *title, char *str1)
     message (*flags, title, str1);
 
     if (title != full_title)
-	free (full_title);
+	g_free (full_title);
 }
 
 static void
@@ -212,7 +210,7 @@ real_message_2s (enum OperationMode mode, int *flags, char *title, char *str1, c
     message (*flags, title, str1, str2);
     
     if (title != full_title)
-	free (full_title);
+	g_free (full_title);
 }
 
 static void
@@ -228,7 +226,7 @@ real_message_3s (enum OperationMode mode, int *flags, char *title, char *str1, c
     message (*flags, title, str1, str2, str3);
     
     if (title != full_title)
-	free (full_title);
+	g_free (full_title);
 }
 /* }}} */
 
@@ -320,7 +318,7 @@ background_attention (int fd, void *closure)
 	int size;
 
 	read (fd, &size, sizeof (size));
-	data [i] = xmalloc (size+1, "RPC Arguments");
+	data [i] = g_malloc (size+1);
 	read (fd, data [i], size);
 
 	data [i][size] = 0;	/* NULL terminate the blocks (they could be strings) */
@@ -398,7 +396,7 @@ background_attention (int fd, void *closure)
 	    write (fd, &len, sizeof (len));
 	    if (len){
 		write (fd, resstr, len);
-		free (resstr);
+		g_free (resstr);
 	    }
 	} else {
 	    len = 0;
@@ -406,7 +404,7 @@ background_attention (int fd, void *closure)
 	}
     }
     for (i = 0; i < argc; i++)
-	free (data [i]);
+	g_free (data [i]);
 
     do_refresh ();
     mc_refresh ();
@@ -486,7 +484,7 @@ parent_call_string (void *routine, int argc, ...)
     read (parent_fd, &i, sizeof (int));
     if (!i)
 	return NULL;
-    str = xmalloc (i + 1, "parent_return");
+    str = g_malloc (i + 1);
     read (parent_fd, str, i);
     str [i] = 0;
     return str;
@@ -579,12 +577,9 @@ input_dialog_help (char *header, char *text, char *help, char *def_text)
 void
 message_1s1d (int flags, char *title, char *str, int d)
 {
-    char *p;
-
-    p = xmalloc (strlen (str) + 30, "1s1d");
-    sprintf (p, str, d);
+    char *p = g_strdup_printf (str, d);
     message_1s (flags, title, p);
-    free (p);
+    g_free (p);
 }
 
 /* }}} */

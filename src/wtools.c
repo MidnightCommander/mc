@@ -33,12 +33,9 @@
 #include <config.h>
 #include <string.h>
 #include <stdio.h>
-#include <malloc.h>
 #include "tty.h"
 #include <stdarg.h>
-#include "mad.h"
 #include "global.h"
-#include "util.h"
 #include "win.h"
 #include "color.h"
 #include "mouse.h"
@@ -110,7 +107,7 @@ static int listbox_callback (Dlg_head *h, int id, int msg)
 Listbox *create_listbox_window (int cols, int lines, char *title, char *help)
 {
     int xpos, ypos, len;
-    Listbox  *listbox = xmalloc (sizeof (Listbox), "create_listbox_window");
+    Listbox  *listbox = g_new (Listbox, 1);
     char* cancel_string = _("&Cancel");
 
     /* Adjust sizes */
@@ -157,7 +154,7 @@ int run_listbox (Listbox *l)
     else
 	val = l->list->pos;
     destroy_dlg (l->dlg);
-    free (l);
+    g_free (l);
     return val;
 }
 
@@ -369,7 +366,7 @@ Chooser *new_chooser (int lines, int cols, char *help, int flags)
     Chooser  *c;
     int      button_lines;
 
-    c = (Chooser *) xmalloc (sizeof (Chooser), "new_chooser");
+    c =g_new (Chooser, 1);
     c->dialog = create_dlg (0, 0, lines, cols, dialog_colors, common_dialog_callback,
 			    help, "chooser", DLG_CENTER | DLG_GRID);
     
@@ -535,7 +532,7 @@ int quick_dialog_skip (QuickDialog *qd, int nskip)
 		break;
 		
 	    case quick_input:
-		*qw->str_result = strdup (((WInput *) qw->the_widget)->buffer);
+		*qw->str_result = g_strdup (((WInput *) qw->the_widget)->buffer);
 		break;
 	    }
 	}
@@ -704,7 +701,7 @@ char *input_expand_dialog (char *header, char *text, char *def_text)
     if (result){
 	expanded = tilde_expand (result);
 	if (expanded){
-	    free (result);
+	    g_free (result);
 	    return expanded;
 	} else 
 	    return result;

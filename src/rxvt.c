@@ -18,13 +18,11 @@
 
 #include <config.h>
 #include <stdio.h>	/* read, printf */
-#include <stdlib.h>	/* getenv */
 #include <sys/types.h>
 #include <string.h>
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>
 #endif
-#include <malloc.h>	/* malloc */
 
 #ifndef SCO_FLAVOR
 #	include <sys/time.h>		/* struct timeval */
@@ -35,7 +33,7 @@
 #endif
 
 #include "tty.h"	/* move, addch */
-#include "util.h"	/* is_printable */
+#include "global.h"
 #include "cons.saver.h"
 
 int rxvt_extensions = 0;
@@ -101,7 +99,7 @@ void show_rxvt_contents (int starty, unsigned char y1, unsigned char y2)
 
     bytes = (y2 - y1) * (COLS + 1) + 1;		/* *should* be the number of bytes read */
     j = 0;
-    k = malloc (bytes);
+    k = g_malloc (bytes);
     for (;;) {
 	int c;
 	c = rxvt_getc ();
@@ -122,6 +120,6 @@ void show_rxvt_contents (int starty, unsigned char y1, unsigned char y2)
 	    move (starty + (i / cols), 0);
 	addch (is_printable (k[i]) ? k[i] : ' ');
     }
-    free (k);
+    g_free (k);
 }
 

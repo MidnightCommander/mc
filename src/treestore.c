@@ -41,14 +41,10 @@
 #include <errno.h>
 #include <dirent.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-#include <glib.h>
-#include "fs.h"
-#include "../vfs/vfs.h"
-#include "util.h"
-#include "mad.h"
+#include "global.h"
 #include "treestore.h"
+#include "../vfs/vfs.h"
 #ifdef OS2_NT
 #   include <io.h>
 #endif
@@ -155,8 +151,8 @@ tree_store_destroy (void)
 	while (current){
 		old = current;
 		current = current->next;
-		free (old->name);
-		free (old);
+		g_free (old->name);
+		g_free (old);
 	}
 
 	ts.tree_first = NULL;
@@ -167,7 +163,7 @@ tree_store_destroy (void)
 static char *
 decode (char *buffer)
 {
-	char *res = strdup (buffer);
+	char *res = g_strdup (buffer);
 	char *p, *q;
 	
 	for (p = q = res; *p; p++, q++){
@@ -275,7 +271,7 @@ tree_store_load (char *name)
 					e->scanned = scanned;
 					strcpy (oldname, name);
 				}
-			free (name);
+			g_free (name);
 		}
 		fclose (file);
 	}
@@ -302,7 +298,7 @@ encode (char *string)
 			special_chars++;
 	}
 	
-	res = malloc (p - string + special_chars + 1);
+	res = g_malloc (p - string + special_chars + 1);
 	for (p = string, q = res; *p; p++, q++){
 		if (*p != '\n' && *p != '\\'){
 			*q = *p;
@@ -346,12 +342,12 @@ tree_store_save (char *name)
 			char *encoded = encode (current->name + common);
 			
 			i = fprintf (file, "%d:%d %s\n", current->scanned, common, encoded);
-			free (encoded);
+			g_free (encoded);
 		} else {
 			char *encoded = encode (current->name);
 			
 			i = fprintf (file, "%d:%s\n", current->scanned, encoded);
-			free (encoded);
+			g_free (encoded);
 		}
 		
 		if (i == EOF){
@@ -390,7 +386,7 @@ tree_store_add_entry (char *name)
 		return current; /* Already in the list */
 
 	/* Not in the list -> add it */
-	new = xmalloc (sizeof (tree_entry), "ts, tree_entry");
+	new = g_new (tree_entry, 1);
 	if (!current){
 		/* Append to the end of the list */
 		if (!ts.tree_first){
@@ -419,7 +415,7 @@ tree_store_add_entry (char *name)
 	}
 
 	/* Calculate attributes */
-	new->name = strdup (name);
+	new->name = g_strdup (name);
 	len = strlen (new->name);
 	new->sublevel = 0;
 	for (i = 0; i < len; i++)
@@ -447,7 +443,7 @@ tree_store_add_entry (char *name)
 	
 	if (new->sublevel > 1){
 		/* Let's check if the parent directory is in the tree */
-		char *parent = strdup (new->name);
+		char *parent = g_strdup (new->name);
 		int i;
 		
 		for (i = strlen (parent) - 1; i > 1; i--){
@@ -457,7 +453,7 @@ tree_store_add_entry (char *name)
 				break;
 			}
 		}
-		free (parent);
+		g_free (parent);
 	}
 
 	tree_store_dirty (TRUE);
@@ -494,8 +490,8 @@ remove_entry (tree_entry *entry)
 		ts.tree_last = entry->prev;
 	
 	/* Free the memory used by the entry */
-	free (entry->name);
-	free (entry);
+	g_free (entry->name);
+	g_free (entry);
 
 	return ret;
 }
@@ -552,7 +548,7 @@ tree_store_mark_checked (const char *subname)
 	    (subname [1] == 0 || (subname [1] == '.' && subname [2] == 0)))
 		return;
 	if (ts.check_name [0] == PATH_SEP && ts.check_name [1] == 0)
-		name = copy_strings (PATH_SEP_STR, subname, 0);
+		name = g_strconcat (PATH_SEP_STR, subname, NULL);
 	else
 		name = concat_dir_and_file (ts.check_name, subname);
 	
@@ -566,7 +562,7 @@ tree_store_mark_checked (const char *subname)
 		current = tree_store_add_entry (name);
 		tree_store_notify_add (current);
 	}
-	free (name);
+	g_free (name);
 	
 	/* Clear the deletion mark from the subdirectory and its children */
 	base = current;
@@ -607,12 +603,12 @@ tree_store_start_check (char *path)
 			return NULL;
 		
 		current = tree_store_add_entry (path);
-		ts.check_name = strdup (path);
+		ts.check_name = g_strdup (path);
 
 		return current;
 	}
 
-	ts.check_name = strdup (path);
+	ts.check_name = g_strdup (path);
 	
 	retval = current;
 	
@@ -665,7 +661,7 @@ tree_store_end_check (void)
 			remove_entry (old);
 	}
 
-	free (ts.check_name);
+	g_free (ts.check_name);
 	ts.check_name = NULL;
 }
 
@@ -696,7 +692,7 @@ tree_store_rescan (char *dir)
 				if (S_ISDIR (buf.st_mode))
 					tree_store_mark_checked (dp->d_name);
 			}
-			free (full_name);
+			g_free (full_name);
 		}
 		mc_closedir (dirp);
 	}
@@ -778,7 +774,7 @@ tree_store_opendir (char *path)
 	if (entry->next == NULL)
 		return NULL;
 	
-	scan = xmalloc (sizeof (tree_scan), "");
+	scan = g_new (tree_scan, 1);
 	scan->base = entry;
 	scan->current = entry->next;
 	scan->sublevel = entry->next->sublevel;
@@ -816,5 +812,5 @@ tree_store_closedir (tree_scan *scanner)
 {
 	g_assert (scanner != NULL);
 	
-	free (scanner);
+	g_free (scanner);
 }

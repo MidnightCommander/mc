@@ -25,7 +25,6 @@
 #endif
 #include <string.h>
 #include <stdio.h>
-#include <stdlib.h>		/* For malloc() */
 #include <sys/types.h>
 #include <sys/param.h>
 #include <sys/stat.h>
@@ -34,8 +33,7 @@
 #    include <pwd.h>
 #endif
 #include "tty.h"
-#include "mad.h"
-#include "util.h"		/* Needed for the externs */
+#include "global.h"
 #include "win.h"
 #include "color.h"
 #include "dlg.h"
@@ -48,7 +46,6 @@
 #include "panel.h"		/* Needed for the externs */
 #include "file.h"
 #include "main.h"
-#include "global.h"
 #include "listmode.h"
 
 #define UX		5
@@ -267,7 +264,7 @@ collect_new_format (void)
     char *last;
     char *text, *extra;
 
-    newformat = xmalloc (1024, "collect_new_format");
+    newformat = g_malloc (1024);
     if (radio_genwidth->sel)
 	strcpy (newformat, "full ");
     else
@@ -293,9 +290,9 @@ char *listmode_edit (char *oldlistformat)
     char *newformat = NULL;
     char *s;
 
-    s = strdup (oldlistformat);
+    s = g_strdup (oldlistformat);
     init_listmode (s);
-    free (s);
+   g_free (s);
 
     while (newformat == NULL)
     {
@@ -306,7 +303,7 @@ char *listmode_edit (char *oldlistformat)
 
 	switch (listmode_dlg->ret_value) {
 	case B_CANCEL:
-	    newformat = strdup (oldlistformat);
+	    newformat = g_strdup (oldlistformat);
 	    break;
 
 	case B_ADD:

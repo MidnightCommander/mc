@@ -64,11 +64,9 @@
 #ifdef NEEDS_IO_H
 #    include <io.h>
 #endif 
-
 #include <errno.h>
 #include "tty.h"
 #include <ctype.h>
-#include <malloc.h>
 #include <string.h>
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>
@@ -81,9 +79,7 @@
 #endif /* SCO_FLAVOR */
 #include <time.h>
 #include <utime.h>
-#include "mad.h"
 #include "eregex.h"
-#include "util.h"
 #include "dialog.h"
 #include "global.h"
 #include "setup.h"
@@ -266,7 +262,7 @@ do_transform_source (FileOpContext *ctx, char *source)
 static char *
 transform_source (FileOpContext *ctx, char *source)
 {
-    char *s = strdup (source);
+    char *s = g_strdup (source);
     char *q;
 
     /* We remove \n from the filename since regex routines would use \n as an anchor */
@@ -276,7 +272,7 @@ transform_source (FileOpContext *ctx, char *source)
 	    *q = ' ';
     }
     q = do_transform_source (ctx, s);
-    free (s);
+   g_free (s);
     return q;
 }
 
@@ -287,7 +283,7 @@ free_linklist (struct link **linklist)
     
     for (lp = *linklist; lp != NULL; lp = lp2){
     	lp2 = lp -> next;
-    	free (lp);
+    	g_free (lp);
     }
     *linklist = NULL;
 }
@@ -346,8 +342,8 @@ check_hardlinks (char *src_name, char *dst_name, struct stat *pstat)
 	    message_1s (1, MSG_ERROR, _(" Could not make the hardlink "));
             return 0;
         }
-    lp = (struct link *) xmalloc (sizeof (struct link) + strlen (src_name) 
-                                  + strlen (dst_name) + 1, "Hardlink cache");
+    lp = (struct link *) g_malloc (sizeof (struct link) + strlen (src_name) 
+                                  + strlen (dst_name) + 1);
     if (lp){
     	lp->vfs = my_vfs;
     	lp->ino = ino;
@@ -404,30 +400,30 @@ make_symlink (FileOpContext *ctx, char *src_path, char *dst_path)
     if (ctx->stable_symlinks && *link_target != PATH_SEP) {
 	char *p, *q, *r, *s;
 
-	p = strdup (src_path);
+	p = g_strdup (src_path);
 	r = strrchr (p, PATH_SEP);
 
 	if (r){
 	    r[1] = 0;
 	    if (*dst_path == PATH_SEP)
-		q = strdup (dst_path);
+		q = g_strdup (dst_path);
 	    else
-		q = copy_strings (p, dst_path, 0);
+		q = g_strconcat (p, dst_path, NULL);
 	    r = strrchr (q, PATH_SEP);
 	    if (r){
 		r[1] = 0;
-		s = copy_strings (p, link_target, NULL);
+		s = g_strconcat (p, link_target, NULL);
 		strcpy (link_target, s);
-		free (s);
+		g_free (s);
 		s = diff_two_paths (q, link_target);
 		if (s){
 		    strcpy (link_target, s);
-		    free (s);
+		   g_free (s);
 		}
 	    }
-	    free (q);
+	   g_free (q);
 	}
-	free (p);
+	g_free (p);
     }
  retry_dst_symlink:
     if (mc_symlink (link_target, dst_path) == 0)
@@ -483,8 +479,8 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
     uid_t src_uid;
     gid_t src_gid;
 #endif
-    char *buf = 0;
-    int  buf_size = 8*1024;
+    char *buf = NULL;
+    int  buf_size = BUF_8K;
     int  src_desc, dest_desc = 0;
     int  n_read, n_written;
     int  src_mode;		/* The mode of the source file */
@@ -653,7 +649,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 	    continue;
 	goto ret;
     }
-    buf = (char *) xmalloc (buf_size, "copy_file_file");
+    buf = (char *) g_malloc (buf_size);
 
     ctx->eta_secs = 0.0;
     ctx->bps = 0;
@@ -763,7 +759,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 
  ret:
     if (buf)
-	free (buf);
+	g_free (buf);
 
     while ((resources & 1) && mc_close (src_desc) < 0){
 	temp_status = file_error (_(" Cannot close source file \"%s\" \n %s "), src_path);
@@ -890,7 +886,7 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 	return FILE_SKIP;
     }
 
-    lp = xmalloc (sizeof (struct link), "parent_dirs");
+    lp = g_new (struct link, 1);
     lp->vfs = vfs_type (s);
     lp->ino = cbuf.st_ino;
     lp->dev = cbuf.st_dev;
@@ -903,11 +899,11 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 
     	if (move_over){
             if (mc_rename (s, d) == 0){
-		free (parent_dirs);
+		g_free (parent_dirs);
 		return FILE_CONT;
 	    }
 	}
-	dest_dir = copy_strings (d, 0);
+	dest_dir = g_strdup (d);
     } else {
         /*
          * If the destination directory exists, we want to copy the whole
@@ -933,7 +929,7 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 	} else 
 #endif
 	{
-	    dest_dir = copy_strings (d, 0);
+	    dest_dir = g_strdup (d);
 	    goto dont_mkdir;
 	}
     }
@@ -945,7 +941,7 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 	goto ret;
     }
 
-    lp = xmalloc (sizeof (struct link), "dest_dirs");
+    lp = g_new (struct link, 1);
     mc_stat (dest_dir, &buf);
     lp->vfs = vfs_type (dest_dir);
     lp->ino = buf.st_ino;
@@ -994,17 +990,17 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
              */
             return_status = copy_dir_dir (ctx, path, mdpath, 0, 0,
 					  delete, parent_dirs, progress_count, progress_bytes);
-	    free (mdpath);
+	   g_free (mdpath);
 	} else {
 	    dest_file = concat_dir_and_file (dest_dir, x_basename (path));
             return_status = copy_file_file (ctx, path, dest_file, 1,
 					    progress_count, progress_bytes, 0);
-	    free (dest_file);
+	   g_free (dest_file);
 	}
 	if (delete && return_status == FILE_CONT){
 	    if (ctx->erase_at_end){
                 static struct link *tail;
-		lp = xmalloc (sizeof (struct link) + strlen (path), "erase_list");
+		lp = g_malloc (sizeof (struct link) + strlen (path));
 		strcpy (lp->name, path);
 		lp->st_mode = buf.st_mode;
 		lp->next = 0;
@@ -1026,9 +1022,9 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 	 * next should be freed: .ado
 	 */
 	if (!next)
-		free (next);
+		g_free (next);
 #endif
-        free (path);
+       g_free (path);
     }
     mc_closedir (reading);
 
@@ -1043,8 +1039,8 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 
 #endif
 ret:
-    free (dest_dir);
-    free (parent_dirs);
+   g_free (dest_dir);
+   g_free (parent_dirs);
     return return_status;
 }
 
@@ -1180,9 +1176,9 @@ move_dir_dir (FileOpContext *ctx, char *s, char *d, long *progress_count, double
 
     mc_stat (s, &sbuf);
     if (mc_stat (d, &dbuf))
-	destdir = copy_strings (d, 0);  /* destination doesn't exist */
+	destdir = g_strdup (d);	/* destination doesn't exist */
     else if (!ctx->dive_into_subdirs){
-	destdir = copy_strings (d, 0);
+	destdir = g_strdup (d);
 	move_over = 1;
     } else
 	destdir = concat_dir_and_file (d, x_basename (s));
@@ -1205,7 +1201,7 @@ move_dir_dir (FileOpContext *ctx, char *s, char *d, long *progress_count, double
 	    if (return_status == FILE_RETRY)
 	        goto retry_dst_stat;
 	}
-        free (destdir);
+       g_free (destdir);
         return return_status;
     }
 
@@ -1251,17 +1247,17 @@ move_dir_dir (FileOpContext *ctx, char *s, char *d, long *progress_count, double
 		return_status = erase_file (ctx, erase_list->name, 0, 0, 0);
 	    lp = erase_list;
 	    erase_list = erase_list->next;
-	    free (lp);
+	   g_free (lp);
 	}
     }
     erase_dir_iff_empty (ctx, s);
 
  ret:
-    free (destdir);
+   g_free (destdir);
     for ( ; erase_list; ){
        lp = erase_list;
        erase_list = erase_list->next;
-       free (lp);
+      g_free (lp);
     }
     return return_status;
 }
@@ -1322,7 +1318,7 @@ recursive_erase (FileOpContext *ctx, char *s, long *progress_count, double *prog
 	    continue;
 	path = concat_dir_and_file (s, next->d_name);
    	if (mc_lstat (path, &buf)){
-	    free (path);
+	   g_free (path);
 	    return 1;
 	} 
 	if (S_ISDIR (buf.st_mode))
@@ -1330,11 +1326,11 @@ recursive_erase (FileOpContext *ctx, char *s, long *progress_count, double *prog
 			     != FILE_CONT);
 	else
 	    return_status = erase_file (ctx, path, progress_count, progress_bytes, 0);
-	free (path);
+	g_free (path);
 	/* .ado: OS/2 returns a block of memory DIR to next and must be freed */
 #ifdef __os2__
 	if (!next)
-	    free (next);
+	   g_free (next);
 #endif
     }
     mc_closedir (reading);
@@ -1525,7 +1521,7 @@ compute_dir_size (char *dirname, long *ret_marked, double *ret_total)
 		res = mc_lstat (fullname, &s);
 
 		if (res != 0){
-			free (fullname);
+			g_free (fullname);
 			continue;
 		}
 
@@ -1541,7 +1537,7 @@ compute_dir_size (char *dirname, long *ret_marked, double *ret_total)
 			(*ret_marked)++;
 			*ret_total += s.st_size;
 		}
-		free (fullname);
+		g_free (fullname);
 	}
 
 	mc_closedir (dir);
@@ -1581,7 +1577,7 @@ panel_compute_totals (WPanel *panel, long *ret_marked, double *ret_total)
 
 			*ret_marked += subdir_count;
 			*ret_total  += subdir_bytes;
-			free (dir_name);
+			g_free (dir_name);
 		} else {
 			(*ret_marked)++;
 			*ret_total += s->st_size;
@@ -1631,7 +1627,7 @@ panel_operate_generate_prompt (char* cmd_buf, WPanel* panel, int operation, int 
 {
 	register char *sp, *cp;
 	register int i;
-	char format_string [200];
+	char format_string [BUF_MEDIUM];
 	char *dp = format_string;
 	char* source = NULL;
 
@@ -1708,11 +1704,11 @@ panel_operate_generate_prompt (char* cmd_buf, WPanel* panel, int operation, int 
 	if (only_one)
 	{
 		i = fmd_xlen - strlen(format_string) - 4;
-		sprintf (cmd_buf, format_string, name_trunc (source, i));
+		g_snprintf (cmd_buf, sizeof (cmd_buf), format_string, name_trunc (source, i));
 	}
 	else
 	{
-		sprintf (cmd_buf, format_string, panel->marked);
+		g_snprintf (cmd_buf,  sizeof (cmd_buf), format_string, panel->marked);
 		i = strlen (cmd_buf) + 6 - fmd_xlen;
 		if (i > 0)
 		{
@@ -1799,7 +1795,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 	    return 0;
 	}
     } else if (operation != OP_DELETE){
-	ctx->rx.buffer = (char *) xmalloc (MC_MAXPATHLEN, "mask copying");
+	ctx->rx.buffer = (char *) g_malloc (MC_MAXPATHLEN);
 	ctx->rx.allocated = MC_MAXPATHLEN;
 	ctx->rx.translate = 0;
 
@@ -1815,23 +1811,23 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 
 	    dest = file_mask_dialog (ctx, operation, cmd_buf, dest_dir, only_one, &do_bg);
 	    if (!dest){
-		free (ctx->rx.buffer);
+		g_free (ctx->rx.buffer);
 		file_op_context_destroy (ctx);
 		return 0;
 	    }
 	    if (!*dest){
-		free (ctx->rx.buffer);
+		g_free (ctx->rx.buffer);
 		file_op_context_destroy (ctx);
-		free (dest);
+		g_free (dest);
 		return 0;
 	    }
 	} else {
 	    char *all = "^\\(.*\\)$";
 
 	    re_compile_pattern (all, strlen (all), &ctx->rx);
-	    ctx->dest_mask = strdup ("*");
+	    ctx->dest_mask = g_strdup ("*");
 	    do_bg = FALSE;
-	    dest = strdup (thedefault);
+	    dest = g_strdup (thedefault);
 	}
     }
 
@@ -1840,7 +1836,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
     if (do_bg){
 	int v;
 
-	v = do_background (ctx, copy_strings (_(op_names [operation]), ": ", panel->cwd, 0));
+	v = do_background (ctx, g_strconcat (op_names [operation], ": ", panel->cwd, NULL));
 	if (v == -1){
 	    message (1, MSG_ERROR, _(" Sorry, I could not put the job in background "));
 	}
@@ -1861,11 +1857,11 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
        invalid data. */
     if (dest) {
 	if (mc_setctl (dest, MCCTL_WANT_STALE_DATA, NULL))
-	    save_dest = strdup(dest);
+	    save_dest = g_strdup (dest);
     }
     if (panel->cwd) {
 	if (mc_setctl (panel->cwd, MCCTL_WANT_STALE_DATA, NULL))
-	    save_cwd = strdup(panel->cwd);
+	    save_cwd = g_strdup (panel->cwd);
     }
 
     ftpfs_hint_reread (0);
@@ -1897,8 +1893,8 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 	    if (temp == NULL){
 		value = transform_error;
 	    } else {
-		temp = get_full_name (dest, temp);
-		free (dest);
+		temp = concat_dir_and_file (dest, temp);
+		g_free (dest);
 		dest = temp;
 		temp = 0;
 
@@ -1988,7 +1984,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 
 #ifdef WITH_FULL_PATHS
 	    if (source_with_path)
-	    	free (source_with_path);
+	    	g_free (source_with_path);
 	    source_with_path = concat_dir_and_file (panel->cwd, source);
 #endif
 
@@ -1999,13 +1995,13 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 		    value = erase_file (ctx, source_with_path, &count, &bytes, 1);
 	    } else {
 		if (temp)
-		    free (temp);
+		   g_free (temp);
 
 		temp = transform_source (ctx, source_with_path);
 		if (temp == NULL)
 		    value = transform_error;
 		else {
-		    temp = get_full_name (dest, temp);
+		    temp = concat_dir_and_file (dest, temp);
 
 		    switch (operation){
 		    case OP_COPY:
@@ -2060,11 +2056,11 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 
     if (save_cwd) {
         mc_setctl (save_cwd, MCCTL_NO_STALE_DATA, NULL);
-	free(save_cwd);
+	g_free (save_cwd);
     }
     if (save_dest) {
         mc_setctl (save_dest, MCCTL_NO_STALE_DATA, NULL);
-	free(save_dest);
+	g_free (save_dest);
     }
     ftpfs_hint_reread (1);
 
@@ -2072,22 +2068,22 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
     free_linklist (&dest_dirs);
 #if WITH_FULL_PATHS
     if (source_with_path)
-    	free (source_with_path);
+    	g_free (source_with_path);
 #endif
 
     if (dest)
-	free (dest);
+	g_free (dest);
 
     if (temp)
-	free (temp);
+	g_free (temp);
 
     if (ctx->rx.buffer) {
-	free (ctx->rx.buffer);
+	g_free (ctx->rx.buffer);
 	ctx->rx.buffer = NULL;
     }
 
     if (ctx->dest_mask) {
-	free (ctx->dest_mask);
+	g_free (ctx->dest_mask);
 	ctx->dest_mask = NULL;
     }
 
@@ -2136,7 +2132,7 @@ real_do_file_error (enum OperationMode mode, char *error)
 int
 file_error (char *format, char *file)
 {
-    sprintf (cmd_buf, format,
+    g_snprintf (cmd_buf,  sizeof (cmd_buf), format,
 	     name_trunc (file, 30), unix_error_string (errno));
 
     return do_file_error (cmd_buf);
@@ -2152,7 +2148,8 @@ files_error (char *format, char *file1, char *file2)
     strcpy (nfile1, name_trunc (file1, 15));
     strcpy (nfile2, name_trunc (file2, 15));
     
-    sprintf (cmd_buf, format, nfile1, nfile2, unix_error_string (errno));
+    g_snprintf (cmd_buf, sizeof (cmd_buf), format, nfile1, nfile2,
+		unix_error_string (errno));
 
     return do_file_error (cmd_buf);
 }
@@ -2166,7 +2163,7 @@ real_query_recursive (FileOpContext *ctx, enum OperationMode mode, char *s)
 	char *msg =
 	    mode == Foreground ? _("\n   Directory not empty.   \n   Delete it recursively? ")
 	                       : _("\n   Background process: Directory not empty \n   Delete it recursively? ");
-	text = copy_strings (_(" Delete: "), name_trunc (s, 30), " ", 0);
+	text = g_strconcat (_(" Delete: "), name_trunc (s, 30), " ", NULL);
 
         if (know_not_what_am_i_doing)
 	    query_set_sel (1);
@@ -2177,14 +2174,14 @@ real_query_recursive (FileOpContext *ctx, enum OperationMode mode, char *s)
 	
 	if (ctx->recursive_result != RECURSIVE_ABORT)
 	    do_refresh ();
-	free (text);
+	g_free (text);
 	if (know_not_what_am_i_doing){
 	    if (ctx->recursive_result == RECURSIVE_YES ||
 		ctx->recursive_result == RECURSIVE_ALWAYS){
-		text = copy_strings (
+		text = g_strconcat (
 		    _(" Type 'yes' if you REALLY want to delete "),
 		    ctx->recursive_result == RECURSIVE_YES
-		    ? name_trunc (s, 19) : _("all the directories "), " ", 0);
+		    ? name_trunc (s, 19) : _("all the directories "), " ", NULL);
 		confirm = input_dialog (
 		    mode == Foreground ? _(" Recursive Delete ")
 		    : _(" Background process: Recursive Delete "),
@@ -2192,8 +2189,8 @@ real_query_recursive (FileOpContext *ctx, enum OperationMode mode, char *s)
 		do_refresh ();
 		if (!confirm || strcmp (confirm, _("yes")))
 		    ctx->recursive_result = RECURSIVE_NEVER;
-		free (confirm);
-		free (text);
+		g_free (confirm);
+		g_free (text);
 	    }
 	}
     }

@@ -26,7 +26,6 @@
 #if defined(__os2__)            /* OS/2 need io.h! .ado */
 #    include <io.h>
 #endif
-#include <stdlib.h>
 #include <sys/types.h>
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
@@ -65,22 +64,13 @@
 #  include <sys/ioctl.h>
 #endif
 
-#include <glib.h>	/* For funny new functions */
-
-#include "fs.h"
 #include "mountlist.h"
 
-/* From dialog.h (not wanting to include it as
-   it requires including a lot of other files, too) */
-int message (int error, char *header, char *text, ...);
-
-#include "mad.h"
 #if defined(HAVE_RX_H) && defined(HAVE_REGCOMP)
 #include <rx.h>
 #else
 #include <regex.h>
 #endif
-#include "util.h"
 #include "global.h"
 #include "profile.h"
 #include "user.h"		/* expand_format */
@@ -95,15 +85,6 @@ int align_extensions = 1;
 int tilde_trunc = 1;
 
 struct mount_entry *mount_list = NULL;
-
-#ifndef HAVE_STRDUP
-char *strdup (const char *s)
-{
-    char *t = malloc (strlen (s)+1);
-    strcpy (t, s);
-    return t;
-}
-#endif
 
 #ifndef VFS_STANDALONE
 int is_printable (int c)
@@ -175,7 +156,7 @@ name_quote (const char *s, int quote_percent)
 {
     char *ret, *d;
     
-    d = ret = xmalloc (strlen (s)*2 + 2 + 1, "quote_name");
+    d = ret = g_malloc (strlen (s)*2 + 2 + 1);
     if (*s == '-') {
         *d++ = '.';
         *d++ = '/';
@@ -220,7 +201,7 @@ name_quote (const char *s, int quote_percent)
 char *
 fake_name_quote (const char *s, int quote_percent)
 {
-    return strdup (s);
+    return g_strdup (s);
 }
 
 /* If passed an empty txt (this usually means that there is an error)
@@ -260,19 +241,19 @@ char *name_trunc (char *txt, int trunc_len)
 
 char *size_trunc (long int size)
 {
-    static char x [30];
+    static char x [BUF_TINY];
     long int divisor = 1;
     char *xtra = "";
     
     if (size > 999999999L){
 	divisor = 1024;
-	xtra = "kb";
+	xtra = "Kb";
 	if (size/divisor > 999999999L){
 	    divisor = 1024*1024;
 	    xtra = "Mb";
 	}
     }
-    sprintf (x, "%ld%s", (size/divisor), xtra);
+    g_snprintf (x, sizeof (x), "%ld%s", (size/divisor), xtra);
     return x;
 }
 
@@ -420,7 +401,7 @@ char *convert_pattern (char *pattern, int match_type, int do_group)
     int was_wildcard = 0;
 
     if (easy_patterns){
-	new_pattern = malloc (MC_MAXPATHLEN);
+	new_pattern = g_malloc (MC_MAXPATHLEN);
 	d = new_pattern;
 	if (match_type == match_file)
 	    *d++ = '^';
@@ -455,7 +436,7 @@ char *convert_pattern (char *pattern, int match_type, int do_group)
 	*d = 0;
 	return new_pattern;
     } else
-	return strdup (pattern);
+	return  g_strdup (pattern);
 }
 
 int regexp_match (char *pattern, char *string, int match_type)
@@ -468,11 +449,11 @@ int regexp_match (char *pattern, char *string, int match_type)
     if (!old_pattern || STRCOMP (old_pattern, pattern) || old_type != match_type){
 	if (old_pattern){
 	    regfree (&r);
-	    free (old_pattern);
+	    g_free (old_pattern);
 	}
 	pattern = convert_pattern (pattern, match_type, 0);
 	if (regcomp (&r, pattern, REG_EXTENDED|REG_NOSUB|MC_ARCH_FLAGS)) {
-	    free (pattern);
+	    g_free (pattern);
 	    return -1;
 	}
 	old_pattern = pattern;
@@ -531,9 +512,9 @@ int get_int (char *file, char *key, int def)
 
 int set_int (char *file, char *key, int value)
 {
-    char buffer [30];
+    char buffer [BUF_TINY];
 
-    sprintf (buffer,  "%d", value);
+    g_snprintf (buffer, sizeof (buffer), "%d", value);
     return WritePrivateProfileString (app_text, key, buffer, file);
 }
 
@@ -555,7 +536,7 @@ char *load_file (char *filename)
     if ((data_file = fopen (filename, "r")) == NULL){
 	return 0;
     }
-    data = (char *) xmalloc (s.st_size+1, "util, load_file");
+    data = (char *) g_malloc (s.st_size+1);
     read_size = fread (data, 1, s.st_size, data_file);
     data [read_size] = 0;
     fclose (data_file);
@@ -563,7 +544,7 @@ char *load_file (char *filename)
     if (read_size > 0)
 	return data;
     else {
-	free (data);
+	 g_free (data);
 	return 0;
     }
 }
@@ -605,7 +586,7 @@ char *file_date_pck (time_t when)
 
 char *extract_line (char *s, char *top)
 {
-    static char tmp_line [500];
+    static char tmp_line [BUF_MEDIUM];
     char *t = tmp_line;
     
     while (*s && *s != '\n' && (t - tmp_line) < sizeof (tmp_line)-1 && s < top)
@@ -648,30 +629,16 @@ char * _icase_search (char *text, char *data, int *lng)
 char *x_basename (char *s)
 {
     char  *where;
-    return ((where = strrchr (s, PATH_SEP)))? where + 1 : s;
-}
-
-char *get_full_name (char *dir, char *file)
-{
-    int i;
-    char *d = malloc (strlen (dir) + strlen (file) + 2);
-
-    strcpy (d, dir);
-    i = strlen (dir);
-    if (dir [i - 1] != PATH_SEP || dir [i] != 0)
-	strcat (d, PATH_SEP_STR);
-    file = x_basename (file);
-    strcat (d, file);
-    return d;
+    return ((where = strrchr (s, PATH_SEP))) ? where + 1 : s;
 }
 
 void my_putenv (char *name, char *data)
 {
     char *full;
 
-    full = xmalloc (strlen (name) + strlen (data) + 2, "util, my_putenv");
-    sprintf (full, "%s=%s", name, data);
+    full = g_strdup_printf ("%s=%s", name, data);
     putenv (full);
+
     /* WARNING: NEVER FREE THE full VARIABLE!!!!!!!!!!!!!!!!!!!!!!!! */
     /* It is used by putenv. Freeing it will corrupt the environment */
 }
@@ -683,7 +650,7 @@ static void my_putenv_expand (char *name, char macro_code)
 
     data = expand_format (macro_code);
     my_putenv (name, data);
-    free (data);
+    g_free (data);
 }
 
 /* Puts some status information in to the environment so that
@@ -703,51 +670,11 @@ static void prepare_environment (void)
 
 char *unix_error_string (int error_num)
 {
-    static char buffer [256];
-    char *error_msg;
+    static char buffer [BUF_LARGE];
 	
-#ifdef HAVE_STRERROR
-    error_msg = strerror (error_num);
-#else
-    extern int sys_nerr;
-    extern char *sys_errlist [];
-    if ((0 <= error_num) && (error_num < sys_nerr))
-	error_msg = sys_errlist[error_num];
-    else
-	error_msg = "strange errno";
-#endif
-    sprintf (buffer, "%s (%d)", error_msg, error_num);
+    g_snprintf (buffer, sizeof (buffer), "%s (%d)",
+		g_strerror (error_num), error_num);
     return buffer;
-}
-
-char *copy_strings (const char *first, ...)
-{
-    va_list ap;
-    long len;
-    char *data, *result;
-
-    if (!first)
-	return 0;
-    
-    len = strlen (first) + 1;
-    va_start (ap, first);
-
-    while ((data = va_arg (ap, char *)) != 0)
-	len += strlen (data);
-
-    result = g_malloc (len);
-    
-    va_end (ap);
-
-    va_start (ap, first);
-    strcpy (result, first);
-
-    while ((data = va_arg (ap, char *)) != 0)
-	strcat (result, data);
-
-    va_end (ap);
-
-    return result;
 }
 
 #ifndef VFS_STANDALONE	
@@ -819,24 +746,6 @@ char *strip_ctrl_codes (char *s)
     return s;
 }
 
-#ifndef HAVE_STRCASECMP
-/* At least one version of HP/UX lacks this */
-/* Assumes ASCII encoding */
-int strcasecmp (const char *s, const char *d)
-{
-    register signed int result;
-
-    while (1){
-	if (result = (0x20 | *s) - (0x20 | *d))
-	    break;
-	if (!*s)
-	    return 0;
-	s++;
-	d++;
-    }
-    return result;
-}
-#endif /* HAVE_STRCASECMP */
 #endif /* VFS_STANDALONE */
 
 /* getwd is better than getcwd, the later uses a popen ("pwd"); */
@@ -989,7 +898,7 @@ decompress_command_and_arg (int type, char **cmd, char **flags)
 /* Hooks */
 void add_hook (Hook **hook_list, void (*hook_fn)(void *), void *data)
 {
-    Hook *new_hook = xmalloc (sizeof (Hook), "add_hook");
+    Hook *new_hook = g_new (Hook, 1);
 
     new_hook->hook_fn = hook_fn;
     new_hook->next    = *hook_list;
@@ -1021,7 +930,7 @@ void execute_hooks (Hook *hook_list)
     for (hook_list = p; hook_list;){
 	p = hook_list;
 	hook_list = hook_list->next;
-	free (p);
+	 g_free (p);
     }
 }
 
@@ -1034,7 +943,7 @@ void delete_hook (Hook **hook_list, void (*hook_fn)(void *))
     for (current = *hook_list; current; current = next){
 	next = current->next;
 	if (current->hook_fn == hook_fn)
-	    free (current);
+	    g_free (current);
 	else
 	    add_hook (&new_list, current->hook_fn, current->hook_data);
     }
@@ -1057,14 +966,14 @@ void wipe_password (char *passwd)
     
     for (;*p ; p++)
         *p = 0;
-    free (passwd);
+    g_free (passwd);
 }
 
 /* Convert "\E" -> esc character and ^x to control-x key and ^^ to ^ key */
 /* Returns a newly allocated string */
 char *convert_controls (char *s)
 {
-    char *valcopy = strdup (s);
+    char *valcopy = g_strdup (s);
     char *p, *q;
 
     /* Parse the escape special character */
@@ -1119,8 +1028,8 @@ char *resolve_symlinks (char *path)
     
     if (*path != PATH_SEP)
         return NULL;
-    r = buf = xmalloc (MC_MAXPATHLEN, "resolve symlinks");
-    buf2 = xmalloc (MC_MAXPATHLEN, "resolve symlinks"); 
+    r = buf = g_malloc (MC_MAXPATHLEN);
+    buf2 = g_malloc (MC_MAXPATHLEN); 
     *r++ = PATH_SEP;
     *r = 0;
     p = path;
@@ -1134,8 +1043,8 @@ char *resolve_symlinks (char *path)
 	c = *q;
 	*q = 0;
 	if (mc_lstat (path, &mybuf) < 0) {
-	    free (buf);
-	    free (buf2);
+	    g_free (buf);
+	    g_free (buf2);
 	    *q = c;
 	    return NULL;
 	}
@@ -1144,8 +1053,8 @@ char *resolve_symlinks (char *path)
 	else {
 	    len = mc_readlink (path, buf2, MC_MAXPATHLEN);
 	    if (len < 0) {
-		free (buf);
-		free (buf2);
+		 g_free (buf);
+		 g_free (buf2);
 		*q = c;
 		return NULL;
 	    }
@@ -1170,7 +1079,7 @@ char *resolve_symlinks (char *path)
 	strcpy (buf, PATH_SEP_STR);
     else if (*(r - 1) == PATH_SEP && r != buf + 1)
 	*(r - 1) = 0;
-    free (buf2);
+    g_free (buf2);
     return buf;
 }
 
@@ -1189,7 +1098,7 @@ char *diff_two_paths (char *first, char *second)
 	if (j) {
 	    second = resolve_symlinks (second);
 	    if (second == NULL) {
-		free (first);
+		 g_free (first);
 	        return buf;
 	    }
 	}
@@ -1214,21 +1123,21 @@ char *diff_two_paths (char *first, char *second)
 	currlen = (i + 1) * 3 + strlen (q) + 1;
 	if (j) {
 	    if (currlen < prevlen)
-	        free (buf);
+	        g_free (buf);
 	    else {
-		free (first);
-		free (second);
+		 g_free (first);
+		 g_free (second);
 		return buf;
 	    }
 	}
-	p = buf = xmalloc (currlen, "diff 2 paths");
+	p = buf = g_malloc (currlen);
 	prevlen = currlen;
 	for (; i >= 0; i--, p += 3)
 	  strcpy (p, "../");
 	strcpy (p, q);
     }
-    free (first);
-    free (second);
+    g_free (first);
+    g_free (second);
     return buf;
 }
 
@@ -1271,13 +1180,76 @@ int truncate (const char *path, long size)
 #endif
 #endif /* VFS_STANDALONE */
 
+/* If filename is NULL, then we just append PATH_SEP to the dir */
 char *
 concat_dir_and_file (const char *dir, const char *file)
 {
-    int l = strlen (dir);
-
-    if (dir [l-1] == PATH_SEP)
-	return copy_strings (dir, file, 0);
+    int i = strlen (dir);
+    
+    if (dir [i-1] == PATH_SEP)
+	return  g_strconcat (dir, file, NULL);
     else
-	return copy_strings (dir, PATH_SEP_STR, file, 0);
+	return  g_strconcat (dir, PATH_SEP_STR, file, NULL);
 }
+
+#ifdef HAVE_MAD
+char *mad_strconcat (const char *first, ...)
+{
+    va_list ap;
+    long len;
+    char *data, *result;
+
+    if (!first)
+	return 0;
+    
+    len = strlen (first) + 1;
+    va_start (ap, first);
+
+    while ((data = va_arg (ap, char *)) != 0)
+	len += strlen (data);
+
+    result = g_malloc (len);
+    
+    va_end (ap);
+
+    va_start (ap, first);
+    strcpy (result, first);
+
+    while ((data = va_arg (ap, char *)) != 0)
+	strcat (result, data);
+
+    va_end (ap);
+
+    return result;
+}
+
+/* This two functions grabbed from GLib's gstrfuncs.c */
+char*
+mad_strdup_vprintf (const char *format, va_list args1)
+{
+  char *buffer;
+  va_list args2;
+
+  G_VA_COPY (args2, args1);
+
+  buffer = g_new (char, g_printf_string_upper_bound (format, args1));
+
+  vsprintf (buffer, format, args2);
+  va_end (args2);
+
+  return buffer;
+}
+
+char*
+mad_strdup_printf (const char *format, ...)
+{
+  char *buffer;
+  va_list args;
+
+  va_start (args, format);
+  buffer = g_strdup_vprintf (format, args);
+  va_end (args);
+
+  return buffer;
+}
+#endif /* HAVE_MAD */

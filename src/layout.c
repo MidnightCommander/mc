@@ -20,7 +20,6 @@
  */
 
 #include <config.h>
-#include <stdlib.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
@@ -41,10 +40,8 @@
 #   include <unistd.h>
 #endif
 #include <signal.h>
-#include <glib.h>
 #include "tty.h"
-#include "mad.h"
-#include "util.h"		/* Needed for the externs */
+#include "global.h"
 #include "win.h"
 #include "color.h"
 #include "key.h"
@@ -901,14 +898,14 @@ void remove_dash (void)
 
 char *get_nth_panel_name (int num)
 {
-    static char buffer [20];
+    static char buffer [BUF_SMALL];
     
     if (!num)
         return "New Left Panel";
     else if (num == 1)
         return "New Right Panel";
     else {
-        sprintf (buffer, "%ith Panel", num);
+        g_snprintf (buffer, sizeof (buffer), "%ith Panel", num);
         return buffer;
     }
 }
@@ -1102,14 +1099,14 @@ void swap_panels ()
 	
 	if (panels [0].type == view_listing) {
             if (!strcmp (panel1->panel_name, get_nth_panel_name (0))) {
-                free (panel1->panel_name);
-                panel1->panel_name = strdup (get_nth_panel_name (1));
+                g_free (panel1->panel_name);
+                panel1->panel_name = g_strdup (get_nth_panel_name (1));
             }
         }
         if (panels [1].type == view_listing) {
             if (!strcmp (panel2->panel_name, get_nth_panel_name (1))) {
-                free (panel2->panel_name);
-                panel2->panel_name = strdup (get_nth_panel_name (0));
+                g_free (panel2->panel_name);
+                panel2->panel_name = g_strdup (get_nth_panel_name (0));
             }
         }
         

@@ -25,10 +25,7 @@
 #include <config.h>
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>	/* For free() and atoi() */
 #include <sys/types.h>
-#include "mad.h"
-#include "util.h"
 #include "global.h"
 #include "profile.h"
 
@@ -64,7 +61,7 @@ static int is_loaded (char *FileName, TSecHeader **section)
     TProfile *p = Base;
 
     while (p){
-	if (!strcasecmp (FileName, p->FileName)){
+	if (! g_strcasecmp (FileName, p->FileName)){
 	    Current = p;
 	    *section = p->Section;
 	    return 1;
@@ -86,7 +83,7 @@ str_untranslate_newline_dup (char *s)
 	l += (*p == '\n' || *p == TRANSLATION_CHAR);
 	p++;
     }
-    q = p = malloc (l + 1);
+    q = p = g_malloc (l + 1);
     if (!q)
 	return 0;
     for (;;) {
@@ -116,7 +113,7 @@ static char *
 str_translate_newline_dup (char *s)
 {
     char *p, *q;
-    q = p = malloc (strlen (s) + 1);
+    q = p = g_malloc (strlen (s) + 1);
     if (!q)
 	return 0;
     while (*s) {
@@ -168,7 +165,7 @@ static TSecHeader *load (char *file)
 	    if (c == ']' || overflow){
 		*next = '\0';
 		next = CharBuffer;
-		SecHeader->AppName = strdup (CharBuffer);
+		SecHeader->AppName = g_strdup (CharBuffer);
 		state = IgnoreToEOL;
 	    } else
 		*next++ = c;
@@ -188,8 +185,7 @@ static TSecHeader *load (char *file)
 		TSecHeader *temp;
 		
 		temp = SecHeader;
-		SecHeader = (TSecHeader *) xmalloc (sizeof (TSecHeader),
-						    "KeyDef");
+		SecHeader = g_new (TSecHeader, 1);
 		SecHeader->link = temp;
 		SecHeader->Keys = 0;
 		state = OnSecHeader;
@@ -210,9 +206,9 @@ static TSecHeader *load (char *file)
 
 		temp = SecHeader->Keys;
 		*next = '\0';
-		SecHeader->Keys = (TKeys *) xmalloc (sizeof (TKeys), "KD2");
+		SecHeader->Keys =g_new (TKeys, 1);
 		SecHeader->Keys->link = temp;
-		SecHeader->Keys->KeyName = strdup (CharBuffer);
+		SecHeader->Keys->KeyName = g_strdup (CharBuffer);
 		state = KeyValue;
 		next = CharBuffer;
 	    } else {
@@ -250,9 +246,9 @@ static void new_key (TSecHeader *section, char *KeyName, char *Value)
 {
     TKeys *key;
     
-    key = (TKeys *) xmalloc (sizeof (TKeys), "new_key");
-    key->KeyName = strdup (KeyName);
-    key->Value   = strdup (Value);
+    key = g_new (TKeys, 1);
+    key->KeyName = g_strdup (KeyName);
+    key->Value   = g_strdup (Value);
     key->link = section->Keys;
     section->Keys = key;
 }
@@ -267,9 +263,9 @@ GetSetProfileChar (int set, char *AppName, char *KeyName,
     TKeys      *key;
 
     if (!is_loaded (FileName, &section)){
-	New = (TProfile *) xmalloc (sizeof (TProfile), "GetSetProfile");
+	New = g_new (TProfile, 1);
 	New->link = Base;
-	New->FileName = strdup (FileName);
+	New->FileName = g_strdup (FileName);
 	New->Section = load (FileName);
 	Base = New;
 	section = New->Section;
@@ -278,14 +274,14 @@ GetSetProfileChar (int set, char *AppName, char *KeyName,
     
     /* Start search */
     for (; section; section = section->link){
-	if (section->AppName == 0 || strcasecmp (section->AppName, AppName))
+	if (section->AppName == 0 || g_strcasecmp (section->AppName, AppName))
 	    continue;
 	for (key = section->Keys; key; key = key->link){
-	    if (strcasecmp (key->KeyName, KeyName))
+	    if ( g_strcasecmp (key->KeyName, KeyName))
 		continue;
 	    if (set){
-		free (key->Value);
-		key->Value = strdup (Default);
+		g_free (key->Value);
+		key->Value = g_strdup (Default);
 	    }
 	    return key->Value;
 	}
@@ -300,8 +296,8 @@ GetSetProfileChar (int set, char *AppName, char *KeyName,
     
     /* Non existent section */
     if (set && Default){
-	section = (TSecHeader *) xmalloc (sizeof (TSecHeader), "GSP3");
-	section->AppName = strdup (AppName);
+	section = g_new (TSecHeader, 1);
+	section->AppName = g_strdup (AppName);
 	section->Keys = 0;
 	new_key (section, KeyName, Default);
 	section->link = Current->Section;
@@ -350,18 +346,18 @@ int GetProfileString (char * AppName, char * KeyName, char * Default,
 int GetPrivateProfileInt (char * AppName, char * KeyName, int Default,
 			   char * File)
 {
-    static char IntBuf [15];
-    static char buf [15];
+    static char IntBuf [BUF_TINY];
+    static char buf [BUF_TINY];
 
-    sprintf (buf, "%d", Default);
+    g_snprintf (buf, sizeof (buf), "%d", Default);
     
     /* Check the exact semantic with the SDK */
-    GetPrivateProfileString (AppName, KeyName, buf, IntBuf, 15, File);
-    if (!strcasecmp (IntBuf, "true"))
+    GetPrivateProfileString (AppName, KeyName, buf, IntBuf, BUF_TINY, File);
+    if (! g_strcasecmp (IntBuf, "true"))
 	return 1;
-    if (!strcasecmp (IntBuf, "yes"))
+    if (! g_strcasecmp (IntBuf, "yes"))
 	return 1;
-    return atoi (IntBuf);
+    return (int) atol (IntBuf);
 }
 
 #if 0
@@ -392,7 +388,7 @@ static void dump_keys (FILE * profile, TKeys * p)
     dump_keys (profile, p->link);
     t = str_untranslate_newline_dup (p->Value);
     fprintf (profile, "%s=%s\n", p->KeyName, t);
-    free (t);
+    g_free (t);
 }
 
 static void dump_sections (FILE *profile, TSecHeader *p)
@@ -435,9 +431,9 @@ static void free_keys (TKeys *p)
     if (!p)
 	return;
     free_keys (p->link);
-    free (p->KeyName);
-    free (p->Value);
-    free (p);
+    g_free (p->KeyName);
+    g_free (p->Value);
+    g_free (p);
 }
 
 static void free_sections (TSecHeader *p)
@@ -446,10 +442,10 @@ static void free_sections (TSecHeader *p)
 	return;
     free_sections (p->link);
     free_keys (p->Keys);
-    free (p->AppName);
+    g_free (p->AppName);
     p->link = 0;
     p->Keys = 0;
-    free (p);
+    g_free (p);
 }
 
 static void free_profile (TProfile *p)
@@ -458,8 +454,8 @@ static void free_profile (TProfile *p)
 	return;
     free_profile (p->link);
     free_sections (p->Section);
-    free (p->FileName);
-    free (p);
+    g_free (p->FileName);
+    g_free (p);
 }
 
 void free_profile_name (char *s)
@@ -490,16 +486,16 @@ void *profile_init_iterator (char *appname, char *file)
     TSecHeader *section;
     
     if (!is_loaded (file, &section)){
-	New = (TProfile *) xmalloc (sizeof (TProfile), "GetSetProfile");
+	New = g_new (TProfile, 1);
 	New->link = Base;
-	New->FileName = strdup (file);
+	New->FileName = g_strdup (file);
 	New->Section = load (file);
 	Base = New;
 	section = New->Section;
 	Current = New;
     }
     for (; section; section = section->link){
-	if (strcasecmp (section->AppName, appname))
+	if ( g_strcasecmp (section->AppName, appname))
 	    continue;
 	return section->Keys;
     }
@@ -531,7 +527,7 @@ void profile_clean_section (char *appname, char *file)
     /* won't be find by further walks of the structure */
 
     for (; section; section = section->link){
-	if (strcasecmp (section->AppName, appname))
+	if ( g_strcasecmp (section->AppName, appname))
 	    continue;
 	section->AppName [0] = 0;
     }
@@ -546,7 +542,7 @@ int profile_has_section (char *section_name, char *profile)
 	return 0;
     }
     for (; section; section = section->link){
-	if (strcasecmp (section->AppName, section_name))
+	if ( g_strcasecmp (section->AppName, section_name))
 	    continue;
 	return 1;
     }
@@ -558,7 +554,7 @@ void profile_forget_profile (char *file)
     TProfile *p;
 
     for (p = Base; p; p = p->link){
-	if (strcasecmp (file, p->FileName))
+	if ( g_strcasecmp (file, p->FileName))
 	    continue;
 	p->FileName [0] = 0;
     }

@@ -70,7 +70,6 @@
 #include <errno.h>
 #include "tty.h"
 #include <ctype.h>
-#include <malloc.h>
 #include <string.h>
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>
@@ -83,22 +82,18 @@
 #endif /* SCO_FLAVOR */
 #include <time.h>
 #include <utime.h>
-#include <glib.h>
-#include "mad.h"
-#include "regex.h"
-#include "setup.h"
-#include "util.h"
-#include "dialog.h"
+#include "eregex.h"
 #include "global.h"
+#include "setup.h"
+#include "dialog.h"
 /* Needed by query_replace */
 #include "color.h"
 #include "win.h"
 #include "dlg.h"
-#include "widget.h"
 #define WANT_WIDGETS
+#include "widget.h"		/* Note the sequence */
 #include "main.h"		/* WANT_WIDGETS-> we get the the_hint def */
 #include "layout.h"
-#include "widget.h"
 #include "wtools.h"
 
 /* Needed for current_panel, other_panel and WTree */
@@ -351,7 +346,7 @@ static void
 file_eta_show (FileOpContext *ctx)
 {
     int eta_hours, eta_mins, eta_s;
-    char eta_buffer [30];
+    char eta_buffer [BUF_TINY];
     FileOpContextUI *ui;
 
     ui = ctx->ui;
@@ -363,7 +358,7 @@ file_eta_show (FileOpContext *ctx)
         eta_hours = ctx->eta_secs / (60 * 60);
 	eta_mins  = (ctx->eta_secs - (eta_hours * 60 * 60)) / 60;
 	eta_s     = ctx->eta_secs - (eta_hours * 60 * 60 + eta_mins * 60);
-	sprintf (eta_buffer, "ETA %d:%02d.%02d", eta_hours, eta_mins, eta_s);
+	g_snprintf (eta_buffer, sizeof (eta_buffer), "ETA %d:%02d.%02d", eta_hours, eta_mins, eta_s);
     } else
 	*eta_buffer = 0;
     
@@ -373,7 +368,7 @@ file_eta_show (FileOpContext *ctx)
 static void
 file_bps_show (FileOpContext *ctx)
 {
-    char bps_buffer [30];
+    char bps_buffer [BUF_TINY];
     FileOpContextUI *ui;
 
     ui = ctx->ui;
@@ -382,11 +377,11 @@ file_bps_show (FileOpContext *ctx)
 	return;
 
     if (ctx->bps > 1024*1024) {
-        sprintf (bps_buffer, "%.2f MB/s", ctx->bps / (1024*1024.0));
+        g_snprintf (bps_buffer, sizeof (bps_buffer), "%.2f MB/s", ctx->bps / (1024*1024.0));
     } else if (ctx->bps > 1024){
-        sprintf (bps_buffer, "%.2f KB/s", ctx->bps / 1024.0);
+        g_snprintf (bps_buffer, sizeof (bps_buffer), "%.2f KB/s", ctx->bps / 1024.0);
     } else if (ctx->bps > 1){
-        sprintf (bps_buffer, "%ld B/s", ctx->bps);
+        g_snprintf (bps_buffer, sizeof (bps_buffer), "%ld B/s", ctx->bps);
     } else
 	*bps_buffer = 0;
 
@@ -591,7 +586,7 @@ rd_widgets [] =
 		rd_widgets [i].layout)
 
 #define ADD_RD_LABEL(ui,i,p1,p2)\
-	sprintf (buffer, rd_widgets [i].text, p1, p2);\
+	g_snprintf (buffer, sizeof (buffer), rd_widgets [i].text, p1, p2);\
 	add_widgetl (ui->replace_dlg,\
 		label_new (rd_widgets [i].ypos, rd_widgets [i].xpos, buffer, rd_widgets [i].tkname),\
 		rd_widgets [i].layout)
@@ -600,7 +595,7 @@ static void
 init_replace (FileOpContext *ctx, enum OperationMode mode)
 {
     FileOpContextUI *ui;
-    char buffer [128];
+    char buffer [BUF_SMALL];
     static int rd_xlen = 60, rd_trunc = X_TRUNC;
 
 #ifdef ENABLE_NLS
@@ -957,7 +952,7 @@ ask_file_mask:
     orig_mask = source_mask;
     if (!dest_dir || !*dest_dir){
 	if (source_mask)
-	    free (source_mask);
+	    g_free (source_mask);
 	return dest_dir;
     }
     if (source_easy_patterns){
@@ -966,7 +961,7 @@ ask_file_mask:
 	source_mask = convert_pattern (source_mask, match_file, 1);
 	easy_patterns = source_easy_patterns;
         error = re_compile_pattern (source_mask, strlen (source_mask), &ctx->rx);
-        free (source_mask);
+        g_free (source_mask);
     } else
         error = re_compile_pattern (source_mask, strlen (source_mask), &ctx->rx);
 
@@ -974,11 +969,11 @@ ask_file_mask:
 	message_3s (1, MSG_ERROR, _("Invalid source pattern `%s' \n %s "),
 		 orig_mask, error);
 	if (orig_mask)
-	    free (orig_mask);
+	    g_free (orig_mask);
 	goto ask_file_mask;
     }
     if (orig_mask)
-	free (orig_mask);
+	g_free (orig_mask);
     ctx->dest_mask = strrchr (dest_dir, PATH_SEP);
     if (ctx->dest_mask == NULL)
 	ctx->dest_mask = dest_dir;
@@ -990,14 +985,14 @@ ask_file_mask:
 	(ctx->dive_into_subdirs && ((!only_one && !is_wildcarded (ctx->dest_mask)) ||
 				    (only_one
 				     && !mc_stat (dest_dir, &buf) && S_ISDIR (buf.st_mode)))))
-	ctx->dest_mask = strdup ("*");
+	ctx->dest_mask = g_strdup ("*");
     else {
-	ctx->dest_mask = strdup (ctx->dest_mask);
+	ctx->dest_mask = g_strdup (ctx->dest_mask);
 	*orig_mask = 0;
     }
     if (!*dest_dir){
-	free (dest_dir);
-	dest_dir = strdup ("./");
+	g_free (dest_dir);
+	dest_dir = g_strdup ("./");
     }
     if (val == B_USER)
 	*do_background = 1;

@@ -22,9 +22,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/param.h>
-#include <malloc.h>
-#include "mad.h"
-#include "util.h"		/* statfs calls */
+#include "global.h"
 #include "mouse.h"		/* Gpm_Event */
 #include "color.h"
 #include "dlg.h"
@@ -260,7 +258,7 @@ static int info_callback (Dlg_head *h, WInfo *info, int msg, int par)
 			   
 WInfo *info_new ()
 {
-    WInfo *info = xmalloc (sizeof (WInfo), "panel_info");
+    WInfo *info = g_new (WInfo, 1);
 
     init_widget (&info->widget, 0, 0, 0, 0, (callback_fn)
 		 info_callback, (destroy_fn) info_destroy,

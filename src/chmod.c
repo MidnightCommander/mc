@@ -30,8 +30,7 @@
 #   include <unistd.h>
 #endif
 #include "tty.h"
-#include "mad.h"
-#include "util.h"
+#include "global.h"
 #include "win.h"
 #include "color.h"
 #include "dlg.h"
@@ -179,13 +178,13 @@ static void chmod_refresh (void)
 
 static int chmod_callback (Dlg_head *h, int Par, int Msg)
 {
-    char buffer [10];
+    char buffer [BUF_TINY];
     
     switch (Msg) {
     case DLG_ACTION:
 	if (Par >= BUTTONS - single_set * 2){
 	    c_stat ^= check_perm[Par - BUTTONS + single_set * 2].mode;
-	    sprintf (buffer, "%o", c_stat);
+	    g_snprintf (buffer, sizeof (buffer), "%o", c_stat);
 	    label_set_text (statl, buffer);
 	    chmod_toggle_select ();
 	    mode_change = 1;
@@ -308,7 +307,7 @@ static void apply_mask (struct stat *sf)
 
 void chmod_cmd (void)
 {
-    char buffer [10];
+    char buffer [BUF_TINY];
     char *fname;
     int i;
     struct stat sf_stat;
@@ -357,7 +356,7 @@ void chmod_cmd (void)
 	add_widget (ch_dlg, label_new (FY+6, FX+2, c_fown, NULL));
 	c_fgrp = name_trunc (get_group (sf_stat.st_gid), 21);
 	add_widget (ch_dlg, label_new (FY+8, FX+2, c_fgrp, NULL));
-	sprintf (buffer, "%o", c_stat);
+	g_snprintf (buffer, sizeof (buffer), "%o", c_stat);
 	statl = label_new (FY+4, FX+2, buffer, NULL);
 	add_widget (ch_dlg, statl);
 	

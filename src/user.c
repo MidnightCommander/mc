@@ -21,14 +21,10 @@
 #    include <io.h>
 #endif
 #include "tty.h"
-#include <stdlib.h>	/* For free() */
-#include "fs.h"
 #include <string.h>
 #include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
-#include "mad.h"
-#include "util.h"
 #include "global.h"
 #include "dialog.h"
 #include "color.h"
@@ -152,17 +148,17 @@ int check_format_var (char *p, char **v)
 	}
 	
 	/* Copy the variable name */
-	var_name = xmalloc (dots - p, "check_format_var");
+	var_name = g_malloc (dots - p);
 	strncpy (var_name, p+4, dots-2 - (p+3));
 	var_name [dots-2 - (p+3)] = 0;
 
 	value = getenv (var_name);
 	if (value){
-	    *v = strdup (value);
+	    *v = g_strdup (value);
 	    return q-p;
 	}
-	free (var_name);
-	var_name = xmalloc (q - dots + 1, "check_format_var_2");
+	g_free (var_name);
+	var_name = g_malloc (q - dots + 1);
 	strncpy (var_name, dots, q - dots + 1);
 	var_name [q-dots] = 0;
 	*v = var_name;
@@ -197,7 +193,7 @@ char *expand_format (char c, int quote)
 	quote_func = fake_name_quote;
 
     if (c == '%')
-	return strdup ("%");
+	return g_strdup ("%");
     
     if (islower (c))
 	panel = cpanel;
@@ -205,7 +201,7 @@ char *expand_format (char c, int quote)
 	if (get_other_type () == view_listing){
 	    panel = other_panel;
 	} else
-	    return strdup ("");
+	    return g_strdup ("");
     }
     if (!panel)
 	panel = cpanel;
@@ -234,12 +230,12 @@ char *expand_format (char c, int quote)
 	    if (panel->dir.list [i].f.marked)
 		length += strlen (panel->dir.list [i].fname) + 1;
 
-	block = xmalloc (length*2+1, "expand_format");
+	block = g_malloc (length*2+1);
 	*block = 0;
 	for (i = 0; i < panel->count; i++)
 	    if (panel->dir.list [i].f.marked){
 		strcat (block, tmp = (*quote_func) (panel->dir.list [i].fname, 0));
-		free (tmp);
+		g_free (tmp);
 		strcat (block, " ");
 		if (c == 'u')
 		    do_file_mark (panel, i, 0);
@@ -247,7 +243,7 @@ char *expand_format (char c, int quote)
 	return block;
     } /* sub case block */
     } /* switch */
-    return strdup ("");
+    return g_strdup ("");
 }
 
 /* Checks for shell patterns defination */
@@ -505,7 +501,7 @@ execute_menu_command (char *s)
 
 #ifdef OS2_NT
     /* OS/2 and NT requires the command to end in .cmd */
-    file_name = copy_strings (file_name, ".cmd", NULL);
+    file_name = g_strconcat (file_name, ".cmd", NULL);
 #endif
     if ((cmd_file_fd = open (file_name, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, 0600)) == -1){
 	message (1, MSG_ERROR, _(" Can't create temporary command file \n %s "),
@@ -544,10 +540,10 @@ execute_menu_command (char *s)
 		}
 		if (do_quote) {
     		    fputs (tmp = name_quote (parameter, 0), cmd_file);
-		    free (tmp);
+		    g_free (tmp);
 		} else
 		    fputs (parameter, cmd_file);
-		free (parameter);
+		g_free (parameter);
 	    } else {
 		int len = strlen (prompt);
 
@@ -569,7 +565,7 @@ execute_menu_command (char *s)
 	    else{
 		char *text = expand_format (*commands, do_quote);
 		fputs (text, cmd_file);
-		free (text);
+		g_free (text);
 	    }
 	} else {
 	    if (*commands == '%') {
@@ -630,12 +626,12 @@ void user_menu_cmd (void)
 	return;
     }
     
-    menu = strdup (MC_LOCAL_MENU);
+    menu = g_strdup (MC_LOCAL_MENU);
     if (!exist_file (menu) || !menu_file_own (menu)){
-	free (menu);
+	g_free (menu);
         menu = concat_dir_and_file (home_dir, MC_HOME_MENU);
 	if (!exist_file (menu)){
-	    free (menu);
+	    g_free (menu);
 	    menu = concat_dir_and_file (mc_home, MC_GLOBAL_MENU);
 	}
     }
@@ -643,10 +639,10 @@ void user_menu_cmd (void)
     if ((data = load_file (menu)) == NULL){
 	message (1, MSG_ERROR, _(" Can't open file %s \n %s "),
 		 menu, unix_error_string (errno));
-	free (menu);
+	g_free (menu);
 	return;
     }
-    free (menu);
+    g_free (menu);
     
     max_cols = 0;
     for (i = 0; i < MAX_ENTRIES; i++)
@@ -732,5 +728,5 @@ void user_menu_cmd (void)
 
     easy_patterns = old_patterns;
     do_refresh ();
-    free (data);
+    g_free (data);
 }

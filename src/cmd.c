@@ -29,12 +29,10 @@
 #endif
 #include "tty.h"
 #include <stdio.h>
-#include <stdlib.h>		/* getenv (), rand */
 #include <sys/types.h>
 #include <sys/param.h>
 #include <sys/stat.h>
 #include <sys/time.h>
-#include <malloc.h>
 #include <string.h>
 #include <fcntl.h>		/* open, O_RDWR */
 #include <errno.h>
@@ -50,9 +48,8 @@
 #ifdef HAVE_MMAP
 #   include <sys/mman.h>
 #endif
-#include "mad.h"
+#include "global.h"
 #include "dir.h"
-#include "util.h"
 #include "panel.h"
 #include "cmd.h"		/* Our definitions */
 #include "view.h"		/* view() */
@@ -64,7 +61,6 @@
 #include "tree.h"
 #include "subshell.h"		/* use_subshell */
 #include "cons.saver.h"
-#include "global.h"
 #include "dlg.h"		/* required by wtools.h */
 #include "widget.h"		/* required by wtools.h */
 #include "wtools.h"		/* listbox */
@@ -75,7 +71,6 @@
 #include "view.h"		/* view */
 #include "key.h"		/* get_key_code */
 #include "help.h"		/* interactive_display */
-#include "fs.h"
 #include "boxes.h"		/* cd_dialog */
 #include "color.h"
 #include "user.h"
@@ -173,7 +168,7 @@ int view_file_at_line (char *filename, int plain_view, int internal, int start_l
         return move_dir;
     }
     if (internal){
-	char view_entry [32];
+	char view_entry [BUF_TINY];
 
 #ifdef HAVE_GNOME
 	if (!gmc_view (filename, start_line)){
@@ -181,7 +176,7 @@ int view_file_at_line (char *filename, int plain_view, int internal, int start_l
 	}
 #else
 	if (start_line != 0)
-	    sprintf (view_entry, "View:%d", start_line);
+	    g_snprintf (view_entry, sizeof (view_entry), "View:%d", start_line);
 	else
 	    strcpy (view_entry, "View");
 	
@@ -291,7 +286,7 @@ void view_file_cmd (WPanel *panel)
     if (!filename) return;
 
     view_file (filename, 0, use_internal_view);
-    free (filename);
+    g_free (filename);
 }
 
 void view_simple_cmd (WPanel *panel)
@@ -311,7 +306,7 @@ void filtered_view_cmd (WPanel *panel)
 
     view (command, "", 0, 0);
 
-    free (command);
+    g_free (command);
 }
 
 void filtered_view_cmd_cpanel (void)
@@ -398,20 +393,20 @@ void mkdir_cmd (WPanel *panel)
 	return;
     
     if (dir [0] && (dir [0] == '/' || dir [0] == '~'))
-	    tempdir = strdup (dir);
+	    tempdir = g_strdup (dir);
     else
 	    tempdir = concat_dir_and_file (panel->cwd, dir);
-    free (dir);
+    g_free (dir);
     
     save_cwds_stat ();
     if (my_mkdir (tempdir, 0777) == 0){
 	update_panels (UP_OPTIMIZE, tempdir);
 	repaint_screen ();
 	select_item (cpanel);
-	free (tempdir);
+	g_free (tempdir);
 	return;
     }
-    free (tempdir);
+    g_free (tempdir);
     message (1, MSG_ERROR, "  %s  ", unix_error_string (errno));
 }
 
@@ -434,13 +429,13 @@ void
 set_panel_filter_to (WPanel *p, char *allocated_filter_string)
 {
     if (p->filter){
-	free (p->filter);
+	g_free (p->filter);
 	p->filter = 0;
     }
     if (!(allocated_filter_string [0] == '*' && allocated_filter_string [1] == 0))
 	p->filter = allocated_filter_string;
     else
-	free (allocated_filter_string);
+	g_free (allocated_filter_string);
     reread_cmd ();
     x_filter_changed (p);
 }
@@ -548,7 +543,7 @@ void select_cmd_panel (WPanel *panel)
 	c = regexp_match (reg_exp_t, panel->dir.list [i].fname, match_file);
 	if (c == -1){
 	    message (1, MSG_ERROR, _("  Malformed regular expression  "));
-	    free (reg_exp);
+	    g_free (reg_exp);
 	    return;
 	}
 	if (c){
@@ -556,7 +551,7 @@ void select_cmd_panel (WPanel *panel)
 	}
     }
     paint_panel (panel);
-    free (reg_exp);
+    g_free (reg_exp);
 }
 
 void select_cmd (void)
@@ -599,7 +594,7 @@ void unselect_cmd_panel (WPanel *panel)
 	c = regexp_match (reg_exp_t, panel->dir.list [i].fname, match_file);
 	if (c == -1){
 	    message (1, MSG_ERROR, _("  Malformed regular expression  "));
-	    free (reg_exp);
+	    g_free (reg_exp);
 	    return;
 	}
 	if (c){
@@ -607,7 +602,7 @@ void unselect_cmd_panel (WPanel *panel)
 	}
     }
     paint_panel (panel);
-    free (reg_exp);
+    g_free (reg_exp);
 }
 
 void unselect_cmd (void)
@@ -654,11 +649,11 @@ void ext_cmd (void)
 	buffer = concat_dir_and_file (home_dir, MC_USER_EXT);
 	check_for_default (extdir, buffer);
 	do_edit (buffer);
-	free (buffer);
+	g_free (buffer);
     } else if (dir == 1)
 	do_edit (extdir);
 
-   free (extdir);
+   g_free (extdir);
    flush_extension_file ();
 }
 
@@ -679,7 +674,7 @@ void menu_edit_cmd (void)
 
     switch (dir){
 	case 0:
-	    buffer = strdup (MC_LOCAL_MENU);
+	    buffer = g_strdup (MC_LOCAL_MENU);
 	    check_for_default (menufile, buffer);
 	    break;
 
@@ -693,14 +688,14 @@ void menu_edit_cmd (void)
 	    break;
 
 	default:
-	    free (menufile);
+	   g_free (menufile);
 	    return;
     }
     do_edit (buffer);
 	if (dir == 0)
 		chmod(buffer, 0600);
-    free (buffer);
-    free (menufile);
+    g_free (buffer);
+    g_free (menufile);
 }
 
 void quick_chdir_cmd (void)
@@ -718,7 +713,7 @@ void quick_chdir_cmd (void)
 #endif
         if (!do_cd (target, cd_exact))
 	    message (1, MSG_ERROR, _("Could not change directory") );
-    free (target);
+    g_free (target);
 }
 
 #ifdef USE_VFS
@@ -732,7 +727,7 @@ void reselect_vfs (void)
 
     if (!do_cd (target, cd_exact))
         message (1, MSG_ERROR, _("Could not change directory") );
-    free (target);
+    g_free (target);
 }
 #endif
 
@@ -843,12 +838,12 @@ compare_dir (WPanel *panel, WPanel *other, enum CompareMode mode)
 	    }
 
 	    /* Thorough compare on, do byte-by-byte comparison */
-	    src_name = get_full_name (panel->cwd, source->fname);
-	    dst_name = get_full_name (other->cwd, target->fname);
+	    src_name = concat_dir_and_file (panel->cwd, source->fname);
+	    dst_name = concat_dir_and_file (other->cwd, target->fname);
 	    if (compare_files (src_name, dst_name, source->buf.st_size))
 		do_file_mark (panel, i, 1);
-	    free (src_name);
-	    free (dst_name);
+	    g_free (src_name);
+	    g_free (dst_name);
 	}
     } /* for (i ...) */
 }
@@ -901,7 +896,7 @@ void history_cmd (void)
     else
 	current = listbox->list->current->data;
     destroy_dlg (listbox->dlg);
-    free (listbox);
+    g_free (listbox);
 
     if (!current)
 	return;
@@ -1031,14 +1026,14 @@ do_link (int symbolic_link, char *fname)
     }
     
     if (!symbolic_link){
-        src = copy_strings (_(" Link "), name_trunc (fname, 46), 
+        src = g_strconcat (_(" Link "), name_trunc (fname, 46), 
             _(" to:"), NULL);
 	dest = input_expand_dialog (_(" Link "), src, "");
-	free (src);
+	g_free (src);
 	if (!dest)
 	    return;
 	if (!*dest) {
-	    free (dest);
+	    g_free (dest);
 	    return;
 	}
 	save_cwds_stat ();
@@ -1067,9 +1062,9 @@ do_link (int symbolic_link, char *fname)
 #endif
 	if (!dest || !*dest) {
 	    if (src)
-	        free (src);
+	        g_free (src);
 	    if (dest)
-	        free (dest);
+	        g_free (dest);
 	    return;
 	}
 	if (src){
@@ -1079,10 +1074,10 @@ do_link (int symbolic_link, char *fname)
 		    message (1, MSG_ERROR, _(" symlink: %s "),
 			     unix_error_string (errno));
 	    }
-	    free (src);
+	    g_free (src);
 	}
     }
-    free (dest);
+    g_free (dest);
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();
 }
@@ -1102,7 +1097,7 @@ void edit_symlink_cmd (void)
     if (S_ISLNK (selection (cpanel)->buf.st_mode)) {
 	char buffer [MC_MAXPATHLEN], *p = selection (cpanel)->fname;
 	int i;
-	char *dest, *q = copy_strings (_(" Symlink "), name_trunc (p, 32), _(" points to:"), NULL);
+	char *dest, *q = g_strconcat (_(" Symlink "), name_trunc (p, 32), _(" points to:"), NULL);
 	
 	i = readlink (p, buffer, MC_MAXPATHLEN);
 	if (i > 0) {
@@ -1118,10 +1113,10 @@ void edit_symlink_cmd (void)
 		    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 		    repaint_screen ();
 		}
-		free (dest);
+		g_free (dest);
 	    }
 	}
-	free (q);
+	g_free (q);
     }
 }
 
@@ -1137,7 +1132,7 @@ void other_symlink_cmd (void)
     p = concat_dir_and_file (cpanel->cwd, selection (cpanel)->fname);
     r = concat_dir_and_file (opanel->cwd, selection (cpanel)->fname);
     
-    q = copy_strings (_(" Link symbolically "), name_trunc (p, 32), _(" to:"), NULL);
+    q = g_strconcat (_(" Link symbolically "), name_trunc (p, 32), _(" to:"), NULL);
     dest = input_expand_dialog (_(" Relative symlink "), q, r);
     if (dest) {
 	if (*dest) {
@@ -1153,15 +1148,15 @@ void other_symlink_cmd (void)
 				 unix_error_string (errno));
 		    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 		    repaint_screen ();
-		    free (s);
+		   g_free (s);
 		}
 	    }
 	}
-	free (dest);
+	g_free (dest);
     }
-    free (q);
-    free (p);
-    free (r);
+    g_free (q);
+    g_free (p);
+    g_free (r);
 }
 #endif
 
@@ -1169,7 +1164,7 @@ void help_cmd (void)
 {
    char *hlpfile = concat_dir_and_file (mc_home, "mc.hlp");
    interactive_display (hlpfile, "[main]");
-   free (hlpfile);
+   g_free (hlpfile);
 }
 
 void view_panel_cmd (void)
@@ -1203,7 +1198,7 @@ char *get_random_hint (void)
 
     time (&now);
     if ((now - last) < 60)
-	return strdup ("");
+	return g_strdup ("");
     last = now;
 #else
     static int last_sec;
@@ -1211,13 +1206,13 @@ char *get_random_hint (void)
     
     gettimeofday (&tv, NULL);
     if (!(tv.tv_sec> last_sec+60))
-	return strdup (""); 
+	return g_strdup (""); 
     last_sec = tv.tv_sec;
 #endif
 
     hintfile = concat_dir_and_file (mc_home, MC_HINT);
     data = load_file (hintfile);
-    free (hintfile);
+    g_free (hintfile);
     if (!data)
 	return 0;
 
@@ -1239,8 +1234,8 @@ char *get_random_hint (void)
     eol = strchr (&data [start], '\n');
     if (eol)
 	*eol = 0;
-    result = strdup (&data [start]);
-    free (data);
+    result = g_strdup (&data [start]);
+    g_free (data);
     return result;
 }
 
@@ -1269,16 +1264,16 @@ static void nice_cd (char *text, char *xtext, char *help, char *prefix, int to_h
 	return;
 
     if (strncmp (prefix, machine, strlen (prefix)) == 0)
-	cd_path = copy_strings (machine, to_home ? "/~/" : NULL, NULL);
+	cd_path = g_strconcat (machine, to_home ? "/~/" : NULL, NULL);
     else 
-	cd_path = copy_strings (prefix, machine, to_home ? "/~/" : NULL, NULL);
+	cd_path = g_strconcat (prefix, machine, to_home ? "/~/" : NULL, NULL);
     
     if (do_panel_cd (MENU_PANEL, cd_path, 0))
 	directory_history_add (MENU_PANEL, (MENU_PANEL)->cwd);
     else
 	message (1, MSG_ERROR, N_(" Could not chdir to %s "), cd_path);
-    free (cd_path);
-    free (machine);
+    g_free (cd_path);
+    g_free (machine);
 }
 
 void netlink_cmd (void)
@@ -1330,13 +1325,13 @@ void quick_cd_cmd (void)
     char *p = cd_dialog ();
 
     if (p && *p) {
-        char *q = copy_strings ("cd ", p, NULL);
+        char *q = g_strconcat ("cd ", p, NULL);
         
         do_cd_command (q);
-        free (q);
+        g_free (q);
     }
     if (p)
-        free (p);
+       g_free (p);
 }
 
 void 
@@ -1369,14 +1364,14 @@ save_setup_cmd (void)
     
     save_setup ();
     sync_profiles ();
-    str = copy_strings ( _(" Setup saved to ~/"), PROFILE_NAME, NULL);
+    str = g_strconcat ( _(" Setup saved to ~/"), PROFILE_NAME, NULL);
     
 #ifdef HAVE_GNOME
     set_hintbar (str);
 #else
     message (0, _(" Setup "), str);
 #endif
-    free (str);
+   g_free (str);
 }
 
 void
@@ -1388,29 +1383,29 @@ configure_panel_listing (WPanel *p, int view_type, int use_msformat, char *user,
     p->list_type = view_type;
     
     if (view_type == list_user || use_msformat){
-	free (p->user_format);
+	g_free (p->user_format);
 	p->user_format = user;
     
-	free (p->user_status_format [view_type]);
+	g_free (p->user_status_format [view_type]);
 	p->user_status_format [view_type] = status;
     
 	err = set_panel_formats (p);
 	
 	if (err){
 	    if (err & 0x01){
-	    	free (p->user_format);
-		p->user_format  = strdup (DEFAULT_USER_FORMAT);
+	    	g_free (p->user_format);
+		p->user_format  = g_strdup (DEFAULT_USER_FORMAT);
 	    }
 		
 	    if (err & 0x02){
-		free (p->user_status_format [view_type]);
-		p->user_status_format [view_type]  = strdup (DEFAULT_USER_FORMAT);
+		g_free (p->user_status_format [view_type]);
+		p->user_status_format [view_type]  = g_strdup (DEFAULT_USER_FORMAT);
 	    }
 	}
     }
     else {
-        free (user);
-        free (status);
+        g_free (user);
+        g_free (status);
     }
 
     set_panel_formats (p);

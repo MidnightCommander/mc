@@ -23,7 +23,6 @@
 
 #include <config.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <sys/types.h>
 #include <string.h>
 #ifdef HAVE_UNISTD_H
@@ -37,9 +36,6 @@
 #include "tty.h"
 #include <ctype.h>
 #include <errno.h>
-#include <malloc.h> 
-#include "util.h"		/* For xmalloc prototype */
-#include "mad.h"		/* The memory debugger */
 #include "global.h"
 #include "mouse.h"
 #include "key.h"
@@ -107,7 +103,7 @@ void add_select_channel (int fd, select_fn callback, void *info)
 {
     SelectList *new;
 
-    new = xmalloc (sizeof (SelectList), "add_select_channel");
+    new = g_new (SelectList, 1);
     new->fd = fd;
     new->callback = callback;
     new->info = info;
@@ -126,7 +122,7 @@ void delete_select_channel (int fd)
 		prev->next = p->next;
 	    else
 		select_list = p->next;
-	    free (p);
+	    g_free (p);
 	}
 	prev = p;
 	p = p->next;
@@ -340,7 +336,7 @@ static key_def *create_sequence (char *seq, int code, int action)
     key_def *base, *p, *attach;
 
     for (base = attach = NULL; *seq; seq++){
-	p = xmalloc (sizeof (key_def), "create_sequence");
+	p = g_new (key_def, 1);
 	if (!base) base = p;
 	if (attach) attach->child = p;
 	
@@ -919,7 +915,7 @@ char *learn_key (void)
     nodelay (stdscr, FALSE);
 #endif
     *p = 0;
-    return strdup (buffer);
+    return g_strdup (buffer);
 }
 
 /* xterm and linux console only: set keypad to numeric or application
@@ -999,7 +995,7 @@ void k_dispose (key_def *k)
 	return;
     k_dispose (k->child);
     k_dispose (k->next);
-    free (k);
+    g_free (k);
 }
 
 void s_dispose (SelectList *sel)
@@ -1008,7 +1004,7 @@ void s_dispose (SelectList *sel)
 	return;
 
     s_dispose (sel->next);
-    free (sel);
+    g_free (sel);
 }
 
 void done_key ()

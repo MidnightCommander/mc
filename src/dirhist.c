@@ -51,12 +51,12 @@ static char *dirhist_name = "Directory history";
 void
 directory_history_load (void)
 {
-    char entry_name [20];
+    char entry_name [BUF_TINY];
     char *value;
     int  i;
     
     for (i = 0; i < DIRECTORY_HISTORY_LOAD_COUNT; i++){
-	sprintf (entry_name, "%d", i);
+	g_snprintf (entry_name, sizeof (entry_name), "%d", i);
 	value = get_profile_string (dirhist_name, entry_name, "", profile_name);
 	if (!(value || *value))
 	    continue;
@@ -67,7 +67,7 @@ directory_history_load (void)
 void
 directory_history_save (void)
 {
-    char entry_name [20];
+    char entry_name [BUF_TINY];
     char *dir;
     int  i;
     
@@ -77,7 +77,7 @@ directory_history_save (void)
 	dir = directory_history_get_next ();
 	if (!dir)
 	    break;
-	sprintf (entry_name, "%d", i);
+	g_snprintf (entry_name, sizeof (entry_name), "%d", i);
 	WritePrivateProfileString (dirhist_name, entry_name, dir, profile_name);
     }
 }
@@ -88,8 +88,8 @@ directory_history_delete (struct dirhist_entry *e)
     if (!e)
 	return;
     directory_history_delete (e->next);
-    free (e->directory);
-    free (e);
+   g_free (e->directory);
+   g_free (e);
 }
 
 void
@@ -121,10 +121,10 @@ directory_history_add (char *directory)
 {
     struct dirhist_entry *p;
 
-    p = (struct dirhist_entry *) malloc (sizeof (struct dirhist_entry));
+    p = g_new (struct dirhist_entry, 1);
     if (!p)
 	return;
-    p->directory = strdup (directory);
+    p->directory = g_strdup (directory);
     p->next = base;
     base = p;
 }

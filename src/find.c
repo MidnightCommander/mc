@@ -25,16 +25,11 @@
 #ifdef NEEDS_IO_H
 #    include <io.h>
 #endif
-#include "fs.h"
-#include <malloc.h>	/* For free() */
 #include <sys/stat.h>
 #include <sys/param.h>
-#include <stdlib.h>
 #include <fcntl.h>
 #include <ctype.h>
 #include "global.h"
-#include "mad.h"
-#include "util.h"
 #include "win.h"
 #include "color.h"
 #include "global.h"
@@ -196,11 +191,11 @@ find_parameters (char **start_dir, char **pattern, char **content)
 
 find_par_start:
     if (!in_start_dir)
-	in_start_dir = strdup (".");
+	in_start_dir = g_strdup (".");
     if (!in_start_name)
-	in_start_name = strdup (easy_patterns ? "*" : ".");
+	in_start_name = g_strdup (easy_patterns ? "*" : ".");
     if (!in_contents)
-	in_contents = strdup ("");
+	in_contents = g_strdup ("");
     
     find_dlg = create_dlg (0, 0, FIND_Y, FIND_X, dialog_colors,
 			   common_dialog_callback, "[Find File]", "findfile",
@@ -238,16 +233,16 @@ find_par_start:
 
 #ifndef HAVE_GNOME
     case B_TREE:
-	temp_dir = strdup (in_start->buffer);
+	temp_dir = g_strdup (in_start->buffer);
 	destroy_dlg (find_dlg);
-	free (in_start_dir);
+	g_free (in_start_dir);
 	if (strcmp (temp_dir, ".") == 0){
-	    free (temp_dir);
-	    temp_dir = strdup (cpanel->cwd);
+	   g_free (temp_dir);
+	    temp_dir = g_strdup (cpanel->cwd);
 	}
 	in_start_dir = tree (temp_dir);
 	if (in_start_dir)
-	    free (temp_dir);
+	   g_free (temp_dir);
 	else
 	    in_start_dir = temp_dir;
 	/* Warning: Dreadful goto */
@@ -257,20 +252,20 @@ find_par_start:
 	
     default:
 	return_value = 1;
-	*start_dir = strdup (in_start->buffer);
-	*pattern   = strdup (in_name->buffer);
+	*start_dir = g_strdup (in_start->buffer);
+	*pattern   = g_strdup (in_name->buffer);
 
-	free (in_contents);
+	g_free (in_contents);
 	if (in_with->buffer [0]){
-	    *content    = strdup (in_with->buffer);
-	    in_contents = strdup (*content);
+	    *content    = g_strdup (in_with->buffer);
+	    in_contents = g_strdup (*content);
 	} else 
 	    *content = in_contents = NULL;
 
-	free (in_start_dir);
-	in_start_dir = strdup (*start_dir);
-	free (in_start_name);
-	in_start_name = strdup (*pattern);
+	g_free (in_start_dir);
+	in_start_dir = g_strdup (*start_dir);
+	g_free (in_start_name);
+	in_start_name = g_strdup (*pattern);
     }
 
     destroy_dlg (find_dlg);
@@ -283,8 +278,8 @@ push_directory (char *dir)
 {
     dir_stack *new;
 
-    new = xmalloc (sizeof (dir_stack), "find: push_directory");
-    new->name = strdup (dir);
+    new = g_new (dir_stack, 1);
+    new->name = g_strdup (dir);
     new->prev = dir_stack_base;
     dir_stack_base = new;
 }
@@ -298,7 +293,7 @@ pop_directory (void)
     if (dir_stack_base){
 	name = dir_stack_base->name;
 	next = dir_stack_base->prev;
-	free (dir_stack_base);
+	g_free (dir_stack_base);
 	dir_stack_base = next;
 	return name;
     } else
@@ -324,18 +319,18 @@ insert_file (char *dir, char *file)
 
     if (old_dir){
 	if (strcmp (old_dir, dir)){
-	    free (old_dir);
-	    old_dir = strdup (dir);
+	   g_free (old_dir);
+	    old_dir = g_strdup (dir);
 	    dirname = listbox_add_item (find_list, 0, 0, dir, 0);
 	}
     } else {
-	old_dir = strdup (dir);
+	old_dir = g_strdup (dir);
 	dirname = listbox_add_item (find_list, 0, 0, dir, 0);
     }
     
-    tmp_name = copy_strings ("    ", file, 0);
+    tmp_name = g_strconcat ("    ", file, NULL);
     listbox_add_item (find_list, 0, 0, tmp_name, dirname);
-    free (tmp_name);
+    g_free (tmp_name);
 }
 
 static void
@@ -393,7 +388,7 @@ static void
 search_content (Dlg_head *h, char *directory, char *filename)
 {
     struct stat s;
-    char buffer [128];
+    char buffer [BUF_SMALL];
     char *fname, *p;
     int file_fd, pipe, ignoring;
     char c;
@@ -401,19 +396,19 @@ search_content (Dlg_head *h, char *directory, char *filename)
     pid_t pid;
     static char *egrep_path;
 
-    fname = get_full_name (directory, filename);
+    fname = concat_dir_and_file (directory, filename);
 
     if (mc_stat (fname, &s) != 0 && !S_ISREG (s.st_mode)){
-	free (fname);
+	g_free (fname);
 	return;
     }
     if (!S_ISREG (s.st_mode)){
-	free (fname);
+	g_free (fname);
 	return;
     }
     
     file_fd = mc_open (fname, O_RDONLY);
-    free (fname);
+    g_free (fname);
     
     if (file_fd == -1)
 	return;
@@ -432,7 +427,7 @@ search_content (Dlg_head *h, char *directory, char *filename)
 	return;
     }
     
-    sprintf (buffer, _("Grepping in %s"), name_trunc (filename, FIND2_X_USE));
+    g_snprintf (buffer, sizeof (buffer), _("Grepping in %s"), name_trunc (filename, FIND2_X_USE));
 
     label_set_text (status_label, buffer);
     mc_refresh ();
@@ -458,9 +453,9 @@ search_content (Dlg_head *h, char *directory, char *filename)
 	    
 	    *p = 0;
 	    ignoring = 1;
-	    the_name = copy_strings (buffer, ":", filename, NULL);
+	    the_name = g_strconcat (buffer, ":", filename, NULL);
 	    find_add_match (h, directory, the_name);
-	    free (the_name);
+	    g_free (the_name);
 	} else {
 	    if (p - buffer < (sizeof (buffer)-1) && ISASCII (c) && isdigit (c))
 		*p++ = c;
@@ -523,12 +518,12 @@ do_search (struct Dlg_head *h)
 		}
 		if (find_ignore_dirs){
                     int found;
-		    char *temp_dir = copy_strings (":", tmp, ":", 0);
+		    char *temp_dir = g_strconcat (":", tmp, ":", NULL);
 
                     found = strstr (find_ignore_dirs, temp_dir) != 0;
-                    free (temp_dir);
+                    g_free (temp_dir);
 		    if (found)
-			free (tmp);
+			g_free (tmp);
 		    else
 			break;
 		} else
@@ -536,12 +531,12 @@ do_search (struct Dlg_head *h)
 	    } 
 	    
 	    strcpy (directory, tmp);
-	    free (tmp);
+	   g_free (tmp);
 
 	    if (verbose){
-		    char buffer [50];
+		    char buffer [BUF_SMALL];
 
-		    sprintf (buffer, _("Searching %s"), name_trunc (directory, FIND2_X_USE));
+		    g_snprintf (buffer, sizeof (buffer), _("Searching %s"), name_trunc (directory, FIND2_X_USE));
 		    label_set_text (status_label, buffer);
 	    }
 	    dirp = mc_opendir (directory);
@@ -561,7 +556,7 @@ do_search (struct Dlg_head *h)
 	return;
     }
     
-    tmp_name = get_full_name (directory, dp->d_name);
+    tmp_name = concat_dir_and_file (directory, dp->d_name);
 
     if (subdirs_left){
 	mc_lstat (tmp_name, &tmp_stat);
@@ -578,7 +573,7 @@ do_search (struct Dlg_head *h)
 	    find_add_match (h, directory, dp->d_name);
     }
     
-    free (tmp_name);
+    g_free (tmp_name);
     dp = mc_readdir (dirp);
 
     /* Displays the nice dot */
@@ -624,17 +619,17 @@ view_edit_currently_selected_file (int unparsed_view, int edit)
 	 line = 0;
     }
     if (dir [0] == '.' && dir [1] == 0)
-	 fullname = strdup (filename);
+	 fullname = g_strdup (filename);
     else if (dir [0] == '.' && dir [1] == PATH_SEP)
-	 fullname = get_full_name (dir+2, filename);
+	 fullname = concat_dir_and_file (dir+2, filename);
     else
-	 fullname = get_full_name (dir, filename);
+	 fullname = concat_dir_and_file (dir, filename);
 
     if (edit)
 	do_edit_at_line (fullname, line);
     else
         view_file_at_line (fullname, unparsed_view, use_internal_view, line);
-    free (fullname);
+    g_free (fullname);
     return MSG_HANDLED;
 }
 
@@ -701,7 +696,7 @@ init_find_vars (void)
     char *dir;
     
     if (old_dir){
-	free (old_dir);
+	g_free (old_dir);
 	old_dir = 0;
     }
     count = 0;
@@ -709,7 +704,7 @@ init_find_vars (void)
 
     /* Remove all the items in the stack */
     while ((dir = pop_directory ()) != NULL)
-	free (dir);
+	g_free (dir);
 }
 
 static int
@@ -810,14 +805,14 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
 
     /* Remove all the items in the stack */
     while ((dir = pop_directory ()) != NULL)
-	free (dir);
+	g_free (dir);
     
     listbox_get_current (find_list, &file_tmp, &dir_tmp);
 
     if (dir_tmp)
-	*dirname  = strdup (dir_tmp);
+	*dirname  = g_strdup (dir_tmp);
     if (file_tmp)
-	*filename = strdup (file_tmp);
+	*filename = g_strdup (file_tmp);
     if (return_value == B_PANELIZE && *filename){
 	int status, link_to_dir, stalled_link;
 	int next_free = 0;
@@ -839,26 +834,26 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
 		continue;
 	    dir = entry->data;
 	    if (dir [0] == '.' && dir [1] == 0)
-		name = strdup (filename);
+		name = g_strdup (filename);
 	    else if (dir [0] == '.' && dir [1] == PATH_SEP)
-		name = get_full_name (dir + 2, filename);
+		name = concat_dir_and_file (dir + 2, filename);
 	    else
-		name = get_full_name (dir, filename);
+		name = concat_dir_and_file (dir, filename);
 	    status = handle_path (list, name, &buf, next_free, &link_to_dir,
 	        &stalled_link);
 	    if (status == 0) {
-		free (name);
+		g_free (name);
 		continue;
 	    }
 	    if (status == -1) {
-	        free (name);
+	        g_free (name);
 		break;
 	    }
 
 	    /* don't add files more than once to the panel */
 	    if (content_pattern && next_free > 0){
 		if (strcmp (list->list [next_free-1].fname, name) == 0) {
-		    free (name);
+		    g_free (name);
 		    continue;
 		}
 	    }
@@ -896,7 +891,7 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
     destroy_dlg (find_dlg);
     do_search (0); /* force do_search to release resources */
     if (old_dir){
-	free (old_dir);
+	g_free (old_dir);
 	old_dir = 0;
     }
     return return_value;
@@ -917,8 +912,8 @@ do_find (void)
 	dirname = filename = NULL;
 	is_start = 0;
 	v = find_file (start_dir, pattern, content, &dirname, &filename);
-	free (start_dir);
-	free (pattern);
+	g_free (start_dir);
+	g_free (pattern);
 	
 	if (v == B_ENTER){
 	    if (dirname || filename){
@@ -933,16 +928,16 @@ do_find (void)
 		select_item (cpanel);
 	    }
 	    if (dirname)  
-		free (dirname);
+		g_free (dirname);
 	    if (filename) 
-		free (filename);
+		g_free (filename);
 	    break;
 	}
 	if (content) 
-	    free (content);
+	    g_free (content);
 	dir_and_file_set = dirname && filename;
-	if (dirname)  free (dirname);
-	if (filename) free (filename);
+	if (dirname) g_free (dirname);
+	if (filename) g_free (filename);
 	if (v == B_CANCEL)
 	    break;
 	

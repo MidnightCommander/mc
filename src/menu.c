@@ -21,12 +21,9 @@
 #include <stdarg.h>
 #include <sys/types.h>
 #include <ctype.h>
-#include <malloc.h>
-#include "mad.h"
-#include "util.h"
+#include "global.h"
 #include "menu.h"
 #include "dialog.h"
-#include "global.h"
 #include "color.h"
 #include "main.h"
 #include "mouse.h"
@@ -54,13 +51,13 @@ Menu create_menu (char *name, menu_entry *entries, int count)
 {
     Menu menu;
 
-    menu = (Menu) xmalloc (sizeof (*menu), "create_menu");
+    menu = (Menu) g_malloc (sizeof (*menu));
     menu->count = count;
     menu->max_entry_len = 0;
     menu->entries = entries;
 
 #ifdef ENABLE_NLS
-	if (entries != (menu_entry*) 0)
+	if (entries != (menu_entry*) NULL)
 	{
 		register menu_entry* mp;
 		for (mp = entries; count--; mp++)
@@ -73,7 +70,7 @@ Menu create_menu (char *name, menu_entry *entries, int count)
 	}
 #endif /* ENABLE_NLS */
 
-    menu->name = strdup( _(name) );
+    menu->name = g_strdup ( _(name) );
     menu_scan_hotkey(menu);
     menu->start_x = 0;
     return menu;
@@ -517,15 +514,14 @@ menubar_arrange(WMenu* menubar)
 void
 destroy_menu (Menu menu)
 {
-    free (menu->name);
-    free (menu);
+    g_free (menu->name);
+    g_free (menu);
 }
 
 WMenu *menubar_new (int y, int x, int cols, Menu menu [], int items)
 {
-    WMenu *menubar = (WMenu *) xmalloc (sizeof (WMenu), "menubar_new");
+    WMenu *menubar = g_new0 (WMenu, 1); /* FIXME: subsel used w/o being set */
    
-    memset(menubar, 0, sizeof(*menubar)); /* FIXME: subsel used w/o being set */
     init_widget (&menubar->widget, y, x, 1, cols,
                  (callback_fn) menubar_callback,
 		 (destroy_fn)  menubar_destroy,

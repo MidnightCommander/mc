@@ -23,8 +23,6 @@
 #include <string.h>
 #include "help.h"
 
-#define BUFFER_SIZE 256
-
 static int width;		/* Output width in characters */
 static int col = 0;		/* Current output column */
 static FILE *toc_file;		/* TOC file */
@@ -152,7 +150,7 @@ void print_string (char *buffer)
 void printf_string (char *format, ...)
 {
     va_list args;
-    char buffer [BUFFER_SIZE];
+    char buffer [BUF_LARGE];
 
     va_start (args, format);
     vsprintf (buffer, format, args);
@@ -163,7 +161,7 @@ void printf_string (char *format, ...)
 int main (int argc, char **argv)
 {
     int len;			/* Length of input line */
-    char buffer [BUFFER_SIZE];	/* Input line */
+    char buffer [BUF_LARGE];	/* Input line */
     int i, j;
     char *p; 
     int ignore_newline = 0;
@@ -183,7 +181,7 @@ int main (int argc, char **argv)
     /* Repeat for each input line */
     while (!feof (stdin)){
 	/* Read a line */
-	if (!fgets (buffer, BUFFER_SIZE, stdin)){
+	if (!fgets (buffer, sizeof(buffer), stdin)){
 	    break;
 	}
 	in_row ++;

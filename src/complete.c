@@ -22,9 +22,7 @@
 #include <config.h>
 #include "tty.h"
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-#include <malloc.h>
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>
 #endif
@@ -60,8 +58,6 @@
 #endif
 
 #include "global.h"
-#include "mad.h"
-#include "util.h"
 #include "win.h"
 #include "color.h"
 #include "dlg.h"
@@ -97,16 +93,16 @@ filename_completion_function (char *text, int state)
         char *temp;
 
         if (dirname)
-            free (dirname);
+            g_free (dirname);
         if (filename) 
-            free (filename);
+            g_free (filename);
         if (users_dirname)
-            free (users_dirname);
+            g_free (users_dirname);
 
-        filename = strdup (text);
+        filename = g_strdup (text);
         if (!*text)
             text = ".";
-        dirname = strdup (text);
+        dirname = g_strdup (text);
 
         temp = strrchr (dirname, PATH_SEP);
 
@@ -120,19 +116,19 @@ filename_completion_function (char *text, int state)
         /* We aren't done yet.  We also support the "~user" syntax. */
 
         /* Save the version of the directory that the user typed. */
-        users_dirname = strdup (dirname);
+        users_dirname = g_strdup (dirname);
         {
 	    char *temp_dirname;
 
 	    temp_dirname = tilde_expand (dirname);
 	    if (!temp_dirname){
-		free (dirname);
-		free (users_dirname);
-		free (filename);
+		g_free (dirname);
+		g_free (users_dirname);
+		g_free (filename);
 		dirname = users_dirname = filename = NULL;
 		return NULL;
 	    }
-	    free (dirname);
+	    g_free (dirname);
 	    dirname = temp_dirname;
 	    canonicalize_pathname (dirname);
 	    /* Here we should do something with variable expansion
@@ -161,7 +157,7 @@ filename_completion_function (char *text, int state)
 	}
 	isdir = 1; isexec = 0;
 	{
-	    char *tmp = xmalloc (3 + strlen (dirname) + NLENGTH (entry), "Filename completion");
+	    char *tmp = g_malloc (3 + strlen (dirname) + NLENGTH (entry));
 	    struct stat tempstat;
 	    
 	    strcpy (tmp, dirname);
@@ -182,7 +178,7 @@ filename_completion_function (char *text, int state)
 	                isexec = 1;
 	        }
 	    }
-	    free (tmp);
+	   g_free (tmp);
 	}
 	switch (look_for_executables)
 	{
@@ -204,15 +200,15 @@ filename_completion_function (char *text, int state)
 	    directory = NULL;
 	}
         if (dirname){
-	    free (dirname);
+	    g_free (dirname);
 	    dirname = NULL;
 	}
         if (filename){
-	    free (filename);
+	    g_free (filename);
 	    filename = NULL;
 	}
         if (users_dirname){
-	    free (users_dirname);
+	    g_free (users_dirname);
 	    users_dirname = NULL;
 	}
         return NULL;
@@ -221,7 +217,7 @@ filename_completion_function (char *text, int state)
 
         if (users_dirname && (users_dirname[0] != '.' || users_dirname[1])){
 	    int dirlen = strlen (users_dirname);
-	    temp = xmalloc (3 + dirlen + NLENGTH (entry), "Filename completion");
+	    temp = g_malloc (3 + dirlen + NLENGTH (entry));
 	    strcpy (temp, users_dirname);
 	    /* We need a `/' at the end. */
 	    if (users_dirname[dirlen - 1] != PATH_SEP){
@@ -230,7 +226,7 @@ filename_completion_function (char *text, int state)
 	    }
 	    strcat (temp, entry->d_name);
 	} else {
-	    temp = xmalloc (2 + NLENGTH (entry), "Filename completion");
+	    temp = g_malloc (2 + NLENGTH (entry));
 	    strcpy (temp, entry->d_name);
 	}
 	if (isdir)
@@ -270,7 +266,7 @@ username_completion_function (char *text, int state)
         endpwent ();
         return NULL;
     } else {
-        char *temp = xmalloc (3 + strlen (entry->pw_name), "Username completion");
+        char *temp = g_malloc (3 + strlen (entry->pw_name));
         
         *temp = '~';
         strcpy (temp + 1, entry->pw_name);
@@ -307,7 +303,7 @@ variable_completion_function (char *text, int state)
     if (!*env_p)
         return NULL;
     else {
-        char *temp = xmalloc (2 + 2 * isbrace + p - *env_p, "Variable completion");
+        char *temp = g_malloc (2 + 2 * isbrace + p - *env_p);
 
 	*temp = '$';
 	if (isbrace)
@@ -373,7 +369,7 @@ static void fetch_hosts (char *filename)
 	    for (start = i; buffer[i] && !cr_whitespace (buffer[i]); i++);
 	        if (i - start == 0)
 	            continue;
-	    name = (char *) xmalloc (i - start + 1, "Hostname completion");
+	    name = (char *) g_malloc (i - start + 1);
 	    strncpy (name, buffer + start, i - start);
 	    name [i - start] = 0;
 	    {
@@ -382,7 +378,7 @@ static void fetch_hosts (char *filename)
 	    	if (hosts_p - hosts >= hosts_alloclen){
 	    	    int j = hosts_p - hosts;
 	    	
-	    	    hosts = realloc ((void *)hosts, ((hosts_alloclen += 30) + 1) * sizeof (char *));
+	    	    hosts = g_realloc ((void *)hosts, ((hosts_alloclen += 30) + 1) * sizeof (char *));
 	    	    hosts_p = hosts + j;
 	        }
 	        for (host_p = hosts; host_p < hosts_p; host_p++)
@@ -392,7 +388,7 @@ static void fetch_hosts (char *filename)
 	            *(hosts_p++) = name;
 	            *hosts_p = NULL;
 	        } else
-	            free (name);
+	            g_free (name);
 	    }
 	}
     }
@@ -410,10 +406,10 @@ hostname_completion_function (char *text, int state)
         
     	if (hosts != NULL){
     	    for (host_p = hosts; *host_p; host_p++)
-    	    	free (*host_p);
-    	    free (hosts);
+    	    	g_free (*host_p);
+    	   g_free (hosts);
     	}
-    	hosts = (char **) xmalloc (((hosts_alloclen = 30) + 1) * sizeof (char *), "Hostname completion");
+    	hosts = g_new (char *, (hosts_alloclen = 30) + 1);
     	*hosts = NULL;
     	hosts_p = hosts;
     	fetch_hosts ((p = getenv ("HOSTFILE")) ? p : "/etc/hosts");
@@ -432,12 +428,12 @@ hostname_completion_function (char *text, int state)
     
     if (!*host_p){
     	for (host_p = hosts; *host_p; host_p++)
-    	    free (*host_p);
-    	free (hosts);
+    	    g_free (*host_p);
+    	g_free (hosts);
     	hosts = NULL;
     	return NULL;
     } else {
-    	char *temp = xmalloc (2 + strlen (*host_p), "Hostname completion");
+    	char *temp = g_malloc (2 + strlen (*host_p));
 
     	if (textstart)
     	    *temp = '@';
@@ -491,7 +487,7 @@ command_completion_function (char *text, int state)
 	    if (!p)
 	    	path = NULL;
 	    else {
-	    	path = xmalloc (strlen (p) + 2, "Command completion");
+	    	path = g_malloc (strlen (p) + 2);
 	    	strcpy (path, p);
 	    	path [strlen (p) + 1] = 0;
 	    	p = strchr (path, PATH_ENV_SEP);
@@ -515,7 +511,7 @@ command_completion_function (char *text, int state)
     	case 0: /* Reserved words */
 	    while (*words){
 	        if (!strncmp (*words, text, text_len))
-	            return strdup (*(words++));
+	            return g_strdup (*(words++));
 	        words++;
 	    }
 	    phase++;
@@ -523,7 +519,7 @@ command_completion_function (char *text, int state)
 	case 1: /* Builtin commands */
 	    while (*words){
 	        if (!strncmp (*words, text, text_len))
-	            return strdup (*(words++));
+	            return g_strdup (*(words++));
 	        words++;
 	    }
 	    phase++;
@@ -540,23 +536,23 @@ command_completion_function (char *text, int state)
 	            	break;
 		    expanded = tilde_expand (cur_path);
 		    if (!expanded){
-			free (path);
+			g_free (path);
 			path = NULL;
 			return NULL;
 		    }
 	            p = canonicalize_pathname (expanded);
-	            cur_word = xmalloc (strlen (p) + 2 + text_len, "Command completion");
+	            cur_word = g_malloc (strlen (p) + 2 + text_len);
 	            strcpy (cur_word, p);
 	            if (cur_word [strlen (cur_word) - 1] != PATH_SEP)
 	            	strcat (cur_word, PATH_SEP_STR);
 	            strcat (cur_word, text);
-	            free (p);
+	            g_free (p);
 	            cur_path = strchr (cur_path, 0) + 1;
 	            init_state = state;
 	        }
 	        found = filename_completion_function (cur_word, state - init_state);
 	        if (!found){
-	            free (cur_word);
+	            g_free (cur_word);
 	            cur_word = NULL;
 	        }
 	    }
@@ -565,13 +561,13 @@ command_completion_function (char *text, int state)
     if (!found){
         look_for_executables = 0;
         if (path)
-            free (path);
+            g_free (path);
         return NULL;
     }
     if ((p = strrchr (found, PATH_SEP)) != NULL){
         p++;
-        p = strdup (p);
-        free (found);
+        p = g_strdup (p);
+        g_free (found);
         return p;
     }
     return found;
@@ -598,7 +594,7 @@ completion_matches (char *text, CompletionFunction entry_function)
     int match_list_size;
 
     /* The list of matches. */
-    char **match_list = (char **) xmalloc (((match_list_size = 30) + 1) * sizeof (char *), "completion match list");
+    char **match_list = g_new (char *, (match_list_size = 30) + 1);
 
     /* Number of matches actually found. */
     int matches = 0;
@@ -610,7 +606,7 @@ completion_matches (char *text, CompletionFunction entry_function)
 
     while ((string = (*entry_function) (text, matches)) != NULL){
         if (matches + 1 == match_list_size)
-	    match_list = (char **) realloc (match_list, ((match_list_size += 30) + 1) * sizeof (char *));
+	    match_list = (char **) g_realloc (match_list, ((match_list_size += 30) + 1) * sizeof (char *));
         match_list[++matches] = string;
         match_list[matches + 1] = NULL;
     }
@@ -644,7 +640,7 @@ completion_matches (char *text, CompletionFunction entry_function)
 		    if (c1 != c2) break;
 		
 		if (!c1 && !match_list [j][si]){ /* Two equal strings */
-		    free (match_list [j]);
+		    g_free (match_list [j]);
 		    j++;
 		    if (j > matches)
 		        break;
@@ -656,12 +652,12 @@ completion_matches (char *text, CompletionFunction entry_function)
 	    }
 	    matches = i;
             match_list [matches + 1] = NULL;
-	    match_list[0] = xmalloc (low + 1, "Completion matching list");
+	    match_list[0] = g_malloc (low + 1);
 	    strncpy (match_list[0], match_list[1], low);
 	    match_list[0][low] = 0;
 	}
     } else {				/* There were no matches. */
-        free (match_list);
+        g_free (match_list);
         match_list = NULL;
     }
     return match_list;
@@ -695,7 +691,7 @@ try_complete (char *text, int *start, int *end, int flags)
     ignore_filenames = 0;
     c = text [*end];
     text [*end] = 0;
-    word = strdup (text + *start);
+    word = g_strdup (text + *start);
     text [*end] = c;
 
     /* Determine if this could be a command word. It is if it appears at
@@ -804,7 +800,7 @@ try_complete (char *text, int *start, int *end, int flags)
 		        ignore_filenames = 1;
     	    		matches = completion_matches (r, filename_completion_function);
     	    		ignore_filenames = 0;
-    	    		free (r);
+    	    		g_free (r);
 		    }
 		    *s = c;
 		    cdpath = s + 1;
@@ -814,7 +810,7 @@ try_complete (char *text, int *start, int *end, int flags)
     }
     	
     if (word)
-    	free (word);
+    	g_free (word);
 
     return matches;
 }
@@ -826,8 +822,8 @@ void free_completions (WInput *in)
     if (!in->completions)
     	return;
     for (p=in->completions; *p; p++)
-    	free (*p);
-    free (in->completions);
+    	g_free (*p);
+    g_free (in->completions);
     in->completions = NULL;
 }
 
@@ -840,7 +836,7 @@ static int insert_text (WInput *in, char *text, int len)
     len = min (len, strlen (text)) + start - end;
     if (strlen (in->buffer) + len >= in->current_max_len){
     /* Expand the buffer */
-    	char *narea = realloc(in->buffer, in->current_max_len + len + in->field_len);
+    	char *narea = g_realloc (in->buffer, in->current_max_len + len + in->field_len);
 	if (narea){
 	    in->buffer = narea;
 	    in->current_max_len += len + in->field_len;

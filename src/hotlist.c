@@ -32,7 +32,6 @@
 #endif
 #include <string.h>
 #include <stdio.h>
-#include <stdlib.h>		/* For malloc() */
 #include <ctype.h>
 #include <sys/types.h>
 #include <sys/param.h>
@@ -49,8 +48,7 @@
 #    include <io.h>
 #endif
 #include "tty.h"
-#include "mad.h"
-#include "util.h"		/* Needed for the externs */
+#include "global.h"
 #include "win.h"
 #include "color.h"
 #include "dlg.h"
@@ -66,7 +64,6 @@
 #include "panel.h"		/* Needed for the externs */
 #include "file.h"
 #include "main.h"
-#include "global.h"
 #include "hotlist.h"
 #include "key.h"
 #include "command.h"
@@ -163,7 +160,7 @@ static struct hotlist *new_hotlist (void)
 {
     struct hotlist *hl;
 
-    hl = xmalloc (sizeof (struct hotlist), "new-hotlist");
+    hl = g_new (struct hotlist, 1);
     hl->type     = 0;
     hl->directory =
 	hl->label = 0;
@@ -204,12 +201,12 @@ static INLINE void update_path_name ()
 		text = _("Subgroup - press ENTER to see list");
 	    
 #ifndef HAVE_X
-	    p = copy_strings (" ", current_group->label, " ", (char *)0);
+	    p = g_strconcat (" ", current_group->label, " ", NULL);
 	    if (!hotlist_state.moving)
 		label_set_text (pname_group, name_trunc (p, dlg->cols - (UX*2+4)));
 	    else
 		label_set_text (movelist_group, name_trunc (p, dlg->cols - (UX*2+4)));
-	    free (p);
+	    g_free (p);
 #endif
 	} else {
 	    text = list->current->text;
@@ -227,8 +224,8 @@ do { \
     int               i; \
 \
     if ((i = strlen (current->label) + 3) > buflen) { \
-      free (buf); \
-      buf = xmalloc (buflen = 1024 * (i/1024 + 1), "fill_listbox"); \
+      g_free (buf); \
+      buf = g_malloc (buflen = 1024 * (i/1024 + 1)); \
     } \
     buf[0] = '\0'; \
 } while (0)
@@ -240,7 +237,7 @@ static void fill_listbox (void)
     static int   buflen;
 
     if (!buf)
-	buf = xmalloc (buflen = 1024, "fill_listbox");
+	buf = g_malloc (buflen = 1024);
     buf[0] = '\0';
 
     while (current){
@@ -456,9 +453,9 @@ l1:
 		    if (l_hotlist->current->data) {
 			struct hotlist *hlp = (struct hotlist*) l_hotlist->current->data;
 			if (hlp->type == HL_TYPE_ENTRY) {
-			    char *tmp = copy_strings( "cd ", hlp->directory, NULL);
+			    char *tmp = g_strconcat ( "cd ", hlp->directory, NULL);
 			    stuff (input_w (cmdline), tmp, 0);
-			    free (tmp);
+			    g_free (tmp);
 			    dlg_stop (h);
 			    h->ret_value = B_CANCEL;
 			    return 1;
@@ -663,7 +660,7 @@ static void init_hotlist (int list_type)
 static void init_movelist (int list_type, struct hotlist *item)
 {
     int i;
-    char *hdr = copy_strings (_("Moving "), item->label, 0);
+    char *hdr = g_strconcat (_("Moving "), item->label, NULL);
 	int movelist_cols = init_i18n_stuff (list_type, COLS - 6);
 
     do_refresh ();
@@ -673,7 +670,7 @@ static void init_movelist (int list_type, struct hotlist *item)
 			      "movelist",
 			      DLG_CENTER|DLG_GRID);
     x_set_dialog_title (movelist_dlg, hdr);
-    free (hdr);
+    g_free (hdr);
 
 #define XTRACT(i) BY-4+hotlist_but[i].y, BX+hotlist_but[i].x, hotlist_but[i].ret_cmd, hotlist_but[i].flags, hotlist_but[i].text, hotlist_button_callback, 0, hotlist_but[i].tkname
 
@@ -714,7 +711,7 @@ static void hotlist_done (void)
 static char *
 find_group_section (struct hotlist *grp)
 {
-    return copy_strings (grp->directory, ".Group", (char *)0);
+    return  g_strconcat (grp->directory, ".Group", NULL);
 
 }
 
@@ -768,10 +765,10 @@ add2hotlist (char *label, char *directory, enum HotListType type, int pos)
 
     if (hotlist_state.running && type != HL_TYPE_COMMENT) {
 	if (type == HL_TYPE_GROUP) {
-	    char  *lbl = copy_strings ("->", new->label, (char *)0);
+	    char  *lbl = g_strconcat ("->", new->label, NULL);
 
 	    listbox_add_item (l_hotlist, pos, 0, lbl, new);
-	    free (lbl);
+	    g_free (lbl);
 	} else
 	    listbox_add_item (l_hotlist, pos, 0, new->label, new);
 	listbox_select_entry (l_hotlist, l_hotlist->current);
@@ -891,9 +888,9 @@ static void add_new_entry_cmd (void)
 	return;
 
     if (ret == B_ENTER || ret == B_APPEND)
-	add2hotlist (strdup (title), strdup (url), HL_TYPE_ENTRY, 2);
+	add2hotlist (g_strdup (title),g_strdup (url), HL_TYPE_ENTRY, 2);
     else
-	add2hotlist (strdup (title), strdup (url), HL_TYPE_ENTRY, 1);
+	add2hotlist (g_strdup (title),g_strdup (url), HL_TYPE_ENTRY, 1);
 
     hotlist_state.modified = 1;
 }
@@ -979,17 +976,16 @@ void add_new_group_cmd (void)
 void add2hotlist_cmd (void)
 {
     char *prompt, *label;
-	char* cp = _("Label for \"%s\":");
-	int l = strlen(cp);
+    char *cp = _("Label for \"%s\":");
+    int l = strlen (cp);
 
-    prompt = xmalloc (strlen (cpanel->cwd) + l, "add2hotlist_cmd");
-    sprintf (prompt, cp, name_trunc (cpanel->cwd, COLS-2*UX-(l+8)));
+    prompt = g_strdup_printf (cp, name_trunc (cpanel->cwd, COLS-2*UX-(l+8)));
     label = input_dialog (_(" Add to hotlist "), prompt, cpanel->cwd);
-    free (prompt);
+    g_free (prompt);
     if (!label || !*label)
 	return;
 
-    add2hotlist (label, strdup (cpanel->cwd), HL_TYPE_ENTRY, 0);
+    add2hotlist (label,g_strdup (cpanel->cwd), HL_TYPE_ENTRY, 0);
     hotlist_state.modified = 1;
 }
 
@@ -1004,10 +1000,10 @@ static void remove_group (struct hotlist *grp)
 	    remove_group (current);
 
 	if (current->label)
-	    free (current->label);
+	    g_free (current->label);
 	if (current->directory)
-	    free (current->directory);
-	free (current);
+	    g_free (current->directory);
+	 g_free (current);
 
 	current = next;
     }
@@ -1021,14 +1017,14 @@ static void remove_from_hotlist (struct hotlist *entry)
 	    char *header;
 	    int   result;
 
-	    header = copy_strings (_(" Remove: "),
+	    header = g_strconcat (_(" Remove: "),
 				   name_trunc (entry->label, 30),
 				   " ",
-				   0);
+				   NULL);
 	    result = query_dialog (header, _("\n Group not empty.\n Remove it?"),
 				   D_ERROR, 2,
 				   _("&No"), _("&Yes"));
-	    free (header);
+	    g_free (header);
 
 	    if (!result)
 		return;
@@ -1040,10 +1036,10 @@ static void remove_from_hotlist (struct hotlist *entry)
     unlink_entry (entry);
 
     if (entry->label)
-          free (entry->label);
+          g_free (entry->label);
     if (entry->directory)
-        free (entry->directory);
-    free (entry);
+        g_free (entry->directory);
+    g_free (entry);
     /* now remove list entry from screen */
     listbox_remove_current (l_hotlist, 1);
     hotlist_state.modified = 1;
@@ -1073,9 +1069,9 @@ char *hotlist_cmd (int vfs_or_hotlist)
     case B_ENTER:
 	if (l_hotlist->current->data) {
 	    struct hotlist *hlp = (struct hotlist*) l_hotlist->current->data;
-	    target = strdup (hlp->directory);
+	    target = g_strdup (hlp->directory);
 	} else
-	    target = strdup (l_hotlist->current->text);
+	    target = g_strdup (l_hotlist->current->text);
 	break;
     }
 
@@ -1099,15 +1095,15 @@ load_group (struct hotlist *grp)
 
     while (profile_keys){
 	profile_keys = profile_iterator_next (profile_keys, &key, &value);
-	add2hotlist (strdup (value), strdup (key), HL_TYPE_GROUP, 0);
+	add2hotlist (g_strdup (value), g_strdup (key), HL_TYPE_GROUP, 0);
     }
-    free (group_section);
+    g_free (group_section);
 
     profile_keys = profile_init_iterator (grp->directory, profile_name);
 
     while (profile_keys){
 	profile_keys = profile_iterator_next (profile_keys, &key, &value);
-	add2hotlist (strdup (value), strdup (key), HL_TYPE_ENTRY, 0);
+	add2hotlist (g_strdup (value),g_strdup (key), HL_TYPE_ENTRY, 0);
     }
 
     for (current = grp->head; current; current = current->next)
@@ -1149,8 +1145,8 @@ static int hot_next_token ()
 #define CHECK_BUF() \
 do { \
     if (tkn_length == tkn_buf_length) \
-	tkn_buf = tkn_buf ? (realloc (tkn_buf, tkn_buf_length += 1024)) \
-			  : (malloc (tkn_buf_length = 1024)); \
+	tkn_buf = tkn_buf ? ( g_realloc (tkn_buf, tkn_buf_length += 1024)) \
+			  : ( g_malloc (tkn_buf_length = 1024)); \
 } while (0)
 
     tkn_length = 0;
@@ -1249,22 +1245,22 @@ hot_load_group (struct hotlist * grp)
 	switch (tkn) {
 	case TKN_GROUP:
 	    CHECK_TOKEN(TKN_STRING);
-	    new_grp = add2hotlist (strdup (tkn_buf), 0, HL_TYPE_GROUP, 0);
+	    new_grp = add2hotlist (g_strdup (tkn_buf), 0, HL_TYPE_GROUP, 0);
 	    SKIP_TO_EOL;
 	    hot_load_group (new_grp);
 	    current_group = grp;
 	    break;
 	case TKN_ENTRY:
 	    CHECK_TOKEN(TKN_STRING);
-	    label = strdup (tkn_buf);
+	    label = g_strdup (tkn_buf);
 	    CHECK_TOKEN(TKN_URL);
 	    CHECK_TOKEN(TKN_STRING);
-	    url = strdup (tkn_buf);
+	    url = g_strdup (tkn_buf);
 	    add2hotlist (label, url, HL_TYPE_ENTRY, 0);
 	    SKIP_TO_EOL;
 	    break;
 	case TKN_COMMENT:
-	    label = strdup (tkn_buf);
+	    label = g_strdup (tkn_buf);
 	    add2hotlist (label, 0, HL_TYPE_COMMENT, 0);
 	    break;
 	case TKN_EOF:
@@ -1297,22 +1293,22 @@ hot_load_file (struct hotlist * grp)
 	switch (tkn) {
 	case TKN_GROUP:
 	    CHECK_TOKEN(TKN_STRING);
-	    new_grp = add2hotlist (strdup (tkn_buf), 0, HL_TYPE_GROUP, 0);
+	    new_grp = add2hotlist (g_strdup (tkn_buf), 0, HL_TYPE_GROUP, 0);
 	    SKIP_TO_EOL;
 	    hot_load_group (new_grp);
 	    current_group = grp;
 	    break;
 	case TKN_ENTRY:
 	    CHECK_TOKEN(TKN_STRING);
-	    label = strdup (tkn_buf);
+	    label = g_strdup (tkn_buf);
 	    CHECK_TOKEN(TKN_URL);
 	    CHECK_TOKEN(TKN_STRING);
-	    url = strdup (tkn_buf);
+	    url = g_strdup (tkn_buf);
 	    add2hotlist (label, url, HL_TYPE_ENTRY, 0);
 	    SKIP_TO_EOL;
 	    break;
 	case TKN_COMMENT:
-	    label = strdup (tkn_buf);
+	    label = g_strdup (tkn_buf);
 	    add2hotlist (label, 0, HL_TYPE_COMMENT, 0);
 	    break;
 	case TKN_EOL:
@@ -1333,7 +1329,7 @@ clean_up_hotlist_groups (char *section)
     void	*profile_keys;
     char	*key, *value;
 
-    grp_section = copy_strings (section, ".Group", (char *)0);
+    grp_section = g_strconcat (section, ".Group", NULL);
     if (profile_has_section (section, profile_name))
 	profile_clean_section (section, profile_name);
     if (profile_has_section (grp_section, profile_name)) {
@@ -1345,7 +1341,7 @@ clean_up_hotlist_groups (char *section)
 	}
 	profile_clean_section (grp_section, profile_name);
     }
-    free (grp_section);
+    g_free (grp_section);
 }
 
 
@@ -1370,30 +1366,30 @@ void load_hotlist (void)
     
     hotlist	       = new_hotlist ();
     hotlist->type      = HL_TYPE_GROUP;
-    hotlist->label     = strdup (_(" Top level group "));
+    hotlist->label     = g_strdup (_(" Top level group "));
     hotlist->up        = hotlist;
     /*
      * compatibility :-(
      */
-    hotlist->directory = strdup ("Hotlist");
+    hotlist->directory = g_strdup ("Hotlist");
 
-    grp_section = copy_strings ("Hotlist", ".Group", (char *)0);
+    grp_section = g_strconcat ("Hotlist", ".Group", NULL);
     has_old_list = profile_has_section ("Hotlist", profile_name) ||
 		   profile_has_section (grp_section, profile_name);
-    free (grp_section);
+    g_free (grp_section);
 
     if ((hotlist_file = fopen (hotlist_file_name, "r")) == 0) {
 	int	result;
 	char    *msg;
 
-	msg = copy_strings (_("Hotlist is now kept in file ~/"),
+	msg = g_strconcat (_("Hotlist is now kept in file ~/"),
 			    HOTLIST_FILENAME, "\n",
 			    _("MC will load hotlist from ~/"),
 			    PROFILE_NAME, "\n",
 			    _("and then delete [Hotlist] section there"),
 			    NULL);
 	message (0, _(" Hotlist Load "), msg);
-	free (msg);
+	g_free (msg);
 	
 	load_group (hotlist);
 	hotlist_state.loaded   = 1;
@@ -1408,11 +1404,11 @@ void load_hotlist (void)
 	} else {
 	    char *msg;
 
-	    msg = copy_strings (_("MC was unable to write ~/"), HOTLIST_FILENAME,
+	    msg = g_strconcat (_("MC was unable to write ~/"), HOTLIST_FILENAME,
 				_(" file, your old hotlist entries were not deleted"), NULL);
 
 	    message (D_ERROR, _(" Hotlist Load "), msg);
-	    free (msg);
+	    g_free (msg);
 	}
     } else {
 	hot_load_file (hotlist);
@@ -1422,7 +1418,7 @@ void load_hotlist (void)
 	    int		result;
 	    char        *msg;
 
-	    msg = copy_strings (
+	    msg = g_strconcat (
 		    _("You have ~/"), HOTLIST_FILENAME, _(" file and [Hotlist] section in ~/"), PROFILE_NAME, "\n",
 		    _("Your ~/"), HOTLIST_FILENAME, _(" most probably was created\n"),
 		    _("by an earlier development version of MC\nand is more actual than ~/"),
@@ -1447,7 +1443,7 @@ void load_hotlist (void)
 
 		old            = new_hotlist ();
 		old->type      = HL_TYPE_GROUP;
-		old->label     = copy_strings (_(" Entries from ~/"), PROFILE_NAME, NULL);
+		old->label     = g_strconcat (_(" Entries from ~/"), PROFILE_NAME, NULL);
 		old->up	       = hotlist;
 		old->head      = hotlist->head;
 		old->next      = grp;
@@ -1456,11 +1452,11 @@ void load_hotlist (void)
 		if (!save_hotlist ()){
 		    char *str;
 
-		    str = copy_strings (_("MC was unable to write ~/"), HOTLIST_FILENAME,
+		    str = g_strconcat (_("MC was unable to write ~/"), HOTLIST_FILENAME,
 					_(" file your old hotlist entries were not deleted"), NULL);
 
 		    message (D_ERROR, _(" Hotlist Load "), str);
-		    free (str);
+		    g_free (str);
 		} else
 		    remove_old_list = 1;
 		hotlist_state.modified = 0;
@@ -1493,7 +1489,7 @@ save_group (struct hotlist *grp)
 				   current->label,
 				   profile_name);
     }
-    free (group_section);
+    g_free (group_section);
 
     for (current = grp->head;
 	 current && current->type == HL_TYPE_GROUP;
@@ -1576,7 +1572,7 @@ int save_hotlist (void)
     struct      stat stat_buf;
     
     if (!hotlist_state.readonly && hotlist_state.modified && hotlist_file_name) {
-	char	*fbak = copy_strings (hotlist_file_name, ".bak", 0);
+	char	*fbak = g_strconcat (hotlist_file_name, ".bak", NULL);
 
 	rename (hotlist_file_name, fbak);
 	if ((hotlist_file = fopen (hotlist_file_name, "w")) != 0) {
@@ -1593,7 +1589,7 @@ int save_hotlist (void)
 	    hotlist_state.modified = 0;
 	} else
 	    rename (fbak, hotlist_file_name);
-	free (fbak);
+	g_free (fbak);
     }
 
     return saved;
@@ -1607,20 +1603,20 @@ void done_hotlist (void)
 
     if (hotlist){
 	if (hotlist->label)
-	    free (hotlist->label);
+	   g_free (hotlist->label);
         if (hotlist->directory)
-            free (hotlist->directory);
-        free (hotlist);
+            g_free (hotlist->directory);
+        g_free (hotlist);
     }
     
     if (hotlist_file_name)
-        free (hotlist_file_name);
+        g_free (hotlist_file_name);
     hotlist_file_name = 0;
     hotlist = current_group = 0;
     l_hotlist = 0;
     current_group = 0;
     if (tkn_buf)
-        free (tkn_buf);
+        g_free (tkn_buf);
 }
 
 

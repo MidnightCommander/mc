@@ -25,7 +25,6 @@
 #endif
 #include <string.h>
 #include <stdio.h>
-#include <stdlib.h>		/* For malloc() */
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/param.h>
@@ -38,8 +37,7 @@
 #   include <pwd.h>
 #endif
 #include "tty.h"
-#include "mad.h"
-#include "util.h"		/* Needed for the externs */
+#include "global.h"
 #include "win.h"
 #include "color.h"
 #include "dlg.h"
@@ -47,7 +45,6 @@
 #include "dialog.h"		/* For do_refresh() */
 #include "setup.h"		/* For profile_bname */
 #include "profile.h"		/* Load/save directories panelize */
-#include "fs.h"
 
 /* Needed for the extern declarations of integer parameters */
 #define DIR_H_INCLUDE_HANDLE_DIRENT
@@ -55,7 +52,6 @@
 #include "panel.h"		/* Needed for the externs */
 #include "file.h"
 #include "main.h"
-#include "global.h"
 #include "../vfs/vfs.h"
 #include "panelize.h"
 
@@ -241,13 +237,13 @@ static void add2panelize (char *label, char *command)
     }
 
     if (old == NULL){
-	panelize = malloc (sizeof (struct panelize));
+	panelize = g_new (struct panelize, 1);
 	panelize->label = label;
 	panelize->command = command;
 	panelize->next = current;
     } else {
 	struct panelize *new;
-	new = malloc (sizeof (struct panelize));
+	new = g_new (struct panelize, 1);
 	new->label = label;
 	new->command = command;
 	old->next = new;
@@ -267,11 +263,11 @@ add2panelize_cmd (void)
 	if (!label)
 	    return;
 	if (!*label) {
-	    free (label);
+	    g_free (label);
 	    return;
 	}
 	
-	add2panelize (label, strdup(pname->buffer));
+	add2panelize (label, g_strdup (pname->buffer));
     }
 }
 
@@ -289,9 +285,9 @@ static void remove_from_panelize (struct panelize *entry)
 	    }
 	}
 
-	free (entry->label);
-	free (entry->command);
-	free (entry);
+	g_free (entry->label);
+	g_free (entry->command);
+	g_free (entry);
     }
 }
 
@@ -328,10 +324,10 @@ external_panelize (void)
     case B_ENTER:
 	target = pname->buffer;
 	if (target != NULL && *target) {
-	    char *cmd = strdup (target);
+	    char *cmd = g_strdup (target);
 	    destroy_dlg (panelize_dlg);
 	    do_external_panelize (cmd);
-	    free (cmd);
+	    g_free (cmd);
 	    repaint_screen ();
 	    return;
 	}
@@ -348,18 +344,18 @@ void load_panelize (void)
     
     profile_keys = profile_init_iterator (panelize_section, profile_name);
     
-    add2panelize (strdup (_("Other command")), strdup (""));
+    add2panelize (g_strdup (_("Other command")), g_strdup (""));
 
     if (!profile_keys){
-	add2panelize (strdup (_("Find rejects after patching")), strdup ("find . -name \\*.rej -print"));
-	add2panelize (strdup (_("Find *.orig after patching")), strdup ("find . -name \\*.orig -print"));
-	add2panelize (strdup (_("Find SUID and SGID programs")), strdup ("find . \\( \\( -perm -04000 -a -perm +011 \\) -o \\( -perm -02000 -a -perm +01 \\) \\) -print"));
+	add2panelize (g_strdup (_("Find rejects after patching")), g_strdup ("find . -name \\*.rej -print"));
+	add2panelize (g_strdup (_("Find *.orig after patching")), g_strdup ("find . -name \\*.orig -print"));
+	add2panelize (g_strdup (_("Find SUID and SGID programs")), g_strdup ("find . \\( \\( -perm -04000 -a -perm +011 \\) -o \\( -perm -02000 -a -perm +01 \\) \\) -print"));
 	return;
     }
     
     while (profile_keys){
 	profile_keys = profile_iterator_next (profile_keys, &key, &value);
-	add2panelize (strdup (key), strdup (value));
+	add2panelize (g_strdup (key), g_strdup (value));
     }
 }
 
@@ -385,9 +381,9 @@ void done_panelize (void)
 
     for (; current; current = next){
 	next = current->next;
-	free (current->label);
-	free (current->command);
-	free (current);
+	g_free (current->label);
+	g_free (current->command);
+	g_free (current);
     }
 }
 
@@ -437,7 +433,7 @@ void do_external_panelize (char *command)
 	if (status == -1)
 	    break;
 	list->list [next_free].fnamelen = strlen (name);
-	list->list [next_free].fname = strdup (name);
+	list->list [next_free].fname = g_strdup (name);
 	file_mark (cpanel, next_free, 0);
 	list->list [next_free].f.link_to_dir = link_to_dir;
 	list->list [next_free].f.stalled_link = stalled_link;

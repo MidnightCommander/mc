@@ -18,14 +18,11 @@
 #include <config.h>
 #include "tty.h"
 #include <stdio.h>
-#include <stdlib.h>	/* For free() */
 #include <stdarg.h>
 #include <sys/types.h>
 #include <string.h>
 #include "x.h"
-#include "mad.h"
 #include "global.h"
-#include "util.h"
 #include "dialog.h"
 #include "color.h"
 #include "win.h"
@@ -43,7 +40,7 @@ void push_refresh (void (*new_refresh)(void *), void *parameter, int flags)
 {
     Refresh *new;
 
-    new = xmalloc (sizeof (Refresh), "push_refresh");
+    new = g_new (Refresh, 1);
     new->next = (struct Refresh *) refresh_list;
     new->refresh_fn = new_refresh;
     new->parameter = parameter;
@@ -60,7 +57,7 @@ void pop_refresh (void)
     else {
 	old = refresh_list;
 	refresh_list = refresh_list->next;
-	free (old);
+	g_free (old);
     }
 }
 

@@ -18,9 +18,8 @@
 #include <config.h>
 #include "tty.h"
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-#include "mad.h"
+#include "global.h"
 #include "setup.h"		/* For the externs */
 #include "color.h"
 #include "x.h"
@@ -200,7 +199,7 @@ void configure_colors_string (char *the_color_string)
     if (!the_color_string)
 	return;
 
-    p = color_string = strdup (the_color_string);
+    p = color_string = g_strdup (the_color_string);
     while (color_string && *color_string){
 	while (*color_string == ' ' || *color_string == '\t')
 	    color_string++;
@@ -226,7 +225,7 @@ void configure_colors_string (char *the_color_string)
 			color_string++;
 	}
     }
-    free (p);
+   g_free (p);
 }
 
 static void configure_colors (void)

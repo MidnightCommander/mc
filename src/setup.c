@@ -21,12 +21,9 @@
 #include <sys/param.h>
 #include <string.h>
 #include "tty.h"
-#include <stdlib.h>
 #include <stdio.h>
-#include "mad.h"
-#include "dir.h"
 #include "global.h"
-#include "util.h"		/* Functions and externs */
+#include "dir.h"
 #include "panel.h"
 #include "main.h"
 #include "tree.h"
@@ -256,12 +253,12 @@ static struct {
 void
 panel_save_setup (WPanel *panel, char *section)
 {
-    char buffer [40];
+    char buffer [BUF_TINY];
     int  i;
     
-    sprintf (buffer, "%d", panel->reverse);
+    g_snprintf (buffer, sizeof (buffer), "%d", panel->reverse);
     save_string (section, "reverse", buffer, profile_name);
-    sprintf (buffer, "%d", panel->case_sensitive);
+    g_snprintf (buffer, sizeof (buffer), "%d", panel->case_sensitive);
     save_string (section, "case_sensitive", buffer, profile_name);
     for (i = 0; sort_names [i].key; i++)
 	if (sort_names [i].sort_type == (sortfn *) panel->sort_type){
@@ -280,12 +277,12 @@ panel_save_setup (WPanel *panel, char *section)
 			       panel->user_format, profile_name);
 			       
     for (i = 0; i < LIST_TYPES; i++){
-	sprintf (buffer, "user_status%d", i);
+	g_snprintf (buffer, sizeof (buffer), "user_status%d", i);
 	save_string (section, buffer, 
 	    panel->user_status_format [i], profile_name);
     }
 			       
-    sprintf (buffer, "%d", panel->user_mini_status);
+    g_snprintf (buffer, sizeof (buffer), "%d", panel->user_mini_status);
     save_string (section, "user_mini_status", buffer,
 			       profile_name);
 }
@@ -295,17 +292,17 @@ save_layout (void)
 {
     char *profile;
     int  i;
-    char buffer [6];
+    char buffer [BUF_TINY];
 
     profile = concat_dir_and_file (home_dir, PROFILE_NAME);
 
     /* Save integer options */
     for (i = 0; layout [i].opt_name; i++){
-	sprintf (buffer, "%d", *layout [i].opt_addr);
+	g_snprintf (buffer, sizeof (buffer), "%d", *layout [i].opt_addr);
 	save_string ("Layout", layout [i].opt_name, buffer, profile);
     }
 
-    free (profile);
+    g_free (profile);
 }
 
 void
@@ -320,7 +317,7 @@ save_configure (void)
     for (i = 0; options [i].opt_name; i++)
 	set_int (profile, options [i].opt_name, *options [i].opt_addr);
 
-    free (profile);
+    g_free (profile);
 }
 
 static void
@@ -387,7 +384,7 @@ save_setup (void)
 				   ftpfs_proxy_host, profile);
 #endif
 #endif
-    free (profile);
+    g_free (profile);
     saving_setup = 0;
 }
 
@@ -395,7 +392,7 @@ void
 panel_load_setup (WPanel *panel, char *section)
 {
     int i;
-    char buffer [40];
+    char buffer [BUF_TINY];
     
     panel->reverse = load_int (section, "reverse", 0);
     panel->case_sensitive = load_int (section, "case_sensitive", OS_SORT_CASE_SENSITIVE_DEFAULT);
@@ -404,7 +401,7 @@ panel_load_setup (WPanel *panel, char *section)
     load_string (section, "sort_order", "name", buffer, sizeof (buffer));
     panel->sort_type = (sortfn *) sort_name;
     for (i = 0; sort_names [i].key; i++)
-	if (strcasecmp (sort_names [i].key, buffer) == 0){
+	if ( g_strcasecmp (sort_names [i].key, buffer) == 0){
 	    panel->sort_type = sort_names [i].sort_type;
 	    break;
 	}
@@ -413,7 +410,7 @@ panel_load_setup (WPanel *panel, char *section)
     load_string (section, PORT_LIST_MODE_NAME, PORT_LIST_MODE_DEFAULT, buffer, sizeof (buffer));
     panel->list_type = list_full;
     for (i = 0; list_types [i].key; i++)
-	if (strcasecmp (list_types [i].key, buffer) == 0){
+	if ( g_strcasecmp (list_types [i].key, buffer) == 0){
 	    panel->list_type = list_types [i].list_type;
 	    break;
 	}
@@ -423,18 +420,18 @@ panel_load_setup (WPanel *panel, char *section)
 #endif
     /* User formats */
     if (panel->user_format){
-	free (panel->user_format);
+	g_free (panel->user_format);
 	panel->user_format = 0;
     }
-    panel->user_format = strdup (get_profile_string (section, "user_format",
+    panel->user_format = g_strdup (get_profile_string (section, "user_format",
 						     DEFAULT_USER_FORMAT,
 						     profile_name));
     for (i = 0; i < LIST_TYPES; i++){
         if (panel->user_status_format [i])
-	    free (panel->user_status_format [i]);
-	sprintf (buffer, "user_status%d", i);
+	    g_free (panel->user_status_format [i]);
+	g_snprintf (buffer, sizeof (buffer), "user_status%d", i);
 	panel->user_status_format [i] =
-	    strdup (get_profile_string (section, buffer,
+	    g_strdup (get_profile_string (section, buffer,
 			DEFAULT_USER_FORMAT, profile_name));
     }
     
@@ -466,7 +463,7 @@ load_mode (char *section)
     load_string (section, "display", "listing", buffer, sizeof (buffer));
 
     for (i = 0; panel_types [i].opt_name; i++)
-	if (strcasecmp (panel_types [i].opt_name, buffer) == 0){
+	if ( g_strcasecmp (panel_types [i].opt_name, buffer) == 0){
 	    mode = panel_types [i].opt_type;
 	    break;
 	}
@@ -477,13 +474,13 @@ load_mode (char *section)
 static char *
 do_load_string (char *s, char *ss, char *def)
 {
-    char *buffer = xmalloc (128, "dls");
+    char *buffer = g_malloc (128);
     char *p;
     
     load_string (s, ss, def, buffer, 128);
 
-    p = strdup (buffer);
-    free (buffer);
+    p = g_strdup (buffer);
+    g_free (buffer);
     return p;
 }
 
@@ -502,12 +499,12 @@ load_setup (void)
     if (exist_file (buffer)){
 	profile = buffer;
     } else if (exist_file (inifile)){
-	profile = strdup (inifile);
-	free (buffer);
+	profile = g_strdup (inifile);
+	g_free (buffer);
     } else {
 	profile = buffer;
     }
-    free (inifile);
+    g_free (inifile);
     
     profile_name = profile;
 
@@ -528,13 +525,13 @@ load_setup (void)
 	startup_left_mode = view_listing;
     
     if (!other_dir){
-	buffer = (char*) malloc (MC_MAXPATHLEN);
+	buffer = (char*) g_malloc (MC_MAXPATHLEN);
 	load_string ("Dirs", "other_dir", ".", buffer,
 			     MC_MAXPATHLEN);
 	if (vfs_file_is_local (buffer))
 	    other_dir = buffer;
 	else
-	    free (buffer);
+	    g_free (buffer);
     }
 #ifdef USE_NETCODE
     ftpfs_proxy_host = do_load_string ("Misc", "ftp_proxy_host", "gate");
@@ -545,7 +542,7 @@ load_setup (void)
     load_string ("Misc", "find_ignore_dirs", "", setup_color_string,
 		 sizeof (setup_color_string));
     if (setup_color_string [0])
-	find_ignore_dirs = copy_strings (":", setup_color_string, ":", 0);
+	find_ignore_dirs = g_strconcat (":", setup_color_string, ":", NULL);
     
     /* The default color and the terminal dependent color */
     load_string ("Colors", "base_color", "", setup_color_string,
@@ -576,7 +573,7 @@ load_anon_passwd ()
 
     load_string ("Misc", "ftpfs_password", "", buffer, sizeof (buffer));
     if (buffer [0])
-	return strdup (buffer);
+	return g_strdup (buffer);
     else
 	return 0;
 }
@@ -585,7 +582,7 @@ load_anon_passwd ()
 
 void done_setup (void)
 {
-    free (profile_name);
+    g_free (profile_name);
     done_hotlist ();
     done_panelize ();
 /*    directory_history_free (); */
@@ -602,10 +599,10 @@ load_keys_from_section (char *terminal, char *profile_name)
     if (!terminal)
 	return;
 
-    section_name = copy_strings ("terminal:", terminal, 0);
+    section_name = g_strconcat ("terminal:", terminal, NULL);
     profile_keys = profile_init_iterator (section_name, profile_name);
     if (!profile_keys){
-	free (section_name);
+	g_free (section_name);
 	return;
     }
     
@@ -615,9 +612,9 @@ load_keys_from_section (char *terminal, char *profile_name)
 	valcopy = convert_controls (value);
 	if (key_code)
 	    define_sequence (key_code, valcopy, MCKEY_NOACTION);
-	free (valcopy);
+	g_free (valcopy);
     }
-    free (section_name);
+    g_free (section_name);
     return;
 }
 
@@ -632,5 +629,5 @@ void load_key_defs (void)
 
     /* We don't want a huge database loaded in core */
     free_profile_name (libfile);
-    free (libfile);
+    g_free (libfile);
 }
