@@ -178,7 +178,7 @@ int view_file_at_line (char *filename, int plain_view, int internal, int start_l
 	    view (0, filename, &move_dir, start_line);
 	    repaint_screen ();
 	}
-#endif
+#endif /* !HAVE_GNOME */
     } else {
 	char *localcopy;
 	
@@ -734,7 +734,7 @@ void reselect_vfs (void)
         message (1, MSG_ERROR, _("Could not change directory") );
     g_free (target);
 }
-#endif
+#endif /* USE_VFS */
 
 static int compare_files (char *name1, char *name2, long size)
 {
@@ -769,7 +769,7 @@ static int compare_files (char *name1, char *name2, long size)
 		while((n2 = read(file2,buf2,BUFSIZ)) == -1 && errno == EINTR);
 	    } while (n1 == n2 && n1 == BUFSIZ && !memcmp(buf1,buf2,BUFSIZ));
 	    result = (n1 != n2) || memcmp(buf1,buf2,n1);
-#endif
+#endif /* !HAVE_MMAP */
 	    close (file2);
 	}
 	close (file1);
@@ -933,14 +933,12 @@ view_other_cmd (void)
 				     " the panels cannot be toggled. "));
 	message_flag = FALSE;
     } else {
-#ifndef HAVE_X
 	if (use_mouse_p)
 	    shut_mouse ();
 	if (clear_before_exec)
 	    clr_scr ();
         if (alternate_plus_minus)
             numeric_keypad_mode ();
-#endif
 #ifndef HAVE_SLANG
 	/* With slang we don't want any of this, since there
 	 * is no mc_raw_mode supported
@@ -948,12 +946,10 @@ view_other_cmd (void)
 	reset_shell_mode ();
 	noecho ();
 #endif
-#ifndef HAVE_X
 	keypad(stdscr, FALSE);
 	endwin ();
 	if (!status_using_ncurses)
 	    do_exit_ca_mode ();
-#endif
 	mc_raw_mode ();
 	if (console_flag)
 	    restore_console ();
@@ -978,7 +974,6 @@ view_other_cmd (void)
 	if (console_flag)
 	    handle_console (CONSOLE_SAVE);
 
-#ifndef HAVE_X	
 	if (!status_using_ncurses)
 	    do_enter_ca_mode ();
 
@@ -988,7 +983,6 @@ view_other_cmd (void)
 	    init_mouse ();
         if (alternate_plus_minus)
             application_keypad_mode ();
-#endif	    
 
 #ifdef HAVE_SUBSHELL_SUPPORT
 	if (use_subshell){
@@ -1001,9 +995,7 @@ view_other_cmd (void)
 				       LINES-keybar_visible-1);
 	}
 #endif
-#ifndef HAVE_X
         touchwin (stdscr);
-#endif
 	
 	/* prevent screen flash when user did 'exit' or 'logout' within
 	   subshell */
@@ -1066,7 +1058,7 @@ do_link (int symbolic_link, char *fname)
         if ( ! ((d[0] == '/') && (d[1] == 0)))
             strcat(d, "/");
         symlink_dialog (s, d, &dest, &src);
-#endif
+#endif /* !OLD_SYMLINK_VERSION */
 	if (!dest || !*dest) {
 	    if (src)
 	        g_free (src);
@@ -1096,7 +1088,7 @@ void link_cmd (void)
 
 void symlink_cmd (void)
 {
-    char *filename;
+    char *filename = NULL;
     if (is_a_desktop_panel (cpanel)) {
         gint i;
 	for (i = 0; i < cpanel->count; i++) 
@@ -1107,7 +1099,10 @@ void symlink_cmd (void)
     } else {
 	    filename = selection (cpanel)->fname;
     }
-    do_link (1, filename);
+
+    if (filename) {
+	do_link (1, filename);
+    }
 }
 
 void edit_symlink_cmd (void)

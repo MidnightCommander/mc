@@ -650,11 +650,11 @@ static INLINE void dialog_handle_key (Dlg_head *h, int d_key)
 	do_refresh ();
 	break;
 
+#ifndef HAVE_X
     case XCTRL('z'):
 	suspend_cmd ();
 	/* Fall through */
 
-#ifndef HAVE_X
     case XCTRL('l'):
 #ifndef HAVE_SLANG
 	/* Use this if the refreshes fail */
@@ -662,10 +662,10 @@ static INLINE void dialog_handle_key (Dlg_head *h, int d_key)
 	do_refresh ();
 #else
 	touchwin (stdscr);
-#endif
+#endif /* HAVE_SLANG */
 	mc_refresh ();
 	doupdate ();
-#endif
+#endif /* !HAVE_X */
 	break;
 
     case '\n':

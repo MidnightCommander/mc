@@ -1690,7 +1690,6 @@ static void copy_other_tagged (void)
 	return;
     copy_tagged (opanel);
 }
-#endif /* !HAVE_GNOME */
 
 static void do_suspend_cmd (void)
 {
@@ -1713,7 +1712,7 @@ static void do_suspend_cmd (void)
 	/* Restore previous SIGTSTP action */
 	sigaction (SIGTSTP, &sigtstp_action, NULL);
     }
-#endif
+#endif /* SIGTSTP */
     
     if (console_flag && !use_subshell)
 	handle_console (CONSOLE_SAVE);
@@ -1730,7 +1729,6 @@ suspend_cmd (void)
     do_refresh ();
 }
 
-#ifndef HAVE_GNOME
 static void
 init_labels (Widget *paneletc)
 {
@@ -1739,7 +1737,7 @@ init_labels (Widget *paneletc)
     define_label (midnight_dlg, paneletc, 9, _("PullDn"), menu_cmd);
     define_label (midnight_dlg, paneletc, 10, _("Quit"), (voidfn) quit_cmd);
 }
-#endif /* HAVE_GNOME */
+#endif /* !HAVE_GNOME */
 
 static const key_map ctl_x_map [] = {
     { XCTRL('c'),   (callfn) quit_cmd },

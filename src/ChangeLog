@@ -1,3 +1,11 @@
+2001-05-25  Pavel Roskin  <proski@gnu.org>
+
+	* cmd.c: Clean up useless preprocessor directives.
+	(symlink_cmd): Warning fix.
+	* dlg.c (dialog_handle_key) [HAVE_X]: Disable suspend on Ctrl-z.
+	* main.c (do_suspend_cmd) [HAVE_GNOME]: Remove.
+	(suspend_cmd) [HAVE_GNOME]: Likewise.
+
 2001-05-24  Pavel Roskin  <proski@gnu.org>
 
 	* widget.c (update_input) [HAVE_SLANG]: Work around a bug in
