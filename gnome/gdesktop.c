@@ -581,6 +581,10 @@ editing_started (GnomeIconTextItem *iti, gpointer data)
 
 	dii = data;
 
+	/* Disable drags from this icon until editing is finished */
+
+	gtk_drag_source_unset (DESKTOP_ICON (dii->dicon)->canvas);
+
 	/* Unselect all icons but this one */
 	unselect_all (dii);
 
@@ -600,6 +604,17 @@ editing_started (GnomeIconTextItem *iti, gpointer data)
 	gdk_keyboard_grab (GTK_LAYOUT (DESKTOP_ICON (dii->dicon)->canvas)->bin_window, FALSE, GDK_CURRENT_TIME);
 }
 
+/* Sets up the specified icon as a drag source, but does not connect the signals */
+static void
+setup_icon_dnd_actions (struct desktop_icon_info *dii)
+{
+	gtk_drag_source_set (DESKTOP_ICON (dii->dicon)->canvas,
+			     GDK_BUTTON1_MASK | GDK_BUTTON2_MASK,
+			     dnd_icon_sources,
+			     dnd_icon_nsources,
+			     GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
+}
+
 /* Callback used when the user finishes editing the icon text item in a desktop icon.  It removes
  * the mouse and keyboard grabs.
  */
@@ -612,6 +627,10 @@ editing_stopped (GnomeIconTextItem *iti, gpointer data)
 
 	gdk_pointer_ungrab (GDK_CURRENT_TIME);
 	gdk_keyboard_ungrab (GDK_CURRENT_TIME);
+
+	/* Re-enable drags from this icon */
+
+	setup_icon_dnd_actions (dii);
 }
 
 /* Used to open a desktop icon when the user double-clicks on it */
@@ -655,6 +674,11 @@ icon_button_press (GtkWidget *widget, GdkEventButton *event, gpointer data)
 	int retval;
 
 	dii = data;
+
+	/* If the text is being edited, do not handle clicks by ourselves */
+
+	if (GNOME_ICON_TEXT_ITEM (DESKTOP_ICON (dii->dicon)->text)->editing)
+		return FALSE;
 
 	/* Save the mouse position for DnD */
 
@@ -865,11 +889,7 @@ drag_data_get (GtkWidget *widget, GdkDragContext *context, GtkSelectionData *sel
 static void
 setup_icon_dnd_source (struct desktop_icon_info *dii)
 {
-	gtk_drag_source_set (DESKTOP_ICON (dii->dicon)->canvas,
-			     GDK_BUTTON1_MASK | GDK_BUTTON2_MASK,
-			     dnd_icon_sources,
-			     dnd_icon_nsources,
-			     GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
+	setup_icon_dnd_actions (dii);
 
 	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "drag_begin",
 			    (GtkSignalFunc) drag_begin,
@@ -927,6 +947,8 @@ setup_icon_dnd_dest (struct desktop_icon_info *dii)
 	if (!fe)
 		return; /* eek */
 
+	/* See what actions are appropriate for this icon */
+
 	if (fe->f.link_to_dir)
 		actions = GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK;
 	else if (is_exe (fe->buf.st_mode) && if_link_is_exe (fe))
@@ -938,6 +960,8 @@ setup_icon_dnd_dest (struct desktop_icon_info *dii)
 
 	if (!actions)
 		return;
+
+	/* Connect the drop signals */
 
 	gtk_drag_dest_set (DESKTOP_ICON (dii->dicon)->canvas,
 			   GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_DROP,
@@ -1382,6 +1406,10 @@ setup_desktop_clicks (void)
 	click_proxy_invisible = gtk_invisible_new ();
 	gtk_widget_show (click_proxy_invisible);
 	gdk_window_set_user_data (click_proxy_gdk_window, click_proxy_invisible); /* make it send events to us */
+
+	/* The proxy window for clicks sends us events as SubstructureNotify things */
+
+	XSelectInput (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (click_proxy_gdk_window), SubstructureNotifyMask);
 
 	gtk_signal_connect (GTK_OBJECT (click_proxy_invisible), "event",
 			    (GtkSignalFunc) click_proxy_event,

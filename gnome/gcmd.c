@@ -20,6 +20,7 @@
 #include "gcmd.h"
 #include "dialog.h"
 #include "layout.h"
+#include "../vfs/vfs.h"
 
 void
 gnome_listing_cmd (GtkWidget *widget, WPanel *panel)
