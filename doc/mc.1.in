@@ -2446,7 +2446,8 @@ pull-down menu. Other keys are: Shift movement
 keys do text highlighting.
 .B Ctrl-Ins
 copies to the file
-.B cooledit.clip and
+.B cooledit.clip
+and
 .B Shift-Ins
 pastes from cooledit.clip.
 .B Shift-Del
