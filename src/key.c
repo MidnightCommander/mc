@@ -260,6 +260,12 @@ static key_define_t xterm_key_defines [] = {
     { KEY_M_SHIFT | KEY_END,   ESC_STR "O2F",   MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_DC,    ESC_STR "[3;2~", MCKEY_NOACTION },
 
+    /* keypad keys */
+    { KEY_IC,                  ESC_STR "Op",  MCKEY_NOACTION },
+    { KEY_DC,                  ESC_STR "On",  MCKEY_NOACTION },
+    { '/',                     ESC_STR "Oo",  MCKEY_NOACTION },
+    { '\n',                    ESC_STR "OM",  MCKEY_NOACTION },
+
     { 0, 0, MCKEY_NOACTION },
 };
 

@@ -1,3 +1,8 @@
+2003-09-09  Pavel Roskin  <proski@gnu.org>
+
+	* key.c (xterm_key_defines): Add keypad keys.
+	Reported by Vyacheslav Filyayev <vfilyayev@d2.khai.edu>
+
 2003-09-09  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* view.c (view_init): Constify "_command" argument.
