@@ -1,3 +1,7 @@
+2000-08-08  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.in: correctly detect make failures in subdirs
+
 2000-08-01  Pavel Roskin  <proski@gnu.org>
 
 	* nt, os2, tk, xv: removed all files

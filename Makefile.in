@@ -24,7 +24,7 @@ DISTMAIN =	configure configure.in NEWS README INSTALL INSTALL.FAST \
 
 all: 
 	@for dir in @INTLSUB@ ${codedirs} @POSUB@; do \
-		(cd $$dir; ${MAKE} all || exit 1); \
+		(cd $$dir; ${MAKE} all) || exit 1; \
 	done
 
 static:
