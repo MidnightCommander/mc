@@ -481,25 +481,30 @@ int raw_callback (struct Dlg_head *h, int key, int Msg)
 /* gets a raw key from the keyboard. Passing cancel = 1 draws
    a cancel button thus allowing c-c etc.. Alternatively, cancel = 0 
    will return the next key pressed */
-int edit_raw_key_query (char *heading, char *query, int cancel)
+int
+edit_raw_key_query (char *heading, char *query, int cancel)
 {
     int w = strlen (query) + 7;
     struct Dlg_head *raw_dlg = create_dlg (0, 0, 7, w, dialog_colors,
 /* NLS ? */
-					 raw_callback, "[Raw Key Query]",
+					   raw_callback, "[Raw Key Query]",
 					   "raw_key_input",
-					   DLG_CENTER | DLG_TRYUP);
+					   DLG_CENTER | DLG_TRYUP |
+					   DLG_WANT_TAB);
     x_set_dialog_title (raw_dlg, heading);
-    raw_dlg->raw = 1;		/* to return even a tab key */
     if (cancel)
-	add_widget (raw_dlg, button_new (4, w / 2 - 5, B_CANCEL, NORMAL_BUTTON, _("Cancel"), 0, 0, 0));
+	add_widget (raw_dlg,
+		    button_new (4, w / 2 - 5, B_CANCEL, NORMAL_BUTTON,
+				_("Cancel"), 0, 0, 0));
     add_widget (raw_dlg, label_new (3 - cancel, 2, query, 0));
-    add_widget (raw_dlg, input_new (3 - cancel, w - 5, INPUT_COLOR, 2, "", 0));
+    add_widget (raw_dlg,
+		input_new (3 - cancel, w - 5, INPUT_COLOR, 2, "", 0));
     run_dlg (raw_dlg);
     w = raw_dlg->ret_value;
     destroy_dlg (raw_dlg);
     if (cancel)
-	if (w == XCTRL ('g') || w == XCTRL ('c') || w == ESC_CHAR || w == B_CANCEL)
+	if (w == XCTRL ('g') || w == XCTRL ('c') || w == ESC_CHAR
+	    || w == B_CANCEL)
 	    return 0;
 /* hence ctrl-a (=B_CANCEL), ctrl-g, ctrl-c, and Esc are cannot returned */
     return w;
@@ -2555,7 +2560,7 @@ void edit_completion_dialog (WEdit *edit, int max_len, int word_len,
 /* create the dialog */    
     compl_dlg = create_dlg (start_y, start_x, compl_dlg_h, compl_dlg_w,
 	dialog_colors, compl_callback, "[Word Completion]", "complete_word", 
-	DLG_NONE);
+	DLG_COMPACT);
 	    
 /* create the listbox */
     compl_list = listbox_new (1, 1, compl_dlg_w - 2, compl_dlg_h - 2, 0, 

@@ -124,9 +124,7 @@ int edit (const char *_file, int line)
     edit_dlg = create_dlg (0, 0, LINES, COLS, midnight_colors,
 			   edit_mode_callback, "[Internal File Editor]",
 			   "edit",
-			   DLG_NONE);
-
-    edit_dlg->raw = 1;		/*so that tab = '\t' key works */
+			   DLG_WANT_TAB);
 
     init_widget (&(wedit->widget), 0, 0, LINES - 1, COLS,
 		 (callback_fn) edit_callback,
