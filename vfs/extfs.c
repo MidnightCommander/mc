@@ -85,7 +85,6 @@ static void remove_entry (struct entry *e);
 
 static struct archive *first_archive = NULL;
 static int my_errno = 0;
-static struct stat hstat;		/* Stat struct corresponding */
 
 #define MAXEXTFS 32
 static char *extfs_prefixes [MAXEXTFS];
@@ -199,7 +198,8 @@ static void free_archive (struct archive *archive)
     g_free (archive);
 }
 
-static FILE *open_archive (int fstype, char *name, struct archive **pparc)
+static FILE *
+open_archive (int fstype, char *name, struct archive **pparc)
 {
     static dev_t __extfs_no = 0;
     FILE *result;
@@ -210,9 +210,9 @@ static FILE *open_archive (int fstype, char *name, struct archive **pparc)
     struct archive *current_archive;
     struct entry *root_entry;
     char *local_name = NULL, *tmp = 0;
-    int uses_archive = extfs_need_archive [fstype];
-    
-    if (uses_archive){
+    int uses_archive = extfs_need_archive[fstype];
+
+    if (uses_archive) {
 	if (mc_stat (name, &mystat) == -1)
 	    return NULL;
 	if (!vfs_file_is_local (name)) {
@@ -220,12 +220,13 @@ static FILE *open_archive (int fstype, char *name, struct archive **pparc)
 	    if (local_name == NULL)
 		return NULL;
 	}
-        tmp = name_quote (name, 0);
+	tmp = name_quote (name, 0);
     }
 
     mc_extfsdir = concat_dir_and_file (mc_home, "extfs/");
-    cmd = g_strconcat (mc_extfsdir, extfs_prefixes [fstype], 
-                        " list ", local_name ? local_name : tmp, NULL);
+    cmd =
+	g_strconcat (mc_extfsdir, extfs_prefixes[fstype], " list ",
+		     local_name ? local_name : tmp, NULL);
     if (tmp)
 	g_free (tmp);
     g_free (mc_extfsdir);
@@ -234,41 +235,40 @@ static FILE *open_archive (int fstype, char *name, struct archive **pparc)
     g_free (cmd);
     if (result == NULL) {
 	close_error_pipe (1, NULL);
-        if (local_name != NULL && uses_archive)
-            mc_ungetlocalcopy (name, local_name, 0);
-    	return NULL;
+	if (local_name != NULL && uses_archive)
+	    mc_ungetlocalcopy (name, local_name, 0);
+	return NULL;
     }
-    
+
     current_archive = g_new (struct archive, 1);
     current_archive->fstype = fstype;
-    current_archive->name = name ? g_strdup (name): name;
+    current_archive->name = name ? g_strdup (name) : name;
     current_archive->local_name = local_name;
-    
+
     if (local_name != NULL)
-        mc_stat (local_name, &current_archive->local_stat);
+	mc_stat (local_name, &current_archive->local_stat);
     current_archive->__inode_counter = 0;
     current_archive->fd_usage = 0;
-    current_archive->extfsstat = mystat;
     current_archive->rdev = __extfs_no++;
     current_archive->next = first_archive;
     first_archive = current_archive;
-    mode = current_archive->extfsstat.st_mode & 07777;
+    mode = mystat.st_mode & 07777;
     if (mode & 0400)
-    	mode |= 0100;
+	mode |= 0100;
     if (mode & 0040)
-    	mode |= 0010;
+	mode |= 0010;
     if (mode & 0004)
-    	mode |= 0001;
+	mode |= 0001;
     mode |= S_IFDIR;
     root_entry = generate_entry (current_archive, "/", NULL, mode);
-    root_entry->inode->uid = current_archive->extfsstat.st_uid;
-    root_entry->inode->gid = current_archive->extfsstat.st_gid;
-    root_entry->inode->atime = current_archive->extfsstat.st_atime;
-    root_entry->inode->ctime = current_archive->extfsstat.st_ctime;
-    root_entry->inode->mtime = current_archive->extfsstat.st_mtime;
+    root_entry->inode->uid = mystat.st_uid;
+    root_entry->inode->gid = mystat.st_gid;
+    root_entry->inode->atime = mystat.st_atime;
+    root_entry->inode->ctime = mystat.st_ctime;
+    root_entry->inode->mtime = mystat.st_mtime;
     current_archive->root_entry = root_entry;
     current_archive->current_dir = root_entry;
-    
+
     *pparc = current_archive;
 
     return result;
@@ -278,76 +278,82 @@ static FILE *open_archive (int fstype, char *name, struct archive **pparc)
  * Main loop for reading an archive.
  * Returns 0 on success, -1 on error.
  */
-static int read_archive (int fstype, char *name, struct archive **pparc)
+static int
+read_archive (int fstype, char *name, struct archive **pparc)
 {
     FILE *extfsd;
     char *buffer;
     struct archive *current_archive;
     char *current_file_name, *current_link_name;
 
-
     if ((extfsd = open_archive (fstype, name, &current_archive)) == NULL) {
-        message_3s (1, MSG_ERROR, _("Couldn't open %s archive\n%s"), 
-            extfs_prefixes [fstype], name);
+	message_3s (1, MSG_ERROR, _("Couldn't open %s archive\n%s"),
+		    extfs_prefixes[fstype], name);
 	return -1;
     }
 
     buffer = g_malloc (4096);
     while (fgets (buffer, 4096, extfsd) != NULL) {
-        current_link_name = NULL;
-        if (vfs_parse_ls_lga (buffer, &hstat, &current_file_name, &current_link_name)) {
-            struct entry *entry, *pent;
-            struct inode *inode;
-            char *p, *q, *cfn = current_file_name;
-            
-            if (*cfn) {
-                if (*cfn == '/')
-                    cfn++;
-                p = strchr (cfn, 0);
-                if (p != cfn && *(p - 1) == '/')
-                    *(p - 1) = 0;
-                p = strrchr (cfn, '/');
-                if (p == NULL) {
-                    p = cfn;
-                    q = strchr (cfn, 0);
-                } else {
-                    *(p++) = 0;
-                    q = cfn;
-                }
-                if (S_ISDIR (hstat.st_mode) && 
-                    (!strcmp (p, ".") || !strcmp (p, "..")))
-                    goto read_extfs_continue;
-                pent = find_entry (current_archive->root_entry, q, 1, 0) ;
-                if (pent == NULL) {
-                    /* FIXME: Should clean everything one day */
-                    g_free (buffer);
+	struct stat hstat;
+
+	current_link_name = NULL;
+	if (vfs_parse_ls_lga
+	    (buffer, &hstat, &current_file_name, &current_link_name)) {
+	    struct entry *entry, *pent;
+	    struct inode *inode;
+	    char *p, *q, *cfn = current_file_name;
+
+	    if (*cfn) {
+		if (*cfn == '/')
+		    cfn++;
+		p = strchr (cfn, 0);
+		if (p != cfn && *(p - 1) == '/')
+		    *(p - 1) = 0;
+		p = strrchr (cfn, '/');
+		if (p == NULL) {
+		    p = cfn;
+		    q = strchr (cfn, 0);
+		} else {
+		    *(p++) = 0;
+		    q = cfn;
+		}
+		if (S_ISDIR (hstat.st_mode)
+		    && (!strcmp (p, ".") || !strcmp (p, "..")))
+		    goto read_extfs_continue;
+		pent = find_entry (current_archive->root_entry, q, 1, 0);
+		if (pent == NULL) {
+		    /* FIXME: Should clean everything one day */
+		    g_free (buffer);
 		    pclose (extfsd);
 		    close_error_pipe (1, _("Inconsistent extfs archive"));
-                    return -1;
-                }
+		    return -1;
+		}
 		entry = g_new (struct entry, 1);
 		entry->name = g_strdup (p);
 		entry->next_in_dir = NULL;
 		entry->dir = pent;
 		if (pent != NULL) {
-		    if (pent->inode->last_in_subdir){
+		    if (pent->inode->last_in_subdir) {
 			pent->inode->last_in_subdir->next_in_dir = entry;
 			pent->inode->last_in_subdir = entry;
 		    }
 		}
 		if (!S_ISLNK (hstat.st_mode) && current_link_name != NULL) {
-	            pent = find_entry (current_archive->root_entry, current_link_name, 0, 0);
-	            if (pent == NULL) {
-                    /* FIXME: Should clean everything one day */
+		    pent =
+			find_entry (current_archive->root_entry,
+				    current_link_name, 0, 0);
+		    if (pent == NULL) {
+			/* FIXME: Should clean everything one day */
 			g_free (buffer);
 			pclose (extfsd);
-			close_error_pipe (1, _("Inconsistent extfs archive"));
-	                return -1;
-	            } else {
+			close_error_pipe (1,
+					  _("Inconsistent extfs archive"));
+			return -1;
+		    } else {
 			entry->inode = pent->inode;
 			pent->inode->nlink++;
-	            }
-	        } else {
+		    }
+		} else {
 		    inode = g_new (struct inode, 1);
 		    entry->inode = inode;
 		    inode->local_filename = NULL;
@@ -356,40 +362,41 @@ static int read_archive (int fstype, char *name, struct archive **pparc)
 		    inode->dev = current_archive->rdev;
 		    inode->archive = current_archive;
 		    inode->mode = hstat.st_mode;
-#ifdef HAVE_ST_RDEV		    
+#ifdef HAVE_ST_RDEV
 		    inode->rdev = hstat.st_rdev;
 #else
 		    inode->rdev = 0;
-#endif		    
+#endif
 		    inode->uid = hstat.st_uid;
 		    inode->gid = hstat.st_gid;
 		    inode->size = hstat.st_size;
 		    inode->mtime = hstat.st_mtime;
 		    inode->atime = hstat.st_atime;
 		    inode->ctime = hstat.st_ctime;
-		    if (current_link_name != NULL && S_ISLNK (hstat.st_mode)) {
-	    		inode->linkname = current_link_name;
-	    		current_link_name = NULL;
+		    if (current_link_name != NULL
+			&& S_ISLNK (hstat.st_mode)) {
+			inode->linkname = current_link_name;
+			current_link_name = NULL;
 		    } else {
-		        if (S_ISLNK( hstat.st_mode))
-			    inode->mode &= ~S_IFLNK; /* You *DON'T* want to do this always */
-	    		inode->linkname = NULL;
+			if (S_ISLNK (hstat.st_mode))
+			    inode->mode &= ~S_IFLNK;	/* You *DON'T* want to do this always */
+			inode->linkname = NULL;
 		    }
 		    if (S_ISDIR (hstat.st_mode))
-	    		make_dot_doubledot (entry);
-	    	}
-            }
- read_extfs_continue:
-            g_free (current_file_name);
-            if (current_link_name != NULL)
-                g_free (current_link_name);
-        }
+			make_dot_doubledot (entry);
+		}
+	    }
+	  read_extfs_continue:
+	    g_free (current_file_name);
+	    if (current_link_name != NULL)
+		g_free (current_link_name);
+	}
     }
     pclose (extfsd);
     close_error_pipe (1, NULL);
 #ifdef SCO_FLAVOR
-    waitpid(-1,NULL,WNOHANG);
-#endif /* SCO_FLAVOR */
+    waitpid (-1, NULL, WNOHANG);
+#endif				/* SCO_FLAVOR */
     *pparc = current_archive;
     g_free (buffer);
     return 0;

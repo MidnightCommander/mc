@@ -1,5 +1,9 @@
 2002-12-05  Pavel Roskin  <proski@gnu.org>
 
+	* extfs.h: Remove "extfsstat" from struct archive - it's unused
+	outside open_archive().  Adjust the dependencies.
+	* extfs.c: Make hstat local variable.
+
 	* sfs.c: Remove "uid" from struct cachedfile - it's unused now.
 
 	* vfs.h: Remove vfs_uid and vfs_gid.  Fix all dependencies.

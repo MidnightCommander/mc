@@ -22,7 +22,6 @@ struct archive {
     int fstype;
     char *name;
     char *local_name;
-    struct stat extfsstat;
     struct stat local_stat;
     dev_t rdev;
     int fd_usage;
