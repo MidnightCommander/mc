@@ -1255,7 +1255,10 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
 	vfs_s_insert_entry(me, dir, ent);
     }
 
-    vfs_s_add_dots(me, dir, NULL);
+    /*    vfs_s_add_dots(me, dir, NULL);
+	  FIXME This really should be here; but we need to provide correct parent.
+	  Disabled for now, please fix it. 				Pavel
+    */
     close(sock);
     me->verrno = E_REMOTE;
     if ((get_reply (me, SUP.sock, NULL, 0) != COMPLETE) || !num_entries)
