@@ -1,5 +1,8 @@
 2001-09-07  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (main): Call save_stop_handler() - it was ifdef'd out
+	by error.
+
 	* main.c: Remove all GNOME code.
 
 	* cmd.c: No need to define "MIDNIGHT" before including vfs.h.

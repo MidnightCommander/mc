@@ -2742,11 +2742,8 @@ main (int argc, char *argv [])
     
     compatibility_move_mc_files ();
     
-#if 0
     /* We need this, since ncurses endwin () doesn't restore the signals */
-    /* FIXME: Check if it's needed */
     save_stop_handler ();
-#endif
 
     /* Must be done before init_subshell, to set up the terminal size: */
     /* FIXME: Should be removed and LINES and COLS computed on subshell */
