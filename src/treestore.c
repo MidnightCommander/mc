@@ -264,13 +264,17 @@ tree_store_load (char *name)
 						different = strtok (NULL, "");
 						if (different){
 							strcpy (oldname + common, different);
-							e = tree_store_add_entry (oldname);
-							e->scanned = scanned;
+							if (vfs_file_is_local (oldname)){
+								e = tree_store_add_entry (oldname);
+								e->scanned = scanned;
+							}
 						}
 					}
 				} else {
-					e = tree_store_add_entry (name);
-					e->scanned = scanned;
+					if (vfs_file_is_local (name)){
+						e = tree_store_add_entry (name);
+						e->scanned = scanned;
+					}
 					strcpy (oldname, name);
 				}
 			g_free (name);
@@ -339,23 +343,25 @@ tree_store_save (char *name)
 	while (current){
 		int i, common;
 
-		/* Clear-text compression */
-		if (current->prev && (common = str_common (current->prev->name, current->name)) > 2){
-			char *encoded = encode (current->name + common);
+		if (vfs_file_is_local (current->name)){
+			/* Clear-text compression */
+			if (current->prev && (common = str_common (current->prev->name, current->name)) > 2){
+				char *encoded = encode (current->name + common);
+				
+				i = fprintf (file, "%d:%d %s\n", current->scanned, common, encoded);
+				g_free (encoded);
+			} else {
+				char *encoded = encode (current->name);
+				
+				i = fprintf (file, "%d:%s\n", current->scanned, encoded);
+				g_free (encoded);
+			}
 			
-			i = fprintf (file, "%d:%d %s\n", current->scanned, common, encoded);
-			g_free (encoded);
-		} else {
-			char *encoded = encode (current->name);
-			
-			i = fprintf (file, "%d:%s\n", current->scanned, encoded);
-			g_free (encoded);
-		}
-		
-		if (i == EOF){
-			fprintf (stderr, _("Can't write to the %s file:\n%s\n"), name,
-				 unix_error_string (errno));
-			break;
+			if (i == EOF){
+				fprintf (stderr, _("Can't write to the %s file:\n%s\n"), name,
+					 unix_error_string (errno));
+				break;
+			}
 		}
 		current = current->next;
 	}

@@ -1,3 +1,9 @@
+1999-04-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* treestore.c (tree_store_load): Do not load non-local file
+	systems
+	(tree_store_save): Do not save non-local file systems
+
 1999-04-07  Jonathan Blandford  <jrb@redhat.com>
 
 	* screen.c (do_enter_on_file_entry): added a consistent behaviour

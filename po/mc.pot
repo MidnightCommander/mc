@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-04-06 14:18-0500\n"
+"POT-Creation-Date: 1999-04-06 23:00-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,125 +36,125 @@ msgstr ""
 msgid " Press any key: "
 msgstr ""
 
-#: gnome/gcmd.c:57
+#: gnome/gcmd.c:59
 msgid " There is no other panel to compare contents to "
 msgstr ""
 
-#: gnome/gcmd.c:108
+#: gnome/gcmd.c:110
 msgid "The Midnight Commander Team"
 msgstr ""
 
-#: gnome/gcmd.c:110
+#: gnome/gcmd.c:112
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
 msgstr ""
 
-#: gnome/gcmd.c:122
+#: gnome/gcmd.c:124
 msgid "GNU Midnight Commander"
 msgstr ""
 
-#: gnome/gcmd.c:125
+#: gnome/gcmd.c:127
 msgid "The GNOME edition of the Midnight Commander file manager."
 msgstr ""
 
-#: gnome/gcmd.c:262
+#: gnome/gcmd.c:264
 msgid "Sort By"
 msgstr ""
 
 #. we define this up here so we can pass it in to our callback
-#: gnome/gcmd.c:267
+#: gnome/gcmd.c:269
 msgid "Ignore case sensitivity."
 msgstr ""
 
-#: gnome/gcmd.c:270
+#: gnome/gcmd.c:272
 msgid "Sort files by "
 msgstr ""
 
-#: gnome/gcmd.c:275 gnome/gcustom-layout.c:43 src/chmod.c:150 src/screen.c:395
+#: gnome/gcmd.c:277 gnome/gcustom-layout.c:43 src/chmod.c:150 src/screen.c:395
 msgid "Name"
 msgstr ""
 
-#: gnome/gcmd.c:282
+#: gnome/gcmd.c:284
 msgid "File Type"
 msgstr ""
 
-#: gnome/gcmd.c:288 gnome/gcustom-layout.c:47 src/screen.c:396
+#: gnome/gcmd.c:290 gnome/gcustom-layout.c:47 src/screen.c:396
 #: src/screen.c:397
 msgid "Size"
 msgstr ""
 
-#: gnome/gcmd.c:294
+#: gnome/gcmd.c:296
 msgid "Time Last Accessed"
 msgstr ""
 
-#: gnome/gcmd.c:300
+#: gnome/gcmd.c:302
 msgid "Time Last Modified"
 msgstr ""
 
-#: gnome/gcmd.c:306
+#: gnome/gcmd.c:308
 msgid "Time Last Changed"
 msgstr ""
 
-#: gnome/gcmd.c:320
+#: gnome/gcmd.c:322
 msgid "Reverse the order."
 msgstr ""
 
-#: gnome/gcmd.c:383
+#: gnome/gcmd.c:385
 msgid "Enter name."
 msgstr ""
 
-#: gnome/gcmd.c:389
+#: gnome/gcmd.c:391
 msgid "Enter label for command:"
 msgstr ""
 
-#: gnome/gcmd.c:488
+#: gnome/gcmd.c:490
 msgid "Find all core files"
 msgstr ""
 
-#: gnome/gcmd.c:491 src/panelize.c:350
+#: gnome/gcmd.c:493 src/panelize.c:350
 msgid "Find rejects after patching"
 msgstr ""
 
-#: gnome/gcmd.c:535
+#: gnome/gcmd.c:537
 msgid "Run Command"
 msgstr ""
 
 #. Frame 1
-#: gnome/gcmd.c:540
+#: gnome/gcmd.c:542
 msgid "Preset Commands"
 msgstr ""
 
 #. add add/remove buttons in center
-#: gnome/gcmd.c:557 gnome/gcustom-layout.c:185
+#: gnome/gcmd.c:559 gnome/gcustom-layout.c:185
 msgid "Add"
 msgstr ""
 
-#: gnome/gcmd.c:561 gnome/gcustom-layout.c:186
+#: gnome/gcmd.c:563 gnome/gcustom-layout.c:186
 msgid "Remove"
 msgstr ""
 
 #. Frame 2
-#: gnome/gcmd.c:569
+#: gnome/gcmd.c:571
 msgid "Run this Command"
 msgstr ""
 
-#: gnome/gcmd.c:576
+#: gnome/gcmd.c:578
 msgid "Command: "
 msgstr ""
 
-#: gnome/gcmd.c:639
+#: gnome/gcmd.c:647
 msgid "Set Filter"
 msgstr ""
 
-#: gnome/gcmd.c:644 gnome/gcmd.c:685 gnome/gcmd.c:690 gnome/gcmd.c:694
+#: gnome/gcmd.c:652 gnome/gcmd.c:693 gnome/gcmd.c:698 gnome/gcmd.c:702
 #: gnome/gscreen.c:2532
 msgid "Show all files"
 msgstr ""
 
-#: gnome/gcmd.c:651
+#: gnome/gcmd.c:659
 msgid "."
 msgstr ""
 
-#: gnome/gcmd.c:667
+#: gnome/gcmd.c:675
 msgid ""
 "Enter a filter here for files in the panel view.\n"
 "\n"
@@ -162,19 +162,19 @@ msgid ""
 "*.gif will show just gif images"
 msgstr ""
 
-#: gnome/gcmd.c:669
+#: gnome/gcmd.c:677
 msgid "Enter a Regular Expression to filter files in the panel view."
 msgstr ""
 
-#: gnome/gcmd.c:726
+#: gnome/gcmd.c:734
 msgid " Open with..."
 msgstr ""
 
-#: gnome/gcmd.c:727
+#: gnome/gcmd.c:735
 msgid "Enter extra arguments:"
 msgstr ""
 
-#: gnome/gcmd.c:789
+#: gnome/gcmd.c:797
 msgid "Desktop entry properties"
 msgstr ""
 
@@ -312,7 +312,7 @@ msgstr ""
 msgid "Creates a new launcher"
 msgstr ""
 
-#: gnome/gdesktop.c:2434 gnome/glayout.c:449
+#: gnome/gdesktop.c:2434 gnome/glayout.c:452
 msgid "Arrange Icons"
 msgstr ""
 
@@ -324,7 +324,7 @@ msgstr ""
 msgid "Recreate Desktop Shortcuts"
 msgstr ""
 
-#: gnome/gdesktop.c:2438 gnome/glayout.c:452
+#: gnome/gdesktop.c:2438 gnome/glayout.c:455
 msgid "Rescan Desktop"
 msgstr ""
 
@@ -664,100 +664,108 @@ msgstr ""
 msgid "Reverses the list of tagged files"
 msgstr ""
 
-#: gnome/glayout.c:401 gnome/gscreen.c:1478
-msgid "_Rescan Directory"
+#: gnome/glayout.c:401 gtkedit/editwidget.c:1071 src/view.c:2017
+msgid "Search"
 msgstr ""
 
 #: gnome/glayout.c:401
+msgid "Search for a file in the current Panel"
+msgstr ""
+
+#: gnome/glayout.c:404 gnome/gscreen.c:1478
+msgid "_Rescan Directory"
+msgstr ""
+
+#: gnome/glayout.c:404
 msgid "Rescan the directory contents"
 msgstr ""
 
-#: gnome/glayout.c:408
+#: gnome/glayout.c:411
 msgid "_Sort By..."
 msgstr ""
 
-#: gnome/glayout.c:408
+#: gnome/glayout.c:411
 msgid "Confirmation settings"
 msgstr ""
 
-#: gnome/glayout.c:409
+#: gnome/glayout.c:412
 msgid "_Filter View..."
 msgstr ""
 
-#: gnome/glayout.c:409
+#: gnome/glayout.c:412
 msgid "Global option settings"
 msgstr ""
 
-#: gnome/glayout.c:416
+#: gnome/glayout.c:419
 msgid "_Find File..."
 msgstr ""
 
-#: gnome/glayout.c:416
+#: gnome/glayout.c:419
 msgid "Locate files on disk"
 msgstr ""
 
 #. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
-#: gnome/glayout.c:419
+#: gnome/glayout.c:422
 msgid "_Edit mime types..."
 msgstr ""
 
-#: gnome/glayout.c:419
+#: gnome/glayout.c:422
 msgid "Edits the MIME type bindings"
 msgstr ""
 
-#: gnome/glayout.c:421
+#: gnome/glayout.c:424
 msgid "_Run Command..."
 msgstr ""
 
-#: gnome/glayout.c:421
+#: gnome/glayout.c:424
 msgid "Runs a command"
 msgstr ""
 
-#: gnome/glayout.c:423
+#: gnome/glayout.c:426
 msgid "_Run Command in panel..."
 msgstr ""
 
-#: gnome/glayout.c:423
+#: gnome/glayout.c:426
 msgid "Run a command and put the results in a panel"
 msgstr ""
 
-#: gnome/glayout.c:433
+#: gnome/glayout.c:436
 msgid "_Background jobs..."
 msgstr ""
 
-#: gnome/glayout.c:433
+#: gnome/glayout.c:436
 msgid "List of background operations"
 msgstr ""
 
-#: gnome/glayout.c:436
+#: gnome/glayout.c:439
 msgid "Exit"
 msgstr ""
 
-#: gnome/glayout.c:436
+#: gnome/glayout.c:439
 msgid "Terminates the file manager and the desktop"
 msgstr ""
 
-#: gnome/glayout.c:451
+#: gnome/glayout.c:454
 msgid "Rescan System Devices"
 msgstr ""
 
-#: gnome/glayout.c:459 gnome/glayout.c:469
+#: gnome/glayout.c:462 gnome/glayout.c:472
 msgid "_Layout"
 msgstr ""
 
-#: gnome/glayout.c:460 gnome/glayout.c:470
+#: gnome/glayout.c:463 gnome/glayout.c:473
 msgid "_Commands"
 msgstr ""
 
-#: gnome/glayout.c:461
+#: gnome/glayout.c:464
 msgid "_Desktop"
 msgstr ""
 
-#: gnome/glayout.c:462 gnome/glayout.c:471
+#: gnome/glayout.c:465 gnome/glayout.c:474
 msgid "_Help"
 msgstr ""
 
-#: gnome/glayout.c:611
+#: gnome/glayout.c:614
 msgid "File/New/Directory..."
 msgstr ""
 
@@ -2107,10 +2115,6 @@ msgstr ""
 
 #: gtkedit/editwidget.c:1068
 msgid "Replac"
-msgstr ""
-
-#: gtkedit/editwidget.c:1071 src/view.c:2017
-msgid "Search"
 msgstr ""
 
 #: gtkedit/editwidget.c:1074 src/main.c:1698
