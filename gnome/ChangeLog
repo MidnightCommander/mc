@@ -1,3 +1,8 @@
+Sun May 31 13:19:59 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* Makefile.in: use @LIBVFS@ when referring to libvfs-mc.a (one
+	reference wasn't converted, yet).
+
 1998-05-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gwidget.c (x_create_input): Set the entry's visibility if it is

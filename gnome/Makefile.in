@@ -168,7 +168,7 @@ TAGS: $(GNOMESRCS)
 	etags $(GNOMESRCS)
 
 clean:
-	$(RMF) @tkmc@ *.o core a.out mx libvfs.a libedit.a libmcslang.a
+	$(RMF) @tkmc@ *.o core a.out mx @LIBVFS@ libedit.a libmcslang.a
 
 realclean: clean
 	$(RMF) .depend
