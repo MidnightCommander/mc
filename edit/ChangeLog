@@ -1,3 +1,7 @@
+2004-12-02  Pavel S. Shirshov <me@pavelsh.pp.ru>
+
+	* editcmd.c (edit_replace_prompt): Fix warning with 'unused' label_len.
+
 2004-12-01  Roland Illig  <roland.illig@gmx.de>
 
 	* editcmd.c: Introduced a type edit_getbyte_fn to get rid of
