@@ -1377,8 +1377,8 @@ file_store(vfs *me, vfs_s_super *super, char *name, char *localname)
 	    goto error_return;
 	}
 	total += n;
-	print_vfs_message(_("ftpfs: storing file %d (%d)"), 
-			  total, s.st_size);
+	print_vfs_message(_("ftpfs: storing file %d (%lu)"),
+			  total, (unsigned long) s.st_size);
     }
     disable_interrupt_key();
     close(sock);

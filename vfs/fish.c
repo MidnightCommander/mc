@@ -498,8 +498,6 @@ file_store(vfs *me, vfs_s_super *super, char *name, char *localname)
 		   "cat > \"/%s\"\n"
 		   "cat > /dev/null\n"
 		 "); echo '### 200'\n",
-	      /* ")\n"                       Why can't it be like this?
-	         "echo '### 200'\n", */
 		 (unsigned long) s.st_size, name, name,
 		 (unsigned long) (s.st_size >> 12),
 		 ((unsigned long) s.st_size) & (4096 - 1), name)
@@ -524,8 +522,9 @@ file_store(vfs *me, vfs_s_super *super, char *name, char *localname)
 	}
 	disable_interrupt_key();
 	total += n;
-	print_vfs_message(_("fish: storing %s %d (%d)"), 
-			  was_error ? _("zeros") : _("file"), total, s.st_size);
+	print_vfs_message(_("fish: storing %s %d (%lu)"), 
+			  was_error ? _("zeros") : _("file"), total,
+			  (unsigned long) s.st_size);
     }
     if ((get_reply (me, SUP.sockr, NULL, 0) != COMPLETE) || was_error)
         ERRNOR (E_REMOTE, -1);
