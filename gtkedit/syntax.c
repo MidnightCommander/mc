@@ -1268,7 +1268,7 @@ static const char * const syntax_text[] = {
 "file .\\*[Mm]akefile[\\\\\\.a-z]\\*$ Makefile",
 "include makefile.syntax",
 "",
-"file ..\\*\\\\.(po|pox)$ PO\\sFile",
+"file ..\\*\\\\.(po|pot|pox)$ PO\\sFile",
 "include po.syntax",
 "",
 "file Don_t_match_me Mail\\sfolder ^From\\s",
