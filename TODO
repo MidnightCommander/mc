@@ -1,6 +1,8 @@
 Before 4.6.2
 ============
 
+Allow pathnames starting with spaces in vfs/extfs.
+
 Hide the passwords when displaying mcvfs path names.
 
 Broken pipe warning when viewing large *.tar.gz files.  Warnings should
