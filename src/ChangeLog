@@ -1,3 +1,8 @@
+2004-11-04  Jindrich Novy  <jnovy@redhat.com>
+
+	* screen.c (show_dir): A small fix to avoid a crash in show_dir() with
+	a panel of more than 200 columns.
+
 2004-11-03  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* file.c (make_symlink): Use g_strlcpy() instead of strcpy().

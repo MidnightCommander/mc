@@ -728,7 +728,7 @@ mini_info_separator (WPanel *panel)
 static void
 show_dir (WPanel *panel)
 {
-    char tmp[200];
+    char *tmp;
 
     set_colors (panel);
     draw_double_box (panel->widget.parent,
@@ -750,9 +750,13 @@ show_dir (WPanel *panel)
 
     widget_move (&panel->widget, 0, 3);
 
+    tmp = g_malloc (panel->widget.cols + 1);
+    tmp[panel->widget.cols] = '\0';
+
     trim (strip_home_and_password (panel->cwd), tmp,
-	  max (panel->widget.cols - 7, 0));
+	 min (max (panel->widget.cols - 7, 0), panel->widget.cols) );
     addstr (tmp);
+    g_free (tmp);
     widget_move (&panel->widget, 0, 1);
     addstr ("<");
     widget_move (&panel->widget, 0, panel->widget.cols - 2);
