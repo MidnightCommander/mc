@@ -1800,6 +1800,28 @@ can specify whether the area is split to the panels in vertical or
 horizontal direction. The split can be equal or you can specify an
 unequal split.
 .PP
+By default all contents of the directory panels are displayed with 
+the same color, but you can specify whether 
+.I permissions 
+and 
+.I file types
+are highlighted with special 
+.\"LINK2"
+Colors.
+.\"Colors"
+If permission highlighting is enabled, the parts of the 
+.I perm
+and
+.I mode
+.\"LINK2"
+display fields
+.\"Listing Mode..."
+which are valid for the user running Midnight Commander
+are highlighted with the color defined with the
+.I selected
+keyword. If file type highlighting is enabled, files are colored according
+to their file type (e.g. directory, core file, executable, ...). 
+.PP
 If the 
 .I Show Mini-Status
 option is enabled, one line of status
@@ -2798,12 +2820,22 @@ The format for the color definition is:
   <keyword>=<foregroundcolor>,<backgroundcolor>:<keyword>= ...
 .fi
 .PP
-The colors are optional, and the keywords are: normal, selected,
-marked, markselect, errors, input, reverse menu, menusel, menuhot, menuhotsel,
-gauge;  the dialog colors are: dnormal, dfocus, dhotnormal, dhotfocus;
-Help colors are: helpnormal, helpitalic, helpbold, helplink,
-helpslink; Viewer color is: viewunderline; Special highlighting mode: 
-executable, directory, link, device, special.
+The colors are optional, and the keywords are: normal,
+selected, marked, markselect, errors, input, reverse, gauge;
+Menu colors are: menu, menusel, menuhot, menuhotsel;  Dialog colors
+are: dnormal, dfocus, dhotnormal, dhotfocus;  Help colors
+are: helpnormal, helpitalic, helpbold, helplink, helpslink;  
+Viewer color is: viewunderline; Special highlighting colors are: 
+executable, directory, link, device, special, core; Editor colors
+are: editnormal, editbold, editmarked.
+.PP
+.I input 
+determines the color of input lines used in query dialogs.
+.PP
+.I gauge 
+determines the color of the filled part of the progress bar
+(gauge), which shows how many percent of files were copied
+etc. in a graphical way.
 .PP
 The dialog boxes use the following colors:
 .I dnormal 
@@ -2832,29 +2864,27 @@ is used for not selected hyperlinks and
 .I helpslink
 is used for selected hyperlink.
 .PP
-.I gauge
-determines color of filled part of the progress bar (gauge), which shows
-how many percent of files were copied etc. in a graphical way.
-.PP
-For file type highlighting mode 
+Special highlight colors determine how files are displayed 
+when file highlighting is enabled (see the section on
+.\"LINK2"
+Layout).
+.\"Layout
 .I directory
-specifies the color in which directories are shown; 
+is used for directories or symbolic links to directories; 
 .I executable
 for executable files;
-.I link 
-is used to represent links; 
-.I device 
-for character and block devices;
+.I link
+is used for symbolic links which are neither stalled nor linked
+to a directory; 
+.I stalledlink
+is used for stalled symbolic links; 
+.I device
+- character and block devices; 
 .I special
-is for special files, such as FIFO and IPC sockets;
+is used for special files, such as FIFOs and IPC
+sockets; 
 .I core
-is for core files (see also the option 
-.B highlight_mode
-at the section on
-.\"LINK2"
-Special Settings).
-.\"Special Settings"
-
+is for core files.
 .PP
 The possible colors are: black, gray, red, brightred, green,
 brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
@@ -2970,24 +3000,6 @@ The end key has a similar behavior: Go down to the middle line, if
 over it; else go to the bottom line unless you already are at the
 bottom line, in such case it will move the selection to the last file
 name in the panel.
-.PP
-.I highlight_mode 
-By default all information on panels displayed with 
-the same color. If this variable is set to 1, then 
-.I perm
-or 
-.I mode
-tokens in display format get ability to show access rights of the user
-to the shown file. Appropriate triplet of reading, writing and execution rights 
-highlighted with the yellow (
-.I selected
-) color. In addition, if the variable 
-is equal to 2, then all lines are displaying by the color according to 
-their type (see 
-.\"LINK2"
-Colors).
-.\"Colors"
-Permissions highlighting also works in this mode.
 .PP
 .I use_file_to_guess_type
 .IP

@@ -197,7 +197,7 @@ file_entry_color (file_entry *fe)
             if (fe->f.link_to_dir)
                 return (DIRECTORY_COLOR);
             else if (fe->f.stalled_link)
-                return (STALLED_COLOR);
+                return (STALLED_LINK_COLOR);
             else
                 return (LINK_COLOR);
         } else if (S_ISSOCK (fe->buf.st_mode))

@@ -1,3 +1,8 @@
+Tue Dec 29 15:49:45 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* doc/mc.sgml, mc1.in (Color section): minor polishing
+	(Layout section): documented Highlight...
+
 Thu Dec 24 18:30:53 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* configure.in: Deleted du checks

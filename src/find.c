@@ -517,8 +517,12 @@ do_search (struct Dlg_head *h)
 		    return;
 		}
 		if (find_ignore_dirs){
+                    int found;
 		    char *temp_dir = copy_strings (":", tmp, ":", 0);
-		    if (strstr (find_ignore_dirs, temp_dir))
+
+                    found = strstr (find_ignore_dirs, temp_dir) != 0;
+                    free (temp_dir);
+		    if (found)
 			free (tmp);
 		    else
 			break;

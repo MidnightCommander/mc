@@ -1,3 +1,8 @@
+Tue Dec 29 16:55:24 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* gmain.c: According to the man page the color keyword for executable 
+	files 	is `executable' and not `execute' -- changed. 
+
 1998-12-28  Jonathan Blandford  <jrb@redhat.com>
 
 	* glayout.c: Initial rehash of the menu code.

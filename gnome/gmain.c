@@ -26,7 +26,7 @@
 
 GdkColorContext *mc_cc;
 
-#define MAX_COLOR_PAIRS 32
+#define MAX_COLOR_PAIRS 40
 struct gmc_color_pairs_s gmc_color_pairs [MAX_COLOR_PAIRS];
 
 char *default_edition_colors =
@@ -38,6 +38,7 @@ char *default_edition_colors =
 "marked=yellow,seagreen:"
 "execute=slateblue:"
 "link=green:"
+"stalledlink=brightred:"
 "device=magenta:"
 "core=red:"
 "menuhotsel=cyan,black:"

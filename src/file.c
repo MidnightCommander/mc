@@ -169,6 +169,7 @@ double file_progress_eta_secs;
 int file_progress_do_reget = 1;
 
 /* Status reporting flags */
+int file_progress_totals_computed; /* panel total has been computed */
 long file_progress_count;
 double file_progress_bytes;
 
@@ -230,8 +231,9 @@ char *op_names [3] = {
 	N_(" Delete ")
 };
 
-static int recursive_erase (char *s);
-static int erase_file (char *s);
+static int recursive_erase (char *s, long *progress_count, double *progress_bytes);
+static int erase_file (char *s, long *progress_count, 
+                       double *progress_bytes, int is_toplevel_file);
 
 /* }}} */
 
@@ -517,12 +519,17 @@ make_symlink (char *src_path, char *dst_path)
 }
 
 static int
-progress_update_one (long *progress_count, double *progress_bytes, int add)
+progress_update_one (long *progress_count, 
+                     double *progress_bytes, 
+                     int add,
+                     int is_toplevel_file)
 {
     int ret;
-    
-    (*progress_count)++;
-    (*progress_bytes) += add;
+
+    if (is_toplevel_file || file_progress_totals_computed) {
+        (*progress_count)++;
+        (*progress_bytes) += add;
+    }
 
     /* Apply some heuristic here to not call the update stuff very often */
     ret = file_progress_show_count (*progress_count, file_progress_count);
@@ -537,7 +544,8 @@ progress_update_one (long *progress_count, double *progress_bytes, int add)
 
 int
 copy_file_file (char *src_path, char *dst_path, int ask_overwrite,
-		long  *progress_count, double *progress_bytes)
+		long  *progress_count, double *progress_bytes, 
+                int is_toplevel_file)
 {
 #ifndef OS2_NT
     uid_t src_uid;
@@ -892,7 +900,10 @@ ret:
     }
 
     if (return_status == FILE_CONT)
-        return_status = progress_update_one (progress_count, progress_bytes, file_size);
+        return_status = progress_update_one (
+                                progress_count, 
+                                progress_bytes, 
+                                file_size, is_toplevel_file);
     
     return return_status;
 }
@@ -1071,7 +1082,7 @@ copy_dir_dir (char *s, char *d, int toplevel,
 	    dest_file = concat_dir_and_file (dest_dir, x_basename (path));
             return_status = copy_file_file (
 		    path, dest_file, 1,
-		    progress_count, progress_bytes);
+		    progress_count, progress_bytes, 0);
 	    free (dest_file);
 	}    
 	if (delete && return_status == FILE_CONT){
@@ -1090,7 +1101,7 @@ copy_dir_dir (char *s, char *d, int toplevel,
 	        if (S_ISDIR (buf.st_mode)){
 		    return_status = erase_dir_iff_empty (path);
 		} else
-		    return_status = erase_file (path);
+		    return_status = erase_file (path, 0, 0, 0);
 	    }
 	}
 	
@@ -1126,7 +1137,10 @@ ret:
 /* {{{ Move routines */
 
 int
-move_file_file (char *s, char *d, long *progress_count, double *progress_bytes)
+move_file_file (char *s, 
+                char *d, 
+                long *progress_count, 
+                double *progress_bytes)
 {
     struct stat src_stats, dst_stats;
     int return_status = FILE_CONT;
@@ -1210,7 +1224,8 @@ move_file_file (char *s, char *d, long *progress_count, double *progress_bytes)
 #endif    
 
     /* Failed because filesystem boundary -> copy the file instead */
-    return_status = copy_file_file (s, d, 0, progress_count, progress_bytes);
+    return_status = copy_file_file (s, d, 0, 
+                             progress_count, progress_bytes, 1);
     if (return_status != FILE_CONT)
 	return return_status;
 
@@ -1229,7 +1244,8 @@ move_file_file (char *s, char *d, long *progress_count, double *progress_bytes)
     }
 
     if (return_status == FILE_CONT)
-        return_status = progress_update_one (progress_count, progress_bytes, src_stats.st_size);
+        return_status = progress_update_one (progress_count, 
+                                  progress_bytes, src_stats.st_size, 1);
     
     return return_status;
 }
@@ -1319,7 +1335,7 @@ oktoret:
     	    if (S_ISDIR (erase_list->st_mode)){
 		return_status = erase_dir_iff_empty (erase_list->name);
 	    } else
-		return_status = erase_file (erase_list->name);
+		return_status = erase_file (erase_list->name, 0, 0, 0);
 	    lp = erase_list;
 	    erase_list = erase_list->next;
 	    free (lp);
@@ -1340,27 +1356,40 @@ oktoret:
 /* }}} */
 
 /* {{{ Erase routines */
-
+/* Don't update progress status if progress_count==NULL */
 static int
-erase_file (char *s)
+erase_file (char *s, 
+            long *progress_count, 
+            double *progress_bytes, 
+            int is_toplevel_file)
 {
     int return_status;
+    struct stat buf;
 
     if (file_progress_show_deleting (s) == FILE_ABORT)
 	return FILE_ABORT;
-
     mc_refresh ();
+    
+    if (progress_count && mc_stat (s, &buf)) {
+        /* ignore, most likely the mc_unlink fails, too */
+        buf.st_size = 0;
+    }
 
     while (mc_unlink (s)){
 	return_status = file_error (_(" Cannot delete file \"%s\" \n %s "), s);
 	if (return_status != FILE_RETRY)
 	    return return_status;
     }
-    return FILE_CONT;
+    if (progress_count)
+        return progress_update_one (
+                     progress_count, progress_bytes, 
+                     buf.st_size, is_toplevel_file);
+    else
+        return FILE_CONT;
 }
 
 static int
-recursive_erase (char *s)
+recursive_erase (char *s, long *progress_count, double *progress_bytes)
 {
     struct dirent *next;
     struct stat	buf;
@@ -1387,9 +1416,10 @@ recursive_erase (char *s)
 	    return 1;
 	} 
 	if (S_ISDIR (buf.st_mode))
-	    return_status = (recursive_erase (path) != FILE_CONT);
+	    return_status = (recursive_erase (path, progress_count, progress_bytes) != FILE_CONT);
 	else
-	    return_status = erase_file (path);
+	    return_status = erase_file (
+                                  path, progress_count, progress_bytes, 0);
 	free (path);
 	/* .ado: OS/2 returns a block of memory DIR to next and must be freed */
 #ifdef __os2__
@@ -1439,7 +1469,7 @@ check_dir_is_empty(char *path)
 }
 
 int
-erase_dir (char *s)
+erase_dir (char *s, long *progress_count, double *progress_bytes)
 {
     int error;
 
@@ -1464,7 +1494,7 @@ erase_dir (char *s)
     if (error == 0){ /* not empty */
 	error = query_recursive (s);
 	if (error == FILE_CONT)
-	    return recursive_erase (s);
+	    return recursive_erase (s, progress_count, progress_bytes);
 	else
 	    return error;
     }
@@ -1816,9 +1846,9 @@ panel_operate_flags (void *source_panel, FileOperation operation, char *thedefau
 	if (operation == OP_DELETE)
 	{
 	    if (S_ISDIR (src_stat.st_mode))
-		value = erase_dir (source_with_path);
+		value = erase_dir (source_with_path, &count, &bytes);
 	    else
-		value = erase_file (source_with_path);
+		value = erase_file (source_with_path, &count, &bytes, 1);
 	}
 	else
 	{
@@ -1846,7 +1876,7 @@ panel_operate_flags (void *source_panel, FileOperation operation, char *thedefau
 				source_with_path, dest, 1, 0, 0, 0, &count, &bytes);
 		    else
 		        value = copy_file_file (
-				source_with_path, dest, 1, &count, &bytes);
+				source_with_path, dest, 1, &count, &bytes, 1);
 		    break;
 
 	        case OP_MOVE:
@@ -1885,10 +1915,12 @@ panel_operate_flags (void *source_panel, FileOperation operation, char *thedefau
 	}
 
 	/* Initialize variables for progress bars */
-	if (verbose && file_op_compute_totals)
+	if (operation != OP_MOVE && verbose && file_op_compute_totals) {
 		panel_compute_totals (
 			panel, &file_progress_count, &file_progress_bytes);
-	else {
+                file_progress_totals_computed = 1;
+	} else {
+                file_progress_totals_computed = 0;
 		file_progress_count = panel->marked;
 		file_progress_bytes = panel->total;
 	}
@@ -1926,9 +1958,9 @@ panel_operate_flags (void *source_panel, FileOperation operation, char *thedefau
 
 	    if (operation == OP_DELETE){
 		if (S_ISDIR (src_stat.st_mode))
-		    value = erase_dir (source_with_path);
+		    value = erase_dir (source_with_path, &count, &bytes);
 		else
-		    value = erase_file (source_with_path);
+		    value = erase_file (source_with_path, &count, &bytes, 1);
 	    }
 	    else
 	    {
@@ -1955,7 +1987,7 @@ panel_operate_flags (void *source_panel, FileOperation operation, char *thedefau
 		    	else
 			    value = copy_file_file (
 				    source_with_path, temp, 1,
-				    &count, &bytes);
+				    &count, &bytes, 1);
 			free_linklist (&dest_dirs);
 		    	break;
 

@@ -67,7 +67,7 @@ struct colorpair {
 #endif
 
 struct colorpair color_map [] = {
-    { "normal=",     0, 0 },	/* normal */
+    { "normal=",     0, 0 },	/* normal */               /*  1 */
     { "selected=",   0, 0 },	/* selected */
     { "marked=",     0, 0 },	/* marked */
     { "markselect=", 0, 0 },	/* marked/selected */
@@ -76,35 +76,41 @@ struct colorpair color_map [] = {
     { "reverse=",    0, 0 },	/* reverse */
 
     /* Dialog colors */
-    { "dnormal=",    0, 0 },	/* Dialog normal */
+    { "dnormal=",    0, 0 },	/* Dialog normal */        /*  8 */
     { "dfocus=",     0, 0 },	/* Dialog focused */
     { "dhotnormal=", 0, 0 },	/* Dialog normal/hot */
     { "dhotfocus=",  0, 0 },	/* Dialog focused/hot */
     
-    { "viewunderline=", 0, 0 },	/* _\b? sequence in view */
-    { "menusel=",    0, 0 },	/* Menu selected color */
+    { "viewunderline=", 0, 0 },	/* _\b? sequence in view, underline in editor */
+    { "menusel=",    0, 0 },	/* Menu selected color */  /* 13 */
     { "menuhot=",    0, 0 },    /* Color for menu hotkeys */
     { "menuhotsel=", 0, 0 },    /* Menu hotkeys/selected entry */
     
-    { "helpnormal=", 0, 0 },    /* Help normal */
+    { "helpnormal=", 0, 0 },    /* Help normal */          /* 16 */
     { "helpitalic=", 0, 0 },    /* Italic in help */
     { "helpbold=",   0, 0 },    /* Bold in help */
     { "helplink=",   0, 0 },    /* Not selected hyperlink */
     { "helpslink=",  0, 0 },    /* Selected hyperlink */
     
-    { "gauge=",      0, 0 },    /* Color of the progress bar (percentage) */
+    { "gauge=",      0, 0 },    /* Color of the progress bar (percentage) *//* 21 */
     { "input=",      0, 0 },
  
     /* Per file types colors */
-    { "directory=",  0, 0 },
-    { "execute=",    0, 0 },
-    { "link=",       0, 0 },
+    { "directory=",  0, 0 },                               /*  23 */
+    { "executable=", 0, 0 },
+    { "link=",       0, 0 },  /* symbolic link (neither stalled nor link to directory) */
+    { "stalledlink=",0, 0 },  /* stalled symbolic link */
     { "device=",     0, 0 },
-    { "special=",    0, 0 },
-    { "core=",       0, 0 },
+    { "special=",    0, 0 }, /* sockets, fifo */
+    { "core=",       0, 0 }, /* core files */              /* 29 */
 
-/* editor colors start at 29 */
-    { "editnormal=",     0, 0 },	/* normal */
+    { 0,             0, 0 }, /* not usable (DEFAULT_COLOR_INDEX) *//* 30 */
+    { 0,             0, 0 }, /* unused */
+    { 0,             0, 0 }, /* not usable (A_REVERSE) */
+    { 0,             0, 0 }, /* not usable (A_REVERSE_BOLD) */
+
+/* editor colors start at 34 */
+    { "editnormal=",     0, 0 },	/* normal */       /* 34 */
     { "editbold=",       0, 0 },	/* search->found */
     { "editmarked=",     0, 0 },	/* marked/selected */
 };
@@ -201,7 +207,11 @@ void configure_colors_string (char *the_color_string)
 
 	found = 0;
 	for (i = 0; i < ELEMENTS(color_map); i++){
-	    int klen = strlen (color_map [i].name);
+	    int klen;
+
+            if (!color_map [i].name)
+                continue;
+            klen = strlen (color_map [i].name);
 
 	    if (strncmp (color_string, color_map [i].name, klen) == 0){
 		color_string += klen;
@@ -232,7 +242,7 @@ static void configure_colors (void)
 }
 
 #ifndef HAVE_SLANG
-#define MAX_PAIRS 30
+#define MAX_PAIRS 34
 int attr_pairs [MAX_PAIRS];
 #endif
 
@@ -253,8 +263,9 @@ init_colors (void)
 	
 	use_colors = 1;
 	configure_colors ();
-	for (i = 0; i < ELEMENTS (color_map); i++)
-	    init_pair (i+1, color_map_fg(i), color_map_bg(i));
+	for (i = 0; i < ELEMENTS (color_map); i++) 
+            if (color_map [i].name)
+                init_pair (i+1, color_map_fg(i), color_map_bg(i));
 	load_dialog_colors ();
 }
 #else
@@ -284,19 +295,22 @@ void init_colors (void)
 #endif
 
 #if defined HAVE_SLANG && !defined(OS2_NT)
-	if (use_colors) { /* Hack to make COLOR_PAIR(33) be the default fg/bg
-	                     of the terminal */
+	if (use_colors) { /* Hack to make COLOR_PAIR(DEFAULT_COLOR_INDEX) 
+                             be the default fg/bg of the terminal */
 	    char *Norm_Vid = SLtt_tgetstr ("me");
 	    
 	    if (Norm_Vid == NULL)
 	        Norm_Vid = SLtt_tgetstr ("se");
 	    if (Norm_Vid == NULL)
 	        Norm_Vid = "\033[0m";
-	    SLtt_set_color_esc (33, Norm_Vid);
+	    SLtt_set_color_esc (DEFAULT_COLOR_INDEX, Norm_Vid);
 	}
 #endif	
 
 	for (i = 0; i < ELEMENTS (color_map); i++){
+            if (!color_map [i].name)
+                continue;
+
 	    init_pair (i+1, color_map_fg(i), color_map_bg(i));
 
 #ifndef HAVE_SLANG

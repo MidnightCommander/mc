@@ -384,7 +384,7 @@ try_alloc_color_pair (char *fg, char *bg)
 	0, 0, 0, 0
     };
 
-    c.index = EDITOR_NORMAL_COLOR;
+    c.index = EDITOR_NORMAL_COLOR_INDEX;
     p = &c;
     for (;;) {
 	if (((fg && p->fg) ? !strcmp (fg, p->fg) : fg == p->fg) != 0
@@ -400,9 +400,10 @@ try_alloc_color_pair (char *fg, char *bg)
     p->fg = fg ? strdup (fg) : 0;
     p->bg = bg ? strdup (bg) : 0;
     if (!fg)
-	fg = color_map[28].fg;
+        /* Index in color_map array = COLOR_INDEX - 1 */
+	fg = color_map[EDITOR_NORMAL_COLOR_INDEX - 1].fg;
     if (!bg)
-	bg = color_map[28].bg;
+	bg = color_map[EDITOR_NORMAL_COLOR_INDEX - 1].bg;
     p->index = alloc_color_pair (fg, bg);
     return p->index;
 }

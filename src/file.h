@@ -31,7 +31,8 @@ extern int know_not_what_am_i_doing;
 struct link;
 
 int copy_file_file      (char *s, char *d, int ask_overwrite,
-			 long *progres_count, double *progress_bytes);
+			 long *progres_count, double *progress_bytes, 
+                         int is_toplevel_file);
 int move_file_file      (char *s, char *d,
 			 long *progres_count, double *progress_bytes);
 int move_dir_dir        (char *s, char *d,
@@ -39,7 +40,7 @@ int move_dir_dir        (char *s, char *d,
 int copy_dir_dir        (char *s, char *d, int toplevel, int move_over,
 			 int delete, struct link *parent_dirs,
 			 long *progres_count, double *progress_bytes);
-int erase_dir           (char *s);
+int erase_dir           (char *s, long *progres_count, double *progress_bytes);
 int erase_dir_iff_empty (char *s);
 
 /*

@@ -1,3 +1,36 @@
+Tue Dec 29 16:34:02 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* file.c (progress_update_one): Ignore files in subdirectories
+	when panel totals haven't been computed.
+
+	(erase_dir, erase_file): update progress bar (i.e. make it work
+	for OP_DELETE).
+
+	(panel_operate_flags): Don't compute panel totals for OP_MOVE.
+	When moving files on the same filesystem computing totals might 
+	last much longer than the actual move operation. 
+
+	(various places): adpations for the above changes.
+
+mon Dec 28 22:15:43 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* slint.c (try_alloc_color_pair): Changed hardcoded values into
+	defines.
+
+Mon Dec 28 20:22:59 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* color.c, text.c: Added color "stalledlink" which is used for
+	stalled symbolic links. Formerly "viewunderline" was used for
+	this (IMO bad because function and name didn't match).
+	According to the man page the color keyword for executable files 
+	is `executable' and not `execute' -- changed. 
+
+	* color.c, color.h: When using SLang some color indexes are not 
+	freely choosable (DEFAULT_COLOR clashed with A_BOLD_REVERSE).
+	Solved by adding holes in color_map.
+
+	* find.c (do_search): fixed possible memory leak
+
 Sat Dec 26 09:53:39 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* layout.c: include sys/ioctl.h to get definition of TIOCGWINSZ 
