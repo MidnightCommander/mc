@@ -1,3 +1,7 @@
+1999-05-31  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* main.c (handle_args): Handle --desktop-linksdir without using X
+
 1999-05-29  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* treestore.c (should_skip_directory): Add fix from Wayne Roberts

@@ -2788,6 +2788,13 @@ handle_args (int argc, char *argv [])
     poptContext   ctx;
 
 #ifdef HAVE_GNOME
+    /* special case, handle --desktop-linksdir without initing X */
+    if (argc > 1){
+	    if (strcmp (argv [1], "--desktop-linksdir") == 0){
+		    puts (DESKTOP_INIT_DIR);
+		    exit (1);
+	    }
+    }
 #ifdef HAVE_CORBA
     init_corba_with_args (&argc, argv, &ctx);
 #else
