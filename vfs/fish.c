@@ -778,6 +778,12 @@ static int fish_fh_open (vfs *me, vfs_s_fh *fh, int flags, int mode)
 {
     /* File will be written only, so no need to retrieve it */
     if (((flags & O_WRONLY) == O_WRONLY) && !(flags & (O_RDONLY|O_RDWR))){
+	if (!fh->ino->localname){
+	    int tmp_handle = mc_mkstemps (&fh->ino->localname, me->name, NULL);
+	    if (tmp_handle == -1)
+		return -1;
+	    close (tmp_handle);
+	}
 	return 0;
     }
     if (!fh->ino->localname)

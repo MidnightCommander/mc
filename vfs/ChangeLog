@@ -1,3 +1,10 @@
+2002-05-22  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* fish.c (fish_fh_open): Generate fh->ino->localname
+	if this one is NULL and file is opened for writting only.
+	* ftpfs.c (ftpfs_fh_open): Likewise if control_connection_buzy
+	is true.
+
 2002-05-21  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* direntry.c (vfs_s_retrieve_file): Please, care about

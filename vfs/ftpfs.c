@@ -1701,8 +1701,15 @@ static int ftpfs_fh_open (vfs *me, vfs_s_fh *fh, int flags, int mode)
 	 * to local temporary file and stored to ftp server 
 	 * by vfs_s_close later
 	 */
-	if (FH_SUPER->u.ftp.control_connection_buzy)
+	if (FH_SUPER->u.ftp.control_connection_buzy){
+	    if (!fh->ino->localname){
+		int handle = mc_mkstemps (&fh->ino->localname, me->name, NULL);
+		if (handle == -1)
+		    return -1;
+		close (handle);
+	    }
 	    return 0;
+	}
 	name = vfs_s_fullpath (me, fh->ino);
 	if (!name)
 	    return -1;
