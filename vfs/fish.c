@@ -653,7 +653,9 @@ static int
 fish_chmod (vfs *me, char *path, int mode)
 {
     PREFIX
-    g_snprintf(buf, sizeof(buf), "#CHMOD %4.4o /%s\nchmod %4.4o \"/%s\"; echo '### 000'\n", 
+    g_snprintf(buf, sizeof(buf), "#CHMOD %4.4o /%s\n"
+				 "chmod %4.4o \"/%s\" 2>/dev/null\n"
+				 "echo '### 000'\n", 
 	    mode & 07777, rpath,
 	    mode & 07777, rpath);
     POSTFIX(OPT_FLUSH);
@@ -674,15 +676,19 @@ static int fish_##name (vfs *me, char *path1, char *path2) \
 }
 
 #define XTEST if (bucket1 != bucket2) { ERRNOR (EXDEV, -1); }
-FISH_OP(rename, XTEST, "#RENAME /%s /%s\nmv \"/%s\" \"/%s\"; echo '### 000'" );
-FISH_OP(link,   XTEST, "#LINK /%s /%s\nln \"/%s\" \"/%s\"; echo '### 000'" );
+FISH_OP(rename, XTEST, "#RENAME /%s /%s\n"
+		       "mv \"/%s\" \"/%s\" 2>/dev/null\n"
+		       "echo '### 000'" );
+FISH_OP(link,   XTEST, "#LINK /%s /%s\n"
+		       "ln \"/%s\" \"/%s\" 2>/dev/null\n"
+		       "echo '### 000'" );
 
 static int fish_symlink (vfs *me, char *setto, char *path)
 {
     PREFIX
     g_snprintf(buf, sizeof(buf),
             "#SYMLINK %s /%s\n"
-	    "ln -s \"%s\" \"/%s\"\n"
+	    "ln -s \"%s\" \"/%s\" 2>/dev/null\n"
 	    "echo '### 000'\n",
 	    setto, rpath, setto, rpath);
     POSTFIX(OPT_FLUSH);
@@ -697,7 +703,7 @@ fish_chown (vfs *me, char *path, int owner, int group)
     sgroup = getgrgid( group )->gr_name;
     g_snprintf(buf, sizeof(buf),
             "#CHOWN /%s /%s\n"
-	    "chown %s \"/%s\"\n"
+	    "chown %s \"/%s\" 2>/dev/null\n"
 	    "echo '### 000'\n", 
 	    sowner, rpath,
 	    sowner, rpath);
@@ -705,7 +711,7 @@ fish_chown (vfs *me, char *path, int owner, int group)
                   /* FIXME: what should we report if chgrp succeeds but chown fails? */
     g_snprintf(buf, sizeof(buf),
             "#CHGRP /%s /%s\n"
-	    "chgrp %s \"/%s\"\n"
+	    "chgrp %s \"/%s\" 2>/dev/null\n"
 	    "echo '### 000'\n", 
 	    sgroup, rpath,
 	    sgroup, rpath);
@@ -718,7 +724,7 @@ static int fish_unlink (vfs *me, char *path)
     PREFIX
     g_snprintf(buf, sizeof(buf),
             "#DELE /%s\n"
-	    "rm -f \"/%s\"\n"
+	    "rm -f \"/%s\" 2>/dev/null\n"
 	    "echo '### 000'\n",
 	    rpath, rpath);
     POSTFIX(OPT_FLUSH);
@@ -729,7 +735,7 @@ static int fish_mkdir (vfs *me, char *path, mode_t mode)
     PREFIX
     g_snprintf(buf, sizeof(buf),
             "#MKD /%s\n"
-	    "mkdir \"/%s\"\n"
+	    "mkdir \"/%s\" 2>/dev/null\n"
 	    "echo '### 000'\n",
 	    rpath, rpath);
     POSTFIX(OPT_FLUSH);
@@ -740,7 +746,7 @@ static int fish_rmdir (vfs *me, char *path)
     PREFIX
     g_snprintf(buf, sizeof(buf),
             "#RMD /%s\n"
-	    "rmdir \"/%s\"\n"
+	    "rmdir \"/%s\" 2>/dev/null\n"
 	    "echo '### 000'\n",
 	    rpath, rpath);
     POSTFIX(OPT_FLUSH);

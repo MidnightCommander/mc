@@ -1,3 +1,7 @@
+2001-05-27  Pavel Roskin  <proski@gnu.org>
+
+	* fish.c: Redirect stderr of all commands to /dev/null.
+
 2001-05-25  Pavel Roskin  <proski@gnu.org>
 
 	* sfs.c (vfs_sfs_ops): Typo fix.
