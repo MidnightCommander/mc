@@ -2208,7 +2208,8 @@ listbox_new (int y, int x, int width, int height,
     l->list   = l->top = l->current = 0;
     l->pos    = 0;
     l->width  = width;
-    l->height = height;
+    if (height <= 0)
+	    l->height = 0;
     l->count  = 0;
     l->top    = 0;
     l->current= 0;

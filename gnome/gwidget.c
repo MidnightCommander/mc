@@ -445,6 +445,9 @@ x_create_listbox (Dlg_head *h, widget_data parent, WListbox *l)
 			    GTK_SIGNAL_FUNC (listbox_select), l);
 	l->widget.wdata = (widget_data) sw;
 	gtk_widget_show (listbox);
+
+	g_warning ("FIXME: actually compute the real size of the listbox");
+	l->height = 8;
 	
 	for (p = l->list, i = 0; i < l->count; i++, p = p->next){
 		char *text [1];
