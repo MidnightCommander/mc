@@ -243,6 +243,18 @@ panel_fill_panel_icons (WPanel *panel)
 	gnome_icon_list_freeze (icons);
 	gnome_icon_list_clear (icons);
 
+	/*
+	 * HACK_BEGIN:
+	 *    Temporary hack for pre-gnome-libs-1.0.10
+	 *
+	 *    Remove after wildely deployed
+	 */
+	icons->last_selected = 0;
+	icons->last_clicked = 0;
+	/*
+	 * HACK_END:
+	 */
+	 
 	for (i = 0; i < top; i++){
 		file_entry *fe = &panel->dir.list [i];
 		int p;

@@ -701,8 +701,8 @@ gnome_filter_cmd (GtkWidget *widget, WPanel *panel)
 			gtk_label_set_text (GTK_LABEL (panel->status), panel->filter);
 		
 		gnome_entry_save_history (GNOME_ENTRY (entry));
-		reread_cmd ();
 		x_filter_changed (panel);
+		reread_cmd ();
 		break;
 	}
 	gtk_widget_destroy (filter_dlg);

@@ -1,5 +1,11 @@
 1999-05-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gscreen.c (panel_fill_panel_icons): Add a hack to work around
+	gnome-libs/gnome-icon-list bug that did not reset the proper
+	values.  A fix will be available in gnome-libs-1.0.10.
+
+	Fixes bug #1338.
+
 	* gcmd.c (gnome_close_panel): Remove filter_w
 
 	* gscreen.c (x_filter_changed): Update nothing.
