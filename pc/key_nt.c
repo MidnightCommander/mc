@@ -85,6 +85,7 @@ struct {
     { ALT('*'),  VK_MULTIPLY },
     { ALT('+'),  VK_ADD },
     { ALT('-'),  VK_SUBTRACT },
+    { ALT('\t'), VK_PAUSE }, /* Added to make Complete work press Pause */
 
     { ESC_CHAR, VK_ESCAPE },
 
@@ -101,6 +102,8 @@ void init_key (void)
 
 int ctrl_pressed ()
 {
+    if(dwSaved_ControlState & RIGHT_ALT_PRESSED) return 0; 
+    /* The line above fixes the BUG with the AltGr Keys*/
     return dwSaved_ControlState & (RIGHT_CTRL_PRESSED | LEFT_CTRL_PRESSED);
 }
 
@@ -111,7 +114,7 @@ int shift_pressed ()
 
 int alt_pressed ()
 {
-    return dwSaved_ControlState & (RIGHT_ALT_PRESSED | LEFT_ALT_PRESSED);
+    return dwSaved_ControlState & (/* RIGHT_ALT_PRESSED  |*/ LEFT_ALT_PRESSED  );
 }
 
 static int VKtoCurses (int a_vkc)
@@ -128,12 +131,20 @@ static int VKtoCurses (int a_vkc)
 static int translate_key_code(int asc, int scan)
 {
     int c;
+    switch(scan){
+    case 106: /* KP_MULT*/
+	return ALT('*');
+    case 107: /* KP_PLUS*/
+	return ALT('+');
+    case 109: /* KP_MINUS*/
+	return ALT('-');
+    }
     c = VKtoCurses (scan);
     if (!asc && !c)
 	return 0;
     if (asc && c)
 	return c;
-    if (!asc)
+    if (!asc || asc=='\t' )
     {
 	if (shift_pressed() && (c >= KEY_F(1)) && (c <= KEY_F(10)))
 	    c += 10;
@@ -141,8 +152,10 @@ static int translate_key_code(int asc, int scan)
 	    c += 10;
 	if (alt_pressed() && (c == KEY_F(7)))
 	    c = ALT('?');
-	if (ctrl_pressed() && c == '\t')
-	    c = ALT('\t');
+ 	if (asc == '\t'){
+ 		if(ctrl_pressed())c = ALT('\t');
+ 		else c=asc;
+ 	}
 	return c;
     }
     if (ctrl_pressed())
@@ -176,11 +189,11 @@ int get_key_code (int no_delay)
 		    break;
 
 		vkcode = ir.Event.KeyEvent.wVirtualKeyCode;
-#ifndef __MINGW32__
+//#ifndef __MINGW32__
 		ch = ir.Event.KeyEvent.uChar.AsciiChar;
-#else
-		ch = ir.Event.KeyEvent.AsciiChar;
-#endif
+//#else
+//		ch = ir.Event.KeyEvent.AsciiChar;
+//#endif
 		dwSaved_ControlState = ir.Event.KeyEvent.dwControlKeyState;
 		j = translate_key_code (ch, vkcode);
 		if (j)

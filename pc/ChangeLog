@@ -1,3 +1,17 @@
+Wed Oct 14 14:51:23 1998  Franco Bez <franco.bez@augsburg.baynet.de>
+
+	* gtkedit/edit.c: Workarround for the CR/LF Translation problem.
+	This is vital, because otherwise CoolEdit corrupts files -
+	they keep growing each time you save the file.
+
+	* pc/key_nt.c: fixed the problem with the AltGr Key and the
+	Gray Keys. Still not optimal, but usable.
+	Especially usefull for international keyboard
+
+	* pc/util_nt.c: Provide a mc_doublepopen and mc_doublepclose
+	function. If one has an egrep.exe installed it's now possible
+	to search for files containing a search pattern.
+
 Tue May 12 17:16:43 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* Makefile.RSX, mc.rc: Resources support for RSX

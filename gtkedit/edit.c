@@ -24,6 +24,7 @@
 #if defined(OS2_NT)
 #    include <io.h>
 #    include <fcntl.h>
+#    define CR_LF_TRANSLATION
 #endif
 #include "edit.h"
 
@@ -104,6 +105,14 @@ char *edit_get_buffer_as_text (WEdit * e)
 /* cursor set to start of file */
 int init_dynamic_edit_buffers (WEdit * edit, const char *filename, const char *text)
 {
+ 
+#if defined CR_LF_TRANSLATION
+    /* Variables needed for safe handling of Translation from Microsoft CR/LF EOL to
+       Unix Style LF EOL - Franco */
+    long bytes_wanted,bytes_read,bytes_missing;
+    char *p;
+#endif
+ 
     long buf;
     int j, file = 0, buf2;
 
@@ -124,8 +133,35 @@ int init_dynamic_edit_buffers (WEdit * edit, const char *filename, const char *t
 
     edit->buffers2[buf2] = CMalloc (EDIT_BUF_SIZE);
 
-    if (filename)
+/*
+_read returns the number of bytes read, 
+which may be less than count if there are fewer than count bytes left in the file 
+or if the file was opened in text mode, 
+in which case each carriage return–linefeed (CR-LF) pair is replaced 
+with a single linefeed character. Only the single linefeed character is counted 
+in the return value. The replacement does not affect the file pointer.
+
+_eof returns 1 if the current position is end of file, or 0 if it is not. 
+A return value of -1 indicates an error; in this case, errno is set to EBADF, 
+which indicates an invalid file handle.
+*/
+    if (filename){
+
+#if defined CR_LF_TRANSLATION
+	bytes_wanted=edit->curs2 & M_EDIT_BUF_SIZE;
+	p = (char *) edit->buffers2[buf2] + EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE);
+	bytes_read = read (file, p , edit->curs2 & M_EDIT_BUF_SIZE);
+	bytes_missing = bytes_wanted - bytes_read ;
+	while(bytes_missing ){
+		p += bytes_read;
+		bytes_read = read(file,p,bytes_missing);
+		if(bytes_read <= 0) break;
+		bytes_missing -= bytes_read ;
+	}
+#else
 	read (file, (char *) edit->buffers2[buf2] + EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE), edit->curs2 & M_EDIT_BUF_SIZE);
+#endif
+    }
     else {
 	memcpy (edit->buffers2[buf2] + EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE), text, edit->curs2 & M_EDIT_BUF_SIZE);
 	text += edit->curs2 & M_EDIT_BUF_SIZE;
@@ -133,8 +169,22 @@ int init_dynamic_edit_buffers (WEdit * edit, const char *filename, const char *t
 
     for (buf = buf2 - 1; buf >= 0; buf--) {
 	edit->buffers2[buf] = CMalloc (EDIT_BUF_SIZE);
-	if (filename)
+ 	if (filename){
+#if defined CR_LF_TRANSLATION
+		bytes_wanted = EDIT_BUF_SIZE;
+		p = (char *) edit->buffers2[buf];
+		bytes_read = read (file, p, EDIT_BUF_SIZE);
+		bytes_missing = bytes_wanted - bytes_read ;
+		while(bytes_missing ){
+			p += bytes_read;
+			bytes_read = read(file,p,bytes_missing);
+			if(bytes_read <= 0) break;
+			bytes_missing -= bytes_read ;
+		}
+#else
 	    read (file, (char *) edit->buffers2[buf], EDIT_BUF_SIZE);
+#endif
+ 	}
 	else {
 	    memcpy (edit->buffers2[buf], text, EDIT_BUF_SIZE);
 	    text += EDIT_BUF_SIZE;
@@ -154,15 +204,21 @@ int edit_load_file (WEdit * edit, const char *filename, const char *text, unsign
     struct stat s;
     int file;
 
+/* VARS for Lastbyte calculation in TEXT mode FRANCO */
+#if defined CR_LF_TRANSLATION
+    char tmp_buf[1024];
+    long real_size,bytes_read;
+#endif
+
     if (text) {
 	edit->last_byte = text_size;
 	filename = NULL;
     } else {
 #if defined(MIDNIGHT) || defined(GTK)
-	if ((file = open ((char *) filename, O_RDONLY)) < 0)
+	if ((file = open ((char *) filename, O_RDONLY | MY_O_TEXT )) < 0)
 	{
 		close(creat((char *) filename, 0666));
-		if ((file = open ((char *) filename, O_RDONLY)) < 0) {
+		if ((file = open ((char *) filename, O_RDONLY | MY_O_TEXT )) < 0) {
 			edit_error_dialog (_(" Error "), get_sys_error (catstrs (" Fail trying to open the file, ", filename, ", for reading ", 0)));
 			return 1;
 		}
@@ -194,6 +250,20 @@ int edit_load_file (WEdit * edit, const char *filename, const char *text, unsign
 		filename, _(" \n Increase edit.h:MAXBUF and recompile the editor. "), 0));
 	    return 1;
 	}
+
+/* Lastbyte calculation in TEXT mode FRANCO */
+#if defined CR_LF_TRANSLATION
+	if(file && (!text)){
+		real_size=0;
+		tmp_buf[1024]=0;
+		while((bytes_read = read(file,tmp_buf,1024)) > 0){
+			real_size += bytes_read;
+		}
+		s.st_size = real_size;
+	}
+
+#endif
+
 	close (file);
 	edit->last_byte = s.st_size;
 	edit->stat = s;

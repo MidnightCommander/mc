@@ -118,10 +118,10 @@ void check_error_pipe (void)
 	{
 	    int rvalue;
 
-	    rvalue = read (error_pipe[0], error + len, 1);
-	    len ++;
+	    rvalue = -1; // read (error_pipe[0], error + len, 1);
 	    if (rvalue <= 0)
 		break;
+	    len ++;
 	}
 	error[len] = 0;
 	close (error_pipe[0]);
@@ -579,16 +579,92 @@ void init_uid_gid_cache (void)
     return;
 }
 
+/* INHANDLE is a result of some mc_open call to any vfs, this function
+   returns a normal handle (to be used with read) of a pipe for reading
+   of the output of COMMAND with arguments ... (must include argv[0] as
+   well) which gets as its input at most INLEN bytes from the INHANDLE
+   using mc_read. You have to call mc_doublepclose to close the returned
+   handle afterwards. If INLEN is -1, we read as much as we can :) */
 int mc_doublepopen (int inhandle, int inlen, pid_t *the_pid, char *command, ...)
 {
-	return 0;
+    int pipe0 [2], pipe1 [2], std_sav [2];
+#define MAXARGS 16
+	int argno;
+	char *args[MAXARGS];
+	char buffer [8192];
+	int i;
+	va_list ap;
+
+    pid_t pid;
+
+	// Create the pipes
+	if(_pipe(pipe0, 8192, O_BINARY | O_NOINHERIT) == -1)
+   	    exit (1);
+	if(_pipe(pipe1, 8192, O_BINARY | O_NOINHERIT) == -1)
+   	    exit (1);
+	// Duplicate stdin/stdout handles (next line will close original)
+	std_sav[0] = _dup(_fileno(stdin));
+	std_sav[1] = _dup(_fileno(stdout));
+	// Duplicate read end of pipe0 to stdin handle
+	if(_dup2(pipe0[0], _fileno(stdin)) != 0)
+   	    exit (1);
+	// Duplicate write end of pipe1 to stdout handle
+	if(_dup2(pipe1[1], _fileno(stdout)) != 0)
+   	    exit (1);
+	// Close original read end of pipe0
+	close(pipe0[0]);
+	// Close original write end of pipe1
+	close(pipe1[1]);
+
+	va_start (ap, command);
+	argno = 0;
+	while ((args[argno++] = va_arg(ap, char *)) != NULL)
+		if (argno == (MAXARGS - 1)) {
+		args[argno] = NULL;
+		break;
+	}
+	va_end (ap);
+	// Spawn process
+	pid = spawnvp(P_NOWAIT,command, args);// argv[1], (const char* const*)&argv[1]);
+	if(!pid)
+   	    exit (1);
+	// Duplicate copy of original stdin back into stdin
+	if(_dup2(std_sav[0], _fileno(stdin)) != 0)
+   	    exit (1);
+	// Duplicate copy of original stdout back into stdout
+	if(_dup2(std_sav[1], _fileno(stdout)) != 0)
+   	    exit (1);
+	// Close duplicate copy of original stdout  and stdin    
+	close(std_sav[0]);
+	close(std_sav[1]);
+
+
+	while ((i = _read (inhandle, buffer,
+							 (inlen == -1 || inlen > 8192) 
+							 ? 8192 : inlen)) > 0) {
+		write (pipe0 [1], buffer, i);
+		if (inlen != -1) {
+			inlen -= i;
+			if (!inlen)
+				break;
+		}
+	}
+	close (pipe0 [1]);
+	*the_pid = pid;
+    return pipe1 [0];
+
 }
 
 int mc_doublepclose (int pipe, pid_t pid)
 {
-/* 	win32Trace(("mc_doublepclose called")); */
-	return 0;
+    int status = 0;
+    
+    close (pipe);
+    _cwait ( &status, pid, 0);
+    return status;	
 }
+
+/*hacks to get it compile, remove these after vfs works */
 
 /*hacks to get it compile, remove these after vfs works */
 #ifndef USE_VFS
