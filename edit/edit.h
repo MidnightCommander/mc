@@ -178,7 +178,6 @@ static inline int edit_get_byte (WEdit * edit, long byte_index)
 }
 #endif
 
-char *edit_get_buffer_as_text (WEdit * edit);
 int edit_count_lines (WEdit * edit, long current, int upto);
 long edit_move_forward (WEdit * edit, long current, int lines, long upto);
 long edit_move_forward3 (WEdit * edit, long current, int cols, long upto);
@@ -305,7 +304,6 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion);
 
 #define edit_get_load_file(d,f,h) input_dialog (h, _(" Enter file name: "), f)
 #define edit_get_save_file(d,f,h) input_dialog (h, _(" Enter file name: "), f)
-#define CMalloc(x) malloc(x)
      
 #define edit_error_dialog(h,s) query_dialog (h, s, 0, 1, _("&Dismiss"))
 

@@ -1,5 +1,9 @@
 2002-11-30  Pavel Roskin  <proski@gnu.org>
 
+	* edit.c: Use g_malloc() and g_free() on buffers1 and buffers2.
+	Eliminate CMalloc.
+	(edit_get_buffer_as_text): Remove, it's unused.
+
 	* editcmd.c (edit_set_search_parameters): Use g_malloc().
 	(edit_complete_word_cmd): Use g_free().
 

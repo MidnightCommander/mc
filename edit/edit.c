@@ -124,18 +124,6 @@ int edit_get_byte (WEdit * edit, long byte_index)
 
 #endif
 
-char *edit_get_buffer_as_text (WEdit * e)
-{
-    int l, i;
-    char *t;
-    l = e->curs1 + e->curs2;
-    t = CMalloc (l + 1);
-    for (i = 0; i < l; i++)
-	t[i] = edit_get_byte (e, i);
-    t[l] = 0;
-    return t;
-}
-
 
 /* 
    The edit_open_file (previously edit_load_file) function uses
@@ -175,7 +163,7 @@ init_dynamic_edit_buffers (WEdit * edit, const char *filename, const char *text)
 
     buf2 = edit->curs2 >> S_EDIT_BUF_SIZE;
 
-    edit->buffers2[buf2] = CMalloc (EDIT_BUF_SIZE);
+    edit->buffers2[buf2] = g_malloc (EDIT_BUF_SIZE);
 
     if (filename) {
 	mc_read (file, (char *) edit->buffers2[buf2] + EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE), edit->curs2 & M_EDIT_BUF_SIZE);
@@ -185,7 +173,7 @@ init_dynamic_edit_buffers (WEdit * edit, const char *filename, const char *text)
     }
 
     for (buf = buf2 - 1; buf >= 0; buf--) {
-	edit->buffers2[buf] = CMalloc (EDIT_BUF_SIZE);
+	edit->buffers2[buf] = g_malloc (EDIT_BUF_SIZE);
 	if (filename) {
 	    mc_read (file, (char *) edit->buffers2[buf], EDIT_BUF_SIZE);
 	} else {
@@ -312,13 +300,13 @@ int edit_insert_file (WEdit * edit, const char *filename)
 	unsigned char *buf;
 	if ((file = mc_open (filename, O_RDONLY | O_BINARY )) == -1)
 	    return 0;
-	buf = malloc (TEMP_BUF_LEN);
+	buf = g_malloc (TEMP_BUF_LEN);
 	while ((blocklen = mc_read (file, (char *) buf, TEMP_BUF_LEN)) > 0) {
 	    for (i = 0; i < blocklen; i++)
 		edit_insert (edit, buf[i]);
 	}
 	edit_cursor_move (edit, current - edit->curs1);
-	free (buf);
+	g_free (buf);
 	mc_close (file);
 	if (blocklen)
 	    return 0;
@@ -509,9 +497,9 @@ int edit_clean (WEdit * edit)
 	book_mark_flush (edit, -1);
 	for (; j <= MAXBUFF; j++) {
 	    if (edit->buffers1[j] != NULL)
-		free (edit->buffers1[j]);
+		g_free (edit->buffers1[j]);
 	    if (edit->buffers2[j] != NULL)
-		free (edit->buffers2[j]);
+		g_free (edit->buffers2[j]);
 	}
 
 	if (edit->undo_stack)
@@ -820,7 +808,7 @@ void edit_insert_ahead (WEdit * edit, int c)
     edit->last_get_rule += (edit->last_get_rule >= edit->curs1);
 
     if (!((edit->curs2 + 1) & M_EDIT_BUF_SIZE))
-	edit->buffers2[(edit->curs2 + 1) >> S_EDIT_BUF_SIZE] = malloc (EDIT_BUF_SIZE);
+	edit->buffers2[(edit->curs2 + 1) >> S_EDIT_BUF_SIZE] = g_malloc (EDIT_BUF_SIZE);
     edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE) - 1] = c;
 
     edit->last_byte++;
@@ -841,7 +829,7 @@ int edit_delete (WEdit * edit)
     p = edit->buffers2[(edit->curs2 - 1) >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - ((edit->curs2 - 1) & M_EDIT_BUF_SIZE) - 1];
 
     if (!(edit->curs2 & M_EDIT_BUF_SIZE)) {
-	free (edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE]);
+	g_free (edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE]);
 	edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] = NULL;
     }
     edit->last_byte--;
@@ -878,7 +866,7 @@ edit_backspace (WEdit * edit)
 
     p = *(edit->buffers1[(edit->curs1 - 1) >> S_EDIT_BUF_SIZE] + ((edit->curs1 - 1) & M_EDIT_BUF_SIZE));
     if (!((edit->curs1 - 1) & M_EDIT_BUF_SIZE)) {
-	free (edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE]);
+	g_free (edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE]);
 	edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE] = NULL;
     }
     edit->last_byte--;
@@ -1028,7 +1016,7 @@ int edit_cursor_move (WEdit * edit, long increment)
 	    edit->curs2++;
 	    c = edit->buffers1[(edit->curs1 - 1) >> S_EDIT_BUF_SIZE][(edit->curs1 - 1) & M_EDIT_BUF_SIZE];
 	    if (!((edit->curs1 - 1) & M_EDIT_BUF_SIZE)) {
-		free (edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE]);
+		g_free (edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE]);
 		edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE] = NULL;
 	    }
 	    edit->curs1--;
@@ -1053,7 +1041,7 @@ int edit_cursor_move (WEdit * edit, long increment)
 	    edit->curs1++;
 	    c = edit->buffers2[(edit->curs2 - 1) >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - ((edit->curs2 - 1) & M_EDIT_BUF_SIZE) - 1];
 	    if (!(edit->curs2 & M_EDIT_BUF_SIZE)) {
-		free (edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE]);
+		g_free (edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE]);
 		edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] = 0;
 	    }
 	    edit->curs2--;
