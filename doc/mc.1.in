@@ -2225,7 +2225,7 @@ on which the operation succeeded are untagged. Failed and skipped files
 are left tagged.
 .\"NODE "Mask Copy/Rename"
 .SH "Mask Copy/Rename"
-The copy/move operations lets you translate the names of files in an
+The copy/move operations let you translate the names of files in an
 easy way.  To do it, you have to specify the correct source mask and
 usually in the trailing part of the destination specify some wildcards.
 All the files matching the source mask are copied/renamed according to
@@ -2512,12 +2512,12 @@ and then the second number.  Then fill in the Replace dialog box as
 follows:
 .PP
 .nf
- Enter search string
-(%d,%d,%d)
- Enter replace string
-apples %d oranges %d
- Enter replacement argument order
-3,2
+ Enter search string:
+  (%d,%d,%d)
+ Enter replacement string:
+  apples %d oranges %d
+ Enter replacement argument order:
+  3,2
 .fi
 .PP
 The last line specifies that the third and then the second

@@ -2351,24 +2351,24 @@ Editar Archivo de Extensiones\&.
 .\"Extension File Edit"
 .\"NODE "Internal File Editor"
 .SH "Editor de Archivos Interno"
-El editor interno incorpora las prestaciones habituales de los editores
-a pantalla completa. Se inicia pulsando
+El editor de archivos interno es un editor a pantalla completa de
+avanzadas prestaciones. Puede editar archivos de hasta 64 MB y también
+permite modificar archivos binarios. Se inicia pulsando
 .B F4
 supuesto que la variable
 .I use_internal_edit
-esté presente en el archivo de inicialización. El tamaño de los archivos
-está limitado a dieciséis megabytes ampliables y edita sin problemas
-archivos binarios.
+esté presente en el archivo de inicialización.
 .PP
-Las características soportadas actualmente son: copia desplazamiento,
-borrado, corte, y pegado de bloques;
-.IR "deshacer paso a paso" ;
-menús desplegables; inserción de archivos; definición de macros;
-buscar y reemplazar usando expresiones regulares (y nuestro propio
-buscar y reemplazar basado en formatos de scanf/printf); selección de
-texto con mayúsculas-cursor (sólo para la consola de linux); alternancia
-insertar-sobreescribir; y la opción de pasar bloques de texto por comandos
-externos como indent.
+Las características soportadas actualmente son: copia, desplazamiento,
+borrado, corte, y pegado de bloques; deshacer paso a paso; menús
+desplegables; inserción de archivos; definición de macros; buscar y
+reemplazar usando expresiones regulares (y su propio buscar y reemplazar
+basado en formatos de scanf/printf); selección de texto con
+mayúsculas-cursor (si el terminal lo soporta); alternancia
+insertar-sobreescribir; plegado de líneas; sangrado automático; tamaño
+de tabulación configurable; realce de sintaxis para varios tipos de
+archivos; y la opción de pasar bloques de texto por filtros externos
+como indent o ispell.
 .PP
 El editor es muy fácil de usar y no requiere aprendizaje alguno.
 Para conocer las teclas asignadas a cada función, basta consultar los
@@ -2418,47 +2418,44 @@ que se copia la primera vez que se usa en
 .B .mc/cedit/edit.indent.rc
 en el directorio personal.
 .PP
-Podemos usar la búsqueda scanf y Buscar y cambiar
-una cadena en formato C. Primero miraremos
-las páginas del manual de
+Podemos usar la búsqueda scanf y reemplazar para buscar y cambiar una
+cierta cadena en formato C. Se pueden consultar las páginas del manual
+de
 .B sscanf
 y
-.B sprintf para saber qué formato de cadena
-es y cómo funciona. Un ejemplo es como sigue: Supongamos que queremos
-cambiar todas las apariciones de un paréntesis abierto, tres
-números separados por coma, y un paréntesis cerrado, con la palabra
+.B sprintf
+para saber qué es una cadena de formato y cómo funciona. Veamos un
+ejemplo: supongamos que queremos cambiar todas las apariciones de un
+paréntesis abierto, tres números separados por comas, y un paréntesis
+cerrado, con la palabra
 .I Melones_De_Pozo-Estrecho,
 el tercer número, la palabra
 .I Tomates_De_Mazarrón
-y el segundo número, Completaremos el diálogo del cuadro de Reemplazo
+y el segundo número. Rellenaremos el diálogo Reemplazar
 como sigue:
 .PP
 .nf
-Introduce la cadena a buscar
-(%d,%d,%d)
-Introduce la cadena de remplazo
-Melones_De_Pozo-Estrecho %d Tomates_De_Mazarrón %d
-Introduce el orden de los argumentos de reemplazo
-3,2
+ Teclee el texto a buscar:
+  (%d,%d,%d)
+ Teclee el cambio a realizar:
+  Melones_De_Pozo-Estrecho %d Tomates_De_Mazarrón %d
+ Teclee el orden de los argumentos:
+  3,2
 .fi
 .PP
-La última línea especifica que el tercer y el segundo
-deben ser usados en lugar de la primera y la segunda.
+La última línea indica que el tercer y el segundo número deben ser
+usados en primer y segundo lugar respectivamente.
 .PP
-Es conveniente usar esta característica con "Confirmar cambios" marcado, porque
-una coincidencia es aquella que se encuentra cuando el número de argumentos
-coincide con el número dado, lo cual no siempre es cierto. Scanf también
-trata el espacio en blanco como si fuese elástico. Démonos cuenta que el formato de
-scanf format % es muy útil para rastrear cadenas, y el espacio en blanco.
+Es conveniente usar esta característica con "Confirmar cambios" marcado,
+porque se pueden producir coincidencias que no correspondan exactamente
+con lo deseado. Scanf también trata el espacio en blanco como si fuese
+elástico. El formato de scanf %[ resulta muy útil para rastrear cadenas,
+y el espacio en blanco.
 .PP
-El editor también visualiza caracteres no estadounidenses (160+). Cuando se
-editan archivos binarios, deberíamos configurar los
+El editor también visualiza caracteres no estadounidenses (160+). Al editar
+archivos binarios, debemos configurar los
 .B bits de pantalla
-a 7 bits en el menú de opciones para guardar el espacio limpio.
-.PP
-Véase también el archivo
-.B LEAME.edit
-para mayor información.
+a 7 bits en el menú de opciones para mantener el espaciado saneado.
 .\"NODE "Completion"
 .SH "Terminación"
 Permite a Midnight Commander escribir por nosotros.
@@ -2477,10 +2474,11 @@ incluyen las palabras reservadas del shell así como comandos internos
 del shell) en ese orden. Si nada de lo anterior es aplicable, se intenta
 la terminación con nombres de archivo.
 .PP
-La terminación de nombres de archivo, usuario y máquina funciona en todas las líneas
-de entrada; la terminación de comandos es específica de la línea de órdenes.
-Si la terminación es ambigua (hay varias posibilidades diferentes),
-MC pita, y la acción siguiente depende de la opción
+La terminación de nombres de archivo, usuario y máquina funciona en
+todas las líneas de entrada; la terminación de comandos es específica de
+la línea de órdenes. Si la terminación es ambigua (hay varias
+posibilidades diferentes), MC pita, y la acción siguiente depende de la
+opción
 .I Completar: Mostrar Todos
 en el diálogo de
 .\"LINK2"
