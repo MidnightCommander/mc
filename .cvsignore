@@ -19,6 +19,7 @@ gettext.m4
 intl
 install-sh
 m4
+mc.qpg
 mc.spec
 missing
 mkinstalldirs
