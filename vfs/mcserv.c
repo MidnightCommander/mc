@@ -55,7 +55,9 @@
 #include <sys/wait.h>
 #include <errno.h>
 #include <signal.h>
-#include <getopt.h>
+#ifdef HAVE_GETOPT_H
+#    include <getopt.h>
+#endif
 
 /* Network include files */
 #include <sys/socket.h>
@@ -70,6 +72,12 @@
 #    ifdef HAVE_RPC_PMAP_CLNT_H
 #        include <rpc/pmap_clnt.h>
 #    endif
+#endif
+
+#if defined(HAVE_PAM)
+#  if !defined(HAVE_SECURITY_PAM_MISC_H)
+#    undef HAVE_PAM
+#  endif
 #endif
 
 /* Authentication include files */
