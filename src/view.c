@@ -343,7 +343,7 @@ enqueue_change (struct hexedit_change_node **head,
 static void move_right (WView *);
 
 static cb_ret_t
-view_handle_editkey (WView *view, unsigned char key)
+view_handle_editkey (WView *view, int key)
 {
     struct hexedit_change_node *node;
     unsigned char byte_val;
@@ -1982,10 +1982,8 @@ toggle_hex_mode (WView *view)
 	view->start_display -= view->start_display % view->bytes_per_line;
 	view->edit_cursor = view->start_display;
 	view->widget.options |= W_WANT_CURSOR;
-	view->widget.parent->flags |= DLG_WANT_TAB;
     } else {
 	view->start_display = view->start_save;
-	view->widget.parent->flags &= ~DLG_WANT_TAB;
 	view->widget.options &= ~W_WANT_CURSOR;
     }
     altered_hex_mode = 1;
@@ -2598,7 +2596,7 @@ view (const char *_command, const char *_file, int *move_dir_p, int start_line)
     /* Create dialog and widgets, put them on the dialog */
     view_dlg =
 	create_dlg (0, 0, LINES, COLS, NULL, view_dialog_callback,
-		    "[Internal File Viewer]", NULL, DLG_NONE);
+		    "[Internal File Viewer]", NULL, DLG_WANT_TAB);
 
     wview = view_new (0, 0, COLS, LINES - 1, 0);
 

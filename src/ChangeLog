@@ -1,3 +1,10 @@
+2003-10-24  Pavel Roskin  <proski@gnu.org>
+
+	* view.c (view_handle_editkey): Fix prototype.
+	(toggle_hex_mode): Don't mess with parent's flags - it can
+	permanently disable Tab switch between panels.
+	(view): Use DLG_WANT_TAB for full screen only, unconditionally.
+
 2003-10-23  Pavel Roskin  <proski@gnu.org>
 
 	* tree.h: Don't include treestore.h.  Fix sources to include
