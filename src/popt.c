@@ -550,7 +550,7 @@ const char * poptStrerror(const int error) {
       case POPT_ERROR_OPTSTOODEEP:
 	return POPT_("aliases nested too deeply");
       case POPT_ERROR_BADQUOTE:
-	return POPT_("error in paramter quoting");
+	return POPT_("error in parameter quoting");
       case POPT_ERROR_BADNUMBER:
 	return POPT_("invalid numeric value");
       case POPT_ERROR_OVERFLOW:
