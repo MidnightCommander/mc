@@ -1,3 +1,8 @@
+1999-06-01  Robert Brady  <rwb197@ecs.soton.ac.uk>
+
+	* file.c (move_dir_dir): Give an error when an attempt is made to
+	move an empty directory into itself.
+
 1999-06-24  smil@linuxfan.com
 
 	* view.c (view_update_bytes_per_line, display): show correctly the
