@@ -1,5 +1,8 @@
 2002-09-23  Pavel Roskin  <proski@gnu.org>
 
+	* editwidget.c (edit): Set edit_dlg to NULL after it's
+	destroyed.
+
 	* edit.h: Move style definitions ...
 	* editdraw.c: ... here.  Multiply them by 256.  Remove unused
 	styles.

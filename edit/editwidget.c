@@ -187,6 +187,7 @@ edit (const char *_file, int line)
 	edit_done_menu ();	/* editmenu.c */
 
     destroy_dlg (edit_dlg);
+    edit_dlg = NULL;
 
     return 1;
 }
