@@ -42,7 +42,7 @@ AM_GNU_GETTEXT
 INTLDEPS=
 LINTL=
 if test "x$USE_INCLUDED_LIBINTL" = xyes; then
-    CPPFLAGS="$CPPFLAGS -I\$(top_srcdir)/intl"
+    CPPFLAGS="$CPPFLAGS -I\$(top_builddir)/intl -I\$(top_srcdir)/intl"
     LINTL='-L$(top_builddir)/intl -lintl'
     INTLDEPS='$(top_builddir)/intl/libintl.a'
 fi
