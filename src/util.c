@@ -106,20 +106,14 @@ int is_printable (int c)
     };
 
     extern int xterm_flag;
-#ifdef HAVE_CHARSET
-    extern int display_codepage;
-#else
-    extern int eight_bit_clean;
-    extern int full_eight_bits;
-#endif /* !HAVE_CHARSET */
 
     c &= 0xff;
 #ifdef HAVE_CHARSET
     if (display_codepage < 0) {
- 	if (xterm_flag)
- 	    return xterm_printable[c];
- 	else
- 	    return (c > 31 && c != 127 && c != 155);
+	if (xterm_flag)
+	    return xterm_printable[c];
+	else
+	    return (c > 31 && c != 127 && c != 155);
     } else
 	return printable[ c ];
 #else
@@ -325,7 +319,7 @@ size_trunc_len (char *buffer, int len, off_t size)
     static const off_t power10 [] =
 	{1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000,
 	 1000000000};
-    static const char *suffix [] =
+    static const char * const suffix [] =
 	{"", "K", "M", "G", "T", "P", "E", "Z", "Y", NULL};
     int j = 0;
 
@@ -395,7 +389,7 @@ char *string_perm (mode_t mode_bits)
 char *
 strip_password (char *p, int has_prefix)
 {
-    static struct {
+    static const struct {
 	char *name;
         size_t len;
     } prefixes[] = { {"/#ftp:", 6},
@@ -620,10 +614,11 @@ char *load_file (char *filename)
     char *data;
     long read_size;
     
-    if (stat (filename, &s) != 0){
+    if ((data_file = fopen (filename, "r")) == NULL){
 	return 0;
     }
-    if ((data_file = fopen (filename, "r")) == NULL){
+    if (fstat (fileno (data_file), &s) != 0){
+	fclose (data_file);
 	return 0;
     }
     data = (char *) g_malloc (s.st_size+1);
@@ -701,7 +696,8 @@ char *file_date (time_t when)
     static char timebuf [MAX_I18NTIMELENGTH + 1];
     time_t current_time = time ((time_t) 0);
     static size_t i18n_timelength = 0;
-    static char *fmt, *fmtyear, *fmttime;
+    static char *fmtyear, *fmttime;
+    char *fmt;
 
     if (i18n_timelength == 0){
 	i18n_timelength = i18n_checktimelength() + 1;
