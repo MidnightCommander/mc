@@ -195,8 +195,9 @@ decode (char *buffer)
 	return res;
 }
 
-int
-tree_store_load (char *name)
+/* Loads the tree store from the specified filename */
+static int
+tree_store_load_from (char *name)
 {
 	FILE *file;
 	char buffer [MC_MAXPATHLEN + 20], oldname[MC_MAXPATHLEN];
@@ -204,7 +205,7 @@ tree_store_load (char *name)
 	int len, common;
 	int do_load;
 	
-	g_return_val_if_fail (name != NULL, TRUE);
+	g_return_val_if_fail (name != NULL, FALSE);
 
 	if (ts.loaded)
 		return TRUE;
@@ -292,6 +293,27 @@ tree_store_load (char *name)
 	return TRUE;
 }
 
+/**
+ * tree_store_load:
+ * @void: 
+ * 
+ * Loads the tree from the default location.
+ * 
+ * Return value: TRUE if success, FALSE otherwise.
+ **/
+int
+tree_store_load (void)
+{
+	char *name;
+	int retval;
+
+	name = concat_dir_and_file (home_dir, MC_TREE);
+	retval = tree_store_load_from (name);
+	g_free (name);
+
+	return retval;
+}
+
 static char *
 encode (char *string)
 {
@@ -327,8 +349,9 @@ encode (char *string)
 	return res;
 }
 
-int
-tree_store_save (char *name)
+/* Saves the tree to the specified filename */
+static int
+tree_store_save_to (char *name)
 {
 	tree_entry *current;
 	FILE *file;
@@ -345,7 +368,8 @@ tree_store_save (char *name)
 
 		if (vfs_file_is_local (current->name)){
 			/* Clear-text compression */
-			if (current->prev && (common = str_common (current->prev->name, current->name)) > 2){
+			if (current->prev
+			    && (common = str_common (current->prev->name, current->name)) > 2){
 				char *encoded = encode (current->name + common);
 				
 				i = fprintf (file, "%d:%d %s\n", current->scanned, common, encoded);
@@ -369,6 +393,41 @@ tree_store_save (char *name)
 	fclose (file);
 
 	return 0;
+}
+
+/**
+ * tree_store_save:
+ * @void: 
+ * 
+ * Saves the tree to the default file in an atomic fashion.
+ * 
+ * Return value: 0 if success, errno on error.
+ **/
+int
+tree_store_save (void)
+{
+	char *tmp;
+	char *name;
+	int retval;
+
+	tmp = concat_dir_and_file (home_dir, MC_TREE_TMP);
+	retval = tree_store_save_to (tmp);
+
+	if (retval) {
+		g_free (tmp);
+		return retval;
+	}
+
+	name = concat_dir_and_file (home_dir, MC_TREE);
+	retval = rename (tmp, name);
+
+	g_free (tmp);
+	g_free (name);
+
+	if (retval)
+		return errno;
+	else
+		return 0;
 }
 
 tree_entry *

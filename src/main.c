@@ -2919,28 +2919,8 @@ compatibility_move_mc_files (void)
 }
 #endif
 
-void
-mc_tree_store_load (void)
-{
-	char *tree_file;
-	
-	tree_file = concat_dir_and_file (home_dir, MC_TREE);
-	tree_store_init ();
-	tree_store_load (tree_file);
-	g_free (tree_file);
-}
-
-void
-mc_tree_store_save (void)
-{
-	char *tree_file;
-
-	tree_file = concat_dir_and_file (home_dir, MC_TREE);
-	tree_store_save (tree_file);
-	g_free (tree_file);
-}
-
-int main (int argc, char *argv [])
+int
+main (int argc, char *argv [])
 {
     /* We had LC_CTYPE before, LC_ALL includs LC_TYPE as well */
     setlocale (LC_ALL, "");
@@ -2989,7 +2969,7 @@ int main (int argc, char *argv [])
 
     handle_args(argc, argv);
 
-    mc_tree_store_load ();
+    tree_store_load ();
 
     session_init ();
     probably_finish_program ();
@@ -3125,7 +3105,7 @@ int main (int argc, char *argv [])
     do_nc ();
 
     /* Save the tree store */
-    mc_tree_store_save ();
+    tree_store_save ();
     
     /* Virtual File System shutdown */
     vfs_shut ();

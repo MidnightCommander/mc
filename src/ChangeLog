@@ -1,3 +1,23 @@
+1999-04-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* treestore.c (tree_store_save_to): Moved the functionality from
+	tree_store_save() to here.
+	(tree_store_save): Save the tree in the default location in an
+	atomic fashion.
+	(tree_store_load_from): Moved the functionality from
+	tree_store_load() to here.
+	(tree_store_load): Load the tree from the default location.
+
+	* treestore.h (MC_TREE_TMP): Added a #define for the temporary
+	name we'll use when saving the tree.  Moved the #defines from
+	tree.h over to here.
+
+	* main.c (main): Use tree_store_load() and tree_store_save().
+	Removed the mc_tree_store_load/save() versions.
+
+	* tree.c (load_tree): Use tree_store_load().
+	(save_tree): Use tree_store_save().
+
 Fri Apr 16 07:51:42 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* wtools.c (message): Use g_vsnprintf instead of vsprintf.

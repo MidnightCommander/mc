@@ -1,5 +1,7 @@
 1999-04-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gtkdtree.c (gtk_dtree_save_tree): Use tree_store_save().
+
 	* gscreen.c (panel_tree_check_auto_expand): Enabled auto-collapse
 	functionality again.  Made the code a simpler by using
 	gtk_dtree_is_ancestor().

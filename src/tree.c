@@ -176,15 +176,9 @@ void tree_destroy (WTree *tree)
 /* Loads the .mc.tree file */
 void load_tree (WTree *tree)
 {
-    char *filename;
-    int v;
-    
-    filename = concat_dir_and_file (home_dir, MC_TREE);
-    v = tree_store_load (filename);
-    g_free (filename);
+    tree_store_load ();
 
     tree->selected_ptr = tree->store->tree_first;
-    
     tree_chdir (tree, home_dir);
 }
 
@@ -192,11 +186,8 @@ void load_tree (WTree *tree)
 void save_tree (WTree *tree)
 {
     int error;
-    char *filename;
     
-    filename = concat_dir_and_file (home_dir, MC_TREE);
-    error = tree_store_save (filename);
-   g_free (filename);
+    error = tree_store_save ();
 
     if (error){
 	fprintf (stderr, _("Can't open the %s file for writing:\n%s\n"), MC_TREE,

@@ -52,10 +52,4 @@ extern int xtree_mode;
 WTree *tree_new (int is_panel, int y, int x, int lines, int cols);
 extern WTree *the_tree;
 
-#ifdef OS2_NT
-#   define MC_TREE "mcn.tre"
-#else
-#   define MC_TREE ".mc/Tree"
-#endif
-
 #endif

@@ -25,9 +25,6 @@ enum {
 extern int quote;
 extern volatile int quit;
 
-void mc_tree_store_load (void);
-void mc_tree_store_save (void);
-
 /* Execute functions: the base and the routines that use it */
 void do_execute (const char *shell, const char *command, int internal_command);
 #define execute_internal(command,args) do_execute (command, args, 1)

@@ -701,7 +701,7 @@ static int
 gtk_dtree_save_tree (void)
 {
 	dirty_tag = -1;
-	mc_tree_store_save ();
+	tree_store_save ();
 	return FALSE;
 }
 

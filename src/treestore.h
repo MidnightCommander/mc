@@ -1,6 +1,16 @@
 #ifndef __TREE_STORE_H
 #define __TREE_STORE_H
 
+/* Default filenames for the tree */
+
+#ifdef OS2_NT
+#   define MC_TREE "mcn.tre"
+#   define MC_TREE_TMP "mcn.tr~"
+#else
+#   define MC_TREE ".mc/Tree"
+#   define MC_TREE_TMP ".mc/Tree.tmp"
+#endif
+
 typedef struct tree_entry {
 	char *name;			/* The full path of directory */
 	int sublevel;			/* Number of parent directories (slashes) */
@@ -35,8 +45,8 @@ typedef struct {
 extern void (*tree_store_dirty_notify)(int state);
 
 TreeStore  *tree_store_init            (void);
-int         tree_store_load            (char *name);
-int         tree_store_save            (char *name);
+int         tree_store_load            (void);
+int         tree_store_save            (void);
 tree_entry *tree_store_add_entry       (char *name);
 void        tree_store_remove_entry    (char *name);
 void        tree_store_destroy         (void);
