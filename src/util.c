@@ -1292,7 +1292,6 @@ load_file_position (char *filename, long *line, long *column)
 	*column = atol (&p[1]);
     }
     fclose (f);
-    g_free (filename);
 }
 
 /* Save position for the given file */
