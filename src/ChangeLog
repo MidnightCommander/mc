@@ -1,3 +1,8 @@
+2003-11-14  Pavel Roskin  <proski@gnu.org>
+
+	* main.c (midnight_callback): Ctrl-Shift-Enter now copies full
+	path to the command line, like in Total Commander.
+
 2003-11-07  Pavel Roskin  <proski@gnu.org>
 
 	* boxes.c: Include "../vfs/gc.h" if VFS is used.

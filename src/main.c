@@ -1497,6 +1497,13 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	    return MSG_HANDLED;
 	}
 
+	/* Ctrl-Shift-Enter */
+	if (parm == (KEY_M_CTRL | KEY_M_SHIFT | '\n')) {
+	    copy_current_pathname ();
+	    copy_prog_name ();
+	    return MSG_HANDLED;
+	}
+
 	if ((!alternate_plus_minus || !(console_flag || xterm_flag))
 	    && !quote && !current_panel->searching) {
 	    if (!only_leading_plus_minus) {
