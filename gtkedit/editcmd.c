@@ -2547,7 +2547,7 @@ void edit_goto_cmd (WEdit *edit)
 #if 0
     f = gtk_edit_dialog_input ("goto", 150, l ? itoa (l) : "", _(" Goto line "), _(" Enter line: "));
 #else
-    /* *** */
+    f = input_dialog (_(" Goto line "), _(" Enter line: "), l ? s : "");
 #endif
 #else
     f = CInputDialog ("goto", WIN_MESSAGES, 150, l ? itoa (l) : "", _(" Goto line "), _(" Enter line: "));

@@ -906,7 +906,7 @@ static int extfs_init (vfs *me)
         char key[256];
 	char *c;
 
-        if (!fgets( key, 250, cfg ))
+        if (!fgets( key, sizeof (key)-1, cfg ))
 	    break;
 
 	/* Handle those with a trailing ':', those flag that the

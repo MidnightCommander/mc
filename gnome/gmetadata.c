@@ -41,11 +41,17 @@ gmeta_get_icon_pos (char *filename, int *x, int *y)
 	if (gnome_metadata_get (filename, ICON_POSITION, &size, &buf) != 0)
 		return FALSE;
 
-	if (!buf || (sscanf (buf, "%d%d", &tx, &ty) != 2)) {
+	if (!buf){
 		g_warning ("Invalid metadata for \"%s\"'s icon position, using auto-placement", filename);
 		return FALSE;
 	}
 
+
+	if ((sscanf (buf, "%d%d", &tx, &ty) != 2)) {
+		g_free (buf);
+		return FALSE;
+	}
+	g_free (buf);
 	*x = tx;
 	*y = ty;
 	return TRUE;

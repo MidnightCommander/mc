@@ -2960,9 +2960,6 @@ int main (int argc, char *argv [])
         application_keypad_mode ();
 #   endif
 
-    /* The directory hot list */
-    load_hotlist ();
-
     if (show_change_notice){
 	message (1, _(" Notice "),
 		 _(" The Midnight Commander configuration files \n"

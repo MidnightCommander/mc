@@ -286,5 +286,5 @@ gicon_get_icon_for_file_speed (file_entry *fe, gboolean do_quick)
 GdkImlibImage *
 gicon_get_icon_for_file (file_entry *fe)
 {
-	gicon_get_icon_for_file_speed (fe, TRUE);
+	return gicon_get_icon_for_file_speed (fe, TRUE);
 }

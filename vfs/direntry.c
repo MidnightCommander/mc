@@ -734,6 +734,7 @@ int vfs_s_read (void *fh, char *buffer, int count)
 	return n;
     }
     vfs_die( "vfs_s_read: This should not happen\n" );
+    return -1;
 }
 
 int vfs_s_write (void *fh, char *buffer, int count)
@@ -752,6 +753,7 @@ int vfs_s_write (void *fh, char *buffer, int count)
 	return n;
     }
     vfs_die( "vfs_s_write: This should not happen\n" );
+    return 0;
 }
 
 int vfs_s_lseek (void *fh, off_t offset, int whence)

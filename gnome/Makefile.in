@@ -237,7 +237,7 @@ TAGS: $(GNOMESRCS)
 	etags $(GNOMESRCS)
 
 clean:
-	$(RMF) @gmc@ *.o core a.out mx @LIBVFS@ libgtkedit.a libmcslang.a
+	$(RMF) gmc corba-gmc *.o core a.out mx @LIBVFS@ libgtkedit.a libmcslang.a
 
 realclean: clean
 	$(RMF) .depend
