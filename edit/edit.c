@@ -273,16 +273,6 @@ long edit_write_stream (WEdit * edit, FILE * f)
 
 #define TEMP_BUF_LEN 1024
 
-/*
-   The edit_load_file function uses edit_load_file_fast to load the
-   file.  This is unnecessary since you can just as well fopen the file
-   and insert the characters one by one.  The real reason for
-   edit_load_file_fast is optimization - it uses raw block reads and
-   inserts large chunks at a time, so it's much faster at loading files. 
-   We may not want to use it if we are reading from pipe or doing
-   CRLF->LF translation.
- */
-
 /* inserts a file at the cursor, returns 1 on success */
 int
 edit_insert_file (WEdit *edit, const char *filename)
@@ -400,6 +390,11 @@ check_file_access (WEdit *edit, const char *filename, struct stat *st)
 /*
  * Open the file and load it into the buffers, either directly or using
  * a filter.  Return 0 on success, 1 on error.
+ *
+ * Fast loading (edit_load_file_fast) is used when the file size is
+ * known.  In this case the data is read into the buffers by blocks.
+ * If the file size is not known, the data is loaded byte by byte in
+ * edit_insert_file.
  */
 static int
 edit_load_file (WEdit *edit)
