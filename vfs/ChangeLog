@@ -1,5 +1,9 @@
 2001-03-07  Pavel Roskin  <proski@gnu.org>
 
+	* cpio.c (cpio_skip_padding): Warning fix.
+	* fish.c (dir_load): Likewise.
+	* mcfs.c: Likewise.
+
 	* extfs/uzip: New file from Oskar Liljeblad.
 	* extfs/README.uzip: Likewise.
 	* extfs/Makefile.am: Adjust for constant uzip.

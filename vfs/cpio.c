@@ -119,6 +119,9 @@ static int cpio_skip_padding(vfs_s_super *super)
     case CPIO_NEWC:
     case CPIO_CRC:
 	return CPIO_SEEK_CUR(super, (4 - (CPIO_POS(super) % 4)) % 4);
+    default:
+	g_assert_not_reached();
+	return 42; /* & the compiler is happy :-) */
     }
 }
 

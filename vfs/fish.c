@@ -393,7 +393,7 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
 
 	switch(buffer[0]) {
 	case ':': {
-	              char *c;
+		      /* char *c; */
 		      if (!strcmp(buffer+1, ".") || !strcmp(buffer+1, ".."))
 			  break;  /* We'll do . and .. ourself */
 		      ent->name = g_strdup(buffer+1); 

@@ -53,7 +53,6 @@
 #define MCFS_MAX_CONNECTIONS 32
 #define mcserver_port 9876
 
-static mcfs_open_connections = 0;
 static struct _mcfs_connection {
     char *host;
     char *user;
@@ -301,6 +300,7 @@ static mcfs_connection *mcfs_get_free_bucket ()
 /* Returns a connected socket to host */
 static mcfs_connection *mcfs_open_link (char *host, char *user, int *port, char *netrcpass)
 {
+    static int mcfs_open_connections = 0;
     int i, sock, version;
     mcfs_connection *bucket;
 
