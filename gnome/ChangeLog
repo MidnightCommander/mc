@@ -1,5 +1,9 @@
 1999-02-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gdesktop.c (desktop_icon_info_place): Better icon placement by
+	rounding to the proper slot number.
+	(select_range): Simpler range selection for exact Windows behavior.
+
 	* gdnd.c (drop_on_directory): Do not ask for the action twice.
 	This was a leftover from a bit of code reorganization.
 

@@ -245,8 +245,8 @@ desktop_icon_info_place (DesktopIconInfo *dii, int user_pos, int auto_pos, int x
 
 	/* Increase the number of icons in the corresponding slot */
 
-	u = xpos / DESKTOP_SNAP_X;
-	v = ypos / DESKTOP_SNAP_Y;
+	u = (xpos + DESKTOP_SNAP_X / 2) / DESKTOP_SNAP_X;
+	v = (ypos + DESKTOP_SNAP_X / 2) / DESKTOP_SNAP_Y;
 
 	dii->slot = u * layout_rows + v;
 	layout_slots[dii->slot].num_icons++;
@@ -505,8 +505,6 @@ select_range (DesktopIconInfo *dii, int sel)
 	int u, v;
 	GList *l;
 	DesktopIconInfo *ldii;
-	DesktopIconInfo *min_udii, *min_vdii;
-	DesktopIconInfo *max_udii, *max_vdii;
 
 	/* Find out the selection range */
 
@@ -521,41 +519,17 @@ select_range (DesktopIconInfo *dii, int sel)
 	if (du < lu) {
 		min_u = du;
 		max_u = lu;
-		min_udii = dii;
-		max_udii = last_selected_icon;
 	} else {
 		min_u = lu;
 		max_u = du;
-
-		/* Even if the icons are on the same slot, their positions may
-		 * need adjusting with respect to each other.
-		 */
-		if (du != lu || last_selected_icon->x < dii->x) {
-			min_udii = last_selected_icon;
-			max_udii = dii;
-		} else {
-			min_udii = dii;
-			max_udii = last_selected_icon;
-		}
 	}
 
 	if (dv < lv) {
 		min_v = dv;
 		max_v = lv;
-		min_vdii = dii;
-		max_vdii = last_selected_icon;
 	} else {
 		min_v = lv;
 		max_v = dv;
-
-		/* Same as above */
-		if (dv != lv || last_selected_icon->y < dii->y) {
-			min_vdii = last_selected_icon;
-			max_vdii = dii;
-		} else {
-			min_vdii = dii;
-			max_vdii = last_selected_icon;
-		}
 	}
 
 	/* Select all the icons in the rectangle */
@@ -564,12 +538,6 @@ select_range (DesktopIconInfo *dii, int sel)
 		for (v = min_v; v <= max_v; v++)
 			for (l = l_slots (u, v).icons; l; l = l->next) {
 				ldii = l->data;
-
-				if ((u == min_u && ldii->x < min_udii->x)
-				    || (v == min_v && ldii->y < min_vdii->y)
-				    || (u == max_u && ldii->x > max_udii->x)
-				    || (v == max_v && ldii->y > max_vdii->y))
-					continue;
 
 				desktop_icon_select (DESKTOP_ICON (ldii->dicon), sel);
 				ldii->selected = sel;
