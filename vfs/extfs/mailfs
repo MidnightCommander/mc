@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -w
 
 # MC extfs for (possibly compressed) Berkeley style mailbox files
 # Peter Daum <gator@cs.tu-berlin.de> (Jan 1998, mc-4.1.24)
@@ -8,7 +8,13 @@ $bzcat="bzip2 -dc";           # bunzip2 to stdout
 $file="file";                 # "file" command
 $TZ='GMT';                    # default timezone (for Date module)
 
-if (eval "require Date::Parse") { # fancy date parsing available?
+if (eval "require Date::Manip") {
+    import Date::Manip;
+    $parse_date= 
+	sub {
+	    return UnixDate($_[0], "%l"); # "ls -l" format
+	}
+} elsif (eval "require Date::Parse") {
     import Date::Parse;
     $parse_date= 
 	sub {
@@ -73,11 +79,11 @@ sub mailfs_list {
     
     while(1) {
 	$_=<IN>;
-	s/\r$//;
 	if (!defined($_)) {	# EOF
 	    print_dir_line; 
 	    exit 0;
 	}
+	s/\r$//;
 	if($blank && /^From /) { # Start of header
 	    print_dir_line unless (!$msg_nr);
 	    $msg_nr++;

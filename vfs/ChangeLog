@@ -1,3 +1,8 @@
+2002-12-11  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/mailfs: Try using UnixDate() from Date::Manip if it's
+	available.  Warning fix.
+
 2002-12-11  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* extfs/patchfs: Use quotemeta() before giving filename to
