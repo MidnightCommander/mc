@@ -6,11 +6,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 4.5.99a\n"
+"Project-Id-Version: 4.6.0-pre2a\n"
 "POT-Creation-Date: 2002-12-28 10:24+0100\n"
-"PO-Revision-Date: 2002-10-25 12:12+0200\n"
+"PO-Revision-Date: 2002-12-28 11:16GMT\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
-"Language-Team: Italian <it@li.org>\n"
+"Language-Team: italiano <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -281,8 +281,7 @@ msgid "Search"
 msgstr "Cerca"
 
 #: edit/editcmd.c:1653
-msgid ""
-" Invalid regular expression, or scanf expression with to many conversions "
+msgid " Invalid regular expression, or scanf expression with to many conversions "
 msgstr ""
 " L'espressione regolare non è valida, o espressione di scanf con troppe "
 "conversioni "
@@ -4474,3 +4473,4 @@ msgstr "%s: %s: %s %3d%% (%lu byte trasferiti)"
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu byte trasferiti"
+
