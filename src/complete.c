@@ -406,107 +406,110 @@ command_completion_function (char *text, int state)
     static int isabsolute;
     static int phase;
     static int text_len;
-    static const char * const * words;
+    static const char *const *words;
     static char *path;
     static char *cur_path;
     static char *cur_word;
     static int init_state;
-    static const char * const bash_reserved [] = { 
-	"if", "then", "else", "elif", "fi", "case", "esac", "for", "select",
-	"while", "until", "do", "done", "in", "function" , 0
+    static const char *const bash_reserved[] = {
+	"if", "then", "else", "elif", "fi", "case", "esac", "for",
+	    "select", "while", "until", "do", "done", "in", "function", 0
     };
-    static const char * const bash_builtins [] = { 
-	"alias", "bg", "bind", "break", "builtin", "cd", "command", "continue",
-	"declare", "dirs", "echo", "enable", "eval", "exec", "exit", "export",
-	"fc", "fg", "getopts", "hash", "help", "history", "jobs", "kill", "let",
-	"local", "logout", "popd", "pushd", "pwd", "read", "readonly", "return",
-	"set", "shift", "source", "suspend", "test", "times", "trap", "type", 
-	"typeset", "ulimit", "umask", "unalias", "unset", "wait" , 0
+    static const char *const bash_builtins[] = {
+	"alias", "bg", "bind", "break", "builtin", "cd", "command",
+	    "continue", "declare", "dirs", "echo", "enable", "eval",
+	    "exec", "exit", "export", "fc", "fg", "getopts", "hash",
+	    "help", "history", "jobs", "kill", "let", "local", "logout",
+	    "popd", "pushd", "pwd", "read", "readonly", "return", "set",
+	    "shift", "source", "suspend", "test", "times", "trap", "type",
+	    "typeset", "ulimit", "umask", "unalias", "unset", "wait", 0
     };
     char *p, *found;
 
-    if (!state){ /* Initialize us a little bit */
+    if (!state) {		/* Initialize us a little bit */
 	isabsolute = strchr (text, PATH_SEP) != 0;
-        look_for_executables = isabsolute ? 1 : 2;
-	if (!isabsolute){
+	look_for_executables = isabsolute ? 1 : 2;
+	if (!isabsolute) {
 	    words = bash_reserved;
 	    phase = 0;
 	    text_len = strlen (text);
 	    path = getenv ("PATH");
-	    if (path){
+	    if (path) {
 		p = path = g_strdup (path);
 		path_end = strchr (p, 0);
-		while ((p = strchr (p, PATH_ENV_SEP))){
+		while ((p = strchr (p, PATH_ENV_SEP))) {
 		    *p++ = 0;
-	    	}
+		}
 	    }
 	}
     }
-    
-    if (isabsolute){
-        p = filename_completion_function (text, state);
-        if (!p)
-            look_for_executables = 0;
-        return p;
+
+    if (isabsolute) {
+	p = filename_completion_function (text, state);
+	if (!p)
+	    look_for_executables = 0;
+	return p;
     }
 
-    found = NULL;    
-    switch (phase){
-    	case 0: /* Reserved words */
-	    while (*words){
-	        if (!strncmp (*words, text, text_len))
-	            return g_strdup (*(words++));
-	        words++;
+    found = NULL;
+    switch (phase) {
+    case 0:			/* Reserved words */
+	while (*words) {
+	    if (!strncmp (*words, text, text_len))
+		return g_strdup (*(words++));
+	    words++;
+	}
+	phase++;
+	words = bash_builtins;
+    case 1:			/* Builtin commands */
+	while (*words) {
+	    if (!strncmp (*words, text, text_len))
+		return g_strdup (*(words++));
+	    words++;
+	}
+	phase++;
+	if (!path)
+	    break;
+	cur_path = path;
+	cur_word = NULL;
+    case 2:			/* And looking through the $PATH */
+	while (!found) {
+	    if (!cur_word) {
+		char *expanded;
+
+		if (cur_path >= path_end)
+		    break;
+		expanded = tilde_expand (*cur_path ? cur_path : ".");
+		cur_word = concat_dir_and_file (expanded, text);
+		g_free (expanded);
+		canonicalize_pathname (cur_word);
+		cur_path = strchr (cur_path, 0) + 1;
+		init_state = state;
 	    }
-	    phase++;
-	    words = bash_builtins;
-	case 1: /* Builtin commands */
-	    while (*words){
-	        if (!strncmp (*words, text, text_len))
-	            return g_strdup (*(words++));
-	        words++;
+	    found =
+		filename_completion_function (cur_word,
+					      state - init_state);
+	    if (!found) {
+		g_free (cur_word);
+		cur_word = NULL;
 	    }
-	    phase++;
-	    if (!path)
-	        break;
-	    cur_path = path;
-	    cur_word = NULL;
-	case 2: /* And looking through the $PATH */
-	    while (!found){
-	        if (!cur_word){
-		    char *expanded;
-		    
-		    if (cur_path >= path_end)
-	            	break;
-		    expanded = tilde_expand (*cur_path ? cur_path : ".");
-	            p = canonicalize_pathname (expanded);
-		    cur_word = concat_dir_and_file (p, text);
-	            g_free (p);
-	            cur_path = strchr (cur_path, 0) + 1;
-	            init_state = state;
-	        }
-	        found = filename_completion_function (cur_word, state - init_state);
-	        if (!found){
-	            g_free (cur_word);
-	            cur_word = NULL;
-	        }
-	    }
+	}
     }
-    
-    if (!found){
-        look_for_executables = 0;
-        if (path)
-            g_free (path);
-        return NULL;
+
+    if (!found) {
+	look_for_executables = 0;
+	if (path)
+	    g_free (path);
+	return NULL;
     }
-    if ((p = strrchr (found, PATH_SEP)) != NULL){
-        p++;
-        p = g_strdup (p);
-        g_free (found);
-        return p;
+    if ((p = strrchr (found, PATH_SEP)) != NULL) {
+	p++;
+	p = g_strdup (p);
+	g_free (found);
+	return p;
     }
     return found;
-    
+
 }
 
 static int

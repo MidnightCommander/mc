@@ -86,7 +86,7 @@ extern struct sigaction startup_handler;
 char *tilde_expand (const char *);
 
 /* Pathname canonicalization */
-char *canonicalize_pathname (char *);
+void canonicalize_pathname (char *);
 
 /* Misc Unix functions */
 char *get_current_wd (char *buffer, int size);

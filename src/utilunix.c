@@ -457,14 +457,14 @@ close_error_pipe (int error, char *text)
 	Trailing `/'s are removed.
 	Non-leading `../'s and trailing `..'s are handled by removing
 	portions of the path. */
-char *
+void
 canonicalize_pathname (char *path)
 {
     char *p, *s;
     int len;
 
     if (!path[0] || !path[1])
-	return path;
+	return;
 
     /* Collapse multiple slashes */
     p = path;
@@ -495,7 +495,7 @@ canonicalize_pathname (char *path)
     if (path[0] == '.' && path[1] == PATH_SEP) {
 	if (path[2] == 0) {
 	    path[1] = 0;
-	    return path;
+	    return;
 	} else {
 	    strcpy (path, path + 2);
 	}
@@ -504,14 +504,14 @@ canonicalize_pathname (char *path)
     /* Remove trailing "/" or "/." */
     len = strlen (path);
     if (len < 2)
-	return path;
+	return;
     if (path[len - 1] == PATH_SEP) {
 	path[len - 1] = 0;
     } else {
 	if (path[len - 1] == '.' && path[len - 2] == PATH_SEP) {
 	    if (len == 2) {
 		path[1] = 0;
-		return path;
+		return;
 	    } else {
 		path[len - 2] = 0;
 	    }
@@ -568,10 +568,8 @@ canonicalize_pathname (char *path)
 	    break;
 	}
 
-	return path;
+	break;
     }
-
-    return path;
 }
 
 #ifdef HAVE_GET_PROCESS_STATS

@@ -1684,7 +1684,8 @@ prepend_cwd_on_local (char *filename)
 	l = strlen (d);
 	d[l++] = PATH_SEP;
 	strcpy (d + l, filename);
-	return canonicalize_pathname (d);
+	canonicalize_pathname (d);
+	return d;
     } else
 	return g_strdup (filename);
 }

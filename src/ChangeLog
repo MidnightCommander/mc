@@ -1,5 +1,8 @@
 2004-01-23  Pavel Roskin  <proski@gnu.org>
 
+	* utilunix.c (canonicalize_pathname): Return void to make it
+	clear that the conversion is done in place.  Adjust all callers.
+
 	* filegui.c (init_replace): Don't show the "Reget" button when
 	moving files.  Reported by Arpad Biro <biro_arpad@yahoo.com>
 
