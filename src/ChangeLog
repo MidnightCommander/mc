@@ -1,5 +1,10 @@
 2001-06-13  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c (display_mini_info): Avoid nested i18n calls.
+	(parse_panel_size): Warning fix.
+	* user.c [HAVE_X]: Warning fix.
+	(check_format_var): Avoid nested i18n calls. Improve messages.
+
 	* screen.c (user_file_menu_cmd) [HAVE_X]: Disable.
 	(panel_callback) [HAVE_X]: Don't define labels, they are unused.
 	* user.c [HAVE_X]: Disable all user meny code.

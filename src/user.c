@@ -49,8 +49,10 @@
 #define MAX_ENTRIES 16
 #define MAX_ENTRY_LEN 60
 
+#ifndef HAVE_X
 static int debug_flag = 0;
 static int debug_error = 0;
+#endif /* !HAVE_X */
 static WEdit *s_editwidget;
 static char *menu = NULL;
 
@@ -135,8 +137,8 @@ int check_format_var (const char *p, char **v)
 	if (!dots || dots == q+5){
 	    message (1,
 		     _(" Format error on file Extensions File "),
-		     _(!dots ? N_(" The %%var macro does not have a default ")
-		     :         N_(" The %%var macros does not have a variable ")));
+		     !dots ? _(" The %%var macro has no default ")
+		     :       _(" The %%var macro has no variable "));
 	    return 0;
 	}
 	

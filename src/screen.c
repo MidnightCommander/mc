@@ -659,8 +659,9 @@ display_mini_info (WPanel *panel)
 	attrset (MARKED_COLOR);
 	printw  ("%*s", cols, " ");
 	widget_move (&panel->widget, llines (panel)+3, 1);
-	g_snprintf (buffer, sizeof (buffer), _((panel->marked == 1) ?
-		 N_("%s bytes in %d file") : N_("%s bytes in %d files")),
+	/* FIXME: use ngettext() here when gettext-0.10.35 becomes history */
+	g_snprintf (buffer, sizeof (buffer), (panel->marked == 1) ?
+		 _("%s bytes in %d file") : _("%s bytes in %d files"),
 		 size_trunc_sep (panel->total), panel->marked);
 	if (strlen (buffer) > cols-2){
 	    buffer [cols] = 0;
@@ -1190,7 +1191,7 @@ parse_panel_size (WPanel *panel, char *format, int isstatus)
 static format_e *
 parse_display_format (WPanel *panel, char *format, char **error, int isstatus, int *res_total_cols)
 {
-    format_e *darr, *old, *home = 0;   	/* The formats we return */
+    format_e *darr, *old = 0, *home = 0; /* The formats we return */
     int  total_cols = 0;		/* Used columns by the format */
     int  set_justify;                  	/* flag: set justification mode? */
     int  justify = 0;                  	/* Which mode. */
