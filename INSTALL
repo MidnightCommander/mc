@@ -79,19 +79,10 @@ incomplete, use `configure --help' to get the full list):
      built-in file editor.  The built-in editor is compiled in by
      default.
 
-`--with-ext2undel[=PATH]'
+`--with-ext2undel'
      On systems that use the ext2 or ext3 file system and have the
-     libext2fs library available, this option add support for recovering
-     deleted files (the undel virtual file system). 
-     Use =PATH if libext2fs is installed in a non-standard place. 
-     The configure will append `lib' and `include' to PATH to find the
-     ext2fs library and include files respectively.
-
-`--with-gpm-mouse[=PATH]'
-     Use this flag if the gpm mouse package cannot be detected by the
-     configure. Use =PATH if it is installed in a non-standard place.
-     The configure will append `lib' and `include' to PATH to find the
-     gpm library and include files respectively.
+     libext2fs library available, this option adds support for
+     recovering deleted files (the undel virtual file system). 
 
 `--without-gpm-mouse'
      Use this flag to disable gpm mouse support (e.g. if you want to
@@ -143,33 +134,26 @@ incomplete, use `configure --help' to get the full list):
      but support for 64-bit offsets is available.  May be useful for
      slow processors and embedded systems.
 
-You may also tell configure which display library you want to use with the
-Midnight Commander.  The configure script will use S-Lang as default, but
-you can override this by using any of the following flags (please note
-that S-Lang is included as part of the distribution and is tested much 
-better than ncurses),
+You may also tell configure which screen library you want to use with
+the Midnight Commander.  The configure script will use S-Lang as
+default, and prefers an already installed S-Lang library over the
+included one, but you can override this by using the following flag
+(please note that since S-Lang is default, it is tested better than
+ncurses):
 
-`--with-slang' (default)
-     This is used to configure the program to use the S-Lang screen
-     library.  This is included as part of GNU Midnight Commander,
-     you don't need it installed on your system.  If S-Lang is installed
-     on your system it will be used if possible.  You can force usage of
-     the included S-Lang with the `--with-included-slang' option.
+`--with-screen={slang|mcslang|ncurses}'
+     Choose the library used to manage interaction with the terminal.
+     `slang' means S-Lang library already installed on the system,
+     `mcslang' means S-Lang library included with the sources of
+     GNU Midnight Commander, `ncurses' means ncurses library already
+     installed on the system.  The installed S-Lang library is used
+     by default if found, otherwise the included S-Lang library is
+     used.
 
-     S-Lang tries to use the terminfo database if it's available,
-     otherwise it uses the termcap database.  At the compile time, you
-     may force using the termcap database by using the option
-     `--with-termcap', which also enables `--with-included-slang'.
-
-`--with-ncurses[=PATH]'
-     Use this flag (either with or without the =PATH part) if
-     you want to compile with ncurses instead of the default S-Lang.
-
-     Use the =PATH part if ncurses cannot be found by the configure
-     script.  The configure will append lib and include to PATH to find
-     the ncurses library and headers respectively.  For example, if you
-     have installed ncurses under /gnu/lib and /gnu/include, you
-     specify `--with-ncurses=/gnu'
+`--with-termcap'
+     If the included S-Lang library is used, this option forces it to
+     use the termcap database, as opposed to the default terminfo
+     database.
 
 On systems that require unusual options for compilation or linking that
 the package's `configure' script does not know about, you can give
@@ -196,6 +180,14 @@ value that `configure' decides to use:
 
  - Variable: LIBS
      Libraries to link with, in the form `-lfoo -lbar...'.
+
+ - Variable: LDFLAGS
+     Linker flags, e.g. -L<lib dir> if you have libraries in a
+     nonstandard directory <lib dir>
+
+ - Variable: CPPFLAGS
+     C/C++ preprocessor flags, e.g. -I<include dir> if you have
+     headers in a nonstandard directory <include dir>
 
 If you need to do unusual things to compile the package, we encourage
 you to figure out how `configure' could check whether to do them, and
