@@ -12,9 +12,9 @@ typedef void (*fill_names_f) (const char *);
 
 struct vfs_class {
     struct vfs_class *next;
-    char *name;			/* "FIles over SHell" */
+    const char *name;			/* "FIles over SHell" */
     int flags;
-    char *prefix;		/* "fish:" */
+    const char *prefix;		/* "fish:" */
     void *data;			/* this is for filesystem's own use */
     int verrno;			/* can't use errno because glibc2 might define errno as function */
 
