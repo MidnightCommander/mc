@@ -1,15 +1,20 @@
+2001-05-22  Pavel Roskin  <proski@gnu.org>
+
+	* sfs.c (redirect): Don't free the filename after failed
+	mc_mkstemps() - it's not needed anymore.
+
 2001-05-21  Pavel Roskin  <proski@gnu.org>
 
-	* vfs/direntry.c (vfs_s_open): Use mc_mkstemps. Create and close
+	* direntry.c (vfs_s_open): Use mc_mkstemps. Create and close
 	temporary file to reserve its name on the filesystem.
 	(vfs_s_retrieve_file): Use mc_mkstemps().
 	(g_tempnam): Remove.
-	* vfs/extfs.c (extfs_open): Use mc_mkstemps().
-	* vfs/sfs.c (redirect): Likewise.
-	* vfs/shared_ftp_fish.c (_get_file_entry): Likewise.
+	* extfs.c (extfs_open): Use mc_mkstemps().
+	* sfs.c (redirect): Likewise.
+	* shared_ftp_fish.c (_get_file_entry): Likewise.
 	(retrieve_file): Likewise.
-	* vfs/vfs.c (mc_def_getlocalcopy): Likewise.
-	* vfs/xdirentry.h: Remove declaration of g_tempnam().
+	* vfs.c (mc_def_getlocalcopy): Likewise.
+	* xdirentry.h: Remove declaration of g_tempnam().
 
 2001-05-18  Pavel Roskin  <proski@gnu.org>
 

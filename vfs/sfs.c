@@ -129,7 +129,6 @@ redirect (vfs *me, char *name)
     handle = mc_mkstemps (&cache, "sfs", NULL);
 
     if (handle == -1) {
-	g_free (cache);
 	return "/SOMEONE_PLAYING_DIRTY_TMP_TRICKS_ON_US";
     }
 
