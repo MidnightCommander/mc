@@ -1,4 +1,4 @@
-.TH mcedit 1 "30 January 1997"
+.TH MCEDIT 1 "January 2003" "MC Version 4.6.0" "GNU Midnight Commander"
 .SH NAME
 mcedit \- Internal file viewer of GNU Midnight Commander.
 .SH USAGE
@@ -19,8 +19,9 @@ version of
 .SH OPTIONS
 .TP
 .I "+number"
-Go  to the line specified by number (do not insert
-a space between the "+" sign and the number).
+Go  to the line specified by number (do not put a space between the
+.I "+"
+sign and the number).
 .TP
 .I "\-b"
 Force black and white display.
@@ -39,7 +40,8 @@ section in mc(1) for more information.
 Disable mouse support.
 .TP
 .I "\-f"
-Display the compiled-in search paths for GNU Midnight Commander files.
+Display the compiled-in search path for GNU Midnight Commander data
+files.
 .TP
 .I "\-t"
 Used only if the code was compiled with Slang and terminfo: it makes
@@ -52,7 +54,7 @@ the system wide terminal database.
 Display the version of the program.
 .TP
 .I "\-x"
-Forces xterm mode.  Used when running on xterm-capable terminals (two
+Force xterm mode.  Used when running on xterm-capable terminals (two
 screen modes, and able to send mouse escape sequences).
 .PP
 .SH FEATURES
@@ -92,7 +94,7 @@ terminal mouse highlighting work.
 The completion key (usually
 .B "Alt-Tab"
 or
-.BR "Espace-Tab" )
+.BR "Escape-Tab" )
 completes the word under the cursor using the words used earlier in the
 file.
 .PP
@@ -133,8 +135,7 @@ will be called
 Keys can be redefined from the Midnight Commander options menu.
 .PP
 .SH SYNTAX HIGHLIGHTING
-As of version 3.6.0,
-.B cooledit
+.B mcedit
 supports syntax highlighting.  This means that keywords and contexts
 (like C comments, string constants, etc) are highlighted in different
 colors.  The following section explains the format of the file
@@ -204,39 +205,62 @@ context " " 6
 .PP
 Each context starts with a line of the form:
 .br
-\fBcontext\fP [\fBexclusive\fP] [\fBwhole\fP|\fBwholeright\fP|\fBwholeleft\fP]
-[\fBlinestart\fP] \fIdelim\fP [\fBlinestart\fP] \fIdelim\fP [\fIforeground\fP] [\fIbackground\fP]
+.B context
+.RB [ exclusive ]
+.RB [ whole | wholeright | wholeleft ]
+.RB [ linestart ]
+.I delim
+.RB [ linestart ]
+.I delim
+.RI [ foreground ]
+.RI [ background ]
 .br
-
 One exception is the first context. It must start with the command
 .br
-\fBcontext\fP \fBdefault\fP [\fIforeground\fP] [\fIbackground\fP]
+.B context
+.B default
+.RI [ foreground ]
+.RI [ background ]
 .br
-or else \fBcooledit\fP will return an error.
-
-The \fBlinestart\fP option dictates that \fIdelim\fP must start at
-the beginning of a line.
-
-The \fBwhole\fP option tells that delim must be a whole word. What
-constitutes a whole word are a set of characters that can be
-changed at any point in the file with the \fBwholechars\fP
-command. The \fBwholechars\fP command at the top just sets the
-set exactly to its default and could therefore have been omitted. To
-specify that a word must be whole on the left only, you can use
-the \fBwholeleft\fP option, and similarly on the right. The left and
-right set of characters can be set separately with,
+or else
+.B mcedit
+will report an error.  The
+.B linestart
+option dictates that
+.I delim
+must start at the beginning of a line.  The
+.B whole
+option tells that delim must be a whole word.  What constitutes a whole
+word are a set of characters that can be changed at any point in the
+file with the
+.B wholechars
+command.  The
+.B wholechars
+command at the top just sets the set exactly to its default and could
+therefore have been omitted.  To specify that a word must be whole on the
+left only, you can use the
+.B wholeleft
+option, and similarly on the right.  The left and right set of characters
+can be set separately with,
 .br
-\fBwholechars\fP [\fBleft\fP|\fBright\fP] \fIcharacters\fP
-
-The \fBexclusive\fP option causes the text between the delimiters to be
-highlighted, but not the delimiters themselves.
-
+.B wholechars
+.RB [ left | right ]
+.I characters
+.PP
+The
+.B exclusive
+option causes the text between the delimiters to be highlighted, but not
+the delimiters themselves.
+.PP
 Each rule is a line of the form:
 .br
-\fBkeyword\fP [\fBwhole\fP|\fBwholeright\fP|\fBwholeleft\fP] [\fBlinestart\fP]
-\fIstring\fP \fIforeground\fP [\fIbackground\fP]
+.B keyword
+.RB [ whole | wholeright | wholeleft ]
+.RB [ linestart ]
+.I string
+.I foreground
+.RI [ background ]
 .br
-
 Context or keyword strings are interpreted, so that you can include
 tabs and spaces with the sequences \\t and \\s.  Newlines and the \\ are
 specified with \\n and \\\\ respectively.  Since whitespace is used as a
@@ -252,48 +276,46 @@ used
   keyword         "*"      6
 .fi
 to color string constants, except that the matched string may not cross
-newlines. \fIThe wildcard may be used within context delimiters as
-well\fP, but you \fBcannot have a wildcard as the last or first character\fP.
-
+newlines. The wildcard may be used within context delimiters as well,
+but you cannot have a wildcard as the last or first character.
+.PP
 Important to note is the line
 .nf
   keyword  \\\\\\n  24
 .fi
+.PP
 This line defines a keyword containing the \\ and newline characters.
-Because keywords have a higher precedence than context delimiters, this
-keyword prevents the context from ending at the end of a line if the
-line ends in a \\ thus allowing C preprocessor directive to continue
+Since the keywords have a higher precedence than the context delimiters,
+this keyword prevents the context from ending at the end of the line if
+the line ends in a \\ thus allowing C preprocessor directive to continue
 across multiple lines.
 .PP
-The colors themselves are numbered 0 to 26 and are explained below in
-\fBFURTHER BEHAVIORAL OPTIONS\fP. You can also use \fBany\fP of the named
-colors specified in \fB/usr/lib/X11/rgb.txt\fP, though only one word
-versions of them. It is better to stick to the numerical colors
-to limit use of the color palette.
+The possible colors are: black, gray, red, brightred, green,
+brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
+cyan, brightcyan, lightgray and white.
 .PP
-Comments may be included on a line of there own and begin with
-a #.
+Comments may be put on a separate line starting with the hash sign (#).
 .PP
 Because of the simplicity of the implementation, there are a few
-intricacies that will not be coped with correctly but these are a minor
-irritation. On the whole, a broad spectrum of quite complicated
-situations are handled with these simple rules. It is a good idea to
+intricacies that will not be dealt with correctly but these are a minor
+irritation.  On the whole, a broad spectrum of quite complicated
+situations are handled with these simple rules.  It is a good idea to
 take a look at the syntax file to see some of the nifty tricks you can
-do with a little imagination. If you can't get by with the rules I have
+do with a little imagination.  If you can't get by with the rules I have
 coded, and you think you have a rule that would be useful, please email
-me with your request. However, do not ask for regular expression
+me with your request.  However, do not ask for regular expression
 support, because this is flatly impossible.
 .PP
-A useful hint is to work with as much as possible with the things
-you \fIcan\fP do rather than try to do things that this
-implementation can't cope with. Also remember that the aim of
-syntax highlighting is to make programming less prone to error,
-\fInot\fP to make code look pretty.
+A useful hint is to work with as much as possible with the things you
+can do rather than try to do things that this implementation can't deal
+with.  Also remember that the aim of syntax highlighting is to make
+programming less prone to error, not to make code look pretty.
 .PP
 .SH COLORS
 The default colors may be changed by appending to the
-\fBMC_COLOR_TABLE\fP environment variable. Foreground and
-background colors pairs may be specified for example with:
+.B MC_COLOR_TABLE
+environment variable.  Foreground and background colors pairs may be
+specified for example with:
 .PP
 .nf
 MC_COLOR_TABLE="$MC_COLOR_TABLE:\\
@@ -304,15 +326,17 @@ editmarked=black,cyan"
 .PP
 .SH OPTIONS
 Most options can now be set from the editors options dialog
-box. See the \fBOptions\fP menu. The following options are defined in
-\fB~/.mc/ini\fP and have obvious counterparts in the dialog box.
-You can modify them to change the editor behavior, by editing the file.
-Unless specified, a 1 sets the option to on, and a 0 sets it to
-off, as is usual.
+box. See the
+.B Options
+menu.  The following options are defined in
+.B ~/.mc/ini
+and have obvious counterparts in the dialog box.  You can modify them to
+change the editor behavior, by editing the file.  Unless specified, a 1
+sets the option to on, and a 0 sets it to off, as is usual.
 .TP
 .I use_internal_edit
 This option is ignored when invoking
-.B mcedit.
+.BR mcedit .
 .TP
 .I editor_key_emulation
 1 for
@@ -352,27 +376,24 @@ margin, moving and tabbing will be as though a tab space were
 When editing anywhere else, a normal tab is inserted.
 .TP
 .I editor_option_save_mode
-(0, 1 or 2.) The save mode (see the options menu also)
-allows you to change the method
-of saving a file. Quick save (0) saves the file by immediately,
-truncating the disk file to zero length (i.e. erasing it)
-and the writing the editor contents to the file. This method
-is fast, but dangerous, since a system error during a file
-save will leave the file only partially written, possibly
-rendering the data irretrievable. When saving, the safe save (1)
-option enables creation of a temporary file into which the
-file contents are first written. In the event of an problem,
-the original file is untouched. When the temporary file is
-successfully written, it is renamed to the name of the original
-file, thus replacing it. The safest method is create
-backups (2). Where a backup file is created before any changes
-are made. You can specify your own backup file extension in
-the dialog. Note that saving twice will replace your backup
-as well as your original file.
+Possible values 0, 1 and 2.  The save mode (see the options menu also)
+allows you to change the method of saving a file.  Quick save (0) saves
+the file by immediately, truncating the disk file to zero length (i.e.
+erasing it) and the writing the editor contents to the file.  This
+method is fast, but dangerous, since a system error during a file save
+will leave the file only partially written, possibly rendering the data
+irretrievable.  When saving, the safe save (1) option enables creation
+of a temporary file into which the file contents are first written.  In
+the event of an problem, the original file is untouched.  When the
+temporary file is successfully written, it is renamed to the name of the
+original file, thus replacing it.  The safest method is create backups
+(2).  Where a backup file is created before any changes are made.  You
+can specify your own backup file extension in the dialog.  Note that
+saving twice will replace your backup as well as your original file.
 .PP
 .SH MISCELLANEOUS
 You can use scanf search and replace to search and replace a C format
-string. First take a look at the
+string.  First take a look at the
 .B sscanf
 and
 .B sprintf
@@ -411,7 +432,7 @@ to 7 bits in the Midnight Commander options menu to keep the
 spacing clean.
 .PP
 .SH FILES
-@prefix@/share/mc/mc.hlp
+.I @prefix@/share/mc/mc.hlp
 .IP
 The help file for the program.
 .PP
@@ -425,17 +446,17 @@ the user's own ~/.mc/ini file is missing.
 Global settings for the Midnight Commander.  Settings in this file
 affect all users, whether they have ~/.mc/ini or not.
 .PP
-$HOME/.mc/ini
+.I $HOME/.mc/ini
 .IP
 User's own setup.  If this file is present, the setup is loaded from
 here instead of the system-wide startup file.
 .PP
-$HOME/.mc/ini
+.I $HOME/.mc/ini
 .IP
 User's own setup. If this file is present then the setup is loaded
 from here instead of the system-wide startup file.
 .PP
-$HOME/.mc/cedit/
+.I $HOME/.mc/cedit/
 .IP
 User's own temporary directory where block commands are processed
 and saved.
