@@ -6,7 +6,7 @@
  */
 
 #include <config.h>
-#include <gnome.h>
+#include "global.h"
 #include "gdesktop.h"
 #include "gdesktop-prefs.h"
 

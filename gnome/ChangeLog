@@ -1,5 +1,9 @@
 2001-08-19  Pavel Roskin  <proski@gnu.org>
 
+	* gdesktop-icon.c: Include "global.h".
+	* gdesktop-prefs.c: Likewise.
+	* gsession.c: Likewise.
+
 	* gcorba.c: Include "global.h".
 	* gdesktop-init.c: Don't include <libgnome/libgnome.h>.
 	* gprint.c: Likewise.

@@ -7,7 +7,7 @@
  */
 
 #include <config.h>
-#include <gnome.h>
+#include "global.h"
 #include "main.h"
 #include "../vfs/vfs.h"
 #include "gcmd.h"
