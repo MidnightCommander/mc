@@ -84,19 +84,20 @@ static DesktopIconInfo *last_selected_icon;
 /* Drag and drop sources and targets */
 
 static GtkTargetEntry dnd_icon_sources[] = {
-	{ "application/x-mc-desktop-icon", 0, TARGET_MC_DESKTOP_ICON },
-	{ "text/uri-list", 0, TARGET_URI_LIST },
-	{ "text/plain", 0, TARGET_TEXT_PLAIN },
-	{ "_NETSCAPE_URL", 0, TARGET_URL }
+	{ TARGET_MC_DESKTOP_ICON_TYPE, 0, TARGET_MC_DESKTOP_ICON },
+	{ TARGET_URI_LIST_TYPE, 0, TARGET_URI_LIST },
+	{ TARGET_TEXT_PLAIN_TYPE, 0, TARGET_TEXT_PLAIN },
+	{ TARGET_URL_TYPE, 0, TARGET_URL }
 };
 
 static GtkTargetEntry dnd_icon_targets[] = {
-	{ "text/uri-list", 0, TARGET_URI_LIST }
+	{ TARGET_MC_DESKTOP_ICON_TYPE, 0, TARGET_MC_DESKTOP_ICON },
+	{ TARGET_URI_LIST_TYPE, 0, TARGET_URI_LIST }
 };
 
 static GtkTargetEntry dnd_desktop_targets[] = {
-	{ "application/x-mc-desktop-icon", 0, TARGET_MC_DESKTOP_ICON },
-	{ "text/uri-list", 0, TARGET_URI_LIST }
+	{ TARGET_MC_DESKTOP_ICON_TYPE, 0, TARGET_MC_DESKTOP_ICON },
+	{ TARGET_URI_LIST_TYPE, 0, TARGET_URI_LIST }
 };
 
 static int dnd_icon_nsources = sizeof (dnd_icon_sources) / sizeof (dnd_icon_sources[0]);
@@ -1112,6 +1113,126 @@ setup_icon_dnd_source (DesktopIconInfo *dii)
 			    dii);
 }
 
+/* Callback used when we get a drag_motion event from a desktop icon.  We have
+ * to decide which operation to perform based on the type of the data the user
+ * is dragging.
+ */
+static gboolean
+icon_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gint y, guint time,
+		  gpointer data)
+{
+	DesktopIconInfo *dii;
+	char *filename;
+	file_entry *fe;
+	GdkDragAction action;
+
+	dii = data;
+
+	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
+	fe = file_entry_from_file (filename);
+	g_free (filename);
+
+	action = 0; /* be pessimistic by defaulting to nothing */
+
+	if (dii->selected
+	    && gdnd_drag_context_has_target (context, TARGET_MC_DESKTOP_ICON)
+	    && (context->actions & GDK_ACTION_MOVE))
+		action = GDK_ACTION_MOVE;
+	else if (gdnd_drag_context_has_target (context, TARGET_URI_LIST)) {
+		if (fe->f.link_to_dir)
+			action = context->suggested_action;
+		else if (is_exe (fe->buf.st_mode)
+			 && if_link_is_exe (fe)
+			 && (context->actions & GDK_ACTION_COPY))
+			action = GDK_ACTION_COPY;
+	}
+
+	gdk_drag_status (context, action, time);
+	return TRUE;
+}
+
+/* Returns the desktop icon that started the drag from the specified context */
+static DesktopIconInfo *
+find_icon_by_drag_context (GdkDragContext *context)
+{
+	GtkWidget *source;
+	int i;
+	GList *l;
+	DesktopIconInfo *dii;
+
+	source = gtk_drag_get_source_widget (context);
+	if (!source)
+		return NULL;
+
+	source = gtk_widget_get_toplevel (source);
+
+	for (i = 0; i < (layout_cols * layout_rows); i++)
+		for (l = layout_slots[i].icons; l; l = l->next) {
+			dii = l->data;
+
+			if (dii->dicon == source)
+				return dii;
+		}
+
+	return NULL;
+}
+
+/*
+ * Performs a drop of desktop icons onto the desktop.  It basically moves the icons from their
+ * original position to the new coordinates.
+ */
+static void
+drop_desktop_icons (GdkDragContext *context, GtkSelectionData *data, int x, int y)
+{
+	DesktopIconInfo *source_dii, *dii;
+	int dx, dy;
+	int i;
+	GList *l;
+	GSList *sel_icons, *sl;
+
+	/* FIXME: this needs to do the right thing (what Windows does) when desktop_auto_placement
+	 * is enabled.
+	 */
+
+	/* Find the icon that the user is dragging */
+
+	source_dii = find_icon_by_drag_context (context);
+	if (!source_dii) {
+		g_warning ("Eeeeek, could not find the icon that started the drag!");
+		return;
+	}
+
+	/* Compute the distance to move icons */
+
+	if (desktop_snap_icons)
+		get_icon_snap_pos (&x, &y);
+
+	dx = x - source_dii->x - dnd_press_x;
+	dy = y - source_dii->y - dnd_press_y;
+
+	/* Build a list of selected icons */
+
+	sel_icons = NULL;
+
+	for (i = 0; i < (layout_cols * layout_rows); i++)
+		for (l = layout_slots[i].icons; l; l = l->next) {
+			dii = l->data;
+			if (dii->selected)
+				sel_icons = g_slist_prepend (sel_icons, l->data);
+		}
+
+	/* Move the icons */
+
+	for (sl = sel_icons; sl; sl = sl->next) {
+		dii = sl->data;
+		desktop_icon_info_place (dii, FALSE, dii->x + dx, dii->y + dy);
+	}
+
+	/* Clean up */
+
+	g_slist_free (sel_icons);
+}
+
 /**
  * drop_on_file_entry
  */
@@ -1210,6 +1331,14 @@ icon_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gin
 	dii = user_data;
 
 	switch (info) {
+	case TARGET_MC_DESKTOP_ICON:
+		if (dii->selected)
+			drop_desktop_icons (context, data, x + dii->x, y + dii->y);
+		else
+			printf ("FIXME: what do drop?\n"); /* FIXME */
+			
+		break;
+
 	case TARGET_URI_LIST:
 		printf ("Wheeeeee!\n");
 		desktop_icon_drop_uri_list (dii, context, data);
@@ -1224,41 +1353,17 @@ icon_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gin
 static void
 setup_icon_dnd_dest (DesktopIconInfo *dii)
 {
-	char *filename;
-	file_entry *fe;
-	int actions;
-
-	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
-	fe = file_entry_from_file (filename);
-	g_free (filename);
-
-	if (!fe)
-		return; /* eek */
-
-	/* See what actions are appropriate for this icon */
-
-	if (fe->f.link_to_dir)
-		actions = GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK;
-	else if (is_exe (fe->buf.st_mode) && if_link_is_exe (fe))
-		actions = GDK_ACTION_COPY;
-	else
-		actions = 0;
-
-	file_entry_free (fe);
-
-	if (!actions)
-		return;
-
-	/* Connect the drop signals */
-
 	gtk_drag_dest_set (DESKTOP_ICON (dii->dicon)->canvas,
-			   GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_DROP,
+			   GTK_DEST_DEFAULT_DROP,
 			   dnd_icon_targets,
 			   dnd_icon_ntargets,
-			   actions);
+			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
 
+	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "drag_motion",
+			    (GtkSignalFunc) (icon_drag_motion),
+			    dii);
 	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "drag_data_received",
-			    GTK_SIGNAL_FUNC (icon_drag_data_received),
+			    (GtkSignalFunc) icon_drag_data_received,
 			    dii);
 }
 
@@ -1510,86 +1615,33 @@ setup_xdnd_proxy (guint32 xid, GdkWindow *proxy_window)
 		return FALSE;
 }
 
-/* Returns the desktop icon that started the drag from the specified context */
-static DesktopIconInfo *
-find_icon_by_drag_context (GdkDragContext *context)
-{
-	GtkWidget *source;
-	int i;
-	GList *l;
-	DesktopIconInfo *dii;
-
-	source = gtk_drag_get_source_widget (context);
-	if (!source)
-		return NULL;
-
-	source = gtk_widget_get_toplevel (source);
-
-	for (i = 0; i < (layout_cols * layout_rows); i++)
-		for (l = layout_slots[i].icons; l; l = l->next) {
-			dii = l->data;
-
-			if (dii->dicon == source)
-				return dii;
-		}
-
-	return NULL;
-}
-
-/*
- * Performs a drop of desktop icons onto the desktop.  It basically moves the icons from their
- * original position to the new coordinates.
+/* Callback used when we get a drag_motion event from the desktop.  We must
+ * decide what kind of operation can be performed with what the user is
+ * dragging.
  */
-static void
-drop_desktop_icons (GdkDragContext *context, GtkSelectionData *data, int x, int y)
+static gboolean
+desktop_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gint y, guint time,
+		     gpointer data)
 {
-	DesktopIconInfo *source_dii, *dii;
-	int dx, dy;
-	int i;
-	GList *l;
-	GSList *sel_icons, *sl;
+	GdkDragAction action;
+	GtkWidget *source_widget;
 
-	/* FIXME: this needs to do the right thing (what Windows does) when desktop_auto_placement
-	 * is enabled.
-	 */
+	action = context->suggested_action; /* this is the default */
 
-	/* Find the icon that the user is dragging */
+	if (gdnd_drag_context_has_target (context, TARGET_MC_DESKTOP_ICON)) {
+		if (context->actions & GDK_ACTION_MOVE)
+			action = GDK_ACTION_MOVE;
+	} else if (gdnd_drag_context_has_target (context, TARGET_URI_LIST)) {
+		source_widget = gtk_drag_get_source_widget (context);
 
-	source_dii = find_icon_by_drag_context (context);
-	if (!source_dii) {
-		g_warning ("Eeeeek, could not find the icon that started the drag!");
-		return;
-	}
+		/* If it comes from ourselves, make move the default */
+		if (source_widget && (context->actions & GDK_ACTION_MOVE))
+			action = GDK_ACTION_MOVE;
+	} else
+		action = 0; /* we cannot handle that type of data */
 
-	/* Compute the distance to move icons */
-
-	if (desktop_snap_icons)
-		get_icon_snap_pos (&x, &y);
-
-	dx = x - source_dii->x - dnd_press_x;
-	dy = y - source_dii->y - dnd_press_y;
-
-	/* Build a list of selected icons */
-
-	sel_icons = NULL;
-
-	for (i = 0; i < (layout_cols * layout_rows); i++)
-		for (l = layout_slots[i].icons; l; l = l->next) {
-			dii = l->data;
-			if (dii->selected)
-				sel_icons = g_slist_prepend (sel_icons, l->data);
-		}
-
-	/* Move the icons */
-
-	for (sl = sel_icons; sl; sl = sl->next) {
-		dii = sl->data;
-		desktop_icon_info_place (dii, FALSE, dii->x + dx, dii->y + dy);
-	}
-
-	/* Clean up */
-
-	g_slist_free (sel_icons);
+	gdk_drag_status (context, action, time);
+	return TRUE;
 }
 
 /* Callback used when the root window receives a drop */
@@ -1643,13 +1695,16 @@ setup_desktop_dnd (void)
 		g_warning ("There is already a process taking drop windows on the desktop\n");
 
 	gtk_drag_dest_set (dnd_proxy_window,
-			   GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_DROP,
+			   GTK_DEST_DEFAULT_DROP,
 			   dnd_desktop_targets,
 			   dnd_desktop_ntargets,
 			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
 
+	gtk_signal_connect (GTK_OBJECT (dnd_proxy_window), "drag_motion",
+			    (GtkSignalFunc) desktop_drag_motion,
+			    NULL);
 	gtk_signal_connect (GTK_OBJECT (dnd_proxy_window), "drag_data_received",
-			    GTK_SIGNAL_FUNC (desktop_drag_data_received),
+			    (GtkSignalFunc) desktop_drag_data_received,
 			    NULL);
 }
 
@@ -2141,6 +2196,7 @@ setup_desktop_clicks (void)
 void
 desktop_init (void)
 {
+	gdnd_init ();
 	create_layout_info ();
 	create_desktop_dir ();
 	reload_desktop_icons (0, 0);

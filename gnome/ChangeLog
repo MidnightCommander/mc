@@ -1,3 +1,30 @@
+1999-01-21  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (setup_icon_dnd_dest): Always specify ACTION_MOVE,
+	since we want to be able to move the icons around.  Connect to the
+	drag_motion signal.
+	(dnd_icon_targets): List desktop icons as a target to be able to
+	move them just a notch in the desktop.
+	(icon_drag_motion): Decide which action we can use for dropping
+	stuff on a desktop icon.
+	(setup_icon_dnd_dest): Always specify all the actions.
+	(icon_drag_data_received): Allow for icons to be moved just a
+	notch by accepting drops from icons.
+
+	* gdnd.h: Added #defines for the DnD target type names.
+
+	* gdnd.c (gdnd_init): New public function to intern the target
+	atom names.
+	(gdnd_drag_context_has_target): New public function to see if a
+	drag context has a certain target type.
+
+	* gdesktop.c (setup_desktop_dnd): Do not use
+	GTK_DEST_DEFAULT_MOVE, and connect to drag_motion.
+	(desktop_drag_motion): If we are dragging from a desktop icon,
+	indicate the action as MOVE.  Otherwise, force the action to be
+	LINK unless the user explicitly requested ASK.
+	(setup_desktop_dnd): Intern the atoms for the drop targets.
+
 1999-01-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c: Selection code now is simpler and should be easier to

@@ -19,6 +19,31 @@
 #include "gdnd.h"
 
 
+/* Atoms for the DnD target types */
+GdkAtom dnd_target_atoms[TARGET_NTARGETS];
+
+
+/**
+ * gdnd_init:
+ * 
+ * Initializes the dnd_target_atoms array by interning the DnD target atom names.
+ **/
+void
+gdnd_init (void)
+{
+	dnd_target_atoms[TARGET_MC_DESKTOP_ICON] =
+		gdk_atom_intern (TARGET_MC_DESKTOP_ICON_TYPE, FALSE);
+
+	dnd_target_atoms[TARGET_URI_LIST] =
+		gdk_atom_intern (TARGET_URI_LIST_TYPE, FALSE);
+
+	dnd_target_atoms[TARGET_TEXT_PLAIN] =
+		gdk_atom_intern (TARGET_TEXT_PLAIN_TYPE, FALSE);
+
+	dnd_target_atoms[TARGET_URL] =
+		gdk_atom_intern (TARGET_URL_TYPE, FALSE);
+}
+
 /* The menu of DnD actions */
 static GnomeUIInfo actions[] = {
 	GNOMEUIINFO_ITEM_NONE (N_("Move here"), NULL, NULL),
@@ -296,3 +321,28 @@ gdnd_drop_on_directory (GdkDragContext *context, GtkSelectionData *selection_dat
 
 	return TRUE;
 }
+
+/**
+ * gdnd_drag_context_has_target:
+ * @context: The context to query for a target type
+ * @type: The sought target type
+ * 
+ * Tests whether the specified drag context has a target of the specified type.
+ * 
+ * Return value: TRUE if the context has the specified target type, FALSE
+ * otherwise.
+ **/
+int
+gdnd_drag_context_has_target (GdkDragContext *context, TargetType type)
+{
+	GList *l;
+
+	g_return_val_if_fail (context != NULL, FALSE);
+
+	for (l = context->targets; l; l = l->next)
+		if (dnd_target_atoms[type] == GPOINTER_TO_INT (l->data))
+			return TRUE;
+
+	return FALSE;
+}
+
