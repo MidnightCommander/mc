@@ -646,12 +646,65 @@ panel_drag_request (GtkWidget *widget, GdkEventDragRequest *event, WPanel *panel
 {
 	void *data;
 	int  len;
-	
+
+	printf ("Drag request!\n");
 	if ((strcmp (event->data_type, "text/plain") == 0) ||
-	    (strcmp (event->data_type, "url:ALL"))){
+	    (strcmp (event->data_type, "url:ALL")    == 0)){
 		data = panel_build_selected_file_list (panel, &len);
 		gtk_widget_dnd_data_set (widget, (GdkEvent *) event, data, len);
+		free (data);
 	}
+}
+
+void
+panel_drop_enter (GtkWidget *widget, GdkEvent *event)
+{
+	printf ("%s\n", event->type == GDK_DROP_ENTER ? "DROP ENTER" :
+		(event->type == GDK_DROP_LEAVE ? "DROP LEAVE" : "?"));
+}
+
+void
+panel_drop_data_available (GtkWidget *widget, GdkEventDropDataAvailable *data, WPanel *panel)
+{
+	printf ("Drop data available!\n");
+}
+
+/* Workaround for the CList that is not adding its clist-window to the DND windows */
+static void
+fixed_gtk_widget_dnd_drop_set (GtkCList *clist, int drop_enable, char **drag_types, int count, int is_destructive)
+{
+	gtk_widget_dnd_drop_set (GTK_WIDGET (clist), drop_enable, drag_types, count, is_destructive);
+	gdk_window_dnd_drop_set (clist->clist_window, drop_enable, drag_types, count, is_destructive);
+}
+
+static void
+fixed_gtk_widget_dnd_drag_set (GtkCList *clist, int drag_enable, gchar **type_accept_list, int numtypes)
+{
+	gtk_widget_dnd_drag_set (GTK_WIDGET (clist), drag_enable, type_accept_list, numtypes);
+/*	gdk_window_dnd_drag_set (clist->clist_window, drag_enable, type_accept_list, numtypes); */
+}
+				
+void
+panel_realized (GtkWidget *file_list, WPanel *panel)
+{
+	GtkObject *obj = GTK_OBJECT (file_list);
+	
+	/* DND: Drag setup */
+	gtk_signal_connect (obj, "drag_request_event",
+			    GTK_SIGNAL_FUNC (panel_drag_request), panel);
+	fixed_gtk_widget_dnd_drag_set (GTK_CLIST (file_list), TRUE, drag_types, ELEMENTS (drag_types));
+
+	/* DND: Drop setup */
+	gtk_signal_connect (obj, "drop_enter_event",
+			    GTK_SIGNAL_FUNC (panel_drop_enter), panel);
+	
+	gtk_signal_connect (obj, "drop_leave_event",
+			    GTK_SIGNAL_FUNC (panel_drop_enter), panel);
+
+	gtk_signal_connect (obj, "drop_data_available_event",
+			    GTK_SIGNAL_FUNC (panel_drop_data_available), panel);
+
+	fixed_gtk_widget_dnd_drop_set (GTK_CLIST (file_list), TRUE, drag_types, ELEMENTS (drag_types), FALSE);
 }
 
 GtkWidget *
@@ -682,14 +735,10 @@ panel_create_file_list (WPanel *panel)
 			    GTK_SIGNAL_FUNC (panel_file_list_row_selected),
 			    panel);
 
-#if 0
 	gtk_signal_connect (GTK_OBJECT (file_list),
-			    "drag_request_event",
-			    GTK_SIGNAL_FUNC (panel_drag_request), panel);
-
-	gtk_widget_dnd_drag_set (file_list, TRUE, drag_types, ELEMENTS (drag_types));
-#endif
-
+			    "realize",
+			    GTK_SIGNAL_FUNC (panel_realized), panel);
+	
 	return file_list;
 }
 

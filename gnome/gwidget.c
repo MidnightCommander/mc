@@ -130,8 +130,10 @@ x_create_input (Dlg_head *h, widget_data parent, WInput *in)
 void
 x_update_input (WInput *in)
 {
-	gtk_entry_set_text (GTK_ENTRY (in->widget.wdata), in->buffer);
-	GTK_ENTRY (in->widget.wdata)->current_pos = in->point;
+	GtkEntry *entry = GTK_ENTRY (in->widget.wdata);
+	
+	gtk_entry_set_text (entry, in->buffer);
+	gtk_entry_set_position (entry, in->point);
 }
 
 /* Listboxes */

@@ -198,7 +198,7 @@ desktop_load_dentry (char *filename)
 	GtkWidget *window;
 
 	char *drop_types [] = {
-		"text/plain"
+		"text/plain",
 		"url:ALL",
 	};
 	
