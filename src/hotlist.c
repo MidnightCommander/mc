@@ -486,22 +486,22 @@ static int l_call (WListbox *list)
 	    if (hlp->type == HL_TYPE_ENTRY) {
 		dlg->ret_value = B_ENTER;
 		dlg_stop (dlg);
-		return listbox_finish;
+		return LISTBOX_DONE;
 	    } else {
 		hotlist_button_callback (B_ENTER);
 		hotlist_callback (dlg, '\n', DLG_POST_KEY);
-		return listbox_nothing;
+		return LISTBOX_CONT;
 	    }
 	} else {
 	    dlg->ret_value = B_ENTER;
 	    dlg_stop (dlg);
-	    return listbox_finish;
+	    return LISTBOX_DONE;
 	}
     }
 
     hotlist_button_callback (B_UP_GROUP);
     hotlist_callback (dlg, 'u', DLG_POST_KEY);
-    return listbox_nothing;
+    return LISTBOX_CONT;
 }
 
 /*
@@ -642,7 +642,7 @@ init_hotlist (int list_type)
     /* get new listbox */
     l_hotlist =
 	listbox_new (UY + 1, UX + 1, COLS - 2 * UX - 8, LINES - 14,
-		     listbox_nothing, l_call);
+		     l_call);
 
     /* Fill the hotlist with the active VFS or the hotlist */
 #ifdef USE_VFS
@@ -690,7 +690,7 @@ init_movelist (int list_type, struct hotlist *item)
     /* get new listbox */
     l_movelist =
 	listbox_new (UY + 1, UX + 1, movelist_dlg->cols - 2 * UX - 2,
-		     movelist_dlg->lines - 8, listbox_nothing, l_call);
+		     movelist_dlg->lines - 8, l_call);
 
     fill_listbox ();
 

@@ -91,15 +91,15 @@ typedef struct WLEntry {
     struct WLEntry *prev;
 } WLEntry;
 
-/* Listbox actions when selecting an option: */
-enum {
-    listbox_nothing,
-    listbox_finish		/* finish dialog automatically */
-};
-
 struct WListbox;
 typedef struct WListbox WListbox;
 typedef int (*lcback) (WListbox *);
+
+/* Callback should return one of the following values */
+enum {
+    LISTBOX_CONT,		/* continue */
+    LISTBOX_DONE		/* finish dialog */
+};
 
 struct WListbox {
     Widget widget;
@@ -110,7 +110,6 @@ struct WListbox {
     int count;			/* Number of items in the listbox */
     int width;
     int height;			/* Size of the widget */
-    int action;			/* Action type */
     int allow_duplicates;	/* Do we allow duplicates on the list? */
     int scrollbar;		/* Draw a scrollbar? */
     lcback cback;		/* The callback function */
@@ -137,7 +136,7 @@ WCheck  *check_new    (int y, int x, int state,  char *text);
 WInput  *input_new    (int y, int x, int color, int len, const char *text, char *histname);
 WLabel  *label_new    (int y, int x, const char *text);
 WGauge  *gauge_new    (int y, int x, int shown, int max, int current);
-WListbox *listbox_new (int x, int y, int width, int height, int action, lcback callback);
+WListbox *listbox_new (int x, int y, int width, int height, lcback callback);
 
 /* Input lines */
 void winput_set_origin (WInput *i, int x, int field_len);

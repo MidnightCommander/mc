@@ -260,7 +260,7 @@ do_enter_key (Dlg_head * h, int f_pos)
 			"[Advanced Chown]", title, DLG_COMPACT);
 
 	/* get new listboxes */
-	chl_list = listbox_new (1, 1, 15, 11, 0, NULL);
+	chl_list = listbox_new (1, 1, 15, 11, NULL);
 
 	listbox_add_item (chl_list, 0, 0, "<Unknown>", NULL);
 

@@ -953,7 +953,7 @@ show_hist (GList *history, int widget_x, int widget_y)
     query_dlg =
 	create_dlg (y, x, h, w, dialog_colors, NULL, "[History-query]",
 		    i18n_htitle (), DLG_COMPACT);
-    query_list = listbox_new (1, 1, w - 2, h - 2, listbox_finish, 0);
+    query_list = listbox_new (1, 1, w - 2, h - 2, 0);
     add_widget (query_dlg, query_list);
     hi = z;
     if (y < widget_y) {
@@ -1969,9 +1969,9 @@ listbox_key (WListbox *l, int key)
 static int
 listbox_callback (WListbox *l, int msg, int par)
 {
-    WLEntry *e;
-    /* int selected_color; Never used */
     int ret_code;
+    WLEntry *e;
+    Dlg_head *h = l->widget.parent;
 
     switch (msg) {
     case WIDGET_INIT:
@@ -1979,15 +1979,18 @@ listbox_callback (WListbox *l, int msg, int par)
 
     case WIDGET_HOTKEY:
 	if ((e = listbox_check_hotkey (l, par)) != NULL) {
+	    int action;
+
 	    listbox_select_entry (l, e);
 
 	    if (l->cback)
-		l->action = (*l->cback) (l);
+		action = (*l->cback) (l);
+	    else
+		action = LISTBOX_DONE;
 
-	    /* Take the appropriate action */
-	    if (l->action == listbox_finish) {
-		l->widget.parent->running = 0;
-		l->widget.parent->ret_value = B_ENTER;
+	    if (action == LISTBOX_DONE) {
+		h->ret_value = B_ENTER;
+		dlg_stop (h);
 	    }
 	    return 1;
 	} else
@@ -2046,6 +2049,8 @@ listbox_event (Gpm_Event *event, WListbox *l)
 
     /* Double click */
     if ((event->type & (GPM_DOUBLE | GPM_UP)) == (GPM_UP | GPM_DOUBLE)) {
+	int action;
+
 	if (event->x < 0 || event->x >= l->width)
 	    return MOU_NORMAL;
 	if (event->y < 1 || event->y > l->height)
@@ -2057,9 +2062,11 @@ listbox_event (Gpm_Event *event, WListbox *l)
 						  event->y - 1));
 
 	if (l->cback)
-	    l->action = (*l->cback) (l);
+	    action = (*l->cback) (l);
+	else
+	    action = LISTBOX_DONE;
 
-	if (l->action == listbox_finish) {
+	if (action == LISTBOX_DONE) {
 	    h->ret_value = B_ENTER;
 	    dlg_stop (h);
 	    return MOU_NORMAL;
@@ -2083,8 +2090,7 @@ listbox_destroy (WListbox *l)
 }
 
 WListbox *
-listbox_new (int y, int x, int width, int height, int action,
-	     lcback callback)
+listbox_new (int y, int x, int width, int height, lcback callback)
 {
     WListbox *l = g_new (WListbox, 1);
     extern int slow_terminal;
@@ -2104,7 +2110,6 @@ listbox_new (int y, int x, int width, int height, int action,
     l->top = 0;
     l->current = 0;
     l->cback = callback;
-    l->action = action;
     l->allow_duplicates = 1;
     l->scrollbar = slow_terminal ? 0 : 1;
     widget_want_hotkey (l->widget, 1);

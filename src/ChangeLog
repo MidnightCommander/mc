@@ -1,5 +1,11 @@
 2003-09-01  Pavel Roskin  <proski@gnu.org>
 
+	* widget.c (listbox_new): Remove "action" argument.  Listboxes
+	without callbacks default to closing the dialog.  Adjust all
+	users.  This fixes double click on completion listbox.
+	* widget.h: Use uppercase names for the return values of the
+	listbox callback.
+
 	* hotlist.c (update_path_name): Avoid using global variable.
 	(l_call): Likewise.
 

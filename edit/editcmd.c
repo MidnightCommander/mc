@@ -2759,7 +2759,7 @@ edit_completion_dialog (WEdit *edit, int max_len, int word_len,
 
     /* create the listbox */
     compl_list =
-	listbox_new (1, 1, compl_dlg_w - 2, compl_dlg_h - 2, 0, NULL);
+	listbox_new (1, 1, compl_dlg_w - 2, compl_dlg_h - 2, NULL);
 
     /* add the dialog */
     add_widget (compl_dlg, compl_list);

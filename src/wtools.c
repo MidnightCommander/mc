@@ -76,7 +76,7 @@ Listbox *create_listbox_window (int cols, int lines, char *title, char *help)
     listbox->dlg = create_dlg (ypos, xpos, lines+6, cols+4, dialog_colors,
 			       NULL, help, title, DLG_CENTER);
     
-    listbox->list = listbox_new (2, 2, cols, lines, listbox_finish, 0);
+    listbox->list = listbox_new (2, 2, cols, lines, 0);
 
     add_widget (listbox->dlg,
 		button_new (lines+3, (cols/2 + 2) - len/2, 
