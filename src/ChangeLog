@@ -1,5 +1,8 @@
 2003-01-20  Pavel Roskin  <proski@gnu.org>
 
+	* man2hlp.c (main): Initialize cnode->heading_level.
+	Bug report by Tribhuvan <loka@rcn.com>
+
 	* dir.c (sort_size): Avoid any arithmetic except comparison on
 	file sizes - they may not fit "int" that the function returns.
 	Original patch by Bulia Byak <bulia@dr.com>

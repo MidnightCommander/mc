@@ -773,6 +773,7 @@ main (int argc, char **argv)
 			cnode->node[p - node - 2] = 0;
 			cnode->lname = NULL;
 			cnode->next = NULL;
+			cnode->heading_level = 0;
 		    }
 		} else
 		    node = NULL;
