@@ -505,6 +505,7 @@ create_panels (void)
 	GList *p, *g;
 	char  *geo;
 	WPanel *panel;
+
 #if 1
 	desktop_init ();
 #else

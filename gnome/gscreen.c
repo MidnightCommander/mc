@@ -1524,7 +1524,7 @@ display_mini_info (WPanel *panel)
 		return;
 	}
 
-	if (panel->estimated_total){
+	if (panel->estimated_total > 8){
 		int  len = panel->estimated_total;
 		char *buffer;
 
@@ -2001,9 +2001,10 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
 	GtkWidget *status_line, *filter, *vbox, *ministatus_box;
 	GtkWidget *frame, *cwd, *back_p, *fwd_p, *up_p;
-	GtkWidget *hbox, *evbox, *dock;
-	GtkWidget *display, *table_frame;
-
+	GtkWidget *hbox, *evbox, *dock, *box;
+	GtkWidget *table_frame;
+	int display;
+	
 	panel->xwindow = gtk_widget_get_toplevel (GTK_WIDGET (panel->widget.wdata));
 
 	panel->table = gtk_table_new (2, 1, 0);
@@ -2022,6 +2023,10 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	/*
 	 * Icon and Listing display
 	 */
+	panel->notebook = gtk_notebook_new ();
+	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (panel->notebook), FALSE);
+	gtk_widget_show (panel->notebook);
+	
 	panel->icons = panel_create_icon_display (panel);
 	panel->scrollbar = gtk_vscrollbar_new (GNOME_ICON_LIST (panel->icons)->adj);
 	gtk_widget_show (panel->scrollbar);
@@ -2030,11 +2035,17 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_widget_ref (panel->icons);
 	gtk_widget_ref (panel->list);
 
-	if (panel->list_type == list_icons)
-		display = panel->icons;
-	else
-		display = panel->list;
+	box = gtk_hbox_new (FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (box), panel->icons, TRUE, TRUE, 0);
+	gtk_box_pack_end (GTK_BOX (box), panel->scrollbar, FALSE, TRUE, 0);
 
+	gtk_notebook_append_page (GTK_NOTEBOOK (panel->notebook), box, NULL);
+	gtk_notebook_append_page (GTK_NOTEBOOK (panel->notebook), panel->list, NULL);
+	gtk_notebook_set_page (GTK_NOTEBOOK (panel->notebook), panel->list_type == list_icons ? 0 : 1);
+	gtk_widget_show_all (box);
+	gtk_widget_show (panel->list);
+	gtk_widget_show (panel->notebook);
+	
 	/*
 	 * Pane
 	 */
@@ -2150,19 +2161,10 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_container_add (GTK_CONTAINER (table_frame), panel->view_table);
 
 	/* Add both the icon view and the listing view */
-	gtk_table_attach (GTK_TABLE (panel->view_table), panel->icons, 0, 1, 0, 1,
+	gtk_table_attach (GTK_TABLE (panel->view_table), panel->notebook, 0, 1, 0, 1,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0);
-	gtk_table_attach (GTK_TABLE (panel->view_table), panel->scrollbar, 1, 2, 0, 1,
-			  0,
-			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
-			  0, 0);
-	gtk_table_attach (GTK_TABLE (panel->view_table), panel->list, 0, 1, 0, 1,
-			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
-			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
-			  0, 0);
-	gtk_widget_show (display);
 
 	gtk_table_attach (GTK_TABLE (panel->table), panel->pane, 0, 1, 1, 2,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
@@ -2270,24 +2272,12 @@ paint_frame (WPanel *panel)
 void
 x_reset_sort_labels (WPanel *panel)
 {
-	if (panel->list_type == list_icons){
-		if (panel->icons){
-			gtk_widget_show (panel->icons);
-			gtk_widget_show (panel->scrollbar);
-		}
-		if (panel->list)
-			gtk_widget_hide (panel->list);
-	} else {
-		panel_switch_new_display_mode (panel);
-		if (panel->list){
-			gtk_widget_show (panel->list);
-			gtk_widget_show (panel->scrollbar);
-		}
-		if (panel->icons){
-			gtk_widget_hide (panel->icons);
-			gtk_widget_hide (panel->scrollbar);
-		}
-	}
+	if (!panel->notebook)
+		return;
+
+	gtk_notebook_set_page (
+		GTK_NOTEBOOK (panel->notebook),
+		panel->list_type == list_icons ? 0 : 1);
 }
 
 /* Releases all of the X resources allocated */

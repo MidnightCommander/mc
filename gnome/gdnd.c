@@ -117,15 +117,21 @@ find_panel_owning_window (GdkDragContext *context)
  * specified destination directory.
  */
 static void
-perform_action_on_panel (WPanel *source_panel, GdkDragAction action, char *destdir)
+perform_action_on_panel (WPanel *source_panel, GdkDragAction action, char *destdir, int ask)
 {
 	switch (action) {
 	case GDK_ACTION_COPY:
-		panel_operate_def (source_panel, OP_COPY, destdir);
+		if (ask)
+			panel_operate (source_panel, OP_COPY, destdir);
+		else
+			panel_operate_def (source_panel, OP_COPY, destdir);
 		break;
 
 	case GDK_ACTION_MOVE:
-		panel_operate_def (source_panel, OP_MOVE, destdir);
+		if (ask)
+			panel_operate (source_panel, OP_MOVE, destdir);
+		else
+			panel_operate_def (source_panel, OP_MOVE, destdir);
 		break;
 
 	default:
@@ -224,7 +230,7 @@ perform_action (GList *names, GdkDragAction action, char *destdir)
 						copy_file_file (
 							name, dest_name,
 							TRUE,
-							&count, &bytes);
+							&count, &bytes, 1);
 					else
 						move_file_file (
 							name, dest_name,
@@ -263,6 +269,7 @@ gdnd_drop_on_directory (GdkDragContext *context, GtkSelectionData *selection_dat
 
 		if (action == GDK_ACTION_ASK)
 			return FALSE;
+		
 	} else
 		action = context->suggested_action;
 
@@ -273,7 +280,7 @@ gdnd_drop_on_directory (GdkDragContext *context, GtkSelectionData *selection_dat
 	/* Symlinks do not use file.c */
 
 	if (source_panel && action != GDK_ACTION_LINK)
-		perform_action_on_panel (source_panel, action, destdir);
+		perform_action_on_panel (source_panel, action, destdir, context->suggested_action == GDK_ACTION_ASK);
 	else {
 		names = gnome_uri_list_extract_uris (selection_data->data);
 

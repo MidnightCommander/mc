@@ -103,16 +103,10 @@ desktop_icon_init (DesktopIcon *dicon)
 	gtk_window_set_wmclass (GTK_WINDOW (dicon), "desktop_icon", "gmc");
 	/* Create the canvas */
 
-	gtk_widget_push_visual (gdk_imlib_get_visual ());
-	gtk_widget_push_colormap (gdk_imlib_get_colormap ());
-
 	dicon->canvas = gnome_canvas_new ();
 	gtk_signal_connect (GTK_OBJECT (dicon->canvas), "size_allocate",
 			    (GtkSignalFunc) canvas_size_allocated,
 			    NULL);
-
-	gtk_widget_pop_colormap ();
-	gtk_widget_pop_visual ();
 
 	gtk_container_add (GTK_CONTAINER (dicon), dicon->canvas);
 	gtk_widget_show (dicon->canvas);

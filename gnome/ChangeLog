@@ -1,3 +1,14 @@
+1998-12-29  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (panel_create_file_list): Use a notebook instead of
+	the hack I was using before for switching the panel contents.
+
+	* gtkdtree.c (gtk_dtree_new): We now rely on the whole code to be
+	running in the proper visual.  The more I look at this, the more
+	desires I have to do a proper imlib.
+
+	* gdesktop-icon.c (desktop_icon_init): ditto.
+
 Tue Dec 29 16:55:24 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* gmain.c: According to the man page the color keyword for executable 
