@@ -1,4 +1,4 @@
-/* Copyright (c) 1992, 1999, 2001, 2002 John E. Davis
+/* Copyright (c) 1992, 1999, 2001, 2002, 2003 John E. Davis
  * This file is part of the S-Lang library.
  *
  * Trimmed down for use in GNU Midnight Commander.
@@ -6,6 +6,7 @@
  * You may distribute under the terms of either the GNU General Public
  * License or the Perl Artistic License.
  */
+#define _GNU_SOURCE
 #include "slinclud.h"
 
 #include "slang.h"

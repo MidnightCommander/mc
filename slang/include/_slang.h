@@ -2,7 +2,7 @@
 #define _PRIVATE_SLANG_H_
 /* header file for S-Lang internal structures that users do not (should not)
    need.  Use slang.h for that purpose. */
-/* Copyright (c) 1992, 1999, 2001, 2002 John E. Davis
+/* Copyright (c) 1992, 1999, 2001, 2002, 2003 John E. Davis
  * This file is part of the S-Lang library.
  *
  * You may distribute under the terms of either the GNU General Public
@@ -40,6 +40,9 @@
 #define _SLANG_BC_PVARIABLE	SLANG_PVARIABLE   /* 0x0B */
 #define _SLANG_BC_PFUNCTION	SLANG_PFUNCTION   /* 0x0C */
 
+#define _SLANG_BC_UNUSED_0x0D	0x0D
+#define _SLANG_BC_UNUSED_0x0E	0x0E
+#define _SLANG_BC_UNUSED_0x0F	0x0F
 #define _SLANG_BC_BINARY	0x10
 #define _SLANG_BC_LITERAL	0x11           /* constant objects */
 #define _SLANG_BC_LITERAL_INT	0x12
@@ -63,10 +66,22 @@
 #define _SLANG_BC_X_USER3	0x20
 #define _SLANG_BC_X_USER4	0x21
 
+#define _SLANG_BC_LITERAL_DBL	0x22
+#define _SLANG_BC_UNUSED_0x23		
+
 #define _SLANG_BC_CALL_DIRECT		0x24
 #define _SLANG_BC_CALL_DIRECT_FRAME	0x25
 #define _SLANG_BC_UNARY			0x26
 #define _SLANG_BC_UNARY_FUNC		0x27
+
+#define _SLANG_BC_UNUSED_0x28	0x28
+#define _SLANG_BC_UNUSED_0x29	0x29
+#define _SLANG_BC_UNUSED_0x2A	0x2A
+#define _SLANG_BC_UNUSED_0x2B	0x2B
+#define _SLANG_BC_UNUSED_0x2C	0x2C
+#define _SLANG_BC_UNUSED_0x2D	0x2D
+#define _SLANG_BC_UNUSED_0x2E	0x2E
+#define _SLANG_BC_UNUSED_0x2F	0x2F
 
 #define _SLANG_BC_DEREF_ASSIGN		0x30
 #define _SLANG_BC_SET_LOCAL_LVALUE	0x31
@@ -76,9 +91,53 @@
 #define _SLANG_BC_FIELD			0x35
 #define _SLANG_BC_SET_ARRAY_LVALUE	0x36
 
+#define _SLANG_BC_UNUSED_0x37	0x37
+#define _SLANG_BC_UNUSED_0x38	0x38
+#define _SLANG_BC_UNUSED_0x39	0x39
+#define _SLANG_BC_UNUSED_0x3A	0x3A
+#define _SLANG_BC_UNUSED_0x3B	0x3B
+#define _SLANG_BC_UNUSED_0x3C	0x3C
+#define _SLANG_BC_UNUSED_0x3D	0x3D
+#define _SLANG_BC_UNUSED_0x3E	0x3E
+#define _SLANG_BC_UNUSED_0x3F	0x3F
+
 #define _SLANG_BC_LINE_NUM		0x40
 
+#define _SLANG_BC_UNUSED_0x41	0x41
+#define _SLANG_BC_UNUSED_0x42	0x42
+#define _SLANG_BC_UNUSED_0x43	0x43
+#define _SLANG_BC_UNUSED_0x44	0x44
+#define _SLANG_BC_UNUSED_0x45	0x45
+#define _SLANG_BC_UNUSED_0x46	0x46
+#define _SLANG_BC_UNUSED_0x47	0x47
+#define _SLANG_BC_UNUSED_0x48	0x48
+#define _SLANG_BC_UNUSED_0x49	0x49
+#define _SLANG_BC_UNUSED_0x4A	0x4A
+#define _SLANG_BC_UNUSED_0x4B	0x4B
+#define _SLANG_BC_UNUSED_0x4C	0x4C
+#define _SLANG_BC_UNUSED_0x4D	0x4D
+#define _SLANG_BC_UNUSED_0x4E	0x4E
+#define _SLANG_BC_UNUSED_0x4F	0x4F
+
 #define _SLANG_BC_TMP			0x50
+
+#define _SLANG_BC_UNUSED_0x51	0x51
+#define _SLANG_BC_UNUSED_0x52	0x52
+#define _SLANG_BC_UNUSED_0x53	0x53
+#define _SLANG_BC_UNUSED_0x54	0x54
+#define _SLANG_BC_UNUSED_0x55	0x55
+#define _SLANG_BC_UNUSED_0x56	0x56
+#define _SLANG_BC_UNUSED_0x57	0x57
+#define _SLANG_BC_UNUSED_0x58	0x58
+#define _SLANG_BC_UNUSED_0x59	0x59
+#define _SLANG_BC_UNUSED_0x5A	0x5A
+#define _SLANG_BC_UNUSED_0x5B	0x5B
+#define _SLANG_BC_UNUSED_0x5C	0x5C
+#define _SLANG_BC_UNUSED_0x5D	0x5D
+#define _SLANG_BC_UNUSED_0x5E	0x5E
+#define _SLANG_BC_UNUSED_0x5F	0x5F
+
+
 #define _SLANG_BC_LVARIABLE_AGET	0x60
 #define _SLANG_BC_LVARIABLE_APUT	0x61
 #define _SLANG_BC_INTEGER_PLUS		0x62
@@ -86,6 +145,35 @@
 #define _SLANG_BC_ARG_LVARIABLE		0x64
 #define _SLANG_BC_EARG_LVARIABLE	0x65
 
+#define _SLANG_BC_UNUSED_0x66	0x66
+#define _SLANG_BC_UNUSED_0x67	0x67
+#define _SLANG_BC_UNUSED_0x68	0x68
+#define _SLANG_BC_UNUSED_0x69	0x69
+#define _SLANG_BC_UNUSED_0x6A	0x6A
+#define _SLANG_BC_UNUSED_0x6B	0x6B
+#define _SLANG_BC_UNUSED_0x6C	0x6C
+#define _SLANG_BC_UNUSED_0x6D	0x6D
+#define _SLANG_BC_UNUSED_0x6E	0x6E
+#define _SLANG_BC_UNUSED_0x6F	0x6F
+
+#define _SLANG_BC_UNUSED_0x70	0x70
+#define _SLANG_BC_UNUSED_0x71	0x71
+#define _SLANG_BC_UNUSED_0x72	0x72
+#define _SLANG_BC_UNUSED_0x73	0x73
+#define _SLANG_BC_UNUSED_0x74	0x74
+#define _SLANG_BC_UNUSED_0x75	0x75
+#define _SLANG_BC_UNUSED_0x76	0x76
+#define _SLANG_BC_UNUSED_0x77	0x77
+#define _SLANG_BC_UNUSED_0x78	0x78
+#define _SLANG_BC_UNUSED_0x79	0x79
+#define _SLANG_BC_UNUSED_0x7A	0x7A
+#define _SLANG_BC_UNUSED_0x7B	0x7B
+#define _SLANG_BC_UNUSED_0x7C	0x7C
+#define _SLANG_BC_UNUSED_0x7D	0x7D
+#define _SLANG_BC_UNUSED_0x7E	0x7E
+#define _SLANG_BC_UNUSED_0x7F	0x7F
+
+/* These are used only when compiled with USE_COMBINED_BYTECODES */
 #define _SLANG_BC_CALL_DIRECT_INTRINSIC	0x80
 #define _SLANG_BC_INTRINSIC_CALL_DIRECT	0x81
 #define _SLANG_BC_CALL_DIRECT_LSTR	0x82
@@ -95,7 +183,23 @@
 #define _SLANG_BC_CALL_DIRECT_EARG_LVAR	0x86
 #define _SLANG_BC_CALL_DIRECT_LINT	0x87
 #define _SLANG_BC_CALL_DIRECT_LVAR	0x88
+#define _SLANG_BC_LLVARIABLE_BINARY	0x89
+#define _SLANG_BC_LGVARIABLE_BINARY	0x8A
+#define _SLANG_BC_GLVARIABLE_BINARY	0x8B
+#define _SLANG_BC_GGVARIABLE_BINARY	0x8C
+#define _SLANG_BC_LIVARIABLE_BINARY	0x8D
+#define _SLANG_BC_LDVARIABLE_BINARY	0x8E
+#define _SLANG_BC_ILVARIABLE_BINARY	0x8F
+#define _SLANG_BC_DLVARIABLE_BINARY	0x90
+#define _SLANG_BC_LVARIABLE_BINARY	0x91
+#define _SLANG_BC_GVARIABLE_BINARY	0x92
+#define _SLANG_BC_LITERAL_INT_BINARY	0x93
+#define _SLANG_BC_LITERAL_DBL_BINARY	0x94
 
+
+#define _SLANG_BC_LVARIABLE_COMBINED	0xA0
+#define _SLANG_BC_GVARIABLE_COMBINED	0xA1
+#define _SLANG_BC_LITERAL_COMBINED	0xA2
 
 /* Byte-Code Sub Types (_BCST_) */
 
@@ -271,8 +375,9 @@ extern void _SLexpand_escaped_string (char *, char *, char *);
 extern char *_SLstringize_object (SLang_Object_Type *);
 extern int _SLdump_objects (char *, SLang_Object_Type *, unsigned int, int);
 
-extern SLang_Object_Type *_SLRun_Stack;
-extern SLang_Object_Type *_SLStack_Pointer;
+extern SLang_Object_Type *_SLang_get_run_stack_pointer (void);
+extern SLang_Object_Type *_SLang_get_run_stack_base (void);
+extern int _SLang_dump_stack (void);
 
 struct _SLang_NameSpace_Type
 {
@@ -290,10 +395,11 @@ extern void _SLang_use_namespace_intrinsic (char *name);
 extern char *_SLang_cur_namespace_intrinsic (void);
 extern SLang_Array_Type *_SLang_apropos (char *, char *, unsigned int);
 extern void _SLang_implements_intrinsic (char *);
+extern SLang_Array_Type *_SLns_list_namespaces (void);
 
 extern int _SLang_Trace;
 extern int _SLstack_depth(void);
-extern char *_SLang_Current_Function_Name;
+extern char *_SLang_current_function_name (void);
 
 extern int _SLang_trace_fun(char *);
 extern int _SLang_Compile_Line_Num_Info;
@@ -359,8 +465,6 @@ extern void _SLclass_type_mismatch_error (SLtype, SLtype);
 extern int _SLclass_init (void);
 extern int _SLclass_copy_class (SLtype, SLtype);
 
-extern SLtype _SLclass_Class_Type [256];
-
 extern int (*_SLclass_get_typecast (SLtype, SLtype, int))
 (SLtype, VOID_STAR, unsigned int,
  SLtype, VOID_STAR);
@@ -376,7 +480,13 @@ extern int (*_SLclass_get_unary_fun (int, SLang_Class_Type *, SLang_Class_Type *
 
 extern int _SLarith_register_types (void);
 extern SLtype _SLarith_Arith_Types [];
-extern SLtype _SLarith_Is_Arith_Type [256];
+
+extern int _SLang_is_arith_type (SLtype);
+extern void _SLang_set_arith_type (SLtype, unsigned char);
+#if _SLANG_OPTIMIZE_FOR_SPEED
+extern int _SLang_get_class_type (SLtype);
+extern void _SLang_set_class_type (SLtype, SLtype);
+#endif
 extern int _SLarith_bin_op (SLang_Object_Type *, SLang_Object_Type *, int);
 
 extern int _SLarray_add_bin_op (SLtype);
@@ -421,9 +531,14 @@ extern int _SLarray_cl_foreach (SLtype, SLang_Foreach_Context_Type *);
 extern int _SLarray_matrix_multiply (void);
 extern void (*_SLang_Matrix_Multiply)(void);
 
+extern int _SLarray_next_index (int *, int *, unsigned int);
+
 extern int _SLarray_init_slarray (void);
 extern SLang_Array_Type *
 SLang_create_array1 (SLtype, int, VOID_STAR, int *, unsigned int, int);
+
+extern int _SLassoc_aput (SLtype, unsigned int);
+extern int _SLassoc_aget (SLtype, unsigned int);
 
 extern int _SLcompile_push_context (SLang_Load_Type *);
 extern int _SLcompile_pop_context (void);
@@ -449,6 +564,13 @@ _SLang_Token_Type;
 
 extern void _SLcompile (_SLang_Token_Type *);
 extern void (*_SLcompile_ptr)(_SLang_Token_Type *);
+
+/* slmisc.c */
+extern char *_SLskip_whitespace (char *s);
+
+/* slospath.c */
+extern char *_SLpath_find_file (char *);   /* slstring returned */
+
 
 /* *** TOKENS *** */
 
@@ -734,7 +856,9 @@ extern int _SLvsnprintf (char *, unsigned int, char *, va_list);
 extern int _SLsnprintf (char *, unsigned int, char *, ...);
 #endif
 
-#endif				       /* !MIDNIGHT_COMMANDER_CODE */
+#endif                                /* !MIDNIGHT_COMMANDER_CODE */
+extern int _SLsecure_issetugid (void);
+extern char *_SLsecure_getenv (char *);
 
 #undef _INLINE_
 #if defined(__GNUC__) && _SLANG_USE_INLINE_CODE

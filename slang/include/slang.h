@@ -1,14 +1,14 @@
 #ifndef DAVIS_SLANG_H_
 #define DAVIS_SLANG_H_
 /* -*- mode: C; mode: fold; -*- */
-/* Copyright (c) 1992, 1999, 2001, 2002 John E. Davis
+/* Copyright (c) 1992, 1999, 2001, 2002, 2003 John E. Davis
  * This file is part of the S-Lang library.
  *
  * You may distribute under the terms of either the GNU General Public
  * License or the Perl Artistic License.
  */
-#define SLANG_VERSION 10405
-#define SLANG_VERSION_STRING "1.4.5"
+#define SLANG_VERSION 10409
+#define SLANG_VERSION_STRING "1.4.9"
 
 /*{{{ System Dependent Macros and Typedefs */
 
@@ -105,10 +105,19 @@ extern "C" {
 # include <alloc.h>
 #endif
 
-#if defined (__cplusplus) || defined(__STDC__) || defined(IBMPC_SYSTEM)
-  typedef void *VOID_STAR;
+#ifdef __GNUC__
+# define _SLATTRIBUTE_(x) __attribute__ (x)
 #else
-  typedef unsigned char *VOID_STAR;
+# define _SLATTRIBUTE_(x)
+#endif
+#define _SLATTRIBUTE_PRINTF(a,b) _SLATTRIBUTE_((format(printf,a,b)))
+  
+#if defined (__cplusplus) || defined(__STDC__) || defined(IBMPC_SYSTEM)
+typedef void *VOID_STAR;
+#define SLCONST const
+#else
+typedef unsigned char *VOID_STAR;
+#define SLCONST
 #endif
 
 typedef int (*FVOID_STAR)(void);
@@ -246,12 +255,21 @@ SLang_DConstant_Type;
 
 typedef struct
 {
-   char *field_name;
+   char *field_name;		       /* gets replaced by slstring at run-time */
    unsigned int offset;
    SLtype type;
    unsigned char read_only;
 }
 SLang_IStruct_Field_Type;
+
+typedef SLCONST struct
+{
+   char *field_name;
+   unsigned int offset;
+   SLtype type;
+   unsigned char read_only;
+}
+SLang_CStruct_Field_Type;
 
 extern int SLadd_intrin_fun_table (SLang_Intrin_Fun_Type *, char *);
 extern int SLadd_intrin_var_table (SLang_Intrin_Var_Type *, char *);
@@ -260,6 +278,7 @@ extern int SLadd_math_unary_table (SLang_Math_Unary_Type *, char *);
 extern int SLadd_iconstant_table (SLang_IConstant_Type *, char *);
 extern int SLadd_dconstant_table (SLang_DConstant_Type *, char *);
 extern int SLadd_istruct_table (SLang_IStruct_Field_Type *, VOID_STAR, char *);
+
 
 typedef struct _SLang_NameSpace_Type SLang_NameSpace_Type;
 
@@ -273,6 +292,12 @@ extern int SLns_add_istruct_table (SLang_NameSpace_Type *, SLang_IStruct_Field_T
 
 extern SLang_NameSpace_Type *SLns_create_namespace (char *);
 extern void SLns_delete_namespace (SLang_NameSpace_Type *);
+
+extern int SLns_load_file (char *, char *);
+extern int SLns_load_string (char *, char *);
+extern int (*SLns_Load_File_Hook) (char *, char *);
+int SLang_load_file_verbose (int);    
+/* if non-zero, display file loading messages */
 
 typedef struct SLang_Load_Type
 {
@@ -299,13 +324,15 @@ typedef struct SLang_Load_Type
     * the compilable unit.
     */
 
-   unsigned long reserved[4];
+   char *namespace_name;
+   unsigned long reserved[3];
    /* For future expansion */
 } SLang_Load_Type;
 
 extern SLang_Load_Type *SLallocate_load_type (char *);
 extern void SLdeallocate_load_type (SLang_Load_Type *);
-
+extern SLang_Load_Type *SLns_allocate_load_type (char *, char *);
+  
 /* Returns SLang_Error upon failure */
 extern int SLang_load_object (SLang_Load_Type *);
 extern int (*SLang_Load_File_Hook)(char *);
@@ -516,6 +543,7 @@ extern int SLclass_register_class (SLang_Class_Type *, SLtype, unsigned int, SLt
 extern int SLclass_set_string_function (SLang_Class_Type *, char *(*)(SLtype, VOID_STAR));
 extern int SLclass_set_destroy_function (SLang_Class_Type *, void (*)(SLtype, VOID_STAR));
 extern int SLclass_set_push_function (SLang_Class_Type *, int (*)(SLtype, VOID_STAR));
+extern int SLclass_set_apush_function (SLang_Class_Type *, int (*)(SLtype, VOID_STAR));
 extern int SLclass_set_pop_function (SLang_Class_Type *, int (*)(SLtype, VOID_STAR));
 
 extern int SLclass_set_aget_function (SLang_Class_Type *, int (*)(SLtype, unsigned int));
@@ -640,6 +668,34 @@ extern SLang_Array_Type *SLang_duplicate_array (SLang_Array_Type *);
 extern int SLang_get_array_element (SLang_Array_Type *, int *, VOID_STAR);
 extern int SLang_set_array_element (SLang_Array_Type *, int *, VOID_STAR);
 
+typedef int SLarray_Contract_Fun_Type (VOID_STAR xp, unsigned int increment, unsigned int num, VOID_STAR yp);
+typedef struct
+{
+   SLtype from_type;		       /* if array is this type */
+   SLtype typecast_to_type;	       /* typecast it to this */
+   SLtype result_type;		       /* to produce this */
+   SLarray_Contract_Fun_Type *f;       /* via this function */
+}
+SLarray_Contract_Type;
+extern int SLarray_contract_array (SLCONST SLarray_Contract_Type *);
+
+typedef int SLarray_Map_Fun_Type (SLtype xtype, VOID_STAR xp, 
+				  unsigned int increment, unsigned int num,
+				  SLtype ytype, VOID_STAR yp, VOID_STAR clientdata);
+typedef struct
+{
+   SLtype from_type;		       /* if array is this type */
+   SLtype typecast_to_type;	       /* typecast it to this */
+   SLtype result_type;		       /* to produce this */
+   SLarray_Map_Fun_Type *f;	       /* via this function */
+}
+SLarray_Map_Type;
+
+extern int SLarray_map_array_1 (SLCONST SLarray_Map_Type *, 
+				int *use_this_dim, 
+				VOID_STAR clientdata);
+extern int SLarray_map_array (SLCONST SLarray_Map_Type *);
+
 
 /*}}}*/
 
@@ -690,14 +746,14 @@ extern int SLang_set_array_element (SLang_Array_Type *, int *, VOID_STAR);
 extern char *SLang_Doc_Dir;
 
 extern void (*SLang_VMessage_Hook) (char *, va_list);
-extern void SLang_vmessage (char *, ...);
+extern void SLang_vmessage (char *, ...) _SLATTRIBUTE_PRINTF(1,2);
 
   extern void (*SLang_Error_Hook)(char *);
   /* Pointer to application dependent error messaging routine.  By default,
      messages are displayed on stderr. */
 
   extern void (*SLang_Exit_Error_Hook)(char *, va_list);
-  extern void SLang_exit_error (char *, ...);
+extern void SLang_exit_error (char *, ...) _SLATTRIBUTE_((format (printf, 1, 2), noreturn));
   extern void (*SLang_Dump_Routine)(char *);
   /* Called if S-Lang traceback is enabled as well as other debugging
      routines (e.g., trace).  By default, these messages go to stderr. */
@@ -741,6 +797,9 @@ extern int SLang_init_slassoc (void);
 
 extern int SLang_init_array (void);
 /* Additional arrays functions: transpose, etc... */
+
+extern int SLang_init_array_extra (void);
+/* Additional arrays functions: sum, min, max, ... */
 
 /* Dynamic linking facility */
 extern int SLang_init_import (void);
@@ -857,6 +916,12 @@ extern SLang_Name_Type *SLang_pop_function (void);
 extern SLang_Name_Type *SLang_get_fun_from_ref (SLang_Ref_Type *);
 extern void SLang_free_function (SLang_Name_Type *f);
 
+/* C structure interface */
+extern int SLang_push_cstruct (VOID_STAR, SLang_CStruct_Field_Type *);
+extern int SLang_pop_cstruct (VOID_STAR, SLang_CStruct_Field_Type *);
+extern void SLang_free_cstruct (VOID_STAR, SLang_CStruct_Field_Type *);
+extern int SLang_assign_cstruct_to_ref (SLang_Ref_Type *, VOID_STAR, SLang_CStruct_Field_Type *);
+
    extern int SLang_is_defined(char *);
    /* Return non-zero is p1 is defined otherwise returns 0. */
 
@@ -878,7 +943,7 @@ extern int SLang_execute_function(char *);
 extern int SLang_end_arg_list (void);
 extern int SLang_start_arg_list (void);
 
-extern void SLang_verror (int, char *, ...);
+extern void SLang_verror (int, char *, ...) _SLATTRIBUTE_PRINTF(2,3);
 
 extern void SLang_doerror(char *);
    /* set SLang_Error and display p1 as error message */
@@ -1331,6 +1396,8 @@ typedef struct
    unsigned char flags;
 #define SLPREP_BLANK_LINES_OK	1
 #define SLPREP_COMMENT_LINES_OK	2
+#define SLPREP_STOP_READING	4
+#define SLPREP_EMBEDDED_TEXT	8
 }
 SLPreprocess_Type;
 
@@ -1359,7 +1426,8 @@ extern void SLsmg_erase_eos (void);
 extern void SLsmg_reverse_video (void);
 extern void SLsmg_set_color (int);
 extern void SLsmg_normal_video (void);
-extern void SLsmg_printf (char *, ...);
+extern void SLsmg_printf (char *, ...) _SLATTRIBUTE_PRINTF(1,2);
+/* extern void SLsmg_printf (char *, ...) _SLATTRIBUTE_PRINTF(1,2); */
 extern void SLsmg_vprintf (char *, va_list);
 extern void SLsmg_write_string (char *);
 extern void SLsmg_write_nstring (char *, unsigned int);
@@ -1658,6 +1726,8 @@ extern int SLerrno_set_errno (int);
 #define SLANG_BSTRING_TYPE	0x25
 #define SLANG_FILE_FD_TYPE	0x26
 
+#define _SLANG_MIN_UNUSED_TYPE	0x27
+
 /* Compatibility */
 #ifdef FLOAT_TYPE
 # undef FLOAT_TYPE
@@ -1792,6 +1862,13 @@ int SLns_add_intrinsic_function (SLang_NameSpace_Type *, char *, FVOID_STAR, uns
 # define offsetof(T,F) ((unsigned int)((char *)&((T *)0L)->F - (char *)0L))
 #endif
 #define MAKE_ISTRUCT_FIELD(s,f,n,t,r) {(n), offsetof(s,f), (t), (r)}
+#define MAKE_CSTRUCT_FIELD(s,f,n,t,r) {(n), offsetof(s,f), (t), (r)}
+#define MAKE_CSTRUCT_INT_FIELD(s,f,n,r) {(n), offsetof(s,f),\
+   (sizeof(((s*)0L)->f)==sizeof(int))?(SLANG_INT_TYPE): \
+   (sizeof(((s*)0L)->f)==sizeof(short))?(SLANG_SHORT_TYPE): \
+   (sizeof(((s*)0L)->f)==sizeof(char))?(SLANG_CHAR_TYPE): \
+   SLANG_LONG_TYPE, (r)\
+}
 
 #define SLANG_END_TABLE {NULL}
 #define SLANG_END_INTRIN_FUN_TABLE MAKE_INTRINSIC_0(NULL,NULL,0)
@@ -1800,7 +1877,7 @@ int SLns_add_intrinsic_function (SLang_NameSpace_Type *, char *, FVOID_STAR, uns
 #define SLANG_END_INTRIN_VAR_TABLE MAKE_VARIABLE(NULL,NULL,0,0)
 #define SLANG_END_ICONST_TABLE MAKE_ICONSTANT(NULL,0)
 #define SLANG_END_ISTRUCT_TABLE {NULL, 0, 0, 0}
-
+#define SLANG_END_CSTRUCT_TABLE {NULL, 0, 0, 0}
    
 
 /*}}}*/
@@ -1920,7 +1997,17 @@ extern unsigned char *SLsearch (unsigned char *, unsigned char *, SLsearch_Type 
 /* These function return pointers to the original space */
 extern char *SLpath_basename (char *);
 extern char *SLpath_extname (char *);
+
 extern int SLpath_is_absolute_path (char *);
+
+/* Get and set the character delimiter for search paths */
+extern int SLpath_get_delimiter (void);
+extern int SLpath_set_delimiter (int);
+
+/* search path for loading .sl files */
+extern int SLpath_set_load_path (char *);   
+/* search path for loading .sl files --- returns slstring */
+extern char *SLpath_get_load_path (void);   
 
 /* These return malloced strings--- NOT slstrings */
 extern char *SLpath_dircat (char *, char *);

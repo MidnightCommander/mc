@@ -2,7 +2,7 @@
  * the slang SLtt interface.
  */
 
-/* Copyright (c) 1992, 1999, 2001, 2002 John E. Davis
+/* Copyright (c) 1992, 1999, 2001, 2002, 2003 John E. Davis
  * This file is part of the S-Lang library.
  *
  * You may distribute under the terms of either the GNU General Public
@@ -248,7 +248,11 @@ SLterminfo_Type *_SLtt_tigetent (char *term)
 #endif
        )
      return NULL;
-
+#if 0
+   if (_SLsecure_issetugid ()
+       && ((term[0] == '.') || (NULL != strchr (term, '/'))))
+     return NULL;
+#endif
    if (NULL == (ti = (SLterminfo_Type *) SLmalloc (sizeof (SLterminfo_Type))))
      {
 	return NULL;
@@ -1006,6 +1010,16 @@ static int tcap_getent (char *term, SLterminfo_Type *ti)
    termcap = (unsigned char *) getenv ("TERMCAP");
    if ((termcap == NULL) || (*termcap == '/')) return -1;
 
+   /* SUN Solaris 7&8 have bug in tset program under tcsh,
+    * eval `tset -s -A -Q` sets value of TERMCAP to ":",
+    *  under other shells it works fine.
+    *  SUN was informed, they marked it as duplicate of bug 4086585
+    *  but didn't care to fix it... <mikkopa@cs.tut.fi> 
+    */
+   if ((termcap[0] == ':') && (termcap[1] == 0))
+     return -1;
+   
+   
    /* We have a termcap so lets use it provided it does not have a reference
     * to another terminal via tc=.  In that case, use terminfo.  The alternative
     * would be to parse the termcap file which I do not want to do right now.

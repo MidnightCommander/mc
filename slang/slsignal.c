@@ -1,4 +1,4 @@
-/* Copyright (c) 1998, 1999, 2001, 2002 John E. Davis
+/* Copyright (c) 1998, 1999, 2001, 2002, 2003 John E. Davis
  * This file is part of the S-Lang library.
  *
  * You may distribute under the terms of either the GNU General Public
@@ -21,7 +21,7 @@
 #include "_slang.h"
 
 /* Do not trust these environments */
-#if defined(__CYGWIN32__) || defined(__MINGW32__) || defined(AMIGA)
+#if defined(__MINGW32__) || defined(AMIGA)
 # ifdef SLANG_POSIX_SIGNALS
 #  undef SLANG_POSIX_SIGNALS
 # endif
@@ -151,7 +151,6 @@ int SLsig_unblock_signals (void)
 #endif
 }
 
-#if 0
 #ifdef MSWINDOWS
 int SLsystem (char *cmd)
 {
@@ -227,7 +226,7 @@ int SLsystem (char *cmd)
 	(void) sigprocmask (SIG_SETMASK, &save_mask, NULL);
 # endif
 
-	execl ("/bin/sh", "sh", "-c", cmd, (char *) NULL);
+	execl ("/bin/sh", "sh", "-c", cmd, NULL);
 	_exit (127);
      }
    else
@@ -289,6 +288,7 @@ int SLsystem (char *cmd)
 }
 #endif
 
+#if 0
 #include <windows.h>
 static int msw_system (char *cmd)
 {

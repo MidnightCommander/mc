@@ -1,5 +1,5 @@
 /* SLang Screen management routines */
-/* Copyright (c) 1992, 1999, 2001, 2002 John E. Davis
+/* Copyright (c) 1992, 1999, 2001, 2002, 2003 John E. Davis
  * This file is part of the S-Lang library.
  *
  * You may distribute under the terms of either the GNU General Public
@@ -26,13 +26,7 @@ Screen_Type;
 #define TRASHED 0x2
 static int Screen_Trashed;
 
-#if !defined(__MSDOS_16BIT__)
-# define MAX_SCREEN_SIZE 256
-#else
-# define MAX_SCREEN_SIZE 75
-#endif
-
-Screen_Type SL_Screen[MAX_SCREEN_SIZE];
+Screen_Type SL_Screen[SLTT_MAX_SCREEN_ROWS];
 static int Start_Col, Start_Row;
 static int Screen_Cols, Screen_Rows;
 static int This_Row, This_Col;
@@ -99,7 +93,7 @@ static void blank_line (SLsmg_Char_Type *p, int n, unsigned char ch)
      }
 }
 
-static void clear_region (int row, int n)
+static void clear_region (int row, int n, unsigned char ch)
 {
    int i;
    int imax = row + n;
@@ -109,7 +103,7 @@ static void clear_region (int row, int n)
      {
 	if (i >= 0)
 	  {
-	     blank_line (SL_Screen[i].neew, Screen_Cols, ' ');
+	     blank_line (SL_Screen[i].neew, Screen_Cols, ch);
 	     SL_Screen[i].flags |= TOUCHED;
 	  }
      }
@@ -169,7 +163,7 @@ void SLsmg_erase_eos (void)
    if (Smg_Inited == 0) return;
 
    SLsmg_erase_eol ();
-   clear_region (This_Row + 1, Screen_Rows);
+   clear_region (This_Row + 1, Screen_Rows, ' ');
 }
 
 static int This_Alt_Char;
@@ -485,7 +479,7 @@ void SLsmg_cls (void)
 
    tac = This_Alt_Char; This_Alt_Char = 0;
    SLsmg_set_color (0);
-   clear_region (0, Screen_Rows);
+   clear_region (0, Screen_Rows, ' ');
    This_Alt_Char = tac;
    SLsmg_set_color (0);
    Cls_Flag = 1;
@@ -984,8 +978,8 @@ static void init_alt_char_set (void)
 	else p = (unsigned char *) *tt_Graphics_Char_Pairs;
 	if (p == NULL) return;
      }
-   else	p = (unsigned char *) Fake_Alt_Char_Pairs;
-   pmax = p + strlen ((char *) p);
+   else	p = (unsigned const char *) Fake_Alt_Char_Pairs;
+   pmax = p + strlen ((const char *) p);
 
    /* Some systems have messed up entries for this */
    while (p < pmax)
@@ -1077,8 +1071,8 @@ static int init_smg (void)
 #endif
 
    Screen_Rows = *tt_Screen_Rows;
-   if (Screen_Rows > MAX_SCREEN_SIZE)
-     Screen_Rows = MAX_SCREEN_SIZE;
+   if (Screen_Rows > SLTT_MAX_SCREEN_ROWS)
+     Screen_Rows = SLTT_MAX_SCREEN_ROWS;
 
    Screen_Cols = *tt_Screen_Cols;
 

@@ -1,3 +1,23 @@
+2004-11-01  Pavel S. Shirshov  <me@pavelsh.pp.ru>
+
+	* README: Imported slang-1.4.9.
+	* sldisply.c: Likewise.
+	* slerr.c: Likewise.
+	* slgetkey.c: Likewise.
+	* slmisc.c: Likewise.
+	* slsignal.c: Likewise.
+	* slsmg.c: Likewise.
+	* sltermin.c: Likewise.
+	* slutty.c: Likewise.
+	* slvideo.c: Likewise.
+	* slw32tty.c: Likewise.
+	* include/_slang.h: Likewise.
+	* include/jdmacros.h: Likewise.
+	* include/sl-feat.h: Likewise.
+	* include/slang.h: Likewise.
+	* include/slinclud.h: Likewise.
+	* include/sllimits.h: Likewise.
+
 2004-10-27  Nerijus Baliunas  <nerijus@users.sourceforge.net>
 
 	* include/slang.h: Define __unix__ if _AIX is defined.
@@ -22,12 +42,12 @@
 
 	From patches from the OpenBSD ports collection.
 
-2004-09-04  Pavel S. Shirshov  <pavelsh@mail.ru>
+2004-09-04  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* sltermin.c (): Avoid strncpy, home_ti is 1K long and 
 	nobody really needs it whole cleared
 
-2004-08-31  Pavel S. Shirshov  <pavelsh@mail.ru>
+2004-08-31  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* include/slang.h: Revert last changes - it breaks compiling
 	* sldisply.c: Likewise.
@@ -59,7 +79,7 @@
 
 	* sldisply.c: Patch to swap blue and red colors for setf/setb
 	capabilities.  Needed on QNX Neutrino.
-	Reported by Pavel Shirshov <pavelsh@mail.ru>
+	Reported by Pavel Shirshov <me@pavelsh.pp.ru>
 
 2002-10-07  Pavel Roskin  <proski@gnu.org>
 

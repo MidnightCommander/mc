@@ -1,4 +1,4 @@
-This is the S-Lang library, version 1.4.5.  It has been radically
+This is the S-Lang library, version 1.4.9.  It has been radically
 stripped down to remove functions that are either unused by the Midnight
 Commander or already provided by the glib library.  The complete
 distribution can be downloaded from:

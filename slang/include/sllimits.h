@@ -1,4 +1,4 @@
-/* Copyright (c) 1998, 1999, 2001, 2002 John E. Davis
+/* Copyright (c) 1998, 1999, 2001, 2002, 2003 John E. Davis
  * This file is part of the S-Lang library.
  *
  * You may distribute under the terms of either the GNU General Public
@@ -26,14 +26,14 @@
 #ifdef __MSDOS_16BIT__
 # define SLANG_MAX_RECURSIVE_DEPTH	50
 #else
-# define SLANG_MAX_RECURSIVE_DEPTH	250
+# define SLANG_MAX_RECURSIVE_DEPTH	2500
 #endif
 
 /* slang.c: Size of the stack used for local variables */
 #ifdef __MSDOS_16BIT__
 # define SLANG_MAX_LOCAL_STACK		200
 #else
-# define SLANG_MAX_LOCAL_STACK		1024
+# define SLANG_MAX_LOCAL_STACK		4096
 #endif
 
 /* slang.c: The size of the hash table used for local and global objects.
@@ -62,3 +62,12 @@
 #else
 # define SL_MAX_FILES			256
 #endif
+
+#if !defined(__MSDOS_16BIT__)
+# define SLTT_MAX_SCREEN_COLS 512
+# define SLTT_MAX_SCREEN_ROWS 512
+#else
+# define SLTT_MAX_SCREEN_ROWS 64
+# define SLTT_MAX_SCREEN_COLS 75
+#endif
+

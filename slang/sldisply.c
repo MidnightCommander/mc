@@ -1,9 +1,10 @@
-/* Copyright (c) 1992, 1999, 2001, 2002 John E. Davis
+/* Copyright (c) 1992, 1999, 2001, 2002, 2003 John E. Davis
  * This file is part of the S-Lang library.
  *
  * You may distribute under the terms of either the GNU General Public
  * License or the Perl Artistic License.
  */
+
 #include "slinclud.h"
 
 #include <time.h>
@@ -164,11 +165,12 @@ static Ansi_Color_Type Ansi_Color_Map[JMAX_COLORS] =
 /* 0 if least significant bit is blue, not red */
 static int Is_Fg_BGR = 0;
 static int Is_Bg_BGR = 0;
-#define COLOR_ARG(color, is_bgr) (is_bgr ? RGB_to_BGR[color] : color)
-static int const RGB_to_BGR[] =
+#define COLOR_ARG(color, is_bgr) ((is_bgr) ? RGB_to_BGR[(color)&0x7] : (color))
+static const int RGB_to_BGR[] =
 {
      0, 4, 2, 6, 1, 5, 3, 7
 };
+
 
 static char *Color_Fg_Str = "\033[3%dm";
 static char *Color_Bg_Str = "\033[4%dm";
@@ -801,6 +803,9 @@ void SLtt_erase_line (void)
    tt_write ("\r", 1);
    Cursor_Set = 1; Cursor_c = 0;
    SLtt_del_eol();
+   /* Put the cursor back at the beginning of the line */
+   tt_write ("\r", 1);
+   Cursor_Set = 1; Cursor_c = 0;
 }
 
 /* It appears that the Linux console, and most likely others do not
@@ -904,20 +909,26 @@ void SLtt_beep (void)
    SLtt_flush_output ();
 }
 
+static void write_string_with_care (char *);
+
 static void del_eol (void)
 {
+#if 0
    int c;
-
-   if (Del_Eol_Str != NULL)
+#endif
+   if ((Del_Eol_Str != NULL)
+       && (Can_Background_Color_Erase || ((Current_Fgbg & ~0xFF) == 0)))
      {
 	tt_write_string(Del_Eol_Str);
 	return;
      }
 
+#if 0
    c = Cursor_c;
+   
    /* Avoid writing to the lower right corner.  If the terminal does not
     * have Del_Eol_Str, then it probably does not have what it takes to play
-    * games with insert for for a space into that corner.
+    * games with insert-mode to "push" the desired character into that corner.
     */
    if (Cursor_r + 1 < SLtt_Screen_Rows)
      c++;
@@ -927,6 +938,16 @@ static void del_eol (void)
 	tt_write (" ", 1);
 	c++;
      }
+   Cursor_c = (SLtt_Screen_Cols-1);
+#else
+   while (Cursor_c < SLtt_Screen_Cols)
+     {
+	write_string_with_care (" ");
+	Cursor_c++;
+     }
+   Cursor_c = SLtt_Screen_Cols - 1;
+   Cursor_Set = 0;
+#endif
 }
 
 void SLtt_del_eol (void)
@@ -978,10 +999,10 @@ void SLtt_set_mono (int obj, char *what, SLtt_Char_Type mask)
 static char *check_color_for_digit_form (char *color)
 {
    unsigned int i, ich;
-   char *s = color;
+   unsigned char *s = (unsigned char *) color;
 
    i = 0;
-   while ((ich = (int) *s) != 0)
+   while ((ich = (unsigned int) *s) != 0)
      {
 	if ((ich < '0') || (ich > '9'))
 	  return color;
@@ -1038,7 +1059,7 @@ static int get_default_colors (char **fgp, char **bgp)
    p = bg_buf;
    pmax = p + (sizeof (bg_buf) - 1);
 
-   /* Mark suggested allowing for extra spplication specific stuff following
+   /* Mark suggested allowing for extra application specific stuff following
     * the background color.  That is what the check for the semi-colon is for.
     */
    while ((*bg != 0) && (*bg != ';'))
@@ -1136,7 +1157,7 @@ static SLtt_Char_Type fb_to_fgbg (SLtt_Char_Type f, SLtt_Char_Type b)
 }
 
 /* This looks for colors with name form 'colorN'.  If color is of this
- * form, N is passed back via paramter list.
+ * form, N is passed back via parameter list.
  */
 static int parse_color_digit_name (char *color, SLtt_Char_Type *f)
 {
@@ -1153,12 +1174,20 @@ static int parse_color_digit_name (char *color, SLtt_Char_Type *f)
    i = 0;
    while (1)
      {
+	unsigned int j;
+
 	ch = (unsigned char) *color++;
 	if (ch == 0)
 	  break;
 	if ((ch > '9') || (ch < '0'))
 	  return -1;
-	i = 10 * i + (ch - '0');
+	
+	if (i > 0xFFFFFFFFU / 10)
+	  return -1;
+	j = (i *= 10);
+	i += (ch - '0');
+	if (i < j)
+	  return -1;
      }
 
    *f = (SLtt_Char_Type) i;
@@ -1339,7 +1368,7 @@ static void write_attributes (SLtt_Char_Type fgbg)
 	     if (fg0 == SLSMG_COLOR_DEFAULT)
 	       tt_write_string (Default_Color_Fg_Str);
 	     else
-	       tt_printf (Color_Fg_Str, COLOR_ARG(fg0, Is_Fg_BGR), 0);
+	       tt_printf (Color_Fg_Str, COLOR_ARG(fg0, Is_Bg_BGR), 0);
 	  }
 
 	if (unknown_attributes
@@ -1412,19 +1441,21 @@ void SLtt_wide_width (void)
 
 /* Highest bit represents the character set. */
 #define COLOR_MASK 0x7F00
+#define COLOR_OF(x) (((x)&COLOR_MASK)>>8)
+#define CHAR_OF(x) ((x)&0x80FF)
 
 #if SLTT_HAS_NON_BCE_SUPPORT
 static int bce_color_eqs (unsigned int a, unsigned int b)
 {
-   a = (a & COLOR_MASK) >> 8;
-   b = (b & COLOR_MASK) >> 8;
+   a = COLOR_OF(a);
+   b = COLOR_OF(b);
    
    if (a == b)
      return 1;
 
    if (SLtt_Use_Ansi_Colors == 0)
      return Ansi_Color_Map[a].mono == Ansi_Color_Map[b].mono;
-   
+
    if (Bce_Color_Offset == 0)
      return Ansi_Color_Map[a].fgbg == Ansi_Color_Map[b].fgbg;
    
@@ -1437,7 +1468,6 @@ static int bce_color_eqs (unsigned int a, unsigned int b)
 }
 #define COLOR_EQS(a,b) bce_color_eqs (a,b)
 #else
-# define COLOR_OF(x) (((unsigned int)(x) & COLOR_MASK) >> 8)
 # define COLOR_EQS(a, b) \
    (SLtt_Use_Ansi_Colors \
     ? (Ansi_Color_Map[COLOR_OF(a)].fgbg == Ansi_Color_Map[COLOR_OF(b)].fgbg)\
@@ -1445,8 +1475,7 @@ static int bce_color_eqs (unsigned int a, unsigned int b)
 #endif
 
 #define CHAR_EQS(a, b) (((a) == (b))\
-			|| ((((a) & ~COLOR_MASK) == ((b) & ~COLOR_MASK))\
-			    && COLOR_EQS((a), (b))))
+			|| ((CHAR_OF(a)==CHAR_OF(b)) && COLOR_EQS(a,b)))
 
 /* The whole point of this routine is to prevent writing to the last column
  * and last row on terminals with automatic margins.
@@ -1476,7 +1505,7 @@ static void write_string_with_care (char *str)
 
 static void send_attr_str (SLsmg_Char_Type *s)
 {
-   unsigned char out[256], ch, *p;
+   unsigned char out[SLTT_MAX_SCREEN_COLS], ch, *p;
    register SLtt_Char_Type attr;
    register SLsmg_Char_Type sh;
    int color, last_color = -1;
@@ -1553,9 +1582,25 @@ static void forward_cursor (unsigned int n, int row)
 {
    char buf [1024];
 
+
+   /* if (Current_Fgbg & ~0xFF) */
+   /*   { */
+   /* 	unsigned int num = 0; */
+   /* 	while (num < n) */
+   /* 	  { */
+   /* 	     write_string_with_care (" "); */
+   /* 	     num++; */
+   /* 	  } */
+   /* 	Cursor_c += n; */
+   /* 	return; */
+   /*   } */
+   
+	
    if (n <= 4)
      {
 	SLtt_normal_video ();
+	if (n >= sizeof (buf))
+	  n = sizeof (buf) - 1;
 	SLMEMSET (buf, ' ', n);
 	buf[n] = 0;
 	write_string_with_care (buf);
@@ -1571,10 +1616,16 @@ static void forward_cursor (unsigned int n, int row)
 }
 
 
+/* FIXME!!  If the terminal does not support color, then this route has 
+ * problems of color object 0 has been assigned some monochrome attribute
+ * such as reverse video.  In such a case, space_char=' ' is not a simple
+ * space character as is assumed below.
+ */
+
 void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int row)
 {
    register SLsmg_Char_Type *p, *q, *qmax, *pmax, *buf;
-   SLsmg_Char_Type buffer[256];
+   SLsmg_Char_Type buffer[SLTT_MAX_SCREEN_COLS+1];
    unsigned int n_spaces;
    SLsmg_Char_Type *space_match, *last_buffered_match;
 #ifdef HP_GLITCH_CODE
@@ -1600,6 +1651,9 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
      }
 #endif
      
+   if (len > SLTT_MAX_SCREEN_COLS)
+     len = SLTT_MAX_SCREEN_COLS;
+
    q = oldd; p = neww;
    qmax = oldd + len;
    pmax = p + len;
@@ -1662,7 +1716,7 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
    /* Find where the last non-blank character on old/new screen is */
 
    space_char = ' ';
-   if ((*(pmax-1) & 0xFF) == ' ')
+   if (CHAR_EQS(*(pmax-1), ' '))
      {
 	/* If we get here, then we can erase to the end of the line to create
 	 * the final space.  However, this will only work _if_ erasing will 
@@ -1713,7 +1767,7 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
      {
 #endif
 	/* Try use use erase to bol if possible */
-	if ((Del_Bol_Str != NULL) && ((*neww & 0xFF) == 32))
+	if ((Del_Bol_Str != NULL) && (CHAR_OF(*neww) == ' '))
 	  {
 	     SLsmg_Char_Type *p1;
 	     SLsmg_Char_Type blank;
@@ -1724,7 +1778,7 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
 	       blank = *p1;
 	     /* black+white attributes do not support bce */
 	     else
-	       blank = 32;
+	       blank = ' ';
 
 	     while ((p1 < pmax) && (CHAR_EQS (*p1, blank)))
 	       p1++;
@@ -1742,7 +1796,7 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
 		  q = oldd + ofs;
 		  p = p1;
 		  SLtt_goto_rc (row, ofs - 1);
-		  SLtt_reverse_video (blank >> 8);
+		  SLtt_reverse_video (COLOR_OF(blank));
 		  tt_write_string (Del_Bol_Str);
 		  tt_write (" ", 1);
 		  Cursor_c += 1;
@@ -1764,7 +1818,7 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
 	n_spaces = 0;
 	while (p < pmax)
 	  {
-	     if (CHAR_EQS(*q, 32) && CHAR_EQS(*p, 32))
+	     if (CHAR_EQS(*q, ' ') && CHAR_EQS(*p, ' '))
 	       {
 		  /* If *q is not a space, we would have to overwrite it.
 		   * However, if *q is a space, then while *p is also one,
@@ -1773,8 +1827,8 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
 		  space_match = p;
 		  p++; q++;
 		  while ((p < pmax)
-			 && CHAR_EQS(*q, 32)
-			 && CHAR_EQS(*p, 32))
+			 && CHAR_EQS(*q, ' ')
+			 && CHAR_EQS(*p, ' '))
 		    {
 		       p++;
 		       q++;
@@ -1835,20 +1889,22 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
 	  }
 	*buf = 0;
 
+	/* At this point, the buffer contains characters that do not match */
 	if (buf != buffer) send_attr_str (buffer);
 	buf = buffer;
 
 	if (n_spaces 
 	    && ((p < pmax) 	       /* erase to eol will achieve this effect*/
-		|| (space_char != 32)))/* unless space_char is not a simple space */
+		|| (space_char != ' ')))/* unless space_char is not a simple space */
 	  {
 	     forward_cursor (n_spaces, row);
 	  }
-
 	/* Now we overwrote what we could and cursor is placed at position
 	 * of a possible match of new and old.  If this is the case, skip
 	 * some more.
 	 */
+	
+	/* Note that from here on, the buffer will contain matched characters */
 #if !SLANG_HAS_KANJI_SUPPORT
 	while ((p < pmax) && CHAR_EQS(*p, *q))
 	  {
@@ -1912,6 +1968,12 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
 	  }
      }
 
+   /* At this point we have reached the end of the new string with the 
+    * exception of space_chars hanging off the end of it, but we may not have
+    * reached the end of the old string if they did not match.
+    */
+   
+   /* Here the buffer will consist only of characters that have matched */
    if (buf != buffer)
      {
 	if (q < qmax)
@@ -1931,7 +1993,7 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
 
    if (q < qmax) 
      {
-	SLtt_reverse_video (space_char >> 8);
+	SLtt_reverse_video (COLOR_OF(space_char));
 	del_eol ();
      }
    
@@ -2134,7 +2196,11 @@ int SLtt_initialize (char *term)
 	if (term == NULL)
 	  return -1;
      }
-
+#if 0
+   if (_SLsecure_issetugid ()
+       && ((term[0] == '.') || (NULL != strchr(term, '/'))))
+     return -1;
+#endif
    Linux_Console = (!strncmp (term, "linux", 5)
 # ifdef linux
 		    || !strncmp(term, "con", 3)
@@ -2241,7 +2307,7 @@ int SLtt_initialize (char *term)
    if (is_xterm && (Del_Bol_Str == NULL))
      Del_Bol_Str = "\033[1K";
    if (is_xterm && (Del_Eol_Str == NULL))
-     Del_Bol_Str = "\033[K";
+     Del_Eol_Str = "\033[K";
 
    Rev_Vid_Str = SLtt_tgetstr("mr");
    if (Rev_Vid_Str == NULL) Rev_Vid_Str = SLtt_tgetstr("so");
@@ -2340,17 +2406,21 @@ int SLtt_initialize (char *term)
      SLtt_Has_Alt_Charset = 0;
 
    Reset_Color_String = SLtt_tgetstr ("op");
+   
+   /* Apparantly the difference between "AF" and "Sf" is that AF uses RGB, 
+    * but Sf uses BGR.
+    */
    Color_Fg_Str = SLtt_tgetstr ("AF"); /* ANSI setaf */
    if (Color_Fg_Str == NULL)
      {
 	Color_Fg_Str = SLtt_tgetstr ("Sf");   /* setf */
 	Is_Fg_BGR = (Color_Fg_Str != NULL);
      }
-   Color_Bg_Str = SLtt_tgetstr ("AB"); /* ANSI setab */
+   Color_Bg_Str = SLtt_tgetstr ("AB"); /* ANSI setbf */
    if (Color_Bg_Str == NULL)
      {
 	Color_Bg_Str = SLtt_tgetstr ("Sb");   /* setb */
-	Is_Bg_BGR = (Color_Bg_Str != NULL);
+	Is_Fg_BGR = (Color_Bg_Str != NULL);
      }
 
    if ((Max_Terminfo_Colors = SLtt_tgetnum ("Co")) < 0)
@@ -2415,6 +2485,12 @@ int SLtt_initialize (char *term)
 void SLtt_get_terminfo ()
 {
    int zero = 0;
+
+   /* Apparantly, this cannot fail according to the man pages. */
+   if (SLang_TT_Write_FD == -1)
+     SLang_TT_Write_FD = fileno (stdout);
+   
+   Can_Background_Color_Erase = 0;
 
    Color_Fg_Str = "\033[3%dm";
    Color_Bg_Str = "\033[4%dm";
@@ -2614,12 +2690,8 @@ void SLtt_get_screen_size (void)
 	if (s != NULL) c = atoi (s);
      }
 
-   if (r <= 0) r = 24;
-   if (c <= 0) c = 80;
-#if 0
-   if ((r <= 0) || (r > 200)) r = 24;
-   if ((c <= 0) || (c > 250)) c = 80;
-#endif
+   if ((r <= 0) || (r > SLTT_MAX_SCREEN_ROWS)) r = 24;
+   if ((c <= 0) || (c > SLTT_MAX_SCREEN_COLS)) c = 80;
    SLtt_Screen_Rows = r;
    SLtt_Screen_Cols = c;
 }

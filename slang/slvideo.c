@@ -1,5 +1,5 @@
 /* -*- mode: C; mode: fold -*- */
-/* Copyright (c) 1992, 1997, 2001, 2002 John E. Davis
+/* Copyright (c) 1992, 1997, 2001, 2002, 2003 John E. Davis
  * This file is part of the S-Lang library.
  *
  * You may distribute under the terms of either the GNU General Public
@@ -2190,13 +2190,6 @@ int SLtt_set_cursor_visibility (int show)
 #endif
 }
 
-void SLtt_set_mono (int obj_unused, char *unused, SLtt_Char_Type c_unused)
-{
-   (void) obj_unused;
-   (void) unused;
-   (void) c_unused;
-}
-
 /*----------------------------------------------------------------------*\
  * Function:	void SLtt_reverse_video (int color);
  *
@@ -2324,3 +2317,21 @@ static void fixup_colors (void)
    SLtt_normal_video ();
 }
 
+
+/* FIXME!!! Add mono support.
+ * The following functions have not been fully implemented.
+ */
+void SLtt_set_mono (int obj_unused, char *unused, SLtt_Char_Type c_unused)
+{
+   (void) obj_unused;
+   (void) unused;
+   (void) c_unused;
+}
+
+#if 0
+void SLtt_add_color_attribute (int obj, SLtt_Char_Type attr)
+{
+   (void) obj;
+   (void) attr;
+}
+#endif
