@@ -134,10 +134,10 @@ install.saver: cons.saver
 	$(INSTALL_PROGRAM) -m 4755 cons.saver $(DESTDIR)$(suppbindir)/cons.saver
 
 uninstall:
-	cd $(bindir); $(RMF) $(binprefix)mc
-	cd $(bindir); $(RMF) $(binprefix)mcmfmt
-	cd $(bindir); $(RMF) $(binprefix)cons.saver
-	cd $(libdir); $(RMF) $(libprefix)mc.hlp
+	$(RMF) $(bindir)/$(binprefix)mc
+	$(RMF) $(bindir)/$(binprefix)mcmfmt
+	$(RMF) $(bindir)/$(binprefix)cons.saver
+	$(RMF) $(libdir)/$(libprefix)mc.hlp
 
 distcopy: $(srcdir)/mc.hlp
 	$(CP) $(DISTFILES) ../../mc-$(VERSION)/src

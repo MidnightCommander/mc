@@ -196,12 +196,14 @@ install_gmc: all
 	$(INSTALL_PROGRAM) gmc $(DESTDIR)$(bindir)/$(binprefix)gmc
 	for I in $(ICONS); \
 	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(icondir)/$$I; done
-	-$(INSTALL_DATA) $(srcdir)/layout $(DESTDIR)$(libdir)
+	$(INSTALL_DATA) $(srcdir)/layout $(DESTDIR)$(libdir)/layout
 
 uninstall: 
 	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)gmc
-	-cd $(DESTDIR)$(icondir); $(RMF) $(ICONS)
+	for I in $(ICONS); \
+	do $(RMF) $(DESTDIR)$(icondir)/$$I; done
 	-rmdir $(DESTDIR)$(icondir)
+	-$(RMF) $(DESTDIR)$(libdir)/layout
 
 depend dep: @gmcdep@
 
