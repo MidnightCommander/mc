@@ -1836,7 +1836,6 @@ panel_operate (void *source_panel, FileOperation operation,
     ctx = file_op_context_new ();
 
     do_bg = 0;
-    ctx->rx.buffer = NULL;
     free_linklist (&linklist);
     free_linklist (&dest_dirs);
     if (get_current_type () == view_listing)
@@ -1864,10 +1863,6 @@ panel_operate (void *source_panel, FileOperation operation,
 	    return 0;
 	}
     } else if (operation != OP_DELETE) {
-	ctx->rx.buffer = (char *) g_malloc (MC_MAXPATHLEN);
-	ctx->rx.allocated = MC_MAXPATHLEN;
-	ctx->rx.translate = 0;
-
 	if (ask_user) {
 	    char *dest_dir;
 
@@ -1882,12 +1877,10 @@ panel_operate (void *source_panel, FileOperation operation,
 		file_mask_dialog (ctx, operation, cmd_buf, dest_dir,
 				  only_one, &do_bg);
 	    if (!dest) {
-		g_free (ctx->rx.buffer);
 		file_op_context_destroy (ctx);
 		return 0;
 	    }
 	    if (!*dest) {
-		g_free (ctx->rx.buffer);
 		file_op_context_destroy (ctx);
 		g_free (dest);
 		return 0;
@@ -2152,11 +2145,6 @@ panel_operate (void *source_panel, FileOperation operation,
 
     if (temp)
 	g_free (temp);
-
-    if (ctx->rx.buffer) {
-	g_free (ctx->rx.buffer);
-	ctx->rx.buffer = NULL;
-    }
 
     if (ctx->dest_mask) {
 	g_free (ctx->dest_mask);

@@ -71,6 +71,8 @@ file_op_context_destroy (FileOpContext *ctx)
     if (ctx->ui)
 	file_op_context_destroy_ui (ctx);
 
+    regfree (&ctx->rx);
+
     /* FIXME: do we need to free ctx->dest_mask? */
 
     g_free (ctx);

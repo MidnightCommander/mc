@@ -1,5 +1,10 @@
 2002-12-26  Pavel Roskin  <proski@gnu.org>
 
+	* file.c: Never access internals of ctx->rx directly.
+	* fileopctx.c (file_op_context_destroy): Use regfree() to free
+	ctx->rx.
+	Patch from Red Hat beta.
+
 	* layout.c (setup_panels): Clean the hint bar if it's enabled.
 	Bug reported by Adam Byrtek <alpha@debian.org>
 
