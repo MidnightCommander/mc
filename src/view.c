@@ -76,10 +76,17 @@
 #define vwidth (view->widget.cols - (view->have_frame ? 2 : 0))
 #define vheight (view->widget.lines - (view->have_frame ? 2 : 0))
 
+/* Offset in bytes into a file */
+typedef unsigned long offset_type;
+#define EOF_offset ((offset_type) -1)
+
+/* A width or height on the screen */
+typedef unsigned int screen_dimen;
+
 /* A node for building a change list on change_list */
 struct hexedit_change_node {
    struct hexedit_change_node *next;
-   long                       offset;
+   offset_type                offset;
    unsigned char              value;
 };
 
@@ -97,24 +104,24 @@ struct WView {
     int file;			/* File descriptor (for mmap and munmap) */
     FILE *stdfile;		/* Stdio struct for reading file in parts */
     int reading_pipe;		/* Flag: Reading from pipe(use popen/pclose) */
-    unsigned long bytes_read;   /* How much of file is read */
+    offset_type bytes_read;     /* How much of file is read */
     int mmapping;		/* Did we use mmap on the file? */
 
     /* Display information */
-    unsigned long last;         /* Last byte shown */
-    unsigned long last_byte;    /* Last byte of file */
-    long first;			/* First byte in file */
-    long bottom_first;	/* First byte shown when very last page is displayed */
+    offset_type last;           /* Last byte shown */
+    offset_type last_byte;      /* Last byte of file */
+    offset_type first;		/* First byte in file */
+    offset_type bottom_first;	/* First byte shown when very last page is displayed */
 				/* For the case of WINCH we should reset it to -1 */
-    unsigned long start_display;/* First char displayed */
+    offset_type start_display;  /* First char displayed */
     int start_col;		/* First displayed column, negative */
-    unsigned long edit_cursor;  /* HexEdit cursor position in file */
+    offset_type edit_cursor;    /* HexEdit cursor position in file */
     int hexedit_mode:1;		/* Hexidecimal editing mode flag */ 
     int nib_shift:1;		/* Set if editing the least significant nibble */
     int hexedit_text:1;		/* Set if hexedit is in the text mode */ 
-    int start_save;		/* Line start shift between text and hex */ 
-    int cursor_col;		/* Cursor column */
-    int cursor_row;		/* Cursor row */
+    screen_dimen start_save;	/* Line start shift between text and hex */ 
+    screen_dimen cursor_col;	/* Cursor column */
+    screen_dimen cursor_row;	/* Cursor row */
     struct hexedit_change_node *change_list;   /* Linked list of changes */
 
     int dirty;			/* Number of skipped updates */
@@ -133,8 +140,8 @@ struct WView {
 
     
     /* Search variables */
-    int search_start;		/* First character to start searching from */
-    int found_len;		/* Length of found string or 0 if none was found */
+    offset_type search_start;	/* First character to start searching from */
+    offset_type found_len;	/* Length of found string or 0 if none was found */
     char *search_exp;		/* The search expression */
     int  direction;		/* 1= forward; -1 backward */
     void (*last_search)(void *, char *);
@@ -144,7 +151,7 @@ struct WView {
     int monitor;		/* Monitor file growth (like tail -f) */
     /* Markers */
     int marker;			/* mark to use */
-    int marks [10];		/* 10 marks: 0..9 */
+    offset_type marks [10];	/* 10 marks: 0..9 */
     
 	
     int  move_dir;		/* return value from widget:  
@@ -480,14 +487,14 @@ set_view_init_error (WView *view, const char *msg)
 	view->bytes_read = strlen (msg);
 	return g_strdup (msg);
     }
-    return 0;
+    return NULL;
 }
 
 /* return values: NULL for success, else points to error message */
 static char *
 init_growing_view (WView *view, const char *name, const char *filename)
 {
-    char *err_msg = NULL;
+    const char *err_msg = NULL;
 
     view->growing_buffer = 1;
 
@@ -577,7 +584,7 @@ static int
 do_view_init (WView *view, const char *_command, const char *_file,
 	      int start_line)
 {
-    char *error = 0;
+    char *error = NULL;
     int i, type;
     int fd = -1;
     char tmp[BUF_MEDIUM];
@@ -847,14 +854,14 @@ typedef enum {
 } mark_t;
 
 /* Shows the file pointed to by *start_display on view_win */
-static long
+static offset_type
 display (WView *view)
 {
     const int frame_shift = view->have_frame;
     int col = 0 + frame_shift;
     int row = STATUS_LINES + frame_shift;
     int height, width;
-    unsigned long from;
+    offset_type from;
     int c;
     mark_t boldflag = MARK_NORMAL;
     struct hexedit_change_node *curr = view->change_list;
@@ -1163,7 +1170,7 @@ view_update (WView *view, gboolean update_gui)
 }
 
 static inline void
-my_define (Dlg_head *h, int idx, char *text, void (*fn) (WView *),
+my_define (Dlg_head *h, int idx, const char *text, void (*fn) (WView *),
 	   WView *view)
 {
     define_label_data (h, idx, text, (buttonbarfn) fn, view);
@@ -1171,10 +1178,10 @@ my_define (Dlg_head *h, int idx, char *text, void (*fn) (WView *),
 
 /* If the last parameter is nonzero, it means we want get the count of lines
    from current up to the the upto position inclusive */
-static long
-move_forward2 (WView *view, long current, int lines, long upto)
+static offset_type
+move_forward2 (WView *view, offset_type current, int lines, offset_type upto)
 {
-    unsigned long q, p;
+    offset_type q, p;
     int line;
     int col = 0;
 
@@ -1259,10 +1266,10 @@ move_forward2 (WView *view, long current, int lines, long upto)
    just find the nearest '\n', use move_forward2(p, 0, q) to get the count
    of lines up to there and then use move_forward2(p, something, 0), which we
    return */
-static long
-move_backward2 (WView *view, unsigned long current, int lines)
+static offset_type
+move_backward2 (WView *view, offset_type current, int lines)
 {
-    long p, q, pm;
+    offset_type p, q, pm;
     int line;
 
     if (!view->hex_mode && current == view->first)
@@ -1322,22 +1329,22 @@ view_move_backward (WView *view, int i)
     view->dirty++;
 }
 
-static long
+static offset_type
 get_bottom_first (WView *view, int do_not_cache, int really)
 {
-    int bottom_first;
+    offset_type bottom_first;
 
     if (!have_fast_cpu && !really)
 	return INT_MAX;
 
-    if (!do_not_cache && view->bottom_first != -1)
+    if (!do_not_cache && view->bottom_first != EOF_offset)
 	return view->bottom_first;
 
     /* Force loading */
     if (view->growing_buffer) {
-	int old_last_byte;
+	offset_type old_last_byte;
 
-	old_last_byte = -1;
+	old_last_byte = EOF_offset;
 	while (old_last_byte != view->last_byte) {
 	    old_last_byte = view->last_byte;
 	    get_byte (view, view->last_byte + VIEW_PAGE_SIZE);
@@ -1442,9 +1449,9 @@ move_left (WView *view)
 static int
 icase_search_p (WView *view, char *text, char *data, int nothing)
 {
-    char *q;
+    const char *q;
     int lng;
-    int direction = view->direction;
+    const int direction = view->direction;
 
     /* If we are searching backwards, reverse the string */
     if (direction == -1) {
@@ -1485,15 +1492,15 @@ grow_string_buffer (char *text, int *size)
 }
 
 static char *
-get_line_at (WView *view, unsigned long *p, unsigned long *skipped)
+get_line_at (WView *view, offset_type *p, offset_type *skipped)
 {
-    char *buffer = 0;
+    char *buffer = NULL;
     int buffer_size = 0;
-    int usable_size = 0;
+    offset_type usable_size = 0;
     int ch;
-    int direction = view->direction;
-    unsigned long pos = *p;
-    long i = 0;
+    const int direction = view->direction;
+    offset_type pos = *p;
+    offset_type i = 0;
     int prev = 0;
 
     if (!pos && direction == -1)
@@ -1551,17 +1558,17 @@ get_line_at (WView *view, unsigned long *p, unsigned long *skipped)
 /** Search status optmizations **/
 
 /* The number of bytes between percent increments */
-static int update_steps;
+static offset_type update_steps;
 
 /* Last point where we updated the status */
-static long update_activate;
+static offset_type update_activate;
 
 static void
 search_update_steps (WView *view)
 {
     if (view->s.st_size)
 	update_steps = 40000;
-    else
+    else /* viewing a data stream, not a file */
 	update_steps = view->last_byte / 100;
 
     /* Do not update the percent display but every 20 ks */
@@ -1573,20 +1580,20 @@ static void
 search (WView *view, char *text,
 	int (*search) (WView *, char *, char *, int))
 {
-    int w = view->widget.cols - view->have_frame + 1;
+    const int w = view->widget.cols - view->have_frame + 1;
 
-    char *s = NULL;		/*  The line we read from the view buffer */
-    long p, beginning;
-    int found_len, search_start;
+    char *s = NULL;	/*  The line we read from the view buffer */
+    offset_type p, beginning, search_start;
+    int found_len;
     int search_status;
     Dlg_head *d = 0;
 
     /* Used to keep track of where the line starts, when looking forward */
     /* is the index before transfering the line; the reverse case uses   */
     /* the position returned after the line has been read */
-    long forward_line_start;
-    long reverse_line_start;
-    long t;
+    offset_type forward_line_start;
+    offset_type reverse_line_start;
+    offset_type t;
     /* Clear interrupt status */
     got_interrupt ();
 
@@ -1677,13 +1684,14 @@ search (WView *view, char *text,
 
 /* Search buffer (it's size is len) in the complete buffer */
 /* returns the position where the block was found or -1 if not found */
-static long
-block_search (WView *view, char *buffer, int len)
+static offset_type
+block_search (WView *view, const char *buffer, int len)
 {
-    int w = view->widget.cols - view->have_frame + 1;
+    const int w = view->widget.cols - view->have_frame + 1;
     int direction = view->direction;
-    char *d = buffer, b;
-    unsigned long e;
+    const char *d = buffer;
+    char b;
+    offset_type e;
 
     /* clear interrupt status */
     got_interrupt ();
@@ -1750,7 +1758,7 @@ block_search (WView *view, char *buffer, int len)
 	}
     }
     disable_interrupt_key ();
-    return -1;
+    return EOF_offset;
 }
 
 /*
@@ -1759,12 +1767,12 @@ block_search (WView *view, char *buffer, int len)
  * - strings in double quotes.  Matches exactly without quotes.
  */
 static void
-hex_search (WView *view, char *text)
+hex_search (WView *view, const char *text)
 {
     char *buffer;		/* Parsed search string */
     char *cur;			/* Current position in it */
     int block_len;		/* Length of the search string */
-    long pos;			/* Position of the string in the file */
+    offset_type pos;		/* Position of the string in the file */
     int parse_error = 0;
 
     if (!*text) {
@@ -1834,7 +1842,7 @@ hex_search (WView *view, char *text)
 
     g_free (buffer);
 
-    if (pos == -1) {
+    if (pos == EOF_offset) {
 	message (0, _("Search"), _(" Search string not found "));
 	view->found_len = 0;
 	return;
@@ -1993,7 +2001,7 @@ goto_line (WView *view)
     char *line, prompt[BUF_SMALL];
     int oldline = 1;
     int saved_wrap_mode = view->wrap_mode;
-    unsigned long i;
+    offset_type i;
 
     view->wrap_mode = 0;
     for (i = view->first; i < view->start_display; i++)
@@ -2020,7 +2028,7 @@ static void
 goto_addr (WView *view)
 {
     char *line, *error, prompt[BUF_SMALL];
-    unsigned long addr;
+    offset_type addr;
 
     g_snprintf (prompt, sizeof (prompt),
 		_(" The current address is 0x%lx.\n"
@@ -2028,7 +2036,7 @@ goto_addr (WView *view)
     line = input_dialog (_(" Goto Address "), prompt, "");
     if (line) {
 	if (*line) {
-	    addr = strtol (line, &error, 0);
+	    addr = strtoul (line, &error, 0);
 	    if ((*error == '\0') && (addr <= view->last_byte)) {
 		move_to_top (view);
 		view_move_forward (view, addr / view->bytes_per_line);
