@@ -2113,6 +2113,8 @@ button_switch_to (char **icon, GtkSignalFunc fn, void *closure)
 static void
 do_switch_to_iconic (GtkWidget *widget, WPanel *panel)
 {
+	if (GTK_TOGGLE_BUTTON (widget)->active == FALSE)
+		return;
 	if (panel->list_type == list_icons)
 		return;
 	panel->list_type = list_icons;
@@ -2123,6 +2125,8 @@ do_switch_to_iconic (GtkWidget *widget, WPanel *panel)
 static void
 do_switch_to_brief_listing (GtkWidget *widget, WPanel *panel)
 {
+	if (GTK_TOGGLE_BUTTON (widget)->active == FALSE)
+		return;
 	if (panel->list_type == list_brief)
 		return;
 	panel->list_type = list_brief;
@@ -2133,6 +2137,8 @@ do_switch_to_brief_listing (GtkWidget *widget, WPanel *panel)
 static void
 do_switch_to_full_listing (GtkWidget *widget, WPanel *panel)
 {
+	if (GTK_TOGGLE_BUTTON (widget)->active == FALSE)
+		return;
 	if (panel->list_type == list_full)
 		return;
 	panel->list_type = list_full;
@@ -2143,6 +2149,8 @@ do_switch_to_full_listing (GtkWidget *widget, WPanel *panel)
 static void
 do_switch_to_custom_listing (GtkWidget *widget, WPanel *panel)
 {
+	if (GTK_TOGGLE_BUTTON (widget)->active == FALSE)
+		return;
 	if (panel->list_type == list_user)
 		return;
 	panel->list_type = list_user;
@@ -2150,35 +2158,19 @@ do_switch_to_custom_listing (GtkWidget *widget, WPanel *panel)
 	panel_update_contents (panel);
 }
 
-static GtkWidget *
-button_switch_to_icon (WPanel *panel)
+static void
+go_home (GtkWidget *widget, WPanel *panel)
 {
-	return button_switch_to (listing_iconic_xpm, GTK_SIGNAL_FUNC (do_switch_to_iconic), panel);
-}
-
-static GtkWidget *
-button_switch_to_full_listing (WPanel *panel)
-{
-	return button_switch_to (listing_list_xpm, GTK_SIGNAL_FUNC (do_switch_to_full_listing), panel);
-}
-static GtkWidget *
-button_switch_to_brief_listing (WPanel *panel)
-{
-	return button_switch_to (listing_brief_list_xpm, GTK_SIGNAL_FUNC (do_switch_to_brief_listing), panel);
-}
-static GtkWidget *
-button_switch_to_custom_listing (WPanel *panel)
-{
-	return button_switch_to (listing_custom_xpm, GTK_SIGNAL_FUNC (do_switch_to_custom_listing), panel);
+	do_panel_cd (panel, "~", cd_exact);
 }
 static GnomeUIInfo viewbar[] = {
-	{ GNOME_APP_UI_ITEM, N_("Icon"), N_("Switch view to an Icon view"), button_switch_to_icon, NULL, NULL, \
+	{ GNOME_APP_UI_ITEM, N_("Icon"), N_("Switch view to an Icon view"), do_switch_to_iconic, NULL, NULL, \
 		GNOME_APP_PIXMAP_DATA, listing_iconic_xpm, 0, (GdkModifierType) 0, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Brief"), N_("Switch view to show just file name and type"), button_switch_to_brief_listing, NULL, NULL, \
+	{ GNOME_APP_UI_ITEM, N_("Brief"), N_("Switch view to show just file name and type"), do_switch_to_brief_listing, NULL, NULL, \
 		GNOME_APP_PIXMAP_DATA, listing_brief_list_xpm, 0, (GdkModifierType) 0, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Detailed"), N_("Switch view to show detailed file statistics"), button_switch_to_full_listing, NULL, NULL, \
+	{ GNOME_APP_UI_ITEM, N_("Detailed"), N_("Switch view to show detailed file statistics"), do_switch_to_full_listing, NULL, NULL, \
 		GNOME_APP_PIXMAP_DATA, listing_list_xpm, 0, (GdkModifierType) 0, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Custom"), N_("Switch view to show custom determined statistics"), button_switch_to_custom_listing, NULL, NULL, \
+	{ GNOME_APP_UI_ITEM, N_("Custom"), N_("Switch view to show custom determined statistics"), do_switch_to_custom_listing, NULL, NULL, \
 		GNOME_APP_PIXMAP_DATA, listing_custom_xpm, 0, (GdkModifierType) 0, NULL },
 	GNOMEUIINFO_END
 };
@@ -2191,7 +2183,7 @@ static GnomeUIInfo toolbar[] = {
 				panel_fwd, GNOME_STOCK_PIXMAP_FORWARD),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_STOCK (N_("Home"), N_("Go to your home directory"),
-				panel_fwd, GNOME_STOCK_PIXMAP_HOME),
+				go_home, GNOME_STOCK_PIXMAP_HOME),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_RADIOLIST(viewbar),
 	GNOMEUIINFO_END
@@ -2388,6 +2380,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
       
 	panel->status = gtk_label_new (_("Show all files"));
 	gtk_misc_set_alignment (GTK_MISC (panel->status), 0.0, 0.0);
+	gtk_misc_set_padding (GTK_MISC (panel->status), 2, 0);
       
 	gtk_box_pack_start (GTK_BOX (panel->ministatus), ministatus_box, FALSE, FALSE, 0);
 	gtk_container_add (GTK_CONTAINER(ministatus_box), panel->status);

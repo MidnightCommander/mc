@@ -1,5 +1,9 @@
 1999-01-18  Jonathan Blandford  <jrb@redhat.com>
 
+	* gscreen.c (x_create_panel): chnaged padding on the Filter label
+	(do_ui_signal_connect): new view switching code.  Toolbar now works
+	(go_home): new function -- takes one home
+
 	* gtkdtree.c (gtk_dtree_construct): change ctree_set_reorderable.
 
 1999-01-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
