@@ -386,6 +386,11 @@ type/JPEG\ picture
 	Open=ee %f
 	Icon=jpeg.xpm
 	Include=image-options
+
+type/JPEG\ image
+	Open=ee %f
+	Icon=jpeg.xpm
+	Include=image-options
 	
 type/TIFF\ file
 	Open=ee %f
