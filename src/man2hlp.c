@@ -574,6 +574,7 @@ main (int argc, char **argv)
 
     if (file_end <= 0) {
 	perror (c_out);
+	return 1;
     }
 
     Topics = malloc (file_end);
