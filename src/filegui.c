@@ -60,7 +60,6 @@
 #include "setup.h"		/* verbose */
 #include "dialog.h"		/* do_refresh() */
 #include "color.h"		/* dialog_colors */
-#include "background.h"		/* message */
 #include "widget.h"		/* WLabel */
 #define WANT_WIDGETS
 #include "main.h"		/* the_hint */

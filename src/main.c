@@ -63,7 +63,6 @@
 #include "panelize.h"
 #include "learn.h"		/* learn_keys() */
 #include "listmode.h"
-#include "background.h"
 #include "execute.h"
 #include "ext.h"		/* For flush_extension_file() */
 

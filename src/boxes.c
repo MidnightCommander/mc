@@ -44,7 +44,7 @@
 #include "main.h"		/* For the confirm_* variables */
 #include "tree.h"
 #include "layout.h"		/* for get_nth_panel_name proto */
-#include "background.h"
+#include "background.h"		/* task_list */
 
 #ifdef HAVE_CHARSET
 #include "charsets.h"

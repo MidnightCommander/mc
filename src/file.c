@@ -65,7 +65,7 @@
 #include "layout.h"
 #include "widget.h"
 #include "wtools.h"
-#include "background.h"		/* tell_parent() */
+#include "background.h"		/* we_are_background */
 
 /* Needed for current_panel, other_panel and WTree */
 #include "dir.h"
