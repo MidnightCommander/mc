@@ -1,3 +1,8 @@
+2002-08-21  Pavel Roskin  <proski@gnu.org>
+
+	* slsmg.c (Fake_Alt_Char_Pairs): Update from slang-1.4.5.  This
+	fixes the MC logo in the help screen.
+
 2002-01-21  Pavel Roskin  <proski@gnu.org>
 
 	* slvideo.c: Include _slang.h, not slang.h.
