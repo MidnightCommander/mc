@@ -2154,23 +2154,44 @@ void edit_paste_from_X_buf_cmd (WEdit * edit)
 }
 
 
-void edit_goto_cmd (WEdit *edit)
+/*
+ * Ask user for the line and go to that line.
+ * Negative numbers mean line from the end (i.e. -1 is the last line).
+ */
+void
+edit_goto_cmd (WEdit *edit)
 {
     char *f;
-    static int l = 0;
-    char s[12];
-    sprintf (s, "%d", l);
-    f = input_dialog (_(" Goto line "), _(" Enter line: "), l ? s : "");
-    if (f) {
-	if (*f) {
-	    l = atoi (f);
-	    edit_move_display (edit, l - edit->num_widget_lines / 2 - 1);
-	    edit_move_to_line (edit, l - 1);
-	    edit->force |= REDRAW_COMPLETELY;
-	}
+    static long line = 0;	/* line as typed, saved as default */
+    long l;
+    char *error;
+    char s[32];
+
+    g_snprintf (s, sizeof (s), "%ld", line);
+    f = input_dialog (_(" Goto line "), _(" Enter line: "), line ? s : "");
+    if (!f)
+	return;
+
+    if (!*f) {
 	g_free (f);
+	return;
     }
+
+    l = strtol (f, &error, 0);
+    if (*error) {
+	g_free (f);
+	return;
+    }
+
+    line = l;
+    if (l < 0)
+	l = edit->total_lines + l + 2;
+    edit_move_display (edit, l - edit->num_widget_lines / 2 - 1);
+    edit_move_to_line (edit, l - 1);
+    edit->force |= REDRAW_COMPLETELY;
+    g_free (f);
 }
+
 
 /* Return 1 on success */
 int

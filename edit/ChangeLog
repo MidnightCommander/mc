@@ -1,5 +1,9 @@
 2002-12-16  Pavel Roskin  <proski@gnu.org>
 
+	* editcmd.c (edit_goto_cmd): Add support for negative line
+	numbers, which are counted from the last line.  Use strtol(), so
+	hex numbers are supported as well.
+
 	* edit.c: Use edit->stack_disable instead of static variable.
 
 2002-12-15  Pavel Roskin  <proski@gnu.org>
