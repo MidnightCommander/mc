@@ -1,3 +1,7 @@
+1999-08-31  Richard Hult  <rhult@hem2.passagen.se>
+
+	* configure.in (ALL_LINGUAS): Added sv.
+
 1999-08-30  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* lib/mc.sh: create temporary files in ~/.mc/tmp in order to avoid
