@@ -1,15 +1,19 @@
-
-#include "windows.h"
-#include "winver.h"
-#include "config.h"
-
+#ifdef WINDRES
+#   include "../VERSION"
+#else
+#   include "windows.h"
+#   include "winver.h"
+#   include "config.h"
+#endif
 
 /*   English (U.S.) resources   */
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 
 #ifdef _WIN32
+#ifndef WINDRES
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#endif
 #pragma code_page(1252)
 #endif /* _WIN32 */
 

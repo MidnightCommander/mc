@@ -42,8 +42,6 @@ MCEDIT_INCLUDES=-I$(MC_PC_DIR) -I$(MC_SRC_DIR)/.. -I$(SLANG_SRC_DIR)
 CFLAGS=$(SPECIFIC_MC_CFLAGS) $(MC_INCLUDES) $(MC_DEFINES) -c
 SLANG_CFLAGS=$(SPECIFIC_SLANG_CFLAGS) $(SLANG_INCLUDES) $(SLANG_DEFINES) -c
 MCEDIT_CFLAGS=$(SPECIFIC_MCEDIT_CFLAGS) $(MCEDIT_INCLUDES) $(MCEDIT_DEFINES) -c
-RSC_FLAGS=$(RES_PLACE)$(OBJS_DIR)/mc.res $(RC_DEFINES)
-
 
 
 all: object-dirs mc
@@ -163,10 +161,16 @@ MCEDIT_OBJS=$(addprefix $(MCEDIT_OBJS_DIR)/, \
 	$(patsubst %.c,%.$(OBJ_SUFFIX),$(MCEDIT_SRCS)))
 
 ifdef RSC
-MC_RES=$(OBJS_DIR)/mc.res
+
+ifndef RES_SUFFIX
+RES_SUFFIX=res
+endif # RES_SUFFIX
+
+MC_RES=$(OBJS_DIR)/mc.$(RES_SUFFIX)
+
+$(MC_RES): $(MC_PC_DIR)/mc.rc $(MC_PC_DIR)/mc_nt.ico $(MC_PC_DIR)/config.h ../VERSION
+	$(RSC) $(RES_PLACE)$(MC_RES) $(RC_DEFINES) $(MC_PC_DIR)/mc.rc
+
 else
 MC_RES=
-endif
-
-$(OBJS_DIR)/mc.res: $(MC_PC_DIR)/mc.rc $(MC_PC_DIR)/mc_nt.ico $(MC_PC_DIR)/config.h ../VERSION
-	$(RSC) $(RSC_FLAGS) $(MC_PC_DIR)/mc.rc
+endif # !RSC

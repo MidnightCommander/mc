@@ -96,6 +96,8 @@ int win32_GetVersionEx ()
 
 int win32_GetEXEType (const char* a_szFileName)
 {
+/* FIXME: MinGW cannot compile this code */
+#ifndef __MINGW32__
     HANDLE hImage;
     DWORD  dwDumm;
     DWORD  SectionOffset;
@@ -177,6 +179,9 @@ int win32_GetEXEType (const char* a_szFileName)
             win32Trace(("Unknown type %u.\n", image_optional_header.Subsystem));
 	    return EXE_Unknown;			
     }
+#else
+    return EXE_Unknown;
+#endif /* !__MINGW32__ */
 }
 
 

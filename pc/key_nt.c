@@ -176,7 +176,11 @@ int get_key_code (int no_delay)
 		    break;
 
 		vkcode = ir.Event.KeyEvent.wVirtualKeyCode;
+#ifndef __MINGW32__
 		ch = ir.Event.KeyEvent.uChar.AsciiChar;
+#else
+		ch = ir.Event.KeyEvent.AsciiChar;
+#endif
 		dwSaved_ControlState = ir.Event.KeyEvent.dwControlKeyState;
 		j = translate_key_code (ch, vkcode);
 		if (j)

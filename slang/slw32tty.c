@@ -203,7 +203,11 @@ unsigned int SLsys_getkey (void)
       return 0;
     }
     if (record.EventType == KEY_EVENT && record.Event.KeyEvent.bKeyDown) {
+#ifndef __MINGW32__
       return record.Event.KeyEvent.uChar.AsciiChar;
+#else
+      return record.Event.KeyEvent.AsciiChar;
+#endif
     }
   }
 /*   ReadFile(hStdin, &key, 1, &bytesRead, NULL); */

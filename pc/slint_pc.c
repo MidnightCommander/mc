@@ -139,12 +139,6 @@ void vline (int character, int len)
     }
 }
 
-void init_pair (int index, char *foreground, char *background)
-{
-    SLtt_set_color (index, "", foreground, background);
-}
-
-
 int has_colors ()
 {
     /* No terminals on NT, make default color */
@@ -218,3 +212,55 @@ void slang_set_raw_mode (void)
    return;
 }
 
+int max_index = 0;
+
+void
+init_pair (int index, char *foreground, char *background)
+{
+
+    SLtt_set_color (index, "", foreground, background);
+    if (index > max_index)
+	max_index = index;
+}
+
+int
+alloc_color_pair (char *foreground, char *background)
+{
+    init_pair (++max_index, foreground, background);
+    return max_index;
+}
+
+int
+try_alloc_color_pair (char *fg, char *bg)
+{
+    static struct colors_avail {
+	struct colors_avail *next;
+	char *fg, *bg;
+	int index;
+    } *p, c =
+    {
+	0, 0, 0, 0
+    };
+
+    c.index = NORMAL_COLOR;
+    p = &c;
+    for (;;) {
+	if (((fg && p->fg) ? !strcmp (fg, p->fg) : fg == p->fg) != 0
+	    && ((bg && p->bg) ? !strcmp (bg, p->bg) : bg == p->bg) != 0)
+	    return p->index;
+	if (!p->next)
+	    break;
+	p = p->next;
+    }
+    p->next = malloc (sizeof (c));
+    p = p->next;
+    p->next = 0;
+    p->fg = fg ? strdup (fg) : 0;
+    p->bg = bg ? strdup (bg) : 0;
+    if (!fg)
+	fg = "white";
+    if (!bg)
+	bg = "blue";
+    p->index = alloc_color_pair (fg, bg);
+    return p->index;
+}

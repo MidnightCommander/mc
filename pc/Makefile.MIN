@@ -18,6 +18,7 @@ EXE_PLACE=-o
 #      Just comment RSC out if you have problems with resources
 RSC=windres.exe
 RES_PLACE=-o
+RES_SUFFIX=o
 
 # ---- Compiler-specific optional stuff
 MC_MISC_CFLAGS=
@@ -31,7 +32,7 @@ SPECIFIC_MC_CFLAGS=-g -O0 $(MC_MISC_CFLAGS)
 SPECIFIC_MC_LFLAGS_EXTRA=
 SPECIFIC_SLANG_CFLAGS=$(SPECIFIC_MC_CFLAGS)
 SPECIFIC_MCEDIT_CFLAGS=$(SPECIFIC_MC_CFLAGS)
-RC_DEFINES=-O coff --define _DEBUG
+RC_DEFINES=--define WINDRES --define _DEBUG
 else
 # ---- Release build
 OBJS_DIR=release
@@ -41,7 +42,7 @@ SPECIFIC_MC_CFLAGS=-O2 $(MC_MISC_CFLAGS)
 SPECIFIC_MC_LFLAGS_EXTRA=
 SPECIFIC_SLANG_CFLAGS=$(SPECIFIC_MC_CFLAGS)
 SPECIFIC_MCEDIT_CFLAGS=$(SPECIFIC_MC_CFLAGS)
-RC_DEFINES=-O coff --define RELEASE=$(RELEASE)
+RC_DEFINES=--define WINDRES --define RELEASE=$(RELEASE)
 endif
 
 # ---- Compiler independent defines
