@@ -1,3 +1,19 @@
+2001-07-12  Andrew V. Samoilov <kai@cmail.ru>
+
+	* main.c: Eliminate iconify_on_exec.
+	[!HAVE_GNOME]: Eliminate nowindows, nodesktop, twopanel,
+	display_linksdir and cmdline_geometry.
+	(sigchld_handler_no_subshell): Comment fixes.
+	(midnight_callback): Likewise.
+	(print_mc_usage): Use fputs, not fprintf.
+	(print_color_usage): Likewise.
+	(argument_table): Assign 'r' with force_subshell_execution and 'U'
+	with use_subshell.
+	(process_args): Don't deal with 'r', 'U' and 'X' options.
+	(setup_mc) [HAVE_GNOME]: Eliminate more code.
+
+	setup.c (options):  Eliminate iconify_on_exec.
+
 2001-07-10  Andrew V. Samoilov <kai@cmail.ru>
 
 	* view.c (hex_search): Release buffer after use.
