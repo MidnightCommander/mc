@@ -1,4 +1,5 @@
 *.cache
+ABOUT-NLS
 Make.common
 Makefile
 Makefile.in
