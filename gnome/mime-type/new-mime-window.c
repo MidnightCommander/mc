@@ -1,6 +1,10 @@
+
+#ifdef HAVE_CONFIG_H
+#   include <config.h>
+#endif
+
 #include "new-mime-window.h"
 #include "capplet-widget.h"
-#include <config.h>
 static GtkWidget *add_dialog = NULL;
 extern GtkWidget *capplet;
 

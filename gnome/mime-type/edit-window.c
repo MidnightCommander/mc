@@ -1,3 +1,8 @@
+
+#ifdef HAVE_CONFIG_H
+#   include <config.h>
+#endif
+
 #include "edit-window.h"
 #include "mime-data.h"
 #include "mime-info.h"

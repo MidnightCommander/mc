@@ -2,7 +2,11 @@
 /* Copyright (C) 1998 Redhat Software Inc. 
  * Authors: Jonathan Blandford <jrb@redhat.com>
  */
-#include <config.h>
+
+#ifdef HAVE_CONFIG_H
+#   include <config.h>
+#endif
+
 #include "capplet-widget.h"
 #include "gnome.h"
 #include <string.h>
