@@ -95,10 +95,8 @@ context default
     keyword : brightcyan
     keyword ? brightcyan
     keyword ; brightmagenta
-    keyword \{\s\t\}\[\s\t\]\n white red
 
 context exclusive /\* \*/ brown
-    keyword \{\s\t\}\[\s\t\]\n white red
     spellcheck
 
 context exclusive // \n brown
