@@ -1,3 +1,9 @@
+2003-03-11  Pavel Roskin  <proski@gnu.org>
+
+	* acinclude.m4 (MC_ASM_LABELS): New macro to work around a bug
+	gettext.  Define _INTL_REDIRECT_MACROS if needed.
+	* configure.in: Use MC_ASM_LABELS.
+
 2003-03-07  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Add --with-glib-static option.

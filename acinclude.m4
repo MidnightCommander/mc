@@ -891,3 +891,31 @@ if test "$mc_cv_g_module_supported" = yes; then
 	      [Define if gmodule functionality is supported])
 fi
 ])
+
+
+dnl
+dnl Check if it's possible to use asm labels to rename functions.
+dnl This macro is necessary because gettext wrongly assumes that gcc
+dnl can do it regardless of the OS.
+dnl
+AC_DEFUN([MC_ASM_LABELS], [
+    AC_CACHE_CHECK([whether functions can be renamed by asm labels],
+		   mc_cv_asm_labels,
+		   [mc_cv_asm_labels=no
+		   if test -n "$GCC"; then
+			AC_TRY_LINK(, [
+static int function1 (void) __asm__ ("function2");
+static int function1 (void)
+{
+    return 0;
+}
+return function2();
+], [mc_cv_asm_labels=yes])
+		   fi
+   ])
+
+if test "$mc_cv_asm_labels" != yes; then
+    AC_DEFINE(_INTL_REDIRECT_MACROS, 1,
+	      [Define if functions cannot be renamed by asm labels])
+fi
+])

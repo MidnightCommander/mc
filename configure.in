@@ -102,6 +102,7 @@ AC_FUNC_MMAP
 dnl
 dnl Internationalization
 dnl
+MC_ASM_LABELS
 AM_GNU_GETTEXT
 AM_GNU_GETTEXT_VERSION(0.11.5)
 
