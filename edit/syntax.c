@@ -1094,7 +1094,7 @@ void
 edit_load_syntax (WEdit *edit, char **names, const char *type)
 {
     int r;
-    char *f;
+    const char *f;
 
     edit_free_syntax_rules (edit);
 

@@ -131,7 +131,7 @@ static char *stacked[16];
    The result is later automatically free'd and must not be free'd
    by the caller.
  */
-char *catstrs (const char *first,...)
+const char *catstrs (const char *first,...)
 {
     static int i = 0;
     va_list ap;
@@ -583,7 +583,7 @@ edit_raw_key_query (const char *heading, const char *query, int cancel)
 /* creates a macro file if it doesn't exist */
 static FILE *edit_open_macro_file (const char *r)
 {
-    char *filename;
+    const char *filename;
     int file;
     filename = catstrs (home_dir, MACRO_FILE, (char *) NULL);
     if ((file = open (filename, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
@@ -761,7 +761,7 @@ int edit_load_macro_cmd (WEdit * edit, struct macro macro[], int *n, int k)
 /* returns 1 on success */
 int edit_save_confirm_cmd (WEdit * edit)
 {
-    char *f;
+    const char *f;
 
     if (edit_confirm_save) {
 	f = catstrs (_(" Confirm save file? : "), edit->filename, " ", (char *) NULL);
@@ -2452,9 +2452,9 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
     FILE *script_home = NULL;
     FILE *script_src = NULL;
     FILE *block_file = NULL;
-    char *o = NULL;
-    char *h = NULL;
-    char *b = NULL;
+    const char *o = NULL;
+    const char *h = NULL;
+    const char *b = NULL;
     char *quoted_name = NULL;
 
     o = catstrs (mc_home, shell_cmd, (char *) NULL);	/* original source script */

@@ -1,5 +1,13 @@
 2005-02-07  Roland Illig  <roland.illig@gmx.de>
 
+	* edit.h (catstrs): Changed the return type to "const char *".
+	* editcmd.c (catstrs): Likewise.
+	* edit.c (user_menu): Added const qualifiers.
+	* editcmd.c: Likewise.
+	* syntax.c: Likewise.
+
+2005-02-07  Roland Illig  <roland.illig@gmx.de>
+
 	* edit.c: Improved message formatting.
 
 2005-01-30  Roland Illig  <roland.illig@gmx.de>

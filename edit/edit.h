@@ -186,7 +186,7 @@ int edit_save_block_cmd (WEdit * edit);
 int edit_insert_file_cmd (WEdit * edit);
 int edit_insert_file (WEdit * edit, const char *filename);
 void edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block);
-char *catstrs (const char *first, ...);
+const char *catstrs (const char *first, ...);
 void freestrs (void);
 void edit_refresh_cmd (WEdit * edit);
 void edit_date_cmd (WEdit * edit);

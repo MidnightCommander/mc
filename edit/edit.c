@@ -2641,7 +2641,7 @@ user_menu (WEdit * edit)
     int nomark;
     struct stat status;
     long start_mark, end_mark;
-    char *block_file = catstrs (home_dir, BLOCK_FILE, (char *) NULL);
+    const char *block_file = catstrs (home_dir, BLOCK_FILE, (char *) NULL);
     int rc = 0;
 
     nomark = eval_marks (edit, &start_mark, &end_mark);
