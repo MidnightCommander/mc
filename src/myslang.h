@@ -103,13 +103,6 @@ int has_colors (void);
 #define standend() SLsmg_normal_video()
 #define addch(c) SLsmg_write_char(c)
 #define addstr(s) SLsmg_write_string(s)
-#define initscr() do { extern int force_ugly_line_drawing; \
-	     extern int SLtt_Has_Alt_Charset; \
-	     SLtt_get_terminfo (); \
-	     if (force_ugly_line_drawing) \
-		SLtt_Has_Alt_Charset = 0; \
-             SLsmg_init_smg (); \
-          } while(0)
 #define refresh() SLsmg_refresh()
 #define mvaddstr(y, x, s) SLsmg_gotorc(y, x); SLsmg_write_string(s)
 #define endwin() SLsmg_reset_smg()
