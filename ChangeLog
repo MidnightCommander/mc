@@ -1,3 +1,8 @@
+1999-07-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* Makefile.in (DISTMAIN): Added config.guess and config.sub to the
+	list of distributed files.
+
 1999-07-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* configure.in (VERSION): Bumped version number to 4.5.34.

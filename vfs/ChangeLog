@@ -5,6 +5,7 @@
 	plain wildcards will not work right.
 	(SAMBA_DIST_TOPLEVEL): Added configure to the list of distributed
 	files.
+	Added smbfs.[ch] to the list of sources.
 
 1999-07-02  Tuomas J. Lukka <lukka@iki.fi>
 

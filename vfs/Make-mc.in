@@ -184,6 +184,7 @@ VFSSRCS = \
 	sfs.c 			\
 	shared_tar_ext.c 	\
 	shared_ftp_fish.c	\
+	smbfs.c			\
 	tar.c 			\
 	tcputil.c		\
 	undelfs.c 		\
@@ -198,6 +199,7 @@ VFSHDRS = 			\
 	ftpfs.h 		\
 	mcfs.h 			\
 	names.h 		\
+	smbfs.h			\
 	tar.h 			\
 	tcputil.h 		\
 	utilvfs.h		\
