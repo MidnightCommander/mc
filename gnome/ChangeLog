@@ -1,3 +1,9 @@
+1999-06-24  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* gmc-chargrid.c (update_strip): Paint every character with the 
+	assigned fore and background color instead of using the colors of 
+	the first character for the whole line.
+
 1999-06-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gsession.c (create_default_panel): Use directory specified in

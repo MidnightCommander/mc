@@ -275,13 +275,13 @@ update_strip (GmcCharGrid *cgrid, int x, int y, int width)
 	while (i < width) {
 		first = i;
 		ocolor = attrs[i].bg_set ? attrs[i].bg : GTK_WIDGET (cgrid)->style->bg[GTK_STATE_NORMAL].pixel;
-		color = ocolor;
 
 		do {
 			i++;
+			color = attrs[i].bg_set ? attrs[i].bg : GTK_WIDGET (cgrid)->style->bg[GTK_STATE_NORMAL].pixel;
 		} while ((i < width) && (color == ocolor));
 
-		gcolor.pixel = color;
+		gcolor.pixel = ocolor;
 		gdk_gc_set_foreground (cgrid->gc, &gcolor);
 
 		gdk_draw_rectangle (cgrid->widget.window,
@@ -300,13 +300,13 @@ update_strip (GmcCharGrid *cgrid, int x, int y, int width)
 	while (i < width) {
 		first = i;
 		ocolor = attrs[i].fg_set ? attrs[i].fg : GTK_WIDGET (cgrid)->style->fg[GTK_STATE_NORMAL].pixel;
-		color = ocolor;
 
 		do {
 			i++;
+			color = attrs[i].fg_set ? attrs[i].fg : GTK_WIDGET (cgrid)->style->fg[GTK_STATE_NORMAL].pixel;
 		} while ((i < width) && (color == ocolor));
 
-		gcolor.pixel = color;
+		gcolor.pixel = ocolor;
 		gdk_gc_set_foreground (cgrid->gc, &gcolor);
 
 		gdk_draw_text (cgrid->widget.window,

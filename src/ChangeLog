@@ -1,3 +1,14 @@
+1999-06-24  smil@linuxfan.com
+
+	* view.c (view_update_bytes_per_line, display): show correctly the
+	offset of the file (full 8 digit), display offset in bold colour
+
+	(view_labels): use goto_addr instead of goto_line in hex mode
+
+	(goto_addr): New function. Goto offset address in hex mode.
+
+	* view.h: use unsigned long for hexedit cursor position in file
+
 1999-06-24  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* menu.c (menubar_execute): Now needs an additional do_refresh in order

@@ -650,7 +650,7 @@ view_update_bytes_per_line(WView *view)
 	cols = view->widget.cols;
     
     view->bottom_first = -1;
-    view->bytes_per_line = 2 * (cols - 7) / 9;
+    view->bytes_per_line = 2 * (cols - 8) / 9;
     view->bytes_per_line &= 0xfffc;
     
     if (view->bytes_per_line == 0)
@@ -876,12 +876,14 @@ display (WView *view)
 
         for (;row < height && from < view->last_byte; row++){
             /* Print the hex offset */
-            g_snprintf (hex_buff, sizeof (hex_buff), "%05X", (int) (from - view->first));
+            view_set_color (view, BOLD_COLOR);
+            g_snprintf (hex_buff, sizeof (hex_buff), "%08X", (int) (from - view->first));
 	    view_gotoyx (view, row, frame_shift);
             view_add_string (view, hex_buff);
+            view_set_color (view, DEF_COLOR);
 	    
-            /* Hex dump starts from column seven */
-            col = 7;
+            /* Hex dump starts from column nine */
+            col = 9;
 	    
             /* Each hex number is two digits */
             hex_buff[2] = 0;
@@ -1893,7 +1895,7 @@ toggle_hex_mode (WView *view)
     view_update (view, TRUE);
 }
 
-/* Both views */
+/* Ascii view */
 void
 goto_line (WView *view)
 {
@@ -1918,6 +1920,31 @@ goto_line (WView *view)
     }
     view->dirty++;
     view->wrap_mode = saved_wrap_mode;
+    view_update (view, TRUE);
+}
+
+/* Hex view */
+void
+goto_addr (WView *view)
+{
+    char *line, *error, prompt [BUF_SMALL];
+    unsigned long addr;
+
+    g_snprintf (prompt, sizeof (prompt), _(" The current address is 0x%lx.\n"
+		       " Enter the new address:"), view->edit_cursor);
+    line = input_dialog (_(" Goto Address "), prompt, "");
+    if (line){
+	if (*line) {
+	    addr = strtol (line, &error, 0);
+  	    if ((*error == '\0') && (addr <= view->last_byte)) { 
+   	         move_to_top (view);
+		 view_move_forward (view, addr/view->bytes_per_line);
+		 view->edit_cursor = addr;
+            }
+        }
+	g_free (line);
+    }
+    view->dirty++;
     view_update (view, TRUE);
 }
 
@@ -2042,7 +2069,9 @@ view_labels (WView *view)
     
     my_define (h, 10, _("Quit"), view_quit_cmd, view);
     my_define (h, 4, view->hex_mode ? _("Ascii"): _("Hex"), toggle_hex_mode, view);
-    my_define (h, 5, _("Line"), goto_line, view);
+    my_define (h, 5, view->hex_mode ? _("Goto") : _("Line"),
+	        view->hex_mode ? goto_addr : goto_line, 
+		     view);
     my_define (h, 6, view->hex_mode ? _("Save") : _("RxSrch"), regexp_search_cmd, view);
 
     my_define (h, 2, view->hex_mode ? view->hexedit_mode ?

@@ -39,7 +39,7 @@ typedef struct {
 				/* For the case of WINCH we should reset it to -1 */
     unsigned long start_display;/* First char displayed */
     int  start_col;		/* First displayed column, negative */
-    unsigned int  edit_cursor;  /* HexEdit cursor position in file */
+    unsigned long edit_cursor;  /* HexEdit cursor position in file */
     char hexedit_mode;          /* Hexidecimal editing mode flag */ 
     char nib_shift;             /* A flag for inserting nibbles into bytes */
     enum ViewSide view_side;	/* A flag for the active editing panel */
