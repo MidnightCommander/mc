@@ -1,3 +1,7 @@
+2003-03-04  Sanlig Badral  <Badral@chinggis.com>
+
+	* po/LINGUAS: added Mongolian (mn) translation.
+
 2003-03-03  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.lib: Add xterm arrows both for application and normal
