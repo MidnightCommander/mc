@@ -26,7 +26,7 @@
 
 /* Assumptions:
  *
- * 1. We don't handle directories (thus undelfs_getpath is easy to write).
+ * 1. We don't handle directories (thus undelfs_get_path is easy to write).
  * 2. Files are on the local file system (we do not support vfs files
  *    because we would have to provide an io_manager for the ext2fs tools,
  *    and I don't think it would be too useful to undelete files 
@@ -86,7 +86,7 @@ static int undelfs_usage;
 #define READDIR_PTR_INIT 0
 
 static void
-undelfs_shutdown ()
+undelfs_shutdown (void)
 {
     if (fs)
 	ext2fs_close (fs);
@@ -107,33 +107,44 @@ undelfs_get_path (char *dirname, char **ext2_fname, char **file)
 {
     char *p;
 
+    /* To look like filesystem, we have virtual directories
+       /#undel:XXX, which have no subdirectories. XXX is replaced with
+       hda5, sdb8 etc, which is assumed to live under /dev. 
+                                                    -- pavel@ucw.cz */
+
     *ext2_fname = 0;
     
-    if (strncmp (dirname, "undel:", 6))
+    if (strncmp (dirname, "/#undel:", 8))
 	return;
     else
-	dirname += 6;
+	dirname += 8;
 
     /* Since we don't allow subdirectories, it's easy to get a filename,
-     * just scan backwards for a slash
-     */
+     * just scan backwards for a slash */
     if (*dirname == 0)
 	return;
     
     p = dirname + strlen (dirname);
+#if 0
+    /* Strip trailing ./ 
+     */
     if (p - dirname > 2 && *(p-1) == '/' && *(p-2) == '.')
 	*(p = p-2) = 0;
+#endif
     
     while (p > dirname){
 	if (*p == '/'){
 	    *file = strdup (p+1);
 	    *p = 0;
-	    *ext2_fname = strdup (dirname);
+	    *ext2_fname = copy_strings ("/dev/", dirname, NULL);
 	    *p = '/';
 	    return;
 	}
 	p--;
     }
+    *file = strdup ("");
+    *ext2_fname = copy_strings ("/dev/", dirname, NULL);
+    return;
 }
 
 static int
@@ -159,7 +170,7 @@ lsdel_proc(ext2_filsys fs, blk_t *block_nr, int blockcnt, void *private)
  * if we don't have enough memory
  */
 static int
-undelfs_loaddel ()
+undelfs_loaddel (void)
 {
     int retval, count;
     ino_t ino;
@@ -519,13 +530,6 @@ undelfs_read (void *vfs_info, char *buffer, int count)
     return p->dest_buffer - buffer;
 }
 
-static int
-undelfs_write (void *vfs_info, char *buf, int count)
-{
-    /* No writes allowed */
-    return -1;
-}
-
 static long
 undelfs_getindex (char *path)
 {
@@ -609,48 +613,6 @@ undelfs_fstat (void *vfs_info, struct stat *buf)
 }
 
 static int
-undelfs_chmod(char *path, int mode)
-{
-    return -1;
-}
-
-static int
-undelfs_chown(char *path, int owner, int group)
-{
-    return -1;
-}
-
-static int
-undelfs_readlink(char *path, char *buf, int size)
-{
-    return -1;
-}
-
-static int
-undelfs_symlink(char *n1, char *n2)
-{
-    return -1;
-}
-
-static int
-undelfs_link(char *p1, char *p2)
-{
-    return -1;
-}
-
-static int
-undelfs_unlink(char *path)
-{
-    return -1;
-}
-
-static int
-undelfs_rename(char *p1, char *p2)
-{
-    return -1;
-}
-
-static int
 undelfs_chdir(char *path)
 {
     char *file, *f;
@@ -675,20 +637,9 @@ undelfs_chdir(char *path)
     return 0;
 }
 
-static int
-undelfs_ferrno(void)
-{
-    return -1;
-}
-
+/* this has to stay here for now: vfs layer does not know how to emulate it */
 static int
 undelfs_lseek(void *vfs_info, off_t offset, int whence)
-{
-    return -1;
-}
-
-static int
-undelfs_mknod(char *path, int mode, int dev)
 {
     return -1;
 }
@@ -721,50 +672,11 @@ undelfs_free(vfsid id)
     undelfs_shutdown ();
 }
 
-static char *
-undelfs_getlocalcopy(char *filename)
-{
-    return 0;
-}
-
-static void
-undelfs_ungetlocalcopy(char *filename, char *local, int has_changed)
-{
-}
-
-static int
-undelfs_mkdir(char *path, mode_t mode)
-{
-    return -1;
-}
-
-static int
-undelfs_rmdir(char *path)
-{
-    return -1;
-}
-
-	
-#ifdef HAVE_MMAP
-static caddr_t
-undelfs_mmap(caddr_t addr, size_t len, int prot, int flags, void *vfs_info, off_t offset)
-{
-    return (caddr_t) -1;
-}
-
-static int
-undelfs_munmap(caddr_t addr, size_t len, void *vfs_info)
-{
-    return -1;
-}
-#endif
-
-
 vfs undelfs_vfs_ops = {
     undelfs_open,
     undelfs_close,
     undelfs_read,
-    undelfs_write,
+    NULL,
     
     undelfs_opendir,
     undelfs_readdir,
@@ -776,35 +688,35 @@ vfs undelfs_vfs_ops = {
     undelfs_lstat,
     undelfs_fstat,
 
-    undelfs_chmod,
-    undelfs_chown,
+    NULL,
+    NULL,
     NULL,
 
-    undelfs_readlink,
-    undelfs_symlink,
-    undelfs_link,
-    undelfs_unlink,
+    NULL,	/* readlink */
+    NULL,
+    NULL,
+    NULL,
 
-    undelfs_rename,
+    NULL,
     undelfs_chdir,
-    undelfs_ferrno,
-    undelfs_lseek,
-    undelfs_mknod,
+    NULL,
+    undelfs_lseek, 
+    NULL,
     
     undelfs_getid,
     undelfs_nothingisopen,
     undelfs_free,
     
-    undelfs_getlocalcopy,
-    undelfs_ungetlocalcopy,
+    NULL,	/* get_local_copy */
+    NULL,
 
-    undelfs_mkdir,
-    undelfs_rmdir,
+    NULL,
+    NULL,
     NULL,
     NULL,
     NULL
 #ifdef HAVE_MMAP
-    , undelfs_mmap,
-    undelfs_munmap
+    , NULL,
+    NULL
 #endif
 };

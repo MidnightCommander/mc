@@ -108,7 +108,7 @@ vfs *vfs_type_from_op (char *path)
         return &ftpfs_vfs_ops;
 #endif
 #ifdef USE_EXT2FSLIB
-    if (!(vfs_flags & FL_NO_UNDELFS) && !strcmp (path, "undel"))
+    if (!(vfs_flags & FL_NO_UNDELFS) && !strncmp (path, "undel:", 6))
 	return &undelfs_vfs_ops;
 #endif
     if (!(vfs_flags & FL_NO_TARFS) && !strcmp (path, "utar"))
@@ -309,7 +309,7 @@ int mc_open (char *file, int flags, ...)
     va_end (ap);
     
     if (!vfs->open)
-        vfs_die( "VFS must support open\n" );
+        vfs_die( "VFS must support open.\n" );
     info = (*vfs->open) (file, flags, mode);	/* open must be supported */
     free (file);
     if (!info){
@@ -337,12 +337,14 @@ int mc_open (char *file, int flags, ...)
 	result = vfs->name ? (*vfs->name)callarg : -1; \
         post \
 	if (result == -1) \
-	    errno = ferrno (vfs); \
+	    errno = vfs->name ? ferrno (vfs) : EOPNOTSUPP; \
 	return result; \
 	}
 
-#define MC_NAMEOP(name, inarg, callarg) MC_OP (name, inarg, callarg, path = vfs_canon (path); vfs = vfs_type (path);, free (path); )
-#define MC_HANDLEOP(name, inarg, callarg) MC_OP (name, inarg, callarg, if (handle == -1) return -1; vfs = vfs_op (handle);, )
+#define MC_NAMEOP(name, inarg, callarg) \
+  MC_OP (name, inarg, callarg, path = vfs_canon (path); vfs = vfs_type (path);, free (path); )
+#define MC_HANDLEOP(name, inarg, callarg) \
+  MC_OP (name, inarg, callarg, if (handle == -1) return -1; vfs = vfs_op (handle);, )
 
 MC_HANDLEOP(read, (int handle, char *buffer, int count), (vfs_info (handle), buffer, count) );
 
@@ -380,7 +382,9 @@ int mc_close (int handle)
     if (handle < 3)
 	return close (handle);
 
-    result = (*vfs->close)(vfs_info (handle)); /* close must be supported */
+    if (!vfs->close)
+        vfs_die( "VFS must support close.\n" );
+    result = (*vfs->close)(vfs_info (handle));
     vfs_free_bucket (handle);
     if (result == -1)
 	errno = ferrno (vfs);
@@ -408,19 +412,16 @@ DIR *mc_opendir (char *dirname)
 
     info = vfs->opendir ? (*vfs->opendir)(dirname) : NULL;
     free (dirname);
+    if (p)
+        free (p);
     if (!info){
-	errno = ferrno (vfs);
-	if (p)
-	    free (p);
+        errno = vfs->opendir ? ferrno (vfs) : EOPNOTSUPP;
 	return NULL;
     }
     handle = get_bucket ();
     vfs_file_table [handle].fs_info = info;
     vfs_file_table [handle].operations = vfs;
 
-    if (p)
-        free (p);
-    
     handlep = (int *) xmalloc (sizeof (int), "opendir handle");
     *handlep = handle;
     return (DIR *) handlep;
@@ -429,11 +430,29 @@ DIR *mc_opendir (char *dirname)
 /* This should strip the non needed part of a path name */
 #define vfs_name(x) x
 
-#define MC_DIROP(name, type, inarg, callarg, onerr ) \
-type mc_##name inarg \
+void mc_seekdir (DIR *dirp, int offset)
+{
+    int handle;
+    vfs *vfs;
+
+    if (!dirp){
+	errno = EFAULT;
+	return;
+    }
+    handle = *(int *) dirp;
+    vfs = vfs_op (handle);
+    if (vfs->seekdir)
+        (*vfs->seekdir) (vfs_info (handle), offset);
+    else
+        errno = EOPNOTSUPP;
+}
+
+#define MC_DIROP(name, type, onerr ) \
+type mc_##name (DIR *dirp) \
 { \
     int handle; \
     vfs *vfs; \
+    type result; \
 \
     if (!dirp){ \
 	errno = EFAULT; \
@@ -441,28 +460,14 @@ type mc_##name inarg \
     } \
     handle = *(int *) dirp; \
     vfs = vfs_op (handle); \
-    return vfs->name ? (*vfs->name) callarg : onerr; \
+    result = vfs->name ? (*vfs->name) (vfs_info (handle)) : onerr; \
+    if (result == onerr) \
+        errno = vfs->name ? ferrno(vfs) : EOPNOTSUPP; \
+    return result; \
 }
 
-#define MC_DIROP_VOID(name, inarg, callarg ) \
-void mc_##name inarg \
-{ \
-    int handle; \
-    vfs *vfs; \
-\
-    if (!dirp){ \
-	errno = EFAULT; \
-	return; \
-    } \
-    handle = *(int *) dirp; \
-    vfs = vfs_op (handle); \
-    if (vfs->name) \
-         (*vfs->name) callarg; \
-}
-
-MC_DIROP (readdir, struct dirent *, (DIR *dirp), (vfs_info (handle)), NULL)
-MC_DIROP_VOID (seekdir, (DIR *dirp, int offset), (vfs_info (handle), offset))
-MC_DIROP (telldir, int, (DIR *dirp), (vfs_info (handle)), -1)
+MC_DIROP (readdir, struct dirent *, NULL)
+MC_DIROP (telldir, int, -1)
 
 int mc_closedir (DIR *dirp)
 {
@@ -514,7 +519,7 @@ char *mc_get_current_wd (char *buffer, int size)
 {
     char *cwd = mc_return_cwd();
     if (strlen (cwd) > size){
-      vfs_die ("Current_dir size overflow\n");
+      vfs_die ("Current_dir size overflow.\n");
     }
     strcpy (buffer, cwd);
     return buffer;
@@ -527,73 +532,48 @@ MC_NAMEOP (readlink, (char *path, char *buf, int bufsiz), (vfs_name (path), buf,
 MC_NAMEOP (unlink, (char *path), (vfs_name (path)))
 MC_NAMEOP (symlink, (char *name1, char *path), (vfs_name (name1), vfs_name (path)))
 
-int mc_link (char *name1, char *name2)
-{
-    vfs *vfs1;
-    vfs *vfs2;
-    int result;
-
-    name1 = vfs_canon (name1);
-    vfs1 = vfs_type (name1);    
-    name2 = vfs_canon (name2);
-    vfs2 = vfs_type (name2);    
-    
-    if (vfs1 != vfs2){
-    	errno = EXDEV;
-    	free (name1);
-    	free (name2);
-	return -1;
-    }
-
-    result = (*vfs1->link)(vfs_name (name1), vfs_name (name2));
-    free (name1);
-    free (name2);
-    if (result == -1){
-	errno = (*vfs1->ferrno)();
-	return -1;
-    }
-    return result;
+#define MC_RENAMEOP(name) \
+int mc_##name (char *name1, char *name2) \
+{ \
+    vfs *vfs; \
+    int result; \
+\
+    name1 = vfs_canon (name1); \
+    vfs = vfs_type (name1); \
+    name2 = vfs_canon (name2); \
+    if (vfs != vfs_type (name2)){ \
+    	errno = EXDEV; \
+    	free (name1); \
+    	free (name2); \
+	return -1; \
+    } \
+\
+    result = vfs->name ? (*vfs->name)(vfs_name (name1), vfs_name (name2)) : -1; \
+    free (name1); \
+    free (name2); \
+    if (result == -1) \
+        errno = vfs->name ? ferrno (vfs) : EOPNOTSUPP; \
+    return result; \
 }
+
+MC_RENAMEOP (link);
+MC_RENAMEOP (rename);
 
 MC_HANDLEOP (write, (int handle, char *buf, int nbyte), (vfs_info (handle), buf, nbyte));
-
-int mc_rename (char *path1, char *path2)
-{
-    vfs *vfs1;
-    vfs *vfs2;
-    int result;    
-
-    path1 = vfs_canon (path1);
-    vfs1 = vfs_type (path1);    
-    path2 = vfs_canon (path2);
-    vfs2 = vfs_type (path2);    
-    
-    if (vfs1 != vfs2){
-	errno = EXDEV;
-	free (path1);
-	free (path2);
-	return -1;
-    }
-
-    result = (*vfs1->rename)(vfs_name (path1), vfs_name (path2));
-    free (path1);
-    free (path2);
-    if (result == -1){
-	errno = (*vfs1->ferrno)();
-	return -1;
-    }
-    return result;
-}
 
 off_t mc_lseek (int fd, off_t offset, int whence)
 {
     vfs *vfs;
+    int result;
 
     if (fd == -1)
 	return -1;
 
     vfs = vfs_op (fd);
-    return (*vfs->lseek)(vfs_info (fd), offset, whence);
+    result = vfs->lseek ? (*vfs->lseek)(vfs_info (fd), offset, whence) : -1;
+    if (result == -1)
+        errno = vfs->lseek ? ferrno (vfs) : EOPNOTSUPP;
+    return result;
 }
 
 /*
@@ -612,7 +592,7 @@ vfs_kill_dots (char *path, char *local)
     while (1){
 	if (ISSLASH (*s)){
 	    if (*last_slash != '/')
-		vfs_die ("/ not there\n");
+		vfs_die ("/ not there.\n");
 	    
 	    if (ISSLASH (last_slash [1]))
 		t--;
@@ -839,7 +819,7 @@ int mc_chdir (char *path)
     result = (*current_vfs->chdir)(vfs_name (b));
     free (b);
     if (result == -1){
-	errno = (*current_vfs->ferrno)();
+	errno = ferrno (current_vfs);
     	free (current_dir);
     	current_vfs = vfs_type (a);
     	current_dir = a;
@@ -911,7 +891,7 @@ void vfs_setup_wd (void)
     mc_return_cwd(); 	/* mc_return_cwd will fixup current_dir for us */
 
     if (strlen(current_dir)>MC_MAXPATHLEN-2)
-        vfs_die ("Current dir too long\n");
+        vfs_die ("Current dir too long.\n");
 
     return;
 }
@@ -939,9 +919,9 @@ mc_mmap (caddr_t addr, size_t len, int prot, int flags, int fd, off_t offset)
 	return (caddr_t) -1;
     
     vfs = vfs_op (fd);
-    result = (*vfs->mmap)(addr, len, prot, flags, vfs_info (fd), offset);
+    result = vfs->mmap ? (*vfs->mmap)(addr, len, prot, flags, vfs_info (fd), offset) : (caddr_t)-1;
     if (result == (caddr_t)-1){
-	errno = (*vfs->ferrno)();
+	errno = ferrno (vfs);
 	return (caddr_t)-1;
     }
     mcm = (struct mc_mmapping *) xmalloc (sizeof (struct mc_mmapping), "vfs: mmap handling");
@@ -963,7 +943,8 @@ int mc_munmap (caddr_t addr, size_t len)
             	mc_mmaparray = mcm->next;
             else
             	mcm2->next = mcm->next;
-            (*mcm->vfs->munmap)(addr, len, mcm->vfs_info);
+	    if (*mcm->vfs->munmap)
+	        (*mcm->vfs->munmap)(addr, len, mcm->vfs_info);
             free (mcm);
             return 0;
         }
@@ -1013,9 +994,8 @@ char *mc_getlocalcopy (char *path)
     result = vfs->getlocalcopy ? (*vfs->getlocalcopy)(vfs_name (path)) :
                                  mc_def_getlocalcopy (vfs_name (path));
     free (path);
-    if (result == NULL){
+    if (!result)
 	errno = ferrno (vfs);
-    }
     return result;
 }
 
@@ -1172,6 +1152,7 @@ void vfs_fill_names (void (*func)(char *))
 #endif
     tarfs_fill_names (func);
     extfs_fill_names (func);
+    sfs_fill_names (func);
 }
 
 /* Following stuff (parse_ls_lga) is used by ftpfs and extfs */
@@ -1228,18 +1209,26 @@ static int is_time (char *str, struct tm *tim)
 
 static int is_year(char *str, struct tm *tim)
 {
+  /* Old code recognized 02904baa as year identification :-( */
     long year;
 
-    if (!strchr(str, ':')) {
-	year = atol (str);
-	if (year < 1900 || year > 3000)
-            return (0);
-	tim->tm_year = (int) (year - 1900);
-        return (1);
-    }
-    else 
-        return (0);
+    if (strchr(str,':'))
+        return 0;
+    if (strlen(str)!=4)
+        return 0;
+    if (sscanf(str, "%d", &year) != 1)
+        return 0;
+    if (year < 1900 || year > 3000)
+        return 0;
+    tim->tm_year = (int) (year - 1900);
+    return 1;
 }
+
+/*
+ * FIXME: this is broken. Consider following entry:
+-rwx------   1 root     root            1 Aug 31 10:04 2904 1234
+where "2904 1234" is filename. Well, this code decodes it as year :-(.
+ */
 
 #define free_and_return(x) { free (p_copy); return (x); }
 int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)

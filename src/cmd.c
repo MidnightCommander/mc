@@ -272,6 +272,18 @@ void view_cmd (WPanel *panel)
     do_view_cmd (panel, 0);
 }
 
+void view_file_cmd (WPanel *panel)
+{
+    char *filename;
+
+    panel = get_a_panel (panel);
+    filename = input_dialog (_(" View file "), _(" Filename:"), selection (panel)->fname);
+    if (!filename) return;
+
+    view_file (filename, 0, use_internal_view);
+    free (filename);
+}
+
 void view_simple_cmd (WPanel *panel)
 {
     do_view_cmd (panel, 1);
@@ -1294,9 +1306,9 @@ void source_routing (void)
 void undelete_cmd (void)
 {
     nice_cd (_(" Undelete files on an ext2 file system "),
-	     _(" Enter the file system name where you want to run the\n "
-	       " undelete file system on: (F1 for details)"),
-	     "[Undelete File System]", "/#undel/", 0);
+	     _(" Enter device (without /dev/) to undelete\n "
+	       "  files on: (F1 for details)"),
+	     "[Undelete File System]", "/#undel:", 0);
 }
 #endif
 

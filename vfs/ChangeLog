@@ -1,3 +1,18 @@
+Sun Aug 30 13:19:49 1998  Pavel Machek <pavel@ucw.cz>
+
+	* undelfs.c: fixed, it has been broken for too long
+
+	* vfs.c, ../src/cmd.c: neccessary minor fixes to make undelfs work
+
+	* vfs.c: made more fields in *_vfs_ops optional, cleanup of errno
+ 	handling in case of NULL in *_vfs_ops.
+
+	* extfs.c, ftpfs.c, tar.c: made use of above change
+
+	* vfs.c: cleanup of macros generating mc_*()
+
+	* libvfs.c: adding variable mc_home
+
 Thu Aug 27 19:45:31 1998  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
 
 	* extfs.c: mc_extfsdir was not defined in extfs_open()
