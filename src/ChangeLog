@@ -1,5 +1,7 @@
 2000-08-23  Pavel Roskin  <proski@gnu.org>
 
+	* features.c: include <sys/param.h> to avoid a warning
+
 	* main.c [HAVE_X]: print_mc_usage() and print_color_usage()
 	removed.
 	version() moved to ...
