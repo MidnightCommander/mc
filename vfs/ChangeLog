@@ -1,5 +1,9 @@
 2002-08-15  Pavel Roskin  <proski@gnu.org>
 
+	* vfs.h: Introduce union vfs_dirent to ensure that we have
+	enough space for the filename.
+	* extfs.c (s_readdir): Use vfs_dirent.  Avoid strcpy().
+
 	* direntry.c (vfs_s_readdir): Use compute_namelen().
 	* extfs.c (s_readdir): Likewise.
 	* mcfs.c (mcfs_readdir): Likewise.

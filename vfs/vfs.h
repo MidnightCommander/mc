@@ -103,6 +103,16 @@
 #endif	
     };
 
+    /*
+     * This union is used to ensure that there is enough space for the
+     * filename (d_name) when the dirent structure is created.
+     */
+    union vfs_dirent {
+	struct dirent dent;
+	char _extra_buffer [((int) &((struct dirent *)0)->d_name) +
+			    MC_MAXPATHLEN + 1];
+    };
+
     /* Other file systems */
     extern vfs vfs_local_ops;
     extern vfs vfs_nil_ops;
