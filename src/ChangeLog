@@ -1,5 +1,11 @@
 2001-02-26  Pavel Roskin  <proski@gnu.org>
 
+	* cmd.c (edit_cmd) [HAVE_GNOME]: Use gmc_edit(). Don't use
+	regex_command().
+	(ext_cmd) [HAVE_GNOME]: Don't compile for GNOME.
+	* ext.c (regex_command) [HAVE_GNOME]: Likewise.
+	* ext.h [HAVE_GNOME]: Don't define MC_USER_EXT and MC_LIB_EXT.
+
 	* main.c (main): Don't call edit_init_file() - the editor should
 	care about its files itself.
 

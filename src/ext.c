@@ -351,6 +351,7 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
  * If action == "View" then a parameter is checked in the form of "View:%d",
  * if the value for %d exists, then the viewer is started up at that line number.
  */
+#ifndef HAVE_GNOME
 char *regex_command_title = NULL;
 char *regex_command (char *filename, char *action, char **drops, int *move_dir)
 {
@@ -692,3 +693,4 @@ match_file_output:
     easy_patterns = old_patterns;
     return to_return;
 }
+#endif /* !HAVE_GNOME */

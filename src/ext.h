@@ -13,10 +13,7 @@ void flush_extension_file (void);
 #    define MC_USER_EXT "mc.ext"
 #    define MC_LIB_EXT  "mc.ext"
 #else
-#    ifdef HAVE_GNOME
-#        define MC_USER_EXT ".mc/gnome.ext" 
-#        define MC_LIB_EXT  "mc-gnome.ext"
-#    else
+#    ifndef HAVE_GNOME
 #        define MC_USER_EXT ".mc/bindings" 
 #        define MC_LIB_EXT  "mc.ext"
 #    endif

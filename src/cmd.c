@@ -342,9 +342,13 @@ do_edit (const char *what)
 
 void edit_cmd (WPanel *panel)
 {
+#ifndef HAVE_GNOME
     panel = get_a_panel(panel);
     if (!regex_command (selection (panel)->fname, "Edit", NULL, 0))
         do_edit (selection (panel)->fname);
+#else
+    gmc_edit (selection (panel)->fname);
+#endif
 }
 
 void edit_cmd_new (WPanel *panel)
@@ -629,6 +633,7 @@ static int check_for_default(char *default_file, char *file)
     return 0;
 }
 
+#ifndef HAVE_GNOME
 void ext_cmd (void)
 {
     char *buffer;
@@ -654,6 +659,7 @@ void ext_cmd (void)
    g_free (extdir);
    flush_extension_file ();
 }
+#endif /* !HAVE_GNOME */
 
 /* where  = 0 - do edit a file menu for mc */
 /* where  = 1 - do edit a file menu for cool edit */
