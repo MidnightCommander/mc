@@ -2606,7 +2606,7 @@ msgstr "Keine Knoten-Information"
 #: src/info.c:126
 #, c-format
 msgid "Free space: %s (%d%%) of %s"
-msgstr "Freie Knoten: %d (%d%%) von %s"
+msgstr "Freie Knoten: %s (%d%%) von %s"
 
 #: src/info.c:129
 msgid "No space information"
@@ -4432,7 +4432,7 @@ msgstr ""
 #. This can be considered archive inconsistency
 #: vfs/cpio.c:452
 #, c-format
-msgid "%s contains duplicit entries! Skiping!"
+msgid "%s contains duplicit entries! Skipping!"
 msgstr "%s enthält doppelte Einträge! Überspringe!"
 
 #: vfs/cpio.c:519
@@ -4956,10 +4956,10 @@ msgstr "Interner Fehler:"
 
 #: vfs/vfs.c:1848
 #, c-format
-msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
-msgstr "%s: %s: %s %3d%% (%ld Bytes übertragen)"
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgstr "%s: %s: %s %3d%% (%lu Bytes übertragen)"
 
 #: vfs/vfs.c:1849
 #, c-format
-msgid "%s: %s: %s %ld bytes transfered"
-msgstr "%s: %s: %s %ld Bytes übertragen"
+msgid "%s: %s: %s %lu bytes transferred"
+msgstr "%s: %s: %s %lu Bytes übertragen"

@@ -4421,7 +4421,7 @@ msgstr ""
 #. This can be considered archive inconsistency
 #: vfs/cpio.c:1
 #, c-format
-msgid "%s contains duplicit entries! Skiping!"
+msgid "%s contains duplicit entries! Skipping!"
 msgstr "%s zawiera zduplikowane elementy! Pominiêcie!"
 
 #: vfs/cpio.c:1
@@ -4944,10 +4944,10 @@ msgstr "B³±d wewnêtrzny:"
 
 #: vfs/vfs.c:1
 #, c-format
-msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
-msgstr "%s: %s: %s %3d%% (%ld przes³anych bajtów)"
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgstr "%s: %s: %s %3d%% (%lu przes³anych bajtów)"
 
 #: vfs/vfs.c:1
 #, c-format
-msgid "%s: %s: %s %ld bytes transfered"
-msgstr "%s: %s: %s %ld przes³anych bajtów"
+msgid "%s: %s: %s %lu bytes transferred"
+msgstr "%s: %s: %s %lu przes³anych bajtów"

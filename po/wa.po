@@ -2610,7 +2610,7 @@ msgstr "Nole informåcion sol nouk"
 #: src/info.c:126
 #, c-format
 msgid "Free space: %s (%d%%) of %s"
-msgstr "Espace Libe: %d (%d%%) so %d"
+msgstr "Espace Libe: %s (%d%%) so %s"
 
 #: src/info.c:129
 msgid "No space information"
@@ -4388,7 +4388,7 @@ msgstr ""
 #. This can be considered archive inconsistency
 #: vfs/cpio.c:450
 #, c-format
-msgid "%s contains duplicit entries! Skiping!"
+msgid "%s contains duplicit entries! Skipping!"
 msgstr ""
 
 #: vfs/cpio.c:517
@@ -4889,10 +4889,10 @@ msgstr "Divintrinne aroke:"
 
 #: vfs/vfs.c:1838
 #, c-format
-msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
 msgstr ""
 
 #: vfs/vfs.c:1839
 #, c-format
-msgid "%s: %s: %s %ld bytes transfered"
+msgid "%s: %s: %s %lu bytes transferred"
 msgstr ""

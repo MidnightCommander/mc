@@ -4452,7 +4452,7 @@ msgstr ""
 #. This can be considered archive inconsistency
 #: vfs/cpio.c:450
 #, c-format
-msgid "%s contains duplicit entries! Skiping!"
+msgid "%s contains duplicit entries! Skipping!"
 msgstr "%s conté registres duplicats! S'estan ometent!"
 
 #: vfs/cpio.c:517
@@ -4977,13 +4977,13 @@ msgstr "Error intern:"
 
 #: vfs/vfs.c:1838
 #, c-format
-msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
-msgstr "%s: %s: %s %3d%% (%ld bytes transferits)"
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgstr "%s: %s: %s %3d%% (%lu bytes transferits)"
 
 #: vfs/vfs.c:1839
 #, c-format
-msgid "%s: %s: %s %ld bytes transfered"
-msgstr "%s: %s: %s %ld bytes transferits"
+msgid "%s: %s: %s %lu bytes transferred"
+msgstr "%s: %s: %s %lu bytes transferits"
 
 #~ msgid ""
 #~ "Unable to execute\n"

@@ -6375,7 +6375,7 @@ msgstr ""
 #. This can be considered archive inconsistency
 #: vfs/cpio.c:450
 #, c-format
-msgid "%s contains duplicit entries! Skiping!"
+msgid "%s contains duplicit entries! Skipping!"
 msgstr ""
 
 #: vfs/cpio.c:517
@@ -6887,12 +6887,12 @@ msgstr ""
 
 #: vfs/vfs.c:1805
 #, c-format
-msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
 msgstr ""
 
 #: vfs/vfs.c:1806
 #, c-format
-msgid "%s: %s: %s %ld bytes transfered"
+msgid "%s: %s: %s %lu bytes transferred"
 msgstr ""
 
 #~ msgid " There is no other panel to compare contents to "

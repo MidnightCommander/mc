@@ -4411,7 +4411,7 @@ msgstr ""
 #. This can be considered archive inconsistency
 #: vfs/cpio.c:453
 #, c-format
-msgid "%s contains duplicit entries! Skiping!"
+msgid "%s contains duplicit entries! Skipping!"
 msgstr "%s ikiyüzlü girdiler içeriyor! Atlanýyor"
 
 #: vfs/cpio.c:520
@@ -4933,11 +4933,11 @@ msgstr "Ýç hata:"
 
 #: vfs/vfs.c:1848
 #, c-format
-msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
-msgstr "%s : %s : %s %3d%% (%ld bayt aktarýldý)"
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgstr "%s : %s : %s %3d%% (%lu bayt aktarýldý)"
 
 #: vfs/vfs.c:1849
 #, c-format
-msgid "%s: %s: %s %ld bytes transfered"
-msgstr "%s : %s : %s %ld bayt aktarýldý"
+msgid "%s: %s: %s %lu bytes transferred"
+msgstr "%s : %s : %s %lu bayt aktarýldý"
 

@@ -4377,7 +4377,7 @@ msgstr ""
 #. This can be considered archive inconsistency
 #: vfs/cpio.c:453
 #, c-format
-msgid "%s contains duplicit entries! Skiping!"
+msgid "%s contains duplicit entries! Skipping!"
 msgstr "%s가 이상한 엔트리를 포함하고 있습니다! 건너뜀!"
 
 #: vfs/cpio.c:520
@@ -4899,10 +4899,10 @@ msgstr "내부 오류:"
 
 #: vfs/vfs.c:1898
 #, c-format
-msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
-msgstr "%s: %s: %s %3d%% (%ld 바이트 송신)"
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgstr "%s: %s: %s %3d%% (%lu 바이트 송신)"
 
 #: vfs/vfs.c:1899
 #, c-format
-msgid "%s: %s: %s %ld bytes transfered"
-msgstr "%s: %s: %s %ld 바이트 송신됨"
+msgid "%s: %s: %s %lu bytes transferred"
+msgstr "%s: %s: %s %lu 바이트 송신됨"

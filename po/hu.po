@@ -4458,7 +4458,7 @@ msgstr ""
 #. This can be considered archive inconsistency
 #: vfs/cpio.c:450
 #, c-format
-msgid "%s contains duplicit entries! Skiping!"
+msgid "%s contains duplicit entries! Skipping!"
 msgstr "\"%s\" ismétlõdõ bejegyzéseket tartalmaz! Kihagyva!..."
 
 #: vfs/cpio.c:517
@@ -4980,10 +4980,10 @@ msgstr "Belsõ programhiba:"
 
 #: vfs/vfs.c:1838
 #, c-format
-msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
-msgstr "%s: %s: %s %3d%% (%ld bájt átküldve)"
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgstr "%s: %s: %s %3d%% (%lu bájt átküldve)"
 
 #: vfs/vfs.c:1839
 #, c-format
-msgid "%s: %s: %s %ld bytes transfered"
-msgstr "%s: %s: %s %ld bájt átküldve"
+msgid "%s: %s: %s %lu bytes transferred"
+msgstr "%s: %s: %s %lu bájt átküldve"

@@ -4415,7 +4415,7 @@ msgstr ""
 #. This can be considered archive inconsistency
 #: vfs/cpio.c:452
 #, c-format
-msgid "%s contains duplicit entries! Skiping!"
+msgid "%s contains duplicit entries! Skipping!"
 msgstr "%s obsahuje duplicitné položky! Preskakujem!"
 
 #: vfs/cpio.c:519
@@ -4937,11 +4937,11 @@ msgstr "Interná chyba:"
 
 #: vfs/vfs.c:1848
 #, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transfered)"
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu bajtov prenesených)"
 
 #: vfs/vfs.c:1849
 #, c-format
-msgid "%s: %s: %s %lu bytes transfered"
+msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu bajtov prenesených"
 

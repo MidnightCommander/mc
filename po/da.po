@@ -4419,7 +4419,7 @@ msgstr ""
 #. This can be considered archive inconsistency
 #: vfs/cpio.c:450
 #, c-format
-msgid "%s contains duplicit entries! Skiping!"
+msgid "%s contains duplicit entries! Skipping!"
 msgstr "%s indeholder duplikerede indgange! Hopper over!"
 
 #: vfs/cpio.c:517
@@ -4941,13 +4941,13 @@ msgstr " Intern fejl:"
 
 #: vfs/vfs.c:1847
 #, c-format
-msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
-msgstr "%s: %s: %s %3d%% (%ld byte overført)"
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgstr "%s: %s: %s %3d%% (%lu byte overført)"
 
 #: vfs/vfs.c:1848
 #, c-format
-msgid "%s: %s: %s %ld bytes transfered"
-msgstr "%s: %s: %s %ld byte overført"
+msgid "%s: %s: %s %lu bytes transferred"
+msgstr "%s: %s: %s %lu byte overført"
 
 #~ msgid " Cannot open file \""
 #~ msgstr " Kan ikke åbne filen \""

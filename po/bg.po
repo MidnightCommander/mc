@@ -6410,7 +6410,7 @@ msgstr ""
 #. 'No such file or directory' is such case)
 #. This can be considered archive inconsistency
 #, c-format
-msgid "%s contains duplicit entries! Skiping!"
+msgid "%s contains duplicit entries! Skipping!"
 msgstr "%s съдържа дублирани елементи! Пропускам го!"
 
 # vfs/tar.c:284
@@ -6833,13 +6833,13 @@ msgid "Internal error:"
 msgstr "Вътрешна грешка:"
 
 # vfs/vfs.c:1824
-msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
-msgstr "%s: %s: %s %3d%% (%ld байта предадени)"
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgstr "%s: %s: %s %3d%% (%lu байта предадени)"
 
 # vfs/vfs.c:1825
 #, c-format
-msgid "%s: %s: %s %ld bytes transfered"
-msgstr "%s: %s: %s %ld байта предадени"
+msgid "%s: %s: %s %lu bytes transferred"
+msgstr "%s: %s: %s %lu байта предадени"
 
 # src/ext.c:431
 msgid " undelfs: error "

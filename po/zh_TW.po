@@ -8340,7 +8340,7 @@ msgstr ""
 #. This can be considered archive inconsistency
 #: vfs/cpio.c:450
 #, c-format
-msgid "%s contains duplicit entries! Skiping!"
+msgid "%s contains duplicit entries! Skipping!"
 msgstr "%s 有重複的進入點! 放棄中!"
 
 # vfs/cpio.c:517
@@ -8980,14 +8980,14 @@ msgstr "內部錯誤:"
 # vfs/vfs.c:1804
 #: vfs/vfs.c:1805
 #, c-format
-msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
-msgstr "%s: %s: %s %3d%% (已傳送 %ld 位元組)"
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgstr "%s: %s: %s %3d%% (已傳送 %lu 位元組)"
 
 # vfs/vfs.c:1805
 #: vfs/vfs.c:1806
 #, c-format
-msgid "%s: %s: %s %ld bytes transfered"
-msgstr "%s: %s: %s 已傳送 %ld 位元組"
+msgid "%s: %s: %s %lu bytes transferred"
+msgstr "%s: %s: %s 已傳送 %lu 位元組"
 
 # gnome/gmc-window.c:69
 #~ msgid "Copyright (C) 1998 The Free Software Foundation"
