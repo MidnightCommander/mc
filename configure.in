@@ -186,7 +186,7 @@ AC_CHECK_FUNCS([strerror statfs strftime getsid \
 dnl
 dnl getpt is a GNU Extension (glibc 2.1.x)
 dnl
-AC_CHECK_FUNCS(getpt)
+AC_CHECK_FUNCS(posix_openpt, , [AC_CHECK_FUNCS(getpt)])
 AC_CHECK_FUNCS(grantpt, , [AC_CHECK_LIB(pt, grantpt)])
 
 dnl replacing lstat with statlstat on sco makes it more portable between

@@ -1,3 +1,8 @@
+2003-07-21  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Check posix_openpt() first and fallback to
+	GNU-specific getpt() only if needed.
+
 2003-06-29  David Sterba  <dave@jikos.cz>
 
 	* lib/mc.hint.cs: Typo fixes.
