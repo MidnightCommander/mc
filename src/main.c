@@ -100,20 +100,20 @@
 /* This pointer variables */
 
 /* The structures for the panels */
-WPanel *left_panel;
-WPanel *right_panel;
+WPanel *left_panel = NULL;
+WPanel *right_panel = NULL;
 
 /* The pointer to the tree */
-WTree *the_tree;
+WTree *the_tree = NULL;
 
 /* The Menubar */
-struct WMenu *the_menubar;
+struct WMenu *the_menubar = NULL;
 
 /* Pointers to the selected and unselected panel */
 WPanel *current_panel = NULL;
 
 /* Set if the command is being run from the "Right" menu */
-int is_right;
+int is_right = 0;
 
 /* Set when main loop should be terminated */
 volatile int quit = 0;
@@ -180,7 +180,7 @@ int force_ugly_line_drawing = 0;
 int reset_hp_softkeys = 0;
 
 /* The prompt */
-char *prompt = 0;
+char *prompt = NULL;
 
 /* The widget where we draw the prompt */
 WLabel *the_prompt;
@@ -230,15 +230,15 @@ Dlg_head *midnight_dlg;
 int update_prompt = 0;
 
 /* The home directory */
-char *home_dir;
+char *home_dir = NULL;
 
 /* The value of the other directory, only used when loading the setup */
-char *other_dir = 0;
+char *other_dir = NULL;
 
 /* Only used at program boot */
 int boot_current_is_left = 1;
 
-static char *this_dir = 0;
+static char *this_dir = NULL;
 
 /* If this is true, then when browsing the tree the other window will
  * automatically reload it's directory with the contents of the currently
@@ -247,8 +247,8 @@ static char *this_dir = 0;
 int xtree_mode = 0;
 
 /* If set, then print to the given file the last directory we were at */
-static char *last_wd_file;
-static char *last_wd_string;
+static char *last_wd_file = NULL;
+static char *last_wd_string = NULL;
 /* Set to 1 to suppress printing the last directory */
 static int print_last_revert = 0;
 
@@ -256,7 +256,7 @@ static int print_last_revert = 0;
 int force_colors = 0;
 
 /* colors specified on the command line: they override any other setting */
-char *command_line_colors;
+char *command_line_colors = NULL;
 
 /* File name to view if argument was supplied */
 static char *view_one_file = 0;
@@ -272,10 +272,10 @@ static int edit_one_file_start_line = 0;
 int midnight_shutdown = 0;
 
 /* The user's shell */
-char *shell;
+char *shell = NULL;
 
 /* mc_home: The home of MC */
-char *mc_home;
+char *mc_home = NULL;
 
 char cmd_buf[512];
 
