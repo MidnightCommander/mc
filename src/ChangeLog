@@ -1,5 +1,8 @@
 2001-05-14  Pavel Roskin  <proski@gnu.org>
 
+	* boxes.c [HAVE_GNOME]: Disable unused code.
+	* find.c [HAVE_GNOME]: Likewise.
+
 	* screen.c (adjust_top_file): Enable only if it's used, i.e.
 	when PORT_HAS_PAINT_FRAME in undefined.
 	* wtools.c (listbox_refresh): Disable for HAVE_X, define to

@@ -449,6 +449,8 @@ confirm_box ()
     }
 }
 
+#ifndef HAVE_GNOME
+
 #define DISPY 11
 #define DISPX 46
 
@@ -565,7 +567,6 @@ tree_callback (struct Dlg_head *h, int id, int msg)
     return MSG_NOT_HANDLED;
 }
 
-#ifndef HAVE_GNOME
 char *
 tree (char *current_dir)
 {
@@ -596,7 +597,7 @@ tree (char *current_dir)
     destroy_dlg (dlg);
     return val;
 }
-#endif
+#endif /* !HAVE_GNOME */
 
 #ifndef USE_VFS
 #ifdef USE_NETCODE

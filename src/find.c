@@ -60,11 +60,11 @@ static int FIND_X = 50;
 
 /* Size of the find window */
 #define FIND2_Y LINES-4
-static int FIND2_X = 64;
 
 #ifdef HAVE_X
 #   define FIND2_X_USE 35
 #else
+    static int FIND2_X = 64;
 #   define FIND2_X_USE FIND2_X-20
 #endif
 
@@ -119,6 +119,7 @@ typedef struct dir_stack {
 
 dir_stack *dir_stack_base = 0;
 
+#ifndef HAVE_GNOME
 static struct {
 	char* text;
 	int len;	/* length including space and brackets */
@@ -133,6 +134,7 @@ static struct {
 	{ N_("&View - F3"), 13, 20 },
 	{ N_("&Edit - F4"), 13, 38 }
 };
+#endif /* !HAVE_GNOME */
 
 static char *add_to_list (char *text, void *closure);
 static void stop_idle (void *data);
@@ -212,7 +214,9 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	
 #endif /* ENABLE_NLS */
 
+#ifndef HAVE_GNOME
 find_par_start:
+#endif
     if (!in_start_dir)
 	in_start_dir = g_strdup (".");
     if (!in_start_name)
@@ -365,24 +369,23 @@ insert_file (char *dir, char *file)
 static void
 find_add_match (Dlg_head *h, char *dir, char *file)
 {
+#ifndef HAVE_GNOME
     int p = ++matches & 7;
 
     insert_file (dir, file);
 
-#ifndef HAVE_GNOME
     /* Scroll nicely */
     if (!p)
 	listbox_select_last (find_list, 1);
     else
 	listbox_select_last (find_list, 0);
-#endif
-    
-#ifndef HAVE_X
 	/* Updates the current listing */
 	send_message (h, &find_list->widget, WIDGET_DRAW, 0);
 	if (p == 7)
 	    mc_refresh ();
-#endif	    
+#else
+    insert_file (dir, file);
+#endif /* HAVE_GNOME */
 }
 
 #if 0
