@@ -1,3 +1,4 @@
+
 #! /bin/sh
 
 #
@@ -33,6 +34,14 @@
 
 # Define your awk
 AWK=@AWK@
+
+if ls -de . >& /dev/null;
+then
+    LS_COMMAND="ls -le"
+else
+    LS_COMMAND="ls -l --full-time"
+fi
+
 # Define which archiver you are using with appropriate options
 LHA_LIST="lha l"
 LHA_GET="lha pq"
@@ -46,7 +55,7 @@ TMPCMD=/tmp/mc-cmd.$$
 mc_lha_fs_list()
 {
    # Get the year of the file timestamp in case we need to replace 'hh:mm'
-   YEAR=$(ls -le $1 | $AWK '{ print $10 }')
+   YEAR=$($LS_COMMAND $1 | $AWK '{ print $10 }')
    # List the contents of the archive and sort it out    
    $LHA_LIST $1 | $AWK -v uid=$(id -nu) -v gid=$(id -ng) -v year=$YEAR '
       # Ignore the annotations, quit on the last one
@@ -60,7 +69,7 @@ mc_lha_fs_list()
       # Print the line this way if there is no permission string
       $1 ~ /^\[generic\]/ {
          # Invent a generic permission
-         $1 = ($10 ~ /\/$/) ? "drwxr-xr-x":"-rwxr-xr-x";
+         $1 = ($10 ~ /\/$/) ? "drwxr-xr-x":"-rwxr--r--";
          # Print it
          printf "%s   1 %-8s %-8s %-8d %3s %2d %4d %s\n",
                  $1,     uid, gid,  $2, $4, $5, $6, $7;
