@@ -435,7 +435,7 @@ int
 edit_save_as_cmd (WEdit *edit)
 {
     /* This heads the 'Save As' dialog box */
-    char *exp = 0;
+    char *exp;
     int save_lock = 0;
     int different_filename = 0;
 
