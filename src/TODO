@@ -1,9 +1,6 @@
 Before 4.6.0-pre2
 =================
 
-ncurses 5.2 turns off keypad under heavy load on xterm.  Check if
-anything can be done about it.
-
 ftp and fish with home != '/' - readjust directory to the home.
 
 Allow modifiers for keys in mc.lib, like "shift-up".

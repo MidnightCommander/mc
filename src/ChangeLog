@@ -1,3 +1,9 @@
+2002-12-20  Pavel Roskin  <proski@gnu.org>
+
+	* layout.c (init_curses) [!HAVE_SLANG]: Set ESCDELAY to 200ms.
+	If ESCDELAY is 0, ncurses 5.2 may stop recognizing escape
+	sequences under heavy CPU load.
+
 2002-12-19  Pavel Roskin  <proski@gnu.org>
 
 	* screen.c (chdir_other_panel): Use do_panel_cd() on the

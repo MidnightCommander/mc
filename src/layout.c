@@ -587,10 +587,15 @@ void init_curses (void)
     initscr();
 #ifdef HAVE_ESCDELAY
     /*
-     * If ncurses exports the ESCDELAY variable it should be set to 0
-     * or you'll have to press Esc three times to dismiss a dialog box.
+     * If ncurses exports the ESCDELAY variable, it should be set to
+     * a low value, or you'll experience a delay in processing escape
+     * sequences that are recognized by mc (e.g. Esc-Esc).  On the other
+     * hand, making ESCDELAY too small can result in some sequences
+     * (e.g. cursor arrows) being reported as separate keys under heavy
+     * processor load, and this can be a problem if mc hasn't learned
+     * them in the "Learn Keys" dialog.  The value is in milliseconds.
      */
-    ESCDELAY = 0;
+    ESCDELAY = 200;
 #endif /* HAVE_ESCDELAY */
     do_enter_ca_mode ();
     mc_raw_mode ();
