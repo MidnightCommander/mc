@@ -1,3 +1,8 @@
+2001-08-17  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.lib: Add "delete=\e[3~" for xterm and xterm-color -
+	it's sometimes missing from the databases.
+
 2001-08-16  Abel Cheung  <maddog@linux.org.hk>
 
 	* lib/mc.hint.zh_TW.Big5 -> lib/mc.hint.zh: Temporary measure.
