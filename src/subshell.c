@@ -39,6 +39,7 @@
 #include <string.h>	/* strstr(), strcpy(), etc.	      */
 #include <signal.h>	/* sigaction(), sigprocmask(), etc.   */
 #include <sys/stat.h>	/* Required by dir.h & panel.h below  */
+#include <ctype.h>	/* isalnum() */
 
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>	/* For pipe, fork, setsid, access etc */
@@ -752,8 +753,8 @@ subshell_name_quote (const char *s)
 
     /* Prevent interpreting leading `-' as a switch for `cd' */
     if (*s == '-') {
-        *d++ = '.';
-        *d++ = '/';
+	*d++ = '.';
+	*d++ = '/';
     }
 
     /* echo in tcsh doesn't understand the "-e" option */
@@ -769,17 +770,28 @@ subshell_name_quote (const char *s)
 
     /*
      * Print every character in octal format with the leading backslash.
-     * tcsh and zsh may require 4-digit octals, bash doesn't like them.
+     * tcsh and zsh may require 4-digit octals, bash < 2.05b doesn't like them.
      */
     if (subshell_type == BASH) {
 	for (; *s; s++) {
-	    sprintf(d, "\\%03o", (unsigned char) *s);
-	    d += 4;
+	    /* Must quote numbers, so that they are not glued to octals */
+	    if (isalpha ((unsigned char) *s)) {
+		sprintf (d, "%c", (unsigned char) *s);
+		d += 1;
+	    } else {
+		sprintf (d, "\\%03o", (unsigned char) *s);
+		d += 4;
+	    }
 	}
     } else {
 	for (; *s; s++) {
-	    sprintf(d, "\\0%03o", (unsigned char) *s);
-	    d += 5;
+	    if (isalnum ((unsigned char) *s)) {
+		sprintf (d, "%c", (unsigned char) *s);
+		d += 1;
+	    } else {
+		sprintf (d, "\\0%03o", (unsigned char) *s);
+		d += 5;
+	    }
 	}
     }
 

@@ -1,9 +1,6 @@
 Before 4.6.0-pre2
 =================
 
-Use paranoid quoting in subshell_name_quote() only when absolutely
-necessary - it's slow, especially in UTF-8 locales.
-
 Don't allow stdout and stderr from extfs scripts pollute the screen.
 
 reimplement "-P" in a safer way (temp file instead of stdout) - possibly

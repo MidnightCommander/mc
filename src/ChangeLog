@@ -1,5 +1,8 @@
 2002-10-30  Pavel Roskin  <proski@gnu.org>
 
+	* subshell.c (subshell_name_quote): Don't quote numbers and
+	letters if possible and safe.
+
 	* charset.h: Provide new inline functions convert_to_display_c()
 	and convert_from_input_c().
 	* view.c: Include charset.h unconditionally, use new conversion
