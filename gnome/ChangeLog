@@ -1,5 +1,11 @@
 1999-02-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* glayout.c (my_app_create_menus): New function, used to create
+	our menus and set the realy properly, to make cpanel (ie,
+	current_panel) always consistent with what the user users.
+
+	So, no need to kill the tearoff menus in gmc now.
+
 	* gmount.c (is_block_device_mountable): compare the device name
 	here. 
 	

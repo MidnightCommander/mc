@@ -554,6 +554,55 @@ create_new_menu (GnomeApp *app, WPanel *panel)
 	g_free (file2);
 }
 
+/*
+ * This routine is a menu relay.
+ *
+ * This is called before the actual command specified in the GnomeUIInfo
+ * structure.  This allows me to select the panel (ie, set the global cpanel
+ * variable to which this menu is bound).
+ *
+ * This is important, as we can have a menu tearoffed.  And the current hack
+ * of setting cpanel on the focus-in event wont work.
+ *
+ */
+static void
+panel_menu_relay (GtkObject *object, WPanel *panel)
+{
+	void (*real_func)(GtkObject *object, WPanel *panel);
+	
+	real_func = gtk_object_get_user_data (object);
+	set_current_panel (panel);
+	(*real_func)(object, panel);
+}
+
+static void
+my_menu_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name, 
+			GnomeUIBuilderData *uibdata)
+{
+	gtk_object_set_user_data (GTK_OBJECT (uiinfo->widget), uiinfo->moreinfo);
+	gtk_signal_connect (GTK_OBJECT (uiinfo->widget), 
+			    signal_name, panel_menu_relay, uibdata->data ? 
+			    uibdata->data : uiinfo->user_data);
+}
+
+static void
+my_app_create_menus (GnomeApp *app, GnomeUIInfo *uiinfo, void *data)
+{
+	GnomeUIBuilderData uibdata;
+
+	g_return_if_fail (app != NULL);
+	g_return_if_fail (GNOME_IS_APP (app));
+	g_return_if_fail (uiinfo != NULL);
+
+	uibdata.connect_func = my_menu_signal_connect;
+	uibdata.data = data;
+	uibdata.is_interp = FALSE;
+	uibdata.relay_func = NULL;
+	uibdata.destroy_func = NULL;
+
+	gnome_app_create_menus_custom (app, uiinfo, &uibdata);
+}
+
 WPanel *
 create_container (Dlg_head *h, char *name, char *geometry)
 {
@@ -561,6 +610,7 @@ create_container (Dlg_head *h, char *name, char *geometry)
 	WPanel     *panel;
 	GtkWidget  *app, *vbox;
 	int        xpos, ypos, width, height;
+	GnomeUIInfo *uiinfo;
 
 	gnome_parse_geometry (geometry, &xpos, &ypos, &width, &height);
 	
@@ -584,9 +634,12 @@ create_container (Dlg_head *h, char *name, char *geometry)
 	gnome_app_set_contents (GNOME_APP (app), vbox);
 
 	if (desktop_wm_is_gnome_compliant == 1)
-		gnome_app_create_menus_with_data (GNOME_APP (app), gnome_panel_menu_without_desktop, panel);
+		uiinfo = gnome_panel_menu_without_desktop;
 	else
-		gnome_app_create_menus_with_data (GNOME_APP (app), gnome_panel_menu_with_desktop, panel);
+		uiinfo = gnome_panel_menu_with_desktop;
+
+
+	my_app_create_menus (GNOME_APP (app), uiinfo, panel);
 	
 	create_new_menu (GNOME_APP (app), panel);
 

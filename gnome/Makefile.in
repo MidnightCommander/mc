@@ -175,13 +175,8 @@ CORBA_GENERATED =		\
 	FileManager-skels.c	\
 	FileManager-common.c
 
-CORBA_SOURCES = 		\
-	gcorba.c
-
 $(CORBA_GENERATED): $(rootdir)/idl/FileManager.idl
 	orbit-idl `gnome-config --cflags idl` $(rootdir)/idl/FileManager.idl
-
-$(CORBA_SOURCES): $(CORBA_GENERATED)
 
 FileManager-impl.c: FileManager.h
 
@@ -199,6 +194,8 @@ DISTGNOME = \
 
 main-corba.o: main.c
 	$(CC) -c -DHAVE_CORBA $(CPPFLAGS) $(DEFS) $(CFLAGS) $< -o main-corba.o
+
+gcorba.o: gcorba.c $(CORBA_GENERATED)
 
 all: @mx@ Makefile mc.keys 
 
