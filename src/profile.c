@@ -53,7 +53,7 @@ typedef struct TProfile {
 static TProfile *Base = 0;
 
 static TProfile *
-find_loaded (char *FileName, TSecHeader ** section)
+find_loaded (const char *FileName, TSecHeader ** section)
 {
     TProfile *p = Base;
 
@@ -140,7 +140,7 @@ str_translate_newline_dup (char *s)
     return q;			/* not reached */
 }
 
-static TSecHeader *load (char *file)
+static TSecHeader *load (const char *file)
 {
     FILE *f;
     int state;
@@ -232,15 +232,27 @@ static TSecHeader *load (char *file)
 	} /* switch */
 	
     } /* while ((c = getc (f)) != EOF) */
-    if (c == EOF && state == KeyValue){
+
+    switch (state) {
+    case KeyValue:
 	*next = '\0';
 	SecHeader->Keys->Value = str_translate_newline_dup (CharBuffer);
+	break;
+    case OnSecHeader: {		/* Broken initialization file */
+	    TSecHeader *link = SecHeader->link;
+	    g_free (SecHeader);
+	    SecHeader = link;
+	    fprintf (stderr, "Warning: Corrupted initialization file `%s'\n",
+		     file);
+	    break;
+	}
     }
+
     fclose (f);
     return SecHeader;
 }
 
-static void new_key (TSecHeader *section, char *KeyName, char *Value)
+static void new_key (TSecHeader *section, const char *KeyName, const char *Value)
 {
     TKeys *key;
     
@@ -333,10 +345,10 @@ char *get_profile_string (const char *AppName, char *KeyName, char *Default,
 }
 
 int GetPrivateProfileInt (const char * AppName, char * KeyName, int Default,
-			   char * File)
+			  char * File)
 {
-    static char IntBuf [BUF_TINY];
-    static char buf [BUF_TINY];
+    char IntBuf [BUF_TINY];
+    char buf [BUF_TINY];
 
     g_snprintf (buf, sizeof (buf), "%d", Default);
     

@@ -1,3 +1,9 @@
+2003-01-20  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* profile.c (load): Handle corrupted section header.
+	Reported by skol@sbox.tugraz.at.
+	(GetPrivateProfileInt): Make intBuf and buf auto variables.
+
 2003-01-20  Pavel Roskin  <proski@gnu.org>
 
 	* screen.c (do_search): Use case-insensitive search if and only
