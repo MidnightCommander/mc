@@ -1,7 +1,6 @@
 /* Utilities for VFS modules.
 
-   Currently includes login and tcp open socket routines.
-   
+   Copyright (C) 1988, 1992 Free Software Foundation
    Copyright (C) 1995, 1996 Miguel de Icaza
    
    This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
    You should have received a copy of the GNU Library General Public
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
-
-/* Namespace: exports vfs_split_url */
 
 #include <config.h>
 #include <unistd.h>
@@ -36,6 +33,8 @@
 #include <arpa/inet.h>
 #endif
 #include <errno.h>
+#include <pwd.h>
+#include <grp.h>
 
 #include "utilvfs.h"
 
@@ -145,4 +144,66 @@ vfs_split_url (const char *path, char **host, char **user, int *port,
 
     g_free (pcopy);
     return retval;
+}
+
+/*
+ * Look up a user or group name from a uid/gid, maintaining a cache.
+ * FIXME, for now it's a one-entry cache.
+ * FIXME2, the "-993" is to reduce the chance of a hit on the first lookup.
+ * This file should be modified for non-unix systems to do something
+ * reasonable.
+ */
+
+#ifndef TUNMLEN
+#define TUNMLEN 256
+#endif
+#ifndef TGNMLEN
+#define TGNMLEN 256
+#endif
+
+#define myuid	( my_uid < 0? (my_uid = getuid()): my_uid )
+#define	mygid	( my_gid < 0? (my_gid = getgid()): my_gid )
+
+int
+finduid (char *uname)
+{
+    static int saveuid = -993;
+    static char saveuname[TUNMLEN];
+    static int my_uid = -993;
+
+    struct passwd *pw;
+
+    if (uname[0] != saveuname[0]	/* Quick test w/o proc call */
+	||0 != strncmp (uname, saveuname, TUNMLEN)) {
+	strncpy (saveuname, uname, TUNMLEN);
+	pw = getpwnam (uname);
+	if (pw) {
+	    saveuid = pw->pw_uid;
+	} else {
+	    saveuid = myuid;
+	}
+    }
+    return saveuid;
+}
+
+int
+findgid (char *gname)
+{
+    static int savegid = -993;
+    static char savegname[TGNMLEN];
+    static int my_gid = -993;
+
+    struct group *gr;
+
+    if (gname[0] != savegname[0]	/* Quick test w/o proc call */
+	||0 != strncmp (gname, savegname, TUNMLEN)) {
+	strncpy (savegname, gname, TUNMLEN);
+	gr = getgrnam (gname);
+	if (gr) {
+	    savegid = gr->gr_gid;
+	} else {
+	    savegid = mygid;
+	}
+    }
+    return savegid;
 }

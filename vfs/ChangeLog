@@ -1,5 +1,11 @@
 2003-10-16  Pavel Roskin  <proski@gnu.org>
 
+	* names.c: Merge ...
+	* utilvfs.c: ... here.
+	* names.h: Merge ...
+	* utilvfs.h: ... here.
+	* Makefile.am: Remove references to names.c and names.h.
+
 	* xdirentry.h: Rename vfs_s_data to vfs_s_subclass.
 	* cpio.c: Initialize only non-zero fields in vfs_s_subclass.
 	* fish.c: Likewise.

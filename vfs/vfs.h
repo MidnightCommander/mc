@@ -201,13 +201,6 @@ int vfs_parse_filedate (int idx, time_t * t);
 void vfs_die (const char *msg);
 char *vfs_get_password (char *msg);
 
-/* Flags for vfs_split_url() */
-#define URL_ALLOW_ANON 1
-#define URL_NOSLASH 2
-
-char *vfs_split_url (const char *path, char **host, char **user, int *port,
-		     char **pass, int default_port, int flags);
-
 #ifdef WITH_SMBFS
 /* Interface for requesting SMB credentials.  */
 struct smb_authinfo {

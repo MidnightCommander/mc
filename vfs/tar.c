@@ -29,7 +29,6 @@
 
 #include "../src/dialog.h"	/* For MSG_ERROR */
 #include "tar.h"
-#include "names.h"
 
 static struct vfs_class vfs_tarfs_ops;
 

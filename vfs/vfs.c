@@ -49,7 +49,6 @@
 
 #include "vfs.h"
 #include "extfs.h"		/* FIXME: we should not know anything about our modules */
-#include "names.h"
 #ifdef USE_NETCODE
 #   include "tcputil.h"
 #endif

@@ -17,7 +17,6 @@ BASICFILES = 			\
 	direntry.c		\
 	extfs.c 		\
 	local.c 		\
-	names.c			\
 	tar.c			\
 	sfs.c			\
 	vfs.c
@@ -28,7 +27,6 @@ VFSHDRS = 			\
 	local.h			\
 	mcfs.h 			\
 	mcfsutil.h 		\
-	names.h 		\
 	smbfs.h			\
 	tar.h 			\
 	tcputil.h 		\
