@@ -109,6 +109,16 @@ void free (void *ptr);
 #define MOUNTED_GETMNTTBL
 #endif
 
+/* A mount table entry. */
+struct mount_entry
+{
+  char *me_devname;		/* Device node pathname, including "/dev/". */
+  char *me_mountdir;		/* Mount point directory pathname. */
+  char *me_type;		/* "nfs", "4.2", etc. */
+  dev_t me_dev;			/* Device number of me_mountdir. */
+  struct mount_entry *me_next;
+};
+
 #ifdef HAVE_INFOMOUNT_LIST
 
 static struct mount_entry *mount_list = NULL;
@@ -173,7 +183,8 @@ static char *fstype_to_string (short t)
 #endif /* MOUNTED_GETMNTINFO && !HAVE_F_FSTYPENAME */
 
 #ifdef MOUNTED_VMOUNT		/* AIX.  */
-static char *fstype_to_string (int t)
+static char *
+fstype_to_string (int t)
 {
     struct vfs_ent *e;
 
@@ -192,7 +203,8 @@ static char *fstype_to_string (int t)
    If ALL_FS is zero, do not return entries for filesystems that
    are automounter (dummy) entries.  */
 
-struct mount_entry *read_filesystem_list (int need_fs_type, int all_fs)
+static struct mount_entry *
+read_filesystem_list (int need_fs_type, int all_fs)
 {
     struct mount_entry *mlist;
     struct mount_entry *me;
@@ -483,7 +495,8 @@ struct mount_entry *read_filesystem_list (int need_fs_type, int all_fs)
 ** this hack.
 */
 
-struct mount_entry *read_filesystem_list(int need_fs_type, int all_fs)
+static struct mount_entry *
+read_filesystem_list(int need_fs_type, int all_fs)
 {
 	struct _disk_entry	de;
 	struct statfs		fs;
@@ -543,14 +556,16 @@ struct mount_entry *read_filesystem_list(int need_fs_type, int all_fs)
 }
 #endif /* HAVE_INFOMOUNT_QNX */
 
-void init_my_statfs (void)
+void
+init_my_statfs (void)
 {
 #ifdef HAVE_INFOMOUNT_LIST
     mount_list = read_filesystem_list (1, 1);
 #endif /* HAVE_INFOMOUNT_LIST */
 }
 
-void my_statfs (struct my_statfs *myfs_stats, char *path)
+void
+my_statfs (struct my_statfs *myfs_stats, char *path)
 {
 #ifdef HAVE_INFOMOUNT_LIST
     int i, len = 0;

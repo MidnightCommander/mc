@@ -1,5 +1,8 @@
 2002-08-18  Pavel Roskin  <proski@gnu.org>
 
+	* mountlist.h: Move some internals ...
+	* mountlist.c: ... here.
+
 	* main.c: Remove extremely unsafe and poorly designed support
 	for /tmp/mc.$PID.control file.
 	* util.c (my_putenv): Remove, it's unused now.
