@@ -389,12 +389,17 @@ panel_file_list_configure_contents (GtkWidget *sw, WPanel *panel, int main_width
 	 * and compute how much space we lost to the column decorations
 	 */
 	lost_pixels = used_columns = expandables = items = 0;
+	char_width = gdk_string_width (sw->style->font, "xW") / 2;
 	for (format = panel->format; format; format = format->next) {
 		format->field_len = format->requested_field_len;
 		if (!format->use_in_gui)
 			continue;
 
-		used_columns += format->field_len;
+		if (format->use_in_gui == 2)
+			used_columns += 2;
+		else
+			used_columns += format->field_len;
+		
 		items++;
 		if (format->expand)
 			expandables++;
@@ -409,7 +414,6 @@ panel_file_list_configure_contents (GtkWidget *sw, WPanel *panel, int main_width
 		lost_pixels += scrollbar_space + scrollbar_width;
 	}
 
-	char_width = gdk_string_width (sw->style->font, "xW") / 2;
 	width = main_width - lost_pixels;
 
 	extra_pixels  = width % char_width;
@@ -463,13 +467,16 @@ panel_file_list_press_row (GtkWidget *file_list, GdkEvent *event, WPanel *panel)
 	/* FIXME: This is still very broken. */
 	if (event->type == GDK_BUTTON_PRESS && event->button.button == 3) {
 		gint row, column;
+
 		gtk_clist_get_selection_info (GTK_CLIST (file_list),
 					      event->button.x, event->button.y,
 					      &row, &column);
+		gtk_clist_select_row (GTK_CLIST (file_list), row, 0);
 		gpopup_do_popup ((GdkEventButton *) event, panel, NULL, row, panel->dir.list[row].fname);
 	}
 	return TRUE;
 }
+
 static void
 panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent *event, WPanel *panel)
 {
@@ -481,13 +488,8 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 
 	if (!event)
 		return;
-	
+
 	switch (event->type) {
-	case GDK_BUTTON_PRESS:
-		if (event->button.button == 3)
-			gpopup_do_popup ((GdkEventButton *) event, panel, NULL, row, panel->dir.list[row].fname);
-		break;
-		
 	case GDK_BUTTON_RELEASE:
 		if (event->button.button == 2){
 			char *fullname;
@@ -1288,10 +1290,10 @@ panel_create_file_list (WPanel *panel)
 	gtk_signal_connect (GTK_OBJECT (file_list), "unselect_row",
 			    GTK_SIGNAL_FUNC (panel_file_list_unselect_row),
 			    panel);
-#if 0
-	gtk_signal_connect (GTK_OBJECT (file_list), "button_press_event",
-			    GTK_SIGNAL_FUNC (panel_file_list_press_row),
-			    panel);
+#if 1
+	gtk_signal_connect_after (GTK_OBJECT (file_list), "button_press_event",
+				  GTK_SIGNAL_FUNC (panel_file_list_press_row),
+				  panel);
 #endif
 	gtk_clist_set_button_actions (GTK_CLIST (file_list), 1, GTK_BUTTON_SELECTS | GTK_BUTTON_DRAGS);
 	gtk_clist_set_button_actions (GTK_CLIST (file_list), 2, GTK_BUTTON_SELECTS);
@@ -1413,18 +1415,6 @@ panel_icon_renamed (GtkWidget *widget, int index, char *dest, WPanel *panel)
 		return FALSE;
 }
 
-static void
-load_imlib_icons (void)
-{
-	static int loaded;
-
-	if (loaded)
-		return;
-
-	loaded = 1;
-}
-
-
 /*
  * Strategy for activaing the drags from the icon-list:
  *
@@ -1494,7 +1484,6 @@ panel_create_icon_display (WPanel *panel)
 
 	/* Setup the icons and DnD */
 
-	load_imlib_icons ();
 	load_dnd_icons ();
 
 	gtk_drag_dest_set (GTK_WIDGET (ilist),

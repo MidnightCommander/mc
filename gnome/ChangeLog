@@ -1,3 +1,11 @@
+1999-02-03  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (panel_file_list_configure_contents): Make the icon on
+	the type column be displayed.
+	(panel_file_list_select_row): Removed dead code.
+	(panel_file_list_press_row): Select the row before calling
+	gpopup_do_popup. 
+
 1999-02-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gscreen.c (drop_types): Allow dropping URLs on file panels.
