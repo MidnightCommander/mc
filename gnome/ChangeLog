@@ -1,3 +1,9 @@
+1999-10-06  Jonathan Blandford  <jrb@redhat.com>
+
+	* gpopup2.c (create_actions): Now the Mount/Unmount/Eject device
+	code will be lumped together with the other MIME_ACTIONS, even
+	thought they're not controlled there.
+
 1999-10-06  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* gmain.c, gmain.h: removed disable_root_warning. This variable

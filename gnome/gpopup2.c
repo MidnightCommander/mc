@@ -78,6 +78,7 @@ static void handle_edit_symlink (GtkWidget *widget, WPanel *panel);
 static gboolean check_mount_func (WPanel *panel, DesktopIconInfo *dii);
 static gboolean check_unmount_func (WPanel *panel, DesktopIconInfo *dii);
 static gboolean check_eject_func (WPanel *panel, DesktopIconInfo *dii);
+static gboolean check_device_func (WPanel *panel, DesktopIconInfo *dii);
 
 static gchar * get_full_filename (WPanel *panel);
 
@@ -179,17 +180,25 @@ check_eject_func (WPanel *panel, DesktopIconInfo *dii)
 	g_free (full_name);
 	return retval;
 }
+static gboolean
+check_device_func (WPanel *panel, DesktopIconInfo *dii)
+{
+	return (check_mount_func (panel, dii) ||
+		check_unmount_func (panel, dii) ||
+		check_eject_func (panel, dii));
+}
 
 /* global vars */
 extern int we_can_afford_the_speed;
 
 static struct action file_actions[] = {
 	{ N_("Open"),			F_NOTDEV | F_SINGLE,			handle_open,		NULL },
+	{ "",				F_NOTDEV | F_SINGLE,			NULL, 			NULL },
 	{ N_("Mount device"),		F_ALL | F_SINGLE,			handle_mount,		check_mount_func },
 	{ N_("Unmount device"),		F_ALL | F_SINGLE,			handle_unmount,		check_unmount_func },
 	{ N_("Eject device"),		F_ALL | F_SINGLE,			handle_eject,		check_eject_func },
-	{ "",				F_NOTDEV | F_SINGLE,			NULL, 			NULL },
-	{ "",				F_MIME_ACTIONS | F_SINGLE,		NULL, 			NULL },
+	/* Custom actions go here */
+	{ "",				F_MIME_ACTIONS | F_SINGLE,		NULL, 			check_device_func },
 	{ N_("Open with..."),		F_REGULAR | F_SINGLE, 			handle_open_with, 	NULL },
 	{ N_("View"),			F_REGULAR | F_SINGLE, 			handle_view, 		NULL },
 	{ N_("View Unfiltered"),	F_REGULAR | F_ADVANCED | F_SINGLE,	handle_view_unfiltered, NULL },
@@ -444,7 +453,15 @@ create_actions (GtkWidget *menu, gint flags, WPanel *panel, DesktopIconInfo *dii
 	for (action = file_actions; action->text; action++) {
 		/* Insert the MIME actions if appropriate */
 		if ((action->flags & F_MIME_ACTIONS) && (flags & F_SINGLE)) {
+			int curpos = pos;
 			pos = create_mime_actions (menu, panel, pos, dii);
+			/* Why do we do this?  If the mime actions are there, and it's mountable,
+			 * we can count on the separator at the end of the mime_actions
+			 * menu.  However, if the mime_actions aren't there, we need a separator */
+			if (pos == curpos && (action->func)(panel, dii)) {
+				uiinfo[0].type = GNOME_APP_UI_SEPARATOR;
+				fill_menu (GTK_MENU_SHELL (menu), uiinfo, pos++);
+			}
 			continue;
 		}
 
