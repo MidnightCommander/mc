@@ -43,7 +43,7 @@ struct utimbuf {
 #endif
 
 /*
- * The following line is needed, because as usual, AIX polutes every single
+ * The following line is needed, because as usual, AIX pollutes every single
  * name space they can get their hands on
  */
 #undef vfs_type
@@ -204,7 +204,7 @@ struct utimbuf {
 	int   mc_open  (const char *filename, int flags, ...);
 	int   mc_close (int handle);
 	int   mc_read  (int handle, char *buffer, int count);
-	int   mc_write (int hanlde, char *buffer, int count);
+	int   mc_write (int handle, char *buffer, int count);
 	off_t mc_lseek (int fd, off_t offset, int whence);
 	int   mc_chdir (char *);
 
@@ -367,7 +367,7 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
 #define URL_NOSLASH 2
 extern void vfs_print_stats (char *fs_name, char *action, char *file_name, int have, int need);
 
-/* Dont use values 0..4 for a while -- 10/98, pavel@ucw.cz */
+/* Don't use values 0..4 for a while -- 10/98, pavel@ucw.cz */
 #define MCCTL_REMOVELOCALCOPY   5
 #define MCCTL_IS_NOTREADY	6
 #define MCCTL_FORGET_ABOUT	7
@@ -417,7 +417,7 @@ extern void mc_vfs_done( void );
 /* O_LINEAR is strange beast, be carefull. If you open file asserting
  * O_RDONLY | O_LINEAR, you promise:
  *
- *     	a) to read file linearily from beggining to the end
+ *     	a) to read file linearly from beginning to the end
  *	b) not to open another file before you close this one
  *		(this will likely go away in future)
  *	as a special gift, you may
