@@ -558,9 +558,7 @@ help_help_cmd (Dlg_head *h)
     history [history_ptr].link = selected_item;
     currentpoint = startpoint = search_string (data, "[How to use help]") + 1;
     selected_item = NULL;
-#ifndef HAVE_XVIEW    
     help_callback (h, 0, DLG_DRAW);
-#endif    
 }
 
 static void
@@ -578,9 +576,7 @@ help_index_cmd (Dlg_head *h)
     else
 	currentpoint = startpoint = new_item + 1;
     selected_item = NULL;
-#ifndef HAVE_XVIEW    
     help_callback (h, 0, DLG_DRAW);
-#endif    
 }
 
 static void quit_cmd (void *x)
@@ -596,9 +592,7 @@ static void prev_node_cmd (Dlg_head *h)
     if (history_ptr < 0)
 	history_ptr = HISTORY_SIZE-1;
     
-#ifndef HAVE_XVIEW    
     help_callback (h, 0, DLG_DRAW);
-#endif    
 }
 
 static int md_callback (Dlg_head *h, Widget *w, int msg, int par)

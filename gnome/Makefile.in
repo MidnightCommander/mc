@@ -4,11 +4,13 @@ VPATH = @srcdir@
 rootdir = $(srcdir)/..
 @MCFG@@MCF@
 
-CFLAGS =   $(XCFLAGS) @X_CFLAGS@
-CPPFLAGS = $(XCPPFLAGS) -I$(vfsdir) -I$(slangdir) -DHAVE_X -DHAVE_GNOME @GNOME_INCLUDEDIR@ 
-LDFLAGS = $(XLDFLAGS) @GNOME_LIBDIR@ @GNOMEUI_LIBS@
+GNOMEDEFS     = -DHAVE_X -DHAVE_GNOME @GNOME_INCLUDEDIR@ 
+CFLAGS        = $(XCFLAGS) @X_CFLAGS@
+CPPFLAGS      = $(XCPPFLAGS) -I$(vfsdir) -I$(slangdir) $(GNOMEDEFS)
+LDFLAGS       = $(XLDFLAGS) @GNOME_LIBDIR@ @GNOMEUI_LIBS@
+CORBA_LDFLAGS = $(XLDFLAGS) @GNOME_LIBDIR@ @GNOMEGNORBA_LIBS@
 DEFS = $(XDEFS)
-LIBS = @X_EXTRA_LIBS@ -lX11 @X_PRE_LIBS@ $(XLIBS) $(XLIB) @TERMNET@
+LIBS = $(XLIBS) @TERMNET@ 
 EXTRALIBS = @LVFS@ -lgtkedit @LINTL@
 INSTALL = @INSTALL@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -83,7 +85,7 @@ LOBJS = mad.o
 #
 # These objects from ../src do depend on HAVE_GNOME
 #
-OOBJS = main.o dlg.o screen.o widget.o wtools.o info.o boxes.o \
+OOBJS = dlg.o screen.o widget.o wtools.o info.o boxes.o \
 	file.o find.o dialog.o key.o chmod.o chown.o view.o \
 	panelize.o hotlist.o background.o dir.o util.o \
 	win.o color.o profile.o user.o ext.o setup.o \
@@ -118,6 +120,13 @@ OBJS = $(LOBJS) $(OOBJS) \
 	gtkdtree.o	\
 	gwidget.o
 
+NORMALOBJS =		\
+	main.o
+
+CORBAOBJS = 		\
+	main-corba.o
+
+
 #
 # Distribution variables
 #
@@ -131,10 +140,28 @@ PIXMAPS =			\
 	dir-close.xpm		\
 	dir-open.xpm
 
-DISTGNOME = Makefile.in gnome.TODO layout $(PIXMAPS) $(ICONS) $(GNOMESRCS) $(GNOMEHDRS) 
+CORBA_GENERATED =		\
+	FileManager.h		\
+	FileManager-stubs.c	\
+	FileManager-skels.c	\
+	FileManager-common.c
+
+CORBA_SOURCES = FileManager-impl.c
+
+$(CORBA_GENERATED): $(rootdir)/idl/FileManager.idl
+
+FileManager-impl.c: FileManager.h
+
+DISTGNOME = \
+	Makefile.in gnome.TODO layout gmc.gnorba 	\
+	$(PIXMAPS) $(ICONS) $(GNOMESRCS) $(GNOMEHDRS) 	\
+	$(CORBA_SOURCES)
 
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<
+
+main-corba.o: main.c
+	$(CC) -c -DHAVE_CORBA $(CPPFLAGS) $(DEFS) $(CFLAGS) $< -o main-corba.o
 
 all: @gmc@ Makefile
 
@@ -144,9 +171,12 @@ Makefile: Makefile.in ../config.status
 gmc: checklinks 
 	$(MAKE) mx
 
-mx: @LIBVFS@ $(OBJS) @LIBSLANG@ libgtkedit.a
-	$(CC) $(LDFLAGS) -o gmc $(OBJS) -L../vfs -L../slang -L../gtkedit $(EXTRALIBS) $(LIBS) 
+mx: @LIBVFS@ $(OBJS) $(NORMALOBJS) @LIBSLANG@ libgtkedit.a
+	$(CC) $(LDFLAGS) -o gmc $(NORMALOBJS) $(OBJS) -L../vfs -L../slang -L../gtkedit $(EXTRALIBS) $(LIBS) 
 	touch mx
+
+corba-gmc: @LIBVFS@ $(OBJS) $(CORBAOBJS) @LIBSLANG@ libgtkedit.a
+	$(CC) $(CORBA_LDFLAGS) -o gmc $(CORBAOBJS) $(OBJS) -L../vfs -L../slang -L../gtkedit $(EXTRALIBS) $(LIBS) 
 
 @LIBVFS@:
 	cd ../vfs; $(MAKE) @LIBVFS@

@@ -1,3 +1,8 @@
+1998-12-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* direntry.c (vfs_s_insert_super): This routine does not return
+	anything. 
+
 1998-12-02  Sebastian Wilhelmi  <wilhelmi@ira.uka.de>
 
 	* fish.c (FISH_OP): changed snprintf to g_snprintf, as glib is

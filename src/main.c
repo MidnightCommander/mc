@@ -79,6 +79,10 @@
 #include <fcntl.h>	/* For O_RDWR */
 #include <signal.h>
 
+#ifdef HAVE_CORBA
+#    include <libgnorba/gnorba.h>
+#endif
+
 /* Program include files */
 #include "x.h"
 #include "mad.h"
@@ -1276,10 +1280,8 @@ static menu_entry CmdMenu [] = {
     { ' ', N_("&Directory tree"),               'D', tree_box },
 #endif
     { ' ', N_("&Find file            M-?"),     'F', find_cmd },
-#ifndef HAVE_XVIEW    
     { ' ', N_("s&Wap panels          C-u"),     'W', swap_cmd },
     { ' ', N_("switch &Panels on/off C-o"),     'P', view_other_cmd },
-#endif    
     { ' ', N_("&Compare directories  C-x d"),   'C', compare_dirs_cmd },
     { ' ', N_("e&Xternal panelize    C-x !"),   'X', external_panelize },
 #ifdef HAVE_DUSUM
@@ -1342,7 +1344,6 @@ init_menu (void)
     MenuBar [1] = create_menu (_(" &File "), FileMenu, menu_entries (FileMenu));
     MenuBar [2] = create_menu (_(" &Command "), CmdMenu, menu_entries (CmdMenu));
     MenuBar [3] = create_menu (_(" &Options "), OptMenu, menu_entries (OptMenu));
-#ifndef HAVE_XVIEW
 #ifdef HAVE_X
     MenuBar [4] = create_menu (_(" &Right "), RightMenu, menu_entries (PanelMenu));
 #else
@@ -1351,7 +1352,6 @@ init_menu (void)
     for (i = 0; i < 5; i++)
 	MenuBarEmpty [i] = create_menu (MenuBar [i]->name, 0, 0);
 #endif /* HAVE_X */
-#endif /* ! HAVE_XVIEW */
 }
 
 void
@@ -1359,15 +1359,10 @@ done_menu (void)
 {
     int i;
 
-#ifndef HAVE_XVIEW
     for (i = 0; i < 5; i++){
 	destroy_menu (MenuBar [i]);
 #ifndef HAVE_X
 	destroy_menu (MenuBarEmpty [i]);
-#endif
-#else
-    for (i = 0; i < 4; i++){
-	destroy_menu (MenuBar [i]);
 #endif
     }
 }
@@ -1532,12 +1527,7 @@ create_panels (void)
     the_hint->widget.cols = COLS;
 #endif
     
-#ifndef HAVE_XVIEW
     the_menubar = menubar_new (0, 0, COLS, MenuBar, 5);
-#else
-    the_menubar = menubar_new (0, 0, COLS, MenuBar + 1, 3);
-    the_bar2    = buttonbar_new (keybar_visible);
-#endif
 }
 #endif
 
@@ -1692,7 +1682,6 @@ init_labels (Widget *paneletc)
     define_label (midnight_dlg, paneletc, 10, _("Quit"), (voidfn) quit_cmd);
 }
 
-#ifndef HAVE_XVIEW
 static key_map ctl_x_map [] = {
     { XCTRL('c'),   (callfn) quit_cmd },
 #ifdef USE_VFS
@@ -1788,7 +1777,6 @@ static key_map default_map [] = {
     { XCTRL('g'), nothing },
     { 0, 0 },
 };
-#endif
 
 #ifndef HAVE_X
 static void setup_sigwinch ()
@@ -1936,8 +1924,6 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
     int i;
     
     switch (msg){
-#ifndef HAVE_XVIEW
-
 	/* Speed up routine: now, we just set the  */
     case DLG_PRE_EVENT:
 	make_panels_dirty ();
@@ -2043,7 +2029,6 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	}
 	return MSG_NOT_HANDLED;
 	
-#endif
 #ifndef HAVE_X
 	/* We handle the special case of the output lines */
     case DLG_DRAW:
@@ -2078,10 +2063,6 @@ xtoolkit_panel_setup ()
     the_prompt->widget.area = AREA_BOTTOM;
     the_bar->widget.wcontainer = containers [0];
     the_bar->widget.area = AREA_TOP;
-#ifdef HAVE_XVIEW
-    the_bar2->widget.wcontainer = containers [1];
-    the_bar2->widget.area = AREA_TOP;
-#endif
     get_panel_widget (0)->wcontainer = containers [0];
     get_panel_widget (0)->area = AREA_RIGHT;
     get_panel_widget (1)->wcontainer = containers [1];
@@ -2126,18 +2107,14 @@ setup_panels_and_run_mc ()
     int first, second;
 
     xtoolkit_panel_setup ();
-    tk_new_frame (midnight_dlg, "p.");
 #ifndef HAVE_X
     add_widget (midnight_dlg, the_hint);
 #endif /* HAVE_X */
     load_hint ();
     add_widgetl (midnight_dlg, cmdline, XV_WLAY_RIGHTOF);
     add_widgetl (midnight_dlg, the_prompt, XV_WLAY_DONTCARE);
-    tk_end_frame ();
     add_widget (midnight_dlg, the_bar);
-#ifdef HAVE_XVIEW
-    add_widget (midnight_dlg, the_bar2);
-#endif
+
     if (boot_current_is_left){
 	first = 1;
 	second = 0;
@@ -2623,7 +2600,7 @@ char *cmdline_geometry = NULL;
 int   nowindows = 0;
 char **directory_list = NULL;
 
-static struct poptOption argumentTable[] = {
+static struct poptOption argument_table [] = {
 #ifdef WITH_BACKGROUND
     { "background",	'B', POPT_ARG_NONE, 	&background_wait, 	 0 },
 #endif
@@ -2682,13 +2659,22 @@ handle_args (int argc, char *argv [])
 {
     char   *tmp, *option_arg, *base;
     int    c;
-    poptContext   optCon;
+    poptContext   ctx;
 
 #ifdef HAVE_GNOME
-    gnome_init_with_popt_table ("gmc", VERSION, argc, argv, argumentTable, 0, &optCon);
-    poptResetContext(optCon);
+#ifdef HAVE_CORBA
+    CORBA_Environment ev;
+
+    CORBA_exception_init (&ev);
+
+    gnome_CORBA_init_with_popt_table (
+	    "gmc", VERSION, &argc, argv, argument_table, 0, &ctx, 0, &ev);
 #else
-    optCon = poptGetContext ("mc", argc, argv, argumentTable, 0);
+    gnome_init_with_popt_table ("gmc", VERSION, argc, argv, argument_table, 0, &ctx);
+#endif
+    poptResetContext (ctx);
+#else
+    ctx = poptGetContext ("mc", argc, argv, argument_table, 0);
 #endif
 
 #ifndef HAVE_X
@@ -2697,8 +2683,8 @@ handle_args (int argc, char *argv [])
 #endif
 #endif
     
-    while ((c = poptGetNextOpt (optCon)) > 0) {
-	option_arg = poptGetOptArg(optCon);
+    while ((c = poptGetNextOpt (ctx)) > 0){
+	option_arg = poptGetOptArg (ctx);
 
 	process_args (c, option_arg);
     }
@@ -2706,18 +2692,19 @@ handle_args (int argc, char *argv [])
     if (c < -1){
 	print_mc_usage ();
 	fprintf(stderr, "%s: %s\n", 
-		poptBadOption(optCon, POPT_BADOPTION_NOALIAS), 
-		poptStrerror(c));
+		poptBadOption (ctx, POPT_BADOPTION_NOALIAS), 
+		poptStrerror (c));
 	finish_program = 1;
     }
 
     probably_finish_program ();
 
-    /* Check for special invocation names mcedit and mcview,
+    /*
+     * Check for special invocation names mcedit and mcview,
      * if none apply then set the current directory and the other
      * directory from the command line arguments
      */
-    tmp = poptGetArg (optCon);
+    tmp = poptGetArg (ctx);
     base = x_basename (argv[0]);
     if (!STRNCOMP (base, "mce", 3) || !STRCOMP(base, "vi")) {
 	edit_one_file = "";
@@ -2733,13 +2720,12 @@ handle_args (int argc, char *argv [])
     	    char buffer[MC_MAXPATHLEN + 2];
 	    this_dir = strdup (tmp);
 	    mc_get_current_wd (buffer, sizeof (buffer) - 2);
-	    if ((tmp = poptGetArg (optCon)))
+	    if ((tmp = poptGetArg (ctx)))
 	        other_dir = strdup (tmp);
 	}
     }
 
-
-    poptFreeContext(optCon);
+    poptFreeContext (ctx);
 }
 
 /*

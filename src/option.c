@@ -238,14 +238,6 @@ static void init_configure (void)
 	add_widgetl (conf_dlg, check_options [i+12].widget,
 	    XV_WLAY_BELOWCLOSE);
     }
-#ifdef HAVE_XVIEW
-     add_widgetl (conf_dlg, label_new (OY, OX + 1, _("Other options"), "label-other"),
-         XV_WLAY_NEXTCOLUMN);
-     add_widgetl (conf_dlg, label_new (RY, RX + 1, _("Pause after run..."), "label-pause"),
-         XV_WLAY_BELOWOF);
-     add_widgetl (conf_dlg, label_new (PY, PX + 1, _("Panel options"), "label-panel"),
-         XV_WLAY_NEXTCOLUMN);
-#endif
 }
 
 

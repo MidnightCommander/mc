@@ -793,8 +793,6 @@ void init_dlg (Dlg_head *h)
 {
     int refresh_mode;
 
-    tk_end_frame ();
-    
     /* Initialize dialog manager and widgets */
     (*h->callback) (h, 0, DLG_INIT);
     dlg_broadcast_msg (h, WIDGET_INIT, 0);
@@ -1021,54 +1019,6 @@ int dlg_select_nth_widget (Dlg_head *h, int n)
 
     return dlg_select_widget (h, w->widget);
 }
-
-#ifdef HAVE_TK
-/* Frames must include a trailing dot */
-static void tk_frame_proc (Dlg_head *h, char *frame, int new_frame)
-{
-    char *s = strdup (frame);
-    
-    if (frame [strlen (frame)-1] != '.'){
-	fprintf (stderr, "Invalid frame name\n");
-	exit (1);
-    }
-    s [strlen (frame)-1] = 0;
-    the_frame = frame;
-    
-    if (new_frame)
-	tk_evalf ("frame %s.%s", (char *)h->wdata, s);
-}
-
-/* If passed a null string, it returns */
-void tk_new_frame (Dlg_head *h, char *frame)
-{
-    if (!*frame)
-	return;
-    tk_frame_proc (h, frame, 1);
-}
-
-void tk_frame (Dlg_head *h, char *frame)
-{
-    tk_frame_proc (h, frame, 0);
-}
-
-void tk_end_frame ()
-{
-    the_frame = "";
-}
-#else
-void tk_new_frame (Dlg_head *h, char *x)
-{
-}
-
-void tk_frame (Dlg_head *h, char *x)
-{
-}
-
-void tk_end_frame (void)
-{
-}
-#endif
 
 #ifndef PORT_HAS_DIALOG_TITLE
 void

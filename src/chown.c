@@ -177,13 +177,11 @@ init_chown (void)
 
 #define XTRACT(i) BY+chown_but[i].y, BX+chown_but[i].x, chown_but[i].ret_cmd, chown_but[i].flags, _(chown_but[i].text), 0, 0, NULL
 
-    tk_new_frame (ch_dlg, "b.");
     for (i = 0; i < BUTTONS-single_set; i++)
 	add_widget (ch_dlg, button_new (XTRACT (i)));
 
     /* Add the widgets for the file information */
 #define LX(i) chown_label [i].y, chown_label [i].x, "", NULL
-    tk_new_frame (ch_dlg, "l.");
     for (i = 0; i < LABELS; i++){
 	chown_label [i].l = label_new (LX (i));
 	add_widget (ch_dlg, chown_label [i].l);
@@ -208,11 +206,8 @@ init_chown (void)
     }
     endgrent ();
     
-    tk_new_frame (ch_dlg, "f.");
     add_widget (ch_dlg, l_group);
-    tk_new_frame (ch_dlg, "g.");
     add_widget (ch_dlg, l_user);	/* add listboxes to the dialogs */
-    tk_end_frame ();
 }
 
 static void

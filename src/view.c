@@ -450,7 +450,6 @@ init_growing_view (WView *view, char *name, char *filename)
 	    return set_view_init_error (view, _(" Can't spawn child program "));
 	}
 
-#ifndef HAVE_XVIEW
 	/* First, check if filter produced any output */
 	get_byte (view, 0);
 	if (view->bytes_read <= 0){
@@ -459,7 +458,6 @@ init_growing_view (WView *view, char *name, char *filename)
 	    close_error_pipe (view->have_frame?-1:1, view->data);
 	    return set_view_init_error (view, _(" Empty output from child filter "));
 	}
-#endif
     } else {
         view->stdfile = NULL;
 	if ((view->file = mc_open (filename, O_RDONLY)) == -1)
@@ -2276,32 +2274,6 @@ view_mode_callback (struct Dlg_head *h, int id, int msg)
 {
     return default_dlg_callback (h, id, msg);
 }
-
-#ifdef HAVE_XVIEW
-/* Real view only */
-
-void
-view_adjust_size (Dlg_head *unused)
-{
-}
-
-int
-view (char *_command, char *_file, int *move_dir_p, int start_line)
-{
-    int midnight_colors [4];
-    int error;
-    WView      *wview;
-
-    wview = view_new (0, 0, COLS, LINES - 1, 0);
-
-    error = view_init (wview, _command, _file, start_line);
-    if (!error){
-	x_view (wview);	
-    }
-    *move_dir_p = 0;
-    return !error;
-}
-#endif
 
 #ifndef PORT_WANTS_VIEW
 void

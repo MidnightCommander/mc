@@ -217,13 +217,9 @@ void configure_colors_string (char *the_color_string)
 static void configure_colors (void)
 {
     extern char *command_line_colors;
-#ifndef HAVE_TK
-#ifndef HAVE_XVIEW
     extern char *default_edition_colors;
     
     configure_colors_string (default_edition_colors);
-#endif
-#endif
     configure_colors_string (setup_color_string);
     configure_colors_string (term_color_string);
     configure_colors_string (getenv ("MC_COLOR_TABLE"));

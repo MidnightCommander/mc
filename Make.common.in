@@ -18,6 +18,7 @@ manprefix =
 builddir   = @builddir@
 bindir     = @bindir@
 libdir     = $(exec_prefix)/lib/mc
+idldir     = $(prefix)/share/idl
 suppbindir = $(libdir)/bin
 tidir      = $(libdir)/term
 extfsdir   = $(libdir)/extfs

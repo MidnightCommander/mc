@@ -305,82 +305,6 @@ dnl ])
 
 AC_PATH_XTRA
 
-insticons=
-xvers="none"
-mxc=""
-AC_PATH_XVIEW_XTRA
-if test "x$no_xview" != "xyes"; then
-    mxc="mxc"
-    xvers="XView"
-    xvdep="xvdep"
-    insticons=install_icons
-    AC_SUBST(insticons)
-else
-    mxc=""
-    xvdep=""
-fi
-AC_SUBST(mxc)
-AC_SUBST(xvdep)
-
-xv_bindir=
-if test -n "$mxc"; then
-AC_ARG_WITH(xv-bindir, 
-        [--with-xv-bindir=dir  Specifies directory where to install XView version],[
-    if test x$withval = xyes; then
-	AC_MSG_WARN(Usage is: --with-xv-bindir=basedir)
-    else
-	if test x$withval = xno; then
-	    AC_MSG_WARN(Usage is: --with-xv-bindir=basedir)
-	else
-	    xv_bindir=$withval
-	fi
-    fi
-])
-if test x$xv_bindir = x; then
-    xv_bindir=`echo $xv_includes | sed s/include/bin/`
-    if test ! -x $xv_bindir/openwin; then
-        if test ! -x $xv_bindir/olwm; then
-            if test ! -x $xv_bindir/olvwm; then
-                xv_bindir=
-            fi    
-        fi
-    fi
-fi
-if test x$xv_bindir = x; then
-    if test "$OPENWINHOME"; then
-        xv_bindir=$OPENWINHOME/bin
-    else
-	AC_PATH_PROG(ac_my_xp, openwin)
-	if test x$ac_my_xp = x; then
-	    AC_PATH_PROG(ac_my_xp, X)
-	    if test x$ac_my_xp = x; then
-		xv_bindir=""
-	    else
-		xv_bindir=`basename $ac_my_xp`
- 	    fi
-	else
-	    xv_bindir=`basename $ac_my_xp`
-	fi
-    fi
-    if test ! -x $xv_bindir/openwin; then
-        if test ! -x $xv_bindir/olwm; then
-            if test ! -x $xv_bindir/olvwm; then
-		if test ! -x $xv_bindir/X; then
-                    xv_bindir=
-		fi
-            fi    
-        fi
-    fi
-fi
-if test x$xv_bindir = x; then
-    xv_bindir=$prefix/bin
-fi
-fi
-if test x$xv_bindir = xNONE/bin; then
-    xv_bindir=
-fi
-AC_SUBST(xv_bindir)
-
 dnl
 dnl Network related functions
 dnl
@@ -569,107 +493,6 @@ AC_ARG_WITH(hsc,
         fi
 )
 
-AC_DEFUN(TK_MSG,[
-    	if test x$xvers = xnone; then
-        	xvers="Tk"
-    	else
-       		xvers="XView+Tk"
-    	fi
-])
-
-dnl
-dnl Check for Tcl/Tk, should switch to Guile/Tk soon :-)
-dnl
-tkmc=""
-tk_includes=""
-tk_libs=""
-if test x$no_x != xyes; then
-    AC_ARG_WITH(tk, 
-        [--with-tk                  Use the Tk toolkit],[
-    if test x$withval = xyes; then
-	tkmc="tkmc"
-    fi])
-    AC_ARG_WITH(tk-includes,
-        [--with-tk-includes=dir     Specifies the Tcl/Tk header directory],[
-    if test x$withval = xyes; then
-	AC_MSG_WARN(Usage is: --with-tk-includes=dir)
-    else
-	if test x$withval = xno; then
-	    AC_MSG_WARN(Usage is: --with-tk-includes=dir)
-	else
-	    tk_includes="-I$withval"
-	    tkmc="tkmc"
-	fi
-    fi])
-    AC_ARG_WITH(tk-libraries,
-        [--with-tk-libraries=dir    Specifies the Tcl/Tk library directory],[
-    if test x$withval = xyes; then
-	AC_MSG_WARN(Usage is: --with-tk-libraries=dir)
-    else
-	if test x$withval = xno; then
-	    AC_MSG_WARN(Usage is: --with-tk-libraries=dir)
-	else
-	    tk_libs="-L$withval"
-	    tkmc="tkmc"
-	fi
-    fi])
-    if test -n "$tkmc"; then 
-        AC_CHECKING(for Tcl/Tk)
-        AC_CHECK_LIB(dl, dlopen, LIBS="$LIBS -ldl")
-        tk_headers_found=no
-        if test ! -n "$tk_includes"; then
-	    AC_CHECK_HEADER_IN_PATH(tcl.h, $include_additional_path, [
-	        AC_CHECK_HEADER_IN_PATH(tk.h, $include_additional_path, [
-		    tk_headers_found=yes
-		    if test -n "$ac_cv_header_in_path_tcl_h"; then
-			tk_includes="-I$ac_cv_header_in_path_tcl_h";
-		    fi
-		    if test -n "$ac_cv_header_in_path_tk_h"; then
-			if test "$ac_cv_header_in_path_tk_h" != "$ac_cv_header_in_path_tcl_h"; then
-			    tk_includes="$tk_includes -I$ac_cv_header_in_path_tk_h" 
-			fi
-		    fi
-	        ])
-	    ])
-        else
-	    tk_headers_found=yes
-        fi
-        if test $tk_headers_found = no; then
-	    tkmc=""
-        else
-	    tk_libs_found=no
-	    ac_save_tk_LIBS="$LIBS"
-	    ac_save_tk_LDFLAGS="$LDFLAGS"
-	    LIBS="$X_EXTRA_LIBS -lX11 $X_PRE_LIBS $LIBS"
-	    LDFLAGS="$LDFLAGS $X_LIBS"
-            if test ! -n "$tk_libs"; then
-		AC_CHECK_LIB(tcl, Tcl_Eval, [
-		    AC_CHECK_LIB(tk, Tk_CreateWindow, [
-		    tk_libs_found=yes
-		    ], , -ltcl -lm)
-		], , -lm)
-	    else
-		tk_libs_found=yes
-	    fi
-	    LDFLAGS="$ac_save_tk_LDFLAGS"
-	    LIBS="$ac_save_tk_LIBS"
-	    if test $tk_libs_found = no; then
-		tkmc=""
-	    fi
-	fi
-    fi
-fi
-if test -n "$tkmc"; then
-    TK_MSG
-    tkdep="tkdep"
-else
-    tkdep=""
-fi
-AC_SUBST(tkmc)
-AC_SUBST(tkdep)
-AC_SUBST(tk_includes)
-AC_SUBST(tk_libs)
-
 dnl
 dnl Check for Gnome
 dnl
@@ -691,6 +514,7 @@ GNOME_INIT_HOOK([
 AC_SUBST(gmc)
 AC_SUBST(gmcdep)
 AC_SUBST(libgtkedit)
+AC_SUBST(GNOMEGNORBA_LIBS)
 
 dnl
 dnl Check for the -mandoc package
@@ -1433,9 +1257,8 @@ VERSION
 doc/Makefile 
 vfs/Makefile:vfs/Make-mc.in
 lib/Makefile
-tk/Makefile 
 gnome/Makefile 
-xv/Makefile 
+idl/Makefile
 src/Makefile
 slang/Makefile 
 edit/Makefile 

@@ -1,0 +1,10 @@
+#include <factory.idl>
+
+module GNOME {
+	interface FileManagerFactory : Factory {
+
+	};
+
+	interface FileManager {
+	};
+};

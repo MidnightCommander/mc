@@ -478,14 +478,6 @@ static void init_layout (void)
 	check_options [i].widget = check_new (8 - i, 7 + first_width, XTRACT(i));
 	add_widgetl (layout_dlg, check_options [i].widget, XV_WLAY_BELOWCLOSE);
     }
-#ifdef HAVE_XVIEW
-    add_widgetl (layout_dlg, label_new (2, 7 + first_width, _("Other options"), "oo"),
-        XV_WLAY_NEXTCOLUMN);
-    add_widgetl (layout_dlg, label_new (8, 5, _("Highlight..."), "hl"),
-        XV_WLAY_NEXTCOLUMN);
-    add_widgetl (layout_dlg, label_new (2, 5, _("Panel split"), "ps"),
-        XV_WLAY_NEXTCOLUMN);
-#endif        
     check_options [8].widget = check_new (10, 6, XTRACT(8));
     add_widgetl (layout_dlg, check_options [8].widget, XV_WLAY_BELOWCLOSE);
     check_options [7].widget = check_new (9, 6, XTRACT(7));
@@ -663,10 +655,6 @@ setup_panels (void)
     }
 
     load_hint ();
-#ifdef HAVE_XVIEW
-    panel_do_cols (0);
-    panel_do_cols (1);
-#endif    
 }
 
 #else
@@ -979,9 +967,6 @@ void set_display_type (int num, int type)
 		    x = first_panel_size;
 	    }
 	}
-#ifdef HAVE_TK
-	tk_evalf ("container_clean %s", panel->widget.wcontainer);
-#endif
     }
 
     new_widget = 0;
@@ -1055,7 +1040,6 @@ void set_display_type (int num, int type)
 	    current_panel = num == 0 ? right_panel : left_panel;
 }
 
-#ifndef HAVE_XVIEW
 /* This routine is deeply sticked to the two panels idea.
    What should it do in more panels. ANSWER - don't use it
    in any multiple panels environment. */
@@ -1152,7 +1136,6 @@ void swap_panels ()
         panels [1].type = tmp_type;
     }
 }
-#endif
 
 int get_display_type (int index)
 {

@@ -220,13 +220,8 @@ create_op_win (FileOperation op, int with_eta)
     int minus = verbose ? 0 : 3;
     int eta_offset = with_eta ? (WX_ETA_EXTRA) / 2 : 0;
 
-#ifdef HAVE_XVIEW    
-    char *sixty = "                                                                                   ";
-    char *fifteen = "               ";
-#else
     char *sixty = "";
     char *fifteen = "";
-#endif
     
     file_progress_replace_result = 0;
     file_progress_recursive_result = 0;
@@ -246,7 +241,6 @@ create_op_win (FileOperation op, int with_eta)
     
     x_set_dialog_title (op_dlg, "");
 
-    tk_new_frame (op_dlg, "b.");
     add_widgetl (op_dlg, button_new (BY-minus, WX - 19 + eta_offset, FILE_ABORT,
 				     NORMAL_BUTTON, _("&Abort"), 0, 0, "abort"),
         XV_WLAY_RIGHTOF);
@@ -254,33 +248,28 @@ create_op_win (FileOperation op, int with_eta)
 				     NORMAL_BUTTON, _("&Skip"), 0, 0, "skip"),
         XV_WLAY_CENTERROW);
 
-    tk_new_frame (op_dlg, "2.");
     add_widgetl (op_dlg, ProgressGauge [2] = gauge_new (7, FCOPY_GAUGE_X, 0, 100, 0, "g-1"), 
         XV_WLAY_RIGHTOF);
     add_widgetl (op_dlg, ProgressLabel [2] = label_new (7, FCOPY_LABEL_X, fifteen, "l-1"), 
         XV_WLAY_NEXTROW);
     add_widgetl (op_dlg, bps_label = label_new (7, WX, "", "bps-label"), XV_WLAY_NEXTROW);
 
-        tk_new_frame (op_dlg, "1.");
     add_widgetl (op_dlg, ProgressGauge [1] = gauge_new (8, FCOPY_GAUGE_X, 0, 100, 0, "g-2"), 
         XV_WLAY_RIGHTOF);
     add_widgetl (op_dlg, ProgressLabel [1] = label_new (8, FCOPY_LABEL_X, fifteen, "l-2"), 
         XV_WLAY_RIGHTOF);
     add_widgetl (op_dlg, stalled_label = label_new (8, WX, "", "stalled"), XV_WLAY_NEXTROW);
 	
-    tk_new_frame (op_dlg, "0.");
     add_widgetl (op_dlg, ProgressGauge [0] = gauge_new (6, FCOPY_GAUGE_X, 0, 100, 0, "g-3"), 
         XV_WLAY_RIGHTOF);
     add_widgetl (op_dlg, ProgressLabel [0] = label_new (6, FCOPY_LABEL_X, fifteen, "l-3"), 
         XV_WLAY_RIGHTOF);
     add_widgetl (op_dlg, eta_label = label_new (6, WX, "", "eta_label"), XV_WLAY_NEXTROW);
     
-    tk_new_frame (op_dlg, "f1.");
     add_widgetl (op_dlg, FileString [1] = label_new (4, FCOPY_GAUGE_X, sixty, "fs-l-1"),
         XV_WLAY_RIGHTOF);
     add_widgetl (op_dlg, FileLabel [1] = label_new (4, FCOPY_LABEL_X, fifteen, "fs-l-2"), 
         XV_WLAY_NEXTROW);
-    tk_new_frame (op_dlg, "f0.");
     add_widgetl (op_dlg, FileString [0] = label_new (3, FCOPY_GAUGE_X, sixty, "fs-x-1"),
         XV_WLAY_RIGHTOF);
     add_widgetl (op_dlg, FileLabel [0] = label_new (3, FCOPY_LABEL_X, fifteen, "fs-x-2"), 
@@ -298,9 +287,6 @@ create_op_win (FileOperation op, int with_eta)
 void
 destroy_op_win (void)
 {
-#ifdef HAVE_XVIEW
-    xtoolkit_kill_dialog (op_dlg);
-#endif
     dlg_run_done (op_dlg);
     destroy_dlg (op_dlg);
 #ifndef HAVE_X
@@ -606,8 +592,6 @@ init_replace (enum OperationMode mode)
 	ADD_RD_LABEL(0, name_trunc (file_progress_replace_filename, rd_trunc - strlen (rd_widgets [0].text)), 0 );
 	ADD_RD_BUTTON(1);    
     
-    tk_new_frame (replace_dlg, "a.");
-
 	ADD_RD_BUTTON(2);
 	ADD_RD_BUTTON(3);
 	ADD_RD_BUTTON(4);
@@ -615,7 +599,6 @@ init_replace (enum OperationMode mode)
 	ADD_RD_LABEL(6,0,0);
 
     /* "this target..." widgets */
-    tk_new_frame (replace_dlg, "p.");
 	if (!S_ISDIR (d_stat->st_mode)){
 		if ((d_stat->st_size && s_stat->st_size > d_stat->st_size))
 			ADD_RD_BUTTON(7);
@@ -626,10 +609,8 @@ init_replace (enum OperationMode mode)
 	ADD_RD_BUTTON(10);
 	ADD_RD_LABEL(11,0,0);
     
-    tk_new_frame (replace_dlg, "i.");
 	ADD_RD_LABEL(12, file_date (d_stat->st_mtime), (int) d_stat->st_size);
 	ADD_RD_LABEL(13, file_date (s_stat->st_mtime), (int) s_stat->st_size);
-    tk_end_frame ();
 }
 
 FileProgressStatus
@@ -715,13 +696,11 @@ static QuickWidget fmd_widgets [] = {
       0/* &source_easy_patterns */, 0, XV_WLAY_BELOWCLOSE, "using-shell" },
     { quick_input, 3, 64, 3, FMDY, "", 58, 
       0, 0, 0, XV_WLAY_BELOWCLOSE, "input-def" },
-#ifndef HAVE_XVIEW      
 #define FMDI1 4
 #define FMDI2 5
 #define FMDC 3
     { quick_input, 3, 64, 6, FMDY, "", 58, 0, 
       0, 0, XV_WLAY_BELOWCLOSE, "input2" },
-#endif      
 #define FMDI0 6	  
     { quick_label, 3, 64, 2, FMDY, "", 0, 0, 0, 0, XV_WLAY_DONTCARE, "ql" },
 #define	FMBRGT 7

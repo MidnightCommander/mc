@@ -1,0 +1,44 @@
+srcdir = @srcdir@
+VPATH = @srcdir@
+
+rootdir = $(srcdir)/..
+@MCFG@@MCF@
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+
+#
+# Distribution variables
+#
+
+DISTFILES = FileManager.idl
+
+all:
+
+check:
+	@echo no tests are supplied.
+
+TAGS:
+
+cross:
+
+clean:
+
+realclean:
+
+distclean:
+
+install:
+	for I in $(DISTFILES); \
+	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(idldir)/$$I; done
+
+uninstall:
+	for I in $(DISTFILES); \
+	do $(RMF) $(DESTDIR)$(idldir)/$$I; done
+
+distcopy:
+	$(CP) $(DISTFILES) ../../mc-$(VERSION)/idl
+
+depend dep:
+

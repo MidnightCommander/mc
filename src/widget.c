@@ -84,7 +84,7 @@ button_callback (Dlg_head *h, WButton *b, int Msg, int Par)
     switch (Msg){
     case WIDGET_INIT:
 	return x_create_button (h, h->wdata, b);
-#ifndef	HAVE_XVIEW
+
     case WIDGET_HOTKEY:
         if (b->hotkey == Par ||  toupper(b->hotkey) == Par){
 	    button_callback (h, b, WIDGET_KEY, ' '); /* to make action */
@@ -104,18 +104,6 @@ button_callback (Dlg_head *h, WButton *b, int Msg, int Par)
 	}
 	return 1;
 
-#ifdef HAVE_TK
-    case WIDGET_FOCUS:
-    case WIDGET_CURSOR:
-    {
-	char *s = b->action == B_ENTER ? ".button" : "";
-	
-	tk_evalf ("focus %s%s", (char *)(b->widget.wdata)+1, s);
-	/* Do not call default_proc: we did the tk focus command */
-	return 1;
-    }
-#else
-	
     case WIDGET_CURSOR:
 	switch (b->flags) {
 	    case DEFPUSH_BUTTON:
@@ -181,8 +169,6 @@ button_callback (Dlg_head *h, WButton *b, int Msg, int Par)
 	else
 	    return 1;
 	break;
-#endif	
-#endif /* !HAVE_XVIEW */
     }	
     return default_proc (h, Msg, Par);
 }
@@ -305,7 +291,6 @@ radio_callback (Dlg_head *h, WRadio *r, int Msg, int Par)
     case WIDGET_INIT:
 	return x_create_radio (h, h->wdata, r);
 	
-#ifndef HAVE_XVIEW
     case WIDGET_HOTKEY:
 	{
 	    int i, lp = tolower(Par);
@@ -359,7 +344,6 @@ radio_callback (Dlg_head *h, WRadio *r, int Msg, int Par)
     case WIDGET_CURSOR:
 	    x_radio_focus_item (r);
 	    return 1;
-#endif
 #endif
 	
 #ifndef HAVE_X
@@ -467,7 +451,6 @@ check_callback (Dlg_head *h, WCheck *c, int Msg, int Par)
     case WIDGET_INIT:
 	return x_create_check (h, h->wdata, c);
 
-#ifndef	HAVE_XVIEW
     case WIDGET_HOTKEY:
         if (c->hotkey==Par ||
 	    (c->hotkey>='a' && c->hotkey<='z' && c->hotkey-32==Par)){
@@ -504,7 +487,6 @@ check_callback (Dlg_head *h, WCheck *c, int Msg, int Par)
 	}
 	return 1;
 #endif /* !HAVE_X */
-#endif /* !HAVE_XVIEW */
     }
     return default_proc (h, Msg, Par);
 }
@@ -829,7 +811,6 @@ static char *kill_buffer = 0;
 void
 update_input (WInput *in, int clear_first)
 {
-#ifndef HAVE_XVIEW
     int has_history = 0;
     int    i, j;
     unsigned char   c;
@@ -880,8 +861,6 @@ update_input (WInput *in, int clear_first)
 
     if (clear_first)
 	    in->first = 0;
-#endif
-
 #endif
 }
 
@@ -1635,7 +1614,6 @@ input_callback (Dlg_head *h, WInput *in, int Msg, int Par)
     case WIDGET_INIT:
 	return x_create_input (h, h->wdata, in);
 
-#ifndef HAVE_XVIEW
     case WIDGET_KEY:
 	if (Par == XCTRL('q')){
 	    int v;
@@ -1661,7 +1639,6 @@ input_callback (Dlg_head *h, WInput *in, int Msg, int Par)
     case WIDGET_DRAW:
 	update_input (in, 0);
 	break;
-#endif /* !HAVE_XVIEW */
 #ifndef HAVE_X
     case WIDGET_CURSOR:
 	widget_move (&in->widget, 0, in->point - in->first_shown);
@@ -2103,7 +2080,6 @@ listbox_callback (Dlg_head *h, WListbox *l, int msg, int par)
     case WIDGET_INIT:
 	return x_create_listbox (h, h->wdata, l);
 	
-#ifndef	HAVE_XVIEW
     case WIDGET_HOTKEY:
 	if ((e = listbox_check_hotkey (l, par)) != NULL){
 	    listbox_select_entry (l, e);
@@ -2138,7 +2114,6 @@ listbox_callback (Dlg_head *h, WListbox *l, int msg, int par)
 	listbox_draw (l, h, msg != WIDGET_UNFOCUS);
 	return 1;
 #endif	
-#endif /* !HAVE_XVIEW */
     }
     return default_proc (h, msg, par);
 }
@@ -2356,7 +2331,6 @@ buttonbar_callback (Dlg_head *h, WButtonBar *bb, int msg, int par)
     case WIDGET_FOCUS:
 	return 0;
 
-#ifndef	HAVE_XVIEW
     case WIDGET_HOTKEY:
 	for (i = 0; i < 10; i++){
 	    if (par == KEY_F(i+1) && bb->labels [i].function){
@@ -2385,7 +2359,6 @@ buttonbar_callback (Dlg_head *h, WButtonBar *bb, int msg, int par)
 	attrset (SELECTED_COLOR);
 	return 1;
 #endif
-#endif /* !HAVE_XVIEW */
     }
     return default_proc (h, msg, par);
 }
@@ -2460,15 +2433,6 @@ find_buttonbar (Dlg_head *h, Widget *paneletc)
     for (i = 0, item = h->current; i < h->count; i++, item = item->next){
 	if (item->widget->callback == (callback_fn) buttonbar_callback){
 	    bb = (WButtonBar *) item->widget;
-#ifdef HAVE_XVIEW
-	    /* Jakub: do we really need this routine here?
-	     * Does XView hold more that a buttonbar per Dlg_head?
-	     */
-	    if (x_find_buttonbar_check (bb, paneletc)) {
-	        bb = 0;
-	        continue;
-	    }
-#endif	    
 	    break;
 	}
     }

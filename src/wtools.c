@@ -265,25 +265,15 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	    xpos = strlen (cur_name)+6;
 		if (strchr(cur_name, '&') != NULL)
 			xpos--;
-#ifndef HAVE_XVIEW
 	    add_widget (query_dlg, button_new
 			(lines-3, cols, B_USER+i, NORMAL_BUTTON, cur_name,
 			 0, 0, NULL));
-#else			 
-	    buttonnames [i] = cur_name;
-#endif			     
 	    cols += xpos;
 	    if (i == sel_pos)
 		query_dlg->initfocus = query_dlg->current;
 	}
 	va_end (ap);
 
-#ifdef HAVE_XVIEW
-	for (i = count - 1; i >= 0; i--)
-	    add_widgetl (query_dlg, button_new
-			 (0, 0, B_USER+i, NORMAL_BUTTON, buttonnames [i], 0, 0, NULL), 
-			 i ? XV_WLAY_RIGHTOF : XV_WLAY_CENTERROW);
-#endif	
 	add_widget (query_dlg, label_new (2, 3, text, NULL));
 	
 	/* run dialog and make result */
@@ -345,15 +335,8 @@ Dlg_head *message (int error, char *header, char *text, ...)
     va_end (args);
     
     query_dialog (header, buffer, error, 0);
-#ifndef HAVE_XVIEW
+
     d = last_query_dlg;
-#ifdef HAVE_TK
-    if (error & D_INSERT){
-	init_dlg (d);
-	tk_dispatch_all ();
-	return d;
-    }
-#else	
     init_dlg (d);
     if (!(error & D_INSERT)){
 	mi_getch ();
@@ -361,8 +344,6 @@ Dlg_head *message (int error, char *header, char *text, ...)
 	destroy_dlg (d);
     } else
 	return d;
-#endif
-#endif	
     return 0;
 }
 #endif

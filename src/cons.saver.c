@@ -348,7 +348,7 @@ int main (int argc, char **argv)
     if (error){
 	/* Not a console -> no need for privileges */
 	setuid (getuid ());
-	dwrite (2, error);
+/*	dwrite (2, error); */
 	console_flag = 0;
 	if (console_fd >= 0)
 	    close (console_fd);

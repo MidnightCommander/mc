@@ -1,3 +1,8 @@
+1998-12-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* Makefile.in (codedirs): Dropped xv and tk ports from the
+	distribution. include idl directory.
+
 1998-12-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* configure.in (slang_use_system_installed_lib): Define slang

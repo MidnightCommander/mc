@@ -1078,7 +1078,8 @@ my_forget (char *path)
     int  port, i, vers;
 
     if (strncmp (path, "/#mc:", 5))
-        return NULL;
+	return;
+    
     path += 5;
     if (path[0] == '/' && path[1] == '/')
 	path += 2;

@@ -1924,9 +1924,7 @@ do_file_mark (WPanel *panel, int idx, int mark)
                 panel->dirs_marked++;
 	    } else 
 		panel->total += panel->dir.list [idx].buf.st_size;
-#ifndef HAVE_XVIEW            
             set_colors (panel);
-#endif
         } else {
             if (S_ISDIR(panel->dir.list [idx].buf.st_mode)) {
 		if (panel->has_dir_sizes)
@@ -1956,10 +1954,9 @@ static void
 do_mark_file (WPanel *panel, int do_move)
 {
     int idx = panel->selected;
+
     do_file_mark (panel, idx, selection (panel)->f.marked ? 0 : 1);
-#ifndef HAVE_XVIEW	
     repaint_file (panel, idx, 1, 2*panel->dir.list [idx].f.marked+1, 0);
-#endif        
 
     if (mark_moves_down && do_move)
 	move_down (panel);
@@ -2283,11 +2280,7 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
 	return 1;
 	
     case WIDGET_DRAW:
-#ifndef HAVE_XVIEW
 	paint_panel (panel);
-#else
-	show_dir (panel);	
-#endif
 	break;
 
     case WIDGET_FOCUS:

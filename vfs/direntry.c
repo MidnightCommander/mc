@@ -359,7 +359,6 @@ void vfs_s_insert_super (vfs *me, vfs_s_super *super)
 
     if (MEDATA->supers != NULL) MEDATA->supers->prevp = &super->next;
     MEDATA->supers = super;
-    return super;
 } 
 
 void vfs_s_free_super (vfs *me, vfs_s_super *super)

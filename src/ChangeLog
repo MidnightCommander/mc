@@ -1,5 +1,8 @@
 1998-12-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* GNORBA integration.  We now produce two binaries: gmc and
+	corba-gmc (that way, I dont interfere with other's work).
+
 	* Added prototypes, made private functions static, clean up
 	various silly warnings.
 

@@ -55,10 +55,6 @@
 #include "cmd.h"		/* view_file_at_line */
 #include "../vfs/vfs.h"
 
-#ifdef HAVE_XVIEW
-#include "xvmain.h"
-#endif
-
 #ifndef PORT_HAS_FLUSH_EVENTS
 #    define x_flush_events()
 #endif
@@ -553,9 +549,6 @@ do_search (struct Dlg_head *h)
     if (strcmp (dp->d_name, ".") == 0 ||
 	strcmp (dp->d_name, "..") == 0){
 	dp = mc_readdir (dirp);
-#ifdef HAVE_XVIEW
-	xv_post_proc (h, (void (*)(void *))do_search, (void *)h);
-#endif		
 	return;
     }
     
@@ -595,9 +588,6 @@ do_search (struct Dlg_head *h)
 #else
         }
     }
-#ifdef HAVE_XVIEW
-    xv_post_proc (h, (void (*)(void *))do_search, (void *)h);
-#endif
 #endif
     x_flush_events ();
 }
@@ -805,9 +795,6 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
     init_find_vars ();
     push_directory (start_dir);
 
-#ifdef HAVE_XVIEW
-    xv_post_proc (find_dlg, (void (*)(void *))do_search, (void *)find_dlg);
-#endif    
     run_dlg (find_dlg);
 
     return_value = find_dlg->ret_value;
