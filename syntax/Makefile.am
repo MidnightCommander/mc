@@ -31,6 +31,7 @@ syntax_DATA =			\
 	spec.syntax		\
 	sql.syntax		\
 	swig.syntax		\
+	syntax.syntax		\
 	tcl.syntax		\
 	texinfo.syntax		\
 	unknown.syntax		\

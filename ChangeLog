@@ -1,3 +1,11 @@
+2002-09-18  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/Syntax: Remove gobledy_gook at the beginning.  Move
+	rules for syntax files ...
+	* syntax/syntax.syntax: ... here.  Add "linestart" for "file"
+	and "include" keywords.
+	* syntax/Makefile.am: Add syntax.syntax.
+
 2002-09-17  Vlad Romanenko  <VladRomanenko@ukr.net>
 
 	* syntax/js.syntax: Advanced number highlighting.
