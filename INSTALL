@@ -84,6 +84,11 @@ incomplete, use `configure --help' to get the full list):
      Use this flag to disable gpm mouse support (e.g. if you want to
      use mouse only on X terminals).
 
+`--with-glib12'
+     Force using glib 1.2.x even if glib 2.0.x is present.  Use this
+     flag for testing or if you want to use the binary on systems that
+     don't have glib 2.0.x installed.
+
 `--with-mmap', `--without-mmap'
      Force using or not using the mmap function.  It is currently used
      in the internal viewer.  `--with-mmap' may be useful on some
@@ -299,7 +304,8 @@ get glib from
 
 ftp://ftp.gtk.org/pub/gtk/
 
-Note that only versions 1.2.x and 2.0.x are supported.
+Note that only versions 1.2.x and 2.0.x are supported.  Newer versions
+may work, but haven't been tested.
 
 Terminal database
 -----------------

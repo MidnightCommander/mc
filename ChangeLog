@@ -1,3 +1,8 @@
+2003-02-22  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Add --with-glib12 option to confugure to force
+	using glib 1.2.x.
+
 2003-02-21  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* doc/ru/mc.1.in (Layout): Translate 'Xterm window title' option.
