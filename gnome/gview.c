@@ -216,7 +216,6 @@ view (char *_command, char *_file, int *move_dir_p, int start_line)
 	gtk_window_set_title (GTK_WINDOW (toplevel),
 			      _command ? _command : _file);
 	wview = view_new (0, 0, 80, 25, 0);
-	status = gview_status (wview);
 	
 	add_widget (our_dlg, wview);
 	
@@ -231,6 +230,8 @@ view (char *_command, char *_file, int *move_dir_p, int start_line)
 	if (error)
 		return !error;
 
+	status = gview_status (wview);
+	
 	init_dlg (our_dlg);
 	gtk_box_pack_start (GTK_BOX (vbox), status, 0, 1, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET (wview->widget.wdata), 1, 1, 0);
