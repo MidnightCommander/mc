@@ -1,5 +1,8 @@
 2002-08-23  Pavel Roskin  <proski@gnu.org>
 
+	* text.c (default_edition_colors): Use more rxvt-friendly color
+	for dhotnormal.
+
 	* Makefile.am: Remove definition of CONFDIR, it's not used.
 
 2002-08-22  Pavel Roskin  <proski@gnu.org>
