@@ -1,3 +1,8 @@
+2001-10-01  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.h [!USE_VFS]: Define macros with no effect to an empty
+	statement "do { } while (0)".
+
 2001-09-30  Pavel Roskin  <proski@gnu.org>
 
 	* samba/acconfig.h: Only leave symbols required by Autoconf-2.52.

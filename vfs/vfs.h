@@ -251,8 +251,8 @@ struct utimbuf {
 
 #    undef USE_NETCODE
 
-#   define vfs_fill_names(x)
-#   define vfs_add_current_stamps()
+#   define vfs_fill_names(x) do { } while (0)
+#   define vfs_add_current_stamps() do { } while (0)
 #   define vfs_current_is_local() 1
 #   define vfs_file_is_local(x) 1
 #   define vfs_file_is_ftp(x) 0
@@ -303,21 +303,21 @@ struct utimbuf {
 #   define mc_rmdir rmdir
 #   define is_special_prefix(x) 0
 #   define vfs_type(x) (vfs *)(NULL)
-#   define vfs_init()
-#   define vfs_shut()
+#   define vfs_init() do { } while (0)
+#   define vfs_shut() do { } while (0)
 #   define vfs_canon(p) g_strdup (canonicalize_pathname(p))
-#   define vfs_free_resources()
-#   define vfs_timeout_handler()
+#   define vfs_free_resources() do { } while (0)
+#   define vfs_timeout_handler() do { } while (0)
 #   define vfs_timeouts() 0
-#   define vfs_force_expire()
+#   define vfs_force_expire() do { } while (0)
 
     typedef int vfs;
     
 #   define mc_getlocalcopy(x) NULL
-#   define mc_ungetlocalcopy(x,y,z) 0
+#   define mc_ungetlocalcopy(x,y,z) do { } while (0)
 
-#   define ftpfs_hint_reread(x) 
-#   define ftpfs_flushdir()
+#   define ftpfs_hint_reread(x) do { } while (0)
+#   define ftpfs_flushdir() do { } while (0)
 
 #ifdef _OS_NT
 #   undef mc_rmdir
