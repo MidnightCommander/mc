@@ -2,8 +2,14 @@
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # David Martín <dmartina@mailexcite.com>, 1998-1999.
 #
+# DHMA 19990411
+# Files, archives and gmc tuning.
+#
+# Pablo 19990408
+# Separate es.po (using "archivo") and es_ES.po (using "fichero").
+#
 # DHMA 19990405
-# Updated to 4.5.29 and tuned gmc
+# Updated to 4.5.29 and tuned gmc.
 #
 # DHMA 19990320
 # Merged to include new strings in gmc-4.5.27 (beta). Ftpfs translations.
@@ -30,7 +36,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.30\n"
 "POT-Creation-Date: 1999-04-04 17:51+0200\n"
-"PO-Revision-Date: 1999-04-04 22:56+0100\n"
+"PO-Revision-Date: 1999-04-10 22:00+0100\n"
 "Last-Translator: David Martín <dmartina@mailexcite.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -362,7 +368,7 @@ msgstr "Crear un lanzador nuevo"
 
 #: gnome/gdesktop.c:2434 gnome/glayout.c:449
 msgid "Arrange Icons"
-msgstr "Colocar iconos"
+msgstr "Colocar _iconos"
 
 #: gnome/gdesktop.c:2435
 msgid "Create New Window"
@@ -374,7 +380,7 @@ msgstr "Reconstruir atajos de escritorio"
 
 #: gnome/gdesktop.c:2438 gnome/glayout.c:452
 msgid "Rescan Desktop"
-msgstr "Actualizar escritorio"
+msgstr "Actualizar _escritorio"
 
 #: gnome/gdesktop.c:2439
 msgid "Configure Background Image"
@@ -618,11 +624,11 @@ msgstr "Mostrar información detallada de cada archivo"
 
 #: gnome/glayout.c:50
 msgid "_Custom View"
-msgstr "Listado Personalizado"
+msgstr "Listado _personalizado"
 
 #: gnome/glayout.c:51 gnome/glayout.c:67
 msgid "Switch view to show user-defined statistics"
-msgstr "Mostrar más o menos detalles, a gusto del usuario"
+msgstr "Configurable para mostrar más o menos detalles"
 
 #: gnome/glayout.c:57
 msgid "Icons"
@@ -634,11 +640,11 @@ msgstr "Breve"
 
 #: gnome/glayout.c:63
 msgid "Detailed"
-msgstr "Detallado"
+msgstr "Detalle"
 
 #: gnome/glayout.c:66
 msgid "Custom"
-msgstr "Personal."
+msgstr "Flexible"
 
 #: gnome/glayout.c:303
 msgid "Enter command to run"
@@ -699,7 +705,7 @@ msgstr "Renombrar o mover archivos"
 
 #: gnome/glayout.c:389
 msgid "Show directory sizes"
-msgstr "Mostrar tamaño directorios"
+msgstr "Mostrar tamaño _directorios"
 
 #: gnome/glayout.c:389
 msgid "Shows the disk space used by each directory"
@@ -723,7 +729,7 @@ msgstr "Seleccionar un grupo de archivos"
 
 #: gnome/glayout.c:399
 msgid "_Invert Selection"
-msgstr "_Invertir Selección"
+msgstr "_Invertir selección"
 
 #: gnome/glayout.c:399
 msgid "Reverses the list of tagged files"
@@ -747,7 +753,7 @@ msgstr "Opciones de confirmación"
 
 #: gnome/glayout.c:409
 msgid "_Filter View..."
-msgstr "Ver _Filtrado..."
+msgstr "_Filtro..."
 
 #: gnome/glayout.c:409
 msgid "Global option settings"
@@ -780,7 +786,7 @@ msgstr "Ejecutar un comando"
 
 #: gnome/glayout.c:423
 msgid "_Run Command in panel..."
-msgstr "Ejecuta_r comando en panel..."
+msgstr "Ejecutar comando en _panel..."
 
 #: gnome/glayout.c:423
 msgid "Run a command and put the results in a panel"
@@ -796,7 +802,7 @@ msgstr "Lista de procesos en 2º plano"
 
 #: gnome/glayout.c:436
 msgid "Exit"
-msgstr "Salir"
+msgstr "_Salir"
 
 #: gnome/glayout.c:436
 msgid "Terminates the file manager and the desktop"
@@ -804,7 +810,7 @@ msgstr "Finalizar el administrador de archivos y cerrar el escritorio"
 
 #: gnome/glayout.c:451
 msgid "Rescan System Devices"
-msgstr "Actualizar dispositivos del sistema"
+msgstr "Actualizar _dispositivos del sistema"
 
 #: gnome/glayout.c:459 gnome/glayout.c:469
 msgid "_Layout"
@@ -1194,7 +1200,7 @@ msgstr "Caducidad de los VFS:"
 
 #: gnome/gprefs.c:124 gnome/gprefs.c:149
 msgid "Seconds"
-msgstr "Segundos"
+msgstr "segundos"
 
 #: gnome/gprefs.c:127
 msgid "Anonymous FTP password:"
@@ -1389,7 +1395,7 @@ msgstr "Filtro"
 
 #: gnome/gscreen.c:2348
 msgid "Back"
-msgstr "Atrás"
+msgstr "Volver"
 
 #: gnome/gscreen.c:2348
 msgid "Go to the previously visited directory"
@@ -1397,7 +1403,7 @@ msgstr "Retroceder al anterior directorio visitado"
 
 #: gnome/gscreen.c:2350
 msgid "Up"
-msgstr "Arriba"
+msgstr "Subir"
 
 #: gnome/gscreen.c:2350
 msgid "Go up a level in the directory heirarchy"
@@ -1405,7 +1411,7 @@ msgstr "Subir un nivel en la jerarquía de directorios"
 
 #: gnome/gscreen.c:2352
 msgid "Forward"
-msgstr "Adelante"
+msgstr "Avanzar"
 
 #: gnome/gscreen.c:2352
 msgid "Go to the next directory"
@@ -1413,7 +1419,7 @@ msgstr "Avanzar al siguiente directorio visitado"
 
 #: gnome/gscreen.c:2355 src/tree.c:1020
 msgid "Rescan"
-msgstr "Actualizar"
+msgstr "Revisar"
 
 #: gnome/gscreen.c:2355
 msgid "Rescan the current directory"
@@ -2182,7 +2188,7 @@ msgstr " Teclee la longitud de la línea, 0 para desactivar: "
 
 #: gtkedit/editmenu.c:70
 msgid " About "
-msgstr " Acerca de "
+msgstr " Acerca de... "
 
 #: gtkedit/editmenu.c:71
 msgid ""
