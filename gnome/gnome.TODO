@@ -5,8 +5,6 @@ Other features requested:
 	- Remove extra space on the panels (the in-between
 	  icons)
 
-	- Default font for the icon list 
-
 	- Remove the bottom scrollabar on the views.
 
 	- Status line uses too much space, it might be fixed
@@ -51,14 +49,7 @@ Other features requested:
 	
 IMPORTANTE:
 
->>>>> When something is dragged, the panel is not being refreshed <<<<
-
 file actions dont cause panels to be refreshed automatically
-
-All:
-
-- Session management
-
 
 EXTENSIONS:
 
