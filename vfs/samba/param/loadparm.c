@@ -852,7 +852,7 @@ static void init_globals(void)
   string_set(&Globals.szDriverFile, DRIVERFILE);
   string_set(&Globals.szLockDir, LOCKDIR);
   string_set(&Globals.szRootdir, "/");
-  string_set(&Globals.szSmbrun, SMBRUN);
+//string_set(&Globals.szSmbrun, SMBRUN);
   string_set(&Globals.szSocketAddress, "0.0.0.0");
   pstrcpy(s, "Samba ");
   pstrcat(s, VERSION);
@@ -1127,7 +1127,6 @@ static char *lp_string(char *s)
  int fn_name(int i) {return(LP_SNUM_OK(i)? pSERVICE(i)->val : sDefault.val);}
 
 FN_GLOBAL_STRING(lp_logfile,&Globals.szLogFile)
-FN_GLOBAL_STRING(lp_smbrun,&Globals.szSmbrun)
 FN_GLOBAL_STRING(lp_configfile,&Globals.szConfigFile)
 FN_GLOBAL_STRING(lp_smb_passwd_file,&Globals.szSMBPasswdFile)
 FN_GLOBAL_STRING(lp_serverstring,&Globals.szServerString)
