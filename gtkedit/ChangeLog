@@ -1,3 +1,7 @@
+2001-07-27  Pavel Roskin  <proski@gnu.org>
+
+	* edit.c: Fix include.
+
 2001-07-20  Pavel Roskin  <proski@gnu.org>
 
 	* syntax.c (open_include_file) [GTK]: Use mc_home instead of

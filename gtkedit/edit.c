@@ -40,7 +40,7 @@
 #include "mad.h"
 #endif
 
-#include <../src/dialog.h> /* MSG_ERROR */
+#include "../src/dialog.h" /* MSG_ERROR */
 
 #ifdef HAVE_CHARSET
 #include "../src/charsets.h"
