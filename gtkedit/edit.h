@@ -83,7 +83,7 @@
 #    include "gdk/gdk.h"
 #    include "gtkedit.h"
 #    include "editcmddef.h"
-#    ifdef _
+#    ifndef _
 #        define _(x) x
 #        define N_(x) x
 #    endif
@@ -134,8 +134,10 @@
 #       include <ndir.h>
 #   endif /* HAVE_NDIR_H */
 #endif /* not (HAVE_DIRENT_H or _POSIX_VERSION) */
-#define _(x) x
-#define N_(x) x
+#   ifndef _
+#      define _(x) x
+#      define N_(x) x
+#   endif
 #include "vfs/vfs.h"
 #include "intl/libgettext.h"
 #    define CDisplay gdk_display
