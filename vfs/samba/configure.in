@@ -1299,31 +1299,6 @@ AC_ARG_WITH(swatdir,
    AC_SUBST(swatdir)]
 )
 
-#
-# As a gating factor for large file support, in order to
-# use <4GB files we must have the following minimal support
-# available.
-# long long, and a 64 bit off_t or off64_t.
-# If we don't have all of these then disable large
-# file support.
-#
-AC_MSG_CHECKING([if large file support can be enabled])
-AC_TRY_COMPILE([
-#if defined(HAVE_LONGLONG) && (defined(HAVE_OFF64_T) || (defined(SIZEOF_OFF_T) && (SIZEOF_OFF_T == 8)))
-#include <sys/types.h>
-#else
-__COMPILE_ERROR_
-#endif
-],
-[int i],
-samba_cv_HAVE_EXPLICIT_LARGEFILE_SUPPORT=yes,samba_cv_HAVE_EXPLICIT_LARGEFILE_SUPPORT=no)
-if test x"$samba_cv_HAVE_EXPLICIT_LARGEFILE_SUPPORT" = x"yes"; then
-    AC_MSG_RESULT(yes)
-    AC_DEFINE(HAVE_EXPLICIT_LARGEFILE_SUPPORT)
-else
-    AC_MSG_RESULT(no)
-fi
-
 AC_MSG_CHECKING([configure summary])
 AC_TRY_RUN([#include "${srcdir-.}/tests/summary.c"],
            AC_MSG_RESULT(OK);,

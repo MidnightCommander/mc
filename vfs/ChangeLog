@@ -1,5 +1,9 @@
 2001-02-09  Pavel Roskin  <proski@gnu.org>
 
+	* samba/configure.in: Remove the test for
+	HAVE_EXPLICIT_LARGEFILE_SUPPORT, since it's incompatible with
+	the rest of the source that doesn't use explicit 64-bit calls.
+
 	* Make-mc.in: Always check for samba/Makefile before descending
 	there. Don't ever ignore errors from "cd". Use $(MAKE), not
 	make. Formatting changes.
