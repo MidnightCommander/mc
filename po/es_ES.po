@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.99\n"
-"POT-Creation-Date: 2002-09-16 19:37-0400\n"
+"POT-Creation-Date: 2002-09-17 16:07-0400\n"
 "PO-Revision-Date: 2002-04-12 23:00+0200\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -3325,7 +3325,7 @@ msgstr ""
 
 #: src/option.c:64
 msgid "safe de&Lete"
-msgstr "&Borrado seguro"
+msgstr "precauciones de &Borrado"
 
 #: src/option.c:65
 msgid "cd follows lin&Ks"
@@ -3337,11 +3337,11 @@ msgstr "navegación al estilo l&Ynx"
 
 #: src/option.c:67
 msgid "rotatin&G dash"
-msgstr "simular &Hélice"
+msgstr "&Hélice de actividad"
 
 #: src/option.c:68
 msgid "co&Mplete: show all"
-msgstr "completado: muestra todo"
+msgstr "completar: mostrar todos"
 
 #: src/option.c:69
 msgid "&Use internal view"
@@ -3373,11 +3373,11 @@ msgstr "ope&Ración detallada"
 
 #: src/option.c:77
 msgid "&Fast dir reload"
-msgstr "carga rápida de contenido"
+msgstr "recarga rápida de directorios"
 
 #: src/option.c:78
 msgid "mi&X all files"
-msgstr "me&Zclar todos los ficheros"
+msgstr "me&Zclar ficheros y directorios"
 
 #: src/option.c:79
 msgid "&Drop down menus"

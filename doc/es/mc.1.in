@@ -1550,131 +1550,153 @@ También es guardado un pequeño grupo de otros valores.
 .PP
 .\"NODE "    Configuration"
 .SH "    Configuración"
-El programa tiene algunas opciones que pueden ser activadas o desactivadas desde
-el diálogo de Configuración. Las opcioes están activas si tienen un asterisco o
-"x" delante. Esas opciones están divididas en tres grupos:
-Colores de Pantalla, Opciones del Panel y Otras Opciones.
+Este diálogo presenta una serie de opciones divididas en tres grupos:
+Opciones de los Paneles, Pausa Después de Ejecutar y Otras Opciones.
 .PP
-.B Colores de Pantalla
+.B Opciones de los paneles
 .PP
-Podemos seleccionar cuándo nuestra pantalla soporta color o no. Normalmente
-esta información está en la base de datos de terminfo. Para saber
-cómo cambiar colores individuales ver la sección sobre
-.\"LINK2"
-Colores.
-.\"Colors"
-.PP
-.B Opciones de Panel
-.PP
-.I Mostrar Ficheros de Copia de Seguridad.
-Por defecto, Midnight Commander no muestra ficheros terminados en '~'
-(como la opción -B de ls de GNU).
+.I Mostrar Ficheros de Respaldo.
+Mostrar los ficheros terminados en tilde '~'. Por defecto, Midnight
+Commander no los muestra (como la opción -B de ls de GNU).
 .PP
 .I Mostrar Ficheros Ocultos.
-Por defecto, Midnight Commander mostrará todos los ficheros que comienzan con
-un punto (como ls -a).
+Mostrar los ficheros que comiencen con un punto (como ls -a).
 .PP
-.I Marcar Mueve el Cursor Hacia Abajo.
-Por defecto, cuando marcamos un fichero (con C-t o la tecla Insert)
-la barra de selección se desplaza hacia abajo.
+.I Marcar y Avanzar.
+Hacer avanzar la barra de selección tras marcar un fichero (con C-t o
+con la tecla Insertar).
 .PP
-.I Mostrar Mini-Estado.
-Si está activa, muestra una línea de información de estado en la parte inferior
-de los paneles sobre el ítem actualmente seleccionado.
+.I Menús Desplegables.
+Mostrar el contenido de los menús desplegables inmediatamente al presionar
+F9. Si está desactivada sólo la barra de títulos de los menús está
+visible, y será necesario abrir cada menú con las flechas de movimiento
+o con las teclas de acceso rápido.
 .PP
-.I Mezclar todos los ficheros.
-Cuando esta opción está habilitada, todos los ficheros y directorios son mostrados mezclados
-juntos. Si la opción está desactivada, los directorios (y enlaces a los mismos)
-son mostrados al principio de la lista, y el resto de ficheros a continuación.
+.I Mezclar Ficheros y Directorios.
+Cuando esta opción está habilitada, todos los ficheros y directorios
+se muestran mezclados. Si la opción está desactivada, los directorios
+(y enlaces a directorios) aparecen al principio de la lista, y el resto
+de ficheros a continuación.
 .PP
-.I Carga rápida de contenido del directorio.
-Esta opción está desactivada por defecto. Si la activamos,
-Midnight Commander usará un truco para determiar si los contenidos
-del directorio han cambiado. El truco consiste en recargar el directorio sólo si
-el nodo-i del directorio ha cambiado; esto significa que las recargas
-suceden sólo cuando los ficheros son creados o borrados. Si lo que cambia
-es el nodo-i de un fichero en el directorio (cambia el tamaño del fichero, cambia el modo o
-propietario, etc) la pantalla nos es actualizada. En esos casos, si tenemos la
-opción activada, deberemos reescanear el directorio manualmente (con C-r).
+.I Recarga Rápida de Directorios.
+Hace que Midnight Commander emplee una pequeña trampa al determinar
+si los contenidos del directorio han cambiado. El truco consiste en
+recargar el directorio sólo si el inodo del directorio ha cambiado. Las
+recargas se producen si se crean o borrar ficheros, pero si lo que cambia
+es sólo el inodo de un fichero del directorio (cambios en el tamaño,
+permisos, propietario, etc.) la pantalla no se actualiza. En esos casos,
+si tenemos la opción activada, será preciso forzar la recarga de forma
+manual (con C-r).
+.PP
+.B Pausa Después de Ejecutar.
+.PP
+Después de ejecutar comandos, Midnight Commander puede realizar una pausa,
+y darnos tiempo a examinar la salida del comando. Hay tres posibles
+valores para esta variable:
+.IP
+.I Nunca.
+Significa que no queremos ver la salida de nuestros comandos. Si estamos
+utilizando la consola Linux o SCO o un xterm, podremos ver la salida
+del comando pulsando C-o.
+.IP
+.I "Sólo en Terminales Tontas".
+Obtendremos el mensaje de pausa sólo en terminales que no sean capaces
+de mostrar la salida del último comando ejecutado (en realidad, cualquier
+terminal que no sea un xterm o una consola de Linux).
+.IP
+.I Siempre.
+El programa realizará simepre una pausa después de ejecutar comandos.
 .PP
 .B Otras Opciones
 .PP
-.I Operación detallada.
-Indica cuándo las operaciones de copia, renombrado y eliminación de ficheros son
-detalladas (p.e., muestra un cuadro de diálogo para cada operación). Si tenemos
-un terminal lento, podríamos querer desactivar la operación detallada. Ésta es
-automáticamente desactivada si la velocidad de nuestro terminal es menor de
-9600 bps.
+.I Operación Detallada.
+Controla la visualización de detalles durante las operaciones de
+Copiar, Mover y Borrar (i.e., muestra un cuadro de diálogo para cada
+operación). Si tenemos un terminal lento, podríamos querer desactivar
+la operación detallada. Se desactiva automáticamente si la velocidad de
+nuestro terminal es menor de 9600 bps.
 .PP
-.I Pausa después de ejecutar.
-Tras ejecutar nuestros comandos, Midnight Commander puede pausar, de tal modo
-que podamos examinar la salida del comando. Hay tres posibles
-selecciones para esta variable:
-.IP
-.I Nunca
-Significa que no queremos ver la salida de nuestros comandos. Si estamos
-utilizando la consola Linux o SCO o un xterm, podremos ver
-la salida del comando pulsando C-o.
-.IP
-.I "En terminales tontos"
-Obtendremos un mensaje de pausa que no son capaces de
-mostrar la salida del último comando ejecutado (en realidad, cualquier
-terminal que no sea un xterm o una consola de Linux).
-.IP
-.I Siempre
-El programa realizará una pausa después de ejecutar todos nuestros comandos.
+.I Calcular Totales.
+Hace que Midnight Commander calcule el total de bytes y el número de
+ficheros antes de iniciar operaciones de Copiar, Mover y Borrar. Esto
+proporciona una barra de progreso más precisa a costa de cierta
+velocidad. Esta opción no tiene efecto si la
+.I Operación Detallada
+no está seleccionada.
 .PP
 .I Patrones del shell.
-Por defecto los comandos de Selección, Desselección y Filtro expresiones
-regulares del estilo del shell. Para realizar esto se realizan las siguientes conversiones:
-el '*' es remplazado por '.*' (cero o más caracteres); la '?'
-por '.' (exactamente un carácter) y '.' por el punto literal. Si la opción está
-deactivada, entonces las expresiones regulares son las descritas en ed(1).
+Por defecto los comandos de Selección, Deselección y Filtro emplean
+expresiones regulares al estilo del shell. Para realizar esto se
+realizan las siguientes conversiones: '*' se cambia por '.*' (cero o
+más caracteres); '?' por '.' (exactamente un carácter) y '.' por un
+punto literal. Si la opción está desactivada, entonces las expresiones
+regulares son las descritas en ed(1).
 .PP
-.I Auto Guardar Configuración.
+.I Auto-Guardar Configuración.
 Si esta opción está activada, cuando salimos de Midnight Commander las
-opciones configurables de Midnight Commander son guardadas en el fichero
+opciones configurables de Midnight Commander se guardan en el fichero
 ~/.mc/ini.
 .PP
-.I Auto menús.
-Si está activada, el menú de usuario será invocado al arrancar.
-Útil para menús construidos por personas ajenas a Unix.
+.I Auto Menús.
+Si está activada, el menú de usuario aparece automáticamente al arrancar.
+Útil en menús construidos para personas sin conocimientos de Unix.
 .PP
-.I Usar editor interno.
-Si es'ta activada, el editor de ficheros incorporado es utilizado para editar
-ficheros. Si está desactivada, será usado el editor especificado por la variable de entorno
-.B EDITOR.
-Si no se especifica ninguno, se usará
+.I Usar Editor Interno.
+Emplear el editor de ficheros interno. Si está desactivada, se editarán
+los ficheros con el editor especificado por la variable de entorno
+.B EDITOR
+y si no se especifica ninguno, se usará
 .B vi.
-Véase la sección sobre
+Véase la sección sobre el
 .\"LINK2"
 editor de ficheros interno.
 .\"Internal File Editor"
 .PP
-.I Usar visor interno.
-Si está activada, el visor de ficheros incorporado será utilizado para ver
-ficheros. Si la opción está desactivada, el paginador especificado en la variable de entorno
+.I Usar Visor Interno.
+Emplear el visor de ficheros interno. Si la opción está desactivada,
+el paginador especificado en la variable de entorno
 .B PAGER
 será el utilizado.
 Si no se especifica ninguno, se usará el comando
 .B view.
-Véase la sección
+Véase la sección sobre el
 .\"LINK2"
 visor de ficheros interno.
 .\"Internal File Viewer"
 .PP
-.I Borrado Seguro.
-Opción activa por defecto, provocará que Midnight
-Commander pida confirmación cuando borremos un sólo fichero.
+.I Completar: Mostrar Todos.
+Por defecto, al completar nombres en situaciones de ambigüedad, Midnight
+Commander completa todo lo posible al pulsar
+.B M-Tab
+y produce un pitido; al intentarlo por segunda vez se muestra una lista
+con las posibilidades que han dado lugar a la ambigüedad. Con esta opción,
+la lista aparece directamente tras pulsar
+.B M-Tab
+por primera vez.
 .PP
-.I Cd sigue los enlaces.
-Esta opción, si está seleccionada, hace que Midnight Commander siga
-la secuencia de directorios lógica al cambiar el directorio actual,
-tanto en el panel como usando el comando cd. Éste es el comportamiento
-por defecto de la shell bash. Sin esto, Midnight Commander sigue la
-estructura real de directorios, y cd .. nos trasladará al padre real
-del directorio actual aunque hayamos entrado en ese directorio a través
-de un enlace, y no al directorio donde se encontraba el enlace.
+.I Hélice de actividad.
+Mostrar un guión rotatorio en la esquina superior derecha a modo de
+indicador de progreso.
+.PP
+.I Navegación al Estilo Lynx.
+Cuando la selección es un directorio y la línea de órdenes está vacía
+permite cambiar a él con las flechas de movimiento. Esta opción está
+inactiva por defecto.
+.PP
+.I Cd Sigue los Enlaces.
+Esta opción, si está seleccionada, hace que Midnight Commander siga la
+secuencia de directorios lógica al cambiar el directorio actual, tanto en
+el panel como usando el comando cd. Éste es el comportamiento por defecto
+de la shell bash. Sin esto, Midnight Commander sigue la estructura real
+de directorios, y cd .. nos trasladará al padre real del directorio
+actual aunque hayamos entrado en ese directorio a través de un enlace,
+y no al directorio donde se encontraba el enlace.
+.PP
+.I Precauciones de Borrado.
+Dificulta el borrado accidental de ficheros. La opción por defecto en
+el diálogo de confirmación de borrado se cambia a "No" y el borrado de
+directorios no vacíos exige ser confirmado. Por defecto, esta opción
+está desactivada.
 .PP
 .\"NODE "    Display bits"
 .SH "    Bits de Visualización"
