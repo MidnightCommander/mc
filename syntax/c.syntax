@@ -62,6 +62,7 @@ context default
     keyword whole using yellow/24
     keyword whole wchar_t yellow/24
     keyword whole ... yellow/24
+    keyword whole linestart \[\s\t\]#*\n brightred/18
 
     keyword /\* brown/22
     keyword \*/ brown/22
@@ -94,15 +95,19 @@ context default
     keyword : brightcyan/14
     keyword ? brightcyan/14
     keyword ; brightmagenta/19
+
 context exclusive /\* \*/ brown/22
     spellcheck
+
 context exclusive // \n brown/22
     spellcheck
+
 context linestart # \n brightred/18
     keyword \\\n yellow/24
     keyword /\**\*/ brown/22
     keyword "+" red/19
     keyword <+> red/19
+
 context " " green/6
     spellcheck
     keyword \\" brightgreen/16
