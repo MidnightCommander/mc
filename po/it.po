@@ -1,20 +1,17 @@
+# Italian translation of Midnight Commander
+# Copyright (C) 1999 Free Software Foundation, Inc.
+# Miguel de Icaza <miguel@metropolis.nuclecu.unam.mx>, 1999.
+#
 msgid ""
 msgstr ""
-"POT-Creation-Date: 1999-04-28 14:41+0200\n"
-"Content-Type: text/plain; charset=\n"
-"Date: 1998-03-24 19:15:11-0600\n"
-"From: Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>\n"
-"Xgettext-Options: --default-domain=mc --directory=.. --add-comments "
-"--keyword=_ --keyword=N_ --files-from=./POTFILES.in\n"
-"Files: edit/edit.c edit/edit_key_translator.c edit/editcmd.c edit/editmenu.c "
-"edit/editoptions.c edit/editwidget.c src/fixhlp.c src/achown.c "
-"src/background.c src/boxes.c src/chmod.c src/chown.c src/cmd.c src/command.c "
-"src/dialog.c src/dir.c src/ext.c src/file.c src/find.c src/help.c "
-"src/hotlist.c src/info.c src/layout.c src/learn.c src/main.c src/menu.c "
-"src/option.c src/panelize.c src/screen.c src/subshell.c src/tree.c "
-"src/user.c src/util.c src/utilunix.c src/view.c src/win.c src/wtools.c "
-"gnome/gcmd.c gnome/gdesktop.c gnome/glayout.c gnome/gprop.c gnome/gscreen.c "
-"gnome/gtools.c gnome/gview.c gnome/gwidget.c\n"
+"Project-Id-Version: mc 4.5.30\n"
+"POT-Creation-Date: 1999-04-28 22:02+0200\n"
+"PO-Revision-Date: 1999-05-05 23:02+0200\n"
+"Last-Translator: Maurizio Carelli <maurizio@urra.it>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8-bit\n"
 
 #: edit/edit_key_translator.c:121
 msgid " Emacs key: "
@@ -43,13 +40,12 @@ msgid " There is no other panel to compare contents to "
 msgstr " Non esistono altri pannelli per il confronto "
 
 #: gnome/gcmd.c:109
-#, fuzzy
 msgid "The Midnight Commander Team"
-msgstr " Midnight Commander "
+msgstr "The Midnight Commander Team"
 
 #: gnome/gcmd.c:111
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
-msgstr ""
+msgstr "bug reports: http://bugs.gnome.org, or use gnome-bug"
 
 #: gnome/gcmd.c:123
 msgid "GNU Midnight Commander"
@@ -57,32 +53,28 @@ msgstr "GNU Midnight Commander"
 
 #: gnome/gcmd.c:126
 msgid "The GNOME edition of the Midnight Commander file manager."
-msgstr "La edizione GNOME del file manager Midnight Commander."
+msgstr "La versione GNOME del file manager Midnight Commander."
 
 #: gnome/gcmd.c:263
-#, fuzzy
 msgid "Sort By"
-msgstr " Ordina "
+msgstr "Ordina per"
 
 #. we define this up here so we can pass it in to our callback
 #: gnome/gcmd.c:268
-#, fuzzy
 msgid "Ignore case sensitivity."
-msgstr "controlla maiuscole/minuscole"
+msgstr "Ignora maiuscole/minuscole"
 
 #: gnome/gcmd.c:271
-#, fuzzy
 msgid "Sort files by "
-msgstr "Files caratteri"
+msgstr "Ordina file per "
 
 #: gnome/gcmd.c:276 gnome/gcustom-layout.c:43 src/chmod.c:150 src/screen.c:395
 msgid "Name"
 msgstr "Nome"
 
 #: gnome/gcmd.c:283
-#, fuzzy
 msgid "File Type"
-msgstr "&Tipo di file"
+msgstr "Tipo di file"
 
 #: gnome/gcmd.c:289 gnome/gcustom-layout.c:47 src/screen.c:396
 #: src/screen.c:397
@@ -91,85 +83,75 @@ msgstr "Dimensione"
 
 #: gnome/gcmd.c:295
 msgid "Time Last Accessed"
-msgstr ""
+msgstr "Data ultimo accesso"
 
 #: gnome/gcmd.c:301
 msgid "Time Last Modified"
-msgstr ""
+msgstr "Data ultima modifica"
 
 #: gnome/gcmd.c:307
 msgid "Time Last Changed"
-msgstr ""
+msgstr "Data ultimo cambio"
 
 #: gnome/gcmd.c:321
 msgid "Reverse the order."
-msgstr ""
+msgstr "Inverti l'ordine"
 
 #: gnome/gcmd.c:384
-#, fuzzy
 msgid "Enter name."
-msgstr "Nome proprietario(owner)"
+msgstr "Inserisci nome"
 
 #: gnome/gcmd.c:390
-#, fuzzy
 msgid "Enter label for command:"
-msgstr " Linea: "
+msgstr "Inserisci linea di comando: "
 
 #: gnome/gcmd.c:489
-#, fuzzy
 msgid "Find all core files"
-msgstr "mostra i files random"
+msgstr "Cerca tutti i file 'core'"
 
 #: gnome/gcmd.c:492 src/panelize.c:350
 msgid "Find rejects after patching"
-msgstr ""
+msgstr "Cerca file reiettati dopo un pacth"
 
 #: gnome/gcmd.c:536
-#, fuzzy
 msgid "Run Command"
-msgstr " Comando "
+msgstr " Esegui comando "
 
 #. Frame 1
 #: gnome/gcmd.c:541
-#, fuzzy
 msgid "Preset Commands"
-msgstr "Comandi"
+msgstr "Comandi predefiniti"
 
 #. add add/remove buttons in center
 #: gnome/gcmd.c:558 gnome/gcustom-layout.c:185
 msgid "Add"
-msgstr ""
+msgstr "Aggiungi"
 
 #: gnome/gcmd.c:562 gnome/gcustom-layout.c:186
-#, fuzzy
 msgid "Remove"
 msgstr "Elimina"
 
 #. Frame 2
 #: gnome/gcmd.c:570
-#, fuzzy
 msgid "Run this Command"
-msgstr " Comando "
+msgstr "Esegui questo comando "
 
 #: gnome/gcmd.c:577
-#, fuzzy
 msgid "Command: "
-msgstr "Comando"
+msgstr "Comando: "
 
 #: gnome/gcmd.c:646
-#, fuzzy
 msgid "Set Filter"
-msgstr " Filtro "
+msgstr "Applica filtro "
 
 #: gnome/gcmd.c:651 gnome/gcmd.c:692 gnome/gcmd.c:697 gnome/gcmd.c:701
 #: gnome/gscreen.c:2551
-#, fuzzy
 msgid "Show all files"
-msgstr "mostra i files random"
+msgstr "Mostra tutti i file"
 
 #: gnome/gcmd.c:658
 msgid "."
-msgstr ""
+msgstr "."
 
 #: gnome/gcmd.c:674
 msgid ""
@@ -178,10 +160,14 @@ msgid ""
 "For example:\n"
 "*.png will show just png images"
 msgstr ""
+"Inserire un filtro per i file nella vista pannello.\n"
+"\n"
+"Per esempio:\n"
+"*.png mostra solo le immagini in formato png"
 
 #: gnome/gcmd.c:676
 msgid "Enter a Regular Expression to filter files in the panel view."
-msgstr ""
+msgstr "Inserirsci un'Espressione Regolare filtro per i file nel pannello"
 
 #: gnome/gcmd.c:733
 msgid " Open with..."
@@ -193,12 +179,11 @@ msgstr "Inserisci argomenti extra:"
 
 #: gnome/gcmd.c:796
 msgid "Desktop entry properties"
-msgstr ""
+msgstr "Proprietà di lavoro del Desktop"
 
 #: gnome/gcmd.c:821
-#, fuzzy
 msgid "Select File"
-msgstr "Elimina..."
+msgstr "Seleziona file"
 
 #: gnome/gcmd.c:829
 msgid ""
@@ -207,23 +192,35 @@ msgid ""
 "For example:\n"
 "*.png will select all png images"
 msgstr ""
+"Inserire un filtro per selezionare file nel pannello.\n"
+"\n"
+"Per esempio:\n"
+"*.png mostra solo le immagini in formato png"
 
 #: gnome/gcmd.c:831
 msgid "Enter a regular expression here to select files in the panel view with."
 msgstr ""
+"Inserirsci un'Espressione Regolare per selezionare file nella vista pannello"
 
 #: gnome/gcmd.c:874 src/cmd.c:545 src/cmd.c:596
 msgid "  Malformed regular expression  "
 msgstr " Espressione regolare errata "
 
+#: gnome/gcmd.c:919
+msgid "Creating a desktop link"
+msgstr "Creo un link sul desktop"
+
+#: gnome/gcmd.c:920
+msgid "Enter the URL:"
+msgstr "Inserire l'URL"
+
 #: gnome/gcustom-layout.c:36
-#, fuzzy
 msgid "Access Time"
 msgstr "Data di accesso"
 
 #: gnome/gcustom-layout.c:37
 msgid "Creation Time"
-msgstr ""
+msgstr "Data di creazione"
 
 #. Group
 #: gnome/gcustom-layout.c:38 gnome/gnome-file-property-dialog.c:776
@@ -233,32 +230,30 @@ msgid "Group"
 msgstr "Gruppo"
 
 #: gnome/gcustom-layout.c:39
-#, fuzzy
 msgid "Group ID"
-msgstr "Gruppo"
+msgstr "ID Gruppo"
 
 #: gnome/gcustom-layout.c:40
 msgid "Inode Number"
-msgstr ""
+msgstr "Numero Inodo"
 
 #: gnome/gcustom-layout.c:41 src/achown.c:378
 msgid "Mode"
 msgstr "Modo"
 
 #: gnome/gcustom-layout.c:42
-#, fuzzy
 msgid "Modification Time"
-msgstr "Data modifica"
+msgstr "Data di modifica"
 
 #: gnome/gcustom-layout.c:44
 msgid "Number of Hard Links"
-msgstr ""
+msgstr "Numero di Hard link"
 
 #. Owner
 #: gnome/gcustom-layout.c:45 gnome/gnome-file-property-dialog.c:925
 #: gnome/gprop.c:390 src/screen.c:408
 msgid "Owner"
-msgstr "Proprietario(owner)"
+msgstr "Proprietario"
 
 #: gnome/gcustom-layout.c:46 src/screen.c:402
 msgid "Permission"
@@ -266,47 +261,44 @@ msgstr "Permessi"
 
 #: gnome/gcustom-layout.c:48
 msgid "Size (short)"
-msgstr ""
+msgstr "Dimensione (formato corto)"
 
 #: gnome/gcustom-layout.c:49
-#, fuzzy
 msgid "Type"
-msgstr "&Tipo"
+msgstr "Tipo"
 
 #: gnome/gcustom-layout.c:50
-#, fuzzy
 msgid "User ID"
-msgstr "Utente"
+msgstr "ID Utente"
 
 #: gnome/gcustom-layout.c:144
 msgid "Possible Columns"
-msgstr ""
+msgstr "Colonne possibili"
 
 #: gnome/gcustom-layout.c:164
 msgid "Displayed Columns"
-msgstr ""
+msgstr "Colonne visibili"
 
 #: gnome/gcustom-layout.c:306
 msgid "Custom View"
-msgstr ""
+msgstr "Vista personalizzata"
 
 #: gnome/gdesktop.c:425 gnome/gdesktop.c:2052 gnome/gmount.c:321
-#, fuzzy
 msgid "Warning"
-msgstr " Attenzione "
+msgstr " Attenzione! "
 
 #: gnome/gdesktop.c:426
 #, c-format
 msgid "Could not open %s; will not have desktop icons"
-msgstr ""
+msgstr "Impossibile aprire %s; non arvrà icone sul desktop"
 
 #: gnome/gdesktop.c:1019
 msgid "While running the mount/umount command"
-msgstr ""
+msgstr "Durante l'esecuzione del comando mount/umount"
 
 #: gnome/gdesktop.c:1088
 msgid "While running the eject command"
-msgstr ""
+msgstr "Durante l'esecuzione del comando eject"
 
 #: gnome/gdesktop.c:1272 gnome/gicon.c:154 gnome/gtools.c:46
 msgid "Error"
@@ -314,16 +306,17 @@ msgstr "Errore"
 
 #. Create the link to the user's home directory so that he will have an icon
 #: gnome/gdesktop.c:2048
-#, fuzzy
 msgid "Home directory"
-msgstr "directory"
+msgstr "Home directory"
 
 #: gnome/gdesktop.c:2053
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial home desktop icon."
 msgstr ""
+"Impossibile creare un link simbolico fra %s e %s; \n"
+"la home directory apparirà senza icona"
 
-#: gnome/gdesktop.c:2397
+#: gnome/gdesktop.c:2398
 msgid ""
 "Unable to locate the file:\n"
 "background-properties-capplet\n"
@@ -331,131 +324,128 @@ msgid ""
 "\n"
 "We are unable to set the background."
 msgstr ""
+"Impossibile trovare il file:\n"
+"background-properties-capplet\n"
+"nel path.\n"
+"\n"
+"Impossibile creare lo sfondo."
 
-#: gnome/gdesktop.c:2406 gnome/glayout.c:361
-#, fuzzy
+#: gnome/gdesktop.c:2407 gnome/glayout.c:361
 msgid "_Terminal"
-msgstr "Nuovo terminale"
+msgstr "_Terminale"
 
-#: gnome/gdesktop.c:2406 gnome/glayout.c:361
+#: gnome/gdesktop.c:2407 gnome/glayout.c:361
 msgid "Launch a new terminal in the current directory"
-msgstr ""
+msgstr "Apre un nuovo terminale alla directory corrente"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2408 gnome/glayout.c:363
-#, fuzzy
+#: gnome/gdesktop.c:2409 gnome/glayout.c:363
 msgid "_Directory..."
-msgstr "directory"
+msgstr "_Directory..."
 
-#: gnome/gdesktop.c:2408 gnome/glayout.c:363
-#, fuzzy
+#: gnome/gdesktop.c:2409 gnome/glayout.c:363
 msgid "Creates a new directory"
-msgstr "Crea nuova directory"
+msgstr "Crea una nuova directory"
 
-#: gnome/gdesktop.c:2409
+#: gnome/gdesktop.c:2410
+msgid "URL L_ink..."
+msgstr "URL L_ink..."
+
+#: gnome/gdesktop.c:2410
+msgid "Creates a new URL link"
+msgstr "Crea un nuovo URL link"
+
+#: gnome/gdesktop.c:2411
 msgid "_Launcher..."
-msgstr ""
+msgstr "_Lanciatore"
 
-#: gnome/gdesktop.c:2409
-#, fuzzy
+#: gnome/gdesktop.c:2411
 msgid "Creates a new launcher"
-msgstr "Crea nuova directory"
+msgstr "Crea un nuovo lanciatore di applicazioni"
 
-#: gnome/gdesktop.c:2417 gnome/glayout.c:451
-#, fuzzy
+#: gnome/gdesktop.c:2419 gnome/glayout.c:451
 msgid "Arrange Icons"
-msgstr "Oidina icone"
-
-#: gnome/gdesktop.c:2418
-#, fuzzy
-msgid "Create New Window"
-msgstr "Apre un nuovo pannello"
+msgstr "Disponi icone"
 
 #: gnome/gdesktop.c:2420
-msgid "Recreate Desktop Shortcuts"
-msgstr ""
-
-#: gnome/gdesktop.c:2421 gnome/glayout.c:454
-#, fuzzy
-msgid "Rescan Desktop"
-msgstr "Aggiorna contenuto directory"
+msgid "Create New Window"
+msgstr "Apri nuova finestra"
 
 #: gnome/gdesktop.c:2422
+msgid "Recreate Desktop Shortcuts"
+msgstr "Ricostruisci i collegamenti sul Desktop"
+
+#: gnome/gdesktop.c:2423 gnome/glayout.c:454
+msgid "Rescan Desktop"
+msgstr "Aggiorna Desktop"
+
+#: gnome/gdesktop.c:2424
 msgid "Configure Background Image"
-msgstr ""
+msgstr "Configura immagine di sfondo"
 
 #: gnome/gdialogs.c:60
 msgid "To: "
-msgstr ""
+msgstr "A: "
 
 #: gnome/gdialogs.c:61
 msgid "Copying from: "
-msgstr ""
+msgstr "Copia da: "
 
 #: gnome/gdialogs.c:62
-#, fuzzy
 msgid "Deleting file: "
-msgstr "Sto eliminando"
+msgstr "Cancellazione file: "
 
 #: gnome/gdialogs.c:370
-#, fuzzy
 msgid "Files Exist"
-msgstr " Il file esiste "
+msgstr "File esistente"
 
 #: gnome/gdialogs.c:385
 msgid ""
 "Some of the files you are trying to copy already exist in the destination "
 "folder.  Please select the action to be performed."
 msgstr ""
+"Alcuni dei file che si sta cercando di copiare esistono già nella directory "
+"di destinazione. Selezionare l'azione da eseguire."
 
 #: gnome/gdialogs.c:398
 msgid "Prompt me before overwriting any file."
-msgstr ""
+msgstr "Avverti prima di sovrascrivere i file"
 
 #: gnome/gdialogs.c:405
-#, fuzzy
 msgid "Don't overwrite any files."
-msgstr ""
-" Non posso sovrascrivere il file `%s' \n"
-" %s "
+msgstr "Non sovrascrivere i file."
 
 #: gnome/gdialogs.c:421
-#, fuzzy
 msgid "Overwrite:"
-msgstr "Sovrascrivi"
+msgstr "Sovrascrivi:"
 
 #: gnome/gdialogs.c:428
-#, fuzzy
 msgid "Older files."
-msgstr "Tutti i files"
+msgstr "I file più vecchi"
 
 #: gnome/gdialogs.c:434
-#, fuzzy
 msgid "Files only if size differs."
-msgstr " se dimensione diversa"
+msgstr "Solo i file di dimensione differente."
 
 #: gnome/gdialogs.c:440
-#, fuzzy
 msgid "All files."
-msgstr "Tutti i files"
+msgstr "Tutti i file."
 
 #: gnome/gdialogs.c:480
-#, fuzzy
 msgid "File Exists"
-msgstr " Il file esiste "
+msgstr "File esistente"
 
 #: gnome/gdialogs.c:486
-#, fuzzy, c-format
+#, c-format
 msgid "The target file already exists: %s"
-msgstr " Il file `%s' esiste!"
+msgstr "File di destinazione gia' esitente: %s"
 
 #: gnome/gdialogs.c:493
-#, fuzzy
 msgid "Replace it?"
-msgstr " Sostituisci "
+msgstr "Sostituirlo?"
 
 #: gnome/gdialogs.c:567 gtkedit/editwidget.c:1069 src/file.c:802
-#: src/screen.c:2355 src/screen.c:2385 src/tree.c:1015
+#: src/screen.c:2365 src/screen.c:2395 src/tree.c:1015
 msgid "Copy"
 msgstr "Copia"
 
@@ -464,115 +454,100 @@ msgid "Move"
 msgstr "Muovi"
 
 #: gnome/gdialogs.c:587
-#, fuzzy
 msgid "Destination"
-msgstr "Animazione"
+msgstr "Destinazione"
 
 #: gnome/gdialogs.c:591
 msgid "Find Destination Folder"
-msgstr ""
+msgstr "Trova cartella di destinazione"
 
 #: gnome/gdialogs.c:596
-#, fuzzy
 msgid "Copy as a background process"
-msgstr "Processo in background"
+msgstr "Esegui la copia in background"
 
 #: gnome/gdialogs.c:616
-#, fuzzy
 msgid "Advanced Options"
-msgstr "Opzioni del pannello"
+msgstr "Opzioni avanzate"
 
 #: gnome/gdialogs.c:620
-#, fuzzy
 msgid "Preserve symlinks"
-msgstr " link simbolico  relativo: %s "
+msgstr "Mantieni link simbolici"
 
 #: gnome/gdialogs.c:630
-#, fuzzy
 msgid "Follow links."
-msgstr "Segui i Link"
+msgstr "Segui i link"
 
 #: gnome/gdialogs.c:636
 msgid ""
 "Selecting this will copy the files that symlinks point to instead of just "
 "copying the link."
 msgstr ""
+"Questo fa che venga copiato veramente il file, anziche solo il suo link."
 
 #: gnome/gdialogs.c:641
-#, fuzzy
 msgid "Preserve file attributes."
-msgstr "preserva &Attributi"
+msgstr "Mantieni attributi dei file"
 
 #: gnome/gdialogs.c:646
 msgid "Preserves the permissions and the UID/GID if possible"
-msgstr ""
+msgstr "Mantieni i permessi e UID/GID se possibile"
 
 #: gnome/gdialogs.c:652
-#, fuzzy
 msgid "Recursively copy subdirectories."
-msgstr "Directory virtuali attive"
+msgstr "Copia directory recursivamente"
 
 #: gnome/gdialogs.c:657
 msgid "If set, this will copy the directories recursively"
-msgstr ""
+msgstr "Questo fa che le directory vengano copiate recursivamente"
 
 #: gnome/gdialogs.c:761
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "\n"
 "Directory not empty. Delete it recursively?"
 msgstr ""
+"%s\n"
 "\n"
-" El directorio no está vacío.\n"
-" ¿Borrarlo recursivamente? "
+"Directory non vuota. Cancellare recursivamente? "
 
 #: gnome/gdialogs.c:770 src/file.c:2228
-#, fuzzy
 msgid " Delete: "
-msgstr " Cancel "
+msgstr " Cancella: "
 
 #: gnome/gdialogs.c:774
-#, fuzzy
 msgid "Do the same for the rest"
-msgstr "Cambia modalita' visualizzazione"
+msgstr "Fai lo stesso con il resto"
 
 #: gnome/gdialogs.c:857
-#, fuzzy
 msgid "Move Progress"
-msgstr " Muovi "
+msgstr "Progresso spostamento"
 
 #: gnome/gdialogs.c:860
-#, fuzzy
 msgid "Copy Progress"
-msgstr " Copia "
+msgstr "Progresso copia"
 
 #: gnome/gdialogs.c:863
-#, fuzzy
 msgid "Delete Progress"
-msgstr "Tasto delete"
+msgstr "Progresso cancellazione"
 
 #: gnome/gdialogs.c:913
-#, fuzzy
 msgid "File "
-msgstr " File "
+msgstr "File "
 
 #: gnome/gdialogs.c:917
-#, fuzzy
 msgid "is "
-msgstr " &Si "
+msgstr "is"
 
 #: gnome/gdialogs.c:920
-#, fuzzy
 msgid "done."
-msgstr "Nessuno"
+msgstr " fatto."
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
 #: gnome/gdialogs.c:980 src/wtools.c:587 vfs/vfs.c:1775
-#, fuzzy
 msgid "Password:"
-msgstr "Password"
+msgstr "Password: "
 
 #: gnome/gdialogs.c:980
 msgid "Password"
@@ -580,9 +555,8 @@ msgstr "Password"
 
 #. Create the dialog
 #: gnome/gdialogs.c:1012
-#, fuzzy
 msgid "Symbolic Link"
-msgstr "Nome del file del link simbolico:"
+msgstr "Link simbolico:"
 
 #: gnome/gdialogs.c:1028 src/boxes.c:803
 msgid "Existing filename (filename symlink will point to):"
@@ -593,99 +567,86 @@ msgid "Symbolic link filename:"
 msgstr "Nome del file del link simbolico:"
 
 #: gnome/gdnd.c:52
-#, fuzzy
 msgid "_Move here"
-msgstr " Muovi "
+msgstr "_Muovi qui"
 
 #: gnome/gdnd.c:53
-#, fuzzy
 msgid "_Copy here"
-msgstr " Copia "
+msgstr "_Copia qui"
 
 #: gnome/gdnd.c:54
-#, fuzzy
 msgid "_Link here"
-msgstr " Link "
+msgstr "_Link qui"
 
 #: gnome/gdnd.c:56
-#, fuzzy
 msgid "Cancel drag"
-msgstr " Annulla "
+msgstr " Annulla trascinamento "
 
 #. FIXME: this error message sucks
 #: gnome/gdnd.c:192
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not stat %s\n"
 "%s"
 msgstr ""
-" Non riesco a verificare il file %s \n"
+"Impossibile ottenere informazioni sul file %s \n"
 " %s "
 
 #: gnome/gicon.c:154
 msgid "Default set of icons not found, please check your installation"
-msgstr ""
+msgstr "Non son state trovate le icone di default, verificare l'installazione"
 
 #: gnome/glayout.c:41
-#, fuzzy
 msgid "_Icon View"
-msgstr "Icona"
+msgstr "_Icone"
 
 #: gnome/glayout.c:42 gnome/glayout.c:58
 msgid "Switch view to an icon display"
-msgstr ""
+msgstr "Passa alla vista con icone"
 
 #: gnome/glayout.c:44
-#, fuzzy
 msgid "_Brief View"
-msgstr "Scrittura"
+msgstr "Vista in _Breve"
 
 #: gnome/glayout.c:45 gnome/glayout.c:61
 msgid "Switch view to show just file name and type"
-msgstr ""
+msgstr "Passa alla vista con solo nome del file e tipo"
 
 #: gnome/glayout.c:47
-#, fuzzy
 msgid "_Detailed View"
-msgstr " Dup fallita "
+msgstr "Vista in _Dettaglio"
 
 #: gnome/glayout.c:48 gnome/glayout.c:64
 msgid "Switch view to show detailed file statistics"
-msgstr ""
+msgstr "Passa alla vista dettagliata con informazioni sui file"
 
 #: gnome/glayout.c:50
-#, fuzzy
 msgid "_Custom View"
-msgstr "Totale"
+msgstr "Vista _personalizzata"
 
 #: gnome/glayout.c:51 gnome/glayout.c:67
 msgid "Switch view to show user-defined statistics"
-msgstr ""
+msgstr "Passa alla vista con i dettagli perdefiniti dall'utente"
 
 #: gnome/glayout.c:57
-#, fuzzy
 msgid "Icons"
-msgstr "Icona"
+msgstr "Icone"
 
 #: gnome/glayout.c:60
-#, fuzzy
 msgid "Brief"
-msgstr "Scrittura"
+msgstr "Breve"
 
 #: gnome/glayout.c:63
-#, fuzzy
 msgid "Detailed"
-msgstr " Dup fallita "
+msgstr "Dettagli"
 
 #: gnome/glayout.c:66
-#, fuzzy
 msgid "Custom"
-msgstr "Totale"
+msgstr "Personale"
 
 #: gnome/glayout.c:302
-#, fuzzy
 msgid "Enter command to run"
-msgstr " Linea: "
+msgstr "Inserisci il comando da eseguire"
 
 #: gnome/glayout.c:315
 msgid ""
@@ -694,6 +655,10 @@ msgid ""
 "\n"
 "Are you sure you want to exit?"
 msgstr ""
+"Si noti che chiudendo il file manager si chiuderà anche il gestore\n"
+"di Desktop GNOME\n"
+"\n"
+"Sicuri di voler uscire?"
 
 #: gnome/glayout.c:327
 msgid ""
@@ -704,35 +669,37 @@ msgid ""
 "\n"
 "Press OK to terminate the application, or cancel to continue using it."
 msgstr ""
+"Chiusura del file manager e del gestore di Desktop in corso\n"
+"\n"
+"Per riavviare il desktop handler o il file manager\n"
+"si possono lanciare dal Panello, o si può esegure il comando UNIX `gmc'\n"
+"\n"
+"Premere OK per terminare l'applicazione, o cancel per continuarne l'uso."
 
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
 #: gnome/glayout.c:384
-#, fuzzy
 msgid "_Copy..."
-msgstr "Copia..."
+msgstr "_Copia..."
 
 #: gnome/glayout.c:384
 msgid "Copy files"
-msgstr "Copia files"
+msgstr "Copia file"
 
 #: gnome/glayout.c:385
-#, fuzzy
 msgid "_Delete..."
 msgstr "Elimina..."
 
 #: gnome/glayout.c:385
-#, fuzzy
 msgid "Delete files"
-msgstr "Sto eliminando"
+msgstr "Elimina file"
 
 #: gnome/glayout.c:386
-#, fuzzy
 msgid "_Move..."
-msgstr "Rinomina/muovi..."
+msgstr "Rinomina/_muovi..."
 
 #: gnome/glayout.c:386
 msgid "Rename or move files"
-msgstr "Rinomina o muove files"
+msgstr "Rinomina o muove file"
 
 #: gnome/glayout.c:388
 msgid "Show directory sizes"
@@ -740,73 +707,65 @@ msgstr "Mostra dimensione directory"
 
 #: gnome/glayout.c:388
 msgid "Shows the disk space used by each directory"
-msgstr ""
+msgstr "Mostra lo spazio su disco utilizzato da una directory"
 
 #: gnome/glayout.c:395
-#, fuzzy
 msgid "Select _All"
-msgstr " Seleziona "
+msgstr "Seleziona tutto"
 
 #: gnome/glayout.c:395
 msgid "Select all files in the current Panel"
-msgstr ""
+msgstr "Seleziona tutti i file nel pannello corrente"
 
 #: gnome/glayout.c:397
-#, fuzzy
 msgid "_Select Files..."
-msgstr "Elimina..."
+msgstr "_Seleziona file..."
 
 #: gnome/glayout.c:397
-#, fuzzy
 msgid "Select a group of files"
-msgstr "Seleziona un gruppo di files"
+msgstr "Seleziona un gruppo di file"
 
 #: gnome/glayout.c:398
-#, fuzzy
 msgid "_Invert Selection"
-msgstr "Inverti selezione files"
+msgstr "_Inverti selezione"
 
 #: gnome/glayout.c:398
 msgid "Reverses the list of tagged files"
-msgstr "Inverti selezione files"
+msgstr "Inverte la lista dei file selezionati"
 
-#: gnome/glayout.c:400 gtkedit/editwidget.c:1071 src/view.c:2031
+#: gnome/glayout.c:400 gtkedit/editwidget.c:1071 src/view.c:2038
 msgid "Search"
 msgstr "Cerca"
 
 #: gnome/glayout.c:400
 msgid "Search for a file in the current Panel"
-msgstr ""
+msgstr "Cerca un file nel pannello corrente"
 
 #: gnome/glayout.c:403 gnome/gscreen.c:1437
-#, fuzzy
 msgid "_Rescan Directory"
-msgstr "Aggiorna contenuto directory"
+msgstr "Aggiorna directory"
 
 #: gnome/glayout.c:403
 msgid "Rescan the directory contents"
-msgstr "Aggiorna contenuto directory"
+msgstr "Aggiorna il contenuto della directory"
 
 #: gnome/glayout.c:410
-#, fuzzy
 msgid "_Sort By..."
-msgstr "Ordinato..."
+msgstr "Ordina per..."
 
 #: gnome/glayout.c:410
 msgid "Confirmation settings"
-msgstr "Opzioni conferma"
+msgstr ""
 
 #: gnome/glayout.c:411
-#, fuzzy
 msgid "_Filter View..."
-msgstr "Filtro.."
+msgstr "Filtra..."
 
 #: gnome/glayout.c:411
 msgid "Global option settings"
-msgstr "Opzioni globali"
+msgstr ""
 
 #: gnome/glayout.c:418
-#, fuzzy
 msgid "_Find File..."
 msgstr "Trova file"
 
@@ -817,77 +776,67 @@ msgstr "Cerca files su disco"
 #. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
 #: gnome/glayout.c:421
 msgid "_Edit mime types..."
-msgstr ""
+msgstr "Modifica MIME type"
 
 #: gnome/glayout.c:421
 msgid "Edits the MIME type bindings"
-msgstr ""
+msgstr "Modifica i legami MIME type"
 
 #: gnome/glayout.c:423
-#, fuzzy
 msgid "_Run Command..."
-msgstr "Comandi"
+msgstr "Esegui comando..."
 
 #: gnome/glayout.c:423
-#, fuzzy
 msgid "Runs a command"
-msgstr " Comando chown "
+msgstr "Esegue un comando"
 
 #: gnome/glayout.c:425
-#, fuzzy
 msgid "_Run Command in panel..."
-msgstr "Confronta pannelli"
+msgstr "Esegui comando in pannello..."
 
 #: gnome/glayout.c:425
 msgid "Run a command and put the results in a panel"
-msgstr ""
+msgstr "Esegue un comando e mostra i risultati in un pannello"
 
 #: gnome/glayout.c:435
-#, fuzzy
 msgid "_Background jobs..."
-msgstr "Processi in background"
+msgstr "Processi in background..."
 
 #: gnome/glayout.c:435
 msgid "List of background operations"
-msgstr "Lista dei processi "
+msgstr "Lista delle operazioni in background"
 
 #: gnome/glayout.c:438
 msgid "Exit"
 msgstr "Esci"
 
 #: gnome/glayout.c:438
-#, fuzzy
 msgid "Terminates the file manager and the desktop"
-msgstr "Ordina le icone sul desktop"
+msgstr "Chiude il file manager e il Desktop"
 
 #: gnome/glayout.c:453
 msgid "Rescan System Devices"
-msgstr ""
+msgstr "Aggiorna periferiche di sistema"
 
 #: gnome/glayout.c:461 gnome/glayout.c:471
-#, fuzzy
 msgid "_Layout"
-msgstr "Layout"
+msgstr "_Presentazione"
 
 #: gnome/glayout.c:462 gnome/glayout.c:472
-#, fuzzy
 msgid "_Commands"
-msgstr "Comandi"
+msgstr "_Comandi"
 
 #: gnome/glayout.c:463
-#, fuzzy
 msgid "_Desktop"
-msgstr "Desktop"
+msgstr "_Desktop"
 
 #: gnome/glayout.c:464 gnome/glayout.c:473
-#, fuzzy
 msgid "_Help"
-msgstr "Aiuto"
+msgstr "_Aiuto"
 
 #: gnome/glayout.c:613
-#, fuzzy
 msgid "File/New/Directory..."
-msgstr "directory"
+msgstr "File/Nuovo/Directory..."
 
 #: gnome/gmain.c:561
 msgid ""
@@ -896,131 +845,115 @@ msgid ""
 "As root, you can damage your system if you are not careful, and the GNOME "
 "File Manager will not stop you from doing it."
 msgstr ""
+"Stai eseguendi il file manager come utenet 'root'\n"
+"Da utente 'root', puoi danneggiare il sistema e GNOMEIl file manager non "
+"potra' impedirti di farlo."
 
 #. we set the file part
 #: gnome/gnome-file-property-dialog.c:170
-#, fuzzy
 msgid "Full Name: "
 msgstr "Nome completo: "
 
 #: gnome/gnome-file-property-dialog.c:178
-#, fuzzy
 msgid "File Name"
 msgstr "Nome file"
 
 #: gnome/gnome-file-property-dialog.c:201
-#, fuzzy
 msgid "File Type: "
-msgstr "&Tipo di file"
+msgstr "Tipo di file: "
 
 #: gnome/gnome-file-property-dialog.c:207
-#, fuzzy
 msgid "File Type: Symbolic Link"
-msgstr "Nome del file del link simbolico:"
+msgstr "Tipo di file del link simbolico:"
 
 #: gnome/gnome-file-property-dialog.c:212
 msgid "Target Name: INVALID LINK"
-msgstr ""
+msgstr "Nome di destinazione: LINK NON VALIDO"
 
 #: gnome/gnome-file-property-dialog.c:215
-#, fuzzy
 msgid "Target Name: "
-msgstr " Nome "
+msgstr "Nome di destinazione:"
 
 #: gnome/gnome-file-property-dialog.c:220
-#, fuzzy
 msgid "File Type: Directory"
-msgstr "directory"
+msgstr "Tipo di file: Directory"
 
 #: gnome/gnome-file-property-dialog.c:222
 msgid "File Type: Character Device"
-msgstr ""
+msgstr "Tipo di file: Periferica (caratteri)"
 
 #: gnome/gnome-file-property-dialog.c:224
 msgid "File Type: Block Device"
-msgstr ""
+msgstr "Tipo di file: Periferica (blocchi)"
 
 #: gnome/gnome-file-property-dialog.c:226
-#, fuzzy
 msgid "File Type: Socket"
-msgstr "&Tipo di file"
+msgstr "Tipo di file: Socket"
 
 #: gnome/gnome-file-property-dialog.c:228
-#, fuzzy
 msgid "File Type: FIFO"
-msgstr "&Tipo di file"
+msgstr "Tipo di file: FIFO"
 
 #: gnome/gnome-file-property-dialog.c:238
 #: gnome/gnome-file-property-dialog.c:242
 #: gnome/gnome-file-property-dialog.c:248
-#, fuzzy
 msgid "File Size: "
-msgstr " Dimensione "
+msgstr "Dimensione file: "
 
 #: gnome/gnome-file-property-dialog.c:238
-#, fuzzy
 msgid " bytes"
-msgstr "%s bytes"
+msgstr " byte"
 
 #: gnome/gnome-file-property-dialog.c:242
-#, fuzzy
 msgid " KBytes  ("
-msgstr "Bytes"
+msgstr " KByte  ("
 
 #: gnome/gnome-file-property-dialog.c:243
 #: gnome/gnome-file-property-dialog.c:249
-#, fuzzy
 msgid " bytes)"
-msgstr "%s bytes"
+msgstr " byte)"
 
 #: gnome/gnome-file-property-dialog.c:248
-#, fuzzy
 msgid " MBytes  ("
-msgstr "Bytes"
+msgstr " MByte  ("
 
 #: gnome/gnome-file-property-dialog.c:256
-#, fuzzy
 msgid "File Size: N/A"
-msgstr " Dimensione "
+msgstr " Dimensione: Non disponibile"
 
 #: gnome/gnome-file-property-dialog.c:267
-#, fuzzy
 msgid "File Created on: "
-msgstr "Creato:    %s"
+msgstr "File creato il: "
 
 #: gnome/gnome-file-property-dialog.c:276
-#, fuzzy
 msgid "Last Modified on: "
-msgstr "Modificato: %s"
+msgstr "Ultima modifica il: "
 
 #: gnome/gnome-file-property-dialog.c:285
-#, fuzzy
 msgid "Last Accessed on: "
-msgstr "Aperto: %d"
+msgstr "Ultimo accesso il:"
 
 #: gnome/gnome-file-property-dialog.c:303
 msgid "URL:"
-msgstr ""
+msgstr "URL:"
 
 #: gnome/gnome-file-property-dialog.c:310
-#, fuzzy
 msgid "Caption:"
-msgstr "Posizione:     %Xh:%Xh"
+msgstr "Titolo:"
 
 #: gnome/gnome-file-property-dialog.c:403
 #: gnome/gnome-file-property-dialog.c:491 gnome/gpopup2.c:194
-#: src/screen.c:2353 src/screen.c:2383
+#: src/screen.c:2363 src/screen.c:2393
 msgid "View"
 msgstr "Vista"
 
 #: gnome/gnome-file-property-dialog.c:404
 msgid "Use default View options"
-msgstr ""
+msgstr "Usa Opzioni Vista di default"
 
 #: gnome/gnome-file-property-dialog.c:439
-#, fuzzy
 msgid "Select an Icon"
-msgstr "Scegli icona"
+msgstr "Scegli un'Icona"
 
 #. we do open first
 #: gnome/gnome-file-property-dialog.c:469 gnome/gpopup2.c:187
@@ -1029,29 +962,28 @@ msgstr "Apri"
 
 #: gnome/gnome-file-property-dialog.c:479
 msgid "Use default Open action"
-msgstr ""
+msgstr "Usa Azioni di Apri di default"
 
 #: gnome/gnome-file-property-dialog.c:489
-#, fuzzy
 msgid "Drop Action"
-msgstr "Posizione:     %Xh:%Xh"
+msgstr "Azioni Trascinamento"
 
 #: gnome/gnome-file-property-dialog.c:502
 msgid "Use default Drop action"
-msgstr ""
+msgstr "Usa Azioni di Trascinamento di default"
 
 #: gnome/gnome-file-property-dialog.c:504
 msgid "Use default View action"
-msgstr ""
+msgstr "Usa Azioni di Vista di default"
 
 #: gnome/gnome-file-property-dialog.c:513 gnome/gpopup2.c:196
-#: src/screen.c:2354 src/screen.c:2384 src/view.c:2027
+#: src/screen.c:2364 src/screen.c:2394 src/view.c:2034
 msgid "Edit"
-msgstr "Modif"
+msgstr "Modifica"
 
 #: gnome/gnome-file-property-dialog.c:523
 msgid "Use default Edit action"
-msgstr ""
+msgstr "Usa Azioni di Modifica di default"
 
 #: gnome/gnome-file-property-dialog.c:577 gnome/gprop.c:521
 msgid "Icon"
@@ -1059,28 +991,24 @@ msgstr "Icona"
 
 #. We must be a file or a link to a file.
 #: gnome/gnome-file-property-dialog.c:611
-#, fuzzy
 msgid "File Actions"
-msgstr " Il file esiste "
+msgstr "Azioni File"
 
 #: gnome/gnome-file-property-dialog.c:616
-#, fuzzy
 msgid "Open action"
-msgstr "Apre un terminale"
+msgstr "Azioni Apri"
 
 #: gnome/gnome-file-property-dialog.c:617
-#, fuzzy
 msgid "Needs terminal to run"
-msgstr "Nuovo terminale"
+msgstr "Necessita un terminale per esguire"
 
 #: gnome/gnome-file-property-dialog.c:742
-#, fuzzy
 msgid "File Permissions"
-msgstr " Permessi "
+msgstr "Permessi"
 
 #: gnome/gnome-file-property-dialog.c:753 gnome/gprop.c:259
 msgid "Current mode: "
-msgstr ""
+msgstr "Modo corrente: "
 
 #. Headings
 #: gnome/gnome-file-property-dialog.c:768 gnome/gprop.c:272
@@ -1123,236 +1051,210 @@ msgstr "Sticky"
 
 #: gnome/gnome-file-property-dialog.c:914
 msgid "File ownership"
-msgstr ""
+msgstr "Appartenenza"
 
 #: gnome/gnome-file-property-dialog.c:1074
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: gnome/gnome-file-property-dialog.c:1077
-#, fuzzy
 msgid "Statistics"
-msgstr "Statico"
+msgstr "Statistiche"
 
 #: gnome/gnome-file-property-dialog.c:1083
-#, fuzzy
 msgid "Options"
 msgstr "Opzioni"
 
 #: gnome/gnome-file-property-dialog.c:1086
-#, fuzzy
 msgid "Permissions"
 msgstr "Permessi"
 
 #: gnome/gnome-file-property-dialog.c:1089
-#, fuzzy
 msgid " Properties"
 msgstr "Proprieta'"
 
 #: gnome/gnome-file-property-dialog.c:1140
 msgid "You entered an invalid username"
-msgstr ""
+msgstr "Nome utente non valido"
 
 #: gnome/gnome-file-property-dialog.c:1185
 msgid "You must rename your file to something"
-msgstr ""
+msgstr "Rinominare il file"
 
 #: gnome/gnome-file-property-dialog.c:1191
 msgid "You cannot rename a file to something containing a '/' character"
-msgstr ""
+msgstr "Impossibile rinominare un file con un nome contenente il carattere '/'"
 
 #. the first label
 #: gnome/gnome-open-dialog.c:382
 msgid "Select an application to open \""
-msgstr ""
+msgstr "Selezionare un'applicazione da aprire \""
 
 #: gnome/gnome-open-dialog.c:393
-#, fuzzy
 msgid "Select a file to run with"
-msgstr "Seleziona un filtro per i files"
+msgstr "Seleziona un file con cui esegure"
 
 #. the file tree
 #: gnome/gnome-open-dialog.c:404
-#, fuzzy
 msgid "Applications"
-msgstr "Animazione"
+msgstr "Applicazioni"
 
 #: gnome/gnome-open-dialog.c:420
 msgid "Program to run"
-msgstr ""
+msgstr "Programma da eseguire"
 
 #: gnome/gpopup2.c:188
 msgid "Mount device"
-msgstr ""
+msgstr "Monta periferica"
 
 #: gnome/gpopup2.c:189
 msgid "Unmount device"
-msgstr ""
+msgstr "Smonta periferica"
 
 #: gnome/gpopup2.c:190
 msgid "Eject device"
-msgstr ""
+msgstr "Espelli periferica"
 
 #: gnome/gpopup2.c:193
 msgid "Open with..."
 msgstr "Apri con..."
 
 #: gnome/gpopup2.c:195
-#, fuzzy
 msgid "View Unfiltered"
-msgstr "Visualizza file"
+msgstr "Vista non filtrata"
 
 #: gnome/gpopup2.c:198
 msgid "Copy..."
 msgstr "Copia..."
 
-#: gnome/gpopup2.c:199 gtkedit/editwidget.c:1072 src/screen.c:2358
-#: src/screen.c:2388
+#: gnome/gpopup2.c:199 gtkedit/editwidget.c:1072 src/screen.c:2368
+#: src/screen.c:2398
 msgid "Delete"
 msgstr "Elimina"
 
 #: gnome/gpopup2.c:200
-#, fuzzy
 msgid "Move..."
 msgstr "Rinomina/muovi..."
 
 #: gnome/gpopup2.c:201
-#, fuzzy
 msgid "Hard Link..."
-msgstr "Link..."
+msgstr "Hard link..."
 
 #: gnome/gpopup2.c:202
 msgid "Symlink..."
-msgstr "Link simbolici"
+msgstr "Link simbolico..."
 
 #: gnome/gpopup2.c:203
-#, fuzzy
 msgid "Edit Symlink..."
-msgstr "Modifica link simbolici"
+msgstr "Modifica link simbolico"
 
 #: gnome/gpopup2.c:205
-#, fuzzy
 msgid "Properties..."
 msgstr "Proprieta'"
 
 #: gnome/gprefs.c:88
-#, fuzzy
 msgid "Show backup files"
-msgstr "mostra files di backup"
+msgstr "Mostra files di backup"
 
 #: gnome/gprefs.c:92
-#, fuzzy
 msgid "Show hidden files"
-msgstr "mostra file nascosti"
+msgstr "Mostra file nascosti"
 
 #: gnome/gprefs.c:96
-#, fuzzy
 msgid "Mix files and directories"
-msgstr "files/directoryes"
+msgstr "Mischia file e directory"
 
 #: gnome/gprefs.c:100
-#, fuzzy
 msgid "Use shell patterns instead of regular expressions"
-msgstr " Espressione regolare errata "
+msgstr "Usa i pattern della shell invece delle espressioni regolari"
 
 #: gnome/gprefs.c:109
 msgid "Confirm when deleting file"
-msgstr ""
+msgstr "Conferma prima di cancellare file"
 
 #: gnome/gprefs.c:113
-#, fuzzy
 msgid "Confirm when overwriting files"
-msgstr " conferma sovrascrittura "
+msgstr "Conferma prima di sovrascrivere file"
 
 #: gnome/gprefs.c:117
-#, fuzzy
 msgid "Confirm when executing files"
-msgstr "Opzioni conferma"
+msgstr "Conferma prima di eseguire file"
 
 #: gnome/gprefs.c:121
 msgid "Show progress while operations are being performed"
-msgstr ""
+msgstr "Mostra progresso operazioni"
 
 #: gnome/gprefs.c:130
 msgid "VFS Timeout:"
-msgstr ""
+msgstr "VFS Timeout: "
 
 #: gnome/gprefs.c:131 gnome/gprefs.c:156
 msgid "Seconds"
-msgstr ""
+msgstr " secondi"
 
 #: gnome/gprefs.c:134
-#, fuzzy
 msgid "Anonymous FTP password:"
-msgstr "password ftp anonimo:"
+msgstr "Password ftp anonimo:"
 
 #: gnome/gprefs.c:138
-#, fuzzy
 msgid "Always use FTP proxy"
-msgstr "usa sempre ftp proxy"
+msgstr "Usa sempre ftp proxy"
 
 #: gnome/gprefs.c:147
-#, fuzzy
 msgid "Fast directory reload"
-msgstr "&Visualizzazione rapida dir"
+msgstr "Aggiornamento directory veloce"
 
 #: gnome/gprefs.c:151
 msgid "Compute totals before copying files"
-msgstr ""
+msgstr "Calcola totali prima di copiare file"
 
 #: gnome/gprefs.c:155
-#, fuzzy
 msgid "FTP directory cache timeout :"
-msgstr "Timeout della cache del ftpfs:"
+msgstr "Timeout della cache ftp:"
 
 #: gnome/gprefs.c:159
 msgid "Allow customization of icons in icon view"
-msgstr ""
+msgstr "Consenti personalizzazione delle icone"
 
 #: gnome/gprefs.c:167
 msgid "Use shaped icons"
-msgstr ""
+msgstr "Usa icone 'shaped'"
 
 #: gnome/gprefs.c:171
-#, fuzzy
 msgid "Auto place icons"
-msgstr "Oidina icone"
+msgstr "Disponi icone automaticamente"
 
 #: gnome/gprefs.c:175
 msgid "Snap icons to grid"
-msgstr ""
+msgstr "Vincola icone alla griglia"
 
 #: gnome/gprefs.c:184
-#, fuzzy
 msgid "File display"
-msgstr "File: %s"
+msgstr "Mostra file"
 
 #: gnome/gprefs.c:188
-#, fuzzy
 msgid "Confirmation"
-msgstr " Conferma"
+msgstr "Conferma"
 
 #: gnome/gprefs.c:192
 msgid "VFS"
-msgstr ""
+msgstr "VFS"
 
 #: gnome/gprefs.c:196
-#, fuzzy
 msgid "Caching"
-msgstr "Cercando"
+msgstr "Caching"
 
 #: gnome/gprefs.c:200
-#, fuzzy
 msgid "Desktop"
 msgstr "Desktop"
 
 #: gnome/gprefs.c:479
 msgid "Preferences"
-msgstr ""
+msgstr "Preferenze"
 
 #: gnome/gprop.c:58 gnome/gprop.c:75
 msgid "Filename"
-msgstr "Nome file"
+msgstr "Nome file: "
 
 #: gnome/gprop.c:67
 msgid "Full name: "
@@ -1363,14 +1265,12 @@ msgid "Command"
 msgstr "Comando"
 
 #: gnome/gprop.c:119
-#, fuzzy
 msgid "Command:"
 msgstr "Comando"
 
 #: gnome/gprop.c:129
-#, fuzzy
 msgid "Use terminal"
-msgstr "Nuovo terminale"
+msgstr "Usa terminale"
 
 #: gnome/gprop.c:248
 msgid "File mode (permissions)"
@@ -1393,23 +1293,20 @@ msgid "Select icon"
 msgstr "Scegli icona"
 
 #: gnome/gscreen.c:1437
-#, fuzzy
 msgid "Reloads the current directory"
-msgstr " Non posso aprire la directory `%s' "
+msgstr "Aggiorna directory corrente"
 
 #: gnome/gscreen.c:1439
-#, fuzzy
 msgid "New _Directory..."
-msgstr "directory"
+msgstr "Nuova _Directory"
 
 #: gnome/gscreen.c:1439
-#, fuzzy
 msgid "Creates a new directory here"
-msgstr "Crea nuova directory"
+msgstr "Crea una nuova directory alla locazione corrente"
 
 #: gnome/gscreen.c:1620
 msgid "All files"
-msgstr "Tutti i files"
+msgstr "Tutti i file"
 
 #: gnome/gscreen.c:1622
 msgid "Archives and compressed files"
@@ -1433,7 +1330,7 @@ msgstr "Postscript e PDF"
 
 #: gnome/gscreen.c:1632
 msgid "Spreadsheet files"
-msgstr "Files fogli di calcolo"
+msgstr "File di fogli di calcolo"
 
 #: gnome/gscreen.c:1634
 msgid "Image files"
@@ -1445,27 +1342,27 @@ msgstr "Video/animazioni"
 
 #: gnome/gscreen.c:1639
 msgid "Audio files"
-msgstr "Files audio"
+msgstr "File audio"
 
 #: gnome/gscreen.c:1641
 msgid "C program files"
-msgstr "Files C"
+msgstr "File C"
 
 #: gnome/gscreen.c:1643
 msgid "C++ program files"
-msgstr "Files C++"
+msgstr "File C++"
 
 #: gnome/gscreen.c:1645
 msgid "Objective-C program files"
-msgstr "Files Objective-C"
+msgstr "File Objective-C"
 
 #: gnome/gscreen.c:1647
 msgid "Scheme program files"
-msgstr "Files scheme"
+msgstr "File Scheme"
 
 #: gnome/gscreen.c:1649
 msgid "Assembler program files"
-msgstr "Files assembler"
+msgstr "File Assembler"
 
 #: gnome/gscreen.c:1651
 msgid "Misc. program files"
@@ -1473,22 +1370,22 @@ msgstr "Programmi vari"
 
 #: gnome/gscreen.c:1653
 msgid "Font files"
-msgstr "Files caratteri"
+msgstr "File di Font"
 
 #: gnome/gscreen.c:1780
-#, fuzzy, c-format
+#, c-format
 msgid "Search: %s"
-msgstr "Cerca:"
+msgstr "Cerca %s:"
 
 #: gnome/gscreen.c:1790
-#, fuzzy, c-format
+#, c-format
 msgid "%s bytes in %d file"
-msgstr " %s bytes in %d file%s"
+msgstr "%s bytes in %d file"
 
 #: gnome/gscreen.c:1790
-#, fuzzy, c-format
+#, c-format
 msgid "%s bytes in %d files"
-msgstr " %s bytes in %d file%s"
+msgstr "%s byte in %d file"
 
 #: gnome/gscreen.c:1816 src/screen.c:670
 msgid "<readlink failed>"
@@ -1500,54 +1397,47 @@ msgstr "Filtro"
 
 #: gnome/gscreen.c:2373
 msgid "Back"
-msgstr ""
+msgstr "Indietro"
 
 #: gnome/gscreen.c:2373
 msgid "Go to the previously visited directory"
-msgstr ""
+msgstr "Va alla directory vista precedentemente"
 
 #: gnome/gscreen.c:2375
-#, fuzzy
 msgid "Up"
 msgstr "Su"
 
 #: gnome/gscreen.c:2375
 msgid "Go up a level in the directory heirarchy"
-msgstr ""
+msgstr "Sale di un livello nella gerarchia delle dirctory"
 
 #: gnome/gscreen.c:2377
-#, fuzzy
 msgid "Forward"
-msgstr "Formattato"
+msgstr "Avanti"
 
 #: gnome/gscreen.c:2377
-#, fuzzy
 msgid "Go to the next directory"
-msgstr " Non posso aprire la directory `%s' "
+msgstr "Va alla directory successiva"
 
 #: gnome/gscreen.c:2380 src/tree.c:1011
 msgid "Rescan"
 msgstr "Aggiorna"
 
 #: gnome/gscreen.c:2380
-#, fuzzy
 msgid "Rescan the current directory"
 msgstr "Aggiorna contenuto directory"
 
 #: gnome/gscreen.c:2383
-#, fuzzy
 msgid "Home"
-msgstr "&Home"
+msgstr "Home"
 
 #: gnome/gscreen.c:2383
-#, fuzzy
 msgid "Go to your home directory"
-msgstr "directory"
+msgstr "Va alla tua home directory"
 
 #: gnome/gscreen.c:2529
-#, fuzzy
 msgid "Location:"
-msgstr "Posizione:     %Xh:%Xh"
+msgstr "Locazione:"
 
 #. 1
 #: gnome/gtools.c:105 gtkedit/editcmd.c:341 gtkedit/editcmd.c:1184
@@ -1557,7 +1447,7 @@ msgstr "Posizione:     %Xh:%Xh"
 #: src/filegui.c:838 src/find.c:171 src/layout.c:370 src/option.c:144
 #: src/wtools.c:289 src/wtools.c:563
 msgid "&Ok"
-msgstr "&Accetta"
+msgstr "&Ok"
 
 #: gnome/gview.c:135 src/view.c:718
 #, c-format
@@ -1572,10 +1462,9 @@ msgstr "Col %d"
 #: gnome/gview.c:141 src/view.c:724
 #, c-format
 msgid "%s bytes"
-msgstr "%s bytes"
+msgstr "%s byte"
 
 #: gnome/gview.c:305
-#, fuzzy
 msgid "_Goto line"
 msgstr "Vai alla linea"
 
@@ -1584,30 +1473,28 @@ msgid "Jump to a specified line number"
 msgstr "Vai alla linea specificata"
 
 #: gnome/gview.c:308
-#, fuzzy
 msgid "_Monitor file"
 msgstr "Monitorizza file"
 
 #: gnome/gview.c:308
 msgid "Monitor file growing"
-msgstr "Controlla la mod. dimensione file"
+msgstr "Controlla dimensione file"
 
 #: gnome/gview.c:315
 msgid "Regexp search"
-msgstr "Cerca un'espressione regolare."
+msgstr "Cerca espressione regolare."
 
 #: gnome/gview.c:316
 msgid "Regular expression search"
-msgstr "Cerca un'espressione regolare"
+msgstr "Cerca espressione regolare"
 
 #: gnome/gview.c:325
-#, fuzzy
 msgid "_Wrap"
-msgstr "Envolver"
+msgstr "A capo"
 
 #: gnome/gview.c:326
 msgid "Wrap the text"
-msgstr ""
+msgstr "Abilita la funzioni di a capo automatico"
 
 #. Can not use this one yet, as it destroys the viewer, need to fix that
 #: gnome/gview.c:329
@@ -1615,27 +1502,24 @@ msgid "_Parsed view"
 msgstr ""
 
 #: gnome/gview.c:332
-#, fuzzy
 msgid "_Formatted"
-msgstr "Formattato"
+msgstr "_Formattato"
 
 #: gnome/gview.c:334
-#, fuzzy
 msgid "_Hex"
-msgstr "Hex"
+msgstr "_Hex"
 
 #: gnome/gview.c:340
-#, fuzzy
 msgid "_Search"
 msgstr "Cerca"
 
 #: gnome/gwidget.c:90
 msgid "ok"
-msgstr "accetta"
+msgstr "ok"
 
 #: gnome/gwidget.c:92
 msgid "cancel"
-msgstr "Annulla"
+msgstr "annulla"
 
 #: gnome/gwidget.c:94
 msgid "help"
@@ -1655,40 +1539,41 @@ msgstr "esci"
 
 #: gnome/gwidget.c:102
 msgid "abort"
-msgstr "annulla"
+msgstr "abbandona"
 
 #: gnome/gmount.c:195
-#, fuzzy
 msgid "Could not open the /etc/fstab file"
-msgstr " Non posso aprire il file "
+msgstr " Impossibile aprire il file /etc/fstab"
 
 #: gnome/gmount.c:322
 #, c-format
 msgid "Could not symlink %s to %s; will not have such a desktop device icon."
 msgstr ""
+"Impossibile creare un link simbolico fra %s e %s;\n"
+"L'icona della periferica non sara' disponibile sul desktop"
 
 #: gnome/gmount.c:374 gnome/gmount.c:389
 #, c-format
 msgid "CD-ROM %d"
-msgstr ""
+msgstr "CD-ROM %d"
 
 #: gnome/gmount.c:379
 #, c-format
 msgid "Floppy %d"
-msgstr ""
+msgstr "Floppy %d"
 
 #: gnome/gmount.c:385
 #, c-format
 msgid "Disk %d"
-msgstr ""
+msgstr "Disk %d"
 
 #: gnome/gmount.c:395
 #, c-format
 msgid "NFS dir %s"
-msgstr ""
+msgstr "NFS dir %s"
 
 #: gnome/gmount.c:399
-#, fuzzy, c-format
+#, c-format
 msgid "Device %d"
 msgstr "Periferica: %s"
 
@@ -1696,19 +1581,18 @@ msgstr "Periferica: %s"
 #: gtkedit/edit.c:131 gtkedit/edit.c:226 gtkedit/edit.c:233 gtkedit/edit.c:240
 #: gtkedit/edit.c:247 gtkedit/edit.c:253 gtkedit/edit.c:310 gtkedit/edit.c:346
 #: gtkedit/editcmd.c:1951 gtkedit/editwidget.c:952 src/dir.c:386
-#: src/screen.c:2373 src/tree.c:683 src/tree.c:689 src/wtools.c:222
+#: src/screen.c:2383 src/tree.c:683 src/tree.c:689 src/wtools.c:222
 #: vfs/fish.c:224
 msgid " Error "
-msgstr " Errore! "
+msgstr " Errore "
 
 #: gtkedit/edit.c:131 gtkedit/edit.c:233
-#, fuzzy
 msgid " Failed trying to open file for reading: "
 msgstr " Impossibile aprire il file in lettura: "
 
 #: gtkedit/edit.c:240
 msgid " Cannot get size/permissions info on file: "
-msgstr " Impossibile ottenere dimensioni/permessi sul file: "
+msgstr " Impossibile ottenere dimensioni/permessi del file: "
 
 #: gtkedit/edit.c:247
 msgid " Not an ordinary file: "
@@ -1724,25 +1608,23 @@ msgid ""
 " Increase edit.h:MAXBUF and recompile the editor. "
 msgstr ""
 " \n"
-" Incrementa la variabile di edit.h:MAXBUG e ricompia l'editor"
+" Incrementa la variabile di edit.h:MAXBUG e ricompila l'editor"
 
 #: gtkedit/edit.c:310 gtkedit/edit.c:346
 msgid " Error allocating memory "
 msgstr " Errore di allocazione di memoria "
 
 #: gtkedit/editcmd.c:334
-#, fuzzy
 msgid "Quick save "
-msgstr "&Rapido "
+msgstr "Salva veloce"
 
 #: gtkedit/editcmd.c:335
-#, fuzzy
 msgid "Safe save "
-msgstr " Salva con nome "
+msgstr " Salva sicuro "
 
 #: gtkedit/editcmd.c:336
 msgid "Do backups -->"
-msgstr ""
+msgstr "Crea backup -->"
 
 #. NLS  for hotkeys?
 #: gtkedit/editcmd.c:339 gtkedit/editcmd.c:1136 gtkedit/editcmd.c:1182
@@ -1757,14 +1639,13 @@ msgid "&Cancel"
 msgstr "Annulla"
 
 #: gtkedit/editcmd.c:345
-#, fuzzy
 msgid "Extension:"
 msgstr "&Estensioni"
 
 #. NLS ?
 #: gtkedit/editcmd.c:352
 msgid " Edit Save Mode "
-msgstr ""
+msgstr "Configura modo di salvare"
 
 #: gtkedit/editcmd.c:476
 msgid " Save As "
@@ -1773,7 +1654,7 @@ msgstr " Salva con nome "
 #. Warning message with a query to continue or cancel the operation
 #: gtkedit/editcmd.c:490 gtkedit/editcmd.c:809 gtkedit/editcmd.c:839
 #: gtkedit/editcmd.c:986 gtkedit/editcmd.c:1083 src/ext.c:303 src/file.c:619
-#: src/help.c:318 src/main.c:699 src/screen.c:2093 src/screen.c:2136
+#: src/help.c:318 src/main.c:699 src/screen.c:2103 src/screen.c:2146
 #: src/subshell.c:705 src/subshell.c:731 src/utilunix.c:390 src/utilunix.c:394
 #: src/utilunix.c:465 vfs/mcfs.c:170
 msgid " Warning "
@@ -1815,7 +1696,7 @@ msgstr " Errore nell'apertura del file temporaneo "
 #. 'Open' = load temp file
 #: gtkedit/editcmd.c:635 gtkedit/editcmd.c:696 gtkedit/editcmd.c:764
 msgid " Error trying to open macro file "
-msgstr " Errore nell'apertura del file delle macro "
+msgstr " Errore nell'apertura del file di macro "
 
 #: gtkedit/editcmd.c:640 gtkedit/editcmd.c:648 gtkedit/editcmd.c:684
 #: gtkedit/editcmd.c:739
@@ -1825,7 +1706,7 @@ msgstr " tasto '%d 0': "
 
 #: gtkedit/editcmd.c:659
 msgid " Error trying to overwrite macro file "
-msgstr " Errore sovrascrivendo il file delle macro "
+msgstr " Errore nella sovrascrittura del file di macro "
 
 #. This heads the 'Macro' dialog box
 #: gtkedit/editcmd.c:676
@@ -1853,14 +1734,14 @@ msgstr " Esegui macro "
 
 #: gtkedit/editcmd.c:777 gtkedit/editcmd.c:779
 msgid " Confirm save file? : "
-msgstr " Conferma:  salvo il file?: "
+msgstr " Conferma salvataggio file: "
 
 #. Buttons to 'Confirm save file' query
 #: gtkedit/editcmd.c:782
 msgid " Save file "
 msgstr " Salva il file "
 
-#: gtkedit/editcmd.c:782 gtkedit/editwidget.c:1066 src/view.c:2023
+#: gtkedit/editcmd.c:782 gtkedit/editwidget.c:1066 src/view.c:2030
 msgid "Save"
 msgstr "Salva"
 
@@ -1870,7 +1751,7 @@ msgid ""
 " Continue discards these changes. "
 msgstr ""
 " Il testo corrente e' stato modificato senza salvare \n"
-" Continuando si perdono tutte le modiiche. "
+" Continuando si perderanno tutte le modifiche. "
 
 #: gtkedit/editcmd.c:809 gtkedit/editcmd.c:839 gtkedit/editcmd.c:986
 msgid "Continue"
@@ -1887,7 +1768,9 @@ msgstr " Errore nell'apertura del file in lettura "
 
 #: gtkedit/editcmd.c:986 gtkedit/editcmd.c:1083
 msgid " Block is large, you may not be able to undo this action. "
-msgstr " Il blocco e' molto grande, non riuscirai ad usare l'undo. "
+msgstr ""
+"Il blocco e' molto grande, potrebbe essere impossibile annullare questo "
+"comando."
 
 #: gtkedit/editcmd.c:1083
 msgid " Continue "
@@ -1906,7 +1789,6 @@ msgid "&Skip"
 msgstr "Ignora"
 
 #: gtkedit/editcmd.c:1142
-#, fuzzy
 msgid "&Replace"
 msgstr "Sostituisci"
 
@@ -1916,56 +1798,46 @@ msgid " Replace with: "
 msgstr " Sostituisci con: "
 
 #: gtkedit/editcmd.c:1152
-#, fuzzy
 msgid " Confirm replace "
-msgstr " conferma eliminazione "
+msgstr " Conferma sostituzione "
 
 #: gtkedit/editcmd.c:1186 gtkedit/editcmd.c:1271
-#, fuzzy
 msgid "scanf &Expression"
 msgstr " Espressione scanf "
 
 #: gtkedit/editcmd.c:1188
-#, fuzzy
 msgid "replace &All"
 msgstr "Sostituisci tutto"
 
 #: gtkedit/editcmd.c:1190
-#, fuzzy
 msgid "pr&Ompt on replace"
 msgstr " Conferma prima di sostituire "
 
 #: gtkedit/editcmd.c:1192 gtkedit/editcmd.c:1273
-#, fuzzy
 msgid "&Backwards"
 msgstr " Indietro "
 
 #: gtkedit/editcmd.c:1194 gtkedit/editcmd.c:1275
-#, fuzzy
 msgid "&Regular expression"
 msgstr " Espressione regolare "
 
 #: gtkedit/editcmd.c:1196 gtkedit/editcmd.c:1277
-#, fuzzy
 msgid "&Whole words only"
 msgstr " Solo parole intere "
 
 #: gtkedit/editcmd.c:1198 gtkedit/editcmd.c:1279
-#, fuzzy
 msgid "case &Sensitive"
-msgstr "controlla maiuscole/minuscole"
+msgstr "Controlla maiuscole/minuscole"
 
 #: gtkedit/editcmd.c:1202
-#, fuzzy
 msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Scrivi ordine argomenti: "
+msgstr " Inserisci l'ordine degli argomenti es. 3,2,1,4 "
 
 #: gtkedit/editcmd.c:1206
-#, fuzzy
 msgid " Enter replacement string:"
-msgstr " Inserisci stringa di ricerca"
+msgstr " Inserisci stringa di sostituzione"
 
-#: gtkedit/editcmd.c:1210 gtkedit/editcmd.c:1283 src/view.c:1948
+#: gtkedit/editcmd.c:1210 gtkedit/editcmd.c:1283 src/view.c:1955
 msgid " Enter search string:"
 msgstr " Inserisci stringa di ricerca"
 
@@ -1977,19 +1849,19 @@ msgstr " Sostituisci "
 
 #. Heads the 'Search' dialog box
 #: gtkedit/editcmd.c:1297 gtkedit/editcmd.c:1474 gtkedit/editcmd.c:2227
-#: src/view.c:1502 src/view.c:1601 src/view.c:1723 src/view.c:1916
-#: src/view.c:1948
+#: src/view.c:1509 src/view.c:1608 src/view.c:1730 src/view.c:1923
+#: src/view.c:1955
 msgid " Search "
 msgstr " Cerca "
 
 #. An input line comes after the ':'
 #: gtkedit/editcmd.c:1346
 msgid " Enter search text : "
-msgstr " Scrivi il testo da cercare: "
+msgstr " Inserisci il testo da cercare: "
 
 #: gtkedit/editcmd.c:1353
 msgid " Enter replace text : "
-msgstr " Scrivi il testo da sostituire: "
+msgstr " Inserisci il testo di sostituzione: "
 
 #: gtkedit/editcmd.c:1356 gtkedit/editcmd.c:1357
 #, c-format
@@ -1997,19 +1869,21 @@ msgid ""
 "You can enter regexp substrings with %s (not \\1, \\2 like sed) then use "
 "\"Enter...order\""
 msgstr ""
+"Si possono inserire sottostringhe di espressione regolare usando %s\n"
+"( non \\1, \\2 come in sed) usare quindi \"Inserisci...ordine\""
 
 #: gtkedit/editcmd.c:1359
-#, fuzzy
 msgid " Enter argument (or substring) order : "
-msgstr " Scrivi ordine argomenti: "
+msgstr " Inserisci ordine argomenti(o sottostringhe): "
 
 #. Tool hint
 #: gtkedit/editcmd.c:1363 gtkedit/editcmd.c:1364
-#, fuzzy
 msgid ""
 "Enter the order of replacement of your scanf format specifiers or regexp "
 "substrings"
-msgstr "Scrivi l'ordine di modifica delle specificazioni del tuo scanf"
+msgstr ""
+"Inserisci l'ordine di modifica delle specificazioni di formato scanf o di "
+"espressione regolare"
 
 #. The following are check boxes
 #: gtkedit/editcmd.c:1369
@@ -2018,7 +1892,7 @@ msgstr " Solo parole intere "
 
 #: gtkedit/editcmd.c:1371
 msgid " Case sensitive "
-msgstr " Verifica maiuscole/minuscole "
+msgstr " Considera maiuscole/minuscole "
 
 #: gtkedit/editcmd.c:1374
 msgid " Regular expression "
@@ -2026,7 +1900,8 @@ msgstr " Espressione regolare "
 
 #: gtkedit/editcmd.c:1375 gtkedit/editcmd.c:1376
 msgid "See the regex man page for how to compose a regular expression"
-msgstr "Controlla la man page di regex per scrivere un'espressione regolare"
+msgstr ""
+"Consulta la man page di regex per sapere come comporreun'espressione regolare"
 
 #: gtkedit/editcmd.c:1382
 msgid " Backwards "
@@ -2058,7 +1933,7 @@ msgstr " Espressione scanf "
 #: gtkedit/editcmd.c:1407
 msgid "Allows entering of a C format string, see the scanf man page"
 msgstr ""
-"Permitti l'inserimento di una stringa in formato C, controlla la man page di "
+"Permetti l'inserimento di una stringa in formato C, consulta la man page di "
 "scanf"
 
 #. Tool hint
@@ -2069,7 +1944,7 @@ msgstr "Inizia ricerca, Invio"
 #. Tool hint
 #: gtkedit/editcmd.c:1415
 msgid "Abort this dialog, Esc"
-msgstr "Esci da questa maschera, Esc"
+msgstr "Abbandona questa maschera, Esc"
 
 #. Buttons for the confirm replace dialog box.
 #: gtkedit/editcmd.c:1578
@@ -2088,22 +1963,22 @@ msgstr "Sostituisci tutto"
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
 msgstr ""
-" L'espressione regolare non e' valida, o espressione di scanf con troppo "
-"poche conversioni "
+" L'espressione regolare non e' valida, o espressione di scanf con troppe "
+"conversioni "
 
 #. "Invalid regexp string or scanf string"
 #: gtkedit/editcmd.c:2127
 msgid " Error in replacement format string. "
-msgstr " Errore nella sostituzione della stringa. "
+msgstr " Errore nella stringa di sostituzione . "
 
 #: gtkedit/editcmd.c:2155
 #, c-format
 msgid " %ld replacements made. "
-msgstr " eseguite %ld sostituzioni. "
+msgstr " Eseguite %ld sostituzioni. "
 
 #: gtkedit/editcmd.c:2158 gtkedit/editcmd.c:2227
 msgid " Search string not found. "
-msgstr " Testo non trovato "
+msgstr " Nessuna corrispondenza trovata "
 
 #. Confirm 'Quit' dialog box
 #: gtkedit/editcmd.c:2251 gtkedit/editcmd.c:2266 gtkedit/editcmd.c:2269
@@ -2115,25 +1990,25 @@ msgid ""
 " Current text was modified without a file save. \n"
 " Save with exit? "
 msgstr ""
-" Il testo e' stato modificato senza salvarlo,\n"
-" Lo salvo in uscita?"
+" Il testo ha subito delle modifiche dall'ultimo salvataggio,\n"
+" Salvarlo prima di uscire?"
 
 #: gtkedit/editcmd.c:2266
 msgid " File was modified, Save with exit? "
-msgstr " Il file e' stato modificato. Lo salvo uscendo? "
+msgstr " Il file e' stato modificato. Salvarlo prima di uscire? "
 
 #: gtkedit/editcmd.c:2266
 msgid "Cancel quit"
 msgstr "Annulla uscita"
 
 #: gtkedit/editcmd.c:2266 src/cmd.c:251 src/file.c:1859 src/file.c:2233
-#: src/filegui.c:602 src/hotlist.c:1035 src/main.c:854 src/screen.c:2122
+#: src/filegui.c:602 src/hotlist.c:1035 src/main.c:854 src/screen.c:2132
 #: src/subshell.c:706 src/subshell.c:732 src/tree.c:746 src/view.c:404
 msgid "&Yes"
 msgstr "&Si"
 
 #: gtkedit/editcmd.c:2266 src/cmd.c:251 src/file.c:1859 src/file.c:2233
-#: src/filegui.c:601 src/hotlist.c:1035 src/main.c:854 src/screen.c:2122
+#: src/filegui.c:601 src/hotlist.c:1035 src/main.c:854 src/screen.c:2132
 #: src/subshell.c:706 src/subshell.c:732 src/tree.c:746 src/view.c:404
 msgid "&No"
 msgstr "&No"
@@ -2157,14 +2032,14 @@ msgstr " Copia nella clipboard "
 #: gtkedit/editcmd.c:2473 gtkedit/editcmd.c:2495 gtkedit/editcmd.c:2548
 #: gtkedit/editcmd.c:2561
 msgid " Unable to save to file. "
-msgstr " impossibile salvare il file. "
+msgstr " Impossibile salvare il file. "
 
 #: gtkedit/editcmd.c:2495 gtkedit/editcmd.c:2561
 msgid " Cut to clipboard "
 msgstr " Taglia nella clipboard "
 
 #: gtkedit/editcmd.c:2583 gtkedit/editcmd.c:2587 gtkedit/editcmd.c:2592
-#: gtkedit/editcmd.c:2595 src/view.c:1888
+#: gtkedit/editcmd.c:2595 src/view.c:1895
 msgid " Goto line "
 msgstr " Vai alla linea "
 
@@ -2175,7 +2050,7 @@ msgstr " Linea: "
 
 #: gtkedit/editcmd.c:2616 gtkedit/editcmd.c:2633
 msgid " Save Block "
-msgstr " Salva blocco evidenziato "
+msgstr " Salva blocco "
 
 #: gtkedit/editcmd.c:2667
 msgid " Insert File "
@@ -2192,21 +2067,22 @@ msgstr " Errore nell'inserimento del file "
 #. Not essential to translate
 #: gtkedit/editcmd.c:2702
 msgid " Sort block "
-msgstr " Ordina "
+msgstr " Ordina blocco "
 
 #. Not essential to translate
 #: gtkedit/editcmd.c:2702 gtkedit/editcmd.c:2756
 msgid " You must first highlight a block of text. "
-msgstr " Seleziona prima una parte di testo "
+msgstr " Seleziona prima un blocco di testo "
 
 #: gtkedit/editcmd.c:2709
 msgid " Run Sort "
-msgstr " Ordina il testo "
+msgstr " Esegui ordina "
 
 #. Not essential to translate
 #: gtkedit/editcmd.c:2711
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " Inserisci opzioni di ordinamento (man sort) separate da spazi: "
+msgstr ""
+" Inserisci opzioni di ordinamento (vedi man page di sort) separate da spazi: "
 
 #: gtkedit/editcmd.c:2722 gtkedit/editcmd.c:2728
 msgid " Sort "
@@ -2220,7 +2096,7 @@ msgstr " Errore nell'esecuzione del comando `sort' "
 #. Not essential to translate
 #: gtkedit/editcmd.c:2730
 msgid " Sort returned non-zero: "
-msgstr " Il `sort' e' uscito con valore non-zero "
+msgstr " Il comando `sort' ha restituito un valore non-zero "
 
 #. Not essential to translate
 #: gtkedit/editcmd.c:2754 gtkedit/editcmd.c:2784
@@ -2234,38 +2110,35 @@ msgstr " Errore nelle informazioni sul file "
 
 #: gtkedit/editcmd.c:2856
 msgid " Mail "
-msgstr " Posta "
+msgstr " Mail "
 
 #: gtkedit/editcmd.c:2869
-#, fuzzy
 msgid " Copies to"
-msgstr " punta a: "
+msgstr " Copie a: "
 
 #: gtkedit/editcmd.c:2873
-#, fuzzy
 msgid " Subject"
-msgstr " Seleziona "
+msgstr " Oggetto "
 
 #: gtkedit/editcmd.c:2877
 msgid " To"
-msgstr ""
+msgstr " A"
 
 #: gtkedit/editcmd.c:2879
 msgid " mail -s <subject> -c <cc> <to>"
-msgstr ""
+msgstr " mail -s <oggetto> -c <cc> <a>"
 
 #: gtkedit/editoptions.c:36
 msgid "Intuitive"
-msgstr ""
+msgstr "Intuitivo"
 
 #: gtkedit/editoptions.c:36
 msgid "Emacs"
-msgstr ""
+msgstr "Emacs"
 
 #: gtkedit/editoptions.c:39
-#, fuzzy
 msgid "None"
-msgstr "proprietario"
+msgstr "Nessuno"
 
 #: gtkedit/editoptions.c:39
 msgid "Dynamic paragraphing"
@@ -2273,37 +2146,36 @@ msgstr "Formattazione dinamica paragrafi"
 
 #: gtkedit/editoptions.c:39
 msgid "Type writer wrap"
-msgstr ""
+msgstr "A capo tipo 'macchina da scrivere'"
 
 #. 2
 #: gtkedit/editoptions.c:74
-#, fuzzy
 msgid "Word wrap line length : "
-msgstr " Inserisci lunghezza linea, 0 per disattivare "
+msgstr "Inserisci lunghezza linea : "
 
 #. 4
 #: gtkedit/editoptions.c:80
 msgid "Tab spacing : "
-msgstr ""
+msgstr "Tabulazioni : "
 
 #: gtkedit/editoptions.c:88
 msgid "synta&X highlighting"
-msgstr ""
+msgstr "Sintassi evidenziata"
 
 #. 7
 #: gtkedit/editoptions.c:94
 msgid "confir&M before saving"
-msgstr ""
+msgstr "conferma prima di salvare"
 
 #. 8
 #: gtkedit/editoptions.c:97
 msgid "fill tabs with &Spaces"
-msgstr ""
+msgstr "riempi tabulazioni con spazi"
 
 #. 9
 #: gtkedit/editoptions.c:100
 msgid "&Return does autoindent"
-msgstr ""
+msgstr "autoindentazione"
 
 #. 10
 #: gtkedit/editoptions.c:103
@@ -2317,9 +2189,8 @@ msgstr ""
 
 #. 13
 #: gtkedit/editoptions.c:112
-#, fuzzy
 msgid "Wrap mode"
-msgstr "Envolver"
+msgstr "Modo di andare a capo"
 
 #. 15
 #: gtkedit/editoptions.c:118
@@ -2327,17 +2198,16 @@ msgid "Key emulation"
 msgstr "Emulazione tasti"
 
 #: gtkedit/editoptions.c:159
-#, fuzzy
 msgid " Editor options "
-msgstr " Altre opzioni "
+msgstr " Opzioni dell'editor "
 
 #. Not essential to translate
 #: gtkedit/editwidget.c:312
 msgid "Error initialising editor.\n"
 msgstr "Errore nell'inizializzazione dell'editor.\n"
 
-#: gtkedit/editwidget.c:1065 src/help.c:806 src/main.c:1705 src/screen.c:2351
-#: src/screen.c:2381 src/tree.c:1009 src/view.c:2018
+#: gtkedit/editwidget.c:1065 src/help.c:806 src/main.c:1705 src/screen.c:2361
+#: src/screen.c:2391 src/tree.c:1009 src/view.c:2025
 msgid "Help"
 msgstr "Aiuto"
 
@@ -2353,22 +2223,21 @@ msgstr "Sostituisci"
 msgid "PullDn"
 msgstr "Menu"
 
-#: gtkedit/editwidget.c:1075 src/help.c:818 src/main.c:1708 src/view.c:2020
-#: src/view.c:2040
+#: gtkedit/editwidget.c:1075 src/help.c:818 src/main.c:1708 src/view.c:2027
+#: src/view.c:2047
 msgid "Quit"
 msgstr "Esci"
 
 #: gtkedit/editmenu.c:57
 msgid " Word wrap "
-msgstr "word wrap "
+msgstr " A capo automatico "
 
 #. Not essential to translate
 #: gtkedit/editmenu.c:59
 msgid " Enter line length, 0 for off: "
-msgstr " Inserisci lunghezza linea, 0 per disattivare "
+msgstr " Inserisci lunghezza linea, 0 per disattivare: "
 
 #: gtkedit/editmenu.c:70
-#, fuzzy
 msgid " About "
 msgstr "About"
 
@@ -2385,43 +2254,43 @@ msgstr ""
 
 #: gtkedit/editmenu.c:119 gtkedit/editmenu.c:135
 msgid "&Open/load...     C-o"
-msgstr "&Apri/esegui... C-o"
+msgstr "&Apri/esegui...   C-o"
 
 #: gtkedit/editmenu.c:120
 msgid "&New              C-n"
-msgstr "&Nuovo"
+msgstr "&Nuovo            C-n"
 
 #: gtkedit/editmenu.c:122 gtkedit/editmenu.c:138
 msgid "&Save              F2"
-msgstr "&Salva      F2"
+msgstr "&Salva             F2"
 
 #: gtkedit/editmenu.c:123 gtkedit/editmenu.c:139
 msgid "save &As...       F12"
-msgstr "salva &Con nome...    F12"
+msgstr "salva &Con nome...F12"
 
 #: gtkedit/editmenu.c:125 gtkedit/editmenu.c:141
 msgid "&Insert file...   F15"
-msgstr "&Inserisci file...    F15"
+msgstr "&Inserisci file...F15"
 
 #: gtkedit/editmenu.c:126
 msgid "copy to &File...  C-f"
-msgstr "copia in un &File....  C-f"
+msgstr "copia in &File... C-f"
 
 #: gtkedit/editmenu.c:128 gtkedit/editmenu.c:144
 msgid "a&Bout...            "
-msgstr "a&Bout"
+msgstr "a&Bout...            "
 
 #: gtkedit/editmenu.c:130 gtkedit/editmenu.c:146
 msgid "&Quit             F10"
-msgstr "&Esci         F10"
+msgstr "&Esci             F10"
 
 #: gtkedit/editmenu.c:136
 msgid "&New            C-x k"
-msgstr "&Nuovo    C-x k"
+msgstr "&Nuovo          C-x k"
 
 #: gtkedit/editmenu.c:142
 msgid "copy to &File...     "
-msgstr "copia su un &File..."
+msgstr "copia in &File...    "
 
 #: gtkedit/editmenu.c:151 gtkedit/editmenu.c:168
 msgid "&Toggle Mark       F3"
@@ -2429,51 +2298,51 @@ msgstr "Attiva/disattiva evidenziazione F3"
 
 #: gtkedit/editmenu.c:152 gtkedit/editmenu.c:169
 msgid "&Mark Columns    S-F3"
-msgstr ""
+msgstr "&Marca colonne   S-F3"
 
 #: gtkedit/editmenu.c:154 gtkedit/editmenu.c:171
 msgid "toggle &Ins/overw Ins"
-msgstr "Attiva &inserisci       Ins"
+msgstr "Attiva/disattiva &inserisci Ins"
 
 #: gtkedit/editmenu.c:156 gtkedit/editmenu.c:173
 msgid "&Copy              F5"
-msgstr "&Copia         F5"
+msgstr "&Copia             F5"
 
 #: gtkedit/editmenu.c:157 gtkedit/editmenu.c:174
 msgid "&Move              F6"
-msgstr "&Rinomina        F6"
+msgstr "&Rinomina/muovi    F6"
 
 #: gtkedit/editmenu.c:158 gtkedit/editmenu.c:175
 msgid "&Delete            F8"
-msgstr "&Cancella        F8"
+msgstr "&Cancella          F8"
 
 #: gtkedit/editmenu.c:160 gtkedit/editmenu.c:177
 msgid "&Undo             C-u"
-msgstr "&Indietro       C-"
+msgstr "&Indietro         C-u"
 
 #: gtkedit/editmenu.c:162 gtkedit/editmenu.c:179
 msgid "&Beginning     C-PgUp"
-msgstr "I&nizio file C-PgUp"
+msgstr "I&nizio file   C-PgUp"
 
 #: gtkedit/editmenu.c:163 gtkedit/editmenu.c:180
 msgid "&End           C-PgDn"
-msgstr "&Fine file   C-PgDn"
+msgstr "&Fine file     C-PgDn"
 
 #: gtkedit/editmenu.c:185 gtkedit/editmenu.c:192
 msgid "&Search...         F7"
-msgstr "&Cerca...   F7"
+msgstr "&Cerca...          F7"
 
 #: gtkedit/editmenu.c:186 gtkedit/editmenu.c:193
 msgid "search &Again     F17"
-msgstr "cerca &Nuovamente     F17"
+msgstr "Ripeti &Ricerca F17"
 
 #: gtkedit/editmenu.c:187 gtkedit/editmenu.c:194
 msgid "&Replace...        F4"
-msgstr "Sostituisci F4"
+msgstr "&Sostituisci...     F4"
 
 #: gtkedit/editmenu.c:199 gtkedit/editmenu.c:221
 msgid "&Goto line...            M-l"
-msgstr "Vai alla linea    M-l"
+msgstr "&Vai alla linea...       M-l"
 
 #: gtkedit/editmenu.c:201 gtkedit/editmenu.c:223
 msgid "insert &Literal...       C-q"
@@ -2481,7 +2350,7 @@ msgstr "Inserisci &Letteralmente... C-q"
 
 #: gtkedit/editmenu.c:203 gtkedit/editmenu.c:225
 msgid "&Refresh screen          C-l"
-msgstr "Aggiorna schermo   C-l"
+msgstr "&Aggiorna schermata      C-l"
 
 #: gtkedit/editmenu.c:205 gtkedit/editmenu.c:227
 msgid "&Start record macro      C-r"
@@ -2493,15 +2362,15 @@ msgstr "&Finisci registrazione macro... C-r"
 
 #: gtkedit/editmenu.c:207
 msgid "&Execute macro...   C-a, KEY"
-msgstr "&Esegui macro C-a, Tasto"
+msgstr "&Esegui macro...  C-a, Tasto"
 
 #: gtkedit/editmenu.c:208 gtkedit/editmenu.c:230
 msgid "delete macr&O...            "
-msgstr "Elimina macro..."
+msgstr "Elimina macro...            "
 
 #: gtkedit/editmenu.c:210 gtkedit/editmenu.c:232
 msgid "insert &Date/time           "
-msgstr "inserisci data e ora"
+msgstr "inserisci data/ora          "
 
 #: gtkedit/editmenu.c:212 gtkedit/editmenu.c:234
 msgid "format p&Aragraph        M-p"
@@ -2513,7 +2382,7 @@ msgstr "Correzine testo(ispell)    C-p"
 
 #: gtkedit/editmenu.c:214 gtkedit/editmenu.c:236
 msgid "sor&T...                 M-t"
-msgstr "&Ordina     M-t"
+msgstr "&Ordina...               M-t"
 
 #: gtkedit/editmenu.c:215 gtkedit/editmenu.c:237
 msgid "'indent' &C Formatter    F19"
@@ -2521,7 +2390,7 @@ msgstr "formatta in C con `indent' F19"
 
 #: gtkedit/editmenu.c:216
 msgid "&Mail...                    "
-msgstr "&Posta... "
+msgstr "&Mail... "
 
 #: gtkedit/editmenu.c:229
 msgid "&Execute macro... C-x e, KEY"
@@ -2529,11 +2398,11 @@ msgstr "&Esegui macro... C-x e, Tasto"
 
 #: gtkedit/editmenu.c:235
 msgid "'ispell' s&Pell check    M-$"
-msgstr "'ispell'  inizia correzione M-$"
+msgstr "'ispell' inizia correzione M-$"
 
 #: gtkedit/editmenu.c:244 gtkedit/editmenu.c:253
 msgid "&General...  "
-msgstr "&Generale..."
+msgstr "&Generale... "
 
 #: gtkedit/editmenu.c:245 gtkedit/editmenu.c:254
 msgid "&Save mode..."
@@ -2541,7 +2410,7 @@ msgstr "&Modalita' di salvataggio..."
 
 #: gtkedit/editmenu.c:247 gtkedit/editmenu.c:256 src/main.c:1339
 msgid "&Layout..."
-msgstr "&Layout"
+msgstr "&Presentazione... "
 
 #. The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t'
 #: gtkedit/editmenu.c:266 gtkedit/editmenu.c:275 gtkedit/editmenu.c:392
@@ -2570,7 +2439,6 @@ msgid "Open...\tC-o"
 msgstr "Apri...\tC-o"
 
 #: gtkedit/editmenu.c:394
-#, fuzzy
 msgid "New\tC-n"
 msgstr "Nuovo\tC-n"
 
@@ -2580,7 +2448,7 @@ msgstr "Salva\tF2"
 
 #: gtkedit/editmenu.c:397
 msgid "Save as...\tF12"
-msgstr "Salva come......\tF12"
+msgstr "Salva come...\tF12"
 
 #: gtkedit/editmenu.c:399
 msgid "Insert file...\tF15"
@@ -2588,34 +2456,32 @@ msgstr "Inserisci file...\tF15"
 
 #: gtkedit/editmenu.c:400
 msgid "Copy to file...\tC-f"
-msgstr "Copia su un file...\tC-f"
+msgstr "Copia in file...\tC-f"
 
 #. Tool hint
 #: gtkedit/editmenu.c:403
 msgid "Disk operations"
-msgstr "Operazioni sui files"
+msgstr "Operazioni sul disco"
 
 #: gtkedit/editmenu.c:409
 msgid "Toggle mark\tF3"
-msgstr "Alterna evidenziazione\\tF3"
+msgstr "Attiva/disattiva evidenziazione\tF3"
 
 #: gtkedit/editmenu.c:410
-#, fuzzy
 msgid "Toggle mark columns\tC-b"
-msgstr "Alterna evidenziazione\\tF3"
+msgstr "Attiva/disattiva evidenziazione colonne\tC-b"
 
 #: gtkedit/editmenu.c:412
-#, fuzzy
 msgid "Toggle book mark\tC-M-Ins"
-msgstr "Alterna evidenziazione\\tF3"
+msgstr "Attiva/disattiva segnalibro\tC-M-Ins"
 
 #: gtkedit/editmenu.c:413
 msgid "Previous book mark\tC-M-Up"
-msgstr ""
+msgstr "Segnalibro precedente\tC-M-Su"
 
 #: gtkedit/editmenu.c:414
 msgid "Next book mark\tC-M-Down"
-msgstr ""
+msgstr "Segnalibro successivo\tC-M-Giu"
 
 #: gtkedit/editmenu.c:415
 msgid "Flush book marks"
@@ -2623,39 +2489,39 @@ msgstr ""
 
 #: gtkedit/editmenu.c:417
 msgid "Toggle insert/overwrite\tIns"
-msgstr "Alterna inserisci/sovrascrivi \tIns"
+msgstr "Inserisci/sovrascrivi \tIns"
 
 #: gtkedit/editmenu.c:419
 msgid "Copy block to cursor\tF5"
-msgstr "Copia il blocco sotto il cursore\tF5"
+msgstr "Copia il blocco alla posizione cursore\tF5"
 
 #: gtkedit/editmenu.c:420
 msgid "Move block to cursor\tF6"
-msgstr "Muovi il blocco sotto al cursore\tF6"
+msgstr "Muovi il blocco alla posizione cursore\tF6"
 
 #: gtkedit/editmenu.c:421
 msgid "Delete block\tF8/C-Del"
-msgstr "Elimina blocco\\tF8/C-Del"
+msgstr "Elimina blocco\tF8/C-Del"
 
 #: gtkedit/editmenu.c:423
 msgid "Copy block to clipbrd\tC-Ins"
-msgstr "Copia il blocco alla clipboard\\tC-Ins"
+msgstr "Copia il blocco alla clipboard\tC-Ins"
 
 #: gtkedit/editmenu.c:424
 msgid "Cut block to clipbrd\tS-Del"
-msgstr "Muovi il blocco alla clipboard\\tS-Del"
+msgstr "Muovi il blocco alla clipboard\tS-Del"
 
 #: gtkedit/editmenu.c:425
 msgid "Paste block from clipbrd\tS-Ins"
-msgstr "Importa il blocco dalla clipboard\\tS-Ins"
+msgstr "Incolla blocco dalla clipboard\tS-Ins"
 
 #: gtkedit/editmenu.c:426
 msgid "Selection history\tM-Ins"
-msgstr "Storico selezioni\\tM-Ins"
+msgstr "Storia selezioni\tM-Ins"
 
 #: gtkedit/editmenu.c:428
 msgid "Undo\tC-BackSpace"
-msgstr "Undo\\tC-Backspace"
+msgstr "Undo\tC-Backspace"
 
 #. Tool hint
 #: gtkedit/editmenu.c:431
@@ -2663,54 +2529,53 @@ msgid "Manipulating blocks of text"
 msgstr "Manipolazione blocchi di testo"
 
 #: gtkedit/editmenu.c:436
-#, fuzzy
 msgid " Srch/Replce "
 msgstr " Cerca/Sostituisci "
 
 #: gtkedit/editmenu.c:437
 msgid "Search...\tF7"
-msgstr "Cerca...\\tF7"
+msgstr "Cerca... \tF7"
 
 #: gtkedit/editmenu.c:438
 msgid "Search again\tF17"
-msgstr "Nuova ricerca\\tF17"
+msgstr "Cerca ancora\tF17"
 
 #: gtkedit/editmenu.c:439
 msgid "Replace...\tF4"
-msgstr "Sostituisci...\\tF4"
+msgstr "Sostituisci...\tF4"
 
 #: gtkedit/editmenu.c:440
 msgid "Replace again\tF14"
-msgstr "Sostituisci di nuovo\\tF14"
+msgstr "Sostituisci di nuovo\tF14"
 
 #. Tool hint
 #: gtkedit/editmenu.c:443
 msgid "Search for and replace text"
-msgstr "Cerca e rimpiazza testo"
+msgstr "Cerca e sostituisci testo"
 
 #: gtkedit/editmenu.c:449
 msgid "Goto line...\tM-l"
-msgstr "Vai alla linea...\\tM-l"
+msgstr "Vai alla linea...\tM-l"
 
 #: gtkedit/editmenu.c:451
 msgid "Start record macro\tC-r"
-msgstr "inizia registrazione macro\\tC-r"
+msgstr "inizia registrazione macro\tC-r"
 
 #: gtkedit/editmenu.c:452
 msgid "Finish record macro...\tC-r"
-msgstr "Fine registrazione macro...\\tC-r"
+msgstr "Fine registrazione macro...\tC-r"
 
 #: gtkedit/editmenu.c:453
 msgid "Execute macro...\tC-a, KEY"
-msgstr "Esegui macro...\\tC-a, TECLA"
+msgstr "Esegui macro...\tC-a, Tasto"
 
 #: gtkedit/editmenu.c:454
 msgid "Delete macro...\t"
-msgstr "Elimina macro...\\t"
+msgstr "Elimina macro...\t"
 
 #: gtkedit/editmenu.c:456
 msgid "Insert date/time\tC-d"
-msgstr "Inserisci data/ora\\tC-d"
+msgstr "Inserisci data/ora\tC-d"
 
 #: gtkedit/editmenu.c:457
 msgid "Format paragraph\tM-p"
@@ -2718,7 +2583,7 @@ msgstr "Formatta paragrafo\tM-p"
 
 #: gtkedit/editmenu.c:459
 msgid "Refresh display\tC-l"
-msgstr ""
+msgstr "Aggiorna schermata\tC-l"
 
 #. Tool hint
 #: gtkedit/editmenu.c:462
@@ -2726,70 +2591,64 @@ msgid "Macros and internal commands"
 msgstr "Macro e comandi interni"
 
 #: gtkedit/gtkedit.c:65
-#, fuzzy
 msgid "&Dismiss"
 msgstr " &Chiudi "
 
 #: gtkedit/gtkedit.c:66
-#, fuzzy
 msgid " Enter file name: "
-msgstr " Linea: "
+msgstr " Inserisci file name: "
 
 #: gtkedit/gtkedit.c:111
 msgid "The Quick Brown Fox Jumps Over The Lazy Dog"
-msgstr ""
+msgstr "The Quick Brown Fox Jumps Over The Lazy Dog"
 
 #: gtkedit/gtkedit.c:802
 msgid ""
 "gtkedit.c: HOME environment variable not set and no passwd entry - aborting\n"
 msgstr ""
+"gtkedit.c: Variabile d'ambiente HOME non configurata e\n"
+"voce non esistente nel file /etc/passwd - termina\n"
 
 #: gtkedit/gtkedit.c:1290
 msgid "Clear the edit buffer"
 msgstr ""
 
 #: gtkedit/gtkedit.c:1295
-#, fuzzy
 msgid "Insert File"
 msgstr " Inserisci file "
 
 #: gtkedit/gtkedit.c:1295
-#, fuzzy
 msgid "Insert text from a file"
-msgstr " Inserisci letteralmente "
+msgstr " Inserisci testo da file "
 
 #: gtkedit/gtkedit.c:1297
-#, fuzzy
 msgid "Copy to file"
-msgstr "Copia files"
+msgstr "Copia in file"
 
 #: gtkedit/gtkedit.c:1297
 msgid "copy a block to a file"
-msgstr ""
+msgstr "Copia blocco in file"
 
 #: gtkedit/gtkedit.c:1337
-#, fuzzy
 msgid "Search/Replace"
 msgstr " Cerca/Sostituisci "
 
 #: gtkedit/syntax.c:1339 gtkedit/syntax.c:1346
-#, fuzzy
 msgid " Load syntax file "
-msgstr "Non posso avere informazioni sul file "
+msgstr "Carica file di regole di sintassi"
 
 #: gtkedit/syntax.c:1339
-#, fuzzy
 msgid " File access error "
-msgstr " errore nel file "
+msgstr "Errore nell'accesso al file"
 
 #: gtkedit/syntax.c:1345
 #, c-format
 msgid " Error in file %s on line %d "
-msgstr ""
+msgstr "Errore nel file %s alla linea %d"
 
 #: src/achown.c:72 src/chmod.c:115 src/chown.c:80
 msgid "&Set"
-msgstr "Modifica"
+msgstr "Applica"
 
 #: src/achown.c:73
 msgid "S&kip"
@@ -2813,11 +2672,11 @@ msgstr "altro"
 
 #: src/achown.c:374
 msgid "On"
-msgstr ""
+msgstr "Attivo"
 
 #: src/achown.c:376
 msgid "Flag"
-msgstr ""
+msgstr "Flag"
 
 #: src/achown.c:383
 #, c-format
@@ -2855,23 +2714,23 @@ msgstr " Oops... "
 
 #: src/achown.c:667
 msgid " I can't run the Advanced Chown command on an extfs "
-msgstr " Impossibile usare modalita' avanzata di chown su un extfs "
+msgstr " Impossibile usare chown in modalita' avanzata su un extfs "
 
 #: src/achown.c:671
 msgid " I can't run the Advanced Chown command on a tarfs "
-msgstr " Impossibile usare modalita' avanzata di chown su un tarfs "
+msgstr " Impossibile usare chown in modalita' avanzata su un tarfs "
 
 #: src/background.c:181
 msgid "Background process:"
-msgstr "Processo in background"
+msgstr "Processo in background:"
 
 #: src/background.c:287 src/file.c:2173
 msgid " Background process error "
-msgstr " Errore sul processo in background"
+msgstr " Errore nel processo in background"
 
 #: src/background.c:294
 msgid " Child died unexpectedly "
-msgstr " Il processo figlio e' uscito prematuramente"
+msgstr " Processo figlio terminato prematuramente"
 
 #: src/background.c:296
 msgid " Unknown error in child "
@@ -2911,7 +2770,7 @@ msgstr "&Definita dall'utente:"
 
 #: src/boxes.c:72
 msgid "&Icon view"
-msgstr ""
+msgstr "Vista a icone"
 
 #: src/boxes.c:137
 msgid "user &Mini status"
@@ -2923,11 +2782,11 @@ msgstr "Modalita' visualizzazione"
 
 #: src/boxes.c:280
 msgid "&Reverse"
-msgstr "inve&Rti"
+msgstr "Inve&Rti"
 
 #: src/boxes.c:281
 msgid "case sensi&tive"
-msgstr "controlla maiuscole/minuscole"
+msgstr "Considera maiuscole/minuscole"
 
 #: src/boxes.c:282
 msgid "Sort order"
@@ -2935,19 +2794,19 @@ msgstr "Ordinamento (modalita')"
 
 #: src/boxes.c:381
 msgid " confirm &Exit "
-msgstr " conferma uscita"
+msgstr " Conferma &Uscita"
 
 #: src/boxes.c:383
 msgid " confirm e&Xecute "
-msgstr " conferma esegui "
+msgstr " Conferma &esegui "
 
 #: src/boxes.c:385
 msgid " confirm o&Verwrite "
-msgstr " conferma sovrascrittura "
+msgstr " Conferma &Sovrascrittura "
 
 #: src/boxes.c:387
 msgid " confirm &Delete "
-msgstr " conferma eliminazione "
+msgstr " Conferma &Eliminazione "
 
 #: src/boxes.c:393
 msgid " Confirmation "
@@ -2975,7 +2834,7 @@ msgstr " Mostra bits "
 
 #: src/boxes.c:651
 msgid "&Always use ftp proxy"
-msgstr "usa sempre ftp proxy"
+msgstr "Usa sempre ftp proxy"
 
 #: src/boxes.c:653
 msgid "sec"
@@ -2987,7 +2846,7 @@ msgstr "Timeout della cache del ftpfs:"
 
 #: src/boxes.c:661
 msgid "ftp anonymous password:"
-msgstr "password ftp anonimo:"
+msgstr "Password ftp anonimo:"
 
 #: src/boxes.c:668
 msgid "Timeout for freeing VFSs:"
@@ -2998,19 +2857,17 @@ msgid " Virtual File System Setting "
 msgstr " Configurazione Virtual File System (VFS)"
 
 #: src/boxes.c:740
-#, fuzzy
 msgid "Quick cd"
-msgstr "&Rapido "
+msgstr "Cambia dir &Veloce "
 
 #. want cd like completion
 #: src/boxes.c:745
 msgid "cd"
-msgstr ""
+msgstr "cd"
 
 #: src/boxes.c:796
-#, fuzzy
 msgid "Symbolic link"
-msgstr "Nome del file del link simbolico:"
+msgstr "Link simbolico:"
 
 #: src/boxes.c:833
 msgid "Running "
@@ -3038,39 +2895,39 @@ msgstr "Processi in background"
 
 #: src/chmod.c:95
 msgid "execute/search by others"
-msgstr "esegui/cerca (others)"
+msgstr "esegui/cerca (altri)"
 
 #: src/chmod.c:96
 msgid "write by others"
-msgstr "scrittura (others)"
+msgstr "scrittura (altri)"
 
 #: src/chmod.c:97
 msgid "read by others"
-msgstr "lettura (others)"
+msgstr "lettura (altri)"
 
 #: src/chmod.c:98
 msgid "execute/search by group"
-msgstr "esegui/cerca (group)"
+msgstr "esegui/cerca (gruppo)"
 
 #: src/chmod.c:99
 msgid "write by group"
-msgstr "scrittura (group)"
+msgstr "scrittura (gruppo)"
 
 #: src/chmod.c:100
 msgid "read by group"
-msgstr "lettura (group)"
+msgstr "lettura (gruppo)"
 
 #: src/chmod.c:101
 msgid "execute/search by owner"
-msgstr "ejecutar/buscar por dueño"
+msgstr "esegui/cerca (proprietario)"
 
 #: src/chmod.c:102
 msgid "write by owner"
-msgstr "scrittura (owner)"
+msgstr "scrittura (proprietario)"
 
 #: src/chmod.c:103
 msgid "read by owner"
-msgstr "lettura (owner)"
+msgstr "lettura (proprietario)"
 
 #: src/chmod.c:104
 msgid "sticky bit"
@@ -3078,19 +2935,19 @@ msgstr "sticky bit"
 
 #: src/chmod.c:105
 msgid "set group ID on execution"
-msgstr "Setta GID"
+msgstr "Configura GID"
 
 #: src/chmod.c:106
 msgid "set user ID on execution"
-msgstr "Setta UID"
+msgstr "Configura UID"
 
 #: src/chmod.c:116
 msgid "C&lear marked"
-msgstr "Cancella selezioni"
+msgstr "Cancella selezionati"
 
 #: src/chmod.c:117
 msgid "S&et marked"
-msgstr "Setta selezionati"
+msgstr "Configura selezionati"
 
 #: src/chmod.c:118
 msgid "&Marked all"
@@ -3102,7 +2959,7 @@ msgstr "Permessi (ottali)"
 
 #: src/chmod.c:154
 msgid "Owner name"
-msgstr "Nome proprietario(owner)"
+msgstr "Nome proprietario"
 
 #: src/chmod.c:156
 msgid "Group name"
@@ -3110,7 +2967,7 @@ msgstr "Nome gruppo"
 
 #: src/chmod.c:160
 msgid " Chmod command "
-msgstr " Comando chown "
+msgstr " Comando chmod "
 
 #: src/chmod.c:162 src/chown.c:120
 msgid " Permission "
@@ -3130,23 +2987,27 @@ msgstr "per muoversi attraverso le opzioni"
 
 #: src/chmod.c:175
 msgid "and T or INS to mark"
-msgstr "T o INS per marcare"
+msgstr "T o INS per selezionare"
 
 #: src/chmod.c:233
 msgid "Chmod command"
-msgstr "Comando Chmod"
+msgstr "Comando chmod"
 
 #: src/chmod.c:321
 msgid " I can't run the Chmod command on an extfs "
-msgstr " Non si puo' eseguire chemod su un extfs "
+msgstr " Non si puo' eseguire chmod su un extfs "
+
+#: src/chmod.c:325
+msgid " I can't run the Chmod command on a tarfs "
+msgstr " Non si puo' eseguire chmod su un tarfs "
 
 #: src/chown.c:81
 msgid "Set &users"
-msgstr "Setta utenti"
+msgstr "Configura utenti"
 
 #: src/chown.c:82
 msgid "Set &groups"
-msgstr "Setta gruppi"
+msgstr "Configura gruppi"
 
 #: src/chown.c:112
 msgid " Name "
@@ -3154,7 +3015,7 @@ msgstr " Nome "
 
 #: src/chown.c:114
 msgid " Owner name "
-msgstr " Nome proprietario (owner) "
+msgstr " Nome proprietario "
 
 #: src/chown.c:116 src/chown.c:128
 msgid " Group name "
@@ -3166,7 +3027,7 @@ msgstr " Dimensione "
 
 #: src/chown.c:124
 msgid " Chown command "
-msgstr " Comando Chown "
+msgstr " Comando chown "
 
 #: src/chown.c:126
 msgid " User name "
@@ -3183,16 +3044,16 @@ msgstr "<Gruppo sconosciuto>"
 
 #: src/chown.c:261
 msgid " I can't run the Chown command on an extfs "
-msgstr " Non si puo' eseguire chmod su un extfs "
+msgstr " Impossibile eseguire chmod su un extfs "
 
 #: src/chown.c:265
 msgid " I can't run the Chown command on a tarfs "
-msgstr " Non si puo' eseguire chown su un tarfs "
+msgstr " Impossibile eseguire chown su un tarfs "
 
 #: src/cmd.c:200
 #, c-format
 msgid " Can not fetch a local copy of %s "
-msgstr " Non posso ottenere una copia locale di `%s' "
+msgstr " Impossibile ottenere una copia locale di `%s' "
 
 #: src/cmd.c:250
 msgid " CD "
@@ -3200,20 +3061,17 @@ msgstr " CD "
 
 #: src/cmd.c:250
 msgid "Files tagged, want to cd?"
-msgstr " File selezionati, cambio directory?"
+msgstr " File selezionati, cambiare directory?"
 
 #: src/cmd.c:256 src/cmd.c:715 src/cmd.c:729
-#, fuzzy
 msgid "Could not change directory"
-msgstr " Non posso aprire la directory `%s' "
+msgstr "Impossibile cambiare directory"
 
 #: src/cmd.c:285
-#, fuzzy
 msgid " View file "
 msgstr "Visualizza file"
 
 #: src/cmd.c:285
-#, fuzzy
 msgid " Filename:"
 msgstr "File:"
 
@@ -3226,7 +3084,6 @@ msgid " Filter command and arguments:"
 msgstr " Comando per il filtro (inclusi argomenti):"
 
 #: src/cmd.c:390
-#, fuzzy
 msgid "Create a new Directory"
 msgstr "Crea nuova directory"
 
@@ -3240,7 +3097,7 @@ msgstr " Filtro "
 
 #: src/cmd.c:451
 msgid " Set expression for filtering filenames"
-msgstr " Setta espressione per filtrare i file in base al nome "
+msgstr " Applica espressione per filtrare i file "
 
 #: src/cmd.c:517
 msgid " Select "
@@ -3252,11 +3109,11 @@ msgstr " De-seleziona "
 
 #: src/cmd.c:642
 msgid "Extension file edit"
-msgstr "Modifica file delle estensioni"
+msgstr "Modifica file supporto estensioni"
 
 #: src/cmd.c:643
 msgid " Which extension file you want to edit? "
-msgstr " Quale file delle estensioni vuoi editare? "
+msgstr " Quale file supporto estensioni vuoi editare? "
 
 #: src/cmd.c:644
 msgid "&User"
@@ -3284,7 +3141,7 @@ msgstr "&Home"
 
 #: src/cmd.c:855
 msgid " Compare directories "
-msgstr " Conftonta directories"
+msgstr " Confronta directories"
 
 #: src/cmd.c:855
 msgid " Select compare method: "
@@ -3292,7 +3149,7 @@ msgstr " Seleziona metodo di confronto: "
 
 #: src/cmd.c:856
 msgid "&Quick"
-msgstr "&Rapido "
+msgstr "&Veloce"
 
 #: src/cmd.c:856
 msgid "&Size only"
@@ -3310,11 +3167,11 @@ msgstr ""
 
 #: src/cmd.c:880
 msgid " The command history is empty "
-msgstr " Lo storico comandi e' vuoto"
+msgstr " La storia comandi e' vuota"
 
 #: src/cmd.c:886
 msgid " Command history "
-msgstr " Storico comandi "
+msgstr " Storia comandi "
 
 #: src/cmd.c:928
 msgid ""
@@ -3326,7 +3183,7 @@ msgstr ""
 
 #: src/cmd.c:967
 msgid "Type `exit' to return to the Midnight Commander"
-msgstr "Premi `exit' per tornare a Midnight Commander"
+msgstr "Digita `exit' per tornare a Midnight Commander"
 
 #: src/cmd.c:1022
 #, c-format
@@ -3356,18 +3213,18 @@ msgid " symlink: %s "
 msgstr " link simbolico: %s "
 
 #: src/cmd.c:1130
-#, fuzzy, c-format
+#, c-format
 msgid " Symlink `%s' points to: "
-msgstr " punta a: "
+msgstr " Il link simbolico `%s' punta a: "
 
 #: src/cmd.c:1135
 msgid " Edit symlink "
 msgstr " Modifica link simbolico "
 
 #: src/cmd.c:1140
-#, fuzzy, c-format
+#, c-format
 msgid " edit symlink, unable to remove %s: %s "
-msgstr " Modifica il link simbolico: %s "
+msgstr " Modifica link simbolico, impossibile eliminare %s: %s "
 
 #: src/cmd.c:1144
 #, c-format
@@ -3392,11 +3249,9 @@ msgid " Enter machine name (F1 for details): "
 msgstr " Inserire nome macchina (F1 per help e dettagli): "
 
 #: src/cmd.c:1310
-#, fuzzy, c-format
+#, c-format
 msgid " Could not chdir to %s "
-msgstr ""
-" Impossibile eseguire chown su \"%s\" \n"
-" %s "
+msgstr " Impossibile cambiare directory ('%s') "
 
 #: src/cmd.c:1317
 msgid " Link to a remote machine "
@@ -3404,7 +3259,7 @@ msgstr " Connessione remota "
 
 #: src/cmd.c:1323
 msgid " FTP to machine "
-msgstr " Connessione FTP "
+msgstr " Connessione ftp "
 
 #: src/cmd.c:1333
 msgid " Socket source routing setup "
@@ -3412,7 +3267,7 @@ msgstr " Configurazione del routing "
 
 #: src/cmd.c:1334
 msgid " Enter host name to use as a source routing hop: "
-msgstr "  "
+msgstr "Inserisci il nome dell'host da usare come origine routing"
 
 #: src/cmd.c:1341
 msgid " Host name "
@@ -3427,13 +3282,12 @@ msgid " Undelete files on an ext2 file system "
 msgstr " Ripristina file da un filesystem ext2 "
 
 #: src/cmd.c:1353
-#, fuzzy
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
 msgstr ""
-" Inserisci il nome del file system sul quale volete \n"
-"  eseguire il comando di ripristino: (F1 per i dettagli) "
+" Inserire il nome della periferica (senza /dev/) sulla quale si desidera \n"
+" eseguire il comando di ripristino: (F1 per i dettagli) "
 
 #: src/cmd.c:1403
 msgid " Setup saved to ~/"
@@ -3449,11 +3303,10 @@ msgid ""
 " Can't chdir to '%s' \n"
 " %s "
 msgstr ""
-" Non posso cambiare directory ( '%s') \n"
+" Impossibile cambiare directory ('%s') \n"
 " %s "
 
 #: src/command.c:198
-#, fuzzy
 msgid " You can not execute commands on non-local filesystems"
 msgstr " Non e' possibile eseguire comandi su un Virtual File System (VFS) "
 
@@ -3497,7 +3350,7 @@ msgstr "&Dimensione"
 
 #: src/dir.c:68
 msgid "&Inode"
-msgstr "&Inode"
+msgstr "&Inodo"
 
 #. New sort orders
 #: src/dir.c:71
@@ -3527,19 +3380,19 @@ msgstr "&Gruppo"
 #: src/dir.c:386
 #, c-format
 msgid "File exists but can not be stat-ed: %s %s"
-msgstr ""
+msgstr "Il file esite ma non puo' essere identificato: %s %s"
 
 #: src/dir.c:662
 msgid "Unknown"
 msgstr "Sconosciuto"
 
 #: src/ext.c:131 src/user.c:506
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Can't generate unique filename \n"
 " %s "
 msgstr ""
-" Non posso aprire il file %s \n"
+" Impossibile generare nome di file unico \n"
 " %s "
 
 #: src/ext.c:138 src/user.c:518
@@ -3548,7 +3401,7 @@ msgid ""
 " Can't create temporary command file \n"
 " %s "
 msgstr ""
-"Non posso creare un file temporaneo per il comando \n"
+"Impossibile creare un file temporaneo per il comando \n"
 " %s "
 
 #: src/ext.c:153 src/user.c:547
@@ -3606,16 +3459,15 @@ msgstr " Muovi "
 
 #: src/file.c:156 src/tree.c:746
 msgid " Delete "
-msgstr " Cancel "
+msgstr " Cancella "
 
 #: src/file.c:244
 msgid " Invalid target mask "
 msgstr "La maschera di destinazione e' errata"
 
 #: src/file.c:342
-#, fuzzy
 msgid " Could not make the hardlink "
-msgstr " Configurazione del routing "
+msgstr " Impossibile creare link fisico "
 
 #: src/file.c:384
 #, c-format
@@ -3623,7 +3475,7 @@ msgid ""
 " Cannot read source link \"%s\" \n"
 " %s "
 msgstr ""
-" Non posso leggere il link sorgente \"%s\" \n"
+" Impossibile leggere il link di origine \"%s\" \n"
 " %s "
 
 #: src/file.c:394
@@ -3632,9 +3484,9 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" Non posso creare link simbolici su un filesystem non locale \n"
+" Impossibile creare link simbolici stabili su un filesystem non locale \n"
 "\n"
-" L'opzione Link simbolici sara' disabilitata "
+" L'opzione Link Simbolici Stabili sara' disabilitata "
 
 #: src/file.c:442
 #, c-format
@@ -3642,15 +3494,15 @@ msgid ""
 " Cannot create target symlink \"%s\" \n"
 " %s "
 msgstr ""
-" Non posso creare il link simbolico di destinazione \"%s\" \n"
+" Impossibile creare il link simbolico di destinazione \"%s\" \n"
 " %s "
 
 #: src/file.c:509
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
 " %s "
-msgstr " Non posso riniminare la directory \"%s\" "
+msgstr " Impossibile sovrascirvere la directory \"%s\"  %s "
 
 #: src/file.c:518
 #, c-format
@@ -3658,13 +3510,13 @@ msgid ""
 " Cannot stat source file \"%s\" \n"
 " %s "
 msgstr ""
-" Non trovo le informazioni sul file \"%s\" \n"
+" Non trovo le informazioni sul file di origine \"%s\" \n"
 " %s "
 
 #: src/file.c:531
 #, c-format
 msgid " `%s' and `%s' are the same file. "
-msgstr " `%s' e `%s' sono lo steddo file. "
+msgstr " `%s' e `%s' sono lo stesso file. "
 
 #: src/file.c:574
 #, c-format
@@ -3672,7 +3524,7 @@ msgid ""
 " Cannot create special file \"%s\" \n"
 " %s "
 msgstr ""
-" Non posso creare il file \"%s\" \n"
+" Impossibile creare il file speciale \"%s\" \n"
 " %s "
 
 #: src/file.c:583 src/file.c:812
@@ -3681,7 +3533,8 @@ msgid ""
 " Cannot chown target file \"%s\" \n"
 " %s "
 msgstr ""
-" Non posso cambiare il proprietario/gruppo del file: \"%s\" \n"
+" Impossibile cambiare il proprietario/gruppo del file di destinazione \"%s\" "
+"\n"
 " %s "
 
 #: src/file.c:592 src/file.c:831
@@ -3690,7 +3543,7 @@ msgid ""
 " Cannot chmod target file \"%s\" \n"
 " %s "
 msgstr ""
-" Non posso cambiare proprietario/gruppo del file \"%s\" \n"
+" Impossibile cambiare i permessi del file \"%s\" \n"
 " %s "
 
 #: src/file.c:609
@@ -3699,7 +3552,7 @@ msgid ""
 " Cannot open source file \"%s\" \n"
 " %s "
 msgstr ""
-" Non posso aprire il file sorgente \"%s\" \n"
+" Impossibile aprire il file di origine \"%s\" \n"
 " %s"
 
 #: src/file.c:619
@@ -3712,7 +3565,7 @@ msgid ""
 " Cannot fstat source file \"%s\" \n"
 " %s "
 msgstr ""
-" Non posso ottenere informazioni sul file sorgente: \"%s\" \n"
+" Impossibile ottenere informazioni sul file di origine: \"%s\" \n"
 " %s "
 
 #: src/file.c:651
@@ -3721,7 +3574,7 @@ msgid ""
 " Cannot create target file \"%s\" \n"
 " %s "
 msgstr ""
-" Non posso creare il file \"%s\" \n"
+" Impossibile creare il file di destinazione \"%s\" \n"
 " %s "
 
 #: src/file.c:665
@@ -3730,7 +3583,7 @@ msgid ""
 " Cannot fstat target file \"%s\" \n"
 " %s "
 msgstr ""
-"  Non posso ottenere informazioni sul file sorgente: \"%s\" \n"
+"  Impossibile ottenere informazioni sul file di destinazione: \"%s\" \n"
 " %s"
 
 #: src/file.c:696
@@ -3748,12 +3601,12 @@ msgid ""
 " Cannot write target file \"%s\" \n"
 " %s "
 msgstr ""
-" Non posso scrivere il file \"%s\" \n"
+" Impossibile scrivere il file \"%s\" di destinazione\n"
 " %s"
 
 #: src/file.c:745
 msgid "(stalled)"
-msgstr "(in attesa)"
+msgstr "(attesa)"
 
 #: src/file.c:783
 #, c-format
@@ -3761,7 +3614,7 @@ msgid ""
 " Cannot close source file \"%s\" \n"
 " %s "
 msgstr ""
-" Non posso chiudere il file sorgente \"%s\" \n"
+" Impossibile chiudere il file di origine \"%s\" \n"
 " %s"
 
 #: src/file.c:792
@@ -3770,21 +3623,20 @@ msgid ""
 " Cannot close target file \"%s\" \n"
 " %s "
 msgstr ""
-" Non posso chiudere il file di destinazione \"%s\" \n"
+" Impossibile chiudere il file di destinazione \"%s\" \n"
 " %s"
 
 #: src/file.c:802
 msgid "Incomplete file was retrieved. Keep it?"
-msgstr ""
+msgstr "File incompleto. Mantenerlo?"
 
 #: src/file.c:803
-#, fuzzy
 msgid "&Delete"
-msgstr "Elimina"
+msgstr "&Elimina"
 
 #: src/file.c:803 src/hotlist.c:1443
 msgid "&Keep"
-msgstr "&Mantenere"
+msgstr "&Mantieni"
 
 #: src/file.c:876
 #, c-format
@@ -3792,15 +3644,17 @@ msgid ""
 " Cannot stat source directory \"%s\" \n"
 " %s "
 msgstr ""
-" Non posso avere informazioni sulla directory sorgente \"%s\" \n"
+" Impossibile avere informazioni sulla directory di origine \"%s\" \n"
 " %s"
 
 #: src/file.c:899
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Source directory \"%s\" is not a directory \n"
 " %s "
-msgstr "  \"%s\" non e' una directory \""
+msgstr ""
+" \"%s\" non e' una directory \n"
+" %s "
 
 #. we found a cyclic symbolic link
 #: src/file.c:907
@@ -3809,8 +3663,8 @@ msgid ""
 " Cannot copy cyclic symbolic link \n"
 " `%s' "
 msgstr ""
-" Non posso copiare un link simbolico ciclico \n"
-" %s"
+" Impossibile copiare un link simbolico ciclico \n"
+" '%s' "
 
 #: src/file.c:964
 #, c-format
@@ -3818,7 +3672,7 @@ msgid ""
 " Cannot create target directory \"%s\" \n"
 " %s "
 msgstr ""
-" Non posso creare la directory di destinazione \"%s\" \n"
+" Impossibile creare la directory di destinazione \"%s\" \n"
 " %s "
 
 #: src/file.c:987
@@ -3827,7 +3681,8 @@ msgid ""
 " Cannot chown target directory \"%s\" \n"
 " %s "
 msgstr ""
-" Non posso cambiare proprietario/gruppo della directory \"%s\"\n"
+"Impossibile cambiare proprietario/gruppo della directory di destinazione "
+"\"%s\"\n"
 " %s "
 
 #. Source doesn't exist
@@ -3837,7 +3692,7 @@ msgid ""
 " Cannot stat file \"%s\" \n"
 " %s "
 msgstr ""
-" Non posso ottenere informazioni sul file \"%s\" \n"
+" Impossibile ottenere informazioni sul file \"%s\" \n"
 " %s "
 
 #: src/file.c:1122
@@ -3848,7 +3703,7 @@ msgstr " `%s' e `%s' sono lo stesso file "
 #: src/file.c:1129
 #, c-format
 msgid " Cannot overwrite directory `%s' "
-msgstr " Non posso rinominare la directory `%s' "
+msgstr " Impossibile sovrascrivere la directory `%s' "
 
 #: src/file.c:1172
 #, c-format
@@ -3856,7 +3711,7 @@ msgid ""
 " Cannot move file \"%s\" to \"%s\" \n"
 " %s "
 msgstr ""
-" Non posso rinominare il file `%s' in `%s' \n"
+" Impossibile rinominare il file \"%s\" in \"%s\" \n"
 " %s "
 
 #: src/file.c:1192
@@ -3865,20 +3720,18 @@ msgid ""
 " Cannot remove file \"%s\" \n"
 " %s "
 msgstr ""
-" Non posso rimuovere il file `%s' \n"
+" Impossibile rimuovere il file '%s' \n"
 " %s"
 
 #: src/file.c:1246
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
-msgstr " Non posso riniminare la directory \"%s\" "
+msgstr " Impossibile sovrascrivere la directory '%s' %s "
 
 #: src/file.c:1248
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot overwrite file \"%s\" %s "
-msgstr ""
-" Non posso sovrascrivere il file `%s' \n"
-" %s "
+msgstr " Impossibile sovrascrivere il file `%s' %s "
 
 #: src/file.c:1275
 #, c-format
@@ -3886,7 +3739,7 @@ msgid ""
 " Cannot move directory \"%s\" to \"%s\" \n"
 " %s "
 msgstr ""
-" Non posso rinominare la directory `%s' in `%s' \n"
+" Impossibile rinominare la directory `%s' in `%s' \n"
 " %s "
 
 #: src/file.c:1338
@@ -3895,7 +3748,7 @@ msgid ""
 " Cannot delete file \"%s\" \n"
 " %s "
 msgstr ""
-" Non posso cancellare il file `%s' \n"
+" Impossibile cancellare il file `%s' \n"
 " %s "
 
 #: src/file.c:1399 src/file.c:1469 src/file.c:1501
@@ -3904,7 +3757,7 @@ msgid ""
 " Cannot remove directory \"%s\" \n"
 " %s "
 msgstr ""
-" Non posso cancellae la directory `%s' \n"
+" Impossibile cancellare la directory `%s' \n"
 " %s "
 
 #: src/file.c:1540
@@ -3921,39 +3774,36 @@ msgstr " Errore interno: get_file \n"
 #. * dropped, when widgets get smarter)
 #.
 #: src/file.c:1661
-#, fuzzy
 msgid "1Copy"
-msgstr "Copia"
+msgstr "1Copia"
 
 #: src/file.c:1661
-#, fuzzy
 msgid "1Move"
-msgstr "Muovi"
+msgstr "1Muovi"
 
 #: src/file.c:1661
-#, fuzzy
 msgid "1Delete"
-msgstr "Elimina"
+msgstr "1Elimina"
 
 #: src/file.c:1676
 #, c-format
 msgid "%o %f \"%s\"%m"
-msgstr ""
+msgstr "%o %f \"%s\"%m"
 
 #: src/file.c:1677
 #, c-format
 msgid "%o %d %f%m"
-msgstr ""
+msgstr "%o %d %f%m"
 
 #: src/file.c:1679
 #, c-format
 msgid "%o %f \"%s\"%e"
-msgstr ""
+msgstr "%o %f \"%s\"%e"
 
 #: src/file.c:1680
 #, c-format
 msgid "%o %d %f%e"
-msgstr ""
+msgstr "%o %d %f%e"
 
 #: src/file.c:1684
 msgid "file"
@@ -3961,7 +3811,7 @@ msgstr "file"
 
 #: src/file.c:1684
 msgid "files"
-msgstr "files"
+msgstr "file"
 
 #: src/file.c:1684
 msgid "directory"
@@ -3973,7 +3823,7 @@ msgstr "directory"
 
 #: src/file.c:1685
 msgid "files/directories"
-msgstr "files/directoryes"
+msgstr "file/directory"
 
 #: src/file.c:1685
 msgid " with source mask:"
@@ -3981,17 +3831,15 @@ msgstr " con maschera:"
 
 #: src/file.c:1837
 msgid " Can't operate on \"..\"! "
-msgstr " Non posso operare su \"..\" "
+msgstr " Impossibile operare su \"..\"! "
 
-#: src/file.c:1856 src/screen.c:2082
-#, fuzzy
+#: src/file.c:1856 src/screen.c:2092
 msgid "Yes"
-msgstr "&Si"
+msgstr "Si"
 
-#: src/file.c:1856 src/screen.c:2082
-#, fuzzy
+#: src/file.c:1856 src/screen.c:2092
 msgid "No"
-msgstr "&No"
+msgstr "No"
 
 #: src/file.c:1909
 msgid " Sorry, I could not put the job in background "
@@ -4006,7 +3854,7 @@ msgid " Unknown file operation "
 msgstr " Operazione su file sconosciuta "
 
 #: src/file.c:2012
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Destination \"%s\" must be a directory \n"
 " %s "
@@ -4018,7 +3866,7 @@ msgstr "&Riprova"
 
 #: src/file.c:2174 src/file.c:2235 src/filegui.c:263 src/filegui.c:591
 msgid "&Abort"
-msgstr "Esci"
+msgstr "&Abbandona"
 
 #: src/file.c:2226
 msgid ""
@@ -4027,8 +3875,8 @@ msgid ""
 "   Delete it recursively? "
 msgstr ""
 "\n"
-" El directorio no está vacío.\n"
-" ¿Borrarlo recursivamente? "
+" Directory non vuota.\n"
+" Cancellarla recursivamente? "
 
 #: src/file.c:2227
 msgid ""
@@ -4037,32 +3885,32 @@ msgid ""
 "   Delete it recursively? "
 msgstr ""
 "\n"
-" Proceso en el fondo: El directorio no está vacío.\n"
-" ¿Borrarlo recursivamente? "
+" Processo in background: Directory non vuota.\n"
+" Cancellarla recursivamente? "
 
 #: src/file.c:2234
 msgid "a&ll"
-msgstr "&Todo"
+msgstr "&Tutti"
 
 #: src/file.c:2234 src/filegui.c:594
 msgid "non&E"
-msgstr "non&E"
+msgstr "n&Essuno"
 
 #: src/file.c:2244
 msgid " Type 'yes' if you REALLY want to delete "
-msgstr " Teclee `yes' si REALMENTE quiere borrar "
+msgstr " Digita `yes' se desideri cancellare VERAMENTE "
 
 #: src/file.c:2246
 msgid "all the directories "
-msgstr "todos los directorios "
+msgstr "tutte le directory "
 
 #: src/file.c:2248
 msgid " Recursive Delete "
-msgstr " Borrado recursivo "
+msgstr " Cancellazione recursiva "
 
 #: src/file.c:2249
 msgid " Background process: Recursive Delete "
-msgstr " Proceso en el fondo: Borrado recursivo "
+msgstr " Processo in background: Cancellazione recursiva "
 
 #: src/filegui.c:423
 msgid "File"
@@ -4074,11 +3922,11 @@ msgstr "Totale"
 
 #: src/filegui.c:467
 msgid "Bytes"
-msgstr "Bytes"
+msgstr "Byte"
 
 #: src/filegui.c:504
 msgid "Source"
-msgstr "Sorgente"
+msgstr "Origine"
 
 #: src/filegui.c:527
 msgid "Target"
@@ -4091,7 +3939,7 @@ msgstr "Sto eliminando"
 #: src/filegui.c:589
 #, c-format
 msgid "Target file \"%s\" already exists!"
-msgstr " Il file `%s' esiste!"
+msgstr " Il file di destinazione `%s' esiste!"
 
 #: src/filegui.c:592
 msgid "if &Size differs"
@@ -4107,11 +3955,11 @@ msgstr "Sovrascrivo tutto?"
 
 #: src/filegui.c:599
 msgid "&Reget"
-msgstr "&Reget"
+msgstr "&Riprova"
 
 #: src/filegui.c:600
 msgid "ap&Pend"
-msgstr "attacca"
+msgstr "Aggiungi"
 
 #: src/filegui.c:603
 msgid "Overwrite this target?"
@@ -4125,15 +3973,15 @@ msgstr "Data destinazione: %s, dimensione %d"
 #: src/filegui.c:607
 #, c-format
 msgid "Source date: %s, size %d"
-msgstr "Data sorgente: %s, dimensione %d"
+msgstr "Data origine: %s, dimensione %d"
 
 #: src/filegui.c:691
 msgid " File exists "
-msgstr " Il file esiste "
+msgstr " File esistente "
 
 #: src/filegui.c:692
 msgid " Background process: File exists "
-msgstr " Processo in background: il file esiste "
+msgstr " Processo in background: File esistente "
 
 #. follow symlinks and preserve Attributes must be the first
 #: src/filegui.c:804
@@ -4152,15 +4000,15 @@ msgstr "a:"
 
 #: src/filegui.c:809
 msgid "&Using shell patterns"
-msgstr "&Usa shell patterns"
+msgstr "&Usa shell pattern"
 
 #: src/filegui.c:830
 msgid "&Background"
-msgstr ""
+msgstr "&Background"
 
 #: src/filegui.c:839
 msgid "&Stable Symlinks"
-msgstr "Link statici"
+msgstr "Link &Statici"
 
 #. &file_mask_stable_symlinks
 #: src/filegui.c:841
@@ -4172,32 +4020,33 @@ msgstr "&Copia dir recurs. "
 msgid ""
 "Invalid source pattern `%s' \n"
 " %s "
-msgstr " %s "
+msgstr ""
+"Pattern di origine non valido '%s' \n"
+" %s "
 
 #: src/find.c:130
 msgid "&Suspend"
-msgstr "&Suspende"
+msgstr "&Suspendi"
 
 #: src/find.c:131
-#, fuzzy
 msgid "Con&tinue"
-msgstr "Continua"
+msgstr "Con&tinua"
 
 #: src/find.c:132
 msgid "&Chdir"
-msgstr "&Chdir"
+msgstr "&Cambia dir"
 
 #: src/find.c:133
 msgid "&Again"
-msgstr "&Otra vez"
+msgstr "&Ancora"
 
 #: src/find.c:134
 msgid "&Quit"
-msgstr "&Terminar"
+msgstr "&Termina"
 
 #: src/find.c:135 src/panelize.c:89
 msgid "Pane&lize"
-msgstr "Pane&lizar"
+msgstr "Pane&llizza"
 
 #: src/find.c:136
 msgid "&View - F3"
@@ -4209,7 +4058,7 @@ msgstr "&Modifica - F4"
 
 #: src/find.c:170
 msgid "Start at:"
-msgstr "Inizia:"
+msgstr "Inizia da:"
 
 #: src/find.c:170
 msgid "Filename:"
@@ -4244,20 +4093,18 @@ msgstr " Problema leggendo dal processo figlio "
 msgid "Finished"
 msgstr "Terminato"
 
-#: src/find.c:561 src/view.c:1502
+#: src/find.c:561 src/view.c:1509
 #, c-format
 msgid "Searching %s"
 msgstr "Cercando %s"
 
 #: src/find.c:717 src/find.c:757
-#, fuzzy
 msgid "Suspend"
-msgstr "&Suspende"
+msgstr "&Sospendi"
 
 #: src/find.c:717
-#, fuzzy
 msgid "Restart"
-msgstr "&Riprova"
+msgstr "&Riprendi"
 
 #: src/find.c:719 src/find.c:821 src/find.c:960 src/find.c:1056
 msgid "Searching"
@@ -4269,35 +4116,32 @@ msgstr "Trova files"
 
 #. The buttons
 #: src/find.c:755
-#, fuzzy
 msgid "Change to this directory"
-msgstr " Non posso aprire la directory `%s' "
+msgstr " Vai alla directory "
 
 #: src/find.c:756
-#, fuzzy
 msgid "Search again"
-msgstr "Cerca di nuovo..."
+msgstr "Cerca ancora"
 
 #: src/find.c:761
-#, fuzzy
 msgid "View this file"
-msgstr "Visualizza file"
+msgstr "Visualizza il file"
 
 #: src/find.c:762
 msgid "Edit this file"
-msgstr ""
+msgstr "Modifica il file"
 
 #: src/find.c:763
 msgid "Send the results to a Panel"
-msgstr ""
+msgstr "Invia i risultati a un pannello"
 
 #: src/fixhlp.c:171
 msgid "Usage: fixhlp <width> <tocname>\n"
-msgstr "Usa: fixhlp <width> <tocname>\n"
+msgstr "Uso: fixhlp <width> <tocname>\n"
 
 #: src/fixhlp.c:176
 msgid "fixhlp: Cannot open toc for writing"
-msgstr "fixhlp: impossibile aprire l'indice in scrittura "
+msgstr "fixhlp: Impossibile aprire l'indice in scrittura "
 
 #: src/fixhlp.c:179
 msgid ""
@@ -4305,8 +4149,8 @@ msgid ""
 " Topics:\n"
 "\n"
 msgstr ""
-"[Indice]\n"
-" Titoli:\n"
+"[Indice]\n"
+" Argomenti:\n"
 
 #: src/help.c:279
 msgid ""
@@ -4334,7 +4178,7 @@ msgid ""
 " Can't open file %s \n"
 " %s "
 msgstr ""
-" Non posso aprire il file %s \n"
+" Impossibile aprire il file %s \n"
 " %s "
 
 #: src/help.c:771
@@ -4372,7 +4216,7 @@ msgstr "&Nuovo"
 
 #: src/hotlist.c:137
 msgid "New &Group"
-msgstr "Nuovo gruppo"
+msgstr "Nuovo &Gruppo"
 
 #: src/hotlist.c:139
 msgid "&Up"
@@ -4380,7 +4224,7 @@ msgstr "Su"
 
 #: src/hotlist.c:140
 msgid "&Add current"
-msgstr "Aggiungi corrente posizione"
+msgstr "&Aggiungi corrente"
 
 #: src/hotlist.c:141
 msgid "Change &To"
@@ -4396,7 +4240,7 @@ msgstr "Directory virtuali attive"
 
 #: src/hotlist.c:620
 msgid "Directory hotlist"
-msgstr "Directory importanti (hotlist)"
+msgstr "Lista favoriti"
 
 #: src/hotlist.c:639
 msgid " Directory path "
@@ -4413,19 +4257,19 @@ msgstr "Spostando "
 
 #: src/hotlist.c:892
 msgid "New hotlist entry"
-msgstr "Nuova entry per la hotlist"
+msgstr "Nuova voce favoriti"
 
 #: src/hotlist.c:892
 msgid "Directory label"
-msgstr "Etichetta directory"
+msgstr " Etichetta directory "
 
 #: src/hotlist.c:892
 msgid "Directory path"
-msgstr "Path della directory"
+msgstr "Percorso directory"
 
 #: src/hotlist.c:973
 msgid " New hotlist group "
-msgstr "Nuovo gruppo"
+msgstr "Nuovo gruppo favoriti"
 
 #: src/hotlist.c:973
 msgid "Name of new group"
@@ -4451,8 +4295,8 @@ msgid ""
 " Remove it?"
 msgstr ""
 "\n"
-"Il gruppo non e' vuoto.\n"
-"Rimuovo comunque?"
+"Gruppo non vuoto.\n"
+"Rimuovere?"
 
 #: src/hotlist.c:1378
 msgid " Top level group "
@@ -4464,7 +4308,7 @@ msgstr "La lista dei favoriti e' mantenuta in ~/"
 
 #: src/hotlist.c:1396
 msgid "MC will load hotlist from ~/"
-msgstr "MC usa la lista favoriti in ~/"
+msgstr "MC usera' la lista favoriti in ~/"
 
 #: src/hotlist.c:1398
 msgid "and then delete [Hotlist] section there"
@@ -4492,7 +4336,7 @@ msgstr "e la sezione [Hotlist] in ~/"
 
 #: src/hotlist.c:1432
 msgid "Your ~/"
-msgstr "il vostro ~/"
+msgstr "Il vostro ~/"
 
 #: src/hotlist.c:1432
 msgid " most probably was created\n"
@@ -4510,7 +4354,9 @@ msgstr ""
 msgid ""
 " entries\n"
 "\n"
-msgstr "sezioni\n"
+msgstr ""
+"sezioni\n"
+"\n"
 
 #: src/hotlist.c:1435
 msgid ""
@@ -4520,7 +4366,7 @@ msgid ""
 msgstr ""
 "Puoi scegliere tra:\n"
 "\n"
-"     Rimuovere    - rimuovere i vecchi link in ~/"
+"  Rimuovere   - rimuove i vecchi link in ~/"
 
 #: src/hotlist.c:1437
 msgid ""
@@ -4528,9 +4374,9 @@ msgid ""
 "           the same question next time\n"
 "  Merge  - add old entries to hotlist as group \"Entries from ~/"
 msgstr ""
-"    Mantenere    - Mantiene la vecchia lista; vi sara' richiesto\n"
+"  Mantenere   - Mantiene la vecchia lista; vi sara' richiesto\n"
 "\t          la possima volta\n"
-"    Sincronizzare - aggiungere i vecchi link come gruppo \"Vecchi archivi ~/"
+"  Sincronizzare - aggiunge i vecchi link come gruppo 'Vecchi archivi ~/'"
 
 #: src/hotlist.c:1443
 msgid "&Merge"
@@ -4542,7 +4388,7 @@ msgstr "Vecchi archivi ~/"
 
 #: src/hotlist.c:1465
 msgid " file your old hotlist entries were not deleted"
-msgstr ".  file dei vostri vecchi archivi non e' stato rimosso"
+msgstr " il file dei vostri vecchi archivi non e' stato rimosso"
 
 #: src/info.c:83
 #, c-format
@@ -4552,7 +4398,7 @@ msgstr "Midnight Commander %s"
 #: src/info.c:109
 #, c-format
 msgid "File:       %s"
-msgstr "File:      %s"
+msgstr "File:       %s"
 
 #: src/info.c:122
 msgid "Free nodes %d (%d%%) of %d"
@@ -4581,7 +4427,7 @@ msgstr "Tipo:      %s"
 
 #: src/info.c:143
 msgid "non-local vfs"
-msgstr "vfs non-locale"
+msgstr "VFS non-locale"
 
 #: src/info.c:149
 #, c-format
@@ -4647,11 +4493,11 @@ msgstr "&Verticale"
 
 #: src/layout.c:160
 msgid "&Horizontal"
-msgstr "Orizzontale"
+msgstr "&Orizzontale"
 
 #: src/layout.c:170
 msgid "&Xterm hintbar"
-msgstr "Barra suggerimenti xterm"
+msgstr "Barra suggerimenti &Xterm"
 
 #: src/layout.c:171
 msgid "h&Intbar visible"
@@ -4659,7 +4505,7 @@ msgstr "Suggerimenti visibili"
 
 #: src/layout.c:172
 msgid "&Keybar visible"
-msgstr "Tasti funzione (barra) visibili"
+msgstr "Barra tasti funzione visibili"
 
 #: src/layout.c:173
 msgid "command &Prompt"
@@ -4667,7 +4513,7 @@ msgstr "Riga di comando"
 
 #: src/layout.c:174
 msgid "show &Mini status"
-msgstr "Mostra m&ini-statu"
+msgstr "Mostra m&ini-stato"
 
 #: src/layout.c:175
 msgid "menu&Bar visible"
@@ -4692,7 +4538,7 @@ msgstr "&Salva"
 #. length of line with '<' '>' buttons
 #: src/layout.c:380
 msgid " Layout "
-msgstr " Layout "
+msgstr " Presentazione "
 
 #: src/layout.c:381
 msgid " Panel split "
@@ -4712,7 +4558,7 @@ msgstr "linee visibili"
 
 #: src/layout.c:451
 msgid "Layout"
-msgstr "Layout"
+msgstr "Presentazione"
 
 #: src/learn.c:74
 msgid " Learn keys "
@@ -4745,7 +4591,7 @@ msgstr ""
 
 #: src/learn.c:122
 msgid " Cannot accept this key "
-msgstr " Non posso accettare il tasto "
+msgstr " Impossibile accettare il tasto "
 
 #: src/learn.c:123
 #, c-format
@@ -4771,7 +4617,7 @@ msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
 msgstr ""
-"Meraviglioso! Hai un database dei te,rmnali completo\n"
+"Fantastico! Hai un database dei termnali completo\n"
 "Tutti i tasti sono configurati e funzionano correttamente."
 
 #: src/learn.c:267
@@ -4789,7 +4635,7 @@ msgstr "quali tasti non siano marcati con OK. Premi Barra spazio sui tasti"
 
 #: src/learn.c:304
 msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr "mancanti, o clicka con il mouse per ridefinirli. Spostati con il TAB."
+msgstr "mancanti, o clicca con il mouse per ridefinirli. Spostati con il TAB."
 
 #: src/main.c:700
 msgid ""
@@ -4809,9 +4655,9 @@ msgstr "Premi un tasto per continuare..."
 
 #: src/main.c:825
 msgid " The shell is already running a command "
-msgstr " La shell sta' eseguendo un comando "
+msgstr " La shell sta gia' eseguendo un comando "
 
-#: src/main.c:852 src/screen.c:2080 src/screen.c:2120
+#: src/main.c:852 src/screen.c:2090 src/screen.c:2130
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
 
@@ -4829,7 +4675,7 @@ msgstr "&Vista rapida   C-x q"
 
 #: src/main.c:1235 src/main.c:1256
 msgid "&Info           C-x i"
-msgstr "&Informazioni    C-x i"
+msgstr "&Info           C-x i"
 
 #: src/main.c:1238 src/main.c:1259
 msgid "&Sort order..."
@@ -4837,7 +4683,7 @@ msgstr "&Ordina..."
 
 #: src/main.c:1240 src/main.c:1261
 msgid "&Filter..."
-msgstr "&Filtro"
+msgstr "&Filtro..."
 
 #: src/main.c:1243 src/main.c:1264
 msgid "&Network link..."
@@ -4845,7 +4691,7 @@ msgstr "&Connessione remota..."
 
 #: src/main.c:1244 src/main.c:1265
 msgid "FT&P link..."
-msgstr "Connessione FTP..."
+msgstr "Connessione ftp..."
 
 #: src/main.c:1248 src/main.c:1269
 msgid "&Drive...       M-d"
@@ -4857,40 +4703,39 @@ msgstr "&Aggiorna     C-r"
 
 #: src/main.c:1275
 msgid "&User menu          F2"
-msgstr "&Menu utente   F2"
+msgstr "&Menu utente        F2"
 
 #: src/main.c:1276
 msgid "&View               F3"
-msgstr "&Visualizza    F3"
+msgstr "&Visualizza         F3"
 
 #: src/main.c:1277
-#, fuzzy
 msgid "Vie&w file...         "
-msgstr "&Cerca...   F7"
+msgstr "Visualizza file...    "
 
 #: src/main.c:1278
 msgid "&Filtered view     M-!"
-msgstr "Vista filtrata    M-!"
+msgstr "Vista filtrata     M-!"
 
 #: src/main.c:1279
 msgid "&Edit               F4"
-msgstr "&Modifica    F4"
+msgstr "&Modifica           F4"
 
 #: src/main.c:1280
 msgid "&Copy               F5"
-msgstr "&Copia     F5"
+msgstr "&Copia              F5"
 
 #: src/main.c:1281
 msgid "c&Hmod           C-x c"
-msgstr "Permessi    C-x c"
+msgstr "Permessi         C-x c"
 
 #: src/main.c:1283
 msgid "&Link            C-x l"
-msgstr "&Link    C-x l"
+msgstr "&Link            C-x l"
 
 #: src/main.c:1284
 msgid "&SymLink         C-x s"
-msgstr "Link &simbolico   C-x s"
+msgstr "Link &simbolico  C-x s"
 
 #: src/main.c:1285
 msgid "edit s&Ymlink  C-x C-s"
@@ -4898,7 +4743,7 @@ msgstr "modifica link simbolico  C-x C-s"
 
 #: src/main.c:1286
 msgid "ch&Own           C-x o"
-msgstr "Cambia proprietario/gruppo     C-x o"
+msgstr "Proprietario/gruppo     C-x o"
 
 #: src/main.c:1287
 msgid "&Advanced chown       "
@@ -4966,11 +4811,11 @@ msgstr "Mostra dimensione directory"
 
 #: src/main.c:1317
 msgid "command &History"
-msgstr "Storico comandi"
+msgstr "Storia comandi"
 
 #: src/main.c:1318
 msgid "di&Rectory hotlist    C-\\"
-msgstr "Lista delle directory (hotlist) C-\\"
+msgstr "Lista favoriti        C-\\"
 
 #: src/main.c:1320
 msgid "&Active VFS list      C-x a"
@@ -4978,11 +4823,11 @@ msgstr "Lista dei &VFS attivi    C-x a "
 
 #: src/main.c:1323
 msgid "&Background jobs      C-x j"
-msgstr "&Processsi in background C-x j"
+msgstr "&Processsi in background  C-x j"
 
 #: src/main.c:1327
 msgid "&Undelete files (ext2fs only)"
-msgstr "&Ripristina files (solamente ext2fs)"
+msgstr "&Ripristina files (solo ext2fs)"
 
 #: src/main.c:1330
 msgid "&Listing format edit"
@@ -5002,15 +4847,15 @@ msgstr "&Configurazione.."
 
 #: src/main.c:1340
 msgid "c&Onfirmation..."
-msgstr "Conferma....."
+msgstr "Conferma...     "
 
 #: src/main.c:1341
 msgid "&Display bits..."
-msgstr "Mostra bits..."
+msgstr "Mostra bits...  "
 
 #: src/main.c:1343
 msgid "learn &Keys..."
-msgstr "Controlla tasti..."
+msgstr "Studia tasti..."
 
 #: src/main.c:1346
 msgid "&Virtual FS..."
@@ -5021,37 +4866,30 @@ msgid "&Save setup"
 msgstr "&Salva configurazione"
 
 #: src/main.c:1365 src/main.c:1367
-#, fuzzy
 msgid " &Left "
 msgstr " Sinistra "
 
 #: src/main.c:1367
-#, fuzzy
 msgid " &Above "
 msgstr " Sopra "
 
 #: src/main.c:1370
-#, fuzzy
 msgid " &File "
 msgstr " File "
 
 #: src/main.c:1371
-#, fuzzy
 msgid " &Command "
 msgstr " Comando "
 
 #: src/main.c:1372
-#, fuzzy
 msgid " &Options "
 msgstr " Opzioni "
 
 #: src/main.c:1374 src/main.c:1376
-#, fuzzy
 msgid " &Right "
 msgstr " Destro "
 
 #: src/main.c:1376
-#, fuzzy
 msgid " &Below "
 msgstr " Sotto "
 
@@ -5067,13 +4905,13 @@ msgid ""
 " the details.                                           "
 msgstr ""
 " L'uso della visualizzazione rapida potrebbe mostrare una\n"
-" directory non corrispondente alla realta'.In questo caso\n"
+" directory non corrispondente alla realta'. In questo caso\n"
 " usate il comando manuale C-r per obbligare il programma \n"
-" ad attualizzare la visualizzazione. Vedi la Man page.             "
+" ad aggiornare la visualizzazione. Vedi la Man page.             "
 
-#: src/main.c:1706 src/screen.c:2352 src/screen.c:2382
+#: src/main.c:1706 src/screen.c:2362 src/screen.c:2392
 msgid "Menu"
-msgstr "Usermenu"
+msgstr "Menu"
 
 #: src/main.c:1911
 msgid "Thank you for using GNU Midnight Commander"
@@ -5101,116 +4939,110 @@ msgstr "Directory delle librerie di Midnight Commander: %s\n"
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
-"L'opzione -m e' obsoleta.  Controlla Display Bits... nel menu opzioni\n"
+"L'opzione -m e' obsoleta.  Controlla Display Bits... nel menu Opzioni\n"
 
 #: src/main.c:2661
-#, fuzzy
 msgid "Use to debug the background code"
 msgstr "[SVILUPPATORI: Debug the background code]"
 
 #: src/main.c:2667
 msgid "Request to run in color mode"
-msgstr ""
+msgstr "Richiede esecuzione in modalita' colori"
 
 #: src/main.c:2669
 msgid "Specifies a color configuration"
-msgstr ""
+msgstr "Specifica una configurazione di colori"
 
 #: src/main.c:2674
-#, fuzzy
 msgid "Edits one file"
-msgstr "Files audio"
+msgstr "Modifica un file"
 
 #: src/main.c:2678
-#, fuzzy
 msgid "Displays this help message"
-msgstr "Mostra questo messaggio di help."
+msgstr "Mostra questo messaggio di aiuto"
 
 #: src/main.c:2681
 msgid "Displays a help screen on how to change the color scheme"
-msgstr ""
+msgstr "Mostra una schermata di aiuto su come cambiare lo schema di colori"
 
 #: src/main.c:2684
-#, fuzzy
 msgid "Log ftp dialog to specified file"
 msgstr "Registra i comandi ftp in un file."
 
 #: src/main.c:2691
 msgid "Obsolete"
-msgstr ""
+msgstr "Obsoleto"
 
 #: src/main.c:2693
 msgid "Requests to run in black and white"
-msgstr ""
+msgstr "Richiede esecuzione in bianco e nero"
 
 #: src/main.c:2695
-#, fuzzy
 msgid "Disable mouse support in text version"
 msgstr "Disabilita il supporto mouse."
 
 #: src/main.c:2698
-#, fuzzy
 msgid "Disables subshell support"
-msgstr "Disabilita il supporto mouse."
+msgstr "Disabilita il supporto shell"
 
 #: src/main.c:2702
 msgid "Prints working directory at program exit"
-msgstr ""
+msgstr "Mostra directory di lavoro all'uscita"
 
 #: src/main.c:2704
 msgid "Resets soft keys on HP terminals"
-msgstr ""
+msgstr "Riconfigura tasti su trminali HP"
 
 #: src/main.c:2706
 msgid "To run on slow terminals"
-msgstr ""
+msgstr "Per eseguire su terminali lenti"
 
 #: src/main.c:2709
 msgid "Use stickchars to draw"
-msgstr ""
+msgstr "Usare caratteri semplici"
 
 #: src/main.c:2713
 msgid "Enables subshell support (default)"
-msgstr ""
+msgstr "Abilita il supporto shell (default)"
 
 #: src/main.c:2718
 msgid "Tries to use termcap instead of terminfo"
-msgstr ""
+msgstr "Prova  ad usare termcap invece di terminfo"
 
 #: src/main.c:2722
 msgid "Displays the current version"
-msgstr ""
+msgstr "Mostra versione corrente"
 
 #: src/main.c:2724
 msgid "Launches the file viewer on a file"
-msgstr ""
+msgstr "Visualizza file"
 
 #: src/main.c:2726
 msgid "Forces xterm features"
-msgstr ""
+msgstr "Forza caratteristiche xterm"
 
 #: src/main.c:2728
 msgid "Geometry for the window"
-msgstr ""
+msgstr "Geometria della finestra"
 
 #: src/main.c:2728
 msgid "GEOMETRY"
-msgstr ""
+msgstr "GEOMETRIA"
 
 #: src/main.c:2729
 msgid "No windows opened at startup"
-msgstr ""
+msgstr "Nessuna finestra all'inizio"
 
 #: src/main.c:2731
 msgid "Display the directory that holds the .links startup files and exit"
-msgstr ""
+msgstr "Mostra directory contenente i file di inizio ed esce"
 
 #: src/main.c:3015
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
-"Non posso aprire il terminale.  Devi eseguire mc senza l'opzione -P\n"
+"Impossibile aprire il terminale.  Devi eseguire mc senza l'opzione -P\n"
 "Su alcuni sistemi, basta eseguire `which mc`\n"
 
 #: src/main.c:3093
@@ -5230,15 +5062,15 @@ msgstr ""
 
 #: src/option.c:75
 msgid "safe de&Lete"
-msgstr "Opzione undelete"
+msgstr "Cancella sicuro"
 
 #: src/option.c:76
 msgid "cd follows lin&Ks"
-msgstr "cd segue i links"
+msgstr "Cd segue i links"
 
 #: src/option.c:77
 msgid "advanced cho&Wn"
-msgstr "opzioni avanzate chown"
+msgstr "Opzioni avanzate cho&Wn"
 
 #: src/option.c:78
 msgid "l&Ynx-like motion"
@@ -5249,13 +5081,12 @@ msgid "Animation"
 msgstr "Animazione"
 
 #: src/option.c:82
-#, fuzzy
 msgid "rotatin&G dash"
-msgstr "lancette rotanti"
+msgstr "Lancette rotanti"
 
 #: src/option.c:84
 msgid "co&Mplete: show all"
-msgstr "co&Mpleto: visualizza tutto"
+msgstr "Co&Mpleto: visualizza tutto"
 
 #: src/option.c:85
 msgid "&Use internal view"
@@ -5263,15 +5094,15 @@ msgstr "&Usa visualizzatore interno"
 
 #: src/option.c:86
 msgid "use internal ed&It"
-msgstr "usa &editor interno"
+msgstr "Usa &Editor interno"
 
 #: src/option.c:87
 msgid "auto m&Enus"
-msgstr "auto me&nu"
+msgstr "Auto me&Nu"
 
 #: src/option.c:88
 msgid "&Auto save setup"
-msgstr "Salvataggio automatico"
+msgstr "Salvataggio &Automatico"
 
 #: src/option.c:89
 msgid "shell &Patterns"
@@ -5279,7 +5110,7 @@ msgstr "&Patterns della shell"
 
 #: src/option.c:90
 msgid "Compute &Totals"
-msgstr ""
+msgstr "Calcola &Totali"
 
 #: src/option.c:91
 msgid "&Verbose operation"
@@ -5287,11 +5118,11 @@ msgstr "Operazioni dettagliate"
 
 #: src/option.c:92
 msgid "&Fast dir reload"
-msgstr "&Visualizzazione rapida dir"
+msgstr "&Aggiornamento veloce dir"
 
 #: src/option.c:93
 msgid "mi&X all files"
-msgstr "mostra i files random"
+msgstr "Mischia tutti i file"
 
 #: src/option.c:94
 msgid "&Drop down menus"
@@ -5303,11 +5134,11 @@ msgstr "Evidenzia: muove cursore giu'"
 
 #: src/option.c:96
 msgid "show &Hidden files"
-msgstr "mostra file nascosti"
+msgstr "Mostra file nascosti"
 
 #: src/option.c:97
 msgid "show &Backup files"
-msgstr "mostra files di backup"
+msgstr "Mostra files di backup"
 
 #: src/option.c:104
 msgid "&Never"
@@ -5315,7 +5146,7 @@ msgstr "Mai"
 
 #: src/option.c:105
 msgid "on dumb &Terminals"
-msgstr "solo su terminali stupidi."
+msgstr "Solo su terminali stupidi."
 
 #: src/option.c:106
 msgid "alwa&Ys"
@@ -5359,18 +5190,16 @@ msgid " Add to external panelize "
 msgstr " Aggiungi al visual. esterno..."
 
 #: src/panelize.c:261
-#, fuzzy
 msgid " Enter command label: "
 msgstr " Linea: "
 
 #: src/panelize.c:301
-#, fuzzy
 msgid " I can't run external panelize while logged on a non local directory "
-msgstr "Posso eseguire il visualizzatore esterno solo in locale"
+msgstr "Posso eseguire il visualizzatore esterno solo su dir locali"
 
 #: src/panelize.c:351
 msgid "Find *.orig after patching"
-msgstr ""
+msgstr "Find *.orig dopo un patch"
 
 #: src/panelize.c:352
 msgid "Find SUID and SGID programs"
@@ -5385,13 +5214,12 @@ msgid "Pipe close failed"
 msgstr "Chiusura pipe fallita"
 
 #: src/popthelp.c:31
-#, fuzzy
 msgid "Show this help message"
-msgstr "Mostra questo messaggio di help."
+msgstr "Mostra questo messaggio di aiuto"
 
 #: src/popthelp.c:32
 msgid "Display brief usage message"
-msgstr ""
+msgstr "Mostra un breve messaggio sull'uso"
 
 #: src/screen.c:399
 msgid "MTime"
@@ -5415,7 +5243,7 @@ msgstr "Nl"
 
 #: src/screen.c:405
 msgid "Inode"
-msgstr "Nodo-I"
+msgstr "Inodo"
 
 #: src/screen.c:406
 msgid "UID"
@@ -5430,39 +5258,39 @@ msgstr "GID"
 msgid "  %s bytes in %d file%s"
 msgstr " %s bytes in %d file %s"
 
-#: src/screen.c:1304
+#: src/screen.c:1314
 msgid "Unknow tag on display format: "
 msgstr "Campo sconosciuto per la visualizzazione: "
 
-#: src/screen.c:2081 src/screen.c:2121
+#: src/screen.c:2091 src/screen.c:2131
 msgid " Do you really want to execute? "
 msgstr " Vuoi eseguire realmente?"
 
-#: src/screen.c:2093 src/screen.c:2136
+#: src/screen.c:2103 src/screen.c:2146
 msgid " No action taken "
-msgstr ""
+msgstr "Nessuna azione eseguita"
 
-#: src/screen.c:2356 src/screen.c:2386 src/tree.c:1017
+#: src/screen.c:2366 src/screen.c:2396 src/tree.c:1017
 msgid "RenMov"
-msgstr "Muovi"
+msgstr "RenMov"
 
-#: src/screen.c:2357 src/screen.c:2387 src/tree.c:1021
+#: src/screen.c:2367 src/screen.c:2397 src/tree.c:1021
 msgid "Mkdir"
-msgstr "CrDir"
+msgstr "Mkdir"
 
-#: src/screen.c:2373
-#, fuzzy, c-format
+#: src/screen.c:2383
+#, c-format
 msgid ""
 " Can't chdir to %s \n"
 " %s "
 msgstr ""
-" Non posso cambiare directory ( '%s') \n"
+" Impossibile cambiare directory ( '%s') \n"
 " %s "
 
 #: src/subshell.c:287
 #, c-format
 msgid "Couldn't open named pipe %s\n"
-msgstr "Non posso aprire la pipe %s\n"
+msgstr "Impossibile aprire la pipe %s\n"
 
 #: src/subshell.c:705
 msgid " The shell is still active. Quit anyway? "
@@ -5479,7 +5307,7 @@ msgstr " Esco comunque?? "
 #: src/subshell.c:785
 #, c-format
 msgid "Warning: Couldn't change to %s.\n"
-msgstr "Attenzione: non posso entrare su %s.\n"
+msgstr "Attenzione: non posso entrare in %s.\n"
 
 #: src/tree.c:193
 #, c-format
@@ -5487,7 +5315,7 @@ msgid ""
 "Can't open the %s file for writing:\n"
 "%s\n"
 msgstr ""
-"Non posso aprire il file `%s' in scrittura:\n"
+"Impossibile aprire il file `%s' in scrittura:\n"
 "%s\n"
 
 #: src/tree.c:638
@@ -5505,7 +5333,7 @@ msgstr "Muovi la directory `%s' a:"
 msgid ""
 " Can't stat the destination \n"
 " %s "
-msgstr "No puedo solicitar información sobre el destino"
+msgstr "Impossibile ottenere informazioni sulla destinazione"
 
 #: src/tree.c:689
 msgid " The destination isn't a directory "
@@ -5530,7 +5358,7 @@ msgid ""
 " Can't chdir to \"%s\" \n"
 " %s "
 msgstr ""
-" Non posso entrare in `%s' \n"
+" Impossibile entrare in `%s' \n"
 " %s "
 
 #: src/tree.c:1013
@@ -5547,7 +5375,7 @@ msgid ""
 "Can't write to the %s file:\n"
 "%s\n"
 msgstr ""
-"Non posso scrivere sul file `%s':\n"
+"Impossibile scrivere sul file `%s':\n"
 "%s\n"
 
 #: src/user.c:261
@@ -5581,8 +5409,8 @@ msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-" Il file `%s' non appartiene a root o e' scrivibile a tutti\n"
-" Usandolo potrebbe compromettere la sicurezza di sistema."
+" Il file `%s' non appartiene a root o e' scrivibile da tutti\n"
+" Usarlo potrebbe compromettere la sicurezza di sistema."
 
 #: src/user.c:640
 msgid " I can't run programs while logged on a non local directory "
@@ -5590,13 +5418,22 @@ msgstr " Impossibile eseguire programmi su una directory non locale"
 
 #. Create listbox
 #: src/user.c:727
-#, fuzzy
 msgid " User menu "
-msgstr " Nome utente "
+msgstr " Menu utente "
 
 #: src/util.c:228
 msgid "name_trunc: too big"
 msgstr "name_trunc: troppo grande"
+
+#. strftime() format string for recent dates
+#: src/util.c:598 src/util.c:623
+msgid "%b %e %H:%M"
+msgstr ""
+
+#. strftime() format string for old dates
+#: src/util.c:599 src/util.c:621
+msgid "%b %e  %Y"
+msgstr ""
 
 #: src/utilunix.c:390
 msgid " Pipe failed "
@@ -5632,7 +5469,7 @@ msgstr " Salva modifiche "
 
 #: src/view.c:446
 msgid " Can't spawn child program "
-msgstr " Non posso eseguire il processo figlio "
+msgstr " Impossibile eseguire il processo figlio "
 
 #: src/view.c:455
 msgid " Empty output from child filter "
@@ -5640,29 +5477,29 @@ msgstr " Output nullo dal filtro figlio "
 
 #: src/view.c:460
 msgid " Could not open file "
-msgstr " Non posso aprire il file "
+msgstr " Impossibile aprire il file "
 
 #: src/view.c:475
 msgid " Can't open file \""
-msgstr " Non posso aprire il file \""
+msgstr " Impossibile aprire il file \""
 
 #: src/view.c:482
 msgid ""
 " Can't stat file \n"
 " "
-msgstr "Non posso avere informazioni sul file "
+msgstr "Impossibile ottenere informazioni sul file "
 
 #: src/view.c:488
 msgid " Can't view: not a regular file "
-msgstr " Non posso vederlo: non e' un file standard "
+msgstr " Impossibile vederlo: non e' un file standard "
 
 #: src/view.c:567 src/view.c:572
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Can't open \"%s\"\n"
 " %s "
 msgstr ""
-" Non posso aprire il file %s \n"
+" Impossibile aprire '%s' \n"
 " %s "
 
 #: src/view.c:704
@@ -5674,20 +5511,20 @@ msgstr "File: %s"
 msgid "  [grow]"
 msgstr "  [grow]"
 
-#: src/view.c:1494
-#, fuzzy, c-format
+#: src/view.c:1501
+#, c-format
 msgid "Searching for `%s'"
 msgstr "Cercando %s"
 
-#: src/view.c:1601 src/view.c:1723
+#: src/view.c:1608 src/view.c:1730
 msgid " Search string not found "
 msgstr " La stringa cercata non e' disponibile "
 
-#: src/view.c:1762
+#: src/view.c:1769
 msgid " Invalid regular expression "
 msgstr " Espressione regolare errata "
 
-#: src/view.c:1886
+#: src/view.c:1893
 #, c-format
 msgid ""
 " The current line number is %d.\n"
@@ -5696,59 +5533,59 @@ msgstr ""
 " La linea corrente e' %d.\n"
 " Inserisci nuovo numero di linea:"
 
-#: src/view.c:1916
+#: src/view.c:1923
 msgid " Enter regexp:"
 msgstr " Inserisci espressione regolare:"
 
-#: src/view.c:2021
+#: src/view.c:2028
 msgid "Ascii"
 msgstr "Ascii"
 
-#: src/view.c:2021
+#: src/view.c:2028
 msgid "Hex"
 msgstr "Hex"
 
-#: src/view.c:2022
+#: src/view.c:2029
 msgid "Line"
 msgstr "Linea"
 
-#: src/view.c:2023
+#: src/view.c:2030
 msgid "RxSrch"
 msgstr "CercaRx"
 
-#: src/view.c:2026
+#: src/view.c:2033
 msgid "EdText"
 msgstr "EdText"
 
-#: src/view.c:2026
+#: src/view.c:2033
 msgid "EdHex"
 msgstr "EdHex"
 
-#: src/view.c:2028
+#: src/view.c:2035
 msgid "UnWrap"
-msgstr "DesEnv"
+msgstr "UnWrap"
 
-#: src/view.c:2028
+#: src/view.c:2035
 msgid "Wrap"
-msgstr "Envolver"
+msgstr "Wrap"
 
-#: src/view.c:2031
+#: src/view.c:2038
 msgid "HxSrch"
 msgstr "CercaHx"
 
-#: src/view.c:2034
+#: src/view.c:2041
 msgid "Raw"
 msgstr "Raw"
 
-#: src/view.c:2034
+#: src/view.c:2041
 msgid "Parse"
 msgstr "Processa"
 
-#: src/view.c:2038
+#: src/view.c:2045
 msgid "Unform"
 msgstr "Unformat"
 
-#: src/view.c:2038
+#: src/view.c:2045
 msgid "Format"
 msgstr "Formato"
 
@@ -5868,7 +5705,7 @@ msgstr "Tasto pagina giu'"
 
 #: src/win.c:252
 msgid "Page Up key"
-msgstr "tasto Pagina su"
+msgstr "Tasto pagina su"
 
 #: src/win.c:253
 msgid "Insert key"
@@ -5876,11 +5713,11 @@ msgstr "Tasto Ins"
 
 #: src/win.c:254
 msgid "Delete key"
-msgstr "Tasto delete"
+msgstr "Tasto Canc"
 
 #: src/win.c:255
 msgid "Completion/M-tab"
-msgstr "Completion/M-Tab"
+msgstr "Completare/M-Tab"
 
 #: src/win.c:256
 msgid "+ on keypad"
@@ -5948,163 +5785,158 @@ msgid "NumLock on keypad"
 msgstr "NumLock sul tastierino"
 
 #: vfs/extfs.c:268
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Couldn't open %s archive\n"
 "%s"
-msgstr "Non posso aprire la pipe %s\n"
+msgstr "Impossibile aprire l'archivio %s "
 
 #: vfs/extfs.c:300 vfs/extfs.c:320
 msgid "Inconsistent extfs archive"
-msgstr ""
+msgstr "Archivio extfs inconsistente"
 
 #: vfs/fish.c:224
 msgid "Sorry, we can not do password authenticated connections for now."
 msgstr ""
+"Spicenti, ma non e' ancora possibile effettuare connessioni autenticate"
 
 #: vfs/ftpfs.c:326
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
-msgstr ""
+msgstr "ftpfs: Disconnessione da %s"
 
 #: vfs/ftpfs.c:377
 msgid " FTP: Password required for "
-msgstr ""
+msgstr " FTP: Password necessaria per"
 
 #: vfs/ftpfs.c:409
 msgid " Proxy: Password required for "
-msgstr ""
+msgstr " Proxy: Password necessaria per"
 
 #: vfs/ftpfs.c:435
 msgid "ftpfs: sending proxy login name"
-msgstr ""
+msgstr "ftpfs: invio nome di login per il proxy"
 
 #: vfs/ftpfs.c:439
-#, fuzzy
 msgid "ftpfs: sending proxy user password"
-msgstr "password ftp anonimo:"
+msgstr "ftpfs: invio password per il proxy"
 
 #: vfs/ftpfs.c:443
 msgid "ftpfs: proxy authentication succeeded"
-msgstr ""
+msgstr "ftpfs: autenticazione proxy riuscita"
 
 #: vfs/ftpfs.c:447
 #, c-format
 msgid "ftpfs: connected to %s"
-msgstr ""
+msgstr "ftpfs: connesso a: %s"
 
 #: vfs/ftpfs.c:464
 msgid "ftpfs: sending login name"
-msgstr ""
+msgstr "ftpfs: sto inviando il nome di login"
 
 #: vfs/ftpfs.c:469
-#, fuzzy
 msgid "ftpfs: sending user password"
-msgstr "password ftp anonimo:"
+msgstr "ftpfs: sto inviando la password"
 
 #: vfs/ftpfs.c:474
 msgid "ftpfs: logged in"
-msgstr ""
+msgstr "ftpfs: autorizzazione ottenuta"
 
 #: vfs/ftpfs.c:489
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
-msgstr ""
+msgstr "ftpfs: autorizzazione all'utente %s negata "
 
 #: vfs/ftpfs.c:521
-#, fuzzy, c-format
+#, c-format
 msgid " Could not set source routing (%s)"
-msgstr " Configurazione del routing "
+msgstr " Impossibile configurare il routing (%s)"
 
 #: vfs/ftpfs.c:650
 msgid "ftpfs: Invalid host name."
-msgstr ""
+msgstr "ftpfs: Nome host non valido"
 
 #: vfs/ftpfs.c:670
 msgid "ftpfs: Invalid host address."
-msgstr ""
+msgstr "ftpfs: Indirizzo host non valido"
 
 #: vfs/ftpfs.c:695
 #, c-format
 msgid "ftpfs: making connection to %s"
-msgstr ""
+msgstr "ftpfs: sto effettuando la connessione a %s"
 
 #: vfs/ftpfs.c:705
 msgid "ftpfs: connection interrupted by user"
-msgstr ""
+msgstr "ftpfs: connessione interrotta dall'utente"
 
 #: vfs/ftpfs.c:707
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
-msgstr ""
+msgstr "ftpfs: connessione al server fallita: %s"
 
 #: vfs/ftpfs.c:791
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr ""
+msgstr "In attesa di riconnettersi... %d (Ctrl-C per abbandonare)"
 
 #: vfs/ftpfs.c:985
-#, fuzzy
 msgid "ftpfs: could not setup passive mode for source routing"
-msgstr " Configurazione del routing "
+msgstr "ftpfs: impossibile effettuare il routing in modalita' passiva"
 
 #: vfs/ftpfs.c:995
 msgid "ftpfs: could not setup passive mode"
-msgstr ""
+msgstr "ftpfs: impossibile applicare la modalita' passiva"
 
 #: vfs/ftpfs.c:1066
 msgid "ftpfs: aborting transfer."
-msgstr ""
+msgstr "ftpfs: annulla trasferimento"
 
 #: vfs/ftpfs.c:1068
 #, c-format
 msgid "ftpfs: abort error: %s"
-msgstr ""
+msgstr "ftpfs: errore nell'annullamento: %s"
 
 #: vfs/ftpfs.c:1073
 msgid "ftpfs: abort failed"
-msgstr ""
+msgstr "ftpfs: annullamento fallito"
 
 #: vfs/ftpfs.c:1159 vfs/ftpfs.c:1329
-#, fuzzy
 msgid "ftpfs: CWD failed."
-msgstr " Dup fallita "
+msgstr "ftpfs: esecuzione di CWD fallita "
 
 #: vfs/ftpfs.c:1169 vfs/ftpfs.c:1176
 msgid "ftpfs: couldn't resolve symlink"
-msgstr ""
+msgstr "ftpfs: impossibile risolvere il link simbolico"
 
 #: vfs/ftpfs.c:1221
-#, fuzzy
 msgid "Resolving symlink..."
-msgstr "Modifica link simbolici"
+msgstr "Sto risolvendo i link simbolici..."
 
 #: vfs/ftpfs.c:1323
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... (don't use UNIX ls options)"
-msgstr ""
+msgstr "ftpfs: Lettura della dir ftp %s ... (no opzioni del comando UNIX 'ls')"
 
 #: vfs/ftpfs.c:1325
 #, c-format
 msgid "ftpfs: Reading FTP directory %s..."
-msgstr ""
+msgstr "ftpfs: Lettura della dir ftp %s ..."
 
 #: vfs/ftpfs.c:1341
 msgid "ftpfs: FAIL"
-msgstr ""
+msgstr "ftpfs: FALLITA"
 
 #: vfs/ftpfs.c:1432
 msgid "ftpfs: reading FTP directory interrupt by user"
-msgstr ""
+msgstr "ftpfs: Lettura della dir ftp interrotta dall'utente"
 
 #: vfs/ftpfs.c:1462
 msgid "ftpfs: got listing"
-msgstr ""
+msgstr "ftpfs: lista ottenuta"
 
 #: vfs/ftpfs.c:1475
-#, fuzzy
 msgid "ftpfs: failed"
-msgstr " Dup fallita "
+msgstr "ftpfs: fallita "
 
 #: vfs/ftpfs.c:1519
 msgid "ftpfs: failed; nowhere to fallback to"
@@ -6113,22 +5945,23 @@ msgstr ""
 #: vfs/ftpfs.c:1583
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
-msgstr ""
+msgstr "ftpfs: salvataggio file %d (%d)"
 
 #: vfs/ftpfs.c:2019 vfs/ftpfs.c:2034
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
 msgstr ""
+"Il file ~/.netrc ha una password.\n"
+"Rimuoverla o correggere i premessi."
 
 #: vfs/mcfs.c:154
-#, fuzzy
 msgid " MCFS "
-msgstr " CD "
+msgstr " MCFS "
 
 #: vfs/mcfs.c:154
 msgid " The server does not support this version "
-msgstr ""
+msgstr "Il server non supporta questa versione"
 
 #: vfs/mcfs.c:171
 msgid ""
@@ -6136,48 +5969,48 @@ msgid ""
 " you need a password to log in, but the information may \n"
 " not be safe on the remote side.  Continue? \n"
 msgstr ""
+" Il server remoto non e' sulla porta richiesta \n"
+" occorre una password per connettersi, tale informazione puo' pero' \n"
+" non essere protetta sul sistema remoto.  Continuare? \n"
 
 #: vfs/mcfs.c:174
-#, fuzzy
 msgid " Yes "
-msgstr " &Si "
+msgstr " Si "
 
 #: vfs/mcfs.c:174
-#, fuzzy
 msgid " No "
-msgstr " &No "
+msgstr " No "
 
 #: vfs/mcfs.c:176
 msgid " The remote server is running on strange port. Giving up.\n"
-msgstr ""
+msgstr " Il server remoto e' su una strana porta. Abbandono l'operazione.\n"
 
 #: vfs/mcfs.c:188
 msgid " MCFS Password required "
-msgstr ""
+msgstr "MCFS richiesta password"
 
 #: vfs/mcfs.c:202
-#, fuzzy
 msgid " Invalid password "
-msgstr "La maschera di destinazione e' errata"
+msgstr " Password non valida"
 
 #: vfs/mcfs.c:322
 msgid " Too many open connections "
-msgstr ""
+msgstr " Troppe connessioni aperte"
 
 #: vfs/tar.c:84 vfs/tar.c:101
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Couldn't open tar archive\n"
 "%s"
-msgstr "Non posso aprire la pipe %s\n"
+msgstr "Impossibile aprire il file tar %s "
 
 #: vfs/tar.c:284
 msgid "Unexpected EOF on archive file"
-msgstr ""
+msgstr "Fine del file inattesa"
 
 #: vfs/tar.c:339 vfs/tar.c:346
 msgid "Inconsistent tar archive"
-msgstr ""
+msgstr "File tar inconsistente"
 
 #: vfs/tar.c:411
 #, c-format
@@ -6186,381 +6019,10 @@ msgid ""
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
+"Hmm,...\n"
+"%s\n"
+"Non sembra essere un file formato tar."
 
-#, fuzzy
-#~ msgid "Opens a new window"
-#~ msgstr "Apre un nuovo pannello"
 
-#, fuzzy
-#~ msgid "_New"
-#~ msgstr "Nuovo\tC-n"
 
-#, fuzzy
-#~ msgid "_Open"
-#~ msgstr "Apri"
 
-#, fuzzy
-#~ msgid "Opens the selected files"
-#~ msgstr "Recupera file rimossi"
-
-#~ msgid "Delete files from disk"
-#~ msgstr "Rimuove i files dal disco"
-
-#, fuzzy
-#~ msgid "Close this panel"
-#~ msgstr "Confronta pannelli"
-
-#, fuzzy
-#~ msgid "Full View"
-#~ msgstr "Vista"
-
-#, fuzzy
-#~ msgid "_Active VFS list..."
-#~ msgstr "Lista dei VFS attivi"
-
-#~ msgid "List of active virtual file systems"
-#~ msgstr "Lista di VFS attivi"
-
-#, fuzzy
-#~ msgid "_About"
-#~ msgstr "About"
-
-#~ msgid "Information on this program"
-#~ msgstr "Informazioni su questo programma"
-
-#, fuzzy
-#~ msgid "_File"
-#~ msgstr "File"
-
-#, fuzzy
-#~ msgid "_Edit"
-#~ msgstr "Modif"
-
-#~ msgid "Open with"
-#~ msgstr "Apri con"
-
-#, fuzzy
-#~ msgid "_Mode"
-#~ msgstr "Modo"
-
-#~ msgid " Symlink "
-#~ msgstr " Link simbolico "
-
-#~ msgid "Ok"
-#~ msgstr "Ok"
-
-#, fuzzy
-#~ msgid "Open/Load"
-#~ msgstr "Apri"
-
-#, fuzzy
-#~ msgid "New"
-#~ msgstr "Nuovo\tC-n"
-
-#, fuzzy
-#~ msgid "Save As"
-#~ msgstr " Salva con nome "
-
-#, fuzzy
-#~ msgid "Copy selection to clipboard"
-#~ msgstr " Copia nella clipboard "
-
-#, fuzzy
-#~ msgid "Cut"
-#~ msgstr "Totale"
-
-#, fuzzy
-#~ msgid "Cut selection to clipboard"
-#~ msgstr " Taglia nella clipboard "
-
-#, fuzzy
-#~ msgid "Paste"
-#~ msgstr "Processa"
-
-#, fuzzy
-#~ msgid "Paste clipboard"
-#~ msgstr " Taglia nella clipboard "
-
-#, fuzzy
-#~ msgid "Undo"
-#~ msgstr "no"
-
-#, fuzzy
-#~ msgid "Find"
-#~ msgstr "Cerca"
-
-#, fuzzy
-#~ msgid "Find string/regular expression"
-#~ msgstr " Espressione regolare errata "
-
-#, fuzzy
-#~ msgid "Find again"
-#~ msgstr "Trova file"
-
-#, fuzzy
-#~ msgid "Find and replace text/regular expressions"
-#~ msgstr " Espressione regolare errata "
-
-#, fuzzy
-#~ msgid "About..."
-#~ msgstr "About"
-
-#~ msgid "|"
-#~ msgstr "|"
-
-#, fuzzy
-#~ msgid "_View"
-#~ msgstr "Vista"
-
-#, fuzzy
-#~ msgid "View r_aw"
-#~ msgstr "View raw"
-
-#~ msgid "View the file without further processing"
-#~ msgstr "Visualizza file senza processare"
-
-#, fuzzy
-#~ msgid "_Select group by pattern..."
-#~ msgstr "Seleziona gruppo"
-
-#, fuzzy
-#~ msgid "_Unselect group by pattern..."
-#~ msgstr "De-seleziona gruppo"
-
-#~ msgid "Un-selects a group of marked files"
-#~ msgstr "De-seleziona un gruppo di files"
-
-#, fuzzy
-#~ msgid "E_xit"
-#~ msgstr "Esci"
-
-#~ msgid "Exit program"
-#~ msgstr "Esci"
-
-#, fuzzy
-#~ msgid "_Display mode..."
-#~ msgstr "Modalita' visualizzazione"
-
-#~ msgid "Changes the sort order of the files"
-#~ msgstr "Cambia l'ordine dei files"
-
-#, fuzzy
-#~ msgid "_Rescan"
-#~ msgstr "Aggiorna"
-
-#, fuzzy
-#~ msgid "_Network link..."
-#~ msgstr "Connessione remota"
-
-#~ msgid "Connect to a remote machine"
-#~ msgstr "Connession remota"
-
-#, fuzzy
-#~ msgid "FT_P link..."
-#~ msgstr "Trasferimento files via FTP"
-
-#~ msgid "Connect to a remote machine with FTP"
-#~ msgstr "Connnessione remota via FTP"
-
-#, fuzzy
-#~ msgid "_Confirmation..."
-#~ msgstr "Conferma"
-
-#, fuzzy
-#~ msgid "_Options..."
-#~ msgstr "Opzioni"
-
-#, fuzzy
-#~ msgid "_Virtual FS..."
-#~ msgstr "Opzioni &VFS..."
-
-#~ msgid "Virtual File System settings"
-#~ msgstr "Configurazione del Virtual File System (VFS)"
-
-#, fuzzy
-#~ msgid "_Save setup"
-#~ msgstr "Salva configurazione"
-
-#, fuzzy
-#~ msgid "_Find..."
-#~ msgstr "Cerca"
-
-#, fuzzy
-#~ msgid "_Hotlist..."
-#~ msgstr "Favoriti"
-
-#~ msgid "List of favorite sites"
-#~ msgstr "Lista favoriti"
-
-#~ msgid "Compare panel contents"
-#~ msgstr "Confronta contenuto pannelli"
-
-#, fuzzy
-#~ msgid "_External panelize..."
-#~ msgstr "Usa visualizzatore esterno"
-
-#, fuzzy
-#~ msgid "_Undelete files (ext2fs only)..."
-#~ msgstr "Recupera files (unicamente ext2fs)"
-
-#, fuzzy
-#~ msgid "_Window"
-#~ msgstr "Cerca"
-
-#, fuzzy
-#~ msgid "Close the viewer"
-#~ msgstr "Chiudi visualizzatore"
-
-#~ msgid "String search"
-#~ msgstr "Cerca una stringa"
-
-#~ msgid "Continue searching"
-#~ msgstr "Continua a cercare"
-
-#~ msgid "Always to memory"
-#~ msgstr "Sempre in memoria"
-
-#~ msgid "If size less than:"
-#~ msgstr "Solo se minore di:"
-
-#~ msgid "Gzipped tar archive extract:"
-#~ msgstr "Estrae l'archivio compresso con gzip:"
-
-#~ msgid " Mkdir "
-#~ msgstr " Crea directory "
-
-#~ msgid "Cannot invoke du command."
-#~ msgstr "Non posso eseguire il comando `du'"
-
-#~ msgid "Link"
-#~ msgstr "Link"
-
-#, fuzzy
-#~ msgid "Do you want to delete "
-#~ msgstr " Vuoi eseguire realmente?"
-
-#, fuzzy
-#~ msgid "Rename/move..."
-#~ msgstr "Rinomina/muovi..."
-
-#~ msgid "Other options"
-#~ msgstr "Altre opzioni"
-
-#~ msgid "Highlight..."
-#~ msgstr "Evidenziazione a colori"
-
-#~ msgid "Panel split"
-#~ msgstr "Divisione pannelli"
-
-#~ msgid "Create command file to set default directory upon exit."
-#~ msgstr ""
-#~ "Crea un file comandi per definire una directory di default all'uscita."
-
-#~ msgid "Force color mode."
-#~ msgstr "Forza modalita' colore."
-
-#~ msgid "Specify colors (use --help-colors to get a list)."
-#~ msgstr "Specifica i colori (usa --help-colors per visualizzare una lista)."
-
-#, fuzzy
-#~ msgid "[DEVEL-ONLY: Debug the subshell]"
-#~ msgstr "[SVILUPPATORI: Debug the subshell]"
-
-#~ msgid "Startup the internal editor."
-#~ msgstr "Inizializza editor interno."
-
-#~ msgid "Help on how to specify colors."
-#~ msgstr "Aiuto su come definire i colori."
-
-#~ msgid "Prints out the configured paths."
-#~ msgstr "Visualizza il path (configurazione)."
-
-#~ msgid "Force black and white display."
-#~ msgstr "Forza l'uso di display in bianco e nero."
-
-#~ msgid "Force the concurrent subshell mode"
-#~ msgstr "Forza l'uso della modalita': concurrent subshell."
-
-#~ msgid "Disable the concurrent subshell mode."
-#~ msgstr "Disabilita la modalita': concurrent shell."
-
-#~ msgid "Force subshell execution."
-#~ msgstr "Forza l'esecuzione della: concurrent shell."
-
-#~ msgid "At exit, print the last working directory."
-#~ msgstr "All'uscita, mostra ultima directory di lavoro ."
-
-#~ msgid ""
-#~ "Reset softkeys (HP terminals only) to their terminfo/termcap default."
-#~ msgstr ""
-#~ "Resetta softkeys(solo terminali HP) ai valori predefiniti nelle "
-#~ "terminfo/termcap."
-
-#~ msgid "Disables verbose operation (for slow terminals)."
-#~ msgstr "Abilita non-verbose mode per le operazioni (per terminali lenti)."
-
-#~ msgid "Use simple symbols for line drawing."
-#~ msgstr "Usa simboli normali per i contorni."
-
-#~ msgid "Activate support for the TERMCAP variable."
-#~ msgstr "Attiva il supporto per la variabile TERMCAP."
-
-#, fuzzy
-#~ msgid "Report version and configuration options."
-#~ msgstr "Visualizza versione e opzioni di configurazione"
-
-#~ msgid "Start up into the viewer mode."
-#~ msgstr "Inizia con il Visualizzatore interno."
-
-#~ msgid "Force xterm mouse support and screen save/restore"
-#~ msgstr ""
-#~ "Forza il supporto del mouse nell'xterm e l'opzione schermo save/restore."
-
-#~ msgid "[this dir] [other dir]"
-#~ msgstr "[questa directory] [altra directory]"
-
-#~ msgid "Pause after run..."
-#~ msgstr "Pausa dopo l'esecuzione..."
-
-#~ msgid " Can not fetch local copy "
-#~ msgstr " Non posso ottenere una copia locale "
-
-#, fuzzy
-#~ msgid ""
-#~ "Couldn't load compressed tar\n"
-#~ "%s"
-#~ msgstr "Non posso aprire la pipe %s\n"
-
-#, fuzzy
-#~ msgid ""
-#~ "Couldn't uncompress tar archive\n"
-#~ "%s"
-#~ msgstr "Non posso aprire la pipe %s\n"
-
-#~ msgid ""
-#~ " Cannnot chmod target file \"%s\" \n"
-#~ " %s "
-#~ msgstr ""
-#~ " Non posso cambiare i permessi del file: \"%s\" \n"
-#~ " %s "
-
-#~ msgid " Can't open target file "
-#~ msgstr " Non posso aprire il file di destinazione "
-
-#~ msgid " Can't write to local target file "
-#~ msgstr " Non ho i permessi in scrittura sul file (locale)"
-
-#~ msgid "&Continue"
-#~ msgstr "&Continua"
-
-#~ msgid "New panel"
-#~ msgstr "Nuovo pannello"
-
-#~ msgid "Rename/Move"
-#~ msgstr "Rinomina/Muovi"
-
-#~ msgid "Virtual FS"
-#~ msgstr "Virtual File System (VFS)"
-
-#~ msgid "Panel"
-#~ msgstr "Pannello"
