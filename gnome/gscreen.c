@@ -284,6 +284,8 @@ x_fill_panel (WPanel *panel)
 		panel_fill_panel_icons (panel);
 	else
 		panel_fill_panel_list (panel);
+
+/*	gtk_dtree_do_select_dir (GTK_DTREE (panel->tree), panel->cwd); */
 }
 
 static void
@@ -1685,7 +1687,7 @@ panel_create_icon_display (WPanel *panel)
 			    GTK_SIGNAL_FUNC (panel_widget_motion),
 			    panel);
 
-9	return GTK_WIDGET (ilist);
+	return GTK_WIDGET (ilist);
 }
 
 void
@@ -2058,7 +2060,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
 	GtkWidget *status_line, *filter, *vbox, *ministatus_box;
 	GtkWidget *frame, *cwd, *back_p, *fwd_p;
-	GtkWidget *display;
+	GtkWidget *display, *tree_scrolled_window;
 		
 	panel->xwindow = gtk_widget_get_toplevel (GTK_WIDGET (panel->widget.wdata));
 	
@@ -2067,8 +2069,13 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	/*
 	 * Tree View
 	 */
+	tree_scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+	gtk_scrolled_window_set_policy (
+		GTK_SCROLLED_WINDOW (tree_scrolled_window),
+		GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 	panel->tree = gtk_dtree_new ();
-	gtk_widget_show (panel->tree);
+	gtk_container_add (GTK_CONTAINER (tree_scrolled_window), panel->tree);
+	gtk_widget_show_all (tree_scrolled_window);
 	
 	/*
 	 * Icon and Listing display
@@ -2092,7 +2099,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	panel->pane = gtk_hpaned_new ();
 	gtk_widget_show (panel->pane);
 
-	gtk_paned_add1 (GTK_PANED (panel->pane), panel->tree);
+	gtk_paned_add1 (GTK_PANED (panel->pane), tree_scrolled_window);
 	
 	/*
 	 * Filter
