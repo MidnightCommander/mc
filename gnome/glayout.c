@@ -294,14 +294,18 @@ save_panel_types (void)
 			panel_save_setup (pc->panel, pc->panel->panel_name);
 	}
 }
+
 static void
 run_cmd (void)
 {
-	char *cmd;
+	char *cmd = _("Enter command to run");
 
-	cmd = input_dialog (_("Enter command to run"), _("Enter command to run"), "");
-	if (cmd && *cmd){
-		my_system (EXECUTE_AS_SHELL, shell, cmd);
+	cmd = input_dialog (cmd, cmd, "");
+	if (cmd){
+		if (*cmd){
+			my_system (EXECUTE_AS_SHELL, shell, cmd);
+		}
+		g_free (cmd);
 	}
 }
 
@@ -539,14 +543,13 @@ create_new_menu_from (char *file, GtkWidget *shell, gint pos)
 
 	g_return_val_if_fail (shell != NULL, pos);
 
+	if (shell == NULL){
+		return pos;
+	}
+
 	dir = opendir (file);
 	if (dir == NULL)
 		return pos;
-
-	if (shell == NULL){
-		closedir (dir);
-		return pos;
-	}
 
 	while ((dirstruc = readdir (dir)) != NULL){
 		if (dirstruc->d_name[0] == '.')
