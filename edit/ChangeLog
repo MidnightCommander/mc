@@ -1,3 +1,9 @@
+2004-09-24  Roland Illig  <roland.illig@gmx.de>
+
+	* editdraw.c (status_string): Removed unused parameter.
+	(edit_status): Rewrote to allow longer filenames to be displayed
+	completely whenever possible.
+
 2004-09-19  Roland Illig  <roland.illig@gmx.de>
 
 	* editcmd.c (edit_replace_cmd): Added const qualifier.

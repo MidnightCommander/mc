@@ -45,7 +45,7 @@
 #define FONT_MEAN_WIDTH 1
 
 
-static void status_string (WEdit * edit, char *s, int w, int fill)
+static void status_string (WEdit * edit, char *s, int w)
 {
     char byte_str[16];
 
@@ -83,36 +83,42 @@ static void status_string (WEdit * edit, char *s, int w, int fill)
 		byte_str);
 }
 
-/* how to get as much onto the status line as is numerically possible :) */
+/* Draw the status line at the top of the widget. The status is displayed
+ * right-aligned to be able to display long file names unshorteded. */
 void
 edit_status (WEdit *edit)
 {
-    int w, i, t;
-    char *s;
-    w = edit->widget.cols;
-    s = g_malloc (w + 16);
-    if (w < 4)
-	w = 4;
-    memset (s, ' ', w);
-    attrset (SELECTED_COLOR);
-    if (w > 4) {
-	widget_move (edit, 0, 0);
-	if (edit->filename) {
-	    i = w > 24 ? 18 : w - 6;
-	    i = i < 13 ? 13 : i;
-	    strcpy (s, name_trunc (edit->filename, i));
-	    i = strlen (s);
-	    s[i] = ' ';
-	}
-	t = w - 20;
-	if (t > 1)		/* g_snprintf() must write at least '\000' */
-	    status_string (edit, s + 20, t + 1 /* for '\000' */ , ' ');
-    }
-    s[w] = 0;
+    const int w = edit->widget.cols;
+    const size_t status_size = w + 1;
+    char * const status = g_malloc (status_size);
+    size_t status_len;
+    const char *fname = "";
+    size_t fname_len;
+    const int gap = 3; /* between the filename and the status */
 
-    printw ("%-*s", w, s);
+    status_string (edit, status, status_size);
+    status_len = (int) strlen (status);
+
+    if (edit->filename)
+        fname = edit->filename;
+    fname_len = strlen(fname);
+
+    if (fname_len + gap + status_len + 2 >= w) {
+    	if (16 + gap + status_len + 2 >= w)
+    	    fname_len = 16;
+    	else
+            fname_len = w - (gap + status_len + 2);
+    	fname = name_trunc (fname, fname_len);
+    }
+
+    widget_move (edit, 0, 0);
+    attrset (SELECTED_COLOR);
+    printw ("%-*s", fname_len + gap, fname);
+    if (fname_len + gap < w)
+        printw ("%-*s  ", w - (fname_len + gap), status);
     attrset (EDITOR_NORMAL_COLOR);
-    g_free (s);
+
+    g_free (status);
 }
 
 /* this scrolls the text so that cursor is on the screen */
