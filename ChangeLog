@@ -1,3 +1,10 @@
+2001-06-25  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: For Autoconf 2.50+, use AC_SYS_LARGEFILE.
+	It should be enabled explicitly by giving `--enable-largefile'
+	to configure.
+	* INSTALL: Document it.
+
 2001-06-22  Pavel Roskin  <proski@gnu.org>
 
 	* extraconf.h: Don't define HAVE_INFOMOUNT_QNX on QNX Neutrino.
@@ -407,7 +414,7 @@
 2000-11-10  Robert Brady  <robert@suse.co.uk>
 
 	* configure.in: Add Tamil to ALL_LINGUAS.
-	
+
 2000-10-23  Pavel Roskin  <proski@gnu.org>
 
 	* mc.spec.in: Allow mcserv.8 to be gzipped.
@@ -775,11 +782,11 @@
 	based systems. Hope, this will make FreeBSD midc maintainer to enable
 	build-in editor by default. Still, syntax highlighting is disabled.
 	Need to port...
-	
+
 2000-03-13  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* gtkedit/syntax.c (upgrade_syntax_file): possible buffer overflow
-	  fixed, some messages gettext()ed again here and in 
+	  fixed, some messages gettext()ed again here and in
 	gtkedit/editmenu.c:edit_about_cmd()
 
 2000-03-13  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
@@ -806,7 +813,7 @@
 
 	* gtkedit/editcmd.c (edit_replace_prompt): fix incorrect
 	initialization of array of structure (gcc version 2.96 20000131
-	chokes on it). 
+	chokes on it).
 
 	* lib/mc.hint: C-y and not C-u can be used to insert text in input
 	lines (e. g. text which has been deleted with M-d).
@@ -829,15 +836,15 @@
 
 2000-01-03  Aaron Lehmann  <aaronl@vitelus.com>
 
-	* gdesktop.c, gdnd.c, gaction.c, gicon.c, 
-	gnome-file-property-dialog.c, gpopup.c, gpopup2.c, gprefs.cgmain.h, 
+	* gdesktop.c, gdnd.c, gaction.c, gicon.c,
+	gnome-file-property-dialog.c, gpopup.c, gpopup2.c, gprefs.cgmain.h,
 	setup.c: Add option of using GNOME "magic" routines to determine file
 	types. This makes MC intelligently look at the data in the file to see
 	what type of file it is, rather than looking at the filename extension.
 	This slows down MC quite a bit, so it has been made an optional
 	preference item. Type detection is expected to improve as mime-magic
 	matures.
-	
+
 2000-01-15  Federico Mena Quintero  <federico@helixcode.com>
 
 	* lib/mc.menu (shell_patterns): Add a missing "esac".  Thanks to
@@ -904,16 +911,16 @@
 
 1999-09-19  David Martin <dmartina@usa.net>
 
-	* gtkedit/editcmd.c (edit_print_string): Use unsigned char so that 
+	* gtkedit/editcmd.c (edit_print_string): Use unsigned char so that
 	8 bit chars from strftime get displayed when inserting date.
 
-	* lib/mc.ext.in: Add entries for bzip2 compressed pages as used in 
-	Mandrake 6.0. The generic entry for bzip2 moved to the end of the 
-	file to avoid interferences. In this one I changed the extension check 
-	to a type check (as used for gzip) which might give problems in some 
+	* lib/mc.ext.in: Add entries for bzip2 compressed pages as used in
+	Mandrake 6.0. The generic entry for bzip2 moved to the end of the
+	file to avoid interferences. In this one I changed the extension check
+	to a type check (as used for gzip) which might give problems in some
 	systems.
 
-	* configure.in: Use -Tlatin1 to format man pages when available and 
+	* configure.in: Use -Tlatin1 to format man pages when available and
 	"view" 8 bit chars.
 
 1999-09-19  Norbert Warmuth  <nwarmuth@privat.circular.de>
@@ -940,7 +947,7 @@
 
 	* doc-gnome/*: Shiny new docs from users-guide.
 	All synced up.
-	
+
 1999-09-03  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* configure.in: added 'nl' to ALL_LINGUAS, it was missing.
@@ -995,10 +1002,10 @@
 1999-08-08  David Martin <dmartina@usa.net>
 
 	* gtkedit/syntax.c (upgrade_syntax_file): Mark error strings for
-	translation. 
+	translation.
 
 	* gtkedit/editmenu.c (edit_about_cmd): Mark text in "about" for
-	translation as it used to be. 
+	translation as it used to be.
 
 1999-08-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -1071,28 +1078,28 @@ July 19, 1999 Elliot Lee
 
 1999-06-07  Shooby Ban  <bansz@szif.hu>
 
-	* po/hu.po, configure.in: added hungarian translations... 
+	* po/hu.po, configure.in: added hungarian translations...
 	  I'm not sure it's OK, but it seems usable.
 	  Translators: Tamas Fejos and Andras Kadar
 
 1999-06-07  Kjartan Maraas  <kmaraas@online.no>
 
 	* configure.in, Makefile.in: added the gmc helpfile to the build
-	
+
 1999-05-23  Yukihiro Nakai <nacai@iname.com>
 
 	* Add ja entry to LANG in configure.in
 
 1999-05-19  Tuomas Kuosmanen  <tigert@gimp.org>
 
-	* gnome/Makefile.in (ICONS): Ok, perhaps we also want the zip-icon to 
+	* gnome/Makefile.in (ICONS): Ok, perhaps we also want the zip-icon to
 	be installed in the system :) (added it to the Makefile.in)
 
 1999-05-19  Tuomas Kuosmanen  <tigert@gimp.org>
 
 	* gnome/i-zipdisk.png: I added an icon for the ZIP(tm I guess :)
 	disks - someone please add it to the mount.c code so it gets used..
-	Everyone have a nice time at the expo! :) I hope to join the 
+	Everyone have a nice time at the expo! :) I hope to join the
 	next time.
 
 Mon May 17 07:30:48 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
@@ -1105,19 +1112,19 @@ Mon May 17 07:30:48 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 Wed Apr 21 22:04:30 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* gtkedit/editcmd.c (edit_save_file): MAD knows about tempnam, no 
+	* gtkedit/editcmd.c (edit_save_file): MAD knows about tempnam, no
 	need to fool it by strdup'ing the return value of tempnam.
 
 Wed Apr 21 20:44:41 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* configure.in: New option --with-tm-x-support, use MCCFLAGS and 
+	* configure.in: New option --with-tm-x-support, use MCCFLAGS and
 	MCLIBS which are specific to the text edition.
 
 	* INSTALL: Added documentation for --with-tm-x-support
-	
+
 Sun Apr 18 17:51:54 EDT 1999 Gregory McLean <gregm@comstar.net>
 
-	* mc.spec.in : Folded in some changes from the 'offical' rpm 
+	* mc.spec.in : Folded in some changes from the 'offical' rpm
 	spec file.
 
 1999-04-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
@@ -1151,7 +1158,7 @@ Tue Apr 13 06:07:05 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 Sun Mar 28 23:46:01 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* configure.in: Deleted duplicate VFS checks. GNOME_VFS_CHECKS 
+	* configure.in: Deleted duplicate VFS checks. GNOME_VFS_CHECKS
 	now contains all checks.
 
 1999-03-26  Federico Mena Quintero  <federico@nuclecu.unam.mx>
@@ -1172,13 +1179,13 @@ Fri Mar 26 19:16:38 1999  Timur Bakeyev  <mc@bat.ru>
 	* doc/Makefile.in: Use mcsrclibdir where appropriate.
 
 Mon Mar 22 03:00:15 1999  Timur Bakeyev  <mc@bat.ru>
-	
+
 	* edit/syntax.c: Remove extra "|"  in "file ..\*\\.(pp|PP|pas|PAS|)$ \
 	Pascal Program" (Heh, second time :)
-	
-	* Makefile.common: Until things gets clear, keep syntax rules in 
+
+	* Makefile.common: Until things gets clear, keep syntax rules in
 	$(prefix)/lib/mc//syntax, as this is how (LIBDIR "/syntax") expands.
-	
+
 	Also, $(libdir) changed to $(mclibdir), to avoid confusion with expanded
 	@libdir@.
 
@@ -1241,7 +1248,7 @@ Fri Feb 26 21:45:30 1999  David Martin <dmartina@usa.net>
 
 	* gtkedit/editcmd.c: Mark strings in the search and replace
 	dialogs for translation. Resized these dialogs to let the messages
-	fit. 
+	fit.
 
 1999-02-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -1250,7 +1257,7 @@ Fri Feb 26 21:45:30 1999  David Martin <dmartina@usa.net>
 
 Tue Feb 16 21:24:43 1999  David Martin <dmartina@usa.net>
 
-	* gtkedit/gtkedit.c: Hack to get one more string defined in a macro 
+	* gtkedit/gtkedit.c: Hack to get one more string defined in a macro
 	into the catalog file.
 
 Sat Feb 13 01:39:17 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
@@ -1265,7 +1272,7 @@ Sat Feb 13 01:39:17 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 1999-02-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* configure.in (CCOPTS): Drop the prefix auto-detection.  
+	* configure.in (CCOPTS): Drop the prefix auto-detection.
 
 Wed Feb 10 02:48:51 1999  Timur Bakeyev  <mc@bat.ru>
 
@@ -1284,14 +1291,14 @@ Tue Feb  9 20:46:07 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 Tue Feb  9 20:32:39 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* lib/mc.menu: Removed GNU tar'isms (option z). Removed option -o 
-	from tar calls when extracting (according to my man page this option 
+	* lib/mc.menu: Removed GNU tar'isms (option z). Removed option -o
+	from tar calls when extracting (according to my man page this option
 	is only useful when creating archieves).
 
 Tue Feb  9 20:28:15 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* lib/mc.menu: Applied patch from root 	<root@golia.dntis.ro> which 
-	adds support for tar.bz2 and merges the support for freeze-compressed 
+	* lib/mc.menu: Applied patch from root 	<root@golia.dntis.ro> which
+	adds support for tar.bz2 and merges the support for freeze-compressed
 	tar files (tar.F) from mc.menu.qnx.diff.
 
 Sun Feb  7 06:11:48 1999  Timur Bakeyev  <mc@bat.ru>
@@ -1306,7 +1313,7 @@ Sun Feb  7 06:11:48 1999  Timur Bakeyev  <mc@bat.ru>
 
 1999-02-02  Tuomas Kuosmanen  <tigert@gimp.org>
 
-	* new_icons/gnome-core.png: New icon for core files. Someone 
+	* new_icons/gnome-core.png: New icon for core files. Someone
 	please add the code part :)
 
 Mon Feb  1 01:28:19 1999  Timur Bakeyev  <mc@bat.ru>
@@ -1319,12 +1326,12 @@ Fri Jan 29 22:55:56 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* slang/Makefile.in: delete slang.h on "make clean"
 
-	* configure.in: link slang/slang-mc.h to slang/slang.h when the 
+	* configure.in: link slang/slang-mc.h to slang/slang.h when the
 	included slang is used. Problem was that MC's slang.h was used
 	when we compiled with an already installed SLang and the systems
 	header file were included with <slang/slang.h>.
 	Unfortunatly I can't use AC_LINK_FILES to make the links because
-	if we needn't make any links AC_LINK_FILES makes a link from 
+	if we needn't make any links AC_LINK_FILES makes a link from
 	srcdir to top_builddir (builddir != srcdir).
 
 	Temporary add $LGPM to $LIBS when checking for the resizeterm
@@ -1354,7 +1361,7 @@ Sun Jan 17 03:19:47 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* configure.in (REGEX_O): Always include regex.o as the code we
 	are using in gmc is not using regcomp/regexec, but the internal
-	Emacs API.  
+	Emacs API.
 
 	* src/regex.c: Do not compile the POSIX compatibility code, as we
 	do not use it.
@@ -1387,9 +1394,9 @@ Mon Dec 21 22:26:34 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 Sun Dec 13 15:26:19 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* Makefile.in (target installdirs): create $(DESTDIR)$(idldir) 
+	* Makefile.in (target installdirs): create $(DESTDIR)$(idldir)
 
-	* lib/Makefile.in (target install): install $(LIBFILES_OUT) from the 
+	* lib/Makefile.in (target install): install $(LIBFILES_OUT) from the
 	builddir
 
 1998-12-08  Tuomas Kuosmanen  <tigert@gimp.org>

@@ -23,6 +23,15 @@ dnl It's needed until Autoconf 2.50 is released.
 ifdef([AC_PROG_CC_STDC], [AC_PROG_CC_STDC], [AM_PROG_CC_STDC])
 AC_HEADER_MAJOR
 AC_C_CONST
+
+dnl AC_SYS_LARGEFILE is missing in Autoconf-2.13
+ifelse(AC_ACVERSION, [2.13], [],
+[dnl Only enable large file support if --enable-largefile was given
+if test "x$enable_largefile" = xyes; then
+   AC_SYS_LARGEFILE
+fi
+])
+
 AC_CHECK_TOOL(AR, ar, ar)
 
 AC_CHECK_PROGS(X11_WWW,netscape arena Mosaic chimera)

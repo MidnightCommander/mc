@@ -141,6 +141,11 @@ installed the gpm package.
      transparent tar File system manipulation as well nor the
      networked Midnight Commander file system.
 
+`--enable-largefile'
+     This option enables support for large files (2 gigabytes and more)
+     on the systems where file operation use 32-bit offsets by default,
+     but support for 64-bit file operations is available.
+
 You may also tell configure which display manager you want to use with
 the Midnight Commander.  The configure script will use SLang as default,
 but you can override this by using any of the following flags (please 
