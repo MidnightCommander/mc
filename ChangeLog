@@ -1,3 +1,12 @@
+2000-04-06  Timur bakeyev  <mc@bat.ru>
+
+	* syntax.c: Wery dirty fix to allow compilation of mceditor on ncurses
+	based systems. Hope, this will make FreeBSD midc maintainer to enable
+	build-in editor by default. Still, syntax highlighting is disabled.
+	Need to port...
+	
+2000-03-13  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
 	* gtkedit/syntax.c (upgrade_syntax_file): possible buffer overflow
 	  fixed, some messages gettext()ed again here and in 
 	gtkedit/editmenu.c:edit_about_cmd()
