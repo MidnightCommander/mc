@@ -126,7 +126,7 @@ int file_op_compute_totals = 1;
 int know_not_what_am_i_doing = 0;
 
 /* mapping operations into names */
-char *operation_names [] = { "Copy", "Move", "Delete" };
+char *operation_names [] = { _("Copy"), _("Move"), _("Delete") };
 
 /* This is a hard link cache */
 struct link {
@@ -788,7 +788,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
     if (resources & 4){
         /* Remove short file */
         int result;
-        result = query_dialog ("Copy", _("Incomplete file was retrieved. Keep it?"),
+        result = query_dialog (_("Copy"), _("Incomplete file was retrieved. Keep it?"),
 			       D_ERROR, 2, _("&Delete"), _("&Keep"));
 	if (!result)
 	    mc_unlink (dst_path);
@@ -1843,7 +1843,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
     if (do_bg){
 	int v;
 
-	v = do_background (ctx, copy_strings (operation_names [operation], ": ", panel->cwd, 0));
+	v = do_background (ctx, copy_strings (_(operation_names [operation]), ": ", panel->cwd, 0));
 	if (v == -1){
 	    message (1, MSG_ERROR, _(" Sorry, I could not put the job in background "));
 	}
@@ -2169,7 +2169,7 @@ real_query_recursive (FileOpContext *ctx, enum OperationMode mode, char *s)
 	char *msg =
 	    mode == Foreground ? _("\n   Directory not empty.   \n   Delete it recursively? ")
 	                       : _("\n   Background process: Directory not empty \n   Delete it recursively? ");
-	text = copy_strings (" Delete: ", name_trunc (s, 30), " ", 0);
+	text = copy_strings (_(" Delete: "), name_trunc (s, 30), " ", 0);
 
         if (know_not_what_am_i_doing)
 	    query_set_sel (1);
@@ -2191,9 +2191,9 @@ real_query_recursive (FileOpContext *ctx, enum OperationMode mode, char *s)
 		confirm = input_dialog (
 		    mode == Foreground ? _(" Recursive Delete ")
 		    : _(" Background process: Recursive Delete "),
-		    text, "no");
+		    text, _("no"));
 		do_refresh ();
-		if (!confirm || strcmp (confirm, "yes"))
+		if (!confirm || strcmp (confirm, _("yes")))
 		    ctx->recursive_result = RECURSIVE_NEVER;
 		free (confirm);
 		free (text);

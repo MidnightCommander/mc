@@ -1,3 +1,7 @@
+1999-01-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* file.c: Tag some more strings for localization.
+
 1999-01-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* cmd.c (mkdir_cmd): Please, check your pointer usage.
