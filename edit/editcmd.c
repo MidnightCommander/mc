@@ -929,8 +929,6 @@ void edit_block_move_cmd (WEdit * edit)
     edit->force |= REDRAW_PAGE;
 }
 
-void edit_cursor_to_bol (WEdit * edit);
-
 void edit_delete_column_of_text (WEdit * edit)
 {
     long p, q, r, m1, m2;
