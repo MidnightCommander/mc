@@ -22,6 +22,9 @@ application/x-tex:
 application/postscript:
 	icon-filename=@icondir@/postscript.xpm
 
+application/x-object-file:
+	icon-filename=@icondir@/o.xpm
+
 audio/*:
 	icon-filename=@icondir@/sound.xpm
 
@@ -33,3 +36,58 @@ application/vcard:
 
 application/x-troff-man:
 	icon-filename=@icondir@/man.xpm
+
+image/x-bmp:
+	icon-filename=@icondir@/gnome-image-bmp.png
+
+image/gif:
+	icon-filename=@icondir@/gnome-image-gif.png
+
+image/jpeg:
+	icon-filename=@icondir@/gnome-image-jpeg.png
+
+
+image/ief:
+	icon-filename=@icondir@/gnome-image-ief.png
+	
+image/x-portable-bitmap:
+	icon-filename=@icondir@/gnome-image-pbm.png
+
+image/x-portable-graymap:
+	icon-filename=@icondir@/gnome-image-pgm.png
+
+image/x-png:
+	icon-filename=@icondir@/gnome-image-png.png
+
+image/x-portable-anymap:
+	icon-filename=@icondir@/gnome-image-pnm.png
+
+image/x-portable-pixmap:
+	icon-filename=@icondir@/gnome-image-ppm.png
+
+image/x-cmu-raster:
+	icon-filename=@icondir@/gnome-image-ras.png
+
+image/x-rgb:
+	icon-filename=@icondir@/gnome-image-rgb.png
+
+image/x-tga:
+	icon-filename=@icondir@/gnome-image-tga.png
+
+image/tiff:
+	icon-filename=@icondir@/gnome-image-tiff.png
+
+image/x-xbitmap:
+	icon-filename=@icondir@/gnome-image-xbm.png
+
+image/x-xpixmap:
+	icon-filename=@icondir@/gnome-image-xpm.png
+
+image/x-xwindowdump:
+	icon-filename=@icondir@/gnome-image-xwd.png
+	
+image/*:
+	open=ee %f
+	icon-filename=@icondir@/gnome-image-generic.png
+	open.edit.Edit=%f
+	[es]open.edit.Edita=%f
