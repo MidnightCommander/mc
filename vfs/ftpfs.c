@@ -979,6 +979,7 @@ open_data_connection (vfs *me, vfs_s_super *super, char *cmd, char *remote,
     return data;
 }
 
+#define ABORT_TIMEOUT 5
 static void
 linear_abort (vfs *me, vfs_s_fh *fh)
 {
@@ -990,24 +991,36 @@ linear_abort (vfs *me, vfs_s_fh *fh)
     FH_SOCK = -1;
     SUP.control_connection_buzy = 0;
 
-    print_vfs_message(_("ftpfs: aborting transfer."));
-    if (send(SUP.sock, ipbuf, sizeof(ipbuf), MSG_OOB) != sizeof(ipbuf)) {
-	print_vfs_message(_("ftpfs: abort error: %s"), unix_error_string(errno));
+    print_vfs_message (_("ftpfs: aborting transfer."));
+    if (send (SUP.sock, ipbuf, sizeof (ipbuf), MSG_OOB) != sizeof (ipbuf)) {
+	print_vfs_message (_("ftpfs: abort error: %s"),
+			   unix_error_string (errno));
 	return;
     }
-    
-    if (command(me, super, NONE, "%cABOR", DM) != COMPLETE){
+
+    if (command (me, super, NONE, "%cABOR", DM) != COMPLETE) {
 	print_vfs_message (_("ftpfs: abort failed"));
 	return;
     }
     if (dsock != -1) {
-	FD_ZERO(&mask);
-	FD_SET(dsock, &mask);
-	if (select(dsock + 1, &mask, NULL, NULL, NULL) > 0)
-	    while (read(dsock, buf, sizeof(buf)) > 0);
+	FD_ZERO (&mask);
+	FD_SET (dsock, &mask);
+	if (select (dsock + 1, &mask, NULL, NULL, NULL) > 0) {
+	    struct timeval start_tim, tim;
+	    gettimeofday (&start_tim, NULL);
+	    /* flush the remaining data */
+	    while (read (dsock, buf, sizeof (buf)) > 0) {
+		gettimeofday (&tim, NULL);
+		if (tim.tv_sec > start_tim.tv_sec + ABORT_TIMEOUT) {
+		    /* server keeps sending, drop the connection and reconnect */
+		    reconnect (me, super);
+		    return;
+		}
+	    }
+	}
     }
-    if ((get_reply(me, SUP.sock, NULL, 0) == TRANSIENT) && (code == 426))
-	get_reply(me, SUP.sock, NULL, 0);
+    if ((get_reply (me, SUP.sock, NULL, 0) == TRANSIENT) && (code == 426))
+	get_reply (me, SUP.sock, NULL, 0);
 }
 
 #if 0

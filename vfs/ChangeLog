@@ -1,3 +1,8 @@
+2002-10-07  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
+
+	* ftpfs.c (linear_abort): Add a timeout after which a reconnect
+	is performed instead of further fetching of the remaining data.
+
 2002-10-07  Pavel Roskin  <proski@gnu.org>
 
 	* direntry.c (vfs_s_resolve_symlink): Use g_snprintf() instead
