@@ -3,16 +3,16 @@
 # Based on previous version of lslR
 # Modified by Tomas Novak <tnovak@ipex.cz>   April 2000
 #   (to allow spaces in filenames)
-
-ZCAT="gunzip -c"
-CAT="cat"
+#
+# It's assumed that lslR was generated in C locale.
 
 mclslRfs_list () {
 case "$1" in
-  *.gz) MYCAT="$ZCAT";;
-  *.z)  MYCAT="$ZCAT";;
-  *.Z)  MYCAT="$ZCAT";;
-  *)	MYCAT="$CAT";;
+  *.bz2) MYCAT="bzip2 -dc";;
+  *.gz)  MYCAT="gzip -dc";;
+  *.z)   MYCAT="gzip -dc";;
+  *.Z)   MYCAT="gzip -dc";;
+  *)     MYCAT="cat";;
 esac
 
 $MYCAT "$1" | @AWK@ '
@@ -38,8 +38,10 @@ BEGIN {
   # Cannot assign to $9, or spaces in the filename would be reduced.
   attr=substr($0, 1, length($0)-length(name))
   printf "%s%s%s\n", attr, dir, name
-}' 2>/dev/null
+}' 
 }
+
+export LC_ALL="C"
 
 case "$1" in
   list) mclslRfs_list "$2"; exit 0;;
