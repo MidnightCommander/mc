@@ -1,3 +1,7 @@
+2004-12-07  Roland Illig  <roland.illig@gmx.de>
+
+	* ext.c: Fixed FIXME by passing around a reference to a VFS.
+
 2004-12-01  Pavel Tsekov <ptsekov@gmx.net>
 
 	* tar.c (tar_read_header): Skip over records containing
