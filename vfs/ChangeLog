@@ -1,3 +1,7 @@
+1999-03-31 Serge Winitzki <swinitzk@hotmail.com>
+
+        * added copy_in capability to mtools filesystem
+
 1999-03-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* vfs.c (vfs_add_current_stamps): Only do stamping of the panels
