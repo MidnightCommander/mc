@@ -25,8 +25,7 @@ void do_execute (const char *shell, const char *command, int internal_command);
 #define execute_internal(command,args) do_execute (command, args, 1)
 
 /* Execute functions that use the shell to execute */
-void shell_execute (char *command, int flags);
-void execute (char *command);
+void shell_execute (const char *command, int flags);
 
 /* This one executes a shell */
 void exec_shell (void);

@@ -575,7 +575,7 @@ do_execute (const char *shell, const char *command, int flags)
 
 /* Executes a command */
 void
-shell_execute (char *command, int flags)
+shell_execute (const char *command, int flags)
 {
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (use_subshell)
@@ -587,12 +587,6 @@ shell_execute (char *command, int flags)
     else
 #endif				/* HAVE_SUBSHELL_SUPPORT */
 	do_execute (shell, command, flags | EXECUTE_AS_SHELL);
-}
-
-void
-execute (char *command)
-{
-    shell_execute (command, 0);
 }
 
 void

@@ -1,3 +1,8 @@
+2003-06-22  Pavel Roskin  <proski@gnu.org>
+
+	* main.c (execute): Eliminate.  Fix all dependencies.
+	(shell_execute): Constify string argument.
+
 2003-06-09  Pavel Roskin  <proski@gnu.org>
 
 	* key.c (mc_bindings): Remove.  Esc-">" and Esc-"<" are not

@@ -630,7 +630,7 @@ execute_menu_command (WEdit *edit_widget, char *commands)
     }
     fclose (cmd_file);
     chmod (file_name, S_IRWXU);
-    execute (file_name);
+    shell_execute (file_name, 0);
     unlink (file_name);
     g_free (file_name);
 }

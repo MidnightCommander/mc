@@ -1960,7 +1960,7 @@ do_enter_on_file_entry (file_entry *fe)
 	     (_(" The Midnight Commander "),
 	      _(" Do you really want to execute? "), 0, 2, _("&Yes"),
 	      _("&No")) == 0))
-	    execute (cmd);
+	    shell_execute (cmd, 0);
 	g_free (cmd);
     }
 #ifdef USE_VFS

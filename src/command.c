@@ -230,7 +230,7 @@ enter (WInput *cmdline)
 	    old_dlg = current_dlg;
 	    current_dlg = 0;
 	    new_input (cmdline);
-	    execute (command);
+	    shell_execute (command, 0);
 	    g_free (command);
 
 #ifdef HAVE_SUBSHELL_SUPPORT
