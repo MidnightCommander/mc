@@ -70,7 +70,7 @@ no)
 esac])
 AC_FUNC_MMAP
 
-ALL_LINGUAS="az be bg ca cs da de el es es_ES eu fi fr hu it ja ko lv \
+ALL_LINGUAS="az be bg ca cs da de el es eu fi fr hu it ja ko lv \
 nl no pl pt pt_BR ro ru sk sl sv uk ta tr wa zh_CN zh_TW"
 
 dnl
