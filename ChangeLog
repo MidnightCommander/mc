@@ -1,3 +1,7 @@
+2001-09-02  Abel Cheung  <maddog@linux.org.hk>
+
+	* configure.in (ALL_LINGUAS): zh_TW.Big5 -> zh_TW
+
 2001-08-28  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/sh.syntax:  Require two '<' before EOF.  Recognize END
