@@ -1184,8 +1184,8 @@ void edit_search_replace_dialog (Window parent, int x, int y, char **search_text
     yc = yh;
     CGetHintPos (0, &yh);
     CDrawSwitch ("replace.reg", win, xh, yh, replace_regexp, _(" Regular expression "), 1);
-    CSetToolHint ("replace.reg", _("See the regex man page for how to compose a regular exporession"));
-    CSetToolHint ("replace.reg.label", _("See the regex man page for how to compose a regular exporession"));
+    CSetToolHint ("replace.reg", _("See the regex man page for how to compose a regular expression"));
+    CSetToolHint ("replace.reg.label", _("See the regex man page for how to compose a regular expression"));
     yb = yh;
     CGetHintPos (0, &yh);
     CGetHintPos (&xb, 0);

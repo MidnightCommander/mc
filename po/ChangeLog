@@ -1,0 +1,6 @@
+Sun,  1 Mar 1998 05:05:34 +0100  Vincent Renardias  <vincent@waw.com>
+
+	* ChangeLog: New File (the one you're reading now).
+	* fr.po: New file.
+	* corrected typos in edit/editcmd.c:1187,1188.
+

@@ -1,0 +1,739 @@
+# mc fr.po
+# Copyright (C) 1998 Free Software Foundation, Inc.
+# Vincent Renardias <vincent@waw.com>, 1998.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mc VERSION\n"
+"POT-Creation-Date: 1998-02-28 03:50+0100\n"
+"PO-Revision-Date: 1998-02-28 03:50+0100\n"
+"Last-Translator: Vincent Renardias <vincent@waw.com>\n"
+"Language-Team: Vincent Renardias <vincent@waw.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. The file-name is printed after the ':'
+#: edit/edit.c:114 edit/edit.c:162 edit/edit.c:169 edit/edit.c:176
+#: edit/edit.c:183 edit/edit.c:189 edit/edit.c:228 edit/edit.c:260
+#: edit/editcmd.c:1680 edit/editwidget.c:801 src/help.c:547 src/help.c:745
+#: src/help.c:750
+msgid " Error "
+msgstr " Erreur "
+
+#: edit/edit.c:114 edit/edit.c:169
+msgid " Fail trying to open file for reading: "
+msgstr " Impossible d'ouvrir le fichier en lecture: "
+
+#: edit/edit.c:176
+msgid " Cannot get size/permissions info on file: "
+msgstr " Impossible d'obtenir taille et permissions du fichier: "
+
+#: edit/edit.c:183
+msgid " Not an ordinary file: "
+msgstr " Ce n'est pas un fichier ordinaire: "
+
+#: edit/edit.c:189
+msgid " File is too large: "
+msgstr " Fichier trop gros: "
+
+#: edit/edit.c:190
+msgid ""
+" \n"
+" Increase edit.h:MAXBUF and recompile the editor. "
+msgstr ""
+" \n"
+" Augmentez edit.h:MAXBUF et recompilez l'éditeur. "
+
+#: edit/edit.c:228 edit/edit.c:260
+msgid " Error allocating memory "
+msgstr " Erreur d'allocation mémoire "
+
+#: edit/edit_key_translator.c:121
+msgid " Emacs key: "
+msgstr " Touches Emacs: "
+
+#: edit/edit_key_translator.c:133
+msgid " Execute Macro "
+msgstr " Exécuter Macro "
+
+#. Input line for a single key press follows the ':'
+#: edit/edit_key_translator.c:133 edit/editcmd.c:617 edit/editcmd.c:622
+msgid " Press macro hotkey: "
+msgstr " Tapez la touche raccourcis pour la macro: "
+
+#: edit/edit_key_translator.c:144
+msgid " Insert Literal "
+msgstr " Insérer un Literal "
+
+#: edit/edit_key_translator.c:144
+msgid " Press any key: "
+msgstr " Appuyez sur une touche: "
+
+#. This heads the 'Save As' dialog box
+#: edit/editcmd.c:395
+msgid " Save As "
+msgstr " Enregistrer Sous "
+
+#. Warning message with a query to continue or cancel the operation
+#: edit/editcmd.c:408 edit/editcmd.c:715 edit/editcmd.c:727 edit/editcmd.c:828
+#: edit/editcmd.c:911 src/help.c:297
+msgid " Warning "
+msgstr " Attention "
+
+#: edit/editcmd.c:409
+msgid " A file already exists with this name. "
+msgstr " Un fichier portant le meme nom exitse déjà. "
+
+#. Push buttons to over-write the current file, or cancel the operation
+#: edit/editcmd.c:411
+msgid "Overwrite"
+msgstr "Ecraser"
+
+#: edit/editcmd.c:411 edit/editcmd.c:688 edit/editcmd.c:715 edit/editcmd.c:727
+#: edit/editcmd.c:828 edit/editcmd.c:1314
+msgid "Cancel"
+msgstr "Annuler"
+
+#: edit/editcmd.c:425
+msgid " Save as "
+msgstr " Enregistrer Sous "
+
+#: edit/editcmd.c:425 edit/editcmd.c:2260
+msgid " Error trying to save file. "
+msgstr " Erreur lors de l'enregistrement du fichier. " 
+
+#. This heads the delete macro error dialog box
+#: edit/editcmd.c:536 edit/editcmd.c:544 edit/editcmd.c:569
+msgid " Delete macro "
+msgstr " Effacer macro "
+
+#. 'Open' = load temp file
+#: edit/editcmd.c:538
+msgid " Error trying to open temp file "
+msgstr " Erreur en essayant d'ouvrir un fichier temporaire "
+
+#. 'Open' = load temp file
+#: edit/editcmd.c:546 edit/editcmd.c:607 edit/editcmd.c:670
+msgid " Error trying to open macro file "
+msgstr " Erreur lors de l'ouverture du fichier de macros "
+
+#: edit/editcmd.c:551 edit/editcmd.c:559 edit/editcmd.c:595 edit/editcmd.c:645
+#, c-format
+msgid "key '%d 0': "
+msgstr "touche '%d 0': "
+
+#: edit/editcmd.c:570
+msgid " Error trying to overwrite macro file "
+msgstr " Erreur lors de l'écrasement du fichier de macros "
+
+#. This heads the 'Macro' dialog box
+#: edit/editcmd.c:587
+msgid " Macro "
+msgstr " Macro "
+
+#. Input line for a single key press follows the ':'
+#: edit/editcmd.c:589
+msgid " Press the macro's new hotkey: "
+msgstr " Pressez sur la touche a assigner à la macro: "
+
+#. This heads the 'Save Macro' dialog box
+#: edit/editcmd.c:607
+msgid " Save macro "
+msgstr " Enregistrer macro "
+
+#. This heads the 'Delete Macro' dialog box
+#: edit/editcmd.c:617 edit/editcmd.c:620
+msgid " Delete Macro "
+msgstr " Effacer Macro "
+
+#. This heads the 'Load Macro' dialog box
+#: edit/editcmd.c:669
+msgid " Load macro "
+msgstr " Charger macro "
+
+#: edit/editcmd.c:683 edit/editcmd.c:685
+msgid " Confirm save file? : "
+msgstr " Voulez-vous vraiment enregistrer? : "
+
+#. Buttons to 'Confirm save file' query
+#: edit/editcmd.c:688
+msgid " Save file "
+msgstr " Enregistrer fichier "
+
+#: edit/editcmd.c:688 edit/editwidget.c:915
+msgid "Save"
+msgstr "Sauver"
+
+#: edit/editcmd.c:715 edit/editcmd.c:727
+msgid ""
+" Current text was modified without a file save. \n"
+" Continue discards these changes. "
+msgstr ""
+" Le fichier courant a été modifié sans avoir été sauvé. \n"
+" Continuer annule les changements. "
+
+#: edit/editcmd.c:715 edit/editcmd.c:727 edit/editcmd.c:828
+msgid "Continue"
+msgstr "Continuer"
+
+#. Heads the 'Load' file dialog box
+#: edit/editcmd.c:730 edit/editcmd.c:747
+msgid " Load "
+msgstr " Ouvrir "
+
+#: edit/editcmd.c:747
+msgid " Error trying to open file for reading "
+msgstr " Erreur en essayant d'ouvrir le fichier en lecture "
+
+#: edit/editcmd.c:828 edit/editcmd.c:911
+msgid " Block is large, you may not be able to undo this action. "
+msgstr " Le block est gros et il est possible que vous ne puissiez pas annuler ce changement. "
+
+#: edit/editcmd.c:911
+msgid " Continue "
+msgstr " Continuer "
+
+#: edit/editcmd.c:911
+msgid " Cancel "
+msgstr " Annuler "
+
+#. This is for the confirm replace dialog box. The replaced string comes after the ':'
+#: edit/editcmd.c:963 edit/editcmd.c:1312
+msgid " Replace with: "
+msgstr " Remplacer avec: "
+
+#. Heads the 'Replace' dialog box
+#: edit/editcmd.c:967 edit/editcmd.c:1044 edit/editcmd.c:1294
+#: edit/editcmd.c:1310 edit/editcmd.c:1842 edit/editcmd.c:1873
+#: edit/editcmd.c:1875
+msgid " Replace "
+msgstr " Remplacer "
+
+#. Heads the 'Search' dialog box
+#: edit/editcmd.c:1112 edit/editcmd.c:1288 edit/editcmd.c:1944
+msgid " Search "
+msgstr " Rechercher "
+
+#. An input line comes after the ':'
+#: edit/editcmd.c:1160
+msgid " Enter search text : "
+msgstr " Entrez le texte à rechercher: "
+
+#: edit/editcmd.c:1167
+msgid " Enter replace text : "
+msgstr " Entrez le texte de substitution : "
+
+#: edit/editcmd.c:1171
+msgid " Enter argument order : "
+msgstr ""
+
+#. Tool hint
+#: edit/editcmd.c:1175 edit/editcmd.c:1176
+msgid "Enter the order of replacement of your scanf format specifiers"
+msgstr ""
+
+#. The following are check boxes
+#: edit/editcmd.c:1181
+msgid " Whole words only "
+msgstr " Mots entiers seulement "
+
+#: edit/editcmd.c:1183
+msgid " Case sensitive "
+msgstr " Respect de la case "
+
+#: edit/editcmd.c:1186
+msgid " Regular expression "
+msgstr " Expression régulière "
+
+#: edit/editcmd.c:1187 edit/editcmd.c:1188
+msgid "See the regex man page for how to compose a regular expression"
+msgstr "Consultez la page de manuel 'regex' pour savoir comment composer une expression regulière"
+
+#: edit/editcmd.c:1194
+msgid " Backwards "
+msgstr ""
+
+#. Tool hint
+#: edit/editcmd.c:1196 edit/editcmd.c:1197
+msgid "Warning: Searching backward can be slow"
+msgstr ""
+
+#: edit/editcmd.c:1210
+msgid " Prompt on replace "
+msgstr " Confirmation avant remplacement "
+
+#. Tool hint
+#: edit/editcmd.c:1212
+msgid "Ask before making each replacement"
+msgstr " Confirmation avant chaque remplacement"
+
+#: edit/editcmd.c:1214
+msgid " Replace all "
+msgstr " Tout remplacer "
+
+#: edit/editcmd.c:1217
+msgid " Scanf expression "
+msgstr " Expression scanf "
+
+#. Tool hint
+#: edit/editcmd.c:1219
+msgid "Allows entering of a C format string, see the scanf man page"
+msgstr "Permet d'entrer une chaine en format C, cf la page de manuel scanf"
+
+#. Tool hint
+#: edit/editcmd.c:1224
+msgid "Begin search, Enter"
+msgstr ""
+
+#. Tool hint
+#: edit/editcmd.c:1227
+msgid "Abort this dialog, Esc"
+msgstr ""
+
+#. Buttons for the confirm replace dialog box.
+#: edit/editcmd.c:1314
+msgid "Replace"
+msgstr "Remplacer"
+
+#: edit/editcmd.c:1314
+msgid "Skip"
+msgstr "Suivant"
+
+#: edit/editcmd.c:1314
+msgid "Replace all"
+msgstr "Tout remplacer"
+
+#: edit/editcmd.c:1680
+msgid ""
+" Invalid regular expression, or scanf expression with to many conversions "
+msgstr ""
+" Expression régulière invalide, ou expression scanf avec trop de conversions "
+
+#. "Invalid regexp string or scanf string"
+#: edit/editcmd.c:1844
+msgid " Error in replacement format string. "
+msgstr ""
+
+#: edit/editcmd.c:1872
+#, c-format
+msgid " %ld replacements made. "
+msgstr " %ld remplacements effectués. "
+
+#: edit/editcmd.c:1875 edit/editcmd.c:1944
+msgid " Search string not found. "
+msgstr " Chaine non trouvée. "
+
+#. Confirm 'Quit' dialog box
+#: edit/editcmd.c:1962 edit/editcmd.c:1965
+msgid " Quit "
+msgstr " Quitter "
+
+#: edit/editcmd.c:1962
+msgid " File was modified, Save with exit? "
+msgstr " Le fichier a été modifié. Sauver et quitter? "
+
+#: edit/editcmd.c:1962
+msgid "Cancel quit"
+msgstr "Annuler quitter"
+
+#: edit/editcmd.c:1962
+msgid "&Yes"
+msgstr "&Oui"
+
+#: edit/editcmd.c:1962
+msgid "&No"
+msgstr "&Non"
+
+#: edit/editcmd.c:1966
+msgid ""
+" Current text was modified without a file save. \n"
+" Save with exit? "
+msgstr ""
+" Ce texte a été modifié sans etre sauvé. \n"
+" Sauver en sortant? "
+
+#: edit/editcmd.c:1966
+msgid " &Cancel quit "
+msgstr " &Annuler quitter "
+
+#: edit/editcmd.c:1966
+msgid " &Yes "
+msgstr " &Oui "
+
+#: edit/editcmd.c:1966
+msgid " &No "
+msgstr " &Non "
+
+#: edit/editcmd.c:2135 edit/editcmd.c:2186
+msgid " Copy to clipboard "
+msgstr " Copier dans le presse-papiers "
+
+#: edit/editcmd.c:2135 edit/editcmd.c:2150 edit/editcmd.c:2186
+#: edit/editcmd.c:2199
+msgid " Unable to save to file. "
+msgstr " Impossible de sauver dans un fichier. "
+
+#: edit/editcmd.c:2150 edit/editcmd.c:2199
+msgid " Cut to clipboard "
+msgstr " Couper vers le presse-papiers "
+
+#: edit/editcmd.c:2221 edit/editcmd.c:2223
+msgid " Goto line "
+msgstr " Aller à la ligne "
+
+#: edit/editcmd.c:2221 edit/editcmd.c:2223
+msgid " Enter line: "
+msgstr " Entrez la ligne: "
+
+#: edit/editcmd.c:2243 edit/editcmd.c:2260
+msgid " Save Block "
+msgstr " Sauver le Block "
+
+#: edit/editcmd.c:2294
+msgid " Insert File "
+msgstr " Insérer Fichier "
+
+#: edit/editcmd.c:2309
+msgid " Insert file "
+msgstr " Insérer fichier "
+
+#: edit/editcmd.c:2309
+msgid " Error trying to insert file. "
+msgstr " Erreur en essayant d'insérer le fichier. "
+
+#. Not essential to translate
+#: edit/editcmd.c:2329
+msgid " Sort block "
+msgstr ""
+
+#. Not essential to translate
+#: edit/editcmd.c:2329 edit/editcmd.c:2383
+msgid " You must first highlight a block of text. "
+msgstr ""
+
+#: edit/editcmd.c:2336
+msgid " Run Sort "
+msgstr " Trier "
+
+#. Not essential to translate
+#: edit/editcmd.c:2338
+msgid " Enter sort options (see manpage) separated by whitespace: "
+msgstr " Entrez les options de tri (voir la page de manuel) séparées par des espaces: "
+
+#: edit/editcmd.c:2349 edit/editcmd.c:2355
+msgid " Sort "
+msgstr " Trier "
+
+#. Not essential to translate
+#: edit/editcmd.c:2351
+msgid " Error trying to execute sort command "
+msgstr " Erreur lors de l'exécution de la commande de tri "
+
+#. Not essential to translate
+#: edit/editcmd.c:2357
+msgid " Sort returned non-zero: "
+msgstr ""
+
+#. Not essential to translate
+#: edit/editcmd.c:2381 edit/editcmd.c:2411
+msgid " Process block "
+msgstr ""
+
+#. Not essential to translate
+#: edit/editcmd.c:2413
+msgid " Error trying to stat file "
+msgstr ""
+
+#: edit/editcmd.c:2483
+msgid " Mail "
+msgstr " Mail "
+
+#: edit/editmenu.c:56
+msgid " Word wrap "
+msgstr " Césure automatique "
+
+#. Not essential to translate
+#: edit/editmenu.c:58
+msgid " Enter line length, 0 for off: "
+msgstr ""
+
+#. The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t'
+#: edit/editmenu.c:389
+msgid " File "
+msgstr " Fichier "
+
+#: edit/editmenu.c:390
+msgid "Open...\tC-o"
+msgstr "Ouvrir...\tC-o"
+
+#: edit/editmenu.c:391
+msgid "New\tC-n"
+msgstr "Nouveau\tC-n"
+
+#: edit/editmenu.c:393
+msgid "Save\tF2"
+msgstr "Sauver\tF2"
+
+#: edit/editmenu.c:394
+msgid "Save as...\tF12"
+msgstr "Enregistrer sous...\tF12"
+
+#: edit/editmenu.c:396
+msgid "Insert file...\tF15"
+msgstr "Insérer fichier...\tF15"
+
+#: edit/editmenu.c:397
+msgid "Copy to file...\tC-f"
+msgstr "Copier vers fichier...\tC-f"
+
+#. Tool hint
+#: edit/editmenu.c:400
+msgid "Disk operations"
+msgstr "Opérations disque"
+
+#: edit/editmenu.c:405
+msgid " Edit "
+msgstr " Editer "
+
+#: edit/editmenu.c:406
+msgid "Toggle mark\tF3"
+msgstr ""
+
+#: edit/editmenu.c:408
+msgid "Toggle insert/overwrite\tIns"
+msgstr ""
+
+#: edit/editmenu.c:410
+msgid "Copy block to cursor\tF5"
+msgstr ""
+
+#: edit/editmenu.c:411
+msgid "Move block to cursor\tF6"
+msgstr ""
+
+#: edit/editmenu.c:412
+msgid "Delete block\tF8/C-Del"
+msgstr "Effacer block\tF8/C-Del"
+
+#: edit/editmenu.c:414
+msgid "Copy block to clipbrd\tC-Ins"
+msgstr ""
+
+#: edit/editmenu.c:415
+msgid "Cut block to clipbrd\tS-Del"
+msgstr ""
+
+#: edit/editmenu.c:416
+msgid "Paste block from clipbrd\tS-Ins"
+msgstr ""
+
+#: edit/editmenu.c:417
+msgid "Selection history\tM-Ins"
+msgstr ""
+
+#: edit/editmenu.c:419
+msgid "Undo\tC-BackSpace"
+msgstr ""
+
+#. Tool hint
+#: edit/editmenu.c:422
+msgid "Manipulating blocks of text"
+msgstr "Manipulation de blocs de texte"
+
+#: edit/editmenu.c:427
+msgid " Srch/Replce "
+msgstr " Chercher/Remplacer "
+
+#: edit/editmenu.c:428
+msgid "Search...\tF7"
+msgstr "Rechercher...\tF7"
+
+#: edit/editmenu.c:429
+msgid "Search again\tF17"
+msgstr "Chercher à nouveau\tF17"
+
+#: edit/editmenu.c:430
+msgid "Replace...\tF4"
+msgstr "Remplacer...\tF4"
+
+#: edit/editmenu.c:431
+msgid "Replace again\tF14"
+msgstr "Remplacer à nouveau\tF14" 
+
+#. Tool hint
+#: edit/editmenu.c:434
+msgid "Search for and replace text"
+msgstr "Chercher et remplacer texte"
+
+#: edit/editmenu.c:439
+msgid " Command "
+msgstr " Commande "
+
+#: edit/editmenu.c:440
+msgid "Goto line...\tM-l"
+msgstr "Aller à la ligne...\tM-l"
+
+#: edit/editmenu.c:442
+msgid "Start record macro\tC-r"
+msgstr "Commencer à enregistrer une macro\tC-r"
+
+#: edit/editmenu.c:443
+msgid "Finish record macro...\tC-r"
+msgstr "Terminer l'enregistrement de macro...\tC-r"
+
+#: edit/editmenu.c:444
+msgid "Execute macro...\tC-a, KEY"
+msgstr "Exécuter macro...\tC-a, TOUCHE"
+
+#: edit/editmenu.c:445
+msgid "Delete macro...\t"
+msgstr "Effacer macro...\t"
+
+#: edit/editmenu.c:447
+msgid "Insert date/time\tC-d"
+msgstr "Insérer date/heure\tC-d"
+
+#: edit/editmenu.c:448
+msgid "Format paragraph\tM-p"
+msgstr "Formater paragraphe\tM-p"
+
+#. Tool hint
+#: edit/editmenu.c:451
+msgid "Macros and internal commands"
+msgstr "Macros et commandes internes"
+
+#: edit/editoptions.c:37
+msgid "None"
+msgstr "Aucun"
+
+#: edit/editoptions.c:37
+msgid "Dynamic paragraphing"
+msgstr ""
+
+#: edit/editoptions.c:37
+msgid "Type writer wrap"
+msgstr ""
+
+#. 12
+#: edit/editoptions.c:89
+msgid "Wrap mode"
+msgstr "Mode de césure"
+
+#. 14
+#: edit/editoptions.c:95
+msgid "Key emulation"
+msgstr ""
+
+#. Not essential to translate
+#: edit/editwidget.c:88
+msgid "Error initialising editor.\n"
+msgstr "Erreur lors de l'initialisation de l'éditeur.\n"
+
+#: edit/editwidget.c:914 src/help.c:785
+msgid "Help"
+msgstr "Aide"
+
+#: edit/editwidget.c:916
+msgid "Mark"
+msgstr "Marquer"
+
+#: edit/editwidget.c:917
+msgid "Replac"
+msgstr "Remplacer"
+
+#: edit/editwidget.c:918
+msgid "Copy"
+msgstr "Copier"
+
+#: edit/editwidget.c:919
+msgid "Move"
+msgstr "Déplacer"
+
+#: edit/editwidget.c:920
+msgid "Search"
+msgstr "Chercher"
+
+#: edit/editwidget.c:921
+msgid "Delete"
+msgstr "Effacer"
+
+#: edit/editwidget.c:923
+msgid "PullDn"
+msgstr ""
+
+#: edit/editwidget.c:924 src/help.c:797
+msgid "Quit"
+msgstr "Quitter"
+
+#: src/dialog.c:59
+msgid ""
+"\n"
+"\n"
+"\n"
+"refresh stack underflow!\n"
+"\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"\n"
+"pile de rafraichissement vide!\n"
+"\n"
+"\n"
+
+#: src/dir.c:645
+msgid "Unknown"
+msgstr "Inconnu"
+
+#: src/fixhlp.c:173
+msgid "Usage: fixhlp <width> <tocname>\n"
+msgstr "Usage: fixhlp <largeur> <sujet>\n"
+
+#: src/fixhlp.c:178
+msgid "fixhlp: Cannot open toc for writing"
+msgstr ""
+
+#: src/fixhlp.c:181
+msgid ""
+"[Contents]\n"
+" Topics:\n"
+"\n"
+msgstr ""
+
+#: src/help.c:258
+msgid ""
+" Help file format error\n"
+""
+msgstr ""
+
+#: src/help.c:297
+msgid " Internal bug: Double start of link area "
+msgstr ""
+
+#: src/help.c:547
+msgid " Can't find node [Contents] in help file "
+msgstr ""
+
+#: src/help.c:745
+#, c-format
+msgid ""
+" Can't open file %s \n"
+" %s "
+msgstr ""
+" Impossible d'ouvrir %s \n"
+" %s "
+
+#: src/help.c:750
+#, c-format
+msgid " Can't find node %s in help file "
+msgstr ""
+
+#: src/help.c:787
+msgid "Index"
+msgstr "Index"
+
+#: src/help.c:789
+msgid "Prev"
+msgstr "Précédent"
