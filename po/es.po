@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.99\n"
-"POT-Creation-Date: 2002-09-26 21:21-0400\n"
+"POT-Creation-Date: 2002-09-29 00:04-0400\n"
 "PO-Revision-Date: 2002-04-12 23:00+0200\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -247,7 +247,7 @@ msgstr "sólo u&No"
 msgid "al&L"
 msgstr "&Todos"
 
-#: edit/editcmd.c:1031 src/file.c:2129 src/filegui.c:229
+#: edit/editcmd.c:1031 src/file.c:2161 src/filegui.c:229
 msgid "&Skip"
 msgstr "&Saltar"
 
@@ -352,13 +352,13 @@ msgstr " El archivo fue modificado. ¿Desea guardarlo al salir? "
 msgid "Cancel quit"
 msgstr "Cancelar salida"
 
-#: edit/editcmd.c:1917 src/cmd.c:222 src/file.c:1828 src/file.c:2187
+#: edit/editcmd.c:1917 src/cmd.c:222 src/file.c:1832 src/file.c:2219
 #: src/filegui.c:533 src/hotlist.c:1030 src/main.c:624 src/screen.c:1933
 #: src/subshell.c:703 src/tree.c:754 src/view.c:409
 msgid "&Yes"
 msgstr "&Sí"
 
-#: edit/editcmd.c:1917 src/cmd.c:222 src/file.c:1828 src/file.c:2187
+#: edit/editcmd.c:1917 src/cmd.c:222 src/file.c:1832 src/file.c:2219
 #: src/filegui.c:532 src/hotlist.c:1030 src/main.c:624 src/screen.c:1933
 #: src/subshell.c:703 src/tree.c:754 src/view.c:409
 msgid "&No"
@@ -870,7 +870,7 @@ msgstr ""
 msgid "Background process:"
 msgstr "Procesos en 2º plano"
 
-#: src/background.c:275 src/file.c:2128
+#: src/background.c:275 src/file.c:2160
 msgid " Background process error "
 msgstr " Error en un proceso en 2º plano"
 
@@ -1367,9 +1367,9 @@ msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Teclee \"exit\" para regresar al Midnight Commander"
 
 #: src/cmd.c:1024
-#, fuzzy, c-format
+#, c-format
 msgid "Link %s to:"
-msgstr " enlace: %s"
+msgstr "Crear enlace a %s como:"
 
 #: src/cmd.c:1025
 msgid " Link "
@@ -1834,7 +1834,7 @@ msgstr ""
 " No puedo copiar un enlace simbólico cíclico \n"
 " \"%s\" "
 
-#: src/file.c:954 src/file.c:1977
+#: src/file.c:954 src/file.c:1994
 #, c-format
 msgid ""
 " Destination \"%s\" must be a directory \n"
@@ -1990,31 +1990,23 @@ msgstr " aplicando la máscara:"
 msgid " to:"
 msgstr " a: "
 
-#: src/file.c:1809
+#: src/file.c:1811
 msgid " Cannot operate on \"..\"! "
 msgstr " ¡No puedo operar sobre \"..\"! "
 
-#: src/file.c:1878
+#: src/file.c:1886
 msgid " Sorry, I could not put the job in background "
 msgstr " Lo siento, no pude poner la tarea en 2º plano "
 
-#: src/file.c:1963 src/file.c:2046
-msgid " Internal failure "
-msgstr " Fallo interno "
-
-#: src/file.c:1963 src/file.c:2046
-msgid " Unknown file operation "
-msgstr " Operación desconocida sobre el archivo "
-
-#: src/file.c:2129 src/view.c:387
+#: src/file.c:2161 src/view.c:387
 msgid "&Retry"
 msgstr "&Reintentar"
 
-#: src/file.c:2129 src/file.c:2189 src/filegui.c:227 src/filegui.c:522
+#: src/file.c:2161 src/file.c:2221 src/filegui.c:227 src/filegui.c:522
 msgid "&Abort"
 msgstr "&Abortar"
 
-#: src/file.c:2180
+#: src/file.c:2212
 msgid ""
 "\n"
 "   Directory not empty.   \n"
@@ -2024,7 +2016,7 @@ msgstr ""
 " El directorio no está vacío.\n"
 " ¿Desea borrarlo recursivamente? "
 
-#: src/file.c:2181
+#: src/file.c:2213
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
@@ -2034,39 +2026,39 @@ msgstr ""
 " Proceso en 2º plano: El directorio no está vacío.\n"
 " ¿Desea borrarlo recursivamente? "
 
-#: src/file.c:2182
+#: src/file.c:2214
 msgid " Delete: "
 msgstr " Borrar: "
 
-#: src/file.c:2188
+#: src/file.c:2220
 msgid "a&ll"
 msgstr "&Todo"
 
-#: src/file.c:2188 src/filegui.c:525
+#: src/file.c:2220 src/filegui.c:525
 msgid "non&E"
 msgstr "nin&Guno"
 
-#: src/file.c:2198
+#: src/file.c:2230
 msgid " Type 'yes' if you REALLY want to delete "
 msgstr " Teclee \"sí\" si REALMENTE quiere borrar "
 
-#: src/file.c:2200
+#: src/file.c:2232
 msgid "all the directories "
 msgstr "todos los directorios "
 
-#: src/file.c:2202
+#: src/file.c:2234
 msgid " Recursive Delete "
 msgstr " Borrado recursivo "
 
-#: src/file.c:2203
+#: src/file.c:2235
 msgid " Background process: Recursive Delete "
 msgstr " Proceso en 2º plano: Borrado recursivo "
 
-#: src/file.c:2204
+#: src/file.c:2236
 msgid "no"
 msgstr "no"
 
-#: src/file.c:2206
+#: src/file.c:2238
 msgid "yes"
 msgstr "sí"
 
@@ -3001,11 +2993,11 @@ msgstr ""
 
 #: src/main.c:2082
 msgid "+number"
-msgstr ""
+msgstr "+número"
 
 #: src/main.c:2083
 msgid "Set initial line number for the internal editor"
-msgstr ""
+msgstr "Línea de comienzo al abrir archivo con editor interno"
 
 #: src/main.c:2085
 msgid ""
@@ -3085,12 +3077,11 @@ msgstr "Registrar diálogos ftp en un archivo"
 
 #: src/main.c:2207
 msgid "Set debug level"
-msgstr ""
+msgstr "Fijar el nivel de depuración"
 
 #: src/main.c:2211
-#, fuzzy
 msgid "Print data directory"
-msgstr "directorio"
+msgstr "Mostrar directorio de datos"
 
 #: src/main.c:2213
 msgid "Requests to run in black and white"
@@ -3105,9 +3096,8 @@ msgid "Disables subshell support"
 msgstr "Desactivar el uso de subshell"
 
 #: src/main.c:2220
-#, fuzzy
 msgid "Force subshell execution"
-msgstr "ejecutar con ID del dueño"
+msgstr "Forzar ejecución de subshell"
 
 #: src/main.c:2223
 msgid "Prints working directory at program exit"
@@ -3653,15 +3643,11 @@ msgstr " No se encuentran entradas apropiadas en %s "
 msgid " User menu "
 msgstr " Menú de usuario "
 
-#: src/util.c:220
-msgid "name_trunc: too big"
-msgstr "name_trunc: demasiado grande"
-
-#: src/util.c:670 src/util.c:696
+#: src/util.c:665 src/util.c:691
 msgid "%b %e %H:%M"
 msgstr "%e %b %H:%M"
 
-#: src/util.c:671 src/util.c:694
+#: src/util.c:666 src/util.c:689
 msgid "%b %e  %Y"
 msgstr "%e %b  %Y"
 
