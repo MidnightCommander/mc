@@ -1,3 +1,10 @@
+2002-01-03  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.am: Remove all files used by OS/2 only.  The OS/2
+	port is discontinued because there is no support for native OS/2
+	compilers in glib.  Remove sys/time.h and dirent.h - they should
+	not be needed anymore.
+
 2002-01-02  Pavel Roskin  <proski@gnu.org>
 
 	* config.h: Include VERSION, not ..\VERSION.  Use sys/utime.h
