@@ -704,7 +704,6 @@ paint_dir (WPanel *panel)
 	repaint_file (panel, i+panel->top_file, 1, color, 0);
     }
     standend ();
-    panel->dirty = 0;
 }
 
 static void
@@ -786,6 +785,7 @@ panel_update_contents (WPanel *panel)
     show_dir (panel);
     paint_dir (panel);
     display_mini_info (panel);
+    panel->dirty = 0;
 }
 
 /* Repaint everything, including frame and separator */
@@ -1481,21 +1481,18 @@ ITEMS (WPanel *p)
 	return llines (p);
 }
 
-/* This function sets redisplays the selection */
+/* Select current item and readjust the panel */
 void
 select_item (WPanel *panel)
 {
-    int repaint = 0;
     int items = ITEMS (panel);
 
     /* Although currently all over the code we set the selection and
        top file to decent values before calling select_item, I could
        forget it someday, so it's better to do the actual fitting here */
 
-    if (panel->top_file < 0) {
-	repaint = 1;
+    if (panel->top_file < 0)
 	panel->top_file = 0;
-    }
 
     if (panel->selected < 0)
 	panel->selected = 0;
@@ -1503,37 +1500,22 @@ select_item (WPanel *panel)
     if (panel->selected > panel->count - 1)
 	panel->selected = panel->count - 1;
 
-    if (panel->top_file > panel->count - 1) {
-	repaint = 1;
+    if (panel->top_file > panel->count - 1)
 	panel->top_file = panel->count - 1;
-    }
 
     if ((panel->count - panel->top_file) < items) {
-	repaint = 1;
 	panel->top_file = panel->count - items;
 	if (panel->top_file < 0)
 	    panel->top_file = 0;
     }
 
-    if (panel->selected < panel->top_file) {
-	repaint = 1;
+    if (panel->selected < panel->top_file)
 	panel->top_file = panel->selected;
-    }
 
-    if ((panel->selected - panel->top_file) >= items) {
-	repaint = 1;
+    if ((panel->selected - panel->top_file) >= items)
 	panel->top_file = panel->selected - items + 1;
-    }
 
-    if (repaint)
-	paint_panel (panel);
-    else {
-	if (panel->active)
-	    repaint_file (panel, panel->selected, 1,
-			  2 * selection (panel)->f.marked + 1, 0);
-    }
-
-    display_mini_info (panel);
+    panel->dirty = 1;
 
     execute_hooks (select_file_hook);
 }
@@ -2196,8 +2178,9 @@ panel_callback (WPanel *panel, widget_msg_t msg, int parm)
 	    subshell_chdir (panel->cwd);
 
 	update_xterm_title_path ();
-	show_dir (panel);
 	select_item (panel);
+	show_dir (panel);
+	paint_dir (panel);
 
 	define_label (h, 1, _("Help"), help_cmd);
 	define_label (h, 2, _("Menu"), user_file_menu_cmd);

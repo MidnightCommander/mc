@@ -1,5 +1,10 @@
 2003-09-10  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c (paint_dir): Don't make panel clean here.
+	(panel_update_contents): Do it here.
+	(panel_callback): Repaint the panel on focus.
+	(select_item): Don't paint anything here.
+
 	* dlg.h (send_message): Use cb_ret_t and widget_msg_t.
 
 	* main.c (menu_cmd): If the current panel is inactive, use the
