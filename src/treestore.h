@@ -65,7 +65,7 @@ void        tree_store_remove_entry_add_hook (tree_store_add_fn callback);
  * Changes in the tree_entry are notified with these
  */
 void        tree_store_notify_remove   (tree_entry *entry);
-void        tree_store_notify_add (tree_entry *entry);
+void        tree_store_notify_add      (char *directory);
 
 tree_scan  *tree_store_opendir       (char *path);
 tree_entry *tree_store_readdir       (tree_scan *scanner);

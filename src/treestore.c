@@ -762,14 +762,14 @@ tree_store_remove_entry_add_hook (tree_store_add_fn callback)
 }
 
 void
-tree_store_notify_add (tree_entry *entry)
+tree_store_notify_add (char *directory)
 {
 	Hook *p = add_entry_hooks;
 	tree_store_add_fn r;
 	
 	while (p) {
 		r = (tree_store_add_fn) p->hook_fn;
-		r (entry->name, p->hook_data);
+		r (directory, p->hook_data);
 		p = p->next;
 	}
 }
