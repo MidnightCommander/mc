@@ -472,18 +472,23 @@ void do_re_sort (WPanel *panel)
     panel_update_contents (panel);
 }
 
-void reverse_selection_cmd (void)
+void reverse_selection_cmd_panel (WPanel *panel)
 {
     file_entry *file;
     int i;
 
-    for (i = 0; i < cpanel->count; i++){
-	file = &cpanel->dir.list [i];
+    for (i = 0; i < panel->count; i++){
+	file = &panel->dir.list [i];
 	if (S_ISDIR (file->buf.st_mode))
 	    continue;
-	do_file_mark (cpanel, i, !file->f.marked);
+	do_file_mark (panel, i, !file->f.marked);
     }
-    paint_panel (cpanel);
+    paint_panel (panel);
+}
+
+void reverse_selection_cmd (void)
+{
+    reverse_selection_cmd_panel (cpanel);
 }
 
 void select_cmd_panel (WPanel *panel)

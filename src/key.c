@@ -48,6 +48,8 @@
 #include "key.h"
 #include "main.h"
 #include "file.h"
+#include "win.h"
+#include "cons.saver.h"
 #include "../vfs/vfs.h"
 
 #ifdef __linux__
@@ -407,12 +409,13 @@ int correct_key_code (int c)
 
     if (c == KEY_F(0))
 	return KEY_F(10);
-	
-    switch (c) {
-        case KEY_KP_ADD: c = alternate_plus_minus ? ALT('+') : '+'; break;
-        case KEY_KP_SUBTRACT: c = alternate_plus_minus ? ALT('-') : '-'; break;
-        case KEY_KP_MULTIPLY: c = alternate_plus_minus ? ALT('*') : '*'; break;
-    }
+
+    if (!alternate_plus_minus) 
+        switch (c) {
+            case KEY_KP_ADD: c = '+'; break;
+            case KEY_KP_SUBTRACT: c = '-'; break;
+            case KEY_KP_MULTIPLY: c = '*'; break;
+        }
 
     return c;
 }
@@ -892,6 +895,28 @@ char *learn_key (void)
     *p = 0;
     return strdup (buffer);
 }
+
+/* xterm and linux console only: set keypad to numeric or application
+   mode. Only in application keypad mode it's possible to distinguish
+   the '+' key and the '+' on the keypad ('*' and '-' ditto)*/
+void
+numeric_keypad_mode (void)
+{
+    if (console_flag || xterm_flag) {
+        fprintf (stdout, "\033>");
+        fflush (stdout);
+    }
+}
+
+void
+application_keypad_mode (void)
+{
+    if (console_flag || xterm_flag) {
+        fprintf (stdout, "\033="); 
+        fflush (stdout);
+    }
+}
+
 #endif /* !HAVE_X */
 
 /* A function to check if we're idle.

@@ -307,13 +307,27 @@ void learn_save (void)
 void learn_keys (void)
 {
     int save_old_esc_mode = old_esc_mode;
+    int save_alternate_plus_minus = alternate_plus_minus;
     
     old_esc_mode = 0; /* old_esc_mode cannot work in learn keys dialog */
+    alternate_plus_minus = 1; /* don't translate KP_ADD, KP_SUBTRACT and
+                                 KP_MULTIPLY to '+', '-' and '*' in
+                                 correct_key_code */
+#ifndef HAVE_X
+    application_keypad_mode ();
+#endif
     init_learn ();
 
     run_dlg (learn_dlg);
     
     old_esc_mode = save_old_esc_mode;
+    alternate_plus_minus = save_alternate_plus_minus;
+
+#ifndef HAVE_X
+    if (!alternate_plus_minus)
+        numeric_keypad_mode ();
+
+#endif
     
     switch (learn_dlg->ret_value) {
     case B_ENTER:

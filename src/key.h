@@ -79,7 +79,10 @@ typedef struct {
 extern key_code_name_t key_name_conv_tab [];
 extern int we_are_background;
 
-#ifdef HAVE_GNOME
+/* Set keypad mode (xterm and linux console only) */
+#ifndef HAVE_X
+    void numeric_keypad_mode (void);
+    void application_keypad_mode (void);
 #endif
 
 #endif	/* __KEY_H */

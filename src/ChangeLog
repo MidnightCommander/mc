@@ -1,3 +1,39 @@
+Wed Apr  1 00:15:30 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* key.c, key.h (numeric_keypad_mode, application_keypad_mode): New
+	functions which encapsulate two hardcoded escape sequences from main.c.
+
+	* main.c (main): Use the two new functions from key.c
+
+	* main.c, screen.c: Moved all file selection keys from the default
+	keymap to the keymap for panels in listing mode. 
+	Changed *_selection_cmd to *_selection_cmd_panel in panel_keymap
+	(functions in panel_keymap get a WPanel * as first parameter,
+	i.e. the indirection with cpanel isn't necessary).
+
+	* main.c (midnight_callback): Keys '*' and '-' were not treated
+	when only_leading_plus_minus==0;
+	Optimized the if-clauses a little bit (i.e. removed duplicate
+	checks). More optimation is possible but it would make the whole
+	stuff completly unreadable.
+
+	* key.c (correct_key_code): KP_ADD, KP_SUBTRACT and KP_MULTIPLY
+	will be translated to +, - and * only if the option
+	alternate_plus_minus is turned off.
+
+	* learn.c (learn_keys): Turn alternate_plus_minus temporarily on
+	to avoid translation of KP_ADD, KP_SUBTRACT and KP_MULTIPLY in
+	correct_key_code/make sure keypad is in application mode (makes it 
+	possible to learn this keys).
+
+	* cmd.c (reverse_selection_cmd_panel): New function (renamed from
+	reverse_selection_cmd, takes a WPanel * as parameter, references to 
+	cpanel changed to panel/the passed parameter).
+	reverse_selection_cmd now simply calls this function with cpanel.
+	This pair was missing among the *_selection_cmd* functions.
+
+	* cmd.h: Added function prototypes.
+
 1998-03-31  Paul Sheer <psheer@obsidian.co.za>
 
 	* cmd.c (nice_cd): Forgot to invoke the history registration in

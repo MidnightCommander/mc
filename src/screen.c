@@ -2097,10 +2097,20 @@ static key_map panel_keymap [] = {
     { ALT('y'),   directory_history_prev },
     { ALT('u'),   directory_history_next },
 
+    { ALT('+'),	  select_cmd_panel },
+    { KEY_KP_ADD, select_cmd_panel },
+    { ALT('\\'),  unselect_cmd_panel },
+    { ALT('-'),	  unselect_cmd_panel },
+    { KEY_KP_SUBTRACT, unselect_cmd_panel },
+    { ALT('*'),	  reverse_selection_cmd_panel },
+    { KEY_KP_MULTIPLY, reverse_selection_cmd_panel },
+    
+
 #ifdef HAVE_GNOME
-    { '+',        select_cmd },
-    { '\\',       unselect_cmd },
-    { '-',        unselect_cmd },
+    { '+',        select_cmd_panel },
+    { '\\',       unselect_cmd_panel },
+    { '-',        unselect_cmd_panel },
+    { '*',	  reverse_selection_cmd_panel },
     { XCTRL('r'), reread_cmd },
 #endif
     

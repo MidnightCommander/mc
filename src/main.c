@@ -1720,11 +1720,6 @@ static key_map default_map [] = {
     { ALT('a'),   copy_current_pathname },
     { ALT('A'),   copy_other_pathname },
     
-    { ALT('+'),	  select_cmd },
-    { ALT('\\'),  unselect_cmd },
-    { ALT('-'),	  unselect_cmd },
-    { ALT('*'),	  reverse_selection_cmd },
-    
     { ALT('c'),	  quick_cd_cmd },
 
     /* To access the directory hotlist */
@@ -1938,36 +1933,40 @@ int midnight_callback (struct Dlg_head *h, int id, int msg)
 	    return MSG_HANDLED;
 	}
 
-	if (!alternate_plus_minus || !(console_flag || xterm_flag)) {
+	if ((!alternate_plus_minus || !(console_flag || xterm_flag)) &&
+             !quote && !cpanel->searching) {
 	    if(!only_leading_plus_minus) {
 		/* Special treatement, since the input line will eat them */
-		if (id == '+' && !quote && !cpanel->searching){
+		if (id == '+' ) {
 		    select_cmd ();
 		    return MSG_HANDLED;
 		}
 
-
-		if (check_key_backslash (id) && !quote && !cpanel->searching){
+		if (check_key_backslash (id) || id == '-'){
 		    unselect_cmd ();
 		    return MSG_HANDLED;
 		}
-	    } else if (command_prompt && !strlen (input_w (cmdline)->buffer)
-		       && !cpanel->searching) {
+
+		if (id == '*') {
+		    reverse_selection_cmd ();
+		    return MSG_HANDLED;
+		}
+	    } else if (command_prompt && !strlen (input_w (cmdline)->buffer)) {
 		/* Special treatement '+', '-', '\', '*' only when this is 
 		 * first char on input line
 		 */
 		
-		if (id == '+' && !quote && !cpanel->searching){
+		if (id == '+') {
 		    select_cmd ();
 		    return MSG_HANDLED;
 		}
 		
-		if ((check_key_backslash (id) || id == '-') && !quote && !cpanel->searching){
+		if (check_key_backslash (id) || id == '-') {
 		    unselect_cmd ();
 		    return MSG_HANDLED;
 		}
 		
-		if (id == '*' && !quote && !cpanel->searching){
+		if (id == '*') {
 		    reverse_selection_cmd ();
 		    return MSG_HANDLED;
 		}
@@ -2892,9 +2891,9 @@ int main (int argc, char *argv [])
     /* Also done after init_subshell, to save any shell init file messages */
     if (console_flag)
 	handle_console (CONSOLE_SAVE);
-    if (alternate_plus_minus && (console_flag || xterm_flag)) {
-        fprintf (stdout, "\033="); fflush (stdout);
-    }
+    
+    if (alternate_plus_minus)
+        application_keypad_mode ();
 #   endif
 
     /* The directory hot list */
@@ -2937,9 +2936,8 @@ int main (int argc, char *argv [])
 
     if (console_flag && !(quit & SUBSHELL_EXIT))
 	restore_console ();
-    if (alternate_plus_minus && (console_flag || xterm_flag)) {
-        fprintf (stdout, "\033>"); fflush (stdout);
-    }
+    if (alternate_plus_minus)
+        numeric_keypad_mode ();
 #   endif
 
 #ifndef OS2_NT
