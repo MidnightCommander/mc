@@ -1806,9 +1806,10 @@ static const key_map default_map [] = {
     /* Panel refresh */
     { XCTRL('r'), reread_cmd },
 
+#ifndef HAVE_X
+    /* Toggle listing between long, user defined and full formats */
     { ALT('t'),   toggle_listing_cmd },
     
-#ifndef HAVE_X
     /* Swap panels */
     { XCTRL('u'), swap_cmd },
 

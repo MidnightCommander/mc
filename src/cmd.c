@@ -1553,7 +1553,6 @@ quick_view_cmd (void)
 	change_panel ();
     set_display_type (MENU_PANEL_IDX, view_quick);
 }
-#endif /* !HAVE_X */
 
 /* Handle the tree internal listing modes switching */
 static int
@@ -1596,4 +1595,5 @@ toggle_listing_cmd (void)
 	return;
     set_basic_panel_listing_to (current, list_full);
 }
+#endif /* !HAVE_X */
 

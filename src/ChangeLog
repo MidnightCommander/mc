@@ -1,3 +1,9 @@
+2001-07-14  Pavel Roskin  <proski@gnu.org>
+
+	* main.c (default_map) [HAVE_X]: Disable Alt-T.
+	* cmd.c [HAVE_X]: Eliminate set_basic_panel_listing_to() and
+	toggle_listing_cmd().
+
 2001-07-13  Pavel Roskin  <proski@gnu.org>
 
 	* utilunix.c (canonicalize_pathname): Don't handle PATH_SEP
