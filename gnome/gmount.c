@@ -409,7 +409,6 @@ setup_devices (void)
 	int hd_count;
 	int cdrom_count;
 	int generic_count;
-	int nfs_count;
 	int automounter;
 
 	list = get_mountable_devices ();
@@ -466,7 +465,7 @@ setup_devices (void)
 			release_format = TRUE;
 			format = g_strdup_printf (_("NFS dir %s"), dit->mount_point);
 			icon = "i-nfs.png";
-			count = nfs_count++;
+			count = 0; /* unused */
 		} else {
 			format = _("Device %d");
 			icon = "i-blockdev.png";

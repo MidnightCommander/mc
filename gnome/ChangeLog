@@ -1,3 +1,8 @@
+2001-06-15  Pavel Roskin  <proski@gnu.org>
+
+	* gmount.c (setup_devices): Remove nfs_count - NFS directories
+	are not numbered.
+
 2001-06-14  Pavel Roskin  <proski@gnu.org>
 
 	* gmain.c (try_alloc_color_pair): Remove.
