@@ -6239,11 +6239,11 @@ msgstr "ftpfs: connessione al server fallita: %s"
 #: vfs/ftpfs.c:793
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "Pausa per riprovare...%d (Control-C per annullare)"
+msgstr "Pausa per ritentare...%d (Control-C per annullare)"
 
 #: vfs/ftpfs.c:987
 msgid "ftpfs: could not setup passive mode for source routing"
-msgstr "ftpfs: non è possibile impostare il modo passivo per l'instradamento"
+msgstr "ftpfs: impossibile impostare il modo passivo per l'instradamento"
 
 #: vfs/ftpfs.c:997
 msgid "ftpfs: could not setup passive mode"
@@ -6251,7 +6251,7 @@ msgstr "ftpfs: non è possibile impostare la modalità passiva"
 
 #: vfs/ftpfs.c:1070
 msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: interruzione del trasferimento."
+msgstr "ftpfs: interruzione trasferimento."
 
 #: vfs/ftpfs.c:1072
 #, c-format
@@ -6323,7 +6323,7 @@ msgstr " MCFS "
 
 #: vfs/mcfs.c:154
 msgid " The server does not support this version "
-msgstr " Il server non supporta questa versione"
+msgstr " Il server non supporta questa versione "
 
 #: vfs/mcfs.c:171
 msgid ""
@@ -6384,7 +6384,6 @@ msgid ""
 msgstr ""
 " riconnessione a %s fallita\n"
 " "
-
 
 #: vfs/smbfs.c:1737
 #, c-format
