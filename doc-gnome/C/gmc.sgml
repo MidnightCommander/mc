@@ -1,9 +1,9 @@
-<!doctype book PUBLIC "-//GNOME//DTD DocBook PNG Variant V1.0//EN" [
+<!doctype article PUBLIC "-//GNOME//DTD DocBook PNG Variant V1.0//EN" [
 <!ENTITY INDEX SYSTEM "genindex.sgml">
 ]>
-<book id="index">
-  <bookinfo>
-    <title>Gnome Midnight Commander Documentation</title>
+<article id="index">
+  <artheader>
+
     <authorgroup>
       <author>
 	<firstname>Dave</firstname>
@@ -21,41 +21,26 @@
     </copyright>
     <legalnotice>
       <para>
-        This documentation is free software; you can redistribute
-        it and/or modify it under the terms of the GNU General Public
-        License as published by the Free Software Foundation; either
-        version 2 of the License, or (at your option) any later
-        version.
+	Permission is granted to copy, distribute and/or modify this document
+	under the terms of the <citetitle>GNU Free Documentation
+	License</citetitle>, Version 1.1 or any later version published by the
+	Free Software Foundation with no Invariant Sections, no Front-Cover
+	Texts, and no Back-Cover Texts. You may obtain a copy of the
+	<citetitle>GNU Free Documentation License</citetitle> from the Free
+	Software Foundation by visiting <ulink type="http"
+	url="http://www.fsf.org">their Web site</ulink> or by writing to
+	<address>
+	  Free Software Foundation, Inc.
+	  <street>59 Temple Place</street> - Suite 330
+	  <city>Boston</city>, <state>MA</state> <postcode>02111-1307</postcode>
+	  <country>USA</country>
+	</address>
       </para>
-
-      <para>
-        This program is distributed in the hope that it will be
-        useful, but WITHOUT ANY WARRANTY; without even the implied
-        warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-        PURPOSE.  See the GNU General Public License for more
-        details.
-      </para>
-
-      <para>
-        You should have received a copy of the GNU General Public
-        License along with this program; if not, write to the Free
-        Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
-        MA 02111-1307 USA
-      </para>
-
-      <para>
-        For more details see the file COPYING that should have been included in
-        this distribution of the Gnome Midnight Commander.
-      </para>
-
     </legalnotice>
-  </bookinfo>
-
-
-  <chapter>
-    <title>The GNOME File Manager</title>
+    <title>Gnome Midnight Commander Documentation</title>
+  </artheader>
     <sect1>
-      <title>Introduction</title>
+      <title>The Gnome File Manager</title>
       <para>
         GNOME includes a file manager that allows you to manipulate the files on
         your system in a comfortable, powerful, graphical environment. This File
@@ -213,7 +198,13 @@
         <keycap>CTRL</keycap> key is pressed you will be able to add to the
         "list" of files that are selected. Once you have selected multiple files
         by either method you may copy or move the files.
-      </para>
+    </para>
+    <para> You may also use the <keycap>SHIFT</keycap> button to select a range
+      of files. For example, if you are in list mode and you press the
+      <keycap>SHIFT</keycap> key while selecting the file at the top of the
+      list, and then select a file ten rows down with the <keycap>SHIFT</keycap>
+      key still pressed, you will select the ten files in that range.
+    </para>
       <para>
         You may also select all files in a directory by selecting the
         <guimenuitem>Select All</guimenuitem> menu item from the
@@ -357,7 +348,11 @@
         The GNOME File Manager allows you to launch applications from the main
         window by simply double clicking your mouse on a file which has an
         application associated with it. You can change the way file types are
-        handled by reading the Mime Capplet Chapter in the GNOME User's Guide.
+        handled by reading the Mime Capplet Chapter in the GNOME User's
+        Guide. Some files that are actually archives will allow you to "look
+        inside" them. For example, .tar files, .gz files, and .rpm files can all
+        be double clicked and the files archived inside them will appear in the
+        File Manager.
       </para>
       <para>
         <indexterm>
@@ -369,13 +364,11 @@
         click on the file and select <guimenuitem>Open with</guimenuitem> from
         the <guimenuitem>pop-up</guimenuitem> menu. This will bring up a dialog
         that allows you to define the application which will launch the
-        file. For example, if you want to edit a file named test.txt with
-        <application>Emacs</application> (a popular text editor), you can right
-        mouse click on test.txt and choose <guimenuitem>Open
-        with</guimenuitem>. When you get the Open with dialog box simply type in
-        emacs in front of the test.txt file name. When you press
-        <guibutton>OK</guibutton> <application>Emacs</application> will open the
-        file.
+        file. The dialog reproduces your Main Menu items so that you can browse
+        through your applications to find the one you would like to open the
+        file with. If you do not find the application in the tree you may
+        specify the path and application name in the <guilabel>Program to
+        run</guilabel> text box.
       </para>
       <figure>
         <title>The Open With Dialog</title>
@@ -404,7 +397,10 @@
             <guimenuitem>Open</guimenuitem> - This will open the file with the
             default application associated with it. You may read more about
             editing these associations in Mime Capplet Chapter in the GNOME
-            User's Guide..
+            User's Guide. Some files that are actually archives will allow you
+            to "look inside" them. For example, .tar files, .gz files, and .rpm
+            files can all be double clicked and the files archived inside them
+            will appear in the File Manager.
           </para>
         </listitem>
         <listitem>
@@ -454,7 +450,8 @@
             directory. When you select Symlink you will see a dialog which
             allows you to type in the directory and filename that you wish to be
             the symbolic link to the file. This link will be a "shortcut" to the
-            selected file.
+            selected file. If you do no understand symlinks you might want to
+            refer to the <!-- newbies appendix  reference -->
           </para>
         </listitem>
         <listitem>
@@ -481,7 +478,9 @@
                 <guilabel>Statistics</guilabel> - This tab will show you the
                 file information including the name, type, size, and
                 history. You may change the name of the file in the
-                <guilabel>File Name</guilabel> text box.
+                <guilabel>File Name</guilabel> text box. Sizes for directories
+                will <emphasis>not</emphasis> show you the size of the directory
+                with all the files within it.
               </para>
             </listitem>
             <listitem>
@@ -509,10 +508,18 @@
                 User, Group, and Others. You may also set the UID, GID and
                 Sticky as well as define who owns the file.
               </para>
-            </listitem>
+	  </listitem>
           </itemizedlist>
         </listitem>
       </itemizedlist>
+    <note>
+      <title>NOTE</title>
+      <para>
+	Changing properties on symlinks is meaningless in the File
+	Manager. If you need to change the properties on such a file you
+	need to change them on the actual file, not the link to it.
+      </para>
+    </note>
     </sect1>
     <sect1 id="gmcprefs">
       <title>Changing Your Preferences in The File Manager</title>
@@ -849,7 +856,7 @@
       <title>The Custom View Dialog</title>
       <screenshot>
        <screeninfo>The Custom View Dialog</screeninfo>
-       <Graphic Format="png" Fileref="./figs/custom-view" srccredit="dcm">
+       <Graphic Format="png" Fileref="./figs/gmcprops6.png" srccredit="dcm">
        </graphic>
       </screenshot>
      </figure>
@@ -1256,13 +1263,6 @@
     </listitem>
     <listitem>
      <para>
-      Dragging Directories - You can drag a directory out of the GNOME File 
-      Manger and place it on the Panel. This will create a new menu which allows 
-      you easy access to the files in that directory.
-     </para>
-    </listitem>
-    <listitem>
-     <para>
       You may drag any sub menu from the Main Menu to the panel and a new menu 
       launcher is added to the panel. This allows easier access to that sub-set
       of menus.
@@ -1270,6 +1270,5 @@
     </listitem>
    </itemizedlist>
   </sect1>
- </chapter>
 &INDEX;
-</book>
+</article>
