@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"POT-Creation-Date: 2002-10-21 19:16-0400\n"
+"POT-Creation-Date: 2002-10-21 19:44-0400\n"
 "PO-Revision-Date: 2002-07-03 08:46+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -2921,23 +2921,19 @@ msgstr "Dakujeme, že používate Midnight Commander"
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/main.c:2076
-msgid ""
-"[flags] [this_dir] [other_panel_dir]\n"
-"\n"
-msgstr ""
-"[flags] [this_dir] [other_panel_dir]\n"
-"\n"
+#: src/main.c:2078
+msgid "[flags] [this_dir] [other_panel_dir]\n"
+msgstr "[flags] [this_dir] [other_panel_dir]\n"
 
-#: src/main.c:2080
+#: src/main.c:2082
 msgid "+number"
 msgstr ""
 
-#: src/main.c:2081
+#: src/main.c:2083
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
-#: src/main.c:2083
+#: src/main.c:2085
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2948,7 +2944,7 @@ msgstr ""
 "na adresu mc-devel@gnome.org\n"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#: src/main.c:2097
+#: src/main.c:2099
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2988,97 +2984,97 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2184
+#: src/main.c:2186
 msgid "Use to debug the background code"
 msgstr "Pre ladenie použite kód na pozadí"
 
-#: src/main.c:2187
+#: src/main.c:2189
 msgid "Request to run in color mode"
 msgstr "Požiadavka pre spustenie vo farebnom móde"
 
-#: src/main.c:2189
+#: src/main.c:2191
 msgid "Specifies a color configuration"
 msgstr "Špecifikujte farebnú konfiguráciu"
 
-#: src/main.c:2193
+#: src/main.c:2195
 msgid "Edits one file"
 msgstr "Upravujte jeden súbor"
 
-#: src/main.c:2197
+#: src/main.c:2199
 msgid "Displays this help message"
 msgstr "Zobraziť tento pomocný odkaz"
 
-#: src/main.c:2199
+#: src/main.c:2201
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Zobraziť pomocnú obrazovku, ako zmeniť farebnú schému"
 
-#: src/main.c:2202
+#: src/main.c:2204
 msgid "Log ftp dialog to specified file"
 msgstr "Log ftp dialóg k určenému súboru "
 
-#: src/main.c:2205
+#: src/main.c:2207
 msgid "Set debug level"
 msgstr ""
 
-#: src/main.c:2209
+#: src/main.c:2211
 #, fuzzy
 msgid "Print data directory"
 msgstr "adresár"
 
-#: src/main.c:2211
+#: src/main.c:2213
 msgid "Requests to run in black and white"
 msgstr "Požiadavka na čiernobiele spustenie"
 
-#: src/main.c:2213
+#: src/main.c:2215
 msgid "Disable mouse support in text version"
 msgstr "Vypínam podporu pre myš v textovej verzii"
 
-#: src/main.c:2216
+#: src/main.c:2218
 msgid "Disables subshell support"
 msgstr "Vypínam podporu pre subshell"
 
-#: src/main.c:2218
+#: src/main.c:2220
 #, fuzzy
 msgid "Force subshell execution"
 msgstr "nastav použ. ID pre vykon."
 
-#: src/main.c:2221
+#: src/main.c:2223
 msgid "Prints working directory at program exit"
 msgstr "Tlač pracovného adresára na programovateľný výstup"
 
-#: src/main.c:2223
+#: src/main.c:2225
 msgid "Resets soft keys on HP terminals"
 msgstr "Klávesy pre mäkký reset na HP termináloch"
 
-#: src/main.c:2225
+#: src/main.c:2227
 msgid "To run on slow terminals"
 msgstr "Na spúšťanie na pomalých termináloch"
 
-#: src/main.c:2228
+#: src/main.c:2230
 msgid "Use stickchars to draw"
 msgstr "Použiť stickchars pre kreslenie"
 
-#: src/main.c:2232
+#: src/main.c:2234
 msgid "Enables subshell support (default)"
 msgstr "Zapnutá podpora pre subshell (štandardne)"
 
-#: src/main.c:2236
+#: src/main.c:2238
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Skúšam použiť termcap miesto terminfo"
 
-#: src/main.c:2239
+#: src/main.c:2241
 msgid "Displays the current version"
 msgstr "Ukázať aktuálnu verziu"
 
-#: src/main.c:2241
+#: src/main.c:2243
 msgid "Launches the file viewer on a file"
 msgstr "Spúšťam prehliadač súborov pre súbor"
 
-#: src/main.c:2243
+#: src/main.c:2245
 msgid "Forces xterm features"
 msgstr "Vnucujem xterm funkcie"
 
-#: src/main.c:2433
+#: src/main.c:2435
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -3086,11 +3082,11 @@ msgstr ""
 "Nemohol som otvoriť tty riadok. Máte spustený mc bez označenia -P .\n"
 "Na niektorých systémoch možno budete chcieť spustiť # `ktorý mc`\n"
 
-#: src/main.c:2496
+#: src/main.c:2498
 msgid " Notice "
 msgstr " Správa "
 
-#: src/main.c:2497
+#: src/main.c:2499
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -4483,87 +4479,3 @@ msgstr "%s: %s: %s %3d%% (%lu bajtov prenesených)"
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu bajtov prenesených"
-
-#~ msgid " Macro "
-#~ msgstr " Makro "
-
-#~ msgid " Delete Macro "
-#~ msgstr " Zmazať makro "
-
-#~ msgid " Continue "
-#~ msgstr " Pokračovať "
-
-#~ msgid " Cancel "
-#~ msgstr " Zrušiť "
-
-#~ msgid " Search "
-#~ msgstr " Hľadať "
-
-#~ msgid " Quit "
-#~ msgstr " Ukončiť"
-
-#~ msgid " Insert file "
-#~ msgstr " Vložiť súbor "
-
-#~ msgid " CD "
-#~ msgstr " CD "
-
-#~ msgid " Internal failure "
-#~ msgstr " Vnútorná porucha "
-
-#~ msgid " Unknown file operation "
-#~ msgstr " Neznáma operácia so súborom "
-
-#~ msgid "a&ll"
-#~ msgstr "&Všetko"
-
-#~ msgid " Type 'yes' if you REALLY want to delete "
-#~ msgstr " Napíšte 'áno' ak to chcete SKUTOČNE vymazať "
-
-#~ msgid "all the directories "
-#~ msgstr "všetky adresáre "
-
-#~ msgid " Recursive Delete "
-#~ msgstr " Rekurzívne Zmazať "
-
-#~ msgid " Background process: Recursive Delete "
-#~ msgstr " Proces v pozadí: Rekurzívne zmazať "
-
-#~ msgid "no"
-#~ msgstr "nie"
-
-#~ msgid "yes"
-#~ msgstr "áno"
-
-#~ msgid " Learn keys "
-#~ msgstr " Učenie klávesov "
-
-#~ msgid "name_trunc: too big"
-#~ msgstr "meno_trunc: je príliš veľké"
-
-#~ msgid ""
-#~ "File: \n"
-#~ "\n"
-#~ "    "
-#~ msgstr ""
-#~ "Súbor: \n"
-#~ "\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "has been modified, do you want to save the changes?\n"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "bol zmenený, chcete uložiť zmeny?\n"
-
-#~ msgid " Save changes "
-#~ msgstr " Uložiť zmeny "
-
-#~ msgid " Yes "
-#~ msgstr " Áno "
-
-#~ msgid " No "
-#~ msgstr " Nie "

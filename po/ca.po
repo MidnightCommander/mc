@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"POT-Creation-Date: 2002-10-21 19:16-0400\n"
+"POT-Creation-Date: 2002-10-21 19:44-0400\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <info@softcatala.org>\n"
@@ -2931,24 +2931,20 @@ msgstr "Gràcies per utilitzar el GNU Midnight Commander"
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/main.c:2076
-msgid ""
-"[flags] [this_dir] [other_panel_dir]\n"
-"\n"
-msgstr ""
-"[opcions] [aquest_dir] [dir_d'altre_quadre]\n"
-"\n"
+#: src/main.c:2078
+msgid "[flags] [this_dir] [other_panel_dir]\n"
+msgstr "[opcions] [aquest_dir] [dir_d'altre_quadre]\n"
 
-#: src/main.c:2080
+#: src/main.c:2082
 #, fuzzy
 msgid "+number"
 msgstr "Número de l'inode"
 
-#: src/main.c:2081
+#: src/main.c:2083
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
-#: src/main.c:2083
+#: src/main.c:2085
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2960,7 +2956,7 @@ msgstr ""
 "a mc-devel@gnome.org\n"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#: src/main.c:2097
+#: src/main.c:2099
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -3001,97 +2997,97 @@ msgstr ""
 "   blau verdós clar, gris clar i blanc\n"
 "\n"
 
-#: src/main.c:2184
+#: src/main.c:2186
 msgid "Use to debug the background code"
 msgstr "S'utilitza per depurar el codi de fons"
 
-#: src/main.c:2187
+#: src/main.c:2189
 msgid "Request to run in color mode"
 msgstr "Demana que s'utilitzi el mode en color"
 
-#: src/main.c:2189
+#: src/main.c:2191
 msgid "Specifies a color configuration"
 msgstr "Especifica una configuració de color"
 
-#: src/main.c:2193
+#: src/main.c:2195
 msgid "Edits one file"
 msgstr "Edita un fitxer"
 
-#: src/main.c:2197
+#: src/main.c:2199
 msgid "Displays this help message"
 msgstr "Mostra aquest missatge d'ajuda"
 
-#: src/main.c:2199
+#: src/main.c:2201
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Mostra una ajuda de com canviar l'esquema de colors"
 
-#: src/main.c:2202
+#: src/main.c:2204
 msgid "Log ftp dialog to specified file"
 msgstr "Enregistra el quadre ftp a un fitxer"
 
-#: src/main.c:2205
+#: src/main.c:2207
 msgid "Set debug level"
 msgstr ""
 
-#: src/main.c:2209
+#: src/main.c:2211
 #, fuzzy
 msgid "Print data directory"
 msgstr "Crea un directori nou"
 
-#: src/main.c:2211
+#: src/main.c:2213
 msgid "Requests to run in black and white"
 msgstr "Demana que s'utilitzi el mode blanc i negre"
 
-#: src/main.c:2213
+#: src/main.c:2215
 msgid "Disable mouse support in text version"
 msgstr "Inhabilita el suport de ratolí a la versió text"
 
-#: src/main.c:2216
+#: src/main.c:2218
 msgid "Disables subshell support"
 msgstr "Inhabilita el suport de subintèrprets"
 
-#: src/main.c:2218
+#: src/main.c:2220
 #, fuzzy
 msgid "Force subshell execution"
 msgstr "executa amb l'ID del propietari"
 
-#: src/main.c:2221
+#: src/main.c:2223
 msgid "Prints working directory at program exit"
 msgstr "Imprimeix el directori de treball en sortir"
 
-#: src/main.c:2223
+#: src/main.c:2225
 msgid "Resets soft keys on HP terminals"
 msgstr "Reinicia les tecles programades als terminals HP"
 
-#: src/main.c:2225
+#: src/main.c:2227
 msgid "To run on slow terminals"
 msgstr "Per funcionar amb terminals lents"
 
-#: src/main.c:2228
+#: src/main.c:2230
 msgid "Use stickchars to draw"
 msgstr "Utilitza el caràcters de línies per fer marcs"
 
-#: src/main.c:2232
+#: src/main.c:2234
 msgid "Enables subshell support (default)"
 msgstr "Habilita el suport de subintèrprets (per defecte)"
 
-#: src/main.c:2236
+#: src/main.c:2238
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Prova d'utilitzar termcap en comptes de terminfo"
 
-#: src/main.c:2239
+#: src/main.c:2241
 msgid "Displays the current version"
 msgstr "Mostra la versió actual"
 
-#: src/main.c:2241
+#: src/main.c:2243
 msgid "Launches the file viewer on a file"
 msgstr "Executa el visualitzador de fitxers amb un fitxer"
 
-#: src/main.c:2243
+#: src/main.c:2245
 msgid "Forces xterm features"
 msgstr "Força l'ús de característiques d'xterm"
 
-#: src/main.c:2433
+#: src/main.c:2435
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -3099,11 +3095,11 @@ msgstr ""
 "No puc obrir una línia al terminal. Heu d'executar mc sense l'opció -P.\n"
 "A alguns sistemes podeu fer servir # `which mc`\n"
 
-#: src/main.c:2496
+#: src/main.c:2498
 msgid " Notice "
 msgstr " Avís "
 
-#: src/main.c:2497
+#: src/main.c:2499
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -4504,88 +4500,3 @@ msgstr "%s: %s: %s %3d%% (%lu bytes transferits)"
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu bytes transferits"
-
-#~ msgid " Macro "
-#~ msgstr " Macro "
-
-#~ msgid " Delete Macro "
-#~ msgstr " Suprimeix la macro "
-
-#~ msgid " Continue "
-#~ msgstr " Continua "
-
-#~ msgid " Cancel "
-#~ msgstr " Cancel·la "
-
-#~ msgid " Search "
-#~ msgstr " Cerca "
-
-#~ msgid " Quit "
-#~ msgstr " Sortir "
-
-#~ msgid " Insert file "
-#~ msgstr " Insereix el fitxer "
-
-#~ msgid " CD "
-#~ msgstr " CD "
-
-#~ msgid " Internal failure "
-#~ msgstr " S'ha produït una fallada interna "
-
-#~ msgid " Unknown file operation "
-#~ msgstr " Operació de fitxer desconeguda "
-
-#~ msgid "a&ll"
-#~ msgstr "&Tots"
-
-# No usa el locale... Deuria ser un FIXME?  iv
-#~ msgid " Type 'yes' if you REALLY want to delete "
-#~ msgstr " Teclegeu \"yes\" si esteu segur que voleu suprimir-ho "
-
-#~ msgid "all the directories "
-#~ msgstr "tots els directoris "
-
-#~ msgid " Recursive Delete "
-#~ msgstr " Supressió recursiva "
-
-#~ msgid " Background process: Recursive Delete "
-#~ msgstr " Procés de fons: Supressió recursiva "
-
-#~ msgid "no"
-#~ msgstr "no"
-
-#~ msgid "yes"
-#~ msgstr "sí"
-
-#~ msgid " Learn keys "
-#~ msgstr " Defineix tecles "
-
-#~ msgid "name_trunc: too big"
-#~ msgstr "name_trunc: massa gran"
-
-#~ msgid ""
-#~ "File: \n"
-#~ "\n"
-#~ "    "
-#~ msgstr ""
-#~ "El fitxer: \n"
-#~ "\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "has been modified, do you want to save the changes?\n"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "s'ha modificat. Voleu desar els canvis?\n"
-
-#~ msgid " Save changes "
-#~ msgstr " Desa els canvis "
-
-#~ msgid " Yes "
-#~ msgstr " Sí "
-
-#~ msgid " No "
-#~ msgstr " No "

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
-"POT-Creation-Date: 2002-10-21 19:16-0400\n"
+"POT-Creation-Date: 2002-10-21 19:44-0400\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: mari susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara\n"
@@ -2931,23 +2931,19 @@ msgstr "Mila esker GNUren Midnight Commander-a erabiltzeagatik"
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNUren %s Midnight Commander-a\n"
 
-#: src/main.c:2076
-msgid ""
-"[flags] [this_dir] [other_panel_dir]\n"
-"\n"
-msgstr ""
-"[flags] [this_dir] [other_panel_dir]\n"
-"\n"
+#: src/main.c:2078
+msgid "[flags] [this_dir] [other_panel_dir]\n"
+msgstr "[flags] [this_dir] [other_panel_dir]\n"
 
-#: src/main.c:2080
+#: src/main.c:2082
 msgid "+number"
 msgstr ""
 
-#: src/main.c:2081
+#: src/main.c:2083
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
-#: src/main.c:2083
+#: src/main.c:2085
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2958,7 +2954,7 @@ msgstr ""
 "mc-devel@gnome.org helbidera\n"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#: src/main.c:2097
+#: src/main.c:2099
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2998,98 +2994,98 @@ msgstr ""
 "   cyan argia, gris argia eta zuria\n"
 "\n"
 
-#: src/main.c:2184
+#: src/main.c:2186
 msgid "Use to debug the background code"
 msgstr "Atzeko planoaren kodea arazteko erabiltzen da"
 
-#: src/main.c:2187
+#: src/main.c:2189
 msgid "Request to run in color mode"
 msgstr "Kolore moduan exekutatzeko eskatzen du"
 
-#: src/main.c:2189
+#: src/main.c:2191
 msgid "Specifies a color configuration"
 msgstr "Kolore-konfigurazioa zehazten du"
 
-#: src/main.c:2193
+#: src/main.c:2195
 msgid "Edits one file"
 msgstr "Fitxategi bat editatzen du"
 
-#: src/main.c:2197
+#: src/main.c:2199
 msgid "Displays this help message"
 msgstr "Laguntza-mezu hau bistaratzen du"
 
-#: src/main.c:2199
+#: src/main.c:2201
 msgid "Displays a help screen on how to change the color scheme"
 msgstr ""
 "Kolore-eskema nola aldatu azaltzen duen laguntza-pantaila bistaratzen du"
 
-#: src/main.c:2202
+#: src/main.c:2204
 msgid "Log ftp dialog to specified file"
 msgstr "Erregistratu ftp elkarrizketa-koadroa zehaztutako fitxategian "
 
-#: src/main.c:2205
+#: src/main.c:2207
 msgid "Set debug level"
 msgstr ""
 
-#: src/main.c:2209
+#: src/main.c:2211
 #, fuzzy
 msgid "Print data directory"
 msgstr "direktorioa"
 
-#: src/main.c:2211
+#: src/main.c:2213
 msgid "Requests to run in black and white"
 msgstr "Zuri-beltzean exekutatzea eskatzen du "
 
-#: src/main.c:2213
+#: src/main.c:2215
 msgid "Disable mouse support in text version"
 msgstr "Testu-bertsioan sagu-euskarria desgaitzen du"
 
-#: src/main.c:2216
+#: src/main.c:2218
 msgid "Disables subshell support"
 msgstr "Subshell euskarria desgaitzen du"
 
-#: src/main.c:2218
+#: src/main.c:2220
 #, fuzzy
 msgid "Force subshell execution"
 msgstr "konfiguratu erabiltzailearen IDa exekutatzerakoan"
 
-#: src/main.c:2221
+#: src/main.c:2223
 msgid "Prints working directory at program exit"
 msgstr "Programatik irtetean oraingo direktorioa inprimatzen du"
 
-#: src/main.c:2223
+#: src/main.c:2225
 msgid "Resets soft keys on HP terminals"
 msgstr "Tekla transferigarriak HP terminalean berrezartzen ditu"
 
-#: src/main.c:2225
+#: src/main.c:2227
 msgid "To run on slow terminals"
 msgstr "Terminal moteletan exekutatzeko"
 
-#: src/main.c:2228
+#: src/main.c:2230
 msgid "Use stickchars to draw"
 msgstr "Erabili karaktere grafikoak marrazteko"
 
-#: src/main.c:2232
+#: src/main.c:2234
 msgid "Enables subshell support (default)"
 msgstr "Subshell euskarria (lehenetsia) gaitzen du"
 
-#: src/main.c:2236
+#: src/main.c:2238
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Terminfo-ren ordez termcap erabiltzen saiatzen da "
 
-#: src/main.c:2239
+#: src/main.c:2241
 msgid "Displays the current version"
 msgstr "Uneko bertsioa bistaratzen du"
 
-#: src/main.c:2241
+#: src/main.c:2243
 msgid "Launches the file viewer on a file"
 msgstr "Fitxategi-ikustailea fitxategian abiarazten du"
 
-#: src/main.c:2243
+#: src/main.c:2245
 msgid "Forces xterm features"
 msgstr "xterm eginbideak behartzen ditu"
 
-#: src/main.c:2433
+#: src/main.c:2435
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -3097,11 +3093,11 @@ msgstr ""
 "Ezin izan da tty lerroa ireki. Mc -P bandera gabe exekutatu behar duzu.\n"
 "Sistema batzuetan # `which mc` exekutatu nahiko duzu\n"
 
-#: src/main.c:2496
+#: src/main.c:2498
 msgid " Notice "
 msgstr "Oharra "
 
-#: src/main.c:2497
+#: src/main.c:2499
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -4499,87 +4495,3 @@ msgstr "%s: %s: %s %3d%% (%lu byte transferitu dira)"
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu byte transferitu dira"
-
-#~ msgid " Macro "
-#~ msgstr " Makroa "
-
-#~ msgid " Delete Macro "
-#~ msgstr " Ezabatu makroa "
-
-#~ msgid " Continue "
-#~ msgstr " Jarraitu "
-
-#~ msgid " Cancel "
-#~ msgstr " Utzi "
-
-#~ msgid " Search "
-#~ msgstr "Bilatu "
-
-#~ msgid " Quit "
-#~ msgstr "Irten "
-
-#~ msgid " Insert file "
-#~ msgstr "Txertatu fitxategia "
-
-#~ msgid " CD "
-#~ msgstr "CD "
-
-#~ msgid " Internal failure "
-#~ msgstr "Barne-hutsegitea "
-
-#~ msgid " Unknown file operation "
-#~ msgstr "Fitxategi-eragiketa ezezaguna "
-
-#~ msgid "a&ll"
-#~ msgstr "&dena"
-
-#~ msgid " Type 'yes' if you REALLY want to delete "
-#~ msgstr "Idatzi 'bai' BENETAN ezabatu nahi baduzu "
-
-#~ msgid "all the directories "
-#~ msgstr "direktorio guztiak "
-
-#~ msgid " Recursive Delete "
-#~ msgstr "Ezabatze errekurtsiboa "
-
-#~ msgid " Background process: Recursive Delete "
-#~ msgstr "Atzeko planoko prozesua: Ezabatze errekurtsiboa "
-
-#~ msgid "no"
-#~ msgstr "ez"
-
-#~ msgid "yes"
-#~ msgstr "bai"
-
-#~ msgid " Learn keys "
-#~ msgstr "Ikasteko teklak "
-
-#~ msgid "name_trunc: too big"
-#~ msgstr "name_trunc: handiegia"
-
-#~ msgid ""
-#~ "File: \n"
-#~ "\n"
-#~ "    "
-#~ msgstr ""
-#~ "Fitxategia: \n"
-#~ "\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "has been modified, do you want to save the changes?\n"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "aldatu egin da, aldaketak gorde nahi dituzu?\n"
-
-#~ msgid " Save changes "
-#~ msgstr " Gorde aldaketak "
-
-#~ msgid " Yes "
-#~ msgstr " Bai "
-
-#~ msgid " No "
-#~ msgstr " Ez "

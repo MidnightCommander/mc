@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
-"POT-Creation-Date: 2002-10-21 19:16-0400\n"
+"POT-Creation-Date: 2002-10-21 19:44-0400\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <gnu-tr-u12a@lists.sourceforge.net>\n"
@@ -2924,23 +2924,19 @@ msgstr "GNU Midnight Commander'ý kullandýðýnýz için teþekkür ederiz"
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/main.c:2076
-msgid ""
-"[flags] [this_dir] [other_panel_dir]\n"
-"\n"
-msgstr ""
-"[seçenekler] [bu_dizin] [diðer_panel_dizini]\n"
-"\n"
+#: src/main.c:2078
+msgid "[flags] [this_dir] [other_panel_dir]\n"
+msgstr "[seçenekler] [bu_dizin] [diðer_panel_dizini]\n"
 
-#: src/main.c:2080
+#: src/main.c:2082
 msgid "+number"
 msgstr ""
 
-#: src/main.c:2081
+#: src/main.c:2083
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
-#: src/main.c:2083
+#: src/main.c:2085
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2951,7 +2947,7 @@ msgstr ""
 "mc-devel@gnome.org adresine gönderiniz\n"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#: src/main.c:2097
+#: src/main.c:2099
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2991,97 +2987,97 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2184
+#: src/main.c:2186
 msgid "Use to debug the background code"
 msgstr "Artalan kodunda hata ayýklamakta kullanýlýr"
 
-#: src/main.c:2187
+#: src/main.c:2189
 msgid "Request to run in color mode"
 msgstr "Renkli kipte çalýþtýrma isteði"
 
-#: src/main.c:2189
+#: src/main.c:2191
 msgid "Specifies a color configuration"
 msgstr "Bir renk yapýlandýrmasý belirtir"
 
-#: src/main.c:2193
+#: src/main.c:2195
 msgid "Edits one file"
 msgstr "Dosya düzenler"
 
-#: src/main.c:2197
+#: src/main.c:2199
 msgid "Displays this help message"
 msgstr "Bu yardým iletisini gösterir"
 
-#: src/main.c:2199
+#: src/main.c:2201
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Renk þemasýnýn deðiþtirilmesi ile ilgili yardým ekranýný gösterir"
 
-#: src/main.c:2202
+#: src/main.c:2204
 msgid "Log ftp dialog to specified file"
 msgstr "ftp dialog günlüðünü belirtilen dosyaya yazar"
 
-#: src/main.c:2205
+#: src/main.c:2207
 msgid "Set debug level"
 msgstr ""
 
-#: src/main.c:2209
+#: src/main.c:2211
 #, fuzzy
 msgid "Print data directory"
 msgstr "dizin:"
 
-#: src/main.c:2211
+#: src/main.c:2213
 msgid "Requests to run in black and white"
 msgstr "Siyah/Beyaz olarak çalýþtýrma isteði"
 
-#: src/main.c:2213
+#: src/main.c:2215
 msgid "Disable mouse support in text version"
 msgstr "Metin sürümünde fare desteðini kapatýr"
 
-#: src/main.c:2216
+#: src/main.c:2218
 msgid "Disables subshell support"
 msgstr "Altkabuk desteðini kapatýr"
 
-#: src/main.c:2218
+#: src/main.c:2220
 #, fuzzy
 msgid "Force subshell execution"
 msgstr "kullanýcý çalýþtýrabilir"
 
-#: src/main.c:2221
+#: src/main.c:2223
 msgid "Prints working directory at program exit"
 msgstr "Program çýkýþýnda çalýþýlan dizini basar"
 
-#: src/main.c:2223
+#: src/main.c:2225
 msgid "Resets soft keys on HP terminals"
 msgstr "HP terminallerde soft tuþlarý sýfýrlar"
 
-#: src/main.c:2225
+#: src/main.c:2227
 msgid "To run on slow terminals"
 msgstr "Yavaþ terminallerde çalýþtýrmak"
 
-#: src/main.c:2228
+#: src/main.c:2230
 msgid "Use stickchars to draw"
 msgstr "Pencere çizgilerinde çubuk karakterleri kullanýlýr"
 
-#: src/main.c:2232
+#: src/main.c:2234
 msgid "Enables subshell support (default)"
 msgstr "Altkabuk desteðini etkinleþtirir (öntanýmlý)"
 
-#: src/main.c:2236
+#: src/main.c:2238
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Terminfo yerine termcap kullanmayý dener"
 
-#: src/main.c:2239
+#: src/main.c:2241
 msgid "Displays the current version"
 msgstr "Sürümü gösterir"
 
-#: src/main.c:2241
+#: src/main.c:2243
 msgid "Launches the file viewer on a file"
 msgstr "Bir dosyayý dosya göstericide açar"
 
-#: src/main.c:2243
+#: src/main.c:2245
 msgid "Forces xterm features"
 msgstr "xterm özelliklerini etkinleþtirir"
 
-#: src/main.c:2433
+#: src/main.c:2435
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -3089,11 +3085,11 @@ msgstr ""
 "tty satýrý açýlamadý. mc'yi -P seçeneði olmaksýzýn çalýþtýrýnýz.\n"
 "Bazý sistemlerde # `which mc` çalýþtýrýlabilir.\n"
 
-#: src/main.c:2496
+#: src/main.c:2498
 msgid " Notice "
 msgstr " Uyarý "
 
-#: src/main.c:2497
+#: src/main.c:2499
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -4488,87 +4484,3 @@ msgstr "%s : %s : %s %3d%% (%lu bayt aktarýldý)"
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s : %s : %s %lu bayt aktarýldý"
-
-#~ msgid " Macro "
-#~ msgstr " Makro "
-
-#~ msgid " Delete Macro "
-#~ msgstr " Makroyu sil "
-
-#~ msgid " Continue "
-#~ msgstr " Devam et "
-
-#~ msgid " Cancel "
-#~ msgstr " Vazgeç "
-
-#~ msgid " Search "
-#~ msgstr " Ara "
-
-#~ msgid " Quit "
-#~ msgstr " Çýk "
-
-#~ msgid " Insert file "
-#~ msgstr " Dosya içeriðine bir dosyayý ekler "
-
-#~ msgid " CD "
-#~ msgstr " CD "
-
-#~ msgid " Internal failure "
-#~ msgstr " Ýç baþarýsýzlýk"
-
-#~ msgid " Unknown file operation "
-#~ msgstr " Bilinmeyen dosya iþlemi "
-
-#~ msgid "a&ll"
-#~ msgstr "tü&mü"
-
-#~ msgid " Type 'yes' if you REALLY want to delete "
-#~ msgstr " Gerçekten silmek istiyorsanýz 'evet' yazýn "
-
-#~ msgid "all the directories "
-#~ msgstr "tüm dizinler "
-
-#~ msgid " Recursive Delete "
-#~ msgstr " Ardýþýk Sil "
-
-#~ msgid " Background process: Recursive Delete "
-#~ msgstr " Artalan süreç: Ardýþýk Sil "
-
-#~ msgid "no"
-#~ msgstr "hayýr"
-
-#~ msgid "yes"
-#~ msgstr "evet"
-
-#~ msgid " Learn keys "
-#~ msgstr " Tuþlarý öðren "
-
-#~ msgid "name_trunc: too big"
-#~ msgstr "name_trunc: çok büyük"
-
-#~ msgid ""
-#~ "File: \n"
-#~ "\n"
-#~ "    "
-#~ msgstr ""
-#~ "Dosya: \n"
-#~ "\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "has been modified, do you want to save the changes?\n"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "deðiþtirilmiþti, deðiþiklikleri kaydetmek ister misiniz?\n"
-
-#~ msgid " Save changes "
-#~ msgstr " Kaydet "
-
-#~ msgid " Yes "
-#~ msgstr " Evet "
-
-#~ msgid " No "
-#~ msgstr " Hayýr"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.30\n"
-"POT-Creation-Date: 2002-10-21 19:16-0400\n"
+"POT-Creation-Date: 2002-10-21 19:44-0400\n"
 "PO-Revision-Date: 2002-01-24 01:25+0100\n"
 "Last-Translator: Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -2924,23 +2924,19 @@ msgstr "Bedankt dat u de GNU Midnight Commander gebruikt"
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander  %s\n"
 
-#: src/main.c:2076
-msgid ""
-"[flags] [this_dir] [other_panel_dir]\n"
-"\n"
-msgstr ""
-"[vlaggen] [deze dir] [andere dir]\n"
-"\n"
+#: src/main.c:2078
+msgid "[flags] [this_dir] [other_panel_dir]\n"
+msgstr "[vlaggen] [deze dir] [andere dir]\n"
 
-#: src/main.c:2080
+#: src/main.c:2082
 msgid "+number"
 msgstr ""
 
-#: src/main.c:2081
+#: src/main.c:2083
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
-#: src/main.c:2083
+#: src/main.c:2085
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2951,7 +2947,7 @@ msgstr ""
 "naar mc-devel@gnome.org\n"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#: src/main.c:2097
+#: src/main.c:2099
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2992,97 +2988,97 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2184
+#: src/main.c:2186
 msgid "Use to debug the background code"
 msgstr "Gebruik om achtergrondcode te debuggen"
 
-#: src/main.c:2187
+#: src/main.c:2189
 msgid "Request to run in color mode"
 msgstr "Vraag om de kleurenmodus te gebruiken"
 
-#: src/main.c:2189
+#: src/main.c:2191
 msgid "Specifies a color configuration"
 msgstr "Geef een kleurconfiguratie aan"
 
-#: src/main.c:2193
+#: src/main.c:2195
 msgid "Edits one file"
 msgstr "Bewerkt een bestand"
 
-#: src/main.c:2197
+#: src/main.c:2199
 msgid "Displays this help message"
 msgstr "Toont deze helptekst"
 
-#: src/main.c:2199
+#: src/main.c:2201
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Toont een helpscherm over het veranderen van het kleurenschema"
 
-#: src/main.c:2202
+#: src/main.c:2204
 msgid "Log ftp dialog to specified file"
 msgstr "Schrijf FTP log naar aangegeven bestand"
 
-#: src/main.c:2205
+#: src/main.c:2207
 msgid "Set debug level"
 msgstr ""
 
-#: src/main.c:2209
+#: src/main.c:2211
 #, fuzzy
 msgid "Print data directory"
 msgstr "map"
 
-#: src/main.c:2211
+#: src/main.c:2213
 msgid "Requests to run in black and white"
 msgstr "Verzoek om in zwart/wit te werken"
 
-#: src/main.c:2213
+#: src/main.c:2215
 msgid "Disable mouse support in text version"
 msgstr "Muisondersteuning uitschakelen in de tekstversie"
 
-#: src/main.c:2216
+#: src/main.c:2218
 msgid "Disables subshell support"
 msgstr "Schakelt subshell-ondersteuning uit"
 
-#: src/main.c:2218
+#: src/main.c:2220
 #, fuzzy
 msgid "Force subshell execution"
 msgstr "zet gebruikers-ID(UID) bij uitvoering"
 
-#: src/main.c:2221
+#: src/main.c:2223
 msgid "Prints working directory at program exit"
 msgstr "Druk werkmap af bij afsluiten programma"
 
-#: src/main.c:2223
+#: src/main.c:2225
 msgid "Resets soft keys on HP terminals"
 msgstr "Zet soft-key bij HP terminals terug"
 
-#: src/main.c:2225
+#: src/main.c:2227
 msgid "To run on slow terminals"
 msgstr "Voor langzame terminals"
 
-#: src/main.c:2228
+#: src/main.c:2230
 msgid "Use stickchars to draw"
 msgstr "Gebruik ASCII karakters om te tekenen"
 
-#: src/main.c:2232
+#: src/main.c:2234
 msgid "Enables subshell support (default)"
 msgstr "Zet subshell-ondersteuning aan (standaard)"
 
-#: src/main.c:2236
+#: src/main.c:2238
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Probeert 'termcap' te gebruiken, in plaats van 'terminfo'"
 
-#: src/main.c:2239
+#: src/main.c:2241
 msgid "Displays the current version"
 msgstr "Toon de huidige versie"
 
-#: src/main.c:2241
+#: src/main.c:2243
 msgid "Launches the file viewer on a file"
 msgstr "Start de bestandviewer voor een bestand"
 
-#: src/main.c:2243
+#: src/main.c:2245
 msgid "Forces xterm features"
 msgstr "Dwingt xterm features"
 
-#: src/main.c:2433
+#: src/main.c:2435
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -3090,11 +3086,11 @@ msgstr ""
 "Tty kan niet geopend worden. Start mc zonder de -P vlag.\n"
 "Op sommige systemen wilt u wellicht # `which mc` gebruiken\n"
 
-#: src/main.c:2496
+#: src/main.c:2498
 msgid " Notice "
 msgstr " Opmerking "
 
-#: src/main.c:2497
+#: src/main.c:2499
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -4490,87 +4486,3 @@ msgstr "%s: %s: %s %3d%% (%lu bytes getransfereerd)"
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu bytes getransfereerd"
-
-#~ msgid " Macro "
-#~ msgstr " Macro "
-
-#~ msgid " Delete Macro "
-#~ msgstr " Macro verwijderen "
-
-#~ msgid " Continue "
-#~ msgstr " Verder "
-
-#~ msgid " Cancel "
-#~ msgstr " Annuleren "
-
-#~ msgid " Search "
-#~ msgstr " Zoeken "
-
-#~ msgid " Quit "
-#~ msgstr " Afsluiten "
-
-#~ msgid " Insert file "
-#~ msgstr " Bestand invoegen "
-
-#~ msgid " CD "
-#~ msgstr " CD "
-
-#~ msgid " Internal failure "
-#~ msgstr " Interne fout "
-
-#~ msgid " Unknown file operation "
-#~ msgstr " Onbekende bestandsoperatie "
-
-#~ msgid "a&ll"
-#~ msgstr "a&lle"
-
-#~ msgid " Type 'yes' if you REALLY want to delete "
-#~ msgstr " 'Ja' invoeren, als u ECHT wilt verwijderen "
-
-#~ msgid "all the directories "
-#~ msgstr "al deze mappen "
-
-#~ msgid " Recursive Delete "
-#~ msgstr " Recursief Verwijderen "
-
-#~ msgid " Background process: Recursive Delete "
-#~ msgstr " Achtergrondproces: Recursief Verwijderen "
-
-#~ msgid "no"
-#~ msgstr "nee"
-
-#~ msgid "yes"
-#~ msgstr "ja"
-
-#~ msgid " Learn keys "
-#~ msgstr " Leer toetsen "
-
-#~ msgid "name_trunc: too big"
-#~ msgstr "name_trunc: te groot"
-
-#~ msgid ""
-#~ "File: \n"
-#~ "\n"
-#~ "    "
-#~ msgstr ""
-#~ "Bestand: \n"
-#~ "\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "has been modified, do you want to save the changes?\n"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "is veranderd. Wilt u de wijzigingen opslaan?\n"
-
-#~ msgid " Save changes "
-#~ msgstr " Sla de veranderingen op "
-
-#~ msgid " Yes "
-#~ msgstr " Ja "
-
-#~ msgid " No "
-#~ msgstr " Nee "

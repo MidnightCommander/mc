@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"POT-Creation-Date: 2002-10-21 19:16-0400\n"
+"POT-Creation-Date: 2002-10-21 19:44-0400\n"
 "PO-Revision-Date: 2002-09-15 14:29+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
@@ -2947,23 +2947,19 @@ msgstr "Köszönjük, hogy a GNU Midnight Commandert használod!"
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/main.c:2076
-msgid ""
-"[flags] [this_dir] [other_panel_dir]\n"
-"\n"
-msgstr ""
-"[opciók] [egyik_könyvtár] [másik_könyvtár]\n"
-"\n"
+#: src/main.c:2078
+msgid "[flags] [this_dir] [other_panel_dir]\n"
+msgstr "[opciók] [egyik_könyvtár] [másik_könyvtár]\n"
 
-#: src/main.c:2080
+#: src/main.c:2082
 msgid "+number"
 msgstr ""
 
-#: src/main.c:2081
+#: src/main.c:2083
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
-#: src/main.c:2083
+#: src/main.c:2085
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2974,7 +2970,7 @@ msgstr ""
 "címre várunk: mc-devel@gnome.org\n"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#: src/main.c:2097
+#: src/main.c:2099
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -3014,97 +3010,97 @@ msgstr ""
 "   brightcyan, lightgray és white\n"
 "\n"
 
-#: src/main.c:2184
+#: src/main.c:2186
 msgid "Use to debug the background code"
 msgstr "Használd ezt a háttérfolyamatok debugolásához."
 
-#: src/main.c:2187
+#: src/main.c:2189
 msgid "Request to run in color mode"
 msgstr "Színes üzemmód kérése."
 
-#: src/main.c:2189
+#: src/main.c:2191
 msgid "Specifies a color configuration"
 msgstr "Színösszeállítás megadása."
 
-#: src/main.c:2193
+#: src/main.c:2195
 msgid "Edits one file"
 msgstr "Fájl szerkesztése."
 
-#: src/main.c:2197
+#: src/main.c:2199
 msgid "Displays this help message"
 msgstr "Ezt a használati útmutatót írja ki."
 
-#: src/main.c:2199
+#: src/main.c:2201
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Útmutató a színösszeállítás megváltoztatásához."
 
-#: src/main.c:2202
+#: src/main.c:2204
 msgid "Log ftp dialog to specified file"
 msgstr "Az FTP párbeszédet naplózza egy megadott fájlba."
 
-#: src/main.c:2205
+#: src/main.c:2207
 msgid "Set debug level"
 msgstr ""
 
-#: src/main.c:2209
+#: src/main.c:2211
 #, fuzzy
 msgid "Print data directory"
 msgstr "könyvtár"
 
-#: src/main.c:2211
+#: src/main.c:2213
 msgid "Requests to run in black and white"
 msgstr "Fekete-fehér üzemmód kérése."
 
-#: src/main.c:2213
+#: src/main.c:2215
 msgid "Disable mouse support in text version"
 msgstr "Egérkezelés letiltása a szöveges változatban."
 
-#: src/main.c:2216
+#: src/main.c:2218
 msgid "Disables subshell support"
 msgstr "A háttér-shell használatának letiltása."
 
-#: src/main.c:2218
+#: src/main.c:2220
 #, fuzzy
 msgid "Force subshell execution"
 msgstr "'set-UID' bit"
 
-#: src/main.c:2221
+#: src/main.c:2223
 msgid "Prints working directory at program exit"
 msgstr "Kiírja az aktuális könyvtárat a programból való kilépéskor."
 
-#: src/main.c:2223
+#: src/main.c:2225
 msgid "Resets soft keys on HP terminals"
 msgstr "HP terminálok 'softkey'-jeit alaphelyzetbe hozza."
 
-#: src/main.c:2225
+#: src/main.c:2227
 msgid "To run on slow terminals"
 msgstr "Lassú terminálokon kevesebb adatforgalommal mûködik."
 
-#: src/main.c:2228
+#: src/main.c:2230
 msgid "Use stickchars to draw"
 msgstr "Sima 7-bites ASCII karakterekkel rajzoljon."
 
-#: src/main.c:2232
+#: src/main.c:2234
 msgid "Enables subshell support (default)"
 msgstr "Háttér-shell bekapcsolása (alapértelmezett)"
 
-#: src/main.c:2236
+#: src/main.c:2238
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Megpróbál termcap-ot használni terminfo helyett."
 
-#: src/main.c:2239
+#: src/main.c:2241
 msgid "Displays the current version"
 msgstr "Az aktuális verzió kiírása."
 
-#: src/main.c:2241
+#: src/main.c:2243
 msgid "Launches the file viewer on a file"
 msgstr "Fájlmegjelenítés indítása egy megadott fájlon."
 
-#: src/main.c:2243
+#: src/main.c:2245
 msgid "Forces xterm features"
 msgstr "Xterm funkciók erõltetése."
 
-#: src/main.c:2433
+#: src/main.c:2435
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -3112,11 +3108,11 @@ msgstr ""
 "Nem sikerült tty-t nyitni. Próbáld a -P kapcsoló nélkül futtatni a MC-t.\n"
 "Néhány rendszeren érdemes lehet a 'which mc'-t is kipróbálni.\n"
 
-#: src/main.c:2496
+#: src/main.c:2498
 msgid " Notice "
 msgstr " Megjegyzés "
 
-#: src/main.c:2497
+#: src/main.c:2499
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -4516,87 +4512,3 @@ msgstr "%s: %s: %s %3d%% (%lu bájt átküldve)"
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu bájt átküldve"
-
-#~ msgid " Macro "
-#~ msgstr " Makró "
-
-#~ msgid " Delete Macro "
-#~ msgstr " Makró törlése "
-
-#~ msgid " Continue "
-#~ msgstr " Tovább "
-
-#~ msgid " Cancel "
-#~ msgstr " Mégsem "
-
-#~ msgid " Search "
-#~ msgstr " Keresés "
-
-#~ msgid " Quit "
-#~ msgstr " Kilépés "
-
-#~ msgid " Insert file "
-#~ msgstr " Fájl beszúrása "
-
-#~ msgid " CD "
-#~ msgstr " CD "
-
-#~ msgid " Internal failure "
-#~ msgstr " Belsõ hiba "
-
-#~ msgid " Unknown file operation "
-#~ msgstr " Ismeretlen fájlmûvelet "
-
-#~ msgid "a&ll"
-#~ msgstr "Min&det"
-
-#~ msgid " Type 'yes' if you REALLY want to delete "
-#~ msgstr " Írj be \"igen\"-t, ha TÉNYLEG törölni akarod: "
-
-#~ msgid "all the directories "
-#~ msgstr "az összes könyvtárat "
-
-#~ msgid " Recursive Delete "
-#~ msgstr " Rekurzív törlés "
-
-#~ msgid " Background process: Recursive Delete "
-#~ msgstr " Háttérfolyamat: rekurzív törlés "
-
-#~ msgid "no"
-#~ msgstr "nem"
-
-#~ msgid "yes"
-#~ msgstr "igen"
-
-#~ msgid " Learn keys "
-#~ msgstr " Billentyûk megtanulása "
-
-#~ msgid "name_trunc: too big"
-#~ msgstr "name_trunc: túl nagy"
-
-#~ msgid ""
-#~ "File: \n"
-#~ "\n"
-#~ "    "
-#~ msgstr ""
-#~ "Fájl: \n"
-#~ "\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "has been modified, do you want to save the changes?\n"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "megváltozott, akarod menteni?\n"
-
-#~ msgid " Save changes "
-#~ msgstr " Változások mentése "
-
-#~ msgid " Yes "
-#~ msgstr " Igen "
-
-#~ msgid " No "
-#~ msgstr " Nem "

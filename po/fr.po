@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"POT-Creation-Date: 2002-10-21 19:16-0400\n"
+"POT-Creation-Date: 2002-10-21 19:44-0400\n"
 "PO-Revision-Date: 2002-04-30 16:46+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <christophe@merlet.net>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
@@ -2925,24 +2925,20 @@ msgstr "Merci d'utiliser GNU Midnight Commander"
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/main.c:2076
-msgid ""
-"[flags] [this_dir] [other_panel_dir]\n"
-"\n"
-msgstr ""
-"[drapeaux] [ce_rép] [autre_rép_panneau]\n"
-"\n"
+#: src/main.c:2078
+msgid "[flags] [this_dir] [other_panel_dir]\n"
+msgstr "[drapeaux] [ce_rép] [autre_rép_panneau]\n"
 
-#: src/main.c:2080
+#: src/main.c:2082
 #, fuzzy
 msgid "+number"
 msgstr "Numéro d'I-noeud"
 
-#: src/main.c:2081
+#: src/main.c:2083
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
-#: src/main.c:2083
+#: src/main.c:2085
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2953,7 +2949,7 @@ msgstr ""
 "à mc-devel@gnome.org\n"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#: src/main.c:2097
+#: src/main.c:2099
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2994,97 +2990,97 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2184
+#: src/main.c:2186
 msgid "Use to debug the background code"
 msgstr "Utilisez ceci pour débuguer du code en tâche de fond"
 
-#: src/main.c:2187
+#: src/main.c:2189
 msgid "Request to run in color mode"
 msgstr "Demande à fonctionner en mode couleur"
 
-#: src/main.c:2189
+#: src/main.c:2191
 msgid "Specifies a color configuration"
 msgstr "Spécifie une configuration des couleurs"
 
-#: src/main.c:2193
+#: src/main.c:2195
 msgid "Edits one file"
 msgstr "Édite un fichier"
 
-#: src/main.c:2197
+#: src/main.c:2199
 msgid "Displays this help message"
 msgstr "Affiche ce message d'aide"
 
-#: src/main.c:2199
+#: src/main.c:2201
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Affiche un écran d'aide sur la façon de changer les styles de couleur"
 
-#: src/main.c:2202
+#: src/main.c:2204
 msgid "Log ftp dialog to specified file"
 msgstr "Consigne les dialogues FTP dans le fichier spécifié"
 
-#: src/main.c:2205
+#: src/main.c:2207
 msgid "Set debug level"
 msgstr ""
 
-#: src/main.c:2209
+#: src/main.c:2211
 #, fuzzy
 msgid "Print data directory"
 msgstr "Crée un nouveau répertoire"
 
-#: src/main.c:2211
+#: src/main.c:2213
 msgid "Requests to run in black and white"
 msgstr "Demande à fonctionner en mode noir et blanc"
 
-#: src/main.c:2213
+#: src/main.c:2215
 msgid "Disable mouse support in text version"
 msgstr "Désactive le support de la souris pour la version texte"
 
-#: src/main.c:2216
+#: src/main.c:2218
 msgid "Disables subshell support"
 msgstr "Désactive le support des sous-shells"
 
-#: src/main.c:2218
+#: src/main.c:2220
 #, fuzzy
 msgid "Force subshell execution"
 msgstr "exécuter avec l'ID propr."
 
-#: src/main.c:2221
+#: src/main.c:2223
 msgid "Prints working directory at program exit"
 msgstr "Affiche le répertoire courant à la sortie du programme"
 
-#: src/main.c:2223
+#: src/main.c:2225
 msgid "Resets soft keys on HP terminals"
 msgstr "Réinitialiser les « softkeys » sur les terminaux HP"
 
-#: src/main.c:2225
+#: src/main.c:2227
 msgid "To run on slow terminals"
 msgstr "À exécuter sur les terminaux lents"
 
-#: src/main.c:2228
+#: src/main.c:2230
 msgid "Use stickchars to draw"
 msgstr "Utiliser les caractères graphiques pour dessiner"
 
-#: src/main.c:2232
+#: src/main.c:2234
 msgid "Enables subshell support (default)"
 msgstr "Active le support des sous-shells (par défaut)"
 
-#: src/main.c:2236
+#: src/main.c:2238
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Essaie d'utiliser termcap au lieu de terminfo"
 
-#: src/main.c:2239
+#: src/main.c:2241
 msgid "Displays the current version"
 msgstr "Affiche le numéro de la version courante"
 
-#: src/main.c:2241
+#: src/main.c:2243
 msgid "Launches the file viewer on a file"
 msgstr "Lance le visionneur de fichiers sur un fichier"
 
-#: src/main.c:2243
+#: src/main.c:2245
 msgid "Forces xterm features"
 msgstr "Force un attribut xterm"
 
-#: src/main.c:2433
+#: src/main.c:2435
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -3092,11 +3088,11 @@ msgstr ""
 "Ne peut ouvrir la ligne tty. Vous devez exécuter mc sans l'option -P.\n"
 "Sur certains systèmes, vous devriez exécuter # `which mc`\n"
 
-#: src/main.c:2496
+#: src/main.c:2498
 msgid " Notice "
 msgstr " Note "
 
-#: src/main.c:2497
+#: src/main.c:2499
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -4501,87 +4497,3 @@ msgstr "%s: %s: %s %3d%% (%lu octets transférés)"
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu octets transférés"
-
-#~ msgid " Macro "
-#~ msgstr " Macro "
-
-#~ msgid " Delete Macro "
-#~ msgstr " Effacer macro "
-
-#~ msgid " Continue "
-#~ msgstr " Continuer "
-
-#~ msgid " Cancel "
-#~ msgstr " Annuler "
-
-#~ msgid " Search "
-#~ msgstr " Rechercher "
-
-#~ msgid " Quit "
-#~ msgstr " Quitter "
-
-#~ msgid " Insert file "
-#~ msgstr " Insérer un fichier "
-
-#~ msgid " CD "
-#~ msgstr " CD "
-
-#~ msgid " Internal failure "
-#~ msgstr " Erreur interne "
-
-#~ msgid " Unknown file operation "
-#~ msgstr " Opération inconnue sur le fichier "
-
-#~ msgid "a&ll"
-#~ msgstr "&Tous"
-
-#~ msgid " Type 'yes' if you REALLY want to delete "
-#~ msgstr " Tapez « yes » si vous voulez vraiment effacer "
-
-#~ msgid "all the directories "
-#~ msgstr "tous les répertoires "
-
-#~ msgid " Recursive Delete "
-#~ msgstr " Effacement récursif "
-
-#~ msgid " Background process: Recursive Delete "
-#~ msgstr " Processus en tâche de fond : effacement récursif "
-
-#~ msgid "no"
-#~ msgstr "non"
-
-#~ msgid "yes"
-#~ msgstr "oui"
-
-#~ msgid " Learn keys "
-#~ msgstr " Apprentissage des touches "
-
-#~ msgid "name_trunc: too big"
-#~ msgstr "name_trunc : trop gros"
-
-#~ msgid ""
-#~ "File: \n"
-#~ "\n"
-#~ "    "
-#~ msgstr ""
-#~ "Fichier : \n"
-#~ "\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "has been modified, do you want to save the changes?\n"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "a été modifié, voulez-vous enregistrer les changements ?\n"
-
-#~ msgid " Save changes "
-#~ msgstr " Enregistrer les changements "
-
-#~ msgid " Yes "
-#~ msgstr " Oui "
-
-#~ msgid " No "
-#~ msgstr " Non "

@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
-"POT-Creation-Date: 2002-10-21 19:16-0400\n"
+"POT-Creation-Date: 2002-10-21 19:44-0400\n"
 "PO-Revision-Date: 2001-10-20 21:37+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -2931,23 +2931,19 @@ msgstr "Tak fordi du brugte GNU Midnight Commander"
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/main.c:2076
-msgid ""
-"[flags] [this_dir] [other_panel_dir]\n"
-"\n"
-msgstr ""
-"[flag] [dette_katalog] [andet_panels_katalog]\n"
-"\n"
+#: src/main.c:2078
+msgid "[flags] [this_dir] [other_panel_dir]\n"
+msgstr "[flag] [dette_katalog] [andet_panels_katalog]\n"
 
-#: src/main.c:2080
+#: src/main.c:2082
 msgid "+number"
 msgstr ""
 
-#: src/main.c:2081
+#: src/main.c:2083
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
-#: src/main.c:2083
+#: src/main.c:2085
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2958,7 +2954,7 @@ msgstr ""
 "til mc-devel@gnome.org\n"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#: src/main.c:2097
+#: src/main.c:2099
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2998,97 +2994,97 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2184
+#: src/main.c:2186
 msgid "Use to debug the background code"
 msgstr "Brug til at afluse baggrundskode"
 
-#: src/main.c:2187
+#: src/main.c:2189
 msgid "Request to run in color mode"
 msgstr "Forsøg at køre med farver"
 
-#: src/main.c:2189
+#: src/main.c:2191
 msgid "Specifies a color configuration"
 msgstr "Specificerer en farveindstilling"
 
-#: src/main.c:2193
+#: src/main.c:2195
 msgid "Edits one file"
 msgstr "Redigerer en fil"
 
-#: src/main.c:2197
+#: src/main.c:2199
 msgid "Displays this help message"
 msgstr "Viser denne hjælpemeddelelse"
 
-#: src/main.c:2199
+#: src/main.c:2201
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Viser en hjælpeskærm der hjælper dig med at ændre farveskemaet"
 
-#: src/main.c:2202
+#: src/main.c:2204
 msgid "Log ftp dialog to specified file"
 msgstr "Gem ftp meddelelser i angivet fil"
 
-#: src/main.c:2205
+#: src/main.c:2207
 msgid "Set debug level"
 msgstr ""
 
-#: src/main.c:2209
+#: src/main.c:2211
 #, fuzzy
 msgid "Print data directory"
 msgstr "mappe"
 
-#: src/main.c:2211
+#: src/main.c:2213
 msgid "Requests to run in black and white"
 msgstr "Kør i sort-hvid"
 
-#: src/main.c:2213
+#: src/main.c:2215
 msgid "Disable mouse support in text version"
 msgstr "Fjern museunderstøttelse i tekstversion"
 
-#: src/main.c:2216
+#: src/main.c:2218
 msgid "Disables subshell support"
 msgstr "Deaktivér underskal understøttelse"
 
-#: src/main.c:2218
+#: src/main.c:2220
 #, fuzzy
 msgid "Force subshell execution"
 msgstr "sæt bruger-ID ved kørsel"
 
-#: src/main.c:2221
+#: src/main.c:2223
 msgid "Prints working directory at program exit"
 msgstr "Viser nuværende mappe ved programafslut"
 
-#: src/main.c:2223
+#: src/main.c:2225
 msgid "Resets soft keys on HP terminals"
 msgstr "Genstarter soft keys på HP terminaler"
 
-#: src/main.c:2225
+#: src/main.c:2227
 msgid "To run on slow terminals"
 msgstr "For at køre på langsomme terminaler"
 
-#: src/main.c:2228
+#: src/main.c:2230
 msgid "Use stickchars to draw"
 msgstr "Brug tændstiktegn til at tegne"
 
-#: src/main.c:2232
+#: src/main.c:2234
 msgid "Enables subshell support (default)"
 msgstr "Aktivér underskal understøttelse (forvalgt)"
 
-#: src/main.c:2236
+#: src/main.c:2238
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Prøver at bruge termcap istedetfor terminfo"
 
-#: src/main.c:2239
+#: src/main.c:2241
 msgid "Displays the current version"
 msgstr "Udskriver versionsnummer"
 
-#: src/main.c:2241
+#: src/main.c:2243
 msgid "Launches the file viewer on a file"
 msgstr "Bruger filfremviseren på en fil"
 
-#: src/main.c:2243
+#: src/main.c:2245
 msgid "Forces xterm features"
 msgstr "Tvinger xterm funktioner"
 
-#: src/main.c:2433
+#: src/main.c:2435
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -3096,11 +3092,11 @@ msgstr ""
 "Kunne ikke åbne tty linie. Du må køre mc uden -P flaget.\n"
 "På nogle systemer er det en god ide at køre # 'which mc'\n"
 
-#: src/main.c:2496
+#: src/main.c:2498
 msgid " Notice "
 msgstr " Notér "
 
-#: src/main.c:2497
+#: src/main.c:2499
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -4493,87 +4489,3 @@ msgstr "%s: %s: %s %3d%% (%lu byte overført)"
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu byte overført"
-
-#~ msgid " Macro "
-#~ msgstr " Makro "
-
-#~ msgid " Delete Macro "
-#~ msgstr " Slet makro "
-
-#~ msgid " Continue "
-#~ msgstr " Fortsæt "
-
-#~ msgid " Cancel "
-#~ msgstr " Annullér "
-
-#~ msgid " Search "
-#~ msgstr " Søg "
-
-#~ msgid " Quit "
-#~ msgstr " Afslut "
-
-#~ msgid " Insert file "
-#~ msgstr " Indsæt fil "
-
-#~ msgid " CD "
-#~ msgstr " CD "
-
-#~ msgid " Internal failure "
-#~ msgstr " Intern fejl "
-
-#~ msgid " Unknown file operation "
-#~ msgstr " Ukendt filoperation "
-
-#~ msgid "a&ll"
-#~ msgstr "a&lle"
-
-#~ msgid " Type 'yes' if you REALLY want to delete "
-#~ msgstr " Indtast 'ja' hvis du VIRKELIG vil slette "
-
-#~ msgid "all the directories "
-#~ msgstr "alle mapperne "
-
-#~ msgid " Recursive Delete "
-#~ msgstr " Slet med undermapper "
-
-#~ msgid " Background process: Recursive Delete "
-#~ msgstr " Baggrundsprocess: Slet med undermapper "
-
-#~ msgid "no"
-#~ msgstr "nej"
-
-#~ msgid "yes"
-#~ msgstr "ja"
-
-#~ msgid " Learn keys "
-#~ msgstr " Lær taster "
-
-#~ msgid "name_trunc: too big"
-#~ msgstr "name_trunc: for stor"
-
-#~ msgid ""
-#~ "File: \n"
-#~ "\n"
-#~ "    "
-#~ msgstr ""
-#~ "Fil: \n"
-#~ "\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "has been modified, do you want to save the changes?\n"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "er blevet ændret. Vil du gemme ændringerne?\n"
-
-#~ msgid " Save changes "
-#~ msgstr " Gem ændringer "
-
-#~ msgid " Yes "
-#~ msgstr " Ja "
-
-#~ msgid " No "
-#~ msgstr " Nej "

@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"POT-Creation-Date: 2002-10-21 19:16-0400\n"
+"POT-Creation-Date: 2002-10-21 19:44-0400\n"
 "PO-Revision-Date: 2002-02-09 13:46+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -2962,24 +2962,20 @@ msgstr "Tack för att du använder GNU Midnight Commander"
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/main.c:2076
-msgid ""
-"[flags] [this_dir] [other_panel_dir]\n"
-"\n"
-msgstr ""
-"[flaggor] [denna katalog] [annan panels katalog]\n"
-"\n"
+#: src/main.c:2078
+msgid "[flags] [this_dir] [other_panel_dir]\n"
+msgstr "[flaggor] [denna katalog] [annan panels katalog]\n"
 
-#: src/main.c:2080
+#: src/main.c:2082
 #, fuzzy
 msgid "+number"
 msgstr "Inodnummer"
 
-#: src/main.c:2081
+#: src/main.c:2083
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
-#: src/main.c:2083
+#: src/main.c:2085
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2990,7 +2986,7 @@ msgstr ""
 "mc-devel@gnome.org och kommentarer på översättningen till sv@li.org\n"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#: src/main.c:2097
+#: src/main.c:2099
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -3030,99 +3026,99 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2184
+#: src/main.c:2186
 msgid "Use to debug the background code"
 msgstr "Använd för att avlusa bakgrundskod"
 
-#: src/main.c:2187
+#: src/main.c:2189
 msgid "Request to run in color mode"
 msgstr "Begär att få köra i färgläge"
 
-#: src/main.c:2189
+#: src/main.c:2191
 msgid "Specifies a color configuration"
 msgstr "Specificera en färgkonfiguration"
 
-#: src/main.c:2193
+#: src/main.c:2195
 msgid "Edits one file"
 msgstr "Redigera en fil"
 
-#: src/main.c:2197
+#: src/main.c:2199
 msgid "Displays this help message"
 msgstr "Visa det här hjälpmeddelandet"
 
-#: src/main.c:2199
+#: src/main.c:2201
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Visa ett hjälpfönster över hur man ändrar färgschema"
 
-#: src/main.c:2202
+#: src/main.c:2204
 msgid "Log ftp dialog to specified file"
 msgstr "Logga ftpdialog till specificerad fil"
 
-#: src/main.c:2205
+#: src/main.c:2207
 msgid "Set debug level"
 msgstr ""
 
-#: src/main.c:2209
+#: src/main.c:2211
 #, fuzzy
 msgid "Print data directory"
 msgstr "Skapar en ny katalog"
 
-#: src/main.c:2211
+#: src/main.c:2213
 msgid "Requests to run in black and white"
 msgstr "Begäran att köra i svartvitt"
 
-#: src/main.c:2213
+#: src/main.c:2215
 msgid "Disable mouse support in text version"
 msgstr "Stäng av musstödet i text versionen"
 
-#: src/main.c:2216
+#: src/main.c:2218
 msgid "Disables subshell support"
 msgstr "Stäng av stöd för subshell"
 
-#: src/main.c:2218
+#: src/main.c:2220
 #, fuzzy
 msgid "Force subshell execution"
 msgstr "sätt användar-ID vid exekvering"
 
-#: src/main.c:2221
+#: src/main.c:2223
 msgid "Prints working directory at program exit"
 msgstr "Skriver ut arbetskatalogen vid programmavslutning"
 
-#: src/main.c:2223
+#: src/main.c:2225
 msgid "Resets soft keys on HP terminals"
 msgstr "Nollställ mjuka tangenter på HP-terminaler"
 
-#: src/main.c:2225
+#: src/main.c:2227
 msgid "To run on slow terminals"
 msgstr "Att köra på långsamma terminaler"
 
-#: src/main.c:2228
+#: src/main.c:2230
 msgid "Use stickchars to draw"
 msgstr "Använd 'stickchars' för att rita"
 
 # incomplete
-#: src/main.c:2232
+#: src/main.c:2234
 msgid "Enables subshell support (default)"
 msgstr "Aktiverar stöd för subshell (default)"
 
 # svängelska
-#: src/main.c:2236
+#: src/main.c:2238
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Försöker använda termcap istället för terminfo"
 
-#: src/main.c:2239
+#: src/main.c:2241
 msgid "Displays the current version"
 msgstr "Visa den aktuella versionen"
 
-#: src/main.c:2241
+#: src/main.c:2243
 msgid "Launches the file viewer on a file"
 msgstr "Startar filläsaren"
 
-#: src/main.c:2243
+#: src/main.c:2245
 msgid "Forces xterm features"
 msgstr "Tvinga fram xtermfinesser"
 
-#: src/main.c:2433
+#: src/main.c:2435
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -3130,11 +3126,11 @@ msgstr ""
 "Kan inte öppna tty linje. Du måste starta mc utan -P flaggan.\n"
 "På vissa system kan det vara lämpligt att köra en # 'which mc'\n"
 
-#: src/main.c:2496
+#: src/main.c:2498
 msgid " Notice "
 msgstr " Notera "
 
-#: src/main.c:2497
+#: src/main.c:2499
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -4543,88 +4539,3 @@ msgstr "%s: %s: %s %3d%% (%lu byte överförda)"
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu byte överförda"
-
-#~ msgid " Macro "
-#~ msgstr " Makro "
-
-#~ msgid " Delete Macro "
-#~ msgstr " Radera makro "
-
-#~ msgid " Continue "
-#~ msgstr " Fortsätt "
-
-#~ msgid " Cancel "
-#~ msgstr " Avbryt "
-
-#~ msgid " Search "
-#~ msgstr " Sök "
-
-#~ msgid " Quit "
-#~ msgstr " Avsluta "
-
-#~ msgid " Insert file "
-#~ msgstr " Infoga fil "
-
-#~ msgid " CD "
-#~ msgstr " CD "
-
-#~ msgid " Internal failure "
-#~ msgstr " Internt fel "
-
-#~ msgid " Unknown file operation "
-#~ msgstr " Okänd filoperation"
-
-#~ msgid "a&ll"
-#~ msgstr "&Alla"
-
-#~ msgid " Type 'yes' if you REALLY want to delete "
-#~ msgstr " Skriv \"ja\" om du VERKLIGEN vill radera "
-
-# hoppas att ja fungerar som svar KONTROLLERA!
-#~ msgid "all the directories "
-#~ msgstr "alla kataloger"
-
-#~ msgid " Recursive Delete "
-#~ msgstr " Rekursiv radering"
-
-#~ msgid " Background process: Recursive Delete "
-#~ msgstr " Bakgrundsprocess: Rekursiv radering"
-
-#~ msgid "no"
-#~ msgstr "nej"
-
-#~ msgid "yes"
-#~ msgstr "ja"
-
-#~ msgid " Learn keys "
-#~ msgstr " Lär MC dina tangenter "
-
-#~ msgid "name_trunc: too big"
-#~ msgstr "name_trunc: för stor"
-
-#~ msgid ""
-#~ "File: \n"
-#~ "\n"
-#~ "    "
-#~ msgstr ""
-#~ "Fil: \n"
-#~ "\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "has been modified, do you want to save the changes?\n"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "har modifierats, vill du spara ändringarna?\n"
-
-#~ msgid " Save changes "
-#~ msgstr " Spara ändringar "
-
-#~ msgid " Yes "
-#~ msgstr " Ja "
-
-#~ msgid " No "
-#~ msgstr " Nej "

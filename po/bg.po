@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
-"POT-Creation-Date: 2002-10-21 19:16-0400\n"
+"POT-Creation-Date: 2002-10-21 19:44-0400\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
@@ -2919,23 +2919,19 @@ msgstr "Благодарим ви,че използвате GNU Midnight Command
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/main.c:2076
-msgid ""
-"[flags] [this_dir] [other_panel_dir]\n"
-"\n"
-msgstr ""
-"[флагове] [тази_директория] [директория_за_другия_панел]\n"
-"\n"
+#: src/main.c:2078
+msgid "[flags] [this_dir] [other_panel_dir]\n"
+msgstr "[флагове] [тази_директория] [директория_за_другия_панел]\n"
 
-#: src/main.c:2080
+#: src/main.c:2082
 msgid "+number"
 msgstr ""
 
-#: src/main.c:2081
+#: src/main.c:2083
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
-#: src/main.c:2083
+#: src/main.c:2085
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2946,7 +2942,7 @@ msgstr ""
 "на mc-devel@gnome.org. Коментари по превода изпращайте на adrez@mail.bg.\n"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#: src/main.c:2097
+#: src/main.c:2099
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2986,97 +2982,97 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2184
+#: src/main.c:2186
 msgid "Use to debug the background code"
 msgstr "Използвай за дебъг на фоновия код"
 
-#: src/main.c:2187
+#: src/main.c:2189
 msgid "Request to run in color mode"
 msgstr "Поиск за стартиране е цветен режим"
 
-#: src/main.c:2189
+#: src/main.c:2191
 msgid "Specifies a color configuration"
 msgstr "Указва цветова конфигурация"
 
-#: src/main.c:2193
+#: src/main.c:2195
 msgid "Edits one file"
 msgstr "Редактира файл"
 
-#: src/main.c:2197
+#: src/main.c:2199
 msgid "Displays this help message"
 msgstr "Показва това помощно съобщение"
 
-#: src/main.c:2199
+#: src/main.c:2201
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Показва как да се смени цветовата схема"
 
-#: src/main.c:2202
+#: src/main.c:2204
 msgid "Log ftp dialog to specified file"
 msgstr "Записва ftp сесиите в указан файл"
 
-#: src/main.c:2205
+#: src/main.c:2207
 msgid "Set debug level"
 msgstr ""
 
-#: src/main.c:2209
+#: src/main.c:2211
 #, fuzzy
 msgid "Print data directory"
 msgstr "директорията"
 
-#: src/main.c:2211
+#: src/main.c:2213
 msgid "Requests to run in black and white"
 msgstr "Поиск за стартиране в черно-бяло"
 
-#: src/main.c:2213
+#: src/main.c:2215
 msgid "Disable mouse support in text version"
 msgstr "Деактивира поддръжката на мишка в текстов режим"
 
-#: src/main.c:2216
+#: src/main.c:2218
 msgid "Disables subshell support"
 msgstr "Деактивира поддръжката на подобвивка"
 
-#: src/main.c:2218
+#: src/main.c:2220
 #, fuzzy
 msgid "Force subshell execution"
 msgstr "установи UID при изпълн."
 
-#: src/main.c:2221
+#: src/main.c:2223
 msgid "Prints working directory at program exit"
 msgstr "Отпечатва работната директория при изход от програмата"
 
-#: src/main.c:2223
+#: src/main.c:2225
 msgid "Resets soft keys on HP terminals"
 msgstr "Реинициализира програмните клавищи на HP терминали"
 
-#: src/main.c:2225
+#: src/main.c:2227
 msgid "To run on slow terminals"
 msgstr "При бавни терминали"
 
-#: src/main.c:2228
+#: src/main.c:2230
 msgid "Use stickchars to draw"
 msgstr "Рисува в псевдографика"
 
-#: src/main.c:2232
+#: src/main.c:2234
 msgid "Enables subshell support (default)"
 msgstr "Разрешава поддръжката на подобвивка (по подразбиране)"
 
-#: src/main.c:2236
+#: src/main.c:2238
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Опитва да използва termcap вместо terminfo"
 
-#: src/main.c:2239
+#: src/main.c:2241
 msgid "Displays the current version"
 msgstr "Показва текущата версия"
 
-#: src/main.c:2241
+#: src/main.c:2243
 msgid "Launches the file viewer on a file"
 msgstr "Показва файл"
 
-#: src/main.c:2243
+#: src/main.c:2245
 msgid "Forces xterm features"
 msgstr "Използва възможности на xterm"
 
-#: src/main.c:2433
+#: src/main.c:2435
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -3084,11 +3080,11 @@ msgstr ""
 "Не мога да отворя tty линия. Трябва да стартирате mc без опциятя -P.\n"
 "На някои системи може да стартирате # `which mc`\n"
 
-#: src/main.c:2496
+#: src/main.c:2498
 msgid " Notice "
 msgstr " Забележка "
 
-#: src/main.c:2497
+#: src/main.c:2499
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -4481,87 +4477,3 @@ msgstr "%s: %s: %s %3d%% (%lu байта предадени)"
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu байта предадени"
-
-#~ msgid " Macro "
-#~ msgstr " Макроси "
-
-#~ msgid " Delete Macro "
-#~ msgstr " Изтрий макроса "
-
-#~ msgid " Continue "
-#~ msgstr " Продължи "
-
-#~ msgid " Cancel "
-#~ msgstr " Отказ "
-
-#~ msgid " Search "
-#~ msgstr " Търсене "
-
-#~ msgid " Quit "
-#~ msgstr " Изход "
-
-#~ msgid " Insert file "
-#~ msgstr " Вмъкни файл "
-
-#~ msgid " CD "
-#~ msgstr " CD "
-
-#~ msgid " Internal failure "
-#~ msgstr " Вътрешна грешка "
-
-#~ msgid " Unknown file operation "
-#~ msgstr " Неизвестна фалйова операция "
-
-#~ msgid "a&ll"
-#~ msgstr "всички"
-
-#~ msgid " Type 'yes' if you REALLY want to delete "
-#~ msgstr " Напишете 'yes', ако НАИСТИНА искате да изтриете "
-
-#~ msgid "all the directories "
-#~ msgstr "всичките директории "
-
-#~ msgid " Recursive Delete "
-#~ msgstr " Рекурсивно изтриване "
-
-#~ msgid " Background process: Recursive Delete "
-#~ msgstr " Фонов процец: Рекурсивно изтриване "
-
-#~ msgid "no"
-#~ msgstr "не"
-
-#~ msgid "yes"
-#~ msgstr "да"
-
-#~ msgid " Learn keys "
-#~ msgstr " Учи клавиши "
-
-#~ msgid "name_trunc: too big"
-#~ msgstr "name_trunc: пракалено голямо"
-
-#~ msgid ""
-#~ "File: \n"
-#~ "\n"
-#~ "    "
-#~ msgstr ""
-#~ "Файлът: \n"
-#~ "\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "has been modified, do you want to save the changes?\n"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "е модифициран. Искате ли да запазите промените?\n"
-
-#~ msgid " Save changes "
-#~ msgstr " Запази промените "
-
-#~ msgid " Yes "
-#~ msgstr " Да "
-
-#~ msgid " No "
-#~ msgstr " Не "

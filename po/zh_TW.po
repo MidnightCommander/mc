@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54a\n"
-"POT-Creation-Date: 2002-10-21 19:16-0400\n"
+"POT-Creation-Date: 2002-10-21 19:44-0400\n"
 "PO-Revision-Date: 2001-07-27 03:02+0800\n"
 "Last-Translator: Jing-Jong Shyue <shyue@sonoma.com.tw>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
@@ -2921,24 +2921,20 @@ msgstr "感謝您使用 GNU Midnight Commander"
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/main.c:2076
-msgid ""
-"[flags] [this_dir] [other_panel_dir]\n"
-"\n"
-msgstr ""
-"[選項標籤] [路徑] [另一個路徑]\n"
-"\n"
+#: src/main.c:2078
+msgid "[flags] [this_dir] [other_panel_dir]\n"
+msgstr "[選項標籤] [路徑] [另一個路徑]\n"
 
-#: src/main.c:2080
+#: src/main.c:2082
 #, fuzzy
 msgid "+number"
 msgstr "Inode 號碼"
 
-#: src/main.c:2081
+#: src/main.c:2083
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
-#: src/main.c:2083
+#: src/main.c:2085
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2949,7 +2945,7 @@ msgstr ""
 "給 mc-devel@gnome.org\n"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#: src/main.c:2097
+#: src/main.c:2099
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2989,97 +2985,97 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2184
+#: src/main.c:2186
 msgid "Use to debug the background code"
 msgstr "用來對背景程式碼偵錯"
 
-#: src/main.c:2187
+#: src/main.c:2189
 msgid "Request to run in color mode"
 msgstr "要求在彩色模式中執行"
 
-#: src/main.c:2189
+#: src/main.c:2191
 msgid "Specifies a color configuration"
 msgstr "指定一組色彩設定"
 
-#: src/main.c:2193
+#: src/main.c:2195
 msgid "Edits one file"
 msgstr "編輯一個檔案"
 
-#: src/main.c:2197
+#: src/main.c:2199
 msgid "Displays this help message"
 msgstr "顯示此說明訊息"
 
-#: src/main.c:2199
+#: src/main.c:2201
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "顯示如何改變色彩設定的說明畫面"
 
-#: src/main.c:2202
+#: src/main.c:2204
 msgid "Log ftp dialog to specified file"
 msgstr "紀錄 FTP 對話框到特定檔案"
 
-#: src/main.c:2205
+#: src/main.c:2207
 msgid "Set debug level"
 msgstr ""
 
-#: src/main.c:2209
+#: src/main.c:2211
 #, fuzzy
 msgid "Print data directory"
 msgstr "建立新目錄"
 
-#: src/main.c:2211
+#: src/main.c:2213
 msgid "Requests to run in black and white"
 msgstr "要求在黑白模式下執行"
 
-#: src/main.c:2213
+#: src/main.c:2215
 msgid "Disable mouse support in text version"
 msgstr "文字模式下不使用滑鼠支援"
 
-#: src/main.c:2216
+#: src/main.c:2218
 msgid "Disables subshell support"
 msgstr "不支援使用次殼層 (subshell)"
 
-#: src/main.c:2218
+#: src/main.c:2220
 #, fuzzy
 msgid "Force subshell execution"
 msgstr "執行時 sUID"
 
-#: src/main.c:2221
+#: src/main.c:2223
 msgid "Prints working directory at program exit"
 msgstr "程式結束時印出當前目錄"
 
-#: src/main.c:2223
+#: src/main.c:2225
 msgid "Resets soft keys on HP terminals"
 msgstr "在 HP 終端機上重設軟鍵 (soft keys)"
 
-#: src/main.c:2225
+#: src/main.c:2227
 msgid "To run on slow terminals"
 msgstr "於慢速的終端機上執行"
 
-#: src/main.c:2228
+#: src/main.c:2230
 msgid "Use stickchars to draw"
 msgstr "使用stickchars繪製"
 
-#: src/main.c:2232
+#: src/main.c:2234
 msgid "Enables subshell support (default)"
 msgstr "支援使用次殼層 (預設值)"
 
-#: src/main.c:2236
+#: src/main.c:2238
 msgid "Tries to use termcap instead of terminfo"
 msgstr "試著使用 termcap 來代替 terminfo"
 
-#: src/main.c:2239
+#: src/main.c:2241
 msgid "Displays the current version"
 msgstr "顯示目前的版本"
 
-#: src/main.c:2241
+#: src/main.c:2243
 msgid "Launches the file viewer on a file"
 msgstr "對某個檔案執行檔案檢視程式"
 
-#: src/main.c:2243
+#: src/main.c:2245
 msgid "Forces xterm features"
 msgstr "強迫使用 xterm 特性"
 
-#: src/main.c:2433
+#: src/main.c:2435
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -3087,11 +3083,11 @@ msgstr ""
 "無法開啟終端機連線，您不能用 -P 選項來執行 mc。 \n"
 "在某些系統上您可能需要執行 # `which mc`\n"
 
-#: src/main.c:2496
+#: src/main.c:2498
 msgid " Notice "
 msgstr " 注意 "
 
-#: src/main.c:2497
+#: src/main.c:2499
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -4487,87 +4483,3 @@ msgstr "%s: %s: %s %3d%% (已傳送 %lu 位元組)"
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s 已傳送 %lu 位元組"
-
-#~ msgid " Macro "
-#~ msgstr " 巨集 "
-
-#~ msgid " Delete Macro "
-#~ msgstr " 刪除巨集 "
-
-#~ msgid " Continue "
-#~ msgstr " 繼續 "
-
-#~ msgid " Cancel "
-#~ msgstr " 取消"
-
-#~ msgid " Search "
-#~ msgstr " 搜尋 "
-
-#~ msgid " Quit "
-#~ msgstr " 結束 "
-
-#~ msgid " Insert file "
-#~ msgstr " 插入檔案 "
-
-#~ msgid " CD "
-#~ msgstr " 改變目錄 "
-
-#~ msgid " Internal failure "
-#~ msgstr " 內部失敗 "
-
-#~ msgid " Unknown file operation "
-#~ msgstr " 不明的檔案操作 "
-
-#~ msgid "a&ll"
-#~ msgstr "全部"
-
-#~ msgid " Type 'yes' if you REALLY want to delete "
-#~ msgstr " 假如您確定要刪除的話就輸入 'yes' "
-
-#~ msgid "all the directories "
-#~ msgstr "所有的目錄"
-
-#~ msgid " Recursive Delete "
-#~ msgstr " 遞迴的刪除 "
-
-#~ msgid " Background process: Recursive Delete "
-#~ msgstr " 背景程序： 遞迴的刪除 "
-
-#~ msgid "no"
-#~ msgstr "否"
-
-#~ msgid "yes"
-#~ msgstr "是"
-
-#~ msgid " Learn keys "
-#~ msgstr " 認識按鍵 "
-
-#~ msgid "name_trunc: too big"
-#~ msgstr "name_trunc: 太大了"
-
-#~ msgid ""
-#~ "File: \n"
-#~ "\n"
-#~ "    "
-#~ msgstr ""
-#~ "檔案： \n"
-#~ "\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "has been modified, do you want to save the changes?\n"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "已經被更動過，您要存檔嗎？\n"
-
-#~ msgid " Save changes "
-#~ msgstr " 存檔 "
-
-#~ msgid " Yes "
-#~ msgstr "是"
-
-#~ msgid " No "
-#~ msgstr "否"

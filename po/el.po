@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
-"POT-Creation-Date: 2002-10-21 19:16-0400\n"
+"POT-Creation-Date: 2002-10-21 19:44-0400\n"
 "PO-Revision-Date: 1997-07-23 00:04-0400\n"
 "Last-Translator: Spiros Papadimitriou <spapadim+@cs.cmu.edu>\n"
 "Language-Team: Greek <el@li.org>\n"
@@ -2796,22 +2796,20 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "Η ομάδα του Midnight Commander"
 
-#: src/main.c:2076
-msgid ""
-"[flags] [this_dir] [other_panel_dir]\n"
-"\n"
+#: src/main.c:2078
+msgid "[flags] [this_dir] [other_panel_dir]\n"
 msgstr ""
 
-#: src/main.c:2080
+#: src/main.c:2082
 #, fuzzy
 msgid "+number"
 msgstr "Αριθμός Inode"
 
-#: src/main.c:2081
+#: src/main.c:2083
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
-#: src/main.c:2083
+#: src/main.c:2085
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2819,7 +2817,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#: src/main.c:2097
+#: src/main.c:2099
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2841,106 +2839,106 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/main.c:2184
+#: src/main.c:2186
 msgid "Use to debug the background code"
 msgstr ""
 
-#: src/main.c:2187
+#: src/main.c:2189
 msgid "Request to run in color mode"
 msgstr ""
 
-#: src/main.c:2189
+#: src/main.c:2191
 msgid "Specifies a color configuration"
 msgstr ""
 
-#: src/main.c:2193
+#: src/main.c:2195
 msgid "Edits one file"
 msgstr ""
 
-#: src/main.c:2197
+#: src/main.c:2199
 msgid "Displays this help message"
 msgstr ""
 
-#: src/main.c:2199
+#: src/main.c:2201
 msgid "Displays a help screen on how to change the color scheme"
 msgstr ""
 
-#: src/main.c:2202
+#: src/main.c:2204
 msgid "Log ftp dialog to specified file"
 msgstr ""
 
-#: src/main.c:2205
+#: src/main.c:2207
 msgid "Set debug level"
 msgstr ""
 
-#: src/main.c:2209
+#: src/main.c:2211
 #, fuzzy
 msgid "Print data directory"
 msgstr "Δημηουργία νέου καταλόγου"
 
-#: src/main.c:2211
+#: src/main.c:2213
 msgid "Requests to run in black and white"
 msgstr ""
 
-#: src/main.c:2213
+#: src/main.c:2215
 msgid "Disable mouse support in text version"
 msgstr ""
 
-#: src/main.c:2216
+#: src/main.c:2218
 msgid "Disables subshell support"
 msgstr ""
 
-#: src/main.c:2218
+#: src/main.c:2220
 msgid "Force subshell execution"
 msgstr ""
 
-#: src/main.c:2221
+#: src/main.c:2223
 msgid "Prints working directory at program exit"
 msgstr ""
 
-#: src/main.c:2223
+#: src/main.c:2225
 msgid "Resets soft keys on HP terminals"
 msgstr ""
 
-#: src/main.c:2225
+#: src/main.c:2227
 msgid "To run on slow terminals"
 msgstr ""
 
-#: src/main.c:2228
+#: src/main.c:2230
 msgid "Use stickchars to draw"
 msgstr ""
 
-#: src/main.c:2232
+#: src/main.c:2234
 msgid "Enables subshell support (default)"
 msgstr ""
 
-#: src/main.c:2236
+#: src/main.c:2238
 msgid "Tries to use termcap instead of terminfo"
 msgstr ""
 
-#: src/main.c:2239
+#: src/main.c:2241
 msgid "Displays the current version"
 msgstr ""
 
-#: src/main.c:2241
+#: src/main.c:2243
 msgid "Launches the file viewer on a file"
 msgstr ""
 
-#: src/main.c:2243
+#: src/main.c:2245
 msgid "Forces xterm features"
 msgstr ""
 
-#: src/main.c:2433
+#: src/main.c:2435
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 
-#: src/main.c:2496
+#: src/main.c:2498
 msgid " Notice "
 msgstr ""
 
-#: src/main.c:2497
+#: src/main.c:2499
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -4298,36 +4296,3 @@ msgstr ""
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr ""
-
-#~ msgid " Macro "
-#~ msgstr " Μακροεντολή "
-
-#~ msgid " Delete Macro "
-#~ msgstr " Διαγραφή μακροεντολής "
-
-#~ msgid " Continue "
-#~ msgstr " Συνέχεια "
-
-#~ msgid " Cancel "
-#~ msgstr " ¶κυρο "
-
-#~ msgid " Search "
-#~ msgstr " Αναζήτηση "
-
-#~ msgid " Quit "
-#~ msgstr " Τέλος "
-
-#~ msgid " Insert file "
-#~ msgstr " Παρεμβολή αρχείου"
-
-#~ msgid "no"
-#~ msgstr "όχι"
-
-#~ msgid "yes"
-#~ msgstr "ναι"
-
-#~ msgid " Yes "
-#~ msgstr " Ναι "
-
-#~ msgid " No "
-#~ msgstr " Όχι "

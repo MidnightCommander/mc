@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"POT-Creation-Date: 2002-10-21 19:16-0400\n"
+"POT-Creation-Date: 2002-10-21 19:44-0400\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <hornet@navigators.lv>\n"
@@ -2929,23 +2929,19 @@ msgstr "Paldies, ka lietojât GNU Pusnakts Komandieri"
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Pusnakts Komandieris %s\n"
 
-#: src/main.c:2076
-msgid ""
-"[flags] [this_dir] [other_panel_dir]\n"
-"\n"
-msgstr ""
-"[karodziòi] [ðis_dir] [cita_paneïa_dir]\n"
-"\n"
+#: src/main.c:2078
+msgid "[flags] [this_dir] [other_panel_dir]\n"
+msgstr "[karodziòi] [ðis_dir] [cita_paneïa_dir]\n"
 
-#: src/main.c:2080
+#: src/main.c:2082
 msgid "+number"
 msgstr ""
 
-#: src/main.c:2081
+#: src/main.c:2083
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
-#: src/main.c:2083
+#: src/main.c:2085
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2956,7 +2952,7 @@ msgstr ""
 "uz mc-bugs@gnome.org\n"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#: src/main.c:2097
+#: src/main.c:2099
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2996,97 +2992,97 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2184
+#: src/main.c:2186
 msgid "Use to debug the background code"
 msgstr "Lietot, lai atkïûdotu fona kodu"
 
-#: src/main.c:2187
+#: src/main.c:2189
 msgid "Request to run in color mode"
 msgstr "Pieprasîjums darboties krâsu reþîmâ"
 
-#: src/main.c:2189
+#: src/main.c:2191
 msgid "Specifies a color configuration"
 msgstr "Nosaka krâsas konfigurâciju"
 
-#: src/main.c:2193
+#: src/main.c:2195
 msgid "Edits one file"
 msgstr "Rediìç vienu failu"
 
-#: src/main.c:2197
+#: src/main.c:2199
 msgid "Displays this help message"
 msgstr "Pârâda ðo palîdzîbas paziòojumu"
 
-#: src/main.c:2199
+#: src/main.c:2201
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Parâda palîdzîbas ekrânu par to, kâ nomainît krâsu shçmu"
 
-#: src/main.c:2202
+#: src/main.c:2204
 msgid "Log ftp dialog to specified file"
 msgstr "Iegrâmatot ftp dialogu noteiktâ failâ"
 
-#: src/main.c:2205
+#: src/main.c:2207
 msgid "Set debug level"
 msgstr ""
 
-#: src/main.c:2209
+#: src/main.c:2211
 #, fuzzy
 msgid "Print data directory"
 msgstr "direktoriju"
 
-#: src/main.c:2211
+#: src/main.c:2213
 msgid "Requests to run in black and white"
 msgstr "Pieprasa, lai darbotos melnbaltâ reþîmâ"
 
-#: src/main.c:2213
+#: src/main.c:2215
 msgid "Disable mouse support in text version"
 msgstr "Atslçdz peles atbalstu teksta reþîmâ"
 
-#: src/main.c:2216
+#: src/main.c:2218
 msgid "Disables subshell support"
 msgstr "Atslçdz zemèaulas atbalstu"
 
-#: src/main.c:2218
+#: src/main.c:2220
 #, fuzzy
 msgid "Force subshell execution"
 msgstr "uzstâd. liet. ID pie izpildes"
 
-#: src/main.c:2221
+#: src/main.c:2223
 msgid "Prints working directory at program exit"
 msgstr "Pie iezieðanas parâda darba direktoriju"
 
-#: src/main.c:2223
+#: src/main.c:2225
 msgid "Resets soft keys on HP terminals"
 msgstr "Pârslçdz mîkstos taustiòus uz HP terminâïiem"
 
-#: src/main.c:2225
+#: src/main.c:2227
 msgid "To run on slow terminals"
 msgstr "Lai palaistu uz lçniem terminâïiem"
 
-#: src/main.c:2228
+#: src/main.c:2230
 msgid "Use stickchars to draw"
 msgstr ""
 
-#: src/main.c:2232
+#: src/main.c:2234
 msgid "Enables subshell support (default)"
 msgstr "Ieslçdz zemèaulas atbalstu (noklusçtais)"
 
-#: src/main.c:2236
+#: src/main.c:2238
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Mçìina lietot termcap terminfo vietâ"
 
-#: src/main.c:2239
+#: src/main.c:2241
 msgid "Displays the current version"
 msgstr "Parâda paðreizçjo versiju"
 
-#: src/main.c:2241
+#: src/main.c:2243
 msgid "Launches the file viewer on a file"
 msgstr "Palaiþ failam failu skatîtâju"
 
-#: src/main.c:2243
+#: src/main.c:2245
 msgid "Forces xterm features"
 msgstr "Aktivizç xterm iespçjas"
 
-#: src/main.c:2433
+#: src/main.c:2435
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -3094,11 +3090,11 @@ msgstr ""
 "Nevarçja atvçrt tty lîniju. Tev jâpalaiþ mc bez -P karodziòa.\n"
 "Uz daþâm sisçmâm tu varçtu gribçt palaist # `which mc`\n"
 
-#: src/main.c:2496
+#: src/main.c:2498
 msgid " Notice "
 msgstr " Paziòojums "
 
-#: src/main.c:2497
+#: src/main.c:2499
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -4495,87 +4491,3 @@ msgstr "%s: %s: %s %3d%% (%lu baiti pârsûtîti)"
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu baiti pârsûtîti"
-
-#~ msgid " Macro "
-#~ msgstr " Makro "
-
-#~ msgid " Delete Macro "
-#~ msgstr " Dzçst Makro "
-
-#~ msgid " Continue "
-#~ msgstr " Turpinât "
-
-#~ msgid " Cancel "
-#~ msgstr " Atsaukt "
-
-#~ msgid " Search "
-#~ msgstr " Meklçt "
-
-#~ msgid " Quit "
-#~ msgstr " Iziet "
-
-#~ msgid " Insert file "
-#~ msgstr " Ievietot failu "
-
-#~ msgid " CD "
-#~ msgstr " CD "
-
-#~ msgid " Internal failure "
-#~ msgstr " Iekðçja neveiksme "
-
-#~ msgid " Unknown file operation "
-#~ msgstr " Nepazîstama faila operâcija "
-
-#~ msgid "a&ll"
-#~ msgstr "&visus"
-
-#~ msgid " Type 'yes' if you REALLY want to delete "
-#~ msgstr " Uzraksti `yes`, ja PATIEÐÂM vçlies izdzçst "
-
-#~ msgid "all the directories "
-#~ msgstr "visas direktorijas "
-
-#~ msgid " Recursive Delete "
-#~ msgstr " Dzçst Rekursîvi "
-
-#~ msgid " Background process: Recursive Delete "
-#~ msgstr " Fona process: Rekursîva Dzçðana "
-
-#~ msgid "no"
-#~ msgstr "nç"
-
-#~ msgid "yes"
-#~ msgstr "jâ"
-
-#~ msgid " Learn keys "
-#~ msgstr " Mâcîbu taustiòi "
-
-#~ msgid "name_trunc: too big"
-#~ msgstr "name_trunc: pârâk liels"
-
-#~ msgid ""
-#~ "File: \n"
-#~ "\n"
-#~ "    "
-#~ msgstr ""
-#~ "Fails: \n"
-#~ "\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "has been modified, do you want to save the changes?\n"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "ir ticis mainîts, vçlies saglabât izmaiòas?\n"
-
-#~ msgid " Save changes "
-#~ msgstr " Glabât izmaiòas "
-
-#~ msgid " Yes "
-#~ msgstr " Jâ "
-
-#~ msgid " No "
-#~ msgstr " Nç "

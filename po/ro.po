@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.55\n"
-"POT-Creation-Date: 2002-10-21 19:16-0400\n"
+"POT-Creation-Date: 2002-10-21 19:44-0400\n"
 "PO-Revision-Date: 2001-08-20 02:05+0300\n"
 "Last-Translator: Miºu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -2928,24 +2928,20 @@ msgstr "Vã mulþumim pentru cã utilizaþi GNU Midnight Commander"
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/main.c:2076
-msgid ""
-"[flags] [this_dir] [other_panel_dir]\n"
-"\n"
-msgstr ""
-"[opþiuni] [acest_dir] [celãlalt_dir]\n"
-"\n"
+#: src/main.c:2078
+msgid "[flags] [this_dir] [other_panel_dir]\n"
+msgstr "[opþiuni] [acest_dir] [celãlalt_dir]\n"
 
-#: src/main.c:2080
+#: src/main.c:2082
 #, fuzzy
 msgid "+number"
 msgstr "Numãrul Inodului"
 
-#: src/main.c:2081
+#: src/main.c:2083
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
-#: src/main.c:2083
+#: src/main.c:2085
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2957,7 +2953,7 @@ msgstr ""
 "la adresa mc-devel@gnome.org\n"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#: src/main.c:2097
+#: src/main.c:2099
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2997,97 +2993,97 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2184
+#: src/main.c:2186
 msgid "Use to debug the background code"
 msgstr "Utilizat pentru depanarea codului de fundal"
 
-#: src/main.c:2187
+#: src/main.c:2189
 msgid "Request to run in color mode"
 msgstr "Cerere de rulare în culori"
 
-#: src/main.c:2189
+#: src/main.c:2191
 msgid "Specifies a color configuration"
 msgstr "Specificã o configuraþie de culori"
 
-#: src/main.c:2193
+#: src/main.c:2195
 msgid "Edits one file"
 msgstr "Editeazã un fiºier"
 
-#: src/main.c:2197
+#: src/main.c:2199
 msgid "Displays this help message"
 msgstr "Afiºeazã un mesaj de ajutor"
 
-#: src/main.c:2199
+#: src/main.c:2201
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Afiºeazã un ecran de ajutor despre cum se schimbã schema de culori"
 
-#: src/main.c:2202
+#: src/main.c:2204
 msgid "Log ftp dialog to specified file"
 msgstr "Înregistreazã dialogul ftp în fiºierul specificat"
 
-#: src/main.c:2205
+#: src/main.c:2207
 msgid "Set debug level"
 msgstr ""
 
-#: src/main.c:2209
+#: src/main.c:2211
 #, fuzzy
 msgid "Print data directory"
 msgstr "Creeazã un nou director în directorul curent"
 
-#: src/main.c:2211
+#: src/main.c:2213
 msgid "Requests to run in black and white"
 msgstr "Cerere de rulare în alb/negru"
 
-#: src/main.c:2213
+#: src/main.c:2215
 msgid "Disable mouse support in text version"
 msgstr "Dezactiveazã suportul de mouse în versiunea text"
 
-#: src/main.c:2216
+#: src/main.c:2218
 msgid "Disables subshell support"
 msgstr "Dezactiveazã suportul subshell"
 
-#: src/main.c:2218
+#: src/main.c:2220
 #, fuzzy
 msgid "Force subshell execution"
 msgstr "setez ID propr. la exec."
 
-#: src/main.c:2221
+#: src/main.c:2223
 msgid "Prints working directory at program exit"
 msgstr "Afiºeazã directorul curent la ieºirea din program"
 
-#: src/main.c:2223
+#: src/main.c:2225
 msgid "Resets soft keys on HP terminals"
 msgstr "Reseteazã tastele soft pe terminale HP"
 
-#: src/main.c:2225
+#: src/main.c:2227
 msgid "To run on slow terminals"
 msgstr "Pentru a rula pe terminale încete"
 
-#: src/main.c:2228
+#: src/main.c:2230
 msgid "Use stickchars to draw"
 msgstr "Utilizeazã +, -, | pentru desenare"
 
-#: src/main.c:2232
+#: src/main.c:2234
 msgid "Enables subshell support (default)"
 msgstr "Activeazã suportul pentru subshell (implicit)"
 
-#: src/main.c:2236
+#: src/main.c:2238
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Încearcã sã utilizeze termcap în locul terminfo"
 
-#: src/main.c:2239
+#: src/main.c:2241
 msgid "Displays the current version"
 msgstr "Afiºeazã versiunea curentã"
 
-#: src/main.c:2241
+#: src/main.c:2243
 msgid "Launches the file viewer on a file"
 msgstr "Lanseazã vizualizatorul de fiºiere pe un fiºier"
 
-#: src/main.c:2243
+#: src/main.c:2245
 msgid "Forces xterm features"
 msgstr "Forþeazã facilitãþile xterm"
 
-#: src/main.c:2433
+#: src/main.c:2435
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -3095,11 +3091,11 @@ msgstr ""
 "Nu pot deschide linia tty. Va trebui sã rulaþi mc fãrã opþiunea -P.\n"
 "Pe unele sisteme poate veþi dori sã rulaþi # `which mc'\n"
 
-#: src/main.c:2496
+#: src/main.c:2498
 msgid " Notice "
 msgstr " Notã "
 
-#: src/main.c:2497
+#: src/main.c:2499
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -4495,87 +4491,3 @@ msgstr "%s: %s: %s %3d%% (%lu bytes transferaþi)"
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu bytes transferaþi"
-
-#~ msgid " Macro "
-#~ msgstr " Combinaþii "
-
-#~ msgid " Delete Macro "
-#~ msgstr " ªterge combinaþia  "
-
-#~ msgid " Continue "
-#~ msgstr " Continuã "
-
-#~ msgid " Cancel "
-#~ msgstr " Renunþã "
-
-#~ msgid " Search "
-#~ msgstr " Cautã "
-
-#~ msgid " Quit "
-#~ msgstr " Ieºire "
-
-#~ msgid " Insert file "
-#~ msgstr " Insereazã fiºier "
-
-#~ msgid " CD "
-#~ msgstr " CD "
-
-#~ msgid " Internal failure "
-#~ msgstr " Eºec intern "
-
-#~ msgid " Unknown file operation "
-#~ msgstr " Operaþie pe fiºier necunoscutã "
-
-#~ msgid "a&ll"
-#~ msgstr "&Toate"
-
-#~ msgid " Type 'yes' if you REALLY want to delete "
-#~ msgstr " Tastaþi 'yes' dacã CHIAR vreþi sã ºtergeþi "
-
-#~ msgid "all the directories "
-#~ msgstr "toate directoarele "
-
-#~ msgid " Recursive Delete "
-#~ msgstr " ªtergere Recursivã "
-
-#~ msgid " Background process: Recursive Delete "
-#~ msgstr " Procesul din fundal: ªtergere Recursivã "
-
-#~ msgid "no"
-#~ msgstr "nu"
-
-#~ msgid "yes"
-#~ msgstr "da"
-
-#~ msgid " Learn keys "
-#~ msgstr " Învaþã tastele "
-
-#~ msgid "name_trunc: too big"
-#~ msgstr "name_trunc: prea mare"
-
-#~ msgid ""
-#~ "File: \n"
-#~ "\n"
-#~ "    "
-#~ msgstr ""
-#~ "Fiºier: \n"
-#~ "\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "has been modified, do you want to save the changes?\n"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "a fost modificat, doriþi sã salvaþi schimbãrile?\n"
-
-#~ msgid " Save changes "
-#~ msgstr " Salvez schimbãrile "
-
-#~ msgid " Yes "
-#~ msgstr " Da "
-
-#~ msgid " No "
-#~ msgstr " Nu "

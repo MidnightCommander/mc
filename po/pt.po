@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: 2002-10-21 19:16-0400\n"
+"POT-Creation-Date: 2002-10-21 19:44-0400\n"
 "PO-Revision-Date: 2002-04-25 03:55+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
@@ -2923,23 +2923,19 @@ msgstr "Obrigado por utilizar o GNU Midnight Commander"
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/main.c:2076
-msgid ""
-"[flags] [this_dir] [other_panel_dir]\n"
-"\n"
-msgstr ""
-"[parâmetros] [este_directório] [outro_directório_painel]\n"
-"\n"
+#: src/main.c:2078
+msgid "[flags] [this_dir] [other_panel_dir]\n"
+msgstr "[parâmetros] [este_directório] [outro_directório_painel]\n"
 
-#: src/main.c:2080
+#: src/main.c:2082
 msgid "+number"
 msgstr ""
 
-#: src/main.c:2081
+#: src/main.c:2083
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
-#: src/main.c:2083
+#: src/main.c:2085
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2950,7 +2946,7 @@ msgstr ""
 "para mc-devel@gnome.org\n"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#: src/main.c:2097
+#: src/main.c:2099
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2991,97 +2987,97 @@ msgstr ""
 "   cian-vivo, cinza-suave e branco\n"
 "\n"
 
-#: src/main.c:2184
+#: src/main.c:2186
 msgid "Use to debug the background code"
 msgstr "Utilizar para depurar o código de fundo"
 
-#: src/main.c:2187
+#: src/main.c:2189
 msgid "Request to run in color mode"
 msgstr "Requerer a execução em modo de cor"
 
-#: src/main.c:2189
+#: src/main.c:2191
 msgid "Specifies a color configuration"
 msgstr "Especificar uma configuração de cor"
 
-#: src/main.c:2193
+#: src/main.c:2195
 msgid "Edits one file"
 msgstr "Edita um ficheiro"
 
-#: src/main.c:2197
+#: src/main.c:2199
 msgid "Displays this help message"
 msgstr "Mostra esta mensagem de ajuda"
 
-#: src/main.c:2199
+#: src/main.c:2201
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Mostra um ecrã de ajuda em como modificar o esquema de cores"
 
-#: src/main.c:2202
+#: src/main.c:2204
 msgid "Log ftp dialog to specified file"
 msgstr "Registar diálogo de ftp para o ficheiro especificado"
 
-#: src/main.c:2205
+#: src/main.c:2207
 msgid "Set debug level"
 msgstr ""
 
-#: src/main.c:2209
+#: src/main.c:2211
 #, fuzzy
 msgid "Print data directory"
 msgstr "directório"
 
-#: src/main.c:2211
+#: src/main.c:2213
 msgid "Requests to run in black and white"
 msgstr "Requerer que execute em modo preto e branco"
 
-#: src/main.c:2213
+#: src/main.c:2215
 msgid "Disable mouse support in text version"
 msgstr "Desabilitar suporte para rato na versão texto"
 
-#: src/main.c:2216
+#: src/main.c:2218
 msgid "Disables subshell support"
 msgstr "Desactiva suporte subterminal"
 
-#: src/main.c:2218
+#: src/main.c:2220
 #, fuzzy
 msgid "Force subshell execution"
 msgstr "definir ID de utilizador na execução"
 
-#: src/main.c:2221
+#: src/main.c:2223
 msgid "Prints working directory at program exit"
 msgstr "Imprime directório de trabalho ao sair da aplicação"
 
-#: src/main.c:2223
+#: src/main.c:2225
 msgid "Resets soft keys on HP terminals"
 msgstr "Limpa teclas de atalho nos terminais HP"
 
-#: src/main.c:2225
+#: src/main.c:2227
 msgid "To run on slow terminals"
 msgstr "Para correr em terminais lentos"
 
-#: src/main.c:2228
+#: src/main.c:2230
 msgid "Use stickchars to draw"
 msgstr "Utilizar caracteres lineares para desenhar"
 
-#: src/main.c:2232
+#: src/main.c:2234
 msgid "Enables subshell support (default)"
 msgstr "Activar suporte de subterminal (defeito)"
 
-#: src/main.c:2236
+#: src/main.c:2238
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Tenta utilizar termcap em vez do terminfo"
 
-#: src/main.c:2239
+#: src/main.c:2241
 msgid "Displays the current version"
 msgstr "Mostra a versão actual"
 
-#: src/main.c:2241
+#: src/main.c:2243
 msgid "Launches the file viewer on a file"
 msgstr "Executa o visualizador de ficheiros sobre um ficheiro"
 
-#: src/main.c:2243
+#: src/main.c:2245
 msgid "Forces xterm features"
 msgstr "Força funcionalidades xterm"
 
-#: src/main.c:2433
+#: src/main.c:2435
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -3089,11 +3085,11 @@ msgstr ""
 "Incapaz de abrir linha tty. Tem de executar o mc sem o parâmetro -P.\n"
 "Nalguns sistemas deverá querer executar # `which mc`\n"
 
-#: src/main.c:2496
+#: src/main.c:2498
 msgid " Notice "
 msgstr " Aviso "
 
-#: src/main.c:2497
+#: src/main.c:2499
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -4490,87 +4486,3 @@ msgstr "%s: %s: %s %3d%% (%lu bytes transferidos)"
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu bytes transferidos"
-
-#~ msgid " Macro "
-#~ msgstr " Macro "
-
-#~ msgid " Delete Macro "
-#~ msgstr " Apagar Macro "
-
-#~ msgid " Continue "
-#~ msgstr " Continuar "
-
-#~ msgid " Cancel "
-#~ msgstr " Cancelar "
-
-#~ msgid " Search "
-#~ msgstr " Procurar "
-
-#~ msgid " Quit "
-#~ msgstr " Sair "
-
-#~ msgid " Insert file "
-#~ msgstr " Inserir ficheiro "
-
-#~ msgid " CD "
-#~ msgstr " CD "
-
-#~ msgid " Internal failure "
-#~ msgstr " Falha interna "
-
-#~ msgid " Unknown file operation "
-#~ msgstr " Operação de ficheiro desconhecida "
-
-#~ msgid "a&ll"
-#~ msgstr "t&odos"
-
-#~ msgid " Type 'yes' if you REALLY want to delete "
-#~ msgstr " Insira 'sim' se deseja mesmo apagar "
-
-#~ msgid "all the directories "
-#~ msgstr "todos os directórios "
-
-#~ msgid " Recursive Delete "
-#~ msgstr " Apagar Recursivo "
-
-#~ msgid " Background process: Recursive Delete "
-#~ msgstr " Processo de fundo: Apagar Recursivo "
-
-#~ msgid "no"
-#~ msgstr "não"
-
-#~ msgid "yes"
-#~ msgstr "sim"
-
-#~ msgid " Learn keys "
-#~ msgstr " Aprender teclas "
-
-#~ msgid "name_trunc: too big"
-#~ msgstr "name_trunc: demasiado grande"
-
-#~ msgid ""
-#~ "File: \n"
-#~ "\n"
-#~ "    "
-#~ msgstr ""
-#~ "Ficheiro: \n"
-#~ "\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "has been modified, do you want to save the changes?\n"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "foi modificado, deseja gravar as modificações?\n"
-
-#~ msgid " Save changes "
-#~ msgstr " Gravar alterações "
-
-#~ msgid " Yes "
-#~ msgstr " Sim "
-
-#~ msgid " No "
-#~ msgstr " Não "
