@@ -615,6 +615,7 @@ gnome_filter_cmd (GtkWidget *widget, WPanel *panel)
 	}
 	gtk_widget_destroy (filter_dlg);
 }
+
 void
 gnome_open_files (GtkWidget *widget, WPanel *panel)
 {
@@ -647,8 +648,16 @@ gnome_open_files (GtkWidget *widget, WPanel *panel)
 	g_list_free (later);
 	   
 }
+
 void
 gnome_run_new (GtkWidget *widget, GnomeDesktopEntry *gde)
 {
 	gnome_desktop_entry_launch (gde);
 }
+
+void
+gnome_mkdir_cmd (GtkWidget *widget, WPanel *panel)
+{
+	mkdir_cmd (panel);
+}
+

@@ -282,7 +282,7 @@ GtkCheckMenuItem *gnome_toggle_snap (void);
 GnomeUIInfo gnome_panel_new_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("_Terminal"), N_("Launch a new terminal in the current directory"), NULL},
 	/* If this ever changes, make sure you update create_new_menu accordingly. */
-	{ GNOME_APP_UI_ITEM, N_("_Directory..."), N_("Creates a new directory"), mkdir_cmd },
+	{ GNOME_APP_UI_ITEM, N_("_Directory..."), N_("Creates a new directory"), gnome_mkdir_cmd },
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 
@@ -441,72 +441,77 @@ static TbItems tb_items[] =
 
 static GtkWidget *create_toolbar (GtkWidget * window, GtkWidget *widget)
 {
-    GtkWidget *toolbar;
-    TbItems *t;
-    toolbar = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
-    for (t = &tb_items[0]; t->text; t++) {
-	t->widget = gtk_toolbar_append_item (GTK_TOOLBAR (toolbar),
-					     t->text,
+	GtkWidget *toolbar;
+	TbItems *t;
+	
+	toolbar = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
+	
+	for (t = &tb_items[0]; t->text; t++){
+		t->widget = gtk_toolbar_append_item (GTK_TOOLBAR (toolbar),
+						     t->text,
 					     t->tooltip,
-					     0,
-			     gnome_stock_pixmap_widget (window, t->icon),
-					     t->cb,
-					     t->cb ? widget : 0);
-    }
-    return toolbar;
+						     0,
+						     gnome_stock_pixmap_widget (window, t->icon),
+						     t->cb,
+						     t->cb ? widget : 0);
+	}
+	return toolbar;
 }
+
 static void
-create_new_menu (GnomeApp *app, WPanel *panel)
+create_new_menu_from (GnomeApp *app, WPanel *panel, char *file)
 {
 	gint pos;
 	GtkWidget *shell = NULL;
-	gchar *file, *file2, *test;
 	DIR *dir;
 	struct stat filedata;
 	struct dirent *dirstruc;
 	GnomeDesktopEntry *gde;
 	GtkWidget *menu;
+	char *file2;
 	
-	/* what do we insert???  We check ${PREFIX}/share/gmc/templates for all .desktop files.
-	 * We then add them to the menu, calling their exec script to launch the new app. */
-	file = gnome_datadir_file ("mc/templates");
-	if (file == NULL) {
-		return;
-	}
-
 	dir = opendir (file);
-	if (dir == NULL) {
-		g_free (file);
+	if (dir == NULL)
 		return;
-	}
-	
 	
 	shell = gnome_app_find_menu_pos (app->menubar, _("File/New/Directory..."), &pos);
 	menu = gtk_menu_item_new ();
 	gtk_widget_show (menu);
 	gtk_menu_shell_insert (GTK_MENU_SHELL (shell), menu, pos++);
 
-	if (shell == NULL)
+	if (shell == NULL){
+		closedir (dir);
 		return;
-	while ((dirstruc = readdir (dir)) != NULL) {
+	}
+
+	while ((dirstruc = readdir (dir)) != NULL){
 		if (dirstruc->d_name[0] == '.')
 			continue;
+
 		file2 = g_concat_dir_and_file (file, dirstruc->d_name);
-		if ((stat (file2, &filedata) != -1) && (S_ISREG (filedata.st_mode))) {
+
+		if ((stat (file2, &filedata) != -1) && (S_ISREG (filedata.st_mode))){
+			char *test;
+			
 			gde = gnome_desktop_entry_load (file2);
+
 			test = rindex(dirstruc->d_name, '.');
-			if (test == NULL || gde == NULL || strcmp (test, ".desktop")) {
+
+			if (test == NULL || gde == NULL || strcmp (test, ".desktop")){
 				g_free (file2);
 				continue;
 			}
-			if (!gnome_is_program_in_path (gde->tryexec)) {
+
+			if (!gnome_is_program_in_path (gde->tryexec)){
 				g_free (file2);
 				g_print ("yes!\n");
 				continue;
 			}
+			
 			menu = gtk_menu_item_new_with_label (gde->name);
 			gtk_widget_show (menu);
 			gtk_menu_shell_insert (GTK_MENU_SHELL (shell), menu, pos++);
+
 			/* This is really bad, but it works. */
 			if (gde->comment)
 				gtk_object_set_data (GTK_OBJECT (menu), "apphelper_statusbar_hint",
@@ -517,6 +522,29 @@ create_new_menu (GnomeApp *app, WPanel *panel)
 		g_free (file2);
 	}
 }
+
+/**
+ * create_new_menu:
+ *
+ * Creates the child New menu items
+ */
+static void
+create_new_menu (GnomeApp *app, WPanel *panel)
+{
+	gchar *file, *file2;
+
+	file = gnome_unconditional_datadir_file ("mc/templates");
+	create_new_menu_from (app, panel, file);
+	
+	file2 = gnome_datadir_file ("mc/templates");
+	if (file2 != NULL){
+		if (strcmp (file, file2) != 0)
+			create_new_menu_from (app, panel, file2);
+	}
+	g_free (file);
+	g_free (file2);
+}
+
 WPanel *
 create_container (Dlg_head *h, char *name, char *geometry)
 {

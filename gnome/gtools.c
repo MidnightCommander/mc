@@ -79,7 +79,7 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 
 	result = gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
 
-	g_slist_foreach (allocated, g_free, NULL);
+	g_slist_foreach (allocated, (GFunc) g_free, NULL);
 	g_slist_free (allocated);
 	g_free (buttons);
 	
