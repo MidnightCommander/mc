@@ -2442,7 +2442,7 @@ edit_ext_cmd (WEdit *edit)
     	goto cleanup;
     }
 
-    if (edit_block_delete_cmd (edit) != 0)
+    if (block != NULL && edit_block_delete_cmd (edit) != 0)
         goto cleanup;
 
     if (outbuf.data != NULL) {
