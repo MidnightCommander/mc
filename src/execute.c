@@ -174,26 +174,25 @@ do_execute (const char *shell, const char *command, int flags)
 void
 shell_execute (const char *command, int flags)
 {
-    char *cmd;
+    char *cmd = NULL;
 
-    if(flags & EXECUTE_HIDE) {
+    if (flags & EXECUTE_HIDE) {
 	cmd = g_strconcat (" ", command, (char *) NULL);
 	flags ^= EXECUTE_HIDE;
-    } else
-	cmd = g_strdup(command);
+    }
 
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (use_subshell)
 	if (subshell_state == INACTIVE)
-	    do_execute (shell, cmd, flags | EXECUTE_AS_SHELL);
+	    do_execute (shell, cmd ? cmd : command, flags | EXECUTE_AS_SHELL);
 	else
 	    message (1, MSG_ERROR,
 		     _(" The shell is already running a command "));
     else
 #endif				/* HAVE_SUBSHELL_SUPPORT */
-	do_execute (shell, cmd, flags | EXECUTE_AS_SHELL);
+	do_execute (shell, cmd ? cmd : command, flags | EXECUTE_AS_SHELL);
 
-    g_free(cmd);
+    g_free (cmd);
 }
 
 
