@@ -1,6 +1,6 @@
 context default
     keyword : brightred/18
-    keyword . brightwhite/Orange
+    keyword . white/Orange
     keyword > yellow/24
     keyword < yellow/24
     keyword \+ yellow/24

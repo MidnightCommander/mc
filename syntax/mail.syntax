@@ -3,11 +3,11 @@ context default
     keyword linestart From:
     keyword linestart From brightred/18
 context exclusive linestart From\s \n\n white/25 red/9
-    keyword <*@*> brightwhite/26
+    keyword <*@*> white/26
 
 wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_01234567890.-
 wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_01234567890.-
-    keyword whole +@+ brightwhite/26
+    keyword whole +@+ white/26
     keyword linestart To: magenta/23
     keyword linestart From: green/6
     keyword linestart Subject: brightred/Orange
