@@ -622,7 +622,7 @@ create_new_menu (GnomeApp *app, WPanel *panel)
 	gint pos;
 	GtkWidget *shell;
 
-	shell = gnome_app_find_menu_pos (app->menubar, _("File/New/Directory..."), &pos);
+	shell = gnome_panel_new_menu[0].widget->parent;
 
 	file = gnome_unconditional_datadir_file ("mc/templates");
 	pos = create_new_menu_from (file, shell, pos);

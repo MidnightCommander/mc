@@ -1,3 +1,9 @@
+2001-07-24  Pavel Roskin  <proski@gnu.org>
+
+	* glayout.c (create_new_menu): Use fixed meny position instead
+	of gnome_app_find_menu_pos() - the later is not reliable and
+	breaks in many locales.
+
 2001-07-20  Pavel Roskin  <proski@gnu.org>
 
 	* gconf.h: Remove some unused defines.
