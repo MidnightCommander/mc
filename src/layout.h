@@ -11,7 +11,6 @@ void destroy_panels (void);
 void move_resize_panel (void);
 void flag_winch (int dummy);
 void change_screen_size (void);
-void layout_change (void);
 void set_display_type (int num, int type);
 void swap_panels (void);
 int get_display_type (int index);

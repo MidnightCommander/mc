@@ -1261,7 +1261,7 @@ dirsizes_cmd (void)
 	}
 	
     recalculate_panel_summary (panel);
-    paint_panel (panel);
+    panel->dirty = 1;
 }
 
 void

@@ -789,7 +789,7 @@ panel_update_contents (WPanel *panel)
 }
 
 /* Repaint everything, including frame and separator */
-void
+static void
 paint_panel (WPanel *panel)
 {
     paint_frame (panel);

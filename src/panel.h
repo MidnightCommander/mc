@@ -85,9 +85,7 @@ extern int show_mini_info;
 extern int panel_scroll_pages;
 extern int fast_reload;
 
-void paint_panel          (WPanel *panel);
 void panel_reload         (WPanel *panel);
-
 void panel_set_sort_order (WPanel *panel, sortfn *sort_order);
 void panel_re_sort        (WPanel *panel);
 

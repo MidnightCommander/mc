@@ -485,15 +485,16 @@ init_layout (void)
     radio_widget->sel = horizontal_split;
 }
 
-void layout_change (void)
+static void
+layout_change (void)
 {
     setup_panels ();
     layout_do_change = 0;
     /* re-init the menu, because perhaps there was a change in the way 
-	how the panel are split (horizontal/vertical). */
-    done_menu();
-    init_menu();
-    menubar_arrange(the_menubar);
+       how the panel are split (horizontal/vertical). */
+    done_menu ();
+    init_menu ();
+    menubar_arrange (the_menubar);
 }
 
 void layout_cmd (void)

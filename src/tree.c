@@ -879,7 +879,6 @@ chdir_sel (WTree *tree)
     }
     change_panel ();
     if (do_cd (tree->selected_ptr->name, cd_exact)) {
-	paint_panel (cpanel);
 	select_item (cpanel);
     } else {
 	message (1, MSG_ERROR, _(" Cannot chdir to \"%s\" \n %s "),

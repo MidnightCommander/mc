@@ -1,5 +1,10 @@
 2003-09-10  Pavel Roskin  <proski@gnu.org>
 
+	* layout.c (layout_change): Make static.
+	* screen.c (paint_panel): Likewise.
+	* cmd.c (dirsizes_cmd): Use dirty flag.
+	* tree.c (chdir_sel): Don't call paint_panel().
+
 	* find.c: Remove useless calls to paint_panel().
 	* panelize.c: Likewise.
 
