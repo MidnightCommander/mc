@@ -2141,7 +2141,7 @@ msgid ""
 "\n"
 " Group not empty.\n"
 " Remove it?"
-msgstr " Groupe non-vide.\n"
+msgstr "\n Groupe non-vide.\n"
 " L'enlever quand-même?"
 
 #: src/hotlist.c:1230
