@@ -1,3 +1,10 @@
+2001-07-15  Pavel Roskin  <proski@gnu.org>
+
+	* vfs/smbfs.c: Rename authinfo to smb_authinfo and
+	authinfo_get_authinfo_from_user() to vfs_smb_get_authinfo()
+	and remove their definitions.
+	* vfs/vfs.h: Declare smb_authinfo and vfs_smb_get_authinfo().
+
 2001-07-10  Pavel Roskin  <proski@gnu.org>
 
 	* extfs.c: Include contents of shared_tar_ext.c - it's no

@@ -349,6 +349,22 @@ extern void vfs_die (char *msg);
 extern char *vfs_get_password (char *msg);
 extern char *vfs_split_url (char *path, char **host, char **user, int *port, char **pass,
 					int default_port, int flags);
+
+#ifdef WITH_SMBFS
+/* Interface for requesting SMB credentials.  */
+struct smb_authinfo {
+    char *host;
+    char *share;
+    char *domain;
+    char *user;
+    char *password;
+};
+
+struct smb_authinfo *
+vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
+		      const char *user);
+#endif /* WITH_SMBFS */
+
 #define URL_DEFAULTANON 1
 #define URL_NOSLASH 2
 extern void vfs_print_stats (char *fs_name, char *action, char *file_name, int have, int need);
