@@ -628,7 +628,7 @@ static void *extfs_open (vfs *me, char *file, int flags, int mode)
 	free (q);
 	free (mc_extfsdir);
 	free (archive_name);
-        if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID, shell, cmd) && !do_create){
+        if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID | EXECUTE_WAIT, shell, cmd) && !do_create){
             free (entry->inode->local_filename);
             entry->inode->local_filename = NULL;
             free (cmd);
@@ -690,7 +690,7 @@ static int extfs_close (void *data)
 			    file->entry->inode->local_filename, 0);
 	free (archive_name);
 	free (file_name);
-	if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID, shell, cmd))
+	if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID | EXECUTE_WAIT, shell, cmd))
 	    errno_code = EIO;
 	free (cmd);
 	free (mc_extfsdir);
