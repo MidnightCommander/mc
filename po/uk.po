@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.5.40\n"
-"POT-Creation-Date: 2000-11-08 15:38+0200\n"
-"PO-Revision-Date: 1999-11-25 12:24+0200\n"
+"Project-Id-Version: mc 4.5.51\n"
+"POT-Creation-Date: 2000-11-20 16:46+0200\n"
+"PO-Revision-Date: 2000-11-08 15:38+0200\n"
 "Last-Translator: Yuri Syrota <rasta@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -188,7 +188,7 @@ msgstr "Запустити команду"
 #. Frame 1
 #: gnome/gcmd.c:560
 msgid "Preset Commands"
-msgstr "Затован╕ команди"
+msgstr "Заготован╕ команди"
 
 #. add add/remove buttons in center
 #: gnome/gcmd.c:577 gnome/gcustom-layout.c:183
@@ -235,7 +235,7 @@ msgstr ""
 
 #: gnome/gcmd.c:746
 msgid "Enter a Regular Expression to filter files in the panel view."
-msgstr "Введ╕ть регулярний вираз для ф╕льтрування файл╕в у панел╕."
+msgstr "Введ╕ть ре╜улярний вираз для ф╕льтрування файл╕в у панел╕."
 
 #: gnome/gcmd.c:806
 msgid " Open with..."
@@ -271,7 +271,7 @@ msgstr ""
 
 #: gnome/gcmd.c:959 src/cmd.c:543 src/cmd.c:594
 msgid "  Malformed regular expression  "
-msgstr " Погано сформований регулярний вираз "
+msgstr " Погано сформований ре╜улярний вираз "
 
 #: gnome/gcmd.c:1004
 msgid "Creating a desktop link"
@@ -521,7 +521,7 @@ msgid ""
 "Some of the files you are trying to copy already exist in the destination "
 "folder.  Please select the action to be performed."
 msgstr ""
-"Деяк╕ файли, що ви пробу╓те скоп╕ювати вже ╕снують у фолдер╕ призначення. "
+"Деяк╕ файли, що ви пробу╓те скоп╕ювати вже ╕снують у каталоз╕ призначення. "
 "Будь ласка, вибер╕ть одну ╕з запропонованих д╕й."
 
 #: gnome/gdialogs.c:399
@@ -588,7 +588,7 @@ msgstr "Додатков╕ параметри"
 
 #: gnome/gdialogs.c:633
 msgid "Preserve symlinks"
-msgstr "Збер╕гати символьн╕ посиланя"
+msgstr "Збер╕гати символьн╕ посилання"
 
 #: gnome/gdialogs.c:643
 msgid "Follow links."
@@ -676,7 +676,7 @@ msgstr "Символьне посилання"
 
 #: gnome/gdialogs.c:1055 src/boxes.c:803
 msgid "Existing filename (filename symlink will point to):"
-msgstr "Назва ╕снуючого файу (на який буде вазувати посилання):"
+msgstr "Назва ╕снуючого файлу (на який буде вказувати посилання):"
 
 #: gnome/gdialogs.c:1069 src/boxes.c:801
 msgid "Symbolic link filename:"
@@ -786,7 +786,7 @@ msgstr "Файл..."
 
 #: gnome/glayout.c:372
 msgid "Creates a new file in this directory"
-msgstr "Створини новий файл в цьому каталоз╕"
+msgstr "Створити новий файл в цьому каталоз╕"
 
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
 #: gnome/glayout.c:393 gnome/gscreen.c:2118
@@ -859,7 +859,7 @@ msgstr "Пошук"
 
 #: gnome/glayout.c:412
 msgid "Search for a file in the current Panel"
-msgstr "Шувати файл в поточн╕й панел╕"
+msgstr "Шукати файл в поточн╕й панел╕"
 
 #: gnome/glayout.c:415 gnome/gscreen.c:1428 gnome/gscreen.c:1439
 msgid "_Rescan Directory"
@@ -1346,7 +1346,7 @@ msgstr "Коп╕ювання..."
 
 #: gnome/gpopup2.c:292
 msgid "Move to Trash"
-msgstr "Перенсти в см╕тник"
+msgstr "Перенести в см╕тник"
 
 #: gnome/gpopup2.c:293 gtkedit/editwidget.c:1144 src/screen.c:2400
 #: src/screen.c:2430
@@ -1639,11 +1639,11 @@ msgstr "Мон╕торинг зб╕льшення файлу"
 
 #: gnome/gview.c:316
 msgid "Regexp search"
-msgstr "Пошук за регулярним виразом"
+msgstr "Пошук за ре╜улярним виразом"
 
 #: gnome/gview.c:317
 msgid "Regular expression search"
-msgstr "Пошук за регулярним виразом"
+msgstr "Пошук за ре╜улярним виразом"
 
 #: gnome/gview.c:326
 msgid "_Wrap"
@@ -1709,7 +1709,7 @@ msgstr "Не вдалось отримати робочий ст╕л\n"
 #: gnome/gmc-client.c:142
 #, c-format
 msgid "Unknown arrange type `%s'\n"
-msgstr ""
+msgstr "Нев╕домий тип впорядкування - \"%s\"\n"
 
 #: gnome/gmc-client.c:206
 msgid "Create window showing the specified directory"
@@ -2000,7 +2000,7 @@ msgstr "Назад"
 
 #: gtkedit/editcmd.c:1252 gtkedit/editcmd.c:1333
 msgid "&Regular expression"
-msgstr "Регулярний вираз"
+msgstr "Ре╜улярний вираз"
 
 #: gtkedit/editcmd.c:1254 gtkedit/editcmd.c:1335
 msgid "&Whole words only"
@@ -2050,7 +2050,7 @@ msgid ""
 "You can enter regexp substrings with %s\n"
 "(not \\1, \\2 like sed) then use \"Enter...order\""
 msgstr ""
-"Ви можете ввести регулярний вираз з %s\n"
+"Ви можете ввести ре╜улярний вираз з %s\n"
 "(не \\1, \\2 як в sed), пот╕м використати \"Ввести...порядок\""
 
 #: gtkedit/editcmd.c:1422
@@ -2073,11 +2073,11 @@ msgstr " Лише слова "
 
 #: gtkedit/editcmd.c:1434
 msgid " Case sensitive "
-msgstr " Чутлив╕ть до рег╕стру "
+msgstr " Чутлив╕сть до ре╜╕стру "
 
 #: gtkedit/editcmd.c:1437
 msgid " Regular expression "
-msgstr " Регулярний вираз "
+msgstr " Ре╜улярний вираз "
 
 #: gtkedit/editcmd.c:1438 gtkedit/editcmd.c:1439
 msgid ""
@@ -2463,7 +2463,7 @@ msgstr "&Перейти на рядок             M-l"
 
 #: gtkedit/editmenu.c:215 gtkedit/editmenu.c:238
 msgid "goto matching &Bracket   M-b"
-msgstr ""
+msgstr "Перейти до в╕дпов╕дно╖ дужки  M-b"
 
 #: gtkedit/editmenu.c:217 gtkedit/editmenu.c:240
 msgid "insert &Literal...       C-q"
@@ -2680,7 +2680,7 @@ msgstr "Перейти на рядок...\tM-l"
 
 #: gtkedit/editmenu.c:467
 msgid "Goto matching bracket\tM-b"
-msgstr ""
+msgstr "Перейти на в╕дпов╕дну дужку\tM-b"
 
 #: gtkedit/editmenu.c:469
 msgid "Start record macro\tC-r"
@@ -2729,7 +2729,7 @@ msgstr "Нема╓"
 
 #: gtkedit/editoptions.c:39
 msgid "Dynamic paragraphing"
-msgstr ""
+msgstr "Динам╕чн╕ абзаци"
 
 #: gtkedit/editoptions.c:39
 msgid "Type writer wrap"
@@ -2738,7 +2738,7 @@ msgstr ""
 #. 2
 #: gtkedit/editoptions.c:72
 msgid "Word wrap line length : "
-msgstr "Позиция обриву рядк╕в : "
+msgstr "Позиц╕я обриву рядк╕в: "
 
 #. 4
 #: gtkedit/editoptions.c:78
@@ -2848,35 +2848,35 @@ msgstr ""
 
 #: gtkedit/gtkedit.c:1251
 msgid "Replc"
-msgstr ""
+msgstr "Зам╕нити"
 
 #: gtkedit/gtkedit.c:1251
 msgid "Find and replace strings/regular expressions"
-msgstr ""
+msgstr "Знайти та зам╕нити рядок чи ре╜улярний вираз"
 
 #: gtkedit/gtkedit.c:1252
 msgid "Copy highlighted block to cursor position"
-msgstr ""
+msgstr "Скоп╕ювати вид╕лений блок в позиц╕ю курсора"
 
 #: gtkedit/gtkedit.c:1254
 msgid "Move highlighted block to cursor position"
-msgstr ""
+msgstr "Перенести вид╕лений блок в позиц╕ю курсора"
 
 #: gtkedit/gtkedit.c:1255
 msgid "Find"
-msgstr ""
+msgstr "Знайти"
 
 #: gtkedit/gtkedit.c:1255
 msgid "Find strings/regular expressions"
-msgstr ""
+msgstr "Знайти рядок чи ре╜улярний вираз"
 
 #: gtkedit/gtkedit.c:1256
 msgid "Dlete"
-msgstr ""
+msgstr "Стерти"
 
 #: gtkedit/gtkedit.c:1256
 msgid "Delete highlighted text"
-msgstr ""
+msgstr "Стерти вид╕линий текст"
 
 #: gtkedit/gtkedit.c:1257 src/main.c:1736 src/screen.c:2394 src/screen.c:2424
 msgid "Menu"
@@ -2892,7 +2892,7 @@ msgstr "Вийти з редактора"
 
 #: gtkedit/gtkedit.c:1292
 msgid "Clear the edit buffer"
-msgstr ""
+msgstr "Очистити буфер редагування"
 
 #: gtkedit/gtkedit.c:1297
 msgid "Insert File"
@@ -3052,7 +3052,7 @@ msgstr " Помилка процесу на тл╕ "
 
 #: src/background.c:280
 msgid " Child died unexpectedly "
-msgstr ""
+msgstr " Зб╕й спадко╓много процесу "
 
 #: src/background.c:282
 msgid " Unknown error in child "
@@ -3728,10 +3728,12 @@ msgid ""
 " Can't create temporary command file \n"
 " %s "
 msgstr ""
+" Неможливо створити тимчасовий командкий файл \n"
+" %s "
 
 #: src/ext.c:165 src/user.c:578
 msgid " Parameter "
-msgstr ""
+msgstr " Параметр "
 
 #: src/ext.c:315
 msgid " Can't execute commands on a Virtual File System directory "
@@ -3901,7 +3903,7 @@ msgstr ""
 
 #: src/file.c:342
 msgid " Could not make the hardlink "
-msgstr ""
+msgstr " Не вдалося створити жорстке посилання "
 
 #: src/file.c:384
 #, c-format
@@ -4017,6 +4019,8 @@ msgid ""
 " Cannot write target file \"%s\" \n"
 " %s "
 msgstr ""
+" Неможливо записати файл призначення \"%s\" \n"
+" %s "
 
 #: src/file.c:745
 msgid "(stalled)"
@@ -4035,10 +4039,12 @@ msgid ""
 " Cannot close target file \"%s\" \n"
 " %s "
 msgstr ""
+" Неможливо закрити файл призначення \"%s\" \n"
+" %s "
 
 #: src/file.c:802
 msgid "Incomplete file was retrieved. Keep it?"
-msgstr ""
+msgstr "Отримано неповний файл. Залашата його?"
 
 #: src/file.c:803
 msgid "&Delete"
@@ -4267,7 +4273,7 @@ msgid ""
 " Destination \"%s\" must be a directory \n"
 " %s "
 msgstr ""
-" М╕сце призачення \"%s\" мусить бути каталогом \n"
+" М╕сце призначення \"%s\" мусить бути каталогом \n"
 " %s "
 
 #: src/file.c:2190
@@ -4961,14 +4967,14 @@ msgid ""
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
 msgstr ""
-"Будь ласка натисн╕ть клавишу %s\n"
+"Будь ласка натисн╕ть клав╕шу %s\n"
 "╕ почекайте, доки це пов╕домлення не зникне.\n"
 "\n"
 "Пот╕м натисн╕ть ╖╖ ще раз, щоб пересв╕дчитись,\n"
 "що справа в╕д ╖╖ назви з'явилась позначка √.\n"
 "\n"
 "Якщо ви хочете припинити розп╕знавання, натисн╕ть\n"
-"клавишу Esc ╕ теж тр╕шки почекайте."
+"клав╕шу Esc ╕ теж тр╕шки зачекайте."
 
 #: src/learn.c:122
 msgid " Cannot accept this key "
@@ -5009,7 +5015,7 @@ msgstr "Розп╕знавання клав╕ш"
 
 #: src/learn.c:300
 msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr "Натисн╕ть вс╕ перерахован╕ вище клав╕ш╕. Посля натиснень знайд╕ть,"
+msgstr "Натисн╕ть вс╕ перерахован╕ вище клав╕ш╕. П╕сля натиснень знайд╕ть,"
 
 #: src/learn.c:302
 msgid "which keys are not marked with OK.  Press space on the missing"
@@ -5476,7 +5482,7 @@ msgstr "Вимога на виконання у чорноб╕лому режим╕"
 
 #: src/main.c:2721
 msgid "Disable mouse support in text version"
-msgstr "Вимкнення п╕дтримки м╕ш╕ в текстов╕й верс╕╖"
+msgstr "Вимкнення п╕дтримки миш╕ в текстов╕й верс╕╖"
 
 #: src/main.c:2724
 msgid "Disables subshell support"
@@ -6046,7 +6052,7 @@ msgstr " Рядок незнайдено "
 
 #: src/view.c:1789
 msgid " Invalid regular expression "
-msgstr " Нев╕рний регулярний вираз "
+msgstr " Нев╕рний ре╜улярний вираз "
 
 #: src/view.c:1913
 #, c-format
@@ -6072,11 +6078,11 @@ msgstr " Перех╕д за адресою "
 
 #: src/view.c:1968
 msgid " Enter regexp:"
-msgstr " Введ╕ть регулярний вираз:"
+msgstr " Введ╕ть ре╜улярний вираз:"
 
 #: src/view.c:2073
 msgid "Ascii"
-msgstr "Ascii"
+msgstr "ASCII"
 
 #: src/view.c:2073
 msgid "Hex"
@@ -6512,11 +6518,11 @@ msgstr " Прокс╕: Необх╕дний пароль для "
 
 #: vfs/ftpfs.c:426
 msgid "ftpfs: sending proxy login name"
-msgstr "ftpfs: в╕дсилання назви користува прокс╕"
+msgstr "ftpfs: в╕дсилання назви користувача прокс╕"
 
 #: vfs/ftpfs.c:430
 msgid "ftpfs: sending proxy user password"
-msgstr "ftpfs: в╕дсилання паролю користува прокс╕"
+msgstr "ftpfs: в╕дсилання паролю користувача прокс╕"
 
 #: vfs/ftpfs.c:434
 msgid "ftpfs: proxy authentication succeeded"
@@ -6641,7 +6647,7 @@ msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
 msgstr ""
-"Файл ~/.netrc ма╓ нев╕рний режим досту/волод╕ння.\n"
+"Файл ~/.netrc ма╓ нев╕рний режим доступу/волод╕ння.\n"
 "Видал╕ть пароль чи виправте режим доступу/волод╕ння."
 
 #: vfs/mcfs.c:156 vfs/mcfs.c:178 vfs/mcfs.c:204
