@@ -9,13 +9,11 @@ AM_INIT_AUTOMAKE(mc, 4.5.54)
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
 
-AC_PROG_MAKE_SET
 AC_PROG_CC
 AC_PROG_CPP
 AC_PROG_RANLIB
 AC_PROG_LN_S
 AC_PROG_AWK
-AC_PROG_GNU_MAKE
 
 AC_AIX
 AC_MINIX
@@ -911,20 +909,8 @@ AC_SUBST(MCCPPFLAGS)
 AC_SUBST(LDFLAGS)
 AC_SUBST(LIBS)
 
-ac_cv_make_with_percent_rules=no
-if test x$ac_cv_prog_gnu_make = xyes; then
-    ac_cv_make_with_percent_rules=yes
-fi
-
 MCF=./Make.common
 AC_SUBST_FILE(MCF)
-
-if test x$ac_cv_make_with_percent_rules = xyes; then
-    PCENTRULE=""
-else
-    PCENTRULE="#"
-fi
-AC_SUBST(PCENTRULE)
 
 dnl
 dnl Output configuration files

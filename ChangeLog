@@ -1,5 +1,11 @@
 2001-05-27  Pavel Roskin  <proski@gnu.org>
 
+	* Make.common.in: Remove all percent rules.
+	* acinclude.m4 (AC_PROG_GNU_MAKE): Remove.
+	* configure.in: Remove AC_PROG_GNU_MAKE. Don't substitute
+	PCENTRULE. Remove AC_PROG_MAKE_SET - it's called by
+	AM_INIT_AUTOMAKE.
+
 	* Make.common.in: Remove obsolete dependency tracking system.
 	* configure.in: Likewise.
 	* edit/Makefile.in: Likewise.

@@ -430,31 +430,6 @@ fi
 rm -f conftest*]
 )
 
-dnl Find if make is GNU make.
-AC_DEFUN([AC_PROG_GNU_MAKE],
-[AC_MSG_CHECKING([whether we are using GNU make])
-set dummy ${MAKE-make}; ac_make=[$]2
-AC_CACHE_VAL(ac_cv_prog_gnu_make,
-[cat > conftestmake <<\EOF
-all:
-	@echo ' '
-EOF
-if ${MAKE-make} --version -f conftestmake 2>/dev/null | grep GNU >/dev/null 2>&1; then
-  ac_cv_prog_gnu_make=yes
-else
-  ac_cv_prog_gnu_make=no
-fi
-rm -f conftestmake])dnl
-if test $ac_cv_prog_gnu_make = yes; then
-  AC_MSG_RESULT(yes)
-  GNU_MAKE="GNU_MAKE=yes"
-else
-  AC_MSG_RESULT(no)
-  GNU_MAKE= 
-fi
-AC_SUBST([GNU_MAKE])dnl
-])
-
 AC_DEFUN([AC_USE_SUNOS_CURSES], [
 	search_ncurses=false
 	screen_manager="SunOS 4.x /usr/5include curses"

@@ -2,13 +2,6 @@ VERSION = @VERSION@
 
 SHELL = @SHELL@
 
-# This variable makes it possible to move the installation root to another
-# directory. This is useful when you're creating a binary distribution of mc.
-# If empty, normal root will be used.
-# You can run e.g. 'make install DESTDIR=/packages/mc/5.0' to accomplish
-# that.
-# DESTDIR = /opt/apps/mc/$(VERSION)
-
 # Installation target directories & other installation stuff
 prefix = @prefix@
 exec_prefix = @exec_prefix@
@@ -84,15 +77,9 @@ first_rule: all
 
 .PHONY: all check cross TAGS clean install uninstall distcopy depend
 
-@PCENTRULE@../slang/%.o : ../slang/%.c
-@PCENTRULE@	cd ../slang; $(MAKE) libmcslang.a
-
-@PCENTRULE@../vfs/%.o : ../vfs/%.c
-@PCENTRULE@	cd ../vfs; $(MAKE) libvfs.a
-
 dummy:
 
-# Added for compatability with Automake
+# Added for compatibility with Automake
 dvi:
 
 installcheck:
