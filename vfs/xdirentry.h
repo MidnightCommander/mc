@@ -82,18 +82,18 @@ struct vfs_s_super {
 	    int use_passive_connection;
 	    int remote_is_amiga;	/* No leading slash allowed for AmiTCP (Amiga) */
 	    int isbinary;
-	    int cwd_defered;	/* current_directory was changed but CWD command hasn't
+	    int cwd_deferred;	/* current_directory was changed but CWD command hasn't
 				   been sent yet */
 	    int strict;		/* ftp server doesn't understand 
 				   "LIST -la <path>"; use "CWD <path>"/
 				   "LIST" instead */
-	    int control_connection_buzy;
+	    int ctl_connection_busy;
 	} ftp;
 	struct {
 	    int fd;
 	    struct stat st;
 	    int type;		/* Type of the archive */
-	    struct defer_inode *defered;	/* List of inodes for which another entries may appear */
+	    struct defer_inode *deferred;	/* List of inodes for which another entries may appear */
 	} arch;
     } u;
 };

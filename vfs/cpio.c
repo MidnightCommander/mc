@@ -426,7 +426,7 @@ static int cpio_create_entry(struct vfs_class *me, struct vfs_s_super *super, st
 	i.inumber = stat->st_ino;
 	i.device = stat->st_dev;
 	i.inode = NULL;
-	if((l = defer_find(super->u.arch.defered, &i)) != NULL) {
+	if((l = defer_find(super->u.arch.deferred, &i)) != NULL) {
 	    inode = l->inode;
 	    if(inode->st.st_size && stat->st_size && (inode->st.st_size != stat->st_size)) {
 		message_3s(1, MSG_ERROR, _("Inconsistent hardlinks of\n%s\nin cpio archive\n%s"),
@@ -474,8 +474,8 @@ static int cpio_create_entry(struct vfs_class *me, struct vfs_s_super *super, st
 		i->inumber = stat->st_ino;
 		i->device = stat->st_dev;
 		i->inode = inode;
-		i->next = super->u.arch.defered;
-		super->u.arch.defered = i;
+		i->next = super->u.arch.deferred;
+		super->u.arch.deferred = i;
 	    }
 	}
 	

@@ -1027,7 +1027,7 @@ linear_abort (struct vfs_class *me, struct vfs_s_fh *fh)
     char buf[1024];
     int dsock = FH_SOCK;
     FH_SOCK = -1;
-    SUP.control_connection_buzy = 0;
+    SUP.ctl_connection_busy = 0;
 
     print_vfs_message (_("ftpfs: aborting transfer."));
     if (send (SUP.sock, ipbuf, sizeof (ipbuf), MSG_OOB) != sizeof (ipbuf)) {
@@ -1466,7 +1466,7 @@ linear_start(struct vfs_class *me, struct vfs_s_fh *fh, int offset)
     if (FH_SOCK == -1)
 	ERRNOR (EACCES, 0);
     fh->linear = LS_LINEAR_OPEN;
-    FH_SUPER->u.ftp.control_connection_buzy = 1;
+    FH_SUPER->u.ftp.ctl_connection_busy = 1;
     fh->u.ftp.append = 0;
     return 1;
 }
@@ -1487,7 +1487,7 @@ linear_read (struct vfs_class *me, struct vfs_s_fh *fh, void *buf, int len)
 	linear_abort(me, fh);
 
     if (!n) {
-	SUP.control_connection_buzy = 0;
+	SUP.ctl_connection_busy = 0;
 	close (FH_SOCK);
 	FH_SOCK = -1;
         if ((get_reply (me, SUP.sock, NULL, 0) != COMPLETE))
@@ -1611,7 +1611,7 @@ ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super, char *rem
     int r;
     char *p;
     
-    if (!SUP.cwd_defered && is_same_dir (me, super, remote_path))
+    if (!SUP.cwd_deferred && is_same_dir (me, super, remote_path))
 	return COMPLETE;
 
     p = translate_path (me, super, remote_path);
@@ -1623,7 +1623,7 @@ ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super, char *rem
     } else {
 	g_free(SUP.cwdir);
 	SUP.cwdir = g_strdup (remote_path);
-	SUP.cwd_defered = 0;
+	SUP.cwd_deferred = 0;
     }
     return r;
 }
@@ -1660,7 +1660,7 @@ static int ftpfs_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags, 
 	 * to local temporary file and stored to ftp server 
 	 * by vfs_s_close later
 	 */
-	if (FH_SUPER->u.ftp.control_connection_buzy){
+	if (FH_SUPER->u.ftp.ctl_connection_busy) {
 	    if (!fh->ino->localname){
 		int handle = mc_mkstemps (&fh->ino->localname, me->name, NULL);
 		if (handle == -1)
