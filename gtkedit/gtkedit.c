@@ -1248,13 +1248,15 @@ static TbItems tb_items[] =
     {"F1", N_("Help"), N_("Interactive help browser"), GNOME_STOCK_MENU_BLANK, 0, NULL},
     {"F2", N_("Save"), N_("Save to current file name"), GNOME_STOCK_MENU_SAVE, gtk_edit_save_file, NULL},
     {"F3", N_("Mark"), N_("Toggle In/Off invisible marker to highlight text"), GNOME_STOCK_MENU_BLANK, gtk_edit_toggle_mark, NULL},
-    {"F4", N_("Replc"), N_("Find and replace strings/regular expressions"), GNOME_STOCK_MENU_SRCHRPL, gtk_edit_replace, NULL},
+    {"F4", N_("Replace"), N_("Find and replace strings/regular expressions"), GNOME_STOCK_MENU_SRCHRPL, gtk_edit_replace, NULL},
     {"F5", N_("Copy"), N_("Copy highlighted block to cursor position"), GNOME_STOCK_MENU_COPY, gtk_edit_copy, NULL},
 
     {"F6", N_("Move"), N_("Move highlighted block to cursor position"), GNOME_STOCK_MENU_BLANK, gtk_edit_move, NULL},
     {"F7", N_("Find"), N_("Find strings/regular expressions"), GNOME_STOCK_MENU_SEARCH, gtk_edit_search, NULL},
-    {"F8", N_("Dlete"), N_("Delete highlighted text"), GNOME_STOCK_MENU_BLANK, gtk_edit_delete, NULL},
+    {"F8", N_("Delete"), N_("Delete highlighted text"), GNOME_STOCK_MENU_BLANK, gtk_edit_delete, NULL},
+#if 0
     {"F9", N_("Menu"), N_("Pull down menu"), GNOME_STOCK_MENU_BLANK, /* gtk_edit_menu*/ 0, NULL},
+#endif
     {"F10", N_("Quit"), N_("Exit editor"), GNOME_STOCK_MENU_QUIT, gtk_edit_quit, NULL},
     {0, 0, 0, 0, 0, 0}
 };

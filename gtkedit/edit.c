@@ -2594,6 +2594,7 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
     case CK_Match_Bracket:
 	edit_goto_matching_bracket (edit);
 	break;
+#ifndef GTK
     case CK_User_Menu:
 	if (edit_one_file) {
 	    message (1, MSG_ERROR, _("User menu available only in mcedit invoked from mc"));
@@ -2602,6 +2603,7 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	else
 	    user_menu (edit);
 	break;
+#endif /* !GTK */
 #ifdef MIDNIGHT
     case CK_Sort:
 	edit_sort_cmd (edit);
@@ -2754,6 +2756,7 @@ void edit_execute_macro (WEdit * edit, struct macro macro[], int n)
     edit_update_screen (edit);
 }
 
+#ifndef GTK
 /* User edit menu, like user menu (F2) but only in editor. */
 void user_menu (WEdit *edit)
 {
@@ -2802,3 +2805,4 @@ void user_menu (WEdit *edit)
     edit->force |= REDRAW_COMPLETELY;
     return;
 }
+#endif /* !GTK */

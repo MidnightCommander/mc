@@ -1,3 +1,11 @@
+2001-06-13  Pavel Roskin  <proski@gnu.org>
+
+	* edit.c (edit_execute_cmd) [GTK]: Disable user menu - it
+	doesn't work.
+	(user_menu) [GTK]: Disable.
+	* gtkedit.c (tb_items): Use complete words. Disable pull-down
+	menu.
+
 2001-06-09  Pavel Roskin  <proski@gnu.org>
 
 	* editcmd.c (catstrs): Use interactive_display() without
