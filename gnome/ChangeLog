@@ -1,3 +1,14 @@
+1998-12-11  Jonathan Blandford  <jrb@redhat.com>
+
+	* gtkdtree.c (gtk_dtree_do_select_dir): fixed a little bug --
+	caused a segfault.
+
+	* gscreen.c (x_create_panel): More changes.  The toolbar is moved
+ 	to a gtk_toolbar, and is movable.  The entry will be put in it's
+ 	own toolbar, too.
+	(panel_create_cwd): For now, hardcode the usize of the entry
+ 	widget.  Later on, have it expand (when toolbar supports it)
+
 1998-12-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gcmd.c: #include "../vfs/vfs.h"
@@ -22,7 +33,7 @@
 1998-12-10  Jonathan Blandford  <jrb@redhat.com>
 
 	* gscreen.c (x_create_panel): made some small stylistic changes.
-	Also, removed the hint bar and consolidated the status bar.
+  	Also, removed the hint bar and consolidated the status bar.
 
 Thu Dec 10 21:38:55 1998  Owen Taylor  <otaylor@redhat.com>
 

@@ -53,7 +53,6 @@ GdkPixmap *icon_link_pixmap;
 GdkBitmap *icon_link_mask;
 GdkPixmap *icon_dev_pixmap;
 GdkBitmap *icon_dev_mask;
-
 static GtkTargetEntry drag_types [] = {
 	{ "text/uri-list", 0, TARGET_URI_LIST },
 	{ "text/plain",    0, TARGET_TEXT_PLAIN }
@@ -1168,6 +1167,10 @@ panel_create_cwd (Dlg_head *h, WPanel *panel, void **entry)
 	send_message_to (h, (Widget *) in, WIDGET_INIT, 0);
 
 	*entry = in;
+	/* FIXME: for now, we set the usize.  Ultimately, toolbar
+	 * will let you expand it.
+	 */
+	gtk_widget_set_usize (GTK_WIDGET (in->widget.wdata), 320, -1);
 	return GTK_WIDGET (in->widget.wdata);
 }
 
@@ -1366,9 +1369,10 @@ display_mini_info (WPanel *panel)
 			char *str;
 
 			link_target [len] = 0;
-			str = copy_strings ("-> ", link_target, NULL);
-			gtk_label_set (label, str);
-			free (str);
+			/* FIXME: Links should be handled differently */
+			/* str = copy_strings ("-> ", link_target, NULL); */
+			gtk_label_set (label, " "); 
+			   /*free (str); */
 		} else 
 			gtk_label_set (label, _("<readlink failed>"));
 		return;
@@ -1386,7 +1390,7 @@ display_mini_info (WPanel *panel)
 	}
 	if (panel->list_type == list_icons){
 		if (panel->marked == 0){
-			gtk_label_set (label, "");
+			gtk_label_set (label, " ");
 		}
 	}
 }
@@ -1792,7 +1796,8 @@ void
 x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
 	GtkWidget *status_line, *filter, *vbox, *ministatus_box;
-	GtkWidget *frame, *cwd, *back_p, *fwd_p;
+	GtkWidget *frame, *cwd, *back_p, *fwd_p, *up_p;
+	GtkWidget *hbox, *evbox, *dock;
 	GtkWidget *display, *table_frame;
 		
 	panel->xwindow = gtk_widget_get_toplevel (GTK_WIDGET (panel->widget.wdata));
@@ -1850,16 +1855,54 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	 */
 	back_p = gnome_stock_pixmap_widget_new (panel->xwindow, GNOME_STOCK_MENU_BACK);
 	fwd_p  = gnome_stock_pixmap_widget_new (panel->xwindow, GNOME_STOCK_MENU_FORWARD);
-	
-	panel->up_b    = gtk_button_new_with_label (_("Up"));
+	up_p   = gnome_stock_pixmap_widget_new (panel->xwindow, GNOME_STOCK_MENU_UP);
+	panel->up_b     = gtk_button_new ();
 	panel->back_b   = gtk_button_new ();
 	panel->fwd_b    = gtk_button_new ();
 	gtk_container_add (GTK_CONTAINER (panel->back_b), back_p);
 	gtk_container_add (GTK_CONTAINER (panel->fwd_b), fwd_p);
+	gtk_container_add (GTK_CONTAINER (panel->up_b), up_p);
 	gtk_signal_connect (GTK_OBJECT (panel->back_b), "clicked", GTK_SIGNAL_FUNC(panel_back), panel);
 	gtk_signal_connect (GTK_OBJECT (panel->fwd_b), "clicked", GTK_SIGNAL_FUNC(panel_fwd), panel);
 	gtk_signal_connect (GTK_OBJECT (panel->up_b), "clicked", GTK_SIGNAL_FUNC(panel_up), panel);
 	panel_update_marks (panel);
+	
+
+	/*
+	 * Here we make the toolbars 
+	 */
+	status_line = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
+	gtk_container_set_border_width (GTK_CONTAINER (status_line), 3);
+	evbox = gtk_event_box_new ();
+	hbox = gtk_hbox_new (FALSE, 2);
+	gtk_container_add (GTK_CONTAINER (evbox), hbox);
+	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("Location:")), FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), cwd, FALSE, FALSE, 0);
+	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
+				   evbox,
+				   NULL, NULL);
+	gtk_toolbar_append_space (GTK_TOOLBAR (status_line));
+	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
+				   panel->back_b,
+				   "Go to the previous directory.", NULL);
+	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
+				   panel->up_b,
+				   "Go up a level in the directory heirarchy.", NULL);
+	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
+				   panel->fwd_b,
+				   "Go to the next directory.", NULL);
+	gtk_toolbar_append_space (GTK_TOOLBAR (status_line));
+	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
+				   button_switch_to_icon (panel),
+				   "Switch view to icon view.", NULL);
+	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
+				   button_switch_to_listing (panel),
+				   "Switch view to detailed view.", NULL);
+	dock =  gnome_dock_item_new (GNOME_DOCK_ITEM_BEH_EXCLUSIVE | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
+	gtk_container_add(GTK_CONTAINER(dock),status_line);
+	gnome_dock_add_item (GNOME_DOCK(GNOME_APP (panel->xwindow)->dock), dock, GNOME_DOCK_POS_TOP, 1, 0, 0, FALSE);
+	gtk_widget_show_all (dock);
+	
 	
 	/*
 	 * ministatus
@@ -1869,34 +1912,20 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_misc_set_alignment (GTK_MISC (panel->ministatus), 0.0, 0.0);
 	gtk_misc_set_padding (GTK_MISC (panel->ministatus), 3, 0);
 	gtk_widget_show (panel->ministatus);
+	gtk_label_set_justify (GTK_LABEL (panel->ministatus), GTK_JUSTIFY_LEFT);
 
 	/*
-	 * Status line and packing of all of the toys
-	 */
-	status_line = gtk_hbox_new (0, 0);
-	gtk_container_set_border_width (GTK_CONTAINER (status_line), 3);
-	
-	gtk_label_set_justify (GTK_LABEL (panel->ministatus), GTK_JUSTIFY_LEFT);
-	gtk_box_pack_start (GTK_BOX (status_line), panel->back_b, 0, 0, 2);
-	gtk_box_pack_start (GTK_BOX (status_line), panel->up_b, 0, 0, 2);
-	gtk_box_pack_start (GTK_BOX (status_line), panel->fwd_b, 0, 0, 2);
-	gtk_box_pack_start (GTK_BOX (status_line), cwd, 1, 1, 5);
-	gtk_box_pack_start (GTK_BOX (status_line), button_switch_to_icon (panel), 0, 0, 2);
-	gtk_box_pack_start (GTK_BOX (status_line), button_switch_to_listing (panel), 0, 0, 2);
-#if 0
-	/* Remove the filter for now, until I add another toolbar */
-	gtk_box_pack_end   (GTK_BOX (status_line), filter, 0, 0, 0);
-#endif
-	gtk_widget_show_all (status_line);
-	
-	/*
 	 * The statusbar
+	 * This status bar now holds the  ministatus.
 	 */
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
 	gtk_container_set_border_width (GTK_CONTAINER (frame), 3);
 
 	panel->status = gtk_label_new (""); /* used to be a cliplabel */
+
+
+	/* we set up the status_bar */
 	gtk_misc_set_alignment (GTK_MISC (panel->status), 0.0, 0.5);
 	gtk_misc_set_padding (GTK_MISC (panel->status), 3, 0);
 	gtk_container_add (GTK_CONTAINER (frame), panel->ministatus);
@@ -1937,9 +1966,10 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 
 	gtk_paned_add2 (GTK_PANED (panel->pane), table_frame);
 	
+#if 0
 	gtk_table_attach (GTK_TABLE (panel->table), status_line, 0, 1, 0, 1,
 			  GTK_EXPAND | GTK_FILL, GTK_SHRINK, 0, 0);
-
+#endif
 	/*
 	 * ministatus_box is a container created just to put the
 	 * panel->ministatus inside.
@@ -1952,6 +1982,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	 * is not made, then the resize is queued and the whole window
 	 * flickers each time this changes
 	 */
+#if 0
 	ministatus_box = gtk_hbox_new (FALSE, 0);
 	gtk_container_add (GTK_CONTAINER (ministatus_box), panel->ministatus);
 	gtk_widget_show (ministatus_box);
@@ -1960,11 +1991,11 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0, 0);
 
+#endif
 	gtk_table_attach (GTK_TABLE (panel->table), frame, 0, 1, 3, 4,
 			  GTK_EXPAND | GTK_FILL,
 			  0, 0, 0);
 	
-
 	/* Ultra nasty hack: pull the vbox from wdata */
 	vbox =  GTK_WIDGET (panel->widget.wdata);
 	

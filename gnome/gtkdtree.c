@@ -253,7 +253,8 @@ gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
 	g_return_val_if_fail (GTK_IS_DTREE (dtree), FALSE);
 	g_return_val_if_fail (path != NULL, FALSE);
 
-	if (strcmp (path, dtree->current_path) == 0)
+	
+	if (dtree->current_path && (strcmp (path, dtree->current_path) == 0))
 		return TRUE;
 	
 	s = alloca (strlen (path)+1);
