@@ -1,3 +1,12 @@
+1999-02-05  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gicon.c (gicon_get_url_image): Return an image for url types.
+	(gicon_init): Load the url image.
+
+	* gdesktop.c (desktop_icon_info_new): Use an URL image for
+	desktop-urls.   Use the url as the caption for those icons. 
+	
+
 1999-02-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_icon_info_open): Run "execute" if the file

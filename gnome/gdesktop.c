@@ -1345,21 +1345,31 @@ desktop_icon_info_new (char *filename, char *url, int user_pos, int auto_pos, in
 	char *full_name;
 	GdkImlibImage *icon_im;
 	GtkSignalFunc text_changed_func;
-
+	char *caption;
+	
 	/* Create the icon structure */
 
 	full_name = g_concat_dir_and_file (desktop_directory, filename);
 	fe = file_entry_from_file (full_name);
-	icon_im = gicon_get_icon_for_file_speed (desktop_directory, fe, FALSE);
 
 	dii = g_new (DesktopIconInfo, 1);
-	dii->dicon = desktop_icon_new (icon_im, filename);
 	dii->x = 0;
 	dii->y = 0;
 	dii->slot = -1;
+
+	if (url){
+		dii->url = g_strdup (url);
+		icon_im = gicon_get_url_image ();
+		caption = url;
+	} else {
+		dii->url = NULL;
+		icon_im = gicon_get_icon_for_file_speed (desktop_directory, fe, FALSE);
+		caption = filename;
+	}
+	
+	dii->dicon = desktop_icon_new (icon_im, caption);
 	dii->filename = g_strdup (filename);
 	dii->selected = FALSE;
-	dii->url = g_strdup (url);
 	
 	file_entry_free (fe);
 	g_free (full_name);

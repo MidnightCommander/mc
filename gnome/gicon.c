@@ -31,6 +31,7 @@ static GdkImlibImage *icon_view_sock;
 static GdkImlibImage *icon_view_char_dev;
 static GdkImlibImage *icon_view_block_dev;
 static GdkImlibImage *icon_view_stalled;
+static GdkImlibImage *icon_view_url;
 
 /* Our UID and GID */
 static uid_t our_uid;
@@ -69,6 +70,7 @@ gicon_init (void)
 	icon_view_char_dev   = gicon_stock_load	("i-chardev.png");
 	icon_view_block_dev  = gicon_stock_load	("i-blockdev.png");
 	icon_view_stalled    = gicon_stock_load ("i-stalled.png");
+	icon_view_url        = gicon_stock_load ("gnome-http-url.png");
 	
 	if (icon_view_directory  == NULL ||
 	    icon_view_dirclosed  == NULL ||
@@ -79,6 +81,7 @@ gicon_init (void)
 	    icon_view_sock       == NULL ||
 	    icon_view_char_dev   == NULL ||
 	    icon_view_block_dev  == NULL ||
+	    icon_view_url        == NULL ||
 	    icon_view_stalled    == NULL){
 		message (1, _("Error"), _("Default set of icons not found, check your installation"));
 		exit (1);
@@ -164,6 +167,12 @@ gnome_file_entry_color (file_entry *fe)
 		return icon_view_core;
 
 	return icon_view_regular;
+}
+
+GdkImlibImage *
+gicon_get_url_image ()
+{
+	return icon_view_url;
 }
 
 /**
