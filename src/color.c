@@ -55,7 +55,7 @@ void init_pair (int, CTYPE, CTYPE);
 #	  endif
 #endif
 
-static struct colorpair {
+struct colorpair {
     char *name;			/* Name of the entry */
     CTYPE fg;			/* foreground color */
     CTYPE bg;			/* background color */
