@@ -1,6 +1,6 @@
 # Note that this is NOT a relocatable package
 %define ver     @VERSION@
-%define rel     2
+%define rel     1
 %define prefix  /usr
 
 Summary:   Midnight Commander visual shell
@@ -76,7 +76,7 @@ install lib/mc.global $RPM_BUILD_ROOT/etc
 chmod 755 $RPM_BUILD_ROOT%{prefix}/lib/mc/bin/cons.saver
 
 %clean
-#rm -rf $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 
 %post   -n mcserv
 /sbin/chkconfig --add mcserv
