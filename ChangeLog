@@ -1,3 +1,17 @@
+Sun Mar 21 03:55:24 1999 Paul Sheer <psheer@obsidian.co.za>
+
+	* edit/*.[ch] gtkedit/*.[ch]: brought the editor up
+	to date with cooledit 3.9.0. This adds some new features.
+	Firstly the SYNTAX RULES ARE NO LONGER HARDCODED into
+	syntax.c. This is because the rule set is becoming too
+	large to maintain in its current form and because file
+	loading is starting to get slow.
+
+	There is also a bookmark feature which does not yet have
+	key bindings assigned to it, but should be cool once
+	these get inserted. Syntax rules files are named
+	    $LIBDIR/cooledit/syntax/*.syntax
+
 1999-03-20  Nuno Ferreira  <nmrf@rnl.ist.utl.pt>
 
 	* configure.in: Create slang directory, it is needed when

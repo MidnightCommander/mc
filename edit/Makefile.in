@@ -21,7 +21,7 @@ AR = @AR@
 EDITSRC = edit_key_translator.c
 
 EDITOBJS = edit.o editcmd.o editwidget.o editdraw.o editmenu.o wordproc.o \
-	  syntax.o editoptions.o
+	  syntax.o editoptions.o bookmark.o
 
 DIST = 	Makefile.in $(EDITSRC)
 
