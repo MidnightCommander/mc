@@ -228,7 +228,7 @@ static int getch_with_delay (void)
     while (1) {
 	/* Try to get a character */
 	c = get_key_code (0);
-	if (c != ERR)
+	if (c != -1)
 	    break;
     }
     /* Success -> return the character */
