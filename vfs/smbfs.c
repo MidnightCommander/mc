@@ -1048,7 +1048,7 @@ do_connect (char *server, char *share)
 	if (!cli_session_setup(c, current_bucket->user, 
 			       current_bucket->password, strlen(current_bucket->password),
 			       current_bucket->password, strlen(current_bucket->password),
-			       current_bucket->workgroup)) {
+			       current_bucket->domain)) {
 		my_errno = cli_error(c, NULL, &err, NULL);
 		DEBUG(1,("session setup failed: %s\n", cli_errstr(c)));
 		return NULL;
