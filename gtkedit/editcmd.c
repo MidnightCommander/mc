@@ -1959,6 +1959,7 @@ void edit_replace_cmd (WEdit * edit, int again)
     char *exp3 = "";
     int replace_yes;
     int replace_continue;
+    int treplace_prompt = replace_prompt;
     int i = 0;
     long times_replaced = 0, last_search;
     char fin_string[32];
@@ -2064,7 +2065,7 @@ void edit_replace_cmd (WEdit * edit, int again)
 
 	    replace_yes = 1;
 
-	    if (replace_prompt) {
+	    if (treplace_prompt) {
 		int l;
 		l = edit->curs_row - edit->num_widget_lines / 3;
 		if (l > 0)
@@ -2087,7 +2088,7 @@ void edit_replace_cmd (WEdit * edit, int again)
 		    replace_yes = 0;
 		    break;
 		case B_REPLACE_ALL:
-		    replace_prompt = 0;
+		    treplace_prompt = 0;
 		    replace_continue = 1;
 		    break;
 		case B_REPLACE_ONE:
