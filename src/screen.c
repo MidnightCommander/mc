@@ -170,7 +170,7 @@ static const char *
 string_file_name (file_entry *fe, int len)
 {
     static char buffer [BUF_SMALL];
-    int i;
+    size_t i;
 
     for (i = 0; i < sizeof(buffer) - 1; i++) {
 	char c;
@@ -654,7 +654,7 @@ display_mini_info (WPanel *panel)
 	g_snprintf (buffer, sizeof (buffer), (panel->marked == 1) ?
 		 _("%s bytes in %d file") : _("%s bytes in %d files"),
 		 size_trunc_sep (panel->total), panel->marked);
-	if (strlen (buffer) > cols-2){
+	if ((int) strlen (buffer) > cols-2){
 	    buffer [cols] = 0;
 	    p += 2;
 	} else
@@ -1170,7 +1170,7 @@ parse_display_format (WPanel *panel, char *format, char **error, int isstatus, i
     int  set_justify;                  	/* flag: set justification mode? */
     int  justify = 0;                  	/* Which mode. */
     int  items = 0;			/* Number of items in the format */
-    int  i;
+    size_t  i;
 
     static size_t i18n_timelength = 0; /* flag: check ?Time length at startup */
 
@@ -1859,7 +1859,8 @@ mark_file (WPanel *panel)
 static void
 do_search (WPanel *panel, int c_code)
 {
-    int l, i;
+    size_t l;
+    int i;
     int wrapped = 0;
     int found;
 
@@ -2049,13 +2050,29 @@ chdir_to_readlink (WPanel *panel)
     }
 }
 
-static const key_map panel_keymap [] = {
+typedef void (*panel_key_callback) (WPanel *);
+typedef struct {
+    int key_code;
+    panel_key_callback fn;
+} panel_key_map;
+
+static void cmd_do_enter(WPanel *wp) { (void) do_enter(wp); }
+static void cmd_view_simple(WPanel *wp) { view_simple_cmd(); }
+static void cmd_edit_new(WPanel *wp) { edit_cmd_new(); }
+static void cmd_copy_local(WPanel *wp) { copy_cmd_local(); }
+static void cmd_rename_local(WPanel *wp) { ren_cmd_local(); }
+static void cmd_delete_local(WPanel *wp) { delete_cmd_local(); }
+static void cmd_select(WPanel *wp) { select_cmd(); }
+static void cmd_unselect(WPanel *wp) { unselect_cmd(); }
+static void cmd_reverse_selection(WPanel *wp) { reverse_selection_cmd(); }
+
+static const panel_key_map panel_keymap [] = {
     { KEY_DOWN,   move_down },
     { KEY_UP, 	move_up },
 
     /* The action button :-) */
-    { '\n',       (key_callback) do_enter },
-    { KEY_ENTER,  (key_callback) do_enter },
+    { '\n',       cmd_do_enter },
+    { KEY_ENTER,  cmd_do_enter },
 
     { KEY_IC,     mark_file },
     { KEY_HOME,	  move_home },
@@ -2085,20 +2102,20 @@ static const key_map panel_keymap [] = {
     { ALT('o'),   chdir_other_panel },
     { ALT('l'),   chdir_to_readlink },
     { ALT('H'),   directory_history_list },
-    { KEY_F(13),  view_simple_cmd },
-    { KEY_F(14),  edit_cmd_new },
-    { KEY_F(15),  copy_cmd_local },
-    { KEY_F(16),  ren_cmd_local },
-    { KEY_F(18),  delete_cmd_local },
+    { KEY_F(13),  cmd_view_simple },
+    { KEY_F(14),  cmd_edit_new },
+    { KEY_F(15),  cmd_copy_local },
+    { KEY_F(16),  cmd_rename_local },
+    { KEY_F(18),  cmd_delete_local },
     { ALT('y'),   directory_history_prev },
     { ALT('u'),   directory_history_next },
-    { ALT('+'),	  select_cmd },
-    { KEY_KP_ADD, select_cmd },
-    { ALT('\\'),  unselect_cmd },
-    { ALT('-'),	  unselect_cmd },
-    { KEY_KP_SUBTRACT, unselect_cmd },
-    { ALT('*'),	  reverse_selection_cmd },
-    { KEY_KP_MULTIPLY, reverse_selection_cmd },
+    { ALT('+'),	  cmd_select },
+    { KEY_KP_ADD, cmd_select },
+    { ALT('\\'),  cmd_unselect },
+    { ALT('-'),	  cmd_unselect },
+    { KEY_KP_SUBTRACT, cmd_unselect },
+    { ALT('*'),	  cmd_reverse_selection },
+    { KEY_KP_MULTIPLY, cmd_reverse_selection },
     { 0, 0 }
 };
 
