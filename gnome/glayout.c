@@ -460,9 +460,10 @@ create_new_menu_from (GnomeApp *app, WPanel *panel, char *file)
 				continue;
 			}
 
-			if (!gnome_is_program_in_path (gde->tryexec)){
+			path = gnome_is_program_in_path (gde->tryexec);
+			g_free (path);
+			if (!path){
 				g_free (file2);
-				g_print ("yes!\n");
 				continue;
 			}
 			

@@ -1,3 +1,8 @@
+1999-02-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtkedit/editwidget.c (selection_send): Use the proper type for
+	64-bit cleanliness (Patch from George Lebl).
+
 Tue Feb 16 21:24:43 1999  David Martin <dmartina@usa.net>
 
 	* gtkedit/gtkedit.c: Hack to get one more string defined in a macro 

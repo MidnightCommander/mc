@@ -377,7 +377,7 @@ create_actions (GtkWidget *menu, WPanel *panel,
 				fullname = g_concat_dir_and_file (desktop_directory, dii->filename);
 				fe = file_entry_from_file (fullname);
 				if (fe){
-					v = is_mountable (fullname, fe, &is_mounted);
+					v = is_mountable (fullname, fe, &is_mounted, NULL);
 					file_entry_free (fe);
 					g_free (fullname);
 					
@@ -404,7 +404,7 @@ create_actions (GtkWidget *menu, WPanel *panel,
 				fullname = g_concat_dir_and_file (desktop_directory, dii->filename);
 				fe = file_entry_from_file (fullname);
 				if (fe){
-					v = is_mountable (fullname, fe, &is_mounted);
+					v = is_mountable (fullname, fe, &is_mounted, NULL);
 					file_entry_free (fe);
 					g_free (fullname);
 					

@@ -448,8 +448,6 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 		if (have_pos) {
 			dii = desktop_icon_info_new (dirent->d_name, desktop_url, caption, x, y);
 			gtk_widget_show (dii->dicon);
-
-			g_free (full_name);
 		} else {
 			file_and_url_t *fau;
 
@@ -462,6 +460,8 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 			need_position_list = g_slist_prepend (need_position_list, fau);
 		}
 
+		g_free (full_name);
+		
 		if (desktop_url)
 			g_free (desktop_url);
 
@@ -1499,6 +1499,7 @@ icon_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gint y, gu
 				       dii->selected);
 
 	gdk_drag_status (context, action, time);
+	file_entry_free (fe);
 	return TRUE;
 }
 
