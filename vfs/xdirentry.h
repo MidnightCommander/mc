@@ -1,9 +1,6 @@
 #ifndef DIRENTRY_H
 #define DIRENTRY_H
 
-#include "vfs.h"
-
-
 #define LINK_FOLLOW 15
 #define LINK_NO_FOLLOW -1
 
