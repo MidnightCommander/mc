@@ -1,3 +1,8 @@
+2002-12-12  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/uar.in: Simplify "list" command, don't use current year.
+	Use more careful quoting.
+
 2002-12-12  Adam Byrtek  <alpha@debian.org>
 
 	* extfs/apt.in: Add non-interactive remove using dpkg.
