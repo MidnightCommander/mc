@@ -22,6 +22,7 @@
 #include <config.h>
 #include <stdio.h>
 #include <sys/types.h>
+
 #undef	USE_NCURSES	/* Don't include *curses.h */
 #include "utilvfs.h"
 
@@ -36,7 +37,6 @@
    conflicts with definitions in other includes */
 #undef HAVE_LIBREADLINE
 #define NO_CONFIG_H
-#define BOOL_DEFINED
 #undef	VERSION
 
 #include "samba/include/includes.h"
