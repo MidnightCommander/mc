@@ -406,7 +406,7 @@ AC_DEFUN(AC_USE_SUNOS_CURSES, [
 	CPPFLAGS="$CPPFLAGS -I/usr/5include"
 	XCURSES="xcurses.o /usr/5lib/libcurses.a /usr/5lib/libtermcap.a"
 	AC_MSG_RESULT(Please note that some screen refreshs may fail)
-	AC_WARN(Reconsider using Slang)
+	AC_MSG_WARN(Reconsider using Slang)
 ])
 
 AC_DEFUN(AC_USE_OSF1_CURSES, [
@@ -446,9 +446,9 @@ dnl	LIBS="$LIBS -l$THIS_CURSES -ltermcap"
 dnl	AC_DEFINE(USE_BSD_CURSES)
 dnl	XCURSES="xcurses.o"
 dnl	AC_MSG_RESULT(Please note that some screen refreshs may fail)
-dnl	AC_WARN(Use of the bsdcurses extension has some)
-dnl	AC_WARN(display/input problems.)
-dnl	AC_WARN(Reconsider using xcurses)
+dnl	AC_MSG_WARN(Use of the bsdcurses extension has some)
+dnl	AC_MSG_WARN(display/input problems.)
+dnl	AC_MSG_WARN(Reconsider using xcurses)
 dnl)
 
 AC_ARG_WITH(sco,

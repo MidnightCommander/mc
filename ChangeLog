@@ -1,3 +1,9 @@
+2000-08-01  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in, mc-aclocal.m4: AC_WARN replaced with AC_MSG_WARN
+
+	* README.PC, doc/mc.1.in, doc/mc.sgml: Updated e-mail address
+
 2000-07-21  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* src/main.c: make 8bit input/output the default (99% of the people

@@ -653,7 +653,7 @@ AC_DEFUN(AC_GET_FS_INFO, [
       fi
 
       if test -z "$list_mounted_fs"; then
-	AC_WARN([could not determine how to read list of mounted fs])
+	AC_MSG_WARN([could not determine how to read list of mounted fs])
 	CPPFLAGS="$CPPFLAGS -DNO_INFOMOUNT"
       fi
 
