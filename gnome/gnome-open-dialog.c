@@ -295,10 +295,12 @@ gnome_open_dialog_generate_tree_helper (GtkCTree *ctree, GtkCTreeNode *parent, G
 }
 
 /* Stolen from gnome-core/panel/menu.c */
+#define MAX_ORDER_ENTRY 1024
+
 static GSList *
 get_presorted_from(char *dir)
 {
-	char buf[PATH_MAX+1];
+	char buf[MAX_ORDER_ENTRY];
 	GSList *list = NULL;
 	char *fname = g_concat_dir_and_file(dir,".order");
 	FILE *fp = fopen(fname,"r");
@@ -307,7 +309,7 @@ get_presorted_from(char *dir)
 		g_free(fname);
 		return NULL;
 	}
-	while(fgets(buf,PATH_MAX+1,fp)!=NULL) {
+	while(fgets(buf, sizeof (buf), fp) != NULL) {
 		char *p = strchr(buf,'\n');
 		if(p) *p = '\0';
 		list = g_slist_prepend(list,g_strdup(buf));

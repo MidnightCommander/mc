@@ -1,3 +1,7 @@
+2001-08-07  Pavel Roskin  <proski@gnu.org>
+
+	* gnome-open-dialog.c (get_presorted_from): Don't use PATH_MAX.
+
 2001-08-03  Pavel Roskin  <proski@gnu.org>
 
 	* gicon.c (get_default_icon): Don't call is_exe for symlinks.
