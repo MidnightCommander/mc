@@ -1108,10 +1108,14 @@ void edit_symlink_cmd (void)
 	    if (dest) {
 		if (*dest && strcmp (buffer, dest)) {
 		    save_cwds_stat ();
-		    mc_unlink (p);
-		    if (-1 == mc_symlink (dest, p))
-		        message (1, MSG_ERROR, _(" edit symlink: %s "),
-				 unix_error_string (errno));
+		    if (-1 == mc_unlink (p)){
+		        message (1, MSG_ERROR, _(" edit symlink, unable to remove %s: %s "),
+				 p, unix_error_string (errno));
+		    } else {
+			    if (-1 == mc_symlink (dest, p))
+				    message (1, MSG_ERROR, _(" edit symlink: %s "),
+					     unix_error_string (errno));
+		    }
 		    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 		    repaint_screen ();
 		}
