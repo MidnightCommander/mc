@@ -1,3 +1,9 @@
+2001-07-31  Pavel Roskin  <proski@gnu.org>
+
+	* autogen.sh: Use gettextize.
+	* ABOUT-NLS: Remove from CVS, it's installed by autogen.sh.
+	* po/Makefile.in.in: Likewise.
+
 2001-07-29  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/slang.syntax: New file.
