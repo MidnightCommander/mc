@@ -97,8 +97,11 @@ Hook *select_file_hook = 0;
 int panel_callback (Dlg_head *h, WPanel *p, int Msg, int Par);
 int panel_event (Gpm_Event *event, WPanel *panel);
 
-#ifndef HAVE_TK
+#ifndef PORT_HAS_PANEL_ADJUST_TOP_FILE
 #   define x_adjust_top_file(p)
+#endif
+
+#ifndef PORT_HAS_PANEL_RESET_SORT_LABELS
 #   define x_reset_sort_labels(x) 
 #endif
 
@@ -908,7 +911,8 @@ panel_new (char *panel_name)
     int i, err;
 
     panel = xmalloc (sizeof (WPanel), "panel_new");
-
+    memset (panel, 0, sizeof (WPanel));
+    
     /* No know sizes of the panel at startup */
     init_widget (&panel->widget, 0, 0, 0, 0, (callback_fn)
 		 panel_callback, (destroy_fn) panel_destroy,
@@ -1367,7 +1371,6 @@ panel_format (WPanel *panel)
 
     case list_brief:
 	return "half 2,type,name";
-
 
     case list_user:
 	return panel->user_format;

@@ -71,7 +71,7 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	
 	/* Init the widgets */
 	init_dlg (h);
-	gtk_grab_add (dialog);
+	gtk_grab_add (GTK_WIDGET (dialog));
 
 	/* Now do the GTK stuff */
 	gtk_container_add (GTK_CONTAINER (dialog->vbox), GTK_WIDGET (label->widget.wdata));
@@ -84,8 +84,8 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 
 	frontend_run_dlg (h);
 	dlg_run_done (h);
-	gtk_grab_remove (dialog);
-	gtk_widget_destroy (dialog);
+	gtk_grab_remove (GTK_WIDGET (dialog));
+	gtk_widget_destroy (GTK_WIDGET (dialog));
 	
 	switch (h->ret_value){
 	case B_CANCEL:

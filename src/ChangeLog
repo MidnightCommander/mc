@@ -1,7 +1,15 @@
-Fri Mar  6 14:24:19 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+Fri Mar  6 19:29:54 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* find.c: Simplify header files: use the fs.h include file. 
+
+	(use x_flush_events).
+	
 	* screen.c (string_file_name): In GNOME, the CList widget does the
 	filename truncation, so we do not do it here. 
+
+	(panel_new): Initialize all of the wpanel contents to zero.  This
+	will is required by the GNOME X ports (to figure out if a field
+	has been inited or not).
 
 Thu Mar  5 10:28:40 1998  Norbert Warmuth <k3190@fh-sw.de>
 

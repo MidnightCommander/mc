@@ -135,6 +135,7 @@ xtoolkit_create_dialog (Dlg_head *h, int flags)
 
 	win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 	h->grided = flags;
+	h->idle_fn_tag = -1;
 	if (!(flags & DLG_NO_TED)){
 		ted = gtk_ted_new_layout (h->name, LIBDIR "/layout");
 		gtk_container_add (GTK_CONTAINER (win), ted);
@@ -254,6 +255,38 @@ int
 dialog_panel_callback (struct Dlg_head *h, int id, int msg)
 {
 	return default_dlg_callback (h, id, msg);
+}
+
+void
+x_flush_events (void)
+{
+	while (gtk_events_pending ())
+		gtk_main_iteration ();
+}
+
+static int
+gnome_idle_handler (gpointer data)
+{
+	Dlg_head *h = data;
+
+	(*h->callback)(h, 0, DLG_IDLE);
+	return TRUE;
+}
+
+/* Turn on and off the idle message sending */
+void
+x_set_idle (Dlg_head *h, int enable_idle)
+{
+	if (enable_idle){
+		if (h->idle_fn_tag != -1)
+			return;
+		h->idle_fn_tag = gtk_idle_add (gnome_idle_handler, h);
+	} else {
+		if (h->idle_fn_tag == -1)
+			return;
+		gtk_idle_remove (h->idle_fn_tag);
+		h->idle_fn_tag = -1;
+	}
 }
 
 void

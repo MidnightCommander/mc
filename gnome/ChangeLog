@@ -1,12 +1,27 @@
-Fri Mar  6 14:48:34 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+Fri Mar  6 20:50:19 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gmain.c (create_panels): New per-port variable, used to flush
+	all of the pending X events.
+
+	(x_set_idle): Implement idle functions, now the find command works
+	properly. 
+	
 	* gwidget.c (x_create_radio): Connect to the "toggled" signal to
 	keep track of the radio button.
 
-	* gwidget.c (x_update_input): This can be invoked before the
+	(listbox_select): callback for the select and double click
+	actions. 
+	(x_update_input): This can be invoked before the
 	widget X resources have been allocated.  Take care of this.
 
 	(x_create_input): update the cursor position as well.
+
+	(x_list_insert, x_create_listbox, x_list_delete_nth,
+	x_listbox_select_nth): implement the Listbox widget. 
+
+	* gconf.h:  New configuration options: 
+	PORT_HAS_PANEL_ADJUST_TOP_FILE and
+	PORT_HAS_PANEL_RESET_SORT_LABELS
 	
 1998-03-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 

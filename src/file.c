@@ -331,8 +331,7 @@ check_buttons (void)
 static int
 check_buttons (void)
 {
-    while (gtk_events_pending ())
-	gtk_main_iteration ();
+    x_flush_events ();
     
     if (op_dlg->running)
         return FILE_CONT;

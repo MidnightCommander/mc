@@ -26,34 +26,8 @@
 #    include <io.h>
 #    include <direct.h>
 #endif
-
+#include "fs.h"
 #include <malloc.h>	/* For free() */
-#include <sys/types.h>
-#ifdef HAVE_UNISTD_H
-#   include <unistd.h>
-#endif
-
-/* unistd.h defines _POSIX_VERSION on POSIX.1 systems. */
-#if defined(HAVE_DIRENT_H) || defined(_POSIX_VERSION)
-#   include <dirent.h>
-#   define NLENGTH(dirent) (strlen ((dirent)->d_name))
-#else
-#   define dirent direct
-#   define NLENGTH(dirent) ((dirent)->d_namlen)
-
-#   ifdef HAVE_SYS_NDIR_H
-#       include <sys/ndir.h>
-#   endif /* HAVE_SYS_NDIR_H */
-
-#   ifdef HAVE_SYS_DIR_H
-#       include <sys/dir.h>
-#   endif /* HAVE_SYS_DIR_H */
-
-#   ifdef HAVE_NDIR_H
-#       include <ndir.h>
-#   endif /* HAVE_NDIR_H */
-#endif /* not (HAVE_DIRENT_H or _POSIX_VERSION) */
-
 #include <sys/stat.h>
 #include <sys/param.h>
 #include <stdlib.h>
@@ -86,6 +60,9 @@ extern int verbose;		/* Should be in a more sensible header file */
 #include "xvmain.h"
 #endif
 
+#ifndef PORT_HAS_FLUSH_EVENTS
+#    define x_flush_events()
+#endif
 
 /* Size of the find parameters window */
 #define FIND_Y 12
@@ -552,8 +529,9 @@ do_search (struct Dlg_head *h)
     }
 #ifdef HAVE_XVIEW
     xv_post_proc (h, (void (*)(void *))do_search, (void *)h);
-#endif		
 #endif
+#endif
+    x_flush_events ();
 }
 
 static int

@@ -107,6 +107,9 @@ typedef struct Dlg_head {
     
     widget_data wdata;
     int  grided;	/* Does it use the automatic layout? */
+#ifdef HAVE_GNOME
+    int  idle_fn_tag;	/* Tag for the idle routine, -1 if none */
+#endif
 } Dlg_head;
 
 /* XView widget layout */

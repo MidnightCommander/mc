@@ -50,6 +50,10 @@ Dlg_head *current_dlg = 0;
 /* A hook list for idle events */
 Hook *idle_hook = 0;
 
+#ifndef PORT_HAS_SET_IDLE
+#    define x_set_idle(d,x)
+#endif
+
 static void slow_box (Dlg_head *h, int y, int x, int ys, int xs)
 {
     move (h->y+y, h->x+x);
@@ -244,6 +248,7 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 void set_idle_proc (Dlg_head *d, int state)
 {
     d->send_idle_msg = state;
+    x_set_idle (d, state);
 }
 
 /* add component to dialog buffer */

@@ -76,11 +76,14 @@ x_button_set (WButton *b, char *text)
 }
 
 /* Radio buttons */
-void
+static void
 radio_toggle (GtkObject *object, WRadio *r)
 {
 	int idx = (int) gtk_object_get_data (object, "index");
 
+	if (!GTK_TOGGLE_BUTTON (object)->active)
+		return;
+	
 	g_return_if_fail (idx != 0);
 	idx--;
 	r->sel = idx;
@@ -101,12 +104,12 @@ x_create_radio (Dlg_head *h, widget_data parent, WRadio *r)
 		} else {
 			w = gtk_radio_button_new_with_label (group, r->texts [i]);
 		}
+		gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (w), (i == r->sel));
 		gtk_signal_connect (GTK_OBJECT (w), "toggled", GTK_SIGNAL_FUNC (radio_toggle), r);
 		gtk_object_set_data (GTK_OBJECT (w), "index", (void *) (i+1));
 		gtk_box_pack_start_defaults (GTK_BOX (vbox), w);
-		gtk_widget_show (w);
 	}
-	gtk_widget_show (vbox);
+	gtk_widget_show_all (vbox);
 
 	r->widget.wdata = (widget_data) vbox;
 	return 1;
@@ -156,27 +159,111 @@ x_update_input (WInput *in)
 void
 x_listbox_select_nth (WListbox *l, int nth)
 {
+	static int inside;
+	GtkCList *clist;
+	
+	if (inside)
+		return;
+	
+	inside = 1;
+	clist = GTK_CLIST (l->widget.wdata);
+	
+	gtk_clist_select_row (clist, nth, 0);
+	if (!gtk_clist_row_is_visible (clist, nth))
+		gtk_clist_moveto (clist, nth, 0, 0.5, 0.0);
+	
+	inside = 0;
 }
 
 void
 x_listbox_delete_nth (WListbox *l, int nth)
 {
+	gtk_clist_remove (GTK_CLIST (l->widget.wdata), nth);
+}
+
+static void
+listbox_select (GtkWidget *widget, int row, int column, GdkEvent *event, WListbox *l)
+{
+	Dlg_head *h = l->widget.parent;
+	static int inside;
+
+	if (inside)
+		return;
+	inside = 1;
+
+	listbox_select_by_number (l, row);
+	
+	if (event && event->type == GDK_2BUTTON_PRESS){
+		printf ("Activando\n");
+		switch (l->action){
+		case listbox_nothing:
+			break;
+			
+		case listbox_finish:
+			h->running   = 0;
+			h->ret_value = B_ENTER;
+			gtk_main_quit ();
+			return;
+			
+		case listbox_cback:
+			if ((*l->cback)(l) == listbox_finish){
+				gtk_main_quit ();
+				return;
+			}
+		}
+	}
+	inside = 0;
 }
 
 int
 x_create_listbox (Dlg_head *h, widget_data parent, WListbox *l)
 {
 	GtkWidget *listbox;
-
+	GtkRequisition req;
+	WLEntry *p;
+	int i;
+	
 	listbox = gtk_clist_new (1);
+	gtk_clist_set_selection_mode (GTK_CLIST (listbox), GTK_SELECTION_BROWSE);
+	gtk_widget_size_request (listbox, &req);
+	gtk_widget_set_usize (listbox, req.width, req.height + 20*8);
+	gtk_signal_connect (GTK_OBJECT (listbox), "select_row",
+			    GTK_SIGNAL_FUNC (listbox_select), l);
 	gtk_widget_show (listbox);
 	l->widget.wdata = (widget_data) listbox;
+
+	for (p = l->list, i = 0; i < l->count; i++, p = p->next){
+		char *text [1];
+
+		text [0] = p->text;
+		gtk_clist_append (GTK_CLIST (listbox), text);
+	}
+	
 	return 1;
 }
 
 void
 x_list_insert (WListbox *l, WLEntry *p, WLEntry *e)
 {
+	int pos = 0, i;
+	char *text [1];
+
+	if (!l->widget.wdata)
+		return;
+
+	for (i = 0; i < l->count; i++){
+		if (p == e)
+			break;
+		p = p->next;
+		pos++;
+	} 
+
+	if (p != e){
+		printf ("x_list_insert: should not happen!\n");
+		return;
+	}
+	text [0] = e->text;
+	gtk_clist_append (GTK_CLIST (l->widget.wdata), text);
 }
 
 /* Labels */

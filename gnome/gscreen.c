@@ -754,6 +754,9 @@ void
 panel_switch_new_display_mode (WPanel *panel)
 {
 	GtkWidget *old_list = panel->list;
+
+	if (!old_list)
+		return;
 	
 	panel->list = panel_create_file_list (panel);
 	gtk_widget_destroy (old_list);
@@ -944,4 +947,10 @@ load_hint (void)
 void
 paint_frame (WPanel *panel)
 {
+}
+
+void
+x_reset_sort_labels (WPanel *panel)
+{
+	panel_switch_new_display_mode (panel);
 }

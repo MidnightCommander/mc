@@ -169,7 +169,6 @@ gnome_listing_cmd (GtkWidget *widget, WPanel *panel)
 		return;
 
 	configure_panel_listing (panel, view_type, use_msformat, user, status);
-	panel_switch_new_display_mode (panel);
 }
 
 void configure_box (void);
@@ -224,7 +223,7 @@ create_container (Dlg_head *h, char *name)
 
 	container->splitted = 0;
 	app = gnome_app_new ("gmc", name);
-	gtk_widget_set_usize (GTK_WIDGET (app), 400, 200);
+	gtk_widget_set_usize (GTK_WIDGET (app), 400, 300);
 	panel = panel_new (name);
 
 	vbox = gtk_vbox_new (0, 0);
