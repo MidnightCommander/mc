@@ -4,9 +4,6 @@ Before 4.6.1
 Broken pipe warning when viewing large *.tar.gz files.  Warnings should
 be shown before the viewer is started if possible.
 
-Files in the root of a tar that start with ./ (dot slash) are invisible
-when entering the archive.
-
 
 Before 4.6.2
 ============

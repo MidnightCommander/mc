@@ -1,5 +1,9 @@
 2004-10-16  Roland Illig  <roland.illig@gmx.de>
 
+	* TODO: Fixed the "./ files in tar archive" item for mc-4.6.1.
+
+2004-10-16  Roland Illig  <roland.illig@gmx.de>
+
 	* syntax/eiffel.syntax: Add syntax highlighting rules for the
 	Eiffel programming language.
 	* syntax/Syntax: Bind *.e with eiffel.syntax.
