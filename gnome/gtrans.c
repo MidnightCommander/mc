@@ -388,6 +388,13 @@ make_transparent_window (char *file)
 
 	gtk_widget_set_usize (window, im->rgb_width, im->rgb_height);
 
-	gdk_imlib_apply_image (im, window->window);
+	
+	/* All of the following 3 lines should not be required, only
+	 * gdk_imlib_apply_image, but is is buggy.
+	 */
+	gdk_imlib_render (im, im->rgb_width, im->rgb_height);
+	gdk_window_set_back_pixmap (window->window, gdk_imlib_move_image (im), FALSE);
+	gdk_window_shape_combine_mask (window->window, gdk_imlib_move_mask (im), 0, 0);
+	
 	return window;
 }

@@ -1,5 +1,7 @@
 1998-04-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gtrans.c (make_transparent_window): Put hack back.
+
 	* gcache.c (image_cache_load_image): Federico spooted the problem:
 	I have to duplicate my keys for the hash.
 
