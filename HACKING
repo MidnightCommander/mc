@@ -311,8 +311,6 @@ Programming Tips
 
 (This list should be sorted alphabetically.)
 
-catstrs: (see NULL).
-
 const: For every function taking a string argument, decide whether you
 	(as a user of the function) would expect that the string is modi-
 	fied by the function. If not, declare the string argument as
@@ -327,15 +325,11 @@ const_cast: We use many libraries that do not know about "const char *" and
 	function does with the string, we should use g_strdup to pass
 	dynamically allocated strings.
 
-execl, execle, execlp: (see NULL).
-
 g_free: g_free handles NULL argument too, no need for the comparison.
 	Bad way:
 	    if (old_dir) g_free (old_dir);
 	Right way:
 	    g_free (old_dir);
-
-g_strconcat: (see NULL).
 
 g_strdup: When you use g_strdup to create a local copy of a string, use
 	the following pattern to keep the reference.
@@ -356,6 +350,11 @@ NULL: When you pass NULL as an argument of a varargs function, cast the
 	be 0 (at least NetBSD and OpenBSD do), and the sizes of int and
 	a pointer are different, the argument will be passed as int 0,
 	not as a pointer.
+
+	This tip applies at least to catstrs (edit/edit.h), execl(3),
+	execle(3), execlp(3), g_strconcat (glib), parent_call
+	(src/background.h), parent_call_string (src/background.h),
+	rpc_get (vfs/mcfsutil.h), rpc_send (vfs/mcfsutil.h).
 
 	example:
 	char *path = g_strconcat("dir", "/", "file", (char *) NULL);
