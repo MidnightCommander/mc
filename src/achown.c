@@ -217,11 +217,6 @@ static void update_mode (Dlg_head * h)
     send_message (h->current->widget, WIDGET_FOCUS, 0);
 }
 
-static int l_call (void *data)
-{
-    return 1;
-}
-
 static int chl_callback (Dlg_head * h, int Par, int Msg)
 {
     switch (Msg) {
@@ -265,7 +260,7 @@ do_enter_key (Dlg_head * h, int f_pos)
 			"[Advanced Chown]", title, DLG_COMPACT);
 
 	/* get new listboxes */
-	chl_list = listbox_new (1, 1, 15, 11, 0, l_call);
+	chl_list = listbox_new (1, 1, 15, 11, 0, NULL);
 
 	listbox_add_item (chl_list, 0, 0, "<Unknown>", NULL);
 

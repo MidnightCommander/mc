@@ -91,10 +91,6 @@ typedef struct WLEntry {
     struct WLEntry *prev;
 } WLEntry;
 
-enum {
-    listbox_begin, listbox_end
-} /* listbox_insert */;
-
 /* Listbox actions when selecting an option: */
 enum {
     listbox_nothing,
@@ -102,9 +98,11 @@ enum {
     listbox_cback		/* call the callback routine */
 } /* listbox_action */;
 
-typedef int (*lcback) (void *);
+struct WListbox;
+typedef struct WListbox WListbox;
+typedef int (*lcback) (WListbox *);
 
-typedef struct WListbox {
+struct WListbox {
     Widget widget;
     WLEntry *list;		/* Pointer to the circular double linked list. */
     WLEntry *top;		/* The first element displayed */
@@ -118,7 +116,7 @@ typedef struct WListbox {
     int scrollbar;		/* Draw a scrollbar? */
     lcback cback;		/* The callback function */
     int cursor_x, cursor_y;	/* Cache the values */
-} WListbox;
+};
 
 typedef void (*buttonbarfn)(void *);
 

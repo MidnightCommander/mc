@@ -476,9 +476,8 @@ l1:
     return 0;
 }
 
-static int l_call (void *l)
+static int l_call (WListbox *list)
 {
-    WListbox *list = (WListbox *) l;
     Dlg_head *dlg = hotlist_state.moving ? movelist_dlg : hotlist_dlg;
 
     if (list->current){

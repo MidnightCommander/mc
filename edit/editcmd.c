@@ -2719,13 +2719,6 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
 }
 
 
-static int
-compllist_callback (void *data)
-{
-    return 0;
-}
-
-
 /* let the user select its preferred completion */
 static void
 edit_completion_dialog (WEdit *edit, int max_len, int word_len,
@@ -2766,8 +2759,7 @@ edit_completion_dialog (WEdit *edit, int max_len, int word_len,
 
     /* create the listbox */
     compl_list =
-	listbox_new (1, 1, compl_dlg_w - 2, compl_dlg_h - 2, 0,
-		     compllist_callback);
+	listbox_new (1, 1, compl_dlg_w - 2, compl_dlg_h - 2, 0, NULL);
 
     /* add the dialog */
     add_widget (compl_dlg, compl_list);

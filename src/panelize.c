@@ -113,11 +113,6 @@ panelize_callback (Dlg_head * h, int Par, int Msg)
     return 0;
 }
 
-static int l_call (void *data)
-{
-	return listbox_nothing;
-}
-
 static void
 init_panelize (void)
 {
@@ -171,13 +166,11 @@ init_panelize (void)
 		   "in");
     add_widget (panelize_dlg, pname);
 
-    add_widget (panelize_dlg,
-		label_new (UY + 13, UX, _("Command")));
+    add_widget (panelize_dlg, label_new (UY + 13, UX, _("Command")));
 
     /* get new listbox */
     l_panelize =
-	listbox_new (UY + 1, UX + 1, panelize_dlg->cols - 12, 10, 0,
-		     l_call);
+	listbox_new (UY + 1, UX + 1, panelize_dlg->cols - 12, 10, 0, NULL);
 
     while (current) {
 	listbox_add_item (l_panelize, 0, 0, current->label, current);

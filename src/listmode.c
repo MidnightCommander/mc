@@ -147,12 +147,6 @@ listmode_callback (Dlg_head * h, int Par, int Msg)
     return 0;
 }
 
-static int
-l_call (void *data)
-{
-    return 1;
-}
-
 static Dlg_head *
 init_listmode (char *oldlistformat)
 {
@@ -198,7 +192,7 @@ init_listmode (char *oldlistformat)
     radio_justify->sel = 1;
 
     /* get new listbox */
-    l_listmode = listbox_new (UY + 5, UX + 1, 16, 9, 0, l_call);
+    l_listmode = listbox_new (UY + 5, UX + 1, 16, 9, 0, NULL);
 
     if (strncmp (oldlistformat, "full ", 5) == 0) {
 	format_width = 1;
