@@ -1,3 +1,9 @@
+Wed Jun  3 Pavel Machek <pavel@ucw.cz>
+
+	* libvfs.c: adding libvfs.c which should contain things specific
+ 	to stand-alone libvfs.so. (This file was missing from previous
+ 	merge.)
+	
 Mon Jun  1 16:00:19 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* ftpfs.c (ftpfs_fill_names): use right character to seperate
@@ -12,7 +18,7 @@ Mon Jun  1 12:47:50 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* ftpfs.c (ftpfs_forget): Use the new ftpfs prefix.
 
-Thu May 28 16:42:31 1998  Pavel Machek <pavel@bug.mj.gts.cz>
+Thu May 28 16:42:31 1998  Pavel Machek <pavel@ucw.cz>
 
 	* extfs.c, shared.c, tar.c: I changed semantics in my previous
 	patch - _get_path() now modifies strings passed to it. I thought
@@ -26,6 +32,18 @@ Thu May 28 16:42:31 1998  Pavel Machek <pavel@bug.mj.gts.cz>
 	inside zip file or similar.
 
 	* vfs.c (mc_open): Die if the filesystem doesn't support open
+
+???         Pavel Machek <pavel@ucw.cz>
+	
+	* shared.c: Shared parts of extfs.c and tar.c are now in shared.c
+
+	* util-alone.*: VFS should be able to compile stand-alone into
+ 	libvfs.so usable by anyone. This is first step.
+
+	* vfs.c & others: syntax change. We no longer use
+ 	tar:/path.tar/file. Now, syntax is /path.tar#utar/file, which has
+ 	better defined meaning. Similar changes are done to all other
+ 	protocols. This change touched really _many_ places of code.
 
 1998-05-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
