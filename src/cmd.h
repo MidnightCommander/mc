@@ -13,11 +13,10 @@ void dirsizes_cmd (void);
 int view_file_at_line (char *filename, int plain_view, int internal, 
                        int start_line);
 int  view_file (char *filename, int normal, int internal);
-void view_cmd (WPanel *panel);
-void view_file_cmd (WPanel *panel);
-void view_simple_cmd (WPanel *panel);
-void filtered_view_cmd (WPanel *panel);
-void filtered_view_cmd_cpanel (void);
+void view_cmd (void);
+void view_file_cmd (void);
+void view_simple_cmd (void);
+void filtered_view_cmd (void);
 void do_edit (const char *what);
 void do_edit_at_line (const char *what, int start_line);
 void edit_cmd (WPanel *panel);
@@ -37,7 +36,6 @@ void set_panel_filter (WPanel *panel);
 void set_panel_filter_to (WPanel *p, char *allocated_filter_string);
 void reread_cmd (void);
 void do_re_sort (WPanel *panel);
-void quick_view_cmd (void);
 void tree_view_cmd (void);
 void ext_cmd (void);
 void menu_edit_cmd (int select);
@@ -59,7 +57,6 @@ void swap_cmd (void);
 void view_other_cmd (void);
 void mkdir_panel_cmd (void);
 void edit_panel_cmd (void);
-void view_panel_cmd (void);
 void quick_cd_cmd (void);
 void save_setup_cmd (void);
 char *get_random_hint (void);
@@ -77,7 +74,8 @@ void quick_cmd_no_menu (void);
 void info_cmd_no_menu (void);
 void quick_view_cmd (void);
 void toggle_listing_cmd (void);
-void configure_panel_listing (WPanel *p, int view_type, int use_msformat, char *user, char *status);
+void configure_panel_listing (WPanel * p, int view_type, int use_msformat,
+			      char *user, char *status);
 
 #ifdef  USE_INTERNAL_EDIT
 extern int edit (const char *file, int line);

@@ -1,3 +1,14 @@
+2002-11-13  Pavel Roskin  <proski@gnu.org>
+
+	* cmd.c (do_view_cmd): Don't take WPanel argument - always use
+	the current panel.
+	(view_cmd): Likewise.
+	(view_file_cmd): Likewise.
+	(view_simple_cmd): Likewise.
+	(filtered_view_cmd): Likewise.
+	(filtered_view_cmd_cpanel): Remove.
+	(view_panel_cmd): Likewise.
+
 2002-11-12  Pavel Roskin  <proski@gnu.org>
 
 	* chmod.c (init_chmod): Make static.

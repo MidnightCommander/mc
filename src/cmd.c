@@ -213,83 +213,90 @@ static int scan_for_file (WPanel *panel, int idx, int direction)
     return i;
 }
 
-/* do_view: Invoked as the F3/F13 key. */
+/*
+ * Run viewer (internal or external) on the currently selected file.
+ * If normal is 1, force internal viewer and raw mode (used for F13).
+ */
 static void
-do_view_cmd (WPanel *panel, int normal)
+do_view_cmd (int normal)
 {
     int dir, file_idx;
-    panel = get_a_panel (panel);
 
     /* Directories are viewed by changing to them */
-    if (S_ISDIR (selection (panel)->buf.st_mode)
-	|| link_isdir (selection (panel))) {
-	if (confirm_view_dir && (panel->marked || panel->dirs_marked)) {
+    if (S_ISDIR (selection (cpanel)->buf.st_mode)
+	|| link_isdir (selection (cpanel))) {
+	if (confirm_view_dir && (cpanel->marked || cpanel->dirs_marked)) {
 	    if (query_dialog
 		(_(" Confirmation "), _("Files tagged, want to cd?"), 0, 2,
 		 _("&Yes"), _("&No")) != 0) {
 		return;
 	    }
 	}
-	if (!do_cd (selection (panel)->fname, cd_exact))
+	if (!do_cd (selection (cpanel)->fname, cd_exact))
 	    message (1, MSG_ERROR, _("Could not change directory"));
 
 	return;
 
     }
 
-    file_idx = panel->selected;
+    file_idx = cpanel->selected;
     while (1) {
 	char *filename;
 
-	filename = panel->dir.list[file_idx].fname;
+	filename = cpanel->dir.list[file_idx].fname;
 
 	dir = view_file (filename, normal, use_internal_view);
 	if (dir == 0)
 	    break;
-	file_idx = scan_for_file (panel, file_idx, dir);
+	file_idx = scan_for_file (cpanel, file_idx, dir);
     }
 }
 
-void view_cmd (WPanel *panel)
+/* Run user's preferred viewer on the currently selected file */
+void
+view_cmd (void)
 {
-    do_view_cmd (panel, 0);
+    do_view_cmd (0);
 }
 
-void view_file_cmd (WPanel *panel)
+/* Ask for file and run user's preferred viewer on it */
+void
+view_file_cmd (void)
 {
     char *filename;
 
-    panel = get_a_panel (panel);
-    filename = input_dialog (_(" View file "), _(" Filename:"), selection (panel)->fname);
-    if (!filename) return;
+    filename =
+	input_dialog (_(" View file "), _(" Filename:"),
+		      selection (cpanel)->fname);
+    if (!filename)
+	return;
 
     view_file (filename, 0, use_internal_view);
     g_free (filename);
 }
 
-void view_simple_cmd (WPanel *panel)
+/* Run plain internal viewer on the currently selected file */
+void
+view_simple_cmd (void)
 {
-    do_view_cmd (panel, 1);
+    do_view_cmd (1);
 }
 
-void filtered_view_cmd (WPanel *panel)
+void
+filtered_view_cmd (void)
 {
     char *command;
 
-    panel = get_a_panel (panel);
-    command = input_dialog (_(" Filtered view "), _(" Filter command and arguments:"),
-			    selection (panel)->fname);
+    command =
+	input_dialog (_(" Filtered view "),
+		      _(" Filter command and arguments:"),
+		      selection (cpanel)->fname);
     if (!command)
 	return;
 
     view (command, "", 0, 0);
 
     g_free (command);
-}
-
-void filtered_view_cmd_cpanel (void)
-{
-    filtered_view_cmd (cpanel);
 }
 
 void do_edit_at_line (const char *what, int start_line)
@@ -1148,11 +1155,6 @@ void edit_symlink_cmd (void)
 void help_cmd (void)
 {
    interactive_display (NULL, "[main]");
-}
-
-void view_panel_cmd (void)
-{
-    view_cmd (cpanel);
 }
 
 void edit_panel_cmd (void)

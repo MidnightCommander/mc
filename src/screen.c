@@ -2181,7 +2181,7 @@ panel_callback (WPanel *panel, int msg, int par)
 
 	define_label (h, 1, _("Help"), help_cmd);
 	define_label (h, 2, _("Menu"), user_file_menu_cmd);
-	define_label (h, 3, _("View"), view_panel_cmd);
+	define_label (h, 3, _("View"), view_cmd);
 	define_label (h, 4, _("Edit"), edit_panel_cmd);
 	define_label (h, 5, _("Copy"), copy_cmd);
 	define_label (h, 6, _("RenMov"), ren_cmd);

@@ -1479,8 +1479,9 @@ static const key_map default_map[] = {
 
     /* Suspend */
     {XCTRL ('z'), suspend_cmd},
+
     /* The filtered view command */
-    {ALT ('!'), filtered_view_cmd_cpanel},
+    {ALT ('!'), filtered_view_cmd},
 
     /* Find file */
     {ALT ('?'), find_cmd},
