@@ -22,6 +22,7 @@ Questions and Answers
           + 2.6 C-o doesn't work!
           + 2.7 What 'keys' are the "a1" and "c1" keys mentioned in the
             manual?
+          + 2.8 How do I change the key bindings?
      * 3 Mouse
           + 3.1 How do I enable mouse support?
           + 3.2 How do I cut and paste text with mouse?
@@ -277,6 +278,13 @@ Questions and Answers
    If you have to ask what these two keys are your keyboard hasn't
    probably got them. Actually, I have never seen a keyboard which has
    got them.
+
+2.8 How do I change the key bindings?
+
+   There is no generic way to reconfigure the key bindings.  You can use
+   the "Learn Keys" dialog to assign keys to some actions listed in that
+   dialog.  However, most actions cannot be redefined to use different
+   keys.
 
 3 Mouse
 
