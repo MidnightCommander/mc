@@ -26,7 +26,7 @@ EDITSRC = edit.c editcmd.c editdraw.c \
 
 EDITOBJS = edit.o editcmd.o editdraw.o \
 	editwidget.o gtkedit.o gtkeditkey.o \
-	mousemark.o propfont.o syntax.o wordproc.o \
+	mousemark.o propfont.o syntax.o wordproc.o
 
 DIST = 	Makefile.in $(EDITSRC)
 

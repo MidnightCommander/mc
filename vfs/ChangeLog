@@ -1,3 +1,7 @@
+Sat Oct  3 01:03:37 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* ftpfs.c (resolve_symlink): minor speed enhancement
+
 Thu Oct  1 18:39:52 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* vfs.h: vfs_force_expire() was incorrectly #define'd
