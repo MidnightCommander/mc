@@ -1,4 +1,5 @@
-MC_PWD_FILE="${TMPDIR-/tmp}/mc-$USER/mc.pwd.$$"
+MC_USER=`id | sed 's/[^(]*(//;s/).*//'`
+MC_PWD_FILE="${TMPDIR-/tmp}/mc-$MC_USER/mc.pwd.$$"
 @bindir@/mc -P "$MC_PWD_FILE" "$@"
 
 if test -r "$MC_PWD_FILE"; then

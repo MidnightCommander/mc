@@ -1,3 +1,10 @@
+2003-08-18  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc-wrapper.csh.in: Use "id" command to find the real user
+	id.  $USER is not reliable.
+	* lib/mc-wrapper.sh.in: Likewise.
+	Reported by Figura Peter <peterf@autus.sk>
+
 2003-08-18  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* acinclude.m4 (MC_WITH_NCURSES): Fix ESCDELAY check on Solaris.
