@@ -1,13 +1,62 @@
 msgid ""
 msgstr ""
-"Date: 1998-05-25 00:45:01-0500\n"
+"Date: 1998-05-25 07:34:02-0500\n"
 "From: Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>\n"
 "Content-Type: text/plain; charset=\n"
 "Xgettext-Options: --default-domain=mc --directory=.. --add-comments --keyword=_ --keyword=N_ --files-from=./POTFILES.in\n"
 "Files: vfs/ftpfs.c vfs/mcfs.c edit/edit.c edit/edit_key_translator.c edit/editcmd.c edit/editmenu.c edit/editoptions.c edit/editwidget.c src/fixhlp.c src/achown.c src/background.c src/boxes.c src/chmod.c src/chown.c src/cmd.c src/command.c src/dialog.c src/dir.c src/ext.c src/file.c src/find.c src/help.c src/hotlist.c src/info.c src/layout.c src/learn.c src/main.c src/menu.c src/option.c src/panelize.c src/screen.c src/subshell.c src/tree.c src/user.c src/util.c src/utilunix.c src/view.c src/win.c src/wtools.c gnome/gcmd.c gnome/gdesktop.c gnome/glayout.c gnome/gprop.c gnome/gscreen.c gnome/gtools.c gnome/gview.c gnome/gwidget.c\n"
 
-#: src/wtools.c:609 vfs/ftpfs.c:444 vfs/ftpfs.c:478 vfs/mcfs.c:184
-msgid "Password:"
+#: vfs/ftpfs.c:602
+msgid " Could not set source routing (%s)"
+msgstr ""
+
+#: vfs/ftpfs.c:2778 vfs/ftpfs.c:2793
+msgid ""
+"~/.netrc file has not correct mode.\n"
+"Remove password or correct mode."
+msgstr ""
+
+#: vfs/mcfs.c:156
+msgid " MCFS "
+msgstr ""
+
+#: vfs/mcfs.c:156
+msgid " The server does not support this version "
+msgstr ""
+
+#: edit/editcmd.c:413 edit/editcmd.c:722 edit/editcmd.c:734 edit/editcmd.c:835 edit/editcmd.c:918 gnome/gdesktop.c:1330 src/ext.c:295 src/help.c:320 src/main.c:671 src/subshell.c:700 src/subshell.c:726 src/utilunix.c:380 src/utilunix.c:384 src/utilunix.c:450 vfs/mcfs.c:172
+msgid " Warning "
+msgstr ""
+
+#: vfs/mcfs.c:173
+msgid ""
+" The remote server is not running on a system port \n"
+" you need a password to log in, but the information may \n"
+" not be safe on the remote side.  Continue? \n"
+msgstr ""
+
+#: vfs/mcfs.c:176
+msgid " Yes "
+msgstr ""
+
+#: vfs/mcfs.c:176
+msgid " No "
+msgstr ""
+
+#: vfs/mcfs.c:178
+msgid " The remote server is running on stange port. Giving up.\n"
+msgstr ""
+
+#: vfs/mcfs.c:190
+msgid " MCFS Password required "
+msgstr ""
+
+#: vfs/mcfs.c:204
+msgid " Invalid password "
+msgstr ""
+
+#: vfs/mcfs.c:270
+msgid " Too many open connections "
 msgstr ""
 
 #. The file-name is printed after the ':'
@@ -64,10 +113,6 @@ msgstr ""
 #. This heads the 'Save As' dialog box
 #: edit/editcmd.c:398
 msgid " Save As "
-msgstr ""
-
-#: edit/editcmd.c:413 edit/editcmd.c:722 edit/editcmd.c:734 edit/editcmd.c:835 edit/editcmd.c:918 gnome/gdesktop.c:1347 src/ext.c:295 src/help.c:320 src/main.c:685 src/subshell.c:700 src/subshell.c:726 src/utilunix.c:377 src/utilunix.c:381 src/utilunix.c:447
-msgid " Warning "
 msgstr ""
 
 #: edit/editcmd.c:414
@@ -312,11 +357,11 @@ msgstr ""
 msgid "Cancel quit"
 msgstr ""
 
-#: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:625 gnome/gdesktop.c:1204 src/cmd.c:248 src/file.c:2365 src/file.c:2691 src/file.c:2881 src/hotlist.c:1027 src/main.c:840 src/screen.c:2040 src/subshell.c:701 src/subshell.c:727 src/tree.c:1195 src/view.c:410
+#: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:625 gnome/gdesktop.c:1187 src/cmd.c:248 src/file.c:2365 src/file.c:2691 src/file.c:2881 src/hotlist.c:1027 src/main.c:826 src/screen.c:2040 src/subshell.c:701 src/subshell.c:727 src/tree.c:1195 src/view.c:410
 msgid "&Yes"
 msgstr ""
 
-#: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:625 gnome/gdesktop.c:1204 src/cmd.c:248 src/file.c:2365 src/file.c:2690 src/file.c:2881 src/hotlist.c:1027 src/main.c:840 src/screen.c:2040 src/subshell.c:701 src/subshell.c:727 src/tree.c:1195 src/view.c:410
+#: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:625 gnome/gdesktop.c:1187 src/cmd.c:248 src/file.c:2365 src/file.c:2690 src/file.c:2881 src/hotlist.c:1027 src/main.c:826 src/screen.c:2040 src/subshell.c:701 src/subshell.c:727 src/tree.c:1195 src/view.c:410
 msgid "&No"
 msgstr ""
 
@@ -581,11 +626,11 @@ msgstr ""
 msgid "&Save mode..."
 msgstr ""
 
-#: edit/editmenu.c:243 edit/editmenu.c:252 src/main.c:1310
+#: edit/editmenu.c:243 edit/editmenu.c:252 src/main.c:1296
 msgid "&Layout..."
 msgstr ""
 
-#: edit/editmenu.c:262 edit/editmenu.c:271 edit/editmenu.c:388 src/chmod.c:174 src/chown.c:131 src/main.c:1341
+#: edit/editmenu.c:262 edit/editmenu.c:271 edit/editmenu.c:388 src/chmod.c:174 src/chown.c:131 src/main.c:1327
 msgid " File "
 msgstr ""
 
@@ -597,11 +642,11 @@ msgstr ""
 msgid " Sear/Repl "
 msgstr ""
 
-#: edit/editmenu.c:265 edit/editmenu.c:274 edit/editmenu.c:438 src/main.c:1342
+#: edit/editmenu.c:265 edit/editmenu.c:274 edit/editmenu.c:438 src/main.c:1328
 msgid " Command "
 msgstr ""
 
-#: edit/editmenu.c:266 edit/editmenu.c:275 src/main.c:1343
+#: edit/editmenu.c:266 edit/editmenu.c:275 src/main.c:1329
 msgid " Options "
 msgstr ""
 
@@ -762,7 +807,7 @@ msgstr ""
 msgid "Error initialising editor.\n"
 msgstr ""
 
-#: edit/editwidget.c:992 gnome/glayout.c:350 src/help.c:812 src/main.c:1672 src/screen.c:2256 src/screen.c:2290 src/tree.c:1451 src/view.c:1987
+#: edit/editwidget.c:992 gnome/glayout.c:350 src/help.c:812 src/main.c:1658 src/screen.c:2256 src/screen.c:2290 src/tree.c:1451 src/view.c:1987
 msgid "Help"
 msgstr ""
 
@@ -786,15 +831,15 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: edit/editwidget.c:999 gnome/gdesktop.c:624 gnome/gdesktop.c:1100 gnome/gscreen.c:545 src/screen.c:2263 src/screen.c:2297
+#: edit/editwidget.c:999 gnome/gdesktop.c:624 gnome/gscreen.c:545 src/screen.c:2263 src/screen.c:2297
 msgid "Delete"
 msgstr ""
 
-#: edit/editwidget.c:1001 src/main.c:1674
+#: edit/editwidget.c:1001 src/main.c:1660
 msgid "PullDn"
 msgstr ""
 
-#: edit/editwidget.c:1002 gnome/gview.c:286 src/help.c:824 src/main.c:1675 src/view.c:1989 src/view.c:2009
+#: edit/editwidget.c:1002 gnome/gview.c:286 src/help.c:824 src/main.c:1661 src/view.c:1989 src/view.c:2009
 msgid "Quit"
 msgstr ""
 
@@ -2102,7 +2147,7 @@ msgstr ""
 msgid "Content: "
 msgstr ""
 
-#: src/find.c:158 src/main.c:1206 src/main.c:1227
+#: src/find.c:158 src/main.c:1192 src/main.c:1213
 msgid "&Tree"
 msgstr ""
 
@@ -2594,7 +2639,7 @@ msgstr ""
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr ""
 
-#: src/main.c:686
+#: src/main.c:672
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -2602,131 +2647,131 @@ msgid ""
 " extra access permissions with the \"su\" command? "
 msgstr ""
 
-#: src/main.c:761
+#: src/main.c:747
 msgid "Press any key to continue..."
 msgstr ""
 
-#: src/main.c:811
+#: src/main.c:797
 msgid " The shell is already running a command "
 msgstr ""
 
-#: gnome/gcmd.c:92 gnome/gdesktop.c:1202 src/main.c:838 src/screen.c:2038
+#: gnome/gcmd.c:92 gnome/gdesktop.c:1185 src/main.c:824 src/screen.c:2038
 msgid " The Midnight Commander "
 msgstr ""
 
-#: gnome/gcmd.c:93 src/main.c:839
+#: gnome/gcmd.c:93 src/main.c:825
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr ""
 
-#: src/main.c:1203 src/main.c:1224
+#: src/main.c:1189 src/main.c:1210
 msgid "&Listing mode..."
 msgstr ""
 
-#: src/main.c:1204 src/main.c:1225
+#: src/main.c:1190 src/main.c:1211
 msgid "&Quick view     C-x q"
 msgstr ""
 
-#: src/main.c:1205 src/main.c:1226
+#: src/main.c:1191 src/main.c:1212
 msgid "&Info           C-x i"
 msgstr ""
 
-#: src/main.c:1208 src/main.c:1229
+#: src/main.c:1194 src/main.c:1215
 msgid "&Sort order..."
 msgstr ""
 
-#: src/main.c:1210 src/main.c:1231
+#: src/main.c:1196 src/main.c:1217
 msgid "&Filter..."
 msgstr ""
 
-#: src/main.c:1213 src/main.c:1234
+#: src/main.c:1199 src/main.c:1220
 msgid "&Network link..."
 msgstr ""
 
-#: src/main.c:1214 src/main.c:1235
+#: src/main.c:1200 src/main.c:1221
 msgid "FT&P link..."
 msgstr ""
 
-#: src/main.c:1218 src/main.c:1239
+#: src/main.c:1204 src/main.c:1225
 msgid "&Drive...       M-d"
 msgstr ""
 
-#: src/main.c:1220 src/main.c:1241
+#: src/main.c:1206 src/main.c:1227
 msgid "&Rescan         C-r"
 msgstr ""
 
-#: src/main.c:1245
+#: src/main.c:1231
 msgid "&User menu          F2"
 msgstr ""
 
-#: src/main.c:1246
+#: src/main.c:1232
 msgid "&View               F3"
 msgstr ""
 
-#: src/main.c:1247
+#: src/main.c:1233
 msgid "&Filtered view     M-!"
 msgstr ""
 
-#: src/main.c:1248
+#: src/main.c:1234
 msgid "&Edit               F4"
 msgstr ""
 
-#: src/main.c:1249
+#: src/main.c:1235
 msgid "&Copy               F5"
 msgstr ""
 
-#: src/main.c:1250
+#: src/main.c:1236
 msgid "c&Hmod           C-x c"
 msgstr ""
 
-#: src/main.c:1252
+#: src/main.c:1238
 msgid "&Link            C-x l"
 msgstr ""
 
-#: src/main.c:1253
+#: src/main.c:1239
 msgid "&SymLink         C-x s"
 msgstr ""
 
-#: src/main.c:1254
+#: src/main.c:1240
 msgid "edit s&Ymlink  C-x C-s"
 msgstr ""
 
-#: src/main.c:1255
+#: src/main.c:1241
 msgid "ch&Own           C-x o"
 msgstr ""
 
-#: src/main.c:1256
+#: src/main.c:1242
 msgid "&Advanced chown       "
 msgstr ""
 
-#: src/main.c:1258
+#: src/main.c:1244
 msgid "&Rename/Move        F6"
 msgstr ""
 
-#: src/main.c:1259
+#: src/main.c:1245
 msgid "&Mkdir              F7"
 msgstr ""
 
-#: src/main.c:1260
+#: src/main.c:1246
 msgid "&Delete             F8"
 msgstr ""
 
-#: src/main.c:1261
+#: src/main.c:1247
 msgid "&Quick cd          M-c"
 msgstr ""
 
-#: src/main.c:1263
+#: src/main.c:1249
 msgid "select &Group      M-+"
 msgstr ""
 
-#: src/main.c:1264
+#: src/main.c:1250
 msgid "u&Nselect group    M-\\"
 msgstr ""
 
-#: src/main.c:1265
+#: src/main.c:1251
 msgid "reverse selec&Tion M-*"
 msgstr ""
 
-#: src/main.c:1267
+#: src/main.c:1253
 msgid "e&Xit              F10"
 msgstr ""
 
@@ -2734,111 +2779,111 @@ msgstr ""
 #. * as a panel still has some problems, I have not yet finished
 #. * the WTree widget port, sorry.
 #.
-#: src/main.c:1276
+#: src/main.c:1262
 msgid "&Directory tree"
 msgstr ""
 
-#: src/main.c:1277
+#: src/main.c:1263
 msgid "&Find file            M-?"
 msgstr ""
 
-#: src/main.c:1279
+#: src/main.c:1265
 msgid "s&Wap panels          C-u"
 msgstr ""
 
-#: src/main.c:1280
+#: src/main.c:1266
 msgid "switch &Panels on/off C-o"
 msgstr ""
 
-#: src/main.c:1282
+#: src/main.c:1268
 msgid "&Compare directories  C-x d"
 msgstr ""
 
-#: src/main.c:1283
+#: src/main.c:1269
 msgid "e&Xternal panelize    C-x !"
 msgstr ""
 
-#: src/main.c:1285
+#: src/main.c:1271
 msgid "show directory s&Izes"
 msgstr ""
 
-#: src/main.c:1288
+#: src/main.c:1274
 msgid "command &History"
 msgstr ""
 
-#: src/main.c:1289
+#: src/main.c:1275
 msgid "di&Rectory hotlist    C-\\"
 msgstr ""
 
-#: src/main.c:1291
+#: src/main.c:1277
 msgid "&Active VFS list      C-x a"
 msgstr ""
 
-#: src/main.c:1294
+#: src/main.c:1280
 msgid "&Background jobs      C-x j"
 msgstr ""
 
-#: src/main.c:1298
+#: src/main.c:1284
 msgid "&Undelete files (ext2fs only)"
 msgstr ""
 
-#: src/main.c:1301
+#: src/main.c:1287
 msgid "&Listing format edit"
 msgstr ""
 
-#: src/main.c:1303
+#: src/main.c:1289
 msgid "&Extension file edit"
 msgstr ""
 
-#: src/main.c:1304
+#: src/main.c:1290
 msgid "&Menu file edit"
 msgstr ""
 
-#: src/main.c:1309
+#: src/main.c:1295
 msgid "&Configuration..."
 msgstr ""
 
-#: src/main.c:1311
+#: src/main.c:1297
 msgid "c&Onfirmation..."
 msgstr ""
 
-#: src/main.c:1312
+#: src/main.c:1298
 msgid "&Display bits..."
 msgstr ""
 
-#: src/main.c:1314
+#: src/main.c:1300
 msgid "learn &Keys..."
 msgstr ""
 
-#: src/main.c:1317
+#: src/main.c:1303
 msgid "&Virtual FS..."
 msgstr ""
 
-#: src/main.c:1320
+#: src/main.c:1306
 msgid "&Save setup"
 msgstr ""
 
-#: src/main.c:1336 src/main.c:1338
+#: src/main.c:1322 src/main.c:1324
 msgid " Left "
 msgstr ""
 
-#: src/main.c:1338
+#: src/main.c:1324
 msgid " Above "
 msgstr ""
 
-#: src/main.c:1346 src/main.c:1348
+#: src/main.c:1332 src/main.c:1334
 msgid " Right "
 msgstr ""
 
-#: src/main.c:1348
+#: src/main.c:1334
 msgid " Below "
 msgstr ""
 
-#: src/main.c:1409
+#: src/main.c:1395
 msgid " Information "
 msgstr ""
 
-#: src/main.c:1410
+#: src/main.c:1396
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -2846,149 +2891,149 @@ msgid ""
 " the details.                                           "
 msgstr ""
 
-#: src/main.c:1673 src/screen.c:2257 src/screen.c:2291
+#: src/main.c:1659 src/screen.c:2257 src/screen.c:2291
 msgid "Menu"
 msgstr ""
 
-#: src/main.c:1884
+#: src/main.c:1870
 msgid "Thank you for using GNU Midnight Commander"
 msgstr ""
 
-#: src/main.c:2246
+#: src/main.c:2232
 msgid "with mouse support on xterm%s.\n"
 msgstr ""
 
-#: src/main.c:2247
+#: src/main.c:2233
 msgid " and the Linux console"
 msgstr ""
 
-#: src/main.c:2340
+#: src/main.c:2326
 msgid "The TERM environment variable is unset!\n"
 msgstr ""
 
-#: src/main.c:2592
+#: src/main.c:2578
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr ""
 
-#: src/main.c:2597
+#: src/main.c:2583
 msgid "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
 
-#: src/main.c:2658
+#: src/main.c:2644
 msgid "[DEVEL-ONLY: Debug the background code]"
 msgstr ""
 
-#: src/main.c:2661
+#: src/main.c:2647
 msgid "Create command file to set default directory upon exit."
 msgstr ""
 
-#: src/main.c:2663
+#: src/main.c:2649
 msgid "Force color mode."
 msgstr ""
 
-#: src/main.c:2664
+#: src/main.c:2650
 msgid "Specify colors (use --help-colors to get a list)."
 msgstr ""
 
-#: src/main.c:2666
+#: src/main.c:2652
 msgid "[DEVEL-ONLY: Debug the subshell."
 msgstr ""
 
-#: src/main.c:2668
+#: src/main.c:2654
 msgid "Startup the internal editor."
 msgstr ""
 
-#: src/main.c:2669
+#: src/main.c:2655
 msgid "Shows this help message."
 msgstr ""
 
-#: src/main.c:2670
+#: src/main.c:2656
 msgid "Help on how to specify colors."
 msgstr ""
 
-#: src/main.c:2672
+#: src/main.c:2658
 msgid "Log ftpfs commands to the file."
 msgstr ""
 
-#: src/main.c:2674
+#: src/main.c:2660
 msgid "Prints out the configured paths."
 msgstr ""
 
-#: src/main.c:2676
+#: src/main.c:2662
 msgid "Force black and white display."
 msgstr ""
 
-#: src/main.c:2677
+#: src/main.c:2663
 msgid "Disable mouse support."
 msgstr ""
 
-#: src/main.c:2679
+#: src/main.c:2665
 msgid "Force the concurrent subshell mode"
 msgstr ""
 
-#: src/main.c:2680
+#: src/main.c:2666
 msgid "Disable the concurrent subshell mode."
 msgstr ""
 
-#: src/main.c:2681
+#: src/main.c:2667
 msgid "Force subshell execution."
 msgstr ""
 
-#: src/main.c:2683
+#: src/main.c:2669
 msgid "At exit, print the last working directory."
 msgstr ""
 
-#: src/main.c:2684
+#: src/main.c:2670
 msgid "Reset softkeys (HP terminals only) to their terminfo/termcap default."
 msgstr ""
 
-#: src/main.c:2685
+#: src/main.c:2671
 msgid "Disables verbose operation (for slow terminals)."
 msgstr ""
 
-#: src/main.c:2687
+#: src/main.c:2673
 msgid "Use simple symbols for line drawing."
 msgstr ""
 
-#: src/main.c:2692
+#: src/main.c:2678
 msgid "Activate support for the TERMCAP variable."
 msgstr ""
 
-#: src/main.c:2694
+#: src/main.c:2680
 msgid "Report versionand configuration options."
 msgstr ""
 
-#: src/main.c:2695
+#: src/main.c:2681
 msgid "Start up into the viewer mode."
 msgstr ""
 
-#: src/main.c:2696
+#: src/main.c:2682
 msgid "Force xterm mouse support and screen save/restore"
 msgstr ""
 
-#: src/main.c:2697
+#: src/main.c:2683
 msgid "Geometry for the window"
 msgstr ""
 
-#: src/main.c:2698
+#: src/main.c:2684
 msgid "No windows opened at startup"
 msgstr ""
 
-#: src/main.c:2775
+#: src/main.c:2761
 msgid "[this dir] [other dir]"
 msgstr ""
 
-#: src/main.c:3017
+#: src/main.c:3003
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 
-#: src/main.c:3105
+#: src/main.c:3091
 msgid " Notice "
 msgstr ""
 
-#: src/main.c:3106
+#: src/main.c:3092
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -3221,7 +3266,7 @@ msgstr ""
 msgid "Unknow tag on display format: "
 msgstr ""
 
-#: gnome/gdesktop.c:1203 src/screen.c:2039
+#: gnome/gdesktop.c:1186 src/screen.c:2039
 msgid " Do you really want to execute? "
 msgstr ""
 
@@ -3360,15 +3405,15 @@ msgstr ""
 msgid " User menu "
 msgstr ""
 
-#: src/util.c:232
+#: src/util.c:235
 msgid "name_trunc: too big"
 msgstr ""
 
-#: src/utilunix.c:377
+#: src/utilunix.c:380
 msgid " Pipe failed "
 msgstr ""
 
-#: src/utilunix.c:381
+#: src/utilunix.c:384
 msgid " Dup failed "
 msgstr ""
 
@@ -3710,6 +3755,10 @@ msgid "NumLock on keypad"
 msgstr ""
 
 #: src/wtools.c:609
+msgid "Password:"
+msgstr ""
+
+#: src/wtools.c:609
 msgid "Password"
 msgstr ""
 
@@ -3738,19 +3787,15 @@ msgstr ""
 msgid "Do you want to delete "
 msgstr ""
 
-#: gnome/gdesktop.c:1093 gnome/gscreen.c:514 gnome/gscreen.c:515
-msgid "Properties"
-msgstr ""
-
-#: gnome/gdesktop.c:1213
+#: gnome/gdesktop.c:1196
 msgid "Open with..."
 msgstr ""
 
-#: gnome/gdesktop.c:1214 gnome/gscreen.c:466
+#: gnome/gdesktop.c:1197 gnome/gscreen.c:466
 msgid "Enter extra arguments:"
 msgstr ""
 
-#: gnome/gdesktop.c:1347
+#: gnome/gdesktop.c:1330
 msgid " Could not open %s directory"
 msgstr ""
 
@@ -4092,6 +4137,10 @@ msgstr ""
 
 #: gnome/gscreen.c:465
 msgid " Open with..."
+msgstr ""
+
+#: gnome/gscreen.c:514 gnome/gscreen.c:515
+msgid "Properties"
 msgstr ""
 
 #: gnome/gscreen.c:517 gnome/gscreen.c:518

@@ -5,6 +5,7 @@
                1995 Jakub Jelinek
                1995, 1996, 1997 Miguel de Icaza
 	       1997 Norbert Warmuth
+	       1998 Pavel Machek
    
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -28,7 +29,6 @@
   etc., (tarfs as well), we should give there a user selectable timeout
   and assign a key sequence.  
 - use hash table instead of linklist to cache ftpfs directory.
-- complete rename operation.
  */
 
 #include <config.h>
@@ -89,8 +89,6 @@
 
 #define UPLOAD_ZERO_LENGTH_FILE
 
-void print_vfs_message(char *, ...);
-
 static int ftpfserrno;
 static int code;
 
@@ -106,7 +104,7 @@ int use_netrc = 1;
 extern char *home_dir;
 
 /* Anonymous setup */
-char *ftpfs_anonymous_passwd;
+char *ftpfs_anonymous_passwd = 0;
 int ftpfs_directory_timeout;
 
 /* Proxy host */
@@ -131,8 +129,6 @@ static FILE *ftpfs_logfile;
 static int force_expiration = 0;
 
 struct linklist *ftpfs_connections_list;
-
-extern char *last_current_dir;
 
 /* command wait_flag: */
 #define NONE        0x00
@@ -441,7 +437,7 @@ login_server (struct ftpfs_connection *bucket, char *netrcpass)
 	    if (!bucket->password){
 		p = copy_strings (" FTP: Password required for ", quser(bucket), 
 				  " ", NULL);
-		op = input_dialog (p, _("Password:"), "");
+		op = vfs_get_password (p);
 		free (p);
 		if (op == NULL) {
 		    ftpfserrno = EPERM;
@@ -475,7 +471,7 @@ login_server (struct ftpfs_connection *bucket, char *netrcpass)
 	    wipe_password (proxypass);
 	p = copy_strings(" Proxy: Password required for ", proxyname, " ",
 			 NULL);
-	proxypass = input_dialog (p, _("Password:"), "");
+	proxypass = vfs_get_password (p);
 	free(p);
 	if (proxypass == NULL) {
 	    ftpfserrno = EPERM;
@@ -603,7 +599,7 @@ setup_source_route (int socket, int dest)
 	ptr++;
     if (setsockopt (socket, IPPROTO_IP, IP_OPTIONS,
 		    buffer, ptr - buffer) < 0)
-	message_2s (1, " Error ", " Could not set source routing (%s)", unix_error_string (errno));
+	message_2s (1, MSG_ERROR, _(" Could not set source routing (%s)"), unix_error_string (errno));
 }
 #else
 #define setup_source_route(x,y)
@@ -619,7 +615,7 @@ load_no_proxy_list ()
 {
     /* FixMe: shouldn't be hardcoded!!! */
     char		s[258]; /* provide for 256 characters and nl */
-    struct no_proxy_entry *np, *current;
+    struct no_proxy_entry *np, *current = 0;
     FILE	*npf;
     int		c;
     char	*p;
@@ -890,13 +886,7 @@ open_command_connection (char *host, char *user, int port, char *netrcpass)
     qhome(bucket) = ftpfs_get_current_directory (bucket);
     if (!qhome(bucket))
         qhome(bucket) = strdup ("/");
-    if (last_current_dir) {
-        if (last_current_dir [strlen (last_current_dir) - 1] == '/')
-            qupdir(bucket) = strdup (last_current_dir);
-        else
-            qupdir(bucket) = copy_strings (last_current_dir, "/", NULL);
-    } else
-        qupdir(bucket) = strdup ("/");
+    qupdir(bucket) = strdup ("/"); /* FIXME: I changed behavior to ignore last_current_dir */
     return bucket;
 }
 
@@ -1018,7 +1008,7 @@ void ftpfs_fill_names (void (*func)(char *))
     do {
 	if ((bucket = lptr->data) != 0){
 
-	    path_name = copy_strings ("ftp://", quser (bucket),
+	    path_name = copy_strings ("/#ftp.", quser (bucket),
 				      "@",      qhost (bucket), 
 				      qcdir(bucket), 0);
 	    (*func)(path_name);
@@ -1177,36 +1167,47 @@ ftpfs_get_path (struct ftpfs_connection **bucket, char *path)
     char *user, *host, *remote_path, *pass;
     int port;
 
-    /* An absolute path name, try to determine connection socket */
-    if (strncmp (path, "ftp://", 6) == 0){
-	path += 6;
+#ifndef BROKEN_PATHS
+    if (strncmp (path, "/#ftp:", 6))
+        return NULL; 	/* Normal: consider cd /bla/#ftp */ 
+#else
+    if (!(path = strstr (path, "/#ftp:")))
+        return NULL;
+#endif    
+    path += 6;
 
-	if (!(remote_path = ftpfs_get_host_and_username (path, &host, &user, 
-	    &port, &pass))) {
-	    ftpfserrno = ENOENT;
-	    free (host);
-	    free (user);
-	    if (pass)
-		wipe_password (pass);
-	    return NULL;
+    if (!(remote_path = ftpfs_get_host_and_username (path, &host, &user, &port, &pass)))
+        ftpfserrno = ENOENT;
+    else {
+        if ((*bucket = ftpfs_open_link (host, user, port, pass)) == NULL) {
+            free (remote_path);
+	    remote_path = NULL;
 	}
-	if ((*bucket = ftpfs_open_link (host, user, port, pass)) == NULL) {
-	    free (remote_path);
-	    free (host);
-	    free (user);
-	    if (pass)
-	        wipe_password (pass);
-	    return NULL;
-	}
-        free (host);
-        free (user);
-	if (pass)
-	    wipe_password (pass);
-	return remote_path;
     }
-    /* never get here !!! */
-    message_1s(1, " Error ", " Oops, you just hit a bug in the code ");
-    return NULL;
+    free (host);
+    free (user);
+    if (pass)
+        wipe_password (pass);
+
+    if (!remote_path) 
+        return NULL;
+
+    /* NOTE: Usage of tildes is deprecated, consider:
+     * cd /#ftp:pavel@hobit
+     * cd ~
+     * And now: what do I want to do? Do I want to go to /home/pavel or to
+     * /#ftp:hobit/home/pavel? I think first has better sense...
+     */
+    {
+        int f = !strcmp( remote_path, "/~" );
+	if (f || !strncmp( remote_path, "/~/", 3 )) {
+	    char *s;
+	    s = concat_dir_and_file( qhome (*bucket), remote_path +3-f );
+	    free (remote_path);
+	    remote_path = s;
+	}
+    }
+    return remote_path;
 }
 
 static void
@@ -1635,7 +1636,7 @@ int retrieve_file_start(struct ftpentry *fe)
 
 int retrieve_file_start2(struct ftpentry *fe)
 {
-    remotelocal_handle = open(fe->local_filename, O_RDWR | O_CREAT | O_TRUNC, 0600);
+    remotelocal_handle = open(fe->local_filename, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, 0600);
     if (remotelocal_handle == -1) {
 	ftpfserrno = EIO;
 	free(fe->local_filename);
@@ -1649,10 +1650,12 @@ int retrieve_file_start2(struct ftpentry *fe)
     return 1;
 }
 
-void ftpfs_flushdir ()
+void ftpfs_flushdir (void)
 {
 	    force_expiration = 1;
 }
+
+static int remove_temp_file (char *file_name);
 
 int ftpfs_ctl (void *data, int ctlop, int arg)
 {
@@ -1731,6 +1734,9 @@ int ftpfs_ctl (void *data, int ctlop, int arg)
 int ftpfs_setctl (char *path, int ctlop, char *arg)
 {
     switch (ctlop) {
+	case MCCTL_REMOVELOCALCOPY:
+	    return remove_temp_file (path);
+
         case MCCTL_SETREMOTECOPY: if (localname) free (localname);
             localname = strdup (vfs_canon (arg));
             return 1;
@@ -1748,7 +1754,7 @@ int retrieve_file(struct ftpentry *fe)
     if (fe->local_filename)
         return 1;
     fe->local_stat.st_mtime = 0;
-    fe->local_filename = strdup(tmpnam(NULL));
+    fe->local_filename = tempnam (0, "ftpfs");
     fe->local_is_temp = 1;
     if (fe->local_filename == NULL) {
 	ftpfserrno = ENOMEM;
@@ -1911,7 +1917,7 @@ _get_file_entry(struct ftpfs_connection *bucket, char *file_name,
 			ent->local_filename = 0;
 		    }
 		    if (flags & O_TRUNC) {
-			ent->local_filename = strdup(tmpnam(NULL));
+			ent->local_filename = tempnam (0, "ftpfs");
 			if (ent->local_filename == NULL) {
 			    ftpfserrno = ENOMEM;
 			    return NULL;
@@ -1964,7 +1970,7 @@ _get_file_entry(struct ftpfs_connection *bucket, char *file_name,
 	ent->bucket = bucket;
 	ent->name = strdup(p);
 	ent->remote_filename = strdup(file_name);
-	ent->local_filename = strdup(tmpnam(NULL));
+	ent->local_filename = tempnam(0, "ftpfs");
 	if (!ent->name && !ent->remote_filename && !ent->local_filename) {
 	    ftpentry_destructor(ent);
 	    ftpfserrno = ENOMEM;
@@ -2000,6 +2006,43 @@ _get_file_entry(struct ftpfs_connection *bucket, char *file_name,
 	ftpfserrno = ENOENT;
 	return NULL;
     }
+}
+
+/* this just free's the local temp file. I don't know if the
+   remote file can be used after this without crashing - paul
+   psheer@obsidian.co.za psheer@icon.co.za */
+static int remove_temp_file (char *file_name)
+{
+    char *p, q;
+    struct ftpfs_connection *bucket;
+    struct ftpentry *ent;
+    struct linklist *file_list, *lptr;
+    struct ftpfs_dir *dcache;
+
+    if (!(file_name = ftpfs_get_path (&bucket, file_name)))
+	return -1;
+    p = strrchr (file_name, '/');
+    q = *p;
+    *p = '\0';
+    dcache = retrieve_dir (bucket, *file_name ? file_name : "/");
+    if (dcache == NULL)
+	return -1;
+    file_list = dcache->file_list;
+    *p++ = q;
+    if (!*p)
+	p = ".";
+    for (lptr = file_list->next; lptr != file_list; lptr = lptr->next) {
+	ent = lptr->data;
+	if (strcmp (p, ent->name) == 0) {
+	    if (ent->local_filename) {
+		unlink (ent->local_filename);
+		free (ent->local_filename);
+		ent->local_filename = 0;
+		return 0;
+	    }
+	}
+    }
+    return -1;
 }
 
 static struct ftpentry *
@@ -2194,7 +2237,7 @@ static int ftpfs_errno (void)
 
 /* Explanation:
  * On some operating systems (Slowaris 2 for example)
- * the d_name member is just a char long (Nice trick that break everything,
+ * the d_name member is just a char long (nice trick that break everything),
  * so we need to set up some space for the filename.
  */
 struct ftpfs_dirent {
@@ -2206,27 +2249,7 @@ struct ftpfs_dirent {
     struct ftpfs_dir *dcache;
 };
 
-char *ftpfs_gethome (char *servername)
-{
-    struct ftpfs_connection *bucket;
-    char *remote_path;
-
-    if (!(remote_path = ftpfs_get_path (&bucket, servername)))
-        return NULL;
-    free (remote_path);
-    return qhome(bucket);
-}
-
-char *ftpfs_getupdir (char *servername)
-{
-    struct ftpfs_connection *bucket;
-    char *remote_path;
-
-    if (!(remote_path = ftpfs_get_path (&bucket, servername)))
-        return NULL;
-    free (remote_path);
-    return qupdir(bucket);
-}
+/* Possible FIXME: what happens if one directory is opened twice ? */
 
 static void *ftpfs_opendir (char *dirname)
 {
@@ -2269,6 +2292,32 @@ static void *ftpfs_readdir (void *data)
 #endif
     dirp->pos = dirp->pos->next;
     return (void *) &dirp->dent;
+}
+
+static int ftpfs_telldir (void *data)
+{
+    struct ftpfs_dirent *dirp = data;
+    struct linklist *pos;
+    int i = 0;
+    
+    pos = dirp->dcache->file_list->next;
+    while( pos!=dirp->dcache->file_list) {
+    	if (pos == dirp->pos)
+	    return i;
+	pos = pos->next;
+	i++;
+    }
+    return -1;
+}
+
+static void ftpfs_seekdir (void *data, int pos)
+{
+    struct ftpfs_dirent *dirp = data;
+    int i;
+
+    dirp->pos = dirp->dcache->file_list->next;
+    for (i=0; i<pos; i++)
+        ftpfs_readdir(data);
 }
 
 static int ftpfs_closedir (void *info)
@@ -2580,6 +2629,8 @@ vfs ftpfs_vfs_ops = {
     ftpfs_opendir,
     ftpfs_readdir,
     ftpfs_closedir,
+    ftpfs_telldir,
+    ftpfs_seekdir,
 
     ftpfs_stat,
     ftpfs_lstat,
@@ -2724,8 +2775,8 @@ int lookup_netrc (char *host, char **login, char **pass)
 			stat (netrcname, &mystat) >= 0 &&
 			(mystat.st_mode & 077)) {
 			if (be_angry) {
-			    message_1s (1, "Error", "~/.netrc file has not correct mode.\n"
-					         "Remove password or correct mode.");
+			    message_1s (1, MSG_ERROR, _("~/.netrc file has not correct mode.\n"
+							"Remove password or correct mode."));
 			    be_angry = 0;
 			}
 			free (netrc);
@@ -2739,8 +2790,8 @@ int lookup_netrc (char *host, char **login, char **pass)
 		    if (stat (netrcname, &mystat) >= 0 && 
 		        (mystat.st_mode & 077)) {
 			if (be_angry) {
-			    message_1s (1, "Error", "~/.netrc file has not correct mode.\n"
-					            "Remove password or correct mode.");
+			    message_1s (1, MSG_ERROR, _("~/.netrc file has not correct mode.\n"
+							"Remove password or correct mode."));
 			    be_angry = 0;
 			}
 			free (netrc);

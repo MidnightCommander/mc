@@ -80,6 +80,16 @@ static void *local_opendir (char *dirname)
     return local_info;
 }
 
+static int local_telldir (void *data)
+{
+    return telldir( *(DIR **) data );
+}
+
+static void local_seekdir (void *data, int offset)
+{
+    seekdir( *(DIR **) data, offset );
+}
+
 static void *local_readdir (void *data)
 {
     return readdir (*(DIR **) data);
@@ -249,6 +259,8 @@ vfs local_vfs_ops = {
     local_opendir,
     local_readdir,
     local_closedir,
+    local_telldir,
+    local_seekdir,
 
     local_stat,
     local_lstat,

@@ -2,6 +2,7 @@
    Copyright (C) 1995 The Free Software Foundation
    
    Written by: 1995 Jakub Jelinek
+   Rewritten by: 1998 Pavel Machek
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -37,6 +38,7 @@
 #include <time.h>
 #include "../src/fs.h"
 #include "../src/util.h"
+#include "../src/dialog.h"
 #include "../src/mem.h"
 #include "../src/mad.h"
 #include "../src/main.h"	/* For shell_execute */
@@ -53,23 +55,10 @@ static struct stat hstat;		/* Stat struct corresponding */
 static char *current_file_name, *current_link_name;
 static char *extfs_current_dir;
 
-enum {
-    EFS_ARG_EMPTY,
-    EFS_NEED_FILE,
-    EFS_NEED_ARG
-};
-
 #define MAXEXTFS 32
 static char *extfs_prefixes [MAXEXTFS];
 static char extfs_need_archive [MAXEXTFS];
 static int extfs_no = 0;
-
-struct extfs_ext {
-    char *ext;
-    struct extfs_ext *next;
-};
-
-static struct extfs_ext *extfs_extensions [MAXEXTFS];
 
 void extfs_fill_names (void (*func)(char *))
 {
@@ -77,7 +66,7 @@ void extfs_fill_names (void (*func)(char *))
     char *name;
     
     while (a){
-	name = copy_strings (extfs_prefixes [a->fstype], ":", 
+	name = copy_strings (extfs_prefixes [a->fstype], "#", 
 			    (a->name ? a->name : ""), "/",
 			     a->current_dir->name, 0);
 	(*func)(name);
@@ -196,9 +185,10 @@ static FILE *open_extfs_archive (int fstype, char *name, struct extfs_archive **
     struct extfs_archive *current_archive;
     struct extfs_entry *root_entry;
     char *local_name = NULL, *tmp = 0;
-    const int uses_archive = extfs_need_archive [fstype];
+    int uses_archive = extfs_need_archive [fstype];
+    char *tmpfile;
     
-    if (uses_archive == EFS_NEED_FILE){
+    if (uses_archive){
 	if (mc_stat (name, &mystat) == -1)
 	    return NULL;
 	if (!vfs_file_is_local (name)) {
@@ -209,9 +199,12 @@ static FILE *open_extfs_archive (int fstype, char *name, struct extfs_archive **
         tmp = name_quote (name, 0);
     }
 
+#if 0
+    /* Sorry, what is this good for? */
     if (uses_archive == EFS_NEED_ARG){
         tmp = name_quote (name, 0);
     }
+#endif
     
     cmd = copy_strings (LIBDIR "extfs/", extfs_prefixes [fstype], 
                         " list ", local_name ? local_name : tmp, 0);
@@ -226,7 +219,7 @@ static FILE *open_extfs_archive (int fstype, char *name, struct extfs_archive **
     }
     
     current_archive = (struct extfs_archive *)
-                      xmalloc (sizeof (struct extfs_archive), "Tar archive");
+                      xmalloc (sizeof (struct extfs_archive), "Extfs archive");
     current_archive->fstype = fstype;
     current_archive->name = name ? strdup (name): name;
     current_archive->local_name = local_name;
@@ -272,7 +265,7 @@ int read_extfs_archive (int fstype, char *name, struct extfs_archive **pparc)
     struct extfs_archive *current_archive;
 
     if ((extfsd = open_extfs_archive (fstype, name, &current_archive)) == NULL) {
-        message_3s (1, " Error ", "Couldn't open %s archive\n%s", 
+        message_3s (1, MSG_ERROR, _("Couldn't open %s archive\n%s"), 
             extfs_prefixes [fstype], name);
 	return -1;
     }
@@ -304,7 +297,7 @@ int read_extfs_archive (int fstype, char *name, struct extfs_archive **pparc)
                     goto read_extfs_continue;
                 pent = extfs_find_entry (current_archive->root_entry, q, 1, 0) ;
                 if (pent == NULL) {
-                    message_1s (1, " Error ", "Inconsistent extfs archive");
+                    message_1s (1, MSG_ERROR, _("Inconsistent extfs archive"));
                     /* FIXME: Should clean everything one day */
                     free (buffer);
 		    pclose (extfsd);
@@ -324,7 +317,7 @@ int read_extfs_archive (int fstype, char *name, struct extfs_archive **pparc)
 		if (!S_ISLNK (hstat.st_mode) && current_link_name != NULL) {
 	            pent = extfs_find_entry (current_archive->root_entry, current_link_name, 0, 0);
 	            if (pent == NULL) {
-	                message_1s (1, " Error ", "Inconsistent extfs archive");
+	                message_1s (1, MSG_ERROR, _("Inconsistent extfs archive"));
                     /* FIXME: Should clean everything one day */
 			free (buffer);
 			pclose (extfsd);
@@ -358,7 +351,8 @@ int read_extfs_archive (int fstype, char *name, struct extfs_archive **pparc)
 	    		inode->linkname = current_link_name;
 	    		current_link_name = NULL;
 		    } else {
-			inode->mode &= ~S_IFLNK;
+		        if (S_ISLNK( hstat.st_mode))
+			    inode->mode &= ~S_IFLNK; /* You *DON'T* want to do this always */
 	    		inode->linkname = NULL;
 		    }
 		    if (S_ISDIR (hstat.st_mode))
@@ -380,112 +374,46 @@ int read_extfs_archive (int fstype, char *name, struct extfs_archive **pparc)
     return 0;
 }
 
-char *extfs_analysis (char *name, char **archive, int *fstype, int is_dir)
-{
-    char *p, *local;
-    int j;
-    char *archive_name = NULL;
-    struct extfs_ext *ext;
-                                               /*  |  this is len of prefix plus some minimum
-                                                *  v  space needed for the extension */
-    *fstype = extfs_prefix_to_type (name);
-    if (*fstype == -1) {
-        extfserrno = ENOENT;
-        return NULL;
-    }
-
-    if (extfs_need_archive [*fstype] == EFS_ARG_EMPTY){
-	*archive = 0;
-	return strdup (name + strlen(extfs_prefixes [*fstype]) + 1);
-    }
-
-    if (extfs_need_archive [*fstype] == EFS_NEED_ARG){
-	char c;
-	p = strchr (name + strlen (extfs_prefixes [*fstype]) + 1, '/');
-	if (p){
-	    c = *p;
-	    *p = 0;
-	}
-	archive_name = strdup (name + strlen (extfs_prefixes [*fstype]) + 1);
-	if (p)
-	    *p = c;
-	*archive = archive_name;
-	return p ? strdup (p+1) : NULL;
-    }
-    for (p = name + strlen (name); p > name; p--)
-    	if (*p == '/' || (is_dir && !*p))
-    	    for (ext = extfs_extensions [*fstype]; ext; ext = ext->next) {
-    	        j = strlen (ext->ext);
-    	        if (p - j < name + 1)
-    	            continue;
-    	        if (!strncmp (p - j, ext->ext, j)) {
-    	            char c = *p;
-    	            
-    	            *p = 0;
-    	            archive_name = 
-    	                vfs_canon (name + strlen (extfs_prefixes [*fstype]) + 1);
-    	            *archive = archive_name;
-    	            *p = c;
-    	            local = strdup (p);
-    	            return local;
-    	        }
-    	    }
-    extfserrno = ENOENT;
-    return NULL;
-}
-
 /* Returns allocated path inside the archive or NULL */
 static char *extfs_get_path (char *inname, struct extfs_archive **archive, int is_dir,
     int do_not_open)
 {
-    char *local, *archive_name;
+    char *local, *archive_name, *op;
     int result = -1;
     struct extfs_archive *parc;
     struct vfs_stamping *parent;
     vfs *v;
     int fstype;
     
-    local = extfs_analysis (inname, &archive_name, &fstype, is_dir);
-    if (local == NULL) {
-    	extfserrno = ENOENT;
-    	return NULL;
-    }
+    archive_name = inname;
+    vfs_split( inname, &local, &op );
+    fstype = extfs_which( op );
+    if (!local)
+        local = "";
+    if (fstype == -1)
+        return NULL;
 
-    /* In the case of the file systems that do not require a local
-     * archive, we compare the fstype instead of the archive name,
-     * of course, this has the drawback that we can't have more than
-     * one external file system for each prefix.
+    /* All filesystems should have some local archive, at least
+     * it can be '/'.
      *
      * Actually, we should implement an alias mechanism that would
      * translate: "a:" to "dos:a.
      *
      */
     for (parc = first_archive; parc != NULL; parc = parc->next)
-	if (archive_name){
-	    if (parc->name) {
-		if (!strcmp (parc->name, archive_name)) {
-		    vfs_stamp (&extfs_vfs_ops, (vfsid) parc);
-		    goto return_success;
-		}
-	    }
-	} else {
-	    if (parc->fstype == fstype){
-		vfs_stamp (&extfs_vfs_ops, (vfsid) parc);
+        if (parc->name) {
+	    if (!strcmp (parc->name, archive_name)) {
+	        vfs_stamp (&extfs_vfs_ops, (vfsid) parc);
 		goto return_success;
 	    }
 	}
-	    
-    if (do_not_open)
-        result = -1;
-    else
-        result = read_extfs_archive (fstype, archive_name, &parc);
+
+    result = do_not_open ? -1 : read_extfs_archive (fstype, archive_name, &parc);
     if (result == -1) {
 	extfserrno = EIO;
-	free(local);
-	if (archive_name)
-	    free(archive_name);
 	return NULL;
     }
+
     if (archive_name){
 	v = vfs_type (archive_name);
 	if (v == &local_vfs_ops) {
@@ -501,8 +429,6 @@ static char *extfs_get_path (char *inname, struct extfs_archive **archive, int i
     }
  return_success:
     *archive = parc;
-    if (archive_name)
-	free (archive_name);
     return local;
 }
 
@@ -591,96 +517,6 @@ static struct extfs_entry *extfs_resolve_symlinks (struct extfs_entry *entry)
     return res;
 }
 
-static struct extfs_entry*
-__extfs_find_entry (struct extfs_entry *dir, char *name, 
-		     struct extfs_loop_protect *list, int make_dirs, int make_file)
-{
-    struct extfs_entry *pent, *pdir;
-    char *p, *q, *name_end;
-    char c;
-
-    if (*name == '/') { /* Handle absolute paths */
-    	name++;
-    	dir = dir->inode->archive->root_entry;
-    }
-
-    pent = dir;
-    p = name;
-    name_end = name + strlen (name);
-    q = strchr (p, '/');
-    c = '/';
-    if (!q)
-	q = strchr (p, 0);
-    
-    for (; pent != NULL && c && *p; ){
-	c = *q;
-	*q = 0;
-
-	if (strcmp (p, ".")){
-	    if (!strcmp (p, "..")) 
-		pent = pent->dir;
-	    else {
-		if ((pent = __extfs_resolve_symlinks (pent, list))==NULL){
-		    *q = c;
-		    return NULL;
-		}
-		if (c == '/' && !S_ISDIR (pent->inode->mode)){
-		    *q = c;
-		    notadir = 1;
-		    return NULL;
-		}
-		pdir = pent;
-		for (pent = pent->inode->first_in_subdir; pent; pent = pent->next_in_dir)
-		    /* Hack: I keep the original semanthic unless
-		       q+1 would break in the strchr */
-		    if (!strcmp (pent->name, p)){
-			if (q + 1 > name_end){
-			    *q = c;
-			    notadir = !S_ISDIR (pent->inode->mode);
-			    return pent;
-			}
-			break;
-		    }
-		
-		/* When we load archive, we create automagically
-		 * non-existant directories
-		 */
-		if (pent == NULL && make_dirs) { 
-		    pent = generate_entry (dir->inode->archive, p, pdir, S_IFDIR | 0777);
-		}
-		if (pent == NULL && make_file) { 
-		    pent = generate_entry (dir->inode->archive, p, pdir, 0777);
-		}
-	    }
-	}
-	/* Next iteration */
-	*q = c;
-	p = q + 1;
-	q = strchr (p, '/');
-	if (!q)
-	    q = strchr (p, 0);
-    }
-    if (pent == NULL)
-    	extfserrno = ENOENT;
-    return pent;
-}
-
-static struct extfs_entry *extfs_find_entry (struct extfs_entry *dir, char *name, int make_dirs, int make_file)
-{
-    struct extfs_entry *res;
-    
-    errloop = 0;
-    notadir = 0;
-    res = __extfs_find_entry (dir, name, NULL, make_dirs, make_file);
-    if (res == NULL) {
-    	if (errloop)
-    	    extfserrno = ELOOP;
-    	else if (notadir)
-    	    extfserrno = ENOTDIR;
-    }
-    return res;
-}
-
 struct extfs_pseudofile {
     struct extfs_archive *archive;
     unsigned int has_changed:1;
@@ -710,14 +546,18 @@ void extfs_run (char *file)
 
     if ((p = extfs_get_path (file, &archive, 0, 0)) == NULL)
 	return;
-    q = name_quote (((*p == '/') ? p + 1 : p), 0);
+    q = name_quote (p, 0);
     
     archive_name = name_quote (get_archive_name(archive), 0);
     cmd = copy_strings (LIBDIR "extfs/", extfs_prefixes [archive->fstype], 
                         " run ", archive_name, " ", q, 0);
     free (archive_name);
     free (q);
+#ifndef VFS_STANDALONE
     shell_execute(cmd, 0);
+#else
+    vfs_die( "shell_execute: implement me!" );
+#endif
     free(cmd);
     free(p);
 }
@@ -726,28 +566,24 @@ static void *extfs_open (char *file, int flags, int mode)
 {
     struct extfs_pseudofile *extfs_info;
     struct extfs_archive *archive;
-    char *p, *q;
+    char *q;
     struct extfs_entry *entry;
     int local_handle;
     const int do_create = (flags & O_ACCMODE) != O_RDONLY;
     
-    if ((p = extfs_get_path (file, &archive, 0, 0)) == NULL)
+    if ((q = extfs_get_path (file, &archive, 0, 0)) == NULL)
 	return NULL;
-    q = (*p == '/') ? p + 1 : p;
     entry = extfs_find_entry (archive->root_entry, q, 0, do_create);
-    free (p);
-    if (entry == NULL) {
+    if (entry == NULL)
     	return NULL;
-    }
-    if ((entry = extfs_resolve_symlinks (entry)) == NULL) {
+    if ((entry = extfs_resolve_symlinks (entry)) == NULL)
 	return NULL;
-    }
     if (S_ISDIR (entry->inode->mode)) {
     	extfserrno = EISDIR;
     	return NULL;
     }
     if (entry->inode->local_filename == NULL) {
-        char *cmd, *archive_name;
+        char *cmd, *archive_name, *p;
         
         entry->inode->local_filename = strdup (tmpnam (NULL));
 	p = extfs_get_path_from_entry (entry);
@@ -861,144 +697,21 @@ static int extfs_close (void *data)
 	return 0;
 }
 
-static int extfs_errno (void)
-{
-    return extfserrno;
-}
+#define RECORDSIZE 512
+#define X_pseudofile extfs_pseudofile
+#define Xerrno extfserrno
 
-static void *extfs_opendir (char *dirname)
-{
-    struct extfs_archive *archive;
-    char *p, *q;
-    struct extfs_entry *entry;
-    struct extfs_entry **extfs_info;
-
-    if ((p = extfs_get_path (dirname, &archive, 1, 0)) == NULL)
-	return NULL;
-    q = (*p == '/') ? p + 1 : p;
-    entry = extfs_find_entry (archive->root_entry, q, 0, 0);
-    free (p);
-    if (entry == NULL)
-    	return NULL;
-    if ((entry = extfs_resolve_symlinks (entry)) == NULL)
-	return NULL;
-    if (!S_ISDIR (entry->inode->mode)) {
-    	extfserrno = ENOTDIR;
-    	return NULL;
-    }
-
-    extfs_info = (struct extfs_entry **) xmalloc (sizeof (struct extfs_entry *), "Extfs: extfs_opendir");
-    *extfs_info = entry->inode->first_in_subdir;
-
-    return extfs_info;
-}
-
-static void *extfs_readdir (void *data)
-{
-    static struct {
-	struct dirent dir;
-#ifdef NEED_EXTRA_DIRENT_BUFFER
-	char extra_buffer [MC_MAXPATHLEN];
-#endif
-    } dir;
-    
-    struct extfs_entry **extfs_info = (struct extfs_entry **) data;
-    
-    if (*extfs_info == NULL)
-    	return NULL;
-    
-    strcpy (&(dir.dir.d_name [0]), (*extfs_info)->name);
-    
-#ifndef DIRENT_LENGTH_COMPUTED
-    dir.d_namlen = strlen (dir.dir.d_name);
-#endif
-    *extfs_info = (*extfs_info)->next_in_dir;
-    
-    return (void *)&dir;
-}
-
-static int extfs_closedir (void *data)
-{
-    free (data);
-    return 0;
-}
-
-static int _extfs_stat (char *path, struct stat *buf, int resolve)
-{
-    struct extfs_archive *archive;
-    char *p, *q;
-    struct extfs_entry *entry;
-    struct extfs_inode *inode;
-
-    if ((p = extfs_get_path (path, &archive, 0, 0)) == NULL)
-	return -1;
-    q = (*p == '/') ? p + 1 : p;
-    entry = extfs_find_entry (archive->root_entry, q, 0, 0);
-    free (p);
-    if (entry == NULL)
-    	return -1;
-    if (resolve && (entry = extfs_resolve_symlinks (entry)) == NULL)
-	return -1;
-    inode = entry->inode;
-    buf->st_dev = inode->dev;
-    buf->st_ino = inode->inode;
-    buf->st_mode = inode->mode;
-    buf->st_nlink = inode->nlink;
-    buf->st_uid = inode->uid;
-    buf->st_gid = inode->gid;
-#ifdef HAVE_ST_RDEV
-    buf->st_rdev = inode->rdev;
-#endif
-    buf->st_size = inode->size;
-#ifdef HAVE_ST_BLKSIZE
-    buf->st_blksize = 512;
-#endif
-#ifdef HAVE_ST_BLOCKS
-    buf->st_blocks = (inode->size + 512 - 1) / 512;
-#endif
-    buf->st_atime = inode->atime;
-    buf->st_mtime = inode->mtime;
-    buf->st_ctime = inode->ctime;
-    return 0;
-}
-
-static int extfs_stat (char *path, struct stat *buf)
-{
-    return _extfs_stat (path, buf, 1);
-}
-
-static int extfs_lstat (char *path, struct stat *buf)
-{
-    return _extfs_stat (path, buf, 0);
-}
-
-static int extfs_fstat (void *data, struct stat *buf)
-{
-    struct extfs_pseudofile *file = (struct extfs_pseudofile *)data;
-    struct extfs_inode *inode;
-    
-    inode = file->entry->inode;
-    buf->st_dev = inode->dev;
-    buf->st_ino = inode->inode;
-    buf->st_mode = inode->mode;
-    buf->st_nlink = inode->nlink;
-    buf->st_uid = inode->uid;
-    buf->st_gid = inode->gid;
-#ifdef HAVE_ST_RDEV    
-    buf->st_rdev = inode->rdev;
-#endif
-    buf->st_size = inode->size;
-#ifdef HAVE_ST_BLKSIZE
-    buf->st_blksize = 512;
-#endif
-#ifdef HAVE_ST_BLOCKS
-    buf->st_blocks = (inode->size + 512 - 1) / 512;
-#endif
-    buf->st_atime = inode->atime;
-    buf->st_mtime = inode->mtime;
-    buf->st_ctime = inode->ctime;
-    return 0;
-}
+#define X_entry extfs_entry
+#define X_archive extfs_archive
+#define X_get_path extfs_get_path
+#define X_find_entry extfs_find_entry
+#define X_resolve_symlinks extfs_resolve_symlinks
+#define X_inode extfs_inode
+#define __X_find_entry __extfs_find_entry
+#define __X_resolve_symlinks __extfs_resolve_symlinks
+#define X_loop_protect extfs_loop_protect
+  
+#include "shared.c"
 
 static int extfs_chmod (char *path, int mode)
 {
@@ -1008,31 +721,6 @@ static int extfs_chmod (char *path, int mode)
 static int extfs_chown (char *path, int owner, int group)
 {
     return -1;
-}
-
-static int extfs_readlink (char *path, char *buf, int size)
-{
-    struct extfs_archive *archive;
-    char *p, *q;
-    int i;
-    struct extfs_entry *entry;
-
-    if ((p = extfs_get_path (path, &archive, 0, 0)) == NULL)
-	return -1;
-    q = (*p == '/') ? p + 1 : p;
-    entry = extfs_find_entry (archive->root_entry, q, 0, 0);
-    free (p);
-    if (entry == NULL)
-    	return -1;
-    if (!S_ISLNK (entry->inode->mode)) {
-        extfserrno = EINVAL;
-        return -1;
-    }
-    if (size > (i = strlen (entry->inode->linkname))) {
-    	size = i;
-    }
-    strncpy (buf, entry->inode->linkname, i);
-    return i;
 }
 
 static int extfs_unlink (char *path)
@@ -1061,31 +749,22 @@ static int extfs_rename (char *a, char *b)
 static int extfs_chdir (char *path)
 {
     struct extfs_archive *archive;
-    char *p, *q, *res;
+    char *q, *res;
     struct extfs_entry *entry;
 
     extfserrno = ENOTDIR;
-    if ((p = extfs_get_path (path, &archive, 1, 0)) == NULL)
+    if ((q = extfs_get_path (path, &archive, 1, 0)) == NULL)
 	return -1;
-    q = (*p == '/') ? p + 1 : p;
     entry = extfs_find_entry (archive->root_entry, q, 0, 0);
-    if (entry == NULL) {
-    	free (p);
+    if (!entry)
     	return -1;
-    }
     entry = extfs_resolve_symlinks (entry);
-    if (entry == NULL) {
-    	free (p);
+    if ((!entry) || (!S_ISDIR (entry->inode->mode)))
     	return -1;
-    }
-    if (!S_ISDIR (entry->inode->mode)) {
-    	free (p);
-    	return -1;
-    }
     entry->inode->archive->current_dir = entry;
-    res = copy_strings (extfs_prefixes [entry->inode->archive->fstype], ":",
-        entry->inode->archive->name, p, NULL);
-    free (p);
+    res = copy_strings (
+        entry->inode->archive->name, "#", extfs_prefixes [entry->inode->archive->fstype], 
+	"/", q, NULL);
     extfserrno = 0;
     if (extfs_current_dir)
 	free (extfs_current_dir);
@@ -1125,14 +804,11 @@ static vfsid extfs_getid (char *path, struct vfs_stamping **parent)
     struct extfs_archive *archive;
     vfs *v;
     vfsid id;
-    char *p;
     struct vfs_stamping *par;
 
     *parent = NULL;
-    if ((p = extfs_get_path (path, &archive, 1, 1)) == NULL) {
+    if (!extfs_get_path (path, &archive, 1, 1))
 	return (vfsid) -1;
-    }
-    free (p);
     if (archive->name){
 	v = vfs_type (archive->name);
 	id = (*v->getid) (archive->name, &par);
@@ -1253,19 +929,21 @@ vfs extfs_vfs_ops =
     extfs_read,
     extfs_write,
 
-    extfs_opendir,
-    extfs_readdir,
-    extfs_closedir,
+    s_opendir,
+    s_readdir,
+    s_closedir,
+    s_telldir,
+    s_seekdir,
 
-    extfs_stat,
-    extfs_lstat,
-    extfs_fstat,
+    s_stat,
+    s_lstat,
+    s_fstat,
 
     extfs_chmod,		/* unimplemented */
     extfs_chown,		/* unimplemented */
     NULL,
 
-    extfs_readlink,
+    s_readlink,
     
     extfs_symlink,		/* unimplemented */
     extfs_link,			/* unimplemented */
@@ -1273,7 +951,7 @@ vfs extfs_vfs_ops =
 
     extfs_rename,		/* unimplemented */
     extfs_chdir,
-    extfs_errno,
+    s_errno,
     extfs_lseek,
     extfs_mknod,		/* unimplemented */
     
@@ -1289,6 +967,7 @@ vfs extfs_vfs_ops =
     NULL,
     NULL,
     NULL
+    
 #ifdef HAVE_MMAP
     , extfs_mmap,
     extfs_munmap
@@ -1298,54 +977,56 @@ vfs extfs_vfs_ops =
 #include "../src/profile.h"
 void extfs_init (void)
 {
-    void *keys = profile_init_iterator ("extfs", LIBDIR "extfs/extfs.ini");
-    char *key, *value;
-    char *p, *q, c;
-    
+    FILE *cfg = fopen( LIBDIR "extfs/extfs.ini", "r" );
+    if (!cfg) {
+        fprintf( stderr, "Warning: " LIBDIR "extfs/extfs.ini not found\n" );
+        return;
+    }
+
     extfs_no = 0;
-    for (extfs_no = 0; keys != NULL && extfs_no < MAXEXTFS; extfs_no++) {
-	keys = profile_iterator_next (keys, &key, &value);
+    while ( extfs_no < MAXEXTFS ) {
+        char key[256];
+	char *c;
+
+        if (!fgets( key, 250, cfg ))
+	    break;
 
 	/* Handle those with a trailing ':', those flag that the
 	 * file system does not require an archive to work
 	 */
 
-	c = key [strlen (key)-1];
-	if (c == ':'){
-	    key [strlen (key)-1] = 0;
-	    extfs_need_archive [extfs_no] = EFS_ARG_EMPTY;
-	} else if (c == '*'){
-	    key [strlen (key)-1] = 0;
-	    extfs_need_archive [extfs_no] = EFS_NEED_ARG;
-	} else 
-	    extfs_need_archive [extfs_no] = EFS_NEED_FILE;
-	
-	extfs_prefixes [extfs_no] = strdup (key);
-
-	value = strdup (value);
-	for (q = value; (p = strtok (q, " \t")) != NULL; ){
-	    struct extfs_ext *newn;
-
-	    q = NULL;
-	    newn = xmalloc (sizeof (struct extfs_ext), "prefixes");
-	    newn->next = extfs_extensions [extfs_no];
-	    newn->ext = strdup (p);
-	    extfs_extensions [extfs_no] = newn;
+	if (*key == '[') {
+	/* We may not use vfs_die() message or message_1s or similar,
+         * UI is not initialized at this time and message would not
+	 * appear on screen. */
+	    fprintf( stderr, "Warning: You need to update your " LIBDIR "extfs/extfs.ini file.\n" );
+	    fclose(cfg);
+	    return;
 	}
-	free (value);
+	if (*key == '#')
+	    continue;
+
+	if ((c = strchr( key, '\n')))
+	    *c = 0;
+	c = &key [strlen (key)-1];
+	extfs_need_archive [extfs_no] = !(*c==':');
+	if (*c==':') *c = 0;
+	if (!(*key))
+	    continue;
+
+	extfs_prefixes [extfs_no] = strdup (key);
+	extfs_no++;
     }
-    free_profile_name (LIBDIR "extfs/extfs.ini");
+    fclose(cfg);
 }
 
-int extfs_prefix_to_type (char *path)
+int extfs_which (char *path)
 {
-    int i, j;
+    int i;
 
-    for (i = 0; i < extfs_no; i++) {
-        j = strlen (extfs_prefixes [i]);
-        if (!strncmp (path, extfs_prefixes [i], j) && path [j] == ':')
+    for (i = 0; i < extfs_no; i++)
+        if (!strcmp (path, extfs_prefixes [i]))
             return i;
-    } 
     return -1;
 }
 
@@ -1356,19 +1037,10 @@ char *extfs_get_prefix (int idx)
 
 void extfs_done (void)
 {
-    struct extfs_ext *current, *old;
     int i;
 
-    for (i = 0; i < extfs_no; i++ ){
+    for (i = 0; i < extfs_no; i++ )
 	free (extfs_prefixes [i]);
-	current = extfs_extensions [i];
-	while (current){
-	    old = current;
-	    current = current->next;
-	    free (old->ext);
-	    free (old);
-	}
-    }
     extfs_no = 0;
     if (extfs_current_dir)
 	free (extfs_current_dir);

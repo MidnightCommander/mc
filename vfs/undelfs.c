@@ -769,6 +769,8 @@ vfs undelfs_vfs_ops = {
     undelfs_opendir,
     undelfs_readdir,
     undelfs_closedir,
+    NULL,
+    NULL,
 
     undelfs_stat,
     undelfs_lstat,

@@ -66,7 +66,7 @@ cons.saver: cons.saver.o
 check:
 	@echo no tests are supplied.
 
-mc: $(OBJS) @LIBVFS@ @LIBSLANG@ @LIBEDIT_A@
+mc: $(OBJS) libvfs-mc.a @LIBSLANG@ @LIBEDIT_A@
 	$(CC) $(LDFLAGS) -o $@ $(OBJS) -L../vfs -L../slang -L../edit $(OURLIBS) $(LIBS) 
 
 mfmt: mfmt.o
@@ -75,10 +75,10 @@ mfmt: mfmt.o
 mcmfmt: mfmt
 	cp mfmt mcmfmt
 
-libvfs.a:
-	cd ../vfs; $(MAKE) libvfs.a
-@PCENTRULE@	-$(RMF) libvfs.a
-@PCENTRULE@	$(LN_S) ../vfs/libvfs.a .
+libvfs-mc.a:
+	cd ../vfs; $(MAKE) libvfs-mc.a
+@PCENTRULE@	-$(RMF) libvfs-mc.a
+@PCENTRULE@	$(LN_S) ../vfs/libvfs-mc.a .
 
 libmcslang.a:
 	cd ../slang; $(MAKE) libmcslang.a
@@ -109,7 +109,7 @@ TAGS: $(SRCS)
 
 clean:
 	$(RMF) mc cons.saver man2hlp fixhlp *.o core a.out mc.html mcmfmt
-	$(RMF) libvfs.a libedit.a libmcslang.a mfmt
+	$(RMF) libvfs-mc.a libedit.a libmcslang.a mfmt
 
 realclean: clean
 	$(RMF) .depend
@@ -121,7 +121,7 @@ distclean:
 	-$(RMF) $(srcdir)/mfmt
 	-$(RMF) $(srcdir)/man2hlp $(srcdir)/fixhlp $(srcdir)/*.o $(srcdir)/core
 	-$(RMF) $(srcdir)/a.out $(srcdir)/mc.html
-	-$(RMF) $(srcdir)/libvfs.a $(srcdir)/libmcslang.a $(srcdir)/libedit.a
+	-$(RMF) $(srcdir)/libvfs-mc.a $(srcdir)/libmcslang.a $(srcdir)/libedit.a
 	-if test $(srcdir) = .; then $(MAKE) realclean; fi
 	-$(RMF) $(srcdir)/Makefile
 

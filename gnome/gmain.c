@@ -12,6 +12,7 @@
 #include <string.h>
 #include <ctype.h>
 #define WANT_WIDGETS
+#include "tty.h"		/* for KEY_BACKSPACE */
 #include "x.h"
 #include "main.h"
 #include "key.h"
@@ -19,7 +20,6 @@
 #include "dir.h"
 #include "panel.h"
 #include "gscreen.h"
-#include "tty.h"		/* for KEY_BACKSPACE */
 #include "command.h"
 #include "cmd.h"
 #include "gdesktop.h"

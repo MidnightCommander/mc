@@ -98,6 +98,7 @@ max_open_files (void)
 #endif
 }
 
+#ifndef VFS_STANDALONE
 void init_groups (void)
 {
     int i;
@@ -246,6 +247,7 @@ void save_stop_handler (void)
 {
     sigaction (SIGTSTP, NULL, &startup_handler);
 }
+#endif /* VFS_STANDALONE */
 
 #ifdef HAVE_GNOME
 #define PORT_HAS_MY_SYSTEM 1
@@ -351,6 +353,7 @@ char *tilde_expand (char *directory)
     return directory;
 }
 
+#ifndef VFS_STANDALONE
 int
 set_nonblocking (int fd)
 {
@@ -446,6 +449,7 @@ void check_error_pipe (void)
     if (len > 0)
         message (0, _(" Warning "), error);
 }
+#endif
 
 static struct sigaction ignore, save_intr, save_quit, save_stop;
 
@@ -675,6 +679,7 @@ char *canonicalize_pathname (char *path)
     return path;
 }
 
+#ifndef VFS_STANDALONE
 #ifdef SCO_FLAVOR
 int gettimeofday( struct timeval * tv, struct timezone * tz)
 {
@@ -931,3 +936,4 @@ int socketpair(int dummy1, int dummy2, int dummy3, int fd[2])
 #endif /* ifndef HAVE_SOCKETPAIR */
 #endif /* ifdef USE_NETCODE */
 #endif /* SCO_FLAVOR */
+#endif /* VFS_STANDALONE */

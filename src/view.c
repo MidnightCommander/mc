@@ -25,6 +25,7 @@
 /* }}} */
 /* {{{ Declarations */
 #include <config.h>
+#include "tty.h"
 #include "x.h"
 #include <stdio.h>
 #ifdef OS2_NT
@@ -35,7 +36,6 @@
 #   include <unistd.h>
 #endif
 #include <string.h>
-#include "tty.h"
 #include <sys/stat.h>
 #ifdef HAVE_MMAP
 #   include <sys/mman.h>

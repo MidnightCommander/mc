@@ -1305,3 +1305,9 @@ char *strdup (char *s)
     return t;
 }
 #endif
+
+void vfs_die( char *m )
+{
+    fprintf (stderr,m);
+    exit (1);
+}

@@ -54,6 +54,7 @@
      { tcp_invalidate_socket (sock); return got_sigpipe = 0; }
 
 extern void tcp_invalidate_socket (int);
+extern void vfs_die (char *);
 
 int got_sigpipe;
 
@@ -134,8 +135,7 @@ int rpc_send (int sock, ...)
 	    break;
 
 	default:
-	    fprintf (stderr, "Unknown rpc message\n");
-	    abort ();
+	    vfs_die ("Unknown rpc message\n");
 	}
     }
 }
@@ -223,8 +223,7 @@ int rpc_get (int sock, ...)
 	    break;
 
 	default:
-	    fprintf (stderr, "Unknown rpc message\n");
-	    abort ();
+	    vfs_die ("Unknown rpc message\n");
 	}
     }
 }
@@ -262,8 +261,8 @@ void tcp_init (void)
 
 int get_remote_port (struct sockaddr_in *sin, int *version)
 {
-    int              port;
 #ifdef HAVE_PMAP_GETMAPS
+    int              port;
     struct pmaplist  *pl;
     
     *version = 1;
@@ -278,6 +277,7 @@ int get_remote_port (struct sockaddr_in *sin, int *version)
     return port;
 #else
 #ifdef HAVE_PMAP_GETPORT
+    int              port;
     for (*version = RPC_PROGVER; *version >= 1; (*version)--)
 	if (port = pmap_getport (sin, RPC_PROGNUM, *version, IPPROTO_TCP))
 	    return port;

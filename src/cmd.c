@@ -1259,13 +1259,13 @@ static void nice_cd (char *text, char *xtext, char *help, char *prefix, int to_h
 void netlink_cmd (void)
 {
     nice_cd (_(" Link to a remote machine "), _(machine_str),
-	     "[Network File System]", "mc:", 1);
+	     "[Network File System]", "/#mc:", 1);
 }
 
 void ftplink_cmd (void)
 {
     nice_cd (_(" FTP to machine "), _(machine_str),
-	     "[FTP File System]", "ftp://", 1);
+	     "[FTP File System]", "/#ftp:", 1);
 }
 
 #ifdef HAVE_SETSOCKOPT
@@ -1296,7 +1296,7 @@ void undelete_cmd (void)
     nice_cd (_(" Undelete files on an ext2 file system "),
 	     _(" Enter the file system name where you want to run the\n "
 	       " undelete file system on: (F1 for details)"),
-	     "[Undelete File System]", "undel:", 0);
+	     "[Undelete File System]", "/#undel/", 0);
 }
 #endif
 

@@ -1,8 +1,6 @@
             Writing scripts for Midnight Commander's external vfs
 
-IMPORTANT NOTE: extfs is not officialy released and fully bug free
-in 3.0! You have been warned. If you would really like to try it,
-you can (by typing make install.extfs in the vfs directory).
+IMPORTANT NOTE: There may be some bugs left in extfs. Enjoy.
 
 Starting with version 3.1, the Midnight Commander comes with so called
 extfs, which is one of the virtual filesystems. This system makes it
@@ -16,18 +14,23 @@ Creating a shell script/program to handle requests.
 configured or compiled, like /usr/local/lib/mc or /usr/lib/mc).
 
 The first one is very easy:
-You assign a vfs prefix and vfs extensions to your vfs. Both will be used in
-vfs pseudoURL names, like if you assign prefix zip and extensions .zip,
-.ZIP, then URLs will look like
-zip:anypath/my.zip/some_path/in_the/archive
-Then you add a line to the end of the [extfs] section:
-prefix=space_separated_extensions
-e.g.
-zip=.zip .ZIP
+You assign a vfs suffix. For example, if you have .zip file, and would
+like to see what's inside it, path will be
+
+/anypath/my.zip#uzip/some_path/...
+
+Then you add a line extfs.ini file containing just that extension. If
+your vfs does not require file to work on, add ':' to the of name.
+
+In this example, .zip is suffix, but I call vfs 'uzip'. Why? Well,
+what this vfs essentially does is UNzip. UN is too long, so I choosed
+U. Note that sometime in future filesystem like zip may exist: It will
+take whole tree and create .zip file from it. So /usr:zip will be
+zipfile containing whole /usr tree.
 
 The second one may require some your knowledge of shell/c programming:
 You have to create a program (with executable permissions) prefix in
-$(libdir)/extfs (in our example $(libdir)/extfs/zip).
+$(libdir)/extfs (in our example $(libdir)/extfs/uzip).
 
 * Commands that should be implemented by your shell script
 ----------------------------------------------------------
@@ -51,10 +54,7 @@ SSSSSSSS is the file size
 FILENAME is the filename
 PATH     is the path from the archive's root without the leading slash (/)
 DATETIME has one of the following formats:
-	    Mon DD hh:mm
-	    Mon DD YYYY
-	    Mon DD YYYY hh:mm
-	    MM-DD-YY hh:mm
+	    Mon DD hh:mm, Mon DD YYYY, Mon DD YYYY hh:mm, MM-DD-YY hh:mm
 
             where Mon is a three digit english month name, DD day
             1-31, MM month 01-12, YY two digit year, YYYY four digit
@@ -74,7 +74,8 @@ then it says that this file should be a hardlinked with the other file.
 * Command: copyout archivename storedfilename extractto
 
 This should extract from archive archivename the file called
-storedfilename (possibly with path if not located in archive's root)
+storedfilename (possibly with path if not located in archive's root
+[this is wrong. current extfs strips paths! -- pavel@ucw.cz])
 to file extractto.
 
 * Command: copyin archivename storedfilename sourcefile
@@ -88,55 +89,16 @@ archivename will be something like /tmp/f43513254 or just
 anything. Some archivers do not like it, so you'll have to find some
 workaround.
 
+* Command: run
+
+Undocumented :-)
+
 ---------------------------------------------------------
 
 Don't forget to mark this file executable (chmod 755 ThisFile, for example)
 
-This is a skeleton structure of the executable:
-
-#!/bin/sh
-
-# Command functions
-mcvfs_list ()
-# $1 is the archive name
-{
-# Apply a system command to obtain a list of filenames
-# For example 'zip -l $1'
-# Scan each line of the 'list' output, discarding unused information, and
-# constructing a printable line in a form, described above, that mc can use.
-# Exit
-}
-
-mcvfs_copyout ()
-# $1 is the archive name
-# $2 is a name of a file within the archive
-# $3 is a name of a file within the system (to add from or extract to)
-{
-# Apply the system command used to extract one file from the archive
-# Exit
-}
-
-mcvfs_copyin ()
-# $1 is the archive name
-# $2 is a name of a file within the archive
-# $3 is a name of a file within the system (to add from or extract to)
-{
-# Apply the system command used to add one file to the archive
-# Exit
-}
-
-# Command line parser
-# $1 is the command
-# $2 is the archive name
-# $3 is a name of a file within the archive
-# $4 is a name of a file within the system (to add from or extract to)
-case "$1" in
-   list)    mcvfs_list $2;          exit $?;;
-   copyout) mcvfs_copyout $2 $3 $4; exit $?;;
-   copyin)  mcvfs_copyin $2 $3 $4;  exit $?;;
-esac
-# Show an error if this was called with some other command
-exit 1
+For skeleton structure of executable, look at some of filesystems
+similar to yours.
 
 ---------------------------------------------------------
 

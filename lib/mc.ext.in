@@ -56,7 +56,7 @@
 #	then the file will be temporarily copied into a local directory
 #	and %f will be the full path to this local temporal file.
 #	If you don't want to get a local copy and want to get the
-#	virtual fs path (like ftp://ftp.cvut.cz/pub/hungry/xword), then
+#	virtual fs path (like /#ftp:ftp.cvut.cz/pub/hungry/xword), then
 #	use %d/%p instead of %f.
 # %d -> name of the current directory (pwd, without trailing slash)
 # %s -> "selected files", i.e. space separated list of tagged files if any
@@ -70,8 +70,7 @@
 #
 # %cd -> the rest is not command, but a path which will mc cd internally
 #       into (cd wouldn't work, since it is a child process, and %cd handles 
-#       even the vfs names (e.g. tar:archive.tar/path or
-#       ftp://tsx-11.mit.edu/
+#       even the vfs names
 #
 # %view -> the command you type will be piped into mc's internal file viewer
 #	if you type only the %view and no command, viewer will load %f file
@@ -104,26 +103,26 @@
 # .tgz, .tpz, .tar.gz, .tar.z, .tar.Z
 
 regex/\.t([gp]?z|ar\.g?[zZ])$
-	Open=%cd tar:%d/%p/
+	Open=%cd %p#utar
 	View=%view{ascii} gzip -dc %f 2>/dev/null | tar tvvf -
 	Extract=gzip -dc %f 2>/dev/null | tar xf -
 	Icon=compressed.xpm
 
 regex/\.tar\.bz$
-#	Open=%cd tar:%d/%p/
+#	Open=%cd %p#utar
 	View=%view{ascii} bzip -dc %f 2>/dev/null | tar tvvf -
 	Extract=bzip -dc %f 2>/dev/null | tar xf -
 	Icon=compressed.xpm
 
 regex/\.tar\.bz2$
-	Open=%cd tar:%d/%p/
+	Open=%cd %p#utar
 	View=%view{ascii} bzip2 -dc %f 2>/dev/null | tar tvvf -
 	Extract=bzip2 -dc %f 2>/dev/null | tar xf -
 	Icon=compressed.xpm
 
 # .tar
 shell/.tar
-	Open=%cd tar:%d/%p/
+	Open=%cd %p#utar
 	View=%view{ascii} tar tvvf %f
 	Extract=tar xf %f
 	Icon=tar.xpm
@@ -208,32 +207,32 @@ directory/^.*$
 
 # ls-lR
 regex/^ls-?lR$
-	Open=%cd lslR:%d/%p/
+	Open=%cd %p#lslR
 	View=%view{ascii}
 	Icon=plain_dir.xpm
 regex/^ls-?lR\.(g?z|Z)$
-	Open=%cd lslR:%d/%p/
+	Open=%cd %p#lslR
 	View=%view{ascii} gunzip -c %f
 	Icon=plain_dir.xpm
 
 # ftplist
 regex/\.ftplist$
-	Open=%cd ftplist:%d/%p/
+	Open=%cd %p#ftplist
 
 # rpm
 regex/\.rpm$
-	Open=%cd rpm:%d/%p/
+	Open=%cd %p#rpm
 	Install this RPM=rpm -i %f
 	Upgrade this RPM=rpm -U %f
 
 # deb
 regex/\.deb$
-	Open=%cd deb:%d/%p/
+	Open=%cd %p#deb
 	View=%view{ascii} dpkg-deb -c %f
 
 # zip
 regex/\.(zip|ZIP)$
-	Open=%cd zip:%d/%p/
+	Open=%cd %p#uzip
 	View=%view{ascii} unzip -v %f
 	Icon=zip.xpm
 	Extract=unzip %f
@@ -242,14 +241,14 @@ regex/\.(zip|ZIP)$
 
 # zoo
 shell/.zoo
-	Open=%cd zoo:%d/%p/
+	Open=%cd %p#uzoo
 	View=%view{ascii} zoo l %f
 	Icon=zoo.xpm
 	Extract=zoo x %f '*'
 	
 # lha
 regex/\.(lha|LHA|lzh|LZH)$
-	Open=%cd lha:%d/%p/
+	Open=%cd %p#ulha
 	View=%view{ascii} lharc l %f
 	Icon=lharc.xpm
 	Extract=lharc x %f '*'
@@ -257,7 +256,7 @@ regex/\.(lha|LHA|lzh|LZH)$
 
 # arj
 regex/\.a(rj|[0-9][0-9])$
-	Open=unarj l %f | %var{PAGER:more}
+	Open=%cd %p#uarj
 	View=%view{ascii} unarj l %f
 	Icon=zip.xpm
 	Extract=unarj x %f '*'
@@ -265,7 +264,7 @@ regex/\.a(rj|[0-9][0-9])$
 
 # ar library
 regex/\.s?a$
-	Open=%cd arfs:%d/%p/
+	Open=%cd %p#uar
 	View=%view{ascii} nm %f
 
 # C
@@ -506,7 +505,7 @@ regex/\.html?$
 
 # rar
 regex/\.[rR]([aA][rR]|[0-9][0-9])$
-	Open=%cd rar:%d/%p/
+	Open=%cd %p#urar
 	View=%view{ascii} rar v -c- %f
 	Extract=rar x -c- %f '*'
 	Extract (with flags)=I=%{Enter any RAR flags:}; if test -n "$I";then rar x $I %f; fi

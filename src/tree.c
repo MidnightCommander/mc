@@ -1528,7 +1528,7 @@ static int my_mkdir_rec (char *s, mode_t mode)
     /* FIXME: should check instead if s is at the root of that filesystem */
     if (!vfs_file_is_local (s))
 	return -1;
-    if (!strcmp (vfs_path(s), PATH_SEP_STR))
+    if (!strcmp (s, PATH_SEP_STR))
         return ENOTDIR;
     p = concat_dir_and_file (s, "..");
     q = vfs_canon (p);

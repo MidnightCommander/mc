@@ -103,6 +103,7 @@ char *strdup (const char *s)
 }
 #endif
 
+#ifndef VFS_STANDALONE
 int is_printable (int c)
 {
     static const unsigned char xterm_printable[] = {
@@ -165,6 +166,7 @@ char *trim (char *s, char *d, int len)
 	strcpy (d, s);
     return d;
 }
+#endif
 
 char *
 name_quote (const char *s, int quote_percent)
@@ -210,6 +212,7 @@ name_quote (const char *s, int quote_percent)
     return ret;
 }
 
+#ifndef VFS_STANDALONE
 char *
 fake_name_quote (const char *s, int quote_percent)
 {
@@ -358,51 +361,24 @@ strip_password (char *path)
 
 char *strip_home_and_password(char *dir)
 {
-    static char newdir [MC_MAXPATHLEN], *p, *q;
+    static char newdir [MC_MAXPATHLEN];
 
     if (home_dir && !strncmp (dir, home_dir, strlen (home_dir))){
 	newdir [0] = '~';
 	strcpy (&newdir [1], &dir [strlen (home_dir)]);
 	return newdir;
     } 
-#ifdef USE_NETCODE    
-    else if (!strncmp (dir, "ftp://", 6)) {
-	strip_password (strcpy (newdir, dir) + 6);
-        if ((p = strchr (newdir + 6, PATH_SEP)) != NULL) {
-            *p = 0;
-	    q = ftpfs_gethome (newdir);
-	    *p = PATH_SEP;
-            if (q != 0 && strcmp (q, PATH_SEP_STR) && !strncmp (p, q, strlen (q) - 1)) {
-                strcpy (p, "/~");
-                strcat (newdir, p + strlen (q) - 1);
-            }
-        }
-        return newdir;
-    } else if (!strncmp (dir, "mc:", 3)) {
-        char  *pth;
-	strcpy (newdir, dir);
-	if (newdir[3] == '/' && newdir[4] == '/') { 
-	    pth = newdir + 5;
-    	    strip_password ( newdir + 5);
-	} else { 
-	    pth = newdir + 3;
-	    strip_password (newdir + 3);
-	}
-        if ((p = strchr (pth, PATH_SEP)) != NULL) {
-            *p = 0;
-	    q = mcfs_gethome (newdir);
-            *p = PATH_SEP;
-            if (q != NULL ) { 
-		if (strcmp (q, PATH_SEP_STR) && !strncmp (p, q, strlen (q) - 1)) {
-                   strcpy (p, "/~");
-                   strcat (newdir, p + strlen (q) - 1);
-		}
-                free (q);
-            }	    
-        }
-	return (newdir);
+
+    /* We do not strip homes in /#ftp tree, I do not like ~'s there (see ftpfs.c why) */
+#define STRIP( name ) \
+    if (strstr( dir, name )) { \
+        strcpy (newdir, dir); \
+	strip_password ( strstr( newdir, name ) + strlen(name) ); \
+        return newdir; \
     }
-#endif    
+    STRIP( "/#ftp:" );
+    STRIP( "/#mc:" );
+
     return dir;
 }
 
@@ -732,6 +708,7 @@ static void prepare_environment (void)
     /* MC_CONTROL_FILE has been added to environment on startup */
 }
 #endif
+#endif /* VFS_STANDALONE */
 
 char *unix_error_string (int error_num)
 {
@@ -779,7 +756,8 @@ char *copy_strings (const char *first,...)
 
     return result;
 }
-	
+
+#ifndef VFS_STANDALONE	
 long blocks2kilos (int blocks, int bsize)
 {
     if (bsize > 1024){
@@ -866,6 +844,7 @@ int strcasecmp (const char *s, const char *d)
     return result;
 }
 #endif /* HAVE_STRCASECMP */
+#endif /* VFS_STANDALONE */
 
 /* getwd is better than getcwd, the later uses a popen ("pwd"); */
 char *get_current_wd (char *buffer, int size)
@@ -1001,6 +980,7 @@ decompress_command_and_arg (int type, char **cmd, char **flags)
 	fprintf (stderr, "Fatal: decompress_command called with an unknown argument\n");
 }
 
+#ifndef VFS_STANDALONE
 /* Hooks */
 void add_hook (Hook **hook_list, void (*hook_fn)(void *), void *data)
 {
@@ -1284,6 +1264,7 @@ int truncate (const char *path, long size)
 }
 
 #endif
+#endif /* VFS_STANDALONE */
 
 char *
 concat_dir_and_file (const char *dir, const char *file)

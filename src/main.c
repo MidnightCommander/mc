@@ -387,20 +387,6 @@ cd_try_to_select (WPanel *panel)
 	&& strchr (panel->lwd + strlen (panel->cwd) + 1, PATH_SEP) == 0)
 	try_to_select (panel, panel->lwd);
     else
-#ifdef USE_VFS
-	if ((!strncmp (panel->lwd, "tar:", 4) && 
-             !strncmp (panel->lwd + 4, panel->cwd, strlen (panel->cwd))) ||
-             ((i = extfs_prefix_to_type (panel->lwd)) != -1 && 
-             !strncmp (panel->lwd + (j = strlen (extfs_get_prefix (i)) + 1), 
-             panel->cwd, strlen (panel->cwd)))) {
-        p = strdup (panel->lwd + j + strlen (panel->cwd));
-        q = strchr (p, PATH_SEP);
-        if (q != NULL && (q != p || (q = strchr (q + 1, PATH_SEP)) != NULL))
-            *q = 0;
-        try_to_select (panel, p);
-        free (p);
-    } else
-#endif
 	try_to_select (panel, NULL);
 }
 

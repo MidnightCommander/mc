@@ -306,7 +306,7 @@ static int
 add_dotdot_to_list (dir_list *list, int index)
 {
     char buffer [MC_MAXPATHLEN + MC_MAXPATHLEN];
-    char *p, *s;
+    char *p;
     int i = 0;
     
     /* Need to grow the *list? */
@@ -337,7 +337,7 @@ add_dotdot_to_list (dir_list *list, int index)
             break;
 	}
         i = 1;
-        if ((s = vfs_path (p)) && !strcmp (s, PATH_SEP_STR)){
+        if (!strcmp (p, PATH_SEP_STR)){
 	    free (p);
             return 1;
 	}

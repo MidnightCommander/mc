@@ -73,6 +73,8 @@ static mcfs_connection *current_dir_connection;
 
 char *mcfs_current_dir = 0;
 
+static char *mcfs_gethome (mcfs_connection *mc);
+
 /* Extract the hostname and username from the path */
 /* path is in the form: hostname:user/remote-dir */
 char *mcfs_get_host_and_username (char *path, char **host, char **user,
@@ -89,7 +91,7 @@ void mcfs_fill_names (void (*func)(char *))
     for (i = 0; i < MCFS_MAX_CONNECTIONS; i++){
 	if (mcfs_connections [i].host == 0)
 	    continue;
-	name = copy_strings ("mc:", mcfs_connections [i].user,
+	name = copy_strings ("/#mc:", mcfs_connections [i].user,
 			     "@",   mcfs_connections [i].host, 0);
 	(*func) (name);
 	free (name);
@@ -137,8 +139,6 @@ int mcfs_invalidate_socket (int sock)
     return 0;
 }
 
-extern char *last_current_dir;
-
 /* This routine checks the server RPC version and logs the user in */
 static int mcfs_login_server (int my_socket, char *user, int port,
 			      int port_autodetected, char *netrcpass,
@@ -153,26 +153,32 @@ static int mcfs_login_server (int my_socket, char *user, int port,
 	return 0;
     
     if (result != MC_VERSION_OK){
-	message_1s (1, " MCFS ", " The server does not support this version ");
+	message_1s (1, _(" MCFS "), _(" The server does not support this version "));
 	close (my_socket);
 	return 0;
     }
 	
-    rpc_send (my_socket, RPC_INT, MC_LOGIN, RPC_STRING, last_current_dir,
+    /* FIXME: figure out why last_current_dir used to be passed here */
+    rpc_send (my_socket, RPC_INT, MC_LOGIN, RPC_STRING, "/",
         RPC_STRING, user, RPC_END);
     
-    if (0 == rpc_get  (my_socket, RPC_INT, &result, RPC_END))
+    if (0 == rpc_get (my_socket, RPC_INT, &result, RPC_END))
 	return 0;
     
     if (result == MC_NEED_PASSWORD){
 	if (port > 1024 && port_autodetected){
 	    int v;
-	    
-	    v = query_dialog (" Warning ",
-	        " The remote server is not running on a system port \n"
-		" you need a password to log in, but the information may \n"
-   	        " not be safe on the remote side.  Continue? \n", 3, 2,
-			      " Yes ",  " No ");
+#ifndef VFS_STANDALONE
+	    v = query_dialog (_(" Warning "),
+	        _(" The remote server is not running on a system port \n"
+		  " you need a password to log in, but the information may \n"
+		  " not be safe on the remote side.  Continue? \n"), 3, 2,
+			      _(" Yes "),  _(" No "));
+#else
+	    message_1s( 1, " MCFS ", _(" The remote server is running on stange port. Giving up.\n"));
+	    v = 1;
+#endif
+
 	    if (v == 1){
 		close (my_socket);
 		return 0;
@@ -181,7 +187,7 @@ static int mcfs_login_server (int my_socket, char *user, int port,
 	if (netrcpass != NULL)
 	    pass = strdup (netrcpass);
 	else
-	    pass = input_dialog (" MCFS Password required ", _("Password:"), "");
+	    pass = vfs_get_password (_(" MCFS Password required "));
 	if (!pass){
 	    rpc_send (my_socket, RPC_INT, MC_QUIT, RPC_END);
 	    close (my_socket);
@@ -195,7 +201,7 @@ static int mcfs_login_server (int my_socket, char *user, int port,
 	    return 0;
 	
 	if (result != MC_LOGINOK){
-	    message_1s (1, " MCFS ", " Invalid password ");
+	    message_1s (1, " MCFS ", _(" Invalid password "));
 	    rpc_send (my_socket, RPC_INT, MC_QUIT, RPC_END);
 	    close (my_socket);
 	    return 0;
@@ -237,8 +243,8 @@ static mcfs_connection *mcfs_get_free_bucket ()
 	    return &mcfs_connections [i];
     }
     /* This can't happend, since we have checked for max connections before */
-    fprintf (stderr, "Internal error: mcfs_get_free_bucket");
-    return 0;
+    vfs_die("Internal error: mcfs_get_free_bucket");
+    return 0;	/* shut up, stupid gcc */
 }
 
 /* This routine keeps track of open connections */
@@ -261,7 +267,7 @@ static mcfs_connection *mcfs_open_link (char *host, char *user, int *port, char 
 	    return &mcfs_connections [i];
     }
     if (mcfs_open_connections == MCFS_MAX_CONNECTIONS){
-	message_1s (1, " Error ", " Too many open connections ");
+	message_1s (1, MSG_ERROR, _(" Too many open connections "));
 	return 0;
     }
 
@@ -305,43 +311,40 @@ static char *mcfs_get_path (mcfs_connection **mc, char *path)
     int    port;
 
     /* An absolute path name, try to determine connection socket */
-    if (strncmp (path, "mc:", 3) == 0){
-	path += 3;
+    if (strncmp (path, "/#mc:", 5)) {
+        vfs_die( "Mcfs: this should not happen.\n" );
+	/* We used to *mc = current_dir_connection; return strdup (path); */
+    }
+    path += 5;
 
-	/* 1.11.96 bor: add mc:// URL syntax */
-	if (path[0] == '/' && path[1] == '/')
-	    path += 2;
-
-	/* Port = 0 means that open_tcp_link will try to contact the
-	 * remote portmapper to get the port number
-	 */
-	port = 0;
-	if (!(remote_path = mcfs_get_host_and_username
-	      (path, &host, &user, &port, &pass))){
-	    free (host);
-	    free (user);
-	    if (pass)
-	        wipe_password (pass);
-	    return 0;
-	}
-
+    /* Port = 0 means that open_tcp_link will try to contact the
+     * remote portmapper to get the port number
+     */
+    port = 0;
+    if ((remote_path = mcfs_get_host_and_username(path, &host, &user, &port, &pass)))
 	if (!(*mc = mcfs_open_link (host, user, &port, pass))){
 	    free (remote_path);
-	    free (host);
-	    free (user);
-	    if (pass)
-	        wipe_password (pass);
-	    return 0;
+	    remote_path = NULL;
 	}
-	free (host);
-	free (user);
-	if (pass)
-	    wipe_password (pass);
-	return remote_path;
+    free (host);
+    free (user);
+    if (pass)
+        wipe_password (pass);
+
+    if (!remote_path)
+        return NULL;
+
+    /* NOTE: tildes are deprecated. See ftpfs.c */
+    {
+        int f = !strcmp( remote_path, "/~" );
+	if (f || !strncmp( remote_path, "/~/", 3 )) {
+	    char *s;
+	    s = concat_dir_and_file( mcfs_gethome (*mc), remote_path +3-f );
+	    free (remote_path);
+	    remote_path = s;
+	}
     }
-    *mc = current_dir_connection;
-    
-    return strdup (path);
+    return remote_path;
 }
 
 /* Simple function for routines returning only an integer from the server */
@@ -436,15 +439,10 @@ static int mcfs_rpc_path_int_int (int command, char *path, int n1, int n2)
     return mcfs_handle_simple_error (mc->sock, 0);
 }
 
-char *mcfs_gethome (char *servername)
+static char *mcfs_gethome (mcfs_connection *mc)
 {
-    char *remote_file;
     char *buffer;
-    mcfs_connection *mc;
 
-    if (!(remote_file = mcfs_get_path (&mc, servername)))
-	return 0;
-    free (remote_file);
     if (mc->home)
 	return strdup (mc->home);
     else {
@@ -454,22 +452,6 @@ char *mcfs_gethome (char *servername)
 	mc->home = buffer;
 	return strdup (buffer);
     }
-}
-
-char *mcfs_getupdir (char *servername)
-{
-    char *remote_file;
-    mcfs_connection *mc;
-    char *buffer;
-
-    if (!(remote_file = mcfs_get_path (&mc, servername)))
-	return 0;
-    free (remote_file);
-    rpc_send (mc->sock, RPC_INT, MC_GETUPDIR, RPC_END);
-    if (0 == rpc_get (mc->sock, RPC_STRING, &buffer, RPC_END)) {
-        return strdup ("/");
-    }
-    return buffer;
 }
 
 /* The callbacks */
@@ -1114,6 +1096,8 @@ vfs mcfs_vfs_ops = {
     mcfs_opendir,
     mcfs_readdir,
     mcfs_closedir,
+    NULL,
+    NULL,
 
     mcfs_stat,
     mcfs_lstat,

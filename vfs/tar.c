@@ -2,6 +2,7 @@
    Copyright (C) 1995 The Free Software Foundation
    
    Written by: 1995 Jakub Jelinek
+   Rewritten by: 1998 Pavel Machek
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -37,6 +38,7 @@
 #include <time.h>
 #include "../src/fs.h"
 #include "../src/util.h"
+#include "../src/dialog.h"	/* For MSG_ERROR */
 #include "../src/mem.h"
 #include "../src/mad.h"
 #include "vfs.h"
@@ -80,7 +82,7 @@ static struct tarfs_archive *first_archive = NULL;
 static int tarerrno = 0;
 static struct stat hstat;		/* Stat struct corresponding */
 static char *current_file_name, *current_link_name;
-static struct tarfs_entry *tarfs_find_entry (struct tarfs_entry *dir, char *name, int make_dirs);
+static struct tarfs_entry *tarfs_find_entry (struct tarfs_entry *dir, char *name, int make_dirs, int make_file);
 
 void tarfs_fill_names (void (*func)(char *))
 {
@@ -88,7 +90,7 @@ void tarfs_fill_names (void (*func)(char *))
     char *name;
     
     while (a){
-	name = copy_strings ("tar:", a->name, "/",
+	name = copy_strings ( a->name, "#tar/",
 			     a->current_dir->name, 0);
 	(*func)(name);
 	free (name);
@@ -573,7 +575,7 @@ static int read_header (struct tarfs_archive *archive, int tard)
 	     size -= written) {
 	    data = get_next_record (archive, tard)->charptr;
 	    if (data == NULL) {
-		message_1s (1, " Error ", "Unexpected EOF on archive file");
+		message_1s (1, MSG_ERROR, _("Unexpected EOF on archive file"));
 		return 0;
 	    }
 	    written = RECORDSIZE;
@@ -625,9 +627,9 @@ static int read_header (struct tarfs_archive *archive, int tard)
 	    q = current_file_name;
 	}
 	    
-	pent = tarfs_find_entry (archive->root_entry, q, 1);
+	pent = tarfs_find_entry (archive->root_entry, q, 1, 0);
 	if (pent == NULL) {
-	    message_1s (1, " Error ", "Inconsistent tar archive");
+	    message_1s (1, MSG_ERROR, _("Inconsistent tar archive"));
 	}
 
 	entry = (struct tarfs_entry *) xmalloc (sizeof (struct tarfs_entry), "Tar: tarfs_entry");
@@ -646,9 +648,9 @@ static int read_header (struct tarfs_archive *archive, int tard)
 	free (current_file_name);
 
 	if (header->header.linkflag == LF_LINK) {
-	    pent = tarfs_find_entry (archive->root_entry, current_link_name, 0);
+	    pent = tarfs_find_entry (archive->root_entry, current_link_name, 0, 0);
 	    if (pent == NULL) {
-	        message_1s (1, " Error ", "Inconsistent tar archive");
+	        message_1s (1, MSG_ERROR, _("Inconsistent tar archive"));
 	    } else {
 		entry->inode = pent->inode;
 		pent->inode->nlink++;
@@ -748,7 +750,7 @@ int read_tar_archive (char *name, struct tarfs_archive **pparc)
     struct tarfs_archive *archive;
 
     if ((tard = open_tar_archive (name, &archive)) == -1) {	/* Open for reading */
-        message_2s (1, " Error ", "Couldn't open tar archive\n%s", name);
+        message_2s (1, MSG_ERROR, _("Couldn't open tar archive\n%s"), name);
 	return -1;
     }
 
@@ -767,7 +769,7 @@ int read_tar_archive (char *name, struct tarfs_archive **pparc)
 	case 0:		/* Invalid header */
 	    switch (prev_status) {
 	    case 3:		/* Error on first record */
-		message_2s (1, " Error ", "Hmm,...\n%s\ndoesn't look like a tar archive.", name);
+		message_2s (1, MSG_ERROR, _("Hmm,...\n%s\ndoesn't look like a tar archive."), name);
 		/* FALL THRU */
 	    case 2:		/* Error after record of zeroes */
 	    case 1:		/* Error after header rec */
@@ -791,43 +793,6 @@ int read_tar_archive (char *name, struct tarfs_archive **pparc)
     return 0;
 }
 
-char *tarfs_analysis (char *name, char **archive, int is_dir)
-{
-    static struct {
-        int len; /* strlen (ext)  */
-        char *ext;
-    } tarext[] = {{4, ".tar"},
-                  {4, ".tgz"},
-                  {7, ".tar.gz"},
-                  {4, ".taz"},
-                  {4, ".tpz"},
-		  {6, ".tar.z"},
-		  {7, ".tar.bz"},
-		  {8, ".tar.bz2"},
-                  {6, ".tar.Z"} };
-    char *p, *local;
-    unsigned int i;
-    char *archive_name = NULL;
-
-                                               /*  |  this is len of "tar:" plus some minimum
-                                                *  v  space needed for the extension */
-    for (p = name + strlen (name); p >= name + 8; p--)
-    	if (*p == '/' || (is_dir && !*p))
-    	    for (i = 0; i < sizeof (tarext) / sizeof (tarext [0]); i++)
-    	        if (!strncmp (p - tarext [i].len, tarext [i].ext, tarext [i].len)) {
-    	            char c = *p;
-    	            
-    	            *p = 0;
-    	            archive_name = vfs_canon (name + 4);
-    	            *archive = archive_name;
-    	            *p = c;
-    	            local = strdup (p);
-    	            return local;
-    	        }
-    tarerrno = ENOENT;
-    return NULL;
-}
-
 /* Returns allocated path inside the archive or NULL */
 static char *tarfs_get_path (char *inname, struct tarfs_archive **archive, int is_dir,
     int do_not_open)
@@ -839,11 +804,10 @@ static char *tarfs_get_path (char *inname, struct tarfs_archive **archive, int i
     vfs *v;
     struct stat stat_buf;
     
-    local = tarfs_analysis (inname, &archive_name, is_dir);
-    if (local == NULL) {
-    	tarerrno = ENOENT;
-    	return NULL;
-    }
+    archive_name = inname;
+    vfs_split( inname, &local, NULL );
+    if (!local)
+      local = "";
 
     mc_stat (archive_name, &stat_buf);
 
@@ -865,8 +829,6 @@ static char *tarfs_get_path (char *inname, struct tarfs_archive **archive, int i
         result = read_tar_archive (archive_name, &parc);
     if (result == -1) {
 	tarerrno = EIO;
-	free(local);
-	free(archive_name);
 	return NULL;
     }
     v = vfs_type (archive_name);
@@ -882,7 +844,6 @@ static char *tarfs_get_path (char *inname, struct tarfs_archive **archive, int i
     vfs_rm_parents (parent);
 return_success:
     *archive = parc;
-    free (archive_name);
     return local;
 }
 
@@ -895,7 +856,7 @@ static int notadir;
 
 static struct tarfs_entry *
 __tarfs_find_entry (struct tarfs_entry *dir, char *name,
-		    struct tarfs_loop_protect *list, int make_dirs);
+		    struct tarfs_loop_protect *list, int make_dirs, int make_file);
 
 static struct tarfs_entry *
 __tarfs_resolve_symlinks (struct tarfs_entry *entry, 
@@ -916,7 +877,7 @@ __tarfs_resolve_symlinks (struct tarfs_entry *entry,
 		 "Tar: symlink looping protection");
     looping->entry = entry;
     looping->next = list;
-    pent = __tarfs_find_entry (entry->dir, entry->inode->linkname, looping, 0);
+    pent = __tarfs_find_entry (entry->dir, entry->inode->linkname, looping, 0, 0);
     free (looping);
     if (pent == NULL)
     	tarerrno = ENOENT;
@@ -939,93 +900,6 @@ static struct tarfs_entry *tarfs_resolve_symlinks (struct tarfs_entry *entry)
     return res;
 }
 
-static struct tarfs_entry*
-__tarfs_find_entry (struct tarfs_entry *dir, char *name, 
-		     struct tarfs_loop_protect *list, int make_dirs)
-{
-    struct tarfs_entry *pent, *pdir;
-    char *p, *q, *name_end;
-    char c;
-
-    if (*name == '/') { /* Handle absolute paths */
-    	name++;
-    	dir = dir->inode->archive->root_entry;
-    }
-
-    pent = dir;
-    p = name;
-    name_end = name + strlen (name);
-    q = strchr (p, '/');
-    c = '/';
-    if (!q)
-	q = strchr (p, 0);
-    
-    for (; pent != NULL && c && *p; ){
-	c = *q;
-	*q = 0;
-
-	if (strcmp (p, ".")){
-	    if (!strcmp (p, "..")) 
-		pent = pent->dir;
-	    else {
-		if ((pent = __tarfs_resolve_symlinks (pent, list))==NULL){
-		    *q = c;
-		    return NULL;
-		}
-		if (c == '/' && !S_ISDIR (pent->inode->mode)){
-		    *q = c;
-		    notadir = 1;
-		    return NULL;
-		}
-		pdir = pent;
-		for (pent = pent->inode->first_in_subdir; pent; pent = pent->next_in_dir)
-		    /* Hack: I keep the original semanthic unless
-		       q+1 would break in the strchr */
-		    if (!strcmp (pent->name, p)){
-			if (q + 1 > name_end){
-			    *q = c;
-			    notadir = !S_ISDIR (pent->inode->mode);
-			    return pent;
-			}
-			break;
-		    }
-		
-		/* When we load archive, we create automagically
-		 * non-existant directories
-		 */
-		if (pent == NULL && make_dirs) { 
-		    pent = generate_entry (dir->inode->archive, p, pdir, S_IFDIR | 0777);
-		}
-	    }
-	}
-	/* Next iteration */
-	*q = c;
-	p = q + 1;
-	q = strchr (p, '/');
-	if (!q)
-	    q = strchr (p, 0);
-    }
-    if (pent == NULL)
-    	tarerrno = ENOENT;
-    return pent;
-}
-
-static struct tarfs_entry *tarfs_find_entry (struct tarfs_entry *dir, char *name, int make_dirs)
-{
-    struct tarfs_entry *res;
-    
-    errloop = 0;
-    notadir = 0;
-    res = __tarfs_find_entry (dir, name, NULL, make_dirs);
-    if (res == NULL) {
-    	if (errloop)
-    	    tarerrno = ELOOP;
-    	else if (notadir)
-    	    tarerrno = ENOTDIR;
-    }
-    return res;
-}
-
 struct tar_pseudofile {
     struct tarfs_archive *archive;
     long pos;
@@ -1034,18 +908,18 @@ struct tar_pseudofile {
     struct tarfs_entry *entry;
 };
 
+static struct tarfs_entry *tarfs_find_entry (struct tarfs_entry *dir, char *name, int make_dirs, int make_file);
+
 static void *tar_open (char *file, int flags, int mode)
 {
     struct tar_pseudofile *tar_info;
     struct tarfs_archive *archive;
-    char *p, *q;
+    char *q;
     struct tarfs_entry *entry;
 
-    if ((p = tarfs_get_path (file, &archive, 0, 0)) == NULL)
+    if ((q = tarfs_get_path (file, &archive, 0, 0)) == NULL)
 	return NULL;
-    q = (*p == '/') ? p + 1 : p;
-    entry = tarfs_find_entry (archive->root_entry, q, 0);
-    free (p);
+    entry = tarfs_find_entry (archive->root_entry, q, 0, 0);
     if (entry == NULL)
     	return NULL;
     if ((entry = tarfs_resolve_symlinks (entry)) == NULL)
@@ -1150,176 +1024,29 @@ static int tar_close (void *data)
     return 0;
 }
 
-static int tar_errno (void)
-{
-    return tarerrno;
-}
+#define X_pseudofile tar_pseudofile
+#define Xerrno tarerrno
 
-static void *tar_opendir (char *dirname)
-{
-    struct tarfs_archive *archive;
-    char *p, *q;
-    struct tarfs_entry *entry;
-    struct tarfs_entry **tar_info;
+#define X_entry tarfs_entry
+#define X_archive tarfs_archive
+#define X_get_path tarfs_get_path
+#define X_find_entry tarfs_find_entry
+#define X_resolve_symlinks tarfs_resolve_symlinks
+#define X_inode tarfs_inode
+#define __X_find_entry __tarfs_find_entry
+#define __X_resolve_symlinks __tarfs_resolve_symlinks
+#define X_loop_protect tarfs_loop_protect
 
-    if ((p = tarfs_get_path (dirname, &archive, 1, 0)) == NULL)
-	return NULL;
-    q = (*p == '/') ? p + 1 : p;
-    entry = tarfs_find_entry (archive->root_entry, q, 0);
-    free (p);
-    if (entry == NULL)
-    	return NULL;
-    if ((entry = tarfs_resolve_symlinks (entry)) == NULL)
-	return NULL;
-    if (!S_ISDIR (entry->inode->mode)) {
-    	tarerrno = ENOTDIR;
-    	return NULL;
-    }
-
-    tar_info = (struct tarfs_entry **) xmalloc (sizeof (struct tarfs_entry *), "Tar: tar_opendir");
-    *tar_info = entry->inode->first_in_subdir;
-
-    return tar_info;
-}
-
-static void *tar_readdir (void *data)
-{
-    static struct {
-	struct dirent dir;
-#ifdef NEED_EXTRA_DIRENT_BUFFER
-	char extra_buffer [MC_MAXPATHLEN];
-#endif
-    } dir;
-    
-    struct tarfs_entry **tar_info = (struct tarfs_entry **) data;
-    
-    if (*tar_info == NULL)
-    	return NULL;
-    
-    strcpy (&(dir.dir.d_name [0]), (*tar_info)->name);
-    
-#ifndef DIRENT_LENGTH_COMPUTED
-    dir.d_namlen = strlen (dir.dir.d_name);
-#endif
-    *tar_info = (*tar_info)->next_in_dir;
-    
-    return (void *)&dir;
-}
-
-static int tar_closedir (void *data)
-{
-    free (data);
-    return 0;
-}
-
-static int _tar_stat (char *path, struct stat *buf, int resolve)
-{
-    struct tarfs_archive *archive;
-    char *p, *q;
-    struct tarfs_entry *entry;
-    struct tarfs_inode *inode;
-
-    if ((p = tarfs_get_path (path, &archive, 0, 0)) == NULL)
-	return -1;
-    q = (*p == '/') ? p + 1 : p;
-    entry = tarfs_find_entry (archive->root_entry, q, 0);
-    free (p);
-    if (entry == NULL)
-    	return -1;
-    if (resolve && (entry = tarfs_resolve_symlinks (entry)) == NULL)
-	return -1;
-    inode = entry->inode;
-    buf->st_dev = inode->dev;
-    buf->st_ino = inode->inode;
-    buf->st_mode = inode->mode;
-    buf->st_nlink = inode->nlink;
-    buf->st_uid = inode->uid;
-    buf->st_gid = inode->gid;
-#ifdef HAVE_ST_RDEV
-    buf->st_rdev = inode->rdev;
-#endif
-    buf->st_size = inode->size;
-#ifdef HAVE_ST_BLKSIZE
-    buf->st_blksize = RECORDSIZE;
-#endif
-#ifdef HAVE_ST_BLOCKS
-    buf->st_blocks = (inode->size + RECORDSIZE - 1) / RECORDSIZE;
-#endif
-    buf->st_atime = inode->atime;
-    buf->st_mtime = inode->mtime;
-    buf->st_ctime = inode->ctime;
-    return 0;
-}
-
-static int tar_stat (char *path, struct stat *buf)
-{
-    return _tar_stat (path, buf, 1);
-}
-
-static int tar_lstat (char *path, struct stat *buf)
-{
-    return _tar_stat (path, buf, 0);
-}
-
-static int tar_fstat (void *data, struct stat *buf)
-{
-    struct tar_pseudofile *file = (struct tar_pseudofile *)data;
-    struct tarfs_inode *inode;
-    
-    inode = file->entry->inode;
-    buf->st_dev = inode->dev;
-    buf->st_ino = inode->inode;
-    buf->st_mode = inode->mode;
-    buf->st_nlink = inode->nlink;
-    buf->st_uid = inode->uid;
-    buf->st_gid = inode->gid;
-    buf->st_rdev = inode->rdev;
-    buf->st_size = inode->size;
-#ifdef HAVE_ST_BLKSIZE
-    buf->st_blksize = RECORDSIZE;
-#endif
-#ifdef HAVE_ST_BLOCKS
-    buf->st_blocks = (inode->size + RECORDSIZE - 1) / RECORDSIZE;
-#endif
-    buf->st_atime = inode->atime;
-    buf->st_mtime = inode->mtime;
-    buf->st_ctime = inode->ctime;
-    return 0;
-}
+#include "shared.c"
 
 static int tar_chmod (char *path, int mode)
-{
+{	/* Fixme: are you sure? IMO this is guaranteed to fail */
     return chmod (path, mode);
 }
 
 static int tar_chown (char *path, int owner, int group)
-{
+{	/* Fixme: are you sure? IMO this is guaranteed to fail */
     return chown (path, owner, group);
-}
-
-static int tar_readlink (char *path, char *buf, int size)
-{
-    struct tarfs_archive *archive;
-    char *p, *q;
-    int i;
-    struct tarfs_entry *entry;
-
-    if ((p = tarfs_get_path (path, &archive, 0, 0)) == NULL)
-	return -1;
-    q = (*p == '/') ? p + 1 : p;
-    entry = tarfs_find_entry (archive->root_entry, q, 0);
-    free (p);
-    if (entry == NULL)
-    	return -1;
-    if (!S_ISLNK (entry->inode->mode)) {
-        tarerrno = EINVAL;
-        return -1;
-    }
-    if (size > (i = strlen (entry->inode->linkname))) {
-    	size = i;
-    }
-    strncpy (buf, entry->inode->linkname, i);
-    return i;
 }
 
 static int tar_unlink (char *path)
@@ -1345,29 +1072,19 @@ static int tar_rename (char *a, char *b)
 static int tar_chdir (char *path)
 {
     struct tarfs_archive *archive;
-    char *p, *q;
+    char *q;
     struct tarfs_entry *entry;
 
     tarerrno = ENOTDIR;
-    if ((p = tarfs_get_path (path, &archive, 1, 0)) == NULL)
+    if ((q = tarfs_get_path (path, &archive, 1, 0)) == NULL)
 	return -1;
-    q = (*p == '/') ? p + 1 : p;
-    entry = tarfs_find_entry (archive->root_entry, q, 0);
-    if (entry == NULL) {
-    	free (p);
+    entry = tarfs_find_entry (archive->root_entry, q, 0, 0);
+    if (!entry)
     	return -1;
-    }
     entry = tarfs_resolve_symlinks (entry);
-    if (entry == NULL) {
-    	free (p);
+    if ((!entry) || (!S_ISDIR (entry->inode->mode)))
     	return -1;
-    }
-    if (!S_ISDIR (entry->inode->mode)) {
-    	free (p);
-    	return -1;
-    }
     entry->inode->archive->current_dir = entry;
-    free (p);
     tarerrno = 0;
     return 0;
 }
@@ -1423,7 +1140,6 @@ static vfsid tar_getid (char *path, struct vfs_stamping **parent)
     if ((p = tarfs_get_path (path, &archive, 0, 1)) == NULL) {
 	return (vfsid) -1;
     }
-    free (p);
     v = vfs_type (archive->name);
     id = (*v->getid) (archive->name, &par);
     if (id != (vfsid)-1) {
@@ -1491,12 +1207,12 @@ static char *tar_getlocalcopy (char *path)
     struct tarfs_archive *archive;
     char *p, *q;
     struct tarfs_entry *entry;
+    char buf[MC_MAXPATHLEN];
 
-    if ((p = tarfs_get_path (path, &archive, 1, 0)) == NULL)
+    strcpy( buf, path );
+    if ((q = tarfs_get_path (path, &archive, 1, 0)) == NULL)
 	return NULL;
-    q = (*p == '/') ? p + 1 : p;
-    entry = tarfs_find_entry (archive->root_entry, q, 0);
-    free (p);
+    entry = tarfs_find_entry (archive->root_entry, q, 0, 0);
     if (entry == NULL)
     	return NULL;
     if ((entry = tarfs_resolve_symlinks (entry)) == NULL)
@@ -1504,7 +1220,7 @@ static char *tar_getlocalcopy (char *path)
 
     if (entry->inode->local_filename != NULL)
         return entry->inode->local_filename;
-    p = mc_def_getlocalcopy (path);
+    p = mc_def_getlocalcopy (buf);
     if (p != NULL) {
         entry->inode->local_filename = p;
     }
@@ -1534,30 +1250,32 @@ vfs tarfs_vfs_ops =
     tar_open,
     tar_close,
     tar_read,
-    tar_write,
+    tar_write,		/* unimplemented */
 
-    tar_opendir,
-    tar_readdir,
-    tar_closedir,
+    s_opendir,
+    s_readdir,
+    s_closedir,
+    s_telldir,
+    s_seekdir,
 
-    tar_stat,
-    tar_lstat,
-    tar_fstat,
+    s_stat,
+    s_lstat,
+    s_fstat,
 
     tar_chmod,
     tar_chown,
     NULL,
 
-    tar_readlink,
-    tar_symlink,
-    tar_link,
-    tar_unlink,
+    s_readlink,
+    tar_symlink,	/* unimplemented */
+    tar_link,		/* unimplemented */
+    tar_unlink,		/* unimplemented */
 
-    tar_rename,
+    tar_rename,		/* unimplemented */
     tar_chdir,
-    tar_errno,
+    s_errno,
     tar_lseek,
-    tar_mknod,
+    tar_mknod,		/* unipmelemented */
     
     tar_getid,
     tar_nothingisopen,
@@ -1566,13 +1284,13 @@ vfs tarfs_vfs_ops =
     tar_getlocalcopy,
     tar_ungetlocalcopy,
     
-    tar_mkdir,
-    tar_rmdir,
+    tar_mkdir,		/* unimplemented */
+    tar_rmdir,		/* unimplemented */
     NULL,
     NULL,
     NULL
 #ifdef HAVE_MMAP
-    , tar_mmap,
-    tar_munmap
+    , tar_mmap,		/* unimplemented */
+    tar_munmap		/* unimplemented */
 #endif    
 };

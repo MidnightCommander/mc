@@ -37,6 +37,7 @@
 #include <string.h>
 #include <fcntl.h>
 #include <stdio.h>
+#include "tty.h"
 #include "dlg.h"
 #include "widget.h"
 #include "wtools.h"
@@ -48,7 +49,6 @@
 #ifdef USE_NETCODE
 #    include <sys/socket.h>
 #endif
-#include "tty.h"
 #include "util.h"
 #include "dialog.h"
 #include "file.h"

@@ -1089,8 +1089,8 @@ AC_DEFUN(AC_WITH_VFS, [
 	if $use_net_code; then
 	    AC_DEFINE(USE_NETCODE)
         fi
-	LIBVFS="libvfs.a"
-	LVFS="-lvfs"
+	LIBVFS="libvfs-mc.a"
+	LVFS="-lvfs-mc"
 	fastdepvfs=fastdepvfs
 	if test $have_socket = yes; then
 	    mcserv="mcserv"

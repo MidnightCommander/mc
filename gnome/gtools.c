@@ -4,12 +4,12 @@
  * Written by Miguel de Icaza
  */
 #include <config.h>
+#include "myslang.h"
 #include "util.h"
 #include <gnome.h>
 #include <gdk/gdkkeysyms.h>
 #include <string.h>
 #include "gconf.h"
-#include "myslang.h"
 #include "dlg.h"
 #undef HAVE_LIBGPM
 #include "mouse.h"

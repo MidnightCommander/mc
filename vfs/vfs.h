@@ -1,6 +1,18 @@
 #ifndef __VFS_H
 #define __VFS_H
 
+#ifdef VFS_STANDALONE
+#include "util-alone.h"
+#undef USE_EXT2FSLIB
+#else
+#define BROKEN_PATHS
+/*
+ * We should really only allow /:ftp/ tree to export ftp, but midnight's users may 
+ * like to be able to cd .. to get back where there were before ftp. How to solve?
+ * Ok, we'll allow /any/path/:ftp/ to access ftp tree. Broken, yes.
+ */ 
+#endif
+
 #if !defined(SCO_FLAVOR) || !defined(_SYS_SELECT_H)
 #	include <sys/time.h>	/* alex: this redefines struct timeval */
 #endif /* SCO_FLAVOR */
@@ -35,6 +47,8 @@ struct utimbuf {
 	void  *(*opendir)(char *dirname);
 	void  *(*readdir)(void *vfs_info);
 	int   (*closedir)(void *vfs_info);
+ 	int   (*telldir)(void *dir);
+ 	void  (*seekdir)(void *dir, int offset);
 
 	int  (*stat)(char *path, struct stat *buf);
 	int  (*lstat)(char *path, struct stat *buf);
@@ -139,12 +153,6 @@ struct utimbuf {
     void ftpfs_fill_names (void (*)(char *));
     void tarfs_fill_names (void (*)(char *));
     
-    char *ftpfs_gethome (char *);
-    char *mcfs_gethome (char *);
-    
-    char *ftpfs_getupdir (char *);
-    char *mcfs_getupdir (char *);
-
     /* Only the routines outside of the VFS module need the emulation macros */
 
 	int mc_open (char *file, int flags, ...);
@@ -157,6 +165,8 @@ struct utimbuf {
 	DIR *mc_opendir (char *dirname);
 	struct dirent *mc_readdir(DIR *dirp);
 	int mc_closedir (DIR *dir);
+ 	int mc_telldir (DIR *dir);
+ 	void mc_seekdir (DIR *dir, int offset);
 
 	int mc_stat (char *path, struct stat *buf);
 	int mc_lstat (char *path, struct stat *buf);
@@ -192,6 +202,8 @@ struct utimbuf {
 #    undef USE_NETCODE
 #endif
 
+#    undef USE_NETCODE
+
 #   define vfs_fill_names(x)
 #   define vfs_add_current_stamps()
 #   define vfs_current_is_local() 1
@@ -207,6 +219,8 @@ struct utimbuf {
 #   define mc_opendir opendir
 #   define mc_readdir readdir
 #   define mc_closedir closedir
+#   define mc_telldir telldir
+#   define mc_seekdir seekdir
 
 #   define mc_get_current_wd(x,size) get_current_wd (x, size)
 #   define mc_fstat fstat
@@ -276,12 +290,15 @@ struct utimbuf {
 #ifdef WANT_PARSE_LS_LGA
 int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname);
 #endif
+extern void vfs_die (char *msg);
+extern char *vfs_get_password (char *msg);
 
 #define MCCTL_SETREMOTECOPY	0
 #define MCCTL_ISREMOTECOPY	1
 #define MCCTL_REMOTECOPYCHUNK	2
 #define MCCTL_FINISHREMOTE	3
 #define MCCTL_FLUSHDIR          4
+#define MCCTL_REMOVELOCALCOPY   5
 
 /* Return codes from the ${fs}_ctl routine */
 

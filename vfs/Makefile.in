@@ -32,12 +32,28 @@ EXTFSSTUFF = README extfs.ini a cpio.in deb.in ftplist.in lha.in lslR.in \
 	rar.in rpm zip.in zoo.in arfs patchfs mailfs hp48
 
 #
+# Commands to build standalone version (.so)
+#
+
+VFSSOOBJS = tcputil.so ftpfs.so mcfs.so utilvfs.so local.so vfs.so tar.so names.so container.so extfs.so util-alone.so util.sor utilunix.sor
+
+%.sor:	../src/%.c
+	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) -DVFS_STANDALONE $< -o $@
+
+%.so:	%.c
+	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) -DVFS_STANDALONE $< -o $@
+
+libvfs.so: $(VFSSOOBJS) libvfs.o
+	gcc $(VFSSOOBJS) libvfs.o -shared -o libvfs.so
+
+
+#
 # Distribution variables
 #
 
 DISTVFS = 	Makefile.in ChangeLog $(VFSSRCS) $(VFSHDRS)
 
-all: @LIBVFS@ @mcserv@
+all: libvfs-mc.a @mcserv@
 
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<
@@ -59,7 +75,7 @@ mcservx: mcserv.o tcputil.o mad.o
 	$(CC) $(LDFLAGS) -o mcserv mcserv.o tcputil.o mad.o $(LIBS)
 	touch mcservx
 
-libvfs.a: $(VFSOBJS)
+libvfs-mc.a: $(VFSOBJS)
 	$(RMF) $@
 	$(AR) cr $@ $(VFSOBJS)
 	-$(RANLIB) $@
@@ -75,7 +91,7 @@ TAGS: $(VFSSRCS)
 	etags $(VFSSRCS)
 
 clean:
-	$(RMF) mcserv *.o core a.out libvfs.a mcservx
+	$(RMF) mcserv *.o core a.out libvfs-mc.a mcservx libvfs.so
 
 realclean: clean
 	$(RMF) .depend
@@ -84,7 +100,7 @@ realclean: clean
 
 distclean:
 	-$(RMF) $(srcdir)/*~ $(srcdir)/mcserv $(srcdir)/*.o $(srcdir)/a.out
-	-$(RMF) $(srcdir)/core $(srcdir)/libvfs.a
+	-$(RMF) $(srcdir)/core $(srcdir)/libvfs-mc.a $(srcdir)/libvfs.so
 	-$(RMF) $(srcdir)/mad.c $(srcdir)/mad.h
 	-if test $(srcdir) = .; then $(MAKE) realclean; fi
 	-$(RMF) $(srcdir)/Makefile

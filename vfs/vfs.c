@@ -3,6 +3,7 @@
    
    Written by: 1995 Miguel de Icaza
                1995 Jakub Jelinek
+	       1998 Pavel Machek
    
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -17,6 +18,8 @@
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
+
+#define _VFS_VFS_C 1
 
 #include <config.h>
 #include <stdio.h>
@@ -38,9 +41,11 @@
 #include "../src/dir.h"
 #include "../src/util.h"
 #include "../src/main.h"
+#ifndef VFS_STANDALONE
 #include "../src/panel.h"
 #include "../src/key.h"		/* Required for the async alarm handler */
 #include "../src/layout.h"	/* For get_panel_widget and get_other_index */
+#endif
 #include "vfs.h"
 #include "mcfs.h"
 #include "names.h"
@@ -50,6 +55,7 @@
 #endif
 
 extern int get_other_type (void);
+extern int extfs_which (char *path);
 
 int vfs_timeout = 60; /* VFS timeout in seconds */
 
@@ -58,7 +64,6 @@ extern int cd_symlinks; /* Defined in main.c */
 /* They keep track of the current directory */
 static vfs *current_vfs = &local_vfs_ops;
 char *current_dir = NULL;
-char *last_current_dir = NULL;
 
 static int current_mon;
 static int current_year;
@@ -83,85 +88,89 @@ static int get_bucket ()
     exit (1);
 }
 
-/* This flag is set on each vfs_type call to say if the path was
-   absolute (1) or relative (0) to current dir. */
+vfs *vfs_type_from_op (char *path)
+{
+#ifdef USE_NETCODE
+    if (!strncmp (path, "mc:", 3))
+	return  &mcfs_vfs_ops;
+    if (!strncmp (path, "ftp:", 4))
+        return &ftpfs_vfs_ops;
+#endif
+#ifdef USE_EXT2FSLIB
+    if (!strcmp (path, "undel"))
+	return &undelfs_vfs_ops;
+#endif
+    if (!strcmp (path, "utar"))
+        return &tarfs_vfs_ops;
+    if (extfs_which (path) != -1)
+        return &extfs_vfs_ops;
+    return NULL;
+}
 
-int vfs_type_absolute = 0;
+/*
+ * Splits path '/p1:op/inpath' into inpath,op; returns which vfs it is.
+ * What is left in path is p1. You still want to free(path), you DON'T
+ * want to free neither *inpath nor *op
+ */
+vfs *vfs_split (char *path, char **inpath, char **op)
+{
+    char *semi = strrchr (path, '#');
+    char *slash;
+    vfs *ret;
+    
+    if (!semi)
+	return NULL;
+    slash = strchr (semi, '/');
+    *semi = 0;
+    if (op)
+	*op = NULL;
+    if (inpath)
+	*inpath = NULL;
+    if (slash)
+	*slash = 0;
+    if ((ret = vfs_type_from_op (semi+1))){
+	if (op) 
+	    *op = semi+1;
+	if (inpath)
+	    *inpath = slash?slash+1:NULL;
+	return ret;
+    }
+    if (slash)
+	*slash = '/';
+    ret = vfs_split (path, inpath, op);
+    *semi = '#';
+    return ret;
+}
+
+vfs*
+vfs_rosplit (char *path)
+{
+    char *semi = strrchr (path, '#');
+    char *slash;
+    vfs *ret;
+    
+    if (!semi)
+	return NULL;
+    slash = strchr (semi, '/');
+    *semi = 0;
+    if (slash)
+	*slash = 0;
+    
+    ret = vfs_type_from_op (semi+1);
+    if (slash)
+	*slash = '/';
+    if (!ret)
+	ret = vfs_rosplit (path);
+    *semi = '#';
+    return ret;
+}
 
 vfs *vfs_type (char *path)
 {
-    vfs *vfs;
-
-    vfs_type_absolute = 0;
-    vfs = current_vfs;
-    
-    if (*path == '/') {
-    	vfs = &local_vfs_ops;
-    	vfs_type_absolute = 1;
-    }
-    
-    if (strncmp (path, "local:", 6) == 0){
-	vfs = &local_vfs_ops;
-	vfs_type_absolute = 1;
-    }
-
-#ifdef USE_NETCODE
-    if (strncmp (path, "mc:", 3) == 0){
-	vfs = &mcfs_vfs_ops;
-	vfs_type_absolute = 1;
-    }
-    
-    if (strncmp (path, "ftp://", 6) == 0){
-        vfs = &ftpfs_vfs_ops;
-        vfs_type_absolute = 1;
-    }
-#endif
-
-#ifdef USE_EXT2FSLIB
-    if (strncmp (path, "undel:", 6) == 0){
-	vfs = &undelfs_vfs_ops;
-	vfs_type_absolute = 1;
-    }
-#endif
-    if (strncmp (path, "tar:", 4) == 0){
-    	vfs = &tarfs_vfs_ops;
-	vfs_type_absolute = 1;
-    }
-    
-    if (extfs_prefix_to_type (path) != -1) {
-        vfs = &extfs_vfs_ops;
-        vfs_type_absolute = 1;
-    }
+    vfs *vfs = vfs_rosplit(path);
+    if (!vfs)
+        vfs = &local_vfs_ops;
     return vfs;
-}
-
-char *vfs_path (char *path)
-{
-    int j;
-
-    if (strncmp (path, "local:", 6) == 0)
-	return path + 6;
-
-#ifdef USE_NETCODE
-    if (strncmp (path, "mc:", 3) == 0)
-	return strchr(path + 3, '/');
-    
-    if (strncmp (path, "ftp://", 6) == 0)
-	return strchr(path + 6, '/');
-#endif
-
-#ifdef USE_EXT2FSLIB
-    if (strncmp (path, "undel:", 6) == 0)
-	return path + 6;
-#endif
-    if (strncmp (path, "tar:", 4) == 0)
-	return path + 4;
-
-    j = extfs_prefix_to_type (path);
-    if (j != -1)
-        return path + strlen (extfs_get_prefix (j)) + 1;
-        
-    return path;
 }
 
 static struct vfs_stamping *stamps;
@@ -177,20 +186,20 @@ int vfs_timeouts ()
 
 void vfs_addstamp (vfs *v, vfsid id, struct vfs_stamping *parent)
 {
-    if (v != &local_vfs_ops && id != (vfsid)-1) {
+    if (v != &local_vfs_ops && id != (vfsid)-1){
         struct vfs_stamping *stamp, *st1;
         
         for (stamp = stamps; stamp != NULL; st1 = stamp, stamp = stamp->next)
-            if (stamp->v == v && stamp->id == id) {
+            if (stamp->v == v && stamp->id == id){
 		gettimeofday(&(stamp->time), NULL);
                 return;
 	    }
         stamp = xmalloc (sizeof (struct vfs_stamping), "vfs stamping");
         stamp->v = v;
         stamp->id = id;
-	if (parent) {
+	if (parent){
 	    struct vfs_stamping *st = stamp;
-	    for ( ; parent; ) {
+	    for (; parent;){
 		st->parent = xmalloc (sizeof (struct vfs_stamping), "vfs stamping");
 		*st->parent = *parent;
 		parent = parent->parent;
@@ -214,7 +223,7 @@ void vfs_stamp (vfs *v, vfsid id)
     struct vfs_stamping *stamp;
     
     for (stamp = stamps; stamp != NULL; stamp = stamp->next)
-        if (stamp->v == v && stamp->id == id) {
+        if (stamp->v == v && stamp->id == id){
             gettimeofday (&(stamp->time), NULL);
             if (stamp->parent != NULL)
                 vfs_stamp (stamp->parent->v, stamp->parent->id);
@@ -225,7 +234,7 @@ void vfs_stamp (vfs *v, vfsid id)
 void vfs_rm_parents (struct vfs_stamping *stamp)
 {
     struct vfs_stamping *st2, *st3;
-    if (stamp) {
+    if (stamp){
 	for (st2 = stamp, st3 = st2->parent; st3 != NULL; st2 = st3, st3 = st3->parent)
 	    free (st2);
 	free (st2);
@@ -237,13 +246,13 @@ void vfs_rmstamp (vfs *v, vfsid id, int removeparents)
     struct vfs_stamping *stamp, *st1;
     
     for (stamp = stamps, st1 = NULL; stamp != NULL; st1 = stamp, stamp = stamp->next)
-        if (stamp->v == v && stamp->id == id) {
-            if (stamp->parent != NULL) {
+        if (stamp->v == v && stamp->id == id){
+            if (stamp->parent != NULL){
                 if (removeparents)
                     vfs_rmstamp (stamp->parent->v, stamp->parent->id, 1);
 		vfs_rm_parents (stamp->parent);
             }
-            if (st1 == NULL) {
+            if (st1 == NULL){
                 stamps = stamp->next;
             } else {
             	st1->next = stamp->next;
@@ -251,6 +260,13 @@ void vfs_rmstamp (vfs *v, vfsid id, int removeparents)
             free (stamp);
             return;
         }
+}
+
+static int
+ferrno (vfs *vfs)
+{
+    return vfs->ferrno ? (*vfs->ferrno)() : EOPNOTSUPP; 
+    /* Hope that error message is obscure enough ;-) */
 }
 
 int mc_open (char *file, int flags, ...)
@@ -264,22 +280,21 @@ int mc_open (char *file, int flags, ...)
     file = vfs_canon (file);
     vfs = vfs_type (file);
 
-    /* Get the mode flag */
+    /* Get the mode flag */	/* FIXME: should look if O_CREAT is present */
     va_start (ap, flags);
     mode = va_arg (ap, int);
     va_end (ap);
     
-    info = (*vfs->open) (file, flags, mode);
+    info = (*vfs->open) (file, flags, mode);	/* open must be supported */
+    free (file);
     if (!info){
-	errno = (*vfs->ferrno)();
-	free (file);
+	errno = ferrno (vfs);
 	return -1;
     }
     handle = get_bucket ();
     vfs_file_table [handle].fs_info = info;
     vfs_file_table [handle].operations = vfs;
     
-    free (file);
     return handle;
 }
 
@@ -287,22 +302,24 @@ int mc_open (char *file, int flags, ...)
 #define vfs_info(handle) vfs_file_table [handle].fs_info
 #define vfs_free_bucket(handle) vfs_info(handle) = 0;
 
-int mc_read (int handle, char *buffer, int count)
-{
-    vfs *vfs;
-    int result;
+#define MC_OP(name, inarg, callarg, pre, post) \
+        int mc_##name inarg \
+	{ \
+	vfs *vfs; \
+	int result; \
+	\
+	pre \
+	result = vfs->name ? (*vfs->name)callarg : -1; \
+        post \
+	if (result == -1) \
+	    errno = ferrno (vfs); \
+	return result; \
+	}
 
-    if (handle == -1)
-	return -1;
-	    
-    vfs = vfs_op (handle);
-    result = (*vfs->read)(vfs_info (handle), buffer, count);
-    if (result == -1){
-	errno = (*vfs->ferrno)();
-	return -1;
-    }
-    return result;
-}
+#define MC_NAMEOP(name, inarg, callarg) MC_OP (name, inarg, callarg, path = vfs_canon (path); vfs = vfs_type (path);, free (path); )
+#define MC_HANDLEOP(name, inarg, callarg) MC_OP (name, inarg, callarg, if (handle == -1) return -1; vfs = vfs_op (handle);, )
+
+MC_HANDLEOP(read, (int handle, char *buffer, int count), (vfs_info (handle), buffer, count) );
 
 int mc_ctl (int handle, int ctlop, int arg)
 {
@@ -310,9 +327,7 @@ int mc_ctl (int handle, int ctlop, int arg)
     int result;
 
     vfs = vfs_op (handle);
-    if (vfs->ctl == NULL)
-        return 0;
-    result = (*vfs->ctl)(vfs_info (handle), ctlop, arg);
+    result = vfs->ctl ? (*vfs->ctl)(vfs_info (handle), ctlop, arg) : 0;
     return result;
 }
 
@@ -323,11 +338,7 @@ int mc_setctl (char *path, int ctlop, char *arg)
 
     path = vfs_canon (path);
     vfs = vfs_type (path);    
-    if (vfs->setctl == NULL) {
-        free (path);
-        return 0;
-    }
-    result = (*vfs->setctl)(path, ctlop, arg);
+    result = vfs->setctl ? (*vfs->setctl)(path, ctlop, arg) : 0;
     free (path);
     return result;
 }
@@ -344,10 +355,10 @@ int mc_close (int handle)
     if (handle < 3)
 	return close (handle);
 
-    result = (*vfs->close)(vfs_info (handle));
+    result = (*vfs->close)(vfs_info (handle)); /* close must be supported */
     vfs_free_bucket (handle);
     if (result == -1)
-	errno = (*vfs->ferrno)();
+	errno = ferrno (vfs);
     
     return result;
 }
@@ -360,7 +371,7 @@ DIR *mc_opendir (char *dirname)
     char *p = NULL;
     int i = strlen (dirname);
 
-    if (dirname [i - 1] != '/') { 
+    if (dirname [i - 1] != '/'){ 
     /* We should make possible reading of the root directory in a tar file */
         p = xmalloc (i + 2, "slash");
         strcpy (p, dirname);
@@ -370,10 +381,10 @@ DIR *mc_opendir (char *dirname)
     dirname = vfs_canon (dirname);
     vfs = vfs_type (dirname);
 
-    info = (*vfs->opendir)(dirname);
+    info = vfs->opendir ? (*vfs->opendir)(dirname) : NULL;
+    free (dirname);
     if (!info){
-	errno = (*vfs->ferrno)();
-	free (dirname);
+	errno = ferrno (vfs);
 	if (p)
 	    free (p);
 	return NULL;
@@ -382,7 +393,6 @@ DIR *mc_opendir (char *dirname)
     vfs_file_table [handle].fs_info = info;
     vfs_file_table [handle].operations = vfs;
 
-    free (dirname);
     if (p)
         free (p);
     
@@ -394,23 +404,24 @@ DIR *mc_opendir (char *dirname)
 /* This should strip the non needed part of a path name */
 #define vfs_name(x) x
 
-struct dirent *mc_readdir(DIR *dirp)
-{
-    int handle;
-    vfs *vfs;
-
-    if (!dirp){
-#ifdef EBADF
-	errno = EBADF;
-#else
-	errno = 1;
-#endif
-	return NULL;
-    }
-    handle = *(int *) dirp;
-    vfs = vfs_op (handle);
-    return (*vfs->readdir)(vfs_info (handle));
+#define MC_DIROP(name, type, inarg, callarg, onerr ) \
+type mc_##name inarg \
+{ \
+    int handle; \
+    vfs *vfs; \
+\
+    if (!dirp){ \
+	errno = EFAULT; \
+	return NULL; \
+    } \
+    handle = *(int *) dirp; \
+    vfs = vfs_op (handle); \
+    return vfs->name ? (*vfs->name) callarg : onerr; \
 }
+
+MC_DIROP (readdir, struct dirent *, (DIR *dirp), (vfs_info (handle)), NULL)
+MC_DIROP (seekdir, void, (DIR *dirp, int offset), (vfs_info (handle), offset), -1)
+MC_DIROP (telldir, int, (DIR *dirp), (vfs_info (handle)), -1)
 
 int mc_closedir (DIR *dirp)
 {
@@ -418,198 +429,62 @@ int mc_closedir (DIR *dirp)
     vfs *vfs = vfs_op (handle);
     int result;
 
-    result = (*vfs->closedir)(vfs_info (handle));
+    result = vfs->closedir ? (*vfs->closedir)(vfs_info (handle)) : -1;
     vfs_free_bucket (handle);
     free (dirp);
     return result; 
 }
 
-int mc_stat (char *path, struct stat *buf)
-{
-    vfs *vfs;
-    int result;
+MC_NAMEOP   (stat, (char *path, struct stat *buf), (vfs_name (path), buf))
+MC_NAMEOP   (lstat, (char *path, struct stat *buf), (vfs_name (path), buf))
+MC_HANDLEOP (fstat, (int handle, struct stat *buf), (vfs_info (handle), buf))
 
-    path = vfs_canon (path);
-    vfs = vfs_type (path);    
-    result = (*vfs->stat)(vfs_name (path), buf);
-    free (path);
-    if (result == -1){
-	errno = (*vfs->ferrno)();
-	return -1;
-    }
-    return result;
-}
+/*
+ * You must strdup whatever this function returns, static buffers are in use
+ */
 
-int mc_lstat (char *path, struct stat *buf)
-{
-    vfs *vfs;
-    int result;
-
-    path = vfs_canon (path);
-    vfs = vfs_type (path);    
-    result = (*vfs->lstat)(vfs_name (path), buf);
-    free (path);
-    if (result == -1){
-	errno = (*vfs->ferrno)();
-	return -1;
-    }
-    return result;
-}
-
-int mc_fstat (int handle, struct stat *buf)
-{
-    vfs *vfs;
-    int result;
-
-    if (handle == -1)
-	return -1;
-    
-    vfs = vfs_op (handle);
-    result = (*vfs->fstat)(vfs_info (handle), buf);
-    if (result == -1){
-	errno = (*vfs->ferrno)();
-	return -1;
-    }
-    return result;
-}
-
-/* FIXME: We should return the buffer, not set it, since it could
-   overflow */
-char *mc_get_current_wd (char *buffer, int size)
+char *mc_return_cwd (void)
 {
     char *p;
     struct stat my_stat, my_stat2;
-    
-    if (current_vfs == &local_vfs_ops){
-#ifdef HAVE_GETWD
-	p = (char *) getwd (buffer);
-#else
-	/* FIXME: this code is just a quick hack */
-	p = getcwd (buffer, size);
-#endif
-	if (!p) { /* One of the directories in the path is not readable */
-	    strcpy (buffer, current_dir);
-	    return buffer;
-	}
+
+    if (!vfs_rosplit (current_dir)){
+	static char buffer[MC_MAXPATHLEN];
+
+	p = get_current_wd (buffer, MC_MAXPATHLEN);
+	if (!p)  /* One of the directories in the path is not readable */
+	    return current_dir;
 
 	/* Otherwise check if it is O.K. to use the current_dir */
-	mc_stat (buffer, &my_stat);
+	mc_stat (p, &my_stat);
 	mc_stat (current_dir, &my_stat2);
 	if (my_stat.st_ino != my_stat2.st_ino ||
 	    my_stat.st_dev != my_stat2.st_dev ||
-	    !cd_symlinks) {
-	    if (last_current_dir != current_dir)
-		free (last_current_dir);
+	    !cd_symlinks){
 	    free (current_dir);
 	    current_dir = strdup (p);
-	    last_current_dir = current_dir;
 	    return p;
 	} /* Otherwise we return current_dir below */
     } 
-    strcpy (buffer, current_dir);
+    return current_dir;
+}
+
+char *mc_get_current_wd (char *buffer, int size)
+{
+    char *cwd = mc_return_cwd();
+    if (strlen (cwd) > size){
+      vfs_die ("Current_dir size overflow\n");
+    }
+    strcpy (buffer, cwd);
     return buffer;
 }
 
-int mc_chmod (char *path, int mode)
-{
-    vfs *vfs;
-    int result;
-    
-    path = vfs_canon (path);
-    vfs = vfs_type (path);    
-    result = (*vfs->chmod)(vfs_name (path), mode);
-    free (path);
-    if (result == -1){
-	errno = (*vfs->ferrno)();
-	return -1;
-    }
-    return result;
-}
-
-int mc_chown (char *path, int owner, int group)
-{
-    vfs *vfs;
-    int result;
-    
-    path = vfs_canon (path);
-    vfs = vfs_type (path);    
-    result = (*vfs->chown)(vfs_name (path), owner, group);
-    free (path);
-    if (result == -1){
-	errno = (*vfs->ferrno)();
-	return -1;
-    }
-    return result;
-}
-
-int mc_utime (char *path, struct utimbuf *times)
-{
-    vfs *vfs;
-    int result;
-    
-    path = vfs_canon (path);
-    vfs = vfs_type (path);    
-    if (!vfs->utime) {
-	free (path);
-	return 0;
-    }
-    result = (*vfs->utime)(vfs_name (path), times);
-    free (path);
-    if (result == -1){
-	errno = (*vfs->ferrno)();
-	return -1;
-    }
-    return result;
-}
-
-int mc_readlink(char *path, char *buf, int bufsiz)
-{
-    vfs *vfs;
-    int result;
-    
-    path = vfs_canon (path);
-    vfs = vfs_type (path);    
-    result = (*vfs->readlink)(vfs_name (path), buf, bufsiz);
-    free (path);
-    if (result == -1){
-	errno = (*vfs->ferrno)();
-	return -1;
-    }
-    return result;
-}
-
-int mc_unlink (char *path)
-{
-    vfs *vfs;
-    int result;
-    
-    path = vfs_canon (path);
-    vfs = vfs_type (path);    
-    result = (*vfs->unlink)(vfs_name (path));
-    free (path);
-    if (result == -1){
-	errno = (*vfs->ferrno)();
-	return -1;
-    }
-    return result;
-}
-
-int mc_symlink (char *name1, char *name2)
-{
-    vfs *vfs2 = 0;
-    int result;
-
-    name2 = vfs_canon (name2);
-    vfs2 = vfs_type (name2);    
-    
-    result = (*vfs2->symlink)(vfs_name (name1), vfs_name (name2));
-    free (name2);
-    if (result == -1){
-	errno = (*vfs2->ferrno)();
-	return -1;
-    }
-    return result;
-}
+MC_NAMEOP (chmod, (char *path, int mode), (vfs_name (path), mode))
+MC_NAMEOP (chown, (char *path, int owner, int group), (vfs_name (path), owner, group))
+MC_NAMEOP (utime, (char *path, struct utimbuf *times), (vfs_name (path), times))
+MC_NAMEOP (readlink, (char *path, char *buf, int bufsiz), (vfs_name (path), buf, bufsiz))
+MC_NAMEOP (unlink, (char *path), (vfs_name (path)))
+MC_NAMEOP (symlink, (char *name1, char *path), (vfs_name (name1), vfs_name (path)))
 
 int mc_link (char *name1, char *name2)
 {
@@ -639,22 +514,7 @@ int mc_link (char *name1, char *name2)
     return result;
 }
 
-int mc_write (int fd, char *buf, int nbyte)
-{
-    vfs *vfs; 
-    int result;
-
-    if (fd == -1)
-	return -1;
-    
-    vfs = vfs_op (fd);
-    result = (*vfs->write)(vfs_info (fd), buf, nbyte);
-    if (result == -1){
-	errno = (*vfs->ferrno)();
-	return -1;
-    }
-    return result;
-}
+MC_HANDLEOP (write, (int handle, char *buf, int nbyte), (vfs_info (handle), buf, nbyte));
 
 int mc_rename (char *path1, char *path2)
 {
@@ -695,49 +555,59 @@ off_t mc_lseek (int fd, off_t offset, int whence)
     return (*vfs->lseek)(vfs_info (fd), offset, whence);
 }
 
-int is_special_prefix (char *path)
+/*
+ * remove //, /./ and /../, local should point to big enough buffer
+ */
+
+#define ISSLASH(a) (!a || (a == '/'))
+
+void
+vfs_kill_dots (char *path, char *local)
 {
-    if (strncmp (path, "mc:", 3) == 0)
-	return 1;
-    if (strncmp (path, "local:", 6) == 0)
-	return 1;
-    if (strncmp (path, "tar:", 4) == 0)
-	return 1;
-    if (extfs_prefix_to_type (path) != -1)
-        return 1;
-    if (strncmp (path, "ftp://", 6) == 0)
-        return 1;
-    if (strncmp (path, "undel:", 6) == 0)
-	return 1;
-    return 0;
+    char *s = path, *t = local;
+    char *last_slash = path;
+    
+    *t++ = *s++;
+    while (1){
+	if (ISSLASH (*s)){
+	    if (*last_slash != '/')
+		vfs_die ("/ not there\n");
+	    
+	    if (ISSLASH (last_slash [1]))
+		t--;
+	    
+	    if (last_slash [1] == '.'){
+		if (ISSLASH(last_slash [2]))
+		    t -= 2;
+		if ((last_slash [2] == '.') && (ISSLASH (last_slash [3]))){
+		    t -= 4;
+		    while ((t >= local) && (*t != '/'))
+			t--;
+		}
+	    }
+	    last_slash = s;
+	}
+	
+	if (t <= local){
+	    *local = '/';
+	    t = local;
+	}
+	if (!*s)
+	    break;
+	*t++ = *s++;
+	*t = 0;
+    }	
+    *t = 0;
+    if (!(*local)){
+	local [0] = '/';
+	local [1] = 0;
+    }
 }
+
 
 char *vfs_canon (char *path)
 {
-    vfs *vfs;
-
-    vfs = current_vfs;
-    
-    if (strncmp (path, "local:", 6) == 0) {
-	return vfs_canon (path+6);
-	
-#ifdef USE_NETCODE
-    } else if (strncmp (path, "mc:", 3) == 0) {
-	vfs = &mcfs_vfs_ops;
-    } else if (strncmp (path, "ftp://", 6) == 0) {
-    	vfs = &ftpfs_vfs_ops;
-#endif
-#ifdef USE_EXT2FSLIB
-    } else if (strncmp (path, "undel:", 6) == 0){
-	vfs = &undelfs_vfs_ops;
-#endif
-    } else if (strncmp (path, "tar:", 4) == 0) {
-    	vfs = &tarfs_vfs_ops;
-    } else if (extfs_prefix_to_type (path) != -1) {
-        vfs = &extfs_vfs_ops;
-    } else if (*path == '/') { /* Absolute local */
-    	vfs = &local_vfs_ops;
-    } else if (*path == '~') { /* Tilde expansion */
+    if (*path == '~'){ /* Tilde expansion */
     	char *local, *result;
 
     	local = tilde_expand (path);
@@ -747,7 +617,9 @@ char *vfs_canon (char *path)
 	    return result;
 	} else 
 	    return strdup (path);
-    } else { /* Relative to current directory */
+    }
+
+    if (*path != '/'){ /* Relative to current directory */
     	char *local, *result;
 
 	if (current_dir [strlen (current_dir) - 1] == '/')
@@ -759,164 +631,12 @@ char *vfs_canon (char *path)
 	free (local);
 	return result;
     }
-    
-    if (vfs == &local_vfs_ops)
-/* NOTE: No local:/ is necessary at the moment, we are handling absolute paths
-         at the moment, even it is impossible, since it doesn't work then at all. */    
-	return strdup (canonicalize_pathname (path));
-#ifdef USE_EXT2FSLIB
-    if (vfs == &undelfs_vfs_ops) {
-	int i = strlen (path);
-	if ((path[i - 1] == '.' && path[i - 2] == '.') ||
-	(path[i - 1] == '/' && path[i - 2] == '.' && path[i - 3] == '.'))
-	    return strdup ("/"); /* we want to go out of the undelfs ->
-	                            go to the root directory */
-	else
-	    return strdup (path);
-    }
-#endif
-#ifdef USE_NETCODE
-    if (vfs == &ftpfs_vfs_ops || vfs == &mcfs_vfs_ops) {
-	char *q, *p, *r, *s;
-	int prefixsh, isftp;
-	
-	if (vfs == &ftpfs_vfs_ops) {
-	    prefixsh = 6;
-	    isftp = 1;
-	} else {
-	    if (path[3] == '/' && path[4] == '/')
-		prefixsh = 5;
-	    else
-		prefixsh = 3;
-	    isftp = 0;
-	}
-	
-	q = strdup (path);
-	p = strchr (q + prefixsh, '/');
-	
-	if (p != NULL) {
-	    if (p [0] && p [1] == '~') { /* Tilde expansion */
-	    	*p = 0;
-	    	if (isftp) {
-	            s = ftpfs_gethome (q);
-	            if (s == NULL)
-	                s = "/";
-	        } else {
-	            s = mcfs_gethome (q);
-	            if (s == NULL)
-	                s = strdup ("/");
-	        }
-	        if (p [2] == '/')
-	            p += 3;
-	        else
-	            p += 2;
-	        r = copy_strings (q, s, p, NULL);
-	        if (!isftp)
-	            free (s);
-	        free (q);
-	        q = r;
-	        p = strchr (q + prefixsh, '/');
-	    }
-	    p++;
-	    if (p [0])
-		canonicalize_pathname (p);
-	    else
-		p = ".";
-	    
-	    if (!strncmp (p, "..", 2) && (p [2] == '/' || !p [2])) {
-	    	*p = 0;
-	        r = isftp ? ftpfs_getupdir (q) : mcfs_getupdir (q);
-	        if (r == NULL)
-	            r = "/";
-	        p += 2;
-	        if (*p == '/')
-	            p++;
-	        r = copy_strings (r, p, NULL);
-	        free (q);
-	        q = vfs_canon (r);
-	        free (r);
-	    }
-	}
-	return q;
-    }
-#endif
-    if (vfs == &tarfs_vfs_ops || vfs == &extfs_vfs_ops) {
-        char *local_path, *arc_name, *p, *q, *result, *extfs_prefix = NULL;
-        int istar, extfs_type;
-        
-        /* There has to be a leading tar: or extfs prefix in the path */
+    /* So we have path of following form:
+     * /p1/p2:op/.././././p3:op/p4. Good luck.
+     */
+    canonicalize_pathname (path);
 
-	if (vfs == &tarfs_vfs_ops)
-	    istar = 1;
-	else
-	    istar = 0;
-	
-        /* The original code does not compile right in NeXTStep:
-	 * istar = (vfs == &tarfs_vfs_ops);
-	 */
-        if (istar)
-            local_path = tarfs_analysis (path, &arc_name, 0);
-        else {
-            local_path = extfs_analysis (path, &arc_name, &extfs_type, 0);
-            extfs_prefix = extfs_get_prefix (extfs_type);
-        }
-        if (local_path == NULL) {
-            return strdup ("/"); /* For error cases cd to the root dir */
-        }
-        p = (*local_path == '/') ? local_path + 1 : local_path;
-        if (*p)
-            canonicalize_pathname (p);
-        if (!strcmp (p, ".")) /* This is an incorrect result of canonicalization,
-                                 if we have p = somedir/.. */
-	    *p = 0;                                 
-        if (p [0] != '.' || p [1] != '.' || (p [2] && p [2] != '/')) { 
-            /* I.e. p doesn't start with the .. directory */
-            if (istar)
-	        result = copy_strings ("tar:", arc_name, "/", p, 0);
-	    else {
-		/* Two chances: the extfs requires an archive to
-		 * use or it does not need it:
-		 */
-
-		/* If it does need an archive... */
-		if (arc_name && *arc_name)
-		    result = copy_strings
-			(extfs_prefix, ":", arc_name, "/", p, 0);
-		else 
-		    result = canonicalize_pathname (strdup(path));
-	    }
-	    free (local_path);
-	    if (arc_name)
-    	        free (arc_name);
-	    return result;
-	} else {
-	    /* We want to move outside of the archive */
-	    if (!istar && (!arc_name || !*arc_name)) {
-	        free (local_path);
-	        if (arc_name) free (arc_name);
-	        return strdup ("/");
-	    }
-	    q = strrchr (arc_name, '/');
-	    if (q == NULL)
-	    	q = arc_name; /* Should not happen */
-	    else
-	    	q++; 
-	    *q = 0;
-	    if (p [2] == '/')
-	    	p += 3;
-	    else
-	    	p += 2;
-	    result = copy_strings (arc_name, p, 0);
-	    free (local_path);
-	    free (arc_name);
-	    local_path = vfs_canon (result);
-	    free (result);
-	    return local_path;
-	}
-    }
-
-    fprintf (stderr, "Could not happend\n");
-    return 0;
+    return strdup (path);
 }
 
 vfsid vfs_ncs_getid (vfs *nvfs, char *dir, struct vfs_stamping **par)
@@ -924,7 +644,7 @@ vfsid vfs_ncs_getid (vfs *nvfs, char *dir, struct vfs_stamping **par)
     vfsid nvfsid;
     int freeit = 0;
 
-    if (dir [strlen (dir) - 1] != '/') {
+    if (dir [strlen (dir) - 1] != '/'){
         dir = copy_strings (dir, "/", NULL);    
         freeit = 1;
     }
@@ -934,6 +654,7 @@ vfsid vfs_ncs_getid (vfs *nvfs, char *dir, struct vfs_stamping **par)
     return nvfsid;
 }
 
+#ifndef VFS_STANDALONE
 static int is_parent (vfs * nvfs, vfsid nvfsid, struct vfs_stamping *parent)
 {
     struct vfs_stamping *stamp;
@@ -942,9 +663,11 @@ static int is_parent (vfs * nvfs, vfsid nvfsid, struct vfs_stamping *parent)
 	    break;
     return (stamp ? 1 : 0);
 }
+#endif
 
 void vfs_add_noncurrent_stamps (vfs * oldvfs, vfsid oldvfsid, struct vfs_stamping *parent)
 {
+#ifndef VFS_STANDALONE
     vfs *nvfs, *n2vfs, *n3vfs;
     vfsid nvfsid, n2vfsid, n3vfsid;
     struct vfs_stamping *par, *stamp;
@@ -971,11 +694,11 @@ void vfs_add_noncurrent_stamps (vfs * oldvfs, vfsid oldvfsid, struct vfs_stampin
 
     f = is_parent (oldvfs, oldvfsid, par);
     vfs_rm_parents (par);
-    if ((nvfs == oldvfs && nvfs == oldvfsid) || oldvfsid == (vfsid *)-1 || f) {
+    if ((nvfs == oldvfs && nvfs == oldvfsid) || oldvfsid == (vfsid *)-1 || f){
 	return;
     }
 
-    if (get_current_type () == view_listing) {
+    if (get_current_type () == view_listing){
 	n2vfs = vfs_type (cpanel->cwd);
 	n2vfsid = vfs_ncs_getid (n2vfs, cpanel->cwd, &par);
         f = is_parent (oldvfs, oldvfsid, par);
@@ -987,7 +710,7 @@ void vfs_add_noncurrent_stamps (vfs * oldvfs, vfsid oldvfsid, struct vfs_stampin
 	n2vfsid = (vfs *) -1;
     }
     
-    if (get_other_type () == view_listing) {
+    if (get_other_type () == view_listing){
 	n3vfs = vfs_type (opanel->cwd);
 	n3vfsid = vfs_ncs_getid (n3vfs, opanel->cwd, &par);
         f = is_parent (oldvfs, oldvfsid, par);
@@ -999,30 +722,31 @@ void vfs_add_noncurrent_stamps (vfs * oldvfs, vfsid oldvfsid, struct vfs_stampin
 	n3vfsid = (vfs *)-1;
     }
     
-    if ((*oldvfs->nothingisopen) (oldvfsid)) {
-	if (oldvfs == &extfs_vfs_ops && ((struct extfs_archive *) oldvfsid)->name == 0) {
+    if ((*oldvfs->nothingisopen) (oldvfsid)){
+	if (oldvfs == &extfs_vfs_ops && ((struct extfs_archive *) oldvfsid)->name == 0){
 	    /* Free the resources immediatly when we leave a mtools fs
 	       ('cd a:') instead of waiting for the vfs-timeout */
 	    (oldvfs->free) (oldvfsid);
 	} else
 	    vfs_addstamp (oldvfs, oldvfsid, parent);
-	for (stamp = parent; stamp != NULL; stamp = stamp->parent) {
+	for (stamp = parent; stamp != NULL; stamp = stamp->parent){
 	    if ((stamp->v == nvfs && stamp->id == nvfsid) ||
 		(stamp->v == n2vfs && stamp->id == n2vfsid) ||
 		(stamp->v == n3vfs && stamp->id == n3vfsid) ||
 		stamp->id == (vfsid) - 1 ||
 		!(*stamp->v->nothingisopen) (stamp->id))
 		break;
-	    if (stamp->v == &extfs_vfs_ops && ((struct extfs_archive *) stamp->id)->name == 0) {
+	    if (stamp->v == &extfs_vfs_ops && ((struct extfs_archive *) stamp->id)->name == 0){
 		(stamp->v->free) (stamp->id);
 		vfs_rmstamp (stamp->v, stamp->id, 0);
 	    } else
 		vfs_addstamp (stamp->v, stamp->id, stamp->parent);
 	}
     }
+#endif
 }
 
-
+#ifndef VFS_STANDALONE
 static void vfs_stamp_path (char *path)
 {
     vfs *vfs;
@@ -1037,7 +761,9 @@ static void vfs_stamp_path (char *path)
 	vfs_addstamp (stamp->v, stamp->id, stamp->parent);
     vfs_rm_parents (par);
 }
+#endif
 
+#ifndef VFS_STANDALONE
 void vfs_add_current_stamps (void)
 {
     vfs_stamp_path (current_dir);
@@ -1046,11 +772,12 @@ void vfs_add_current_stamps (void)
     if (get_other_type () == view_listing)
 	vfs_stamp_path (opanel->cwd);
 }
+#endif
 
 /* This function is really broken */
 int mc_chdir (char *path)
 {
-    char *a;
+    char *a, *b;
     int result;
     char *p = NULL;
     int i = strlen (path);
@@ -1058,50 +785,36 @@ int mc_chdir (char *path)
     vfsid oldvfsid;
     struct vfs_stamping *parent;
 
-    if (path [i - 1] != '/') {
+    if (path [i - 1] != '/'){
     /* We should make possible reading of the root directory in a tar archive */
         p = xmalloc (i + 2, "slash");
         strcpy (p, path);
         strcpy (p + i, "/");
         path = p;
     }
-    
-    if (!current_dir) {
-	current_dir = strdup ("/"); /* Note: we should set current_dir
-	                               on startup to a reasonable pwd.
-	                               It cannot be relative, i.e. no
-	                               . or anything else except
-	                               /, tar:, mcfs:, local:, ftp:, 
-	                               $extfs_prefix .
-	                               This is done by the vfs_setup_wd call
-	                               in main.c */
-	last_current_dir = current_dir;
-    }	                               
 
     a = current_dir; /* Save a copy for case of failure */
-    if (last_current_dir != current_dir)
-	free (last_current_dir);
-    last_current_dir = a;
     current_dir = vfs_canon (path);
     current_vfs = vfs_type (current_dir);
-    result = (*current_vfs->chdir)(vfs_name (current_dir));
-    if (result == -1) {
+    b = strdup (current_dir);
+    result = (*current_vfs->chdir)(vfs_name (b));
+    free (b);
+    if (result == -1){
 	errno = (*current_vfs->ferrno)();
     	free (current_dir);
     	current_vfs = vfs_type (a);
     	current_dir = a;
     } else {
-    	last_current_dir = current_dir;
         oldvfs = vfs_type (a);
 	oldvfsid = vfs_ncs_getid (oldvfs, a, &parent);
 	free (a);
         vfs_add_noncurrent_stamps (oldvfs, oldvfsid, parent);
 	vfs_rm_parents (parent);
     }
-    if (p) {
+    if (p)
         free (p);
-    }
-    if (*current_dir) {
+
+    if (*current_dir){
 	p = strchr (current_dir, 0) - 1;
 	if (*p == '/' && p > current_dir)
 	    *p = 0; /* Sometimes we assume no trailing slash on cwd */
@@ -1153,64 +866,20 @@ char *vfs_get_current_dir (void)
     return current_dir;
 }
 
-static void vfs_setup_wd (void)
+void vfs_setup_wd (void)
 {
-    current_dir = xmalloc (MC_MAXPATHLEN, "Current directory");
-    if (!get_current_wd (current_dir, MC_MAXPATHLEN))
-	if (errno != 0)
-	     current_dir [0] = 0;
-    current_dir [MC_MAXPATHLEN - 1] = 0;
-    last_current_dir = current_dir;
+    current_dir = strdup ("/");
+    mc_return_cwd(); 	/* mc_return_cwd will fixup current_dir for us */
+
+    if (strlen(current_dir)>MC_MAXPATHLEN-2)
+        vfs_die ("Current dir too long\n");
+
     return;
 }
 
-int mc_mkdir (char *path, mode_t mode)
-{
-    vfs *vfs;
-    int result;
-
-    path = vfs_canon (path);
-    vfs = vfs_type (path);    
-    result = (*vfs->mkdir)(vfs_name (path), mode);
-    free (path);
-    if (result == -1){
-	errno = (*vfs->ferrno)();
-	return -1;
-    }
-    return result;
-}
-
-int mc_rmdir (char *path)
-{
-    vfs *vfs;
-    int result;
-
-    path = vfs_canon (path);
-    vfs = vfs_type (path);    
-    result = (*vfs->rmdir)(vfs_name (path));
-    free (path);
-    if (result == -1){
-	errno = (*vfs->ferrno)();
-	return -1;
-    }
-    return result;
-}
-
-int mc_mknod (char *path, int mode, int dev)
-{
-    vfs *vfs;
-    int result;
-
-    path = vfs_canon (path);
-    vfs = vfs_type (path);    
-    result = (*vfs->mknod)(vfs_name (path), mode, dev);
-    free (path);
-    if (result == -1){
-	errno = (*vfs->ferrno)();
-	return -1;
-    }
-    return result;
-}
+MC_NAMEOP (mkdir, (char *path, mode_t mode), (vfs_name (path), mode))
+MC_NAMEOP (rmdir, (char *path), (vfs_name (path)))
+MC_NAMEOP (mknod, (char *path, int mode, int dev), (vfs_name (path), mode, dev))
 
 #ifdef HAVE_MMAP
 struct mc_mmapping {
@@ -1220,7 +889,8 @@ struct mc_mmapping {
     struct mc_mmapping *next;
 } *mc_mmaparray = NULL;
 
-caddr_t mc_mmap (caddr_t addr, size_t len, int prot, int flags, int fd, off_t offset)
+caddr_t
+mc_mmap (caddr_t addr, size_t len, int prot, int flags, int fd, off_t offset)
 {
     vfs *vfs;
     caddr_t result;
@@ -1248,8 +918,8 @@ int mc_munmap (caddr_t addr, size_t len)
 {
     struct mc_mmapping *mcm, *mcm2 = NULL;
     
-    for (mcm = mc_mmaparray; mcm != NULL; mcm2 = mcm, mcm = mcm->next) {
-        if (mcm->addr == addr) {
+    for (mcm = mc_mmaparray; mcm != NULL; mcm2 = mcm, mcm = mcm->next){
+        if (mcm->addr == addr){
             if (mcm2 == NULL)
             	mc_mmaparray = mcm->next;
             else
@@ -1275,20 +945,20 @@ char *mc_def_getlocalcopy (char *filename)
     if (fdin == -1)
         return NULL;
     tmp = tmpnam(NULL);
-    fdout = creat (tmp, 0600);
-    if (fdout == -1) {
+    fdout = creat (tmp, 0600); 		/* FIXME: What about symlink attack ? */
+    if (fdout == -1){
         mc_close (fdin);
         return NULL;
     }
     tmp = strdup (tmp);
-    while ((i = mc_read (fdin, buffer, sizeof (buffer))) == sizeof (buffer)) {
+    while ((i = mc_read (fdin, buffer, sizeof (buffer))) == sizeof (buffer)){
         write (fdout, buffer, i);
     }
     if (i != -1)
         write (fdout, buffer, i);
     mc_close (fdin);
     close (fdout);
-    if (mc_stat (filename, &mystat) != -1) {
+    if (mc_stat (filename, &mystat) != -1){
         chmod (tmp, mystat.st_mode);
     }
     return tmp;
@@ -1301,35 +971,35 @@ char *mc_getlocalcopy (char *path)
 
     path = vfs_canon (path);
     vfs = vfs_type (path);    
-    result = (*vfs->getlocalcopy)(vfs_name (path));
+    result = vfs->getlocalcopy ? (*vfs->getlocalcopy)(vfs_name (path)) :
+                                 mc_def_getlocalcopy (vfs_name (path));
     free (path);
     if (result == NULL){
-	errno = (*vfs->ferrno)();
-	return NULL;
+	errno = ferrno (vfs);
     }
     return result;
 }
 
 void mc_def_ungetlocalcopy (char *filename, char *local, int has_changed)
 {
-    if (has_changed) {
+    if (has_changed){
         int fdin, fdout, i;
-        char buffer[8192];
+        char buffer [8192];
     
         fdin = open (local, O_RDONLY);
-        if (fdin == -1) {
+        if (fdin == -1){
             unlink (local);
             free (local);
             return;
         }
         fdout = mc_open (filename, O_WRONLY | O_TRUNC);
-        if (fdout == -1) {
+        if (fdout == -1){
             close (fdin);
             unlink (local);
             free (local);
             return;
         }
-        while ((i = read (fdin, buffer, sizeof (buffer))) == sizeof (buffer)) {
+        while ((i = read (fdin, buffer, sizeof (buffer))) == sizeof (buffer)){
             mc_write (fdout, buffer, i);
         }
         if (i != -1)
@@ -1346,8 +1016,9 @@ void mc_ungetlocalcopy (char *path, char *local, int has_changed)
     vfs *vfs;
 
     path = vfs_canon (path);
-    vfs = vfs_type (path);    
-    (*vfs->ungetlocalcopy)(vfs_name (path), local, has_changed);
+    vfs = vfs_type (path);
+    vfs->ungetlocalcopy ? (*vfs->ungetlocalcopy)(vfs_name (path), local, has_changed) :
+                          mc_def_ungetlocalcopy (vfs_name (path), local, has_changed);
     free (path);
 }
 
@@ -1357,15 +1028,15 @@ inline int timeoutcmp (struct timeval *t1, struct timeval *t2)
 	    || ((t1->tv_sec == t2->tv_sec) && (t1->tv_usec <= t2->tv_usec)));
 }
 
-void vfs_timeout_handler ()
+void vfs_timeout_handler (void)
 {
     struct timeval time;
     struct vfs_stamping *stamp, *st;
 
     gettimeofday (&time, NULL);
     time.tv_sec -= vfs_timeout;
-    for (stamp = stamps; stamp != NULL;) {
-        if (timeoutcmp (&stamp->time, &time)) {
+    for (stamp = stamps; stamp != NULL;){
+        if (timeoutcmp (&stamp->time, &time)){
             st = stamp->next;
             (*stamp->v->free) (stamp->id);
 	    vfs_rmstamp (stamp->v, stamp->id, 0);
@@ -1380,6 +1051,7 @@ void vfs_init (void)
     time_t current_time;
     struct tm *t;
     
+    memset (vfs_file_table, 0, sizeof (vfs_file_table));
     current_time = time (NULL);
     t = localtime (&current_time);
     current_mon = t->tm_mon;
@@ -1424,7 +1096,7 @@ void vfs_shut (void)
 {
     struct vfs_stamping *stamp, *st;
 
-    for ( stamp = stamps, stamps = 0; stamp != NULL; ) {
+    for (stamp = stamps, stamps = 0; stamp != NULL;){
 	(*stamp->v->free)(stamp->id);
 	st = stamp->next;
 	free (stamp);
@@ -1434,8 +1106,6 @@ void vfs_shut (void)
     if (stamps)
 	vfs_rmstamp (stamps->v, stamps->id, 1);
     
-    if (last_current_dir && last_current_dir != current_dir)
-	free (last_current_dir);
     if (current_dir)
 	free (current_dir);
 
@@ -1492,7 +1162,7 @@ static int is_num (int idx)
     return 1;
 }
 
-#define free_and_return(x) {free (p_copy); return (x); }
+#define free_and_return(x) { free (p_copy); return (x); }
 int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 {
     int idx, idx2, num_cols, isconc = 0;
@@ -1507,7 +1177,7 @@ int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
     if (strncmp (p, "total", 5) == 0){
         return 0;
     }
-    switch (*(p++)) {
+    switch (*(p++)){
         case 'd': s->st_mode |= S_IFDIR; break;
         case 'b': s->st_mode |= S_IFBLK; break;
         case 'c': s->st_mode |= S_IFCHR; break;
@@ -1522,7 +1192,7 @@ int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
         case '?': s->st_mode |= S_IFREG; break;
         default: return 0;
     }
-    if (*p == '[') {
+    if (*p == '['){
 	if (strlen (p) <= 8 || p [8] != ']')
 	    return 0;
 	/* Should parse here the Notwell permissions :) */
@@ -1532,51 +1202,51 @@ int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 	    s->st_mode |= (S_IRUSR | S_IRGRP | S_IROTH | S_IWUSR);
 	p += 9;
     } else {
-	switch (*(p++)) {
+	switch (*(p++)){
 	 case 'r': s->st_mode |= 0400; break;
 	 case '-': break;
 	 default: return 0;
 	}
-	switch (*(p++)) {
+	switch (*(p++)){
 	 case 'w': s->st_mode |= 0200; break;
 	 case '-': break;
 	 default: return 0;
 	}
-	switch (*(p++)) {
+	switch (*(p++)){
 	 case 'x': s->st_mode |= 0100; break;
 	 case 's': s->st_mode |= 0100 | S_ISUID; break;
 	 case 'S': s->st_mode |= S_ISUID; break;
 	 case '-': break;
 	 default: return 0;
 	}
-	switch (*(p++)) {
+	switch (*(p++)){
 	 case 'r': s->st_mode |= 0040; break;
 	 case '-': break;
 	 default: return 0;
 	}
-	switch (*(p++)) {
+	switch (*(p++)){
 	 case 'w': s->st_mode |= 0020; break;
 	 case '-': break;
 	 default: return 0;
 	}
-	switch (*(p++)) {
+	switch (*(p++)){
 	 case 'x': s->st_mode |= 0010; break;
 	 case 's': s->st_mode |= 0010 | S_ISGID; break;
 	 case 'S': s->st_mode |= S_ISGID; break;
 	 case '-': break;
 	 default: return 0;
 	}
-	switch (*(p++)) {
+	switch (*(p++)){
 	 case 'r': s->st_mode |= 0004; break;
 	 case '-': break;
 	 default: return 0;
 	}
-	switch (*(p++)) {
+	switch (*(p++)){
 	 case 'w': s->st_mode |= 0002; break;
 	 case '-': break;
 	 default: return 0;
 	}
-	switch (*(p++)) {
+	switch (*(p++)){
 	 case 'x': s->st_mode |= 0001; break;
 	 case 't': s->st_mode |= 0001 | S_ISVTX; break;
 	 case 'T': s->st_mode |= S_ISVTX; break;
@@ -1605,7 +1275,7 @@ int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
             break;
     if (idx == 6 || (idx == 5 && !S_ISCHR (s->st_mode) && !S_ISBLK (s->st_mode)))
         free_and_return (0);
-    if (idx < 5) {
+    if (idx < 5){
         char *p = strchr(columns [idx - 1], ',');
         if (p && p[1] >= '0' && p[1] <= '9')
             isconc = 1;
@@ -1620,14 +1290,14 @@ int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 	idx2 = 3;
     }
 
-    if (S_ISCHR (s->st_mode) || S_ISBLK (s->st_mode)) {
+    if (S_ISCHR (s->st_mode) || S_ISBLK (s->st_mode)){
         char *p;
 	if (!is_num (idx2))
 	    free_and_return (0);
 #ifdef HAVE_ST_RDEV
 	s->st_rdev = (atol (columns [idx2]) & 0xff) << 8;
 #endif
-	if (isconc) {
+	if (isconc){
 	    p = strchr (columns [idx2], ',');
 	    if (!p || p [1] < '0' || p [1] > '9')
 	        free_and_return (0);
@@ -1687,7 +1357,7 @@ int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
            MM-DD-YY hh:mm
            where Mon is Jan-Dec, DD, MM, YY two digit day, month, year,
            YYYY four digit year, hh, mm two digit hour and minute. */
-        if (strlen (p) == 8 && p [2] == '-' && p [5] == '-') {
+        if (strlen (p) == 8 && p [2] == '-' && p [5] == '-'){
             p [2] = 0;
             p [5] = 0;
             tim.tm_mon = (int) atol (p);
@@ -1704,7 +1374,7 @@ int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
             free_and_return (0);
     }
 
-    if (!extfs_format_date) {
+    if (!extfs_format_date){
         if (!is_num (idx))
 	    free_and_return (0);
         tim.tm_mday = (int)atol (columns [idx++]);
@@ -1724,7 +1394,7 @@ int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
     }
     if (columns [idx][2] == ':' || columns [idx][1] == ':'){
         if (sscanf (columns [idx],
-		    "%2d:%2d", &tim.tm_hour, &tim.tm_min) != 2) {
+		    "%2d:%2d", &tim.tm_hour, &tim.tm_min) != 2){
 	    if (!year_supplied)
 	        free_and_return (0);
 	    tim.tm_hour = 0;
@@ -1733,7 +1403,7 @@ int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
         } else {
             idx++;
             tim.tm_sec = 0;
-            if (!extfs_format_date && !year_supplied) {
+            if (!extfs_format_date && !year_supplied){
                 tim.tm_year = current_year;
                 if (tim.tm_mon > current_mon)
                     tim.tm_year--;
@@ -1757,7 +1427,7 @@ int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 #endif
 
     for (i = idx + 1, idx2 = 0; i < num_cols; i++ ) 
-	if (strcmp (columns [i], "->") == 0) {
+	if (strcmp (columns [i], "->") == 0){
 	    idx2 = i;
 	    break;
 	}
@@ -1768,14 +1438,14 @@ int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 	int p;
 	char *s;
 	    
-	if (filename) {
+	if (filename){
 	    p = column_ptr [idx2] - column_ptr [idx];
 	    s = xmalloc (p, "filename");
 	    strncpy (s, p_copy + column_ptr [idx], p - 1);
 	    s[p - 1] = '\0';
 	    *filename = s;
 	}
-	if (linkname) {
+	if (linkname){
 	    s = strdup (p_copy + column_ptr [idx2+1]);
 	    p = strlen (s);
 	    if (s [p-1] == '\r' || s [p-1] == '\n')
@@ -1799,7 +1469,7 @@ int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 	    s = strdup (p_copy + column_ptr [idx++]);
 	    p = strlen (s);
 	    if (s [p-1] == '\r' || s [p-1] == '\n')
-		s [p-1] = 0;
+	        s [p-1] = 0;
 	    if (s [p-2] == '\r' || s [p-2] == '\n')
 		s [p-2] = 0;
 	    
@@ -1822,3 +1492,18 @@ vfs_force_expire (char *pathname)
 	(*vfs->forget_about) (pathname);
     free (pathname);
 }
+
+void
+vfs_die (char *m)
+{
+    message_1s (1, "Internal error:", m);
+    exit (1);
+}
+
+#ifndef VFS_STANDALONE
+char *
+vfs_get_password (char *msg)
+{
+    return input_dialog (msg, _("Password:"), "");
+}
+#endif

@@ -36,6 +36,13 @@ the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
 #include <pwd.h>
 #include <grp.h>
 
+#ifndef TUNMLEN 
+#define TUNMLEN 256
+#endif
+#ifndef TGNMLEN
+#define TGNMLEN 256
+#endif
+
 static int saveuid = -993;
 static char saveuname[TUNMLEN];
 static int my_uid = -993;
