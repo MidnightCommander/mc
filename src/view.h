@@ -79,7 +79,7 @@ typedef struct {
     int marks [10];		/* 10 marks: 0..9 */
     
 	
-#ifdef HAVE_GNOME
+#ifdef HAVE_X
     int  current_x, current_y;	/* Current x,y position */
     int  color;			/* Current color */
     void *gtk_fname;		/* filename widget */
@@ -88,7 +88,7 @@ typedef struct {
     void *gtk_flags;		/* flags (growing) */
     void *gtk_percent;		/* percent */
     void *sadj;			/* scrollbar adjustment */
-#endif
+#endif /* HAVE_X */
 	
     int  move_dir;		/* return value from widget:  
 				 * 0 do nothing
@@ -124,7 +124,12 @@ void set_monitor        (WView *view, int set_on);
 void view_move_forward  (WView *view, int i);
 void view_move_backward (WView *view, int i);
 void view_add_one_vline (void);
-#endif
+void view_add_character (WView *view, int c);
+void view_add_string    (WView *view, char *s);
+void view_gotoyx        (WView *view, int r, int c);
+void view_set_color     (WView *view, int font);
+int view_ok_to_quit     (WView *view);
+#endif /* WANT_WIDGETS */
 
 /* Command: view a file, if _command != NULL we use popen on _command */
 /* move direction should be apointer that will hold the direction in which the user */
@@ -143,7 +148,6 @@ extern int altered_magic_flag;
 extern int altered_nroff_flag;
 
 void view_adjust_size (Dlg_head *);
-int view_ok_to_quit (WView *view);
 
 /* A node for building a change list on change_list */
 struct hexedit_change_node {
@@ -154,10 +158,6 @@ struct hexedit_change_node {
 
 #ifdef HAVE_X
 #ifdef WANT_WIDGETS
-void view_add_character (WView *view, int c);
-void view_add_string    (WView *view, char *s);
-void view_gotoyx        (WView *view, int r, int c);
-void view_set_color     (WView *view, int font);
 void view_display_clean (WView *view, int h, int w);
 
 void x_destroy_view     (WView *);
@@ -165,17 +165,14 @@ void x_create_viewer    (WView *);
 void x_focus_view       (WView *);
 void x_init_view        (WView *);
 
-#ifdef PORT_HAS_VIEW_FREEZE
 void view_freeze (WView *view);
 void view_thaw (WView *view);
-#endif
-
-#endif
+#endif /* WANT_WIDGETS */
 #else
 #    define x_init_view(x)
 #    define x_destroy_view(x)
 #    define x_create_viewer(x)
 #    define x_focus_view(x)
-#endif
+#endif /* !HAVE_X */
 
 #endif	/* __VIEW_H */
