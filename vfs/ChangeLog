@@ -1,5 +1,8 @@
 2003-10-29  Pavel Roskin  <proski@gnu.org>
 
+	* ftpfs.c: Use HAVE_STRUCT_LINGER_L_LINGER instead of
+	HAVE_STRUCT_LINGER.
+
 	* Makefile.am: Compile utilvfs.c even without USE_VFS_NET.
 	* utilvfs.c (vfs_split_url): Only compile with USE_NETCODE
 	defined.

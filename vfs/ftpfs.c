@@ -1294,7 +1294,7 @@ ftpfs_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *lo
 {
     int h, sock, n;
     off_t total;
-#ifdef HAVE_STRUCT_LINGER
+#ifdef HAVE_STRUCT_LINGER_L_LINGER
     struct linger li;
 #else
     int flag_one = 1;
@@ -1312,7 +1312,7 @@ ftpfs_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *lo
 	close(h);
 	return -1;
     }
-#ifdef HAVE_STRUCT_LINGER
+#ifdef HAVE_STRUCT_LINGER_L_LINGER
     li.l_onoff = 1;
     li.l_linger = 120;
     setsockopt(sock, SOL_SOCKET, SO_LINGER, (char *) &li, sizeof(li));
@@ -1564,7 +1564,7 @@ ftpfs_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags,
     fh->u.ftp.append = 0;
     /* File will be written only, so no need to retrieve it from ftp server */
     if (((flags & O_WRONLY) == O_WRONLY) && !(flags & (O_RDONLY | O_RDWR))) {
-#ifdef HAVE_STRUCT_LINGER
+#ifdef HAVE_STRUCT_LINGER_L_LINGER
 	struct linger li;
 #else
 	int li = 1;
@@ -1597,7 +1597,7 @@ ftpfs_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags,
 
 	if (fh->handle < 0)
 	    return -1;
-#ifdef HAVE_STRUCT_LINGER
+#ifdef HAVE_STRUCT_LINGER_L_LINGER
 	li.l_onoff = 1;
 	li.l_linger = 120;
 #endif
