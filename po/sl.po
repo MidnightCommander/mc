@@ -1,11 +1,10 @@
 # Slovenian translation file for mc.
 # Copyright (C) 2000 Free Software Foundation, Inc.
 # Andraz Tori <andraz.tori1@guest.arnes.si> 2000
-
 msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
-"POT-Creation-Date: 2003-01-12 12:25+0100\n"
+"POT-Creation-Date: 2003-01-22 02:37-0500\n"
 "PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -13,7 +12,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. The file-name is printed after the ':'
 #: edit/edit.c:150 edit/edit.c:281 edit/edit.c:289 edit/edit.c:337
 #: edit/edit.c:352 edit/edit.c:363 edit/edit.c:379 edit/edit.c:2686
 #: edit/editcmd.c:267 edit/editcmd.c:275 edit/editcmd.c:1653 src/wtools.c:132
@@ -57,7 +55,6 @@ msgstr "Rekurzija makra je pregloboka"
 msgid "&Dismiss"
 msgstr "&Opusti"
 
-#. 1
 #: edit/edit.h:266 edit/editcmd.c:367 edit/editcmd.c:1162 edit/editcmd.c:1244
 #: edit/editcmd.c:2480 edit/editmenu.c:36 edit/editoptions.c:71
 #: src/boxes.c:138 src/boxes.c:275 src/boxes.c:373 src/boxes.c:465
@@ -91,7 +88,6 @@ msgstr "Varna shranitev"
 msgid "Do backups -->"
 msgstr "Delaj varnostne kopije -->"
 
-#. 0
 #: edit/editcmd.c:365 edit/editcmd.c:1103 edit/editcmd.c:1160
 #: edit/editcmd.c:1242 edit/editcmd.c:2478 edit/editoptions.c:68
 #: src/achown.c:69 src/boxes.c:139 src/boxes.c:276 src/boxes.c:371
@@ -115,10 +111,9 @@ msgstr " Uredi Shranjevalni Način"
 msgid " Save As "
 msgstr " Shrani kot "
 
-#. Execution on this filesysten is not implemented
 #: edit/editcmd.c:460 edit/editcmd.c:747 edit/editcmd.c:775 edit/editcmd.c:934
-#: edit/editcmd.c:1047 src/file.c:623 src/help.c:319 src/main.c:464
-#: src/screen.c:1392 src/screen.c:1963 src/selcodepage.c:106
+#: edit/editcmd.c:1047 src/file.c:623 src/help.c:319 src/main.c:466
+#: src/screen.c:1397 src/screen.c:1976 src/selcodepage.c:106
 #: src/subshell.c:701 src/utilunix.c:401 src/utilunix.c:405 src/utilunix.c:427
 #: src/utilunix.c:479 vfs/mcfs.c:139
 msgid "Warning"
@@ -139,20 +134,16 @@ msgstr "Prekliči"
 
 #: edit/editcmd.c:482 edit/editcmd.c:2223 src/view.c:475
 msgid " Cannot save file. "
-msgstr ""
-" Ne morem shraniti datoteke. "
+msgstr " Ne morem shraniti datoteke. "
 
-#. This heads the delete macro error dialog box
 #: edit/editcmd.c:581 edit/editcmd.c:589 edit/editcmd.c:614 edit/editcmd.c:661
 msgid " Delete macro "
 msgstr " Zbriši makro "
 
-#. 'Open' = load temp file
 #: edit/editcmd.c:583
 msgid " Cannot open temp file "
 msgstr " Ne morem odpreti začasne datoteke "
 
-#. 'Open' = load temp file
 #: edit/editcmd.c:591 edit/editcmd.c:652 edit/editcmd.c:709
 msgid " Cannot open macro file "
 msgstr " Ne morem odpreti makro datoteke"
@@ -161,12 +152,10 @@ msgstr " Ne morem odpreti makro datoteke"
 msgid " Cannot overwrite macro file "
 msgstr " Ne morem prepisati makro datoteke "
 
-#. This heads the 'Macro' dialog box
 #: edit/editcmd.c:631 edit/editcmd.c:652
 msgid " Save macro "
 msgstr " Shrani makro "
 
-#. Input line for a single key press follows the ':'
 #: edit/editcmd.c:633
 msgid " Press the macro's new hotkey: "
 msgstr " Pritisnite makrovo novo vročo tipko: "
@@ -175,7 +164,6 @@ msgstr " Pritisnite makrovo novo vročo tipko: "
 msgid " Press macro hotkey: "
 msgstr " Pritisni vročo tipko za makro: "
 
-#. This heads the 'Load Macro' dialog box
 #: edit/editcmd.c:708
 msgid " Load macro "
 msgstr " Naloži makro "
@@ -184,7 +172,6 @@ msgstr " Naloži makro "
 msgid " Confirm save file? : "
 msgstr " Potrdi shranitev datoteke? : "
 
-#. Buttons to 'Confirm save file' query
 #: edit/editcmd.c:723 src/view.c:474
 msgid " Save file "
 msgstr " Shrani datoteko "
@@ -282,7 +269,6 @@ msgstr " Vnesite niz za iskanje:"
 msgid " Replace "
 msgstr " Zamenjaj "
 
-#. in response to number of bookmarks added because of string being found %d times
 #: edit/editcmd.c:1272 edit/editcmd.c:1970 edit/editcmd.c:1972
 #: edit/editcmd.c:2000 edit/editwidget.c:288 src/view.c:1601 src/view.c:1681
 #: src/view.c:1801 src/view.c:1813 src/view.c:2037 src/view.c:2074
@@ -315,7 +301,7 @@ msgstr " Iskan niz ni bil najden "
 msgid " %d finds made, %d bookmarks added "
 msgstr " %d najdb, %d dodanih zaznamkov"
 
-#: edit/editcmd.c:2018 edit/editwidget.c:292 src/help.c:825 src/main.c:1419
+#: edit/editcmd.c:2018 edit/editwidget.c:292 src/help.c:825 src/main.c:1421
 #: src/view.c:491 src/view.c:2154 src/view.c:2179
 msgid "Quit"
 msgstr "Končaj"
@@ -329,13 +315,13 @@ msgid "Cancel quit"
 msgstr "Prekliči izhod"
 
 #: edit/editcmd.c:2018 src/cmd.c:242 src/file.c:1859 src/file.c:2240
-#: src/filegui.c:544 src/hotlist.c:1029 src/main.c:627 src/screen.c:1951
+#: src/filegui.c:544 src/hotlist.c:1029 src/main.c:629 src/screen.c:1964
 #: src/subshell.c:702 src/tree.c:765 src/view.c:493 vfs/mcfs.c:144
 msgid "&Yes"
 msgstr "&Da"
 
 #: edit/editcmd.c:2018 src/cmd.c:242 src/file.c:1859 src/file.c:2240
-#: src/filegui.c:543 src/hotlist.c:1029 src/main.c:627 src/screen.c:1952
+#: src/filegui.c:543 src/hotlist.c:1029 src/main.c:629 src/screen.c:1965
 #: src/subshell.c:702 src/tree.c:765 src/view.c:493 vfs/mcfs.c:144
 msgid "&No"
 msgstr "&Ne"
@@ -370,8 +356,7 @@ msgstr " Vstavi datoteko "
 
 #: edit/editcmd.c:2252
 msgid " Cannot insert file. "
-msgstr ""
-" Ne morem vstaviti datoteke. "
+msgstr " Ne morem vstaviti datoteke. "
 
 #: edit/editcmd.c:2269
 msgid " Sort block "
@@ -645,7 +630,7 @@ msgstr "&Splošno...  "
 msgid "&Save mode..."
 msgstr "način &Shranjevanja..."
 
-#: edit/editmenu.c:407 edit/editmenu.c:416 src/main.c:1076
+#: edit/editmenu.c:407 edit/editmenu.c:416 src/main.c:1078
 msgid "&Layout..."
 msgstr "&Postavitev..."
 
@@ -737,8 +722,8 @@ msgstr "Emulacija tipk"
 msgid " Editor options "
 msgstr " Možnosti urejevalnika"
 
-#: edit/editwidget.c:282 src/help.c:792 src/help.c:813 src/main.c:1416
-#: src/screen.c:2178 src/tree.c:1029 src/view.c:2152
+#: edit/editwidget.c:282 src/help.c:792 src/help.c:813 src/main.c:1418
+#: src/screen.c:2191 src/tree.c:1029 src/view.c:2152
 msgid "Help"
 msgstr "Pomoč"
 
@@ -750,7 +735,7 @@ msgstr "Oznaka"
 msgid "Replac"
 msgstr "Zamenj"
 
-#: edit/editwidget.c:286 src/file.c:828 src/screen.c:2182 src/tree.c:1034
+#: edit/editwidget.c:286 src/file.c:828 src/screen.c:2195 src/tree.c:1034
 msgid "Copy"
 msgstr "Kopiraj"
 
@@ -758,11 +743,11 @@ msgstr "Kopiraj"
 msgid "Move"
 msgstr "Prestavi"
 
-#: edit/editwidget.c:289 src/screen.c:2185
+#: edit/editwidget.c:289 src/screen.c:2198
 msgid "Delete"
 msgstr "Zbriši"
 
-#: edit/editwidget.c:291 src/main.c:1418
+#: edit/editwidget.c:291 src/main.c:1420
 msgid "PullDn"
 msgstr "Potegni Dol"
 
@@ -831,6 +816,7 @@ msgstr " Chown napreden ukaz "
 
 #: src/achown.c:607 src/achown.c:623 src/achown.c:669 src/chmod.c:249
 #: src/chmod.c:319
+#, c-format
 msgid ""
 " Cannot chmod \"%s\" \n"
 " %s "
@@ -840,6 +826,7 @@ msgstr ""
 
 #: src/achown.c:612 src/achown.c:627 src/achown.c:673 src/chown.c:220
 #: src/chown.c:328
+#, c-format
 msgid ""
 " Cannot chown \"%s\" \n"
 " %s "
@@ -999,7 +986,6 @@ msgstr " Nastavitve Navideznega Datotečnega Sistema (VFS)"
 msgid "Quick cd"
 msgstr "Hitri cd"
 
-#. want cd like completion
 #: src/boxes.c:801
 msgid "cd"
 msgstr "cd"
@@ -1127,7 +1113,7 @@ msgstr "&Nastavi oznako"
 msgid "&Marked all"
 msgstr "&Označi vse"
 
-#: src/chmod.c:127 src/screen.c:404
+#: src/chmod.c:127 src/screen.c:406
 msgid "Name"
 msgstr "Imenu"
 
@@ -1199,7 +1185,6 @@ msgstr " Uporabniško ime "
 msgid " Chown command "
 msgstr " Chown ukaz "
 
-#. add fields for unknown names (numbers)
 #: src/chown.c:184
 msgid "<Unknown user>"
 msgstr "<Neznan uporabnik>"
@@ -1209,6 +1194,7 @@ msgid "<Unknown group>"
 msgstr "<Neznana skupina>"
 
 #: src/cmd.c:111
+#, c-format
 msgid " Cannot fetch a local copy of %s "
 msgstr " Ne morem dobiti krajevne kopije %s "
 
@@ -1216,7 +1202,7 @@ msgstr " Ne morem dobiti krajevne kopije %s "
 msgid "Files tagged, want to cd?"
 msgstr "Datoteke označene, želite spremeniti imenik"
 
-#: src/cmd.c:247 src/cmd.c:709 src/cmd.c:771 src/main.c:849 src/screen.c:1924
+#: src/cmd.c:247 src/cmd.c:709 src/cmd.c:771 src/main.c:851 src/screen.c:1937
 msgid "Cannot change directory"
 msgstr "Ne morem spremeniti imenika"
 
@@ -1349,6 +1335,7 @@ msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Napišite `exit' za vrnitev v Polnočnega poveljnika"
 
 #: src/cmd.c:1059
+#, c-format
 msgid "Link %s to:"
 msgstr "Poveži %s na:"
 
@@ -1391,10 +1378,9 @@ msgid "`%s' is not a symbolic link"
 msgstr "`%s' ni simbolična povezava"
 
 #: src/cmd.c:1283
+#, c-format
 msgid " Cannot chdir to %s "
-msgstr ""
-" Ne morem spremeniti imenika (chdir) v %s \n"
-" %s "
+msgstr " Ne morem iti v imenik %s "
 
 #: src/cmd.c:1292
 msgid " Enter machine name (F1 for details): "
@@ -1454,7 +1440,7 @@ msgstr " Nastavitve shranjene v ~/"
 msgid " Setup "
 msgstr " Nastavi "
 
-#: src/command.c:167 src/screen.c:2169 src/tree.c:885
+#: src/command.c:167 src/screen.c:2182 src/tree.c:885
 #, c-format
 msgid ""
 " Cannot chdir to \"%s\" \n"
@@ -1515,7 +1501,6 @@ msgstr "&Velikost"
 msgid "&Inode"
 msgstr "&Inode"
 
-#. New sort orders
 #: src/dir.c:60
 msgid "&Type"
 msgstr "&Način"
@@ -1540,11 +1525,7 @@ msgstr "&Lastnik"
 msgid "&Group"
 msgstr "&Skupina"
 
-#: src/dir.c:385
-msgid "File '%s' exists but cannot be stat-ed: %s"
-msgstr "Datoteka '%s' obstaja, a se ne da izvedeti stanja: %s"
-
-#: src/dir.c:474 src/dir.c:582
+#: src/dir.c:478 src/dir.c:584
 msgid "Cannot read directory contents"
 msgstr "Ne morem prebrati vsebine imenika"
 
@@ -1922,15 +1903,6 @@ msgstr ""
 " Ne morem odstraniti imenika \"%s\" \n"
 " %s "
 
-#.
-#. * This array introduced to avoid translation problems. The former (op_names)
-#. * is assumed to be nouns, suitable in dialog box titles; this one should
-#. * contain whatever is used in prompt itself (i.e. in russian, it's verb).
-#. * Notice first symbol - it is to fool gettext and force these strings to
-#. * be different for it. First symbol is skipped while building a prompt.
-#. * (I don't use spaces around the words, because someday they could be
-#. * dropped, when widgets get smarter)
-#.
 #: src/file.c:1689
 msgid "1Copy"
 msgstr "1Kopiraj"
@@ -1943,15 +1915,6 @@ msgstr "1Prestavi"
 msgid "1Delete"
 msgstr "1Zbriši"
 
-#.
-#. * These are formats for building a prompt. Parts encoded as follows:
-#. * %o - operation from op_names1
-#. * %f - file/files or files/directories, as appropriate
-#. * %m - "with source mask" or question mark for delete
-#. * %s - source name (truncated)
-#. * %d - number of marked files
-#. * %e - "to:" or question mark for delete
-#. *
 #: src/file.c:1704
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -2125,17 +2088,14 @@ msgstr " Datoteka obstaja "
 msgid " Background process: File exists "
 msgstr " Proces v ozadju: datoteka obstaja "
 
-#. follow symlinks and preserve Attributes must be the first
 #: src/filegui.c:746
 msgid "preserve &Attributes"
 msgstr "ohrani &Atribute"
 
-#. &op_preserve
 #: src/filegui.c:748
 msgid "follow &Links"
 msgstr "sledi &Povezavam"
 
-#. &file_mask_op_follow_links
 #: src/filegui.c:750
 msgid "to:"
 msgstr "v:"
@@ -2152,7 +2112,6 @@ msgstr "&Ozadje"
 msgid "&Stable Symlinks"
 msgstr "&Stabilne simbolične povezave"
 
-#. &file_mask_stable_symlinks
 #: src/filegui.c:784
 msgid "&Dive into subdir if exists"
 msgstr "&Potopi se v podimenik, če obstaja"
@@ -2210,7 +2169,7 @@ msgstr "Ime datoteke:"
 msgid "Content: "
 msgstr "Vsebina: "
 
-#: src/find.c:177 src/main.c:956 src/main.c:983
+#: src/find.c:177 src/main.c:958 src/main.c:985
 msgid "&Tree"
 msgstr "&Drevo"
 
@@ -2236,11 +2195,9 @@ msgstr "Iščem %s"
 msgid "Searching"
 msgstr "Iščem"
 
-#. Create a replacement page with the error message
 #: src/help.c:280
 msgid " Help file format error\n"
-msgstr ""
-" Napačna oblika datoteke pomoči\n"
+msgstr " Napačna oblika datoteke pomoči\n"
 
 #: src/help.c:319
 msgid " Internal bug: Double start of link area "
@@ -2311,7 +2268,6 @@ msgstr " Vroča lista imenikov"
 msgid " Directory path "
 msgstr " Pot imenika "
 
-#. This one holds the displayed pathname
 #: src/hotlist.c:621 src/hotlist.c:671
 msgid " Directory label "
 msgstr " Oznaka imenika "
@@ -2385,7 +2341,6 @@ msgstr " Naloži vroči seznam"
 msgid "Midnight Commander %s"
 msgstr "Polnočni Poveljnik %s"
 
-#. This printf pattern string is used as a reference for size
 #: src/info.c:99
 #, c-format
 msgid "File:       %s"
@@ -2530,7 +2485,6 @@ msgstr "&Vrste datotek"
 msgid "&Save"
 msgstr "&Shrani"
 
-#. length of line with '<' '>' buttons
 #: src/layout.c:370
 msgid " Panel split "
 msgstr " Razdelitev pulta"
@@ -2628,7 +2582,7 @@ msgstr ""
 "manjkajoči tipki ali jo kliknite z miško, da jo definirate. Okoli se "
 "premikate s Tabulatorjem."
 
-#: src/main.c:465
+#: src/main.c:467
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -2640,288 +2594,284 @@ msgstr ""
 " vaš delavni imenik ali pa ste si dali dodatna \n"
 " dostopna dovoljenja z ukazom \"su\"? "
 
-#: src/main.c:539 src/utilunix.c:380
+#: src/main.c:541 src/utilunix.c:380
 msgid "Press any key to continue..."
 msgstr "Pritisnite katerokoli tipko za nadaljevanje..."
 
-#: src/main.c:586
+#: src/main.c:588
 msgid " The shell is already running a command "
 msgstr " Lupina že izvaja ukaz "
 
-#: src/main.c:625 src/screen.c:1950
+#: src/main.c:627 src/screen.c:1963
 msgid " The Midnight Commander "
 msgstr " Polnočni Poveljnik"
 
-#: src/main.c:626
+#: src/main.c:628
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr " Zares želite zapreti Polnočnega poveljnika? "
 
-#: src/main.c:945
+#: src/main.c:947
 msgid " Listing format edit "
 msgstr " Uredi obliko izpisa seznama"
 
-#: src/main.c:945
+#: src/main.c:947
 #, c-format
 msgid " New mode is \"%s\" "
 msgstr " Nov način je \"%s\" "
 
-#: src/main.c:953 src/main.c:980
+#: src/main.c:955 src/main.c:982
 msgid "&Listing mode..."
 msgstr "&Seznamski način..."
 
-#: src/main.c:954 src/main.c:981
+#: src/main.c:956 src/main.c:983
 msgid "&Quick view     C-x q"
 msgstr "&Hitri pogled   C-x q"
 
-#: src/main.c:955 src/main.c:982
+#: src/main.c:957 src/main.c:984
 msgid "&Info           C-x i"
 msgstr "&Podatki        C-x i"
 
-#: src/main.c:958 src/main.c:985
+#: src/main.c:960 src/main.c:987
 msgid "&Sort order..."
 msgstr "&Vrstni red..."
 
-#: src/main.c:960 src/main.c:987
+#: src/main.c:962 src/main.c:989
 msgid "&Filter..."
 msgstr "&Filter..."
 
-#: src/main.c:964 src/main.c:991
+#: src/main.c:966 src/main.c:993
 msgid "&Network link..."
 msgstr "&Mrežna povezava..."
 
-#: src/main.c:966 src/main.c:993
+#: src/main.c:968 src/main.c:995
 msgid "FT&P link..."
 msgstr "FT&P povezava..."
 
-#: src/main.c:967 src/main.c:994
+#: src/main.c:969 src/main.c:996
 msgid "S&hell link..."
 msgstr "&Lupinska povezava..."
 
-#: src/main.c:969 src/main.c:996
+#: src/main.c:971 src/main.c:998
 msgid "SM&B link..."
 msgstr "SM&B povezava..."
 
-#: src/main.c:974 src/main.c:1001
+#: src/main.c:976 src/main.c:1003
 msgid "&Drive...       M-d"
 msgstr "&Pogon...       M-d"
 
-#: src/main.c:976 src/main.c:1003
+#: src/main.c:978 src/main.c:1005
 msgid "&Rescan         C-r"
 msgstr "&Osveži         C-r"
 
-#: src/main.c:1007
+#: src/main.c:1009
 msgid "&User menu          F2"
 msgstr "&Uporabnikov menu   F2"
 
-#: src/main.c:1008
+#: src/main.c:1010
 msgid "&View               F3"
 msgstr "&Pogled             F3"
 
-#: src/main.c:1009
+#: src/main.c:1011
 msgid "Vie&w file...         "
 msgstr "Po&glej datoteko...   "
 
-#: src/main.c:1010
+#: src/main.c:1012
 msgid "&Filtered view     M-!"
 msgstr "&Filtriran pogled  M-!"
 
-#: src/main.c:1011
+#: src/main.c:1013
 msgid "&Edit               F4"
 msgstr "ur&Edi              F4"
 
-#: src/main.c:1012
+#: src/main.c:1014
 msgid "&Copy               F5"
 msgstr "&Kopiraj            F5"
 
-#: src/main.c:1013
+#: src/main.c:1015
 msgid "c&Hmod           C-x c"
 msgstr "c&Hmod           C-x c"
 
-#: src/main.c:1015
+#: src/main.c:1017
 msgid "&Link            C-x l"
 msgstr "&Povezava        X-x l"
 
-#: src/main.c:1016
+#: src/main.c:1018
 msgid "&SymLink         C-x s"
 msgstr "&Simb. povezava  C-x s"
 
-#: src/main.c:1017
+#: src/main.c:1019
 msgid "edit s&Ymlink  C-x C-s"
 msgstr "uredi s&imb. povez. C-x C-s"
 
-#: src/main.c:1018
+#: src/main.c:1020
 msgid "ch&Own           C-x o"
 msgstr "ch&Own           C-x o"
 
-#: src/main.c:1019
+#: src/main.c:1021
 msgid "&Advanced chown       "
 msgstr "&Napredni chown"
 
-#: src/main.c:1021
+#: src/main.c:1023
 msgid "&Rename/Move        F6"
 msgstr "p&Reimenuj/Prestavi F6"
 
-#: src/main.c:1022
+#: src/main.c:1024
 msgid "&Mkdir              F7"
 msgstr "Ustvari &Imenik     F7"
 
-#: src/main.c:1023
+#: src/main.c:1025
 msgid "&Delete             F8"
 msgstr "&Zbriši             F8"
 
-#: src/main.c:1024
+#: src/main.c:1026
 msgid "&Quick cd          M-c"
 msgstr "&Hitra sprememba imenika M-c"
 
-#: src/main.c:1026
+#: src/main.c:1028
 msgid "select &Group      M-+"
 msgstr "izberi &Skupino    M-+"
 
-#: src/main.c:1027
+#: src/main.c:1029
 msgid "u&Nselect group    M-\\"
 msgstr "o&Dizberi skupino  M-\\"
 
-#: src/main.c:1028
+#: src/main.c:1030
 msgid "reverse selec&Tion M-*"
 msgstr "obrni iz&Biro      M-*"
 
-#: src/main.c:1030
+#: src/main.c:1032
 msgid "e&Xit              F10"
 msgstr "&Izhod             F10"
 
-#. I know, I'm lazy, but the tree widget when it's not running
-#. * as a panel still has some problems, I have not yet finished
-#. * the WTree widget port, sorry.
-#.
-#: src/main.c:1038
+#: src/main.c:1040
 msgid "&Directory tree"
 msgstr "&Drevo imenikov"
 
-#: src/main.c:1039
+#: src/main.c:1041
 msgid "&Find file            M-?"
 msgstr "&Poišči datoteko      M-?"
 
-#: src/main.c:1040
+#: src/main.c:1042
 msgid "s&Wap panels          C-u"
 msgstr "za&Menjaj pulta       C-u"
 
-#: src/main.c:1041
+#: src/main.c:1043
 msgid "switch &Panels on/off C-o"
 msgstr "v/izklopi &Pulta      C-o"
 
-#: src/main.c:1042
+#: src/main.c:1044
 msgid "&Compare directories  C-x d"
 msgstr "&Primerjaj imenika    C-x d"
 
-#: src/main.c:1043
+#: src/main.c:1045
 msgid "e&Xternal panelize    C-x !"
 msgstr "&V pult od zunaj      C-x !"
 
-#: src/main.c:1044
+#: src/main.c:1046
 msgid "show directory s&Izes"
 msgstr "kaži velikosti &Imenikov"
 
-#: src/main.c:1046
+#: src/main.c:1048
 msgid "command &History"
 msgstr "zgodovina &Ukazov"
 
-#: src/main.c:1047
+#: src/main.c:1049
 msgid "di&Rectory hotlist    C-\\"
 msgstr "v&Roč seznam imenikov  C-\\"
 
-#: src/main.c:1049
+#: src/main.c:1051
 msgid "&Active VFS list      C-x a"
 msgstr "dej&Avni VFS seznam   C-x a"
 
-#: src/main.c:1050
+#: src/main.c:1052
 msgid "Fr&ee VFSs now"
 msgstr "&Takoj sprosti VFS-je"
 
-#: src/main.c:1053
+#: src/main.c:1055
 msgid "&Background jobs      C-x j"
 msgstr "Posli v &Ozadju       C-x j"
 
-#: src/main.c:1057
+#: src/main.c:1059
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Odbriši datoteke (samo ext2fs)"
 
-#: src/main.c:1060
+#: src/main.c:1062
 msgid "&Listing format edit"
 msgstr "uredi izpis &Seznama"
 
-#: src/main.c:1065
+#: src/main.c:1067
 msgid "Edit &extension file"
 msgstr "Uredi &priponsko datoteko"
 
-#: src/main.c:1066
+#: src/main.c:1068
 msgid "Edit &menu file"
 msgstr "Uredi &menujsko datoteko"
 
-#: src/main.c:1068
+#: src/main.c:1070
 msgid "Edit edi&tor menu file"
 msgstr "Uredi menujsko datoteko urejavalnika"
 
-#: src/main.c:1069
+#: src/main.c:1071
 msgid "Edit &syntax file"
 msgstr "Uredi &sintaksno datoteko"
 
-#: src/main.c:1075
+#: src/main.c:1077
 msgid "&Configuration..."
 msgstr "&Nastavitve..."
 
-#: src/main.c:1077
+#: src/main.c:1079
 msgid "c&Onfirmation..."
 msgstr "&Potrditev..."
 
-#: src/main.c:1078
+#: src/main.c:1080
 msgid "&Display bits..."
 msgstr "&Kaži bite..."
 
-#: src/main.c:1080
+#: src/main.c:1082
 msgid "learn &Keys..."
 msgstr "nauči se &Tipk..."
 
-#: src/main.c:1083
+#: src/main.c:1085
 msgid "&Virtual FS..."
 msgstr "&Navidezni Datotečni Sistem..."
 
-#: src/main.c:1086
+#: src/main.c:1088
 msgid "&Save setup"
 msgstr "&Shrani nastavitve"
 
-#: src/main.c:1097
+#: src/main.c:1099
 msgid " &Above "
 msgstr " &Nad "
 
-#: src/main.c:1097
+#: src/main.c:1099
 msgid " &Left "
 msgstr " &Levo "
 
-#: src/main.c:1101
+#: src/main.c:1103
 msgid " &File "
 msgstr " &Datoteka "
 
-#: src/main.c:1104
+#: src/main.c:1106
 msgid " &Command "
 msgstr " &Ukaz "
 
-#: src/main.c:1107
+#: src/main.c:1109
 msgid " &Options "
 msgstr " &Možnosti "
 
-#: src/main.c:1110
+#: src/main.c:1112
 msgid " &Below "
 msgstr " &Pod "
 
-#: src/main.c:1110
+#: src/main.c:1112
 msgid " &Right "
 msgstr " &Desno "
 
-#: src/main.c:1153
+#: src/main.c:1155
 msgid " Information "
 msgstr " Obvestilo "
 
-#: src/main.c:1155
+#: src/main.c:1157
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -2933,33 +2883,32 @@ msgstr ""
 " ročno osvežiti imenik. Poglejte si priročnik (man)  \n"
 " za podrobnosti.                                     "
 
-#: src/main.c:1417 src/screen.c:2179
+#: src/main.c:1419 src/screen.c:2192
 msgid "Menu"
 msgstr "Menu"
 
-#: src/main.c:1557
+#: src/main.c:1559
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM okoljska spremenljivka ni nastavljena!\n"
 
-#: src/main.c:1874 src/textconf.c:116
+#: src/main.c:1876 src/textconf.c:116
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "Polnočni poveljnik GNU %s\n"
 
-#: src/main.c:2126
+#: src/main.c:2128
 msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr ""
-"[zastavice] [ta_imenik] [imenik_drugega_pulta]\n"
+msgstr "[zastavice] [ta_imenik] [imenik_drugega_pulta]\n"
 
-#: src/main.c:2130
+#: src/main.c:2132
 msgid "+number"
 msgstr "+številka"
 
-#: src/main.c:2131
+#: src/main.c:2133
 msgid "Set initial line number for the internal editor"
 msgstr "Nastavi začetno številko vrstice za vgrajen urejevalnik"
 
-#: src/main.c:2133
+#: src/main.c:2135
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2969,7 +2918,7 @@ msgstr ""
 "Prosimo pošljite poročila o hroščih (vključite izpis `mc -V')\n"
 "na mc-devel@gnome.org\n"
 
-#: src/main.c:2148
+#: src/main.c:2150
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2981,7 +2930,8 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
 "   Help:         helpnormal, helpitalic, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, core\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -2999,7 +2949,8 @@ msgstr ""
 "   Dialogi:      dnormal, dfocus, dhotnormal, dhotfocus\n"
 "   Menuji:       menu, menuhot, menusel, menuhotsel\n"
 "   Pomoč:        helpnormal, helpitalic, helplink, helpslink\n"
-"   Vrste dat.:   directory, executable, link, stalelink, device, special, core\n"
+"   Vrste dat.:   directory, executable, link, stalelink, device, special, "
+"core\n"
 "\n"
 "Barve:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -3007,99 +2958,99 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2223
+#: src/main.c:2225
 msgid "Use to debug the background code"
 msgstr "Uporabi za razhroščevanje kod ozadja"
 
-#: src/main.c:2226
+#: src/main.c:2228
 msgid "Request to run in color mode"
 msgstr "Prošnja za izvajanje v barvnem načinu"
 
-#: src/main.c:2228
+#: src/main.c:2230
 msgid "Specifies a color configuration"
 msgstr "Določi nastavitve barv"
 
-#: src/main.c:2232
+#: src/main.c:2234
 msgid "Edits one file"
 msgstr "Urejuje eno datoteko"
 
-#: src/main.c:2236
+#: src/main.c:2238
 msgid "Displays this help message"
 msgstr "Pokaže to sporočilo s pomočjo"
 
-#: src/main.c:2238
+#: src/main.c:2240
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Pokaže poročilo s pomočjo o menjavi barvne sheme"
 
-#: src/main.c:2241
+#: src/main.c:2243
 msgid "Log ftp dialog to specified file"
 msgstr "Zapiše dnevnik ftp dialogov v določeno datoteko"
 
-#: src/main.c:2244
+#: src/main.c:2246
 msgid "Set debug level"
 msgstr "Nastavi stopnjo razhroščevanja"
 
-#: src/main.c:2248
+#: src/main.c:2250
 msgid "Print data directory"
 msgstr "Natisne podatkovni imenik"
 
-#: src/main.c:2250
+#: src/main.c:2252
 msgid "Requests to run in black and white"
 msgstr "Prošnja za izvajanje v črnobelem načinu"
 
-#: src/main.c:2252
+#: src/main.c:2254
 msgid "Disable mouse support in text version"
 msgstr "Izključi podporo za miško v tekstovni različici"
 
-#: src/main.c:2255
+#: src/main.c:2257
 msgid "Disables subshell support"
 msgstr "Izključi podporo za podlupine"
 
-#: src/main.c:2257
+#: src/main.c:2259
 msgid "Force subshell execution"
 msgstr "Prisili izvedbo podlupine"
 
-#: src/main.c:2260
+#: src/main.c:2262
 msgid "Print last working directory to specified file"
 msgstr "Izpiše zadnji delavni imenik v navedeno datoteko"
 
-#: src/main.c:2262
+#: src/main.c:2264
 msgid "Resets soft keys on HP terminals"
 msgstr "Ponastavi mehke tipke na HP terminalih"
 
-#: src/main.c:2264
+#: src/main.c:2266
 msgid "To run on slow terminals"
 msgstr "Za poganjanje na počasnih terminalih"
 
-#: src/main.c:2267
+#: src/main.c:2269
 msgid "Use stickchars to draw"
 msgstr "Uporabi lepljive znake za risanje"
 
-#: src/main.c:2271
+#: src/main.c:2273
 msgid "Enables subshell support (default)"
 msgstr "Vklopi podporo za podlupino (privzeto)"
 
-#: src/main.c:2275
+#: src/main.c:2277
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Poskuša uporabiti termcap namesto terminfa"
 
-#: src/main.c:2278
+#: src/main.c:2280
 msgid "Displays the current version"
 msgstr "Pokaže trenutno različico"
 
-#: src/main.c:2280
+#: src/main.c:2282
 msgid "Launches the file viewer on a file"
 msgstr "Zažene pogled datoteke"
 
-#: src/main.c:2282
+#: src/main.c:2284
 msgid "Forces xterm features"
 msgstr "Prisili uporabo xterm dodatkov"
 
-#: src/main.c:2499
+#: src/main.c:2501
 msgid " Notice "
 msgstr " Opomba "
 
-#: src/main.c:2500
+#: src/main.c:2502
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -3109,7 +3060,6 @@ msgstr ""
 " so sedaj shranjene v imeniku ~/.mc \n"
 " daatoteke so bile prestavljene\n"
 
-#. other options
 #: src/option.c:61
 msgid "safe de&Lete"
 msgstr "varni i&zbris"
@@ -3158,7 +3108,6 @@ msgstr "Izračunaj vso&Te"
 msgid "&Verbose operation"
 msgstr "&Podrobno obveščanje"
 
-#. panel options
 #: src/option.c:74
 msgid "&Fast dir reload"
 msgstr "&Hitro osveževanje imenikov"
@@ -3195,7 +3144,6 @@ msgstr "na neumnih &Terminalih"
 msgid "Alwa&ys"
 msgstr "&Vedno"
 
-#. Similar code is in layout.c (init_layout())
 #: src/option.c:154
 msgid " Panel options "
 msgstr " Nastavitve pulta"
@@ -3234,8 +3182,7 @@ msgstr " Vnesite oznčbo ukaza: "
 
 #: src/panelize.c:266
 msgid " Cannot run external panelize in a non-local directory "
-msgstr ""
-" V nekrajevnem imeniku ne morem pognati dodajanja v pult od zunaj"
+msgstr " V nekrajevnem imeniku ne morem pognati dodajanja v pult od zunaj"
 
 #: src/panelize.c:315
 msgid "Find rejects after patching"
@@ -3297,99 +3244,98 @@ msgstr "SIMBLINK"
 msgid "SUB-DIR"
 msgstr "POD-IMENIK"
 
-#: src/screen.c:405 src/screen.c:406
+#: src/screen.c:407 src/screen.c:408
 msgid "Size"
 msgstr "Velikost"
 
-#: src/screen.c:408
+#: src/screen.c:410
 msgid "MTime"
 msgstr "MČas"
 
-#: src/screen.c:409
+#: src/screen.c:411
 msgid "ATime"
 msgstr "DČas"
 
-#: src/screen.c:410
+#: src/screen.c:412
 msgid "CTime"
 msgstr "SČas"
 
-#: src/screen.c:411
+#: src/screen.c:413
 msgid "Permission"
 msgstr "Dovoljenje"
 
-#: src/screen.c:412
+#: src/screen.c:414
 msgid "Perm"
 msgstr "Dovo"
 
-#: src/screen.c:413
+#: src/screen.c:415
 msgid "Nl"
 msgstr "Nl"
 
-#: src/screen.c:414
+#: src/screen.c:416
 msgid "Inode"
 msgstr "Inode"
 
-#: src/screen.c:415
+#: src/screen.c:417
 msgid "UID"
 msgstr "UID"
 
-#: src/screen.c:416
+#: src/screen.c:418
 msgid "GID"
 msgstr "GID"
 
-#: src/screen.c:417
+#: src/screen.c:419
 msgid "Owner"
 msgstr "Lastnik"
 
-#: src/screen.c:418
+#: src/screen.c:420
 msgid "Group"
 msgstr "Skupina"
 
-#: src/screen.c:651
+#: src/screen.c:656
 #, c-format
 msgid "%s bytes in %d file"
 msgstr "%s bajtov v %d datoteki"
 
-#: src/screen.c:651
+#: src/screen.c:656
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s bajtov v %d datotekah"
 
-#: src/screen.c:677
+#: src/screen.c:682
 msgid "<readlink failed>"
 msgstr "<branje povezave neuspešno>"
 
-#: src/screen.c:1268
+#: src/screen.c:1273
 msgid "Unknown tag on display format: "
 msgstr "Neznana označba v opisu načina prikaza: "
 
-#: src/screen.c:1392
+#: src/screen.c:1397
 msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
 "Uporabniško podano oblikovanje izgleda neveljavno, uporabljam privzeto."
 
-#: src/screen.c:1951
+#: src/screen.c:1964
 msgid " Do you really want to execute? "
 msgstr " Zares želite pognati?"
 
-#: src/screen.c:1963
+#: src/screen.c:1976
 msgid " No action taken "
 msgstr " Izršeno ni bilo nobeno dejanje"
 
-#: src/screen.c:2180
+#: src/screen.c:2193
 msgid "View"
 msgstr "Pogled"
 
-#: src/screen.c:2181 src/view.c:2165
+#: src/screen.c:2194 src/view.c:2165
 msgid "Edit"
 msgstr "Uredi"
 
-#: src/screen.c:2183 src/tree.c:1036
+#: src/screen.c:2196 src/tree.c:1036
 msgid "RenMov"
 msgstr "RenMov"
 
-#. FIXME: mkdir is currently defunct
-#: src/screen.c:2184 src/tree.c:1040
+#: src/screen.c:2197 src/tree.c:1040
 msgid "Mkdir"
 msgstr "Mkdir"
 
@@ -3421,6 +3367,7 @@ msgstr ""
 "Preverite okoljsko spremenljivko TERM.\n"
 
 #: src/subshell.c:416
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Ne morem odpreti imenovane cevi %s\n"
 
@@ -3429,6 +3376,7 @@ msgid " The shell is still active. Quit anyway? "
 msgstr " Lupina je še vedno dejavna. Končaj vseeno? "
 
 #: src/subshell.c:840
+#, c-format
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Opozorilo: Ne morem iti v %s.\n"
 
@@ -3598,25 +3546,24 @@ msgstr ""
 "Njena uporaba lahko ošibi varnost sistema"
 
 #: src/user.c:781
+#, c-format
 msgid " No suitable entries found in %s "
 msgstr " Ustrezni vpisi v %s niso bili najdeni "
 
-#. Create listbox
 #: src/user.c:787
 msgid " User menu "
 msgstr " Uporabnikov menu "
 
-#. strftime() format string for recent dates
 #: src/util.c:665 src/util.c:691
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
-#. strftime() format string for old dates
 #: src/util.c:666 src/util.c:689
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
 #: src/utilunix.c:333
+#, c-format
 msgid "%s is not a directory\n"
 msgstr "%s ni imenik\n"
 
@@ -3626,13 +3573,14 @@ msgid "Directory %s is not owned by you\n"
 msgstr "Niste lastnik imenika %s\n"
 
 #: src/utilunix.c:338
+#, c-format
 msgid "Cannot set correct permissions for directory %s\n"
 msgstr "Ne morem nastaviti pravilnih dovoljenj za imenik %s\n"
 
 #: src/utilunix.c:343
+#, c-format
 msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-" Ne morem ustvariti začasnega imenika %s: %s\n"
+msgstr " Ne morem ustvariti začasnega imenika %s: %s\n"
 
 #: src/utilunix.c:373
 #, c-format
@@ -3803,8 +3751,6 @@ msgstr "Oblikuj izpis"
 msgid " History "
 msgstr " Zgodovina "
 
-#. KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
-#. to define f0 as well. Also, it makes Learn keys a bunch of problems :(
 #: src/win.c:121
 msgid "Function key 1"
 msgstr "Funkcijska tipka 1"
@@ -3945,7 +3891,6 @@ msgstr "- na številčni tipkovnici"
 msgid "* on keypad"
 msgstr "* na številčni tipkovnici"
 
-#. From here on, these won't be shown in Learn keys (no space)
 #: src/win.c:157
 msgid "Left arrow keypad"
 msgstr "Puščica levo na številčni tipkovnici"
@@ -3999,6 +3944,7 @@ msgid "NumLock on keypad"
 msgstr "NumLock na številčni tipkovnici"
 
 #: vfs/cpio.c:141 vfs/cpio.c:157
+#, c-format
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
@@ -4037,12 +3983,8 @@ msgstr ""
 "v cpio archivu\n"
 "%s"
 
-#. In case entry is already there
-#. This shouldn't happen! (well, it can happen if there is a record for a
-#. file and than a record for a directory it is in; cpio would die with
-#. 'No such file or directory' is such case)
-#. This can be considered archive inconsistency
 #: vfs/cpio.c:453
+#, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s vsebuje podvojene vnose! Preskakujem!"
 
@@ -4056,6 +3998,7 @@ msgstr ""
 "%s"
 
 #: vfs/direntry.c:301
+#, c-format
 msgid "Directory cache expired for %s"
 msgstr "Predpomnilnik imenika za %s je potekel"
 
@@ -4068,6 +4011,7 @@ msgid "Getting file"
 msgstr "Dobivam datoteko"
 
 #: vfs/extfs.c:291
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
@@ -4124,14 +4068,15 @@ msgid "fish: Reading directory %s..."
 msgstr "fish: Berem imenik %s..."
 
 #: vfs/fish.c:455 vfs/ftpfs.c:1325 vfs/undelfs.c:310
+#, c-format
 msgid "%s: done."
 msgstr "%s: opravljeno."
 
 #: vfs/fish.c:460 vfs/ftpfs.c:1277 vfs/undelfs.c:313
+#, c-format
 msgid "%s: failure"
 msgstr "%s: napaka"
 
-#. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
 #: vfs/fish.c:485
 #, c-format
 msgid "fish: store %s: sending command..."
@@ -4189,6 +4134,7 @@ msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: Napačna prijava za uporabnika %s "
 
 #: vfs/ftpfs.c:523
+#, c-format
 msgid " Cannot set source routing (%s)"
 msgstr " Ne morem ustvariti usmerjanja izvora (%s)"
 
@@ -4324,6 +4270,7 @@ msgid " Too many open connections "
 msgstr " Preveč odprtih povezav "
 
 #: vfs/sfs.c:335
+#, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
@@ -4332,6 +4279,7 @@ msgstr ""
 "%s\n"
 
 #: vfs/sfs.c:347
+#, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
@@ -4353,10 +4301,12 @@ msgid " Authentication failed "
 msgstr " Avtentifikacija ni uspela "
 
 #: vfs/smbfs.c:1597
+#, c-format
 msgid " Error %s creating directory %s "
 msgstr " Napaka %s ob ustvarjanju imenika %s "
 
 #: vfs/smbfs.c:1620
+#, c-format
 msgid " Error %s removing directory %s "
 msgstr " Napaka %s ob odstranjuju imenika %s "
 
@@ -4376,6 +4326,7 @@ msgid " %s renaming files\n"
 msgstr " %s preimenuje datoteke\n"
 
 #: vfs/tar.c:80 vfs/tar.c:97
+#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4448,6 +4399,7 @@ msgid " Ext2lib error "
 msgstr " napaka v ext2lib "
 
 #: vfs/undelfs.c:292 vfs/undelfs.c:611
+#, c-format
 msgid " Cannot open file %s "
 msgstr " Ne morem odpreti datoteke %s"
 
@@ -4456,6 +4408,7 @@ msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs: berem inode sliko..."
 
 #: vfs/undelfs.c:298
+#, c-format
 msgid ""
 " Cannot load inode bitmap from: \n"
 " %s \n"
@@ -4468,6 +4421,7 @@ msgid "undelfs: reading block bitmap..."
 msgstr "undelfs: berem sliko blokov..."
 
 #: vfs/undelfs.c:304
+#, c-format
 msgid ""
 " Cannot load block bitmap from: \n"
 " %s \n"
@@ -4512,2242 +4466,3 @@ msgstr "%s: %s: %s %3d%% (%lu bajtov prenešenih)"
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu bajtov prenešenih"
-
-#~ msgid " Error "
-#~ msgstr " Napaka "
-
-#~ msgid " Error reading file: "
-#~ msgstr " Napaka pri branju datoteke: "
-
-#~ msgid ""
-#~ " \n"
-#~ " Increase edit.h:MAXBUF and recompile the editor. "
-#~ msgstr ""
-#~ " \n"
-#~ " Povečajte edit.h:MAXBUF in na novo prevedite urejevalnik. "
-
-#~ msgid "&Ok"
-#~ msgstr "&V redu"
-
-#~ msgid " Warning "
-#~ msgstr " Opozorilo "
-
-#~ msgid " Save as "
-#~ msgstr " Shrani kot "
-
-#~ msgid " Error trying to save file. "
-#~ msgstr " Napaka ob poskusu shranjenja datoteke. "
-
-#~ msgid " Error trying to open temp file "
-#~ msgstr " Napaka ob poskusu odprtja začasne datoteke "
-
-#~ msgid " Error trying to open macro file "
-#~ msgstr " Napaka ob poskusu odprtja datoteke z makri"
-
-#~ msgid " Error trying to overwrite macro file "
-#~ msgstr " Napaka ob poskusu prepisa datoteke z makri"
-
-#~ msgid " Macro "
-#~ msgstr " Makro "
-
-#~ msgid " Delete Macro "
-#~ msgstr " Zbriši makro "
-
-#~ msgid " Continue "
-#~ msgstr " Nadaljuj "
-
-#~ msgid " Cancel "
-#~ msgstr " Prekliči "
-
-#~ msgid "o&Ne"
-#~ msgstr "e&Na"
-
-#~ msgid "al&L"
-#~ msgstr "&Vse"
-
-#~ msgid " Search "
-#~ msgstr " Iskanje "
-
-#~ msgid " Search string not found. "
-#~ msgstr " Iskan niz ni bil najden. "
-
-#~ msgid " Quit "
-#~ msgstr " Končaj "
-
-#~ msgid " Insert file "
-#~ msgstr " Vstavi datoteko "
-
-#~ msgid " Error trying to insert file. "
-#~ msgstr " Napaka ob poskusu vstavitve datoteke. "
-
-#~ msgid "Error trying to stat file:"
-#~ msgstr "Napaka ob poskusu poizvedbe stanja datoteke:"
-
-#~ msgid " Word wrap "
-#~ msgstr " Lomi vrstice ob besedah "
-
-#~ msgid " Enter line length, 0 for off: "
-#~ msgstr " Vnesite dolžino vrstice, 0 za izklop: "
-
-#~ msgid " File access error "
-#~ msgstr " Napaka ob dostopanju do datoteke"
-
-#~ msgid "Archive"
-#~ msgstr "Arhiv"
-
-#~ msgid "Read Only"
-#~ msgstr "Le beriljiva"
-
-#~ msgid "Hidden"
-#~ msgstr "Skrita"
-
-#~ msgid "System"
-#~ msgstr "Sistemska"
-
-#~ msgid " Chmod command "
-#~ msgstr " Chmod ukaz"
-
-#~ msgid "[Chmod]"
-#~ msgstr "[Chmod]"
-
-#~ msgid "chmod"
-#~ msgstr "chmod"
-
-#~ msgid "unknown"
-#~ msgstr "neznan"
-
-#~ msgid ""
-#~ " Couldn't chmod \"%s\" \n"
-#~ " %s "
-#~ msgstr ""
-#~ " %s "
-
-#~ msgid ""
-#~ " Couldn't chown \"%s\" \n"
-#~ " %s "
-#~ msgstr ""
-#~ " Nisem mogel določiti lastništva \"%s\" \n"
-#~ " %s "
-
-#~ msgid " Listing mode "
-#~ msgstr " Seznamski način "
-
-#~ msgid "&Icon view"
-#~ msgstr "&Ikonski pogled"
-
-#~ msgid "Password: "
-#~ msgstr "Geslo: "
-
-#~ msgid " CD "
-#~ msgstr " CD "
-
-#~ msgid " Which menu file will you edit ? "
-#~ msgstr " Katero datoteko z menuji želite urejati?"
-
-#~ msgid " Link symbolically "
-#~ msgstr " Poveži simbolično"
-
-#~ msgid " Relative symlink "
-#~ msgstr " Relativna simbolična povezava"
-
-#~ msgid " relative symlink: %s "
-#~ msgstr " relativna simbolična povezava: %s "
-
-#~ msgid " Could not chdir to %s "
-#~ msgstr " Nisem mogel iti v imenik %s"
-
-#~ msgid " file error"
-#~ msgstr " napaka v datoteki"
-
-#~ msgid "Format of the ~/"
-#~ msgstr "Način zapisa ~/"
-
-#~ msgid " `%s' and `%s' are the same file. "
-#~ msgstr " datoteki `%s' in `%s' sta isti. "
-
-#~ msgid " Internal failure "
-#~ msgstr " Notranja napaka "
-
-#~ msgid "non&E"
-#~ msgstr "br&Ez"
-
-#~ msgid " Type 'yes' if you REALLY want to delete "
-#~ msgstr " Vpišite 'yes', če RESNIČNO želite zbrisati "
-
-#~ msgid "all the directories "
-#~ msgstr "vse imenike "
-
-#~ msgid " Recursive Delete "
-#~ msgstr " Rekurzivno brisanje "
-
-#~ msgid " Background process: Recursive Delete "
-#~ msgstr " Proces v ozadju: Rekurzivno brisanje "
-
-#~ msgid "no"
-#~ msgstr "ne"
-
-#~ msgid "yes"
-#~ msgstr "da"
-
-#~ msgid "ap&Pend"
-#~ msgstr "&Dodaj"
-
-#~ msgid "Find file"
-#~ msgstr "Poišči datoteko"
-
-#~ msgid " Cannot find node [Contents] in help file "
-#~ msgstr " V datoteki s pomočjo nisem našel vozlišč [vsebine]"
-
-#~ msgid " Help "
-#~ msgstr " Pomoč "
-
-#~ msgid "You have ~/"
-#~ msgstr "Imate  ~/"
-
-#~ msgid " file and [Hotlist] section in ~/"
-#~ msgstr " datoteko in [Hotlist] sekcijo v  ~/"
-
-#~ msgid "Your ~/"
-#~ msgstr "Vaš ~/"
-
-#~ msgid " most probably was created\n"
-#~ msgstr " je bil zelo verjetno ustvarjen\n"
-
-#~ msgid ""
-#~ "by an earlier development version of MC\n"
-#~ "and is more actual than ~/"
-#~ msgstr ""
-#~ "s strani starejše razvojne različice Polnočnega poveljnika\n"
-#~ "in je bolj aktualen kot ~/"
-
-#~ msgid ""
-#~ " entries\n"
-#~ "\n"
-#~ msgstr ""
-#~ " vpisov\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "You can choose between\n"
-#~ "\n"
-#~ "  Remove - remove old hotlist entries from ~/"
-#~ msgstr ""
-#~ "Lahko izbirate med\n"
-#~ "\n"
-#~ "  Odstrani - odstranite stare vpise v vroči seznam ~/"
-
-#~ msgid ""
-#~ "  Keep   - keep your old entries; you will be asked\n"
-#~ "           the same question next time\n"
-#~ "  Merge  - add old entries to hotlist as group \"Entries from ~/"
-#~ msgstr ""
-#~ "  Ohrani - ohranite vaše tare vpise; enako vprašanje vam \n"
-#~ "           bo zastavljeno prihodnjič\n"
-#~ "  Združi  - dodajte stare vnose v vroči seznam kot skupšino \"Vnosi iz ~/"
-
-#~ msgid "&Merge"
-#~ msgstr "&Združi"
-
-#~ msgid " Entries from ~/"
-#~ msgstr " Vnosi iz ~/"
-
-#~ msgid " file your old hotlist entries were not deleted"
-#~ msgstr " datoteke, vaši stari vpisi v vroči seznam niso bili zbrisani"
-
-#~ msgid " Layout "
-#~ msgstr " Postavitev "
-
-#~ msgid " Learn keys "
-#~ msgstr " Nauči se tipk"
-
-#~ msgid "&Extension file edit"
-#~ msgstr "uredi datoteko s &Priponami"
-
-#~ msgid "&Menu file edit"
-#~ msgstr "uredi datoteko z &Menuji"
-
-#~ msgid "Menu edi&Tor edit"
-#~ msgstr "Uredi &Urejevalnik menujev"
-
-#~ msgid "&Syntax file edit"
-#~ msgstr "Uredi datoteko s &Sintakso"
-
-#~ msgid "Thank you for using GNU Midnight Commander"
-#~ msgstr "Hvala, ker ste uporabljali Polnočnega poveljnika GNU"
-
-#~ msgid "-a, --stickchars   Force use of +, -, | for line drawing.\n"
-#~ msgstr "-a, --stickchars   Prisili uporabo +, -, | za risanje črt.\n"
-
-#~ msgid "-b, --nocolor      Force black and white display.\n"
-#~ msgstr "-b, --nocolor      Prisili črnobel prikaz.\n"
-
-#~ msgid "-B, --background   [DEVEL-ONLY: Debug the background code]\n"
-#~ msgstr "-B, --background   [SAMO-RAZVOJ: Razhroščuj kodo ozadja]\n"
-
-#~ msgid ""
-#~ "-c, --color        Force color mode.\n"
-#~ "-C, --colors       Specify colors (use --help-colors to get a list).\n"
-#~ "-d, --nomouse      Disable mouse support.\n"
-#~ msgstr ""
-#~ "-c, --color        Prisili barvni način.\n"
-#~ "-C, --colors       Določi barve (uporabi --help-colors za seznam).\n"
-#~ "-d, --nomouse      Izključi podporo za miško\n"
-
-#~ msgid "-e, --edit         Startup the internal editor.\n"
-#~ msgstr "-e, --edit        Zaženi notranji urejevalnik.\n"
-
-#~ msgid ""
-#~ "-f, --libdir       Print configured paths.\n"
-#~ "-h, --help         Shows this help message.\n"
-#~ "-k, --resetsoft    Reset softkeys (HP terminals only) to their terminfo/"
-#~ "termcap\n"
-#~ "                   default.\n"
-#~ msgstr ""
-#~ "-f, --libdir       Izpiši nastavljene poti.\n"
-#~ "-h, --help         Pokaži to sporočilo s pomočjo.\n"
-#~ "-k, --resetsoft    Ponastavi mehketipke (samo HP terminali) na njihove "
-#~ "terminfo/termcap\n"
-#~ "                   privzete nastavitve.\n"
-
-#~ msgid "-l, --ftplog file  Log ftpfs commands to the file.\n"
-#~ msgstr "-l, --ftplog file  Piši dnevnik ukazov ftpfs v datoteko.\n"
-
-#~ msgid "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
-#~ msgstr ""
-#~ "-M, --memory dato  [SAMO-RAZVOJ: Piši dnevnik sporočil MAD v datoteko.]\n"
-
-#~ msgid ""
-#~ "-P, --printwd      At exit, print the last working directory.\n"
-#~ "-s, --slow         Disables verbose operation (for slow terminals).\n"
-#~ msgstr ""
-#~ "-P, --printwd      Ob izhodu, izpiši zadnji delavni imenik.\n"
-#~ "-s, --slow         Iključi podrobno obveščanje (za počasne terminale).\n"
-
-#~ msgid "-t, --termcap      Activate support for the TERMCAP variable.\n"
-#~ msgstr "-t, --termcap      Aktiviraj podporo za TERMCAP spremenljivko.\n"
-
-#~ msgid ""
-#~ "-S, --createcmdile Create command file to set default directory upon "
-#~ "exit.\n"
-#~ msgstr ""
-#~ "-S, --createcmdile Ustvari datoteko z ukazi, ki nastavi privzet imenik ob "
-#~ "izhodu.\n"
-
-#~ msgid ""
-#~ "-u, --nosubshell   Disable the concurrent subshell mode.\n"
-#~ "-U, --subshell     Force the concurrent subshell mode.\n"
-#~ "-r, --forceexec    Force subshell execution.\n"
-#~ msgstr ""
-#~ "-u, --nosubshell   Izključi hkratni podlupinski način.\n"
-#~ "-U, --subshell     Prisili hkratni podlupinski način.\n"
-#~ "-r, --forceexec    Prisili izvajanje v podlupini.\n"
-
-#~ msgid ""
-#~ "-v, --view fname   Start up into the viewer mode.\n"
-#~ "-V, --version      Report version and configuration options.\n"
-#~ "-x, --xterm        Force xterm mouse support and screen save/restore.\n"
-#~ "+number            number it is the start line number of file for "
-#~ "`mcedit'.\n"
-#~ msgstr ""
-#~ "-v, --view fname   Poženi v poglednem načinu.\n"
-#~ "-V, --version      Poročilo o različici in nastavitvah.\n"
-#~ "-x, --xterm        Prisili xterm podporo za miško in shranjevanje/"
-#~ "obnavljanje zaslona.\n"
-#~ "+številka          Številka je začetna vrstica datoteke za `mcedit'.\n"
-
-#~ msgid "Library directory for the Midnight Commander: %s\n"
-#~ msgstr "Imenik s knjižnicami za Polnočnega poveljnika: %s\n"
-
-#~ msgid ""
-#~ "Option -m is obsolete. Please look at Display Bits... in the Option's "
-#~ "menu\n"
-#~ msgstr ""
-#~ "Možnost -m je zastarela. Prosim poglejte pod \"Kaži bite\"... v menuju "
-#~ "\"Možnosti\"\n"
-
-#~ msgid "Obsolete"
-#~ msgstr "Zastarelo"
-
-#~ msgid ""
-#~ "Couldn't open tty line. You have to run mc without the -P flag.\n"
-#~ "On some systems you may want to run # `which mc`\n"
-#~ msgstr ""
-#~ "Nisem mogel odpreti tty linije. Polnočnega morate pognati brez -P "
-#~ "zastavice.\n"
-#~ "Na nekaterih sistemih želite pognati # `which mc`\n"
-
-#~ msgid "advanced cho&Wn"
-#~ msgstr "napredni cho&Wn"
-
-#~ msgid " Configure options "
-#~ msgstr " Nastavi"
-
-#~ msgid " External panelize "
-#~ msgstr " V pult od zunaj"
-
-#~ msgid " Oops... "
-#~ msgstr " Ups... "
-
-#~ msgid ""
-#~ "Midnight Commander was compiled without iconv support,\n"
-#~ "so charsets recoding feature is not available!"
-#~ msgstr ""
-#~ "Polnočni poveljnik je bil preveden brez podpore za iconv\n"
-#~ "zato možnost pretvorbe med nabori znakov ni na voljo!"
-
-#~ msgid " There are stopped jobs."
-#~ msgstr " Obstajajo ustavljeni posli."
-
-#~ msgid " Quit anyway? "
-#~ msgstr " Zaključi vseeno? "
-
-#~ msgid "Virtual File System: tarfs, extfs"
-#~ msgstr "Navidtezni Datotečni sistem (VFS): tarfs, extfs"
-
-#~ msgid ", ftpfs"
-#~ msgstr ", ftpfs"
-
-#~ msgid " (proxies: hsc proxy)"
-#~ msgstr " (posredniki: hsc proxy)"
-
-#~ msgid ", mcfs"
-#~ msgstr ", mcfs"
-
-#~ msgid " (with termnet support)"
-#~ msgstr " (s termnet podporo)"
-
-#~ msgid ", smbfs"
-#~ msgstr ", smbfs"
-
-#~ msgid ", undelfs"
-#~ msgstr ", undelfs"
-
-#~ msgid "with an unknown terminal database"
-#~ msgstr "z neznano zbirko podatkov o terminalih"
-
-#~ msgid "Using old curses library"
-#~ msgstr "Uporabljam staro knjižnico ncruses"
-
-#~ msgid " The destination isn't a directory "
-#~ msgstr " Cilj ni imenik"
-
-#~ msgid " Invalid shell pattern definition \"%c\". "
-#~ msgstr " Napačna določitev vzorca lupine \"%c\". "
-
-#~ msgid " I can't run programs while logged on a non local directory "
-#~ msgstr ""
-#~ " Ne morem poganjati programov dokler sem prijavljen na oddaljen imenik"
-
-#~ msgid "name_trunc: too big"
-#~ msgstr "name_trunc: preveliko"
-
-#~ msgid ""
-#~ "File: \n"
-#~ "\n"
-#~ "    "
-#~ msgstr ""
-#~ "Datoteka: \n"
-#~ "\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "has been modified, do you want to save the changes?\n"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "je bila spremenjena, želite shraniti spremembe?\n"
-
-#~ msgid " Save changes "
-#~ msgstr " Shrani spremembe "
-
-#~ msgid " Could not open file "
-#~ msgstr " Ne morem odpreti datoteke "
-
-#~ msgid ""
-#~ "Corrupt cpio header encountered in\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Pokvarjena cpio glava v\n"
-#~ "%s"
-
-#~ msgid "fish: failed"
-#~ msgstr "fish: neuspel"
-
-#~ msgid " Proxy: Password required for "
-#~ msgstr " Posrednik: Potrebno je geslo za"
-
-#~ msgid "ftpfs: sending proxy login name"
-#~ msgstr "ftpfs: pošiljam uporabniško ime posredniku"
-
-#~ msgid "ftpfs: sending proxy user password"
-#~ msgstr "ftpfS: pošiljam geslo posredniku"
-
-#~ msgid "ftpfs: proxy authentication succeeded"
-#~ msgstr "ftpfs: avtentifikacija posrednika uspela"
-
-#~ msgid "ftpfs: connected to %s"
-#~ msgstr "ftpfs: povezan z %s"
-
-#~ msgid "ftpfs: failed"
-#~ msgstr "ftpfs: ni uspel"
-
-#~ msgid " Yes "
-#~ msgstr " Da "
-
-#~ msgid " No "
-#~ msgstr " Ne "
-
-#~ msgid " The remote server is running on strange port. Giving up.\n"
-#~ msgstr " Oddaljeni strežnik deluje na čudnih vratih. Odnehuje.\n"
-
-#~ msgid " %s mkdir'ing %s "
-#~ msgstr " %s ustvarja imenik %s "
-
-#~ msgid " %s rmdir'ing %s "
-#~ msgstr " %s briše imenik %s "
-
-#~ msgid " Could not open file %s "
-#~ msgstr " Ne morem odpreti datoteke %s "
-
-#~ msgid "undelfs: done."
-#~ msgstr "undelfs: končano."
-
-#~ msgid " Could not open file: %s "
-#~ msgstr " Ne morem odpreti datoteke %s "
-
-#~ msgid "(sorry)"
-#~ msgstr "(žal)"
-
-#~ msgid "%o %f \"%s\"%e"
-#~ msgstr "%o %f \"%s\"%e"
-
-#~ msgid "%o %d %f%e"
-#~ msgstr "%o %d %f%e"
-
-#~ msgid "Yes"
-#~ msgstr "Da"
-
-#~ msgid "No"
-#~ msgstr "Ne"
-
-#~ msgid " Find/read "
-#~ msgstr " Poišči/beri"
-
-#~ msgid " Problem reading from child "
-#~ msgstr " Napaka ob branju iz otroka "
-
-#~ msgid "-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
-#~ msgstr "-X, --dbgsubshell  [SAMO-RAZVOJ: Razhroščuj podlupino].\n"
-
-#~ msgid ""
-#~ "Unable to execute\n"
-#~ "\"%s\".\n"
-#~ "\n"
-#~ "Please check it to see if it points to a valid command."
-#~ msgstr ""
-#~ "Ne morem pognati\n"
-#~ "\"%s\".\n"
-#~ "\n"
-#~ "Prosim preverite, ali kaže na veljaven ukaz."
-
-#~ msgid ""
-#~ "\".\n"
-#~ "\n"
-#~ "To fix this, bring up the mime-properties editor in the GNOME Control "
-#~ "Center, and edit the default %s-action for \"%s\"."
-#~ msgstr ""
-#~ "\".\n"
-#~ "\n"
-#~ "Če želite to popraviti, vzemite urejevalnik tipov mime v Kontrolnem "
-#~ "centeru GNOME in uredite privzeto dejanje za %s tip \"%s\"."
-
-#~ msgid ""
-#~ "\".\n"
-#~ "\n"
-#~ "To fix this error, bring up this file's properties and change the default "
-#~ "%s-action."
-#~ msgstr ""
-#~ "\".\n"
-#~ "\n"
-#~ "Če želite to popraviti, nastavite lastnosti te datoteke in nastavite "
-#~ "privzeto dejanje za %s."
-
-#~ msgid ""
-#~ "Unable to %s\n"
-#~ "\"%s\"\n"
-#~ "with the command:\n"
-#~ "\"%s\"%s"
-#~ msgstr ""
-#~ "Ne morem %s\n"
-#~ "\"%s\"\n"
-#~ "z ukazom:\n"
-#~ "\"%s\"%s"
-
-#~ msgid "open"
-#~ msgstr "odpreti"
-
-#~ msgid "edit"
-#~ msgstr "urediti"
-
-#~ msgid "view"
-#~ msgstr "pogledati"
-
-#~ msgid " Could not start a terminal "
-#~ msgstr " Nisem mogel pognati terminala"
-
-#~ msgid "The Midnight Commander Team"
-#~ msgstr "Skupina Polnočnega poveljnika"
-
-#~ msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
-#~ msgstr "poročila o hroščih: http://bugs.gnome.org ali uporabite gnome-bug"
-
-#~ msgid "GNU Midnight Commander"
-#~ msgstr "Polnočni poveljnik GNU"
-
-#~ msgid "The GNOME edition of the Midnight Commander file manager."
-#~ msgstr "GNOME izvedba upravljalnika datotek Polnočni poveljnik."
-
-#~ msgid "Sort By"
-#~ msgstr "Sortiraj po"
-
-#~ msgid "Ignore case sensitivity."
-#~ msgstr "Ne razlikuj velikih in malih črk."
-
-#~ msgid "Sort files by "
-#~ msgstr "Sortiraj datoteke po"
-
-#~ msgid "File Type"
-#~ msgstr "Vrsti datoteke"
-
-#~ msgid "Time Last Accessed"
-#~ msgstr "Času zadnjega dostopa"
-
-#~ msgid "Time Last Modified"
-#~ msgstr "Času zadnje modifikacije"
-
-#~ msgid "Time Last Changed"
-#~ msgstr "Času zadnje spremembe"
-
-#~ msgid "Reverse the order."
-#~ msgstr "Obrni vrstni red."
-
-#~ msgid "Enter name."
-#~ msgstr "Vnesite ime."
-
-#~ msgid "Enter label for command:"
-#~ msgstr "Vnesite oznako za ukaz:"
-
-#~ msgid "Find all core files"
-#~ msgstr "Poišči vse core datoteke"
-
-#~ msgid "Run Command"
-#~ msgstr "Poženi ukaz"
-
-#~ msgid "Preset Commands"
-#~ msgstr "Predstavi ukaze"
-
-#~ msgid "Add"
-#~ msgstr "Dodaj"
-
-#~ msgid "Remove"
-#~ msgstr "Odstrani"
-
-#~ msgid "Run this Command"
-#~ msgstr "Poženi ta ukaz"
-
-#~ msgid "Command: "
-#~ msgstr "Ukaz: "
-
-#~ msgid "Set Filter"
-#~ msgstr "Določi filter"
-
-#~ msgid "Show all files"
-#~ msgstr "Kaži vse datoteke"
-
-#~ msgid ""
-#~ "Enter a filter here for files in the panel view.\n"
-#~ "\n"
-#~ "For example:\n"
-#~ "*.png will show just png images"
-#~ msgstr ""
-#~ "Tu vnesite filter za datoteke v pultnem pogledu.\n"
-#~ "\n"
-#~ "Na primer:\n"
-#~ "*.png bo kazalo le slike PNG"
-
-#~ msgid "Enter a Regular Expression to filter files in the panel view."
-#~ msgstr "Vnesite regularni izraz za filtriranje datotek v pultnem pogledu."
-
-#~ msgid " Open with..."
-#~ msgstr " Odpri z..."
-
-#~ msgid "Enter extra arguments:"
-#~ msgstr "Vnesite dodatne argumente:"
-
-#~ msgid "Desktop entry properties"
-#~ msgstr "Lastnosti vnosa na namizju"
-
-#~ msgid "Select File"
-#~ msgstr "Izberi datoteko"
-
-#~ msgid ""
-#~ "Enter a filter here to select files in the panel view with.\n"
-#~ "\n"
-#~ "For example:\n"
-#~ "*.png will select all png images"
-#~ msgstr ""
-#~ "Tu vnesite filter za izbiro datotek v pultnem pogledu.\n"
-#~ "\n"
-#~ "Na primer:\n"
-#~ "*.png bo izbralo slike PNG"
-
-#~ msgid ""
-#~ "Enter a regular expression here to select files in the panel view with."
-#~ msgstr "Vnesite regularni izraz za izbiro datotek v pultnem pogledu."
-
-#~ msgid "Creating a desktop link"
-#~ msgstr "Ustvarjam povezavo na namizju"
-
-#~ msgid "Enter the URL:"
-#~ msgstr "Vnesite URL:"
-
-#~ msgid "Access Time"
-#~ msgstr "Čas dostopa"
-
-#~ msgid "Creation Time"
-#~ msgstr "Čas nastanka"
-
-#~ msgid "Group ID"
-#~ msgstr "ID skupine"
-
-#~ msgid "Modification Time"
-#~ msgstr "Čas modifikacije"
-
-#~ msgid "Number of Hard Links"
-#~ msgstr "Število močnih povezav"
-
-#~ msgid "Size (short)"
-#~ msgstr "Velikost (kratko)"
-
-#~ msgid "Type"
-#~ msgstr "Način"
-
-#~ msgid "User ID"
-#~ msgstr "Uporabnikov ID"
-
-#~ msgid "Possible Columns"
-#~ msgstr "Možni stolpci"
-
-#~ msgid "Displayed Columns"
-#~ msgstr "Prikazani stolpci"
-
-#~ msgid "Custom View"
-#~ msgstr "Prikrojen pogled"
-
-#~ msgid "Home directory"
-#~ msgstr "Domači imenik"
-
-#~ msgid "Trash"
-#~ msgstr "Smeti"
-
-#~ msgid "Icon position"
-#~ msgstr "Mesto ikone"
-
-#~ msgid "Automatic icon placement"
-#~ msgstr "Samodejna postavitev ikon"
-
-#~ msgid "Snap icons to grid"
-#~ msgstr "Ikone naj skačejo do mreže"
-
-#~ msgid "Use shaped icons"
-#~ msgstr "Uporabi obrezane ikone"
-
-#~ msgid "Use shaped text"
-#~ msgstr "Uporabi obrezano besedilo"
-
-#~ msgid "Desktop"
-#~ msgstr "Namizje"
-
-#~ msgid "Could not open %s; will not have desktop icons"
-#~ msgstr "Ne morem odpreti %s; ikon namizja ne bo"
-
-#~ msgid "While running the mount/umount command"
-#~ msgstr "Med tekom ukaza mount/unmount (priklopi/odklopi)"
-
-#~ msgid "While running the eject command"
-#~ msgstr "Med tekom ukaza eject (izvrzi)"
-
-#~ msgid ""
-#~ "Unable to locate the file:\n"
-#~ "background-properties-capplet\n"
-#~ "in your path.\n"
-#~ "\n"
-#~ "We are unable to set the background."
-#~ msgstr ""
-#~ "Ne morem najti datoteke:\n"
-#~ "background-properties-capplet\n"
-#~ "v vaši poti.\n"
-#~ "\n"
-#~ "Ne morem nastaviti ozadja."
-
-#~ msgid "_Terminal"
-#~ msgstr "_Terminal"
-
-#~ msgid "Launch a new terminal in the current directory"
-#~ msgstr "Poženi nov terminal v trenutnem imeniku"
-
-#~ msgid "_Directory..."
-#~ msgstr "_Imenik..."
-
-#~ msgid "URL L_ink..."
-#~ msgstr "URL _povezava ..."
-
-#~ msgid "Creates a new URL link"
-#~ msgstr "Ustvari novo URL povezavo"
-
-#~ msgid "_Launcher..."
-#~ msgstr "_Zaganjalnik..."
-
-#~ msgid "Creates a new launcher"
-#~ msgstr "Ustvari nov zaganjalnik"
-
-#~ msgid "By _Name"
-#~ msgstr "Po ime_nu"
-
-#~ msgid "By File _Type"
-#~ msgstr "Po _vrsti datoteke"
-
-#~ msgid "By _Size"
-#~ msgstr "Po veliko_sti"
-
-#~ msgid "By Time Last _Accessed"
-#~ msgstr "Po času zadnjeg_a dostopa"
-
-#~ msgid "By Time Last _Modified"
-#~ msgstr "Po času zadnje _modifikacije"
-
-#~ msgid "By Time Last _Changed"
-#~ msgstr "Po času zadnje _spremembe"
-
-#~ msgid "_Arrange Icons"
-#~ msgstr "_Uredi ikone"
-
-#~ msgid "_Tidy Icons"
-#~ msgstr "_Počisti ikone"
-
-#~ msgid "Create _New Window"
-#~ msgstr "Ustvari _novo okno"
-
-#~ msgid "Rescan _Desktop Directory"
-#~ msgstr "Osveži namizni i_menik"
-
-#~ msgid "Rescan De_vices"
-#~ msgstr "Osveži napra_ve"
-
-#~ msgid "Recreate Default _Icons"
-#~ msgstr "Znova ustvari privzete _ikone"
-
-#~ msgid "Configure _Background Image"
-#~ msgstr "Nastavi sliko v _ozadju"
-
-#~ msgid "Des_ktop Properties"
-#~ msgstr "_Lastnosti namizja"
-
-#~ msgid "To: "
-#~ msgstr "V: "
-
-#~ msgid "Copying from: "
-#~ msgstr "Kopiram iz: "
-
-#~ msgid "Deleting file: "
-#~ msgstr "Brišem datoteko: "
-
-#~ msgid "Files Exist"
-#~ msgstr "Datoteke obstajajo"
-
-#~ msgid ""
-#~ "Some of the files you are trying to copy already exist in the destination "
-#~ "folder.  Please select the action to be performed."
-#~ msgstr ""
-#~ "Nekatere datoteke, ki jih želite prekopirati že obstajajov ciljni mapi.  "
-#~ "Prosim izberite dejanje, ki naj se izvede."
-
-#~ msgid "Prompt me before overwriting any file."
-#~ msgstr "Vprašaj me pred prepisovanjem katerkoli datoteke."
-
-#~ msgid "Don't overwrite any files."
-#~ msgstr "Ne prepiši nobene datoteke."
-
-#~ msgid "Overwrite:"
-#~ msgstr "Prepiši:"
-
-#~ msgid "Older files."
-#~ msgstr "Starejše datoteke."
-
-#~ msgid "Files only if size differs."
-#~ msgstr "Datoteke le, če se velikost razlikuje."
-
-#~ msgid "All files."
-#~ msgstr "Vse datoteke."
-
-#~ msgid "File Exists"
-#~ msgstr "Datoteka obstaja"
-
-#~ msgid "The target file already exists: %s"
-#~ msgstr "Ciljna datoteka že obstja: %s"
-
-#~ msgid "Replace it?"
-#~ msgstr "Zamenjaj jo?"
-
-#~ msgid "Destination"
-#~ msgstr "Cilj"
-
-#~ msgid "Find Destination Folder"
-#~ msgstr "Poišči ciljno mapo"
-
-#~ msgid "Copy as a background process"
-#~ msgstr "Kopiraj kot proces v ozadju"
-
-#~ msgid "Advanced Options"
-#~ msgstr "Napredne izbire"
-
-#~ msgid "Follow links."
-#~ msgstr "Sledi povezavam."
-
-#~ msgid "Preserve file attributes."
-#~ msgstr "Ohrani atribute datotek."
-
-#~ msgid "Preserves the permissions and the UID/GID if possible"
-#~ msgstr "Ohrani dovoljenja in UID/GID, če je možno"
-
-#~ msgid "Recursively copy subdirectories."
-#~ msgstr "Rekurzivno kopiraj podimenike."
-
-#~ msgid "If set, this will copy the directories recursively"
-#~ msgstr "Če je nastavljeno, bodo podimeniki rekurzivno kopirani"
-
-#~ msgid ""
-#~ "%s\n"
-#~ "\n"
-#~ "Directory not empty. Delete it recursively?"
-#~ msgstr ""
-#~ "%s\n"
-#~ "\n"
-#~ "Imenik ni prazen. Naj ga zbrišem rekurzivno?"
-
-#~ msgid "Do the same for the rest"
-#~ msgstr "Stori enako za ostale"
-
-#~ msgid "Move Progress"
-#~ msgstr "Napredek prestavljanja"
-
-#~ msgid "Copy Progress"
-#~ msgstr "Napredek kopiranja"
-
-#~ msgid "Delete Progress"
-#~ msgstr "Napredek brisanja"
-
-#~ msgid "File "
-#~ msgstr "Datoteka "
-
-#~ msgid "is "
-#~ msgstr "je "
-
-#~ msgid "Password"
-#~ msgstr "Geslo"
-
-#~ msgid "_Move here"
-#~ msgstr "_Prestavi sem"
-
-#~ msgid "_Copy here"
-#~ msgstr "_Kopiraj sem"
-
-#~ msgid "_Link here"
-#~ msgstr "P_oveži sem"
-
-#~ msgid "Cancel drag"
-#~ msgstr "Prekliči spust"
-
-#~ msgid ""
-#~ "Could not stat %s\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Nisem mogel izvesti ukaza stat na %s\n"
-#~ "%s"
-
-#~ msgid "Case sensitive"
-#~ msgstr "Razlikuj velike in male črke"
-
-#~ msgid "Suspend"
-#~ msgstr "Izključi"
-
-#~ msgid "Restart"
-#~ msgstr "Znova zaženi"
-
-#~ msgid "Change to this directory"
-#~ msgstr "Pojdi v ta imenik"
-
-#~ msgid "Search again"
-#~ msgstr "Iskanje znova"
-
-#~ msgid "View this file"
-#~ msgstr "Poglej to datoteko"
-
-#~ msgid "Edit this file"
-#~ msgstr "Uredi to datoteko"
-
-#~ msgid "Send the results to a Panel"
-#~ msgstr "Pošlji rezultate v pult"
-
-#~ msgid "Default set of icons not found, check your installation"
-#~ msgstr "Privzete ikone niso bile najdene, preverite svojo namestitev"
-
-#~ msgid "_Icon View"
-#~ msgstr "_Ikonski pogled"
-
-#~ msgid "Switch view to an icon display"
-#~ msgstr "Preklopi pogled na ikonski pogled"
-
-#~ msgid "_Brief View"
-#~ msgstr "_Hitri pogled"
-
-#~ msgid "Switch view to show just file name and type"
-#~ msgstr "Preklopi pogled, da kaže le ime in vrsto datoteke"
-
-#~ msgid "_Detailed View"
-#~ msgstr "Po_drobni pogled"
-
-#~ msgid "Switch view to show detailed file statistics"
-#~ msgstr "Preklopi pogled, da kaže podrobno stanje datotek"
-
-#~ msgid "_Custom View"
-#~ msgstr "P_rikrojen pogled"
-
-#~ msgid "Switch view to show user-defined statistics"
-#~ msgstr "Preklopi pogled, da kaže uporabniško prikrojeno stanje"
-
-#~ msgid "Icons"
-#~ msgstr "Ikone"
-
-#~ msgid "Brief"
-#~ msgstr "Hitro"
-
-#~ msgid "Detailed"
-#~ msgstr "Podrobno"
-
-#~ msgid "Custom"
-#~ msgstr "Prikrojeno"
-
-#~ msgid "Enter command to run"
-#~ msgstr "Vpišite ukaz, ki naj se požene"
-
-#~ msgid ""
-#~ "Notice that if you choose to terminate the file manager, you will\n"
-#~ "also terminate the GNOME desktop handler.\n"
-#~ "\n"
-#~ "Are you sure you want to exit?"
-#~ msgstr ""
-#~ "Če boste izbrali ugasnili upravljalnik datotek, boste\n"
-#~ "prav tako ugasnili GNOME upravljalnik namizja.\n"
-#~ "\n"
-#~ "Ste prepričani da želite izhod?"
-
-#~ msgid ""
-#~ "The file manager and the desktop handler are now terminating\n"
-#~ "\n"
-#~ "If you want to start up again the desktop handler or the file manager\n"
-#~ "you can launch it from the Panel, or you can run the UNIX command `gmc'\n"
-#~ "\n"
-#~ "Press OK to terminate the application, or cancel to continue using it."
-#~ msgstr ""
-#~ "Upravljalnik datotek in upravljalnik namizja se sedaj ugašata\n"
-#~ "\n"
-#~ "Če želite znova pognati enega ali drugega\n"
-#~ "jih lahko zaženete iz pulta ali pa poženete UNIX ukaz `gmc'\n"
-#~ "\n"
-#~ "Pritisnite \"V redu\" za ugasnitev programa ali \"prekliči\" za "
-#~ "nadaljevanje."
-
-#~ msgid "_File..."
-#~ msgstr "_Datoteka..."
-
-#~ msgid "Creates a new file in this directory"
-#~ msgstr "Ustvari novo datoteko v tem imeniku"
-
-#~ msgid "_Copy..."
-#~ msgstr "_Kopiraj..."
-
-#~ msgid "Copy files"
-#~ msgstr "Kopiraj datoteke"
-
-#~ msgid "_Delete..."
-#~ msgstr "_Zbriši..."
-
-#~ msgid "Delete files"
-#~ msgstr "Zbriši datoteke"
-
-#~ msgid "_Move..."
-#~ msgstr "_Prestavi..."
-
-#~ msgid "Rename or move files"
-#~ msgstr "Preimenuj ali prestavi datoteke"
-
-#~ msgid "Show directory sizes"
-#~ msgstr "Kaži velikosti imenikov"
-
-#~ msgid "Shows the disk space used by each directory"
-#~ msgstr "Kaže porabo diskovnega prostora s strani vsakega imenika"
-
-#~ msgid "Close window"
-#~ msgstr "Zapri okno"
-
-#~ msgid "Closes this window"
-#~ msgstr "Zapre to okno"
-
-#~ msgid "Select _All"
-#~ msgstr "Izberi _vse"
-
-#~ msgid "Select all files in the current Panel"
-#~ msgstr "Izberi vse datoteke v trenutnem pultu"
-
-#~ msgid "_Select Files..."
-#~ msgstr "_Izberi datoteke..."
-
-#~ msgid "Select a group of files"
-#~ msgstr "Izberi skupino datotek"
-
-#~ msgid "_Invert Selection"
-#~ msgstr "_Obrni izbiro"
-
-#~ msgid "Reverses the list of tagged files"
-#~ msgstr "Obrne seznam izbranih datotek"
-
-#~ msgid "Search for a file in the current Panel"
-#~ msgstr "Iskanje za datoteko v trenutnem pultu"
-
-#~ msgid "_Rescan Directory"
-#~ msgstr "P_reišči imenik"
-
-#~ msgid "_Sort By..."
-#~ msgstr "_Sortiraj po..."
-
-#~ msgid "Filename sort order"
-#~ msgstr "Vrstni red sortiranja imen datotek"
-
-#~ msgid "_Filter View..."
-#~ msgstr "_Filtriran pogled..."
-
-#~ msgid "Filename filtering settings"
-#~ msgstr "Nastavitve filtriranja imen datotek"
-
-#~ msgid "_Find File..."
-#~ msgstr "_Poišči datoteko..."
-
-#~ msgid "Locate files on disk"
-#~ msgstr "Poišči datoteke na disku"
-
-#~ msgid "_Edit mime types..."
-#~ msgstr "_Uredi tipe mime..."
-
-#~ msgid "Edits the MIME type bindings"
-#~ msgstr "Uredi povezave tipov MIME"
-
-#~ msgid "_Run Command..."
-#~ msgstr "_Poženi ukaz..."
-
-#~ msgid "Runs a command"
-#~ msgstr "Požene ukaz"
-
-#~ msgid "_Run Command in panel..."
-#~ msgstr "_Poženi ukaz v pultu..."
-
-#~ msgid "Run a command and put the results in a panel"
-#~ msgstr "Poženi ukaz in podaj rezultate v pultu"
-
-#~ msgid "_Background jobs..."
-#~ msgstr "Posli v _ozadju..."
-
-#~ msgid "List of background operations"
-#~ msgstr "Seznam operacij v ozadju"
-
-#~ msgid "Exit"
-#~ msgstr "Izhod"
-
-#~ msgid "Terminates the file manager and the desktop"
-#~ msgstr "Ugasni upravljalnik datotek in namizje"
-
-#~ msgid "_Settings"
-#~ msgstr "_Nastavitve"
-
-#~ msgid "_Layout"
-#~ msgstr "_Postavitev"
-
-#~ msgid "_Commands"
-#~ msgstr "_Ukazi"
-
-#~ msgid "_Desktop"
-#~ msgstr "Namizje"
-
-#~ msgid "_Help"
-#~ msgstr "_Pomoč"
-
-#~ msgid "Don't show this window again"
-#~ msgstr "Tega okna ne kaži več"
-
-#~ msgid ""
-#~ "You are running the GNOME File Manager as root.\n"
-#~ "\n"
-#~ "As root, you can damage your system, and the File Manager will not stop "
-#~ "you.\n"
-#~ "Your manual explains how to add a non-privileged user account to the "
-#~ "system.\n"
-#~ msgstr ""
-#~ "Upravljalnik datotek GNOME poganjate kot superuporabnik (root).\n"
-#~ "\n"
-#~ "Če niste pazljivi lahko poškodujete sistem in Upravljalnik datotek GNOME "
-#~ "vam tega ne bo preprečil.\n"
-#~ "Navodila za dodajanje neprivilegiranih uporabniških računov najdete v "
-#~ "priročniku.\n"
-
-#~ msgid "Could not contact the file manager\n"
-#~ msgstr "Ne morem vzpostaviti stika z upravljalnikom datotek\n"
-
-#~ msgid "Could not get the desktop\n"
-#~ msgstr "Ne morem dobiti namizja\n"
-
-#~ msgid "Unknown arrange type `%s'\n"
-#~ msgstr "Neznan urejevalni tip `%s'\n"
-
-#~ msgid "Create window showing the specified directory"
-#~ msgstr "Ustvari okno, ki bo zazalo izbran imenik"
-
-#~ msgid "DIRECTORY"
-#~ msgstr "IMENIK"
-
-#~ msgid "Rescan the specified directory"
-#~ msgstr "Osveži izbran imenik"
-
-#~ msgid "Rescan the desktop icons"
-#~ msgstr "Osveži ikone namizja"
-
-#~ msgid "Rescan the desktop device icons"
-#~ msgstr "Osveži ikone naprav namizja"
-
-#~ msgid "Arrange the desktop icons"
-#~ msgstr "Uredi ikone namizja"
-
-#~ msgid "name | type | size | atime | mtime | ctime"
-#~ msgstr "ime | vrsta  | velikost | dčas | mčas | sčas"
-
-#~ msgid "Close windows whose directories cannot be reached"
-#~ msgstr "Zapri okna, katerih imeniki niso dostopni"
-
-#~ msgid "Could not open the /etc/fstab file"
-#~ msgstr "Ne morem odpreti datoteke /etc/fstab"
-
-#~ msgid ""
-#~ "Could not symlink %s to %s; will not have such a desktop device icon."
-#~ msgstr "Ne morem simbolično povezati %s na %s. Take namizne ikone ne bo."
-
-#~ msgid "CD-ROM %d"
-#~ msgstr "CD-ROM %d"
-
-#~ msgid "Floppy %d"
-#~ msgstr "Disketnik %d"
-
-#~ msgid "Disk %d"
-#~ msgstr "Disk %d"
-
-#~ msgid "NFS dir %s"
-#~ msgstr "NFS imenik %s"
-
-#~ msgid "Device %d"
-#~ msgstr "Naprava %d"
-
-#~ msgid "Full Name: "
-#~ msgstr "Polno ime: "
-
-#~ msgid "File Name"
-#~ msgstr "Ime datoteke"
-
-#~ msgid "File Type: "
-#~ msgstr "Vrsta datoteke: "
-
-#~ msgid "Target Name: INVALID LINK"
-#~ msgstr "Ime cilja: NEVELJAVNA POVEZAVA"
-
-#~ msgid "Target Name: "
-#~ msgstr "Ime cilja: "
-
-#~ msgid "File Type: Directory"
-#~ msgstr "Vrsta datoteke: imenik"
-
-#~ msgid "File Type: Character Device"
-#~ msgstr "Vrsta datoteke: znakovna naprava"
-
-#~ msgid "File Type: Block Device"
-#~ msgstr "Vrsta datoteke: blokovna naprava"
-
-#~ msgid "File Type: Socket"
-#~ msgstr "Vrsta datoteke: vtič"
-
-#~ msgid "File Type: FIFO"
-#~ msgstr "Vrsta datoteke: FIFO"
-
-#~ msgid "File Size: "
-#~ msgstr "Velikost datoteke: "
-
-#~ msgid " bytes"
-#~ msgstr " bajtov"
-
-#~ msgid " KBytes  ("
-#~ msgstr " KBajtov ("
-
-#~ msgid " bytes)"
-#~ msgstr " bajtov)"
-
-#~ msgid " MBytes  ("
-#~ msgstr " MBajtov ("
-
-#~ msgid "File Size: N/A"
-#~ msgstr "Velikost datoteke: N/V"
-
-#~ msgid "File Created on: "
-#~ msgstr "Datoteka ustvarjena: "
-
-#~ msgid "%a, %b %d %Y,  %I:%M:%S %p"
-#~ msgstr "%a, %d %b %Y,  %I:%M:%S %p"
-
-#~ msgid "Last Modified on: "
-#~ msgstr "Zadnjič modificirana: "
-
-#~ msgid "Last Accessed on: "
-#~ msgstr "Zadnjič dostopana: "
-
-#~ msgid "URL:"
-#~ msgstr "URL:"
-
-#~ msgid "Caption:"
-#~ msgstr "Naslov:"
-
-#~ msgid "Drop Action"
-#~ msgstr "Dejanje ob spustitvi"
-
-#~ msgid "Use default Drop Action options"
-#~ msgstr "Uporabi privzete možnosti dejanje za spust"
-
-#~ msgid "Use default View options"
-#~ msgstr "Uporabi privzeto dejanje Pogled"
-
-#~ msgid "Select an Icon"
-#~ msgstr "Izberi ikono"
-
-#~ msgid "Open"
-#~ msgstr "Odpri"
-
-#~ msgid "Use default Open action"
-#~ msgstr "Uporabi privzeto dejanje za Odprtje"
-
-#~ msgid "Use default Drop action"
-#~ msgstr "Uporabi privzeto dejanje za Spust"
-
-#~ msgid "Use default View action"
-#~ msgstr "Uporabi privzeto dejanje za Pogled"
-
-#~ msgid "Use default Edit action"
-#~ msgstr "Uporabi privzeto dejanje za Urejanje"
-
-#~ msgid "Icon"
-#~ msgstr "Ikona"
-
-#~ msgid "File Actions"
-#~ msgstr "Dejanja datotek"
-
-#~ msgid "Open action"
-#~ msgstr "Dejanje za odprtje"
-
-#~ msgid "Needs terminal to run"
-#~ msgstr "Potrebuje terminal za delovanje"
-
-#~ msgid "File Permissions"
-#~ msgstr "Dovoljenja datoteke"
-
-#~ msgid "Current mode: "
-#~ msgstr "Trenutni način: "
-
-#~ msgid "Write"
-#~ msgstr "Pisljiva"
-
-#~ msgid "Exec"
-#~ msgstr "Izvedljiva"
-
-#~ msgid "Special"
-#~ msgstr "Posebna"
-
-#~ msgid "User"
-#~ msgstr "Uporabnik"
-
-#~ msgid "Other"
-#~ msgstr "Drugo"
-
-#~ msgid "Set UID"
-#~ msgstr "Nastavi UID"
-
-#~ msgid "Set GID"
-#~ msgstr "Nastavi GID"
-
-#~ msgid "Sticky"
-#~ msgstr "Lepljiva"
-
-#~ msgid "<Unknown> (%d)"
-#~ msgstr "<Neznan> (%d)"
-
-#~ msgid "File ownership"
-#~ msgstr "Lastništvo datoteke"
-
-#~ msgid "URL"
-#~ msgstr "URL"
-
-#~ msgid "Statistics"
-#~ msgstr "Stanje"
-
-#~ msgid "Options"
-#~ msgstr "Možnosti"
-
-#~ msgid "Permissions"
-#~ msgstr "Dovoljenja"
-
-#~ msgid " Properties"
-#~ msgstr " Lastnosti"
-
-#~ msgid "You entered an invalid username"
-#~ msgstr "Vpisali ste napačno uporabniško ime"
-
-#~ msgid "You entered an invalid group name"
-#~ msgstr "Vpisali ste napačno ime skupine"
-
-#~ msgid "You must rename your file to something"
-#~ msgstr "Preimenovati morate vašo datoteko v nekaj"
-
-#~ msgid "You cannot rename a file to something containing a '/' character"
-#~ msgstr "Datoteke ne morete preimenovati v nekaj, kar vsebuje znak '/'"
-
-#~ msgid "Select an application to open \"%s\" with."
-#~ msgstr "Izberite program s katerim naj se \"%s\" odpre."
-
-#~ msgid "Select a file to run with"
-#~ msgstr "Izberite datoteko s katero naj se požene"
-
-#~ msgid "Applications"
-#~ msgstr "Programi"
-
-#~ msgid "Program to run"
-#~ msgstr "Program, ki naj se požene"
-
-#~ msgid "Mount device"
-#~ msgstr "Priklopi napravo"
-
-#~ msgid "Unmount device"
-#~ msgstr "Odklopi napravo"
-
-#~ msgid "Eject device"
-#~ msgstr "Izvrzi napravo"
-
-#~ msgid "Empty Trash"
-#~ msgstr "Sprazni smeti"
-
-#~ msgid "Open with..."
-#~ msgstr "Odpri z..."
-
-#~ msgid "View Unfiltered"
-#~ msgstr "Nefiltriran pogled"
-
-#~ msgid "Copy..."
-#~ msgstr "Kopiraj..."
-
-#~ msgid "Move to Trash"
-#~ msgstr "Prestavi v smeti"
-
-#~ msgid "Move..."
-#~ msgstr "Prestavi..."
-
-#~ msgid "Hard Link..."
-#~ msgstr "Močna povezava..."
-
-#~ msgid "Symlink..."
-#~ msgstr "Simbolna povezava..."
-
-#~ msgid "Edit Symlink..."
-#~ msgstr "Uredi Simbolično povezavo..."
-
-#~ msgid "Properties..."
-#~ msgstr "Lastnosti..."
-
-#~ msgid "Show backup files"
-#~ msgstr "Kaži varnostne kopije datotek"
-
-#~ msgid "Show hidden files"
-#~ msgstr "Kaži skrite datoteke"
-
-#~ msgid "Mix files and directories"
-#~ msgstr "Obravnavaj datoteke in imenike enako"
-
-#~ msgid "Use shell patterns instead of regular expressions"
-#~ msgstr "Uporabi vzorce lupine namesto regularnih izrazov"
-
-#~ msgid "Determine file types from file content instead of extensions"
-#~ msgstr "Ugotovi vrsto datoteke iz njene vsebine namesto iz pripone"
-
-#~ msgid "Confirm when deleting file"
-#~ msgstr "Potrditev ob brisanju datotek"
-
-#~ msgid "Confirm when overwriting files"
-#~ msgstr "Potrditev ob prepisovanju datotek"
-
-#~ msgid "Confirm when executing files"
-#~ msgstr "Potrditev ob zagonu datotek"
-
-#~ msgid "Show progress while operations are being performed"
-#~ msgstr "Kaži napredek medtem, ko se operacije izvajajo"
-
-#~ msgid "VFS Timeout:"
-#~ msgstr "Časovna omejitev za VFS:"
-
-#~ msgid "Seconds"
-#~ msgstr "Sekund"
-
-#~ msgid "Anonymous FTP password:"
-#~ msgstr "Geslo za anonimni FTP:"
-
-#~ msgid "Always use FTP proxy"
-#~ msgstr "Vedno uporabi posrednika za FTP"
-
-#~ msgid "Fast directory reload"
-#~ msgstr "Hitro osveževanje imenikov"
-
-#~ msgid "Compute totals before copying files"
-#~ msgstr "Izračunaj skupne velikosti pred kopiranjem datotek"
-
-#~ msgid "FTP directory cache timeout :"
-#~ msgstr "Časovna omejitev za predpomnilnik FTP imenika :"
-
-#~ msgid "Allow customization of icons in icon view"
-#~ msgstr "Dovoli prikrojene ikone v ikonskem pogledu"
-
-#~ msgid "File display"
-#~ msgstr "Prikaz datoteke"
-
-#~ msgid "Confirmation"
-#~ msgstr "Potrditev"
-
-#~ msgid "VFS"
-#~ msgstr "VFS"
-
-#~ msgid "Caching"
-#~ msgstr "Predpomnjenje"
-
-#~ msgid "Preferences"
-#~ msgstr "Nastavitve"
-
-#~ msgid "Reloads the current directory"
-#~ msgstr "Osveži trenutni imenik"
-
-#~ msgid "New _Directory..."
-#~ msgstr "Nov _imenik..."
-
-#~ msgid "Creates a new directory here"
-#~ msgstr "Tu ustvari nov imenik"
-
-#~ msgid "Empty _Trash"
-#~ msgstr "Sprazni _smeti"
-
-#~ msgid "Empties the Trash"
-#~ msgstr "Sprazni smeti"
-
-#~ msgid "Search: %s"
-#~ msgstr "Išči: %s"
-
-#~ msgid "Copy directory"
-#~ msgstr "Kopiraj imenik"
-
-#~ msgid "Delete directory"
-#~ msgstr "Zbriši imenik"
-
-#~ msgid "Rename or move directory"
-#~ msgstr "Preimenuj ali prestavi imenik"
-
-#~ msgid "Back"
-#~ msgstr "Nazaj"
-
-#~ msgid "Go to the previously visited directory"
-#~ msgstr "Pojdi na prej obiskani imenik"
-
-#~ msgid "Up"
-#~ msgstr "Gor"
-
-#~ msgid "Go up a level in the directory hierarchy"
-#~ msgstr "Pojdi nivo navzgor v hirarhiji imenikov"
-
-#~ msgid "Forward"
-#~ msgstr "Naprej"
-
-#~ msgid "Go to the next directory"
-#~ msgstr "Pojdi na naslednji imenik"
-
-#~ msgid "Rescan the current directory"
-#~ msgstr "Znova osveži trenutni imenik"
-
-#~ msgid "Home"
-#~ msgstr "Dom"
-
-#~ msgid "Go to your home directory"
-#~ msgstr "Pojdi v vaš domači imenik"
-
-#~ msgid "Location:"
-#~ msgstr "Lokacija:"
-
-#~ msgid "Offset 0x%08lx"
-#~ msgstr "Odmik 0x%08lx"
-
-#~ msgid "_Goto line"
-#~ msgstr "_Pojdi v vrstico"
-
-#~ msgid "Jump to a specified line number"
-#~ msgstr "Pojdi v določeno številko vrstice"
-
-#~ msgid "_Monitor file"
-#~ msgstr "_Spremljaj datoteko"
-
-#~ msgid "Monitor file growing"
-#~ msgstr "Spremljaj naraščanje datoteke"
-
-#~ msgid "Regexp search"
-#~ msgstr "Iskanje z regularnim izrazom"
-
-#~ msgid "Regular expression search"
-#~ msgstr "Iskanje z regularnim izrazom"
-
-#~ msgid "_Wrap"
-#~ msgstr "_Prevoj"
-
-#~ msgid "Wrap the text"
-#~ msgstr "Prevoj besedila"
-
-#~ msgid "_Parsed view"
-#~ msgstr "_Razčlenjen pogled"
-
-#~ msgid "_Formatted"
-#~ msgstr "_Formatiran"
-
-#~ msgid "_Hex"
-#~ msgstr "_Šestnajstiško"
-
-#~ msgid "_Search"
-#~ msgstr "_Iskanje"
-
-#~ msgid "ok"
-#~ msgstr "v redu"
-
-#~ msgid "cancel"
-#~ msgstr "prekliči"
-
-#~ msgid "help"
-#~ msgstr "pomoč"
-
-#~ msgid "exit"
-#~ msgstr "izhod"
-
-#~ msgid "abort"
-#~ msgstr "prekini"
-
-#~ msgid " Enter search text : "
-#~ msgstr " Vnesite iskano besedilo :"
-
-#~ msgid " Enter replace text : "
-#~ msgstr " Vnesite besedilo za zamenjavo : "
-
-#~ msgid ""
-#~ "You can enter regexp substrings with %s\n"
-#~ "(not \\1, \\2 like sed) then use \"Enter...order\""
-#~ msgstr ""
-#~ "Vnesete lahko regularne izraze %s\n"
-#~ "(ne \\1, \\2 kot sed) nato pa uporabite \"Vpiši ... vrstni red\""
-
-#~ msgid " Enter argument (or substring) order : "
-#~ msgstr " Vnesite vrstni red argumentov (ali podnizov) : "
-
-#~ msgid ""
-#~ "Enter the order of replacement of your scanf\n"
-#~ "format specifiers or regexp substrings, eg 3,1,2"
-#~ msgstr ""
-#~ "Vnesite vrstni red zamenjav scanf\n"
-#~ "določilnikov načina izpisa ali regularnih izrazov, npr.: 3,1,2"
-
-#~ msgid " Whole words only "
-#~ msgstr " Le cele besede "
-
-#~ msgid " Case sensitive "
-#~ msgstr " Razlikuj velike in male črke "
-
-#~ msgid " Regular expression "
-#~ msgstr " Regularni izraz "
-
-#~ msgid ""
-#~ "See the regex man page for how\n"
-#~ "to compose a regular expression"
-#~ msgstr ""
-#~ "Poglejte si priročnik o regularnih izrazih (man regex), \n"
-#~ "za navodila kako narediti regularni izraz"
-
-#~ msgid " Backwards "
-#~ msgstr " Nazaj "
-
-#~ msgid "Warning: Searching backward can be slow"
-#~ msgstr "Opozorilo: iskanje nazaj je lahko počasno"
-
-#~ msgid " Prompt on replace "
-#~ msgstr " Potrdimo ob zamenjavi "
-
-#~ msgid "Ask before making each replacement"
-#~ msgstr "Vprašaj preden izvršiš zamenjavo "
-
-#~ msgid " Replace all "
-#~ msgstr " Zamenjaj vse "
-
-#~ msgid "Replace repeatedly"
-#~ msgstr "Zamenjuj zaporedoma"
-
-#~ msgid " Bookmarks "
-#~ msgstr " Zaznamki "
-
-#~ msgid "Create bookmarks at all lines found"
-#~ msgstr "Ustvari zaznamke ob vseh najdenih vrsticah"
-
-#~ msgid " Scanf expression "
-#~ msgstr " Scanf izraz "
-
-#~ msgid ""
-#~ "Allows entering of a C format string,\n"
-#~ "see the scanf man page"
-#~ msgstr ""
-#~ "Dovoli vpis C formatnega zniza,\n"
-#~ "poglejte si priročnik o scanf (man scanf)"
-
-#~ msgid "Begin search, Enter"
-#~ msgstr "Začni iskanje, Enter"
-
-#~ msgid "Abort this dialog, Esc"
-#~ msgstr "Zavrni ta dialog, Esc"
-
-#~ msgid "Replace"
-#~ msgstr "Zamenjaj"
-
-#~ msgid "Skip"
-#~ msgstr "Preskoči"
-
-#~ msgid "Replace all"
-#~ msgstr "Zamenjaj vse"
-
-#~ msgid "Replace one"
-#~ msgstr "Zamenjaj enega"
-
-#~ msgid ""
-#~ " Current text was modified without a file save. \n"
-#~ " Save with exit? "
-#~ msgstr ""
-#~ " Trenutno besedilo je bilo spremenjeno brez shranitve. \n"
-#~ " Shranim ob izhodu? "
-
-#~ msgid " &Cancel quit "
-#~ msgstr " &Prekliči izhod "
-
-#~ msgid " &Yes "
-#~ msgstr " &Da "
-
-#~ msgid " &No "
-#~ msgstr " &Ne "
-
-#~ msgid "Open...\tC-o"
-#~ msgstr "Odpri...\tC-o"
-
-#~ msgid "New\tC-n"
-#~ msgstr "Novo\tC-n"
-
-#~ msgid "Save\tF2"
-#~ msgstr "Shrani\tF2"
-
-#~ msgid "Save as...\tF12"
-#~ msgstr "Shrani kot...\tF12"
-
-#~ msgid "Insert file...\tF15"
-#~ msgstr "Vstavi datoteko...\tF15"
-
-#~ msgid "Copy to file...\tC-f"
-#~ msgstr "Kopiraj v datoteko...\tC-f"
-
-#~ msgid "Disk operations and file indexing/searching"
-#~ msgstr "Operacije nad diski in iskanje/indeksiranje datotek"
-
-#~ msgid "Toggle mark\tF3"
-#~ msgstr "Preklopi označbo\tF3"
-
-#~ msgid "Toggle mark columns\tC-b"
-#~ msgstr "Preklopi označbo stolpcev\tC-b"
-
-#~ msgid "Toggle book mark\tC-M-Ins"
-#~ msgstr "Preklopi zaznamek\tC-M-Ins"
-
-#~ msgid "Previous book mark\tC-M-Up"
-#~ msgstr "Zaznamek nazaj\tC-M-Up"
-
-#~ msgid "Next book mark\tC-M-Down"
-#~ msgstr "Zaznamek naprej\tC-M-Down"
-
-#~ msgid "Flush book marks"
-#~ msgstr "Zbriši zaznamke"
-
-#~ msgid "Toggle insert/overwrite\tIns"
-#~ msgstr "preklopi način &Pisanja\tIns"
-
-#~ msgid "Copy block to cursor\tF5"
-#~ msgstr "Kopiraj blok na kazalc\tF5"
-
-#~ msgid "Move block to cursor\tF6"
-#~ msgstr "Premakni blok na kazalec\tF6"
-
-#~ msgid "Delete block\tF8/C-Del"
-#~ msgstr "Zbriši blok\tF8/C-Del"
-
-#~ msgid "Copy block to clipbrd\tC-Ins"
-#~ msgstr "Kopiraj blok na odlož.\tC-Ins"
-
-#~ msgid "Cut block to clipbrd\tS-Del"
-#~ msgstr "Izreži blok na odlož.\tS-Del"
-
-#~ msgid "Paste block from clipbrd\tS-Ins"
-#~ msgstr "Prilepi blok iz odlož. \tS-Ins"
-
-#~ msgid "Selection history\tM-Ins"
-#~ msgstr "Zgodovina označenega\tM-Ins"
-
-#~ msgid "Undo\tC-BackSpace"
-#~ msgstr "Razveljavi\tC-Vračalka"
-
-#~ msgid "Manipulating blocks of text"
-#~ msgstr "Manipuliranje z bloki besedila"
-
-#~ msgid " Srch/Replce "
-#~ msgstr " Išči/Zamenjaj "
-
-#~ msgid "Search...\tF7"
-#~ msgstr "Išči...\tF7"
-
-#~ msgid "Search again\tF17"
-#~ msgstr "Išči znova\tF17"
-
-#~ msgid "Replace...\tF4"
-#~ msgstr "Zamenjaj...\tF4"
-
-#~ msgid "Replace again\tF14"
-#~ msgstr "Zamenjaj znova\tF14"
-
-#~ msgid "Search for and replace text"
-#~ msgstr "Išči za in zamenjaj besedilo"
-
-#~ msgid "Goto line...\tM-l"
-#~ msgstr "Pojdi v vrstico...\tM-l"
-
-#~ msgid "Goto matching bracket\tM-b"
-#~ msgstr "Pojdi na zaklepaj\tM-b"
-
-#~ msgid "Start record macro\tC-r"
-#~ msgstr "Začni snemanje makra\tC-r"
-
-#~ msgid "Finish record macro...\tC-r"
-#~ msgstr "Končaj snemanje makra...\tC-r"
-
-#~ msgid "Execute macro...\tC-a, KEY"
-#~ msgstr "Izvedi makro...\tC-a, TIPKA"
-
-#~ msgid "Delete macro...\t"
-#~ msgstr "Zbriši makro...\t"
-
-#~ msgid "Insert date/time\tC-d"
-#~ msgstr "Vstavi datum/čas\tC-d"
-
-#~ msgid "Format paragraph\tM-p"
-#~ msgstr "Formatiraj odstavek\tM-p"
-
-#~ msgid "Refresh display\tC-l"
-#~ msgstr "Obnovi zaslon\tC-l"
-
-#~ msgid "Macros and internal commands"
-#~ msgstr "Makri in notranji ukazi"
-
-#~ msgid "Error initialising editor.\n"
-#~ msgstr "Napaka ob inicializaciji urejevalnika.\n"
-
-#~ msgid "The Quick Brown Fox Jumps Over The Lazy Dog"
-#~ msgstr "Piškur molče grabi fižol iz dna cezijeve hoste"
-
-#~ msgid ""
-#~ "gtkedit.c: HOME environment variable not set and no passwd entry - "
-#~ "aborting\n"
-#~ msgstr ""
-#~ "gtkedit.c: HOME okoljska spremenljivka ni nastavljena in ni gesla - "
-#~ "končujem\n"
-
-#~ msgid "Interactive help browser"
-#~ msgstr "Interaktivni brskalnik pomoči"
-
-#~ msgid "Save to current file name"
-#~ msgstr "Shrani v trentno datoteko"
-
-#~ msgid "Toggle In/Off invisible marker to highlight text"
-#~ msgstr "Vklopi/Izklopi nevidni označnik za osvetljevanje besedila"
-
-#~ msgid "Find and replace strings/regular expressions"
-#~ msgstr "Poišči in zamenjaj nize/regularne izraze"
-
-#~ msgid "Copy highlighted block to cursor position"
-#~ msgstr "Kopiraj osvetljen blok na pozicijo kazalca"
-
-#~ msgid "Move highlighted block to cursor position"
-#~ msgstr "Premakni osvetljen blok na pozicijo kazalca"
-
-#~ msgid "Find"
-#~ msgstr "Poišči"
-
-#~ msgid "Find strings/regular expressions"
-#~ msgstr "Poišči nize/regularne izraze"
-
-#~ msgid "Delete highlighted text"
-#~ msgstr "Zbriši osvetljeno besedilo"
-
-#~ msgid "Pull down menu"
-#~ msgstr "Spustni menu"
-
-#~ msgid "Exit editor"
-#~ msgstr "Zapusti urejevalnik"
-
-#~ msgid "Clear the edit buffer"
-#~ msgstr "Počisti urejevalniški medpomnilnik"
-
-#~ msgid "Insert File"
-#~ msgstr "Vstavi datoteko"
-
-#~ msgid "Insert text from a file"
-#~ msgstr "Vstavi besedilo iz datoteke"
-
-#~ msgid "Copy to file"
-#~ msgstr "Kopiraj v datoteko"
-
-#~ msgid "copy a block to a file"
-#~ msgstr "kopiraj blok v datoteko"
-
-#~ msgid "Search/Replace"
-#~ msgstr "Išči/Zamenjaj"
-
-#~ msgid " Spelling Message "
-#~ msgstr " Sporočilo Črkovalnika "
-
-#~ msgid ""
-#~ " Fail trying to open ispell program. \n"
-#~ " Check that it is in your path and works with the -a option. \n"
-#~ " Alternatively, disable spell checking from the Options menu. "
-#~ msgstr ""
-#~ " Napaka ob poskusu zagona programa ispell. \n"
-#~ " Preverite, da je v vaši poti in, da deluje z -a možnostjo. \n"
-#~ " Lahko pa tudi izključite preverjanje črkovanja v menuju Nastavitve. "
-
-#~ msgid ""
-#~ " Fail trying to open ispell pipes. \n"
-#~ " Check that it is in your path and works with the -a option. \n"
-#~ " Alternatively, disable spell checking from the Options menu. "
-#~ msgstr ""
-#~ " Napaka ob poskusu odprtja ispell cevi. \n"
-#~ " Preverite, da je v vaši poti in, da deluje z -a možnostjo. \n"
-#~ " Lahko pa tudi izključite preverjanje črkovanja v menuju Nastavitve. "
-
-#~ msgid ""
-#~ " Fail trying to read ispell pipes. \n"
-#~ " Check that it is in your path and works with the -a option. \n"
-#~ " Alternatively, disable spell checking from the Options menu. "
-#~ msgstr ""
-#~ " Napaka ob poskusu branja iz ispell cevi. \n"
-#~ " Preverite, da je v vaši poti in, da deluje z -a možnostjo. \n"
-#~ " Lahko pa tudi izključite preverjanje črkovanja v menuju Nastavitve. "
-
-#~ msgid ""
-#~ " Error reading from ispell. \n"
-#~ " Ispell is being restarted. "
-#~ msgstr ""
-#~ " Napaka ob branju iz programa ispell. \n"
-#~ " Program bo znova zagnan. "
-
-#~ msgid " Load Syntax Rules "
-#~ msgstr " Naloži sintaktična pravila"
-
-#~ msgid ""
-#~ " Your syntax rule file is outdated \n"
-#~ " A new rule file is being installed. \n"
-#~ " Your old rule file has been saved with a .OLD extension. "
-#~ msgstr ""
-#~ " Vaša datoteka s sintaktičnimi pravili je zastarala \n"
-#~ " Nova pravila se nameščajo. \n"
-#~ " Vaša stara pravila bodo shranjena s pripono .OLD. "
-
-#~ msgid "Using default locale"
-#~ msgstr "Uporabljam privzete lokalizacijske nastavitve"
-
-#~ msgid "Using locale \"%s\" (from environment variable %s)"
-#~ msgstr "Uporabljam 'locale' \"%s\" (iz okoljske spremenljivke %s)"
-
-#~ msgid "Hotlist is now kept in file ~/"
-#~ msgstr "Vroči seznam je sedaj v datoteki ~/"
-
-#~ msgid "MC will load hotlist from ~/"
-#~ msgstr "Polnočni Poveljnik bo naložil vroči seznam iz  ~/"
-
-#~ msgid "and then delete [Hotlist] section there"
-#~ msgstr "in nato zbrisal [Hotlist] sekcijo tam"
-
-#~ msgid "Free space "
-#~ msgstr "Neuporabljen prostor "
-
-#~ msgid " (%d%%) of "
-#~ msgstr " (%d%%) od"
-
-#~ msgid "Geometry for the window"
-#~ msgstr "Geometrija okna"
-
-#~ msgid "GEOMETRY"
-#~ msgstr "GEOMETRIJA"
-
-#~ msgid "No windows opened at startup"
-#~ msgstr "Ob pričetku ni odprtih oken"
-
-#~ msgid "No desktop icons"
-#~ msgstr "Ni namiznih ikon"
-
-#~ msgid "Look more like traditional gmc"
-#~ msgstr "Izgleda bolj kot tradicionalni GNOME Polnočni Poveljnik"
-
-#~ msgid "Display the directory that holds the .links startup files and exit"
-#~ msgstr "Izpiši imenik, ki vsebuje .links začetne datoteke in končaj"
-
-#~ msgid "Cannot load %s/%s"
-#~ msgstr "Ne morem naložiti %s/%s"
-
-#~ msgid "Edition: "
-#~ msgstr "Edicija: "
-
-#~ msgid "text mode"
-#~ msgstr "besedilni način"
-
-#~ msgid " with X11 support to read modifiers"
-#~ msgstr " z X11 podporo za branje sprememb"
-
-#~ msgid "Searching for `%s'"
-#~ msgstr "Iščem za `%s'"
-
-#~ msgid " Direntry warning "
-#~ msgstr " Opozorilo 'direntry'"
-
-#~ msgid "Super ino_usage is %d, memory leak"
-#~ msgstr "Super ino_usage je %d, puščanje pomnilnika"
-
-#~ msgid "Super has want_stale set"
-#~ msgstr "Super ima nastavljen want_stale"
-
-#~ msgid "Copyright (C) 1998 The Free Software Foundation"
-#~ msgstr "Avtorske pravice pridržane (C) 1998 Fundacija za prosto programje"
-
-#~ msgid "Open _new window"
-#~ msgstr "Odpri _novo okno"
-
-#~ msgid "_Close this window"
-#~ msgstr "_Zapri to okno"
-
-#~ msgid "E_xit"
-#~ msgstr "Iz_hod"
-
-#~ msgid "_Listing view"
-#~ msgstr "_Seznamski pogled"
-
-#~ msgid "_Icon view"
-#~ msgstr "_Ikonski pogled"
-
-#~ msgid "Display _tree view"
-#~ msgstr " Kaži _drevesni pogled "
-
-#~ msgid "_About the Midnight Commander..."
-#~ msgstr " _O Polnočnem poveljniku..."
-
-#~ msgid "_File"
-#~ msgstr "_Datoteka"
-
-#~ msgid "_View"
-#~ msgstr "_Pogled"
-
-#~ msgid "&Open/load...     C-o"
-#~ msgstr "&Odpri/naloži...  C-o"
-
-#~ msgid " I can't run the Advanced Chown command on an extfs "
-#~ msgstr " Ne morem pognati Naprednega Chown ukaza na extfs"
-
-#~ msgid " I can't run the Advanced Chown command on a tarfs "
-#~ msgstr " Ne morem pognati Naprednega Chown ukaza na tarfs"
-
-#~ msgid " I can't run the Chmod command on an extfs "
-#~ msgstr " Ne morem pognati Chmod ukaza na extfs"
-
-#~ msgid " I can't run the Chmod command on a tarfs "
-#~ msgstr " Ne morem pognati Chmod ukaza na tarfs"
-
-#~ msgid " I can't run the Chown command on an extfs "
-#~ msgstr " Ne morem pognati Chown ukaza na extfs"
-
-#~ msgid " I can't run the Chown command on a tarfs "
-#~ msgstr " Ne morem pognati Chown ukaza na tarfs"
-
-#~ msgid ""
-#~ " Couldn't stat %s \n"
-#~ " %s "
-#~ msgstr ""
-#~ " Nisem mogel dobiti stanja %s \n"
-#~ " %s "
-
-#~ msgid "File/New/Directory..."
-#~ msgstr "Datoteka/Nov/Imenik..."
-
-#~ msgid " Can't execute commands on a Virtual File System directory "
-#~ msgstr ""
-#~ " Ne morem poganjati ukazov na imenuku Navideznega Datotečnega Sistema "
-#~ "(VFS)"
-
-#~ msgid " Internal error: get_file \n"
-#~ msgstr " Notranja napaka: get_file \n"
-
-#~ msgid "netbios over tcp/ip"
-#~ msgstr "netbios preko tcp/ip"
-
-#~ msgid " There is no other panel to compare contents to "
-#~ msgstr " Ne obstaja drug pult za primerjanje vsebine z "
-
-#~ msgid "."
-#~ msgstr "."
-
-#~ msgid "Global option settings"
-#~ msgstr "Nastavitve globalnih možnosti"
-
-#~ msgid "mc.hlp"
-#~ msgstr "mc.pomoč"
-
-#~ msgid "Replc"
-#~ msgstr "Zamen"
-
-#~ msgid "Dlete"
-#~ msgstr "Briši"
-
-#~ msgid ""
-#~ " Can't generate unique filename \n"
-#~ " %s "
-#~ msgstr ""
-#~ " Ne morem generirati unikatnega imena datoteke \n"
-#~ " %s "
-
-#~ msgid "Using "
-#~ msgstr "Uporabljam "
-
-#~ msgid "terminfo"
-#~ msgstr "terminfo"
-
-#~ msgid "termcap"
-#~ msgstr "termcap"
-
-#~ msgid "optional"
-#~ msgstr "ni nujno"
-
-#~ msgid "as default"
-#~ msgstr "kot privzeto"
-
-#~ msgid "Animation"
-#~ msgstr "Animacija"
-
-#~ msgid "File Transfer Protocol (ftp)"
-#~ msgstr "Protokol prenosa datotek (ftp)"
-
-#~ msgid "Midnight Commander's private remote filesystem"
-#~ msgstr "Privatni oddaljen datotečni sistem Polnočnega poveljnika"
-
-#~ msgid "Undelete filesystem for ext2"
-#~ msgstr "Odbrisljiv datotečni sistem za ext2"
-
-#~ msgid "Filename"
-#~ msgstr "Ime datoteke"
-
-#~ msgid "Full name: "
-#~ msgstr "Polno ime: "
-
-#~ msgid "Command:"
-#~ msgstr "Ukaz:"
-
-#~ msgid "Use terminal"
-#~ msgstr "Uporabi terminal"
-
-#~ msgid "File mode (permissions)"
-#~ msgstr "Način datoteke (dovoljenja)"
-
-#~ msgid "<Unknown>"
-#~ msgstr "<Neznan>"
-
-#~ msgid "General"
-#~ msgstr "Splošno"
-
-#~ msgid "Title"
-#~ msgstr "Naziv"
-
-#~ msgid "Select icon"
-#~ msgstr "Izberi ikono"
-
-#~ msgid "key '%d 0': "
-#~ msgstr "ključ '%d 0': "
-
-#~ msgid "Usage: fixhlp <width> <tocname>\n"
-#~ msgstr "Uporaba: fixhlp <širina> <naslov_kazala>\n"
-
-#~ msgid "fixhlp: Cannot open toc for writing"
-#~ msgstr "fixhlp: Ne morem odpreti stvarnega kazala za pisanje"
-
-#~ msgid ""
-#~ "[Contents]\n"
-#~ " Topics:\n"
-#~ "\n"
-#~ msgstr ""
-#~ "[Vsebine]\n"
-#~ " Naslovi:\n"
-#~ "\n"
-
-#~ msgid "XView"
-#~ msgstr "XView"
-
-#~ msgid "Tk"
-#~ msgstr "Tk"
-
-#~ msgid "  %s bytes in %d file"
-#~ msgstr "  %s bajtov v %d datoteki"
-
-#~ msgid "  %s bytes in %d files"
-#~ msgstr "  %s bajtov v %d datotekah"
-
-#~ msgid "New _File..."
-#~ msgstr "Nova Datoteka..."
-
-#~ msgid "Creates a new file here"
-#~ msgstr "Tu ustvari novo datoteko"
-
-#~ msgid " Empty file %s "
-#~ msgstr " Prazna datoteka %s"
