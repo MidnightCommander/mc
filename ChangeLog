@@ -1,5 +1,8 @@
 2003-10-25  Pavel Roskin  <proski@gnu.org>
 
+	* extraconf.h: Don't define HAVE_GRANTPT forcedly if grantpt()
+	wasn't found.  Don't define HAVE_CRYPT, it's unused now.
+
 	* configure.in: Remove check for socketpair().  Add new option
 	--enable-background.
 	* extraconf.h: Don't define WITH_BACKGROUND.

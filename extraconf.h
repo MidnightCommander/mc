@@ -11,14 +11,6 @@ conflict between them.
 the need to embed this logic into configure.in.
 */
 
-#ifdef HAVE_LIBPT
-#    define HAVE_GRANTPT
-#endif
-
-#if defined(HAVE_LIBCRYPT) || defined(HAVE_LIBCRYPT_I)
-#    define HAVE_CRYPT
-#endif
-
 #if defined(HAVE_SIGADDSET) && defined(HAVE_SIGEMPTYSET)
 # if defined(HAVE_SIGACTION) && defined(HAVE_SIGPROCMASK)
 #  define SLANG_POSIX_SIGNALS
