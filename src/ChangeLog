@@ -1,6 +1,6 @@
 2004-12-08  Pavel Shirshov  <me@pavelsh.pp.ru>
 
-        * subshell.c (init_subshell_child): Does not g_strdup() constant string
+        * subshell.c (init_subshell_child): Don't g_strdup() constant string
         in putenv() calls.
 
 2004-12-03  Roland Illig  <roland.illig@gmx.de>
@@ -576,17 +576,17 @@
 2004-09-02  Roland Illig  <roland.illig@gmx.de>
 
 	* man2hlp.c (handle_link): Added header "glibcompat.h" because
-	glib-1.2 does not know g_strlcpy.
+	glib-1.2 does not know g_strlcpy().
 	* Makefile.am (man2hlp): Added source file glibcompat.c for
 	glib-1.2 compatibility.
 
 2004-09-02  Pavel S. Shirshov <me@pavelsh.pp.ru>
 
 	* complete.c (completion_matches): Use more suitable function
-        g_strndup(), instead sequence g_malloc(), strncpy(),
+        g_strndup() instead of sequence g_malloc(), strncpy(),
 	name[len] = '\0'
-	* widget.c (copy_region): Likewise. (delete_region): Use
-	memmove() instead strcpy().
+	* widget.c (copy_region): Likewise.
+	(delete_region): Use memmove() instead of strcpy().
 	* user.c (debug_out): Eliminate buffer array.
 	(test_line): Likewise.
 
@@ -602,9 +602,9 @@
 2004-09-01  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* user.c (check_format_var): Use more suitable function
-        g_strndup(), instead sequence g_malloc(), strncpy(),
+        g_strndup() instead of sequence g_malloc(), strncpy(),
 	name[len] = '\0'
-	* man2hlp.c (handle_link): Use g_strlcpy instead sequence 
+	* man2hlp.c (handle_link): Use g_strlcpy() instead of sequence
 	strncpy(), name[len] = '\0'
 	* profile.c (GetSetProfile): Likewise.
 	* wtools.c (fg_input_dialog_help): Likewise.
