@@ -1,3 +1,7 @@
+2000-01-03  Fatih Demir <kabalak@gmx.net>
+
+	* configure.in: Added tr -> ALL_LINGUAS .
+
 1999-12-28  Matthias Warkus  <mawa@iname.com>
 
 	* new_icons/*.png: Added a bunch of new icons.
