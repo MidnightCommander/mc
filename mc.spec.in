@@ -7,6 +7,7 @@ Summary:   Midnight Commander visual shell
 Name:      mc
 Version:   %ver
 Release:   %rel
+Epoch:     1
 Copyright: GPL
 Group:     Applications/File
 Source0:   ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/mc-%{PACKAGE_VERSION}.tar.gz
@@ -119,6 +120,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/share/pixmaps/mc
 
 %changelog
+* Sun Aug 05 2001 Pavel Roskin <proski@gnu.org>
+- Set epoch.
+
 * Sun Jul 15 2001 Pavel Roskin <proski@gnu.org>
 - Remove /usr/lib/mc/layout.
 
