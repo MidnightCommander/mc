@@ -1,3 +1,8 @@
+2001-08-19  Andras Timar  <timar@gnome.hu>
+
+	* lib/Makefile.am: Added Hungarian hints
+	* lib/mc.hint.hu: by Arpad Biro <biro_arpad@yahoo.com>
+
 2001-08-19  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.lib: Add definition for "bs" for xterm and xterm-color.
