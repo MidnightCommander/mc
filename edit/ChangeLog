@@ -1,3 +1,15 @@
+2002-12-08  Pavel Roskin  <proski@gnu.org>
+
+	* edit.c: Commit the rest of the position saving code.
+	(edit_load_position): New function, load position.
+	(edit_save_position): New function, save position.
+	(edit_init): Take new argument "line".  If it's 0, load position
+	from .mc/filepos.
+	(edit_clean): Save file position to .mc/filepos even if the file
+	is not being saved.
+	* editwidget.c (edit): Don't set the initial line, pass it to
+	edit_init().
+
 2002-12-07  Pavel Roskin  <proski@gnu.org>
 
 	* syntax.c (edit_load_syntax): Reuse more informative error

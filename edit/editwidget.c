@@ -178,7 +178,7 @@ edit (const char *_file, int line)
     } else
 	text = "";
 
-    if (!(wedit = edit_init (NULL, LINES - 2, COLS, _file, text, 0))) {
+    if (!(wedit = edit_init (NULL, LINES - 2, COLS, _file, text, 0, line))) {
 	return 0;
     }
     wedit->macro_i = -1;
@@ -213,8 +213,6 @@ edit (const char *_file, int line)
 	add_widget (edit_dlg, edit_menubar);
 
     add_widget (edit_dlg, edit_bar);
-    edit_move_display (wedit, line - 1);
-    edit_move_to_line (wedit, line - 1);
 
     run_dlg (edit_dlg);
 

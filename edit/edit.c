@@ -404,6 +404,39 @@ edit_open_file (WEdit * edit, const char *filename, const char *text, unsigned l
     return init_dynamic_edit_buffers (edit, filename, text);
 }
 
+/* Restore saved cursor position in the file */
+static void
+edit_load_position (WEdit *edit)
+{
+    char *filename;
+    long line, column;
+
+    if (!edit->filename || !*edit->filename)
+	return;
+
+    filename = vfs_canon (edit->filename);
+    load_file_position (filename, &line, &column);
+    g_free (filename);
+
+    edit_move_to_line (edit, line - 1);
+    edit_move_to_column (edit, column);
+    edit_move_display (edit, line - (edit->num_widget_lines / 2));
+}
+
+/* Save cursor position in the file */
+static void
+edit_save_position (WEdit *edit)
+{
+    char *filename;
+
+    if (!edit->filename || !*edit->filename)
+	return;
+
+    filename = vfs_canon (edit->filename);
+    save_file_position (filename, edit->curs_line + 1, edit->curs_col);
+    g_free (filename);
+}
+
 /* Clean the WEdit stricture except the widget part */
 static inline void
 edit_purge_widget (WEdit *edit)
@@ -416,8 +449,16 @@ edit_purge_widget (WEdit *edit)
 
 #define space_width 1
 
-/* fills in the edit struct. returns 0 on fail. Pass edit as NULL for this */
-WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, const char *text, unsigned long text_size)
+/*
+ * Fill in the edit structure.  Return NULL on failure.  Pass edit as
+ * NULL to allocate a new structure.
+ *
+ * If line is 0, try to restore saved position.  Otherwise put the
+ * cursor on that line and show it in the middle of the screen.
+ */
+WEdit *
+edit_init (WEdit *edit, int lines, int columns, const char *filename,
+	   const char *text, unsigned long text_size, long line)
 {
     int to_free = 0;
     int use_filter = 0;
@@ -429,24 +470,25 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
 	 * current locale
 	 */
 
-	static char option_whole_chars_search_buf [256];
+	static char option_whole_chars_search_buf[256];
 
 	if (option_whole_chars_search_buf != option_whole_chars_search) {
 	    int i;
 	    int len = strlen (option_whole_chars_search);
 
-	    strcpy (option_whole_chars_search_buf, option_whole_chars_search);
+	    strcpy (option_whole_chars_search_buf,
+		    option_whole_chars_search);
 
 	    for (i = 1; i <= sizeof (option_whole_chars_search_buf); i++) {
 		if (islower (i) && !strchr (option_whole_chars_search, i)) {
-		    option_whole_chars_search_buf [len++] = i;
+		    option_whole_chars_search_buf[len++] = i;
 		}
 	    }
 
-	    option_whole_chars_search_buf [len] = 0;
+	    option_whole_chars_search_buf[len] = 0;
 	    option_whole_chars_search = option_whole_chars_search_buf;
 	}
-#endif	/* ENABLE_NLS */
+#endif				/* ENABLE_NLS */
 	edit = g_malloc (sizeof (WEdit));
 	memset (edit, 0, sizeof (WEdit));
 	to_free = 1;
@@ -489,14 +531,13 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
     if (use_filter) {
 	push_action_disabled = 1;
 	if (check_file_access (edit, filename, &(edit->stat1))
-	    || !edit_insert_file (edit, filename))
-	{
+	    || !edit_insert_file (edit, filename)) {
 	    edit_clean (edit);
 	    if (to_free)
 		g_free (edit);
 	    return 0;
 	}
-/* FIXME: this should be an unmodification() function */
+	/* FIXME: this should be an unmodification() function */
 	push_action_disabled = 0;
     }
     edit->modified = 0;
@@ -505,36 +546,53 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
 	int color;
 	edit_get_syntax_color (edit, -1, &color);
     }
+
+    /* load saved cursor position */
+    if ((line == 0) && option_save_position) {
+	edit_load_position (edit);
+    } else {
+	if (line <= 0)
+	    line = 1;
+	edit_move_display (edit, line - 1);
+	edit_move_to_line (edit, line - 1);
+    }
+
     return edit;
 }
 
-/* clear the edit struct, freeing everything in it. returns 1 on success */
-int edit_clean (WEdit * edit)
+/* Clear the edit struct, freeing everything in it.  Return 1 on success */
+int
+edit_clean (WEdit *edit)
 {
-    if (edit) {
-	int j = 0;
-	edit_free_syntax_rules (edit);
-	book_mark_flush (edit, -1);
-	for (; j <= MAXBUFF; j++) {
-	    if (edit->buffers1[j] != NULL)
-		g_free (edit->buffers1[j]);
-	    if (edit->buffers2[j] != NULL)
-		g_free (edit->buffers2[j]);
-	}
+    int j = 0;
 
-	if (edit->undo_stack)
-	    free (edit->undo_stack);
-	if (edit->filename)
-	    free (edit->filename);
+    if (!edit)
+	return 0;
 
-	edit_purge_widget (edit);
+    /* save cursor position */
+    if (option_save_position)
+	edit_save_position (edit);
 
-	/* Free temporary strings used in catstrs() */
-	freestrs();
-
-	return 1;
+    edit_free_syntax_rules (edit);
+    book_mark_flush (edit, -1);
+    for (; j <= MAXBUFF; j++) {
+	if (edit->buffers1[j] != NULL)
+	    g_free (edit->buffers1[j]);
+	if (edit->buffers2[j] != NULL)
+	    g_free (edit->buffers2[j]);
     }
-    return 0;
+
+    if (edit->undo_stack)
+	free (edit->undo_stack);
+    if (edit->filename)
+	free (edit->filename);
+
+    edit_purge_widget (edit);
+
+    /* Free temporary strings used in catstrs() */
+    freestrs ();
+
+    return 1;
 }
 
 
@@ -546,7 +604,7 @@ int edit_renew (WEdit * edit)
     int retval = 1;
 
     edit_clean (edit);
-    if (!edit_init (edit, lines, columns, 0, "", 0))
+    if (!edit_init (edit, lines, columns, 0, "", 0, 0))
 	retval = 0;
     return retval;
 }
@@ -561,7 +619,7 @@ int edit_reload (WEdit * edit, const char *filename, const char *text, unsigned 
     memset (e, 0, sizeof (WEdit));
     e->widget = edit->widget;
     e->macro_i = -1;
-    if (!edit_init (e, lines, columns, filename, text, text_size)) {
+    if (!edit_init (e, lines, columns, filename, text, text_size, 0)) {
 	g_free (e);
 	return 0;
     }

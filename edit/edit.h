@@ -182,7 +182,9 @@ char *edit_get_write_filter (char *writename, const char *filename);
 int edit_save_cmd (WEdit * edit);
 int edit_save_confirm_cmd (WEdit * edit);
 int edit_save_as_cmd (WEdit * edit);
-WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, const char *text, unsigned long text_size);
+WEdit *edit_init (WEdit *edit, int lines, int columns,
+		  const char *filename, const char *text,
+		  unsigned long text_size, long line);
 int edit_clean (WEdit * edit);
 int edit_renew (WEdit * edit);
 int edit_new_cmd (WEdit * edit);
