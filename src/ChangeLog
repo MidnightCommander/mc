@@ -1,3 +1,9 @@
+2003-10-15  Pavel Roskin  <proski@gnu.org>
+
+	* view.c (load_view_file): Use g_try_malloc() because the
+	failure to allcate memory is acceptable here.
+	Reported by Pavel S. Shirshov <pavelsh@mail.ru>
+
 2003-10-14  Pavel Roskin  <proski@gnu.org>
 
 	* tree.c: Remove dead code.

@@ -578,7 +578,7 @@ load_view_file (WView *view, int fd)
 
     /* Make sure view->s.st_size is not truncated when passed to g_malloc */
     if ((gulong) view->s.st_size == view->s.st_size)
-	view->data = (unsigned char *) g_malloc ((gulong) view->s.st_size);
+	view->data = (unsigned char *) g_try_malloc ((gulong) view->s.st_size);
     else
 	view->data = NULL;
 
