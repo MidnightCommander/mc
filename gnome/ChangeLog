@@ -1,3 +1,8 @@
+1998-12-11  Owen Taylor  <otaylor@redhat.com>
+
+	* gdesktop.c (window_button_press): Ehen cancelling editing
+	account for clicks on other GMC windows.
+
 1998-12-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (click_proxy_filter): Doh.  We may get DestroyNotify
@@ -46,6 +51,7 @@
 	* gdesktop-icon.c (desktop_icon_reshape): Set the position and
 	size fields as computed for layout.
 
+>>>>>>> 1.192
 1998-12-11  Owen Taylor  <otaylor@redhat.com>
 
 	* gdesktop.c (editing_started): Grab on the window for the

@@ -693,13 +693,24 @@ static gint
 window_button_press (GtkWidget *widget, GdkEventButton *event, gpointer data)
 {
 	struct desktop_icon_info *dii;
+	GtkWidget *parent;
 
 	dii = data;
 
-	/* We should only get this while editing. But check anyways */
+	/* We should only get this while editing. But check anyways -
+	 * we ignore events in a child of our a event widget
+	 */
+	parent = gtk_get_event_widget ((GdkEvent *)event);
+	if (parent)
+		parent = parent->parent;
 
-	if ((event->window == widget->window) &&
-	    GNOME_ICON_TEXT_ITEM (DESKTOP_ICON (dii->dicon)->text)->editing) {
+	while (parent) {
+		if (widget == parent)
+			return FALSE;
+		parent = parent->parent;
+	}
+	
+	if (GNOME_ICON_TEXT_ITEM (DESKTOP_ICON (dii->dicon)->text)->editing) {
 		gnome_icon_text_item_stop_editing (
 			GNOME_ICON_TEXT_ITEM (
 				DESKTOP_ICON (dii->dicon)->text), TRUE);
