@@ -1,3 +1,8 @@
+2004-11-01  Roland Illig  <roland.illig@gmx.de>
+
+	* utilunix.c (mc_tmpdir): Use putenv(3) instead of setenv(3) if
+	the latter is not available. Needed for Solaris.
+
 2004-10-29  Pavel Tsekov <ptsekov@gmx.net>
 
 	* complete.c (completion_matches): Fix duplicate completion matches

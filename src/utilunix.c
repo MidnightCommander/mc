@@ -292,6 +292,16 @@ tilde_expand (const char *directory)
     return g_strconcat (passwd->pw_dir, PATH_SEP_STR, q, (char *) NULL);
 }
 
+static void
+mc_setenv (const char *name, const char *value, int overwrite_flag)
+{
+#if defined(HAVE_SETENV)
+    setenv (name, value, overwrite_flag);
+#else
+    if (overwrite_flag || getenv (name) == NULL)
+        putenv (g_strconcat (name, "=", value, (char *) NULL));
+#endif
+}
 
 /*
  * Return the directory where mc should keep its temporary files.
@@ -386,7 +396,7 @@ mc_tmpdir (void)
     }
 
     if (!error)
-	setenv ("MC_TMPDIR", tmpdir, 1);
+	mc_setenv ("MC_TMPDIR", tmpdir, 1);
 
     return tmpdir;
 }
