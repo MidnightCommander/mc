@@ -210,7 +210,59 @@ file_entry_color (file_entry *fe)
     return (NORMAL_COLOR);
 }
 
+/* String representations of various file attributes */
+/* name */
+char *
+string_file_name (file_entry *fe, int len)
+{
+	return fe->fname;
+}
+
+/* size */
+char *
+string_file_size (file_entry *fe, int len)
+{
+    static char buffer [BUF_TINY];
+    int i;
+
+#ifdef HAVE_ST_RDEV
+    if (S_ISBLK (fe->buf.st_mode) || S_ISCHR (fe->buf.st_mode))
+        g_snprintf (buffer, sizeof (buffer), "%3d,%3d", 
+		    (int) ((fe->buf.st_rdev >> 8) & 0xff), 
+		    (int) (fe->buf.st_rdev & 0xff));
+    else
+#endif 
+    {   
+        g_snprintf (buffer, sizeof (buffer), "%lu", (unsigned long) fe->buf.st_size);
+        if (len && (i = strlen (buffer)) > len) {
+            if (i - 2 > len) {
+                if (i - 5 > len)
+                    g_snprintf (buffer, sizeof (buffer), "%luG", (unsigned long) ((fe->buf.st_size) >> 30));
+                else
+                    g_snprintf (buffer, sizeof (buffer), "%luM", (unsigned long) ((fe->buf.st_size) >> 20));
+            } else
+                g_snprintf (buffer, sizeof (buffer), "%luK", (unsigned long) ((fe->buf.st_size) >> 10));
+        }
+    }
+    return buffer;
+}
+
+/* bsize */
+char *
+string_file_size_brief (file_entry *fe, int len)
+{
+    static char buffer [BUF_TINY];
+
+    if (S_ISDIR (fe->buf.st_mode)){
+       strcpy (buffer, (strcmp (fe->fname, "..") ? "SUB-DIR" : "UP--DIR"));
+       return buffer;
+    }
+
+    return string_file_size (fe, len);
+}
+
 /* This functions return a string representation of a file entry */
+/* type */
 char *
 string_file_type (file_entry *fe, int len)
 {
@@ -241,146 +293,35 @@ string_file_type (file_entry *fe, int len)
     return buffer;
 }
 
-char *
-string_file_size_brief (file_entry *fe, int len)
-{
-    static char buffer [8];
-
-    if (S_ISDIR (fe->buf.st_mode)){
-       strcpy (buffer, (strcmp (fe->fname, "..") ? "SUB-DIR" : "UP--DIR"));
-       return buffer;
-    }
-
-    return string_file_size (fe, len);
-}
-
-char *
-string_file_permission (file_entry *fe, int len)
-{
-    return string_perm (fe->buf.st_mode);
-}
-
-char *
-string_file_nlinks (file_entry *fe, int len)
-{
-    static char buffer [BUF_TINY];
-
-    g_snprintf (buffer, sizeof (buffer), "%16d", fe->buf.st_nlink);
-    return buffer;
-}
-
-char *
-string_file_size (file_entry *fe, int len)
-{
-    static char buffer [BUF_TINY];
-    int i;
-
-#ifdef HAVE_ST_RDEV
-    if (S_ISBLK (fe->buf.st_mode) || S_ISCHR (fe->buf.st_mode))
-        g_snprintf (buffer, sizeof (buffer), "%3d,%3d", 
-		    (int) ((fe->buf.st_rdev >> 8) & 0xff), 
-		    (int) (fe->buf.st_rdev & 0xff));
-    else
-#endif 
-    {   
-        g_snprintf (buffer, sizeof (buffer), "%lu", (unsigned long) fe->buf.st_size);
-        if (len && (i = strlen (buffer)) > len) {
-            if (i - 2 > len) {
-                if (i - 5 > len)
-                    g_snprintf (buffer, sizeof (buffer), "%luG", (unsigned long) ((fe->buf.st_size) >> 30));
-                else
-                    g_snprintf (buffer, sizeof (buffer), "%luM", (unsigned long) ((fe->buf.st_size) >> 20));
-            } else
-                g_snprintf (buffer, sizeof (buffer), "%luK", (unsigned long) ((fe->buf.st_size) >> 10));
-        }
-    }
-    return buffer;
-}
-
+/* mtime */
 char *
 string_file_mtime (file_entry *fe, int len)
 {
     return file_date (fe->buf.st_mtime);
 }
 
+/* atime */
 char *
 string_file_atime (file_entry *fe, int len)
 {
     return file_date (fe->buf.st_atime);
 }
 
+/* ctime */
 char *
 string_file_ctime (file_entry *fe, int len)
 {
     return file_date (fe->buf.st_ctime);
 }
 
-#ifdef HAVE_GNOME
-/* In GNOME, the CList truncates the names */
+/* perm */
 char *
-string_file_owner (file_entry *fe, int len)
+string_file_permission (file_entry *fe, int len)
 {
-    return get_owner (fe->buf.st_uid);
+    return string_perm (fe->buf.st_mode);
 }
 
-char *
-string_file_group (file_entry *fe, int len)
-{
-    return get_group (fe->buf.st_gid);
-}
-
-char *
-string_file_name (file_entry *fe, int len)
-{
-	return fe->fname;
-}
-#else
-char *
-string_file_owner (file_entry *fe, int len)
-{
-    if (len)
-	return name_trunc (get_owner (fe->buf.st_uid), len);
-    else
-	return get_owner (fe->buf.st_uid);
-}
-
-char *
-string_file_group (file_entry *fe, int len)
-{
-    if (len)
-	return name_trunc (get_group (fe->buf.st_gid), len);
-    else
-	return get_group (fe->buf.st_gid);
-}
-
-char *
-string_file_name (file_entry *fe, int len)
-{
-    if (len)
-        return name_trunc (fe->fname, len);
-    else
-	return fe->fname;
-}
-#endif
-
-char *
-string_space (file_entry *fe, int len)
-{
-    return " ";
-}
-
-char *
-string_dot (file_entry *fe, int len)
-{
-    return ".";
-}
-
-char *
-string_marked (file_entry *fe, int len)
-{
-    return fe->f.marked ? "*" : " ";
-}
-
+/* mode */
 char *
 string_file_perm_octal (file_entry *fe, int len)
 {
@@ -390,15 +331,37 @@ string_file_perm_octal (file_entry *fe, int len)
     return buffer;
 }
 
+/* nlink */
+char *
+string_file_nlinks (file_entry *fe, int len)
+{
+    static char buffer [BUF_TINY];
+
+    g_snprintf (buffer, sizeof (buffer), "%16d", fe->buf.st_nlink);
+    return buffer;
+}
+
+/* inode */
 char *
 string_inode (file_entry *fe, int len)
 {
     static char buffer [10];
 
-    g_snprintf (buffer, sizeof (buffer), "%ld", (long) fe->buf.st_ino);
+    g_snprintf (buffer, sizeof (buffer), "%lu", (unsigned long) fe->buf.st_ino);
     return buffer;
 }
 
+/* nuid */
+char *
+string_file_nuid (file_entry *fe, int len)
+{
+    static char buffer [10];
+
+    g_snprintf (buffer, sizeof (buffer), "%d", fe->buf.st_uid);
+    return buffer;
+}
+
+/* ngid */
 char *
 string_file_ngid (file_entry *fe, int len)
 {
@@ -408,13 +371,39 @@ string_file_ngid (file_entry *fe, int len)
     return buffer;
 }
 
+/* owner */
 char *
-string_file_nuid (file_entry *fe, int len)
+string_file_owner (file_entry *fe, int len)
 {
-    static char buffer [10];
+    return get_owner (fe->buf.st_uid);
+}
 
-    g_snprintf (buffer, sizeof (buffer), "%d", fe->buf.st_uid);
-    return buffer;
+/* group */
+char *
+string_file_group (file_entry *fe, int len)
+{
+    return get_group (fe->buf.st_gid);
+}
+
+/* mark */
+char *
+string_marked (file_entry *fe, int len)
+{
+    return fe->f.marked ? "*" : " ";
+}
+
+/* space */
+char *
+string_space (file_entry *fe, int len)
+{
+    return " ";
+}
+
+/* dot */
+char *
+string_dot (file_entry *fe, int len)
+{
+    return ".";
 }
 
 #ifdef HAVE_GNOME
@@ -433,53 +422,60 @@ static struct {
     char *(*string_fn)(file_entry *, int);
     sortfn *sort_routine;
 } formats [] = {
-{ "name",  12, 1, J_LEFT,  N_("Name"),       1, string_file_name,       (sortfn *) sort_name },
-{ "size",  7,  0, J_RIGHT, N_("Size"),       1, string_file_size,       (sortfn *) sort_size },
-{ "type",  GT, 0, J_LEFT,     "",            1, string_file_type,       (sortfn *) sort_type },
-{ "mtime", 12, 0, J_RIGHT, N_("MTime"),      1, string_file_mtime,      (sortfn *) sort_time },
-{ "bsize", 7,  0, J_RIGHT, N_("Size"),       1, string_file_size_brief, (sortfn *) sort_size },
-{ "perm",  10, 0, J_LEFT,  N_("Permission"), 1, string_file_permission, NULL },
-{ "mode",  6,  0, J_RIGHT, N_("Perm"),       1, string_file_perm_octal, NULL },
-{ "|",     1,  0, J_RIGHT, N_("|"),          0, 0,                      NULL },
-{ "nlink", 2,  0, J_RIGHT, N_("Nl"),         1, string_file_nlinks,     (sortfn *) sort_links },
-{ "ngid",  5,  0, J_RIGHT, N_("GID"),        1, string_file_ngid,       (sortfn *) sort_ngid },
-{ "nuid",  5,  0, J_RIGHT, N_("UID"),        1, string_file_nuid,       (sortfn *) sort_nuid },
-{ "owner", 8,  0, J_LEFT,  N_("Owner"),      1, string_file_owner,      (sortfn *) sort_owner },
-{ "group", 8,  0, J_LEFT,  N_("Group"),      1, string_file_group,      (sortfn *) sort_group },
-{ "atime", 12, 0, J_RIGHT, N_("ATime"),      1, string_file_atime,      (sortfn *) sort_atime },
-{ "ctime", 12, 0, J_RIGHT, N_("CTime"),      1, string_file_ctime,      (sortfn *) sort_ctime },
-{ "space", 1,  0, J_RIGHT,    " ",          0, string_space,           NULL },
-{ "dot",   1,  0, J_RIGHT,    " ",          0, string_dot,             NULL },
-{ "mark",  1,  0, J_RIGHT,    " ",          1, string_marked,          NULL },
-{ "inode", 5,  0, J_RIGHT, N_("Inode"),      1, string_inode,           (sortfn *) sort_inode },
+{ "name",  12, 1, J_LEFT_FIT,	N_("Name"),	1, string_file_name,	   (sortfn *) sort_name },
+{ "size",  7,  0, J_RIGHT,	N_("Size"),	1, string_file_size,	   (sortfn *) sort_size },
+{ "bsize", 7,  0, J_RIGHT,	N_("Size"),	1, string_file_size_brief, (sortfn *) sort_size },
+{ "type",  GT, 0, J_LEFT,	"",		1, string_file_type,	   (sortfn *) sort_type },
+{ "mtime", 12, 0, J_RIGHT,	N_("MTime"),	1, string_file_mtime,	   (sortfn *) sort_time },
+{ "atime", 12, 0, J_RIGHT,	N_("ATime"),	1, string_file_atime,	   (sortfn *) sort_atime },
+{ "ctime", 12, 0, J_RIGHT,	N_("CTime"),	1, string_file_ctime,	   (sortfn *) sort_ctime },
+{ "perm",  10, 0, J_LEFT,	N_("Permission"),1,string_file_permission, NULL },
+{ "mode",  6,  0, J_RIGHT,	N_("Perm"),	1, string_file_perm_octal, NULL },
+{ "nlink", 2,  0, J_RIGHT,	N_("Nl"),	1, string_file_nlinks,	   (sortfn *) sort_links },
+{ "inode", 5,  0, J_RIGHT,	N_("Inode"),	1, string_inode,	   (sortfn *) sort_inode },
+{ "nuid",  5,  0, J_RIGHT,	N_("UID"),	1, string_file_nuid,	   (sortfn *) sort_nuid },
+{ "ngid",  5,  0, J_RIGHT,	N_("GID"),	1, string_file_ngid,	   (sortfn *) sort_ngid },
+{ "owner", 8,  0, J_LEFT_FIT,	N_("Owner"),	1, string_file_owner,	   (sortfn *) sort_owner },
+{ "group", 8,  0, J_LEFT_FIT,	N_("Group"),	1, string_file_group,	   (sortfn *) sort_group },
+{ "mark",  1,  0, J_RIGHT,	" ",		1, string_marked,	   NULL },
+{ "|",     1,  0, J_RIGHT,	" ",		0, NULL,		   NULL },
+{ "space", 1,  0, J_RIGHT,	" ",		0, string_space,	   NULL },
+{ "dot",   1,  0, J_RIGHT,	" ",		0, string_dot,		   NULL },
 };
 
 static char *
 to_buffer (char *dest, int just_mode, int len, char *txt)
 {
     int txtlen = strlen (txt);
-    int still;
+    int still, over;
+    
+    memset (dest, ' ', len);
 
-    if (txtlen > len){
-	if (just_mode != J_LEFT)
-	    txt += txtlen - len;
-	txtlen = len;
-    }
-    still = len - txtlen;
-    if (just_mode == J_LEFT){
-	strncpy (dest, txt, txtlen);
-	dest += txtlen;
-	while (still--)
-	    *dest++ = ' ';
-	*dest = 0;
-    } else {
-	while (still--)
-	    *dest++ = ' ';
-	strncpy (dest, txt, len);
-	dest += txtlen;
-	*dest = 0;
-    }
-    return dest;
+    still = (over=(txtlen > len)) ? (txtlen - len) : (len - txtlen);
+    
+    switch (HIDE_FIT(just_mode)){
+        case J_LEFT:
+	    still = 0;
+	    break;
+	case J_CENTER:
+	    still /= 2;
+	    break;
+	case J_RIGHT:
+	default:
+	    break;
+    }    
+
+    if (over){
+	if (IS_FIT(just_mode))
+	    strcpy (dest, name_trunc(txt, len));
+	else
+	    strncpy (dest, txt+still, len);
+    } else 
+	strncpy (dest+still, txt, txtlen);
+    
+    dest[len] = NULL;
+    
+    return (dest + len);
 }
 
 int
@@ -548,10 +544,6 @@ format_file (char *dest, WPanel *panel, int file_index, int width, int attr, int
 	    if (length == width)
 		    break;
 #else
-            /* What shall we do? Will we color each line according to
-	     * the file type? Any suggestions to mc@timur.kazan.su
-	     */
-	    
             attrset (color);
  
             if (permission_mode && !strcmp(format->id, "perm"))
@@ -563,7 +555,6 @@ format_file (char *dest, WPanel *panel, int file_index, int width, int attr, int
 #endif
 	} else {
 #ifndef HAVE_X
-            /* I'm preffer the view without this 3 lines, try to kill it :-) */
             if (attr == SELECTED || attr == MARKED_SELECTED)
                 attrset (SELECTED_COLOR);
             else
@@ -594,7 +585,7 @@ repaint_file (WPanel *panel, int file_index, int mv, int attr, int isstatus)
 {
     int    second_column = 0;
     int	   width, offset;
-    char   buffer [255];
+    char   buffer [BUF_MEDIUM];
 
     offset = 0;
     if (!isstatus && panel->split){

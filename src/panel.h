@@ -30,10 +30,18 @@ enum panel_display_enum {
     frame_half			/* half screen frame */
 };
 
-#define is_view_special(x) ((x == view_info) || (x == view_quick))
+#define is_view_special(x) (((x) == view_info) || ((x) == view_quick))
 
-#define J_LEFT  0
-#define J_RIGHT 1
+#define J_LEFT 		1
+#define J_RIGHT		2
+#define J_CENTER	3
+
+#define IS_FIT(x)	((x) & 0x0004)
+#define HIDE_FIT(x)	((x) & 0x0003)
+
+#define J_LEFT_FIT	5
+#define J_RIGHT_FIT	6
+#define J_CENTER_FIT	7
 
 #define NORMAL		0
 #define SELECTED	1

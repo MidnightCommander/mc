@@ -1,3 +1,14 @@
+Mon Feb  1 00:43:15 1999  Timur Bakeyev <mc@bat.ru>
+
+	* screen.c (to_buffer): Code of the function rewritten, as a side
+	effect added J_CENTER (who needs this?). Also, justification flags
+	got twins with _FIT suffix, which tries to fit name in the field with-
+	out truncation (uses name_trunc()). This unifies behaviour of CList
+	variants and text-bases widgets.
+	
+	* screen.c: Remove HAVE_GNOME wrappers around string_file_[name|owner|
+	group]() - not necessary, to_buffer() doing this work.
+
 Sun Jan 31 19:49:00 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* hotlist.c (add_new_entry_input, add_new_group_input): Make the
