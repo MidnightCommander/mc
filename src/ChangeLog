@@ -1,3 +1,9 @@
+2003-01-22  Adam Byrtek  <alpha@debian.org>
+
+	* cmd.c (view_other_cmd): Update path in the xterm title after
+	command execution.
+	* main.c (do_execute): Likewise.
+
 2003-01-22  Pavel Roskin  <proski@gnu.org>
 
 	* util.c (size_trunc): Remove "b" from the output - it's

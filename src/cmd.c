@@ -1046,6 +1046,7 @@ view_other_cmd (void)
         touchwin (stdscr);
 	
 	repaint_screen ();
+	update_xterm_title_path ();
     }
 }
 

@@ -570,6 +570,7 @@ do_execute (const char *shell, const char *command, int flags)
 #endif				/* USE_VFS */
 
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+    update_xterm_title_path ();
 
     do_refresh ();
     use_dash (TRUE);
