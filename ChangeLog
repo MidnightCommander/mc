@@ -1,7 +1,7 @@
 2000-06-08  Matthias Warkus  <mawa@iname.com>
 
 	* new_icons/gnome-pack-*.png: Updated.
-	* gnome/gnome.mime: Added a MIME type for SLP packages.
+	* gnome/mc.keys: Added a MIME type for SLP packages.
 
 2000-05-30  Pavel Roskin  <pavel_roskin@geociiities.com>
 
