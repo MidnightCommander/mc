@@ -29,7 +29,15 @@ if test ! -d config; then
 fi
 
 # Ensure that gettext is reasonably new.
-gettext_ver=`$GETTEXTIZE --version | sed -n '1s/\.//g;1s/.* //;1s/^\(...\)$/\100/;1s/^\(...\)\(.\)$/\10\2/;1p'`
+gettext_ver=`$GETTEXTIZE --version | \
+  sed '2,$d;			# remove all but the first line
+       s/.* //;			# take text after the last space
+       s/-.*//;			# strip "-pre" or "-rc" at the end
+       s/\([^.]\+\)/0\1/g;	# prepend 0 to every token
+       s/0\([^.][^.]\)/\1/g;	# trim 0 from long lokens
+       s/\.//g;			# remove dots
+       '`
+
 if test $gettext_ver -lt 01038; then
   echo "Don't use gettext older than 0.10.38" 2>&1
   exit 1
@@ -41,9 +49,9 @@ if test $gettext_ver -ge 01100; then
     echo "Upgrade gettext to at least 0.11.5 or downgrade to 0.10.40" 2>&1
     exit 1
   fi
-  $AUTOPOINT
+  $AUTOPOINT || exit 1
 else
-  $GETTEXTIZE --copy --force
+  $GETTEXTIZE --copy --force || exit 1
   if test -e po/ChangeLog~; then
     rm -f po/ChangeLog
     mv po/ChangeLog~ po/ChangeLog
