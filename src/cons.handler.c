@@ -417,17 +417,13 @@ set_attr (unsigned attr)
      * to indices for ANSI sequences (red=1, green=2, blue=4).
      */
     static const int color_map[8] = { 0, 4, 2, 6, 1, 5, 3, 7 };
-    char cmd[17];
     int bc, tc;
 
     tc = attr & 0xF;
     bc = (attr >> 4) & 0xF;
 
-    strcpy (cmd, "\x1B[");
-    strcat (cmd, (bc & 8) ? "5;" : "25;");
-    strcat (cmd, (tc & 8) ? "1;" : "22;");
-    strcat (cmd, "3%d;4%dm");
-    printf (cmd, color_map[tc & 7], color_map[bc & 7]);
+    printf ("\x1B[%d;%d;3%d;4%dm", (bc & 8) ? 5 : 25, (tc & 8) ? 1 : 22,
+	    color_map[tc & 7], color_map[bc & 7]
 }
 
 #define cursor_to(x, y) do {				\
