@@ -2044,6 +2044,8 @@ panel_tree_check_auto_expand (WPanel *panel, GtkCTreeNode *current)
 	 * so that the "current" stays the same place on the
 	 * screen
 	 */
+#if 0
+	/* This behaviour is confusing --jrb and quartic (and MS, apparently)*/
 	if (tmp_list) {
 		if (current) {
 			row = g_list_position (clist->row_list, (GList *)current);
@@ -2074,6 +2076,7 @@ panel_tree_check_auto_expand (WPanel *panel, GtkCTreeNode *current)
 		free_list->prev = NULL;
 		g_list_free (free_list);
 	}
+#endif
 }
 
 /**
@@ -2132,7 +2135,10 @@ panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *ctx, int x, int y, gu
 		panel_tree_check_auto_expand (panel, current);
 	} else
 		panel_tree_check_auto_expand (panel, NULL);
-		
+	GTK_DTREE (widget)->internal = TRUE;
+	gtk_clist_select_row (GTK_CLIST (widget), row, 0);
+	GTK_DTREE (widget)->internal = FALSE;
+	
 	panel->timer_id = gtk_timeout_add (400, tree_drag_open_directory, data);
 	return TRUE;
 }

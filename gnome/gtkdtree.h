@@ -50,7 +50,6 @@ guint      gtk_dtree_get_type           (void);
 GtkWidget *gtk_dtree_new                (void);
 void       gtk_dtree_select_parent      (GtkDTree *dtree,
 					 char *directory);
-void       gtk_dtree_select_child       (GtkDTree *dtree);
 void       gtk_dtree_remove_dir_by_name (GtkDTree *dtree,
 					 char *directory);
 gboolean   gtk_dtree_select_dir         (GtkDTree *dtree,

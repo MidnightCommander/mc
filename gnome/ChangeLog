@@ -1,5 +1,13 @@
 1999-03-19  Jonathan Blandford  <jrb@redhat.com>
 
+	* gscreen.c (panel_tree_drag_motion): Dragging now automatically
+	highlights the tree.  God does it flicker... )-:
+
+	* gtkdtree.h (gtk_dtree_construct): removed unused prototype.
+
+	* gscreen.c (panel_tree_check_auto_expand): removed the
+	auto-collapse of trees, as it is confusing to the user.
+
 	* gcustom-layout.c (custom_layout_set): We don't want to let the
 	user remove all of the settings.
 
