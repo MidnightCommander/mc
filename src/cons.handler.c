@@ -52,7 +52,6 @@
 signed char console_flag = 0;
 
 #ifdef __linux__
-#include "main.h"
 
 /* The cons saver can't have a pid of 1, used to prevent bunches of
  * #ifdef linux */
