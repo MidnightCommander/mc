@@ -16,12 +16,6 @@ struct vfs_stamping {
     struct timeval time;
 };
 
-/*
- * Notice: Andrej Borsenkow <borsenkow.msk@sni.de> reports system
- * (RelianUNIX), where it is bad idea to define struct vfs. That system
- * has include called <sys/vfs.h>, which contains things like vfs_t.
- */
-
 /* Flags of VFS classes */
 #define VFSF_LOCAL 1		/* Class is local (not virtual) filesystem */
 #define VFSF_NOLINKS 2		/* Hard links not supported */
