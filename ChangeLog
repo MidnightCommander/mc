@@ -1,3 +1,7 @@
+2000-08-22  Pavel Roskin  <proski@gnu.org>
+
+	* *.c, *.h: Updated address of Free Software Foundation
+
 2000-08-21  Pavel Roskin  <proski@gnu.org>
 
 	* Make.common.in, acconfig.h, configure.in, mc-aclocal.m4,
