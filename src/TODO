@@ -1,9 +1,6 @@
 Before 4.6.1
 ============
 
-Regression - revert and review last changes to edit/syntax.c.  Shell
-variables are not highlighted.
-
 Regression - restore tilde expansion, but do it properly this time.
 
 Cannot spell check unsaved files in the editor.
