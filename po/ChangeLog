@@ -1,3 +1,7 @@
+2000-04-18  Fatih Demir	<kabalak@gmx.net>
+
+	* tr.po : A little bit more strings & no crashes any more ..
+
 2000-04-17  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* cs.po: patch from rebel@penguin.cz: make shortcuts more like in
