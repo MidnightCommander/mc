@@ -838,28 +838,22 @@ perm_group_new (GnomeFilePropertyDialog *fp_dlg)
 			if (grp->gr_name)
 				fp_dlg->group_name = g_strdup (grp->gr_name);
 			else {
-				sprintf (grpnum, "%d", (int) grp->gr_gid);
-				fp_dlg->group_name = g_strdup (grpnum);
+				fp_dlg->group_name = g_strdup_printf ("%d", (int) grp->gr_gid);
 			}
 		} else {
-			sprintf (grpnum, "%d", (int) fp_dlg->st.st_gid);
-			fp_dlg->group_name = g_strdup (grpnum);
+			fp_dlg->group_name = g_strdup_printf ("%d", (int) fp_dlg->st.st_gid);
 		}
 
 		/* we change this, b/c we are able to set the egid, if we aren't in the group already */
 		grp = getgrgid (getegid());
 		if (grp) {
 			if (grp->gr_name)
-				grpname = grp->gr_name;
-			else {
-				sprintf (grpnum, "%d", (int) grp->gr_gid);
-				grpname = grpnum;
-			}
-		} else {
-			sprintf (grpnum, "%d", (int) fp_dlg->st.st_gid);
-			grpname = grpnum;
-		}
-			
+				grpname = g_strdup (grp->gr_name);
+			else
+				grpname = g_strdup_printf ("%d", (int) grp->gr_gid);
+		} else
+			grpname = g_strdup_printf ("%d", (int) fp_dlg->st.st_gid);
+
 		if (fp_dlg->euid != 0)
 			gtk_editable_set_editable (GTK_EDITABLE (GTK_COMBO (gentry)->entry), FALSE);
 		for (setgrent (); (grp = getgrent ()) != NULL;) {
@@ -902,6 +896,7 @@ perm_group_new (GnomeFilePropertyDialog *fp_dlg)
 		grp = getgrgid (fp_dlg->st.st_gid);
 		gtk_entry_set_text (GTK_ENTRY (gentry), grp->gr_name);
 	}
+	g_free (grpname);
 	return gentry;
 }
 

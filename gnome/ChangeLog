@@ -1,3 +1,10 @@
+1999-07-13  Miguel de Icaza  <miguel@gnu.org>
+
+	* gnome-file-property-dialog.c (perm_group_new): the return values
+	from the group functions in libc return pointers to static buffers
+	in the library.  Duplicate all return values and free them at the
+	end. 
+
 1999-07-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (icon_drag_data_received): Use desktop directory here
