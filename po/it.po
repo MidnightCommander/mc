@@ -87,7 +87,7 @@ msgstr " Tasti emacs: "
 
 #: edit/edit_key_translator.c:147 edit/edit_key_translator.c:172
 msgid " Execute Macro "
-msgstr " Esegui macro "
+msgstr " Esegue macro "
 
 #: edit/edit_key_translator.c:147 edit/edit_key_translator.c:172
 #: edit/editcmd.c:637
@@ -219,7 +219,7 @@ msgstr " Elimina Macro "
 #. This heads the 'Load Macro' dialog box
 #: edit/editcmd.c:683
 msgid " Load macro "
-msgstr " Esegui macro "
+msgstr " Carica macro "
 
 #: edit/editcmd.c:696
 msgid " Confirm save file? : "
@@ -353,7 +353,7 @@ msgstr " Errore nella sostituzione della stringa. "
 #: edit/editcmd.c:1805
 #, c-format
 msgid " %ld replacements made. "
-msgstr " eseguite %ld sostituzioni. "
+msgstr " Eseguite %ld sostituzioni. "
 
 #: edit/editcmd.c:1807 edit/editcmd.c:1885 edit/editcmd.c:1913
 msgid " Search string not found. "
@@ -644,7 +644,7 @@ msgstr "&Blocca registrazione macro...  C-r"
 
 #: edit/editmenu.c:210
 msgid "&Execute macro...   C-a, KEY"
-msgstr "&Esegui macro...         C-a, TASTO"
+msgstr "&Esegue macro...         C-a, TASTO"
 
 #: edit/editmenu.c:211 edit/editmenu.c:234
 msgid "delete macr&O...            "
@@ -676,7 +676,7 @@ msgstr "&Posta..."
 
 #: edit/editmenu.c:233
 msgid "&Execute macro... C-x e, KEY"
-msgstr "&Esegui macro... C-x e, TASTO"
+msgstr "&Esegue macro... C-x e, TASTO"
 
 #: edit/editmenu.c:239
 msgid "'ispell' s&Pell check    M-$"
@@ -1129,7 +1129,7 @@ msgstr "Impossibile tradurre da %s a %s"
 
 #: src/chmod.c:88
 msgid "execute/search by others"
-msgstr "esegui/cerca (altri)"
+msgstr "esegue/cerca (altri)"
 
 #: src/chmod.c:89
 msgid "write by others"
@@ -1141,7 +1141,7 @@ msgstr "lettura (altri)"
 
 #: src/chmod.c:91
 msgid "execute/search by group"
-msgstr "esegui/cerca (gruppo)"
+msgstr "esegue/cerca (gruppo)"
 
 #: src/chmod.c:92
 msgid "write by group"
@@ -1153,7 +1153,7 @@ msgstr "lettura (gruppo)"
 
 #: src/chmod.c:94
 msgid "execute/search by owner"
-msgstr "esegui/cerca (propriet.)"
+msgstr "esegue/cerca (propriet.)"
 
 #: src/chmod.c:95
 msgid "write by owner"
@@ -2259,7 +2259,7 @@ msgstr "preserva &Attributi"
 #. &op_preserve
 #: src/filegui.c:765
 msgid "follow &Links"
-msgstr "Segui i &Link"
+msgstr "Segue i &Link"
 
 #. &file_mask_op_follow_links
 #: src/filegui.c:767
@@ -3403,7 +3403,7 @@ msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
-"Non posso aprire il terminale.  Devi eseguire mc senza l'opzione -P\n"
+"Non posso aprire il terminale.  E' necessario eseguire mc senza l'opzione -P\n"
 "Su alcuni sistemi, basta eseguire `which mc`\n"
 
 #: src/main.c:2539
@@ -3559,7 +3559,7 @@ msgstr " Oops... "
 
 #: src/panelize.c:285
 msgid " I can't run external panelize while logged on a non local directory "
-msgstr " Posso eseguire il visualizzatore esterno solo su una directory locale"
+msgstr " E' possibile eseguire il visualizzatore esterno solo su una directory locale "
 
 #: src/panelize.c:334
 msgid "Find rejects after patching"

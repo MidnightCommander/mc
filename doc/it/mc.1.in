@@ -904,14 +904,14 @@ se l'opzione, "Usa Editor interno" è stata impostata.
 .PP
 .B Copia (F5)
 .PP
-Pop up an input dialog with destination that defaults to the directory
-in the non-selected panel and copies the currently selected file (or
-the tagged files, if there is at least one file tagged) to the
-directory specified by the user in the input dialog. During this
-process, you can press C-c or ESC to abort the operation. For details
-about source mask (which will be usually either * or ^\\(.*\\)$ depending
-on setting of Use shell patterns) and possible wildcards in the destination
-see 
+Mostra una finestra di dialogo con destinazione predefinita alla
+directory del pannello non selezionato, che copia il file selezionato (o
+i file marcati, se c'e n'è almeno uno) sulla directory specificata dall'utente
+nella finestra di dialogo. Durante questo processo è possibile
+premere C-c o ESC per abortire l'operazione. Per i dettagli
+sulla maschera sorgente (che sarà normalmente * o ^\\(.*\\)$ a seconda
+dell'impostazione di 'pattern della shell') o sui caratteri jolly sulla destinazione
+vedere
 .\"LINK2"
 Mask copy/rename.
 .\"Mask Copy/Rename"
