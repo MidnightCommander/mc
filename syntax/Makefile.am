@@ -7,6 +7,7 @@ syntax_DATA =			\
 	c.syntax		\
 	changelog.syntax	\
 	diff.syntax		\
+	dos.syntax		\
 	fortran.syntax		\
 	html.syntax		\
 	java.syntax		\

@@ -1,0 +1,70 @@
+# DOS & Windows highlighting
+# 2002 (C) Petr Kozelka, <pkozelka@email.cz>
+
+context default
+	keyword whole call yellow/24
+	keyword whole CALL yellow/24
+	keyword whole copy yellow/24
+	keyword whole COPY yellow/24
+	keyword whole del yellow/24
+	keyword whole DEL yellow/24
+	keyword whole dir yellow/24
+	keyword whole DIR yellow/24
+	keyword whole echo yellow/24
+	keyword whole ECHO yellow/24
+	keyword whole else yellow/24
+	keyword whole ELSE yellow/24
+	keyword whole endlocal yellow/24
+	keyword whole ENDLOCAL yellow/24
+	keyword whole exist yellow/24
+	keyword whole EXIST yellow/24
+	keyword whole goto yellow/24
+	keyword whole GOTO yellow/24
+	keyword whole if yellow/24
+	keyword whole IF yellow/24
+	keyword whole not yellow/24
+	keyword whole NOT yellow/24
+	keyword whole off yellow/24
+	keyword whole OFF yellow/24
+	keyword whole on yellow/24
+	keyword whole ON yellow/24
+	keyword whole pause yellow/24
+	keyword whole PAUSE yellow/24
+	keyword wholeleft rem\s*\n brown/22
+	keyword wholeleft REM\s*\n brown/22
+	keyword whole set yellow/24
+	keyword whole SET yellow/24
+	keyword whole setlocal yellow/24
+	keyword whole SETLOCAL yellow/24
+	keyword whole then yellow/24
+	keyword whole THEN yellow/24
+	keyword whole type yellow/24
+	keyword whole TYPE yellow/24
+
+	keyword \\ lightgray/12
+	keyword whole \%\* brightmagenta/13
+	keyword whole \%\$ brightmagenta/13
+	keyword whole \%\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\]+\% brightmagenta/13
+	keyword whole \%\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789@~\]+ brightmagenta/13
+	keyword >> white/12
+	keyword > white/12
+	keyword < white/12
+	keyword | white/12
+
+context ' ' brightcyan/22
+	spellcheck
+
+context " " brightcyan/22
+	keyword whole \%\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\]+\% brightmagenta/13
+	keyword whole \%\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789@~\]+ brightmagenta/13
+	spellcheck
+
+context linestart :: \n brightgreen/3
+	keyword $+:*$ black/13 green/13
+	spellcheck
+
+context linestart : \n white/5 black/2
+	spellcheck
+
+context :: \n brightgreen/22
+	spellcheck

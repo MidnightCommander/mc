@@ -96,6 +96,9 @@ include changelog.syntax
 file .\*[Mm]akefile[\\\.a-z]\*$ Makefile
 include makefile.syntax
 
+file ..\*\\.(bat|cmd) $ DOS\sBatch
+include dos.syntax
+
 file ..\*\\.(po|pot|pox)$ PO\sFile
 include po.syntax
 

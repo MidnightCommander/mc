@@ -1,3 +1,10 @@
+2002-06-24  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/dos.syntax: New file - highlighting for DOS batch
+	files.  From Petr Kozelka <pkozelka@centrum.cz>
+	* syntax/Syntax: Add dos.syntax.
+	* syntax/Makefile.am: Likewise.
+
 2002-06-04  Max Schedriviy  <max@humgat.org>
 
 	* syntax/php.syntax: New version.
@@ -190,7 +197,7 @@
 
 2002-01-11  Pavel Roskin  <proski@gnu.org>
 
-	* syntax/xml.syntax: New file - hightlighting for XML.
+	* syntax/xml.syntax: New file - highlighting for XML.
 	From Petr Kozelka <pkozelka@centrum.cz>
 	* syntax/Syntax: Add xml.syntax.
 	* syntax/Makefile.am: Likewise.
