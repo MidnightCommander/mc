@@ -3,8 +3,6 @@
 #ifndef __VFSDUMMY_H
 #define __VFSDYMMY_H
 
-#undef USE_NETCODE
-
 /* Flags of VFS classes */
 #define VFSF_LOCAL 1		/* Class is local (not virtual) filesystem */
 #define VFSF_NOLINKS 2		/* Hard links not supported */
