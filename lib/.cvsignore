@@ -1,4 +1,5 @@
 Makefile
+Makefile.in
 mc.ext
 mc-gnome.ext
 mc.csh
