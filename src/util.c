@@ -313,6 +313,38 @@ char *size_trunc_sep (double size)
     return d;
 }
 
+/*
+ * Print file SIZE to BUFFER, but don't exceed LEN characters,
+ * not including trailing 0. BUFFER should be at least LEN+1 long.
+ * This function is called for every file on panels, so avoid
+ * floating point by any means.
+ */
+void
+size_trunc_len (char *buffer, int len, off_t size)
+{
+    /* Avoid taking power for every file.  */
+    static const off_t power10 [] =
+	{1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000,
+	 1000000000};
+    static const char *suffix [] =
+	{"", "K", "M", "G", "T", "P", "E", "Z", "Y", NULL};
+    int j = 0;
+
+    /* Don't print more than 9 digits - use suffix.  */
+    if (len == 0 || len > 9)
+	len = 9;
+
+    for (j = 0; suffix [j] != NULL; j++) {
+	if (size < power10 [len - (j > 0)]) {
+	    g_snprintf (buffer, len + 1, "%lu%s", (unsigned long) size, suffix[j]);
+	    break;
+	}
+
+	/* Powers of 1024, no rounding.  */
+	size = size >> 10;
+    }
+}
+
 int is_exe (mode_t mode)
 {
     if ((S_IXUSR & mode) || (S_IXGRP & mode) || (S_IXOTH & mode))

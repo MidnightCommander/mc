@@ -1,3 +1,10 @@
+2001-06-28  Pavel Roskin  <proski@gnu.org>
+
+	* util.c (size_trunc_len): New function - print file size to
+	a buffer of limited length.
+	* util.h: Declare size_trunc_len().
+	* screen.c (string_file_size): Use size_trunc_len().
+
 2001-06-26  Pavel Roskin  <proski@gnu.org>
 
 	* xslint.c: Remove.

@@ -197,7 +197,6 @@ char *
 string_file_size (file_entry *fe, int len)
 {
     static char buffer [BUF_TINY];
-    int i;
 
 #ifdef HAVE_ST_RDEV
     if (S_ISBLK (fe->buf.st_mode) || S_ISCHR (fe->buf.st_mode))
@@ -207,16 +206,7 @@ string_file_size (file_entry *fe, int len)
     else
 #endif
     {
-        g_snprintf (buffer, sizeof (buffer), "%lu", (unsigned long) fe->buf.st_size);
-        if (len && (i = strlen (buffer)) > len) {
-            if (i - 2 > len) {
-                if (i - 5 > len)
-                    g_snprintf (buffer, sizeof (buffer), "%luG", (unsigned long) ((fe->buf.st_size) >> 30));
-                else
-                    g_snprintf (buffer, sizeof (buffer), "%luM", (unsigned long) ((fe->buf.st_size) >> 20));
-            } else
-                g_snprintf (buffer, sizeof (buffer), "%luK", (unsigned long) ((fe->buf.st_size) >> 10));
-        }
+	size_trunc_len (buffer, len, fe->buf.st_size);
     }
     return buffer;
 }
