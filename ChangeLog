@@ -1,5 +1,8 @@
 2002-09-26  Pavel Roskin  <proski@gnu.org>
 
+	* syntax/c.syntax: Require at least one space at the beginning
+	of indented cpp directives.  Use brightmagenta for them.
+
 	* syntax/syntax.syntax: Don't start keywords with "\[" - it
 	doesn't work.  Use "\[\]" at the end of keywords to suppress
 	their special meaning.
