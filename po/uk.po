@@ -613,11 +613,11 @@ msgid ""
 msgstr ""
 "%s\n"
 "\n"
-"Каталог не порожн╕й. Видалити його рекурсивно?"
+"Каталог не порожн╕й. Стерти його рекурсивно?"
 
 #: gnome/gdialogs.c:790 src/file.c:2244
 msgid " Delete: "
-msgstr " Видалити: "
+msgstr " Стерти: "
 
 #: gnome/gdialogs.c:794
 msgid "Do the same for the rest"
@@ -787,11 +787,11 @@ msgstr "Коп╕ювати файли"
 
 #: gnome/glayout.c:390 gnome/gscreen.c:2086
 msgid "_Delete..."
-msgstr "_Видалити..."
+msgstr "_Стерти..."
 
 #: gnome/glayout.c:390
 msgid "Delete files"
-msgstr "Видалити файли"
+msgstr "Стерти файли"
 
 #: gnome/glayout.c:391 gnome/gscreen.c:2087
 msgid "_Move..."
@@ -875,20 +875,20 @@ msgstr ""
 
 #: gnome/glayout.c:429
 msgid "_Find File..."
-msgstr ""
+msgstr "Шукати файл..."
 
 #: gnome/glayout.c:429
 msgid "Locate files on disk"
-msgstr ""
+msgstr "Знайти файли на диску"
 
 #. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
 #: gnome/glayout.c:432
 msgid "_Edit mime types..."
-msgstr ""
+msgstr "Редагувати MIME-типи..."
 
 #: gnome/glayout.c:432
 msgid "Edits the MIME type bindings"
-msgstr ""
+msgstr "Редагувати прив'язки до MIME-тип╕в"
 
 #: gnome/glayout.c:434
 msgid "_Run Command..."
@@ -1280,11 +1280,11 @@ msgstr "Коп╕ювання..."
 #: gnome/gpopup2.c:208 gtkedit/editwidget.c:1100 src/screen.c:2402
 #: src/screen.c:2432
 msgid "Delete"
-msgstr "Видалити"
+msgstr "Стерти"
 
 #: gnome/gpopup2.c:209
 msgid "Move..."
-msgstr "Перенесення..."
+msgstr "Перенести..."
 
 #: gnome/gpopup2.c:210
 msgid "Hard Link..."
@@ -1384,11 +1384,11 @@ msgstr ""
 
 #: gnome/gprefs.c:474
 msgid "Preferences"
-msgstr ""
+msgstr "Установки"
 
 #: gnome/gprop.c:58 gnome/gprop.c:75
 msgid "Filename"
-msgstr ""
+msgstr "Назва файлу"
 
 #: gnome/gprop.c:67
 msgid "Full name: "
@@ -1428,7 +1428,7 @@ msgstr ""
 
 #: gnome/gscreen.c:1415
 msgid "Reloads the current directory"
-msgstr ""
+msgstr "Перезавантажу╓ поточний каталог"
 
 #: gnome/gscreen.c:1417
 msgid "New _Directory..."
@@ -1467,11 +1467,11 @@ msgstr ""
 
 #: gnome/gscreen.c:2085
 msgid "Copy directory"
-msgstr ""
+msgstr "Скоп╕ювати каталог"
 
 #: gnome/gscreen.c:2086
 msgid "Delete directory"
-msgstr "Видалити каталог"
+msgstr "Стерти каталог"
 
 #: gnome/gscreen.c:2087
 msgid "Rename or move directory"
@@ -1556,11 +1556,11 @@ msgstr "Перескочити на вказаний рядок"
 
 #: gnome/gview.c:309
 msgid "_Monitor file"
-msgstr ""
+msgstr "Мон╕торинг файлу"
 
 #: gnome/gview.c:309
 msgid "Monitor file growing"
-msgstr ""
+msgstr "Мон╕торинг зб╕льшення файлу"
 
 #: gnome/gview.c:316
 msgid "Regexp search"
@@ -1641,11 +1641,11 @@ msgstr "КАТАЛОГ"
 
 #: gnome/gmc-client.c:173
 msgid "Rescan the specified directory"
-msgstr ""
+msgstr "Пересканувати вказаний каталог"
 
 #: gnome/gmc-client.c:175
 msgid "Rescan the desktop icons"
-msgstr ""
+msgstr "Пересканувати п╕ктограми на робочому стол╕"
 
 #: gnome/gmc-client.c:177
 msgid "Rescan the desktop device icons"
@@ -1674,7 +1674,7 @@ msgstr ""
 
 #: gtkedit/edit.c:248
 msgid " Not an ordinary file: "
-msgstr ""
+msgstr " Незвичайний файл: "
 
 #: gtkedit/edit.c:254
 msgid " File is too large: "
@@ -1765,7 +1765,7 @@ msgstr " Помилка на спроб╕ зберегти файл. "
 #. This heads the delete macro error dialog box
 #: gtkedit/editcmd.c:653 gtkedit/editcmd.c:661 gtkedit/editcmd.c:686
 msgid " Delete macro "
-msgstr " Видалити макрос "
+msgstr " Стерти макрос "
 
 #. 'Open' = load temp file
 #: gtkedit/editcmd.c:655
@@ -1804,7 +1804,7 @@ msgstr " Зберегти макрос "
 
 #: gtkedit/editcmd.c:734 gtkedit/editcmd.c:741
 msgid " Delete Macro "
-msgstr " Видалити макрос "
+msgstr " Стерти макрос "
 
 #. This heads the 'Load Macro' dialog box
 #: gtkedit/editcmd.c:791
@@ -2106,7 +2106,7 @@ msgstr " &Н╕ "
 
 #: gtkedit/editcmd.c:2524 gtkedit/editcmd.c:2599
 msgid " Copy to clipboard "
-msgstr ""
+msgstr " Коп╕ювання у буфер обм╕ну "
 
 #: gtkedit/editcmd.c:2524 gtkedit/editcmd.c:2546 gtkedit/editcmd.c:2599
 #: gtkedit/editcmd.c:2612
@@ -2115,7 +2115,7 @@ msgstr ""
 
 #: gtkedit/editcmd.c:2546 gtkedit/editcmd.c:2612
 msgid " Cut to clipboard "
-msgstr ""
+msgstr " Вир╕зання у буфер обм╕ну "
 
 #: gtkedit/editcmd.c:2634 gtkedit/editcmd.c:2638 gtkedit/editcmd.c:2643
 #: gtkedit/editcmd.c:2646 src/view.c:1913
@@ -2129,15 +2129,15 @@ msgstr " Введ╕ть номер рядка: "
 
 #: gtkedit/editcmd.c:2667 gtkedit/editcmd.c:2680
 msgid " Save Block "
-msgstr ""
+msgstr " Збереження блоку "
 
 #: gtkedit/editcmd.c:2717
 msgid " Insert File "
-msgstr ""
+msgstr " Вставляння файлу "
 
 #: gtkedit/editcmd.c:2730
 msgid " Insert file "
-msgstr ""
+msgstr " Вставити файл "
 
 #: gtkedit/editcmd.c:2730
 msgid " Error trying to insert file. "
@@ -2299,7 +2299,7 @@ msgstr "Пере&нести         F6"
 
 #: gtkedit/editmenu.c:162 gtkedit/editmenu.c:179
 msgid "&Delete            F8"
-msgstr "&Видалити          F8"
+msgstr "&Стерти            F8"
 
 #: gtkedit/editmenu.c:164 gtkedit/editmenu.c:181
 msgid "&Undo             C-u"
@@ -2478,27 +2478,27 @@ msgstr ""
 
 #: gtkedit/editmenu.c:423
 msgid "Copy block to cursor\tF5"
-msgstr ""
+msgstr "Скоп╕ювати блок\tF5"
 
 #: gtkedit/editmenu.c:424
 msgid "Move block to cursor\tF6"
-msgstr ""
+msgstr "Перенести блок\tF6"
 
 #: gtkedit/editmenu.c:425
 msgid "Delete block\tF8/C-Del"
-msgstr "Видалити блок\tF8/C-Del"
+msgstr "Стерти блок\tF8/C-Del"
 
 #: gtkedit/editmenu.c:427
 msgid "Copy block to clipbrd\tC-Ins"
-msgstr ""
+msgstr "Скоп╕ювати блок у буфер обм╕ну\tC-Ins"
 
 #: gtkedit/editmenu.c:428
 msgid "Cut block to clipbrd\tS-Del"
-msgstr ""
+msgstr "Вир╕зати блок у буфер обм╕ну\tS-Del"
 
 #: gtkedit/editmenu.c:429
 msgid "Paste block from clipbrd\tS-Ins"
-msgstr ""
+msgstr "Вставити блок з буферу обм╕ну\tS-Ins"
 
 #: gtkedit/editmenu.c:430
 msgid "Selection history\tM-Ins"
@@ -2536,7 +2536,7 @@ msgstr "Зам╕нити знову\tF14"
 #. Tool hint
 #: gtkedit/editmenu.c:447
 msgid "Search for and replace text"
-msgstr ""
+msgstr "Знайти та зам╕нити текст"
 
 #: gtkedit/editmenu.c:453
 msgid "Goto line...\tM-l"
@@ -2548,7 +2548,7 @@ msgstr "Розпочати запис макросу\tC-r"
 
 #: gtkedit/editmenu.c:456
 msgid "Finish record macro...\tC-r"
-msgstr "авершити запис макросу...\tC-r"
+msgstr "Завершити запис макросу...\tC-r"
 
 #: gtkedit/editmenu.c:457
 msgid "Execute macro...\tC-a, KEY"
@@ -2577,15 +2577,15 @@ msgstr "Макроси та внутр╕шн╕ команди"
 
 #: gtkedit/editoptions.c:36
 msgid "Intuitive"
-msgstr ""
+msgstr "╤нту╕тивна"
 
 #: gtkedit/editoptions.c:36
 msgid "Emacs"
-msgstr ""
+msgstr "Emacs"
 
 #: gtkedit/editoptions.c:39
 msgid "None"
-msgstr ""
+msgstr "Нема╓"
 
 #: gtkedit/editoptions.c:39
 msgid "Dynamic paragraphing"
@@ -2642,7 +2642,7 @@ msgstr ""
 #. 15
 #: gtkedit/editoptions.c:118
 msgid "Key emulation"
-msgstr ""
+msgstr "Емуляц╕я клав╕ш"
 
 #: gtkedit/editoptions.c:159
 msgid " Editor options "
@@ -2657,7 +2657,7 @@ msgstr "Помилка ╕н╕ц╕ал╕зац╕╖ редактора.\n"
 #: src/main.c:1719 src/screen.c:2395 src/screen.c:2425 src/tree.c:1008
 #: src/view.c:2068
 msgid "Help"
-msgstr "Допомога"
+msgstr "Дов╕дка"
 
 #: gtkedit/editwidget.c:1095 gtkedit/gtkedit.c:1248
 msgid "Mark"
@@ -2902,11 +2902,11 @@ msgstr ""
 
 #: src/background.c:181
 msgid "Background process:"
-msgstr ""
+msgstr "Процес на тл╕:"
 
 #: src/background.c:287 src/file.c:2189
 msgid " Background process error "
-msgstr ""
+msgstr " Помилка процесу на тл╕ "
 
 #: src/background.c:294
 msgid " Child died unexpectedly "
@@ -3770,7 +3770,7 @@ msgstr ""
 
 #: src/file.c:803
 msgid "&Delete"
-msgstr "&Видалити"
+msgstr "&Стерти"
 
 #: src/file.c:803 src/hotlist.c:1443
 msgid "&Keep"
@@ -3878,7 +3878,7 @@ msgid ""
 " Cannot delete file \"%s\" \n"
 " %s "
 msgstr ""
-" Неможливо видалити файл \"%s\" \n"
+" Неможливо стерти файл \"%s\" \n"
 " %s "
 
 #: src/file.c:1418 src/file.c:1488 src/file.c:1520
@@ -3887,7 +3887,7 @@ msgid ""
 " Cannot remove directory \"%s\" \n"
 " %s "
 msgstr ""
-" Неможливо видалити каталог \"%s\" \n"
+" Неможливо стерти каталог \"%s\" \n"
 " %s "
 
 #: src/file.c:1559
@@ -3913,7 +3913,7 @@ msgstr "1Перенести"
 
 #: src/file.c:1680
 msgid "1Delete"
-msgstr "1Видалити"
+msgstr "1Стерти"
 
 #: src/file.c:1695
 #, c-format
@@ -3992,11 +3992,11 @@ msgstr ""
 
 #: src/file.c:2190
 msgid "&Retry"
-msgstr ""
+msgstr "&Повторити"
 
 #: src/file.c:2190 src/file.c:2251 src/filegui.c:264 src/filegui.c:592
 msgid "&Abort"
-msgstr ""
+msgstr "&Перервати"
 
 #: src/file.c:2242
 msgid ""
@@ -4006,7 +4006,7 @@ msgid ""
 msgstr ""
 "\n"
 "   Каталог не порожн╕й.   \n"
-"   Видалити його рекурсивно? "
+"   Стерти його рекурсивно? "
 
 #: src/file.c:2243
 msgid ""
@@ -4016,11 +4016,11 @@ msgid ""
 msgstr ""
 "\n"
 "   Процес на тл╕: Каталог не порожн╕й \n"
-"   Видалити його рекурсивно? "
+"   Стерти його рекурсивно? "
 
 #: src/file.c:2250
 msgid "a&ll"
-msgstr ""
+msgstr "&вс╕"
 
 #: src/file.c:2250 src/filegui.c:595
 msgid "non&E"
@@ -4032,15 +4032,15 @@ msgstr ""
 
 #: src/file.c:2262
 msgid "all the directories "
-msgstr ""
+msgstr "вс╕ каталоги "
 
 #: src/file.c:2264
 msgid " Recursive Delete "
-msgstr " Рекурсивне видалення "
+msgstr " Рекурсивне стирання "
 
 #: src/file.c:2265
 msgid " Background process: Recursive Delete "
-msgstr " Процес на тл╕: рекурсивне видалення "
+msgstr " Процес на тл╕: рекурсивне стирання "
 
 #: src/filegui.c:424
 msgid "File"
@@ -4111,7 +4111,7 @@ msgstr ""
 
 #: src/filegui.c:693
 msgid " Background process: File exists "
-msgstr ""
+msgstr " Процес на тл╕: Файл ╕сну╓ "
 
 #. follow symlinks and preserve Attributes must be the first
 #: src/filegui.c:805
@@ -4166,11 +4166,11 @@ msgstr ""
 
 #: src/find.c:133
 msgid "&Again"
-msgstr ""
+msgstr "&Знову"
 
 #: src/find.c:134
 msgid "&Quit"
-msgstr ""
+msgstr "&Вийти"
 
 #: src/find.c:135 src/panelize.c:89
 msgid "Pane&lize"
@@ -4182,7 +4182,7 @@ msgstr "&Переглянути - F3"
 
 #: src/find.c:137
 msgid "&Edit - F4"
-msgstr ""
+msgstr "&Редагувати - F4"
 
 #: src/find.c:170
 msgid "Start at:"
@@ -4190,7 +4190,7 @@ msgstr ""
 
 #: src/find.c:170
 msgid "Filename:"
-msgstr ""
+msgstr "Назва файлу:"
 
 #: src/find.c:170
 msgid "Content: "
@@ -4878,7 +4878,7 @@ msgstr "&Створити калог                    F7"
 
 #: src/main.c:1304
 msgid "&Delete             F8"
-msgstr "&Видалити                          F8"
+msgstr "&Стерти                            F8"
 
 #: src/main.c:1305
 msgid "&Quick cd          M-c"
@@ -5455,7 +5455,7 @@ msgstr ""
 #: src/tree.c:744
 #, c-format
 msgid "  Delete %s?  "
-msgstr "  Видалити %s?  "
+msgstr "  Стерти %s?  "
 
 #: src/tree.c:776
 msgid "Static"
