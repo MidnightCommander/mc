@@ -512,9 +512,6 @@ mc_opendir (char *dirname)
     return (DIR *) handlep;
 }
 
-/* This should strip the non needed part of a path name */
-#define vfs_name(x) x
-
 void
 mc_seekdir (DIR *dirp, int offset)
 {
@@ -573,7 +570,7 @@ int mc_stat (const char *filename, struct stat *buf) {
     int result;
     char *path;
     path = vfs_canon (filename); vfs = vfs_type (path);
-    result = vfs->stat ? (*vfs->stat) (vfs, vfs_name (path), buf) : -1;
+    result = vfs->stat ? (*vfs->stat) (vfs, path, buf) : -1;
     g_free (path);
     if (result == -1)
 	errno = vfs->name ? ferrno (vfs) : E_NOTSUPP;
@@ -585,7 +582,7 @@ int mc_lstat (const char *filename, struct stat *buf) {
     int result;
     char *path;
     path = vfs_canon (filename); vfs = vfs_type (path);
-    result = vfs->lstat ? (*vfs->lstat) (vfs, vfs_name (path), buf) : -1;
+    result = vfs->lstat ? (*vfs->lstat) (vfs, path, buf) : -1;
     g_free (path);
     if (result == -1)
 	errno = vfs->name ? ferrno (vfs) : E_NOTSUPP;
@@ -645,12 +642,12 @@ mc_get_current_wd (char *buffer, int size)
     return buffer;
 }
 
-MC_NAMEOP (chmod, (char *path, int mode), (vfs, vfs_name (path), mode))
-MC_NAMEOP (chown, (char *path, int owner, int group), (vfs, vfs_name (path), owner, group))
-MC_NAMEOP (utime, (char *path, struct utimbuf *times), (vfs, vfs_name (path), times))
-MC_NAMEOP (readlink, (char *path, char *buf, int bufsiz), (vfs, vfs_name (path), buf, bufsiz))
-MC_NAMEOP (unlink, (char *path), (vfs, vfs_name (path)))
-MC_NAMEOP (symlink, (char *name1, char *path), (vfs, vfs_name (name1), vfs_name (path)))
+MC_NAMEOP (chmod, (char *path, int mode), (vfs, path, mode))
+MC_NAMEOP (chown, (char *path, int owner, int group), (vfs, path, owner, group))
+MC_NAMEOP (utime, (char *path, struct utimbuf *times), (vfs, path, times))
+MC_NAMEOP (readlink, (char *path, char *buf, int bufsiz), (vfs, path, buf, bufsiz))
+MC_NAMEOP (unlink, (char *path), (vfs, path))
+MC_NAMEOP (symlink, (char *name1, char *path), (vfs, name1, path))
 
 #define MC_RENAMEOP(name) \
 int mc_##name (const char *fname1, const char *fname2) \
@@ -668,7 +665,7 @@ int mc_##name (const char *fname1, const char *fname2) \
 	return -1; \
     } \
 \
-    result = vfs->name ? (*vfs->name)(vfs, vfs_name (name1), vfs_name (name2)) : -1; \
+    result = vfs->name ? (*vfs->name)(vfs, name1, name2) : -1; \
     g_free (name1); \
     g_free (name2); \
     if (result == -1) \
@@ -879,7 +876,10 @@ vfs_add_current_stamps (void)
     }
 }
 
-/* This function is really broken */
+/*
+ * VFS chdir.
+ * Return 0 on success, -1 on failure.
+ */
 int
 mc_chdir (char *path)
 {
@@ -890,29 +890,31 @@ mc_chdir (char *path)
     vfsid oldvfsid;
     struct vfs_stamping *parent;
 
-    a = current_dir; /* Save a copy for case of failure */
+    a = current_dir;		/* Save a copy for case of failure */
     current_dir = vfs_canon (path);
     current_vfs = vfs_type (current_dir);
     b = g_strdup (current_dir);
-    result = (*current_vfs->chdir) ?  (*current_vfs->chdir)(current_vfs, vfs_name (b)) : -1;
+    result =
+	(*current_vfs->chdir) ? (*current_vfs->chdir) (current_vfs,
+						       b) : -1;
     g_free (b);
-    if (result == -1){
+    if (result == -1) {
 	errno = ferrno (current_vfs);
-    	g_free (current_dir);
-    	current_vfs = vfs_type (a);
-    	current_dir = a;
+	g_free (current_dir);
+	current_vfs = vfs_type (a);
+	current_dir = a;
     } else {
-        oldvfs = vfs_type (a);
+	oldvfs = vfs_type (a);
 	oldvfsid = vfs_ncs_getid (oldvfs, a, &parent);
 	g_free (a);
-        vfs_add_noncurrent_stamps (oldvfs, oldvfsid, parent);
+	vfs_add_noncurrent_stamps (oldvfs, oldvfsid, parent);
 	vfs_rm_parents (parent);
     }
 
-    if (*current_dir){
+    if (*current_dir) {
 	p = strchr (current_dir, 0) - 1;
 	if (*p == PATH_SEP && p > current_dir)
-	    *p = 0; /* Sometimes we assume no trailing slash on cwd */
+	    *p = 0;		/* Sometimes we assume no trailing slash on cwd */
     }
     return result;
 }
@@ -979,9 +981,9 @@ static void vfs_setup_wd (void)
         vfs_die ("Current dir too long.\n");
 }
 
-MC_NAMEOP (mkdir, (char *path, mode_t mode), (vfs, vfs_name (path), mode))
-MC_NAMEOP (rmdir, (char *path), (vfs, vfs_name (path)))
-MC_NAMEOP (mknod, (char *path, int mode, int dev), (vfs, vfs_name (path), mode, dev))
+MC_NAMEOP (mkdir, (char *path, mode_t mode), (vfs, path, mode))
+MC_NAMEOP (rmdir, (char *path), (vfs, path))
+MC_NAMEOP (mknod, (char *path, int mode, int dev), (vfs, path, mode, dev))
 
 #ifdef HAVE_MMAP
 static struct mc_mmapping {
@@ -1098,8 +1100,8 @@ mc_getlocalcopy (const char *pathname)
     char *path = vfs_canon (pathname);
     vfs  *vfs  = vfs_type (path);    
 
-    result = vfs->getlocalcopy ? (*vfs->getlocalcopy)(vfs, vfs_name (path)) :
-                                 mc_def_getlocalcopy (vfs, vfs_name (path));
+    result = vfs->getlocalcopy ? (*vfs->getlocalcopy)(vfs, path) :
+                                 mc_def_getlocalcopy (vfs, path);
     g_free (path);
     if (!result)
 	errno = ferrno (vfs);
@@ -1157,8 +1159,8 @@ mc_ungetlocalcopy (const char *pathname, char *local, int has_changed)
     vfs *vfs = vfs_type (path);
 
     return_value = vfs->ungetlocalcopy ? 
-            (*vfs->ungetlocalcopy)(vfs, vfs_name (path), local, has_changed) :
-            mc_def_ungetlocalcopy (vfs, vfs_name (path), local, has_changed);
+            (*vfs->ungetlocalcopy)(vfs, path, local, has_changed) :
+            mc_def_ungetlocalcopy (vfs, path, local, has_changed);
     g_free (path);
     return return_value;
 }

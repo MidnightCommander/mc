@@ -1,9 +1,13 @@
+2002-12-24  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.c (vfs_name): Eliminate - it's unused and wrong.
+
 2002-12-24  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-	* extfs/mailfs.in: Quote filename when openning mailbox.
+	* extfs/mailfs.in: Quote filename when opening mailbox.
 
 2002-12-24  Adam Byrtek  <alpha@debian.org>
- 
+
 	* extfs/apt.in, extfs/dpkg.in: Avoid stat on non-existing file.
 
 2002-12-20  Andrew V. Samoilov  <sav@bcs.zp.ua>
