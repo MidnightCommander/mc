@@ -1,5 +1,7 @@
 2001-09-09  Pavel Roskin  <proski@gnu.org>
 
+	* NEWS: Update.
+
 	* configure.in: Remove a hack for Unixware.  AC_FUNC_GETMNTENT
 	checks -lgen for getmntent as of Autoconf 2.52.
 
