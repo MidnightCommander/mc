@@ -838,10 +838,9 @@ do_try_to_select (WPanel *panel, char *name)
 	return;
     }
 
-    /* We only want the last component of the directory */
-    subdir = x_basename (name);
-
-    subdir = vfs_strip_suffix_from_filename (subdir);
+    /* We only want the last component of the directory,
+     * and from this only the name without suffix. */
+    subdir = vfs_strip_suffix_from_filename (x_basename(name));
 
     /* Search that subdirectory, if found select it */
     for (i = 0; i < panel->count; i++){
