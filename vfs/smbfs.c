@@ -856,11 +856,13 @@ smbfs_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
 }
 
 static int
-smbfs_readlink (struct vfs_class *me, const char *path, char *buf, int size)
+smbfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
 {
-	DEBUG(3, ("smbfs_readlink(path:%s, buf:%s, size:%d)\n", path, buf, size));
+	DEBUG (3,
+	    ("smbfs_readlink(path:%s, buf:%s, size:%d)\n", path, buf,
+	    (int) size));
 	my_errno = EOPNOTSUPP;
-    return -1;	/* no symlinks on smb filesystem? */
+    return -1;                 /* no symlinks on smb filesystem? */
 }
 
 static int

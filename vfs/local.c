@@ -147,7 +147,7 @@ local_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
 }
 
 static int
-local_readlink (struct vfs_class *me, const char *path, char *buf, int size)
+local_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
 {
     return readlink (path, buf, size);
 }

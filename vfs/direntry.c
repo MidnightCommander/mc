@@ -672,9 +672,10 @@ vfs_s_fstat (void *fh, struct stat *buf)
 }
 
 static int
-vfs_s_readlink (struct vfs_class *me, const char *path, char *buf, int size)
+vfs_s_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
 {
     struct vfs_s_inode *ino;
+    size_t len;
 
     ino = vfs_s_inode_from_path (me, path, 0);
     if (!ino)
@@ -686,8 +687,12 @@ vfs_s_readlink (struct vfs_class *me, const char *path, char *buf, int size)
     if (ino->linkname == NULL)
 	ERRNOR (EFAULT, -1);
 
-    g_strlcpy (buf, ino->linkname, size);
-    return strlen (buf);
+    len = strlen (buf);
+    if (size < len)
+       len = size;
+    /* readlink() does not append a NUL character to buf */
+    memcpy (buf, ino->linkname, len);
+    return len;
 }
 
 static void *

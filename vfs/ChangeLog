@@ -1,3 +1,17 @@
+2004-09-02  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+        * tar.c (tar_read_header): Fix missed *.
+        * extfs.c (extfs_readlink): Revert last change: readlink does not
+        append a NUL character to buf.
+        * ftpfs.c: Warning fix.
+        * vfs-impl.h (struct vfs_class.readlink): Make "size" size_t.
+        Adjust all callers.
+	* local.c (local_readlink): Make "size" size_t.
+	* direntry.c (vfs_s_readlink): Revert last changes. Make "size" 
+	size_t.
+	* sfs.c (sfs_readlink): Reformat function.
+	* smbfs.c (smbfs_readlink): Reformat function.	
+
 2004-09-02  Roland Illig  <roland.illig@gmx.de>
 
 	* mcfs.c (mcfs_readlink): Fixed syntax error (usage of

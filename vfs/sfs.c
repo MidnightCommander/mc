@@ -235,7 +235,8 @@ static int sfs_utime (struct vfs_class *me, const char *path, struct utimbuf *ti
     return utime (path, times);
 }
 
-static int sfs_readlink (struct vfs_class *me, const char *path, char *buf, int size)
+static int
+sfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
 {
     path = sfs_redirect (me, path);
     return readlink (path, buf, size);
