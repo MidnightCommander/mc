@@ -3111,7 +3111,7 @@ msgstr "Отключить поддержку встроенной командной оболочки"
 
 #: src/main.c:2220
 msgid "Force subshell execution"
-msgstr "Принудетельное исполнение во встроенной командной оболочке"
+msgstr "Принудительное исполнение во встроенной командной оболочке"
 
 #: src/main.c:2223
 msgid "Prints working directory at program exit"
