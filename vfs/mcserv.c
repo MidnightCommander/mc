@@ -80,12 +80,19 @@
 #        define PAM_ESTABLISH_CRED PAM_CRED_ESTABLISH
 #    endif
 #else
+#endif				/* !HAVE_PAM */
+
 #ifdef HAVE_CRYPT_H
 #    include <crypt.h>
-#else
-extern char *crypt (const char *, const char *);
 #endif				/* !HAVE_CRYPT_H */
-#endif				/* !HAVE_PAM */
+
+#ifdef HAVE_SHADOW_H
+#    include <shadow.h>
+#else
+#    ifdef HAVE_SHADOW_SHADOW_H
+#        include <shadow/shadow.h>
+#    endif
+#endif
 
 #include "utilvfs.h"
 
@@ -881,20 +888,33 @@ do_ftp_auth (char *username, char *password)
 static int
 do_classic_auth (char *username, char *password)
 {
-    struct passwd *this;
-    int ret;
+    int ret = 0;
+    char *encr_pwd = NULL;
+    struct passwd *pw;
+#ifdef HAVE_SHADOW
+    struct spwd *spw;
+#endif
 
-    if ((this = getpwnam (username)) == 0)
+    if ((pw = getpwnam (username)) == 0)
 	return 0;
 
-#ifdef HAVE_CRYPT
-    if (strcmp (crypt (password, this->pw_passwd), this->pw_passwd) == 0) {
-	ret = 1;
-    } else
+#ifdef HAVE_SHADOW
+    setspent ();
+
+    /* Password expiration is not checked! */
+    if ((spw = getspnam (username)) == NULL)
+	encr_pwd = "*";
+    else
+	encr_pwd = spw->sp_pwdp;
+
+    endspent ();
+#else
+    encr_pwd = pw->pw_passwd;
 #endif
-    {
-	ret = 0;
-    }
+
+    if (strcmp (crypt (password, encr_pwd), encr_pwd) == 0)
+	ret = 1;
+
     endpwent ();
     return ret;
 }
@@ -924,9 +944,12 @@ do_auth (char *username, char *password)
 	auth = 1;
     else
 #endif
+#ifdef HAVE_CRYPT
     if (do_classic_auth (username, password))
 	auth = 1;
-    else if (ftp)
+    else
+#endif
+    if (ftp)
 	auth = do_ftp_auth (username, password);
 #endif				/* not pam */
 

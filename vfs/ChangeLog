@@ -1,5 +1,10 @@
 2002-11-16  Pavel Roskin  <proski@gnu.org>
 
+	* mcserv.c (do_classic_auth): Restore support for shadow
+	passwords.  Use crypt() instead of pw_encrypt() - the later is
+	missing on Slackware 8.0.  Reported by
+	Christian Laubscher <christian.laubscher@tiscalinet.ch>
+
 	* Makefile.am: Consolidate mcserv libraries into MCSERVLIBS.
 
 2002-11-15  Pavel Roskin  <proski@gnu.org>
