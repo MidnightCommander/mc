@@ -74,6 +74,19 @@ scrollbar_moved (GtkAdjustment *adj, WView *view)
 			view_move_forward (view, 1);
 	}
 
+	/* Update the ajd->value */
+	gtk_signal_handler_block_by_func (
+		GTK_OBJECT (view->sadj),
+		GTK_SIGNAL_FUNC (scrollbar_moved),
+		view);
+
+	gtk_adjustment_set_value (adj, view->start_display);
+	
+	gtk_signal_handler_unblock_by_func (
+		GTK_OBJECT (view->sadj),
+		GTK_SIGNAL_FUNC (scrollbar_moved),
+		view);
+	
 	/* To force a display */
 	view->dirty = max_dirt_limit + 1;
 	view_update (view, 0);

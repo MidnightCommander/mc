@@ -339,9 +339,12 @@ int add_widgetl (Dlg_head *where, void *what, WLay layout)
 int remove_widget (Dlg_head *h, void *what)
 {
     Widget_Item *first, *p;
+
+    if (!h->current)
+	    return;
     
     first = p = h->current;
-    
+
     do {
 	if (p->widget == what){
 	    /* Remove links to this Widget_Item */
@@ -422,6 +425,9 @@ void dlg_broadcast_msg (Dlg_head *h, int message, int reverse)
 
 int dlg_focus (Dlg_head *h)
 {
+    if (!h->current)
+        return 0;
+    
     if (send_message (h, h->current->widget, WIDGET_FOCUS, 0)){
 	(*h->callback) (h, h->current->dlg_id, DLG_FOCUS);
 	return 1;
@@ -431,6 +437,9 @@ int dlg_focus (Dlg_head *h)
 
 int dlg_unfocus (Dlg_head *h)
 {
+    if (!h->current)
+        return 0;
+    
     if (send_message (h, h->current->widget, WIDGET_UNFOCUS, 0)){
 	(*h->callback) (h, h->current->dlg_id, DLG_UNFOCUS);
 	return 1;
@@ -442,6 +451,9 @@ static void select_a_widget (Dlg_head *h, int down)
 {
     int direction = h->direction;
 
+    if (!h->current)
+       return;
+    
     if (!down)
 	direction = !direction;
     
@@ -476,6 +488,8 @@ Widget *find_widget_type (Dlg_head *h, callback_fn signature)
 
     if (!h)
 	return 0;
+    if (!h->current)
+	return 0;
     
     w = 0;
     for (i = 0, item = h->current; i < h->count; i++, item = item->next){
@@ -492,6 +506,10 @@ void dlg_one_up (Dlg_head *h)
     Widget_Item *old;
 
     old = h->current;
+
+    if (!old)
+        return;
+    
     /* If it accepts unFOCUSion */
     if (!dlg_unfocus(h))
 	return;
@@ -508,6 +526,9 @@ void dlg_one_down (Dlg_head *h)
     Widget_Item *old;
 
     old = h->current;
+    if (!old)
+        return;
+		
     if (!dlg_unfocus (h))
 	return;
 
@@ -520,6 +541,9 @@ void dlg_one_down (Dlg_head *h)
 
 int dlg_select_widget (Dlg_head *h, void *w)
 {
+    if (!h->current)
+       return 0;
+	       
     if (dlg_unfocus (h)){
 	while (h->current->widget != w)
 	    h->current = h->current->next;
@@ -536,6 +560,9 @@ int send_message_to (Dlg_head *h, Widget *w, int msg, int par)
     Widget_Item *p = h->current;
     int v, i;
 
+    if (!h->current)
+        return 0;
+    
     v = 0;
     for (i = 0; i < h->count; i++){
 	if (w == (void *) p->widget){
@@ -654,6 +681,9 @@ static int dlg_try_hotkey (Dlg_head *h, int d_key)
     Widget_Item *hot_cur;
     Widget_Item *previous;
     int    handled, c;
+
+    if (!h->current)
+        return 0;
     
     /*
      * Explanation: we don't send letter hotkeys to other widgets if
@@ -714,6 +744,9 @@ static int dlg_try_hotkey (Dlg_head *h, int d_key)
 int dlg_key_event (Dlg_head *h, int d_key)
 {
     int handled;
+
+    if (!h->current)
+        return 0;
     
     /* TAB used to cycle */
     if (!h->raw && (d_key == '\t' || d_key == KEY_BTAB))
@@ -835,8 +868,15 @@ void dlg_run_done (Dlg_head *h)
 {
     (*h->callback) (h, h->current->dlg_id, DLG_END);
     current_dlg = (Dlg_head *) h->previous_dialog;
-    if (current_dlg)
-	    x_focus_widget (current_dlg->current);
+    if (current_dlg){
+
+	    /*
+	     * Special case for the GNOME desktop:
+	     * The desktop will not have any widgets
+	     */
+	    if (current_dlg->current)
+		    x_focus_widget (current_dlg->current);
+    }
 }
 
 void dlg_process_event (Dlg_head *h, int key, Gpm_Event *event)
@@ -917,8 +957,10 @@ destroy_dlg (Dlg_head *h)
 	if (c->widget->destroy)
 	    c->widget->destroy (c->widget);
 	c = c->next;
-	g_free (h->current->widget);
-	g_free (h->current);
+	if (h->current){
+	    g_free (h->current->widget);
+	    g_free (h->current);
+	}
 	h->current = c;
     }
     if (h->title)
@@ -950,6 +992,9 @@ void dlg_replace_widget (Dlg_head *h, Widget *old, Widget *new)
 {
     Widget_Item *p = h->current;
     int should_focus = 0;
+
+    if (!h->current)
+        return;
     
     do {
 	if (p->widget == old){
@@ -982,6 +1027,9 @@ void widget_redraw (Dlg_head *h, Widget_Item *w)
 {
     Widget_Item *save = h->current;
 
+    if (!h->current)
+        return;
+    
     h->current = w;
     (*w->widget->callback)(h, h->current->widget, WIDGET_DRAW, 0);
     h->current = save;

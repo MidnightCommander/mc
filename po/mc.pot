@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-03-11 19:23-0500\n"
+"POT-Creation-Date: 1999-03-12 20:02-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr ""
 msgid "The GNOME edition of the Midnight Commander file manager."
 msgstr ""
 
-#: gnome/gcmd.c:127 src/main.c:844 src/screen.c:2050
+#: gnome/gcmd.c:127 src/main.c:844 src/screen.c:2053
 msgid " The Midnight Commander "
 msgstr ""
 
@@ -57,14 +57,14 @@ msgstr ""
 
 #: gnome/gcmd.c:129 gtkedit/editcmd.c:2248 src/cmd.c:251 src/file.c:1860
 #: src/file.c:2232 src/filegui.c:602 src/hotlist.c:1035 src/main.c:846
-#: src/screen.c:2052 src/subshell.c:706 src/subshell.c:732 src/tree.c:755
+#: src/screen.c:2055 src/subshell.c:706 src/subshell.c:732 src/tree.c:755
 #: src/view.c:404
 msgid "&Yes"
 msgstr ""
 
 #: gnome/gcmd.c:129 gtkedit/editcmd.c:2248 src/cmd.c:251 src/file.c:1860
 #: src/file.c:2232 src/filegui.c:601 src/hotlist.c:1035 src/main.c:846
-#: src/screen.c:2052 src/subshell.c:706 src/subshell.c:732 src/tree.c:755
+#: src/screen.c:2055 src/subshell.c:706 src/subshell.c:732 src/tree.c:755
 #: src/view.c:404
 msgid "&No"
 msgstr ""
@@ -181,7 +181,7 @@ msgstr ""
 msgid "Enter extra arguments:"
 msgstr ""
 
-#: gnome/gdesktop.c:420 gnome/gdesktop.c:2071
+#: gnome/gdesktop.c:420 gnome/gdesktop.c:2072
 msgid "Warning"
 msgstr ""
 
@@ -203,45 +203,45 @@ msgid "Error"
 msgstr ""
 
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop.c:2067
+#: gnome/gdesktop.c:2068
 msgid "Home directory"
 msgstr ""
 
-#: gnome/gdesktop.c:2072
+#: gnome/gdesktop.c:2073
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial desktop icons."
 msgstr ""
 
-#: gnome/gdesktop.c:2401 gnome/glayout.c:355
+#: gnome/gdesktop.c:2402 gnome/glayout.c:355
 msgid "_Terminal"
 msgstr ""
 
-#: gnome/gdesktop.c:2401 gnome/glayout.c:355
+#: gnome/gdesktop.c:2402 gnome/glayout.c:355
 msgid "Launch a new terminal in the current directory"
 msgstr ""
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2403 gnome/glayout.c:357
+#: gnome/gdesktop.c:2404 gnome/glayout.c:357
 msgid "_Directory..."
 msgstr ""
 
-#: gnome/gdesktop.c:2403 gnome/glayout.c:357
+#: gnome/gdesktop.c:2404 gnome/glayout.c:357
 msgid "Creates a new directory"
 msgstr ""
 
-#: gnome/gdesktop.c:2411 gnome/glayout.c:440
+#: gnome/gdesktop.c:2412 gnome/glayout.c:440
 msgid "Arrange Icons"
 msgstr ""
 
-#: gnome/gdesktop.c:2412
+#: gnome/gdesktop.c:2413
 msgid "Create New Window"
 msgstr ""
 
-#: gnome/gdesktop.c:2414
+#: gnome/gdesktop.c:2415
 msgid "Rescan Mountable Devices"
 msgstr ""
 
-#: gnome/gdesktop.c:2415 gnome/glayout.c:443
+#: gnome/gdesktop.c:2416 gnome/glayout.c:443
 msgid "Rescan Desktop"
 msgstr ""
 
@@ -305,7 +305,7 @@ msgid "Replace it?"
 msgstr ""
 
 #: gnome/gdialogs.c:558 gtkedit/editwidget.c:1067 src/file.c:803
-#: src/screen.c:2291 src/screen.c:2321 src/tree.c:1024
+#: src/screen.c:2294 src/screen.c:2324 src/tree.c:1024
 msgid "Copy"
 msgstr ""
 
@@ -484,7 +484,7 @@ msgid ""
 "Notice that if you choose to terminate the file manager, you will\n"
 "also terminate the GNOME desktop handler.\n"
 "\n"
-"Are you sure you want to quit?"
+"Are you sure you want to exit?"
 msgstr ""
 
 #: gnome/glayout.c:327
@@ -648,7 +648,7 @@ msgid "Properties"
 msgstr ""
 
 #: gnome/gpopup.c:253 gnome/gpopup.c:254 gtkedit/editwidget.c:1070
-#: src/screen.c:2294 src/screen.c:2324
+#: src/screen.c:2297 src/screen.c:2327
 msgid "Delete"
 msgstr ""
 
@@ -672,7 +672,7 @@ msgstr ""
 msgid "Open with"
 msgstr ""
 
-#: gnome/gpopup.c:263 src/screen.c:2289 src/screen.c:2319
+#: gnome/gpopup.c:263 src/screen.c:2292 src/screen.c:2322
 msgid "View"
 msgstr ""
 
@@ -680,7 +680,7 @@ msgstr ""
 msgid "View unfiltered"
 msgstr ""
 
-#: gnome/gpopup.c:265 src/screen.c:2290 src/screen.c:2320 src/view.c:1991
+#: gnome/gpopup.c:265 src/screen.c:2293 src/screen.c:2323 src/view.c:1991
 msgid "Edit"
 msgstr ""
 
@@ -1046,67 +1046,67 @@ msgstr ""
 msgid "&Ok"
 msgstr ""
 
-#: gnome/gview.c:122 src/view.c:683
+#: gnome/gview.c:135 src/view.c:683
 #, c-format
 msgid "Offset 0x%08x"
 msgstr ""
 
-#: gnome/gview.c:124 src/view.c:685
+#: gnome/gview.c:137 src/view.c:685
 #, c-format
 msgid "Col %d"
 msgstr ""
 
-#: gnome/gview.c:128 src/view.c:689
+#: gnome/gview.c:141 src/view.c:689
 #, c-format
 msgid "%s bytes"
 msgstr ""
 
-#: gnome/gview.c:292
+#: gnome/gview.c:305
 msgid "_Goto line"
 msgstr ""
 
-#: gnome/gview.c:293
+#: gnome/gview.c:306
 msgid "Jump to a specified line number"
 msgstr ""
 
-#: gnome/gview.c:295
+#: gnome/gview.c:308
 msgid "_Monitor file"
 msgstr ""
 
-#: gnome/gview.c:295
+#: gnome/gview.c:308
 msgid "Monitor file growing"
 msgstr ""
 
-#: gnome/gview.c:302
+#: gnome/gview.c:315
 msgid "Regexp search"
 msgstr ""
 
-#: gnome/gview.c:303
+#: gnome/gview.c:316
 msgid "Regular expression search"
 msgstr ""
 
-#: gnome/gview.c:312
+#: gnome/gview.c:325
 msgid "_Wrap"
 msgstr ""
 
-#: gnome/gview.c:313
+#: gnome/gview.c:326
 msgid "Wrap the text"
 msgstr ""
 
 #. Can not use this one yet, as it destroys the viewer, need to fix that
-#: gnome/gview.c:316
+#: gnome/gview.c:329
 msgid "_Parsed view"
 msgstr ""
 
-#: gnome/gview.c:319
+#: gnome/gview.c:332
 msgid "_Formatted"
 msgstr ""
 
-#: gnome/gview.c:321
+#: gnome/gview.c:334
 msgid "_Hex"
 msgstr ""
 
-#: gnome/gview.c:327
+#: gnome/gview.c:340
 msgid "_Search"
 msgstr ""
 
@@ -1142,7 +1142,7 @@ msgstr ""
 #: gtkedit/edit.c:129 gtkedit/edit.c:224 gtkedit/edit.c:231 gtkedit/edit.c:238
 #: gtkedit/edit.c:245 gtkedit/edit.c:251 gtkedit/edit.c:308 gtkedit/edit.c:344
 #: gtkedit/editcmd.c:1945 gtkedit/editwidget.c:950 src/dir.c:386
-#: src/screen.c:2309 src/tree.c:692 src/tree.c:698 src/wtools.c:222
+#: src/screen.c:2312 src/tree.c:692 src/tree.c:698 src/wtools.c:222
 #: vfs/fish.c:224
 msgid " Error "
 msgstr ""
@@ -1214,7 +1214,7 @@ msgstr ""
 #. Warning message with a query to continue or cancel the operation
 #: gtkedit/editcmd.c:491 gtkedit/editcmd.c:810 gtkedit/editcmd.c:840
 #: gtkedit/editcmd.c:987 gtkedit/editcmd.c:1084 src/ext.c:301 src/file.c:620
-#: src/help.c:318 src/main.c:691 src/screen.c:2066 src/subshell.c:705
+#: src/help.c:318 src/main.c:691 src/screen.c:2069 src/subshell.c:705
 #: src/subshell.c:731 src/utilunix.c:388 src/utilunix.c:392 src/utilunix.c:458
 #: vfs/mcfs.c:170
 msgid " Warning "
@@ -1729,8 +1729,8 @@ msgstr ""
 msgid "Error initialising editor.\n"
 msgstr ""
 
-#: gtkedit/editwidget.c:1063 src/help.c:806 src/main.c:1688 src/screen.c:2287
-#: src/screen.c:2317 src/tree.c:1018 src/view.c:1982
+#: gtkedit/editwidget.c:1063 src/help.c:806 src/main.c:1688 src/screen.c:2290
+#: src/screen.c:2320 src/tree.c:1018 src/view.c:1982
 msgid "Help"
 msgstr ""
 
@@ -4293,7 +4293,7 @@ msgid ""
 " the details.                                           "
 msgstr ""
 
-#: src/main.c:1689 src/screen.c:2288 src/screen.c:2318
+#: src/main.c:1689 src/screen.c:2291 src/screen.c:2321
 msgid "Menu"
 msgstr ""
 
@@ -4643,23 +4643,23 @@ msgstr ""
 msgid "Unknow tag on display format: "
 msgstr ""
 
-#: src/screen.c:2051
+#: src/screen.c:2054
 msgid " Do you really want to execute? "
 msgstr ""
 
-#: src/screen.c:2066
+#: src/screen.c:2069
 msgid " No action taken "
 msgstr ""
 
-#: src/screen.c:2292 src/screen.c:2322 src/tree.c:1026
+#: src/screen.c:2295 src/screen.c:2325 src/tree.c:1026
 msgid "RenMov"
 msgstr ""
 
-#: src/screen.c:2293 src/screen.c:2323 src/tree.c:1030
+#: src/screen.c:2296 src/screen.c:2326 src/tree.c:1030
 msgid "Mkdir"
 msgstr ""
 
-#: src/screen.c:2309
+#: src/screen.c:2312
 #, c-format
 msgid ""
 " Can't chdir to %s \n"

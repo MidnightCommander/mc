@@ -1,3 +1,8 @@
+1999-03-14  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* dlg.c (dlg_select_nth_widget): Handle the case where h->current
+	points to NULL.  
+
 1999-03-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* file.c (erase_file): Here we need to mc_lstat(), not mc_stat().
