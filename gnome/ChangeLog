@@ -1,3 +1,15 @@
+1998-12-01  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* glayout.c (file_menu): Use view_cmd and view_simple_cmd in the
+	menu instead of panel_action_view and
+	panel_action_view_unfiltered, respectively.
+
+	* gpopup.c (create_regexp_actions): Create the menu items using
+	gnome-app-helper, for visual consistency.
+	(create_actions): Likewise.  Also, fixed S_ISLNK() confusion.
+	(get_label_text): Extract the label from the GnomeUIInfo item in
+	an ugly way.
+
 1998-12-01  Jonathan Blandford  <jrb@redhat.com>
 
 	* Makefile.in: now handles gdialogs*

@@ -98,7 +98,6 @@ OBJS = $(LOBJS) $(OOBJS) \
 	gcmd.o		\
 	gdesktop-icon.o	\
 	gdesktop.o 	\
-	gdialogs.o	\
 	gdnd.o		\
 	ghelp.o 	\
 	ginfo.o 	\

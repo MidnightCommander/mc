@@ -1,9 +1,6 @@
 #ifndef __GSCREEN_H
 #define __GSCREEN_H
 
-void panel_action_view_unfiltered (GtkWidget *widget, WPanel *panel);
-void panel_action_view (GtkWidget *widget, WPanel *panel);
-void panel_action_edit (GtkWidget *widget, WPanel *panel);
 
 WPanel *create_container (Dlg_head *h, char *str, char *geometry);
 

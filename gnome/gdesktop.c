@@ -347,9 +347,10 @@ desktop_icon_info_event (struct desktop_icon_info *dii, GdkEvent *event, int on_
 			retval = TRUE;
 		} else if (event->button.button == 3) {
 			filename = g_concat_dir_and_file (desktop_directory, dii->filename);
-#if 0
-			gpopup_do_popup (filename, FALSE, (GdkEventButton *) event);
-#endif
+
+			if (gpopup_do_popup ((GdkEventButton *) event, NULL, 0, filename) != -1)
+				; /* FIXME: reread the desktop if this returns something other than -1 */
+
 			g_free (filename);
 			retval = TRUE;
 		}
@@ -771,6 +772,9 @@ destroy_op_win (void)
 }
 
 #endif
+
+
+
 
 
 #else

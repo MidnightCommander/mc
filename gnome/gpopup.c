@@ -22,16 +22,22 @@
 #define CLIST_FROM_SW(panel_list) GTK_CLIST (GTK_BIN (panel_list)->child)
 
 
-/*
- * Flags for the context-sensitive popup menus
- */
-#define F_ALL         1
-#define F_REGULAR     2
-#define F_SYMLINK     4
-#define F_SINGLE      8
-#define F_NOTDIR     16
-#define F_DICON      32		/* Only applies to desktop_icon_t */
-#define F_PANEL      64         /* Only applies to WPanel */
+/* Flags for the popup menu entries.  They specify to which kinds of files an entry is valid for. */
+enum {
+	F_ALL 		= 1 << 0,	/* Applies to all files */
+	F_REGULAR	= 1 << 1,	/* Applies only to regular files */
+	F_SYMLINK	= 1 << 2,	/* Applies only to symlinks */
+	F_SINGLE	= 1 << 3,	/* Applies only to a single file, not to a multiple selection */
+	F_NOTDIR	= 1 << 4,	/* Applies to non-directories */
+	F_DICON		= 1 << 5,	/* Applies to desktop icons */
+	F_PANEL		= 1 << 6	/* Applies to files from a panel window */
+};
+
+struct action {
+	char *text;		/* Menu item text */
+	int flags;		/* Flags from the above enum */
+	GtkSignalFunc callback;	/* Callback for menu item */
+};
 
 
 static void
@@ -55,25 +61,25 @@ panel_action_open (GtkWidget *widget, WPanel *panel)
 	panel_action_open_with (widget, panel);
 }
 
-void
+static void
 panel_action_view (GtkWidget *widget, WPanel *panel)
 {
 	view_cmd (panel);
 }
 
-void
+static void
 panel_action_view_unfiltered (GtkWidget *widget, WPanel *panel)
 {
 	view_simple_cmd (panel);
 }
 
-void
+static void
 panel_action_edit (GtkWidget *widget, WPanel *panel)
 {
 	edit_cmd (panel);
 }
 
-void
+static void
 panel_action_properties (GtkWidget *widget, WPanel *panel)
 {
 	file_entry *fe = &panel->dir.list [panel->selected];
@@ -85,227 +91,288 @@ panel_action_properties (GtkWidget *widget, WPanel *panel)
 	free (full_name);
 }
 
-typedef void (*context_menu_callback)(GtkWidget *, void *);
+static void
+dicon_move (GtkWidget *widget, char *filename)
+{
+	g_warning ("Implement this function!");
+}
 
-/*
- * The context menu: text displayed, condition that must be met and
- * the routine that gets invoked upon activation.
+static void
+dicon_copy (GtkWidget *widget, char *filename)
+{
+	g_warning ("Implement this function!");
+}
+
+static void
+dicon_delete (GtkWidget *widget, char *filename)
+{
+	g_warning ("Implement this function!");
+}
+
+
+/* The context menu: text displayed, condition that must be met and the routine that gets invoked
+ * upon activation.
  */
-static struct {
-	char *text;
-	int  flags;
-	context_menu_callback callback;
-} file_actions [] = {
-	{ N_("Properties"),      F_SINGLE | F_PANEL,   	  	 (context_menu_callback) panel_action_properties },
+static struct action file_actions[] = {
+	{ N_("Properties"),      F_SINGLE | F_PANEL,   	  	 (GtkSignalFunc) panel_action_properties },
 #if 0
-	{ N_("Properties"),      F_SINGLE | F_DICON,  	  	 (context_menu_callback) desktop_icon_properties },
+	{ N_("Properties"),      F_SINGLE | F_DICON,  	  	 (GtkSignalFunc) desktop_icon_properties },
 #endif
 	{ "",                    F_SINGLE,   	    	  	 NULL },
-	{ N_("Open"),            F_PANEL | F_ALL,      	  	 (context_menu_callback) panel_action_open },
+	{ N_("Open"),            F_PANEL | F_ALL,      	  	 (GtkSignalFunc) panel_action_open },
 #if 0
-	{ N_("Open"),            F_DICON | F_ALL, 	  	 (context_menu_callback) desktop_icon_execute },
+	{ N_("Open"),            F_DICON | F_ALL, 	  	 (GtkSignalFunc) desktop_icon_execute },
 #endif
-	{ N_("Open with"),       F_PANEL | F_ALL,      	  	 (context_menu_callback) panel_action_open_with },
-	{ N_("View"),            F_PANEL | F_NOTDIR,      	 (context_menu_callback) panel_action_view },
-	{ N_("View unfiltered"), F_PANEL | F_NOTDIR,      	 (context_menu_callback) panel_action_view_unfiltered },  
-	{ N_("Edit"),            F_PANEL | F_NOTDIR,             (context_menu_callback) panel_action_edit },
+	{ N_("Open with"),       F_PANEL | F_ALL,      	  	 (GtkSignalFunc) panel_action_open_with },
+	{ N_("View"),            F_PANEL | F_NOTDIR,      	 (GtkSignalFunc) panel_action_view },
+	{ N_("View unfiltered"), F_PANEL | F_NOTDIR,      	 (GtkSignalFunc) panel_action_view_unfiltered },  
+	{ N_("Edit"),            F_PANEL | F_NOTDIR,             (GtkSignalFunc) panel_action_edit },
 	{ "",                    0,          	                 NULL },
-	{ N_("Link..."),         F_PANEL | F_REGULAR | F_SINGLE, (context_menu_callback) link_cmd },
-	{ N_("Symlink..."),      F_PANEL | F_SINGLE,             (context_menu_callback) symlink_cmd },
-	{ N_("Edit symlink..."), F_PANEL | F_SYMLINK,            (context_menu_callback) edit_symlink_cmd },
+	{ N_("Link..."),         F_PANEL | F_REGULAR | F_SINGLE, (GtkSignalFunc) link_cmd },
+	{ N_("Symlink..."),      F_PANEL | F_SINGLE,             (GtkSignalFunc) symlink_cmd },
+	{ N_("Edit symlink..."), F_PANEL | F_SYMLINK,            (GtkSignalFunc) edit_symlink_cmd },
 	{ NULL, 0, NULL },
 };
 
-typedef struct {
-	char *text;
-	context_menu_callback callback;
-} common_menu_t;
-	
-/*
- * context menu, constant entries
+/* Menu entries for files from a panel window */
+static GnomeUIInfo panel_actions[] = {
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_ITEM_NONE (N_("Move/rename..."), NULL, ren_cmd),
+	GNOMEUIINFO_ITEM_NONE (N_("Copy..."), NULL, copy_cmd),
+	GNOMEUIINFO_ITEM_NONE (N_("Delete"), NULL, delete_cmd),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_END
+};
+
+/* Menu entries for files from desktop icons */
+static GnomeUIInfo desktop_icon_actions[] = {
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_ITEM_NONE (N_("Move/rename..."), NULL, dicon_move),
+	GNOMEUIINFO_ITEM_NONE (N_("Copy..."), NULL, dicon_copy),
+	GNOMEUIINFO_ITEM_NONE (N_("Delete"), NULL, dicon_delete),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_END
+};
+
+
+/* Creates the menu items for the standard actions.  Returns the position at which additional menu
+ * items should be inserted.
  */
-common_menu_t common_panel_actions [] = {
-	{ N_("Copy..."),         (context_menu_callback) copy_cmd },
-	{ N_("Rename/move..."),  (context_menu_callback) ren_cmd },
-	{ N_("Delete..."),       (context_menu_callback) delete_cmd },
-	{ NULL, NULL }
-};
-
-common_menu_t common_dicon_actions [] = {
-#if 0
-	{ N_("Delete"),          (context_menu_callback) desktop_icon_delete },
-#endif
-	{ NULL, NULL }
-};
-      
-static GtkWidget *
-create_popup_submenu (WPanel *panel, desktop_icon_t *di, int row, char *filename)
+static int
+create_actions (GtkWidget *menu, WPanel *panel, int panel_row, char *filename)
 {
-	static int submenu_translated;
-	GtkWidget *menu;
-	int i;
-	void *closure;
+	gpointer closure;
+	struct action *action;
+	int pos;
+	GnomeUIInfo uiinfo[] = {
+		{ 0 },
+		GNOMEUIINFO_END
+	};
 
-	closure = (panel != 0 ? (void *) panel : (void *)di);
-	
-	if (!submenu_translated){
-		/* FIXME translate it */
-		submenu_translated = 1;
-	}
-	
-	menu = gtk_menu_new ();
-	for (i = 0; file_actions [i].text; i++){
-		GtkWidget *item;
+	closure = panel ? (gpointer) panel : (gpointer) filename;
 
+	pos = 0;
+	
+	for (action = file_actions; action->text; action++) {
 		/* First, try F_PANEL and F_DICON flags */
-		if (di && (file_actions [i].flags & F_PANEL))
+
+		if (panel && !(action->flags & F_PANEL))
 			continue;
 
-		if (panel && (file_actions [i].flags & F_DICON))
+		if (!panel && (action->flags & F_DICON))
 			continue;
-		
+
 		/* Items with F_ALL bypass any other condition */
-		if (!(file_actions [i].flags & F_ALL)){
 
+		if (!(action->flags & F_ALL)) {
 			/* Items with F_SINGLE require that ONLY ONE marked files exist */
-			if (panel && file_actions [i].flags & F_SINGLE){
+
+			if (panel && (action->flags & F_SINGLE))
 				if (panel->marked > 1)
 					continue;
-			}
 
 			/* Items with F_NOTDIR requiere that the selection is not a directory */
-			if (panel && file_actions [i].flags & F_NOTDIR){
-				struct stat *s = &panel->dir.list [row].buf;
 
-				if (panel->dir.list [row].f.link_to_dir)
+			if (panel && (action->flags & F_NOTDIR)) {
+				struct stat *s = &panel->dir.list[panel_row].buf;
+
+				if (panel->dir.list [panel_row].f.link_to_dir)
 					continue;
-				
+
 				if (S_ISDIR (s->st_mode))
 					continue;
 			}
-			
+
 			/* Items with F_REGULAR do not accept any strange file types */
-			if (panel && file_actions [i].flags & F_REGULAR){
-				struct stat *s = &panel->dir.list [row].buf;
-				
-				if (S_ISLNK (panel->dir.list [row].f.link_to_dir))
+
+			if (panel && (action->flags & F_REGULAR)) {
+				struct stat *s = &panel->dir.list[panel_row].buf;
+
+				if (S_ISLNK (s->st_mode) && panel->dir.list[panel_row].f.link_to_dir)
 					continue;
+
 				if (S_ISSOCK (s->st_mode) || S_ISCHR (s->st_mode) ||
 				    S_ISFIFO (s->st_mode) || S_ISBLK (s->st_mode))
 					continue;
 			}
 
 			/* Items with F_SYMLINK only operate on symbolic links */
-			if (panel && file_actions [i].flags & F_SYMLINK){
-				if (!S_ISLNK (panel->dir.list [row].buf.st_mode))
+
+			if (panel && action->flags & F_SYMLINK) {
+				struct stat *s = &panel->dir.list[panel_row].buf;
+
+				if (!S_ISLNK (s->st_mode))
 					continue;
 			}
 		}
-		if (*file_actions [i].text)
-			item = gtk_menu_item_new_with_label (_(file_actions [i].text));
-		else
-			item = gtk_menu_item_new ();
 
-		gtk_widget_show (item);
-		if (file_actions [i].callback){
-			gtk_signal_connect (GTK_OBJECT (item), "activate",
-					    GTK_SIGNAL_FUNC(file_actions [i].callback), closure);
-		}
+		/* Create the appropriate GnomeUIInfo structure for the menu item */
 
-		gtk_menu_append (GTK_MENU (menu), item);
+		if (action->text[0]) {
+			uiinfo[0].type = GNOME_APP_UI_ITEM;
+			uiinfo[0].label = _(action->text);
+			uiinfo[0].hint = NULL;
+			uiinfo[0].moreinfo = action->callback;
+			uiinfo[0].user_data = closure;
+			uiinfo[0].unused_data = NULL;
+			uiinfo[0].pixmap_type = GNOME_APP_PIXMAP_NONE;
+			uiinfo[0].pixmap_info = NULL;
+			uiinfo[0].accelerator_key = 0;
+			uiinfo[0].ac_mods = 0;
+			uiinfo[0].widget = NULL;
+		} else
+			uiinfo[0].type = GNOME_APP_UI_SEPARATOR;
+
+		gnome_app_fill_menu (GTK_MENU_SHELL (menu), uiinfo, NULL, FALSE, pos);
+		pos++;
 	}
-	return menu;
+
+	return pos;
 }
 
-/*
- * Ok, this activates a menu popup action for a filename
- * it is kind of hackish, it gets the desired action from the
- * item, so it has to peek inside the item to retrieve the label
+/* These functions activate a menu popup action for a filename in a hackish way, as they have to
+ * fetch the action from the menu item's label.
+ */
+
+static char *
+get_label_text (GtkMenuItem *item)
+{
+	GtkWidget *label;
+
+	/* THIS DEPENDS ON THE LATEST GNOME-LIBS!  Keep this in sync with gnome-app-helper until we
+	 * figure a way to do this in a non-hackish way.
+	 */
+
+	label = GTK_BIN (item)->child;
+	g_assert (label != NULL);
+
+	return GTK_LABEL (label)->label;
+}
+
+static void
+regex_command_from_panel (GtkMenuItem *item, WPanel *panel)
+{
+	char *filename;
+	char *action;
+	int movedir;
+
+	filename = panel->dir.list[panel->selected].fname;
+	action = get_label_text (item);
+
+	regex_command (filename, action, NULL, &movedir);
+}
+
+static void
+regex_command_from_desktop_icon (GtkMenuItem *item, char *filename)
+{
+	char *action;
+	int movedir;
+
+	action = get_label_text (item);
+
+	regex_command (filename, action, NULL, &movedir);
+}
+
+/* Create the menu items common to files from panel window and desktop icons, and also the items for
+ * regexp_command() actions.
  */
 static void
-popup_activate_by_string (GtkMenuItem *item, WPanel *panel)
+create_regexp_actions (GtkWidget *menu, WPanel *panel, int panel_row, char *filename, int insert_pos)
 {
-	char *filename = panel->dir.list [panel->selected].fname;
-	char *action;
-	int movedir;
-	
-	g_return_if_fail (GTK_IS_MENU_ITEM (item));
-	g_return_if_fail (GTK_IS_LABEL (GTK_BIN (item)->child));
-
-	action = GTK_LABEL (GTK_BIN (item)->child)->label;
-
-	regex_command (filename, action, NULL, &movedir);
-}
-
-static void
-popup_activate_desktop_icon (GtkMenuItem *item, char *filename)
-{
-	char *action;
-	int movedir;
-	
-	action = GTK_LABEL (GTK_BIN (item)->child)->label;
-
-	regex_command (filename, action, NULL, &movedir);
-}
-
-static void
-file_popup_add_context (GtkMenu *menu, WPanel *panel, desktop_icon_t *di, char *filename)
-{
-	GtkWidget *item;
+	gpointer closure, regex_closure;
+	GnomeUIInfo *a_uiinfo;
+	int i;
+	GtkSignalFunc regex_callback;
 	char *p, *q;
-	int c, i;
-	void *closure, *regex_closure;
-	common_menu_t *menu_p;
-	GtkSignalFunc regex_func;
-	
-	if (panel){
-		menu_p        = common_panel_actions;
-		closure       = panel;
-		regex_func    = GTK_SIGNAL_FUNC (popup_activate_by_string);
+	int c;
+	GnomeUIInfo uiinfo[] = {
+		{ 0 },
+		GNOMEUIINFO_END
+	};
+
+	if (panel) {
+		a_uiinfo = panel_actions;
+		closure = panel;
+		regex_callback = regex_command_from_panel;
 		regex_closure = panel;
 	} else {
-		menu_p        = common_dicon_actions;
-		closure       = di;
-		regex_func    = GTK_SIGNAL_FUNC (popup_activate_desktop_icon);
-		regex_closure = di->dentry->exec [0];
+		a_uiinfo = desktop_icon_actions;
+		closure = filename;
+		regex_callback = regex_command_from_desktop_icon;
+		regex_closure = filename;
 	}
-	
-	for (i = 0; menu_p [i].text; i++){
-		GtkWidget *item;
 
-		item = gtk_menu_item_new_with_label (_(menu_p [i].text));
-		gtk_widget_show (item);
-		gtk_signal_connect (GTK_OBJECT (item), "activate",
-				    GTK_SIGNAL_FUNC (menu_p [i].callback), closure);
-		gtk_menu_append (GTK_MENU (menu), item);
-	}
-	
+	/* Fill in the common part of the menus */
+
+	for (i = 0; i < 5; i++)
+		a_uiinfo[i].user_data = closure;
+
+	gnome_app_fill_menu (GTK_MENU_SHELL (menu), a_uiinfo, NULL, FALSE, insert_pos);
+	insert_pos += 5; /* the number of items from the common menus */
+
+	/* Fill in the regex command part */
+
 	p = regex_command (filename, NULL, NULL, NULL);
 	if (!p)
 		return;
-	
-	item = gtk_menu_item_new ();
-	gtk_widget_show (item);
-	gtk_menu_append (menu, item);
-	
-	for (;;){
+
+	for (;;) {
+		/* Strip off an entry */
+
 		while (*p == ' ' || *p == '\t')
 			p++;
+
 		if (!*p)
 			break;
+
 		q = p;
 		while (*q && *q != '=' && *q != '\t')
 			q++;
+
 		c = *q;
 		*q = 0;
-		
-		item = gtk_menu_item_new_with_label (p);
-		gtk_widget_show (item);
 
-		gtk_signal_connect (GTK_OBJECT(item), "activate", regex_func, regex_closure);
-		gtk_menu_append (menu, item);
+		/* Create the item for that entry */
+
+		uiinfo[0].type = GNOME_APP_UI_ITEM;
+		uiinfo[0].label = p;
+		uiinfo[0].hint = NULL;
+		uiinfo[0].moreinfo = regex_callback;
+		uiinfo[0].user_data = regex_closure;
+		uiinfo[0].unused_data = NULL;
+		uiinfo[0].pixmap_type = GNOME_APP_PIXMAP_NONE;
+		uiinfo[0].pixmap_info = NULL;
+		uiinfo[0].accelerator_key = 0;
+		uiinfo[0].ac_mods = 0;
+		uiinfo[0].widget = NULL;
+
+		gnome_app_fill_menu (GTK_MENU_SHELL (menu), uiinfo, NULL, FALSE, insert_pos++);
+
+		/* Next! */
+
 		if (!c)
 			break;
+
 		p = q + 1;
 	}
 }
@@ -315,36 +382,20 @@ file_popup_add_context (GtkMenu *menu, WPanel *panel, desktop_icon_t *di, char *
  * It can take either a WPanel or a GnomeDesktopEntry.  One of them should
  * be set to NULL.
  */
-void
-file_popup (GdkEventButton *event, void *WPanel_pointer, void *desktop_icon_t_pointer, int row, char *filename)
+int
+gpopup_do_popup (GdkEventButton *event, WPanel *from_panel, int panel_row, char *filename)
 {
-	GtkWidget *menu = gtk_menu_new ();
-	GtkWidget *submenu;
-	GtkWidget *item;
-	WPanel      *panel = WPanel_pointer;
-	desktop_icon_t *di = desktop_icon_t_pointer;
-	char *str;
-		
-	g_return_if_fail (((panel != NULL) ^ (di != NULL)));
+	GtkWidget *menu;
+	int pos;
 
-	if (panel)
-		str = (panel->marked > 1) ? "..." : filename;
-	else
-		str = filename;
-	
-	if (panel){
-		item = gtk_menu_item_new_with_label (str);
-		gtk_widget_show (item);
-		gtk_menu_append (GTK_MENU (menu), item);
+	g_return_val_if_fail (event != NULL, -1);
+	g_return_val_if_fail ((from_panel != NULL) ^ (filename != NULL), -1);
 
-		submenu = create_popup_submenu (panel, di, row, filename);
-		gtk_menu_item_set_submenu (GTK_MENU_ITEM (item), submenu);
-	} else 
-		menu = create_popup_submenu (panel, di, row, filename);
-
-	file_popup_add_context (GTK_MENU (menu), panel, di, filename);
+	pos = create_actions (menu, from_panel, panel_row, filename);
+	create_regexp_actions (menu, from_panel, panel_row, filename, pos);
 
 	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3, event->time);
+	return 0; /* FIXME: return the index of the selected item */
 }
 
 
