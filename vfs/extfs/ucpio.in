@@ -23,7 +23,7 @@ uni_cat ()
 mccpiofs_list ()
 # $1 is the archive name
 {
-    uni_cat "$1" | cpio -itv | /bin/awk '
+    uni_cat "$1" | cpio -itv | @AWK@ '
 	{
 	    if (substr($9,length($9),1) == ",")
 	    {
