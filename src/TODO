@@ -4,19 +4,30 @@ Before 4.6.0-pre2
 reimplement "-P" in a safer way (temp file instead of stdout) - possibly
 security issues.
 
-Make xnc.hlp a text file.  Make it easier to translate the manual.
-
 Consider applying a patch from PLD to make M-o propagate the current
 directory to the other panel.
+
+Pressing F8 twice in the viewer causes error messages if the file was
+preprocessed (i.e. gzipped files, manpages).
+
+Add support for mouse wheel with gpm.
+
+Recheck all mouse handlers, make sure that they check button number.
+
+ncurses 5.2 turns off keypad under heavy load on xterm.  Check if
+anything can be done about it.
+
+Implement --with-screen option.
+
+Remove side effects from --with-termcap option.
 
 
 Before 4.6.0
 ============
 
-Hard links in cpio have 0 length (if easy to fix).
+Make xnc.hlp a text file.  Make it easier to translate the manual.
 
-Pressing F8 twice in the viewer causes error messages if the file was
-preprocessed (i.e. gzipped files, manpages).
+Hard links in cpio have 0 length (if easy to fix).
 
 Add "Ignore" and "Ignore all" buttons when reporting permission
 problems.
@@ -30,11 +41,10 @@ Report errors in fish operations and recover from them.
 SMB crash when not starting with the share root, but copying to the
 share root.
 
-Mouse doesn't work with ncurses on xterm and rxvt on some systems.
-
-MC + ncurses + FreeBSD 4.6.2 doesn't recognize cursor keys.
-
 Scan more packages for patches, check Red Hat and Ximian Bugzilla.
+
+Allow colors to be defined in the mc.lib file.  Make it possible to
+avoid using a superlong line to redefine all colors.
 
 
 After 4.6.0
@@ -51,6 +61,12 @@ In the 4.7 branch
 =================
 
 Internal terminal - no more console saving.
+
+Implement a really Advanced Chown/Chmod.
+
+Dynamic loading for libX11, libgpm.
+
+Process all input internally, use screen libraries only for output.
 
 
 ========================================================================
@@ -100,8 +116,6 @@ ideas still waiting for their implementation.
    - Write a general grow_string routine.  This code is used in the internal
      viewer and would also be used in the profile.c code.
 
-   - Allow colors to be defined in the mc.lib file.
-
    -  A command to set the line length to a fixed value for viewing
       fixed length binary files. LIST does this with Ctrl-B and then
       prompts for a "record" length.
@@ -120,8 +134,6 @@ ideas still waiting for their implementation.
   - In Listing mode... give at least three user-definable formats
     (using Janne's Listing mode editor) and assign hot-keys to both
     standard and user defined (what about c-x f [fbl123] ?).
-
-  - Multiple panels - really necessary! [3.x]
 
   - Shift-Home, Shift-End for the input line: home and end.
 
@@ -200,7 +212,7 @@ ideas still waiting for their implementation.
     view_update after handling a key, should all the other
     view_updates be removed?
 
-  - If the viewer is too slow, some catching could be done.
+  - If the viewer is too slow, some caching could be done.
     width and cols are currently computed each time they are needed.
 
   - Add context sensitive help to the f9 menus.
@@ -210,9 +222,4 @@ ideas still waiting for their implementation.
  ++ In the user menu, don't use the entries array, we can now grow
     dynamically.  I should take a look at this one day, it's easy to
     fix.
-
-* Binaries distribution
-  - Including all the necessary terminfo databases compiled for
-    different machines, as well as xterm_color for different machines.
-  
 
