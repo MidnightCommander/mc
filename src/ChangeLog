@@ -1,5 +1,8 @@
 2002-09-05  Pavel Roskin  <proski@gnu.org>
 
+	* cmd.c (nice_cd): Fix conditions when this function is
+	compiled.
+
 	* fs.h: Replace S_IFFIFO with S_IFIFO, which is the right name.
 
 	* fs.h: Correct S_IS* definitions to use S_IFMT.  Add fallback

@@ -1273,11 +1273,9 @@ char *get_random_hint (void)
     return result;
 }
 
-#ifdef USE_NETCODE
-
-static char *machine_str = N_(" Enter machine name (F1 for details): ");
-
-static void nice_cd (char *text, char *xtext, char *help, char *prefix, int to_home)
+#if defined(USE_NETCODE) || defined(USE_EXT2FSLIB)
+static void
+nice_cd (char *text, char *xtext, char *help, char *prefix, int to_home)
 {
     char *machine;
     char *cd_path;
@@ -1306,30 +1304,41 @@ static void nice_cd (char *text, char *xtext, char *help, char *prefix, int to_h
     g_free (cd_path);
     g_free (machine);
 }
+#endif /* USE_NETCODE || USE_EXT2FSLIB */
+
+
+#ifdef USE_NETCODE
+
+static char *machine_str = N_(" Enter machine name (F1 for details): ");
+
 #ifdef WITH_MCFS
 void netlink_cmd (void)
 {
     nice_cd (_(" Link to a remote machine "), _(machine_str),
 	     "[Network File System]", "/#mc:", 1);
 }
-#endif
+#endif /* WITH_MCFS */
+
 void ftplink_cmd (void)
 {
     nice_cd (_(" FTP to machine "), _(machine_str),
 	     "[FTP File System]", "/#ftp:", 1);
 }
+
 void fishlink_cmd (void)
 {
     nice_cd (_(" Shell link to machine "), _(machine_str),
 	     "[FIle transfer over SHell filesystem]", "/#sh:", 1);
 }
+
 #ifdef WITH_SMBFS
 void smblink_cmd (void)
 {
     nice_cd (_(" SMB link to machine "), _(machine_str),
 	     "[SMB File System]", "/#smb:", 0);
 }
-#endif
+#endif /* WITH_SMBFS */
+
 #ifdef HAVE_SETSOCKOPT
 void source_routing (void)
 {
