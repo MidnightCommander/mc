@@ -338,7 +338,7 @@ g_strdup: If you use g_strdup to create a local copy of a string, use
 	/* ... */
 	g_free (pathref);
 
-	The "const" will make the pointer unmodifiable (local_copy++
+	The "const" will make the pointer unmodifiable (pathref++
 	is not possible), but you can still modify the string contents.
 	
 g_strlcpy: Whenever you use this function, be sure to add "glibcompat.h"
