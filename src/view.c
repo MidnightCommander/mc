@@ -593,7 +593,7 @@ do_view_init (WView *view, char *_command, const char *_file, int start_line)
 finish:
     if (error){
 	if (!view->have_frame){
-	    message (1, MSG_ERROR, error);
+	    message (1, MSG_ERROR, "%s", error);
 	    g_free (error);
 	    return -1;
 	}

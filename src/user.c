@@ -240,7 +240,7 @@ char *expand_format (char c, int quote)
 	
 	for (i = 0; i < panel->count; i++)
 	    if (panel->dir.list [i].f.marked)
-		length += strlen (panel->dir.list [i].fname) + 1;
+		length += strlen (panel->dir.list [i].fname) + 1; /* for space */
 
 	block = g_malloc (length*2+1);
 	*block = 0;

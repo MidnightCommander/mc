@@ -155,7 +155,7 @@ exist_file (char *name)
 }
 
 void
-message_1s (int i, char *c1, char *c2)
+message_1s (int i, char *c1, const char *c2)
 {
     char buf [4096];
 

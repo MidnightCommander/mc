@@ -183,12 +183,12 @@ background_title (char *str)
 
 /* {{{ Routines that do the real job */
 static void
-real_message_1s (enum OperationMode mode, int *flags, char *title, char *str1)
+real_message_1s (enum OperationMode mode, int *flags, char *title, const char *str1)
 {
     if (mode == Background)
 	title = background_title (title);
-    
-    message (*flags, title, str1);
+
+    message (*flags, title, "%s", str1);
 
     if (mode == Background)
 	g_free (title);
@@ -488,7 +488,7 @@ tell_parent (int msg)
 }
 
 void
-message_1s (int flags, char *title, char *str1)
+message_1s (int flags, char *title, const char *str1)
 {
     if (we_are_background)
 	parent_call ((void *)real_message_1s, NULL, 3, sizeof (flags), &flags,
@@ -536,9 +536,9 @@ input_dialog_help (char *header, char *text, char *help, char *def_text)
 
 /* {{{ Stubs if background code is not supported */
 void
-message_1s (int flags, char *title, char *str1)
+message_1s (int flags, char *title, const char *str1)
 {
-    message (flags, title, str1);
+    message (flags, title, "%s", str1);
 }
 
 void

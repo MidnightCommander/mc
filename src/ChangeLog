@@ -1,7 +1,20 @@
+2000-05-14  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* background.c (real_message_1s, message_1s): third parameter is
+	  used by message () as printf pattern, so "%s" has to be added
+	  if plain string must be shown but printf conversion
+	  specification(s) may be there.
+	* view.c (do_view_init): ditto
+	* user.c (debug_out): ditto
+	* utilunux.c (close_error_pipe, check_error_pipe): ditto
+
+	* background.[ch], vfs/util-alone.c (message_1s): third parameter
+	  constified
+
 2001-04-27  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* find.c (search_content): Redo recent change without infinite loop ;-),
-	egrep_path hardcoded to "egrep" as it is done in locate_egrep ()  
+	egrep_path hardcoded to "egrep" as it is done in locate_egrep ()
 
 	(locate_egrep): commented out
 
