@@ -1621,6 +1621,8 @@ static void setup_dummy_mc (const char *file)
 
 static void done_mc (void)
 {
+    disable_mouse ();
+
     done_menu ();
     
     /* Setup shutdown

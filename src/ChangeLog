@@ -1,3 +1,9 @@
+2002-09-08  Oskar Liljeblad  <oskar@osk.mine.nu>
+
+	* key.c (get_event): Check gpm_fd only if gpm is actually used.
+	* layout.c (done_screen): Move disable_mouse() call ...
+	* main.c (done_mc): ... here.
+
 2002-09-08  Pavel Roskin  <proski@gnu.org>
 
 	* view.c (init_growing_view): Avoid reporting the same error
