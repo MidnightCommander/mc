@@ -72,7 +72,7 @@ INSTOBJEXT = @INSTOBJEXT@
 
 all: all-@USE_NLS@
 
-all-yes: cat-id-tbl.c $(CATALOGS)
+all-yes: $(srcdir)/cat-id-tbl.c $(CATALOGS)
 all-no:
 
 $(srcdir)/$(PACKAGE).pot: $(POTFILES)

@@ -1,3 +1,9 @@
+Wed May 13 12:24:30 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* Makefile.in.in: Don't depend on VPATH when checking the 
+	dependencies of the target all-yes (instead prefix cat-id-tbl.c 
+	with $(src)).
+
 1998-05-03  David Martin <mozart.usal.es>
 
 	* es.po: Various spelling and typo fixes .
