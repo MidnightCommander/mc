@@ -597,6 +597,8 @@ int this_allocate_color (WEdit *edit, char *fg)
 
 static char *error_file_name = 0;
 
+extern char *mc_home;
+
 static FILE *open_include_file (char *filename)
 {
     FILE *f;
@@ -613,12 +615,12 @@ static FILE *open_include_file (char *filename)
     f = fopen (p, "r");
     if (f)
 	return f;
-#ifndef	MIDNIGHT
+#if !defined (MIDNIGHT) && !defined(GTK)
     strcpy (p, LIBDIR "/syntax/");
 #else
     strcpy (p, mc_home);
     strcat (p, "/syntax/");
-#endif
+#endif /* MIDNIGHT || GTK */
     strcat (p, filename);
     syntax_free (error_file_name);
     error_file_name = (char *) strdup (p);

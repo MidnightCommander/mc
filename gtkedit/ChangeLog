@@ -1,3 +1,8 @@
+2001-07-20  Pavel Roskin  <proski@gnu.org>
+
+	* syntax.c (open_include_file) [GTK]: Use mc_home instead of
+	LIBDIR.
+
 2001-07-19  Pavel Roskin  <proski@gnu.org>
 
 	* editcmd.c (edit_canonicalize_pathname): Don't ever use
