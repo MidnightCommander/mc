@@ -68,7 +68,7 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<
 
 cons.saver: cons.saver.o
-	$(CC) -s cons.saver.o -o cons.saver
+	$(CC) $(LDFLAGS) cons.saver.o -o cons.saver
 
 check:
 	@echo no tests are supplied.
