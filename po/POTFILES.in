@@ -75,7 +75,6 @@ vfs/fish.c
 vfs/ftpfs.c
 vfs/mcfs.c
 vfs/sfs.c
-vfs/shared_ftp_fish.c
 vfs/smbfs.c
 vfs/tar.c
 vfs/vfs.c

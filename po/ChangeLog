@@ -1,3 +1,7 @@
+2001-06-06  Pavel Roskin  <proski@gnu.org>
+
+	* POTFILES.in: Remove vfs/shared_ftp_fish.c.
+
 2001-06-03  Marius Andreiana  <mandreiana@yahoo.com>
 
 	* ro.po: updated
