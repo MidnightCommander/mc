@@ -1,3 +1,11 @@
+2002-03-06  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* direntry.c (vfs_s_resolve_symlink): Comment out buggy code.
+	(vfs_s_retrieve_file): Set fh->handle to -1.
+	(vfs_s_read): Don't manipulate with FH->handle if it is -1.
+	(vfs_s_write): Likewise.
+	(vfs_s_close): Likewise.
+
 2002-02-27  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* samba/lib/debug.c: Remove syslog support.
@@ -23,11 +31,10 @@
 
 	* direntry.c (vfs_s_retrieve_file): Use off_t for total
 	and stat_size.
+	(vfs_s_resolve_symlink): Use snprintf instead of sprintf.
 
-	* vfs.c (vfs_s_resolve_symlink): Use snprintf
-	instead of sprintf.
-	(vfs_print_stats): Use off_t for have and need.  Cast
-	have to double to eliminate negative percent(s).
+	* vfs.c (vfs_print_stats): Use off_t for have and need.
+	Cast `have' to double to eliminate negative percent(s).
 	Fix print_vfs_message string formats.
 
 	* vfs.h (vfs_print_stats): Adjust declaration.

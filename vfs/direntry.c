@@ -87,9 +87,7 @@ vfs_s_free_inode (vfs *me, vfs_s_inode *ino)
     /* ==0 can happen if freshly created entry is deleted */
     if (ino->st.st_nlink <= 1){
 	while (ino->subdir){
-	    vfs_s_entry *ent;
-	    ent = ino->subdir;
-	    vfs_s_free_entry (me, ent);
+	    vfs_s_free_entry (me, ino->subdir);
 	}
 
 	CALL (free_inode) (me, ino);
@@ -395,7 +393,7 @@ vfs_s_resolve_symlink (vfs *me, vfs_s_entry *entry, char *path, int follow)
     return (MEDATA->find_entry) (me, entry->dir, linkname, follow - 1, 0);
 }
 
-/* Ook, these were functions around direcory entries / inodes */
+/* Ook, these were functions around directory entries / inodes */
 /* -------------------------------- superblock games -------------------------- */
 
 vfs_s_super *
@@ -828,7 +826,7 @@ vfs_s_read (void *fh, char *buffer, int count)
     if (FH->linear == LS_LINEAR_OPEN)
         return MEDATA->linear_read (me, FH, buffer, count);
         
-    if (FH->handle){
+    if (FH->handle != -1){
 	n = read (FH->handle, buffer, count);
 	if (n < 0)
 	    me->verrno = errno;
@@ -848,7 +846,7 @@ vfs_s_write (void *fh, char *buffer, int count)
 	vfs_die ("no writing to linear files, please");
         
     FH->changed = 1;
-    if (FH->handle){
+    if (FH->handle != -1){
 	n = write (FH->handle, buffer, count);
 	if (n < 0)
 	    me->verrno = errno;
@@ -922,7 +920,7 @@ vfs_s_close (void *fh)
 	}
 	vfs_s_invalidate (me, FH_SUPER);
     }
-    if (FH->handle)
+    if (FH->handle != -1)
 	close (FH->handle);
 	
     vfs_s_free_inode (me, FH->ino);
@@ -943,6 +941,7 @@ vfs_s_retrieve_file(vfs *me, struct vfs_s_inode *ino)
     memset(&fh, 0, sizeof(fh));
 
     fh.ino = ino;
+    fh.handle = -1;
 
     handle = mc_mkstemps (&ino->localname, me->name, NULL);
     if (handle == -1) {
