@@ -22,4 +22,4 @@ sysdir = $(datadir)/control-center
 sys_DATA = mime-type.desktop 
 
 install-data-local:
-	$(INSTALL_DATA) $(srcdir)/mime-type.desktop $(datadir)/gnome/apps/Settings/mime-type.desktop
+	$(INSTALL_DATA) $(srcdir)/mime-type.desktop $(DESTDIR)$(datadir)/gnome/apps/Settings/mime-type.desktop
