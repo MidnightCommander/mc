@@ -1,3 +1,10 @@
+2003-03-11  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* key.c: Use fputs() instead of fprintf().
+	(func_XOpenDisplay) [HAVE_GMODULE]: Move to init_key_x11().
+	(get_modifier) [__QNXNTO__]: Use g_snprintf() instead of unsafe
+	sprintf(). 
+
 2003-03-10  Pavel Roskin  <proski@gnu.org>
 
 	* key.c (correct_key_code): Convert unrecognized 0177, Ctrl-h

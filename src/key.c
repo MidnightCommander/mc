@@ -192,8 +192,8 @@ void channels_down (void)
 void channels_up (void)
 {
     if (!disabled_channels)
-	fprintf (stderr,
-		 "Error: channels_up called with disabled_channels = 0\n");
+	fputs ("Error: channels_up called with disabled_channels = 0\n",
+	       stderr);
     disabled_channels--;
 }
 
@@ -267,7 +267,6 @@ define_sequences (key_define_t *kd)
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
 
 #ifdef HAVE_GMODULE
-static Display *(*func_XOpenDisplay) (_Xconst char *);
 static int (*func_XCloseDisplay) (Display *);
 static Bool (*func_XQueryPointer) (Display *, Window, Window *, Window *,
 				   int *, int *, int *, int *,
@@ -283,6 +282,7 @@ static void
 init_key_x11 (void)
 {
 #ifdef HAVE_GMODULE
+    static Display *(*func_XOpenDisplay) (_Xconst char *);
     gchar *x11_module_fname;
 #endif				/* HAVE_GMODULE */
 
@@ -716,7 +716,7 @@ int get_key_code (int no_delay)
 		        GET_TIME (esctime);
 		        if (this == NULL) {
 		            /* Shouldn't happen */
-		            fprintf (stderr, "Internal error\n");
+		            fputs ("Internal error\n", stderr);
 		            exit (1);
 		        }
 		        goto nodelay_try_again;
@@ -1072,7 +1072,7 @@ void
 numeric_keypad_mode (void)
 {
     if (console_flag || xterm_flag) {
-        fprintf (stdout, "\033>");
+	fputs ("\033>", stdout);
         fflush (stdout);
     }
 }
@@ -1081,7 +1081,7 @@ void
 application_keypad_mode (void)
 {
     if (console_flag || xterm_flag) {
-        fprintf (stdout, "\033="); 
+	fputs ("\033=", stdout); 
         fflush (stdout);
     }
 }
@@ -1164,7 +1164,8 @@ get_modifier (void)
 	in_photon = -1;
 	ph_env = getenv ("PHOTON2_PATH");
 	if (ph_env != NULL) {
-	    sprintf (phlib_path, "%s/lib/libph.so.1", ph_env);
+	    g_snprintf (phlib_path, sizeof (phlib_path),
+			"%s/lib/libph.so.1", ph_env);
 	    /* QNX 6.x has no support for RTLD_LAZY */
 	    ph_handle = dlopen (phlib_path, RTLD_NOW);
 	    if (ph_handle != NULL) {
