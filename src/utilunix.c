@@ -200,7 +200,7 @@ char *get_owner (int uid)
     struct passwd *pwd;
     static char ibuf [8];
     char   *name;
-    static uid_last;
+    static int uid_last;
     
     if ((name = i_cache_match (uid, uid_cache, UID_CACHE_SIZE)) != NULL)
 	return name;

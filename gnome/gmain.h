@@ -7,25 +7,25 @@
 int xtoolkit_init (int *argc, char *argv []);
 int xtoolkit_end (void);
 
+extern Dlg_head *desktop_dlg;
+
 /* Required by the standard code */
-widget_data xtoolkit_create_dialog (Dlg_head *h, int with_grid);
+widget_data xtoolkit_create_dialog   (Dlg_head *h, int with_grid);
 widget_data xtoolkit_get_main_dialog (Dlg_head *h);
-void x_dlg_set_window (Dlg_head *h, GtkWidget *win);
+void x_dlg_set_window                (Dlg_head *h, GtkWidget *win);
 widget_data x_create_panel_container (int which);
-void x_panel_container_show (widget_data wdata);
-
-void x_destroy_cmd (void *);
-
-int x_create_radio (Dlg_head *h, widget_data parent, WRadio *r);
-int x_create_check (Dlg_head *h, widget_data parent, WCheck *c);
-int x_create_label (Dlg_head *h, widget_data parent, WLabel *l);
-int x_create_input (Dlg_head *h, widget_data parent, WInput *in);
-int x_create_listbox (Dlg_head *h, widget_data parent, WListbox *l);
-int x_create_buttonbar (Dlg_head *h, widget_data parent, WButtonBar *bb);
-void x_filter_changed (WPanel *panel);
-void x_list_insert (WListbox *l, WLEntry *p, WLEntry *e);
-void x_redefine_label (WButtonBar *bb, int idx);
-void x_add_widget (Dlg_head *h, Widget_Item *w);
+void x_panel_container_show          (widget_data wdata);
+void x_destroy_cmd        	     (void *);
+int  x_create_radio       	     (Dlg_head *h, widget_data parent, WRadio *r);
+int  x_create_check       	     (Dlg_head *h, widget_data parent, WCheck *c);
+int  x_create_label       	     (Dlg_head *h, widget_data parent, WLabel *l);
+int  x_create_input       	     (Dlg_head *h, widget_data parent, WInput *in);
+int  x_create_listbox     	     (Dlg_head *h, widget_data parent, WListbox *l);
+int  x_create_buttonbar   	     (Dlg_head *h, widget_data parent, WButtonBar *bb);
+void x_filter_changed   	     (WPanel *panel);
+void x_list_insert      	     (WListbox *l, WLEntry *p, WLEntry *e);
+void x_redefine_label   	     (WButtonBar *bb, int idx);
+void x_add_widget       	     (Dlg_head *h, Widget_Item *w);
 
 struct gmc_color_pairs_s {
 	GdkColor *fore, *back;

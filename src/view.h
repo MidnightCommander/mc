@@ -117,17 +117,19 @@ int view_init (WView *view, char *_command, char *_file, int start_line);
 int view_file (char *filename, int normal, int internal);
 
 /* Internal view routines */
-void view_update (WView *view);
-void view_labels (WView *view);
-int view_event (WView *view, Gpm_Event *event,int *result);
-void toggle_wrap_mode (WView *);
-void toggle_hex_mode (WView *);
-void goto_line (WView *);
-void regexp_search_cmd (WView *);
-void normal_search_cmd (WView *);
-void continue_search (WView *);
-void change_nroff (WView *view);
-void set_monitor (WView *view, int set_on);
+void view_status        (WView *);
+void view_percent       (WView *, int, int);
+void view_update        (WView *view);
+void view_labels        (WView *view);
+int view_event          (WView *view, Gpm_Event *event,int *result);
+void toggle_wrap_mode   (WView *);
+void toggle_hex_mode    (WView *);
+void goto_line          (WView *);
+void regexp_search_cmd  (WView *);
+void normal_search_cmd  (WView *);
+void continue_search    (WView *);
+void change_nroff       (WView *view);
+void set_monitor        (WView *view, int set_on);
 #endif
 
 /* Command: view a file, if _command != NULL we use popen on _command */
@@ -171,6 +173,11 @@ void view_set_color     (WView *view, int font);
 void view_display_clean (WView *view, int h, int w);
 void view_move_backward (WView *view, int i);
 void view_move_forward  (WView *view, int i);
+
+void x_destroy_view     (WView *);
+void x_create_viewer    (WView *);
+void x_focus_view       (WView *);
+void x_init_view        (WView *);
 
 #ifdef PORT_HAS_VIEW_FREEZE
 void view_freeze (WView *view);

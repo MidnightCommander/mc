@@ -105,6 +105,7 @@ void close_error_pipe (int error, char *text);
 /* Process spawning */
 void my_putenv (char*, char*);
 int my_system (int as_shell_command, const char *shell, const char *command);
+int my_system_get_child_pid (int as_shell_command, const char *shell, const char *command, pid_t *pid);
 void save_stop_handler (void);
 extern struct sigaction startup_handler;
 

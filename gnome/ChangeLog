@@ -1,5 +1,31 @@
 1998-04-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* glayout.c (assign_other): Keep track of all of the opened
+	panels.  We were never removing them from the containers list.
+	This fixes a number of problems.
+
+	* gwidget.c (x_dialog_stop): Only call gtk_main_quit if this
+	dialog did not inlcude the DLG_GNOME_APP flag, as those windows
+	did not launch a gtk_main event loop.
+	
+	* gcmd.c: Try various terminal programs in the PATH before giving
+	up 
+	
+	* glayout.c: Unselect command is unselect_cmd, not select_cmd
+
+	* gcmd.c (gnome_quit_cmd): Add quit confirmation.
+
+	* gdesktop.c (perform_drop_manually): Check the type for the
+	source file (directory/file) and perform the proper operation.
+	Before this we always did a *_file_file operation.
+	(perform_drop_manually): Use copy_dir_dir correctly
+	(desktop_setup_default): Use copy_dir_dir correctly
+
+	* gwidget.c (x_create_label): Remove debugging labels.
+
+	* gscreen.c: Do not show the view/view unfiltered if the
+	selectioned item is a directory.
+
 	* gwidget.c (x_radio_toggle): Never commit non-compilable code.
 
 1998-04-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>

@@ -41,6 +41,9 @@ char *default_edition_colors =
 "menuhotsel=cyan,black:"
 "special=black";
 
+/* The Dlg_head for the whole desktop */
+Dlg_head *desktop_dlg;
+
 void
 init_pair (int index, GdkColor *fore, GdkColor *back)
 {
@@ -381,7 +384,6 @@ dialog_panel_callback (struct Dlg_head *h, int id, int msg)
 void
 create_panels (void)
 {
-	Dlg_head *h;
 	WPanel *panel;
 	
 	start_desktop ();
@@ -390,13 +392,13 @@ create_panels (void)
 
 	gnome_init_panels ();
 	
-	h = create_dlg (0, 0, 24, 80, 0, dialog_panel_callback, "[panel]", "midnight", DLG_NO_TED);
+	desktop_dlg = create_dlg (0, 0, 24, 80, 0, dialog_panel_callback, "[panel]", "midnight", DLG_NO_TED);
 	
-	panel = create_container (h, "My Panel");
-	add_widget (h, panel);
+	panel = create_container (desktop_dlg, "My Panel");
+	add_widget (desktop_dlg, panel);
 
 	set_current_panel (0);
-	run_dlg (h);
+	run_dlg (desktop_dlg);
 
 	/* shutdown gnome specific bits of midnight commander */
 	stop_desktop ();

@@ -17,6 +17,7 @@
 #include "wtools.h"
 #include "dialog.h"
 #include "color.h"
+#include "gmain.h"
 
 Dlg_head *last_query_dlg;
 static int sel_pos;

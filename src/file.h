@@ -7,11 +7,14 @@ enum { FILE_CONT, FILE_RETRY, FILE_SKIP, FILE_ABORT };
 extern int verbose;
 extern int know_not_what_am_i_doing;
 
+struct link;
+
 int copy_file_file (char *s, char *d, int ask_overwrite);
 int move_file_file (char *s, char *d);
 int erase_dir (char *s);
 int erase_dir_iff_empty (char *s);
 int move_dir_dir (char *s, char *d);
+int copy_dir_dir (char *s, char *d, int toplevel, int move_over, int delete, struct link *parent_dirs);
 
 void create_op_win (int op, int with_eta);
 void destroy_op_win (void);

@@ -1103,7 +1103,7 @@ void tree_copy (WTree *tree, char *default_dest)
     }
     create_op_win (OP_COPY, 0);
     file_mask_defaults ();
-    copy_dir_dir (tree->selected_ptr->name, dest, 1, 0);
+    copy_dir_dir (tree->selected_ptr->name, dest, 1, 0, 0, 0);
     destroy_op_win ();
     free (dest);
 }

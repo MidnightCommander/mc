@@ -13,6 +13,7 @@
 #include "panel.h"
 #include "gscreen.h"
 #include "main.h"
+#include "gmain.h"
 #include "cmd.h"
 #include "boxes.h"
 #include "panelize.h"
@@ -35,7 +36,10 @@ PanelContainer *current_panel_ptr, *other_panel_ptr;
 WPanel *
 get_current_panel (void)
 {
-	return current_panel_ptr->panel;
+	if (current_panel_ptr)
+		return current_panel_ptr->panel;
+	else
+		return NULL;
 }
 
 WPanel *
@@ -91,12 +95,89 @@ set_new_current_panel (WPanel *panel)
 {
 	GList *p;
 
-	other_panel_ptr = current_panel_ptr;
+	if (g_list_length (containers) > 1)
+		other_panel_ptr = current_panel_ptr;
+	
 	for (p = containers; p; p = p->next){
 		if (((PanelContainer *)p->data)->panel == panel){
 			current_panel_ptr = p->data;
 		}
 	}
+}
+
+/*
+ * Tries to assign other_panel (ie, if there is anything to assign to
+ */
+static void
+assign_other (void)
+{
+	GList *p;
+
+	other_panel_ptr = NULL;
+	for (p = containers; p; p = p->next)
+		if (p->data != current_panel_ptr){
+			other_panel_ptr = p->data;
+			printf ("PANEL: Found another other\n");
+			break;
+		}
+}
+
+/*
+ * This keeps track of the current_panel_ptr and other_panel_ptr as
+ * well as the list of active containers
+ */
+void
+layout_panel_gone (WPanel *panel)
+{
+	PanelContainer *pc_holder = 0;
+	int len = g_list_length (containers);
+	GList *p;
+	
+	for (p = containers; p; p = p->next){
+		PanelContainer *pc = p->data;
+
+		if (pc->panel == panel){
+			pc_holder = pc;
+			break;
+		}
+	}
+
+	printf ("PANEL: Going away [%d]\n", len);
+	if (len > 1){
+		containers = g_list_remove (containers, pc_holder);
+		printf ("PANEL: extra panels left\n");
+	}
+
+	/* Check if this is not the current panel */
+	if (current_panel_ptr->panel == panel){
+		printf ("PANEL: was current panel\n");
+		if (other_panel_ptr){
+			current_panel_ptr = other_panel_ptr;
+			assign_other ();
+			printf ("PANEL: setting current to other\n");
+		} else {
+			current_panel_ptr = NULL;
+			printf ("PANEL: No current panel now\n");
+		}
+	} else if (other_panel_ptr->panel == panel){
+	        /* Check if it was the other panel */
+		printf ("PANEL: was the other panel\n");
+		if (len == 1){
+			other_panel_ptr = 0;
+			printf ("PANEL: We are left without other\n");
+		} else 
+			assign_other ();
+	} else {
+		printf ("PANEL: was some other panel\n");
+	}
+
+	if (len == 1){
+		g_free (containers->data);
+		g_list_free (containers);
+		containers = NULL;
+		printf ("PANEL: It was the last one\n");
+	} else
+		g_free (pc_holder);
 }
 
 void
@@ -202,7 +283,7 @@ GnomeUIInfo gnome_panel_file_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("View raw"),          N_("View the file without further processing"),panel_action_view_unfiltered},
 	{ GNOME_APP_UI_SEPARATOR },	
 	{ GNOME_APP_UI_ITEM, N_("Select group"),      N_("Selects a group of files"), select_cmd },
-	{ GNOME_APP_UI_ITEM, N_("Unselect group"),    N_("Un-selects a group of marked files"), select_cmd },
+	{ GNOME_APP_UI_ITEM, N_("Unselect group"),    N_("Un-selects a group of marked files"), unselect_cmd },
 	{ GNOME_APP_UI_ITEM, N_("Reverse selection"), N_("Reverses the list of tagged files"), reverse_selection_cmd },
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("Close"),             N_("Close this panel"), gnome_close_panel },
@@ -359,11 +440,10 @@ void
 new_panel_at (char *dir)
 {
 	WPanel *panel;
-	Dlg_head *h = current_panel_ptr->panel->widget.parent;
 	
 	mc_chdir (dir);
-	panel = create_container (h, dir);
-	add_widget (h, panel);
+	panel = create_container (desktop_dlg, dir);
+	add_widget (desktop_dlg, panel);
 
 	set_new_current_panel (panel);
 }

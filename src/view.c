@@ -670,7 +670,7 @@ view_init (WView *view, char *_command, char *_file, int start_line)
 /* {{{ Screen update functions */
 
 #ifndef HAVE_X
-static void
+void
 view_percent (WView *view, int p, int w)
 {
     int percent;
@@ -690,7 +690,7 @@ view_percent (WView *view, int p, int w)
     printw ("%3d%% ", percent);
 }
 
-static void
+void
 view_status (WView *view)
 {
     int w = view->widget.cols - (view->have_frame * 2);

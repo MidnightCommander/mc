@@ -345,10 +345,11 @@ int remove_widget (Dlg_head *h, void *what)
 	    }
 	    h->count--;
 	    free (p);
-	    return;
+	    return 1;
 	}
 	p = p->next;
     } while (p != first);
+    return 0;
 }
 
 int destroy_widget (Widget *w)
@@ -357,6 +358,7 @@ int destroy_widget (Widget *w)
     if (w->destroy)
 	w->destroy (w);
     free (w);
+    return 1;
 }
 
 int add_widget (Dlg_head *where, void *what)

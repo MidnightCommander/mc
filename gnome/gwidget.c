@@ -30,6 +30,8 @@ get_gtk_widget (Widget_Item *p)
 void
 x_dialog_stop (Dlg_head *h)
 {
+	if (h->grided & DLG_GNOME_APP)
+		return;
 	gtk_main_quit ();
 }
 
@@ -456,9 +458,12 @@ x_create_label (Dlg_head *g, widget_data parent, WLabel *l)
 	GtkWidget *label;
 
 	/* Tempo-hack */
-	if (*l->text == 0)
-		label = gtk_label_new (l->widget.tkname);
-	else
+	if (*l->text == 0){
+		if (0)
+			label = gtk_label_new (l->widget.tkname);
+		else
+			label = gtk_label_new ("");
+	} else
 		label = gtk_label_new (l->text);
 	gtk_widget_show (label);
 	l->widget.wdata = (widget_data) label;

@@ -63,6 +63,7 @@ typedef void (*context_menu_callback)(GtkWidget *, WPanel *);
 #define F_REGULAR     2
 #define F_SYMLINK     4
 #define F_SINGLE      8
+#define F_NOTDIR     16
 
 void
 repaint_file (WPanel *panel, int file_index, int move, int attr, int isstatus)
@@ -361,8 +362,8 @@ static struct {
 	{ "",                    F_SINGLE,   	    NULL },
 	{ N_("Open"),            F_ALL,      	    panel_action_open },
 	{ N_("Open with"),       F_ALL,      	    panel_action_open_with },
-	{ N_("View"),            F_ALL,      	    panel_action_view },
-	{ N_("View unfiltered"), F_ALL,      	    panel_action_view_unfiltered },  
+	{ N_("View"),            F_NOTDIR,   	    panel_action_view },
+	{ N_("View unfiltered"), F_NOTDIR,     	    panel_action_view_unfiltered },  
 	{ "",                    0,          	    NULL },
 	{ N_("Link..."),         F_REGULAR | F_SINGLE, (context_menu_callback) link_cmd },
 	{ N_("Symlink..."),      F_SINGLE,             (context_menu_callback) symlink_cmd },
@@ -405,6 +406,17 @@ create_popup_submenu (WPanel *panel, int row, char *filename)
 					break;
 			}
 
+			/* Items with F_NOTDIR requiere that the selection is not a directory */
+			if (file_actions [i].flags & F_NOTDIR){
+				struct stat *s = &panel->dir.list [row].buf;
+
+				if (panel->dir.list [row].f.link_to_dir)
+					break;
+				
+				if (S_ISDIR (s->st_mode))
+					break;
+			}
+			
 			/* Items with F_REGULAR do not accept any strange file types */
 			if (file_actions [i].flags & F_REGULAR){
 				struct stat *s = &panel->dir.list [row].buf;
@@ -983,15 +995,6 @@ panel_create_cwd (Dlg_head *h, WPanel *panel, void **entry)
 	return GTK_WIDGET (in->widget.wdata);
 }
 
-static void
-panel_change_filter (GtkWidget *entry, WPanel *panel)
-{
-	char *reg_exp;
-
-	reg_exp = ((WInput *)panel->filter_w)->buffer; 
-	set_panel_filter_to (panel, strdup (reg_exp));
-}
-
 /* FIXME: for now, this list is hardcoded.  We want a way to let the user configure it. */
 
 static struct filter_item {
@@ -1276,8 +1279,8 @@ void
 x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
 	GtkWidget *status_line, *filter, *vbox;
-	GtkWidget *frame, *cwd, *back, *home, *fwd, *back_p, *fwd_p;
-	GtkWidget *very_top, *display;
+	GtkWidget *frame, *cwd, *back_p, *fwd_p;
+	GtkWidget *display;
 
 	panel->xwindow = gtk_widget_get_toplevel (GTK_WIDGET (panel->widget.wdata));
 	

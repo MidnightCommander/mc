@@ -3,20 +3,24 @@
 IMPORTANTE:
 
 >>>>> properties change on desktop object dont lead to refresh  <<<<<
-
-drags onto desktop dont seem to be refreshed when link complete Also,
-panel drag originated in is trashed by shaped window moving around in it during drag event  
+>>>>> When something is dragged, the panel is not being refreshed <<<<
 
 file actions dont cause panels to be refreshed automatically
 
 All:
 
-- It leaks objects.
 - Session management
 
-Desktop:
+
+EXTENSIONS:
 
 - Add special destkop entries ("Network neighborhood")
+- In the find-file results, it would be nice if 'chdir' popped up a new
+  panel instead of changing the directory of the present one (optionally).
+- (Cool but low priority) it would be nice if 'Arrange icons'
+  were configurable to allow stacking the icons along a particular edge
+  OR if gmc could automatically find areas of free screen (i.e. no windows
+  on them) and then place icons there.
 
 Panels:
 
@@ -41,20 +45,6 @@ DND:
 
 - Get sopwith to fix the random motion of his dnd icons.
 - Check the purify stuff.
-
-Observations from Dr Mike:
-
-From msf@redhat.com  Wed Apr  1 15:12:58 1998
-Return-Path: <msf@redhat.com>
-To: Miguel de Icaza <miguel@nuclecu.unam.mx>
-cc: msf@redhat.com, marc@redhat.com
-Subject: gmc observations
-Mime-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Date: Wed, 01 Apr 1998 16:14:50 -0500
-From: Michael Fulbright <msf@redhat.com>
-
-Ok you asked for it...
 
 General Comments
 ----------------
@@ -109,24 +99,13 @@ Panel comments
  - I didnt get an error message when I tried to change the file modes
    on a file I didnt own.
 
- - double clicking on a file object seemed to try to push an artificial drag
-   sometimes, I thought it would try to open it or something.
-
- - when selecting 'Copy' from the right click menu, it would be nice to
-   have a browsable tree to select the destination from.
-
- - i couldnt seem to drag things onto the root window
-
-
 Configure Options
 -----------------
 
  - need some sort of help for all these options, they aren't too intuitive.
    We can't assume people are going to read the man page.
 
- - 'Find File' dialog - the Tree button needs a pixmap
-
-    Also, during a find, the dialog violently resizes as it lists the
+ -  Also, during a find, the dialog violently resizes as it lists the
     directories it is searching through. Seems like the label showing
     the currently searched dir needs to be a separate container or something.
     It looks like its in the first column of the table of buttons below it.
@@ -140,4 +119,25 @@ VFS Options
    of feedback while grabbing a ls listing from a ftp server would be
    cool.
 
+NEW BUG LIST:
 
+- In the properties dialog, permissions tab, the user & group drop-downs
+  list the same users/groups multiple times.
+- Why use a GnomeEntry *everywhere* when a lot of the places don't need
+  the history that it provides? Only when the user changes an entry
+  box often and needs a history should GnomeEntry be used...?
+- Find file is pretty cool, but you might want to force-set a maximum size
+  during the search (and then unset it after the search is done) to stop
+  it from dancing around while it displays all the files that it's
+  checking in that label below the GtkCList.
+- Hidden directories don't have the right-mouse-button 'Start XTerm
+  here'/'Make a tarball' menu options.
+
+OPEN ISSUES:
+- Selection of multiple files is somewhat confusing in general
+
+- Also if you have multi-file selection, is there a way to get a popup
+  menu of the operations that are applicable to all those files, instead
+  of an empty one?
+- The text in a lot of text entries disappears as soon as I start typing
+  in them.

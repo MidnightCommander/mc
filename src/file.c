@@ -916,7 +916,7 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
  retry_dst_stat:
     if (mc_stat (dst_path, &sb2) == 0){
 	if (S_ISDIR (sb2.st_mode)){
-	    return_status = file_error (_(" Cannot overwrite directory \"%s\" "),
+	    return_status = file_error (_(" Cannot overwrite directory \"%s\" \n %s "),
 					dst_path);
 	    if (return_status == FILE_RETRY)
 		goto retry_dst_stat;
@@ -1334,7 +1334,7 @@ copy_dir_dir (char *s, char *d, int toplevel, int move_over, int delete,
     }
 
     if (!S_ISDIR (cbuf.st_mode)){
-	return_status = file_error (_(" Source directory \"%s\" is not a directory "), s);
+	return_status = file_error (_(" Source directory \"%s\" is not a directory \n %s "), s);
 	if (return_status == FILE_RETRY)
 	    goto retry_src_stat;
 	return return_status;
@@ -1647,9 +1647,9 @@ move_dir_dir (char *s, char *d)
 	    goto oktoret;
 	} else {
 	    if (S_ISDIR (destbuf.st_mode))
-	        return_status = file_error (_(" Cannot overwrite directory \"%s\" "), destdir);
+	        return_status = file_error (_(" Cannot overwrite directory \"%s\" %s "), destdir);
 	    else
-	        return_status = file_error (_(" Cannot overwrite file \"%s\" "), destdir);
+	        return_status = file_error (_(" Cannot overwrite file \"%s\" %s "), destdir);
 	    if (return_status == FILE_RETRY)
 	        goto retry_dst_stat;
 	}
@@ -2227,7 +2227,7 @@ panel_operate (void *source_panel, int operation, char *thedefault)
 	retry_many_dst_stat:
 	    dst_result = mc_stat (dest, &dst_stat);
 	    if (dst_result == 0 && !S_ISDIR (dst_stat.st_mode)){
-		if (file_error (_(" Destination \"%s\" must be a directory "), dest) == FILE_RETRY)
+		if (file_error (_(" Destination \"%s\" must be a directory \n %s "), dest) == FILE_RETRY)
 		    goto retry_many_dst_stat;
 		goto clean_up;
 	    }
@@ -2352,7 +2352,7 @@ real_do_file_error (enum OperationMode mode, char *error)
     char *msg;
 
     msg = mode == Foreground ? MSG_ERROR : _(" Background process error ");
-    result = query_dialog (msg, error, 3, 3, _("&Skip"), _("&Retry"), _("&Abort"));
+    result = query_dialog (msg, error, D_ERROR, 3, _("&Skip"), _("&Retry"), _("&Abort"));
 
     switch (result){
     case 0:

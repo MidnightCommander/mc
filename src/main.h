@@ -148,18 +148,18 @@ enum cd_enum {
     cd_exact
 };
 
-int do_cd (char *new_dir, enum cd_enum cd_type);	/* For find.c */
-void change_panel (void);
-void init_sigchld (void);	/* For subshell.c */
-int load_prompt (int fd, void *unused);
+int do_cd           (char *new_dir, enum cd_enum cd_type);	/* For find.c */
+void change_panel   (void);
+void init_sigchld   (void);	/* For subshell.c */
+int load_prompt     (int fd, void *unused);
 void save_cwds_stat (void);
 void copy_prog_name (void);
-int quiet_quit_cmd (void);	/* For cmd.c and command.c */
-int quit_cmd (void);
+int quiet_quit_cmd  (void);	/* For cmd.c and command.c */
+int quit_cmd        (void);
 
-void untouch_bar (void);
-void touch_bar (void);
-void load_hint (void);
+void untouch_bar    (void);
+void touch_bar      (void);
+void load_hint      (void);
 
 void print_vfs_message(char *msg, ...);
 
@@ -179,6 +179,15 @@ extern WLabel      *process_status;
 extern WMenu      *the_menubar;
 
 extern Dlg_head *midnight_dlg;
+
+/* Back hack to define the following routines only if the client code
+ * has included panel.h
+ */
+#ifdef __PANEL_H
+void directory_history_add (WPanel *panel, char *s);
+int  do_panel_cd           (WPanel *panel, char *new_dir, enum cd_enum cd_type);
+#endif
+
 #endif
 
 #ifdef OS2_NT

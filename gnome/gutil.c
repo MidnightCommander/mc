@@ -48,10 +48,9 @@
 #include <X11/Xlib.h>
 #include <gdk/gdkprivate.h>
 
-int my_system (int as_shell_command, const char *shell, const char *command)
+int my_system_get_child_pid (int as_shell_command, const char *shell, const char *command, pid_t *pid)
 {
 	struct sigaction ignore, save_intr, save_quit, save_stop;
-	pid_t pid;
 	int status = 0, i;
 
 	ignore.sa_handler = SIG_IGN;
@@ -61,11 +60,11 @@ int my_system (int as_shell_command, const char *shell, const char *command)
 	sigaction (SIGINT, &ignore, &save_intr);    
 	sigaction (SIGQUIT, &ignore, &save_quit);
 
-	if ((pid = fork ()) < 0){
+	if ((*pid = fork ()) < 0){
 		fprintf (stderr, "\n\nfork () = -1\n");
 		return -1;
 	}
-	if (pid == 0){
+	if (*pid == 0){
 		const int top = max_open_files ();
 		sigaction (SIGINT,  &save_intr, NULL);
 		sigaction (SIGQUIT, &save_quit, NULL);
@@ -89,6 +88,13 @@ int my_system (int as_shell_command, const char *shell, const char *command)
 #endif /* SCO_FLAVOR */
 
 	return WEXITSTATUS(status);
+}
+
+int my_system (int as_shell_command, const char *shell, const char *command)
+{
+	pid_t pid;
+	
+	return my_system_get_child_pid (as_shell_command, shell, command, &pid);
 }
 
 int

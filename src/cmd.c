@@ -80,6 +80,7 @@
 #include "user.h"
 #include "setup.h"
 #include "x.h"
+#include "profile.h"
 
 #define MIDNIGHT
 #ifdef  USE_INTERNAL_EDIT
@@ -1404,7 +1405,11 @@ save_setup_cmd (void)
     sync_profiles ();
     str = copy_strings ( _(" Setup saved to ~/"), PROFILE_NAME, NULL);
     
+#ifdef HAVE_GNOME
+    set_hintbar (str);
+#else
     message (0, _(" Setup "), str);
+#endif
     free (str);
 }
 

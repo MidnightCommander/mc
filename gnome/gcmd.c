@@ -1,3 +1,10 @@
+/*
+ * Various Menu-invoked Command implementations specific to the GNOME port
+ *
+ * Copyright (C) 1998 the Free Software Foundation
+ *
+ * Author: Miguel de Icaza (miguel@kernel.org)
+ */
 #include <config.h>
 #include "x.h"
 #include <stdio.h>
@@ -40,7 +47,19 @@ gnome_compare_panels (void)
 void
 gnome_open_terminal (void)
 {
-	my_system (1, shell, "nxterm");
+	char *p;
+	
+	if (!(p = gnome_is_program_in_path ("gnome-terminal")))
+		if (!(p = gnome_is_program_in_path ("dtterm")))
+			if (!(p = gnome_is_program_in_path ("nxterm")))
+				if (!(p = gnome_is_program_in_path ("color-xterm")))
+					if (!(p = gnome_is_program_in_path ("rxvt")))
+						p = gnome_is_program_in_path ("xterm");
+
+	if (p)
+		my_system (1, shell, p);
+	else
+		message (1, MSG_ERROR, " Could not start a terminal ");
 }
 
 void
@@ -65,7 +84,17 @@ gnome_about_cmd (void)
 void
 gnome_quit_cmd (void)
 {
-	gtk_main_quit ();
+	int q = 0;
+
+	if (!confirm_exit)
+		q = 1;
+	else if (query_dialog (_(" The Midnight Commander "),
+			       _(" Do you really want to quit the Midnight Commander? "),
+			       0, 2, _("&Yes"), _("&No")) == 0)
+		q = 1;
+	
+	if (q == 1)
+		gtk_main_quit ();
 }
 
 void
@@ -89,5 +118,6 @@ gnome_close_panel (GtkWidget *widget, WPanel *panel)
 	destroy_widget (panel->filter_w);
 	destroy_widget ((void *)panel);
 
+	layout_panel_gone (panel);
 	return TRUE;
 }

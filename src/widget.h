@@ -217,4 +217,17 @@ void redraw_labels (Dlg_head *h, Widget *paneletc);
 WButtonBar *find_buttonbar (Dlg_head *h, Widget *paneletc);
 void buttonbar_hint (WButtonBar *bb, char *s);
 
+#ifdef HAVE_X
+int  x_create_radio       	     (Dlg_head *h, widget_data parent, WRadio *r);
+int  x_create_check       	     (Dlg_head *h, widget_data parent, WCheck *c);
+int  x_create_label       	     (Dlg_head *h, widget_data parent, WLabel *l);
+int  x_create_input       	     (Dlg_head *h, widget_data parent, WInput *in);
+int  x_create_listbox     	     (Dlg_head *h, widget_data parent, WListbox *l);
+int  x_create_buttonbar   	     (Dlg_head *h, widget_data parent, WButtonBar *bb);
+
+void x_listbox_select_nth (WListbox *, int);
+void x_list_insert        (WListbox *, WLEntry *, WLEntry *);
+void x_redefine_label     (WButtonBar *, int);
+#endif
+
 #endif	/* __WIDGET_H */

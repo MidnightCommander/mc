@@ -423,6 +423,7 @@ perform_drop_on_directory (WPanel *source_panel, int operation, char *dest)
 static void
 perform_drop_manually (int operation, GdkEventDropDataAvailable *event, char *dest)
 {
+	struct stat buf;
 	int count = event->data_numbytes;
 	char *p   = event->data;
 	int len;
@@ -440,6 +441,7 @@ perform_drop_manually (int operation, GdkEventDropDataAvailable *event, char *de
 	
 	do {
 		char *tmpf;
+		int res, v;
 		
 		len = 1 + strlen (event->data);
 		count -= len;
@@ -447,15 +449,37 @@ perform_drop_manually (int operation, GdkEventDropDataAvailable *event, char *de
 		switch (operation){
 		case OPER_COPY:
 			tmpf = concat_dir_and_file (dest, x_basename (p));
-			copy_file_file (p, tmpf, 1);
+			do {
+				res = mc_stat (p, &buf);
+				if (res != 0){
+					v = file_error (" Could not stat %s \n %s ", tmpf);
+					if (v != FILE_RETRY)
+						res = 0;
+				} else {
+					if (S_ISDIR (buf.st_mode))
+						copy_dir_dir (p, tmpf, 1, 0, 0, 0);
+					else
+						copy_file_file (p, tmpf, 1);
+				}
+			} while (res != 0);
 			free (tmpf);
 			break;
 			
 		case OPER_MOVE:
-			create_op_win (OP_MOVE, 0);
-			file_mask_defaults ();
 			tmpf = concat_dir_and_file (dest, x_basename (p));
-			move_file_file (p, tmpf);
+			do {
+				res = mc_stat (p, &buf);
+				if (res != 0){
+					v = file_error (" Could not stat %s \n %s ", tmpf);
+					if (v != FILE_RETRY)
+						res = 0;
+				} else {
+					if (S_ISDIR (buf.st_mode))
+						move_dir_dir (p, tmpf);
+					else
+						move_file_file (p, tmpf);
+				}
+			} while (res != 0);
 			free (tmpf);
 			break;
 		}
@@ -1255,7 +1279,7 @@ desktop_setup_default (char *desktop_dir)
 	if (exist_file (mc_desktop_dir)){
 		create_op_win (OP_COPY, 0);
 		file_mask_defaults ();
-		copy_dir_dir (mc_desktop_dir, desktop_dir);
+		copy_dir_dir (mc_desktop_dir, desktop_dir, 1, 0, 0, 0);
 		destroy_op_win ();
 	} else 
 		mkdir (desktop_dir, 0777);

@@ -29,6 +29,7 @@
 #include <sys/param.h>
 #include <malloc.h>
 #include <signal.h>
+#include <ctype.h>
 #include "global.h"
 #include "mad.h"		/* The great mad */
 #include "util.h"		/* Required by panel.h */

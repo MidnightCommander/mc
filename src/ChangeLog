@@ -1,5 +1,14 @@
 1998-04-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* file.h: Added prototype for copy_dir_dir.
+
+	* file.c (real_do_file_error): use the proper flags, this is not a
+	D_INSERT dialog box, for what it is worth.  Important bug fix.  
+
+	* utilunix.c (get_owner): Declare.
+
+	* widget.h: Added various missing prototypes for the X edition.
+	* view.h: Added various missing prototypes for the X edition.
 	* widget.c (x_radio_toggle): New per-port variable: PORT_HAS_RADIO_TOGGLE
 
 1998-04-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>

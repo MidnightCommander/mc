@@ -80,7 +80,7 @@ scrollbar_moved (GtkAdjustment *adj, WView *view)
 }
 
 void
-view_percent (WView *view, int p)
+view_percent (WView *view, int p, int w)
 {
     int percent;
     char buffer [40];
@@ -127,9 +127,9 @@ view_status (WView *view)
 		gtk_label_set (GTK_LABEL (view->gtk_bytes), buffer);
 
 	if (view->hex_mode)
-		view_percent (view, view->edit_cursor - view->first);
+		view_percent (view, view->edit_cursor - view->first, 0);
 	else
-		view_percent (view, view->start_display - view->first);
+		view_percent (view, view->start_display - view->first, 0);
 }
 
 void
@@ -323,6 +323,13 @@ GnomeUIInfo gview_top_menu [] = {
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 
+static int
+quit_view (GtkWidget *widget, GdkEvent *event, WView *view)
+{
+	gview_quit (widget, view);
+	return TRUE;
+}
+	   
 int
 view (char *_command, char *_file, int *move_dir_p, int start_line)
 {
@@ -378,6 +385,9 @@ view (char *_command, char *_file, int *move_dir_p, int start_line)
 	scrollbar = gtk_vscrollbar_new (wview->sadj);
 	gtk_signal_connect (GTK_OBJECT (wview->sadj), "value_changed",
 			    GTK_SIGNAL_FUNC(scrollbar_moved), wview);
+
+	gtk_signal_connect (GTK_OBJECT (toplevel), "delete_event",
+			    GTK_SIGNAL_FUNC (quit_view), wview);
 	
 	hbox = gtk_hbox_new (0, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, 1, 1, 0);
