@@ -1,3 +1,15 @@
+1999-01-03  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* main.c (update_one_panel_widget): GNOME version does the panel
+	update here (this is an optimization, as we do not want do_refresh
+	to do anything.
+
+	* dialog.c (do_refresh): Remove this optimization as it was
+	disabling the repainting of the screen contents.
+
+	* hotlist.c (done_hotlist): The hotlist might not be loaded
+	anymore. 
+
 1999-01-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* widget.c (listbox_new): Under GNOME, height of the listbox might

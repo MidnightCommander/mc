@@ -19,6 +19,7 @@
 #include "dialog.h"
 #include "color.h"
 #include "gmain.h"
+#include "gwidget.h"
 Dlg_head *last_query_dlg;
 static int sel_pos;
 
@@ -38,34 +39,35 @@ pack_button (WButton *button, GtkBox *box)
 int query_dialog (char *header, char *text, int flags, int count, ...)
 {
 	va_list ap;
-	Dlg_head  *h;
 	WLabel    *label;
 	GtkWidget *dialog;
 	int i, result = -1;
 	gchar **buttons;
-
+	char *stock;
+	
 	if (header == MSG_ERROR)
 		header = _("Error");
-	h = create_dlg (0, 0, 0, 0, dialog_colors, default_dlg_callback, "[QueryBox]", "query",
-			DLG_NO_TED | DLG_NO_TOPLEVEL);
 
 	/* extract the buttons from the args */
 	buttons = g_malloc (sizeof (gchar[flags + 1]));
 	va_start (ap, count);
-	for (i = 0; i < count; i++)
-	  buttons[i] = va_arg (ap, char *);
+	for (i = 0; i < count; i++){
+		char *text;
+
+		text = va_arg (ap, char *);
+		stock = stock_from_text (text);
+		if (stock)
+			buttons [i] = stock;
+		else
+			buttons [i] = text;
+	}
 	va_end (ap);
 
 	buttons[i] = NULL;
 	dialog = gnome_message_box_newv (text, header, buttons);
 
-	switch (gnome_dialog_run_and_close (GNOME_DIALOG (dialog))){
-	case B_CANCEL:
-		break;
-	default:
-		result = h->ret_value - B_USER;
-	}
-
+	result = gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
+	
 	return result;
 }
 

@@ -446,6 +446,11 @@ update_one_panel_widget (WPanel *panel, int force_update, char *current_file)
 
     if (free_pointer)
 	free (current_file);
+
+#ifdef HAVE_X
+    paint_panel (panel);
+    panel->dirty = 0;
+#endif
 }
 
 #ifndef PORT_HAS_UPDATE_PANELS

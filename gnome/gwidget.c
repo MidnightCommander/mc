@@ -82,6 +82,29 @@ gbutton_callback (GtkWidget *w, void *data)
 	}
 }
 
+char *
+stock_from_text (char *text)
+{
+	char *stock;
+		
+	if (strcasecmp (text, _("ok")) == 0)
+		stock = GNOME_STOCK_BUTTON_OK;
+	else if (strcasecmp (text, _("cancel")) == 0)
+		stock = GNOME_STOCK_BUTTON_CANCEL;
+	else if (strcasecmp (text, _("help")) == 0)
+		stock = GNOME_STOCK_BUTTON_HELP;
+	else if (strcasecmp (text, _("yes")) == 0)
+		stock = GNOME_STOCK_BUTTON_YES;
+	else if (strcasecmp (text, _("no")) == 0)
+		stock = GNOME_STOCK_BUTTON_NO;
+	else if (strcasecmp (text, _("exit")) == 0)
+		stock = GNOME_STOCK_BUTTON_CLOSE;
+	else if (strcasecmp (text, _("abort")) == 0)
+		stock = GNOME_STOCK_BUTTON_CANCEL;
+	else
+		stock = 0;
+}
+
 int
 x_create_button (Dlg_head *h, widget_data parent, WButton *b)
 {
@@ -89,22 +112,7 @@ x_create_button (Dlg_head *h, widget_data parent, WButton *b)
 	char *stock;
 	int tag;
 
-	if (strcasecmp (b->text, _("ok")) == 0)
-		stock = GNOME_STOCK_BUTTON_OK;
-	else if (strcasecmp (b->text, _("cancel")) == 0)
-		stock = GNOME_STOCK_BUTTON_CANCEL;
-	else if (strcasecmp (b->text, _("help")) == 0)
-		stock = GNOME_STOCK_BUTTON_HELP;
-	else if (strcasecmp (b->text, _("yes")) == 0)
-		stock = GNOME_STOCK_BUTTON_YES;
-	else if (strcasecmp (b->text, _("no")) == 0)
-		stock = GNOME_STOCK_BUTTON_NO;
-	else if (strcasecmp (b->text, _("exit")) == 0)
-		stock = GNOME_STOCK_BUTTON_CLOSE;
-	else if (strcasecmp (b->text, _("abort")) == 0)
-		stock = GNOME_STOCK_BUTTON_CANCEL;
-	else
-		stock = 0;
+	stock = stock_from_text (b->text);
 
 	if (stock){
 		button = gnome_stock_button (stock);

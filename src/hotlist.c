@@ -1600,13 +1600,18 @@ int save_hotlist (void)
 
 void done_hotlist (void)
 {
-    remove_group (hotlist);
+    if (hotlist)
+        remove_group (hotlist);
     hotlist_state.loaded = 0;
-    if (hotlist->label)
-        free (hotlist->label);
-    if (hotlist->directory)
-        free (hotlist->directory);
-    free (hotlist);
+
+    if (hotlist){
+	if (hotlist->label)
+	    free (hotlist->label);
+        if (hotlist->directory)
+            free (hotlist->directory);
+        free (hotlist);
+    }
+    
     if (hotlist_file_name)
         free (hotlist_file_name);
     hotlist_file_name = 0;
