@@ -685,6 +685,7 @@ editing_started (GnomeIconTextItem *iti, gpointer data)
 	unselect_all (dii);
 
 	gtk_grab_add (dii->dicon);
+	setup_editing_grab (dii);
 	gdk_keyboard_grab (GTK_LAYOUT (DESKTOP_ICON (dii->dicon)->canvas)->bin_window,
 			   FALSE, GDK_CURRENT_TIME);
 }
@@ -1210,6 +1211,7 @@ icon_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gin
 
 	switch (info) {
 	case TARGET_URI_LIST:
+		printf ("Wheeeeee!\n");
 		desktop_icon_drop_uri_list (dii, context, data);
 		break;
 
