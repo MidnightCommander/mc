@@ -165,7 +165,7 @@ $(CORBA_SOURCES): $(CORBA_GENERATED)
 FileManager-impl.c: FileManager.h
 
 DISTGNOME = \
-	Makefile.in gnome.TODO layout FileManager.goad	\
+	Makefile.in gnome.TODO layout gmc.gnorba	\
 	$(PIXMAPS) $(ICONS) $(GNOMESRCS) $(GNOMEHDRS) 	\
 	$(CORBA_SOURCES)
 

@@ -1,5 +1,0 @@
-[FileManager]
-type=exe
-repo_id=IDL:GNOME/FileManager:1.0
-description=File Manager
-location_info=corba-gmc
