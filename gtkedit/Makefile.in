@@ -42,7 +42,7 @@ libgtkedit.a: $(EDITOBJS)
 	-$(RANLIB) $@
 
 mcedit:
-	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)mcedit
+	$(RMF) $(DESTDIR)$(bindir)/$(binprefix)mcedit
 	$(LN_S) mc $(DESTDIR)$(bindir)/$(binprefix)mcedit
 
 showlibdep:
@@ -64,15 +64,15 @@ realclean: clean
 	$(RMF) *~
 
 distclean:
-	-$(RMF) $(srcdir)/*~ $(srcdir)/*.o $(srcdir)/a.out
-	-$(RMF) $(srcdir)/core $(srcdir)/libgtkedit.a
+	$(RMF) $(srcdir)/*~ $(srcdir)/*.o $(srcdir)/a.out
+	$(RMF) $(srcdir)/core $(srcdir)/libgtkedit.a
 	-if test $(srcdir) = .; then $(MAKE) realclean; fi
-	-$(RMF) $(srcdir)/Makefile
+	$(RMF) $(srcdir)/Makefile
 
 install: @MCEDIT@
 
 uninstall:
-	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)mcedit
+	$(RMF) $(DESTDIR)$(bindir)/$(binprefix)mcedit
 
 distcopy:
 	for I in $(DIST); do $(CP) $(top_srcdir)/gtkedit/$$I $(top_srcdir)/mc-$(VERSION)/gtkedit; done

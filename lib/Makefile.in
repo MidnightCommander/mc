@@ -62,7 +62,7 @@ install:
 	for I in $(LIBFILES_OUT); \
 	do $(INSTALL_DATA) $(builddir)/lib/$$I $(DESTDIR)$(mclibdir)/$$I; done
 	for I in $(SUPPBIN_OUT); \
-	do $(INSTALL_PROGRAM) -m 755 $(builddir)/lib/$$I $(DESTDIR)$(suppbindir)//$$I; done
+	do $(INSTALL_PROGRAM) -m 755 $(builddir)/lib/$$I $(DESTDIR)$(suppbindir)/$$I; done
 	for I in $(TIFILES); \
 	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(tidir)/$$I; done
 	$(MKINSTALLDIRS) $(DESTDIR)$(confdir)
@@ -74,8 +74,14 @@ install:
 uninstall:
 	for I in $(LIBFILES_OUT) $(LIBFILES_CONST); \
 	do $(RMF) $(DESTDIR)$(mclibdir)/$$I; done
+	for I in $(SUPPBIN_OUT); \
+	do $(RMF) $(DESTDIR)$(suppbindir)/$$I; done
+	for I in $(DESKTOP_FILES); \
+	do $(RMF) $(DESTDIR)$(desktopdir)/$$I; done
 	for I in $(TIFILES); \
 	do $(RMF) $(DESTDIR)$(tidir)/$$I; done
+	$(RMF) $(DESTDIR)$(confdir)/mc.global
+	-rmdir $(DESTDIR)$(desktopdir)
 	-rmdir $(DESTDIR)$(tidir)
 	-rmdir $(DESTDIR)$(mclibdir)
 

@@ -66,8 +66,8 @@ mcfninstall:
 
 uninstall:
 	@for I in $(unixdirs); do cd $$I; $(MAKE) $@ || exit 1; cd ..; done
-	-$(RMF) $(DESTDIR)$(mclibdir)/FAQ
-	-$(RMF) $(DESTDIR)$(suppbindir)/mcfn_install
+	$(RMF) $(DESTDIR)$(mclibdir)/FAQ
+	$(RMF) $(DESTDIR)$(suppbindir)/mcfn_install
 	-rmdir $(DESTDIR)$(suppbindir)
 	-rmdir $(DESTDIR)$(mclibdir)
 	@echo Midnight Commander uninstalled

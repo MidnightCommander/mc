@@ -59,10 +59,10 @@ realclean: clean
 	$(RMF) *~
 
 distclean:
-	-$(RMF) $(srcdir)/*~ $(srcdir)/*.o $(srcdir)/core $(srcdir)/a.out
-	-$(RMF) $(srcdir)/libmcslang.a 
+	$(RMF) $(srcdir)/*~ $(srcdir)/*.o $(srcdir)/core $(srcdir)/a.out
+	$(RMF) $(srcdir)/libmcslang.a 
 	-if test $(srcdir) = .; then $(MAKE) realclean; fi
-	-$(RMF) $(srcdir)/Makefile
+	$(RMF) $(srcdir)/Makefile
 
 distcopy: 
 	for I in $(DISTSLANG); do $(CP) $(top_srcdir)/slang/$$I $(top_srcdir)/mc-$(VERSION)/slang; done

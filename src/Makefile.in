@@ -82,17 +82,17 @@ mcmfmt: mfmt.o
 
 libvfs-mc.a:
 	cd ../vfs; $(MAKE) libvfs-mc.a
-@PCENTRULE@	-$(RMF) libvfs-mc.a
+@PCENTRULE@	$(RMF) libvfs-mc.a
 @PCENTRULE@	$(LN_S) ../vfs/libvfs-mc.a .
 
 libmcslang.a:
 	cd ../slang; $(MAKE) libmcslang.a
-@PCENTRULE@	-$(RMF) libmcslang.a
+@PCENTRULE@	$(RMF) libmcslang.a
 @PCENTRULE@	$(LN_S) ../slang/libmcslang.a .
 
 libedit.a:
 	cd ../edit; $(MAKE) libedit.a
-@PCENTRULE@	-$(RMF) libedit.a
+@PCENTRULE@	$(RMF) libedit.a
 @PCENTRULE@	$(LN_S) ../edit/libedit.a .
 
 $(srcdir)/mc.hlp: $(docdir)/mc.1.in $(mcsrclibdir)/xnc.hlp $(srcdir)/gindex.pl
@@ -118,12 +118,12 @@ realclean: clean
 	$(RMF) *~
 
 distclean:
-	-$(RMF) $(srcdir)/*~ $(srcdir)/mc $(srcdir)/cons.saver
-	-$(RMF) $(srcdir)/man2hlp $(srcdir)/fixhlp $(srcdir)/*.o $(srcdir)/core
-	-$(RMF) $(srcdir)/a.out $(srcdir)/mc.html
-	-$(RMF) $(srcdir)/libvfs-mc.a $(srcdir)/libmcslang.a $(srcdir)/libedit.a
+	$(RMF) $(srcdir)/*~ $(srcdir)/mc $(srcdir)/cons.saver
+	$(RMF) $(srcdir)/man2hlp $(srcdir)/fixhlp $(srcdir)/*.o $(srcdir)/core
+	$(RMF) $(srcdir)/a.out $(srcdir)/mc.html
+	$(RMF) $(srcdir)/libvfs-mc.a $(srcdir)/libmcslang.a $(srcdir)/libedit.a
 	-if test $(srcdir) = .; then $(MAKE) realclean; fi
-	-$(RMF) $(srcdir)/Makefile
+	$(RMF) $(srcdir)/Makefile
 
 install: mc mcmfmt @saver@
 	$(INSTALL_PROGRAM) mc     $(DESTDIR)$(bindir)/$(binprefix)mc
@@ -134,10 +134,10 @@ install.saver: cons.saver
 	$(INSTALL_PROGRAM) -m 4755 cons.saver $(DESTDIR)$(suppbindir)/cons.saver
 
 uninstall:
-	$(RMF) $(bindir)/$(binprefix)mc
-	$(RMF) $(bindir)/$(binprefix)mcmfmt
-	$(RMF) $(bindir)/$(binprefix)cons.saver
-	$(RMF) $(mclibdir)/$(libprefix)mc.hlp
+	$(RMF) $(DESTDIR)$(bindir)/$(binprefix)/mc
+	$(RMF) $(DESTDIR)$(bindir)/$(binprefix)/mcmfmt
+	$(RMF) $(DESTDIR)$(suppbindir)/cons.saver
+	$(RMF) $(DESTDIR)$(mclibdir)/$(libprefix)/mc.hlp
 
 distcopy: $(srcdir)/mc.hlp
 	for I in $(DISTFILES); do $(CP) $(top_srcdir)/src/$$I $(top_srcdir)/mc-$(VERSION)/src; done

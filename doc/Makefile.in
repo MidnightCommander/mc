@@ -12,19 +12,22 @@ DISTDOC =	Makefile.in LSM DEVEL FILES mc.sgml linuxdoc-sgml.diff \
 		mc.1.in mcedit.1.in mcserv.8.in
 LINUXDOCDIR =	/usr/local/linuxdoc-sgml
 
-all:
+all: Makefile
+
+Makefile: $(srcdir)/Makefile.in $(builddir)/config.status
+	cd $(builddir) && CONFIG_FILES=doc/Makefile CONFIG_HEADERS= $(SHELL) ./config.status
 
 install:
-	$(MKINSTALLDIRS) $(DESTDIR)/$(man1dir)
-	$(MKINSTALLDIRS) $(DESTDIR)/$(man8dir)
+	$(MKINSTALLDIRS) $(DESTDIR)$(man1dir)
+	$(MKINSTALLDIRS) $(DESTDIR)$(man8dir)
 	-$(SEDCMD2) < mc.1 > $(DESTDIR)$(man1dir)/$(manprefix)mc.$(manext)
 	-$(SEDCMD2) < mcedit.1 > $(DESTDIR)$(man1dir)/$(manprefix)mcedit.$(manext)
 	-$(SEDCMD2) < mcserv.8 > $(DESTDIR)$(man8dir)/$(manprefix)mcserv.$(man8ext)
 
 uninstall:
-	-cd $(mandir); $(RMF) $(manprefix)mc.$(manext)
-	-cd $(mandir); $(RMF) $(manprefix)mcedit.$(manext)
-	-cd $(man8dir); $(RMF) $(manprefix)mcserv.$(man8ext)
+	$(RMF) $(DESTDIR)$(man1dir)/$(manprefix)mc.$(manext)
+	$(RMF) $(DESTDIR)$(man1dir)/$(manprefix)mcedit.$(manext)
+	$(RMF) $(DESTDIR)$(man8dir)/$(manprefix)mcserv.$(man8ext)
 
 check:
 	@echo no tests are supplied.
@@ -75,7 +78,7 @@ clean:
 realclean:
 
 distclean:
-	-$(RMF) $(srcdir)/*~ $(srcdir)/Makefile $(srcdir)/*.1 $(srcdir)/*.8
+	$(RMF) $(srcdir)/*~ $(srcdir)/Makefile $(srcdir)/*.1 $(srcdir)/*.8
 
 distcopy:
 	for I in $(DISTDOC); do $(CP) $(top_srcdir)/doc/$$I $(top_srcdir)/mc-$(VERSION)/doc; done

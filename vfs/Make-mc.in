@@ -327,14 +327,14 @@ realclean: clean
 	$(RMF) *~
 
 distclean:
-	-$(RMF) $(srcdir)/*~ $(srcdir)/mcserv $(srcdir)/*.o $(srcdir)/a.out
-	-$(RMF) $(srcdir)/core $(srcdir)/libvfs-mc.a $(srcdir)/libvfs.so
-	-$(RMF) $(srcdir)/mad.c $(srcdir)/mad.h
+	$(RMF) $(srcdir)/*~ $(srcdir)/mcserv $(srcdir)/*.o $(srcdir)/a.out
+	$(RMF) $(srcdir)/core $(srcdir)/libvfs-mc.a $(srcdir)/libvfs.so
+	$(RMF) $(srcdir)/mad.c $(srcdir)/mad.h
 	for I in $(EXTFS_OUT) ; do \
 	    $(RMF) $(builddir)/vfs/extfs/$$I; \
 	done
 	-if test $(srcdir) = .; then $(MAKE) realclean; fi
-	-$(RMF) $(srcdir)/Makefile
+	$(RMF) $(srcdir)/Makefile
 
 install: @mcserv@ install.extfs
 	-(if test x@mcserv@ != x; then \
@@ -363,7 +363,7 @@ uninstall:
 	    $(RMF) $(DESTDIR)$(extfsdir)/$$I; \
 	done
 	-rmdir $(DESTDIR)$(extfsdir)
-	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)mcserv
+	$(RMF) $(DESTDIR)$(bindir)/$(binprefix)mcserv
 
 distcopy:
 	for I in $(DISTVFS); do $(CP) $(top_srcdir)/vfs/$$I $(top_srcdir)/mc-$(VERSION)/vfs; done

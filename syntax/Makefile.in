@@ -63,7 +63,7 @@ clean:
 realclean:
 
 distclean:
-	-$(RMF) $(srcdir)/*~ $(srcdir)/Makefile
+	$(RMF) $(srcdir)/*~ $(srcdir)/Makefile
 
 distcopy:
 	for I in $(DISTSYNTAX); do $(CP) $(top_srcdir)/syntax/$$I $(top_srcdir)/mc-$(VERSION)/syntax; done

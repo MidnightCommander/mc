@@ -1,5 +1,9 @@
 2000-08-15  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.in, */Makefile.in: Fail if $(RMF) fails - it may
+	indicate serious problems. Fixes for uninstall.
+	* doc/Makefile.in: Rebuild if it is out of date.
+
 	* lib/cedit.menu: Added. This file has been missing
 
 	* lib/Makefile.in: Install mc.sh and mc.csh in $(suppbindir) only

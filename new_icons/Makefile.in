@@ -121,7 +121,7 @@ clean:
 realclean:
 
 distclean:
-	-$(RMF) $(srcdir)/*~ $(srcdir)/Makefile
+	$(RMF) $(srcdir)/*~ $(srcdir)/Makefile
 
 distcopy:
 	for I in $(DISTICONS); do $(CP) $(top_srcdir)/new_icons/$$I $(top_srcdir)/mc-$(VERSION)/new_icons; done

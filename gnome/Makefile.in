@@ -281,12 +281,12 @@ mc.keys.in: mc.keys.in.in Makefile.in ../config.status
 
 @LIBVFS@:
 	cd ../vfs; $(MAKE) @LIBVFS@
-@PCENTRULE@	-$(RMF) @LIBVFS@
+@PCENTRULE@	$(RMF) @LIBVFS@
 @PCENTRULE@	$(LN_S) ../vfs/@LIBVFS@ .
 
 libgtkedit.a:
 	cd ../gtkedit; $(MAKE) libgtkedit.a
-@PCENTRULE@	-$(RMF) libgtkedit.a
+@PCENTRULE@	$(RMF) libgtkedit.a
 @PCENTRULE@	$(LN_S) ../gtkedit/libgtkedit.a .
 
 checklinks:
@@ -320,10 +320,10 @@ realclean: clean
 	$(RMF) *~
 
 distclean: cleansourcelinks
-	-$(RMF) $(srcdir)/*~ $(srcdir)/*.o $(srcdir)/gmc $(srcdir)/core
-	-$(RMF) $(srcdir)/a.out
+	$(RMF) $(srcdir)/*~ $(srcdir)/*.o $(srcdir)/gmc $(srcdir)/core
+	$(RMF) $(srcdir)/a.out
 	-if test $(srcdir) = .; then $(MAKE) realclean; fi
-	-$(RMF) $(srcdir)/Makefile
+	$(RMF) $(srcdir)/Makefile
 
 distcopy:
 	for I in $(DISTGNOME); do $(CP) $(top_srcdir)/gnome/$$I $(top_srcdir)/mc-$(VERSION)/gnome; done
@@ -349,15 +349,18 @@ install_mx: all
 	$(INSTALL_DATA) $(srcdir)/gmc.gnorba $(DESTDIR)$(corbadir)
 
 uninstall:
-	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)gmc
-	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)corba-gmc
+	$(RMF) $(DESTDIR)$(bindir)/$(binprefix)gmc
+	$(RMF) $(DESTDIR)$(bindir)/$(binprefix)gmc-client
+	$(RMF) $(DESTDIR)$(bindir)/$(binprefix)plain-gmc
 	for I in $(ICONS); \
 	do $(RMF) $(DESTDIR)$(icondir)/$$I; done
 	-rmdir $(DESTDIR)$(icondir)
-	-$(RMF) $(DESTDIR)$(mclibdir)/layout
-	-$(RMF) $(DESTDIR)$(datadir)/mime-info/mc.keys
+	$(RMF) $(DESTDIR)$(mclibdir)/layout
+	$(RMF) $(DESTDIR)$(datadir)/mime-info/mc.keys
 	-rmdir $(DESTDIR)$(datadir)/mime-info
-	-$(RMF) $(gnewdir)
+	-rmdir $(DESTDIR)$(gnewdir)
+	$(RMF) $(DESTDIR)$(corbadir)/gmc.gnorba
+	-rmdir $(DESTDIR)$(corbadir)
 
 depend dep: @gmcdep@
 

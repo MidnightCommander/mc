@@ -57,7 +57,7 @@ mx: $(EDITOBJS)
 	-$(RANLIB) libedit.a
 
 mcedit:
-	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)mcedit
+	$(RMF) $(DESTDIR)$(bindir)/$(binprefix)mcedit
 	$(LN_S) mc $(DESTDIR)$(bindir)/$(binprefix)mcedit
 
 showlibdep:
@@ -79,15 +79,15 @@ realclean: clean
 	$(RMF) *~
 
 distclean: cleansourcelinks
-	-$(RMF) $(srcdir)/*~ $(srcdir)/*.o $(srcdir)/a.out
-	-$(RMF) $(srcdir)/core $(srcdir)/libedit.a
+	$(RMF) $(srcdir)/*~ $(srcdir)/*.o $(srcdir)/a.out
+	$(RMF) $(srcdir)/core $(srcdir)/libedit.a
 	-if test $(srcdir) = .; then $(MAKE) realclean; fi
-	-$(RMF) $(srcdir)/Makefile
+	$(RMF) $(srcdir)/Makefile
 
 install: @MCEDIT@
 
 uninstall:
-	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)mcedit
+	$(RMF) $(DESTDIR)$(bindir)/$(binprefix)mcedit
 
 distcopy:
 	for I in $(DIST); do $(CP) $(top_srcdir)/edit/$$I $(top_srcdir)/mc-$(VERSION)/edit; done
