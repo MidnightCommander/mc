@@ -72,7 +72,7 @@ static inline int my_lower_case (int c)
 
 char *strcasechr (const unsigned char *s, int c)
 {
-    for (; my_lower_case ((int) *s) != my_lower_case (c); ++s)
+    for (c = my_lower_case (c); my_lower_case ((int) *s) != c; ++s)
 	if (*s == '\0')
 	    return 0;
     return (char *) s;
@@ -442,6 +442,7 @@ static char cwd[1040];
 static char *canonicalize_pathname (const char *p)
 {
     char *q, *r;
+    char *t = NULL;
 
     if (*p != '/') {
 	if (strlen (cwd) == 0) {
@@ -451,18 +452,14 @@ static char *canonicalize_pathname (const char *p)
 	    getwd (cwd);
 #endif
 	}
-	r = malloc (strlen (cwd) + strlen (p) + 2);
-	strcpy (r, cwd);
-	strcat (r, "/");
-	strcat (r, p);
-	p = r;
+	t = malloc (strlen (cwd) + strlen (p) + 2);
+	strcpy (t, cwd);
+	strcat (t, "/");
+	strcat (t, p);
+	p = t;
     }
     r = q = malloc (strlen (p) + 2);
-    for (;;) {
-	if (!*p) {
-	    *q = '\0';
-	    break;
-	}
+    while (*p) {
 	if (*p != '/') {
 	    *q++ = *p++;
 	} else {
@@ -484,6 +481,9 @@ static char *canonicalize_pathname (const char *p)
 	    q++;
 	}
     }
+    if (t)
+	free (t);
+    *q = '\0';
 /* get rid of trailing / */
     if (r[0] && r[1])
 	if (*--q == '/')
