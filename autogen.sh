@@ -1,11 +1,14 @@
+#! /bin/sh
+# Run this to generate all the initial makefiles, etc.
+
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
 (
 cd $srcdir
 if test -d macros; then
-	cat macros/gnome.m4 macros/gnome-vfs.m4 macros/gnome-undelfs.m4 \
-	macros/linger.m4 mc-aclocal.m4 gettext.m4 glib.m4 > aclocal.m4
+	test -f mc-aclocal.m4 && test -f gettext.m4 && cat mc-aclocal.m4 gettext.m4 > acinclude.m4
+	aclocal $ACLOCAL_FLAGS
 else
 	echo macros directory not found, skipping generation of aclocal.m4
 fi
@@ -13,9 +16,10 @@ autoheader
 autoconf
 )
 
-if [ ! -z "$OBJ_DIR" ]; then
+if [ -z "$OBJ_DIR" ]; then
+	$srcdir/configure --enable-maintainer-mode $*
+else
 	mkdir -p "$OBJ_DIR"
 	cd "$OBJ_DIR"
+	../configure --enable-maintainer-mode $*
 fi
-
-$srcdir/$OBJDIR/configure --enable-maintainer-mode $*

@@ -9,3 +9,4 @@ configure
 mcfn_install
 aclocal.m4
 VERSION
+acinclude.m4

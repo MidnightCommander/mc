@@ -1,3 +1,12 @@
+Sun Nov 22 22:30:50 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* autogen.sh: replaced "cat *.m4" with a call to aclocal. Concatenate
+	mc-aclocal.m4 and gettext.m4 to acinclude.m4. The other way round
+	would have been to add three more m4 files to the replaced cat line
+	(including cond.m4 from automake-1.3b).
+
+	Fixed OBJ_DIR handling.
+	
 Sun Nov 15 00:37:58 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* mad.c (mad_tempnam): needed wrapper for tempnam added

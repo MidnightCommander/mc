@@ -1,3 +1,7 @@
+Sun Nov 22 22:23:20 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* Makefile.in: added findme.o to LOBJS and filegui.o to OOBJS
+
 Sun May 31 13:22:09 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* Makefile.in: use @LIBVFS@ when referring to libvfs-mc.a
