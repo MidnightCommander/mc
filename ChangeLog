@@ -1,5 +1,8 @@
 2002-10-31  Pavel Roskin  <proski@gnu.org>
 
+	* syntax/diff.syntax: Revert highlighting for trailing spaces
+	on the added lines - it extends the context to the next line.
+
 	* lib/mc.csh.in: Add quoting and check for missing file.
 
 	* lib/mc.csh.in: Update to use the new -P option.  This script

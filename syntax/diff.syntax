@@ -15,9 +15,7 @@ context linestart \+\+\+ \n brightmagenta
 context linestart \*\*\* \n brightmagenta
 context linestart === \n brown
 context linestart \+ \n brightgreen
-    keyword \{\s\t\}\[\s\t\]\n white red
 context linestart > \n brightgreen
-    keyword \{\s\t\}\[\s\t\]\n white red
 context linestart - \n brightred
 context linestart < \n brightred
 context linestart ! \n yellow
