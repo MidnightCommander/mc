@@ -1,6 +1,8 @@
 2004-11-15  Leonard den Ottolander  <leonard * den ottolander nl>
 
 	* file.c: Code cleanup (mostly indentation).
+	* user.c (execute_menu_command): Prefix the command with a space
+	to prevent recording in ~/.bash_history.
 
 2004-11-12  Pavel Shirshov  <me@pavelsh.pp.ru>
 
