@@ -1,3 +1,7 @@
+1999-01-18  Jonathan Blandford  <jrb@redhat.com>
+
+	* gtkdtree.c (gtk_dtree_construct): change ctree_set_reorderable.
+
 1999-01-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (icon_event): Rewrote event handling for icons on the
@@ -43,6 +47,8 @@
 
 	* glayout.c (create_container): finished the New->menu.  Looks
 	better now.
+	(create_container): Moved the statusbar creaton.  Now you can get
+	the hints.
 
 	* gcmd.c (gnome_run_new): new function.
 

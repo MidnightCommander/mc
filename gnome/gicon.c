@@ -292,10 +292,10 @@ gicon_get_icon_for_file (file_entry *fe)
 	return gicon_get_icon_for_file_speed (fe, TRUE);
 }
 
-typedef lookup_name_closure_t {
+typedef struct lookup_name_closure_t {
 	char *name;
 	void *image;
-};
+} lookup_name_closure_t;
 
 void
 search_image (gpointer key, gpointer value, gpointer user_data)
@@ -318,7 +318,7 @@ gicon_image_to_name (GdkImlibImage *image)
 	closure.image = image;
 	closure.name  = NULL;
 	
-	g_hash_table_foreach (icon_hash, check_key, &search_image, &closure);
+	g_hash_table_foreach (icon_hash, &search_image, &closure);
 	if (closure.name == NULL)
 		return g_strdup (ICONDIR "i-regular.png");
 

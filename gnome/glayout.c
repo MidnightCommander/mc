@@ -280,7 +280,7 @@ void configure_box (void);
 
 GtkCheckMenuItem *gnome_toggle_snap (void);
 GnomeUIInfo gnome_panel_new_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("_Terminal"), N_("Launch a new terminal in the current directory"), NULL},
+	{ GNOME_APP_UI_ITEM, N_("_Terminal"), N_("Launch a new terminal in the current directory"), gnome_open_terminal},
 	/* If this ever changes, make sure you update create_new_menu accordingly. */
 	{ GNOME_APP_UI_ITEM, N_("_Directory..."), N_("Creates a new directory"), gnome_mkdir_cmd },
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
@@ -575,6 +575,11 @@ create_container (Dlg_head *h, char *name, char *geometry)
 	gnome_app_set_contents (GNOME_APP (app), vbox);
 	gnome_app_create_menus_with_data (GNOME_APP (app), gnome_panel_menu, panel);
 	create_new_menu (GNOME_APP (app), panel);
+
+	panel->ministatus = GNOME_APPBAR(gnome_appbar_new(FALSE, TRUE, GNOME_PREFERENCES_NEVER));
+	gnome_app_set_statusbar(GNOME_APP (app), GTK_WIDGET(panel->ministatus));
+
+	gnome_app_install_menu_hints (GNOME_APP (app), gnome_panel_menu);
 	/*
 	 * I am trying to unclutter the screen, so this toolbar is gone now
 	 */

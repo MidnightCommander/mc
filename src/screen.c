@@ -29,6 +29,7 @@
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>	/* For chdir(), readlink() and getwd()/getcwd() */
 #endif
+/*#include "mc.h"*/
 
 #include "mem.h"
 #include "mad.h"
@@ -2563,7 +2564,8 @@ panel_re_sort (WPanel *panel)
     char *filename;
     int  i;
 
-    g_return_if_fail (panel != NULL);
+    if (panel == NULL)
+	    return;
     
     filename = strdup (selection (panel)->fname);
     unselect_item (panel);

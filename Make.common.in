@@ -22,6 +22,7 @@ corbadir   = $(sysconfdir)/CORBA/servers
 libdir     = $(exec_prefix)/lib/mc
 idldir     = $(prefix)/share/idl
 suppbindir = $(libdir)/bin
+gnewdir	   = $(prefix)/share/mc/templates
 tidir      = $(libdir)/term
 extfsdir   = $(libdir)/extfs
 datadir    = @datadir@

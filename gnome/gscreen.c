@@ -81,6 +81,7 @@ GtkWidget *drag_multiple_ok  = NULL;
 
 static void panel_file_list_configure_contents (GtkWidget *sw, WPanel *panel, int main_width, int height);
 
+
 #define CLIST_FROM_SW(panel_list) GTK_CLIST (GTK_BIN (panel_list)->child)
 
 
@@ -2170,6 +2171,42 @@ button_switch_to_custom_listing (WPanel *panel)
 {
 	return button_switch_to (listing_custom_xpm, GTK_SIGNAL_FUNC (do_switch_to_custom_listing), panel);
 }
+static GnomeUIInfo viewbar[] = {
+	{ GNOME_APP_UI_ITEM, N_("Icon"), N_("Switch view to an Icon view"), button_switch_to_icon, NULL, NULL, \
+		GNOME_APP_PIXMAP_DATA, listing_iconic_xpm, 0, (GdkModifierType) 0, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Brief"), N_("Switch view to show just file name and type"), button_switch_to_brief_listing, NULL, NULL, \
+		GNOME_APP_PIXMAP_DATA, listing_brief_list_xpm, 0, (GdkModifierType) 0, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Detailed"), N_("Switch view to show detailed file statistics"), button_switch_to_full_listing, NULL, NULL, \
+		GNOME_APP_PIXMAP_DATA, listing_list_xpm, 0, (GdkModifierType) 0, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Custom"), N_("Switch view to show custom determined statistics"), button_switch_to_custom_listing, NULL, NULL, \
+		GNOME_APP_PIXMAP_DATA, listing_custom_xpm, 0, (GdkModifierType) 0, NULL },
+	GNOMEUIINFO_END
+};
+static GnomeUIInfo toolbar[] = {
+	GNOMEUIINFO_ITEM_STOCK (N_("Back"), N_("Go to the previously visited directory"),
+				panel_back, GNOME_STOCK_PIXMAP_BACK),
+	GNOMEUIINFO_ITEM_STOCK (N_("Up"), N_("Go up a level in the directory heirarchy"),
+				panel_up, GNOME_STOCK_PIXMAP_UP),
+	GNOMEUIINFO_ITEM_STOCK (N_("Forward"), N_("Go to the next directory"),
+				panel_fwd, GNOME_STOCK_PIXMAP_FORWARD),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_ITEM_STOCK (N_("Home"), N_("Go to your home directory"),
+				panel_fwd, GNOME_STOCK_PIXMAP_HOME),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_RADIOLIST(viewbar),
+	GNOMEUIINFO_END
+};
+static void
+do_ui_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name, 
+		GnomeUIBuilderData *uibdata)
+{
+	if (uiinfo->moreinfo)
+		gtk_signal_connect (GTK_OBJECT (uiinfo->widget), 
+				    signal_name, uiinfo->moreinfo, uibdata->data ? 
+				    uibdata->data : uiinfo->user_data);
+}
+
+
 
 static void
 tree_size_allocate (GtkWidget *widget, GtkAllocation *allocation, WPanel *panel)
@@ -2189,11 +2226,11 @@ void
 x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
 	GtkWidget *status_line, *filter, *vbox, *ministatus_box;
-	GtkWidget *frame, *cwd, *back_p, *fwd_p, *up_p;
+	GtkWidget *cwd, *back_p, *fwd_p, *up_p;
 	GtkWidget *hbox, *evbox, *dock, *box;
-	GtkWidget *table_frame;
-	int display;
-	
+	GnomeUIBuilderData uibdata;
+
+
 	panel->xwindow = gtk_widget_get_toplevel (GTK_WIDGET (panel->widget.wdata));
 
 	panel->table = gtk_table_new (2, 1, 0);
@@ -2262,39 +2299,53 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 
 	/* We do not want the focus by default  (and the previos add_widget just gave it to us) */
 	h->current = h->current->prev;
-
+	
 	/*
-	 * History buttons, and updir.
+	 * We go through a lot of pain, wrestling with gnome_app* and gmc's @#$&*#$ internal structure and
+	 * make the #@$*&@#$ toolbars here...
 	 */
-	back_p = gnome_stock_pixmap_widget_new (panel->xwindow, GNOME_STOCK_MENU_BACK);
-	fwd_p  = gnome_stock_pixmap_widget_new (panel->xwindow, GNOME_STOCK_MENU_FORWARD);
-	up_p   = gnome_stock_pixmap_widget_new (panel->xwindow, GNOME_STOCK_MENU_UP);
-	panel->up_b     = gtk_button_new ();
-	panel->back_b   = gtk_button_new ();
-	panel->fwd_b    = gtk_button_new ();
-	gtk_container_add (GTK_CONTAINER (panel->back_b), back_p);
-	gtk_container_add (GTK_CONTAINER (panel->fwd_b), fwd_p);
-	gtk_container_add (GTK_CONTAINER (panel->up_b), up_p);
-	gtk_signal_connect (GTK_OBJECT (panel->back_b), "clicked", GTK_SIGNAL_FUNC(panel_back), panel);
-	gtk_signal_connect (GTK_OBJECT (panel->fwd_b), "clicked", GTK_SIGNAL_FUNC(panel_fwd), panel);
-	gtk_signal_connect (GTK_OBJECT (panel->up_b), "clicked", GTK_SIGNAL_FUNC(panel_up), panel);
+
+	status_line = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
+	uibdata.connect_func = do_ui_signal_connect;
+	uibdata.data = panel;
+	uibdata.is_interp = FALSE;
+	uibdata.relay_func = NULL;
+	uibdata.destroy_func = NULL;
+
+	gnome_app_fill_toolbar_custom (GTK_TOOLBAR (status_line), toolbar,  &uibdata, NULL);
+	gnome_app_add_toolbar (GNOME_APP (panel->xwindow),
+			       GTK_TOOLBAR (status_line),
+			       "gmc-toolbar0",
+			       GNOME_DOCK_ITEM_BEH_EXCLUSIVE,
+			       GNOME_DOCK_TOP,
+			       2, 0, 0);
+	
+	panel->back_b   = toolbar[0].widget;
+	panel->up_b     = toolbar[1].widget;
+	panel->fwd_b    = toolbar[2].widget;
 	panel_update_marks (panel);
-
-
 	/*
-	 * Here we make the toolbars
+	 * Here we make the view buttons.
 	 */
 	status_line = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
 	gtk_container_set_border_width (GTK_CONTAINER (status_line), 3);
 	evbox = gtk_event_box_new ();
 	hbox = gtk_hbox_new (FALSE, 2);
 	gtk_container_add (GTK_CONTAINER (evbox), hbox);
-	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("Location:")), FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), cwd, FALSE, FALSE, 0);
 	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
 				   evbox,
 				   NULL, NULL);
-	gtk_toolbar_append_space (GTK_TOOLBAR (status_line));
+	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("Location:")), FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), cwd, FALSE, FALSE, 0);
+	dock =  gnome_dock_item_new ("gmc-toolbar1", GNOME_DOCK_ITEM_BEH_EXCLUSIVE | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
+	gtk_container_add (GTK_CONTAINER(dock),status_line);
+	gnome_dock_add_item (GNOME_DOCK(GNOME_APP (panel->xwindow)->dock),
+			     GNOME_DOCK_ITEM (dock), GNOME_DOCK_TOP, 1, 0, 0, FALSE);
+	
+	gtk_widget_show_all (dock);
+
+#if 0
+	status_line = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
 	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
 				   panel->back_b,
 				   "Go to the previous directory", NULL);
@@ -2317,11 +2368,14 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
 				   button_switch_to_custom_listing (panel),
 				   "Custom view", NULL);
-	dock =  gnome_dock_item_new ("gmc-toolbar", GNOME_DOCK_ITEM_BEH_EXCLUSIVE | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
-	gtk_container_add (GTK_CONTAINER(dock),status_line);
-	gnome_dock_add_item (GNOME_DOCK(GNOME_APP (panel->xwindow)->dock),
-			     GNOME_DOCK_ITEM (dock), GNOME_DOCK_TOP, 1, 0, 0, FALSE);
-	gtk_widget_show_all (dock);
+	gnome_app_add_toolbar (GNOME_APP (panel->xwindow),
+			       GTK_TOOLBAR (status_line),
+			       "gmc-toolbar2",
+			       GNOME_DOCK_ITEM_BEH_EXCLUSIVE,
+			       GNOME_DOCK_TOP,
+			       2, 0, 0);
+	gtk_widget_show_all (status_line);
+#endif
 	panel->view_table = gtk_table_new (1, 1, 0);
 	gtk_widget_show (panel->view_table);
 
@@ -2329,8 +2383,6 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	/*
 	 * The status bar.
 	 */
-	panel->ministatus = GNOME_APPBAR(gnome_appbar_new(FALSE, TRUE, GNOME_PREFERENCES_NEVER));
-	gnome_app_set_statusbar(GNOME_APP (panel->xwindow), GTK_WIDGET(panel->ministatus));
 	ministatus_box = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME(ministatus_box), GTK_SHADOW_IN);
       
