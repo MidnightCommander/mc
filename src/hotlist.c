@@ -849,7 +849,6 @@ static int add_new_entry_input (char *header, char *text1, char *text2, char *he
     Quick_input.xpos  = -1;
     Quick_input.title = header;
     Quick_input.help  = help;
-    Quick_input.class = "hotlist_new_entry";
     Quick_input.i18n  = 0;
     quick_widgets [6].text = text1;
     quick_widgets [4].text = text2;
@@ -940,7 +939,6 @@ static int add_new_group_input (char *header, char *label, char **result)
     Quick_input.xpos  = -1;
     Quick_input.title = header;
     Quick_input.help  = "[Hotlist]";
-    Quick_input.class = "hotlist_new_group";
     Quick_input.i18n  = 0;
     quick_widgets [4].text = label;
 

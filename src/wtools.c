@@ -477,7 +477,6 @@ char *real_input_dialog_help (char *header, char *text, char *help, char *def_te
     Quick_input.xpos  = -1;
     Quick_input.title = header;
     Quick_input.help  = help;
-    Quick_input.class = "quick_input";
     Quick_input.i18n  = 0;
     quick_widgets [INPUT_INDEX+1].text = text;
     quick_widgets [INPUT_INDEX].text = def_text;

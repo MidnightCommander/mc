@@ -384,8 +384,9 @@ static QuickWidget conf_widgets [] = {
 };
 
 static QuickDialog confirmation =
-{ CONFX, CONFY, -1, -1, N_(" Confirmation "), "[Confirmation]", "quick_confirm",
-      conf_widgets, 0 };
+    { CONFX, CONFY, -1, -1, N_(" Confirmation "), "[Confirmation]",
+    conf_widgets, 0
+};
 
 void
 confirm_box (void)
@@ -736,7 +737,8 @@ static QuickWidget confvfs_widgets [] = {
 };
 
 static QuickDialog confvfs_dlg =
-{ VFSX, VFSY, -1, -1, N_(" Virtual File System Setting "), "[Virtual FS]", "quick_vfs", confvfs_widgets, 0 };
+    { VFSX, VFSY, -1, -1, N_(" Virtual File System Setting "),
+"[Virtual FS]", confvfs_widgets, 0 };
 
 void
 configure_vfs (void)
@@ -791,7 +793,6 @@ cd_dialog (void)
     Quick_input.xlen  = 57;
     Quick_input.title = _("Quick cd");
     Quick_input.help  = "[Quick cd]";
-    Quick_input.class = "quick_input";
     quick_widgets [0].text = "";
     quick_widgets [0].value = 2; /* want cd like completion */
     quick_widgets [1].text = _("cd");
@@ -836,7 +837,6 @@ symlink_dialog (char *existing, char *new, char **ret_existing, char **ret_new)
     Quick_input.ylen  = 8;
     Quick_input.title = _("Symbolic link");
     Quick_input.help  = "[File Menu]";
-    Quick_input.class = "quick_symlink";
     Quick_input.i18n  = 0;
     quick_widgets [0].text = new;
     quick_widgets [1].text = _("Symbolic link filename:");

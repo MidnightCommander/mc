@@ -880,12 +880,6 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text,
     Quick_input.help  = "[Mask Copy/Rename]";
     Quick_input.ylen  = FMDY;
     Quick_input.i18n  = 1;
-
-    if (operation == OP_COPY) {
-	Quick_input.class = "quick_file_mask_copy";
-    } else { /* operation == OP_MOVE */
-	Quick_input.class = "quick_file_mask_move";
-    }
     Quick_input.widgets = fmd_widgets;
     fmd_widgets [FMDI0].text = text;
     fmd_widgets [FMDI2].text = def_text;

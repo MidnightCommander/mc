@@ -150,8 +150,7 @@ void edit_options_dialog (void)
 
     {
 	QuickDialog Quick_options =
-	{OPT_DLG_W, OPT_DLG_H, -1, 0, N_(" Editor options "),
-	 "", "quick_input", 0};
+	{OPT_DLG_W, OPT_DLG_H, -1, 0, N_(" Editor options "), "", 0};
 
 	Quick_options.widgets = quick_widgets;
 

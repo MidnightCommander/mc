@@ -46,7 +46,6 @@ typedef struct {
     int  xpos, ypos; /* if -1, then center the dialog */
     char *title;
     char *help;
-    char *class;		/* Used for Tk's class name */
     QuickWidget *widgets;
     int  i18n;			/* If true, internationalization has happened */
 } QuickDialog;
