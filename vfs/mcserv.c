@@ -208,19 +208,29 @@ void do_read (void)
 
 void do_write (void)
 {
-    int handle, count, status;
-    char buffer [8192];
-    
+    int handle, count, status, written = 0;
+    char buf[8192];
+
     rpc_get (msock, RPC_INT, &handle, RPC_INT, &count, RPC_END);
     status = 0;
-    while (count){
+    while (count) {
 	int nbytes = count > 8192 ? 8192 : count;
-	
-	rpc_get (msock, RPC_BLOCK, nbytes, buffer, RPC_END);
-	status = write (handle, buffer, nbytes);
+
+	rpc_get (msock, RPC_BLOCK, nbytes, buf, RPC_END);
+	status = write (handle, buf, nbytes);
+	if (status < 0) {
+	    send_status (status, errno);
+	    return;
+	}
+	/* FIXED: amount written must be returned to caller */
+	written += status;
+	if (status < nbytes) {
+	    send_status (written, errno);
+	    return;
+	}
 	count -= nbytes;
     }
-    send_status (status, errno);
+    send_status (written, errno);
 }
 
 void do_lseek (void)
@@ -298,7 +308,7 @@ void send_time (int sock, time_t time)
 
 void send_stat_info (struct stat *st)
 {
-    int mylong;
+    long mylong;
     int blocks =
 #ifdef HAVE_ST_BLOCKS
 	st->st_blocks;
@@ -306,8 +316,12 @@ void send_stat_info (struct stat *st)
         st->st_size / 1024;
 #endif
     
-    mylong = st->st_dev;
-    rpc_send (msock, RPC_INT, (long) st->st_dev, 
+#ifdef HAVE_ST_RDEV
+    mylong = st->st_rdev;
+#else
+    mylong = 0;
+#endif
+    rpc_send (msock, RPC_INT, (long) mylong, 
 	      RPC_INT, (long) st->st_ino,
 	      RPC_INT, (long) st->st_mode,
 	      RPC_INT, (long) st->st_nlink,

@@ -813,12 +813,12 @@ static int get_stat_info (mcfs_connection *mc, struct stat *buf)
     long mylong;
     int  sock = mc->sock;
 
-#ifdef HAVE_ST_RDEV
-    buf->st_rdev = 0;
-#endif
+    buf->st_dev = 0;
     
     rpc_get (sock, RPC_INT, &mylong, RPC_END);
-    buf->st_dev = mylong;
+#ifdef HAVE_ST_RDEV
+    buf->st_rdev = mylong;
+#endif
     rpc_get (sock, RPC_INT, &mylong, RPC_END);
     buf->st_ino = mylong;
     rpc_get (sock, RPC_INT, &mylong, RPC_END);
