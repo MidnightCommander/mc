@@ -1213,7 +1213,10 @@ edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 }
 
 static void
-edit_replace_dialog (WEdit * edit, char **search_text, char **replace_text, char **arg_order)
+edit_replace_dialog (WEdit * edit, const char *search_default,
+                     const char *replace_default, const char *argorder_default,
+                     /*@out@*/ char **search_text, /*@out@*/ char **replace_text,
+                     /*@out@*/ char **arg_order)
 {
     int treplace_scanf = replace_scanf;
     int treplace_regexp = replace_regexp;
@@ -1265,11 +1268,11 @@ edit_replace_dialog (WEdit * edit, char **search_text, char **replace_text, char
     quick_widgets[7].result = &treplace_whole;
     quick_widgets[8].result = &treplace_case;
     quick_widgets[9].str_result = arg_order;
-    quick_widgets[9].text = *arg_order;
+    quick_widgets[9].text = argorder_default;
     quick_widgets[11].str_result = replace_text;
-    quick_widgets[11].text = *replace_text;
+    quick_widgets[11].text = replace_default;
     quick_widgets[13].str_result = search_text;
-    quick_widgets[13].text = *search_text;
+    quick_widgets[13].text = search_default;
     {
 	QuickDialog Quick_input =
 	{REPLACE_DLG_WIDTH, REPLACE_DLG_HEIGHT, -1, 0, N_(" Replace "),
@@ -1748,84 +1751,88 @@ void
 edit_replace_cmd (WEdit *edit, int again)
 {
     static regmatch_t pmatch[NUM_REPL_ARGS];
-    static char *old1 = NULL;
-    static char *old2 = NULL;
-    static char *old3 = NULL;
-    char *exp1 = "";
-    char *exp2 = "";
-    char *exp3 = "";
+    /* 1 = search string, 2 = replace with, 3 = argument order */
+    static char *saved1 = NULL; /* saved default[123] */
+    static char *saved2 = NULL;
+    static char *saved3 = NULL;
+    char *default1 = NULL; /* default values */
+    char *default2 = NULL;
+    char *default3 = NULL;
+    char *input1 = NULL; /* user input from the dialog */
+    char *input2 = NULL;
+    char *input3 = NULL;
     int replace_yes;
     int replace_continue;
     int treplace_prompt = 0;
-    int i = 0;
     long times_replaced = 0, last_search;
     int argord[NUM_REPL_ARGS];
 
     if (!edit) {
-	g_free (old1);
-	old1 = 0;
-	g_free (old2);
-	old2 = 0;
-	g_free (old3);
-	old3 = 0;
+    	g_free (saved1), saved1 = NULL;
+    	g_free (saved2), saved2 = NULL;
+    	g_free (saved3), saved3 = NULL;
 	return;
     }
+
     last_search = edit->last_byte;
 
     edit->force |= REDRAW_COMPLETELY;
 
-    exp1 = old1 ? old1 : exp1;
-    exp2 = old2 ? old2 : exp2;
-    exp3 = old3 ? old3 : exp3;
+    default1 = g_strdup (saved1 ? saved1 : "");
+    default2 = g_strdup (saved2 ? saved2 : "");
+    default3 = g_strdup (saved3 ? saved3 : "");
 
     if (again) {
-	if (!old1 || !old2)
-	    return;
-	exp1 = g_strdup (old1);
-	exp2 = g_strdup (old2);
-	exp3 = g_strdup (old3);
+	if (saved1 == NULL || saved2 == NULL)
+	    goto cleanup;
     } else {
+	char *disp1 = g_strdup (default1);
+	char *disp2 = g_strdup (default2);
+	char *disp3 = g_strdup (default3);
+
+	convert_to_display (disp1);
+	convert_to_display (disp2);
+	convert_to_display (disp3);
+
 	edit_push_action (edit, KEY_PRESS + edit->start_display);
+	edit_replace_dialog (edit, disp1, disp2, disp3, &input1, &input2, &input3);
 
-	convert_to_display (exp1);
-	convert_to_display (exp2);
+	g_free (disp1);
+	g_free (disp2);
+	g_free (disp3);
 
-	edit_replace_dialog (edit, &exp1, &exp2, &exp3);
-
-	convert_from_input (exp1);
-	convert_from_input (exp2);
+	convert_from_input (input1);
+	convert_from_input (input2);
+	convert_from_input (input3);
 
 	treplace_prompt = replace_prompt;
     }
 
-    if (!exp1 || !*exp1) {
+    if (input1 == NULL || *input1 == '\0') {
 	edit->force = REDRAW_COMPLETELY;
-	g_free (exp1);
-	g_free (exp2);
-	g_free (exp3);
-	return;
+	goto cleanup;
     }
-    g_free (old1);
-    g_free (old2);
-    g_free (old3);
-    old1 = g_strdup (exp1);
-    old2 = g_strdup (exp2);
-    old3 = g_strdup (exp3);
+
+    g_free (saved1), saved1 = g_strdup (input1);
+    g_free (saved2), saved2 = g_strdup (input2);
+    g_free (saved3), saved3 = g_strdup (input3);
 
     {
-	char *s;
+	const char *s;
 	int ord;
-	while ((s = strchr (exp3, ' ')))
-	    memmove (s, s + 1, strlen (s));
-	s = exp3;
+	size_t i;
+
+	s = input3;
 	for (i = 0; i < NUM_REPL_ARGS; i++) {
-	    if (s != (char *) 1 && *s) {
+	    if (s != NULL && *s != '\0') {
 		ord = atoi (s);
 		if ((ord > 0) && (ord <= NUM_REPL_ARGS))
 		    argord[i] = ord - 1;
 		else
 		    argord[i] = i;
-		s = strchr (s, ',') + 1;
+		s = strchr (s, ',');
+		if (s != NULL)
+		    s++;
 	    } else
 		argord[i] = i;
 	}
@@ -1845,7 +1852,7 @@ edit_replace_cmd (WEdit *edit, int again)
 	int len = 0;
 	long new_start;
 	new_start =
-	    edit_find (edit->search_start, (unsigned char *) exp1, &len,
+	    edit_find (edit->search_start, (unsigned char *) input1, &len,
 		       last_search, edit_get_byte, (void *) edit, pmatch);
 	if (new_start == -3) {
 	    regexp_error (edit);
@@ -1855,6 +1862,8 @@ edit_replace_cmd (WEdit *edit, int again)
 	/*returns negative on not found or error in pattern */
 
 	if (edit->search_start >= 0) {
+	    int i;
+
 	    edit->found_start = edit->search_start;
 	    i = edit->found_len = len;
 
@@ -1878,7 +1887,7 @@ edit_replace_cmd (WEdit *edit, int again)
 		/*so that undo stops at each query */
 		edit_push_key_press (edit);
 
-		switch (edit_replace_prompt (edit, exp2,	/* and prompt 2/3 down */
+		switch (edit_replace_prompt (edit, input2,	/* and prompt 2/3 down */
 					     (edit->num_widget_columns -
 					      CONFIRM_DLG_WIDTH) / 2,
 					     edit->num_widget_lines * 2 /
@@ -1939,7 +1948,7 @@ edit_replace_cmd (WEdit *edit, int again)
 			    sargs[k - 1][0] = 0;
 		    }
 		    if (!ret)
-			ret = snprintf_p (repl_str, MAX_REPL_LEN + 2, exp2, PRINTF_ARGS);
+			ret = snprintf_p (repl_str, MAX_REPL_LEN + 2, input2, PRINTF_ARGS);
 		    if (ret >= 0) {
 			times_replaced++;
 			while (i--)
@@ -1957,8 +1966,8 @@ edit_replace_cmd (WEdit *edit, int again)
 		    times_replaced++;
 		    while (i--)
 			edit_delete (edit);
-		    while (exp2[++i])
-			edit_insert (edit, exp2[i]);
+		    while (input2[++i])
+			edit_insert (edit, input2[i]);
 		}
 		edit->found_len = i;
 	    }
@@ -1988,11 +1997,15 @@ edit_replace_cmd (WEdit *edit, int again)
 	}
     } while (replace_continue);
 
-    g_free (exp1);
-    g_free (exp2);
-    g_free (exp3);
     edit->force = REDRAW_COMPLETELY;
     edit_scroll_screen_over_cursor (edit);
+cleanup:
+    g_free (default1);
+    g_free (default2);
+    g_free (default3);
+    g_free (input1);
+    g_free (input2);
+    g_free (input3);
 }
 
 
