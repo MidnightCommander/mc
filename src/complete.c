@@ -100,37 +100,26 @@ filename_completion_function (char *text, int state)
         if (users_dirname)
             g_free (users_dirname);
 
-        filename = g_strdup (text);
-        if (!*text)
-            text = ".";
-        dirname = g_strdup (text);
-
-        temp = strrchr (dirname, PATH_SEP);
-
-        if (temp){
-	    strcpy (filename, ++temp);
-	    *temp = 0;
+	if ((*text) && (temp = strrchr (text, PATH_SEP))){
+	    filename = g_strdup (++temp);
+	    dirname = g_strndup (text, temp - text);
+	} else {
+	    dirname = g_strdup (".");
+	    filename = g_strdup (text);
 	}
-        else
-	    strcpy (dirname, ".");
 
         /* We aren't done yet.  We also support the "~user" syntax. */
 
         /* Save the version of the directory that the user typed. */
-        users_dirname = g_strdup (dirname);
+        users_dirname = dirname;
         {
-	    char *temp_dirname;
-
-	    temp_dirname = tilde_expand (dirname);
-	    if (!temp_dirname){
-		g_free (dirname);
+	    dirname = tilde_expand (dirname);
+	    if (!dirname){
 		g_free (users_dirname);
 		g_free (filename);
-		dirname = users_dirname = filename = NULL;
+		users_dirname = filename = NULL;
 		return NULL;
 	    }
-	    g_free (dirname);
-	    dirname = temp_dirname;
 	    canonicalize_pathname (dirname);
 	    /* Here we should do something with variable expansion
 	       and `command`.
@@ -360,19 +349,19 @@ static void fetch_hosts (char *filename)
 	}
 
         /* Skip IP #s. */
-        for (; buffer[i] && !cr_whitespace (buffer[i]); i++);
+	while (buffer[i] && !cr_whitespace (buffer[i]))
+	    i++;
 
         /* Get the host names separated by white space. */
         while (buffer[i] && buffer[i] != '#'){
-	    for (; i && cr_whitespace (buffer[i]); i++);
+	    while (buffer[i] && cr_whitespace (buffer[i]))
+		i++;
 	    if (buffer[i] ==  '#')
-	        continue;
+		continue;
 	    for (start = i; buffer[i] && !cr_whitespace (buffer[i]); i++);
 	        if (i - start == 0)
 	            continue;
-	    name = (char *) g_malloc (i - start + 1);
-	    strncpy (name, buffer + start, i - start);
-	    name [i - start] = 0;
+	    name = g_strndup (buffer + start, i - start);
 	    {
 	    	char **host_p;
 	    	
@@ -456,25 +445,23 @@ command_completion_function (char *text, int state)
     static int isabsolute;
     static int phase;
     static int text_len;
-    static char **words;
+    static const char * const * words;
     static char *path;
     static char *cur_path;
     static char *cur_word;
     static int init_state;
-    static char *bash_reserved [] = { "if", "then", "else", "elif", "fi",
-                                      "case", "esac", "for", "select", "while",
-                                      "until", "do", "done", "in", "function" , 0};
-    static char *bash_builtins [] = { "alias", "bg", "bind", "break", "builtin",
-    				      "cd", "command", "continue", "declare", 
-    				      "dirs", "echo", "enable", "eval", "exec",
-    				      "exit", "export", "fc", "fg", "getopts",
-    				      "hash", "help", "history", "jobs", "kill",
-    				      "let", "local", "logout", "popd", "pushd",
-    				      "pwd", "read", "readonly", "return", "set",
-    				      "shift", "source", "suspend", "test", 
-    				      "times", "trap", "type", "typeset",
-    				      "ulimit", "umask", "unalias", "unset",
-    				      "wait" , 0};
+    static const char * const bash_reserved [] = { 
+	"if", "then", "else", "elif", "fi", "case", "esac", "for", "select",
+	"while", "until", "do", "done", "in", "function" , 0
+    };
+    static const char * const bash_builtins [] = { 
+	"alias", "bg", "bind", "break", "builtin", "cd", "command", "continue",
+	"declare", "dirs", "echo", "enable", "eval", "exec", "exit", "export",
+	"fc", "fg", "getopts", "hash", "help", "history", "jobs", "kill", "let",
+	"local", "logout", "popd", "pushd", "pwd", "read", "readonly", "return",
+	"set", "shift", "source", "suspend", "test", "times", "trap", "type", 
+	"typeset", "ulimit", "umask", "unalias", "unset", "wait" , 0
+    };
     char *p, *found;
 
     if (!state){ /* Initialize us a little bit */
@@ -542,11 +529,7 @@ command_completion_function (char *text, int state)
 			return NULL;
 		    }
 	            p = canonicalize_pathname (expanded);
-	            cur_word = g_malloc (strlen (p) + 2 + text_len);
-	            strcpy (cur_word, p);
-	            if (cur_word [strlen (cur_word) - 1] != PATH_SEP)
-	            	strcat (cur_word, PATH_SEP_STR);
-	            strcat (cur_word, text);
+		    cur_word = concat_dir_and_file (p, text);
 	            g_free (p);
 	            cur_path = strchr (cur_path, 0) + 1;
 	            init_state = state;
@@ -809,7 +792,7 @@ try_complete (char *text, int *start, int *end, int flags)
     	    }
     	}
     }
-    	
+
     if (word)
     	g_free (word);
 

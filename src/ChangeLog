@@ -4,6 +4,11 @@
 	(view_new): Use g_new0.
 	(ruler): Make static.
 
+	* complete.c (filename_completion_function): Clean it up.
+	(command_completion_function): Make words, bash_reserved and
+	bash_builtins const, use concat_dir_and_file.
+	(fetch_hosts): Fix typo, style fixes.
+
 2001-06-23  Pavel Roskin  <proski@gnu.org>
 
 	* mem.h: Undefine bcopy(), bcmp() and bzero() before redefining
