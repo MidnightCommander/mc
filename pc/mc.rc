@@ -1,4 +1,4 @@
-#include "../VERSION"
+#include "VERSION"
 #ifndef WINDRES
 #   include "windows.h"
 #   include "winver.h"

@@ -21,7 +21,7 @@ RES_PLACE=-o
 RES_SUFFIX=o
 
 # ---- Compiler-specific optional stuff
-MC_MISC_CFLAGS=
+MC_MISC_CFLAGS=-mno-cygwin
 
 ifndef RELEASE
 # ---- Debug build

@@ -177,9 +177,12 @@ endif # RES_SUFFIX
 
 MC_RES=$(OBJS_DIR)/mc.$(RES_SUFFIX)
 
-$(MC_RES): $(MC_PC_DIR)/mc.rc $(MC_PC_DIR)/mc_nt.ico $(MC_PC_DIR)/config.h ../VERSION
+$(MC_RES): $(MC_PC_DIR)/mc.rc $(MC_PC_DIR)/mc_nt.ico $(MC_PC_DIR)/config.h VERSION
 	$(RSC) $(RES_PLACE)$(MC_RES) $(RC_DEFINES) $(MC_PC_DIR)/mc.rc
 
 else
 MC_RES=
 endif # !RSC
+
+VERSION: ../configure.in
+	sed -n -e 's/^AM_INIT_AUTOMAKE([^,]*,[ []*\([0-9A-Za-z.-_]*\).*$$/#define VERSION "\1"/p' $< > $@
