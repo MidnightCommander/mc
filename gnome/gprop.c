@@ -407,6 +407,17 @@ gprop_perm_get_data (GpropPerm *gp, umode_t *umode, char **owner, char **group)
 
 /***** General *****/
 
+static void
+change_icon (GtkEntry *entry, GpropGeneral *gp)
+{
+	char *filename;
+
+	filename = gtk_entry_get_text (entry);
+
+	if (g_file_exists (filename))
+		gnome_pixmap_load_file (GNOME_PIXMAP (gp->icon_pixmap), gtk_entry_get_text (entry));
+}
+
 GpropGeneral *
 gprop_general_new (char *title, char *icon_filename)
 {
@@ -429,7 +440,7 @@ gprop_general_new (char *title, char *icon_filename)
 	gtk_box_pack_start (GTK_BOX (gp->top), frame, FALSE, FALSE, 0);
 	gtk_widget_show (frame);
 
-	table = gtk_table_new (2, 2, FALSE);
+	table = gtk_table_new (3, 2, FALSE);
 	gtk_container_border_width (GTK_CONTAINER (table), 6);
 	gtk_table_set_row_spacings (GTK_TABLE (table), 6);
 	gtk_table_set_col_spacings (GTK_TABLE (table), 4);
@@ -458,8 +469,19 @@ gprop_general_new (char *title, char *icon_filename)
 			  GTK_FILL | GTK_SHRINK,
 			  0, 0);
 
+	gp->icon_pixmap = gnome_pixmap_new_from_file (icon_filename);
+	gtk_table_attach (GTK_TABLE (table), gp->icon_pixmap,
+			  1, 2, 2, 3,
+			  GTK_FILL | GTK_SHRINK,
+			  GTK_FILL | GTK_SHRINK,
+			  0, 0);
+	gtk_widget_show (gp->icon_pixmap);
+
 	gp->icon_filename = gnome_file_entry_new ("gprop_general_icon_filename", _("Select icon"));
 	entry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (gp->icon_filename));
+	gtk_signal_connect (GTK_OBJECT (entry), "changed",
+			    (GtkSignalFunc) change_icon,
+			    gp);
 	gtk_entry_set_text (GTK_ENTRY (entry), icon_filename);
 	gtk_table_attach (GTK_TABLE (table), gp->icon_filename,
 			  1, 2, 1, 2,

@@ -51,6 +51,7 @@ typedef struct {
 
 	GtkWidget *title;
 	GtkWidget *icon_filename;
+	GtkWidget *icon_pixmap;
 } GpropGeneral;
 
 GpropGeneral *gprop_general_new (char *title, char *icon_filename);

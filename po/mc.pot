@@ -1,13 +1,13 @@
 msgid ""
 msgstr ""
-"Date: 1998-04-29 20:43:05-0500\n"
-"From: Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>\n"
+"Date: 1998-04-29 23:04:04-0500\n"
+"From: Federico Mena <federico@bananoid.nuclecu.unam.mx>\n"
 "Content-Type: text/plain; charset=\n"
 "Xgettext-Options: --default-domain=mc --directory=.. --add-comments --keyword=_ --keyword=N_ --files-from=./POTFILES.in\n"
 "Files: edit/edit.c edit/edit_key_translator.c edit/editcmd.c edit/editmenu.c edit/editoptions.c edit/editwidget.c src/fixhlp.c src/achown.c src/background.c src/boxes.c src/chmod.c src/chown.c src/cmd.c src/command.c src/dialog.c src/dir.c src/ext.c src/file.c src/find.c src/help.c src/hotlist.c src/info.c src/layout.c src/learn.c src/main.c src/menu.c src/option.c src/panelize.c src/screen.c src/subshell.c src/tree.c src/user.c src/util.c src/utilunix.c src/view.c src/win.c src/wtools.c gnome/gcmd.c gnome/gdesktop.c gnome/glayout.c gnome/gprop.c gnome/gscreen.c gnome/gtools.c gnome/gview.c gnome/gwidget.c\n"
 
 #. The file-name is printed after the ':'
-#: edit/edit.c:113 edit/edit.c:161 edit/edit.c:168 edit/edit.c:175 edit/edit.c:182 edit/edit.c:188 edit/edit.c:227 edit/edit.c:262 edit/editcmd.c:1683 edit/editwidget.c:879 src/tree.c:1138 src/tree.c:1144 src/wtools.c:225
+#: edit/edit.c:113 edit/edit.c:161 edit/edit.c:168 edit/edit.c:175 edit/edit.c:182 edit/edit.c:188 edit/edit.c:227 edit/edit.c:262 edit/editcmd.c:1687 edit/editwidget.c:879 src/tree.c:1138 src/tree.c:1144 src/wtools.c:225
 msgid " Error "
 msgstr ""
 
@@ -45,8 +45,7 @@ msgstr ""
 msgid " Execute Macro "
 msgstr ""
 
-#. Input line for a single key press follows the ':'
-#: edit/edit_key_translator.c:133 edit/editcmd.c:620 edit/editcmd.c:625
+#: edit/edit_key_translator.c:133 edit/editcmd.c:624 edit/editcmd.c:629
 msgid " Press macro hotkey: "
 msgstr ""
 
@@ -58,355 +57,362 @@ msgstr ""
 msgid " Press any key: "
 msgstr ""
 
-#: edit/editcmd.c:394
+#. This heads the 'Save As' dialog box
+#: edit/editcmd.c:398
 msgid " Save As "
 msgstr ""
 
-#. Warning message with a query to continue or cancel the operation
-#: edit/editcmd.c:409 edit/editcmd.c:718 edit/editcmd.c:730 edit/editcmd.c:831 edit/editcmd.c:914 gnome/gdesktop.c:1299 src/ext.c:295 src/help.c:320 src/main.c:685 src/subshell.c:696 src/subshell.c:722 src/utilunix.c:374 src/utilunix.c:378 src/utilunix.c:444
+#: edit/editcmd.c:413 edit/editcmd.c:722 edit/editcmd.c:734 edit/editcmd.c:835 edit/editcmd.c:918 gnome/gdesktop.c:1301 src/ext.c:295 src/help.c:320 src/main.c:685 src/subshell.c:696 src/subshell.c:722 src/utilunix.c:374 src/utilunix.c:378 src/utilunix.c:444
 msgid " Warning "
 msgstr ""
 
-#: edit/editcmd.c:410
+#: edit/editcmd.c:414
 msgid " A file already exists with this name. "
 msgstr ""
 
-#: edit/editcmd.c:412
+#. Push buttons to over-write the current file, or cancel the operation
+#: edit/editcmd.c:416
 msgid "Overwrite"
 msgstr ""
 
-#: edit/editcmd.c:412 edit/editcmd.c:691 edit/editcmd.c:718 edit/editcmd.c:730 edit/editcmd.c:831 edit/editcmd.c:1317
+#: edit/editcmd.c:416 edit/editcmd.c:695 edit/editcmd.c:722 edit/editcmd.c:734 edit/editcmd.c:835 edit/editcmd.c:1321
 msgid "Cancel"
 msgstr ""
 
-#: edit/editcmd.c:428
+#: edit/editcmd.c:432
 msgid " Save as "
 msgstr ""
 
-#: edit/editcmd.c:428 edit/editcmd.c:2263
+#: edit/editcmd.c:432 edit/editcmd.c:2267
 msgid " Error trying to save file. "
 msgstr ""
 
 #. This heads the delete macro error dialog box
-#: edit/editcmd.c:539 edit/editcmd.c:547 edit/editcmd.c:572
+#: edit/editcmd.c:543 edit/editcmd.c:551 edit/editcmd.c:576
 msgid " Delete macro "
 msgstr ""
 
 #. 'Open' = load temp file
-#: edit/editcmd.c:541
+#: edit/editcmd.c:545
 msgid " Error trying to open temp file "
 msgstr ""
 
-#: edit/editcmd.c:549 edit/editcmd.c:610 edit/editcmd.c:673
+#. 'Open' = load temp file
+#: edit/editcmd.c:553 edit/editcmd.c:614 edit/editcmd.c:677
 msgid " Error trying to open macro file "
 msgstr ""
 
-#: edit/editcmd.c:554 edit/editcmd.c:562 edit/editcmd.c:598 edit/editcmd.c:648
+#: edit/editcmd.c:558 edit/editcmd.c:566 edit/editcmd.c:602 edit/editcmd.c:652
 msgid "key '%d 0': "
 msgstr ""
 
-#: edit/editcmd.c:573
+#: edit/editcmd.c:577
 msgid " Error trying to overwrite macro file "
 msgstr ""
 
-#. This heads the 'Macro' dialog box
-#: edit/editcmd.c:590
+#: edit/editcmd.c:594
 msgid " Macro "
 msgstr ""
 
 #. Input line for a single key press follows the ':'
-#: edit/editcmd.c:592
+#: edit/editcmd.c:596
 msgid " Press the macro's new hotkey: "
 msgstr ""
 
 #. This heads the 'Save Macro' dialog box
-#: edit/editcmd.c:610
+#: edit/editcmd.c:614
 msgid " Save macro "
 msgstr ""
 
-#: edit/editcmd.c:620 edit/editcmd.c:623
+#. This heads the 'Delete Macro' dialog box
+#: edit/editcmd.c:624 edit/editcmd.c:627
 msgid " Delete Macro "
 msgstr ""
 
-#: edit/editcmd.c:672
+#. This heads the 'Load Macro' dialog box
+#: edit/editcmd.c:676
 msgid " Load macro "
 msgstr ""
 
-#: edit/editcmd.c:686 edit/editcmd.c:688
+#: edit/editcmd.c:690 edit/editcmd.c:692
 msgid " Confirm save file? : "
 msgstr ""
 
 #. Buttons to 'Confirm save file' query
-#: edit/editcmd.c:691
+#: edit/editcmd.c:695
 msgid " Save file "
 msgstr ""
 
-#: edit/editcmd.c:691 edit/editwidget.c:993 src/view.c:1992
+#: edit/editcmd.c:695 edit/editwidget.c:993 src/view.c:1992
 msgid "Save"
 msgstr ""
 
-#: edit/editcmd.c:718 edit/editcmd.c:730
+#: edit/editcmd.c:722 edit/editcmd.c:734
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
 msgstr ""
 
-#: edit/editcmd.c:718 edit/editcmd.c:730 edit/editcmd.c:831
+#: edit/editcmd.c:722 edit/editcmd.c:734 edit/editcmd.c:835
 msgid "Continue"
 msgstr ""
 
 #. Heads the 'Load' file dialog box
-#: edit/editcmd.c:733 edit/editcmd.c:750
+#: edit/editcmd.c:737 edit/editcmd.c:754
 msgid " Load "
 msgstr ""
 
-#: edit/editcmd.c:750
+#: edit/editcmd.c:754
 msgid " Error trying to open file for reading "
 msgstr ""
 
-#: edit/editcmd.c:831 edit/editcmd.c:914
+#: edit/editcmd.c:835 edit/editcmd.c:918
 msgid " Block is large, you may not be able to undo this action. "
 msgstr ""
 
-#: edit/editcmd.c:914
+#: edit/editcmd.c:918
 msgid " Continue "
 msgstr ""
 
-#: edit/editcmd.c:914
+#: edit/editcmd.c:918
 msgid " Cancel "
 msgstr ""
 
-#. This is for the confirm replace dialog box. The replaced string comes after the ':'
-#: edit/editcmd.c:966 edit/editcmd.c:1315
+#: edit/editcmd.c:970 edit/editcmd.c:1319
 msgid " Replace with: "
 msgstr ""
 
-#. Heads the 'Replace' dialog box
-#: edit/editcmd.c:970 edit/editcmd.c:1047 edit/editcmd.c:1297 edit/editcmd.c:1313 edit/editcmd.c:1845 edit/editcmd.c:1876 edit/editcmd.c:1878
+#: edit/editcmd.c:974 edit/editcmd.c:1051 edit/editcmd.c:1301 edit/editcmd.c:1317 edit/editcmd.c:1849 edit/editcmd.c:1880 edit/editcmd.c:1882
 msgid " Replace "
 msgstr ""
 
-#. Heads the 'Search' dialog box
-#: edit/editcmd.c:1115 edit/editcmd.c:1291 edit/editcmd.c:1947 src/view.c:1474 src/view.c:1564 src/view.c:1686 src/view.c:1885 src/view.c:1917
+#: edit/editcmd.c:1119 edit/editcmd.c:1295 edit/editcmd.c:1951 src/view.c:1474 src/view.c:1564 src/view.c:1686 src/view.c:1885 src/view.c:1917
 msgid " Search "
 msgstr ""
 
-#: edit/editcmd.c:1163
+#. An input line comes after the ':'
+#: edit/editcmd.c:1167
 msgid " Enter search text : "
 msgstr ""
 
-#: edit/editcmd.c:1170
+#: edit/editcmd.c:1174
 msgid " Enter replace text : "
 msgstr ""
 
-#: edit/editcmd.c:1174
+#: edit/editcmd.c:1178
 msgid " Enter argument order : "
 msgstr ""
 
-#: edit/editcmd.c:1178 edit/editcmd.c:1179
+#. Tool hint
+#: edit/editcmd.c:1182 edit/editcmd.c:1183
 msgid "Enter the order of replacement of your scanf format specifiers"
 msgstr ""
 
-#: edit/editcmd.c:1184
+#. The following are check boxes
+#: edit/editcmd.c:1188
 msgid " Whole words only "
 msgstr ""
 
-#: edit/editcmd.c:1186
+#: edit/editcmd.c:1190
 msgid " Case sensitive "
 msgstr ""
 
-#: edit/editcmd.c:1189
+#: edit/editcmd.c:1193
 msgid " Regular expression "
 msgstr ""
 
-#: edit/editcmd.c:1190 edit/editcmd.c:1191
+#: edit/editcmd.c:1194 edit/editcmd.c:1195
 msgid "See the regex man page for how to compose a regular expression"
 msgstr ""
 
-#: edit/editcmd.c:1197
+#: edit/editcmd.c:1201
 msgid " Backwards "
 msgstr ""
 
-#: edit/editcmd.c:1199 edit/editcmd.c:1200
+#. Tool hint
+#: edit/editcmd.c:1203 edit/editcmd.c:1204
 msgid "Warning: Searching backward can be slow"
 msgstr ""
 
-#: edit/editcmd.c:1213
+#: edit/editcmd.c:1217
 msgid " Prompt on replace "
 msgstr ""
 
 #. Tool hint
-#: edit/editcmd.c:1215
+#: edit/editcmd.c:1219
 msgid "Ask before making each replacement"
 msgstr ""
 
-#: edit/editcmd.c:1217
+#: edit/editcmd.c:1221
 msgid " Replace all "
 msgstr ""
 
-#: edit/editcmd.c:1220
+#: edit/editcmd.c:1224
 msgid " Scanf expression "
 msgstr ""
 
-#. Tool hint
-#: edit/editcmd.c:1222
+#: edit/editcmd.c:1226
 msgid "Allows entering of a C format string, see the scanf man page"
 msgstr ""
 
 #. Tool hint
-#: edit/editcmd.c:1227
+#: edit/editcmd.c:1231
 msgid "Begin search, Enter"
 msgstr ""
 
 #. Tool hint
-#: edit/editcmd.c:1230
+#: edit/editcmd.c:1234
 msgid "Abort this dialog, Esc"
 msgstr ""
 
 #. Buttons for the confirm replace dialog box.
-#: edit/editcmd.c:1317
+#: edit/editcmd.c:1321
 msgid "Replace"
 msgstr ""
 
-#: edit/editcmd.c:1317
+#: edit/editcmd.c:1321
 msgid "Skip"
 msgstr ""
 
-#: edit/editcmd.c:1317
+#: edit/editcmd.c:1321
 msgid "Replace all"
 msgstr ""
 
-#: edit/editcmd.c:1683
+#: edit/editcmd.c:1687
 msgid " Invalid regular expression, or scanf expression with to many conversions "
 msgstr ""
 
 #. "Invalid regexp string or scanf string"
-#: edit/editcmd.c:1847
+#: edit/editcmd.c:1851
 msgid " Error in replacement format string. "
 msgstr ""
 
-#: edit/editcmd.c:1875
+#: edit/editcmd.c:1879
 msgid " %ld replacements made. "
 msgstr ""
 
-#: edit/editcmd.c:1878 edit/editcmd.c:1947
+#: edit/editcmd.c:1882 edit/editcmd.c:1951
 msgid " Search string not found. "
 msgstr ""
 
-#: edit/editcmd.c:1965 edit/editcmd.c:1968
+#. Confirm 'Quit' dialog box
+#: edit/editcmd.c:1969 edit/editcmd.c:1972
 msgid " Quit "
 msgstr ""
 
-#: edit/editcmd.c:1965
+#: edit/editcmd.c:1969
 msgid " File was modified, Save with exit? "
 msgstr ""
 
-#: edit/editcmd.c:1965
+#: edit/editcmd.c:1969
 msgid "Cancel quit"
 msgstr ""
 
-#: edit/editcmd.c:1965 gnome/gcmd.c:94 gnome/gdesktop.c:804 gnome/gdesktop.c:1114 src/cmd.c:248 src/file.c:2116 src/file.c:2469 src/file.c:2549 src/hotlist.c:1027 src/main.c:840 src/screen.c:1989 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:410
+#: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:804 gnome/gdesktop.c:1116 src/cmd.c:248 src/file.c:2116 src/file.c:2469 src/file.c:2549 src/hotlist.c:1027 src/main.c:840 src/screen.c:1989 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:410
 msgid "&Yes"
 msgstr ""
 
-#: edit/editcmd.c:1965 gnome/gcmd.c:94 gnome/gdesktop.c:804 gnome/gdesktop.c:1114 src/cmd.c:248 src/file.c:2116 src/file.c:2466 src/file.c:2549 src/hotlist.c:1027 src/main.c:840 src/screen.c:1989 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:410
+#: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:804 gnome/gdesktop.c:1116 src/cmd.c:248 src/file.c:2116 src/file.c:2466 src/file.c:2549 src/hotlist.c:1027 src/main.c:840 src/screen.c:1989 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:410
 msgid "&No"
 msgstr ""
 
-#: edit/editcmd.c:1969
+#: edit/editcmd.c:1973
 msgid ""
 " Current text was modified without a file save. \n"
 " Save with exit? "
 msgstr ""
 
-#: edit/editcmd.c:1969
+#: edit/editcmd.c:1973
 msgid " &Cancel quit "
 msgstr ""
 
-#: edit/editcmd.c:1969
+#: edit/editcmd.c:1973
 msgid " &Yes "
 msgstr ""
 
-#: edit/editcmd.c:1969
+#: edit/editcmd.c:1973
 msgid " &No "
 msgstr ""
 
-#: edit/editcmd.c:2138 edit/editcmd.c:2189
+#: edit/editcmd.c:2142 edit/editcmd.c:2193
 msgid " Copy to clipboard "
 msgstr ""
 
-#: edit/editcmd.c:2138 edit/editcmd.c:2153 edit/editcmd.c:2189 edit/editcmd.c:2202
+#: edit/editcmd.c:2142 edit/editcmd.c:2157 edit/editcmd.c:2193 edit/editcmd.c:2206
 msgid " Unable to save to file. "
 msgstr ""
 
-#: edit/editcmd.c:2153 edit/editcmd.c:2202
+#: edit/editcmd.c:2157 edit/editcmd.c:2206
 msgid " Cut to clipboard "
 msgstr ""
 
-#: edit/editcmd.c:2224 edit/editcmd.c:2226 src/view.c:1857
+#: edit/editcmd.c:2228 edit/editcmd.c:2230 src/view.c:1857
 msgid " Goto line "
 msgstr ""
 
-#: edit/editcmd.c:2224 edit/editcmd.c:2226
+#: edit/editcmd.c:2228 edit/editcmd.c:2230
 msgid " Enter line: "
 msgstr ""
 
-#: edit/editcmd.c:2246 edit/editcmd.c:2263
+#: edit/editcmd.c:2250 edit/editcmd.c:2267
 msgid " Save Block "
 msgstr ""
 
-#: edit/editcmd.c:2297
+#. returns 1 on success
+#: edit/editcmd.c:2301
 msgid " Insert File "
 msgstr ""
 
-#: edit/editcmd.c:2312
+#: edit/editcmd.c:2316
 msgid " Insert file "
 msgstr ""
 
-#: edit/editcmd.c:2312
+#: edit/editcmd.c:2316
 msgid " Error trying to insert file. "
 msgstr ""
 
-#. Not essential to translate
-#: edit/editcmd.c:2332
+#: edit/editcmd.c:2336
 msgid " Sort block "
 msgstr ""
 
-#: edit/editcmd.c:2332 edit/editcmd.c:2386
+#. Not essential to translate
+#: edit/editcmd.c:2336 edit/editcmd.c:2390
 msgid " You must first highlight a block of text. "
 msgstr ""
 
-#: edit/editcmd.c:2339
+#: edit/editcmd.c:2343
 msgid " Run Sort "
 msgstr ""
 
-#. Not essential to translate
-#: edit/editcmd.c:2341
+#: edit/editcmd.c:2345
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr ""
 
-#: edit/editcmd.c:2352 edit/editcmd.c:2358
+#: edit/editcmd.c:2356 edit/editcmd.c:2362
 msgid " Sort "
 msgstr ""
 
-#: edit/editcmd.c:2354
+#. Not essential to translate
+#: edit/editcmd.c:2358
 msgid " Error trying to execute sort command "
 msgstr ""
 
-#: edit/editcmd.c:2360
+#. Not essential to translate
+#: edit/editcmd.c:2364
 msgid " Sort returned non-zero: "
 msgstr ""
 
 #. Not essential to translate
-#: edit/editcmd.c:2384 edit/editcmd.c:2414
+#: edit/editcmd.c:2388 edit/editcmd.c:2418
 msgid " Process block "
 msgstr ""
 
-#: edit/editcmd.c:2416
+#. Not essential to translate
+#: edit/editcmd.c:2420
 msgid " Error trying to stat file "
 msgstr ""
 
-#: edit/editcmd.c:2486
+#: edit/editcmd.c:2490
 msgid " Mail "
 msgstr ""
 
@@ -776,7 +782,7 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: edit/editwidget.c:999 gnome/gdesktop.c:803 gnome/gdesktop.c:1011 src/screen.c:2207 src/screen.c:2241
+#: edit/editwidget.c:999 gnome/gdesktop.c:803 gnome/gdesktop.c:1013 src/screen.c:2207 src/screen.c:2241
 msgid "Delete"
 msgstr ""
 
@@ -2538,7 +2544,7 @@ msgstr ""
 msgid " The shell is already running a command "
 msgstr ""
 
-#: gnome/gcmd.c:92 gnome/gdesktop.c:1112 src/main.c:838 src/screen.c:1987
+#: gnome/gcmd.c:92 gnome/gdesktop.c:1114 src/main.c:838 src/screen.c:1987
 msgid " The Midnight Commander "
 msgstr ""
 
@@ -3133,7 +3139,7 @@ msgstr ""
 msgid "  %s bytes in %d file%s"
 msgstr ""
 
-#: gnome/gscreen.c:1200 src/screen.c:667
+#: gnome/gscreen.c:1201 src/screen.c:667
 msgid "<readlink failed>"
 msgstr ""
 
@@ -3141,7 +3147,7 @@ msgstr ""
 msgid "Unknow tag on display format: "
 msgstr ""
 
-#: gnome/gdesktop.c:1113 src/screen.c:1988
+#: gnome/gdesktop.c:1115 src/screen.c:1988
 msgid " Do you really want to execute? "
 msgstr ""
 
@@ -3664,22 +3670,19 @@ msgstr ""
 msgid "Do you want to delete "
 msgstr ""
 
-#. We connect_object_after to the items so that we can destroy
-#. * the menu at the proper time.
-#.
-#: gnome/gdesktop.c:1004 gnome/gscreen.c:365
+#: gnome/gdesktop.c:1006 gnome/gscreen.c:365
 msgid "Properties"
 msgstr ""
 
-#: gnome/gdesktop.c:1123
+#: gnome/gdesktop.c:1125
 msgid "Open with..."
 msgstr ""
 
-#: gnome/gdesktop.c:1124 gnome/gscreen.c:321
+#: gnome/gdesktop.c:1126 gnome/gscreen.c:321
 msgid "Enter extra arguments:"
 msgstr ""
 
-#: gnome/gdesktop.c:1299
+#: gnome/gdesktop.c:1301
 msgid " Could not open %s directory"
 msgstr ""
 
@@ -3996,19 +3999,19 @@ msgstr ""
 msgid "<Unknown>"
 msgstr ""
 
-#: gnome/gprop.c:428
+#: gnome/gprop.c:439
 msgid "General"
 msgstr ""
 
-#: gnome/gprop.c:439
+#: gnome/gprop.c:450
 msgid "Title"
 msgstr ""
 
-#: gnome/gprop.c:455
+#: gnome/gprop.c:466
 msgid "Icon"
 msgstr ""
 
-#: gnome/gprop.c:461
+#: gnome/gprop.c:480
 msgid "Select icon"
 msgstr ""
 
@@ -4044,83 +4047,83 @@ msgstr ""
 msgid "Rename/move.."
 msgstr ""
 
-#: gnome/gscreen.c:1008
+#: gnome/gscreen.c:1009
 msgid "All files"
 msgstr ""
 
-#: gnome/gscreen.c:1010
+#: gnome/gscreen.c:1011
 msgid "Archives and compressed files"
 msgstr ""
 
-#: gnome/gscreen.c:1012
+#: gnome/gscreen.c:1013
 msgid "RPM/DEB files"
 msgstr ""
 
-#: gnome/gscreen.c:1014
+#: gnome/gscreen.c:1015
 msgid "Text/Document files"
 msgstr ""
 
-#: gnome/gscreen.c:1016
+#: gnome/gscreen.c:1017
 msgid "HTML and SGML files"
 msgstr ""
 
-#: gnome/gscreen.c:1018
+#: gnome/gscreen.c:1019
 msgid "Postscript and PDF files"
 msgstr ""
 
-#: gnome/gscreen.c:1020
+#: gnome/gscreen.c:1021
 msgid "Spreadsheet files"
 msgstr ""
 
-#: gnome/gscreen.c:1022
+#: gnome/gscreen.c:1023
 msgid "Image files"
 msgstr ""
 
-#: gnome/gscreen.c:1025
+#: gnome/gscreen.c:1026
 msgid "Video/animation files"
 msgstr ""
 
-#: gnome/gscreen.c:1027
+#: gnome/gscreen.c:1028
 msgid "Audio files"
 msgstr ""
 
-#: gnome/gscreen.c:1029
+#: gnome/gscreen.c:1030
 msgid "C program files"
 msgstr ""
 
-#: gnome/gscreen.c:1031
+#: gnome/gscreen.c:1032
 msgid "C++ program files"
 msgstr ""
 
-#: gnome/gscreen.c:1033
+#: gnome/gscreen.c:1034
 msgid "Objective-C program files"
 msgstr ""
 
-#: gnome/gscreen.c:1035
+#: gnome/gscreen.c:1036
 msgid "Scheme program files"
 msgstr ""
 
-#: gnome/gscreen.c:1037
+#: gnome/gscreen.c:1038
 msgid "Assembler program files"
 msgstr ""
 
-#: gnome/gscreen.c:1039
+#: gnome/gscreen.c:1040
 msgid "Misc. program files"
 msgstr ""
 
-#: gnome/gscreen.c:1041
+#: gnome/gscreen.c:1042
 msgid "Font files"
 msgstr ""
 
-#: gnome/gscreen.c:1166
+#: gnome/gscreen.c:1167
 msgid "Search: "
 msgstr ""
 
-#: gnome/gscreen.c:1176
+#: gnome/gscreen.c:1177
 msgid " %s bytes in %d file%s"
 msgstr ""
 
-#: gnome/gscreen.c:1246
+#: gnome/gscreen.c:1247
 msgid "Filter"
 msgstr ""
 
