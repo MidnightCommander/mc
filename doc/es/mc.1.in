@@ -670,8 +670,9 @@ visualiza el nombre de fichero.
 visualiza el tamaño del fichero.
 .PP
 .B bsize,
-es una forma alternativa del formato <bf/size/. Muestra
-el tamaño de los ficheros y para los directorios visualiza
+es una forma alternativa del formato
+.BR size .
+Muestra el tamaño de los ficheros y para los directorios visualiza
 SUB-DIR o UP--DIR.
 .PP
 .B tipo (type),

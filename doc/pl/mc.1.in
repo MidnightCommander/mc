@@ -580,8 +580,10 @@ wy¶wietla nazwê pliku.
 wy¶wietla wielko¶æ pliku.
 .PP
 .BR bsize ,
-jest alternatyw± dla formatu <bf/size/. Wy¶wietla rozmiar plików, a dla
-katalogów po prostu wy¶wietla tekst "SUB-DIR" lub "UP--DIR".
+jest alternatyw± dla format
+.BR size .
+Wy¶wietla rozmiar plików, a dla katalogów po prostu wy¶wietla tekst
+"SUB-DIR" lub "UP--DIR".
 .PP
 .BR type ,
 wy¶wietla jednoznakowy opis typu pliku. Ten znak jest taki sam co ten
