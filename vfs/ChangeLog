@@ -1,3 +1,13 @@
+2005-01-20  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* samba/lib/util.c: Comment out some more unused functions.
+	(global_myworkgroup): Remove unused variable.
+	(def_finfo): Make const.
+	(remote_proto, remote_arch): Make const char * instead of
+	fstring.
+	* samba/libsmb/clientgen.c (interpret_long_filename): Fix 
+	def_finfo declaration.
+
 2005-01-19  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* ftpfs.c (ftpfs_file_store): Make sure we write() all read() data.

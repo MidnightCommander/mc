@@ -63,7 +63,7 @@ extern int DEBUGLEVEL;
 int Protocol = PROTOCOL_COREPLUS;
 
 /* a default finfo structure to ensure all fields are sensible */
-file_info def_finfo = {-1,0,0,0,0,0,0,""};
+file_info const def_finfo = {-1,0,0,0,0,0,0,""};
 
 /* the client file descriptor */
 extern int Client;
@@ -88,9 +88,9 @@ BOOL case_mangle;
 
 fstring remote_machine="";
 fstring local_machine="";
-fstring remote_arch="UNKNOWN";
+static const char *remote_arch = "UNKNOWN";
 static enum remote_arch_types ra_type = RA_UNKNOWN;
-fstring remote_proto="UNKNOWN";
+static const char *remote_proto = "UNKNOWN";
 pstring myhostname="";
 pstring user_socket_options="";   
 
@@ -100,10 +100,7 @@ pstring samlogon_user="";
 BOOL sam_logon_in_ssb = False;
 
 pstring global_myname = "";
-fstring global_myworkgroup = "";
 char **my_netbios_names;
-
-static char *filename_dos(char *path,char *buf);
 
 
 
@@ -567,6 +564,7 @@ int smb_offset(char *p,char *buf)
   return(PTR_DIFF(p,buf+4) + chain_size);
 }
 
+#if 0
 /*******************************************************************
 reduce a file name, removing .. elements.
 ********************************************************************/
@@ -641,7 +639,6 @@ on the system that has the referenced file system.
 
 widelinks are allowed if widelinks is true
 ********************************************************************/
-#if 0
 BOOL reduce_name(char *s,char *dir,BOOL widelinks)
 {
 #ifndef REDUCE_PATHS
@@ -763,7 +760,8 @@ BOOL reduce_name(char *s,char *dir,BOOL widelinks)
   return(True);
 #endif
 }
-#endif /* 0 */
+
+
 /****************************************************************************
 expand some *s 
 ****************************************************************************/
@@ -790,6 +788,18 @@ static void dirname_dos(char *path,char *buf)
 	split_at_last_component(path, buf, '\\', NULL);
 }
 
+
+static char *filename_dos(char *path,char *buf)
+{
+  char *p = strrchr(path,'\\');
+
+  if (!p)
+    pstrcpy(buf,path);
+  else
+    pstrcpy(buf,p+1);
+
+  return(buf);
+}
 
 /****************************************************************************
 expand a wildcard expression, replacing *s with ?s
@@ -852,7 +862,6 @@ void expand_mask(char *Mask,BOOL doext)
 }  
 
 
-
 /****************************************************************************
   make a dir struct
 ****************************************************************************/
@@ -887,6 +896,7 @@ void make_dir_struct(char *buf,char *mask,char *fname,SMB_OFF_T size,int mode,ti
     strupper(buf+30);
   DEBUG(8,("put name [%s] into dir struct\n",buf+30));
 }
+#endif /* 0 */
 
 
 /*******************************************************************
@@ -1609,22 +1619,11 @@ this is a version of setbuffer() for those machines that only have setvbuf
   setvbuf(f,buf,_IOFBF,bufsize);
 }
 #endif
-#endif /* 0 */
 
 /****************************************************************************
 parse out a filename from a path name. Assumes dos style filenames.
 ****************************************************************************/
-static char *filename_dos(char *path,char *buf)
-{
-  char *p = strrchr(path,'\\');
-
-  if (!p)
-    pstrcpy(buf,path);
-  else
-    pstrcpy(buf,p+1);
-
-  return(buf);
-}
+#endif /* 0 */
 
 
 
@@ -2668,23 +2667,23 @@ void set_remote_arch(enum remote_arch_types type)
   switch( type )
   {
   case RA_WFWG:
-    fstrcpy(remote_arch, "WfWg");
+    remote_arch = "WfWg";
     return;
   case RA_OS2:
-    fstrcpy(remote_arch, "OS2");
+    remote_arch = "OS2";
     return;
   case RA_WIN95:
-    fstrcpy(remote_arch, "Win95");
+    remote_arch = "Win95";
     return;
   case RA_WINNT:
-    fstrcpy(remote_arch, "WinNT");
+    remote_arch = "WinNT";
     return;
   case RA_SAMBA:
-    fstrcpy(remote_arch,"Samba");
+    remote_arch = "Samba";
     return;
   default:
     ra_type = RA_UNKNOWN;
-    fstrcpy(remote_arch, "UNKNOWN");
+    remote_arch = "UNKNOWN";
     break;
   }
 }
@@ -2835,6 +2834,7 @@ int str_checksum(const char *s)
 
 
 
+#if 0
 /*****************************************************************
 zero a memory area then free it. Used to catch bugs faster
 *****************************************************************/  
@@ -2903,7 +2903,7 @@ int set_maxfiles(int requested_max)
 #endif
 }
 
-#if 0
+
 /*****************************************************************
  splits out the last subkey of a key
  *****************************************************************/  

@@ -1893,7 +1893,7 @@ by NT and 2 is used by OS/2
 ****************************************************************************/
 static int interpret_long_filename(int level,char *p,file_info *finfo)
 {
-	extern file_info def_finfo;
+	extern file_info const def_finfo;
 
 	if (finfo)
 		memcpy(finfo,&def_finfo,sizeof(*finfo));
