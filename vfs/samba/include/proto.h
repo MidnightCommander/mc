@@ -366,9 +366,6 @@ BOOL cli_dskattr(struct cli_state *cli, int *bsize, int *total, int *avail);
 
 /* The following definitions come from libsmb/namequery.c  */
 
-BOOL name_status(int fd,char *name,int name_type,BOOL recurse,
-		 struct in_addr to_ip,char *master,char *rname,
-		 void (*fn)(struct packet_struct *));
 struct in_addr *name_query(int fd,const char *name,int name_type, BOOL bcast,BOOL recurse,
          struct in_addr to_ip, int *count, void (*fn)(struct packet_struct *));
 FILE *startlmhosts(char *fname);

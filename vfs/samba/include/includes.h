@@ -519,9 +519,6 @@ extern int errno;
 #endif
 
 
-/* Lists, trees, caching, datbase... */
-#include "dlinklist.h"
-
 #include "version.h"
 #include "smb.h"
 #include "nameserv.h"

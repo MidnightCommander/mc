@@ -61,7 +61,6 @@ dist-hook:
 	$(mkinstalldirs) $(distdir)/samba/lib
 	$(mkinstalldirs) $(distdir)/samba/libsmb
 	$(mkinstalldirs) $(distdir)/samba/param
-	$(mkinstalldirs) $(distdir)/samba/tests
 	for I in $(SAMBA_DIST); do \
 	  cp -p $(srcdir)/samba/$$I $(distdir)/samba/$$I || exit 1; \
 	done
@@ -104,7 +103,6 @@ mcserv_LDADD = $(MCSERVLIBS)
 SAMBA_DIST =			\
 	Makefile.in		\
 	aclocal.m4		\
-	architecture.doc	\
 	configure.in		\
 	configure		\
 	internals.doc		\
@@ -151,7 +149,5 @@ SAMBA_DIST =			\
 	libsmb/smbencrypt.c	\
 	libsmb/smberr.c		\
 	param/loadparm.c	\
-	param/params.c		\
-	tests/README		\
-	tests/summary.c
+	param/params.c
 
