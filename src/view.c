@@ -1545,29 +1545,30 @@ get_line_at (WView *view, unsigned long *p, unsigned long *skipped)
     }
     *skipped = i;
 
-    if (pos) {
-	prev = get_byte (view, pos - 1);
+    if (!i && (pos || direction == -1)) {
+	prev = get_byte (view, pos - direction);
 	if ((prev == -1) || (prev == '\n'))
 	    prev = 0;
     }
 
-    for (i = 0; ch != -1; ch = get_byte (view, pos)) {
+    for (i = 1; ch != -1; ch = get_byte (view, pos)) {
 
-	if (i == usable_size) {
+	if (i >= usable_size) {
 	    buffer = grow_string_buffer (buffer, &buffer_size);
-	    usable_size = buffer_size - 2;
+	    usable_size = buffer_size - 2;	/* prev & null terminator */
 	}
 
-	i++;
-	buffer[i] = ch;
+	buffer[i++] = ch;
 
 	if (!pos && direction == -1)
 	    break;
 
 	pos += direction;
 
-	if (ch == '\n' || !ch)
+	if (ch == '\n' || !ch) {
+	    i--;			/* Strip newline/zero */
 	    break;
+	}
     }
 
     if (buffer) {
@@ -1675,20 +1676,19 @@ search (WView *view, char *text,
 
 	/* We found the string */
 
-	if (*s && !view->search_start && (search == regexp_view_search)
-	    && (*text == '^')) {
-
-	    /* We do not want to match a
-	     * ^ regexp when not at the real
-	     * beginning of some line
-	     */
-	    continue;
+	/* Handle ^ and $ when regexp search starts at the middle of the line */
+	if (*s && !view->search_start && (search == regexp_view_search)) {
+	    if ((*text == '^' && view->direction == 1)
+		|| (view->direction == -1 && text[strlen (text) - 1] == '$')
+	       ) {
+		continue;
+	    }
 	}
 	/* Record the position used to continue the search */
 	if (view->direction == 1)
 	    t += forward_line_start;
 	else
-	    t = reverse_line_start ? reverse_line_start + 2 : 0;
+	    t = reverse_line_start ? reverse_line_start + 3 : 0;
 	view->search_start += t;
 
 	if (t != beginning) {

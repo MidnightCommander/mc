@@ -1,3 +1,11 @@
+2003-03-24  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* view.c (get_line_at): Set prev properly for reverse search.
+	Don't remove final character in the last line without newline.
+	(search): During regexp search: handle properly '^'
+	in forward search and '$' in reverse search.
+	Based on the patch from Adam Byrtek <alpha@debian.org>.
+
 2003-03-22  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* cons.handler.c (set_attr) [__FreeBSD__]: Fix compilation.
