@@ -366,11 +366,11 @@ respectively.
 Start a filename search in the directory listing. When the search is
 active, the user input will be added to the search string instead of
 the command line. If the
-.I "Show mini-status"
+.I Show mini-status
 option is enabled the search string is shown on the mini-status
 line. When typing, the selection bar will move to the next file
 starting with the typed letters. The
-.I "backspace"
+.I backspace
 or
 .I DEL
 keys can be used to correct typing mistakes. If C-s is pressed
@@ -622,13 +622,13 @@ lists the actions which allow you to customize the Midnight Commander.
 .\"NODE "  Left and Right Menus"
 .SH "  Left and Right (Above and Below) Menus"
 The outlook of the directory panels can be changed from the
-.B "Left"
+.B Left
 and
-.B "Right"
-menus.
-.B ("Above"
+.B Right
+menus (they are named
+.B Above
 and
-.B "Below"
+.B Below
 when the horizontal panel split is chosen from the
 .\"LINK2"
 Layout
