@@ -141,6 +141,8 @@ void do_cd_command (char *cmd)
        (to see why, try "cd fred "). */
     /* NOTE: I think we should not remove the extra space,
        that way, we can cd into hidden directories */
+    /* FIXME: what about interpreting quoted strings like the shell.
+       so one could type "cd <tab> M-a <enter>" and it would work. */
     len = strlen (cmd) - 1;
     while (len >= 0 &&
 	   (cmd [len] == ' ' || cmd [len] == '\t' || cmd [len] == '\n')){
@@ -293,7 +295,7 @@ command_new (int y, int x, int cols)
  * command line, so the percent sign is quoted as well.
  */
 void
-command_insert (WInput * in, char *text, int insert_extra_space)
+command_insert (WInput * in, const char *text, int insert_extra_space)
 {
     char *quoted_text;
 
