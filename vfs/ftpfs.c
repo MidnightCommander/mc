@@ -278,6 +278,7 @@ reconnect (vfs *me, vfs_s_super *super)
 	    g_free (cwdir);
 	    return sock == COMPLETE;
 	}
+	SUP.cwdir = cwdir;
     }
     return 0;
 }
@@ -1231,17 +1232,17 @@ again:
         sock = open_data_connection (me, super, "LIST", 0, TYPE_ASCII, 0);
     else if (cd_first)
 	/* Dirty hack to avoid autoprepending / to . */
-        sock = open_data_connection (me, super, "LIST -la .", 0, TYPE_ASCII, 0);
+	/* Wu-ftpd produces strange output for '/' if 'LIST -la .' used */
+        sock = open_data_connection (me, super, "LIST -la", 0, TYPE_ASCII, 0);
     else {
 	/* Trailing "/." is necessary if remote_path is a symlink
            but don't generate "//." */
-	char *path = g_strconcat (remote_path, 
-				  (!*remote_path) ? "" : PATH_SEP_STR,
-				  ".", 
-				  NULL);
+	char *path = (*remote_path) ? concat_dir_and_file (remote_path, ".")
+				    : NULL;
 
-        sock = open_data_connection (me, super, "LIST -la", path, TYPE_ASCII, 0);
-	g_free (path);
+	sock = open_data_connection (me, super, "LIST -la", path, TYPE_ASCII, 0);
+	if (path)
+	    g_free (path);
     }
 
     if (sock == -1)
@@ -1279,10 +1280,16 @@ again:
 	int res = vfs_s_get_line_interruptible (me, buffer, sizeof (buffer), sock);
 	if (!res)
 	    break;
+
 	if (res == EINTR) {
 	    me->verrno = ECONNRESET;
-	    goto error;
+	    close (sock);
+	    disable_interrupt_key();
+	    get_reply(me, SUP.sock, NULL, 0);
+	    print_vfs_message(_("ftpfs: failed"));
+	    return -1;
 	}
+
 	if (logfile){
 	    fputs (buffer, logfile);
             fputs ("\n", logfile);
@@ -1328,12 +1335,6 @@ again:
     }
 #endif
     return 0;
-
-error:
-    disable_interrupt_key();
-    get_reply(me, SUP.sock, NULL, 0);
-    print_vfs_message(_("ftpfs: failed"));
-    return -1;
 
 fallback:
     if (SUP.strict == RFC_AUTODETECT) {

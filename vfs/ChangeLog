@@ -1,3 +1,11 @@
+2002-02-06  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* ftpfs.c (dir_load): Use "LIST -la" instead of "LIST -la ."
+	to eliminate problem with wu-ftpd.
+	Close sock on error. Eliminate goto.
+
+	(reconnect): Restore cwdir if login_server fails.
+
 2002-02-01  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* ftpfs.c (translate_path): Remove leading slash(es) more
