@@ -1,6 +1,11 @@
+2004-03-09  Pavel Roskin  <proski@gnu.org>
+
+	* subshell.c: Partly revert previous patch to preserve
+	translated strings.
+
 2004-02-09  Pavel Roskin  <proski@gnu.org>
 
-	* subshell.c: Use "\r\n" at the end of all error messages. 
+	* subshell.c: Use "\r\n" at the end of all error messages.
 	Don't use perror().  Make error messages more exact.
 
 2004-01-23  Pavel Roskin  <proski@gnu.org>
