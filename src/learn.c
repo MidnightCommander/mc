@@ -40,6 +40,7 @@
 #include "setup.h"
 #include "main.h"
 #include "learn.h"
+#include "wtools.h"
 
 #define UX		4
 #define UY		3
@@ -73,17 +74,6 @@ static int learnok;
 static int learnchanged;
 static char* learn_title = N_(" Learn keys ");
 
-static void learn_refresh (void)
-{
-    attrset (COLOR_NORMAL);
-    dlg_erase (learn_dlg);
-    
-    draw_box (learn_dlg, 1, 2, learn_dlg->lines - 2, learn_dlg->cols - 4);
-    
-    attrset (COLOR_HOT_NORMAL);
-    dlg_move (learn_dlg, 1, (learn_dlg->cols - strlen (learn_title)) / 2);
-    addstr (learn_title);
-}
 
 static int learn_button (int action, void *param)
 {
@@ -225,7 +215,7 @@ static int learn_callback (Dlg_head * h, int Par, int Msg)
 {
     switch (Msg) {
     case DLG_DRAW:
-	learn_refresh ();
+	common_dialog_repaint (h);
 	break;
     case DLG_KEY:
     	return learn_check_key (Par);

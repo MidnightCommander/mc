@@ -228,9 +228,7 @@ static int chl_callback (Dlg_head * h, int Par, int Msg)
 {
     switch (Msg) {
     case DLG_DRAW:
-	attrset (COLOR_NORMAL);
-	dlg_erase (h);
-	draw_box (h, 0, 0, 13, 17);
+	common_dialog_repaint (h);
 	break;
 	
     case DLG_KEY:
@@ -259,7 +257,7 @@ static void do_enter_key (Dlg_head *h, int f_pos)
 	chl_end = 0;
 	
 	chl_dlg = create_dlg (lyy, lxx, 13, 17, dialog_colors, chl_callback,
-			      "[Advanced Chown]", "achown_enter", DLG_NONE);
+			      "[Advanced Chown]", "achown_enter", DLG_COMPACT);
 	
 	/* get new listboxes */
 	chl_list = listbox_new (1, 1, 15, 11, 0, l_call, NULL);
