@@ -1,3 +1,10 @@
+2000-09-30  Pavel Roskin  <proski@gnu.org>
+
+	* editcmd.c (canonicalize_pathname) [GTK]: Make the argument
+	constant.
+	(edit_split_filename) [GTK]: Make the second argument constant
+	to match the declaration.
+
 2000-10-30  Andrew V. Samoilov <sav@bcs.zp.ua>
 
 	* editcmd.c (edit_save_file): better error handling on writting
