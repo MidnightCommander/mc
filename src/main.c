@@ -1669,27 +1669,22 @@ load_hint (int force)
 static void
 setup_panels_and_run_mc (void)
 {
-    int first, second;
-
     xtoolkit_panel_setup ();
+
+    add_widget (midnight_dlg, the_menubar);
+    add_widget (midnight_dlg, get_panel_widget (0));
+    add_widget (midnight_dlg, get_panel_widget (1));
     add_widget (midnight_dlg, the_hint);
     load_hint (1);
     add_widget (midnight_dlg, cmdline);
     add_widget (midnight_dlg, the_prompt);
     add_widget (midnight_dlg, the_bar);
-
-    if (boot_current_is_left) {
-	first = 1;
-	second = 0;
-    } else {
-	first = 0;
-	second = 1;
-    }
-    add_widget (midnight_dlg, get_panel_widget (first));
-    add_widget (midnight_dlg, get_panel_widget (second));
-    add_widget (midnight_dlg, the_menubar);
-
     init_labels ();
+
+    if (boot_current_is_left)
+	dlg_select_widget (midnight_dlg, get_panel_widget (0));
+    else
+	dlg_select_widget (midnight_dlg, get_panel_widget (1));
 
     /* Run the Midnight Commander if no file was specified in the command line */
     run_dlg (midnight_dlg);
@@ -1757,7 +1752,7 @@ do_nc (void)
 
     midnight_dlg =
 	create_dlg (0, 0, LINES, COLS, midnight_colors, midnight_callback,
-		    "[main]", NULL, DLG_HAS_MENUBAR | DLG_WANT_IDLE | DLG_REVERSE);
+		    "[main]", NULL, DLG_HAS_MENUBAR | DLG_WANT_IDLE);
 
     /* Check if we were invoked as an editor or file viewer */
     if (mc_maybe_editor_or_viewer ())
