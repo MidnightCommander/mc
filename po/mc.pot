@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-02-26 01:14-0600\n"
+"POT-Creation-Date: 1999-03-08 14:47-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgid " Execute Macro "
 msgstr ""
 
 #. Input line for a single key press follows the ':'
-#: edit/edit_key_translator.c:133 gtkedit/editcmd.c:698 gtkedit/editcmd.c:707
+#: edit/edit_key_translator.c:133 gtkedit/editcmd.c:707 gtkedit/editcmd.c:716
 msgid " Press macro hotkey: "
 msgstr ""
 
@@ -47,23 +47,23 @@ msgstr ""
 msgid "The GNOME edition of the Midnight Commander file manager."
 msgstr ""
 
-#: gnome/gcmd.c:121 src/main.c:827 src/screen.c:2047
+#: gnome/gcmd.c:121 src/main.c:844 src/screen.c:2047
 msgid " The Midnight Commander "
 msgstr ""
 
-#: gnome/gcmd.c:122 src/main.c:828
+#: gnome/gcmd.c:122 src/main.c:845
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr ""
 
-#: gnome/gcmd.c:123 gtkedit/editcmd.c:2235 src/cmd.c:251 src/file.c:1813
-#: src/file.c:2195 src/filegui.c:573 src/hotlist.c:1035 src/main.c:829
+#: gnome/gcmd.c:123 gtkedit/editcmd.c:2246 src/cmd.c:251 src/file.c:1813
+#: src/file.c:2195 src/filegui.c:573 src/hotlist.c:1035 src/main.c:846
 #: src/screen.c:2049 src/subshell.c:701 src/subshell.c:727 src/tree.c:755
 #: src/view.c:404
 msgid "&Yes"
 msgstr ""
 
-#: gnome/gcmd.c:123 gtkedit/editcmd.c:2235 src/cmd.c:251 src/file.c:1813
-#: src/file.c:2195 src/filegui.c:572 src/hotlist.c:1035 src/main.c:829
+#: gnome/gcmd.c:123 gtkedit/editcmd.c:2246 src/cmd.c:251 src/file.c:1813
+#: src/file.c:2195 src/filegui.c:572 src/hotlist.c:1035 src/main.c:846
 #: src/screen.c:2049 src/subshell.c:701 src/subshell.c:727 src/tree.c:755
 #: src/view.c:404
 msgid "&No"
@@ -181,7 +181,7 @@ msgstr ""
 msgid "Enter extra arguments:"
 msgstr ""
 
-#: gnome/gdesktop.c:392 gnome/gdesktop.c:1828
+#: gnome/gdesktop.c:392 gnome/gdesktop.c:1841
 msgid "Warning"
 msgstr ""
 
@@ -203,28 +203,28 @@ msgid "Error"
 msgstr ""
 
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop.c:1824
+#: gnome/gdesktop.c:1837
 msgid "Home directory"
 msgstr ""
 
-#: gnome/gdesktop.c:1829
+#: gnome/gdesktop.c:1842
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial desktop icons."
 msgstr ""
 
-#: gnome/gdesktop.c:2160 gnome/glayout.c:410
+#: gnome/gdesktop.c:2173 gnome/glayout.c:410
 msgid "Arrange Icons"
 msgstr ""
 
-#: gnome/gdesktop.c:2162
+#: gnome/gdesktop.c:2175
 msgid "Create New Window"
 msgstr ""
 
-#: gnome/gdesktop.c:2164
+#: gnome/gdesktop.c:2177
 msgid "Rescan Mountable Devices"
 msgstr ""
 
-#: gnome/gdesktop.c:2165 gnome/glayout.c:413
+#: gnome/gdesktop.c:2178 gnome/glayout.c:413
 msgid "Rescan Desktop"
 msgstr ""
 
@@ -569,14 +569,6 @@ msgstr ""
 
 #: gnome/glayout.c:384
 msgid "Run a command and put the results in a panel"
-msgstr ""
-
-#: gnome/glayout.c:387
-msgid "_Active VFS list..."
-msgstr ""
-
-#: gnome/glayout.c:387
-msgid "List of active virtual file systems"
 msgstr ""
 
 #: gnome/glayout.c:394
@@ -1040,74 +1032,75 @@ msgstr ""
 msgid "Location:"
 msgstr ""
 
-#: gnome/gtools.c:110 src/boxes.c:138 src/boxes.c:278 src/boxes.c:378
+#: gnome/gtools.c:110 gtkedit/editcmd.c:342 gtkedit/editcmd.c:1183
+#: gtkedit/editcmd.c:1268 src/boxes.c:138 src/boxes.c:278 src/boxes.c:378
 #: src/boxes.c:466 src/boxes.c:646 src/boxes.c:728 src/boxes.c:783
 #: src/boxes.c:897 src/filegui.c:807 src/find.c:171 src/layout.c:369
 #: src/option.c:144 src/wtools.c:289 src/wtools.c:561
 msgid "&Ok"
 msgstr ""
 
-#: gnome/gview.c:120 src/view.c:683
+#: gnome/gview.c:122 src/view.c:683
 #, c-format
 msgid "Offset 0x%08x"
 msgstr ""
 
-#: gnome/gview.c:122 src/view.c:685
+#: gnome/gview.c:124 src/view.c:685
 #, c-format
 msgid "Col %d"
 msgstr ""
 
-#: gnome/gview.c:126 src/view.c:689
+#: gnome/gview.c:128 src/view.c:689
 #, c-format
 msgid "%s bytes"
 msgstr ""
 
-#: gnome/gview.c:290
+#: gnome/gview.c:292
 msgid "_Goto line"
 msgstr ""
 
-#: gnome/gview.c:291
+#: gnome/gview.c:293
 msgid "Jump to a specified line number"
 msgstr ""
 
-#: gnome/gview.c:293
+#: gnome/gview.c:295
 msgid "_Monitor file"
 msgstr ""
 
-#: gnome/gview.c:293
+#: gnome/gview.c:295
 msgid "Monitor file growing"
 msgstr ""
 
-#: gnome/gview.c:300
+#: gnome/gview.c:302
 msgid "Regexp search"
 msgstr ""
 
-#: gnome/gview.c:301
+#: gnome/gview.c:303
 msgid "Regular expression search"
 msgstr ""
 
-#: gnome/gview.c:310
+#: gnome/gview.c:312
 msgid "_Wrap"
 msgstr ""
 
-#: gnome/gview.c:311
+#: gnome/gview.c:313
 msgid "Wrap the text"
 msgstr ""
 
 #. Can not use this one yet, as it destroys the viewer, need to fix that
-#: gnome/gview.c:314
+#: gnome/gview.c:316
 msgid "_Parsed view"
 msgstr ""
 
-#: gnome/gview.c:317
+#: gnome/gview.c:319
 msgid "_Formatted"
 msgstr ""
 
-#: gnome/gview.c:319
+#: gnome/gview.c:321
 msgid "_Hex"
 msgstr ""
 
-#: gnome/gview.c:325
+#: gnome/gview.c:327
 msgid "_Search"
 msgstr ""
 
@@ -1142,7 +1135,7 @@ msgstr ""
 #. The file-name is printed after the ':'
 #: gtkedit/edit.c:129 gtkedit/edit.c:224 gtkedit/edit.c:231 gtkedit/edit.c:238
 #: gtkedit/edit.c:245 gtkedit/edit.c:251 gtkedit/edit.c:308 gtkedit/edit.c:344
-#: gtkedit/editcmd.c:1932 gtkedit/editwidget.c:950 src/dir.c:386
+#: gtkedit/editcmd.c:1943 gtkedit/editwidget.c:950 src/dir.c:386
 #: src/screen.c:2306 src/tree.c:692 src/tree.c:698 src/wtools.c:222
 #: vfs/fish.c:224
 msgid " Error "
@@ -1174,375 +1167,447 @@ msgstr ""
 msgid " Error allocating memory "
 msgstr ""
 
-#: gtkedit/editcmd.c:468
+#: gtkedit/editcmd.c:335
+msgid "Quick save "
+msgstr ""
+
+#: gtkedit/editcmd.c:336
+msgid "Safe save "
+msgstr ""
+
+#: gtkedit/editcmd.c:337
+msgid "Do backups -->"
+msgstr ""
+
+#: gtkedit/editcmd.c:340 gtkedit/editcmd.c:1181 gtkedit/editcmd.c:1266
+#: src/achown.c:71 src/boxes.c:139 src/boxes.c:279 src/boxes.c:376
+#: src/boxes.c:464 src/boxes.c:644 src/boxes.c:727 src/boxes.c:781
+#: src/chmod.c:114 src/chown.c:79 src/cmd.c:856 src/filegui.c:790
+#: src/find.c:171 src/hotlist.c:138 src/hotlist.c:814 src/hotlist.c:911
+#: src/layout.c:370 src/learn.c:59 src/option.c:145 src/panelize.c:86
+#: src/view.c:404 src/wtools.c:111 src/wtools.c:386 src/wtools.c:559
+#: src/wtools.c:640
+msgid "&Cancel"
+msgstr ""
+
+#: gtkedit/editcmd.c:346
+msgid "Extension:"
+msgstr ""
+
+#. NLS ?
+#: gtkedit/editcmd.c:353
+msgid " Edit Save Mode "
+msgstr ""
+
+#: gtkedit/editcmd.c:477
 msgid " Save As "
 msgstr ""
 
 #. Warning message with a query to continue or cancel the operation
-#: gtkedit/editcmd.c:482 gtkedit/editcmd.c:801 gtkedit/editcmd.c:831
-#: gtkedit/editcmd.c:978 gtkedit/editcmd.c:1075 src/ext.c:301 src/file.c:606
-#: src/help.c:318 src/main.c:674 src/screen.c:2063 src/subshell.c:700
+#: gtkedit/editcmd.c:491 gtkedit/editcmd.c:810 gtkedit/editcmd.c:840
+#: gtkedit/editcmd.c:987 gtkedit/editcmd.c:1084 src/ext.c:301 src/file.c:606
+#: src/help.c:318 src/main.c:691 src/screen.c:2063 src/subshell.c:700
 #: src/subshell.c:726 src/utilunix.c:388 src/utilunix.c:392 src/utilunix.c:458
 #: vfs/mcfs.c:170
 msgid " Warning "
 msgstr ""
 
-#: gtkedit/editcmd.c:483
+#: gtkedit/editcmd.c:492
 msgid " A file already exists with this name. "
 msgstr ""
 
 #. Push buttons to over-write the current file, or cancel the operation
-#: gtkedit/editcmd.c:485
+#: gtkedit/editcmd.c:494
 msgid "Overwrite"
 msgstr ""
 
-#: gtkedit/editcmd.c:485 gtkedit/editcmd.c:774 gtkedit/editcmd.c:801
-#: gtkedit/editcmd.c:831 gtkedit/editcmd.c:978 gtkedit/editcmd.c:1565
+#: gtkedit/editcmd.c:494 gtkedit/editcmd.c:783 gtkedit/editcmd.c:810
+#: gtkedit/editcmd.c:840 gtkedit/editcmd.c:987 gtkedit/editcmd.c:1576
 msgid "Cancel"
 msgstr ""
 
-#: gtkedit/editcmd.c:501
+#: gtkedit/editcmd.c:510
 msgid " Save as "
 msgstr ""
 
-#: gtkedit/editcmd.c:501 gtkedit/editcmd.c:2602
+#: gtkedit/editcmd.c:510 gtkedit/editcmd.c:2613
 msgid " Error trying to save file. "
 msgstr ""
 
 #. This heads the delete macro error dialog box
-#: gtkedit/editcmd.c:617 gtkedit/editcmd.c:625 gtkedit/editcmd.c:650
+#: gtkedit/editcmd.c:626 gtkedit/editcmd.c:634 gtkedit/editcmd.c:659
 msgid " Delete macro "
 msgstr ""
 
 #. 'Open' = load temp file
-#: gtkedit/editcmd.c:619
+#: gtkedit/editcmd.c:628
 msgid " Error trying to open temp file "
 msgstr ""
 
 #. 'Open' = load temp file
-#: gtkedit/editcmd.c:627 gtkedit/editcmd.c:688 gtkedit/editcmd.c:756
+#: gtkedit/editcmd.c:636 gtkedit/editcmd.c:697 gtkedit/editcmd.c:765
 msgid " Error trying to open macro file "
 msgstr ""
 
-#: gtkedit/editcmd.c:632 gtkedit/editcmd.c:640 gtkedit/editcmd.c:676
-#: gtkedit/editcmd.c:731
+#: gtkedit/editcmd.c:641 gtkedit/editcmd.c:649 gtkedit/editcmd.c:685
+#: gtkedit/editcmd.c:740
 #, c-format
 msgid "key '%d 0': "
 msgstr ""
 
-#: gtkedit/editcmd.c:651
+#: gtkedit/editcmd.c:660
 msgid " Error trying to overwrite macro file "
 msgstr ""
 
 #. This heads the 'Macro' dialog box
-#: gtkedit/editcmd.c:668
+#: gtkedit/editcmd.c:677
 msgid " Macro "
 msgstr ""
 
 #. Input line for a single key press follows the ':'
-#: gtkedit/editcmd.c:670
+#: gtkedit/editcmd.c:679
 msgid " Press the macro's new hotkey: "
 msgstr ""
 
 #. This heads the 'Save Macro' dialog box
-#: gtkedit/editcmd.c:688
+#: gtkedit/editcmd.c:697
 msgid " Save macro "
 msgstr ""
 
-#: gtkedit/editcmd.c:698 gtkedit/editcmd.c:705
+#: gtkedit/editcmd.c:707 gtkedit/editcmd.c:714
 msgid " Delete Macro "
 msgstr ""
 
 #. This heads the 'Load Macro' dialog box
-#: gtkedit/editcmd.c:755
+#: gtkedit/editcmd.c:764
 msgid " Load macro "
 msgstr ""
 
-#: gtkedit/editcmd.c:769 gtkedit/editcmd.c:771
+#: gtkedit/editcmd.c:778 gtkedit/editcmd.c:780
 msgid " Confirm save file? : "
 msgstr ""
 
 #. Buttons to 'Confirm save file' query
-#: gtkedit/editcmd.c:774
+#: gtkedit/editcmd.c:783
 msgid " Save file "
 msgstr ""
 
-#: gtkedit/editcmd.c:774 gtkedit/editwidget.c:1064 src/view.c:1992
+#: gtkedit/editcmd.c:783 gtkedit/editwidget.c:1064 src/view.c:1992
 msgid "Save"
 msgstr ""
 
-#: gtkedit/editcmd.c:801 gtkedit/editcmd.c:831
+#: gtkedit/editcmd.c:810 gtkedit/editcmd.c:840
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
 msgstr ""
 
-#: gtkedit/editcmd.c:801 gtkedit/editcmd.c:831 gtkedit/editcmd.c:978
+#: gtkedit/editcmd.c:810 gtkedit/editcmd.c:840 gtkedit/editcmd.c:987
 msgid "Continue"
 msgstr ""
 
 #. Heads the 'Load' file dialog box
-#: gtkedit/editcmd.c:820 gtkedit/editcmd.c:834
+#: gtkedit/editcmd.c:829 gtkedit/editcmd.c:843
 msgid " Load "
 msgstr ""
 
-#: gtkedit/editcmd.c:820
+#: gtkedit/editcmd.c:829
 msgid " Error trying to open file for reading "
 msgstr ""
 
-#: gtkedit/editcmd.c:978 gtkedit/editcmd.c:1075
+#: gtkedit/editcmd.c:987 gtkedit/editcmd.c:1084
 msgid " Block is large, you may not be able to undo this action. "
 msgstr ""
 
-#: gtkedit/editcmd.c:1075
+#: gtkedit/editcmd.c:1084
 msgid " Continue "
 msgstr ""
 
-#: gtkedit/editcmd.c:1075
+#: gtkedit/editcmd.c:1084
 msgid " Cancel "
 msgstr ""
 
 #. This is for the confirm replace dialog box. The replaced string comes after the ':'
-#: gtkedit/editcmd.c:1136 gtkedit/editcmd.c:1563
+#: gtkedit/editcmd.c:1147 gtkedit/editcmd.c:1574
 msgid " Replace with: "
 msgstr ""
 
 #. Heads the 'Replace' dialog box
-#: gtkedit/editcmd.c:1140 gtkedit/editcmd.c:1217 gtkedit/editcmd.c:1467
-#: gtkedit/editcmd.c:1561 gtkedit/editcmd.c:2094 gtkedit/editcmd.c:2125
-#: gtkedit/editcmd.c:2127
+#: gtkedit/editcmd.c:1151 gtkedit/editcmd.c:1228 gtkedit/editcmd.c:1478
+#: gtkedit/editcmd.c:1572 gtkedit/editcmd.c:2105 gtkedit/editcmd.c:2136
+#: gtkedit/editcmd.c:2138
 msgid " Replace "
 msgstr ""
 
+#: gtkedit/editcmd.c:1185 gtkedit/editcmd.c:1270
+msgid "scanf &Expression"
+msgstr ""
+
+#: gtkedit/editcmd.c:1187
+msgid "replace &All"
+msgstr ""
+
+#: gtkedit/editcmd.c:1189
+msgid "pr&Ompt on replace"
+msgstr ""
+
+#: gtkedit/editcmd.c:1191 gtkedit/editcmd.c:1272
+msgid "&Backwards"
+msgstr ""
+
+#: gtkedit/editcmd.c:1193 gtkedit/editcmd.c:1274
+msgid "&Regular expression"
+msgstr ""
+
+#: gtkedit/editcmd.c:1195 gtkedit/editcmd.c:1276
+msgid "&Whole words only"
+msgstr ""
+
+#: gtkedit/editcmd.c:1197 gtkedit/editcmd.c:1278
+msgid "case &Sensitive"
+msgstr ""
+
+#: gtkedit/editcmd.c:1201
+msgid " Enter replacement argument order eg. 3,2,1,4 "
+msgstr ""
+
+#: gtkedit/editcmd.c:1205
+msgid " Enter replacement string:"
+msgstr ""
+
+#: gtkedit/editcmd.c:1209 gtkedit/editcmd.c:1282 src/view.c:1917
+msgid " Enter search string:"
+msgstr ""
+
 #. Heads the 'Search' dialog box
-#: gtkedit/editcmd.c:1285 gtkedit/editcmd.c:1461 gtkedit/editcmd.c:2196
+#: gtkedit/editcmd.c:1296 gtkedit/editcmd.c:1472 gtkedit/editcmd.c:2207
 #: src/view.c:1465 src/view.c:1564 src/view.c:1686 src/view.c:1885
 #: src/view.c:1917
 msgid " Search "
 msgstr ""
 
 #. An input line comes after the ':'
-#: gtkedit/editcmd.c:1335
+#: gtkedit/editcmd.c:1346
 msgid " Enter search text : "
 msgstr ""
 
-#: gtkedit/editcmd.c:1342
+#: gtkedit/editcmd.c:1353
 msgid " Enter replace text : "
 msgstr ""
 
-#: gtkedit/editcmd.c:1346
+#: gtkedit/editcmd.c:1357
 msgid " Enter argument order : "
 msgstr ""
 
 #. Tool hint
-#: gtkedit/editcmd.c:1350 gtkedit/editcmd.c:1351
+#: gtkedit/editcmd.c:1361 gtkedit/editcmd.c:1362
 msgid "Enter the order of replacement of your scanf format specifiers"
 msgstr ""
 
 #. The following are check boxes
-#: gtkedit/editcmd.c:1356
+#: gtkedit/editcmd.c:1367
 msgid " Whole words only "
 msgstr ""
 
-#: gtkedit/editcmd.c:1358
+#: gtkedit/editcmd.c:1369
 msgid " Case sensitive "
 msgstr ""
 
-#: gtkedit/editcmd.c:1361
+#: gtkedit/editcmd.c:1372
 msgid " Regular expression "
 msgstr ""
 
-#: gtkedit/editcmd.c:1362 gtkedit/editcmd.c:1363
+#: gtkedit/editcmd.c:1373 gtkedit/editcmd.c:1374
 msgid "See the regex man page for how to compose a regular expression"
 msgstr ""
 
-#: gtkedit/editcmd.c:1369
+#: gtkedit/editcmd.c:1380
 msgid " Backwards "
 msgstr ""
 
 #. Tool hint
-#: gtkedit/editcmd.c:1371 gtkedit/editcmd.c:1372
+#: gtkedit/editcmd.c:1382 gtkedit/editcmd.c:1383
 msgid "Warning: Searching backward can be slow"
 msgstr ""
 
-#: gtkedit/editcmd.c:1385
+#: gtkedit/editcmd.c:1396
 msgid " Prompt on replace "
 msgstr ""
 
 #. Tool hint
-#: gtkedit/editcmd.c:1387
+#: gtkedit/editcmd.c:1398
 msgid "Ask before making each replacement"
 msgstr ""
 
-#: gtkedit/editcmd.c:1389
+#: gtkedit/editcmd.c:1400
 msgid " Replace all "
 msgstr ""
 
-#: gtkedit/editcmd.c:1392
+#: gtkedit/editcmd.c:1403
 msgid " Scanf expression "
 msgstr ""
 
 #. Tool hint
-#: gtkedit/editcmd.c:1394
+#: gtkedit/editcmd.c:1405
 msgid "Allows entering of a C format string, see the scanf man page"
 msgstr ""
 
 #. Tool hint
-#: gtkedit/editcmd.c:1399
+#: gtkedit/editcmd.c:1410
 msgid "Begin search, Enter"
 msgstr ""
 
 #. Tool hint
-#: gtkedit/editcmd.c:1402
+#: gtkedit/editcmd.c:1413
 msgid "Abort this dialog, Esc"
 msgstr ""
 
 #. Buttons for the confirm replace dialog box.
-#: gtkedit/editcmd.c:1565
+#: gtkedit/editcmd.c:1576
 msgid "Replace"
 msgstr ""
 
-#: gtkedit/editcmd.c:1565
+#: gtkedit/editcmd.c:1576
 msgid "Skip"
 msgstr ""
 
-#: gtkedit/editcmd.c:1565
+#: gtkedit/editcmd.c:1576
 msgid "Replace all"
 msgstr ""
 
-#: gtkedit/editcmd.c:1932
+#: gtkedit/editcmd.c:1943
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
 msgstr ""
 
 #. "Invalid regexp string or scanf string"
-#: gtkedit/editcmd.c:2096
+#: gtkedit/editcmd.c:2107
 msgid " Error in replacement format string. "
 msgstr ""
 
-#: gtkedit/editcmd.c:2124
+#: gtkedit/editcmd.c:2135
 #, c-format
 msgid " %ld replacements made. "
 msgstr ""
 
-#: gtkedit/editcmd.c:2127 gtkedit/editcmd.c:2196
+#: gtkedit/editcmd.c:2138 gtkedit/editcmd.c:2207
 msgid " Search string not found. "
 msgstr ""
 
 #. Confirm 'Quit' dialog box
-#: gtkedit/editcmd.c:2220 gtkedit/editcmd.c:2235 gtkedit/editcmd.c:2238
+#: gtkedit/editcmd.c:2231 gtkedit/editcmd.c:2246 gtkedit/editcmd.c:2249
 msgid " Quit "
 msgstr ""
 
-#: gtkedit/editcmd.c:2221 gtkedit/editcmd.c:2239
+#: gtkedit/editcmd.c:2232 gtkedit/editcmd.c:2250
 msgid ""
 " Current text was modified without a file save. \n"
 " Save with exit? "
 msgstr ""
 
-#: gtkedit/editcmd.c:2235
+#: gtkedit/editcmd.c:2246
 msgid " File was modified, Save with exit? "
 msgstr ""
 
-#: gtkedit/editcmd.c:2235
+#: gtkedit/editcmd.c:2246
 msgid "Cancel quit"
 msgstr ""
 
-#: gtkedit/editcmd.c:2239
+#: gtkedit/editcmd.c:2250
 msgid " &Cancel quit "
 msgstr ""
 
-#: gtkedit/editcmd.c:2239
+#: gtkedit/editcmd.c:2250
 msgid " &Yes "
 msgstr ""
 
-#: gtkedit/editcmd.c:2239
+#: gtkedit/editcmd.c:2250
 msgid " &No "
 msgstr ""
 
-#: gtkedit/editcmd.c:2442 gtkedit/editcmd.c:2517
+#: gtkedit/editcmd.c:2453 gtkedit/editcmd.c:2528
 msgid " Copy to clipboard "
 msgstr ""
 
-#: gtkedit/editcmd.c:2442 gtkedit/editcmd.c:2464 gtkedit/editcmd.c:2517
-#: gtkedit/editcmd.c:2530
+#: gtkedit/editcmd.c:2453 gtkedit/editcmd.c:2475 gtkedit/editcmd.c:2528
+#: gtkedit/editcmd.c:2541
 msgid " Unable to save to file. "
 msgstr ""
 
-#: gtkedit/editcmd.c:2464 gtkedit/editcmd.c:2530
+#: gtkedit/editcmd.c:2475 gtkedit/editcmd.c:2541
 msgid " Cut to clipboard "
 msgstr ""
 
-#: gtkedit/editcmd.c:2552 gtkedit/editcmd.c:2556 gtkedit/editcmd.c:2561
-#: gtkedit/editcmd.c:2564 src/view.c:1857
+#: gtkedit/editcmd.c:2563 gtkedit/editcmd.c:2567 gtkedit/editcmd.c:2572
+#: gtkedit/editcmd.c:2575 src/view.c:1857
 msgid " Goto line "
 msgstr ""
 
-#: gtkedit/editcmd.c:2552 gtkedit/editcmd.c:2556 gtkedit/editcmd.c:2561
-#: gtkedit/editcmd.c:2564
+#: gtkedit/editcmd.c:2563 gtkedit/editcmd.c:2567 gtkedit/editcmd.c:2572
+#: gtkedit/editcmd.c:2575
 msgid " Enter line: "
 msgstr ""
 
-#: gtkedit/editcmd.c:2585 gtkedit/editcmd.c:2602
+#: gtkedit/editcmd.c:2596 gtkedit/editcmd.c:2613
 msgid " Save Block "
 msgstr ""
 
-#: gtkedit/editcmd.c:2636
+#: gtkedit/editcmd.c:2647
 msgid " Insert File "
 msgstr ""
 
-#: gtkedit/editcmd.c:2651
+#: gtkedit/editcmd.c:2662
 msgid " Insert file "
 msgstr ""
 
-#: gtkedit/editcmd.c:2651
+#: gtkedit/editcmd.c:2662
 msgid " Error trying to insert file. "
 msgstr ""
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2671
+#: gtkedit/editcmd.c:2682
 msgid " Sort block "
 msgstr ""
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2671 gtkedit/editcmd.c:2725
+#: gtkedit/editcmd.c:2682 gtkedit/editcmd.c:2736
 msgid " You must first highlight a block of text. "
 msgstr ""
 
-#: gtkedit/editcmd.c:2678
+#: gtkedit/editcmd.c:2689
 msgid " Run Sort "
 msgstr ""
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2680
+#: gtkedit/editcmd.c:2691
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr ""
 
-#: gtkedit/editcmd.c:2691 gtkedit/editcmd.c:2697
+#: gtkedit/editcmd.c:2702 gtkedit/editcmd.c:2708
 msgid " Sort "
 msgstr ""
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2693
+#: gtkedit/editcmd.c:2704
 msgid " Error trying to execute sort command "
 msgstr ""
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2699
+#: gtkedit/editcmd.c:2710
 msgid " Sort returned non-zero: "
 msgstr ""
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2723 gtkedit/editcmd.c:2753
+#: gtkedit/editcmd.c:2734 gtkedit/editcmd.c:2764
 msgid " Process block "
 msgstr ""
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2755
+#: gtkedit/editcmd.c:2766
 msgid " Error trying to stat file "
 msgstr ""
 
-#: gtkedit/editcmd.c:2825
+#: gtkedit/editcmd.c:2836
 msgid " Mail "
 msgstr ""
 
@@ -1573,7 +1638,7 @@ msgstr ""
 msgid "Error initialising editor.\n"
 msgstr ""
 
-#: gtkedit/editwidget.c:1063 src/help.c:806 src/main.c:1677 src/screen.c:2284
+#: gtkedit/editwidget.c:1063 src/help.c:806 src/main.c:1688 src/screen.c:2284
 #: src/screen.c:2314 src/tree.c:1018 src/view.c:1987
 msgid "Help"
 msgstr ""
@@ -1590,11 +1655,11 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: gtkedit/editwidget.c:1072 src/main.c:1679
+#: gtkedit/editwidget.c:1072 src/main.c:1690
 msgid "PullDn"
 msgstr ""
 
-#: gtkedit/editwidget.c:1073 src/help.c:818 src/main.c:1680 src/view.c:1989
+#: gtkedit/editwidget.c:1073 src/help.c:818 src/main.c:1691 src/view.c:1989
 #: src/view.c:2009
 msgid "Quit"
 msgstr ""
@@ -1779,7 +1844,7 @@ msgstr ""
 msgid "&Save mode..."
 msgstr ""
 
-#: gtkedit/editmenu.c:246 gtkedit/editmenu.c:255 src/main.c:1311
+#: gtkedit/editmenu.c:246 gtkedit/editmenu.c:255 src/main.c:1322
 msgid "&Layout..."
 msgstr ""
 
@@ -1997,16 +2062,6 @@ msgstr ""
 #: gtkedit/syntax.c:3186
 #, c-format
 msgid " Syntax error in file %s on line %d "
-msgstr ""
-
-#: src/achown.c:71 src/boxes.c:139 src/boxes.c:279 src/boxes.c:376
-#: src/boxes.c:464 src/boxes.c:644 src/boxes.c:727 src/boxes.c:781
-#: src/chmod.c:114 src/chown.c:79 src/cmd.c:856 src/filegui.c:790
-#: src/find.c:171 src/hotlist.c:138 src/hotlist.c:814 src/hotlist.c:911
-#: src/layout.c:370 src/learn.c:59 src/option.c:145 src/panelize.c:86
-#: src/view.c:404 src/wtools.c:111 src/wtools.c:386 src/wtools.c:559
-#: src/wtools.c:640
-msgid "&Cancel"
 msgstr ""
 
 #: src/achown.c:72 src/chmod.c:115 src/chown.c:80
@@ -3355,7 +3410,7 @@ msgstr ""
 msgid "Content: "
 msgstr ""
 
-#: src/find.c:171 src/main.c:1208 src/main.c:1229
+#: src/find.c:171 src/main.c:1219 src/main.c:1240
 msgid "&Tree"
 msgstr ""
 
@@ -3894,7 +3949,7 @@ msgstr ""
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr ""
 
-#: src/main.c:675
+#: src/main.c:692
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -3902,247 +3957,247 @@ msgid ""
 " extra access permissions with the \"su\" command? "
 msgstr ""
 
-#: src/main.c:750
+#: src/main.c:767
 msgid "Press any key to continue..."
 msgstr ""
 
-#: src/main.c:800
+#: src/main.c:817
 msgid " The shell is already running a command "
 msgstr ""
 
-#: src/main.c:1205 src/main.c:1226
+#: src/main.c:1216 src/main.c:1237
 msgid "&Listing mode..."
 msgstr ""
 
-#: src/main.c:1206 src/main.c:1227
+#: src/main.c:1217 src/main.c:1238
 msgid "&Quick view     C-x q"
 msgstr ""
 
-#: src/main.c:1207 src/main.c:1228
+#: src/main.c:1218 src/main.c:1239
 msgid "&Info           C-x i"
 msgstr ""
 
-#: src/main.c:1210 src/main.c:1231
+#: src/main.c:1221 src/main.c:1242
 msgid "&Sort order..."
 msgstr ""
 
-#: src/main.c:1212 src/main.c:1233
+#: src/main.c:1223 src/main.c:1244
 msgid "&Filter..."
 msgstr ""
 
-#: src/main.c:1215 src/main.c:1236
+#: src/main.c:1226 src/main.c:1247
 msgid "&Network link..."
 msgstr ""
 
-#: src/main.c:1216 src/main.c:1237
+#: src/main.c:1227 src/main.c:1248
 msgid "FT&P link..."
 msgstr ""
 
-#: src/main.c:1220 src/main.c:1241
+#: src/main.c:1231 src/main.c:1252
 msgid "&Drive...       M-d"
 msgstr ""
 
-#: src/main.c:1222 src/main.c:1243
+#: src/main.c:1233 src/main.c:1254
 msgid "&Rescan         C-r"
 msgstr ""
 
-#: src/main.c:1247
+#: src/main.c:1258
 msgid "&User menu          F2"
 msgstr ""
 
-#: src/main.c:1248
+#: src/main.c:1259
 msgid "&View               F3"
 msgstr ""
 
-#: src/main.c:1249
+#: src/main.c:1260
 msgid "Vie&w file...         "
 msgstr ""
 
-#: src/main.c:1250
+#: src/main.c:1261
 msgid "&Filtered view     M-!"
 msgstr ""
 
-#: src/main.c:1251
+#: src/main.c:1262
 msgid "&Edit               F4"
 msgstr ""
 
-#: src/main.c:1252
+#: src/main.c:1263
 msgid "&Copy               F5"
 msgstr ""
 
-#: src/main.c:1253
+#: src/main.c:1264
 msgid "c&Hmod           C-x c"
 msgstr ""
 
-#: src/main.c:1255
+#: src/main.c:1266
 msgid "&Link            C-x l"
 msgstr ""
 
-#: src/main.c:1256
+#: src/main.c:1267
 msgid "&SymLink         C-x s"
 msgstr ""
 
-#: src/main.c:1257
+#: src/main.c:1268
 msgid "edit s&Ymlink  C-x C-s"
 msgstr ""
 
-#: src/main.c:1258
+#: src/main.c:1269
 msgid "ch&Own           C-x o"
 msgstr ""
 
-#: src/main.c:1259
+#: src/main.c:1270
 msgid "&Advanced chown       "
 msgstr ""
 
-#: src/main.c:1261
+#: src/main.c:1272
 msgid "&Rename/Move        F6"
 msgstr ""
 
-#: src/main.c:1262
+#: src/main.c:1273
 msgid "&Mkdir              F7"
 msgstr ""
 
-#: src/main.c:1263
+#: src/main.c:1274
 msgid "&Delete             F8"
 msgstr ""
 
-#: src/main.c:1264
+#: src/main.c:1275
 msgid "&Quick cd          M-c"
 msgstr ""
 
-#: src/main.c:1266
+#: src/main.c:1277
 msgid "select &Group      M-+"
 msgstr ""
 
-#: src/main.c:1267
+#: src/main.c:1278
 msgid "u&Nselect group    M-\\"
 msgstr ""
 
-#: src/main.c:1268
+#: src/main.c:1279
 msgid "reverse selec&Tion M-*"
 msgstr ""
 
-#: src/main.c:1270
+#: src/main.c:1281
 msgid "e&Xit              F10"
 msgstr ""
 
-#: src/main.c:1280
+#: src/main.c:1291
 msgid "&Directory tree"
 msgstr ""
 
-#: src/main.c:1282
+#: src/main.c:1293
 msgid "&Find file            M-?"
 msgstr ""
 
-#: src/main.c:1283
+#: src/main.c:1294
 msgid "s&Wap panels          C-u"
 msgstr ""
 
-#: src/main.c:1284
+#: src/main.c:1295
 msgid "switch &Panels on/off C-o"
 msgstr ""
 
-#: src/main.c:1285
+#: src/main.c:1296
 msgid "&Compare directories  C-x d"
 msgstr ""
 
-#: src/main.c:1286
+#: src/main.c:1297
 msgid "e&Xternal panelize    C-x !"
 msgstr ""
 
-#: src/main.c:1287
+#: src/main.c:1298
 msgid "show directory s&Izes"
 msgstr ""
 
-#: src/main.c:1289
+#: src/main.c:1300
 msgid "command &History"
 msgstr ""
 
-#: src/main.c:1290
+#: src/main.c:1301
 msgid "di&Rectory hotlist    C-\\"
 msgstr ""
 
-#: src/main.c:1292
+#: src/main.c:1303
 msgid "&Active VFS list      C-x a"
 msgstr ""
 
-#: src/main.c:1295
+#: src/main.c:1306
 msgid "&Background jobs      C-x j"
 msgstr ""
 
-#: src/main.c:1299
+#: src/main.c:1310
 msgid "&Undelete files (ext2fs only)"
 msgstr ""
 
-#: src/main.c:1302
+#: src/main.c:1313
 msgid "&Listing format edit"
 msgstr ""
 
-#: src/main.c:1304
+#: src/main.c:1315
 msgid "&Extension file edit"
 msgstr ""
 
-#: src/main.c:1305
+#: src/main.c:1316
 msgid "&Menu file edit"
 msgstr ""
 
-#: src/main.c:1310
+#: src/main.c:1321
 msgid "&Configuration..."
 msgstr ""
 
-#: src/main.c:1312
+#: src/main.c:1323
 msgid "c&Onfirmation..."
 msgstr ""
 
-#: src/main.c:1313
+#: src/main.c:1324
 msgid "&Display bits..."
 msgstr ""
 
-#: src/main.c:1315
+#: src/main.c:1326
 msgid "learn &Keys..."
 msgstr ""
 
-#: src/main.c:1318
+#: src/main.c:1329
 msgid "&Virtual FS..."
 msgstr ""
 
-#: src/main.c:1321
+#: src/main.c:1332
 msgid "&Save setup"
 msgstr ""
 
-#: src/main.c:1337 src/main.c:1339
+#: src/main.c:1348 src/main.c:1350
 msgid " &Left "
 msgstr ""
 
-#: src/main.c:1339
+#: src/main.c:1350
 msgid " &Above "
 msgstr ""
 
-#: src/main.c:1342
+#: src/main.c:1353
 msgid " &File "
 msgstr ""
 
-#: src/main.c:1343
+#: src/main.c:1354
 msgid " &Command "
 msgstr ""
 
-#: src/main.c:1344
+#: src/main.c:1355
 msgid " &Options "
 msgstr ""
 
-#: src/main.c:1346 src/main.c:1348
+#: src/main.c:1357 src/main.c:1359
 msgid " &Right "
 msgstr ""
 
-#: src/main.c:1348
+#: src/main.c:1359
 msgid " &Below "
 msgstr ""
 
-#: src/main.c:1403
+#: src/main.c:1414
 msgid " Information "
 msgstr ""
 
-#: src/main.c:1404
+#: src/main.c:1415
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -4150,64 +4205,64 @@ msgid ""
 " the details.                                           "
 msgstr ""
 
-#: src/main.c:1678 src/screen.c:2285 src/screen.c:2315
+#: src/main.c:1689 src/screen.c:2285 src/screen.c:2315
 msgid "Menu"
 msgstr ""
 
-#: src/main.c:1883
+#: src/main.c:1894
 msgid "Thank you for using GNU Midnight Commander"
 msgstr ""
 
-#: src/main.c:2242
+#: src/main.c:2253
 #, c-format
 msgid "with mouse support on xterm%s.\n"
 msgstr ""
 
-#: src/main.c:2243
+#: src/main.c:2254
 msgid " and the Linux console"
 msgstr ""
 
-#: src/main.c:2338
+#: src/main.c:2349
 msgid "The TERM environment variable is unset!\n"
 msgstr ""
 
-#: src/main.c:2545
+#: src/main.c:2556
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr ""
 
-#: src/main.c:2556
+#: src/main.c:2567
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
 
-#: src/main.c:2682
+#: src/main.c:2693
 msgid "Geometry for the window"
 msgstr ""
 
-#: src/main.c:2682
+#: src/main.c:2693
 msgid "GEOMETRY"
 msgstr ""
 
-#: src/main.c:2683
+#: src/main.c:2694
 msgid "No windows opened at startup"
 msgstr ""
 
-#: src/main.c:2684
+#: src/main.c:2695
 msgid "Force activation even if a server is already running"
 msgstr ""
 
-#: src/main.c:2956
+#: src/main.c:2967
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 
-#: src/main.c:3030
+#: src/main.c:3041
 msgid " Notice "
 msgstr ""
 
-#: src/main.c:3031
+#: src/main.c:3042
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -4331,7 +4386,7 @@ msgstr ""
 msgid " External panelize "
 msgstr ""
 
-#: src/panelize.c:194 src/panelize.c:462
+#: src/panelize.c:194 src/panelize.c:458
 msgid "External panelize"
 msgstr ""
 
@@ -4363,7 +4418,7 @@ msgstr ""
 msgid "Cannot invoke command."
 msgstr ""
 
-#: src/panelize.c:462
+#: src/panelize.c:458
 msgid "Pipe close failed"
 msgstr ""
 
@@ -4569,7 +4624,7 @@ msgstr ""
 msgid " User menu "
 msgstr ""
 
-#: src/util.c:220
+#: src/util.c:222
 msgid "name_trunc: too big"
 msgstr ""
 
@@ -4656,10 +4711,6 @@ msgstr ""
 
 #: src/view.c:1885
 msgid " Enter regexp:"
-msgstr ""
-
-#: src/view.c:1917
-msgid " Enter search string:"
 msgstr ""
 
 #: src/view.c:1990
