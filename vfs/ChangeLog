@@ -1,5 +1,8 @@
 2003-10-11  Pavel Roskin  <proski@gnu.org>
 
+	* xdirentry.h: Remove all typedefs, there is no need to hide the
+	fact that structures are structures.  Fix all dependencies.
+
 	* vfs.h: Remove typedef vfs, it's too ambiguous.  Massive
 	changes to use struct vfs_class instead.
 

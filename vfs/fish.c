@@ -80,7 +80,7 @@ static char reply_str [80];
 static struct vfs_class vfs_fish_ops;
 
 static int
-command (struct vfs_class *me, vfs_s_super *super, int wait_reply, const char *fmt, ...)
+command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const char *fmt, ...)
     __attribute__ ((format (printf, 4, 5)));
 
 static int decode_reply (char *s, int was_garbage)
@@ -119,7 +119,7 @@ static int get_reply (struct vfs_class *me, int sock, char *string_buf, int stri
 #define SUP super->u.fish
 
 static int
-command (struct vfs_class *me, vfs_s_super *super, int wait_reply, const char *fmt, ...)
+command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const char *fmt, ...)
 {
     va_list ap;
     char *str;
@@ -151,7 +151,7 @@ command (struct vfs_class *me, vfs_s_super *super, int wait_reply, const char *f
 }
 
 static void
-free_archive (struct vfs_class *me, vfs_s_super *super)
+free_archive (struct vfs_class *me, struct vfs_s_super *super)
 {
     if ((SUP.sockw != -1) || (SUP.sockr != -1)){
 	print_vfs_message (_("fish: Disconnecting from %s"), super->name?super->name:"???");
@@ -167,7 +167,7 @@ free_archive (struct vfs_class *me, vfs_s_super *super)
 }
 
 static void
-pipeopen(vfs_s_super *super, char *path, char *argv[])
+pipeopen(struct vfs_s_super *super, char *path, char *argv[])
 {
     int fileset1[2], fileset2[2];
     int res;
@@ -197,14 +197,14 @@ pipeopen(vfs_s_super *super, char *path, char *argv[])
 }
 
 /* The returned directory should always contain a trailing slash */
-static char *fish_getcwd(struct vfs_class *me, vfs_s_super *super)
+static char *fish_getcwd(struct vfs_class *me, struct vfs_s_super *super)
 {
     if (command(me, super, WANT_STRING, "#PWD\npwd; echo '### 200'\n") == COMPLETE)
         return  g_strconcat (reply_str, "/", NULL);
     ERRNOR (EIO, NULL);
 }
 static int
-open_archive_int (struct vfs_class *me, vfs_s_super *super)
+open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 {
     char *argv[100];
     char *xsh = (SUP.flags == FISH_FLAG_RSH ? "rsh" : "ssh");
@@ -295,7 +295,7 @@ open_archive_int (struct vfs_class *me, vfs_s_super *super)
 }
 
 static int
-open_archive (struct vfs_class *me, vfs_s_super *super, char *archive_name, char *op)
+open_archive (struct vfs_class *me, struct vfs_s_super *super, char *archive_name, char *op)
 {
     char *host, *user, *password, *p;
     int flags;
@@ -317,7 +317,7 @@ open_archive (struct vfs_class *me, vfs_s_super *super, char *archive_name, char
 }
 
 static int
-archive_same(struct vfs_class *me, vfs_s_super *super, char *archive_name, char *op, void *cookie)
+archive_same(struct vfs_class *me, struct vfs_s_super *super, char *archive_name, char *op, void *cookie)
 {	
     char *host, *user;
     int flags;
@@ -337,7 +337,7 @@ archive_same(struct vfs_class *me, vfs_s_super *super, char *archive_name, char 
 }
 
 static int
-dir_uptodate(struct vfs_class *me, vfs_s_inode *ino)
+dir_uptodate(struct vfs_class *me, struct vfs_s_inode *ino)
 {
     struct timeval tim;
 
@@ -352,11 +352,11 @@ dir_uptodate(struct vfs_class *me, vfs_s_inode *ino)
 }
 
 static int
-dir_load(struct vfs_class *me, vfs_s_inode *dir, char *remote_path)
+dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 {
-    vfs_s_super *super = dir->super;
+    struct vfs_s_super *super = dir->super;
     char buffer[8192];
-    vfs_s_entry *ent = NULL;
+    struct vfs_s_entry *ent = NULL;
     FILE *logfile;
     char *quoted_path;
 
@@ -475,9 +475,9 @@ error:
 }
 
 static int
-file_store(struct vfs_class *me, vfs_s_fh *fh, char *name, char *localname)
+file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *localname)
 {
-    vfs_s_super *super = FH_SUPER;
+    struct vfs_s_super *super = FH_SUPER;
     int n, total;
     char buffer[8192];
     struct stat s;
@@ -562,7 +562,7 @@ error_return:
     return -1;
 }
 
-static int linear_start(struct vfs_class *me, vfs_s_fh *fh, int offset)
+static int linear_start(struct vfs_class *me, struct vfs_s_fh *fh, int offset)
 {
     char *name;
     char *quoted_name;
@@ -596,9 +596,9 @@ static int linear_start(struct vfs_class *me, vfs_s_fh *fh, int offset)
 }
 
 static void
-linear_abort (struct vfs_class *me, vfs_s_fh *fh)
+linear_abort (struct vfs_class *me, struct vfs_s_fh *fh)
 {
-    vfs_s_super *super = FH_SUPER;
+    struct vfs_s_super *super = FH_SUPER;
     char buffer[8192];
     int n;
 
@@ -617,9 +617,9 @@ linear_abort (struct vfs_class *me, vfs_s_fh *fh)
 }
 
 static int
-linear_read (struct vfs_class *me, vfs_s_fh *fh, void *buf, int len)
+linear_read (struct vfs_class *me, struct vfs_s_fh *fh, void *buf, int len)
 {
-    vfs_s_super *super = FH_SUPER;
+    struct vfs_s_super *super = FH_SUPER;
     int n = 0;
     len = MIN( fh->u.fish.total - fh->u.fish.got, len );
     disable_interrupt_key();
@@ -638,7 +638,7 @@ linear_read (struct vfs_class *me, vfs_s_fh *fh, void *buf, int len)
 }
 
 static void
-linear_close (struct vfs_class *me, vfs_s_fh *fh)
+linear_close (struct vfs_class *me, struct vfs_s_fh *fh)
 {
     if (fh->u.fish.total != fh->u.fish.got)
 	linear_abort(me, fh);
@@ -671,7 +671,7 @@ fish_ctl (void *fh, int ctlop, int arg)
 }
 
 static int
-send_fish_command(struct vfs_class *me, vfs_s_super *super, char *cmd, int flags)
+send_fish_command(struct vfs_class *me, struct vfs_s_super *super, char *cmd, int flags)
 {
     int r;
 
@@ -686,7 +686,7 @@ send_fish_command(struct vfs_class *me, vfs_s_super *super, char *cmd, int flags
 #define PREFIX \
     char buf[BUF_LARGE]; \
     char *rpath; \
-    vfs_s_super *super; \
+    struct vfs_s_super *super; \
     if (!(rpath = vfs_s_get_path_mangle(me, path, &super, 0))) \
 	return -1; \
     rpath = name_quote (rpath, 0);
@@ -712,7 +712,7 @@ static int fish_##name (struct vfs_class *me, char *path1, char *path2) \
 { \
     char buf[BUF_LARGE]; \
     char *rpath1, *rpath2; \
-    vfs_s_super *super1, *super2; \
+    struct vfs_s_super *super1, *super2; \
     if (!(rpath1 = vfs_s_get_path_mangle(me, path1, &super1, 0))) \
 	return -1; \
     if (!(rpath2 = vfs_s_get_path_mangle(me, path2, &super2, 0))) \
@@ -813,7 +813,7 @@ static int fish_rmdir (struct vfs_class *me, char *path)
     POSTFIX(OPT_FLUSH);
 }
 
-static int fish_fh_open (struct vfs_class *me, vfs_s_fh *fh, int flags, int mode)
+static int fish_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags, int mode)
 {
     fh->u.fish.append = 0;
     /* File will be written only, so no need to retrieve it */
@@ -866,7 +866,7 @@ static struct vfs_s_data fish_data = {
 static void
 fish_fill_names (struct vfs_class *me, void (*func)(char *))
 {
-    struct vfs_s_super * super = fish_data.supers;
+    struct vfs_s_super *super = fish_data.supers;
     char *flags;
     char *name;
     

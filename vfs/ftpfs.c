@@ -156,16 +156,16 @@ static struct vfs_class vfs_ftpfs_ops;
    c) strip trailing "/."
  */
 
-static char *ftpfs_get_current_directory (struct vfs_class *me, vfs_s_super *super);
-static int ftpfs_chdir_internal (struct vfs_class *me, vfs_s_super *super, char *remote_path);
-static int command (struct vfs_class *me, vfs_s_super *super, int wait_reply, const char *fmt, ...)
+static char *ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super);
+static int ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super, char *remote_path);
+static int command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const char *fmt, ...)
     __attribute__ ((format (printf, 4, 5)));
-static int ftpfs_open_socket (struct vfs_class *me, vfs_s_super *super);
-static int login_server (struct vfs_class *me, vfs_s_super *super, const char *netrcpass);
+static int ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super);
+static int login_server (struct vfs_class *me, struct vfs_s_super *super, const char *netrcpass);
 static int lookup_netrc (const char *host, char **login, char **pass);
 
 static char *
-translate_path (struct vfs_class *me, vfs_s_super *super, const char *remote_path)
+translate_path (struct vfs_class *me, struct vfs_s_super *super, const char *remote_path)
 {
     if (!SUP.remote_is_amiga)
 	return g_strdup (remote_path);
@@ -297,7 +297,7 @@ get_reply (struct vfs_class *me, int sock, char *string_buf, int string_len)
 }
 
 static int
-reconnect (struct vfs_class *me, vfs_s_super *super)
+reconnect (struct vfs_class *me, struct vfs_s_super *super)
 {
     int sock = ftpfs_open_socket (me, super);
     if (sock != -1){
@@ -318,7 +318,7 @@ reconnect (struct vfs_class *me, vfs_s_super *super)
 }
 
 static int
-command (struct vfs_class *me, vfs_s_super *super, int wait_reply, const char *fmt, ...)
+command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const char *fmt, ...)
 {
     va_list ap;
     char *cmdstr;
@@ -378,7 +378,7 @@ command (struct vfs_class *me, vfs_s_super *super, int wait_reply, const char *f
 }
 
 static void
-free_archive (struct vfs_class *me, vfs_s_super *super)
+free_archive (struct vfs_class *me, struct vfs_s_super *super)
 {
     if (SUP.sock != -1){
 	print_vfs_message (_("ftpfs: Disconnecting from %s"), SUP.host);
@@ -401,7 +401,7 @@ free_archive (struct vfs_class *me, vfs_s_super *super)
 #define TYPE_UNKNOWN -1 
 
 static int
-changetype (struct vfs_class *me, vfs_s_super *super, int binary)
+changetype (struct vfs_class *me, struct vfs_s_super *super, int binary)
 {
     if (binary != SUP.isbinary) {
         if (command (me, super, WAIT_REPLY, "TYPE %c", binary ? 'I' : 'A') != COMPLETE)
@@ -413,7 +413,7 @@ changetype (struct vfs_class *me, vfs_s_super *super, int binary)
 
 /* This routine logs the user in */
 static int
-login_server (struct vfs_class *me, vfs_s_super *super, const char *netrcpass)
+login_server (struct vfs_class *me, struct vfs_s_super *super, const char *netrcpass)
 {
     char *pass;
     char *op;
@@ -653,7 +653,7 @@ ftpfs_get_proxy_host_and_port (const char *proxy, char **host, int *port)
 }
 
 static int
-ftpfs_open_socket (struct vfs_class *me, vfs_s_super *super)
+ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
 {
     struct   sockaddr_in server_address;
     struct   hostent *hp;
@@ -730,7 +730,7 @@ ftpfs_open_socket (struct vfs_class *me, vfs_s_super *super)
 }
 
 static int
-open_archive_int (struct vfs_class *me, vfs_s_super *super)
+open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 {
     int retry_seconds, count_down;
 
@@ -780,7 +780,7 @@ open_archive_int (struct vfs_class *me, vfs_s_super *super)
 }
 
 static int
-open_archive (struct vfs_class *me, vfs_s_super *super, char *archive_name, char *op)
+open_archive (struct vfs_class *me, struct vfs_s_super *super, char *archive_name, char *op)
 {
     char *host, *user, *password;
     int port;
@@ -807,7 +807,7 @@ open_archive (struct vfs_class *me, vfs_s_super *super, char *archive_name, char
 }
 
 static int
-archive_same(struct vfs_class *me, vfs_s_super *super, char *archive_name, char *op, void *cookie)
+archive_same(struct vfs_class *me, struct vfs_s_super *super, char *archive_name, char *op, void *cookie)
 {	
     char *host, *user;
     int port;
@@ -831,7 +831,7 @@ ftpfs_flushdir (void)
 }
 
 static int
-dir_uptodate(struct vfs_class *me, vfs_s_inode *ino)
+dir_uptodate(struct vfs_class *me, struct vfs_s_inode *ino)
 {
     struct timeval tim;
 
@@ -847,7 +847,7 @@ dir_uptodate(struct vfs_class *me, vfs_s_inode *ino)
 
 /* The returned directory should always contain a trailing slash */
 static char *
-ftpfs_get_current_directory (struct vfs_class *me, vfs_s_super *super)
+ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super)
 {
     char buf[BUF_8K], *bufp, *bufq;
 
@@ -887,7 +887,7 @@ ftpfs_get_current_directory (struct vfs_class *me, vfs_s_super *super)
     
 /* Setup Passive ftp connection, we use it for source routed connections */
 static int
-setup_passive (struct vfs_class *me, vfs_s_super *super, int my_socket, struct sockaddr_in *sa)
+setup_passive (struct vfs_class *me, struct vfs_s_super *super, int my_socket, struct sockaddr_in *sa)
 {
     int xa, xb, xc, xd, xe, xf;
     char n [6];
@@ -921,7 +921,7 @@ setup_passive (struct vfs_class *me, vfs_s_super *super, int my_socket, struct s
 }
 
 static int
-initconn (struct vfs_class *me, vfs_s_super *super)
+initconn (struct vfs_class *me, struct vfs_s_super *super)
 {
     struct sockaddr_in data_addr;
     int data;
@@ -972,7 +972,7 @@ again:
 }
 
 static int
-open_data_connection (struct vfs_class *me, vfs_s_super *super, const char *cmd,
+open_data_connection (struct vfs_class *me, struct vfs_s_super *super, const char *cmd,
 		      const char *remote, int isbinary, int reget)
 {
     struct sockaddr_in from;
@@ -1015,9 +1015,9 @@ open_data_connection (struct vfs_class *me, vfs_s_super *super, const char *cmd,
 
 #define ABORT_TIMEOUT 5
 static void
-linear_abort (struct vfs_class *me, vfs_s_fh *fh)
+linear_abort (struct vfs_class *me, struct vfs_s_fh *fh)
 {
-    vfs_s_super *super = FH_SUPER;
+    struct vfs_s_super *super = FH_SUPER;
     static unsigned char const ipbuf[3] = { IAC, IP, IAC };
     fd_set mask;
     char buf[1024];
@@ -1065,7 +1065,7 @@ linear_abort (struct vfs_class *me, vfs_s_fh *fh)
 
 #if 0
 static void
-resolve_symlink_without_ls_options(struct vfs_class *me, vfs_s_super *super, vfs_s_inode *dir)
+resolve_symlink_without_ls_options(struct vfs_class *me, struct vfs_s_super *super, struct vfs_s_inode *dir)
 {
     struct linklist *flist;
     struct direntry *fe, *fel;
@@ -1126,7 +1126,7 @@ resolve_symlink_without_ls_options(struct vfs_class *me, vfs_s_super *super, vfs
 }
 
 static void
-resolve_symlink_with_ls_options(struct vfs_class *me, vfs_s_super *super, vfs_s_inode *dir)
+resolve_symlink_with_ls_options(struct vfs_class *me, struct vfs_s_super *super, struct vfs_s_inode *dir)
 {
     char  buffer[2048] = "", *filename;
     int sock;
@@ -1205,7 +1205,7 @@ done:
 }
 
 static void
-resolve_symlink(struct vfs_class *me, vfs_s_super *super, vfs_s_inode *dir)
+resolve_symlink(struct vfs_class *me, struct vfs_s_super *super, struct vfs_s_inode *dir)
 {
     print_vfs_message(_("Resolving symlink..."));
 
@@ -1217,10 +1217,10 @@ resolve_symlink(struct vfs_class *me, vfs_s_super *super, vfs_s_inode *dir)
 #endif
 
 static int
-dir_load (struct vfs_class *me, vfs_s_inode *dir, char *remote_path)
+dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 {
-    vfs_s_entry *ent;
-    vfs_s_super *super = dir->super;
+    struct vfs_s_entry *ent;
+    struct vfs_s_super *super = dir->super;
     int sock, num_entries = 0;
 #ifdef FIXME_LATER
     int has_symlinks = 0;
@@ -1279,7 +1279,7 @@ again:
        * code below may jump directly into error handling code (without executing 
        * remaining code). And C doesn't have try {...} finally {}; :-)
        */
-      vfs_s_inode *parent = dir->ent->dir;
+      struct vfs_s_inode *parent = dir->ent->dir;
       
       if( parent==NULL )
         parent = dir;
@@ -1373,7 +1373,7 @@ fallback:
 }
 
 static int
-file_store(struct vfs_class *me, vfs_s_fh *fh, char *name, char *localname)
+file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *localname)
 {
     int h, sock, n;
     off_t total;
@@ -1384,7 +1384,7 @@ file_store(struct vfs_class *me, vfs_s_fh *fh, char *name, char *localname)
 #endif
     char buffer[8192];
     struct stat s;
-    vfs_s_super *super = FH_SUPER;
+    struct vfs_s_super *super = FH_SUPER;
 
     h = open(localname, O_RDONLY);
     if (h == -1)
@@ -1451,7 +1451,7 @@ error_return:
 }
 
 static int 
-linear_start(struct vfs_class *me, vfs_s_fh *fh, int offset)
+linear_start(struct vfs_class *me, struct vfs_s_fh *fh, int offset)
 {
     char *name = vfs_s_fullpath (me, fh->ino);
 
@@ -1468,10 +1468,10 @@ linear_start(struct vfs_class *me, vfs_s_fh *fh, int offset)
 }
 
 static int
-linear_read (struct vfs_class *me, vfs_s_fh *fh, void *buf, int len)
+linear_read (struct vfs_class *me, struct vfs_s_fh *fh, void *buf, int len)
 {
     int n;
-    vfs_s_super *super = FH_SUPER;
+    struct vfs_s_super *super = FH_SUPER;
 
     while ((n = read (FH_SOCK, buf, len))<0) {
         if ((errno == EINTR) && !got_interrupt())
@@ -1494,7 +1494,7 @@ linear_read (struct vfs_class *me, vfs_s_fh *fh, void *buf, int len)
 }
 
 static void
-linear_close (struct vfs_class *me, vfs_s_fh *fh)
+linear_close (struct vfs_class *me, struct vfs_s_fh *fh)
 {
     if (FH_SOCK != -1)
         linear_abort(me, fh);
@@ -1527,7 +1527,7 @@ static int
 send_ftp_command(struct vfs_class *me, char *filename, char *cmd, int flags)
 {
     char *rpath, *p;
-    vfs_s_super *super;
+    struct vfs_s_super *super;
     int r;
     int flush_directory_cache = (flags & OPT_FLUSH);
 
@@ -1592,7 +1592,7 @@ static int ftpfs_unlink (struct vfs_class *me, char *path)
 
 /* Return 1 if path is the same directory as the one we are in now */
 static int
-is_same_dir (struct vfs_class *me, vfs_s_super *super, const char *path)
+is_same_dir (struct vfs_class *me, struct vfs_s_super *super, const char *path)
 {
     if (!SUP.cwdir)
 	return 0;
@@ -1602,7 +1602,7 @@ is_same_dir (struct vfs_class *me, vfs_s_super *super, const char *path)
 }
 
 static int
-ftpfs_chdir_internal (struct vfs_class *me, vfs_s_super *super, char *remote_path)
+ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super, char *remote_path)
 {
     int r;
     char *p;
@@ -1640,7 +1640,7 @@ static int ftpfs_rmdir (struct vfs_class *me, char *path)
     return send_ftp_command(me, path, "RMD /%s", OPT_FLUSH);
 }
 
-static int ftpfs_fh_open (struct vfs_class *me, vfs_s_fh *fh, int flags, int mode)
+static int ftpfs_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags, int mode)
 {
     fh->u.ftp.append = 0;
     /* File will be written only, so no need to retrieve it from ftp server */
@@ -1697,7 +1697,7 @@ static int ftpfs_fh_open (struct vfs_class *me, vfs_s_fh *fh, int flags, int mod
     return 0;
 }
 
-static int ftpfs_fh_close (struct vfs_class *me, vfs_s_fh *fh)
+static int ftpfs_fh_close (struct vfs_class *me, struct vfs_s_fh *fh)
 {
     if (fh->handle != -1 && !fh->ino->localname){
 	close (fh->handle);
