@@ -461,6 +461,9 @@ static char *get_path_from_entry (struct entry *entry)
 	head = p;
 	len += strlen (entry->name) + 1;
     }
+
+    if (len == 0)
+	    return g_strdup ("");
     
     localpath = g_malloc (len);
     *localpath = '\0';
