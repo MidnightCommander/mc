@@ -626,3 +626,15 @@ session_management_setup (char *name)
 	}
 }
 
+/*
+ * Configures the GtkWindow/GnomeDialog from a WPanel.
+ *
+ * This makes the window centered on the screen and binds it to
+ * its parent container for better window manager experience
+ */
+void
+gmc_window_setup_from_panel (GnomeDialog *dialog, WPanel *panel)
+{
+	gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_MOUSE);
+	gnome_dialog_set_parent (dialog, GTK_WINDOW (panel->xwindow));
+}

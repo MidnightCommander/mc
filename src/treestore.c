@@ -560,9 +560,11 @@ tree_store_mark_checked (const char *subname)
 	while (current && (flag = pathcmp (current->name, name)) < 0)
 		current = current->next;
 	
-	if (flag != 0)
+	if (flag != 0){
 		/* Doesn't exist -> add it */
 		current = tree_store_add_entry (name);
+		tree_store_notify_add (current);
+	}
 	free (name);
 	
 	/* Clear the deletion mark from the subdirectory and its children */
@@ -646,6 +648,8 @@ tree_store_end_check (void)
 
 	if (!ts.loaded)
 		return;
+
+	g_return_if_fail (ts.check_name);
 	
 	/* Check delete marks and delete if found */
 	len = strlen (ts.check_name);
@@ -702,11 +706,18 @@ tree_store_rescan (char *dir)
 }      
 
 static Hook *remove_entry_hooks;
+static Hook *add_entry_hooks;
 
 void
 tree_store_add_entry_remove_hook (tree_store_remove_fn callback, void *data)
 {
 	add_hook (&remove_entry_hooks, (void (*)(void *))callback, data);
+}
+
+void
+tree_store_remove_entry_remove_hook (tree_store_remove_fn callback)
+{
+	delete_hook (&remove_entry_hooks, (void (*)(void *))callback);
 }
 
 void
@@ -718,6 +729,32 @@ tree_store_notify_remove (tree_entry *entry)
 	
 	while (p){
 		r = (tree_store_remove_fn) p->hook_fn;
+		r (entry, p->hook_data);
+		p = p->next;
+	}
+}
+
+void
+tree_store_add_entry_add_hook (tree_store_add_fn callback, void *data)
+{
+	add_hook (&add_entry_hooks, (void (*)(void *))callback, data);
+}
+
+void
+tree_store_remove_entry_add_hook (tree_store_add_fn callback)
+{
+	delete_hook (&add_entry_hooks, (void (*)(void *))callback);
+}
+
+void
+tree_store_notify_add (tree_entry *entry)
+{
+	Hook *p = add_entry_hooks;
+	tree_store_add_fn r;
+
+	
+	while (p){
+		r = (tree_store_add_fn) p->hook_fn;
 		r (entry, p->hook_data);
 		p = p->next;
 	}

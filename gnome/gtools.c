@@ -42,7 +42,7 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	WLabel    *label;
 	GtkWidget *dialog;
 	int i, result = -1;
-	gchar **buttons;
+	const gchar **buttons;
 	char *stock;
 	GSList *allocated = NULL;
 	
@@ -76,7 +76,8 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 
 	buttons[i] = NULL;
 	dialog = gnome_message_box_newv (text, header, buttons);
-
+	gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_MOUSE);
+	
 	result = gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
 
 	g_slist_foreach (allocated, (GFunc) g_free, NULL);

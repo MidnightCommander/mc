@@ -205,6 +205,8 @@ gnome_sort_cmd (GtkWidget *widget, WPanel *panel)
 
 	sort_box = gnome_dialog_new (_("Sort By"), GNOME_STOCK_BUTTON_OK, 
 				     GNOME_STOCK_BUTTON_CANCEL, NULL);
+	gmc_window_setup_from_panel (GNOME_DIALOG (sort_box), panel);
+	
 	/* we define this up here so we can pass it in to our callback */
 	cbox1 = gtk_check_button_new_with_label (N_("Ignore case sensitivity."));
 	hbox = gtk_hbox_new (FALSE, 0);
@@ -323,6 +325,7 @@ get_nickname (gchar *text)
 
 	dlg = gnome_dialog_new (_("Enter name."), GNOME_STOCK_BUTTON_OK, 
 				GNOME_STOCK_BUTTON_CANCEL, NULL);
+	gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_MOUSE);
 	entry = gtk_entry_new ();
 	if (text)
 		gtk_entry_set_text (GTK_ENTRY (entry), text);
@@ -468,7 +471,8 @@ gnome_external_panelize (GtkWidget *widget, WPanel *panel)
 	data->selected = -1;
 	data->ep_dlg = gnome_dialog_new (_("Run Command"), GNOME_STOCK_BUTTON_OK, 
 				   GNOME_STOCK_BUTTON_CANCEL, NULL);
-
+	gtk_window_set_position (GTK_WINDOW (data->ep_dlg), GTK_WIN_POS_MOUSE);
+	
 				/* Frame 1 */
 	frame = gtk_frame_new (_("Preset Commands"));
 	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (data->ep_dlg)->vbox),
@@ -552,6 +556,7 @@ gnome_filter_cmd (GtkWidget *widget, WPanel *panel)
 
 	filter_dlg = gnome_dialog_new (_("Set Filter"), GNOME_STOCK_BUTTON_OK, 
 				       GNOME_STOCK_BUTTON_CANCEL, NULL);
+	gtk_window_set_position (GTK_WINDOW (filter_dlg), GTK_WIN_POS_MOUSE);
 	if (easy_patterns) {
 		text1 = "mc_filter_globs";
 		text3 = _("Show all files");

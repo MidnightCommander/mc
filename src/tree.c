@@ -164,7 +164,7 @@ void tree_remove_entry (WTree *tree, char *name)
 
 void tree_destroy (WTree *tree)
 {
-
+    tree_store_remove_entry_remove_hook (remove_callback);
     save_tree (tree);
     tree_store_destroy ();
     

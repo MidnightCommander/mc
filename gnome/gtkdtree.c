@@ -99,6 +99,24 @@ gtk_dtree_contains (GtkDTree *dtree, GtkCTreeNode *parent, char *text)
 	return NULL;
 }
 
+static GtkCTreeNode *
+gtk_dtree_insert_node (GtkDTree *dtree, GtkCTreeNode *parent, char *text)
+{
+	GtkCTreeNode *sibling;
+	char *texts [1];
+
+	texts [0] = text;
+	
+	sibling = gtk_ctree_insert_node (
+		GTK_CTREE (dtree), parent, NULL,
+		texts, TREE_SPACING,
+		dtree->pixmap_close,
+		dtree->bitmap_close,
+		dtree->pixmap_open,
+		dtree->bitmap_open,
+		FALSE, FALSE);
+}
+
 static gboolean
 gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int level)
 {
@@ -115,24 +133,15 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 
 	for (; (dirent = tree_store_readdir (dir)) != NULL; ){
 		GtkCTreeNode *sibling;
-		char *text [1];
+		char *text;
 		
-		text [0] = x_basename (dirent->name);
+		text = x_basename (dirent->name);
 
 		/* Do not insert duplicates */
-		sibling = gtk_dtree_contains (dtree, parent, text [0]);
+		sibling = gtk_dtree_contains (dtree, parent, text);
 		
-		if (sibling == NULL){
-			sibling = gtk_ctree_insert_node (
-				GTK_CTREE (dtree), parent, NULL,
-				text, TREE_SPACING,
-				dtree->pixmap_close,
-				dtree->bitmap_close,
-				dtree->pixmap_open,
-				dtree->bitmap_open,
-				FALSE, FALSE);
-
-		}
+		if (sibling == NULL)
+			sibling = gtk_dtree_insert_node (dtree, parent, text);
 
 		if (level)
 			gtk_dtree_load_path (dtree, dirent->name, sibling, level-1);
@@ -354,11 +363,77 @@ gtk_dtree_expand (GtkCTree *ctree, GtkCTreeNode *node)
 	gtk_dtree_select_row (ctree, node, 0);
 }
 
+/*
+ * entry_removed_callback:
+ *
+ * Called when an entry is removed by the treestore
+ */
+static void
+entry_removed_callback (tree_entry *tree, void *data)
+{
+	GtkCTreeNode *current_node;
+	GtkDTree *dtree = data;
+	char *dirname, *copy, *current ;
+
+	copy = dirname = g_strdup (tree->name);
+	copy++;
+	current_node = dtree->root_node;
+	while ((current = strtok (copy, "/")) != NULL){
+		current_node = gtk_dtree_lookup_dir (dtree, current_node, current);
+		if (!current_node)
+			break;
+		copy = NULL;
+	}
+	if (current == NULL && current_node)
+		gtk_ctree_remove_node (GTK_CTREE (data), current_node);
+	
+	g_free (dirname);
+}
+
+/*
+ * entry_added_callback:
+ *
+ * Callback invoked by the treestore when a tree_entry has been inserted
+ * into the treestore.  We update the gtkdtree with this new information.
+ */
+static void
+entry_added_callback (tree_entry *tree, void *data)
+{
+	GtkCTreeNode *current_node, *new_node;
+	GtkDTree *dtree = data;
+	char *dirname, *copy, *current, *npath, *full_path;
+
+	copy = dirname = g_strdup (tree->name);
+	copy++;
+	current_node = dtree->root_node;
+	npath = g_strdup ("/");
+	while ((current = strtok (copy, "/")) != NULL){
+		full_path = g_concat_dir_and_file (npath, current);
+		g_free (npath);
+		npath = full_path;
+		
+		new_node = gtk_dtree_lookup_dir (dtree, current_node, current);
+		if (!new_node){
+			GtkCTreeNode *sibling;
+			
+			sibling = gtk_dtree_insert_node (dtree, current_node, current);
+			gtk_dtree_load_path (dtree, full_path, sibling, 1);
+			break;
+		}
+		copy = NULL;
+		current_node = new_node;
+	}
+	g_free (npath);
+	g_free (dirname);
+}
+
 static void
 gtk_dtree_destroy (GtkObject *object)
 {
 	GtkDTree *dtree = GTK_DTREE (object);
 
+	tree_store_remove_entry_remove_hook (entry_removed_callback);
+	tree_store_remove_entry_add_hook (entry_added_callback);
 	gdk_pixmap_unref (dtree->pixmap_open);
 	gdk_pixmap_unref (dtree->pixmap_close);
 	gdk_bitmap_unref (dtree->bitmap_open);
@@ -505,6 +580,9 @@ gtk_dtree_init (GtkDTree *dtree)
 	dtree->auto_expanded_nodes = NULL;
 
 	tree_store_dirty_notify = gtk_dtree_dirty_notify;
+
+	tree_store_add_entry_remove_hook (entry_removed_callback, dtree);
+	tree_store_add_entry_add_hook (entry_added_callback, dtree);
 }
 
 void

@@ -1,3 +1,14 @@
+1999-01-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* treestore.c (tree_store_remove_entry_remove_hook): Missing
+	function.  To remove a notification hook.
+	(tree_store_notify_add, tree_store_add_entry_add_hook,
+	tree_store_remove_entry_add_hook): New functions to notify of
+	additions to the treestore.
+
+	* tree.c (tree_destroy): Remove the callback hook when we go
+	away. 
+
 1999-01-21  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* option.c (init_configure): One line patch from Alexander

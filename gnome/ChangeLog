@@ -1,3 +1,32 @@
+1999-01-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gcmd.c (ep_add_callback): Set Window's position to
+	GTK_WIN_POS_MOUSE.
+	(gnome_external_panelize): ditto.
+	(gnome_filter_cmd): ditto.
+
+	* gdialogs.c (file_progress_query_replace_policy): Set Window's
+	position to GTK_WIN_POS_MOUSE. 
+	(file_progress_real_query_replace): ditto.
+	(file_mask_dialog): ditto.
+
+	* gdialogs.c: Tag the strings for localization.  Remove debugging
+	messages. 
+
+	* gmain.c (gmc_window_setup_from_panel): Helper routine used to
+	set the GTK_WIN_POS_MOUSE on a window and set the parent with
+	gnome_dialog_set_parent (iff you have the WPanel * pointer to the
+	parent). 
+
+	* gtools.c (query_dialog): Set the window position to GTK_WIN_POS_MOUSE.
+
+	* gtkdtree.c (gtk_dtree_destroy): Kill the add_entry notification hook.
+	(gtk_dtree_init): Install a notification function for treentry.
+	removal.
+	(entry_added_callback, entry_removed_callback): Implemented.  Now
+	the tree is in sync with the panels and reload will update the
+	tree correctly.
+
 1999-01-22  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop-icon.c (set_text): Update the call to

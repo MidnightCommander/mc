@@ -44,10 +44,25 @@ void        tree_store_end_check       (void);
 tree_entry *tree_store_whereis         (char *name);
 tree_entry *tree_store_rescan          (char *dir);
 
+/*
+ * Register/unregister notification functions for "entry_remove"
+ */
 typedef void (*tree_store_remove_fn)(tree_entry *tree, void *data);
-void        tree_store_add_entry_remove_hook (tree_store_remove_fn callback, void *data);
+void        tree_store_add_entry_remove_hook    (tree_store_remove_fn callback, void *data);
+void        tree_store_remove_entry_remove_hook (tree_store_remove_fn callback);
 
-void        tree_store_notify_remove (tree_entry *entry);
+/*
+ * Register/unregister notification functions for "entry_remove"
+ */
+typedef void (*tree_store_add_fn)(tree_entry *tree, void *data);
+void        tree_store_add_entry_add_hook    (tree_store_remove_fn callback, void *data);
+void        tree_store_remove_entry_add_hook (tree_store_remove_fn callback);
+
+/*
+ * Changes in the tree_entry are notified with these
+ */
+void        tree_store_notify_remove   (tree_entry *entry);
+void        tree_store_notify_add (tree_entry *entry);
 
 tree_scan  *tree_store_opendir       (char *path);
 tree_entry *tree_store_readdir       (tree_scan *scanner);

@@ -41,6 +41,8 @@ int gmc_view (char *filename, int start_line);
 void x_show_info (WInfo *info, struct my_statfs *s, struct stat *b);
 void x_create_info (Dlg_head *h, widget_data parent, WInfo *info);
 
+void gmc_window_setup_from_panel (GnomeDialog *dialog, WPanel *panel);
+
 struct gmc_color_pairs_s {
 	GdkColor *fore, *back;
 };
