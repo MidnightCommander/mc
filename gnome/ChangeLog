@@ -1,3 +1,7 @@
+Fri Sep 18 13:51:16 1998  Pavel Roskin <pavel_roskin@geocities.com>
+
+	* Makefile.in: Consequent "make" should not rebuild gmc every time
+
 Mon Aug 31 10:46:32 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gscreen.c (display_mini_info): Removed calls to

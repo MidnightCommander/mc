@@ -9,7 +9,7 @@ CPPFLAGS = $(XCPPFLAGS) -I$(vfsdir) -I$(slangdir) -DHAVE_X -DHAVE_GNOME @GNOME_I
 LDFLAGS = $(XLDFLAGS) @X_LIBS@ @GNOME_LIBDIR@ @GNOMEUI_LIBS@
 DEFS = $(XDEFS)
 LIBS = @X_EXTRA_LIBS@ -lX11 @X_PRE_LIBS@ $(XLIBS) $(XLIB) @TERMNET@
-EXTRALIBS = @LVFS@ @LSLANG@ ../gtkedit/libgtkedit.a @LINTL@
+EXTRALIBS = @LVFS@ @LSLANG@ -lgtkedit @LINTL@
 INSTALL = @INSTALL@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
@@ -139,7 +139,7 @@ libmcslang.a:
 libgtkedit.a:
 	cd ../gtkedit; $(MAKE) libgtkedit.a
 @PCENTRULE@	-$(RMF) libgtkedit.a
-@PCENTRULE@	$(LN_S) ../edit/libgtkedit.a .
+@PCENTRULE@	$(LN_S) ../gtkedit/libgtkedit.a .
 
 checklinks:
 	@if test -f $(gnomedir)/regex.c; then echo ok; \
