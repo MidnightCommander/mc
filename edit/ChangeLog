@@ -1,5 +1,8 @@
 2001-09-07  Pavel Roskin  <proski@gnu.org>
 
+	* edit-widget.h: Change ~/.cedit to ~/.mc/cedit to keep mcedit
+	files separate from cooledit.
+
 	* bookmark.c: Eliminate all code disabled for the text edition.
 	* edit-widget.h: Likewise.
 	* editcmd.c: Likewise.
