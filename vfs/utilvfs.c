@@ -157,10 +157,10 @@ done:
 char*
 append_path_sep (char *path)
 {
-    int i = strlen(path) - 1;
+    int i = strlen (path);
 
-    if(path[i] == PATH_SEP)
-	return g_strndup(path, i);
+    if (path[i - 1] == PATH_SEP)
+	return g_strndup (path, i);
     else
 	return copy_strings (path, PATH_SEP_STR, NULL);
 }

@@ -1,3 +1,8 @@
+1999-01-21  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* utilvfs.c (append_path_sep): Fixed, it was broken for paths
+	which already have a / at the end.
+
 Fri Jan 22 01:41:25 1999  Timur I. Bakeyev <mc@bat.ru>
 
 	* undelfs.c: Found one more unconverted realloc() call.
