@@ -1,5 +1,8 @@
 2002-09-29  Pavel Roskin  <proski@gnu.org>
 
+	* syntax/syntax.syntax: Don't require Cooledit colors for
+	highlighting color names.  Remove Cooledit colors.
+
 	* syntax/m4.syntax: Don't use yellow color on parentheses, since
 	it interferes with parentheses highlighting.  Remove list of
 	supported Autoconf macros.

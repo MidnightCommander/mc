@@ -12,44 +12,44 @@ context default
     keyword whole linestart\[\t\s\]wholeright
 
 # Combinations below are valid
-    keyword whole whole\[\t\s\]linestart brightcyan/17
-    keyword whole whole\[\t\s\]linestart brightcyan/17
-    keyword whole wholeleft\[\t\s\]linestart brightcyan/17
-    keyword whole wholeright\[\t\s\]linestart brightcyan/17
-    keyword whole whole\[\] brightcyan/17
-    keyword whole wholeleft\[\] brightcyan/17
-    keyword whole wholeright\[\] brightcyan/17
-    keyword whole linestart\[\] brightcyan/17
+    keyword whole whole\[\t\s\]linestart brightcyan
+    keyword whole whole\[\t\s\]linestart brightcyan
+    keyword whole wholeleft\[\t\s\]linestart brightcyan
+    keyword whole wholeright\[\t\s\]linestart brightcyan
+    keyword whole whole\[\] brightcyan
+    keyword whole wholeleft\[\] brightcyan
+    keyword whole wholeright\[\] brightcyan
+    keyword whole linestart\[\] brightcyan
 
-    keyword whole wholechars\[\t\s\]left brightcyan/17
-    keyword whole wholechars\[\t\s\]right brightcyan/17
-    keyword whole wholechars\[\] brightcyan/17
+    keyword whole wholechars\[\t\s\]left brightcyan
+    keyword whole wholechars\[\t\s\]right brightcyan
+    keyword whole wholechars\[\] brightcyan
 
-    keyword whole spellcheck\[\] yellow/24
-    keyword whole keyword\[\] yellow/24
-    keyword whole context\[\t\s\]exclusive brightred/18
-    keyword whole context\[\t\s\]default brightred/18
-    keyword whole context\[\] brightred/18
+    keyword whole spellcheck\[\] yellow
+    keyword whole keyword\[\] yellow
+    keyword whole context\[\t\s\]exclusive brightred
+    keyword whole context\[\t\s\]default brightred
+    keyword whole context\[\] brightred
 
-    keyword whole linestart file\[\] brightgreen/6
-    keyword whole linestart include\[\] brightred/18
+    keyword whole linestart file\[\] brightgreen
+    keyword whole linestart include\[\] brightred
 
-    keyword wholeleft black\/ black/0
-    keyword wholeleft red\/ red/DarkRed
-    keyword wholeleft green\/ green/green3
-    keyword wholeleft brown\/ brown/saddlebrown
-    keyword wholeleft blue\/ blue/blue3
-    keyword wholeleft magenta\/ magenta/magenta3
-    keyword wholeleft cyan\/ cyan/cyan3
-    keyword wholeleft lightgray\/ lightgray/lightgray
-    keyword wholeleft gray\/ gray/gray
-    keyword wholeleft brightred\/ brightred/red
-    keyword wholeleft brightgreen\/ brightgreen/green1
-    keyword wholeleft yellow\/ yellow/yellow
-    keyword wholeleft brightblue\/ brightblue/blue1
-    keyword wholeleft brightmagenta\/ brightmagenta/magenta
-    keyword wholeleft brightcyan\/ brightcyan/cyan1
-    keyword wholeleft white\/ white/26
+    keyword whole black black blue
+    keyword whole red red
+    keyword whole green green
+    keyword whole brown brown
+    keyword whole blue blue black
+    keyword whole magenta magenta
+    keyword whole cyan cyan
+    keyword whole lightgray lightgray
+    keyword whole gray lightgray
+    keyword whole brightred brightred
+    keyword whole brightgreen brightgreen
+    keyword whole yellow yellow
+    keyword whole brightblue brightblue
+    keyword whole brightmagenta brightmagenta
+    keyword whole brightcyan brightcyan
+    keyword whole white white
 
-context linestart # \n brown/22
+context linestart # \n brown
 
