@@ -13,12 +13,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.51\n"
-"POT-Creation-Date: 2000-08-21 12:23+0000\n"
+"POT-Creation-Date: 2000-09-11 19:52+0300\n"
 "PO-Revision-Date: 2000-08-21 12:24+00:00\n"
 "Last-Translator: Andrew V. Samoilov <sav@bcs.zp.ua>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=koi8\n"
+"Content-Type: text/plain; charset=koi8-r\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: edit/edit_key_translator.c:126
@@ -998,6 +998,49 @@ msgstr ""
 "Как root, вы можете случайно повредить вашу систему. \n"
 "Диспетчер файлов GNOME не сможет помешать вам в этом."
 
+#: gnome/gmc-window.c:69
+msgid "Copyright (C) 1998 The Free Software Foundation"
+msgstr ""
+
+#: gnome/gmc-window.c:81
+msgid "Open _new window"
+msgstr "Открыть новое окно"
+
+#: gnome/gmc-window.c:86
+msgid "_Close this window"
+msgstr "Закрыть это окно"
+
+#: gnome/gmc-window.c:88
+msgid "E_xit"
+msgstr "Выход"
+
+#: gnome/gmc-window.c:95
+#, fuzzy
+msgid "_Listing view"
+msgstr "Формат списка файлов"
+
+#: gnome/gmc-window.c:96
+#, fuzzy
+msgid "_Icon view"
+msgstr "Пиктограммы"
+
+#: gnome/gmc-window.c:102
+#, fuzzy
+msgid "Display _tree view"
+msgstr " Отображение символов "
+
+#: gnome/gmc-window.c:112
+msgid "_About the Midnight Commander..."
+msgstr "O Midnight Commander..."
+
+#: gnome/gmc-window.c:119
+msgid "_File"
+msgstr "Файл"
+
+#: gnome/gmc-window.c:120
+msgid "_View"
+msgstr "Просмотр"
+
 #: gnome/gmount.c:218
 msgid "Could not open the /etc/fstab file"
 msgstr "Невозможно открыть файл /etc/fstab"
@@ -1781,7 +1824,6 @@ msgstr ""
 msgid "User menu avalaible only in mcedit invoked from mc"
 msgstr "Меню пользователя доступно только в mcedit, запущенном из mc"
 
-#. Not essential to translate
 #: gtkedit/edit.c:2765 gtkedit/editcmd.c:2939
 msgid "Error trying to stat file:"
 msgstr "Ошибка получения атрибутов файла:"
@@ -1882,8 +1924,8 @@ msgstr " Ошибка при открытии файла макросов "
 #: gtkedit/editcmd.c:695 gtkedit/editcmd.c:703 gtkedit/editcmd.c:739
 #: gtkedit/editcmd.c:794
 #, c-format
-msgid "key '%d 0': "
-msgstr "клавиша '%d 0': "
+#~ msgid "key '%d 0': "
+#~ msgstr "клавиша '%d 0': "
 
 #: gtkedit/editcmd.c:714
 msgid " Error trying to overwrite macro file "
@@ -2268,12 +2310,10 @@ msgstr " Вставить файл "
 msgid " Error trying to insert file. "
 msgstr " Ошибка при вставке файла. "
 
-#. Not essential to translate
 #: gtkedit/editcmd.c:2821
 msgid " Sort block "
 msgstr " Сортировать блок "
 
-#. Not essential to translate
 #: gtkedit/editcmd.c:2821 gtkedit/editcmd.c:2907
 msgid " You must first highlight a block of text. "
 msgstr " Вы должны сначала выделить блок текста. "
@@ -2282,7 +2322,6 @@ msgstr " Вы должны сначала выделить блок текста. "
 msgid " Run Sort "
 msgstr " Выполнить сортировку "
 
-#. Not essential to translate
 #: gtkedit/editcmd.c:2828
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr " Введите параметры сортировки (man sort(1)), разделенные пробелами "
@@ -2291,12 +2330,10 @@ msgstr " Введите параметры сортировки (man sort(1)), разделенные пробелами "
 msgid " Sort "
 msgstr " Сортировка "
 
-#. Not essential to translate
 #: gtkedit/editcmd.c:2841
 msgid " Error trying to execute sort command "
 msgstr " Ошибка при выполнении команды sort "
 
-#. Not essential to translate
 #: gtkedit/editcmd.c:2847
 msgid " Sort returned non-zero: "
 msgstr " Сортировка вернула ненулевой код: "
@@ -2345,7 +2382,6 @@ msgstr " mail -s <Тема> -c <Копии> <Кому>"
 msgid " Word wrap "
 msgstr " Перенос слов "
 
-#. Not essential to translate
 #: gtkedit/editmenu.c:64
 msgid " Enter line length, 0 for off: "
 msgstr " Введите длину строки, 0 для отключения переноса: "
@@ -2795,7 +2831,6 @@ msgstr "Эмуляция раскладки клавиш"
 msgid " Editor options "
 msgstr " Настройки редактора "
 
-#. Not essential to translate
 #: gtkedit/editwidget.c:323
 msgid "Error initialising editor.\n"
 msgstr "Ошибка инициализации редактора.\n"
@@ -4281,8 +4316,9 @@ msgstr "%o %f \"%s\"%m"
 
 #: src/file.c:1696
 #, c-format
+# msgfmt warnings/errors must be ignored. mc parse this pattern itself.
 msgid "%o %d %f%m"
-msgstr "%o %d %f%m"
+msgstr "%o эти %f (%d шт.)%m"
 
 #: src/file.c:1698
 #, c-format
@@ -4308,7 +4344,7 @@ msgstr "каталог"
 
 #: src/file.c:1703
 msgid "directories"
-msgstr "каталога"
+msgstr "каталоги"
 
 #: src/file.c:1704
 msgid "files/directories"
@@ -7009,7 +7045,7 @@ msgstr " не хватило памяти при переоткрытии массива "
 #: vfs/undelfs.c:246
 #, c-format
 msgid " while doing inode scan %d "
-msgstr " при сканировании inode %d "
+msgstr " при сканировании узла %d "
 
 #: vfs/undelfs.c:270
 msgid " Ext2lib error "
@@ -7022,7 +7058,7 @@ msgstr " Невозможно открыть файл %s "
 
 #: vfs/undelfs.c:300
 msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: чтение битовой карты inode..."
+msgstr "undelfs: чтение битовой карты узлов..."
 
 #: vfs/undelfs.c:303
 #, c-format
@@ -7030,7 +7066,7 @@ msgid ""
 " Could not load inode bitmap from: \n"
 " %s \n"
 msgstr ""
-" Невозможно загрузить битовую карту inode с:\n"
+" Невозможно загрузить битовую карту узлов с:\n"
 " %s \n"
 
 #: vfs/undelfs.c:306
@@ -7069,7 +7105,7 @@ msgstr ""
 #: vfs/undelfs.c:626
 #, c-format
 msgid " Could not open file: %s "
-msgstr " Невозможно открыть файл: %s  "
+msgstr " Невозможно открыть файл: %s "
 
 #. This is place of next pointer
 #: vfs/undelfs.c:684

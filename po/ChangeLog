@@ -1,3 +1,7 @@
+2000-09-15  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* ru.po: updated russian translation. Please ignore msgfmt warning.
+
 2000-09-14  Pavel Roskin  <proski@gnu.org>
 
 	* POTFILES.in: src/features.c renamed to src/textconf.c
