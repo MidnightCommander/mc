@@ -187,11 +187,7 @@ void load_tree (WTree *tree)
 
     tree->selected_ptr = tree->store->tree_first;
     
-    if (!v){
-	    tree_store_add_entry (home_dir);
-	    tree_chdir (tree, home_dir);
-	    tree_store_rescan (home_dir);
-    }
+    tree_chdir (tree, home_dir);
 }
 
 /* Save the .mc.tree file */

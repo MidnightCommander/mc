@@ -1,3 +1,7 @@
+1999-01-10  Ilya Zakharevich <ilya@math.ohio-state.edu>
+
+        * gtkedit/edit.c (edit_load_file): Off-by-one error disabled editing.
+
 1999-01-11  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* configure.in (REGEX_O): Always include regex.o as the code we

@@ -6,33 +6,50 @@ typedef struct tree_entry {
 	int sublevel;			/* Number of parent directories (slashes) */
 	long submask;			/* Bitmask of existing sublevels after this entry */
 	char *subname;			/* The last part of name (the actual name) */
-	int mark;			/* Flag: Is this entry marked (e. g. for delete)? */
+	unsigned int mark:1;		/* Flag: Is this entry marked (e. g. for delete)? */
+	unsigned int scanned:1;		/* Flag: childs scanned or not */
 	struct tree_entry *next;	/* Next item in the list */
 	struct tree_entry *prev;	/* Previous item in the list */
 } tree_entry;
+
+typedef struct {
+	struct tree_entry *base;
+	struct tree_entry *current;
+	int base_dir_len;
+	int sublevel;
+} tree_scan;
 
 typedef struct {
 	int refcount;
 	tree_entry *tree_first;     	/* First entry in the list */
 	tree_entry *tree_last;          /* Last entry in the list */
 	tree_entry *check_start;	/* Start of checked subdirectories */
-	char       check_name [MC_MAXPATHLEN];/* Directory which is been checked */
-	int        loaded;
+	char       *check_name;		/* Directory which is been checked */
+	unsigned int loaded : 1;
+	unsigned int dirty : 1;
 } TreeStore;
 
-TreeStore  *tree_store_init         (void);
-int         tree_store_load         (char *name);
-int         tree_store_save         (char *name);
-tree_entry *tree_store_add_entry    (char *name);
-void        tree_store_remove_entry (char *name);
-void        tree_store_destroy      (void);
-void        tree_store_start_check  (void);
-void        tree_store_mark_checked (const char *subname);
-void        tree_store_end_check    (void);
-tree_entry *tree_store_whereis      (char *name);
-void        tree_store_rescan       (char *dir);
+extern void (*tree_store_dirty_notify)(int state);
+
+TreeStore  *tree_store_init          (void);
+int         tree_store_load          (char *name);
+int         tree_store_save          (char *name);
+tree_entry *tree_store_add_entry     (char *name);
+void        tree_store_remove_entry  (char *name);
+void        tree_store_destroy       (void);
+tree_entry *tree_store_start_check   (char *path);
+void        tree_store_mark_checked  (const char *subname);
+void        tree_store_end_check     (void);
+tree_entry *tree_store_whereis       (char *name);
+tree_entry *tree_store_rescan        (char *dir);
 
 typedef void (*tree_store_remove_fn)(tree_entry *tree, void *data);
 void        tree_store_add_entry_remove_hook (tree_store_remove_fn callback, void *data);
+
+void        tree_store_notify_remove (tree_entry *entry);
+
+tree_scan  *tree_store_opendir       (char *path);
+tree_entry *tree_store_readdir       (tree_scan *scanner);
+void        tree_store_closedir      (tree_scan *scanner);
 
 #endif

@@ -7,6 +7,8 @@
  *
  */
 #include <config.h>
+#include "util.h"
+#include "treestore.h"
 #include <gnome.h>
 #include "gtkdtree.h"
 
@@ -14,7 +16,6 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include "../vfs/vfs.h"
 #include "dir-open.xpm"
 #include "dir-close.xpm"
 
@@ -101,46 +102,26 @@ gtk_dtree_contains (GtkDTree *dtree, GtkCTreeNode *parent, char *text)
 static gboolean
 gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int level)
 {
-	DIR *dir;
-	struct dirent *dirent;
+	tree_scan  *dir;
+	tree_entry *dirent;
 	
 	g_assert (path);
 	g_assert (parent);
 	g_assert (dtree);
 
-	dir = mc_opendir (path);
+	dir = tree_store_opendir (path);
 	if (!dir)
 		return FALSE;
 
-	for (; (dirent = mc_readdir (dir)) != NULL; ){
+	for (; (dirent = tree_store_readdir (dir)) != NULL; ){
 		GtkCTreeNode *sibling;
 		struct stat s;
-		char *full_name;
 		char *text [1];
 		int   res;
 		
-		if (dirent->d_name [0] == '.'){
-			if (dirent->d_name [1] == '.'){
-				if (dirent->d_name [2] == 0)
-					continue;
-			} else if (dirent->d_name [1] == 0)
-				continue;
-		}
+		res = mc_stat (dirent->name, &s);
 
-		full_name = g_concat_dir_and_file (path, dirent->d_name);
-		res = mc_stat (full_name, &s);
-
-		if (res == -1){
-			g_free (full_name);
-			continue;
-		}
-
-		if (!S_ISDIR (s.st_mode)){
-			g_free (full_name);
-			continue;
-		}
-
-		text [0] = dirent->d_name;
+		text [0] = x_basename (dirent->name);
 
 		/* Do not insert duplicates */
 		sibling = gtk_dtree_contains (dtree, parent, text [0]);
@@ -158,15 +139,13 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 		}
 
 		if (level)
-			gtk_dtree_load_path (dtree, full_name, sibling, level-1);
-
-		g_free (full_name);
+			gtk_dtree_load_path (dtree, dirent->name, sibling, level-1);
 
 		if (!level)
 			break;
 	}
 
-	mc_closedir (dir);
+	tree_store_closedir (dir);
 
 	return TRUE;
 }
@@ -195,7 +174,8 @@ gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 
 	dtree->current_path = path;
 
-	gtk_signal_emit (GTK_OBJECT (ctree), gtk_dtree_signals [DIRECTORY_CHANGED], path);
+	if (!dtree->internal)
+		gtk_signal_emit (GTK_OBJECT (ctree), gtk_dtree_signals [DIRECTORY_CHANGED], path);
 
 	gtk_dtree_load_path (dtree, path, row, 1);
 #if 0
@@ -248,7 +228,8 @@ gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
 {
 	GtkCTreeNode *current_node;
 	char *s, *current, *npath;
-
+	char *request;
+	
 	g_return_val_if_fail (dtree != NULL, FALSE);
 	g_return_val_if_fail (GTK_IS_DTREE (dtree), FALSE);
 	g_return_val_if_fail (path != NULL, FALSE);
@@ -256,7 +237,7 @@ gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
 	
 	if (dtree->current_path && (strcmp (path, dtree->current_path) == 0))
 		return TRUE;
-	
+
 	s = alloca (strlen (path)+1);
 	strcpy (s, path);
 	current_node = dtree->root_node;
@@ -264,6 +245,7 @@ gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
 	s++;
 	npath = g_strdup ("/");
 
+	dtree->internal = 1;
 	while ((current = strtok (s, "/")) != NULL){
 		char *full_path;
 		GtkCTreeNode *node;
@@ -282,14 +264,12 @@ gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
 		
 		if (node){
 			gtk_ctree_expand (GTK_CTREE (dtree), node);
-			while (gtk_events_pending ())
-				gtk_main_iteration ();
 			current_node = node;
 		} else
 			break;
 	}
         g_free (npath);
-
+	
 	if (current_node){
 		if (!gtk_ctree_node_is_visible (GTK_CTREE (dtree), current_node)){
 			gtk_ctree_node_moveto (GTK_CTREE (dtree), current_node, 0, 0.5, 0.0);
@@ -305,6 +285,8 @@ gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
 		g_free (dtree->requested_path);
 		dtree->requested_path = NULL;
 	}
+
+	dtree->internal = 0;
 
 	return TRUE;
 }
@@ -331,10 +313,9 @@ gtk_dtree_select_dir (GtkDTree *dtree, char *path)
 	if (dtree->visible)
 		gtk_dtree_do_select_dir (dtree, path);
 	else {
-		if (dtree->requested_path){
+		if (dtree->requested_path)
 			g_free (dtree->requested_path);
-			dtree->requested_path = g_strdup (path);
-		}
+		dtree->requested_path = g_strdup (path);
 	}
 
 	return TRUE;
@@ -344,7 +325,8 @@ static void
 gtk_dtree_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 {
 	GtkDTree *dtree = GTK_DTREE (widget);
-
+	char *request;
+	
 	GTK_WIDGET_CLASS (parent_class)->size_allocate (widget, allocation);
 	if (allocation->width != 0 && allocation->height != 0)
 		dtree->visible = TRUE;
@@ -353,11 +335,23 @@ gtk_dtree_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 
 	if (!(dtree->visible && dtree->requested_path))
 		return;
-	
-	if (strcmp (dtree->current_path, dtree->requested_path) != 0)
+
+	if (!dtree->visible)
 		return;
 
-	gtk_dtree_do_select_dir (dtree, dtree->requested_path);
+	if (!dtree->requested_path)
+		return;
+	
+	if (strcmp (dtree->current_path, dtree->requested_path) == 0){
+		g_free (dtree->requested_path);
+		dtree->requested_path = NULL;
+		return;
+	}
+
+	request = dtree->requested_path;
+	dtree->requested_path = NULL;
+	gtk_dtree_do_select_dir (dtree, request);
+	g_free (request);
 }
 
 static void
@@ -481,11 +475,41 @@ gdk_dtree_load_pixmaps (GtkDTree *dtree)
 		&dtree->pixmap_close, &dtree->bitmap_close);
 }
 
+static int dirty_tag = -1;
+
+static int
+gtk_dtree_save_tree (void)
+{
+	dirty_tag = -1;
+	mc_tree_store_save ();
+	return FALSE;
+}
+	
+static void
+gtk_dtree_dirty_notify (int state)
+{
+	if (dirty_tag != -1){
+		if (state)
+			return;
+		else {
+			gtk_timeout_remove (dirty_tag);
+			dirty_tag = -1;
+		}
+	}
+
+	if (state)
+		dirty_tag = gtk_timeout_add (1000, (GtkFunction) gtk_dtree_save_tree, NULL);
+}
+
 static void
 gtk_dtree_init (GtkDTree *dtree)
 {
+	static int tree_inited;
+	
 	dtree->current_path = NULL;
 	dtree->auto_expanded_nodes = NULL;
+
+	tree_store_dirty_notify = gtk_dtree_dirty_notify;
 }
 
 void

@@ -30,6 +30,8 @@ typedef struct {
 	/* Masks */
 	GdkBitmap *bitmap_open;
 	GdkBitmap *bitmap_close;
+
+	int internal;
 } GtkDTree;
 
 typedef struct {

@@ -2810,6 +2810,28 @@ compatibility_move_mc_files (void)
 }
 #endif
 
+void
+mc_tree_store_load ()
+{
+	char *tree_file;
+	
+	tree_file = concat_dir_and_file (home_dir, MC_TREE);
+	tree_store_init ();
+	tree_store_load (tree_file);
+	free (tree_file);
+}
+
+void
+mc_tree_store_save ()
+{
+	char *tree_file;
+
+	printf ("Saving tree!\n");
+	tree_file = concat_dir_and_file (home_dir, MC_TREE);
+	tree_store_save (tree_file);
+	free (tree_file);
+}
+
 int main (int argc, char *argv [])
 {
     /* We had LC_CTYPE before, LC_ALL includs LC_TYPE as well */
@@ -2856,6 +2878,8 @@ int main (int argc, char *argv [])
     }
 
     handle_args(argc, argv);
+
+    mc_tree_store_load ();
 
     session_management_setup (argv [0]);
     probably_finish_program ();

@@ -1,3 +1,13 @@
+1999-01-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtkdtree.c: Now it uses the treestore code.
+
+	* treestore.c: Provide _opendir, _readdir, _closedir operations
+	for the tree cache.
+
+	Next step: load/save the tree_entry->scanned flag (without this,
+	you wont notice a big speedup).
+
 1999-01-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gutil.c (my_system_get_child_pid): Acknowledge new EXECUTE_WAIT

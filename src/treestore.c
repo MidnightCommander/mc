@@ -53,6 +53,17 @@
 
 static TreeStore ts;
 
+void (*tree_store_dirty_notify)(int state) = NULL;
+
+void
+tree_store_dirty (int state)
+{
+	ts.dirty = state;
+
+	if (tree_store_dirty_notify)
+		(*tree_store_dirty_notify)(state);
+}
+
 /* Returns number of common characters */
 static int str_common (char *s1, char *s2)
 {
@@ -240,6 +251,7 @@ tree_store_load (char *name)
 	if (!ts.tree_first){
 		tree_store_add_entry (PATH_SEP_STR);
 		tree_store_rescan (PATH_SEP_STR);
+		ts.loaded = TRUE;
 	}
 	
 	return TRUE;
@@ -314,6 +326,7 @@ tree_store_save (char *name)
 		}
 		current = current->next;
 	}
+	tree_store_dirty (FALSE);
 	fclose (file);
 
 	return 0;
@@ -411,7 +424,8 @@ tree_store_add_entry (char *name)
 		}
 		free (parent);
 	}
-	
+
+	tree_store_dirty (TRUE);
 	return new;
 }
 
@@ -481,6 +495,7 @@ tree_store_remove_entry (char *name)
 		remove_entry (old);
 	}
 	remove_entry (base);
+	tree_store_dirty (TRUE);
 
 	return;
 }
@@ -531,24 +546,37 @@ tree_store_mark_checked (const char *subname)
 }
 
 /* Mark the subdirectories of the current directory for delete */
-void
-tree_store_start_check (void)
+tree_entry *
+tree_store_start_check (char *path)
 {
-	tree_entry *current;
+	tree_entry *current, *retval;
 	int len;
 
 	if (!ts.loaded)
-		return;
+		return NULL;
 
-	/* Search for the start of subdirectories */
-	mc_get_current_wd (ts.check_name, MC_MAXPATHLEN);
 	ts.check_start = NULL;
-	current = tree_store_whereis (ts.check_name);
+	
+	/* Search for the start of subdirectories */
+	current = tree_store_whereis (path);
 	if (!current){
-		/* Cwd doesn't exist -> add it */
-		current = tree_store_add_entry (ts.check_name);
-		return;
+		struct stat s;
+
+		if (stat (path, &s) == -1)
+			return NULL;
+
+		if (!S_ISDIR (s.st_mode))
+			return NULL;
+		
+		current = tree_store_add_entry (path);
+		ts.check_name = strdup (path);
+
+		return current;
 	}
+
+	ts.check_name = strdup (path);
+	
+	retval = current;
 	
 	/* Mark old subdirectories for delete */
 	ts.check_start = current->next;
@@ -561,6 +589,17 @@ tree_store_start_check (void)
 		current->mark = 1;
 		current = current->next;
 	}
+
+	return retval;
+}
+
+tree_entry *
+tree_store_start_check_cwd (void)
+{
+	char buffer [MC_MAXPATHLEN];
+	
+	mc_get_current_wd (buffer, MC_MAXPATHLEN);
+	return tree_store_start_check (buffer);
 }
 
 /* Delete subdirectories which still have the deletion mark */
@@ -585,27 +624,45 @@ tree_store_end_check (void)
 		if (old->mark)
 			remove_entry (old);
 	}
+
+	free (ts.check_name);
 }
 
-void
+tree_entry *
 tree_store_rescan (char *dir)
 {
 	DIR *dirp;
 	struct dirent *dp;
 	struct stat buf;
+	tree_entry *entry;
+	
+	entry = tree_store_start_check (dir);
 
-	tree_store_start_check ();
-
-	dirp = opendir (dir);
+	if (!entry)
+		return NULL;
+	
+	dirp = mc_opendir (dir);
 	if (dirp){
-		for (dp = readdir (dirp); dp; dp = readdir (dirp)){
-			lstat (dp->d_name, &buf);
-			if (S_ISDIR (buf.st_mode))
-				tree_store_mark_checked (dp->d_name);
+		for (dp = mc_readdir (dirp); dp; dp = mc_readdir (dirp)){
+			char *full_name;
+
+			if (dp->d_name [0] == '.' &&
+			    dp->d_name [1] == 0 || (dp->d_name [1] == '.' && dp->d_name [2] == 0))
+				continue;
+
+			full_name = concat_dir_and_file (dir, dp->d_name);
+			if (lstat (full_name, &buf) != -1){
+				if (S_ISDIR (buf.st_mode))
+					tree_store_mark_checked (dp->d_name);
+			}
+			free (full_name);
 		}
-		closedir (dirp);
+		mc_closedir (dirp);
 	}
 	tree_store_end_check ();
+	entry->scanned = 1;
+
+	return entry;
 }      
 
 static Hook *remove_entry_hooks;
@@ -628,4 +685,59 @@ tree_store_notify_remove (tree_entry *entry)
 		r (entry, p->hook_data);
 		p = p->next;
 	}
+}
+
+tree_scan *
+tree_store_opendir (char *path)
+{
+	tree_entry *entry;
+	tree_scan *scan;
+
+	entry = tree_store_whereis (path);
+	if (!entry || (entry && !entry->scanned)){
+		entry = tree_store_rescan (path);
+
+		if (!entry)
+			return NULL;
+	}
+	
+	scan = xmalloc (sizeof (tree_scan), "");
+	scan->base = entry;
+	scan->current = entry->next;
+	scan->sublevel = entry->next->sublevel;
+	
+	scan->base_dir_len = strlen (path);
+	return scan;
+}
+
+tree_entry *
+tree_store_readdir (tree_scan *scan)
+{
+	tree_entry *entry;
+	int len;
+	
+	g_assert (scan != NULL);
+
+	len = scan->base_dir_len;
+	entry = scan->current;
+	while (entry &&
+	    (strncmp (entry->name, scan->base->name, len) == 0) &&
+	    (entry->name [len] == 0 || entry->name [len] == PATH_SEP || len == 1)){
+
+		if (entry->sublevel == scan->sublevel){
+			scan->current = entry->next;
+			return entry;
+		}
+		entry = entry->next;
+	}
+
+	return NULL;
+}
+
+void
+tree_store_closedir (tree_scan *scanner)
+{
+	g_assert (scanner != NULL);
+	
+	free (scanner);
 }

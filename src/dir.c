@@ -455,7 +455,7 @@ int do_load_dir(dir_list *list, sortfn *sort, int reverse, int case_sensitive, c
     struct stat   buf;
     int dotdot_found = 0;
 
-    tree_store_start_check ();
+    tree_store_start_check_cwd ();
     
     dirp = mc_opendir (".");
     if (!dirp){
@@ -551,7 +551,7 @@ int do_reload_dir (dir_list *list, sortfn *sort, int count, int rev,
     int		  tmp_len;  /* For optimisation */
     int 	  dotdot_found = 0; 
 
-    tree_store_start_check ();
+    tree_store_start_check_cwd ();
     dirp = mc_opendir (".");
     if (!dirp) {
  	clean_dir (list, count);
