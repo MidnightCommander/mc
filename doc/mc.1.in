@@ -14,6 +14,7 @@ Unix-like operating systems.
 .\"NODE "OPTIONS"
 .\".\"DONT_SPLIT"
 .SH "OPTIONS"
+.TP
 .I "\-a"
 Disables the usage of graphic characters for line drawing.
 .TP
@@ -1857,7 +1858,6 @@ favorite editor. See the section on
 Special Settings
 .\"Special Settings"
 for more information.
-.PP
 .SH ""
 .\"NODE "Executing operating system commands"
 .SH "Executing operating system commands"
@@ -3143,7 +3143,6 @@ The directory list for the directory tree and tree view features.
 Local user-defined menu. If this file
 is present it is used instead of the home or system-wide
 applications menu.
-.PP
 .\"SKIP_SECTION"
 .SH "LICENSE"
 This program is distributed under the terms of the GNU General Public
