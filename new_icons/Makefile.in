@@ -38,7 +38,10 @@ ALLICONS = 				\
 	gnome-video-x-msvideo.png 	\
 	gnome-text-html.png		\
 	gnome-http-url.png		\
-	gnome-image-generic.png
+	gnome-image-generic.png		\
+	gnome-application-x-c-header.png	\
+	gnome-application-x-c-source.png	\
+	gnome-application-x-cc-source.png
 
 all:
 
