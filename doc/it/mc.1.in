@@ -887,7 +887,7 @@ o preprocessamento sul file.
 .B Vista Filtrata (M-!)
 .PP
 Questo tasto richiede all'utente un comando ed i suoi argomenti (l'argomento
-predefinito è il nome del file correntemente selezionato), il risultato di tale
+predefinito è il nome del file attualmente selezionato), il risultato di tale
 comando viene mostrato nel visualizzatore di file interno.
 .PP
 .B Cambia (F4)
@@ -2003,21 +2003,21 @@ Il tipo di sintassi del file corrente. Solo per la modifica menu.
 .PP
 .I "%k"
 .IP
-Il nome file di blocco.
+Nome del file di blocco.
 .PP
 .I "%e"
 .IP
-Il nome file di errore.
+Nome del file di errore.
 .PP
 .I "%m"
 .IP
-Il nome menu corrente.
+Nome del menu corrente.
 .PP
 .I "%f"
 and
 .I "%p"
 .IP
-Il nome file corrente.
+Nome del file corrente.
 .PP
 .I "%x"
 .IP
@@ -2025,11 +2025,11 @@ L'estensione del file corrente.
 .PP
 .I "%b"
 .IP
-Il nome del file corrente ma senza estensione.
+Nome del file corrente ma senza estensione.
 .PP
 .I "%d"
 .IP
-In nome della directory corrente.
+Nome della directory corrente.
 .PP
 .I "%F"
 .IP
@@ -2060,93 +2060,98 @@ saranno file marcati.
 e
 .I "%S"
 .IP
-The selected files: The tagged files if there are any. Otherwise the
-current file.
+I file selezionati se ce ne sono. Altrimenti il file corrente.
 .PP
 .I "%cd"
 .IP
-This is a special macro that is used to change the current directory
-to the directory specified in front of it.  This is used primarily as
-an interface to the
+Questa è una macro speciale usata per cambiare la directory corrente
+alla directory specificata di fronte ad essa. Usata principalmente 
+come interfaccia al
 .\"LINK2"
-Virtual File System.
+File System Virtuale.
 .\"Virtual File System"
 .PP
 .I "%view"
 .IP
-This macro is used to invoke the internal viewer.  This macro can be
-used alone, or with arguments.  If you pass any arguments to this
-macro, they should be enclosed in brackets.
+Questa macro serve per invocare il visualizzatore interno. Può essere
+usata da sola o con argomenti. Se si passa argomenti a questa macro,
+questi dovrebbero essere racchiusi da parentesi.
 .IP
-The arguments are: 
+Gli argomenti sono:
 .I ascii
-to force the viewer into ascii mode;
+per forzare il visualizzatore in modo ascii;
 .I hex
-to force the viewer into hex mode;
+per forzare il visualizzatore in modo esadecimale;
 .I nroff
-to tell the viewer that it should interpret the bold and underline
-sequences of nroff; 
+per dire al visualizzatore che deve interpretare le sequenze di
+grassetto e sottolineato di nroff;
 .I unformatted
-to tell the viewer to not interpret nroff commands for making the text
-bold or underlined.
+per dire al visualizzatore di non interpretare i comandi nroff
+per rendere il testo grassetto o sottolineato.
 .PP
 .I "%%"
 .IP
-The % character
+Il carattere % 
 .PP
-.I "%{some text}"
+.I "%{testo}"
 .IP
-Prompt for the substitution. An input box is shown and the text inside
-the braces is used as a prompt. The macro is substituted by the text
-typed by the user. The user can press ESC or F10 to cancel. This macro
-doesn't work on the command line yet.
+Visualizza una richiesta di sostituzione. Viene mostrata una finestra
+contenente il testo all'interno delle graffe. La macro viene sostituita
+dal testo immesso dall'utente. L'utente può premere ESC o F10 per annullare.
+Questa macro non funziona ancora sulla riga di comando.
 .PP
 .I "%var{ENV:default}"
 .IP
-If environment variable
+Se la variabile di ambiente 
 .I ENV
-is unset, the 
+non è impostata, la sostituzione prenderà
 .I default
-is substituted.  Otherwise, the value of
+ . Altrimenti, verrà sostituito il valore di 
 .I ENV
-is substituted.
+ .
 .PP
-.SH "  The subshell support"
-The subshell support is a compile time option, that works with the
-shells: bash, tcsh and zsh.  
+.\"NODE "  The subshell support"
+.SH "  Supporto alla subshell"
+Il supporto alla subshell è una opzione di compilazione che lavora
+con le seguenti shell: bash, tcsh e zsh.
 .PP
-When the subshell code is activated the Midnight Commander will
-spawn a concurrent copy of your shell (the one defined in the 
+Quando il codice di subshell è attivato il Midnight Commander
+genererà un processo copia concorrente della shell (quella definita
+dalla variabile
 .B SHELL
-variable and if it is not defined, then the one in the /etc/passwd
-file) and run it in a pseudo terminal, instead of invoking a new shell
-each time you execute a command, the command will be passed to the
-subshell as if you had typed it.  This also allows you to change the
-environment variables, use shell functions and define aliases that are
-valid until you quit the Midnight Commander.
+e se non è definita, prenderà quella presente nel file /etc/passwd)
+e lo eseguirà in un pseudo terminale; invece di invocare una nuova 
+shell ogniqualvolta si esegue un comando, il comando verrà passato 
+alla subshell come se lo si avesse battuto personalmente. Questo 
+permette di cambiare le variabili di ambiente, usare funzioni della
+shell e definire alias che rimangono validi fintanto che non si 
+esca dal Midnight Commander.
 .PP
-If you are using 
+Se si sta usando
 .B bash
-you can specify startup
-commands for the subshell in your ~/.mc/bashrc file and
-special keyboard maps in the ~/.mc/inputrc file.
+si può specificare comandi alla partenza della subshell nel file
+~/.mc/bashrc e mappature speciali della tastiera nel file
+~/.mc/inputrc.
 .B tcsh 
-users may specify startup commands in the ~/.mc/tcshrc file.
+gli utenti possono specificare comandi alla partenza nel file
+~/.mc/tcshrc.
 .PP
-When the subshell code is used, you can suspend applications at any
-time with the sequence C-o and jump back to the Midnight Commander, if
-you interrupt an application, you will not be able to run other
-external commands until you quit the application you interrupted.
+Quando il codice della subshell viene utilizzato, si può sospendere
+l'applicazione in ogni momento con la sequenza C-o e saltare nuovamente
+al Midnight Commander; se si interrompe un'applicazione, non si sarà 
+in grado di eseguire altri comandi esterni finché non si esce
+dall'applicazione interrotta.
 .PP
-An extra added feature of using the subshell is that the prompt
-displayed by the Midnight Commander is the same prompt that you are
-currently using in your shell.
+Una caratteristica aggiuntiva dell'usare la subshell è data dal
+fatto che il prompt mostrato dal Midnight Commander sarà lo stesso
+di quello utilizzato dalla shell.
 .PP
-The
+La sezione
 .\"LINK2"
-OPTIONS
+OPZIONI
 .\"OPTIONS"
-section has more information on how you can control the subshell code.
+contiene informazioni aggiuntive riguardo come controllare il codice
+della subshell.
 .PP
 .\"NODE "Chmod"
 .SH "Permessi"
@@ -2222,37 +2227,39 @@ Proprietario
 combinati assieme in una finestra. E' così possibile cambiare i permessi
 ed il proprietario/gruppo dei file in un sol colpo.
 .PP
-.SH "File Operations"
-When you copy, move or delete files the Midnight Commander shows the
-file operations dialog. It shows the files currently being operated on
-and there are at most three progress bars. The file bar tells how big
-part of the current file has been copied so far. The count bar tells
-how many of tagged files have been handled so far. The bytes bar tells
-how big part of total size of the tagged files has been handled so
-far. If the verbose option is off the file and bytes bars are not
-shown.
+.\"NODE "File Operations"
+.SH "Operazioni sui file"
+Quando si copia, sposta o cancella dei file il Midnight Commander
+mostra la finestra di operazioni sui file. Essa mostra i file sui cui
+si sta operando attualmente e ci possono essere fino a tre barre di
+progressione. La barra file mostra quanta parte del file corrente è
+stata copiata. La barra conteggio mostra quanti dei file selezionati
+sono stati gestiti. La barra byte comunica quanto dell'ampiezza totale 
+dei file selezionati è stata elaborato. Se l'opzione operazioni prolisse
+è deselezionata, non verranno mostrate la barra file e la barra byte.
 .PP
-There are two buttons at the bottom of the dialog. Pressing the Skip
-button will skip the rest of the current file. Pressing the Abort
-button will abort the whole operation, the rest of the files are
-skipped.
+Ci sono due bottoni sul fondo della finestra di dialogo. Premendo
+il tasto Salta si salterà il resto del file. Premendo il tasto
+Esci si bloccherà tutta l'operazione ed il resto dei file saranno
+ignorati.
 .PP
-There are three other dialogs which you can run into during the file
-operations.
+Ci sono tre altre finestre di dialogo che si possono incontrare 
+durante le operazioni sui file.
 .PP
-The error dialog informs about error conditions and has three
-choices. Normally you select either the Skip button to skip the file
-or the Abort button to abort the operation altogether. You can also
-select the Retry button if you fixed the problem from another
-terminal.
+La finestra di dialogo di errore informa circa le condizioni di
+errore ed ha tre scelte. Normalmente si seleziona il tasto
+Salta per saltare il file o Esci per bloccare l'operazione. E'
+possibile anche selezionare il tasto Riprova se nel frattempo si ha
+risolto il problema da un'altro terminale.
 .PP
-The replace dialog is shown when you attempt to copy or move a file on
-the top of an existing file. The dialog shows the dates and sizes of
-the both files. Press the Yes button to overwrite the file, the No
-button to skip the file, the alL button to overwrite all the files,
-the nonE button to never overwrite and the Update button to overwrite
-if the source file is newer than the target file. You can abort the
-whole operation by pressing the Abort button.
+La finestra di dialogo di rimpiazzo viene mostrata quando si tenta
+di copiare o spostare un file sopra un file esistente. La finestra
+mostra la data e la dimensione di tutti e due i file. Premere il 
+tasto Si per rimpiazzare il file, No per saltare il file, Tutti per
+sovrascrivere tutti i file, Nessuno per non sovrascriverli mai e
+Aggiorna per sovrascriverli solo se il file sorgente è più recente
+del file di destinazione. E' possibile bloccare l'intera operazione
+premendo il tasto Esci.
 .PP
 The recursive delete dialog is shown when you try to delete a
 directory which is not empty. Press the Yes button to delete the
