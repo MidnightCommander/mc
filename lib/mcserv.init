@@ -18,11 +18,14 @@
 # Source function library.
 . /etc/rc.d/init.d/functions
 
+RETVAL=0
+
 # See how we were called.
 case "$1" in
   start)
         echo -n "Starting mcserv services: "
 	daemon /usr/bin/mcserv -d
+	RETVAL=$?
 	touch /var/lock/subsys/mcserv
 	echo
 	;;
@@ -36,6 +39,7 @@ case "$1" in
   stop)
         echo -n "Shutting down mcserv services: "
 	killproc mcserv
+	RETVAL=$?
 	rm -f /var/lock/subsys/mcserv
 	echo
 	;;
@@ -44,5 +48,5 @@ case "$1" in
 	exit 1
 esac
 
-exit 0
+exit $RETVAL
 

@@ -1,5 +1,8 @@
 2001-07-13  Pavel Roskin  <proski@gnu.org>
 
+	* lib/mcserv.init: Fix exit status.
+	http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=44601
+
 	* lib/mc.ext.in: Anchor all regexes in the type/ rules except
 	"executable", which should follow a space. Simplify rules for
 	images. Add shell/ rule for *.info files. Fix all incorrect
