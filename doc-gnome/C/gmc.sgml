@@ -1,8 +1,8 @@
-<!doctype article PUBLIC "-//GNOME//DTD DocBook PNG Variant V1.1//EN" [
+<!DOCTYPE ARTICLE PUBLIC "-//OASIS//DTD DocBook V4.1//EN" [
 <!ENTITY INDEX SYSTEM "genindex.sgml">
 ]>
 <article id="index">
-  <artheader>
+  <articleinfo>
 
     <authorgroup>
       <author>
@@ -45,7 +45,7 @@
       </para>
     </legalnotice>
     <title>Gnome Midnight Commander Documentation</title>
-  </artheader>
+  </articleinfo>
     <sect1 id="unnamed1">
       <title>The Gnome File Manager</title>
       <para>
@@ -69,7 +69,6 @@
           <screenshot>
             <screeninfo>GMC</screeninfo>
             <graphic Format="png" Fileref="./figs/gmc1" srccredit="dcm">
-            </graphic>
           </screenshot>
         </figure>
       </para>
@@ -193,7 +192,6 @@
         <screenshot>
           <screeninfo>Rubber Band Select</screeninfo>
           <graphic format="png" Fileref="./figs/rubberband" srccredit="dcm">
-          </graphic>
         </screenshot>
       </figure>
       <para>
@@ -284,12 +282,11 @@
           <screenshot>
             <screeninfo>Move Dialog</screeninfo>
             <graphic Format="png" Fileref="./figs/gmc_move" srccredit="dcm">
-            </graphic>
           </screenshot>
         </figure>
         <indexterm>
           <primary>
-            Moving files
+            Move dialog
           </primary>
         </indexterm>
         To use the move dialog you simply type in the path where you wish to
@@ -331,7 +328,6 @@
         <screenshot>
           <screeninfo>File Properties</screeninfo>
           <graphic format="png" Fileref="./figs/fileprops" srccredit="dcm">
-          </graphic>
         </screenshot>
       </figure>
       <para>
@@ -382,7 +378,6 @@
         <screenshot>
           <screeninfo>Open With Dialog</screeninfo>
           <graphic Format="png" Fileref="./figs/open_with" srccredit="dcm">
-          </graphic>
         </screenshot>
       </figure>
     </sect1>
@@ -476,7 +471,6 @@
             <screenshot>
               <screeninfo>File Properties</screeninfo>
               <graphic format="png" Fileref="./figs/fileprops" srccredit="dcm">
-              </graphic>
             </screenshot>
           </figure>
           <itemizedlist mark="bullet">
@@ -558,7 +552,6 @@
           <screenshot>
             <screeninfo>File Display Preferences</screeninfo>
             <graphic Format="png" Fileref="./figs/gmcprops1" srccredit="dcm">
-            </graphic>
           </screenshot>
         </figure>
         <itemizedlist MARK="bullet">
@@ -623,7 +616,6 @@
           <screenshot>
             <screeninfo>Confirmation Preferences</screeninfo>
             <graphic Format="png" Fileref="./figs/gmcprops2" srccredit="dcm">
-            </graphic>
           </screenshot>
         </figure>
         <itemizedlist MARK="bullet">
@@ -675,7 +667,6 @@
           <screenshot>
             <screeninfo>VFS Preferences</screeninfo>
             <graphic Format="png" Fileref="./figs/gmcprops3" srccredit="dcm">
-            </graphic>
           </screenshot>
         </figure>
         <itemizedlist MARK="bullet">
@@ -738,7 +729,6 @@
          <screenshot>
           <screeninfo>Caching Preferences</screeninfo>
           <graphic Format="png" Fileref="./figs/gmcprops4" srccredit="dcm">
-          </graphic>
          </screenshot>
         </figure>
       <itemizedlist MARK="bullet">
@@ -815,7 +805,6 @@
            <screenshot>
 	    <screeninfo>The Desktop Dialog</screeninfo>
 	    <graphic Format="png" Fileref="./figs/gmcprops5" srccredit="dcm">
-             </graphic>
 	    </screenshot>
 	    </figure>
          <para>
@@ -864,7 +853,6 @@
       <screenshot>
        <screeninfo>The Custom View Dialog</screeninfo>
        <graphic Format="png" Fileref="./figs/gmcprops6" srccredit="dcm">
-       </graphic>
       </screenshot>
      </figure>
     <para>

@@ -1,3 +1,8 @@
+2001-05-19  Pavel Roskin  <proski@gnu.org>
+
+	* doc-gnome/C/gmc.sgml: Use DTD DocBook V4.1. Fix duplicate
+	index entry "Moving files".
+
 2001-05-18  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Use src/main.c in AC_INIT.
