@@ -77,6 +77,11 @@ application/x-applix-spreadsheet
 	edit=applix %f
 	view=applix %f
 
+application/x-applix-word
+	open=applix %f
+	edit=applix %f
+	view=applix %f
+
 application/x-compressed-tar
 	fm-open=%cd %p#utar
 	fm-view=%view{ascii} gzip -dc %f 2>/dev/null | tar tvvf -
@@ -287,6 +292,10 @@ text/x-C++:
 	icon-filename=@icondir@/gnome-application-x-cc-source.png
 
 text/x-comma-separated-values:
+	open=gnumeric %f
+	view=gnumeric %f
+
+text/tab-separated-values
 	open=gnumeric %f
 	view=gnumeric %f
 

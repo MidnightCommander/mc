@@ -1,3 +1,7 @@
+1999-07-07    <jrb@redhat.com>
+
+	* mc.keys.in.in: updated a few values.
+
 1999-07-01  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gcorba.c (corba_create_window): Ensure that the directory we
