@@ -11,22 +11,23 @@ SHELL = /bin/sh
 
 # Installation target directories & other installation stuff
 prefix = @prefix@
-exec_prefix = $(prefix)
+exec_prefix = @exec_prefix@
 binprefix =
 manprefix =
 
 builddir   = @builddir@
-bindir     = $(exec_prefix)/bin
+bindir     = @bindir@
 libdir     = $(exec_prefix)/lib/mc
 suppbindir = $(libdir)/bin
 tidir      = $(libdir)/term
 extfsdir   = $(libdir)/extfs
-icondir    = $(prefix)/share/icons/mc
-mandir     = $(prefix)/man/man1
-datadir    = $(prefix)/share
+datadir    = @datadir@
+icondir    = $(datadir)/icons/mc
 localedir  = $(datadir)/locale
+basemandir = @mandir@
+mandir     = $(basemandir)/man1
 manext     = 1
-man8dir    = $(prefix)/man/man8
+man8dir    = $(basemandir)/man8
 man8ext   = 8
 xv_bindir = @xv_bindir@
 
