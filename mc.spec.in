@@ -2,7 +2,6 @@
 %define ver     @VERSION@
 %define  RELEASE 1
 %define  rel     %{?CUSTOM_RELEASE} %{!?CUSTOM_RELEASE:%RELEASE}
-%define prefix  /usr
 
 Summary:   Midnight Commander visual shell
 Name:      mc
@@ -47,7 +46,9 @@ The GNOME version of Midnight Commander is not yet finished though. :-(
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure \
-	--prefix=%{prefix} --with-included-slang \
+	--prefix=%{_prefix} \
+	--mandir=%{_mandir} \
+	--with-included-slang \
 	--with-gnome \
         --sysconfdir=/etc
 
@@ -73,51 +74,54 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root)
 
 %doc FAQ COPYING NEWS README
-%{prefix}/bin/mc
-%{prefix}/bin/mcedit
-%{prefix}/bin/mcview
-%{prefix}/lib/mc/bin/cons.saver
-%{prefix}/lib/mc/term/*
-%{prefix}/man/man1/*
+%{_prefix}/bin/mc
+%{_prefix}/bin/mcedit
+%{_prefix}/bin/mcview
+%{_prefix}/lib/mc/bin/cons.saver
+%{_prefix}/lib/mc/term/*
+%{_mandir}/man1/*
 %config /etc/profile.d/*
-%dir %{prefix}/lib/mc/bin
-%dir %{prefix}/lib/mc/term
+%dir %{_prefix}/lib/mc/bin
+%dir %{_prefix}/lib/mc/term
 
 %files -n mc-common
 %defattr(-, root, root)
-%{prefix}/bin/mcmfmt
-%config %{prefix}/lib/mc/cedit.menu
-%config %{prefix}/lib/mc/edit.indent.rc
-%config %{prefix}/lib/mc/extfs/*
-%config %{prefix}/lib/mc/mc.ext
-%config %{prefix}/lib/mc/mc.lib
-%config %{prefix}/lib/mc/mc.menu
-%{prefix}/lib/mc/mc.hint*
-%{prefix}/lib/mc/mc.hlp*
-%{prefix}/lib/mc/syntax/*
-%{prefix}/share/locale/*/LC_MESSAGES/*
+%{_prefix}/bin/mcmfmt
+%config %{_prefix}/lib/mc/cedit.menu
+%config %{_prefix}/lib/mc/edit.indent.rc
+%config %{_prefix}/lib/mc/extfs/*
+%config %{_prefix}/lib/mc/mc.ext
+%config %{_prefix}/lib/mc/mc.lib
+%config %{_prefix}/lib/mc/mc.menu
+%{_prefix}/lib/mc/mc.hint*
+%{_prefix}/lib/mc/mc.hlp*
+%{_prefix}/lib/mc/syntax/*
+%{_prefix}/share/locale/*/LC_MESSAGES/*
 %config /etc/mc.global
-%dir %{prefix}/lib/mc
-%dir %{prefix}/lib/mc/extfs
-%dir %{prefix}/lib/mc/syntax
+%dir %{_prefix}/lib/mc
+%dir %{_prefix}/lib/mc/extfs
+%dir %{_prefix}/lib/mc/syntax
 
 %files -n gmc
 %defattr(-, root, root)
-%{prefix}/bin/gmc
-%{prefix}/bin/plain-gmc
-# %{prefix}/bin/gmc-client ?
-%{prefix}/lib/mc/layout
-%{prefix}/share/gnome/help/gmc/*
-%{prefix}/share/idl/*
-%{prefix}/share/mime-info/mc.keys
-%{prefix}/share/pixmaps/mc/*
+%{_prefix}/bin/gmc
+%{_prefix}/bin/plain-gmc
+# %{_prefix}/bin/gmc-client ?
+%{_prefix}/lib/mc/layout
+%{_prefix}/share/gnome/help/gmc/*
+%{_prefix}/share/idl/*
+%{_prefix}/share/mime-info/mc.keys
+%{_prefix}/share/pixmaps/mc/*
 %config /etc/CORBA/servers/*
-%dir %{prefix}/lib/mc/desktop-scripts
-%dir %{prefix}/share/gnome/help/gmc
-# %dir %{prefix}/share/mc/templates ?
-%dir %{prefix}/share/pixmaps/mc
+%dir %{_prefix}/lib/mc/desktop-scripts
+%dir %{_prefix}/share/gnome/help/gmc
+# %dir %{_prefix}/share/mc/templates ?
+%dir %{_prefix}/share/pixmaps/mc
 
 %changelog
+* Sat Jun 09 2001 Pavel Roskin <proski@gnu.org>
+- Use %{_prefix} and %{_mandir}. Specify --mandir to configure.
+
 * Fri May 25 2001 Pavel Roskin <proski@gnu.org>
 - Change groups. Don't include locale directories. More config files.
 
