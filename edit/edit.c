@@ -48,7 +48,7 @@ int option_fill_tabs_with_spaces = 0;
 int option_return_does_auto_indent = 1;
 int option_backspace_through_tabs = 0;
 int option_fake_half_tabs = 1;
-int option_save_mode = 0;
+int option_save_mode = EDIT_QUICK_SAVE;
 int option_save_position = 1;
 int option_backup_ext_int = -1;
 int option_max_undo = 32768;
@@ -218,26 +218,31 @@ static char *
 edit_get_filter (const char *filename)
 {
     int i, l;
-    char *p;
+    char *p, *quoted_name;
     i = edit_find_filter (filename);
     if (i < 0)
 	return 0;
-    l = strlen (filename);
+    quoted_name = name_quote (filename, 0);
+    l = strlen (quoted_name);
     p = g_malloc (strlen (all_filters[i].read) + l + 2);
-    sprintf (p, all_filters[i].read, filename);
+    sprintf (p, all_filters[i].read, quoted_name);
+    g_free (quoted_name);
     return p;
 }
 
-char *edit_get_write_filter (char *writename, const char *filename)
+char *
+edit_get_write_filter (const char *write_name, const char *filename)
 {
     int i, l;
-    char *p;
+    char *p, *writename;
     i = edit_find_filter (filename);
     if (i < 0)
 	return 0;
+    writename = name_quote (write_name, 0);
     l = strlen (writename);
     p = g_malloc (strlen (all_filters[i].write) + l + 2);
     sprintf (p, all_filters[i].write, writename);
+    g_free (writename);
     return p;
 }
 
@@ -695,10 +700,8 @@ void edit_push_action (WEdit * edit, long c,...)
 	if (option_max_undo < 256)
 	    option_max_undo = 256;
 	if (edit->stack_size < option_max_undo) {
-	    t = g_malloc ((edit->stack_size * 2 + 10) * sizeof (long));
+	    t = g_realloc (edit->undo_stack, (edit->stack_size * 2 + 10) * sizeof (long));
 	    if (t) {
-		memcpy (t, edit->undo_stack, sizeof (long) * edit->stack_size);
-		g_free (edit->undo_stack);
 		edit->undo_stack = t;
 		edit->stack_size <<= 1;
 		edit->stack_size_mask = edit->stack_size - 1;

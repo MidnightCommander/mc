@@ -214,13 +214,13 @@ edit_save_file (WEdit *edit, const char *filename)
 	 * The file does not exists yet, so no safe save or
 	 * backup are necessary.
 	 */
-	this_save_mode = 0;
+	this_save_mode = EDIT_QUICK_SAVE;
     } else {
 	mc_close (fd);
 	this_save_mode = option_save_mode;
     }
 
-    if (this_save_mode > 0) {
+    if (this_save_mode != EDIT_QUICK_SAVE) {
 	char *savedir, *slashpos, *saveprefix;
 	slashpos = strrchr (filename, PATH_SEP);
 	if (slashpos) {
@@ -252,7 +252,7 @@ edit_save_file (WEdit *edit, const char *filename)
 	goto error_save;
 
 /* pipe save */
-    if ((p = (char *) edit_get_write_filter (savename, filename))) {
+    if ((p = edit_get_write_filter (savename, filename))) {
 	FILE *file;
 
 	mc_close (fd);
@@ -326,19 +326,21 @@ edit_save_file (WEdit *edit, const char *filename)
 
     if (filelen != edit->last_byte)
 	goto error_save;
-    if (this_save_mode == 2)
+    if (this_save_mode == EDIT_DO_BACKUP)
 	if (mc_rename (filename, catstrs (filename, option_backup_ext, 0))
 	    == -1)
 	    goto error_save;
-    if (this_save_mode > 0)
+    if (this_save_mode != EDIT_QUICK_SAVE)
 	if (mc_rename (savename, filename) == -1)
 	    goto error_save;
-    if (savename)
-	g_free (savename);
+    g_free (savename);
     return 1;
   error_save:
-    if (savename)
-	g_free (savename);
+/*  FIXME: Is this safe ?
+ *  if (this_save_mode != EDIT_QUICK_SAVE)
+ *	mc_unlink (savename);
+ */
+    g_free (savename);
     return 0;
 }
 
@@ -2435,7 +2437,13 @@ static void pipe_mail (WEdit *edit, char *to, char *subject, char *cc)
     FILE *p = 0;
     char *s;
 
-    s = g_strdup_printf ("mail -s \"%s\" -c \"%s\" \"%s\"", subject, cc, to);
+    to = name_quote (to, 0);
+    subject = name_quote (subject, 0);
+    cc = name_quote (cc, 0);
+    s = g_strdup_printf ("mail -s %s -c %s %s", subject, cc, to);
+    g_free (to);
+    g_free (subject);
+    g_free (cc);
 
     if (s) {
 	p = popen (s, "w");

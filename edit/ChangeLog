@@ -1,3 +1,12 @@
+2002-12-18  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* edit.h (edit_save_mode_t): New enum for file saving mode.
+	* editcmd.c (): Use edit_save_mode_t.
+	(pipe_mail): Quote to, subject and cc with name_quote().
+	* edit.c (edit_get_filter): Use quoted filename.
+	(edit_get_write_filter): Use quoted writename.
+	(edit_push_action): Use g_realloc().
+
 2002-12-16  Pavel Roskin  <proski@gnu.org>
 
 	* editcmd.c (edit_goto_cmd): Add support for negative line

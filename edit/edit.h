@@ -175,7 +175,7 @@ void edit_push_key_press (WEdit * edit);
 void edit_insert_ahead (WEdit * edit, int c);
 int edit_save_file (WEdit * edit, const char *filename);
 long edit_write_stream (WEdit * edit, FILE * f);
-char *edit_get_write_filter (char *writename, const char *filename);
+char *edit_get_write_filter (const char *writename, const char *filename);
 int edit_save_cmd (WEdit * edit);
 int edit_save_confirm_cmd (WEdit * edit);
 int edit_save_as_cmd (WEdit * edit);
@@ -300,11 +300,19 @@ extern int option_fill_tabs_with_spaces;
 extern int option_return_does_auto_indent;
 extern int option_backspace_through_tabs;
 extern int option_fake_half_tabs;
+
+typedef enum {
+    EDIT_QUICK_SAVE = 0,
+    EDIT_SAFE_SAVE,
+    EDIT_DO_BACKUP
+} edit_save_mode_t;
+
 extern int option_save_mode;
 extern int option_save_position;
 extern int option_backup_ext_int;
 extern int option_max_undo;
 extern int option_syntax_highlighting;
+extern int editor_option_check_nl_at_eof;
 
 extern int option_edit_right_extreme;
 extern int option_edit_left_extreme;
