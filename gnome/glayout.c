@@ -9,6 +9,7 @@
 #include "x.h"
 #include <stdio.h>
 #include <sys/stat.h>
+#include <unistd.h>
 #include "dir.h"
 #include "panel.h"
 #include "gscreen.h"
@@ -24,6 +25,9 @@
 #include "setup.h"
 #include "../vfs/vfs.h"
 #include "gprefs.h"
+
+
+
 #define UNDEFINED_INDEX -1
 
 GList *containers = 0;
@@ -277,6 +281,7 @@ void configure_box (void);
 GtkCheckMenuItem *gnome_toggle_snap (void);
 GnomeUIInfo gnome_panel_new_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("_Terminal"), N_("Launch a new terminal in the current directory"), NULL},
+	/* If this ever changes, make sure you update create_new_menu accordingly. */
 	{ GNOME_APP_UI_ITEM, N_("_Directory..."), N_("Creates a new directory"), mkdir_cmd },
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
@@ -455,8 +460,62 @@ create_new_menu (GnomeApp *app, WPanel *panel)
 {
 	gint pos;
 	GtkWidget *shell = NULL;
+	gchar *file, *file2, *test;
+	DIR *dir;
+	struct stat filedata;
+	struct dirent *dirstruc;
+	GnomeDesktopEntry *gde;
+	GtkWidget *menu;
+	
+	/* what do we insert???  We check ${PREFIX}/share/gmc/templates for all .desktop files.
+	 * We then add them to the menu, calling their exec script to launch the new app. */
+	file = gnome_datadir_file ("mc/templates");
+	if (file == NULL) {
+		return;
+	}
+
+	dir = opendir (file);
+	if (dir == NULL) {
+		g_free (file);
+		return;
+	}
+	
+	
 	shell = gnome_app_find_menu_pos (app->menubar, _("File/New/Directory..."), &pos);
-	/*gtk_menu_shell_insert*/
+	menu = gtk_menu_item_new ();
+	gtk_widget_show (menu);
+	gtk_menu_shell_insert (GTK_MENU_SHELL (shell), menu, pos++);
+
+	if (shell == NULL)
+		return;
+	while ((dirstruc = readdir (dir)) != NULL) {
+		if (dirstruc->d_name[0] == '.')
+			continue;
+		file2 = g_concat_dir_and_file (file, dirstruc->d_name);
+		if ((stat (file2, &filedata) != -1) && (S_ISREG (filedata.st_mode))) {
+			gde = gnome_desktop_entry_load (file2);
+			test = rindex(dirstruc->d_name, '.');
+			if (test == NULL || gde == NULL || strcmp (test, ".desktop")) {
+				g_free (file2);
+				continue;
+			}
+			if (!gnome_is_program_in_path (gde->tryexec)) {
+				g_free (file2);
+				g_print ("yes!\n");
+				continue;
+			}
+			menu = gtk_menu_item_new_with_label (gde->name);
+			gtk_widget_show (menu);
+			gtk_menu_shell_insert (GTK_MENU_SHELL (shell), menu, pos++);
+			/* This is really bad, but it works. */
+			if (gde->comment)
+				gtk_object_set_data (GTK_OBJECT (menu), "apphelper_statusbar_hint",
+						     gde->comment);
+			gtk_signal_connect (GTK_OBJECT (menu), "activate", GTK_SIGNAL_FUNC (gnome_run_new),
+					    gde);
+		}
+		g_free (file2);
+	}
 }
 WPanel *
 create_container (Dlg_head *h, char *name, char *geometry)
@@ -487,7 +546,7 @@ create_container (Dlg_head *h, char *name, char *geometry)
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 0);
 	gnome_app_set_contents (GNOME_APP (app), vbox);
 	gnome_app_create_menus_with_data (GNOME_APP (app), gnome_panel_menu, panel);
-	create_new_menu (app, panel);
+	create_new_menu (GNOME_APP (app), panel);
 	/*
 	 * I am trying to unclutter the screen, so this toolbar is gone now
 	 */

@@ -266,6 +266,7 @@ install_mx: all
 	$(mcsrcdir)/xmkdir $(DESTDIR)$(icondir)
 	$(mcsrcdir)/xmkdir $(DESTDIR)$(libdir)
 	$(mcsrcdir)/xmkdir $(DESTDIR)$(bindir)
+	$(mcsrcdir)/xmkdir $(gnewdir)
 	$(INSTALL_PROGRAM) gmc $(DESTDIR)$(bindir)/$(binprefix)gmc
 	$(INSTALL_PROGRAM) corba-gmc $(DESTDIR)$(bindir)/$(binprefix)corba-gmc
 	for I in $(ICONS); \
@@ -275,7 +276,7 @@ install_mx: all
 	$(INSTALL_DATA) mc.keys $(DESTDIR)$(datadir)/mime-info
 	$(mcsrcdir)/xmkdir $(DESTDIR)$(corbadir)
 	$(INSTALL_DATA) gmc.gnorba $(DESTDIR)$(corbadir)
-
+	$(INSTALL_DATA) gimp.image.desktop application.x-gnumeric.desktop $(gnewdir)
 uninstall: 
 	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)gmc
 	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)corba-gmc
@@ -285,6 +286,7 @@ uninstall:
 	-$(RMF) $(DESTDIR)$(libdir)/layout
 	-$(RMF) $(DESTDIR)$(datadir)/mime-info/mc.keys
 	-rmdir $(DESTDIR)$(datadir)/mime-info
+	-$(RMF) $(gnewdir)
 
 depend dep: @gmcdep@
 

@@ -645,4 +645,8 @@ gnome_open_files (GtkWidget *widget, WPanel *panel)
 	g_list_free (later);
 	   
 }
-
+void
+gnome_run_new (GtkWidget *widget, GnomeDesktopEntry *gde)
+{
+	gnome_desktop_entry_launch (gde);
+}

@@ -1,5 +1,10 @@
 1999-01-13  Jonathan Blandford  <jrb@redhat.com>
 
+	* glayout.c (create_container): finished the New->menu.  Looks
+	better now.
+
+	* gcmd.c (gnome_run_new): new function.
+
 	* glayout.c (create_container): beginnings of the New-> menu.  It
 	doesn't have much yet, hopefully we'll have a good way to let apps
 	register themselves with it.

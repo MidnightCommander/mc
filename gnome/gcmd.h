@@ -17,5 +17,6 @@ void gnome_select_all_cmd (GtkWidget *widget, WPanel *panel);
 void gnome_filter_cmd (GtkWidget *widget, WPanel *panel);
 void gnome_external_panelize (GtkWidget *widget, WPanel *panel);
 void gnome_open_files (GtkWidget *widget, WPanel *panel);
+void gnome_run_new (GtkWidget *widget, GnomeDesktopEntry *gde);
 
 #endif /* __GCMD_H */
