@@ -421,15 +421,18 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 
 	switch(buffer[0]) {
 	case ':': {
-		      /* char *c; */
 		      if (!strcmp(buffer+1, ".") || !strcmp(buffer+1, ".."))
 			  break;  /* We'll do . and .. ourself */
 		      ent->name = g_strdup(buffer+1); 
-		      /* if ((c=strchr(ent->name, ' ')))
-			  *c = 0; / * this is ugly, but we cannot handle " " in name */
 		      break;
 	          }
-	case 'S': ST.st_size = atoi(buffer+1); break;
+	case 'S':
+#ifdef HAVE_ATOLL
+	    ST.st_size = (off_t) atoll (buffer+1);
+#else
+	    ST.st_size = (off_t) atof (buffer+1);
+#endif
+	    break;
 	case 'P': {
 	              int i;
 		      if ((i = vfs_parse_filetype(buffer[1])) ==-1)
