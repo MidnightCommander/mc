@@ -316,7 +316,7 @@ uninstall:
 distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 
 distdir:
-	for I in $(DISTVFS); do $(CP) $(srcdir)/$$I $(distdir); done
+	for I in $(DISTVFS); do $(CP) $(srcdir)/$$I $(distdir) || exit 1; done
 	mkdir $(distdir)/extfs
 	(cd extfs && $(MAKE) $(AM_MAKEFLAGS) top_distdir=../$(top_distdir) \
 		distdir=../$(distdir)/extfs distdir) || exit 1
@@ -329,14 +329,14 @@ distdir:
 	mkdir $(distdir)/samba/tests
 	mkdir $(distdir)/samba/ubiqx
 
-	for I in $(SAMBA_DIST_TOPLEVEL); do $(CP) $(srcdir)/samba/$$I $(distdir)/samba; done
-	for I in $(SAMBA_DIST_INCLUDE); do $(CP) $(srcdir)/samba/include/$$I $(distdir)/samba/include; done
-	for I in $(SAMBA_DIST_LIB); do $(CP) $(srcdir)/samba/lib/$$I $(distdir)/samba/lib; done
-	for I in $(SAMBA_DIST_LIBSMB); do $(CP) $(srcdir)/samba/libsmb/$$I $(distdir)/samba/libsmb; done
-	for I in $(SAMBA_DIST_PARAM); do $(CP) $(srcdir)/samba/param/$$I $(distdir)/samba/param; done
-	for I in $(SAMBA_DIST_SMBWRAPPER); do $(CP) $(srcdir)/samba/smbwrapper/$$I $(distdir)/samba/smbwrapper; done
-	for I in $(SAMBA_DIST_TESTS); do $(CP) $(srcdir)/samba/tests/$$I $(distdir)/samba/tests; done
-	for I in $(SAMBA_DIST_UBIQX); do $(CP) $(srcdir)/samba/ubiqx/$$I $(distdir)/samba/ubiqx; done
+	for I in $(SAMBA_DIST_TOPLEVEL); do $(CP) $(srcdir)/samba/$$I $(distdir)/samba || exit 1; done
+	for I in $(SAMBA_DIST_INCLUDE); do $(CP) $(srcdir)/samba/include/$$I $(distdir)/samba/include || exit 1; done
+	for I in $(SAMBA_DIST_LIB); do $(CP) $(srcdir)/samba/lib/$$I $(distdir)/samba/lib || exit 1; done
+	for I in $(SAMBA_DIST_LIBSMB); do $(CP) $(srcdir)/samba/libsmb/$$I $(distdir)/samba/libsmb || exit 1; done
+	for I in $(SAMBA_DIST_PARAM); do $(CP) $(srcdir)/samba/param/$$I $(distdir)/samba/param || exit 1; done
+	for I in $(SAMBA_DIST_SMBWRAPPER); do $(CP) $(srcdir)/samba/smbwrapper/$$I $(distdir)/samba/smbwrapper || exit 1; done
+	for I in $(SAMBA_DIST_TESTS); do $(CP) $(srcdir)/samba/tests/$$I $(distdir)/samba/tests || exit 1; done
+	for I in $(SAMBA_DIST_UBIQX); do $(CP) $(srcdir)/samba/ubiqx/$$I $(distdir)/samba/ubiqx || exit 1; done
 	
 depend dep: mcdep
 

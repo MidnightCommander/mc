@@ -1,3 +1,7 @@
+2000-09-05  Pavel Roskin  <proski@gnu.org>
+
+	* Make-mc.in: don't ignore errors in the distdir target
+
 2000-08-24  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/Makefile.am: new file
