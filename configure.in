@@ -65,9 +65,8 @@ no)
 esac])
 AC_FUNC_MMAP
 
-if test "x$ALL_LINGUAS" = x; then
-ALL_LINGUAS="az be bg ca cs da de el es es_ES eu fi fr hu it ja ko lv nl no pl pt pt_BR ro ru sk sl sv uk ta tr wa zh_CN zh_TW"
-fi
+ALL_LINGUAS="az be bg ca cs da de el es es_ES eu fi fr hu it ja ko lv \
+nl no pl pt pt_BR ro ru sk sl sv uk ta tr wa zh_CN zh_TW"
 
 dnl
 dnl Internationalization
