@@ -1,26 +1,47 @@
-Changes made after 4.6.0-pre1.
+Version 4.6.0-pre2.
 
-- Polish manual has been added.
-- glib is now properly detected on FreeBSD.
-- New syntax rules - RPM specfile.
-- Support for termnet and HSC firewall has heen removed.
-- mc now creates its own temporary directory, separate for each user.
-- Support for glib 2.0.x has been added.
-- Mouse wheel is supported in the internal editor and viewer in xterm
-  compatible terminals that implement wheel events correctly.
-- mc now complies with the Filesystem Hierarchy Standard and uses
-  @prefix@/share/mc for the data files.
-- Editor shows control characters in the caret notation.
-- Fixed segmentation fault when displaying messages from background
-  process.
-- Screen library is now selected by the option --with-screen.
-- Included S-Lang library has been updated to version 1.4.5.
-- Fixed viewing and editing files on mcfs.
-- When using support for setting the last working directory of mc in the
-  parent shell, "mc" is now an alias in all shells, not a function.
-- Behavior of Alt-O is more intuitive now.
-- Internal editor now saves the cursor position in the file.
-- X11 support is now enabled by default, use --without-x to disable.
+Release candidate for 4.6.0.
+
+- Security.
+	- mc now creates its own temporary directory /tmp/mc-$USER.
+	  If it fails or permissions are wrong, the user is warned.
+
+- Portability.
+	- mc now complies with the Filesystem Hierarchy Standard and
+	  uses @prefix@/share/mc for the data files.
+	- Support for glib 2.0.x has been added.
+	- glib 1.2 is now properly detected on FreeBSD.
+
+- Core functionality.
+	- Fixed segmentation fault when displaying messages from
+	  background operations.
+	- When using support for setting the last working directory of
+	  mc in the parent shell, "mc" is now an alias in all shells,
+	  not a function.  The "-P" option needs an argument now.
+	- Alt-O sets the same directory on the other panel.
+
+- Screen libraries.
+	- Screen library is now selected by the option --with-screen.
+	- X11 support is enabled by default, use --without-x to disable.
+	- The keycode now contains information about all screen
+	  modifiers.  This allows to implement more shortcuts, but this
+	  work has just begun.
+	- Included S-Lang library has been updated to version 1.4.5.
+	- Mouse wheel is supported in the internal editor and viewer in
+	  xterm compatible terminals that implement wheel events.
+
+- Editor.
+	- Internal editor now saves the cursor position in the file.
+	- New syntax rules - RPM specfile, m4.
+	- Editor shows control characters in the caret notation.
+
+- VFS.
+	- Most extfs scripts have been reviewed and improved.
+	- Fixed viewing and editing files on mcfs.
+	- Support for termnet and HSC firewall has been removed.
+
+- Documentation.
+	- Polish manual has been added.
 
 
 Version 4.6.0-pre1.
