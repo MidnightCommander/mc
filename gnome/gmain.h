@@ -31,7 +31,7 @@ void x_list_insert      	     (WListbox *l, WLEntry *p, WLEntry *e);
 void x_redefine_label   	     (WButtonBar *bb, int idx);
 void x_add_widget       	     (Dlg_head *h, Widget_Item *w);
 int  translate_gdk_keysym_to_curses (GdkEventKey *event);
-void gnome_init_panels ();
+void gnome_init_panels (void);
 void bind_gtk_keys (GtkWidget *w, Dlg_head *h);
 WPanel *new_panel_at (const char *dir);
 WPanel *new_panel_with_geometry_at (const char *dir, const char *geometry);

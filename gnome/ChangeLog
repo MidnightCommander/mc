@@ -1,3 +1,7 @@
+2001-07-30  Pavel Roskin  <proski@gnu.org>
+
+	* gmain.h: Fix declaration of gnome_init_panels().
+
 2001-07-28  Pavel Roskin  <proski@gnu.org>
 
 	* gmain.c (x_init_dlg): Don't install handler for "delete_event"
