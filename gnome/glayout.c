@@ -360,8 +360,6 @@ GnomeUIInfo gnome_panel_commands_menu [] = {
 #ifdef WITH_BACKGROUND
 	GNOMEUIINFO_ITEM_NONE( N_("_Background jobs..."),   N_("List of background operations"), jobs_cmd ),
 #endif
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_ITEM_NONE( N_("Recreate desktop devices"), N_("Recreates the devices shown on the desktop"), desktop_setup_devices ),
         GNOMEUIINFO_END
 };
 

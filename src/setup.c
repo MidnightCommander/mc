@@ -65,6 +65,7 @@ extern int ftpfs_first_cd_then_ls;
 #endif
 
 #ifdef HAVE_GNOME
+extern int tree_panel_visible;
 extern int we_can_afford_the_speed;
 #endif
 

@@ -1,3 +1,8 @@
+1999-02-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* setup.c: Declare extern int tree_panel_visible for the GNOME
+	version.
+
 1999-02-17  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* dir.c (if_link_is_exe): Made this function take in a directory

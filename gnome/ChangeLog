@@ -1,3 +1,29 @@
+1999-02-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gmount.c (gmount_setup_devices): New function to set up the
+	mountable devices on the desktop directory.  Moved over from
+	gdesktop.c.  Added an argument that specifies whether it should
+	clean up the device list first.
+	(cleanup_devices): Delete the metadata for the devices.
+	(setup_devices): Free the list of device names.  Use the proper
+	icon for each device.
+	(create_device_link): Better error checking.
+
+	* gdesktop.c (create_desktop_dir): Use gmount_setup_devices().
+	(desktop_icon_info_destroy): Made static.
+	(desktop_popup_items): The command for rescanning mountable
+	devices should go here.
+	(handle_rescan_devices): Call gmount and refresh the desktop.
+
+	* gdesktop.h: Removed the declaration of tree_panel_visible, since
+	it has nothing to do with the desktop.
+
+	* glayout.c (gnome_panel_commands_menu): Removed the recreate
+	devices command.
+
+	* gdesktop.c (desktop_popup_items): Added a new command to create
+	a file window.
+
 1999-02-17  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (do_mount_umount): Removed unused variable.

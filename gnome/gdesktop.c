@@ -24,10 +24,10 @@
 #include "gmain.h"
 #include "gmetadata.h"
 #include "gdnd.h"
+#include "gmount.h"
 #include "gpopup.h"
 #include "../vfs/vfs.h"
 #include "main.h"
-#include "gmount.h"
 
 /* Name of the user's desktop directory (i.e. ~/desktop) */
 #define DESKTOP_DIR_NAME "desktop"
@@ -289,6 +289,18 @@ desktop_icon_info_place (DesktopIconInfo *dii, int xpos, int ypos)
 	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
 	gmeta_set_icon_pos (filename, dii->x, dii->y);
 	g_free (filename);
+}
+
+/* Destroys the specified desktop icon */
+static void
+desktop_icon_info_destroy (DesktopIconInfo *dii)
+{
+	gtk_widget_destroy (dii->dicon);
+	remove_from_slot (dii);
+
+	g_free (dii->url);
+	g_free (dii->filename);
+	g_free (dii);
 }
 
 /* Destroys all the current desktop icons */
@@ -1725,23 +1737,6 @@ desktop_icon_update_url (DesktopIconInfo *dii)
 	g_free (fullname);
 }
 
-/**
- * desktop_icon_info_destroy:
- * @dii: The desktop icon to destroy
- *
- * Destroys the specified desktop icon.
- **/
-void
-desktop_icon_info_destroy (DesktopIconInfo *dii)
-{
-	gtk_widget_destroy (dii->dicon);
-	remove_from_slot (dii);
-
-	g_free (dii->url);
-	g_free (dii->filename);
-	g_free (dii);
-}
-
 /* Creates the layout information array */
 static void
 create_layout_info (void)
@@ -1753,110 +1748,8 @@ create_layout_info (void)
 	layout_slots = g_new0 (struct layout_slot, layout_cols * layout_rows);
 }
 
-static void
-setup_trashcan (char *desktop_dir)
-{
-	char *trashcan_dir;
-	char *trash_pix;
-	
-	trashcan_dir = g_concat_dir_and_file (desktop_directory, _("Trashcan"));
-	trash_pix = g_concat_dir_and_file (ICONDIR, "trash.xpm");
-		
-	if (!g_file_exists (trashcan_dir)){
-		mkdir (trashcan_dir, 0777);
-		gnome_metadata_set (
-			trashcan_dir, "icon-filename", strlen (trash_pix) + 1, trash_pix);
-	}
-	
-	g_free (trashcan_dir);
-	g_free (trash_pix);
-}
-
-static void
-setup_devices (void)
-{
-	GList *list = get_list_of_mountable_devices ();
-	GList *l;
-	int floppy = 0;
-	int generic = 0;
-	int hd = 0;
-	char buffer [60];
-	const char *device_icon = ICONDIR "i-blockdev.png";
-	
-	if (!list)
-		return;
-
-	/* Create the links */
-	for (l = list; l; l = l->next){
-		char *full;
-		char *name = l->data;
-		char *short_dev_name = x_basename (name);
-		char *format = NULL;
-		int count;
-		
-		if (strncmp (short_dev_name, "fd", 2) == 0){
-			format = _("floppy %d");
-			count = floppy++;
-		} else if (strncmp (short_dev_name, "hd", 2) == 0 || strncmp (short_dev_name, "sd", 2) == 0){
-			format = _("disk %d");
-			count = hd++;
-		} else {
-			format = _("device %d");
-			count = generic++;
-		}
-		
-		g_snprintf (buffer, sizeof (buffer), format, count);
-		
-		full = g_concat_dir_and_file (desktop_directory, short_dev_name);
-		symlink (name, full);
-		
-		gnome_metadata_set (
-			full, "icon-filename",
-			strlen (device_icon) + 1, device_icon);
-		gnome_metadata_set (
-			full, "icon-caption",
-			strlen (buffer)+1, buffer);
-		gnome_metadata_set (
-			full, "is-desktop-device",
-			1, &buffer [0]);
-		g_free (full);
-	}
-	
-	/* release the list */
-	for (l = list; l; l = l->next)
-		g_free (l->data);
-	g_list_free (l);
-}
-
-void
-desktop_setup_devices ()
-{
-	DIR *dir;
-	struct dirent *dent;
-	
-	dir = mc_opendir (desktop_directory);
-	if (!dir)
-		return;
-	while ((dent = mc_readdir (dir)) != NULL){
-		char *full = g_concat_dir_and_file (desktop_directory, dent->d_name);
-		int size;
-		char *buf;
-		
-		if (gnome_metadata_get (full, "is-desktop-device", &size, &buf) == 0){
-			mc_unlink (full);
-			g_free (buf);
-		}
-		g_free (full);
-	}
-	mc_closedir (dir);
-	
-	setup_devices ();
-	reload_desktop_icons (FALSE, 0, 0);
-}
-
-/*
- * Check that the user's desktop directory exists, and if not, create
- * the default desktop setup.
+/* Check that the user's desktop directory exists, and if not, create the
+ * default desktop setup.
  */
 static void
 create_desktop_dir (void)
@@ -1879,15 +1772,14 @@ create_desktop_dir (void)
 		if (mc_symlink (gnome_user_home_dir, home_link_name) != 0) {
 			message (FALSE,
 				 _("Warning"),
-				 _("Could not symlink %s to %s; will not have initial desktop icons."),
+				 _("Could not symlink %s to %s; "
+				   "will not have initial desktop icons."),
 				 gnome_user_home_dir, home_link_name);
 		}
 		g_free (home_link_name);
 
-		setup_devices ();
+		gmount_setup_devices (FALSE);
 	}
-
-/*	setup_trashcan (desktop_directory); */
 }
 
 /* Property placed on target windows */
@@ -2185,6 +2077,21 @@ handle_arrange_icons (GtkWidget *widget, gpointer data)
 	arrange_desktop_icons ();
 }
 
+/* Callback for creating a new panel window */
+static void
+handle_new_window (GtkWidget *widget, gpointer data)
+{
+	new_panel_at (gnome_user_home_dir);
+}
+
+/* Callback for rescanning the mountable devices */
+static void
+handle_rescan_devices (GtkWidget *widget, gpointer data)
+{
+	gmount_setup_devices (TRUE);
+	reload_desktop_icons (FALSE, 0, 0);
+}
+
 /* Callback for rescanning the desktop directory */
 static void
 handle_rescan_desktop (GtkWidget *widget, gpointer data)
@@ -2195,6 +2102,10 @@ handle_rescan_desktop (GtkWidget *widget, gpointer data)
 /* The popup menu for the desktop */
 static GnomeUIInfo desktop_popup_items[] = {
 	GNOMEUIINFO_ITEM_NONE (N_("Arrange Icons"), NULL, handle_arrange_icons),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_ITEM_NONE (N_("Create New Window"), NULL, handle_new_window),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_ITEM_NONE (N_("Rescan Mountable Devices"), NULL, handle_rescan_devices),
 	GNOMEUIINFO_ITEM_NONE (N_("Rescan Desktop"), NULL, handle_rescan_desktop),
 	GNOMEUIINFO_END
 };

@@ -2,7 +2,8 @@
  *
  * Copyright (C) 1998-1999 The Free Software Foundation
  *
- * Author: Miguel de Icaza <miguel@nuclecu.unam.mx>
+ * Authors: Miguel de Icaza <miguel@nuclecu.unam.mx>
+ *          Federico Mena <federico@nuclecu.unam.mx>
  */
 
 #include <config.h>
@@ -82,10 +83,19 @@ void free (void *ptr);
 #define MOUNTED_GETMNTTBL
 #endif
 
-#include <glib.h>
+#include <dirent.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <gnome.h>
+#include "../vfs/vfs.h"
+#include "dialog.h"
+#include "gdesktop.h"
 #include "gmount.h"
+#include "util.h"
+
 
 #ifdef MOUNTED_GETMNTENT1
+
 gboolean
 is_block_device_mountable (char *devname)
 {
@@ -171,3 +181,118 @@ is_block_device_mounted (char *devname)
 }
 
 #endif
+
+
+/* Cleans up the desktop directory from device files */
+static void
+cleanup_devices (void)
+{
+	DIR *dir;
+	struct dirent *dent;
+
+	dir = mc_opendir (desktop_directory);
+	if (!dir) {
+		g_warning ("Could not clean up desktop devices");
+		return;
+	}
+
+	while ((dent = mc_readdir (dir)) != NULL) {
+		char *full_name;
+		char *buf;
+		int size;
+
+		full_name = g_concat_dir_and_file (desktop_directory, dent->d_name);
+		if (gnome_metadata_get (full_name, "is-desktop-device", &size, &buf) == 0) {
+			mc_unlink (full_name);
+			gnome_metadata_delete (full_name);
+			g_free (buf);
+		}
+		g_free (full_name);
+	}
+
+	mc_closedir (dir);
+}
+
+/* Creates the desktop link for the specified device */
+static void
+create_device_link (char *dev_name, char *short_dev_name, char *caption, char *icon)
+{
+	char *full_name;
+
+	full_name = g_concat_dir_and_file (desktop_directory, short_dev_name);
+	if (mc_symlink (dev_name, full_name) != 0) {
+		message (FALSE,
+			 _("Warning"),
+			 _("Could not symlink %s to %s; "
+			   "will not have such a desktop device icon."),
+			 dev_name, full_name);
+		return;
+	}
+
+	gnome_metadata_set (full_name, "icon-filename", strlen (icon) + 1, icon);
+	gnome_metadata_set (full_name, "icon-caption", strlen (caption) + 1, caption);
+	gnome_metadata_set (full_name, "is-desktop-device", 1, full_name); /* hack a boolean value */
+
+	g_free (full_name);
+}
+
+/* Creates the desktop links to the mountable devices */
+static void
+setup_devices (void)
+{
+	GList *list, *l;
+	int floppy_count;
+	int hd_count;
+	int generic_count;
+
+	list = get_list_of_mountable_devices ();
+
+	floppy_count = hd_count = generic_count = 0;
+
+	for (l = list; l; l = l->next) {
+		char *dev_name;
+		char *short_dev_name;
+		char *format;
+		char *icon;
+		int count;
+		char buffer[128];
+
+		dev_name = l->data;
+		short_dev_name = x_basename (dev_name);
+
+		/* Create the format/icon/count.  This could use better heuristics. */
+
+		if (strncmp (short_dev_name, "fd", 2) == 0) {
+			format = _("Floppy %d");
+			icon = "i-floppy.png";
+			count = floppy_count++;
+		} else if (strncmp (short_dev_name, "hd", 2) == 0
+			   || strncmp (short_dev_name, "sd", 2) == 0) {
+			format = _("Disk %d");
+			icon = "i-blockdev.png";
+			count = hd_count++;
+		} else {
+			format = _("Device %d");
+			icon = "i-blockdev.png";
+			count = generic_count++;
+		}
+
+		g_snprintf (buffer, sizeof (buffer), format, count);
+
+		/* Create the actual link */
+
+		create_device_link (dev_name, short_dev_name, buffer, icon);
+		g_free (l->data);
+	}
+
+	g_free (list);
+}
+
+void
+gmount_setup_devices (int cleanup)
+{
+	if (cleanup)
+		cleanup_devices ();
+
+	setup_devices ();
+}
