@@ -44,9 +44,11 @@ context default
     keyword whole CONNECT yellow
     keyword whole CONNECTION yellow
     keyword whole CONSTRAINT yellow
+    keyword whole Constraint yellow
     keyword whole CONSTRAINTS yellow
     keyword whole CONTINUE yellow
     keyword whole CORRESPONDING yellow
+    keyword whole COPY yellow
     keyword whole CREATE yellow
     keyword whole CROSS yellow
     keyword whole CURRENT yellow
@@ -55,6 +57,7 @@ context default
     keyword whole CURRENT_TIMESTAMP yellow
     keyword whole CURRENT_USER yellow
     keyword whole CURSOR yellow
+    keyword whole DATABASE yellow
     keyword whole DATE yellow
     keyword whole DAY yellow
     keyword whole DEALLOCATE yellow
@@ -75,6 +78,7 @@ context default
     keyword whole DOUBLE yellow
     keyword whole DROP yellow
     keyword whole ELSE yellow
+    keyword whole ENCODING yellow
     keyword whole END yellow
     keyword whole END-EXEC yellow
     keyword whole ESCAPE yellow
@@ -124,6 +128,7 @@ context default
     keyword whole ISOLATION yellow
     keyword whole JOIN yellow
     keyword whole KEY yellow
+    keyword whole Key yellow
     keyword whole LANGUAGE yellow
     keyword whole LAST yellow
     keyword whole LEADING yellow
@@ -167,6 +172,7 @@ context default
     keyword whole PREPARE yellow
     keyword whole PRESERVE yellow
     keyword whole PRIMARY yellow
+    keyword whole Primary yellow
     keyword whole PRIOR yellow
     keyword whole PRIVILEGES yellow
     keyword whole PROCEDURE yellow
@@ -185,6 +191,7 @@ context default
     keyword whole SECOND yellow
     keyword whole SECTION yellow
     keyword whole SELECT yellow
+    keyword whole SEQUENCE yellow
     keyword whole SESSION yellow
     keyword whole SESSION_USER yellow
     keyword whole SET yellow
@@ -199,6 +206,7 @@ context default
     keyword whole SUBSTRING yellow
     keyword whole SYSTEM_USER yellow
     keyword whole TABLE yellow
+    keyword whole TEMPLATE yellow
     keyword whole TEMPORARY yellow
     keyword whole THEN yellow
     keyword whole TIME yellow
@@ -229,6 +237,7 @@ context default
     keyword whole WORK yellow
     keyword whole WRITE yellow
     keyword whole YEAR yellow
+    keyword whole USER yellow
     keyword whole ZONE yellow
 											    
     keyword whole absolute yellow
@@ -429,6 +438,7 @@ context default
     keyword whole system_user yellow
     keyword whole table yellow
     keyword whole temporary yellow
+    keyword whole text yellow
     keyword whole then yellow
     keyword whole time yellow
     keyword whole timestamp yellow
@@ -477,6 +487,27 @@ context default
     keyword , brightcyan
     keyword ; brightcyan
     keyword . white
+
+# PostgreSQL specific
+    keyword CREATEDB white
+    keyword NOCREATEDB white
+    keyword CREATEUSER white
+    keyword NOCREATEUSER white
+    keyword PASSWORD white
+    keyword SYSID white
+    
+    keyword nextval white
+    keyword pg_database white
+    keyword pg_group white
+    keyword pg_shadow white
+    keyword stdin white
+
+# PostgreSQL sequences 
+    keyword cache white
+    keyword increment white
+    keyword maxvalue white
+    keyword minvalue white
+    keyword start white
 
 # MySQL comment
 context linestart # \n brown
