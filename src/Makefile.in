@@ -66,7 +66,7 @@ cons.saver: cons.saver.o
 check:
 	@echo no tests are supplied.
 
-mc: $(OBJS) libvfs-mc.a @LIBSLANG@ @LIBEDIT_A@
+mc: $(OBJS) @LIBVFS@ @LIBSLANG@ @LIBEDIT_A@
 	$(CC) $(LDFLAGS) -o $@ $(OBJS) -L../vfs -L../slang -L../edit $(OURLIBS) $(LIBS) 
 
 mfmt: mfmt.o

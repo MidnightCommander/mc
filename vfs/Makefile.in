@@ -53,7 +53,7 @@ libvfs.so: $(VFSSOOBJS) libvfs.o
 
 DISTVFS = 	Makefile.in ChangeLog $(VFSSRCS) $(VFSHDRS)
 
-all: libvfs-mc.a @mcserv@
+all: @LIBVFS@ @mcserv@
 
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<
