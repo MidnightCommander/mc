@@ -21,6 +21,9 @@
  */
 
 #include <config.h>
+
+#include <errno.h>
+
 #include "edit.h"
 #include "edit-widget.h"
 
@@ -176,8 +179,9 @@ edit_file (const char *_file, int line)
 		sizeof (int));
     }
     if (!made_directory) {
-	mkdir (catstrs (home_dir, EDIT_DIR, (char *) NULL), 0700);
-	made_directory = 1;
+	char *dir = concat_dir_and_file (home_dir, EDIT_DIR);
+	made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
+	g_free (dir);
     }
 
     if (!(wedit = edit_init (NULL, LINES - 2, COLS, _file, line))) {
