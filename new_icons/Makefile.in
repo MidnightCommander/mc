@@ -30,7 +30,9 @@ ALLICONS = 			\
 	gnome-image-tiff.png	\
 	gnome-image-xbm.png	\
 	gnome-image-xpm.png	\
-	gnome-image-xwd.png
+	gnome-image-xwd.png	\
+	gnome-pack-deb.png	\
+	gnome-pack-rpm.png
 
 
 all:
