@@ -1,3 +1,8 @@
+2004-11-19  Roland Illig  <roland.illig@gmx.de>
+
+	* Makefile.am: Excluded pipethough.3 from the distribution
+	as it is currently unused.
+
 2004-11-18  Pavel Shirshov  <me@pavelsh.pp.ru>
 
 	* user.c (execute_menu_command): Revert last changes. Execute

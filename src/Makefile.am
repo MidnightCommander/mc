@@ -61,10 +61,6 @@ SRCS =	achown.c achown.h background.c background.h boxes.c boxes.h	\
 	util.c util.h utilunix.c view.c view.h vfsdummy.h widget.c	\
 	widget.h win.c win.h wtools.c wtools.h
 
-if MAINTAINER_MODE
-man_MANS=	pipethrough.3
-endif
-
 if CHARSET
 mc_SOURCES = $(SRCS) $(CHARSET_SRC)
 else
