@@ -1,3 +1,8 @@
+2001-08-14  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.lib: Add popular sequences for "home" and "end" in
+	"xterm" and "xterm-color" terminals.
+
 2001-08-13  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.ext.in: Move ls-lR.gz before generic gzip support.

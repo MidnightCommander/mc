@@ -79,6 +79,10 @@ kpppage=\eOy
 kpplus=\eOk
 kpminus=\eOm
 kpasterix=\eOj
+home=\e[1~
+home=\e[7~
+end=\e[4~
+end=\e[8~
 pgdn=\e[6~
 pgup=\e[5~
 
@@ -105,6 +109,10 @@ kpppage=\eOy
 kpplus=\eOk
 kpminus=\eOm
 kpasterix=\eOj
+home=\e[1~
+home=\e[7~
+end=\e[4~
+end=\e[8~
 pgdn=\e[6~
 pgup=\e[5~
 
