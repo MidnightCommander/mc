@@ -2207,13 +2207,15 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
 	break;
 
     case WIDGET_FOCUS:
-	current_panel = panel;
 	panel->active = 1;
-	if (mc_chdir (panel->cwd) != 0){
-	    message (1, MSG_ERROR, _(" Cannot chdir to \"%s\" \n %s "),
-		     panel->cwd, unix_error_string (errno));
-	} else
-	    subshell_chdir (panel->cwd);
+	if (current_panel != panel) {
+	    current_panel = panel;
+	    if (mc_chdir (panel->cwd) != 0) {
+		message (1, MSG_ERROR, _(" Cannot chdir to \"%s\" \n %s "),
+			 panel->cwd, unix_error_string (errno));
+	    } else
+		subshell_chdir (panel->cwd);
+	}
 
 	show_dir (panel);
 	focus_select_item (panel);
