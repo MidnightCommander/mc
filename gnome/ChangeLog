@@ -1,3 +1,11 @@
+1999-03-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-file-property-dialog.c (apply_metadata_change): Fixed
+	incorrect logic when testing whether the icon changed or not.
+	This makes icons change correctly again.
+
+	* Makefile.in (GNOMEHDRS): Added gdesktop-init.h.
+
 1999-03-23  Jonathan Blandford  <jrb@redhat.com>
 
 	* gscreen.c (panel_tree_drag_motion): lets try to cut down on the flickers.

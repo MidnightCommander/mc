@@ -1365,7 +1365,7 @@ apply_metadata_change (GnomeFilePropertyDialog *fpd)
 	/*gtk_entry_get_text (GTK_ENTRY (gnome_icon_entry_gtk_entry (GNOME_ICON_ENTRY (fpd->button))));*/
 	
 	if (text) {
-		if (fpd->icon_filename == NULL || (!strcmp (fpd->icon_filename, text)))
+		if (fpd->icon_filename == NULL || strcmp (fpd->icon_filename, text) != 0)
 			gnome_metadata_set (fpd->file_name, "icon-filename", strlen (text) + 1, text);
 		g_free (text);
 	}
