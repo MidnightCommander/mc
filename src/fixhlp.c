@@ -21,6 +21,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
+#include "global.h"
 #include "help.h"
 
 static int width;		/* Output width in characters */
@@ -92,8 +93,6 @@ int string_len (char *buffer)
 void print_string (char *buffer)
 {
     int len;	/* The length of current word */
-    int i;	/* Index */
-    int c;	/* Current character */
     char *p;
 
     /* Split into words */
@@ -162,7 +161,6 @@ int main (int argc, char **argv)
 {
     int len;			/* Length of input line */
     char buffer [BUF_LARGE];	/* Input line */
-    int i, j;
     char *p; 
     int ignore_newline = 0;
 
