@@ -2,7 +2,8 @@
 
 	* da.po: Updated Danish translation from Kenneth Christiansen
 	<kenneth@ripen.dk>
-
+	* no.po: Updated Norwegian translation.
+	
 1999-09-19  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* *.po: s/defination/definition/
