@@ -4178,7 +4178,7 @@ msgstr "Formato"
 
 #: src/widget.c:895
 msgid " History "
-msgstr "&Storico comandi"
+msgstr " Storico comandi "
 
 #. KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
 #. to define f0 as well. Also, it makes Learn keys a bunch of problems :(

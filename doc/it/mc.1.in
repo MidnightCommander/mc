@@ -1036,60 +1036,62 @@ comando interno cd.
 .\"The cd internal command"
 .PP
 .SH "  Command Menu"
-The
+Il comando
 .\"LINK2"
-Directory tree
+Albero directory
 .\"Directory Tree"
-command shows a tree figure of the directories.
+mostra un disegno ad albero delle directory.
 .PP
-The
+Il comando
 .\"LINK2"
-Find file
+Trova file
 .\"Find File"
-command allows you to search for a specific file. The "Swap panels"
-command swaps the contents of the two directory panels. 
+permette di cercare un file specifico. Il comando "Scambia pannelli"
+scambia il contenuto dei due pannelli directory.
 .PP
-The "Panels on/off" command shows the output of the last shell
-command. This works only on xterm and on Linux and SCO console.
+Il comando "Attiva/disattiva pannelli" mostra il risultato dell'ultimo
+comando shell. Quest'ultimo funziona solo su xterm e sulle console Linux e
+SCO.
 .PP
-The Compare directories (C-x d) command compares the directory
-panels with each other. You can then use the Copy (F5) command to make
-the panels identical. There are three compare methods. The quick method
-compares only file size and file date. The thorough method makes a
-full byte-by-byte compare. The thorough method is not available if the
-machine does not support the mmap(2) system call.  The size-only
-compare method just compares the file sizes and does not check the
-contents or the date times, it just checks the file size.
+Il comando Confronta directory (C-x d) confronta il contenuto dei
+pannelli directory uno con l'altro. E' poi possibile usare il comando Copia (F5)
+per rendere i pannelli identici. Ci sono tre metodi di confronto. Il metodo
+veloce confronta solo l'ampiezza e la data del file. Il metodo completo
+fa un confronto byte-per-byte. Il metodo completo non è disponibile se la
+macchina non supporta la chiamata di sistema mmap(2). Il metodo solo
+dimensione confronta solo l'ampiezza dei file e non controlla il contenuto ne 
+la data del file.
 .PP
-The Command history command shows a list of typed commands. The
-selected command is copied to the command line. The command history
-can also be accessed by typing M-p or M-n. 
+Il comando Storico comandi mostra un'elenco dei comandi battuti. Il comando
+selezionato viene copiato sulla riga di comando. Allo storico comandi vi si 
+può accedere premendo M-p o M-n. 
 .PP
-The 
+Il comando
 .\"LINK2"
-Directory hotlist (C-\\)
+Directory favorite (C-\\)
 .\"Hotlist"
-command makes changing of the current directory to often used directories
-faster.
+permette un cambio più veloce dalla directory corrente ad una di quelle usate 
+più spesso.
 .PP
-The 
+Il comando
 .\"LINK2"
-External panelize
+Pannellizza comando
 .\"External panelize"
-allows you to execute an external program, and
-make the output of that program the contents of the current panel.
+permette di eseguire un coamndo esterno e di mettere il risultato nel pannello
+corrente.
 .PP
+Il comando
 .\"LINK2"
-Extension file edit
+Modifica file estensioni
 .\"Extension File Edit"
-command allows you to specify programs to executed when you try to
-execute, view, edit and do a bunch of other thing on files
-with certain extensions (filename endings). The
+permette di specificare i programmi che devono essere eseguiti quando
+si prova ad eseguire, visualizzare, modificare e un mucchio di altre
+cose, file con una specifica estensione (la fine del nome del file).
+Il comando
 .\"LINK2"
-Menu file edit
+Modifica file menu
 .\"Menu File Edit"
-command may be used for editing the user menu (which appears by
-pressing F2).
+serve a modificare il menu utente (che appare premendo F2).
 .PP
 .SH "    Directory Tree"
 The Directory Tree command shows a tree figure of the directories. You
