@@ -806,7 +806,7 @@ main (int argc, char **argv)
 	struct node *next = cnode->next;
 
 	if (*node)
-	    fprintf (f_out, "  %*s\001 %s \002%s\003", cnode->heading_level,
+	    fprintf (f_out, "  %*s\001%s\002%s\003", cnode->heading_level,
 		     "", cnode->lname ? cnode->lname : node, node);
 	fprintf (f_out, "\n");
 
