@@ -3113,7 +3113,7 @@ come un tasto di cancellazione (ESC ESC).
 .PP
 .I only_leading_plus_minus
 .IP
-Imposta una gestione speciale per '+', '-', '*' nella riga di comando 
+Permette una gestione speciale per '+', '-', '*' nella riga di comando 
 (selezione, de-selezione, selezione inversa) solo se la riga di comando è
 vuota. Non è necessario proteggere questi caratteri nel mezzo della riga
 di comando ma non è possibile cambiare selezione se la riga di comando
