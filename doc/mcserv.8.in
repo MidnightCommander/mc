@@ -37,12 +37,12 @@ To make the server listen on the specified
 port.
 .TP
 .I "-f"
-Force ftp authorization if classic fails. This is only useful on systems
-whose password checking method is not supported by this version of mcserv.
-Authorization is then done by trying to connect to the local ftp server
-and supplying user name and password. Ftp server then says whether are you
-successfuly logged in or whether you typed a wrong password. Use this with
-care and only when necessary.
+Allow ftp authentication as a fallback if the other methods fail.
+This is only useful on systems where the password checking method is not
+supported by this version of mcserv.  The local ftp server is contacted
+with the username and password.  The user is authenticated if the ftp
+server accepts the credentials.  Use this option with care and only
+when necessary.
 .TP
 .I "-v"
 Toggle on the verbose mode.

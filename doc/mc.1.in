@@ -96,10 +96,11 @@ selected panel; the second path name is the directory to be shown in
 the other panel.
 .PP
 .SH "Overview"
-The screen of the Midnight Commander is divided into four parts. Almost
-all of the screen space is taken up by two directory panels.  By default,
-the second bottommost line of the screen is the shell command line, and
-the bottom line shows the function key labels. The topmost line is the
+The screen of the Midnight Commander is divided into four parts.
+Almost all of the screen space is taken up by two directory panels.
+By default, the second line from the bottom of the screen is the
+shell command line, and the bottom line shows the function key labels.
+The topmost line is the
 .\"LINK2"
 menu bar line.
 .\"Menu Bar"
@@ -163,10 +164,10 @@ program is executed.
 Also, it is possible to execute the commands assigned to the function
 key labels by clicking on them.
 .PP
-If a mouse button is clicked on the top frame line of the directory
-panel, it is scrolled one pageful backward. Correspondingly, a click on
-the bottom frame line will cause a scroll of one pageful forward. This
-frame line method works also in the
+If a mouse button is clicked on the top frame line of the directory panel,
+it is scrolled one page up.  Likewise, a click on the bottom frame line
+will cause scrolling one page down.  This frame line method works also
+in the
 .\"LINK2"
 Help Viewer
 .\"Contents"
@@ -361,7 +362,7 @@ respectively.
 .PP
 .B C-s, M-s.
 Start a filename search in the directory listing. When the search is
-active the keypresses will be added to the search string instead of
+active, the user input will be added to the search string instead of
 the command line. If the
 .I "Show mini-status"
 option is enabled the search string is shown on the mini-status
@@ -494,10 +495,10 @@ Moves one line backward.
 Moves one line forward.
 .PP
 .B Prev Page, Page Up, M-v.
-Moves one pageful backward.
+Moves one page up.
 .PP
 .B Next Page, Page Down, C-v.
-Moves one pageful forward.
+Moves one page down.
 .PP
 .B Home, A1.
 Moves to the beginning.
@@ -509,13 +510,13 @@ The help viewer and the file viewer accept the following keys in
 addition the to ones mentioned above:
 .PP
 .B b, C-b, C-h, Backspace, Delete.
-Moves one pageful backward.
+Moves one page up.
 .PP
 .B Space bar.
-Moves one pageful forward.
+Moves one page down.
 .PP
 .B u, d.
-Moves one half of a page backward or forward.
+Moves one half of a page up or down.
 .PP
 .B g, G.
 Moves to the beginning or to the end.
@@ -665,12 +666,26 @@ format. It displays the size of the files and for directories it just
 shows SUB-DIR or UP--DIR.
 .PP
 .B type,
-displays a one character field type.  This character is a superset of what
-is displayed by ls with the -F flag.  An asterisk for executable
-files, a slash for directories, an at-sign for links, an equal sign
-for sockets, a hyphen for character devices, a plus sign for block devices,
-a pipe for fifos, a tilde for symbolic links to directories and an
-exclamation mark for stalled symlinks (links that point nowhere).
+displays a one character field type.  This character is similar to
+what is displayed by ls with the -F flag -
+.B *
+for executable files,
+.B /
+for directories,
+.B @
+for links,
+.B =
+for sockets,
+.B -
+for character devices,
+.B +
+for block devices,
+.B |
+for pipes,
+.B ~
+for symbolic links to directories and
+.B !
+for stalled symlinks (links that point nowhere).
 .PP
 .B mtime,
 file's last modification time.
@@ -797,9 +812,9 @@ for more information).
 .PP
 .SH "  File Menu"
 The Midnight Commander uses the F1 - F10 keys as keyboard shortcuts
-for commands appearing in the file menu. The escape sequences for the
-Fkeys are terminfo capabilities kf1 trough kf10.  On terminals without
-function key support, you can achieve the same functionality by
+for commands appearing in the file menu.  The escape sequences for the
+function keys are terminfo capabilities kf1 trough kf10.  On terminals
+without function key support, you can achieve the same functionality by
 pressing the ESC key and then a number in the range 1 through 9 and 0
 (corresponding to F1 to F9 and F10 respectively).
 .PP
@@ -961,7 +976,7 @@ with a '/'.
 .PP
 .B Unselect group (\\\\)
 .PP
-Used for unselecting a group of files. This is the opposite of the
+Used to unselect a group of files. This is the opposite of the
 .I "Select group"
 command.
 .PP
@@ -1216,13 +1231,13 @@ which you want the command to be saved. Next time, you just choose that
 command from the list and do not have to type it again.
 .PP
 .SH "    Hotlist"
-The Directory hotlist command shows the labels of the directories in the 
-directory hotlist. The Midnight Commander will change to the directory
-corresponding to the selected label. From the hotlist dialog, you can remove
-already created label/directory pairs and add new one. For adding you may
-want to use a standalone Add to hotlist command (C-x h), which adds the 
-current directory into the directory hotlist, as well. The user is prompted 
-for a label for the directory. 
+The Directory hotlist command shows the labels of the directories
+in the directory hotlist.  The Midnight Commander will change to the
+directory corresponding to the selected label.  From the hotlist dialog,
+you can remove already created label/directory pairs and add new ones.
+To add new directories quickly, you can use the Add to hotlist command
+(C-x h), which adds the current directory into the directory hotlist,
+asking just for the label for the directory.
 .PP
 This makes cd to often used directories faster. You may consider using the
 CDPATH variable as described in
@@ -1400,7 +1415,7 @@ Type is one or more of the following characters:
   l	link
   c	char special
   b	block special
-  f	fifo
+  f	fifo (pipe)
   s	socket
   x	executable
   t	tagged
@@ -1528,8 +1543,8 @@ letter and from there select your option in the menu.
 .PP
 .I Mix all files.
 When this option is enabled, all files and directories are shown mixed
-together. If the option is off, directories (and links to directories)
-are shown at the beginning of the listing, and other files afterwards.
+together.  If the option is off, directories (and links to directories)
+are shown at the beginning of the listing, and other files below.
 .PP
 .I Fast directory reload.
 This option is off by default. If you activate the fast reload, the
@@ -2129,8 +2144,8 @@ or the
 key.  To change the state of the check buttons or to select a button
 use
 .I Space.
-You can also use the hotkeys on the buttons to quickly activate that
-selection (they are the highlit letters on the buttons).  
+You can also use the hotkeys on the buttons to quickly activate them.
+Hotkeys are shown as highlighted letters on the buttons.
 .PP
 To set the attribute bits, use the Enter key.
 .PP
@@ -2435,9 +2450,8 @@ common full screen editors. It is invoked using
 provided
 the 
 .I use_internal_edit
-option is set in the initialization file. It has an
-extensible file size limit of sixteen megabytes and edits binary files
-flawlessly. 
+option is set in the initialization file. It has an extendable file size
+limit of sixteen megabytes and edits binary files flawlessly.
 .PP
 The features it presently supports are: Block
 copy, move, delete, cut, paste; 
@@ -2623,10 +2637,9 @@ element, then the Midnight Commander will try to logon on the remote
 machine as that user, otherwise it will use your login name.  The
 optional 
 .I pass
-element, if present is the password used for the connection.  This use
-is not recommended (nor keeping this in your hotlist, unless you set
-the appropriate permissions there, and then, it may not be entirely
-safe anyways).
+element, if present is the password used for the connection.  This is not
+recommended (nor keeping the password in your hotlist, unless you set the
+appropriate permissions there, and even then it may not be entirely safe).
 .PP
 Examples:
 .PP
@@ -2639,9 +2652,9 @@ Examples:
 .fi
 .PP
 To connect to sites behind a firewall, you will need to use the prefix
-ftp://! (ie, with a bang character after the double slash) to make the
-Midnight Commander use a proxy host for doing the ftp transfer.  You
-can define the proxy host in the
+ftp://! (i.e., with a bang character after the double slash) to make
+the Midnight Commander use a proxy host for doing the ftp transfer.
+You can define the proxy host in the
 .\"LINK2"
 Virtual File System
 .\"Virtual FS"
@@ -2791,7 +2804,7 @@ formed by the "/#undel" prefix and the file name where the actual
 file system resides.
 .PP
 For example, to recover deleted files on the second partition of the
-first scsi disk on Linux, you would use the following path name:
+first SCSI disk on Linux, you would use the following path name:
 .PP
 .nf
     /#undel:sda2
@@ -2913,8 +2926,7 @@ is used for stalled symbolic links;
 .I device
 - character and block devices; 
 .I special
-is used for special files, such as FIFOs and IPC
-sockets; 
+is used for special files, such as pipes and sockets; 
 .I core
 is for core files.
 .PP
@@ -2951,9 +2963,8 @@ changing the directory if you have files tagged.
 .I ftpfs_retry_seconds.
 .IP
 This value is the number of seconds the Midnight Commander will wait
-before attempting a reconnection to an ftp server that has denied the
-login.  If the value is zero, the the program will not retry the
-login.
+before attempting to reconnect to an ftp server that has denied the login.
+If the value is zero, the login will no be retried.
 .PP
 .I ftpfs_use_passive_connections.
 .IP
@@ -2964,12 +2975,12 @@ are not using an ftp proxy.
 .PP
 .I max_dirt_limit.
 .IP
-Specifies how many screen updates can be skipped at most in the
-internal file viewer.  Normally this value is not significant, because
-the code automatically adjusts the number of updates to skip according
-to the rate of incoming keypresses. However, on very slow machines or
-terminals with a fast keyboard auto repeat, a big value can make
-screen updates too jumpy.
+Specifies how many screen updates can be skipped at most in the internal
+file viewer.  Normally this value is not significant, because the code
+automatically adjusts the number of updates to skip according to the rate
+of incoming keystrokes.  However, on very slow machines or terminals
+with a fast keyboard auto repeat, a big value can make screen updates
+too jumpy.
 .IP
 It seems that setting max_dirt_limit to 10 causes the best behavior,
 and that is the default value.
