@@ -10,15 +10,15 @@
 extern char* strdup(const char*);
 #endif
 
-int is_printable (int c);
-int msglen (char *text, int *lines);
+int  is_printable (int c);
+int  msglen (char *text, int *lines);
 char *trim (char *s, char *d, int len);
 char *name_quote (const char *c, int quote_percent);
 char *fake_name_quote (const char *c, int quote_percent);
 char *name_trunc (char *txt, int trunc_len);
 char *size_trunc (long int size);
 char *size_trunc_sep (long int size);
-int is_exe (mode_t mode);
+int  is_exe (mode_t mode);
 char *string_perm (mode_t mode_bits);
 char *strip_home_and_password(char *dir);
 char *extension (char *);

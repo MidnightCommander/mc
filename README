@@ -10,7 +10,7 @@ Contents:
   Obtaining the Midnight Commander
   Reporting problems.
 
-This is version 3.5 of the Midnight Commander, a free Norton Commander
+This is version 4 of the Midnight Commander, a free Norton Commander
 Clone with many useful features. The Midnight Commander comes with
 mouse support on xterms and optionally on the Linux console.
 
@@ -66,7 +66,7 @@ It is feature packed:
 
 	Please note that the undelete file system can only recover
 	12 file system blocks if the file was deleted with a kernel 
-	in the 2.0.x series.  The 2.1.x series have fixes this and you
+	in the 2.0.x series.  The 2.1.x series have fixed this and you
 	can recover all of the file contents there.
 
 	o External panelization: You can run any arbitrary external
@@ -147,7 +147,7 @@ o The Virtual File System is a cute addition to the project, you may
 
 o Please read the manual page.
 
-o Read the file TODO for the current projects.
+o Read the file src/TODO for the current projects.
 
 You can access the whole documentation online with the F1 key,
 although it's not as nice as the groff printed manual page :-)
@@ -175,7 +175,7 @@ Please, send a detailed description of your problem to the
 mc-bugs@roxanne.nuclecu.unam.mx address.
 
 Include the version of the program, the operating system that you are
-using, the compielr and compiler flags used to compile the program (if
+using, the compiler and compiler flags used to compile the program (if
 you know them), what kind of distribution you are using (if a
 GNU/Linux system).
 

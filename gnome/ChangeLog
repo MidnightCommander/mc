@@ -1,3 +1,18 @@
+Tue Mar 17 22:40:36 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+	
+	* gdesktop.c (desktop_setup_icon): Lots of changes to accomodate
+	dropping icons on the root window.
+	
+	(do_symlinks): Implement symlink action.
+
+	(icon_delete, desktop_icon_context_popup): Implement icon context
+	menus.  only deleting an icon is working right now. 
+
+	* gscreen.c: Load the drag and drop icons from the installation
+	directory.
+	
+	* Makefile.in (install_gmc): Install our icons. 
+
 Tue Mar 17 02:38:37 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_setup_default): Create a default desktop

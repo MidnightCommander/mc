@@ -739,7 +739,7 @@ panel_drop_data_available (GtkWidget *widget, GdkEventDropDataAvailable *data, W
 		else 
 			drop_dir = panel->cwd;
 	}
-	drop_on_panel (data, drop_dir);
+	drop_on_directory (data, drop_dir, 0);
 
 	if (drop_dir != panel->cwd)
 		free (drop_dir);
@@ -818,6 +818,17 @@ panel_artificial_drag_start (GtkCList *window, GdkEventMotion *event, WPanel *pa
 	gdk_dnd_display_drag_cursor (event->x, event->y, FALSE, TRUE);
 }
 
+static GtkWidget *
+load_transparent_xpm (char *base)
+{
+	char *f = concat_dir_and_file (ICONDIR, base);
+	GtkWidget *w;
+	
+	w = make_transparent_window (f);
+	g_free (f);
+	return w;
+}
+
 static void
 panel_realized (GtkWidget *file_list, WPanel *panel)
 {
@@ -825,16 +836,16 @@ panel_realized (GtkWidget *file_list, WPanel *panel)
 	GdkPoint hotspot = { 5, 5 };
 
 	if (!drag_directory)
-		drag_directory = make_transparent_window ("directory-ok.xpm");
+		drag_directory = load_transparent_xpm ("directory-ok.xpm");
 	
 	if (!drag_directory_ok)
-		drag_directory_ok = make_transparent_window ("directory.xpm");
+		drag_directory_ok = load_transparent_xpm ("directory.xpm");
 	
 	if (!drag_multiple)
-		drag_multiple = make_transparent_window ("multi.xpm");
+		drag_multiple = load_transparent_xpm ("multi.xpm");
 	
 	if (!drag_multiple_ok)
-		drag_multiple_ok = make_transparent_window ("multi-ok.xpm");
+		drag_multiple_ok = load_transparent_xpm ("multi-ok.xpm");
 
 	if (drag_directory && drag_directory_ok)
 		gdk_dnd_set_drag_shape (drag_directory->window, &hotspot,

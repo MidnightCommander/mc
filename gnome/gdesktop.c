@@ -53,11 +53,16 @@ enum {
 	OPER_LINK
 };
 
-/* The list of icons on the desktop */
-static GList *desktop_icons;
-
 /* The X11 root window */
 static GnomeRootWin *root_window;
+
+/* The full name of the desktop directory ~/desktop */
+char *desktop_directory;
+
+static void desktop_reload (char *desktop_dir);
+
+/* The list with the filenames we have actually loaded */
+static GList *desktop_icons;
 
 /*
  * If the dentry is zero, then no information from the on-disk .desktop file is used
@@ -117,7 +122,7 @@ option_menu_gone ()
 }
 
 static int
-get_operation (int x, int y)
+get_operation (guint32 timestamp, int x, int y)
 {
 	static GtkWidget *menu;
 	
@@ -136,13 +141,12 @@ get_operation (int x, int y)
 		gtk_menu_append (GTK_MENU (menu), item);
 		gtk_widget_show (item);
 
-#if 0
 		/* Not yet implemented the Link bits, so better to not show what we dont have */
 		item = gtk_menu_item_new_with_label (_("Link"));
 		gtk_signal_connect (GTK_OBJECT (item), "activate", GTK_SIGNAL_FUNC(set_option), (void *) OPER_LINK);
 		gtk_menu_append (GTK_MENU (menu), item);
 		gtk_widget_show (item);
-#endif
+
 		gtk_signal_connect (GTK_OBJECT (menu), "hide", GTK_SIGNAL_FUNC(option_menu_gone), 0);
 	} 
 
@@ -155,7 +159,7 @@ get_operation (int x, int y)
 
 	/* FIXME: We should catch any events that escape this menu and cancel it */
 	operation_value = -1;
-	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, 0, NULL, 1, GDK_CURRENT_TIME);
+	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, 0, NULL, 1, timestamp);
 	gtk_grab_add (menu);
 	gtk_main ();
 	gtk_grab_remove (menu);
@@ -201,10 +205,8 @@ find_panel_owning_window_id (int id)
 	return temp_panel;
 }
 
-static void make_symlinks (WPanel *source_panel, char *target_dir);
-
 static void
-perform_drop_on_panel (WPanel *source_panel, int operation, char *dest)
+perform_drop_on_directory (WPanel *source_panel, int operation, char *dest)
 {
 	switch (operation){
 	case OPER_COPY:
@@ -213,10 +215,6 @@ perform_drop_on_panel (WPanel *source_panel, int operation, char *dest)
 		
 	case OPER_MOVE:
 		panel_operate (source_panel, OP_MOVE, dest);
-		break;
-		
-	case OPER_LINK:
-		make_symlinks (source_panel, dest);
 		break;
 	}
 }
@@ -259,8 +257,6 @@ perform_drop_manually (int operation, GdkEventDropDataAvailable *event, char *de
 			move_file_file (p, tmpf);
 			free (tmpf);
 			break;
-
-			
 		}
 		p += len;
 	} while (count > 0);
@@ -268,19 +264,47 @@ perform_drop_manually (int operation, GdkEventDropDataAvailable *event, char *de
 	destroy_op_win ();
 }
 
+static void
+do_symlinks (GdkEventDropDataAvailable *event, char *dest)
+{
+	int count = event->data_numbytes;
+	char *p = event->data;
+	int len;
+
+	do {
+		char *full_dest_name;
+		len = 1 + strlen (event->data);
+		count -= len;
+
+		full_dest_name = concat_dir_and_file (dest, x_basename (p));
+		mc_symlink (p, full_dest_name);
+		free (full_dest_name);
+		p += len;
+	} while (count > 0);
+}
+
 void
-drop_on_panel (GdkEventDropDataAvailable *event, char *dest)
+drop_on_directory (GdkEventDropDataAvailable *event, char *dest, int force_manually)
 {
 	WPanel *source_panel;
 	int x, y;
 	int operation;
 	
-	operation = get_operation (event->coords.x, event->coords.y);
-	
+	operation = get_operation (event->timestamp, event->coords.x, event->coords.y);
+
+	/* Optimization: if we are dragging from the same process, we can
+	 * display a nicer status bar.
+	 */
 	source_panel = find_panel_owning_window_id (event->requestor);
 
-	if (source_panel)
-		perform_drop_on_panel (source_panel, operation, dest);
+	/* Symlinks do not use any panel/file.c optimization */
+	if (operation == OPER_LINK){
+		do_symlinks (event, dest);
+		return;
+	}
+	
+	if (source_panel  && !force_manually)
+		perform_drop_on_directory (source_panel, operation, dest);
 	else
 		perform_drop_manually (operation, event, dest);
 	return;
@@ -292,22 +316,33 @@ drop_cb (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di
 	char *p;
 	int count;
 	int len;
-	int is_directory = strcasecmp (di->dentry->type, "directory") == 0;
+	int is_directory = 0;
 
-	if (is_directory){
-		drop_on_panel (event, di->dentry->exec);
+	/* if DI is set to zero, then it is a drop on the root window */
+	if (di)
+		is_directory = strcasecmp (di->dentry->type, "directory") == 0;
+	else {
+		drop_on_directory (event, desktop_directory, 1);
+		desktop_reload (desktop_directory);
 		return;
 	}
-		
+	
+	if (is_directory){
+		drop_on_directory (event, di->dentry->exec, 0);
+		return;
+	}
+
+	printf ("Arguments to non-directory (FIXME: needs to be implemented):\n");
 	count = event->data_numbytes;
 	p = event->data;
 	do {
 		len = 1 + strlen (event->data);
 		count -= len;
-		printf ("Receiving: %s\n", p);
+		printf ("[%s], ", p);
 		p += len;
 	} while (count);
-	printf ("Receiving: %s %d\n", event->data, event->data_numbytes);
+	printf ("\nReceiving: %s %d\n", event->data, event->data_numbytes);
+	
 }
 
 static void
@@ -341,14 +376,19 @@ dentry_properties (desktop_icon_t *di)
 	printf ("Edit this widget properties\n");
 }
 
-static void
+static int
 dentry_button_click (GtkWidget *widget, GdkEventButton *event, desktop_icon_t *di)
 {
-	if (event->type == GDK_2BUTTON_PRESS && event->button == 1)
+	if (event->type == GDK_2BUTTON_PRESS && event->button == 1){
 		dentry_execute (di);
+		return TRUE;
+	}
 
-	if (event->type == GDK_BUTTON_PRESS && event->button == 3)
-		dentry_properties (di);
+	if (event->type == GDK_BUTTON_PRESS && event->button == 3){
+		desktop_icon_context_popup (event, di);
+		return TRUE;
+	}
+	return FALSE;
 }
 		
 char *drop_types [] = {
@@ -358,22 +398,35 @@ char *drop_types [] = {
 
 #define ELEMENTS(x) (sizeof (x) / sizeof (x[0]))
 
-static void
-desktop_load_dentry (char *filename)
+GtkWidget *
+my_create_transparent_text_window (char *file, char *text, int extra_events)
 {
-	GnomeDesktopEntry  *dentry;
+	GtkWidget *w;
+
+	w = create_transparent_text_window (file, text, extra_events);
+	if (!w){
+		static char *default_pix;
+
+		if (!default_pix){
+			default_pix = gnome_unconditional_pixmap_file ("launcher-program.xpm");
+		}
+		w = create_transparent_text_window (default_pix, text, extra_events);
+		if (!w)
+			return NULL;
+	}
+	return w;
+}
+
+static void
+desktop_load_from_dentry (GnomeDesktopEntry *dentry)
+{
 	desktop_icon_t *di;
 	GtkWidget *window;
 	char      *icon_label;
-	
-	dentry = gnome_desktop_entry_load (filename);
-
-	if (!dentry)
-		return;
 
 	icon_label = dentry->name ? dentry->name : x_basename (dentry->exec);
 	if (dentry->icon)
-		window = create_transparent_text_window (dentry->icon, icon_label, GDK_BUTTON_PRESS_MASK);
+		window = my_create_transparent_text_window (dentry->icon, icon_label, GDK_BUTTON_PRESS_MASK);
 	else {
 		static char *default_icon_path;
 		static char exists;
@@ -385,7 +438,7 @@ desktop_load_dentry (char *filename)
 		}
 
 		if (exists)
-			window = create_transparent_text_window (default_icon_path, icon_label, GDK_BUTTON_PRESS_MASK);
+			window = my_create_transparent_text_window (default_icon_path, icon_label, GDK_BUTTON_PRESS_MASK);
 		else {
 			window = gtk_window_new (GTK_WINDOW_POPUP);
 			gtk_widget_set_usize (window, 20, 20);
@@ -395,9 +448,10 @@ desktop_load_dentry (char *filename)
 		return;
 	
 	di = xmalloc (sizeof (desktop_icon_t), "desktop_load_entry");
-	di->dentry = dentry;
-	di->widget = window;
-	
+	di->dentry   = dentry;
+	di->widget   = window;
+	di->pathname = dentry->location;
+		
 	desktop_icon_set_position (di, window);
 	
 	desktop_icons = g_list_prepend (desktop_icons, (gpointer) di);
@@ -410,8 +464,38 @@ desktop_load_dentry (char *filename)
 	
 	/* 2. Double clicking executes the command */
 	gtk_signal_connect (GTK_OBJECT (window), "button_press_event", GTK_SIGNAL_FUNC (dentry_button_click), di);
-	
+
 	gtk_widget_show (window);
+}
+
+static void
+desktop_release_desktop_icon_t (desktop_icon_t *di)
+{
+	if (di->dentry){
+		gnome_desktop_entry_free (di->dentry);
+	} else {
+		free (di->pathname);
+		di->pathname = 0;
+	}
+
+	if (di->widget){
+		gtk_widget_destroy (di->widget);
+		di->widget = 0;
+	}
+	free (di);
+}
+
+static void
+desktop_load_dentry (char *filename)
+{
+	GnomeDesktopEntry  *dentry;
+	
+	dentry = gnome_desktop_entry_load (filename);
+
+	if (!dentry)
+		return;
+
+	desktop_load_from_dentry (dentry);
 }
 
 static void
@@ -430,8 +514,7 @@ desktop_create_directory_entry (char *dentry_path, char *pathname, char *short_n
 	dentry->location = g_strdup (dentry_path);
 
 	gnome_desktop_entry_save (dentry);
-
-	gnome_desktop_entry_load (dentry_path);
+	desktop_load_from_dentry (dentry);
 }
 
 /*
@@ -443,34 +526,174 @@ get_desktop_icon (char *pathname)
 {
 	char *fname, *full_fname;
 
-	fname = regex_command (pathname, "Icon", 0, 0);
+	fname = regex_command (x_basename (pathname), "Icon", 0, 0);
 
-	/* Try the system icon */
+	/* Try the GNOME icon */
 	full_fname = gnome_unconditional_pixmap_file (fname);
-	if (full_fname)
+	if (exist_file (full_fname))
 		return full_fname;
+	g_free (full_fname);
+
+	/* Try a mc icon */
+	full_fname = concat_dir_and_file (ICONDIR, fname);
+	if (exist_file (full_fname))
+		return full_fname;
+
+	free (full_fname);
 	
 	return gnome_unconditional_pixmap_file ("launcher-program.xpm");
 }
 
+static int
+file_is_executable (char *path)
+{
+	struct stat s;
+
+	if (mc_stat (path, &s) == -1)
+		return 0;
+	
+	if (is_exe (s.st_mode))
+		return 1;
+	return 0;
+
+}
+
+/* Pops up the icon properties pages */
 static void
+icon_properties (GtkWidget *widget, desktop_icon_t *di)
+{
+	printf ("Sorry, no property pages yet\n");
+	gtk_main_quit ();
+}
+
+static void
+desktop_icon_remove (desktop_icon_t *di)
+{
+	desktop_icons = g_list_remove (desktop_icons, di);
+
+	mc_unlink (di->pathname);
+	gtk_widget_destroy (di->widget);
+	desktop_release_desktop_icon_t (di);
+}
+
+/* Removes the icon from the desktop */
+static void
+icon_delete (GtkWidget *widget, desktop_icon_t *di)
+{
+	desktop_icon_remove (di);
+	gtk_main_quit ();
+}
+
+/*
+ * Activates the context sensitive menu for this icon
+ */
+static void
+desktop_icon_context_popup (GdkEventButton *event, desktop_icon_t *di)
+{
+	static GtkWidget *menu;
+	GtkWidget *item;
+
+	menu = gtk_menu_new ();
+
+	item = gtk_menu_item_new_with_label (_("Properties"));
+	gtk_signal_connect (GTK_OBJECT (item), "activate", GTK_SIGNAL_FUNC (icon_properties), di);
+	gtk_menu_append (GTK_MENU (menu), item);
+	gtk_widget_show (item);
+
+	item = gtk_menu_item_new_with_label (_("Delete"));
+	gtk_signal_connect (GTK_OBJECT (item), "activate", GTK_SIGNAL_FUNC (icon_delete), di);
+	gtk_menu_append (GTK_MENU (menu), item);
+	gtk_widget_show (item);
+	
+	gtk_widget_set_uposition (menu, event->x, event->y);
+
+	gtk_grab_add (menu);
+	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, 0, NULL, 3, event->time);
+	gtk_main ();
+	gtk_grab_remove (menu);
+	gtk_widget_destroy (menu);
+}
+
+static int
 desktop_file_exec (GtkWidget *widget, GdkEventButton *event, desktop_icon_t *di)
 {
-	if (!(event->type == GDK_2BUTTON_PRESS && event->button == 1))
-		return;
+	if (event->type == GDK_2BUTTON_PRESS && event->button == 1){
+		if (di->dentry){
+			printf ("FIXME: No support for dentry loaded stuff yet\n");
+		} else {
+			if (file_is_executable (di->pathname)){
+				char *tmp = name_quote (di->pathname, 0);
 
-	if (di->dentry){
-		printf ("FIXME: No support for dentry loaded stuff yet\n");
-	} else 
-		regex_command (di->pathname, "Open", 0, 0);
+				if (!confirm_execute || (query_dialog (" The Midnight Commander ",
+								       " Do you really want to execute? ",
+								       0, 2, "&Yes", "&No") == 0))
+					execute (tmp);
+				free (tmp);
+			} else {
+				regex_command (di->pathname, "Open", NULL, 0);
+			}
+		}
+		return TRUE;
+	}
+
+	if (event->type == GDK_BUTTON_PRESS && event->button == 3){
+		desktop_icon_context_popup (event, di);
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+static void
+drop_on_executable (desktop_icon_t *di, GdkEventDropDataAvailable *event)
+{
+	int count, i, len;
+	int arguments;
+	char *p, **argv;
+
+	/* Count the number of file names received */
+	count = event->data_numbytes;
+	p = event->data;
+	arguments = 0;
+	while (count){
+		arguments++;
+		len = strlen (p) + 1;
+		count -= len;
+		p += len;
+	}
+
+	/* Create the exec vector with all of the filenames */
+	argv = (char **) xmalloc (sizeof (char *) * arguments + 1, "arguments");
+	count = event->data_numbytes;
+	p = event->data;
+	i = 0;
+	do {
+		len = 1 + strlen (p);
+		count -= len;
+		argv [i++] = p;
+		p += len;
+	} while (count);
+	argv [i] = 0;
+
+	/* invoke */
+	exec_direct (di->pathname, argv);
 }
 
 static void
 drop_on_launch_entry (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di)
 {
-	if (strcmp (event->data_type, "url:ALL") == 0){
+	struct stat s;
+
+	/* try to stat it, if it fails, remove it from desktop */
+	if (!mc_stat (di->pathname, &s) == 0){
+		desktop_icon_remove (di);
+		return;
 	}
 	
+	if (is_exe (s.st_mode)){
+		drop_on_executable (di, event);
+		return;
+	}
 }
 
 static void
@@ -481,17 +704,21 @@ desktop_create_launch_entry (char *pathname, char *short_name)
 	char *icon;
 
 	icon = get_desktop_icon (pathname);
-	window = create_transparent_text_window (icon, x_basename (pathname), GDK_BUTTON_PRESS_MASK);
+	window = my_create_transparent_text_window (icon, x_basename (pathname), GDK_BUTTON_PRESS_MASK);
 	g_free (icon);
+	if (!window)
+		return;
+	
 	di = xmalloc (sizeof (desktop_icon_t), "dcle");
 	di->dentry = NULL;
 	di->widget = window;
 	di->pathname = strdup (pathname);
+
 	desktop_icon_set_position (di, window);
 
 	desktop_icons = g_list_prepend (desktop_icons, (gpointer) di);
 
-	/* Double clicking executes the command */
+	/* Double clicking executes the command, single clicking brings up context menu */
 	gtk_signal_connect (GTK_OBJECT (window), "button_press_event", GTK_SIGNAL_FUNC (desktop_file_exec), di);
 	gtk_widget_realize (window);
 	
@@ -503,11 +730,61 @@ desktop_create_launch_entry (char *pathname, char *short_name)
 	gtk_widget_show (window);
 }
 
+static int 
+desktop_pathname_loaded (char *pathname)
+{
+	GList *p = desktop_icons;
+
+	for (; p; p = p->next){
+		desktop_icon_t *di = p->data;
+
+		if (strcmp (di->pathname, pathname) == 0)
+			return 1;
+	}
+	return 0;
+}
+
+static void
+desktop_setup_icon (char *filename, char *full_pathname)
+{
+	struct stat s;
+
+	if (mc_stat (full_pathname, &s) == -1)
+		return;
+
+	if (S_ISDIR (s.st_mode)){
+		char *dir_full = concat_dir_and_file (full_pathname, ".directory");
+
+		if (!desktop_pathname_loaded (dir_full)){
+			if (exist_file (dir_full))
+				desktop_load_dentry (dir_full);
+			else
+				desktop_create_directory_entry (dir_full, full_pathname, filename);
+		}
+
+	} else {
+		if (strstr (filename, ".desktop")){
+			if (!desktop_pathname_loaded (full_pathname))
+				desktop_load_dentry (full_pathname);
+		} else {
+			char *desktop_version;
+			
+			desktop_version = copy_strings (full_pathname, ".desktop", NULL);
+			if (!exist_file (desktop_version) && !desktop_pathname_loaded (full_pathname))
+				desktop_create_launch_entry (full_pathname, filename);
+			free (desktop_version);
+		}
+	}
+}
+
+
 /*
- * Desktop initialization code
+ * Load all of the entries available on the ~/desktop directory
+ * So far, we support: .desktop files;  directories (they get a .directory file);
+ * sylinks to directories;  other programs. 
  */
 static void
-desktop_load (char *desktop_dir)
+desktop_reload (char *desktop_dir)
 {
 	struct dirent *dent;
 	DIR *dir;
@@ -520,7 +797,6 @@ desktop_load (char *desktop_dir)
 	}
 
 	while ((dent = mc_readdir (dir)) != NULL){
-		struct stat s;
 		char *full;
 
 		/* ignore '.' */
@@ -532,44 +808,22 @@ desktop_load (char *desktop_dir)
 			continue;
 
 		full = concat_dir_and_file (desktop_dir, dent->d_name);
-		mc_stat (full, &s);
-
-		if (S_ISDIR (s.st_mode)){
-			char *dir_full = concat_dir_and_file (full, ".directory");
-
-			if (exist_file (dir_full))
-				desktop_load_dentry (dir_full);
-			else
-				desktop_create_directory_entry (dir_full, full, dent->d_name);
-			
-			free (dir_full);
-		} else {
-			if (strstr (dent->d_name, ".desktop"))
-				desktop_load_dentry (full);
-			else {
-				char *desktop_version;
-				
-				desktop_version = copy_strings (full, ".desktop", NULL);
-				if (!exist_file (desktop_version))
-					desktop_create_launch_entry (full, dent->d_name);
-				free (desktop_version);
-			}
-		}
-		
+		desktop_setup_icon (dent->d_name, full);
 		free (full);
 	}
 }
 
-static void
-make_symlinks (WPanel *source_panel, char *target_dir)
-{
-	printf ("weee! you are right, creating symbolic links by dnd is still not working\n");
-}
-
+/*
+ * Copy the system defaults to the user ~/desktop directory and setup a
+ * Home directory link
+ */
 static void
 desktop_setup_default (char *desktop_dir)
 {
 	char *mc_desktop_dir;
+	char *desktop_dir_home_link;
+	
+	desktop_dir_home_link = concat_dir_and_file (desktop_dir, "Home directory.desktop");
 
 	mc_desktop_dir = concat_dir_and_file (mc_home, MC_LIB_DESKTOP);
 
@@ -578,62 +832,42 @@ desktop_setup_default (char *desktop_dir)
 		file_mask_defaults ();
 		copy_dir_dir (mc_desktop_dir, desktop_dir);
 		destroy_op_win ();
-	} else {
-		char *desktop_dir_home_link;
-
-		desktop_dir_home_link = concat_dir_and_file (desktop_dir, "Home directory.desktop");
+	} else 
 		mkdir (desktop_dir, 0777);
-		desktop_create_directory_entry (desktop_dir_home_link, "~", "Home directory");
-		
-		g_free (desktop_dir_home_link);
-	}
+	
+	desktop_create_directory_entry (desktop_dir_home_link, "~", "Home directory");
+	free (desktop_dir_home_link);
 	free (mc_desktop_dir);
 }
 
-void
-root_drop_cb (GtkWidget *rw, GdkEventDropDataAvailable *event)
-{
-	printf ("Weeee!  Getting a drop on the root window!\n");
-}
-
-static GdkFilterReturn
-root_event_filter (GdkXEvent *xevent, GdkEvent *event, gpointer data)
-{
-	XEvent *x_event = (XEvent *) xevent;
-
-	printf ("root filter: tipo de evento: %d\n", x_event->type);
-	if (x_event->type == ClientMessage) {
-		printf ("El mundo me ama\n");
-		return GDK_FILTER_CONTINUE;
-	}
-	return GDK_FILTER_CONTINUE;
-}
-
+/*
+ * configures the root window dropability
+ */
 void
 desktop_root (void)
 {
 	GtkWidget *rw;
 
 	rw = gnome_rootwin_new ();
-	gtk_signal_connect (GTK_OBJECT (rw), "drop_data_available_event",
-			    GTK_SIGNAL_FUNC (root_drop_cb), NULL);
-			       
+	connect_drop_signals (rw, NULL);
 	gtk_widget_realize (rw);
 	gtk_widget_dnd_drop_set (rw, TRUE, drop_types, ELEMENTS (drop_types), FALSE);
 	gtk_widget_show (rw);
 	root_window = GNOME_ROOTWIN (rw);
 }
 
+/*
+ * entry point to start up the gnome desktop
+ */
 void
 start_desktop (void)
 {
-	char *f = concat_dir_and_file (home_dir, "desktop");
+	desktop_directory = concat_dir_and_file (home_dir, "desktop");
 
-	if (!exist_file (f))
-		desktop_setup_default (f);
+	if (!exist_file (desktop_directory))
+		desktop_setup_default (desktop_directory);
 
 	desktop_root ();
-	desktop_load (f);
-	free (f);
+	desktop_reload (desktop_directory);
 }
  

@@ -277,6 +277,7 @@ dnl ])
 
 AC_PATH_XTRA
 
+insticons=
 xvers="none"
 mxc=""
 AC_PATH_XVIEW_XTRA
@@ -284,6 +285,8 @@ if test "x$no_xview" != "xyes"; then
     mxc="mxc"
     xvers="XView"
     xvdep="xvdep"
+    insticons=install_icons
+    AC_SUBST(insticons)
 else
     mxc=""
     xvdep=""
@@ -659,6 +662,8 @@ if test x$no_x != xyes; then
     if test x$withval = xyes; then
 	gmc=gmc
  	gmcdep=gmcdep
+	insticons=install_icons
+	AC_SUBST(insticons)
 	if test x"$xvers" = xnone; then
 	    xvers="Gnome"
 	else
@@ -1351,12 +1356,6 @@ changequote([, ])dnl
 esac
 
 LIBS="$LIBS $posix_libs"
-
-insticons=
-if test "x$no_xview" != "xyes"; then
-    insticons=install_icons
-fi
-AC_SUBST(insticons)
 
 CPPFLAGS="-I.. $CPPFLAGS"
 AC_SUBST(CFLAGS)

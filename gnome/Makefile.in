@@ -40,6 +40,12 @@ GNOMEHDRS = 		\
 	gcmd.h		\
 	gmc-chargrid.h
 
+ICONS = 			\
+	directory-ok.xpm	\
+	directory.xpm		\
+	multi.xpm		\
+	multi-ok.xpm
+
 #
 # These objects from ../src do not depend on HAVE_X / HAVE_GNOME??
 #
@@ -79,18 +85,18 @@ OBJS = $(LOBJS) $(OOBJS) \
 
 PIXMAPS =		\
 	dev.xpm		\
-	directory-ok.xpm \
-	directory.xpm	\
 	link.xpm	\
-	multi-ok.xpm	\
-	multi.xpm
+	directory.xpm
 
-DISTGNOME = Makefile.in gnome.TODO layout $(PIXMAPS) $(GNOMESRCS) $(GNOMEHDRS) 
+DISTGNOME = Makefile.in gnome.TODO layout $(PIXMAPS) $(ICONS) $(GNOMESRCS) $(GNOMEHDRS) 
 
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<
 
-all: @gmc@
+all: @gmc@ Makefile
+
+Makefile: Makefile.in ../config.status
+	(cd ..; CONFIG_FILES=gnome/Makefile CONFIG_HEADERS= ./config.status)
 
 gmc: checklinks 
 	$(MAKE) mx
@@ -162,8 +168,13 @@ install: install_@gmc@
 install_:
 
 install_gmc: all 
+	$(mcsrcdir)/xmkdir $(DESTDIR)$(bindir)
+	$(mcsrcdir)/xmkdir $(DESTDIR)$(icondir)
+	$(mcsrcdir)/xmkdir $(DESTDIR)$(libdir)
+	$(mcsrcdir)/xmkdir $(DESTDIR)$(bindir)
 	$(INSTALL_PROGRAM) gmc $(DESTDIR)$(bindir)/$(binprefix)gmc
-	$(INSTALL_DATA) layout $(DESTDIR)$(libdir)
+	$(INSTALL_DATA) $(ICONS) $(DESTDIR)$(icondir)
+	-$(INSTALL_DATA) layout $(DESTDIR)$(libdir)
 
 uninstall: 
 	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)gmc

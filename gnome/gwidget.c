@@ -95,6 +95,8 @@ x_create_button (Dlg_head *h, widget_data parent, WButton *b)
 		stock = GNOME_STOCK_BUTTON_NO;
 	else if (strcasecmp (b->text, "exit") == 0)
 		stock = GNOME_STOCK_BUTTON_CLOSE;
+	else if (strcasecmp (b->text, "abort") == 0)
+		stock = GNOME_STOCK_BUTTON_CANCEL;
 	else
 		stock = 0;
 

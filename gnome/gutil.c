@@ -49,39 +49,81 @@
 
 int my_system (int as_shell_command, const char *shell, const char *command)
 {
-    struct sigaction ignore, save_intr, save_quit, save_stop;
-    pid_t pid;
-    int status = 0;
+	struct sigaction ignore, save_intr, save_quit, save_stop;
+	pid_t pid;
+	int status = 0, i;
 
-    ignore.sa_handler = SIG_IGN;
-    sigemptyset (&ignore.sa_mask);
-    ignore.sa_flags = 0;
+	ignore.sa_handler = SIG_IGN;
+	sigemptyset (&ignore.sa_mask);
+	ignore.sa_flags = 0;
     
-    sigaction (SIGINT, &ignore, &save_intr);    
-    sigaction (SIGQUIT, &ignore, &save_quit);
+	sigaction (SIGINT, &ignore, &save_intr);    
+	sigaction (SIGQUIT, &ignore, &save_quit);
 
-    if ((pid = fork ()) < 0){
-	fprintf (stderr, "\n\nfork () = -1\n");
-	return -1;
-    }
-    if (pid == 0){
+	if ((pid = fork ()) < 0){
+		fprintf (stderr, "\n\nfork () = -1\n");
+		return -1;
+	}
+	if (pid == 0){
+		sigaction (SIGINT,  &save_intr, NULL);
+		sigaction (SIGQUIT, &save_quit, NULL);
+
+		for (i = 3; i < 4096; i++)
+			close (i);
+	
+		if (as_shell_command)
+			execl (shell, shell, "-c", command, (char *) 0);
+		else
+			execlp (shell, shell, command, (char *) 0);
+
+		_exit (127);		/* Exec error */
+	}
 	sigaction (SIGINT,  &save_intr, NULL);
 	sigaction (SIGQUIT, &save_quit, NULL);
-
-	if (as_shell_command)
-	    execl (shell, shell, "-c", command, (char *) 0);
-	else
-	    execlp (shell, shell, command, (char *) 0);
-
-	_exit (127);		/* Exec error */
-    }
-    sigaction (SIGINT,  &save_intr, NULL);
-    sigaction (SIGQUIT, &save_quit, NULL);
-    sigaction (SIGTSTP, &save_stop, NULL);
+	sigaction (SIGTSTP, &save_stop, NULL);
 
 #ifdef SCO_FLAVOR 
 	waitpid(-1, NULL, WNOHANG);
 #endif /* SCO_FLAVOR */
 
-    return WEXITSTATUS(status);
+	return WEXITSTATUS(status);
+}
+
+int
+exec_direct (char *path, char *argv [])
+{
+	struct sigaction ignore, save_intr, save_quit, save_stop;
+	pid_t pid;
+	int status = 0, i;
+
+	ignore.sa_handler = SIG_IGN;
+	sigemptyset (&ignore.sa_mask);
+	ignore.sa_flags = 0;
+    
+	sigaction (SIGINT, &ignore, &save_intr);    
+	sigaction (SIGQUIT, &ignore, &save_quit);
+
+	if ((pid = fork ()) < 0){
+		fprintf (stderr, "\n\nfork () = -1\n");
+		return -1;
+	}
+	if (pid == 0){
+		sigaction (SIGINT,  &save_intr, NULL);
+		sigaction (SIGQUIT, &save_quit, NULL);
+
+		for (i = 3; i < 4096; i++)
+			close (i);
+
+		execvp (path, argv); 
+		_exit (127);		/* Exec error */
+	}
+	sigaction (SIGINT,  &save_intr, NULL);
+	sigaction (SIGQUIT, &save_quit, NULL);
+	sigaction (SIGTSTP, &save_stop, NULL);
+
+#ifdef SCO_FLAVOR 
+	waitpid(-1, NULL, WNOHANG);
+#endif /* SCO_FLAVOR */
+
+	return WEXITSTATUS(status);
 }

@@ -5,4 +5,4 @@ GtkWidget *create_transparent_text_window (char *file, char *text, int extra_eve
 GtkWidget *make_transparent_window (char *file);
 
 /* gdesktop.c */
-void drop_on_panel (GdkEventDropDataAvailable *event, char *dest);
+void drop_on_directory (GdkEventDropDataAvailable *event, char *dest, int force_manually);
