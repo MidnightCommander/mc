@@ -4,9 +4,6 @@
    Miguel de Icaza, Janne Kukonlehto, Dugan Porter,
    Jakub Jelinek, Mauricio Plaza.
 
-   The file_date routine is mostly from GNU's fileutils package,
-   written by Richard Stallman and David MacKenzie.
-
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
