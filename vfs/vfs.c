@@ -274,7 +274,7 @@ _vfs_get_class (const char *path)
     
     slash = strchr (semi, PATH_SEP);
     if (slash == NULL)
-        slash += strlen (slash);
+        slash = semi + strlen (semi);
     
     ret = vfs_prefix_to_class (semi+1, slash - (semi + 1));
 
