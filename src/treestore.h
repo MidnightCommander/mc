@@ -17,14 +17,7 @@ typedef struct tree_entry {
     struct tree_entry *prev;	/* Previous item in the list */
 } tree_entry;
 
-typedef struct {
-    struct tree_entry *base;
-    struct tree_entry *current;
-    int base_dir_len;
-    int sublevel;
-} tree_scan;
-
-typedef struct {
+struct TreeStore {
     tree_entry *tree_first;	/* First entry in the list */
     tree_entry *tree_last;	/* Last entry in the list */
     tree_entry *check_start;	/* Start of checked subdirectories */
@@ -32,9 +25,9 @@ typedef struct {
     GList *add_queue;		/* List of strings of added directories */
     unsigned int loaded:1;
     unsigned int dirty:1;
-} TreeStore;
+};
 
-TreeStore *tree_store_get (void);
+struct TreeStore *tree_store_get (void);
 int tree_store_load (void);
 int tree_store_save (void);
 void tree_store_remove_entry (char *name);

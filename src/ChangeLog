@@ -1,5 +1,9 @@
 2003-10-23  Pavel Roskin  <proski@gnu.org>
 
+	* tree.h: Don't include treestore.h.  Fix sources to include
+	treestore.h when needed.
+	* treestore.h: Eliminate useless typedefs.
+
 	* treestore.c (tree_store_start_check_cwd): Eliminate.
 	(tree_store_start_check): Make globally visible.
 	* dir.c (do_load_dir): Use path supplied as argument.  Call

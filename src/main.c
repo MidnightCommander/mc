@@ -50,6 +50,7 @@
 #include "mouse.h"
 #include "option.h"
 #include "tree.h"
+#include "treestore.h"
 #include "cons.saver.h"
 #include "subshell.h"
 #include "key.h"		/* For init_key() and mi_getch() */

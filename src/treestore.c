@@ -47,7 +47,7 @@
 
 #define TREE_SIGNATURE "Midnight Commander TreeStore v 2.0"
 
-static TreeStore ts;
+static struct TreeStore ts;
 
 static tree_entry *tree_store_add_entry(char *name);
 
@@ -123,7 +123,7 @@ tree_store_whereis(char *name)
 	return NULL;
 }
 
-TreeStore *
+struct TreeStore *
 tree_store_get(void)
 {
     return &ts;

@@ -45,6 +45,7 @@
 #include "help.h"
 #include "key.h"	/* For mi_getch() */
 #include "tree.h"
+#include "treestore.h"
 #include "cmd.h"
 
 extern int command_prompt;
@@ -57,7 +58,7 @@ static int tree_navigation_flag;
 
 struct WTree {
     Widget widget;
-    TreeStore *store;
+    struct TreeStore *store;
     tree_entry *selected_ptr;	/* The selected directory */
     char search_buffer[256];	/* Current search string */
     tree_entry **tree_shown;	/* Entries currently on screen */

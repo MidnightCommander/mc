@@ -27,7 +27,7 @@
 #include "tty.h"
 #include "dir.h"
 #include "wtools.h"
-#include "tree.h"
+#include "treestore.h"
 
 /* If true show files starting with a dot */
 int show_dot_files = 1;

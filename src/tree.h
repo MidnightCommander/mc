@@ -1,8 +1,6 @@
 #ifndef __TREE_H
 #define __TREE_H
 
-#include "treestore.h"
-
 #include "dlg.h"
 
 struct WTree;
