@@ -1,5 +1,8 @@
 2001-09-10  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Eliminate LIBSLANG and LSLANG.
+	* acinclude.m4: Likewise.  Use MCLIBS for -lslang.
+
 	* configure.in: Use MCLIBS for -lgpm.  Remove LGPM.  Check for
 	resizeterm() and keyok() only if configuring with ncurses.
 
