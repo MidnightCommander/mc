@@ -336,140 +336,140 @@ confbuild() {
 
 
 test_plain() {
-	testname="plain" \
-	configure_args="" \
+	testname="plain"
+	configure_args=""
 	confbuild
 }
 
 test_charset() {
-	testname="charset" \
-	configure_args="--enable-charset" \
+	testname="charset"
+	configure_args="--enable-charset"
 	confbuild
 }
 
 test_no_charset() {
-	testname="no_charset" \
-	configure_args="--disable-charset" \
+	testname="no_charset"
+	configure_args="--disable-charset"
 	confbuild
 }
 
 test_X11() {
-	testname="X11" \
-	configure_args="--with-x" \
+	testname="X11"
+	configure_args="--with-x"
 	confbuild
 }
 
 test_no_X11() {
-	testname="no_X11" \
-	configure_args="--without-x" \
+	testname="no_X11"
+	configure_args="--without-x"
 	confbuild
 }
 
 test_vfs() {
-	testname="vfs" \
-	configure_args="--with-vfs" \
+	testname="vfs"
+	configure_args="--with-vfs"
 	confbuild
 }
 
 test_no_vfs() {
-	testname="no_vfs" \
-	configure_args="--without-vfs" \
+	testname="no_vfs"
+	configure_args="--without-vfs"
 	confbuild
 }
 
 test_mcfs() {
-	testname="mcfs" \
-	configure_args="--with-mcfs" \
+	testname="mcfs"
+	configure_args="--with-mcfs"
 	confbuild
 }
 
 test_no_mcfs() {
-	testname="no_mcfs" \
-	configure_args="--without-mcfs" \
+	testname="no_mcfs"
+	configure_args="--without-mcfs"
 	confbuild
 }
 
 test_samba() {
-	testname="samba" \
-	configure_args="--with-samba" \
+	testname="samba"
+	configure_args="--with-samba"
 	confbuild
 }
 
 test_no_samba() {
-	testname="no_samba" \
-	configure_args="--without-samba" \
+	testname="no_samba"
+	configure_args="--without-samba"
 	confbuild
 }
 
 test_ext2undel() {
-	testname="ext2undel" \
-	configure_args="--with-ext2undel" \
+	testname="ext2undel"
+	configure_args="--with-ext2undel"
 	confbuild
 }
 
 test_no_ext2undel() {
-	testname="no_ext2undel" \
-	configure_args="--without-ext2undel" \
+	testname="no_ext2undel"
+	configure_args="--without-ext2undel"
 	confbuild
 }
 
 test_slang() {
-	testname="slang" \
-	configure_args="--with-screen=slang" \
+	testname="slang"
+	configure_args="--with-screen=slang"
 	confbuild
 }
 
 test_mcslang() {
-	testname="mcslang" \
-	configure_args="--with-screen=mcslang" \
+	testname="mcslang"
+	configure_args="--with-screen=mcslang"
 	confbuild
 }
 
 test_ncurses() {
-	testname="ncurses" \
-	configure_args="--with-screen=ncurses" \
+	testname="ncurses"
+	configure_args="--with-screen=ncurses"
 	confbuild
 }
 
 test_maintainer() {
-	testname="maintainer" \
-	configure_args="--enable-maintainer-mode" \
+	testname="maintainer"
+	configure_args="--enable-maintainer-mode"
 	confbuild
 }
 
 test_no_maintainer() {
-	testname="no_maintainer" \
-	configure_args="--disable-maintainer-mode" \
+	testname="no_maintainer"
+	configure_args="--disable-maintainer-mode"
 	confbuild
 }
 
 test_i18n() {
-	testname="i18n" \
-	configure_args="--enable-nls" \
+	testname="i18n"
+	configure_args="--enable-nls"
 	confbuild
 }
 
 test_no_i18n() {
-	testname="no_i18n" \
-	configure_args="--disable-nls" \
+	testname="no_i18n"
+	configure_args="--disable-nls"
 	confbuild
 }
 
 test_no_features() {
-	testname="no_features" \
+	testname="no_features"
 	configure_args="${configure_args_disable_all}"
 	confbuild
 }
 
 test_all_features() {
-	testname="all_features" \
-	configure_args="${configure_args_enable_all}" \
+	testname="all_features"
+	configure_args="${configure_args_enable_all}"
 	confbuild
 }
 
 test_all_warnings() {
-	testname="all_warnings" \
-	configure_args="${configure_args_enable_all} --enable-gcc-warnings" \
+	testname="all_warnings"
+	configure_args="${configure_args_enable_all} --enable-gcc-warnings"
 	confbuild
 }
 
