@@ -1,5 +1,8 @@
 2000-09-30  Pavel Roskin  <proski@gnu.org>
 
+	* mc.spec.in: New package mc-common. Use DESTDIR instead of
+	misusing prefix. Don't install old icons - they don't exist.
+
 	* lib/mc.sh.in: Use "rm -f" to delete temporary files. Use
 	"export -f" to have mc() exported.
 	* doc/mc.1.in: Changed description of the "-P" option to

@@ -14,6 +14,7 @@ Source0:   ftp://ftp.nuclecu.unam.mx/linux/local/devel/mc-%{PACKAGE_VERSION}.tar
 URL:       http://www.gnome.org/mc/
 BuildRoot: /var/tmp/mc-%{PACKAGE_VERSION}-root
 Requires:  pam >= 0.59
+Requires:  mc-common >= %{PACKAGE_VERSION}
 Prereq:    /sbin/chkconfig
 
 %description
@@ -22,9 +23,18 @@ more features.  It is text mode, but also includes mouse support if you are
 running GPM.  Its coolest feature is the ability to ftp, view tar, zip
 files, and poke into RPMs for specific files.  :-)
 
+%package -n mc-common
+Summary:  Midnight Commander visual shell (common files)
+Group:    Interface/Desktops
+
+%description -n mc-common
+Midnight Commander is a visual shell much like a file manager, only with
+way more features.  This file contains files common for both the text and
+the GNOME editions.
+ 
 %package -n gmc
 Summary:  Midnight Commander visual shell (GNOME version)
-Requires: mc >= %{PACKAGE_VERSION}
+Requires: mc-common >= %{PACKAGE_VERSION}
 BuildPrereq: stylesheets
 Group:    Interface/Desktops
 
@@ -65,8 +75,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,profile.d}
 
 
-make prefix=$RPM_BUILD_ROOT%{prefix} sysconfdir=$RPM_BUILD_ROOT/etc install
-(cd icons; make prefix=$RPM_BUILD_ROOT%{prefix} install_icons)
+make install DESTDIR=$RPM_BUILD_ROOT
 install lib/mcserv.init $RPM_BUILD_ROOT/etc/rc.d/init.d/mcserv
 
 install -m 644 lib/mcserv.pamd $RPM_BUILD_ROOT/etc/pam.d/mcserv
@@ -91,27 +100,29 @@ rm -rf $RPM_BUILD_ROOT
 %doc FAQ COPYING NEWS README
 %{prefix}/bin/mc
 %{prefix}/bin/mcedit
+%{prefix}/lib/mc/bin/cons.saver
+%{prefix}/lib/mc/term/*
+%{prefix}/man/man1/*
+%config /etc/profile.d/*
+%dir %{prefix}/lib/mc/bin
+%dir %{prefix}/lib/mc/term
+
+%files -n mc-common
+%defattr(-, root, root)
 %{prefix}/bin/mcmfmt
 %{prefix}/lib/mc/cedit.menu
 %{prefix}/lib/mc/edit.indent.rc
-%{prefix}/lib/mc/mc.*
-%{prefix}/lib/mc/bin/cons.saver
 %{prefix}/lib/mc/extfs/*
+%{prefix}/lib/mc/mc.*
 %{prefix}/lib/mc/syntax/*
-%{prefix}/lib/mc/term/*
-%{prefix}/man/man1/*
 %{prefix}/share/locale/*
-%config /etc/profile.d/*
 %config /etc/mc.global
 %dir %{prefix}/lib/mc
-%dir %{prefix}/lib/mc/bin
 %dir %{prefix}/lib/mc/extfs
 %dir %{prefix}/lib/mc/syntax
-%dir %{prefix}/lib/mc/term
 
 %files -n mcserv
 %defattr(-, root, root)
-
 %config /etc/pam.d/mcserv
 %config /etc/rc.d/init.d/mcserv
 %attr(-, root, man)  %{prefix}/man/man8/mcserv.8
@@ -135,6 +146,11 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{prefix}/share/pixmaps/mc
 
 %changelog
+* Sat Sep 30 2000 Pavel Roskin <proski@gnu.org>
+- New package mc-common.
+- Use DESTDIR instead of misusing prefix.
+- Don't install old icons - they don't exist
+
 * Sat Sep 23 2000 Pavel Roskin <proski@gnu.org>
 - Include translations with mc, not gmc
 - chkconfig --del in %preun, not %postun
