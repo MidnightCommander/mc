@@ -8,9 +8,6 @@
 
 #include <config.h>
 #include <stdio.h>
-#if defined(__os2__)            /* OS/2 need io.h! .ado */
-#    include <io.h>
-#endif
 #include <stdlib.h>
 #include <sys/types.h>
 #ifdef HAVE_UNISTD_H

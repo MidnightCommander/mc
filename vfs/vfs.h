@@ -280,14 +280,12 @@ struct utimbuf {
 #   define mc_symlink symlink
 #   define mc_rename rename
 
-#ifndef __os2__
 #   define mc_open open
 #   define mc_utime utime
 #   define mc_chmod chmod
 #   define mc_chown chown
 #   define mc_chdir chdir
 #   define mc_unlink unlink
-#endif
 
 #   define mc_mmap mmap
 #   define mc_munmap munmap
