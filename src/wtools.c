@@ -551,6 +551,8 @@ int quick_dialog (QuickDialog *qd)
 /* }}} */
 
 /* {{{ Input routines */
+
+#ifndef HAVE_GNOME
 #define INPUT_INDEX 2
 char *real_input_dialog_help (char *header, char *text, char *help, char *def_text)
 {
@@ -626,70 +628,11 @@ char *real_input_dialog_help (char *header, char *text, char *help, char *def_te
     } else
 	return 0;
 }
+#endif
 
 char *input_dialog (char *header, char *text, char *def_text)
 {
     return input_dialog_help (header, text, "[Input Line Keys]", def_text);
-}
-
-static int
-input_dialog_help_2 (char *header, char *text1, char *text2, char *help, char **r1, char **r2)
-{
-    QuickDialog Quick_input;
-    QuickWidget quick_widgets [] = {
-    { quick_button, 6, 10, 4, 0, N_("&Cancel"), 0, B_CANCEL, 0, 0,
-	  XV_WLAY_DONTCARE, "button-cancel" },
-    { quick_button, 3, 10, 4, 0, N_("Ok")
-, 0, B_ENTER, 0, 0,
-	  XV_WLAY_DONTCARE, "button-ok" },
-    { quick_input,  4, 80, 4, 0, "", 58, 0, 0, 0, XV_WLAY_BELOWCLOSE, "input-pth" },
-    { quick_label,  3, 80, 3, 0, "", 0, 0, 0, 0, XV_WLAY_DONTCARE, "label-pth" },
-    { quick_input,  4, 80, 3, 0, "", 58, 0, 0, 0, XV_WLAY_BELOWCLOSE, "input-lbl" },
-    { quick_label,  3, 80, 2, 0, "", 0, 0, 0, 0, XV_WLAY_DONTCARE, "label-lbl" },
-    { 0 } };
-    
-    int len;
-    int i;
-    int lines1, lines2;
-    char *my_str1, *my_str2;
-    
-    len = max (strlen (header), msglen (text1, &lines1));
-    len = max (len, msglen (text2, &lines2)) + 4;
-    len = max (len, 64);
-
-    Quick_input.xlen  = len;
-    Quick_input.xpos  = -1;
-    Quick_input.title = header;
-    Quick_input.help  = help;
-    Quick_input.class = "quick_input_2";
-    Quick_input.i18n  = 0;
-    quick_widgets [5].text = text1;
-    quick_widgets [3].text = text2;
-
-    for (i = 0; i < 6; i++)
-	quick_widgets [i].y_divisions = lines1+lines2+7;
-    Quick_input.ylen  = lines1 + lines2 + 7;
-
-    quick_widgets [0].relative_y += (lines1 + lines2);
-    quick_widgets [1].relative_y += (lines1 + lines2);
-    quick_widgets [2].relative_y += (lines1);
-    quick_widgets [3].relative_y += (lines1);
-
-    quick_widgets [4].str_result = &my_str1;
-    quick_widgets [2].str_result = &my_str2;
-    
-    Quick_input.widgets = quick_widgets;
-    if (quick_dialog (&Quick_input) != B_CANCEL){
-	 *r1 = *(quick_widgets [4].str_result);
-	 *r2 = *(quick_widgets [2].str_result);
-	 return 1;
-    } else
-	 return 0;
-}
-
-int input_dialog_2 (char *header, char *text1, char *text2, char **r1, char **r2)
-{
-    return input_dialog_help_2 (header, text1, text2,  "[Input Line Keys]", r1, r2);
 }
 
 char *input_expand_dialog (char *header, char *text, char *def_text)

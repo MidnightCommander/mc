@@ -1,3 +1,14 @@
+1999-03-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* cmd.c (edit_symlink_cmd): Generate the title of the dialog after
+	we have computed the source filename.
+	(edit_symlink_cmd): Use g_strdup_printf() instead of g_strconcat()
+	for better internationalization.
+
+	* wtools.c: Removed unused function input_dialog_help_2().
+	(real_input_dialog_help): Put this inside an "#ifndef HAVE_GNOME",
+	because now the Gnome version implements its own pretty dialog.
+
 1999-03-14  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* dlg.c (dlg_select_nth_widget): Handle the case where h->current

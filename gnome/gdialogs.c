@@ -224,8 +224,9 @@ file_progress_show_deleting (FileOpContext *ctx, char *path)
 FileProgressStatus
 file_progress_show (FileOpContext *ctx, long done, long total)
 {
-        static gchar count[10];
+        static gchar count[20];
         FileOpContextUI *ui;
+        double perc;
 
         g_return_val_if_fail (ctx != NULL, FILE_CONT);
 
@@ -238,8 +239,14 @@ file_progress_show (FileOpContext *ctx, long done, long total)
         if (ui->aborting)
                 return FILE_ABORT;
         
-        snprintf (count, 9, "%d%%", (gint)(100.0 *(gfloat)done/(gfloat)total));
-        gtk_label_set_text (GTK_LABEL (ui->file_label), count);
+        if (total > 0) {
+                perc = (double) done / (double) total;
+                snprintf (count, 9, "%d%%", (gint) (100.0 * perc));
+                gtk_label_set_text (GTK_LABEL (ui->file_label), count);
+                gtk_progress_bar_update (GTK_PROGRESS_BAR (ui->byte_prog), perc);
+        } else
+                gtk_progress_bar_update (GTK_PROGRESS_BAR (ui->byte_prog), 0.0);
+
         while (gtk_events_pending ())
                 gtk_main_iteration ();
 	return FILE_CONT;
@@ -273,7 +280,7 @@ FileProgressStatus
 file_progress_show_bytes (FileOpContext *ctx, double done, double total)
 {
         FileOpContextUI *ui;
-        gfloat per;
+        double perc;
 
         g_return_val_if_fail (ctx != NULL, FILE_CONT);
 
@@ -285,12 +292,10 @@ file_progress_show_bytes (FileOpContext *ctx, double done, double total)
 
         if (ui->aborting)
                 return FILE_ABORT;
-        per = ( done / total <= 1.0) ? done / total : 1.0;
 
-        if (total <= 0.0)
-                gtk_progress_bar_update (GTK_PROGRESS_BAR (ui->byte_prog), 0.0);
-        else
-                gtk_progress_bar_update (GTK_PROGRESS_BAR (ui->byte_prog), per);
+        perc = done / total;
+        gtk_progress_bar_update (GTK_PROGRESS_BAR (ui->byte_prog), CLAMP (perc, 0.0, 1.0));
+
         while (gtk_events_pending ())
                 gtk_main_iteration ();
 	return FILE_CONT;
@@ -928,4 +933,38 @@ void
 fmd_init_i18n (int force)
 {
         /* unneccessary func */
+}
+
+/* Callback for the gnome_request_dialog() in the input dialog */
+static void
+input_dialog_cb (gchar *string, gpointer data)
+{
+        char **s;
+
+        s = data;
+        *s = string;
+
+        gtk_main_quit ();
+}
+
+/* Our implementation of the general-purpose input dialog */
+char *
+real_input_dialog_help (char *header, char *text, char *help, char *def_text)
+{
+        int is_password;
+        GtkWidget *dialog;
+        char *string;
+
+        if (strncmp (text, _("Password:"), strlen (_("Password"))) == 0)
+                is_password = TRUE;
+        else
+                is_password = FALSE;
+
+        dialog = gnome_request_dialog (is_password, text, def_text, 0,
+                                       input_dialog_cb, &string,
+                                       NULL);
+        gtk_window_set_title (GTK_WINDOW (dialog), header);
+        gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+        gtk_main ();
+        return string;
 }

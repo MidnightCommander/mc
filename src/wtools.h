@@ -79,7 +79,6 @@ void destroy_chooser (Chooser *c);
 
 /* The input dialogs */
 char *input_dialog (char *header, char *text, char *def_text);
-int input_dialog_2 (char *header, char *text1, char *text2, char **r1, char **r2);
 char *input_dialog_help (char *header, char *text, char *help, char *def_text);
 char *input_expand_dialog (char *header, char *text, char *def_text);
 char *real_input_dialog (char *header, char *text, char *def_text);

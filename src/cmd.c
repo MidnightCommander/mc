@@ -168,13 +168,13 @@ int view_file_at_line (char *filename, int plain_view, int internal, int start_l
         return move_dir;
     }
     if (internal){
-	char view_entry [BUF_TINY];
-
 #ifdef HAVE_GNOME
 	if (!gmc_view (filename, start_line)){
 	    view (0, filename, &move_dir, start_line);
 	}
 #else
+	char view_entry [BUF_TINY];
+
 	if (start_line != 0)
 	    g_snprintf (view_entry, sizeof (view_entry), "View:%d", start_line);
 	else
@@ -1114,7 +1114,7 @@ void edit_symlink_cmd (void)
 	char buffer [MC_MAXPATHLEN];
 	char *p = NULL;
 	int i;
-	char *dest, *q = g_strconcat (_(" Symlink "), name_trunc (p, 32), _(" points to:"), NULL);
+	char *dest, *q;
 
 	if (is_a_desktop_panel (cpanel)) {
 		gint i;
@@ -1126,6 +1126,9 @@ void edit_symlink_cmd (void)
 	} else {
 		p = selection (cpanel)->fname;
 	}
+
+	q = g_strdup_printf (_(" Symlink `%s\' points to: "), name_trunc (p, 32));
+
 	i = readlink (p, buffer, MC_MAXPATHLEN);
 	if (i > 0) {
 	    buffer [i] = 0;

@@ -16,9 +16,11 @@
 
 int gpopup_do_popup2 (GdkEventButton *event, WPanel *panel, DesktopIconInfo *dii);
 
+#if 0
 int gpopup_do_popup (GdkEventButton *event, WPanel *from_panel,
 		     DesktopIconInfo *dii,
 		     int panel_row, char *filename);
+#endif
 
 
 #endif

@@ -1,3 +1,13 @@
+1999-03-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdialogs.c (real_input_dialog_help): Now we use a
+	gnome_request_dialog() for generic input dialogs.  They look
+	prettier and consistent now.
+	(file_progress_show): Update the progress bars.  Thanks to Greg
+	for noticing this!
+
+	* Makefile.in: Removed references to gpopup.[co].
+
 Mon Mar 15 17:09:37 1999  Gregory McLean  <gregm@comstar.net>
 
 	* gdialogs.c (file_progress_show_bytes): Fixed a GTK Warning when
