@@ -1,5 +1,11 @@
 2001-02-20  Pavel Roskin  <proski@gnu.org>
 
+	* gtkedit/edit.h: Only include malloc.h if STDC_HEADERS is not
+	defined to prevent warnings on OpenBSD 2.7.
+	* slang/jdmacros.h: Likewise.
+	* src/mad.h: Likewise.
+	* src/poptalloca.h: Likewise.
+
 	* configure.in: Check for sys/time.h and sys/timeb.h. Use
 	AC_HEADER_TIME.
 

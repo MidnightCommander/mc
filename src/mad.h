@@ -3,7 +3,7 @@
 
 /* To prevent molesting these files with the malloc/calloc/free macros.  */
 #include <stdlib.h>
-#ifdef HAVE_MALLOC_H
+#if !defined(STDC_HEADERS) && defined(HAVE_MALLOC_H)
 #   include <malloc.h>
 #endif
 
