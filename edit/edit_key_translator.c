@@ -40,8 +40,8 @@
 
 /* ordinary translations. (Some of this may be redundant.) Note that keys listed
    first take priority when a key is assigned to more than one command */
-    static long *key_map;
-    static long cooledit_key_map[] =
+    static const long *key_map;
+    static const long cooledit_key_map[] =
     {OUR_BACKSPACE_KEY, CK_BackSpace, OUR_DELETE_KEY, CK_Delete,
      XCTRL ('d'), CK_Delete, '\n', CK_Enter,
      KEY_PPAGE, CK_Page_Up, KEY_NPAGE, CK_Page_Down, KEY_LEFT, CK_Left,
@@ -64,7 +64,7 @@
      0177, CK_BackSpace,
      0, 0};
 
-    static long emacs_key_map[] =
+    static long const emacs_key_map[] =
     {OUR_BACKSPACE_KEY, CK_BackSpace, OUR_DELETE_KEY, CK_Delete, '\n', CK_Enter,
      KEY_PPAGE, CK_Page_Up, KEY_NPAGE, CK_Page_Down, KEY_LEFT, CK_Left,
      KEY_RIGHT, CK_Right, KEY_UP, CK_Up, KEY_DOWN, CK_Down, ALT ('\t'), CK_Return, ALT ('\n'), CK_Return,
@@ -105,7 +105,7 @@
      
      0, 0};
 
-    static long key_pad_map[10] =
+    static long const key_pad_map[10] =
     {XCTRL ('o'), KEY_END, KEY_DOWN, KEY_NPAGE, KEY_LEFT,
      KEY_DOWN, KEY_RIGHT, KEY_HOME, KEY_UP, KEY_PPAGE};
 
