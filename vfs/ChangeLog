@@ -1,5 +1,9 @@
 2003-08-08  Pavel Roskin  <proski@gnu.org>
 
+	* extfs/audio.in: Further portability fixes.  Use current date
+	for timestamps.
+	Partly from Andrew V. Samoilov <sav@bcs.zp.ua>
+
 	* extfs/audio.in: Fix non-POSIX constructs.
 	From GoTaR <gotar@poczta.onet.pl>
 

@@ -14,13 +14,13 @@ CDDB_TIMEOUT=20 # in seconds
 
 audiofs_list ()
 {
-    echo "-r--r--r-- 1 0 0 0 Jan 1 0:00 CDDB"
-    cdparanoia -Q -d $1 2>&1 | grep '^[ 0-9][ 0-9][ 0-9]\.' | while true
+    DATE=`date +"%b %d %H:%M"`
+    echo "-r--r--r-- 1 0 0 0 $DATE CDDB"
+    cdparanoia -Q -d $1 2>&1 | grep '^[ 0-9][ 0-9][ 0-9]\.' | while read A B C
     do
-    read A B C || break
-    A=`echo $A | sed -e 's/\.//' -e 's/^\(.\)$/0\1/'`
-    SIZE=$((44+$B*2352))
-    echo "-r--r--r-- 1 0 0 $SIZE Jan 1 0:00 track-${A}.wav"
+	A=`echo $A | sed -e 's/\.//' -e 's/^\(.\)$/0\1/'`
+	SIZE=`expr 44 + $B \* 2352`
+	echo "-r--r--r-- 1 0 0 $SIZE $DATE track-${A}.wav"
     done
 }
 
@@ -40,7 +40,7 @@ audiofs_copyout ()
 }
 
 if [ ! -b "$2" ]
-    then
+then
     BASE=/dev/cdrom
 else
     BASE=$2
