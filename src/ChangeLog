@@ -3,6 +3,11 @@
 	* myslang.h: Add a replacement for addch(), which expects a
 	wchar_t argument in patched S-Lang on Red Hat 8.0.
 
+2002-10-21  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* man2hlp.c (handle_link): Don't strip leading space(s) from
+	linkname.
+
 2002-10-21  Pavel Roskin  <proski@gnu.org>
 
 	* main.c (print_mc_usage): Remove unnecessary newline.
