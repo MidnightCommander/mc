@@ -1,3 +1,8 @@
+2001-07-20  Pavel Roskin  <proski@gnu.org>
+
+	* extfs.c (extfs_init) [GTK]: Use mc_home instead of LIBDIR.
+	From Ludovic Drolez <ludovic.drolez@freealter.com>.
+
 2001-07-17  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.c (mc_return_cwd): Use g_get_current_dir().

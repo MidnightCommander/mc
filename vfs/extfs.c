@@ -1312,11 +1312,11 @@ static int extfs_init (vfs *me)
 
     mc_extfsini = concat_dir_and_file (mc_home, "extfs/extfs.ini");
     cfg = fopen (mc_extfsini, "r");
-    g_free (mc_extfsini);
 
     if (!cfg) {
-        fprintf( stderr, "Warning: " LIBDIR "extfs/extfs.ini not found\n" );
-        return 0;
+	fprintf(stderr, "Warning: file %s not found\n", mc_extfsini);
+	g_free (mc_extfsini);
+	return 0;
     }
 
     extfs_no = 0;
@@ -1335,8 +1335,10 @@ static int extfs_init (vfs *me)
 	/* We may not use vfs_die() message or message_1s or similar,
          * UI is not initialized at this time and message would not
 	 * appear on screen. */
-	    fprintf( stderr, "Warning: You need to update your " LIBDIR "extfs/extfs.ini file.\n" );
+	    fprintf(stderr, "Warning: You need to update your %s file.\n",
+		    mc_extfsini);
 	    fclose(cfg);
+	    g_free (mc_extfsini);
 	    return 0;
 	}
 	if (*key == '#')
@@ -1358,6 +1360,7 @@ static int extfs_init (vfs *me)
 	extfs_no++;
     }
     fclose(cfg);
+    g_free (mc_extfsini);
     return 1;
 }
 
