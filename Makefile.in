@@ -56,11 +56,11 @@ install.create_vcs:
 	if test x$(DESTDIR) = x; then $(SHELL) $(srcdir)/create_vcs; fi
 
 installdirs:
-	$(mcsrcdir)/xmkdir $(DESTDIR)$(bindir) $(DESTDIR)$(libdir)
-	$(mcsrcdir)/xmkdir $(DESTDIR)$(mandir) $(DESTDIR)$(man8dir)
-	$(mcsrcdir)/xmkdir $(DESTDIR)$(icondir) $(DESTDIR)$(suppbindir)
-	$(mcsrcdir)/xmkdir $(DESTDIR)$(tidir) $(DESTDIR)$(extfsdir)
-	$(mcsrcdir)/xmkdir $(DESTDIR)$(idldir)
+	$(MKINSTALLDIRS) $(DESTDIR)$(bindir) $(DESTDIR)$(libdir)
+	$(MKINSTALLDIRS) $(DESTDIR)$(mandir) $(DESTDIR)$(man8dir)
+	$(MKINSTALLDIRS) $(DESTDIR)$(icondir) $(DESTDIR)$(suppbindir)
+	$(MKINSTALLDIRS) $(DESTDIR)$(tidir) $(DESTDIR)$(extfsdir)
+	$(MKINSTALLDIRS) $(DESTDIR)$(idldir)
 
 mcfninstall:
 	-/bin/sh ./mcfn_install
