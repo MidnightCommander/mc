@@ -123,7 +123,8 @@ info_show_info (WInfo *info)
 	    size_trunc_len (buffer1, 5, myfs_stats.avail, 1);
 	    size_trunc_len (buffer2, 5, myfs_stats.total, 1);
 	    printw (_("Free space: %s (%d%%) of %s"), buffer1, myfs_stats.total ?
-		    100 * myfs_stats.avail / myfs_stats.total : 0, buffer2);
+		    (int)(100 * (double)myfs_stats.avail / myfs_stats.total) : 0,
+		    buffer2);
 	} else
 	    addstr (_("No space information"));
 
