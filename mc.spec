@@ -9,8 +9,8 @@ Version:   %ver
 Release:   %rel
 Copyright: GPL
 Group:     Shells
-Source0:   ftp://peyote-asesino.nuclecu.unam.mx/linux/local/devel/mc-%{PACKAGE_VERSION}.tar.gz
-URL:       http://mc.blackdown.org/mc/
+Source0:   ftp://ftp.nuclecu.unam.mx/linux/local/devel/mc-%{PACKAGE_VERSION}.tar.gz
+URL:       http://www.gnome.org/mc/
 BuildRoot: /tmp/mc-%{PACKAGE_VERSION}-root
 Requires:  pam >= 0.59
 Prereq:    /sbin/chkconfig
