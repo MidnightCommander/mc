@@ -123,7 +123,7 @@ mûvelet a jelenlegi panelben történik. Néhány fájlmûvelet, úgy, mint
 használja rendeltetési helyként (ne aggódj, végrehajtás elõtt erre mindíg
 rákérdez a megerõsítés mûveletnél). További információkért nézd meg a
 .\"LINK2"
-Könyvtár panelek,
+Könyvtár panelek\&,
 .\"Directory Panels"
 a
 .\"LINK2"
@@ -270,9 +270,9 @@ Commander-ben, akkor végrehajtja a
 panel információit; ha a kiválasztás egy futtatható fájlon van, akkor
 lefuttatja azt. Végül, ha a kiválasztott fájl kiterjesztése szerepel a
 .\"LINK2"
-társításoknál
+társításoknál\&,
 .\"Extension File Edit"
-, akkor a kijelölt parancs fut le.
+akkor a kijelölt parancs fut le.
 .PP
 .B C-l
 Frissít minden információt a Midnight Commander.
@@ -786,7 +786,7 @@ eszközzel. Lásd az errõl szóló részt további információkért.
 .B "Gyorsnézõke"
 Ebben a módban a panel átvált
 .\"LINK2"
-Belsõ fájlnézõre,
+Belsõ fájlnézõre\&,
 .\"Internal File Viewer"
 amely megjeleníti a jelenleg kiválasztott fájl tartalmát, ha a panelt
 választod ki (a tab billentyûvel, vagy az egérrel), elérhetõvé válnak a
@@ -842,7 +842,7 @@ megjegyzésként megtalálhatóak):
 .PP
 Segítségül hívja a beépített hypertext Súgó nézõt. A
 .\"LINK2"
-Súgó nézõn,
+Súgó nézõn\&,
 .\"Contents"
 belül a Tab gombot használhatod a következõ link kiválasztására és az
 Enter gombot a link követésére. A Space és a Backspace gombok az elõre-
@@ -853,7 +853,7 @@ lenyomására egy teljes listát kapsz az elérhetõ gombokról.
 .PP
 Ez segítségül hívja a
 .\"LINK2"
-felhasználói menüt.
+felhasználói menüt\&.
 .\"Menu File Edit"
 A felhasználói menü könnyû használatot biztosít az új menükkel és az
 extra eszközökkel a Midnight Commander-hez.
@@ -887,9 +887,9 @@ editort használja, vagy az
 .B EDITOR
 környezeti változóban megadott szerkesztõt, vagy a
 .\"LINK2"
-Belsõ fájl szerkesztõt
+Belsõ fájl szerkesztõt\&,
 .\"Internal File Editor"
-, ha a belsõ szerkesztõ be van kapcsolva.
+ha a belsõ szerkesztõ be van kapcsolva.
 .PP
 .B Másol (F5)
 .PP
@@ -977,8 +977,7 @@ Használd a
 .\"LINK2"
 Gyors cd
 .\"Quick cd"
-parancsot,
-ha teljes parancssort akarsz alkalmazni a könyvtárváltáshoz.
+parancsot, ha teljes parancssort akarsz alkalmazni a könyvtárváltáshoz.
 .PP
 .B Csoport kiválasztás (+)
 .PP
@@ -1021,7 +1020,7 @@ ablakot jelenít meg, amelybe bármit begépelhetsz, amit a parancssorban a
 parancs után begépeltél volna, és ezután használd az entert.Ez az eszkõz
 mindenben ugyanaz, mint a
 .\"LINK2"
-belsõ cd parancs.
+belsõ cd parancs\&.
 .\"The cd internal command"
 .\"NODE "  Command Menu"
 .SH "  Parancsok menü"
@@ -1101,7 +1100,7 @@ megtalálod a megtekinteni kívánt könyvtárat, menj rá a szülökönyvtárára
 A következõ gombokat használhatod:
 .PP
 .\"LINK2"
-Általános mozgási lehetõségek billentyûzettel.
+Általános mozgási lehetõségek billentyûzettel\&.
 .\"General Movement Keys"
 .PP
 .B Enter.
@@ -1330,7 +1329,7 @@ lehet:
 .I command
 ez bármely egysoros shell parancs lehet, az egyszerû
 .\"LINK2"
-Macro Helyettesítõvel.
+Macro Helyettesítõvel\&.
 .\"Macro Substitution"
 .PP
 A feladatokatokat fentrõl lefelé értékeljük ki (tehát a sorrend nagyon
@@ -1657,7 +1656,7 @@ környezeti változóban megadottat használja. Ha ez sincs megadva, a
 .BR vi -t
 fogja használni. Lásd a
 .\"LINK2"
-Belsõ fájlszerkesztõ.
+Belsõ fájlszerkesztõ\&.
 .\"Internal File Editor"
 részben.
 .PP
@@ -1677,7 +1676,7 @@ részben.
 .I Kiegészítés: minden mutat
 Alapértelmezésben a Midnight Commander megjelenít minden elem
 .\"LINK2"
-Kiegészítést.
+Kiegészítést\&.
 .\"Completion"
 Ha a kiegészítésben bizonytalan vagy, nyomd le az
 .BR M-Tab -ot
@@ -1731,7 +1730,7 @@ vagy a
 .I fájltípusok
 jelenjenek-e meg speciális
 .\"LINK2"
-Színekkel.
+Színekkel\&.
 .\"Colors"
 Ha pl. a jogosultságokat kérted, a
 .I jogok
@@ -1850,7 +1849,7 @@ Ezenfelül definiálhatod a proxy host-ot az ftp adatforgalomhoz, és
 beállíthatod a Midnight Commander-t, hogy mindíg használja a proxy
 host-ot. Az ezzel kapcsolatos információkat lásd az
 .\"LINK2"
-FTP fájlrendszernél.
+FTP fájlrendszernél\&.
 .\"FTP File System"
 .\"NODE "    Save Setup"
 .SH "    Beállítások mentése"
@@ -1943,11 +1942,11 @@ az /usr/src/linux könyvtárba léptet át).
 .SH "  Makro helyettesítõ"
 Amikor belépsz a
 .\"LINK2"
-felhasználói menübe,
+felhasználói menübe\&,
 .\"Menu File Edit"
 vagy a
 .\"LINK2"
-társítások parancsot,
+társítások parancsot\&,
 .\"Extension File Edit"
 futtatod, illetve a parancsot a parancssorból futtatod, a Makró
 Helyettesítõt használod.
@@ -2895,9 +2894,8 @@ a kiválasztott hyperlinkekhez.
 A kiemelés színei azt határozzák meg, a fájlok hogyan jelenjenek meg
 akkor, ha a kiemelés engedélyezve van (lásd a
 .\"LINK2"
-Megjelenés részt
+Megjelenés részt\&).
 .\"Layout"
-).
 .I directory
 a könyvtárakhoz, és a könyvtárak szimbolikus linkjeihez használatos;
 .I executable
