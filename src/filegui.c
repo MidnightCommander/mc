@@ -426,7 +426,7 @@ file_progress_show_bytes (FileOpContext *ctx, double done, double total)
 #define truncFileString(ui, s) name_trunc (s, ui->eta_extra + 47)
 
 FileProgressStatus
-file_progress_show_source (FileOpContext *ctx, char *s)
+file_progress_show_source (FileOpContext *ctx, const char *s)
 {
     FileOpContextUI *ui;
 
@@ -459,7 +459,7 @@ file_progress_show_source (FileOpContext *ctx, char *s)
 }
 
 FileProgressStatus
-file_progress_show_target (FileOpContext *ctx, char *s)
+file_progress_show_target (FileOpContext *ctx, const char *s)
 {
     FileOpContextUI *ui;
 
@@ -482,7 +482,7 @@ file_progress_show_target (FileOpContext *ctx, char *s)
 }
 
 FileProgressStatus
-file_progress_show_deleting (FileOpContext *ctx, char *s)
+file_progress_show_deleting (FileOpContext *ctx, const char *s)
 {
     FileOpContextUI *ui;
 
@@ -639,7 +639,7 @@ init_replace (FileOpContext *ctx, enum OperationMode mode)
 }
 
 void
-file_progress_set_stalled_label (FileOpContext *ctx, char *stalled_msg)
+file_progress_set_stalled_label (FileOpContext *ctx, const char *stalled_msg)
 {
     FileOpContextUI *ui;
 
@@ -655,7 +655,7 @@ file_progress_set_stalled_label (FileOpContext *ctx, char *stalled_msg)
 
 FileProgressStatus
 file_progress_real_query_replace (FileOpContext *ctx,
-				  enum OperationMode mode, char *destname,
+				  enum OperationMode mode, const char *destname,
 				  struct stat *_s_stat,
 				  struct stat *_d_stat)
 {
@@ -848,8 +848,8 @@ fmd_init_i18n (int force)
 }
 
 char *
-file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text,
-		  char *def_text, int only_one, int *do_background)
+file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
+		  const char *def_text, int only_one, int *do_background)
 {
     int source_easy_patterns = easy_patterns;
     char *source_mask, *orig_mask, *dest_dir;

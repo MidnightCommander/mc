@@ -805,7 +805,7 @@ void use_dash (int flag)
 	ok_to_refresh--;
 }
 
-void set_hintbar(char *str) 
+void set_hintbar(const char *str) 
 {
     label_set_text (the_hint, str);
     if (ok_to_refresh > 0)
@@ -866,7 +866,7 @@ void rotate_dash (void)
     pos++;
 }
 
-char *get_nth_panel_name (int num)
+const char *get_nth_panel_name (int num)
 {
     static char buffer [BUF_SMALL];
     

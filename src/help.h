@@ -17,5 +17,5 @@
 #define CHAR_FONT_NORMAL	'\013'	/* Ctrl-K */
 #define CHAR_FONT_ITALIC	'\024'	/* Ctrl-T */
 
-void interactive_display (char *filename, char *node);
+void interactive_display (const char *filename, const char *node);
 #endif				/* __HELP_H */

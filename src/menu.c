@@ -46,7 +46,7 @@ menu_scan_hotkey (Menu *menu)
 }
 
 Menu *
-create_menu (char *name, menu_entry *entries, int count, char *help_node)
+create_menu (const char *name, menu_entry *entries, int count, const char *help_node)
 {
     Menu *menu;
     char *cp;

@@ -16,7 +16,7 @@ int get_current_type (void);
 int get_other_type (void);
 int get_current_index (void);
 int get_other_index (void);
-char *get_nth_panel_name (int num);
+const char *get_nth_panel_name (int num);
 
 struct Widget;
 struct Widget *get_panel_widget (int index);
@@ -24,7 +24,7 @@ struct Widget *get_panel_widget (int index);
 struct WPanel;
 struct WPanel *get_other_panel (void);
 
-void set_hintbar (char *str);
+void set_hintbar (const char *str);
 
 /* Clear screen */
 void clr_scr (void);

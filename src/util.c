@@ -122,7 +122,7 @@ int msglen (const char *text, int *lines)
  * bytes, not counting trailing 0.
  */
 char *
-trim (char *s, char *d, int len)
+trim (const char *s, char *d, int len)
 {
     int source_len;
 
@@ -218,7 +218,7 @@ fake_name_quote (const char *s, int quote_percent)
  * Use "~" to show where the string was truncated.
  * Return static buffer, no need to free() it.
  */
-char *
+const char *
 name_trunc (const char *txt, int trunc_len)
 {
     static char x[MC_MAXPATHLEN + MC_MAXPATHLEN];
@@ -244,11 +244,11 @@ name_trunc (const char *txt, int trunc_len)
     return x;
 }
 
-char *size_trunc (double size)
+const char *size_trunc (double size)
 {
     static char x [BUF_TINY];
     long int divisor = 1;
-    char *xtra = "";
+    const char *xtra = "";
     
     if (size > 999999999L){
 	divisor = 1024;
@@ -262,7 +262,7 @@ char *size_trunc (double size)
     return x;
 }
 
-char *size_trunc_sep (double size)
+const char *size_trunc_sep (double size)
 {
     static char x [60];
     int  count;

@@ -9,12 +9,39 @@
 void str_replace(char *s, char from, char to);
 int  is_printable (int c);
 int  msglen (const char *text, int *lines);
-char *trim (char *s, char *d, int len);
+
+/* Copy from s to d, and trim the beginning if necessary, and prepend
+ * "..." in this case.  The destination string can have at most len
+ * bytes, not counting trailing 0. */
+char *trim (const char *s, char *d, int len);
+
+/* Quote the filename for the purpose of inserting it into the command
+ * line.  If quote_percent is 1, replace "%" with "%%" - the percent is
+ * processed by the mc command line. */
 char *name_quote (const char *c, int quote_percent);
+
+/* returns a duplicate of c. */
 char *fake_name_quote (const char *c, int quote_percent);
-char *name_trunc (const char *txt, int trunc_len);
-char *size_trunc (double size);
-char *size_trunc_sep (double size);
+
+/* Remove the middle part of the string to fit given length.
+ * Use "~" to show where the string was truncated.
+ * Return static buffer, no need to free() it. */
+const char *name_trunc (const char *txt, int trunc_len);
+
+/* return a static string representing size, appending "K" or "M" for
+ * big sizes.
+ * NOTE: uses the same static buffer as size_trunc_sep. */
+const char *size_trunc (double size);
+
+/* return a static string representing size, appending "K" or "M" for
+ * big sizes. Separates every three digits by ",".
+ * NOTE: uses the same static buffer as size_trunc. */
+const char *size_trunc_sep (double size);
+
+/* Print file SIZE to BUFFER, but don't exceed LEN characters,
+ * not including trailing 0. BUFFER should be at least LEN+1 long.
+ *
+ * Units: size units (0=bytes, 1=Kbytes, 2=Mbytes, etc.) */
 void size_trunc_len (char *buffer, int len, off_t size, int units);
 int  is_exe (mode_t mode);
 char *string_perm (mode_t mode_bits);

@@ -10,8 +10,8 @@ void    display_bits_box (void);
 void    configure_vfs    (void);
 void    jobs_cmd         (void);
 char   *cd_dialog        (void);
-void    symlink_dialog   (char *existing, char *new,
+void    symlink_dialog   (const char *existing, const char *new,
 			  char **ret_existing, char **ret_new);
-char   *tree_box         (char *current_dir);
+char   *tree_box         (const char *current_dir);
 
 #endif

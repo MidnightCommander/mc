@@ -588,7 +588,7 @@ init_my_statfs (void)
 }
 
 void
-my_statfs (struct my_statfs *myfs_stats, char *path)
+my_statfs (struct my_statfs *myfs_stats, const char *path)
 {
 #ifdef HAVE_INFOMOUNT_LIST
     int i, len = 0;

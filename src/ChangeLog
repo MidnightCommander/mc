@@ -1,3 +1,8 @@
+2004-08-29  Roland Illig  <roland.illig@gmx.de>
+
+	* Code cleanup: Added const qualifier for variables and
+	function declarations where possible. No functional changes.
+
 2004-08-26  Roland Illig  <roland.illig@gmx.de>
 
 	* cmd.c (do_link): Fixed memory leak and cleaned up code.

@@ -19,7 +19,7 @@ typedef enum {
 	OP_DELETE
 } FileOperation;
 
-typedef int (*mc_stat_fn) (char *filename, struct stat *buf);
+typedef int (*mc_stat_fn) (const char *filename, struct stat *buf);
 
 /* This structure describes a context for file operations.  It is used to update
  * the progress windows and pass around options.
@@ -146,15 +146,15 @@ void file_op_context_destroy_ui (FileOpContext *ctx);
 FileProgressStatus file_progress_show (FileOpContext *ctx, off_t done, off_t total);
 FileProgressStatus file_progress_show_count (FileOpContext *ctx, off_t done, off_t total);
 FileProgressStatus file_progress_show_bytes (FileOpContext *ctx, double done, double total);
-FileProgressStatus file_progress_show_source (FileOpContext *ctx, char *path);
-FileProgressStatus file_progress_show_target (FileOpContext *ctx, char *path);
-FileProgressStatus file_progress_show_deleting (FileOpContext *ctx, char *path);
+FileProgressStatus file_progress_show_source (FileOpContext *ctx, const char *path);
+FileProgressStatus file_progress_show_target (FileOpContext *ctx, const char *path);
+FileProgressStatus file_progress_show_deleting (FileOpContext *ctx, const char *path);
 
-void file_progress_set_stalled_label (FileOpContext *ctx, char *stalled_msg);
+void file_progress_set_stalled_label (FileOpContext *ctx, const char *stalled_msg);
 
 FileProgressStatus file_progress_real_query_replace (FileOpContext *ctx,
 						     enum OperationMode mode,
-						     char *destname,
+						     const char *destname,
 						     struct stat *_s_stat,
 						     struct stat *_d_stat);
 

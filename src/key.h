@@ -56,7 +56,7 @@ int is_quit_char (int c);
 /* Return code for the mouse sequence */
 #define MCKEY_MOUSE     -2
 
-int define_sequence (int code, char *seq, int action);
+int define_sequence (int code, const char *seq, int action);
 
 /* internally used in key.c, defined in keyxtra.c */
 void load_xtra_key_defines (void);

@@ -858,7 +858,7 @@ do_try_to_select (WPanel *panel, char *name)
 }
 
 void
-try_to_select (WPanel *panel, char *name)
+try_to_select (WPanel *panel, const char *name)
 {
     do_try_to_select (panel, name);
     select_item (panel);

@@ -411,7 +411,7 @@ regex_check_type (char *filename, char *ptr, int *have_type)
  * if the value for %d exists, then the viewer is started up at that line number.
  */
 int
-regex_command (char *filename, char *action, int *move_dir)
+regex_command (const char *filename, const char *action, int *move_dir)
 {
     char *p, *q, *r, c;
     int file_len = strlen (filename);
@@ -427,7 +427,7 @@ regex_command (char *filename, char *action, int *move_dir)
     /* Check for the special View:%d parameter */
     if (strncmp (action, "View:", 5) == 0) {
 	view_at_line_number = atoi (action + 5);
-	action[4] = 0;
+	action = "View";
     } else {
 	view_at_line_number = 0;
     }

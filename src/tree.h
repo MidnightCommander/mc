@@ -6,11 +6,11 @@ typedef struct WTree WTree;
 
 #define tlines(t) (t->is_panel ? t->widget.lines-2 - (show_mini_info ? 2 : 0) : t->widget.lines)
 
-int tree_init (char *current_dir, int lines);
-void tree_chdir (WTree *tree, char *dir);
+int tree_init (const char *current_dir, int lines);
+void tree_chdir (WTree *tree, const char *dir);
 char *tree_selected_name (WTree *tree);
 
-void sync_tree (char *pathname);
+void sync_tree (const char *pathname);
 
 extern int xtree_mode;
 

@@ -658,7 +658,7 @@ tree_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 
 /* Show tree in a box, not on a panel */
 char *
-tree_box (char *current_dir)
+tree_box (const char *current_dir)
 {
     WTree    *mytree;
     Dlg_head *dlg;
@@ -825,7 +825,7 @@ cd_dialog (void)
 }
 
 void
-symlink_dialog (char *existing, char *new, char **ret_existing,
+symlink_dialog (const char *existing, const char *new, char **ret_existing,
 		char **ret_new)
 {
     QuickDialog Quick_input;

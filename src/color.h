@@ -88,6 +88,6 @@ extern int alarm_colors[4];
 void init_colors (void);
 void done_colors (void);
 void mc_init_pair (int index, CTYPE foreground, CTYPE background);
-int try_alloc_color_pair (char *fg, char *bg);
+int try_alloc_color_pair (const char *fg, const char *bg);
 
 #endif /* __COLOR_H */

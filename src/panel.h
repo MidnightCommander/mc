@@ -97,7 +97,7 @@ extern WPanel *left_panel;
 extern WPanel *right_panel;
 extern WPanel *current_panel;
 
-void try_to_select (WPanel *panel, char *name);
+void try_to_select (WPanel *panel, const char *name);
 
 void unmark_files (WPanel *panel);
 void select_item (WPanel *panel);

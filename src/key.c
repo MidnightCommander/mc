@@ -542,7 +542,7 @@ static int push_char (int c)
  * Return 1 on success, 0 on error.
  * An error happens if SEQ is a beginning of an existing longer sequence.
  */
-int define_sequence (int code, char *seq, int action)
+int define_sequence (int code, const char *seq, int action)
 {
     key_def *base;
 

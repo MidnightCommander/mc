@@ -443,7 +443,7 @@ static void tree_move_to_bottom (WTree *tree)
     tree->topdiff = tlines (tree) - 3 - 1;
 }
 
-void tree_chdir (WTree *tree, char *dir)
+void tree_chdir (WTree *tree, const char *dir)
 {
     tree_entry *current;
 
@@ -455,7 +455,7 @@ void tree_chdir (WTree *tree, char *dir)
 }
 
 void
-sync_tree (char *path)
+sync_tree (const char *path)
 {
     tree_chdir (the_tree, path);
 }

@@ -8,9 +8,9 @@ void smblink_cmd (void);
 void undelete_cmd (void);
 void help_cmd (void);
 void dirsizes_cmd (void);
-int view_file_at_line (char *filename, int plain_view, int internal,
+int view_file_at_line (const char *filename, int plain_view, int internal,
 		       int start_line);
-int view_file (char *filename, int normal, int internal);
+int view_file (const char *filename, int normal, int internal);
 void view_cmd (void);
 void view_file_cmd (void);
 void view_simple_cmd (void);

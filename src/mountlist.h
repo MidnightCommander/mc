@@ -31,6 +31,6 @@ struct my_statfs {
 };
 
 void init_my_statfs (void);
-void my_statfs (struct my_statfs *myfs_stats, char *path);
+void my_statfs (struct my_statfs *myfs_stats, const char *path);
 
 #endif 	/* __MOUNTLIST_H	*/

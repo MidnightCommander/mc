@@ -49,7 +49,7 @@
 
 static struct TreeStore ts;
 
-static tree_entry *tree_store_add_entry(char *name);
+static tree_entry *tree_store_add_entry(const char *name);
 
 static void
 tree_store_dirty(int state)
@@ -59,7 +59,7 @@ tree_store_dirty(int state)
 
 /* Returns number of common characters */
 static int
-str_common(char *s1, char *s2)
+str_common(const char *s1, const char *s2)
 {
     int result = 0;
 
@@ -109,7 +109,7 @@ pathcmp(const char *p1, const char *p2)
 
 /* Searches for specified directory */
 tree_entry *
-tree_store_whereis(char *name)
+tree_store_whereis(const char *name)
 {
     tree_entry *current = ts.tree_first;
     int flag = -1;
@@ -271,10 +271,11 @@ tree_store_load(void)
 }
 
 static char *
-encode(char *string)
+encode(const char *string)
 {
     int special_chars;
-    char *p, *q;
+    const char *p;
+    char *q;
     char *res;
 
     for (special_chars = 0, p = string; *p; p++) {
@@ -389,7 +390,7 @@ tree_store_save(void)
 }
 
 static tree_entry *
-tree_store_add_entry(char *name)
+tree_store_add_entry(const char *name)
 {
     int flag = -1;
     tree_entry *current = ts.tree_first;
@@ -550,7 +551,7 @@ remove_entry(tree_entry * entry)
 }
 
 void
-tree_store_remove_entry(char *name)
+tree_store_remove_entry(const char *name)
 {
     tree_entry *current, *base, *old;
     int len;
@@ -634,7 +635,7 @@ tree_store_mark_checked(const char *subname)
 
 /* Mark the subdirectories of the current directory for delete */
 tree_entry *
-tree_store_start_check(char *path)
+tree_store_start_check(const char *path)
 {
     tree_entry *current, *retval;
     int len;
@@ -762,7 +763,7 @@ should_skip_directory(char *dir)
 }
 
 tree_entry *
-tree_store_rescan(char *dir)
+tree_store_rescan(const char *dir)
 {
     DIR *dirp;
     struct dirent *dp;

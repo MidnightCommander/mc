@@ -10,7 +10,7 @@ typedef struct tree_entry {
     char *name;			/* The full path of directory */
     int sublevel;		/* Number of parent directories (slashes) */
     long submask;		/* Bitmask of existing sublevels after this entry */
-    char *subname;		/* The last part of name (the actual name) */
+    const char *subname;		/* The last part of name (the actual name) */
     unsigned int mark:1;	/* Flag: Is this entry marked (e. g. for delete)? */
     unsigned int scanned:1;	/* Flag: childs scanned or not */
     struct tree_entry *next;	/* Next item in the list */
@@ -30,12 +30,12 @@ struct TreeStore {
 struct TreeStore *tree_store_get (void);
 int tree_store_load (void);
 int tree_store_save (void);
-void tree_store_remove_entry (char *name);
-tree_entry *tree_store_start_check (char *path);
+void tree_store_remove_entry (const char *name);
+tree_entry *tree_store_start_check (const char *path);
 void tree_store_mark_checked (const char *subname);
 void tree_store_end_check (void);
-tree_entry *tree_store_whereis (char *name);
-tree_entry *tree_store_rescan (char *dir);
+tree_entry *tree_store_whereis (const char *name);
+tree_entry *tree_store_rescan (const char *dir);
 
 /*
  * Register/unregister notification functions for "entry_remove"

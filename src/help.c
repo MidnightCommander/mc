@@ -749,7 +749,7 @@ interactive_display_finish (void)
 }
 
 void
-interactive_display (char *filename, char *node)
+interactive_display (const char *filename, const char *node)
 {
     WButtonBar *help_bar;
     Widget *md;

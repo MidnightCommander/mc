@@ -2387,7 +2387,7 @@ groupbox_callback (WGroupbox *g, widget_msg_t msg, int parm)
 }
 
 WGroupbox *
-groupbox_new (int x, int y, int width, int height, char *title)
+groupbox_new (int x, int y, int width, int height, const char *title)
 {
     WGroupbox *g = g_new (WGroupbox, 1);
 

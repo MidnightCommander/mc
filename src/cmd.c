@@ -82,7 +82,7 @@ int use_internal_edit = 1;
 
 
 int
-view_file_at_line (char *filename, int plain_view, int internal,
+view_file_at_line (const char *filename, int plain_view, int internal,
 		   int start_line)
 {
     static char *viewer = 0;
@@ -149,7 +149,7 @@ view_file_at_line (char *filename, int plain_view, int internal,
  *   internal:   If set uses the internal viewer, otherwise an external viewer.
  */
 int
-view_file (char *filename, int plain_view, int internal)
+view_file (const char *filename, int plain_view, int internal)
 {
     return view_file_at_line (filename, plain_view, internal, 0);
 }

@@ -29,15 +29,15 @@ typedef struct {
 
 typedef int sortfn (const void *, const void *);
 
-int do_load_dir (char *path, dir_list * list, sortfn * sort, int reverse,
-		 int case_sensitive, char *filter);
+int do_load_dir (const char *path, dir_list * list, sortfn * sort, int reverse,
+		 int case_sensitive, const char *filter);
 void do_sort (dir_list * list, sortfn * sort, int top, int reverse,
 	      int case_sensitive);
-int do_reload_dir (char *path, dir_list * list, sortfn * sort, int count,
-		   int reverse, int case_sensitive, char *filter);
+int do_reload_dir (const char *path, dir_list * list, sortfn * sort, int count,
+		   int reverse, int case_sensitive, const char *filter);
 void clean_dir (dir_list * list, int count);
 int set_zero_dir (dir_list * list);
-int handle_path (dir_list *list, char *path, struct stat *buf1,
+int handle_path (dir_list *list, const char *path, struct stat *buf1,
 		 int next_free, int *link_to_dir, int *stale_link);
 
 /* Sorting functions */
@@ -66,7 +66,7 @@ int sort_group (const file_entry *a, const file_entry *b);
 #define SORT_TYPES_TOTAL (SORT_TYPES + SORT_TYPES_EXTRA)
 
 typedef struct {
-    char    *sort_name;
+    const char    *sort_name;
     int     (*sort_fn)(const file_entry *, const file_entry *);
 } sort_orders_t;
 

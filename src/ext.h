@@ -1,7 +1,7 @@
 #ifndef __EXT_H
 #define __EXT_H
 
-int regex_command (char *filename, char *action, int *move_dir);
+int regex_command (const char *filename, const char *action, int *move_dir);
 
 /* Call it after the user has edited the mc.ext file, 
  * to flush the cached mc.ext file

@@ -127,12 +127,12 @@ char *op_names[3] = {
 
 /* }}} */
 
-static int query_replace (FileOpContext * ctx, char *destname,
+static int query_replace (FileOpContext * ctx, const char *destname,
 			  struct stat *_s_stat, struct stat *_d_stat);
-static int query_recursive (FileOpContext * ctx, char *s);
-static int do_file_error (char *str);
-static int erase_dir_iff_empty (FileOpContext *ctx, char *s);
-static int erase_file (FileOpContext *ctx, char *s,
+static int query_recursive (FileOpContext * ctx, const char *s);
+static int do_file_error (const char *str);
+static int erase_dir_iff_empty (FileOpContext *ctx, const char *s);
+static int erase_file (FileOpContext *ctx, const char *s,
 		       off_t *progress_count, double *progress_bytes,
 		       int is_toplevel_file);
 static int files_error (const char *format, const char *file1,
@@ -457,7 +457,7 @@ enum {
 };
 
 int
-copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
+copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 		int ask_overwrite, off_t *progress_count,
 		double *progress_bytes, int is_toplevel_file)
 {
@@ -854,7 +854,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
 /* FIXME: This function needs to check the return values of the
    function calls */
 int
-copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
+copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 	      int move_over, int delete,
 	      struct link *parent_dirs,
 	      off_t *progress_count, double *progress_bytes)
@@ -1195,7 +1195,7 @@ move_file_file (FileOpContext *ctx, char *s, char *d,
 }
 
 int
-move_dir_dir (FileOpContext *ctx, char *s, char *d,
+move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 	      off_t *progress_count, double *progress_bytes)
 {
     struct stat sbuf, dbuf, destbuf;
@@ -1333,7 +1333,7 @@ move_dir_dir (FileOpContext *ctx, char *s, char *d,
 /* {{{ Erase routines */
 /* Don't update progress status if progress_count==NULL */
 static int
-erase_file (FileOpContext *ctx, char *s, off_t *progress_count,
+erase_file (FileOpContext *ctx, const char *s, off_t *progress_count,
 	    double *progress_bytes, int is_toplevel_file)
 {
     int return_status;
@@ -1445,7 +1445,7 @@ check_dir_is_empty (char *path)
 }
 
 int
-erase_dir (FileOpContext *ctx, char *s, off_t *progress_count,
+erase_dir (FileOpContext *ctx, const char *s, off_t *progress_count,
 	   double *progress_bytes)
 {
     int error;
@@ -1488,7 +1488,7 @@ erase_dir (FileOpContext *ctx, char *s, off_t *progress_count,
 }
 
 static int
-erase_dir_iff_empty (FileOpContext *ctx, char *s)
+erase_dir_iff_empty (FileOpContext *ctx, const char *s)
 {
     int error;
 
@@ -1556,7 +1556,7 @@ panel_get_file (WPanel *panel, struct stat *stat_buf)
  * Computes the number of bytes used by the files in a directory
  */
 void
-compute_dir_size (char *dirname, off_t *ret_marked, double *ret_total)
+compute_dir_size (const char *dirname, off_t *ret_marked, double *ret_total)
 {
     DIR *dir;
     struct dirent *dirent;
@@ -2138,7 +2138,7 @@ panel_operate (void *source_panel, FileOperation operation,
 /* {{{ Query/status report routines */
 
 static int
-real_do_file_error (enum OperationMode mode, char *error)
+real_do_file_error (enum OperationMode mode, const char *error)
 {
     int result;
     char *msg;
@@ -2165,7 +2165,7 @@ real_do_file_error (enum OperationMode mode, char *error)
 
 /* Report error with one file */
 int
-file_error (char *format, char *file)
+file_error (const char *format, const char *file)
 {
     g_snprintf (cmd_buf, sizeof (cmd_buf), format,
 		name_trunc (file, 30), unix_error_string (errno));
@@ -2234,7 +2234,7 @@ real_query_recursive (FileOpContext *ctx, enum OperationMode mode, char *s)
 
 #ifdef WITH_BACKGROUND
 static int
-do_file_error (char *str)
+do_file_error (const char *str)
 {
     if (we_are_background)
 	return parent_call (real_do_file_error, NULL, 1, strlen (str),
@@ -2244,7 +2244,7 @@ do_file_error (char *str)
 }
 
 static int
-query_recursive (FileOpContext *ctx, char *s)
+query_recursive (FileOpContext *ctx, const char *s)
 {
     if (we_are_background)
 	return parent_call (real_query_recursive, ctx, 1, strlen (s), s);
@@ -2253,7 +2253,7 @@ query_recursive (FileOpContext *ctx, char *s)
 }
 
 static int
-query_replace (FileOpContext *ctx, char *destname, struct stat *_s_stat,
+query_replace (FileOpContext *ctx, const char *destname, struct stat *_s_stat,
 	       struct stat *_d_stat)
 {
     if (we_are_background)

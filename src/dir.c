@@ -424,7 +424,7 @@ handle_dirent (dir_list *list, char *filter, struct dirent *dp,
    If you change handle_path then check also handle_dirent. */
 /* Return values: -1 = failure, 0 = don't add, 1 = add to the list */
 int
-handle_path (dir_list *list, char *path,
+handle_path (dir_list *list, const char *path,
 	     struct stat *buf1, int next_free, int *link_to_dir,
 	     int *stale_link)
 {
@@ -461,8 +461,8 @@ handle_path (dir_list *list, char *path,
 }
 
 int
-do_load_dir (char *path, dir_list *list, sortfn *sort, int reverse,
-	     int case_sensitive, char *filter)
+do_load_dir (const char *path, dir_list *list, sortfn *sort, int reverse,
+	     int case_sensitive, const char *filter)
 {
     DIR *dirp;
     struct dirent *dp;
@@ -561,8 +561,8 @@ alloc_dir_copy (int size)
 
 /* If filter is null, then it is a match */
 int
-do_reload_dir (char *path, dir_list *list, sortfn *sort, int count,
-	       int rev, int case_sensitive, char *filter)
+do_reload_dir (const char *path, dir_list *list, sortfn *sort, int count,
+	       int rev, int case_sensitive, const char *filter)
 {
     DIR *dirp;
     struct dirent *dp;
