@@ -28,7 +28,11 @@ BASE_VERSION="4.6.0"
 MC_BASE_DIR="/usr/src/mc-$BASE_VERSION"
 MC_CVS_DIR="/usr/src/mc"
 MC_BUILD_DIR="/usr/src/mc.snap"
-RPM_SRC_DIR="/usr/src/redhat"
+if test -d "/usr/src/rpm"; then
+  RPM_SRC_DIR="/usr/src/rpm"
+else
+  RPM_SRC_DIR="/usr/src/redhat"
+fi
 
 # Location of the snapshot directory
 SITE="login.ibiblio.org"
