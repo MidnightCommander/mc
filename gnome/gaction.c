@@ -53,7 +53,7 @@ gmc_unable_to_execute_dlg (gchar *fname, const gchar *command, gchar *action, co
 				   action,
 				   "\n\"",
 				   fname,
-				   _("\"\nwith\n\""),
+				   _("\"\nwith the command:\n\""),
 				   command,
 				   fix,
 				   NULL);
