@@ -502,7 +502,7 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
 	memset (edit, 0, sizeof (WEdit));
 	to_free = 1;
     }
-    memset (&(edit->from_here), 0, &(edit->to_here) - &(edit->from_here));
+    memset (&(edit->from_here), 0, (unsigned long)&(edit->to_here) - (unsigned long)&(edit->from_here));
     edit->num_widget_lines = lines;
     edit->num_widget_columns = columns;
     edit->stat1.st_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
@@ -588,7 +588,7 @@ int edit_clean (WEdit * edit)
 	if (edit->dir)
 	    free (edit->dir);
 /* we don't want to clear the widget */
-	memset (&(edit->from_here), 0, &(edit->to_here) - &(edit->from_here));
+	memset (&(edit->from_here), 0, (unsigned long)&(edit->to_here) - (unsigned long)&(edit->from_here));
 	return 1;
     }
     return 0;
