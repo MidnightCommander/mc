@@ -1,34 +1,57 @@
 Before 4.6.1
 ============
 
-Allow navigating VFS directories by Enter with non-empty command line.
+Changing directory while in the editor shouldn't affect the path where
+the editor saves its files.
+
+Allow navigating VFS directories by Enter with non-empty command line. 
+Right now, pressing Enter on a directory on VFS with something on the
+command line cayses and error message "Cannot execute commands on
+non-local filesystems".
 
 Allow entering archives in VFS by Ctrl-PgDown with non-empty command
-line.
+line.  Right now, there is no convenient way to enter an archive when
+the command line is not empty.
 
-Allow calling directory hotlist from Copy, Move and Find File dialogs.
+Allow switching between histories of two panels.  It's convenient to
+change to a directory from the history of the other panel.
 
-Allow modifiers for keys in mc.lib, like "shift-up".
+Allow calling the directory hotlist from Copy, Move and Find File
+dialogs.  Recent directories are the obvious candidates for copying and
+looking for files.
 
-Backup config files when writing them.
+Allow modifiers for keys in mc.lib, like "shift-up".  Right now,
+modifiers can be read from the terminal (if supported), but not from the
+config file.  This change would make it possible to use modifiers even
+if they can only be identified by the escape sequences.
 
-Totals are not calculated when operating on a single directory.
+When saving config files, write to a copy, then replace the file.  This
+would avoid the problem of partly written config files.  Consider using
+locking of the config files.
 
-Add support for mouse wheel with gpm.
+Totals are not calculated when copying or moving a single directory. 
+Totals should only be omitted for single files.
 
-Recheck all mouse handlers, make sure that they check button number.
+Add support for mouse wheel with gpm.  Latest versions of gpm (1.20)
+have mose wheel support.
 
-Smooth mouse scrolling on panels.
+Recheck all mouse handlers, make sure that they check button number.  We
+don't wan't mouse scrolling to be interpreted as mouse click.
 
-Load subshell prompt when and only when it's ready.  Alternative
-solution - interpret PS1.
+Smooth mouse scrolling on panels.  Scrolling one page per step is too
+fast.
+
+Don't read prompt from the subshell, because it's unreliable.  Interpret
+environment variable MC_PS1 (or PS1) in the same way as bash.
+
+Support an environment variable (also like PS1 in bash) for setting the
+window title.
 
 real_input_dialog_help() shouldn't use translated strings in the section
-names in .mc/history.
+names in .mc/history.  Right now, mc writes separate history sections
+for different locales.  Only input history is affected.
 
-Make xnc.hlp a text file.  Make it easier to translate the manual.
-
-Hard links in cpio have 0 length (if easy to fix).
+Hard links in cpio archives have 0 length.
 
 Add "Ignore" and "Ignore all" buttons when reporting permission
 problems.
@@ -43,16 +66,22 @@ avoid using a superlong line to redefine all colors.
 
 Use separate colors for hotkeys in error dialogs.
 
-Allow verbatim search in "Find File".
+Allow verbatim search in "Find File".  Right now, the context is always
+interpreted as regular expression.
 
-Filters in the editor should operate on the open file.  They don't work
-on VFS now.  Don't close and reopen the file.
+Filters in the editor should operate on the open file - don't close and
+reopen the file.  They don't work on VFS now.  For example, a gzipped
+files on FTP cannot be edited.
 
 ftp and fish with home != '/' - readjust directory to the home.
 
-Add a case match option in the viewer.
+Search in the viewer should have an option for case sensitive search.
 
-Make find dialog more responsive.
+Make "Find File" dialog more responsive.  Keep state in a structure and
+preserve it when the search is suspended.
+
+Lock files in the editor to prevent opening them more than once.  Warn
+user when opening locked file.
 
 
 
@@ -101,6 +130,8 @@ sftp and fxp support in VFS.
 
 New listing mode keyword "time": mtime or the time (atime, ctime) used
 to sort files.
+
+Support for X clipboard.
 
 
 ========================================================================
