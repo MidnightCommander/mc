@@ -1,0 +1,61 @@
+#! /usr/bin/perl
+#
+# Written by Balazs Nagy (julian7@kva.hu) 1998
+# (C) 1998 The Free Software Foundation.
+#
+#
+
+sub gd
+{
+    my ($dt) = @_;
+    $dt =~ tr/ //s;
+    $dt =~ s/^\w+ (\w+) (\d+) (\d+:\d+):\d+ .+\n?$/$1 $2 $3/;
+    return $dt;
+}
+
+$DATE=gd(`date`);
+
+sub list
+{
+    my (@rpms, %files, $i, $fn, $dn, $sz, $bt);
+#    @rpms = `rpm -qa --qf "\%{NAME}-\%{VERSION}-\%{RELEASE}:\%{GROUP}:\%{SIZE}:\%{BUILDTIME:date}\n"`;
+    @rpms = `rpm -qa --qf "\%{NAME}-\%{VERSION}:\%{GROUP}:\%{SIZE}:\%{BUILDTIME:date}\n"`;
+    print @trpms;
+    %files = ();
+    %sizes = ();
+    %dates = ();
+    for $i (@rpms) {
+	if ($i =~ /^([^:]+):([^:]+):([^:]+):(.+)$/) {
+	    ($fn, $dn, $sz, $bt) = ($1, $2, $3, $4);
+	    $dn =~ s/ /_/g;
+	    if (defined $files{$dn}) {
+		push(@{$files{$dn}}, $fn);
+	    } else {
+		@{$files{$dn}} = ($fn);
+	    }
+	    $sizes{$fn} = $sz;
+	    $dates{$fn} = gd($bt);
+	}
+    }
+    for $i (sort keys %files) {
+	print "dr-xr-xr-x 1 root root 0 $DATE $i/\n";
+	for $fn (sort @{$files{$i}}) {
+	    print "-r--r--r-- 1 root root $sizes{$fn} $dates{$fn} $i/$fn.trpm\n";
+	}
+    }
+}
+
+# override any locale for dates
+$ENV{"LC_ALL"}="C";
+
+#open O, ">>/tmp/tt";
+#print O "RPMS: ";
+#for $i (@ARGV) {
+#    print O "$i ";
+#}
+#print O "\n";
+#close O;
+
+if ($ARGV[0] eq "list") { list(); exit(0); }
+elsif ($ARGV[0] eq "copyout") { open O, ">$ARGV[3]"; print O $ARGV[2], "\n"; close O; exit(0); }
+exit(1);
