@@ -1,6 +1,8 @@
 Before 4.6.1
 ============
 
+Cannot spell check unsaved files in the editor.
+
 Dynamic loading for libgpm, libext2fs.
 
 Check if the archive was changed for extfs, tar and cpio.  Free the data
