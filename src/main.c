@@ -3128,14 +3128,13 @@ main (int argc, char *argv [])
 
 #ifdef HAVE_GNOME
     init_colors ();
+    use_subshell = 0;
 #else
     init_curses ();
+    if (edit_one_file || view_one_file)
+	use_subshell = 0;
 #endif
 
-#ifdef HAVE_GNOME
-    use_subshell = 0;
-#endif
-    
 #   ifdef HAVE_SUBSHELL_SUPPORT
 	/* Done here to ensure that the subshell doesn't  */
 	/* inherit the file descriptors opened below, etc */
