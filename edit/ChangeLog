@@ -1,3 +1,7 @@
+2003-03-06  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* syntax.c (edit_read_syntax_file): Fix segmentation violation.
+
 2003-03-03  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* syntax.c (edit_read_syntax_rules): Check for list of defines

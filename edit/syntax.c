@@ -1005,7 +1005,9 @@ edit_read_syntax_file (WEdit * edit, char **names, const char *syntax_file,
 	    }
 	    if (q) {
 		int line_error;
+		char *syntax_type;
 	      found_type:
+		syntax_type =  args[2];
 		line_error = edit_read_syntax_rules (edit, g ? g : f, args);
 		if (line_error) {
 		    if (!error_file_name)	/* an included file */
@@ -1014,7 +1016,7 @@ edit_read_syntax_file (WEdit * edit, char **names, const char *syntax_file,
 			result = line_error;
 		} else {
 		    syntax_g_free (edit->syntax_type);
-		    edit->syntax_type = g_strdup (args[2]);
+		    edit->syntax_type = g_strdup (syntax_type);
 /* if there are no rules then turn off syntax highlighting for speed */
 		    if (!g && !edit->rules[1])
 			if (!edit->rules[0]->keyword[1] && !edit->rules[0]->spelling) {
