@@ -99,12 +99,13 @@ union vfs_dirent {
 
 /* Register a file system class */
 int vfs_register_class (struct vfs_class *vfs);
+
 void init_cpiofs (void);
 void init_fish (void);
 void init_ftpfs (void);
+void init_tarfs (void);
 
 extern vfs vfs_local_ops;
-extern vfs vfs_tarfs_ops;
 extern vfs vfs_smbfs_ops;
 extern vfs vfs_mcfs_ops;
 extern vfs vfs_extfs_ops;

@@ -30,6 +30,8 @@
 #include "tar.h"
 #include "names.h"
 
+static struct vfs_class vfs_tarfs_ops;
+
 #define	isodigit(c)	( ((c) >= '0') && ((c) <= '7') )
 /*
  * Quick and dirty octal conversion.
@@ -521,60 +523,16 @@ static struct vfs_s_data tarfs_data = {
     NULL
 };
 
-vfs vfs_tarfs_ops =
+void
+init_tarfs (void)
 {
-    NULL,	/* This is place of next pointer */
-    "tarfs",
-    0,		/* flags */
-    "utar",	/* prefix */
-    &tarfs_data,
-    0,		/* errno */
-    NULL,
-    NULL,
-    vfs_s_fill_names,
-    NULL,
-
-    vfs_s_open,
-    vfs_s_close,
-    tar_read,
-    NULL,
-
-    vfs_s_opendir,
-    vfs_s_readdir,
-    vfs_s_closedir,
-    vfs_s_telldir,
-    vfs_s_seekdir,
-
-    vfs_s_stat,
-    vfs_s_lstat,
-    vfs_s_fstat,
-
-    NULL,
-    NULL,
-    NULL,
-
-    vfs_s_readlink,
-    NULL,
-    NULL,
-    NULL,
-
-    NULL,
-    vfs_s_chdir,
-    vfs_s_ferrno,
-    vfs_s_lseek,
-    NULL,
-    
-    vfs_s_getid,
-    vfs_s_nothingisopen,
-    vfs_s_free,
-    
-    vfs_s_getlocalcopy,
-    tar_ungetlocalcopy,
-    
-    NULL,		/* mkdir */
-    NULL,
-    NULL,
-    NULL
-
-MMAPNULL
-};
+    vfs_s_init_class (&vfs_tarfs_ops);
+    vfs_tarfs_ops.name = "tarfs";
+    vfs_tarfs_ops.prefix = "utar";
+    vfs_tarfs_ops.data = &tarfs_data;
+    vfs_tarfs_ops.read = tar_read;
+    vfs_tarfs_ops.write = NULL;
+    vfs_tarfs_ops.ungetlocalcopy = tar_ungetlocalcopy;
+    vfs_tarfs_ops.setctl = NULL;
+    vfs_register_class (&vfs_tarfs_ops);
+}

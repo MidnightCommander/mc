@@ -1231,7 +1231,7 @@ vfs_init (void)
 
     vfs_register_class (&vfs_extfs_ops);
     vfs_register_class (&vfs_sfs_ops);
-    vfs_register_class (&vfs_tarfs_ops);
+    init_tarfs ();
     init_cpiofs ();
 
 #ifdef USE_EXT2FSLIB

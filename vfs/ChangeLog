@@ -1,5 +1,7 @@
 2003-10-11  Pavel Roskin  <proski@gnu.org>
 
+	* tarfs.c: Switch to self-registration.
+
 	* extfs.c: Don't include xdirentry.h.
 	* vfs.c: Likewise.
 
