@@ -3,23 +3,30 @@
 # Compile GNU Midnight Commander against glib 2.x.
 # Should be run from the top-level directory.
 
-GLIB_VERSION="2.2.1"
+: ${MC_TOPDIR=`pwd`}
+: ${TMP_INSTDIR=$MC_TOPDIR/tmp-inst}
+: ${GLIB_VERSION=2.2.1}
+: ${PKGC_VERSION=0.15.0}
+: ${GETTEXT_VERSION=0.11.5}
+
 GLIB_DIR="glib-$GLIB_VERSION"
 GLIB_TARBALL="glib-$GLIB_VERSION.tar.gz"
 GLIB_URL="ftp://ftp.gtk.org/pub/gtk/v2.2/$GLIB_TARBALL"
 
-PKGC_VERSION="0.15.0"
 PKGC_DIR="pkgconfig-$PKGC_VERSION"
 PKGC_TARBALL="pkgconfig-$PKGC_VERSION.tar.gz"
 PKGC_URL="http://www.freedesktop.org/software/pkgconfig/releases/$PKGC_TARBALL"
 
-GETTEXT_VERSION="0.11.5"
 GETTEXT_DIR="gettext-$GETTEXT_VERSION"
 GETTEXT_TARBALL="gettext-$GETTEXT_VERSION.tar.gz"
 GETTEXT_URL="ftp://ftp.gnu.org/gnu/gettext/$GETTEXT_TARBALL"
 
-MC_TOPDIR=`pwd`
-TMP_INSTDIR="$MC_TOPDIR/tmp-inst"
+function get_file() {
+  curl --remote-name "$1" || \
+  wget --passive-ftp "$1" || \
+  wget "$1" || \
+  exit 1
+}
 
 if test -f src/dir.c; then : ; else
   echo "Not in the top-level directory of GNU Midnight Commander." 2>&1
@@ -37,7 +44,7 @@ export PATH
 # Compile gettext
 cd "$MC_TOPDIR"
 if gzip -vt "$GETTEXT_TARBALL"; then : ; else
-  wget "$GETTEXT_URL" || curl -o "$GETTEXT_TARBALL" "$GETTEXT_URL" || exit 1
+  get_file "$GETTEXT_URL"
 fi
 
 rm -rf "$GETTEXT_DIR"
@@ -55,7 +62,7 @@ make install || exit 1
 # Compile pkgconfig
 cd "$MC_TOPDIR"
 if gzip -vt "$PKGC_TARBALL"; then : ; else
-  wget "$PKGC_URL" || curl -o "$PKGC_TARBALL" "$PKGC_URL" || exit 1
+  get_file "$PKGC_URL"
 fi
 
 rm -rf "$PKGC_DIR"
@@ -73,7 +80,7 @@ make install || exit 1
 # Compile glib
 cd "$MC_TOPDIR"
 if gzip -vt "$GLIB_TARBALL"; then : ; else
-  wget "$GLIB_URL" || curl -o "$GLIB_TARBALL" "$GLIB_URL" || exit 1
+  get_file "$GLIB_URL" || exit 1
 fi
 
 rm -rf "$GLIB_DIR"

@@ -3,12 +3,20 @@
 # Get glib-1.2.10 and compile GNU Midnight Commander against it.
 # Should be run from the top-level directory.
 
-GLIB_VERSION="1.2.10"
+: ${MC_TOPDIR=`pwd`}
+: ${GLIB_VERSION=1.2.10}
+
 GLIB_DIR="glib-$GLIB_VERSION"
 GLIB_TARBALL="glib-$GLIB_VERSION.tar.gz"
 GLIB_URL="ftp://ftp.gtk.org/pub/gtk/v1.2/$GLIB_TARBALL"
-MC_TOPDIR=`pwd`
 GLIB_INSTDIR="$MC_TOPDIR/glib-inst"
+
+function get_file() {
+  curl --remote-name "$1" || \
+  wget --passive-ftp "$1" || \
+  wget "$1" || \
+  exit 1
+}
 
 if test -f src/dir.c; then : ; else
   echo "Not in the top-level directory of GNU Midnight Commander." 2>&1
@@ -20,7 +28,7 @@ if test -f configure; then : ; else
 fi
 
 if gzip -vt "$GLIB_TARBALL"; then : ; else
-  wget "$GLIB_URL" || curl -o "$GLIB_TARBALL" "$GLIB_URL" || exit 1
+  get_file "$GLIB_URL"
 fi
 
 rm -rf "$GLIB_DIR"
