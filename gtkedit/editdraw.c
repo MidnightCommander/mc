@@ -461,10 +461,8 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
 {
     long row = 0, curs_row;
     static int prev_curs_row = 0;
-    static long prev_start_display = 0;
     static int prev_start_col = 0;
     static long prev_curs = 0;
-    unsigned long syntax_rule;
 
 #ifndef MIDNIGHT
     static unsigned long prev_win = 0;
@@ -473,9 +471,6 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
 
     int force = edit->force;
     long b;
-
-    edit_get_syntax_color (edit, edit->start_display - 1, &fg, &bg);
-    syntax_rule = edit->rule;
 
 /*
    if the position of the page has not moved then we can draw the cursor character only.
@@ -580,7 +575,6 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
 
     prev_curs_row = edit->curs_row;
     prev_curs = edit->curs1;
-    prev_start_display = edit->start_display;
     prev_start_col = edit->start_col;
 #ifndef MIDNIGHT
 #ifdef GTK
@@ -590,8 +584,6 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
 #endif
 #endif
   exit_render:
-    edit->last_get_rule = edit->start_display - 1;
-    edit->rule = syntax_rule;
 }
 
 

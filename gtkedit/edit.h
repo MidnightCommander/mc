@@ -37,11 +37,9 @@
 #    include "src/tty.h"
 #    include <sys/stat.h>
 #    include <errno.h>
-     
-#    ifdef HAVE_FCNTL_H
-#        include <fcntl.h>
-#    endif
-     
+
+#    include <fcntl.h>
+
 #    include <stdlib.h>
 #    include <malloc.h>
 
@@ -304,14 +302,17 @@ struct context_rule {
     int between_delimiters;
     char *whole_word_chars_left;
     char *whole_word_chars_right;
-    unsigned char *conflicts;
     char *keyword_first_chars;
     char *keyword_last_chars;
 /* first word is word[1] */
     struct key_word **keyword;
 };
 
-
+struct _syntax_marker {
+    long offset;
+    unsigned long rule;
+    struct _syntax_marker *next;
+};
 
 struct editor_widget {
 #ifdef MIDNIGHT
@@ -375,6 +376,12 @@ struct editor_widget {
     int column2;			/*position of column highlight end */
     long bracket;		/*position of a matching bracket */
 
+/* cache speedup for line lookups */
+#define N_LINE_CACHES	32
+    int caches_valid;
+    int line_numbers[N_LINE_CACHES];
+    long line_offsets[N_LINE_CACHES];
+
 /* undo stack and pointers */
     unsigned long stack_pointer;
     long *undo_stack;
@@ -384,6 +391,7 @@ struct editor_widget {
     struct stat stat;
 
 /* syntax higlighting */
+    struct _syntax_marker *syntax_marker;
     struct context_rule **rules;
     long last_get_rule;
     unsigned long rule;
