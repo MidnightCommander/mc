@@ -406,7 +406,7 @@ init_subshell (void)
 
 	if (subshell_type == TCSH) {
 	    g_snprintf (tcsh_fifo, sizeof (tcsh_fifo), "%s/mc.pipe.%d",
-			mc_tmpdir (), getpid ());
+			mc_tmpdir (), (int) getpid ());
 	    if (mkfifo (tcsh_fifo, 0600) == -1) {
 		fprintf (stderr, "mkfifo(%s) failed: %s\r\n", tcsh_fifo,
 			 unix_error_string (errno));
