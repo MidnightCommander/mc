@@ -1,6 +1,7 @@
 2004-09-25  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c (display): Recognize "+\bo" as a list item in nroff mode.
+	Display "_\b_" correctly in both colors.
 	* view.c (hex_search): Added const qualifier.
 
 2004-09-25  Pavel Shirshov  <pavelsh@mail.ru>

@@ -866,6 +866,14 @@ typedef enum {
     MARK_CHANGED = 3
 } mark_t;
 
+static inline int view_count_backspaces (WView *view, off_t offset)
+{
+    int backspaces = 0;
+    while (get_byte (view, offset - 2 * backspaces) == '\b')
+        backspaces++;
+    return backspaces;
+}
+
 /* Shows the file pointed to by *start_display on view_win */
 static offset_type
 display (WView *view)
@@ -1097,7 +1105,7 @@ display (WView *view)
 		    }
 		    col--;
 		    boldflag = MARK_SELECTED;
-		    if (c_prev == '_' && c_next != '_')
+		    if (c_prev == '_' && (c_next != '_' || view_count_backspaces (view, from) == 1))
 			attrset (VIEW_UNDERLINED_COLOR);
 		    else
 			attrset (MARKED_COLOR);
