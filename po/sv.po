@@ -3,6 +3,10 @@
 # FIRST AUTHOR: Henrik Steen <hsteen@sw.seisy.abb.se>, 26 Aug 1999.
 #		revision for gnome 1.0.50, 17 Sept 1999
 #
+# Richard Hult <rhult@hem.passagen.se>
+# Martin Norbäck <d95mback@dtek.chalmers.se>
+# Andreas Hyden  <a.hyden@cyberpoint.se>
+#
 # ERROR på rad: 5594
 # I original källkoden antas att pluralformen av 'File' alltid fås genom 
 # att lägga till ett 's'. Fixa källkoden!!! (Någon med CVS rättighet.)
@@ -12,7 +16,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
-"POT-Creation-Date: 2000-05-09 10:51+0200\n"
+"POT-Creation-Date: 2000-05-15 20:23+0200\n"
 "PO-Revision-Date: 2000-04-20 17:22+0200\n"
 "Last-Translator: Martin Norbäck <d95mback@dtek.chalmers.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -120,8 +124,7 @@ msgstr "Människorna bakom Midnight Commander"
 
 #: gnome/gcmd.c:102
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
-msgstr ""
-"buggrapporter: http://bugs.gnome.org, eller använd gnome-bug"
+msgstr "buggrapporter: http://bugs.gnome.org, eller använd gnome-bug"
 
 #: gnome/gcmd.c:114
 msgid "GNU Midnight Commander"
@@ -360,28 +363,28 @@ msgstr "Visa kolumner"
 msgid "Custom View"
 msgstr "Egen vy"
 
-#: gnome/gdesktop.c:622 gnome/gmount.c:382
+#: gnome/gdesktop.c:629 gnome/gmount.c:382
 msgid "Warning"
 msgstr "Varning"
 
-#: gnome/gdesktop.c:623
+#: gnome/gdesktop.c:630
 #, c-format
 msgid "Could not open %s; will not have desktop icons"
 msgstr "Kan inte öppna %s, kommer inte att finnas några ikoner på skrivbordet"
 
-#: gnome/gdesktop.c:1298
+#: gnome/gdesktop.c:1347
 msgid "While running the mount/umount command"
 msgstr "Under körning av montera/avmontera kommandot"
 
-#: gnome/gdesktop.c:1367
+#: gnome/gdesktop.c:1416
 msgid "While running the eject command"
 msgstr "Vid körning av kommandot \"eject\""
 
-#: gnome/gdesktop.c:1551 gnome/gicon.c:282 gnome/gtools.c:46
+#: gnome/gdesktop.c:1600 gnome/gicon.c:282 gnome/gtools.c:46
 msgid "Error"
 msgstr "Fel"
 
-#: gnome/gdesktop.c:2775
+#: gnome/gdesktop.c:2832
 msgid ""
 "Unable to locate the file:\n"
 "background-properties-capplet\n"
@@ -395,84 +398,88 @@ msgstr ""
 "\n"
 "Kan inte sätta bakgrund."
 
-#: gnome/gdesktop.c:2798 gnome/glayout.c:362
+#: gnome/gdesktop.c:2855 gnome/glayout.c:362
 msgid "_Terminal"
 msgstr "_Terminal"
 
-#: gnome/gdesktop.c:2798 gnome/glayout.c:363
+#: gnome/gdesktop.c:2855 gnome/glayout.c:363
 msgid "Launch a new terminal in the current directory"
 msgstr "Starta en ny terminal i den aktuella katalogen"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2800 gnome/glayout.c:365
+#: gnome/gdesktop.c:2857 gnome/glayout.c:365
 msgid "_Directory..."
 msgstr "_Katalog..."
 
-#: gnome/gdesktop.c:2800 gnome/glayout.c:366
+#: gnome/gdesktop.c:2857 gnome/glayout.c:366
 msgid "Creates a new directory"
 msgstr "Skapar en ny katalog"
 
-#: gnome/gdesktop.c:2801
+#: gnome/gdesktop.c:2858
 msgid "URL L_ink..."
 msgstr "URL-_länk..."
 
-#: gnome/gdesktop.c:2801
+#: gnome/gdesktop.c:2858
 msgid "Creates a new URL link"
 msgstr "Skapar en ny URL-länk"
 
-#: gnome/gdesktop.c:2802
+#: gnome/gdesktop.c:2859
 msgid "_Launcher..."
 msgstr "_Startare..."
 
-#: gnome/gdesktop.c:2802
+#: gnome/gdesktop.c:2859
 msgid "Creates a new launcher"
 msgstr "Skapar en ny startare"
 
-#: gnome/gdesktop.c:2808
+#: gnome/gdesktop.c:2865
 msgid "By _Name"
 msgstr "Efter _namn"
 
-#: gnome/gdesktop.c:2809
+#: gnome/gdesktop.c:2866
 msgid "By File _Type"
 msgstr "Efter _filtyp"
 
-#: gnome/gdesktop.c:2810
+#: gnome/gdesktop.c:2867
 msgid "By _Size"
 msgstr "I _storleksordning"
 
-#: gnome/gdesktop.c:2811
+#: gnome/gdesktop.c:2868
 msgid "By Time Last _Accessed"
 msgstr "Efter tid, senast _accessad"
 
-#: gnome/gdesktop.c:2812
+#: gnome/gdesktop.c:2869
 msgid "By Time Last _Modified"
 msgstr "Efter tid, senast _modified"
 
-#: gnome/gdesktop.c:2813
+#: gnome/gdesktop.c:2870
 msgid "By Time Last _Changed"
 msgstr "Efter tid, senast _ändrad"
 
-#: gnome/gdesktop.c:2821 gnome/glayout.c:462
+#: gnome/gdesktop.c:2878 gnome/glayout.c:462
 msgid "_Arrange Icons"
 msgstr "_Arrangera ikoner"
 
-#: gnome/gdesktop.c:2822
+#: gnome/gdesktop.c:2879
+msgid "_Tidy Icons"
+msgstr "_Rada upp ikoner"
+
+#: gnome/gdesktop.c:2880
 msgid "Create _New Window"
 msgstr "Öppna _nytt fönster"
 
-#: gnome/gdesktop.c:2824 gnome/glayout.c:464
+#: gnome/gdesktop.c:2882 gnome/glayout.c:464
 msgid "Rescan _Desktop Directory"
 msgstr "_Ladda om skrivbordet"
 
-#: gnome/gdesktop.c:2825 gnome/glayout.c:465
+#: gnome/gdesktop.c:2883 gnome/glayout.c:465
 msgid "Rescan De_vices"
 msgstr "Ladda om _enheter"
 
-#: gnome/gdesktop.c:2826 gnome/glayout.c:466
+#: gnome/gdesktop.c:2884 gnome/glayout.c:466
 msgid "Recreate Default _Icons"
 msgstr "Återskapa skrivbords_ikoner"
 
-#: gnome/gdesktop.c:2828
+#: gnome/gdesktop.c:2886
 msgid "Configure _Background Image"
 msgstr "Konfigurera _bakgrundsbild"
 
@@ -6613,29 +6620,29 @@ msgstr ""
 "Oväntat filslut\n"
 "%s"
 
-#: vfs/direntry.c:300
+#: vfs/direntry.c:301
 #, c-format
 msgid "Dir cache expired for %s"
 msgstr "Katalogcache för gammal för %s"
 
-#: vfs/direntry.c:430 vfs/direntry.c:433
+#: vfs/direntry.c:431 vfs/direntry.c:434
 msgid " Direntry warning "
 msgstr " Katalogpostsvarning "
 
-#: vfs/direntry.c:430
+#: vfs/direntry.c:431
 #, c-format
 msgid "Super ino_usage is %d, memory leak"
 msgstr "Super ino_usage är %d, minnesläcka"
 
-#: vfs/direntry.c:433
+#: vfs/direntry.c:434
 msgid "Super has want_stale set"
 msgstr "Super har satt want_stale"
 
-#: vfs/direntry.c:811
+#: vfs/direntry.c:812
 msgid "Starting linear transfer..."
 msgstr "Startar linjär överföring..."
 
-#: vfs/direntry.c:956
+#: vfs/direntry.c:957
 msgid "Getting file"
 msgstr "Hämtar fil: "
 
