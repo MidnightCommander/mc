@@ -222,12 +222,12 @@ int edit_save_file (WEdit * edit, const char *filename)
     } else
 	savename = g_strdup (filename);
 
+    mc_chmod (savename, edit->stat1.st_mode);
+    mc_chown (savename, edit->stat1.st_uid, edit->stat1.st_gid);
+
     if ((fd = mc_open (savename, O_CREAT | O_WRONLY | O_TRUNC | MY_O_TEXT,
 		    edit->stat1.st_mode)) == -1)
 	goto error_save;
-
-    mc_chmod (savename, edit->stat1.st_mode);
-    mc_chown (savename, edit->stat1.st_uid, edit->stat1.st_gid);
 
 /* pipe save */
     if ((p = (char *) edit_get_write_filter (savename, filename))) {
