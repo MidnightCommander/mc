@@ -232,7 +232,7 @@ panel_fill_panel_icons (WPanel *panel)
 		file_entry *fe = &panel->dir.list [i];
 		int p;
 		
-		image = gicon_get_icon_for_file (panel->cwd, fe);
+		image = gicon_get_icon_for_file (panel->cwd, fe, TRUE);
 		p = gnome_icon_list_append_imlib (icons, image, fe->fname);
 		if (fe->f.marked)
 			gnome_icon_list_select_icon (icons, p);

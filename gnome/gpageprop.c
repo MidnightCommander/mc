@@ -100,10 +100,10 @@ item_properties (GtkWidget *parent, char *fname, DesktopIconInfo *dii)
 		dirname = g_strndup (fname, p - fname);
 
 		fe = file_entry_from_file (fname);
-		icon = gicon_get_icon_for_file_speed (dirname, fe, FALSE);
+		icon = gicon_get_icon_for_file (dirname, fe, FALSE);
 		g_free (dirname);
 		file_entry_free (fe);
-		icon_filename = gicon_image_to_name (icon);
+		icon_filename = gicon_get_filename_for_icon (icon);
 		if (icon_filename == NULL)
 			icon_filename = g_strdup (ICONDIR "i-regular.png");
 		

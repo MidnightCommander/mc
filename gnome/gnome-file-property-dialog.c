@@ -98,6 +98,7 @@ gnome_file_property_dialog_init (GnomeFilePropertyDialog *file_property_dialog)
 	file_property_dialog->drop_target = NULL;
 	file_property_dialog->im = NULL;
 }
+
 static void
 gnome_file_property_dialog_finalize (GtkObject *object)
 {
@@ -141,8 +142,8 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 	GtkWidget *align;
 	gchar *direc;
 	gchar *gen_string;
-	gchar size[50]; /* this is a HUGE file. (: */
-	gchar size2[20]; /* this is a HUGE file. (: */
+	gchar buf[MC_MAXPATHLEN];
+	gchar buf2[MC_MAXPATHLEN];
 	file_entry *fe;
 	GtkWidget *icon;
 	struct tm *time;
@@ -156,7 +157,7 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 	direc = g_strdup (fp_dlg->file_name);
 	strrchr (direc, '/')[0] = '\0';
 	fe = file_entry_from_file (fp_dlg->file_name);
-	fp_dlg->im = gicon_get_icon_for_file_speed (direc, fe, FALSE);
+	fp_dlg->im = gicon_get_icon_for_file (direc, fe, FALSE);
 	file_entry_free (fe);
 	g_free (direc);
 	icon = gnome_pixmap_new_from_imlib (fp_dlg->im);
@@ -203,12 +204,11 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 		label = gtk_label_new (_("File Type: Symbolic Link"));
 		gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 		gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
-		n = mc_readlink (fp_dlg->file_name, size, 49);
+		n = mc_readlink (fp_dlg->file_name, buf, MC_MAXPATHLEN);
 		if (n < 0)
 			label = gtk_label_new (_("Target Name: INVALID LINK"));
 		else {
-			size[n] = '\0';
-			gen_string = g_strconcat (_("Target Name: "), size, NULL);
+			gen_string = g_strconcat (_("Target Name: "), buf, NULL);
 			label = gtk_label_new (gen_string);
 			g_free (gen_string);
 		}
@@ -230,18 +230,19 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 	    || S_ISREG (fp_dlg->st.st_mode)
 	    || S_ISLNK (fp_dlg->st.st_mode)) {
 		if ((gint)fp_dlg->st.st_size < 1024) {
-			snprintf (size, 19, "%d", (gint) fp_dlg->st.st_size);
-			gen_string = g_strconcat (_("File Size: "), size, _(" bytes"), NULL);
+			snprintf (buf, MC_MAXPATHLEN, "%d", (gint) fp_dlg->st.st_size);
+			gen_string = g_strconcat (_("File Size: "), buf, _(" bytes"), NULL);
 		} else if ((gint)fp_dlg->st.st_size < 1024 * 1024) {
-			snprintf (size, 19, "%.1f", (gfloat) fp_dlg->st.st_size / 1024.0);
-			snprintf (size2, 19, "%d", (gint) fp_dlg->st.st_size);
-			gen_string = g_strconcat (_("File Size: "), size, _(" KBytes  ("),
-						  size2, _(" bytes)"), NULL);
+			snprintf (buf, MC_MAXPATHLEN, "%.1f", (gfloat) fp_dlg->st.st_size / 1024.0);
+			snprintf (buf2, MC_MAXPATHLEN, "%d", (gint) fp_dlg->st.st_size);
+			gen_string = g_strconcat (_("File Size: "), buf, _(" KBytes  ("),
+						  buf2, _(" bytes)"), NULL);
 		} else {
-			snprintf (size, 19, "%.1f", (gfloat) fp_dlg->st.st_size / (1024.0 * 1024.0));
-			snprintf (size2, 19, "%d", (gint) fp_dlg->st.st_size);
-			gen_string = g_strconcat (_("File Size: "), size, _(" MBytes  ("),
-						  size2, _(" bytes)"), NULL);
+			snprintf (buf, MC_MAXPATHLEN, "%.1f",
+				  (gfloat) fp_dlg->st.st_size / (1024.0 * 1024.0));
+			snprintf (buf2, MC_MAXPATHLEN, "%d", (gint) fp_dlg->st.st_size);
+			gen_string = g_strconcat (_("File Size: "), buf, _(" MBytes  ("),
+						  buf2, _(" bytes)"), NULL);
 		}
 		label = gtk_label_new (gen_string);
 		g_free (gen_string);
@@ -263,8 +264,8 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 0, 1);
 	time = gmtime (&(fp_dlg->st.st_ctime));
-	strftime (size, 49, "%a, %b %d %Y,  %I:%M:%S %p", time);
-	label = gtk_label_new (size);
+	strftime (buf, MC_MAXPATHLEN, "%a, %b %d %Y,  %I:%M:%S %p", time);
+	label = gtk_label_new (buf);
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 	gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 0, 1);
 
@@ -272,8 +273,8 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 1, 2);
 	time = gmtime (&(fp_dlg->st.st_mtime));
-	strftime (size, 49, "%a, %b %d %Y,  %I:%M:%S %p", time);
-	label = gtk_label_new (size);
+	strftime (buf, MC_MAXPATHLEN, "%a, %b %d %Y,  %I:%M:%S %p", time);
+	label = gtk_label_new (buf);
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 	gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 1, 2);
 
@@ -281,8 +282,8 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 2, 3);
 	time = gmtime (&(fp_dlg->st.st_atime));
-	strftime (size, 49, "%a, %b %d %Y,  %I:%M:%S %p", time);
-	label = gtk_label_new (size);
+	strftime (buf, MC_MAXPATHLEN, "%a, %b %d %Y,  %I:%M:%S %p", time);
+	label = gtk_label_new (buf);
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 	gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 2, 3);
 	return vbox;
@@ -364,6 +365,7 @@ metadata_toggled (GtkWidget *cbox, GnomeFilePropertyDialog *fp_dlg)
 		}
 	}
 }
+
 static void
 switch_metadata_box (GnomeFilePropertyDialog *fp_dlg)
 {
@@ -423,6 +425,7 @@ switch_metadata_box (GnomeFilePropertyDialog *fp_dlg)
 	}
 	fp_dlg->changing = FALSE;
 }
+
 static GtkWidget *
 generate_icon_sel (GnomeFilePropertyDialog *fp_dlg)
 {
@@ -430,7 +433,7 @@ generate_icon_sel (GnomeFilePropertyDialog *fp_dlg)
 	gchar *icon;
 	
 	retval = gnome_icon_entry_new ("gmc_file_icon", "Select an Icon");
-	icon = gicon_image_to_name (fp_dlg->im);
+	icon = gicon_get_filename_for_icon (fp_dlg->im);
 	if (!icon)
 		return retval;
 	
@@ -442,6 +445,7 @@ generate_icon_sel (GnomeFilePropertyDialog *fp_dlg)
 	g_free (icon);
 	return retval;
 }
+
 static GtkWidget *
 generate_actions_box (GnomeFilePropertyDialog *fp_dlg)
 {
@@ -552,6 +556,7 @@ generate_actions_box (GnomeFilePropertyDialog *fp_dlg)
 
 	return table;
 }
+
 static GtkWidget *
 create_settings_pane (GnomeFilePropertyDialog *fp_dlg)
 {
@@ -642,7 +647,6 @@ perm_get_umode (GnomeFilePropertyDialog *fp_dlg)
 	
 #undef SETBIT
 }
-
 
 static void
 perm_set_mode_label (GtkWidget *widget, gpointer data)
@@ -792,12 +796,13 @@ perm_owner_new (GnomeFilePropertyDialog *fp_dlg)
 
 	return gentry;
 }
+
 static GtkWidget *
 perm_group_new (GnomeFilePropertyDialog *fp_dlg)
 {
 	GtkWidget *gentry;
 	struct group *grp;
-	gchar grpnum [10];
+	gchar grpnum [50];
 	gboolean grp_flag = FALSE;
 	gchar *grpname = NULL;
 	GList *templist;
@@ -814,7 +819,7 @@ perm_group_new (GnomeFilePropertyDialog *fp_dlg)
 		if (grp->gr_name)
 			fp_dlg->group_name = g_strdup (grp->gr_name);
 		else {
-			g_snprintf (grpnum, 9, "%d", (int) grp->gr_gid);
+			sprintf (grpnum, "%d", (int) grp->gr_gid);
 			fp_dlg->group_name = g_strdup (grpnum);
 		}
 
@@ -824,7 +829,7 @@ perm_group_new (GnomeFilePropertyDialog *fp_dlg)
 			if (grp->gr_name)
 				grpname = grp->gr_name;
 			else {
-				g_snprintf (grpnum, 9, "%d", (int) grp->gr_gid);
+				sprintf (grpnum, "%d", (int) grp->gr_gid);
 				grpname = grpnum;
 			}
 		}
@@ -932,13 +937,14 @@ create_perm_properties (GnomeFilePropertyDialog *fp_dlg)
 	gtk_box_pack_start (GTK_BOX (vbox), perm_ownership_new (fp_dlg), TRUE, TRUE, 0);
 	return vbox;
 } 
+
 /* finally the new dialog */
 static void
 init_metadata (GnomeFilePropertyDialog *fp_dlg)
 {
 	gint size;
 	char *mime_type;
-	gchar link_name[60];
+	gchar link_name[MC_MAXPATHLEN];
 	gint n;
 	gchar *file_name, *desktop_url;
 
@@ -952,11 +958,9 @@ init_metadata (GnomeFilePropertyDialog *fp_dlg)
 	/* Mime stuff */
 	file_name = fp_dlg->file_name;
 	if (S_ISLNK (fp_dlg->st.st_mode)) {
-		n = mc_readlink (fp_dlg->file_name, link_name, 59);
-		if (n > 0) {
-			link_name[n] = '\0';
+		n = mc_readlink (fp_dlg->file_name, link_name, MC_MAXPATHLEN);
+		if (n > 0)
 			file_name = link_name;
-		}
 	}
 	
 	if (gnome_metadata_get (fp_dlg->file_name, "desktop-url", &size, &desktop_url) == 0)
@@ -987,6 +991,7 @@ init_metadata (GnomeFilePropertyDialog *fp_dlg)
 		g_print ("we have an icon-filename:%s:\n", fp_dlg->icon_filename);
 
 }
+
 GtkWidget *
 gnome_file_property_dialog_new (gchar *file_name, gboolean can_set_icon)
 {
@@ -1057,6 +1062,7 @@ gnome_file_property_dialog_new (gchar *file_name, gboolean can_set_icon)
 
 	return GTK_WIDGET (fp_dlg);
 }
+
 static gint
 apply_mode_change (GnomeFilePropertyDialog *fpd)
 {
@@ -1068,6 +1074,7 @@ apply_mode_change (GnomeFilePropertyDialog *fpd)
 	}
 	return 0;
 }
+
 static gint
 apply_uid_group_change (GnomeFilePropertyDialog *fpd)
 {
@@ -1122,6 +1129,7 @@ apply_uid_group_change (GnomeFilePropertyDialog *fpd)
 	}
 	return 0;
 }
+
 static gint
 apply_name_change (GnomeFilePropertyDialog *fpd)
 {
@@ -1170,6 +1178,7 @@ apply_name_change (GnomeFilePropertyDialog *fpd)
 	}
 	return 1;
 }
+
 static gint
 apply_metadata_change (GnomeFilePropertyDialog *fpd)
 {
@@ -1260,7 +1269,7 @@ apply_metadata_change (GnomeFilePropertyDialog *fpd)
 		return 1;
 	/* And finally, we set the metadata on the icon filename */
 	text = gnome_icon_entry_get_filename (GNOME_ICON_ENTRY (fpd->button)); /*gtk_entry_get_text (GTK_ENTRY (gnome_icon_entry_gtk_entry (GNOME_ICON_ENTRY (fpd->button))));*/
-	icon_name = gicon_image_to_name (fpd->im);
+	icon_name = gicon_get_filename_for_icon (fpd->im);
 	if (text) {
 		if (strcmp (text, icon_name))
 			/* FIXME: We make a big assumption here.  If the file doesn't exist, it will

@@ -1,5 +1,20 @@
 1999-02-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gicon.c: Lots of changes to support the little symlink/stalled
+	icons that get overlaid on the normal file icons.  We now have the
+	concept of an icon set, which is a cache of normal icons plus
+	their overlaid versions.
+
+	* gnome-file-property-dialog.c (apply_metadata_change): Use
+	gicon_get_filename_for_icon().
+	(generate_icon_sel): Likewise.
+
+	* gnome-file-property-dialog.c (create_general_properties): Use
+	buffers of size MC_MAXPATHLEN.
+	(init_metadata): Likewise.
+
+1999-02-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
 	* gmetadata.c: Removed the gmeta_del_icon_pos() function, since it
 	is no longer used anywhere.
 
@@ -403,7 +418,7 @@ Sun Feb  7 05:29:17 1999  Timur Bakeyev <mc@bat.ru>
 
 	* gdesktop.c: Init gicon here to avoid crashing when we have the
 	metadata database locked.  Not really important, but makes the
-	code cleaner (in terms of fixes). 
+	code cleaner (in terms of fixes).
 
 1999-01-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 

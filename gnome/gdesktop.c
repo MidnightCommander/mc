@@ -1,6 +1,6 @@
 /* Desktop management for the Midnight Commander
  *
- * Copyright (C) 1998 The Free Software Foundation
+ * Copyright (C) 1998-1999 The Free Software Foundation
  *
  * Authors: Federico Mena <federico@nuclecu.unam.mx>
  *          Miguel de Icaza <miguel@nuclecu.unam.mx>
@@ -406,7 +406,7 @@ reload_desktop_icons (int user_pos, int xpos, int ypos)
 
 			full_name = g_concat_dir_and_file (desktop_directory, dirent->d_name);
 			fe = file_entry_from_file (full_name);
-			im = gicon_get_icon_for_file_speed (desktop_directory, fe, FALSE);
+			im = gicon_get_icon_for_file (desktop_directory, fe, FALSE);
 			file_entry_free (fe);
 			g_free (full_name);
 
@@ -1435,7 +1435,7 @@ desktop_icon_info_new (char *filename, char *url, char *caption, int xpos, int y
 		caption = filename;
 	}
 	
-	icon_im = gicon_get_icon_for_file_speed (desktop_directory, fe, FALSE);
+	icon_im = gicon_get_icon_for_file (desktop_directory, fe, FALSE);
 	dii->dicon = desktop_icon_new (icon_im, caption);
 	dii->filename = g_strdup (filename);
 	dii->selected = FALSE;
