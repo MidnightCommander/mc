@@ -8,7 +8,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc VERSION\n"
+"Project-Id-Version: mc-4.5.40\n"
 "POT-Creation-Date: 1999-10-05 01:00-0400\n"
 "PO-Revision-Date: 1999-09-21 02:56-0500\n"
 "Last-Translator: Sergey Panov <sipan@mit.edu>\n"
@@ -270,7 +270,7 @@ msgstr ""
 
 #: gnome/gcmd.c:963
 msgid "Enter the URL:"
-msgstr ""
+msgstr "Введите URL:"
 
 #: gnome/gcustom-layout.c:34
 msgid "Access Time"
@@ -499,12 +499,12 @@ msgid ""
 "Some of the files you are trying to copy already exist in the destination "
 "folder.  Please select the action to be performed."
 msgstr ""
-"Некоторые из файлов вы пытаетесь скопировать уже находятся в выбранном "
-"каталоге. Выберите пожалуйста одно из предложенных действий."
+"Некоторые из файлов, которые вы пытаетесь скопировать уже находятся в "
+"выбранном каталоге. Выберите пожалуйста одно из предложенных действий."
 
 #: gnome/gdialogs.c:399
 msgid "Prompt me before overwriting any file."
-msgstr "Предупреждать перед перезаписыванием любого файла"
+msgstr "Предупреждать перед перезаписыванием любого файла."
 
 #: gnome/gdialogs.c:406
 msgid "Don't overwrite any files."
@@ -641,11 +641,11 @@ msgstr ""
 #. are used to identify password boxes and hide characters with "*"
 #: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1808
 msgid "Password:"
-msgstr ""
+msgstr "Пароль:"
 
 #: gnome/gdialogs.c:1007
 msgid "Password"
-msgstr ""
+msgstr "Пароль"
 
 #. Create the dialog
 #: gnome/gdialogs.c:1039
@@ -733,7 +733,7 @@ msgstr "Крат."
 
 #: gnome/glayout.c:63
 msgid "Detailed"
-msgstr "Полн."
+msgstr "Полный"
 
 #: gnome/glayout.c:66
 msgid "Custom"
@@ -800,7 +800,7 @@ msgstr "Показывать размеры каталогов"
 
 #: gnome/glayout.c:393
 msgid "Shows the disk space used by each directory"
-msgstr "Показывать размер занимаемый каждым каталогом"
+msgstr "Показывать размер, занимаемый каждым каталогом"
 
 #: gnome/glayout.c:395
 msgid "Close window"
@@ -949,7 +949,7 @@ msgstr ""
 
 #: gnome/gmount.c:225
 msgid "Could not open the /etc/fstab file"
-msgstr "Невозможно открыть /etc/fstab файл"
+msgstr "Невозможно открыть файл /etc/fstab"
 
 #: gnome/gmount.c:390
 #, c-format
@@ -1218,7 +1218,7 @@ msgstr "Свойства"
 #: gnome/gnome-file-property-dialog.c:1146
 #: gnome/gnome-file-property-dialog.c:1157
 msgid "You entered an invalid username"
-msgstr ""
+msgstr "Вы ввели неверное имя пользователя"
 
 #: gnome/gnome-file-property-dialog.c:1202
 msgid "You must rename your file to something"
@@ -1508,7 +1508,7 @@ msgstr "Дом"
 
 #: gnome/gscreen.c:2255
 msgid "Go to your home directory"
-msgstr "Перейти в персональный каталог"
+msgstr "Перейти в домашний каталог"
 
 #: gnome/gscreen.c:2395
 msgid "Location:"
@@ -1695,7 +1695,7 @@ msgstr "Безопасное сохранение"
 
 #: gtkedit/editcmd.c:336
 msgid "Do backups -->"
-msgstr ""
+msgstr "Создавать резервные копии -->"
 
 #. NLS  for hotkeys?
 #: gtkedit/editcmd.c:339 gtkedit/editcmd.c:1171 gtkedit/editcmd.c:1217
@@ -1970,7 +1970,6 @@ msgid " Regular expression "
 msgstr " Регулярные выражения "
 
 #: gtkedit/editcmd.c:1411 gtkedit/editcmd.c:1412
-#, fuzzy
 msgid ""
 "See the regex man page for how\n"
 "to compose a regular expression"
@@ -2269,7 +2268,7 @@ msgstr "&Новый файл         C-x k"
 
 #: gtkedit/editmenu.c:146
 msgid "copy to &File...     "
-msgstr "&Копировать в файл...     "
+msgstr "&Копировать в файл..."
 
 #: gtkedit/editmenu.c:155 gtkedit/editmenu.c:172
 msgid "&Toggle Mark       F3"
@@ -2493,7 +2492,6 @@ msgid "Cut block to clipbrd\tS-Del"
 msgstr "Вырезать блок в буфер\tS-Del"
 
 #: gtkedit/editmenu.c:429
-#, fuzzy
 msgid "Paste block from clipbrd\tS-Ins"
 msgstr "Вставить блок из буфера\tS-Ins"
 
@@ -2520,14 +2518,12 @@ msgid "Search...\tF7"
 msgstr "Поиск...\tF7"
 
 #: gtkedit/editmenu.c:442
-#, fuzzy
 msgid "Search again\tF17"
-msgstr "&Искать дальше    F17"
+msgstr "Искать дальше\tF17"
 
 #: gtkedit/editmenu.c:443
-#, fuzzy
 msgid "Replace...\tF4"
-msgstr "&Замена...         F4"
+msgstr "Замена...\tF4"
 
 #: gtkedit/editmenu.c:444
 #, fuzzy
@@ -2541,38 +2537,32 @@ msgid "Search for and replace text"
 msgstr " Введите текст для замены: "
 
 #: gtkedit/editmenu.c:453
-#, fuzzy
 msgid "Goto line...\tM-l"
-msgstr "&Перейти к строке           M-l"
+msgstr "Перейти к строке\tM-l"
 
 #: gtkedit/editmenu.c:455
-#, fuzzy
 msgid "Start record macro\tC-r"
-msgstr "&Начать запись макроса      C-r"
+msgstr "Начать запись макроса\tC-r"
 
 #: gtkedit/editmenu.c:456
-#, fuzzy
 msgid "Finish record macro...\tC-r"
-msgstr "&Окончить запись макроса... C-r"
+msgstr "Окончить запись макроса...\tC-r"
 
 #: gtkedit/editmenu.c:457
-#, fuzzy
 msgid "Execute macro...\tC-a, KEY"
-msgstr "&Выполнить макрос...   C-a, KEY"
+msgstr "Выполнить макрос...\tC-a, KEY"
 
 #: gtkedit/editmenu.c:458
-#, fuzzy
 msgid "Delete macro...\t"
-msgstr " Удалить макрос "
+msgstr "Удалить макрос...\t"
 
 #: gtkedit/editmenu.c:460
 msgid "Insert date/time\tC-d"
-msgstr ""
+msgstr "Вставить Дату/время\tC-d"
 
 #: gtkedit/editmenu.c:461
-#, fuzzy
 msgid "Format paragraph\tM-p"
-msgstr "Форматировать &абзац        M-p"
+msgstr "Форматировать абзац\tM-p"
 
 #: gtkedit/editmenu.c:463
 msgid "Refresh display\tC-l"
@@ -2659,7 +2649,7 @@ msgstr " Настройки редактора "
 #. Not essential to translate
 #: gtkedit/editwidget.c:317
 msgid "Error initialising editor.\n"
-msgstr ""
+msgstr "Ошибка инициализации редактора.\n"
 
 #: gtkedit/editwidget.c:1093 gtkedit/gtkedit.c:1246 src/help.c:806
 #: src/main.c:1715 src/screen.c:2395 src/screen.c:2425 src/tree.c:1008
@@ -2770,9 +2760,8 @@ msgid "Clear the edit buffer"
 msgstr ""
 
 #: gtkedit/gtkedit.c:1295
-#, fuzzy
 msgid "Insert File"
-msgstr " Вставить файл "
+msgstr "Вставить файл"
 
 #: gtkedit/gtkedit.c:1295
 #, fuzzy
@@ -2850,7 +2839,8 @@ msgstr ""
 #: gtkedit/syntax.c:1493
 #, c-format
 msgid " Error in file %s on line %d "
-msgstr ""
+msgstr " Ошибка в файле %s на строке %d "
+
 
 #: src/achown.c:72 src/chmod.c:115 src/chown.c:80
 msgid "&Set"
@@ -2924,7 +2914,7 @@ msgstr ""
 
 #: src/background.c:181
 msgid "Background process:"
-msgstr ""
+msgstr "Фоновый процесс:"
 
 #: src/background.c:287 src/file.c:2192
 msgid " Background process error "
@@ -2990,7 +2980,7 @@ msgstr "Учет ре&гистра"
 
 #: src/boxes.c:282
 msgid "Sort order"
-msgstr " Порядок сортировки "
+msgstr "Порядок сортировки"
 
 #: src/boxes.c:381
 msgid " confirm &Exit "
@@ -3067,7 +3057,7 @@ msgstr "Перейти в"
 
 #: src/boxes.c:796
 msgid "Symbolic link"
-msgstr ""
+msgstr " Сиволическая ссылка "
 
 #: src/boxes.c:833
 msgid "Running "
@@ -3211,7 +3201,7 @@ msgstr ""
 
 #: src/chown.c:112
 msgid " Name "
-msgstr ""
+msgstr " Имя "
 
 #: src/chown.c:114
 msgid " Owner name "
@@ -3223,7 +3213,7 @@ msgstr ""
 
 #: src/chown.c:118
 msgid " Size "
-msgstr ""
+msgstr " Размер "
 
 #: src/chown.c:124
 msgid " Chown command "
@@ -3265,17 +3255,15 @@ msgstr ""
 
 #: src/cmd.c:254 src/cmd.c:713 src/cmd.c:727
 msgid "Could not change directory"
-msgstr ""
+msgstr " Не могу сменить каталог "
 
 #: src/cmd.c:283
 msgid " View file "
-msgstr ""
+msgstr " Просмотр файла "
 
-# msgstr " Не могу перейти в %s "
 #: src/cmd.c:283
-#, fuzzy
 msgid " Filename:"
-msgstr "Шаблон имени:"
+msgstr " Имя файла:"
 
 #: src/cmd.c:300
 msgid " Filtered view "
@@ -3303,7 +3291,7 @@ msgstr " Задайте выражение для отбора имен файлов"
 
 #: src/cmd.c:515
 msgid " Select "
-msgstr ""
+msgstr " Отметить "
 
 #: src/cmd.c:567
 msgid " Unselect "
@@ -3391,6 +3379,8 @@ msgid ""
 " Couldn't stat %s \n"
 " %s "
 msgstr ""
+" Невозможно проверить %s \n"
+" %s "
 
 #: src/cmd.c:1029 src/cmd.c:1031
 msgid " Link "
@@ -3417,7 +3407,7 @@ msgstr ""
 
 #: src/cmd.c:1133
 msgid " Edit symlink "
-msgstr ""
+msgstr " Правка символической ссылки "
 
 #: src/cmd.c:1138
 #, c-format
@@ -3507,6 +3497,8 @@ msgid ""
 " Can't chdir to '%s' \n"
 " %s "
 msgstr ""
+" Не могу перейти в '%s' \n"
+" %s "
 
 #: src/command.c:198
 msgid " You can not execute commands on non-local filesystems"
@@ -3593,14 +3585,16 @@ msgstr ""
 msgid ""
 " Can't generate unique filename \n"
 " %s "
-msgstr ""
+msgstr " Невозможно генерировать уникальное имя файла \n"
+" %s "
 
 #: src/ext.c:150 src/user.c:518
 #, c-format
 msgid ""
 " Can't create temporary command file \n"
 " %s "
-msgstr ""
+msgstr " Невозможно создать временный командный файл \n"
+" %s "
 
 #: src/ext.c:165 src/user.c:547
 msgid " Parameter "
@@ -3794,9 +3788,8 @@ msgstr ""
 
 #: src/file.c:803
 msgid "&Delete"
-msgstr ""
+msgstr "&Удалить"
 
-# msgstr "1Удалить"
 #: src/file.c:803 src/hotlist.c:1443
 msgid "&Keep"
 msgstr ""
@@ -3846,6 +3839,8 @@ msgid ""
 " Cannot stat file \"%s\" \n"
 " %s "
 msgstr ""
+" Невозможно проверить файл \"%s\" \n"
+" %s "
 
 #: src/file.c:1122
 #, c-format
@@ -3869,7 +3864,8 @@ msgstr ""
 msgid ""
 " Cannot remove file \"%s\" \n"
 " %s "
-msgstr ""
+msgstr " Невозможно удалить файл \"%s\" \n"
+" %s "
 
 #: src/file.c:1246
 #, c-format
@@ -3879,7 +3875,7 @@ msgstr ""
 #: src/file.c:1265
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
-msgstr ""
+msgstr " Не могу переписать каталог \"%s\" %s "
 
 #: src/file.c:1267
 #, c-format
@@ -3898,14 +3894,16 @@ msgstr ""
 msgid ""
 " Cannot delete file \"%s\" \n"
 " %s "
-msgstr ""
+msgstr " Невозможно удалить файл \"%s\" \n"
+" %s "
 
 #: src/file.c:1418 src/file.c:1488 src/file.c:1520
 #, c-format
 msgid ""
 " Cannot remove directory \"%s\" \n"
 " %s "
-msgstr ""
+msgstr " Невозможно удалить каталог \"%s\" \n"
+" %s "
 
 #: src/file.c:1559
 msgid " Internal error: get_file \n"
@@ -4540,7 +4538,7 @@ msgstr ""
 #: src/info.c:109
 #, c-format
 msgid "File:       %s"
-msgstr ""
+msgstr " Файл:       %s"
 
 #: src/info.c:122
 msgid "Free nodes %d (%d%%) of %d"
@@ -4589,16 +4587,16 @@ msgstr ""
 #: src/info.c:162
 #, c-format
 msgid "Modified:  %s"
-msgstr ""
+msgstr "Изменен:   %s"
 
 #: src/info.c:166
 #, c-format
 msgid "Created:   %s"
-msgstr ""
+msgstr "Создан:    %s"
 
 #: src/info.c:179
 msgid "Size:      "
-msgstr ""
+msgstr "Размер:    "
 
 #: src/info.c:182
 #, c-format
@@ -4613,7 +4611,7 @@ msgstr ""
 #: src/info.c:193
 #, c-format
 msgid "Links:     %d"
-msgstr ""
+msgstr "Ссылок:    %d"
 
 #: src/info.c:197
 #, c-format
@@ -5014,37 +5012,30 @@ msgid "&Save setup"
 msgstr "&Сохранить настройки"
 
 #: src/main.c:1375 src/main.c:1377
-#, fuzzy
 msgid " &Left "
 msgstr " Левая "
 
 #: src/main.c:1377
-#, fuzzy
 msgid " &Above "
 msgstr " Верхняя "
 
 #: src/main.c:1380
-#, fuzzy
 msgid " &File "
 msgstr " Файл "
 
 #: src/main.c:1381
-#, fuzzy
 msgid " &Command "
 msgstr " Команда "
 
 #: src/main.c:1382
-#, fuzzy
 msgid " &Options "
-msgstr " Настройка "
+msgstr " Настройки "
 
 #: src/main.c:1384 src/main.c:1386
-#, fuzzy
 msgid " &Right "
 msgstr " Правая "
 
 #: src/main.c:1386
-#, fuzzy
 msgid " &Below "
 msgstr " Нижняя "
 
@@ -5437,7 +5428,7 @@ msgstr ""
 #: src/subshell.c:287
 #, c-format
 msgid "Couldn't open named pipe %s\n"
-msgstr ""
+msgstr " Невозможно открыть именованый канал %s\n"
 
 #: src/subshell.c:705
 msgid " The shell is still active. Quit anyway? "
@@ -5487,7 +5478,7 @@ msgstr ""
 #: src/tree.c:744
 #, c-format
 msgid "  Delete %s?  "
-msgstr ""
+msgstr "  Удалить %s?  "
 
 #: src/tree.c:776
 msgid "Static"
@@ -5637,6 +5628,8 @@ msgid ""
 " Can't stat file \n"
 " "
 msgstr ""
+" Невозможно проверить файл \n"
+" "
 
 #: src/view.c:488
 msgid " Can't view: not a regular file "
@@ -5657,6 +5650,8 @@ msgid ""
 " Can't stat \"%s\"\n"
 " %s "
 msgstr ""
+" Невозможно проверить \"%s\" \n"
+" %s "
 
 #: src/view.c:714
 #, c-format
@@ -5705,7 +5700,6 @@ msgstr ""
 msgid " Goto Address "
 msgstr ""
 
-# msgstr " Перейти к строке "
 #: src/view.c:1966
 msgid " Enter regexp:"
 msgstr ""
@@ -5972,7 +5966,7 @@ msgid ""
 "Couldn't open %s archive\n"
 "%s"
 msgstr ""
-"Не могу открыть %s архив\n"
+"Не могу открыть %s-архив\n"
 "%s"
 
 #: vfs/extfs.c:300 vfs/extfs.c:320
@@ -6166,7 +6160,6 @@ msgstr ""
 msgid "Resolving symlink..."
 msgstr ""
 
-# msgstr "Изменить симв. ссылку..."
 #: vfs/ftpfs.c:1338
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... (don't use UNIX ls options)"
@@ -6243,30 +6236,28 @@ msgstr ""
 
 #: vfs/mcfs.c:202
 msgid " Invalid password "
-msgstr ""
+msgstr " Неверный пароль "
 
 #: vfs/mcfs.c:322
 msgid " Too many open connections "
 msgstr ""
 
 #: vfs/smbfs.c:115
-#, fuzzy
 msgid "Domain:"
-msgstr "Команда:"
+msgstr "Домен:"
 
 #: vfs/smbfs.c:115
-#, fuzzy
 msgid "Username:"
-msgstr "Шаблон имени:"
+msgstr "Имя пользователя:"
 
 #: vfs/smbfs.c:115
 msgid "Password: "
-msgstr ""
+msgstr "Пароль:"
 
 #: vfs/smbfs.c:170
 #, c-format
 msgid "Password for \\\\%s\\%s"
-msgstr ""
+msgstr "Пароль для \\\\%s\\%s"
 
 #: vfs/smbfs.c:666
 #, c-format
@@ -6333,4 +6324,4 @@ msgid "%s: %s: %s %ld bytes transfered"
 msgstr ""
 
 #~ msgid "Home directory"
-#~ msgstr "Персональный каталог"
+#~ msgstr "Домашний каталог"
