@@ -202,10 +202,15 @@ panel_fill_panel_list (WPanel *panel)
 		}
 		gtk_clist_append (cl, texts);
 
-		color = file_compute_color (fe->f.marked ? MARKED : NORMAL, fe);
+		color = file_compute_color (NORMAL, fe);
 		panel_file_list_set_row_colors (cl, i, color);
+
 		if (type_col != -1)
 			panel_file_list_set_type_bitmap (cl, i, type_col, color, fe);
+
+		if (fe->f.marked)
+			gtk_clist_select_row (cl, i, 0);
+		
 	}
 	/* This is needed as the gtk_clist_append changes selected under us :-( */
 	panel->selected = selected;
@@ -302,18 +307,19 @@ x_panel_select_item (WPanel *panel, int index, int value)
 {
 	int color;
 
-	color = file_compute_color (value ? MARKED : NORMAL, &panel->dir.list[index]);
+	color = file_compute_color (NORMAL, &panel->dir.list[index]);
 	panel_file_list_set_row_colors (CLIST_FROM_SW (panel->list), index, color);
 }
 
 void
 x_select_item (WPanel *panel)
 {
+	do_file_mark (panel, panel->selected, 1);
+	display_mini_info (panel);
+	
 	if (panel->list_type == list_icons){
 		GnomeIconList *list = GNOME_ICON_LIST (panel->icons);
 
-		do_file_mark (panel, panel->selected, 1);
-		display_mini_info (panel);
 		gnome_icon_list_select_icon (list, panel->selected);
 
 		if (list->icon_list){
@@ -326,13 +332,7 @@ x_select_item (WPanel *panel)
 		GtkCList *clist = CLIST_FROM_SW (panel->list);
 		int color, marked;
 
-		if (panel->dir.list [panel->selected].f.marked)
-			marked = 1;
-		else
-			marked = 0;
-
-		color = file_compute_color (marked ? MARKED_SELECTED : SELECTED, &panel->dir.list [panel->selected]);
-		panel_file_list_set_row_colors (CLIST_FROM_SW (panel->list), panel->selected, color);
+		gtk_clist_select_row (clist, panel->selected, 0);
 
 		/* Make it visible */
 		if (gtk_clist_row_is_visible (clist, panel->selected) != GTK_VISIBILITY_FULL)
@@ -343,20 +343,14 @@ x_select_item (WPanel *panel)
 void
 x_unselect_item (WPanel *panel)
 {
-	if (panel->list_type == list_icons){
-	        int selected = panel->selected;
-
-		/* This changes the panel->selected */
+	int selected = panel->selected;
+	
+	if (panel->list_type == list_icons)
 		gnome_icon_list_unselect_all (GNOME_ICON_LIST (panel->icons), NULL, NULL);
-		panel->selected = selected;
-	} else {
-		int color;
-		int val;
+	else
+		gtk_clist_unselect_all (CLIST_FROM_SW (panel->list));
 
-		val = panel->dir.list [panel->selected].f.marked ? MARKED : NORMAL;
-		color = file_compute_color (val, &panel->dir.list [panel->selected]);
-		panel_file_list_set_row_colors (CLIST_FROM_SW (panel->list), panel->selected, color);
-	}
+	panel->selected = selected;
 }
 
 void
@@ -490,43 +484,35 @@ panel_file_list_press_row (GtkWidget *file_list, GdkEvent *event, WPanel *panel)
 static void
 panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent *event, WPanel *panel)
 {
-	int current_selection = panel->selected;
-	char *fullname;
-	
-	if (!event) {
-		internal_select_item (file_list, panel, row);
+	panel->selected = row;
+	do_file_mark (panel, row, 1);
+	display_mini_info (panel);
+	execute_hooks (select_file_hook);
+
+
+	if (!event)
 		return;
-	}
-
+	
 	switch (event->type) {
+	case GDK_BUTTON_PRESS:
+		if (event->button.button == 3)
+			gpopup_do_popup ((GdkEventButton *) event, panel, NULL, row, panel->dir.list[row].fname);
+		break;
+		
 	case GDK_BUTTON_RELEASE:
-		gtk_clist_unselect_row (CLIST_FROM_SW (panel->list), row, 0);
-		internal_select_item (file_list, panel, row);
+		if (event->button.button == 2){
+			char *fullname;
 
-		switch (event->button.button) {
-		case 1:
-			if (!(event->button.state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK))){
-				do_file_mark (panel, row, !panel->dir.list[row].f.marked);
-			} else {
-				/* if shift-click is pressed */
-				do_file_mark_range (panel, row, current_selection);
-			}
-			break;
-
-		case 2:
-			if (S_ISDIR (panel->dir.list [current_selection].buf.st_mode) ||
-			    panel->dir.list [current_selection].f.link_to_dir){
-				fullname = concat_dir_and_file (panel->cwd, panel->dir.list [current_selection].fname);
+			if (S_ISDIR (panel->dir.list [row].buf.st_mode) ||
+			    panel->dir.list [row].f.link_to_dir){
+				fullname = concat_dir_and_file (panel->cwd, panel->dir.list [row].fname);
 				new_panel_at (fullname);
 				free (fullname);
 			}
-			break;
 		}
-
 		break;
-
+		
 	case GDK_2BUTTON_PRESS:
-		gtk_clist_unselect_row (CLIST_FROM_SW (panel->list), row, 0);
 		if (event->button.button == 1)
 			do_enter (panel);
 		break;
@@ -535,6 +521,16 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 		break;
 	}
 }
+
+static void
+panel_file_list_unselect_row (GtkWidget *widget, int row, int columns, GdkEvent *event, WPanel *panel)
+{
+	do_file_mark (panel, row, 0);
+	display_mini_info (panel);
+	if (panel->marked == 0)
+		panel->selected = 0;
+}
+
 
 /* Figure out the number of visible lines in the panel */
 static void
@@ -654,7 +650,7 @@ panel_configure_file_list (WPanel *panel, GtkWidget *sw, GtkWidget *file_list)
 
 	/* Configure the CList */
 
-	gtk_clist_set_selection_mode (GTK_CLIST (file_list), GTK_SELECTION_SINGLE);
+	gtk_clist_set_selection_mode (GTK_CLIST (file_list), GTK_SELECTION_EXTENDED);
 
 	for (i = 0, format = panel->format; format; format = format->next) {
 		GtkJustification just;
@@ -1177,7 +1173,7 @@ panel_create_file_list (WPanel *panel)
 	sw = gtk_scrolled_window_new (NULL, NULL);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
-	file_list = gtk_blist_new_with_titles (items, titles);
+	file_list = gtk_clist_new_with_titles (items, titles);
 	gtk_container_add (GTK_CONTAINER (sw), file_list);
 	gtk_widget_show (file_list);
 
@@ -1191,9 +1187,14 @@ panel_create_file_list (WPanel *panel)
 	gtk_signal_connect (GTK_OBJECT (file_list), "select_row",
 			    GTK_SIGNAL_FUNC (panel_file_list_select_row),
 			    panel);
+	gtk_signal_connect (GTK_OBJECT (file_list), "unselect_row",
+			    GTK_SIGNAL_FUNC (panel_file_list_unselect_row),
+			    panel);
+#if 0
 	gtk_signal_connect (GTK_OBJECT (file_list), "button_press_event",
 			    GTK_SIGNAL_FUNC (panel_file_list_press_row),
 			    panel);
+#endif
 	gtk_clist_set_button_actions (GTK_CLIST (file_list), 1, GTK_BUTTON_SELECTS | GTK_BUTTON_DRAGS);
 	gtk_clist_set_button_actions (GTK_CLIST (file_list), 2, GTK_BUTTON_SELECTS);
 	
@@ -1277,7 +1278,6 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 				new_panel_at (fullname);
 				free (fullname);
 			}
-			break;
 		} 
 		break;
 		

@@ -193,6 +193,19 @@ gicon_get_icon_for_file_speed (char *directory, file_entry *fe, gboolean do_quic
 	 */
 	if (S_ISDIR (mode)){
 		if (fe->buf.st_uid != our_uid){
+			{
+				static int reported;
+
+				if (!reported){
+					g_warning ("Getgroups should be used here\n");
+					reported = 1;
+				}
+			}
+			
+				/* FIXME:
+				 * Use getgroups to fetch the list of groups
+				 * to which I belong and test against those
+				 */
 			if (fe->buf.st_gid != our_gid){
 
 				/*

@@ -1,3 +1,8 @@
+1999-01-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c: Selection code now is simpler and should be easier to
+	use in the listing modes.
+
 1999-01-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gicon.h (gicon_image_to_name): Added prototype for
