@@ -51,6 +51,7 @@ GNOMESRCS =					\
 	gdesktop.c				\
 	gdialogs.c				\
 	gdnd.c					\
+	gfind.c					\
 	gicon.c					\
 	gkey.c					\
 	glayout.c				\
@@ -121,7 +122,7 @@ ICONS = 			\
 # These objects are made from sources in ../src
 #
 OOBJS = dlg.o screen.o widget.o wtools.o			\
-	file.o find.o dialog.o view.o				\
+	file.o dialog.o view.o					\
 	panelize.o background.o dir.o util.o			\
 	win.o color.o profile.o user.o ext.o setup.o		\
 	regex.o complete.o					\
@@ -149,6 +150,7 @@ OBJS =						\
 	gdesktop-prefs.o			\
 	gdesktop.o				\
 	gdnd.o					\
+	gfind.o					\
 	gicon.o					\
 	gkey.o					\
 	glayout.o				\

@@ -1,3 +1,10 @@
+2001-07-14  Pavel Roskin  <proski@gnu.org>
+
+	* gfind.c: New file - copied from find.c.  Reindent, remove
+	unneeded parts.  Rewrite find_parameters() to use GNOME dialog.
+	* layout: Remove usused entries.
+	* Makefile.in: Use gfind.c, not find.c.
+
 2001-07-12  Pavel Roskin  <proski@gnu.org>
 
 	* gdesktop.c (create_desktop_dir): If ~/Desktop doesn't exist
