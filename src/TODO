@@ -1,8 +1,6 @@
 Before 4.6.0-pre2
 =================
 
-Crash in isalpha() in key.c is c=0xFFFF.
-
 get_byte() in view.c produces warnings in Valgrind.
 
 Don't allow stdout and stderr from extfs scripts pollute the screen.

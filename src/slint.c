@@ -493,7 +493,8 @@ load_terminfo_keys (void)
 	do_define_key (key_table [i].key_code, key_table [i].key_name);
 }
 
-int getch (void)
+int
+getch (void)
 {
     int c;
     if (no_slang_delay)
@@ -502,11 +503,13 @@ int getch (void)
 
     c = SLang_getkey2 ();
     if (c == SLANG_GETKEY_ERROR) {
-	fprintf (stderr, "SLang_getkey returned SLANG_GETKEY_ERROR\n"
-                         "Assuming EOF on stdin and exiting\n");
+	fprintf (stderr,
+		 "SLang_getkey returned SLANG_GETKEY_ERROR\n"
+		 "Assuming EOF on stdin and exiting\n");
 	quiet_quit_cmd ();
+	return -1;
     }
-    return (c);
+    return c;
 }
 
 #else
