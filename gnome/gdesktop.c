@@ -303,6 +303,9 @@ desktop_icon_info_place (DesktopIconInfo *dii, int xpos, int ypos)
 static void
 desktop_icon_info_destroy (DesktopIconInfo *dii)
 {
+	if (last_selected_icon == dii)
+		last_selected_icon = NULL;
+
 	gtk_widget_destroy (dii->dicon);
 	remove_from_slot (dii);
 
@@ -1102,6 +1105,134 @@ try_to_mount (char *filename, file_entry *fe)
 	return do_mount_umount (filename, TRUE);
 }
 
+/* This is a HORRIBLE HACK.  It creates a temporary panel structure for gpopup's
+ * perusal.  Once gmc is rewritten, all file lists including panels will be a
+ * single data structure, and the world will be happy again.
+ */
+static WPanel *
+create_panel_from_desktop (void)
+{
+	WPanel *panel;
+	int nicons, count;
+	int marked_count, dir_marked_count;
+	long total;
+	int selected_index;
+	int i;
+	file_entry *fe;
+	GList *l;
+	struct stat s;
+
+	panel = g_new0 (WPanel, 1);
+
+	/* Count the number of desktop icons */
+
+	nicons = 0;
+	for (i = 0; i < layout_cols * layout_rows; i++)
+		nicons += layout_slots[i].num_icons;
+
+	/* Create the file entry list */
+
+	panel->dir.size = nicons;
+
+	count = 0;
+	marked_count = 0;
+	dir_marked_count = 0;
+	total = 0;
+	selected_index = -1;
+
+	if (nicons != 0) {
+		panel->dir.list = g_new (file_entry, nicons);
+
+		fe = panel->dir.list;
+
+		for (i = 0; i < layout_cols * layout_rows; i++)
+			for (l = layout_slots[i].icons; l; l = l->next) {
+				DesktopIconInfo *dii;
+				char *full_name;
+
+				dii = l->data;
+				full_name = g_concat_dir_and_file (desktop_directory, dii->filename);
+				if (mc_lstat (full_name, &s) == -1) {
+					g_warning ("Could not stat %s, bad things will happen",
+						   full_name);
+					continue;
+				}
+
+				file_entry_fill (fe, &s, full_name);
+				if (dii->selected) {
+					marked_count++;
+					fe->f.marked = TRUE;
+
+					if (S_ISDIR (fe->buf.st_mode)) {
+						dir_marked_count++;
+						if (fe->f.dir_size_computed)
+							total += fe->buf.st_size;
+					} else
+						total += fe->buf.st_size;
+				}
+
+				g_free (full_name);
+				fe++;
+				count++;
+			}
+	}
+
+	/* Fill the rest of the panel structure */
+
+	panel->list_type = list_icons;
+	strncpy (panel->cwd, desktop_directory, sizeof (panel->cwd));
+	panel->count = count; /* the actual number of lstat()ed files */
+	panel->marked = marked_count;
+	panel->dirs_marked = dir_marked_count;
+	panel->total = total;
+	panel->selected = selected_index;
+	panel->is_a_desktop_panel = TRUE;
+	panel->id = -1;
+
+	return panel;
+}
+
+/* Pushes our hacked-up desktop panel into the containers list */
+WPanel *
+push_desktop_panel_hack (void)
+{
+	WPanel *panel;
+	PanelContainer *container;
+	
+	panel = create_panel_from_desktop ();
+	container = g_new (PanelContainer, 1);
+	container->splitted = FALSE;
+	container->panel = panel;
+
+	containers = g_list_append (containers, container);
+
+	if (!current_panel_ptr)
+		current_panel_ptr = container;
+	else if (!other_panel_ptr)
+		other_panel_ptr = container;
+
+	/* Set it as the current panel and invoke the menu */
+
+	set_current_panel (panel);
+	mc_chdir (desktop_directory);
+	return panel;
+}
+
+/* Frees our hacked-up panel created in the function above */
+static void
+free_panel_from_desktop (WPanel *panel)
+{
+	int i;
+
+	for (i = 0; i < panel->count; i++)
+		g_free (panel->dir.list[i].fname);
+	
+	if (panel->dir.list)
+		g_free (panel->dir.list);
+
+	g_free (panel);
+}
+
 /**
  * desktop_icon_info_open:
  * @dii: The desktop icon to open.
@@ -1262,134 +1393,6 @@ desktop_icon_info_get_by_filename (char *filename)
 		}
 
 	return NULL;
-}
-
-/* This is a HORRIBLE HACK.  It creates a temporary panel structure for gpopup's
- * perusal.  Once gmc is rewritten, all file lists including panels will be a
- * single data structure, and the world will be happy again.
- */
-static WPanel *
-create_panel_from_desktop (void)
-{
-	WPanel *panel;
-	int nicons, count;
-	int marked_count, dir_marked_count;
-	long total;
-	int selected_index;
-	int i;
-	file_entry *fe;
-	GList *l;
-	struct stat s;
-
-	panel = g_new0 (WPanel, 1);
-
-	/* Count the number of desktop icons */
-
-	nicons = 0;
-	for (i = 0; i < layout_cols * layout_rows; i++)
-		nicons += layout_slots[i].num_icons;
-
-	/* Create the file entry list */
-
-	panel->dir.size = nicons;
-
-	count = 0;
-	marked_count = 0;
-	dir_marked_count = 0;
-	total = 0;
-	selected_index = -1;
-
-	if (nicons != 0) {
-		panel->dir.list = g_new (file_entry, nicons);
-
-		fe = panel->dir.list;
-
-		for (i = 0; i < layout_cols * layout_rows; i++)
-			for (l = layout_slots[i].icons; l; l = l->next) {
-				DesktopIconInfo *dii;
-				char *full_name;
-
-				dii = l->data;
-				full_name = g_concat_dir_and_file (desktop_directory, dii->filename);
-				if (mc_lstat (full_name, &s) == -1) {
-					g_warning ("Could not stat %s, bad things will happen",
-						   full_name);
-					continue;
-				}
-
-				file_entry_fill (fe, &s, full_name);
-				if (dii->selected) {
-					marked_count++;
-					fe->f.marked = TRUE;
-
-					if (S_ISDIR (fe->buf.st_mode)) {
-						dir_marked_count++;
-						if (fe->f.dir_size_computed)
-							total += fe->buf.st_size;
-					} else
-						total += fe->buf.st_size;
-				}
-
-				g_free (full_name);
-				fe++;
-				count++;
-			}
-	}
-
-	/* Fill the rest of the panel structure */
-
-	panel->list_type = list_icons;
-	strncpy (panel->cwd, desktop_directory, sizeof (panel->cwd));
-	panel->count = count; /* the actual number of lstat()ed files */
-	panel->marked = marked_count;
-	panel->dirs_marked = dir_marked_count;
-	panel->total = total;
-	panel->selected = selected_index;
-	panel->is_a_desktop_panel = TRUE;
-	panel->id = -1;
-
-	return panel;
-}
-
-WPanel *
-push_desktop_panel_hack (void)
-{
-	WPanel *panel;
-	PanelContainer *container;
-	
-	panel = create_panel_from_desktop ();
-	container = g_new (PanelContainer, 1);
-	container->splitted = FALSE;
-	container->panel = panel;
-
-	containers = g_list_append (containers, container);
-
-	if (!current_panel_ptr)
-		current_panel_ptr = container;
-	else if (!other_panel_ptr)
-		other_panel_ptr = container;
-
-	/* Set it as the current panel and invoke the menu */
-
-	set_current_panel (panel);
-	mc_chdir (desktop_directory);
-	return panel;
-}
-
-
-/* Frees our hacked-up panel created in the function above */
-static void
-free_panel_from_desktop (WPanel *panel)
-{
-	int i;
-
-	for (i = 0; i < panel->count; i++)
-		g_free (panel->dir.list[i].fname);
-	
-	if (panel->dir.list)
-		g_free (panel->dir.list);
-
-	g_free (panel);
 }
 
 /* Used to execute the popup menu for desktop icons */

@@ -34,6 +34,7 @@
 #include "gcmd.h"
 #include "gcliplabel.h"
 #include "gicon.h"
+#include "gtkflist.h"
 #include "../vfs/vfs.h"
 #include <gdk/gdkprivate.h>
 
@@ -318,10 +319,10 @@ x_select_item (WPanel *panel)
 {
 	if (is_a_desktop_panel (panel))
 		return;
-	    
+
 	do_file_mark (panel, panel->selected, 1);
 	display_mini_info (panel);
-	
+
 	if (panel->list_type == list_icons){
 		GnomeIconList *list = ILIST_FROM_SW (panel->icons);
 
@@ -347,7 +348,7 @@ void
 x_unselect_item (WPanel *panel)
 {
 	int selected = panel->selected;
-	
+
 	if (panel->list_type == list_icons)
 		gnome_icon_list_unselect_all (ILIST_FROM_SW (panel->icons), NULL, NULL);
 	else
@@ -467,70 +468,33 @@ panel_file_list_configure_contents (GtkWidget *sw, WPanel *panel, int main_width
 	gtk_clist_thaw (clist);
 }
 
-static int
-panel_file_list_press_row (GtkWidget *file_list, GdkEvent *event, WPanel *panel)
-{
-	/* FIXME: This is still very broken. */
-	if (event->type == GDK_BUTTON_PRESS && event->button.button == 3) {
-		gint row, column;
-
-		if (gtk_clist_get_selection_info (GTK_CLIST (file_list),
-						  event->button.x, event->button.y,
-						  &row, &column)) {
-			gtk_clist_select_row (GTK_CLIST (file_list), row, 0);
-#if 1
-			gpopup_do_popup2 ((GdkEventButton *) event, panel, NULL);
-#else
-			gpopup_do_popup ((GdkEventButton *) event, panel,
-					 NULL, row, panel->dir.list[row].fname);
-#endif
-		} else
-			file_list_popup ((GdkEventButton *) event, panel);
-	}
-	return TRUE;
-}
-
+/* Handler for the select_row signal of the clist.  We synchronize the panel's
+ * idea of a selection, and handle pending actions that the
+ * button_press/button_release handlers did not handle by themselves.
+ */
 static void
-panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent *event, WPanel *panel)
+panel_file_list_select_row (GtkWidget *file_list, gint row, gint column,
+			    GdkEvent *event, gpointer data)
 {
+	WPanel *panel;
+
+	panel = data;
+
 	panel->selected = row;
 	do_file_mark (panel, row, 1);
 	display_mini_info (panel);
 	execute_hooks (select_file_hook);
-
-	if (!event)
-		return;
-
-	switch (event->type) {
-	case GDK_BUTTON_RELEASE:
-		if (event->button.button == 2){
-			char *fullname;
-
-			if (S_ISDIR (panel->dir.list [row].buf.st_mode) ||
-			    panel->dir.list [row].f.link_to_dir){
-				fullname = concat_dir_and_file (panel->cwd,
-								panel->dir.list [row].fname);
-				new_panel_at (fullname);
-				 g_free (fullname);
-			}
-		}
-		break;
-		
-	case GDK_2BUTTON_PRESS:
-		if (event->button.button == 1)
-			do_enter (panel);
-		break;
-
-	default:
-		break;
-	}
 }
 
 static void
-panel_file_list_unselect_row (GtkWidget *widget, int row, int columns, GdkEvent *event, WPanel *panel)
+panel_file_list_unselect_row (GtkWidget *widget, int row, int columns, GdkEvent *event, gpointer data)
 {
+	WPanel *panel;
+
+	panel = data;
 	do_file_mark (panel, row, 0);
 	display_mini_info (panel);
+
 	if (panel->marked == 0)
 		panel->selected = 0;
 }
@@ -621,7 +585,7 @@ panel_setup_drag_scroll (WPanel *panel, int x, int y, desirable_fn desirable, sc
 	panel->drag_motion_x = x;
 	panel->drag_motion_y = y;
 
-	if ((*desirable)(panel, x, y)){
+	if ((* desirable) (panel, x, y)) {
 		panel->timer_id = gtk_timeout_add (60, scroll, panel);
 		return TRUE;
 	}
@@ -630,18 +594,19 @@ panel_setup_drag_scroll (WPanel *panel, int x, int y, desirable_fn desirable, sc
 }
 
 static void
-panel_configure_file_list (WPanel *panel, GtkWidget *sw, GtkWidget *file_list)
+panel_file_list_configure (WPanel *panel, GtkWidget *sw, GtkWidget *file_list)
 {
 	format_e *format = panel->format;
-	GtkObject *adjustment;
 	int i;
 
 	/* Set sorting callback */
 	gtk_signal_connect (GTK_OBJECT (file_list), "click_column",
 			    GTK_SIGNAL_FUNC (panel_file_list_column_callback), panel);
 
-	/* Configure the CList */
+	/* Avoid clist's broken focusing behavior */
+	GTK_WIDGET_UNSET_FLAGS (file_list, GTK_CAN_FOCUS);
 
+	/* Semi-sane selection mode */
 	gtk_clist_set_selection_mode (GTK_CLIST (file_list), GTK_SELECTION_EXTENDED);
 
 	for (i = 0, format = panel->format; format; format = format->next) {
@@ -651,24 +616,23 @@ panel_configure_file_list (WPanel *panel, GtkWidget *sw, GtkWidget *file_list)
 			continue;
 
 		/* Set desired justification */
-		switch (HIDE_FIT(format->just_mode)){
+		switch (HIDE_FIT (format->just_mode)) {
 		case J_LEFT:
-		    just = GTK_JUSTIFY_LEFT;
-		    break;
+			just = GTK_JUSTIFY_LEFT;
+			break;
+
 		case J_RIGHT:
-		    just = GTK_JUSTIFY_RIGHT;
-		    break;
+			just = GTK_JUSTIFY_RIGHT;
+			break;
+
 		case J_CENTER:
-		    just = GTK_JUSTIFY_CENTER;
-		    break;    
+			just = GTK_JUSTIFY_CENTER;
+			break;
 		}
 
 		gtk_clist_set_column_justification (GTK_CLIST (file_list), i, just);
 		i++;
 	}
-
-	/* Configure the scrolbars */
-	adjustment = GTK_OBJECT (gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (sw)));
 }
 
 /*
@@ -956,48 +920,35 @@ load_dnd_icons (void)
 		drag_multiple_ok = gnome_stock_transparent_window (GNOME_STOCK_PIXMAP_MULTIPLE, NULL);
 }
 
-static int
-panel_clist_button_press (GtkWidget *widget, GdkEventButton *event, WPanel *panel)
-{
-	if (event->window != GTK_CLIST (widget)->clist_window)
-		return FALSE;
-
-	panel->maybe_start_drag = event->button;
-
-	panel->click_x = event->x;
-	panel->click_y = event->y;
-
-	return FALSE;
-}
-
-static int
-panel_clist_button_release (GtkWidget *widget, GdkEventButton *event, WPanel *panel)
-{
-	panel->maybe_start_drag = 0;
-	return FALSE;
-}
-
-static int
-panel_widget_motion (GtkWidget *widget, GdkEventMotion *event, WPanel *panel)
+/* Convenience function to start a drag operation for the icon and file lists */
+static void
+start_drag (GtkWidget *widget, int button, GdkEvent *event)
 {
 	GtkTargetList *list;
 	GdkDragContext *context;
-
-	if (!panel->maybe_start_drag)
-		return FALSE;
-
-	if ((abs (event->x - panel->click_x) < 4) ||
-	    (abs (event->y - panel->click_y) < 4))
-		return FALSE;
 
 	list = gtk_target_list_new (drag_types, ELEMENTS (drag_types));
 
 	context = gtk_drag_begin (widget, list,
 				  (GDK_ACTION_COPY | GDK_ACTION_MOVE
 				   | GDK_ACTION_LINK | GDK_ACTION_ASK),
-				  panel->maybe_start_drag, (GdkEvent *) event);
+				  button, event);
 	gtk_drag_set_icon_default (context);
+}
 
+static int
+panel_widget_motion (GtkWidget *widget, GdkEventMotion *event, WPanel *panel)
+{
+	if (!panel->maybe_start_drag)
+		return FALSE;
+
+	/* This is the same threshold value that is used in gtkdnd.c */
+
+	if (MAX (abs (panel->click_x - event->x),
+		 abs (panel->click_y - event->y)) <= 3)
+		return FALSE;
+
+	start_drag (widget, panel->maybe_start_drag, (GdkEvent *) event);
 	return FALSE;
 }
 
@@ -1024,26 +975,6 @@ panel_drag_end (GtkWidget *widget, GdkDragContext *context, WPanel *panel)
 	panel->dragging = 0;
 }
 
-/* Wrapper for the motion_notify callback; it ignores motion events from the
- * clist if they do not come from the clist_window.
- */
-static int
-panel_clist_motion (GtkWidget *widget, GdkEventMotion *event, gpointer data)
-{
-	if (event->window != GTK_CLIST (widget)->clist_window)
-		return FALSE;
-
-	panel_widget_motion (widget, event, data);
-
-	/* We have to stop the motion event from ever reaching the clist.
-	 * Otherwise it will begin dragging/selecting rows when we don't want
-	 * that.  Yes, the clist widget sucks.
-	 */
-
-	gtk_signal_emit_stop_by_name (GTK_OBJECT (widget), "motion_notify_event");
-	return TRUE;
-}
-
 /**
  * panel_clist_scrolling_is_desirable:
  *
@@ -1058,11 +989,11 @@ panel_clist_scrolling_is_desirable (WPanel *panel, int x, int y)
 
 	va = scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (panel->list));
 
-	if (y < 10){
+	if (y < 10) {
 		if (va->value > va->lower)
 			return TRUE;
 	} else {
-		if (y > (GTK_WIDGET (panel->list)->allocation.height - 10)){
+		if (y > (CLIST_FROM_SW (panel->list)->clist_window_height - 10)) {
 			if (va->value < va->upper - va->page_size)
 				return TRUE;
 		}
@@ -1103,25 +1034,6 @@ panel_clist_scroll (gpointer data)
 	return TRUE;
 }
 
-/* Convenience function to return whether we are on a valid drop area in a
- * GtkCList.
- */
-static int
-can_drop_on_clist (WPanel *panel, int x, int y)
-{
-	GtkCList *clist;
-	int border_width;
-
-	clist = CLIST_FROM_SW (panel->list);
-
-	border_width = GTK_CONTAINER (clist)->border_width;
-
-	if (y < border_width + clist->column_title_area.y + clist->column_title_area.height)
-		return FALSE;
-	else
-		return TRUE;
-}
-
 /* Callback used for drag motion events over the clist.  We set up
  * auto-scrolling and validate the drop to present the user with the correct
  * feedback.
@@ -1131,6 +1043,7 @@ panel_clist_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gin
 			 gpointer data)
 {
 	WPanel *panel;
+	GtkCList *clist;
 	GdkDragAction action;
 	GtkWidget *source_widget;
 	gint idx;
@@ -1138,9 +1051,16 @@ panel_clist_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gin
 
 	panel = data;
 
-	if (!can_drop_on_clist (panel, x, y)) {
+	/* Normalize the y coordinate to the clist_window */
+
+	clist = CLIST_FROM_SW (panel->list);
+	y -= (GTK_CONTAINER (clist)->border_width
+	      + clist->column_title_area.y
+	      + clist->column_title_area.height);
+
+	if (y < 0) {
 		gdk_drag_status (context, 0, time);
-		return TRUE;
+		goto out;
 	}
 
 	/* Set up auto-scrolling */
@@ -1167,6 +1087,9 @@ panel_clist_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gin
 				       fe ? fe->f.marked : FALSE);
 
 	gdk_drag_status (context, action, time);
+
+ out:
+	gtk_signal_emit_stop_by_name (GTK_OBJECT (widget), "drag_motion");
 	return TRUE;
 }
 
@@ -1296,6 +1219,43 @@ panel_icon_list_drag_leave (GtkWidget *widget, GdkDragContext *ctx, guint time, 
 	panel_cancel_drag_scroll (panel);
 }
 
+/* Handler for the row_popup_menu signal of the file list. */
+static void
+panel_file_list_row_popup_menu (GtkFList *flist, GdkEventButton *event, gpointer data)
+{
+	WPanel *panel;
+
+	panel = data;
+	gpopup_do_popup2 (event, panel, NULL);
+}
+
+/* Handler for the empty_popup_menu signal of the file list. */
+static void
+panel_file_list_empty_popup_menu (GtkFList *flist, GdkEventButton *event, gpointer data)
+{
+	WPanel *panel;
+
+	panel = data;
+	file_list_popup (event, panel);
+}
+
+/* Handler for the open_row signal of the file list */
+static void
+panel_file_list_open_row (GtkFList *flist, gpointer data)
+{
+	WPanel *panel;
+
+	panel = data;
+	do_enter (panel);
+}
+
+/* Handler for the start_drag signal of the file list */
+static void
+panel_file_list_start_drag (GtkFList *flist, gint button, GdkEvent *event, gpointer data)
+{
+	start_drag (GTK_WIDGET (flist), button, event);
+}
+
 /*
  * Create, setup the file listing display.
  */
@@ -1318,31 +1278,39 @@ panel_create_file_list (WPanel *panel)
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
 					GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
-	file_list = gtk_clist_new_with_titles (items, titles);
+	file_list = gtk_flist_new_with_titles (panel, items, titles);
 	gtk_container_add (GTK_CONTAINER (sw), file_list);
 	gtk_widget_show (file_list);
 
-	panel_configure_file_list (panel, sw, file_list);
+	panel_file_list_configure (panel, sw, file_list);
 	g_free (titles);
 
 	gtk_signal_connect_after (GTK_OBJECT (sw), "size_allocate",
-				  GTK_SIGNAL_FUNC (panel_file_list_size_allocate_hook),
+				  (GtkSignalFunc) panel_file_list_size_allocate_hook,
 				  panel);
 
 	gtk_signal_connect (GTK_OBJECT (file_list), "select_row",
-			    GTK_SIGNAL_FUNC (panel_file_list_select_row),
+			    (GtkSignalFunc) panel_file_list_select_row,
 			    panel);
 	gtk_signal_connect (GTK_OBJECT (file_list), "unselect_row",
-			    GTK_SIGNAL_FUNC (panel_file_list_unselect_row),
+			    (GtkSignalFunc) panel_file_list_unselect_row,
 			    panel);
-#if 1
-	gtk_signal_connect_after (GTK_OBJECT (file_list), "button_press_event",
-				  GTK_SIGNAL_FUNC (panel_file_list_press_row),
-				  panel);
-#endif
-	gtk_clist_set_button_actions (GTK_CLIST (file_list), 1, GTK_BUTTON_SELECTS | GTK_BUTTON_DRAGS);
-	gtk_clist_set_button_actions (GTK_CLIST (file_list), 2, GTK_BUTTON_SELECTS);
-	
+
+	/* Connect to the flist signals */
+
+	gtk_signal_connect (GTK_OBJECT (file_list), "row_popup_menu",
+			    (GtkSignalFunc) panel_file_list_row_popup_menu,
+			    panel);
+	gtk_signal_connect (GTK_OBJECT (file_list), "empty_popup_menu",
+			    (GtkSignalFunc) panel_file_list_empty_popup_menu,
+			    panel);
+	gtk_signal_connect (GTK_OBJECT (file_list), "open_row",
+			    (GtkSignalFunc) panel_file_list_open_row,
+			    panel);
+	gtk_signal_connect (GTK_OBJECT (file_list), "start_drag",
+			    (GtkSignalFunc) panel_file_list_start_drag,
+			    panel);
+
 	/* Set up drag and drop */
 
 	load_dnd_icons ();
@@ -1351,12 +1319,7 @@ panel_create_file_list (WPanel *panel)
 			   GTK_DEST_DEFAULT_DROP,
 			   drop_types, ELEMENTS (drop_types),
 			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
-#if 0
-	/* Make directories draggable */
-	gtk_drag_source_set (GTK_WIDGET (file_list), GDK_BUTTON1_MASK | GDK_BUTTON2_MASK,
-			     drag_types, ELEMENTS (drag_types),
-			     GDK_ACTION_LINK | GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_ASK);
-#endif
+
 	gtk_signal_connect (GTK_OBJECT (file_list), "drag_data_get",
 			    GTK_SIGNAL_FUNC (panel_drag_data_get), panel);
 	gtk_signal_connect (GTK_OBJECT (file_list), "drag_data_delete",
@@ -1372,20 +1335,6 @@ panel_create_file_list (WPanel *panel)
 			    GTK_SIGNAL_FUNC (panel_clist_drag_motion), panel);
 	gtk_signal_connect (GTK_OBJECT (file_list), "drag_leave",
 			    GTK_SIGNAL_FUNC (panel_clist_drag_leave), panel);
-	
-	/* These implement our drag-start activation code.  We need to
-	 * manually activate the drag as the DnD code in Gtk+ will
-	 * make the scrollbars in the CList activate drags when they
-	 * are moved.
-	 */
-	gtk_signal_connect (GTK_OBJECT (file_list), "button_press_event",
-			    GTK_SIGNAL_FUNC (panel_clist_button_press), panel);
-
-	gtk_signal_connect (GTK_OBJECT (file_list), "button_release_event",
-			    GTK_SIGNAL_FUNC (panel_clist_button_release), panel);
-
-	gtk_signal_connect (GTK_OBJECT (file_list), "motion_notify_event",
-			    GTK_SIGNAL_FUNC (panel_clist_motion), panel);
 	gtk_signal_connect (GTK_OBJECT (file_list), "drag_begin",
 			    GTK_SIGNAL_FUNC (panel_drag_begin), panel);
 	gtk_signal_connect (GTK_OBJECT (file_list), "drag_end",
@@ -1410,14 +1359,9 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 
 	switch (event->type){
 	case GDK_BUTTON_PRESS:
-		if (event->button.button == 3) {
-#if 1
+		if (event->button.button == 3)
 			gpopup_do_popup2 ((GdkEventButton *) event, panel, NULL);
-#else
-			gpopup_do_popup ((GdkEventButton *) event, panel,
-					 NULL, index, panel->dir.list[index].fname);
-#endif
-		}
+
 		break;
 
 	case GDK_BUTTON_RELEASE:
@@ -1430,9 +1374,9 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 				new_panel_at (fullname);
 				g_free (fullname);
 			}
-		} 
+		}
 		break;
-		
+
 	case GDK_2BUTTON_PRESS:
 		if (event->button.button == 1) {
 			do_enter (panel);

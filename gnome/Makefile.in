@@ -60,6 +60,7 @@ GNOMESRCS =					\
 	gsession.c				\
 	gtools.c				\
 	gtkdtree.c				\
+	gtkflist.c				\
 	gtree.c					\
 	gutil.c					\
 	gview.c					\
@@ -91,6 +92,7 @@ GNOMEHDRS =					\
 	gscreen.h				\
 	gsession.h				\
 	gtkdtree.h				\
+	gtkflist.h				\
 	gtree.h					\
 	gwidget.h
 
@@ -172,6 +174,7 @@ OBJS =						\
 	gutil.o					\
 	gview.o					\
 	gtkdtree.o				\
+	gtkflist.o				\
 	gwidget.o
 
 NORMALOBJS =	\

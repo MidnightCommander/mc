@@ -1,3 +1,31 @@
+1999-04-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gtkflist.[ch]: New files.  This is a "file list" widget derived
+	from GtkCList that does several things:
+
+		- Overrides all mouse and keyboard event handlers.
+
+		- Implements its own, *sane* selection behavior, unlike
+		GtkCList's, which is broken.
+
+		- Implements the same selection behavior as the desktop,
+		which is a) correct, and b) consistent.
+
+	* gscreen.c (panel_create_file_list): Use the GtkFList widget.
+	(panel_widget_motion): Changed the drag thresholds to be the same
+	as in gtkdnd.c.
+	(start_drag): New convenience function to begin a drag operation.
+	(panel_widget_motion): Use start_drag().
+	(panel_clist_scrolling_is_desirable): Offsets must be with respect
+	to the clist_window, not to the allocation.
+	(panel_clist_drag_motion): Normalize the y coordinate of the
+	motion event to the clist_window.
+
+	* gdesktop.c (desktop_icon_info_destroy): Reset the
+	last_selected_icon to NULL if it is destroyed.
+
+	* Makefile.in: Added gtkflist to the list of files.
+
 1999-04-09  Rosanna Yuen  <rwsy@mit.edu>
 
 	* gaction.c (gmc_view): We now have consistant actions everywhere;
