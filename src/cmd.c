@@ -326,6 +326,7 @@ void edit_cmd_new (WPanel *panel)
     do_edit ("");
 }
 
+/* Invoked by F5.  Copy, default to the other panel.  */
 void copy_cmd (void)
 {
     save_cwds_stat ();
@@ -335,6 +336,7 @@ void copy_cmd (void)
     }
 }
 
+/* Invoked by F6.  Move/rename, default to the other panel.  */
 void ren_cmd (void)
 {
     save_cwds_stat ();
@@ -344,10 +346,21 @@ void ren_cmd (void)
     }
 }
 
-void copymove_cmd_with_default (int copy, char *thedefault)
+/* Invoked by F15.  Copy, default to the same panel.  */
+void copy_cmd_local (void)
 {
     save_cwds_stat ();
-    if (panel_operate (cpanel, copy ? OP_COPY : OP_MOVE, thedefault, TRUE)){
+    if (panel_operate (cpanel, OP_COPY, selection (cpanel)->fname, TRUE)){
+	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+	repaint_screen ();
+    }
+}
+
+/* Invoked by F16.  Move/rename, default to the same panel.  */
+void ren_cmd_local (void)
+{
+    save_cwds_stat ();
+    if (panel_operate (cpanel, OP_MOVE, selection (cpanel)->fname, TRUE)){
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }

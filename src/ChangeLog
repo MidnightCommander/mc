@@ -1,5 +1,12 @@
 2002-07-26  Pavel Roskin  <proski@gnu.org>
 
+	* cmd.c (copymove_cmd_with_default): Remove, it's unused.
+	(copy_cmd_local): New function, copy within panel.
+	(ren_cmd_local): New function, rename within panel.
+	* cmd.h: Adjust to match.
+	* screen.c (panel_keymap): Associate F15 with copy_cmd_local and
+	F16 with ren_cmd_local.
+
 	* view.c (display): Don't highlight characters as bold if the
 	character before the backspace was different.
 	From Roland Illig <roland.illig@gmx.de>
