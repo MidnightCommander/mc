@@ -26,7 +26,7 @@ xterm-basic|xterm terminal base (X Window System),
 	smir=\E[4h, rmir=\E[4l,
 
 # Positions Horizontal and vertical.  Taken from linux console source
-         hpa=\E%i%p1%dG, vpa=\E%i%p1%dd,
+         hpa=\E[%i%p1%dG, vpa=\E[%i%p1%dd,
 
 # Scroll text down 
 	ri=\EM,
