@@ -716,9 +716,11 @@ tree_box (char *current_dir)
 #ifdef USE_VFS
 
 #if defined(USE_NETCODE)
-#define VFSY 14
+#define VFSY 15
+#define VFS_WIDGETBASE 8
 #else
 #define VFSY 8
+#define VFS_WIDGETBASE 0
 #endif
 
 #define VFSX 56
@@ -729,7 +731,6 @@ extern int ftpfs_always_use_proxy;
 #if defined(USE_NETCODE)
 extern char *ftpfs_anonymous_passwd;
 extern char *ftpfs_proxy_host;
-extern int use_netrc;
 #endif
 
 static char *ret_timeout;
@@ -741,18 +742,14 @@ static char *ret_ftp_proxy;
 static int ret_use_netrc;
 #endif
 
-#if 0
-/* Not used currently */
-{ quick_checkbox,  4, VFSX, 10, VFSY, "Use ~/.netrc",
-      'U', 0, 0, &ret_use_netrc, 0, "" },
-#endif
-
 static QuickWidget confvfs_widgets [] = {
 { quick_button,   30,  VFSX,    VFSY - 3, VFSY, N_("&Cancel"),
       0, B_CANCEL, 0, 0, "button-cancel" },
 { quick_button,   12, VFSX,    VFSY - 3, VFSY, N_("&Ok"),
       0, B_ENTER, 0, 0, "button-ok" },
 #if defined(USE_NETCODE)
+{ quick_checkbox,  4, VFSX, 10, VFSY, N_("&Use ~/.netrc"), 0, 0,
+      &ret_use_netrc, 0, "check-use-netrc" },
 { quick_input,     4, VFSX, 9, VFSY, "", 48, 0, 0, &ret_ftp_proxy,
       "input-ftp-proxy" },
 { quick_checkbox,  4, VFSX, 8, VFSY, N_("&Always use ftp proxy"), 0, 0,
@@ -780,12 +777,6 @@ static QuickWidget confvfs_widgets [] = {
 static QuickDialog confvfs_dlg =
 { VFSX, VFSY, -1, -1, N_(" Virtual File System Setting "), "[Virtual FS]", "quick_vfs", confvfs_widgets, 0 };
 
-#if defined(USE_NETCODE)
-#define VFS_WIDGETBASE 7
-#else
-#define VFS_WIDGETBASE 0
-#endif
-
 void
 configure_vfs (void)
 {
@@ -799,9 +790,9 @@ configure_vfs (void)
 #if defined(USE_NETCODE)
     ret_use_netrc = use_netrc;
     g_snprintf(buffer3, sizeof (buffer3), "%i", ftpfs_directory_timeout);
-    confvfs_widgets[5].text = buffer3;
-    confvfs_widgets[7].text = ftpfs_anonymous_passwd;
-    confvfs_widgets[2].text = ftpfs_proxy_host;
+    confvfs_widgets[6].text = buffer3;
+    confvfs_widgets[8].text = ftpfs_anonymous_passwd;
+    confvfs_widgets[3].text = ftpfs_proxy_host;
 #endif
 
     if (quick_dialog (&confvfs_dlg) != B_CANCEL) {

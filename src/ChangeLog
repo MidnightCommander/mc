@@ -1,3 +1,9 @@
+2002-07-10  Pavel Roskin  <proski@gnu.org>
+
+	* global.h: Include vfs.h.
+	* boxes.c (configure_vfs): Ask whether .netrc should be used.
+	From Thomas Zajic <zlatko@gmx.at>
+
 2002-07-03  Pavel Roskin  <proski@gnu.org>
 
 	* file.c (do_transform_source): Cast the argument to functions

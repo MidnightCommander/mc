@@ -94,6 +94,7 @@ struct timeval {
 #include "mad.h"
 
 #include "textconf.h"
+#include "../vfs/vfs.h"
 
 extern char *home_dir;
 
