@@ -19,13 +19,13 @@
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 
+extern void charset_initialise(void);
+
 #ifndef CHARSET_C
 
 extern char *dos_char_map;
 extern char *upper_char_map;
 extern char *lower_char_map;
-extern void add_char_string(char *s);
-extern void charset_initialise(void);
 
 #ifdef toupper
 #undef toupper
@@ -61,7 +61,7 @@ extern void charset_initialise(void);
 /* this is used to determine if a character is safe to use in
    something that may be put on a command line */
 #define issafe(c) (isalnum((c&0xff)) || strchr("-._",c))
-#endif
+#endif		/* !CHARSET_C */
 
 /* Dynamic codepage files defines. */
 

@@ -39,7 +39,6 @@ void interpret_character_set(char *str);
 
 /*The following definitions come from  lib/charset.c  */
 
-void charset_initialise(void);
 void codepage_initialise(int client_codepage);
 void add_char_string(char *s);
 
@@ -149,7 +148,6 @@ int smbrun(char *cmd,char *outfile,BOOL shared);
 
 /*The following definitions come from  lib/system.c  */
 
-int sys_select(int maxfd, fd_set *fds,struct timeval *tval);
 int sys_select(int maxfd, fd_set *fds,struct timeval *tval);
 int sys_usleep(long usecs);
 int sys_stat(const char *fname,SMB_STRUCT_STAT *sbuf);
@@ -1956,7 +1954,6 @@ void process_blocking_lock_queue(time_t t);
 
 /*The following definitions come from  smbd/chgpasswd.c  */
 
-BOOL chgpasswd(char *name,char *oldpass,char *newpass, BOOL as_root);
 BOOL chgpasswd(char *name,char *oldpass,char *newpass, BOOL as_root);
 BOOL check_lanman_password(char *user, uchar *pass1, 
                            uchar *pass2, struct smb_passwd **psmbpw);

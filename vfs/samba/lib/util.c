@@ -2538,7 +2538,7 @@ routine to do file locking
 ****************************************************************************/
 BOOL fcntl_lock(int fd, int op, SMB_OFF_T offset, SMB_OFF_T count, int type)
 {
-#if HAVE_FCNTL_LOCK
+#ifdef HAVE_FCNTL_LOCK
   SMB_STRUCT_FLOCK lock;
   int ret;
 
