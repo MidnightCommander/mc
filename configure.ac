@@ -170,7 +170,7 @@ dnl
 dnl Check availability of some functions 
 dnl 
 
-AC_CHECK_FUNCS([cfgetospeed getsid initgroups memcpy memmove memset \
+AC_CHECK_FUNCS([atoll cfgetospeed getsid initgroups memcpy memmove memset \
 		putenv setreuid setuid statfs strerror strftime \
 		sysconf tcgetattr tcsetattr truncate])
 
