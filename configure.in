@@ -60,6 +60,9 @@ GNU Midnight Commander requires glib 1.2.6 or above.])])
 	GLIB_CFLAGS="$save_GLIB_CFLAGS"
 	GLIB_LIBS="$save_GLIB_LIBS"
 	GLIB_LIBDIR="`$GLIB_CONFIG --exec-prefix`/lib"
+
+	dnl Used in src/glibcompat.c
+	AC_CHECK_FUNCS([strlcpy])
 else
 	PKG_CHECK_MODULES(GMODULE, [gmodule-2.0], [gmodule_found=yes])
 	GLIB_LIBDIR="`$PKG_CONFIG --variable=libdir glib-2.0`"
