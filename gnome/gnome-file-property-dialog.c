@@ -127,6 +127,9 @@ gnome_file_property_dialog_finalize (GtkObject *object)
 		g_free (gfpd->desktop_url);
 	if (gfpd->caption)
 		g_free (gfpd->caption);
+
+	if (gfpd->mode_name)
+		g_free (gfpd->mode_name);
 	
 	(* GTK_OBJECT_CLASS (parent_class)->finalize) (object);
 }

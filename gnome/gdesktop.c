@@ -937,6 +937,8 @@ is_mountable (char *filename, file_entry *fe, int *is_mounted, char **point)
 
 	if (point)
 		*point = p;
+	else
+		g_free (point);
 			
 	*is_mounted = is_block_device_mounted (buffer);
 		
@@ -1081,6 +1083,7 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 
 			if (launch)
 				new_panel_at (point);
+			g_free (point);
 		} else {
 			if (is_exe (fe->buf.st_mode) && if_link_is_exe (desktop_directory, fe))
 				my_system (EXECUTE_AS_SHELL, shell, filename);
