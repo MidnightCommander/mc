@@ -468,8 +468,6 @@ int dlg_select_widget (Dlg_head *h, void *w)
     return 0;
 }
 
-#define callback(h) (h->current->callback)
-
 void update_cursor (Dlg_head *h)
 {
     if (!h->current)
@@ -583,7 +581,7 @@ dlg_try_hotkey (Dlg_head *h, int d_key)
 
     handled = 0;
     if (h->current->options & W_WANT_HOTKEY)
-	handled = callback (h) (h->current, WIDGET_HOTKEY, d_key);
+	handled = h->current->callback (h->current, WIDGET_HOTKEY, d_key);
 
     /* If not used, send hotkey to other widgets */
     if (handled)
@@ -647,7 +645,7 @@ dlg_key_event (Dlg_head *h, int d_key)
 
     /* not used - then try widget_callback */
     if (!handled)
-	handled = callback (h) (h->current, WIDGET_KEY, d_key);
+	handled = h->current->callback (h->current, WIDGET_KEY, d_key);
 
     /* not used- try to use the unhandled case */
     if (!handled)
