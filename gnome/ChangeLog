@@ -1,3 +1,8 @@
+Mon Dec 14 11:39:38 1998  Owen Taylor  <otaylor@redhat.com>
+
+	* gscreen.c (x_create_panel): Keep up with changes
+	to GtkDockItem.
+
 1998-12-14  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gwidget.c (x_update_input): Use gtk_entry_get_text here.

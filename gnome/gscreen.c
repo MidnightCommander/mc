@@ -2001,7 +2001,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
 				   button_switch_to_listing (panel),
 				   "Switch view to detailed view.", NULL);
-	dock =  gnome_dock_item_new (GNOME_DOCK_ITEM_BEH_EXCLUSIVE | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
+	dock =  gnome_dock_item_new ("gmc-toolbar", GNOME_DOCK_ITEM_BEH_EXCLUSIVE | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
 	gtk_container_add(GTK_CONTAINER(dock),status_line);
 	gnome_dock_add_item (GNOME_DOCK(GNOME_APP (panel->xwindow)->dock), dock, GNOME_DOCK_POS_TOP, 1, 0, 0, FALSE);
 	gtk_widget_show_all (dock);
