@@ -1,5 +1,9 @@
 2001-12-21  Pavel Roskin  <proski@gnu.org>
 
+	* myslang.h [!HAVE_SYSTEM_SLANG]: Include slang/slang-mc.h to
+	simplify includes.
+	[HAVE_SYSTEM_SLANG]: Use angle brackets for slang.h.
+
 	* myslang.h [!HAVE_SYSTEM_SLANG]: Include slang-mc.h directly
 	to avoid relying on symlinks.
 
