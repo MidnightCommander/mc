@@ -340,6 +340,23 @@ if test $have_socket = yes; then
 fi
 AC_SUBST(NETFILES)
 
+LIBVFS=""
+LVFS=""
+fastdepvfs=""
+vfs_type="normal"
+if test $use_vfs = yes
+then
+	LIBVFS="libvfs-mc.a"
+	LVFS="-lvfs-mc"
+	fastdepvfs=fastdepvfs
+	MCCPPFLAGS="$MCCPPFLAGS -I\$(vfsdir)"
+	AC_MSG_RESULT(Using the VFS switch code)
+	vfs_type="Midnight Commander Virtual File System"
+fi
+AC_SUBST(LIBVFS)
+AC_SUBST(LVFS)
+AC_SUBST(fastdepvfs)
+
 screen_manager=unknown
 search_ncurses=false
 
@@ -628,18 +645,6 @@ fi
 AC_MSG_RESULT($ac_cv_grep_stdin)
 
 dnl
-dnl The termnet support
-dnl
-termnet=false
-AC_ARG_WITH(termnet,
-	[--with-termnet             If you want a termified net support],[
-	if test x$withval = xyes; then
-		AC_DEFINE(USE_TERMNET)
-		termnet=true		
-	fi
-])
-
-dnl
 dnl The subshell support
 dnl
 
@@ -880,42 +885,6 @@ AC_ARG_WITH(slang,
 AC_SUBST(LIBSLANG)
 AC_SUBST(LSLANG)
 AC_SUBST(fastdepslang)
-
-TERMNET=""
-AC_DEFUN(AC_WITH_VFS, [
-	AC_DEFINE(USE_VFS)
-	if $use_net_code; then
-	    AC_DEFINE(USE_NETCODE)
-        fi
-	LIBVFS="libvfs-mc.a"
-	LVFS="-lvfs-mc"
-	fastdepvfs=fastdepvfs
-	MCCPPFLAGS="$MCCPPFLAGS -I\$(vfsdir)"
-	AC_MSG_RESULT(Using the VFS switch code)
-	vfs_type="Midnight Commander Virtual File System"
-])
-AC_SUBST(TERMNET)
-
-LIBVFS=""
-LVFS=""
-fastdepvfs=""
-vfs_type="normal"
-AC_ARG_WITH(vfs,
-	[--with-vfs		   Compile with the VFS code],
-	if test x$withval = xyes
-	then 
-		AC_WITH_VFS
-	else
-		vfs_flags=""
-		TERMNET=""
-		mcserv=""
-	fi,
-	dnl Default: provide the VFS code
-	AC_WITH_VFS	
-)
-AC_SUBST(LIBVFS)
-AC_SUBST(LVFS)
-AC_SUBST(fastdepvfs)
 
 AC_DEFUN(AC_WITH_EDIT, [
 	AC_DEFINE(USE_INTERNAL_EDIT)

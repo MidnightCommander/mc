@@ -110,7 +110,7 @@ int is_printable (int c)
 	    if (xterm_flag)
 	        return xterm_printable [c];
 	    else
-	        return (c > 31 && c != 127);
+	        return (c > 31 && c != 127 && c != 155);
 	} else
 	    return ((c >31 && c < 127) || c >= 160);
     } else

@@ -280,7 +280,7 @@ struct utimbuf {
 
 #   define mc_ctl(a,b,c) 0
 #   define mc_setctl(a,b,c) 0
-#   define vfs_translate_url g_strdup(s)
+#   define vfs_translate_url(s) g_strdup(s)
 
 #   define mc_stat stat
 #   define mc_mknod mknod

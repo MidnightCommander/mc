@@ -1,3 +1,9 @@
+Sun Mar 28 23:52:08 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* util.c (is_printable): Character 155 is non printable even when 
+	full eight bit output is enabled (on the linux console 155 is
+	interpreted as "ESC [").
+
 1999-03-26  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	Patch courtesy of John Bley (jbb6@acpub.duke.edu):

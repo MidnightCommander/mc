@@ -1,3 +1,8 @@
+Sun Mar 28 23:46:01 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* configure.in: Deleted duplicate VFS checks. GNOME_VFS_CHECKS 
+	now contains all checks.
+
 1999-03-26  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* configure.in (VERSION): bumped version number to 4.5.28.
