@@ -22,6 +22,7 @@
 
 #include <config.h>
 #include "edit.h"
+#include "editlock.h"
 #include "edit-widget.h"
 #include "editcmddef.h"
 
@@ -554,6 +555,7 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
 	return 0;
     }
     edit->modified = 0;
+    edit->locked = 0;
     edit_load_syntax (edit, 0, 0);
     {
 	int color;
@@ -811,8 +813,12 @@ pop_action (WEdit * edit)
 static inline void edit_modification (WEdit * edit)
 {
     edit->caches_valid = 0;
-    edit->modified = 1;
     edit->screen_modified = 1;
+    
+    /* raise lock when file modified */
+    if (!edit->modified && !edit->delete_file)
+	edit->locked = edit_lock_file (edit->filename);
+    edit->modified = 1;
 }
 
 /*

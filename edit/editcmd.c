@@ -27,6 +27,7 @@
 #include <ctype.h>
 
 #include "edit.h"
+#include "editlock.h"
 #include "editcmddef.h"
 #include "edit-widget.h"
 
@@ -183,9 +184,6 @@ void edit_refresh_cmd (WEdit * edit)
     mc_refresh();
     doupdate();
 }
-
-/* "Oleg Yu. Repin" <repin@ssd.sscc.ru> added backup filenames
-    ...thanks -paul */
 
 /*  If 0 (quick save) then  a) create/truncate <filename> file,
 			    b) save to <filename>;
@@ -438,6 +436,7 @@ edit_save_as_cmd (WEdit *edit)
 {
     /* This heads the 'Save As' dialog box */
     char *exp = 0;
+    int save_lock = 0;
     int different_filename = 0;
 
     exp = edit_get_save_file (edit->filename, _(" Save As "));
@@ -465,8 +464,25 @@ edit_save_as_cmd (WEdit *edit)
 			return 0;
 		    }
 		}
+		save_lock = edit_lock_file (exp);
+	    } else {
+		/* filenames equal, check if already locked */
+		if (!edit->locked && !edit->delete_file)
+		    save_lock = edit_lock_file (exp);
 	    }
+		
 	    if (edit_save_file (edit, exp)) {
+		/* Succesful, so unlock both files */
+		if (strcmp (edit->filename, exp)) {
+		    if (save_lock)
+			edit_unlock_file (exp);
+		    if (edit->locked)
+			edit->locked = edit_unlock_file (edit->filename);
+		} else {
+		    if (edit->locked || save_lock)
+			edit->locked = edit_unlock_file (edit->filename);
+		}
+		
 		edit_set_filename (edit, exp);
 		g_free (exp);
 		edit->modified = 0;
@@ -476,6 +492,11 @@ edit_save_as_cmd (WEdit *edit)
 		edit->force |= REDRAW_COMPLETELY;
 		return 1;
 	    } else {
+		/* Failed, so maintain modify (not save) lock */
+		if (strcmp (edit->filename, exp) && save_lock)
+		    edit_unlock_file (exp);
+		if (save_lock)
+		    edit->locked = edit_unlock_file (edit->filename);
 		g_free (exp);
 		edit_error_dialog (_(" Save As "),
 				   get_sys_error (_
@@ -730,11 +751,22 @@ int edit_save_confirm_cmd (WEdit * edit)
 /* returns 1 on success */
 int edit_save_cmd (WEdit * edit)
 {
-    if (!edit_save_file (edit, edit->filename))
+    int res, save_lock = 0;
+    
+    if (!edit->locked && !edit->delete_file)
+	save_lock = edit_lock_file (edit->filename);
+    res = edit_save_file (edit, edit->filename);
+    
+    /* Maintain modify (not save) lock on failure */
+    if ((res && edit->locked) || save_lock)
+	edit->locked = edit_unlock_file (edit->filename);
+    
+    /* On failure try 'save as', it does locking on its own */
+    if (!res) 
 	return edit_save_as_cmd (edit);
     edit->force |= REDRAW_COMPLETELY;
-    edit->modified = 0;
     edit->delete_file = 0;
+    edit->modified = 0;
 
     return 1;
 }
@@ -750,7 +782,9 @@ int edit_new_cmd (WEdit * edit)
 	}
     }
     edit->force |= REDRAW_COMPLETELY;
-    edit->modified = 0;
+
+    if (edit->locked)
+	edit->locked = edit_unlock_file (edit->filename);
     return edit_renew (edit);	/* if this gives an error, something has really screwed up */
 }
 
@@ -758,10 +792,17 @@ int edit_new_cmd (WEdit * edit)
 static int
 edit_load_file_from_filename (WEdit * edit, char *exp)
 {
-    if (!edit_reload (edit, exp))
+    int prev_locked = edit->locked;
+    char *prev_filename = g_strdup (edit->filename);
+    
+    if (!edit_reload (edit, exp)) {
+	g_free (prev_filename);
 	return 1;
-    edit_set_filename (edit, exp);
-    edit->modified = 0;
+    }
+
+    if (prev_locked)
+	edit_unlock_file (prev_filename);
+    g_free (prev_filename);
     return 0;
 }
 
@@ -2023,6 +2064,8 @@ void edit_quit_cmd (WEdit * edit)
 		return;
 	    break;
 	case 2:
+	    if (edit->locked)
+		edit->locked = edit_unlock_file (edit->filename);
 	    if (edit->delete_file)
 		unlink (edit->filename);
 	    break;

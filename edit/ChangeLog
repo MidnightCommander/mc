@@ -1,3 +1,17 @@
+2003-04-01  Adam Byrtek  <alpha@debian.org>
+
+	* editlock.c, editlock.h: New files. Implement file locking in
+	Emacs style, as documented in JED editor sources.
+	* Makefile.am: Add those files to build tree.
+
+	* edit-widget.c (WEdit): New property 'locked', 0 on edit_init.
+	* edit.c (edit_modification): Lock buffer on modification.
+	* editcmd.c (edit_save_cmd, edit_save_as_cmd): Handle locking
+	during file save.
+	(edit_load_file_from_filename): Unlock.  Remove 2 duplicate
+	lines (handled by edit_init).
+	(edit_quit_cmd): Unlock.
+
 2003-03-12  Pavel Roskin  <proski@gnu.org>
 
 	* edit.h: Make it easier to tweak buffer size and maximal number
