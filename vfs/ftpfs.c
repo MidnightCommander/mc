@@ -1680,6 +1680,20 @@ static struct vfs_s_data ftp_data = {
     linear_close
 };
 
+static void
+ftpfs_fill_names (vfs *me, void (*func)(char *))
+{
+    struct vfs_s_super * super = ftp_data.supers;
+    char *name;
+    
+    while (super){
+	name = g_strconcat ("/#ftp:", SUP.user, "@", SUP.host, "/", SUP.cwdir, NULL);
+	(*func)(name);
+	g_free (name);
+	super = super->next;
+    }
+}
+
 vfs vfs_ftpfs_ops = {
     NULL,	/* This is place of next pointer */
     "ftpfs",
@@ -1689,7 +1703,7 @@ vfs vfs_ftpfs_ops = {
     0,		/* errno */
     NULL,	/* init */
     NULL,	/* done */
-    vfs_s_fill_names,
+    ftpfs_fill_names,
     NULL,
 
     vfs_s_open,
