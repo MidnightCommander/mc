@@ -255,6 +255,7 @@ session_load (void)
 void
 session_set_restart (int restart)
 {
+	gnome_client_set_priority (master_client, 40);
 	gnome_client_set_restart_style (master_client,
 					(restart
 					 ? GNOME_RESTART_IMMEDIATELY

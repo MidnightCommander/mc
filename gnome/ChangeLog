@@ -1,3 +1,8 @@
+2000-05-06  Jacob Berkman  <jacob@helixcode.com>
+
+	* gsession.c (session_set_restart): restart with priority 40 so we show
+	up in the splash screen
+
 2000-04-23  JP Rosevear  <jpr@arcavia.com>
 
 	* gview.c (view): Constify file parameter to match prototype and fix
