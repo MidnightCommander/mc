@@ -3,15 +3,16 @@
  *
  */
 static int         store_file           (struct direntry *fe);
-static int         retrieve_file_start  (struct direntry *fe);
 static int         retrieve_file        (struct direntry *fe);
 static int         remove_temp_file     (char *file_name);
-static int         linear_start         (struct direntry *fe);
-static int         linear_read          (struct direntry *fe, void *buf, int len);
-static int         linear_close         (struct direntry *fe);
 static struct dir *retrieve_dir         (struct connection *bucket,
 					 char *remote_path,
 					 int resolve_symlinks);
+static void	   my_forget		(char *path);
+
+static int         linear_start         (struct direntry *fe);
+static int         linear_read          (struct direntry *fe, void *buf, int len);
+static void        linear_close         (struct direntry *fe);
 
 static int
 select_on_two (int fd1, int fd2)
@@ -175,7 +176,7 @@ flush_all_directory(struct connection *bucket)
     linklist_delete_all(qdcache(bucket), dir_destructor);
 }
 
-void X_fill_names (void (*func)(char *))
+void X_fill_names (vfs *me, void (*func)(char *))
 {
     struct linklist *lptr;
     char   *path_name;
@@ -260,15 +261,18 @@ X_flushdir (void)
 
 
 static int 
-s_setctl (char *path, int ctlop, char *arg)
+s_setctl (vfs *me, char *path, int ctlop, char *arg)
 {
     switch (ctlop) {
 	case MCCTL_REMOVELOCALCOPY:
 	    return remove_temp_file (path);
             return 0;
+        case MCCTL_FORGET_ABOUT:
+	    my_forget(path);
+	    return 0;
     }
+    return 0;
 }
-
 
 static struct direntry *
 _get_file_entry(struct connection *bucket, char *file_name, 
@@ -471,7 +475,7 @@ struct filp {
     int local_handle;
 };
 
-static void *s_open (char *file, int flags, int mode)
+static void *s_open (vfs *me, char *file, int flags, int mode)
 {
     struct filp *fp;
     struct direntry *fe;
@@ -551,7 +555,7 @@ static int s_close (void *data)
     return result;
 }
 
-static int s_errno (void)
+static int s_errno (vfs *me)
 {
     return my_errno;
 }
@@ -573,7 +577,7 @@ struct my_dirent {
 
 /* Possible FIXME: what happens if one directory is opened twice ? */
 
-static void *s_opendir (char *dirname)
+static void *s_opendir (vfs *me, char *dirname)
 {
     struct connection *bucket;
     char *remote_path;
@@ -650,7 +654,7 @@ static int s_closedir (void *info)
     return 0;
 }
 
-static int s_lstat (char *path, struct stat *buf)
+static int s_lstat (vfs *me, char *path, struct stat *buf)
 {
     struct direntry *fe;
     
@@ -663,7 +667,7 @@ static int s_lstat (char *path, struct stat *buf)
         return -1;
 }
 
-static int s_stat (char *path, struct stat *buf)
+static int s_stat (vfs *me, char *path, struct stat *buf)
 {
     struct direntry *fe;
 
@@ -690,8 +694,7 @@ static int s_fstat (void *data, struct stat *buf)
     return 0;
 }
 
-
-static int s_readlink (char *path, char *buf, int size)
+static int s_readlink (vfs *me, char *path, char *buf, int size)
 {
     struct direntry *fe;
 
@@ -705,8 +708,7 @@ static int s_readlink (char *path, char *buf, int size)
     return strlen(fe->linkname);
 }
 
-
-static int s_chdir (char *path)
+static int s_chdir (vfs *me, char *path)
 {
     char *remote_path;
     struct connection *bucket;
@@ -729,8 +731,7 @@ static int s_lseek (void *data, off_t offset, int whence)
     return lseek(fp->local_handle, offset, whence);
 }
 
-
-static vfsid s_getid (char *p, struct vfs_stamping **parent)
+static vfsid s_getid (vfs *me, char *p, struct vfs_stamping **parent)
 {
     struct connection *bucket;
     char *remote_path;
@@ -758,9 +759,9 @@ static void s_free (vfsid id)
     linklist_delete(connections_list, bucket);
 }
 
-static char *s_getlocalcopy (char *path)
+static char *s_getlocalcopy (vfs *me, char *path)
 {
-    struct filp *fp = (struct filp *) s_open (path, O_RDONLY, 0);
+    struct filp *fp = (struct filp *) s_open (me, path, O_RDONLY, 0);
     char *p;
     
     if (fp == NULL)
@@ -776,9 +777,9 @@ static char *s_getlocalcopy (char *path)
     return p;
 }
 
-static void s_ungetlocalcopy (char *path, char *local, int has_changed)
+static void s_ungetlocalcopy (vfs *me, char *path, char *local, int has_changed)
 {
-    struct filp *fp = (struct filp *) s_open (path, O_WRONLY, 0);
+    struct filp *fp = (struct filp *) s_open (me, path, O_WRONLY, 0);
     
     if (fp == NULL)
         return;
@@ -790,12 +791,12 @@ static void s_ungetlocalcopy (char *path, char *local, int has_changed)
     } else {
         /* Should not happen */
         s_close ((void *) fp);
-        mc_def_ungetlocalcopy (path, local, has_changed);
+        mc_def_ungetlocalcopy (me, path, local, has_changed);
     }
 }
 
 void
-X_done(void)
+X_done(vfs *me)
 {
     linklist_destroy(connections_list, connection_destructor);
     connections_list = NULL;

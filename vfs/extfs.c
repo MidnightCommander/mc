@@ -4,18 +4,18 @@
    Written by: 1995 Jakub Jelinek
    Rewritten by: 1998 Pavel Machek
 
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public License
+   as published by the Free Software Foundation; either version 2 of
+   the License, or (at your option) any later version.
 
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+   GNU Library General Public License for more details.
 
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
+   You should have received a copy of the GNU Library General Public
+   License along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
 #include <config.h>
@@ -60,7 +60,7 @@ static char *extfs_prefixes [MAXEXTFS];
 static char extfs_need_archive [MAXEXTFS];
 static int extfs_no = 0;
 
-void extfs_fill_names (void (*func)(char *))
+void extfs_fill_names (vfs *me, void (*func)(char *))
 {
     struct archive *a = first_archive;
     char *name;
@@ -434,7 +434,7 @@ static char *get_path_mangle (char *inname, struct archive **archive, int is_dir
 	    parent = xmalloc (sizeof (struct vfs_stamping), "vfs stamping");
 	    parent->v = v;
 	    parent->next = 0;
-	    parent->id = (*v->getid) (archive_name, &(parent->parent));
+	    parent->id = (*v->getid) (v, archive_name, &(parent->parent));
 	}
 	vfs_add_noncurrent_stamps (&extfs_vfs_ops, (vfsid) parc, parent);
 	vfs_rm_parents (parent);
@@ -576,7 +576,7 @@ void extfs_run (char *file)
     free(p);
 }
 
-static void *extfs_open (char *file, int flags, int mode)
+static void *extfs_open (vfs *me, char *file, int flags, int mode)
 {
     struct pseudofile *extfs_info;
     struct archive *archive;
@@ -698,7 +698,7 @@ static int extfs_close (void *data)
 	    parent = xmalloc (sizeof (struct vfs_stamping), "vfs stamping");
 	    parent->v = v;
 	    parent->next = 0;
-	    parent->id = (*v->getid) (file->archive->name, &(parent->parent));
+	    parent->id = (*v->getid) (v, file->archive->name, &(parent->parent));
 	}
         vfs_add_noncurrent_stamps (&extfs_vfs_ops, (vfsid) (file->archive), parent);
 	vfs_rm_parents (parent);
@@ -712,7 +712,7 @@ static int extfs_close (void *data)
 #define RECORDSIZE 512
 #include "shared_tar_ext.c"
 
-static int extfs_chmod (char *path, int mode)
+static int extfs_chmod (vfs *me, char *path, int mode)
 {
     return 0;
 }
@@ -725,7 +725,7 @@ static int extfs_write (void *data, char *buf, int nbyte)
     return write (file->local_handle, buf, nbyte);
 }
 
-static int extfs_chdir (char *path)
+static int extfs_chdir (vfs *me, char *path)
 {
     struct archive *archive;
     char *q, *res;
@@ -758,7 +758,7 @@ static int extfs_lseek (void *data, off_t offset, int whence)
     return lseek (file->local_handle, offset, whence);
 }
 
-static vfsid extfs_getid (char *path, struct vfs_stamping **parent)
+static vfsid extfs_getid (vfs *me, char *path, struct vfs_stamping **parent)
 {
     struct archive *archive;
     vfs *v;
@@ -772,7 +772,7 @@ static vfsid extfs_getid (char *path, struct vfs_stamping **parent)
     free(p);
     if (archive->name){
 	v = vfs_type (archive->name);
-	id = (*v->getid) (archive->name, &par);
+	id = (*v->getid) (v, archive->name, &par);
 	if (id != (vfsid)-1) {
 	    *parent = xmalloc (sizeof (struct vfs_stamping), "vfs stamping");
 	    (*parent)->v = v;
@@ -834,10 +834,10 @@ static void extfs_free (vfsid id)
     free_archive (archive);
 }
 
-static char *extfs_getlocalcopy (char *path)
+static char *extfs_getlocalcopy (vfs *me, char *path)
 {
     struct pseudofile *fp = 
-        (struct pseudofile *) extfs_open (path, O_RDONLY, 0);
+        (struct pseudofile *) extfs_open (me, path, O_RDONLY, 0);
     char *p;
     
     if (fp == NULL)
@@ -852,10 +852,10 @@ static char *extfs_getlocalcopy (char *path)
     return p;
 }
 
-static void extfs_ungetlocalcopy (char *path, char *local, int has_changed)
+static void extfs_ungetlocalcopy (vfs *me, char *path, char *local, int has_changed)
 {
     struct pseudofile *fp = 
-        (struct pseudofile *) extfs_open (path, O_WRONLY, 0);
+        (struct pseudofile *) extfs_open (me, path, O_WRONLY, 0);
     
     if (fp == NULL)
         return;
@@ -867,12 +867,103 @@ static void extfs_ungetlocalcopy (char *path, char *local, int has_changed)
     } else {
         /* Should not happen */
         extfs_close ((void *) fp);
-        mc_def_ungetlocalcopy (path, local, has_changed);
+        mc_def_ungetlocalcopy (me, path, local, has_changed);
     }
 }
 
-vfs extfs_vfs_ops =
+
+#include "../src/profile.h"
+int extfs_init (vfs *me)
 {
+    FILE *cfg;
+    char *mc_extfsini;
+
+    mc_extfsini = concat_dir_and_file (mc_home, "extfs/extfs.ini");
+    cfg = fopen (mc_extfsini, "r");
+    free (mc_extfsini);
+
+    if (!cfg) {
+        fprintf( stderr, "Warning: " LIBDIR "extfs/extfs.ini not found\n" );
+        return 0;
+    }
+
+    extfs_no = 0;
+    while ( extfs_no < MAXEXTFS ) {
+        char key[256];
+	char *c;
+
+        if (!fgets( key, 250, cfg ))
+	    break;
+
+	/* Handle those with a trailing ':', those flag that the
+	 * file system does not require an archive to work
+	 */
+
+	if (*key == '[') {
+	/* We may not use vfs_die() message or message_1s or similar,
+         * UI is not initialized at this time and message would not
+	 * appear on screen. */
+	    fprintf( stderr, "Warning: You need to update your " LIBDIR "extfs/extfs.ini file.\n" );
+	    fclose(cfg);
+	    return 0;
+	}
+	if (*key == '#')
+	    continue;
+
+	if ((c = strchr( key, '\n')))
+	    *c = 0;
+	c = &key [strlen (key)-1];
+	extfs_need_archive [extfs_no] = !(*c==':');
+	if (*c==':') *c = 0;
+	if (!(*key))
+	    continue;
+
+	extfs_prefixes [extfs_no] = strdup (key);
+	extfs_no++;
+    }
+    fclose(cfg);
+    return 1;
+}
+
+int extfs_which (vfs *me, char *path)
+{
+    int i;
+
+    for (i = 0; i < extfs_no; i++)
+        if (!strcmp (path, extfs_prefixes [i]))
+            return i;
+    return -1;
+}
+
+char *extfs_get_prefix (int idx)
+{
+    return extfs_prefixes [idx];
+}
+
+void extfs_done (vfs *me)
+{
+    int i;
+
+    for (i = 0; i < extfs_no; i++ )
+	free (extfs_prefixes [i]);
+    extfs_no = 0;
+    if (extfs_current_dir)
+	free (extfs_current_dir);
+    extfs_current_dir = 0;
+}
+
+vfs extfs_vfs_ops = {
+    NULL,	/* This is place of next pointer */
+    "Extended filesystems",
+    F_EXEC,	/* flags */
+    NULL,	/* prefix */
+    NULL,	/* data */
+    0,		/* errno */
+    extfs_init,
+    extfs_done,
+    extfs_fill_names,
+    extfs_which,
+
     extfs_open,
     extfs_close,
     extfs_read,
@@ -914,91 +1005,7 @@ vfs extfs_vfs_ops =
     NULL,		/* mkdir */
     NULL,
     NULL,
-    NULL,
     NULL
-    
-#ifdef HAVE_MMAP
-    , NULL,
-    NULL
-#endif    
+
+MMAPNULL
 };
-
-#include "../src/profile.h"
-void extfs_init (void)
-{
-    FILE *cfg;
-    char *mc_extfsini;
-
-    mc_extfsini = concat_dir_and_file (mc_home, "extfs/extfs.ini");
-    cfg = fopen (mc_extfsini, "r");
-    free (mc_extfsini);
-
-    if (!cfg) {
-        fprintf( stderr, "Warning: " LIBDIR "extfs/extfs.ini not found\n" );
-        return;
-    }
-
-    extfs_no = 0;
-    while ( extfs_no < MAXEXTFS ) {
-        char key[256];
-	char *c;
-
-        if (!fgets( key, 250, cfg ))
-	    break;
-
-	/* Handle those with a trailing ':', those flag that the
-	 * file system does not require an archive to work
-	 */
-
-	if (*key == '[') {
-	/* We may not use vfs_die() message or message_1s or similar,
-         * UI is not initialized at this time and message would not
-	 * appear on screen. */
-	    fprintf( stderr, "Warning: You need to update your " LIBDIR "extfs/extfs.ini file.\n" );
-	    fclose(cfg);
-	    return;
-	}
-	if (*key == '#')
-	    continue;
-
-	if ((c = strchr( key, '\n')))
-	    *c = 0;
-	c = &key [strlen (key)-1];
-	extfs_need_archive [extfs_no] = !(*c==':');
-	if (*c==':') *c = 0;
-	if (!(*key))
-	    continue;
-
-	extfs_prefixes [extfs_no] = strdup (key);
-	extfs_no++;
-    }
-    fclose(cfg);
-}
-
-int extfs_which (char *path)
-{
-    int i;
-
-    for (i = 0; i < extfs_no; i++)
-        if (!strcmp (path, extfs_prefixes [i]))
-            return i;
-    return -1;
-}
-
-char *extfs_get_prefix (int idx)
-{
-    return extfs_prefixes [idx];
-}
-
-void extfs_done (void)
-{
-    int i;
-
-    for (i = 0; i < extfs_no; i++ )
-	free (extfs_prefixes [i]);
-    extfs_no = 0;
-    if (extfs_current_dir)
-	free (extfs_current_dir);
-    extfs_current_dir = 0;
-}
-

@@ -5,18 +5,18 @@
                1995 Jakub Jelinek
 	       1998 Pavel Machek
    
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public License
+   as published by the Free Software Foundation; either version 2 of
+   the License, or (at your option) any later version.
    
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+   GNU Library General Public License for more details.
 
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
+   You should have received a copy of the GNU Library General Public
+   License along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
 /* Warning: funtions like extfs_lstat() have right to destroy any
@@ -103,31 +103,39 @@ static int get_bucket (void)
     return 0; /* Shut up, stupid gcc */
 }
 
+static vfs *vfs_list = &local_vfs_ops;	/* It _has_ to be the first */
+
+#define FOR_ALL_VFS for (vfs=vfs_list; vfs; vfs=vfs->next) 
+
+int vfs_register( vfs *vfs )
+{
+    int res = (vfs->init) ? (*vfs->init)(vfs) : 1;
+    if (!res) return 0;
+    vfs->next = vfs_list;
+    vfs_list = vfs;
+#if 0
+    fprintf( stderr, "VFS %s successfully registered\n", vfs->name );
+#endif
+    return 1;
+}
+
 vfs *vfs_type_from_op (char *path)
 {
-#ifdef USE_NETCODE
-    if (!(vfs_flags & FL_NO_MCFS) && !strncmp (path, "mc:", 3))
-	return  &mcfs_vfs_ops;
-    if (!(vfs_flags & FL_NO_FTPFS) && !strncmp (path, "ftp:", 4))
-        return &ftpfs_vfs_ops;
-#endif
-#ifdef USE_EXT2FSLIB
-    if (!(vfs_flags & FL_NO_UNDELFS) && !strncmp (path, "undel:", 6))
-	return &undelfs_vfs_ops;
-#endif
-    if (!(vfs_flags & FL_NO_FISH) && !strncmp (path, "sh:", 3))
-        return &fish_vfs_ops;
-    if (!(vfs_flags & FL_NO_FISH) && !strncmp (path, "ssh:", 4))
-        return &fish_vfs_ops;
-    if (!(vfs_flags & FL_NO_FISH) && !strncmp (path, "rsh:", 4))
-        return &fish_vfs_ops;
-    if (!(vfs_flags & FL_NO_TARFS) && !strcmp (path, "utar"))
-        return &tarfs_vfs_ops;
-    if (!(vfs_flags & FL_NO_EXTFS) && extfs_which (path) != -1)
-        return &extfs_vfs_ops;
-    if (!(vfs_flags & FL_NO_SFS) && sfs_which (path) != -1)
-        return &sfs_vfs_ops;
-    return NULL;
+    vfs *vfs;
+    FOR_ALL_VFS {
+        if (vfs == &local_vfs_ops)	/* local catches all */ 
+	    return NULL;
+        if (vfs->which) {
+	    if ((*vfs->which) (vfs, path) != -1)
+	        return vfs;
+	    else
+	        continue;
+	}
+	if (!strncmp (path, vfs->prefix, strlen (vfs->prefix)))
+	    return vfs;
+    }
+    vfs_die( "No local in vfs list?" );
+    return NULL; /* shut up stupid gcc */
 }
 
 int path_magic( char *path )
@@ -298,7 +306,7 @@ void vfs_rmstamp (vfs *v, vfsid id, int removeparents)
 static int
 ferrno (vfs *vfs)
 {
-    return vfs->ferrno ? (*vfs->ferrno)() : EOPNOTSUPP; 
+    return vfs->ferrno ? (*vfs->ferrno)(vfs) : EOPNOTSUPP; 
     /* Hope that error message is obscure enough ;-) */
 }
 
@@ -320,7 +328,7 @@ int mc_open (char *file, int flags, ...)
     
     if (!vfs->open)
         vfs_die( "VFS must support open.\n" );
-    info = (*vfs->open) (file, flags, mode);	/* open must be supported */
+    info = (*vfs->open) (vfs, file, flags, mode);	/* open must be supported */
     free (file);
     if (!info){
 	errno = ferrno (vfs);
@@ -375,7 +383,7 @@ int mc_setctl (char *path, int ctlop, char *arg)
 
     path = vfs_canon (path);
     vfs = vfs_type (path);    
-    result = vfs->setctl ? (*vfs->setctl)(path, ctlop, arg) : 0;
+    result = vfs->setctl ? (*vfs->setctl)(vfs, path, ctlop, arg) : 0;
     free (path);
     return result;
 }
@@ -420,7 +428,7 @@ DIR *mc_opendir (char *dirname)
     dirname = vfs_canon (dirname);
     vfs = vfs_type (dirname);
 
-    info = vfs->opendir ? (*vfs->opendir)(dirname) : NULL;
+    info = vfs->opendir ? (*vfs->opendir)(vfs, dirname) : NULL;
     free (dirname);
     if (p)
         free (p);
@@ -491,8 +499,8 @@ int mc_closedir (DIR *dirp)
     return result; 
 }
 
-MC_NAMEOP   (stat, (char *path, struct stat *buf), (vfs_name (path), buf))
-MC_NAMEOP   (lstat, (char *path, struct stat *buf), (vfs_name (path), buf))
+MC_NAMEOP   (stat, (char *path, struct stat *buf), (vfs, vfs_name (path), buf))
+MC_NAMEOP   (lstat, (char *path, struct stat *buf), (vfs, vfs_name (path), buf))
 MC_HANDLEOP (fstat, (int handle, struct stat *buf), (vfs_info (handle), buf))
 
 /*
@@ -535,12 +543,12 @@ char *mc_get_current_wd (char *buffer, int size)
     return buffer;
 }
 
-MC_NAMEOP (chmod, (char *path, int mode), (vfs_name (path), mode))
-MC_NAMEOP (chown, (char *path, int owner, int group), (vfs_name (path), owner, group))
-MC_NAMEOP (utime, (char *path, struct utimbuf *times), (vfs_name (path), times))
-MC_NAMEOP (readlink, (char *path, char *buf, int bufsiz), (vfs_name (path), buf, bufsiz))
-MC_NAMEOP (unlink, (char *path), (vfs_name (path)))
-MC_NAMEOP (symlink, (char *name1, char *path), (vfs_name (name1), vfs_name (path)))
+MC_NAMEOP (chmod, (char *path, int mode), (vfs, vfs_name (path), mode))
+MC_NAMEOP (chown, (char *path, int owner, int group), (vfs, vfs_name (path), owner, group))
+MC_NAMEOP (utime, (char *path, struct utimbuf *times), (vfs, vfs_name (path), times))
+MC_NAMEOP (readlink, (char *path, char *buf, int bufsiz), (vfs, vfs_name (path), buf, bufsiz))
+MC_NAMEOP (unlink, (char *path), (vfs, vfs_name (path)))
+MC_NAMEOP (symlink, (char *name1, char *path), (vfs, vfs_name (name1), vfs_name (path)))
 
 #define MC_RENAMEOP(name) \
 int mc_##name (char *name1, char *name2) \
@@ -558,7 +566,7 @@ int mc_##name (char *name1, char *name2) \
 	return -1; \
     } \
 \
-    result = vfs->name ? (*vfs->name)(vfs_name (name1), vfs_name (name2)) : -1; \
+    result = vfs->name ? (*vfs->name)(vfs, vfs_name (name1), vfs_name (name2)) : -1; \
     free (name1); \
     free (name2); \
     if (result == -1) \
@@ -679,7 +687,7 @@ vfsid vfs_ncs_getid (vfs *nvfs, char *dir, struct vfs_stamping **par)
         dir = copy_strings (dir, "/", NULL);    
         freeit = 1;
     }
-    nvfsid = (*nvfs->getid)(dir, par);
+    nvfsid = (*nvfs->getid)(nvfs, dir, par);
     if (freeit)
         free (dir);
     return nvfsid;
@@ -826,7 +834,7 @@ int mc_chdir (char *path)
     current_dir = vfs_canon (path);
     current_vfs = vfs_type (current_dir);
     b = strdup (current_dir);
-    result = (*current_vfs->chdir) ?  (*current_vfs->chdir)(vfs_name (b)) : -1;
+    result = (*current_vfs->chdir) ?  (*current_vfs->chdir)(current_vfs, vfs_name (b)) : -1;
     free (b);
     if (result == -1){
 	errno = ferrno (current_vfs);
@@ -907,9 +915,9 @@ void vfs_setup_wd (void)
     return;
 }
 
-MC_NAMEOP (mkdir, (char *path, mode_t mode), (vfs_name (path), mode))
-MC_NAMEOP (rmdir, (char *path), (vfs_name (path)))
-MC_NAMEOP (mknod, (char *path, int mode, int dev), (vfs_name (path), mode, dev))
+MC_NAMEOP (mkdir, (char *path, mode_t mode), (vfs, vfs_name (path), mode))
+MC_NAMEOP (rmdir, (char *path), (vfs, vfs_name (path)))
+MC_NAMEOP (mknod, (char *path, int mode, int dev), (vfs, vfs_name (path), mode, dev))
 
 #ifdef HAVE_MMAP
 struct mc_mmapping {
@@ -930,7 +938,7 @@ mc_mmap (caddr_t addr, size_t len, int prot, int flags, int fd, off_t offset)
 	return (caddr_t) -1;
     
     vfs = vfs_op (fd);
-    result = vfs->mmap ? (*vfs->mmap)(addr, len, prot, flags, vfs_info (fd), offset) : (caddr_t)-1;
+    result = vfs->mmap ? (*vfs->mmap)(vfs, addr, len, prot, flags, vfs_info (fd), offset) : (caddr_t)-1;
     if (result == (caddr_t)-1){
 	errno = ferrno (vfs);
 	return (caddr_t)-1;
@@ -955,7 +963,7 @@ int mc_munmap (caddr_t addr, size_t len)
             else
             	mcm2->next = mcm->next;
 	    if (*mcm->vfs->munmap)
-	        (*mcm->vfs->munmap)(addr, len, mcm->vfs_info);
+	        (*mcm->vfs->munmap)(mcm->vfs, addr, len, mcm->vfs_info);
             free (mcm);
             return 0;
         }
@@ -965,7 +973,7 @@ int mc_munmap (caddr_t addr, size_t len)
 
 #endif
 
-char *mc_def_getlocalcopy (char *filename)
+char *mc_def_getlocalcopy (vfs *vfs, char *filename)
 {
     char *tmp;
     int fdin, fdout, i;
@@ -1002,15 +1010,15 @@ char *mc_getlocalcopy (char *path)
 
     path = vfs_canon (path);
     vfs = vfs_type (path);    
-    result = vfs->getlocalcopy ? (*vfs->getlocalcopy)(vfs_name (path)) :
-                                 mc_def_getlocalcopy (vfs_name (path));
+    result = vfs->getlocalcopy ? (*vfs->getlocalcopy)(vfs, vfs_name (path)) :
+                                 mc_def_getlocalcopy (vfs, vfs_name (path));
     free (path);
     if (!result)
 	errno = ferrno (vfs);
     return result;
 }
 
-void mc_def_ungetlocalcopy (char *filename, char *local, int has_changed)
+void mc_def_ungetlocalcopy (vfs *vfs, char *filename, char *local, int has_changed)
 {
     if (has_changed){
         int fdin, fdout, i;
@@ -1047,8 +1055,8 @@ void mc_ungetlocalcopy (char *path, char *local, int has_changed)
 
     path = vfs_canon (path);
     vfs = vfs_type (path);
-    vfs->ungetlocalcopy ? (*vfs->ungetlocalcopy)(vfs_name (path), local, has_changed) :
-                          mc_def_ungetlocalcopy (vfs_name (path), local, has_changed);
+    vfs->ungetlocalcopy ? (*vfs->ungetlocalcopy)(vfs, vfs_name (path), local, has_changed) :
+                          mc_def_ungetlocalcopy (vfs, vfs_name (path), local, has_changed);
     free (path);
 }
 
@@ -1090,14 +1098,24 @@ void vfs_init (void)
     current_mday = t->tm_mday;
     current_mon  = t->tm_mon;
     current_year = t->tm_year;
-    
+
+    /* We do not want to register local_vfs_ops */
+
 #ifdef USE_NETCODE
     tcp_init();
-    ftpfs_init();
+    vfs_register (&ftpfs_vfs_ops);
+    vfs_register (&mcfs_vfs_ops);
 #endif
-    fish_init ();
-    extfs_init ();
-    sfs_init ();
+
+    vfs_register (&fish_vfs_ops);
+    vfs_register (&extfs_vfs_ops);
+    vfs_register (&sfs_vfs_ops);
+    vfs_register (&tarfs_vfs_ops);
+
+#ifdef USE_EXT2FSLIB
+    vfs_register (&undelfs_vfs_ops);
+#endif
+
     vfs_setup_wd ();
 }
 
@@ -1131,6 +1149,7 @@ void vfs_shut_path (char *p)
 void vfs_shut (void)
 {
     struct vfs_stamping *stamp, *st;
+    vfs *vfs;
 
     for (stamp = stamps, stamps = 0; stamp != NULL;){
 	(*stamp->v->free)(stamp->id);
@@ -1145,12 +1164,9 @@ void vfs_shut (void)
     if (current_dir)
 	free (current_dir);
 
-    extfs_done ();
-    sfs_done();
-#ifdef USE_NETCODE
-    fish_done();
-    ftpfs_done();
-#endif
+    FOR_ALL_VFS
+        if (vfs->done)
+	     (*vfs->done) (vfs);
 }
 
 /* These ones grab information from the VFS
@@ -1158,14 +1174,10 @@ void vfs_shut (void)
  */
 void vfs_fill_names (void (*func)(char *))
 {
-#ifdef USE_NETCODE
-    mcfs_fill_names (func);
-    ftpfs_fill_names (func);
-    fish_fill_names (func);
-#endif
-    tarfs_fill_names (func);
-    extfs_fill_names (func);
-    sfs_fill_names (func);
+    vfs *vfs;
+    FOR_ALL_VFS
+        if (vfs->fill_names)
+	    (*vfs->fill_names) (vfs, func);
 }
 
 /* Following stuff (parse_ls_lga) is used by ftpfs and extfs */
@@ -1564,13 +1576,7 @@ int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 void
 vfs_force_expire (char *pathname)
 {
-    vfs *vfs;
-    
-    pathname = vfs_canon (pathname);
-    vfs = vfs_type (pathname);
-    if (vfs->forget_about)
-	(*vfs->forget_about) (pathname);
-    free (pathname);
+    mc_setctl( pathname, MCCTL_FORGET_ABOUT, NULL );
 }
 
 void

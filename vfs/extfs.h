@@ -67,12 +67,8 @@ struct archive {
     struct archive *next;
 };
 
-void extfs_init (void);
-void extfs_fill_names (void (*func)(char *));
-int extfs_prefix_to_type (char *path);
 char *extfs_get_prefix (int fstype);
 char *extfs_analysis (char *path, char **arc_name, int *fstype, int is_dir);
 void extfs_run (char *path);
-void extfs_done (void);
 
 typedef struct archive extfs_archive; 	/* Do _not_ use this inside extfs.c */

@@ -4,18 +4,18 @@
    Written by: 1995 Jakub Jelinek
    Rewritten by: 1998 Pavel Machek
 
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public License
+   as published by the Free Software Foundation; either version 2 of
+   the License, or (at your option) any later version.
 
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+   GNU Library General Public License for more details.
 
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
+   You should have received a copy of the GNU Library General Public
+   License along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
 #include <config.h>
@@ -85,7 +85,7 @@ static struct stat hstat;		/* Stat struct corresponding */
 static char *current_file_name, *current_link_name;
 static struct entry *find_entry (struct entry *dir, char *name, int make_dirs, int make_file);
 
-void tarfs_fill_names (void (*func)(char *))
+void tarfs_fill_names (vfs *me, void (*func)(char *))
 {
     struct archive *a = first_archive;
     char *name;
@@ -820,7 +820,7 @@ static char *get_path_mangle (char *inname, struct archive **archive, int is_dir
 	parent = xmalloc (sizeof (struct vfs_stamping), "vfs stamping");
 	parent->v = v;
 	parent->next = 0;
-	parent->id = (*v->getid) (archive_name, &(parent->parent));
+	parent->id = (*v->getid) (v, archive_name, &(parent->parent));
     }
     vfs_add_noncurrent_stamps (&tarfs_vfs_ops, (vfsid) parc, parent);
     vfs_rm_parents (parent);
@@ -892,7 +892,7 @@ struct pseudofile {
 
 static struct entry *find_entry (struct entry *dir, char *name, int make_dirs, int make_file);
 
-static void *tar_open (char *file, int flags, int mode)
+static void *tar_open (vfs *me, char *file, int flags, int mode)
 {
     struct pseudofile *tar_info;
     struct archive *archive;
@@ -984,7 +984,7 @@ static int tar_close (void *data)
 	    parent = xmalloc (sizeof (struct vfs_stamping), "vfs stamping");
 	    parent->v = v;
 	    parent->next = 0;
-	    parent->id = (*v->getid) (file->archive->name, &(parent->parent));
+	    parent->id = (*v->getid) (v, file->archive->name, &(parent->parent));
 	}
         vfs_add_noncurrent_stamps (&tarfs_vfs_ops, (vfsid) (file->archive), parent);
 	vfs_rm_parents (parent);
@@ -997,17 +997,17 @@ static int tar_close (void *data)
 
 #include "shared_tar_ext.c"
 
-static int tar_chmod (char *path, int mode)
+static int tar_chmod (vfs *me, char *path, int mode)
 {	/* Fixme: are you sure? IMO this is guaranteed to fail */
     return chmod (path, mode);
 }
 
-static int tar_chown (char *path, int owner, int group)
+static int tar_chown (vfs *me, char *path, int owner, int group)
 {	/* Fixme: are you sure? IMO this is guaranteed to fail */
     return chown (path, owner, group);
 }
 
-static int tar_chdir (char *path)
+static int tar_chdir (vfs *me, char *path)
 {
     struct archive *archive;
     char *q;
@@ -1046,7 +1046,7 @@ static int tar_lseek (void *data, off_t offset, int whence)
     return file->pos;
 }
 
-static vfsid tar_getid (char *path, struct vfs_stamping **parent)
+static vfsid tar_getid (vfs *me, char *path, struct vfs_stamping **parent)
 {
     struct archive *archive;
     vfs *v;
@@ -1059,7 +1059,7 @@ static vfsid tar_getid (char *path, struct vfs_stamping **parent)
 	return (vfsid) -1;
     free(p);
     v = vfs_type (archive->name);
-    id = (*v->getid) (archive->name, &par);
+    id = (*v->getid) (v, archive->name, &par);
     if (id != (vfsid)-1) {
         *parent = xmalloc (sizeof (struct vfs_stamping), "vfs stamping");
         (*parent)->v = v;
@@ -1120,7 +1120,7 @@ static void tar_free (vfsid id)
     free_archive (archive);
 }
 
-static char *tar_getlocalcopy (char *path)
+static char *tar_getlocalcopy (vfs *me, char *path)
 {
     struct archive *archive;
     char *p, *q;
@@ -1138,21 +1138,37 @@ static char *tar_getlocalcopy (char *path)
 
     if (entry->inode->local_filename != NULL)
         return entry->inode->local_filename;
-    p = mc_def_getlocalcopy (buf);
+    p = mc_def_getlocalcopy (me, buf);
     if (p != NULL) {
         entry->inode->local_filename = p;
     }
     return p;
 }
 
-static void tar_ungetlocalcopy (char *path, char *local, int has_changed)
+static void tar_ungetlocalcopy (vfs *me, char *path, char *local, int has_changed)
 {
 /* We do just nothing. (We are read only and do not need to free local,
    since it will be freed when tar archive will be freed */
 }
 
+int tarfs_init(vfs *me)
+{
+    return 1;
+}
+
 vfs tarfs_vfs_ops =
 {
+    NULL,	/* This is place of next pointer */
+    "TApe aRchiver decompressor",
+    0,		/* flags */
+    "utar",	/* prefix */
+    NULL,	/* data */
+    0,		/* errno */
+    tarfs_init,
+    NULL,
+    tarfs_fill_names,
+    NULL,
+
     tar_open,
     tar_close,
     tar_read,
@@ -1191,7 +1207,6 @@ vfs tarfs_vfs_ops =
     tar_ungetlocalcopy,
     
     NULL,		/* mkdir */
-    NULL,
     NULL,
     NULL,
     NULL

@@ -108,12 +108,12 @@ static struct entry *find_entry (struct entry *dir, char *name, int make_dirs, i
 }
 
 
-static int s_errno (void)
+static int s_errno (vfs *me)
 {
     return my_errno;
 }
 
-static void * s_opendir (char *dirname)
+static void * s_opendir (vfs *me, char *dirname)
 {
     struct archive *archive;
     char *q;
@@ -219,9 +219,6 @@ static int s_internal_stat (char *path, struct stat *buf, int resolve)
     char *q;
     struct entry *entry;
     struct inode *inode;
-char debugbuf[10240];
-strcpy( debugbuf, path );
-
 
     if ((q = get_path_mangle (path, &archive, 0, 0)) == NULL)
 	return -1;
@@ -235,12 +232,12 @@ strcpy( debugbuf, path );
     return 0;
 }
 
-static int s_stat (char *path, struct stat *buf)
+static int s_stat (vfs *me, char *path, struct stat *buf)
 {
     return s_internal_stat (path, buf, 1);
 }
 
-static int s_lstat (char *path, struct stat *buf)
+static int s_lstat (vfs *me, char *path, struct stat *buf)
 {
     return s_internal_stat (path, buf, 0);
 }
@@ -255,7 +252,7 @@ static int s_fstat (void *data, struct stat *buf)
     return 0;
 }
 
-static int s_readlink (char *path, char *buf, int size)
+static int s_readlink (vfs *me, char *path, char *buf, int size)
 {
     struct archive *archive;
     char *q;

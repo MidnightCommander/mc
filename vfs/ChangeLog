@@ -1,3 +1,16 @@
+Sun Sep 27 16:16:52 1998  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* COPYING.LGPL, all over the code: code is now under Library
+ 	General Public License (instead of GPL), so non-free applications
+ 	can link to it.
+
+Wed Sep 23 22:37:40 1998  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* all over the code: added (vfs *) as first argument for functions
+ 	that have no other way to know what fs they belong to. This will
+ 	be used by object-like tricks, which will allow us to do real
+ 	code-sharing: I do not like #including of .c files.
+
 1998-09-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* shared_ftp_fish.c: Addaed prototypes for linear_start, linear_read,

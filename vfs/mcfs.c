@@ -6,18 +6,18 @@
               Andrej Borsenkow
 	      Norbert Warmuth
    
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public License
+   as published by the Free Software Foundation; either version 2 of
+   the License, or (at your option) any later version.
    
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+   GNU Library General Public License for more details.
 
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
+   You should have received a copy of the GNU Library General Public
+   License along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
 #include <config.h>
@@ -83,7 +83,7 @@ char *mcfs_get_host_and_username (char *path, char **host, char **user,
     return get_host_and_username (path, host, user, port, 0, 0, pass); 
 }
 
-void mcfs_fill_names (void (*func)(char *))
+void mcfs_fill_names (vfs *me, void (*func)(char *))
 {
     int i;
     char *name;
@@ -455,7 +455,7 @@ static char *mcfs_gethome (mcfs_connection *mc)
 }
 
 /* The callbacks */
-static void *mcfs_open (char *file, int flags, int mode)
+static void *mcfs_open (vfs *me, char *file, int flags, int mode)
 {
     char *remote_file;
     mcfs_connection *mc;
@@ -549,7 +549,7 @@ static int mcfs_close (void *data)
     return result;
 }
 
-static int mcfs_errno (void)
+static int mcfs_errno (vfs *me)
 {
     return mcfs_errno_var;
 }
@@ -568,7 +568,7 @@ typedef struct {
     dir_entry *current;
 } opendir_info;
 
-static void *mcfs_opendir (char *dirname)
+static void *mcfs_opendir (vfs *me, char *dirname)
 {
     opendir_info *mcfs_info;
     mcfs_connection *mc;
@@ -817,12 +817,12 @@ static int mcfs_stat_cmd (int cmd, char *path, struct stat *buf)
 	return the_error (-1, EIO);
 }
 
-static int mcfs_stat (char *path, struct stat *buf)
+static int mcfs_stat (vfs *me, char *path, struct stat *buf)
 {
     return mcfs_stat_cmd (MC_STAT, path, buf);
 }
 
-static int mcfs_lstat (char *path, struct stat *buf)
+static int mcfs_lstat (vfs *me, char *path, struct stat *buf)
 {
     int path_len = strlen (path);
     int entry_len = strlen (mcfs_readdir_data.dent.d_name);
@@ -859,17 +859,17 @@ int mcfs_fstat (void *data, struct stat *buf)
 	return the_error (-1, EIO);
 }
 
-int mcfs_chmod (char *path, int mode)
+int mcfs_chmod (vfs *me, char *path, int mode)
 {
     return mcfs_rpc_path_int (MC_CHMOD, path, mode);
 }
 
-int mcfs_chown (char *path, int owner, int group)
+int mcfs_chown (vfs *me, char *path, int owner, int group)
 {
     return mcfs_rpc_path_int_int (MC_CHOWN, path, owner, group);
 }
 
-int mcfs_utime (char *path, struct utimbuf *times)
+int mcfs_utime (vfs *me, char *path, struct utimbuf *times)
 {
     mcfs_connection   *mc;
     int status;
@@ -902,7 +902,7 @@ int mcfs_utime (char *path, struct utimbuf *times)
     return (status);
 }
 
-static int mcfs_readlink (char *path, char *buf, int size)
+static int mcfs_readlink (vfs *me, char *path, char *buf, int size)
 {
     char *remote_file, *stat_str;
     int  status, error;
@@ -927,22 +927,22 @@ static int mcfs_readlink (char *path, char *buf, int size)
     return strlen (buf);
 }
 
-int mcfs_unlink (char *path)
+int mcfs_unlink (vfs *me, char *path)
 {
     return mcfs_rpc_path (MC_UNLINK, path);
 }
 
-int mcfs_symlink (char *n1, char *n2)
+int mcfs_symlink (vfs *me, char *n1, char *n2)
 {
     return mcfs_rpc_two_paths (MC_SYMLINK, n1, n2);
 }
 
-int mcfs_rename (char *a, char *b)
+int mcfs_rename (vfs *me, char *a, char *b)
 {
     return mcfs_rpc_two_paths (MC_RENAME, a, b);
 }
 
-static int mcfs_chdir (char *path)
+static int mcfs_chdir (vfs *me, char *path)
 {
     char *remote_dir;
     mcfs_connection *mc;
@@ -984,22 +984,22 @@ int mcfs_lseek (void *data, off_t offset, int whence)
     return mcfs_handle_simple_error (sock, 1);
 }
 
-int mcfs_mknod (char *path, int mode, int dev)
+int mcfs_mknod (vfs *me, char *path, int mode, int dev)
 {
     return mcfs_rpc_path_int_int (MC_MKNOD, path, mode, dev);
 }
 
-int mcfs_mkdir (char *path, mode_t mode)
+int mcfs_mkdir (vfs *me, char *path, mode_t mode)
 {
     return mcfs_rpc_path_int (MC_MKDIR, path, mode);
 }
 
-int mcfs_rmdir (char *path)
+int mcfs_rmdir (vfs *me, char *path)
 {
     return mcfs_rpc_path (MC_RMDIR, path);
 }
 
-int mcfs_link (char *p1, char *p2)
+int mcfs_link (vfs *me, char *p1, char *p2)
 {
     return mcfs_rpc_two_paths (MC_LINK, p1, p2);
 }
@@ -1007,7 +1007,7 @@ int mcfs_link (char *p1, char *p2)
 /* We do not free anything right now: we free resources when we run
  * out of them
  */
-static vfsid mcfs_getid (char *p, struct vfs_stamping **parent)
+static vfsid mcfs_getid (vfs *me, char *p, struct vfs_stamping **parent)
 {
     *parent = NULL;
     
@@ -1024,28 +1024,19 @@ static void mcfs_free (vfsid id)
     /* FIXME: Should not be empty */
 }
 
-static char *mcfs_getlocalcopy (char *path)
-{
-    return mc_def_getlocalcopy (path);
-}
-
-static void mcfs_ungetlocalcopy (char *path, char *local, int has_changed)
-{
-    mc_def_ungetlocalcopy (path, local, has_changed);
-}
-
 /* Gives up on a socket and reopnes the connection, the child own the socket
  * now
  */
-void
-mcfs_forget (char *path)
+static void
+my_forget (char *path)
 {
     char *host, *user, *pass, *p;
     int  port, i, vers;
-    
-    if (strncmp (path, "mc:", 3) != 0)
-	return;
-    path += 3;
+
+    if (strncmp (path, "/#mc:", 5)) {
+        vfs_die( "Mcfs: this should not happen.\n" );
+    }
+    path += 5;
     if (path[0] == '/' && path[1] == '/')
 	path += 2;
 
@@ -1075,19 +1066,29 @@ mcfs_forget (char *path)
 	wipe_password (pass);
 }
 
-#ifdef HAVE_MMAP
-caddr_t mcfs_mmap (caddr_t addr, size_t len, int prot, int flags, void *data, off_t offset)
+static int 
+mcfs_setctl (vfs *me, char *path, int ctlop, char *arg)
 {
-    return (caddr_t)-1; /* We do not mmap to far away */
+    switch (ctlop) {
+        case MCCTL_FORGET_ABOUT:
+	    my_forget(path);
+	    return 0;
+    }
+    return 0;
 }
-
-int mcfs_munmap (caddr_t addr, size_t len, void *data)
-{
-    return -1;
-}
-#endif
 
 vfs mcfs_vfs_ops = {
+    NULL,	/* This is place of next pointer */
+    "Midnight Commander's private remote filesystem",
+    F_NET,	/* flags */
+    "mcfs:",	/* prefix */
+    NULL,	/* data */
+    0,		/* errno */
+    NULL,
+    NULL,
+    mcfs_fill_names,
+    NULL,
+
     mcfs_open,
     mcfs_close,
     mcfs_read,
@@ -1122,17 +1123,15 @@ vfs mcfs_vfs_ops = {
     mcfs_nothingisopen,
     mcfs_free,
     
-    mcfs_getlocalcopy,
-    mcfs_ungetlocalcopy,
+    NULL,
+    NULL,
 
     mcfs_mkdir,
     mcfs_rmdir,
     NULL,
-    NULL,
-    mcfs_forget
-#ifdef HAVE_MMAP
-    , mcfs_mmap,
-    mcfs_munmap
-#endif
+    mcfs_setctl
+
+MMAPNULL
 };
 
+/* FIXME: should add mc_setctl() and make it call mcfs_forget */

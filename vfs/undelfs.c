@@ -10,18 +10,18 @@
    Written by: 1995 Miguel de Icaza.
                1997 Norbert Warmuth.
    
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public License
+   as published by the Free Software Foundation; either version 2 of
+   the License, or (at your option) any later version.
    
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+   GNU Library General Public License for more details.
 
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
+   You should have received a copy of the GNU Library General Public
+   License along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
 /* Assumptions:
@@ -274,7 +274,7 @@ void com_err (const char *str, long err_code, const char *s2, ...)
 }
 
 static void *
-undelfs_opendir (char *dirname)
+undelfs_opendir (vfs *me, char *dirname)
 {
     char *file, *f;
     
@@ -386,7 +386,7 @@ typedef struct {
 
 /* We do not support lseek */
 static void *
-undelfs_open (char *fname, int flags, int mode)
+undelfs_open (vfs *me, char *fname, int flags, int mode)
 {
     char *file, *f;
     ino_t  inode, i;
@@ -560,7 +560,7 @@ do_stat (int inode_index, struct stat *buf)
 }
 
 static int
-undelfs_lstat(char *path, struct stat *buf)
+undelfs_lstat(vfs *me, char *path, struct stat *buf)
 {
     int inode_index;
     char *file, *f;
@@ -598,9 +598,9 @@ undelfs_lstat(char *path, struct stat *buf)
 }
 
 static int
-undelfs_stat(char *path, struct stat *buf)
+undelfs_stat(vfs *me, char *path, struct stat *buf)
 {
-    return undelfs_lstat (path, buf);
+    return undelfs_lstat (me, path, buf);
 }
 
 
@@ -613,7 +613,7 @@ undelfs_fstat (void *vfs_info, struct stat *buf)
 }
 
 static int
-undelfs_chdir(char *path)
+undelfs_chdir(vfs *me, char *path)
 {
     char *file, *f;
     int fd;
@@ -645,7 +645,7 @@ undelfs_lseek(void *vfs_info, off_t offset, int whence)
 }
 
 static vfsid
-undelfs_getid(char *path, struct vfs_stamping **parent)
+undelfs_getid(vfs *me, char *path, struct vfs_stamping **parent)
 {
     char *ext2_fname, *file;
 
@@ -673,6 +673,17 @@ undelfs_free(vfsid id)
 }
 
 vfs undelfs_vfs_ops = {
+    NULL,	/* This is place of next pointer */
+    "Undelete filesystem for ext2",
+    0,	/* flags */
+    "undel:",	/* prefix */
+    NULL,	/* data */
+    0,		/* errno */
+    NULL,
+    NULL,
+    NULL,	/* fill_names */
+    NULL,
+
     undelfs_open,
     undelfs_close,
     undelfs_read,
@@ -713,10 +724,7 @@ vfs undelfs_vfs_ops = {
     NULL,
     NULL,
     NULL,
-    NULL,
     NULL
-#ifdef HAVE_MMAP
-    , NULL,
-    NULL
-#endif
+
+MMAPNULL
 };

@@ -7,18 +7,18 @@
 
    Derived from ftpfs.c.
    
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public License
+   as published by the Free Software Foundation; either version 2 of
+   the License, or (at your option) any later version.
    
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+   GNU Library General Public License for more details.
 
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
+   You should have received a copy of the GNU Library General Public
+   License along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
 /*
@@ -207,7 +207,7 @@ pipeopen(struct connection *bucket, char *path, char *argv[])
     if (pipe(fileset1)<0) vfs_die("Could not pipe(): %m.");
     if (pipe(fileset2)<0) vfs_die("Could not pipe(): %m.");
     
-    if (res = fork()) {
+    if ((res = fork())) {
         if (res<0) vfs_die("Could not fork(): %m.");
 	/* We are the parent */
 	close(fileset1[0]);
@@ -363,6 +363,10 @@ static char *fish_get_current_directory(struct connection *bucket)
     ERRNOR (EIO, NULL);
 }
 
+static void my_forget (char *path)
+{
+}
+
 #define X "fish"
 #define X_myname "/#sh:"
 #define X_vfs_ops fish_vfs_ops
@@ -376,11 +380,11 @@ static char*
 get_path (struct connection **bucket, char *path)
 {
     char *res;
-    if (res = s_get_path (bucket, path, "/#sh:"))
+    if ((res = s_get_path (bucket, path, "/#sh:")))
         return res;
-    if (res = s_get_path (bucket, path, "/#ssh:"))
+    if ((res = s_get_path (bucket, path, "/#ssh:")))
         return res;
-    if (res = s_get_path (bucket, path, "/#rsh:")) {
+    if ((res = s_get_path (bucket, path, "/#rsh:"))) {
         qflags((*bucket)) |= FISH_FLAG_RSH;
         return res;
     }
@@ -649,7 +653,7 @@ linear_abort (struct direntry *fe)
 
     print_vfs_message( "Aborting transfer..." );
     do {
-	n = MIN(8192, fe->total - fe->got);
+	n = VFS_MIN(8192, fe->total - fe->got);
 	if (n)
 	    if ((n = read(qsockr(fe->bucket), buffer, n)) < 0)
 	        return;
@@ -665,7 +669,7 @@ static int
 linear_read (struct direntry *fe, void *buf, int len)
 {
     int n = 0;
-    len = MIN( fe->total - fe->got, len );
+    len = VFS_MIN( fe->total - fe->got, len );
     while (len && ((n = read (qsockr(fe->bucket), buf, len))<0)) {
         if ((errno == EINTR) && !got_interrupt())
 	    continue;
@@ -679,7 +683,7 @@ linear_read (struct direntry *fe, void *buf, int len)
     ERRNOR (errno, n);
 }
 
-static int
+static void
 linear_close (struct direntry *fe)
 {
     if (fe->total != fe->got)
@@ -688,9 +692,7 @@ linear_close (struct direntry *fe)
 
 int fish_ctl (void *data, int ctlop, int arg)
 {
-    int n = 0;
     struct filp *fp = data;
-    int v;
     switch (ctlop) {
         case MCCTL_IS_NOTREADY:
 	    {
@@ -719,11 +721,14 @@ send_fish_command(struct connection *bucket, char *cmd, int flags)
     return 0;
 }
 
-void
-fish_init (void)
+int
+fish_init (vfs *me)
 {
     connections_list = linklist_init();
+#if 0
     logfile = fopen ("/tmp/talk.fish", "w+");
+#endif
+    return 1;
 }
 
 #define PREFIX \
@@ -737,7 +742,7 @@ fish_init (void)
     free(remote_path); \
     return send_fish_command(bucket, buf, flags);
 
-int fish_chmod (char *path, int mode)
+int fish_chmod (vfs *me, char *path, int mode)
 {
     PREFIX
     sprintf(buf, "#CHMOD %4.4o %s\nchmod %4.4o %s; echo '### 000'\n", 
@@ -747,7 +752,7 @@ int fish_chmod (char *path, int mode)
 }
 
 #define FISH_OP(name, chk, string) \
-int fish_##name (char *path1, char *path2) \
+int fish_##name (vfs *me, char *path1, char *path2) \
 { \
     char buf[120]; \
     char *remote_path1 = NULL, *remote_path2 = NULL; \
@@ -769,7 +774,7 @@ FISH_OP(rename, XTEST, "#RENAME %s %s\nmv %s %s; echo '*** 000'" );
 FISH_OP(link,   XTEST, "#LINK %s %s\nln %s %s; echo '*** 000'" );
 FISH_OP(symlink,     , "#SYMLINK %s %s\nln -s %s %s; echo '*** 000'" );
 
-int fish_chown (char *path, int owner, int group)
+int fish_chown (vfs *me, char *path, int owner, int group)
 {
     char *sowner, *sgroup;
     PREFIX
@@ -787,84 +792,39 @@ int fish_chown (char *path, int owner, int group)
     POSTFIX(OPT_FLUSH)
 }
 
-static int fish_unlink (char *path)
+static int fish_unlink (vfs *me, char *path)
 {
     PREFIX
     sprintf(buf, "#DELE %s\nrm -f %s; echo '### 000'\n", remote_path, remote_path);
     POSTFIX(OPT_FLUSH);
 }
 
-static int fish_mkdir (char *path, mode_t mode)
+static int fish_mkdir (vfs *me, char *path, mode_t mode)
 {
     PREFIX
     sprintf(buf, "#MKD %s\nmkdir %s; echo '### 000'\n", remote_path, remote_path);
     POSTFIX(OPT_FLUSH);
 }
 
-static int fish_rmdir (char *path)
+static int fish_rmdir (vfs *me, char *path)
 {
     PREFIX
     sprintf(buf, "#RMD %s\nrmdir %s; echo '### 000'\n", remote_path, remote_path);
     POSTFIX(OPT_FLUSH);
 }
 
-void fish_set_debug (char *file)
-{
-}
-
-void fish_forget (char *file)
-{
-#if 0
-    struct linklist *l;
-    char *host, *user, *pass, *rp;
-    int port;
-
-#ifndef BROKEN_PATHS
-    if (strncmp (file, "/#sh:", 5))
-        return; 	/* Normal: consider cd /bla/#ftp */ 
-#else
-    if (!(file = strstr (file, "/#sh:")))
-        return;
-#endif    
-
-    file += 6;
-    if (!(rp = fish_get_host_and_username (file, &host, &user, &port, &pass))) {
-        free (host);
-	free (user);
-	if (pass)
-	    wipe_password (pass);
-	return;
-    }
-
-    /* we do not care about the path actually */
-    free (rp);
-    
-    for (l = connections_list->next; l != connections_list; l = l->next){
-	struct connection *bucket = l->data;
-	
-	if ((strcmp (host, qhost (bucket)) == 0) &&
-	    (strcmp (user, quser (bucket)) == 0) &&
-	    (port == qport (bucket))){
-	    
-	    /* close socket: the child owns it now */
-	    close (bucket->sock);
-	    bucket->sock = -1;
-
-	    /* reopen the connection */
-	    bucket->sock = fish_open_socket (bucket);
-	    if (bucket->sock != -1)
-		login_server (bucket, pass);
-	    break;
-	}
-    }
-    free (host);
-    free (user);
-    if (pass)
-        wipe_password (pass);
-#endif
-}
-
 vfs fish_vfs_ops = {
+    NULL,	/* This is place of next pointer */
+    "FIles tranferred over SHell",
+    F_EXEC,	/* flags */
+    "sh:",	/* prefix */
+    NULL,	/* data */
+    0,		/* errno */
+    fish_init,
+    fish_done,
+    fish_fill_names,
+    NULL,
+
     s_open,
     s_close,
     s_read,
@@ -905,8 +865,7 @@ vfs fish_vfs_ops = {
     fish_mkdir,
     fish_rmdir,
     fish_ctl,
-    s_setctl,
-    fish_forget
+    s_setctl
 #ifdef HAVE_MMAP
     , NULL,
     NULL

@@ -7,18 +7,18 @@
 	       1997 Norbert Warmuth
 	       1998 Pavel Machek
    
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public License
+   as published by the Free Software Foundation; either version 2 of
+   the License, or (at your option) any later version.
    
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+   GNU Library General Public License for more details.
 
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
+   You should have received a copy of the GNU Library General Public
+   License along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
    
 /* FTPfs TODO:
@@ -1380,7 +1380,7 @@ linear_start(struct direntry *fe)
     return 1;
 }
 
-static int
+static void
 linear_abort (struct direntry *fe)
 {
     my_abort(fe->bucket, fe->data_sock);
@@ -1409,7 +1409,7 @@ linear_read (struct direntry *fe, void *buf, int len)
     ERRNOR (errno, n);
 }
 
-static int
+static void
 linear_close (struct direntry *fe)
 {
     if (fe->data_sock != -1)
@@ -1418,9 +1418,7 @@ linear_close (struct direntry *fe)
 
 int ftpfs_ctl (void *data, int ctlop, int arg)
 {
-    int n = 0;
     struct filp *fp = data;
-    int v;
     switch (ctlop) {
         case MCCTL_IS_NOTREADY:
 	    {
@@ -1481,14 +1479,15 @@ ftpfs_init_passwd(void)
     endpwent ();
 }
 
-void
-ftpfs_init ()
+int
+ftpfs_init (vfs *me)
 {
     connections_list = linklist_init();
     ftpfs_directory_timeout = FTPFS_DIRECTORY_TIMEOUT;
+    return 1;
 }
 
-int ftpfs_chmod (char *path, int mode)
+int ftpfs_chmod (vfs *me, char *path, int mode)
 {
     char buf[40];
     
@@ -1496,7 +1495,7 @@ int ftpfs_chmod (char *path, int mode)
     return send_ftp_command(path, buf, OPT_IGNORE_ERROR | OPT_FLUSH);
 }
 
-int ftpfs_chown (char *path, int owner, int group)
+int ftpfs_chown (vfs *me, char *path, int owner, int group)
 {
 #if 0
     my_errno = EPERM;
@@ -1508,7 +1507,7 @@ int ftpfs_chown (char *path, int owner, int group)
 #endif    
 }
 
-static int ftpfs_unlink (char *path)
+static int ftpfs_unlink (vfs *me, char *path)
 {
     return send_ftp_command(path, "DELE %s", OPT_FLUSH);
 }
@@ -1544,18 +1543,18 @@ __ftpfs_chdir (struct connection *bucket ,char *remote_path)
     return r;
 }
 
-static int ftpfs_rename (char *path1, char *path2)
+static int ftpfs_rename (vfs *me, char *path1, char *path2)
 {
     send_ftp_command(path1, "RNFR %s", OPT_FLUSH);
     return send_ftp_command(path2, "RNTO %s", OPT_FLUSH);
 }
 
-static int ftpfs_mkdir (char *path, mode_t mode)
+static int ftpfs_mkdir (vfs *me, char *path, mode_t mode)
 {
     return send_ftp_command(path, "MKD %s", OPT_FLUSH);
 }
 
-static int ftpfs_rmdir (char *path)
+static int ftpfs_rmdir (vfs *me, char *path)
 {
     return send_ftp_command(path, "RMD %s", OPT_FLUSH);
 }
@@ -1565,7 +1564,7 @@ void ftpfs_set_debug (char *file)
     logfile = fopen (file, "w+");
 }
 
-void ftpfs_forget (char *file)
+static void my_forget (char *file)
 {
     struct linklist *l;
     char *host, *user, *pass, *rp;
@@ -1616,6 +1615,17 @@ void ftpfs_forget (char *file)
 }
 
 vfs ftpfs_vfs_ops = {
+    NULL,	/* This is place of next pointer */
+    "File Tranfer Protocol (ftp)",
+    F_NET,	/* flags */
+    "ftp:",	/* prefix */
+    NULL,	/* data */
+    0,		/* errno */
+    ftpfs_init,
+    ftpfs_done,
+    ftpfs_fill_names,
+    NULL,
+
     s_open,
     s_close,
     s_read,
@@ -1656,8 +1666,7 @@ vfs ftpfs_vfs_ops = {
     ftpfs_mkdir,
     ftpfs_rmdir,
     ftpfs_ctl,
-    s_setctl,
-    ftpfs_forget
+    s_setctl
 #ifdef HAVE_MMAP
     , NULL,
     NULL

@@ -1,17 +1,6 @@
 #ifndef __VFS_H
 #define __VFS_H
 
-#ifdef VFS_STANDALONE
-#undef USE_EXT2FSLIB
-#else
-#define BROKEN_PATHS
-/*
- * We should really only allow /#ftp/ tree to export ftp, but midnight's users may 
- * like to be able to cd .. to get back where there were before ftp. How to solve?
- * Ok, we'll allow /any/path/#ftp/ to access ftp tree. Broken, yes.
- */ 
-#endif
-
 #if !defined(SCO_FLAVOR) || !defined(_SYS_SELECT_H)
 #	include <sys/time.h>	/* alex: this redefines struct timeval */
 #endif /* SCO_FLAVOR */
@@ -30,58 +19,81 @@ struct utimbuf {
 #include <sys/mman.h>
 #endif
 
+#ifdef VFS_STANDALONE
+#undef USE_EXT2FSLIB
+#else
+#define BROKEN_PATHS
+/*
+ * We should really only allow /#ftp/ tree to export ftp, but midnight's users may 
+ * like to be able to cd .. to get back where there were before ftp. How to solve?
+ * Ok, we'll allow /any/path/#ftp/ to access ftp tree. Broken, yes.
+ */ 
+#endif
+
     /* Our virtual file system layer */
     
     typedef void * vfsid;
 
     struct vfs_stamping;
     
-    typedef struct {
-	void  *(*open)(char *fname, int flags, int mode);
+    typedef struct vfs {
+        struct vfs *next;
+        char  *name;		/* "FIles over SHell" */
+        int   flags;
+#define F_EXEC 1
+#define F_NET 2
+        char  *prefix;		/* "#fish:" */
+        void  *data;		/* this is for filesystem's own use */
+        int   errno;
+        int   (*init)(struct vfs *me);	/* 1..initialized succesfully */
+        void  (*done)(struct vfs *me);
+        void  (*fill_names)(struct vfs *me, void (*)(char *));
+        int   (*which)(struct vfs *me, char *path); /* Returns '-1' if this path does not belong to this filesystem */
+
+	void  *(*open)(struct vfs *me, char *fname, int flags, int mode);
 	int   (*close)(void *vfs_info);
 	int   (*read)(void *vfs_info, char *buffer, int count);
 	int   (*write)(void *vfs_info, char *buf, int count);
 
-	void  *(*opendir)(char *dirname);
+	void  *(*opendir)(struct vfs *me, char *dirname);
 	void  *(*readdir)(void *vfs_info);
 	int   (*closedir)(void *vfs_info);
- 	int   (*telldir)(void *dir);
- 	void  (*seekdir)(void *dir, int offset);
+ 	int   (*telldir)(void *vfs_info);
+ 	void  (*seekdir)(void *vfs_info, int offset);
 
-	int  (*stat)(char *path, struct stat *buf);
-	int  (*lstat)(char *path, struct stat *buf);
+	int  (*stat)(struct vfs *me, char *path, struct stat *buf);
+	int  (*lstat)(struct vfs *me, char *path, struct stat *buf);
 	int  (*fstat)(void *vfs_info, struct stat *buf);
 
-	int  (*chmod)(char *path, int mode);
-	int  (*chown)(char *path, int owner, int group);
-	int  (*utime)(char *path, struct utimbuf *times);
+	int  (*chmod)(struct vfs *me, char *path, int mode);
+	int  (*chown)(struct vfs *me, char *path, int owner, int group);
+	int  (*utime)(struct vfs *me, char *path, struct utimbuf *times);
 
-	int  (*readlink)(char *path, char *buf, int size);
-	int  (*symlink)(char *n1, char *n2);
-	int  (*link)(char *p1, char *p2);
-	int  (*unlink)(char *path);
-	int  (*rename)(char *p1, char *p2);
-	int  (*chdir)(char *path);
-	int  (*ferrno)(void);
+	int  (*readlink)(struct vfs *me, char *path, char *buf, int size);
+	int  (*symlink)(struct vfs *me, char *n1, char *n2);
+	int  (*link)(struct vfs *me, char *p1, char *p2);
+	int  (*unlink)(struct vfs *me, char *path);
+	int  (*rename)(struct vfs *me, char *p1, char *p2);
+	int  (*chdir)(struct vfs *me, char *path);
+	int  (*ferrno)(struct vfs *me);
 	int  (*lseek)(void *vfs_info, off_t offset, int whence);
-	int  (*mknod)(char *path, int mode, int dev);
+	int  (*mknod)(struct vfs *me, char *path, int mode, int dev);
 	
-	vfsid (*getid)(char *path, struct vfs_stamping **parent);
+	vfsid (*getid)(struct vfs *me, char *path, struct vfs_stamping **parent);
 	int  (*nothingisopen)(vfsid id);
 	void (*free)(vfsid id);
 	
-	char *(*getlocalcopy)(char *filename);
-	void (*ungetlocalcopy)(char *filename, char *local, int has_changed);
+	char *(*getlocalcopy)(struct vfs *me, char *filename);
+	void (*ungetlocalcopy)(struct vfs *me, char *filename, char *local, int has_changed);
 
-	int  (*mkdir)(char *path, mode_t mode);
-	int  (*rmdir)(char *path);
+	int  (*mkdir)(struct vfs *me, char *path, mode_t mode);
+	int  (*rmdir)(struct vfs *me, char *path);
 	
 	int  (*ctl)(void *vfs_info, int ctlop, int arg);
-	int  (*setctl)(char *path, int ctlop, char *arg);
-	void (*forget_about)(char *path);
+	int  (*setctl)(struct vfs *me, char *path, int ctlop, char *arg);
 #ifdef HAVE_MMAP
-	caddr_t (*mmap)(caddr_t addr, size_t len, int prot, int flags, void *vfs_info, off_t offset);
-	int (*munmap)(caddr_t addr, size_t len, void *vfs_info);
+	caddr_t (*mmap)(struct vfs *me, caddr_t addr, size_t len, int prot, int flags, void *vfs_info, off_t offset);
+	int (*munmap)(struct vfs *me, caddr_t addr, size_t len, void *vfs_info);
 #endif	
     } vfs;
 
@@ -139,15 +151,6 @@ struct utimbuf {
     /* Required for the vfs_canon routine */
     char *tarfs_analysis (char *inname, char **archive, int is_dir);
 
-    void ftpfs_init(void);
-    void fish_init(void);
-    void sfs_init(void);
-    void ftpfs_done(void);
-    void sfs_done(void);
-    void fish_done(void);
-    int extfs_which (char *path);
-    int sfs_which (char *path);
-
     void ftpfs_set_debug (char *file);
 #ifdef USE_NETCODE
     void ftpfs_hint_reread(int reread);
@@ -156,12 +159,6 @@ struct utimbuf {
 #   define ftpfs_flushdir()
 #   define ftpfs_hint_reread(x) 
 #endif
-    /* They fill the file system names */
-    void mcfs_fill_names (void (*)(char *));
-    void ftpfs_fill_names (void (*)(char *));
-    void tarfs_fill_names (void (*)(char *));
-    void fish_fill_names (void (*)(char *));
-    void sfs_fill_names (void (*)(char *));
     
     /* Only the routines outside of the VFS module need the emulation macros */
 
@@ -196,8 +193,8 @@ struct utimbuf {
         int mc_mkdir (char *path, mode_t mode);
         char *mc_getlocalcopy (char *filename);
         void mc_ungetlocalcopy (char *filename, char *local, int has_changed);
-        char *mc_def_getlocalcopy (char *filename);
-        void mc_def_ungetlocalcopy (char *filename, char *local, int has_changed);
+        char *mc_def_getlocalcopy (vfs *vfs, char *filename);
+        void mc_def_ungetlocalcopy (vfs *vfs, char *filename, char *local, int has_changed);
         int mc_ctl (int fd, int ctlop, int arg);
         int mc_setctl (char *path, int ctlop, char *arg);
 #ifdef HAVE_MMAP
@@ -307,6 +304,8 @@ int parse_filedate(int idx, time_t *t);
 extern void vfs_die (char *msg);
 extern char *vfs_get_password (char *msg);
 
+void print_vfs_stats (char *fs_name, char *action, char *file_name, int have, int need);
+
 #define MCCTL_SETREMOTECOPY	0
 #define MCCTL_ISREMOTECOPY	1
 #define MCCTL_REMOTECOPYCHUNK	2
@@ -314,6 +313,7 @@ extern char *vfs_get_password (char *msg);
 #define MCCTL_FLUSHDIR          4	/* Unreferenced */
 #define MCCTL_REMOVELOCALCOPY   5
 #define MCCTL_IS_NOTREADY	6
+#define MCCTL_FORGET_ABOUT	7
 
 /* Return codes from the ${fs}_ctl routine */
 
@@ -371,11 +371,13 @@ extern void mc_vfs_done( void );
  * cases (ftp transfer).				-- pavel@ucw.cz
  */
 
-#ifndef MIN
-#define MIN(a,b) ((a)<(b) ? (a) : (b))
-#endif
-#ifndef MAX
-#define MAX(a,b) ((a)<(b) ? (b) : (a))
+#define VFS_MIN(a,b) ((a)<(b) ? (a) : (b))
+#define VFS_MAX(a,b) ((a)<(b) ? (b) : (a))
+
+#ifdef HAVE_MMAP
+#define MMAPNULL , NULL, NULL
+#else
+#define MMAPNULL
 #endif
 
 #endif /* __VFS_H */

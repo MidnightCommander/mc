@@ -24,7 +24,7 @@
 
 #include "vfs.h"
 
-char *shell = "/bin/bash";
+char *shell = "/bin/sh";
 
 struct cachedfile {
     char *name, *cache;
@@ -49,7 +49,7 @@ static int uptodate( char *name, char *cache )
     return 1;
 }
 
-static int vfmake( char *name, char *cache )
+static int vfmake( vfs *me, char *name, char *cache )
 {
     char *inpath, *op;
     int w;
@@ -58,7 +58,7 @@ static int vfmake( char *name, char *cache )
     int was_percent = 0;
 
     vfs_split( name, &inpath, &op );
-    if ((w = sfs_which( op )) == -1)
+    if ((w = (*me->which)( me, op )) == -1)
         vfs_die( "This cannot happen... Hopefully.\n" );
 
     if ((sfs_flags[w] & F_1) || (!strcmp( name, "/" ))) ; else return -1;
@@ -95,7 +95,7 @@ static int vfmake( char *name, char *cache )
 }
 
 #define CUR (*cur)
-static char *redirect( char *name )
+static char *redirect( vfs *me, char *name )
 {
     struct cachedfile *cur = head;
     uid_t uid = vfs_uid;
@@ -114,7 +114,7 @@ static char *redirect( char *name )
     }
     cache = tempnam( NULL, "sfs" );
     xname = strdup( name );
-    if (!vfmake( name, cache )) {
+    if (!vfmake( me, name, cache )) {
         cur = xmalloc( sizeof(struct cachedfile), "SFS cache" );
 	cur->name = xname;
 	cur->cache = strdup(cache);
@@ -133,9 +133,9 @@ static char *redirect( char *name )
     return "/I_MUST_NOT_EXIST";
 }
 
-#define REDIR path = redirect( path );
+#define REDIR path = redirect( me, path );
     
-static void *sfs_open (char *path, int flags, int mode)
+static void *sfs_open (vfs *me, char *path, int flags, int mode)
 {
     int *sfs_info;
     int fd;
@@ -151,13 +151,13 @@ static void *sfs_open (char *path, int flags, int mode)
     return sfs_info;
 }
 
-static int sfs_stat (char *path, struct stat *buf)
+static int sfs_stat (vfs *me, char *path, struct stat *buf)
 {
     REDIR;
     return stat (path, buf);
 }
 
-static int sfs_lstat (char *path, struct stat *buf)
+static int sfs_lstat (vfs *me, char *path, struct stat *buf)
 {
     REDIR;
 #ifndef HAVE_STATLSTAT
@@ -167,31 +167,31 @@ static int sfs_lstat (char *path, struct stat *buf)
 #endif
 }
 
-static int sfs_chmod (char *path, int mode)
+static int sfs_chmod (vfs *me, char *path, int mode)
 {
     REDIR;
     return chmod (path, mode);
 }
 
-static int sfs_chown (char *path, int owner, int group)
+static int sfs_chown (vfs *me, char *path, int owner, int group)
 {
     REDIR;
     return chown (path, owner, group);
 }
 
-static int sfs_utime (char *path, struct utimbuf *times)
+static int sfs_utime (vfs *me, char *path, struct utimbuf *times)
 {
     REDIR;
     return utime (path, times);
 }
 
-static int sfs_readlink (char *path, char *buf, int size)
+static int sfs_readlink (vfs *me, char *path, char *buf, int size)
 {
     REDIR;
     return readlink (path, buf, size);
 }
 
-static vfsid sfs_getid (char *path, struct vfs_stamping **parent)
+static vfsid sfs_getid (vfs *me, char *path, struct vfs_stamping **parent)
 {	/* FIXME: what should I do? */
     vfs *v;
     vfsid id;
@@ -212,7 +212,7 @@ static vfsid sfs_getid (char *path, struct vfs_stamping **parent)
     {
         char *path2 = strdup( path );
 	v = vfs_split (path2, NULL, NULL);
-	id = (*v->getid) (path2, &par);
+	id = (*v->getid) (v, path2, &par);
 	free( path2 );
     }
 
@@ -243,7 +243,7 @@ static void sfs_free (vfsid id)
 }
 #undef CUR
 
-void sfs_fill_names (void (*func)(char *))
+static void sfs_fill_names (vfs *me, void (*func)(char *))
 {
     struct cachedfile *cur = head;
 
@@ -258,25 +258,25 @@ static int sfs_nothingisopen (vfsid id)
     return 0;
 }
 
-static char *sfs_getlocalcopy (char *path)
+static char *sfs_getlocalcopy (vfs *me, char *path)
 {
     REDIR;
     return strdup (path);
 }
 
-static void sfs_ungetlocalcopy (char *path, char *local, int has_changed)
+static void sfs_ungetlocalcopy (vfs *me, char *path, char *local, int has_changed)
 {
 }
 
 #ifdef HAVE_MMAP
-static caddr_t sfs_mmap (caddr_t addr, size_t len, int prot, int flags, void *data, off_t offset)
+static caddr_t sfs_mmap (vfs *me, caddr_t addr, size_t len, int prot, int flags, void *data, off_t offset)
 {
     int fd = * (int *)data;
 
     return mmap (addr, len, prot, flags, fd, offset);
 }
 
-static int sfs_munmap (caddr_t addr, size_t len, void *data)
+static int sfs_munmap (vfs *me, caddr_t addr, size_t len, void *data)
 {
     return munmap (addr, len);
 }
@@ -285,65 +285,15 @@ static int sfs_munmap (caddr_t addr, size_t len, void *data)
 extern int local_close (void *data);
 extern int local_read (void *data, char *buffer, int count);
 extern int local_fstat (void *data, struct stat *buf);
-extern int local_errno (void);
+extern int local_errno (vfs *me);
 extern int local_lseek (void *data, off_t offset, int whence);
 
-vfs sfs_vfs_ops = {
-    sfs_open,
-    local_close,
-    local_read,
-    NULL,
-    
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-
-    sfs_stat,
-    sfs_lstat,
-    local_fstat,
-
-    sfs_chmod,
-    sfs_chown,
-    sfs_utime,
-
-    sfs_readlink,
-    NULL,
-    NULL,
-    NULL,
-
-    NULL,
-    NULL,
-    local_errno,
-    local_lseek,
-    NULL,
-    
-    sfs_getid,
-    sfs_nothingisopen,
-    sfs_free,
-    
-    sfs_getlocalcopy,
-    sfs_ungetlocalcopy,
-    
-    NULL,
-    NULL,
-    
-    NULL,
-    NULL,
-    NULL
-#ifdef HAVE_MMAP
-    ,sfs_mmap,
-    sfs_munmap
-#endif
-};
-
-void sfs_init (void)
+int sfs_init (vfs *me)
 {
     FILE *cfg = fopen( LIBDIR "extfs/sfs.ini", "r" );
     if (!cfg) {
         fprintf( stderr, "Warning: " LIBDIR "extfs/sfs.ini not found\n" );
-        return;
+        return 0;
     }
 
     sfs_no = 0;
@@ -389,9 +339,10 @@ void sfs_init (void)
 	sfs_no++;
     }
     fclose(cfg);
+    return 1;
 }
 
-void sfs_done (void)
+void sfs_done (vfs *me)
 {
     int i;
     for (i=0; i<sfs_no; i++) {
@@ -402,7 +353,7 @@ void sfs_done (void)
     sfs_no = 0;
 }
 
-int sfs_which (char *path)
+int sfs_which (vfs *me, char *path)
 {
     int i;
 
@@ -417,3 +368,64 @@ int sfs_which (char *path)
     
     return -1;
 }
+
+vfs sfs_vfs_ops = {
+    NULL,	/* This is place of next pointer */
+    "Signle file filesystems",
+    F_EXEC,	/* flags */
+    NULL,	/* prefix */
+    NULL,	/* data */
+    0,		/* errno */
+    sfs_init,
+    sfs_done,
+    sfs_fill_names,
+    sfs_which,
+
+    sfs_open,
+    local_close,
+    local_read,
+    NULL,
+    
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+
+    sfs_stat,
+    sfs_lstat,
+    local_fstat,
+
+    sfs_chmod,
+    sfs_chown,
+    sfs_utime,
+
+    sfs_readlink,
+    NULL,
+    NULL,
+    NULL,
+
+    NULL,
+    NULL,
+    local_errno,
+    local_lseek,
+    NULL,
+    
+    sfs_getid,
+    sfs_nothingisopen,
+    sfs_free,
+    
+    sfs_getlocalcopy,
+    sfs_ungetlocalcopy,
+    
+    NULL,
+    NULL,
+    
+    NULL,
+    NULL
+#ifdef HAVE_MMAP
+    ,sfs_mmap,
+    sfs_munmap
+#endif
+};
+
