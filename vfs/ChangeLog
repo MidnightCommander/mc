@@ -1,3 +1,7 @@
+2000-04-12  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* extfs/lslR.in: Patch by tnovak@ipex.cz: allow spaces in filenames
+
 2000-04-10  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* extfs/audio: Added a way to browse audio CDs conviently
