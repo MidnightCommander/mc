@@ -32,13 +32,16 @@ mcrpmfs_list ()
       MCFASTRPM=$MCFASTRPM_DFLT
     fi
     FILEPREF="-r--r--r--   1 root     root    "
-    DESC=`$RPM -qip "$1" 2>/dev/null` || {
+    $RPM -qp "$1" >/dev/null 2>&1 || {
 	echo "$FILEPREF 0 "`date +"%b %d %H:%M"`" ERROR"
-	exit 1
+	exit 0
     }
+    DESC=`$RPM -qip "$1" 2>/dev/null`
     DATE=`$RPM -qp --qf "%{BUILDTIME:date}\n" "$1" | cut -c 5-11,21-24`
-    HEADERSIZE=`echo "$DESC" | wc -c`
-    echo "-r--r--r--   1 root     root  $HEADERSIZE $DATE HEADER"
+    if test -n "$DESC"; then
+	HEADERSIZE=`echo "$DESC" | wc -c`
+	echo "-r--r--r--   1 root     root  $HEADERSIZE $DATE HEADER"
+    fi
     echo "-r-xr-xr-x   1 root     root    39 $DATE INSTALL"
     echo "-r-xr-xr-x   1 root     root    39 $DATE UPGRADE"
     echo "dr-xr-xr-x   3 root     root	   0 $DATE INFO"
@@ -127,7 +130,7 @@ mcrpmfs_list ()
 mcrpmfs_copyout ()
 {
     case "$2" in
-	HEADER) $RPM -qip "$1" > "$3"; exit 0;;
+	HEADER) $RPM -qip "$1" > "$3" 2>/dev/null; exit 0;;
 	INSTALL) echo "# Run this to install this RPM package" > "$3"; exit 0;;
 	UPGRADE) echo "# Run this to upgrade this RPM package" > "$3"; exit 0;;
 	ERROR) $RPM -qip "$1" > /dev/null 2> "$3"; exit 0;;

@@ -1,3 +1,8 @@
+2003-05-08  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/rpm: If rpm doesn't support --info as in Red Hat 9,
+	ignore it and don't show HEADER in the listing.
+
 2003-04-29  Michael Shigorin  <mike@osdn.org.ua>
 
 	* extfs/iso9660.in: Determine presence of Rock Ridge and Joliet
