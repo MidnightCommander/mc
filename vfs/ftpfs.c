@@ -221,13 +221,6 @@ static void
 ftp_split_url(char *path, char **host, char **user, int *port, char **pass)
 {
     char *p;
-    char *tmp_pass;
-
-    /* Caller is not interested in password, but the functions below want
-     * a valid pointer */
-    if (!pass) {
-	pass = &tmp_pass;
-    }
 
     p = vfs_split_url (path, host, user, port, pass, FTP_COMMAND_PORT,
 		       URL_ALLOW_ANON);
@@ -241,9 +234,6 @@ ftp_split_url(char *path, char **host, char **user, int *port, char **pass)
 
     if (p)
 	g_free (p);
-
-    if (pass == &tmp_pass && *pass)
-	g_free (*pass);
 }
 
 /* Returns a reply code, check /usr/include/arpa/ftp.h for possible values */
@@ -1889,7 +1879,8 @@ static int netrc_has_incorrect_mode (char * netrcname, char * netrc)
 
 static int lookup_netrc (char *host, char **login, char **pass)
 {
-    char *netrcname, *tmp;
+    char *netrcname;
+    char *tmp_pass = NULL;
     char hostname[MAXHOSTNAMELEN], *domain;
     int keyword;
     static struct rupcache {
@@ -1906,7 +1897,7 @@ static int lookup_netrc (char *host, char **login, char **pass)
 	    (*login != NULL) &&
 	    (!strcmp(rupp->login, *login))) {
         	*login = g_strdup (rupp->login);
-        	if (rupp->pass != NULL)
+        	if (pass && rupp->pass != NULL)
             	    *pass = g_strdup (rupp->pass);
         	return 0;
 	}
@@ -1923,6 +1914,8 @@ static int lookup_netrc (char *host, char **login, char **pass)
 
     while ((keyword = netrc_next ())) {
         if (keyword == 2) {
+	    char *tmp;
+
 	    if (netrc_next () != 8)
 		continue;
 	    if (g_strcasecmp (host, buffer) &&
@@ -1950,8 +1943,8 @@ static int lookup_netrc (char *host, char **login, char **pass)
 			netrc_has_incorrect_mode (netrcname, netrc)) {
 			return -1;
 		    }
-		    if (netrc_next () && *pass == NULL)
-			*pass = g_strdup (buffer);
+		    if (netrc_next () && tmp_pass == NULL)
+			tmp_pass = g_strdup (buffer);
 		    break;
 		case 6:
 		    if (netrc_has_incorrect_mode (netrcname, netrc)) {
@@ -1989,10 +1982,13 @@ static int lookup_netrc (char *host, char **login, char **pass)
 	    *login = g_strdup("anonymous");
         rupp->login = g_strdup (*login);
     }
-    if (*pass != NULL)
-        rupp->pass = g_strdup (*pass);
+    if (tmp_pass != NULL)
+        rupp->pass = g_strdup (tmp_pass);
     rupp->next = rup_cache;
     rup_cache = rupp;
-    
+
+    if (pass)
+	*pass = tmp_pass;
+
     return 0;
 }

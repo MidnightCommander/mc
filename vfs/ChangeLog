@@ -1,3 +1,9 @@
+2002-07-12  Pavel Roskin  <proski@gnu.org>
+
+	* ftpfs.c (ftp_split_url): Move protection against pass being
+	NULL ...
+	(lookup_netrc): ... here.
+
 2002-07-11  Pavel Roskin  <proski@gnu.org>
 
 	* xdirentry.h: Eliminate use_proxy field.
