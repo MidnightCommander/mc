@@ -150,6 +150,7 @@ MCEDIT_SRCS= \
 	editmenu.c \
 	editoptions.c \
 	editwidget.c \
+	syntax.c \
 	wordproc.c
 
 SRCS=$(MC_SRCS) $(PC_SRCS) $($(TARGET_OS)_SRCS) $(EXTRA_MC_SRCS)
