@@ -1,5 +1,8 @@
 2002-08-25  Pavel Roskin  <proski@gnu.org>
 
+	* man2hlp.c: Change default from the English string for TOPICS,
+	to no heading.
+
 	* man2hlp.c (handle_command): Remove quotes from TOPIC.
 
 	* key.c (get_event): Check gpm_fd before using it in FD_SET.  If

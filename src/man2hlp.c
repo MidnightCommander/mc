@@ -41,7 +41,7 @@ static int node = 0;		/* Flag: This line is an original ".SH" */
 static const char *c_out;	/* Output filename */
 static FILE *f_out;		/* Output file */
 
-static char *Topics = "Topics:";
+static char *Topics = NULL;
 
 static struct node {
     char *node;
@@ -554,7 +554,10 @@ main (int argc, char **argv)
     }
 
     cont_start = ftell (f_out);
-    fprintf (f_out, "\004[Contents]\n%s\n\n", Topics);
+    if (Topics)
+	fprintf (f_out, "\004[Contents]\n%s\n\n", Topics);
+    else
+	fprintf (f_out, "\004[Contents]\n");
 
     for (cnode = &nodes; cnode && cnode->node;) {
 	char *node = cnode->node;
