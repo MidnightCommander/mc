@@ -178,6 +178,7 @@ file_progress_check_buttons (void)
     int c;
     Gpm_Event event;
 
+    x_flush_events ();
     c = get_event (&event, 0, 0);
     if (c == EV_NONE)
       return FILE_CONT;

@@ -2,6 +2,7 @@
 
 	* gscreen.c (panel_icon_list_select_icon): Use gpopup_do_popup().
 	(panel_file_list_select_row): Use gpopup_do_popup().
+	Moved the popup menu code to gpopup.c.
 
 1998-11-29  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 

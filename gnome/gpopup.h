@@ -14,6 +14,8 @@
 #include "panel.h"
 
 
+void file_popup (GdkEventButton *event, void *WPanel_pointer, void *desktop_icon_t_pointer, int row, char *filename);
+
 int gpopup_do_popup (char *filename, WPanel *from_panel, GdkEventButton *event);
 
 
