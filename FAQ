@@ -42,8 +42,8 @@ Frequently Asked Questions
           + 4.5 How can I get colors?
           + 4.6 My color_xterm goes completely (or partially) black!
           + 4.7 Where can I get xterm or rxvt?
-          + 4.8 I got colors working with MC but the other programs don't
-            work at all anymore!
+          + 4.8 I got colors working with MC but the other programs
+            don't work at all anymore!
           + 4.9 Why are there both terminfo and termcap?  Wouldn't one
             database be enough?
 
@@ -72,16 +72,13 @@ Frequently Asked Questions
           + 7.7 What kind of proxy server works with Midnight Commander?
 
      * 8 Internal editor
-          + 8.1 How do I get the internal editor to work?
-          + 8.2 When I try pasting to the internal editor, it indents
+          + 8.1 When I try pasting to the internal editor, it indents
             the amount of indenting increases with each line!
-          + 8.3 Is it possible to use Colorer for syntax highlighting?
+          + 8.2 Is it possible to use Colorer for syntax highlighting?
 
      * 9 Other common problems
           + 9.1 Is there any way to 'bookmark' favorite ftp-fs links?
-          + 9.2 Why I keep getting: "There is no disk in the drive.
-            Please insert a disk into drive D:"?
-          + 9.3 When I start Midnight Commander, nothing happens!
+          + 9.2 When I start Midnight Commander, nothing happens!
 
      * 10 Development
           + 10.1 Who has written Midnight Commander?
@@ -90,8 +87,8 @@ Frequently Asked Questions
           + 10.4 How can I join the development?
 
      * 11 More information
-          + 11.1 This document didn't answer my question. Where else can
-            I look for an answer?
+          + 11.1 This document didn't answer my question.  Where else
+            can I look for an answer?
           + 11.2 What mailing lists are there for Midnight Commander?
           + 11.3 Where should I look on the World Wide Web for MC stuff?
           + 11.4 Are the mailing lists archived anywhere?
@@ -107,25 +104,21 @@ Frequently Asked Questions
 1.1 What is Midnight Commander?
 
    GNU Midnight Commander is a user-friendly yet powerful file manager
-   and visual shell, useful to novice and guru alike. It provides a
+   and visual shell, useful to novice and guru alike.  It provides a
    clear, user-friendly, and somewhat protected interface to a Unix
    system while making many frequent file operations more efficient and
-   preserving the full power of the command prompt. You will wonder how
-   you could ever live without it.
-
-   For more thorough description take a look at the announcement of
-   Midnight Commander 4.0.
+   preserving the full power of the command prompt.  After some
+   practice, you will wonder how you could ever live without it.
 
 1.2 Does it run on my machine?
 
    GNU Midnight Commander runs on POSIX (Unix-like) operating systems,
    such as GNU/Linux, FreeBSD, Mac OS X, Solaris, HP-UX and others.  It
-   can also be compiled under Cygwin on Windows.  There is an unfinished
-   Windows port.
+   can also be compiled under Cygwin on Windows.
 
    GNU Midnight Commander uses GNU Autoconf which should automatically
    configure it for every Unix clone.  Following configurations have
-   been tested:
+   been tested in the past (this list is very old):
 
      * i386-*-linux1.x, 2.x
      * alpha-linux-linux2
@@ -145,22 +138,19 @@ Frequently Asked Questions
      * i386-*-sco3.2v4.2
      * i386-*-sco3.2v5
 
-   Windows 95/NT port can be compiled with Microsoft Visual C++, Borland
-   C++, RSX and Mingw32.
-
 1.3 Does it work with my terminal?
 
    Yes, it does.
 
-   Because Midnight Commander is a full screen program it doesn't run on
-   dummy terminals but anything more advanced will do (like vt100). If
-   your terminal works with vi, emacs, elm or pine it will work with
-   Midnight Commander.
+   Because GNU Midnight Commander is a full screen program it doesn't
+   run on dummy terminals but anything more advanced will do (like
+   vt100).  If your terminal works with vi, emacs, elm or pine it will
+   work with GNU Midnight Commander.
 
 1.4 What else do I need to run MC?
 
-   You need a POSIX (Unix compatible) operating system.  Native support
-   for Windows is incomplete - you should be prepared to fix things.
+   You need a POSIX (Unix compatible) operating system.  If you are
+   running Windows, use Cygwin.
 
    To compile any edition you need to have glib 1.2.x or newer
    installed.  It's available at ftp://ftp.gtk.org/pub/gtk/.  If you
@@ -168,8 +158,8 @@ Frequently Asked Questions
    harder to compile, so your first choice should be glib 1.2.10.
 
    If you want to use mouse on the Linux console you need the gpm daemon
-   from ftp://ftp.systemy.it/pub/develop/. You need nothing extra to use
-   mouse on xterm.
+   from ftp://ftp.systemy.it/pub/develop/.  You need nothing extra to
+   use mouse on xterm.
 
    If you do not want to use the S-Lang library you could try using
    ncurses version 4.1 and above.
@@ -178,10 +168,10 @@ Frequently Asked Questions
 
    Midnight Commander is under GNU Public License which basically means
    that you may freely copy, change and distribute it, but that you may
-   not impose any restrictions on further distribution, and that you must
-   make the source code available.  This is not the same as Public Domain.
-   For details, the GNU license is included in GNU Midnight Commander
-   source distribution (the COPYING file).
+   not impose any restrictions on further distribution, and that you
+   must make the source code available.  This is not the same as Public
+   Domain.  For details, the GNU license is included in GNU Midnight
+   Commander source distribution (the COPYING file).
 
    Midnight Commander is now officially a part of the GNU project.
    All the authors of GNU Midnight Commander have given all their rights
@@ -191,16 +181,16 @@ Frequently Asked Questions
 
    The main site is ftp://ftp.gnome.org/pub/GNOME/stable/sources/mc/
 
-1.7 I don't have FTP access. Where can I get MC?
+1.7 I don't have FTP access.  Where can I get MC?
 
-   Most GNU/Linux distributions include GNU Midnight Commander. For
+   Most GNU/Linux distributions include GNU Midnight Commander.  For
    example, Debian, Mandrake, Red Hat, Slackware and SuSE.
 
 1.8 I cannot compile MC.  What should I do?
 
    Make sure you have read the INSTALL file in the sources.  Report the
    error messages exactly as they appear, mention the versions of your
-   OS, your compiler and whatever else software you think is relevant. 
+   OS, your compiler and whatever else software you think is relevant.
    If you have compile problems in the VFS code, try disabling it by
    using "--without-vfs" switch.  As the last resort, you can use
    precompiled binaries from the GNU Midnight Commander website.
@@ -217,31 +207,32 @@ Frequently Asked Questions
    hold down the Ctrl key and press the f key.
 
    M stands for the Meta key.  Your terminal might call it Alt or
-   Compose instead of Meta. For example, M-f means that you should hold
+   Compose instead of Meta.  For example, M-f means that you should hold
    down the Meta/Alt/Compose key and press the f key.  If your terminal
    doesn't have Meta, Alt or Compose or they don't work you can use Esc.
    For M-f press the Esc key and then press the f key.
 
-   Sometimes Ctrl and Alt are used instead of C and M for simplicity. 
+   Sometimes Ctrl and Alt are used instead of C and M for simplicity.
    Keep in mind that Alt can actually be Meta on some keyboards.
 
-   F? stands for a function key. If your terminal doesn't have function
+   F? stands for a function key.  If your terminal doesn't have function
    keys or they don't work you can use Esc.  For example, for F3 press
    the Esc key and then press the 3 key.
 
 2.2 Why don't function keys (or some other key) work?
 
-   Your terminfo or termcap database has missing or incorrect definitions
-   for function keys. Type "mc -V" to see what terminal database is being
-   used. If the result is "using the S-Lang library with terminfo
-   database" you should install one of the enhanced terminfo databases
-   included in GNU Midnight Commander source distribution. For example,
+   Your terminfo or termcap database has missing or incorrect
+   definitions for function keys.  Type "mc -V" to see what terminal
+   database is being used.  If the result is "using the S-Lang library
+   with terminfo database" and you are using a very old terminfo
+   database, consider installing one of the enhanced terminfo files
+   included in GNU Midnight Commander source distribution.  For example,
    if you are using xterm type "tic xterm.ti".
 
    If the result is "using the S-Lang library with termcap database" you
    should fix your /etc/termcap database.
 
-   Better termcap and terminfo databases are available here:
+   Up-to-date termcap and terminfo databases are available here:
 
      http://www.tuxedo.org/~esr/terminfo/
      ftp://dickey.his.com/ncurses/
@@ -251,45 +242,43 @@ Frequently Asked Questions
    is to use terminfo.
 
    If you don't have permissions to edit terminal databases you can use
-   Learn keys feature of Midnight Commander instead. Press Esc 9 o k and
-   follow instructions.
+   Learn keys feature of Midnight Commander instead.  Press Esc 9 o k
+   and follow instructions.
 
    If all else fails you can emulate function keys by first pressing the
-   ESC key and then one of the number keys. For example, if you want to
-   produce F9, press ESC, then 9. If you don't have a ESC key on your
+   ESC key and then one of the number keys.  For example, if you want to
+   produce F9, press ESC, then 9.  If you don't have a ESC key on your
    keyboard you can try alt-9 or meta-9.
 
 2.3 How do I use function keys F11 to F20?
 
-   These can mapped to function keys F1 to F10 with Shift held. e.g.
-   function key F13 can be activated by pressing Shift-F3. You can define
-   the keys this way in the Options menu. The convention for PC keyboards
-   is that F11-20 always means Shift with F1-10
-
-   Note!  The native Windows port uses F11 and F12 keys to change the
-   current disk drive.  In this case F11 and F12 mean the real F11 and
-   F12 keys, not shift-F1 and shift-F2.
+   These are normally mapped to function keys F1 to F10 with Shift held,
+   e.g. function key F13 can be activated by pressing Shift-F3.  You can
+   define the keys this way in the Options->Learn Keys dialog.  The
+   convention for PC keyboards is that F11-20 always means Shift with
+   F1-10.
 
 2.4 Why does the ESC key behave funny?
 
    Midnight Commander uses the ESC key as a prefix for simulating the
-   Meta and Alt keys (for terminals which don't have Meta or Alt, see the
-   three previous questions). For example, pressing ESC-a is the same as
-   pressing Meta-a. In addition most terminals use ESC for internal
-   representation of arrow keys, function keys and other enhanced keys.
-   If you want to use ESC to cancel things you have to press it twice i.
-   e. ESC-ESC. If you find this cumbersome you can generally use F10 to
-   cancel. Alternatively turn on the old_esc_mode setting in the
-   ~/.mc.ini file. The old_esc_mode setting makes ESC work as a prefix
-   only if another key is pressed within 0.5 seconds. After 0.5 seconds
-   the ESC key cancels. There is no way to make ESC cancel immediately
-   (if we want to be able to use arrows keys and function keys).
+   Meta and Alt keys (for terminals which don't have Meta or Alt, see
+   the three previous questions).  For example, pressing ESC-a is the
+   same as pressing Meta-a.  In addition most terminals use ESC for
+   internal representation of arrow keys, function keys and other
+   enhanced keys.  If you want to use ESC to cancel things you have to
+   press it twice i.e. ESC-ESC.  If you find this cumbersome you can
+   generally use F10 to cancel.  Alternatively turn on the old_esc_mode
+   setting in the ~/.mc/ini file.  The old_esc_mode setting makes ESC
+   work as a prefix only if another key is pressed within 0.5 seconds.
+   After 0.5 seconds the ESC key cancels.  There is no way to make ESC
+   cancel immediately (if we want to be able to use arrows keys and
+   function keys).
 
 2.5 How can I add the plus sign (+) on the command line?
 
    Press C-q first, then press the + sign.
 
-   The plus key is the hotkey for the select files command. If you want
+   The plus key is the hotkey for the select files command.  If you want
    to add a literal plus on to the command line you must quote it by
    pressing C-q first.
 
@@ -297,7 +286,7 @@ Frequently Asked Questions
 
 2.6 C-o doesn't work!
 
-   Maybe C-o is a stty control character on your terminal. See man stty
+   Maybe C-o is a stty control character on your terminal.  See man stty
    for details on how to list and change stty control characters.
 
 2.7 What 'keys' are the "a1" and "c1" keys mentioned in the manual?
@@ -307,7 +296,7 @@ Frequently Asked Questions
    The "c1" key is the key which has the "c1" caption on it.
 
    If you have to ask what these two keys are your keyboard hasn't
-   probably got them. Actually, I have never seen a keyboard which has
+   probably got them.  Actually, I have never seen a keyboard which has
    got them.
 
 2.8 How do I change the key bindings?
@@ -322,8 +311,9 @@ Frequently Asked Questions
 
 3.1 How do I enable mouse support?
 
-   Invoke mc like this (without quotes): "mc -x". If this doesn't work
-   upgrade to a terminal which compatible with the Xterm mouse sequences.
+   Invoke mc like this (without quotes): "mc -x".  If this doesn't work
+   upgrade to a terminal which compatible with the Xterm mouse
+   sequences.
 
    Alternatively, on Linux console you can use gpm.
 
@@ -333,8 +323,8 @@ Frequently Asked Questions
 
 3.3 How do I get the extension dependent pop-up menu to pop up?
 
-   It was developed for the GNOME edition. The text-mode edition doesn't
-   support this feature yet.
+   It was developed for the GNOME edition.  The text-mode edition
+   doesn't support this feature yet.
 
 
 4 Display
@@ -345,7 +335,7 @@ Frequently Asked Questions
    This means that your terminfo databases do not contain the correct
    definitions for your terminal.
 
-   You could try using a different terminal setting. If you use csh or
+   You could try using a different terminal setting.  If you use csh or
    tcsh:
 
      setenv TERM vt100
@@ -362,9 +352,10 @@ Frequently Asked Questions
 
 4.2 Why don't line drawing characters work?
 
-   Since version 4.0.13 there's the command line option -a to force use of
-   +, |, - for line drawing (only available when compiled with S-Lang).
-   Use this -a option if any of the suggestions below doesn't help.
+   Since version 4.0.13 there's the command line option -a to force use
+   of charaters +, |, - for line drawing (only available when compiled
+   with S-Lang).  Use the -a option if any of the suggestions below
+   doesn't help.
 
    In general, there are three cases:
      * Lines are shown as ASCII characters like this
@@ -373,7 +364,7 @@ Frequently Asked Questions
       |         |
       +---------+
 
-       This also happens when you use the -a option. Other than that
+       This also happens when you use the -a option.  Other than that
        possible reason is 1 or 2 (see below).
 
      * Lines are shown as lower case characters like this
@@ -384,31 +375,32 @@ Frequently Asked Questions
 
        Possible reason is 1 or 2 (see below).
 
-     * Lines are shown as blanks or missing characters. Possible reason
+     * Lines are shown as blanks or missing characters.  Possible reason
        is 2 or 3 (see below).
 
    The reason for the problem is one of following:
 
-    1. Your terminal might not support line drawing characters. Vt100
-       compatible terminals, rxvt, xterm and color_xterm do support them.
+    1. Your terminal might not support line drawing characters.  VT100
+       compatible terminals, rxvt and xterm and color_xterm do support
+       them.
     2. Your terminfo or termcap database might have missing or incorrect
-       definitions for line drawing characters. Set the acsc variable in
-       the terminfo database like this:
-       acsc=a\376k\277l\332m\300j\331n\305w\302v\301u\264t\303q\304x\263h
-       \2600\333
-       Don't forget issue 'tic' command. This supposes you are using PC
-       character set. The octal values might be different for other
-       character sets. If you are using termcap instead of terminfo, you
-       should modify above solution appropriately.
-    3. Your terminal font might not support line drawing characters. Try
-       changing the font.
+       definitions for line drawing characters.  Set the acsc variable
+       in the terminfo database like this:
+       acsc=a\376k\277l\332m\300j\331n\305w\302v\301u\264t\303q\304x
+       \263h\2600\333
+       Don't forget issue 'tic' command.  This supposes you are using PC
+       character set.  The octal values might be different for other
+       character sets.  If you are using termcap instead of terminfo,
+       you should modify above solution appropriately.
+    3. Your terminal font might not support line drawing characters.
+       Try changing the font.
 
    Here is Miguel's answer to Torben on this subject.
 
    Torben:
 
      When I load consolefonts/iso01.f16, I get perfectly right national
-     characters, but the line drawing characters in mc get wrong. Is it
+     characters, but the line drawing characters in mc get wrong.  Is it
      a mc problem, or is it a problem with the font? (I guess it is).
 
      Is there a trick?
@@ -419,9 +411,9 @@ Frequently Asked Questions
      characters or not.
 
      If it has line drawing characters, then a new terminfo entry should
-     be written for this specific case. Let's call this linux-iso01. The
-     acsc variable should be modified to reflect which characters are
-     used to do the line drawing.
+     be written for this specific case.  Let's call this linux-iso01.
+     The acsc variable should be modified to reflect which characters
+     are used to do the line drawing.
 
      If it does not have line drawing characters, then we should get rid
      of the switch to acsc sequences and make the acsc sequence be just
@@ -445,7 +437,7 @@ Frequently Asked Questions
    Upgrade to version 4.0.12 or newer.
 
    From the Options - Display Bits dialog select Full 8 bits or ISO
-   8859-1. In addition, select 8 bit input from the same dialog.
+   8859-1.  In addition, select 8 bit input from the same dialog.
 
 4.5 How can I get colors?
 
@@ -454,15 +446,15 @@ Frequently Asked Questions
    If you get colors, be happy.
 
    If your terminal stays black and white, your terminal doesn't support
-   color. You might want to upgrade to a terminal which compatible with
+   color.  You might want to upgrade to a terminal which compatible with
    the ANSI color sequences.
 
    If your terminal goes completely black, see the next question.
 
    More detailed answer:
 
-   Check that your terminal supports color. color_xterm, rxvt and Linux
-   console do support, most other terminals don't. You can test color
+   Check that your terminal supports color.  color_xterm, rxvt and Linux
+   console do support, most other terminals don't.  You can test color
    support with following simple C program:
 
     #include <stdio.h>
@@ -472,7 +464,7 @@ Frequently Asked Questions
         return 0;
     }
 
-   Compile and run it. If you see "Hello world!" text in green your
+   Compile and run it.  If you see "Hello world!" text in green your
    terminal supports color, otherwise not (however, for color_xterm see
    also the next question).
 
@@ -482,9 +474,10 @@ Frequently Asked Questions
    With S-Lang library you can force color support by setting the
    environment variable COLORTERM to any value.
 
-   If you use ncurses library, check that your terminfo database supports
-   color. If not, you should install one of the enhanced terminfo
-   databases included in GNU Midnight Commander source distribution.
+   If you use ncurses library, check that your terminfo database
+   supports color.  If not, you should install one of the enhanced
+   terminfo databases included in GNU Midnight Commander source
+   distribution.
 
    You might want to set the TERM environment variable so that you are
    using the correct terminfo database or termcap entry.
@@ -498,11 +491,11 @@ Frequently Asked Questions
 4.6 My color_xterm goes completely (or partially) black!
 
    Some color_xterm terminals define all colors as black instead of the
-   standard ANSI colors. This makes them go completely black when you try
-   to use Midnight Commander with colors.
+   standard ANSI colors.  This makes them go completely black when you
+   try to use Midnight Commander with colors.
 
-   You will have to override the defaults. Create a file "color.defaults"
-   which has the following contents:
+   You will have to override the defaults.  Create a file
+   "color.defaults" which has the following contents:
 
     color_xterm*color0:           Black
     color_xterm*color1:           Red
@@ -522,29 +515,29 @@ Frequently Asked Questions
 
     xrdb -merge color.defaults
 
-   Alternatively you can add the suggested contents of the color.defaults
-   file to your .Xdefaults or .Xresources file (or what ever the name of
-   your X configuration file is). Or you can replace your non-ANSI
-   color_xterm with an ANSI color_xterm.
+   Alternatively you can add the suggested contents of the
+   color.defaults file to your .Xdefaults or .Xresources file (or what
+   ever the name of your X configuration file is).  Or you can replace
+   your non-ANSI color_xterm with an ANSI color_xterm.
 
 4.7 Where can I get xterm or rxvt?
 
    xterm is included with the X Window System, so you probably already
-   have it if you have X. This version is not actively maintained, but
+   have it if you have X.  This version is not actively maintained, but
    Thomas Dickey maintains his more advanced version of xterm at
    ftp://dickey.his.com/xterm/
 
    rxvt has its own site http://www.rxvt.org/ - get the latest version
    there.
 
-4.8 I got colors working with MC but the other programs don't work at all
-anymore!
+4.8 I got colors working with MC but the other programs don't work at
+all anymore!
 
    Midnight Commander uses terminfo database (if available) but many
-   other programs use termcap database. If you set the TERM environment
+   other programs use termcap database.  If you set the TERM environment
    variable to a value which has no corresponding entry in termcap
-   database those programs stop working. You should add the new value of
-   TERM to the termcap database.
+   database those programs stop working.  You should add the new value
+   of TERM to the termcap database.
 
    Example: If you have set TERM to xterm-color locate from /etc/termcap
    the line which starts:
@@ -559,11 +552,11 @@ anymore!
 enough?
 
    You might want to read the Unix-Haters Handbook at
-   http://catalog.com/hopkins/unix-haters/handbook.html. It lists many
+   http://catalog.com/hopkins/unix-haters/handbook.html.  It lists many
    more reasons why Unix sucks.
 
    You can configure which terminal database you want to use with the
-   "--with-termcap" and "--with-terminfo" flags of configure. If you
+   "--with-termcap" and "--with-terminfo" flags of configure.  If you
    don't specify them, the configure script will try to use terminfo if
    available otherwise it will use termcap.
 
@@ -592,65 +585,57 @@ enough?
 
 6.2 How can I access command line history?
 
-   Alt-h shows the last commands you executed from the command line. 
+   Alt-h shows the last commands you executed from the command line.
    Duplicates are suppressed from the history.  Commands executed from
    the subshell prompt are not shown.
 
    You can put previous commands to the command line with Alt-p.  Alt-n
    moves you forward in history.
 
-   Since version 4.1.15 all the input widgets have permanent history. You
-   can summon the history listbox by pressing M-h.
+   Since version 4.1.15 all the input widgets have permanent history.
+   You can summon the history listbox by pressing M-h.
 
 6.3 How can I complete commands, file names, variable names and so on?
 
-   Just press M-Tab. Press M-Tab again to get a listbox if there are
+   Just press M-Tab.  Press M-Tab again to get a listbox if there are
    multiple possible completions.
 
-6.4 I am using ksh. Can I use functions defined in the .kshrc within MC?
+6.4 I am using ksh.  Can I use functions defined in the .kshrc within
+MC?
 
-   Sorry, MC only supports bash, tcsh and zsh functions. Ksh functions
+   Sorry, MC only supports bash, tcsh and zsh functions.  Ksh functions
    are not supported because ksh lacks the necessary hooks needed for
    subshell integration.
 
-   Switch to bash or zsh. They are both quite compatible with ksh. Your
-   ksh functions should work as such or after minimal changes.
+   Switch to bash or zsh.  They are both quite compatible with ksh. 
+   Your ksh functions should work as such or after minimal changes.
 
 6.5 Is there any way to include additional options or hot keys to MC?
 
-   Yes, F2 invokes an user menu which fully configurable. You can add
-   any shell commands to the user menu. See the mc(1) man page for more
+   Yes, F2 invokes an user menu which fully configurable.  You can add
+   any shell commands to the user menu.  See the mc(1) man page for more
    info.
 
    Another way to add functionality is the external panelize feature.
    See the mc(1) man page for more info.
 
-   And finally, you can code any feature you want yourself. MC source
-   code is free which means you can change it anyway you want. There are
-   some limitations to make sure MC stays free. See GNU General Public
-   License for details.
+   And finally, you can code any feature you want yourself.  MC source
+   code is free which means you can change it anyway you want.  There
+   are some limitations to make sure MC stays free.  See GNU General
+   Public License for details.
 
 
 7 Virtual file systems
 
-   Note! Virtual file systems are supported by Unix ports only.  The
-   native Windows port doesn't support virtual file systems.
-
 7.1 How can I see the contents of a tar archive?
 
    If you use keyboard just move the selection bar on the tar file and
-   press enter.
-
-   If you use mouse just double-click on the tar file.
-
-   If these procedures don't work, your .mc.ext file is faulty. Replace
-   it with one from the MC source distribution.
-
-   You can also enter a tar archive by typing "cd tar:filename.tar.gz"
-   where filename.tar.gz is the name of the archive.
+   press enter.  If you use mouse just double-click on the tar file.
 
    The recognized suffixes for tar archives are .tar, .tar.gz and .tgz.
-   If your tar archive uses different suffix you have to rename it.
+   You can also enter a tar archive by typing "cd filename#utar" where
+   filename is the name of the archive.  In this case, the suffix is not
+   important.
 
 7.2 How do I get out of a tar archive?
 
@@ -661,28 +646,30 @@ enough?
 7.3 How do I do anonymous ftp with MC?
 
    Just type "cd ftp://hostname" where hostname is the name of the host
-   you want to connect. Alternatively, select FTP link from the Left or
+   you want to connect.  Alternatively, select FTP link from the Left or
    Right menu and type the name of the host you want to connect.
 
 7.4 How do I do non-anonymous ftp with MC?
 
    Non-anonymous ftp works just like the anonymous ftp but you give the
-   login name with the host name. For example, type "cd
+   login name with the host name.  For example, type "cd
    ftp://username@hostname".
 
 7.5 How do I close an ftp connection?
 
-   Just chdir to a non-ftp directory. Just typing "cd" with no parameters
-   is enough (it will take you to your home directory).
+   Just change to a non-ftp directory.  Simply typing "cd" with no
+   parameters is enough (it will take you to your home directory).
 
-   Internally Midnight Commander closes ftp connection only after a
-   timeout. This isn't visible to the end user.
+   GNU Midnight Commander closes ftp connection automatically after a
+   timeout or on exit.  It's possible to force disconnect by selecting
+   "Command" -> "Active VFS List" in the menu and using the "Free VFSs
+   Now" button.
 
 7.6 Why aren't the contents of ftp panel updated?
 
    Update is skipped because there would be a serious performance
-   penalty. Constantly updating directory panels through a ftp connection
-   would take too much time.
+   penalty.  Constantly updating directory panels through a ftp
+   connection would take too much time.
 
    You can use C-r to force an update.
 
@@ -699,51 +686,14 @@ enough?
 
 8 Other common problems
 
-8.1 How do I get the internal editor to work?
-
-   The F4 key used to default to an external editor because that was what
-   most people were used to.  The newer versions use internal editor by
-   default.
-
-   To use the internal editor with an old version, select Configuration
-   from the Options menu and check the 'use internal edit' option.
-
-   Alternatively add the line
-     use_internal_edit=1
-
-   under the [Midnight-Commander] section in your .mc.ini file (which is
-   in your home directory).
-
-   To make the editor work all the time, go to the default/* section in
-   the file lib/mc/mc.ext file and remove the line
-
-       Edit=%var{EDITOR:vi} %f
-
-   The internal editor will now be invoked for anything not specified
-   elsewhere in the mc.ext file.
-
-   Make sure that you edit the correct mc.ext file.  The Midnight
-   Commander first checks the existence of $HOME/.mc.ext.  If this file
-   is missing MC will use $prefix/lib/mc/mc.ext instead ($prefix can be
-   changed with configure before compilation and it defaults to
-   /usr/local).
-
-   When you run `F9/Command/Extension file edit' for the very first time
-   Midnight Commander copies the system-wide mc.ext from $prefix/lib/mc
-   into your home directory because you need write access in order to
-   change it.
-
-   And please don't forget that "make install" overwrites
-   $prefix/lib/mc/mc.ext.
-
-8.2 When I try pasting to the internal editor, it indents the amount of
+8.1 When I try pasting to the internal editor, it indents the amount of
 indenting increases with each line!
 
    Either turn of 'Return does autoindent' in the editor options or
    update GNU Midnight Commander to version 4.6.0 or above - it doesn't
    autoindent when you are holding Shift.
 
-8.3 Is it possible to use Colorer for syntax highlighting?
+8.2 Is it possible to use Colorer for syntax highlighting?
 
    Yes if you submit the patch.  There are no legal problems with it
    because it's licensed under GPL now.  The homepage of Colorer is
@@ -759,21 +709,9 @@ indenting increases with each line!
    control key with the key which is the backslash key in the English
    keyboard layout.
 
-9.3 Why I keep getting: "There is no disk in the drive. Please insert a disk
-into drive D:"?
+9.2 When I start Midnight Commander, nothing happens!
 
-   This is a known bug of the native Windows port.  MC looks its
-   configuration files from the D:\MC directory and if the D: drive is a
-   removable drive (like a CD ROM drive) and there is no disk in drive
-   you get this message every time you try to do anything.
-
-   Since version 4.0.6 you can specify the actual location of the
-   Midnight Commander configuration files with the MCHOME environment
-   variable.
-
-9.3 When I start Midnight Commander, nothing happens!
-
-   First, invoke MC without subshell support: "mc -u". If this helps
+   First, invoke MC without subshell support: "mc -u".  If this helps
    check the shell you are using.  Subshell support works best with
    bash, although tcsh and zsh are also supported.  You might want to
    upgrade your shell to a newer version.  If you use something else
@@ -800,7 +738,7 @@ into drive D:"?
 10.1 Who has written Midnight Commander?
 
    Midnight Commander was started by Miguel de Icaza and he is the
-   maintainer of the package. Other authors have joined the project
+   maintainer of the package.  Other authors have joined the project
    later:
      * Mauricio Plaza (early releases)
      * Janne Kukonlehto (joined Sep 27 1994)
@@ -815,7 +753,7 @@ into drive D:"?
      * Alex I. Tkachenko
 
    Alessandro Rubini has been specially helpful with debugging and
-   enhancing of the mouse support. John E. Davis has made his S-Lang
+   enhancing of the mouse support.  John E. Davis has made his S-Lang
    library available to us and answered many questions about it.
 
    Many people have contributed bug reports, feature suggestions and
@@ -859,7 +797,7 @@ into drive D:"?
    Give as much details as possible.  A too long message is a lot better
    than a too short message.
 
-   For segmentation faults a stack backtrace is appreciated. You can
+   For segmentation faults a stack backtrace is appreciated.  You can
    produce stack backtrace as follows:
      * If segmentation fault produced a core file:
          1. Load the core file by typing "gdb mc core" or "dbx mc core".
@@ -868,8 +806,8 @@ into drive D:"?
      * If segmentation fault didn't produce a core file:
          1. Load mc by typing "gdb mc" or "dbx mc".
          2. Start mc by typing "run".
-         3. Try to reproduce the segmentation fault by doing whatever you
-            did last time when the segmentation fault occurred.
+         3. Try to reproduce the segmentation fault by doing whatever
+            you did last time when the segmentation fault occurred.
          4. Type "where".
          5. Cut and paste the results to your message.
          6. For the future you might want to check out what is the
@@ -879,30 +817,30 @@ into drive D:"?
 
 10.4 How can I join the development?
 
-   To join the development just code the feature you want to add and send
-   your patch for inclusion. Email address is mc-devel@gnome.org.
-   Before you start coding check the latest development version. It might
-   be that your feature has already been implemented.
+   To join the development just code the feature you want to add and
+   send your patch for inclusion.  Email address is mc-devel@gnome.org.
+   Before you start coding check the latest development version.  It
+   might be that your feature has already been implemented.
 
    Note that the authors of GNU Midnight Commander have given all their
-   rights on the program to the Free Software Foundation. You will have
-   to do the same if you contribute non-trivial patches. Otherwise we
+   rights on the program to the Free Software Foundation.  You will have
+   to do the same if you contribute non-trivial patches.  Otherwise we
    have to reject your patches in order to avoid copyright problems.
 
 
 11 More information
 
-11.1 This document didn't answer my question. Where else can I look for an
-answer?
+11.1 This document didn't answer my question.  Where else can I look for
+an answer?
 
    Read messages from the Discussion (mailing list archive) or read the
    Manual.
 
-   Upgrade to a newer version of Midnight Commander. Many problems are
+   Upgrade to a newer version of Midnight Commander.  Many problems are
    fixed in the new versions.
 
    If you still can't find an answer, post your question to the Midnight
-   Commander mailing list. Its address is mc@gnome.org.
+   Commander mailing list.  Its address is mc@gnome.org.
 
 11.2 What mailing lists are there for Midnight Commander?
 
@@ -920,14 +858,14 @@ answer?
 
 11.3 Where should I look on the World Wide Web for MC stuff?
 
-   There is a WWW page for Midnight Commander. The URL is:
+   There is a WWW page for Midnight Commander.  The URL is:
 
      http://www.ibiblio.org/mc/
 
 11.4 Are the mailing lists archived anywhere?
 
-   The mc and mc-devel lists are archived on the World Wide Web. There are
-   links to the archives on the mailing list pages (see 10.2).
+   The mc and mc-devel lists are archived on the World Wide Web.  There
+   are links to the archives on the mailing list pages (see 10.2).
 
 
 12 Legal issues
@@ -945,9 +883,9 @@ answer?
 
 12.3 Disclaimer and copyright
 
-   Note that this document is provided as is. The information in it is
+   Note that this document is provided as is.  The information in it is
    not warranted to be correct; you use it at your own risk.
 
-   You can use Questions and Answers according to GNU Public License (see
-   the COPYING file in GNU Midnight Commander source distribution).
-   Questions and Answers is not public domain.
+   You can use Questions and Answers according to GNU General Public
+   License (see the COPYING file in GNU Midnight Commander source
+   distribution).  Questions and Answers is not public domain.
