@@ -1,5 +1,13 @@
 2004-09-25  Roland Illig  <roland.illig@gmx.de>
 
+	* pipethrough.c: Added pipethrough, a function to execute child
+	processes in a simple way.
+	* pipethrough.h: The interface for the function.
+	* pipethrough.3: The manpage (will be installed in maintainer-mode).
+	* Makefile.am: Added the files to SRCS.
+
+2004-09-25  Roland Illig  <roland.illig@gmx.de>
+
 	* view.c (display): Recognize "+\bo" as a list item in nroff mode.
 	Display "_\b_" correctly in both colors.
 

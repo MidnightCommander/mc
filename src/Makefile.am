@@ -59,7 +59,12 @@ SRCS =	achown.c achown.h background.c background.h boxes.c boxes.h	\
 	slint.c	subshell.c subshell.h textconf.c textconf.h		\
 	tree.c tree.h treestore.c treestore.h tty.h user.c user.h	\
 	util.c util.h utilunix.c view.c view.h vfsdummy.h widget.c	\
-	widget.h win.c win.h wtools.c wtools.h
+	widget.h win.c win.h wtools.c wtools.h				\
+	pipethrough.c pipethrough.h
+
+if MAINTAINER_MODE
+man_MANS=	pipethrough.3
+endif
 
 if CHARSET
 mc_SOURCES = $(SRCS) $(CHARSET_SRC)
@@ -67,7 +72,7 @@ else
 mc_SOURCES = $(SRCS)
 endif
 
-EXTRA_DIST = ChangeLog OChangeLog man2hlp.c $(CHARSET_SRC)
+EXTRA_DIST = ChangeLog OChangeLog man2hlp.c $(CHARSET_SRC) $(man_MANS)
 
 install-exec-hook:
 	$(MAKE) install_mcview
