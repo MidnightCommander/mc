@@ -11,6 +11,7 @@
 #include <config.h>
 #include <string.h>
 #include "x.h"
+#include "util.h"
 #include "global.h"
 #include "dir.h"
 #include "command.h"
@@ -38,7 +39,6 @@
 #include "gtkflist.h"
 #include "../vfs/vfs.h"
 #include <gdk/gdkprivate.h>
-#include <glib.h>
 
 /* Whether to display the tree view on the left */
 int tree_panel_visible = -1;
