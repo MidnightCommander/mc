@@ -355,8 +355,8 @@ static void show_tree (WTree *tree)
 	attrset (TREE_NORMALC);
 
 	/* Calculate the next value for current */
+	current = current->next;
 	if (tree_navigation_flag){
-	    current = current->next;
 	    while (current){
 		if (current->sublevel < tree->selected_ptr->sublevel){
 		    if (strncmp (current->name, tree->selected_ptr->name,
@@ -374,8 +374,7 @@ static void show_tree (WTree *tree)
 		}
 		current = current->next;
 	    }
-	} else
-	    current = current->next;
+	}
     }
     tree_show_mini_info (tree, tree_lines, tree_cols);
 }
@@ -639,7 +638,12 @@ static void tree_copy (WTree *tree, char *default_dest)
     g_snprintf (cmd_buf, sizeof(cmd_buf), _("Copy \"%s\" directory to:"),
 	     name_trunc (tree->selected_ptr->name, 50));
     dest = input_expand_dialog (_(" Copy "), cmd_buf, default_dest);
-    if (!dest || !*dest){
+
+    if (!dest)
+	return;
+
+    if (!*dest){
+	g_free (dest);
 	return;
     }
 
@@ -675,17 +679,20 @@ static void tree_move (WTree *tree, char *default_dest)
     g_snprintf (cmd_buf, sizeof (cmd_buf), _("Move \"%s\" directory to:"),
 	     name_trunc (tree->selected_ptr->name, 50));
     dest = input_expand_dialog (_(" Move "), cmd_buf, default_dest);
-    if (!dest || !*dest){
+    if (!dest)
+	return;
+    if (!*dest){
+	g_free (dest);
 	return;
     }
     if (stat (dest, &buf)){
-	message (1, _(" Error "), _(" Can't stat the destination \n %s "),
+	message (1, MSG_ERROR, _(" Can't stat the destination \n %s "),
 		 unix_error_string (errno));
 	g_free (dest);
 	return;
     }
     if (!S_ISDIR (buf.st_mode)){
-	message (1, _(" Error "), _(" The destination isn't a directory "));
+	message (1, MSG_ERROR, _(" The destination isn't a directory "));
 	g_free (dest);
 	return;
     }
@@ -901,7 +908,7 @@ tree_start_search (WTree *tree)
     }
 }
 
-static key_map tree_keymap [] = {
+static const key_map tree_keymap [] = {
     { XCTRL('n'), move_down    },
     { XCTRL('p'), move_up      },
     { KEY_DOWN,   move_down    },
