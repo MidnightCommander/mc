@@ -1413,7 +1413,7 @@ msgstr "Команда:"
 
 #: gnome/gprop.c:129
 msgid "Use terminal"
-msgstr ""
+msgstr "Використовувати терм╕нал"
 
 #: gnome/gprop.c:248
 msgid "File mode (permissions)"
@@ -1472,7 +1472,7 @@ msgstr "%s байт╕в в %d файлах"
 
 #: gnome/gscreen.c:1669 src/screen.c:688
 msgid "<readlink failed>"
-msgstr ""
+msgstr "<зб╕й зчитування посилання>"
 
 #: gnome/gscreen.c:2098
 msgid "Copy directory"
@@ -1675,7 +1675,7 @@ msgstr "назва | тип | розм╕р | часд | часм | часс "
 
 #: gnome/gmc-client.c:217
 msgid "Close windows whose directories cannot be reached"
-msgstr ""
+msgstr "Закрити в╕кна недосяжних каталог╕в"
 
 #. The file-name is printed after the ':'
 #: gtkedit/edit.c:145 gtkedit/edit.c:314 gtkedit/edit.c:319 gtkedit/edit.c:333
@@ -1983,10 +1983,12 @@ msgid ""
 "You can enter regexp substrings with %s\n"
 "(not \\1, \\2 like sed) then use \"Enter...order\""
 msgstr ""
+"Ви можете ввести регулярний вираз з %s\n"
+"(не \\1, \\2 як в sed), пот╕м використати \"Ввести...порядок\""
 
 #: gtkedit/editcmd.c:1414
 msgid " Enter argument (or substring) order : "
-msgstr ""
+msgstr " Введ╕ть порядок аргумент╕в (чи п╕дрядк╕в): "
 
 #. Tool hint
 #: gtkedit/editcmd.c:1418 gtkedit/editcmd.c:1419
@@ -1994,6 +1996,8 @@ msgid ""
 "Enter the order of replacement of your scanf\n"
 "format specifiers or regexp substrings, eg 3,1,2"
 msgstr ""
+"Введ╕ть порядок зам╕ни ваших специф╕катор╕в формату scanf\n"
+"чи п╕дрядк╕в regexp, наприклад 3,1,2"
 
 #. The following are check boxes
 #: gtkedit/editcmd.c:1424
@@ -6438,12 +6442,12 @@ msgstr "ftpfs: в╕дсилання паролю користувача"
 
 #: vfs/ftpfs.c:474
 msgid "ftpfs: logged in"
-msgstr "ftpfs: розпочато роботу"
+msgstr "ftpfs: заре╓стровано"
 
 #: vfs/ftpfs.c:489
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
-msgstr ""
+msgstr "ftpfs: Помилка ре╓страц╕╖ для користувача %s "
 
 #: vfs/ftpfs.c:521
 #, c-format
