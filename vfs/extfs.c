@@ -36,7 +36,7 @@
 #include <errno.h>
 #include "utilvfs.h"
 #include "../src/dialog.h"
-#include "../src/main.h"	/* For shell_execute */
+#include "../src/execute.h"	/* For shell_execute */
 #include "xdirentry.h"
 #include "vfs.h"
 #include "extfs.h"

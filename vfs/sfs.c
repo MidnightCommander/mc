@@ -23,6 +23,7 @@
 
 #include "vfs.h"
 #include "local.h"
+#include "../src/execute.h"
 
 struct cachedfile {
     char *name, *cache;
