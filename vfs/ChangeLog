@@ -1,3 +1,12 @@
+2003-11-04  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.c: Allocate handles dynamically.
+	(get_bucket): Rewrite as vfs_new_handle().
+	(vfs_op): Make a function.
+	(vfs_info): Likewise.
+	(vfs_free_bucket): Replace with vfs_free_handle().
+	(mc_readdir): Expand, eliminate MC_DIROP.
+
 2003-10-30  Pavel Roskin  <proski@gnu.org>
 
 	* HACKING: New file - technical documentation for VFS.

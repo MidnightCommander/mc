@@ -65,29 +65,84 @@ static int current_mday;
 static int current_mon;
 static int current_year;
 
-/* FIXME: Open files managed by the vfs layer, should be dynamical */
-#define MAX_VFS_FILES 100
+struct vfs_openfile {
+    int handle;
+    struct vfs_class *vclass;
+    void *fsinfo;
+};
 
-static struct {
-    void *fs_info;
-    struct vfs_class *operations;
-} vfs_file_table [MAX_VFS_FILES];
+static GSList *vfs_openfiles;
+#define VFS_FIRST_HANDLE 100
 
 static struct vfs_class *localfs_class;
 
+/* Create new VFS handle and put it to the list */
 static int
-get_bucket (void)
+vfs_new_handle (struct vfs_class *vclass, void *fsinfo)
 {
-    int i;
+    static int vfs_handle_counter = VFS_FIRST_HANDLE;
+    struct vfs_openfile *h;
 
-    /* 0, 1, 2 are reserved file descriptors, while (DIR *) 0 means error */
-    for (i = 3; i < MAX_VFS_FILES; i++){
-	if (!vfs_file_table [i].fs_info)
-	    return i;
-    }
+    h = g_new (struct vfs_openfile, 1);
+    h->handle = vfs_handle_counter++;
+    h->fsinfo = fsinfo;
+    h->vclass = vclass;
+    vfs_openfiles = g_slist_prepend (vfs_openfiles, h);
+    return h->handle;
+}
 
-    vfs_die ("No more virtual file handles");
-    return 0;
+/* Function to match handle, passed to g_slist_find_custom() */
+static gint
+vfs_cmp_handle (gconstpointer a, gconstpointer b)
+{
+    if (!a)
+	return 1;
+    return ((struct vfs_openfile *) a)->handle != (int) b;
+}
+
+/* Find VFS class by file handle */
+static inline struct vfs_class *
+vfs_op (int handle)
+{
+    GSList *l;
+    struct vfs_openfile *h;
+
+    l = g_slist_find_custom (vfs_openfiles, (gconstpointer) handle,
+			     vfs_cmp_handle);
+    if (!l)
+	return NULL;
+    h = (struct vfs_openfile *) l->data;
+    if (!h)
+	return NULL;
+    return h->vclass;
+}
+
+/* Find private file data by file handle */
+static inline void *
+vfs_info (int handle)
+{
+    GSList *l;
+    struct vfs_openfile *h;
+
+    l = g_slist_find_custom (vfs_openfiles, (gconstpointer) handle,
+			     vfs_cmp_handle);
+    if (!l)
+	return NULL;
+    h = (struct vfs_openfile *) l->data;
+    if (!h)
+	return NULL;
+    return h->fsinfo;
+}
+
+/* Free open file data for given file handle */
+static inline void
+vfs_free_handle (int handle)
+{
+    GSList *l;
+
+    l = g_slist_find_custom (vfs_openfiles, (gconstpointer) handle,
+			     vfs_cmp_handle);
+    vfs_openfiles = g_slist_delete_link (vfs_openfiles, l);
 }
 
 static struct vfs_class *vfs_list;
@@ -378,7 +433,6 @@ ferrno (struct vfs_class *vfs)
 int
 mc_open (const char *filename, int flags, ...)
 {
-    int  handle;
     int  mode;
     void *info;
     va_list ap;
@@ -403,16 +457,9 @@ mc_open (const char *filename, int flags, ...)
 	errno = ferrno (vfs);
 	return -1;
     }
-    handle = get_bucket ();
-    vfs_file_table [handle].fs_info = info;
-    vfs_file_table [handle].operations = vfs;
-    
-    return handle;
-}
 
-#define vfs_op(handle) vfs_file_table [handle].operations 
-#define vfs_info(handle) vfs_file_table [handle].fs_info
-#define vfs_free_bucket(handle) vfs_info(handle) = 0;
+    return vfs_new_handle (vfs, info);
+}
 
 #define MC_OP(name, inarg, callarg, pre, post) \
         int mc_##name inarg \
@@ -475,7 +522,7 @@ mc_close (int handle)
     if (!vfs->close)
         vfs_die ("VFS must support close.\n");
     result = (*vfs->close)(vfs_info (handle));
-    vfs_free_bucket (handle);
+    vfs_free_handle (handle);
     if (result == -1)
 	errno = ferrno (vfs);
     
@@ -498,35 +545,32 @@ mc_opendir (char *dirname)
         errno = vfs->opendir ? ferrno (vfs) : E_NOTSUPP;
 	return NULL;
     }
-    handle = get_bucket ();
-    vfs_file_table [handle].fs_info = info;
-    vfs_file_table [handle].operations = vfs;
+    handle = vfs_new_handle (vfs, info);
 
     handlep = g_new (int, 1);
     *handlep = handle;
     return (DIR *) handlep;
 }
 
-#define MC_DIROP(name, type, onerr ) \
-type mc_##name (DIR *dirp) \
-{ \
-    int handle; \
-    struct vfs_class *vfs; \
-    type result; \
-\
-    if (!dirp){ \
-	errno = EFAULT; \
-	return onerr; \
-    } \
-    handle = *(int *) dirp; \
-    vfs = vfs_op (handle); \
-    result = vfs->name ? (*vfs->name) (vfs_info (handle)) : onerr; \
-    if (result == onerr) \
-        errno = vfs->name ? ferrno(vfs) : E_NOTSUPP; \
-    return result; \
-}
+struct dirent *
+mc_readdir (DIR *dirp)
+{
+    int handle;
+    struct vfs_class *vfs;
+    struct dirent *result = NULL;
 
-MC_DIROP (readdir, struct dirent *, NULL)
+    if (!dirp) {
+	errno = EFAULT;
+	return NULL;
+    }
+    handle = *(int *) dirp;
+    vfs = vfs_op (handle);
+    if (vfs->readdir)
+	result = (*vfs->readdir) (vfs_info (handle));
+    if (!result)
+	errno = vfs->readdir ? ferrno (vfs) : E_NOTSUPP;
+    return result;
+}
 
 int
 mc_closedir (DIR *dirp)
@@ -536,7 +580,7 @@ mc_closedir (DIR *dirp)
     int result;
 
     result = vfs->closedir ? (*vfs->closedir)(vfs_info (handle)) : -1;
-    vfs_free_bucket (handle);
+    vfs_free_handle (handle);
     g_free (dirp);
     return result; 
 }
@@ -1182,7 +1226,6 @@ vfs_init (void)
     time_t current_time;
     struct tm *t;
 
-    memset (vfs_file_table, 0, sizeof (vfs_file_table));
     current_time = time (NULL);
     t = localtime (&current_time);
     current_mday = t->tm_mday;
@@ -1240,6 +1283,8 @@ vfs_shut (void)
     for (vfs=vfs_list; vfs; vfs=vfs->next)
         if (vfs->done)
 	     (*vfs->done) (vfs);
+
+    g_slist_free (vfs_openfiles);
 }
 
 /*
