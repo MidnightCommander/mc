@@ -1,9 +1,9 @@
 Bugzilla: 3436, 3194, 3621, 3244
 
 bugs.gnome.org:
-  Important: 216, 382, etc.
+  Important: 216, 382, 707, etc.
   Major cosmetic: 272, 487
-  Minor cosmetic: 55/208, 115, 308, 383, 398, 449, 479, 597
+  Minor cosmetic: 55/208, 115, 308, 383, 398, 449, 479, 597, 781
   Non-essential: 779?, 448
 
   216: If you drag a file into a directory that you don't have
@@ -16,5 +16,8 @@ bugs.gnome.org:
 			   gmc will fall over very soon afterwards.
 			   (e.g. if you try to select the same icon
 			   once or twice)
+  707: Renaming files doesn't check for clashes
 
   The drop-non-existent-file-from-panel bug.
+
+  The "try to view /etc/X11/XF86Config" bug.
