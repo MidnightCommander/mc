@@ -285,7 +285,8 @@ sub print_file {
 	if ($platform ne 'unx') {
 		$perms = ($filename =~ /\/$/ ? 'drwxr-xr-x' : '-rw-r--r--');
 	}
-	printf "%-10s    1 %-8d %-8d %8d $mon $day $year $hours:$mins $filename", $perms, $<, $(, $realsize;
+	printf "%-10s    1 %-8d %-8d %8d %s %s %s %s:%s %s", $perms, $<,
+		$(, $realsize, $mon, $day, $year, $hours, $mins, $filename;
 	if ($platform eq 'unx' && $perms =~ /^l/) {
 		my $linkdest = &get_link_destination($filename);
 		print " -> $linkdest";

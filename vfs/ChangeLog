@@ -1,3 +1,8 @@
+2002-01-22  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/uzip: Fix unsafe printf.
+	Reported by Jari Karppinen <jakarppi@mail.student.oulu.fi>
+
 2002-01-22  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* ftpfs.c (ftpfs_chmod): Add missed '/'.
