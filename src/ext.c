@@ -247,7 +247,15 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
     } /* for */
     fputc ('\n', cmd_file);
     fclose (cmd_file);
-    chmod (file_name, S_IRWXU);
+
+    if ((run_view && !written_nonspace) || is_cd) {
+	unlink (file_name);
+	g_free (file_name);
+	file_name = NULL;
+    } else {
+	chmod (file_name, S_IRWXU);
+    }
+
     if (run_view){
     	altered_hex_mode = 0;
     	altered_nroff_flag = 0;
@@ -302,22 +310,17 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
 	    }
 	}
 #endif /* !HAVE_X */
-
-#ifdef OLD_CODE
-	if (vfs_current_is_local ())
-	    shell_execute (file_name, EXECUTE_INTERNAL);
-	else
-	    message (1, _(" Warning "), _(" Can't execute commands on a Virtual File System directory "));
-#endif
     }
 #ifndef PORT_DOES_BACKGROUND_EXEC
-    unlink (file_name);
+    if (file_name) {
+	unlink (file_name);
+	g_free (file_name);
+    }
 #endif
     if (localcopy) {
         mc_stat (localcopy, &mystat);
         mc_ungetlocalcopy (filename, localcopy, localmtime != mystat.st_mtime);
     }
-    g_free (file_name);
 }
 
 #ifdef FILE_L

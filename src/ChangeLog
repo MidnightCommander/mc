@@ -1,5 +1,9 @@
 2001-07-06  Pavel Roskin  <proski@gnu.org>
 
+	* view.c (exec_extension): Unlink temporary file earlier if it's
+	not going to be used.
+	[OLD_CODE]: Remove.
+
 	* Makefile.in: Use additional quotes to preserve @prefix@ when
 	Makefile is generated.
 
