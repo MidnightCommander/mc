@@ -21,7 +21,7 @@
 	could not be found.  Don't ever return NULL.  Change callers not
 	to check for NULL.
 
-	* dialog.c (do_select_widget): New function that it the only one
+	* dialog.c (do_select_widget): New function that is the only one
 	calling dlg_focus() and dlg_unfocus().  Incorporate code from
 	other functions that did it.
 	(dlg_select_widget): Change return type to void.
