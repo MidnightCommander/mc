@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "POT-Creation-Date: 2002-10-21 19:44-0400\n"
 "PO-Revision-Date: 2002-04-11 16:36+0300\n"
-"Last-Translator: Volodymyr M. Lisivka <lvm@mystery.lviv.net>\n"
+"Last-Translator: Volodymyr M. Lisivka <lvm@mystery.lviv.net>, Andrew V. Samoilov <sav@bcs.zp.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=KOI8-U\n"
@@ -55,7 +55,7 @@ msgstr "Меню користувача доступне лише у mcedit викликаному з mc"
 
 #: edit/edit.c:2595
 msgid "Macro recursion is too deep"
-msgstr ""
+msgstr "Занадто глибока рекурс╕я макрос╕в"
 
 #: edit/edit.h:319 edit/edit.h:320
 msgid " Enter file name: "
@@ -2585,11 +2585,11 @@ msgstr ""
 
 #: src/learn.c:294
 msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr "Натисн╕ть вс╕ перерахован╕ вище клав╕ш╕. П╕сля цього знайд╕ть,"
+msgstr "Натисн╕ть вс╕ перерахован╕ вище клав╕ш╕. П╕сля цього знайд╕ть"
 
 #: src/learn.c:296
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "клав╕ш╕, як╕ не мають пом╕тки √. Для навчання клав╕ш╕ вибер╕ть"
+msgstr "клав╕ш╕, як╕ не мають пом╕тки OK. Для навчання клав╕ш╕ вибер╕ть"
 
 #: src/learn.c:298
 msgid "key, or click with the mouse to define it. Move around with Tab."
@@ -3235,6 +3235,18 @@ msgstr "Не вда╓ться викликати команду."
 msgid "Pipe close failed"
 msgstr "Зб╕й закриття каналу"
 
+#: src/popt.c:547
+msgid "missing argument"
+msgstr "вiдсутнiй аргумент"
+
+#: src/popt.c:549
+msgid "unknown option"
+msgstr "нев╕домий перемикач"
+
+#: src/popt.c:555
+msgid "invalid numeric value"
+msgstr "нев╕рне число"
+
 #: src/popthelp.c:31
 msgid "Show this help message"
 msgstr "Показати це дов╕дкове пов╕домлення"
@@ -3245,16 +3257,11 @@ msgstr "Показати коротку дов╕дку"
 
 #: src/popthelp.c:60
 msgid "ARG"
-msgstr ""
+msgstr "АРГ"
 
 #: src/popthelp.c:179
-#, fuzzy
 msgid "Usage:"
-msgstr "╤м'я користувача:"
-
-#: src/popthelp.c:197
-msgid "[OPTION...]"
-msgstr ""
+msgstr "Використання:"
 
 #: src/screen.c:173
 msgid "UP--DIR"
