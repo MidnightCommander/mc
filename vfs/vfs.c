@@ -981,15 +981,29 @@ vfs_fill_names (fill_names_f func)
  * Returns vfs path corresponding to given url. If passed string is
  * not recognized as url, g_strdup(url) is returned.
  */
+
+static const struct {
+    const char *name;
+    size_t name_len;
+    const char *substitute;
+} url_table[] = { {"ftp://", 6, "/#ftp:"},
+                  {"mc://", 5, "/#mc:"},
+                  {"smb://", 6, "/#smb:"},
+                  {"sh://", 5, "/#sh:"},
+		  {"ssh://", 6, "/#sh:"},
+                  {"a:", 2, "/#a"}
+};
+
 char *
 vfs_translate_url (const char *url)
 {
-    if (strncmp (url, "ftp://", 6) == 0)
-	return g_strconcat ("/#ftp:", url + 6, (char *) NULL);
-    else if (strncmp (url, "a:", 2) == 0)
-	return g_strdup ("/#a");
-    else
-	return g_strdup (url);
+    size_t i;
+
+    for (i = 0; i < sizeof (url_table)/sizeof (url_table[0]); i++)
+       if (strncmp (url, url_table[i].name, url_table[i].name_len) == 0)
+           return g_strconcat (url_table[i].substitute, url + url_table[i].name_len, (char*) NULL);
+
+    return g_strdup (url);
 }
 
 int vfs_file_is_local (const char *filename)

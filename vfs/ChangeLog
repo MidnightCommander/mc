@@ -1,3 +1,13 @@
+2005-02-12  Jindrich Novy <jnovy@redhat.com>
+
+	* vfs.c (vfs_translate_url): Add support for smb://, sh://,
+	ssh:// and mc:// filesystem requests. Introduced separate table
+	for vfs aliases.
+	* util.c (strip_password): Modifications to take the aliases into
+	account while eliminating passwords.
+
+	The original patch was extended by Roland Illig.
+
 2005-02-12  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
        * samba/lib/netmask.c [HAVE_NETMASK_AIX && HAVE_UNISTD_H]: Include

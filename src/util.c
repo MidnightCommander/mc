@@ -437,10 +437,14 @@ strip_password (char *p, int has_prefix)
 	const char *name;
         size_t len;
     } prefixes[] = { {"/#ftp:", 6},
-		     {"/#mc:", 5},
 		     {"ftp://", 6},
+		     {"/#mc:", 5},
+		     {"mc://", 5},
 		     {"/#smb:", 6},
-		     {"/#sh:", 5}
+		     {"smb://", 6},
+		     {"/#sh:", 5},
+		     {"sh://", 5},
+		     {"ssh://", 6}
     };
     char *at, *inner_colon, *dir;
     size_t i;
