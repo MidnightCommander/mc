@@ -58,7 +58,7 @@ BOOL is_a_socket(int fd)
 
 enum SOCK_OPT_TYPES {OPT_BOOL,OPT_INT,OPT_ON};
 
-struct
+static const struct
 {
   char *name;
   int level;
