@@ -1,3 +1,8 @@
+2002-09-13  Pavel Roskin  <proski@gnu.org>
+
+	* option.c: Make "Configure options" dialog more flexible,
+	readjust layout.  Remove "advanced chown" option - it's unused.
+
 2002-09-13  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* main.c (process_args) [WITH_SMBFS]: Call smbfs_set_debugf()
