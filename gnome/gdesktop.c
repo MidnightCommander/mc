@@ -42,7 +42,7 @@ struct layout_slot {
 
 int desktop_use_shaped_icons = TRUE;
 int desktop_auto_placement = FALSE;
-int desktop_snap_icons = TRUE;
+int desktop_snap_icons = FALSE;
 
 /* The computed name of the user's desktop directory */
 static char *desktop_directory;
