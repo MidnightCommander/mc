@@ -1,5 +1,9 @@
 2004-09-19  Roland Illig  <roland.illig@gmx.de>
 
+	* util.c (strip_home_and_password): Fixed possible buffer overflow.
+
+2004-09-19  Roland Illig  <roland.illig@gmx.de>
+
 	* find.c: Applied patch to make the find dialog more responsive
 	while scanning through large files.
 

@@ -460,13 +460,13 @@ const char *strip_home_and_password(const char *dir)
     if (home_dir && !strncmp (dir, home_dir, len = strlen (home_dir)) && 
 	(dir[len] == PATH_SEP || dir[len] == '\0')){
 	newdir [0] = '~';
-	strcpy (&newdir [1], &dir [len]);
+	g_strlcpy (&newdir [1], &dir [len], sizeof(newdir) - 1);
 	return newdir;
     } 
 
     /* We do not strip homes in /#ftp tree, I do not like ~'s there 
        (see ftpfs.c why) */
-    strcpy (newdir, dir);
+    g_strlcpy (newdir, dir, sizeof(newdir));
     strip_password (newdir, 1);
     return newdir;
 }
