@@ -1,5 +1,7 @@
 context default
-	keyword whole &*; brightgreen/16
+	keyword &\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\]; brightgreen/16
+	keyword &#\{xX\}\[0123456789abcdefABCDEF\]; brightgreen/16
+	keyword &#\[0123456789\]; brightgreen/16
 	spellcheck
 
 context <!-- --> brown/22
