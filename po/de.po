@@ -111,11 +111,11 @@ msgstr "Alle Core-Dateien finden"
 
 #: gnome/gcmd.c:492 src/panelize.c:350
 msgid "Find rejects after patching"
-msgstr "Rejects nach Patchen suchen"
+msgstr "Nach dem Patchen nach Rejects suchen"
 
 #: gnome/gcmd.c:536
 msgid "Run Command"
-msgstr " Befehl ausführen "
+msgstr "Befehl ausführen"
 
 #. Frame 1
 #: gnome/gcmd.c:541
@@ -134,7 +134,7 @@ msgstr "Löschen"
 #. Frame 2
 #: gnome/gcmd.c:570
 msgid "Run this Command"
-msgstr " Diesen Befehl ausführen "
+msgstr "Diesen Befehl ausführen"
 
 #: gnome/gcmd.c:577
 msgid "Command: "
@@ -142,7 +142,7 @@ msgstr "Befehl: "
 
 #: gnome/gcmd.c:646
 msgid "Set Filter"
-msgstr " Filter einstellen"
+msgstr "Filter einstellen"
 
 #: gnome/gcmd.c:651 gnome/gcmd.c:692 gnome/gcmd.c:697 gnome/gcmd.c:701
 #: gnome/gscreen.c:2551
@@ -167,12 +167,11 @@ msgstr ""
 
 #: gnome/gcmd.c:676
 msgid "Enter a Regular Expression to filter files in the panel view."
-msgstr ""
-"Geben Sie einen regulären Ausdruck als Filter für die Fensteransicht an."
+msgstr "Geben Sie einen regulären Ausdruck als Filter für die Fensteransicht an."
 
 #: gnome/gcmd.c:733
 msgid " Open with..."
-msgstr "Öffnen mit..."
+msgstr " Öffnen mit..."
 
 #: gnome/gcmd.c:734
 msgid "Enter extra arguments:"
@@ -200,8 +199,7 @@ msgstr ""
 
 #: gnome/gcmd.c:831
 msgid "Enter a regular expression here to select files in the panel view with."
-msgstr ""
-"Geben Sie einen regulären Ausdruck zur Dateiauswahl in der Fensteransicht an."
+msgstr "Geben Sie einen regulären Ausdruck zur Dateiauswahl in der Fensteransicht an."
 
 #: gnome/gcmd.c:874 src/cmd.c:545 src/cmd.c:596
 msgid "  Malformed regular expression  "
@@ -220,7 +218,7 @@ msgstr "Erstellungszeit"
 #: gnome/gnome-file-property-dialog.c:940 gnome/gprop.c:280 gnome/gprop.c:405
 #: src/screen.c:409
 msgid "Group"
-msgstr "Group"
+msgstr "Gruppe"
 
 #: gnome/gcustom-layout.c:39
 msgid "Group ID"
@@ -246,7 +244,7 @@ msgstr "Anzahl harter Links"
 #: gnome/gcustom-layout.c:45 gnome/gnome-file-property-dialog.c:925
 #: gnome/gprop.c:390 src/screen.c:408
 msgid "Owner"
-msgstr "Owner"
+msgstr "Eigentümer"
 
 #: gnome/gcustom-layout.c:46 src/screen.c:402
 msgid "Permission"
@@ -274,7 +272,7 @@ msgstr "Angezeigte Spalten"
 
 #: gnome/gcustom-layout.c:306
 msgid "Custom View"
-msgstr "Manuelle Ansicht"
+msgstr "Individuelle Ansicht"
 
 #: gnome/gdesktop.c:425 gnome/gdesktop.c:2052 gnome/gmount.c:321
 msgid "Warning"
@@ -300,7 +298,7 @@ msgstr "Fehler"
 #. Create the link to the user's home directory so that he will have an icon
 #: gnome/gdesktop.c:2048
 msgid "Home directory"
-msgstr "Heimverzeichnis"
+msgstr "Heimatverzeichnis"
 
 #: gnome/gdesktop.c:2053
 #, c-format
@@ -480,7 +478,7 @@ msgstr "Behält Berechtigungen und UID/GID wenn möglich bei"
 
 #: gnome/gdialogs.c:652
 msgid "Recursively copy subdirectories."
-msgstr "Unterverzeichnisse mitkopieren."
+msgstr "Unterverzeichnisse rekursiv kopieren."
 
 #: gnome/gdialogs.c:657
 msgid "If set, this will copy the directories recursively"
@@ -497,7 +495,7 @@ msgid ""
 msgstr ""
 "%s\n"
 "\n"
-"Verzeichnis nicht leer. Rekursiv löschen?"
+"Das Verzeichnis ist nicht leer. Rekursiv löschen?"
 
 #: gnome/gdialogs.c:770 src/file.c:2228
 msgid " Delete: "
@@ -568,7 +566,7 @@ msgstr " Hierher linken"
 
 #: gnome/gdnd.c:56
 msgid "Cancel drag"
-msgstr " Ziehvorgang abbrechen"
+msgstr "Ziehvorgang abbrechen"
 
 #. FIXME: this error message sucks
 #: gnome/gdnd.c:192
@@ -610,7 +608,7 @@ msgstr "Ansicht auf detaillierte Dateistatistiken umschalten"
 
 #: gnome/glayout.c:50
 msgid "_Custom View"
-msgstr "Manuelle Ansicht"
+msgstr "Individuelle Ansicht"
 
 #: gnome/glayout.c:51 gnome/glayout.c:67
 msgid "Switch view to show user-defined statistics"
@@ -630,11 +628,11 @@ msgstr "Detailliert"
 
 #: gnome/glayout.c:66
 msgid "Custom"
-msgstr "Manuell"
+msgstr "Individuell"
 
 #: gnome/glayout.c:302
 msgid "Enter command to run"
-msgstr "Auszuführenden Befehl eingeben:"
+msgstr "Auszuführenden Befehl eingeben"
 
 #: gnome/glayout.c:315
 msgid ""
@@ -700,23 +698,23 @@ msgstr "Zeigt den Plattenplatz, den jedes Verzeichnis verbraucht"
 
 #: gnome/glayout.c:395
 msgid "Select _All"
-msgstr "Alle auswählen"
+msgstr "Alle markieren"
 
 #: gnome/glayout.c:395
 msgid "Select all files in the current Panel"
-msgstr "Alle Dateien im aktuellen Fenster schließen"
+msgstr "Alle Dateien im aktuellen Fenster markieren"
 
 #: gnome/glayout.c:397
 msgid "_Select Files..."
-msgstr "Dateien auswählen..."
+msgstr "Dateien markieren..."
 
 #: gnome/glayout.c:397
 msgid "Select a group of files"
-msgstr "Dateien auswählen"
+msgstr "Eine Dateigruppe markieren"
 
 #: gnome/glayout.c:398
 msgid "_Invert Selection"
-msgstr "Auswahl invertieren"
+msgstr "Markierung umkehren"
 
 #: gnome/glayout.c:398
 msgid "Reverses the list of tagged files"
@@ -1024,7 +1022,7 @@ msgstr "User"
 
 #: gnome/gnome-file-property-dialog.c:777 gnome/gprop.c:281
 msgid "Other"
-msgstr "Other"
+msgstr "Andere"
 
 #. Special
 #: gnome/gnome-file-property-dialog.c:781 gnome/gprop.c:285
@@ -1041,7 +1039,7 @@ msgstr "Sticky"
 
 #: gnome/gnome-file-property-dialog.c:914
 msgid "File ownership"
-msgstr "Dateibesitzer"
+msgstr "Dateieigentümer"
 
 #: gnome/gnome-file-property-dialog.c:1074
 msgid "URL"
@@ -1160,15 +1158,15 @@ msgstr "Shellsuchmuster statt regulärer Ausdrücke benutzen"
 
 #: gnome/gprefs.c:109
 msgid "Confirm when deleting file"
-msgstr "Nachfragen vor Löschen von Dateien"
+msgstr "Vor dem Löschen von Dateien nachfragen"
 
 #: gnome/gprefs.c:113
 msgid "Confirm when overwriting files"
-msgstr "Nachfragen vor Überschreiben von Dateien"
+msgstr "Vor dem Überschreiben von Dateien nachfragen"
 
 #: gnome/gprefs.c:117
 msgid "Confirm when executing files"
-msgstr "Nachfragen vor Ausführen von Dateien"
+msgstr "Vor dem Ausführen von Dateien nachfragen"
 
 #: gnome/gprefs.c:121
 msgid "Show progress while operations are being performed"
@@ -1196,7 +1194,7 @@ msgstr "Schnelles Verzeichnis-Neulesen"
 
 #: gnome/gprefs.c:151
 msgid "Compute totals before copying files"
-msgstr "Gesamtsummen vor Kopieren von Dateien berechnen"
+msgstr "Gesamtsummen vor dem Kopieren von Dateien berechnen"
 
 #: gnome/gprefs.c:155
 msgid "FTP directory cache timeout :"
@@ -1204,7 +1202,7 @@ msgstr "FTP-Verzeichnis-Cache-Zeitvorgabe:"
 
 #: gnome/gprefs.c:159
 msgid "Allow customization of icons in icon view"
-msgstr "Konfiguration von Icons in der Icondarstellung erlauben"
+msgstr "Anpassung von Icons in der Icondarstellung erlauben"
 
 #: gnome/gprefs.c:167
 msgid "Use shaped icons"
@@ -1395,7 +1393,7 @@ msgstr "Zum zuvor besuchten Verzeichnis zurückgehen"
 
 #: gnome/gscreen.c:2375
 msgid "Up"
-msgstr "Rauf"
+msgstr "Aufwärts"
 
 #: gnome/gscreen.c:2375
 msgid "Go up a level in the directory heirarchy"
@@ -1419,11 +1417,11 @@ msgstr "Das aktuelle Verzeichnis neu einlesen"
 
 #: gnome/gscreen.c:2383
 msgid "Home"
-msgstr "Heim"
+msgstr "Heimat"
 
 #: gnome/gscreen.c:2383
 msgid "Go to your home directory"
-msgstr "Zu Ihrem Heimverzeichnis gehen"
+msgstr "Zu Ihrem Heimatverzeichnis gehen"
 
 #: gnome/gscreen.c:2529
 msgid "Location:"
