@@ -975,18 +975,18 @@ int history_callback (Dlg_head * h, int Par, int Msg)
 
 static inline int listbox_fwd (WListbox *l);
 
-static void show_hist (WInput * in)
+char *show_hist (Hist *history, int widget_x, int widget_y)
 {
     Hist *hi, *z;
     int maxlen = strlen(history_title), i, count = 0;
     int x, y, w, h;
-    char *q;
+    char *q, *r = 0;
     Dlg_head *query_dlg;
     WListbox *query_list;
 
-    z = in->history;
+    z = history;
     if (!z)
-		return;
+		return 0;
 
     while (z->prev)		/* goto first */
 		z = z->prev;
@@ -998,7 +998,7 @@ static void show_hist (WInput * in)
 		hi = hi->next;
     }
 
-       y = in->widget.y;
+       y = widget_y;
 	h = count + 2;
 	if (h <= y || y > LINES - 6)
 	{
@@ -1011,7 +1011,7 @@ static void show_hist (WInput * in)
 		h = min(h, LINES - y);
 	}
 
-	x = in->widget.x - 2;
+	x = widget_x - 2;
 	if ((w = maxlen + 4) + x > COLS)
 	{
 		w = min(w,COLS);
@@ -1023,7 +1023,7 @@ static void show_hist (WInput * in)
     query_list = listbox_new (1, 1, w - 2, h - 2, listbox_finish, 0, NULL);
     add_widget (query_dlg, query_list);
     hi = z;
-    if (y < in->widget.y) {
+    if (y < widget_y) {
 		while (hi) {		/* traverse */
 		    listbox_add_item (query_list, 0, 0, hi->text, NULL);
 	    	hi = hi->next;
@@ -1042,11 +1042,21 @@ static void show_hist (WInput * in)
     if (query_dlg->ret_value != B_CANCEL) {
 		listbox_get_current (query_list, &q, NULL);
 		if (q)
-	    	assign_text (in, q);
+		    r = strdup (q);
     }
     destroy_dlg (query_dlg);
+    return r;
 }
 
+static void do_show_hist (WInput * in)
+{
+    char *r;
+    r = show_hist (in->history, in->widget.x, in->widget.y);
+    if (r) {
+	assign_text (in, r);
+	free (r);
+    }
+}
 
 /* }}} history display */
 
@@ -1459,7 +1469,7 @@ static struct {
     /* History */     	  
     { ALT('p'),       	  hist_prev },
     { ALT('n'),       	  hist_next },
-    { ALT('h'),       	  show_hist },
+    { ALT('h'),       	  do_show_hist },
     
     /* Completion */
     { ALT('\t'),	  complete },
@@ -1613,7 +1623,7 @@ input_event (Gpm_Event *event, WInput *in)
 	dlg_select_widget (in->widget.parent, in); 
 
 	if (event->x >= in->field_len - HISTORY_BUTTON_WIDTH + 1 && should_show_history_button (in)) {
-	    show_hist (in);
+	    do_show_hist (in);
 	    update_input (in);
 	} else {
 	    in->point = strlen (in->buffer);

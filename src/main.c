@@ -111,7 +111,6 @@
 #endif
 #include "listmode.h"
 #include "background.h"
-#include "dirhist.h"
 #include "ext.h"	/* For flush_extension_file() */
 
 /* Listbox for the command history feature */
@@ -906,6 +905,70 @@ subshell_chdir (char *directory)
 #endif
 }
 
+void
+directory_history_add (WPanel * panel, char *s)
+{
+    if (!panel->dir_history) {
+	panel->dir_history = malloc (sizeof (Hist));
+	memset (panel->dir_history, 0, sizeof (Hist));
+	panel->dir_history->text = strdup (s);
+	return;
+    }
+    if (!strcmp (panel->dir_history->text, s))
+	return;
+    if (panel->dir_history->next) {
+	if (panel->dir_history->next->text) {
+	    free (panel->dir_history->next->text);
+	    panel->dir_history->next->text = 0;
+	}
+    } else {
+	panel->dir_history->next = malloc (sizeof (Hist));
+	memset (panel->dir_history->next, 0, sizeof (Hist));
+	panel->dir_history->next->prev = panel->dir_history;
+    }
+    panel->dir_history = panel->dir_history->next;
+    panel->dir_history->text = strdup (s);
+}
+
+int do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type);
+
+void
+directory_history_next (WPanel * panel)
+{
+    if (!panel->dir_history->next)
+	return;
+    if (do_panel_cd (panel, panel->dir_history->next->text, cd_exact))
+	panel->dir_history = panel->dir_history->next;
+}
+
+void
+directory_history_prev (WPanel * panel)
+{
+    if (!panel->dir_history->prev)
+	return;
+    if (do_panel_cd (panel, panel->dir_history->prev->text, cd_exact))
+	panel->dir_history = panel->dir_history->prev;
+}
+
+void
+directory_history_list (WPanel * panel)
+{
+    char *s;
+/* must be at least two to show a history */
+    if (panel->dir_history) {
+	if (panel->dir_history->prev || panel->dir_history->next) {
+	    s = show_hist (panel->dir_history, panel->widget.x, panel->widget.y);
+	    if (s) {
+		int r;
+		r = do_panel_cd (panel, s, cd_exact);
+		if (r)
+		    directory_history_add (panel, panel->cwd);
+		free (s);
+	    }
+	}
+    }
+}
+
 /* Changes the current panel directory */
 int
 do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
@@ -939,7 +1002,6 @@ do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
     }
 
     /* Success: save previous directory, shutdown status of previous dir */
-    directory_history_add (olddir);
     strcpy (panel->lwd, olddir);
     free_completions (input_w (cmdline));
     
@@ -974,7 +1036,11 @@ do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
 int
 do_cd (char *new_dir, enum cd_enum exact)
 {
-    return do_panel_cd (cpanel, new_dir, exact);
+    int r;
+    r = do_panel_cd (cpanel, new_dir, exact);
+    if (r)
+	directory_history_add (cpanel, cpanel->cwd);
+    return r;
 }
 
 #ifdef HAVE_SUBSHELL_SUPPORT

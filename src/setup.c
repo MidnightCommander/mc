@@ -43,7 +43,6 @@
 #include "menu.h"		/* menubar_visible declaration */
 #include "win.h"		/* lookup_key */
 #include "cmd.h"
-#include "dirhist.h"		/* Directory history routines */
 #include "x.h"
 
 #include "../vfs/vfs.h"
@@ -346,7 +345,7 @@ void save_setup (void)
     save_hotlist ();
     save_panelize ();
     save_panel_types ();
-    directory_history_save ();
+/*     directory_history_save (); */
     
 #ifdef USE_VFS
 #ifdef USE_NETCODE
@@ -518,7 +517,7 @@ void load_setup (void)
 			     color_terminal_string, sizeof (color_terminal_string));
 
     /* Load the directory history */
-    directory_history_load ();
+/*    directory_history_load (); */
     /* Remove the temporal entries */
     profile_clean_section ("Temporal:New Left Panel", profile_name);
     profile_clean_section ("Temporal:New Right Panel", profile_name);
@@ -549,7 +548,7 @@ void done_setup (void)
     free (profile_name);
     done_hotlist ();
     done_panelize ();
-    directory_history_free ();
+/*    directory_history_free (); */
 }
 
 void load_keys_from_section (char *terminal, char *profile_name)

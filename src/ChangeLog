@@ -26,6 +26,21 @@ Sat Mar 28 13:18:36 1998 Alex Tkachenko <alex@bcs.zp.ua>
 	* src/screen.c: (repaint_file) last patches to format_file() in the
 	same file broke appearance of panels in brief mode -- fixed.
 
+Mon Mar 30 20:02:49 1998  Paul Sheer <psheer@obsidian.co.za>
+
+	* main.c, screen.c, dirhist.c, dirhist.h, main.h, widget.c,
+	main.h and others?: Directory history added. The previous
+	directory history code was removed. The directory history now
+	loads and saves using the same routines as the input widget. The
+	keys meta-y, and meta-u are used to go backward and forward
+	through the history. The buttons to the right and left of the
+	current directory display on the panel can be used as well. The
+	v button brings up a history, but no key is assigned to this.
+	Discussion as to correct color and shape of these buttons is
+	open. show_hist() in widget.c is made generic to be called for
+	any widget. Help pages still needed to be added for the
+	directory history.
+
 Wed Mar 25 19:05:31 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* view.c (view_done): Set monitor off before deleting the view

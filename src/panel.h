@@ -3,6 +3,7 @@
 
 #include "dir.h"     /* file_entry */
 #include "dlg.h"
+#include "widget.h"	/* for history loading and saving */
 
 #define LIST_TYPES	4
 
@@ -68,6 +69,8 @@ typedef struct {
     int      active;		/* If panel is currently selected */
     char     cwd [MC_MAXPATHLEN];/* Current Working Directory */
     char     lwd [MC_MAXPATHLEN];/* Last Working Directory */
+    Hist     *dir_history;	/* directory history */
+    char     *hist_name;	/* directory history name for history file */
     int      count;		/* Number of files in dir structure */
     int      marked;		/* Count of marked files */
     int      dirs_marked;	/* Count of marked directories */

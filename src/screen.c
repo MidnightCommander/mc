@@ -744,10 +744,16 @@ show_dir (WPanel *panel)
     if (panel->active)
 	attrset (REVERSE_COLOR);
 
-    widget_move (&panel->widget, 0, 1);
+    widget_move (&panel->widget, 0, 3);
 
-    trim (strip_home_and_password (panel->cwd), tmp, panel->widget.cols-5);
+    trim (strip_home_and_password (panel->cwd), tmp, panel->widget.cols-7);
     addstr (tmp);
+    widget_move (&panel->widget, 0, 1);
+    addstr ("<");
+    widget_move (&panel->widget, 0, panel->widget.cols-2);
+    addstr (">");
+    widget_move (&panel->widget, 0, panel->widget.cols-3);
+    addstr ("v");
     
     if (panel->active)
 	standend ();
@@ -892,11 +898,27 @@ static void
 panel_destroy (WPanel *p)
 {
     int i;
-    
+
     char *name = panel_save_name (p);
 
     panel_save_setup (p, name);
     clean_dir (&p->dir, p->count);
+
+/* save and clean history */
+    if (p->dir_history){
+	Hist *current, *old;
+	history_put (p->hist_name, p->dir_history);
+	current = p->dir_history;
+	while (current->next)
+	    current = current->next;
+	while (current){
+	    old = current;
+	    current = current->prev;
+	    free (old->text);
+	    free (old);
+	}
+    }
+    free (p->hist_name);
 
     delete_format (p->format);
     delete_format (p->status_format);
@@ -916,6 +938,7 @@ panel_format_modified (WPanel *panel)
     x_reset_sort_labels (panel);
 }
 
+void directory_history_add (WPanel * panel, char *s);
 
 /* Panel creation */
 /* The parameter specifies the name of the panel for setup retieving */
@@ -939,6 +962,10 @@ panel_new (char *panel_name)
     
     mc_get_current_wd (panel->cwd, sizeof (panel->cwd)-2);
     strcpy (panel->lwd, ".");
+
+    panel->hist_name = copy_strings ("Dir Hist ", panel_name, 0);
+    panel->dir_history = history_get (panel->hist_name);
+    directory_history_add (panel, panel->cwd);
 
     panel->dir.list    = (file_entry *) malloc (MIN_FILES * sizeof (file_entry));
     panel->dir.size    = MIN_FILES;
@@ -2024,6 +2051,10 @@ chdir_to_readlink (WPanel *panel)
     }
 }
 
+void directory_history_next (WPanel * panel);
+void directory_history_prev (WPanel * panel);
+void directory_history_list (WPanel * panel);
+
 static key_map panel_keymap [] = {
     { KEY_DOWN,   move_down },
     { KEY_UP, 	move_up },
@@ -2063,6 +2094,8 @@ static key_map panel_keymap [] = {
     { ALT('l'),   chdir_to_readlink },
     { KEY_F(13),  view_simple_cmd },
     { KEY_F(14),  edit_cmd_new },
+    { ALT('y'),   directory_history_prev },
+    { ALT('u'),   directory_history_next },
 
 #ifdef HAVE_GNOME
     { '+',        select_cmd },
@@ -2320,6 +2353,21 @@ panel_event (Gpm_Event *event, WPanel *panel)
     
     int my_index;
     extern void change_panel (void);
+
+    if (event->type & GPM_DOWN && event->x == 1 + 1 && event->y == 0 + 1) {
+	directory_history_prev (panel);
+	return MOU_NORMAL;
+    }
+
+    if (event->type & GPM_DOWN && event->x == panel->widget.cols - 2 + 1 && event->y == 0 + 1) {
+	directory_history_next (panel);
+	return MOU_NORMAL;
+    }
+
+    if (event->type & GPM_DOWN && event->x == panel->widget.cols - 3 + 1 && event->y == 0 + 1) {
+	directory_history_list (panel);
+	return MOU_NORMAL;
+    }
 
     event->y -= 2;
     if ((event->type & (GPM_DOWN|GPM_DRAG))){

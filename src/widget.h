@@ -61,6 +61,10 @@ typedef struct hist_entry {
     char   *text;
 } Hist;
 
+Hist *history_get (char *input_name);
+void history_put (char *input_name, Hist *h);
+char *show_hist (Hist *history, int widget_y, int widget_x);
+
 typedef struct {
     Widget widget;
     int  point;			/* cursor position in the input line */

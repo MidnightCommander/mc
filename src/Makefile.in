@@ -21,7 +21,7 @@ SRCS =	dir.c util.c main.c screen.c dialog.c key.c menu.c\
 	wtools.c cons.handler.c chown.c subshell.c terms.c boxes.c \
 	hotlist.c achown.c layout.c fsusage.c mountlist.c regex.c \
 	complete.c slint.c command.c cmd.c panelize.c learn.c \
-	listmode.c utilunix.c background.c dirhist.c rxvt.c popt.c \
+	listmode.c utilunix.c background.c rxvt.c popt.c \
 	text.c
 
 HDRS =	color.h file.h mouse.h user.h dialog.h find.h main.h \
@@ -31,7 +31,7 @@ HDRS =	color.h file.h mouse.h user.h dialog.h find.h main.h \
 	subshell.h view.h setup.h key.h ext.h boxes.h \
 	hotlist.h layout.h fsusage.h mountlist.h regex.h complete.h \
 	myslang.h command.h cmd.h tty.h fs.h panelize.h achown.h \
-	learn.h listmode.h features.inc background.h dirhist.h \
+	learn.h listmode.h features.inc background.h \
 	x.h popt.h textconf.h i18n.h
 
 OBJS =	dir.o util.o screen.o dialog.o key.o menu.o\
@@ -42,7 +42,7 @@ OBJS =	dir.o util.o screen.o dialog.o key.o menu.o\
 	hotlist.o achown.o layout.o fsusage.o mountlist.o \
         @XCURSES@ @REGEX_O@ complete.o slint.o command.o \
 	cmd.o main.o panelize.o learn.o listmode.o utilunix.o \
-	background.o dirhist.o rxvt.o popt.o text.o
+	background.o rxvt.o popt.o text.o
 
 #
 # Distribution variables

@@ -128,6 +128,8 @@ void outrefresh_screen (void);
 void suspend_cmd (void);
 void do_update_prompt (void);
 
+
+
 extern char control_file [];
 extern char *shell;
 
