@@ -6,10 +6,17 @@
 # Run this script in the directory where mc was built.
 
 # TODO:
-#  upload to .in* files, then rename.
 #  build tarball, select level of testing
 #  (dist, distcheck, warning checks)
 
+
+# $1 - file to upload, $2 - shell mask to erase
+function upload() {
+  echo "Uploading $1 to $SITE"
+  name="`basename $1`"
+  scp "$1" "$SITE:$DIR/.in.$name"
+  ssh $SITE "rm -f $DIR/$2; mv $DIR/.in.$name $DIR/$name"
+}
 
 set -e
 
@@ -50,42 +57,15 @@ if test ! -d $MC_BASE_DIR; then
 fi
 rm -f mc-$BASE_VERSION-current.diff mc-$BASE_VERSION-current.diff.bz2
 
-# Don't bother to merge PO-files, we are skipping them in the patch
+# Don't merge PO-files, we are skipping them in the patch
 make distdir MSGMERGE=
 
 # Sometimes GNU diff returns 1 for unclear reasons
 diff -urN -x po $MC_BASE_DIR mc-*/ >mc-$BASE_VERSION-current.diff || :
 bzip2 mc-$BASE_VERSION-current.diff
 
-echo "Copying $MCTARBALL to $SITE"
-scp "$MCTARBALL" "$SITE:$DIR/$MCNAME"
-
-# Remove old tarballs
-MCFILES=`ssh $SITE ls $DIR | egrep '^mc.*\.tar\.gz' | sort | sed '$d'`
-for i in $MCFILES; do
-  echo "Removing $i"
-  ssh $SITE rm -f "$DIR/$i"
-done
-
-echo "Copying $MC_RPM to $SITE"
-scp "$MC_RPM" "$SITE:$DIR/"
-
-# Remove old RPM packages
-MCFILES=`ssh $SITE ls $DIR | egrep '^mc.*\.rpm' | sort | sed '$d'`
-for i in $MCFILES; do
-  echo "Removing $i"
-  ssh $SITE rm -f "$DIR/$i"
-done
-
-echo "Copying $MC_PATCH to $SITE"
-scp "$MC_PATCH" "$SITE:$DIR/"
-
-# Remove old patches
-MCFILES=`ssh $SITE ls $DIR | egrep '^mc.*\.diff\.bz2' | sort | sed '$d'`
-for i in $MCFILES; do
-  echo "Removing $i"
-  ssh $SITE rm -f "$DIR/$i"
-done
-
+upload "$MCTARBALL" "mc*.tar.gz"
+upload "$MC_RPM" "mc*.i386.rpm"
+upload "$MC_PATCH" "mc*.diff.bz2"
 
 echo "Done"
