@@ -111,8 +111,11 @@ static GtkWidget *dnd_proxy_window;
 static int dnd_press_x, dnd_press_y;
 
 /* Whether a call to select_icon() is pending because the initial click on an
- * icon had the GDK_CONTROL_MASK in it.  */
+ * icon needs to be resolved at button release time.  Also, we store the
+ * event->state.
+ */
 static int dnd_select_icon_pending;
+static guint dnd_select_icon_pending_state;
 
 /* Whether the button release signal on a desktop icon should be stopped due to
  * the icon being selected by clicking on the text item.
@@ -868,10 +871,13 @@ icon_event (GnomeCanvasItem *item, GdkEvent *event, gpointer data)
 				    && (!dii->selected || (event->button.state & GDK_SHIFT_MASK)))
 					icon_select_on_text = TRUE;
 
-				if ((event->button.state & GDK_CONTROL_MASK)
-				    && !(event->button.state & GDK_SHIFT_MASK))
+				if ((dii->selected
+				     && !(event->button.state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK)))
+				    || ((event->button.state & GDK_CONTROL_MASK)
+					&& !(event->button.state & GDK_SHIFT_MASK))) {
 					dnd_select_icon_pending = TRUE;
-				else
+					dnd_select_icon_pending_state = event->button.state;
+				} else
 					select_icon (dii, event->button.state);
 
 				retval = TRUE;
@@ -908,8 +914,9 @@ icon_event (GnomeCanvasItem *item, GdkEvent *event, gpointer data)
 		}
 
 		if (dnd_select_icon_pending) {
-			select_icon (dii, GDK_CONTROL_MASK);
+			select_icon (dii, dnd_select_icon_pending_state);
 			dnd_select_icon_pending = FALSE;
+			dnd_select_icon_pending_state = 0;
 			retval = TRUE;
 		}
 		break;
@@ -970,9 +977,10 @@ drag_begin (GtkWidget *widget, GdkDragContext *context, gpointer data)
 
 	if (dnd_select_icon_pending) {
 		if (!dii->selected)
-			select_icon (dii, GDK_CONTROL_MASK);
+			select_icon (dii, dnd_select_icon_pending_state);
 
 		dnd_select_icon_pending = FALSE;
+		dnd_select_icon_pending_state = 0;
 	}
 
 	/* FIXME: see if it is more than one icon and if so, use a multiple-files icon. */

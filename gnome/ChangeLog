@@ -1,5 +1,12 @@
 1999-01-21  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gdesktop.c (icon_event): Also delay the call to select_icon()
+	until button release if the icon is selected and there are no
+	modifier keys pressed.  This lets us perform drags on
+	multi-selections easily.
+
+1999-01-21  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
 	* gdesktop.c (setup_icon_dnd_dest): Always specify ACTION_MOVE,
 	since we want to be able to move the icons around.  Connect to the
 	drag_motion signal.
