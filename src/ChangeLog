@@ -1,3 +1,8 @@
+2001-07-13  Pavel Roskin  <proski@gnu.org>
+
+	* utilunix.c (canonicalize_pathname): Don't handle PATH_SEP
+	after backslash	in a special way.
+
 2001-07-12  Pavel Roskin  <proski@gnu.org>
 
 	* subshell.c (init_subshell): Run "set echo_style=both" at

@@ -637,10 +637,6 @@ char *canonicalize_pathname (char *path)
 	    i = start + 1;
 	}
 
-        /* Handle backquoted `/'. */
-        if (start > 0 && path[start - 1] == '\\')
-	    continue;
-
         /* Check for trailing `/'. */
         if (start && !path[i]) {
 	zero_last:
