@@ -82,9 +82,8 @@ struct archive {
     struct stat local_stat;
     dev_t rdev;
     int fd_usage;
-    ino_t __inode_counter;
+    ino_t inode_counter;
     struct entry *root_entry;
-    struct entry *current_dir;
     struct archive *next;
 };
 
@@ -103,16 +102,17 @@ static char *extfs_prefixes [MAXEXTFS];
 static char extfs_need_archive [MAXEXTFS];
 static int extfs_no = 0;
 
-static void extfs_fill_names (struct vfs_class *me, void (*func)(char *))
+static void
+extfs_fill_names (struct vfs_class *me, void (*func) (char *))
 {
     struct archive *a = first_archive;
     char *name;
-    
-    while (a){
-	name = g_strconcat (a->name ? a->name : "",
-			    "#", extfs_prefixes [a->fstype],
-			    PATH_SEP_STR, a->current_dir->name, NULL);
-	(*func)(name);
+
+    while (a) {
+	name =
+	    g_strconcat (a->name ? a->name : "", "#",
+			 extfs_prefixes[a->fstype], NULL);
+	(*func) (name);
 	g_free (name);
 	a = a->next;
     }
@@ -169,7 +169,7 @@ static struct entry *extfs_generate_entry (struct archive *archive,
     entry->inode = inode;
     inode->local_filename = NULL;
     inode->linkname = 0;
-    inode->inode = (archive->__inode_counter)++;
+    inode->inode = (archive->inode_counter)++;
     inode->dev = archive->rdev;
     inode->archive = archive;
     myumask = umask (022);
@@ -213,7 +213,7 @@ static void extfs_free_archive (struct archive *archive)
 static FILE *
 extfs_open_archive (int fstype, const char *name, struct archive **pparc)
 {
-    static dev_t __extfs_no = 0;
+    static dev_t archive_counter = 0;
     FILE *result;
     mode_t mode;
     char *cmd;
@@ -259,9 +259,9 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
 
     if (local_name != NULL)
 	mc_stat (local_name, &current_archive->local_stat);
-    current_archive->__inode_counter = 0;
+    current_archive->inode_counter = 0;
     current_archive->fd_usage = 0;
-    current_archive->rdev = __extfs_no++;
+    current_archive->rdev = archive_counter++;
     current_archive->next = first_archive;
     first_archive = current_archive;
     mode = mystat.st_mode & 07777;
@@ -279,7 +279,6 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
     root_entry->inode->ctime = mystat.st_ctime;
     root_entry->inode->mtime = mystat.st_mtime;
     current_archive->root_entry = root_entry;
-    current_archive->current_dir = root_entry;
 
     *pparc = current_archive;
 
@@ -372,7 +371,7 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
 		    inode = g_new (struct inode, 1);
 		    entry->inode = inode;
 		    inode->local_filename = NULL;
-		    inode->inode = (current_archive->__inode_counter)++;
+		    inode->inode = (current_archive->inode_counter)++;
 		    inode->nlink = 1;
 		    inode->dev = current_archive->rdev;
 		    inode->archive = current_archive;
@@ -1111,7 +1110,6 @@ static int extfs_chdir (struct vfs_class *me, char *path)
     entry = extfs_resolve_symlinks (entry);
     if ((!entry) || (!S_ISDIR (entry->inode->mode)))
     	return -1;
-    entry->inode->archive->current_dir = entry;
     my_errno = 0;
     return 0;
 }

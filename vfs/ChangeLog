@@ -1,5 +1,8 @@
 2003-10-29  Pavel Roskin  <proski@gnu.org>
 
+	* extfs.c: Remove current_dir field, its role was purely
+	decorative.  Rename names starting with underscore.
+
 	* extfs.h: Merge ...
 	* extfs.c: ... here.
 	* Makefile.am: Remove extfs.h.
