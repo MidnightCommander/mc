@@ -1317,9 +1317,62 @@ load_dnd_icons (void)
 #endif
 }
 
-static void
-widget_connect_dnd_signals (GtkObject *obj, WPanel *panel)
+static int
+panel_clist_button_press (GtkWidget *widget, GdkEventButton *event, WPanel *panel)
 {
+	GtkCList *clist = GTK_CLIST (widget);
+	int icon;
+
+	panel->maybe_start_drag = event->button;
+	
+	panel->click_x = event->x;
+	panel->click_y = event->y;
+
+	return FALSE;
+}
+
+static int
+panel_clist_button_release (GtkWidget *widget, GdkEventButton *event, WPanel *panel)
+{
+	GtkCList *clist = GTK_CLIST (widget);
+
+	panel->maybe_start_drag = 0;
+	return FALSE;
+}
+
+#define MAX(a,b) ((a > b) ? a : b)
+
+static int
+panel_widget_motion (GtkWidget *widget, GdkEventMotion *event, WPanel *panel)
+{
+	GtkTargetList *list;
+	GdkDragAction action;
+	GdkDragContext *context;
+	
+	if (!panel->maybe_start_drag)
+		return FALSE;
+
+	if (panel->maybe_start_drag == 3)
+		return FALSE;
+	
+	if ((abs (event->x - panel->click_x) < 4) || 
+	    (abs (event->y - panel->click_y) < 4))
+		return FALSE;
+	
+	list = gtk_target_list_new (drag_types, ELEMENTS (drag_types));
+
+	/* Control+Shift = LINK */
+	if ((event->state & (GDK_SHIFT_MASK|GDK_CONTROL_MASK)) == (GDK_SHIFT_MASK|GDK_CONTROL_MASK))
+		action = GDK_ACTION_LINK;
+	else if (event->state & (GDK_SHIFT_MASK))
+		action = GDK_ACTION_MOVE;
+	else
+		action = GDK_ACTION_COPY;
+		
+	context = gtk_drag_begin (widget, list, action, panel->maybe_start_drag, (GdkEvent *) event);
+	gtk_drag_set_icon_default (context);
+	
+	return FALSE;
 }
 
 /*
@@ -1335,9 +1388,6 @@ panel_clist_realized (GtkWidget *file_list, WPanel *panel)
 
 	load_dnd_icons ();
 
-	gtk_drag_source_set (GTK_WIDGET (file_list), GDK_BUTTON1_MASK,
-			     drag_types, ELEMENTS (drag_types), GDK_ACTION_COPY);
-
 	gtk_drag_dest_set (GTK_WIDGET (obj), GTK_DEST_DEFAULT_ALL,
 			   drop_types, ELEMENTS (drop_types),
 			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
@@ -1349,21 +1399,19 @@ panel_clist_realized (GtkWidget *file_list, WPanel *panel)
 	gtk_signal_connect (obj, "drag_data_received",
 			    GTK_SIGNAL_FUNC (panel_clist_drag_data_received), panel);
 
-#if OLD_DND
-	/* DND: Drag setup */
-	gtk_signal_connect (obj, "drag_request_event", GTK_SIGNAL_FUNC (panel_clist_drag_request), panel);
-	gtk_signal_connect (obj, "drag_begin_event",   GTK_SIGNAL_FUNC (panel_drag_begin), panel);
+	/*
+	 * These implement our drag-start activation code.  We need to manually
+	 * activate the drag as the DnD code in Gtk+ will make the scrollbars 
+	 * in the CList activate drags when they are moved. 
+	 */
+	gtk_signal_connect (obj, "button_press_event",
+			    GTK_SIGNAL_FUNC (panel_clist_button_press), panel);
 
-	gdk_window_dnd_drag_set (GTK_CLIST (file_list)->clist_window, TRUE, drag_types, ELEMENTS (drag_types));
- 
-	/* DND: Drop setup */
-	gtk_signal_connect (obj, "drop_data_available_event", GTK_SIGNAL_FUNC (panel_clist_drop_data_available), panel);
+	gtk_signal_connect (obj, "button_release_event",
+			    GTK_SIGNAL_FUNC (panel_clist_button_release), panel);
 
-	/* Artificial way of getting drag to start without leaving the widget boundary */
 	gtk_signal_connect (obj, "motion_notify_event",
-			    GTK_SIGNAL_FUNC (panel_artificial_drag_start), panel);
-	gdk_window_dnd_drop_set (GTK_CLIST (file_list)->clist_window, TRUE, drop_types, ELEMENTS (drop_types), FALSE);
-#endif
+			    GTK_SIGNAL_FUNC (panel_widget_motion), panel);
 }
 
 /*
@@ -1579,46 +1627,8 @@ static int
 panel_icon_list_button_release (GtkWidget *widget, GdkEventButton *event, WPanel *panel)
 {
 	GnomeIconList *gil = GNOME_ICON_LIST (widget);
-	int icon;
 
-	icon = gnome_icon_list_get_icon_at (gil, event->x, event->y);
-
-	panel->maybe_start_drag = FALSE;
-	return FALSE;
-}
-
-#define MAX(a,b) ((a > b) ? a : b)
-
-static int
-panel_icon_list_motion (GtkWidget *widget, GdkEventMotion *event, WPanel *panel)
-{
-	GtkTargetList *list;
-	GdkDragAction action;
-	GdkDragContext *context;
-	
-	if (!panel->maybe_start_drag)
-		return FALSE;
-
-	if (panel->maybe_start_drag == 3)
-		return FALSE;
-	
-	if ((abs (event->x - panel->click_x) < 4) || 
-	    (abs (event->y - panel->click_y) < 4))
-		return FALSE;
-	
-	list = gtk_target_list_new (drag_types, ELEMENTS (drag_types));
-
-	/* Control+Shift = LINK */
-	if ((event->state & (GDK_SHIFT_MASK|GDK_CONTROL_MASK)) == (GDK_SHIFT_MASK|GDK_CONTROL_MASK))
-		action = GDK_ACTION_LINK;
-	else if (event->state & (GDK_SHIFT_MASK))
-		action = GDK_ACTION_MOVE;
-	else
-		action = GDK_ACTION_COPY;
-		
-	context = gtk_drag_begin (widget, list, action, panel->maybe_start_drag, (GdkEvent *) event);
-	gtk_drag_set_icon_default (context);
-	
+	panel->maybe_start_drag = 0;
 	return FALSE;
 }
 
@@ -1655,7 +1665,7 @@ panel_icon_list_realized (GtkObject *obj, WPanel *panel)
 			    GTK_SIGNAL_FUNC (panel_icon_list_button_release), panel);
 
 	gtk_signal_connect (obj, "motion_notify_event",
-			    GTK_SIGNAL_FUNC (panel_icon_list_motion), panel);
+			    GTK_SIGNAL_FUNC (panel_widget_motion), panel);
 
 #ifdef OLD_DND
 	/* DND: Drag setup */
