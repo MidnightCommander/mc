@@ -1523,39 +1523,39 @@ Panel Options, Pause after run and Other Options.
 .B Panel Options
 .PP
 .I Show Backup Files.
-By default the Midnight Commander doesn't show files ending in '~'
-(like GNU's ls option -B).
+If enabled, the Midnight Commander will show files ending with a tilde.
+Otherwise, they won't be shown (like GNU's ls option -B).
 .PP
 .I Show Hidden Files.
-By default the Midnight Commander will show all files that start with
+If enabled, the Midnight Commander will show all files that start with
 a dot (like ls -a).
 .PP
 .I Mark moves down.
-By default when you mark a file (with either C-t or the Insert key)
-the selection bar will move down.
+If enabled, the selection bar will move down when you mark a file (with
+either C-t or the Insert key).
 .PP
 .I Drop down menus.
-When this option is enabled, when you press the 
+When this option is enabled, the pull down menus will be activated as
+soon as you press the 
 .B F9
-key, the pull down menus will be activated, else, you will
-only be presented with the menu title, and you will have
-to select the entry with the arrow keys or the first
-letter and from there select your option in the menu.
+key.  Otherwise, you will only get the menu title, and you will have
+to activate the menu either with the arrow keys or with the hotkeys.
+It is recommanded if you are using hotkeys.
 .PP
 .I Mix all files.
-When this option is enabled, all files and directories are shown mixed
+If this option is enabled, all files and directories are shown mixed
 together.  If the option is off, directories (and links to directories)
 are shown at the beginning of the listing, and other files below.
 .PP
 .I Fast directory reload.
-This option is off by default. If you activate the fast reload, the
-Midnight Commander will use a trick to determine if the directory
-contents have changed. The trick is to reload the directory only if
-the i-node of the directory has changed; this means that reloads only
-happen when files are created or deleted. If what changes is the
-i-node for a file in the directory (file size changes, mode or owner
-changes, etc) the display is not updated. In these cases, if you have
-the option on, you have to rescan the directory manually (with C-r).
+If this option is enabled, the Midnight Commander will use a trick to
+determine if the directory contents have changed.  The trick is to reload
+the directory only if the i-node of the directory has changed; this means
+that reloads only happen when files are created or deleted.  If what
+changes is the i-node for a file in the directory (file size changes,
+mode or owner changes, etc) the display is not updated.  In these cases,
+if you have the option on, you have to rescan the directory manually
+(with C-r).
 .PP
 .B Pause after run
 .PP
