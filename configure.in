@@ -1423,6 +1423,7 @@ xv/Makefile
 src/Makefile
 slang/Makefile 
 edit/Makefile 
+gtkedit/Makefile 
 icons/Makefile 
 
 lib/mc.ext
