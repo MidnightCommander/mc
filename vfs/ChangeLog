@@ -1,3 +1,9 @@
+2002-09-13  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* smbfs.c (smbfs_set_debugf): New function to specify
+	logfile.
+	* smbfs.h: Declare smbfs_set_debugf().
+
 2002-09-12  Pavel Roskin  <proski@gnu.org>
 
 	* mcserv.c: Declare crypt if crypt.h is missing and we are not

@@ -20,7 +20,7 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-/* Namespace: exports vfs_smbfs_ops, smbfs_set_debug */
+/* Namespace: exports vfs_smbfs_ops, smbfs_set_debug(), smbfs_set_debugf() */
 #include <config.h>
 #include <stdio.h>
 #include <sys/types.h>
@@ -250,9 +250,25 @@ bucket_set_authinfo (smbfs_connection *bucket,
 }
 
 void
-smbfs_set_debug(int arg)
+smbfs_set_debug (int arg)
 {
-	DEBUGLEVEL = arg;
+    DEBUGLEVEL = arg;
+}
+
+void
+smbfs_set_debugf (const char *filename)
+{
+    extern pstring debugf;
+    extern FILE *dbf;
+    if (DEBUGLEVEL > 0) {
+	FILE *outfile = fopen (filename, "w");
+	if (outfile) {
+	    setup_logging ("", True);	/* No needs for timestamp for each message */
+	    dbf = outfile;
+	    setbuf (dbf, NULL);
+	    pstrcpy (debugf, filename);
+	}
+    }
 }
 
 /********************** The callbacks ******************************/
@@ -263,7 +279,6 @@ smbfs_init (vfs * me)
 
     /*  DEBUGLEVEL = 4; */
 
-    setup_logging ("mc", True);
     TimeInit ();
     charset_initialise ();
 
