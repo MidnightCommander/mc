@@ -27,9 +27,6 @@
 
 #include <stdio.h>
 
-int
-interrupts_enabled (void) { return 0; }
-
 void
 enable_interrupt_key(void) {}
    
@@ -44,53 +41,7 @@ void
 slang_init (void) {}
 
 void
-slang_set_raw_mode (void) {}
-
-void
-slang_prog_mode (void) {}
-
-void
-slang_shell_mode (void) {}
-
-void
-slang_shutdown () {}
-
-void
-slang_keypad (int set) {}
-
-void
-set_slang_delay (int v) {}
-
-void
-hline (int ch, int len) {}
-
-void
-vline (int character, int len) {}
-
-#ifndef HAVE_GNOME
-void
-init_pair (int index, char *foreground, char *background) {}
-#endif
-
-int has_colors ()
-{
-    return 1;
-}
-
-void
 attrset (int color) { }
-
-void
-do_define_key (int code, char *strcap) {}
-
-void
-load_terminfo_keys () {}
-
-int
-getch ()
-{
-    return getchar ();
-}
 
 void
 mc_refresh (void)

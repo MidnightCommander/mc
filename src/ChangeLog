@@ -1,5 +1,7 @@
 2001-05-28  Pavel Roskin  <proski@gnu.org>
 
+	* xslint.c: Remove unused functions.
+
 	* color.c (init_colors) [HAVE_SLANG]: Use SLtt_set_color() to
 	associate the default colors with DEFAULT_COLOR_INDEX. The old
 	code would unset alternative charset without making S-Lang aware
