@@ -683,7 +683,7 @@ display_mini_info (WPanel *panel)
 	return;
     }
 #endif
-    /* Default behaviour */
+    /* Default behavior */
     repaint_file (panel, panel->selected, 0, STATUS, 1);
     return;
 }
@@ -2192,7 +2192,7 @@ panel_callback (WPanel *panel, int msg, int par)
 	define_label (h, 8, _("Delete"), delete_cmd);
 	redraw_labels (h);
 
-	/* Chain behaviour */
+	/* Chain behavior */
 	default_proc (WIDGET_FOCUS, par);
 	return 1;
 

@@ -308,7 +308,7 @@ check_hardlinks (char *src_name, char *dst_name, struct stat *pstat)
     struct stat link_stat;
     char *p;
 
-#if 1				/* What will happen if we kill this line? mc_link() will fail on this and it is right behaviour... */
+#if 1				/* What will happen if we kill this line? mc_link() will fail on this and it is right behavior... */
     if (vfs_file_is_ftp (src_name) || vfs_file_is_smb (src_name))
 	return 0;
 #endif
@@ -983,7 +983,7 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
  *  I'm afraid this will lead into a two level deep dive :(
  *
  * I think this is indeed the problem.  I cannot remember any case where
- * we actually would like that behaviour -miguel
+ * we actually would like that behavior -miguel
  *
  * It's a documented feature (option `Dive into subdir if exists' in the
  * copy/move dialog). -Norbert

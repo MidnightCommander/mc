@@ -246,10 +246,10 @@ real_message_3s (enum OperationMode mode, int *flags, char *title,
  *
  * If the return type is a string:
  *
- *     the parent writes the resulting string lenght
+ *     the parent writes the resulting string length
  *     if the result string was NULL or the empty string,
- *     then the lenght is zero.
- *     The parent then writes the string lenght and frees
+ *     then the length is zero.
+ *     The parent then writes the string length and frees
  *     the result string.
  */
 /*

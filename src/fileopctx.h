@@ -89,7 +89,7 @@ typedef struct {
 	 * subdirectories were processed.
 	 *
 	 * If erase_at_end is zero files will be deleted immediately after their
-	 * successful copy (Note: this behaviour is not tested and at the moment
+	 * successful copy (Note: this behavior is not tested and at the moment
 	 * it can't be changed at runtime).
 	 */
 	int erase_at_end;

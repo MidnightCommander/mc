@@ -704,7 +704,7 @@ static void draw_history_button (WInput * in)
 	Dlg_head *h;
 	h = in->widget.parent;
 #if 0
-	attrset (NORMALC);	/* button has the same colour as other buttons */
+	attrset (NORMALC);	/* button has the same color as other buttons */
 	addstr ("[ ]");
 	attrset (HOT_NORMALC);
 #else
