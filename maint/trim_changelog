@@ -30,12 +30,10 @@ while (<CHANGELOG>) {
 	s/\s*$//;
 
 	# Make sure there are exactly 2 spaces before the e-mail.
-	s/(^\w.*\w)\s+</$1  </;
+	s/(^\w.*[^\s])\s+</$1  </;
 
 	# Make sure there are exactly 2 spaces after numeric dates.
-	if (/[0-9]+-[0-9]+-[0-9]+\w/) {
-		s/(^[0-9-]+)\s+/$1  /;
-	}
+	s/(^[0-9]+-[0-9-]+)\s+/$1  /;
 
 	# Up to 7 spaces and tab or up to 8 spaces -> tab.
 	if (/^( {1,7}\t| {1,8})(.*)/) {
