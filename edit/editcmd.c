@@ -2347,6 +2347,10 @@ int edit_sort_cmd (WEdit * edit)
     return 0;
 }
 
+/*
+ * Ask user for a command, execute it and paste its output back to the
+ * editor.
+ */
 int
 edit_ext_cmd (WEdit *edit)
 {
