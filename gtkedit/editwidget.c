@@ -137,7 +137,7 @@ static void move_mark (WEdit *edit)
     edit_mark_cmd (edit, 0);
 }
 
-static void release_mark (WEdit *edit, XEvent *event)
+static void release_mark (WEdit * edit, XEvent * event)
 {
     if (edit->mark2 < 0)
 	edit_mark_cmd (edit, 0);
@@ -146,13 +146,21 @@ static void release_mark (WEdit *edit, XEvent *event)
     if (edit->mark1 != edit->mark2 && event) {
 	edit_get_selection (edit);
 #ifdef GTK
+	{
 #if 0
-/* *** */
-	gtk_set_selection_owner (CWindowOf (edit->widget));
+	    long start_mark = 0, end_mark = 0;
+	    edit->widget->editable.has_selection = !eval_marks (edit, &start_mark, &end_mark);
+	    edit->widget->editable.selection_start_pos = start_mark;
+	    edit->widget->editable.selection_end_pos = end_mark;
+	    if (edit->widget->editable.has_selection)
 #endif
+		gtk_selection_owner_set (GTK_WIDGET (edit->widget), GDK_SELECTION_PRIMARY, GDK_CURRENT_TIME);
+	}
 #else
 	XSetSelectionOwner (CDisplay, XA_PRIMARY, CWindowOf (edit->widget), event->xbutton.time);
 #endif
+    } else {
+	edit->widget->editable.has_selection = TRUE;
     }
 }
 
@@ -589,6 +597,7 @@ void selection_send (XSelectionRequestEvent * rq)
 
 /*{{{ paste selection */
 
+#ifndef GTK
 /*
  * Respond to a notification that a primary selection has been sent
  */
@@ -606,20 +615,6 @@ void paste_prop (void *data, void (*insert) (void *, int), Window win, unsigned 
 	Atom actual_type;
 	int actual_fmt, i;
 	unsigned long nitems;
-
-#ifdef GTK
-#if 0
-/* *** */
-	if (gtk_get_window_property (win, prop,
-				nread / 4, 65536, delete,
-			      AnyPropertyType, &actual_type, &actual_fmt,
-				&nitems, &bytes_after,
-				&s) != Success) {
-	    XFree (s);
-	    return;
-	}
-#endif
-#else
 	if (XGetWindowProperty (CDisplay, win, prop,
 				nread / 4, 65536, delete,
 			      AnyPropertyType, &actual_type, &actual_fmt,
@@ -628,7 +623,6 @@ void paste_prop (void *data, void (*insert) (void *, int), Window win, unsigned 
 	    XFree (s);
 	    return;
 	}
-#endif
 	nread += nitems;
 	for (i = 0; i < nitems; i++)
 	    (*insert) (data, s[i]);
@@ -646,6 +640,8 @@ void selection_paste (WEdit * edit, Window win, unsigned prop, int delete)
     edit_cursor_move (edit, c - edit->curs1);
     edit->force |= REDRAW_COMPLETELY | REDRAW_LINE;
 }
+
+#endif
 
 /*}}} */
 

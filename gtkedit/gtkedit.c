@@ -1,4 +1,5 @@
-/* gtkedit.c - front end for gtk/gnome version
+/* gtkedit.c -
+ front end for gtk/gnome version
 
    Copyright (C) 1996, 1997 the Free Software Foundation
 
@@ -533,6 +534,7 @@ static gint
     GtkEdit *edit;
     GtkEditable *editable;
     static GdkAtom ctext_atom = GDK_NONE;
+    long start_mark = 0, end_mark = 0;
 
     g_return_val_if_fail (widget != NULL, FALSE);
     g_return_val_if_fail (GTK_IS_EDIT (widget), FALSE);
@@ -573,6 +575,14 @@ static gint
     xevent.xbutton.state = event->state;
 
     edit_mouse_mark (edit->editor, &xevent, double_click);
+
+    editable->current_pos = edit->editor->curs1;
+    editable->has_selection = !eval_marks (edit->editor, &start_mark, &end_mark);
+    editable->selection_start_pos = start_mark;
+    editable->selection_end_pos = end_mark;
+    if (event->type == GDK_BUTTON_PRESS && event->button == 2)
+	gtk_selection_convert (GTK_WIDGET (edit), GDK_SELECTION_PRIMARY,
+			       ctext_atom, event->time);
     return FALSE;
 }
 
@@ -691,6 +701,67 @@ static void get_home_dir (void)
     abort ();
 }
 
+static gchar *gtk_edit_get_chars (GtkEditable * editable,
+				  gint start_pos,
+				  gint end_pos)
+{
+    GtkEdit *edit;
+    gchar *retval;
+    int i;
+    g_return_val_if_fail (editable != NULL, NULL);
+    g_return_val_if_fail (GTK_IS_EDIT (editable), NULL);
+    edit = GTK_EDIT (editable);
+    if (end_pos < 0)
+	end_pos = edit->editor->last_byte;
+    if ((start_pos < 0) ||
+	(end_pos > edit->editor->last_byte) ||
+	(end_pos < start_pos))
+	return 0;
+    retval = malloc (end_pos - start_pos + 1);
+    retval[end_pos - start_pos] = '\0';
+    for (i = 0; start_pos < end_pos; start_pos++, i++)
+	retval[i] = (gchar) edit_get_byte (edit->editor, start_pos);
+    return retval;
+}
+
+static void gtk_edit_set_selection (GtkEditable * editable,
+				    gint start,
+				    gint end)
+{
+    GtkEdit *edit = GTK_EDIT (editable);
+    guint start1, end1, start2, end2;
+    if (end < 0)
+	end = edit->editor->last_byte;
+    start1 = MIN (start, end);
+    end1 = MAX (start, end);
+    start2 = MIN (editable->selection_start_pos, editable->selection_end_pos);
+    end2 = MAX (editable->selection_start_pos, editable->selection_end_pos);
+    if (start2 < start1) {
+	guint tmp;
+	tmp = start1;
+	start1 = start2;
+	start2 = tmp;
+	tmp = end1;
+	end1 = end2;
+	end2 = tmp;
+    }
+    editable->selection_start_pos = start;
+    editable->selection_end_pos = end;
+    editable->has_selection = TRUE;
+    return;
+}
+
+static void gtk_edit_insert_text (GtkEditable * editable,
+				  const gchar * new_text,
+				  gint new_text_length,
+				  gint * position)
+{
+    GtkEdit *edit = GTK_EDIT (editable);
+    edit_cursor_move (edit->editor, *position - edit->editor->curs1);
+    while (new_text_length--)
+	edit_insert_ahead (edit->editor, new_text[new_text_length]);
+    *position = edit->editor->curs1;
+}
 
 static void gtk_edit_class_init (GtkEditClass * class)
 {
@@ -726,19 +797,19 @@ static void gtk_edit_class_init (GtkEditClass * class)
     widget_class->focus_in_event = 0;
     widget_class->focus_out_event = 0;
 
-#if 0
     editable_class->insert_text = gtk_edit_insert_text;
+#if 0
     editable_class->delete_text = gtk_edit_delete_text;
     editable_class->update_text = gtk_edit_update_text;
-    editable_class->get_chars = gtk_edit_get_chars;
-    editable_class->set_selection = gtk_edit_set_selection;
-#endif
-    editable_class->set_position = gtk_edit_set_position;
-
-    editable_class->insert_text = 0;
+#else
     editable_class->delete_text = 0;
     editable_class->update_text = 0;
-    editable_class->get_chars = 0;
+#endif
+
+    editable_class->get_chars = gtk_edit_get_chars;
+    editable_class->set_selection = gtk_edit_set_selection;
+    editable_class->set_position = gtk_edit_set_position;
+
 
 #if 0
     editable_class->set_position = 0;

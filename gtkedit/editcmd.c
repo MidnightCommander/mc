@@ -2435,12 +2435,10 @@ int edit_copy_to_X_buf_cmd (WEdit * edit)
 	return 1;
     }
 #ifdef GTK
-#if 0
-    gtk_set_selection_owner (CWindowOf (edit->widget));
-#else
-    /* *** */
-    printf ("gtk_set_selection_owner\n");
-#endif
+    gtk_selection_owner_set (GTK_WIDGET (edit->widget), GDK_SELECTION_PRIMARY, GDK_CURRENT_TIME);
+    edit->widget->editable.selection_start_pos = start_mark;
+    edit->widget->editable.selection_end_pos = end_mark;
+    edit->widget->editable.has_selection = TRUE;
 #else
     XSetSelectionOwner (CDisplay, XA_PRIMARY, CWindowOf (edit->widget), CurrentTime);
 #endif
@@ -2455,16 +2453,15 @@ int edit_cut_to_X_buf_cmd (WEdit * edit)
 	return 0;
     edit_XStore_block (edit, start_mark, end_mark);
     if (!edit_save_block_to_clip_file (edit, start_mark, end_mark)) {
-	edit_error_dialog (_(" Cut to clipboard "), _(" Unable to save to file. "));
+	edit_error_dialog (_ (" Cut to clipboard "), _ (" Unable to save to file. "));
 	return 1;
     }
     edit_block_delete_cmd (edit);
 #ifdef GTK
-#if 0
-    gtk_set_selection_owner (CWindowOf (edit->widget));
-#else
-    printf ("gtk_set_selection_owner\n");
-#endif
+    gtk_selection_owner_set (GTK_WIDGET (edit->widget), GDK_SELECTION_PRIMARY, GDK_CURRENT_TIME);
+    edit->widget->editable.selection_start_pos = start_mark;
+    edit->widget->editable.selection_end_pos = end_mark;
+    edit->widget->editable.has_selection = TRUE;
 #else
     XSetSelectionOwner (CDisplay, XA_PRIMARY, CWindowOf (edit->widget), CurrentTime);
 #endif
@@ -2487,11 +2484,8 @@ void edit_paste_from_X_buf_cmd (WEdit * edit)
 #endif
     else
 #ifdef GTK
-#if 0
-    gtk_convert_selection ();
-#else
-    /* *** */
-#endif
+	gtk_selection_convert (GTK_WIDGET (edit->widget), GDK_SELECTION_PRIMARY,
+	     gdk_atom_intern ("COMPOUND_TEXT", FALSE), GDK_CURRENT_TIME);
 #else
 	XConvertSelection (CDisplay, XA_PRIMARY, XA_STRING,
 			   XInternAtom (CDisplay, "VT_SELECTION", False),

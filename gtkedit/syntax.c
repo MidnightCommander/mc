@@ -956,7 +956,7 @@ void edit_free_syntax_rules (WEdit * edit)
     syntax_free (edit->rules);
 }
 
-#define CURRENT_SYNTAX_RULES_VERSION "43"
+#define CURRENT_SYNTAX_RULES_VERSION "44"
 
 char *syntax_text[] = {
 "# syntax rules version " CURRENT_SYNTAX_RULES_VERSION,
@@ -1050,9 +1050,6 @@ char *syntax_text[] = {
 "",
 "###############################################################################",
 "file ..\\*\\\\.sh$ Shell\\sScript ^#!\\s\\*/.\\*/(ksh|bash|sh|pdkzsh)$",
-"",
-"wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._",
-"wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._",
 "",
 "context default",
 "    keyword whole for yellow/24",
@@ -1170,6 +1167,9 @@ char *syntax_text[] = {
 "",
 "    keyword wholeleft function*() brightblue/11",
 "",
+"wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._",
+"wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._",
+"",
 "    keyword whole arch cyan/14",
 "    keyword whole ash cyan/14",
 "    keyword whole awk cyan/14",
@@ -1258,6 +1258,9 @@ char *syntax_text[] = {
 "    keyword whole ypdomainname cyan/14",
 "    keyword whole zcat cyan/14",
 "    keyword whole zsh cyan/14",
+"",
+"wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_",
+"wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_",
 "",
 "context # \\n brown/22",
 "",
@@ -1451,6 +1454,9 @@ char *syntax_text[] = {
 "    keyword wholeright $+9 brightgreen/16",
 "",
 "    keyword $ brightgreen/16",
+"",
+"wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._",
+"wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._",
 "",
 "    keyword whole arch cyan/14",
 "    keyword whole ash cyan/14",
