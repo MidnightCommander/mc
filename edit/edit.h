@@ -235,6 +235,8 @@ struct context_rule {
     char *whole_word_chars_left;
     char *whole_word_chars_right;
     unsigned char *conflicts;
+    char *keyword_first_chars;
+    char *keyword_last_chars;
 /* first word is word[1] */
     struct key_word **keyword;
 };

@@ -1,3 +1,8 @@
+Sat Apr 25 13:41:43 1998  Paul Sheer  <psheer@obsidian.co.za>
+
+	* edit.h, syntax.h: some optimisations to improve syntax
+	highlighting speed.
+
 1998-04-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* color.h: Move the CTYPE definition 

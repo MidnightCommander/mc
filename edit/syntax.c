@@ -206,17 +206,18 @@ static unsigned long apply_rules_going_right (WEdit * edit, long i, unsigned lon
     }
 /* check to turn on a keyword */
     if (!keyword) {
-	int count;
-	r = edit->rules[context];
-	for (count = 1; r->keyword[count]; count++) {
+	char *p;
+	p = (r = edit->rules[context])->keyword_first_chars;
+	while ((p = strchr (p + 1, c2))) {
 	    struct key_word *k;
+	    int count;
+	    count = (unsigned long) p - (unsigned long) r->keyword_first_chars;
 	    k = r->keyword[count];
-	    if (k->first == c2)
-		if (compare_word_to_right (edit, i, k->keyword, k->whole_word_chars_left, k->whole_word_chars_right, k->line_start)) {
-		    keyword = count;
-		    debug_printf ("keyword=%d ", keyword);
-		    break;
-		}
+	    if (compare_word_to_right (edit, i, k->keyword, k->whole_word_chars_left, k->whole_word_chars_right, k->line_start)) {
+		keyword = count;
+		debug_printf ("keyword=%d ", keyword);
+		break;
+	    }
 	}
     }
     debug_printf ("border=%s ", border ? ((border & RULE_ON_LEFT_BORDER) ? "left" : "right") : "off");
@@ -338,10 +339,12 @@ static unsigned long apply_rules_going_left (WEdit * edit, long i, unsigned long
     }
 /* check to turn on a keyword */
     if (!keyword) {
-	int count;
-	r = edit->rules[context];
-	for (count = 1; r->keyword[count]; count++) {
+	char *p;
+	p = (r = edit->rules[context])->keyword_last_chars;
+	while ((p = strchr (p + 1, c1))) {
 	    struct key_word *k;
+	    int count;
+	    count = (unsigned long) p - (unsigned long) r->keyword_last_chars;
 	    k = r->keyword[count];
 	    if (k->last == c1 && compare_word_to_left (edit, i, k->keyword, k->whole_word_chars_left, k->whole_word_chars_right, k->line_start)) {
 		keyword = count;
@@ -697,7 +700,6 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 	result = line;
 	return result;
     }
-
     for (i = 1; edit->rules[i]; i++) {
 	for (j = i + 1; edit->rules[j]; j++) {
 	    if (strstr (edit->rules[j]->right, edit->rules[i]->right) && strcmp (edit->rules[i]->right, "\n")) {
@@ -707,6 +709,26 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 		s = edit->rules[i]->conflicts;
 		s[strlen ((char *) s)] = (unsigned char) j;
 	    }
+	}
+    }
+
+    {
+	char first_chars[1024], *p;
+	char last_chars[1024], *q;
+	for (i = 0; edit->rules[i]; i++) {
+	    c = edit->rules[i];
+	    p = first_chars;
+	    q = last_chars;
+	    *p++ = (char) 1;
+	    *q++ = (char) 1;
+	    for (j = 1; c->keyword[j]; j++) {
+		*p++ = c->keyword[j]->first;
+		*q++ = c->keyword[j]->last;
+	    }
+	    *p = '\0';
+	    *q = '\0';
+	    c->keyword_first_chars = strdup (first_chars);
+	    c->keyword_last_chars = strdup (last_chars);
 	}
     }
 
@@ -749,6 +771,8 @@ void edit_free_syntax_rules (WEdit * edit)
 	syntax_free (edit->rules[i]->whole_word_chars_left);
 	syntax_free (edit->rules[i]->whole_word_chars_right);
 	syntax_free (edit->rules[i]->keyword);
+	syntax_free (edit->rules[i]->keyword_first_chars);
+	syntax_free (edit->rules[i]->keyword_last_chars);
 	syntax_free (edit->rules[i]);
     }
     syntax_free (edit->rules);
