@@ -1299,9 +1299,6 @@ move_backward2_textmode_wrap (WView * view, offset_type current, int lines)
 static offset_type
 move_backward2 (WView *view, offset_type current, int lines)
 {
-    offset_type p, q, pm;
-    int line;
-
     if (view->hex_mode) {
     	if (view->edit_cursor >= lines * view->bytes_per_line) {
     	    view->edit_cursor -= lines * view->bytes_per_line;
