@@ -656,6 +656,7 @@ static void *extfs_open (vfs *me, char *file, int flags, int mode)
 	    return NULL;
 	close (handle);
 
+	/* FIXME: should not need it if O_TRUNK is present in flags */
 	if (extfs_cmd
 	    (" copyout ", archive, entry, entry->inode->local_filename)
 	    && !created) {
