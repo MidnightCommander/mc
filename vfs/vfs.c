@@ -603,43 +603,66 @@ int mc_fstat (int handle, struct stat *buf) {
 }
 
 /*
- * You must g_strdup whatever this function returns.
+ * Return current directory.  If it's local, reread the current directory
+ * from the OS.  You must g_strdup whatever this function returns.
  */
-
 static const char *
-mc_return_cwd (void)
+_vfs_get_cwd (void)
 {
     char *p;
     struct stat my_stat, my_stat2;
 
-    if (!vfs_rosplit (current_dir)){
+    if (!vfs_rosplit (current_dir)) {
 	p = g_get_current_dir ();
-	if (!p)  /* One of the directories in the path is not readable */
+	if (!p)			/* One of the directories in the path is not readable */
 	    return current_dir;
 
 	/* Otherwise check if it is O.K. to use the current_dir */
-	if (!cd_symlinks ||
-	    mc_stat (p, &my_stat) || 
-	    mc_stat (current_dir, &my_stat2) ||
-	    my_stat.st_ino != my_stat2.st_ino ||
-	    my_stat.st_dev != my_stat2.st_dev){
+	if (!cd_symlinks || mc_stat (p, &my_stat)
+	    || mc_stat (current_dir, &my_stat2)
+	    || my_stat.st_ino != my_stat2.st_ino
+	    || my_stat.st_dev != my_stat2.st_dev) {
 	    g_free (current_dir);
 	    current_dir = p;
 	    return p;
-	} /* Otherwise we return current_dir below */
+	}			/* Otherwise we return current_dir below */
 	g_free (p);
-    } 
+    }
     return current_dir;
 }
 
+static void
+vfs_setup_wd (void)
+{
+    current_dir = g_strdup (PATH_SEP_STR);
+    if (!(vfs_flags & FL_NO_CWDSETUP))
+	_vfs_get_cwd ();
+
+    if (strlen (current_dir) > MC_MAXPATHLEN - 2)
+	vfs_die ("Current dir too long.\n");
+}
+
+/*
+ * Return current directory.  If it's local, reread the current directory
+ * from the OS.  Put directory to the provided buffer.
+ */
 char *
 mc_get_current_wd (char *buffer, int size)
 {
-    const char *cwd = mc_return_cwd();
+    const char *cwd = _vfs_get_cwd ();
 
     strncpy (buffer, cwd, size - 1);
-    buffer [size - 1] = 0;
+    buffer[size - 1] = 0;
     return buffer;
+}
+
+/*
+ * Return current directory without any OS calls.
+ */
+char *
+vfs_get_current_dir (void)
+{
+    return current_dir;
 }
 
 MC_NAMEOP (chmod, (char *path, int mode), (vfs, path, mode))
@@ -973,21 +996,6 @@ vfs_file_is_smb (char *filename)
 #endif /* USE_NETCODE */
 #endif /* WITH_SMBFS */
     return 0;
-}
-
-char *vfs_get_current_dir (void)
-{
-    return current_dir;
-}
-
-static void vfs_setup_wd (void)
-{
-    current_dir = g_strdup (PATH_SEP_STR);
-    if (!(vfs_flags & FL_NO_CWDSETUP))
-        mc_return_cwd();
-
-    if (strlen(current_dir)>MC_MAXPATHLEN-2)
-        vfs_die ("Current dir too long.\n");
 }
 
 MC_NAMEOP (mkdir, (char *path, mode_t mode), (vfs, path, mode))

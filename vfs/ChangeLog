@@ -1,5 +1,8 @@
 2003-06-05  Pavel Roskin  <proski@gnu.org>
 
+	* vfs.c: Rename mc_return_cwd() to _vfs_get_cwd().  Move
+	related functions closer to each other, add comments.
+
 	* ftpfs.c (ftpfs_done): New function.  Free ftpfs_proxy_host and
 	ftpfs_anonymous_passwd.
 
