@@ -1,3 +1,9 @@
+2004-10-17  Roland Illig  <roland.illig@gmx.de>
+
+	* extfs/hp48.in: Fix quoting issues.
+
+	From Leonard den Ottolander.
+
 2004-10-17  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* undelfs.c (undelfs_open): Use g_try_malloc() instead

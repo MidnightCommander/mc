@@ -32,40 +32,41 @@ $KERMIT -C "SET EXIT WARNING OFF,REMOTE $*,QUIT"
 hp48_cd()
 {
 (echo SET EXIT WARNING OFF;echo REMOTE HOST HOME
-for HP48_DIR in `echo $*|tr '/' ' '`;do
- if [ "$HP48_DIR" != "." ];then echo REMOTE HOST $HP48_DIR;fi
+for HP48_DIR in `echo "$*" | tr '/' ' '`;do
+  if [ "x$HP48_DIR" != "x." ];then echo REMOTE HOST "$HP48_DIR"; fi
 done
 echo QUIT)| $KERMIT -B >/dev/null
 }
 
 hp48_retdir()
 {
-echo $1
+echo "$1"
 }
 
 hp48_retsize()
 {
-printf "%d" $2 2>/dev/null
+printf "%d" "$2" 2>/dev/null
 }
 
 hp48_parser()
 {
 HP48_DIRS=
-read INPUT
-while [ "$INPUT" != "EOF" ]
+read -r INPUT
+while [ "x$INPUT" != "xEOF" ]
 do
-    case `echo $INPUT | $AWK '{if (int($2)) if ($3=="Directory") print "dir";else print "file"}'` in
-    dir) HP48_DIRS="$HP48_DIRS `hp48_retdir $INPUT`"
-    printf "drwxr-xr-x   1 %-8d %-8d %8d %s %s\n" 0 0 `hp48_retsize $INPUT` "`date +\"%b %d %Y %k:%M"`" "$HP48_CDIR/`hp48_retdir $INPUT`";;
-    file) printf "-rw-r--r--   1 %-8d %-8d %8d %s %s\n" 0 0 `hp48_retsize $INPUT` "`date +"%b %d %Y %k:%M"`" "$HP48_CDIR/`hp48_retdir $INPUT`";;
+    case `echo "$INPUT" | $AWK '{if (int($2)) if ($3 == "Directory") print "dir";else print "file"}'` in
+    dir) HP48_DIRS="$HP48_DIRS `hp48_retdir \"$INPUT\"`"
+    printf "drwxr-xr-x   1 %-8d %-8d %8d %s %s\n" 0 0 `hp48_retsize "$INPUT"` "`date +\"%b %d %Y %k:%M\"`" "$HP48_CDIR/`hp48_retdir \"$INPUT\"`";;
+    file) printf "-rw-r--r--   1 %-8d %-8d %8d %s %s\n" 0 0 `hp48_retsize "$INPUT"` "`date +\"%b %d %Y %k:%M\"`" "$HP48_CDIR/`hp48_retdir \"$INPUT\"`";;
     esac
-    read INPUT
+    read -r INPUT
 done
-for HP48_DIR in $HP48_DIRS;do 
- HP48_PDIR=$HP48_CDIR
- HP48_CDIR=$HP48_CDIR/$HP48_DIR; hp48_cmd HOST $HP48_DIR >/dev/null
- hp48_list
- HP48_CDIR=$HP48_PDIR; hp48_cmd HOST UPDIR >/dev/null
+for HP48_DIR in $HP48_DIRS;
+do 
+    HP48_PDIR="$HP48_CDIR"
+    HP48_CDIR="$HP48_CDIR/$HP48_DIR"; hp48_cmd HOST "$HP48_DIR" >/dev/null
+    hp48_list
+    HP48_CDIR="$HP48_PDIR"; hp48_cmd HOST UPDIR >/dev/null
 done
 }
 
@@ -84,14 +85,14 @@ list) HP48_CDIR=
     hp48_list
     exit 0;;
 copyout)
-    cd `dirname $4`
-    hp48_cd `dirname $3`
-    $KERMIT -B -g `basename $3` -a $4 >/dev/null
+    cd `dirname "$4"`
+    hp48_cd `dirname "$3"`
+    $KERMIT -B -g `basename "$3"` -a "$4" >/dev/null
     exit 0;;
 copyin) 
-    cd `dirname $4`
-    hp48_cd `dirname $3`
-    $KERMIT -B -s $4 -a `basename $3` >/dev/null
+    cd `dirname "$4"`
+    hp48_cd `dirname "$3"`
+    $KERMIT -B -s "$4" -a `basename "$3"` >/dev/null
     exit 0;;
 esac
 exit 1
