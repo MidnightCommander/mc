@@ -1,5 +1,5 @@
 AM_CFLAGS = $(GLIB_CFLAGS)
-AM_CPPFLAGS = -DREGEX_MALLOC -DLIBDIR=\""$(mclibdir)/"\" \
+AM_CPPFLAGS = -DLIBDIR=\""$(mclibdir)/"\" \
 	-DCONFDIR=\""$(sysconfdir)/"\" -DLOCALEDIR=\""$(localedir)"\"
 
 mclibdir = $(libdir)/mc

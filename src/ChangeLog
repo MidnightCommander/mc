@@ -1,5 +1,8 @@
 2002-07-13  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.am (AM_CPPFLAGS): Remove REGEX_MALLOC, it's now in
+	configure.in.
+
 	* tty.h: Use standard autoconf defines to determine which
 	ncurses header to include.  Eliminate RENAMED_NCURSES.
 
