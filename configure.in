@@ -306,9 +306,6 @@ AC_SUBST(LVFS)
 screen_manager=unknown
 search_ncurses=false
 
-XCURSES=""
-AC_SUBST(XCURSES)
-
 mouse_lib="xterm only"
 LGPM=""
 case $host_os in
