@@ -1607,7 +1607,8 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     case DLG_POST_KEY:
-	update_dirty_panels ();
+	if (!the_menubar->active)
+	    update_dirty_panels ();
 	return MSG_HANDLED;
 
     default:
