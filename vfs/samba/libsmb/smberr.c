@@ -35,7 +35,7 @@ typedef struct
 } err_code_struct;
 
 /* Dos Error Messages */
-err_code_struct dos_msgs[] = {
+static err_code_struct const dos_msgs[] = {
   {"ERRbadfunc",1,"Invalid function."},
   {"ERRbadfile",2,"File not found."},
   {"ERRbadpath",3,"Directory invalid."},
@@ -68,7 +68,7 @@ err_code_struct dos_msgs[] = {
   {NULL,-1,NULL}};
 
 /* Server Error Messages */
-err_code_struct server_msgs[] = {
+static err_code_struct const server_msgs[] = {
   {"ERRerror",1,"Non-specific error code."},
   {"ERRbadpw",2,"Bad password - name/password pair in a Tree Connect or Session Setup are invalid."},
   {"ERRbadtype",3,"reserved."},
@@ -104,7 +104,7 @@ err_code_struct server_msgs[] = {
   {NULL,-1,NULL}};
 
 /* Hard Error Messages */
-err_code_struct hard_msgs[] = {
+static err_code_struct const hard_msgs[] = {
   {"ERRnowrite",19,"Attempt to write on write-protected diskette."},
   {"ERRbadunit",20,"Unknown unit."},
   {"ERRnotready",21,"Drive not ready."},
@@ -130,8 +130,8 @@ struct
 {
   int code;
   char *class;
-  err_code_struct *err_msgs;
-} err_classes[] = { 
+  err_code_struct const *err_msgs;
+} const err_classes [] = { 
   {0,"SUCCESS",NULL},
   {0x01,"ERRDOS",dos_msgs},
   {0x02,"ERRSRV",server_msgs},
@@ -159,7 +159,7 @@ char *smb_errstr(char *inbuf)
       {
 	if (err_classes[i].err_msgs)
 	  {
-	    err_code_struct *err = err_classes[i].err_msgs;
+	    const err_code_struct *err = err_classes[i].err_msgs;
 	    for (j=0;err[j].name;j++)
 	      if (num == err[j].code)
 		{

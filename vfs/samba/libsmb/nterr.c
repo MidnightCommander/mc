@@ -10,7 +10,7 @@ typedef struct
 
 } nt_err_code_struct;
 
-nt_err_code_struct nt_errs[] =
+nt_err_code_struct const nt_errs[] =
 {
 	{ "NT_STATUS_UNSUCCESSFUL", NT_STATUS_UNSUCCESSFUL },
 	{ "NT_STATUS_NOT_IMPLEMENTED", NT_STATUS_NOT_IMPLEMENTED },
