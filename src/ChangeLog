@@ -1,3 +1,8 @@
+2005-02-12  Roland Illig  <roland.illig@gmx.de>
+
+	* screen.c: Reverted my changes from 2005-02-08 (except the
+	maybe_cd calls) to not confuse the upcoming UTF-8 patches.
+
 2004-02-12  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
         * glibcompat.c: Add g_strlcat() declaration for glib 1.2.x

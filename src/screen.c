@@ -70,24 +70,19 @@
 #define MARKED_SELECTED	3
 #define STATUS		5
 
-typedef void (*info_fn) (file_entry *, char * buf, size_t bufsize);
-
 /*
  * This describes a format item.  The parse_display_format routine parses
  * the user specified format and creates a linked list of format_e structures.
- *
- * The string_fn functions may assume that the size of the passed buffer is
- * at least 1, to allow storing the trailing '\0'.
  */
 typedef struct format_e {
     struct format_e *next;
-    unsigned int     requested_field_len;
-    unsigned int     field_len;
-    int              just_mode;
-    int              expand;
-    info_fn          string_fn;
-    const char      *title;
-    const char      *id;
+    int    requested_field_len;
+    int    field_len;
+    int    just_mode;
+    int    expand;
+    const char *(*string_fn)(file_entry *, int len);
+    const char   *title;
+    const char   *id;
 } format_e;
 
 /* If true, show the mini-info on the panel */
@@ -123,7 +118,6 @@ static const char *mini_status_format (WPanel *panel);
 static void
 set_colors (WPanel *panel)
 {
-    (void) panel;
     standend ();
     attrset (NORMAL_COLOR);
 }
@@ -173,25 +167,29 @@ add_permission_string (char *dest, int width, file_entry *fe, int attr, int colo
 }
 
 /* String representations of various file attributes */
-
 /* name */
-static void
-string_file_name (file_entry *fe, char *buffer, size_t bufsize)
+static const char *
+string_file_name (file_entry *fe, int len)
 {
+    static char buffer [BUF_SMALL];
     size_t i;
-    char c;
-    const char *fe_fname_trunc;
 
-    fe_fname_trunc = name_trunc (fe->fname, bufsize - 1);
-    for (i = 0; i < bufsize - 1; i++) {
-	c = fe_fname_trunc[i];
+    for (i = 0; i < sizeof(buffer) - 1; i++) {
+	char c;
+
+	c = fe->fname[i];
+
 	if (!c)
 	    break;
+
 	if (!is_printable(c))
 	    c = '?';
+
 	buffer[i] = c;
     }
-    buffer[i] = '\0';
+
+    buffer[i] = 0;
+    return buffer;
 }
 
 static inline int ilog10(dev_t n)
@@ -207,8 +205,8 @@ static void format_device_number (char *buf, size_t bufsize, dev_t dev)
 {
     dev_t major_dev = major(dev);
     dev_t minor_dev = minor(dev);
-    size_t major_digits = ilog10(major_dev);
-    size_t minor_digits = ilog10(minor_dev);
+    int major_digits = ilog10(major_dev);
+    int minor_digits = ilog10(minor_dev);
 
     g_assert(bufsize >= 1);
     if (major_digits + 1 + minor_digits + 1 <= bufsize) {
@@ -220,44 +218,48 @@ static void format_device_number (char *buf, size_t bufsize, dev_t dev)
 }
 
 /* size */
-static void
-string_file_size (file_entry *fe, char *buffer, size_t bufsize)
+static const char *
+string_file_size (file_entry *fe, int len)
 {
+    static char buffer [BUF_TINY];
+
     /* Don't ever show size of ".." since we don't calculate it */
     if (!strcmp (fe->fname, "..")) {
-	g_strlcpy (buffer, _("UP--DIR"), bufsize);
-    } else
+	return _("UP--DIR");
+    }
+
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
     if (S_ISBLK (fe->st.st_mode) || S_ISCHR (fe->st.st_mode))
-        format_device_number (buffer, bufsize, fe->st.st_rdev);
+        format_device_number (buffer, len + 1, fe->st.st_rdev);
     else
 #endif
     {
-	size_trunc_len (buffer, bufsize - 1, fe->st.st_size, 0);
+	size_trunc_len (buffer, len, fe->st.st_size, 0);
     }
+    return buffer;
 }
 
 /* bsize */
-static void
-string_file_size_brief (file_entry *fe, char *buffer, size_t bufsize)
+static const char *
+string_file_size_brief (file_entry *fe, int len)
 {
     if (S_ISLNK (fe->st.st_mode) && !fe->f.link_to_dir) {
-	g_strlcpy (buffer, _("SYMLINK"), bufsize);
-    } else if ((S_ISDIR (fe->st.st_mode) || fe->f.link_to_dir) && strcmp (fe->fname, "..") != 0) {
-	g_strlcpy (buffer, _("SUB-DIR"), bufsize);
-    } else {
-	string_file_size (fe, buffer, bufsize);
+	return _("SYMLINK");
     }
+
+    if ((S_ISDIR (fe->st.st_mode) || fe->f.link_to_dir) && strcmp (fe->fname, "..")) {
+	return _("SUB-DIR");
+    }
+
+    return string_file_size (fe, len);
 }
 
+/* This functions return a string representation of a file entry */
 /* type */
-static void
-string_file_type (file_entry *fe, char *buffer, size_t bufsize)
+static const char *
+string_file_type (file_entry *fe, int len)
 {
-    if (bufsize == 1) {
-	buffer[0] = '\0';
-	return;
-    }
+    static char buffer[2];
 
     if (S_ISDIR (fe->st.st_mode))
 	buffer[0] = PATH_SEP;
@@ -287,119 +289,132 @@ string_file_type (file_entry *fe, char *buffer, size_t bufsize)
     else
 	buffer[0] = ' ';
     buffer[1] = '\0';
+    return buffer;
 }
 
 /* mtime */
-static void
-string_file_mtime (file_entry *fe, char *buffer, size_t bufsize)
+static const char *
+string_file_mtime (file_entry *fe, int len)
 {
-    if (str_cmp (fe->fname, ==, ".."))
-	g_strlcpy (buffer, "", bufsize);
-    else
-	g_strlcpy (buffer, file_date (fe->st.st_mtime), bufsize);
+    if (!strcmp (fe->fname, "..")) {
+       return "";
+    }
+    return file_date (fe->st.st_mtime);
 }
 
 /* atime */
-static void
-string_file_atime (file_entry *fe, char *buffer, size_t bufsize)
+static const char *
+string_file_atime (file_entry *fe, int len)
 {
-    if (str_cmp (fe->fname, ==, ".."))
-	g_strlcpy (buffer, "", bufsize);
-    else
-	g_strlcpy (buffer, file_date (fe->st.st_atime), bufsize);
+    if (!strcmp (fe->fname, "..")) {
+       return "";
+    }
+    return file_date (fe->st.st_atime);
 }
 
 /* ctime */
-static void
-string_file_ctime (file_entry *fe, char *buffer, size_t bufsize)
+static const char *
+string_file_ctime (file_entry *fe, int len)
 {
-    if (str_cmp (fe->fname, ==, ".."))
-	g_strlcpy (buffer, "", bufsize);
-    else
-	g_strlcpy (buffer, file_date (fe->st.st_ctime), bufsize);
+    if (!strcmp (fe->fname, "..")) {
+       return "";
+    }
+    return file_date (fe->st.st_ctime);
 }
 
 /* perm */
-static void
-string_file_permission (file_entry *fe, char *buffer, size_t bufsize)
+static const char *
+string_file_permission (file_entry *fe, int len)
 {
-    g_strlcpy (buffer, string_perm (fe->st.st_mode), bufsize);
+    return string_perm (fe->st.st_mode);
 }
 
 /* mode */
-static void
-string_file_perm_octal (file_entry *fe, char *buffer, size_t bufsize)
+static const char *
+string_file_perm_octal (file_entry *fe, int len)
 {
-    char buf[8];
-    const int digits = bufsize - 1;
+    static char buffer [10];
 
-    g_snprintf (buf, sizeof(buf), "0%06lo", (unsigned long) fe->st.st_mode);
-    g_strlcpy (buffer, buf + ((digits < 7) ? (7 - digits) : 0), bufsize);
+    g_snprintf (buffer, sizeof (buffer), "0%06lo", (unsigned long) fe->st.st_mode);
+    return buffer;
 }
 
 /* nlink */
-static void
-string_file_nlinks (file_entry *fe, char *buffer, size_t bufsize)
+static const char *
+string_file_nlinks (file_entry *fe, int len)
 {
-    g_snprintf (buffer, bufsize, "%d", (int) fe->st.st_nlink);
+    static char buffer[BUF_TINY];
+
+    g_snprintf (buffer, sizeof (buffer), "%16d", (int) fe->st.st_nlink);
+    return buffer;
 }
 
 /* inode */
-static void
-string_inode (file_entry *fe, char *buffer, size_t bufsize)
+static const char *
+string_inode (file_entry *fe, int len)
 {
-    g_snprintf (buffer, bufsize, "%lu", (unsigned long) fe->st.st_ino);
+    static char buffer [10];
+
+    g_snprintf (buffer, sizeof (buffer), "%lu",
+		(unsigned long) fe->st.st_ino);
+    return buffer;
 }
 
 /* nuid */
-static void
-string_file_nuid (file_entry *fe, char *buffer, size_t bufsize)
+static const char *
+string_file_nuid (file_entry *fe, int len)
 {
-    g_snprintf (buffer, bufsize, "%lu", (unsigned long) fe->st.st_uid);
+    static char buffer [10];
+
+    g_snprintf (buffer, sizeof (buffer), "%lu",
+		(unsigned long) fe->st.st_uid);
+    return buffer;
 }
 
 /* ngid */
-static void
-string_file_ngid (file_entry *fe, char *buffer, size_t bufsize)
+static const char *
+string_file_ngid (file_entry *fe, int len)
 {
-    g_snprintf (buffer, bufsize, "%lu", (unsigned long) fe->st.st_gid);
+    static char buffer [10];
+
+    g_snprintf (buffer, sizeof (buffer), "%lu",
+		(unsigned long) fe->st.st_gid);
+    return buffer;
 }
 
 /* owner */
-static void
-string_file_owner (file_entry *fe, char *buffer, size_t bufsize)
+static const char *
+string_file_owner (file_entry *fe, int len)
 {
-    g_strlcpy (buffer, get_owner (fe->st.st_uid), bufsize);
+    return get_owner (fe->st.st_uid);
 }
 
 /* group */
-static void
-string_file_group (file_entry *fe, char *buffer, size_t bufsize)
+static const char *
+string_file_group (file_entry *fe, int len)
 {
-    g_strlcpy (buffer, get_group (fe->st.st_gid), bufsize);
+    return get_group (fe->st.st_gid);
 }
 
 /* mark */
-static void
-string_marked (file_entry *fe, char *buffer, size_t bufsize)
+static const char *
+string_marked (file_entry *fe, int len)
 {
-    g_strlcpy (buffer, fe->f.marked ? "*" : " ", bufsize);
+    return fe->f.marked ? "*" : " ";
 }
 
 /* space */
-static void
-string_space (file_entry *fe, char *buffer, size_t bufsize)
+static const char *
+string_space (file_entry *fe, int len)
 {
-    (void) fe;
-    g_strlcpy (buffer, " ", bufsize);
+    return " ";
 }
 
 /* dot */
-static void
-string_dot (file_entry *fe, char *buffer, size_t bufsize)
+static const char *
+string_dot (file_entry *fe, int len)
 {
-    (void) fe;
-    g_strlcpy (buffer, ".", bufsize);
+    return ".";
 }
 
 #define GT 1
@@ -411,7 +426,7 @@ static struct {
     int  default_just;
     const char *title;
     int  use_in_gui;
-    info_fn string_fn;
+    const char *(*string_fn)(file_entry *, int);
     sortfn *sort_routine;
 } formats [] = {
 { "name",  12, 1, J_LEFT_FIT,	N_("Name"),	1, string_file_name,	   (sortfn *) sort_name },
@@ -524,10 +539,10 @@ file_compute_color (int attr, file_entry *fe)
 
 /* Formats the file number file_index of panel in the buffer dest */
 static void
-format_file (char *dest, size_t destsize, WPanel *panel, int file_index, int width, int attr, int isstatus)
+format_file (char *dest, int limit, WPanel *panel, int file_index, int width, int attr, int isstatus)
 {
-    char buffer[BUF_1K];
     int      color, length, empty_line;
+    const char *txt;
     char     *old_pos;
     char     *cdest = dest;
     format_e *format, *home;
@@ -552,20 +567,20 @@ format_file (char *dest, size_t destsize, WPanel *panel, int file_index, int wid
 	    int len;
 
 	    if (empty_line)
-	        strcpy (buffer, " ");
+		txt = " ";
 	    else
-		(*format->string_fn) (fe, buffer, min(format->field_len, sizeof(buffer) - 1) + 1);
+		txt = (*format->string_fn)(fe, format->field_len);
 
 	    old_pos = cdest;
 
 	    len = format->field_len;
 	    if (len + length > width)
 		len = width - length;
-	    if (len + (cdest - dest) > (int) destsize)
-		len = destsize - (cdest - dest);
+	    if (len + (cdest - dest) > limit)
+		len = limit - (cdest - dest);
 	    if (len <= 0)
 		break;
-	    cdest = to_buffer (cdest, format->just_mode, len, buffer);
+	    cdest = to_buffer (cdest, format->just_mode, len, txt);
 	    length += len;
 
             attrset (color);
@@ -1104,7 +1119,7 @@ paint_frame (WPanel *panel)
                 txt = format->title;
 
 		header_len = strlen (txt);
-		if ((unsigned int) header_len > format->field_len)
+		if (header_len > format->field_len)
 		    header_len = format->field_len;
 
                 attrset (MARKED_COLOR);
@@ -1632,7 +1647,7 @@ move_selection (WPanel *panel, int lines)
 }
 
 static cb_ret_t
-move_left (WPanel *panel)
+move_left (WPanel *panel, int c_code)
 {
     if (panel->split) {
 	move_selection (panel, -llines (panel));
@@ -1642,7 +1657,7 @@ move_left (WPanel *panel)
 }
 
 static int
-move_right (WPanel *panel)
+move_right (WPanel *panel, int c_code)
 {
     if (panel->split) {
 	move_selection (panel, llines (panel));
@@ -1680,7 +1695,6 @@ prev_page (WPanel *panel)
 static void
 ctrl_prev_page (WPanel *panel)
 {
-    (void) panel;
     do_cd ("..", cd_exact);
 }
 
@@ -2071,14 +2085,14 @@ typedef struct {
 } panel_key_map;
 
 static void cmd_do_enter(WPanel *wp) { (void) do_enter(wp); }
-static void cmd_view_simple(WPanel *wp) { (void) wp; view_simple_cmd(); }
-static void cmd_edit_new(WPanel *wp) { (void) wp; edit_cmd_new(); }
-static void cmd_copy_local(WPanel *wp) { (void) wp; copy_cmd_local(); }
-static void cmd_rename_local(WPanel *wp) { (void) wp; ren_cmd_local(); }
-static void cmd_delete_local(WPanel *wp) { (void) wp; delete_cmd_local(); }
-static void cmd_select(WPanel *wp) { (void) wp; select_cmd(); }
-static void cmd_unselect(WPanel *wp) { (void) wp; unselect_cmd(); }
-static void cmd_reverse_selection(WPanel *wp) { (void) wp; reverse_selection_cmd(); }
+static void cmd_view_simple(WPanel *wp) { view_simple_cmd(); }
+static void cmd_edit_new(WPanel *wp) { edit_cmd_new(); }
+static void cmd_copy_local(WPanel *wp) { copy_cmd_local(); }
+static void cmd_rename_local(WPanel *wp) { ren_cmd_local(); }
+static void cmd_delete_local(WPanel *wp) { delete_cmd_local(); }
+static void cmd_select(WPanel *wp) { select_cmd(); }
+static void cmd_unselect(WPanel *wp) { unselect_cmd(); }
+static void cmd_reverse_selection(WPanel *wp) { reverse_selection_cmd(); }
 
 static const panel_key_map panel_keymap [] = {
     { KEY_DOWN,   move_down },
@@ -2160,10 +2174,10 @@ panel_key (WPanel *panel, int key)
     /* We do not want to take a key press if nothing can be done with it */
     /* The command line widget may do something more useful */
     if (key == KEY_LEFT)
-	return move_left (panel);
+	return move_left (panel, key);
 
     if (key == KEY_RIGHT)
-	return move_right (panel);
+	return move_right (panel, key);
 
     if (is_abort_char (key)) {
 	panel->searching = 0;
