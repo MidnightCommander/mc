@@ -55,7 +55,7 @@
 #include "key.h"		/* application_keypad_mode() */
 #include "win.h"		/* do_enter_ca_mode() */
 #include "main.h"		/* change_panel() */
-#include "panel.h"		/* cpanel */
+#include "panel.h"		/* current_panel */
 #include "help.h"		/* interactive_display() */
 #include "user.h"		/* MC_GLOBAL_MENU */
 #include "command.h"		/* cmdline */
@@ -187,32 +187,32 @@ do_view_cmd (int normal)
     int dir, file_idx;
 
     /* Directories are viewed by changing to them */
-    if (S_ISDIR (selection (cpanel)->st.st_mode)
-	|| link_isdir (selection (cpanel))) {
-	if (confirm_view_dir && (cpanel->marked || cpanel->dirs_marked)) {
+    if (S_ISDIR (selection (current_panel)->st.st_mode)
+	|| link_isdir (selection (current_panel))) {
+	if (confirm_view_dir && (current_panel->marked || current_panel->dirs_marked)) {
 	    if (query_dialog
 		(_(" Confirmation "), _("Files tagged, want to cd?"), 0, 2,
 		 _("&Yes"), _("&No")) != 0) {
 		return;
 	    }
 	}
-	if (!do_cd (selection (cpanel)->fname, cd_exact))
+	if (!do_cd (selection (current_panel)->fname, cd_exact))
 	    message (1, MSG_ERROR, _("Cannot change directory"));
 
 	return;
 
     }
 
-    file_idx = cpanel->selected;
+    file_idx = current_panel->selected;
     while (1) {
 	char *filename;
 
-	filename = cpanel->dir.list[file_idx].fname;
+	filename = current_panel->dir.list[file_idx].fname;
 
 	dir = view_file (filename, normal, use_internal_view);
 	if (dir == 0)
 	    break;
-	file_idx = scan_for_file (cpanel, file_idx, dir);
+	file_idx = scan_for_file (current_panel, file_idx, dir);
     }
 }
 
@@ -231,7 +231,7 @@ view_file_cmd (void)
 
     filename =
 	input_dialog (_(" View file "), _(" Filename:"),
-		      selection (cpanel)->fname);
+		      selection (current_panel)->fname);
     if (!filename)
 	return;
 
@@ -254,7 +254,7 @@ filtered_view_cmd (void)
     command =
 	input_dialog (_(" Filtered view "),
 		      _(" Filter command and arguments:"),
-		      selection (cpanel)->fname);
+		      selection (current_panel)->fname);
     if (!command)
 	return;
 
@@ -294,8 +294,8 @@ do_edit (const char *what)
 void
 edit_cmd (void)
 {
-    if (regex_command (selection (cpanel)->fname, "Edit", 0) == 0)
-	do_edit (selection (cpanel)->fname);
+    if (regex_command (selection (current_panel)->fname, "Edit", 0) == 0)
+	do_edit (selection (current_panel)->fname);
 }
 
 void
@@ -309,7 +309,7 @@ void
 copy_cmd (void)
 {
     save_cwds_stat ();
-    if (panel_operate (cpanel, OP_COPY, 0)) {
+    if (panel_operate (current_panel, OP_COPY, 0)) {
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
@@ -319,7 +319,7 @@ copy_cmd (void)
 void ren_cmd (void)
 {
     save_cwds_stat ();
-    if (panel_operate (cpanel, OP_MOVE, 0)){
+    if (panel_operate (current_panel, OP_MOVE, 0)){
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
@@ -329,7 +329,7 @@ void ren_cmd (void)
 void copy_cmd_local (void)
 {
     save_cwds_stat ();
-    if (panel_operate (cpanel, OP_COPY, 1)){
+    if (panel_operate (current_panel, OP_COPY, 1)){
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
@@ -339,7 +339,7 @@ void copy_cmd_local (void)
 void ren_cmd_local (void)
 {
     save_cwds_stat ();
-    if (panel_operate (cpanel, OP_MOVE, 1)){
+    if (panel_operate (current_panel, OP_MOVE, 1)){
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
@@ -361,14 +361,14 @@ mkdir_cmd (void)
     if (dir[0] == '/' || dir[0] == '~')
 	tempdir = g_strdup (dir);
     else
-	tempdir = concat_dir_and_file (cpanel->cwd, dir);
+	tempdir = concat_dir_and_file (current_panel->cwd, dir);
     g_free (dir);
 
     save_cwds_stat ();
     if (my_mkdir (tempdir, 0777) == 0) {
 	update_panels (UP_OPTIMIZE, tempdir);
 	repaint_screen ();
-	select_item (cpanel);
+	select_item (current_panel);
 	g_free (tempdir);
 	return;
     }
@@ -380,7 +380,7 @@ void delete_cmd (void)
 {
     save_cwds_stat ();
 
-    if (panel_operate (cpanel, OP_DELETE, 0)){
+    if (panel_operate (current_panel, OP_DELETE, 0)){
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
@@ -391,7 +391,7 @@ void delete_cmd_local (void)
 {
     save_cwds_stat ();
 
-    if (panel_operate (cpanel, OP_DELETE, 1)){
+    if (panel_operate (current_panel, OP_DELETE, 1)){
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
@@ -451,7 +451,7 @@ void reread_cmd (void)
 
     if (get_current_type () == view_listing &&
 	get_other_type () == view_listing)
-	flag = strcmp (cpanel->cwd, opanel->cwd) ? UP_ONLY_CURRENT : 0;
+	flag = strcmp (current_panel->cwd, other_panel->cwd) ? UP_ONLY_CURRENT : 0;
     else
 	flag = UP_ONLY_CURRENT;
 	
@@ -464,11 +464,11 @@ void reverse_selection_cmd (void)
     file_entry *file;
     int i;
 
-    for (i = 0; i < cpanel->count; i++){
-	file = &cpanel->dir.list [i];
+    for (i = 0; i < current_panel->count; i++){
+	file = &current_panel->dir.list [i];
 	if (S_ISDIR (file->st.st_mode))
 	    continue;
-	do_file_mark (cpanel, i, !file->f.marked);
+	do_file_mark (current_panel, i, !file->f.marked);
     }
 }
 
@@ -495,24 +495,24 @@ void select_cmd (void)
         reg_exp_t [strlen(reg_exp_t) - 1] = 0;
     }
 
-    for (i = 0; i < cpanel->count; i++){
-        if (!strcmp (cpanel->dir.list [i].fname, ".."))
+    for (i = 0; i < current_panel->count; i++){
+        if (!strcmp (current_panel->dir.list [i].fname, ".."))
             continue;
-	if (S_ISDIR (cpanel->dir.list [i].st.st_mode)){
+	if (S_ISDIR (current_panel->dir.list [i].st.st_mode)){
 	    if (!dirflag)
                 continue;
         } else {
             if (dirflag)
                 continue;
 	}
-	c = regexp_match (reg_exp_t, cpanel->dir.list [i].fname, match_file);
+	c = regexp_match (reg_exp_t, current_panel->dir.list [i].fname, match_file);
 	if (c == -1){
 	    message (1, MSG_ERROR, _("  Malformed regular expression  "));
 	    g_free (reg_exp);
 	    return;
 	}
 	if (c){
-	    do_file_mark (cpanel, i, 1);
+	    do_file_mark (current_panel, i, 1);
 	}
     }
     g_free (reg_exp);
@@ -540,24 +540,24 @@ void unselect_cmd (void)
         dirflag = 1;
         reg_exp_t [strlen(reg_exp_t) - 1] = 0;
     }
-    for (i = 0; i < cpanel->count; i++){
-        if (!strcmp (cpanel->dir.list [i].fname, "..")) 
+    for (i = 0; i < current_panel->count; i++){
+        if (!strcmp (current_panel->dir.list [i].fname, "..")) 
             continue;
-	if (S_ISDIR (cpanel->dir.list [i].st.st_mode)){
+	if (S_ISDIR (current_panel->dir.list [i].st.st_mode)){
 	    if (!dirflag)
 	        continue;
         } else {
             if (dirflag)
                 continue;
         }
-	c = regexp_match (reg_exp_t, cpanel->dir.list [i].fname, match_file);
+	c = regexp_match (reg_exp_t, current_panel->dir.list [i].fname, match_file);
 	if (c == -1){
 	    message (1, MSG_ERROR, _("  Malformed regular expression  "));
 	    g_free (reg_exp);
 	    return;
 	}
 	if (c){
-	    do_file_mark (cpanel, i, 0);
+	    do_file_mark (current_panel, i, 0);
 	}
     }
     g_free (reg_exp);
@@ -862,8 +862,8 @@ compare_dirs_cmd (void)
 
     if (get_current_type () == view_listing
 	&& get_other_type () == view_listing) {
-	compare_dir (cpanel, opanel, thorough_flag);
-	compare_dir (opanel, cpanel, thorough_flag);
+	compare_dir (current_panel, other_panel, thorough_flag);
+	compare_dir (other_panel, current_panel, thorough_flag);
     } else {
 	message (1, MSG_ERROR,
 		 _(" Both panels should be in the "
@@ -954,10 +954,10 @@ do_link (int symbolic_link, char *fname)
 	char *d;
 
 	/* suggest the full path for symlink */
-	s = concat_dir_and_file (cpanel->cwd, fname);
+	s = concat_dir_and_file (current_panel->cwd, fname);
 
 	if (get_other_type () == view_listing) {
-	    d = concat_dir_and_file (opanel->cwd, fname);
+	    d = concat_dir_and_file (other_panel->cwd, fname);
 	} else {
 	    d = g_strdup (fname);
 	}
@@ -986,13 +986,13 @@ do_link (int symbolic_link, char *fname)
 
 void link_cmd (void)
 {
-    do_link (0, selection (cpanel)->fname);
+    do_link (0, selection (current_panel)->fname);
 }
 
 void symlink_cmd (void)
 {
     char *filename = NULL;
-    filename = selection (cpanel)->fname;
+    filename = selection (current_panel)->fname;
 
     if (filename) {
 	do_link (1, filename);
@@ -1001,13 +1001,13 @@ void symlink_cmd (void)
 
 void edit_symlink_cmd (void)
 {
-    if (S_ISLNK (selection (cpanel)->st.st_mode)) {
+    if (S_ISLNK (selection (current_panel)->st.st_mode)) {
 	char buffer [MC_MAXPATHLEN];
 	char *p = NULL;
 	int i;
 	char *dest, *q;
 
-	p = selection (cpanel)->fname;
+	p = selection (current_panel)->fname;
 
 	q = g_strdup_printf (_(" Symlink `%s\' points to: "), name_trunc (p, 32));
 
@@ -1035,7 +1035,7 @@ void edit_symlink_cmd (void)
 	g_free (q);
     } else {
 	message (1, MSG_ERROR, _("`%s' is not a symbolic link"),
-		 selection (cpanel)->fname);
+		 selection (current_panel)->fname);
     }
 }
 
@@ -1219,7 +1219,7 @@ void quick_cd_cmd (void)
 void 
 dirsizes_cmd (void)
 {
-    WPanel *panel = cpanel;
+    WPanel *panel = current_panel;
     int i;
     off_t marked;
     double total;
@@ -1284,7 +1284,7 @@ info_cmd_no_menu (void)
     else if (get_display_type (1) == view_info)
 	set_display_type (1, view_listing);
     else
-	set_display_type (cpanel == left_panel ? 1 : 0, view_info);
+	set_display_type (current_panel == left_panel ? 1 : 0, view_info);
 }
 
 void
@@ -1295,7 +1295,7 @@ quick_cmd_no_menu (void)
     else if (get_display_type (1) == view_quick)
 	set_display_type (1, view_listing);
     else
-	set_display_type (cpanel == left_panel ? 1 : 0, view_quick);
+	set_display_type (current_panel == left_panel ? 1 : 0, view_quick);
 }
 
 static void
@@ -1346,7 +1346,7 @@ info_cmd (void)
 void
 quick_view_cmd (void)
 {
-    if ((WPanel *) get_panel_widget (MENU_PANEL_IDX) == cpanel)
+    if ((WPanel *) get_panel_widget (MENU_PANEL_IDX) == current_panel)
 	change_panel ();
     set_display_type (MENU_PANEL_IDX, view_quick);
 }

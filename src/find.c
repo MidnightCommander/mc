@@ -266,7 +266,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	g_free (in_start_dir);
 	if (strcmp (temp_dir, ".") == 0) {
 	    g_free (temp_dir);
-	    temp_dir = g_strdup (cpanel->cwd);
+	    temp_dir = g_strdup (current_panel->cwd);
 	}
 	in_start_dir = tree_box (temp_dir);
 	if (in_start_dir)
@@ -892,7 +892,7 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,
 	int i;
 	struct stat st;
 	WLEntry *entry = find_list->list;
-	dir_list *list = &cpanel->dir;
+	dir_list *list = &current_panel->dir;
 	char *dir, *name;
 
 	for (i = 0; entry && i < find_list->count;
@@ -935,7 +935,7 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,
 	    }
 
 	    if (!next_free)	/* first turn i.e clean old list */
-		panel_clean_dir (cpanel);
+		panel_clean_dir (current_panel);
 	    list->list[next_free].fnamelen = strlen (name);
 	    list->list[next_free].fname = name;
 	    list->list[next_free].f.marked = 0;
@@ -948,17 +948,17 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,
 		rotate_dash ();
 	}
 	if (next_free) {
-	    cpanel->count = next_free;
-	    cpanel->is_panelized = 1;
+	    current_panel->count = next_free;
+	    current_panel->is_panelized = 1;
 	    /* Done by panel_clean_dir a few lines above 
-	       cpanel->dirs_marked = 0;
-	       cpanel->marked = 0;
-	       cpanel->total = 0;
-	       cpanel->top_file = 0;
-	       cpanel->selected = 0; */
+	       current_panel->dirs_marked = 0;
+	       current_panel->marked = 0;
+	       current_panel->total = 0;
+	       current_panel->top_file = 0;
+	       current_panel->selected = 0; */
 
 	    if (start_dir[0] == PATH_SEP) {
-		strcpy (cpanel->cwd, PATH_SEP_STR);
+		strcpy (current_panel->cwd, PATH_SEP_STR);
 		chdir (PATH_SEP_STR);
 	    }
 	}
@@ -996,11 +996,11 @@ do_find (void)
 		if (dirname){
 		    do_cd (dirname, cd_exact);
 		    if (filename)
-			try_to_select (cpanel, filename + (content ? 
+			try_to_select (current_panel, filename + (content ? 
 			   (strchr (filename + 4, ':') - filename + 1) : 4) );
 		} else if (filename)
 		    do_cd (filename, cd_exact);
-		select_item (cpanel);
+		select_item (current_panel);
 	    }
 	    if (dirname)  
 		g_free (dirname);
@@ -1018,8 +1018,8 @@ do_find (void)
 	
 	if (v == B_PANELIZE){
 	    if (dir_and_file_set){
-	        try_to_select (cpanel, NULL);
-		panel_re_sort (cpanel);
+	        try_to_select (current_panel, NULL);
+		panel_re_sort (current_panel);
 	    }
 	    break;
 	}

@@ -182,14 +182,14 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
 	return g_strdup ("%");
 
     if (islower ((unsigned) c))
-	panel = cpanel;
+	panel = current_panel;
     else {
 	if (get_other_type () != view_listing)
 	    return g_strdup ("");
 	panel = other_panel;
     }
     if (!panel)
-	panel = cpanel;
+	panel = current_panel;
 
     if (quote)
 	quote_func = name_quote;
@@ -372,7 +372,7 @@ static char *test_condition (WEdit *edit_widget, char *p, int *condition)
 	if ((*p == ' ' && *(p-1) != '\\') || *p == '\t')
 	    continue;
 	if (*p >= 'a')
-	    panel = cpanel;
+	    panel = current_panel;
 	else {
 	    if (get_other_type () == view_listing)
 		panel = other_panel;

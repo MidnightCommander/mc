@@ -282,7 +282,7 @@ reload_panelized (WPanel *panel)
     int i, j;
     dir_list *list = &panel->dir;
 
-    if (panel != cpanel)
+    if (panel != current_panel)
 	mc_chdir (panel->cwd);
 
     for (i = 0, j = 0; i < panel->count; i++) {
@@ -310,8 +310,8 @@ reload_panelized (WPanel *panel)
     else
 	panel->count = j;
 
-    if (panel != cpanel)
-	mc_chdir (cpanel->cwd);
+    if (panel != current_panel)
+	mc_chdir (current_panel->cwd);
 }
 
 static void
@@ -407,9 +407,9 @@ void
 save_cwds_stat (void)
 {
     if (fast_reload) {
-	mc_stat (cpanel->cwd, &(cpanel->dir_stat));
+	mc_stat (current_panel->cwd, &(current_panel->dir_stat));
 	if (get_other_type () == view_listing)
-	    mc_stat (opanel->cwd, &(opanel->dir_stat));
+	    mc_stat (other_panel->cwd, &(other_panel->dir_stat));
     }
 }
 
@@ -628,7 +628,7 @@ do_panel_cd (struct WPanel *panel, char *new_dir, enum cd_enum cd_type)
 int
 do_cd (char *new_dir, enum cd_enum exact)
 {
-    return (do_panel_cd (cpanel, new_dir, exact));
+    return (do_panel_cd (current_panel, new_dir, exact));
 }
 
 void
@@ -724,9 +724,9 @@ maybe_cd (int char_code, int move_up_dir)
 		do_cd ("..", cd_exact);
 		return 1;
 	    }
-	    if (S_ISDIR (selection (cpanel)->st.st_mode)
-		|| link_isdir (selection (cpanel))) {
-		do_cd (selection (cpanel)->fname, cd_exact);
+	    if (S_ISDIR (selection (current_panel)->st.st_mode)
+		|| link_isdir (selection (current_panel))) {
+		do_cd (selection (current_panel)->fname, cd_exact);
 		return 1;
 	    }
 	}
@@ -755,7 +755,7 @@ treebox_cmd (void)
 {
     char *sel_dir;
 
-    sel_dir = tree_box (selection (cpanel)->fname);
+    sel_dir = tree_box (selection (current_panel)->fname);
     if (sel_dir) {
 	do_cd (sel_dir, cd_exact);
 	g_free (sel_dir);
@@ -771,14 +771,14 @@ listmode_cmd (void)
     if (get_current_type () != view_listing)
 	return;
 
-    newmode = listmode_edit (cpanel->user_format);
+    newmode = listmode_edit (current_panel->user_format);
     if (!newmode)
 	return;
 
-    g_free (cpanel->user_format);
-    cpanel->list_type = list_user;
-    cpanel->user_format = newmode;
-    set_panel_formats (cpanel);
+    g_free (current_panel->user_format);
+    current_panel->list_type = list_user;
+    current_panel->user_format = newmode;
+    set_panel_formats (current_panel);
 
     do_refresh ();
 }
@@ -962,7 +962,7 @@ menu_cmd (void)
     if (the_menubar->active)
 	return;
 
-    if ((get_current_index () == 0) ^ (!cpanel->active))
+    if ((get_current_index () == 0) ^ (!current_panel->active))
 	the_menubar->selected = 0;
     else
 	the_menubar->selected = 4;
@@ -1092,8 +1092,8 @@ copy_current_pathname (void)
     if (!command_prompt)
 	return;
 
-    command_insert (cmdline, cpanel->cwd, 0);
-    if (cpanel->cwd[strlen (cpanel->cwd) - 1] != PATH_SEP)
+    command_insert (cmdline, current_panel->cwd, 0);
+    if (current_panel->cwd[strlen (current_panel->cwd) - 1] != PATH_SEP)
 	command_insert (cmdline, PATH_SEP_STR, 0);
 }
 
@@ -1106,8 +1106,8 @@ copy_other_pathname (void)
     if (!command_prompt)
 	return;
 
-    command_insert (cmdline, opanel->cwd, 0);
-    if (opanel->cwd[strlen (opanel->cwd) - 1] != PATH_SEP)
+    command_insert (cmdline, other_panel->cwd, 0);
+    if (other_panel->cwd[strlen (other_panel->cwd) - 1] != PATH_SEP)
 	command_insert (cmdline, PATH_SEP_STR, 0);
 }
 
@@ -1134,7 +1134,7 @@ copy_readlink (WPanel *panel)
 static void
 copy_current_readlink (void)
 {
-    copy_readlink (cpanel);
+    copy_readlink (current_panel);
 }
 
 static void
@@ -1142,7 +1142,7 @@ copy_other_readlink (void)
 {
     if (get_other_type () != view_listing)
 	return;
-    copy_readlink (opanel);
+    copy_readlink (other_panel);
 }
 
 /* Insert the selected file name into the input line */
@@ -1157,7 +1157,7 @@ copy_prog_name (void)
 	WTree *tree = (WTree *) get_panel_widget (get_current_index ());
 	tmp = tree_selected_name (tree);
     } else
-	tmp = selection (cpanel)->fname;
+	tmp = selection (current_panel)->fname;
 
     command_insert (cmdline, tmp, 1);
 }
@@ -1185,7 +1185,7 @@ copy_tagged (WPanel *panel)
 static void
 copy_current_tagged (void)
 {
-    copy_tagged (cpanel);
+    copy_tagged (current_panel);
 }
 
 static void
@@ -1193,7 +1193,7 @@ copy_other_tagged (void)
 {
     if (get_other_type () != view_listing)
 	return;
-    copy_tagged (opanel);
+    copy_tagged (other_panel);
 }
 
 static void
@@ -1406,10 +1406,10 @@ setup_dummy_mc (const char *file)
     /* Create a fake current_panel, this is needed because the
      * expand_format routine will use current panel.
      */
-    strcpy (cpanel->cwd, d);
-    cpanel->selected = 0;
-    cpanel->count = 1;
-    cpanel->dir.list[0].fname = (char *) file;
+    strcpy (current_panel->cwd, d);
+    current_panel->selected = 0;
+    current_panel->count = 1;
+    current_panel->dir.list[0].fname = (char *) file;
 }
 
 static void
@@ -1495,7 +1495,7 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	}
 
 	if ((!alternate_plus_minus || !(console_flag || xterm_flag))
-	    && !quote && !cpanel->searching) {
+	    && !quote && !current_panel->searching) {
 	    if (!only_leading_plus_minus) {
 		/* Special treatement, since the input line will eat them */
 		if (parm == '+') {
@@ -1536,9 +1536,9 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_NOT_HANDLED;
 
     case DLG_HOTKEY_HANDLED:
-	if ((get_current_type () == view_listing) && cpanel->searching) {
-	    cpanel->searching = 0;
-	    cpanel->dirty = 1;
+	if ((get_current_type () == view_listing) && current_panel->searching) {
+	    current_panel->searching = 0;
+	    current_panel->dirty = 1;
 	}
 	return MSG_HANDLED;
 
@@ -1594,7 +1594,7 @@ update_xterm_title_path (void)
     unsigned char *p, *s;
 
     if (xterm_flag && xterm_title) {
-	p = s = g_strdup (strip_home_and_password (cpanel->cwd));
+	p = s = g_strdup (strip_home_and_password (current_panel->cwd));
 	do {
 	    if (!is_printable (*s))
 		*s = '?';
@@ -1734,9 +1734,9 @@ do_nc (void)
     /* Program end */
     midnight_shutdown = 1;
 
-    /* destroy_dlg destroys even cpanel->cwd, so we have to save a copy :) */
+    /* destroy_dlg destroys even current_panel->cwd, so we have to save a copy :) */
     if (last_wd_file && vfs_current_is_local ()) {
-	last_wd_string = g_strdup (cpanel->cwd);
+	last_wd_string = g_strdup (current_panel->cwd);
     }
     done_mc ();
 

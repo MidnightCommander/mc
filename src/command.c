@@ -146,7 +146,7 @@ void do_cd_command (char *cmd)
 	if (cmd [0] == 0){
 	    sync_tree (home_dir);
 	} else if (strcmp (cmd+3, "..") == 0){
-	    char *dir = cpanel->cwd;
+	    char *dir = current_panel->cwd;
 	    int len = strlen (dir);
 	    while (len && dir [--len] != PATH_SEP);
 	    dir [len] = 0;
@@ -157,7 +157,7 @@ void do_cd_command (char *cmd)
 	} else if (cmd [3] == PATH_SEP){
 	    sync_tree (cmd+3);
 	} else {
-	    char *old = cpanel->cwd;
+	    char *old = current_panel->cwd;
 	    char *new;
 	    new = concat_dir_and_file (old, cmd+3);
 	    sync_tree (new);

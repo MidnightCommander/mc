@@ -990,11 +990,11 @@ void set_display_type (int num, int type)
      * - select left panel
      * - invoke menue left/tree
      * - as long as you stay in the left panel almost everything that uses
-     *   cpanel causes segfault, e.g. C-Enter, C-x c, ...
+     *   current_panel causes segfault, e.g. C-Enter, C-x c, ...
      */
 
     if (type != view_listing)
-	if (cpanel == (WPanel *) old_widget)
+	if (current_panel == (WPanel *) old_widget)
 	    current_panel = num == 0 ? right_panel : left_panel;
 }
 
@@ -1033,7 +1033,7 @@ void swap_panels ()
 	
         panel1->searching = 0;
         panel2->searching = 0;
-        if (cpanel == panel1)
+        if (current_panel == panel1)
             current_panel = panel2;
         else
             current_panel = panel1;
@@ -1098,7 +1098,7 @@ get_panel_widget (int index)
 
 int get_current_index (void)
 {
-    if (panels [0].widget == ((Widget *) cpanel))
+    if (panels [0].widget == ((Widget *) current_panel))
 	return 0;
     else
 	return 1;
@@ -1118,7 +1118,7 @@ get_other_panel (void)
 /* Returns the view type for the current panel/view */
 int get_current_type (void)
 {
-    if (panels [0].widget == (Widget *) cpanel)
+    if (panels [0].widget == (Widget *) current_panel)
 	return panels [0].type;
     else
 	return panels [1].type;
@@ -1127,7 +1127,7 @@ int get_current_type (void)
 /* Returns the view type of the unselected panel */
 int get_other_type (void)
 {
-    if (panels [0].widget == (Widget *) cpanel)
+    if (panels [0].widget == (Widget *) current_panel)
 	return panels [1].type;
     else
 	return panels [0].type;

@@ -658,7 +658,7 @@ regex_command (char *filename, char *action, int *move_dir)
 			 * We need to copy the filename because exec_extension
 			 * may end up invoking update_panels thus making the
 			 * filename parameter invalid (ie, most of the time,
-			 * we get filename as a pointer from cpanel->dir).
+			 * we get filename as a pointer from current_panel->dir).
 			 */
 			if (p < q) {
 			    char *filename_copy = g_strdup (filename);

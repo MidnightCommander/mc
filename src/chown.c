@@ -122,10 +122,10 @@ chown_refresh (Dlg_head *h)
 static char *
 next_file (void)
 {
-    while (!cpanel->dir.list[current_file].f.marked)
+    while (!current_panel->dir.list[current_file].f.marked)
 	current_file++;
 
-    return cpanel->dir.list[current_file].fname;
+    return current_panel->dir.list[current_file].fname;
 }
 
 static cb_ret_t
@@ -151,7 +151,7 @@ init_chown (void)
 
     do_refresh ();
     end_chown = need_update = current_file = 0;
-    single_set = (cpanel->marked < 2) ? 3 : 0;
+    single_set = (current_panel->marked < 2) ? 3 : 0;
 
     ch_dlg =
 	create_dlg (0, 0, 18, 74, dialog_colors, chown_callback, "[Chown]",
@@ -210,11 +210,11 @@ chown_done (void)
 static inline void
 do_chown (uid_t u, gid_t g)
 {
-    if (mc_chown (cpanel->dir.list [current_file].fname, u, g) == -1)
+    if (mc_chown (current_panel->dir.list [current_file].fname, u, g) == -1)
 	message (1, MSG_ERROR, _(" Cannot chown \"%s\" \n %s "),
-	     cpanel->dir.list [current_file].fname, unix_error_string (errno));
+	     current_panel->dir.list [current_file].fname, unix_error_string (errno));
 
-    do_file_mark (cpanel, current_file, 0);
+    do_file_mark (current_panel, current_file, 0);
 }
 
 static void
@@ -229,7 +229,7 @@ apply_chowns (uid_t u, gid_t g)
 	fname = next_file ();
     
 	do_chown (u,g);
-    } while (cpanel->marked);
+    } while (current_panel->marked);
 }
 
 #define chown_label(n,txt) label_set_text (chown_label [n].l, txt)
@@ -249,10 +249,10 @@ chown_cmd (void)
 	ch_dlg = init_chown ();
 	new_user = new_group = -1;
 
-	if (cpanel->marked)
+	if (current_panel->marked)
 	    fname = next_file ();	        /* next marked file */
 	else
-	    fname = selection (cpanel)->fname;	        /* single file */
+	    fname = selection (current_panel)->fname;	        /* single file */
 	
 	if (mc_stat (fname, &sf_stat) != 0) {	/* get status of file */
 	    destroy_dlg (ch_dlg);
@@ -327,12 +327,12 @@ chown_cmd (void)
 	}
 	}
 	
-	if (cpanel->marked && ch_dlg->ret_value != B_CANCEL){
-	    do_file_mark (cpanel, current_file, 0);
+	if (current_panel->marked && ch_dlg->ret_value != B_CANCEL){
+	    do_file_mark (current_panel, current_file, 0);
 	    need_update = 1;
 	}
 	destroy_dlg (ch_dlg);
-    } while (cpanel->marked && !end_chown);
+    } while (current_panel->marked && !end_chown);
     
     chown_done ();
 }

@@ -91,9 +91,6 @@ void update_dirty_panels (void);
 void panel_update_cols (Widget *widget, int frame_size);
 int set_panel_formats (WPanel *p);
 
-/* Useful macros to avoid too much typing */
-#define cpanel current_panel
-#define opanel get_other_panel()
 #define other_panel get_other_panel()
 
 extern WPanel *left_panel;

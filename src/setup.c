@@ -327,7 +327,7 @@ save_setup (void)
     save_layout ();
     save_string ("Dirs", "other_dir",
 			       get_other_type () == view_listing
-			       ? opanel->cwd : ".", profile);
+			       ? other_panel->cwd : ".", profile);
     if (current_panel != NULL)
 	    WritePrivateProfileString ("Dirs", "current_is_left",
 				       get_current_index () == 0 ? "1" : "0", profile);

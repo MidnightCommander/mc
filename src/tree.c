@@ -822,7 +822,7 @@ chdir_sel (WTree *tree)
     }
     change_panel ();
     if (do_cd (tree->selected_ptr->name, cd_exact)) {
-	select_item (cpanel);
+	select_item (current_panel);
     } else {
 	message (1, MSG_ERROR, _(" Cannot chdir to \"%s\" \n %s "),
 		 tree->selected_ptr->name, unix_error_string (errno));

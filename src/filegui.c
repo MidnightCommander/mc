@@ -65,7 +65,7 @@
 #define WANT_WIDGETS
 #include "main.h"		/* the_hint */
 #include "wtools.h"		/* QuickDialog */
-#include "panel.h"		/* cpanel */
+#include "panel.h"		/* current_panel */
 #include "fileopctx.h"		/* FILE_CONT */
 #include "filegui.h"
 #include "key.h"		/* get_event */
@@ -442,10 +442,10 @@ file_progress_show_source (FileOpContext *ctx, char *s)
 
     if (s != NULL) {
 #ifdef WITH_FULL_PATHS
-	int i = strlen (cpanel->cwd);
+	int i = strlen (current_panel->cwd);
 
 	/* We remove the full path we have added before */
-	if (!strncmp (s, cpanel->cwd, i)) {
+	if (!strncmp (s, current_panel->cwd, i)) {
 	    if (s[i] == PATH_SEP)
 		s += i + 1;
 	}

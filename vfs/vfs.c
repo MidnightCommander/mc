@@ -766,11 +766,11 @@ _vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid,
        parents to the time-outing structure. */
 
     /* There are three directories we have to take care of: current_dir,
-       cpanel->cwd and opanel->cwd. Athough most of the time either
-       current_dir and cpanel->cwd or current_dir and opanel->cwd are the
+       current_panel->cwd and other_panel->cwd. Athough most of the time either
+       current_dir and current_panel->cwd or current_dir and other_panel->cwd are the
        same, it's possible that all three are different -- Norbert */
 
-    if (!cpanel)
+    if (!current_panel)
 	return;
 
     nvfs = vfs_get_class (current_dir);
@@ -785,8 +785,8 @@ _vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid,
     }
 
     if (get_current_type () == view_listing) {
-	n2vfs = vfs_get_class (cpanel->cwd);
-	n2vfsid = vfs_ncs_getid (n2vfs, cpanel->cwd, &par);
+	n2vfs = vfs_get_class (current_panel->cwd);
+	n2vfsid = vfs_ncs_getid (n2vfs, current_panel->cwd, &par);
 	f = is_parent (oldvfs, oldvfsid, par);
 	vfs_rm_parents (par);
 	if ((n2vfs == oldvfs && n2vfsid == oldvfsid) || f)
@@ -797,8 +797,8 @@ _vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid,
     }
 
     if (get_other_type () == view_listing) {
-	n3vfs = vfs_get_class (opanel->cwd);
-	n3vfsid = vfs_ncs_getid (n3vfs, opanel->cwd, &par);
+	n3vfs = vfs_get_class (other_panel->cwd);
+	n3vfsid = vfs_ncs_getid (n3vfs, other_panel->cwd, &par);
 	f = is_parent (oldvfs, oldvfsid, par);
 	vfs_rm_parents (par);
 	if ((n3vfs == oldvfs && n3vfsid == oldvfsid) || f)
@@ -866,14 +866,14 @@ vfs_add_current_stamps (void)
 {
     vfs_stamp_path (current_dir);
 
-    if (cpanel) {
+    if (current_panel) {
 	if (get_current_type () == view_listing)
-	    vfs_stamp_path (cpanel->cwd);
+	    vfs_stamp_path (current_panel->cwd);
     }
 
-    if (opanel) {
+    if (other_panel) {
 	if (get_other_type () == view_listing)
-	    vfs_stamp_path (opanel->cwd);
+	    vfs_stamp_path (other_panel->cwd);
     }
 }
 

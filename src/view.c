@@ -2637,7 +2637,7 @@ view_hook (void *v)
     delete_hook (&idle_hook, view_hook);
 
     if (get_current_type () == view_listing)
-	panel = cpanel;
+	panel = current_panel;
     else if (get_other_type () == view_listing)
 	panel = other_panel;
     else

@@ -39,7 +39,7 @@
 #include "setup.h"		/* For profile_bname */
 #include "profile.h"		/* Load/save directories panelize */
 #include "dir.h"
-#include "panel.h"		/* cpanel */
+#include "panel.h"		/* current_panel */
 #include "main.h"		/* repaint_screen */
 #include "panelize.h"
 
@@ -358,7 +358,7 @@ static void do_external_panelize (char *command)
     int status, link_to_dir, stale_link;
     int next_free = 0;
     struct stat st;
-    dir_list *list = &cpanel->dir;
+    dir_list *list = &current_panel->dir;
     char line [MC_MAXPATHLEN];
     char *name;
     FILE *external;
@@ -370,7 +370,7 @@ static void do_external_panelize (char *command)
 	return;
     }
     /* Clear the counters and the directory list */
-    panel_clean_dir (cpanel);
+    panel_clean_dir (current_panel);
 
     while (1) {
 	clearerr(external);
@@ -396,7 +396,7 @@ static void do_external_panelize (char *command)
 	    break;
 	list->list [next_free].fnamelen = strlen (name);
 	list->list [next_free].fname = g_strdup (name);
-	file_mark (cpanel, next_free, 0);
+	file_mark (current_panel, next_free, 0);
 	list->list [next_free].f.link_to_dir = link_to_dir;
 	list->list [next_free].f.stale_link = stale_link;
 	list->list [next_free].f.dir_size_computed = 0;
@@ -406,19 +406,19 @@ static void do_external_panelize (char *command)
 	    rotate_dash ();
     }
 
-    cpanel->is_panelized = 1;
+    current_panel->is_panelized = 1;
     if (next_free){
-	cpanel->count = next_free;
+	current_panel->count = next_free;
 	if (list->list [0].fname [0] == PATH_SEP){
-	    strcpy (cpanel->cwd, PATH_SEP_STR);
+	    strcpy (current_panel->cwd, PATH_SEP_STR);
 	    chdir (PATH_SEP_STR);
 	}
     } else {
-	cpanel->count = set_zero_dir (list);
+	current_panel->count = set_zero_dir (list);
     }
     if (pclose (external) < 0)
 	message (0, _("External panelize"), _("Pipe close failed"));
     close_error_pipe (0, 0);
-    try_to_select (cpanel, NULL);
-    panel_re_sort (cpanel);
+    try_to_select (current_panel, NULL);
+    panel_re_sort (current_panel);
 }

@@ -189,7 +189,7 @@ init_chmod (void)
 
     do_refresh ();
     end_chmod = c_file = need_update = 0;
-    single_set = (cpanel->marked < 2) ? 2 : 0;
+    single_set = (current_panel->marked < 2) ? 2 : 0;
 
     ch_dlg =
 	create_dlg (0, 0, 22 - single_set, 70, dialog_colors,
@@ -227,21 +227,21 @@ static void chmod_done (void)
 
 static char *next_file (void)
 {
-    while (!cpanel->dir.list[c_file].f.marked)
+    while (!current_panel->dir.list[c_file].f.marked)
 	c_file++;
 
-    return cpanel->dir.list[c_file].fname;
+    return current_panel->dir.list[c_file].fname;
 }
 
 static void do_chmod (struct stat *sf)
 {
     sf->st_mode &= and_mask;
     sf->st_mode |= or_mask;
-    if (mc_chmod (cpanel->dir.list [c_file].fname, sf->st_mode) == -1)
+    if (mc_chmod (current_panel->dir.list [c_file].fname, sf->st_mode) == -1)
 	message (1, MSG_ERROR, _(" Cannot chmod \"%s\" \n %s "),
-	     cpanel->dir.list [c_file].fname, unix_error_string (errno));
+	     current_panel->dir.list [c_file].fname, unix_error_string (errno));
 
-    do_file_mark (cpanel, c_file, 0);
+    do_file_mark (current_panel, c_file, 0);
 }
 
 static void apply_mask (struct stat *sf)
@@ -258,7 +258,7 @@ static void apply_mask (struct stat *sf)
 	c_stat = sf->st_mode;
 
 	do_chmod (sf);
-    } while (cpanel->marked);
+    } while (current_panel->marked);
 }
 
 void chmod_cmd (void)
@@ -271,10 +271,10 @@ void chmod_cmd (void)
 
     do {			/* do while any files remaining */
 	ch_dlg = init_chmod ();
-	if (cpanel->marked)
+	if (current_panel->marked)
 	    fname = next_file ();	/* next marked file */
 	else
-	    fname = selection (cpanel)->fname;	/* single file */
+	    fname = selection (current_panel)->fname;	/* single file */
 
 	if (mc_stat (fname, &sf_stat) != 0) {	/* get status of file */
 	    destroy_dlg (ch_dlg);
@@ -358,12 +358,12 @@ void chmod_cmd (void)
 	    break;
 	}
 
-	if (cpanel->marked && ch_dlg->ret_value!=B_CANCEL) {
-	    do_file_mark (cpanel, c_file, 0);
+	if (current_panel->marked && ch_dlg->ret_value!=B_CANCEL) {
+	    do_file_mark (current_panel, c_file, 0);
     	    need_update = 1;
 	}
 	destroy_dlg (ch_dlg);
-    } while (cpanel->marked && !end_chmod);
+    } while (current_panel->marked && !end_chmod);
     chmod_done ();
 }
 

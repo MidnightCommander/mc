@@ -1847,7 +1847,7 @@ panel_operate (void *source_panel, FileOperation operation,
 	if (force_single)
 	    dest_dir = source;
 	else if (get_other_type () == view_listing)
-	    dest_dir = opanel->cwd;
+	    dest_dir = other_panel->cwd;
 	else
 	    dest_dir = panel->cwd;
 

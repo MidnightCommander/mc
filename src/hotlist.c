@@ -44,7 +44,7 @@
 #include "setup.h"		/* For profile_bname */
 #include "profile.h"		/* Load/save directories hotlist */
 #include "wtools.h"		/* QuickDialog */
-#include "panel.h"		/* cpanel */
+#include "panel.h"		/* current_panel */
 #include "main.h"		/* repaint_screen */
 #include "hotlist.h"
 #include "key.h"		/* KEY_M_CTRL */
@@ -901,7 +901,7 @@ static void add_new_entry_cmd (void)
     int ret;
 
     /* Take current directory as default value for input fields */
-    title = url = cpanel->cwd;
+    title = url = current_panel->cwd;
 
     ret = add_new_entry_input (_("New hotlist entry"), _("Directory label"), _("Directory path"),
 	 "[Hotlist]", &title, &url);
@@ -1001,13 +1001,13 @@ void add2hotlist_cmd (void)
     char *cp = _("Label for \"%s\":");
     int l = strlen (cp);
 
-    prompt = g_strdup_printf (cp, name_trunc (cpanel->cwd, COLS-2*UX-(l+8)));
-    label = input_dialog (_(" Add to hotlist "), prompt, cpanel->cwd);
+    prompt = g_strdup_printf (cp, name_trunc (current_panel->cwd, COLS-2*UX-(l+8)));
+    label = input_dialog (_(" Add to hotlist "), prompt, current_panel->cwd);
     g_free (prompt);
     if (!label || !*label)
 	return;
 
-    add2hotlist (label,g_strdup (cpanel->cwd), HL_TYPE_ENTRY, 0);
+    add2hotlist (label,g_strdup (current_panel->cwd), HL_TYPE_ENTRY, 0);
     hotlist_state.modified = 1;
 }
 

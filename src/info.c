@@ -29,7 +29,7 @@
 #include "info.h"
 #include "dir.h"		/* required by panel */
 #include "panel.h"		/* for the panel structure */
-#include "main.h"		/* opanel, cpanel definitions */
+#include "main.h"		/* other_panel, current_panel definitions */
 #include "util.h"		/* size_trunc_len */
 #include "layout.h"
 #include "key.h"		/* is_idle() */
@@ -81,8 +81,8 @@ info_show_info (struct WInfo *info)
     if (!info->ready)
 	return;
     
-    my_statfs (&myfs_stats, cpanel->cwd);
-    st = cpanel->dir.list [cpanel->selected].st;
+    my_statfs (&myfs_stats, current_panel->cwd);
+    st = current_panel->dir.list [current_panel->selected].st;
 
     /* Print only lines which fit */
     
@@ -188,9 +188,9 @@ info_show_info (struct WInfo *info)
     case 3:
 	widget_move (&info->widget, 3, 2);
 	/* .ado: fname is invalid if selected == 0 && info called from current panel */
-	if (cpanel->selected){
+	if (current_panel->selected){
 		printw (file_label,
-			name_trunc (cpanel->dir.list [cpanel->selected].fname,
+			name_trunc (current_panel->dir.list [current_panel->selected].fname,
 				    info->widget.cols - i18n_adjust));
 	} else
 		printw (_("File:       None"));

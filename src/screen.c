@@ -808,11 +808,11 @@ paint_panel (WPanel *panel)
 void
 update_dirty_panels (void)
 {
-    if (cpanel->dirty)
-	panel_update_contents (cpanel);
+    if (current_panel->dirty)
+	panel_update_contents (current_panel);
 
-    if ((get_other_type () == view_listing) && opanel->dirty)
-	panel_update_contents (opanel);
+    if ((get_other_type () == view_listing) && other_panel->dirty)
+	panel_update_contents (other_panel);
 }
 
 static void
@@ -1939,7 +1939,7 @@ do_enter_on_file_entry (file_entry *fe)
 	return 1;
 
     /* Check if the file is executable */
-    full_name = concat_dir_and_file (cpanel->cwd, fe->fname);
+    full_name = concat_dir_and_file (current_panel->cwd, fe->fname);
     if (!is_exe (fe->st.st_mode) || !if_link_is_exe (full_name, fe)) {
 	g_free (full_name);
 	return 0;
@@ -1997,7 +1997,7 @@ chdir_other_panel (WPanel *panel)
 	set_display_type (get_other_index (), view_listing);
     }
 
-    do_panel_cd (opanel, cpanel->cwd, cd_exact);
+    do_panel_cd (other_panel, current_panel->cwd, cd_exact);
 
     /* try to select current filename on the other panel */
     if (!panel->is_panelized) {

@@ -45,7 +45,7 @@
 
 #include "global.h"
 #include "tty.h"	/* LINES */
-#include "panel.h"	/* cpanel */
+#include "panel.h"	/* current_panel */
 #include "wtools.h"	/* query_dialog() */
 #include "main.h"	/* do_update_prompt() */
 #include "cons.saver.h"	/* handle_console() */
@@ -530,7 +530,7 @@ int invoke_subshell (const char *command, int how, char **new_dir)
     
     /* Make the subshell change to MC's working directory */
     if (new_dir)
-	do_subshell_chdir (cpanel->cwd, TRUE, 1);
+	do_subshell_chdir (current_panel->cwd, TRUE, 1);
     
     if (command == NULL)  /* The user has done "C-o" from MC */
     {
@@ -555,7 +555,7 @@ int invoke_subshell (const char *command, int how, char **new_dir)
 
     feed_subshell (how, FALSE);
 
-    if (new_dir && subshell_alive && strcmp (subshell_cwd, cpanel->cwd))
+    if (new_dir && subshell_alive && strcmp (subshell_cwd, current_panel->cwd))
 	*new_dir = subshell_cwd;  /* Make MC change to the subshell's CWD */
 
     /* Restart the subshell if it has died by SIGHUP, SIGQUIT, etc. */
@@ -754,7 +754,7 @@ subshell_name_quote (const char *s)
 /* If it actually changed the directory it returns true */
 void do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
 {
-    if (!(subshell_state == INACTIVE && strcmp (subshell_cwd, cpanel->cwd))){
+    if (!(subshell_state == INACTIVE && strcmp (subshell_cwd, current_panel->cwd))){
 	/* We have to repaint the subshell prompt if we read it from
 	 * the main program.  Please note that in the code after this
 	 * if, the cd command that is sent will make the subshell
@@ -786,8 +786,8 @@ void do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
     subshell_state = RUNNING_COMMAND;
     feed_subshell (QUIETLY, FALSE);
     
-    if (subshell_alive && strcmp (subshell_cwd, cpanel->cwd) && strcmp (cpanel->cwd, "."))
-	fprintf (stderr, _("Warning: Cannot change to %s.\n"), cpanel->cwd);
+    if (subshell_alive && strcmp (subshell_cwd, current_panel->cwd) && strcmp (current_panel->cwd, "."))
+	fprintf (stderr, _("Warning: Cannot change to %s.\n"), current_panel->cwd);
 
     if (reset_prompt)
 	prompt_pos = 0;

@@ -355,7 +355,7 @@ static void chown_refresh (void)
 
     if (!single_set){
 	dlg_move (ch_dlg, 3, 54);
-	printw (_("%6d of %d"), files_on_begin - (cpanel->marked) + 1,
+	printw (_("%6d of %d"), files_on_begin - (current_panel->marked) + 1,
 		   files_on_begin);
     }
 
@@ -539,7 +539,7 @@ init_chown_advanced (void)
     sf_stat = g_new (struct stat, 1);
     do_refresh ();
     end_chown = need_update = current_file = 0;
-    single_set = (cpanel->marked < 2) ? 2 : 0;
+    single_set = (current_panel->marked < 2) ? 2 : 0;
     memset (ch_flags, '=', 11);
     flag_pos = 0;
     x_toggle = 070;
@@ -582,17 +582,17 @@ chown_advanced_done (void)
 #if 0
 static inline void do_chown (uid_t u, gid_t g)
 {
-    chown (cpanel->dir.list[current_file].fname, u, g);
-    file_mark (cpanel, current_file, 0);
+    chown (current_panel->dir.list[current_file].fname, u, g);
+    file_mark (current_panel, current_file, 0);
 }
 #endif
 
 static char *next_file (void)
 {
-    while (!cpanel->dir.list[current_file].f.marked)
+    while (!current_panel->dir.list[current_file].f.marked)
 	current_file++;
 
-    return cpanel->dir.list[current_file].fname;
+    return current_panel->dir.list[current_file].fname;
 }
 
 static void apply_advanced_chowns (struct stat *sf)
@@ -601,7 +601,7 @@ static void apply_advanced_chowns (struct stat *sf)
     gid_t a_gid = sf->st_gid;
     uid_t a_uid = sf->st_uid;
 
-    fname = cpanel->dir.list[current_file].fname;
+    fname = current_panel->dir.list[current_file].fname;
     need_update = end_chown = 1;
     if (mc_chmod (fname, get_mode ()) == -1)
 	message (1, MSG_ERROR, _(" Cannot chmod \"%s\" \n %s "),
@@ -611,7 +611,7 @@ static void apply_advanced_chowns (struct stat *sf)
 		       (ch_flags[10] == '+') ? sf->st_gid : -1) == -1)
 	message (1, MSG_ERROR, _(" Cannot chown \"%s\" \n %s "),
 		 fname, unix_error_string (errno));
-    do_file_mark (cpanel, current_file, 0);
+    do_file_mark (current_panel, current_file, 0);
 
     do {
 	fname = next_file ();
@@ -627,23 +627,23 @@ static void apply_advanced_chowns (struct stat *sf)
 	    message (1, MSG_ERROR, _(" Cannot chown \"%s\" \n %s "),
 		     fname, unix_error_string (errno));
 
-	do_file_mark (cpanel, current_file, 0);
-    } while (cpanel->marked);
+	do_file_mark (current_panel, current_file, 0);
+    } while (current_panel->marked);
 }
 
 void
 chown_advanced_cmd (void)
 {
 
-    files_on_begin = cpanel->marked;
+    files_on_begin = current_panel->marked;
 
     do {			/* do while any files remaining */
 	init_chown_advanced ();
 
-	if (cpanel->marked)
+	if (current_panel->marked)
 	    fname = next_file ();	/* next marked file */
 	else
-	    fname = selection (cpanel)->fname;	/* single file */
+	    fname = selection (current_panel)->fname;	/* single file */
 
 	if (mc_stat (fname, sf_stat) != 0) {	/* get status of file */
 	    destroy_dlg (ch_dlg);
@@ -682,12 +682,12 @@ chown_advanced_cmd (void)
 
 	}
 
-	if (cpanel->marked && ch_dlg->ret_value != B_CANCEL) {
-	    do_file_mark (cpanel, current_file, 0);
+	if (current_panel->marked && ch_dlg->ret_value != B_CANCEL) {
+	    do_file_mark (current_panel, current_file, 0);
 	    need_update = 1;
 	}
 	destroy_dlg (ch_dlg);
-    } while (cpanel->marked && !end_chown);
+    } while (current_panel->marked && !end_chown);
 
     chown_advanced_done ();
 }
