@@ -1,7 +1,7 @@
 
 * The Desktop startup directory
 
-The directory $(libdir)/desktop-scripts is a place holder for
+The directory $(libdir)/mc/desktop-scripts is a place holder for
 information on how to configure the default's user desktop.  There are
 a number of files that can be installed in this directory:
 
