@@ -1558,6 +1558,11 @@ init_xterm_support (void)
 	xmouse_seq = NULL;
     }
 
+    if (strcmp (termvalue, "cygwin") == 0) {
+	force_xterm = 1;
+	use_mouse_p = MOUSE_DISABLED;
+    }
+
     if (force_xterm
 	    || strncmp (termvalue, "xterm", 5) == 0
 	    || strncmp (termvalue, "rxvt", 4) == 0
