@@ -1,3 +1,8 @@
+2002-12-11  Pavel Roskin  <proski@gnu.org>
+
+	* eregex.h: Undefine __restrict_arr before redefining to avoid a
+	warning if it's defined.
+
 2002-12-09  Pavel Roskin  <proski@gnu.org>
 
 	* util.c (load_file_position): Don't free filename.
