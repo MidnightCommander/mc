@@ -403,9 +403,6 @@ extern void mc_vfs_done( void );
 #define MMAPNULL
 #endif
 
-#define DIR_SEP_CHAR '/'
-#define DIR_SEP_STRING "/"
-
 /* And now some defines for our errors. */
 
 #ifdef ENOSYS
