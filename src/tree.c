@@ -59,6 +59,7 @@
 #include "key.h"	/* For mi_getch() */
 #include "tree.h"
 #include "cmd.h"
+#include "command.h"
 #include "../vfs/vfs.h"
 
 extern int command_prompt;
@@ -1365,6 +1366,7 @@ static key_map tree_keymap [] = {
     { XCTRL('s'), start_search },
     { ALT('s'),   start_search },
     { XCTRL('r'), tree_rescan_cmd },
+    { KEY_DC,     tree_rmdir_cmd },
     { 0, 0 }
     };
 
@@ -1378,37 +1380,45 @@ static inline int tree_key (WTree *tree, int key)
 	        tree->searching = 0;
 	    (*tree_keymap [i].fn)(tree);
 	    show_tree (tree);
-	    break;
+	    return 1;
 	}
     }
+
     /* We do not want to use them if we do not need to */
     /* Input line may want to take the motion key event */
     if (key == KEY_LEFT)
 	return move_left (tree);
 
     if (key == KEY_RIGHT)
-	move_right (tree);
+	return move_right (tree);
 
     if (is_abort_char (key)) {
-	tree->searching = 0;
+	if (tree->is_panel) {
+	    tree->searching = 0;
+	    show_tree (tree);
+	    return 1;  /* eat abort char */
+	}
+	return 0;  /* modal tree dialog: let upper layer see the
+		      abort character and close the dialog */
     }
 
-    if (tree->searching){
-	tree_do_search (tree, key);
-	return 1;
-    }
-    if (!command_prompt)
-	start_search (tree);
+    /* Do not eat characters not meant for the tree below ' ' (e.g. C-l). */
+    if ((key >= ' '&& key <= 255) || key == 8 || key == KEY_BACKSPACE) {
+	if (tree->searching){
+	    tree_do_search (tree, key);
+	    show_tree (tree);
+	    return 1;
+	}
 
-    if (key == -1)
-	return 0;
-    
-    if (tree_keymap [i].key_code == 0){
-	if (tree->search_buffer [0])
-	    tree->search_buffer [0] = 0;
-	show_tree (tree);
+	if (!command_prompt) {
+	    start_search (tree);
+	    tree_do_search (tree, key);
+	    return 1;
+	}
+	return tree->is_panel;
     }
-    return  (key > ' ') ? tree->is_panel : 0;
+
+    return 0;
 }
 
 static void tree_frame (Dlg_head *h, WTree *tree)

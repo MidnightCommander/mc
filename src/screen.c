@@ -2027,21 +2027,10 @@ static key_map panel_keymap [] = {
     { XCTRL('n'), move_down },		/* C-n like emacs */
     { XCTRL('s'), start_search },	/* C-s like emacs */
     { ALT('s'),   start_search },	/* M-s not like emacs */
-
-    /* The functions keys we deal with */
-    { KEY_F(3),   view_cmd },
-    { KEY_F(13),  view_simple_cmd },
-    { KEY_F(4),   edit_cmd },
-    { KEY_F(14),  edit_cmd_new },
-    { KEY_F(5),   copy_cmd },
-    { KEY_F(6),   ren_cmd },
-    { KEY_F(7),   mkdir_cmd },
-    { KEY_F(8),   delete_cmd },
-    { KEY_DC,     delete_cmd },
-	
     { XCTRL('t'), mark_file },
     { ALT('o'),   chdir_other_panel },
     { ALT('l'),   chdir_to_readlink },
+    { KEY_DC,     delete_cmd},
     { 0, 0 }
 };
     
@@ -2058,8 +2047,10 @@ panel_key (WPanel *panel, int key)
 	    return 1;
 	}
     }
-    if (torben_fj_mode && key == ALT('h'))
+    if (torben_fj_mode && key == ALT('h')) {
 	goto_middle_file (panel);
+	return 1;
+    }
 
     /* We do not want to take a key press if nothing can be done with it */
     /* The command line widget may do something more usefull */
@@ -2067,30 +2058,29 @@ panel_key (WPanel *panel, int key)
 	return move_left (panel, key);
 
     if (key == KEY_RIGHT)
-	move_right (panel, key);
+	return move_right (panel, key);
 
     if (is_abort_char (key)) {
 	panel->searching = 0;
 	display_mini_info (panel);
-    }
-
-    if (panel->searching){
-	do_search (panel, key);
 	return 1;
     }
-    if (!command_prompt)
-	start_search (panel);
-    if (key == -1)
-	return 0;
-    
-    if (panel_keymap [i].key_code == 0){
+
+    /* Do not eat characters not meant for the panel below ' ' (e.g. C-l). */
+    if ((key >= ' '&& key <= 255) || key == 8 || key == KEY_BACKSPACE) {
 	if (panel->searching){
-	    panel->searching = 0;
-	    display_mini_info (panel);
+	    do_search (panel, key);
+	    return 1;
 	}
-	return 0;
+
+	if (!command_prompt) {
+	    start_search (panel);
+	    do_search (panel, key);
+	    return 1;
+	}
     }
-    return 1;
+
+    return 0;
 }
 
 int

@@ -386,10 +386,19 @@ ftpfs_connection_destructor(void *data)
     ftpfs_free_bucket (data);
 }
 
+/* some defines only used by changetype */
+/* These two are valid values for the second parameter */
+#define TYPE_ASCII    0
+#define TYPE_BINARY   1
+
+/* This one is only used to initialize bucket->isbinary, don't use it as
+   second parameter to changetype. */
+#define TYPE_UNKNOWN -1 
+
 static int
 changetype (struct ftpfs_connection *bucket, int binary)
 {
-    if (binary || binary != bucket->isbinary) {
+    if (binary != bucket->isbinary) {
         if (command (bucket, WAIT_REPLY, "TYPE %c", binary ? 'I' : 'A') != COMPLETE) {
 	    ftpfserrno = EIO;
             return -1;
@@ -417,7 +426,8 @@ login_server (struct ftpfs_connection *bucket, char *netrcpass)
     char *op;
     char *name;			/* login user name */
     int  anon = 0;
-    
+
+    bucket->isbinary = TYPE_UNKNOWN;    
     if (netrcpass)
         op = strdup (netrcpass);
     else {
@@ -824,7 +834,7 @@ open_command_connection (char *host, char *user, int port, char *netrcpass)
     bucket->password = 0;
     bucket->use_passive_connection = ftpfs_use_passive_connections | source_route;
     bucket->use_source_route = source_route;
-    bucket->isbinary = -1;
+    bucket->isbinary = TYPE_UNKNOWN;
 
     /* We do not want to use the passive if we are using proxies */
     if (bucket->use_proxy)
@@ -1243,11 +1253,11 @@ resolve_symlink(struct ftpfs_connection *bucket, struct ftpfs_dir *dir)
             print_vfs_message("ftpfs: CWD failed.");
 	    return;
         }
-        sock = open_data_connection (bucket, "LIST -lLa", ".", 0);
+        sock = open_data_connection (bucket, "LIST -lLa", ".", TYPE_ASCII);
     }
     else
         sock = open_data_connection (bucket, "LIST -lLa", 
-                                     dir->remote_path, 0);
+                                     dir->remote_path, TYPE_ASCII);
 
     if (sock == -1) {
 	print_vfs_message("ftpfs: couldn't resolve symlink");
@@ -1396,11 +1406,11 @@ retrieve_dir(struct ftpfs_connection *bucket, char *remote_path)
     dcache->count = 1;
 
     if (has_spaces)
-        sock = open_data_connection (bucket, "LIST -la", ".", 0);
+        sock = open_data_connection (bucket, "LIST -la", ".", TYPE_ASCII);
     else {
 	char *path = copy_strings (remote_path, PATH_SEP_STR, ".", (char *) 0);
 	
-	sock = open_data_connection (bucket, "LIST -la", path, 0);
+	sock = open_data_connection (bucket, "LIST -la", path, TYPE_ASCII);
 	free (path);
     }
 
@@ -1529,7 +1539,7 @@ store_file(struct ftpentry *fe)
 	return 0;
     }
     fstat(local_handle, &s);
-    sock = open_data_connection(fe->bucket, "STOR", fe->remote_filename, 1);
+    sock = open_data_connection(fe->bucket, "STOR", fe->remote_filename, TYPE_BINARY);
     if (sock < 0) {
 	close(local_handle);
 	return 0;
@@ -1606,7 +1616,7 @@ int retrieve_file_start(struct ftpentry *fe)
 	ftpfserrno = ENOMEM;
 	return 0;
     }
-    remotesock = open_data_connection(fe->bucket, "RETR", fe->remote_filename, 1);
+    remotesock = open_data_connection(fe->bucket, "RETR", fe->remote_filename, TYPE_BINARY);
     if (remotesock == -1) {
 	ftpfserrno = EACCES;
 	free (fe->local_filename);
@@ -1746,7 +1756,7 @@ int retrieve_file(struct ftpentry *fe)
 	fe->local_filename = NULL;
 	return 0;
     }
-    sock = open_data_connection(fe->bucket, "RETR", fe->remote_filename, 1);
+    sock = open_data_connection(fe->bucket, "RETR", fe->remote_filename, TYPE_BINARY);
     if (sock == -1) {
 	ftpfserrno = EACCES;
 	goto error_3;

@@ -1,3 +1,26 @@
+Mon Mar  2 12:11:37 1998  Norbert Warmuth <k3190@fh-sw.de>
+
+	* vfs/ftpfs.c (changetype): Removed the hack which always forced 
+	sending the command "TYPE I" when changing to binary transfer mode
+	was requested even when MC thought the connection was already in 
+	binary mode (bucket->isbinary == 1). The correct fix is now in 
+	login_server.
+
+	* vfs/ftpfs.c (login_server): Set the transfer mode stored in
+	the bucket to UNKNOWN (the bucket might be reused and the old
+	transfer mode isn't valid any longer). 
+
+	* screen.c (panel_key): Cleanup: deleted if-clause with -1 (EV_NONE)
+	which isn't delivered to widgets by the dialog manager; always 
+	return 1 when key was handled; removed the function keys from the 
+	panel's keymap (the function keys are always handled by the 
+	buttonbar); don't eat characters below ' ' (C-l and Shift-F3 now 
+	work even when quick search was started); characters between 32 and 
+	255 start quick search if there is no commandline (no C-s necessary 
+	to start search).
+
+	* tree.c (tree_key): likewise
+	
 Tue Feb 24 18:37:36 1998  Stas Maximov <stmax@u213.srcc.msu.su>
 
 	* subshell.c: Set subshell_pid to 1 on startup
