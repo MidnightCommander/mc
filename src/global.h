@@ -33,6 +33,8 @@
 
 #ifdef HAVE_UTIME_H
 #  include <utime.h>
+#elif HAVE_SYS_UTIME_H
+#  include <sys/utime.h>
 #endif
 
 #ifdef HAVE_SYS_WAIT_H
