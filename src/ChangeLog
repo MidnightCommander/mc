@@ -1,3 +1,8 @@
+2002-05-14  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* Makefile.am (VFSLIB): Add ../vfs/samba/libsamba.a
+	if USE_WITH_SAMBA is true.
+
 2002-05-07  Pavel Roskin  <proski@gnu.org>
 
 	* hotlist.c (hotlist_button_callback): Don't process B_REMOVE
