@@ -568,7 +568,7 @@ MCEDIT=""
 LEDIT=""
 EDIT_msg=""
 AC_ARG_WITH(edit,
-        [--with-edit                Enable internal editpr],
+        [--with-edit                Enable internal editor],
 	[if test x$withval = xyes
 	then
 		AC_WITH_EDIT
