@@ -78,8 +78,6 @@ static void handle_edit_symlink (GtkWidget *widget, WPanel *panel);
 static gboolean check_mount_func (WPanel *panel, DesktopIconInfo *dii);
 static gboolean check_unmount_func (WPanel *panel, DesktopIconInfo *dii);
 static gboolean check_eject_func (WPanel *panel, DesktopIconInfo *dii);
-static gboolean check_edit_func (WPanel *panel, DesktopIconInfo *dii);
-static gboolean check_view_func (WPanel *panel, DesktopIconInfo *dii);
 
 static gchar * get_full_filename (WPanel *panel);
 
@@ -550,8 +548,8 @@ gpopup_do_popup2 (GdkEventButton *event, WPanel *panel, DesktopIconInfo *dii)
 			REMOVE (flags, F_NOTDEV);
 	}
 
-	if (market == 0)
-		return;
+	if (marked == 0)
+		return 1;
 
 	if (marked > 1)
 		REMOVE (flags, F_SINGLE);
@@ -569,7 +567,7 @@ gpopup_do_popup2 (GdkEventButton *event, WPanel *panel, DesktopIconInfo *dii)
 
 	i = get_active_index (GTK_MENU (menu));
 	gtk_widget_unref (menu);
-	return i;
+	return 1;
 }
 
 static void
