@@ -1,3 +1,9 @@
+Thu Jan 14 13:18:58 1999  Timur Bakeyev <mc@bat.ru>
+
+	* screen.c (string_file_[owner|group]): Workaround the fact, that some
+	systems have user and group names greater than 8 symbols. Now we trun-
+	cate them.
+
 1999-01-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* treestore.c (tree_store_load): Use g_return_val_if_fail(), not

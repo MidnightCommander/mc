@@ -29,6 +29,9 @@
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>	/* For chdir(), readlink() and getwd()/getcwd() */
 #endif
+
+#include "mc.h"
+
 #include "mem.h"
 #include "mad.h"
 #include "global.h"
@@ -52,7 +55,6 @@
 #include "widget.h"
 #include "../vfs/vfs.h"
 #include "../vfs/extfs.h"
-#include <glib.h>
 
 #ifdef NEEDS_DRIVE_H
 # include "drive.h"
@@ -277,18 +279,6 @@ string_file_nlinks (file_entry *fe, int len)
 }
 
 char *
-string_file_owner (file_entry *fe, int len)
-{
-    return get_owner (fe->buf.st_uid);
-}
-
-char *
-string_file_group (file_entry *fe, int len)
-{
-    return get_group (fe->buf.st_gid);
-}
-
-char *
 string_file_size (file_entry *fe, int len)
 {
     static char buffer [16];
@@ -336,11 +326,41 @@ string_file_ctime (file_entry *fe, int len)
 #ifdef HAVE_GNOME
 /* In GNOME, the CList truncates the names */
 char *
+string_file_owner (file_entry *fe, int len)
+{
+    return get_owner (fe->buf.st_uid);
+}
+
+char *
+string_file_group (file_entry *fe, int len)
+{
+    return get_group (fe->buf.st_gid);
+}
+
+char *
 string_file_name (file_entry *fe, int len)
 {
 	return fe->fname;
 }
 #else
+char *
+string_file_owner (file_entry *fe, int len)
+{
+    if (len)
+	return name_trunc (get_owner (fe->buf.st_uid), len);
+    else
+	return get_owner (fe->buf.st_uid);
+}
+
+char *
+string_file_group (file_entry *fe, int len)
+{
+    if (len)
+	return name_trunc (get_group (fe->buf.st_gid), len);
+    else
+	return get_group (fe->buf.st_gid);
+}
+
 char *
 string_file_name (file_entry *fe, int len)
 {
