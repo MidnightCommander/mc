@@ -12,6 +12,8 @@ string.
 
 REGRESSION: Allow minimal functionality on read-only filesystems.
 
+Don't rely on temporary scripts being executable.  Run shell explicitly.
+
 When using included S-Lang, don't fill empty areas with spaces (' '),
 because they are copied to the buffer when doing cut and paste.
 
