@@ -156,7 +156,8 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
     for (p = (unsigned char *) text, q = p + strlen ((char *) p); p < q; p++, i++) {
 	switch (*p) {
 	case '\001':
-	    p++;
+	    if (++p >= q)
+		return -1;
 	    for (;;) {
 		c = edit_get_byte (edit, i);
 		if (!*p)
@@ -171,7 +172,8 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 	    }
 	    break;
 	case '\002':
-	    p++;
+	    if (++p >= q)
+		return -1;
 	    j = 0;
 	    for (;;) {
 		c = edit_get_byte (edit, i);
@@ -207,7 +209,8 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 	    }
 	    break;
 	case '\003':
-	    p++;
+	    if (++p >= q)
+		return -1;
 	    c = -1;
 	    for (;; i++) {
 		d = c;
@@ -220,20 +223,23 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 		j = c;		/* dummy command */
 	    }
 	    i--;
-	    while (*p != '\003')
+	    while (*p != '\003' && p < q)
 		p++;
+	    if (p >= q)
+		return -1;
 	    if (p[1] == d)
 		i--;
 	    break;
 	case '\004':
-	    p++;
+	    if (++p >= q)
+		return -1;
 	    c = edit_get_byte (edit, i);
 	    for (; *p != '\004'; p++)
 		if (c == *p)
 		    goto found_char3;
 	    return -1;
 	  found_char3:
-	    for (; *p != '\004'; p++);
+	    for (; *p != '\004' && p < q; p++);
 	    break;
 	default:
 	    if (*p != edit_get_byte (edit, i))
