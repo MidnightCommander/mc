@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
-"POT-Creation-Date: 2000-05-15 21:07+0200\n"
+"POT-Creation-Date: 2000-06-27 15:58+0200\n"
 "PO-Revision-Date: 2000-06-25 23:37+01:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -577,7 +577,7 @@ msgid "Replace it?"
 msgstr "Erstat den?"
 
 #: gnome/gdialogs.c:568 gtkedit/editwidget.c:1140 gtkedit/gtkedit.c:1250
-#: src/file.c:802 src/screen.c:2400 src/screen.c:2430 src/tree.c:1014
+#: src/file.c:802 src/screen.c:2396 src/screen.c:2426 src/tree.c:1014
 msgid "Copy"
 msgstr "Kopiér"
 
@@ -1145,7 +1145,7 @@ msgstr "Brug standard for \"slip\" handling"
 
 #: gnome/gnome-file-property-dialog.c:413
 #: gnome/gnome-file-property-dialog.c:501 gnome/gpopup2.c:287
-#: src/screen.c:2398 src/screen.c:2428
+#: src/screen.c:2394 src/screen.c:2424
 msgid "View"
 msgstr "Vis"
 
@@ -1175,7 +1175,7 @@ msgid "Use default View action"
 msgstr "Brug standard \"Vis\" handling"
 
 #: gnome/gnome-file-property-dialog.c:523 gnome/gpopup2.c:289
-#: src/screen.c:2399 src/screen.c:2429 src/view.c:2081
+#: src/screen.c:2395 src/screen.c:2425 src/view.c:2081
 msgid "Edit"
 msgstr "Redigér"
 
@@ -1339,8 +1339,8 @@ msgstr "Kopiér..."
 msgid "Move to Trash"
 msgstr "Flyt til papirkurv"
 
-#: gnome/gpopup2.c:293 gtkedit/editwidget.c:1143 src/screen.c:2403
-#: src/screen.c:2433
+#: gnome/gpopup2.c:293 gtkedit/editwidget.c:1143 src/screen.c:2399
+#: src/screen.c:2429
 msgid "Delete"
 msgstr "Slet"
 
@@ -1837,8 +1837,8 @@ msgstr " Gem som "
 #. Warning message with a query to continue or cancel the operation
 #: gtkedit/editcmd.c:539 gtkedit/editcmd.c:862 gtkedit/editcmd.c:887
 #: gtkedit/editcmd.c:1038 gtkedit/editcmd.c:1136 src/ext.c:315 src/file.c:619
-#: src/help.c:318 src/main.c:711 src/screen.c:1451 src/screen.c:2128
-#: src/screen.c:2178 src/subshell.c:705 src/subshell.c:731 src/utilunix.c:382
+#: src/help.c:318 src/main.c:711 src/screen.c:1447 src/screen.c:2124
+#: src/screen.c:2174 src/subshell.c:705 src/subshell.c:731 src/utilunix.c:382
 #: src/utilunix.c:386 src/utilunix.c:406 src/utilunix.c:457 vfs/mcfs.c:172
 msgid " Warning "
 msgstr " Advarsel "
@@ -2208,13 +2208,13 @@ msgid "Cancel quit"
 msgstr "Annullér afslut"
 
 #: gtkedit/editcmd.c:2379 src/cmd.c:246 src/file.c:1878 src/file.c:2249
-#: src/filegui.c:603 src/hotlist.c:1035 src/main.c:866 src/screen.c:2165
+#: src/filegui.c:603 src/hotlist.c:1035 src/main.c:866 src/screen.c:2161
 #: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:406
 msgid "&Yes"
 msgstr "&Ja"
 
 #: gtkedit/editcmd.c:2379 src/cmd.c:246 src/file.c:1878 src/file.c:2249
-#: src/filegui.c:602 src/hotlist.c:1035 src/main.c:866 src/screen.c:2165
+#: src/filegui.c:602 src/hotlist.c:1035 src/main.c:866 src/screen.c:2161
 #: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:406
 msgid "&No"
 msgstr "&Nej"
@@ -2803,7 +2803,7 @@ msgid "Error initialising editor.\n"
 msgstr "Fejl under initialisering af editor.\n"
 
 #: gtkedit/editwidget.c:1136 gtkedit/gtkedit.c:1246 src/help.c:806
-#: src/main.c:1726 src/screen.c:2396 src/screen.c:2426 src/tree.c:1008
+#: src/main.c:1726 src/screen.c:2392 src/screen.c:2422 src/tree.c:1008
 #: src/view.c:2070
 msgid "Help"
 msgstr "Hjælp"
@@ -2889,7 +2889,7 @@ msgstr "Slet"
 msgid "Delete highlighted text"
 msgstr "Slet markeret tekst"
 
-#: gtkedit/gtkedit.c:1255 src/main.c:1727 src/screen.c:2397 src/screen.c:2427
+#: gtkedit/gtkedit.c:1255 src/main.c:1727 src/screen.c:2393 src/screen.c:2423
 msgid "Menu"
 msgstr "Menu"
 
@@ -4324,11 +4324,11 @@ msgstr " med kildemaske:"
 msgid " Can't operate on \"..\"! "
 msgstr " Kan ikke arbejde på \"..\"! "
 
-#: src/file.c:1875 src/screen.c:2118
+#: src/file.c:1875 src/screen.c:2114
 msgid "Yes"
 msgstr "Ja"
 
-#: src/file.c:1875 src/screen.c:2118
+#: src/file.c:1875 src/screen.c:2114
 msgid "No"
 msgstr "Nej"
 
@@ -5153,7 +5153,7 @@ msgstr "Tryk på en tast for at fortsætte..."
 msgid " The shell is already running a command "
 msgstr " Skallen kører allerede en kommando "
 
-#: src/main.c:864 src/screen.c:2116 src/screen.c:2163
+#: src/main.c:864 src/screen.c:2112 src/screen.c:2159
 msgid " The Midnight Commander "
 msgstr " Midnight Commander'en "
 
@@ -5925,36 +5925,41 @@ msgstr "UID"
 msgid "GID"
 msgstr "GID"
 
-#: src/screen.c:661
-#, c-format
-msgid "  %s bytes in %d file%s"
+#: src/screen.c:662
+#, fuzzy, c-format
+msgid "  %s bytes in %d file"
 msgstr "  %s byte i %d file%s"
 
-#: src/screen.c:1325
+#: src/screen.c:662
+#, fuzzy, c-format
+msgid "  %s bytes in %d files"
+msgstr "  %s byte i %d file%s"
+
+#: src/screen.c:1321
 msgid "Unknow tag on display format: "
 msgstr "Ukendt mærke på skærmformat: "
 
-#: src/screen.c:1451
+#: src/screen.c:1447
 msgid "User suplied format looks invalid, reverting to default."
 msgstr "Brugerdefineret format ser ugyldigt ud, bruger standard."
 
-#: src/screen.c:2117 src/screen.c:2164
+#: src/screen.c:2113 src/screen.c:2160
 msgid " Do you really want to execute? "
 msgstr " Vil du virkelig køre? "
 
-#: src/screen.c:2128 src/screen.c:2178
+#: src/screen.c:2124 src/screen.c:2174
 msgid " No action taken "
 msgstr " Ingen handling udført "
 
-#: src/screen.c:2401 src/screen.c:2431 src/tree.c:1016
+#: src/screen.c:2397 src/screen.c:2427 src/tree.c:1016
 msgid "RenMov"
 msgstr "Flyt"
 
-#: src/screen.c:2402 src/screen.c:2432 src/tree.c:1020
+#: src/screen.c:2398 src/screen.c:2428 src/tree.c:1020
 msgid "Mkdir"
 msgstr "Mkdir"
 
-#: src/screen.c:2418 src/tree.c:866
+#: src/screen.c:2414 src/tree.c:866
 #, c-format
 msgid ""
 " Can't chdir to \"%s\" \n"
