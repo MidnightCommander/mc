@@ -9,6 +9,7 @@
 #include <config.h>
 #include <gnome.h>
 #include "gdesktop.h"
+#include "gmetadata.h"
 #include "../vfs/vfs.h"
 
 
@@ -20,13 +21,16 @@
 struct desktop_icon_info {
 	GtkWidget *dicon;	/* The desktop icon widget */
 	int x, y;		/* Position in the desktop */
-	char *filename;		/* The file this icon refers to */
+	char *filename;		/* The file this icon refers to (relative to the desktop_directory) */
 	int selected : 1;	/* Is the icon selected? */
 };
 
 
-/* Should use a shaped window for icons?  If not, use a solid square. */
+/* Configuration options for the desktop */
+
 int desktop_use_shaped_icons = TRUE;
+int desktop_auto_placement = FALSE;
+int desktop_snap_icons = FALSE;
 
 /* The computed name of the user's desktop directory */
 static char *desktop_directory;
@@ -40,6 +44,16 @@ static int *layout_slots;
 static GList *desktop_icons;
 
 
+/* Places a desktop icon.  If auto_pos is true, then the function will look for a place to position
+ * the icon automatically, else it will use the specified coordinates, snapped to the grid if the
+ * global desktop_snap_icons flag is set.
+ */
+static void
+desktop_icon_info_place (struct desktop_icon_info *dii, int auto_pos, int xpos, int ypos)
+{
+	/* FIXME */
+}
+
 /* Creates a new desktop icon.  The filename is the pruned filename inside the desktop directory.
  * If auto_pos is true, then the function will look for a place to position the icon automatically,
  * else it will use the specified coordinates.
@@ -47,7 +61,23 @@ static GList *desktop_icons;
 static void
 desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 {
-	
+	struct desktop_icon_info *dii;
+	char *full_name;
+	char *icon_name;
+
+	full_name = g_concat_dir_and_file (desktop_directory, filename);
+	icon_name = meta_get_icon_for_file (full_name);
+
+	dii = g_new (struct desktop_icon_info, 1);
+	dii->widget = desktop_icon_new (icon_name, filename);
+	dii->filename = g_strdup (filename);
+	dii->selected = FALSE;
+
+	g_free (full_name);
+	g_free (icon_name);
+
+	desktop_icon_info_place (dii, auto_pos, xpos, ypos);
+	gtk_widget_show (dii->dicon);
 }
 
 /* Creates the layout information array */
@@ -97,6 +127,7 @@ load_initial_desktop_icons (void)
 {
 	struct dirent *dirent;
 	DIR *dir;
+	char *full_name;
 	int have_pos, x, y;
 
 	dir = mc_opendir (desktop_directory);
@@ -113,7 +144,12 @@ load_initial_desktop_icons (void)
 		    || ((dirent->d_name[0] == '.') && (dirent->d_name[1] == '.') && (dirent->d_name[2] == 0)))
 			continue;
 
-		desktop_icon_info_new (dirent->d_name, TRUE, 0, 0);
+		full_name = g_concat_dir_and_file (desktop_directory, dirent->d_name);
+
+		have_pos = meta_get_icon_pos (full_name, &x, &y);
+		desktop_icon_info_new (dirent->d_name, have_pos, x, y);
+
+		g_free (full_name);
 	}
 
 	mc_closedir (dir);

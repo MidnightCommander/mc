@@ -65,65 +65,6 @@ desktop_icon_class_init (DesktopIconClass *class)
 	widget_class->realize = desktop_icon_realize;
 }
 
-/* Computes and sets a new window shape for the desktop icon */
-static void
-create_window_shape (DesktopIcon *dicon, int icon_width, int icon_height, int text_width, int text_height)
-{
-	GdkImlibImage *im;
-	GdkBitmap *mask;
-	GdkBitmap *im_mask;
-	GdkGC *mgc;
-	GdkColor c;
-
-	/* Create the initial mask and clear it */
-
-	mask = gdk_pixmap_new (GTK_WIDGET (dicon)->window, dicon->width, dicon->height, 1);
-
-	mgc = gdk_gc_new (mask);
-	c.pixel = 0;
-	gdk_gc_set_foreground (mgc, &c);
-	gdk_draw_rectangle (mask, mgc, TRUE, 0, 0, dicon->width, dicon->height);
-
-	c.pixel = 1;
-	gdk_gc_set_foreground (mgc, &c);
-
-	/* Paint the mask of the image */
-
-	im = GNOME_CANVAS_IMAGE (dicon->icon)->im;
-	gdk_imlib_render (im, icon_width, icon_height);
-	im_mask = gdk_imlib_move_mask (im);
-#if 0
-	if (im_mask && desktop_use_shaped_icons) {
-#else
-	if (im_mask && want_transparent_icons) {
-#endif
-		gdk_draw_pixmap (mask,
-				 mgc,
-				 im_mask,
-				 0, 0,
-				 (dicon->width - icon_width) / 2, 0,
-				 icon_width, icon_height);
-		gdk_imlib_free_bitmap (im_mask);
-	} else
-		gdk_draw_rectangle (mask, mgc, TRUE,
-				    (dicon->width - icon_width) / 2, 0,
-				    icon_width, icon_height);
-
-	/* Fill the area for the text */
-
-	gdk_draw_rectangle (mask, mgc, TRUE,
-			    (dicon->width - text_width) / 2,
-			    icon_height + SPACING,
-			    text_width, text_height);
-
-	if (!GTK_WIDGET_REALIZED (dicon))
-		gtk_widget_realize (GTK_WIDGET (dicon));
-
-	gtk_widget_shape_combine_mask (GTK_WIDGET (dicon), mask, 0, 0);
-	gdk_bitmap_unref (mask);
-	gdk_gc_unref (mgc);
-}
-
 /* Callback used when the size of the icon text item changes */
 static void
 size_changed (GnomeIconTextItem *text, gpointer data)
@@ -135,15 +76,31 @@ size_changed (GnomeIconTextItem *text, gpointer data)
 	desktop_icon_reshape (dicon);
 }
 
+/* Callback used when the desktop icon's canvas is size_allocated.  We reset the canvas scrolling
+ * region here, instead of doing it when the window shape changes, to avoid flicker.
+ */
+static void
+canvas_size_allocated (GtkWidget *widget, GtkAllocation *allocation, gpointer data)
+{
+	gnome_canvas_set_scroll_region (GNOME_CANVAS (widget), 0, 0, allocation->width, allocation->height);
+}
+
 static void
 desktop_icon_init (DesktopIcon *dicon)
 {
+	/* Set the window policy */
+
+	gtk_window_set_policy (GTK_WINDOW (dicon), TRUE, TRUE, TRUE);
+	
 	/* Create the canvas */
 
 	gtk_widget_push_visual (gdk_imlib_get_visual ());
 	gtk_widget_push_colormap (gdk_imlib_get_colormap ());
 
 	dicon->canvas = gnome_canvas_new ();
+	gtk_signal_connect (GTK_OBJECT (dicon->canvas), "size_allocate",
+			    (GtkSignalFunc) canvas_size_allocated,
+			    NULL);
 
 	gtk_widget_pop_colormap ();
 	gtk_widget_pop_visual ();
@@ -320,6 +277,65 @@ desktop_icon_set_text (DesktopIcon *dicon, char *text)
 
 	set_text (dicon, text);
 	desktop_icon_reshape (dicon);
+}
+
+/* Computes and sets a new window shape for the desktop icon */
+static void
+create_window_shape (DesktopIcon *dicon, int icon_width, int icon_height, int text_width, int text_height)
+{
+	GdkImlibImage *im;
+	GdkBitmap *mask;
+	GdkBitmap *im_mask;
+	GdkGC *mgc;
+	GdkColor c;
+
+	/* Create the initial mask and clear it */
+
+	mask = gdk_pixmap_new (GTK_WIDGET (dicon)->window, dicon->width, dicon->height, 1);
+
+	mgc = gdk_gc_new (mask);
+	c.pixel = 0;
+	gdk_gc_set_foreground (mgc, &c);
+	gdk_draw_rectangle (mask, mgc, TRUE, 0, 0, dicon->width, dicon->height);
+
+	c.pixel = 1;
+	gdk_gc_set_foreground (mgc, &c);
+
+	/* Paint the mask of the image */
+
+	im = GNOME_CANVAS_IMAGE (dicon->icon)->im;
+	gdk_imlib_render (im, icon_width, icon_height);
+	im_mask = gdk_imlib_move_mask (im);
+#if 0
+	if (im_mask && desktop_use_shaped_icons) {
+#else
+	if (im_mask && want_transparent_icons) {
+#endif
+		gdk_draw_pixmap (mask,
+				 mgc,
+				 im_mask,
+				 0, 0,
+				 (dicon->width - icon_width) / 2, 0,
+				 icon_width, icon_height);
+		gdk_imlib_free_bitmap (im_mask);
+	} else
+		gdk_draw_rectangle (mask, mgc, TRUE,
+				    (dicon->width - icon_width) / 2, 0,
+				    icon_width, icon_height);
+
+	/* Fill the area for the text */
+
+	gdk_draw_rectangle (mask, mgc, TRUE,
+			    (dicon->width - text_width) / 2,
+			    icon_height + SPACING,
+			    text_width, text_height);
+
+	if (!GTK_WIDGET_REALIZED (dicon))
+		gtk_widget_realize (GTK_WIDGET (dicon));
+
+	gtk_widget_shape_combine_mask (GTK_WIDGET (dicon), mask, 0, 0);
+	gdk_bitmap_unref (mask);
+	gdk_gc_unref (mgc);
 }
 
 /**

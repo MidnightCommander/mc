@@ -19,7 +19,9 @@
 
 /* Configuration options for the desktop */
 
-extern int desktop_use_shaped_icons;		/* Specifies whether to use shaped icons or not (for slow X servers) */
+extern int desktop_use_shaped_icons;		/* Whether to use shaped icons or not (for slow X servers) */
+extern int desktop_auto_placement;		/* Whether to auto-place icons or not (user placement) */
+extern int desktop_snap_icons;			/* Whether to snap icons to the grid or not */
 
 
 /* Initializes the desktop -- init DnD, load the default desktop icons, etc. */

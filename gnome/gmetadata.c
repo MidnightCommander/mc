@@ -9,6 +9,8 @@
 #include <sys/stat.h>
 #include <libgnome/libgnome.h>
 #include "gmetadata.h"
+#include "fs.h"
+#include "../vfs/vfs.h"
 
 
 #define ICON_FILENAME "icon-filename"
@@ -33,7 +35,7 @@ meta_get_icon_for_file (char *filename)
 	struct stat s;
 	int retval;
 
-	g_return_if_fail (filename != NULL);
+	g_return_val_if_fail (filename != NULL, NULL);
 
 	if (gnome_metadata_get (filename, ICON_FILENAME, &size, &buf) != 0) {
 		/* Return a default icon */
@@ -50,17 +52,18 @@ meta_get_icon_for_file (char *filename)
 }
 
 /**
- * meta_get_desktop_icon_pos
+ * meta_get_icon_pos
  * @filename:	The file under ~/desktop for which to get the icon position
  * @x:		The x position will be stored here.  Must be non-NULL.
  * @y:		The y position will be stored here.  Must be non-NULL.
  *
- * Checks if the specified file in the user's desktop directory has an icon position
- * associated to it.  If so, returns TRUE and fills in the x and y values.  Otherwise
- * it returns FALSE and x and y are not modified.
+ * Checks if the specified file has an icon position associated to it.  If so, returns TRUE and
+ * fills in the x and y values.  Otherwise it returns FALSE and x and y are not modified.
+ *
+ * Icon position information is expected to be saved using the meta_set_icon_pos() function.
  */
 int
-meta_get_desktop_icon_pos (char *filename, int *x, int *y)
+meta_get_icon_pos (char *filename, int *x, int *y)
 {
 	int size;
 	char *buf;
@@ -81,4 +84,26 @@ meta_get_desktop_icon_pos (char *filename, int *x, int *y)
 	*x = tx;
 	*y = ty;
 	return TRUE;
+}
+
+/**
+ * meta_set_icon_pos
+ * @filename:	The file for which to save icon position information
+ * @x:		X position of the icon
+ * @y:		Y position of the icon
+ *
+ * Saves the icon position information for the specified file.  This is expected to be read back
+ * using the meta_get_icon_pos() function.
+ */
+void
+meta_set_icon_pos (char *filename, int x, int y)
+{
+	char buf[100];
+
+	g_return_if_fail (filename != NULL);
+
+	sprintf (buf, "%d %d", x, y);
+
+	if (gnome_metadata_set (filename, ICON_POSITION, strlen (buf) + 1, buf) != 0)
+		g_warning ("Error setting the icon position metadata for \"%s\"", filename);
 }

@@ -1,3 +1,16 @@
+1998-10-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gmetadata.c (meta_get_icon_pos): Renamed from
+	meta_get_desktop_icon_pos().
+	(meta_set_icon_pos): New public function to save the icon position
+	information.
+
+	* gdesktop-icon.c (canvas_size_allocated): New function.  We reset
+	the canvas scrolling region here, when the canvas gets size
+	allocated, to ensure that the canvas has always the correct
+	scrolling region.  We do it here instead of in the reshape()
+	function to avoid flicker.
+
 1998-10-29  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gmetadata.[ch]: New files with functions to handle all metadata
