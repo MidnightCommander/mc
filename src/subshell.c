@@ -24,6 +24,10 @@
 
 /* {{{ Declarations */
 
+#ifndef _GNU_SOURCE
+#   define _GNU_SOURCE 1
+#endif
+
 #include <stdio.h>      
 #include <stdlib.h>	/* For errno, putenv, etc.	      */
 #include <errno.h>	/* For errno on SunOS systems	      */

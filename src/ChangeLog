@@ -1,5 +1,8 @@
 2001-05-16  Pavel Roskin  <proski@gnu.org>
 
+	* subshell.c: Define _GNU_SOURCE to enable prototypes for
+	allocating pseudo-terminals on GNU systems.
+
 	* subshell.c (init_subshell_child): New function to initialize
 	child process and run subshell. Code moved from ...
 	(init_subshell): ... here.
