@@ -329,6 +329,8 @@ extern void vfs_print_stats (char *fs_name, char *action, char *file_name, int h
 #define MCCTL_IS_NOTREADY	6
 #define MCCTL_FORGET_ABOUT	7
 #define MCCTL_EXTFS_RUN		8
+#define MCCTL_WANT_STALE_DATA	9
+#define MCCTL_NO_STALE_DATA	10
 
 extern int vfs_flags;
 extern uid_t vfs_uid;
