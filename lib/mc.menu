@@ -109,7 +109,7 @@ n       Inspect gzip'ed newsbatch file
 = t r &
 + ! t t
 h       Strip headers from current newsarticle
-	CHECK=`sed 1q < %f|awk '{print $1}'` 2>/dev/null
+	CHECK=`awk '{print $1 ; exit}' %f` 2>/dev/null
 	case $CHECK in
 	  Newsgroups:|Path:)
 	      cp %f /tmp/%f.$$ && sed '/^'"$CHECK"' /,/^$/d' /tmp/%f.$$ > %f
@@ -125,7 +125,7 @@ h       Strip headers from current newsarticle
 H       Strip headers from the marked newsarticles
 	set %u
 	while [ -n "$1" ]; do
-	  CHECK=`sed 1q < $1|awk '{print $1}'` 2>/dev/null
+	  CHECK=`awk '{print $1 ; exit}' $1` 2>/dev/null
 	  WFILE=/tmp/${1}.$$
 	  case $CHECK in
 	    Newsgroups:|Path:)
@@ -173,7 +173,7 @@ U       Uudecode marked news articles (needs work)
 	set %u
         (
 	while [ -n "$1" ]; do # strip headers
-          FIRST=`sed 1q < $1|awk '{print $1}'`
+	  FIRST=`awk '{print $1 ; exit}' $1`
 	  cat $1 | sed '/^'"$FIRST"' /,/^$/d'; shift
 	done
 	) |sed '/^$/d' |sed -n '/^begin 6/,/^end$/p' | uudecode
@@ -189,7 +189,9 @@ U       Uudecode marked news articles (needs work)
 =+ f \.tar\.gz$ | f \.tar\.z$ | f \.tgz$ | f \.tpz$ | f \.tar\.Z$| f \.tar\.bz2$ & t r
 x       Extract the contents of a compressed tar file
 	unset EXT
-	echo %f|egrep -q "\.tar.bz2$" && EXT=tar_bz2
+	case %f in 
+	    *.tar.bz2) EXT=tar_bz2;;
+	esac
 	if [ "$EXT" = "tar_bz2" ]; then
 	  bunzip2 -c %f | tar xvf -
 	else
@@ -200,7 +202,10 @@ x       Extract the contents of a compressed tar file
 + ! t t
 y       Gzip or gunzip current file
         unset DECOMP
-	echo %f|egrep -q "\.gz$|\.z$|\.Z$" && DECOMP=-d
+	case %f in 
+	    *.gz) DECOMP=-d;;
+	    *.[zZ]) DECOMP=-d;;
+	esac
         gzip $DECOMP -v %f
 
 + t t
@@ -208,14 +213,19 @@ Y       Gzip or gunzip tagged files
         for i in %t
         do
           unset DECOMP
-	  echo $i|egrep -q "\.gz$|\.z$|\.Z$" && DECOMP=-d
+	  case $i in 
+	    *.gz) DECOMP=-d;;
+	    *.[zZ]) DECOMP=-d;;
+	  esac
           gzip $DECOMP -v $i
         done
 
 + ! t t
 b       Bzip2 or bunzip2 current file
         unset DECOMP
-	echo %f|egrep -q "\.bz2$" && DECOMP=-d
+	case %f in 
+	    *.bz2) DECOMP=-d;;
+	esac
         bzip2 $DECOMP -v %f
 
 + t t
@@ -223,86 +233,60 @@ B       Bzip2 or bunzip2 tagged files
         for i in %t
         do
           unset DECOMP
-	  echo $i|egrep -q "\.bz2$" && DECOMP=-d
+	  case $i in 
+	    *.bz2) DECOMP=-d;;
+	  esac
           bzip2 $DECOMP -v $i
         done
 
-+ f \.tar.gz$ | f \.tgz$ | f \.tpz$ | f \.tar.Z$ | f \.tar.z$ | f \.tar.bz2$ & t r & ! t t
++ f \.tar.gz$ | f \.tgz$ | f \.tpz$ | f \.tar.Z$ | f \.tar.z$ | f \.tar.bz2$ | f \.tar.F$ & t r & ! t t
 z       Extract compressed tar file to subdirectory
-        unset D
-	echo %f|egrep -q "\.tar.gz$" && EXT=tar_gz
-	echo %f|egrep -q "\.tgz$"    && EXT=tgz
-	echo %f|egrep -q "\.tpz$"    && EXT=tpz
-	echo %f|egrep -q "\.tar.Z$"    && EXT=tar_Z
-	echo %f|egrep -q "\.tar.z$"    && EXT=tar_z
-	echo %f|egrep -q "\.tar.bz2$"  && EXT=tar_bz2
-        case $EXT in
-          tar_gz) D="`basename %f .tar.gz`";;
-          tgz)    D="`basename %f .tgz`";;
-          tpz)    D="`basename %f .tpz`";;
-          tar_Z)  D="`basename %f .tar.Z`";;
-          tar_z)  D="`basename %f .tar.z`";;
-	  tar_bz2) D="`basename %f .tar.bz2`";;
-        esac
-        if [ "$EXT" = "tar_bz2" ]; then
-            mkdir $D; cd $D && (bunzip2 -c ../%f | tar xvf -)
-	else
-	    mkdir $D; cd $D && (gzip -dc ../%f | tar xvf -)
-	fi
-
-+ f \.tar.F$ & t r & ! t t
-z	Extract compressed tar file to subdirectory
-        unset D
-	echo %f|egrep -q "\.tar.F$" && EXT=tar_F
-	case $EXT in
-	  tar_F) D="`basename %f .tar.F`";;
+	unset D
+	set gzip -cd
+	case %f in
+	  *.tar.gz) D="`basename %f .tar.gz`";;
+	  *.tgz)    D="`basename %f .tgz`";;
+	  *.tpz)    D="`basename %f .tpz`";;
+	  *.tar.Z)  D="`basename %f .tar.Z`";;
+	  *.tar.z)  D="`basename %f .tar.z`";;
+	  *.tar.bz2) D="`basename %f .tar.bz2`"; set bunzip2 -c ;;
+	  *.tar.F) D="`basename %f .tar.F`"; set freeze -dc;
 	esac
-	mkdir $D; cd $D && (freeze -dc ../%f | tar xvf -)
+	mkdir $D; cd $D && ($1 $2 ../%f | tar xvf -)
 
 + t t
 Z       Extract compressed tar files to subdirectories
-	set %u
-	while [ -n "$1" ]
+	for i in %u
         do
+	  set gzip -dc
           unset D
-	  echo $1|egrep -q "\.tar.gz$" && EXT=tar_gz
-	  echo $1|egrep -q "\.tgz$"    && EXT=tgz
-	  echo $1|egrep -q "\.tpz$"    && EXT=tpz
-	  echo $1|egrep -q "\.tar.Z$"    && EXT=tar_Z
-	  echo $1|egrep -q "\.tar.z$"    && EXT=tar_z
-	  echo $1|egrep -q "\.tar.F$"    && EXT=tar_F
-	  echo $1|egrep -q "\.tar.bz2$"  && EXT=tar_bz2
-          case $EXT in
-            tar_gz)  D="`basename $1 .tar.gz`";;
-            tgz)     D="`basename $1 .tgz`";;
-            tpz)     D="`basename $1 .tpz`";;
-            tar_Z)   D="`basename $1 .tar.Z`";;
-            tar_z)   D="`basename $1 .tar.z`";;
-	    tar_F)   D="`basename $1 .tar.F`";;
-	    tar_bz2) D="`basename $1 .tar.bz2`";;
+	  case $i in
+	    *.tar.gz)  D="`basename $1 .tar.gz`";;
+	    *.tgz)     D="`basename $1 .tgz`";;
+	    *.tpz)     D="`basename $1 .tpz`";;
+	    *.tar.Z)   D="`basename $1 .tar.Z`";;
+	    *.tar.z)   D="`basename $1 .tar.z`";;
+	    *.tar.F)   D="`basename $1 .tar.F`"; set freeze -dc;;
+	    *.tar.bz2) D="`basename $1 .tar.bz2`"; set bunzip2 -c;;
           esac
-	  case $EXT in
-	    tar_gz|tgz|tpz|tar_Z|tar_z) mkdir $D; (cd $D && gzip -dc ../$1 | tar xvf -)||echo tag $1 >>$MC_CONTROL_FILE;;
-	    tar_F)                      mkdir $D; (cd $D && freeze -dc ../$1 | tar xvf -)||echo tag $1 >>$MC_CONTROL_FILE;;
-	    tar_bz2)			mkdir $D; (cd $D && bunzip2 -c ../$1 | tar xvf -)||echo tag $1 >>$MC_CONTROL_FILE
-	  esac
-	  shift
+	  mkdir $D; (cd $D && $1 $2 ../$i | tar xvf -)||echo tag $i >>$MC_CONTROL_FILE
         done
 
 + f \.gz$ | f \.tgz$ | f \.tpz$ | f \.Z$ | f \.z$ | f \.bz2$ & t r & ! t t
 c       Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
         unset D
-	echo %f|egrep -q "\.tgz$"    && EXT=tgz
-	echo %f|egrep -q "\.tpz$"    && EXT=tpz
-	echo %f|egrep -q "\.Z$"    && EXT=Z
-	echo %f|egrep -q "\.z$"    && EXT=z
-	echo %f|egrep -q "\.gz$" && EXT=gz
-	echo %f|egrep -q "\.bz2$" && EXT=bz2
+	case %f in
+	    *.tgz)	EXT=tgz;;
+	    *.tpz)	EXT=tpz;;
+	    *.Z)	EXT=Z;;
+	    *.z)	EXT=z;;
+	    *.gz)	EXT=gz;;
+	    *.bz2)	EXT=bz2;;
+	esac
         case $EXT in
-          tgz)    D="`basename %f .tgz`.tar";;
-          tpz)    D="`basename %f .tpz`.tar";;
-          gz) D="`basename %f .gz`";;
-	  bz2) D="`basename %f .bz2`";;
+	  tgz|tpz)	D="`basename %f .$EXT`.tar";;
+	  gz|Z|z)	D="`basename %f .$EXT`";;
+	  bz2)		D="`basename %f .bz2`";;
         esac
         if [ "$EXT" = "bz2" ]; then
 	    bunzip2 -v %f ; gzip -f9 -v $D
@@ -316,17 +300,19 @@ C       Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
 	while [ -n "$1" ]
         do
           unset D
-	  echo %f|egrep -q "\.tgz$"    && EXT=tgz
-	  echo %f|egrep -q "\.tpz$"    && EXT=tpz
-	  echo %f|egrep -q "\.Z$"    && EXT=Z
-	  echo %f|egrep -q "\.z$"    && EXT=z
-	  echo %f|egrep -q "\.gz$" && EXT=gz
-	  echo %f|egrep -q "\.bz2$" && EXT=bz2
+	  case $1 in
+	    *.tgz)	EXT=tgz;;
+	    *.tpz)	EXT=tpz;;
+	    *.Z)	EXT=Z;;
+	    *.z)	EXT=z;;
+	    *.gz)	EXT=gz;;
+	    *.bz2)	EXT=bz2;;
+	  esac
 	  case $EXT in
 	      tgz)    D="`basename $1 .tgz`.tar";;
               tpz)    D="`basename $1 .tpz`.tar";;
-              gz) D="`basename $1 .gz`";;
-	      bz2) D="`basename $1 .bz2`";;
+	      gz|Z|z) D="`basename $1 .$EXT`";;
+	      bz2)    D="`basename $1 .bz2`";;
 	  esac
 	  if [ "$EXT" = "bz2" ]; then
 	    (bunzip2 -v $1 ; gzip -f9 -v $D)||echo tag $1 >>$MC_CONTROL_FILE
