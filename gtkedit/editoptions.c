@@ -73,13 +73,13 @@ void edit_options_dialog (void)
 	 0, 0, NULL},
 /*3 */
 	{quick_input, OPT_DLG_W / 2 + 24, OPT_DLG_W, OPT_DLG_H - 4, OPT_DLG_H, "", OPT_DLG_W / 2 - 4 - 24, 0,
-	 0, 0, "i"},
+	 0, 0, "edit-word-wrap"},
 /*4 */
 	{quick_label, OPT_DLG_W / 2, OPT_DLG_W, OPT_DLG_H - 5, OPT_DLG_H, N_("Tab spacing : "), 0, 0,
 	 0, 0, NULL},
 /*5 */
 	{quick_input, OPT_DLG_W / 2 + 24, OPT_DLG_W, OPT_DLG_H - 5, OPT_DLG_H, "", OPT_DLG_W / 2 - 4 - 24, 0,
-	 0, 0, "i"},
+	 0, 0, "edit-tab-spacing"},
 /*6 */
 #if !defined(MIDNIGHT) || defined(HAVE_SYNTAXH)
 #define OA 1

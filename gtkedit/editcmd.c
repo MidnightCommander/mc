@@ -396,7 +396,7 @@ void menu_save_mode_cmd (void)
 	{quick_button, 6, DLG_X, 7, DLG_Y, N_("&Ok"), 0,
 	 B_ENTER, 0, 0, "o"},
 	{quick_input, 23, DLG_X, 5, DLG_Y, 0, 9,
-	 0, 0, &str_result, "i"},
+	 0, 0, &str_result, "edit-backup-ext"},
 	{quick_label, 22, DLG_X, 4, DLG_Y, N_("Extension:"), 0,
 	 0, 0, 0, "savemext"},
 	{quick_radio, 4, DLG_X, 3, DLG_Y, "", 3,

@@ -1,3 +1,9 @@
+2001-07-13  Pavel Roskin  <proski@gnu.org>
+
+	* editcmd.c (menu_save_mode_cmd): Give meaningful names to the
+	input fields instead of "i" so that they have separate history.
+	* editoptions.c (edit_options_dialog): Likewise.
+
 2001-07-11  Pavel Roskin  <proski@gnu.org>
 
 	* editdraw.c (status_string): Use g_snprintf() instead of
