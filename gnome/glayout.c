@@ -382,6 +382,48 @@ panel_enter_event (GtkWidget *widget, GdkEvent *event, WPanel *panel)
 	send_message (panel->widget.parent, (Widget *) panel, WIDGET_FOCUS, 0);
 }
 
+struct _TbItems {
+	char *key, *text, *tooltip, *icon;
+	void (*cb) (GtkWidget *, void *);
+	GtkWidget *widget; /* will be filled in */
+};
+typedef struct _TbItems TbItems;
+
+void user_menu_cmd (void);
+
+static TbItems tb_items[] =
+{
+/* 1Help   2Menu   3View   4Edit   5Copy   6RenMov 7Mkdir  8Delete 9PullDn 10Quit */
+    {"F1", "Help", "Interactive help browser", GNOME_STOCK_MENU_BLANK, (void (*) (GtkWidget *, void *)) help_cmd, 0},
+    {"F2", "Menu", "User actions", GNOME_STOCK_MENU_BLANK, (void (*) (GtkWidget *, void *)) user_menu_cmd, 0},
+    {"F3", "View", "View file", GNOME_STOCK_MENU_BLANK, (void (*) (GtkWidget *, void *)) view_panel_cmd, 0},
+    {"F4", "Edit", "Edit file", GNOME_STOCK_MENU_BLANK, (void (*) (GtkWidget *, void *)) edit_panel_cmd, 0},
+    {"F5", "Copy", "Copy file or directory", GNOME_STOCK_MENU_COPY, (void (*) (GtkWidget *, void *)) copy_cmd, 0},
+    {"F6", "Move", "Rename or move a file or directory", GNOME_STOCK_MENU_BLANK, (void (*) (GtkWidget *, void *)) ren_cmd, 0},
+    {"F7", "Mkdir", "Create directory", GNOME_STOCK_MENU_BLANK, (void (*) (GtkWidget *, void *)) mkdir_panel_cmd, 0},
+    {"F8", "Dlete", "Delete file or directory", GNOME_STOCK_MENU_BLANK, (void (*) (GtkWidget *, void *)) delete_cmd, 0},
+    {"F9", "Menu", "Pull down menu", GNOME_STOCK_MENU_BLANK, (void (*) (GtkWidget *, void *)) 0, 0},
+    {"F10", "Quit", "Close and exit", GNOME_STOCK_MENU_QUIT, (void (*) (GtkWidget *, void *)) 0, 0},
+    {0, 0, 0, 0, 0, 0}
+};
+
+static GtkWidget *create_toolbar (GtkWidget * window, GtkWidget *widget)
+{
+    GtkWidget *toolbar;
+    TbItems *t;
+    toolbar = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
+    for (t = &tb_items[0]; t->text; t++) {
+	t->widget = gtk_toolbar_append_item (GTK_TOOLBAR (toolbar),
+					     t->text,
+					     t->tooltip,
+					     0,
+			     gnome_stock_pixmap_widget (window, t->icon),
+					     t->cb,
+					     t->cb ? widget : 0);
+    }
+    return toolbar;
+}
+
 WPanel *
 create_container (Dlg_head *h, char *name, char *geometry)
 {
@@ -408,6 +450,7 @@ create_container (Dlg_head *h, char *name, char *geometry)
 	vbox = gtk_vbox_new (0, 0);
 	gnome_app_set_contents (GNOME_APP (app), vbox);
 	gnome_app_create_menus_with_data (GNOME_APP (app), gnome_panel_menu, panel);
+	gnome_app_set_toolbar(GNOME_APP (app), GTK_TOOLBAR(create_toolbar(app, 0)));
 
 	gtk_signal_connect (GTK_OBJECT (app),
 			    "enter_notify_event",
