@@ -39,6 +39,7 @@
 #include <errno.h>
 #include <sys/types.h>
 #include <signal.h>
+#include <ctype.h>	/* is_digit() */
 
 #include "utilvfs.h"
 
@@ -46,7 +47,6 @@
 #include "../src/layout.h"	/* get_current_type() */
 #include "../src/wtools.h"	/* input_dialog() */
 
-#include "xdirentry.h"
 #include "vfs.h"
 #include "extfs.h"		/* FIXME: we should not know anything about our modules */
 #include "names.h"
