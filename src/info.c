@@ -39,16 +39,16 @@
 #   define VERSION "undefined"
 #endif
 
+struct WInfo {
+    Widget widget;
+    int ready;
+};
+
 /* Have we called the init_my_statfs routine? */
 static int initialized;
 static struct my_statfs myfs_stats;
 
-static int info_event (Gpm_Event *event, WInfo *info)
-{
-    return 0;
-}
-
-static void info_box (Dlg_head *h, WInfo *info)
+static void info_box (Dlg_head *h, struct WInfo *info)
 {
     standend ();
     attrset (NORMAL_COLOR);
@@ -58,7 +58,7 @@ static void info_box (Dlg_head *h, WInfo *info)
 }
 
 static void
-info_show_info (WInfo *info)
+info_show_info (struct WInfo *info)
 {
     static int i18n_adjust=0;
     static char *file_label;
@@ -204,7 +204,7 @@ info_show_info (WInfo *info)
 
 static void info_hook (void *data)
 {
-    WInfo *info = (WInfo *) data;
+    struct WInfo *info = (struct WInfo *) data;
     Widget *other_widget;
     
     other_widget = get_panel_widget (get_current_index ());
@@ -218,7 +218,7 @@ static void info_hook (void *data)
 }
 
 static cb_ret_t
-info_callback (WInfo *info, widget_msg_t msg, int parm)
+info_callback (struct WInfo *info, widget_msg_t msg, int parm)
 {
     switch (msg) {
 
@@ -244,12 +244,12 @@ info_callback (WInfo *info, widget_msg_t msg, int parm)
     }
 }
 			   
-WInfo *info_new ()
+struct WInfo *info_new ()
 {
-    WInfo *info = g_new (WInfo, 1);
+    struct WInfo *info = g_new (struct WInfo, 1);
 
     init_widget (&info->widget, 0, 0, 0, 0, (callback_fn)
-		 info_callback, (mouse_h) info_event);
+		 info_callback, NULL);
 
     /* We do not want the cursor */
     widget_want_cursor (info->widget, 0);

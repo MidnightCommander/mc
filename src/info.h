@@ -1,11 +1,7 @@
 #ifndef __INFO_H
 #define __INFO_H
 
-typedef struct {
-    Widget widget;
-    int ready;
-} WInfo;
-
-WInfo *info_new (void);
+struct WInfo;
+struct WInfo *info_new (void);
 
 #endif

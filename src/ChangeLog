@@ -1,5 +1,7 @@
 2003-10-26  Pavel Roskin  <proski@gnu.org>
 
+	* info.h: Don't expose WInfo internals.
+
 	* background.c (tell_parent): Eliminate.
 	(background_attention): Use error code instead.
 	* file.c (panel_operate): Exit with code 0, not 1.
