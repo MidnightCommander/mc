@@ -1,5 +1,11 @@
 2001-09-07  Pavel Roskin  <proski@gnu.org>
 
+	* main.c: Remove old debugging code.  Remove external function
+	declarations.
+	(menu_bar_event): Remove, it's unused.
+	* main.h: Declare get_mc_lib_dir() and force_ugly_line_drawing.
+	* layout.c: Remove all external declarations.
+
 	* main.c (main): Call save_stop_handler() - it was ifdef'd out
 	by error.
 

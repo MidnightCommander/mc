@@ -79,6 +79,7 @@ extern int full_eight_bits;
 extern int confirm_view_dir;
 extern int fast_refresh;
 extern int navigate_with_arrows;
+extern int force_ugly_line_drawing;
 extern int advanced_chfns;
 extern int drop_menus;
 extern int cd_symlinks;
@@ -171,6 +172,7 @@ void edit_user_menu_cmd (void);
 
 extern char *prompt;
 extern char *mc_home;
+char *get_mc_lib_dir (void);
 
 int maybe_cd (int char_code, int move_up_dir);
 void do_possible_cd (char *dir);

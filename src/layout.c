@@ -554,15 +554,9 @@ static void check_split (void)
     }
 }
 
-int panel_event    (Gpm_Event *event, WPanel *panel);
-int menu_bar_event (Gpm_Event *event, void *);
-extern char *prompt;
-
 #ifdef HAVE_SLANG
 void init_curses ()
 {
-    extern int force_ugly_line_drawing;
-    extern int SLtt_Has_Alt_Charset;
     SLtt_get_terminfo ();
 #ifndef HAS_ACS_AS_PCCHARS
     if (force_ugly_line_drawing)

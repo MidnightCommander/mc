@@ -330,11 +330,6 @@ char cmd_buf [512];
 /* Used during argument processing */
 int finish_program = 0;
 
-/* Forward declarations */
-char *get_mc_lib_dir (void);
-int panel_event    (Gpm_Event *event, WPanel *panel);
-int menu_bar_event (Gpm_Event *event, void *);
-
 WPanel *
 get_current_panel (void)
 {
@@ -1067,16 +1062,6 @@ load_prompt (int fd, void *unused)
 }
 #endif /* HAVE_SUBSHELL_SUPPORT */
 
-/* The user pressed the enter key */
-int
-menu_bar_event (Gpm_Event *event, void *x)
-{
-    if (event->type != GPM_DOWN)
-	return MOU_NORMAL;
-
-    return MOU_ENDLOOP;
-}
-
 /* Used to emulate Lynx's entering leaving a directory with the arrow keys */
 int
 maybe_cd (int char_code, int move_up_dir)
@@ -1212,7 +1197,6 @@ static menu_entry FileMenu [] = {
     { ' ', N_("e&Xit              F10"), 'X', (callfn) quit_cmd }
 };
 
-void external_panelize (void);
 static menu_entry CmdMenu [] = {
     /* I know, I'm lazy, but the tree widget when it's not running
      * as a panel still has some problems, I have not yet finished
@@ -2280,10 +2264,6 @@ init_sigchld (void)
 
 #endif /* _OS_NT, __os2__, UNIX */
 
-#if defined(HAVE_SLANG) && !defined(OS2_NT)
-    extern int SLtt_Try_Termcap;
-#endif
-
 static void
 print_mc_usage (void)
 {
@@ -2585,8 +2565,7 @@ handle_args (int argc, char *argv [])
 	    finish_program = 1;
 	    probably_finish_program ();
  	}
-    } else
-    {
+    } else {
        	/* sets the current dir and the other dir */
 	if (tmp) {
     	    char buffer[MC_MAXPATHLEN + 2];
@@ -2672,17 +2651,7 @@ main (int argc, char *argv [])
     bindtextdomain ("mc", LOCALEDIR);
     textdomain ("mc");
     mad_init ();
-#if 0
-    /* This is here to debug startup stuff */
-    {
-	    volatile int i = 0;
 
-	    printf ("GMC IS WAITING %d\n", getpid ());
-	    while (!i)
-		    ;
-
-    }
-#endif
     /* Initialize list of all user group for timur_clr_mode */
     init_groups ();
     
