@@ -12,6 +12,33 @@
 # Heavily modified by Paul Sheer <psheer@obsidian.co.za>.
 
 context default 
+# keywords at the beginning of line
+    keyword linestart ! black/0 yellow/24
+    keyword linestart \* black/0 yellow/24
+    keyword linestart c black/0 yellow/24
+    keyword linestart C black/0 yellow/24
+
+    keyword linestart \s\s\s\s\s\* yellow/24 red/9
+    keyword linestart \s\s\s\s\s\+ yellow/24 red/9
+
+    keyword linestart \s\s\s\s\s\s black/0 brightcyan/blue3
+
+    keyword linestart 0\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart 1\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart 2\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart 3\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart 4\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart 5\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart 6\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart 7\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart 8\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart 9\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+
+    keyword linestart \s\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart               \s\s\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart                             \s\s\s\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
+    keyword linestart                                           \s\s\s\s\{0123456789\s\}\s white/26 brightcyan/2
+
 # boolean and logical expressions / operators
     keyword .and. brightred/orange
     keyword .eq. brightred/orange
@@ -193,6 +220,7 @@ context default
     keyword whole tan yellow/24
     keyword whole tanh yellow/24
 
+# operators and syntax elements
     keyword ( brightcyan/15
     keyword ) brightcyan/15
     keyword , brightcyan/14
@@ -201,31 +229,6 @@ context default
     keyword \* yellow/24
     keyword / yellow/24
     keyword = yellow/24
-
-    keyword linestart ! black/0 yellow/24
-    keyword linestart \* black/0 yellow/24
-    keyword linestart c black/0 yellow/24
-    keyword linestart C black/0 yellow/24
-
-    keyword linestart \s\s\s\s\s\* yellow/24 red/9
-
-    keyword linestart                                                         \s\s\s\s\s\s black/0 brightcyan/blue3
-
-    keyword linestart 0\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
-    keyword linestart 1\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
-    keyword linestart 2\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
-    keyword linestart 3\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
-    keyword linestart 4\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
-    keyword linestart 5\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
-    keyword linestart 6\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
-    keyword linestart 7\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
-    keyword linestart 8\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
-    keyword linestart 9\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
-
-    keyword linestart \s\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
-    keyword linestart               \s\s\{0123456789\s\}\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
-    keyword linestart                             \s\s\s\{0123456789\s\}\{0123456789\s\}\s white/26 brightcyan/2
-    keyword linestart                                           \s\s\s\s\{0123456789\s\}\s white/26 brightcyan/2
 
 # comments and quotes
     keyword '*' green/6
