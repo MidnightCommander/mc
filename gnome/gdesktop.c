@@ -32,6 +32,7 @@
 #include "../vfs/vfs.h"
 #include "main.h"
 #include "gmount.h"
+#include "gprefs.h"
 
 
 struct layout_slot {

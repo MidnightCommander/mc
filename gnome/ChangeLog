@@ -1,5 +1,7 @@
 2001-06-15  Pavel Roskin  <proski@gnu.org>
 
+	* gdesktop.c (): Include gprefs.h to avoid a warning.
+
 	* gmount.c (setup_devices): Remove nfs_count - NFS directories
 	are not numbered.
 
