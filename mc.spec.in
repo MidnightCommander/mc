@@ -56,6 +56,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/profile.d
 install lib/mc.sh $RPM_BUILD_ROOT/etc/profile.d
 install lib/mc.csh $RPM_BUILD_ROOT/etc/profile.d
+rm -rf $RPM_BUILD_ROOT%{_prefix}/share/mc/bin/
 
 
 %clean
@@ -96,6 +97,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/share/mc/term
 
 %changelog
+* Mon Oct 07 2002 Pavel Roskin <proski@gnu.org>
+- Remove installed mc.sh and mc.csh from %{_prefix}/share/mc/bin to
+  suppress a warning about installed but unpackaged files.
+
 * Mon Sep 30 2002 Andrew V. Samoilov <sav@bcs.zp.ua>
 - Don't require slang-devel if _with_ncurses.
 - Add --with samba.
