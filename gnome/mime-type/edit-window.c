@@ -235,7 +235,7 @@ initialize_main_win_vals (void)
 
 	gtk_widget_show_all (GNOME_DIALOG (main_win->window)->vbox);
 	/* we initialize everything */
-	title = g_strconcat (_("Set actions for "), mi->mime_type, NULL);
+	title = g_strdup_printf (_("Set actions for %s"), mi->mime_type);
 	gtk_window_set_title (GTK_WINDOW (main_win->window), title);
 	g_free (title);
 	if (mi->ext[0]) {
