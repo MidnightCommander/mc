@@ -404,22 +404,26 @@ Porting the program
 
 Random notes on porting to other architectures.  
 
-The Midnight Commander uses now by default the Slang library for
-handling the display.  If you can't port Slang (which should be a
-pretty trivial job), you may want to attempt using ncurses (the
-Midnight Commander can use ncurses as well as the display engine). 
+The Midnight Commander uses now by default the SLang library for
+handling the display.  You may want to download the latest version of
+SLang or use a slightly modified SLang version 0.99.38 included with
+the Midnight Commander.  The later is very stable and has been used
+for years without problems.  You shouldn't expect any problems porting
+SLang to your platform.
 
-If you don't want to install ncurses and your OS is a SystemV Release
-4 variant, maybe the curses supplied with your system will do the
-work.  If you experience display problems, then it means that we are
-dealing with a buggy implementation of curses.  You have two options:
-one, download ncurses and recompile with ncurses or recompile all your
-source code with the symbol BUGGY_CURSES defined.  But you can always
-switch to the default SLang screen manager.
+Another possibility is to download and install ncurses on your OS.
+The Midnight Commander can use ncurses as well as the display engine.
+However, you may encounter minor differences, for instance, you will
+be unable to force the color mode by giving the "-c" switch to the
+Midnight Commander.
 
-The fast way to do this is to:
+As the last resort, you may try to use the curses library supplied with
+your OS. Beware that some systems, e.g. SystemV Release 4, include the
+curses library with bugs critical to the Midnight Commander. You may
+try to recompile all your source code with the symbol BUGGY_CURSES
+defined, i.e.
 
-make clean; make XINC=-DBUGGY_CURSES
+make clean; make CFLAGS="-g -O -DBUGGY_CURSES"
 
 
 Obtaining the missing pieces of the Midnight Commander

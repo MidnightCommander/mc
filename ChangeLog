@@ -1,3 +1,14 @@
+2000-10-06  Pavel Roskin  <proski@gnu.org>
+
+	* gnome/Makefile.in, src/Makefile.in, vfs/Make-mc.in: Required
+	flags moved out of CFLAGS as recommended by GNU coding
+	standards.
+	* configure.in: Don't add GLIB_CFLAGS to CFLAGS.
+	* Make.common.in: XINC eliminated. GLIB_CFLAGS is now added to
+	XCPPFLAGS.
+	* INSTALL (Random notes on porting to other architectures):
+	Completely rewritten. Recommended using CFLAGS instead of XINC.
+
 2000-10-05  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* lib/mc.ext.in: .spm is used by SuSE to mark src rpms

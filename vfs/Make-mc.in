@@ -10,8 +10,10 @@ top_builddir = ..
 
 @MCF@
 
-CFLAGS   = $(XCFLAGS) -D_LARGEFILE64_SOURCE
-CPPFLAGS = $(XCPPFLAGS) -I. -I$(srcdir)/samba/ubiqx -I$(srcdir)/samba/smbwrapper
+SAMBA_INCLUDES = -I$(srcdir)/samba/ubiqx -I$(srcdir)/samba/smbwrapper
+
+CFLAGS   = $(XCFLAGS)
+CPPFLAGS = $(XCPPFLAGS) -D_LARGEFILE64_SOURCE -I. $(SAMBA_INCLUDES)
 LDFLAGS  = $(XLDFLAGS)
 DEFS     = $(XDEFS)
 LIBS     = @LINTL@ @SHADOWLIB@ $(XLIBS) @TERMNET@ @PAMLIBS@ @LCRYPT@ $(XLIB)

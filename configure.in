@@ -65,7 +65,6 @@ dnl We now use glib
 dnl 
 AM_PATH_GLIB(1.2.0,,AC_MSG_ERROR(Test for GLIB failed.  MC requires GLIB.))
 LIBS="$LIBS $GLIB_LIBS"
-CFLAGS="$CFLAGS $GLIB_CFLAGS"
 
 dnl
 dnl For A/UX.  Do not move
