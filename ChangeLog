@@ -4,6 +4,13 @@
         directory creations. (CAN-2004-0231). 
 
 	* lib/mc.menu: Likewise.
+	* doc/mc.1.in: Likewise.
+	* doc/es/mc.1.in: Likewise.
+	* doc/hu/mc.1.in: Likewise.
+	* doc/it/mc.1.in: Likewise.
+	* doc/pl/mc.1.in: Likewise.
+	* doc/ru/mc.1.in: Likewise.
+	* doc/sr/mc.1.in: Likewise.
 
 2004-08-09  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
