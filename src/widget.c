@@ -1119,14 +1119,10 @@ insert_char (WInput *in, int c_code)
     in->need_push = 1;
     if (strlen (in->buffer)+1 == in->current_max_len){
 	/* Expand the buffer */
-	char *narea = g_malloc (in->current_max_len + in->field_len);
+	char *narea = g_realloc (in->buffer, in->current_max_len + in->field_len);
 	if (narea){
-	    char *p = in->buffer;
-
-	    strcpy (narea, in->buffer);
 	    in->buffer = narea;
 	    in->current_max_len += in->field_len;
-	   g_free (p);
 	}
     }
     if (strlen (in->buffer)+1 < in->current_max_len){
