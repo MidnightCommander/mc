@@ -1,4 +1,4 @@
-.TH mc 1 "20 October 1997"
+.TH mc 1 "30 October 1998"
 .\"SKIP_SECTION"
 .SH NAME
 mc \- Visual shell for Unix-like systems.
@@ -2759,7 +2759,13 @@ Special Settings).
 .PP
 The possible colors are: black, gray, red, brightred, green,
 brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
-cyan, brightcyan, lightgray and white.
+cyan, brightcyan, lightgray and white. And there is a special keyword
+for transparent background. It is 'default'. The 'default' can only be
+used for background color. Example:
+.nf
+[Colors]
+base_color=normal=white,default:marked=magenta,default
+.fi
 .PP
 .SH "Special Settings"
 Most of the settings of the Midnight Commander can be changed from the

@@ -31,7 +31,7 @@
 
 <article>
 
-<mantitle title="mc" sectnum="1" date="20 October 1997" name="mc - Visual shell for Unix-like systems">
+<mantitle title="mc" sectnum="1" date="30 October 1998" name="mc - Visual shell for Unix-like systems">
 <title>GNU Midnight Commander User's Guide
 <author>Written by the Midnight Commander development team <tt/mc-devel@nuclecu.unam.mx/
 <date>v 3.0, 16 September 1995
@@ -2355,7 +2355,14 @@ at the section on <lnk name="special settings" id="Special Settings">).
 
 The possible colors are: black, gray, red, brightred, green,
 brightgreen, brown, yellow, blue, brightblue, magenta,
-brightmagenta, cyan, brightcyan, lightgray and white.
+brightmagenta, cyan, brightcyan, lightgray and white. An there is a special
+keyword for transparent background. It is 'default'. The 'default' can only
+be used for background color. Example:
+
+<tscreen><verb>
+[Colors]
+base_color=normal=white,default:marked=magenta,default
+</verb></tscreen>
 
 <sect>Special Settings<label id="Special Settings">
 
