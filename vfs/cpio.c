@@ -300,7 +300,7 @@ static int cpio_read_oldc_head(vfs *me, vfs_s_super *super)
     if((len = mc_read(super->u.cpio.fd, (void *)buf, HEAD_LENGTH)) < HEAD_LENGTH)
 	return STATUS_EOF;
     CPIO_POS(super) += len;
-    buf[HEAD_LENGTH + 1] = 0;
+    buf[HEAD_LENGTH] = 0;
 
     if(sscanf((void *)buf, "070707%6lo%6lo%6lo%6lo%6lo%6lo%6lo%11lo%6lo%11lo",
 	      &hd.c_dev, &hd.c_ino, &hd.c_mode, &hd.c_uid, &hd.c_gid,
@@ -311,9 +311,10 @@ static int cpio_read_oldc_head(vfs *me, vfs_s_super *super)
     }
 
     name = g_malloc(hd.c_namesize);
-    if((len = mc_read(super->u.cpio.fd, name, hd.c_namesize)) < hd.c_namesize)
+    if((len = mc_read(super->u.cpio.fd, name, hd.c_namesize)) < hd.c_namesize) {
+	g_free (name);
 	return STATUS_EOF;
-
+    }
     CPIO_POS(super) +=  len;
     cpio_skip_padding(super);
 
@@ -348,7 +349,7 @@ static int cpio_read_crc_head(vfs *me, vfs_s_super *super)
     if((len = mc_read(super->u.cpio.fd, buf, HEAD_LENGTH)) < HEAD_LENGTH)
 	return STATUS_EOF;
     CPIO_POS(super) += len;
-    buf[HEAD_LENGTH + 1] = 0;
+    buf[HEAD_LENGTH] = 0;
 
     if(sscanf(buf, "%6ho%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx",
 	      &hd.c_magic, &hd.c_ino, &hd.c_mode, &hd.c_uid, &hd.c_gid,
