@@ -1,5 +1,7 @@
 2001-06-22  Pavel Roskin  <proski@gnu.org>
 
+	* extraconf.h: Don't define HAVE_INFOMOUNT_QNX on QNX Neutrino.
+
 	* acinclude.m4 (AC_GET_FS_INFO): Fix checking for f_fstypename
 	in struct statfs.
 	Reported by Libor Motyèka <libor.motycka@ortex.cz>.
