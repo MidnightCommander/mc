@@ -24,8 +24,6 @@ man2hlp_SOURCES = man2hlp.c
 
 if INCLUDED_SLANG
 SLANGLIB = ../slang/libmcslang.a
-else
-SLANGLIB = $(LSLANG)
 endif
 
 if USE_EDIT
@@ -37,7 +35,7 @@ VFSLIB = ../vfs/libvfs-mc.a
 endif
 
 mc_LDADD = $(EDITLIB) $(SLANGLIB) $(VFSLIB) \
-	$(INTLLIBS) $(LGPM) $(TERMNET) $(MCLIBS) $(LIBICONV)
+	$(INTLLIBS) $(TERMNET) $(MCLIBS) $(LIBICONV)
 
 CHARSET_SRC = charsets.c charsets.h selcodepage.c selcodepage.h
 

@@ -1,5 +1,8 @@
 2001-09-10  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.am (mc_LDADD): Don't use LSLANG and LGPM, since they
+	are now included into MCLIBS.
+
 	* Makefile.am (mc_LDADD): Use INTLLIBS provided by gettext
 	instead of LINTL.
 
