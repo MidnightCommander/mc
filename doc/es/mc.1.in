@@ -5,7 +5,7 @@
 .\"	David H. Martín Alonso <dmartina@excite.com>
 .\"
 .\"TOPICS "Índice de Contenidos:"
-.TH MC 1 "20 de Octubre de 1998" "MC Versión 4.6.0" "GNU Midnight Commander"
+.TH MC 1 "26 de Diciembre de 2002" "MC Versión 4.6.0" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH "NOMBRE"
 mc \- Entorno visual para sistemas tipo Unix.
@@ -199,15 +199,18 @@ Algunos comandos en Midnight Commander implican el uso de las teclas
 siguientes abreviaturas:
 .TP
 .B C-<chr>
-significa mantener pulsada la tecla Control mientras pulsamos
-el carácter <chr>. Así C-f sería: manteniendo pulsada la tecla Control
-teclear f.
+significa mantener pulsada la tecla Control mientras se pulsa el carácter
+<chr>. Así, C-f sería: manteniendo pulsada la tecla Control teclear f.
 .TP
 .B M-<chr>
-significa mantener pulsada la tecla Meta o Alt mientras pulsamos
-el carácter <chr>. Si no hay tecla Meta o Alt, pulsar
+significa mantener pulsada la tecla Meta o Alt mientras pulsamos el
+carácter <chr>. Si no hay tecla Meta o Alt, pulsar
 .IR ESC ,
 soltar, y entonces pulsar el carácter <chr>.
+.TP
+.B S-<chr>
+significa mantener pulsada la tecla de Mayúsculas (o Shift) y teclear
+<chr>.
 .PP
 Todas las líneas de entrada en Midnight Commander usan una aproximación
 a las asociaciones de teclas del editor GNU Emacs.
@@ -263,80 +266,79 @@ extensiones en el
 .\"LINK2"
 archivo de extensiones
 .\"Extension File Edit"
-entonces es ejecutado el comando correspondiente.
+entonces se ejecuta la aplicación correspondiente.
 .TP
 .B C-l
-redibuja toda la información en la pantalla de Midnight Commander.
+redibuja toda la pantalla de Midnight Commander.
 .TP
 .B C-x c
-ejecuta el comando
 .\"LINK2"
 Cambiar Permisos
 .\"Chmod"
-en un archivo o un conjunto de archivos marcados.
+de un archivo o un conjunto de archivos marcados.
 .TP
 .B C-x o
-ejecuta el comando
 .\"LINK2"
-Chown
+Cambiar Dueño
 .\"Chown"
-sobre el archivo actual o sobre los archivos marcados.
+del archivo actual o de los archivos marcados.
 .TP
 .B C-x l
-ejecuta el comando enlazado.
+crea enlaces.
 .TP
 .B C-x s
-ejecuta el comando enlazado simbólicamente.
+crea enlaces simbólicos.
+.TP
+.B C-x C-s
+edita enlaces simbólicos.
 .TP
 .B C-x i
-selecciona el modo de la pantalla del otro panel a información.
+cambia el panel opuesto al modo de información.
 .TP
 .B C-x q
-selecciona el modo de la pantalla del otro panel a vista rápida.
+cambia el panel opuesto al modo de vista rápida.
 .TP
 .B C-x !
-ejecuta la utilidad de
+ejecuta
 .\"LINK2"
-búsquedas externas\&.
+Búsquedas Externas\&.
 .\"External panelize"
 .TP
 .B C-x h
-ejecuta el comando
+añade el sitio actual a la lista de
 .\"LINK2"
-añadir a la Lista Rápida de Directorios\&.
+Favoritos\&.
 .\"Hotlist"
 .TP
 .B M-!
-ejecuta el comando de Vista Filtrada, descrito en el
+ejecuta una orden del sistema y muestra su salida en el
 .\"LINK2"
-comando Ver\&.
+Visor de Archivos Interno\&.
 .\"Internal File Viewer"
 .TP
 .B M-?
-ejecuta el comando
 .\"LINK2"
-Buscar archivo\&.
+Buscar Archivo\&.
 .\"Find File"
 .TP
 .B M-c
-muestra la ventana de diálogo del comando
+permite
 .\"LINK2"
-"cd Rápido" .
+Cambiar de Directorio\&.
 .\"Quick cd"
 .TP
 .B C-o
-cuando el programa está siendo ejecutado en la consola Linux o SCO o bajo un xterm,
-se mostrará la salida del comando anterior. Cuando fuere ejecutado en una
-consola de Linux, Midnight Commander usa un programa externo
-(cons.saver) para controlar la copia y restauración de información en la
-pantalla.
-.IP
-Cuando el soporte de subshell está compilado internamente, podemos pulsar C-o en cualquier
-momento y seremos llevados de vuelta a la pantalla principal de Midnight Commander, para
-volver a nuestra aplicación basta con volver a pulsar C-o. Si tenemos una aplicación
-suspendida usando esta técnica, no podremos ejecutar otros programas
-desde Midnight Commander hasta que terminemos la aplicación
-suspendida.
+en la consola de Linux o SCO o bajo un xterm, se muestra la salida de
+la orden anterior. En la consola de Linux, Midnight Commander usa un
+programa externo (cons.saver) para controlar la copia y restauración de
+la pantalla.
+.PP
+Cuando se haya creado Midnight Commander con soporte de subshell incluido,
+podemos pulsar C-o en cualquier momento y volver a la pantalla principal;
+para volver a nuestra aplicación bastará con volver a pulsar C-o. Si
+tenemos una aplicación suspendida en esta situación, no podremos
+ejecutar otros programas desde Midnight Commander hasta que terminemos
+la aplicación suspendida.
 .\"NODE "  Directory Panels"
 .SH "  Paneles de Directorio"
 Esta sección enumera las teclas que operan en los paneles de directorio. Si
@@ -380,11 +382,11 @@ de listado. Con esto es posible intercambiar rápidamente de un listado
 completo al regular o breve, así como al modo de listado definido por el usuario.
 .TP
 .B C-\\\\ (control-Contrabarra)
-muestra la
+muestra la lista de sitios
 .\"LINK2"
-Lista Rápida de Directorios
+Favoritos
 .\"Hotlist"
-y cambiar al directorio seleccionado.
+y permite cambiar al directorio seleccionado.
 
 .B * N. de T.:
 En el teclado castellano, existe un pequeño inconveniente, dado que
@@ -587,7 +589,7 @@ del nombre de archivo, comando, variable, nombre de usuario o host.
 .SH "Barra de Menú"
 La barra de menú aparece cuando pulsamos F9 o pulsamos el botón del ratón
 sobre la primera fila de la pantalla. La barra de menú tiene cinco submenús: "Izquierdo", "Archivo",
-"Comando", "Opciones" y "Derecho".
+"Utilidades", "Opciones" y "Derecho".
 .PP
 Los
 .\"LINK2"
@@ -605,7 +607,7 @@ o sobre los archivos marcados.
 .PP
 El
 .\"LINK2"
-Menú de Comandos
+Menú de Utilidades
 .\"Command Menu"
 lista las acciones más generales y que no guardan relación con
 la selección actual de archivos.
@@ -624,150 +626,160 @@ si hemos elegido la disposición horizontal de paneles en las opciones de
 presentación\&).
 .\"Layout"
 .\"NODE "    Listing Mode..."
-.SH "    Modo de Listado..."
-El modo de listado es usado para visualizar archivos y sus atributos, hay
-cuatro modos diferentes disponibles:
-.B Completo (Full),
-.B Breve (Brief),
-.B Largo (Long),
+.SH "    Listado..."
+La vista en modo
+.B "Listado"
+se usa para mostrar la lista de archivos. Hay cuatro modos disponibles:
+.BR Completo ,
+.BR Breve ,
+.BR Largo ,
 y
-.B Personalizado (User).
+.BR "Definido por el usuario" .
 .PP
-La vista completa muestra el nombre del archivo, el tamaño del mismo y
-la hora de modificación.
+En modo completo se muestra el nombre del archivo, su tamaño y la fecha
+y hora de modificación.
 .PP
-La vista breve muestra sólo el nombre del archivo y utiliza dos columnas
-(por lo cual puede mostrar el doble de entradas que otros modos).
+Breve muestra sólo los nombres de archivo, en dos columnas. Esto permite
+ver el doble de entradas que en los otros modos.
 .PP
-La vista extensa es similar a la salida del comando
-.B "ls -l".
-Este modo aprovecha todo el ancho de la pantalla.
+El modo largo es similar a la salida de la orden
+.BR "ls -l" .
+Este modo requiere todo el ancho de la pantalla.
 .PP
-Si elegimos el modo de visualización en formato "User", deberemos especificar
-el formato de presentación, es decir, los atributos que deseamos que sean mostrados.
+Si se elige el modo definido por el usuario, hay que especificar el
+formato de presentación. Un formato personalizado tiene que comenzar con
+la indicación de tamaño de panel, que puede ser "half" (medio) o "full"
+(completo) para tener respectivamente dos paneles de media pantalla o
+un único panel a pantalla completa. Tras el tamaño se puede colocar el
+número "2" para dividir el panel en dos columnas.
 .PP
-El formato de presentación personalizado debe comenzar con un especificador de tamaño de panel. Éste
-podría ser medio (half) o completo (full), lo cual indicaría un panel de media pantalla
-y un panel a toda pantalla respectivamente.
-.PP
-Después del tamaño del panel, deberíamos especificar el modo de dos columnas en
-el panel, lo cual se indica añadiendo el número "2" a la cadena de formato de
-usuario.
-.PP
-Después de esto añadimos el nombre de los campos con un delimitador de tamaño
-opcional. Estos son los campos disponibles que podemos visualizar:
+A continuación van los campos deseados con especificación opcional del
+tamaño. Los campos que se pueden emplear son:
 .TP
-.B nombre (en la versión internacional, name)
-visualiza el nombre de archivo.
+.B name
+nombre del archivo.
 .TP
-.B tamaño (size)
-visualiza el tamaño del archivo.
+.B size
+tamaño del archivo.
 .TP
 .B bsize
-es una forma alternativa del formato
+forma alternativa para
 .BR size .
-Muestra el tamaño de los archivos y para los directorios visualiza
-SUB-DIR o UP--DIR.
+Muestra el tamaño de los archivos y SUB-DIR o DIR-ANT para directorios.
 .TP
-.B tipo (type)
-muestra el campo type de un carácter de extensión. Este carácter es un
-subconjunto de la información mostrada por el comando ls con la opción -F.
-Un asterisco (*) para archivos ejecutables, una barra (/) para directorios,
-una arroba (@, at-sign) para los enlaces, un signo igual (=) para sockets,
-un guión para los dispositivos de caracteres, un signo más para dispositivos de bloque,
-un pipe (|) para colas, una tilde (~) para enlaces simbólicos a directorios y
-un signo de exclamación para enlaces perdidos (enlaces que no apuntan a ninguna parte).
+.B type
+carácter de tipo de archivo. Este carácter se asemeja a lo mostrado por
+la orden
+.BR "ls -F" :
+.B *
+para archivos ejecutables,
+.B /
+para directorios,
+.B @
+para enlaces,
+.B =
+para sockets,
+.B -
+para los dispositivos en modo carácter,
+.B +
+para dispositivos en modo bloque,
+.B |
+para tuberías,
+.B ~
+para enlaces simbólicos a directorios y
+.B !
+para enlaces rotos (enlaces que no apuntan a nada).
+.TP
+.B mark
+un asterisco si el archivo está marcado, o un espacio si no lo está.
 .TP
 .B mtime
-hora de última modificación del archivo.
+fecha y hora de la última modificación del contenido del archivo.
 .TP
 .B atime
-hora del último acceso al archivo.
+fecha y hora del último acceso al archivo.
 .TP
 .B ctime
-hora de creación del archivo.
+fecha y hora del último cambio del archivo.
 .TP
 .B perm
-una cadena representando los bits actuales de permisos del archivo.
+cadena representando los permisos del archivo.
 .TP
 .B mode
-un valor octal con los actuales bits de permisos del archivo.
+valor en octal representando los permisos del archivo.
 .TP
 .B nlink
 número de enlaces al archivo.
 .TP
 .B ngid
-el Identificador de Grupo, GID (numérico).
+Identificador de Grupo, GID (numérico).
 .TP
 .B nuid
-el Identificador de Usuario, UID (numérico).
+Identificador de Usuario, UID (numérico).
 .TP
 .B owner
-el propietario del archivo.
+propietario del archivo.
 .TP
 .B group
-el grupo del archivo.
+grupo del archivo.
 .TP
 .B inode
-el inodo del archivo.
+número de inodo del archivo.
 .PP
-Además, podemos usar estos nombres de campo para organizar la pantalla:
+Además, podemos ajustar la apariencia del panel con:
 .TP
 .B space
-un espacio en el formato de pantalla.
-.TP
-.B mark
-un asterisco si el archivo está marcado, o un espacio si no lo está.
+un espacio.
 .TP
 .B |
-este carácter es utilizado para añadir una línea vertical al formato de pantalla.
+añadir una línea vertical.
 .PP
-Para forzar un campo a un tamaño fijo (un especificador de tamaño), basta añadir
-':' seguido del número de caracteres que deseamos tenga el campo, si
-el número es seguido por el símbolo '+', entonces el tamaño especifica el
-tamaño mínimo, aunque si el programa advierte que hay más espacio en la
-pantalla, entonces expandirá la anchura del campo.
+Para fijar el tamaño de un campo basta añadir
+.B :
+seguido por el número de caracteres que se desee. Si tras el número
+colocamos el símbolo
+.B +
+el tamaño indicado será el tamaño mínimo, y si hay espacio de sobra se
+extenderá más el campo.
 .PP
-Por ejemplo, el listado
-.B Completo (Full)
-corresponde a este formato:
+Como ejemplo, el listado
+.B Completo
+corresponde al formato:
 .PP
-half type,name,|,size,|,mtime
+half type name | size | mtime
 .PP
 Y el listado
-.B Largo (Long)
-corresponde a este formato:
+.B Largo
+corresponde a:
 .PP
-full perm,space,nlink,space,owner,space,group,space,size,space,
-mtime,space,name
+full perm space nlink space owner space group space size space mtime
+space name
 .PP
-Éste es un bonito formato de pantalla definida por el usuario:
+Éste es un bonito formato de pantalla definido por el usuario:
 .PP
-half name,|,size:7,|,type,mode:3
+half name | size:7 | type mode:3
 .PP
-Los paneles además pueden ser activados en los siguientes modos:
+Los paneles admiten además los siguientes modos:
 .TP
 .B "Información"
-La vista de información visualiza información relacionada con el
-archivo seleccionado y, si es posible, información sobre el sistema
-de archivos empleado.
+La vista de información muestra detalles relativos al archivo seleccionado
+y, si es posible, sobre el sistema de archivos usado.
 .TP
 .B "Árbol"
-La vista en árbol es bastante similar a la función
+La vista en árbol es bastante parecida a la utilidad
 .\"LINK2"
 árbol de directorios\&.
 .\"Directory Tree"
 Para más información véase la sección correspondiente.
 .TP
 .B "Vista Rápida"
-En este modo, el panel cambia a un
+En este modo, en el panel aparece
 .\"LINK2"
-visor reducido
+visor
 .\"Internal File Viewer"
-que muestra el contenido del archivo actualmente seleccionado,
-si seleccionamos el panel (con la tecla
-.I tab
-o el ratón), tendremos acceso a los comandos usuales del visor.
+reducido que muestra el contenido del archivo seleccionado.  Si se activa
+el panel (con el tabulador o con el ratón), se dispone de los funciones
+usuales del visor.
 .\"NODE "    Sort Order..."
 .SH "    Modo de Ordenación..."
 Los ocho modos de ordenación son por nombre, por extensión, por hora de modificación,
@@ -785,11 +797,10 @@ activando la opción
 .BR "Mezclar archivos y directorios" .
 .\"NODE "    Filter..."
 .SH "    Filtro..."
-El comando de filtro nos permite seleccionar un patrón (por ejemplo
+La utilidad filtro nos permite seleccionar con un patrón (por ejemplo
 .BR "*.tar.gz" )
-con el cual los archivos deben coincidir para ser mostrados. Indiferente
-al patrón de filtro, los directorios y enlaces a directorios
-son mostrados siempre en el panel de directorios.
+los archivos a listar. Indiferentes al patrón de filtro, siempre se
+muestran todos los directorios y enlaces a directorios.
 .\"NODE "    Reread"
 .SH "    Releer"
 El comando releer recarga la lista de archivos en el directorio. Esto es
@@ -812,7 +823,7 @@ Fkeys son características de terminfo desde kf1 hasta kf10. En terminales sin
 soporte de teclas de función, podemos conseguir la misma funcionalidad
 pulsando la tecla
 .I ESC
-seguido de un número entre 1 y 9 o 0 (correspondiendo de
+seguido de un número entre 1 y 9 ó 0 (correspondiendo a las teclas
 .I F1
 a
 .I F9
@@ -820,12 +831,10 @@ y
 .I F10
 respectivamente).
 .PP
-El menú de Archivo posee los siguientes comandos (atajos de teclado entre paréntesis):
+El menú de Archivo recoge las siguientes opciones (con los atajos de
+teclado entre paréntesis):
 .PP
-.B Ayuda
-(
-.I F1
-)
+.B Ayuda (F1)
 .PP
 Invoca el visor hipertexto de ayuda interno. Dentro del
 .\"LINK2"
@@ -843,8 +852,7 @@ son usadas para mover adelante y atrás en una página de ayuda. Pulsando
 .I F1
 de nuevo para obtener la lista completa de teclas válidas.
 .PP
-.B Menú (
-.I F2 )
+.B Menú de Usuario (F2)
 .PP
 Invoca el
 .\"LINK2"
@@ -853,11 +861,9 @@ Menú de usuario
 El menú de usuario otorga una manera fácil de tener usuarios con un menú
 y añadir asimismo características extra a Midnight Commander.
 .PP
-.B Ver (
-.I F3,
-.I Mayúsculas-F3 )
+.B Ver (F3, S-F3)
 .PP
-Visualiza el archivo actualmente seleccionado. Por defecto invoca el
+Visualiza el archivo seleccionado. Por defecto invoca el
 .\"LINK2"
 Visor de Archivos Interno
 .\"Internal File Viewer"
@@ -867,25 +873,22 @@ de archivos externo especificado por la variable de entorno
 Si la variable
 .B PAGER
 no está definida, se invoca al comando "view". Si en vez de esto usamos
-.I Mayúsculas-F3,
-el visor será invocado sin realizar ningún tipo de formateo o
+S-F3, el visor será invocado sin realizar ningún tipo de formateo o
 preprocesamiento del archivo.
 .PP
-.B Ver filtrado (
-.I M-! )
+.B Ejecutar y Ver (M-!)
 .PP
 El comando con los argumentos indicados se ejecuta, y la salida se
 muestra usando el visor de archivos interno. Como argumento se ofrece,
 por defecto, el nombre seleccionado en el panel.
 .PP
-.B Editar (
-.I F4 )
+.B Editar (F4)
 .PP
-Actualmente invoca el editor
+Invoca el editor
 .B vi,
 u otro especificado en la variable de entorno
 .B EDITOR,
-o en el
+o el
 .\"LINK2"
 Editor de Archivos Interno
 .\"Internal File Editor"
@@ -893,8 +896,7 @@ si la opción
 .B use_internal_edit
 está activada.
 .PP
-.B Copiar (
-.I F5 )
+.B Copiar (F5)
 .PP
 Sobreimpresiona una ventana de entrada con destino por defecto al directorio del
 panel no seleccionado y copia el archivo actualmente seleccionado (o
@@ -918,13 +920,11 @@ Trabajos en Segundo Plano
 .\"Background jobs"
 son utilizados para controlar los procesos en segundo plano.
 .PP
-.B Ligar (Enlazar,
-.I C-x l
-.B )
+.B Crear Enlace (C-x l)
 .PP
 Crea un enlace al archivo actual.
 .PP
-.B Liga simbólica (Enlace simbólico, C-x s)
+.B Crear Enlace Simbólico (C-x s)
 .PP
 Crea un enlace simbólico al archivo actual. Para aquellos que no conozcan
 qué son los enlaces: crear un enlace a un archivo es algo parecido a copiar
@@ -948,7 +948,7 @@ El archivo original al cual el enlace apunta es mostrado en la línea de estado s
 está habilitada. Usaremos enlaces simbólicos cuando
 queramos evitar la confusión que pueden causar los enlaces físicos.
 .PP
-.B Renombrar/mover (F6)
+.B Renombrar/Mover (F6)
 .PP
 Presenta un diálogo de entrada proponiendo como directorio de destino el
 directorio del panel no activo, y mueve allí, o bien los archivos marcados
@@ -967,7 +967,7 @@ Procesos en 2º plano
 .\"Background jobs"
 se puede controlar estas tareas.
 .PP
-.B Crear directorio (F7)
+.B Crear Directorio (F7)
 .PP
 Presenta un diálogo de entrada y crea el directorio especificado.
 .PP
@@ -978,14 +978,14 @@ seleccionado en el panel activo. Durante el proceso, se puede pulsar
 .IR C-c " o " ESC
 para abortar la operación.
 .PP
-.B Cambio rápido de directorio (M-c)
+.B Cambiar Directorio (M-c)
 Usaremos el comando
 .\"LINK2"
 Cambiar de directorio
 .\"Quick cd"
 si tenemos llena la línea de órdenes y queremos hacer un cd a algún lugar.
 .PP
-.B Selecciona grupo (+)
+.B Seleccionar Grupo (+)
 .PP
 Es usado para seleccionar (marcar) un grupo de archivos. Midnight Commander
 preguntará por una expresión regular describiendo el grupo. Cuando los
@@ -999,15 +999,15 @@ regulares normales (Véase ed (1)).
 Para marcar directorios en vez de archivos, la expresión debe empezar o terminar
 con '/'.
 .PP
-.B De-selecciona grupo (\\\\)
+.B De-seleccionar Grupo (\\\\)
 .PP
 Utilizado para deseleccionar un grupo de archivos. Es la operación antagonista al comando
 .IR "Selecciona grupo" .
 .PP
-.B Salir (F10, Mayúsculas-F10)
+.B Salir (F10, S-F10)
 .PP
-Finaliza Midnight Commander. Mayúsculas-F10 es usado cuando queremos
-salir y estamos utilizando la envoltura del shell. Mayúsculas-F10 no nos llevará
+Finaliza Midnight Commander. S-F10 es usado cuando queremos
+salir y estamos utilizando la envoltura del shell. S-F10 no nos llevará
 al último directorio visitado con Midnight Commander, en vez de eso
 nos llevará al directorio donde fue invocado Midnight Commander.
 .\"NODE "    Quick cd"
@@ -1027,7 +1027,7 @@ todas las cualidades incluidas en el
 comando cd interno\&.
 .\"The cd internal command"
 .\"NODE "  Command Menu"
-.SH "  Menú de Comando"
+.SH "  Menú de Utilidades"
 .\"LINK2"
 Árbol de directorios
 .\"Directory Tree"
@@ -1056,12 +1056,12 @@ de los comandos escritos. El comando seleccionado es copiado a la línea de órden
 El histórico de comandos puede ser accedido también tecleando M-p ó M-n.
 .PP
 .\"LINK2"
-Lista de directorios frecuentes (C-\\)
+Favoritos (C-\\)
 .\"Hotlist"
-realiza el cambio desde el directorio actual a directorios utilizados a menudo más rápidamente.
+permite acceder con facilidad a directorios y sitios utilizados con frecuencia.
 .PP
 .\"LINK2"
-Búsquedas externas
+Búsquedas Externas
 .\"External panelize"
 nos permite ejecutar un programa externo, y llevar la salida de ese
 programa al panel actual.
@@ -1085,7 +1085,7 @@ Podemos seleccionar un directorio de la figura y Midnight Commander cambiará
 a ese directorio.
 .PP
 Hay dos modos de invocar el árbol. El comando de árbol de directorios
-está disponible desde el menú Comando. El otro modo es seleccionar la vista en árbol
+está disponible desde el menú Utilidades. El otro modo es seleccionar la vista en árbol
 desde el menú Izquierdo o Derecho.
 .PP
 Para evitar largos retardos Midnight Commander crea la figura de árbol
@@ -1248,17 +1248,16 @@ en la línea de entrada y pulsando el botón "Añadir nuevo". Entonces introducirem
 bajo el cual queremos que el comando sea guardado. La próxima vez, bastará elegir
 ese comando de la lista y no habrá que escribirlo de nuevo.
 .\"NODE "    Hotlist"
-.SH "    Lista de Directorios Frecuentes"
-El historial de directorios muestra las etiquetas de los directorios en el
-histórico de directorios. Midnight Commander cambiará al directorio correspondiente
-a la etiqueta seleccionada. Desde el diálogo de la lista, podemos eliminar
-parejas etiqueta/directorio ya creadas y añadir una nueva. Para añadir
-podríamos necesitar de la utilización del comando Añadir a la lista (C-x h), que añade el
-directorio actual (no el seleccionado) a la lista de directorios frecuentes. Se preguntará al usuario
-respecto a la etiqueta para el directorio.
+.SH "    Favoritos"
+Muestra una lista de sitios y directorios guardados y abre en el panel
+el lugar seleccionado. Desde el cuadro de diálogo podemos también crear y
+eliminar entradas. Para añadir se puede igualmente utilizar Añadir Actual
+(C-x h), que añade el directorio actual (no el seleccionado) a la lista
+de favoritos. Se pide al usuario una etiqueta para identificar la entrada.
 .PP
-Esto hace el posicionamiento en directorios usados frecuentemente más rápido. Deberíamos considerar el uso
-de la variable CDPATH tal y como se describe en
+Esto hace más rápido el posicionamiento en los directorios usados
+frecuentemente.  Deberíamos considerar también el uso de la variable
+CDPATH tal y como se describe en
 .\"LINK2"
 comando cd interno\&.
 .\"The cd internal command"
@@ -1599,7 +1598,7 @@ velocidad. Esta opción no tiene efecto si la
 no está seleccionada.
 .PP
 .I Patrones del shell.
-Por defecto los comandos de Selección, Deselección y Filtro emplean
+Por defecto, las funciones Selección, Deselección y Filtro emplean
 expresiones regulares al estilo del shell. Para realizar esto se
 realizan las siguientes conversiones: '*' se cambia por '.*' (cero o
 más caracteres); '?' por '.' (exactamente un carácter) y '.' por un

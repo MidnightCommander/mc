@@ -1,3 +1,9 @@
+2003-01-12  David Martin  <dmartina@excite.com>
+
+	* po/es.po: Update. Rewrite localized names for some menu entries.
+	* doc/es/mc.1.in: Likewise.
+	* lib/mc.hint.es: Likewise.
+
 2002-12-27  David Martin  <dmartina@excite.com>
 
 	* doc/pl/xnc.hlp: Update GPL (change FSF address and move 19xx

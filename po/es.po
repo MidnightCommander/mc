@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.0\n"
 "POT-Creation-Date: 2002-12-27 14:46+0100\n"
-"PO-Revision-Date: 2002-12-26 23:40+0100\n"
+"PO-Revision-Date: 2003-01-12 21:00+0100\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,15 +23,15 @@ msgstr "Error"
 
 #: edit/edit.c:153 edit/edit.c:340
 msgid " Cannot open file for reading: "
-msgstr " Fallo al tratar de abrir el archivo para lectura: "
+msgstr " Imposible abrir el archivo para lectura: "
 
 #: edit/edit.c:283
 msgid " Error reading from pipe: "
-msgstr " Problemas al leer en tubería: "
+msgstr " Error al leer en tubería: "
 
 #: edit/edit.c:292
 msgid " Cannot open pipe for reading: "
-msgstr " Fallo al tratar de abrir tubería para lectura: "
+msgstr " Imposible abrir tubería para lectura: "
 
 #: edit/edit.c:355
 msgid " Cannot get size/permissions info for file: "
@@ -76,7 +76,7 @@ msgstr " Error al escribir en tubería: "
 
 #: edit/editcmd.c:278
 msgid " Cannot open pipe for writing: "
-msgstr " Fallo al tratar de abrir tubería para escritura: "
+msgstr " Imposible abrir tubería para escritura: "
 
 #: edit/editcmd.c:360
 msgid "Quick save "
@@ -136,7 +136,7 @@ msgstr "Cancelar"
 
 #: edit/editcmd.c:482 edit/editcmd.c:2223 src/view.c:475
 msgid " Cannot save file. "
-msgstr " Error al guardar el archivo. "
+msgstr " Imposible guardar el archivo. "
 
 #: edit/editcmd.c:581 edit/editcmd.c:589 edit/editcmd.c:614 edit/editcmd.c:661
 msgid " Delete macro "
@@ -144,15 +144,15 @@ msgstr " Eliminar macro "
 
 #: edit/editcmd.c:583
 msgid " Cannot open temp file "
-msgstr " Error al tratar de abrir el archivo temporal "
+msgstr " Imposible abrir el archivo temporal "
 
 #: edit/editcmd.c:591 edit/editcmd.c:652 edit/editcmd.c:709
 msgid " Cannot open macro file "
-msgstr " Error al tratar de abrir el archivo de macros "
+msgstr " Imposible abrir el archivo de macros "
 
 #: edit/editcmd.c:615
 msgid " Cannot overwrite macro file "
-msgstr " Error al sobrescribir el archivo de macros "
+msgstr " Imposible sobrescribir el archivo de macros "
 
 #: edit/editcmd.c:631 edit/editcmd.c:652
 msgid " Save macro "
@@ -359,7 +359,7 @@ msgstr " Insertar archivo "
 
 #: edit/editcmd.c:2252
 msgid " Cannot insert file. "
-msgstr " Error al tratar de insertar el archivo "
+msgstr " Imposible insertar el archivo "
 
 #: edit/editcmd.c:2269
 msgid " Sort block "
@@ -383,11 +383,11 @@ msgstr " Ordenar "
 
 #: edit/editcmd.c:2289
 msgid " Cannot execute sort command "
-msgstr " Error al tratar de ejecutar el comando \"sort\" "
+msgstr " Imposible ejecutar \"sort\" "
 
 #: edit/editcmd.c:2294
 msgid " Sort returned non-zero: "
-msgstr " \"sort\" regresó un valor distinto de cero "
+msgstr " \"sort\" devolvió un error: "
 
 #: edit/editcmd.c:2331
 msgid "Error creating script:"
@@ -881,7 +881,7 @@ msgstr "&Definido por el usuario:"
 
 #: src/boxes.c:135
 msgid "Listing mode"
-msgstr "Modo de listado"
+msgstr "Listado"
 
 #: src/boxes.c:137
 msgid "user &Mini status"
@@ -1217,11 +1217,11 @@ msgstr " Nombre de archivo:"
 
 #: src/cmd.c:302
 msgid " Filtered view "
-msgstr " Ver archivo (con filtro) "
+msgstr " Ejecutar y ver "
 
 #: src/cmd.c:303
 msgid " Filter command and arguments:"
-msgstr " Comando para filtrar (incluya argumentos):"
+msgstr " Orden a ejecutar y argumentos:"
 
 #: src/cmd.c:402
 msgid "Create a new Directory"
@@ -1313,15 +1313,15 @@ msgstr "&Completo"
 
 #: src/cmd.c:915
 msgid " Both panels should be in the listing mode to use this command "
-msgstr " Ambos paneles deben estar en modo lista para poder usar este comando "
+msgstr " Ambos paneles deben estar en modo listado para usar esta función "
 
 #: src/cmd.c:931
 msgid " The command history is empty "
-msgstr " La historia de comandos está vacía"
+msgstr " La historia de órdenes está vacía "
 
 #: src/cmd.c:937
 msgid " Command history "
-msgstr " Historia de comandos "
+msgstr " Historia de órdenes "
 
 #: src/cmd.c:976
 msgid ""
@@ -2265,11 +2265,11 @@ msgstr " Directorios virtuales (VFS) activos "
 
 #: src/hotlist.c:589
 msgid "Directory hotlist"
-msgstr " Directorios favoritos "
+msgstr " Favoritos "
 
 #: src/hotlist.c:618
 msgid " Directory path "
-msgstr " Ruta del directorio "
+msgstr " Ruta "
 
 #: src/hotlist.c:621 src/hotlist.c:671
 msgid " Directory label "
@@ -2286,11 +2286,11 @@ msgstr " Nuevo "
 
 #: src/hotlist.c:887
 msgid "Directory label"
-msgstr " Etiqueta del directorio:"
+msgstr " Etiqueta:"
 
 #: src/hotlist.c:887
 msgid "Directory path"
-msgstr " Ruta del directorio:"
+msgstr " Ruta:"
 
 #: src/hotlist.c:967
 msgid " New hotlist group "
@@ -2333,7 +2333,7 @@ msgstr " MC no pudo escribir al archivo ~/"
 
 #: src/hotlist.c:1394
 msgid " file, your old hotlist entries were not deleted"
-msgstr " su lista de directorios favoritos anterior no fue borrada"
+msgstr " la lista de favoritos antigua no fue borrada"
 
 #: src/hotlist.c:1396
 msgid " Hotlist Load "
@@ -2573,15 +2573,15 @@ msgstr ""
 
 #: src/learn.c:294
 msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr "Presione todas las teclas de la lista y compruebe si alguna de ellas"
+msgstr "Presione todas las teclas y compruebe si alguna no responde. Para"
 
 #: src/learn.c:296
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "no está marcada con OK. Para definirla presione la barra espaciadora"
+msgstr "redefinirla, pulse la barra espaciadora o haga clic con el ratón"
 
 #: src/learn.c:298
 msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr "en esa tecla o presione el mouse. Puede moverse con el tabulador."
+msgstr "en ella. Use el tabulador para moverse."
 
 #: src/main.c:465
 msgid ""
@@ -2622,7 +2622,7 @@ msgstr " El nuevo modo es \"%s\" "
 
 #: src/main.c:953 src/main.c:980
 msgid "&Listing mode..."
-msgstr "&Modo de listado..."
+msgstr "&Listado..."
 
 #: src/main.c:954 src/main.c:981
 msgid "&Quick view     C-x q"
@@ -2678,7 +2678,7 @@ msgstr "ver arc&Hivo..."
 
 #: src/main.c:1010
 msgid "&Filtered view     M-!"
-msgstr "ver archivo (con &Filtro)...  M-!"
+msgstr "e&Jecutar y ver...            M-!"
 
 #: src/main.c:1011
 msgid "&Edit               F4"
@@ -2774,11 +2774,11 @@ msgstr "mostrar &Tamaños de los directorios"
 
 #: src/main.c:1046
 msgid "command &History"
-msgstr "&Historia de comandos"
+msgstr "&Historia de órdenes"
 
 #: src/main.c:1047
 msgid "di&Rectory hotlist    C-\\"
-msgstr "directorios &Favoritos...          C-\\"
+msgstr "&Favoritos...                      C-\\"
 
 #: src/main.c:1049
 msgid "&Active VFS list      C-x a"
@@ -2854,7 +2854,7 @@ msgstr " &Archivo "
 
 #: src/main.c:1104
 msgid " &Command "
-msgstr " &Comando "
+msgstr " &Utilidades "
 
 #: src/main.c:1107
 msgid " &Options "
@@ -3370,7 +3370,7 @@ msgstr ""
 #: src/subshell.c:416
 #, c-format
 msgid "Cannot open named pipe %s\n"
-msgstr "No pude abrir la tubería con nombre %s\n"
+msgstr "Imposible abrir la tubería con nombre %s\n"
 
 #: src/subshell.c:701
 msgid " The shell is still active. Quit anyway? "
@@ -3379,7 +3379,7 @@ msgstr " El shell todavía está activo. ¿Terminar de todas maneras?"
 #: src/subshell.c:840
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
-msgstr "Cuidado: no pude cambiar a %s.\n"
+msgstr "Cuidado: Imposible cambiar a %s.\n"
 
 #: src/textconf.c:50
 msgid "With builtin Editor\n"
@@ -3447,7 +3447,7 @@ msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
-"No pude abrir el archivo \"%s\" para escritura:\n"
+"Imposible abrir el archivo \"%s\" para escritura:\n"
 "%s\n"
 
 #: src/tree.c:648
@@ -3500,7 +3500,7 @@ msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
-"No pude escribir al archivo %s:\n"
+"Imposible escribir al archivo %s:\n"
 "%s\n"
 
 #: src/user.c:134
@@ -3752,7 +3752,7 @@ msgstr "Formato"
 
 #: src/widget.c:901
 msgid " History "
-msgstr " Histórico "
+msgstr " Historia "
 
 #: src/win.c:121
 msgid "Function key 1"
@@ -4333,7 +4333,7 @@ msgid ""
 "Cannot open tar archive\n"
 "%s"
 msgstr ""
-"No pude abrir archivo de tipo tar\n"
+"Imposible abrir archivo de tipo tar\n"
 "%s"
 
 #: vfs/tar.c:280

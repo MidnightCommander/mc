@@ -1,9 +1,9 @@
-Midnight Commander (c) 1995-2001 The Free Software Foundation
+GNU Midnight Commander (c) 1995-2001, The Free Software Foundation
 Ayudita: C-x t pone los archivos marcados en la línea de órdenes.
 Ayudita: C-x p copia la trayectoria completa en la línea de órdenes.
 Ayudita: C-x C-p copia la trayectoria del panel opuesto en la línea de órdenes.
 Ayudita: M-Tab (o Esc+Tab) completa nombres; dos veces y muestra una lista.
-Ayudita: M-p y M-n permiten acceder al histórico de comandos.
+Ayudita: M-p y M-n permiten acceder a la historia de órdenes.
 Ayudita: Para introducir un carácter especial: C-q y el caracter.
 Ayudita: ¿Harto de mensajitos? Se quitan en el menú Opciones/Presentación.
 Ayudita: Para seleccionar directorios añadir "/" tras el patrón a buscar.
@@ -28,20 +28,20 @@ Ayudita: En terminales lentos la opción -s puede ayudar.
 Ayudita: Puede "Llevar al panel" los resultados de "Buscar archivos" y usarlos.
 Ayudita: Puede hacer y guardar búsquedas complejas con "Búsquedas externas".
 Ayudita: Con M-c cambiar de directorio es un poco más cómodo.
-Nota: Los comandos de la Shell no funcionan fuera del sistema local.
+Nota: Las instrucciones de la Shell no funcionan fuera del sistema local.
 Ayudita: Con C-y puede recuperar texto eliminado.
 Ayudita: ¿Alguna tecla rebelde? Puede educarla con "Redefinir teclas".
-Ayudita: Para ver la salida de un comando por el visor M-!
+Ayudita: Para ver la salida de una orden por el visor M-!
 Ayudita: F13 (o Mayúsculas-F3) invoca el visor en modo primitivo, sin formatos.
 Ayudita: ¿Problemas de teclas en terminales X? Use xterm.ad, .ti y .tcap
 Ayudita: F4 puede usar cualquier editor que indiquemos en la variable EDITOR.
 Ayudita: Se puede usar un visor externo indicado en la variable PAGER.
 Ayudita: Para deshabilitar los mensajes de Confirmación vaya al menú Opciones.
-Ayudita: Apunte los directorios más usados en "Directorios favoritos".
+Ayudita: Apunte los directorios y sitios más usados en "Favoritos".
 Ayudita: Para hacer un FTP anónimo con mc: 'cd /#ftp:maquina.dominio'
 Ayudita: FTP está integrado en Midnight Commander, en "conexión por FTP..."
-Ayudita: M-t permite cambiar rápidamente entre varios tipos de listado.
+Ayudita: M-t permite cambiar rápidamente entre varios modos de listado.
 Ayudita: Para hacer un FTP no-anónimo: 'cd /#ftp:usuario@maquina.dominio'
-Ayudita: Para examinar un archivo RPM basta pulsar <enter> sobre él.
+Ayudita: Para examinar un archivo RPM basta pulsar <intro> sobre él.
 Ayudita: Para copiar y pegar con ratón mantener presionada la tecla MAYÚSCULAS.
-Ayudita: Los ftp habituales se pueden guardar como "Directorios favoritos".
+Ayudita: Los ftp habituales se pueden guardar en "Favoritos".
