@@ -35,9 +35,6 @@
 
 static volatile int total_inodes = 0, total_entries = 0;
 
-static struct vfs_s_entry *vfs_s_resolve_symlink (struct vfs_class * me, struct vfs_s_entry * entry,
-					   char *path, int follow);
-
 struct vfs_s_inode *
 vfs_s_new_inode (struct vfs_class *me, struct vfs_s_super *super, struct stat *initstat)
 {
@@ -214,44 +211,92 @@ vfs_s_automake (struct vfs_class *me, struct vfs_s_inode *dir, char *path, int f
     return res;
 }
 
+/* If the entry is a symlink, find the entry for its target */
+static struct vfs_s_entry *
+vfs_s_resolve_symlink (struct vfs_class *me, struct vfs_s_entry *entry,
+		       char *path, int follow)
+{
+    char *linkname;
+    char *fullname = NULL;
+    struct vfs_s_entry *target;
+
+    if (follow == LINK_NO_FOLLOW)
+	return entry;
+    if (follow == 0)
+	ERRNOR (ELOOP, NULL);
+    if (!entry)
+	ERRNOR (ENOENT, NULL);
+    if (!S_ISLNK (entry->ino->st.st_mode))
+	return entry;
+
+    linkname = entry->ino->linkname;
+    if (linkname == NULL)
+	ERRNOR (EFAULT, NULL);
+
+    /* make full path from relative */
+    if (*linkname != PATH_SEP) {
+	char *fullpath = vfs_s_fullpath (me, entry->dir);
+	fullname = g_strdup_printf ("%s/%s", fullpath, linkname);
+	linkname = fullname;
+	g_free (fullpath);
+    }
+
+    target =
+	(MEDATA->find_entry) (me, entry->dir->super->root, linkname,
+			      follow - 1, 0);
+    g_free (fullname);
+    return target;
+}
+
 /*
  * Follow > 0: follow links, serves as loop protect,
  *       == -1: do not follow links
  */
 struct vfs_s_entry *
-vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root, char *path, int follow, int flags)
+vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
+		       char *path, int follow, int flags)
 {
     unsigned int pseg;
     struct vfs_s_entry *ent = NULL;
     char p[MC_MAXPATHLEN] = "";
 
-    while (root){
+    if (strlen(path) >= MC_MAXPATHLEN)
+	return NULL;
+
+    while (root) {
 	int t;
 
 	while (*path == PATH_SEP)	/* Strip leading '/' */
 	    path++;
 
-	if (!path [0])
+	if (!path[0])
 	    return ent;
 
-	for (pseg = 0; path[pseg] && path[pseg] != PATH_SEP; pseg++)
-		;
+	for (pseg = 0; path[pseg] && path[pseg] != PATH_SEP; pseg++);
 
 	strcat (p, PATH_SEP_STR);
 	strncpy (p + (t = strlen (p)), path, pseg);
 	p[t + pseg] = '\0';
 
 	for (ent = root->subdir; ent != NULL; ent = ent->next)
-	    if (strlen (ent->name) == pseg && (!strncmp (ent->name, path, pseg)))
+	    if (strlen (ent->name) == pseg
+		&& (!strncmp (ent->name, path, pseg)))
 		/* FOUND! */
 		break;
 
 	if (!ent && (flags & (FL_MKFILE | FL_MKDIR)))
 	    ent = vfs_s_automake (me, root, path, flags);
-	if (!ent) ERRNOR (ENOENT, NULL);
+	if (!ent)
+	    ERRNOR (ENOENT, NULL);
 	path += pseg;
-/* here we must follow leading directories always; only the actual file is optional */
-	if (!(ent = vfs_s_resolve_symlink (me, ent, p, strchr (path, PATH_SEP) ? LINK_FOLLOW : follow)))
+	/* here we must follow leading directories always;
+	   only the actual file is optional */
+	ent =
+	    vfs_s_resolve_symlink (me, ent, p,
+				   strchr (path,
+					   PATH_SEP) ? LINK_FOLLOW :
+				   follow);
+	if (!ent)
 	    return NULL;
 	root = ent->ino;
     }
@@ -342,61 +387,6 @@ vfs_s_find_inode (struct vfs_class *me, struct vfs_s_inode *root, char *path, in
     if (!ent)
 	return NULL;
     return ent->ino;
-}
-
-static struct vfs_s_entry *
-vfs_s_resolve_symlink (struct vfs_class *me, struct vfs_s_entry *entry, char *path, int follow)
-{
-    char buf[MC_MAXPATHLEN], *linkname;
-
-    if (follow == LINK_NO_FOLLOW)
-	return entry;
-    if (follow == 0)
-	ERRNOR (ELOOP, NULL);
-    if (!entry)
-	ERRNOR (ENOENT, NULL);
-    if (!S_ISLNK (entry->ino->st.st_mode))
-	return entry;
-
-    linkname = entry->ino->linkname;
-
-    if (linkname == NULL)
-	ERRNOR (EFAULT, NULL);
-
-    if (MEDATA->find_entry == vfs_s_find_entry_linear) {
-	if (*linkname == PATH_SEP)
-	    return (MEDATA->find_entry) (me, entry->dir->super->root,
-					 linkname, follow - 1, 0);
-	else {
-	    char *fullpath = vfs_s_fullpath (me, entry->dir);
-
-	    g_snprintf (buf, sizeof (buf), "%s/%s", fullpath, linkname);
-	    g_free (fullpath);
-	    return (MEDATA->find_entry) (me, entry->dir->super->root, buf,
-					 follow - 1, 0);
-	}
-    }
-
-    /* Convert absolute paths to relative ones */
-    if (*linkname == PATH_SEP) {
-	char *p, *q;
-
-	for (p = path, q = entry->ino->linkname; *p == *q; p++, q++);
-	while (*(--q) != PATH_SEP);
-	q++;
-	for (;; p++) {
-	    p = strchr (p, PATH_SEP);
-	    if (!p) {
-		strcat (buf, q);
-		break;
-	    }
-	    strcat (buf, "..");
-	    strcat (buf, PATH_SEP_STR);
-	}
-	linkname = buf;
-    }
-
-    return (MEDATA->find_entry) (me, entry->dir, linkname, follow - 1, 0);
 }
 
 /* Ook, these were functions around directory entries / inodes */
@@ -544,17 +534,29 @@ vfs_s_invalidate (struct vfs_class *me, struct vfs_s_super *super)
 char *
 vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino)
 {
-/* For now, usable only on filesystems with _linear structure */
-    if (MEDATA->find_entry != vfs_s_find_entry_linear)
-	vfs_die ("Implement me!");
-    if (!ino->ent) /* That must be directory... */
+    if (!ino->ent)
 	ERRNOR (EAGAIN, NULL);
 
-    if ((!ino->ent->dir) || (!ino->ent->dir->ent)) /* It must be directory */
-        return g_strdup (ino->ent->name);
+    if (MEDATA->find_entry != vfs_s_find_entry_linear) {
+	char *newpath;
+	char *path = g_strdup (ino->ent->name);
+	while (1) {
+	    ino = ino->ent->dir;
+	    if (ino == ino->super->root)
+		break;
+	    newpath = g_strdup_printf ("%s/%s", ino->ent->name, path);
+	    g_free (path);
+	    path = newpath;
+	}
+	return path;
+    }
 
-    return  g_strconcat (ino->ent->dir->ent->name, PATH_SEP_STR, 
-			    ino->ent->name, NULL);
+    /* It must be directory */
+    if ((!ino->ent->dir) || (!ino->ent->dir->ent))
+	return g_strdup (ino->ent->name);
+
+    return g_strconcat (ino->ent->dir->ent->name, PATH_SEP_STR,
+			ino->ent->name, NULL);
 }
 
 /* Support of archives */

@@ -1,3 +1,12 @@
+2003-10-16  Pavel Roskin  <proski@gnu.org>
+
+	* direntry.c (vfs_s_resolve_symlink): Don't use buffers of fixed
+	size.  This fixes a security hole.  Always start from the root.
+	Remove broken code for making symlinks relative.
+	(vfs_s_find_entry_tree): Protect against long path, since this
+	function uses a buffer of fixed size.
+	(vfs_s_fullpath): Implement support for archives (real trees).
+
 2003-10-16  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* vfs.c (mc_open): Fix rare memory leak on failure.
