@@ -29,7 +29,6 @@
 #include "global.h"
 #include "profile.h"
 
-#define INIFILE "xxx.ini"
 #define STRSIZE 4096
 #define overflow (next == &CharBuffer [STRSIZE-1])
 
@@ -53,22 +52,21 @@ typedef struct TProfile {
     struct TProfile *link;
 } TProfile;
 
-TProfile *Current = 0;
-TProfile *Base = 0;
+static TProfile *Base = 0;
 
-static int is_loaded (char *FileName, TSecHeader **section)
+static TProfile *
+find_loaded (char *FileName, TSecHeader ** section)
 {
     TProfile *p = Base;
 
-    while (p){
-	if (! g_strcasecmp (FileName, p->FileName)){
-	    Current = p;
+    while (p) {
+	if (!g_strcasecmp (FileName, p->FileName)) {
 	    *section = p->Section;
-	    return 1;
+	    return p;
 	}
 	p = p->link;
     }
-    return 0;
+    return NULL;
 }
 
 #define TRANSLATION_CHAR '\200'
@@ -260,18 +258,18 @@ GetSetProfileChar (int set, const char *AppName, char *KeyName,
 		   char *Default, char *FileName)
 {
     
-    TProfile   *New;
+    TProfile   *Current;
     TSecHeader *section;
     TKeys      *key;
 
-    if (!is_loaded (FileName, &section)){
-	New = g_new (TProfile, 1);
-	New->link = Base;
-	New->FileName = g_strdup (FileName);
-	New->Section = load (FileName);
-	Base = New;
-	section = New->Section;
-	Current = New;
+    Current = find_loaded (FileName, &section);
+    if (!Current) {
+	Current = g_new (TProfile, 1);
+	Current->link = Base;
+	Current->FileName = g_strdup (FileName);
+	Current->Section = load (FileName);
+	Base = Current;
+	section = Current->Section;
     }
     
     /* Start search */
@@ -336,15 +334,6 @@ char *get_profile_string (const char *AppName, char *KeyName, char *Default,
     return GetSetProfileChar (0, AppName, KeyName, Default, FileName);
 }
 
-#if 0
-int GetProfileString (const char * AppName, char * KeyName, char * Default, 
-		      char * ReturnedString, int Size)
-{
-    return GetPrivateProfileString (AppName, KeyName, Default,
-				    ReturnedString, Size, INIFILE);
-}
-#endif
-
 int GetPrivateProfileInt (const char * AppName, char * KeyName, int Default,
 			   char * File)
 {
@@ -362,25 +351,11 @@ int GetPrivateProfileInt (const char * AppName, char * KeyName, int Default,
     return (int) atol (IntBuf);
 }
 
-#if 0
-int GetProfileInt (const char * AppName, char * KeyName, int Default)
-{
-    return GetPrivateProfileInt (AppName, KeyName, Default, INIFILE);
-}
-#endif
-
 int WritePrivateProfileString (const char * AppName, char * KeyName, char * String,
 				char * FileName)
 {
     return GetSetProfile (1, AppName, KeyName, String, "", 0, FileName);
 }
-
-#if 0
-int WriteProfileString (const char * AppName, char * KeyName, char * String)
-{
-    return (WritePrivateProfileString (AppName, KeyName, String, INIFILE));
-}
-#endif
 
 static void dump_keys (FILE * profile, TKeys * p)
 {
@@ -484,17 +459,17 @@ void free_profiles (void)
 
 void *profile_init_iterator (char *appname, char *file)
 {
-    TProfile   *New;
+    TProfile   *Current;
     TSecHeader *section;
-    
-    if (!is_loaded (file, &section)){
-	New = g_new (TProfile, 1);
-	New->link = Base;
-	New->FileName = g_strdup (file);
-	New->Section = load (file);
-	Base = New;
-	section = New->Section;
-	Current = New;
+
+    Current = find_loaded (file, &section);
+    if (!Current) {
+	Current = g_new (TProfile, 1);
+	Current->link = Base;
+	Current->FileName = g_strdup (file);
+	Current->Section = load (file);
+	Base = Current;
+	section = Current->Section;
     }
     for (; section; section = section->link){
 	if ( g_strcasecmp (section->AppName, appname))
@@ -521,7 +496,7 @@ void profile_clean_section (char *appname, char *file)
     TSecHeader *section;
 
     /* We assume the user has called one of the other initialization funcs */
-    if (!is_loaded (file, &section)){
+    if (!find_loaded (file, &section)){
 	fprintf (stderr,"Warning: profile_clean_section called before init\n");
 	return;
     }
@@ -540,7 +515,7 @@ int profile_has_section (char *section_name, char *profile)
     TSecHeader *section;
 
     /* We assume the user has called one of the other initialization funcs */
-    if (!is_loaded (profile, &section)){
+    if (!find_loaded (profile, &section)){
 	return 0;
     }
     for (; section; section = section->link){
