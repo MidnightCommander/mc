@@ -57,11 +57,11 @@ SSSSSSSS is the file size
 FILENAME is the filename
 PATH     is the path from the archive's root without the leading slash (/)
 DATETIME has one of the following formats:
-	    Mon DD hh:mm, Mon DD YYYY, Mon DD YYYY hh:mm, MM-DD-YY hh:mm
+	    Mon DD hh:mm, Mon DD YYYY, Mon DD YYYY hh:mm, MM-DD-YYYY hh:mm
 
-            where Mon is a three digit english month name, DD day
-            1-31, MM month 01-12, YY two digit year, YYYY four digit
-            year, hh hour and mm minute.
+            where Mon is a three letter English month name, DD is day
+            1-31, MM is month 01-12, YYYY is four digit year, hh hour is
+            and mm is minute.
 
 If the -> [PATH/]FILENAME part is present, it means:
 
