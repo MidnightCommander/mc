@@ -47,6 +47,7 @@
 #define CK_Remove 		204
 #define CK_Unmark 		206
 #define CK_Save_Block		207
+#define CK_Column_Mark 	208
 
 /* search and replace */
 #define CK_Find			301

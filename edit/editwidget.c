@@ -25,8 +25,10 @@
 #ifndef MIDNIGHT
 #include <X11/Xmd.h>		/* CARD32 */
 #include <X11/Xatom.h>
+#ifndef GTK
 #include "app_glob.c"
 #include "coollocal.h"
+#endif
 #include "editcmddef.h"
 #include "mousemark.h"
 #endif
@@ -49,10 +51,17 @@ void edit_destroy_callback (CWidget * w)
 	CError ("Trying to destroy non-existing editor widget.\n");
 }
 
+#ifdef GTK
+
+#else
 void link_hscrollbar_to_editor (CWidget * scrollbar, CWidget * editor, XEvent * xevent, CEvent * cwevent, int whichscrbutton);
+#endif
+
+#ifndef GTK
 
 extern int option_editor_bg_normal;
 void edit_tri_cursor (Window win);
+
 /* starting_directory is for the filebrowser */
 CWidget *CDrawEditor (const char *identifier, Window parent, int x, int y,
 	   int width, int height, const char *text, const char *filename,
@@ -116,6 +125,17 @@ CWidget *CDrawEditor (const char *identifier, Window parent, int x, int y,
     return w;
 }
 
+#endif
+
+#ifdef GTK
+
+void update_scroll_bars (WEdit * e)
+{
+
+}
+
+#else
+
 void update_scroll_bars (WEdit * e)
 {
     int i, x1, x2;
@@ -156,6 +176,8 @@ void update_scroll_bars (WEdit * e)
 	}
     }
 }
+
+#endif
 
 /* returns the position in the edit buffer of a window click */
 long edit_get_click_pos (WEdit * edit, int x, int y)
@@ -245,7 +267,14 @@ static void release_mark (WEdit *edit, XEvent *event)
 	edit_mark_cmd (edit, 1);
     if (edit->mark1 != edit->mark2) {
 	edit_get_selection (edit);
-	XSetSelectionOwner (CDisplay, XA_PRIMARY, edit->widget->winid, event->xbutton.time);
+#ifdef GTK
+#if 0
+/* *** */
+	gtk_set_selection_owner (CWindowOf (edit->widget));
+#endif
+#else
+	XSetSelectionOwner (CDisplay, XA_PRIMARY, CWindowOf (edit->widget), event->xbutton.time);
+#endif
     }
 }
 
@@ -279,7 +308,7 @@ static void redraw (WEdit *edit, long click)
     mouse_redraw (edit, click);
 }
 
-static void edit_mouse_mark (WEdit * edit, XEvent * event, CEvent * ce)
+void edit_mouse_mark (WEdit * edit, XEvent * event, int double_click)
 {
     edit_update_curs_row (edit);
     edit_update_curs_col (edit);
@@ -295,7 +324,7 @@ static void edit_mouse_mark (WEdit * edit, XEvent * event, CEvent * ce)
     mouse_mark (
 	(void  *) edit,
 	event,
-	ce,
+	double_click,
 	(void (*) (int, int, int *, int *)) xy,
 	(long (*) (void *, int, int)) cp,
 	(int (*) (void *, long *, long *)) marks,
@@ -310,6 +339,10 @@ static void edit_mouse_mark (WEdit * edit, XEvent * event, CEvent * ce)
 	(void (*) (void *, long)) redraw
     );
 }
+
+#ifdef GTK
+
+#else
 
 void link_scrollbar_to_editor (CWidget * scrollbar, CWidget * editor, XEvent * xevent, CEvent * cwevent, int whichscrbutton)
 {
@@ -362,6 +395,12 @@ void link_scrollbar_to_editor (CWidget * scrollbar, CWidget * editor, XEvent * x
     }
 }
 
+#endif
+
+#ifdef GTK
+
+#else
+
 void link_hscrollbar_to_editor (CWidget * scrollbar, CWidget * editor, XEvent * xevent, CEvent * cwevent, int whichscrbutton)
 {
     int i, start_col;
@@ -410,6 +449,8 @@ void link_hscrollbar_to_editor (CWidget * scrollbar, CWidget * editor, XEvent * 
 	edit_status (e);
     }
 }
+
+#endif
 
 /* 
    This section comes from rxvt-2.21b1/src/screen.c by
@@ -480,6 +521,19 @@ void paste_prop (void *data, void (*insert) (void *, int), Window win, unsigned 
 	int actual_fmt, i;
 	unsigned long nitems;
 
+#ifdef GTK
+#if 0
+/* *** */
+	if (gtk_get_window_property (win, prop,
+				nread / 4, 65536, delete,
+			      AnyPropertyType, &actual_type, &actual_fmt,
+				&nitems, &bytes_after,
+				&s) != Success) {
+	    XFree (s);
+	    return;
+	}
+#endif
+#else
 	if (XGetWindowProperty (CDisplay, win, prop,
 				nread / 4, 65536, delete,
 			      AnyPropertyType, &actual_type, &actual_fmt,
@@ -488,6 +542,7 @@ void paste_prop (void *data, void (*insert) (void *, int), Window win, unsigned 
 	    XFree (s);
 	    return;
 	}
+#endif
 	nread += nitems;
 	for (i = 0; i < nitems; i++)
 	    (*insert) (data, s[i]);
@@ -533,8 +588,19 @@ void edit_update_screen (WEdit * e)
 /* pop all events for this window for internal handling */
     if (e->force & (REDRAW_CHAR_ONLY | REDRAW_COMPLETELY)) {
 	edit_render_keypress (e);
+#ifdef GTK
+    } else if (
+#if 0
+/* *** */
+    gtk_edit_key_pending () || gtk_edit_mouse_pending ()
+#else
+    0
+#endif
+    ) {
+#else
     } else if (CCheckWindowEvent (e->widget->winid, ButtonPressMask | ButtonReleaseMask | ButtonMotionMask, 0)
 	       || CKeyPending ()) {
+#endif
 	e->force |= REDRAW_PAGE;
 	return;
     } else {
@@ -544,48 +610,12 @@ void edit_update_screen (WEdit * e)
 
 extern int space_width;
 
-static void edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int width)
-{
-    long cursor;
-    int i, col;
-    cursor = edit->curs1;
-    col = edit_get_col (edit);
-    for (i = 0; i < size; i++) {
-	if (data[i] == '\n') {	/* fill in and move to next line */
-	    int l;
-	    long p;
-	    if (edit_get_byte (edit, edit->curs1) != '\n') {
-		l = width - (edit_get_col (edit) - col);
-		while (l > 0) {
-		    edit_insert (edit, ' ');
-		    l -= space_width;
-		}
-	    }
-	    for (p = edit->curs1;; p++) {
-		if (p == edit->last_byte)
-		    edit_insert_ahead (edit, '\n');
-		if (edit_get_byte (edit, p) == '\n') {
-		    p++;
-		    break;
-		}
-	    }
-	    edit_cursor_move (edit, edit_move_forward3 (edit, p, col, 0) - edit->curs1);
-	    l = col - edit_get_col (edit);
-	    while (l >= space_width) {
-		edit_insert (edit, ' ');
-		l -= space_width;
-	    }
-	    continue;
-	}
-	edit_insert (edit, data[i]);
-    }
-    edit_cursor_move (edit, cursor - edit->curs1);
-}
+void edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int width);
 
 #define free_data if (data) {free(data);data=0;}
 
 /* handles drag and drop */
-void handle_client_message (CWidget * w, XEvent * xevent, CEvent * cwevent)
+void handle_client_message (CWidget * w, XEvent * xevent)
 {
     int data_type;
     unsigned char *data;
@@ -608,7 +638,7 @@ void handle_client_message (CWidget * w, XEvent * xevent, CEvent * cwevent)
     }
     data_type = CGetDrop (xevent, &data, &size, &xs, &ys);
 
-    if (data_type == DndNotDnd || xs < 0 || ys < 0 || xs >= w->width || ys >= w->height) {
+    if (data_type == DndNotDnd || xs < 0 || ys < 0 || xs >= CWidthOf (w) || ys >= CHeightOf (w)) {
 	free_data;
 	return;
     }
@@ -684,6 +714,8 @@ void handle_client_message (CWidget * w, XEvent * xevent, CEvent * cwevent)
     free_data;
 }
 
+#ifndef GTK
+
 int eh_editor (CWidget * w, XEvent * xevent, CEvent * cwevent)
 {
     WEdit *e = w->editor;
@@ -713,22 +745,27 @@ int eh_editor (CWidget * w, XEvent * xevent, CEvent * cwevent)
 	return 1;
 /*  case SelectionClear:   ---> This is handled by coolnext.c: CNextEvent() */
     case ClientMessage:
-	handle_client_message (w, xevent, cwevent);
+	handle_client_message (w, xevent);
 	r = 1;
 	break;
     case ButtonPress:
 	CFocus (w);
 	edit_render_tidbits (w);
     case ButtonRelease:
-	if (xevent->xbutton.state & ControlMask)
+	if (xevent->xbutton.state & ControlMask) {
+	    if (!column_highlighting)
+		edit_push_action (edit, COLUMN_OFF);
 	    column_highlighting = 1;
-	else
+	} else {
+	    if (column_highlighting)
+		edit_push_action (edit, COLUMN_ON);
 	    column_highlighting = 0;
+	}
     case MotionNotify:
 	if (!xevent->xmotion.state && xevent->type == MotionNotify)
 	    return 0;
 	resolve_button (xevent, cwevent);
-	edit_mouse_mark (e, xevent, cwevent);
+	edit_mouse_mark (e, xevent, cwevent->double_click);
 	break;
     case Expose:
 	edit_render_expose (e, &(xevent->xexpose));
@@ -742,11 +779,13 @@ int eh_editor (CWidget * w, XEvent * xevent, CEvent * cwevent)
 	return 1;
 	break;
     case KeyRelease:
+#if 0
 	if (column_highlighting) {
 	    column_highlighting = 0;
 	    e->force = REDRAW_COMPLETELY | REDRAW_LINE;
 	    edit_mark_cmd (e, 1);
 	}
+#endif
 	break;
     case KeyPress:
 	cwevent->ident = w->ident;
@@ -777,6 +816,8 @@ int eh_editor (CWidget * w, XEvent * xevent, CEvent * cwevent)
     edit_update_screen (e);
     return r;
 }
+
+#endif	/* ! GTK */
 
 #else
 
@@ -1064,7 +1105,11 @@ static int edit_callback (Dlg_head * h, WEdit * e, int msg, int par)
 		return 1;
 	    if (!edit_translate_key (e, 0, par, get_key_state (), &cmd, &ch))
 		return 0;
+	    if (column_highlighting)
+		e->force |= REDRAW_PAGE;
 	    edit_execute_key_command (e, cmd, ch);
+	    if (column_highlighting)
+		e->force |= REDRAW_PAGE;
 	    edit_update_screen (e);
 	}
 	return 1;

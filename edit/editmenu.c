@@ -85,6 +85,7 @@ void menu_save_as_cmd (void)		{ menu_cmd (CK_Save_As); }
 void menu_insert_file_cmd (void)	{ menu_cmd (CK_Insert_File); }
 void menu_quit_cmd (void)		{ menu_cmd (CK_Exit); }
 void menu_mark_cmd (void)		{ menu_cmd (CK_Mark); }
+void menu_markcol_cmd (void)		{ menu_cmd (CK_Column_Mark); }
 void menu_ins_cmd (void)		{ menu_cmd (CK_Toggle_Insert); }
 void menu_copy_cmd (void)		{ menu_cmd (CK_Copy); }
 void menu_move_cmd (void)		{ menu_cmd (CK_Move); }
@@ -147,6 +148,7 @@ static menu_entry FileMenuEmacs[] =
 static menu_entry EditMenu[] =
 {
     {' ', N_("&Toggle Mark       F3"), 'T', menu_mark_cmd},
+    {' ', N_("&Mark Columns    S-F3"), 'T', menu_markcol_cmd},
     {' ', "", ' ', 0},
     {' ', N_("toggle &Ins/overw Ins"), 'I', menu_ins_cmd},
     {' ', "", ' ', 0},
@@ -163,6 +165,7 @@ static menu_entry EditMenu[] =
 static menu_entry EditMenuEmacs[] =
 {
     {' ', N_("&Toggle Mark       F3"), 'T', menu_mark_cmd},
+    {' ', N_("&Mark Columns    S-F3"), 'T', menu_markcol_cmd},
     {' ', "", ' ', 0},
     {' ', N_("toggle &Ins/overw Ins"), 'I', menu_ins_cmd},
     {' ', "", ' ', 0},

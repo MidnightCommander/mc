@@ -31,7 +31,9 @@
 
 #ifndef MIDNIGHT
 #include <X11/Xatom.h>
+#ifndef GTK
 #include "loadfile.h"
+#endif
 #endif
 
 /* globals: */
@@ -55,7 +57,7 @@ int edit_confirm_save = 0;
 #define NUM_REPL_ARGS 16
 #define MAX_REPL_LEN 1024
 
-#ifdef MIDNIGHT
+#if defined(MIDNIGHT) || defined(GTK)
 
 static inline int my_lower_case (int c)
 {
@@ -70,8 +72,9 @@ char *strcasechr (const unsigned char *s, int c)
     return (char *) s;
 }
 
-
+#ifdef MIDNIGHT
 #include "../src/mad.h"
+#endif
 
 #ifndef HAVE_MEMMOVE
 /* for Christophe */
@@ -372,6 +375,65 @@ void edit_split_filename (WEdit * edit, char *f)
 
 #else
 
+#ifdef GTK
+
+static char cwd[1040];
+
+static char *canonicalize_pathname (char *p)
+{
+    char *q, *r;
+
+    if (*p != '/') {
+	if (strlen (cwd) == 0) {
+#ifdef HAVE_GETCWD
+	    getcwd (cwd, MAX_PATH_LEN);
+#else
+	    getwd (cwd);
+#endif
+	}
+	r = malloc (strlen (cwd) + strlen (p) + 2);
+	strcpy (r, cwd);
+	strcat (r, "/");
+	strcat (r, p);
+	p = r;
+    }
+    r = q = malloc (strlen (p) + 2);
+    for (;;) {
+	if (!*p) {
+	    *q = '\0';
+	    break;
+	}
+	if (*p != '/') {
+	    *q++ = *p++;
+	} else {
+	    while (*p == '/') {
+		*q = '/';
+		if (!strncmp (p, "/./", 3) || !strcmp (p, "/."))
+		    p++;
+		else if (!strncmp (p, "/../", 4) || !strcmp (p, "/..")) {
+		    p += 2;
+		    *q = ' ';
+		    q = strrchr (r, '/');
+		    if (!q) {
+			q = r;
+			*q = '/';
+		    }
+		}
+		p++;
+	    }
+	    q++;
+	}
+    }
+/* get rid of trailing / */
+    if (r[0] && r[1])
+	if (*--q == '/')
+	    *q = '\0';
+    return r;
+}
+
+#endif		/* GTK */
+
+
 void edit_split_filename (WEdit * edit, char *longname)
 {
     char *exp, *p;
@@ -387,7 +449,7 @@ void edit_split_filename (WEdit * edit, char *longname)
     free (exp);
 }
 
-#endif
+#endif		/* ! MIDNIGHT */
 
 /*  here we want to warn the user of overwriting an existing file, but only if they
    have made a change to the filename */
@@ -424,8 +486,11 @@ int edit_save_as_cmd (WEdit * edit)
 #ifdef MIDNIGHT
 	        edit->delete_file = 0;
 #endif		
+#ifndef GTK
+/* *** */
 		if (different_filename && !edit->explicit_syntax)
 		    edit_load_syntax (edit, 0, 0);
+#endif
 		return 1;
 	    } else {
 		free (exp);
@@ -492,7 +557,12 @@ int edit_raw_key_query (char *heading, char *query, int cancel)
 
 int edit_raw_key_query (char *heading, char *query, int cancel)
 {
+#ifdef GTK
+    /* *** */
+    return 0;
+#else
     return CKeySymMod (CRawkeyQuery (0, 0, 0, heading, query));
+#endif
 }
 
 #endif
@@ -624,9 +694,14 @@ void edit_delete_macro_cmd (WEdit * edit)
     command = CK_Macro (edit_raw_key_query (_(" Delete Macro "), _(" Press macro hotkey: "), 1));
 #else
 /* This heads the 'Delete Macro' dialog box */
+#ifdef GTK
+/* *** */
+    command = 0;
+#else
     command = CK_Macro (CKeySymMod (CRawkeyQuery (0, 0, 0, _(" Delete Macro "), 
 /* Input line for a single key press follows the ':' */
     _(" Press macro hotkey: "))));
+#endif
 #endif
 
     if (command == CK_Macro (0))
@@ -783,35 +858,88 @@ int eval_marks (WEdit * edit, long *start_mark, long *end_mark)
 }
 
 /*Block copy, move and delete commands */
+extern int column_highlighting;
+
+#ifdef MIDNIGHT
+#define space_width 1
+#else
+extern int space_width;
+#endif
+
+void edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int width)
+{
+    long cursor;
+    int i, col;
+    cursor = edit->curs1;
+    col = edit_get_col (edit);
+    for (i = 0; i < size; i++) {
+	if (data[i] == '\n') {	/* fill in and move to next line */
+	    int l;
+	    long p;
+	    if (edit_get_byte (edit, edit->curs1) != '\n') {
+		l = width - (edit_get_col (edit) - col);
+		while (l > 0) {
+		    edit_insert (edit, ' ');
+		    l -= space_width;
+		}
+	    }
+	    for (p = edit->curs1;; p++) {
+		if (p == edit->last_byte)
+		    edit_insert_ahead (edit, '\n');
+		if (edit_get_byte (edit, p) == '\n') {
+		    p++;
+		    break;
+		}
+	    }
+	    edit_cursor_move (edit, edit_move_forward3 (edit, p, col, 0) - edit->curs1);
+	    l = col - edit_get_col (edit);
+	    while (l >= space_width) {
+		edit_insert (edit, ' ');
+		l -= space_width;
+	    }
+	    continue;
+	}
+	edit_insert (edit, data[i]);
+    }
+    edit_cursor_move (edit, cursor - edit->curs1);
+}
+
 
 void edit_block_copy_cmd (WEdit * edit)
 {
     long start_mark, end_mark, current = edit->curs1;
-    long count;
+    int size, x;
     char *copy_buf;
 
+    edit_update_curs_col (edit);
+    x = edit->curs_col;
     if (eval_marks (edit, &start_mark, &end_mark))
 	return;
+    if (column_highlighting)
+	if ((x >= edit->column1 && x < edit->column2) || (x > edit->column2 && x <= edit->column1))
+	    return;
 
-
-    copy_buf = malloc (end_mark - start_mark);
+    copy_buf = edit_get_block (edit, start_mark, end_mark, &size);
 
 /* all that gets pushed are deletes hence little space is used on the stack */
 
     edit_push_markers (edit);
 
-    count = start_mark;
-    while (count < end_mark) {
-	copy_buf[end_mark - count - 1] = edit_get_byte (edit, count);
-	count++;
+    if (column_highlighting) {
+	edit_insert_column_of_text (edit, copy_buf, size, abs (edit->column2 - edit->column1));
+    } else {
+	while (size--)
+	    edit_insert_ahead (edit, copy_buf[size]);
     }
-    while (count-- > start_mark) {
-	edit_insert_ahead (edit, copy_buf[end_mark - count - 1]);
-    }
+
     free (copy_buf);
     edit_scroll_screen_over_cursor (edit);
 
-    if (start_mark < current && end_mark > current)
+    if (column_highlighting) {
+	edit_set_markers (edit, 0, 0, 0, 0);
+	edit_push_action (edit, COLUMN_ON);
+	column_highlighting = 0;
+    } else if (start_mark < current && end_mark > current)
 	edit_set_markers (edit, start_mark, end_mark + end_mark - start_mark, 0, 0);
 
     edit->force |= REDRAW_PAGE;
@@ -824,81 +952,104 @@ void edit_block_move_cmd (WEdit * edit)
     long current;
     char *copy_buf;
     long start_mark, end_mark;
+    int deleted = 0;
+    int x;
 
     if (eval_marks (edit, &start_mark, &end_mark))
 	return;
-
-    if (start_mark <= edit->curs1 && end_mark >= edit->curs1)
+    if (column_highlighting) {
+	edit_update_curs_col (edit);
+	x = edit->curs_col;
+	if (start_mark <= edit->curs1 && end_mark >= edit->curs1)
+	    if ((x > edit->column1 && x < edit->column2) || (x > edit->column2 && x < edit->column1))
+		return;
+    } else if (start_mark <= edit->curs1 && end_mark >= edit->curs1)
 	return;
 
     if ((end_mark - start_mark) > option_max_undo / 2)
-	if (edit_query_dialog2 (_(" Warning "), _(" Block is large, you may not be able to undo this action. "), _("Continue"), _("Cancel")))
+	if (edit_query_dialog2 (_ (" Warning "), _ (" Block is large, you may not be able to undo this action. "), _ ("Continue"), _ ("Cancel")))
 	    return;
 
-    copy_buf = malloc (end_mark - start_mark);
-
     edit_push_markers (edit);
-
     current = edit->curs1;
-    edit_cursor_move (edit, start_mark - edit->curs1);
-    edit_scroll_screen_over_cursor (edit);
-
-    count = start_mark;
-    while (count < end_mark) {
-	copy_buf[end_mark - count - 1] = edit_delete (edit);
-	count++;
-    }
-    edit_scroll_screen_over_cursor (edit);
-
-    edit_cursor_move (edit, current - edit->curs1 
-	- (((current - edit->curs1) > 0) ? end_mark - start_mark : 0));
-    edit_scroll_screen_over_cursor (edit);
-
-    while (count-- > start_mark) {
-	edit_insert_ahead (edit, copy_buf[end_mark - count - 1]);
+    if (column_highlighting) {
+	int size, c1, c2, line;
+	line = edit->curs_line;
+	if (edit->mark2 < 0)
+	    edit_mark_cmd (edit, 0);
+	c1 = min (edit->column1, edit->column2);
+	c2 = max (edit->column1, edit->column2);
+	copy_buf = edit_get_block (edit, start_mark, end_mark, &size);
+	if (x < c2) {
+	    edit_block_delete_cmd (edit);
+	    deleted = 1;
+	}
+	edit_move_to_line (edit, line);
+	edit_cursor_move (edit, edit_move_forward3 (edit, edit_bol (edit, edit->curs1), x, 0) - edit->curs1);
+	edit_insert_column_of_text (edit, copy_buf, size, c2 - c1);
+	if (!deleted) {
+	    line = edit->curs_line;
+	    edit_update_curs_col (edit);
+	    x = edit->curs_col;
+	    edit_block_delete_cmd (edit);
+	    edit_move_to_line (edit, line);
+	    edit_cursor_move (edit, edit_move_forward3 (edit, edit_bol (edit, edit->curs1), x, 0) - edit->curs1);
+	}
+	edit_set_markers (edit, 0, 0, 0, 0);
+	edit_push_action (edit, COLUMN_ON);
+	column_highlighting = 0;
+    } else {
+	copy_buf = malloc (end_mark - start_mark);
+	edit_cursor_move (edit, start_mark - edit->curs1);
+	edit_scroll_screen_over_cursor (edit);
+	count = start_mark;
+	while (count < end_mark) {
+	    copy_buf[end_mark - count - 1] = edit_delete (edit);
+	    count++;
+	}
+	edit_scroll_screen_over_cursor (edit);
+	edit_cursor_move (edit, current - edit->curs1 - (((current - edit->curs1) > 0) ? end_mark - start_mark : 0));
+	edit_scroll_screen_over_cursor (edit);
+	while (count-- > start_mark)
+	    edit_insert_ahead (edit, copy_buf[end_mark - count - 1]);
 	edit_set_markers (edit, edit->curs1, edit->curs1 + end_mark - start_mark, 0, 0);
     }
     edit_scroll_screen_over_cursor (edit);
-
     free (copy_buf);
     edit->force |= REDRAW_PAGE;
 }
 
 void edit_cursor_to_bol (WEdit * edit);
 
-extern int column_highlighting;
-
 void edit_delete_column_of_text (WEdit * edit)
 {
     long p, q, r, m1, m2;
-    int b, c, d, fin;
+    int b, c, d;
+    int n;
 
     eval_marks (edit, &m1, &m2);
+    n = edit_move_forward (edit, m1, 0, m2) + 1;
     c = edit_move_forward3 (edit, edit_bol (edit, m1), 0, m1);
     d = edit_move_forward3 (edit, edit_bol (edit, m2), 0, m2);
 
     b = min (c, d);
     c = max (c, d);
 
-    fin = 0;
-    while (!fin) {
-	eval_marks (edit, &m1, &m2);
+    while (n--) {
 	r = edit_bol (edit, edit->curs1);
 	p = edit_move_forward3 (edit, r, b, 0);
 	q = edit_move_forward3 (edit, r, c, 0);
 	if (p < m1)
 	    p = m1;
-	if (q >= m2) {
+	if (q > m2)
 	    q = m2;
-	    fin = 1;
-	}
 	edit_cursor_move (edit, p - edit->curs1);
-	while (p != q) {	/* delete line between margins */
+	while (q > p) {		/* delete line between margins */
 	    if (edit_get_byte (edit, edit->curs1) != '\n')
 		edit_delete (edit);
 	    q--;
 	}
-	if (!fin)		/* next line */
+	if (n)			/* move to next line except on the last delete */
 	    edit_cursor_move (edit, edit_move_forward (edit, edit->curs1, 1, 0) - edit->curs1);
     }
 }
@@ -909,13 +1060,16 @@ int edit_block_delete_cmd (WEdit * edit)
     long count;
     long start_mark, end_mark;
 
+    if (column_highlighting && edit->mark2 < 0)
+	edit_mark_cmd (edit, 0);
+
     if (eval_marks (edit, &start_mark, &end_mark)) {
 	start_mark = edit_bol (edit, edit->curs1);
 	end_mark = edit_eol (edit, edit->curs1) + 1;
     }
     if ((end_mark - start_mark) > option_max_undo / 2)
 /* Warning message with a query to continue or cancel the operation */
-	if (edit_query_dialog2 (_(" Warning "), _(" Block is large, you may not be able to undo this action. "), _(" Continue "), _(" Cancel ")))
+	if (edit_query_dialog2 (_ (" Warning "), _ (" Block is large, you may not be able to undo this action. "), _ (" Continue "), _ (" Cancel ")))
 	    return 1;
 
     edit_push_markers (edit);
@@ -926,6 +1080,8 @@ int edit_block_delete_cmd (WEdit * edit)
     count = start_mark;
     if (start_mark < end_mark) {
 	if (column_highlighting) {
+	    if (edit->mark2 < 0)
+		edit_mark_cmd (edit, 0);
 	    edit_delete_column_of_text (edit);
 	} else {
 	    while (count < end_mark) {
@@ -1146,6 +1302,8 @@ void edit_search_dialog (WEdit * edit, char **search_text)
 
 extern CWidget *wedit;
 
+#ifndef GTK
+
 void edit_search_replace_dialog (Window parent, int x, int y, char **search_text, char **replace_text, char **arg_order, char *heading, int option)
 {
     Window win;
@@ -1287,7 +1445,14 @@ void edit_search_replace_dialog (Window parent, int x, int y, char **search_text
     CRestoreState (&s);
 }
 
+#else
 
+void edit_search_replace_dialog (Window parent, int x, int y, char **search_text, char **replace_text, char **arg_order, char *heading, int option)
+{
+
+}
+
+#endif
 
 void edit_search_dialog (WEdit * edit, char **search_text)
 {
@@ -1300,6 +1465,15 @@ void edit_replace_dialog (WEdit * edit, char **search_text, char **replace_text,
 /* Heads the 'Replace' dialog box */
     edit_search_replace_dialog (WIN_MESSAGES, search_text, replace_text, arg_order, _(" Replace "), SEARCH_DIALOG_OPTION_BACKWARDS);
 }
+
+#ifdef GTK
+
+int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
+{
+    return B_CANCEL;
+}
+
+#else
 
 int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 {
@@ -1336,6 +1510,7 @@ int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
     return 0;
 }
 
+#endif
 
 #endif
 
@@ -2001,8 +2176,6 @@ void edit_quit_cmd (WEdit * edit)
 
 #define TEMP_BUF_LEN 1024
 
-extern int column_highlighting;
-
 /* returns a null terminated length of text. Result must be free'd */
 unsigned char *edit_get_block (WEdit * edit, long start, long finish, int *l)
 {
@@ -2033,24 +2206,39 @@ unsigned char *edit_get_block (WEdit * edit, long start, long finish, int *l)
 /* save block, returns 1 on success */
 int edit_save_block (WEdit * edit, const char *filename, long start, long finish)
 {
-    long i = start, end, filelen = finish - start;
-    int file;
-    unsigned char *buf;
+    int len, file;
 
     if ((file = open ((char *) filename, O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
 	return 0;
 
-    buf = malloc (TEMP_BUF_LEN);
-    while (start != finish) {
-	end = min (finish, start + TEMP_BUF_LEN);
-	for (; i < end; i++)
-	    buf[i - start] = edit_get_byte (edit, i);
-	filelen -= write (file, (char *) buf, end - start);
-	start = end;
+    if (column_highlighting) {
+	char *block, *p;
+	int r;
+	p = block = edit_get_block (edit, start, finish, &len);
+	while (len) {
+	    r = write (file, p, len);
+	    if (r < 0)
+		break;
+	    p += r;
+	    len -= r;
+	}
+	free (block);
+    } else {
+	unsigned char *buf;
+	int i = start, end;
+	len = finish - start;
+	buf = malloc (TEMP_BUF_LEN);
+	while (start != finish) {
+	    end = min (finish, start + TEMP_BUF_LEN);
+	    for (; i < end; i++)
+		buf[i - start] = edit_get_byte (edit, i);
+	    len -= write (file, (char *) buf, end - start);
+	    start = end;
+	}
+	free (buf);
     }
-    free (buf);
     close (file);
-    if (filelen)
+    if (len)
 	return 0;
     return 1;
 }
@@ -2108,9 +2296,20 @@ void edit_paste_from_history (WEdit * edit)
 
     c = max (20, edit->num_widget_columns - 5);
 
+#ifdef GTK
+#if 0
+/* *** */
+    i = gtk_edit_list_box_dialog (c, 10,
+	       0, NUM_SELECTION_HISTORY - 10, NUM_SELECTION_HISTORY - 1, NUM_SELECTION_HISTORY,
+	       selection_get_line, (void *) selection_history);
+#else
+    i = -1;
+#endif
+#else
     i = CListboxDialog (WIN_MESSAGES, c, 10,
 	       0, NUM_SELECTION_HISTORY - 10, NUM_SELECTION_HISTORY - 1, NUM_SELECTION_HISTORY,
 	       selection_get_line, (void *) selection_history);
+#endif
 
     if (i < 0)
 	return;
@@ -2142,7 +2341,16 @@ int edit_copy_to_X_buf_cmd (WEdit * edit)
 	edit_error_dialog (_(" Copy to clipboard "), get_sys_error (_(" Unable to save to file. ")));
 	return 1;
     }
-    XSetSelectionOwner (CDisplay, XA_PRIMARY, edit->widget->winid, CurrentTime);
+#ifdef GTK
+#if 0
+    gtk_set_selection_owner (CWindowOf (edit->widget));
+#else
+    /* *** */
+    printf ("gtk_set_selection_owner\n");
+#endif
+#else
+    XSetSelectionOwner (CDisplay, XA_PRIMARY, CWindowOf (edit->widget), CurrentTime);
+#endif
     edit_mark_cmd (edit, 1);
     return 0;
 }
@@ -2158,7 +2366,15 @@ int edit_cut_to_X_buf_cmd (WEdit * edit)
 	return 1;
     }
     edit_block_delete_cmd (edit);
-    XSetSelectionOwner (CDisplay, XA_PRIMARY, edit->widget->winid, CurrentTime);
+#ifdef GTK
+#if 0
+    gtk_set_selection_owner (CWindowOf (edit->widget));
+#else
+    printf ("gtk_set_selection_owner\n");
+#endif
+#else
+    XSetSelectionOwner (CDisplay, XA_PRIMARY, CWindowOf (edit->widget), CurrentTime);
+#endif
     edit_mark_cmd (edit, 1);
     return 0;
 }
@@ -2170,11 +2386,24 @@ void edit_paste_from_X_buf_cmd (WEdit * edit)
     if (selection.text)
 	paste_text (edit, selection.text, selection.len);
     else if (!XGetSelectionOwner (CDisplay, XA_PRIMARY))
+#ifdef GTK
+/* *** */
+	;
+#else
 	selection_paste (edit, CRoot, XA_CUT_BUFFER0, False);
+#endif
     else
+#ifdef GTK
+#if 0
+    gtk_convert_selection ();
+#else
+    /* *** */
+#endif
+#else
 	XConvertSelection (CDisplay, XA_PRIMARY, XA_STRING,
 			   XInternAtom (CDisplay, "VT_SELECTION", False),
-			   edit->widget->winid, CurrentTime);
+			   CWindowOf (edit->widget), CurrentTime);
+#endif
     edit->force |= REDRAW_PAGE;
 }
 
@@ -2227,7 +2456,15 @@ void edit_goto_cmd (WEdit *edit)
     sprintf (s, "%d", l);
     f = input_dialog (_(" Goto line "), _(" Enter line: "), l ? s : "");
 #else
+#ifdef GTK
+#if 0
+    f = gtk_edit_dialog_input ("goto", 150, l ? itoa (l) : "", _(" Goto line "), _(" Enter line: "));
+#else
+    /* *** */
+#endif
+#else
     f = CInputDialog ("goto", WIN_MESSAGES, 150, l ? itoa (l) : "", _(" Goto line "), _(" Enter line: "));
+#endif
 #endif
     if (f) {
 	if (*f) {

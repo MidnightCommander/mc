@@ -24,20 +24,23 @@
 #define MAX_LINE_LEN 1024
 
 #ifndef MIDNIGHT
+#ifndef GTK
 #include "app_glob.c"
 #include "coollocal.h"
+#endif
 #else
 #include "../src/mad.h"
 #endif
 
+extern int column_highlighting;
 
-static void status_string (WEdit * edit, char *s, int w, int fill, int font_width)
+void status_string (WEdit * edit, char *s, int w, int fill, int font_width)
 {
     int i;
     char t[160];		/* 160 just to be sure */
 /* The field lengths just prevents the status line from shortening to much */
     sprintf (t, "[%c%c%c%c] %2ld:%3ld+%2ld=%3ld/%3ld - *%-4ld/%4ldb=%3d",
-	     edit->mark1 != edit->mark2 ? 'B' : '-',
+	     edit->mark1 != edit->mark2 ? ( column_highlighting ? 'C' : 'B') : '-',
 	     edit->modified ? 'M' : '-', edit->macro_i < 0 ? '-' : 'R',
 	     edit->overwrite == 0 ? '-' : 'O',
 	     edit->curs_col / font_width, edit->start_line + 1, edit->curs_row,
@@ -86,20 +89,33 @@ void edit_status (WEdit * edit)
 	s[w] = 0;
     }
     printw ("%.*s", w, s);
-
     attrset (NORMAL_COLOR);
     free (s);
 }
 
 #else
 
+#ifndef GTK
 extern int fixed_font;
+#endif
 
 void rerender_text (CWidget * wdt);
     
+#ifdef GTK
+
 void edit_status (WEdit * edit)
 {
-    if ((edit->widget->options & EDITOR_NO_TEXT)) {
+#if 0
+/* ******* */
+    gtk_edit_update_status_line (edit->widget);
+#endif
+}
+
+#else
+
+void edit_status (WEdit * edit)
+{
+    if ((COptionsOf (edit->widget) & EDITOR_NO_TEXT)) {
 	return;
     } else {
 	int w, i, t;
@@ -125,16 +141,17 @@ void edit_status (WEdit * edit)
 	    status_string (edit, s + i + 2, t, 0, FONT_MEAN_WIDTH);
 	}
 	s[w] = 0;
-	strcpy (id, edit->widget->ident);
+	strcpy (id, CIdentOf (edit->widget));
 	strcat (id, ".text");
 	wdt = CIdent (id);
 	free (wdt->text);
 	wdt->text = strdup (s);
-	CSetWidgetSize (id, edit->widget->width, wdt->height);
+	CSetWidgetSize (id, CWidthOf (edit->widget), CHeightOf (wdt));
 	rerender_text (wdt);
     }
 }
 
+#endif
 
 #endif
 
@@ -183,7 +200,7 @@ void edit_scroll_screen_over_cursor (WEdit * edit)
 #ifdef MIDNIGHT
     outby = p + edit->start_col - edit->num_widget_columns + 1 + (EDIT_RIGHT_EXTREME + edit->found_len);
 #else
-    outby = p + edit->start_col - edit->widget->width + 7 + (EDIT_RIGHT_EXTREME + edit->found_len) * FONT_MEAN_WIDTH + edit_width_of_long_printable (edit_get_byte (edit, edit->curs1));
+    outby = p + edit->start_col - CWidthOf (edit->widget) + 7 + (EDIT_RIGHT_EXTREME + edit->found_len) * FONT_MEAN_WIDTH + edit_width_of_long_printable (edit_get_byte (edit, edit->curs1));
 #endif
     if (outby > 0)
 	edit_scroll_right (edit, outby);
@@ -310,7 +327,7 @@ static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col,
 {
     static unsigned int line[MAX_LINE_LEN];
     unsigned int *p = line;
-    long m1 = 0, m2 = 0, q;
+    long m1 = 0, m2 = 0, q, c1, c2;
     int col, start_col_real;
     unsigned int c;
     int fg, bg;
@@ -319,6 +336,8 @@ static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col,
     edit_get_syntax_color (edit, b - 1, &fg, &bg);
     q = edit_move_forward3 (edit, b, start_col - edit->start_col, 0);
     start_col_real = (col = (int) edit_move_forward3 (edit, b, 0, q)) + edit->start_col;
+    c1 = min (edit->column1, edit->column2);
+    c2 = max (edit->column1, edit->column2);
 
     if (col + 16 > -edit->start_col) {
 	eval_marks (edit, &m1, &m2);
@@ -328,8 +347,15 @@ static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col,
 		*p = 0;
 		if (q == edit->curs1)
 		    *p |= MOD_CURSOR * 256;
-		if (q >= m1 && q < m2)
-		    *p |= MOD_MARKED * 256;
+		if (q >= m1 && q < m2) {
+		    if (column_highlighting) {
+			int x;
+			x = edit_move_forward3 (edit, b, 0, q);
+			if (x >= c1 && x < c2)
+			    *p |= MOD_MARKED * 256;
+		    } else
+			*p |= MOD_MARKED * 256;
+		}
 		if (q == edit->bracket)
 		    *p |= MOD_BOLD * 256;
 		if (q >= edit->found_start && q < edit->found_start + edit->found_len)
@@ -387,8 +413,12 @@ int edit_mouse_pending (Window win);
 
 static int key_pending (WEdit * edit)
 {
+#ifdef GTK
+    /* ******* */
+#else
     if (!(edit->force & REDRAW_COMPLETELY) && !EditExposeRedraw)
 	return CKeyPending ();
+#endif
     return 0;
 }
 
@@ -402,7 +432,7 @@ static void edit_draw_this_char (WEdit * edit, long curs, long row)
 #ifdef MIDNIGHT
     edit_draw_this_line (edit, b, row, 0, edit->num_widget_columns - 1);
 #else
-    edit_draw_this_line (edit, b, row, 0, edit->widget->width);
+    edit_draw_this_line (edit, b, row, 0, CWidthOf (edit->widget));
 #endif
 }
 
@@ -429,7 +459,7 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
  */
     if ((!(force & REDRAW_CHAR_ONLY)) || (force & REDRAW_PAGE)
 #ifndef MIDNIGHT
-	|| prev_win != edit->widget->winid
+	|| prev_win != CWindowOf (edit->widget)
 #endif
 	) {
 	if (!(force & REDRAW_IN_BOUNDS)) {	/* !REDRAW_IN_BOUNDS means to ignore bounds and redraw whole rows */
@@ -439,7 +469,7 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
 #ifdef MIDNIGHT
 	    end_column = edit->num_widget_columns - 1;
 #else
-	    end_column = edit->widget->width;
+	    end_column = CWidthOf (edit->widget);
 #endif
 	}
 	if (force & REDRAW_PAGE) {
@@ -525,10 +555,13 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
     prev_start_display = edit->start_display;
     prev_start_col = edit->start_col;
 #ifndef MIDNIGHT
-    prev_win = edit->widget->winid;
+    prev_win = CWindowOf (edit->widget);
 #endif
   exit_render:
+#ifndef GTK
+/* *** */
     edit_get_syntax_color (edit, edit->start_display - 1, &fg, &bg);
+#endif
 }
 
 
@@ -542,6 +575,15 @@ void edit_convert_expose_to_area (XExposeEvent * xexpose, int *row1, int *col1, 
     *col2 = xexpose->x + xexpose->width + EDIT_TEXT_HORIZONTAL_OFFSET + 3;
     *row2 = (xexpose->y + xexpose->height - EDIT_TEXT_VERTICAL_OFFSET) / FONT_PIX_PER_LINE;
 }
+
+#ifdef GTK
+
+void edit_render_tidbits (GtkEdit * edit)
+{
+    return;
+}
+
+#else
 
 void edit_render_tidbits (CWidget * wdt)
 {
@@ -561,6 +603,8 @@ void edit_render_tidbits (CWidget * wdt)
 	render_bevel (win, 0, 0, w - 1, h - 1, 2, 0);	/*most outer border bevel */
     }
 }
+
+#endif
 
 void edit_set_space_width (int s);
 extern int option_long_whitespace;
@@ -598,8 +642,12 @@ void edit_render (WEdit * edit, int page, int row_start, int col_start, int row_
 			      color_palette (option_editor_fg_cursor)
 	);
 
+#ifdef GTK
+    /* *********** */
+#else
     if (!EditExposeRedraw)
 	set_cursor_position (0, 0, 0, 0, 0, 0, 0, 0, 0);
+#endif
 #endif
 
     render_edit_text (edit, row_start, col_start, row_end, col_end);
@@ -610,8 +658,12 @@ void edit_render (WEdit * edit, int page, int row_start, int col_start, int row_
 #ifndef MIDNIGHT
     if (f) {
 	edit_render_tidbits (edit->widget);
+#ifdef GTK
+    /*  ***************** */
+#else
 	CSetColor (edit_normal_background_color);
-	CLine (edit->widget->winid, 3, 3, 3, edit->widget->height - 4);
+	CLine (CWindowOf (edit->widget), 3, 3, 3, CHeightOf (edit->widget) - 4);
+#endif
     }
 #endif
 }
@@ -621,8 +673,8 @@ void edit_render_expose (WEdit * edit, XExposeEvent * xexpose)
 {
     int row_start, col_start, row_end, col_end;
     EditExposeRedraw = 1;
-    edit->num_widget_lines = (edit->widget->height - 6) / FONT_PIX_PER_LINE;
-    edit->num_widget_columns = (edit->widget->width - 7) / FONT_MEAN_WIDTH;
+    edit->num_widget_lines = (CHeightOf (edit->widget) - 6) / FONT_PIX_PER_LINE;
+    edit->num_widget_columns = (CWidthOf (edit->widget) - 7) / FONT_MEAN_WIDTH;
     if (edit->force & (REDRAW_PAGE | REDRAW_COMPLETELY)) {
 	edit->force |= REDRAW_PAGE | REDRAW_COMPLETELY;
 	edit_render_keypress (edit);
