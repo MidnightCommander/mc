@@ -1,9 +1,3 @@
-Before 4.6.0-pre2
-=================
-
-ftp and fish with home != '/' - readjust directory to the home.
-
-
 Before 4.6.0
 ============
 
@@ -27,9 +21,9 @@ Add support for mouse wheel with gpm.
 
 Recheck all mouse handlers, make sure that they check button number.
 
-Load subshell prompt when it's ready.
+Smooth mouse scrolling on panels.
 
-Eliminate all pipes in subshell.c, run pwd after kill.
+Load subshell prompt when it's ready.
 
 real_input_dialog_help() shouldn't use translated strings in the section
 names in .mc/history.
@@ -56,9 +50,16 @@ Allow verbatim search in "Find File".
 Filters in the editor should operate on the open file.  They don't work
 on VFS now.  Don't close and reopen the file.
 
+ftp and fish with home != '/' - readjust directory to the home.
+
+Have a case match option in the viewer.
+
+
 
 After 4.6.1 on 4.6.x branch
 ===========================
+
+Eliminate all pipes in subshell.c, run pwd after kill.
 
 Consistent support for mc.lib.
 
@@ -78,11 +79,9 @@ Implement a really Advanced Chown/Chmod.
 
 Dynamic loading for libX11, libgpm.
 
-Process all input internally, use screen libraries only for output.
-
 Support for multi-byte charsets (e.g. UTF-8).
 
-sftp support in VFS.
+sftp and fxp support in VFS.
 
 
 ========================================================================
@@ -120,7 +119,7 @@ ideas still waiting for their implementation.
 * Documentation
 
   - Convert the source mc.1 to mc.sgml and create automagically from it
-    mc.1, mc.html, mc.hlp, mc.info, mc.tex, mc.txt etc. [3.x]
+    mc.1, mc.html, mc.hlp, mc.info, mc.tex, mc.txt etc.
 
 * Extensions
 
@@ -135,8 +134,6 @@ ideas still waiting for their implementation.
    -  A command to set the line length to a fixed value for viewing
       fixed length binary files. LIST does this with Ctrl-B and then
       prompts for a "record" length.
-
-   - Viewer: have a case match toggle.
 
    - Viewer: Mark all found matches, and when 'n' is pressed go to the
      next page, not the next match on the same screen (when there is
@@ -181,26 +178,26 @@ ideas still waiting for their implementation.
 
   - Recursive delete should (perhaps as an option) delete files just after
     they have been copied and not to delay deleting until everything was
-    moved. [3.x]
+    moved.
 
   - When copying a tree (or moving or deleting), as an option act primarily
     on the regular files and at the end on directories recursively, so that
     we get complete high parts of the tree if something fails (useful for
-    ftpfs). [3.x]
+    ftpfs).
 
   - Put into a new and bigger Options/Configuration dialog all the options
-    we have now to set using .mc.ini manually. [3.x]
+    we have now to set using .mc/ini manually.
 
   - When after deleting there are no files in a panelized panel, restore
-    it automagically to the real directory content. [3.x]
+    it automagically to the real directory content.
 
   - Files/Symlink and Link should be able to do multiple links (if the
-    target is a directory). [3.x]
+    target is a directory).
 
-  - Directory sizes should work in background using try_channels. [3.x]
+  - Directory sizes should work in background using try_channels.
 
   - Support of non-UNIX ls in ftpfs. Perhaps using an ascii configuration
-    file similar to moxftp. [3.x]
+    file similar to moxftp.
 
   - Have an option to let the user choose the preferred keybindings.
     Currently, only the emacs keybindings are supported, add support
@@ -230,10 +227,6 @@ ideas still waiting for their implementation.
 
   - If the viewer is too slow, some caching could be done.
     width and cols are currently computed each time they are needed.
-
-  - Add context sensitive help to the f9 menus.
-
-  - Add an overlap when going up or down in the file list.
 
  ++ In the user menu, don't use the entries array, we can now grow
     dynamically.  I should take a look at this one day, it's easy to
