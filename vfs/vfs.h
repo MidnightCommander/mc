@@ -265,7 +265,7 @@
 #   define mc_munmap munmap
 
 #   define mc_ctl(a,b,c) 0
-#   define mc_setctl(a,b,c) 0
+static inline int mc_setctl(a,b,c) { return 0; }
 #   define vfs_translate_url(s) g_strdup(s)
 
 #   define mc_stat stat
