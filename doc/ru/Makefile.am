@@ -8,7 +8,7 @@ man_MANS = mc.1
 EXTRA_DIST = xnc.hlp mc.hlp.ru
 MAINTAINERCLEANFILES = mc.hlp.ru
 
-mc.hlp.ru: mc.1 xnc.hlp $(top_srcdir)/src/gindex.pl $(top_srcdir)/src/man2hlp
-	- perl $(top_srcdir)/src/gindex.pl mc.1 xnc.hlp mc.hlp.ru '' \
-	    $(top_srcdir)/src/man2hlp
+$(srcdir)/mc.hlp.ru: mc.1 $(srcdir)/xnc.hlp $(top_srcdir)/src/gindex.pl $(top_builddir)/src/man2hlp
+	- perl $(top_srcdir)/src/gindex.pl mc.1 $(srcdir)/xnc.hlp $(srcdir)/mc.hlp.ru '' \
+	    $(top_builddir)/src/man2hlp
 
