@@ -696,10 +696,11 @@ AC_ARG_WITH(debug,
 	mem_debug="Janne's MAD library"
 	AC_DEFINE(HAVE_MAD)
 	AC_DEFINE(MCDEBUG)
-	if [ echo `uname -s -r` | grep -q 'SunOS 4.1' ]
+	if [ echo `uname -s -r` | grep 'SunOS 4.1' ]
 	then
     	    CFLAGS="$CFLAGS -Wno-implicit"
-        fi
+        fi >& /dev/null
+
 	if echo "$CFLAGS" | grep -e -g >/dev/null 2>&1; then
 		:
 	else
@@ -720,10 +721,10 @@ AC_ARG_WITH(efence,
 	CFLAGS="$CFLAGS -Wall"
 	AC_DEFINE(MCDEBUG)
 	LIBS="$LIBS -lefence"
-	if [ echo `uname -s -r` | grep -q 'SunOS 4.1' ]
+	if [ echo `uname -s -r` | grep 'SunOS 4.1' ]
 	then
     	    CFLAGS="$CFLAGS -Wno-implicit"
-        fi
+        fi >& /dev/null
 	if echo "$CFLAGS" | grep -e -g >/dev/null 2>&1; then
 		:
 	else
@@ -1246,9 +1247,9 @@ if test x$srcdir != x; then
     fi
 fi
 
-if echo "$screen_manager" | grep -q "SLang" ; then
+if echo "$screen_manager" | grep "SLang" ; then
     screen_manager="${screen_manager}${slang_term}"
-fi
+fi >& /dev/null
 
 echo "
 Configuration:
