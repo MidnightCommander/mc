@@ -1,5 +1,12 @@
 Mon May  4 10:21:31 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
+	* background.c (message_1s1d): the unprocessed string with %d was
+	passed to message_1s; fixed small memory leak
+
+	* widget.c (button_callback): WIDGET_CURSOR: make cursor position
+	dependend from button type (fixes the off by one bug in advanced 
+	changeown).
+
 	* file.c (copy_file_file): Schedule deletion of short target file
 	only when we created or truncated the target file and not already
 	when we decided to overwrite an existing file.

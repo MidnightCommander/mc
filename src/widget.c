@@ -117,7 +117,22 @@ button_callback (Dlg_head *h, WButton *b, int Msg, int Par)
 #else
 	
     case WIDGET_CURSOR:
-	widget_move (&b->widget, 0, b->hotpos);
+	switch (b->flags) {
+	    case DEFPUSH_BUTTON:
+		off = 3;
+		break;
+	    case NORMAL_BUTTON:
+		off = 2;
+		break;
+	    case NARROW_BUTTON:
+		off = 1;
+		break;
+	    case HIDDEN_BUTTON:
+	    default:
+		off = 0;
+		break;
+        }
+	widget_move (&b->widget, 0, b->hotpos + off);
 	return 1;
 
     case WIDGET_UNFOCUS:

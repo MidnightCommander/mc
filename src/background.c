@@ -555,7 +555,8 @@ message_1s1d (int flags, char *title, char *str, int d)
 
     p = xmalloc (strlen (str) + 30, "1s1d");
     sprintf (p, str, d);
-    message_1s (flags, title, str);
+    message_1s (flags, title, p);
+    free (p);
 }
 
 /* }}} */
