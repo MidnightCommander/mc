@@ -1,3 +1,12 @@
+1999-07-21  Paul Sheer <psheer@obsidian.co.za>
+
+	* gtkedit.c, edit.c, editcmd.c, syntax.c, edit.h, bookmark.c,
+	editwidget.c: bring editor stuff up to date with cooledit 3.11.5
+	This adds some new syntax rules, and spell check on the fly
+	which if someone bugs me for, will actually get enabled in
+	both the text and gnome versions. Bookmark stuff also needs
+	some keys bound to it, I suppose: any takers?
+
 July 19, 1999 Elliot Lee
 	* Makefile.in: Remove doc-gnome* from codedirs variable. Fixes infinitely recursing make.
 
