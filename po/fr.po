@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"POT-Creation-Date: 2002-02-02 23:21+0100\n"
-"PO-Revision-Date: 2002-02-02 23:20+0100\n"
+"POT-Creation-Date: 2002-02-11 10:10+0100\n"
+"PO-Revision-Date: 2002-02-11 10:10+0100\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@eikonex.org>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -148,7 +148,7 @@ msgstr " Enregistrer sous "
 #. Warning message with a query to continue or cancel the operation
 #: edit/editcmd.c:424 edit/editcmd.c:713 edit/editcmd.c:738 edit/editcmd.c:885
 #: edit/editcmd.c:983 src/file.c:593 src/help.c:314 src/main.c:624
-#: src/screen.c:1384 src/screen.c:1997 src/selcodepage.c:75
+#: src/screen.c:1388 src/screen.c:2001 src/selcodepage.c:75
 #: src/selcodepage.c:92 src/subshell.c:723 src/subshell.c:749
 #: src/utilunix.c:366 src/utilunix.c:370 src/utilunix.c:390 src/utilunix.c:441
 #: vfs/mcfs.c:167
@@ -377,13 +377,13 @@ msgid "Cancel quit"
 msgstr "Annuler quitter"
 
 #: edit/editcmd.c:1929 src/cmd.c:223 src/file.c:1775 src/file.c:2134
-#: src/filegui.c:563 src/hotlist.c:1012 src/main.c:774 src/screen.c:1984
+#: src/filegui.c:563 src/hotlist.c:1012 src/main.c:774 src/screen.c:1988
 #: src/subshell.c:724 src/subshell.c:750 src/tree.c:755 src/view.c:398
 msgid "&Yes"
 msgstr "&Oui"
 
 #: edit/editcmd.c:1929 src/cmd.c:223 src/file.c:1775 src/file.c:2134
-#: src/filegui.c:562 src/hotlist.c:1012 src/main.c:774 src/screen.c:1984
+#: src/filegui.c:562 src/hotlist.c:1012 src/main.c:774 src/screen.c:1988
 #: src/subshell.c:724 src/subshell.c:750 src/tree.c:755 src/view.c:398
 msgid "&No"
 msgstr "&Non"
@@ -790,7 +790,7 @@ msgstr "Émulation de touches"
 msgid " Editor options "
 msgstr " Options de l'éditeur "
 
-#: edit/editwidget.c:235 src/help.c:811 src/main.c:1534 src/screen.c:2218
+#: edit/editwidget.c:235 src/help.c:811 src/main.c:1534 src/screen.c:2222
 #: src/tree.c:1018 src/view.c:2010
 msgid "Help"
 msgstr "Aide"
@@ -803,7 +803,7 @@ msgstr "Marquer"
 msgid "Replac"
 msgstr "Remplacer"
 
-#: edit/editwidget.c:239 src/file.c:771 src/screen.c:2222 src/tree.c:1024
+#: edit/editwidget.c:239 src/file.c:771 src/screen.c:2226 src/tree.c:1024
 msgid "Copy"
 msgstr "Copier"
 
@@ -815,7 +815,7 @@ msgstr "Déplacer"
 msgid "Search"
 msgstr "Rechercher"
 
-#: edit/editwidget.c:242 src/screen.c:2225
+#: edit/editwidget.c:242 src/screen.c:2229
 msgid "Delete"
 msgstr "Effacer"
 
@@ -1199,12 +1199,12 @@ msgstr "Mot de passe : "
 msgid "Password for \\\\%s\\%s"
 msgstr "Mot de passe pour \\\\%s\\%s"
 
-#: src/charsets.c:32 vfs/extfs.c:1337 vfs/sfs.c:302
+#: src/charsets.c:31 vfs/extfs.c:1337 vfs/sfs.c:302
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Attention : fichier %s non trouvé\n"
 
-#: src/charsets.c:189 src/charsets.c:202
+#: src/charsets.c:173 src/charsets.c:186
 #, c-format
 msgid "Cannot translate from %s to %s"
 msgstr "Ne peut converti de %s vers %s"
@@ -2856,7 +2856,7 @@ msgstr "Appuyez sur une touche pour continuer..."
 msgid " The shell is already running a command "
 msgstr " Le shell est déjà en train d'exécuter une commande "
 
-#: src/main.c:772 src/screen.c:1982
+#: src/main.c:772 src/screen.c:1986
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
 
@@ -3134,7 +3134,7 @@ msgstr ""
 " manuel du répertoire. Voir la page de manuel pour les  \n"
 " détails."
 
-#: src/main.c:1535 src/screen.c:2219
+#: src/main.c:1535 src/screen.c:2223
 msgid "Menu"
 msgstr "Menu"
 
@@ -3649,39 +3649,39 @@ msgstr "Propriétaire"
 msgid "Group"
 msgstr "Groupe"
 
-#: src/screen.c:638
+#: src/screen.c:642
 #, c-format
 msgid "%s bytes in %d file"
 msgstr " %s octets dans %d fichiers"
 
-#: src/screen.c:638
+#: src/screen.c:642
 #, c-format
 msgid "%s bytes in %d files"
 msgstr " %s octets dans %d fichiers"
 
-#: src/screen.c:664
+#: src/screen.c:668
 msgid "<readlink failed>"
 msgstr "<échec de readlink>"
 
-#: src/screen.c:1258
+#: src/screen.c:1262
 msgid "Unknown tag on display format: "
 msgstr "Balise inconnue dans le format d'affichage :"
 
-#: src/screen.c:1384
+#: src/screen.c:1388
 msgid "User suplied format looks invalid, reverting to default."
 msgstr ""
 "Le format fourni par l'utilisateur semble invalide, je retourne aux valeurs "
 "par défaut."
 
-#: src/screen.c:1983
+#: src/screen.c:1987
 msgid " Do you really want to execute? "
 msgstr " Voulez-vous vraiment exécuter ? "
 
-#: src/screen.c:1997
+#: src/screen.c:2001
 msgid " No action taken "
 msgstr " Aucune action effectuée "
 
-#: src/screen.c:2210 src/tree.c:876
+#: src/screen.c:2214 src/tree.c:876
 #, c-format
 msgid ""
 " Cannot chdir to \"%s\" \n"
@@ -3690,19 +3690,19 @@ msgstr ""
 " Ne peut aller dans le répertoire « %s »\n"
 " %s "
 
-#: src/screen.c:2220
+#: src/screen.c:2224
 msgid "View"
 msgstr "Voir"
 
-#: src/screen.c:2221 src/view.c:2021
+#: src/screen.c:2225 src/view.c:2021
 msgid "Edit"
 msgstr "Éditer"
 
-#: src/screen.c:2223 src/tree.c:1026
+#: src/screen.c:2227 src/tree.c:1026
 msgid "RenMov"
 msgstr "RenDép"
 
-#: src/screen.c:2224 src/tree.c:1030
+#: src/screen.c:2228 src/tree.c:1030
 msgid "Mkdir"
 msgstr "Mkdir"
 
@@ -3992,17 +3992,17 @@ msgstr " Aucune entrée appropriée trouvé dans %s "
 msgid " User menu "
 msgstr " Menu utilisateur "
 
-#: src/util.c:210
+#: src/util.c:207
 msgid "name_trunc: too big"
 msgstr "name_trunc : trop gros"
 
 #. strftime() format string for recent dates
-#: src/util.c:640 src/util.c:666
+#: src/util.c:637 src/util.c:663
 msgid "%b %e %H:%M"
 msgstr "%e %b %H:%M"
 
 #. strftime() format string for old dates
-#: src/util.c:641 src/util.c:664
+#: src/util.c:638 src/util.c:661
 msgid "%b %e  %Y"
 msgstr "%e %b  %Y"
 
@@ -4560,141 +4560,141 @@ msgstr "Erreur raportée après l'abandon."
 msgid "Aborted transfer would be successful."
 msgstr "Le transfert abandonné devrait avoir réussi."
 
-#: vfs/ftpfs.c:345
+#: vfs/ftpfs.c:346
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "FTPfs : déconnexion de %s"
 
-#: vfs/ftpfs.c:403
+#: vfs/ftpfs.c:404
 msgid " FTP: Password required for "
 msgstr " FTP : mot de passe requis "
 
-#: vfs/ftpfs.c:432
+#: vfs/ftpfs.c:433
 msgid " Proxy: Password required for "
 msgstr " Proxy : mot de passe requis "
 
-#: vfs/ftpfs.c:458
+#: vfs/ftpfs.c:459
 msgid "ftpfs: sending proxy login name"
 msgstr "FTPfs : envoi du nom de connexion pour le proxy"
 
-#: vfs/ftpfs.c:462
+#: vfs/ftpfs.c:463
 msgid "ftpfs: sending proxy user password"
 msgstr "FTPfs : envoi du mot de passe pour le proxy"
 
-#: vfs/ftpfs.c:466
+#: vfs/ftpfs.c:467
 msgid "ftpfs: proxy authentication succeeded"
 msgstr "FTPfs : authentification par le proxy réussie"
 
-#: vfs/ftpfs.c:470
+#: vfs/ftpfs.c:471
 #, c-format
 msgid "ftpfs: connected to %s"
 msgstr "FTPfs : connecté à %s"
 
-#: vfs/ftpfs.c:487
+#: vfs/ftpfs.c:488
 msgid "ftpfs: sending login name"
 msgstr "FTPfs : envoi du nom de connexion"
 
-#: vfs/ftpfs.c:492
+#: vfs/ftpfs.c:493
 msgid "ftpfs: sending user password"
 msgstr "FTPfs : envoi du mot de passe"
 
-#: vfs/ftpfs.c:497
+#: vfs/ftpfs.c:498
 msgid "ftpfs: logged in"
 msgstr "FTPfs : loggé"
 
-#: vfs/ftpfs.c:512
+#: vfs/ftpfs.c:513
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "FTPfs : login incorrect pour l'utilisateur %s"
 
-#: vfs/ftpfs.c:544
+#: vfs/ftpfs.c:545
 #, c-format
 msgid " Could not set source routing (%s)"
 msgstr " Ne peut définir le routage par la source (%s)"
 
-#: vfs/ftpfs.c:669
+#: vfs/ftpfs.c:670
 msgid "ftpfs: Invalid host name."
 msgstr "FTPfs : nom d'hôte invalide."
 
-#: vfs/ftpfs.c:689
+#: vfs/ftpfs.c:690
 msgid "ftpfs: Invalid host address."
 msgstr "FTPfs : adresse d'hôte invalide."
 
-#: vfs/ftpfs.c:712
+#: vfs/ftpfs.c:713
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "FTPfs : établissement de la connexion à %s"
 
-#: vfs/ftpfs.c:722
+#: vfs/ftpfs.c:723
 msgid "ftpfs: connection interrupted by user"
 msgstr "FTPfs : connexion interrompue par l'utilisateur"
 
-#: vfs/ftpfs.c:724
+#: vfs/ftpfs.c:725
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "FTPfs : connexion au serveur échouée : %s"
 
-#: vfs/ftpfs.c:765
+#: vfs/ftpfs.c:766
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Attente avant de réessayer... %d (Control-C pour annuler)"
 
-#: vfs/ftpfs.c:951
+#: vfs/ftpfs.c:958
 msgid "ftpfs: could not setup passive mode"
 msgstr "FTPfs : ne peut configurer le mode passif"
 
-#: vfs/ftpfs.c:1023
+#: vfs/ftpfs.c:1030
 msgid "ftpfs: aborting transfer."
 msgstr "FTPfs : abandon du transfert."
 
-#: vfs/ftpfs.c:1025
+#: vfs/ftpfs.c:1032
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "FTPfs : erreur d'abandon : %s"
 
-#: vfs/ftpfs.c:1030
+#: vfs/ftpfs.c:1037
 msgid "ftpfs: abort failed"
 msgstr "FTPfs : échec de l'abandon"
 
-#: vfs/ftpfs.c:1119 vfs/ftpfs.c:1221
+#: vfs/ftpfs.c:1126 vfs/ftpfs.c:1228
 msgid "ftpfs: CWD failed."
 msgstr "FTPfs : échec de CWD."
 
-#: vfs/ftpfs.c:1129 vfs/ftpfs.c:1136
+#: vfs/ftpfs.c:1136 vfs/ftpfs.c:1143
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "FTPfs : ne peut résoudre le lien symbolique"
 
-#: vfs/ftpfs.c:1187
+#: vfs/ftpfs.c:1194
 msgid "Resolving symlink..."
 msgstr "Résolution du lien symbolique..."
 
-#: vfs/ftpfs.c:1209
+#: vfs/ftpfs.c:1216
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "FTPfs : lecture du répertoire FTP %s... %s%s"
 
-#: vfs/ftpfs.c:1210
+#: vfs/ftpfs.c:1217
 msgid "(strict rfc959)"
 msgstr "(rfc959 stricte)"
 
-#: vfs/ftpfs.c:1211
+#: vfs/ftpfs.c:1218
 msgid "(chdir first)"
 msgstr "(chdir d'abord)"
 
-#: vfs/ftpfs.c:1335
+#: vfs/ftpfs.c:1295
 msgid "ftpfs: failed"
 msgstr "FTPfs : échec"
 
-#: vfs/ftpfs.c:1348
+#: vfs/ftpfs.c:1355
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "FTPfs : échec ; nulle part où retomber"
 
-#: vfs/ftpfs.c:1411
+#: vfs/ftpfs.c:1419
 #, c-format
-msgid "ftpfs: storing file %d (%lu)"
-msgstr "FTPfs : stockage du fichier %d (%lu)"
+msgid "ftpfs: storing file %lu (%lu)"
+msgstr "ftpfs : stockage du fichier %lu (%lu)"
 
-#: vfs/ftpfs.c:1843
+#: vfs/ftpfs.c:1851
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -4968,13 +4968,13 @@ msgstr "Erreur interne :"
 
 #: vfs/vfs.c:1848
 #, c-format
-msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
-msgstr "%s: %s: %s %3d%% (%ld octets transférés)"
+msgid "%s: %s: %s %3d%% (%lu bytes transfered)"
+msgstr "%s: %s: %s %3d%% (%lu octets transférés)"
 
 #: vfs/vfs.c:1849
 #, c-format
-msgid "%s: %s: %s %ld bytes transfered"
-msgstr "%s: %s: %s %ld octets transférés"
+msgid "%s: %s: %s %lu bytes transfered"
+msgstr "%s: %s: %s %lu octets transférés"
 
 #~ msgid "%o %f \"%s\"%e"
 #~ msgstr "%o %f \"%s\"%e"
