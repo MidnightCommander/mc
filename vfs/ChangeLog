@@ -1,3 +1,10 @@
+2003-04-29  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/iso9660.in: New filesystem for ISO-9660 images.
+	From Michael Shigorin <mike@altlinux.org>
+	* extfs/extfs.ini: Add iso9660.
+	* extfs/Makefile.am: Add extfs/iso9660.in.
+
 2003-04-03  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* smbfs.c (open_readwrite): New function to replace open_read()

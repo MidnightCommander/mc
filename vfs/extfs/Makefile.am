@@ -15,6 +15,7 @@ EXTFS_IN    = 			\
 	deba.in			\
 	debd.in			\
 	dpkg.in			\
+	iso9660.in		\
 	hp48.in			\
 	lslR.in			\
 	mailfs.in		\
@@ -37,6 +38,7 @@ EXTFS_OUT = 			\
 	deba			\
 	debd			\
 	dpkg			\
+	iso9660			\
 	hp48			\
 	lslR			\
 	mailfs			\
