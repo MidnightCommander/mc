@@ -51,7 +51,7 @@
 #include "../src/panel.h"
 #include "../src/key.h"		/* Required for the async alarm handler */
 #include "../src/layout.h"	/* For get_panel_widget and get_other_index */
-#include "../src/dialog.h"
+#include "../src/wtools.h"	/* input_dialog() */
 #endif
 
 #include "xdirentry.h"
@@ -1890,7 +1890,7 @@ vfs_print_stats (const char *fs_name, const char *action, const char *file_name,
 char *
 vfs_get_password (char *msg)
 {
-    return (char *) input_dialog (msg, _("Password:"), "");
+    return (char *) input_dialog (msg, _("Password:"), INPUT_PASSWORD);
 }
 #endif
 
