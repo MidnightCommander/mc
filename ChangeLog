@@ -1,3 +1,9 @@
+2001-10-05  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Use xmms to play *.mp3 under X.  When viewing
+	*.mp3, use "verbose" option to mpg123.  Add support for *.ogg
+	and *.mid files.
+
 2001-09-30  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Don't check whether grep supports stdin - it's

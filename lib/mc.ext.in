@@ -257,9 +257,15 @@ regex/\.(wav22|WAV22)$
        Open=vplay -s 22 %f
 
 regex/\.(mp3|MP3|Mp3)$
-	Open=mpg123 %f
-	View=%view{ascii} mpg123 -tn1 %f 2>&1|grep -E "^(Title|Album|Comment|MPEG|$)"
+	Open=if [ "$DISPLAY" = "" ]; then mpg123 %f; else (xmms %f &); fi
+	View=%view{ascii} mpg123 -vtn1 %f 2>&1 | sed -n '/^Title/,/^Comment/p;/^MPEG/,/^Audio/p'
 
+regex/\.(ogg|OGG|Ogg)$
+	Open=if [ "$DISPLAY" = "" ]; then ogg123 %f; else (xmms %f &); fi
+	View=%view{ascii} ogg123 -v -d null -k -1 %f 2>&1 | sed -n '/^Bitstream/,/^$/p'
+
+regex/\.(midi?|MIDI?|Midi?)$
+	Open=timidity %f
 
 ### Multimedia ###
 
