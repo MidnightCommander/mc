@@ -1,5 +1,8 @@
 2003-02-18  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (do_panel_cd): Record directory history for the panel
+	that changes the directory, not for the current panel.
+
 	* widget.c (history_get): Use list_append_unique() for backward
 	compatibility.
 

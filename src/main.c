@@ -718,7 +718,10 @@ get_parent_dir_name (char *cwd, char *lwd)
     return NULL;
 }
 
-/* Changes the current panel directory */
+/*
+ * Changes the current directory of the panel.
+ * Don't record change in the directory history.
+ */
 static int
 _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
 {
@@ -784,6 +787,10 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
     return 1;
 }
 
+/*
+ * Changes the current directory of the panel.
+ * Record change in the directory history.
+ */
 int
 do_panel_cd (struct WPanel *panel, char *new_dir, enum cd_enum cd_type)
 {
@@ -791,7 +798,7 @@ do_panel_cd (struct WPanel *panel, char *new_dir, enum cd_enum cd_type)
 
     r = _do_panel_cd (panel, new_dir, cd_type);
     if (r)
-	directory_history_add (cpanel, cpanel->cwd);
+	directory_history_add (panel, panel->cwd);
     return r;
 }
 

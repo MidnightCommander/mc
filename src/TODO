@@ -6,8 +6,6 @@ Allow navigating VFS directories by Enter with non-empty command line.
 Allow entering archives in VFS by Ctrl-PgDown with non-empty command
 line.
 
-Alt-O doesn't save new directory in the history.
-
 Allow calling directory hotlist from Copy, Move and Find File dialogs.
 
 Allow modifiers for keys in mc.lib, like "shift-up".
