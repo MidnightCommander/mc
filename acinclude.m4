@@ -643,8 +643,7 @@ AC_DEFUN([AC_USE_TERMINFO], [
 AC_DEFUN([AC_USE_TERMCAP], [
 	AC_MSG_NOTICE([using S-Lang screen manager/termcap])
 	AC_DEFINE(USE_TERMCAP, 1, [Define to use termcap library])
-	dnl Check with $LIBS at the end so that it works with ELF libs.
-	AC_CHECK_LIB(termcap, tgoto, [LIBS="$LIBS -ltermcap"], , [$LIBS])
+	AC_CHECK_LIB(termcap, tgoto, [MCLIBS="$MCLIBS -ltermcap"], , [$LIBS])
 	slang_term=" with termcap"
 ])
 	

@@ -1,3 +1,11 @@
+2002-09-05  Pavel Roskin  <proski@gnu.org>
+
+	* acinclude.m4 (AC_USE_TERMCAP): Add -ltermcap to MCLIBS, not
+	LIBS.
+	* configure.in: Eliminate MCCFLAGS, use CPPFLAGS instead.  Add
+	"-L" options to LDFLAGS, not to LIBS or MCLIBS - this should fix
+	test for ncurses in non-standard directories.
+
 2002-09-04  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.ext.in: Remove edit rules for compressed files that

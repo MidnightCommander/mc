@@ -211,18 +211,12 @@ dnl
 dnl X11 support.
 dnl
 
-dnl These variables are only used when building the MC binary
-MCCFLAGS=""
-MCLIBS=""
-AC_SUBST(MCCFLAGS)
-AC_SUBST(MCLIBS)
-
 textmode_x11_support="no"
 AC_ARG_WITH(tm-x-support,
 	[--with-tm-x-support        Try getting events from X Window System],
 	[if test x$withval = xyes; then
 		AC_PATH_XTRA
-		MCCFLAGS="$X_CFLAGS"
+		CPPFLAGS="$CPPFLAGS $X_CFLAGS"
 		MCLIBS="$X_LIBS $X_PRE_LIBS -lX11 $X_EXTRA_LIBS"
 		AC_DEFINE(HAVE_TEXTMODE_X11_SUPPORT, 1,
 			  [Define to enable getting events from X Window System])
@@ -307,7 +301,7 @@ linux*)
 	then
 		if test x$withval != xyes
 		then
-			LIBS="$LIBS -L$withval/lib"
+			LDFLAGS="$LDFLAGS -L$withval/lib"
 			CPPFLAGS="$CPPFLAGS -I$withval/include"
 		fi
 		AC_DEFINE(HAVE_LIBGPM, 1,
@@ -329,7 +323,7 @@ AC_ARG_WITH(ncurses,
 	[--with-ncurses[[=base-dir]]  Compile with ncurses/locate base dir],
 [if test x$withval != xno; then
 	if test x$withval != xyes; then
-		MCLIBS="$MCLIBS -L$withval/lib"
+		LDFLAGS="$LDFLAGS -L$withval/lib"
 		CPPFLAGS="$CPPFLAGS -I$withval/include"
 	fi
 
@@ -566,7 +560,7 @@ if test $use_vfs = yes; then
 	then
 		if test x$withval != xyes
 		then
-			LIBS="$LIBS -L$withval/lib"
+			LDFLAGS="$LDFLAGS -L$withval/lib"
 			CPPFLAGS="$CPPFLAGS -I$withval/include"
 		fi
 		AC_EXT2_UNDEL
@@ -691,6 +685,9 @@ AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
 AC_SUBST(LDFLAGS)
 AC_SUBST(LIBS)
+
+dnl Libraries used only when building the mc binary
+AC_SUBST(MCLIBS)
 
 dnl Version for the RedHat package, without dashes
 RH_VERSION=`echo $VERSION | sed 's/-//'`
