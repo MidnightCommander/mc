@@ -378,13 +378,10 @@ handle_dirent (dir_list *list, char *filter, struct dirent *dp,
 {
     if (dp->d_name [0] == '.' && dp->d_name [1] == 0)
 	return 0;
-    if (!show_dot_files){
-	if (dp->d_name [0] == '.'){
-	    if (!(dp->d_name [1] == 0))
-		if (!(dp->d_name [1] == '.' && NLENGTH (dp) == 2))
-		    return 0;
-	}
-    }
+    if (dp->d_name [0] == '.' && dp->d_name [1] == '.' && dp->d_name [2] == 0)
+	return 0;
+    if (!show_dot_files && (dp->d_name [0] == '.'))
+	return 0;
     if (!show_backups && dp->d_name [NLENGTH (dp)-1] == '~')
 	return 0;
     if (mc_lstat (dp->d_name, buf1) == -1) {
@@ -431,6 +428,8 @@ handle_path (dir_list *list, char *path,
 	     int *stalled_link)
 {
     if (path [0] == '.' && path [1] == 0)
+	return 0;
+    if (path [0] == '.' && path [1] == '.' && path [2] == 0)
 	return 0;
     if (mc_lstat (path, buf1) == -1)
         return 0;
