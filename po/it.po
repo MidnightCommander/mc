@@ -2155,9 +2155,8 @@ msgid ""
 " Help file format error\n"
 "\004"
 msgstr ""
-"\n"
 " Errore nel formato del file di aiuto\n"
-""
+"\004"
 
 #: src/help.c:320
 msgid " Internal bug: Double start of link area "

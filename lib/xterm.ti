@@ -115,7 +115,7 @@ xterm|vs100|xterm terminal emulator (X Window System),
 	sgr0=\E[m^O,
 
 xterm-color|color-xterm|color xterm terminal emulator (X Window System),
-	use=xterm-basic,
+	use=xterm,
 	colors#8, pairs#64,
 
 # Set all color pairs to the original ones

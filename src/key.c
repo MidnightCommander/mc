@@ -394,6 +394,8 @@ void define_sequence (int code, char *seq, int action)
 		    return;
 		} else {
 		    /* The sequence clashes */
+                    base->code = code;
+                    base->action = action;
 		    return;
 		}
 	    } else {
@@ -531,7 +533,7 @@ int get_key_code (int no_delay)
         parent = NULL;
 
         if ((c & 0x80) && use_8th_bit_as_meta) {
-            c &= ~0x7f;
+            c &= 0x7f;
 
 	    /* The first sequence defined starts with esc */
 	    parent = keys;

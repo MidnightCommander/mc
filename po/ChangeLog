@@ -1,3 +1,7 @@
+Sun May 31 22:02:33 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* it.po: deleted additional "\n" in one msgstr
+
 Wed May 13 12:24:30 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* Makefile.in.in: Don't depend on VPATH when checking the 

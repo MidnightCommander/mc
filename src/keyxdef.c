@@ -40,7 +40,7 @@
 #include <config.h>
 #include "mouse.h" /* required before key.h */
 #include "key.h"
-#include "myslang.h"
+#include "tty.h"
 
 
 #ifdef __QNX__

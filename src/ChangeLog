@@ -1,3 +1,33 @@
+Sun May 31 10:23:01 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* key.c (define_sequence): If a sequence clashes the last
+	definition made will be used. This makes it possible to override
+	wrong definitions in terminfo/termcap database with learn keys (or
+	the appropriate entries in mc.lib and ~/.mc/ini).
+
+	* widget.c (show_hist): Don't display the listbox partly
+ 	off screen (the left panel's history started in column - 2).
+
+	* keyxdef.c: include tty.h instead of myslang.h as suggested by
+	Tamasi Gyorgy <gt_cosy@usa.net>
+
+Fri May 29 15:41:19 1998  Alexander V. Lukyanov <lav@yars.free.net>
+
+	* widget.c (update_input): this patch allows entering 8-bit
+	characters in input fields without screwing attributes. (the 
+	same old sign extension...)
+
+Wed May 27 22:23:48 1998  Ed Cogburn <ecogburn@greene.xtn.net>
+	
+	* lib/xterm.ti: The 'xterm-color' definition needs 'sgr0'. The tic 
+	program from ncurses 4.2 doesn't like the xterm.ti file that comes 
+	with mc.
+
+Wed May 27 15:29:01 1998  Alexander V. Lukyanov <lav@yars.free.net>
+
+	* key.c (get_key_code): characters with high bit set were input 
+	as 0x80 char when use_8th_bit_as_meta was set
+
 1998-05-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* ext.h (MC_USER_EXT): New name for the per-user extension file

@@ -828,7 +828,7 @@ update_input (WInput *in, int clear_first)
 #ifndef HAVE_XVIEW
     int has_history = 0;
     int    i, j;
-    char   c;
+    unsigned char   c;
     int    buf_len = strlen (in->buffer);
 
     if (should_show_history_button (in))
@@ -1049,7 +1049,10 @@ char *show_hist (Hist *history, int widget_x, int widget_y)
 		h = min(h, LINES - y);
 	}
 
-	x = widget_x - 2;
+	if (widget_x > 2)
+	    x = widget_x - 2;
+        else
+            x = 0;
 	if ((w = maxlen + 4) + x > COLS)
 	{
 		w = min(w,COLS);
