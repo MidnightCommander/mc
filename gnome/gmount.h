@@ -11,7 +11,8 @@
 
 #include <glib.h>
 
-void gmount_setup_devices (int cleanup);
+void gmount_setup_devices (void);
+void desktop_cleanup_devices (void);
 
 char     *is_block_device_mountable (char *devname);
 gboolean  is_block_device_mounted   (char *devname);

@@ -203,9 +203,13 @@ is_block_device_mounted (char *devname)
 #endif
 
 
-/* Cleans up the desktop directory from device files */
-static void
-cleanup_devices (void)
+/*
+ * Cleans up the desktop directory from device files
+ *
+ * Includes block devices and printers.
+ */
+void
+desktop_cleanup_devices (void)
 {
 	DIR *dir;
 	struct dirent *dent;
@@ -216,6 +220,7 @@ cleanup_devices (void)
 		return;
 	}
 
+	gnome_metadata_lock ();
 	while ((dent = mc_readdir (dir)) != NULL) {
 		char *full_name;
 		char *buf;
@@ -229,7 +234,8 @@ cleanup_devices (void)
 		}
 		g_free (full_name);
 	}
-
+	gnome_metadata_unlock ();
+	
 	mc_closedir (dir);
 }
 
@@ -238,6 +244,7 @@ static void
 create_device_link (char *dev_name, char *short_dev_name, char *caption, char *icon)
 {
 	char *full_name;
+	char type = 'D';
 
 	full_name = g_concat_dir_and_file (desktop_directory, short_dev_name);
 	if (mc_symlink (dev_name, full_name) != 0) {
@@ -251,7 +258,7 @@ create_device_link (char *dev_name, char *short_dev_name, char *caption, char *i
 
 	gnome_metadata_set (full_name, "icon-filename", strlen (icon) + 1, icon);
 	gnome_metadata_set (full_name, "icon-caption", strlen (caption) + 1, caption);
-	gnome_metadata_set (full_name, "is-desktop-device", 1, full_name); /* hack a boolean value */
+	gnome_metadata_set (full_name, "is-desktop-device", 1, &type); /* hack a boolean value */
 
 	g_free (full_name);
 }
@@ -309,10 +316,8 @@ setup_devices (void)
 }
 
 void
-gmount_setup_devices (int cleanup)
+gmount_setup_devices (void)
 {
-	if (cleanup)
-		cleanup_devices ();
-
 	setup_devices ();
 }
+

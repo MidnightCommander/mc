@@ -1820,7 +1820,7 @@ create_desktop_dir (void)
 		}
 		g_free (home_link_name);
 
-		gmount_setup_devices (FALSE);
+		gmount_setup_devices ();
 	}
 }
 
@@ -2123,7 +2123,9 @@ handle_new_window (GtkWidget *widget, gpointer data)
 void
 desktop_rescan_devices (void)
 {
-	gmount_setup_devices (TRUE);
+	desktop_cleanup_devices ();
+	gmount_setup_devices ();
+	gprint_setup_devices ();
 	desktop_reload_icons (FALSE, 0, 0);
 }
 

@@ -2526,7 +2526,7 @@ enum {
 };
 
 static void
-process_args (int c, char *option_arg)
+process_args (int c, const char *option_arg)
 {
     switch (c) {
     case 'V':

@@ -51,6 +51,7 @@ GNOMESRCS = 		\
 	gpopup.c	\
 	gpopup2.c	\
 	gprefs.c	\
+	gprint.c	\
 	gprop.c		\
 	gnome-file-property-dialog.c \
 	gscreen.c 	\
@@ -151,6 +152,7 @@ OBJS = 			\
 	gpopup.o	\
 	gpopup2.o	\
 	gprefs.o	\
+	gprint.o	\
 	gprop.o		\
 	gnome-file-property-dialog.o \
 	gscreen.o 	\
