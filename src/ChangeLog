@@ -1,3 +1,7 @@
+Wed May  6 13:46:37 1998 Paul Sheer  <psheer@obsidian.co.za>
+
+	* syntax.c: more bug fixes.
+
 1998-05-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* view.c (view_quit_cmd): Use dlg_stop.

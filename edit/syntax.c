@@ -97,7 +97,7 @@ static int compare_word_to_right (WEdit * edit, long i, char *text, char *whole_
 		    if (c == p[j])
 			goto found_char2;
 		break;
-	      found_char2:
+	      found_char2:;
 	    }
 	    i--;
 	    while (*p != '\003')
@@ -188,7 +188,7 @@ static int compare_word_to_left (WEdit * edit, long i, char *text, char *whole_l
 		    if (c == p[j])
 			goto found_char2;
 		break;
-	      found_char2:
+	      found_char2:;
 	    }
 	    i++;
 	    p--;
@@ -231,7 +231,7 @@ static int compare_word_to_left (WEdit * edit, long i, char *text, char *whole_l
 }
 
 
-#if 0
+#if 1
 #define debug_printf(x,y) fprintf(stderr,x,y)
 #else
 #define debug_printf(x,y)
@@ -240,7 +240,7 @@ static int compare_word_to_left (WEdit * edit, long i, char *text, char *whole_l
 static inline unsigned long apply_rules_going_right (WEdit * edit, long i, unsigned long rule)
 {
     struct context_rule *r;
-    int context, keyword, c1, c2;
+    int context, contextchanged = 0, keyword, c1, c2;
     int found_right = 0, found_left = 0;
     int done = 0;
     unsigned long border;
@@ -322,37 +322,24 @@ static inline unsigned long apply_rules_going_right (WEdit * edit, long i, unsig
 		    debug_printf ("B:4 count=%d", count);
 		    found_left = 1;
 		    border = 0;
-		    if (!keyword)
-			context = 0;
+		    context = 0;
+		    contextchanged = 1;
+		    keyword = 0;
 		} else if (r->last_left == c1 && compare_word_to_left (edit, i - 1, r->left, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_left) \
 			   &&(rule & RULE_ON_LEFT_BORDER)) {
 		    debug_printf ("B:2 ", 0);
 		    found_left = 1;
 		    border = 0;
 		    if (r->between_delimiters) {
-			if (!keyword)
-			    context = count;
+			context = count;
+			contextchanged = 1;
+			keyword = 0;
 			debug_printf ("context=%d ", context);
 			if (r->first_right == c2 && compare_word_to_right (edit, i, r->right, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_right)) {
 			    debug_printf ("B:3 ", 0);
 			    found_right = 1;
 			    border = RULE_ON_RIGHT_BORDER;
-			    if (!keyword)
-				context = 0;
-			} else {
-			    char *p;
-			    p = (r = edit->rules[context])->keyword_first_chars;
-			    while ((p = strchr (p + 1, c2))) {
-				struct key_word *k;
-				int count;
-				count = (unsigned long) p - (unsigned long) r->keyword_first_chars;
-				k = r->keyword[count];
-				if (compare_word_to_right (edit, i, k->keyword, k->whole_word_chars_left, k->whole_word_chars_right, k->line_start)) {
-				    keyword = count;
-				    debug_printf ("keyword=%d ", keyword);
-				    break;
-				}
-			    }
+			    context = 0;
 			}
 		    }
 		    break;
@@ -370,6 +357,21 @@ static inline unsigned long apply_rules_going_right (WEdit * edit, long i, unsig
 		    }
 		    break;
 		}
+	    }
+	}
+    }
+    if (!keyword && contextchanged) {
+	char *p;
+	p = (r = edit->rules[context])->keyword_first_chars;
+	while ((p = strchr (p + 1, c2))) {
+	    struct key_word *k;
+	    int coutner;
+	    coutner = (unsigned long) p - (unsigned long) r->keyword_first_chars;
+	    k = r->keyword[coutner];
+	    if (compare_word_to_right (edit, i, k->keyword, k->whole_word_chars_left, k->whole_word_chars_right, k->line_start)) {
+		keyword = coutner;
+		debug_printf ("keyword=%d ", keyword);
+		break;
 	    }
 	}
     }
@@ -406,7 +408,7 @@ static inline int resolve_left_delim (WEdit * edit, long i, struct context_rule 
 static inline unsigned long apply_rules_going_left (WEdit * edit, long i, unsigned long rule)
 {
     struct context_rule *r;
-    int context, keyword, c2, c1;
+    int context, contextchanged = 0, keyword, c2, c1;
     int found_left = 0, found_right = 0;
     int done = 0;
     unsigned long border;
@@ -488,8 +490,9 @@ static inline unsigned long apply_rules_going_left (WEdit * edit, long i, unsign
 		    debug_printf ("B:1 count=%d", count);
 		    found_right = 1;
 		    border = 0;
-		    if (!keyword)
-			context = 0;
+		    context = 0;
+		    contextchanged = 1;
+		    keyword = 0;
 		} else if (r->first_right == c2 && compare_word_to_right (edit, i + 1, r->right, r->whole_word_chars_right, r->whole_word_chars_left, r->line_start_right) \
 			   &&(rule & RULE_ON_RIGHT_BORDER)) {
 		    if (!(c2 == '\n' && r->single_char)) {
@@ -498,28 +501,14 @@ static inline unsigned long apply_rules_going_left (WEdit * edit, long i, unsign
 			border = 0;
 			if (r->between_delimiters) {
 			    debug_printf ("context=%d ", context);
-			    if (!keyword)
-				context = resolve_left_delim (edit, i, r, count);
+			    context = resolve_left_delim (edit, i, r, count);
+			    contextchanged = 1;
+			    keyword = 0;
 			    if (r->last_left == c1 && compare_word_to_left (edit, i, r->left, r->whole_word_chars_right, r->whole_word_chars_left, r->line_start_left)) {
 				debug_printf ("B:2 ", 0);
 				found_left = 1;
 				border = RULE_ON_LEFT_BORDER;
-				if (!keyword)
-				    context = 0;
-			    } else {
-				char *p;
-				p = (r = edit->rules[context])->keyword_last_chars;
-				while ((p = strchr (p + 1, c1))) {
-				    struct key_word *k;
-				    int count;
-				    count = (unsigned long) p - (unsigned long) r->keyword_last_chars;
-				    k = r->keyword[count];
-				    if (compare_word_to_left (edit, i, k->keyword, k->whole_word_chars_right, k->whole_word_chars_left, k->line_start)) {
-					keyword = count;
-					debug_printf ("keyword=%d ", keyword);
-					break;
-				    }
-				}
+				context = 0;
 			    }
 			}
 			break;
@@ -538,6 +527,21 @@ static inline unsigned long apply_rules_going_left (WEdit * edit, long i, unsign
 			break;
 		    }
 		}
+	    }
+	}
+    }
+    if (!keyword && contextchanged) {
+	char *p;
+	p = (r = edit->rules[context])->keyword_last_chars;
+	while ((p = strchr (p + 1, c1))) {
+	    struct key_word *k;
+	    int coutner;
+	    coutner = (unsigned long) p - (unsigned long) r->keyword_last_chars;
+	    k = r->keyword[coutner];
+	    if (compare_word_to_left (edit, i, k->keyword, k->whole_word_chars_right, k->whole_word_chars_left, k->line_start)) {
+		keyword = coutner;
+		debug_printf ("keyword=%d ", keyword);
+		break;
 	    }
 	}
     }
