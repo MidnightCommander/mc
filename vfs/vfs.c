@@ -75,6 +75,8 @@ static struct {
     struct vfs_class *operations;
 } vfs_file_table [MAX_VFS_FILES];
 
+static struct vfs_class *localfs_class;
+
 static int
 get_bucket (void)
 {
@@ -253,7 +255,7 @@ vfs_get_class (const char *path)
     vfs = _vfs_get_class(path);
 
     if (!vfs)
-	vfs = &vfs_local_ops;
+	vfs = localfs_class;
 
     return vfs;
 }
@@ -1219,8 +1221,10 @@ vfs_init (void)
     current_mon  = t->tm_mon;
     current_year = t->tm_year;
 
-    /* vfs_local_ops needs to be the first one */
-    vfs_register_class (&vfs_local_ops);
+    /* localfs needs to be the first one */
+    init_localfs();
+    /* fallback value for vfs_get_class() */
+    localfs_class = vfs_list;
 
 #ifdef USE_NETCODE
     tcp_init();

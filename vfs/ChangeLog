@@ -1,3 +1,8 @@
+2003-10-12  Pavel Roskin  <proski@gnu.org>
+
+	* local.c: Switch to self-registration.
+	* vfs.c: Cache localfs class for the use in vfs_get_class().
+
 2003-10-11  Pavel Roskin  <proski@gnu.org>
 
 	* xdirentry.h: Remove all typedefs, there is no need to hide the

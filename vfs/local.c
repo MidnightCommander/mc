@@ -16,6 +16,8 @@
  * saves both computer's memory and my work.  <pavel@ucw.cz>
  * */
     
+static struct vfs_class vfs_local_ops;
+
 static void *
 local_open (struct vfs_class *me, char *file, int flags, int mode)
 {
@@ -303,62 +305,44 @@ local_which (struct vfs_class *me, char *path)
     return 0;		/* Every path which other systems do not like is expected to be ours */
 }
 
-struct vfs_class vfs_local_ops = {
-    NULL,	/* This is place of next pointer */
-    "localfs",
-    VFSF_LOCAL,	/* flags */
-    NULL,	/* prefix */
-    NULL,	/* data */
-    0,		/* errno */
-    NULL,
-    NULL,
-    NULL,
-    local_which,
-
-    local_open,
-    local_close,
-    local_read,
-    local_write,
-    
-    local_opendir,
-    local_readdir,
-    local_closedir,
-    local_telldir,
-    local_seekdir,
-
-    local_stat,
-    local_lstat,
-    local_fstat,
-
-    local_chmod,
-    local_chown,
-    local_utime,
-
-    local_readlink,
-    local_symlink,
-    local_link,
-    local_unlink,
-
-    local_rename,
-    local_chdir,
-    local_errno,
-    local_lseek,
-    local_mknod,
-    
-    local_getid,
-    local_nothingisopen,
-    local_free,
-    
-    local_getlocalcopy,
-    local_ungetlocalcopy,
-    
-    local_mkdir,
-    local_rmdir,
-    
-    NULL,
-    NULL
-#ifdef HAVE_MMAP
-    ,local_mmap,
-    local_munmap
-#endif
-};
+void
+init_localfs (void)
+{
+    vfs_local_ops.name = "localfs";
+    vfs_local_ops.flags = VFSF_LOCAL;
+    vfs_local_ops.which = local_which;
+    vfs_local_ops.open = local_open;
+    vfs_local_ops.close = local_close;
+    vfs_local_ops.read = local_read;
+    vfs_local_ops.write = local_write;
+    vfs_local_ops.opendir = local_opendir;
+    vfs_local_ops.readdir = local_readdir;
+    vfs_local_ops.closedir = local_closedir;
+    vfs_local_ops.telldir = local_telldir;
+    vfs_local_ops.seekdir = local_seekdir;
+    vfs_local_ops.stat = local_stat;
+    vfs_local_ops.lstat = local_lstat;
+    vfs_local_ops.fstat = local_fstat;
+    vfs_local_ops.chmod = local_chmod;
+    vfs_local_ops.chown = local_chown;
+    vfs_local_ops.utime = local_utime;
+    vfs_local_ops.readlink = local_readlink;
+    vfs_local_ops.symlink = local_symlink;
+    vfs_local_ops.link = local_link;
+    vfs_local_ops.unlink = local_unlink;
+    vfs_local_ops.rename = local_rename;
+    vfs_local_ops.chdir = local_chdir;
+    vfs_local_ops.ferrno = local_errno;
+    vfs_local_ops.lseek = local_lseek;
+    vfs_local_ops.mknod = local_mknod;
+    vfs_local_ops.getid = local_getid;
+    vfs_local_ops.nothingisopen = local_nothingisopen;
+    vfs_local_ops.free = local_free;
+    vfs_local_ops.getlocalcopy = local_getlocalcopy;
+    vfs_local_ops.ungetlocalcopy = local_ungetlocalcopy;
+    vfs_local_ops.mkdir = local_mkdir;
+    vfs_local_ops.rmdir = local_rmdir;
+    vfs_local_ops.mmap = local_mmap;
+    vfs_local_ops.munmap = local_munmap;
+    vfs_register_class (&vfs_local_ops);
+}

@@ -102,8 +102,8 @@ void init_cpiofs (void);
 void init_fish (void);
 void init_ftpfs (void);
 void init_tarfs (void);
+void init_localfs (void);
 
-extern struct vfs_class vfs_local_ops;
 extern struct vfs_class vfs_smbfs_ops;
 extern struct vfs_class vfs_mcfs_ops;
 extern struct vfs_class vfs_extfs_ops;
