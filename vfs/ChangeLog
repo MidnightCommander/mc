@@ -158,6 +158,11 @@
 
 	* From debian: added deba, debd, dpkg, apt script file systems. 
 
+1999-12-28  Andrew V. Samoilov <sav@bcs.zp.ua>
+
+	* vfs.c (vfs_parse_filedate): don't decode last columns as year
+
+
 1999-12-21  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* vfs/vfs.h: use #warning only for gcc. Not all compilers

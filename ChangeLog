@@ -1,5 +1,9 @@
 2000-04-14  Timur Bakeyev  <mc@bat.ru>
 
+	* config.in: Added check against strcoll().
+
+2000-04-14  Timur Bakeyev  <mc@bat.ru>
+
 	* syntax/perl.syntax: According to Tomasz Wegrzanovski <maniek@beer.com>
 	added 'and', 'or', 'not', 'for' keywords.
 
@@ -81,10 +85,6 @@
 2000-01-11  Matthias Warkus  <mawa@iname.com>
 
 	* Added icon and keys entry for Scheme source.
-
-1999-12-28  Andrew V. Samoilov <sav@bcs.zp.ua>
-
-	* vfs/vfs.c (vfs_parse_filedate): don't decode last columns as year
 
 2000-01-03  Fatih Demir <kabalak@gmx.net>
 
