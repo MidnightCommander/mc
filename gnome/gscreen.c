@@ -199,6 +199,7 @@ panel_fill_panel_list (WPanel *panel)
 	for (i = 0; i < top; i++){
 		file_entry *fe = &panel->dir.list [i];
 		format_e *format = panel->format;
+		int n;
 
 		for (col = 0; format; format = format->next){
 			if (!format->use_in_gui)
@@ -209,12 +210,17 @@ panel_fill_panel_list (WPanel *panel)
 					type_col = col;
 
 			if (!format->string_fn)
-				texts [col] = "";
+				texts[col] = "";
 			else
-				texts [col] = (*format->string_fn)(fe, 10);
+				texts[col] = (* format->string_fn) (fe, 10);
 			col++;
 		}
-		gtk_clist_append (cl, texts);
+
+		n = gtk_clist_append (cl, texts);
+
+		/* Do not let the user select .. */
+		if (strcmp (fe->fname, "..") == 0)
+			gtk_clist_set_selectable (cl, n, FALSE);
 
 		color = file_compute_color (NORMAL, fe);
 		panel_file_list_set_row_colors (cl, i, color);
@@ -486,10 +492,6 @@ panel_file_list_configure_contents (GtkWidget *sw, WPanel *panel, int main_width
 	gtk_clist_thaw (clist);
 }
 
-/* Handler for the select_row signal of the clist.  We synchronize the panel's
- * idea of a selection, and handle pending actions that the
- * button_press/button_release handlers did not handle by themselves.
- */
 static void
 panel_file_list_select_row (GtkWidget *file_list, gint row, gint column,
 			    GdkEvent *event, gpointer data)
@@ -516,7 +518,6 @@ panel_file_list_unselect_row (GtkWidget *widget, int row, int columns, GdkEvent 
 	if (panel->marked == 0)
 		panel->selected = 0;
 }
-
 
 /* Figure out the number of visible lines in the panel */
 static void
@@ -1379,6 +1380,10 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 	do_file_mark (panel, index, 1);
 	display_mini_info (panel);
 	execute_hooks (select_file_hook);
+
+	/* Do not let the user select .. */
+	if (strcmp (panel->dir.list[index].fname, "..") == 0)
+		gnome_icon_list_unselect_icon (GNOME_ICON_LIST (widget), index);
 
 	if (!event)
 		return;

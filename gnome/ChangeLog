@@ -1,5 +1,14 @@
 1999-08-12  Federico Mena Quintero  <federico@redhat.com>
 
+	The two following entries are BUGFIX: GNOME bug tracker #1789.
+
+	* gscreen.c (panel_fill_panel_list): Do not allow selection of "..".
+	(panel_icon_list_select_icon): Likewise.
+
+	* glayout.c (gnome_panel_edit_menu): Removed the Invert Selection
+	command.  It is completely broken for the expected GNOME
+	semantics.
+
 	* gnome-file-property-dialog.c (perm_group_new): If the file
 	belongs to an unknown user/group, use the group's number as a
 	string for the entry box.  BUGFIX: GNOME bug tracker #1414.
