@@ -1,3 +1,8 @@
+2002-08-04  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Check for SIGTSTP and SIGCONT signals.  Disable
+	subshell if this test fails.
+
 2002-08-03  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/mail.syntax: Colors changed to be more readable.
