@@ -1,5 +1,9 @@
 2002-02-18  Pavel Roskin  <proski@gnu.org>
 
+	* utilunix.c (canonicalize_pathname) [__QNX__]: Fix detection
+	of Qnet names.  Disable support of Qnet names under QNX Netrino.
+	Reported by Maurizio Rossi <MRossi@system-group.it>
+
 	* global.h: Include unix.h under "classical" QNX.
 	* subshell.c: Don't include unix.h.
 	* utilunix.c: Likewise.
