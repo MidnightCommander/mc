@@ -296,10 +296,6 @@ void clean_dir (dir_list *list, int count)
     for (i = 0; i < count; i++){
 	free (list->list [i].fname);
 	list->list [i].fname = 0;
-	if (list->list [i].cache != NULL) {
-	    free (list->list [i].cache);
-	    list->list [i].cache = NULL;
-	}
     }
 }
 
@@ -321,7 +317,6 @@ add_dotdot_to_list (dir_list *list, int index)
 
     (list->list) [index].fnamelen = 2;
     (list->list) [index].fname = strdup ("..");
-    (list->list) [index].cache = NULL;
     (list->list) [index].f.link_to_dir = 0;
     (list->list) [index].f.stalled_link = 0;
     
@@ -475,7 +470,6 @@ int do_load_dir(dir_list *list, sortfn *sort, int reverse, int case_sensitive, c
 	    return next_free;
 	list->list [next_free].fnamelen = NLENGTH (dp);
 	list->list [next_free].fname = strdup (dp->d_name);
-	list->list [next_free].cache = NULL; 
 	list->list [next_free].f.marked = 0;
 	list->list [next_free].f.link_to_dir = link_to_dir;
 	list->list [next_free].f.stalled_link = stalled_link;
@@ -503,13 +497,11 @@ int do_load_dir(dir_list *list, sortfn *sort, int reverse, int case_sensitive, c
 int link_isdir (file_entry *file)
 {
     struct stat b;
-    
-    if (S_ISLNK (file->buf.st_mode)){
-	mc_stat (file->fname, &b);
-	if (S_ISDIR (b.st_mode))
-	    return 1;
-    }
-    return 0;
+
+    if (file->f.link_to_dir)
+	return 1;
+    else
+	return 0;
 }
  
 int if_link_is_exe (file_entry *file)
@@ -535,18 +527,15 @@ static void alloc_dir_copy (int size)
 	    for (i = 0; i < dir_copy.size; i++) {
 		if (dir_copy.list [i].fname)
 		    free (dir_copy.list [i].fname);
-		if (dir_copy.list [i].cache)
-		    free (dir_copy.list [i].cache);
 	    }
 	    free (dir_copy.list);
 	    dir_copy.list = 0;
 	}
 
 	dir_copy.list = xmalloc (sizeof (file_entry) * size, "alloc_dir_copy");
-	for (i = 0; i < size; i++) {
+	for (i = 0; i < size; i++)
 	    dir_copy.list [i].fname = 0;
-	    dir_copy.list [i].cache = NULL;
-	}
+
 	dir_copy.size = size;
     }
 }
@@ -574,7 +563,6 @@ int do_reload_dir (dir_list *list, sortfn *sort, int count, int rev,
     for (i = 0; i < count; i++){
 	dir_copy.list [i].fnamelen = list->list [i].fnamelen;
 	dir_copy.list [i].fname =    list->list [i].fname;
-	dir_copy.list [i].cache =    list->list [i].cache;
 	dir_copy.list [i].f.marked = list->list [i].f.marked;
 	dir_copy.list [i].f.link_to_dir = list->list [i].f.link_to_dir;
 	dir_copy.list [i].f.stalled_link = list->list [i].f.stalled_link;
@@ -614,7 +602,6 @@ int do_reload_dir (dir_list *list, sortfn *sort, int count, int rev,
 	
 	list->list [next_free].fnamelen = tmp_len;
 	list->list [next_free].fname = strdup (dp->d_name);
-	list->list [next_free].cache = NULL;
 	list->list [next_free].f.link_to_dir = link_to_dir;
 	list->list [next_free].f.stalled_link = stalled_link;
 	list->list [next_free].buf = buf;

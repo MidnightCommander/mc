@@ -858,7 +858,6 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
     		clean_dir (list, cpanel->count);
 	    list->list [next_free].fnamelen = strlen (name);
 	    list->list [next_free].fname = name;
-	    list->list [next_free].cache = NULL;
 	    file_mark (cpanel, next_free, 0);
 	    list->list [next_free].f.link_to_dir = link_to_dir;
 	    list->list [next_free].f.stalled_link = stalled_link;

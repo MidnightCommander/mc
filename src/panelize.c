@@ -439,7 +439,6 @@ void do_external_panelize (char *command)
 	    break;
 	list->list [next_free].fnamelen = strlen (name);
 	list->list [next_free].fname = strdup (name);
-	list->list [next_free].cache = NULL;
 	file_mark (cpanel, next_free, 0);
 	list->list [next_free].f.link_to_dir = link_to_dir;
 	list->list [next_free].f.stalled_link = stalled_link;

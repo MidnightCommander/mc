@@ -1,5 +1,18 @@
 1998-12-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* dir.c (link_isdir): Fetch the information from
+	file->f.link_to_dir, since we already have it.
+
+	* dir.h (file_entry): Removed the `cache' field in this structure,
+	as it was only used for the deprecated Xview version.
+	Also, removed the `exists' field, as it was not being used anywhere.
+
+	* dir.c: Removed all occurrences of file_entry->cache.
+
+	* find.c: Removed all occurrences of file_entry->cache.
+
+	* panelize.c: Removed all occurrences of file_entry->cache.
+
 	* screen.c (do_enter_on_file_entry): New public function that
 	implements the functionality in do_enter(), but based on a file
 	entry rather than on a panel.

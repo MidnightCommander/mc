@@ -15,11 +15,9 @@ typedef struct {
     /* Flags */
     struct { 
 	unsigned int marked:1;		/* File marked in pane window */
-	unsigned int exists:1;		/* Use for rereading file */
 	unsigned int link_to_dir:1;	/* If this is a link, does it point to directory? */
 	unsigned int stalled_link:1;    /* If this is a symlink and points to Charon's land */
     } f;
-    char *cache;
 } file_entry;
 
 typedef struct {
