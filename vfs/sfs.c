@@ -310,6 +310,7 @@ static int sfs_init (struct vfs_class *me)
 {
     char *mc_sfsini;
     FILE *cfg;
+    char key[256];
 
     mc_sfsini = concat_dir_and_file (mc_home, "extfs" PATH_SEP_STR "sfs.ini");
     cfg = fopen (mc_sfsini, "r");
@@ -322,14 +323,10 @@ static int sfs_init (struct vfs_class *me)
     g_free (mc_sfsini);
 
     sfs_no = 0;
-    while (sfs_no < MAXFS){
-	char key[256];
+    while (sfs_no < MAXFS && fgets (key, sizeof (key), cfg)) {
 	char *c, *semi = NULL, flags = 0;
 
-        if (!fgets (key, sizeof (key), cfg))
-	    break;
-
-	if (*key == '#')
+	if (*key == '#' || *key == '\n')
 	    continue;
 
 	for (c = key; *c; c++)
@@ -343,13 +340,14 @@ static int sfs_init (struct vfs_class *me)
 	    }
 
 	if (!semi){
+	invalid_line:
 	    fprintf (stderr, _("Warning: Invalid line in %s:\n%s\n"),
 		     "sfs.ini", key);
 	    continue;
 	}
 
 	c = semi + 1;
-	while ((*c != ' ') && (*c != '\t')) {
+	while (*c && (*c != ' ') && (*c != '\t')) {
 	    switch (*c) {
 	    case '1': flags |= F_1; break;
 	    case '2': flags |= F_2; break;
@@ -360,6 +358,8 @@ static int sfs_init (struct vfs_class *me)
 	    }	    
 	    c++;
 	}
+	if (!*c)
+	    goto invalid_line;
 	c++;
 	*(semi+1) = 0;
 	if ((semi = strchr (c, '\n')))

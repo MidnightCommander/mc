@@ -2,6 +2,7 @@
 
 	* extfs.c (extfs_init): Fix possible off-by-one buffer underflow
 	for empty lines in extfs.ini.
+	* sfs.c (sfs_init): Fix possible buffer overflows for invalid sfs.ini.
 
 2004-06-14  Pavel Roskin  <proski@gnu.org>
 
