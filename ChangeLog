@@ -1,3 +1,9 @@
+2000-09-12  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: enable AM_MAINTAINER_MODE to be consistent with
+	other GNOME modules
+	* autogen.sh: remove "-I ." from the "aclocal" command line
+
 2000-09-01  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: output vfs/extfs/Makefile

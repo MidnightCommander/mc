@@ -5,6 +5,7 @@ AC_INIT(create_vcs)
 AC_CANONICAL_SYSTEM
 AM_INIT_AUTOMAKE(mc, 4.5.51)
 AM_CONFIG_HEADER(config.h)
+AM_MAINTAINER_MODE
 
 top_srcdir=`dirname $0`
 AC_SUBST(top_srcdir)

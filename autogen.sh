@@ -7,7 +7,7 @@ test -z "$srcdir" && srcdir=.
 (
 cd $srcdir
 if test -d macros; then
-	aclocal -I . -I macros $ACLOCAL_FLAGS || exit 1
+	aclocal -I macros $ACLOCAL_FLAGS || exit 1
 else
 	if test -f aclocal.m4; then
 		echo Warning: aclocal.m4 cannot be rebuilt
