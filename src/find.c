@@ -46,12 +46,6 @@
 #include "boxes.h"
 #include "../vfs/vfs.h"
 
-#if defined(HAVE_RX_H) && defined(HAVE_REGCOMP)
-#    include <rx.h>
-#else
-#    include "eregex.h"
-#endif
-
 /* Size of the find parameters window */
 #define FIND_Y 14
 static int FIND_X = 50;

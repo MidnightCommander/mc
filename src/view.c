@@ -40,11 +40,6 @@
 #include <ctype.h>	/* For toupper() */
 #include <errno.h>
 #include <limits.h>
-#if defined(HAVE_RX_H) && defined(HAVE_REGCOMP)
-#    include <rx.h>
-#else
-#    include "eregex.h"
-#endif
 
 #include "global.h"
 #include "tty.h"

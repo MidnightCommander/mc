@@ -36,12 +36,6 @@
 #include <string.h>
 #include <ctype.h>
 
-#if defined(HAVE_RX_H) && defined(HAVE_REGCOMP)
-#include <rx.h>
-#else
-#include "eregex.h"
-#endif
-
 #include "global.h"
 #include "profile.h"
 #include "main.h"		/* mc_home */

@@ -44,12 +44,6 @@
 #    include <malloc.h>
 #endif
 
-#if defined(HAVE_RX_H) && defined(HAVE_REGCOMP)
-#    include <rx.h>
-#else
-#    include "src/eregex.h"
-#endif
-
 #include "src/global.h"
 #include "src/tty.h"
 #include "src/main.h"		/* for char *shell */
