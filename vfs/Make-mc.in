@@ -21,9 +21,10 @@ AR = @AR@
 # VFS code
 #
 NETFILES   = tcputil.o ftpfs.o mcfs.o utilvfs.o
-NONETFILES = local.o vfs.o tar.o names.o container.o extfs.o @undelfs_o@
+NONETFILES = local.o vfs.o tar.o sfs.o names.o container.o extfs.o \
+	@undelfs_o@
 
-VFSSRCS = local.c vfs.c mcfs.c tcputil.c tar.c names.c shared.c \
+VFSSRCS = local.c vfs.c mcfs.c tcputil.c tar.c sfs.c names.c shared.c \
 	ftpfs.c container.c mcserv.c extfs.c undelfs.c utilvfs.c
 
 VFSHDRS = vfs.h mcfs.h tcputil.h tar.h container.h ftpfs.h names.h \
@@ -32,7 +33,7 @@ VFSHDRS = vfs.h mcfs.h tcputil.h tar.h container.h ftpfs.h names.h \
 VFSOBJS = $(NONETFILES) @NETFILES@
 
 EXTFS_MISC = README extfs.ini
-EXTFS_CONST = a rpm hp48 mailfs patchfs
+EXTFS_CONST = a rpm hp48 mailfs patchfs sfs.ini
 EXTFS_IN = deb.in lslR.in ucpio.in urar.in uzoo.in ftplist.in uar.in \
 	ulha.in uzip.in
 EXTFS_OUT = deb lslR ucpio urar uzoo ftplist uar ulha uzip
@@ -43,7 +44,9 @@ EXTFSSTUFF = $(EXTFS_MISC) $(EXTFS_CONST) $(EXTFS_IN)
 # Commands to build standalone version (.so)
 #
 
-VFSSOOBJS = tcputil.so ftpfs.so mcfs.so utilvfs.so local.so vfs.so tar.so names.so container.so extfs.so util-alone.so util.sor utilunix.sor
+VFSSOOBJS = tcputil.so ftpfs.so mcfs.so utilvfs.so local.so vfs.so \
+	tar.so sfs.so names.so container.so extfs.so util-alone.so \
+	util.sor utilunix.sor
 
 %.sor:	../src/%.c
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) -DVFS_STANDALONE $< -o $@

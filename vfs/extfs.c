@@ -585,6 +585,7 @@ static void *extfs_open (char *file, int flags, int mode)
     struct extfs_pseudofile *extfs_info;
     struct extfs_archive *archive;
     char *q;
+    char *mc_extfsdir;
     struct extfs_entry *entry;
     int local_handle;
     const int do_create = (flags & O_ACCMODE) != O_RDONLY;
@@ -615,6 +616,7 @@ static void *extfs_open (char *file, int flags, int mode)
                             archive_name, 
                             " ", q, " ", entry->inode->local_filename, 0);
 	free (q);
+	free (mc_extfsdir);
 	free (archive_name);
         if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID, shell, cmd) && !do_create){
             free (entry->inode->local_filename);

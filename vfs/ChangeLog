@@ -1,3 +1,12 @@
+Thu Aug 27 19:45:31 1998  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+
+	* extfs.c: mc_extfsdir was not defined in extfs_open()
+
+	* Make-mc.in: sfs.c was not compiled, linked and copied out
+	extfs/sfs.ini was not installed and copied out
+
+	* Makefile.am: sfs.c was not linked to standalone VFS
+
 Tue Aug 25 17:54:17 1998  Pavel Machek <pavel@ucw.cz>
 	
 	* Added vfs_uid for use by libvfs.so users (rpc.nfsd)
