@@ -1216,11 +1216,44 @@ void mkdir_panel_cmd (void)
     mkdir_cmd (cpanel);
 }
 
+/* partly taken from dcgettect.c, returns "" for C locale */
+static const char *
+guess_message_value (void)
+{
+    const char *retval;
+
+    /* The highest priority value is the `LANGUAGE' environment
+       variable.  This is a GNU extension.  */
+    retval = getenv ("LANGUAGE");
+    if (retval != NULL && retval[0] != '\0')
+        return retval;
+
+    /* Setting of LC_ALL overwrites all other.  */
+    retval = getenv ("LC_ALL");
+    if (retval != NULL && retval[0] != '\0')
+        return retval;
+
+    /* Next comes the name of the desired category.  */
+    retval = getenv ("LC_MESSAGE");
+    if (retval != NULL && retval[0] != '\0')
+        return retval;
+    
+    /* Last possibility is the LANG environment variable.  */
+    retval = getenv ("LANG");
+    if (retval != NULL && retval[0] != '\0')
+        return retval;
+
+    /* We use C as the default domain.  POSIX says this is implementation
+       defined.  */
+    return "";
+
+}
 /* Returns a random hint */
 char *get_random_hint (void)
 {
     char *data, *result, *eol;
-    char *hintfile;
+    char *hintfile_base, *hintfile;
+    const char *lang;
     int  len;
     int start;
     
@@ -1244,9 +1277,23 @@ char *get_random_hint (void)
     last_sec = tv.tv_sec;
 #endif
 
-    hintfile = concat_dir_and_file (mc_home, MC_HINT);
+    hintfile_base = concat_dir_and_file (mc_home, MC_HINT);
+    lang = guess_message_value ();
+
+    hintfile = g_strdup_printf ("%s.%s", hintfile_base, lang);
     data = load_file (hintfile);
     g_free (hintfile);
+
+    if (!data) {
+	hintfile = g_strdup_printf ("%s.%.2s", hintfile_base, lang);
+	data = load_file (hintfile);
+	g_free (hintfile);
+
+	if (!data)
+	    data = load_file (hintfile_base);
+    }
+
+    g_free (hintfile_base);
     if (!data)
 	return 0;
 

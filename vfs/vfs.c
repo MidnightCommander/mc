@@ -1786,11 +1786,18 @@ vfs_die (char *m)
 void
 vfs_print_stats (char *fs_name, char *action, char *file_name, int have, int need)
 {
+    static char *i18n_percent_transf_format = NULL, *i18n_transf_format = NULL;
+    
+    if (i18n_percent_transf_format == NULL) {
+        i18n_percent_transf_format = _("%s: %s: %s %3d%% (%ld bytes transfered)");
+	i18n_transf_format = _("%s: %s: %s %ld bytes transfered");
+	}
+
     if (need) 
-        print_vfs_message ("%s: %s: %s %3d%% (%ld bytes transfered)", 
+        print_vfs_message (i18n_percent_transf_format, 
 			   fs_name, action, file_name, have*100/need, have);
     else
-        print_vfs_message ("%s: %s: %s %ld bytes transfered",
+        print_vfs_message (i18n_transf_format,
 			   fs_name, action, file_name, have);
 }
 

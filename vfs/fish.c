@@ -133,7 +133,7 @@ static void
 free_archive (vfs *me, vfs_s_super *super)
 {
     if ((SUP.sockw != -1) || (SUP.sockr != -1)){
-	print_vfs_message ("fish: Disconnecting from %s", super->name?super->name:"???");
+	print_vfs_message (_("fish: Disconnecting from %s"), super->name?super->name:"???");
 	command(me, super, NONE, "#BYE\nlogout\n");
 	close(SUP.sockw);
 	close(SUP.sockr);
@@ -211,7 +211,7 @@ open_archive_int (vfs *me, vfs_s_super *super)
 
     {
         char answer[2048];
-	print_vfs_message( "fish: Waiting for initial line..." );
+	print_vfs_message( _("fish: Waiting for initial line...") );
         if (!vfs_s_get_line(me, SUP.sockr, answer, sizeof(answer), ':'))
 	    ERRNOR (E_PROTO, -1);
 	print_vfs_message( answer );
@@ -235,23 +235,23 @@ open_archive_int (vfs *me, vfs_s_super *super)
 		SUP.password = g_strdup (op);
 		wipe_password(op);
 	    }
-	    print_vfs_message( "fish: Sending password..." );
+	    print_vfs_message( _("fish: Sending password...") );
 	    write(SUP.sockw, SUP.password, strlen(SUP.password));
 	    write(SUP.sockw, "\n", 1);
 	}
     }
 
-    print_vfs_message( "FISH: Sending initial line..." );
+    print_vfs_message( _("fish: Sending initial line...") );
     if (command (me, super, WAIT_REPLY, "#FISH\necho; start_fish_server; echo '### 200'\n") != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
-    print_vfs_message( "FISH: Handshaking version..." );
+    print_vfs_message( _("fish: Handshaking version...") );
     if (command (me, super, WAIT_REPLY, "#VER 0.0.0\necho '### 000'\n") != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
-    print_vfs_message( "FISH: Setting up current directory..." );
+    print_vfs_message( _("fish: Setting up current directory...") );
     SUP.home = fish_getcwd (me, super);
-    print_vfs_message( "FISH: Connected, home %s.", SUP.home );
+    print_vfs_message( _("fish: Connected, home %s."), SUP.home );
 #if 0
     super->name = g_strconcat ( "/#sh:", SUP.user, "@", SUP.host, "/", NULL );
 #endif
@@ -328,7 +328,7 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
 
     logfile = MEDATA->logfile;
 
-    print_vfs_message("fish: Reading directory %s...", remote_path);
+    print_vfs_message(_("fish: Reading directory %s..."), remote_path);
 
     gettimeofday(&dir->u.fish.timestamp, NULL);
     dir->u.fish.timestamp.tv_sec += 10; /* was 360: 10 is good for
@@ -423,11 +423,11 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
     if (decode_reply(buffer+4, 0) != COMPLETE)
         goto error;
 
-    print_vfs_message("fish: got listing");
+    print_vfs_message(_("fish: got listing"));
     return 0;
 
 error:
-    print_vfs_message("fish: failed");
+    print_vfs_message(_("fish: failed"));
     return 1;
 }
 
@@ -447,7 +447,7 @@ file_store(vfs *me, vfs_s_super *super, char *name, char *localname)
 
     /* Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null ) */
 
-    print_vfs_message("FISH: store %s: sending command...", name );
+    print_vfs_message(_("fish: store %s: sending command..."), name );
     if (command (me, super, WAIT_REPLY, 
 		 "#STOR %d /%s\n> /%s; echo '### 001'; ( dd bs=4096 count=%d; dd bs=%d count=1 ) 2>/dev/null | ( cat > /%s; cat > /dev/null ); echo '### 200'\n",
 		 s.st_size, name, name,
@@ -461,7 +461,7 @@ file_store(vfs *me, vfs_s_super *super, char *name, char *localname)
 	while ((n = read(h, buffer, sizeof(buffer))) < 0) {
 	    if ((errno == EINTR) && got_interrupt)
 	        continue;
-	    print_vfs_message("FISH: Local read failed, sending zeros" );
+	    print_vfs_message(_("fish: Local read failed, sending zeros") );
 	    close(h);
 	    h = open( "/dev/zero", O_RDONLY );
 	}
@@ -473,7 +473,7 @@ file_store(vfs *me, vfs_s_super *super, char *name, char *localname)
 	}
 	disable_interrupt_key();
 	total += n;
-	print_vfs_message("fish: storing %s %d (%d)", 
+	print_vfs_message(_("fish: storing %s %d (%d)"), 
 			  was_error ? "zeros" : "file", total, s.st_size);
     }
     if ((get_reply (me, SUP.sockr, NULL, 0) != COMPLETE) || was_error)
@@ -513,7 +513,7 @@ linear_abort (vfs *me, vfs_s_fh *fh)
     char buffer[8192];
     int n;
 
-    print_vfs_message( "Aborting transfer..." );
+    print_vfs_message( _("Aborting transfer...") );
     do {
 	n = MIN(8192, fh->u.fish.total - fh->u.fish.got);
 	if (n)
@@ -522,9 +522,9 @@ linear_abort (vfs *me, vfs_s_fh *fh)
     } while (n);
 
     if (get_reply (me, SUP.sockr, NULL, 0) != COMPLETE)
-        print_vfs_message( "Error reported after abort." );
+        print_vfs_message( _("Error reported after abort.") );
     else
-        print_vfs_message( "Aborted transfer would be successfull." );
+        print_vfs_message( _("Aborted transfer would be successfull.") );
 }
 
 static int

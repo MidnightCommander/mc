@@ -2305,9 +2305,12 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	break;
 
     case CK_Date:{
+	    char s[1024];
+
 	    time_t t;
 	    time (&t);
-	    edit_printf (edit, ctime (&t));
+	    strftime (s, 1024, "%c", localtime (&t));
+	    edit_printf (edit, s);
 	    edit->force |= REDRAW_PAGE;
 	    break;
 	}

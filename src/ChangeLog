@@ -1,3 +1,16 @@
+1999-08-15  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* cmd.c (guess_message_value): New function. Determine locale used
+	for messages 
+
+	(get_random_hint): use guess_message_value
+
+1999-08-15  David Martin <dmartina@usa.net>
+
+	* boxes.c: (symlink_dialog): Move dialog misaligned elements
+
+	* cmd.c (get_random_hint): Look for localized hint files
+
 1999-08-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* ext.c: Added missing include file.

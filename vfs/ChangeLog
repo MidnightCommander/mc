@@ -1,3 +1,11 @@
+1999-08-15  David Martin <dmartina@usa.net>
+
+	* vfs.c (vfs_print_stats): Translate vfs stats
+
+	* shared_ftp_fish.c (s_read, s_lseek): Mark strings for translation
+
+	* fish.c: Translate messages
+
 1999-08-06  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* tar.c (read_header): Don't segfault when a symlink points to the

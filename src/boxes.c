@@ -785,10 +785,10 @@ symlink_dialog (char *existing, char *new, char **ret_existing, char **ret_new)
 #else
 #define INPUT_INDEX 0
 #endif
-    { quick_input,  6, 80, 5, 8, "", 58, 0, 0, 0, XV_WLAY_BELOWCLOSE, "input-1" },
-    { quick_label,  6, 80, 4, 8, "", 0, 0, 0, 0, XV_WLAY_BELOWOF, "label-1" },
-    { quick_input,  6, 80, 3, 8, "", 58, 0, 0, 0, XV_WLAY_BELOWCLOSE, "input-2" },
-    { quick_label,  6, 80, 2, 8, "", 0, 0, 0, 0, XV_WLAY_DONTCARE, "label-2" },
+    { quick_input,  4, 80, 5, 8, "", 58, 0, 0, 0, XV_WLAY_BELOWCLOSE, "input-1" },
+    { quick_label,  4, 80, 4, 8, "", 0, 0, 0, 0, XV_WLAY_BELOWOF, "label-1" },
+    { quick_input,  4, 80, 3, 8, "", 58, 0, 0, 0, XV_WLAY_BELOWCLOSE, "input-2" },
+    { quick_label,  4, 80, 2, 8, "", 0, 0, 0, 0, XV_WLAY_DONTCARE, "label-2" },
     { 0 } };
     
     Quick_input.xlen  = 64;

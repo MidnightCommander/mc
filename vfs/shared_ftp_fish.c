@@ -512,7 +512,7 @@ static int s_read (void *data, char *buffer, int count)
     
     fp = data;
     if (fp->fe->linear_state == LS_LINEAR_CLOSED) {
-        print_vfs_message ("Starting linear transfer...");
+        print_vfs_message (_("Starting linear transfer..."));
 	if (!linear_start (fp->fe, 0))
 	    return -1;
     }
@@ -740,7 +740,7 @@ static int s_lseek (void *data, off_t offset, int whence)
     if (fp->fe->linear_state == LS_LINEAR_OPEN)
         vfs_die ("You promissed not to seek!");
     if (fp->fe->linear_state == LS_LINEAR_CLOSED) {
-        print_vfs_message ("Preparing reget...");
+        print_vfs_message (_("Preparing reget..."));
         if (whence != SEEK_SET)
 	    vfs_die ("You may not do such seek on linear file");
 	if (!linear_start (fp->fe, offset))
