@@ -2609,7 +2609,7 @@ protocol.
 .PP
 A generic
 .I extfs
-(EXternal virtual File System) is provided in order to easily expand
+(EXTernal virtual File System) is provided in order to easily expand
 VFS capabilities using scripts and external software.
 .PP
 The VFS switch code will interpret all of the path names used and will
@@ -2639,8 +2639,8 @@ user, otherwise it will use your login name or the login name from the
 file.  The optional
 .I pass
 element is the password used for the connection.  Using the password in
-the VFS directory name is not recommended, since it can appear on the
-screen unobscured and can be saved to the directory history.
+the VFS directory name is not recommended, because it can appear on the
+screen in clear text and can be saved to the directory history.
 .PP
 To enable using FTP proxy, prepend
 .B !
@@ -2704,20 +2704,17 @@ The
 .I options
 and
 .I remote-dir
-elements are optional. If
-you specify the
+elements are optional.  If you specify the
 .I user
-element then the Midnight Commander
-will try to logon on the remote machine as that user,
-otherwise it will use your login name.
+element, the Midnight Commander will try to login on the remote
+machine as that user, otherwise it will use your login name.
 .PP
 The
 .I options
-are 'C' - use compression and 'rsh' use rsh instead
-of ssh. If the
+are 'C' - use compression and 'rsh' use rsh instead of ssh.  If the
 .I remote-dir
-element is present, your current directory on the remote machine will
-be set to this one.
+element is present, your current directory on the remote machine will be
+set to this one.
 .PP
 Examples:
 .PP
@@ -2729,9 +2726,9 @@ Examples:
 .\"NODE "  Network File System"
 .SH "  Network File System"
 The Midnight Commander file system is a network base file system that
-allows you to manipulate the files in a remote machine as if they
-were local.  To use this, the remote machine must be running the
-mcserv(8) server program.
+allows you to manipulate the files in a remote machine as if they were
+local.  To use this, the remote machine must be running the mcserv(8)
+server program.
 .PP
 To connect to a remote machine, you just need to chdir into a special
 directory which name is in the following format:
@@ -2852,10 +2849,10 @@ For example, to list contents of a zip archive documents.zip type
   cd documents.zip#uzip
 .fi
 .PP
-In many aspects, you could treat extfs like any other directory.
-For instance, you can add it to the hotlist or change to it from
-directory history.  An important limitation is that you cannot invoke
-shell commands inside extfs, just like any other non-local VFS.
+In many aspects, you could treat extfs like any other directory.  For
+instance, you can add it to the hotlist or change to it from directory
+history.  An important limitation is that you cannot invoke shell
+commands inside extfs, just like any other non-local VFS.
 .PP
 Common extfs scripts included with Midnight Commander are:
 .TP
@@ -2993,9 +2990,9 @@ special, core.  Editor colors are: editnormal, editbold, editmarked.
 determines the color of input lines used in query dialogs.
 .PP
 .I gauge
-determines the color of the filled part of the progress bar
-(gauge), which shows how many percent of files were copied
-etc. in a graphical way.
+determines the color of the filled part of the progress bar (gauge),
+which is used to show the user the progress of file operations, such as
+copying.
 .PP
 The dialog boxes use the following colors:
 .I dnormal
@@ -3024,8 +3021,8 @@ is used for not selected hyperlinks and
 .I helpslink
 is used for selected hyperlink.
 .PP
-Special highlight colors determine how files are displayed
-when file highlighting is enabled (see the section on
+Special highlight colors determine how files are displayed when file
+highlighting is enabled (see the section on
 .\"LINK2"
 Layout\&).
 .\"Layout"
@@ -3065,27 +3062,27 @@ These variables may be set in your ~/.mc/ini file:
 .TP
 .I clear_before_exec
 By default the Midnight Commander clears the screen before executing a
-command. If you would prefer to see the output of the command at the
+command.  If you would prefer to see the output of the command at the
 bottom of the screen, edit your ~/.mc/ini file and change the value of
 the field clear_before_exec to 0.
 .TP
 .I confirm_view_dir
-If you press F3 on a directory, normally MC enters that directory. If
-this flag is set to 1, then MC will ask for confirmation before
-changing the directory if you have files tagged.
+If you press F3 on a directory, normally MC enters that directory.  If
+this flag is set to 1, then MC will ask for confirmation before changing
+the directory if you have files tagged.
 .TP
 .I ftpfs_retry_seconds
 This value is the number of seconds the Midnight Commander will wait
-before attempting to reconnect to an FTP server that has denied the login.
-If the value is zero, the login will no be retried.
+before attempting to reconnect to an FTP server that has denied the
+login.  If the value is zero, the login will no be retried.
 .TP
 .I max_dirt_limit
 Specifies how many screen updates can be skipped at most in the internal
 file viewer.  Normally this value is not significant, because the code
-automatically adjusts the number of updates to skip according to the rate
-of incoming keystrokes.  However, on very slow machines or terminals
-with a fast keyboard auto repeat, a big value can make screen updates
-too jumpy.
+automatically adjusts the number of updates to skip according to the
+rate of incoming keystrokes.  However, on very slow machines or
+terminals with a fast keyboard auto repeat, a big value can make screen
+updates too jumpy.
 .IP
 It seems that setting max_dirt_limit to 10 causes the best behavior,
 and that is the default value.
@@ -3100,10 +3097,9 @@ on the internal file viewer.
 .TP
 .I old_esc_mode
 By default the Midnight Commander treats the ESC key as a key prefix
-(old_esc_mode=0), if you set this option (old_esc_mode=1), then the
-ESC key will act as a prefix key for one second, and if no extra keys
-have arrived, then the ESC key is interpreted as a cancel key (ESC
-ESC).
+(old_esc_mode=0).  If this option is set (old_esc_mode=1), the ESC key
+will act as a prefix key for one second, and if no extra keys have
+arrived, then the ESC key is interpreted as a cancel key (ESC ESC).
 .TP
 .I only_leading_plus_minus
 Allow special treatment for '+', '-', '*' in the command line (select,
@@ -3128,14 +3124,14 @@ If this flag is set, then the home and end keys will work slightly
 different on the panels, instead of moving the selection to the first
 and last files in the panels, they will act as follows:
 .IP
-The home key will: Go up to the middle line, if below it; else go to
-the top line unless it is already on the top line, in this case it
-will go to the first file in the panel.
+The home key will: Go up to the middle line, if below it; else go to the
+top line unless it is already on the top line, in this case it will go
+to the first file in the panel.
 .IP
-The end key has a similar behavior: Go down to the middle line, if
-over it; else go to the bottom line unless you already are at the
-bottom line, in such case it will move the selection to the last file
-name in the panel.
+The end key has a similar behavior: Go down to the middle line, if over
+it; else go to the bottom line unless you already are at the bottom
+line, in such case it will move the selection to the last file name in
+the panel.
 .TP
 .I use_file_to_guess_type
 If this variable is on (the default) it will spawn the file command to
@@ -3145,20 +3141,20 @@ mc.ext file\&.
 .\"Extension File Edit"
 .TP
 .I xterm_mode
-If this variable is on (default is off) when you browse the file
-system on a Tree panel, it will automatically reload the other panel
-with the contents of the selected directory.
+If this variable is on (default is off) when you browse the file system
+on a Tree panel, it will automatically reload the other panel with the
+contents of the selected directory.
 .\"NODE "Terminal databases"
 .SH "Terminal databases"
 The Midnight Commander provides a way to fix your system terminal
 database without requiring root privileges.  The Midnight Commander
 searches in the system initialization file (the mc.lib file located in
-the Midnight Commander library directory) and in the ~/.mc/ini file
-for the section "terminal:your-terminal-name" and then for the section
-"terminal:general", each line of the section contains a key symbol
-that you want to define, followed by an equal sign and the definition
-for the key.  You can use the special \\e form to represent the escape
-character and the ^x to represent the control-x character.
+the Midnight Commander library directory) and in the ~/.mc/ini file for
+the section "terminal:your-terminal-name" and then for the section
+"terminal:general", each line of the section contains a key symbol that
+you want to define, followed by an equal sign and the definition for the
+key.  You can use the special \\e form to represent the escape character
+and the ^x to represent the control-x character.
 .PP
 The possible key symbols are:
 .PP
@@ -3187,16 +3183,16 @@ insert=\\e[Op
 .PP
 The
 .I complete
-key symbol represents the escape sequences used to invoke the
-completion process, this is invoked with M-tab, but you can define
-other keys to do the same work (on those keyboard with tons of nice
-and unused keys everywhere).
+key symbol represents the escape sequences used to invoke the completion
+process, this is invoked with M-tab, but you can define other keys to do
+the same work (on those keyboard with tons of nice and unused keys
+everywhere).
 .SH ""
 .\"NODE "FILES"
 .SH "FILES"
 The program will retrieve all of its information relative to the
-MC_DATADIR environment variable; if this variable is not set, then it will
-fall back to the @prefix@/share/mc directory.
+MC_DATADIR environment variable.  If this variable is not set, then it
+will fall back to the @prefix@/share/mc directory.
 .PP
 .I @prefix@/share/mc/mc.hlp
 .IP
@@ -3240,8 +3236,8 @@ This file contains the default system-wide applications menu.
 .PP
 .I ~/.mc/menu
 .IP
-User's own application menu. If this file is present it is used
-instead of the system-wide applications menu.
+User's own application menu. If this file is present it is used instead
+of the system-wide applications menu.
 .PP
 .I ~/.mc/Tree
 .IP
@@ -3249,9 +3245,8 @@ The directory list for the directory tree and tree view features.
 .PP
 .I ./.mc.menu
 .IP
-Local user-defined menu. If this file
-is present it is used instead of the home or system-wide
-applications menu.
+Local user-defined menu. If this file is present, it is used instead of
+the home or system-wide applications menu.
 .\"SKIP_SECTION"
 .SH "LICENSE"
 This program is distributed under the terms of the GNU General Public
@@ -3273,25 +3268,23 @@ The Midnight Commander page on the World Wide Web:
 .\"NODE "AUTHORS"
 .SH "AUTHORS"
 Miguel de Icaza (miguel@ximian.com), Janne Kukonlehto
-(jtklehto@paju.oulu.fi), Radek Doulik (rodo@ucw.cz), Fred
-Leeflang (fredl@nebula.ow.org), Dugan Porter (dugan@b011.eunet.es),
-Jakub Jelinek (jj@sunsite.mff.cuni.cz), Ching Hui
-(mr854307@cs.nthu.edu.tw), Andrej Borsenkow (borsenkow.msk@sni.de),
-Norbert Warmuth (nwarmuth@privat.circular.de),
-Mauricio Plaza (mok@roxanne.nuclecu.unam.mx), Paul Sheer
-(psheer@icon.co.za), Pavel Machek (pavel@ucw.cz) and Pavel Roskin
-(proski@gnu.org) are the developers of this package.
-Alessandro Rubini (rubini@ipvvis.unipv.it) has been especially helpful
-debugging and enhancing the program's mouse support, John Davis
-(davis@space.mit.edu) also made his S-Lang library available to us
-under the GPL and answered my questions about it, and the following
-people have contributed code and many bug fixes (in alphabetical
-order):
+(jtklehto@paju.oulu.fi), Radek Doulik (rodo@ucw.cz), Fred Leeflang
+(fredl@nebula.ow.org), Dugan Porter (dugan@b011.eunet.es), Jakub Jelinek
+(jj@sunsite.mff.cuni.cz), Ching Hui (mr854307@cs.nthu.edu.tw), Andrej
+Borsenkow (borsenkow.msk@sni.de), Norbert Warmuth
+(nwarmuth@privat.circular.de), Mauricio Plaza
+(mok@roxanne.nuclecu.unam.mx), Paul Sheer (psheer@icon.co.za), Pavel
+Machek (pavel@ucw.cz) and Pavel Roskin (proski@gnu.org) are the
+developers of this package.  Alessandro Rubini (rubini@ipvvis.unipv.it)
+has been especially helpful debugging and enhancing the program's mouse
+support, John Davis (davis@space.mit.edu) also made his S-Lang library
+available to us under the GPL and answered my questions about it, and
+the following people have contributed code and many bug fixes (in
+alphabetical order):
 .PP
-Adam Tla/lka (atlka@sunrise.pg.gda.pl),
-alex@bcs.zp.ua (Alex I. Tkachenko), Antonio Palama,
-DOS port (palama@posso.dm.unipi.it), Erwin van Eijk
-(wabbit@corner.iaf.nl), Gerd Knorr (kraxel@cs.tu-berlin.de),
+Adam Tla/lka (atlka@sunrise.pg.gda.pl), alex@bcs.zp.ua (Alex I.
+Tkachenko), Antonio Palama, DOS port (palama@posso.dm.unipi.it), Erwin
+van Eijk (wabbit@corner.iaf.nl), Gerd Knorr (kraxel@cs.tu-berlin.de),
 Jean-Daniel Luiset (luiset@cih.hcuge.ch), Jon Stevens
 (root@dolphin.csudh.edu), Juan Francisco Grigera, Win32 port
 (j-grigera@usa.net), Juan Jose Ciarlante (jjciarla@raiz.uncu.edu.ar),
@@ -3305,8 +3298,8 @@ Sergey Ya. Korshunoff (root@seyko.msk.su), Thomas Pundt
 and Wim Osterholt (wim@djo.wtm.tudelft.nl).
 .\"NODE "BUGS"
 .SH "BUGS"
-See the file TODO in the distribution for information on what
-remains to be done.
+See the file TODO in the distribution for information on what remains to
+be done.
 .PP
 If you want to report a problem with the program, please send mail to
 this address: mc-devel@gnome.org.
