@@ -118,3 +118,19 @@ distcopy:
 
 dist: configure config.h.in distcopy
 
+check:
+	tar xzvf ../mc-$(VERSION)
+	cd mc-$(VERSION)
+	mkdir =build
+	mkdir =install
+	cd =build
+	../configure --prefix=../=install
+	make
+	make install
+	echo 
+
+distcheck: dist check
+	@echo ***********************************
+	@echo mc-$(VERSION) is ready for release
+	@echo ***********************************
+
