@@ -66,8 +66,8 @@ void slang_set_raw_mode (void);
 #define ungetch(x) SLang_ungetkey(x)
 #define start_color()
 #define touchwin(x) SLsmg_touch_lines(0, LINES)
-#define reset_shell_mode slang_shell_mode
-#define reset_prog_mode slang_prog_mode
+#define reset_shell_mode() slang_shell_mode()
+#define reset_prog_mode() slang_prog_mode()
 #define flushinp()
 
 void slint_goto (int y, int x);
@@ -83,25 +83,17 @@ void slang_keypad (int set);
 void slang_shell_mode (void);
 void slang_shutdown (void);
 int has_colors (void);
-
-/* FIXME Clean up this; gnome has nothing to do here */
-#ifndef HAVE_GNOME
 void init_pair (int, char *, char *);
-#endif
 
 /* copied from slcurses.h (MC version 4.0.7) */
-#define move SLsmg_gotorc
-#define clreol SLsmg_erase_eol
+#define move(x, y) SLsmg_gotorc(x, y)
 #define printw SLsmg_printf
 #define mvprintw(x, y, z) SLsmg_gotorc(x, y); SLsmg_printf(z)
 #define COLS SLtt_Screen_Cols
 #define LINES SLtt_Screen_Rows
-#define clrtobot SLsmg_erase_eos
-#define clrtoeol SLsmg_erase_eol
-#define standout SLsmg_reverse_video
-#define standend  SLsmg_normal_video
-#define addch SLsmg_write_char
-#define addstr SLsmg_write_string
+#define standend() SLsmg_normal_video()
+#define addch(c) SLsmg_write_char(c)
+#define addstr(s) SLsmg_write_string(s)
 #define initscr() do { extern int force_ugly_line_drawing; \
 	     extern int SLtt_Has_Alt_Charset; \
 	     SLtt_get_terminfo (); \
@@ -109,13 +101,9 @@ void init_pair (int, char *, char *);
 		SLtt_Has_Alt_Charset = 0; \
              SLsmg_init_smg (); \
           } while(0)
-#define refresh SLsmg_refresh
-#define clear SLsmg_cls
-#define erase SLsmg_cls
+#define refresh() SLsmg_refresh()
 #define mvaddstr(y, x, s) SLsmg_gotorc(y, x); SLsmg_write_string(s)
-#define touchline SLsmg_touch_lines
-#define inch SLsmg_char_at
-#define endwin SLsmg_reset_smg
+#define endwin() SLsmg_reset_smg()
 
 #define SLsmg_draw_double_box(r,c,dr,dc) SLsmg_draw_box ((r), (c), (dr), (dc))
 
@@ -132,4 +120,4 @@ void init_pair (int, char *, char *);
 
 void enable_interrupt_key (void);
 void disable_interrupt_key (void);
-#endif
+#endif /* !__MYSLANG_H */

@@ -1,5 +1,8 @@
 2001-09-07  Pavel Roskin  <proski@gnu.org>
 
+	* myslang.h: Specify arguments to function-like macros or remove
+	them if they are unused.
+
 	* main.c: Remove old debugging code.  Remove external function
 	declarations.
 	(menu_bar_event): Remove, it's unused.
