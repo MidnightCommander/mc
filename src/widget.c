@@ -958,7 +958,7 @@ show_hist (GList *history, int widget_x, int widget_y)
 
     query_dlg =
 	create_dlg (y, x, h, w, dialog_colors, NULL, "[History-query]",
-		    i18n_htitle (), DLG_COMPACT);
+		    i18n_htitle (), DLG_COMPACT | DLG_REVERSE);
     query_list = listbox_new (1, 1, w - 2, h - 2, 0);
     add_widget (query_dlg, query_list);
     hi = z;

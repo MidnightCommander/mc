@@ -213,7 +213,7 @@ file_op_context_create_ui (FileOpContext *ctx, FileOperation op,
     x_size = (WX + 4) + ui->eta_extra;
 
     ui->op_dlg = create_dlg (0, 0, WY - minus + 4, x_size, dialog_colors,
-			     NULL, NULL, op_names[op], DLG_CENTER);
+			     NULL, NULL, op_names[op], DLG_CENTER | DLG_REVERSE);
 
     last_hint_line = the_hint->widget.y;
     if ((ui->op_dlg->y + ui->op_dlg->lines) > last_hint_line)
@@ -625,7 +625,7 @@ init_replace (FileOpContext *ctx, enum OperationMode mode)
     /* FIXME - missing help node */
     ui->replace_dlg =
 	create_dlg (0, 0, 16, rd_xlen, alarm_colors, NULL, "[Replace]",
-		    title, DLG_CENTER);
+		    title, DLG_CENTER | DLG_REVERSE);
 
 
     ADD_RD_LABEL (ui, 0,

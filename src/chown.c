@@ -157,7 +157,7 @@ init_chown (void)
 
     ch_dlg =
 	create_dlg (0, 0, 18, 74, dialog_colors, chown_callback, "[Chown]",
-		    _(" Chown command "), DLG_CENTER);
+		    _(" Chown command "), DLG_CENTER | DLG_REVERSE);
 
     for (i = 0; i < BUTTONS - single_set; i++)
 	add_widget (ch_dlg,

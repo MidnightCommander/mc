@@ -1757,7 +1757,7 @@ do_nc (void)
 
     midnight_dlg =
 	create_dlg (0, 0, LINES, COLS, midnight_colors, midnight_callback,
-		    "[main]", NULL, DLG_HAS_MENUBAR | DLG_WANT_IDLE);
+		    "[main]", NULL, DLG_HAS_MENUBAR | DLG_WANT_IDLE | DLG_REVERSE);
 
     /* Check if we were invoked as an editor or file viewer */
     if (mc_maybe_editor_or_viewer ())

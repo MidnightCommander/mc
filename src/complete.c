@@ -977,7 +977,7 @@ complete_engine (WInput *in, int what_to_do)
 	    query_width  = w;
     	    query_dlg = create_dlg (y, x, query_height, query_width,
 				    dialog_colors, query_callback,
-				    "[Completion]", NULL, DLG_COMPACT);
+				    "[Completion]", NULL, DLG_COMPACT | DLG_REVERSE);
     	    query_list = listbox_new (1, 1, w - 2, h - 2, NULL);
     	    add_widget (query_dlg, query_list);
     	    for (p = in->completions + 1; *p; p++)

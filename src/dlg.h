@@ -135,7 +135,7 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 
 /* The flags: */
 #define DLG_WANT_IDLE   64	/* Dialog wants idle events */
-#define DLG_BACKWARD    32	/* Tab order is reverse to the index order */
+#define DLG_REVERSE     32	/* Tab order is opposite to the add order */
 #define DLG_WANT_TAB    16	/* Should the tab key be sent to the dialog? */
 #define DLG_HAS_MENUBAR  8	/* GrossHack: Send events on row 1 to a menubar? */
 #define DLG_COMPACT      4	/* Suppress spaces around the frame */

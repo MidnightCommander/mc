@@ -1,5 +1,9 @@
 2003-09-12  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.h: Replace DLG_BACKWARD to DLG_REVERSE with a better
+	defined meaning.  Make it default to populate dialogs from the
+	top.  Change all calls to create_dlg().
+
 	* dlg.c: DLG_BACKWARD now affects how the dialog is populated by
 	widgets, not the runtime behavior.
 	(init_dlg): Don't change current widget.  This allows using

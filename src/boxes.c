@@ -180,7 +180,7 @@ display_init (int radio_sel, char *init_text, int _check_status,
     }
     dd = create_dlg (0, 0, DISPLAY_Y, DISPLAY_X, dialog_colors,
 		     display_callback, "[Listing Mode...]", display_title,
-		     DLG_CENTER);
+		     DLG_CENTER | DLG_REVERSE);
 
     add_widget (dd,
 		button_new (4, button_start, B_CANCEL, NORMAL_BUTTON,
@@ -324,7 +324,7 @@ sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive)
 	}
 
     dd = create_dlg (0, 0, SORT_Y, SORT_X, dialog_colors, NULL,
-		     "[Sort Order...]", sort_title, DLG_CENTER);
+		     "[Sort Order...]", sort_title, DLG_CENTER | DLG_REVERSE);
 
     add_widget (dd,
 		button_new (10, button_pos, B_CANCEL, NORMAL_BUTTON,
@@ -571,7 +571,7 @@ init_disp_bits_box (void)
 
     dbits_dlg =
 	create_dlg (0, 0, DISPY, DISPX, dialog_colors, NULL,
-		    "[Display bits]", _(" Display bits "), DLG_CENTER);
+		    "[Display bits]", _(" Display bits "), DLG_CENTER | DLG_REVERSE);
 
     add_widget (dbits_dlg,
 		label_new (3, 4, _("Input / display codepage:")));
@@ -666,7 +666,7 @@ tree_box (char *current_dir)
 
     /* Create the components */
     dlg = create_dlg (0, 0, TREE_Y, TREE_X, dialog_colors,
-		      tree_callback, "[Directory Tree]", NULL, DLG_CENTER);
+		      tree_callback, "[Directory Tree]", NULL, DLG_CENTER | DLG_REVERSE);
     mytree = tree_new (0, 2, 2, TREE_Y - 6, TREE_X - 5);
     add_widget (dlg, mytree);
     bar = buttonbar_new(1);
@@ -978,7 +978,7 @@ jobs_cmd (void)
 
     jobs_dlg = create_dlg (0, 0, JOBS_Y, JOBS_X, dialog_colors, NULL,
 			   "[Background jobs]", _("Background Jobs"),
-			   DLG_CENTER);
+			   DLG_CENTER | DLG_REVERSE);
 
     bg_list = listbox_new (2, 3, JOBS_X-7, JOBS_Y-9, 0);
     add_widget (jobs_dlg, bg_list);
@@ -1062,7 +1062,7 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
     title = g_strdup_printf (_("Password for \\\\%s\\%s"), host, share);
 
     auth_dlg = create_dlg (0, 0, dialog_y, dialog_x, dialog_colors, NULL,
-			   "[Smb Authinfo]", title, DLG_CENTER);
+			   "[Smb Authinfo]", title, DLG_CENTER | DLG_REVERSE);
 
     g_free (title);
 

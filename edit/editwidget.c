@@ -187,7 +187,7 @@ edit (const char *_file, int line)
     /* Create a new dialog and add it widgets to it */
     edit_dlg =
 	create_dlg (0, 0, LINES, COLS, NULL, edit_dialog_callback,
-		    "[Internal File Editor]", NULL, DLG_WANT_TAB);
+		    "[Internal File Editor]", NULL, DLG_WANT_TAB | DLG_REVERSE);
 
     init_widget (&(wedit->widget), 0, 0, LINES - 1, COLS,
 		 (callback_fn) edit_callback,

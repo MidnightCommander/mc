@@ -421,7 +421,7 @@ init_layout (void)
     layout_dlg =
 	create_dlg (0, 0, 15, first_width + second_width + 9,
 		    dialog_colors, layout_callback, "[Layout]",
-		    _("Layout"), DLG_CENTER);
+		    _("Layout"), DLG_CENTER | DLG_REVERSE);
 
     add_widget (layout_dlg, groupbox_new (4, 2, first_width, 6, title1));
     add_widget (layout_dlg, groupbox_new (4, 8, first_width, 4, title2));

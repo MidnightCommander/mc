@@ -262,7 +262,7 @@ add_widget (Dlg_head *h, void *w)
 	h->first = new_item;
     }
 
-    if (!(h->flags & DLG_BACKWARD) || !h->current)
+    if ((h->flags & DLG_REVERSE) || !h->current)
 	h->current = new_item;
 
     return new_item->dlg_id;

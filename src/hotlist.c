@@ -614,7 +614,7 @@ init_hotlist (int list_type)
 
     hotlist_dlg =
 	create_dlg (0, 0, LINES - 2, hotlist_cols, dialog_colors,
-		    hotlist_callback, help_node, title, DLG_CENTER);
+		    hotlist_callback, help_node, title, DLG_CENTER | DLG_REVERSE);
 
     for (i = 0; i < BUTTONS; i++) {
 	if (hotlist_but[i].type & list_type)
@@ -671,7 +671,7 @@ init_movelist (int list_type, struct hotlist *item)
 
     movelist_dlg =
 	create_dlg (0, 0, LINES - 6, movelist_cols, dialog_colors,
-		    hotlist_callback, "[Hotlist]", hdr, DLG_CENTER);
+		    hotlist_callback, "[Hotlist]", hdr, DLG_CENTER | DLG_REVERSE);
     g_free (hdr);
 
     for (i = 0; i < BUTTONS; i++) {

@@ -792,7 +792,7 @@ interactive_display (char *filename, char *node)
     whelp =
 	create_dlg (0, 0, help_lines + 4, HELP_WINDOW_WIDTH + 4,
 		    dialog_colors, help_callback, "[Help]", _("Help"),
-		    DLG_TRYUP | DLG_CENTER | DLG_WANT_TAB);
+		    DLG_TRYUP | DLG_CENTER | DLG_WANT_TAB | DLG_REVERSE);
 
     selected_item = search_string_node (main_node, STRING_LINK_START) - 1;
     currentpoint = startpoint = main_node + 1;

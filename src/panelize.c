@@ -153,7 +153,7 @@ init_panelize (void)
     panelize_dlg =
 	create_dlg (0, 0, 22, panelize_cols, dialog_colors,
 		    panelize_callback, "[External panelize]",
-		    _("External panelize"), DLG_CENTER);
+		    _("External panelize"), DLG_CENTER | DLG_REVERSE);
 
     for (i = 0; i < BUTTONS; i++)
 	add_widget (panelize_dlg,

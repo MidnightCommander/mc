@@ -256,7 +256,7 @@ do_enter_key (Dlg_head * h, int f_pos)
 
 	chl_dlg =
 	    create_dlg (lyy, lxx, 13, 17, dialog_colors, chl_callback,
-			"[Advanced Chown]", title, DLG_COMPACT);
+			"[Advanced Chown]", title, DLG_COMPACT | DLG_REVERSE);
 
 	/* get new listboxes */
 	chl_list = listbox_new (1, 1, 15, 11, NULL);
@@ -548,7 +548,7 @@ init_chown_advanced (void)
     ch_dlg =
 	create_dlg (0, 0, 13, 74, dialog_colors, advanced_chown_callback,
 		    "[Advanced Chown]", _(" Chown advanced command "),
-		    DLG_CENTER);
+		    DLG_CENTER | DLG_REVERSE);
 
 #define XTRACT(i) BY+chown_advanced_but[i].y, BX+chown_advanced_but[i].x, \
 	chown_advanced_but[i].ret_cmd, chown_advanced_but[i].flags, \

@@ -168,7 +168,7 @@ init_configure (void)
 	create_dlg (0, 0, DLG_Y,
 		    first_width + second_width + 2 * X_MARGIN + X_PANE_GAP,
 		    dialog_colors, NULL, "[Configuration]",
-		    _("Configure options"), DLG_CENTER);
+		    _("Configure options"), DLG_CENTER | DLG_REVERSE);
 
     add_widget (conf_dlg,
 		groupbox_new (PX, PY, first_width, PANEL_OPTIONS + 2, title1));

@@ -550,7 +550,7 @@ edit_raw_key_query (char *heading, char *query, int cancel)
     struct Dlg_head *raw_dlg =
 	create_dlg (0, 0, 7, w, dialog_colors, raw_callback,
 		    NULL, heading,
-		    DLG_CENTER | DLG_TRYUP | DLG_WANT_TAB);
+		    DLG_CENTER | DLG_TRYUP | DLG_WANT_TAB | DLG_REVERSE);
     if (cancel)
 	add_widget (raw_dlg,
 		    button_new (4, w / 2 - 5, B_CANCEL, NORMAL_BUTTON,
@@ -2756,7 +2756,7 @@ edit_completion_dialog (WEdit *edit, int max_len, int word_len,
     compl_dlg =
 	create_dlg (start_y, start_x, compl_dlg_h, compl_dlg_w,
 		    dialog_colors, NULL, "[Completion]", NULL,
-		    DLG_COMPACT);
+		    DLG_COMPACT | DLG_REVERSE);
 
     /* create the listbox */
     compl_list =
