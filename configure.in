@@ -24,9 +24,6 @@ dnl We reset it back soon.
 CCOPTS="$CFLAGS"
 unset CFLAGS
 
-dnl Find out, if we should default to /usr/local or /usr
-AC_PREFIX_PROGRAM(mc)
-
 AC_PROG_MAKE_SET
 AC_PROG_CC
 AC_PROG_CPP

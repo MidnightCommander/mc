@@ -1,3 +1,7 @@
+1999-02-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* configure.in (CCOPTS): Drop the prefix auto-detection.  
+
 Wed Feb 10 02:48:51 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* configure.in: Add check, which, in case of system-installed SLang

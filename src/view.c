@@ -1421,6 +1421,14 @@ search_update_steps (WView *view)
 	update_steps = 20000;
 }
 
+#ifdef HAVE_GNOME
+static void
+cancel_pressed (GtkWidget *widget, int *abort)
+{
+	*abort = 1;
+}
+#endif
+
 static void
 search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
 {
@@ -1432,7 +1440,9 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
     int found_len, search_start;
     Dlg_head *d = 0;
     int search_status;
-
+    int abort;
+    void *gd;
+    
     /* Used to keep track of where the line starts, when looking forward */
     /* is the index before transfering the line; the reverse case uses   */
     /* the position returned after the line has been read */
@@ -1441,11 +1451,21 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
     long t;
     /* Clear interrupt status */
     got_interrupt ();
-    
+
+    abort = 0;
+#ifdef HAVE_GNOME
+    gd = gnome_message_box_new (_("Searching for `%s'"),
+				GNOME_MESSAGE_BOX_INFO,
+				GNOME_STOCK_BUTTON_CANCEL,
+				NULL);
+    gnome_dialog_button_connect (GNOME_DIALOG (gd), 0, GTK_SIGNAL_FUNC (cancel_pressed), &abort);
+    gtk_widget_show (gd);
+#else
     if (verbose){
 	d = message (D_INSERT, _(" Search "), _("Searching %s"), text);
 	mc_refresh ();
     }
+#endif
     ch = 0;
     if (view->direction == 1){
 	p = view->found_len ? view->search_start + 1 : view->search_start;
@@ -1468,8 +1488,13 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
 
 	if ((count++ % 32) == 0)
 	    x_flush_events ();
+#ifdef HAVE_GNOME
+	if (abort)
+	    break;
+#else
 	if (verbose && !d->running)
 	    break;
+#endif
 #endif
 	if (p >= update_activate){
 	    update_activate += update_steps;
@@ -1527,11 +1552,14 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
 	break;
     }
     disable_interrupt_key ();
+#ifdef HAVE_GNOME
+    gtk_object_destroy (GTK_OBJECT (gd));
+#else
     if (verbose){
 	dlg_run_done (d);
 	destroy_dlg (d);
     }
-
+#endif
     if (!s){
 	message (0, _(" Search "), _(" Search string not found "));
 	view->found_len = 0;
