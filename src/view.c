@@ -1330,7 +1330,7 @@ move_backward2 (WView *view, offset_type current, int lines)
 	while (lines > 0) {
             if (current > view->first)
                 current--;
-                lines--;
+            lines--;
             while (current > view->first && get_byte(view, current - 1) != '\n')
                 current--;
         }
