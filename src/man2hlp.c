@@ -36,6 +36,7 @@ static int skip_flag = 0;	/* Flag: Skip this section.
 				   2 = title skipped, skipping text */
 static int link_flag = 0;	/* Flag: Next line is a link */
 static int verbatim_flag = 0;	/* Flag: Copy input to output verbatim */
+static int node = 0;		/* Flag: This line is an original ".SH" */
 
 /* Report error in input */
 static void print_error (char *message)
@@ -134,7 +135,7 @@ static void print_string (char *buffer)
 		/* Attempt to handle backslash quoting */
 		while (*(buffer))
 		{
-		    c = *buffer;
+		    c = *buffer++;
 		    if (c == '\\' && !backslash_flag){
 			backslash_flag = 1;
 			continue;
@@ -170,7 +171,8 @@ static void handle_command (char *buffer)
 
     /* Get the command name */
     strtok (buffer, " \t");
-    if (strcmp (buffer, ".SH") == 0){
+    if ((strcmp (buffer, ".SH") == 0) || (strcmp (buffer, ".\\\"NODE") == 0)){
+	int SH = (strcmp (buffer, ".SH") == 0);
 	/* If we already skipped a section, don't skip another */
 	if (skip_flag == 2){
 	    skip_flag = 0;
@@ -210,15 +212,20 @@ static void handle_command (char *buffer)
 		skip_flag = 2;
 	    }
 	    else {
+		if (!SH || !node){
 		/* Start a new section */
-		printf ("%c[%s]", CHAR_NODE_END, buffer);
-		col ++;
-		newline ();
-		print_string (buffer + heading_level);
-		newline ();
-		newline ();
+		    printf ("%c[%s]", CHAR_NODE_END, buffer);
+		    col ++;
+		    newline ();
+		}
+		if (SH){
+		    print_string (buffer + heading_level);
+		    newline ();
+		    newline ();
+		}
 	    } /* Start new section */
 	} /* Has parameters */
+	node = !SH;
     } /* Command .SH */
     else if (strcmp (buffer, ".\\\"DONT_SPLIT\"") == 0){
 	no_split_flag = 1;

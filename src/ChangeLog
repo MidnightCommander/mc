@@ -2,6 +2,8 @@
 
 	* man2hlp.c (main): Don't crash if called without argument(s).
 	Make buffer char pointer.
+	(handle_command): Handle '.\"NODE' comment.  Use it for
+	nodename in translated manual pages.
 
 	* find.c (find_parameters): Compile content_pattern here.
 	Inform user about malformed regular expression.
