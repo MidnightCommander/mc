@@ -21,7 +21,8 @@ Requirements
 ------------
 
 To compile the GNU Midnight Commander you need at least to have a copy
-of the GLib library, available at ftp://ftp.gtk.org/pub/gtk/.
+of the GLib library, available at ftp://ftp.gtk.org/pub/gtk/v1.2/
+Use only glib 1.2.x - newer and older versions are not supported!
 
 
 Features
