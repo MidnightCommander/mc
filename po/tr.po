@@ -4,36 +4,36 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.5.51\n"
-"POT-Creation-Date: 2000-07-28 23:03+0200\n"
-"PO-Revision-Date: 2000-07-29 13:45+0200\n"
+"Project-Id-Version: mc 4.5.44\n"
+"POT-Creation-Date: 2000-04-18 12:46+0200\n"
+"PO-Revision-Date: 2000-04-18 12:55+0100\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-9\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: edit/edit_key_translator.c:126
+#: edit/edit_key_translator.c:124
 msgid " Emacs key: "
-msgstr " Emacs tuþu :"
+msgstr " Emacs tuþu: "
 
-#: edit/edit_key_translator.c:138 edit/edit_key_translator.c:153
+#: edit/edit_key_translator.c:136 edit/edit_key_translator.c:151
 msgid " Execute Macro "
-msgstr " Macro'yu çalýþtýr"
+msgstr " Makroyu Çalýþtýr "
 
 #. Input line for a single key press follows the ':'
-#: edit/edit_key_translator.c:138 edit/edit_key_translator.c:153
-#: gtkedit/editcmd.c:761 gtkedit/editcmd.c:770
+#: edit/edit_key_translator.c:136 edit/edit_key_translator.c:151
+#: gtkedit/editcmd.c:760 gtkedit/editcmd.c:769
 msgid " Press macro hotkey: "
-msgstr " Macro tuþuna bas :"
+msgstr " Makro tuþuna bas :"
 
-#: edit/edit_key_translator.c:149
+#: edit/edit_key_translator.c:147
 msgid " Insert Literal "
 msgstr " Harfi içer"
 
-#: edit/edit_key_translator.c:149
+#: edit/edit_key_translator.c:147
 msgid " Press any key: "
-msgstr " Istediðin tuþa bas :"
+msgstr " Bir tuþa basýn: "
 
 #: gnome/gaction.c:33
 #, c-format
@@ -46,7 +46,7 @@ msgstr ""
 "\"%s\"'i çalýþtýramadým .\n"
 "\n"
 "\n"
-"Lütfen verdiðin komutanýn geçerliliðin bir gözden geçir"
+"Lütfen verdiðiniz komutun geçerliliðini gözden geçirin."
 
 #: gnome/gaction.c:40
 #, c-format
@@ -71,8 +71,8 @@ msgid ""
 msgstr ""
 "\".\n"
 "\n"
-"Bu sorunu çümek için , dosya özelliklerini çaðýrýp \n"
-"%s için önayarlý eylemini deðiþtir ."
+"Bu sorunu gidermek için dosya özelliklerini çaðýrýp \n"
+"%s için öntanýmlý eylemini deðiþtirin"
 
 #: gnome/gaction.c:51
 #, c-format
@@ -84,7 +84,7 @@ msgid ""
 msgstr ""
 "%s yapamadým\n"
 "\"%s\"\n"
-"(bu komutayla) :\n"
+"(bu komutla) :\n"
 "\"%s\"%s"
 
 #: gnome/gaction.c:137 gnome/gaction.c:154
@@ -99,133 +99,125 @@ msgstr "edit"
 msgid "view"
 msgstr "view"
 
-#: gnome/gcmd.c:50
+#: gnome/gcmd.c:49
 msgid " There is no other panel to compare contents to "
-msgstr " Hiç karþýlaþtýralacak baþka panel yok ki"
+msgstr " Hiç karþýlaþtýralacak baþka panel yok"
 
-#: gnome/gcmd.c:86
-#, fuzzy
-msgid " Could not start a terminal "
-msgstr ""
-"%s'yi stat edemedim\n"
-"%s"
-
-#: gnome/gcmd.c:101
+#: gnome/gcmd.c:100
 msgid "The Midnight Commander Team"
-msgstr "Midnight Commander timi"
+msgstr "Midnight Commander Takýmý"
 
-#: gnome/gcmd.c:103
+#: gnome/gcmd.c:102
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
-msgstr ""
-"hata raporlarý sitesi: http://bugs.gnome.org ; istersen gnome-bug'ý kullan"
+msgstr "hata raporlarý sayfasý: http://bugs.gnome.org"
 
-#: gnome/gcmd.c:115
+#: gnome/gcmd.c:114
 msgid "GNU Midnight Commander"
 msgstr "GNU Midnight Commander"
 
-#: gnome/gcmd.c:118
+#: gnome/gcmd.c:117
 msgid "The GNOME edition of the Midnight Commander file manager."
-msgstr "Midnight Commander'in Gnome teþkili ."
+msgstr "Midnight Commander'in Gnome sürümü."
 
-#: gnome/gcmd.c:291
+#: gnome/gcmd.c:290
 msgid "Sort By"
 msgstr "Sýrala"
 
 #. we define this up here so we can pass it in to our callback
-#: gnome/gcmd.c:296
+#: gnome/gcmd.c:295
 msgid "Ignore case sensitivity."
 msgstr "Yazýlýþý gözardý et"
 
-#: gnome/gcmd.c:299
+#: gnome/gcmd.c:298
 msgid "Sort files by "
 msgstr "Dosyalarý sýrala"
 
-#: gnome/gcmd.c:304 gnome/gcustom-layout.c:41 src/chmod.c:150 src/screen.c:413
+#: gnome/gcmd.c:303 gnome/gcustom-layout.c:41 src/chmod.c:150 src/screen.c:413
 msgid "Name"
-msgstr "Ad :"
+msgstr "Ad"
 
-#: gnome/gcmd.c:311
+#: gnome/gcmd.c:310
 msgid "File Type"
-msgstr "Dosya tipi"
+msgstr "Dosya Tipi"
 
-#: gnome/gcmd.c:317 gnome/gcustom-layout.c:45 src/screen.c:414
+#: gnome/gcmd.c:316 gnome/gcustom-layout.c:45 src/screen.c:414
 #: src/screen.c:415
 msgid "Size"
 msgstr "Büyüklük"
 
-#: gnome/gcmd.c:323
+#: gnome/gcmd.c:322
 msgid "Time Last Accessed"
-msgstr "Son eriþim vakti"
+msgstr "Son Eriþim Tarihi"
 
-#: gnome/gcmd.c:329
+#: gnome/gcmd.c:328
 msgid "Time Last Modified"
-msgstr "Son deðiþim zamaný"
+msgstr "Son Düzenleme Tarihi"
 
-#: gnome/gcmd.c:335
+#: gnome/gcmd.c:334
 msgid "Time Last Changed"
-msgstr "Son deðiþim zamaný"
+msgstr "Son Deðiþtirilme Tarihi"
 
-#: gnome/gcmd.c:349
+#: gnome/gcmd.c:348
 msgid "Reverse the order."
-msgstr "Sýralamayý ters çevir ."
+msgstr "Sýralamayý ters çevir."
 
-#: gnome/gcmd.c:396
+#: gnome/gcmd.c:395
 msgid "Enter name."
-msgstr "Adý ver :"
+msgstr "Ýsim verin."
 
-#: gnome/gcmd.c:402
+#: gnome/gcmd.c:401
 msgid "Enter label for command:"
-msgstr "Komuta için yafta ver :"
+msgstr "Komut için etiket verin:"
 
-#: gnome/gcmd.c:507
+#: gnome/gcmd.c:506
 msgid "Find all core files"
-msgstr "Yekin 'kötük(core)' dosyalarý bul"
+msgstr "Tüm core dosyalarýný bul"
 
-#: gnome/gcmd.c:510 src/panelize.c:350
+#: gnome/gcmd.c:509 src/panelize.c:350
 msgid "Find rejects after patching"
-msgstr "'Patch' edildikten sonraki redleri ('reject') bul"
+msgstr "'Patch edildikten sonraki reject dosyalarýný bul"
 
-#: gnome/gcmd.c:555
+#: gnome/gcmd.c:554
 msgid "Run Command"
-msgstr "Komutayý çalýþtýr"
+msgstr "Komut Çalýþtýr"
 
 #. Frame 1
-#: gnome/gcmd.c:560
+#: gnome/gcmd.c:559
 msgid "Preset Commands"
-msgstr "Ayarlý komutalar"
+msgstr "Ayarlý Komutlar"
 
 #. add add/remove buttons in center
-#: gnome/gcmd.c:577 gnome/gcustom-layout.c:183
+#: gnome/gcmd.c:576 gnome/gcustom-layout.c:183
 msgid "Add"
 msgstr "Ekle"
 
-#: gnome/gcmd.c:581 gnome/gcustom-layout.c:184
+#: gnome/gcmd.c:580 gnome/gcustom-layout.c:184
 msgid "Remove"
 msgstr "Sil"
 
 #. Frame 2
-#: gnome/gcmd.c:589
+#: gnome/gcmd.c:588
 msgid "Run this Command"
-msgstr "Bu komutayý çalýþtýr"
+msgstr "Bu Komutu Çalýþtýr"
 
-#: gnome/gcmd.c:596
+#: gnome/gcmd.c:595
 msgid "Command: "
-msgstr "Komuta :"
+msgstr "Komut: "
 
-#: gnome/gcmd.c:716
+#: gnome/gcmd.c:674
 msgid "Set Filter"
-msgstr "Filtra kullan"
+msgstr "Filtre kullan"
 
-#: gnome/gcmd.c:721 gnome/gcmd.c:762 gnome/gcmd.c:767 gnome/gcmd.c:771
-#: gnome/gscreen.c:2449
+#: gnome/gcmd.c:679 gnome/gcmd.c:720 gnome/gcmd.c:725 gnome/gcmd.c:729
+#: gnome/gscreen.c:2429
 msgid "Show all files"
-msgstr "Yekin dosyalarý göster"
+msgstr "Tüm dosyalarý göster"
 
-#: gnome/gcmd.c:728
+#: gnome/gcmd.c:686
 msgid "."
 msgstr "."
 
-#: gnome/gcmd.c:744
+#: gnome/gcmd.c:702
 msgid ""
 "Enter a filter here for files in the panel view.\n"
 "\n"
@@ -237,27 +229,27 @@ msgstr ""
 "Mesela :\n"
 "*.png sadece png-resimlerini gösterir"
 
-#: gnome/gcmd.c:746
+#: gnome/gcmd.c:704
 msgid "Enter a Regular Expression to filter files in the panel view."
 msgstr "Panel bakýþýnýn filtrasýný bir tanýmlanmýþ tabir (regexp) olarak ver ."
 
-#: gnome/gcmd.c:806
+#: gnome/gcmd.c:764
 msgid " Open with..."
 msgstr " Farklý aç ..."
 
-#: gnome/gcmd.c:807
+#: gnome/gcmd.c:765
 msgid "Enter extra arguments:"
 msgstr "Eklenek argümanlarý ver :"
 
-#: gnome/gcmd.c:877
+#: gnome/gcmd.c:835
 msgid "Desktop entry properties"
 msgstr "Masaüstü birimi özellikleri"
 
-#: gnome/gcmd.c:903
+#: gnome/gcmd.c:861
 msgid "Select File"
 msgstr "Dosya seç"
 
-#: gnome/gcmd.c:911
+#: gnome/gcmd.c:869
 msgid ""
 "Enter a filter here to select files in the panel view with.\n"
 "\n"
@@ -269,20 +261,20 @@ msgstr ""
 "Mesela :\n"
 "*.png sadece png-resimlerini gösterir"
 
-#: gnome/gcmd.c:913
+#: gnome/gcmd.c:871
 msgid "Enter a regular expression here to select files in the panel view with."
 msgstr ""
 "Panel bakýþýnda dosya seçmek için bir tanýmlanmýþ tabir (regexp) olarak ver ."
 
-#: gnome/gcmd.c:959 src/cmd.c:540 src/cmd.c:591
+#: gnome/gcmd.c:917 src/cmd.c:543 src/cmd.c:594
 msgid "  Malformed regular expression  "
 msgstr " Yanlýþ bir tanýmlanm_iþ tabir"
 
-#: gnome/gcmd.c:1004
+#: gnome/gcmd.c:962
 msgid "Creating a desktop link"
 msgstr "Bir masaüsüt baðýný yapýyorum"
 
-#: gnome/gcmd.c:1005
+#: gnome/gcmd.c:963
 msgid "Enter the URL:"
 msgstr "Adresi ver :"
 
@@ -307,7 +299,7 @@ msgstr "Grup numarasý"
 
 #: gnome/gcustom-layout.c:38
 msgid "Inode Number"
-msgstr "Inode numarasý"
+msgstr "Inode Numarasý"
 
 #: gnome/gcustom-layout.c:39 src/achown.c:378
 msgid "Mode"
@@ -325,7 +317,7 @@ msgstr "Sert baðlarýn sayýsý"
 #: gnome/gcustom-layout.c:43 gnome/gnome-file-property-dialog.c:942
 #: gnome/gprop.c:390 src/screen.c:426
 msgid "Owner"
-msgstr "Iye"
+msgstr "Sahibi"
 
 #: gnome/gcustom-layout.c:44 src/screen.c:420
 msgid "Permission"
@@ -355,28 +347,28 @@ msgstr "Gösterilen sütunlar"
 msgid "Custom View"
 msgstr "Özelleþmiþ bakýþ"
 
-#: gnome/gdesktop.c:629 gnome/gmount.c:382
+#: gnome/gdesktop.c:532 gnome/gmount.c:382
 msgid "Warning"
-msgstr "Ikaz"
+msgstr "Uyarý"
 
-#: gnome/gdesktop.c:630
+#: gnome/gdesktop.c:533
 #, c-format
 msgid "Could not open %s; will not have desktop icons"
-msgstr "%s'yi açamadým ; masaüstü ikonalarýn olmayacak "
+msgstr "%s açýlamadý, masaüstü simgeleri olmayacak"
 
-#: gnome/gdesktop.c:1347
+#: gnome/gdesktop.c:1205
 msgid "While running the mount/umount command"
-msgstr "Mount/umount komutasýný çalýþtýrýrken"
+msgstr "Mount/umount komutu çalýþtýrýlýrken"
 
-#: gnome/gdesktop.c:1416
+#: gnome/gdesktop.c:1274
 msgid "While running the eject command"
-msgstr "Çýkar komutasýný çalýþtýrýken"
+msgstr "Çýkar komutu çalýþtýrýlýrken"
 
-#: gnome/gdesktop.c:1600 gnome/gicon.c:282 gnome/gtools.c:46
+#: gnome/gdesktop.c:1458 gnome/gicon.c:282 gnome/gtools.c:46
 msgid "Error"
 msgstr "Hata"
 
-#: gnome/gdesktop.c:2832
+#: gnome/gdesktop.c:2617
 msgid ""
 "Unable to locate the file:\n"
 "background-properties-capplet\n"
@@ -388,114 +380,106 @@ msgstr ""
 "background-properties-capplet\n"
 "uygulaðýný bulamadým .\n"
 "\n"
-"Ardalaný belirleyemeyeceðiz ."
+"Arkaplaný belirleyemeyeceðiz ."
 
-#: gnome/gdesktop.c:2861 gnome/glayout.c:362
+#: gnome/gdesktop.c:2640 gnome/glayout.c:362
 msgid "_Terminal"
-msgstr "Komu_ta"
+msgstr "_Terminal"
 
-#: gnome/gdesktop.c:2861 gnome/glayout.c:363
+#: gnome/gdesktop.c:2640 gnome/glayout.c:363
 msgid "Launch a new terminal in the current directory"
-msgstr "Geçerli dizinde bir komuta aç"
+msgstr "Geçerli dizinde bir terminal ekraný aç"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2863 gnome/glayout.c:365
+#: gnome/gdesktop.c:2642 gnome/glayout.c:365
 msgid "_Directory..."
-msgstr "_Dizin ..."
+msgstr "_Dizin..."
 
-#: gnome/gdesktop.c:2863 gnome/glayout.c:366
+#: gnome/gdesktop.c:2642 gnome/glayout.c:366
 msgid "Creates a new directory"
 msgstr "Yeni bir dizin yaratýr"
 
-#: gnome/gdesktop.c:2864
+#: gnome/gdesktop.c:2643
 msgid "URL L_ink..."
-msgstr "Adres _baðý ..."
+msgstr "URL baðý ..."
 
-#: gnome/gdesktop.c:2864
+#: gnome/gdesktop.c:2643
 msgid "Creates a new URL link"
-msgstr "Yeni bir adres badý yaratýr"
+msgstr "Yeni bir adres baðý yaratýr"
 
-#: gnome/gdesktop.c:2865
+#: gnome/gdesktop.c:2644
 msgid "_Launcher..."
 msgstr "_Baþlatýcý ..."
 
-#: gnome/gdesktop.c:2865
+#: gnome/gdesktop.c:2644
 msgid "Creates a new launcher"
 msgstr "Yeni bir baþlatýcý yaratýr"
 
-#: gnome/gdesktop.c:2871
+#: gnome/gdesktop.c:2650
 msgid "By _Name"
-msgstr "_Isme göre"
+msgstr "Ýsme _Göre"
 
-#: gnome/gdesktop.c:2872
+#: gnome/gdesktop.c:2651
 msgid "By File _Type"
-msgstr "_Tipe göre"
+msgstr "_Dosya Türüne Göre"
 
-#: gnome/gdesktop.c:2873
+#: gnome/gdesktop.c:2652
 msgid "By _Size"
-msgstr "_Boyuta göre"
+msgstr "_Büyüklüðüne Göre"
 
-#: gnome/gdesktop.c:2874
+#: gnome/gdesktop.c:2653
 msgid "By Time Last _Accessed"
-msgstr "_Son eriþim vaktine göre"
+msgstr "_Son Eriþim Tarihine Göre"
 
-#: gnome/gdesktop.c:2875
+#: gnome/gdesktop.c:2654
 msgid "By Time Last _Modified"
-msgstr "S_on deðiþitirilme vaktine göre"
+msgstr "_Son Düzeltme Tarihine Göre"
 
-#: gnome/gdesktop.c:2876
+#: gnome/gdesktop.c:2655
 msgid "By Time Last _Changed"
-msgstr "So_n deðiþim vaktine göre"
+msgstr "Son Deðiþtirme Tarihine Göre"
 
-#: gnome/gdesktop.c:2884 gnome/glayout.c:462
+#: gnome/gdesktop.c:2663 gnome/glayout.c:462
 msgid "_Arrange Icons"
-msgstr "Simgeleri _diz"
+msgstr "_Simgeleri Diz"
 
-#: gnome/gdesktop.c:2885
-msgid "_Tidy Icons"
-msgstr "Simgeleri _topla"
-
-#: gnome/gdesktop.c:2886
+#: gnome/gdesktop.c:2664
 msgid "Create _New Window"
-msgstr "Ye_ni pencere yarat"
+msgstr "Ye_ni Pencere Yarat"
 
-#: gnome/gdesktop.c:2888 gnome/glayout.c:464
+#: gnome/gdesktop.c:2666 gnome/glayout.c:464
 msgid "Rescan _Desktop Directory"
-msgstr "Masaüstü _dizini yeniden tara"
+msgstr "Masaüstü _Dizinini Yeniden Tara"
 
-#: gnome/gdesktop.c:2889 gnome/glayout.c:465
+#: gnome/gdesktop.c:2667 gnome/glayout.c:465
 msgid "Rescan De_vices"
-msgstr "Aygýtlarý yeniden _tara"
+msgstr "Aygýtlarý yeniden tara"
 
-#: gnome/gdesktop.c:2890 gnome/glayout.c:466
+#: gnome/gdesktop.c:2668 gnome/glayout.c:466
 msgid "Recreate Default _Icons"
-msgstr "Önayarlý simgeleri _yenile"
+msgstr "Öntanýmlý simgeleri yeniden yarat"
 
-#: gnome/gdesktop.c:2892
+#: gnome/gdesktop.c:2670
 msgid "Configure _Background Image"
-msgstr "Ardalaný _ayarla"
-
-#: gnome/gdesktop.c:2893
-msgid "Des_ktop Properties"
-msgstr "M_asaüstü özellikleri"
+msgstr "Arkaplan resmini ayarla"
 
 #. Icon position
 #: gnome/gdesktop-prefs.c:242
 msgid "Icon position"
-msgstr "Simge yeri"
+msgstr "Simgelerin yeri"
 
 #. Snap and placement
 #: gnome/gdesktop-prefs.c:258
 msgid "Automatic icon placement"
-msgstr "Otomatik ikona yerleþtirmesi"
+msgstr "Otomatik simge yerleþtirmesi"
 
 #: gnome/gdesktop-prefs.c:262
 msgid "Snap icons to grid"
-msgstr "Ikonalarý þebekede yakala"
+msgstr "Simgeleri ýzgara üzerinde yerleþtir"
 
 #: gnome/gdesktop-prefs.c:277
 msgid "Use shaped icons"
-msgstr "Gölgeli ikonalarý kullan"
+msgstr "Gölgeli simgeler kullan"
 
 #: gnome/gdesktop-prefs.c:281
 msgid "Use shaped text"
@@ -506,13 +490,13 @@ msgid "Desktop"
 msgstr "Masaüstü"
 
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop-init.c:146
+#: gnome/gdesktop-init.c:141
 msgid "Home directory"
 msgstr "Ev dizini"
 
 #: gnome/gdialogs.c:60
 msgid "To: "
-msgstr "Gönderilen :"
+msgstr "Kime: "
 
 #: gnome/gdialogs.c:61
 msgid "Copying from: "
@@ -520,11 +504,11 @@ msgstr "Kopyalanma yeri :"
 
 #: gnome/gdialogs.c:62
 msgid "Deleting file: "
-msgstr "Dosyayý siliyorum :"
+msgstr "Dosya siliniyor: "
 
 #: gnome/gdialogs.c:371
 msgid "Files Exist"
-msgstr "Dosya zaten var"
+msgstr "Olan Dosyalar"
 
 #: gnome/gdialogs.c:386
 msgid ""
@@ -544,19 +528,19 @@ msgstr "Hiç bir dosyanýn üstüne yazma ."
 
 #: gnome/gdialogs.c:422
 msgid "Overwrite:"
-msgstr "Üstüne yaz :"
+msgstr "Üstüne yaz:"
 
 #: gnome/gdialogs.c:429
 msgid "Older files."
-msgstr "Eskice olan dosyalar ."
+msgstr "Daha eski dosyalar"
 
 #: gnome/gdialogs.c:435
 msgid "Files only if size differs."
-msgstr "Sadece büyüklükleri deðiþik ise ."
+msgstr "Sadece büyüklükleri deðiþikse"
 
 #: gnome/gdialogs.c:441
 msgid "All files."
-msgstr "Yekin dosyalarý ."
+msgstr "Tüm dosyalar"
 
 #: gnome/gdialogs.c:481
 msgid "File Exists"
@@ -569,10 +553,10 @@ msgstr "%s hedef dosyasý zaten var "
 
 #: gnome/gdialogs.c:494
 msgid "Replace it?"
-msgstr "Yerine yazamayým mý ?"
+msgstr "Yerine yazýlsýn mý?"
 
 #: gnome/gdialogs.c:568 gtkedit/editwidget.c:1140 gtkedit/gtkedit.c:1250
-#: src/file.c:802 src/screen.c:2397 src/screen.c:2427 src/tree.c:1014
+#: src/file.c:802 src/screen.c:2399 src/screen.c:2429 src/tree.c:1014
 msgid "Copy"
 msgstr "Kopyala"
 
@@ -586,15 +570,15 @@ msgstr "Hedef"
 
 #: gnome/gdialogs.c:597
 msgid "Find Destination Folder"
-msgstr "Hedef dizini ara"
+msgstr "Hedef Dizini Ara"
 
 #: gnome/gdialogs.c:611
 msgid "Copy as a background process"
-msgstr "Ardalan iþlemi olarak kopyala"
+msgstr "Arkaplan süreci olarak kopyala"
 
 #: gnome/gdialogs.c:629
 msgid "Advanced Options"
-msgstr "Geliþmiþ ayarlar"
+msgstr "Geliþmiþ Ayarlar"
 
 #: gnome/gdialogs.c:633
 msgid "Preserve symlinks"
@@ -609,24 +593,23 @@ msgid ""
 "Selecting this will copy the files that symlinks point to instead of just "
 "copying the link."
 msgstr ""
-"Bunu seçersen , sadece baðlarýn yerine baðýn hedeflediði dosya "
-"dakopyalanýyor ."
+"Bunu seçersen, sadece baðlarýn yerine baðýn hedeflediði dosya kopyalanýr."
 
 #: gnome/gdialogs.c:654
 msgid "Preserve file attributes."
-msgstr "Dosya özelliklerini koru ."
+msgstr "Dosya özelliklerini koru"
 
 #: gnome/gdialogs.c:660
 msgid "Preserves the permissions and the UID/GID if possible"
-msgstr "Mümkün ise , eriþim haklarýný ve UID/GID'i koru"
+msgstr "Mümkün ise eriþim haklarýný ve UID/GID'i korur"
 
 #: gnome/gdialogs.c:666
 msgid "Recursively copy subdirectories."
-msgstr "Altdizinleri de kopyala ."
+msgstr "Altdizinleri de kopyala."
 
 #: gnome/gdialogs.c:673
 msgid "If set, this will copy the directories recursively"
-msgstr "Bunla dizinlerin altdizinleri de kopyalanýyor"
+msgstr "Altdizinler de kopyalanýr"
 
 #: gnome/gdialogs.c:780
 #, c-format
@@ -649,15 +632,15 @@ msgstr "Öbürküleri için de aynýsýný yap"
 
 #: gnome/gdialogs.c:877
 msgid "Move Progress"
-msgstr "Taþýma ilerlemesi"
+msgstr "Taþýma Ýþlemi"
 
 #: gnome/gdialogs.c:880
 msgid "Copy Progress"
-msgstr "Kopyalama ilerlemesi"
+msgstr "Kopyalama Ýþlemi"
 
 #: gnome/gdialogs.c:883
 msgid "Delete Progress"
-msgstr "Silme ilerlemesi"
+msgstr "Silme Ýþlemi"
 
 #: gnome/gdialogs.c:939
 msgid "File "
@@ -669,13 +652,13 @@ msgstr " "
 
 #: gnome/gdialogs.c:946
 msgid "done."
-msgstr " bitti ."
+msgstr "tamamlandý."
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
-#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1820
+#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1831
 msgid "Password:"
-msgstr "Parola :"
+msgstr "Parola:"
 
 #: gnome/gdialogs.c:1007
 msgid "Password"
@@ -684,19 +667,19 @@ msgstr "Parola"
 #. Create the dialog
 #: gnome/gdialogs.c:1039
 msgid "Symbolic Link"
-msgstr "\"Yumþak\" bað"
+msgstr "Sembolik bað"
 
 #: gnome/gdialogs.c:1055 src/boxes.c:803
 msgid "Existing filename (filename symlink will point to):"
-msgstr "Varolan dosya (yumþak baðýn hedefi ) :"
+msgstr "Varolan dosya (sembolik baðýn hedefi):"
 
 #: gnome/gdialogs.c:1069 src/boxes.c:801
 msgid "Symbolic link filename:"
-msgstr "Yumþak baðýn adý :"
+msgstr "Sembolik baðýn adý:"
 
 #: gnome/gdnd.c:53
 msgid "_Move here"
-msgstr "Buraya _taþý"
+msgstr "_Buraya taþý"
 
 #: gnome/gdnd.c:54
 msgid "_Copy here"
@@ -721,45 +704,44 @@ msgstr ""
 "%s"
 
 #: gnome/gicon.c:282
-#, fuzzy
 msgid "Default set of icons not found, check your installation"
-msgstr "Önayarlý ikonalar bulunamadý , lütfen yüklenimi gözden geçir"
+msgstr "Öntanýmlý simgeler bulunamadý, lütfen kurulumu gözden geçirin"
 
 #: gnome/glayout.c:41
 msgid "_Icon View"
-msgstr "_Ikona bakýþý"
+msgstr "_Simge Bakýþý"
 
 #: gnome/glayout.c:42 gnome/glayout.c:58
 msgid "Switch view to an icon display"
-msgstr "Bakýþý ikona gösteriþine deðiþtir"
+msgstr "Simge görüntüsü"
 
 #: gnome/glayout.c:44
 msgid "_Brief View"
-msgstr "_Brifing bakýþý"
+msgstr "_Kýsa Bakýþ"
 
 #: gnome/glayout.c:45 gnome/glayout.c:61
 msgid "Switch view to show just file name and type"
-msgstr "Bakýþý öyle deðiþtir ki, sýrf dosya adý ve tipi gözüksün"
+msgstr "Dosya adý ve türü görüntülenir"
 
 #: gnome/glayout.c:47
 msgid "_Detailed View"
-msgstr "Geliþmýþ bakýþ"
+msgstr "_Geliþmýþ Bakýþ"
 
 #: gnome/glayout.c:48 gnome/glayout.c:64
 msgid "Switch view to show detailed file statistics"
-msgstr "Bakýþý öyle deðiþtir ki, geliþmiþ dosya özellikleri görünsün"
+msgstr "Geliþmiþ dosya özellikleri görüntülenir"
 
 #: gnome/glayout.c:50
 msgid "_Custom View"
-msgstr "Özelleþtirilmiþ bakýþ"
+msgstr "Özel _Bakýþ"
 
 #: gnome/glayout.c:51 gnome/glayout.c:67
 msgid "Switch view to show user-defined statistics"
-msgstr "Bakýþý öyle deðiþtir ki, kullanýcýnýn özgü bilgilerini göster"
+msgstr "Kullanýcý bilgileri de görüntülenir"
 
 #: gnome/glayout.c:57
 msgid "Icons"
-msgstr "Ikonalar"
+msgstr "Simgeler"
 
 #: gnome/glayout.c:60
 msgid "Brief"
@@ -771,11 +753,11 @@ msgstr "Geliþmiþ"
 
 #: gnome/glayout.c:66
 msgid "Custom"
-msgstr "Özelleþmiþ"
+msgstr "Özel"
 
 #: gnome/glayout.c:302
 msgid "Enter command to run"
-msgstr "Çalýþtýrýcak komutayý ver"
+msgstr "Çalýþtýrýlacak komutu girin"
 
 #: gnome/glayout.c:315
 msgid ""
@@ -784,10 +766,10 @@ msgid ""
 "\n"
 "Are you sure you want to exit?"
 msgstr ""
-"Dosya yöneticisini bitirirsen , Gnome masaüstü yöneticisini de ayný\n"
-"anda bitirmiþ olacaðýn .\n"
+"Dosya yöneticisini kapatmaya karar verirseniz, \n"
+"GNOME masaüstü de kapatýlacaktýr.\n"
 "\n"
-"Çýkmaktan halen emin misin ?"
+"Emin misiniz?"
 
 #: gnome/glayout.c:327
 msgid ""
@@ -803,18 +785,18 @@ msgstr ""
 "Dosya veya masaüstü yöneticisini baþlatmak istiyorsan , bunu kolayca\n"
 "panelden çaðýrabilirsin veya UNIX `gmc` komutasýný çalýþtýrýrsýn\n"
 "\n"
-"Vallahi çýkmak için \"Oldu\" de veya iptal edip yöneticiyi kullan."
+"Çýkmak için \"Tamam\"a týklayýn, ya da iptal tuþuna basýn."
 
 #: gnome/glayout.c:367
 msgid "_File..."
-msgstr "Dosya ..."
+msgstr "_Dosya..."
 
 #: gnome/glayout.c:368
 msgid "Creates a new file in this directory"
 msgstr "Bu dizinde yeni bir dosya yarattýr"
 
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
-#: gnome/glayout.c:389 gnome/gscreen.c:2118
+#: gnome/glayout.c:389 gnome/gscreen.c:2098
 msgid "_Copy..."
 msgstr "_Kopyala..."
 
@@ -822,17 +804,17 @@ msgstr "_Kopyala..."
 msgid "Copy files"
 msgstr "Dosyalarý kopyala"
 
-#: gnome/glayout.c:390 gnome/gscreen.c:2119
+#: gnome/glayout.c:390 gnome/gscreen.c:2099
 msgid "_Delete..."
-msgstr "_Sil ..."
+msgstr "_Sil..."
 
 #: gnome/glayout.c:390
 msgid "Delete files"
 msgstr "Dosyalarý sil"
 
-#: gnome/glayout.c:391 gnome/gscreen.c:2120
+#: gnome/glayout.c:391 gnome/gscreen.c:2100
 msgid "_Move..."
-msgstr "_Taþý ..."
+msgstr "_Taþý..."
 
 #: gnome/glayout.c:391
 msgid "Rename or move files"
@@ -852,11 +834,11 @@ msgstr "Pencereyi kapat"
 
 #: gnome/glayout.c:395
 msgid "Closes this window"
-msgstr "Bu pencereyi kapat"
+msgstr "Bu pencereyi kapatýr"
 
 #: gnome/glayout.c:402
 msgid "Select _All"
-msgstr "_Hepsini seç"
+msgstr "_Tümünü Seç"
 
 #: gnome/glayout.c:402
 msgid "Select all files in the current Panel"
@@ -864,7 +846,7 @@ msgstr "Geçerli paneldeki yekin dosyalarý seç"
 
 #: gnome/glayout.c:404
 msgid "_Select Files..."
-msgstr "Dosyalarý _seç ..."
+msgstr "Dosyalarý _Seç ..."
 
 #: gnome/glayout.c:404
 msgid "Select a group of files"
@@ -872,13 +854,13 @@ msgstr "Bir dosya grubunu seç"
 
 #: gnome/glayout.c:405
 msgid "_Invert Selection"
-msgstr "Seçimi terse çev_ir"
+msgstr "_Seçimi Tersine Çevir"
 
 #: gnome/glayout.c:405
 msgid "Reverses the list of tagged files"
-msgstr "Iþaretlenmiþ dosyalrýn listesini terse çevirir"
+msgstr "Ýþaretlenmiþ dosyalarýn listesini terse çevirir"
 
-#: gnome/glayout.c:408 gtkedit/editwidget.c:1142 src/view.c:2085
+#: gnome/glayout.c:408 gtkedit/editwidget.c:1142 src/view.c:2088
 msgid "Search"
 msgstr "Ara"
 
@@ -886,9 +868,9 @@ msgstr "Ara"
 msgid "Search for a file in the current Panel"
 msgstr "Þu anki panelde bir dosya ara"
 
-#: gnome/glayout.c:411 gnome/gscreen.c:1428 gnome/gscreen.c:1439
+#: gnome/glayout.c:411 gnome/gscreen.c:1428
 msgid "_Rescan Directory"
-msgstr "Dizini yeniden ta_ra"
+msgstr "_Dizini Yeniden Tara"
 
 #: gnome/glayout.c:411
 msgid "Rescan the directory contents"
@@ -896,15 +878,15 @@ msgstr "Dizin içeriðini yeniden tara"
 
 #: gnome/glayout.c:421
 msgid "_Sort By..."
-msgstr "_Sýrala ..."
+msgstr "_Sýrala..."
 
 #: gnome/glayout.c:421
 msgid "Confirmation settings"
-msgstr "Sorgulama ayarlarý"
+msgstr "Onaylama ayarlarý"
 
 #: gnome/glayout.c:422
 msgid "_Filter View..."
-msgstr "_Filtra bakýþý"
+msgstr "_Filtre Bakýþý..."
 
 #: gnome/glayout.c:422
 msgid "Global option settings"
@@ -912,11 +894,11 @@ msgstr "Genel ayarlar"
 
 #: gnome/glayout.c:429
 msgid "_Find File..."
-msgstr "Bir dosya _bul ..."
+msgstr "_Dosya Bul..."
 
 #: gnome/glayout.c:429
 msgid "Locate files on disk"
-msgstr "Disk'te dosyalarýn yerini tespit et"
+msgstr "Diskte dosyalarý ara"
 
 #. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
 #: gnome/glayout.c:432
@@ -925,31 +907,31 @@ msgstr "Mim_e tiplerini deðiþtir ..."
 
 #: gnome/glayout.c:432
 msgid "Edits the MIME type bindings"
-msgstr "MIME tipleri baðlarýn_i deðiþtir"
+msgstr "MIME tipleri baðlarýn_ý deðiþtir"
 
 #: gnome/glayout.c:434
 msgid "_Run Command..."
-msgstr "Komutayý çalýþtý_r"
+msgstr "_Komut Çalýþtýr..."
 
 #: gnome/glayout.c:434
 msgid "Runs a command"
-msgstr "Bir komuta çalýþtýrýr"
+msgstr "Bir komut çalýþtýrýr"
 
 #: gnome/glayout.c:436
 msgid "_Run Command in panel..."
-msgstr "_Panelde bir komutayý çalýþtýr ..."
+msgstr "_Panelde komut çalýþtýr ..."
 
 #: gnome/glayout.c:436
 msgid "Run a command and put the results in a panel"
-msgstr "Bir komutayý çalýþtýr ve geri-verimi panelde göster"
+msgstr "Bir komutu çalýþtýr"
 
 #: gnome/glayout.c:446
 msgid "_Background jobs..."
-msgstr "_Ardalan iþlemleri ..."
+msgstr "_Arkaplan iþlemleri ..."
 
 #: gnome/glayout.c:446
 msgid "List of background operations"
-msgstr "Ardalan iþlemlerinin listeleri"
+msgstr "Arkaplan iþlem listesi"
 
 #: gnome/glayout.c:449
 msgid "Exit"
@@ -969,31 +951,31 @@ msgstr "Dizi_lim"
 
 #: gnome/glayout.c:475 gnome/glayout.c:486
 msgid "_Commands"
-msgstr "_Komutalar"
+msgstr "_Komutlar"
 
 #: gnome/glayout.c:476
 msgid "_Desktop"
-msgstr "_Masaüstü"
+msgstr "Masaüstü"
 
 #: gnome/glayout.c:477 gnome/glayout.c:487
 msgid "_Help"
-msgstr "_Yardým"
+msgstr "Yardým"
 
 #: gnome/glayout.c:627
 msgid "File/New/Directory..."
-msgstr "Dosya/Yeni/Dizin..."
+msgstr "Dosya/Yeni/Dizin"
 
-#: gnome/gmain.c:563
+#: gnome/gmain.c:554
 msgid ""
 "You are running the GNOME File Manager as root.\n"
 "\n"
 "As root, you can damage your system if you are not careful, and the GNOME "
 "File Manager will not stop you from doing it."
 msgstr ""
-"Gnome Dosya Yöneticisini 'root' olarak çalýþtýrýyorsun .\n"
+"Gnome Dosya Yöneticisini root olarak çalýþtýrýyorsunuz.\n"
 "\n"
-"'Root' olarak ( dikkatsiz veya kötü niyetli olduðun vakit ) yekin sistemi "
-"çökürtebilirsin ve Gnome Dosya Yöneticisi seni bundan korumayacaktýr ."
+"Root altýnda dikkatli olmamanýz halinde sisteme zarar verebilirsiniz. "
+"Bu durumda GNOME Dosya Yöneticisi sizi uyarmayacaktýr." 
 
 #: gnome/gmount.c:218
 msgid "Could not open the /etc/fstab file"
@@ -1002,28 +984,27 @@ msgstr "/etc/fstab dosyasýný açamadým"
 #: gnome/gmount.c:383
 #, c-format
 msgid "Could not symlink %s to %s; will not have such a desktop device icon."
-msgstr ""
-"%s'yi %s'ye badlayamadým ; öyle bir ahize ikonan masaüstünde olmayacaktýr."
+msgstr "%s'den %s'e sembolik bað yaratýlamadý."
 
 #: gnome/gmount.c:439
 #, c-format
 msgid "CD-ROM %d"
-msgstr "%d Cd-sürücüsü"
+msgstr "CD sürücüsü: %d"
 
 #: gnome/gmount.c:451
 #, c-format
 msgid "Floppy %d"
-msgstr "%d Floppy-sürücüsü"
+msgstr "Disket sürücüsü: %d"
 
 #: gnome/gmount.c:457
 #, c-format
 msgid "Disk %d"
-msgstr "%d Sabit disk"
+msgstr "Sabit disk: %d"
 
 #: gnome/gmount.c:462
 #, c-format
 msgid "NFS dir %s"
-msgstr "%s NFS dizini"
+msgstr "NFS dizini: %s"
 
 #: gnome/gmount.c:466
 #, c-format
@@ -1033,20 +1014,20 @@ msgstr "%d Aygýtý"
 #. we set the file part
 #: gnome/gnome-file-property-dialog.c:171
 msgid "Full Name: "
-msgstr "Tam adý :"
+msgstr "Tam Adý:"
 
 #: gnome/gnome-file-property-dialog.c:179
 msgid "File Name"
-msgstr "Dosya adý"
+msgstr "Dosya Adý"
 
 #: gnome/gnome-file-property-dialog.c:204
 #: gnome/gnome-file-property-dialog.c:210
 msgid "File Type: "
-msgstr "Dosya tipi : "
+msgstr "Dosya Tipi: "
 
 #: gnome/gnome-file-property-dialog.c:217
 msgid "File Type: Symbolic Link"
-msgstr "Dosya tipi : Yumþak bað"
+msgstr "Dosya tipi : Sembolik bað"
 
 #: gnome/gnome-file-property-dialog.c:222
 msgid "Target Name: INVALID LINK"
@@ -1054,27 +1035,27 @@ msgstr "Hedef adý : GEÇERSiZ BAÐ"
 
 #: gnome/gnome-file-property-dialog.c:225
 msgid "Target Name: "
-msgstr "Hedef adý : "
+msgstr "Hedef adý: "
 
 #: gnome/gnome-file-property-dialog.c:230
 msgid "File Type: Directory"
-msgstr "Dosya tipi : Dizin"
+msgstr "Dosya tipi: Dizin"
 
 #: gnome/gnome-file-property-dialog.c:232
 msgid "File Type: Character Device"
-msgstr "Dosya tipi : Harf ahizesi"
+msgstr "Dosya tipi: Karakter Aygýt"
 
 #: gnome/gnome-file-property-dialog.c:234
 msgid "File Type: Block Device"
-msgstr "Dosya tipi : Blok ahizesi"
+msgstr "Dosya tipi: Blok Aygit"
 
 #: gnome/gnome-file-property-dialog.c:236
 msgid "File Type: Socket"
-msgstr "Dosya tipi : Socket"
+msgstr "Dosya tipi: Soket"
 
 #: gnome/gnome-file-property-dialog.c:238
 msgid "File Type: FIFO"
-msgstr "Dosya tipi : \"Arabellekcik\""
+msgstr "Dosya tipi: FIFO"
 
 #: gnome/gnome-file-property-dialog.c:248
 #: gnome/gnome-file-property-dialog.c:252
@@ -1084,124 +1065,118 @@ msgstr "Dosya büyüklüðü : "
 
 #: gnome/gnome-file-property-dialog.c:248
 msgid " bytes"
-msgstr " byte"
+msgstr " bayt"
 
 #: gnome/gnome-file-property-dialog.c:252
 msgid " KBytes  ("
-msgstr " KByte ("
+msgstr " Kbayt ("
 
 #: gnome/gnome-file-property-dialog.c:253
 #: gnome/gnome-file-property-dialog.c:259
 msgid " bytes)"
-msgstr " byte)"
+msgstr " bayt)"
 
 #: gnome/gnome-file-property-dialog.c:258
 msgid " MBytes  ("
-msgstr " MByte ("
+msgstr " MBayt ("
 
 #: gnome/gnome-file-property-dialog.c:266
 msgid "File Size: N/A"
-msgstr "dosya büyüklüðü : Belirlenemedi"
+msgstr "Dosya büyüklüðü: Belirlenemedi"
 
 #: gnome/gnome-file-property-dialog.c:277
 msgid "File Created on: "
-msgstr "Dosyanýn yaratýlýþ tarihi : "
-
-#: gnome/gnome-file-property-dialog.c:281
-#: gnome/gnome-file-property-dialog.c:290
-#: gnome/gnome-file-property-dialog.c:299
-msgid "%a, %b %d %Y,  %I:%M:%S %p"
-msgstr ""
+msgstr "Dosyanýn Yaratýlma Tarihi: "
 
 #: gnome/gnome-file-property-dialog.c:286
 msgid "Last Modified on: "
-msgstr "Son deðiþim tarihi : "
+msgstr "Son Deðiþim tarihi: "
 
 #: gnome/gnome-file-property-dialog.c:295
 msgid "Last Accessed on: "
-msgstr "Son eriþim tarihi : "
+msgstr "Son Eriþim tarihi : "
 
 #: gnome/gnome-file-property-dialog.c:313
 msgid "URL:"
-msgstr "Adres :"
+msgstr "Adres:"
 
 #: gnome/gnome-file-property-dialog.c:320
 msgid "Caption:"
-msgstr "Üstyazý :"
+msgstr "Üstyazý:"
 
 #: gnome/gnome-file-property-dialog.c:397
 #: gnome/gnome-file-property-dialog.c:499
 msgid "Drop Action"
-msgstr "Býrakýlýþ eylemi"
+msgstr "Býrakýlma Eylemi"
 
 #: gnome/gnome-file-property-dialog.c:398
 msgid "Use default Drop Action options"
-msgstr "Önayarlý býrakma eylemini kullan"
+msgstr "Öntanýmlý býrakma eylemini kullan"
 
 #: gnome/gnome-file-property-dialog.c:413
-#: gnome/gnome-file-property-dialog.c:501 gnome/gpopup2.c:287
-#: src/screen.c:2395 src/screen.c:2425
+#: gnome/gnome-file-property-dialog.c:501 gnome/gpopup202.c:203
+#: src/screen.c:2397 src/screen.c:2427
 msgid "View"
 msgstr "Göster"
 
 #: gnome/gnome-file-property-dialog.c:414
 msgid "Use default View options"
-msgstr "Önayarlý gösterme ayarlarýný kullan"
+msgstr "Öntanýmlý izleme seçeneklerini kullan"
 
 #: gnome/gnome-file-property-dialog.c:449
 msgid "Select an Icon"
-msgstr "Bir ikona seç"
+msgstr "Bir simge seçin"
 
 #. we do open first
-#: gnome/gnome-file-property-dialog.c:479 gnome/gpopup2.c:278
+#: gnome/gnome-file-property-dialog.c:479 gnome/gpopup2.c:195
 msgid "Open"
 msgstr "Aç"
 
 #: gnome/gnome-file-property-dialog.c:489
 msgid "Use default Open action"
-msgstr "Önayarlý açma eylemi"
+msgstr "Öntanýmlý açma eylemi"
 
 #: gnome/gnome-file-property-dialog.c:512
 msgid "Use default Drop action"
-msgstr "Önayarlý býrakma eylemi"
+msgstr "Öntanýmlý býrakma eylemi"
 
 #: gnome/gnome-file-property-dialog.c:514
 msgid "Use default View action"
-msgstr "Önayarlý gösterme eylemi"
+msgstr "Öntanýmlý gösterme eylemi"
 
-#: gnome/gnome-file-property-dialog.c:523 gnome/gpopup2.c:289
-#: src/screen.c:2396 src/screen.c:2426 src/view.c:2081
+#: gnome/gnome-file-property-dialog.c:523 gnome/gpopup2.c:205
+#: src/screen.c:2398 src/screen.c:2428 src/view.c:2084
 msgid "Edit"
 msgstr "Deðiþtir"
 
 #: gnome/gnome-file-property-dialog.c:533
 msgid "Use default Edit action"
-msgstr "Önayarlý deðiþtirme eylemini kullan"
+msgstr "Öntanýmlý deðiþtirme eylemini kullan"
 
 #: gnome/gnome-file-property-dialog.c:587 gnome/gprop.c:521
 msgid "Icon"
-msgstr "Ikona"
+msgstr "Simge"
 
 #. We must be a file or a link to a file.
 #: gnome/gnome-file-property-dialog.c:621
 msgid "File Actions"
-msgstr "Dosya eylemleri"
+msgstr "Dosya Eylemleri"
 
 #: gnome/gnome-file-property-dialog.c:626
 msgid "Open action"
-msgstr "Açma eylemi"
+msgstr "Açma Eylemi"
 
 #: gnome/gnome-file-property-dialog.c:627
 msgid "Needs terminal to run"
-msgstr "Çalýþmasý için komuta lazým"
+msgstr "Çalýþmasý için komut gerekiyor"
 
 #: gnome/gnome-file-property-dialog.c:753
 msgid "File Permissions"
-msgstr "Eriþim haklarý"
+msgstr "Eriþim Haklarý"
 
 #: gnome/gnome-file-property-dialog.c:764 gnome/gprop.c:259
 msgid "Current mode: "
-msgstr "Þu anki haklar : "
+msgstr "Þu anki haklar: "
 
 #. Headings
 #: gnome/gnome-file-property-dialog.c:780 gnome/gprop.c:272
@@ -1223,7 +1198,7 @@ msgstr "Özel"
 #. Permissions
 #: gnome/gnome-file-property-dialog.c:787 gnome/gprop.c:279
 msgid "User"
-msgstr "Kullançiý"
+msgstr "Kullanýcý"
 
 #: gnome/gnome-file-property-dialog.c:789 gnome/gprop.c:281
 msgid "Other"
@@ -1249,7 +1224,7 @@ msgstr "<Tanýnmayan> (%d)"
 
 #: gnome/gnome-file-property-dialog.c:931
 msgid "File ownership"
-msgstr "Dosya iyeliði"
+msgstr "Dosya sahibi"
 
 #: gnome/gnome-file-property-dialog.c:1097
 msgid "URL"
@@ -1257,11 +1232,11 @@ msgstr "Adres"
 
 #: gnome/gnome-file-property-dialog.c:1100
 msgid "Statistics"
-msgstr "Istatistikler"
+msgstr "Ýstatistikler"
 
 #: gnome/gnome-file-property-dialog.c:1106
 msgid "Options"
-msgstr "Ayarlar"
+msgstr "Seçenekler"
 
 #: gnome/gnome-file-property-dialog.c:1109
 msgid "Permissions"
@@ -1274,24 +1249,24 @@ msgstr " Özellikler"
 #: gnome/gnome-file-property-dialog.c:1164
 #: gnome/gnome-file-property-dialog.c:1175
 msgid "You entered an invalid username"
-msgstr "Geçersiz bir kullanýcý verdin"
+msgstr "Geçersiz bir kullanýcý girildi"
 
 #: gnome/gnome-file-property-dialog.c:1220
 msgid "You must rename your file to something"
-msgstr "Yeniden adlandýrmak için yeni bir dosya dý vermek zorundasýn"
+msgstr "Yeniden adlandýrmak için yeni bir dosya adý vermek zorundasýnýz"
 
 #: gnome/gnome-file-property-dialog.c:1226
 msgid "You cannot rename a file to something containing a '/' character"
-msgstr "Bir dosya dý hiç ´/´ içermez"
+msgstr "Bir dosya adý / karakteri içermez"
 
 #: gnome/gnome-open-dialog.c:385
 #, c-format
 msgid "Select an application to open \"%s\" with."
-msgstr "\"%s\"'yi açacak uygulamayý belirle ."
+msgstr "\"%s\"'yi açacak uygulamayý belirleyin."
 
 #: gnome/gnome-open-dialog.c:395
 msgid "Select a file to run with"
-msgstr "Çalýþtýrýlcak dosyayý seç"
+msgstr "Çalýþtýrýlacak dosyayý seçin"
 
 #. the file tree
 #: gnome/gnome-open-dialog.c:406
@@ -1302,62 +1277,54 @@ msgstr "Uygulamalar"
 msgid "Program to run"
 msgstr "Çalýþtýrýlacak uygulama"
 
-#: gnome/gpopup2.c:280
+#: gnome/gpopup2.c:197
 msgid "Mount device"
-msgstr "Aygýtý ekle"
+msgstr "Aygýtý baðla"
 
-#: gnome/gpopup2.c:281
+#: gnome/gpopup2.c:198
 msgid "Unmount device"
-msgstr "Aygýtý ayýrt"
+msgstr "Aygýtý ayýr"
 
-#: gnome/gpopup2.c:282
+#: gnome/gpopup2.c:199
 msgid "Eject device"
-msgstr "Ahizeyi çýkar"
+msgstr "Aygýtý çýkar"
 
-#: gnome/gpopup2.c:283
-msgid "Empty Trash"
-msgstr "Çöp kutusunu boþalt"
-
-#: gnome/gpopup2.c:286
+#: gnome/gpopup2.c:202
 msgid "Open with..."
-msgstr "Farklý aç ..."
+msgstr "Birlikte aç ..."
 
-#: gnome/gpopup2.c:288
+#: gnome/gpopup2.c:204
 msgid "View Unfiltered"
-msgstr "filtrasýz bakýþ"
+msgstr "Filtresiz Bakýþ"
 
-#: gnome/gpopup2.c:291
+#: gnome/gpopup2.c:207
 msgid "Copy..."
-msgstr "Kopyala ..."
+msgstr "Kopyala..."
 
-#: gnome/gpopup2.c:292
-msgid "Move to Trash"
-msgstr "Çöp kutusuna taþý"
-
-#: gnome/gpopup2.c:293 gtkedit/editwidget.c:1143 src/screen.c:2400
-#: src/screen.c:2430
+#: gnome/gpopup2.c:208 gtkedit/editwidget.c:1143 src/screen.c:2402
+#: src/screen.c:2432
 msgid "Delete"
 msgstr "Sil"
 
-#: gnome/gpopup2.c:294
+#: gnome/gpopup2.c:209
 msgid "Move..."
 msgstr "Taþý ..."
 
-#: gnome/gpopup2.c:295
+#: gnome/gpopup2.c:210
 msgid "Hard Link..."
-msgstr "Bað ..."
+msgstr "Sabit Bað..."
 
-#: gnome/gpopup2.c:296
+#: gnome/gpopup2.c:211
 msgid "Symlink..."
-msgstr "Yumþak bað ..."
+msgstr "Sembolik bað ..."
 
-#: gnome/gpopup2.c:297
+#: gnome/gpopup2.c:212
 msgid "Edit Symlink..."
-msgstr "Yumþak baðý deðiþtir ..."
+msgstr "Sembolik Baðý Düzenle..."
 
-#: gnome/gpopup2.c:299
+#: gnome/gpopup2.c:214
 msgid "Properties..."
-msgstr "Özellikler ..."
+msgstr "Özellikler..."
 
 #: gnome/gprefs.c:92
 msgid "Show backup files"
@@ -1369,15 +1336,15 @@ msgstr "Gizli dosyalarý göster"
 
 #: gnome/gprefs.c:100
 msgid "Mix files and directories"
-msgstr "Dizinleri ve dosyalarý göster"
+msgstr "Dizinleri ve dosyalarý karýþtýr"
 
 #: gnome/gprefs.c:104
 msgid "Use shell patterns instead of regular expressions"
-msgstr "Tanýmlanmýþ tabirler yerine komuta teþkilini kullan"
+msgstr "Tanýmlanmýþ tabirler yerine komut teþkilini kullan"
 
 #: gnome/gprefs.c:108
 msgid "Determine file types from file content instead of extensions"
-msgstr "Dosya tiplerini soneklerden ziyade içeriklerinden belirle"
+msgstr "Dosyalarý uzantýlarý yerine dosya içeriðinden taný"
 
 #: gnome/gprefs.c:117
 msgid "Confirm when deleting file"
@@ -1413,7 +1380,7 @@ msgstr "Her zaman FTP ara belleðini kullan"
 
 #: gnome/gprefs.c:155
 msgid "Fast directory reload"
-msgstr "hýzlý dizin yüklemesini kullan"
+msgstr "Hýzlý dizin yüklemesi"
 
 #: gnome/gprefs.c:159
 msgid "Compute totals before copying files"
@@ -1425,7 +1392,7 @@ msgstr "FTP dizin ara belleði için zaman arasý :"
 
 #: gnome/gprefs.c:167
 msgid "Allow customization of icons in icon view"
-msgstr "Ikona bakýþýnda ikonalarýn özelleþmesine izin ver"
+msgstr "Simge bakýþýnda simgelerin özelleþmesine izin ver"
 
 #: gnome/gprefs.c:176
 msgid "File display"
@@ -1443,7 +1410,7 @@ msgstr "VFS"
 msgid "Caching"
 msgstr "Belleme"
 
-#: gnome/gprefs.c:480
+#: gnome/gprefs.c:478
 msgid "Preferences"
 msgstr "Ayarlar"
 
@@ -1457,15 +1424,15 @@ msgstr "Tam adý : "
 
 #: gnome/gprop.c:109 src/panelize.c:205
 msgid "Command"
-msgstr "Komuta"
+msgstr "Komut"
 
 #: gnome/gprop.c:119
 msgid "Command:"
-msgstr "Komuta :"
+msgstr "Komut:"
 
 #: gnome/gprop.c:129
 msgid "Use terminal"
-msgstr "Komutayý kullan"
+msgstr "Terminal kullan"
 
 #: gnome/gprop.c:248
 msgid "File mode (permissions)"
@@ -1485,110 +1452,110 @@ msgstr "Üstyazý"
 
 #: gnome/gprop.c:535
 msgid "Select icon"
-msgstr "Ikona seç"
+msgstr "Simge seç"
 
-#: gnome/gscreen.c:1428 gnome/gscreen.c:1439
+#: gnome/gscreen.c:1428
 msgid "Reloads the current directory"
 msgstr "Geçerli dizini yeniden yükle"
 
-#: gnome/gscreen.c:1430 gnome/gscreen.c:1441
+#: gnome/gscreen.c:1430
 msgid "New _Directory..."
 msgstr "Yeni _dizin .."
 
-#: gnome/gscreen.c:1430 gnome/gscreen.c:1441
+#: gnome/gscreen.c:1430
 msgid "Creates a new directory here"
-msgstr "Burada yeni bir dizin yarat"
+msgstr "burada yeni bir dizin yaratýr"
 
-#: gnome/gscreen.c:1437
-msgid "Empty _Trash"
-msgstr "Çöp kutusunu _boþalt"
+#: gnome/gscreen.c:1432
+msgid "New _File..."
+msgstr "Yeni dosya"
 
-#: gnome/gscreen.c:1437
-msgid "Empties the Trash"
-msgstr "Çöp kutusunu boþaltýr"
+#: gnome/gscreen.c:1432
+msgid "Creates a new file here"
+msgstr "Burada yeni bir dosya yaratýr"
 
-#: gnome/gscreen.c:1653
+#: gnome/gscreen.c:1633
 #, c-format
 msgid "Search: %s"
 msgstr "Ara : %s"
 
-#: gnome/gscreen.c:1663 src/screen.c:663
+#: gnome/gscreen.c:1643
 #, c-format
 msgid "%s bytes in %d file"
 msgstr "%s bayt : %d dosya"
 
-#: gnome/gscreen.c:1663 src/screen.c:663
+#: gnome/gscreen.c:1643
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s bayt : %d dosya"
 
-#: gnome/gscreen.c:1689 src/screen.c:689
+#: gnome/gscreen.c:1669 src/screen.c:688
 msgid "<readlink failed>"
 msgstr "<bað okumasý baþarýsýz oldu>"
 
-#: gnome/gscreen.c:2118
+#: gnome/gscreen.c:2098
 msgid "Copy directory"
 msgstr "Dizini kopyala"
 
-#: gnome/gscreen.c:2119
+#: gnome/gscreen.c:2099
 msgid "Delete directory"
 msgstr "Dizini sil"
 
-#: gnome/gscreen.c:2120
+#: gnome/gscreen.c:2100
 msgid "Rename or move directory"
 msgstr "Dizini yeniden adlandýt yada taþý"
 
-#: gnome/gscreen.c:2278
+#: gnome/gscreen.c:2258
 msgid "Back"
 msgstr "Geri"
 
-#: gnome/gscreen.c:2278
+#: gnome/gscreen.c:2258
 msgid "Go to the previously visited directory"
 msgstr "Önceki dizine geç"
 
-#: gnome/gscreen.c:2280
+#: gnome/gscreen.c:2260
 msgid "Up"
 msgstr "Yukarý"
 
-#: gnome/gscreen.c:2280
+#: gnome/gscreen.c:2260
 msgid "Go up a level in the directory heirarchy"
 msgstr "Üst dizine geç"
 
-#: gnome/gscreen.c:2282
+#: gnome/gscreen.c:2262
 msgid "Forward"
 msgstr "Ileri"
 
-#: gnome/gscreen.c:2282
+#: gnome/gscreen.c:2262
 msgid "Go to the next directory"
 msgstr "Ileri dizine geç"
 
-#: gnome/gscreen.c:2285 src/tree.c:1010
+#: gnome/gscreen.c:2265 src/tree.c:1010
 msgid "Rescan"
 msgstr "Yeniden tara"
 
-#: gnome/gscreen.c:2285
+#: gnome/gscreen.c:2265
 msgid "Rescan the current directory"
 msgstr "Geçerli dizini yeniden tara"
 
-#: gnome/gscreen.c:2288
+#: gnome/gscreen.c:2268
 msgid "Home"
-msgstr "Bark"
+msgstr "Ev dizini"
 
-#: gnome/gscreen.c:2288
+#: gnome/gscreen.c:2268
 msgid "Go to your home directory"
 msgstr "Ev dizinine geç"
 
-#: gnome/gscreen.c:2428
+#: gnome/gscreen.c:2408
 msgid "Location:"
-msgstr "Mekan :"
+msgstr "Konum :"
 
 #. 1
-#: gnome/gtools.c:105 gtkedit/editcmd.c:387 gtkedit/editcmd.c:1236
-#: gtkedit/editcmd.c:1321 gtkedit/editcmd.c:3022 gtkedit/editoptions.c:69
+#: gnome/gtools.c:105 gtkedit/editcmd.c:386 gtkedit/editcmd.c:1234
+#: gtkedit/editcmd.c:1319 gtkedit/editcmd.c:2983 gtkedit/editoptions.c:69
 #: src/boxes.c:138 src/boxes.c:278 src/boxes.c:378 src/boxes.c:466
 #: src/boxes.c:646 src/boxes.c:728 src/boxes.c:783 src/boxes.c:898
 #: src/filegui.c:839 src/find.c:171 src/layout.c:370 src/option.c:143
-#: src/wtools.c:289 src/wtools.c:563 vfs/smbfs.c:117
+#: src/wtools.c:289 src/wtools.c:563 vfs/smbfs.c:116
 msgid "&Ok"
 msgstr "&Oldu"
 
@@ -1597,12 +1564,12 @@ msgstr "&Oldu"
 msgid "Offset 0x%08lx"
 msgstr ""
 
-#: gnome/gview.c:138 src/view.c:732
+#: gnome/gview.c:138 src/view.c:735
 #, c-format
 msgid "Col %d"
 msgstr "Sütun %d"
 
-#: gnome/gview.c:142 src/view.c:736
+#: gnome/gview.c:142 src/view.c:739
 #, c-format
 msgid "%s bytes"
 msgstr "%s byte"
@@ -1695,7 +1662,7 @@ msgstr "Masaüstüne ulaþamadým\n"
 #: gnome/gmc-client.c:142
 #, c-format
 msgid "Unknown arrange type `%s'\n"
-msgstr "Bilinmeyen sýralama türü %s\n"
+msgstr ""
 
 #: gnome/gmc-client.c:206
 msgid "Create window showing the specified directory"
@@ -1711,64 +1678,64 @@ msgstr "Belirlenmiþ dizini yeniden tara"
 
 #: gnome/gmc-client.c:210
 msgid "Rescan the desktop icons"
-msgstr "Masaüstü ikonalarýný yeniden tara"
+msgstr "Masaüstü simgelerini yeniden tara"
 
 #: gnome/gmc-client.c:212
 msgid "Rescan the desktop device icons"
-msgstr "Masaüstü ahize ikonalarý yeniden tara"
+msgstr "Masaüstü aygýt simgelerini yeniden tara"
 
 #: gnome/gmc-client.c:214
 msgid "Arrange the desktop icons"
-msgstr "Masaüstü simgeleri düzenle"
+msgstr "Masaüstü simgelerini düzenle"
 
 #: gnome/gmc-client.c:215
 msgid "name | type | size | atime | mtime | ctime"
-msgstr "isim | tip | boyut | eriþim zamaný | deðiþim zamaný | yaratýl#iþ zamaný"
+msgstr ""
 
 #: gnome/gmc-client.c:217
 msgid "Close windows whose directories cannot be reached"
 msgstr "Ulaþýlamayan dizinlerin pencereleri kapat"
 
 #. The file-name is printed after the ':'
-#: gtkedit/edit.c:149 gtkedit/edit.c:318 gtkedit/edit.c:323 gtkedit/edit.c:337
-#: gtkedit/edit.c:341 gtkedit/edit.c:373 gtkedit/edit.c:379 gtkedit/edit.c:386
-#: gtkedit/edit.c:393 gtkedit/edit.c:399 gtkedit/editcmd.c:298
-#: gtkedit/editcmd.c:304 gtkedit/editcmd.c:2032 gtkedit/editwidget.c:1023
-#: src/dir.c:386 src/tree.c:682 src/tree.c:688 src/wtools.c:222
+#: gtkedit/edit.c:145 gtkedit/edit.c:314 gtkedit/edit.c:319 gtkedit/edit.c:333
+#: gtkedit/edit.c:337 gtkedit/edit.c:369 gtkedit/edit.c:375 gtkedit/edit.c:382
+#: gtkedit/edit.c:389 gtkedit/edit.c:395 gtkedit/editcmd.c:298
+#: gtkedit/editcmd.c:304 gtkedit/editcmd.c:2030 gtkedit/editwidget.c:1023
+#: src/dir.c:386 src/screen.c:2417 src/tree.c:682 src/tree.c:688
+#: src/wtools.c:222
 msgid " Error "
 msgstr " HATA "
 
-#: gtkedit/edit.c:149 gtkedit/edit.c:341 gtkedit/edit.c:379
+#: gtkedit/edit.c:145 gtkedit/edit.c:337 gtkedit/edit.c:375
 msgid " Failed trying to open file for reading: "
 msgstr " Dosyayý okumaya açarken hata oldu : "
 
-#: gtkedit/edit.c:318
-#, fuzzy
+#: gtkedit/edit.c:314
 msgid " Error reading from pipe: "
-msgstr " Dosyayý kaydederken hata oldu . "
+msgstr " Borudan okunurken hata oluþtu:"
 
-#: gtkedit/edit.c:323
+#: gtkedit/edit.c:319
 #, fuzzy
 msgid " Failed trying to open pipe for reading: "
 msgstr " Dosyayý okumaya açarken hata oldu : "
 
-#: gtkedit/edit.c:337
+#: gtkedit/edit.c:333
 msgid " Error reading file: "
-msgstr " Dosyayý okurken hata oldu : "
+msgstr " Dosyayý okurken hata oluþtu: "
 
-#: gtkedit/edit.c:386
+#: gtkedit/edit.c:382
 msgid " Cannot get size/permissions info on file: "
 msgstr " Dosyanýn eriþim haklarýný/büyüklüðünü alamadým : "
 
-#: gtkedit/edit.c:393
+#: gtkedit/edit.c:389
 msgid " Not an ordinary file: "
 msgstr " Normal bir dosya deðil : "
 
-#: gtkedit/edit.c:399
+#: gtkedit/edit.c:395
 msgid " File is too large: "
 msgstr " Dosya çok fazla büyük : "
 
-#: gtkedit/edit.c:400
+#: gtkedit/edit.c:396
 msgid ""
 " \n"
 " Increase edit.h:MAXBUF and recompile the editor. "
@@ -1776,495 +1743,483 @@ msgstr ""
 " \n"
 " ´edit.h´'da \"MAXBUF\"'un deðerini deðiþtirip editörü yeniden denetlet . "
 
-#: gtkedit/edit.c:2567
-msgid "User menu avalaible only in mcedit invoked from mc"
-msgstr ""
-
-#. Not essential to translate
-#: gtkedit/edit.c:2765 gtkedit/editcmd.c:2939
-#, fuzzy
-msgid "Error trying to stat file:"
-msgstr " Dosyayý kaydederken hata oldu . "
-
 #: gtkedit/editcmd.c:298
-#, fuzzy
 msgid " Error writing to pipe: "
-msgstr " Dosyayý kaydederken hata oldu . "
+msgstr " Boruya kaydederken hata oluþtu: "
 
 #: gtkedit/editcmd.c:304
 #, fuzzy
 msgid " Failed trying to open pipe for writing: "
 msgstr " Dosyayý okumaya açarken hata oldu : "
 
-#: gtkedit/editcmd.c:380
+#: gtkedit/editcmd.c:379
 msgid "Quick save "
 msgstr "Hýzlý kaydet "
 
-#: gtkedit/editcmd.c:381
+#: gtkedit/editcmd.c:380
 msgid "Safe save "
 msgstr "Güvenilir kaydet "
 
-#: gtkedit/editcmd.c:382
+#: gtkedit/editcmd.c:381
 msgid "Do backups -->"
 msgstr "Yedek yarat -->"
 
 #. NLS  for hotkeys?
-#: gtkedit/editcmd.c:385 gtkedit/editcmd.c:1190 gtkedit/editcmd.c:1234
-#: gtkedit/editcmd.c:1319 gtkedit/editcmd.c:3020 gtkedit/editoptions.c:66
+#: gtkedit/editcmd.c:384 gtkedit/editcmd.c:1188 gtkedit/editcmd.c:1232
+#: gtkedit/editcmd.c:1317 gtkedit/editcmd.c:2981 gtkedit/editoptions.c:66
 #: src/achown.c:71 src/boxes.c:139 src/boxes.c:279 src/boxes.c:376
 #: src/boxes.c:464 src/boxes.c:644 src/boxes.c:727 src/boxes.c:781
-#: src/chmod.c:114 src/chown.c:79 src/cmd.c:858 src/filegui.c:822
+#: src/chmod.c:114 src/chown.c:79 src/cmd.c:859 src/filegui.c:822
 #: src/find.c:171 src/hotlist.c:138 src/hotlist.c:814 src/hotlist.c:911
 #: src/layout.c:371 src/learn.c:59 src/option.c:144 src/panelize.c:86
-#: src/view.c:406 src/wtools.c:111 src/wtools.c:386 src/wtools.c:561
-#: vfs/smbfs.c:117
+#: src/view.c:409 src/wtools.c:111 src/wtools.c:386 src/wtools.c:561
+#: vfs/smbfs.c:116
 msgid "&Cancel"
 msgstr "&Iptal"
 
-#: gtkedit/editcmd.c:391
+#: gtkedit/editcmd.c:390
 msgid "Extension:"
 msgstr "Sonek :"
 
 #. NLS ?
-#: gtkedit/editcmd.c:398
+#: gtkedit/editcmd.c:397
 msgid " Edit Save Mode "
 msgstr " Kaydetme þeklini deðiþtir "
 
-#: gtkedit/editcmd.c:526
+#: gtkedit/editcmd.c:525
 msgid " Save As "
 msgstr " Farklý kaydet "
 
 #. Warning message with a query to continue or cancel the operation
-#: gtkedit/editcmd.c:540 gtkedit/editcmd.c:863 gtkedit/editcmd.c:888
-#: gtkedit/editcmd.c:1039 gtkedit/editcmd.c:1137 src/ext.c:315 src/file.c:619
-#: src/help.c:318 src/main.c:711 src/screen.c:1448 src/screen.c:2125
-#: src/screen.c:2175 src/subshell.c:705 src/subshell.c:731 src/utilunix.c:382
-#: src/utilunix.c:386 src/utilunix.c:406 src/utilunix.c:457 vfs/mcfs.c:172
+#: gtkedit/editcmd.c:539 gtkedit/editcmd.c:862 gtkedit/editcmd.c:887
+#: gtkedit/editcmd.c:1038 gtkedit/editcmd.c:1135 src/ext.c:315 src/file.c:619
+#: src/help.c:318 src/main.c:708 src/screen.c:1451 src/screen.c:2129
+#: src/screen.c:2179 src/subshell.c:705 src/subshell.c:731 src/utilunix.c:390
+#: src/utilunix.c:394 src/utilunix.c:465 vfs/mcfs.c:172
 msgid " Warning "
 msgstr " Ikaz "
 
-#: gtkedit/editcmd.c:541
+#: gtkedit/editcmd.c:540
 msgid " A file already exists with this name. "
 msgstr " Bu adla zaten bir dosya var "
 
 #. Push buttons to over-write the current file, or cancel the operation
-#: gtkedit/editcmd.c:543
+#: gtkedit/editcmd.c:542
 msgid "Overwrite"
 msgstr "Üstüne yaz"
 
-#: gtkedit/editcmd.c:543 gtkedit/editcmd.c:610 gtkedit/editcmd.c:837
-#: gtkedit/editcmd.c:863 gtkedit/editcmd.c:888 gtkedit/editcmd.c:1039
-#: gtkedit/editcmd.c:1672
+#: gtkedit/editcmd.c:542 gtkedit/editcmd.c:609 gtkedit/editcmd.c:836
+#: gtkedit/editcmd.c:862 gtkedit/editcmd.c:887 gtkedit/editcmd.c:1038
+#: gtkedit/editcmd.c:1670
 msgid "Cancel"
 msgstr "Iptal"
 
-#: gtkedit/editcmd.c:562
+#: gtkedit/editcmd.c:561
 msgid " Save as "
 msgstr " Farklý kaydet"
 
-#: gtkedit/editcmd.c:562 gtkedit/editcmd.c:2772
+#: gtkedit/editcmd.c:561 gtkedit/editcmd.c:2770
 msgid " Error trying to save file. "
 msgstr " Dosyayý kaydederken hata oldu . "
 
 #. This heads the delete macro error dialog box
-#: gtkedit/editcmd.c:680 gtkedit/editcmd.c:688 gtkedit/editcmd.c:713
+#: gtkedit/editcmd.c:679 gtkedit/editcmd.c:687 gtkedit/editcmd.c:712
 msgid " Delete macro "
 msgstr " Macro'yu sil "
 
 #. 'Open' = load temp file
-#: gtkedit/editcmd.c:682
+#: gtkedit/editcmd.c:681
 msgid " Error trying to open temp file "
 msgstr " Geçici dosyayý açarken hata oldu "
 
 #. 'Open' = load temp file
-#: gtkedit/editcmd.c:690 gtkedit/editcmd.c:751 gtkedit/editcmd.c:819
+#: gtkedit/editcmd.c:689 gtkedit/editcmd.c:750 gtkedit/editcmd.c:818
 msgid " Error trying to open macro file "
 msgstr " Macro dosyasýný açarken hata oldu "
 
-#: gtkedit/editcmd.c:695 gtkedit/editcmd.c:703 gtkedit/editcmd.c:739
-#: gtkedit/editcmd.c:794
+#: gtkedit/editcmd.c:694 gtkedit/editcmd.c:702 gtkedit/editcmd.c:738
+#: gtkedit/editcmd.c:793
 #, c-format
 msgid "key '%d 0': "
-msgstr "Tuþ ´5d 0´ : "
+msgstr "Tuþ '%d 0' : "
 
-#: gtkedit/editcmd.c:714
+#: gtkedit/editcmd.c:713
 msgid " Error trying to overwrite macro file "
 msgstr " Macro dosyasýnýn üstüne yazarken hata oldu "
 
 #. This heads the 'Macro' dialog box
-#: gtkedit/editcmd.c:730
+#: gtkedit/editcmd.c:729
 msgid " Macro "
 msgstr " Macro "
 
 #. Input line for a single key press follows the ':'
-#: gtkedit/editcmd.c:732
+#: gtkedit/editcmd.c:731
 msgid " Press the macro's new hotkey: "
 msgstr " Macro'nun yeni basayýný belirle : "
 
 #. This heads the 'Save Macro' dialog box
-#: gtkedit/editcmd.c:751
+#: gtkedit/editcmd.c:750
 msgid " Save macro "
 msgstr " Macro'yu kaydet "
 
-#: gtkedit/editcmd.c:761 gtkedit/editcmd.c:768
+#: gtkedit/editcmd.c:760 gtkedit/editcmd.c:767
 msgid " Delete Macro "
 msgstr " Macro'yu sil "
 
 #. This heads the 'Load Macro' dialog box
-#: gtkedit/editcmd.c:818
+#: gtkedit/editcmd.c:817
 msgid " Load macro "
 msgstr " Macro'yu yükle "
 
-#: gtkedit/editcmd.c:832 gtkedit/editcmd.c:834
+#: gtkedit/editcmd.c:831 gtkedit/editcmd.c:833
 msgid " Confirm save file? : "
 msgstr " Dosyayý kaydedeyim mi ? :"
 
 #. Buttons to 'Confirm save file' query
-#: gtkedit/editcmd.c:837
+#: gtkedit/editcmd.c:836
 msgid " Save file "
 msgstr " Dosyayý kaydet"
 
-#: gtkedit/editcmd.c:837 gtkedit/editwidget.c:1137 gtkedit/gtkedit.c:1247
-#: src/view.c:2077
+#: gtkedit/editcmd.c:836 gtkedit/editwidget.c:1137 gtkedit/gtkedit.c:1247
+#: src/view.c:2080
 msgid "Save"
 msgstr "Kaydet"
 
-#: gtkedit/editcmd.c:863 gtkedit/editcmd.c:888
+#: gtkedit/editcmd.c:862 gtkedit/editcmd.c:887
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
 msgstr ""
 
-#: gtkedit/editcmd.c:863 gtkedit/editcmd.c:888 gtkedit/editcmd.c:1039
+#: gtkedit/editcmd.c:862 gtkedit/editcmd.c:887 gtkedit/editcmd.c:1038
 msgid "Continue"
 msgstr "Devam et"
 
-#: gtkedit/editcmd.c:894
+#: gtkedit/editcmd.c:893
 msgid " Load "
 msgstr " Yükle "
 
-#: gtkedit/editcmd.c:1039 gtkedit/editcmd.c:1137
+#: gtkedit/editcmd.c:1038 gtkedit/editcmd.c:1135
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Blokçok büyük , bu eylemi geri alamayabilirsin . "
 
-#: gtkedit/editcmd.c:1137
+#: gtkedit/editcmd.c:1135
 msgid " Continue "
 msgstr " Devam et "
 
-#: gtkedit/editcmd.c:1137
+#: gtkedit/editcmd.c:1135
 msgid " Cancel "
 msgstr " Iptal "
 
-#: gtkedit/editcmd.c:1192
+#: gtkedit/editcmd.c:1190
 msgid "o&Ne"
 msgstr ""
 
-#: gtkedit/editcmd.c:1194 src/filegui.c:597
+#: gtkedit/editcmd.c:1192 src/filegui.c:597
 msgid "al&L"
 msgstr ""
 
-#: gtkedit/editcmd.c:1196 src/file.c:2190 src/filegui.c:267
+#: gtkedit/editcmd.c:1194 src/file.c:2190 src/filegui.c:267
 msgid "&Skip"
 msgstr "&Atla"
 
-#: gtkedit/editcmd.c:1198
+#: gtkedit/editcmd.c:1196
 msgid "&Replace"
 msgstr "&Yerleþtir"
 
-#: gtkedit/editcmd.c:1204 gtkedit/editcmd.c:1672
+#: gtkedit/editcmd.c:1202 gtkedit/editcmd.c:1670
 msgid " Replace with: "
 msgstr " Bunla yerleþtir : "
 
-#: gtkedit/editcmd.c:1208
+#: gtkedit/editcmd.c:1206
 msgid " Confirm replace "
 msgstr " Yerleþmeyi doðrula "
 
-#: gtkedit/editcmd.c:1238 gtkedit/editcmd.c:1323
+#: gtkedit/editcmd.c:1236 gtkedit/editcmd.c:1321
 msgid "scanf &Expression"
 msgstr ""
 
-#: gtkedit/editcmd.c:1240
+#: gtkedit/editcmd.c:1238
 msgid "replace &All"
 msgstr "hepsine yerleþtir"
 
-#: gtkedit/editcmd.c:1242
+#: gtkedit/editcmd.c:1240
 msgid "pr&Ompt on replace"
 msgstr ""
 
-#: gtkedit/editcmd.c:1244 gtkedit/editcmd.c:1325
+#: gtkedit/editcmd.c:1242 gtkedit/editcmd.c:1323
 msgid "&Backwards"
 msgstr "&geriye dönük"
 
-#: gtkedit/editcmd.c:1246 gtkedit/editcmd.c:1327
+#: gtkedit/editcmd.c:1244 gtkedit/editcmd.c:1325
 msgid "&Regular expression"
 msgstr ""
 
-#: gtkedit/editcmd.c:1248 gtkedit/editcmd.c:1329
+#: gtkedit/editcmd.c:1246 gtkedit/editcmd.c:1327
 msgid "&Whole words only"
 msgstr ""
 
-#: gtkedit/editcmd.c:1250 gtkedit/editcmd.c:1331
+#: gtkedit/editcmd.c:1248 gtkedit/editcmd.c:1329
 msgid "case &Sensitive"
 msgstr ""
 
-#: gtkedit/editcmd.c:1254
+#: gtkedit/editcmd.c:1252
 msgid " Enter replacement argument order eg. 3,2,1,4 "
 msgstr ""
 
-#: gtkedit/editcmd.c:1258
+#: gtkedit/editcmd.c:1256
 msgid " Enter replacement string:"
 msgstr ""
 
-#: gtkedit/editcmd.c:1262 gtkedit/editcmd.c:1335 src/view.c:2000
+#: gtkedit/editcmd.c:1260 gtkedit/editcmd.c:1333 src/view.c:2003
 msgid " Enter search string:"
 msgstr ""
 
 #. Heads the 'Replace' dialog box
-#: gtkedit/editcmd.c:1281 gtkedit/editcmd.c:1585 gtkedit/editcmd.c:1672
-#: gtkedit/editcmd.c:2211 gtkedit/editcmd.c:2242 gtkedit/editcmd.c:2244
+#: gtkedit/editcmd.c:1279 gtkedit/editcmd.c:1583 gtkedit/editcmd.c:1670
+#: gtkedit/editcmd.c:2209 gtkedit/editcmd.c:2240 gtkedit/editcmd.c:2242
 msgid " Replace "
 msgstr ""
 
 #. Heads the 'Search' dialog box
-#: gtkedit/editcmd.c:1349 gtkedit/editcmd.c:1579 gtkedit/editcmd.c:2310
-#: gtkedit/editcmd.c:2312 gtkedit/editcmd.c:2340 src/view.c:1528
-#: src/view.c:1627 src/view.c:1750 src/view.c:1968 src/view.c:2000
+#: gtkedit/editcmd.c:1347 gtkedit/editcmd.c:1577 gtkedit/editcmd.c:2308
+#: gtkedit/editcmd.c:2310 gtkedit/editcmd.c:2338 src/view.c:1531
+#: src/view.c:1630 src/view.c:1753 src/view.c:1971 src/view.c:2003
 msgid " Search "
 msgstr ""
 
 #. An input line comes after the ':'
-#: gtkedit/editcmd.c:1403
+#: gtkedit/editcmd.c:1401
 msgid " Enter search text : "
 msgstr ""
 
-#: gtkedit/editcmd.c:1410
+#: gtkedit/editcmd.c:1408
 msgid " Enter replace text : "
 msgstr ""
 
-#: gtkedit/editcmd.c:1413 gtkedit/editcmd.c:1414
+#: gtkedit/editcmd.c:1411 gtkedit/editcmd.c:1412
 #, c-format
 msgid ""
 "You can enter regexp substrings with %s\n"
 "(not \\1, \\2 like sed) then use \"Enter...order\""
 msgstr ""
 
-#: gtkedit/editcmd.c:1416
+#: gtkedit/editcmd.c:1414
 msgid " Enter argument (or substring) order : "
 msgstr ""
 
 #. Tool hint
-#: gtkedit/editcmd.c:1420 gtkedit/editcmd.c:1421
+#: gtkedit/editcmd.c:1418 gtkedit/editcmd.c:1419
 msgid ""
 "Enter the order of replacement of your scanf\n"
 "format specifiers or regexp substrings, eg 3,1,2"
 msgstr ""
 
 #. The following are check boxes
-#: gtkedit/editcmd.c:1426
+#: gtkedit/editcmd.c:1424
 msgid " Whole words only "
 msgstr ""
 
-#: gtkedit/editcmd.c:1428
+#: gtkedit/editcmd.c:1426
 msgid " Case sensitive "
 msgstr ""
 
-#: gtkedit/editcmd.c:1431
+#: gtkedit/editcmd.c:1429
 msgid " Regular expression "
 msgstr ""
 
-#: gtkedit/editcmd.c:1432 gtkedit/editcmd.c:1433
+#: gtkedit/editcmd.c:1430 gtkedit/editcmd.c:1431
 msgid ""
 "See the regex man page for how\n"
 "to compose a regular expression"
 msgstr ""
 
-#: gtkedit/editcmd.c:1441
+#: gtkedit/editcmd.c:1439
 msgid " Backwards "
 msgstr ""
 
 #. Tool hint
-#: gtkedit/editcmd.c:1443 gtkedit/editcmd.c:1444
+#: gtkedit/editcmd.c:1441 gtkedit/editcmd.c:1442
 msgid "Warning: Searching backward can be slow"
 msgstr ""
 
-#: gtkedit/editcmd.c:1465
+#: gtkedit/editcmd.c:1463
 msgid " Prompt on replace "
 msgstr ""
 
 #. Tool hint
-#: gtkedit/editcmd.c:1467
+#: gtkedit/editcmd.c:1465
 msgid "Ask before making each replacement"
 msgstr ""
 
-#: gtkedit/editcmd.c:1469
+#: gtkedit/editcmd.c:1467
 msgid " Replace all "
-msgstr ""
+msgstr " Tümünü deðiþtir "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1471
-#, fuzzy
+#: gtkedit/editcmd.c:1469
 msgid "Replace repeatedly"
-msgstr "Yerine yazamayým mý ?"
+msgstr "Hepsini deðiþtir"
 
-#: gtkedit/editcmd.c:1475
+#: gtkedit/editcmd.c:1473
 msgid " Bookmarks "
-msgstr " Niþanlar "
+msgstr " Yer Ýmleri "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1477 gtkedit/editcmd.c:1478
+#: gtkedit/editcmd.c:1475 gtkedit/editcmd.c:1476
 msgid "Create bookmarks at all lines found"
 msgstr ""
 
-#: gtkedit/editcmd.c:1481
+#: gtkedit/editcmd.c:1479
 msgid " Scanf expression "
 msgstr ""
 
 #. Tool hint
-#: gtkedit/editcmd.c:1483
+#: gtkedit/editcmd.c:1481
 msgid ""
 "Allows entering of a C format string,\n"
 "see the scanf man page"
 msgstr ""
 
 #. Tool hint
-#: gtkedit/editcmd.c:1508
+#: gtkedit/editcmd.c:1506
 msgid "Begin search, Enter"
 msgstr ""
 
-#: gtkedit/editcmd.c:1509
+#: gtkedit/editcmd.c:1507
 msgid "Abort this dialog, Esc"
 msgstr ""
 
-#: gtkedit/editcmd.c:1672
+#: gtkedit/editcmd.c:1670
 msgid "Replace"
 msgstr ""
 
-#: gtkedit/editcmd.c:1672
+#: gtkedit/editcmd.c:1670
 msgid "Skip"
 msgstr ""
 
-#: gtkedit/editcmd.c:1672
+#: gtkedit/editcmd.c:1670
 msgid "Replace all"
 msgstr ""
 
-#: gtkedit/editcmd.c:1672
+#: gtkedit/editcmd.c:1670
 msgid "Replace one"
 msgstr ""
 
-#: gtkedit/editcmd.c:2032
+#: gtkedit/editcmd.c:2030
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
 msgstr ""
 
 #. "Invalid regexp string or scanf string"
-#: gtkedit/editcmd.c:2213
+#: gtkedit/editcmd.c:2211
 msgid " Error in replacement format string. "
 msgstr ""
 
-#: gtkedit/editcmd.c:2241
+#: gtkedit/editcmd.c:2239
 #, c-format
 msgid " %ld replacements made. "
 msgstr ""
 
-#: gtkedit/editcmd.c:2244 gtkedit/editcmd.c:2312 gtkedit/editcmd.c:2340
+#: gtkedit/editcmd.c:2242 gtkedit/editcmd.c:2310 gtkedit/editcmd.c:2338
 msgid " Search string not found. "
 msgstr ""
 
 #. in response to number of bookmarks added because of string being found %d times
-#: gtkedit/editcmd.c:2309
+#: gtkedit/editcmd.c:2307
 #, c-format
 msgid " %d finds made, %d bookmarks added "
 msgstr ""
 
 #. Confirm 'Quit' dialog box
-#: gtkedit/editcmd.c:2365 gtkedit/editcmd.c:2380 gtkedit/editcmd.c:2383
+#: gtkedit/editcmd.c:2363 gtkedit/editcmd.c:2378 gtkedit/editcmd.c:2381
 msgid " Quit "
 msgstr " Çýk "
 
-#: gtkedit/editcmd.c:2366 gtkedit/editcmd.c:2384
+#: gtkedit/editcmd.c:2364 gtkedit/editcmd.c:2382
 msgid ""
 " Current text was modified without a file save. \n"
 " Save with exit? "
 msgstr ""
 
-#: gtkedit/editcmd.c:2380
+#: gtkedit/editcmd.c:2378
 msgid " File was modified, Save with exit? "
 msgstr ""
 
-#: gtkedit/editcmd.c:2380
+#: gtkedit/editcmd.c:2378
 msgid "Cancel quit"
 msgstr "Çýkýþý durdur"
 
-#: gtkedit/editcmd.c:2380 src/cmd.c:246 src/file.c:1878 src/file.c:2249
-#: src/filegui.c:603 src/hotlist.c:1035 src/main.c:866 src/screen.c:2162
-#: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:406
+#: gtkedit/editcmd.c:2378 src/cmd.c:249 src/file.c:1878 src/file.c:2249
+#: src/filegui.c:603 src/hotlist.c:1035 src/main.c:863 src/screen.c:2165
+#: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:409
 msgid "&Yes"
 msgstr "&Evet"
 
-#: gtkedit/editcmd.c:2380 src/cmd.c:246 src/file.c:1878 src/file.c:2249
-#: src/filegui.c:602 src/hotlist.c:1035 src/main.c:866 src/screen.c:2162
-#: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:406
+#: gtkedit/editcmd.c:2378 src/cmd.c:249 src/file.c:1878 src/file.c:2249
+#: src/filegui.c:602 src/hotlist.c:1035 src/main.c:863 src/screen.c:2165
+#: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:409
 msgid "&No"
 msgstr "&Hayýr"
 
-#: gtkedit/editcmd.c:2384
+#: gtkedit/editcmd.c:2382
 msgid " &Cancel quit "
 msgstr " &Çýkýþý durdur "
 
-#: gtkedit/editcmd.c:2384
+#: gtkedit/editcmd.c:2382
 msgid " &Yes "
 msgstr " &Evet "
 
-#: gtkedit/editcmd.c:2384
+#: gtkedit/editcmd.c:2382
 msgid " &No "
 msgstr " &Hayýr "
 
-#: gtkedit/editcmd.c:2616 gtkedit/editcmd.c:2691
+#: gtkedit/editcmd.c:2614 gtkedit/editcmd.c:2689
 msgid " Copy to clipboard "
 msgstr " Arabelleðe kopyala "
 
-#: gtkedit/editcmd.c:2616 gtkedit/editcmd.c:2638 gtkedit/editcmd.c:2691
-#: gtkedit/editcmd.c:2704
+#: gtkedit/editcmd.c:2614 gtkedit/editcmd.c:2636 gtkedit/editcmd.c:2689
+#: gtkedit/editcmd.c:2702
 msgid " Unable to save to file. "
 msgstr " Dosyaya kaydedemedim. "
 
-#: gtkedit/editcmd.c:2638 gtkedit/editcmd.c:2704
+#: gtkedit/editcmd.c:2636 gtkedit/editcmd.c:2702
 msgid " Cut to clipboard "
 msgstr " Arabelleðe kes "
 
-#: gtkedit/editcmd.c:2726 gtkedit/editcmd.c:2730 gtkedit/editcmd.c:2735
-#: gtkedit/editcmd.c:2738 src/view.c:1915
+#: gtkedit/editcmd.c:2724 gtkedit/editcmd.c:2728 gtkedit/editcmd.c:2733
+#: gtkedit/editcmd.c:2736 src/view.c:1918
 msgid " Goto line "
 msgstr " Satra git "
 
-#: gtkedit/editcmd.c:2726 gtkedit/editcmd.c:2730 gtkedit/editcmd.c:2735
-#: gtkedit/editcmd.c:2738
+#: gtkedit/editcmd.c:2724 gtkedit/editcmd.c:2728 gtkedit/editcmd.c:2733
+#: gtkedit/editcmd.c:2736
 msgid " Enter line: "
 msgstr " Satrý belirle: "
 
-#: gtkedit/editcmd.c:2759 gtkedit/editcmd.c:2772
+#: gtkedit/editcmd.c:2757 gtkedit/editcmd.c:2770
 msgid " Save Block "
 msgstr " Bloku kaydet "
 
-#: gtkedit/editcmd.c:2786
+#: gtkedit/editcmd.c:2784
 msgid " Insert File "
 msgstr " Dosyayý içer "
 
-#: gtkedit/editcmd.c:2799
+#: gtkedit/editcmd.c:2797
 msgid " Insert file "
 msgstr " Dosyayý içer"
 
-#: gtkedit/editcmd.c:2799
+#: gtkedit/editcmd.c:2797
 msgid " Error trying to insert file. "
 msgstr " Dosyayý içerirken hata oldu. "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2821
+#: gtkedit/editcmd.c:2819
 msgid " Sort block "
 msgstr " Bloku sýrala "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2821 gtkedit/editcmd.c:2907
+#: gtkedit/editcmd.c:2819 gtkedit/editcmd.c:2873
 msgid " You must first highlight a block of text. "
 msgstr ""
 
@@ -2291,60 +2246,50 @@ msgstr ""
 msgid " Sort returned non-zero: "
 msgstr ""
 
-#: gtkedit/editcmd.c:2880
-msgid "Error create script:"
-msgstr "Denetlemeyi yaratýrken bir hata oluþtur :"
-
-#: gtkedit/editcmd.c:2886
-msgid "Error read script:"
-msgstr "Denetlemi okurken bir hata oluþtu :"
-
-#: gtkedit/editcmd.c:2893
-msgid "Error close script:"
+#. Not essential to translate
+#: gtkedit/editcmd.c:2871 gtkedit/editcmd.c:2901
+msgid " Process block "
 msgstr ""
 
-#: gtkedit/editcmd.c:2898
-msgid "Script created:"
+#. Not essential to translate
+#: gtkedit/editcmd.c:2903
+msgid " Error trying to stat file "
 msgstr ""
 
-#: gtkedit/editcmd.c:2905
-msgid "Process block"
-msgstr ""
-
-#: gtkedit/editcmd.c:3013
+#: gtkedit/editcmd.c:2974
 msgid " Mail "
 msgstr ""
 
-#: gtkedit/editcmd.c:3026
+#: gtkedit/editcmd.c:2987
 msgid " Copies to"
 msgstr ""
 
-#: gtkedit/editcmd.c:3030
+#: gtkedit/editcmd.c:2991
 msgid " Subject"
 msgstr ""
 
-#: gtkedit/editcmd.c:3034
+#: gtkedit/editcmd.c:2995
 msgid " To"
 msgstr ""
 
-#: gtkedit/editcmd.c:3036
+#: gtkedit/editcmd.c:2997
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr ""
 
-#: gtkedit/editmenu.c:62
+#: gtkedit/editmenu.c:61
 msgid " Word wrap "
 msgstr ""
 
 #. Not essential to translate
-#: gtkedit/editmenu.c:64
+#: gtkedit/editmenu.c:63
 msgid " Enter line length, 0 for off: "
 msgstr ""
 
-#: gtkedit/editmenu.c:75
+#: gtkedit/editmenu.c:74
 msgid " About "
 msgstr " Bilgi "
 
-#: gtkedit/editmenu.c:76
+#: gtkedit/editmenu.c:75
 msgid ""
 "\n"
 "                Cooledit  v3.11.5\n"
@@ -2355,368 +2300,363 @@ msgid ""
 "           for the Midnight Commander.\n"
 msgstr ""
 
-#: gtkedit/editmenu.c:128 gtkedit/editmenu.c:147
+#: gtkedit/editmenu.c:124 gtkedit/editmenu.c:140
 msgid "&Open/load...     C-o"
 msgstr "&Aç/yükle ..    C-o"
 
-#: gtkedit/editmenu.c:129
+#: gtkedit/editmenu.c:125
 msgid "&New              C-n"
 msgstr "&Yeni             C-n"
 
-#: gtkedit/editmenu.c:131 gtkedit/editmenu.c:150
+#: gtkedit/editmenu.c:127 gtkedit/editmenu.c:143
 msgid "&Save              F2"
 msgstr "&Kaydet            F2"
 
-#: gtkedit/editmenu.c:132 gtkedit/editmenu.c:151
+#: gtkedit/editmenu.c:128 gtkedit/editmenu.c:144
 msgid "save &As...       F12"
 msgstr "&Farklý kaydet  F12"
 
-#: gtkedit/editmenu.c:134 gtkedit/editmenu.c:153
+#: gtkedit/editmenu.c:130 gtkedit/editmenu.c:146
 msgid "&Insert file...   F15"
 msgstr "Dosyayý &içer .. F15"
 
-#: gtkedit/editmenu.c:135
+#: gtkedit/editmenu.c:131
 msgid "copy to &File...  C-f"
 msgstr "Dosyaya kopyala   C-f"
 
-#: gtkedit/editmenu.c:137 gtkedit/editmenu.c:156
-msgid "&User menu...     F11"
-msgstr "K&ullanýcý mönüsü...   F1"
-
-#: gtkedit/editmenu.c:140 gtkedit/editmenu.c:159
+#: gtkedit/editmenu.c:133 gtkedit/editmenu.c:149
 msgid "a&Bout...            "
 msgstr "&Bilgi ..."
 
-#: gtkedit/editmenu.c:142 gtkedit/editmenu.c:161
+#: gtkedit/editmenu.c:135 gtkedit/editmenu.c:151
 msgid "&Quit             F10"
 msgstr "Çý&k             F10"
 
-#: gtkedit/editmenu.c:148
+#: gtkedit/editmenu.c:141
 msgid "&New            C-x k"
 msgstr "&Yeni           C-x k"
 
-#: gtkedit/editmenu.c:154
+#: gtkedit/editmenu.c:147
 msgid "copy to &File...     "
 msgstr "&Dosyaya kopyala ...  "
 
-#: gtkedit/editmenu.c:166 gtkedit/editmenu.c:183
+#: gtkedit/editmenu.c:156 gtkedit/editmenu.c:173
 msgid "&Toggle Mark       F3"
 msgstr ""
 
-#: gtkedit/editmenu.c:167 gtkedit/editmenu.c:184
+#: gtkedit/editmenu.c:157 gtkedit/editmenu.c:174
 msgid "&Mark Columns    S-F3"
 msgstr ""
 
-#: gtkedit/editmenu.c:169 gtkedit/editmenu.c:186
+#: gtkedit/editmenu.c:159 gtkedit/editmenu.c:176
 msgid "toggle &Ins/overw Ins"
 msgstr ""
 
-#: gtkedit/editmenu.c:171 gtkedit/editmenu.c:188
+#: gtkedit/editmenu.c:161 gtkedit/editmenu.c:178
 msgid "&Copy              F5"
 msgstr "&Kopyala           F5"
 
-#: gtkedit/editmenu.c:172 gtkedit/editmenu.c:189
+#: gtkedit/editmenu.c:162 gtkedit/editmenu.c:179
 msgid "&Move              F6"
 msgstr "&Taþý              F6"
 
-#: gtkedit/editmenu.c:173 gtkedit/editmenu.c:190
+#: gtkedit/editmenu.c:163 gtkedit/editmenu.c:180
 msgid "&Delete            F8"
 msgstr "&Sil               F8"
 
-#: gtkedit/editmenu.c:175 gtkedit/editmenu.c:192
+#: gtkedit/editmenu.c:165 gtkedit/editmenu.c:182
 msgid "&Undo             C-u"
 msgstr "&Geriye al        C-u"
 
-#: gtkedit/editmenu.c:177 gtkedit/editmenu.c:194
+#: gtkedit/editmenu.c:167 gtkedit/editmenu.c:184
 msgid "&Beginning     C-PgUp"
 msgstr "&Baþ           C-SaYu"
 
-#: gtkedit/editmenu.c:178 gtkedit/editmenu.c:195
+#: gtkedit/editmenu.c:168 gtkedit/editmenu.c:185
 msgid "&End           C-PgDn"
 msgstr "&Son           C-SaAþ"
 
-#: gtkedit/editmenu.c:200 gtkedit/editmenu.c:207
+#: gtkedit/editmenu.c:190 gtkedit/editmenu.c:197
 msgid "&Search...         F7"
 msgstr "&Ara ...           F7"
 
-#: gtkedit/editmenu.c:201 gtkedit/editmenu.c:208
+#: gtkedit/editmenu.c:191 gtkedit/editmenu.c:198
 msgid "search &Again     F17"
 msgstr "Yeniden b&ul      F17"
 
-#: gtkedit/editmenu.c:202 gtkedit/editmenu.c:209
+#: gtkedit/editmenu.c:192 gtkedit/editmenu.c:199
 msgid "&Replace...        F4"
 msgstr "&Yerleþtir ....    F4"
 
-#: gtkedit/editmenu.c:214 gtkedit/editmenu.c:237
+#: gtkedit/editmenu.c:204 gtkedit/editmenu.c:227
 msgid "&Goto line...            M-l"
 msgstr "&Satra git ...           M-l"
 
-#: gtkedit/editmenu.c:215 gtkedit/editmenu.c:238
+#: gtkedit/editmenu.c:205 gtkedit/editmenu.c:228
 msgid "goto matching &Bracket   M-b"
 msgstr ""
 
-#: gtkedit/editmenu.c:217 gtkedit/editmenu.c:240
+#: gtkedit/editmenu.c:207 gtkedit/editmenu.c:230
 msgid "insert &Literal...       C-q"
 msgstr ""
 
-#: gtkedit/editmenu.c:219 gtkedit/editmenu.c:242
+#: gtkedit/editmenu.c:209 gtkedit/editmenu.c:232
 msgid "&Refresh screen          C-l"
 msgstr ""
 
-#: gtkedit/editmenu.c:221 gtkedit/editmenu.c:244
+#: gtkedit/editmenu.c:211 gtkedit/editmenu.c:234
 msgid "&Start record macro      C-r"
 msgstr ""
 
-#: gtkedit/editmenu.c:222 gtkedit/editmenu.c:245
+#: gtkedit/editmenu.c:212 gtkedit/editmenu.c:235
 msgid "&Finish record macro...  C-r"
 msgstr ""
 
-#: gtkedit/editmenu.c:223
+#: gtkedit/editmenu.c:213
 msgid "&Execute macro...   C-a, KEY"
 msgstr ""
 
-#: gtkedit/editmenu.c:224 gtkedit/editmenu.c:247
+#: gtkedit/editmenu.c:214 gtkedit/editmenu.c:237
 msgid "delete macr&O...            "
 msgstr "makr&oyu sil ...            "
 
-#: gtkedit/editmenu.c:226 gtkedit/editmenu.c:249
+#: gtkedit/editmenu.c:216 gtkedit/editmenu.c:239
 msgid "insert &Date/time           "
 msgstr "t&arih/zamaný içer          "
 
-#: gtkedit/editmenu.c:228 gtkedit/editmenu.c:251
+#: gtkedit/editmenu.c:218 gtkedit/editmenu.c:241
 msgid "format p&Aragraph        M-p"
 msgstr ""
 
-#: gtkedit/editmenu.c:229
+#: gtkedit/editmenu.c:219
 msgid "'ispell' s&Pell check    C-p"
 msgstr ""
 
-#: gtkedit/editmenu.c:230 gtkedit/editmenu.c:253
+#: gtkedit/editmenu.c:220 gtkedit/editmenu.c:243
 msgid "sor&T...                 M-t"
 msgstr ""
 
-#: gtkedit/editmenu.c:231 gtkedit/editmenu.c:254
-#, fuzzy
-msgid "E&xternal Formatter      F19"
+#: gtkedit/editmenu.c:221 gtkedit/editmenu.c:244
+msgid "'indent' &C Formatter    F19"
 msgstr "'indent' &C imleþtiricisi F19"
 
-#: gtkedit/editmenu.c:232
+#: gtkedit/editmenu.c:222
 msgid "&Mail...                    "
 msgstr "&ePostala ...               "
 
-#: gtkedit/editmenu.c:246
+#: gtkedit/editmenu.c:236
 msgid "&Execute macro... C-x e, KEY"
 msgstr ""
 
-#: gtkedit/editmenu.c:252
+#: gtkedit/editmenu.c:242
 msgid "'ispell' s&Pell check    M-$"
 msgstr ""
 
-#: gtkedit/editmenu.c:261 gtkedit/editmenu.c:270
+#: gtkedit/editmenu.c:251 gtkedit/editmenu.c:260
 msgid "&General...  "
 msgstr "&Genel ..."
 
-#: gtkedit/editmenu.c:262 gtkedit/editmenu.c:271
+#: gtkedit/editmenu.c:252 gtkedit/editmenu.c:261
 msgid "&Save mode..."
 msgstr "Ka&ydetme türü ..."
 
-#: gtkedit/editmenu.c:264 gtkedit/editmenu.c:273 src/main.c:1360
+#: gtkedit/editmenu.c:254 gtkedit/editmenu.c:263 src/main.c:1355
 msgid "&Layout..."
 msgstr "&Dizinem ..."
 
 #. The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t'
-#: gtkedit/editmenu.c:283 gtkedit/editmenu.c:292 gtkedit/editmenu.c:409
+#: gtkedit/editmenu.c:273 gtkedit/editmenu.c:282 gtkedit/editmenu.c:399
 #: src/chmod.c:164 src/chown.c:130
 msgid " File "
 msgstr " Dosya "
 
-#: gtkedit/editmenu.c:284 gtkedit/editmenu.c:293 gtkedit/editmenu.c:425
+#: gtkedit/editmenu.c:274 gtkedit/editmenu.c:283 gtkedit/editmenu.c:415
 msgid " Edit "
 msgstr " Deðiþtir "
 
-#: gtkedit/editmenu.c:285 gtkedit/editmenu.c:294
+#: gtkedit/editmenu.c:275 gtkedit/editmenu.c:284
 msgid " Sear/Repl "
 msgstr ""
 
-#: gtkedit/editmenu.c:286 gtkedit/editmenu.c:295 gtkedit/editmenu.c:465
+#: gtkedit/editmenu.c:276 gtkedit/editmenu.c:285 gtkedit/editmenu.c:455
 msgid " Command "
-msgstr " Komuta "
+msgstr " Komut "
 
-#: gtkedit/editmenu.c:287 gtkedit/editmenu.c:296
+#: gtkedit/editmenu.c:277 gtkedit/editmenu.c:286
 msgid " Options "
-msgstr " Ayarlar "
+msgstr " Seçenekler "
 
-#: gtkedit/editmenu.c:410
+#: gtkedit/editmenu.c:400
 msgid "Open...\tC-o"
 msgstr "Aç ...\tC-o"
 
-#: gtkedit/editmenu.c:411
+#: gtkedit/editmenu.c:401
 msgid "New\tC-n"
 msgstr "Yeni\tC-n"
 
-#: gtkedit/editmenu.c:413
+#: gtkedit/editmenu.c:403
 msgid "Save\tF2"
 msgstr "Kaydet\tF2"
 
-#: gtkedit/editmenu.c:414
+#: gtkedit/editmenu.c:404
 msgid "Save as...\tF12"
 msgstr "Farklý kaydet.... \tF12"
 
-#: gtkedit/editmenu.c:416
+#: gtkedit/editmenu.c:406
 msgid "Insert file...\tF15"
-msgstr ""
+msgstr "Dosya ekle...\tF15"
 
-#: gtkedit/editmenu.c:417
+#: gtkedit/editmenu.c:407
 msgid "Copy to file...\tC-f"
-msgstr ""
+msgstr "Dosyaya kopyala...\tC-f"
 
 #. Tool hint
-#: gtkedit/editmenu.c:420
+#: gtkedit/editmenu.c:410
 msgid "Disk operations and file indexing/searching"
 msgstr ""
 
-#: gtkedit/editmenu.c:426
+#: gtkedit/editmenu.c:416
 msgid "Toggle mark\tF3"
 msgstr ""
 
-#: gtkedit/editmenu.c:427
+#: gtkedit/editmenu.c:417
 msgid "Toggle mark columns\tC-b"
 msgstr ""
 
-#: gtkedit/editmenu.c:429
+#: gtkedit/editmenu.c:419
 msgid "Toggle book mark\tC-M-Ins"
 msgstr ""
 
-#: gtkedit/editmenu.c:430
+#: gtkedit/editmenu.c:420
 msgid "Previous book mark\tC-M-Up"
 msgstr ""
 
-#: gtkedit/editmenu.c:431
+#: gtkedit/editmenu.c:421
 msgid "Next book mark\tC-M-Down"
 msgstr ""
 
-#: gtkedit/editmenu.c:432
+#: gtkedit/editmenu.c:422
 msgid "Flush book marks"
 msgstr ""
 
-#: gtkedit/editmenu.c:434
+#: gtkedit/editmenu.c:424
 msgid "Toggle insert/overwrite\tIns"
 msgstr ""
 
-#: gtkedit/editmenu.c:436
+#: gtkedit/editmenu.c:426
 msgid "Copy block to cursor\tF5"
 msgstr ""
 
-#: gtkedit/editmenu.c:437
+#: gtkedit/editmenu.c:427
 msgid "Move block to cursor\tF6"
 msgstr ""
 
-#: gtkedit/editmenu.c:438
+#: gtkedit/editmenu.c:428
 msgid "Delete block\tF8/C-Del"
 msgstr ""
 
-#: gtkedit/editmenu.c:440
+#: gtkedit/editmenu.c:430
 msgid "Copy block to clipbrd\tC-Ins"
 msgstr ""
 
-#: gtkedit/editmenu.c:441
+#: gtkedit/editmenu.c:431
 msgid "Cut block to clipbrd\tS-Del"
 msgstr ""
 
-#: gtkedit/editmenu.c:442
+#: gtkedit/editmenu.c:432
 msgid "Paste block from clipbrd\tS-Ins"
 msgstr ""
 
-#: gtkedit/editmenu.c:443
+#: gtkedit/editmenu.c:433
 msgid "Selection history\tM-Ins"
 msgstr ""
 
-#: gtkedit/editmenu.c:445
+#: gtkedit/editmenu.c:435
 msgid "Undo\tC-BackSpace"
 msgstr ""
 
 #. Tool hint
-#: gtkedit/editmenu.c:448
+#: gtkedit/editmenu.c:438
 msgid "Manipulating blocks of text"
 msgstr ""
 
-#: gtkedit/editmenu.c:453
+#: gtkedit/editmenu.c:443
 msgid " Srch/Replce "
 msgstr ""
 
-#: gtkedit/editmenu.c:454
+#: gtkedit/editmenu.c:444
 msgid "Search...\tF7"
 msgstr ""
 
-#: gtkedit/editmenu.c:455
+#: gtkedit/editmenu.c:445
 msgid "Search again\tF17"
 msgstr ""
 
-#: gtkedit/editmenu.c:456
+#: gtkedit/editmenu.c:446
 msgid "Replace...\tF4"
 msgstr ""
 
-#: gtkedit/editmenu.c:457
+#: gtkedit/editmenu.c:447
 msgid "Replace again\tF14"
 msgstr ""
 
 #. Tool hint
-#: gtkedit/editmenu.c:460
+#: gtkedit/editmenu.c:450
 msgid "Search for and replace text"
-msgstr ""
+msgstr "Metni ara/deðiþtir"
 
-#: gtkedit/editmenu.c:466
+#: gtkedit/editmenu.c:456
 msgid "Goto line...\tM-l"
-msgstr ""
+msgstr "Satýra git...\tM-l"
 
-#: gtkedit/editmenu.c:467
+#: gtkedit/editmenu.c:457
 msgid "Goto matching bracket\tM-b"
 msgstr ""
 
-#: gtkedit/editmenu.c:469
+#: gtkedit/editmenu.c:459
 msgid "Start record macro\tC-r"
 msgstr ""
 
-#: gtkedit/editmenu.c:470
+#: gtkedit/editmenu.c:460
 msgid "Finish record macro...\tC-r"
 msgstr ""
 
-#: gtkedit/editmenu.c:471
+#: gtkedit/editmenu.c:461
 msgid "Execute macro...\tC-a, KEY"
 msgstr ""
 
-#: gtkedit/editmenu.c:472
+#: gtkedit/editmenu.c:462
 msgid "Delete macro...\t"
-msgstr ""
+msgstr "Makroyu sil...\t"
 
-#: gtkedit/editmenu.c:474
+#: gtkedit/editmenu.c:464
 msgid "Insert date/time\tC-d"
-msgstr ""
+msgstr "Tarih/zaman ekle\tC-d"
 
-#: gtkedit/editmenu.c:475
+#: gtkedit/editmenu.c:465
 msgid "Format paragraph\tM-p"
-msgstr ""
+msgstr "Paragrafý formatla\tM-p"
 
-#: gtkedit/editmenu.c:477
+#: gtkedit/editmenu.c:467
 msgid "Refresh display\tC-l"
-msgstr ""
+msgstr "Ekraný tazele\tC-l"
 
 #. Tool hint
-#: gtkedit/editmenu.c:480
+#: gtkedit/editmenu.c:470
 msgid "Macros and internal commands"
-msgstr ""
+msgstr "Makrolar ve iç komutlar"
 
 #: gtkedit/editoptions.c:36
 msgid "Intuitive"
-msgstr ""
+msgstr "Öðretici"
 
 #: gtkedit/editoptions.c:36
 msgid "Emacs"
-msgstr ""
+msgstr "Emacs"
 
 #: gtkedit/editoptions.c:39
 msgid "None"
-msgstr ""
+msgstr "Hiçbiri"
 
 #: gtkedit/editoptions.c:39
 msgid "Dynamic paragraphing"
@@ -2734,7 +2674,7 @@ msgstr ""
 #. 4
 #: gtkedit/editoptions.c:78
 msgid "Tab spacing : "
-msgstr ""
+msgstr "Tab boþluðu : "
 
 #: gtkedit/editoptions.c:86
 msgid "synta&X highlighting"
@@ -2785,8 +2725,8 @@ msgid "Error initialising editor.\n"
 msgstr ""
 
 #: gtkedit/editwidget.c:1136 gtkedit/gtkedit.c:1246 src/help.c:806
-#: src/main.c:1726 src/screen.c:2393 src/screen.c:2423 src/tree.c:1008
-#: src/view.c:2070
+#: src/main.c:1721 src/screen.c:2395 src/screen.c:2425 src/tree.c:1008
+#: src/view.c:2073
 msgid "Help"
 msgstr "Yardým"
 
@@ -2798,27 +2738,27 @@ msgstr "Iþaretle"
 msgid "Replac"
 msgstr "Yerleþle"
 
-#: gtkedit/editwidget.c:1145 src/main.c:1728
+#: gtkedit/editwidget.c:1145 src/main.c:1723
 msgid "PullDn"
 msgstr "Aç"
 
 #. gtk_edit_menu
 #: gtkedit/editwidget.c:1146 gtkedit/gtkedit.c:1256 src/help.c:818
-#: src/main.c:1729 src/view.c:2072 src/view.c:2094
+#: src/main.c:1724 src/view.c:2075 src/view.c:2097
 msgid "Quit"
 msgstr "Çýk"
 
 #: gtkedit/gtkedit.c:65
 msgid "&Dismiss"
-msgstr ""
+msgstr "&Sil"
 
 #: gtkedit/gtkedit.c:66
 msgid " Enter file name: "
-msgstr " Dosya adýný ver: "
+msgstr " Dosya adýný verin: "
 
 #: gtkedit/gtkedit.c:111
 msgid "The Quick Brown Fox Jumps Over The Lazy Dog"
-msgstr ""
+msgstr "Dað Baþýný Duman Almýþ, Gümüþ Dere Durmaz Akar"
 
 #: gtkedit/gtkedit.c:802
 msgid ""
@@ -2827,11 +2767,11 @@ msgstr ""
 
 #: gtkedit/gtkedit.c:1246
 msgid "Interactive help browser"
-msgstr ""
+msgstr "Etkileþimli yardým tarayýcýsý"
 
 #: gtkedit/gtkedit.c:1247
 msgid "Save to current file name"
-msgstr ""
+msgstr "Þimdiki dosya adýna kaydet"
 
 #: gtkedit/gtkedit.c:1248
 msgid "Toggle In/Off invisible marker to highlight text"
@@ -2859,7 +2799,7 @@ msgstr "Bul"
 
 #: gtkedit/gtkedit.c:1253
 msgid "Find strings/regular expressions"
-msgstr ""
+msgstr "Dizeleri/düzgün deyimleri bul"
 
 #: gtkedit/gtkedit.c:1254
 msgid "Dlete"
@@ -2867,107 +2807,107 @@ msgstr "Sil"
 
 #: gtkedit/gtkedit.c:1254
 msgid "Delete highlighted text"
-msgstr ""
+msgstr "Seçili metni sil"
 
-#: gtkedit/gtkedit.c:1255 src/main.c:1727 src/screen.c:2394 src/screen.c:2424
+#: gtkedit/gtkedit.c:1255 src/main.c:1722 src/screen.c:2396 src/screen.c:2426
 msgid "Menu"
-msgstr "Mönü"
+msgstr "Menü"
 
 #: gtkedit/gtkedit.c:1255
 msgid "Pull down menu"
-msgstr ""
+msgstr "Aþaðý çekilir menü"
 
 #: gtkedit/gtkedit.c:1256
 msgid "Exit editor"
-msgstr ""
+msgstr "Düzenleyiciden çýk"
 
 #: gtkedit/gtkedit.c:1290
 msgid "Clear the edit buffer"
-msgstr ""
+msgstr "Düzenleme tamponunu temizle"
 
 #: gtkedit/gtkedit.c:1295
 msgid "Insert File"
-msgstr ""
+msgstr "Dosya Ekle"
 
 #: gtkedit/gtkedit.c:1295
 msgid "Insert text from a file"
-msgstr ""
+msgstr "Dosyadan metin ekle"
 
 #: gtkedit/gtkedit.c:1297
 msgid "Copy to file"
-msgstr ""
+msgstr "Dosyaya kopyala"
 
 #: gtkedit/gtkedit.c:1297
 msgid "copy a block to a file"
-msgstr ""
+msgstr "dosyaya bir blok kopyala"
 
 #: gtkedit/gtkedit.c:1337
 msgid "Search/Replace"
-msgstr ""
+msgstr "Ara/Deðiþtir"
 
-#: gtkedit/syntax.c:1072 gtkedit/syntax.c:1081 gtkedit/syntax.c:1090
-#: gtkedit/syntax.c:1099
+#: gtkedit/syntax.c:1069 gtkedit/syntax.c:1078 gtkedit/syntax.c:1087
+#: gtkedit/syntax.c:1096
 msgid " Spelling Message "
-msgstr ""
+msgstr " Ýmla Denetimi Mesajý "
 
-#: gtkedit/syntax.c:1072
+#: gtkedit/syntax.c:1069
 msgid ""
 " Fail trying to open ispell program. \n"
 " Check that it is in your path and works with the -a option. \n"
 " Alternatively, disable spell checking from the Options menu. "
 msgstr ""
 
-#: gtkedit/syntax.c:1081
+#: gtkedit/syntax.c:1078
 msgid ""
 " Fail trying to open ispell pipes. \n"
 " Check that it is in your path and works with the -a option. \n"
 " Alternatively, disable spell checking from the Options menu. "
 msgstr ""
 
-#: gtkedit/syntax.c:1090
+#: gtkedit/syntax.c:1087
 msgid ""
 " Fail trying to read ispell pipes. \n"
 " Check that it is in your path and works with the -a option. \n"
 " Alternatively, disable spell checking from the Options menu. "
 msgstr ""
 
-#: gtkedit/syntax.c:1099
+#: gtkedit/syntax.c:1096
 msgid ""
 " Error reading from ispell. \n"
 " Ispell is being restarted. "
 msgstr ""
 
-#: gtkedit/syntax.c:1370 gtkedit/syntax.c:1372
+#: gtkedit/syntax.c:1369 gtkedit/syntax.c:1371
 msgid " Load Syntax Rules "
 msgstr ""
 
-#: gtkedit/syntax.c:1370 gtkedit/syntax.c:1372
+#: gtkedit/syntax.c:1369 gtkedit/syntax.c:1371
 msgid ""
 " Your syntax rule file is outdated \n"
 " A new rule file is being installed. \n"
 " Your old rule file has been saved with a .OLD extension. "
 msgstr ""
 
-#: gtkedit/syntax.c:1515 gtkedit/syntax.c:1522
+#: gtkedit/syntax.c:1519 gtkedit/syntax.c:1526
 msgid " Load syntax file "
 msgstr ""
 
-#: gtkedit/syntax.c:1515
+#: gtkedit/syntax.c:1519
 msgid " File access error "
 msgstr ""
 
-#: gtkedit/syntax.c:1521
+#: gtkedit/syntax.c:1525
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr ""
 
 #: src/achown.c:72 src/chmod.c:115 src/chown.c:80
 msgid "&Set"
-msgstr ""
+msgstr "&Tanýmla"
 
 #: src/achown.c:73
 msgid "S&kip"
-msgstr ""
+msgstr "&Atla"
 
 #: src/achown.c:74 src/chmod.c:119 src/chown.c:83
 msgid "Set &all"
@@ -2975,15 +2915,15 @@ msgstr ""
 
 #: src/achown.c:362 src/achown.c:369
 msgid "owner"
-msgstr ""
+msgstr "sahibi"
 
 #: src/achown.c:364 src/achown.c:371
 msgid "group"
-msgstr ""
+msgstr "grubu"
 
 #: src/achown.c:366
 msgid "other"
-msgstr ""
+msgstr "diðer"
 
 #: src/achown.c:374
 msgid "On"
@@ -2991,12 +2931,12 @@ msgstr "Aç"
 
 #: src/achown.c:376
 msgid "Flag"
-msgstr "Derek"
+msgstr "Bayrak"
 
 #: src/achown.c:383
 #, c-format
 msgid "%6d of %d"
-msgstr ""
+msgstr "%6d / %d"
 
 #: src/achown.c:391
 msgid " Chown advanced command "
@@ -3019,9 +2959,9 @@ msgid ""
 msgstr ""
 
 #: src/achown.c:666 src/achown.c:670 src/chmod.c:320 src/chmod.c:324
-#: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:671
+#: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:621
 msgid " Oops... "
-msgstr ""
+msgstr " Tüh.. "
 
 #: src/achown.c:667
 msgid " I can't run the Advanced Chown command on an extfs "
@@ -3033,11 +2973,11 @@ msgstr ""
 
 #: src/background.c:181
 msgid "Background process:"
-msgstr ""
+msgstr "Arkaplan süreci:"
 
 #: src/background.c:287 src/file.c:2189
 msgid " Background process error "
-msgstr ""
+msgstr " Arkaplan süreç hatasý "
 
 #: src/background.c:294
 msgid " Child died unexpectedly "
@@ -3049,7 +2989,7 @@ msgstr ""
 
 #: src/background.c:311
 msgid " Background protocol error "
-msgstr ""
+msgstr " Arkaplan protokol hatasý "
 
 #: src/background.c:312
 msgid ""
@@ -3075,15 +3015,15 @@ msgstr "&Uzun dosya bakýþý"
 
 #: src/boxes.c:71
 msgid "&User defined:"
-msgstr "Ku&llanýcýya özgü :"
+msgstr "Ku&llanýcýya özgü:"
 
 #: src/boxes.c:72
 msgid "&Icon view"
-msgstr "&Ikona bakýþý"
+msgstr "&Simge bakýþý"
 
 #: src/boxes.c:137
 msgid "user &Mini status"
-msgstr ""
+msgstr "&kullanýcý istatistiði"
 
 #: src/boxes.c:186
 msgid "Listing mode"
@@ -3095,7 +3035,7 @@ msgstr "Te&rs"
 
 #: src/boxes.c:281
 msgid "case sensi&tive"
-msgstr ""
+msgstr "&büyük/küçük harf duyarlý"
 
 #: src/boxes.c:282
 msgid "Sort order"
@@ -3103,19 +3043,19 @@ msgstr "Sýralama türü"
 
 #: src/boxes.c:381
 msgid " confirm &Exit "
-msgstr " çýkmayý &onaylat "
+msgstr " çýkmayý &onayla "
 
 #: src/boxes.c:383
 msgid " confirm e&Xecute "
-msgstr " çalýþtýrmayý o&naylat "
+msgstr " çalýþtýrmayý o&nayla "
 
 #: src/boxes.c:385
 msgid " confirm o&Verwrite "
-msgstr " ü&stüne yazmayý onaylat "
+msgstr " ü&stüne yazmayý onayla "
 
 #: src/boxes.c:387
 msgid " confirm &Delete "
-msgstr " sil&meyi onaylar "
+msgstr " sil&meyi onayla "
 
 #: src/boxes.c:393
 msgid " Confirmation "
@@ -3139,7 +3079,7 @@ msgstr "Tam 8-bitlik veri"
 
 #: src/boxes.c:476
 msgid " Display bits "
-msgstr ""
+msgstr " Bitleri görüntüle "
 
 #: src/boxes.c:651
 msgid "&Always use ftp proxy"
@@ -3147,7 +3087,7 @@ msgstr "Her z&aman ftp proxy'sini kullan"
 
 #: src/boxes.c:653
 msgid "sec"
-msgstr "san."
+msgstr "sn."
 
 #: src/boxes.c:657
 msgid "ftpfs directory cache timeout:"
@@ -3155,36 +3095,36 @@ msgstr ""
 
 #: src/boxes.c:661
 msgid "ftp anonymous password:"
-msgstr ""
+msgstr "ftp anonnim parolasý:"
 
 #: src/boxes.c:668
 msgid "Timeout for freeing VFSs:"
-msgstr ""
+msgstr "SDS'ni serbest býrakmak için zaman aþýmý:"
 
 #: src/boxes.c:674
 msgid " Virtual File System Setting "
-msgstr ""
+msgstr " Sanal Dosya Sistemi Ayarlarý "
 
 #: src/boxes.c:740
 msgid "Quick cd"
-msgstr ""
+msgstr "Hýzlý cd"
 
 #. want cd like completion
 #: src/boxes.c:745
 msgid "cd"
-msgstr ""
+msgstr "cd"
 
 #: src/boxes.c:796
 msgid "Symbolic link"
-msgstr ""
+msgstr "Sembolik bað"
 
 #: src/boxes.c:833
 msgid "Running "
-msgstr ""
+msgstr "Çalýþýyor "
 
 #: src/boxes.c:834 src/find.c:719 src/find.c:960
 msgid "Stopped"
-msgstr ""
+msgstr "Durduruldu"
 
 #: src/boxes.c:895
 msgid "&Stop"
@@ -3200,7 +3140,7 @@ msgstr "&Öldür"
 
 #: src/boxes.c:936
 msgid "Background Jobs"
-msgstr ""
+msgstr "Arkaplan Görevleri"
 
 #: src/chmod.c:95
 msgid "execute/search by others"
@@ -3324,11 +3264,11 @@ msgstr " Ad "
 
 #: src/chown.c:114
 msgid " Owner name "
-msgstr " Iye adý "
+msgstr " Sahip adý "
 
 #: src/chown.c:116 src/chown.c:128
 msgid " Group name "
-msgstr " Kitle adý "
+msgstr " Grup adý "
 
 #: src/chown.c:118
 msgid " Size "
@@ -3336,7 +3276,7 @@ msgstr " Boyut "
 
 #: src/chown.c:124
 msgid " Chown command "
-msgstr " Yömle komutasý "
+msgstr " Chown komutu "
 
 #: src/chown.c:126
 msgid " User name "
@@ -3359,255 +3299,246 @@ msgstr ""
 msgid " I can't run the Chown command on a tarfs "
 msgstr ""
 
-#: src/cmd.c:195
+#: src/cmd.c:198
 #, c-format
 msgid " Can not fetch a local copy of %s "
 msgstr ""
 
-#: src/cmd.c:245
+#: src/cmd.c:248
 msgid " CD "
 msgstr ""
 
-#: src/cmd.c:245
+#: src/cmd.c:248
 msgid "Files tagged, want to cd?"
 msgstr ""
 
-#: src/cmd.c:251 src/cmd.c:712 src/cmd.c:731
+#: src/cmd.c:254 src/cmd.c:713 src/cmd.c:732
 msgid "Could not change directory"
 msgstr ""
 
-#: src/cmd.c:280
+#: src/cmd.c:283
 msgid " View file "
 msgstr " Dosyayý göster "
 
-#: src/cmd.c:280
+#: src/cmd.c:283
 msgid " Filename:"
-msgstr " Dosya adý :"
+msgstr " Dosya adý:"
 
-#: src/cmd.c:297
+#: src/cmd.c:300
 msgid " Filtered view "
 msgstr ""
 
-#: src/cmd.c:297
+#: src/cmd.c:300
 msgid " Filter command and arguments:"
 msgstr ""
 
-#: src/cmd.c:385
+#: src/cmd.c:388
 msgid "Create a new Directory"
-msgstr ""
+msgstr "Yeni bir dizin yarat"
 
-#: src/cmd.c:385
+#: src/cmd.c:388
 msgid " Enter directory name:"
-msgstr " Dizin adýný ver :"
+msgstr " Dizin adýný ver:"
 
-#: src/cmd.c:446
+#: src/cmd.c:449
 msgid " Filter "
-msgstr " Filtra "
+msgstr " Filtre "
 
-#: src/cmd.c:446
+#: src/cmd.c:449
 msgid " Set expression for filtering filenames"
 msgstr ""
 
-#: src/cmd.c:512
+#: src/cmd.c:515
 msgid " Select "
-msgstr ""
+msgstr " Seç "
 
-#: src/cmd.c:564
+#: src/cmd.c:567
 msgid " Unselect "
-msgstr ""
+msgstr " Seçme "
 
-#: src/cmd.c:637
+#: src/cmd.c:640
 msgid "Extension file edit"
 msgstr ""
 
-#: src/cmd.c:638
+#: src/cmd.c:641
 msgid " Which extension file you want to edit? "
 msgstr ""
 
-#: src/cmd.c:639
+#: src/cmd.c:642
 msgid "&User"
-msgstr ""
+msgstr "&Kullanýcý"
 
-#: src/cmd.c:639 src/cmd.c:667
+#: src/cmd.c:642 src/cmd.c:668
 msgid "&System Wide"
-msgstr ""
-
-#: src/cmd.c:664
-msgid " Menu edit "
-msgstr " Mönüyü deðiþtir "
+msgstr "&Sisteme Yönelik"
 
 #: src/cmd.c:665
-msgid " Which menu file will you edit ? "
-msgstr ""
+msgid "Menu file edit"
+msgstr "Menü dosyasý düzenleme"
 
-#: src/cmd.c:667
+#: src/cmd.c:666
+msgid " Which menu file will you edit? "
+msgstr " Hangi menü dosyasýný düzenleyeceksiniz? "
+
+#: src/cmd.c:668
 msgid "&Local"
 msgstr "Yere&l"
 
-#: src/cmd.c:667
+#: src/cmd.c:668
 msgid "&Home"
-msgstr "&Bark"
-
-#: src/cmd.c:857
-msgid " Compare directories "
-msgstr ""
-
-#: src/cmd.c:857
-msgid " Select compare method: "
-msgstr ""
+msgstr "&Ev dizini"
 
 #: src/cmd.c:858
+msgid " Compare directories "
+msgstr " Dizinleri karþýlaþtýr "
+
+#: src/cmd.c:858
+msgid " Select compare method: "
+msgstr " Karþýlaþtýrma yöntemi seç: "
+
+#: src/cmd.c:859
 msgid "&Quick"
 msgstr ""
 
-#: src/cmd.c:858
+#: src/cmd.c:859
 msgid "&Size only"
 msgstr ""
 
-#: src/cmd.c:858
+#: src/cmd.c:859
 msgid "&Thorough"
 msgstr ""
 
-#: src/cmd.c:868
+#: src/cmd.c:869
 msgid " Both panels should be on the listing view mode to use this command "
 msgstr ""
 
-#: src/cmd.c:882
+#: src/cmd.c:883
 msgid " The command history is empty "
 msgstr ""
 
-#: src/cmd.c:888
+#: src/cmd.c:889
 msgid " Command history "
 msgstr ""
 
-#: src/cmd.c:930
+#: src/cmd.c:931
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
 msgstr ""
 
-#: src/cmd.c:969
+#: src/cmd.c:970
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr ""
 
-#: src/cmd.c:1024
+#: src/cmd.c:1025
 #, c-format
 msgid ""
 " Couldn't stat %s \n"
 " %s "
 msgstr ""
 
-#: src/cmd.c:1033 src/cmd.c:1035
+#: src/cmd.c:1034 src/cmd.c:1036
 msgid " Link "
 msgstr ""
 
-#: src/cmd.c:1034 src/cmd.c:1173 src/file.c:1704
+#: src/cmd.c:1035 src/cmd.c:1174 src/file.c:1704
 msgid " to:"
 msgstr ""
 
-#: src/cmd.c:1045
+#: src/cmd.c:1046
 #, c-format
 msgid " link: %s "
 msgstr ""
 
-#: src/cmd.c:1078
+#: src/cmd.c:1079
 #, c-format
 msgid " symlink: %s "
 msgstr ""
 
-#: src/cmd.c:1132
+#: src/cmd.c:1133
 #, c-format
 msgid " Symlink `%s' points to: "
 msgstr ""
 
-#: src/cmd.c:1137
+#: src/cmd.c:1138
 msgid " Edit symlink "
 msgstr ""
 
-#: src/cmd.c:1142
+#: src/cmd.c:1143
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr ""
 
-#: src/cmd.c:1146
+#: src/cmd.c:1147
 #, c-format
 msgid " edit symlink: %s "
 msgstr ""
 
-#: src/cmd.c:1173
+#: src/cmd.c:1174
 msgid " Link symbolically "
 msgstr ""
 
-#: src/cmd.c:1174
+#: src/cmd.c:1175
 msgid " Relative symlink "
 msgstr ""
 
-#: src/cmd.c:1185
+#: src/cmd.c:1186
 #, c-format
 msgid " relative symlink: %s "
 msgstr ""
 
-#: src/cmd.c:1260
-msgid "Using default locale"
-msgstr "Önayarlý yerelleþtirmeyi kullanýyorum"
-
-#: src/cmd.c:1262
-#, c-format
-msgid "Using locale \"%s\" (from environment variable %s)"
-msgstr ""
-
-#: src/cmd.c:1348
+#: src/cmd.c:1336
 msgid " Enter machine name (F1 for details): "
 msgstr ""
 
-#: src/cmd.c:1375
+#: src/cmd.c:1363
 #, c-format
 msgid " Could not chdir to %s "
 msgstr ""
 
-#: src/cmd.c:1382 src/widget.c:1162
+#: src/cmd.c:1370
 msgid " Link to a remote machine "
 msgstr ""
 
-#: src/cmd.c:1388 src/widget.c:1163
+#: src/cmd.c:1376
 msgid " FTP to machine "
 msgstr ""
 
-#: src/cmd.c:1394 src/widget.c:1164
+#: src/cmd.c:1382
 msgid " SMB link to machine "
 msgstr ""
 
-#: src/cmd.c:1404
+#: src/cmd.c:1392
 msgid " Socket source routing setup "
 msgstr ""
 
-#: src/cmd.c:1405
+#: src/cmd.c:1393
 msgid " Enter host name to use as a source routing hop: "
 msgstr ""
 
-#: src/cmd.c:1413
+#: src/cmd.c:1400
 msgid " Host name "
 msgstr ""
 
-#: src/cmd.c:1413
+#: src/cmd.c:1400
 msgid " Error while looking up IP address "
 msgstr ""
 
-#: src/cmd.c:1424
+#: src/cmd.c:1411
 msgid " Undelete files on an ext2 file system "
 msgstr ""
 
-#: src/cmd.c:1425
+#: src/cmd.c:1412
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
 msgstr ""
 
-#: src/cmd.c:1475
+#: src/cmd.c:1462
 msgid " Setup saved to ~/"
 msgstr ""
 
-#: src/cmd.c:1480
+#: src/cmd.c:1467
 msgid " Setup "
 msgstr ""
 
@@ -3698,21 +3629,21 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: src/ext.c:143 src/user.c:544
+#: src/ext.c:143 src/user.c:499
 #, c-format
 msgid ""
 " Can't generate unique filename \n"
 " %s "
 msgstr ""
 
-#: src/ext.c:150 src/user.c:556
+#: src/ext.c:150 src/user.c:511
 #, c-format
 msgid ""
 " Can't create temporary command file \n"
 " %s "
 msgstr ""
 
-#: src/ext.c:165 src/user.c:578
+#: src/ext.c:165 src/user.c:533
 msgid " Parameter "
 msgstr ""
 
@@ -3720,51 +3651,42 @@ msgstr ""
 msgid " Can't execute commands on a Virtual File System directory "
 msgstr ""
 
-#: src/ext.c:414
+#: src/ext.c:412
 msgid " file error"
 msgstr ""
 
-#: src/ext.c:415
+#: src/ext.c:413
 msgid "Format of the "
 msgstr ""
 
-#: src/ext.c:417
-msgid ""
-"mc.ext file has changed\n"
-"with version 3.0. It seems that installation\n"
-"failed. Please fetch a fresh new copy from the\n"
-"Midnight Commander package or in case you don't\n"
-"have any, get it from ftp://ftp.nuclecu.unam.mx."
-msgstr ""
-
-#: src/ext.c:432
+#: src/ext.c:431
 msgid " file error "
 msgstr ""
 
-#: src/ext.c:433
+#: src/ext.c:432
 msgid "Format of the ~/"
 msgstr ""
 
-#: src/ext.c:433
+#: src/ext.c:432
 msgid ""
 " file has changed\n"
 "with version 3.0. You may want either to\n"
 "copy it from "
 msgstr ""
 
-#: src/ext.c:435
+#: src/ext.c:434
 msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
 msgstr ""
 
-#: src/ext.c:437
+#: src/ext.c:436
 msgid "mc.ext will be used for this moment."
 msgstr ""
 
 #: src/features.inc:8
 msgid "Edition: "
-msgstr "Nesil : "
+msgstr "Düzenleme: "
 
 #: src/features.inc:11
 msgid "XView"
@@ -3772,11 +3694,11 @@ msgstr "XView"
 
 #: src/features.inc:13
 msgid "Tk"
-msgstr "Tk"
+msgstr "tk"
 
 #: src/features.inc:16
 msgid "text mode"
-msgstr "metin türü"
+msgstr "metin kipi"
 
 #: src/features.inc:18
 msgid " with X11 support to read modifiers"
@@ -3827,47 +3749,44 @@ msgid "S-lang library with "
 msgstr ""
 
 #: src/features.inc:56
-#, fuzzy
 msgid "terminfo"
-msgstr "Komutayý kullan"
+msgstr "terminfo"
 
 #: src/features.inc:59
 msgid "termcap"
-msgstr ""
+msgstr "termcap"
 
 #: src/features.inc:61
 msgid "an unknown terminal"
-msgstr ""
+msgstr "bilinmeyen terminal"
 
 #: src/features.inc:64
 msgid " database"
-msgstr ""
+msgstr " veritabaný"
 
 #: src/features.inc:67
 msgid "the ncurses library"
-msgstr ""
+msgstr "ncurses kütüphanesi"
 
 #: src/features.inc:69
 msgid "some unknown curses library"
-msgstr ""
+msgstr "bilinmeyen curses kütüphanesi"
 
 #: src/features.inc:74
 msgid "With subshell support: "
 msgstr ""
 
 #: src/features.inc:76
-#, fuzzy
 msgid "optional"
-msgstr "Ayarlar"
+msgstr "seçimlik"
 
 #: src/features.inc:78
 msgid "as default"
-msgstr ""
+msgstr "öntanýmlý"
 
 #: src/features.inc:84
-#, fuzzy
 msgid "With support for background operations\n"
-msgstr "Ardalan iþlemlerinin listeleri"
+msgstr "Arkaplan iþlemleri desteðiyle\n"
 
 #: src/file.c:154 src/tree.c:639
 msgid " Copy "
@@ -4177,7 +4096,7 @@ msgstr ""
 msgid "%o %d %f%e"
 msgstr ""
 
-#: src/file.c:1703 vfs/fish.c:509
+#: src/file.c:1703 vfs/fish.c:496
 msgid "file"
 msgstr ""
 
@@ -4205,11 +4124,11 @@ msgstr ""
 msgid " Can't operate on \"..\"! "
 msgstr ""
 
-#: src/file.c:1875 src/screen.c:2115
+#: src/file.c:1875 src/screen.c:2117
 msgid "Yes"
 msgstr "Evet"
 
-#: src/file.c:1875 src/screen.c:2115
+#: src/file.c:1875 src/screen.c:2117
 msgid "No"
 msgstr "Hayýr"
 
@@ -4219,11 +4138,11 @@ msgstr ""
 
 #: src/file.c:2014 src/file.c:2098
 msgid " Internal failure "
-msgstr " Iç hata "
+msgstr ""
 
 #: src/file.c:2014 src/file.c:2098
 msgid " Unknown file operation "
-msgstr " Bilinmeyen dosya iþlemi "
+msgstr ""
 
 #: src/file.c:2029
 #, c-format
@@ -4231,8 +4150,6 @@ msgid ""
 " Destination \"%s\" must be a directory \n"
 " %s "
 msgstr ""
-" Hedef \"%s\" bir dizin olmak zorunda \n"
-" %s "
 
 #: src/file.c:2190
 msgid "&Retry"
@@ -4248,9 +4165,6 @@ msgid ""
 "   Directory not empty.   \n"
 "   Delete it recursively? "
 msgstr ""
-"\n"
-"   Dizin boþ deðil.   \n"
-"   Dizini komple sileyim mi ? "
 
 #: src/file.c:2243
 msgid ""
@@ -4261,7 +4175,7 @@ msgstr ""
 
 #: src/file.c:2250
 msgid "a&ll"
-msgstr "&hepsi"
+msgstr ""
 
 #: src/file.c:2250 src/filegui.c:595
 msgid "non&E"
@@ -4375,7 +4289,7 @@ msgstr ""
 
 #: src/filegui.c:831
 msgid "&Background"
-msgstr "&Ardalan"
+msgstr ""
 
 #: src/filegui.c:840
 msgid "&Stable Symlinks"
@@ -4437,7 +4351,7 @@ msgstr ""
 msgid "Content: "
 msgstr ""
 
-#: src/find.c:171 src/main.c:1248 src/main.c:1272
+#: src/find.c:171 src/main.c:1245 src/main.c:1269
 msgid "&Tree"
 msgstr "&Aðaç"
 
@@ -4462,7 +4376,7 @@ msgstr ""
 msgid "Finished"
 msgstr ""
 
-#: src/find.c:561 src/view.c:1528
+#: src/find.c:561 src/view.c:1531
 #, c-format
 msgid "Searching %s"
 msgstr ""
@@ -4537,7 +4451,7 @@ msgstr ""
 msgid " Help "
 msgstr ""
 
-#: src/help.c:766 src/user.c:689
+#: src/help.c:766 src/user.c:637
 #, c-format
 msgid ""
 " Can't open file %s \n"
@@ -4748,7 +4662,7 @@ msgstr "Midnight Commander %s"
 #: src/info.c:109
 #, c-format
 msgid "File:       %s"
-msgstr "Dosya :     %s"
+msgstr "Dosya:      %s"
 
 #: src/info.c:122
 msgid "Free nodes %d (%d%%) of %d"
@@ -4802,40 +4716,40 @@ msgstr ""
 #: src/info.c:166
 #, c-format
 msgid "Created:   %s"
-msgstr "Yaratýlýþ :   %s"
+msgstr ""
 
 #: src/info.c:179
 msgid "Size:      "
-msgstr "Boyut :    "
+msgstr ""
 
 #: src/info.c:182
 #, c-format
 msgid " (%d blocks)"
-msgstr " ( %d blok )"
+msgstr ""
 
 #: src/info.c:188
 #, c-format
 msgid "Owner:     %s/%s"
-msgstr "Iye :     %s/%s"
+msgstr ""
 
 #: src/info.c:193
 #, c-format
 msgid "Links:     %d"
-msgstr "Baðlar :   %d"
+msgstr ""
 
 #: src/info.c:197
 #, c-format
 msgid "Mode:      %s (%04o)"
-msgstr "Tür :      %s ( %04o )"
+msgstr ""
 
 #: src/info.c:202
 #, c-format
 msgid "Location:  %Xh:%Xh"
-msgstr "Mekan :   %Xh:%Xh"
+msgstr ""
 
 #: src/info.c:212
 msgid "File:       None"
-msgstr "Dosya :     Yok"
+msgstr ""
 
 #: src/layout.c:159
 msgid "&Vertical"
@@ -4859,7 +4773,7 @@ msgstr ""
 
 #: src/layout.c:173
 msgid "command &Prompt"
-msgstr "komuta"
+msgstr "komut &Satýrý"
 
 #: src/layout.c:174
 msgid "show &Mini status"
@@ -4879,11 +4793,11 @@ msgstr "hakla&r"
 
 #: src/layout.c:178
 msgid "&File types"
-msgstr "&Dosya tipleri"
+msgstr ""
 
 #: src/layout.c:372 src/learn.c:60 src/learn.c:179 src/option.c:145
 msgid "&Save"
-msgstr "&Kaydet"
+msgstr ""
 
 #. length of line with '<' '>' buttons
 #: src/layout.c:380
@@ -4976,7 +4890,7 @@ msgstr ""
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr ""
 
-#: src/main.c:712
+#: src/main.c:709
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -4984,267 +4898,263 @@ msgid ""
 " extra access permissions with the \"su\" command? "
 msgstr ""
 
-#: src/main.c:787
+#: src/main.c:784
 msgid "Press any key to continue..."
 msgstr ""
 
-#: src/main.c:837
+#: src/main.c:834
 msgid " The shell is already running a command "
 msgstr ""
 
-#: src/main.c:864 src/screen.c:2113 src/screen.c:2160
+#: src/main.c:861 src/screen.c:2115 src/screen.c:2163
 msgid " The Midnight Commander "
 msgstr ""
 
-#: src/main.c:865
+#: src/main.c:862
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr ""
 
-#: src/main.c:1245 src/main.c:1269
+#: src/main.c:1242 src/main.c:1266
 msgid "&Listing mode..."
 msgstr "Sýra&lama türü ..."
 
-#: src/main.c:1246 src/main.c:1270
+#: src/main.c:1243 src/main.c:1267
 msgid "&Quick view     C-x q"
 msgstr "Çab&uk bakýþ    C-x q"
 
-#: src/main.c:1247 src/main.c:1271
+#: src/main.c:1244 src/main.c:1268
 msgid "&Info           C-x i"
 msgstr "B&ilgi          C-x i"
 
-#: src/main.c:1250 src/main.c:1274
+#: src/main.c:1247 src/main.c:1271
 msgid "&Sort order..."
 msgstr "&sýralama türü ..."
 
-#: src/main.c:1252 src/main.c:1276
+#: src/main.c:1249 src/main.c:1273
 msgid "&Filter..."
-msgstr "&Filtra ..."
+msgstr "&Filtre ..."
 
-#: src/main.c:1255 src/main.c:1279
+#: src/main.c:1252 src/main.c:1276
 msgid "&Network link..."
 msgstr "Þ&ebeke baðý ..."
 
-#: src/main.c:1256 src/main.c:1280
+#: src/main.c:1253 src/main.c:1277
 msgid "FT&P link..."
 msgstr "FT&P baðý ..."
 
-#: src/main.c:1258 src/main.c:1282
+#: src/main.c:1255 src/main.c:1279
 msgid "SM&B link..."
 msgstr ""
 
-#: src/main.c:1263 src/main.c:1287
+#: src/main.c:1260 src/main.c:1284
 msgid "&Drive...       M-d"
 msgstr "Sürü&cü ..      M-d"
 
-#: src/main.c:1265 src/main.c:1289
+#: src/main.c:1262 src/main.c:1286
 msgid "&Rescan         C-r"
 msgstr "Yeniden ta&ra   C-r"
 
-#: src/main.c:1293
+#: src/main.c:1290
 msgid "&User menu          F2"
-msgstr "K&ullanýcý mönüsü   F2"
+msgstr "K&ullanýcý menüsü   F2"
 
-#: src/main.c:1294
+#: src/main.c:1291
 msgid "&View               F3"
 msgstr "&Göster             F3"
 
-#: src/main.c:1295
+#: src/main.c:1292
 msgid "Vie&w file...         "
 msgstr "Dosyaya ba&k ..."
 
-#: src/main.c:1296
+#: src/main.c:1293
 msgid "&Filtered view     M-!"
-msgstr "&Filtralý bakýþ     M-!"
+msgstr "&Filtreli bakýþ     M-!"
 
-#: src/main.c:1297
+#: src/main.c:1294
 msgid "&Edit               F4"
 msgstr "D&eðiþtir           F4"
 
-#: src/main.c:1298
+#: src/main.c:1295
 msgid "&Copy               F5"
 msgstr "&Kopyala            F5"
 
-#: src/main.c:1299
+#: src/main.c:1296
 msgid "c&Hmod           C-x c"
-msgstr "y&ömlr           C-x x"
+msgstr "c&Hmod           C-x x"
 
-#: src/main.c:1301
+#: src/main.c:1298
 msgid "&Link            C-x l"
 msgstr "Bað&la           C-x l"
 
-#: src/main.c:1302
+#: src/main.c:1299
 msgid "&SymLink         C-x s"
-msgstr "Yumþak&Baðla     C-x s"
+msgstr "&SemBað          C-x s"
 
-#: src/main.c:1303
+#: src/main.c:1300
 msgid "edit s&Ymlink  C-x C-s"
-msgstr "YBaðý deðiþtir  C-x C-s"
+msgstr "SemBaðý deðiþtir  C-x C-s"
 
-#: src/main.c:1304
+#: src/main.c:1301
 msgid "ch&Own           C-x o"
 msgstr "yö&mle           C-x o"
 
-#: src/main.c:1305
+#: src/main.c:1302
 msgid "&Advanced chown       "
 msgstr "Geliþmiþ y&ömle       "
 
-#: src/main.c:1307
+#: src/main.c:1304
 msgid "&Rename/Move        F6"
 msgstr "YenidenAd/&Taþý     F6"
 
-#: src/main.c:1308
+#: src/main.c:1305
 msgid "&Mkdir              F7"
 msgstr "D&izin yarat        F7"
 
-#: src/main.c:1309
+#: src/main.c:1306
 msgid "&Delete             F8"
 msgstr "&Sil                F8"
 
-#: src/main.c:1310
+#: src/main.c:1307
 msgid "&Quick cd          M-c"
 msgstr "Çabuk dizine geç   M-c"
 
-#: src/main.c:1312
+#: src/main.c:1309
 msgid "select &Group      M-+"
 msgstr "&Kitle seç          M-+"
 
-#: src/main.c:1313
+#: src/main.c:1310
 msgid "u&Nselect group    M-\\"
 msgstr "Kitle&yi seçme      M-\\"
 
-#: src/main.c:1314
+#: src/main.c:1311
 msgid "reverse selec&Tion M-*"
 msgstr "Kitleyi te&rsle     M-*"
 
-#: src/main.c:1316
+#: src/main.c:1313
 msgid "e&Xit              F10"
 msgstr "Çýk                F10"
 
-#: src/main.c:1326
+#: src/main.c:1323
 msgid "&Directory tree"
 msgstr "&Dizinler aðaçý"
 
-#: src/main.c:1328
+#: src/main.c:1325
 msgid "&Find file            M-?"
 msgstr "Dosya b&ul             M-?"
 
-#: src/main.c:1329
+#: src/main.c:1326
 msgid "s&Wap panels          C-u"
 msgstr "Panelleri &deðiþtir    C-u"
 
-#: src/main.c:1330
+#: src/main.c:1327
 msgid "switch &Panels on/off C-o"
 msgstr "&Panelleri kapat/aç    C-o"
 
-#: src/main.c:1331
+#: src/main.c:1328
 msgid "&Compare directories  C-x d"
 msgstr "Dizinleri karþýlaþtýr C-x d"
 
-#: src/main.c:1332
+#: src/main.c:1329
 msgid "e&Xternal panelize    C-x !"
 msgstr "D6ýþarýdan panelle    C-x !"
 
-#: src/main.c:1333
+#: src/main.c:1330
 msgid "show directory s&Izes"
 msgstr "diz&inlerin boyutunu göster"
 
-#: src/main.c:1335
+#: src/main.c:1332
 msgid "command &History"
-msgstr "komuta geçmiþi"
+msgstr "Komut Geçmiþi"
 
-#: src/main.c:1336
+#: src/main.c:1333
 msgid "di&Rectory hotlist    C-\\"
 msgstr "Di&zinler geçmiþi      C-\\"
 
-#: src/main.c:1338
+#: src/main.c:1335
 msgid "&Active VFS list      C-x a"
 msgstr "&Geçerli VFS listesi   C-x a"
 
-#: src/main.c:1339
+#: src/main.c:1336
 msgid "Fr&ee VFSs now"
 msgstr "VFS'i þimdi boþalt"
 
-#: src/main.c:1342
+#: src/main.c:1339
 msgid "&Background jobs      C-x j"
-msgstr "&Ardalan iþlemleri     C-x j"
+msgstr "&Arkaplan iþlemleri     C-x j"
 
-#: src/main.c:1346
+#: src/main.c:1343
 msgid "&Undelete files (ext2fs only)"
 msgstr "Dosyalarý k&urtar (sadece ext2fs'de)"
 
-#: src/main.c:1349
+#: src/main.c:1346
 msgid "&Listing format edit"
 msgstr ""
 
-#: src/main.c:1352
+#: src/main.c:1348
 msgid "&Extension file edit"
 msgstr "Dosya son&eklerini deðiþtir"
 
-#: src/main.c:1353
+#: src/main.c:1349
 msgid "&Menu file edit"
 msgstr "Mön&üyü deðiþtir"
 
 #: src/main.c:1354
-msgid "Menu edi&Tor edit"
-msgstr "Mönü edi&törü"
-
-#: src/main.c:1359
 msgid "&Configuration..."
 msgstr "&Ayarlar ..."
 
-#: src/main.c:1361
+#: src/main.c:1356
 msgid "c&Onfirmation..."
 msgstr "&Onaylama ..."
 
-#: src/main.c:1362
+#: src/main.c:1357
 msgid "&Display bits..."
 msgstr "Bitleri &göster ..."
 
-#: src/main.c:1364
+#: src/main.c:1359
 msgid "learn &Keys..."
-msgstr "Tu&þlarý öðren ..."
+msgstr "&Tuþlarý Öðren ..."
 
-#: src/main.c:1367
+#: src/main.c:1362
 msgid "&Virtual FS..."
 msgstr "&Sanal DYS (VFS) ..."
 
-#: src/main.c:1370
+#: src/main.c:1365
 msgid "&Save setup"
 msgstr "A&yarlarý kaydet"
 
-#: src/main.c:1386 src/main.c:1388
+#: src/main.c:1381 src/main.c:1383
 msgid " &Left "
 msgstr " &Sol "
 
-#: src/main.c:1388
+#: src/main.c:1383
 msgid " &Above "
 msgstr " &Üst "
 
-#: src/main.c:1391
+#: src/main.c:1386
 msgid " &File "
 msgstr " &Dosya "
 
-#: src/main.c:1392
+#: src/main.c:1387
 msgid " &Command "
-msgstr " &Komuta "
+msgstr " &Komut "
 
-#: src/main.c:1393
+#: src/main.c:1388
 msgid " &Options "
-msgstr " &Ayarlar "
+msgstr " &Seçenekler "
 
-#: src/main.c:1395 src/main.c:1397
+#: src/main.c:1390 src/main.c:1392
 msgid " &Right "
 msgstr " &Sað "
 
-#: src/main.c:1397
+#: src/main.c:1392
 msgid " &Below "
 msgstr " &Alt"
 
-#: src/main.c:1452
+#: src/main.c:1447
 msgid " Information "
 msgstr " Bilgi       "
 
-#: src/main.c:1453
+#: src/main.c:1448
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -5252,23 +5162,24 @@ msgid ""
 " the details.                                           "
 msgstr ""
 
-#: src/main.c:1932
+#: src/main.c:1927
 msgid "Thank you for using GNU Midnight Commander"
 msgstr "GNU Midinight Commander'i kullandýðýn için teþekkürler"
 
-#: src/main.c:2290
-msgid "with mouse support on xterm and the Linux console.\n"
+#: src/main.c:2284
+#, c-format
+msgid "with mouse support on xterm%s.\n"
 msgstr ""
 
-#: src/main.c:2291
-msgid "with mouse support on xterm.\n"
+#: src/main.c:2285
+msgid " and the Linux console"
 msgstr ""
 
-#: src/main.c:2392
+#: src/main.c:2381
 msgid "The TERM environment variable is unset!\n"
 msgstr ""
 
-#: src/main.c:2498
+#: src/main.c:2487
 msgid ""
 "Usage is:\n"
 "\n"
@@ -5276,30 +5187,30 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/main.c:2501
+#: src/main.c:2490
 msgid "-a, --stickchars   Force use of +, -, | for line drawing.\n"
 msgstr ""
 
-#: src/main.c:2503
+#: src/main.c:2492
 msgid "-b, --nocolor      Force black and white display.\n"
 msgstr ""
 
-#: src/main.c:2505
+#: src/main.c:2494
 msgid "-B, --background   [DEVEL-ONLY: Debug the background code]\n"
 msgstr ""
 
-#: src/main.c:2507
+#: src/main.c:2496
 msgid ""
 "-c, --color        Force color mode.\n"
 "-C, --colors       Specify colors (use --help-colors to get a list).\n"
 "-d, --nomouse      Disable mouse support.\n"
 msgstr ""
 
-#: src/main.c:2511
+#: src/main.c:2500
 msgid "-e, --edit         Startup the internal editor.\n"
 msgstr ""
 
-#: src/main.c:2513
+#: src/main.c:2502
 msgid ""
 "-f, --libdir       Print configured paths.\n"
 "-h, --help         Shows this help message.\n"
@@ -5308,56 +5219,55 @@ msgid ""
 "                   default.\n"
 msgstr ""
 
-#: src/main.c:2518
+#: src/main.c:2507
 msgid "-l, --ftplog file  Log ftpfs commands to the file.\n"
 msgstr ""
 
-#: src/main.c:2521
+#: src/main.c:2510
 msgid "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
 msgstr ""
 
-#: src/main.c:2523
+#: src/main.c:2512
 msgid ""
 "-P, --printwd      At exit, print the last working directory.\n"
 "-s, --slow         Disables verbose operation (for slow terminals).\n"
 msgstr ""
 
-#: src/main.c:2526
+#: src/main.c:2515
 msgid "-t, --termcap      Activate support for the TERMCAP variable.\n"
 msgstr ""
 
-#: src/main.c:2529
+#: src/main.c:2518
 msgid ""
 "-S, --createcmdile Create command file to set default directory upon exit.\n"
 msgstr ""
 
-#: src/main.c:2532
+#: src/main.c:2521
 msgid ""
 "-u, --nosubshell   Disable the concurrent subshell mode.\n"
 "-U, --subshell     Force the concurrent subshell mode.\n"
 "-r, --forceexec    Force subshell execution.\n"
 msgstr ""
 
-#: src/main.c:2536
+#: src/main.c:2525
 msgid ""
 "-v, --view fname   Start up into the viewer mode.\n"
 "-V, --version      Report version and configuration options.\n"
 "-x, --xterm        Force xterm mouse support and screen save/restore.\n"
-"+number            number it is the start line number of file for `mcedit'.\n"
 msgstr ""
 
-#: src/main.c:2541
+#: src/main.c:2529
 msgid "-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
 msgstr ""
 
-#: src/main.c:2543
+#: src/main.c:2531
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
 "to mc-bugs@nuclecu.unam.mx\n"
 msgstr ""
 
-#: src/main.c:2559
+#: src/main.c:2547
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -5378,132 +5288,131 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/main.c:2608
+#: src/main.c:2596
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr ""
 
-#: src/main.c:2622
+#: src/main.c:2610
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
 
-#: src/main.c:2699
+#: src/main.c:2687
 msgid "Use to debug the background code"
 msgstr ""
 
-#: src/main.c:2705
+#: src/main.c:2693
 msgid "Request to run in color mode"
 msgstr ""
 
-#: src/main.c:2707
+#: src/main.c:2695
 msgid "Specifies a color configuration"
 msgstr ""
 
-#: src/main.c:2712
+#: src/main.c:2700
 msgid "Edits one file"
 msgstr ""
 
-#: src/main.c:2716
+#: src/main.c:2704
 msgid "Displays this help message"
 msgstr ""
 
-#: src/main.c:2719
+#: src/main.c:2707
 msgid "Displays a help screen on how to change the color scheme"
 msgstr ""
 
-#: src/main.c:2722
+#: src/main.c:2710
 msgid "Log ftp dialog to specified file"
 msgstr ""
 
-#: src/main.c:2729
+#: src/main.c:2717
 msgid "Obsolete"
 msgstr ""
 
-#: src/main.c:2731
+#: src/main.c:2719
 msgid "Requests to run in black and white"
 msgstr ""
 
-#: src/main.c:2733
+#: src/main.c:2721
 msgid "Disable mouse support in text version"
 msgstr ""
 
-#: src/main.c:2736
+#: src/main.c:2724
 msgid "Disables subshell support"
 msgstr ""
 
-#: src/main.c:2740
+#: src/main.c:2728
 msgid "Prints working directory at program exit"
 msgstr ""
 
-#: src/main.c:2742
+#: src/main.c:2730
 msgid "Resets soft keys on HP terminals"
 msgstr ""
 
-#: src/main.c:2744
+#: src/main.c:2732
 msgid "To run on slow terminals"
 msgstr ""
 
-#: src/main.c:2747
+#: src/main.c:2735
 msgid "Use stickchars to draw"
 msgstr ""
 
-#: src/main.c:2751
+#: src/main.c:2739
 msgid "Enables subshell support (default)"
 msgstr ""
 
-#: src/main.c:2756
+#: src/main.c:2744
 msgid "Tries to use termcap instead of terminfo"
 msgstr ""
 
-#: src/main.c:2760
+#: src/main.c:2748
 msgid "Displays the current version"
 msgstr ""
 
-#: src/main.c:2762
+#: src/main.c:2750
 msgid "Launches the file viewer on a file"
 msgstr ""
 
-#: src/main.c:2764
+#: src/main.c:2752
 msgid "Forces xterm features"
 msgstr ""
 
-#: src/main.c:2766
+#: src/main.c:2754
 msgid "Geometry for the window"
 msgstr ""
 
-#: src/main.c:2766
+#: src/main.c:2754
 msgid "GEOMETRY"
-msgstr ""
+msgstr "GEOMETRÝ"
 
-#: src/main.c:2767
+#: src/main.c:2755
 msgid "No windows opened at startup"
-msgstr ""
+msgstr "Baþlangýçta pencere açýlmasýn"
 
-#: src/main.c:2768
-#, fuzzy
+#: src/main.c:2756
 msgid "No desktop icons"
-msgstr "Masaüstü ikonalarýný yeniden tara"
+msgstr "Masaüstü simgesi yok"
 
-#: src/main.c:2769
+#: src/main.c:2757
 msgid "Look more like traditional gmc"
 msgstr ""
 
-#: src/main.c:2771
+#: src/main.c:2759
 msgid "Display the directory that holds the .links startup files and exit"
 msgstr ""
 
-#: src/main.c:3087
+#: src/main.c:3071
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 
-#: src/main.c:3165
+#: src/main.c:3149
 msgid " Notice "
 msgstr ""
 
-#: src/main.c:3166
+#: src/main.c:3150
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -5633,7 +5542,7 @@ msgstr ""
 
 #: src/panelize.c:219 src/panelize.c:276 src/panelize.c:347 src/panelize.c:368
 msgid "Other command"
-msgstr "Baþka komuta"
+msgstr "Baþka komut"
 
 #: src/panelize.c:260
 msgid " Add to external panelize "
@@ -5671,14 +5580,6 @@ msgstr "Bu yardým iletisini göster"
 msgid "Display brief usage message"
 msgstr ""
 
-#: src/screen.c:227
-msgid "SUB-DIR"
-msgstr ""
-
-#: src/screen.c:227
-msgid "UP--DIR"
-msgstr ""
-
 #: src/screen.c:417
 msgid "MTime"
 msgstr ""
@@ -5711,34 +5612,39 @@ msgstr ""
 msgid "GID"
 msgstr ""
 
-#: src/screen.c:1322
+#: src/screen.c:661
+#, c-format
+msgid "  %s bytes in %d file%s"
+msgstr ""
+
+#: src/screen.c:1325
 msgid "Unknow tag on display format: "
 msgstr ""
 
-#: src/screen.c:1448
+#: src/screen.c:1451
 msgid "User suplied format looks invalid, reverting to default."
 msgstr ""
 
-#: src/screen.c:2114 src/screen.c:2161
+#: src/screen.c:2116 src/screen.c:2164
 msgid " Do you really want to execute? "
 msgstr ""
 
-#: src/screen.c:2125 src/screen.c:2175
+#: src/screen.c:2129 src/screen.c:2179
 msgid " No action taken "
 msgstr ""
 
-#: src/screen.c:2398 src/screen.c:2428 src/tree.c:1016
+#: src/screen.c:2400 src/screen.c:2430 src/tree.c:1016
 msgid "RenMov"
 msgstr "YenidenAd"
 
-#: src/screen.c:2399 src/screen.c:2429 src/tree.c:1020
+#: src/screen.c:2401 src/screen.c:2431 src/tree.c:1020
 msgid "Mkdir"
 msgstr "Dizinle"
 
-#: src/screen.c:2415 src/tree.c:866
+#: src/screen.c:2417
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Can't chdir to %s \n"
 " %s "
 msgstr ""
 
@@ -5753,16 +5659,16 @@ msgstr ""
 
 #: src/subshell.c:731
 msgid " There are stopped jobs."
-msgstr ""
+msgstr " Durdurulmuþ görevler var."
 
 #: src/subshell.c:732
 msgid " Quit anyway? "
-msgstr " Illaki mi çýkayým mý ?"
+msgstr " Yine de çýkýlsýn mý?"
 
 #: src/subshell.c:785
 #, c-format
 msgid "Warning: Couldn't change to %s.\n"
-msgstr "Ikaz : %s'ye geçemedim .\n"
+msgstr "Uyarý: %s'ye geçilemedi.\n"
 
 #: src/tree.c:192
 #, c-format
@@ -5770,13 +5676,13 @@ msgid ""
 "Can't open the %s file for writing:\n"
 "%s\n"
 msgstr ""
-"%s dosyasýný yazmak için açanmadým :\n"
+"%s dosyasý yazmak için açýlamadý:\n"
 "%s\n"
 
 #: src/tree.c:637
 #, c-format
 msgid "Copy \"%s\" directory to:"
-msgstr "\"%s\"'yi buraya kopyala :"
+msgstr "\"%s\"'yi buraya kopyala:"
 
 #: src/tree.c:675
 #, c-format
@@ -5792,7 +5698,7 @@ msgstr ""
 
 #: src/tree.c:688
 msgid " The destination isn't a directory "
-msgstr ""
+msgstr " Hedef bir dizin deðil "
 
 #: src/tree.c:744
 #, c-format
@@ -5806,6 +5712,13 @@ msgstr "Statik"
 #: src/tree.c:776
 msgid "Dynamc"
 msgstr "Dinamik"
+
+#: src/tree.c:866
+#, c-format
+msgid ""
+" Can't chdir to \"%s\" \n"
+" %s "
+msgstr ""
 
 #: src/tree.c:1012
 msgid "Forget"
@@ -5822,67 +5735,56 @@ msgid ""
 "%s\n"
 msgstr ""
 
-#: src/user.c:137
-msgid " Format error on file Extensions File "
-msgstr ""
-
-#: src/user.c:138
-msgid " The %%var macro does not have a default "
-msgstr ""
-
-#: src/user.c:139
-msgid " The %%var macros does not have a variable "
-msgstr ""
-
-#: src/user.c:273
+#: src/user.c:250
 #, c-format
 msgid " Invalid shell pattern definition \"%c\". "
 msgstr ""
 
-#: src/user.c:426
+#: src/user.c:383
 msgid " Debug "
 msgstr ""
 
-#: src/user.c:435
+#: src/user.c:392
 msgid " ERROR: "
-msgstr " HATA : "
+msgstr ""
 
-#: src/user.c:439
+#: src/user.c:396
 msgid " True:  "
-msgstr " Doðru : "
+msgstr ""
 
-#: src/user.c:441
+#: src/user.c:398
 msgid " False: "
-msgstr " Yanlýþ : "
+msgstr ""
 
-#: src/user.c:647
+#: src/user.c:602
 msgid " Warning -- ignoring file "
-msgstr " Ikaz -- dosyayý geçiyorum "
+msgstr ""
 
-#: src/user.c:648
+#: src/user.c:603
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
 
-#: src/user.c:672
+#: src/user.c:622
 msgid " I can't run programs while logged on a non local directory "
 msgstr ""
 
-#: src/user.c:770
+#. FIXME: this message is not quite right
+#: src/user.c:720
 #, c-format
-msgid " No appropriative entries found in %s "
-msgstr " %s'de uygulanabilinecek birimleri bulunamadý "
+msgid " Empty file %s "
+msgstr " %s boþ bir dosya "
 
 #. Create listbox
-#: src/user.c:776
+#: src/user.c:730
 msgid " User menu "
-msgstr " Kullanýcý mönüsü "
+msgstr ""
 
 #: src/util.c:232
 msgid "name_trunc: too big"
-msgstr "name_trunc : çok fazla büyük"
+msgstr ""
 
 #. strftime() format string for recent dates
 #: src/util.c:599 src/util.c:624
@@ -5894,318 +5796,306 @@ msgstr ""
 msgid "%b %e  %Y"
 msgstr ""
 
-#: src/utilunix.c:382
+#: src/utilunix.c:390
 msgid " Pipe failed "
 msgstr ""
 
-#: src/utilunix.c:386
+#: src/utilunix.c:394
 msgid " Dup failed "
 msgstr ""
 
-#: src/view.c:403
+#: src/view.c:406
 msgid ""
 "File: \n"
 "\n"
 "    "
 msgstr ""
-"Dosya : \n"
-"\n"
-"    "
 
-#: src/view.c:404
+#: src/view.c:407
 msgid ""
 "\n"
 "\n"
 "has been modified, do you want to save the changes?\n"
 msgstr ""
-"\n"
-"\n"
-"deðiþtirildi; deðiþiklikleri kaydetmek ister misin ?\n"
 
-#: src/view.c:406
+#: src/view.c:409
 msgid " Save changes "
-msgstr " Deðiþiklikleri kaydet "
+msgstr ""
 
-#: src/view.c:448
+#: src/view.c:451
 msgid " Can't spawn child program "
-msgstr " Altuygulamayý baþlatamadým "
+msgstr ""
 
-#: src/view.c:457
+#: src/view.c:460
 msgid " Empty output from child filter "
 msgstr ""
 
-#: src/view.c:462
+#: src/view.c:465
 msgid " Could not open file "
-msgstr " Dosyayý açamadým "
+msgstr ""
 
-#: src/view.c:477
+#: src/view.c:480
 msgid " Can't open file \""
-msgstr " Dosyayý açamadým \""
+msgstr ""
 
-#: src/view.c:484
+#: src/view.c:487
 msgid ""
 " Can't stat file \n"
 " "
 msgstr ""
-" Dosya stat edemedim \n"
-" "
 
-#: src/view.c:490
+#: src/view.c:493
 msgid " Can't view: not a regular file "
-msgstr " Gösteremiyorum : vasat bir dosya deðildir"
+msgstr ""
 
-#: src/view.c:571
+#: src/view.c:574
 #, c-format
 msgid ""
 " Can't open \"%s\"\n"
 " %s "
 msgstr ""
-" \"%s\"'yi açamýyorum\n"
-" %s "
 
-#: src/view.c:580
+#: src/view.c:583
 #, c-format
 msgid ""
 " Can't stat \"%s\"\n"
 " %s "
 msgstr ""
-" \"%s\"'yi stat edemedim\n"
-" %s "
 
-#: src/view.c:716
+#: src/view.c:719
 #, c-format
 msgid "File: %s"
-msgstr "Dosya : %s"
+msgstr ""
 
-#: src/view.c:730
+#: src/view.c:733
 #, c-format
 msgid "Offset 0x%08x"
 msgstr ""
 
-#: src/view.c:741
+#: src/view.c:744
 msgid "  [grow]"
 msgstr ""
 
-#: src/view.c:1520
+#: src/view.c:1523
 #, c-format
 msgid "Searching for `%s'"
-msgstr "'%s' için arýyorum"
+msgstr ""
 
-#: src/view.c:1627 src/view.c:1750
+#: src/view.c:1630 src/view.c:1753
 msgid " Search string not found "
 msgstr ""
 
-#: src/view.c:1789
+#: src/view.c:1792
 msgid " Invalid regular expression "
 msgstr ""
 
-#: src/view.c:1913
+#: src/view.c:1916
 #, c-format
 msgid ""
 " The current line number is %d.\n"
 " Enter the new line number:"
 msgstr ""
 
-#: src/view.c:1935
+#: src/view.c:1938
 #, c-format
 msgid ""
 " The current address is 0x%lx.\n"
 " Enter the new address:"
 msgstr ""
 
-#: src/view.c:1937
+#: src/view.c:1940
 msgid " Goto Address "
-msgstr ""
+msgstr " Adrese Git "
 
-#: src/view.c:1968
+#: src/view.c:1971
 msgid " Enter regexp:"
 msgstr ""
 
-#: src/view.c:2073
+#: src/view.c:2076
 msgid "Ascii"
 msgstr "Ascii"
 
-#: src/view.c:2073
+#: src/view.c:2076
 msgid "Hex"
-msgstr "Heksades."
+msgstr "Onaltýlý."
 
-#: src/view.c:2074
+#: src/view.c:2077
 msgid "Goto"
 msgstr "Git"
 
-#: src/view.c:2074
-msgid "Line"
-msgstr "Fýkra"
-
 #: src/view.c:2077
+msgid "Line"
+msgstr "Satýr"
+
+#: src/view.c:2080
 msgid "RxSrch"
 msgstr ""
 
-#: src/view.c:2080
+#: src/view.c:2083
 msgid "EdText"
 msgstr ""
 
-#: src/view.c:2080
+#: src/view.c:2083
 msgid "EdHex"
 msgstr ""
 
-#: src/view.c:2082
+#: src/view.c:2085
 msgid "UnWrap"
 msgstr "Kýrma"
 
-#: src/view.c:2082
-msgid "Wrap"
-msgstr "Kýr"
-
 #: src/view.c:2085
+msgid "Wrap"
+msgstr "Kes"
+
+#: src/view.c:2088
 msgid "HxSrch"
 msgstr ""
 
-#: src/view.c:2088
+#: src/view.c:2091
 msgid "Raw"
 msgstr "Saf"
 
-#: src/view.c:2088
+#: src/view.c:2091
 msgid "Parse"
 msgstr "Tara"
 
-#: src/view.c:2092
+#: src/view.c:2095
 msgid "Unform"
 msgstr ""
 
-#: src/view.c:2092
+#: src/view.c:2095
 msgid "Format"
-msgstr ""
+msgstr "Biçimle"
 
-#: src/widget.c:994
+#: src/widget.c:999
 msgid " History "
-msgstr ""
+msgstr " Geçmiþ "
 
 #. KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
 #. to define f0 as well. Also, it makes Learn keys a bunch of problems :(
 #: src/win.c:224
 msgid "Function key 1"
-msgstr ""
+msgstr "1. fonksiyon tuþu"
 
 #: src/win.c:225
 msgid "Function key 2"
-msgstr ""
+msgstr "2. fonksiyon tuþu"
 
 #: src/win.c:226
 msgid "Function key 3"
-msgstr ""
+msgstr "3. fonksiyon tuþu"
 
 #: src/win.c:227
 msgid "Function key 4"
-msgstr ""
+msgstr "4. fonksiyon tuþu"
 
 #: src/win.c:228
 msgid "Function key 5"
-msgstr ""
+msgstr "5. fonksiyon tuþu"
 
 #: src/win.c:229
 msgid "Function key 6"
-msgstr ""
+msgstr "6. fonksiyon tuþu"
 
 #: src/win.c:230
 msgid "Function key 7"
-msgstr ""
+msgstr "7. fonksiyon tuþu"
 
 #: src/win.c:231
 msgid "Function key 8"
-msgstr ""
+msgstr "8. fonksiyon tuþu"
 
 #: src/win.c:232
 msgid "Function key 9"
-msgstr ""
+msgstr "9. fonksiyon tuþu"
 
 #: src/win.c:233
 msgid "Function key 10"
-msgstr ""
+msgstr "10. fonksiyon tuþu"
 
 #: src/win.c:234
 msgid "Function key 11"
-msgstr ""
+msgstr "11. fonksiyon tuþu"
 
 #: src/win.c:235
 msgid "Function key 12"
-msgstr ""
+msgstr "12. fonksiyon tuþu"
 
 #: src/win.c:236
 msgid "Function key 13"
-msgstr ""
+msgstr "13. fonksiyon tuþu"
 
 #: src/win.c:237
 msgid "Function key 14"
-msgstr ""
+msgstr "14. fonksiyon tuþu"
 
 #: src/win.c:238
 msgid "Function key 15"
-msgstr ""
+msgstr "15. fonksiyon tuþu"
 
 #: src/win.c:239
 msgid "Function key 16"
-msgstr ""
+msgstr "16. fonksiyon tuþu"
 
 #: src/win.c:240
 msgid "Function key 17"
-msgstr ""
+msgstr "17. fonksiyon tuþu"
 
 #: src/win.c:241
 msgid "Function key 18"
-msgstr ""
+msgstr "18. fonksiyon tuþu"
 
 #: src/win.c:242
 msgid "Function key 19"
-msgstr ""
+msgstr "19. fonksiyon tuþu"
 
 #: src/win.c:243
 msgid "Function key 20"
-msgstr ""
+msgstr "20. fonksiyon tuþu"
 
 #: src/win.c:244
 msgid "Backspace key"
-msgstr ""
+msgstr "Silme tuþu"
 
 #: src/win.c:245
 msgid "End key"
-msgstr ""
+msgstr "End tuþu"
 
 #: src/win.c:246
 msgid "Up arrow key"
-msgstr ""
+msgstr "Yukarý ok tuþu"
 
 #: src/win.c:247
 msgid "Down arrow key"
-msgstr ""
+msgstr "Aþaðý ok tuþu"
 
 #: src/win.c:248
 msgid "Left arrow key"
-msgstr ""
+msgstr "Sol ok tuþu"
 
 #: src/win.c:249
 msgid "Right arrow key"
-msgstr ""
+msgstr "Sað ok tuþu"
 
 #: src/win.c:250
 msgid "Home key"
-msgstr ""
+msgstr "Home tuþu"
 
 #: src/win.c:251
 msgid "Page Down key"
-msgstr ""
+msgstr "Page Down tuþu"
 
 #: src/win.c:252
 msgid "Page Up key"
-msgstr ""
+msgstr "Page Up tuþu"
 
 #: src/win.c:253
 msgid "Insert key"
-msgstr ""
+msgstr "Inset tuþu"
 
 #: src/win.c:254
 msgid "Delete key"
-msgstr ""
+msgstr "Delete tuþu"
 
 #: src/win.c:255
 msgid "Completion/M-tab"
@@ -6277,13 +6167,12 @@ msgid "NumLock on keypad"
 msgstr ""
 
 #: vfs/cpio.c:141 vfs/cpio.c:157
-#, fuzzy, c-format
 msgid ""
 "Couldn't open cpio archive\n"
 "%s"
 msgstr ""
-"%s\n"
-"tar arþivini açamdým"
+"cpio arþivi açýlamadý\n"
+"%s"
 
 #: vfs/cpio.c:224
 #, c-format
@@ -6319,39 +6208,38 @@ msgid "%s contains duplicit entries! Skiping!"
 msgstr ""
 
 #: vfs/cpio.c:517
-#, fuzzy, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr "Arþiv dosyasýnda beklenmeyen EOF yakalandý"
+msgstr "Beklenmeyen dosya sunu\n"
+"%s"
 
-#: vfs/direntry.c:301
+#: vfs/direntry.c:310
 #, c-format
 msgid "Dir cache expired for %s"
 msgstr ""
 
-#: vfs/direntry.c:431 vfs/direntry.c:434
+#: vfs/direntry.c:440 vfs/direntry.c:443
 msgid " Direntry warning "
 msgstr ""
 
-#: vfs/direntry.c:431
+#: vfs/direntry.c:440
 #, c-format
 msgid "Super ino_usage is %d, memory leak"
 msgstr ""
 
-#: vfs/direntry.c:434
+#: vfs/direntry.c:443
 msgid "Super has want_stale set"
 msgstr ""
 
-#: vfs/direntry.c:812
+#: vfs/direntry.c:817
 #, fuzzy
 msgid "Starting linear transfer..."
 msgstr "ftpfs : "
 
-#: vfs/direntry.c:957
-#, fuzzy
+#: vfs/direntry.c:962
 msgid "Getting file"
-msgstr "Dosyayý siliyorum :"
+msgstr "Dosya alýnýyor"
 
 #: vfs/extfs.c:270
 #, c-format
@@ -6403,181 +6291,181 @@ msgstr ""
 msgid "fish: Connected, home %s."
 msgstr ""
 
-#: vfs/fish.c:347
+#: vfs/fish.c:334
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr ""
 
-#: vfs/fish.c:451
+#: vfs/fish.c:438
 msgid "fish: failed"
 msgstr ""
 
 #. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
-#: vfs/fish.c:471
+#: vfs/fish.c:458
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr ""
 
-#: vfs/fish.c:496
+#: vfs/fish.c:483
 msgid "fish: Local read failed, sending zeros"
 msgstr ""
 
-#: vfs/fish.c:508
+#: vfs/fish.c:495
 #, c-format
 msgid "fish: storing %s %d (%d)"
 msgstr ""
 
-#: vfs/fish.c:509
+#: vfs/fish.c:496
 msgid "zeros"
 msgstr ""
 
-#: vfs/fish.c:556
+#: vfs/fish.c:543
 msgid "Aborting transfer..."
 msgstr ""
 
-#: vfs/fish.c:565
+#: vfs/fish.c:552
 msgid "Error reported after abort."
 msgstr ""
 
-#: vfs/fish.c:567
+#: vfs/fish.c:554
 msgid "Aborted transfer would be successful."
 msgstr ""
 
-#: vfs/ftpfs.c:315
+#: vfs/ftpfs.c:318
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs : "
+msgstr "ftpfs : %s ile baðlantý kesiliyor"
 
-#: vfs/ftpfs.c:373
+#: vfs/ftpfs.c:376
 msgid " FTP: Password required for "
-msgstr ""
+msgstr " FTP: Parola gerekiyor: "
 
-#: vfs/ftpfs.c:402
+#: vfs/ftpfs.c:409
 msgid " Proxy: Password required for "
-msgstr ""
+msgstr " Proxy: Parola gerekiyor:"
 
-#: vfs/ftpfs.c:428
+#: vfs/ftpfs.c:435
 msgid "ftpfs: sending proxy login name"
 msgstr "ftpfs : "
 
-#: vfs/ftpfs.c:432
+#: vfs/ftpfs.c:439
 msgid "ftpfs: sending proxy user password"
 msgstr "ftpfs : "
 
-#: vfs/ftpfs.c:436
+#: vfs/ftpfs.c:443
 msgid "ftpfs: proxy authentication succeeded"
 msgstr "ftpfs : "
 
-#: vfs/ftpfs.c:440
+#: vfs/ftpfs.c:447
 #, c-format
 msgid "ftpfs: connected to %s"
-msgstr "ftpfs : "
+msgstr "ftpfs : %s makinasýna baðlantý kuruldu"
 
-#: vfs/ftpfs.c:457
+#: vfs/ftpfs.c:464
 msgid "ftpfs: sending login name"
-msgstr "ftpfs : "
+msgstr "ftpfs : kullanýcý adý gönderiliyor"
 
-#: vfs/ftpfs.c:462
+#: vfs/ftpfs.c:469
 msgid "ftpfs: sending user password"
-msgstr "ftpfs : "
+msgstr "ftpfs : kullanýcý parolasý gönderiliyor"
 
-#: vfs/ftpfs.c:467
+#: vfs/ftpfs.c:474
 msgid "ftpfs: logged in"
-msgstr "ftpfs : "
+msgstr "ftpfs : girildi"
 
-#: vfs/ftpfs.c:482
+#: vfs/ftpfs.c:489
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs : "
+msgstr "ftpfs : %s kullanýcýsý için hatalý giriþ"
 
-#: vfs/ftpfs.c:514
+#: vfs/ftpfs.c:521
 #, c-format
 msgid " Could not set source routing (%s)"
-msgstr "ftpfs : "
+msgstr ""
 
-#: vfs/ftpfs.c:640
+#: vfs/ftpfs.c:649
 msgid "ftpfs: Invalid host name."
-msgstr "ftpfs : "
+msgstr "ftpfs : Hatalý makina adý"
 
-#: vfs/ftpfs.c:660
+#: vfs/ftpfs.c:669
 msgid "ftpfs: Invalid host address."
-msgstr "ftpfs : "
+msgstr "ftpfs : Hatalý makina adresi."
 
-#: vfs/ftpfs.c:683
+#: vfs/ftpfs.c:692
 #, c-format
 msgid "ftpfs: making connection to %s"
-msgstr "ftpfs : "
+msgstr "ftpfs : %s adresine baðlantý kuruluyor"
 
-#: vfs/ftpfs.c:693
+#: vfs/ftpfs.c:702
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs : "
 
-#: vfs/ftpfs.c:695
+#: vfs/ftpfs.c:704
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs : "
+msgstr "ftpfs : sunucuya baðlantý baþarýsýz: %s"
 
-#: vfs/ftpfs.c:736
+#: vfs/ftpfs.c:746
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr ""
 
-#: vfs/ftpfs.c:922
+#: vfs/ftpfs.c:919
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs : "
 
-#: vfs/ftpfs.c:997
+#: vfs/ftpfs.c:994
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs : "
 
-#: vfs/ftpfs.c:999
+#: vfs/ftpfs.c:996
 #, c-format
 msgid "ftpfs: abort error: %s"
-msgstr "ftpfs : "
+msgstr ""
 
-#: vfs/ftpfs.c:1004
+#: vfs/ftpfs.c:1001
 msgid "ftpfs: abort failed"
 msgstr "ftpfs : "
 
-#: vfs/ftpfs.c:1093 vfs/ftpfs.c:1192
+#: vfs/ftpfs.c:1090 vfs/ftpfs.c:1187
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs : "
 
-#: vfs/ftpfs.c:1103 vfs/ftpfs.c:1110
+#: vfs/ftpfs.c:1100 vfs/ftpfs.c:1107
 msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs : yumþak baðý çözemedim"
+msgstr "ftpfs : sembolik bað çözülemedi"
 
-#: vfs/ftpfs.c:1161
+#: vfs/ftpfs.c:1158
 msgid "Resolving symlink..."
-msgstr "Yumþak baðý çöziyorum ..."
+msgstr "Sembollik bað çözülüyor..."
 
-#: vfs/ftpfs.c:1180
+#: vfs/ftpfs.c:1176
 #, fuzzy, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs : %s FTP dizinini okuyorum ..."
 
-#: vfs/ftpfs.c:1181
+#: vfs/ftpfs.c:1177
 msgid "(strict rfc959)"
 msgstr ""
 
-#: vfs/ftpfs.c:1182
+#: vfs/ftpfs.c:1178
 msgid "(chdir first)"
 msgstr ""
 
-#: vfs/ftpfs.c:1279
+#: vfs/ftpfs.c:1272
 msgid "ftpfs: failed"
 msgstr "ftpfs : baþarýsýz"
 
-#: vfs/ftpfs.c:1289
+#: vfs/ftpfs.c:1282
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs : baþarýsýzlýk ..; geriye dönülcek nokta yok"
 
-#: vfs/ftpfs.c:1352
+#: vfs/ftpfs.c:1345
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs : %d dosyasýný uzakta kaydediyorum (%d)"
 
-#: vfs/ftpfs.c:1767
+#: vfs/ftpfs.c:1760
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -6626,17 +6514,16 @@ msgstr " Yanlýþ parola "
 #: vfs/mcfs.c:235
 #, c-format
 msgid " Can't locate hostname: %s "
-msgstr " Sunucu ismini bulamadým : %s"
+msgstr " Makina adý belirlenemedi: %s "
 
 #: vfs/mcfs.c:253
 #, c-format
 msgid " Can't create socket: %s "
-msgstr " Fiþi yaratamadým : %s "
+msgstr " Soket yaratýlmamadý: %s "
 
 #: vfs/mcfs.c:259
-#, c-format
 msgid " Can't connect to server: %s "
-msgstr " Sunucuya baðlanamadým : %s "
+msgstr " Sunucu baðlantý kurulamýyor: %s "
 
 #: vfs/mcfs.c:324
 msgid " Too many open connections "
@@ -6647,24 +6534,24 @@ msgstr " Çok fazla açýk baðlantý var "
 msgid "Midnight Commander's private remote filesystem"
 msgstr ""
 
-#: vfs/smbfs.c:116
+#: vfs/smbfs.c:115
 msgid "Domain:"
 msgstr "Sunucu : "
 
-#: vfs/smbfs.c:116
+#: vfs/smbfs.c:115
 msgid "Username:"
 msgstr "Kullanýcý : "
 
-#: vfs/smbfs.c:116
+#: vfs/smbfs.c:115
 msgid "Password: "
 msgstr "Parola : "
 
-#: vfs/smbfs.c:171
+#: vfs/smbfs.c:170
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "\\\\%s\\%s için parola"
 
-#: vfs/smbfs.c:667
+#: vfs/smbfs.c:666
 #, c-format
 msgid ""
 " reconnect to %s failed\n"
@@ -6673,26 +6560,26 @@ msgstr ""
 " %s'ye bir daha baðlanamadý \n"
 " "
 
-#: vfs/smbfs.c:1243
+#: vfs/smbfs.c:1242
 msgid " Authentication failed "
 msgstr ""
 
-#: vfs/smbfs.c:1738
+#: vfs/smbfs.c:1737
 #, c-format
 msgid " %s mkdir'ing %s "
 msgstr " %s %s dizinini yaratýyor "
 
-#: vfs/smbfs.c:1759
+#: vfs/smbfs.c:1758
 #, c-format
 msgid " %s rmdir'ing %s "
 msgstr " %s %s dizinini siliyor "
 
-#: vfs/smbfs.c:1868 vfs/smbfs.c:1888 vfs/smbfs.c:1949
+#: vfs/smbfs.c:1867 vfs/smbfs.c:1887 vfs/smbfs.c:1948
 #, c-format
 msgid " %s opening remote file %s "
 msgstr " %s uzaktaki %s dosyasýný açýyor "
 
-#: vfs/smbfs.c:1972
+#: vfs/smbfs.c:1971
 #, c-format
 msgid " %s renaming files\n"
 msgstr " %s dosyalarý yeniden adlandýrýlýyor \n"
@@ -6710,11 +6597,11 @@ msgstr ""
 msgid "Unexpected EOF on archive file"
 msgstr "Arþiv dosyasýnda beklenmeyen EOF yakalandý"
 
-#: vfs/tar.c:336 vfs/tar.c:343
+#: vfs/tar.c:339 vfs/tar.c:346
 msgid "Inconsistent tar archive"
 msgstr "Tar arþivi düzgün deðil"
 
-#: vfs/tar.c:413
+#: vfs/tar.c:411
 #, c-format
 msgid ""
 "Hmm,...\n"
@@ -6725,133 +6612,131 @@ msgstr ""
 "%s\n"
 "bir tar arþivine benzemiyor. "
 
-#: vfs/vfs.c:1139
+#: vfs/vfs.c:1149
 msgid "Changes to file lost"
-msgstr "Deðiþiklikleri kaybettim"
+msgstr "Dosyaya deðiþiklikler kaybedildi"
 
-#: vfs/vfs.c:1781
+#: vfs/vfs.c:1792
 msgid "Could not parse:"
-msgstr "Tarayamadým :"
+msgstr "Ayrýþtýrýlamadý:"
 
-#: vfs/vfs.c:1783
+#: vfs/vfs.c:1794
 msgid "More parsing errors will be ignored."
 msgstr ""
 
-#: vfs/vfs.c:1783
-msgid "(sorry)"
-msgstr "( özür dileriz )"
-
 #: vfs/vfs.c:1794
-msgid "Internal error:"
-msgstr "Iç hata :"
+msgid "(sorry)"
+msgstr ""
 
-#: vfs/vfs.c:1804
+#: vfs/vfs.c:1805
+msgid "Internal error:"
+msgstr ""
+
+#: vfs/vfs.c:1815
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
 msgstr "%s : %s : %s %3d%% (%ld byte transfer edildi)"
 
-#: vfs/vfs.c:1805
+#: vfs/vfs.c:1816
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s : %s : %s %ld byte tansfer edildi"
 
-#: vfs/undelfs.c:81
+#: vfs/undelfs.c:80
 msgid " undelfs: error "
 msgstr ""
 
-#: vfs/undelfs.c:184
+#: vfs/undelfs.c:183
 msgid " not enough memory "
 msgstr ""
 
-#: vfs/undelfs.c:189
+#: vfs/undelfs.c:188
 msgid " while allocating block buffer "
 msgstr ""
 
-#: vfs/undelfs.c:193
+#: vfs/undelfs.c:192
 #, c-format
 msgid " open_inode_scan: %d "
 msgstr ""
 
-#: vfs/undelfs.c:197
+#: vfs/undelfs.c:196
 #, c-format
 msgid " while starting inode scan %d "
 msgstr ""
 
-#: vfs/undelfs.c:204
+#: vfs/undelfs.c:203
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr ""
 
-#: vfs/undelfs.c:219
+#: vfs/undelfs.c:218
 #, c-format
 msgid " while calling ext2_block_iterate %d "
 msgstr ""
 
-#: vfs/undelfs.c:227
+#: vfs/undelfs.c:226
 msgid " no more memory while reallocating array "
 msgstr ""
 
-#: vfs/undelfs.c:246
+#: vfs/undelfs.c:245
 #, c-format
 msgid " while doing inode scan %d "
 msgstr ""
 
-#: vfs/undelfs.c:270
+#: vfs/undelfs.c:269
 msgid " Ext2lib error "
 msgstr " Ext2lib hatasý "
 
-#: vfs/undelfs.c:297
-#, c-format
+#: vfs/undelfs.c:296
 msgid " Could not open file %s "
-msgstr " Dosya %s'yi açamadým "
+msgstr " %s dosyasý açýlamadý "
 
-#: vfs/undelfs.c:300
+#: vfs/undelfs.c:299
 msgid "undelfs: reading inode bitmap..."
 msgstr ""
 
-#: vfs/undelfs.c:303
+#: vfs/undelfs.c:302
 #, c-format
 msgid ""
 " Could not load inode bitmap from: \n"
 " %s \n"
 msgstr ""
 
-#: vfs/undelfs.c:306
+#: vfs/undelfs.c:305
 msgid "undelfs: reading block bitmap..."
-msgstr "undelfs : blok'u okuyorum ..."
+msgstr ""
 
-#: vfs/undelfs.c:309
+#: vfs/undelfs.c:308
 #, c-format
 msgid ""
 " Could not load block bitmap from: \n"
 " %s \n"
 msgstr ""
 
-#: vfs/undelfs.c:315
+#: vfs/undelfs.c:314
 msgid "undelfs: done."
-msgstr "undelfs : oldu."
+msgstr "undelfs: tamam."
 
-#: vfs/undelfs.c:318
+#: vfs/undelfs.c:317
 msgid "undelfs: failure"
-msgstr "undelfs : hata"
+msgstr "undelfs: baþarýsýz"
 
-#: vfs/undelfs.c:342
+#: vfs/undelfs.c:341
 msgid " vfs_info is not fs! "
-msgstr " vfs_info bir dosya sistemi deðildir ! "
+msgstr ""
 
-#: vfs/undelfs.c:398 vfs/undelfs.c:582
+#: vfs/undelfs.c:397 vfs/undelfs.c:581
 msgid " You have to chdir to extract files first "
 msgstr ""
 
-#: vfs/undelfs.c:521
+#: vfs/undelfs.c:520
 msgid " while iterating over blocks "
 msgstr ""
 
-#: vfs/undelfs.c:626
-#, c-format
+#: vfs/undelfs.c:625
 msgid " Could not open file: %s "
-msgstr " Dosyayý açamadým : %s "
+msgstr "%s dosyasý açýlamadý"
 
 #. This is place of next pointer
-#: vfs/undelfs.c:684
+#: vfs/undelfs.c:683
 msgid "Undelete filesystem for ext2"
-msgstr "Dosyalarý kurtar ( sadece ext2fs'de )"
+msgstr "Dosyalarý kurtar (sadece ext2fs'de)"
