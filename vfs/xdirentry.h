@@ -137,7 +137,7 @@ typedef struct vfs_s_fh {
     int linear;	 /* Is that file open with O_LINEAR? */
     union {
 	struct {
-	    int got, total;
+	    int got, total, append;
 	} fish;
 	struct {
 	    int sock, append;

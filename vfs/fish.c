@@ -497,7 +497,8 @@ file_store(vfs *me, vfs_s_fh *fh, char *name, char *localname)
      * FIXME: Limit size to unsigned long for now.
      * Files longer than 256 * ULONG_MAX are not supported.
      */
-    if (command (me, super, WAIT_REPLY,
+    if (!fh->u.fish.append)
+	n = command (me, super, WAIT_REPLY,
 		 "#STOR %lu /%s\n"
 		 "> \"/%s\"\n"
 		 "echo '### 001'\n"
@@ -510,8 +511,23 @@ file_store(vfs *me, vfs_s_fh *fh, char *name, char *localname)
 		 "); echo '### 200'\n",
 		 (unsigned long) s.st_size, name, name,
 		 (unsigned long) (s.st_size >> 8),
-		 ((unsigned long) s.st_size) & (256 - 1), name)
-	!= PRELIM) 
+		 ((unsigned long) s.st_size) & (256 - 1), name);
+    else
+	n = command (me, super, WAIT_REPLY,
+		 "#STOR %lu /%s\n"
+		 "echo '### 001'\n"
+		 "(\n"
+		   "dd ibs=256 obs=4096 count=%lu\n"
+		   "dd bs=%lu count=1\n"
+		 ") 2>/dev/null | (\n"
+		   "cat >> \"/%s\"\n"
+		   "cat > /dev/null\n"
+		 "); echo '### 200'\n",
+		 (unsigned long) s.st_size, name,
+		 (unsigned long) (s.st_size >> 8),
+		 ((unsigned long) s.st_size) & (256 - 1), name);
+
+    if (n != PRELIM) 
         ERRNOR(E_REMOTE, -1);
 
     total = 0;
@@ -555,6 +571,7 @@ static int linear_start(vfs *me, vfs_s_fh *fh, int offset)
     name = vfs_s_fullpath (me, fh->ino);
     if (!name)
 	return 0;
+    fh->u.fish.append = 0;
     offset = command(me, FH_SUPER, WANT_STRING,
 		"#RETR /%s\n"
 		"ls -l \"/%s\" 2>/dev/null | (\n"
@@ -786,8 +803,10 @@ static int fish_rmdir (vfs *me, char *path)
 
 static int fish_fh_open (vfs *me, vfs_s_fh *fh, int flags, int mode)
 {
+    fh->u.fish.append = 0;
     /* File will be written only, so no need to retrieve it */
     if (((flags & O_WRONLY) == O_WRONLY) && !(flags & (O_RDONLY|O_RDWR))){
+	fh->u.fish.append = flags & O_APPEND;
 	if (!fh->ino->localname){
 	    int tmp_handle = mc_mkstemps (&fh->ino->localname, me->name, NULL);
 	    if (tmp_handle == -1)

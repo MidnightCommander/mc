@@ -1,5 +1,10 @@
 2002-07-25  Andrew V. Samoilov  <kai@cmail.ru>
 
+	* xdirentry.h (vfs_s_fh.u.fish): Add append field.
+	* fish.c (fish_fh_open): Care about append.
+	(linear_open): Likewise.
+	(fish_store): Append data to target file if append is true.
+
 	* mcserv.c [HAVE_MAD]: Include "../src/mad.c" at the end of
 	file to fix compilation.
 	(main): Add mad_init() and mad_finalize().
