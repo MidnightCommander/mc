@@ -1,5 +1,5 @@
 
-static struct dir *retrieve_dir(struct connection *bucket, char *remote_path);
+static struct dir *retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks);
 static int store_file(struct direntry *fe);
 static int retrieve_file_start(struct direntry *fe);
 static int retrieve_file(struct direntry *fe);
@@ -285,7 +285,7 @@ _get_file_entry(struct connection *bucket, char *file_name,
     p = strrchr(file_name, '/');
     q = *p;
     *p = '\0';
-    dcache = retrieve_dir(bucket, *file_name ? file_name : "/");
+    dcache = retrieve_dir(bucket, *file_name ? file_name : "/", op & DO_RESOLVE_SYMLINK);
     if (dcache == NULL)
         return NULL;
     file_list = dcache->file_list;
@@ -449,7 +449,7 @@ static int remove_temp_file (char *file_name)
     p = strrchr (file_name, '/');
     q = *p;
     *p = '\0';
-    dcache = retrieve_dir (bucket, *file_name ? file_name : "/");
+    dcache = retrieve_dir (bucket, *file_name ? file_name : "/", 0);
     if (dcache == NULL)
 	return -1;
     file_list = dcache->file_list;
@@ -627,7 +627,7 @@ static void *s_opendir (char *dirname)
 	my_errno = ENOMEM;
 	goto error_return;
     }
-    dirp->dcache = retrieve_dir(bucket, remote_path);
+    dirp->dcache = retrieve_dir(bucket, remote_path, 1);
     if (dirp->dcache == NULL)
         goto error_return;
     dirp->pos = dirp->dcache->file_list->next;

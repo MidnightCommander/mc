@@ -1,3 +1,53 @@
+Tue Sep 15 20:31:32 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* ftpfs.c (ftp_use_unix_list_options): New global variable/option. 
+	If true we try to use 'LIST -la <path>'. When it fails we use the 
+	two commands 'CWD <path>' and 'LIST' instead. 
+ 
+	(resolve_symlink): rewritten. Don't get a second directory listing 
+	with `LIST -lLa'. Instead use the cache to get the file stat of
+	symbolic links. If the directory the symlink points to isn't
+	already in the cache the directory listing will be fetched and 
+	stored in the directory cache (without resolving symlinks
+	recursively).
+ 	The new method to resolve symlinks is faster if symlinks
+	the same directory or the directory the symlink points to
+	is already in the cache.
+	This function was small and nice until I discovered that it was
+	broken for symlinks to symlinks. Now it looks ugly and perhaps I
+	will revert it to use "LIST -lLa" again. With a fast connection it 
+	doesn't matter which methode we use but with a slow connection I
+	wouldn't hesitate to burn more cpu cycles on the client side.
+
+	(retrieve_dir): Added parameter to tell whether to resolve
+	symlinks (don't resolve symlinks in directory listings retrieved 
+	while resolving symlinks).
+	When we don't get a directory listing with 'LIST -la <path>' then
+	try to get it with `CWD <path>; LIST'.
+
+Tue Sep 15 20:27:29 1998  Norbert Warmuth  <k3190@fh-sw.de
+
+	* ftpfs.c (login_server): s/ftpfs_get_host/my_get_host/
+	
+	(retrieve_file_start2): Don't create target file O_EXCL, in 
+	copy_file_file we check existance of the target file and know
+	that we want to truncate it (this change was already done a 
+	while back but it was reverted with the vfs-split).
+
+Tue Sep 15 20:15:42 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* ftpfs.h (struct connection): added boolean which indicates that
+	the ftp server doesn't unterstand Unix ls options
+
+	* ftpfs.h (struct dir): added enum to store symlink status of the
+	in memory directory cache (directory has no symbolic links;
+	symbolic links but not yet resolved; symbolic links which are resolved)
+
+Tue Sep 15 20:02:08 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* shared_ftp_fish.c, fish.c: updated references to retrieve_dir to
+	honour the additional boolean parameter
+
 Tue Sep 15 00:42:15 1998  Yimur Bakeyev <mc@bat.ru>
 
 	* vfs.h: add vfs_split() declaration, to make sfs.c happy.

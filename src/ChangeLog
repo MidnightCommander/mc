@@ -1,3 +1,8 @@
+Tue Sep 15 20:51:42 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* setup.c: save and restore new global variable/option 
+	ftp_use_unix_list_options	
+
 Tue Sep 15 01:02:34 1998   Paul Sheer <psheer@obsidian.co.za>
 
 	* gtkedit: Directory added. This directory contains all the editor

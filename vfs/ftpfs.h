@@ -25,7 +25,13 @@ struct dir
     struct timeval timestamp;
     char *remote_path;
     struct linklist *file_list;
+    int symlink_status;
 };
+
+/* valid values for dir->symlink_status */
+#define FTPFS_NO_SYMLINKS          0
+#define FTPFS_UNRESOLVED_SYMLINKS  1
+#define FTPFS_RESOLVED_SYMLINKS    2
 
 struct connection {
     char *host;
@@ -47,6 +53,9 @@ struct connection {
     int isbinary;
     int cwd_defered;  /* current_directory was changed but CWD command hasn't
                          been sent yet */
+    int strict_rfc959_list_cmd; /* ftp server doesn't understand 
+                                   "LIST -la <path>"; use "CWD <path>"/
+                                   "LIST" instead */
 };
 
 #define qhost(b) (b)->host

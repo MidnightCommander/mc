@@ -99,6 +99,13 @@ int ftpfs_retry_seconds = 30;
 /* Method to use to connect to ftp sites */
 int ftpfs_use_passive_connections = 1;
 
+/* Method used to get directory listings:
+   1: try 'LIST -la <path>', if it fails
+      fall back to CWD <path>; LIST 
+   0: always use CWD <path>; LIST  
+ */
+int ftpfs_use_unix_list_options = 1;
+
 /* Use the ~/.netrc */
 int use_netrc = 1;
 
@@ -136,6 +143,8 @@ static char reply_str [80];
 
 static char *ftpfs_get_current_directory(struct connection *bucket);
 static int __ftpfs_chdir (struct connection *bucket ,char *remote_path);
+static struct direntry *_get_file_entry(struct connection *bucket, 
+                char *file_name, int op, int flags);
 static void free_bucket (void *data);
 static void connection_destructor(void *data);
 static void flush_all_directory(struct connection *bucket);
@@ -326,7 +335,7 @@ login_server (struct connection *bucket, char *netrcpass)
 #if defined(HSC_PROXY)
 	char *p, *host;
 	int port;
-	p = ftpfs_get_host_and_username(ftpfs_proxy_host, &host, &proxyname,
+	p = my_get_host_and_username(ftpfs_proxy_host, &host, &proxyname,
 					&port, &proxypass);
 	if (p)
 	    free (p);
@@ -699,6 +708,7 @@ open_command_connection (char *host, char *user, int port, char *netrcpass)
     bucket->password = 0;
     bucket->use_passive_connection = ftpfs_use_passive_connections | source_route;
     bucket->use_source_route = source_route;
+    bucket->strict_rfc959_list_cmd = !ftpfs_use_unix_list_options;
     bucket->isbinary = TYPE_UNKNOWN;
 
     /* We do not want to use the passive if we are using proxies */
@@ -1034,76 +1044,64 @@ ftpfs_abort (struct connection *bucket, int dsock)
 static void
 resolve_symlink(struct connection *bucket, struct dir *dir)
 {
-    char  buffer[2048] = "", *filename;
-    int sock;
-    FILE *fp;
-    struct stat s;
     struct linklist *flist;
-    struct direntry *fe;
+    struct direntry *fe, *fel;
+    char tmp[MC_MAXPATHLEN];
     
     print_vfs_message("Resolving symlink...");
 
-    if (strchr (dir->remote_path, ' ')) {
-        if (__ftpfs_chdir(bucket, dir->remote_path) != COMPLETE) {
-            print_vfs_message("ftpfs: CWD failed.");
-	    return;
+    dir->symlink_status = FTPFS_RESOLVED_SYMLINKS;
+    for (flist = dir->file_list->next; flist != dir->file_list; flist = flist->next) {
+        /* flist->data->l_stat is alread initialized with 0 */
+        fel = flist->data;
+        if (S_ISLNK(fel->s.st_mode)) {
+  	    if (fel->linkname[0] == '/') {
+		if (strlen (fel->linkname) >= MC_MAXPATHLEN)
+		    continue;
+ 	        strcpy (tmp, fel->linkname);
+	    } else {
+		if ((strlen (dir->remote_path) + strlen (fel->linkname)) >= MC_MAXPATHLEN)
+		    continue;
+                strcpy (tmp, dir->remote_path);
+                if (tmp[1] != '\0')
+                   strcat (tmp, "/");
+                strcat (tmp + 1, fel->linkname);
+	    }
+	    for ( ;; ) {
+                fe = _get_file_entry(bucket, tmp, 0, 0);
+                if (fe) {
+                    if (S_ISLNK (fe->s.st_mode) && fe->l_stat == 0) {
+		        /* Symlink points to link which isn't resolved, yet. */
+			if (fe->linkname[0] == '/') {
+		            if (strlen (fe->linkname) >= MC_MAXPATHLEN)
+		                break;
+			    strcpy (tmp, fe->linkname);
+			} else {
+			    /* at this point tmp looks always like this
+			       /directory/filename, i.e. no need to check
+				strrchr's return value */
+			    *(strrchr (tmp, '/') + 1) = '\0'; /* dirname */
+		            if ((strlen (tmp) + strlen (fe->linkname)) >= MC_MAXPATHLEN)
+		                break;
+			    strcat (tmp, fe->linkname);
+			}
+			continue;
+                    } else {
+	                fel->l_stat = xmalloc(sizeof(struct stat), 
+		 			 "resolve_symlink: struct stat");
+			if ( S_ISLNK (fe->s.st_mode))
+ 		            *fel->l_stat = *fe->l_stat;
+			else
+ 		            *fel->l_stat = fe->s;
+                        (*fel->l_stat).st_ino = bucket->__inode_counter++;
+                    }
+	        }
+                break;
+	    }
         }
-        sock = open_data_connection (bucket, "LIST -lLa", ".", TYPE_ASCII);
     }
-    else
-        sock = open_data_connection (bucket, "LIST -lLa", 
-                                     dir->remote_path, TYPE_ASCII);
-
-    if (sock == -1) {
-	print_vfs_message("ftpfs: couldn't resolve symlink");
-	return;
-    }
-    
-    fp = fdopen(sock, "r");
-    if (fp == NULL) {
-	close(sock);
-	print_vfs_message("ftpfs: couldn't resolve symlink");
-	return;
-    }
-    enable_interrupt_key();
-    flist = dir->file_list->next;
-    while (1) {
-	do {
-	    if (flist == dir->file_list)
-		goto done;
-	    fe = flist->data;
-	    flist = flist->next;
-	} while (!S_ISLNK(fe->s.st_mode));
-	while (1) {
-	    if (fgets (buffer, sizeof (buffer), fp) == NULL)
-		goto done;
-	    if (logfile){
-		fputs (buffer, logfile);
-	        fflush (logfile);
-	    }
-	    if (parse_ls_lga (buffer, &s, &filename, NULL)) {
-		int r = strcmp(fe->name, filename);
-		free(filename);
-		if (r == 0) {
-		    fe->l_stat = xmalloc(sizeof(struct stat), 
-					 "resolve_symlink: struct stat");
-		    if (fe->l_stat == NULL)
-			goto done;
-		    *fe->l_stat = s;
-                    (*fe->l_stat).st_ino = bucket->__inode_counter++;
-		    break;
-		}
-		if (r < 0)
-		    break;
-	    }
-	}
-    }
-done:
-    while (fgets(buffer, sizeof(buffer), fp) != NULL);
-    disable_interrupt_key();
-    fclose(fp);
-    get_reply(qsock(bucket), NULL, 0);
 }
+
 
 #define X "ftp"
 #define X_myname "/#ftp:"
@@ -1115,7 +1113,7 @@ done:
 #include "shared_ftp_fish.c"
 
 static struct dir *
-retrieve_dir(struct connection *bucket, char *remote_path)
+retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
 {
 #ifdef OLD_READ
     FILE *fp;
@@ -1128,6 +1126,7 @@ retrieve_dir(struct connection *bucket, char *remote_path)
     int got_intr = 0;
     int has_spaces = (strchr (remote_path, ' ') != NULL);
 
+    canonicalize_pathname (remote_path);
     for (p = qdcache(bucket)->next;p != qdcache(bucket);
 	 p = p->next) {
 	dcache = p->data;
@@ -1135,9 +1134,11 @@ retrieve_dir(struct connection *bucket, char *remote_path)
 	    struct timeval tim;
 
 	    gettimeofday(&tim, NULL);
-	    if ((tim.tv_sec < dcache->timestamp.tv_sec) && !force_expiration)
+	    if ((tim.tv_sec < dcache->timestamp.tv_sec) && !force_expiration) {
+                if (resolve_symlinks && dcache->symlink_status == FTPFS_UNRESOLVED_SYMLINKS)
+	            resolve_symlink(bucket, dcache);
 		return dcache;
-	    else {
+	    } else {
 		force_expiration = 0;
 		p->next->prev = p->prev;
 		p->prev->next = p->next;
@@ -1149,8 +1150,11 @@ retrieve_dir(struct connection *bucket, char *remote_path)
     }
 
     has_symlinks = 0;
-    print_vfs_message("ftpfs: Reading FTP directory...");
-    if (has_spaces) 
+    if (bucket->strict_rfc959_list_cmd)
+        print_vfs_message("ftpfs: Reading FTP directory... (don't use UNIX ls options)");
+    else
+        print_vfs_message("ftpfs: Reading FTP directory...");
+    if (has_spaces || bucket->strict_rfc959_list_cmd) 
         if (__ftpfs_chdir(bucket, remote_path) != COMPLETE) {
             my_errno = ENOENT;
 	    print_vfs_message("ftpfs: CWD failed.");
@@ -1176,8 +1180,11 @@ retrieve_dir(struct connection *bucket, char *remote_path)
     dcache->file_list = file_list;
     dcache->remote_path = strdup(remote_path);
     dcache->count = 1;
+    dcache->symlink_status = FTPFS_NO_SYMLINKS;
 
-    if (has_spaces)
+    if (bucket->strict_rfc959_list_cmd == 1) 
+        sock = open_data_connection (bucket, "LIST", 0, TYPE_ASCII);
+    else if (has_spaces)
         sock = open_data_connection (bucket, "LIST -la", ".", TYPE_ASCII);
     else {
 	char *path = copy_strings (remote_path, PATH_SEP_STR, ".", (char *) 0);
@@ -1266,6 +1273,15 @@ retrieve_dir(struct connection *bucket, char *remote_path)
         goto error_3;
     }
     if (file_list->next == file_list) {
+        if (bucket->__inode_counter == 0 && !bucket->strict_rfc959_list_cmd) {
+            /* It's our first attempt to get a directory listing from this
+               server (UNIX style LIST command) */
+            bucket->strict_rfc959_list_cmd = 1;
+    	    free(dcache->remote_path);
+            free(dcache);
+            linklist_destroy(file_list, direntry_destructor);
+            return retrieve_dir (bucket, remote_path, resolve_symlinks);
+        }
 	my_errno = EACCES;
 	goto error_3;
     }
@@ -1273,8 +1289,12 @@ retrieve_dir(struct connection *bucket, char *remote_path)
 	my_errno = ENOMEM;
         goto error_3;
     }
-    if (has_symlinks)
-	resolve_symlink(bucket, dcache);
+    if (has_symlinks) {
+        if (resolve_symlinks)
+	    resolve_symlink(bucket, dcache);
+        else
+           dcache->symlink_status = FTPFS_UNRESOLVED_SYMLINKS;
+    }
     print_vfs_message("ftpfs: got listing");
     return dcache;
 error_1:
@@ -1396,7 +1416,7 @@ static int retrieve_file_start(struct direntry *fe)
 
 static int retrieve_file_start2(struct direntry *fe)
 {
-    remotelocal_handle = open(fe->local_filename, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, 0600);
+    remotelocal_handle = open(fe->local_filename, O_RDWR | O_CREAT | O_TRUNC, 0600);
     if (remotelocal_handle == -1) {
 	my_errno = EIO;
 	free(fe->local_filename);

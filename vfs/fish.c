@@ -381,9 +381,14 @@ static char *fish_get_current_directory(struct connection *bucket)
 /*
  * This is the 'new' code
  */
+/*
+ * Last parameter (resolve_symlinks) is currently not used. Due to
+ * the code sharing (file shared_ftp_fish.c) the fish and ftp interface
+ * have to be the same (Norbert).
+ */
 
 static struct dir *
-retrieve_dir(struct connection *bucket, char *remote_path)
+retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
 {
     int sock, has_symlinks;
     struct linklist *file_list, *p;
