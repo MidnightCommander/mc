@@ -1,5 +1,8 @@
 2002-09-26  Pavel Roskin  <proski@gnu.org>
 
+	* syntax/syntax.syntax: Remove highlighting for numbers - it's
+	for Cooledit only.
+
 	* syntax/c.syntax: Require at least one space at the beginning
 	of indented cpp directives.  Use brightmagenta for them.
 

@@ -34,34 +34,6 @@ context default
     keyword whole linestart file\[\] brightgreen/6
     keyword whole linestart include\[\] brightred/18
 
-    keyword whole 0 lightgray/0	blue/26
-    keyword whole 1 lightgray/1	blue/26
-    keyword whole 2 lightgray/2	blue/26
-    keyword whole 3 lightgray/3	blue/26
-    keyword whole 4 lightgray/4	blue/26
-    keyword whole 5 lightgray/5	blue/26
-    keyword whole 6 lightgray/6
-    keyword whole 7 lightgray/7
-    keyword whole 8 lightgray/8
-    keyword whole 9 lightgray/9
-    keyword whole 10 lightgray/10
-    keyword whole 11 lightgray/11
-    keyword whole 12 lightgray/12
-    keyword whole 13 lightgray/13
-    keyword whole 14 lightgray/14
-    keyword whole 15 lightgray/15
-    keyword whole 16 lightgray/16
-    keyword whole 17 lightgray/17
-    keyword whole 18 lightgray/18
-    keyword whole 19 lightgray/19
-    keyword whole 20 lightgray/20
-    keyword whole 21 lightgray/21
-    keyword whole 22 lightgray/22
-    keyword whole 23 lightgray/23
-    keyword whole 24 lightgray/24
-    keyword whole 25 lightgray/25
-    keyword whole 26 lightgray/26
-
     keyword wholeleft black\/ black/0
     keyword wholeleft red\/ red/DarkRed
     keyword wholeleft green\/ green/green3
