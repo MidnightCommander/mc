@@ -6,8 +6,8 @@
 	* screen.c (do_enter_on_file_entry): Try to change directory
 	when pressing Enter on a non-stat()able file.
 
-	* screen.c (string_file_size_brief): Represent non-regular files
-	of unknown kind by '?'.
+	* screen.c (string_file_type): Represent non-regular files of
+	unknown kind by '?'.
 	(file_compute_color): Use for them the same color as for stale
 	links.
 
