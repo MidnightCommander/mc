@@ -546,6 +546,10 @@ if test "$GLIBC21" != yes; then
     AC_DEFINE(USE_INCLUDED_REGEX, 1, [Use the regex included here])
 fi
 
+if test "x$with_screen" = xmcslang; then
+    AC_DEFINE(USE_INCLUDED_SLANG, 1, [Use the S-Lang included here])
+fi
+
 if test x"$USE_MAINTAINER_MODE" = x"yes"; then
     if test x"${enable_gcc_warnings+set}" != x"set"; then
         CFLAGS="-Wall $CFLAGS"

@@ -742,7 +742,7 @@ dnl
 dnl Use the included S-Lang library.
 dnl
 AC_DEFUN([MC_WITH_MCSLANG], [
-    screen_type=slang
+    screen_type=mcslang
     screen_msg="Included S-Lang library (mcslang)"
 
     # Search for terminfo database.

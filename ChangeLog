@@ -1,3 +1,8 @@
+2004-10-12  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* acinclude.m4 (MC_WITH_MCSLANG): Set screen_type to mcslang.
+	* configure.ac: Define USE_INCLUDED_SLANG if screen_type is mcslang.
+
 2004-10-05  Gergely Sza'sz  <szaszg@hu.inter.net> 
 
 	* syntax/perl.syntax: Fix highlight the hashes.
