@@ -46,6 +46,7 @@ int set_int (char *, char *, int);
 int get_int (char *, char *, int);
 
 char *load_file (char *filename);
+char *load_mc_home_file (const char *filename, char ** allocated_filename);
 
 #include "fs.h"
 #ifndef S_ISLNK

@@ -651,9 +651,7 @@ void tree_copy (WTree *tree, char *default_dest)
 
 static void tree_help_cmd (void)
 {
-    char *hlpfile = concat_dir_and_file (mc_home, _("mc.hlp"));
-    interactive_display (hlpfile,  "[Directory Tree]");
-    g_free (hlpfile);
+    interactive_display (NULL,  "[Directory Tree]");
 }
 
 static int tree_copy_cmd (WTree *tree)

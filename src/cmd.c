@@ -1201,9 +1201,7 @@ void other_symlink_cmd (void)
 
 void help_cmd (void)
 {
-   char *hlpfile = concat_dir_and_file (mc_home, _("mc.hlp"));
-   interactive_display (hlpfile, "[main]");
-   g_free (hlpfile);
+   interactive_display (NULL, "[main]");
 }
 
 void view_panel_cmd (void)
@@ -1269,8 +1267,6 @@ char *guess_message_value (unsigned want_info)
 char *get_random_hint (void)
 {
     char *data, *result, *eol;
-    char *hintfile_base, *hintfile;
-    char *lang;
     int  len;
     int start;
     
@@ -1294,24 +1290,7 @@ char *get_random_hint (void)
     last_sec = tv.tv_sec;
 #endif
 
-    hintfile_base = concat_dir_and_file (mc_home, MC_HINT);
-    lang = guess_message_value (0);
-
-    hintfile = g_strdup_printf ("%s.%s", hintfile_base, lang);
-    data = load_file (hintfile);
-    g_free (hintfile);
-
-    if (!data) {
-	hintfile = g_strdup_printf ("%s.%.2s", hintfile_base, lang);
-	data = load_file (hintfile);
-	g_free (hintfile);
-
-	if (!data)
-	    data = load_file (hintfile_base);
-    }
-
-    g_free (lang);
-    g_free (hintfile_base);
+    data = load_mc_home_file (MC_HINT, NULL);
     if (!data)
 	return 0;
 

@@ -630,8 +630,6 @@ void dlg_stop (Dlg_head *h)
 
 static INLINE void dialog_handle_key (Dlg_head *h, int d_key)
 {
-   char *hlpfile;
-
     switch (d_key){
     case KEY_LEFT:
     case KEY_UP:
@@ -644,9 +642,7 @@ static INLINE void dialog_handle_key (Dlg_head *h, int d_key)
 	break;
 
     case KEY_F(1):
-        hlpfile = concat_dir_and_file (mc_home, _("mc.hlp"));
-	interactive_display (hlpfile, h->help_ctx);
-        g_free (hlpfile);
+	interactive_display (NULL, h->help_ctx);
 	do_refresh ();
 	break;
 

@@ -1,3 +1,16 @@
+2001-06-09  Pavel Roskin  <proski@gnu.org>
+
+	* util.c (load_mc_home_file): New function. Load file from
+	mc_home, but try localized version of that file first.
+	* util.h: Declare load_mc_home_file().
+	* help.c (interactive_display): Use load_mc_home_file(). If the
+	first argument is NULL assume mc.hlp.
+	* dlg.c (dialog_handle_key): Use interactive_display() without
+	specifying the help file.
+	* tree.c (tree_copy): Likewise.
+	* cmd.c (help_cmd): Likewise.
+	(get_random_hint): Use load_mc_home_file().
+
 2001-06-07  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* charsets.h: Define CHARSETS_INDEX without leading LIBDIR.

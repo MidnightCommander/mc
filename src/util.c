@@ -74,6 +74,8 @@
 #include "global.h"
 #include "profile.h"
 #include "user.h"		/* expand_format */
+#include "main.h"		/* mc_home */
+#include "cmd.h"		/* guess_message_value */
 #include "../vfs/vfs.h"
 
 #ifdef HAVE_CHARSET
@@ -605,6 +607,43 @@ char *load_file (char *filename)
 	 g_free (data);
 	return 0;
     }
+}
+
+char *load_mc_home_file (const char *filename, char ** allocated_filename)
+{
+    char *hintfile_base, *hintfile;
+    char *lang;
+    char *data;
+
+    hintfile_base = concat_dir_and_file (mc_home, filename);
+    lang = guess_message_value (0);
+
+    hintfile = g_strdup_printf ("%s.%s", hintfile_base, lang);
+    data = load_file (hintfile);
+
+    if (!data) {
+	g_free (hintfile);
+	hintfile = g_strdup_printf ("%s.%.2s", hintfile_base, lang);
+	data = load_file (hintfile);
+
+	if (!data) {
+	    g_free (hintfile);
+	    hintfile = hintfile_base;
+	    data = load_file (hintfile_base);
+	}
+    }
+
+    g_free (lang);
+
+    if (hintfile != hintfile_base)
+	g_free (hintfile_base);
+
+    if (allocated_filename)
+	*allocated_filename = hintfile;
+    else
+	g_free (hintfile);
+
+    return data;
 }
 
 /* Check strftime() results. Some systems (i.e. Solaris) have different

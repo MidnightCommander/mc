@@ -1825,9 +1825,7 @@ static void do_normal_search (void *xview, char *text)
 /* Real view only */
 static void help_cmd (void)
 {
-    char *hlpfile = concat_dir_and_file (mc_home, _("mc.hlp"));
-    interactive_display (hlpfile, "[Internal File Viewer]");
-    g_free (hlpfile);
+    interactive_display (NULL, "[Internal File Viewer]");
     /*
     view_refresh (0);
     */

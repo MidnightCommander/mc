@@ -755,14 +755,26 @@ interactive_display_finish (void)
 void
 interactive_display (char *filename, char *node)
 {
-    WButtonBar *help_bar;
-    Widget     *md;
-    
-    if ((data = load_file (filename)) == 0){
+    WButtonBar	*help_bar;
+    Widget	*md;
+    char	*hlpfile = filename;
+
+    if (filename)
+	data = load_file (filename);
+    else
+	data = load_mc_home_file ("mc.hlp", &hlpfile);
+
+    if (data == NULL){
 	message (1, MSG_ERROR, _(" Can't open file %s \n %s "),
-		 filename, unix_error_string (errno));
-	return;
+		 hlpfile, unix_error_string (errno));
     }
+
+    if (!filename)
+	g_free (hlpfile);
+
+    if (!data)
+	return;
+
     if (!(main_node = search_string (data, node))){
 	message (1, MSG_ERROR, _(" Can't find node %s in help file "), node);
 	interactive_display_finish ();
