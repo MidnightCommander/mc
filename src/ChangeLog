@@ -1,3 +1,8 @@
+2001-10-22  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* dialog.h: Include global.h.
+	(message): Specify __attribute__.
+
 2001-10-20  Pavel Roskin  <proski@gnu.org>
 
 	* main.h (print_vfs_message): Specify __attribute__.
