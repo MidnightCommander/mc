@@ -1,5 +1,10 @@
 2002-12-09  Pavel Roskin  <proski@gnu.org>
 
+	* extfs/ftplist.in: Remove, it's obsoleted by the hotlist.
+	* extfs/ucpio.in: Remove, it's obsoleted ucpio.c.
+	* extfs/Makefile.am: Remove all references to them.
+	* extfs/extfs.ini: Likewise.
+
 	* extfs.c (__find_entry): When creating entried for regular
 	files, set initial permissions to S_IFREG | 0666.  This fixes
 	problems with viewing and editing newly added files.

@@ -11,11 +11,9 @@ EXTFS_CONST = a apt audio deba debd dpkg hp48 mailfs patchfs rpm bpp \
 EXTFS_IN    = 			\
 	deb.in 			\
 	lslR.in 		\
-	ucpio.in 		\
 	urar.in 		\
 	uzip.in 		\
 	uzoo.in 		\
-	ftplist.in 		\
 	uar.in 			\
 	ulha.in 		\
 	uha.in
@@ -24,11 +22,9 @@ EXTFS_IN    = 			\
 EXTFS_OUT = 			\
 	deb 			\
 	lslR 			\
-	ucpio 			\
 	urar 			\
 	uzip 			\
 	uzoo 			\
-	ftplist 		\
 	uar 			\
 	ulha 			\
 	uha
