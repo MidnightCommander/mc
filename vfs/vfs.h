@@ -4,7 +4,15 @@
 #if !defined(SCO_FLAVOR) || !defined(_SYS_SELECT_H)
 #	include <sys/time.h>	/* alex: this redefines struct timeval */
 #endif /* SCO_FLAVOR */
-#include <utime.h>
+
+#ifdef HAVE_UTIME_H
+#    include <utime.h>
+#else
+struct utimbuf {
+	time_t actime;
+	time_t modtime;
+};
+#endif
 
 #ifdef USE_VFS
 
