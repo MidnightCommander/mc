@@ -13,7 +13,6 @@ Group:     Applications/File
 Source0:   ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/mc-%{PACKAGE_VERSION}.tar.gz
 URL:       http://www.gnome.org/mc/
 BuildRoot: /var/tmp/mc-%{PACKAGE_VERSION}-root
-Requires:  mc-common >= %{PACKAGE_VERSION}
 Prereq:    /sbin/chkconfig
 
 %description
@@ -22,26 +21,6 @@ more features.  It is text mode, but also includes mouse support if you are
 running GPM.  Its coolest feature is the ability to ftp, view tar, zip
 files, and poke into RPMs for specific files.  :-)
 
-%package -n mc-common
-Summary:  Midnight Commander visual shell (common files)
-Group:    Applications/File
-
-%description -n mc-common
-Midnight Commander is a visual shell much like a file manager, only with
-way more features.  This file contains files common for both the text and
-the GNOME editions.
- 
-%package -n gmc
-Summary:  Midnight Commander visual shell (GNOME version)
-Requires: mc-common >= %{PACKAGE_VERSION}
-Group:    User Interface/Desktops
-
-%description -n gmc
-Midnight Commander is a visual shell much like a file manager, only with
-way more features.  This is the GNOME version. It's coolest feature is the
-ability to ftp, view tar, zip files and poke into RPMs for specific files.
-The GNOME version of Midnight Commander is not yet finished though. :-(
- 
 %prep
 %setup -q
 
@@ -86,7 +65,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/lib/mc/bin
 %dir %{_prefix}/lib/mc/term
 
-%files -n mc-common
 %defattr(-, root, root)
 %{_prefix}/bin/mcmfmt
 %config %{_prefix}/lib/mc/cedit.menu
@@ -104,22 +82,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/lib/mc/extfs
 %dir %{_prefix}/lib/mc/syntax
 
-%files -n gmc
-%defattr(-, root, root)
-%{_prefix}/bin/gmc
-%{_prefix}/bin/plain-gmc
-# %{_prefix}/bin/gmc-client ?
-%{_prefix}/share/gnome/help/gmc/*
-%{_prefix}/share/idl/*
-%{_prefix}/share/mime-info/mc.keys
-%{_prefix}/share/pixmaps/mc/*
-%config /etc/CORBA/servers/*
-%dir %{_prefix}/lib/mc/desktop-scripts
-%dir %{_prefix}/share/gnome/help/gmc
-# %dir %{_prefix}/share/mc/templates ?
-%dir %{_prefix}/share/pixmaps/mc
-
 %changelog
+* Fri Aug 24 2001 Pavel Roskin <proski@gnu.org>
+- Remove gmc.  Reunite mc and mc-common.
+
 * Sun Aug 05 2001 Pavel Roskin <proski@gnu.org>
 - Set epoch.
 
