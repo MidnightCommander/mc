@@ -1,3 +1,13 @@
+1998-12-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (panel_switch_new_display_mode): Destroy the old
+	widget.  Add the list view to the proper table.
+
+	* glayout.c: Remove the exit menu option.
+
+	* gtree.c (gtk_dtree_contains): New routine used to avoid
+	duplicate entries in the tree display.
+
 1998-11-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gscreen.c (panel_icon_list_select_icon): Use gpopup_do_popup().

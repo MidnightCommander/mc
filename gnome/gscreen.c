@@ -276,7 +276,6 @@ x_fill_panel (WPanel *panel)
 
 	gtk_signal_handler_block_by_data (GTK_OBJECT (panel->tree), panel);
 
-	printf ("Solicitando: %s\n", panel->cwd);
 	gtk_dtree_do_select_dir (GTK_DTREE (panel->tree), panel->cwd); 
 
 	gtk_signal_handler_unblock_by_data (GTK_OBJECT (panel->tree), panel);
@@ -529,7 +528,6 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 		break;
 
 	case GDK_2BUTTON_PRESS:
-		printf ("2\n");
 		gtk_clist_unselect_row (CLIST_FROM_SW (panel->list), row, 0);
 		if (event->button.button == 1)
 			do_enter (panel);
@@ -1389,10 +1387,10 @@ panel_switch_new_display_mode (WPanel *panel)
 
 	if (!old_list)
 		return;
-	
+
 	panel->list = panel_create_file_list (panel);
 	gtk_widget_destroy (old_list);
-	gtk_table_attach (GTK_TABLE (panel->table), panel->list, 0, 1, 1, 2,
+	gtk_table_attach (GTK_TABLE (panel->view_table), panel->list, 0, 1, 0, 1,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK, 
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0);

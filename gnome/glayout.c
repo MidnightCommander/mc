@@ -281,8 +281,10 @@ GnomeUIInfo gnome_panel_file_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("R_everse selection"), N_("Reverses the list of tagged files"), reverse_selection_cmd },
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("C_lose"),             N_("Close this panel"), gnome_close_panel },
+#if 0
 	{ GNOME_APP_UI_ITEM, N_("E_xit"),              N_("Exit program"), gnome_quit_cmd, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_EXIT },
+#endif
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 

@@ -18,7 +18,14 @@
 #include "dir-open.xpm"
 #include "dir-close.xpm"
 
-#define TREE_SPACING 5
+#ifdef HACK
+# define mc_opendir opendir
+# define mc_closedir closedir
+# define mc_stat stat
+# define mc_readdir readdir
+#endif
+
+#define TREE_SPACING 3
 
 static GtkCTreeClass *parent_class = NULL;
 
@@ -59,8 +66,33 @@ gtk_dtree_get_row_path (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 		if (path [l-1] == '/')
 			path [l-1] = 0;
 	}
-	printf ("get: %s\n", path);
 	return path;
+}
+
+static GtkCTreeNode *
+gtk_dtree_contains (GtkDTree *dtree, GtkCTreeNode *parent, char *text)
+{
+	GtkCTreeNode *node;
+	char *s;
+	
+	g_assert (dtree);
+	g_assert (parent);
+	g_assert (text);
+
+	node = GTK_CTREE_ROW (parent)->children;
+	
+	for (; node && GTK_CTREE_ROW (node)->parent == parent;){
+		char *s;
+		
+		gtk_ctree_node_get_pixtext (GTK_CTREE (dtree), node, 0, &s, NULL, NULL, NULL);
+
+		if (strcmp (s, text) == 0)
+			return node;
+		
+		node = GTK_CTREE_ROW (node)->sibling;
+	}
+
+	return NULL;
 }
 
 static gboolean
@@ -108,26 +140,31 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 
 		text [0] = dirent->d_name;
 
-		sibling = gtk_ctree_insert_node (
-			GTK_CTREE (dtree), parent, NULL,
-			text, TREE_SPACING,
-			dtree->pixmap_close,
-			dtree->bitmap_close,
-			dtree->pixmap_open,
-			dtree->bitmap_open,
-			FALSE, FALSE);
+		/* Do not insert duplicates */
+		sibling = gtk_dtree_contains (dtree, parent, text [0]);
+		
+		if (sibling == NULL){
+			sibling = gtk_ctree_insert_node (
+				GTK_CTREE (dtree), parent, NULL,
+				text, TREE_SPACING,
+				dtree->pixmap_close,
+				dtree->bitmap_close,
+				dtree->pixmap_open,
+				dtree->bitmap_open,
+				FALSE, FALSE);
 
-		if (level){
-			gtk_dtree_load_path (dtree, full_name, sibling, level-1);
 		}
 
+		if (level)
+			gtk_dtree_load_path (dtree, full_name, sibling, level-1);
+		
 		g_free (full_name);
 
-		if (level == 0)
-			break;
 	}
 
 	mc_closedir (dir);
+
+	return TRUE;
 }
 
 static void
@@ -223,15 +260,13 @@ gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
 	s++;
 	npath = g_strdup ("/");
 
-	printf ("Original %s\n", s);
 	while ((current = strtok (s, "/")) != NULL){
 		char *comp, *full_path;
 		GtkCTreeNode *node;
 
 		s = NULL;
-		printf ("Attempting component: %p, %s\n", current, current);
 		full_path = g_concat_dir_and_file (npath, current);
-/*		g_free (npath); */
+		g_free (npath);
 		npath = full_path;
 
 		node = gtk_dtree_lookup_dir (dtree, current_node, current);
@@ -264,6 +299,8 @@ gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
 		g_free (dtree->requested_path);
 		dtree->requested_path = NULL;
 	}
+
+	return TRUE;
 }
 
 /**
@@ -293,6 +330,8 @@ gtk_dtree_select_dir (GtkDTree *dtree, char *path)
 			dtree->requested_path = g_strdup (path);
 		}
 	}
+
+	return TRUE;
 }
 
 static void
