@@ -57,6 +57,8 @@
 #endif				/* __linux__ */
 
 #ifdef __QNXNTO__
+#	include <dlfcn.h>
+#	include <Ph.h>
 #	include <sys/dcmd_chr.h>
 #endif
 
@@ -105,6 +107,15 @@ typedef struct SelectList {
     void *info;
     struct SelectList *next;
 } SelectList;
+
+#ifdef __QNXNTO__
+    typedef int (*ph_dv_f) (void *, void *);
+    typedef int (*ph_ov_f) (void *);
+    typedef int (*ph_pqc_f) (unsigned short, PhCursorInfo_t *);
+    ph_dv_f ph_attach;
+    ph_ov_f ph_input_group;
+    ph_pqc_f ph_query_cursor;
+#endif
 
 static SelectList *select_list = 0;
 
@@ -1098,6 +1109,13 @@ get_modifier (void)
     int result = 0;
 #ifdef __QNXNTO__
     int mod_status, shift_ext_status;
+    static int in_photon = 0;
+    static int ph_ig = 0;
+    char phlib_path[PATH_MAX];
+    PhCursorInfo_t cursor_info;
+    static void *ph_handle;
+    char *ph_env;
+    struct stat st;
 #endif
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
@@ -1123,20 +1141,60 @@ get_modifier (void)
     }
 #endif
 #ifdef __QNXNTO__
-    /* This code doesn't work under Photon */
-    if (devctl
-	(fileno (stdin), DCMD_CHR_LINESTATUS, &mod_status, sizeof (int),
-	 NULL) == -1)
-	return 0;
-    shift_ext_status = mod_status & 0xffffff00UL;
-    mod_status &= 0x7f;
-    if (mod_status & _LINESTATUS_CON_ALT)
-	result |= KEY_M_ALT;
-    if (mod_status & _LINESTATUS_CON_CTRL)
-	result |= KEY_M_CTRL;
-    if ((mod_status & _LINESTATUS_CON_SHIFT)
-	|| (shift_ext_status & 0x00000800UL))
-	result |= KEY_M_SHIFT;
+
+    if (in_photon == 0) {
+	/* First time here, let's load Photon library and attach
+	   to Photon */
+	in_photon = -1;
+	ph_env = getenv ("PHOTON2_PATH");
+	if (ph_env != NULL) {
+	    sprintf (phlib_path, "%s/lib/libph.so.1", ph_env);
+	    if (fstat (phlib_path, &st)) {
+		/* QNX 6.x has no support for RTLD_LAZY */
+		ph_handle = dlopen (phlib_path, RTLD_NOW);
+		if (ph_handle != NULL) {
+		    ph_attach = (ph_dv_f) dlsym (ph_handle, "PhAttach");
+		    ph_input_group =
+			(ph_ov_f) dlsym (ph_handle, "PhInputGroup");
+		    ph_query_cursor =
+			(ph_pqc_f) dlsym (ph_handle, "PhQueryCursor");
+		    if ((ph_attach != NULL) && (ph_input_group != NULL)
+			&& (ph_query_cursor != NULL)) {
+			if ((*ph_attach) (0, 0)) {	/* Attached */
+			    ph_ig = (*ph_input_group) (0);
+			    in_photon = 1;
+			}
+		    }
+		}
+	    }
+	}
+
+    }
+    /* We do not have Photon running. Assume we are in text 
+       console or xterm */
+    if (in_photon == -1) {
+	if (devctl
+	    (fileno (stdin), DCMD_CHR_LINESTATUS, &mod_status,
+	     sizeof (int), NULL) == -1)
+	    return 0;
+	shift_ext_status = mod_status & 0xffffff00UL;
+	mod_status &= 0x7f;
+	if (mod_status & _LINESTATUS_CON_ALT)
+	    result |= KEY_M_ALT;
+	if (mod_status & _LINESTATUS_CON_CTRL)
+	    result |= KEY_M_CTRL;
+	if ((mod_status & _LINESTATUS_CON_SHIFT)
+	    || (shift_ext_status & 0x00000800UL))
+	    result |= KEY_M_SHIFT;
+    } else {
+	(*ph_query_cursor) (ph_ig, &cursor_info);
+	if (cursor_info.key_mods & 0x04)
+	    result |= KEY_M_ALT;
+	if (cursor_info.key_mods & 0x02)
+	    result |= KEY_M_CTRL;
+	if (cursor_info.key_mods & 0x01)
+	    result |= KEY_M_SHIFT;
+    }
 #endif
 #ifdef __linux__
     {

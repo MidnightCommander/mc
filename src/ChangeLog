@@ -1,3 +1,7 @@
+2003-03-10  Dmitry Alexeyev  <dmi_a@qnx.org.ru>
+
+	* key.c (get_modifier): Add support for QNX Photon pterm.
+
 2003-03-10  Pavel Roskin  <proski@gnu.org>
 
 	* utilunix.c (canonicalize_pathname): Clean rewrite from
