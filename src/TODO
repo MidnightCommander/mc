@@ -3,9 +3,6 @@ Before 4.6.1
 
 Regression - restore tilde expansion, but do it properly this time.
 
-Crash in VFS code after entering extfs inside extfs and letting both
-expire.
-
 
 Before 4.6.2
 ============
