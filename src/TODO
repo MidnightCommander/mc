@@ -1,6 +1,12 @@
 Before 4.6.0-pre2
 =================
 
+Totals are not calculated when operating on a single directory.
+
+Recheck and clean up manuals.  Add node names to the English manual.
+
+Check "mc --help-colors" for completeness.
+
 reimplement "-P" in a safer way (temp file instead of stdout) - possibly
 security issues.
 
@@ -10,10 +16,6 @@ directory to the other panel.
 Pressing F8 twice in the viewer causes error messages if the file was
 preprocessed (i.e. gzipped files, manpages).
 
-Add support for mouse wheel with gpm.
-
-Recheck all mouse handlers, make sure that they check button number.
-
 ncurses 5.2 turns off keypad under heavy load on xterm.  Check if
 anything can be done about it.
 
@@ -22,6 +24,10 @@ ftp and fish with home != '/' - readjust directory to the home.
 
 Before 4.6.0
 ============
+
+Add support for mouse wheel with gpm.
+
+Recheck all mouse handlers, make sure that they check button number.
 
 Load subshell prompt when it's ready.
 
