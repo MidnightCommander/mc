@@ -6590,7 +6590,7 @@ msgstr " Opozorilo 'direntry'"
 #: vfs/direntry.c:431
 #, c-format
 msgid "Super ino_usage is %d, memory leak"
-msgstr "Super ino_usage je %d, pu¹èanje spomina"
+msgstr "Super ino_usage je %d, pu¹èanje pomnilnika"
 
 #: vfs/direntry.c:434
 msgid "Super has want_stale set"
