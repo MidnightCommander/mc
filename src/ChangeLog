@@ -1,3 +1,12 @@
+1998-07-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* main.c (translated_mc_chdir): Quick hack to make the old
+	url-like pathnames to be used on the command line.
+	
+1998-06-22  T.E.Dickey <dickey@clark.net>
+
+	* keyxdef.c: Fix for compiling with ncurses.
+	
 Fri Jul 24 00:44:37 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* mc-local.m4 (AC_STRUCT_LINGER): Moved into macros/linger.m4.

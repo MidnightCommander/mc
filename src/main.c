@@ -1453,6 +1453,20 @@ toggle_align_extensions (void)
     align_extensions = !align_extensions;
 }
 
+/*
+ * Just a hack for allowing url-like pathnames to be accepted from the
+ * command line.
+ */
+static void
+translated_mc_chdir (char *dir)
+{
+	char *newdir;
+
+	newdir = translate_url_to_new_syntax (dir);
+	mc_chdir (newdir);
+	free (newdir);
+}
+
 #ifndef PORT_HAS_CREATE_PANELS
 void
 create_panels (void)
@@ -1485,15 +1499,15 @@ create_panels (void)
 	     */
 	    mc_get_current_wd (original_dir, sizeof (original_dir)-2);
 	}
-	mc_chdir (this_dir);
+	translated_mc_chdir (this_dir);
     }
     set_display_type (current_index, current_mode);
 
     /* The other panel */
     if (other_dir){
 	if (original_dir [0])
-	    mc_chdir (original_dir);
-	mc_chdir (other_dir);
+	    translated_mc_chdir (original_dir);
+	translated_mc_chdir (other_dir);
     }
     set_display_type (other_index, other_mode);
 
