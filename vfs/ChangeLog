@@ -1,3 +1,7 @@
+2002-04-19  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* vfs.c (vfs_init) [!WITH_MCFS]: Don't register mcfs.
+
 2002-04-12  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/trpm: update to work with rpm 4.x.

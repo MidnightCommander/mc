@@ -1267,7 +1267,9 @@ vfs_init (void)
 #ifdef WITH_SMBFS
     vfs_register (&vfs_smbfs_ops);
 #endif
+#ifdef WITH_MCFS
     vfs_register (&vfs_mcfs_ops);
+#endif
 #endif
 
     vfs_register (&vfs_fish_ops);
