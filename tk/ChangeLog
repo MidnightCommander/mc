@@ -1,0 +1,4 @@
+1998-03-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* tkconf.h (PORT_HAS_FILTER_CHANGED): New flag for conditional compilation.
+
