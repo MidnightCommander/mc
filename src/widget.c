@@ -506,7 +506,7 @@ label_callback (WLabel *l, int msg, int parm)
 
     case WIDGET_DRAW:
 	{
-	    const char *p = l->text, *q;
+	    char *p = l->text, *q, c = 0;
 	    int y = 0;
 
 	    if (!l->text)
@@ -520,13 +520,18 @@ label_callback (WLabel *l, int msg, int parm)
 		int xlen;
 
 		q = strchr (p, '\n');
+		if (q) {
+		    c = *q;
+		    *q = 0;
+		}
 		widget_move (&l->widget, y, 0);
-		printw ("%.*s", q - p, p);
+		printw ("%s", p);
 		xlen = l->widget.cols - strlen (p);
 		if (xlen > 0)
 		    printw ("%*s", xlen, " ");
 		if (!q)
 		    break;
+		*q = c;
 		p = q + 1;
 		y++;
 	    }
