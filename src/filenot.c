@@ -90,7 +90,7 @@ my_mkdir (char *s, mode_t mode)
     if (result == 0) {
 	s = get_absolute_name (s);
 
-#if FIXME
+#ifdef FIXME
 	tree_add_entry (tree, s);
 #endif
 
@@ -103,7 +103,7 @@ int
 my_rmdir (char *s)
 {
     int result;
-#if FIXME
+#ifdef FIXME
     WTree *tree = 0;
 #endif
 
@@ -112,7 +112,7 @@ my_rmdir (char *s)
     if (result == 0) {
 	s = get_absolute_name (s);
 
-#if FIXME
+#ifdef FIXME
 	tree_remove_entry (tree, s);
 #endif
 
