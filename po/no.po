@@ -611,7 +611,7 @@ msgstr "Terminerer filbehandleren og skrivebordet"
 
 #: gnome/glayout.c:412
 msgid "Rescan System Devices"
-msgstr "Oppdater systemenhetene
+msgstr "Oppdater systemenhetene"
 
 #: gnome/glayout.c:420 gnome/glayout.c:430
 msgid "_Layout"
