@@ -57,8 +57,7 @@ GNOMESRCS = 		\
 	gtree.c		\
 	gutil.c		\
 	gview.c		\
-	gwidget.c	\
-	temp-hack.c
+	gwidget.c
 
 GNOMEHDRS = 		\
 	gblist.h	\
@@ -78,7 +77,6 @@ GNOMEHDRS = 		\
 	gpopup.h	\
 	gprefs.h	\
 	gprop.h		\
-	gdialogs.h	\
 	gscreen.h	\
 	gtkdtree.h	\
 	gtree.h		\
