@@ -808,10 +808,10 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
 		break_a;
 	    if ((t = g_tree_lookup (defines, key))){
 		g_free (t);
-		t = g_strdup (value);
 	    } else {
-		g_tree_insert (defines, g_strdup (key), g_strdup (value));
+		key = g_strdup (key);
 	    }
+	    g_tree_insert (defines, key, g_strdup (value));
 	} else {		/* anything else is an error */
 	    break_a;
 	}
