@@ -239,8 +239,11 @@ x_init_dlg (Dlg_head *h)
 			p = p->next;
 		} while (p != first);
 		gtk_ted_prepare (ted);
-		gtk_grab_add (GTK_WIDGET (ted)); 
-
+		gtk_grab_add (GTK_WIDGET (ted));
+		
+		if (!ted->need_gui)
+			gtk_window_set_policy (GTK_WINDOW (ted), 0, 0, 0);
+		
 		gtk_widget_show (GTK_WIDGET (h->wdata));
 	}
 	gtk_signal_connect (GTK_OBJECT (h->wdata), "delete_event",

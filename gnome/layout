@@ -137,7 +137,7 @@ text=Directory path
 
 [option-Widget-button-ok]
 geometry=2,15,1,1
-flags=w
+flags=
 
 [option-Widget-safe-del]
 geometry=5,13,1,1
@@ -152,7 +152,7 @@ geometry=5,4,1,1
 flags=w
 
 [option-Widget-drop-menus]
-geometry=2,5,1,1
+geometry=2,5,2,1
 flags=w
 
 [option-Widget-edit-int]
@@ -160,8 +160,8 @@ geometry=5,6,1,1
 flags=w
 
 [option-Widget-button-save]
-geometry=2,15,1,1
-flags=
+geometry=3,15,2,1
+flags=ew
 
 [option-Widget-lynx]
 geometry=5,10,1,1
@@ -184,11 +184,11 @@ geometry=5,11,1,1
 flags=w
 
 [option-Widget-show-hidden]
-geometry=2,3,1,1
+geometry=2,3,2,1
 flags=w
 
 [option-Widget-mark-moves]
-geometry=2,4,1,1
+geometry=2,4,2,1
 flags=w
 
 [option-Widget-verbose]
@@ -196,7 +196,7 @@ geometry=5,2,1,1
 flags=w
 
 [option-Widget-mix-files]
-geometry=2,6,1,1
+geometry=2,6,2,1
 flags=w
 
 [option-Widget-auto-menus]
@@ -205,7 +205,7 @@ flags=w
 
 [option-Widget-button-cancel]
 geometry=5,15,1,1
-flags=w
+flags=
 
 [option-Widget-dummy]
 geometry=5,9,1,1
@@ -216,11 +216,11 @@ geometry=5,12,1,1
 flags=w
 
 [option-Widget-show-backup]
-geometry=2,2,1,1
+geometry=2,2,2,1
 flags=w
 
 [option-Widget-pause-radio]
-geometry=2,10,1,5
+geometry=2,10,2,5
 flags=nw
 
 [option-Frame-Frame-1]
@@ -234,7 +234,7 @@ flags=snew
 text=Pause after run
 
 [option-Frame-Frame-0]
-geometry=0,0,4,8
+geometry=0,0,4,9
 flags=snew
 text=Panel options
 
