@@ -1335,7 +1335,7 @@ menu bêdzie aktywowane, w przeciwnym wypadku zostaniesz tylko przeniosiony
 do tytu³ów w tym menu i bêdziesz musia³ wybraæ opcjê rêcznie przy u¿yciu
 strza³ek b±d¼ te¿ przy u¿yciu pierwszej litery z nazwy konkretnego menu.
 .PP
-.I Mix all files .
+.IR Mix all files .
 Je¶li ta opcja jest w³±czona, wszystkie pliki i katalogi s± pomieszane razem.
 Je¶li za¶ jest wy³±czona, katalogi (i dowi±zania do nich), s± listowane na
 pocz±tku a pozosta³e pliki dopiero za nimi.
@@ -2324,7 +2324,7 @@ Przyk³ady
 .PP
 Pó¼niejszy podaje pe³n± ¶cie¿kê archiwum tar.
 .\"NODE "  FIle transfer over SHell filesystem"
-.SH "  Transfer plików pomiêdzy systemami plików (FIle transfer over SHell filesystem)".
+.SH "  Transfer plików pomiêdzy systemami plików (FIle transfer over SHell filesystem)"
 .PP
 System plików fish jest systemem opartym na sieci, który pozwala na
 manipulowanie plikami na obcej maszynie tak jakby by³y one lokalne. Aby
@@ -2458,7 +2458,9 @@ tu dopiszê  [ patrz t³umacz na dole ;)) ]].
 Teraz wystarczy ju¿ tylko w³±czyæ odpowiednie opcje w menu opcji (klawisz
 F9). W menu opcji wybieramy
 .I Display bits
-i w³±czamy opcje \fIISO 8859-1\fP oraz \fIFull 8 bits input\fP. Potem
+i w³±czamy opcje 
+.I ISO 8859-1
+oraz \fIFull 8 bits input\fP. Potem
 zapisujemy konfiguracjê w opcje | Save setup.
 .PP
 I gotowe - polskie literki dzia³aj± równie¿ w podgl±dzie i wbudowanym
