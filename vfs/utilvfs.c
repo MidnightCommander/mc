@@ -160,7 +160,7 @@ vfs_finduid (const char *uname)
 
     if (uname[0] != saveuname[0]	/* Quick test w/o proc call */
 	||0 != strncmp (uname, saveuname, TUNMLEN)) {
-	strncpy (saveuname, uname, TUNMLEN);
+	g_strlcpy (saveuname, uname, TUNMLEN);
 	pw = getpwnam (uname);
 	if (pw) {
 	    saveuid = pw->pw_uid;
@@ -182,7 +182,7 @@ vfs_findgid (const char *gname)
 
     if (gname[0] != savegname[0]	/* Quick test w/o proc call */
 	||0 != strncmp (gname, savegname, TUNMLEN)) {
-	strncpy (savegname, gname, TUNMLEN);
+	g_strlcpy (savegname, gname, TUNMLEN);
 	gr = getgrnam (gname);
 	if (gr) {
 	    savegid = gr->gr_gid;

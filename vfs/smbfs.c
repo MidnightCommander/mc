@@ -803,8 +803,7 @@ smbfs_readdir(void *info)
 #endif
 	return NULL;
     }
-    strncpy(dirent_dest, smbfs_info->current->text, MC_MAXPATHLEN);
-    dirent_dest[MC_MAXPATHLEN] = 0;
+    g_strlcpy(dirent_dest, smbfs_info->current->text, MC_MAXPATHLEN);
     smbfs_info->current = smbfs_info->current->next;
 
     compute_namelen(&smbfs_readdir_data.dent);

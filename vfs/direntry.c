@@ -607,8 +607,7 @@ vfs_s_readdir(void *data)
 	return NULL;
 
     if (info->cur->name) {
-	strncpy(dir.dent.d_name, info->cur->name, MC_MAXPATHLEN);
-	dir.dent.d_name[MC_MAXPATHLEN] = 0;
+	g_strlcpy (dir.dent.d_name, info->cur->name, MC_MAXPATHLEN);
     } else {
 	vfs_die("Null in structure-cannot happen");
     }

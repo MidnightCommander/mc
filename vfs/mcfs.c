@@ -756,8 +756,7 @@ mcfs_readdir (void *info)
 	return NULL;
     }
     dirent_dest = mcfs_readdir_data.dent.d_name;
-    strncpy (dirent_dest, mcfs_info->current->text, MC_MAXPATHLEN);
-    dirent_dest[MC_MAXPATHLEN] = 0;
+    g_strlcpy (dirent_dest, mcfs_info->current->text, MC_MAXPATHLEN);
     cached_lstat_info = &mcfs_info->current->my_stat;
     mcfs_info->current = mcfs_info->current->next;
 
