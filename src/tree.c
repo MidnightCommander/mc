@@ -770,21 +770,21 @@ tree_rmdir_cmd (WTree *tree)
 	return;
 }
 
-static void set_navig_label (Dlg_head *h);
+static void set_navig_label (WTree *tree);
 
 static void
-tree_toggle_navig (Dlg_head *h)
+tree_toggle_navig (WTree *tree)
 {
     tree_navigation_flag = 1 - tree_navigation_flag;
-    set_navig_label (h);
+    set_navig_label (tree);
 }
 
 static void
-set_navig_label (Dlg_head *h)
+set_navig_label (WTree *tree)
 {
-    define_label_data (h, (Widget *)tree,
+    define_label_data (tree->widget.parent, (Widget *) tree,
 		       4, tree_navigation_flag ? _("Static") : _("Dynamc"),
-		       (void (*)(void *))tree_toggle_navig, h);
+		       (buttonbarfn) tree_toggle_navig, tree);
 }
 
 static void
@@ -1033,7 +1033,7 @@ tree_callback (Dlg_head *h, WTree *tree, int msg, int par)
 #endif
 	define_label_data (h, (Widget *)tree,
 	    8, _("Rmdir"),  (buttonbarfn) tree_rmdir_cmd, tree);
-	set_navig_label (h);
+	set_navig_label (tree);
 	redraw_labels (h, (Widget *)tree);
 
 
