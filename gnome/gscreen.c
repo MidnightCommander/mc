@@ -1148,10 +1148,6 @@ panel_create_file_list (WPanel *panel)
 			   drop_types, ELEMENTS (drop_types),
 			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
 
-	gtk_drag_source_set (GTK_WIDGET (file_list), GDK_BUTTON1_MASK,
-			     drag_types, ELEMENTS (drag_types),
-			     GDK_ACTION_LINK | GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_ASK);
-
 	gtk_signal_connect (GTK_OBJECT (file_list), "drag_data_get",
 			    GTK_SIGNAL_FUNC (panel_drag_data_get), panel);
 	gtk_signal_connect (GTK_OBJECT (file_list), "drag_data_delete",
@@ -1343,10 +1339,6 @@ panel_create_icon_display (WPanel *panel)
 	gtk_drag_dest_set (GTK_WIDGET (ilist), GTK_DEST_DEFAULT_ALL,
 			   drop_types, ELEMENTS (drop_types),
 			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
-
-	gtk_drag_source_set (GTK_WIDGET (ilist), GDK_BUTTON1_MASK,
-			     drag_types, ELEMENTS (drag_types),
-			     GDK_ACTION_LINK | GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_ASK);
 
 	gtk_signal_connect (GTK_OBJECT (ilist), "drag_data_get",
 			    GTK_SIGNAL_FUNC (panel_drag_data_get),
