@@ -1,3 +1,7 @@
+2005-02-08  Roland Illig  <roland.illig@gmx.de>
+
+	* edit.h: Reformatted #definitions.
+
 2005-02-07  Roland Illig  <roland.illig@gmx.de>
 
 	* *.c: Removed trailing whitespace.

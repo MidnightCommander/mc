@@ -41,11 +41,11 @@
 
 #define N_menus 5
 
-#define SEARCH_DIALOG_OPTION_NO_SCANF	1
-#define SEARCH_DIALOG_OPTION_NO_REGEX	2
-#define SEARCH_DIALOG_OPTION_NO_CASE	4
-#define SEARCH_DIALOG_OPTION_BACKWARDS	8
-#define SEARCH_DIALOG_OPTION_BOOKMARK	16
+#define SEARCH_DIALOG_OPTION_NO_SCANF	(1 << 0)
+#define SEARCH_DIALOG_OPTION_NO_REGEX	(1 << 1)
+#define SEARCH_DIALOG_OPTION_NO_CASE	(1 << 2)
+#define SEARCH_DIALOG_OPTION_BACKWARDS	(1 << 3)
+#define SEARCH_DIALOG_OPTION_BOOKMARK	(1 << 4)
 
 #define EDIT_KEY_EMULATION_NORMAL 0
 #define EDIT_KEY_EMULATION_EMACS  1
@@ -60,8 +60,8 @@
 #define REDRAW_CHAR_ONLY     (1 << 7)
 #define REDRAW_COMPLETELY    (1 << 8)
 
-#define EDIT_TEXT_HORIZONTAL_OFFSET 0
-#define EDIT_TEXT_VERTICAL_OFFSET 1
+#define EDIT_TEXT_HORIZONTAL_OFFSET	0
+#define EDIT_TEXT_VERTICAL_OFFSET	1
 
 #define EDIT_RIGHT_EXTREME option_edit_right_extreme
 #define EDIT_LEFT_EXTREME option_edit_left_extreme
@@ -99,18 +99,18 @@
 #define START_STACK_SIZE 32
 
 /* Some codes that may be pushed onto or returned from the undo stack */
-#define CURS_LEFT 601
-#define CURS_RIGHT 602
-#define DELCHAR 603
-#define BACKSPACE 604
-#define STACK_BOTTOM 605
-#define CURS_LEFT_LOTS 606
-#define CURS_RIGHT_LOTS 607
-#define COLUMN_ON 608
-#define COLUMN_OFF 609
-#define MARK_1 1000
-#define MARK_2 700000000
-#define KEY_PRESS 1400000000
+#define CURS_LEFT	601
+#define CURS_RIGHT	602
+#define DELCHAR		603
+#define BACKSPACE	604
+#define STACK_BOTTOM	605
+#define CURS_LEFT_LOTS	606
+#define CURS_RIGHT_LOTS	607
+#define COLUMN_ON	608
+#define COLUMN_OFF	609
+#define MARK_1		1000
+#define MARK_2		700000000
+#define KEY_PRESS	1400000000
 
 /* Tabs spaces: (sofar only HALF_TAB_SIZE is used: */
 #define TAB_SIZE		option_tab_spacing
