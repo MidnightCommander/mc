@@ -1,3 +1,14 @@
+2000-09-15  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* editcmd.c (edit_save_file): fopen()+fwrite()+fclose() replaced
+	by open()+write()+close() to restore possibility to edit files
+	over Midnight Commander's VFSes
+	
+	(edit_replace_cmd) [MIDNIGHT]: some more right algorithm to calculate
+	menu coordinates used. I don't like if menu hides replaced text.
+
+	(edit_goto_cmd): Memory leaking fixed when f is empty string
+
 2000-09-07  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* edit.c (check_file_access) [MIDNIGHT,GTK]: error message localized;

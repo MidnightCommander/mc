@@ -249,7 +249,6 @@ int edit_save_file (WEdit * edit, const char *filename)
 {
     char *p;
     long filelen = 0;
-    FILE *file;
     char *savename = 0;
     int this_save_mode, fd;
 
@@ -283,15 +282,20 @@ int edit_save_file (WEdit * edit, const char *filename)
 	if (!savename)
 	    return 0;
     }
-    if ((file = fopen (savename, "w+")) == 0)
+
+    if ((fd = open (savename, O_CREAT | O_WRONLY | O_TRUNC | MY_O_TEXT, edit->stat.st_mode)) == -1)
 	goto error_save;
+
     chmod (savename, edit->stat.st_mode);
     chown (savename, edit->stat.st_uid, edit->stat.st_gid);
 
 /* pipe save */
     if ((p = (char *) edit_get_write_filter (savename, filename))) {
-	fclose (file);
-	file = (FILE *) popen (p, "w");
+	FILE *file;
+
+	close (fd);
+	file  = (FILE *) popen (p, "w");
+
 	if (file) {
 	    filelen = edit_write_stream (edit, file);
 #if 1
@@ -320,32 +324,30 @@ int edit_save_file (WEdit * edit, const char *filename)
 	buf = 0;
 	filelen = edit->last_byte;
 	while (buf <= (edit->curs1 >> S_EDIT_BUF_SIZE) - 1) {
-	    if (fwrite ((char *) edit->buffers1[buf], EDIT_BUF_SIZE, 1, file) != 1) {
-		fclose (file);
+	    if (write (fd, (char *) edit->buffers1[buf], EDIT_BUF_SIZE) == -1) {
+		close (fd);
 		goto error_save;
 	    }
 	    buf++;
 	}
-	if (fwrite ((char *) edit->buffers1[buf], edit->curs1 & M_EDIT_BUF_SIZE, 1, file) == -1) {
+	if (write (fd, (char *) edit->buffers1[buf], edit->curs1 & M_EDIT_BUF_SIZE) == -1) {
 	    filelen = -1;
 	} else if (edit->curs2) {
 	    edit->curs2--;
 	    buf = (edit->curs2 >> S_EDIT_BUF_SIZE);
-	    if (fwrite ((char *) edit->buffers2[buf] + EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE) - 1, 1 + (edit->curs2 & M_EDIT_BUF_SIZE), 1, file) != 1) {
+	    if (write (fd, (char *) edit->buffers2[buf] + EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE) - 1, 1 + (edit->curs2 & M_EDIT_BUF_SIZE)) == -1) {
 		filelen = -1;
 	    } else {
-		buf--;
-		while (buf >= 0) {
-		    if (fwrite ((char *) edit->buffers2[buf], EDIT_BUF_SIZE, 1, file) != 1) {
+		while (--buf >= 0) {
+		    if (write (fd, (char *) edit->buffers2[buf], EDIT_BUF_SIZE) == -1) {
 			filelen = -1;
 			break;
 		    }
-		    buf--;
 		}
 	    }
 	    edit->curs2++;
 	}
-	if (fclose (file))
+	if (close (fd))
 	    goto error_save;
 #endif	/* CR_LF_TRANSLATION */
     }
@@ -1211,6 +1213,12 @@ int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 	Quick_input.widgets = quick_widgets;
 
 	Quick_input.xpos = xpos;
+
+	/* Sometimes menu can hide replaced text. I don't like it */
+
+	if ((edit->curs_row >= ypos) && (edit->curs_row <= ypos + CONFIRM_DLG_HEIGTH))
+	    ypos -= CONFIRM_DLG_HEIGTH;
+
 	Quick_input.ypos = ypos;
 	return quick_dialog (&Quick_input);
     }
@@ -2167,7 +2175,11 @@ void edit_replace_cmd (WEdit * edit, int again)
 		edit_push_key_press (edit);
 
 		switch (edit_replace_prompt (edit, exp2,	/*and prompt 2/3 down */
+#ifdef	MIDNIGHT
+					     (edit->num_widget_columns - CONFIRM_DLG_WIDTH)/2, edit->num_widget_lines * 2 / 3)) {
+#else
 					     edit->num_widget_columns / 2 - 33, edit->num_widget_lines * 2 / 3)) {
+#endif
 		case B_ENTER:
 		    break;
 		case B_SKIP_REPLACE:
@@ -2744,8 +2756,8 @@ void edit_goto_cmd (WEdit *edit)
 	    edit_move_display (edit, l - edit->num_widget_lines / 2 - 1);
 	    edit_move_to_line (edit, l - 1);
 	    edit->force |= REDRAW_COMPLETELY;
-	    free (f);
 	}
+	free (f);
     }
 }
 
@@ -2817,14 +2829,12 @@ int edit_sort_cmd (WEdit * edit)
     int e;
 
     if (eval_marks (edit, &start_mark, &end_mark)) {
-/* Not essential to translate */
 	edit_error_dialog (_(" Sort block "), _(" You must first highlight a block of text. "));
 	return 0;
     }
     edit_save_block (edit, catstrs (home_dir, BLOCK_FILE, 0), start_mark, end_mark);
 
     exp = input_dialog (_(" Run Sort "), 
-/* Not essential to translate */
     _(" Enter sort options (see manpage) separated by whitespace: "), "");
 
     if (!exp)
@@ -2837,13 +2847,11 @@ int edit_sort_cmd (WEdit * edit)
     if (e) {
 	if (e == -1 || e == 127) {
 	    edit_error_dialog (_(" Sort "), 
-/* Not essential to translate */
 	    get_sys_error (_(" Error trying to execute sort command ")));
 	} else {
 	    char q[8];
 	    sprintf (q, "%d ", e);
 	    edit_error_dialog (_(" Sort "), 
-/* Not essential to translate */
 	    catstrs (_(" Sort returned non-zero: "), q, 0));
 	}
 	return -1;
@@ -2903,7 +2911,6 @@ void edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
     if (block) { /* for marked block run indent formatter */
 	if (eval_marks (edit, &start_mark, &end_mark)) {
 	    edit_error_dialog (_("Process block"),
-/* Not essential to translate */
 		_(" You must first highlight a block of text. "));
 	    return;
 	}
@@ -2935,7 +2942,6 @@ void edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
 	    }
 	} else {
 	    edit_error_dialog ("",
-/* Not essential to translate */
             get_sys_error (catstrs (_ ("Error trying to stat file:"), e, 0)));
 	    edit->force |= REDRAW_COMPLETELY;
 	}
