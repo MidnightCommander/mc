@@ -840,9 +840,6 @@ fish_fill_names (vfs *me, void (*func)(char *))
     
     while (super){
 	switch (SUP.flags & (FISH_FLAG_RSH | FISH_FLAG_COMPRESSED)) {
-	case 0:
-		flags = "";
-		break;
 	case FISH_FLAG_RSH:
 		flags = ":r";
 		break;
@@ -850,6 +847,9 @@ fish_fill_names (vfs *me, void (*func)(char *))
 		flags = ":C";
 		break;
 	case FISH_FLAG_RSH | FISH_FLAG_COMPRESSED:
+		flags = "";
+		break;
+	default:
 		flags = "";
 		break;
 	}
