@@ -113,7 +113,7 @@ struct editor_widget {
     unsigned long stack_size;
     unsigned long stack_size_mask;
     unsigned long stack_bottom;
-    struct stat stat;
+    struct stat stat1;
 
 /* syntax higlighting */
     struct _syntax_marker *syntax_marker;

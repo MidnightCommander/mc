@@ -427,7 +427,7 @@ int edit_open_file (WEdit * edit, const char *filename, const char *text, unsign
 #endif
 	if (r)
 	    return 1;
-	edit->stat = st;
+	edit->stat1 = st;
 #ifndef CR_LF_TRANSLATION
 	edit->last_byte = st.st_size;
 #else
@@ -502,9 +502,9 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
 #endif
     edit->num_widget_lines = lines;
     edit->num_widget_columns = columns;
-    edit->stat.st_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
-    edit->stat.st_uid = getuid ();
-    edit->stat.st_gid = getgid ();
+    edit->stat1.st_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+    edit->stat1.st_uid = getuid ();
+    edit->stat1.st_gid = getgid ();
     edit->bracket = -1;
     if (!dir)
 	dir = "";
@@ -559,7 +559,7 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
 		free (edit);
 	    return 0;
 	}
-	edit->stat = st;
+	edit->stat1 = st;
 	if (!edit_insert_file (edit, f)) {
 	    edit_clean (edit);
 	    if (to_free)

@@ -1,3 +1,10 @@
+2001-06-26  Pavel Roskin  <proski@gnu.org>
+
+	* edit-widget.h (editor_widget): Rename `stat' to `stat1' to
+	avoid problems on Solaris with 64-bit file access, when `stat'
+	is a macro. All users adjusted.
+	Reported by Maksym Polyakov <polyama@yahoo.com>.
+
 2001-06-25  Pavel Roskin  <proski@gnu.org>
 
 	* gtkedit.c: Remove home_dir - it's declared in main.c.
