@@ -1,0 +1,172 @@
+#
+# JavaScript syntax highlighting
+# for MC Editor/CoolEdit
+#
+# Author: Vlad Romanenko <VladRomanenko@ukr.net>
+# Based on c.syntax
+#
+# TODO:
+# Highlight JS regexpressions /../
+# More built-in functions
+#
+# 2002-09-16  Vlad Romanenko <VladRomanenko@ukr.net>
+#	* Initial public release
+#
+
+context default
+
+	#=========================
+	# Keywords
+	keyword whole arguments		yellow/24
+	keyword whole break		yellow/24
+	keyword whole caller		yellow/24
+	keyword whole case		yellow/24
+	keyword whole catch		yellow/24
+	keyword whole constructor	yellow/24
+	keyword whole continue		yellow/24
+	keyword whole else		yellow/24
+	keyword whole default		yellow/24
+	keyword whole delete		yellow/24
+	keyword whole for		yellow/24
+	keyword whole function		yellow/24
+	keyword whole if		yellow/24
+	keyword whole in		yellow/24
+	keyword whole instanceof	yellow/24
+	keyword whole new		yellow/24
+	keyword whole prototype		yellow/24
+	keyword whole return		yellow/24
+	keyword whole switch		yellow/24
+	keyword whole this		yellow/24
+	keyword whole throw		yellow/24
+	keyword whole try		yellow/24
+	keyword whole typeof		yellow/24
+	keyword whole var		yellow/24
+	keyword whole while		yellow/24
+	keyword whole with		yellow/24
+
+	#=========================
+	# Objects
+	keyword whole ActiveXObject	yellow/24
+	keyword whole Array		yellow/24
+	keyword whole Boolean		yellow/24
+	keyword whole Date		yellow/24
+	keyword whole Dictionary	yellow/24
+	keyword whole Enumerator	yellow/24
+	keyword whole FileSystemObject	yellow/24
+	keyword whole Function		yellow/24
+	keyword whole Global		yellow/24
+	keyword whole Image		yellow/24
+	keyword whole Math		yellow/24
+	keyword whole Number		yellow/24
+	keyword whole Object		yellow/24
+	keyword whole TextStream	yellow/24
+	keyword whole RegExp		yellow/24
+	keyword whole VBArray		yellow/24
+
+	#=========================
+	# Most common functions
+	keyword whole alert		yellow/24
+	keyword whole escape		yellow/24
+	keyword whole eval		yellow/24
+	keyword whole indexOf		yellow/24
+	keyword whole isNaN		yellow/24
+	keyword whole toString		yellow/24
+	keyword whole unescape		yellow/24
+	keyword whole valueOf		yellow/24
+
+	#=========================
+	# Constants
+	keyword whole false		brightgreen/16
+	keyword whole null		brightgreen/16
+	keyword whole true		brightgreen/16
+	keyword whole undefined		yellow/24
+
+	#=========================
+	# Comments
+	keyword /\*	brown/22
+	keyword \*/	brown/22
+	keyword //	brown/22
+
+	#=========================
+	# Numbers
+	keyword whole \{012345679\}\[012345679\]%	brightgreen/16
+	keyword whole -\{012345679\}\[012345679\]	brightgreen/16
+	keyword whole \{012345679\}\[012345679\]	brightgreen/16
+
+	#=========================
+	# Special symbols
+	keyword \.	yellow/24
+	keyword \*	yellow/24
+	keyword \+	yellow/24
+	keyword -	yellow/24
+	keyword /	yellow/24
+	keyword %	yellow/24
+	keyword =	yellow/24
+	keyword !	yellow/24
+	keyword &	yellow/24
+	keyword |	yellow/24
+	keyword ^	yellow/24
+	keyword ~	yellow/24
+	keyword >	yellow/24
+	keyword <	yellow/24
+
+	#=========================
+	# Parentheses
+	keyword {	brightcyan/14
+	keyword }	brightcyan/14
+	keyword (	brightcyan/14
+	keyword )	brightcyan/14
+	keyword [	brightcyan/14
+	keyword ]	brightcyan/14
+
+	#=========================
+	# Separators
+	keyword ,	brightcyan/14
+	keyword ?	brightcyan/14
+	keyword :	brightcyan/14
+	keyword ;	brightmagenta/19
+
+
+#=============================
+# Comments
+
+context exclusive /\* \*/	brown/22
+	spellcheck
+	keyword whole TODO	brightred/18
+	keyword !!!		brightred/18
+	keyword !!		brightred/18
+	keyword ???		brightred/18
+	keyword ??		brightred/18
+
+
+context exclusive // \n		brown/22
+	spellcheck
+	keyword whole TODO	brightred/18
+	keyword !!!		brightred/18
+	keyword !!		brightred/18
+	keyword ???		brightred/18
+	keyword ??		brightred/18
+
+
+#=============================
+# Strings
+
+context " " green/6
+	spellcheck
+	keyword \\"					brightgreen/16
+	keyword \\'					brightgreen/16
+	keyword \\\\					brightgreen/16
+	keyword \\\{abtnvfr\}				brightgreen/16
+	keyword \\\{0123\}\{01234567\}\{01234567\}	brightgreen/16
+
+	keyword '					brightgreen/16
+
+context ' ' green/6
+	spellcheck
+	keyword \\"					brightgreen/16
+	keyword \\'					brightgreen/16
+	keyword \\\\					brightgreen/16
+	keyword \\\{abtnvfr\}				brightgreen/16
+	keyword \\\{0123\}\{01234567\}\{01234567\}	brightgreen/16
+
+	keyword "					brightgreen/16

@@ -84,7 +84,10 @@ include php.syntax
 file ..\*\\.(java|JAVA|Java|jav)$ Java\sProgram
 include java.syntax
 
-file ..\*\\.(st)$ SmallTalk\sProgram
+file ..\*\\.(js|JS)$ JavaScript\sProgram
+include js.syntax
+
+file ..\*\\.st$ SmallTalk\sProgram
 include smalltalk.syntax
 
 file ..\*\\.(lisp|lsp|el)$ Lisp\sProgram
