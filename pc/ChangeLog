@@ -1,3 +1,9 @@
+2002-08-01  Pavel Roskin  <proski@gnu.org>
+
+	* (chmod.c): Don't include mad.h.
+	* (drive.c): Likewise.
+	* (slint_pc.c): Likewise.
+
 2002-07-15  Pavel Roskin  <proski@gnu.org>
 
 	* chmod.c: Remove all translatable strings - gettext doesn't

@@ -26,7 +26,6 @@
 #include <sys/stat.h>
 #include "../src/global.h"
 #include "../src/tty.h"
-#include "../src/mad.h"
 #include "../src/util.h"
 #include "../src/win.h"
 #include "../src/color.h"
