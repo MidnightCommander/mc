@@ -82,7 +82,7 @@ struct _book_mark *book_mark_find (WEdit * edit, int line)
     return 0;			/* can't get here */
 }
 
-/* returns true if a bookmark exists at this line of colour c */
+/* returns true if a bookmark exists at this line of color c */
 int book_mark_query_color (WEdit * edit, int line, int c)
 {
     struct _book_mark *p;
@@ -97,8 +97,8 @@ int book_mark_query_color (WEdit * edit, int line, int c)
     return 0;
 }
 
-/* returns the number of bookmarks at this line and a list of their colours in c 
-   up to a maximum of 8 colours */
+/* returns the number of bookmarks at this line and a list of their colors in c 
+   up to a maximum of 8 colors */
 int book_mark_query_all (WEdit * edit, int line, int *c)
 {
     int i;
@@ -121,7 +121,7 @@ book_mark_insert (WEdit *edit, int line, int c)
     p = book_mark_find (edit, line);
 #if 0
     if (p->line == line) {
-	/* already exists, so just change the colour */
+	/* already exists, so just change the color */
 	if (p->c != c) {
 	    edit->force |= REDRAW_LINE;
 	    p->c = c;
@@ -142,7 +142,7 @@ book_mark_insert (WEdit *edit, int line, int c)
     p->next = q;
 }
 
-/* remove a bookmark if there is one at this line matching this colour - c of -1 clear all */
+/* remove a bookmark if there is one at this line matching this color - c of -1 clear all */
 /* returns non-zero on not-found */
 int book_mark_clear (WEdit * edit, int line, int c)
 {
@@ -171,7 +171,7 @@ int book_mark_clear (WEdit * edit, int line, int c)
     return r;
 }
 
-/* clear all bookmarks matching this colour, if c is -1 clears all */
+/* clear all bookmarks matching this color, if c is -1 clears all */
 void book_mark_flush (WEdit * edit, int c)
 {
     struct _book_mark *p, *q;

@@ -382,7 +382,7 @@ void menu_save_mode_cmd (void)
 	int dlg_x;
 	int l1;
 
-	/* Ok/Cancel buttons */
+	/* OK/Cancel buttons */
 	l1 = strlen (_(widgets[0].text)) + strlen (_(widgets[1].text)) + 5;
 	maxlen = max (maxlen, l1);
         
@@ -2443,7 +2443,7 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
 	 * Run script.
 	 * Initial space is to avoid polluting bash history.
 	 * Arguments:
-	 *   $1 - name of the edited file (to check its extention etc).
+	 *   $1 - name of the edited file (to check its extension etc).
 	 *   $2 - file containing the current block.
 	 *   $3 - file where error messages should be put
 	 *        (for compatibility with old scripts).
