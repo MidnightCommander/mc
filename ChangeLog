@@ -1,5 +1,8 @@
 2002-03-21  Andrew V. Samoilov  <kai@cmail.ru>
 
+	* syntax/c.syntax: Highlight "%p" printf format.
+	Allow '*' as width and precision for strings and numbers.
+
 	* doc/mc.1.in: Fix smbfs example.  Minor format fixes.
 	* doc/ru/mc.1.in: Likewise.
 
