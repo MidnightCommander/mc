@@ -1,3 +1,8 @@
+2002-08-19  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Enable subshell support on all operating systems
+	by default.  Old issues are most likely solved by now.
+
 2002-08-18  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.ext.in: Try links before lynx.  Force full path when

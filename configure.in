@@ -481,15 +481,8 @@ AC_ARG_WITH(subshell,
         then 
 		result="yes"
 	fi],
-	[dnl Default: provide the subshell support on non-ultrix machines
-	case $host_os in
-	ultrix*)
-		result="no"
-		;;
-	*)
-		result="yes"
-		;;
-	esac
+	[dnl Default: enable the subshell support
+	result="yes"
 ])
 if test "x$result" != xno; then
 	AC_DEFINE(HAVE_SUBSHELL_SUPPORT, 1,
