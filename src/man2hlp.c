@@ -25,7 +25,6 @@
 
 #define BUFFER_SIZE 256
 
-static char *filename;		/* The name of the input file */
 static int width;		/* Output width in characters */
 static int col = 0;		/* Current output column */
 static int out_row = 1;		/* Current output row */
@@ -39,7 +38,9 @@ static int link_flag = 0;	/* Flag: Next line is a link */
 static int verbatim_flag = 0;	/* Flag: Copy input to output verbatim */
 static int node = 0;		/* Flag: This line is an original ".SH" */
 
-static char *output;		/* The name of the output mc.hlp */
+static const char *c_out;	/* Output filename */
+static FILE *f_out;		/* Output file */
+
 static char *Topics = "Topics:";
 
 static struct node {
@@ -111,7 +112,7 @@ static void
 print_error (char *message)
 {
     fprintf (stderr, "man2hlp: %s in file \"%s\" at row %d\n", message,
-	     filename, in_row);
+	     c_out, in_row);
 }
 
 /* Change output line */
@@ -120,7 +121,7 @@ newline (void)
 {
     out_row++;
     col = 0;
-    printf ("\n");
+    fprintf (f_out, "\n");
 }
 
 /* Calculate the length of string */
@@ -186,7 +187,7 @@ print_string (char *buffer)
 		continue;
 	    }
 	    backslash_flag = 0;
-	    printf ("%c", c);
+	    fprintf (f_out, "%c", c);
 	}
     } else {
 	/* Split into words */
@@ -201,7 +202,7 @@ print_string (char *buffer)
 		    newline ();
 		/* Words are separated by spaces */
 		if (col > 0) {
-		    printf (" ");
+		    fprintf (f_out, " ");
 		    col++;
 		}
 		/* Attempt to handle backslash quoting */
@@ -212,7 +213,7 @@ print_string (char *buffer)
 			continue;
 		    }
 		    backslash_flag = 0;
-		    printf ("%c", c);
+		    fprintf (f_out, "%c", c);
 		}
 		/* Increase column */
 		col += len;
@@ -286,28 +287,23 @@ handle_command (char *buffer)
 	    } else {
 		if (!SH || !node) {
 		    /* Start a new section */
-		    if (!output)
-			printf ("%c[%s]", CHAR_NODE_END, buffer);
-		    else {
-			printf ("%c[%s]", CHAR_NODE_END,
-				buffer + heading_level);
-			if (!cnode) {
-			    cnode = &nodes;
-			    cnode->next = NULL;
-			} else {
-			    cnode->next = malloc (sizeof (nodes));
-			    cnode = cnode->next;
-			}
-			cnode->node = strdup (buffer);
-			cnode->lname = NULL;
+		    fprintf (f_out, "%c[%s]", CHAR_NODE_END,
+			     buffer + heading_level);
+		    if (!cnode) {
+			cnode = &nodes;
+			cnode->next = NULL;
+		    } else {
+			cnode->next = malloc (sizeof (nodes));
+			cnode = cnode->next;
 		    }
+		    cnode->node = strdup (buffer);
+		    cnode->lname = NULL;
 		    col++;
 		    newline ();
 		}
 		if (SH) {
-		    if (output)
-			/* print_string() strtok()es buffer, so */
-			cnode->lname = strdup (buffer + heading_level);
+		    /* print_string() strtok()es buffer, so */
+		    cnode->lname = strdup (buffer + heading_level);
 		    print_string (buffer + heading_level);
 		    newline ();
 		    newline ();
@@ -377,10 +373,7 @@ handle_command (char *buffer)
 	    print_error ("Syntax error: .\\\"TOPICS: no text");
 	    return;
 	}
-	if (output)
-	    Topics = strdup (buffer);
-	else
-	    printf ("%s\n", buffer);
+	Topics = strdup (buffer);
     } else {
 	/* Other commands are ignored */
     }
@@ -427,8 +420,10 @@ int
 main (int argc, char **argv)
 {
     int len;			/* Length of input line */
-    FILE *file;			/* Input file */
-    FILE *fout;			/* Output file */
+    const char *c_man;		/* Manual filename */
+    const char *c_tmpl;		/* Template filename */
+    FILE *f_man;		/* Manual file */
+    FILE *f_tmpl;		/* Template file */
     char buffer2[BUFFER_SIZE];	/* Temp input line */
     char *buffer = buffer2;	/* Input line */
     char *node = NULL;
@@ -436,34 +431,35 @@ main (int argc, char **argv)
     long cont_start, file_end;
 
     /* Validity check for arguments */
-    if ((argc != 3 && argc != 5) || ((width = atoi (argv[1])) <= 10)) {
+    if ((argc != 5) || ((width = atoi (argv[1])) <= 10)) {
 	fprintf (stderr,
-		 "Usage: man2hlp <width> <file.man> [template_file helpfile]\n");
+		 "Usage: man2hlp width file.man template_file helpfile\n");
 	return 3;
     }
 
-    if (argc == 5)
-	output = argv[4];
+    c_man = argv[2];
+    c_tmpl = argv[3];
+    c_out = argv[4];
 
-    /* Open the input file */
-    filename = argv[2];
-    file = fopen (filename, "r");
-    if (file == NULL) {
-	sprintf (buffer, "man2hlp: Cannot open file \"%s\"", filename);
+    /* Open the input file (manual) */
+    f_man = fopen (c_man, "r");
+    if (f_man == NULL) {
+	sprintf (buffer, "man2hlp: Cannot open file \"%s\"", c_man);
 	perror (buffer);
 	return 3;
     }
 
-    if (argc == 5 && freopen (argv[4], "w", stdout) == NULL) {
-	sprintf (buffer, "man2hlp: Cannot open file \"%s\"", argv[4]);
+    f_out = fopen (c_out, "w");
+    if (f_out == NULL) {
+	sprintf (buffer, "man2hlp: Cannot open file \"%s\"", c_out);
 	perror (buffer);
 	return 3;
     }
 
     /* Repeat for each input line */
-    while (!feof (file)) {
+    while (!feof (f_man)) {
 	/* Read a line */
-	if (!fgets (buffer2, BUFFER_SIZE, file)) {
+	if (!fgets (buffer2, BUFFER_SIZE, f_man)) {
 	    break;
 	}
 	if (buffer2[0] == '\\' && buffer2[1] == '&')
@@ -499,23 +495,20 @@ main (int argc, char **argv)
 
     /* All done */
     newline ();
-    fclose (file);
-
-    if (argc != 5)
-	return 0;
+    fclose (f_man);
 
     /* Open the template file */
-    filename = argv[3];
-    file = fopen (filename, "r");
-    if (file == NULL) {
-	sprintf (buffer, "man2hlp: Cannot open file \"%s\"", filename);
+    f_tmpl = fopen (c_tmpl, "r");
+    if (f_tmpl == NULL) {
+	sprintf (buffer, "man2hlp: Cannot open file \"%s\"", c_tmpl);
 	perror (buffer);
 	return 3;
     }
+
     /* Repeat for each input line */
-    while (!feof (file)) {
+    while (!feof (f_tmpl)) {
 	/* Read a line */
-	if (!fgets (buffer2, BUFFER_SIZE, file)) {
+	if (!fgets (buffer2, BUFFER_SIZE, f_tmpl)) {
 	    break;
 	}
 	if (node) {
@@ -548,11 +541,11 @@ main (int argc, char **argv)
 	    } else
 		node = NULL;
 	}
-	fputs (buffer, stdout);
+	fputs (buffer, f_out);
     }
 
-    cont_start = ftell (stdout);
-    printf ("\004[Contents]\n%s\n\n", Topics);
+    cont_start = ftell (f_out);
+    fprintf (f_out, "\004[Contents]\n%s\n\n", Topics);
 
     for (cnode = &nodes; cnode && cnode->node;) {
 	char *node = cnode->node;
@@ -564,9 +557,9 @@ main (int argc, char **argv)
 	    node++;
 	}
 	if (*node)
-	    printf ("  %*s\001 %s \002%s\003", heading_level, "",
-		    cnode->lname ? cnode->lname : node, node);
-	printf ("\n");
+	    fprintf (f_out, "  %*s\001 %s \002%s\003", heading_level, "",
+		     cnode->lname ? cnode->lname : node, node);
+	fprintf (f_out, "\n");
 
 	free (cnode->node);
 	if (cnode->lname)
@@ -576,51 +569,55 @@ main (int argc, char **argv)
 	cnode = next;
     }
 
-    file_end = ftell (stdout);
-    fclose (file);
+    file_end = ftell (f_out);
+    fclose (f_out);
+
+    if (file_end <= 0) {
+	perror (c_out);
+    }
 
     Topics = malloc (file_end);
     if (!Topics)
 	return 1;
 
-    fout = fopen (output, "r");
-    if (!fout) {
-	perror (output);
+    f_out = fopen (c_out, "r");
+    if (!f_out) {
+	perror (c_out);
 	return 1;
     }
 
-    if (persistent_fread (Topics, file_end, fout) < 0) {
-	perror (output);
+    if (persistent_fread (Topics, file_end, f_out) < 0) {
+	perror (c_out);
 	return 1;
     }
 
-    if (fclose (fout) != 0) {
-	perror (output);
+    if (fclose (f_out) != 0) {
+	perror (c_out);
 	return 1;
     }
 
-    fout = fopen (output, "w");
-    if (!fout) {
-	perror (output);
+    f_out = fopen (c_out, "w");
+    if (!f_out) {
+	perror (c_out);
 	return 1;
     }
 
     if (persistent_fwrite
-	(Topics + cont_start, file_end - cont_start, fout)
+	(Topics + cont_start, file_end - cont_start, f_out)
 	< 0) {
-	perror (output);
+	perror (c_out);
 	return 1;
     }
 
-    if (persistent_fwrite (Topics, cont_start, fout) < 0) {
-	perror (output);
+    if (persistent_fwrite (Topics, cont_start, f_out) < 0) {
+	perror (c_out);
 	return 1;
     }
 
     free (Topics);
 
-    if (fclose (fout) != 0) {
-	perror (output);
+    if (fclose (f_out) != 0) {
+	perror (c_out);
 	return 1;
     }
 
