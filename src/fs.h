@@ -11,53 +11,29 @@
 
 
 /* Replacement for permission bits missing in sys/stat.h */
-#ifndef S_IFLNK
-#   define S_IFLNK 0
-#endif
-
 #ifndef S_ISLNK
-#   define S_ISLNK(x) (((x) & S_IFMT) == S_IFLNK)
-#endif
-
-#ifndef S_IFSOCK
-#   define S_IFSOCK 0
+#   define S_ISLNK(x) 0
 #endif
 
 #ifndef S_ISSOCK
-#   define S_ISSOCK(x) (((x) & S_IFMT) == S_IFSOCK)
-#endif
-
-#ifndef S_IFIFO
-#   define S_IFIFO 0
+#   define S_ISSOCK(x) 0
 #endif
 
 #ifndef S_ISFIFO
-#   define S_ISFIFO(x) (((x) & S_IFMT) == S_IFIFO)
-#endif
-
-#ifndef S_IFCHR
-#   define S_IFCHR 0
+#   define S_ISFIFO(x) 0
 #endif
 
 #ifndef S_ISCHR
-#   define S_ISCHR(x) (((x) & S_IFMT) == S_IFCHR)
-#endif
-
-#ifndef S_IFBLK
-#   define S_IFBLK 0
+#   define S_ISCHR(x) 0
 #endif
 
 #ifndef S_ISBLK
-#   define S_ISBLK(x) (((x) & S_IFMT) == S_IFBLK)
+#   define S_ISBLK(x) 0
 #endif
 
 /* Door is something that only exists on Solaris */
-#ifndef S_IFDOOR
-#   define S_IFDOOR 0
-#endif
-
 #ifndef S_ISDOOR
-#   define S_ISDOOR(x) (((x) & S_IFMT) == S_IFDOOR)
+#   define S_ISDOOR(x) 0
 #endif
 
 

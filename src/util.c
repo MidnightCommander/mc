@@ -319,34 +319,56 @@ int is_exe (mode_t mode)
 
 #define ismode(n,m) ((n & m) == m)
 
-char *string_perm (mode_t mode_bits)
+char *
+string_perm (mode_t mode_bits)
 {
-    static char mode [11];
+    static char mode[11];
 
     strcpy (mode, "----------");
-    if (ismode (mode_bits, S_IFDIR)) mode [0] = 'd';
-    if (ismode (mode_bits, S_IFSOCK)) mode [0] = 's';
-    if (ismode (mode_bits, S_IXOTH)) mode [9] = 'x';
-    if (ismode (mode_bits, S_IWOTH)) mode [8] = 'w';
-    if (ismode (mode_bits, S_IROTH)) mode [7] = 'r';
-    if (ismode (mode_bits, S_IXGRP)) mode [6] = 'x';
-    if (ismode (mode_bits, S_IWGRP)) mode [5] = 'w';
-    if (ismode (mode_bits, S_IRGRP)) mode [4] = 'r';
-    if (ismode (mode_bits, S_IXUSR)) mode [3] = 'x';
-    if (ismode (mode_bits, S_IWUSR)) mode [2] = 'w';
-    if (ismode (mode_bits, S_IRUSR)) mode [1] = 'r';
-#ifndef OS2_NT
-    if (ismode (mode_bits, S_ISUID)) mode [3] = (mode [3] == 'x') ? 's' : 'S';
-    if (ismode (mode_bits, S_ISGID)) mode [6] = (mode [6] == 'x') ? 's' : 'S';
-    if (ismode (mode_bits, S_IFCHR)) mode [0] = 'c';
-    if (ismode (mode_bits, S_IFBLK)) mode [0] = 'b';
-    if (ismode (mode_bits, S_ISVTX)) mode [9] = (mode [9] == 'x') ? 't' : 'T';
-    if (ismode (mode_bits, S_IFLNK)) mode [0] = 'l';
-    if (ismode (mode_bits, S_IFIFO)) mode [0] = 'p';
-#ifdef	S_IFDOOR
-    if (ismode (mode_bits, S_IFDOOR)) mode [0] = 'D';
-#endif /* S_IFDOOR */
-#endif /* !OS2_NT */
+    if (S_ISDIR (mode_bits))
+	mode[0] = 'd';
+    if (S_ISCHR (mode_bits))
+	mode[0] = 'c';
+    if (S_ISBLK (mode_bits))
+	mode[0] = 'b';
+    if (S_ISLNK (mode_bits))
+	mode[0] = 'l';
+    if (S_ISFIFO (mode_bits))
+	mode[0] = 'p';
+    if (S_ISSOCK (mode_bits))
+	mode[0] = 's';
+    if (S_ISDOOR (mode_bits))
+	mode[0] = 'D';
+    if (ismode (mode_bits, S_IXOTH))
+	mode[9] = 'x';
+    if (ismode (mode_bits, S_IWOTH))
+	mode[8] = 'w';
+    if (ismode (mode_bits, S_IROTH))
+	mode[7] = 'r';
+    if (ismode (mode_bits, S_IXGRP))
+	mode[6] = 'x';
+    if (ismode (mode_bits, S_IWGRP))
+	mode[5] = 'w';
+    if (ismode (mode_bits, S_IRGRP))
+	mode[4] = 'r';
+    if (ismode (mode_bits, S_IXUSR))
+	mode[3] = 'x';
+    if (ismode (mode_bits, S_IWUSR))
+	mode[2] = 'w';
+    if (ismode (mode_bits, S_IRUSR))
+	mode[1] = 'r';
+#ifdef S_ISUID
+    if (ismode (mode_bits, S_ISUID))
+	mode[3] = (mode[3] == 'x') ? 's' : 'S';
+#endif				/* S_ISUID */
+#ifdef S_ISGID
+    if (ismode (mode_bits, S_ISGID))
+	mode[6] = (mode[6] == 'x') ? 's' : 'S';
+#endif				/* S_ISGID */
+#ifdef S_ISVTX
+    if (ismode (mode_bits, S_ISVTX))
+	mode[9] = (mode[9] == 'x') ? 't' : 'T';
+#endif				/* S_ISVTX */
     return mode;
 }
 
