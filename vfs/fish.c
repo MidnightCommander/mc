@@ -232,7 +232,7 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 	print_vfs_message (_("fish: Waiting for initial line..."));
 	if (!vfs_s_get_line (me, SUP.sockr, answer, sizeof (answer), ':'))
 	    ERRNOR (E_PROTO, -1);
-	print_vfs_message (answer);
+	print_vfs_message ("%s", answer);
 	if (strstr (answer, "assword")) {
 
 	    /* Currently, this does not work. ssh reads passwords from
@@ -252,8 +252,7 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 		g_free (p);
 		if (op == NULL)
 		    ERRNOR (EPERM, -1);
-		SUP.password = g_strdup (op);
-		wipe_password (op);
+		SUP.password = op;
 	    }
 	    print_vfs_message (_("fish: Sending password..."));
 	    write (SUP.sockw, SUP.password, strlen (SUP.password));
