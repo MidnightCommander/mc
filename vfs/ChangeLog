@@ -1,3 +1,8 @@
+2001-05-30  Ludovic Drolez  <ludovic.drolez@freealter.com>
+
+	* sfs.c (sfs_init): Don't hardcode location of sfs.ini, 
+	use mc_home to make mc relocatable.
+
 2001-05-28  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* sfs.c (shell): Variable moved to ...

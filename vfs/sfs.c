@@ -291,20 +291,26 @@ static int sfs_ungetlocalcopy (vfs *me, char *path, char *local, int has_changed
 
 static int sfs_init (vfs *me)
 {
-    FILE *cfg = fopen (LIBDIR "extfs/sfs.ini", "r");
+    char *mc_sfsini;
+    FILE *cfg;
+
+    mc_sfsini = concat_dir_and_file (mc_home, "extfs/sfs.ini");
+    cfg = fopen (mc_sfsini, "r");
 
     if (!cfg){
-	fprintf (stderr, _("Warning: %sextfs/sfs.ini not found\n"), LIBDIR);
-        return 0;
+	fprintf (stderr, _("Warning: %s not found\n"), mc_sfsini);
+	free (mc_sfsini);
+	return 0;
     }
+    free (mc_sfsini);
 
     sfs_no = 0;
     while (sfs_no < MAXFS){
-        char key[256];
+	char key[256];
 	char *c, *semi = NULL, flags = 0;
 	int i;
 
-        if (!fgets (key, 250, cfg))
+        if (!fgets (key, sizeof (key), cfg))
 	    break;
 
 	if (*key == '#')
@@ -326,7 +332,7 @@ static int sfs_init (vfs *me)
 	}
 
 	c = semi + 1;
-	while ((*c != ' ') && (*c != 9)) {
+	while ((*c != ' ') && (*c != '\t')) {
 	    switch (*c) {
 	    case '1': flags |= F_1; break;
 	    case '2': flags |= F_2; break;
