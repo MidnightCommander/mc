@@ -65,7 +65,7 @@ msgid ""
 msgstr ""
 "\".\n"
 "\n"
-"För att fixa det här, ta fram editorn för mime-egenskaper (den finns i GNOME "
+"För att fixa det här, ta fram editorn för MIME-egenskaper (den finns i GNOME "
 "kontrollcenter) och editera standard %s-aktionen för \"%s\"."
 
 #: gnome/gaction.c:46
@@ -100,7 +100,7 @@ msgstr "öppna"
 
 #: gnome/gaction.c:194 gnome/gaction.c:211
 msgid "edit"
-msgstr "edit"
+msgstr "redigera"
 
 #: gnome/gaction.c:351
 msgid "view"
@@ -121,7 +121,7 @@ msgstr "Människorna bakom Midnight Commander"
 #: gnome/gcmd.c:102
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
 msgstr ""
-"buggrapporter: http://bugs.gnome.org, eller använd 'gnome-bug' scriptet"
+"buggrapporter: http://bugs.gnome.org, eller använd gnome-bug"
 
 #: gnome/gcmd.c:114
 msgid "GNU Midnight Commander"
@@ -167,7 +167,7 @@ msgstr "Senast modifierad"
 
 #: gnome/gcmd.c:334
 msgid "Time Last Changed"
-msgstr "Senst ändrad"
+msgstr "Senast ändrad"
 
 #: gnome/gcmd.c:348
 msgid "Reverse the order."
