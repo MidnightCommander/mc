@@ -22,26 +22,30 @@
 
 #include "global.h"
 
-static const char * const features [] =  {
 #ifdef USE_VFS
-    N_("Virtual File System: tarfs, extfs"),
-    N_(", cpiofs"),
+static const char *const vfs_supported[] = {
+    "tarfs",
+    "extfs",
+    "cpiofs",
 #ifdef USE_NETCODE
-    N_(", ftpfs"),
-    N_(", fish"),
+    "ftpfs",
+    "fish",
 #   ifdef WITH_MCFS
-    N_(", mcfs"),
+    "mcfs",
 #   endif
 #   ifdef WITH_SMBFS
-    N_(", smbfs"),
+    "smbfs",
 #   endif
-#endif /* USE_NETCODE */
+#endif				/* USE_NETCODE */
 #ifdef USE_EXT2FSLIB
-    N_(", undelfs"),
+    "undelfs",
 #endif
-    "\n",
-#endif /* USE_VFS */
-    
+    NULL
+};
+#endif				/* USE_VFS */
+
+
+static const char *const features[] = {
 #ifdef USE_INTERNAL_EDIT
     N_("With builtin Editor\n"),
 #endif
@@ -65,8 +69,8 @@ static const char * const features [] =  {
 #elif defined(USE_NCURSES)
     N_("Using the ncurses library"),
 #else
- #error "Cannot compile mc without S-Lang or ncurses"
-#endif /* !HAVE_SLANG && !USE_NCURSES */
+#error "Cannot compile mc without S-Lang or ncurses"
+#endif				/* !HAVE_SLANG && !USE_NCURSES */
 
     "\n",
 
@@ -77,7 +81,7 @@ static const char * const features [] =  {
     N_("With subshell support as default"),
 #   endif
     "\n",
-#endif /* !HAVE_SUBSHELL_SUPPORT */
+#endif				/* !HAVE_SUBSHELL_SUPPORT */
 
 #ifdef WITH_BACKGROUND
     N_("With support for background operations\n"),
@@ -101,18 +105,31 @@ static const char * const features [] =  {
     N_("With multiple codepages support\n"),
 #endif
 
-    NULL }
-;
+    NULL
+};
 
 void
 version (int verbose)
 {
     int i;
 
-    fprintf (stdout, _("GNU Midnight Commander %s\n"), VERSION);
+    printf (_("GNU Midnight Commander %s\n"), VERSION);
     if (!verbose)
 	return;
-    
-    for (i = 0; features [i]; i++) 
-	fputs (_(features [i]), stdout);
+
+#ifdef USE_VFS
+    printf (_("Virtual File System:"));
+    for (i = 0; vfs_supported[i]; i++) {
+	if (i == 0)
+	    printf (" ");
+	else
+	    printf (", ");
+
+	printf ("%s", _(vfs_supported[i]));
+    }
+    printf ("\n");
+#endif				/* USE_VFS */
+
+    for (i = 0; features[i]; i++)
+	printf ("%s", _(features[i]));
 }

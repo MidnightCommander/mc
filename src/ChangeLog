@@ -1,5 +1,7 @@
 2002-09-26  Pavel Roskin  <proski@gnu.org>
 
+	* textconf.c: Don't translate filesystem names.
+
 	* main.h: Remove all references to icons.
 	* panel.h: Likewise.  Adjust all dependencies.
 
