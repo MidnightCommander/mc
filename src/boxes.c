@@ -550,7 +550,8 @@ static WCheck *inpcheck;
 static int
 sel_charset_button (int action)
 {
-    char *cpname, buf[64];
+    const char *cpname;
+    char buf[64];
     new_display_codepage = select_charset (new_display_codepage, 1);
     cpname = (new_display_codepage < 0)
 	? _("Other 8 bit")
@@ -565,7 +566,7 @@ sel_charset_button (int action)
 static Dlg_head *
 init_disp_bits_box (void)
 {
-    char *cpname;
+    const char *cpname;
     Dlg_head *dbits_dlg;
 
     do_refresh ();
