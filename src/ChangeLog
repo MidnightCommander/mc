@@ -1,3 +1,10 @@
+2004-11-11  Roland Illig  <roland.illig@gmx.de>
+
+	* popthelp.c (showHelpIntro): The basename of argv[0] starts after
+	the last slash in argv[0], not after the first.
+
+	From Egmont Koblinger <egmont * uhulinux hu>
+
 2004-11-10  Roland Illig  <roland.illig@gmx.de>
 
 	* Makefile.am: Excluded pipethough.{c,h} from the distribution
