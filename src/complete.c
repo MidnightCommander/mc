@@ -978,6 +978,8 @@ int complete_engine (WInput *in, int what_to_do)
     	    if (insert_text (in, in->completions [0], strlen (in->completions [0]))){
     	        if (in->completions [1])
     	    	    beep ();
+		else
+		    free_completions (in);
 	    } else
 	        beep ();
         }
