@@ -20,7 +20,7 @@ sub timef
 {
     # format unix time
     my @time=localtime($_[0]);
-    return sprintf "%02d-%02d-%02d %02d:%02d", $time[4]+1, $time[3],
+    return sprintf "%02d-%02d-%d %02d:%02d", $time[4]+1, $time[3],
 		   $time[5] + 1900, $time[2], $time[1];
 }
 
