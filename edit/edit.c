@@ -403,6 +403,45 @@ edit_open_file (WEdit *edit, const char *filename)
     return init_dynamic_edit_buffers (edit, filename);
 }
 
+/*
+ * Open the file and load it into the buffers, either directly or using
+ * a filter.  Return 0 on success, 1 on error.
+ */
+static int
+edit_load_file (WEdit *edit)
+{
+    int use_filter = 0;
+
+    if (edit_find_filter (edit->filename) < 0) {
+#ifdef CR_LF_TRANSLATION
+	use_filter = 1;
+#endif
+	if (edit_open_file (edit, edit->filename)) {
+	    return 1;
+	}
+    } else {
+	use_filter = 1;
+	if (edit_open_file (edit, 0)) {
+	    return 1;
+	}
+    }
+
+    if (use_filter) {
+	push_action_disabled = 1;
+	if (check_file_access (edit, edit->filename, &(edit->stat1))
+	    || !edit_insert_file (edit, edit->filename)) {
+	    edit_clean (edit);
+	    return 1;
+	}
+	/* FIXME: this should be an unmodification() function */
+	push_action_disabled = 0;
+    } else {
+	/* If fast load was used, the number of lines wasn't calculated */
+	edit->total_lines = edit_count_lines (edit, 0, edit->last_byte);
+    }
+    return 0;
+}
+
 /* Restore saved cursor position in the file */
 static void
 edit_load_position (WEdit *edit)
@@ -461,7 +500,6 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
 	   long line)
 {
     int to_free = 0;
-    int use_filter = 0;
 
     if (!edit) {
 #ifdef ENABLE_NLS
@@ -500,41 +538,16 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
     edit->stat1.st_uid = getuid ();
     edit->stat1.st_gid = getgid ();
     edit->bracket = -1;
-    if (edit_find_filter (filename) < 0) {
-#ifdef CR_LF_TRANSLATION
-	use_filter = 1;
-#endif
-	if (edit_open_file (edit, filename)) {
-	    /* edit_open_file already gives an error message */
-	    if (to_free)
-		g_free (edit);
-	    return 0;
-	}
-    } else {
-	use_filter = 1;
-	if (edit_open_file (edit, 0)) {
-	    if (to_free)
-		g_free (edit);
-	    return 0;
-	}
-    }
     edit->force |= REDRAW_PAGE;
     edit_set_filename (edit, filename);
     edit->stack_size = START_STACK_SIZE;
     edit->stack_size_mask = START_STACK_SIZE - 1;
     edit->undo_stack = malloc ((edit->stack_size + 10) * sizeof (long));
-    edit->total_lines = edit_count_lines (edit, 0, edit->last_byte);
-    if (use_filter) {
-	push_action_disabled = 1;
-	if (check_file_access (edit, filename, &(edit->stat1))
-	    || !edit_insert_file (edit, filename)) {
-	    edit_clean (edit);
-	    if (to_free)
-		g_free (edit);
-	    return 0;
-	}
-	/* FIXME: this should be an unmodification() function */
-	push_action_disabled = 0;
+    if (edit_load_file (edit)) {
+	/* edit_load_file already gives an error message */
+	if (to_free)
+	    g_free (edit);
+	return 0;
     }
     edit->modified = 0;
     edit_load_syntax (edit, 0, 0);

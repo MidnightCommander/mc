@@ -1,5 +1,8 @@
 2002-12-15  Pavel Roskin  <proski@gnu.org>
 
+	* (edit_init): Move file loading to ...
+	(edit_load_file): ... a separate function.
+
 	* edit.c (init_dynamic_edit_buffers): Remove unused code to
 	support loading text from buffer.
 
