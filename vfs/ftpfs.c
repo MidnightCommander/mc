@@ -1414,6 +1414,7 @@ linear_read (struct direntry *fe, void *buf, int len)
 	    my_errno = EIO;
 	    n=-1;
 	}
+	close (fe->data_sock);
 	fe->data_sock = -1;
     }
     ERRNOR (errno, n);

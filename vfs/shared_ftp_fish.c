@@ -527,13 +527,11 @@ static int s_read (void *data, char *buffer, int count)
 
 static int s_write (void *data, char *buf, int nbyte)
 {
-    struct filp *fp;
+    struct filp *fp = data;
     int n;
 
     if (fp->fe->linear_state)
         vfs_die ("You may not write to linear file");
-    
-    fp = data;
     n = write (fp->local_handle, buf, nbyte);
     if (n < 0)
         my_errno = errno;
