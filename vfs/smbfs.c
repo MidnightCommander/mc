@@ -20,12 +20,19 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-/* Namespace: exports smbfs_vfs_ops, smbfs_set_debug */
+/* Namespace: exports vfs_smbfs_ops, smbfs_set_debug */
 #include <config.h>
 #include <stdio.h>
 #include <sys/types.h>
 
 #include "utilvfs.h"
+
+#undef	PACKAGE_BUGREPORT
+#undef	PACKAGE_NAME
+#undef	PACKAGE_STRING
+#undef	PACKAGE_TARNAME
+#undef	PACKAGE_VERSION
+
 #include "samba/include/config.h"
 /* don't load crap in "samba/include/includes.h" we don't use and which 
    conflicts with definitions in other includes */
@@ -33,6 +40,7 @@
 #define NO_CONFIG_H
 #define BOOL_DEFINED
 #undef	VERSION
+
 #include "samba/include/includes.h"
 
 #include <string.h>
@@ -75,6 +83,8 @@ static struct _smbfs_connection {
 	time_t	last_use;
 } smbfs_connections [SMBFS_MAX_CONNECTIONS];
 /* unique to each connection */
+
+static struct cli_state * smbfs_do_connect (const char *server, char *share);
 
 typedef struct _smbfs_connection smbfs_connection;
 static smbfs_connection *current_bucket;
@@ -252,7 +262,7 @@ smbfs_init(vfs *me)
 {
 	char *servicesf = CONFIGDIR "/smb.conf";
 
-/*	DEBUGLEVEL = 4;	*/
+	DEBUGLEVEL = 0;
 
 	setup_logging("mc", True);
     TimeInit();
@@ -404,24 +414,6 @@ new_dir_entry (const char * name)
 	return new_entry;
 }
 
-static int
-smbfs_add_dots (opendir_info *current_info)
-{
-    dir_entry *entry;
-    
-    entry = g_new0 (dir_entry, 1);
-    entry->text = g_strdup (".");
-    entry->my_stat.st_mode = S_IFDIR|S_IRUSR|S_IRGRP|S_IROTH;
-
-    entry->next = g_new0 (dir_entry, 1);
-    entry->next->text = g_strdup ("..");
-    entry->next->my_stat.st_mode = S_IFDIR|S_IRUSR|S_IRGRP|S_IROTH;
-
-    entry->next->next = current_info->entries;
-    current_info->entries = entry;
-    return 0;
-}
-
 /* browse for shares on server */
 static void
 browsing_helper(const char *name, uint32 type, const char *comment)
@@ -539,7 +531,7 @@ reconnect(smbfs_connection *conn, int *retries)
 
 	cli_shutdown(conn->cli);
 
-   	if (!(conn->cli = do_connect(host, conn->service))) {
+   	if (!(conn->cli = smbfs_do_connect(host, conn->service))) {
 		message_2s (1, MSG_ERROR,
 			_(" reconnect to %s failed\n "), conn->host);
 		g_free(host);
@@ -682,7 +674,6 @@ smbfs_loaddir (opendir_info *smbfs_info)
 			else
 				current_share_info = smbfs_info;
 		}
-		smbfs_add_dots (smbfs_info);
 		goto done;
 	}
 
@@ -866,15 +857,15 @@ smbfs_get_host_and_username
 	return a connection to a SMB server
 	current_bucket needs to be set before calling
 *******************************************************/
-struct cli_state *
-do_connect (char *server, char *share)
+static struct cli_state *
+smbfs_do_connect (const char *server, char *share)
 {
 	struct cli_state *c;
 	struct nmb_name called, calling;
 	struct in_addr ip;
 	extern struct in_addr ipzero;
 
-	DEBUG(3, ("do_connect(%s, %s)\n", server, share));
+	DEBUG(3, ("smbfs_do_connect(%s, %s)\n", server, share));
 	if (*share == '\\') {
 		server = share+2;
 		share = strchr(server,'\\');
@@ -883,15 +874,12 @@ do_connect (char *server, char *share)
 		share++;
 	}
 
-	ip = ipzero;
-
 	make_nmb_name(&calling, global_myname, 0x0, "");
 	make_nmb_name(&called , server, current_bucket->name_type, "");
 
     for (;;) {
 
-	ip = ipzero;
-	if (current_bucket->have_ip) ip = current_bucket->dest_ip;
+	ip = (current_bucket->have_ip) ? current_bucket->dest_ip : ipzero;
 
 	/* have to open a new connection */
 	if (!(c = cli_initialise(NULL))) {
@@ -993,7 +981,7 @@ free_bucket (smbfs_connection *bucket)
 	g_free (bucket->domain);
 	g_free (bucket->user);
 	wipe_password (bucket->password);
-	g_free (bucket->home);
+	if (bucket->home) g_free (bucket->home);
 	bzero (bucket, sizeof (smbfs_connection));
 }
 
@@ -1110,7 +1098,7 @@ smbfs_open_link(char *host, char *path, const char *user, int *port, char *this_
 		return 0;
 
 	/* connect to share */
-    while (!(bucket->cli = do_connect(host, service))) {
+    while (!(bucket->cli = smbfs_do_connect(host, service))) {
 
 	if (my_errno != EPERM)
             return 0;
@@ -1510,15 +1498,15 @@ smbfs_stat (vfs *me, char *path, struct stat *buf)
 	p += HEADER_LEN;
 	if (*p == '/')
 		p++;
-	p = strchr(p, '/');	/* advance past next '/' */
-	if (!p) {
+	pp = strchr(p, '/');	/* advance past next '/' */
+	if (!pp) {
 		if (!current_info->server_list) {
 			if (loaddir(me, path) < 0)
 				return -1;
 		}
 		return fake_server_stat(server_url, path, buf);
 	}
-	if (!strchr(++p, '/')) {
+	if (!strchr(++pp, '/')) {
 		return fake_share_stat(server_url, path, buf);
 	}
 
@@ -1527,11 +1515,10 @@ smbfs_stat (vfs *me, char *path, struct stat *buf)
 		return -1;
 	g_free (remote_dir);
 	{
-		char *sp, *pp = path;
 		int hostlen = strlen(current_bucket->host);
-		pp += strlen(path)-hostlen;
-		sp = server_url;
-		sp += strlen(server_url)-hostlen;
+		char *pp = path + strlen(path)-hostlen;
+		char *sp = server_url + strlen(server_url)-hostlen;
+
 		if (strcmp(sp, pp) == 0) {
 			/* make server name appear as directory */
 			DEBUG(1, ("smbfs_stat: showing server as directory\n"));
@@ -1541,16 +1528,12 @@ smbfs_stat (vfs *me, char *path, struct stat *buf)
 		}
 	}
 	/* check if current_info is in share requested */
-	p = path;
-	if (strncmp(p, URL_HEADER, HEADER_LEN) == 0)
-		p += HEADER_LEN;
-	if (*p == '/')
-		p++;
 	p = service = g_strdup(p);
 	pp = strchr(p, '/');
-	if (pp)
+	if (pp) {
 		p = ++pp;	/* advance past server name */
-	pp = strchr(p, '/');
+		pp = strchr(p, '/');
+	}
 	if (pp)
 		*pp = 0;	/* cut off everthing after service name */
 	else
@@ -1571,12 +1554,7 @@ smbfs_stat (vfs *me, char *path, struct stat *buf)
 	return get_stat_info(sc, path, buf);
 }
 
-static int
-smbfs_lstat (vfs *me, char *path, struct stat *buf)
-{
-	DEBUG(4, ("smbfs_lstat(path:%s)\n", path));
-	return smbfs_stat(me, path, buf);	/* no symlinks on smb filesystem? */
-}
+#define smbfs_lstat smbfs_stat	/* no symlinks on smb filesystem? */
 
 static int
 smbfs_lseek (void *data, off_t offset, int whence)
@@ -1706,7 +1684,7 @@ my_forget (char *path)
 
 		    /* reopen the connection */
 		    smbfs_connections [i].cli =
-				do_connect(host, smbfs_connections[i].service);
+				smbfs_do_connect(host, smbfs_connections[i].service);
 		}
 	}
     }

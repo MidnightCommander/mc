@@ -1,3 +1,16 @@
+2002-06-21  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* smbfs.c: Undefine PACKAGE_BUGREPORT, PACKAGE_NAME, 
+	PACKAGE_STRING, PACKAGE_TARNAME and PACKAGE_VERSION
+	before including "samba/include/config.h" to prevent warnings.
+	(smbfs_init): Set DEBUGLEVEL to 0.
+	(do_connect): Rename to ...
+	(smbfs_do_connect): ... this to avoid namespace clash and
+	make static.  Make server const. Adjust all callers.
+	(smbfs_add_dots): Remove.
+	(smbfs_stat): Remove code duplication.
+	(smbfs_lstat): Define as smbfs_stat.
+
 2002-06-06  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* cpio.c (cpio_read_oldc_head): Use char[] for buf instead
