@@ -296,7 +296,7 @@ string_file_size (file_entry *fe, int len)
 
 #ifdef HAVE_ST_RDEV
     if (S_ISBLK (fe->buf.st_mode) || S_ISCHR (fe->buf.st_mode))
-        sprintf (buffer, "%3d,%3d", (int) (fe->buf.st_rdev >> 8), 
+        sprintf (buffer, "%3d,%3d", (int) ((fe->buf.st_rdev >> 8) & 0xff), 
             (int) (fe->buf.st_rdev & 0xff));
     else
 #endif 

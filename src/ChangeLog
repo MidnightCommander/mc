@@ -1,3 +1,8 @@
+Sun Jan 10 02:18:33 1999  Timur Bakeyev <mc@bat.ru>
+
+	* screen.c(string_file_size): Fixed (incorrect?) printing of device num-
+	bers. Major should never be greater 255.
+
 1999-01-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* dir.c (handle_dirent): Use the tree_store now.
@@ -51,7 +56,7 @@
 	in x_create_listbox.
 
 	* main.c (main): Do not load the hotlist here anymore.   We
-	auto-load it on the 
+	auto-load it on the setup(?).
 
 1998-12-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
