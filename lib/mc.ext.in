@@ -416,22 +416,22 @@ regex/\.[rR]([aA][rR]|[0-9][0-9])$
 # cpio
 shell/.cpio.Z
 	Open=%cd %p#ucpio
-	View=%view{ascii} compress -dc '%f' | cpio -ictv
+	View=%view{ascii} gzip -dc '%f' | cpio -itv 2>/dev/null
 
 shell/.cpio.gz
 	Open=%cd %p#ucpio
-	View=%view{ascii} gzip -dc '%f' | cpio -ictv
+	View=%view{ascii} gzip -dc '%f' | cpio -itv 2>/dev/null
 
 shell/.cpio
 	Open=%cd %p#ucpio
-	View=%view{ascii} cat '%f' | cpio -ictv
+	View=%view{ascii} cpio -itv <'%f' 2>/dev/null
 
 # ls-lR
 regex/(^|\.)ls-?lR$
 	Open=%cd %p#lslR
 regex/(^|\.)ls-?lR\.(g?z|Z)$
 	Open=%cd %p#lslR
-	View=%view{ascii} gunzip -c %f
+	View=%view{ascii} gzip -dc %f
 
 # ftplist
 regex/\.ftplist$

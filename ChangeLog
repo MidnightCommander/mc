@@ -1,3 +1,9 @@
+2002-08-27  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Use gzip instead of gunzip and compress.  Avoid
+	unnecessary pipeline.  Redirect stderr from cpio, because it can
+	be non-empty even for successful operations.
+
 2002-08-26  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/spec.syntax: New file.
