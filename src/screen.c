@@ -209,7 +209,7 @@ file_entry_color (file_entry *fe)
             return (SPECIAL_COLOR);
         else if (is_exe (fe->buf.st_mode))
             return (EXECUTABLE_COLOR);
-	else if (fe->fname && (strcmp (fe->fname, "core") == 0))
+        else if (fe->fname && (!strcmp (fe->fname, "core") || !strcmp (extension(fe->fname), "core")))
 	    return (CORE_COLOR);
     }
     return (NORMAL_COLOR);

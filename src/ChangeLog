@@ -1,3 +1,8 @@
+Fri Jun  5 23:34:20 1998  Timur I. Bakeyev <timur@comtat.kazan.ru>
+	
+	* screen.c (file_entry_color): take care about BSD core dumps
+	which have names program.core instead of core
+
 Mon Jun  1 15:41:20 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* main.c (translate_url_to_new_syntax): translate the common
