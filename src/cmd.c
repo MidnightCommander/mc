@@ -32,14 +32,9 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <sys/time.h>
 #include <string.h>
 #include <fcntl.h>		/* open, O_RDWR */
 #include <errno.h>
-
-#ifdef NEEDS_IO_H
-#   include <io.h>
-#endif
 
 #ifdef USE_NETCODE
 #include <netdb.h>

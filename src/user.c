@@ -17,9 +17,6 @@
 
 #include <config.h>
 #include <stdio.h>
-#ifdef NEEDS_IO_H
-#    include <io.h>
-#endif
 #include <string.h>
 #include <ctype.h>
 #include <errno.h>

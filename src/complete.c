@@ -52,9 +52,6 @@
 #endif /* not (HAVE_DIRENT_H or _POSIX_VERSION) */
 #include <sys/types.h>
 #include <sys/stat.h>
-#ifndef HAS_NO_GRP_PWD_H
-#   include <pwd.h>
-#endif
 
 #include "global.h"
 #include "tty.h"

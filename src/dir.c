@@ -17,13 +17,14 @@
 
 #include <config.h>
 #define DIR_H_INCLUDE_HANDLE_DIRENT
-#include "tty.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
 #include <sys/stat.h>
+
 #include "global.h"
+#include "tty.h"
 #include "dir.h"
 #include "dialog.h"
 #include "tree.h"

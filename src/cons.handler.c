@@ -24,13 +24,11 @@
 #endif
 #include <fcntl.h>
 #include <sys/types.h>
-#ifdef HAVE_SYS_WAIT_H
-#    include <sys/wait.h>
-#endif
 #include <signal.h>
-#include "cons.saver.h"
-#include "tty.h"
+
 #include "global.h"
+#include "tty.h"
+#include "cons.saver.h"
 
 signed char console_flag = 0;
 

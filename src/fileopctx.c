@@ -8,7 +8,8 @@
 
 #include <config.h>
 #include <unistd.h>
-#include <glib.h>
+
+#include "global.h"
 #include "fileopctx.h"
 #include "../vfs/vfs.h"
 

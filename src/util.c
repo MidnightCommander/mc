@@ -23,36 +23,18 @@
 
 #include <config.h>
 #include <stdio.h>
-#if defined(NEEDS_IO_H)            /* OS/2 need io.h! .ado */
-#    include <io.h>
-#endif
 #include <sys/types.h>
 #ifdef HAVE_UNISTD_H
-#include <unistd.h>
+#   include <unistd.h>
 #endif
 #include <fcntl.h>
 #include <signal.h>		/* my_system */
 #include <limits.h>		/* INT_MAX */
-#ifndef SCO_FLAVOR
-#	include <sys/time.h>	/* alex: sys/select.h defines struct timeval */
-#endif /* SCO_FLAVOR */
-#include <sys/types.h>
 #include <sys/stat.h>
 #include <stdarg.h>
 #include <errno.h>		/* my_system */
-#ifdef SCO_FLAVOR
-#	include <sys/timeb.h>	/* alex: for struct timeb, used in time.h */
-#endif /* SCO_FLAVOR */
-#include <time.h>
-#ifndef HAS_NO_GRP_PWD_H
-#   include <pwd.h>
-#   include <grp.h>
-#endif
 #include <string.h>
 #include <ctype.h>
-#ifdef HAVE_SYS_SELECT_H
-#  include <sys/select.h>
-#endif
 
 #ifdef __linux__
 #    if defined(__GLIBC__) && (__GLIBC__ < 2)

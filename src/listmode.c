@@ -30,12 +30,9 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#ifndef HAS_NO_GRP_PWD_H
-#    include <grp.h>
-#    include <pwd.h>
-#endif
-#include "tty.h"
+
 #include "global.h"
+#include "tty.h"
 #include "win.h"
 #include "color.h"
 #include "dlg.h"

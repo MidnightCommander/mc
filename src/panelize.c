@@ -28,13 +28,6 @@
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#ifdef HAVE_SYS_WAIT_H
-#   include <sys/wait.h>
-#endif
-#ifndef HAS_NO_GRP_PWD_H
-#   include <grp.h>
-#   include <pwd.h>
-#endif
 
 /* Needed for the extern declarations of integer parameters */
 #define DIR_H_INCLUDE_HANDLE_DIRENT

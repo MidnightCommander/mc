@@ -21,9 +21,6 @@
 #include <config.h>
 #include <stdio.h>
 #include <ctype.h>
-#ifdef NEEDS_IO_H
-# include <io.h>
-#endif
 
 #ifdef HAVE_UNISTD_H
 #    include <unistd.h>
@@ -44,9 +41,6 @@
 
 #include "cons.saver.h"
 #include "layout.h"
-#ifdef SCO_FLAVOR
-#include <sys/wait.h>
-#endif /* SCO_FLAVOR */
 
 /* If set, we execute the file command to check the file type */
 int use_file_to_check_type = 1;

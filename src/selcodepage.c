@@ -3,7 +3,8 @@
 #ifdef HAVE_CHARSET
 #include <stdlib.h>
 #include <stdio.h>
-#include "i18n.h"
+
+#include "global.h"
 #include "dlg.h"
 #include "dialog.h"
 #include "widget.h"

@@ -35,17 +35,6 @@
 #include <ctype.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#ifdef SCO_FLAVOR
-#	include <sys/timeb.h>	/* alex: for struct timeb, used in time.h */
-#endif /* SCO_FLAVOR */
-#include <time.h>
-#ifndef HAS_NO_GRP_PWD_H
-#    include <grp.h>
-#    include <pwd.h>
-#endif
-#ifdef NEEDS_IO_H
-#    include <io.h>
-#endif
 
 #include "global.h"
 #include "tty.h"

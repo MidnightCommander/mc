@@ -41,9 +41,6 @@
 #include <dirent.h>
 #include <stdio.h>
 #include <string.h>
-#ifdef NEEDS_IO_H
-#   include <io.h>
-#endif
 
 #include "global.h"
 #include "treestore.h"

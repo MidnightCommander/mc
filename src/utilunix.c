@@ -25,37 +25,23 @@
 #include <stdio.h>
 #include <sys/types.h>
 #ifdef HAVE_UNISTD_H
-#include <unistd.h>
+#   include <unistd.h>
 #endif
 #include <fcntl.h>
 #include <signal.h>		/* my_system */
 #include <limits.h>		/* INT_MAX */
-#include <sys/time.h>		/* select: timeout */
-#include <sys/types.h>
 #include <sys/stat.h>
 #include <stdarg.h>
-#ifdef HAVE_SYS_WAIT_H
-#    include <sys/wait.h>	/* my_system */
-#endif
 #include <errno.h>		/* my_system */
-#include <pwd.h>
-#include <grp.h>
 #include <string.h>
 #include <ctype.h>
-#ifdef HAVE_SYS_SELECT_H
-#  include <sys/select.h>
-#endif
-#ifdef SCO_FLAVOR
-#   include <sys/timeb.h>
-#endif
-#include <time.h>
 #ifdef __linux__
-#    if defined(__GLIBC__) && (__GLIBC__ < 2)
-#        include <linux/termios.h>	/* This is needed for TIOCLINUX */
-#    else
-#        include <termios.h>
-#    endif
-#  include <sys/ioctl.h>
+#   if defined(__GLIBC__) && (__GLIBC__ < 2)
+#	include <linux/termios.h>	/* This is needed for TIOCLINUX */
+#   else
+#	include <termios.h>
+#   endif
+#   include <sys/ioctl.h>
 #endif
 #ifdef __QNX__
 #   include <unix.h>		/* exec*() from <process.h> */

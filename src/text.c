@@ -8,6 +8,7 @@
 #include <stdio.h>
 
 #define WANT_WIDGETS
+#include "global.h"
 #include "win.h"
 #include "tty.h"
 #include "key.h"

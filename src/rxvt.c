@@ -24,16 +24,8 @@
 #   include <unistd.h>
 #endif
 
-#ifndef SCO_FLAVOR
-#	include <sys/time.h>		/* struct timeval */
-#endif /* SCO_FLAVOR */
-
-#if HAVE_SYS_SELECT_H
-#   include <sys/select.h>
-#endif
-
-#include "tty.h"	/* move, addch */
 #include "global.h"
+#include "tty.h"	/* move, addch */
 #include "cons.saver.h"
 
 static int rxvt_extensions = 0;

@@ -30,8 +30,9 @@
 #include <string.h>
 #include <errno.h>
 #include <stdio.h>
-#include "tty.h"
+
 #include "global.h"
+#include "tty.h"
 #include "color.h"
 #include "dialog.h"
 #include "dir.h"

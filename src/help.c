@@ -37,13 +37,13 @@
 */
 
 #include <config.h>
-#include "tty.h"
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <errno.h>
 
 #include "global.h"
+#include "tty.h"
 #include "color.h"
 #include "dialog.h"
 #include "win.h"

@@ -21,9 +21,6 @@
 #include <config.h>
 #include <string.h>
 #include <stdio.h>
-#ifdef NEEDS_IO_H
-#    include <io.h>
-#endif
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <ctype.h>

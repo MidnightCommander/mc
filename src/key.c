@@ -28,13 +28,9 @@
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>
 #endif
-#include <sys/types.h>
-#include <sys/time.h>
-#if HAVE_SYS_SELECT_H
-#   include <sys/select.h>
-#endif
 #include <ctype.h>
 #include <errno.h>
+
 #include "global.h"
 #include "tty.h"
 #include "mouse.h"

@@ -39,21 +39,10 @@
 #include <fcntl.h>	/* For open(), etc.		      */
 #include <string.h>	/* strstr(), strcpy(), etc.	      */
 #include <signal.h>	/* sigaction(), sigprocmask(), etc.   */
-#ifndef SCO_FLAVOR
-#	include <sys/time.h>	/* select(), gettimeofday(), etc.     */
-#endif /* SCO_FLAVOR */
 #include <sys/stat.h>	/* Required by dir.h & panel.h below  */
 
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>	/* For pipe, fork, setsid, access etc */
-#endif
-
-#ifdef HAVE_SYS_SELECT_H
-#   include <sys/select.h>
-#endif
-
-#ifdef HAVE_SYS_WAIT_H
-#   include <sys/wait.h> /* For waitpid() */
 #endif
 
 #ifndef WEXITSTATUS
@@ -67,10 +56,6 @@
 #ifdef HAVE_STROPTS_H
 #   include <stropts.h> /* For I_PUSH */
 #endif /* HAVE_STROPTS_H */
-
-#ifdef HAVE_GRP_H
-#   include <grp.h>	/* For the group struct & getgrnam()  */
-#endif /* HAVE_GRP_H */
 
 #ifdef __QNX__
 #   include <unix.h>	/* exec*() from <process.h> */

@@ -23,13 +23,12 @@
 /* Needed for the extern declarations of integer parameters */
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <grp.h>
-#include <pwd.h>
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>
 #endif
-#include "tty.h"
+
 #include "global.h"
+#include "tty.h"
 #include "win.h"
 #include "color.h"
 #include "dlg.h"

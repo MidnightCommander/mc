@@ -27,9 +27,6 @@
 /* {{{ Declarations */
 #include <config.h>
 #include <stdio.h>
-#ifdef NEEDS_IO_H
-#   include <io.h>
-#endif
 #include <sys/types.h>
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>

@@ -38,6 +38,8 @@
  *
  */
 #include <config.h>
+
+#include "global.h"
 #include "mouse.h" /* required before key.h */
 #include "key.h"
 #include "tty.h"

@@ -2,7 +2,6 @@
 
 #include <config.h>
 #include <stdio.h>
-#include <glib.h>
 
 #include "global.h"
 #include "cmd.h"

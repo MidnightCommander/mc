@@ -3,10 +3,14 @@
  * all local includes.
  */
 
-#ifndef __GLOBAL_H
-#define __GLOBAL_H
+#ifndef __MC_GLOBAL_H
+#define __MC_GLOBAL_H
 
 #include <stdlib.h>	/* for free() and other usefull routins */
+
+#ifdef NEEDS_IO_H
+#  include <io.h>
+#endif
 
 #ifdef HAVE_SYS_PARAM_H
 #  include <sys/param.h>
@@ -27,12 +31,24 @@
 #  endif
 #endif
 
+#ifdef HAVE_UTIME_H
+#  include <utime.h>
+#endif
+
 #ifdef HAVE_SYS_WAIT_H
 #  include <sys/wait.h>
 #endif
 
 #ifdef HAVE_SYS_SELECT_H
 #  include <sys/select.h>
+#endif
+
+#ifdef HAVE_GRP_H
+#  include <grp.h>
+#endif
+
+#ifdef HAVE_PWD_H
+#  include <pwd.h>
 #endif
 
 #include <glib.h>
@@ -76,4 +92,4 @@ void refresh_screen (void *);
 
 #define xgetch getch
 
-#endif
+#endif /* !__MC_GLOBAL_H */

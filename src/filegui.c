@@ -63,9 +63,6 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <stdio.h>
-#ifdef NEEDS_IO_H
-#    include <io.h>
-#endif 
 
 #include <errno.h>
 #include <ctype.h>
@@ -75,11 +72,6 @@
 #endif
 #include <sys/stat.h>
 #include <fcntl.h>
-#ifdef SCO_FLAVOR
-#	include <sys/timeb.h>	/* alex: for struct timeb, used in time.h */
-#endif /* SCO_FLAVOR */
-#include <time.h>
-#include <utime.h>
 
 #include "global.h"
 #include "tty.h"

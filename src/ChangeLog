@@ -1,5 +1,9 @@
 2001-09-07  Pavel Roskin  <proski@gnu.org>
 
+	* global.h: Include io.h, pwd.h, grp.h and utime.h.  Adjust all
+	sources not to include them and to include global.h at the right
+	place.
+
 	* global.h: Include all time-related system includes, since
 	it's non-trivial (order, conflicts) and is better handled in one
 	place.

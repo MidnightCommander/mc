@@ -65,21 +65,10 @@
 #   endif /* HAVE_NDIR_H */
 #endif /* not (HAVE_DIRENT_H or _POSIX_VERSION) */
 
-#if HAVE_SYS_WAIT_H
-#   include <sys/wait.h>	/* For waitpid() */
-#endif
-
 #include <errno.h>
-#ifndef HAS_NO_GRP_PWD_H
-#    include <pwd.h>
-#endif
 #include <ctype.h>
 #include <fcntl.h>	/* For O_RDWR */
 #include <signal.h>
-
-#ifdef NEEDS_IO_H
-#    include <io.h>
-#endif
 
 #ifdef NEEDS_DRIVE_H
 #    include <drive.h>
