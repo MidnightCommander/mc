@@ -1,6 +1,9 @@
 Before 4.6.1
 ============
 
+Add an argument to regexp_match() to force POSIX regex instead of
+changing easy_patterns in ext.c.
+
 Cannot spell check unsaved files in the editor.
 
 Dynamic loading for libgpm, libext2fs.
