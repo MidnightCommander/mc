@@ -1,5 +1,12 @@
 Makefile
+Makefile.in
 gmc
 gmc.junk
-gmc.html
-index.html
+docbook.css
+*.html
+gmc.dvi
+gmc.tex
+gmc.aux
+gmc.log
+gmc.ps
+gmc.rtf
