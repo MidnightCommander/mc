@@ -119,7 +119,7 @@ static struct link *erase_list;
  */
 static struct link *dest_dirs = 0;
 
-char *op_names[3] = {
+const char *op_names[3] = {
     N_(" Copy "),
     N_(" Move "),
     N_(" Delete ")
@@ -161,8 +161,8 @@ convert_case (int c, enum CaseConvs *conversion)
 
 static int transform_error = 0;
 
-static unsigned char *
-do_transform_source (FileOpContext *ctx, unsigned char *source)
+static const unsigned char *
+do_transform_source (FileOpContext *ctx, const unsigned char *source)
 {
     size_t j, k, l, len;
     unsigned const char *fnsource = x_basename (source);
@@ -234,11 +234,12 @@ do_transform_source (FileOpContext *ctx, unsigned char *source)
     return fntarget;
 }
 
-static unsigned char *
-transform_source (FileOpContext *ctx, unsigned char *source)
+static const unsigned char *
+transform_source (FileOpContext *ctx, const unsigned char *source)
 {
     unsigned char *s = g_strdup (source);
     unsigned char *q;
+    const unsigned char *p;
 
     /* We remove \n from the filename since regex routines would use \n as an anchor */
     /* this is just to be allowed to maniupulate file names with \n on it */
@@ -246,9 +247,9 @@ transform_source (FileOpContext *ctx, unsigned char *source)
 	if (*q == '\n')
 	    *q = ' ';
     }
-    q = do_transform_source (ctx, s);
+    p = do_transform_source (ctx, s);
     g_free (s);
-    return q;
+    return p;
 }
 
 static void
@@ -264,7 +265,7 @@ free_linklist (struct link **linklist)
 }
 
 static int
-is_in_linklist (struct link *lp, char *path, struct stat *sb)
+is_in_linklist (struct link *lp, const char *path, struct stat *sb)
 {
     ino_t ino = sb->st_ino;
     dev_t dev = sb->st_dev;
@@ -288,7 +289,7 @@ is_in_linklist (struct link *lp, char *path, struct stat *sb)
  * and a hardlink was succesfully made
  */
 static int
-check_hardlinks (char *src_name, char *dst_name, struct stat *pstat)
+check_hardlinks (const char *src_name, const char *dst_name, struct stat *pstat)
 {
     struct link *lp;
     struct vfs_class *my_vfs = vfs_get_class (src_name);
@@ -340,7 +341,7 @@ check_hardlinks (char *src_name, char *dst_name, struct stat *pstat)
  * (upper levels take already care of existing files at dst_path).
  */
 static int
-make_symlink (FileOpContext *ctx, char *src_path, char *dst_path)
+make_symlink (FileOpContext *ctx, const char *src_path, const char *dst_path)
 {
     char link_target[MC_MAXPATHLEN];
     int len;
@@ -666,7 +667,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 	struct timeval tv_current, tv_last_update, tv_last_input;
 	int secs, update_secs;
 	long dt;
-	char *stalled_msg;
+	const char *stalled_msg;
 
 	tv_last_update = tv_transfer_start;
 
@@ -1079,7 +1080,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 /* {{{ Move routines */
 
 static int
-move_file_file (FileOpContext *ctx, char *s, char *d,
+move_file_file (FileOpContext *ctx, const char *s, const char *d,
 		off_t *progress_count, double *progress_bytes)
 {
     struct stat src_stats, dst_stats;
@@ -1363,7 +1364,7 @@ erase_file (FileOpContext *ctx, const char *s, off_t *progress_count,
 }
 
 static int
-recursive_erase (FileOpContext *ctx, char *s, off_t *progress_count,
+recursive_erase (FileOpContext *ctx, const char *s, off_t *progress_count,
 		 double *progress_bytes)
 {
     struct dirent *next;
@@ -1421,7 +1422,7 @@ recursive_erase (FileOpContext *ctx, char *s, off_t *progress_count,
 /* Return -1 on error, 1 if there are no entries besides "." and ".." 
    in the directory path points to, 0 else. */
 static int
-check_dir_is_empty (char *path)
+check_dir_is_empty (const char *path)
 {
     DIR *dir;
     struct dirent *d;
@@ -1655,7 +1656,7 @@ panel_compute_totals (WPanel *panel, off_t *ret_marked, double *ret_total)
  * (I don't use spaces around the words, because someday they could be
  * dropped, when widgets get smarter)
  */
-static char *op_names1[] = { N_("1Copy"), N_("1Move"), N_("1Delete") };
+static const char *op_names1[] = { N_("1Copy"), N_("1Move"), N_("1Delete") };
 #define	FMD_XLEN 64
 
 int fmd_xlen = FMD_XLEN;
@@ -1670,10 +1671,10 @@ int fmd_xlen = FMD_XLEN;
  * %e - "to:" or question mark for delete
  * 
  * xgettext:no-c-format */
-static char *one_format = N_("%o %f \"%s\"%m");
+static const char *one_format = N_("%o %f \"%s\"%m");
 /* xgettext:no-c-format */
-static char *many_format = N_("%o %d %f%m");
-static char *prompt_parts[] = {
+static const char *many_format = N_("%o %d %f%m");
+static const char *prompt_parts[] = {
     N_("file"), N_("files"), N_("directory"), N_("directories"),
     N_("files/directories"), N_(" with source mask:"), N_(" to:")
 };
@@ -1689,7 +1690,7 @@ panel_operate_generate_prompt (const WPanel *panel, const int operation,
 			       const char *single_source,
 			       const struct stat *src_stat)
 {
-    register char *sp, *cp;
+    register const char *sp, *cp;
     register int i;
     char format_string[BUF_MEDIUM];
     char *dp = format_string;
@@ -1793,7 +1794,7 @@ panel_operate (void *source_panel, FileOperation operation,
 #endif				/* !WITH_FULL_PATHS */
     char *source = NULL;
     char *dest = NULL;
-    char *temp = NULL;
+    const char *temp = NULL;
     char *save_cwd = NULL, *save_dest = NULL;
     int single_entry = (get_current_type () == view_tree)
 	|| (panel->marked <= 1) || force_single;
@@ -1933,10 +1934,10 @@ panel_operate (void *source_panel, FileOperation operation,
 	    if (temp == NULL) {
 		value = transform_error;
 	    } else {
-		temp = concat_dir_and_file (dest, temp);
+		char *temp2 = concat_dir_and_file (dest, temp);
 		g_free (dest);
-		dest = temp;
-		temp = 0;
+		dest = temp2;
+		temp = NULL;
 
 		switch (operation) {
 		case OP_COPY:
@@ -2024,14 +2025,11 @@ panel_operate (void *source_panel, FileOperation operation,
 			erase_file (ctx, source_with_path, &count, &bytes,
 				    1);
 	    } else {
-		if (temp)
-		    g_free (temp);
-
 		temp = transform_source (ctx, source_with_path);
 		if (temp == NULL)
 		    value = transform_error;
 		else {
-		    temp = concat_dir_and_file (dest, temp);
+		    char *temp2 = concat_dir_and_file (dest, temp);
 
 		    switch (operation) {
 		    case OP_COPY:
@@ -2041,12 +2039,12 @@ panel_operate (void *source_panel, FileOperation operation,
 			(*ctx->stat_func) (source_with_path, &src_stat);
 			if (S_ISDIR (src_stat.st_mode))
 			    value =
-				copy_dir_dir (ctx, source_with_path, temp,
+				copy_dir_dir (ctx, source_with_path, temp2,
 					      1, 0, 0, 0, &count, &bytes);
 			else
 			    value =
 				copy_file_file (ctx, source_with_path,
-						temp, 1, &count, &bytes,
+						temp2, 1, &count, &bytes,
 						1);
 			free_linklist (&dest_dirs);
 			break;
@@ -2054,18 +2052,19 @@ panel_operate (void *source_panel, FileOperation operation,
 		    case OP_MOVE:
 			if (S_ISDIR (src_stat.st_mode))
 			    value =
-				move_dir_dir (ctx, source_with_path, temp,
+				move_dir_dir (ctx, source_with_path, temp2,
 					      &count, &bytes);
 			else
 			    value =
 				move_file_file (ctx, source_with_path,
-						temp, &count, &bytes);
+						temp2, &count, &bytes);
 			break;
 
 		    default:
 			/* Unknown file operation */
 			abort ();
 		    }
+		    g_free (temp2);
 		}
 	    }			/* Copy or move operation */
 
@@ -2113,9 +2112,6 @@ panel_operate (void *source_panel, FileOperation operation,
 
     if (dest)
 	g_free (dest);
-
-    if (temp)
-	g_free (temp);
 
     if (ctx->dest_mask) {
 	g_free (ctx->dest_mask);
@@ -2190,7 +2186,7 @@ files_error (const char *format, const char *file1, const char *file2)
 }
 
 static int
-real_query_recursive (FileOpContext *ctx, enum OperationMode mode, char *s)
+real_query_recursive (FileOpContext *ctx, enum OperationMode mode, const char *s)
 {
     gchar *text;
 
