@@ -1,3 +1,8 @@
+1999-05-12  Christian GENNERAT   <christian.gennerat@alcatel.fr>
+
+    * urar.in, uzip.in: patches to use in #urar and #uzip the new features
+    added in mc-4.5.31 (unlink, mkdir, rmdir)
+	
 1999-04-30  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* extfs/deb.in (mcdebfs_run): Quote string properly, fix suggested
