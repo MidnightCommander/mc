@@ -833,10 +833,10 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename,
 	static int errorcount = 0;
 
 	if (++errorcount < 5) {
-	    message (1, _("Cannot parse:"),
+	    message (1, _("Cannot parse:"), "%s",
 		     (p_copy && *p_copy) ? p_copy : line);
 	} else if (errorcount == 5)
-	    message (1, _("Error"),
+	    message (1, MSG_ERROR,
 		     _("More parsing errors will be ignored."));
     }
 
@@ -847,7 +847,7 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename,
 void
 vfs_die (const char *m)
 {
-    message (1, _("Internal error:"), m);
+    message (1, _("Internal error:"), "%s", m);
     exit (1);
 }
 
