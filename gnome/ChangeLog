@@ -1,5 +1,16 @@
 2001-07-26  Pavel Roskin  <proski@gnu.org>
 
+	* gfind.c (GFindDlg): Add last_dir_row field for the last
+	directory row.
+	(add_to_list): Last argument is now boolean, FALSE for files,
+	TRUE for directories.  Change all callers.  Use item data for
+	the row of the last directory.
+	(select_row): Enable `view' and `edit' buttons for files only,
+	`change' button for all entries.
+	(setup_gui): Set selection mode to GTK_SELECTION_BROWSE.  Make
+	`change' button inactive.  Don't hide `view' and `edit' buttons.
+	(get_list_info): Look up directory using list item data.
+
 	* gfind.c (find_parameters): Fix behavior of the Enter key.
 	Select initial values in the text entries.
 

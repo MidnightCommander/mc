@@ -74,10 +74,11 @@ typedef struct {
 	char *content_pattern;	/* pattern to search inside files */
 	int is_start;		/* Status of the start/stop toggle button */
 	char *old_dir;
+	int last_dir_row;
 	dir_stack *dir_stack_base;
 } GFindDlg;
 
-static char *add_to_list(GFindDlg *head, char *text, void *closure);
+static char *add_to_list(GFindDlg *head, char *text, gboolean is_dir);
 static void stop_idle(GFindDlg *head);
 static void status_update(GFindDlg *head, char *text);
 static void get_list_info(GFindDlg *head, char **file, char **dir);
@@ -270,15 +271,15 @@ static void find_add_match(GFindDlg *head, char *dir, char *file)
 		if (strcmp(head->old_dir, dir)) {
 			g_free(head->old_dir);
 			head->old_dir = g_strdup(dir);
-			dirname = add_to_list(head, dir, NULL);
+			dirname = add_to_list(head, dir, TRUE);
 		}
 	} else {
 		head->old_dir = g_strdup(dir);
-		dirname = add_to_list(head, dir, NULL);
+		dirname = add_to_list(head, dir, TRUE);
 	}
 
 	tmp_name = g_strconcat("    ", file, NULL);
-	add_to_list(head, tmp_name, dirname);
+	add_to_list(head, tmp_name, FALSE);
 	g_free(tmp_name);
 }
 
@@ -514,8 +515,12 @@ find_do_view_edit(GFindDlg *head, int unparsed_view, int edit, char *dir, char *
 static void
 select_row(GtkCList *clist, gint row, gint column, GdkEvent *event, GFindDlg *head)
 {
-	gtk_widget_set_sensitive(head->g_edit, TRUE);
-	gtk_widget_set_sensitive(head->g_view, TRUE);
+	gboolean is_file;
+	is_file = ((int) gtk_clist_get_row_data(clist, row) != -1);
+
+	gtk_widget_set_sensitive(head->g_edit, is_file);
+	gtk_widget_set_sensitive(head->g_view, is_file);
+	gtk_widget_set_sensitive(head->g_change, TRUE);
 	head->current_row = row;
 }
 
@@ -614,7 +619,7 @@ static void setup_gui(GFindDlg *head)
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(sw), GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 	head->g_clist = gtk_clist_new(1);
-	gtk_clist_set_selection_mode(GTK_CLIST(head->g_clist), GTK_SELECTION_SINGLE);
+	gtk_clist_set_selection_mode(GTK_CLIST(head->g_clist), GTK_SELECTION_BROWSE);
 	gtk_widget_set_usize(head->g_clist, -1, 200);
 	gtk_container_add(GTK_CONTAINER(sw), head->g_clist);
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(head->g_find_dlg)->vbox),
@@ -650,6 +655,7 @@ static void setup_gui(GFindDlg *head)
 
 	gtk_widget_set_sensitive(head->g_view, FALSE);
 	gtk_widget_set_sensitive(head->g_edit, FALSE);
+	gtk_widget_set_sensitive(head->g_change, FALSE);
 	box2 = gtk_hbox_new(1, GNOME_PAD + GNOME_PAD);
 	gtk_box_pack_start(GTK_BOX(box2), head->g_view, 0, 0, 0);
 	gtk_box_pack_start(GTK_BOX(box2), head->g_edit, 0, 0, 0);
@@ -667,8 +673,6 @@ static void setup_gui(GFindDlg *head)
 			   box3, TRUE, TRUE, GNOME_PAD_SMALL);
 
 	gtk_widget_show_all(head->g_find_dlg);
-	gtk_widget_hide(GTK_WIDGET(head->g_view));
-	gtk_widget_hide(GTK_WIDGET(head->g_edit));
 }
 
 static int run_process(GFindDlg *head)
@@ -711,32 +715,53 @@ static void status_update(GFindDlg *head, char *text)
 	x_flush_events();
 }
 
-static char *add_to_list(GFindDlg *head, char *text, void *data)
+static char *add_to_list(GFindDlg *head, char *text, gboolean is_dir)
 {
 	int row;
 	char *texts[1];
+	int data;
 
 	texts[0] = text;
 
 	row = gtk_clist_append(GTK_CLIST(head->g_clist), texts);
-	gtk_clist_set_row_data(GTK_CLIST(head->g_clist), row, data);
-#if 1
+
+	/* Record parent row (or -1 for directories) in the item data.  */
+	if (is_dir) {
+		data = -1;
+		head->last_dir_row = row;
+	} else {
+		data = head->last_dir_row;
+	}
+
+	gtk_clist_set_row_data(GTK_CLIST(head->g_clist), row, (void *) data);
+
 	if (gtk_clist_row_is_visible(GTK_CLIST(head->g_clist), row)
 			!= GTK_VISIBILITY_FULL) {
 		gtk_clist_moveto(GTK_CLIST(head->g_clist), row, 0, 0.5, 0.0);
 	}
-#endif
+
 	return text;
 }
 
 static void get_list_info(GFindDlg *head, char **file, char **dir)
 {
+	int p_row;
+
 	if (head->current_row == -1)
 		*file = *dir = NULL;
+
+	p_row = (int) gtk_clist_get_row_data(GTK_CLIST(head->g_clist),
+					     head->current_row);
 	gtk_clist_get_text(GTK_CLIST(head->g_clist),
 			   head->current_row, 0, file);
-	*dir = gtk_clist_get_row_data(GTK_CLIST(head->g_clist),
-				      head->current_row);
+
+	if (p_row == -1) {
+		/* No parent row - it's a directory */
+		*dir = *file;
+		*file = NULL;
+	} else {
+		gtk_clist_get_text(GTK_CLIST(head->g_clist), p_row, 0, dir);
+	}
 }
 
 static int find_file(char *start_dir, char *pattern, char *content, char **dirname,
