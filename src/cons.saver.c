@@ -315,7 +315,8 @@ int main (int argc, char **argv)
 {
     char *error;
     unsigned char action = 0;
-
+    int stderr_fd;
+    
     /*
      * Make sure Stderr points to a valid place
      */
@@ -324,8 +325,8 @@ int main (int argc, char **argv)
     if (stderr_fd == -1)
 	    exit (1);
     
-    if (strderr_fd != 2)
-	    dup2 (strderr_fd, 2);
+    if (stderr_fd != 2)
+	    dup2 (stderr_fd, 2);
     
     if (argc != 2){
 	/* Wrong number of arguments */

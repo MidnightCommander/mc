@@ -119,16 +119,16 @@ typedef struct {
     /* These are standard GtkWidgets */
 	
     void *xwindow;		/* The toplevel window */
-	
+
     void *table;
+    void *view_table;
+    void *pane;
     void *list;
+    void *tree;
     void *icons;
     void *scrollbar;
     void *status;
     void *ministatus;
-    void *tree;
-    void *pane;
-    void *view_table;
 
     void *filter_w;		/* A WInput* */
     void *current_dir;		/* A WInput* */
