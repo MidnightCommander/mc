@@ -696,8 +696,8 @@ const char *file_date (time_t when)
     static char timebuf [MAX_I18NTIMELENGTH + 1];
     time_t current_time = time ((time_t) 0);
     static size_t i18n_timelength = 0;
-    static char *fmtyear, *fmttime;
-    char *fmt;
+    static const char *fmtyear, *fmttime;
+    const char *fmt;
 
     if (i18n_timelength == 0){
 	i18n_timelength = i18n_checktimelength() + 1;

@@ -2137,7 +2137,7 @@ static int
 real_do_file_error (enum OperationMode mode, const char *error)
 {
     int result;
-    char *msg;
+    const char *msg;
 
     msg = mode == Foreground ? MSG_ERROR : _(" Background process error ");
     result =
@@ -2191,7 +2191,7 @@ real_query_recursive (FileOpContext *ctx, enum OperationMode mode, const char *s
     gchar *text;
 
     if (ctx->recursive_result < RECURSIVE_ALWAYS) {
-	char *msg =
+	const char *msg =
 	    mode ==
 	    Foreground ?
 	    _("\n   Directory not empty.   \n"

@@ -783,7 +783,7 @@ static void
 view_status (WView *view, gboolean update_gui)
 {
     static int i18n_adjust = 0;
-    static char *file_label;
+    static const char *file_label;
 
     int w = view->widget.cols - (view->have_frame * 2);
     int i;
@@ -802,19 +802,19 @@ view_status (WView *view, gboolean update_gui)
 			    view->command ? view->command : "", w));
     else {
 	i = (w > 22 ? 22 : w) - i18n_adjust;
-	printw (file_label, name_trunc (view->filename ? view->filename :
+	printw (const_cast(char *, file_label), name_trunc (view->filename ? view->filename :
 					view->command ? view->command : "",
 					i));
 	if (w > 46) {
 	    widget_move (view, view->have_frame, 24 + view->have_frame);
 	    if (view->hex_mode)
-		printw (_("Offset 0x%08lx"), view->edit_cursor);
+		printw (const_cast(char *, _("Offset 0x%08lx")), view->edit_cursor);
 	    else
-		printw (_("Col %d"), -view->start_col);
+		printw (const_cast(char *, _("Col %d")), -view->start_col);
 	}
 	if (w > 62) {
 	    widget_move (view, view->have_frame, 43 + view->have_frame);
-	    printw (_("%s bytes"), size_trunc (view->s.st_size));
+	    printw (const_cast(char *, _("%s bytes")), size_trunc (view->s.st_size));
 	}
 	if (w > 70) {
 	    printw (" ");

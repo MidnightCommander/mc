@@ -444,7 +444,8 @@ debug_out (char *start, char *end, int cond)
 	g_free (msg);
 	msg = NULL;
     } else {
-	char *type, *p;
+	const char *type;
+	char *p;
 
 	/* Save debug info for later output */
 	if (!debug_flag)

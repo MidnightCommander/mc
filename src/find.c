@@ -124,7 +124,7 @@ static inline char * add_to_list (const char *text, void *data) {
 static inline void stop_idle (void *data) {
     set_idle_proc (data, 0);
 }
-static inline void status_update (char *text) {
+static inline void status_update (const char *text) {
     label_set_text (status_label, text);
 }
 static void get_list_info (char **file, char **dir) {

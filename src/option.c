@@ -110,10 +110,10 @@ init_configure (void)
     int i;
     static int i18n_config_flag = 0;
     static int b1, b2, b3;
-    char *ok_button = _("&OK");
-    char *cancel_button = _("&Cancel");
-    char *save_button = _("&Save");
-    static char *title1, *title2, *title3;
+    const char *ok_button = _("&OK");
+    const char *cancel_button = _("&Cancel");
+    const char *save_button = _("&Save");
+    static const char *title1, *title2, *title3;
 
     if (!i18n_config_flag) {
 	register int l1;

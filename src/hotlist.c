@@ -921,7 +921,7 @@ static void add_new_entry_cmd (void)
     hotlist_state.modified = 1;
 }
 
-static int add_new_group_input (char *header, char *label, char **result)
+static int add_new_group_input (const char *header, const char *label, char **result)
 {
     int		ret;
     QuickDialog Quick_input;
@@ -1002,7 +1002,7 @@ static void add_new_group_cmd (void)
 void add2hotlist_cmd (void)
 {
     char *prompt, *label;
-    char *cp = _("Label for \"%s\":");
+    const char *cp = _("Label for \"%s\":");
     int l = strlen (cp);
 
     prompt = g_strdup_printf (cp, name_trunc (current_panel->cwd, COLS-2*UX-(l+8)));

@@ -542,7 +542,7 @@ init_replace (FileOpContext *ctx, enum OperationMode mode)
 {
     FileOpContextUI *ui;
     char buffer[BUF_SMALL];
-    char *title;
+    const char *title;
     static int rd_xlen = 60, rd_trunc = X_TRUNC;
 
 #ifdef ENABLE_NLS

@@ -903,10 +903,10 @@ history_put (const char *input_name, GList *h)
 
 /* {{{ history display */
 
-static char *
+static const char *
 i18n_htitle (void)
 {
-    static char *history_title = NULL;
+    static const char *history_title = NULL;
 
     if (history_title == NULL)
 	history_title = _(" History ");

@@ -425,7 +425,7 @@ void open_error_pipe (void)
 int
 close_error_pipe (int error, const char *text)
 {
-    char *title;
+    const char *title;
     char msg[MAX_PIPE_SIZE];
     int len = 0;
 

@@ -172,7 +172,7 @@ static struct {
 };
 
 static int first_width, second_width;
-static char *output_lines_label;
+static const char *output_lines_label;
 
 static WButton *bleft_widget, *bright_widget;
 
@@ -345,10 +345,10 @@ init_layout (void)
     static int i18n_layt_flag = 0;
     static int b1, b2, b3;
     int i = sizeof (s_split_direction) / sizeof (char *);
-    char *ok_button = _("&OK");
-    char *cancel_button = _("&Cancel");
-    char *save_button = _("&Save");
-    static char *title1, *title2, *title3;
+    const char *ok_button = _("&OK");
+    const char *cancel_button = _("&Cancel");
+    const char *save_button = _("&Save");
+    static const char *title1, *title2, *title3;
 
     if (!i18n_layt_flag) {
 	register int l1;

@@ -207,7 +207,7 @@ background_attention (int fd, void *closure)
 
     bytes = read (fd, &routine, sizeof (routine));
     if (bytes == -1 || (size_t) bytes < (sizeof (routine))) {
-	char *background_process_error = _(" Background process error ");
+	const char *background_process_error = _(" Background process error ");
 
 	unregister_task_running (ctx->pid, fd);
 	if (!waitpid (ctx->pid, &status, WNOHANG)) {

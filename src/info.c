@@ -61,7 +61,7 @@ static void
 info_show_info (struct WInfo *info)
 {
     static int i18n_adjust=0;
-    static char *file_label;
+    static const char *file_label;
     
     struct stat st;
 
@@ -71,7 +71,7 @@ info_show_info (struct WInfo *info)
     info_box (info->widget.parent, info);
     attrset (MARKED_COLOR);
     widget_move (&info->widget, 1, 3);
-    printw (_("Midnight Commander %s"), VERSION);
+    printw (const_cast(char *, _("Midnight Commander %s")), VERSION);
     attrset (NORMAL_COLOR);
     widget_move (&info->widget, 2, 1);
     hline (ACS_HLINE|NORMAL_COLOR, info->widget.x-2);
@@ -100,7 +100,7 @@ info_show_info (struct WInfo *info)
     case 16:
 	widget_move (&info->widget, 16, 3);
 	if (myfs_stats.nfree >0 || myfs_stats.nodes > 0)
-	    printw (_("Free nodes: %d (%d%%) of %d"),
+	    printw (const_cast(char *, _("Free nodes: %d (%d%%) of %d")),
 		    myfs_stats.nfree,
 		    myfs_stats.total
 		    ? 100 * myfs_stats.nfree / myfs_stats.nodes : 0,
@@ -114,7 +114,7 @@ info_show_info (struct WInfo *info)
 	    char buffer1 [6], buffer2[6];
 	    size_trunc_len (buffer1, 5, myfs_stats.avail, 1);
 	    size_trunc_len (buffer2, 5, myfs_stats.total, 1);
-	    printw (_("Free space: %s (%d%%) of %s"), buffer1, myfs_stats.total ?
+	    printw (const_cast(char *, _("Free space: %s (%d%%) of %s")), buffer1, myfs_stats.total ?
 		    (int)(100 * (double)myfs_stats.avail / myfs_stats.total) : 0,
 		    buffer2);
 	} else
@@ -122,30 +122,30 @@ info_show_info (struct WInfo *info)
 
     case 14:
 	widget_move (&info->widget, 14, 3);
-	printw (_("Type:      %s "), myfs_stats.typename ? myfs_stats.typename : _("non-local vfs"));
+	printw (const_cast(char *, _("Type:      %s ")), myfs_stats.typename ? myfs_stats.typename : _("non-local vfs"));
 	if (myfs_stats.type != 0xffff && myfs_stats.type != -1)
 	    printw (" (%Xh)", myfs_stats.type);
 
     case 13:
 	widget_move (&info->widget, 13, 3);
-	printw (_("Device:    %s"),
+	printw (const_cast(char *, _("Device:    %s")),
 		name_trunc (myfs_stats.device, info->widget.cols - i18n_adjust));
     case 12:
 	widget_move (&info->widget, 12, 3);
-	printw (_("Filesystem: %s"),
+	printw (const_cast(char *, _("Filesystem: %s")),
 		name_trunc (myfs_stats.mpoint, info->widget.cols - i18n_adjust));
 
     case 11:
 	widget_move (&info->widget, 11, 3);
-	printw (_("Accessed:  %s"), file_date (st.st_atime));
+	printw (const_cast(char *, _("Accessed:  %s")), file_date (st.st_atime));
 	
     case 10:
 	widget_move (&info->widget, 10, 3);
-	printw (_("Modified:  %s"), file_date (st.st_mtime));
+	printw (const_cast(char *, _("Modified:  %s")), file_date (st.st_mtime));
 	
     case 9:
 	widget_move (&info->widget, 9, 3);
-	printw (_("Created:   %s"), file_date (st.st_ctime));
+	printw (const_cast(char *, _("Created:   %s")), file_date (st.st_ctime));
 
     case 8:
 	widget_move (&info->widget, 8, 3);
@@ -160,40 +160,40 @@ info_show_info (struct WInfo *info)
 	{
 	    char buffer[10];
 	    size_trunc_len(buffer, 9, st.st_size, 0);
-	    printw (_("Size:      %s"), buffer);
+	    printw (const_cast(char *, _("Size:      %s")), buffer);
 #ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-	    printw ((st.st_blocks==1) ?
-		_(" (%ld block)") : _(" (%ld blocks)"), (long) st.st_blocks);
+	    printw (const_cast(char *, (st.st_blocks==1) ?
+		_(" (%ld block)") : _(" (%ld blocks)")), (long) st.st_blocks);
 #endif
 	}
 	
     case 7:
 	widget_move (&info->widget, 7, 3);
-	printw (_("Owner:     %s/%s"), get_owner (st.st_uid),
+	printw (const_cast(char *, _("Owner:     %s/%s")), get_owner (st.st_uid),
 		get_group (st.st_gid));
 	
     case 6:
 	widget_move (&info->widget, 6, 3);
-	printw (_("Links:     %d"), (int) st.st_nlink);
+	printw (const_cast(char *, _("Links:     %d")), (int) st.st_nlink);
 	
     case 5:
 	widget_move (&info->widget, 5, 3);
-	printw (_("Mode:      %s (%04o)"),
+	printw (const_cast(char *, _("Mode:      %s (%04o)")),
 		string_perm (st.st_mode), st.st_mode & 07777);
 	
     case 4:
 	widget_move (&info->widget, 4, 3);
-	printw (_("Location:  %Xh:%Xh"), (int)st.st_dev, (int)st.st_ino);
+	printw (const_cast(char *, _("Location:  %Xh:%Xh")), (int)st.st_dev, (int)st.st_ino);
 	
     case 3:
 	widget_move (&info->widget, 3, 2);
 	/* .ado: fname is invalid if selected == 0 && info called from current panel */
 	if (current_panel->selected){
-		printw (file_label,
+		printw (const_cast(char *, file_label),
 			name_trunc (current_panel->dir.list [current_panel->selected].fname,
 				    info->widget.cols - i18n_adjust));
 	} else
-		printw (_("File:       None"));
+		addstr (_("File:       None"));
      
     case 2:
     case 1:

@@ -1,5 +1,24 @@
 2004-09-19  Roland Illig  <roland.illig@gmx.de>
 
+	* achown.c: Added const qualifiers and const_cast.
+	* background.c: likewise.
+	* boxes.c: likewise.
+	* file.c: likewise.
+	* filegui.c: likewise.
+	* find.c: likewise.
+	* hotlist.c: likewise.
+	* info.c: likewise.
+	* layout.c: likewise.
+	* myslang.h: likewise.
+	* option.c: likewise.
+	* user.c: likewise.
+	* util.c: likewise.
+	* utilunix.c: likewise.
+	* view.c: likewise.
+	* widget.c: likewise.
+
+2004-09-19  Roland Illig  <roland.illig@gmx.de>
+
 	* util.c (strip_home_and_password): Fixed possible buffer overflow.
 
 2004-09-19  Roland Illig  <roland.illig@gmx.de>

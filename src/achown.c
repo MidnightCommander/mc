@@ -243,7 +243,7 @@ do_enter_key (Dlg_head * h, int f_pos)
     WLEntry *fe;
     int lxx, lyy, chl_end, b_pos;
     int is_owner;
-    char *title;
+    const char *title;
 
     do {
 	is_owner = (f_pos == 3);
@@ -355,7 +355,7 @@ static void chown_refresh (void)
 
     if (!single_set){
 	dlg_move (ch_dlg, 3, 54);
-	printw (_("%6d of %d"), files_on_begin - (current_panel->marked) + 1,
+	printw (const_cast(char *, _("%6d of %d")), files_on_begin - (current_panel->marked) + 1,
 		   files_on_begin);
     }
 

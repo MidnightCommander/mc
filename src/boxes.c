@@ -874,7 +874,7 @@ static Dlg_head *jobs_dlg;
 static void
 jobs_fill_listbox (void)
 {
-    static char *state_str [2];
+    static const char *state_str [2];
     TaskList *tl = task_list;
 
     if (!state_str [0]){
