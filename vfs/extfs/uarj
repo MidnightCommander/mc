@@ -1,34 +1,61 @@
 #! /bin/sh
 #
-# Copyright 1998 Pavel Machek,
-# partly based on zip by Jakub Jelinek 1995
+# Written by Pavel Roskin
+# Copyright (C) 2002 Free Software Foundation.
 #
-# Distribute in terms of GPL.
-#
-#
-ARJ=mcunarj
+# This filesystem doesn't support file extraction due to limitations of
+# unarj, which cannot extract a single file.
+
+
+UNARJ=unarj
 
 mcarjfs_list ()
 {
-$ARJ v $1 | awk -v uid=${UID-0} '
-BEGIN { hyphens=0 }
-/^----------/ { if (hyphens > 0) exit 0; hyphens=1; next }
-{ 
-if (hyphens < 1) next;
-path=$1;
-getline;
-printf "-rw-r--r--   1 %-8d %-8d %8d %s-%s %s %s\n", uid, 0, $1, substr($4,4), substr($4,1,2), substr($5,1,5), path
-}' 2>/dev/null
+    TMPDIR="/tmp/mctmpdir-uarj.$$"
+    mkdir $TMPDIR || exit 1
+    cd $TMPDIR
+
+    # "unarj t" gives filenames with path, "unarj l" gives other attributes
+    $UNARJ t "$1" | grep "^Testing" | cut -c 12-38 >testlist
+    $UNARJ l "$1" | sed -n -e '/------------/,/------------/p' | \
+	sed -e '1d;$d' | cut -c 1-58 >list
+
+    # Put long names into environment variables name_N
+    i=0
+    exec <testlist
+    while read name; do
+	eval name_$i=\$name
+	i=$(($i+1))
+    done
+
+    # Combine long names with the listing
+    i=0
+    exec <list
+    while read fname size ignore1 ignore2 fdate ftime; do
+	eval name=\$name_$i
+	: ${name=$fname}
+	# Date is originally YY-MM-DD, make it MM-DD-YY
+	mdy_date=`echo $fdate | sed 's/\(..\)-\(..\)-\(..\)/\2-\3-\1/'`
+	echo "-rw-r--r-- 1 root root $size $mdy_date $ftime $name"
+	i=$(($i+1))
+    done
+
+    cd /
+    rm -rf $TMPDIR
 }
 
-mcarjfs_copyout ()
-{
-$ARJ p $1 $2 2> $3 > /dev/null
-}
+LC_ALL=C
+export LC_ALL
 
-umask 077
-case "$1" in
-  list) mcarjfs_list $2; exit 0;;
-  copyout) mcarjfs_copyout $2 $3 $4; exit 0;;
+LANG=C
+export LANG
+
+cmd="$1"
+shift
+
+case "$cmd" in
+  list) mcarjfs_list "$@" ;;
+  *) exit 1 ;;
 esac
-exit 1
+
+exit 0

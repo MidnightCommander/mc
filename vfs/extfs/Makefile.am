@@ -1,7 +1,7 @@
 extfsdir = $(pkgdatadir)/extfs
 
 # Files to install and distribute other than extfs scripts
-EXTFS_MISC  = README extfs.ini unarj.diff sfs.ini
+EXTFS_MISC  = README extfs.ini sfs.ini
 
 # Scripts hat don't need adaptation to the local system
 EXTFS_CONST = bpp hp48 rpm trpm uarj

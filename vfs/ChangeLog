@@ -1,3 +1,10 @@
+2002-12-13  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/uarj: New list-only implementation that doesn't need
+	patched unarj.
+	* extfs/unarj.diff: Remove.
+	* extfs/Makefile.am: Remove extfs/unarj.diff.
+
 2002-12-13  Adam Byrtek  <alpha@debian.org>
 
 	* extfs/patchfs.in: "copyin" method added (with compressed files
