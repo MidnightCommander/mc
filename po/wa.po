@@ -7,6 +7,8 @@
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # Lorint Hendschel <LorintHendschel@skynet.be>, 1999-2000
 # Pablo Saratxaga <pablo@mandrakesoft.com>, 2000
+# Lucyin Mahin, 2000
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
@@ -792,7 +794,7 @@ msgstr "Fé on novea fitchî dvins ci ridant"
 msgid "Copy files"
 msgstr "Copyî des fitchîs"
 
-# _Copyî is the normal way, but we alreadi have _Cloyu on the same menu
+# _Copyî is the normal way, but we alreadi have _Clôre on the same menu
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
 #: gnome/glayout.c:389 gnome/gscreen.c:2098
 msgid "_Copy..."
@@ -825,11 +827,11 @@ msgstr "Mostrer cbén di plaece ki les ridants purdèt sol deure plake"
 
 #: gnome/glayout.c:395
 msgid "Close window"
-msgstr "Cloyu li purnea"
+msgstr "Clôre li purnea"
 
 #: gnome/glayout.c:395
 msgid "Closes this window"
-msgstr "Cloyu ci purnea chal"
+msgstr "Clôre ci purnea chal"
 
 #: gnome/glayout.c:402
 msgid "Select _All"
@@ -3856,7 +3858,7 @@ msgid ""
 " Cannot close source file \"%s\" \n"
 " %s "
 msgstr ""
-" Dji n' sai cloyu li fitchî soûrdant \"%s\" \n"
+" Dji n' sai clôre li fitchî soûrdant \"%s\" \n"
 " %s "
 
 #: src/file.c:792
@@ -3865,7 +3867,7 @@ msgid ""
 " Cannot close target file \"%s\" \n"
 " %s "
 msgstr ""
-" Dji n' sai cloyu li fitchî såme \"%s\" \n"
+" Dji n' sai clôre li fitchî såme \"%s\" \n"
 " %s "
 
 #: src/file.c:802
