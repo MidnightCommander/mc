@@ -43,7 +43,7 @@ OOBJS = main.o dlg.o screen.o widget.o wtools.o info.o layout.o boxes.o \
 	subshell.o terms.o \
 	achown.o fsusage.o mountlist.o \
         @XCURSES@ @REGEX_O@ complete.o command.o \
-	option.o cmd.o utilunix.o dirhist.o popt.o xslint.o
+	option.o cmd.o utilunix.o popt.o xslint.o
 
 OBJS = $(LOBJS) $(OOBJS) \
 	tkmenu.o tkmain.o tkscreen.o tkwidget.o tkkey.o tkview.o \

@@ -41,7 +41,7 @@ LOBJS = dir.o util.o \
 	terms.o \
 	achown.o fsusage.o mountlist.o \
 	@XCURSES@ @REGEX_O@ complete.o command.o \
-	utilunix.o dirhist.o
+	utilunix.o 
 
 #
 # These objects from ../src do depend on HAVE_XVIEW or HAVE_X
