@@ -72,8 +72,13 @@ void enable_mouse (void);
 void disable_mouse (void);
 
 /* Mouse wheel events */
-#define GPM_B_UP        8
-#define GPM_B_DOWN     16
+#ifndef GPM_B_DOWN
+#define GPM_B_DOWN      32
+#endif
+
+#ifndef GPM_B_UP
+#define GPM_B_UP        16
+#endif
 
 #ifdef HAVE_LIBGPM
 
