@@ -70,7 +70,8 @@ about_dialog (GtkWidget *widget, gpointer data)
 				 authors,
 				 _("The GNOME edition of the Midnight Commander file manager."),
 				 NULL);
-	gnome_dialog_run_modal (GNOME_DIALOG (about));
+	gtk_window_set_modal(GTK_WINDOW(about),TRUE);
+	gnome_dialog_run (GNOME_DIALOG (about));
 }
 
 /* FIXME: put in the callbacks */
