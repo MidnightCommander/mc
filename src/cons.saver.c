@@ -26,6 +26,7 @@
 #include <sys/stat.h>
 #include <sys/ioctl.h>
 #include <fcntl.h>
+#include <errno.h>
 #ifdef HAVE_UNISTD_H
 #    include <unistd.h>
 #endif
@@ -326,7 +327,8 @@ int main (int argc, char **argv)
 	    exit (1);
     
     if (stderr_fd != 2)
-	    dup2 (stderr_fd, 2);
+	while (dup2 (stderr_fd, 2) == -1 && errno == EINTR)
+	    ;
     
     if (argc != 2){
 	/* Wrong number of arguments */

@@ -1,3 +1,9 @@
+1999-04-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* cons.saver.c (main): dup2() may be interrupted; take this into
+	account.  Do we need to fcntl() stderr, or is it enough to close()
+	it before recreating it?
+
 1999-03-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* dlg.c (dlg_run_done): Do not call the callback of a NULL current
