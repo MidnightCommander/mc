@@ -1327,7 +1327,7 @@ load_file_position (const char *filename, long *line, long *column)
     len = strlen (filename);
 
     while (fgets (buf, sizeof (buf), f)) {
-	char *p;
+	const char *p;
 
 	/* check if the filename matches the beginning of string */
 	if (strncmp (buf, filename, len) != 0)
@@ -1342,9 +1342,13 @@ load_file_position (const char *filename, long *line, long *column)
 	if (strchr (p, ' '))
 	    continue;
 
-	*line = atol (p);
-	p = strchr (buf, ';');
-	*column = atol (&p[1]);
+	*line = strtol(p, const_cast(char **, &p), 10);
+	if (*p == ';') {
+	    *column = strtol(p, const_cast(char **, &p), 10);
+	    if (*p != '\n')
+	        *column = 0;
+	} else
+	    *line = 1;
     }
     fclose (f);
 }

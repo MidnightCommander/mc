@@ -1,5 +1,10 @@
 2004-09-24  Roland Illig  <roland.illig@gmx.de>
 
+	* util.c (load_file_position): Fixed possible segmentation fault
+	when an $HOME/.mc/filepos did not contain a ';'.
+
+2004-09-24  Roland Illig  <roland.illig@gmx.de>
+
 	* boxes.c: Replaced NULL with (char *) NULL. Likewise for 0, where
 	NULL was meant.
 	* cmd.c: Likewise.
