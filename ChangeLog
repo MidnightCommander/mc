@@ -1,5 +1,8 @@
 2000-08-24  Pavel Roskin  <proski@gnu.org>
 
+	* lib/Makefile.in: converted to ...
+	* lib/Makefile.am: ... this
+
 	* lib/tkmc.wmconfig: removed
 	* lib/Makefile.in, doc/FILES: removed lib/tkmc.wmconfig
 
