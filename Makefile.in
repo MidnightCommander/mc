@@ -5,7 +5,7 @@ rootdir = $(srcdir)
 @MCFGR@@MCF@
 
 foreigndirs=pc
-codedirs=vfs lib doc slang gtkedit src gnome new_icons icons idl
+codedirs=vfs lib doc slang gtkedit edit src gnome new_icons icons idl
 unixdirs=intl $(codedirs) @POSUB@
 alldirs=$(unixdirs) $(foreigndirs) 
 subdirs=$(alldirs)
@@ -36,6 +36,7 @@ configure: configure.in aclocal.m4
 
 GNOME_M4_FILES = macros/gnome.m4 macros/gnome-vfs.m4 macros/gnome-undelfs.m4 \
 	macros/linger.m4
+
 aclocal.m4: mc-aclocal.m4 $(GNOME_M4_FILES) gettext.m4
 	cd $(srcdir); cat $(GNOME_M4_FILES) mc-aclocal.m4 gettext.m4 > aclocal.m4
 
@@ -109,6 +110,8 @@ distcopy:
 	    cd $$I ; \
 	    $(MAKE) distcopy VERSION=$(VERSION) PACKAGE=mc || exit 1; \
 	    cd ..; done
+	mkdir ../mc-$(VERSION)/macros
+	cp $(GNOME_M4_FILES) ../mc-$(VERSION)/macros
 	cd po; $(MAKE) || exit 1; cd ..;
 	cp po/Makefile.in.in ../mc-$(VERSION)/po;
 	cp po/POTFILES.in ../mc-$(VERSION)/po;

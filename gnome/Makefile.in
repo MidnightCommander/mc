@@ -175,7 +175,7 @@ DISTGNOME = \
 main-corba.o: main.c
 	$(CC) -c -DHAVE_CORBA $(CPPFLAGS) $(DEFS) $(CFLAGS) $< -o main-corba.o
 
-all: @gmc@ Makefile mc.metadata mc.keys image.metadata
+all: @gmc@ Makefile mc.keys 
 
 Makefile: Makefile.in ../config.status
 	(cd ..; CONFIG_FILES=gnome/Makefile CONFIG_HEADERS= ./config.status)
@@ -190,16 +190,8 @@ mx: @LIBVFS@ $(OBJS) $(NORMALOBJS) @LIBSLANG@ libgtkedit.a
 corba-gmc: @LIBVFS@ $(OBJS) $(CORBAOBJS) @LIBSLANG@ libgtkedit.a
 	$(CC) $(CORBA_LDFLAGS) -o corba-gmc $(CORBAOBJS) $(OBJS) -L../vfs -L../slang -L../gtkedit $(EXTRALIBS) $(LIBS) 
 
-mc.metadata: mc.metadata.in Makefile
-	sed -e 's^\@icondir\@^$(icondir)^g' < $(srcdir)/mc.metadata.in > mc.metadata.tmp \
-	&& mv mc.metadata.tmp mc.metadata 
-
-image.metadata: image.metadata.in Makefile
-	sed -e 's^\@icondir\@^$(icondir)^g' < $(srcdir)/image.metadata.in > image.metadata.tmp \
-	&& mv image.metadata.tmp image.metadata 
-
 mc.keys: mc.keys.in Makefile
-	sed -e 's^\@icondir\@^$(icondir)^g' < $(srcdir)/mc.keys.in > mc.keys.tmp \
+	sed -e 's^\@icondir\@^$(icondir)^g' < mc.keys.in > mc.keys.tmp \
 	&& mv mc.keys.tmp mc.keys 
 
 mc.keys.in: mc.keys.in.in Makefile.in ../config.status
@@ -272,11 +264,7 @@ install_gmc: all
 	for I in $(ICONS); \
 	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(icondir)/$$I; done
 	$(INSTALL_DATA) $(srcdir)/layout $(DESTDIR)$(libdir)/layout
-	if [ -f $(DESTDIR)$(datadir)/metadata ]; then rm $(DESTDIR)$(datadir)/metadata; fi
-	$(mcsrcdir)/xmkdir $(DESTDIR)$(datadir)/metadata
 	$(mcsrcdir)/xmkdir $(DESTDIR)$(datadir)/mime-info
-	$(INSTALL_DATA) mc.metadata $(DESTDIR)$(datadir)/metadata
-	$(INSTALL_DATA) image.metadata $(DESTDIR)$(datadir)/metadata
 	$(INSTALL_DATA) mc.keys $(DESTDIR)$(datadir)/mime-info
 
 uninstall: 

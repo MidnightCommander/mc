@@ -4,3 +4,5 @@ Makefile
 .depend
 mc.metadata
 image.metadata
+mc.keys.in
+mc.keys
