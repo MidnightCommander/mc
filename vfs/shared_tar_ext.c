@@ -127,10 +127,7 @@ static void * s_opendir (char *dirname)
     	return NULL;
     if ((entry = my_resolve_symlinks (entry)) == NULL)
 	return NULL;
-    if (!S_ISDIR (entry->inode->mode)) {
-    	my_errno = ENOTDIR;
-    	return NULL;
-    }
+    if (!S_ISDIR (entry->inode->mode)) ERRNOR (ENOTDIR, NULL);
 
     info = (struct entry **) xmalloc (2*sizeof (struct entry *), "shared opendir");
     info[0] = entry->inode->first_in_subdir;
@@ -270,10 +267,7 @@ static int s_readlink (char *path, char *buf, int size)
     entry = find_entry (archive->root_entry, q, 0, 0);
     if (entry == NULL)
     	return -1;
-    if (!S_ISLNK (entry->inode->mode)) {
-        my_errno = EINVAL;
-        return -1;
-    }
+    if (!S_ISLNK (entry->inode->mode)) ERRNOR (EINVAL, -1);
     if (size > (i = strlen (entry->inode->linkname))) {
     	size = i;
     }

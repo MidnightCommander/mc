@@ -424,10 +424,7 @@ static char *get_path_mangle (char *inname, struct archive **archive, int is_dir
 	}
 
     result = do_not_open ? -1 : read_archive (fstype, archive_name, &parc);
-    if (result == -1) {
-	my_errno = EIO;
-	return NULL;
-    }
+    if (result == -1) ERRNOR (EIO, NULL);
 
     if (archive_name){
 	v = vfs_type (archive_name);
@@ -596,10 +593,7 @@ static void *extfs_open (char *file, int flags, int mode)
     	return NULL;
     if ((entry = my_resolve_symlinks (entry)) == NULL)
 	return NULL;
-    if (S_ISDIR (entry->inode->mode)) {
-    	my_errno = EISDIR;
-    	return NULL;
-    }
+    if (S_ISDIR (entry->inode->mode)) ERRNOR (EISDIR, NULL);
     if (entry->inode->local_filename == NULL) {
         char *cmd, *archive_name, *p;
         
@@ -628,10 +622,7 @@ static void *extfs_open (char *file, int flags, int mode)
     }
     
     local_handle = open (entry->inode->local_filename, flags, mode);
-    if (local_handle == -1) {
-        my_errno = EIO;
-        return NULL;
-    }
+    if (local_handle == -1) ERRNOR (EIO, NULL);
     
     extfs_info = (struct pseudofile *) xmalloc (sizeof (struct pseudofile), "Extfs: extfs_open");
     extfs_info->archive = archive;
@@ -714,11 +705,8 @@ static int extfs_close (void *data)
     }
 	
     free (data);
-    if (errno_code){
-	my_errno = EIO;	/* Non standard, but who cares? */
-	return -1;
-    } else
-	return 0;
+    if (errno_code) ERRNOR (EIO, -1);
+    return 0;
 }
 
 #define RECORDSIZE 512

@@ -116,6 +116,10 @@ vfs *vfs_type_from_op (char *path)
 #endif
     if (!(vfs_flags & FL_NO_FISH) && !strncmp (path, "sh:", 3))
         return &fish_vfs_ops;
+    if (!(vfs_flags & FL_NO_FISH) && !strncmp (path, "ssh:", 4))
+        return &fish_vfs_ops;
+    if (!(vfs_flags & FL_NO_FISH) && !strncmp (path, "rsh:", 4))
+        return &fish_vfs_ops;
     if (!(vfs_flags & FL_NO_TARFS) && !strcmp (path, "utar"))
         return &tarfs_vfs_ops;
     if (!(vfs_flags & FL_NO_EXTFS) && extfs_which (path) != -1)

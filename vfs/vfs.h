@@ -298,21 +298,17 @@ extern char *vfs_get_password (char *msg);
 #define MCCTL_ISREMOTECOPY	1
 #define MCCTL_REMOTECOPYCHUNK	2
 #define MCCTL_FINISHREMOTE	3
-#define MCCTL_FLUSHDIR          4
+#define MCCTL_FLUSHDIR          4	/* Unreferenced */
 #define MCCTL_REMOVELOCALCOPY   5
+#define MCCTL_IS_NOTREADY	6
 
 /* Return codes from the ${fs}_ctl routine */
 
-#define MCERR_TARGETOPEN	-1
-    /* Can't open target file */
-#define MCERR_READ		-2
-    /* Read error on source file */
-#define MCERR_WRITE		-3
-    /* Write error on target file */
-#define MCERR_FINISH		-4
-    /* Finished transfer */
-#define MCERR_DATA_ON_STDIN     -5
-    /* Data waiting on stdin to be processed */
+#define MCERR_TARGETOPEN	-1    /* Can't open target file */
+#define MCERR_READ		-2    /* Read error on source file */
+#define MCERR_WRITE		-3    /* Write error on target file */
+#define MCERR_FINISH		-4    /* Finished transfer */
+#define MCERR_DATA_ON_STDIN     -5    /* Data waiting on stdin to be processed */
 
 extern int vfs_flags;
 extern uid_t vfs_uid;
@@ -334,5 +330,21 @@ extern void mc_vfs_init( void );
 extern void mc_vfs_done( void );
 #endif
 
-#endif /* __VFS_H */
+#define ERRNOR(x,y) do { my_errno = x; return y; } while(0)
 
+#define O_ALL (O_CREAT | O_EXCL | O_NOCTTY | O_NDELAY | O_SYNC | O_WRONLY | O_RDWR | O_RDONLY)
+/* Midnight commander code should _not_ use other flags than those
+   listed above and O_APPEND */
+
+#if (O_ALL & O_APPEND)
+#warning Unexpected problem with flags, O_LINEAR disabled, contact pavel@ucw.cz
+#define O_LINEAR 0
+#define IS_LINEAR(a) 0
+#define NO_LINEAR(a) a
+#else
+#define O_LINEAR O_APPEND
+#define IS_LINEAR(a) ((a) == (O_RDONLY | O_LINEAR))
+#define NO_LINEAR(a) (((a) == (O_RDONLY | O_LINEAR)) ? O_RDONLY : (a))
+#endif
+
+#endif /* __VFS_H */

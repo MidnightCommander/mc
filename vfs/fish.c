@@ -107,6 +107,7 @@ static void free_bucket (void *data);
 static void connection_destructor(void *data);
 static void flush_all_directory(struct connection *bucket);
 static int get_line (int sock, char *buf, int buf_len, char term);
+static char *get_path (struct connection **bucket, char *path);
 
 static char *my_get_host_and_username (char *path, char **host, char **user, int *flags, char **pass)
 {
@@ -239,10 +240,7 @@ open_command_connection (char *host, char *user, int flags, char *netrcpass)
     bucket = xmalloc(sizeof(struct connection), 
 		     "struct connection");
     
-    if (bucket == NULL) {
-	my_errno = ENOMEM;
-	return NULL;
-    }
+    if (bucket == NULL) ERRNOR (ENOMEM, NULL);
 
     qhost(bucket) = strdup (host);
     quser(bucket) = strdup (user);
@@ -353,9 +351,8 @@ open_link (char *host, char *user, int flags, char *netrcpass)
     if (bucket == NULL)
 	return NULL;
     if (!linklist_insert(connections_list, bucket)) {
-	my_errno = ENOMEM;
 	connection_destructor(bucket);
-	return NULL;
+	ERRNOR (ENOMEM, NULL);
     }
     return bucket;
 }
@@ -365,8 +362,7 @@ static char *fish_get_current_directory(struct connection *bucket)
 {
     if (command(bucket, WANT_STRING, "#PWD\npwd; echo '### 200'\n") == COMPLETE)
         return copy_strings(reply_str, "/", NULL);
-    my_errno = EIO;
-    return NULL;
+    ERRNOR (EIO, NULL);
 }
 
 #define X "fish"
@@ -377,6 +373,20 @@ static char *fish_get_current_directory(struct connection *bucket)
 #define X_flushdir fish_flushdir
 #define X_done fish_done
 #include "shared_ftp_fish.c"
+
+static char*
+get_path (struct connection **bucket, char *path)
+{
+    char *res;
+    if (res = s_get_path (bucket, path, "/#sh:"))
+        return res;
+    if (res = s_get_path (bucket, path, "/#ssh:"))
+        return res;
+    if (res = s_get_path (bucket, path, "/#rsh:")) {
+        qflags((*bucket)) |= FISH_FLAG_RSH;
+        return res;
+    }
+}
 
 /*
  * This is the 'new' code
@@ -612,10 +622,8 @@ store_file(struct direntry *fe)
     }
     disable_interrupt_key();
     close(local_handle);
-    if (get_reply (qsockr(fe->bucket), NULL, 0) != COMPLETE) {
-	my_errno = EIO;
-	return 0;
-    }
+    if (get_reply (qsockr(fe->bucket), NULL, 0) != COMPLETE)
+        ERRNOR (EIO, 0);
     return (!was_error);
 error_return:
     disable_interrupt_key();
@@ -650,17 +658,12 @@ fish_abort (struct connection *bucket)
 
 static int retrieve_file_start(struct direntry *fe)
 {
-    if (fe->local_filename == NULL) {
-	my_errno = ENOMEM;
-	return 0;
-    }
+    if (fe->local_filename == NULL)
+	ERRNOR (ENOMEM, 0);
     if (command(fe->bucket, WANT_STRING, 
 		"#RETR %s\nls -l %s | ( read var1 var2 var3 var4 var5 var6; echo $var5 ); echo '### 100'; cat %s; echo '### 200'\n", 
 		fe->remote_filename, fe->remote_filename, fe->remote_filename )
-	!= PRELIM) {
-        my_errno = EPERM;
-        return 0;
-    }
+	!= PRELIM) ERRNOR (EPERM, 0);
 
     remotestat_size = atoi(reply_str);
 
@@ -675,12 +678,11 @@ static int retrieve_file_start2(struct direntry *fe)
     remotelocal_handle = open(fe->local_filename, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, 0600);
     if (remotelocal_handle == -1) {
         fish_abort(remoteent->bucket);
-        my_errno = EIO;
 	free(remotebuffer);
         free(fe->local_filename);
         fe->local_filename = NULL;
         fe->local_is_temp = 1;
-        return 0;
+	ERRNOR (EIO, 0);
     }
 
     return 1;
@@ -756,7 +758,6 @@ int fish_ctl (void *data, int ctlop, int arg)
 	    transfer_started = 0;
 	    fish_abort (remoteent->bucket);
 	    my_errno = EINTR;
-	    return 0;
     }
     return 0;
 }
@@ -825,10 +826,7 @@ send_fish_command(struct connection *bucket, char *cmd, int flags)
 
     r = command (bucket, WAIT_REPLY, cmd);
     vfs_add_noncurrent_stamps (&fish_vfs_ops, (vfsid) bucket, NULL);
-    if (r != COMPLETE) {
-	my_errno = EPERM;
-	return -1;
-    }
+    if (r != COMPLETE) ERRNOR (EPERM, -1);
     if (flush_directory_cache)
 	flush_all_directory(bucket);
     return 0;
@@ -879,7 +877,7 @@ int fish_##name (char *path1, char *path2) \
     return send_fish_command(bucket2, buf, OPT_FLUSH); \
 }
 
-#define XTEST if (bucket1 != bucket2) { free(remote_path1); free(remote_path2); my_errno = EXDEV; return -1; }
+#define XTEST if (bucket1 != bucket2) { free(remote_path1); free(remote_path2); ERRNOR (EXDEV, -1); }
 FISH_OP(rename, XTEST, "#RENAME %s %s\nmv %s %s; echo '*** 000'" );
 FISH_OP(link,   XTEST, "#LINK %s %s\nln %s %s; echo '*** 000'" );
 FISH_OP(symlink,     , "#SYMLINK %s %s\nln -s %s %s; echo '*** 000'" );

@@ -1,3 +1,10 @@
+Wed Sep 18 12:51:51 1998  Pavel Machek <pavel@ucw.cz>
+	
+	* fish.c, vfs.c: created aliases /#ssh: and /#rsh:
+
+	* vfs.h: created ERRNOR() macro which sets my_errno and returns,
+ 	which makes vfs's _much_ more readable
+
 Fri Sep 18 10:37:28 1998  Pavel Roskin <pavel_roskin@geocities.com)
 
 	* extfs.c: free() was called twice for the some place in memory

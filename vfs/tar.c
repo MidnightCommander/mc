@@ -811,10 +811,7 @@ static char *get_path_mangle (char *inname, struct archive **archive, int is_dir
         result = -1;
     else
         result = read_tar_archive (archive_name, &parc);
-    if (result == -1) {
-	my_errno = EIO;
-	return NULL;
-    }
+    if (result == -1) ERRNOR (EIO, NULL);
     v = vfs_type (archive_name);
     if (v == &local_vfs_ops) {
 	parent = NULL;
@@ -908,14 +905,8 @@ static void *tar_open (char *file, int flags, int mode)
     	return NULL;
     if ((entry = my_resolve_symlinks (entry)) == NULL)
 	return NULL;
-    if (S_ISDIR (entry->inode->mode)) {
-    	my_errno = EISDIR;
-    	return NULL;
-    }
-    if ((flags & O_ACCMODE) != O_RDONLY) {
-    	my_errno = EROFS; /* At the moment we are RO */
-    	return NULL;
-    }
+    if (S_ISDIR (entry->inode->mode)) ERRNOR (EISDIR, NULL);
+    if ((flags & O_ACCMODE) != O_RDONLY) ERRNOR (EROFS, NULL);
     
     tar_info = (struct pseudofile *) xmalloc (sizeof (struct pseudofile), "Tar: tar_open");
     tar_info->archive = archive;
@@ -937,10 +928,8 @@ static int tar_read (void *data, char *buffer, int count)
 
     if (file->archive->is_gzipped != targz_growing && 
         mc_lseek (file->archive->fd, file->begin + file->pos, SEEK_SET) != 
-        file->begin + file->pos) {
-    	my_errno = EIO;
-    	return -1;
-    }
+        file->begin + file->pos) ERRNOR (EIO, -1);
+
     
     if (count > file->end - file->begin - file->pos)
     	count = file->end - file->begin - file->pos;
@@ -971,10 +960,7 @@ static int tar_read (void *data, char *buffer, int count)
             cnt -= j;
         }
     }
-    else if ((count = mc_read (file->archive->fd, buffer, count)) == -1) {
-    	my_errno = errno;
-    	return -1;
-    }
+    else if ((count = mc_read (file->archive->fd, buffer, count)) == -1) ERRNOR (errno, -1);
     file->pos += count;
     return count;
 }

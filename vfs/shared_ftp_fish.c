@@ -192,21 +192,23 @@ void X_fill_names (void (*func)(char *))
 /* get_path:
  * makes BUCKET point to the connection bucket descriptor for PATH
  * returns a malloced string with the pathname relative to BUCKET.
+ *
+ * path must _not_ contain initial /bla/#ftp:
  */
 static char*
-get_path (struct connection **bucket, char *path)
+s_get_path (struct connection **bucket, char *path, char *name)
 {
     char *user, *host, *remote_path, *pass;
     int port;
 
 #ifndef BROKEN_PATHS
-    if (strncmp (path, X_myname, strlen (X_myname)))
+    if (strncmp (path, name, strlen (name)))
         return NULL; 	/* Normal: consider cd /bla/#ftp */ 
 #else
-    if (!(path = strstr (path, X_myname)))
+    if (!(path = strstr (path, name)))
         return NULL;
 #endif    
-    path += strlen (X_myname);
+    path += strlen (name);
 
     if (!(remote_path = my_get_host_and_username (path, &host, &user, &port, &pass)))
         my_errno = ENOENT;
@@ -296,14 +298,8 @@ _get_file_entry(struct connection *bucket, char *file_name,
 	ent = lptr->data;
         if (strcmp(p, ent->name) == 0) {
 	    if (S_ISLNK(ent->s.st_mode) && (op & DO_RESOLVE_SYMLINK)) {
-		if (ent->l_stat == NULL) {
-		    my_errno = ENOENT;
-		    return NULL;
-		}
-		if (S_ISLNK(ent->l_stat->st_mode)) {
-		    my_errno = ELOOP;
-		    return NULL;
-		}
+		if (ent->l_stat == NULL) ERRNOR (ENOENT, NULL);
+		if (S_ISLNK(ent->l_stat->st_mode)) ERRNOR (ELOOP, NULL);
 	    }
 	    if (ent && (op & DO_OPEN)) {
 		mode_t fmode;
@@ -311,24 +307,12 @@ _get_file_entry(struct connection *bucket, char *file_name,
 		fmode = S_ISLNK(ent->s.st_mode)
 		    ? ent->l_stat->st_mode
 		    : ent->s.st_mode;
-		if (S_ISDIR(fmode)) {
-		    my_errno = EISDIR;
-		    return NULL;
-		}
-		if (!S_ISREG(fmode)) {
-		    my_errno = EPERM;
-		    return NULL;
-		}
-		if ((flags & O_EXCL) && (flags & O_CREAT)) {
-		    my_errno = EEXIST;
-		    return NULL;
-		}
+		if (S_ISDIR(fmode)) ERRNOR (EISDIR, NULL);
+		if (!S_ISREG(fmode)) ERRNOR (EPERM, NULL);
+		if ((flags & O_EXCL) && (flags & O_CREAT)) ERRNOR (EEXIST, NULL);
 		if (ent->remote_filename == NULL) {
 		    ent->remote_filename = strdup(file_name);
-		    if (ent->remote_filename == NULL) {
-			my_errno = ENOMEM;
-			return NULL;
-		    }
+		    if (ent->remote_filename == NULL) ERRNOR (ENOMEM, NULL);
 		}
 		if (ent->local_filename == NULL || 
 		    !ent->local_stat.st_mtime || 
@@ -342,15 +326,9 @@ _get_file_entry(struct connection *bucket, char *file_name,
 		    }
 		    if (flags & O_TRUNC) {
 			ent->local_filename = tempnam (NULL, X "fs");
-			if (ent->local_filename == NULL) {
-			    my_errno = ENOMEM;
-			    return NULL;
-			}
+			if (ent->local_filename == NULL) ERRNOR (ENOMEM, NULL);
 			handle = open(ent->local_filename, O_CREAT | O_TRUNC | O_RDWR | O_EXCL, 0600);
-			if (handle < 0) {
-			    my_errno = EIO;
-			    return NULL;
-			}
+			if (handle < 0) ERRNOR (EIO, NULL);
 			close(handle);
 			if (stat (ent->local_filename, &ent->local_stat) < 0)
 			    ent->local_stat.st_mtime = 0;
@@ -384,10 +362,7 @@ _get_file_entry(struct connection *bucket, char *file_name,
 	ent = xmalloc(sizeof(struct direntry), "struct direntry");
 	ent->freshly_created = 0;
 	ent->tmp_reget = 0;
-	if (ent == NULL) {
-	    my_errno = ENOMEM;
-	    return NULL;
-	}
+	if (ent == NULL) ERRNOR (ENOMEM, NULL);
 	ent->count = 1;
 	ent->linkname = NULL;
 	ent->l_stat = NULL;
@@ -397,14 +372,12 @@ _get_file_entry(struct connection *bucket, char *file_name,
 	ent->local_filename = tempnam (NULL, X "fs");
 	if (!ent->name && !ent->remote_filename && !ent->local_filename) {
 	    direntry_destructor(ent);
-	    my_errno = ENOMEM;
-	    return NULL;
+	    ERRNOR (ENOMEM, NULL);
 	}
         handle = creat(ent->local_filename, 0700);
 	if (handle == -1) {
 	    my_errno = EIO;
-	    direntry_destructor(ent);
-	    return NULL;
+	    goto error;
 	}
 	fstat(handle, &ent->s);
 	close(handle);
@@ -412,24 +385,20 @@ _get_file_entry(struct connection *bucket, char *file_name,
 /* This is very wrong - like this a zero length file will be always created
    and usually preclude uploading anything more desirable */	
 #if defined(UPLOAD_ZERO_LENGTH_FILE)
-	if (!store_file(ent)) {
-	    direntry_destructor(ent);
-	    return NULL;
-	}
+	if (!store_file(ent)) goto error;
 #endif
 #endif
 	if (!linklist_insert(file_list, ent)) {
 	    my_errno = ENOMEM;
-	    direntry_destructor(ent);
-	    return NULL;
+	    goto error;
 	}
 	ent->freshly_created = 1;
 	return ent;
     }
-    else {
-	my_errno = ENOENT;
-	return NULL;
-    }
+    else ERRNOR (ENOENT, NULL);
+error:
+    direntry_destructor(ent);
+    return NULL;
 }
 
 
@@ -519,10 +488,7 @@ static void *s_open (char *file, int flags, int mode)
     struct direntry *fe;
 
     fp = xmalloc(sizeof(struct filp), "struct filp");
-    if (fp == NULL) {
-	my_errno = ENOMEM;
-        return NULL;
-    }
+    if (fp == NULL) ERRNOR (ENOMEM, NULL);
     fe = get_file_entry(file, DO_OPEN | DO_RESOLVE_SYMLINK, flags);
     if (fe == NULL) {
 	free(fp);
@@ -739,18 +705,9 @@ static int s_readlink (char *path, char *buf, int size)
     fe = get_file_entry(path, DO_FREE_RESOURCE, 0);
     if (!fe)
 	return -1;
-    if (!S_ISLNK(fe->s.st_mode)) {
-	my_errno = EINVAL;
-	return -1;
-    }
-    if (fe->linkname == NULL) {
-	my_errno = EACCES;
-	return -1;
-    }
-    if (strlen(fe->linkname) >= size) {
-	my_errno = ERANGE;
-	return -1;
-    }
+    if (!S_ISLNK(fe->s.st_mode)) ERRNOR (EINVAL, -1);
+    if (fe->linkname == NULL) ERRNOR (EACCES, -1);
+    if (strlen(fe->linkname) >= size) ERRNOR (ERANGE, -1);
     strncpy(buf, fe->linkname, size);
     return strlen(fe->linkname);
 }

@@ -149,6 +149,7 @@ static void free_bucket (void *data);
 static void connection_destructor(void *data);
 static void flush_all_directory(struct connection *bucket);
 static int get_line (int sock, char *buf, int buf_len, char term);
+static char *get_path (struct connection **bucket, char *path);
 
 /* Extract the hostname and username from the path */
 /* path is in the form: [user@]hostname:port/remote-dir, e.g.:
@@ -276,10 +277,7 @@ static int
 changetype (struct connection *bucket, int binary)
 {
     if (binary != bucket->isbinary) {
-        if (command (bucket, WAIT_REPLY, "TYPE %c", binary ? 'I' : 'A') != COMPLETE) {
-	    my_errno = EIO;
-            return -1;
-	}
+        if (command (bucket, WAIT_REPLY, "TYPE %c", binary ? 'I' : 'A') != COMPLETE) ERRNOR (EIO, -1);
         bucket->isbinary = binary;
     }
     return binary;
@@ -313,10 +311,7 @@ login_server (struct connection *bucket, char *netrcpass)
 				  " ", NULL);
 		op = vfs_get_password (p);
 		free (p);
-		if (op == NULL) {
-		    my_errno = EPERM;
-		    return 0;
-		}
+		if (op == NULL) ERRNOR (EPERM, 0);
 		bucket->password = strdup (op);
 	    } else
 		op = strdup (bucket->password);
@@ -348,10 +343,9 @@ login_server (struct connection *bucket, char *netrcpass)
 	proxypass = vfs_get_password (p);
 	free(p);
 	if (proxypass == NULL) {
-	    my_errno = EPERM;
 	    wipe_password (pass);
 	    free (proxyname);
-	    return 0;
+	    ERRNOR (EPERM, 0);
 	}
 	name = strdup(quser (bucket));
 #else
@@ -681,10 +675,7 @@ open_command_connection (char *host, char *user, int port, char *netrcpass)
     bucket = xmalloc(sizeof(struct connection), 
 		     "struct connection");
     
-    if (bucket == NULL) {
-	my_errno = ENOMEM;
-	return NULL;
-    }
+    if (bucket == NULL) ERRNOR (ENOMEM, NULL);
 #ifdef HAVE_MAD
     {
 	extern void *watch_free_pointer;
@@ -864,10 +855,7 @@ static char *ftpfs_get_current_directory(struct connection *bucket)
 		            *bufq = 0;
 		        }
 		        return strdup (bufp);
-		    } else {
-		        my_errno = EIO;
-		        return NULL;
-		    }
+		    } else ERRNOR (EIO, NULL);
 		}
 	    }
     }
@@ -922,15 +910,9 @@ initconn (struct connection *bucket)
     data_addr.sin_port = 0;
     
     pe = getprotobyname("tcp");
-    if (pe == NULL) {
-	my_errno = EIO;
-	return -1;
-    }
+    if (pe == NULL) ERRNOR (EIO, -1);
     data = socket (AF_INET, SOCK_STREAM, pe->p_proto);
-    if (data < 0) {
-	my_errno = EIO;
-        return -1;
-    }
+    if (data < 0) ERRNOR (EIO, -1);
 
 #ifdef ORIGINAL_CONNECT_CODE
     if (bucket->use_source_route){
@@ -994,10 +976,7 @@ open_data_connection (struct connection *bucket, char *cmd, char *remote,
         j = command (bucket, WAIT_REPLY, "%s %s", cmd, remote);
     else
     	j = command (bucket, WAIT_REPLY, "%s", cmd);
-    if (j != PRELIM) {
-	my_errno = EPERM;
-        return -1;
-    }
+    if (j != PRELIM) ERRNOR (EPERM, -1);
     enable_interrupt_key();
     if (bucket->use_passive_connection)
 	data = s;
@@ -1112,6 +1091,13 @@ resolve_symlink(struct connection *bucket, struct dir *dir)
 #define X_done ftpfs_done
 #include "shared_ftp_fish.c"
 
+static char*
+get_path (struct connection **bucket, char *path)
+{
+    return s_get_path (bucket, path, "/#ftp:");
+}
+
+
 static struct dir *
 retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
 {
@@ -1162,11 +1148,7 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
         }
 
     file_list = linklist_init();
-    if (file_list == NULL) {
-	my_errno = ENOMEM;
-	print_vfs_message("ftpfs: couldn't get a file listing");
-        return NULL;
-    }
+    if (file_list == NULL) ERRNOR (ENOMEM, NULL);
     dcache = xmalloc(sizeof(struct dir), 
 		     "struct dir");
     if (dcache == NULL) {
@@ -1326,10 +1308,7 @@ store_file(struct direntry *fe)
 
     local_handle = open(fe->local_filename, O_RDONLY);
     unlink (fe->local_filename);
-    if (local_handle == -1) {
-	my_errno = EIO;
-	return 0;
-    }
+    if (local_handle == -1) ERRNOR (EIO, 0);
     fstat(local_handle, &s);
     sock = open_data_connection(fe->bucket, "STOR", fe->remote_filename, TYPE_BINARY);
     if (sock < 0) {
@@ -1380,10 +1359,7 @@ store_file(struct direntry *fe)
     disable_interrupt_key();
     close(sock);
     close(local_handle);
-    if (get_reply (qsock (fe->bucket), NULL, 0) != COMPLETE) {
-	my_errno = EIO;
-	return 0;
-    }
+    if (get_reply (qsock (fe->bucket), NULL, 0) != COMPLETE) ERRNOR (EIO, 0);
     return 1;
 error_return:
     disable_interrupt_key();
@@ -1398,10 +1374,7 @@ static int remotelocal_handle, remotesock, remoten, remotestat_size;
 
 static int retrieve_file_start(struct direntry *fe)
 {
-    if (fe->local_filename == NULL) {
-	my_errno = ENOMEM;
-	return 0;
-    }
+    if (fe->local_filename == NULL) ERRNOR (ENOMEM, 0);
     remotesock = open_data_connection(fe->bucket, "RETR", fe->remote_filename, TYPE_BINARY);
     if (remotesock == -1) {
 	my_errno = EACCES;
@@ -1515,10 +1488,7 @@ static int retrieve_file(struct direntry *fe)
     fe->local_stat.st_mtime = 0;
     fe->local_filename = tempnam (NULL, "ftpfs");
     fe->local_is_temp = 1;
-    if (fe->local_filename == NULL) {
-	my_errno = ENOMEM;
-	return 0;
-    }
+    if (fe->local_filename == NULL) ERRNOR (ENOMEM, 0);
     local_handle = open(fe->local_filename, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, 0600);
     if (local_handle == -1) {
 	my_errno = EIO;
@@ -1622,10 +1592,7 @@ send_ftp_command(char *filename, char *cmd, int flags)
     vfs_add_noncurrent_stamps (&ftpfs_vfs_ops, (vfsid) bucket, NULL);
     if (flags & OPT_IGNORE_ERROR)
 	r = COMPLETE;
-    if (r != COMPLETE) {
-	my_errno = EPERM;
-	return -1;
-    }
+    if (r != COMPLETE) ERRNOR (EPERM, -1);
     if (flush_directory_cache)
 	flush_all_directory(bucket);
     return 0;
