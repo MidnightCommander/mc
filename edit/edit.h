@@ -37,8 +37,6 @@
 #include <sys/stat.h>
 #include <errno.h>
 
-#include <fcntl.h>
-
 #include <stdlib.h>
 #if !defined(STDC_HEADERS) && defined(HAVE_MALLOC_H)
 #    include <malloc.h>

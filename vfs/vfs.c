@@ -40,7 +40,6 @@
 #include <string.h>
 #include <errno.h>
 #include <sys/types.h>
-#include <fcntl.h>
 #include <signal.h>
 
 #include "utilvfs.h"

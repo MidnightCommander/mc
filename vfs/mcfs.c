@@ -33,7 +33,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdarg.h>
-#include <fcntl.h>
 #include <pwd.h>
 #include <sys/types.h>		/* POSIX-required by sys/socket.h and netdb.h */
 #include <netdb.h>		/* struct hostent */

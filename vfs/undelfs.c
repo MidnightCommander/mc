@@ -39,7 +39,6 @@
 #include <errno.h>
 
 #include <stdio.h>
-#include <fcntl.h>
 #include <stdlib.h>
 /* asm/types.h defines its own umode_t :-( */
 #undef umode_t

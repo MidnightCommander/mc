@@ -25,7 +25,6 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <io.h>
-#include <fcntl.h>
 #include <signal.h>		/* my_system */
 #include <limits.h>		/* INT_MAX */
 #include <errno.h>
