@@ -12,7 +12,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.5.55\n"
+"Project-Id-Version: mc 4.5.99a\n"
 "POT-Creation-Date: 2002-01-20 15:06-0500\n"
 "PO-Revision-Date: 2000-08-21 12:24+00:00\n"
 "Last-Translator: Andrew V. Samoilov <kai@cmail.ru>\n"
@@ -4649,8 +4649,8 @@ msgstr "ftpfs: ошибка; некуда перейти на аварийный режим"
 
 #: vfs/ftpfs.c:1382
 #, c-format
-msgid "ftpfs: storing file %d (%lu)"
-msgstr "ftpfs: запись файла %d (%lu)"
+msgid "ftpfs: storing file %lu (%lu)"
+msgstr "ftpfs: запись файла %lu (%lu)"
 
 #: vfs/ftpfs.c:1814
 msgid ""
@@ -4924,10 +4924,10 @@ msgstr "Внутренняя ошибка:"
 
 #: vfs/vfs.c:1848
 #, c-format
-msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
-msgstr "%s: %s: %s %3d%% (%ld байт перенесено)"
+msgid "%s: %s: %s %3d%% (%lu bytes transfered)"
+msgstr "%s: %s: %s %3d%% (%lu байт перенесено)"
 
 #: vfs/vfs.c:1849
 #, c-format
-msgid "%s: %s: %s %ld bytes transfered"
-msgstr "%s: %s: %s %ld байт перенесено"
+msgid "%s: %s: %s %lu bytes transfered"
+msgstr "%s: %s: %s %lu байт перенесено"

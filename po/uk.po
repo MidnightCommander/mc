@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.5.51\n"
+"Project-Id-Version: mc 4.5.99a\n"
 "POT-Creation-Date: 2001-08-24 04:10-0400\n"
 "PO-Revision-Date: 2000-11-08 15:38+0200\n"
 "Last-Translator: Yuri Syrota <rasta@renome.rovno.ua>\n"
@@ -1401,9 +1401,8 @@ msgid "You entered an invalid username"
 msgstr "Ви ввели нев╕рне ╕м'я користувача"
 
 #: gnome/gnome-file-property-dialog.c:1187
-#, fuzzy
 msgid "You entered an invalid group name"
-msgstr "Ви ввели нев╕рне ╕м'я користувача"
+msgstr "Ви ввели нев╕рне ╕м'я групи"
 
 #: gnome/gnome-file-property-dialog.c:1210
 msgid "You must rename your file to something"
@@ -6607,8 +6606,8 @@ msgstr "ftpfs: помилка; нема╓ куди перейти в авар╕йний режим"
 
 #: vfs/ftpfs.c:1380
 #, c-format
-msgid "ftpfs: storing file %d (%d)"
-msgstr "ftpfs: збереження файлу %d (%d)"
+msgid "ftpfs: storing file %lu (%lu)"
+msgstr "ftpfs: збереження файлу %lu (%lu)"
 
 #: vfs/ftpfs.c:1812
 msgid ""
@@ -6677,7 +6676,8 @@ msgstr " Надто багато в╕дкритих з'╓днань "
 msgid ""
 "Warning: Invalid line in sfs.ini:\n"
 "%s\n"
-msgstr ""
+msgstr "Попередження: нев╕рний рядок в sfs.ini:\n"
+"%s\n"
 
 #: vfs/sfs.c:340
 #, c-format
@@ -6715,9 +6715,9 @@ msgid " %s opening remote file %s "
 msgstr " %s в╕дкриття в╕ддаленого файлу %s "
 
 #: vfs/smbfs.c:1805
-#, fuzzy, c-format
+#, c-format
 msgid " %s removing remote file %s "
-msgstr " %s в╕дкриття в╕ддаленого файлу %s "
+msgstr " %s в╕далення в╕ддаленого файлу %s "
 
 #: vfs/smbfs.c:1843
 #, c-format
@@ -6875,13 +6875,13 @@ msgstr "Внутр╕шня помилка:"
 
 #: vfs/vfs.c:1805
 #, c-format
-msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
-msgstr "%s: %s: %s %3d%% (%ld байт перенесено)"
+msgid "%s: %s: %s %3d%% (%lu bytes transfered)"
+msgstr "%s: %s: %s %3d%% (%lu байт перенесено)"
 
 #: vfs/vfs.c:1806
 #, c-format
-msgid "%s: %s: %s %ld bytes transfered"
-msgstr "%s: %s: %s %ld байт перенесено"
+msgid "%s: %s: %s %lu bytes transfered"
+msgstr "%s: %s: %s %lu байт перенесено"
 
 #~ msgid " There is no other panel to compare contents to "
 #~ msgstr " Нема╓ ╕ншо╖ панел╕ для пор╕вняння вм╕сту "

@@ -1,3 +1,8 @@
+2002-02-08  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* ru.po: Adjust changes in vfs/ftpfs.c and vfs/vfs.c.
+	* uk.po: Likewise. Some messages fixed/translated.
+
 2002-02-06  Christian Meyer  <chrisime@gnome.org>
 
 	* de.po: Updated German translation.
