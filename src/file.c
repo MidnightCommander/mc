@@ -1630,6 +1630,7 @@ int
 move_dir_dir (char *s, char *d)
 {
     struct stat sbuf, dbuf, destbuf;
+    struct link *lp;
     char *destdir;
     int return_status;
     int move_over = 0;
@@ -1700,7 +1701,6 @@ oktoret:
 
     mc_refresh ();
     if (erase_at_end) {
-        struct link *lp;
 	for ( ; erase_list && return_status != FILE_ABORT; ) {
     	    if (S_ISDIR (erase_list->st_mode)) {
 		return_status = erase_dir_iff_empty (erase_list->name);
@@ -1710,16 +1710,16 @@ oktoret:
 	    erase_list = erase_list->next;
 	    free (lp);
 	}
-	for ( ; erase_list; ) {
-	    lp = erase_list;
-	    erase_list = erase_list->next;
-	    free (lp);
-	}
     }
     erase_dir_iff_empty (s);
 
  ret:
     free (destdir);
+    for ( ; erase_list; ) {
+       lp = erase_list;
+       erase_list = erase_list->next;
+       free (lp);
+    }
     return return_status;
 }
 

@@ -1,3 +1,10 @@
+1998-09-14  Norbert Warmuth  <k3190@fh-sw.de>
+
+        * file.c (move_dir_dir): Fixed severe bug reported by Andrew Pechenov
+        <zx80@demo.ru> (losing files when moving directories cross filesystem
+        boundaries): make sure erase_list is emptied always not only when we
+        deleted files.
+
 Sat Sep 12 02:59:43 1998  Timur Bakeyev <mc@bat.ru>
 	
 	* screen.c: Xtry_to_select() Remove extfs hack to the main.c. Change 
