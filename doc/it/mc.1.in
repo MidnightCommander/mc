@@ -373,7 +373,7 @@ Cambia il pannello corrente. L'altro pannello diventa il nuovo pannello
 corrente mentre il pannello corrente diventa l'altro pannello.
 La barra di selezione si sposta dal vecchio pannello al nuovo corrente.
 .PP
-.B Insert, C-t.
+.B Ins, C-t.
 Per marcare i file si può usare il tasto di Inserimento (la sequenza
 teminfo kich1) o la sequenza C-t (Control-t). Per smarcare i file
 basta marcare un file già marcato.
@@ -430,7 +430,7 @@ del tasto più.
 .B freccia-su, C-p.
 Sposta la barra di selezione alla voce precedente nel pannello.
 .PP
-.B freccia-giùy, C-n.
+.B freccia-giù, C-n.
 Sposta barra di selezione alla voce successiva nel pannello.
 .PP
 .B home, a1, M-<.
@@ -446,27 +446,27 @@ Sposta la barra di selezione di una pagina in basso.
 Sposta la barra di selezione di una pagina in alto.
 .PP
 .B M-o,
-If the other panel is a listing panel and you are standing on a
-directory in the current panel, then the other panel contents are set
-to the contents of the currently selected directory (like Emacs' dired
-C-o key) otherwise the other panel contents are set to the parent dir
-of the current dir.
+Se l'altro pannello è un elenco e si è su una directory nel
+pannello corrente, allora il contenuto dell'altro pannello viene
+impostato al contenuto della directory correntemente selezionata
+(come con il tasto C-o dired in Emacs) altrimenti il contenuto 
+dell'altro pannello viene impostato sulla directory madre della 
+dir corrente.
 .PP
-.B C-PageUp, C-PageDown
-Only when ran on the Linux console: does a chdir to ".." and to the
-currently selected directory respectively.
+.B C-PaginaSu, C-PaginaGiù
+Solo quando si esegue in console Linux: rispettivamente cambia 
+directory a ".." e alla directory correntemente selezionata.
 .PP
 .B M-y
-Moves to the previous directory in the history, equivalent 
-to depressing the '<' with the mouse.
+Sposta la directory precedente nello storico, equivalente a 
+premere '<' con il mouse.
 .PP
 .B M-u
-Moves to the next directory in the history, equivalent 
-to depressing the '>' with the mouse.
+Sposta la directory successiva nello storico, equivalente a 
+premere '>' con il mouse.
 .PP
 .B M-S-h, M-H
-Displays the directory history, equivalent to depressing the 'v' with
-the mouse.
+Mostra lo storico directory, equivalente a premere 'v' con il mouse.
 .PP
 .\"NODE "  Shell a Riga di Comando"
 .SH "  Shell a riga di comando"
