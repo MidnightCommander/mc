@@ -54,6 +54,10 @@
 #include "selcodepage.h"
 #endif
 
+#ifdef WITH_SMBFS
+#include "../vfs/vfs.h"		/* smb_authinfo */
+#endif /* WITH_SMBFS */
+
 static int DISPLAY_X = 45, DISPLAY_Y = 14;
 
 static Dlg_head *dd;
@@ -1038,4 +1042,113 @@ jobs_cmd (void)
     
     destroy_dlg (jobs_dlg);
 }
-#endif
+#endif /* WITH_BACKGROUND */
+
+#ifdef WITH_SMBFS
+struct smb_authinfo *
+vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
+		      const char *user)
+{
+    static int dialog_x = 44;
+    int dialog_y = 12;
+    struct smb_authinfo *return_value;
+    static char* labs[] = {N_("Domain:"), N_("Username:"), N_("Password: ")};
+    static char* buts[] = {N_("&Ok"), N_("&Cancel")};
+    static int ilen = 30, istart = 14;
+    static int b0 = 3, b2 = 30;
+    char *title;
+    WInput *in_password;
+    WInput *in_user;
+    WInput *in_domain;
+    Dlg_head *auth_dlg;
+
+#ifdef ENABLE_NLS
+    static int i18n_flag = 0;
+    
+    if (!i18n_flag)
+    {
+        register int i = sizeof(labs)/sizeof(labs[0]);
+        int l1, maxlen = 0;
+        
+        while (i--)
+        {
+            l1 = strlen (labs [i] = _(labs [i]));
+            if (l1 > maxlen)
+                maxlen = l1;
+        }
+        i = maxlen + ilen + 7;
+        if (i > dialog_x)
+            dialog_x = i;
+        
+        for (i = sizeof(buts)/sizeof(buts[0]), l1 = 0; i--; )
+        {
+            l1 += strlen (buts [i] = _(buts [i]));
+        }
+        l1 += 15;
+        if (l1 > dialog_x)
+            dialog_x = l1;
+
+        ilen = dialog_x - 7 - maxlen; /* for the case of very long buttons :) */
+        istart = dialog_x - 3 - ilen;
+        
+        b2 = dialog_x - (strlen(buts[1]) + 6);
+        
+        i18n_flag = 1;
+    }
+    
+#endif /* ENABLE_NLS */
+
+    if (!domain)
+    domain = "";
+    if (!user)
+    user = "";
+
+    auth_dlg = create_dlg (0, 0, dialog_y, dialog_x, dialog_colors,
+                       common_dialog_callback, "[Smb Authinfo]", "smbauthinfo",
+                       DLG_CENTER | DLG_GRID);
+
+    title = g_strdup_printf (_("Password for \\\\%s\\%s"), host, share);
+    x_set_dialog_title (auth_dlg, title);
+    g_free (title);
+
+    in_user  = input_new (5, istart, INPUT_COLOR, ilen, user, "auth_name");
+    add_widget (auth_dlg, in_user);
+
+    in_domain = input_new (3, istart, INPUT_COLOR, ilen, domain, "auth_domain");
+    add_widget (auth_dlg, in_domain);
+    add_widget (auth_dlg, button_new (9, b2, B_CANCEL, NORMAL_BUTTON,
+                 buts[1], 0 ,0, "cancel"));
+    add_widget (auth_dlg, button_new (9, b0, B_ENTER, DEFPUSH_BUTTON,
+                 buts[0], 0, 0, "ok"));
+
+    in_password  = input_new (7, istart, INPUT_COLOR, ilen, "", "auth_password");
+    in_password->completion_flags = 0;
+    in_password->is_password = 1;
+    add_widget (auth_dlg, in_password);
+
+    add_widget (auth_dlg, label_new (7, 3, labs[2], "label-passwd"));
+    add_widget (auth_dlg, label_new (5, 3, labs[1], "label-user"));
+    add_widget (auth_dlg, label_new (3, 3, labs[0], "label-domain"));
+
+    run_dlg (auth_dlg);
+
+    switch (auth_dlg->ret_value) {
+    case B_CANCEL:
+        return_value = 0;
+        break;
+    default:
+        return_value = g_new (struct smb_authinfo, 1);
+        if (return_value) {
+            return_value->host = g_strdup (host);
+            return_value->share = g_strdup (share);
+            return_value->domain = g_strdup (in_domain->buffer);
+            return_value->user = g_strdup (in_user->buffer);
+            return_value->password = g_strdup (in_password->buffer);
+        }
+    }
+
+    destroy_dlg (auth_dlg);
+             
+    return return_value;
+}
+#endif /* WITH_SMBFS */

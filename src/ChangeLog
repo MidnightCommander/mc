@@ -1,5 +1,8 @@
 2001-07-15  Pavel Roskin  <proski@gnu.org>
 
+	* src/boxes.c [WITH_SMBFS] (vfs_smb_get_authinfo): Copied from
+	vfs/smbfs.c, function authinfo_get_authinfo_from_user().
+
 	* cmd.c [HAVE_X]: Disable source routing dialog and panel
 	comparison.
 	* main.c (ctl_x_map): Simplify preprocessor directives.
