@@ -1497,12 +1497,19 @@ This option gives you control over the settings of the
 
 The Midnight Commander keeps in memory the information
 related to some of the virtual file systems to speed up
-the access to the files in the file system. Since the
-information that must be kept may be large (for example,
-compressed tar files may be kept in RAM for faster
-access), you may want to tune the parameters of the cached
-information to decrease your memory usage or to maximize
-the speed of access to frequently used file systems.
+the access to the files in the file system (for example,
+directory listings fetched from ftp servers).
+
+Moreover in order to access the contents of compressed
+files (for eaxample, compressed tar files) the Midnight
+Commander has to create a temporary uncompressed file on
+your disk.
+
+Since both the information in memory and the temporary
+files on disk take up resources, you may want to tune the
+parameters of the cached information to decrease your
+resource usage or to maximize the speed of access to
+frequently used file systems.
 
 The Tar file system is quite clever about how it handles
 tar files: it just loads the directory entries and when it
@@ -1513,34 +1520,30 @@ In the wild, tar files are usually kept compressed (plain
 tar files are species in extinction), and because of the
 nature of those files (the directory entries for the tar
 files is not there waiting for us to be loaded), the tar
-file system has two choices: load the complete,
-uncompressed tar file into memory or uncompress the file
-in the disk in a temporary location and then access the
-uncompressed file as a regular tar file.
-
-In this dialog box you tell the Midnight Commander which
-sizes for compressed tar files you will tolerate to load
-into your precious memory. The default setting is set to
-one megabyte, this means that compressed tar files whose
-size is at most one megabyte will be loaded into core,
-otherwise a temporary uncompressed tar file will be
-created to access the contents (all of this is transparent
-to the user).
-
-The program will let you add a suffix to specify the units
-of the number you typed in, use 'k' for kilobyte and 'm'
-for megabyte. Our routine does not accept floating point
-numbers, so you can't use ".5 m" to specify 512 kilobytes,
-you will have to use "512 k" instead.
+file system has to uncompress the file on the disk in a
+temporary location and then access the uncompressed file
+as a regular tar file.
 
 Now, since we all love to browse files and tar files all
 over the disk, it's common that you will leave a tar file
 and the re-enter it later. Since uncompression is slow,
 the Midnight Commander will cache the information in
 memory for a limited amount of time, after you hit the
-timeout, all of the memory resources associated with the
-file system will be freed. The default timeout is set to
-one minute.
+timeout, all of the resources associated with the file
+system will be freed. The default timeout is set to one
+minute.
+
+The FTP File SystemFTP File System keeps the directory listing it
+fetches from a ftp server in a cache. The cache expire
+time is configurable with the ftpfs directory cache
+timeout option. A low value for this option may slow down
+every operation on the ftp file System because every
+operation is accompanied by a query of the ftp server.
+
+Moreover you can define a proxy host for doing ftp
+transfers and configure the Midnight Commander to always
+use the proxy host. See the section on FTP File SystemFTP File System
+for more information.
 
 [Layout]
 Layout
@@ -2233,21 +2236,22 @@ the double slash) to make the Midnight Commander use a
 proxy host for doing the ftp transfer. You can define the
 proxy host in the Virtual File SystemVirtual FS dialog box.
 
-Another option is to set the ftpfs_always_use_proxy
-parameter in the initialization file. This will configure
-the program to always use the proxy host. If this variable
-is set, the program will do two things: consult the
-@prefix@/lib/mc.no_proxy file for lines containing host
-names that are local (if the host name starts with a dot,
-it is assumed to be a domain) and to assume that any
-hostnames without dots in their names are directly
-accessible.
+Another option to set is the Always use ftp proxy option
+in the Virtual File SystemVirtual FS dialog box. This will
+configure the program to always use the proxy host. If
+this variable is set, the program will do two things:
+consult the @prefix@/lib/mc.no_proxy file for lines
+containing host names that are local (if the host name
+starts with a dot, it is assumed to be a domain) and to
+assume that any hostnames without dots in their names are
+directly accessible.
 
 If you are using the ftpfs code with a filtering packet
 router that does not allow you to use the regular mode of
 opening files, you may want to force the program to use
 the passive-open mode. To use this, set the
-ftpfs_use_passive_connections option.
+ftpfs_use_passive_connections option in the initialization
+file.
 
 The Midnight Commander keeps the directory listing in a
 cache. The cache expire time is configurable in the
@@ -2453,7 +2457,11 @@ on Special Settings).Special Settings
 The possible colors are: black, gray, red, brightred,
 green, brightgreen, brown, yellow, blue, brightblue,
 magenta, brightmagenta, cyan, brightcyan, lightgray and
-white.
+white. And there is a special keyword for transparent
+background. It is 'default'. The 'default' can only be
+used for background color. Example:
+[Colors]
+base_color=normal=white,default:marked=magenta,default
 
 [Special Settings]
 Special Settings
@@ -2705,21 +2713,21 @@ AUTHORS
 
 Miguel de Icaza (miguel@roxanne.nuclecu.unam.mx), Janne
 Kukonlehto (jtklehto@paju.oulu.fi), Radek Doulik
-(rodo@earn.cvut.cz), Fred Leeflang (fredl@nebula.ow.org),
-Dugan Porter (dugan@b011.eunet.es), Jakub Jelinek
+(rodo@ucw.cz), Fred Leeflang (fredl@nebula.ow.org), Dugan
+Porter (dugan@b011.eunet.es), Jakub Jelinek
 (jj@sunsite.mff.cuni.cz), Ching Hui
 (mr854307@cs.nthu.edu.tw), Andrej Borsenkow
 (borsenkow.msk@sni.de), Norbert Warmuth
 (nwarmuth@privat.circular.de), Mauricio Plaza
-(mok@roxanne.nuclecu.unam.mx) and Paul Sheer
-(psheer@icon.co.za) are the developers of this package;
-Alessandro Rubini (rubini@ipvvis.unipv.it) has been
-especially helpful debugging and enhancing the program's
-mouse support, John Davis (davis@space.mit.edu) also made
-his S-Lang library available to us under the GPL and
-answered my questions about it, and the following people
-have contributed code and many bug fixes (in alphabetical
-order):
+(mok@roxanne.nuclecu.unam.mx), Paul Sheer
+(psheer@icon.co.za) and Pavel Machek (pavel@ucw.cz) are
+the developers of this package; Alessandro Rubini
+(rubini@ipvvis.unipv.it) has been especially helpful
+debugging and enhancing the program's mouse support, John
+Davis (davis@space.mit.edu) also made his S-Lang library
+available to us under the GPL and answered my questions
+about it, and the following people have contributed code
+and many bug fixes (in alphabetical order):
 
 Adam Tla/lka (atlka@sunrise.pg.gda.pl), alex@bcs.zp.ua
 (Alex I. Tkachenko), Antonio Palama, DOS port

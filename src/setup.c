@@ -218,9 +218,7 @@ static struct {
     { "tree_navigation_flag", &tree_navigation_flag },
 #endif
 #ifdef USE_VFS    
-    { "tar_gzipped_memlimit", &tar_gzipped_memlimit },
     { "vfs_timeout", &vfs_timeout },
-    { "vfs_use_targz_memlimit", &vfs_use_limit },
 #ifdef USE_NETCODE
     { "ftpfs_directory_timeout", &ftpfs_directory_timeout },
     { "use_netrc", &use_netrc },

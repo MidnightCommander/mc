@@ -98,11 +98,10 @@ void free (void *ptr);
 #   define xBSD
 #endif
 
-#if defined(SCO_FLAVOR) && defined(__GNUC__)
-extern char* strdup(const char*);
+#ifdef __FreeBSD__
+#   define xBSD
 #endif
 
-char *strstr (const char *haystack, const char *needle);
 /* void error (void);  FIXME -- needed? */
 
 #ifdef DOLPHIN

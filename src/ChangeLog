@@ -1,3 +1,28 @@
+Mon Dec 21 22:39:35 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+	* mountlist.c: Define xBSD on FreeBSD.
+
+	* main.c (parse_an_arg): New function, popt callback. Option
+	parsing in gmc was broken. The gnome*_init_with_popt_table free
+	the option tables and gmc tried to use the option tables later.
+
+	* main.c (handle_args): In the Gnome edition don't parse the
+ 	options a second time.
+
+	* boxes.c (configure_vfs), setup.c: Deleted obsolete options. 
+	tar.gz files are now always unzipped to a temporary file on disk.
+
+Mon Dec 21 14:28:55 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* filenot.c (my_mkdir_rec): Someone broke this completely by deleting
+	a line. Funny things happen if you use an already freed pointer.
+	Improved error handling: try to make directories recursivly until
+	mkdir succeeds or fails with errno != ENOENT. Now you will get the
+	correct error message when you don't have permission to create a
+	directory.
+
+	* mountlist.c: Deleted function prototypes for strdup and strstr, 
+	they might conflict with definitions in the system header files.
+
 Wed Dec 16 14:41:15 1998  Paul Sheer <psheer@obsidian.co.za>
 
 	* gtkedit.c, editwidget.c: gnome selection now works with the

@@ -1,3 +1,8 @@
+Mon Dec 21 22:33:07 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* layout: Deleted obsolete widgets from the Virtual FS configuration
+	dialog. 
+
 1998-12-17  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (panel_icon_list_select_icon): Show the popup menu on

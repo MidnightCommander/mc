@@ -33,17 +33,20 @@ my_mkdir_rec (char *s, mode_t mode)
     
     if (!mc_mkdir (s, mode))
         return 0;
+    else if (errno != ENOENT)
+	return -1;
 
     /* FIXME: should check instead if s is at the root of that filesystem */
     if (!vfs_file_is_local (s))
 	return -1;
 
-    if (!strcmp (s, PATH_SEP_STR))
-        return ENOTDIR;
+    if (!strcmp (s, PATH_SEP_STR)) {
+        errno = ENOTDIR;
+        return -1;
+    }
 
     p = concat_dir_and_file (s, "..");
-
-
+    q = vfs_canon (p);
     free (p);
 
     if (!(result = my_mkdir_rec (q, mode))) 

@@ -32,8 +32,6 @@
 #include "tar.h"
 #include "names.h"
 
-int tar_gzipped_memlimit; /* unused, to be killed, soon */
-
 #define	isodigit(c)	( ((c) >= '0') && ((c) <= '7') )
 /*
  * Quick and dirty octal conversion.

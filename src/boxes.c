@@ -612,15 +612,14 @@ tree (char *current_dir)
 #ifdef USE_VFS
 
 #if defined(USE_NETCODE)
-#define VFSY 15
+#define VFSY 12
 #else
-#define VFSY 11
+#define VFSY 8
 #endif
 
 #define VFSX 56
 
 extern int vfs_timeout;
-extern int tar_gzipped_memlimit;
 extern int ftpfs_always_use_proxy;
 
 #if defined(USE_NETCODE)
@@ -629,9 +628,7 @@ extern char *ftpfs_proxy_host;
 extern int use_netrc;
 #endif
 
-int vfs_use_limit = 1;
 static char *ret_timeout;
-static char *ret_limit;
 
 #if defined(USE_NETCODE)
 static char *ret_passwd;
@@ -646,36 +643,27 @@ static int ret_use_netrc;
       'U', 0, 0, &ret_use_netrc, 0, XV_WLAY_BELOWCLOSE, "" },
 #endif
 
-char *confvfs_str [] =
-{ N_("Always to memory"), N_("If size less than:") };
-
 static QuickWidget confvfs_widgets [] = {
 { quick_button,   30,  VFSX,    VFSY - 3, VFSY, N_("&Cancel"),
       0, B_CANCEL, 0, 0, XV_WLAY_RIGHTOF, "button-cancel" },
 { quick_button,   12, VFSX,    VFSY - 3, VFSY, N_("&Ok"),
       0, B_ENTER, 0, 0, XV_WLAY_CENTERROW, "button-ok" },
 #if defined(USE_NETCODE)
-{ quick_input,    30, VFSX, 10, VFSY, "", 22, 0, 0, &ret_ftp_proxy,
+{ quick_input,    30, VFSX, 7, VFSY, "", 22, 0, 0, &ret_ftp_proxy,
       XV_WLAY_RIGHTDOWN, "input-ftp-proxy" },
-{ quick_checkbox,    4, VFSX, 10, VFSY, N_("&Always use ftp proxy"), 0, 0,
+{ quick_checkbox,    4, VFSX, 7, VFSY, N_("&Always use ftp proxy"), 0, 0,
       &ftpfs_always_use_proxy, 0, XV_WLAY_RIGHTDOWN, "check-ftp-proxy" },
-{ quick_label,    46, VFSX, 9, VFSY, N_("sec"),
+{ quick_label,    46, VFSX, 6, VFSY, N_("sec"),
       0, 0, 0, 0, XV_WLAY_RIGHTOF, "label-sec" },
-{ quick_input,    35, VFSX, 9, VFSY, "", 10, 0, 0, &ret_directory_timeout,
+{ quick_input,    35, VFSX, 6, VFSY, "", 10, 0, 0, &ret_directory_timeout,
       XV_WLAY_RIGHTDOWN, "input-timeout" },
-{ quick_label,     4, VFSX, 9, VFSY, N_("ftpfs directory cache timeout:"),
+{ quick_label,     4, VFSX, 6, VFSY, N_("ftpfs directory cache timeout:"),
       0, 0, 0, 0, XV_WLAY_NEXTROW, "label-cache"},
-{ quick_input,    28, VFSX, 8, VFSY, "", 24, 0, 0, &ret_passwd,
+{ quick_input,    28, VFSX, 5, VFSY, "", 24, 0, 0, &ret_passwd,
       XV_WLAY_RIGHTDOWN, "input-passwd" },
-{ quick_label,     4, VFSX, 8, VFSY, N_("ftp anonymous password:"),
+{ quick_label,     4, VFSX, 5, VFSY, N_("ftp anonymous password:"),
       0, 0, 0, 0, XV_WLAY_NEXTROW, "label-pass"},
 #endif
-{ quick_input,    26, VFSX, 6, VFSY, "", 10, 0, 0, &ret_limit, 
-      XV_WLAY_RIGHTDOWN, "input-limit" },
-{ quick_radio,    4, VFSX, 5, VFSY, "", 2, 0,
-      &vfs_use_limit, confvfs_str, XV_WLAY_BELOWCLOSE, "radio" },
-{ quick_label,    4,  VFSX, 4, VFSY, N_("Gzipped tar archive extract:"), 
-      0, 0, 0, 0, XV_WLAY_NEXTROW, "label-tar" },
 { quick_label,    46, VFSX, 3, VFSY, "sec",
       0, 0, 0, 0, XV_WLAY_RIGHTOF, "label-sec2" },
 { quick_input,    35, VFSX, 3, VFSY, "", 10, 0, 0, &ret_timeout, 
@@ -697,28 +685,13 @@ static QuickDialog confvfs_dlg =
 void
 configure_vfs (void)
 {
-    char buffer1 [15], buffer2 [15];
+    char buffer2[15];
 #if defined(USE_NETCODE)
     char buffer3[15];
 #endif
 
-    if (tar_gzipped_memlimit > -1) {
-        if (tar_gzipped_memlimit == 0)
-            strcpy (buffer1, "0 B");
-	else if ((tar_gzipped_memlimit % (1024*1024)) == 0) /* I.e. in M */
-	    sprintf (buffer1, "%i MB", (int)(((unsigned)tar_gzipped_memlimit) >> 20));
-	else if ((tar_gzipped_memlimit % 1024) == 0) /* I.e. in K */
-	    sprintf (buffer1, "%i KB", (int)(((unsigned)tar_gzipped_memlimit) >> 10));
-	else if ((tar_gzipped_memlimit % 1000) == 0)
-	    sprintf (buffer1, "%i kB", (int)(tar_gzipped_memlimit / 1000));
-	else
-	    sprintf (buffer1, "%i B", (int)tar_gzipped_memlimit);
-        confvfs_widgets [2 + VFS_WIDGETBASE].text = buffer1;
-    } else
-    	confvfs_widgets [2 + VFS_WIDGETBASE].text = "5 MB";
     sprintf (buffer2, "%i", vfs_timeout);
-    confvfs_widgets [6 + VFS_WIDGETBASE].text = buffer2;
-    confvfs_widgets [3 + VFS_WIDGETBASE].value = vfs_use_limit;
+    confvfs_widgets [3 + VFS_WIDGETBASE].text = buffer2;
 #if defined(USE_NETCODE)
     ret_use_netrc = use_netrc;
     sprintf(buffer3, "%i", ftpfs_directory_timeout);
@@ -734,23 +707,6 @@ configure_vfs (void)
         free (ret_timeout);
         if (vfs_timeout < 0 || vfs_timeout > 10000)
             vfs_timeout = 10;
-        if (!vfs_use_limit)
-            tar_gzipped_memlimit = -1;
-        else {
-            tar_gzipped_memlimit = atoi (ret_limit);
-            if (tar_gzipped_memlimit < 0)
-                tar_gzipped_memlimit = -1;
-            else {
-                for (p = ret_limit; *p == ' ' || (*p >= '0' && *p <= '9'); p++);
-                switch (*p) {
-		case 'm':
-		case 'M': tar_gzipped_memlimit <<= 20; break;
-		case 'K': tar_gzipped_memlimit <<= 10; break;
-		case 'k': tar_gzipped_memlimit *= 1000; break;
-                }
-            }
-        }
-        free (ret_limit);
 #if defined(USE_NETCODE)
 	free(ftpfs_anonymous_passwd);
 	ftpfs_anonymous_passwd = ret_passwd;

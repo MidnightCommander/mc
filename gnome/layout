@@ -516,56 +516,44 @@ geometry=2,1,1,1
 flags=
 
 [quick_vfs-Widget-label-pass]
-geometry=1,4,1,1
-flags=
+geometry=1,2,1,1
+flags=w
 
 [quick_vfs-Widget-button-ok]
 geometry=5,1,1,1
 flags=ew
 
-[quick_vfs-Widget-input-limit]
-geometry=2,3,1,1
-flags=s
-
 [quick_vfs-Widget-input-ftp-proxy]
-geometry=2,6,1,1
-flags=
-
-[quick_vfs-Widget-label-tar]
-geometry=1,2,1,1
-flags=w
-
-[quick_vfs-Widget-label-cache]
-geometry=1,5,1,1
-flags=w
-
-[quick_vfs-Widget-input-timeout]
-geometry=2,5,1,1
-flags=
-
-[quick_vfs-Widget-check-ftp-proxy]
-geometry=1,6,1,1
-flags=
-
-[quick_vfs-Widget-input-passwd]
 geometry=2,4,1,1
 flags=
 
+[quick_vfs-Widget-label-cache]
+geometry=1,3,1,1
+flags=w
+
+[quick_vfs-Widget-input-timeout]
+geometry=2,3,1,1
+flags=
+
+[quick_vfs-Widget-check-ftp-proxy]
+geometry=1,4,1,1
+flags=w
+
+[quick_vfs-Widget-input-passwd]
+geometry=2,2,1,1
+flags=
+
 [quick_vfs-Widget-label-sec]
-geometry=3,5,1,1
+geometry=3,3,1,1
 flags=
 
 [quick_vfs-Widget-button-cancel]
 geometry=5,2,1,1
-flags=
+flags=ew
 
 [quick_vfs-Widget-label-sec2]
 geometry=3,1,1,1
 flags=
-
-[quick_vfs-Widget-radio]
-geometry=1,3,1,1
-flags=e
 
 [sort-Widget-case-check]
 geometry=3,2,1,1

@@ -1,3 +1,7 @@
+Mon Dec 21 22:55:48 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* tar.c: Deleted global variable tar_gzipped_memlimit.
+
 Wed Dec 16 06:36:42 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* vfs.c (vfs_strip_suffix_from_filename): New function which strips

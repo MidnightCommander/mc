@@ -387,7 +387,7 @@ that are otherwise interpreted by the Midnight Commander
 <tag/M-p, M-n/ Use these keys to browse through the command
 history. M-p takes you to the last entry, M-n takes you to
 the next one.
-<tag/M-h>  Displays the history for the current input line. 
+<tag/M-h/  Displays the history for the current input line. 
 </descrip>
 
 <sect1>General Movement Keys<label id="General Movement Keys">
@@ -1375,11 +1375,16 @@ This option gives you control over the settings of the
 
 The Midnight Commander keeps in memory the information
 related to some of the virtual file systems to speed up
-the access to the files in the file system. Since the
-information that must be kept may be large (for example,
-compressed tar files may be kept in RAM for faster
-access), you may want to tune the parameters of the cached
-information to decrease your memory usage or to maximize
+the access to the files in the file system (for example,
+directory listings fetched from ftp servers). 
+
+Moreover in order to access the contents of compressed files 
+(for eaxample, compressed tar files) the Midnight Commander 
+has to create a temporary uncompressed file on your disk.
+
+Since both the information in memory and the temporary files on
+disk take up resources, you may want to tune the parameters of 
+the cached information to decrease your resource usage or to maximize
 the speed of access to frequently used file systems.
 
 The Tar file system is quite clever about how it handles
@@ -1391,34 +1396,32 @@ In the wild, tar files are usually kept compressed (plain
 tar files are species in extinction), and because of the
 nature of those files (the directory entries for the tar
 files is not there waiting for us to be loaded), the tar
-file system has two choices: load the complete,
-uncompressed tar file into memory or uncompress the file
-in the disk in a temporary location and then access the
+file system has to uncompress the file
+on the disk in a temporary location and then access the
 uncompressed file as a regular tar file.
-
-In this dialog box you tell the Midnight Commander which
-sizes for compressed tar files you will tolerate to load
-into your precious memory. The default setting is set to
-one megabyte, this means that compressed tar files whose
-size is at most one megabyte will be loaded into core,
-otherwise a temporary uncompressed tar file will be
-created to access the contents (all of this is transparent
-to the user).
-
-The program will let you add a suffix to specify the units
-of the number you typed in, use 'k' for kilobyte and 'm'
-for megabyte. Our routine does not accept floating point
-numbers, so you can't use ".5 m" to specify 512 kilobytes,
-you will have to use "512 k" instead.
 
 Now, since we all love to browse files and tar files all
 over the disk, it's common that you will leave a tar file
 and the re-enter it later. Since uncompression is slow,
 the Midnight Commander will cache the information in
 memory for a limited amount of time, after you hit the
-timeout, all of the memory resources associated with the
+timeout, all of the resources associated with the
 file system will be freed. The default timeout is set to
 one minute.
+
+The <lnk name ="FTP File System" id="FTP File System">
+keeps the directory listing it fetches from a ftp server
+in a cache.  The cache
+expire time is configurable with the option 
+<em/ftpfs directory cache timeout/.  A low value for this
+option may slow down every operation on the ftp file System
+because every operation is accompanied by a query of the
+ftp server. 
+
+Moreover you can define a proxy host for doing ftp transfers 
+and configure the Midnight Commander to always use the proxy host. See
+the section on <lnk name ="FTP File System" id="FTP File System">
+for more information.
 
 <sect2>Layout<label id="Layout">
 
@@ -2127,8 +2130,9 @@ Midnight Commander use a proxy host for doing the ftp transfer.  You
 can define the proxy host in the <lnk name="Virtual FS" id="Virtual FS">
 Virtual File System dialog box.
 
-Another option is to set the <em/ftpfs_always_use_proxy/
-parameter in the initialization file.  This will configure the program
+Another option to set is the <em/Always use ftp proxy/
+option in the <lnk name="Virtual FS" id="Virtual FS">
+dialog box.  This will configure the program
 to always use the proxy host.  If this variable is set, the program
 will do two things: consult the <tt>@prefix@/lib/mc.no_proxy</tt> file for
 lines containing host names that are local (if the host name starts
@@ -2138,7 +2142,7 @@ hostnames without dots in their names are directly accessible.
 If you are using the ftpfs code with a filtering packet router that
 does not allow you to use the regular mode of opening files, you may
 want to force the program to use the passive-open mode.  To use this,
-set the <em/ftpfs_use_passive_connections/ option.
+set the <em/ftpfs_use_passive_connections/ option in the initialization file.
 
 The Midnight Commander keeps the directory listing in a cache.  The cache
 expire time is configurable in the <lnk name="Virtual FS" id="Virtual FS">
@@ -2238,6 +2242,7 @@ Examples:
 
 <sect1>Undelete File System<label id="Undelete File System">
 
+<p>
 On Linux systems, if you asked configure to use the ext2fs undelete
 facilities, you will have the undelete file system available.
 Recovery of deleted files is only available on ext2 file systems.  The

@@ -2595,11 +2595,25 @@ process_args (int c, char *option_arg)
     }
 }
 
+#ifdef HAVE_GNOME
+static void parse_an_arg (poptContext state,
+			  enum poptCallbackReason reason,
+			  const struct poptOption *opt,
+			  const char *arg, void *data)
+{
+	process_args (opt->shortName, arg);
+}
+
+#endif
+
 char *cmdline_geometry = NULL;
 int   nowindows = 0;
 char **directory_list = NULL;
 
 static struct poptOption argument_table [] = {
+#ifdef HAVE_GNOME
+	{ NULL, '\0', POPT_ARG_CALLBACK, parse_an_arg, 0},
+#endif
 #ifdef WITH_BACKGROUND
     { "background",	'B', POPT_ARG_NONE, 	&background_wait, 	 0 },
 #endif
@@ -2683,7 +2697,8 @@ handle_args (int argc, char *argv [])
     SLtt_Try_Termcap = 1;
 #endif
 #endif
-    
+
+#ifndef HAVE_GNOME
     while ((c = poptGetNextOpt (ctx)) > 0){
 	option_arg = poptGetOptArg (ctx);
 
@@ -2697,7 +2712,7 @@ handle_args (int argc, char *argv [])
 		poptStrerror (c));
 	finish_program = 1;
     }
-
+#endif
     probably_finish_program ();
 
     /*
