@@ -371,7 +371,7 @@ void edit_get_syntax_color (WEdit * edit, long byte_index, int *color)
                          option_syntax_highlighting && use_colors) {
 	translate_rule_to_color (edit, edit_get_rule (edit, byte_index), color);
     } else {
-	*color = EDITOR_NORMAL_COLOR;
+	*color = use_colors ? EDITOR_NORMAL_COLOR_INDEX : 0;
     }
 }
 
@@ -1018,7 +1018,7 @@ void edit_free_syntax_rules (WEdit * edit)
 
 void edit_get_syntax_color (WEdit * edit, long byte_index, int *color)
 {
-    *color = EDITOR_NORMAL_COLOR;
+    *color = use_colors ? EDITOR_NORMAL_COLOR_INDEX : 0;
 }
 
 int edit_check_spelling (WEdit * edit)

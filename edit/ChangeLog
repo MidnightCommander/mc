@@ -1,5 +1,9 @@
 2002-07-14  Pavel Roskin  <proski@gnu.org>
 
+	* syntax.c (edit_get_syntax_color): Return colorpair index, not
+	attribute, when syntax highlighting is disabled.  Handle black
+	and white mode separately.
+
 	* syntax.c (edit_load_syntax): Do nothing in black and white
 	mode.
 
