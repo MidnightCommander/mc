@@ -1,3 +1,7 @@
+2002-09-21  Pavel Roskin  <proski@gnu.org>
+
+	* mcfs.c: Move config,h to the beginning.
+
 2002-09-19  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* tcputil.c [!WITH_MCFS]: Disable mcfs related code.

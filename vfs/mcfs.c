@@ -24,8 +24,9 @@
 
 /* Namespace: exports mcfs_vfs_ops, tcp_invalidate_socket */
 
-#ifdef WITH_MCFS
 #include <config.h>
+
+#ifdef WITH_MCFS
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
