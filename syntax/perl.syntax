@@ -124,6 +124,7 @@ context default
     keyword whole goto magenta
     keyword whole last magenta
     keyword whole next magenta
+    keyword whole break magenta
     keyword whole bless magenta
     keyword whole caller magenta
     keyword whole import magenta

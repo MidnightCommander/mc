@@ -2,6 +2,8 @@
 context default
     keyword $(*) yellow
     keyword ${*} brightgreen
+    keyword whole linestart define magenta
+    keyword whole linestart endef magenta
     keyword whole linestart include magenta
     keyword whole linestart ifdef magenta
     keyword whole linestart ifndef magenta
