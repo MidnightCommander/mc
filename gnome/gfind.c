@@ -624,7 +624,7 @@ static void setup_gui(void)
 			   GNOME_PAD_SMALL);
 
 	current_row = -1;
-	stop = 0;
+	stop = B_EXIT;
 	gtk_signal_connect(GTK_OBJECT(g_clist), "select_row", GTK_SIGNAL_FUNC(select_row),
 			   NULL);
 
@@ -673,15 +673,27 @@ static int run_process(void)
 {
 	idle_tag = gtk_idle_add((GtkFunction) do_search, g_find_dlg);
 
-	gnome_dialog_run(GNOME_DIALOG(g_find_dlg));
+	switch (gnome_dialog_run(GNOME_DIALOG(g_find_dlg))) {
+	case 0:
+		/* Ok button */
+		stop = B_CANCEL;
+		break;
+	}
 	g_start_stop = NULL;
+
+	/* B_EXIT means that user closed the dialog */
+	if (stop == B_EXIT) {
+		g_find_dlg = NULL;
+	}
 
 	return stop;
 }
 
 static void kill_gui(void)
 {
-	gtk_object_destroy(GTK_OBJECT(g_find_dlg));
+	if (g_find_dlg) {
+		gtk_object_destroy(GTK_OBJECT(g_find_dlg));
+	}
 }
 
 static void stop_idle(void *data)
@@ -742,12 +754,14 @@ static int find_file(char *start_dir, char *pattern, char *content, char **dirna
 	while ((dir = pop_directory()) != NULL)
 		g_free(dir);
 
-	get_list_info(&file_tmp, &dir_tmp);
+	if (return_value == B_ENTER || return_value == B_PANELIZE) {
+		get_list_info(&file_tmp, &dir_tmp);
 
-	if (dir_tmp)
-		*dirname = g_strdup(dir_tmp);
-	if (file_tmp)
-		*filename = g_strdup(file_tmp);
+		if (dir_tmp)
+			*dirname = g_strdup(dir_tmp);
+		if (file_tmp)
+			*filename = g_strdup(file_tmp);
+	}
 
 	kill_gui();
 	do_search(0);		/* force do_search to release resources */
@@ -763,9 +777,8 @@ void do_find(void)
 	char *start_dir, *pattern, *content;
 	char *filename, *dirname;
 	int v, dir_and_file_set;
-	int done = 0;
 
-	while (!done) {
+	while (1) {
 		if (!find_parameters(&start_dir, &pattern, &content))
 			break;
 
@@ -805,7 +818,7 @@ void do_find(void)
 			g_free(dirname);
 		if (filename)
 			g_free(filename);
-		if (v == B_CANCEL)
+		if (v == B_CANCEL || v == B_EXIT)
 			break;
 
 		if (v == B_PANELIZE) {

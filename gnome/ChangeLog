@@ -1,5 +1,11 @@
 2001-07-15  Pavel Roskin  <proski@gnu.org>
 
+	* gfind.c (run_process): Interpret "Ok" button as "Cancel".
+	Set g_find_dlg to NULL if it has been closed.
+	(kill_gui): Don't destroy already destroyed dialog.
+	(find_file): Onle read directory and filename if needed.
+	(do_find): Break loop on B_EXIT.
+
 	* gscreen.c (panel_tree_button_release): New function, opens a
 	new window on middle click.
 	(panel_create_tree_view): Bind panel_tree_button_release() to
