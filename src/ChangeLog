@@ -1,7 +1,7 @@
 2002-10-24  Pavel Roskin  <proski@gnu.org>
 
 	* filegui.c (check_progress_buttons): Reinitialize ret_value to
-	avoid old values after incomplete events.
+	avoid old values after events other than selecting a button.
 	Reported by Dmitry Semyonov <Dmitry.Semyonov@oktet.ru>
 
 2002-10-24  Andrew V. Samoilov  <sav@bcs.zp.ua>

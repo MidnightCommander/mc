@@ -171,7 +171,8 @@ check_progress_buttons (FileOpContext *ctx)
     if (c == EV_NONE)
 	return FILE_CONT;
 
-    /* Reinitialize to avoid old values after incomplete events */
+    /* Reinitialize to avoid old values after events other than
+       selecting a button */
     ui->op_dlg->ret_value = FILE_CONT;
 
     dlg_process_event (ui->op_dlg, c, &event);
