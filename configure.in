@@ -959,7 +959,9 @@ AC_SUBST(PCENTRULE)
 dnl
 dnl Output configuration files
 dnl
-AC_CONFIG_SUBDIRS(vfs/samba)
+if test "x$SAMBAFILES" != x; then
+  AC_CONFIG_SUBDIRS(vfs/samba)
+fi
 
 AC_OUTPUT([
 Make.common 

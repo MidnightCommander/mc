@@ -1,3 +1,8 @@
+2001-01-30  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Only configure in vfs/samba if smbfs support is
+	enabled.
+
 2001-01-13  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Don't create a faked malloc.h.
