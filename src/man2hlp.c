@@ -109,7 +109,7 @@ persistent_fwrite (const void *data, size_t len, FILE * stream)
 
 /* Report error in input */
 static void
-print_error (char *message)
+print_error (const char *message)
 {
     fprintf (stderr, "man2hlp: %s in file \"%s\" at row %d\n", message,
 	     c_out, in_row);
@@ -119,7 +119,7 @@ print_error (char *message)
 static FILE *
 fopen_check (const char *filename, const char *flags)
 {
-    char *tmp;
+    char tmp[BUFFER_SIZE];
     FILE *f;
 
     f = fopen (filename, flags);
