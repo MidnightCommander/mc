@@ -22,7 +22,7 @@ msgid "Error"
 msgstr "XƏTA"
 
 #: edit/edit.c:163 edit/edit.c:338
-msgid " Failed trying to open file for reading: "
+msgid " Cannot open file for reading: "
 msgstr " Faylı oxumaq üçün aöarkan xəta oldu : "
 
 #: edit/edit.c:289
@@ -30,7 +30,7 @@ msgid " Error reading from pipe: "
 msgstr " Borudan oxuyarkən xəta oldu . "
 
 #: edit/edit.c:294
-msgid " Failed trying to open pipe for reading: "
+msgid " Cannot open pipe for reading: "
 msgstr " Oxumaq əqsədi ilə borunu açarkən xəta oldu : "
 
 #: edit/edit.c:332
@@ -107,7 +107,7 @@ msgid " Error writing to pipe: "
 msgstr " Faylı borularkən xəta oldu . "
 
 #: edit/editcmd.c:260
-msgid " Failed trying to open pipe for writing: "
+msgid " Cannot open pipe for writing: "
 msgstr " Faylı yazmaq məqsədi ilə borularkəbn xəta oldu : "
 
 #: edit/editcmd.c:327

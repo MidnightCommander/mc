@@ -268,7 +268,7 @@ int edit_save_file (WEdit * edit, const char *filename)
 	    }
 #endif
 	} else {
-	    edit_error_dialog (_ ("Error"), get_sys_error (catstrs (_ (" Failed trying to open pipe for writing: "), p, " ", 0)));
+	    edit_error_dialog (_ ("Error"), get_sys_error (catstrs (_ (" Cannot open pipe for writing: "), p, " ", 0)));
 	    free (p);
 	    goto error_save;
 	}

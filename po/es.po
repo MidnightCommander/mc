@@ -22,7 +22,7 @@ msgid "Error"
 msgstr "Error"
 
 #: edit/edit.c:161 edit/edit.c:336
-msgid " Failed trying to open file for reading: "
+msgid " Cannot open file for reading: "
 msgstr " Fallo al tratar de abrir el archivo para lectura: "
 
 #: edit/edit.c:287
@@ -30,7 +30,7 @@ msgid " Error reading from pipe: "
 msgstr " Problemas al leer en tubería: "
 
 #: edit/edit.c:292
-msgid " Failed trying to open pipe for reading: "
+msgid " Cannot open pipe for reading: "
 msgstr " Fallo al tratar de abrir tubería para lectura: "
 
 #: edit/edit.c:330
@@ -104,7 +104,7 @@ msgid " Error writing to pipe: "
 msgstr " Error al escribir en tubería: "
 
 #: edit/editcmd.c:258
-msgid " Failed trying to open pipe for writing: "
+msgid " Cannot open pipe for writing: "
 msgstr " Fallo al tratar de abrir tubería para escritura: "
 
 #: edit/editcmd.c:325

@@ -28,7 +28,7 @@ msgid "Error"
 msgstr "Fejl"
 
 #: edit/edit.c:163 edit/edit.c:338
-msgid " Failed trying to open file for reading: "
+msgid " Cannot open file for reading: "
 msgstr " Fejl under åbning af fil for læsning: "
 
 #: edit/edit.c:289
@@ -36,7 +36,7 @@ msgid " Error reading from pipe: "
 msgstr " Problem under læsning fra rør: "
 
 #: edit/edit.c:294
-msgid " Failed trying to open pipe for reading: "
+msgid " Cannot open pipe for reading: "
 msgstr " Fejl ved forsøg på åbning af rør for læsning: "
 
 #: edit/edit.c:332
@@ -111,7 +111,7 @@ msgid " Error writing to pipe: "
 msgstr " Fejl ved skrivning af fil "
 
 #: edit/editcmd.c:260
-msgid " Failed trying to open pipe for writing: "
+msgid " Cannot open pipe for writing: "
 msgstr " Fejl ved forsøg på åbning af rør for skrivning: "
 
 #: edit/editcmd.c:327

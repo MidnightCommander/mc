@@ -21,7 +21,7 @@ msgid "Error"
 msgstr "Virhe"
 
 #: edit/edit.c:163 edit/edit.c:338
-msgid " Failed trying to open file for reading: "
+msgid " Cannot open file for reading: "
 msgstr " Tiedoston avaaminen lukua varten epäonnistui: "
 
 #: edit/edit.c:289
@@ -31,7 +31,7 @@ msgstr " Virhe hakiessa tietoja tiedostosta "
 
 #: edit/edit.c:294
 #, fuzzy
-msgid " Failed trying to open pipe for reading: "
+msgid " Cannot open pipe for reading: "
 msgstr " Tiedoston avaaminen lukua varten epäonnistui: "
 
 #: edit/edit.c:332
@@ -107,7 +107,7 @@ msgstr " Virhe hakiessa tietoja tiedostosta "
 
 #: edit/editcmd.c:260
 #, fuzzy
-msgid " Failed trying to open pipe for writing: "
+msgid " Cannot open pipe for writing: "
 msgstr " Tiedoston avaaminen lukua varten epäonnistui: "
 
 #: edit/editcmd.c:327

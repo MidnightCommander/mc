@@ -23,7 +23,7 @@ msgid "Error"
 msgstr "Fout"
 
 #: edit/edit.c:163 edit/edit.c:338
-msgid " Failed trying to open file for reading: "
+msgid " Cannot open file for reading: "
 msgstr " Openen van bestand voor lezen mislukt: "
 
 #: edit/edit.c:289
@@ -31,7 +31,7 @@ msgid " Error reading from pipe: "
 msgstr " Probleem bij het lezen van pijp "
 
 #: edit/edit.c:294
-msgid " Failed trying to open pipe for reading: "
+msgid " Cannot open pipe for reading: "
 msgstr " Openen van pijp voor lezen mislukt: "
 
 #: edit/edit.c:332
@@ -106,7 +106,7 @@ msgid " Error writing to pipe: "
 msgstr " Fout bij het schrijven naar pijp: "
 
 #: edit/editcmd.c:260
-msgid " Failed trying to open pipe for writing: "
+msgid " Cannot open pipe for writing: "
 msgstr " Openen van pijp voor lezen mislukt: "
 
 #: edit/editcmd.c:327

@@ -22,7 +22,7 @@ msgid "Error"
 msgstr "エラー"
 
 #: edit/edit.c:163 edit/edit.c:338
-msgid " Failed trying to open file for reading: "
+msgid " Cannot open file for reading: "
 msgstr "ファイルの読みだしでオープンに失敗しました: "
 
 #: edit/edit.c:289
@@ -30,7 +30,7 @@ msgid " Error reading from pipe: "
 msgstr " パイプからの読み込みエラー: "
 
 #: edit/edit.c:294
-msgid " Failed trying to open pipe for reading: "
+msgid " Cannot open pipe for reading: "
 msgstr "読みだし用のパイプのオープンに失敗しました: "
 
 #: edit/edit.c:332
@@ -103,7 +103,7 @@ msgid " Error writing to pipe: "
 msgstr " パイプへの書き出しエラー: "
 
 #: edit/editcmd.c:260
-msgid " Failed trying to open pipe for writing: "
+msgid " Cannot open pipe for writing: "
 msgstr "書き込み用のパイプのオープンに失敗しました: "
 
 #: edit/editcmd.c:327

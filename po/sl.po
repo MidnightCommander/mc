@@ -21,7 +21,7 @@ msgid "Error"
 msgstr "Napaka"
 
 #: edit/edit.c:163 edit/edit.c:338
-msgid " Failed trying to open file for reading: "
+msgid " Cannot open file for reading: "
 msgstr " Napaka ob poskusu odprtja datoteke za branje: "
 
 #: edit/edit.c:289
@@ -29,7 +29,7 @@ msgid " Error reading from pipe: "
 msgstr " Napaka ob branju iz cevi: "
 
 #: edit/edit.c:294
-msgid " Failed trying to open pipe for reading: "
+msgid " Cannot open pipe for reading: "
 msgstr " Napaka ob poskusu odprtja cevi za pisanje: "
 
 #: edit/edit.c:332
@@ -103,7 +103,7 @@ msgid " Error writing to pipe: "
 msgstr " Napaka pri pisanju v cev: "
 
 #: edit/editcmd.c:260
-msgid " Failed trying to open pipe for writing: "
+msgid " Cannot open pipe for writing: "
 msgstr " Napaka pri odpiranju cevi za pisanje: "
 
 #: edit/editcmd.c:327

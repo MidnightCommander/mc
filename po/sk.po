@@ -23,7 +23,7 @@ msgid "Error"
 msgstr "Chyba"
 
 #: edit/edit.c:163 edit/edit.c:338
-msgid " Failed trying to open file for reading: "
+msgid " Cannot open file for reading: "
 msgstr " Neúspešný pokus o otvorenie súboru pre čítanie: "
 
 #: edit/edit.c:289
@@ -31,7 +31,7 @@ msgid " Error reading from pipe: "
 msgstr " Chyba pri čítaní z rúry: "
 
 #: edit/edit.c:294
-msgid " Failed trying to open pipe for reading: "
+msgid " Cannot open pipe for reading: "
 msgstr " Neúspešný pokus o otvorenie rúry pre čítanie: "
 
 #: edit/edit.c:332
@@ -106,7 +106,7 @@ msgid " Error writing to pipe: "
 msgstr " Chyba počas zápisu do rúry: "
 
 #: edit/editcmd.c:260
-msgid " Failed trying to open pipe for writing: "
+msgid " Cannot open pipe for writing: "
 msgstr " Neúspešný pokus o otvorenie rúry pre zápis: "
 
 #: edit/editcmd.c:327

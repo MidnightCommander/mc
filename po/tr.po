@@ -23,7 +23,7 @@ msgid "Error"
 msgstr "Hata"
 
 #: edit/edit.c:163 edit/edit.c:338
-msgid " Failed trying to open file for reading: "
+msgid " Cannot open file for reading: "
 msgstr " Dosya okunmak için açýlýrken hata oluþtu: "
 
 #: edit/edit.c:289
@@ -31,7 +31,7 @@ msgid " Error reading from pipe: "
 msgstr " Veri yolundan okumada hata "
 
 #: edit/edit.c:294
-msgid " Failed trying to open pipe for reading: "
+msgid " Cannot open pipe for reading: "
 msgstr " Veri yolu okumak için açýlýrken hata oluþtu"
 
 #: edit/edit.c:332
@@ -106,7 +106,7 @@ msgid " Error writing to pipe: "
 msgstr " Veri yoluna yazarken hata: "
 
 #: edit/editcmd.c:260
-msgid " Failed trying to open pipe for writing: "
+msgid " Cannot open pipe for writing: "
 msgstr " Veri yolu yazmak için açýlýrken hata oluþtu: "
 
 #: edit/editcmd.c:327

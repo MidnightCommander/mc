@@ -25,7 +25,7 @@ msgid "Error"
 msgstr "B³±d"
 
 #: edit/edit.c:163 edit/edit.c:338
-msgid " Failed trying to open file for reading: "
+msgid " Cannot open file for reading: "
 msgstr " Otwarcie pliku do odczytu nie powiod³o siê: "
 
 #: edit/edit.c:289
@@ -33,7 +33,7 @@ msgid " Error reading from pipe: "
 msgstr " B³±d przy odczycie z potoku: "
 
 #: edit/edit.c:294
-msgid " Failed trying to open pipe for reading: "
+msgid " Cannot open pipe for reading: "
 msgstr " Otwarcie potoku do odczytu nie powiod³o siê: "
 
 #: edit/edit.c:332
@@ -107,7 +107,7 @@ msgid " Error writing to pipe: "
 msgstr " B³±d przy zapisie do potoku: "
 
 #: edit/editcmd.c:260
-msgid " Failed trying to open pipe for writing: "
+msgid " Cannot open pipe for writing: "
 msgstr " Otwarcie potoku do zapisu nie powiod³o siê: "
 
 #: edit/editcmd.c:327

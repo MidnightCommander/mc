@@ -28,7 +28,7 @@ msgid "Error"
 msgstr "Aroke"
 
 #: edit/edit.c:163 edit/edit.c:338
-msgid " Failed trying to open file for reading: "
+msgid " Cannot open file for reading: "
 msgstr " Dj' a fwait berwete come dji sayîve di drovî li fitchî po lére: "
 
 #: edit/edit.c:289
@@ -36,7 +36,7 @@ msgid " Error reading from pipe: "
 msgstr " Åk ni va nén cwand dji saye di lére del bûze: "
 
 #: edit/edit.c:294
-msgid " Failed trying to open pipe for reading: "
+msgid " Cannot open pipe for reading: "
 msgstr " Dj' a fwait berwete come dji sayîve di drovî l' bûze po lére: "
 
 #: edit/edit.c:332
@@ -111,7 +111,7 @@ msgid " Error writing to pipe: "
 msgstr " Åk n' a nén stî come dji sayîve di scrire el bûze: "
 
 #: edit/editcmd.c:260
-msgid " Failed trying to open pipe for writing: "
+msgid " Cannot open pipe for writing: "
 msgstr " Dj' a fwait berwete come dji sayîve di drovî l' bûze po scrire: "
 
 #: edit/editcmd.c:327

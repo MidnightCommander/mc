@@ -22,7 +22,7 @@ msgid "Error"
 msgstr "S'ha produït un error"
 
 #: edit/edit.c:163 edit/edit.c:338
-msgid " Failed trying to open file for reading: "
+msgid " Cannot open file for reading: "
 msgstr " S'ha produït una fallada en intentar obrir un fitxer per llegir: "
 
 #: edit/edit.c:289
@@ -30,7 +30,7 @@ msgid " Error reading from pipe: "
 msgstr " S'ha produït un error en llegir del conducte: "
 
 #: edit/edit.c:294
-msgid " Failed trying to open pipe for reading: "
+msgid " Cannot open pipe for reading: "
 msgstr " No s'ha pogut obrir un conducte per llegir: "
 
 #: edit/edit.c:332
@@ -105,7 +105,7 @@ msgid " Error writing to pipe: "
 msgstr " S'ha produït un error en escriure al conducte: "
 
 #: edit/editcmd.c:260
-msgid " Failed trying to open pipe for writing: "
+msgid " Cannot open pipe for writing: "
 msgstr " No s'ha pogut obrir el conducte per a l'escriptura: "
 
 #: edit/editcmd.c:327

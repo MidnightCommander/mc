@@ -20,7 +20,7 @@ msgid "Error"
 msgstr "에러"
 
 #: edit/edit.c:163 edit/edit.c:338
-msgid " Failed trying to open file for reading: "
+msgid " Cannot open file for reading: "
 msgstr " 파일 열기 실패: "
 
 #: edit/edit.c:289
@@ -28,7 +28,7 @@ msgid " Error reading from pipe: "
 msgstr " 파이프 읽기 에러: "
 
 #: edit/edit.c:294
-msgid " Failed trying to open pipe for reading: "
+msgid " Cannot open pipe for reading: "
 msgstr " 읽을 파이프 열기 실패: "
 
 #: edit/edit.c:332
@@ -102,7 +102,7 @@ msgid " Error writing to pipe: "
 msgstr " 파이프 쓰기 에러: "
 
 #: edit/editcmd.c:260
-msgid " Failed trying to open pipe for writing: "
+msgid " Cannot open pipe for writing: "
 msgstr " 쓰기위한 파이프 열기 실패: "
 
 #: edit/editcmd.c:327

@@ -22,7 +22,7 @@ msgid "Error"
 msgstr "Errorea"
 
 #: edit/edit.c:163 edit/edit.c:338
-msgid " Failed trying to open file for reading: "
+msgid " Cannot open file for reading: "
 msgstr " Huts egin da fitxategia irakurtzeko irekitzen saiatzean: "
 
 #: edit/edit.c:289
@@ -30,7 +30,7 @@ msgid " Error reading from pipe: "
 msgstr " Errorea kanalizazioan irakurtzean: "
 
 #: edit/edit.c:294
-msgid " Failed trying to open pipe for reading: "
+msgid " Cannot open pipe for reading: "
 msgstr " Huts egin da kanalizazioa irakurtzeko irekitzen saiatzean: "
 
 #: edit/edit.c:332
@@ -105,7 +105,7 @@ msgid " Error writing to pipe: "
 msgstr " Errorea kanalizazioan idaztean: "
 
 #: edit/editcmd.c:260
-msgid " Failed trying to open pipe for writing: "
+msgid " Cannot open pipe for writing: "
 msgstr " Huts egin da kanalizazioa idazteko irekitzen saiatzean: "
 
 #: edit/editcmd.c:327

@@ -29,7 +29,7 @@ msgid "Error"
 msgstr "Ошибка"
 
 #: edit/edit.c:159 edit/edit.c:336
-msgid " Failed trying to open file for reading: "
+msgid " Cannot open file for reading: "
 msgstr " Сбой открытия файла для чтения: "
 
 #: edit/edit.c:287
@@ -37,7 +37,7 @@ msgid " Error reading from pipe: "
 msgstr " Ошибка чтения из канала: "
 
 #: edit/edit.c:292
-msgid " Failed trying to open pipe for reading: "
+msgid " Cannot open pipe for reading: "
 msgstr " Сбой открытия канала для чтения: "
 
 #: edit/edit.c:330
@@ -111,7 +111,7 @@ msgid " Error writing to pipe: "
 msgstr " Ошибка записи в канал: "
 
 #: edit/editcmd.c:270
-msgid " Failed trying to open pipe for writing: "
+msgid " Cannot open pipe for writing: "
 msgstr " Сбой открытия канала для записи: "
 
 #: edit/editcmd.c:337

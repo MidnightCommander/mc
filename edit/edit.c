@@ -156,7 +156,7 @@ init_dynamic_edit_buffers (WEdit * edit, const char *filename, const char *text)
     if (filename)
 	if ((file = mc_open (filename, O_RDONLY | O_BINARY)) == -1) {
 /* The file-name is printed after the ':' */
-	    edit_error_dialog (_ ("Error"), get_sys_error (catstrs (_ (" Failed trying to open file for reading: "), filename, " ", 0)));
+	    edit_error_dialog (_ ("Error"), get_sys_error (catstrs (_ (" Cannot open file for reading: "), filename, " ", 0)));
 	    return 1;
 	}
     edit->curs2 = edit->last_byte;
@@ -289,7 +289,7 @@ int edit_insert_file (WEdit * edit, const char *filename)
 		return 0;
 	    }
 	} else {
-	    edit_error_dialog (_ ("Error"), get_sys_error (catstrs (_ (" Failed trying to open pipe for reading: "), p, " ", 0)));
+	    edit_error_dialog (_ ("Error"), get_sys_error (catstrs (_ (" Cannot open pipe for reading: "), p, " ", 0)));
 	    free (p);
 	    return 0;
 	}
@@ -333,7 +333,7 @@ static int check_file_access (WEdit *edit, const char *filename, struct stat *st
 
     /* Open the file, create it if needed */
     if ((file = mc_open (filename, O_RDONLY | O_CREAT | O_BINARY, 0666)) < 0) {
-	edit_error_dialog (_ ("Error"), get_sys_error (catstrs (_ (" Failed trying to open file for reading: "), filename, " ", 0)));
+	edit_error_dialog (_ ("Error"), get_sys_error (catstrs (_ (" Cannot open file for reading: "), filename, " ", 0)));
 	return 1;
     }
 

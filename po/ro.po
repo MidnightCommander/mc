@@ -27,7 +27,7 @@ msgid "Error"
 msgstr "Eroare"
 
 #: edit/edit.c:163 edit/edit.c:338
-msgid " Failed trying to open file for reading: "
+msgid " Cannot open file for reading: "
 msgstr " Nu pot deschide pentru citire fiºierul: "
 
 #: edit/edit.c:289
@@ -35,7 +35,7 @@ msgid " Error reading from pipe: "
 msgstr " Eroare la citirea din filtrul: "
 
 #: edit/edit.c:294
-msgid " Failed trying to open pipe for reading: "
+msgid " Cannot open pipe for reading: "
 msgstr " Nu pot deschide pentru citire filtrul: "
 
 #: edit/edit.c:332
@@ -109,7 +109,7 @@ msgid " Error writing to pipe: "
 msgstr " Eroare la scrierea în filtrul: "
 
 #: edit/editcmd.c:260
-msgid " Failed trying to open pipe for writing: "
+msgid " Cannot open pipe for writing: "
 msgstr " Nu pot deschide pentru scriere filtrul: "
 
 #: edit/editcmd.c:327
