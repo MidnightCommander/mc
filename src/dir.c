@@ -36,7 +36,7 @@
 int show_dot_files = 1;
 
 /* If true show files ending in ~ */
-int show_backups = 0;
+int show_backups = 1;
 
 /* If false then directories are shown separately from files */
 int mix_all_files = 0;

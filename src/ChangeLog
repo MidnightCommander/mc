@@ -1,3 +1,7 @@
+2002-01-17  Pavel Roskin  <proski@gnu.org>
+
+	* dir.c: Show backups by default.
+
 2002-01-15  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* file.c (copy_dir_dir): Check the destination is a directory
