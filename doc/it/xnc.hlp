@@ -14,7 +14,7 @@ Version 
 del GNU Midnight Commander. 
 
 Per saperne di più su come usare l'aiuto interattivo premi 
-semplicemente invioCome usare l'aiuto interattivo. Se vuoi, puoi andare direttamente 
+semplicemente invioHow to use help. Se vuoi, puoi andare direttamente 
 al contenutoContents dell'aiuto.
 
 Il Midnight Commander è stato scritto dai suoi autoriAUTHORS.
@@ -432,13 +432,15 @@ to permit linking proprietary applications with the
 library.  If this is what you want to do, use the GNU
 Library General Public License instead of this License.
 
-[Dialoghi di richiesta dati]
+[QueryBox]
+Dialoghi di richiesta dati
 
 Nelle finestra di richiesta dati è possibile usare i tasti
 freccia o la prima lettera per selezionare una voce o
 cliccare con il mouse sul bottone.
 
-[Come usare l'aiuto interattivo]
+[How to use help]
+Come usare l'aiuto interattivo
 
 Usare i tasti del cursore o il mouse per navigare
 nel visualizzatore dell'aiuto.
