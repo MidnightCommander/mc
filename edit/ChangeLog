@@ -1,3 +1,9 @@
+2002-10-17  Pavel Roskin  <proski@gnu.org>
+
+	* editoptions.c (edit_options_dialog): Don't allow
+	option_tab_spacing to be 0.  Reset invalid values to 8.
+	Reported by Ury N. Stankevich <ury@bofh.homeunix.org>
+
 2002-10-08  Pavel Roskin  <proski@gnu.org>
 
 	* wordproc.c (format_paragraph): If formatting was successful,

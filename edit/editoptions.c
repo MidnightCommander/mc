@@ -163,8 +163,8 @@ void edit_options_dialog (void)
 	    }
 	    if (q) {
 		option_tab_spacing = atoi (q);
-		if (option_tab_spacing < 0)
-		    option_tab_spacing = 2;
+		if (option_tab_spacing <= 0)
+		    option_tab_spacing = 8;
 		free (q);
 	    }
 	    option_syntax_highlighting = *quick_widgets[5 + OA].result;
