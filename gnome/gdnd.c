@@ -534,8 +534,8 @@ gdnd_validate_action (GdkDragContext *context,
 		      int on_desktop, int same_process, int same_source,
 		      char *dest_full_name, file_entry *dest_fe, int dest_selected)
 {
-	int on_directory;
-	int on_exe;
+	int on_directory = 0;
+	int on_exe = 0;
 
 	g_return_val_if_fail (context != NULL, 0);
 	g_return_val_if_fail (dest_full_name != NULL, 0);

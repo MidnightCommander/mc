@@ -116,10 +116,8 @@ create_mini_icons (GDesktopPrefs *dp, int r2l, int b2t, int rows)
 		dy = ICON_POS_INTERVAL;
 	}
 
-	if (dp->rows_not_columns)
-		y = oy;
-	else
-		x = ox;
+	x = ox;
+	y = oy;
 
 	for (i = 0; i < 2; i++) {
 		if (dp->rows_not_columns) {

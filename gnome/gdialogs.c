@@ -564,12 +564,19 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char 
         ctx->stable_symlinks = 0;
 
         /* Basic window */
-        if (operation == OP_COPY)
+	switch (operation) {
+	case OP_COPY:
                 fmd_win = gnome_dialog_new (_("Copy"), GNOME_STOCK_BUTTON_OK,
                                             GNOME_STOCK_BUTTON_CANCEL, NULL);
-        else if (operation == OP_MOVE)
+		break;
+	case OP_MOVE:
                 fmd_win = gnome_dialog_new (_("Move"), GNOME_STOCK_BUTTON_OK,
                                             GNOME_STOCK_BUTTON_CANCEL, NULL);
+		break;
+	default:
+		g_assert_not_reached ();
+		return NULL; /* keep -Wall happy */
+	}
 
         gtk_window_set_position (GTK_WINDOW (fmd_win), GTK_WIN_POS_MOUSE);
 

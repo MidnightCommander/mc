@@ -1,3 +1,11 @@
+2001-07-09  Pavel Roskin  <proski@gnu.org>
+
+	* gdesktop-prefs.c (create_mini_icons): Warning fix.
+	* gdialogs.c (file_mask_dialog): Likewise.
+	* gdnd.c (gdnd_validate_action): Likewise.
+	* gscreen.c (panel_drag_data_delete): Likewise.
+	(panel_tree_check_auto_expand): Likewise.
+
 2001-07-06  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.in: Move here gnome-specific definitions from

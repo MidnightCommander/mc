@@ -696,10 +696,10 @@ panel_drag_data_delete (GtkWidget *widget, GdkDragContext *context, WPanel *pane
 static void
 drop_on_panel (WPanel *panel, int idx, GdkDragContext *context, GtkSelectionData *selection_data)
 {
-	char *file;
-	file_entry *fe;
 	int drop_on_dir;
 	int reload;
+	char *file = NULL;
+	file_entry *fe = NULL;
 
 	g_assert (panel != NULL);
 	g_assert (idx == -1 || idx < panel->count);
@@ -1853,7 +1853,6 @@ panel_tree_check_auto_expand (WPanel *panel, GtkCTreeNode *current)
 	GtkCList *clist;
 	GList *free_list;
 	GList *tmp_list;
-	gint row, old_y, new_y;
 
 	dtree = GTK_DTREE (panel->tree);
 	ctree = GTK_CTREE (panel->tree);
@@ -1869,6 +1868,8 @@ panel_tree_check_auto_expand (WPanel *panel, GtkCTreeNode *current)
 	 * "current" stays the same place on the screen.
 	 */
 	if (tmp_list) {
+		gint row, new_y;
+		gint old_y = 0;
 		if (current) {
 			row = g_list_position (clist->row_list, (GList *) current);
 			old_y = row * clist->row_height - clist->vadjustment->value;
