@@ -1,17 +1,17 @@
 .TH mc 1 "30 October 1998"
 .\"SKIP_SECTION"
-.SH NAME
+.SH "NAME"
 mc \- Visual shell for Unix-like systems.
 .\"SKIP_SECTION"
-.SH USAGE
+.SH "USAGE"
 .B mc
 [\-abcCdfhPstuUVx?] [\-l log] [dir1 [dir2]] [-v file]
-.SH DESCRIPTION
+.SH "DESCRIPTION"
 .LP
 The Midnight Commander is a directory browser/file manager for
 Unix-like operating systems.  
 .\".\"DONT_SPLIT"
-.SH OPTIONS
+.SH "OPTIONS"
 .TP
 .I "\-a"
 Disables the usage of graphic characters for line drawing.
@@ -2531,8 +2531,7 @@ See also the file
 .B README.edit
 in the source tree for some more info.
 .PP
-.SH Completion
-.PP
+.SH "Completion"
 Let the Midnight Commander type for you.
 .PP
 Attempt to perform completion on the text before current position. MC
@@ -2794,7 +2793,7 @@ first scsi disk on Linux, you would use the following path name:
 It may take a while for the undelfs to load the required information
 before you start browsing files there. 
 .PP
-.SH Colors
+.SH "Colors"
 The Midnight Commander will try to detect if your terminal supports
 color using the terminal database and your terminal name.  Sometimes
 it gets confused, so you may force color mode or disable color mode
@@ -3041,7 +3040,7 @@ If this variable is on (default is off) when you browse the file
 system on a Tree panel, it will automatically reload the other panel
 with the contents of the selected directory.
 .PP
-.SH Terminal databases
+.SH "Terminal databases"
 The Midnight Commander provides a way to fix your system terminal
 database without requiring root privileges.  The Midnight Commander
 searches in the system initialization file (the mc.lib file located in
@@ -3085,7 +3084,7 @@ other keys to do the same work (on those keyboard with tons of nice
 and unused keys everywhere).
 .PP
 .SH ""
-.SH FILES
+.SH "FILES"
 .PP
 The program will retrieve all of its information relative to the
 MCHOME environment variable, if this variable is not set, then it will
@@ -3148,15 +3147,15 @@ is present it is used instead of the home or system-wide
 applications menu.
 .PP
 .\"SKIP_SECTION"
-.SH LICENSE
+.SH "LICENSE"
 This program is distributed under the terms of the GNU General Public
 License as published by the Free Software Foundation. See the built-in
 help for details on the License and the lack of warranty.
-.SH AVAILABILITY
+.SH "AVAILABILITY"
 The latest version of this program can be found at 
 ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/ and on the
 mirrors listed on the GNOME site http://www.gnome.org/.
-.SH SEE ALSO
+.SH "SEE ALSO"
 ed(1), gpm(1), mcserv(8), terminfo(1), view(1), sh(1), bash(1),
 tcsh(1), zsh(1).
 .PP
@@ -3165,7 +3164,7 @@ The Midnight Commander page on the World Wide Web:
 	http://www.gnome.org/mc/
 .fi
 .PP
-.SH AUTHORS
+.SH "AUTHORS"
 Miguel de Icaza (miguel@roxanne.nuclecu.unam.mx), Janne Kukonlehto
 (jtklehto@paju.oulu.fi), Radek Doulik (rodo@ucw.cz), Fred
 Leeflang (fredl@nebula.ow.org), Dugan Porter (dugan@b011.eunet.es),
@@ -3199,7 +3198,7 @@ Sergey Ya. Korshunoff (root@seyko.msk.su), Thomas Pundt
 (torben.fjerdingstad@uni-c.dk), Vadim Sinolitis (vvs@nsrd.npi.msu.su)
 and Wim Osterholt (wim@djo.wtm.tudelft.nl).
 .PP
-.SH BUGS
+.SH "BUGS"
 See the file TODO in the distribution for information on what
 remains to be done.
 .PP

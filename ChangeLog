@@ -1,3 +1,7 @@
+2001-07-24  Pavel Roskin  <proski@gnu.org>
+
+	* doc/mc.1.in: Quote all section headers.  Minor formatting fix.
+
 2001-07-23  Pavel Roskin  <proski@gnu.org>
 
 	* doc/mc.1.in: Fix description of mc.lib.  Fix broken links.
