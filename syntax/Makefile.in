@@ -1,13 +1,68 @@
+srcdir = @srcdir@
+VPATH = @srcdir@
 
-dunno what to do here exactly
+rootdir = $(srcdir)/..
+@MCFG@@MCF@
 
-these files must be installed:
-    /usr/lib/cooledit/syntax/c.syntax
-    /usr/lib/cooledit/syntax/changelog.syntax
-etc.
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+
+#
+# Distribution variables
+#
+
+DISTSYNTAX = Makefile.in $(ALLSYNTAX)
+ALLSYNTAX =		\
+	c.syntax	\
+	changelog.syntax \
+	diff.syntax	\
+	diffc.syntax	\
+	html.syntax	\
+	java.syntax	\
+	latex.syntax	\
+	lsm.syntax	\
+	makefile.syntax	\
+	ml.syntax	\
+	nroff.syntax	\
+	pascal.syntax	\
+	perl.syntax	\
+	python.syntax	\
+	sh.syntax	\
+	smalltalk.syntax
+
+all:
+
+Makefile: Makefile.in ../config.status
+	(cd ..; CONFIG_FILES=syntax/Makefile CONFIG_HEADERS= ./config.status)
 
 
-(I use automake only)
+install: Makefile
+	for I in $(ALLSYNTAX); \
+	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(syntaxdir)/$$I; done
 
--paul <psheer@obsidian.co.za>
+uninstall:
+	for I in $(ALLSYNTAX); \
+	do $(RMF) $(DESTDIR)$(syntaxdir)/$$I; done
+	-rmdir $(DESTDIR)$(syntaxdir)
+
+check:
+	@echo no tests are supplied.
+
+TAGS:
+
+cross:
+
+clean:
+
+realclean:
+
+distclean:
+	-$(RMF) $(srcdir)/*~ $(srcdir)/Makefile
+
+distcopy:
+	$(CP) $(DISTSYNTAX) ../../mc-$(VERSION)/syntax
+
+depend dep:
+
 
