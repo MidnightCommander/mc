@@ -1,6 +1,9 @@
 Before 4.6.0-pre2
 =================
 
+Work around bug in Red Hat 8.0 S-Lang that hides non-ascii characters in
+POSIX locale or disable Red Hat 8.0 S-Lang by default.
+
 Use paranoid quoting in subshell_name_quote() only when absolutely
 necessary - it's slow, especially in UTF-8 locales.
 
