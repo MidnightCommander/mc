@@ -72,17 +72,14 @@ msgid ""
 msgstr ""
 
 #: gnome/gaction.c:134 gnome/gaction.c:150
-#, fuzzy
 msgid "open"
 msgstr "Openen"
 
 #: gnome/gaction.c:185 gnome/gaction.c:198
-#, fuzzy
 msgid "edit"
 msgstr "Bewerken"
 
 #: gnome/gaction.c:331
-#, fuzzy
 msgid "view"
 msgstr "Weergave"
 
@@ -354,7 +351,6 @@ msgid "Use shaped icons"
 msgstr "Gebruik gevormde pictogrammen"
 
 #: gnome/gdesktop-prefs.c:281
-#, fuzzy
 msgid "Use shaped text"
 msgstr "Gebruik gevormde pictogrammen"
 
@@ -427,14 +423,12 @@ msgid "_Directory..."
 msgstr "_Directory..."
 
 #: gnome/gdesktop.c:2613
-#, fuzzy
 msgid "Creates a new URL link"
-msgstr "Maak een nieuwe starter"
+msgstr "Maak een nieuwe URL link"
 
 #: gnome/gdesktop.c:2613
-#, fuzzy
 msgid "URL L_ink..."
-msgstr "Harde Link..."
+msgstr "URL Link..."
 
 #: gnome/gdesktop.c:2614
 msgid "Creates a new launcher"
@@ -445,57 +439,46 @@ msgid "_Launcher..."
 msgstr "Starter..."
 
 #: gnome/gdesktop.c:2620
-#, fuzzy
 msgid "By _Name"
-msgstr " Naam "
+msgstr "Op naam "
 
 #: gnome/gdesktop.c:2621
-#, fuzzy
 msgid "By File _Type"
-msgstr "Bestandsformaat"
+msgstr "Volgens bestandsformaat"
 
 #: gnome/gdesktop.c:2622
-#, fuzzy
 msgid "By _Size"
-msgstr " Grootte "
+msgstr "Volgens grootte "
 
 #: gnome/gdesktop.c:2623
-#, fuzzy
 msgid "By Time Last _Accessed"
-msgstr "Benaderd"
+msgstr "Volgens laatst gebruikt"
 
 #: gnome/gdesktop.c:2624
-#, fuzzy
 msgid "By Time Last _Modified"
-msgstr "Gewijzigd"
+msgstr "Volgens laatst aangepast"
 
 #: gnome/gdesktop.c:2625
-#, fuzzy
 msgid "By Time Last _Changed"
-msgstr "Veranderd"
+msgstr "Volgens laatst gewijzigd"
 
 #: gnome/gdesktop.c:2633 gnome/glayout.c:455
-#, fuzzy
 msgid "_Arrange Icons"
 msgstr "Pictogrammen schikken"
 
 #: gnome/gdesktop.c:2634
-#, fuzzy
 msgid "Create _New Window"
 msgstr "Open Nieuw Venster"
 
 #: gnome/gdesktop.c:2636 gnome/glayout.c:457
-#, fuzzy
 msgid "Recreate Desktop _Shortcuts"
 msgstr "Herstel Bureablad Snelkoppelingen"
 
 #: gnome/gdesktop.c:2637 gnome/glayout.c:458
-#, fuzzy
 msgid "Rescan _Desktop"
 msgstr "Bureaublad Opnieuw Inlezen"
 
 #: gnome/gdesktop.c:2638
-#, fuzzy
 msgid "Configure _Background Image"
 msgstr "Instellen achtergrondafbeelding"
 
@@ -1103,9 +1086,8 @@ msgid "Drop Action"
 msgstr "'Drop'-actie"
 
 #: gnome/gnome-file-property-dialog.c:388
-#, fuzzy
 msgid "Use default Drop Action options"
-msgstr "Standaard 'drop'-actie"
+msgstr "Gebruik standaard 'drop'-actie"
 
 #: gnome/gnome-file-property-dialog.c:403
 #: gnome/gnome-file-property-dialog.c:491 gnome/gpopup2.c:194
@@ -1213,9 +1195,9 @@ msgstr "Plakkend"
 
 #: gnome/gnome-file-property-dialog.c:815
 #: gnome/gnome-file-property-dialog.c:905
-#, fuzzy, c-format
+#, c-format
 msgid "<Unknown> (%d)"
-msgstr "<Onbekend>"
+msgstr "<Onbekend> (%d)"
 
 #: gnome/gnome-file-property-dialog.c:919
 msgid "File ownership"
@@ -1254,9 +1236,9 @@ msgid "You cannot rename a file to something containing a '/' character"
 msgstr "Een bestandsnaam mag geen '/' bevatten"
 
 #: gnome/gnome-open-dialog.c:384
-#, fuzzy, c-format
+#, c-format
 msgid "Select an application to open \"%s\" with."
-msgstr "Kies een toepassing voor het openen van \""
+msgstr "Kies een toepassing voor het openen van \"%s\"."
 
 #: gnome/gnome-open-dialog.c:394
 msgid "Select a file to run with"
@@ -1476,19 +1458,16 @@ msgid "<readlink failed>"
 msgstr "<readlink mislukt>"
 
 #: gnome/gscreen.c:2147
-#, fuzzy
 msgid "Copy directory"
-msgstr "Homedirectory"
+msgstr "Kopieer directory"
 
 #: gnome/gscreen.c:2148
-#, fuzzy
 msgid "Delete directory"
-msgstr "Homedirectory"
+msgstr "Verwijder directory"
 
 #: gnome/gscreen.c:2149
-#, fuzzy
 msgid "Rename or move directory"
-msgstr "Hernoem of verplaats bestanden"
+msgstr "Hernoem of verplaats directory"
 
 #: gnome/gscreen.c:2305
 msgid "Back"
@@ -1545,9 +1524,9 @@ msgid "&Ok"
 msgstr "&Ok"
 
 #: gnome/gview.c:136
-#, fuzzy, c-format
+#, c-format
 msgid "Offset 0x%08lx"
-msgstr "Offset 0x%08x"
+msgstr "Offset 0x%08lx"
 
 #: gnome/gview.c:138 src/view.c:730
 #, c-format
@@ -1839,9 +1818,8 @@ msgid " Continue "
 msgstr " Verder "
 
 #: gtkedit/editcmd.c:1151
-#, fuzzy
 msgid "o&Ne"
-msgstr "&Naam"
+msgstr "Ee&n"
 
 #: gtkedit/editcmd.c:1153 src/filegui.c:597
 msgid "al&L"
@@ -1926,7 +1904,7 @@ msgid " Enter replace text : "
 msgstr " Geef vervangende tekst : "
 
 #: gtkedit/editcmd.c:1370 gtkedit/editcmd.c:1371
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You can enter regexp substrings with %s\n"
 "(not \\1, \\2 like sed) then use \"Enter...order\""
@@ -1940,12 +1918,12 @@ msgstr " Geef argument- (of substring-) volgorde: "
 
 #. Tool hint
 #: gtkedit/editcmd.c:1377 gtkedit/editcmd.c:1378
-#, fuzzy
 msgid ""
 "Enter the order of replacement of your scanf\n"
 "format specifiers or regexp substrings, eg 3,1,2"
 msgstr ""
-"Geef de vervangingsvolgorde van uw 'scanf'-omschrijving of regexp substrings"
+"Geef de vervangingsvolgorde van uw 'scanf'-omschrijving\n"
+"of regexp substrings, bvb 3,1,2"
 
 #. The following are check boxes
 #: gtkedit/editcmd.c:1383
@@ -1961,11 +1939,12 @@ msgid " Regular expression "
 msgstr " Reguliere expressie "
 
 #: gtkedit/editcmd.c:1389 gtkedit/editcmd.c:1390
-#, fuzzy
 msgid ""
 "See the regex man page for how\n"
 "to compose a regular expression"
-msgstr "Zie de regex 'man'-pagina"
+msgstr ""
+"Zie de regex 'man'-pagina\n"
+"om een reguliere expressie samen te stellen"
 
 #: gtkedit/editcmd.c:1396
 msgid " Backwards "
