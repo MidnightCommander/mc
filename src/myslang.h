@@ -83,8 +83,6 @@ void slang_keypad (int set);
 void slang_shell_mode (void);
 void slang_shutdown (void);
 int has_colors (void);
-/* Internal function prototypes */
-void load_terminfo_keys (void);
 
 /* FIXME Clean up this; gnome has nothing to do here */
 #ifndef HAVE_GNOME

@@ -26,14 +26,14 @@
 #include <termios.h>
 #include <signal.h>
 #include <string.h>
-#include "tty.h"
+
 #include "global.h"
+#include "tty.h"
 #include "color.h"
 #include "mouse.h"		/* Gpm_Event is required in key.h */
 #include "key.h"		/* define_sequence */
 #include "main.h"		/* extern: force_colors */
 #include "win.h"		/* do_exit_ca_mode */
-#include "fileopctx.h"
 #include "setup.h"
 
 #ifdef HAVE_SLANG
@@ -80,6 +80,8 @@ extern int _SLsys_input_pending (int);
 extern unsigned int SLsys_getkey (void);
 extern int SLsys_input_pending (int);
 #endif
+
+static void load_terminfo_keys (void);
 
 static unsigned int SLang_getkey2 (void)
 {
@@ -132,17 +134,6 @@ slang_intr (int signo)
     slinterrupt = 1;
 }
 
-#if 0
-static int
-interrupts_enabled (void)
-{
-    struct sigaction current_act;
-
-    sigaction (SIGINT, NULL, &current_act);
-    return current_act.sa_handler == slang_intr;
-}
-#endif
-
 void
 enable_interrupt_key(void)
 {
@@ -167,7 +158,7 @@ disable_interrupt_key(void)
 }
 
 int
-got_interrupt ()
+got_interrupt (void)
 {
     int t;
 
@@ -256,7 +247,7 @@ slang_shell_mode (void)
 }
 
 void
-slang_shutdown ()
+slang_shutdown (void)
 {
     char *op_cap;
     
@@ -367,7 +358,7 @@ vline (int character, int len)
     }
 }
 
-int max_index = 0;
+static int max_index = 0;
 
 void
 init_pair (int index, char *foreground, char *background)
@@ -448,7 +439,7 @@ char *color_terminals [] = {
     0
 };
 
-int has_colors ()
+int has_colors (void)
 {
     char *terminal = getenv ("TERM");
     char *cts = color_terminal_string, *s;
@@ -533,7 +524,7 @@ attrset (int color)
 /* This table describes which capabilities we want and which values we
  * assign to them.
  */
-struct {
+static struct {
     int  key_code;
     char *key_name;
 } key_table [] = {
@@ -572,7 +563,7 @@ struct {
     { 0, 0}
 };
 	
-void
+static void
 do_define_key (int code, char *strcap)
 {
     char    *seq;
@@ -582,8 +573,8 @@ do_define_key (int code, char *strcap)
 	define_sequence (code, seq, MCKEY_NOACTION);
 }
 
-void
-load_terminfo_keys ()
+static void
+load_terminfo_keys (void)
 {
     int i;
 
@@ -591,7 +582,7 @@ load_terminfo_keys ()
 	do_define_key (key_table [i].key_code, key_table [i].key_name);
 }
 
-int getch ()
+int getch (void)
 {
     int c;
     if (no_slang_delay)
@@ -607,12 +598,10 @@ int getch ()
     return (c);
 }
 
-extern int slow_terminal;
-
 #else
 
 /* Non slang builds do not understand got_interrupt */
-int got_interrupt ()
+int got_interrupt (void)
 {
     return 0;
 }

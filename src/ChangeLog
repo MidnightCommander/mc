@@ -1,5 +1,9 @@
 2001-09-03  Pavel Roskin  <proski@gnu.org>
 
+	* slint.c: Make more data and function static.
+	* key.h: Remove declarations that are now static.
+	* myslang.h: Likewise.
+
 	* x.h: Remove.  Adjust all users.  Make sure that global.h is
 	included instead.  Don't include sys/param.h unconditionally -
 	rely on global.h taking care of it.
