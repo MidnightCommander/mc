@@ -405,7 +405,7 @@ string_perm (mode_t mode_bits)
                    the password.
    has_prefix = 1: Search p for known url prefixes. If found delete
                    the password from the url. 
-                   Cavevat: only the first url is found
+                   Caveat: only the first url is found
 */ 
 char *
 strip_password (char *p, int has_prefix)
@@ -417,6 +417,7 @@ strip_password (char *p, int has_prefix)
 		     {"/#mc:", 5},
 		     {"ftp://", 6},
 		     {"/#smb:", 6},
+		     {"/#sh:", 5}
     };
     char *at, *inner_colon, *dir;
     size_t i;
