@@ -36,6 +36,7 @@ DIR="/public/ftp/pub/Linux/utils/file/managers/mc/snapshots"
 
 cd "$MC_CVS_DIR"
 cvs up -dPA
+test -d "$MC_BUILD_DIR" && chmod -R u+rwx "$MC_BUILD_DIR"
 rm -rf "$MC_BUILD_DIR"
 cp -a "$MC_CVS_DIR" "$MC_BUILD_DIR"
 cd "$MC_BUILD_DIR"
