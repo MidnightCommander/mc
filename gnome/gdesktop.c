@@ -5,11 +5,14 @@
  * Authors: Federico Mena <federico@nuclecu.unam.mx>
  *          Miguel de Icaza <miguel@nuclecu.unam.mx>
  */
-#if 0
+#if 1
 #include <config.h>
 #include <gnome.h>
+#include "dialog.h"
 #include "gdesktop.h"
+#include "gdesktop-icon.h"
 #include "gmetadata.h"
+#include "fs.h"
 #include "../vfs/vfs.h"
 
 
@@ -35,14 +38,92 @@ int desktop_snap_icons = FALSE;
 /* The computed name of the user's desktop directory */
 static char *desktop_directory;
 
-/* Layout information:  number of rows/columns for the layout slots, and the array of slots */
+/* Layout information:  number of rows/columns for the layout slots, and the array of slots.  Each
+ * slot is an integer that specifies the number of icons that belong to that slot.
+ */
 static int layout_cols;
 static int layout_rows;
 static int *layout_slots;
 
-/* The list of desktop icons */
+/* The list of desktop icons (desktop_icon_info structures) */
 static GList *desktop_icons;
 
+#define l_slots(x, y) (layout_slots[(x) * layout_rows + (y)])
+
+
+/* Looks for a free slot in the layout_slots array and returns the coordinates that coorespond to
+ * it.  "Free" means it either has zero icons in it, or it has the minimum number of icons of all
+ * the slots.
+ */
+static void
+get_icon_auto_pos (int *x, int *y)
+{
+	int min, min_x, min_y;
+	int u, v;
+	int val;
+
+	min = l_slots (0, 0);
+	min_x = min_y = 0;
+
+	for (u = 0; u < layout_cols; u++)
+		for (v = 0; v < layout_rows; v++) {
+			val = l_slots (u, v);
+
+			if (val == 0) {
+				/* Optimization: if it is zero, return immediately */
+
+				*x = u * DESKTOP_SNAP_X;
+				*y = v * DESKTOP_SNAP_Y;
+				return;
+			} else if (val < min) {
+				min = val;
+				min_x = u;
+				min_y = v;
+			}
+		}
+
+	*x = min_x * DESKTOP_SNAP_X;
+	*y = min_y * DESKTOP_SNAP_Y;
+}
+
+/* Snaps the specified position to the icon grid.  It looks for the closest free spot on the grid,
+ * or the closest one that has the least number of icons in it.
+ */
+static void
+get_icon_snap_pos (int *x, int *y)
+{
+	int min, min_x, min_y;
+	int min_dist;
+	int sx, sy;
+	int u, v;
+	int val, dist;
+	int dx, dy;
+
+	min = l_slots (0, 0);
+	min_x = min_y = 0;
+	min_dist = INT_MAX;
+
+	sx = DESKTOP_SNAP_X * (*x / DESKTOP_SNAP_X);
+	sy = DESKTOP_SNAP_Y * (*y / DESKTOP_SNAP_Y);
+
+	for (u = 0; u < layout_cols; u++)
+		for (v = 0; v < layout_rows; v++) {
+			val = l_slots (u, v);
+
+			dx = sx - u;
+			dy = sy - v;
+			dist = dx * dx + dy * dy;
+
+			if (((val == min) && (dist < min_dist)) || (val < min)) {
+				min_dist = dist;
+				min_x = u;
+				min_y = v;
+			}
+		}
+
+	*x = min_x * DESKTOP_SNAP_X;
+	*y = min_y * DESKTOP_SNAP_Y;
+}
 
 /* Places a desktop icon.  If auto_pos is true, then the function will look for a place to position
  * the icon automatically, else it will use the specified coordinates, snapped to the grid if the
@@ -51,14 +132,31 @@ static GList *desktop_icons;
 static void
 desktop_icon_info_place (struct desktop_icon_info *dii, int auto_pos, int xpos, int ypos)
 {
-	/* FIXME */
+	int u, v;
+
+	if (auto_pos)
+		get_icon_auto_pos (&xpos, &ypos);
+	else if (desktop_snap_icons)
+		get_icon_snap_pos (&xpos, &ypos);
+
+	/* Increase the number of icons in the corresponding slot */
+
+	u = xpos / DESKTOP_SNAP_X;
+	v = ypos / DESKTOP_SNAP_Y;
+	l_slots (u, v)++;
+
+	/* Move the icon */
+	
+	dii->x = xpos;
+	dii->y = ypos;
+	gtk_widget_set_uposition (dii->dicon, xpos, ypos);
 }
 
 /* Creates a new desktop icon.  The filename is the pruned filename inside the desktop directory.
  * If auto_pos is true, then the function will look for a place to position the icon automatically,
- * else it will use the specified coordinates.
+ * else it will use the specified coordinates.  It does not show the icon.
  */
-static void
+static struct desktop_icon_info *
 desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 {
 	struct desktop_icon_info *dii;
@@ -69,7 +167,7 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 	icon_name = meta_get_icon_for_file (full_name);
 
 	dii = g_new (struct desktop_icon_info, 1);
-	dii->widget = desktop_icon_new (icon_name, filename);
+	dii->dicon = desktop_icon_new (icon_name, filename);
 	dii->filename = g_strdup (filename);
 	dii->selected = FALSE;
 
@@ -77,15 +175,39 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 	g_free (icon_name);
 
 	desktop_icon_info_place (dii, auto_pos, xpos, ypos);
-	gtk_widget_show (dii->dicon);
+
+	desktop_icons = g_list_append (desktop_icons, dii);
+
+	return dii;
+}
+
+/* Frees a desktop icon information structure, and destroy the icon widget.  Does not remove the
+ * structure from the desktop_icons list!
+ */
+static void
+desktop_icon_info_free (struct desktop_icon_info *dii)
+{
+	int u, v;
+
+	gtk_widget_destroy (dii->dicon);
+
+	/* Decrease the number of icons in the corresponding slot */
+
+	u = dii->x / DESKTOP_SNAP_X;
+	v = dii->y / DESKTOP_SNAP_Y;
+	l_slots (u, v)--;
+	g_assert (l_slots (u, v) >= 0);
+
+	g_free (dii->filename);
+	g_free (dii);
 }
 
 /* Creates the layout information array */
 static void
 create_layout_info (void)
 {
-	layout_cols = gdk_screen_width () / DESKTOP_SNAP_X;
-	layout_rows = gdk_screen_height () / DESKTOP_SNAP_Y;
+	layout_cols = (gdk_screen_width () + DESKTOP_SNAP_X - 1) / DESKTOP_SNAP_X;
+	layout_rows = (gdk_screen_height () + DESKTOP_SNAP_Y - 1) / DESKTOP_SNAP_Y;
 	layout_slots = g_new0 (int, layout_cols * layout_rows);
 }
 
@@ -129,6 +251,8 @@ load_initial_desktop_icons (void)
 	DIR *dir;
 	char *full_name;
 	int have_pos, x, y;
+	GList *list;
+	struct desktop_icon_info *dii;
 
 	dir = mc_opendir (desktop_directory);
 	if (!dir) {
@@ -147,12 +271,19 @@ load_initial_desktop_icons (void)
 		full_name = g_concat_dir_and_file (desktop_directory, dirent->d_name);
 
 		have_pos = meta_get_icon_pos (full_name, &x, &y);
-		desktop_icon_info_new (dirent->d_name, have_pos, x, y);
+		desktop_icon_info_new (dirent->d_name, !have_pos, x, y);
 
 		g_free (full_name);
 	}
 
 	mc_closedir (dir);
+
+	/* Show all the icons */
+
+	for (list = desktop_icons; list; list = list->next) {
+		dii = list->data;
+		gtk_widget_show (dii->dicon);
+	}
 }
 
 /**
@@ -181,7 +312,7 @@ desktop_destroy (void)
 	/* Destroy the desktop icons */
 
 	for (list = desktop_icons; list; list = list->next)
-		desktop_icon_info_free (dii->data);
+		desktop_icon_info_free (list->data);
 
 	g_list_free (desktop_icons);
 	desktop_icons = NULL;

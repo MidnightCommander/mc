@@ -1,3 +1,15 @@
+1998-10-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c: We are now using the new desktop icon code.  It is
+	not yet complete, but what is there does work.  We have icon
+	creation, auto-layout and snapping.  Next step is drag and drop
+	and popup menus.
+
+	* glayout.c: #ifdef out the stuff that uses the old desktop code.
+	I will replace it gradually.
+	* gmain.c: Likewise.
+	* gscreen.c: Likewise.
+
 1998-10-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (panel_icon_list_button_release): Remove unused

@@ -118,7 +118,7 @@ desktop_icon_init (DesktopIcon *dicon)
 	dicon->text = gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (dicon->canvas)),
 					     gnome_icon_text_item_get_type (),
 					     NULL);
-	gnome_icon_text_item_select (GNOME_ICON_TEXT_ITEM (dicon->text), TRUE);
+
 	dicon->w_changed_id = gtk_signal_connect (GTK_OBJECT (dicon->text), "width_changed",
 						  (GtkSignalFunc) size_changed,
 						  dicon);
@@ -203,7 +203,7 @@ set_text (DesktopIcon *dicon, char *text)
 
 	gnome_icon_text_item_configure (GNOME_ICON_TEXT_ITEM (dicon->text),
 					0, icon_height + SPACING,
-#if 0
+#if 1
 					DESKTOP_SNAP_X,
 #else
 					SNAP_X,
@@ -306,7 +306,7 @@ create_window_shape (DesktopIcon *dicon, int icon_width, int icon_height, int te
 	im = GNOME_CANVAS_IMAGE (dicon->icon)->im;
 	gdk_imlib_render (im, icon_width, icon_height);
 	im_mask = gdk_imlib_move_mask (im);
-#if 0
+#if 1
 	if (im_mask && desktop_use_shaped_icons) {
 #else
 	if (im_mask && want_transparent_icons) {
@@ -372,7 +372,7 @@ desktop_icon_reshape (DesktopIcon *dicon)
 	text_height = y2 - y1 + 1;
 
 	/* Calculate new size of widget */
-#if 0
+#if 1
 	dicon->width = MAX (icon_width, DESKTOP_SNAP_X);
 #else
 	dicon->width = MAX (icon_width, SNAP_X);

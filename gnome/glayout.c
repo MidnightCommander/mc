@@ -329,7 +329,9 @@ GnomeUIInfo gnome_panel_commands_menu [] = {
 };
 
 GnomeUIInfo gnome_panel_desktop_menu [] = {
+#if 0
 	{ GNOME_APP_UI_ITEM, N_("_Arrange icons"),     N_("Arranges the icons on the desktop"), gnome_arrange_icons },
+#endif
 /*	{ GNOME_APP_UI_TOGGLEITEM, N_("Desktop grid"), N_("Use a grid for laying out icons"), gnome_toggle_snap }, */
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };

@@ -533,10 +533,14 @@ static struct {
 	context_menu_callback callback;
 } file_actions [] = {
 	{ N_("Properties"),      F_SINGLE | F_PANEL,   	  	 (context_menu_callback) panel_action_properties },
+#if 0
 	{ N_("Properties"),      F_SINGLE | F_DICON,  	  	 (context_menu_callback) desktop_icon_properties },
+#endif
 	{ "",                    F_SINGLE,   	    	  	 NULL },
 	{ N_("Open"),            F_PANEL | F_ALL,      	  	 (context_menu_callback) panel_action_open },
+#if 0
 	{ N_("Open"),            F_DICON | F_ALL, 	  	 (context_menu_callback) desktop_icon_execute },
+#endif
 	{ N_("Open with"),       F_PANEL | F_ALL,      	  	 (context_menu_callback) panel_action_open_with },
 	{ N_("View"),            F_PANEL | F_NOTDIR,      	 (context_menu_callback) panel_action_view },
 	{ N_("View unfiltered"), F_PANEL | F_NOTDIR,      	 (context_menu_callback) panel_action_view_unfiltered },  
@@ -564,7 +568,9 @@ common_menu_t common_panel_actions [] = {
 };
 
 common_menu_t common_dicon_actions [] = {
+#if 0
 	{ N_("Delete"),          (context_menu_callback) desktop_icon_delete },
+#endif
 	{ NULL, NULL }
 };
       
@@ -1065,7 +1071,9 @@ panel_icon_list_drag_data_received (GtkWidget          *widget,
 		else
 			dir = g_strdup (panel->cwd);
 	}
+#if 0
 	drop_on_directory (selection_data, context, context->suggested_action, dir, 0);
+#endif
 	free (dir);
 
 	update_one_panel_widget (panel, 0, UP_KEEPSEL);
@@ -1104,7 +1112,9 @@ panel_clist_drag_data_received (GtkWidget          *widget,
 		else 
 			dir = g_strdup (panel->cwd);
 	}
+#if 0
 	drop_on_directory (selection_data, context, context->suggested_action, dir, 0);
+#endif
 	free (dir);
 
 	update_one_panel_widget (panel, 0, UP_KEEPSEL);
@@ -1234,7 +1244,9 @@ panel_clist_drop_data_available (GtkWidget *widget, GdkEventDropDataAvailable *d
 		g_assert (row < panel->count);
 
 	}
+#if 0
 	drop_on_directory (data, drop_dir, 0);
+#endif
 
 	if (drop_dir != panel->cwd)
 		free (drop_dir);
@@ -1586,7 +1598,9 @@ panel_icon_list_drop_data_available (GtkWidget *widget, GdkEventDropDataAvailabl
 		else 
 			drop_dir = panel->cwd;
 	}
+#if 0
 	drop_on_directory (data, drop_dir, 0);
+#endif
 
 	if (drop_dir != panel->cwd)
 		free (drop_dir);
