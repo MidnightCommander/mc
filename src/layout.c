@@ -177,7 +177,7 @@ static struct {
 };
 
 static int first_width, second_width;
-static char *layout_title, *title1, *title2, *title3, *output_lines_label;
+static char *title1, *title2, *title3, *output_lines_label;
 
 static WButton *bleft_widget, *bright_widget;
 
@@ -274,19 +274,18 @@ static int layout_callback (struct Dlg_head *h, int Id, int Msg)
     case DLG_DRAW:
     	/*When repainting the whole dialog (e.g. with C-l) we have to
     	  update everything*/
+	common_dialog_repaint (h);
+
    	old_first_panel_size = -1;
     	old_horizontal_split = -1;
     	old_output_lines     = -1;
+
 	attrset (COLOR_NORMAL);
-	dlg_erase (h);
-	draw_box (h, 1, 2, h->lines - 2, h->cols - 4);
 	draw_box (h, 2, 4, 6, first_width);
 	draw_box (h, 8, 4, 4, first_width);
 	draw_box (h, 2, 5 + first_width, 10, second_width);
 
 	attrset (COLOR_HOT_NORMAL);
-	dlg_move (h, 1, (h->cols - strlen(layout_title))/2);
-	addstr (layout_title);
 	dlg_move (h, 2, 5);
 	addstr (title1);
 	dlg_move (h, 8, 5);
@@ -373,7 +372,6 @@ static void init_layout (void)
 		
 		first_width = 19; /* length of line with '<' '>' buttons */
 		
-		layout_title = _(" Layout ");
 		title1 = _(" Panel split ");
 		title2 = _(" Highlight... ");
 		title3 = _(" Other options ");
@@ -421,7 +419,7 @@ static void init_layout (void)
 
 		/* 
 		 * alex@bcs.zp.ua:
-		 * To be completely correct, one need to check if layout_title
+		 * To be completely correct, one need to check if the title
 		 * does not exceed dialog length and total length of 3 buttons
 		 * allows their placement in one row. But assuming this dialog
 		 * is wide enough, I don't include such a tests.

@@ -45,7 +45,6 @@
 #include "../vfs/vfs.h"
 
 static int single_set;
-static struct Dlg_head *ch_dlg;
 
 #define PX		5
 #define PY		2
@@ -74,9 +73,6 @@ static umode_t and_mask, or_mask, c_stat;
 static char *c_fname, *c_fown, *c_fgrp;
 
 static WLabel *statl;
-static int normal_color;
-static int title_color;
-static int selection_color;
 
 static struct {
     mode_t mode;
@@ -112,54 +108,51 @@ static struct {
     { B_ALL,    NORMAL_BUTTON,  0, 0,  N_("Set &all") },
 };
 
-static void chmod_toggle_select (void)
+static void chmod_toggle_select (Dlg_head *h)
 {
-    int Id = ch_dlg->current->dlg_id - BUTTONS + single_set * 2;
+    int Id = h->current->dlg_id - BUTTONS + single_set * 2;
 
-    attrset (normal_color);
+    attrset (COLOR_NORMAL);
     check_perm[Id].selected ^= 1;
 
-    dlg_move (ch_dlg, PY + PERMISSIONS - Id, PX + 1);
+    dlg_move (h, PY + PERMISSIONS - Id, PX + 1);
     addch ((check_perm[Id].selected) ? '*' : ' ');
-    dlg_move (ch_dlg, PY + PERMISSIONS - Id, PX + 3);
+    dlg_move (h, PY + PERMISSIONS - Id, PX + 3);
 }
 
-static void chmod_refresh (void)
+static void chmod_refresh (Dlg_head *h)
 {
-    attrset (COLOR_NORMAL);
-    dlg_erase (ch_dlg);
-    
-    draw_box (ch_dlg, 1, 2, 20 - single_set, 66);
-    draw_box (ch_dlg, PY, PX, PERMISSIONS + 2, 33);
-    draw_box (ch_dlg, FY, FX, 10, 25);
+    common_dialog_repaint (h);
 
-    dlg_move (ch_dlg, FY + 1, FX + 2);
+    attrset (COLOR_NORMAL);
+    
+    draw_box (h, PY, PX, PERMISSIONS + 2, 33);
+    draw_box (h, FY, FX, 10, 25);
+
+    dlg_move (h, FY + 1, FX + 2);
     addstr (_("Name"));
-    dlg_move (ch_dlg, FY + 3, FX + 2);
+    dlg_move (h, FY + 3, FX + 2);
     addstr (_("Permissions (Octal)"));
-    dlg_move (ch_dlg, FY + 5, FX + 2);
+    dlg_move (h, FY + 5, FX + 2);
     addstr (_("Owner name"));
-    dlg_move (ch_dlg, FY + 7, FX + 2);
+    dlg_move (h, FY + 7, FX + 2);
     addstr (_("Group name"));
     
-    attrset (title_color);
-    dlg_move (ch_dlg, 1, 28);
-    addstr (_(" Chmod command "));
-    dlg_move (ch_dlg, PY, PX + 1);
-    addstr (_(" Permission "));
-    dlg_move (ch_dlg, FY, FX + 1);
-    addstr (_(" File "));
-    
-    attrset (selection_color);
-
-    dlg_move (ch_dlg, TY, TX);
+    dlg_move (h, TY, TX);
     addstr (_("Use SPACE to change"));
-    dlg_move (ch_dlg, TY + 1, TX);
+    dlg_move (h, TY + 1, TX);
     addstr (_("an option, ARROW KEYS"));
-    dlg_move (ch_dlg, TY + 2, TX);
+    dlg_move (h, TY + 2, TX);
     addstr (_("to move between options"));
-    dlg_move (ch_dlg, TY + 3, TX);
+    dlg_move (h, TY + 3, TX);
     addstr (_("and T or INS to mark"));
+
+    attrset (COLOR_HOT_NORMAL);
+
+    dlg_move (h, PY, PX + 1);
+    addstr (_(" Permission "));
+    dlg_move (h, FY, FX + 1);
+    addstr (_(" File "));
 }
 
 static int chmod_callback (Dlg_head *h, int Par, int Msg)
@@ -172,68 +165,64 @@ static int chmod_callback (Dlg_head *h, int Par, int Msg)
 	    c_stat ^= check_perm[Par - BUTTONS + single_set * 2].mode;
 	    g_snprintf (buffer, sizeof (buffer), "%o", c_stat);
 	    label_set_text (statl, buffer);
-	    chmod_toggle_select ();
+	    chmod_toggle_select (h);
 	    mode_change = 1;
 	}
 	break;
 
     case DLG_KEY:
 	if ((Par == 'T' || Par == 't' || Par == KEY_IC) &&
-	    ch_dlg->current->dlg_id >= BUTTONS - single_set * 2) {
-	    chmod_toggle_select ();
+	    h->current->dlg_id >= BUTTONS - single_set * 2) {
+	    chmod_toggle_select (h);
 	    if (Par == KEY_IC)
-		dlg_one_down (ch_dlg);
+		dlg_one_down (h);
 	    return 1;
 	}
 	break;
 
     case DLG_DRAW:
-	chmod_refresh ();
+	chmod_refresh (h);
 	break;
     }
     return 0;
 }
 
-static void init_chmod (void)
+Dlg_head *
+init_chmod (void)
 {
     int i;
+    Dlg_head *ch_dlg;
 
     do_refresh ();
     end_chmod = c_file = need_update = 0;
     single_set = (cpanel->marked < 2) ? 2 : 0;
 
-    if (use_colors){
-	normal_color = COLOR_NORMAL;
-	title_color  = COLOR_HOT_NORMAL;
-	selection_color = COLOR_NORMAL;
-    } else {
-	normal_color = NORMAL_COLOR;
-	title_color  = SELECTED_COLOR;
-	selection_color = SELECTED_COLOR;
-    }
-    
-    ch_dlg = create_dlg (0, 0, 22 - single_set, 70, dialog_colors,
-			 chmod_callback, "[Chmod]", "chmod", DLG_CENTER);
-			 
-    x_set_dialog_title (ch_dlg, _("Chmod command"));
+    ch_dlg =
+	create_dlg (0, 0, 22 - single_set, 70, dialog_colors,
+		    chmod_callback, "[Chmod]", "chmod", DLG_CENTER);
 
-#define XTRACT(i) BY+chmod_but[i].y-single_set, BX+chmod_but[i].x, \
-     chmod_but[i].ret_cmd, chmod_but[i].flags, _(chmod_but[i].text), 0, 0, NULL
+    x_set_dialog_title (ch_dlg, _("Chmod command"));
 
     for (i = 0; i < BUTTONS; i++) {
 	if (i == 2 && single_set)
 	    break;
 	else
-	    add_widget (ch_dlg, button_new (XTRACT (i)));
+	    add_widget (ch_dlg,
+			button_new (BY + chmod_but[i].y - single_set,
+				    BX + chmod_but[i].x,
+				    chmod_but[i].ret_cmd,
+				    chmod_but[i].flags,
+				    _(chmod_but[i].text), 0, 0, NULL));
     }
 
-
-#define XTRACT2(i) 0, _(check_perm [i].text), NULL
     for (i = 0; i < PERMISSIONS; i++) {
-	check_perm[i].check = check_new (PY + (PERMISSIONS - i), PX + 2,
-					 XTRACT2 (i));
+	check_perm[i].check =
+	    check_new (PY + (PERMISSIONS - i), PX + 2, 0,
+		       _(check_perm[i].text), NULL);
 	add_widget (ch_dlg, check_perm[i].check);
     }
+
+    return ch_dlg;
 }
 
 int stat_file (char *filename, struct stat *st)
@@ -293,9 +282,10 @@ void chmod_cmd (void)
     char *fname;
     int i;
     struct stat sf_stat;
+    Dlg_head *ch_dlg;
 
     do {			/* do while any files remaining */
-	init_chmod ();
+	ch_dlg = init_chmod ();
 	if (cpanel->marked)
 	    fname = next_file ();	/* next marked file */
 	else

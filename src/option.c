@@ -60,7 +60,7 @@ static int r_but;
 extern int use_internal_edit;
 
 static int OX = 33, first_width = 27, second_width = 27;
-static char *configure_title, *title1, *title2, *title3;
+static char *title1, *title2, *title3;
 
 static struct {
     char   *text;
@@ -102,16 +102,14 @@ static int configure_callback (struct Dlg_head *h, int Id, int Msg)
 {
     switch (Msg) {
     case DLG_DRAW:
+	common_dialog_repaint (h);
+
 	attrset (COLOR_NORMAL);
-	dlg_erase (h);
-	draw_box (h, 1, 2, h->lines - 2, h->cols - 4);
 	draw_box (h, PY, PX, 8, first_width);
 	draw_box (h, RY, RX, 5, first_width);
 	draw_box (h, OY, OX, 15, second_width);
 
 	attrset (COLOR_HOT_NORMAL);
-	dlg_move (h, 1, (h->cols - strlen(configure_title))/2);
-	addstr (configure_title);
 	dlg_move (h, OY, OX+1);
 	addstr (title3);
 	dlg_move (h, RY, RX+1);
@@ -142,7 +140,6 @@ static void init_configure (void)
 
 		/* Similar code is in layout.c (init_layout())  */
 
-		configure_title = _(" Configure options ");
 		title1 = _(" Panel options ");
 		title2 = _(" Pause after run... ");
 		title3 = _(" Other options ");

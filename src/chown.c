@@ -63,7 +63,6 @@
 #define B_SETUSR        B_USER + 1
 #define B_SETGRP        B_USER + 2
 
-static struct Dlg_head *ch_dlg;
 static int need_update, end_chown;
 static int current_file;
 static int single_set;
@@ -93,36 +92,33 @@ static struct {
 };
 
 static void
-chown_refresh (void)
+chown_refresh (Dlg_head *h)
 {
-    attrset (COLOR_NORMAL);
-    dlg_erase (ch_dlg);
-
-    draw_box (ch_dlg, 1, 2, 16, 70);
-    draw_box (ch_dlg, UY, UX, 12, 21);
-    draw_box (ch_dlg, GY, GX, 12, 21);
-    draw_box (ch_dlg, TY, TX, 12, 19);
+    common_dialog_repaint (h);
 
     attrset (COLOR_NORMAL);
-    dlg_move (ch_dlg, TY + 1, TX + 1);
+
+    draw_box (h, UY, UX, 12, 21);
+    draw_box (h, GY, GX, 12, 21);
+    draw_box (h, TY, TX, 12, 19);
+
+    dlg_move (h, TY + 1, TX + 1);
     addstr (_(" Name "));
-    dlg_move (ch_dlg, TY + 3, TX + 1);
+    dlg_move (h, TY + 3, TX + 1);
     addstr (_(" Owner name "));
-    dlg_move (ch_dlg, TY + 5, TX + 1);
+    dlg_move (h, TY + 5, TX + 1);
     addstr (_(" Group name "));
-    dlg_move (ch_dlg, TY + 7, TX + 1);
+    dlg_move (h, TY + 7, TX + 1);
     addstr (_(" Size "));
-    dlg_move (ch_dlg, TY + 9, TX + 1);
+    dlg_move (h, TY + 9, TX + 1);
     addstr (_(" Permission "));
     
     attrset (COLOR_HOT_NORMAL);
-    dlg_move (ch_dlg, 1, 28);
-    addstr (_(" Chown command "));
-    dlg_move (ch_dlg, UY, UX + 1);
+    dlg_move (h, UY, UX + 1);
     addstr (_(" User name "));
-    dlg_move (ch_dlg, GY, GX + 1);
+    dlg_move (h, GY, GX + 1);
     addstr (_(" Group name "));
-    dlg_move (ch_dlg, TY, TX + 1);
+    dlg_move (h, TY, TX + 1);
     addstr (_(" File "));
 }
 
@@ -140,8 +136,8 @@ chown_callback (Dlg_head * h, int Par, int Msg)
 {
     switch (Msg) {
     case DLG_DRAW:
-      chown_refresh ();
-      break;
+	chown_refresh (h);
+	break;
     }
     return 0;
 }
@@ -152,53 +148,63 @@ l_call (void *data)
     return 1;
 }
 
-static void
+static Dlg_head *
 init_chown (void)
 {
     int i;
     struct passwd *l_pass;
     struct group *l_grp;
+    Dlg_head *ch_dlg;
 
     do_refresh ();
     end_chown = need_update = current_file = 0;
-    single_set = (cpanel->marked < 2) ? 3 : 0;    
+    single_set = (cpanel->marked < 2) ? 3 : 0;
 
-    ch_dlg = create_dlg (0, 0, 18, 74, dialog_colors, chown_callback,
-			 "[Chown]", "chown", DLG_CENTER);
+    ch_dlg =
+	create_dlg (0, 0, 18, 74, dialog_colors, chown_callback, "[Chown]",
+		    "chown", DLG_CENTER);
+    x_set_dialog_title (ch_dlg, _(" Chown command "));
 
-#define XTRACT(i) BY+chown_but[i].y, BX+chown_but[i].x, chown_but[i].ret_cmd, chown_but[i].flags, _(chown_but[i].text), 0, 0, NULL
-
-    for (i = 0; i < BUTTONS-single_set; i++)
-	add_widget (ch_dlg, button_new (XTRACT (i)));
+    for (i = 0; i < BUTTONS - single_set; i++)
+	add_widget (ch_dlg,
+		    button_new (BY + chown_but[i].y, BX + chown_but[i].x,
+				chown_but[i].ret_cmd, chown_but[i].flags,
+				_(chown_but[i].text), 0, 0, NULL));
 
     /* Add the widgets for the file information */
-#define LX(i) chown_label [i].y, chown_label [i].x, "", NULL
-    for (i = 0; i < LABELS; i++){
-	chown_label [i].l = label_new (LX (i));
-	add_widget (ch_dlg, chown_label [i].l);
+    for (i = 0; i < LABELS; i++) {
+	chown_label[i].l =
+	    label_new (chown_label[i].y, chown_label[i].x, "", NULL);
+	add_widget (ch_dlg, chown_label[i].l);
     }
 
     /* get new listboxes */
     l_user = listbox_new (UY + 1, UX + 1, 19, 10, 0, l_call, NULL);
     l_group = listbox_new (GY + 1, GX + 1, 19, 10, 0, l_call, NULL);
 
-    listbox_add_item (l_user, 0, 0, _("<Unknown user>"), NULL);	/* add fields for unknown names (numbers) */
+    /* add fields for unknown names (numbers) */
+    listbox_add_item (l_user, 0, 0, _("<Unknown user>"), NULL);
     listbox_add_item (l_group, 0, 0, _("<Unknown group>"), NULL);
 
-    setpwent ();		/* get and put user names in the listbox */
+    /* get and put user names in the listbox */
+    setpwent ();
     while ((l_pass = getpwent ())) {
 	listbox_add_item (l_user, 0, 0, l_pass->pw_name, NULL);
     }
     endpwent ();
-    
-    setgrent ();		/* get and put group names in the listbox */
+
+    /* get and put group names in the listbox */
+    setgrent ();
     while ((l_grp = getgrent ())) {
 	listbox_add_item (l_group, 0, 0, l_grp->gr_name, NULL);
     }
     endgrent ();
-    
+
+    /* add listboxes to the dialogs */
     add_widget (ch_dlg, l_group);
-    add_widget (ch_dlg, l_user);	/* add listboxes to the dialogs */
+    add_widget (ch_dlg, l_user);
+
+    return ch_dlg;
 }
 
 static void
@@ -242,12 +248,13 @@ chown_cmd (void)
     char *fname;
     struct stat sf_stat;
     WLEntry *fe;
+    Dlg_head *ch_dlg;
     uid_t new_user;
     gid_t new_group;
     char  buffer [BUF_TINY];
 
     do {			/* do while any files remaining */
-	init_chown ();
+	ch_dlg = init_chown ();
 	new_user = new_group = -1;
 
 	if (cpanel->marked)
