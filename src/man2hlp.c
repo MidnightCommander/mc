@@ -29,7 +29,6 @@ static int width;		/* Output width in characters */
 static int col = 0;		/* Current output column */
 static int out_row = 1;		/* Current output row */
 static int in_row = 0;		/* Current input row */
-static int old_heading_level = 0;/* Level of the last heading */
 static int no_split_flag = 0;	/* Flag: Don't split section on next ".SH" */
 static int skip_flag = 0;	/* Flag: Skip this section.
 				   0 = don't skip,
@@ -39,13 +38,13 @@ static int link_flag = 0;	/* Flag: Next line is a link */
 static int verbatim_flag = 0;	/* Flag: Copy input to output verbatim */
 
 /* Report error in input */
-void print_error (char *message)
+static void print_error (char *message)
 {
     fprintf (stderr, "man2hlp: %s in file \"%s\" at row %d\n", message, filename, in_row);
 }
 
 /* Change output line */
-void newline (void)
+static void newline (void)
 {
     out_row ++;
     col = 0;
@@ -53,12 +52,12 @@ void newline (void)
 }
 
 /* Calculate the length of string */
-int string_len (char *buffer)
+static int string_len (char *buffer)
 {
     static int anchor_flag = 0;	/* Flag: Inside hypertext anchor name */
     static int link_flag = 0;	/* Flag: Inside hypertext link target name */
     int backslash_flag = 0;	/* Flag: Backslash quoting */
-    int i;			/* Index */
+    unsigned int i;		/* Index */
     int c;			/* Current character */
     int len = 0;		/* Result: the length of the string */
 
@@ -96,11 +95,11 @@ int string_len (char *buffer)
 }
 
 /* Output the string */
-void print_string (char *buffer)
+static void print_string (char *buffer)
 {
-    int len;	/* The length of current word */
-    int i;	/* Index */
-    int c;	/* Current character */
+    int len;		/* The length of current word */
+    unsigned int i;	/* Index */
+    int c;		/* Current character */
     int backslash_flag = 0;
 
     /* Skipping lines? */
@@ -108,11 +107,17 @@ void print_string (char *buffer)
 	return;
     /* Copying verbatim? */
     if (verbatim_flag){
-	printf("%s", buffer);
-	return;
-    }
-    if (width){
-	/* HLP format */
+	/* Attempt to handle backslash quoting */
+	for (i = 0; i < strlen (buffer); i++){
+	    c = buffer [i];
+	    if (c == '\\' && !backslash_flag){
+		backslash_flag = 1;
+		continue;
+	    }
+	    backslash_flag = 0;
+	    printf ("%c", c);
+	}
+    } else {
 	/* Split into words */
 	buffer = strtok (buffer, " \t\n");
 	/* Repeat for each word */
@@ -145,26 +150,11 @@ void print_string (char *buffer)
 	    /* Get the next word */
 	    buffer = strtok (NULL, " \t\n");
 	} /* while */
-    } else {
-	/* HTML format */
-	if (strlen (buffer) > 0){
-	    /* Attempt to handle backslash quoting */
-	    for (i = 0; i < strlen (buffer); i++)
-	    {
-		c = buffer [i];
-		if (c == '\\' && !backslash_flag){
-		    backslash_flag = 1;
-		    continue;
-		}
-		backslash_flag = 0;
-		printf ("%c", c);
-	    }
-	}
-    } /* if (width) */
+    }
 }
 
 /* Like print_string but with printf-like syntax */
-void printf_string (char *format, ...)
+static void printf_string (char *format, ...)
 {
     va_list args;
     char buffer [BUFFER_SIZE];
@@ -176,9 +166,9 @@ void printf_string (char *format, ...)
 }
 
 /* Handle all the roff dot commands */
-void handle_command (char *buffer)
+static void handle_command (char *buffer)
 {
-    int i, len, heading_level;
+    int len, heading_level;
 
     /* Get the command name */
     strtok (buffer, " \t");
@@ -211,18 +201,10 @@ void handle_command (char *buffer)
 		print_error ("Syntax error: .SH: odd heading level");
 	    if (no_split_flag){
 		/* Don't start a new section */
-		if (width){
-		    /* HLP format */
-		    newline ();
-		    print_string (buffer);
-		    newline ();
-		    newline ();
-		} else {
-		    /* HTML format */
-		    newline ();
-		    printf_string ("<h4>%s</h4>", buffer);
-		    newline ();
-		}
+		newline ();
+		print_string (buffer);
+		newline ();
+		newline ();
 		no_split_flag = 0;
 	    }
 	    else if (skip_flag){
@@ -231,38 +213,12 @@ void handle_command (char *buffer)
 	    }
 	    else {
 		/* Start a new section */
-		if (width){
-		    /* HLP format */
-		    printf ("%c[%s]", CHAR_NODE_END, buffer);
-		    col ++;
-		    newline ();
-		    print_string (buffer + heading_level);
-		    newline ();
-		    newline ();
-		} else {
-		    /* HTML format */
-		    if (buffer [0]){
-			if (heading_level > old_heading_level){
-			    for (i = old_heading_level; i < heading_level; i += 2)
-				printf ("<ul>");
-			} else {
-			    for (i = heading_level; i < old_heading_level; i += 2)
-				printf ("</ul>");
-			}
-			old_heading_level = heading_level;
-			printf_string ("<h%d><a name=\"%s\">%s</a></h%d>",
-				       heading_level / 2 + 2, buffer + heading_level,
-				       buffer + heading_level, heading_level / 2 + 2);
-			newline ();
-			printf ("<li><a href=\"#%s\">%s</a>\n",
-				 buffer + heading_level, buffer + heading_level);
-		    } else {
-			for (i = 0; i < old_heading_level; i += 2)
-			    printf ("</ul>");
-			old_heading_level = 0;
-			printf ("</ul><p><ul>\n");
-		    }
-		} /* if (width) */
+		printf ("%c[%s]", CHAR_NODE_END, buffer);
+		col ++;
+		newline ();
+		print_string (buffer + heading_level);
+		newline ();
+		newline ();
 	    } /* Start new section */
 	} /* Has parameters */
     } /* Command .SH */
@@ -272,34 +228,19 @@ void handle_command (char *buffer)
     else if (strcmp (buffer, ".\\\"SKIP_SECTION\"") == 0){
 	skip_flag = 1;
     }
-    else if (strcmp (buffer, ".\\\"LINK\"") == 0){
-	/* Next input line is a link */
-	link_flag = 1;
-    }
     else if (strcmp (buffer, ".\\\"LINK2\"") == 0){
 	/* Next two input lines form a link */
 	link_flag = 2;
     }
     else if (strcmp (buffer, ".PP") == 0){
 	/* End of paragraph */
-	if (width){
-	    /* HLP format */
-	    if (col > 0) newline();
-	} else /* HTML format */
-	    print_string ("<p>");
+	if (col > 0) newline();
 	newline ();
     }
     else if (strcmp (buffer, ".nf") == 0){
 	/* Following input lines are to be handled verbatim */
 	verbatim_flag = 1;
-	if (width){
-	    /* HLP format */
-	    if (col > 0) newline ();
-	} else {
-	    /* HTML format */
-	    print_string ("<pre>");
-	    newline ();
-	}
+	if (col > 0) newline ();
     }
     else if (strcmp (buffer, ".I") == 0 || strcmp (buffer, ".B") == 0){
 	/* Bold text or italics text */
@@ -311,34 +252,14 @@ void handle_command (char *buffer)
 	    return;
 	}
 	else {
-	    if (!width){
-		/* HTML format */
-		/* Remove quotes */
-		if (buffer[0] == '"'){
-		    buffer ++;
-		    len = strlen (buffer);
-		    if (buffer[len-1] == '"'){
-			len --;
-			buffer[len] = 0;
-		    }
-		}
-		printf_string ("<%c>%s</%c>", type, buffer, type);
-		newline ();
-	    } else /* HLP format */
-		printf_string ("%c%s%c", 
-		    (type == 'I') ? CHAR_ITALIC_ON : CHAR_BOLD_ON, 
-		    buffer, CHAR_BOLD_OFF);
+	    printf_string ("%c%s%c", 
+			   (type == 'I') ? CHAR_ITALIC_ON : CHAR_BOLD_ON, 
+			   buffer, CHAR_BOLD_OFF);
 	}
     }
     else if (strcmp (buffer, ".TP") == 0){
 	/* End of paragraph? */
-	if (width){
-	    /* HLP format */
-	    if (col > 0) newline ();
-	} else {
-	    /* HTML format */
-	    print_string ("<p>");
-	}
+	if (col > 0) newline ();
 	newline ();
     }
     else {
@@ -346,22 +267,14 @@ void handle_command (char *buffer)
     }
 }
 
-void handle_link (char *buffer)
+static void handle_link (char *buffer)
 {
     static char old [80];
     int len;
 
     switch (link_flag){
     case 1:
-	/* Old format link */
-	if (width) /* HLP format */
-	    printf_string ("%c%s%c%s%c\n", CHAR_LINK_START, buffer, CHAR_LINK_POINTER, buffer, CHAR_LINK_END);
-	else {
-	    /* HTML format */
-	    printf_string ("<a href=\"#%s\">%s</a>", buffer, buffer);
-	    newline ();
-	}
-	link_flag = 0;
+	/* Old format link, not supported */
 	break;
     case 2:
 	/* First part of new format link */
@@ -380,13 +293,7 @@ void handle_link (char *buffer)
 	if (len && buffer [len-1] == '"'){
 	    buffer [--len] = 0;
 	}
-	if (width) /* HLP format */
-	    printf_string ("%c%s%c%s%c\n", CHAR_LINK_START, old, CHAR_LINK_POINTER, buffer, CHAR_LINK_END);
-	else {
-	    /* HTML format */
-	    printf_string ("<a href=\"#%s\">%s</a>", buffer, old);
-	    newline ();
-	}
+	printf_string ("%c%s%c%s%c\n", CHAR_LINK_START, old, CHAR_LINK_POINTER, buffer, CHAR_LINK_END);
 	link_flag = 0;
 	break;
     }
@@ -398,12 +305,11 @@ int main (int argc, char **argv)
     FILE *file;			/* Input file */
     char buffer2 [BUFFER_SIZE];	/* Temp input line */
     char buffer [BUFFER_SIZE];	/* Input line */
-    int i, j;
 
     /* Validity check for arguments */
-    if (argc != 3 || (strcmp (argv[1], "0") && (width = atoi (argv[1])) <= 10)){
+    width = atoi (argv[1]);
+    if (argc != 3 || (width <= 10)){
 	fprintf (stderr, "Usage: man2hlp <width> <file.man>\n");
-	fprintf (stderr, "zero width will create a html file instead of a hlp file\n");
 	return 3;
     }
 
@@ -416,68 +322,16 @@ int main (int argc, char **argv)
 	return 3;
     }
 
-    if (!width){
-	/* HTML format */
-	printf ("<html><head><title>Midnight Commander manual</title>\n");
-	printf ("</head><body><pre><img src=\"mc.logo.small.gif\" width=180 height=85 align=\"right\" alt=\""
-		 "                                                                            \n"
-		 "______________           ____                          ____                 \n"
-		 "|////////////#           |//#                          |//#                 \n"
-		 "|//##+//##+//#           |//#                          |//#                 \n"
-		 "|//# |//# |//# ____      |//#           ____           |//#                 \n"
-		 "|//# |//# |//# |//#      |//#           |//#           |//#                 \n"
-		 "|//# |//# |//# +###      |//#           +###           |//#        ____     \n"
-		 "|//# |//# |//# ____ _____|//# _________ ____ _________ |//#______ _|//#__   \n"
-		 "|@@# |@@# |@/# |//# |///////# |///////# |//# |///////# |////////# |/////#   \n"
-		 "|@@# |@@# |@@# |@/# |//##+//# |//##+//# |//# |//##+//# |//###+//# +#/@###   \n"
-		 "|@@# |@@# |@@# |@@# |@@# |@@# |@/# |//# |//# |//# |/@# |@@#  |@@#  |@@# ____\n"
-		 "|@@# |@@# |@@# |@@# |@@#_|@@# |@@# |@@# |@@# |@@#_|@@# |@@#  |@@#  |@@#_|@@#\n"
-		 "|@@# |@@# |@@# |@@# |@@@@@@@# |@@# |@@# |@@# |@@@@@@@# |@@#  |@@#  |@@@@@@@#\n"
-		 "+### +### +### +### +######## +### +### +### +####+@@# +###  +###  +########\n"
-		 "           _______________________________________|@@#                      \n"
-		 "           |@@@@@@@@@@@ C O M M A N D E R @@@@@@@@@@@#                      \n"
-		 "           +##########################################                      \n"
-		 "                                                                            \n"
-		 "\"></pre><h1>Manual</h1>\nThis is the manual for Midnight Commander version %s.\n"
-		 "This HTML version of the manual has been compiled from the NROFF version at %s.<p>\n",
-		 VERSION, __DATE__);
-	printf ("<hr><h2>Contents</h2><ul>\n");
-    }
-
     /* Repeat for each input line */
     while (!feof (file)){
 	/* Read a line */
 	if (!fgets (buffer2, BUFFER_SIZE, file)){
 	    break;
 	}
-	if (!width){
-	    /* HTML format */
-	    if (buffer2 [0] == '\\' && buffer2 [1] == '&')
-		i = 2;
-	    else
-		i = 0;
-	    for (j = 0; i < strlen (buffer2); i++, j++){
-		if (buffer2 [i] == '<'){
-		    buffer [j++] = '&';
-		    buffer [j++] = 'l';
-		    buffer [j++] = 't';
-		    buffer [j] = ';';
-		} else if (buffer2 [i] == '>'){
-		    buffer [j++] = '&';
-		    buffer [j++] = 'g';
-		    buffer [j++] = 't';
-		    buffer [j] = ';';
-		} else
-		    buffer [j] = buffer2 [i];
-	    }
-	    buffer [j] = 0;
-	} else {
-	    /* HLP format */
-	    if (buffer2 [0] == '\\' && buffer2 [1] == '&')
-		strcpy (buffer, buffer2 + 2);
-	    else
-		strcpy (buffer, buffer2);
-	}
+	if (buffer2 [0] == '\\' && buffer2 [1] == '&')
+	    strcpy (buffer, buffer2 + 2);
+	else
+	    strcpy (buffer, buffer2);
 	in_row ++;
 	len = strlen (buffer);
 	/* Remove terminating newline */
@@ -490,7 +344,6 @@ int main (int argc, char **argv)
 	    /* Copy the line verbatim */
 	    if (strcmp (buffer, ".fi") == 0){
 		verbatim_flag = 0;
-	        if (!width) print_string ("</pre>"); /* HTML format */
 	    } else {
 		print_string (buffer);
 		newline ();
@@ -506,21 +359,11 @@ int main (int argc, char **argv)
 	{
 	    /* A normal line, just output it */
 	    print_string (buffer);
-	    if (!width)	newline (); /* HTML format */
 	}
     }
 
     /* All done */
     newline ();
-    if (!width){
-	/* HTML format */
-	for (i = 0; i < old_heading_level; i += 2)
-	    printf ("</ul>");
-	old_heading_level = 0;
-	printf ("</ul><hr>\n");
-	print_string ("<hr></body></html>");
-	newline ();
-    }
     fclose (file);
     return 0;
 }

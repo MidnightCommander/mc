@@ -1,5 +1,9 @@
 2001-08-15  Pavel Roskin  <proski@gnu.org>
 
+	* man2hlp.c: Remove HTML support.  Remove old link support.
+	Warning fixes.
+	(print_string): Handle backslashes in verbatim mode too.
+
 	* main.c (setup_pre) [HAVE_CHARSET]: Fix compilation with
 	ncurses.
 
