@@ -1,3 +1,7 @@
+2001-04-06  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Bump version to 4.5.52a.
+
 2001-03-14  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Use AC_CHECK_TOOL for finding AR. Define
