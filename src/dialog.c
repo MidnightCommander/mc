@@ -135,6 +135,8 @@ init_widget (Widget *w, int y, int x, int lines, int cols,
 cb_ret_t
 default_proc (widget_msg_t msg, int parm)
 {
+    (void) parm;
+
     switch (msg) {
     case WIDGET_INIT:
     case WIDGET_FOCUS:
@@ -172,6 +174,8 @@ common_dialog_repaint (struct Dlg_head *h)
 /* Default dialog callback */
 cb_ret_t default_dlg_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 {
+    (void) parm;
+
     if (msg == DLG_DRAW && h->color) {
 	common_dialog_repaint (h);
 	return MSG_HANDLED;
@@ -290,7 +294,8 @@ do_refresh (void)
 }
 
 /* broadcast a message to all the widgets in a dialog that have
- * the options set to flags.
+ * the options set to flags. If flags is zero, the message is sent
+ * to all widgets.
  */
 static void
 dlg_broadcast_msg_to (Dlg_head *h, widget_msg_t message, int reverse,
@@ -312,7 +317,8 @@ dlg_broadcast_msg_to (Dlg_head *h, widget_msg_t message, int reverse,
 	    p = p->prev;
 	else
 	    p = p->next;
-	send_message (wi, message, 0);
+	if (flags == 0 || (flags & wi->options))
+	    send_message (wi, message, 0);
     } while (first != p);
 }
 
@@ -320,7 +326,7 @@ dlg_broadcast_msg_to (Dlg_head *h, widget_msg_t message, int reverse,
 void
 dlg_broadcast_msg (Dlg_head *h, widget_msg_t message, int reverse)
 {
-    dlg_broadcast_msg_to (h, message, reverse, ~0);
+    dlg_broadcast_msg_to (h, message, reverse, 0);
 }
 
 int dlg_focus (Dlg_head *h)

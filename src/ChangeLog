@@ -1,5 +1,10 @@
 2005-02-08  Roland Illig  <roland.illig@gmx.de>
 
+	* dialog.c: Marked unused parameters. Now dlg_broadcast_msg_to
+	does what the comment above it says.
+
+2005-02-08  Roland Illig  <roland.illig@gmx.de>
+
 	* screen.c (string_file_*): Don't use static buffers.
 	* screen.c (format_file): Provide a buffer for the string_file_*
 	functions.
