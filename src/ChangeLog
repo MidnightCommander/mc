@@ -1,3 +1,7 @@
+2002-02-21  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* ext.c (exec_extension): Use "#! /bin/sh".
+
 2002-02-20  Pavel Roskin  <proski@gnu.org>
 
 	* background.c (background_attention): Cast pointer to long

@@ -143,7 +143,7 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
 	return;
     }
     cmd_file = fdopen (cmd_file_fd, "w");
-    fputs ("#!/bin/sh\n", cmd_file);
+    fputs ("#! /bin/sh\n", cmd_file);
 
     prompt [0] = 0;
     for (;*data && *data != '\n'; data++){
