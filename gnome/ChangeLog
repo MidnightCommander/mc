@@ -1,3 +1,15 @@
+1999-02-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gcmd.c (gnome_open_terminal_with_cmd): New routine, based on the
+	gnome_open_terminal routine, that will allow the user to specify a
+	command to execute (used internally).
+
+	* gaction.c (gmc_edit_filename): Support for the GNOME editor
+	environment properties. 
+
+	* gdesktop.c (create_desktop_dir): Support GNOME_DESKTOP_DIR
+	variable to configure the desktop directory.
+
 1999-02-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* mc.keys.in.in: Use "gnome-moz-remote file:%d/%f" for the html

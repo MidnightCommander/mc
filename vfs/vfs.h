@@ -8,6 +8,9 @@
 
 #if !defined(SCO_FLAVOR) || !defined(_SYS_SELECT_H) || defined(IS_AIX)
 #	include <sys/time.h>	/* alex: this redefines struct timeval */
+#  ifdef IS_AIX
+#       include <time.h>
+#  endif
 #endif /* SCO_FLAVOR */
 
 #ifdef HAVE_UTIME_H

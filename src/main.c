@@ -349,6 +349,9 @@ char cmd_buf [512];
 /* Used during argument processing */
 int finish_program = 0;
 
+/* If set, then no windows are displayed in the GNOME edition */
+int   nowindows = 0;
+
 /* Forward declarations */
 char *get_mc_lib_dir ();
 int panel_event    (Gpm_Event *event, WPanel *panel);
@@ -2164,8 +2167,14 @@ mc_maybe_editor_or_viewer (void)
 #ifdef USE_INTERNAL_EDIT
     else {
 	    path = prepend_cwd_on_local ("");
+#ifndef HAVE_GNOME
 	    setup_dummy_mc (path);
+#endif
 	    edit (edit_one_file, 1);
+#ifdef HAVE_GNOME
+	    gtk_main ();
+	    exit (1);
+#endif
     }
 #endif
     g_free (path);
@@ -2608,7 +2617,6 @@ static void parse_an_arg (poptContext state,
 #endif
 
 char *cmdline_geometry = NULL;
-int   nowindows = 0;
 char **directory_list = NULL;
 int   force_activation = 0;
 

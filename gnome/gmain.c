@@ -52,6 +52,8 @@ int dialog_panel_callback (struct Dlg_head *h, int id, int msg);
 /* The Dlg_head for the whole desktop */
 Dlg_head *desktop_dlg;
 
+int run_desktop = 1;
+
 /* This is only used by the editor, so we provide a dummy implementation */
 void
 try_alloc_color_pair (char *str, char *str2)
@@ -506,7 +508,9 @@ create_panels (void)
 {
 	WPanel *panel;
 
-	desktop_init ();
+	if (run_desktop)
+		desktop_init ();
+	
 	cmdline = command_new (0, 0, 0);
 	the_hint = label_new (0, 0, 0, NULL);
 

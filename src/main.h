@@ -99,6 +99,7 @@ extern int output_starts_shell;
 extern int midnight_shutdown;
 extern char search_buffer [256];
 extern char cmd_buf [512];
+extern int run_desktop;
 
 #if HAVE_GNOME
 #define MENU_PANEL get_current_panel ()

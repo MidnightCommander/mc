@@ -1532,7 +1532,10 @@ create_desktop_dir (void)
 {
 	char *home_link_name;
 
-	desktop_directory = g_concat_dir_and_file (gnome_user_home_dir, DESKTOP_DIR_NAME);
+	if (getenv ("GNOME_DESKTOP_DIR") != NULL)
+		desktop_directory = g_strdup (getenv ("GNOME_DESKTOP_DIR"));
+	else
+		desktop_directory = g_concat_dir_and_file (gnome_user_home_dir, DESKTOP_DIR_NAME);
 
 	if (!g_file_exists (desktop_directory)) {
 		/* Create the directory */

@@ -60,7 +60,7 @@ gnome_compare_panels (void)
 }
 
 void
-gnome_open_terminal (void)
+gnome_open_terminal_with_cmd (const char *command)
 {
 	char *p;
 	
@@ -71,10 +71,25 @@ gnome_open_terminal (void)
 					if (!(p = gnome_is_program_in_path ("rxvt")))
 						p = gnome_is_program_in_path ("xterm");
 
-	if (p)
-		my_system (EXECUTE_AS_SHELL, shell, p);
-	else
+	if (p){
+		if (command){
+			char *q;
+			
+			q = g_strconcat (p, " -e ", command, NULL);
+			my_system (EXECUTE_AS_SHELL, shell, q);
+			g_free (q);
+		} else
+			my_system (EXECUTE_AS_SHELL, shell, p);
+
+		g_free (p);
+	} else
 		message (1, MSG_ERROR, " Could not start a terminal ");
+}
+
+void
+gnome_open_terminal (void)
+{
+	gnome_open_terminal_with_cmd (NULL);
 }
 
 void

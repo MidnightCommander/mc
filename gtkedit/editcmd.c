@@ -2261,8 +2261,16 @@ void edit_quit_cmd (WEdit * edit)
 	unlink (catstrs (edit->dir, edit->filename, 0));
 #endif
 #ifdef MIDNIGHT
-    edit->widget.parent->running = 0;
+    dlg_stop (edit->widget.parent);
 #else
+#ifdef GTK
+    {
+	    extern char *edit_one_file;
+
+	    if (edit_one_file)
+		    gtk_main_quit ();
+    }
+#endif
     edit->stopped = 1;
 #endif
 }

@@ -97,7 +97,7 @@ quote_block (quote_func_t quote_func, char **quoting_block)
 }
 	     
 void
-exec_extension (char *filename, char *data, char **drops, int *move_dir, int start_line)
+exec_extension (const char *filename, const char *data, char **drops, int *move_dir, int start_line)
 {
     char *file_name;
     int  cmd_file_fd;
