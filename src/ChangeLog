@@ -1,3 +1,8 @@
+Sun Aug  9 22:39:12 1998  Janne Kukonlehto  <jtklehto@paju.oulu.fi>
+
+	* mad.h (calloc): Added parentheses around the arguments as
+ 	suggested by Steef Boerrigter <sxmboer@sci.kun.nl>.
+
 Fri Jul 31 09:04:35 1998  Pavel Roskin <pavel.roskin@escoft.co.uk>
 
 	* syntax.c: makefile* will be highlighted as Makefile*

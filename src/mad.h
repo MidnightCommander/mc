@@ -23,7 +23,7 @@
 #endif
 
 #define malloc(x)	mad_alloc (x, __FILE__, __LINE__)
-#define calloc(x, y)	mad_alloc (x * y, __FILE__, __LINE__)
+#define calloc(x, y)	mad_alloc ((x) * (y), __FILE__, __LINE__)
 #define realloc(x, y)	mad_realloc (x, y, __FILE__, __LINE__)
 #define xmalloc(x, y)	mad_alloc (x, __FILE__, __LINE__)
 #define strdup(x)	mad_strdup (x, __FILE__, __LINE__)
