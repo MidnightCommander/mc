@@ -111,8 +111,6 @@ struct vfs_class *vfs_split (char *path, char **inpath, char **op);
 char *vfs_path (const char *path);
 int vfs_file_class_flags (const char *filename);
 
-int vfs_file_is_local (const char *filename);
-
 void vfs_fill_names (fill_names_f);
 char *vfs_translate_url (const char *);
 
