@@ -21,6 +21,7 @@
 #if GLIB_MAJOR_VERSION < 2
 gsize g_strlcpy (gchar *dest, const gchar *src, gsize dest_size);
 #define g_try_malloc(x) malloc(x)
+#define g_try_realloc(x) realloc(x)
 #endif				/* GLIB_MAJOR_VERSION < 2 */
 
 #endif				/* !__MC_GLIBCOMPAT_H */

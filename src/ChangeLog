@@ -1,3 +1,7 @@
+2003-11-14  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* glibcompat.h: Define g_try_realloc as realloc for glib 1.2.x.
+
 2003-11-14  Pavel Roskin  <proski@gnu.org>
 
 	* main.c (midnight_callback): Ctrl-Shift-Enter now copies full
