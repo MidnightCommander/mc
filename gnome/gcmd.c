@@ -392,6 +392,7 @@ get_nickname (gchar *text)
 		break;
 	case 1:
 	default:
+		break;
 	}
 	if (destroy)
 		gtk_widget_destroy (dlg);
@@ -591,6 +592,7 @@ gnome_external_panelize (GtkWidget *widget, WPanel *panel)
 		destroy = FALSE;
 		break;
 	default:
+		break;
 	}
 	for (i = 0; i < GTK_CLIST (data->clist)->rows; i++) {
 		row_data = gtk_clist_get_row_data (GTK_CLIST (data->clist), i);

@@ -814,6 +814,7 @@ file_delete_query_recursive (FileOpContext *ctx, enum OperationMode mode, gchar 
                         ctx->recursive_result = RECURSIVE_ABORT;
                         break;
                 default:
+                        break;
                 }
 
                 if (ctx->recursive_result != RECURSIVE_ABORT)

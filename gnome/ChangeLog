@@ -1,5 +1,10 @@
 2001-06-15  Pavel Roskin  <proski@gnu.org>
 
+	* gcmd.c (get_nickname): Warning fix - label at the end of
+	`case' statement.
+	(gnome_external_panelize): Likewise.
+	* gdialogs.c (file_delete_query_recursive): Likewise.
+
 	* gmain.c (beep): Remove.
 
 	* gdesktop.c (): Include gprefs.h to avoid a warning.
