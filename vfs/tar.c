@@ -72,7 +72,6 @@ static int current_tar_position = 0;
 static int tar_open_archive (vfs *me, char *name, vfs_s_super *archive)
 {
     int result, type;
-    long size;
     mode_t mode;
     struct vfs_s_inode *root;
     
@@ -87,9 +86,9 @@ static int tar_open_archive (vfs *me, char *name, vfs_s_super *archive)
     archive->u.tar.fd = -1;
 
     /* Find out the method to handle this tar file */
-    size = is_gunzipable (result, &type);
+    type = get_compression_type (result);
     mc_lseek (result, 0, SEEK_SET);
-    if (size > 0) {
+    if (type != COMPRESSION_NONE) {
 	char *s;
 	mc_close( result );
 	s = g_strconcat ( archive->name, decompress_extension (type), NULL );

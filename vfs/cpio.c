@@ -135,7 +135,7 @@ static void cpio_free_archive(vfs *me, vfs_s_super *super)
 
 static int cpio_open_cpio_file(vfs *me, vfs_s_super *super, char *name)
 {
-    int fd, size, type;
+    int fd, type;
     mode_t mode;
     vfs_s_inode *root;
 
@@ -149,8 +149,7 @@ static int cpio_open_cpio_file(vfs *me, vfs_s_super *super, char *name)
     mc_stat(name, &(super->u.cpio.stat));
     super->u.cpio.type = CPIO_UNKNOWN;
 
-    size = is_gunzipable(fd, &type);
-    if(size > 0) {
+    if (get_compression_type(fd) != COMPRESSION_NONE) {
 	char *s;
 
 	mc_close(fd);
