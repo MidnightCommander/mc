@@ -1,3 +1,11 @@
+2001-01-11  Pavel Roskin  <proski@gnu.org>
+
+	* macros/gnome-gettext.m4: Propagateg change by Owen Taylor
+	from acinclude.m4 in gtk+:
+	Don't define ENABLE_NLS unless we have a working NLS.
+	(This should keep libintl.h from being included when it doesn't
+	exist).
+
 2001-01-09  Pavel Roskin  <proski@gnu.org>
 
 	* doc-gnome/C/figs/Makefile.am: New file.
