@@ -1,3 +1,8 @@
+2004-11-02  Pavel Tsekov  <ptsekov@gmx.net>
+
+        * dialog.c (do_select_widget): Walk the whole widgets list looking
+        for a widget accepting the focus.
+
 2004-11-01  Roland Illig  <roland.illig@gmx.de>
 
 	* utilunix.c (mc_tmpdir): Use putenv(3) instead of setenv(3) if

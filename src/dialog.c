@@ -427,7 +427,7 @@ do_select_widget (Dlg_head *h, Widget *w, select_dir_t dir)
 	return;
 
     h->current = w;
-    while (h->current != w0) {
+    do {
 	if (dlg_focus (h))
 	    break;
 
@@ -443,7 +443,7 @@ do_select_widget (Dlg_head *h, Widget *w, select_dir_t dir)
 	    dlg_focus (h);
 	    return;
 	}
-    }
+    } while (h->current != w);
 
     if (dlg_overlap (w0, h->current)) {
 	send_message (h->current, WIDGET_DRAW, 0);
