@@ -344,10 +344,10 @@ sub cleandirs {
 
 # Make a temporary directory with mode 0700.
 sub mktmpdir {
-	while (1) {
-		my $dir = POSIX::tmpnam();
-		return $dir if mkdir ($dir, 0700);
-	}
+	use File::Temp qw(mkdtemp);
+	my $template = "/tmp/mcuzipfs.XXXXXX";
+	$template="$ENV{MC_TMPDIR}/mcuzipfs.XXXXXX" if ($ENV{MC_TMPDIR});
+	return mkdtemp($template);
 }
 
 # Make a filename absolute and return it.

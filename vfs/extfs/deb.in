@@ -149,15 +149,10 @@ sub mcdebfs_run
 	}
 	else
 	{
-	        $suffix = "aaa";
-		while (1) {
-		    $tmpdir = "/tmp/mcdebfs.run".$$.$suffix;
-		    last if mkdir $tmpdir, 0700;
-		    $suffix++;
-		    # Somebody is being really nasty, give up
-		    exit 1 if $suffix eq "zzz";
-		}
-		
+		use File::Temp qw(mkdtemp);
+		my $template = "/tmp/mcdebfs.run.XXXXXX";
+		$template="$ENV{MC_TMPDIR}/mcdebfs.XXXXXX" if ($ENV{MC_TMPDIR});
+		$tmpdir = mkdtemp($template);
 		$tmpcmd="$tmpdir/run";
 		&mcdebfs_copyout($archive, $filename, $tmpcmd);
 		system("chmod u+x $tmpcmd");

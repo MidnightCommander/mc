@@ -13,8 +13,7 @@ ZOO=zoo
 # it to a temporary directory.
 mklink ()
 {
-    TMPDIR="/tmp/mctmpdir-uzoo.$$"
-    mkdir $TMPDIR || exit 1
+    TMPDIR=`mktemp -d ${MC_TMPDIR:-/tmp}/mctmpdir-uzoo.XXXXXX` || exit 1
     trap 'cd /; rm -rf $TMPDIR' 0 1 2 3 5 13 15
     ARCHIVE=$TMPDIR/tmp.zoo
     ln -sf "$1" "$ARCHIVE"

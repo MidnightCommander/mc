@@ -35,12 +35,6 @@ LHA_LIST="lha lq"
 LHA_GET="lha pq"
 LHA_PUT="lha aq"
 
-# Define a directory to create a temporary file for when
-# running a command to be run from the archive
-TMPDIR="/tmp/mctmpdir-uha.$$"
-# Temporary file within the directory
-TMPCMD=$TMPDIR/run
-
 # The 'list' command executive
 
 mc_lha_fs_list()
@@ -121,9 +115,9 @@ mc_lha_fs_copyin ()
 
 mc_lha_fs_run()
 {
+   TMPDIR=`mktemp -d ${MC_TMPDIR:-/tmp}/mctmpdir-ulha.XXXXXX` || exit 1
    trap "rm -rf $TMPDIR; exit 0" 1 2 3 4 15
-   # FIXME: Try harder to generate a unique directory if this fails
-   mkdir -m 0700 $TMPDIR || exit 1
+   TMPCMD=$TMPDIR/run
    $LHA_GET "$1" "$2" > $TMPCMD  
    chmod a+x $TMPCMD
    $TMPCMD

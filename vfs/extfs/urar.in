@@ -77,8 +77,7 @@ mcrarfs_mkdir ()
 # preserve pwd. It is clean, but is it necessary?
     pwd=`pwd`
 # Create a directory and create in it a tmp directory with the good name     
-    dir=tmpdir.${RANDOM}
-    mkdir $dir
+    dir=`mktemp -d ${MC_TMPDIR:-/tmp}/mctmpdir-urar.XXXXXX` || exit 1
     cd $dir
     mkdir -p "$2"  
 # rar cannot create an empty directory    

@@ -1,3 +1,15 @@
+2004-08-16  Pavel S. Shirshov  <pavelsh@mail.ru>
+
+	* extfs/deb.in: Security fix patch. Fix insecure temporary file and 
+	directory creations. (CAN-2004-0231).
+
+        * extfs/uar.in: Likewise.
+	* extfs/uha.in: Likewise.
+	* extfs/ulha.in: Likewise.
+        * extfs/urar.in: Likewise.
+        * extfs/uzip.in: Likewise.
+        * extfs/uzoo.in: Likewise.
+
 2004-08-14  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* extfs.c (extfs_init): Fix possible off-by-one buffer underflow
