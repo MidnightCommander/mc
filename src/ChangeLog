@@ -1,6 +1,8 @@
 1999-02-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* treestore.c (tree_store_notify_add): Close, but no cigar.  The
+	* treestore.c 	(tree_store_add_entry): Use g_new0 to allocate the tree_entry.
+
+	(tree_store_notify_add): Close, but no cigar.  The
 	bug was deeper:  This list keeps names, not tree_entries.
 
 1999-02-07  Federico Mena Quintero  <federico@nuclecu.unam.mx>

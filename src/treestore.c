@@ -386,7 +386,7 @@ tree_store_add_entry (char *name)
 		return current; /* Already in the list */
 
 	/* Not in the list -> add it */
-	new = g_new (tree_entry, 1);
+	new = g_new0 (tree_entry, 1);
 	if (!current){
 		/* Append to the end of the list */
 		if (!ts.tree_first){
