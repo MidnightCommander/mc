@@ -1,3 +1,7 @@
+1999-03-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* vfs.c (parse_ls_lga): kill the messages on each error.
+
 Tue Feb 16 12:11:04 1999 Paul Sheer <psheer@obsidian.co.za>
 
 	* mcserv.c, mcfs.c: mcserv and mcfs exchange st_dev instead

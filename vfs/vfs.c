@@ -1729,7 +1729,9 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
     return 1;
 
 error:
+#if 0
     message_1s (1, "Could not parse:", p_copy);
+#endif
     if (p_copy != p)		/* Carefull! */
 	g_free (p_copy);
     return 0;
