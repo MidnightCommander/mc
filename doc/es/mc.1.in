@@ -2763,8 +2763,9 @@ Esto le llevaría un tiempo a undelfs para cargar la información
 antes de empezar a navegar por los archivos allí contenidos.
 .\"NODE "  EXTernal File System"
 .SH "  Sistema de archivos EXTerno (extfs)"
-'extfs' permite incorporar a GNU Midnight Commander numerosas utilidades
-y tipos de archivos de manera sencilla, simplemente escribiendo guiones
+.B extfs
+permite incorporar a GNU Midnight Commander numerosas utilidades y tipos
+de archivos de manera sencilla, simplemente escribiendo guiones
 (scripts).
 .PP
 Los sistemas de archivos Extfs son de dos tipos:
