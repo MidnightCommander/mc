@@ -2430,7 +2430,7 @@ char *syntax_text[] = {
 "",
 "###############################################################################",
 "# Pascal (BP7 IDE alike)",
-"file ..\\*\\\\.(pp|PP|pas|PAS|)$ Pascal Program",
+"file ..\\*\\\\.(pp|PP|pas|PAS)$ Pascal Program",
 "context default yellow/24",
 "    keyword whole absolute white/25",
 "    keyword whole and white/25",
