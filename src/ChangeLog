@@ -1,3 +1,7 @@
+2003-02-26  Max Khon  <fjoe@iclub.nsu.ru>
+
+	* cons.handler.c: Add implementation for FreeBSD 4.x and 5.x.
+
 2003-02-26  Pavel Roskin  <proski@gnu.org>
 
 	* view.c (load_view_file): Make sure view->s.st_size is not

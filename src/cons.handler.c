@@ -15,8 +15,6 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-/* The cons saver can't have a pid of 1, used to prevent bunches of */
-/*#ifdef linux */
 #include <config.h>
 
 #ifdef HAVE_UNISTD_H
@@ -24,6 +22,28 @@
 #endif
 #include <sys/types.h>
 #include <signal.h>
+
+#ifdef SCO_FLAVOR
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/vid.h>
+#include <sys/console.h>
+#include <sys/vtkd.h>
+#include <memory.h>
+#include <signal.h>
+#endif				/* SCO_FLAVOR */
+
+#ifdef __FreeBSD__
+#include <sys/consio.h>
+#include <sys/errno.h>
+#include <sys/fcntl.h>
+#include <sys/ioctl.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <syslog.h>
+#include <unistd.h>
+#include <osreldate.h>
+#endif				/* __FreeBSD__ */
 
 #include "global.h"
 #include "tty.h"
@@ -34,10 +54,16 @@ signed char console_flag = 0;
 #if defined(linux) || defined(__linux__)
 #include "main.h"
 
-int    cons_saver_pid = 1;
-static int pipefd1 [2] = {-1, -1}, pipefd2 [2] = {-1, -1};
+/* The cons saver can't have a pid of 1, used to prevent bunches of
+ * #ifdef linux */
 
-void show_console_contents (int starty, unsigned char begin_line, unsigned char end_line)
+int cons_saver_pid = 1;
+static int pipefd1[2] = { -1, -1 }, pipefd2[2] = {
+-1, -1};
+
+void
+show_console_contents (int starty, unsigned char begin_line,
+		       unsigned char end_line)
 {
     unsigned char message = 0;
     unsigned short bytes = 0;
@@ -54,7 +80,7 @@ void show_console_contents (int starty, unsigned char begin_line, unsigned char 
     if (!console_flag)
 	return;
     /* Paranoid: Is the cons.saver still running? */
-    if (cons_saver_pid < 1 || kill (cons_saver_pid, SIGCONT)){
+    if (cons_saver_pid < 1 || kill (cons_saver_pid, SIGCONT)) {
 	cons_saver_pid = 0;
 	console_flag = 0;
 	return;
@@ -75,9 +101,9 @@ void show_console_contents (int starty, unsigned char begin_line, unsigned char 
     read (pipefd2[0], &bytes, 2);
 
     /* Read the bytes and output them */
-    for (i = 0; i < bytes; i++){
+    for (i = 0; i < bytes; i++) {
 	if ((i % COLS) == 0)
-	    move (starty+(i/COLS), 0);
+	    move (starty + (i / COLS), 0);
 	read (pipefd2[0], &message, 1);
 	addch (message);
     }
@@ -86,13 +112,14 @@ void show_console_contents (int starty, unsigned char begin_line, unsigned char 
     read (pipefd2[0], &message, 1);
 }
 
-void handle_console (unsigned char action)
+void
+handle_console (unsigned char action)
 {
     char *tty_name;
     char *mc_conssaver;
     int status;
 
-    switch (action){
+    switch (action) {
     case CONSOLE_INIT:
 	if (look_for_rxvt_extensions ())
 	    return;
@@ -104,7 +131,7 @@ void handle_console (unsigned char action)
 	pipe (pipefd2);
 	/* Get the console saver running */
 	cons_saver_pid = fork ();
-	if (cons_saver_pid < 0){
+	if (cons_saver_pid < 0) {
 	    /* Cannot fork */
 	    /* Delete pipes */
 	    close (pipefd1[1]);
@@ -112,14 +139,14 @@ void handle_console (unsigned char action)
 	    close (pipefd2[1]);
 	    close (pipefd2[0]);
 	    console_flag = 0;
-	} else if (cons_saver_pid > 0){
+	} else if (cons_saver_pid > 0) {
 	    /* Parent */
 	    /* Close the extra pipe ends */
 	    close (pipefd1[0]);
 	    close (pipefd2[1]);
 	    /* Was the child successful? */
 	    read (pipefd2[0], &console_flag, 1);
-	    if (!console_flag){
+	    if (!console_flag) {
 		close (pipefd1[1]);
 		close (pipefd2[0]);
 		waitpid (cons_saver_pid, &status, 0);
@@ -152,7 +179,7 @@ void handle_console (unsigned char action)
 	    close (1);
 	    close (0);
 	    _exit (3);
-	} /* if (cons_saver_pid ...) */
+	}			/* if (cons_saver_pid ...) */
 	break;
 
     case CONSOLE_DONE:
@@ -164,21 +191,21 @@ void handle_console (unsigned char action)
 	if (!console_flag)
 	    return;
 	/* Paranoid: Is the cons.saver still running? */
-	if (cons_saver_pid < 1 || kill (cons_saver_pid, SIGCONT)){
+	if (cons_saver_pid < 1 || kill (cons_saver_pid, SIGCONT)) {
 	    cons_saver_pid = 0;
 	    console_flag = 0;
 	    return;
 	}
 	/* Send command to the console handler */
 	write (pipefd1[1], &action, 1);
-	if (action != CONSOLE_DONE){
+	if (action != CONSOLE_DONE) {
 	    /* Wait the console handler to do its job */
 	    read (pipefd2[0], &console_flag, 1);
 	}
-	if (action == CONSOLE_DONE || !console_flag){
+	if (action == CONSOLE_DONE || !console_flag) {
 	    /* We are done -> Let's clean up */
-	    close (pipefd1 [1]);
-	    close (pipefd2 [0]);
+	    close (pipefd1[1]);
+	    close (pipefd2[0]);
 	    waitpid (cons_saver_pid, &status, 0);
 	    console_flag = 0;
 	}
@@ -186,221 +213,392 @@ void handle_console (unsigned char action)
     }
 }
 
-#endif /* #ifdef linux */
+#elif defined(SCO_FLAVOR)
 
-#ifdef SCO_FLAVOR
 /* 
 **	SCO console save/restore handling routines
 **	Copyright (C) 1997 Alex Tkachenko <alex@bcs.zaporizhzhe.ua>
 */
 
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/vid.h>
-#include <sys/console.h>
-#include <sys/vtkd.h>
-#include <memory.h>
-#include <signal.h>
-#include "tty.h"
 #include "util.h"
 #include "color.h"
-#include "cons.saver.h"
 
 static int FD_OUT = 2;
 
-static unsigned short* vidbuf = NULL;
-static unsigned short* screen = NULL;
+static unsigned short *vidbuf = NULL;
+static unsigned short *screen = NULL;
 static int height = 0, width = 0, saved_attr = 0;
 static int mode = 0;
 
-#define	SIG_ACQUIRE 21 /* originally: handset, line status change (?) */
+#define	SIG_ACQUIRE 21		/* originally: handset, line status change (?) */
 
 static int
-vt_active()
+vt_active ()
 {
-	struct vid_info vi;
-	int adapter = ioctl(FD_OUT, CONS_CURRENT, 0);
+    struct vid_info vi;
+    int adapter = ioctl (FD_OUT, CONS_CURRENT, 0);
 
-	vi.size = sizeof(struct vid_info);
-	ioctl(FD_OUT, CONS_GETINFO, &(vi));
-	return (vi.m_num == ioctl(FD_OUT,CONSADP,adapter));
+    vi.size = sizeof (struct vid_info);
+    ioctl (FD_OUT, CONS_GETINFO, &(vi));
+    return (vi.m_num == ioctl (FD_OUT, CONSADP, adapter));
 }
 
 static void
-console_acquire_vt()
+console_acquire_vt ()
 {
+    struct vt_mode smode;
+
+    signal (SIG_ACQUIRE, SIG_DFL);
+    smode.mode = VT_AUTO;
+    smode.waitv = smode.relsig = smode.acqsig = smode.frsig = 0;
+    ioctl (FD_OUT, VT_SETMODE, &smode);
+    ioctl (FD_OUT, VT_RELDISP, VT_ACKACQ);
+}
+
+static void
+console_shutdown ()
+{
+    if (!console_flag) {
+	return;
+    }
+    if (screen != NULL) {
+	g_free (screen);
+    }
+    console_flag = 0;
+}
+
+static void
+console_save ()
+{
+    struct m6845_info mi;
+
+    if (!console_flag) {
+	return;
+    }
+
+    if (!vt_active ()) {
 	struct vt_mode smode;
 
-	signal(SIG_ACQUIRE, SIG_DFL);
-	smode.mode = VT_AUTO;
-	smode.waitv = smode.relsig = smode.acqsig = smode.frsig = 0;
-	ioctl(FD_OUT, VT_SETMODE, &smode);
-	ioctl(FD_OUT, VT_RELDISP, VT_ACKACQ);
+	/* 
+	 **     User switched out of our vt. Let's wait until we get SIG_ACQUIRE,
+	 **     otherwise we could save wrong screen image
+	 */
+	signal (SIG_ACQUIRE, console_acquire_vt);
+	smode.mode = VT_PROCESS;
+	smode.waitv = 0;
+	smode.waitv = smode.relsig = smode.acqsig = smode.frsig =
+	    SIG_ACQUIRE;
+	ioctl (FD_OUT, VT_SETMODE, &smode);
+
+	pause ();
+    }
+
+    saved_attr = ioctl (FD_OUT, GIO_ATTR, 0);
+
+    vidbuf = (unsigned short *) ioctl (FD_OUT, MAPCONS, 0);
+
+    mi.size = sizeof (struct m6845_info);
+    ioctl (FD_OUT, CONS_6845INFO, &mi);
+
+    {
+	unsigned short *start = vidbuf + mi.screen_top;
+	memcpy (screen, start, width * height * 2);
+    }
+
+    write (FD_OUT, "\0337", 2);	/* save cursor position */
 }
 
 static void
-console_shutdown()
+console_restore ()
 {
-	if (!console_flag)
-	{
-		return;
-	}
-	if (screen != NULL)
-	{
-		g_free (screen);
-	}
-	console_flag = 0;
-}
+    struct m6845_info mi;
+    unsigned short *start;
 
-static void
-console_save()
-{
-	struct m6845_info mi;
-
-	if (!console_flag)
-	{
-		return;
-	}
-
-	if (!vt_active())
-	{
-		struct vt_mode smode;
-
-		/* 
-		**	User switched out of our vt. Let's wait until we get SIG_ACQUIRE,
-		**	otherwise we could save wrong screen image
-		*/
-		signal(SIG_ACQUIRE, console_acquire_vt);
-		smode.mode = VT_PROCESS;
-		smode.waitv = 0;
-		smode.waitv = smode.relsig = smode.acqsig = smode.frsig = SIG_ACQUIRE;
-		ioctl(FD_OUT, VT_SETMODE, &smode);
-
-		pause();
-	}
-
-	saved_attr = ioctl(FD_OUT, GIO_ATTR, 0);
-
-	vidbuf = (unsigned short*) ioctl(FD_OUT, MAPCONS, 0);
-
-	mi.size = sizeof(struct m6845_info);
-	ioctl(FD_OUT, CONS_6845INFO, &mi);
-
-	{
-		unsigned short* start = vidbuf + mi.screen_top;
-		memcpy(screen, start, width * height * 2);
-	}
-
-	write(FD_OUT,"\0337",2);                        /* save cursor position */
-}
-
-static void
-console_restore()
-{
-	struct m6845_info mi;
-	unsigned short* start;
-
-	if (!console_flag)
-	{
-		return;
-	}
+    if (!console_flag) {
+	return;
+    }
 
     write (FD_OUT, "\033[2J", 4);
 
-	mi.size = sizeof(struct m6845_info);
-	ioctl(FD_OUT, CONS_6845INFO, &mi);
+    mi.size = sizeof (struct m6845_info);
+    ioctl (FD_OUT, CONS_6845INFO, &mi);
 
-	start = vidbuf + mi.screen_top;
- 	memcpy(start, screen, width * height * 2);
-	write(FD_OUT,"\0338",2);                 /* restore cursor position */
+    start = vidbuf + mi.screen_top;
+    memcpy (start, screen, width * height * 2);
+    write (FD_OUT, "\0338", 2);	/* restore cursor position */
 }
 
 static void
-console_init()
+console_init ()
 {
-	struct vid_info vi;
-	int adapter = ioctl(FD_OUT, CONS_CURRENT, 0);
+    struct vid_info vi;
+    int adapter = ioctl (FD_OUT, CONS_CURRENT, 0);
 
-	console_flag = 0;
+    console_flag = 0;
 
-	if (adapter != -1)
-	{
-		vi.size = sizeof(struct vid_info);
-		ioctl(FD_OUT, CONS_GETINFO, &(vi));
+    if (adapter != -1) {
+	vi.size = sizeof (struct vid_info);
+	ioctl (FD_OUT, CONS_GETINFO, &(vi));
 
-		if (vt_active())
-		{
-			console_flag = 1;
+	if (vt_active ()) {
+	    console_flag = 1;
 
-			height = vi.mv_rsz;
-			width = vi.mv_csz;
+	    height = vi.mv_rsz;
+	    width = vi.mv_csz;
 
-			screen = (unsigned short*) g_malloc (height * width * 2);
-			if (screen == NULL)
-			{
-				console_shutdown();
-				return;
-			}
-			console_save();
-			mode = ioctl(FD_OUT, CONS_GET, 0);
-			ioctl(FD_OUT, MODESWITCH | mode, 0);
-			console_restore();
-		}
+	    screen = (unsigned short *) g_malloc (height * width * 2);
+	    if (screen == NULL) {
+		console_shutdown ();
+		return;
+	    }
+	    console_save ();
+	    mode = ioctl (FD_OUT, CONS_GET, 0);
+	    ioctl (FD_OUT, MODESWITCH | mode, 0);
+	    console_restore ();
 	}
+    }
 }
 
 void
 handle_console (unsigned char action)
 {
-	if (look_for_rxvt_extensions ())
-		return;
-	switch (action){
-		case CONSOLE_INIT:
-			console_init();
-			break;
+    if (look_for_rxvt_extensions ())
+	return;
+    switch (action) {
+    case CONSOLE_INIT:
+	console_init ();
+	break;
 
-		case CONSOLE_DONE: 
-			console_shutdown();
-			break;
+    case CONSOLE_DONE:
+	console_shutdown ();
+	break;
 
-		case CONSOLE_SAVE:
-			console_save();
-			break;
+    case CONSOLE_SAVE:
+	console_save ();
+	break;
 
-		case CONSOLE_RESTORE:
-			console_restore();
-			break;
-		default:
-			/* Nothing */;
+    case CONSOLE_RESTORE:
+	console_restore ();
+	break;
+    default:
+	/* Nothing */ ;
     }
 }
 
 void
-show_console_contents (int starty, unsigned char begin_line, unsigned char end_line)
+show_console_contents (int starty, unsigned char begin_line,
+		       unsigned char end_line)
 {
-	register int i, len = (end_line - begin_line) * width;
+    register int i, len = (end_line - begin_line) * width;
 
-	if (look_for_rxvt_extensions ()) {
-		show_rxvt_contents (starty, begin_line, end_line);
-		return;
-	}
-	attrset(DEFAULT_COLOR);
-	for (i = 0; i < len; i++)
-	{
-		if ((i % width) == 0)
-		    move (starty+(i/width), 0);
-		addch ((unsigned char)screen[width*starty + i]);
-	}
+    if (look_for_rxvt_extensions ()) {
+	show_rxvt_contents (starty, begin_line, end_line);
+	return;
+    }
+    attrset (DEFAULT_COLOR);
+    for (i = 0; i < len; i++) {
+	if ((i % width) == 0)
+	    move (starty + (i / width), 0);
+	addch ((unsigned char) screen[width * starty + i]);
+    }
 }
 
-#endif /* SCO_FLAVOR */
+#elif defined(__FreeBSD__)
 
+/*
+ * FreeBSD support copyright (C) 2003 Alexander Serkov <serkov@ukrpost.net>.
+ * Support for screenmaps by Max Khon <fjoe@FreeBSD.org>
+ */
 
-#if !defined(linux) && !defined(__linux__) && !defined(SCO_FLAVOR)
+#define FD_OUT 1
 
-#include "tty.h"
+static struct scrshot screen_shot;
+static struct vid_info screen_info;
+/*
+ * Color indexes returned by SCRSHOT differ from that ones VT220 accepts.
+ * color_map defines mapping from SCRSHOT colors to VT220.
+ */
+static int color_map[8] = { 0, 4, 2, 6, 1, 5, 3, 7 };
 
-void show_console_contents (int starty, unsigned char begin_line, unsigned char end_line)
+static void
+console_init (void)
+{
+    if (console_flag)
+	return;
+
+    screen_info.size = sizeof (screen_info);
+    if (ioctl (FD_OUT, CONS_GETINFO, &screen_info) == -1)
+	return;
+
+#if __FreeBSD_version >= 500000
+    screen_shot.x = 0;
+    screen_shot.y = 0;
+#endif
+    screen_shot.xsize = screen_info.mv_csz;
+    screen_shot.ysize = screen_info.mv_rsz;
+    if ((screen_shot.buf =
+	 malloc (screen_info.mv_csz * screen_info.mv_rsz)) == NULL)
+	return;
+
+    console_flag = 1;
+}
+
+static void
+set_attr (unsigned attr)
+{
+    char cmd[17];
+    int bc, tc;
+
+    tc = attr & 0xF;
+    bc = (attr >> 4) & 0xF;
+
+    strcpy (cmd, "\x1B[");
+    strcat (cmd, (bc & 8) ? "5;" : "25;");
+    strcat (cmd, (tc & 8) ? "1;" : "22;");
+    strcat (cmd, "3%d;4%dm");
+    printf (cmd, color_map[tc & 7], color_map[bc & 7]);
+}
+
+#define cursor_to(x, y) do {				\
+	printf("\x1B[%d;%df", (y) + 1, (x) + 1);	\
+	fflush(stdout);					\
+} while (0)
+
+static void
+console_restore (void)
+{
+    int i, last;
+
+    if (!console_flag)
+	return;
+
+    cursor_to (0, 0);
+
+    /* restoring all content up to cursor position */
+    last = screen_info.mv_row * screen_info.mv_csz + screen_info.mv_col;
+    for (i = 0; i < last; ++i) {
+	set_attr ((screen_shot.buf[i] >> 8) & 0xFF);
+	putc (screen_shot.buf[i] & 0xFF, stdout);
+    }
+
+    /* restoring cursor color */
+    set_attr ((screen_shot.buf[last] >> 8) & 0xFF);
+
+    fflush (stdout);
+}
+
+static void
+console_shutdown (void)
+{
+    if (!console_flag)
+	return;
+
+    free (screen_shot.buf);
+
+    console_flag = 0;
+}
+
+static void
+console_save (void)
+{
+    int i;
+    scrmap_t map;
+    scrmap_t revmap;
+
+    if (!console_flag)
+	return;
+
+    /* screen_info.size is already set in console_init() */
+    if (ioctl (FD_OUT, CONS_GETINFO, &screen_info) == -1) {
+	console_shutdown ();
+	return;
+    }
+
+    /* handle console resize */
+    if (screen_info.mv_csz != screen_shot.xsize
+	|| screen_info.mv_rsz != screen_shot.ysize) {
+	console_shutdown ();
+	console_init ();
+    }
+
+    if (ioctl (FD_OUT, CONS_SCRSHOT, &screen_shot) == -1) {
+	console_shutdown ();
+	return;
+    }
+
+    if (ioctl (FD_OUT, GIO_SCRNMAP, &map) == -1) {
+	console_shutdown ();
+	exit (1);
+    }
+
+    for (i = 0; i < 256; i++) {
+	char *p = memchr (map.scrmap, i, 256);
+	revmap.scrmap[i] = p ? p - map.scrmap : i;
+    }
+
+    for (i = 0; i < screen_shot.xsize * screen_shot.ysize; i++) {
+	screen_shot.buf[i] =
+	    (screen_shot.buf[i] & 0xff00) | (unsigned char) revmap.
+	    scrmap[screen_shot.buf[i] & 0xff];
+    }
+}
+
+void
+show_console_contents (int starty, unsigned char begin_line,
+		       unsigned char end_line)
+{
+    int i, first, last;
+
+    if (look_for_rxvt_extensions ()) {
+	show_rxvt_contents (starty, begin_line, end_line);
+	return;
+    }
+
+    if (!console_flag)
+	return;
+
+    cursor_to (0, starty);
+
+    first = starty * screen_info.mv_csz;
+    last = first + (end_line - begin_line + 1) * screen_info.mv_csz - 1;
+    for (i = first; i <= last; ++i) {
+	set_attr ((screen_shot.buf[i] >> 8) & 0xFF);
+	putc (screen_shot.buf[i] & 0xFF, stdout);
+    }
+
+    fflush (stdout);
+}
+
+void
+handle_console (unsigned char action)
+{
+    if (look_for_rxvt_extensions ())
+	return;
+
+    switch (action) {
+    case CONSOLE_INIT:
+	console_init ();
+	break;
+
+    case CONSOLE_DONE:
+	console_shutdown ();
+	break;
+
+    case CONSOLE_SAVE:
+	console_save ();
+	break;
+
+    case CONSOLE_RESTORE:
+	console_restore ();
+	break;
+    }
+}
+
+#else
+
+void
+show_console_contents (int starty, unsigned char begin_line,
+		       unsigned char end_line)
 {
     standend ();
 
@@ -411,11 +609,10 @@ void show_console_contents (int starty, unsigned char begin_line, unsigned char 
     console_flag = 0;
 }
 
-void handle_console (unsigned char action)
+void
+handle_console (unsigned char action)
 {
     look_for_rxvt_extensions ();
 }
 
-#endif				/* !defined(linux) && !defined(__linux__) && !defined(SCO_FLAVOR) */
-
-
+#endif				/* !defined(linux) && !defined(__linux__) && !defined(SCO_FLAVOR) && !defined(__FreeBSD__) */
