@@ -1,3 +1,7 @@
+2002-05-14  Pavel Roskin  <proski@gnu.org>
+
+	 * configure.in: Fix logic for gettext 0.10.x.
+
 2002-05-14  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* configure.in: Don't generate po/Makefile if

@@ -811,7 +811,7 @@ intl/Makefile po/Makefile.in
 ])
 
 AC_CONFIG_COMMANDS(potfiles,
-    [grep top_builddir po/Makefile.in >/dev/null || sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile])
+    [grep ^top_builddir po/Makefile.in >/dev/null && sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile])
 
 AC_OUTPUT
 
