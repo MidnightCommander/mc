@@ -146,6 +146,9 @@ void
 wipe_password (char *passwd)
 {
     char *p = passwd;
+
+    if (p == NULL)
+	    return;
     
     for (;*p; p++)
         *p = 0;
