@@ -266,23 +266,33 @@ GtkCheckMenuItem *gnome_toggle_snap (void);
 
 GnomeUIInfo gnome_panel_file_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("_New window"),        N_("Opens a new window"), gnome_open_panel },
-#if 0
 	/* We want to make a new menu entry here... */
-#endif
-	{ GNOME_APP_UI_SEPARATOR },	
-	{ GNOME_APP_UI_ITEM, N_("_Open"),              N_("Open selected files"), NULL },
-	{ GNOME_APP_UI_ITEM, N_("_Copy..."),           N_("Copy files"),       copy_cmd },
+	/* For example: */
+	/* New-> */
+	/*  Command Prompt */
+	/*  Gimp Image */
+	/*  Gnumeric Spreadsheet */
+	/*  Text Document */
+	/*  etc... */
+	{ GNOME_APP_UI_SEPARATOR },
+	{ GNOME_APP_UI_ITEM, N_("_Open"),              N_("Open selected files"), NULL, NULL,
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN },
+	{ GNOME_APP_UI_ITEM, N_("_Copy..."),           N_("Copy files"), copy_cmd, NULL},
 	{ GNOME_APP_UI_ITEM, N_("_Move..."),           N_("Rename or move files"), ren_cmd },
 	{ GNOME_APP_UI_ITEM, N_("_Delete..."),         N_("Delete files from disk"), delete_cmd },
 	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_ITEM, N_("C_lose"),             N_("Close this panel"), gnome_close_panel },
+	{ GNOME_APP_UI_ITEM, N_("C_lose"),             N_("Close this panel"), gnome_close_panel, NULL,
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE },
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 
 GnomeUIInfo gnome_panel_edit_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("_Cut"),               N_("Cuts the selected files into the cut buffer."),  NULL },
-	{ GNOME_APP_UI_ITEM, N_("C_opy"),              N_("Copies the selected files into the cut buffer."),  NULL },
-	{ GNOME_APP_UI_ITEM, N_("_Paste"),             N_("Pastes files from the cut buffer into the current directory"),  NULL },
+	{ GNOME_APP_UI_ITEM, N_("_Cut"),               N_("Cuts the selected files into the cut buffer."),  NULL, NULL,
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CUT },
+	{ GNOME_APP_UI_ITEM, N_("C_opy"),              N_("Copies the selected files into the cut buffer."),  NULL, NULL,
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_COPY },
+	{ GNOME_APP_UI_ITEM, N_("_Paste"),             N_("Pastes files from the cut buffer into the current directory"),  NULL, NULL,
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PASTE },
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("_Select Files..."),   N_("Select a group of files"), select_cmd },
 	{ GNOME_APP_UI_ITEM, N_("_Invert Selection"),  N_("Reverses the list of tagged files"), reverse_selection_cmd },
@@ -294,16 +304,16 @@ GnomeUIInfo gnome_panel_edit_menu [] = {
 };
 
 GnomeUIInfo gnome_panel_view_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("Icon View"), NULL, NULL},
-	{ GNOME_APP_UI_ITEM, N_("Partial View"), NULL, NULL},
-	{ GNOME_APP_UI_ITEM, N_("Full View"), NULL, NULL},
-	{ GNOME_APP_UI_ITEM, N_("Custom View"), NULL, NULL},
+	{ GNOME_APP_UI_ITEM, N_("Icon View"), NULL, gnome_icon_view_cmd, NULL},
+	{ GNOME_APP_UI_ITEM, N_("Partial View"), NULL, gnome_partial_view_cmd, NULL},
+	{ GNOME_APP_UI_ITEM, N_("Full View"), NULL, gnome_full_view_cmd, NULL},
+	{ GNOME_APP_UI_ITEM, N_("Custom View"), NULL, gnome_custom_view_cmd, NULL},
 	{GNOME_APP_UI_ENDOFINFO, NULL, NULL, NULL, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL}
 };
 
 GnomeUIInfo gnome_panel_layout_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("_Sort Order..."),     N_("Confirmation settings"), sort_cmd },
+	{ GNOME_APP_UI_ITEM, N_("_Sort By..."),     N_("Confirmation settings"), gnome_sort_cmd },
 	{ GNOME_APP_UI_ITEM, N_("_Filter View..."),    N_("Global option settings"), NULL },
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_RADIOITEMS, NULL , NULL, gnome_panel_view_menu},
@@ -311,7 +321,9 @@ GnomeUIInfo gnome_panel_layout_menu [] = {
 };
 
 GnomeUIInfo gnome_panel_commands_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("_Find File..."),      N_("Locate files on disk"),   find_cmd },
+	{ GNOME_APP_UI_ITEM, N_("_Find File..."),      N_("Locate files on disk"),   find_cmd, NULL,
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_JUMP_TO},
+	  
 	{ GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
 	{ GNOME_APP_UI_ITEM, N_("_Run Command..."),    N_("Run a command and put the results in a panel"), external_panelize },
 #ifdef USE_VFS					  
