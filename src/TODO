@@ -21,6 +21,8 @@ Implement --with-screen option.
 
 Remove side effects from --with-termcap option.
 
+Make resize a dialog event.
+
 
 Before 4.6.0
 ============
