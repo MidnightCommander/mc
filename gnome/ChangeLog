@@ -1,7 +1,12 @@
+2001-05-26  Pavel Roskin  <proski@gnu.org>
+
+	* glayout.c (gnome_panel_layout_menu): Status bar messages for
+	"Sort By" and "Filter View" were incorrect.
+
 2001-05-25  Pavel Roskin  <proski@gnu.org>
 
-	* gmain.c: Add option not to show the root warning again.
-	From Ximian patches.
+	* gmain.c (gnome_check_super_user): Add option not to show the
+	root warning again. From Ximian patches.
 
 	* gmain.c: Include libgnomeui/gnome-window-icon.h if needed.
 	(gnome_check_super_user): Better warning for root. From Ximian.

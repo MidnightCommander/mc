@@ -421,8 +421,8 @@ GnomeUIInfo gnome_panel_settings_menu [] = {
 };
 
 GnomeUIInfo gnome_panel_layout_menu [] = {
-	GNOMEUIINFO_ITEM_NONE(N_("_Sort By..."),     N_("Confirmation settings"), gnome_sort_cmd),
-	GNOMEUIINFO_ITEM_NONE(N_("_Filter View..."),    N_("Global option settings"), gnome_filter_cmd),
+	GNOMEUIINFO_ITEM_NONE(N_("_Sort By..."),     N_("Filename sort order"), gnome_sort_cmd),
+	GNOMEUIINFO_ITEM_NONE(N_("_Filter View..."),    N_("Filename filtering settings"), gnome_filter_cmd),
 	GNOMEUIINFO_SEPARATOR,
         GNOMEUIINFO_RADIOLIST(panel_view_menu_uiinfo),
 	GNOMEUIINFO_END
