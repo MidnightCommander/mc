@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.51\n"
-"POT-Creation-Date: 2001-06-08 16:19+0200\n"
+"POT-Creation-Date: 2001-06-09 10:23+0200\n"
 "PO-Revision-Date: 2000-09-01 03:29+1\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Marco Ciampa <it@li.org>\n"
@@ -2988,7 +2988,7 @@ msgstr " Errore nel file %s alla linea %d "
 
 #: src/achown.c:72 src/chmod.c:111 src/chown.c:80
 msgid "&Set"
-msgstr "&Modifica"
+msgstr "&Imposta"
 
 #: src/achown.c:73
 msgid "S&kip"
@@ -3308,7 +3308,7 @@ msgstr "M&od. marc."
 
 #: src/chmod.c:142
 msgid "Permissions (Octal)"
-msgstr "Permessi (ottali)"
+msgstr "Permessi (Ottale)"
 
 #: src/chmod.c:144
 msgid "Owner name"
@@ -3320,7 +3320,7 @@ msgstr "Nome gruppo"
 
 #: src/chmod.c:150
 msgid " Chmod command "
-msgstr " Comando chown "
+msgstr " Comando Chmod "
 
 #: src/chmod.c:152 src/chown.c:120
 msgid " Permission "
