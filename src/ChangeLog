@@ -1,3 +1,9 @@
+Mon Aug 31 12:40:29 1998  Pavel Machek <pavel@ucw.cz>
+
+	* cmd.c: added view_file_cmd which asks user which file to view -
+ 	_very_ usefull with vfs (now you can browse web with mc: try
+ 	/#url:http:||atrey.karlin.mff.cuni.cz|~pavel#uhtml)
+
 Thu Aug 27 19:52:45 1998  Pavel Roskin <pavel.roskin@escoft.co.uk>
 
 	* Make.common.in: Don't define VERSION anymore
