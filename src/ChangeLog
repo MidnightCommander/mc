@@ -1,5 +1,8 @@
 2003-01-20  Pavel Roskin  <proski@gnu.org>
 
+	* main.c: Change default value of full_eight_bits to 0 - it's
+	reported to be broken on many terminals.
+
 	* man2hlp.c (main): Initialize cnode->heading_level.
 	Bug report by Tribhuvan <loka@rcn.com>
 

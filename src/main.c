@@ -154,12 +154,14 @@ int pause_after_run = pause_on_dumb_terminals;
 int auto_save_setup = 1;
 
 #ifndef HAVE_CHARSET
-/* If true, be eight bit clean */
+/* If true, allow characters in the range 160-255 */
 int eight_bit_clean = 1;
 
-/* If true, then display chars 0-255, else iso-8859-1,
-   requires eight_bit_clean */
-int full_eight_bits = 1;
+/*
+ * If true, also allow characters in the range 128-159.
+ * This is reported to break on many terminals (xterm, qansi-m).
+ */
+int full_eight_bits = 0;
 #endif				/* !HAVE_CHARSET */
 
 /* If true use the internal viewer */
