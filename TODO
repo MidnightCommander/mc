@@ -142,6 +142,17 @@ to sort files.
 
 Support for X clipboard.
 
+Provide "patch" and "diff" editors. The patch editor will automatically
+adjust the line numbers of the following chunks when lines are deleted
+or inserted at the beginning of the file.
+
+Provide context menus for files. Possible actions include: [compile],
+[CVS commit], [CVS diff -up], [pack], [unpack], [grep].
+
+Make mc a CVS frontend comparable to Eclipse-3.0.
+
+More standard Widgets: WTreeView, WDirectoryList, WGroupBox, WTextArea,
+WOpenDialog, WSaveDialog, WPrintDialog, WKeyBar.
 
 ========================================================================
 Everything below this point is the old TODO list.  It doesn't reflect

@@ -1,3 +1,8 @@
+2004-10-18  Roland Illig  <roland.illig@gmx.de>
+
+	* TODO: Some new TODO items with low priority: More standard
+	widgets, CVS frontend, patch editor, context menus.
+
 2004-10-16  Roland Illig  <roland.illig@gmx.de>
 
 	* TODO: Fixed the "./ files in tar archive" item for mc-4.6.1.
