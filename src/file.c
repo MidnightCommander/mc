@@ -471,7 +471,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     int buf_size = BUF_8K;
     int src_desc, dest_desc = -1;
     int n_read, n_written;
-    int src_mode = 0;		/* The mode of the source file */
+    mode_t src_mode = 0;		/* The mode of the source file */
     struct stat sb, sb2;
     struct utimbuf utb;
     int dst_exists = 0, appending = 0;
@@ -490,17 +490,17 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 
     mc_refresh ();
 
-  retry_dst_stat:
-    if (mc_stat (dst_path, &sb2) == 0) {
+    while (mc_stat (dst_path, &sb2) == 0) {
 	if (S_ISDIR (sb2.st_mode)) {
 	    return_status =
 		file_error (_(" Cannot overwrite directory \"%s\" \n %s "),
 			    dst_path);
 	    if (return_status == FILE_RETRY)
-		goto retry_dst_stat;
+		continue;
 	    return return_status;
 	}
 	dst_exists = 1;
+	break;
     }
 
     while ((*ctx->stat_func) (src_path, &sb)) {
@@ -515,8 +515,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 	/* Destination already exists */
 	if (sb.st_dev == sb2.st_dev && sb.st_ino == sb2.st_ino) {
 	    message (1, MSG_ERROR,
-			_(" `%s' and `%s' are the same file "), src_path,
-			dst_path);
+		    _(" `%s' and `%s' are the same file "), src_path, dst_path);
 	    do_refresh ();
 	    return FILE_SKIP;
 	}
@@ -545,17 +544,13 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 	    return retval;
 	}
 
-	if (S_ISCHR (sb.st_mode) || S_ISBLK (sb.st_mode)
-	    || S_ISFIFO (sb.st_mode)
-	    || S_ISNAM (sb.st_mode)
-	    || S_ISSOCK (sb.st_mode)) {
-	    while (mc_mknod
-		   (dst_path, sb.st_mode & ctx->umask_kill,
+	if (S_ISCHR (sb.st_mode) || S_ISBLK (sb.st_mode) || 
+		S_ISFIFO (sb.st_mode) || S_ISNAM (sb.st_mode) ||
+		S_ISSOCK (sb.st_mode)) {
+	    while (mc_mknod (dst_path, sb.st_mode & ctx->umask_kill,
 		    sb.st_rdev) < 0) {
-		return_status =
-		    file_error (_
-				(" Cannot create special file \"%s\" \n %s "),
-				dst_path);
+		return_status = file_error (
+		    _(" Cannot create special file \"%s\" \n %s "), dst_path);
 		if (return_status == FILE_RETRY)
 		    continue;
 		return return_status;
@@ -564,21 +559,16 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 
 	    while (ctx->preserve_uidgid
 		   && mc_chown (dst_path, sb.st_uid, sb.st_gid)) {
-		temp_status =
-		    file_error (_
-				(" Cannot chown target file \"%s\" \n %s "),
-				dst_path);
+		temp_status = file_error (
+			_(" Cannot chown target file \"%s\" \n %s "), dst_path);
 		if (temp_status == FILE_RETRY)
 		    continue;
 		return temp_status;
 	    }
 	    while (ctx->preserve &&
-		   (mc_chmod (dst_path, sb.st_mode & ctx->umask_kill) <
-		    0)) {
-		temp_status =
-		    file_error (_
-				(" Cannot chmod target file \"%s\" \n %s "),
-				dst_path);
+		   mc_chmod (dst_path, sb.st_mode & ctx->umask_kill)) {
+		temp_status = file_error (
+			_(" Cannot chmod target file \"%s\" \n %s "), dst_path);
 		if (temp_status == FILE_RETRY)
 		    continue;
 		return temp_status;
@@ -590,9 +580,8 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     gettimeofday (&tv_transfer_start, (struct timezone *) NULL);
 
     while ((src_desc = mc_open (src_path, O_RDONLY | O_LINEAR)) < 0) {
-	return_status =
-	    file_error (_(" Cannot open source file \"%s\" \n %s "),
-			src_path);
+	return_status = file_error (
+		_(" Cannot open source file \"%s\" \n %s "), src_path);
 	if (return_status == FILE_RETRY)
 	    continue;
 	ctx->do_append = 0;
@@ -608,9 +597,8 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     }
 
     while (mc_fstat (src_desc, &sb)) {
-	return_status =
-	    file_error (_(" Cannot fstat source file \"%s\" \n %s "),
-			src_path);
+	return_status = file_error (
+		_(" Cannot fstat source file \"%s\" \n %s "), src_path);
 	if (return_status == FILE_RETRY)
 	    continue;
 	ctx->do_append = 0;
@@ -627,14 +615,10 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
        do not create a security hole.  FIXME: You have security hole
        here, btw. Imagine copying to /tmp and symlink attack :-( */
 
-    while ((dest_desc = mc_open (dst_path, O_WRONLY |
-				 (ctx->
-				  do_append ? O_APPEND : (O_CREAT |
-							  O_TRUNC)),
-				 0600)) < 0) {
-	return_status =
-	    file_error (_(" Cannot create target file \"%s\" \n %s "),
-			dst_path);
+    while ((dest_desc = mc_open (dst_path, O_WRONLY | (ctx->do_append ?
+    	    O_APPEND : (O_CREAT | O_TRUNC)), 0600)) < 0) {
+	return_status = file_error (
+		_(" Cannot create target file \"%s\" \n %s "), dst_path);
 	if (return_status == FILE_RETRY)
 	    continue;
 	ctx->do_append = 0;
@@ -647,9 +631,8 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 
     /* Find out the optimal buffer size.  */
     while (mc_fstat (dest_desc, &sb)) {
-	return_status =
-	    file_error (_(" Cannot fstat target file \"%s\" \n %s "),
-			dst_path);
+	return_status = file_error (
+		_(" Cannot fstat target file \"%s\" \n %s "), dst_path);
 	if (return_status == FILE_RETRY)
 	    continue;
 	goto ret;
@@ -680,10 +663,8 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 		n_read = -1;
 	    else
 		while ((n_read = mc_read (src_desc, buf, buf_size)) < 0) {
-		    return_status =
-			file_error (_
-				    (" Cannot read source file \"%s\" \n %s "),
-				    src_path);
+		    return_status = file_error (
+			_(" Cannot read source file \"%s\" \n %s "), src_path);
 		    if (return_status == FILE_RETRY)
 			continue;
 		    goto ret;
@@ -701,10 +682,8 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 		 * permissions: -------, so if we happen to have actually
 		 * read something, we should fix the permissions.
 		 */
-		if (!(src_mode & ((S_IRUSR | S_IWUSR | S_IXUSR)	/* user */
-				  |(S_IXOTH | S_IWOTH | S_IROTH)	/* other */
-				  |(S_IXGRP | S_IWGRP | S_IRGRP))))	/* group */
-		    src_mode = S_IRUSR | S_IWUSR | S_IROTH | S_IRGRP;
+		if (!(src_mode & (S_IRWXU | S_IRWXG | S_IRWXO)))
+		    src_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
 		gettimeofday (&tv_last_input, NULL);
 
 		/* dst_write */
@@ -716,9 +695,8 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 			continue;
 		    }
 		    return_status =
-			file_error (_
-				    (" Cannot write target file \"%s\" \n %s "),
-				    dst_path);
+			file_error (_(" Cannot write target file \"%s\" \n %s "),
+				dst_path);
 		    if (return_status != FILE_RETRY)
 			goto ret;
 		}
@@ -760,10 +738,8 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 	    }
 
 	    file_progress_set_stalled_label (ctx, stalled_msg);
-	    return_status =
-		file_progress_show_bytes (ctx,
-					  *progress_bytes + n_read_total,
-					  ctx->progress_bytes);
+	    return_status = file_progress_show_bytes (ctx, *progress_bytes +
+		    n_read_total, ctx->progress_bytes);
 	    if (return_status == FILE_CONT) {
 		return_status =
 		    file_progress_show (ctx, n_read_total, file_size);
@@ -780,9 +756,8 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     g_free (buf);
 
     while (src_desc != -1 && mc_close (src_desc) < 0) {
-	temp_status =
-	    file_error (_(" Cannot close source file \"%s\" \n %s "),
-			src_path);
+	temp_status = file_error (
+		_(" Cannot close source file \"%s\" \n %s "), src_path);
 	if (temp_status == FILE_RETRY)
 	    continue;
 	if (temp_status == FILE_ABORT)
@@ -791,9 +766,8 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     }
 
     while (dest_desc != -1 && mc_close (dest_desc) < 0) {
-	temp_status =
-	    file_error (_(" Cannot close target file \"%s\" \n %s "),
-			dst_path);
+	temp_status = file_error (
+		_(" Cannot close target file \"%s\" \n %s "), dst_path);
 	if (temp_status == FILE_RETRY)
 	    continue;
 	return_status = temp_status;
@@ -803,19 +777,17 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     if (dst_status == DEST_SHORT) {
 	/* Remove short file */
 	int result;
-	result =
-	    query_dialog (_("Copy"),
-			  _("Incomplete file was retrieved. Keep it?"),
-			  D_ERROR, 2, _("&Delete"), _("&Keep"));
+	result = query_dialog (_("Copy"),
+		_("Incomplete file was retrieved. Keep it?"),
+		D_ERROR, 2, _("&Delete"), _("&Keep"));
 	if (!result)
 	    mc_unlink (dst_path);
     } else if (dst_status == DEST_FULL) {
 	/* Copy has succeeded */
 	if (!appending && ctx->preserve_uidgid) {
 	    while (mc_chown (dst_path, src_uid, src_gid)) {
-		temp_status = file_error
-		    (_(" Cannot chown target file \"%s\" \n %s "),
-		     dst_path);
+		temp_status = file_error (
+			_(" Cannot chown target file \"%s\" \n %s "), dst_path);
 		if (temp_status == FILE_RETRY)
 		    continue;
 		return_status = temp_status;
@@ -823,16 +795,10 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 	    }
 	}
 
-	/*
-	 * .ado: according to the XPG4 standard, the file must be closed before
-	 * chmod can be invoked
-	 */
 	if (!appending && ctx->preserve) {
-	    while (mc_chmod (dst_path, src_mode & ctx->umask_kill)) {
-		temp_status =
-		    file_error (_
-				(" Cannot chmod target file \"%s\" \n %s "),
-				dst_path);
+	    while (mc_chmod (dst_path, (src_mode & ctx->umask_kill))) {
+		temp_status = file_error (
+			_(" Cannot chmod target file \"%s\" \n %s "), dst_path);
 		if (temp_status != FILE_RETRY) {
 		    return_status = temp_status;
 		    break;
