@@ -716,7 +716,7 @@ msgid ""
 "Could not stat %s\n"
 "%s"
 msgstr ""
-"Ne morem pognati ukaza stat na %s\n"
+"Nisem mogel izvesti ukaza stat na %s\n"
 "%s"
 
 #: gnome/gicon.c:282
@@ -6798,7 +6798,7 @@ msgstr "ftpfs: CWD (sprememba delovnega direktorija) ni uspela."
 
 #: vfs/ftpfs.c:1101 vfs/ftpfs.c:1108
 msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: ne morem razre¹iti simbolne povezave"
+msgstr "ftpfs: ne morem razvozlati simbolne povezave"
 
 #: vfs/ftpfs.c:1159
 msgid "Resolving symlink..."
