@@ -565,6 +565,10 @@ shell/.mp3
 	View=mpg123 %f
 	Icon=sound.xpm
 
+regex/\.trpm$
+	Open=%cd trpm:%p
+	View=%view{ascii} rpm -qivl --scripts `basename %p .trpm`
+
 # Default target for anything not described above
 default/*
 	Open=
