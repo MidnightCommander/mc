@@ -117,17 +117,18 @@ vfs_type_from_op (char *path)
 
     if (!path)
 	vfs_die ("vfs_type_from_op got NULL: impossible");
-    
-    for (vfs = vfs_list; vfs != &vfs_local_ops; vfs = vfs->next){
-        if (vfs->which) {
+
+    for (vfs = vfs_list; vfs != &vfs_local_ops; vfs = vfs->next) {
+	if (vfs->which) {
 	    if ((*vfs->which) (vfs, path) == -1)
 		continue;
 	    return vfs;
 	}
-	if (!strncmp (path, vfs->prefix, strlen (vfs->prefix)))
+	if (vfs->prefix
+	    && !strncmp (path, vfs->prefix, strlen (vfs->prefix)))
 	    return vfs;
     }
-    return NULL; /* shut up stupid gcc */
+    return NULL;
 }
 
 /* Strip known vfs suffixes from a filename (possible improvement: strip
@@ -141,23 +142,24 @@ vfs_strip_suffix_from_filename (const char *filename)
     char *p;
 
     if (!filename)
-	vfs_die("vfs_strip_suffix_from_path got NULL: impossible");
-    
+	vfs_die ("vfs_strip_suffix_from_path got NULL: impossible");
+
     p = g_strdup (filename);
     if (!(semi = strrchr (p, '#')))
 	return p;
 
-    for (vfs = vfs_list; vfs != &vfs_local_ops; vfs = vfs->next){
-        if (vfs->which){
+    for (vfs = vfs_list; vfs != &vfs_local_ops; vfs = vfs->next) {
+	if (vfs->which) {
 	    if ((*vfs->which) (vfs, semi + 1) == -1)
 		continue;
-	    *semi = '\0'; /* Found valid suffix */
+	    *semi = '\0';	/* Found valid suffix */
 	    return p;
 	}
-	if (!strncmp (semi + 1, vfs->prefix, strlen (vfs->prefix))) {
-	    *semi = '\0'; /* Found valid suffix */
+	if (vfs->prefix
+	    && !strncmp (semi + 1, vfs->prefix, strlen (vfs->prefix))) {
+	    *semi = '\0';	/* Found valid suffix */
 	    return p;
-        }
+	}
     }
     return p;
 }
@@ -903,7 +905,7 @@ mc_chdir (char *path)
     new_dir = vfs_canon (path);
     new_vfs = vfs_type (new_dir);
     if (!new_vfs->chdir)
-	vfs_die ("No chdir function defined");
+	return -1;
 
     /* new_vfs->chdir can write to the second argument, use a copy */
     new_dir_copy = g_strdup (new_dir);

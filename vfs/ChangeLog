@@ -1,3 +1,11 @@
+2003-09-28  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.c (vfs_type_from_op): Check if vfs->prefix is NULL before
+	calling strlen() on it.
+	(vfs_strip_suffix_from_filename): Likewise.
+	(mc_chdir): Don't panic if no chdir function is defined.  This
+	fixes "cd #gz".
+
 2003-09-23  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.c (vfs_canon): Remove tilde expansion.  mc_chdir() should
