@@ -437,6 +437,13 @@ regex_check_type (char *filename, int file_len, char *ptr, int *have_type)
 		for (content_shift = 15;
 		     content_string[content_shift] == ' ';
 		     content_shift++);
+	    } else if (!islocal
+		       && !strncmp (content_string, "/dev/stdin:",
+				    11)) {
+		/* Skip "/dev/stdin: " */
+		for (content_shift = 11;
+		     content_string[content_shift] == ' ';
+		     content_shift++);
 	    }
 	} else {
 	    /* No data */

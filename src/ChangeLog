@@ -1,5 +1,8 @@
 2003-05-29  Koblinger Egmont  <egmont@uhulinux.hu>
 
+	* ext.c (regex_check_type): Recognize and skip "/dev/stdin:"
+	that can apprear in the output of new versions of file.
+
 	* util.c (unix_error_string): Convert error string from UTF-8 is
 	glib 2 is used.
 
