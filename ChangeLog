@@ -1,3 +1,8 @@
+2000-03-13  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* doc/mc.sgml (Examples): Fixed documentation, thanx
+	to martin@internet-treff.uni-koeln.de.
+
 2000-03-01  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* gtkedit/editcmd.c (edit_replace_prompt): fix index for

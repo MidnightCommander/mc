@@ -2771,7 +2771,7 @@ For example, to recover deleted files on the second partition of the
 first scsi disk on Linux, you would use the following path name:
 .PP
 .nf
-    /#undel:/dev/sda2
+    /#undel:sda2
 .fi
 .PP
 It may take a while for the undelfs to load the required information
