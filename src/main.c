@@ -2368,17 +2368,15 @@ char control_file [sizeof (CONTROL_FILE) + 8];
 static void
 OS_Setup ()
 {
-    char   *termvalue;
     char   *mc_libdir;
+#ifndef HAVE_X
+    char   *termvalue;
 	
     termvalue = getenv ("TERM");
-    if (!termvalue){
-#ifndef HAVE_X
+    if (!termvalue || !(*termvalue)){
 	fprintf (stderr, _("The TERM environment variable is unset!\n"));
-#endif
-	termvalue = "";
+	exit (1);
     }
-#ifndef HAVE_X
     if (force_xterm || (strncmp (termvalue, "xterm", 5) == 0 || strcmp (termvalue, "dtterm") == 0)){
 	use_mouse_p = XTERM_MOUSE;
 	xterm_flag = 1;
