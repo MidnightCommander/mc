@@ -817,7 +817,7 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 		if (is_exe (fe->buf.st_mode) && if_link_is_exe (fe))
 			my_system (EXECUTE_AS_SHELL, shell, filename);
 		else
-			gmc_open_filename (filename);
+			gmc_open_filename (filename, NULL);
 	}
 
 	file_entry_free (fe);
@@ -1370,7 +1370,7 @@ desktop_icon_info_new (char *filename, char *url, char *caption, int user_pos, i
 	dii->y = 0;
 	dii->slot = -1;
 
-	if (url){
+	if (url) {
 		dii->url = g_strdup (url);
 		if (!caption)
 			caption = url;

@@ -219,7 +219,6 @@ perform_action (GList *names, GdkDragAction action, char *destdir)
 		} while (result != 0);
 
 		g_free (dest_name);
-		break;
 	}
 
 	file_op_context_destroy (ctx);
