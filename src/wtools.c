@@ -240,11 +240,12 @@ quick_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 {
     switch (msg) {
     case DLG_KEY:
+	/* Enter closes the dialog, not just moves to the next widget */
 	if (parm == '\n') {
 	    h->ret_value = B_ENTER;
 	    dlg_stop (h);
-	    return MSG_HANDLED;
 	}
+	/* Allow button callback to override h->ret_value */
 	return MSG_NOT_HANDLED;
 
     default:

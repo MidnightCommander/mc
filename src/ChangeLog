@@ -1,5 +1,9 @@
 2003-09-09  Pavel Roskin  <proski@gnu.org>
 
+	* wtools.c (quick_callback): Restore old obscure functionality -
+	DLG_KEY should not return MSG_HANDLED to allow the button
+	callback to override the dialog return value.
+
 	* key.c (xterm_key_defines): Add keypad keys.
 	Reported by Vyacheslav Filyayev <vfilyayev@d2.khai.edu>
 
