@@ -1,3 +1,7 @@
+1998-04-15  Pavel Machek <pavel@elf.ucw.cz>
+
+	* cmd.c: Report failed chdir attempts. 
+
 Wed Apr 15 10:48:41 1998 Alex Tkachenko <alex@bcs.zp.ua>
 
 	* src/hotlist.c: changes to hotlist boxes i18n.
