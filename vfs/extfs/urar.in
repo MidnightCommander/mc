@@ -2,9 +2,12 @@
 #
 # Written by andrey joukov
 # (C) 1996 2:5020/337.13@fidonet.org
-# beta version 1.0
+# Updated by christian.gennerat@alcatel.fr 1999
+# beta version 2.0
 #
-UNRAR=rar
+DRAR=/usr/bin
+RAR=$DRAR/rar
+UNRAR=$DRAR/unrar # Prefer unrar (freeware)
 #
 # NOTE: rar ver 2.0 by Eugene Roshal
 # ftp.elf.stuba.sk/pub/pc/pack
@@ -12,12 +15,12 @@ UNRAR=rar
 
 mcrarfs_list ()
 {
-     $UNRAR v -c- $1 | @AWK@ -v uid=${UID-0} '
+     $UNRAR v -c- "$1" | @AWK@ -v uid=${UID-0} '
 BEGIN { flag=0; date="JanFebMarAprMayJunJulAugSepOctNovDec" }
 /^-------/ { flag++; if (flag > 1) exit 0; next }
 {
 if (flag == 0) next
-if (NF == 1) str = $1
+if ( !/ [0-9][0-9]:[0-9][0-9] /) str = $0  # there is no time spec in this line
 else {
     if (str ~ /^\^/)
 	str=substr(str, 2)
@@ -36,14 +39,37 @@ else {
 }' 2>/dev/null
 }
 
+mcrarfs_copyin ()
+{
+# copyin by christian.gennerat@alcatel.fr
+# preserve pwd. It is clean, but is it necessary?
+    pwd=`pwd`
+# Create a directory and copy in it the tmp file with the good name     
+    mkdir $3.dir
+    cd $3.dir
+    di="${2%/*}"
+# if file is to be written upper in the archive tree, make fake dir
+    if test "$di" != "${2##*/}" ; then
+        mkdir -p "$di" 
+    fi
+# (cp -p) to preserve date, but $2 is dated now!
+    cp -p $3 "$3.dir/$2" 
+    $RAR a "$1" "$2" >/dev/null
+    cd $pwd
+    rm -rf $3.dir
+}
+
 mcrarfs_copyout ()
 {
-    $UNRAR p -c- -inul $1 $2 > $3 2>/dev/null
+    $UNRAR p -c- -inul "$1" "$2" > $3 2>/dev/null
 }
 umask 077
 
+# uncomment this line for debugging
+#echo "`date +%T` ${0##*/} $1 $2 to=$3 tmp=$4" >>/tmp/${0##*/}.log
 case "$1" in
-  list) mcrarfs_list $2; exit 0;;
-  copyout) mcrarfs_copyout $2 $3 $4; exit 0;;
+  list)    mcrarfs_list    "$2"; exit 0;;
+  copyin)  mcrarfs_copyin  "$2" "$3" $4; exit 0;;
+  copyout) mcrarfs_copyout "$2" "$3" $4; exit 0;;
 esac
 exit 1

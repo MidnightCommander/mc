@@ -1,13 +1,16 @@
 #! /bin/sh
 #
 # Written by Jakub Jelinek 1995
+# Updated by Christian Gennerat 1999
 #
-# (C) 1995 The Free Software Foundation.
+# (C) 1995,1999 The Free Software Foundation.
 #
 #
-XZIP=zip
-XUNZIP=unzip
-XZIPINFO="unzip -Z"
+
+DZIP=/usr/bin
+XZIP="$DZIP/zip -g"
+XUNZIP="$DZIP/unzip"
+XZIPINFO="$DZIP/unzip -Z"
 #
 #If you don't have zipinfo, set ZIPINFO=
 #
@@ -17,28 +20,30 @@ mczipfs_list ()
 DOZIPINFO=no
 if test -n "$XZIPINFO"; then
     DOZIPINFO=
-    $XZIPINFO -l $1 | @AWK@ -v uid=${UID-0} -v zipfile=$1 -v xunzip=${XUNZIP-unzip} '
+    $XZIPINFO -l "$1" | @AWK@ -v uid=${UID-0} -v zipfile=$1 -v xunzip=${XUNZIP-unzip} '
 /^Archive/ { next }
 /^[0-9]*\ file/ { next }
 /unx/ { 
+split($0,a,":")
+nam = substr(a[2],4)
 if ($1 ~ /^l/ ) {
     arrow=" -> "
     linkname=""
-    cmd=xunzip " -p " zipfile " " $10
+    cmd=xunzip " -p " zipfile " " nam
     cmd | getline linkname
 } else {
     arrow=""
     linkname=""
 }
 
-if ($10 ~ /^\^/)
-    $10=substr($10, 2)
+if (nam ~ /^\^/)
+    nam=substr(nam, 2)
 split($8, a, "-")
 if (a[3] < 50)
     a[3] = 2000 + a[3]
 else
     a[3] = 1900 + a[3]
-printf "%s   1 %-8d %-8d %8d %3s %2d %4d %s %s%s%s\n", $1, uid, 0, $4, a[2], a[1], a[3], $9, $10, arrow, linkname
+printf "%s   1 %-8d %-8d %8d %3s %2d %4d %s %s%s%s\n", $1, uid, 0, $4, a[2], a[1], a[3], $9, nam, arrow, linkname
 next
 }
 {
@@ -49,7 +54,7 @@ exit 214
     fi
 fi
 if test -n "$DOZIPINFO"; then
-    $XUNZIP -v $1 | @AWK@ -v uid=${UID-0} '
+    $XUNZIP -v "$1" | @AWK@ -v uid=${UID-0} '
 BEGIN { hyphens=0 }
 /^Archive/ { next }
 /^\ Length/ { next }
@@ -66,15 +71,36 @@ else
 fi
 }
 
-mczipfs_copyout ()
+mczipfs_copyin ()
 {
-    $XUNZIP -p $1 $2 > $3 2>/dev/null
+# preserve pwd. It is clean, but is it necessary?
+    pwd=`pwd`
+# Create a directory and copy in it the tmp file with the good name     
+    mkdir $3.dir
+    cd $3.dir
+    di="${2%/*}"
+# if file is to be written upper in the archive tree, make fake dir
+    if test "$di" != "${2##*/}" ; then
+        mkdir -p "$di" 
+    fi
+# (cp -p) to preserve date, but $2 is dated now!
+    cp -p $3 "$3.dir/$2" 
+    $XZIP "$1" "$2" >/dev/null
+    cd $pwd
+    rm -rf $3.dir
 }
 
+mczipfs_copyout ()
+{
+    $XUNZIP -p "$1" "$2" > $3 2>/dev/null
+}
 umask 077
 
+#echo "`date +%T` ${0##*/} $1 $2 to=$3 tmp=$4" >>/tmp/${0##*/}.log
 case "$1" in
-  list) mczipfs_list $2; exit 0;;
-  copyout) mczipfs_copyout $2 $3 $4; exit 0;;
+  list)    mczipfs_list    "$2"; exit 0;;
+# delete)  mczipfs_delete  "$2" "$3" ; exit 0;;
+  copyin)  mczipfs_copyin  "$2" "$3" $4 ; exit 0;;
+  copyout) mczipfs_copyout "$2" "$3" $4 ; exit 0;;
 esac
 exit 1
