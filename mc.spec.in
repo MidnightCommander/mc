@@ -73,7 +73,7 @@ install lib/mc.global $RPM_BUILD_ROOT/etc
 
 
 # clean up this setuid problem for now
-chmod 755 $RPM_BUILD_ROOT/usr/lib/mc/bin/cons.saver
+chmod 755 $RPM_BUILD_ROOT%{prefix}/lib/mc/bin/cons.saver
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -122,6 +122,10 @@ rm -rf $RPM_BUILD_ROOT
 %config /etc/CORBA/servers/*
 
 %changelog
+* Wed May 26 1999 Cody Russell <bratsche@dfw.net>
+- chmod cons.saver at $RPM_BUILD_ROOT%{prefix}/lib rather than at
+  $RPM_BUILD_ROOT/usr/lib. We can now install to somewhere other than /usr.
+
 * Sun Apr 18 1999 Gregory McLean <gregm@comstar.net>
 - Updated the specfile, removed some kludges.
 
