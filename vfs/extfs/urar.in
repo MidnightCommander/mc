@@ -14,6 +14,10 @@ UNRAR=$DRAR/unrar # Prefer unrar (freeware)
 # ftp.elf.stuba.sk/pub/pc/pack
 #
 
+if [ ! -x $UNRAR -a -x $RAR ]; then
+    UNRAR=$RAR
+fi
+
 mcrarfs_list ()
 {
      $UNRAR v -c- "$1" | @AWK@ -v uid=${UID-0} '
