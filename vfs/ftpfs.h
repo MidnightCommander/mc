@@ -91,6 +91,12 @@ extern char *ftpfs_proxy_host;
 extern int ftpfs_directory_timeout;
 extern int ftpfs_always_use_proxy;
 
+extern int use_netrc;
+extern int ftpfs_retry_seconds;
+extern int ftpfs_use_passive_connections;
+extern int ftpfs_use_unix_list_options;
+extern int ftpfs_first_cd_then_ls;
+
 void ftpfs_init_passwd (void);
 
 #define OPT_FLUSH        1

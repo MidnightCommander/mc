@@ -1,11 +1,23 @@
+2001-06-01  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* ftpfs.h: Declare use_netrc, ftpfs_retry_seconds, ftpfs_first_cd_then_ls,
+	ftpfs_use_passive_connections and ftpfs_use_unix_list_options.
+
+	* vfs.c [VFS_STANDALONE]: Undefine WITH_SMBFS, they are mutually 
+	exclusive now.
+	(is_week): Unmade week static.
+	(is_month): Unmade month static.
+	(vfs_parse_ls_lga): Optimize memory usage.
+
+	* .cvsignore: *.sor added.
+	* sfs.c (sfs_init): Optimized.
+
+	* vfs/samba/lib/util_sock.c (socket_options): Made static const.
+
 2001-05-30  Ludovic Drolez  <ludovic.drolez@freealter.com>
 
 	* sfs.c (sfs_init): Don't hardcode location of sfs.ini, 
 	use mc_home to make mc relocatable.
-
-2001-05-28  Andrew V. Samoilov  <sav@bcs.zp.ua>
-
-	* sfs.c (shell): Variable moved to ...
 	* util-alone.c (shell): ... here
 
 2001-05-27  Pavel Roskin  <proski@gnu.org>
