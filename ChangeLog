@@ -1,5 +1,8 @@
 2000-09-17  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: fixed wrong use of AC_MSG_RESULT inside
+	AC_CACHE_VAL
+
 	* Make.common.in: Added the "dvi" target for "make distcheck"
 	to go further
 	* doc-gnome/C/Makefile.in: converted to ...

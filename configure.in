@@ -519,19 +519,21 @@ if $HAVE_nroff; then
     if test $? = 0
     then
 	ac_cv_nroff_tascii=" -Tlatin1"
-        AC_MSG_RESULT(yes)
     else
         nroff -Tascii < /dev/null > /dev/null 2>&1 /dev/null
         if test $? = 0
         then
 	    ac_cv_nroff_tascii=" -Tascii"
-            AC_MSG_RESULT(yes)
         else
     	    ac_cv_nroff_tascii=""
-    	    AC_MSG_RESULT(no)
 	fi
     fi
     ])
+    if test "x$ac_cv_nroff_tascii" = x; then
+	AC_MSG_RESULT(no)
+    else
+	AC_MSG_RESULT([yes,$ac_cv_nroff_tascii])
+    fi
 fi
 TROFFASCII="$ac_cv_nroff_tascii"
 AC_SUBST(TROFFASCII)
