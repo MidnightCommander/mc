@@ -453,6 +453,13 @@ progress_update_one (FileOpContext *ctx,
     return ret;
 }
 
+/* Status of the destination file */
+enum {
+    DST_NONE,			/* Not created */
+    DST_SHORT,			/* Created, not fully copied */
+    DST_FULL			/* Created, fully copied */
+};
+
 int
 copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
 		int ask_overwrite, off_t *progress_count,
@@ -464,7 +471,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
 #endif				/* !NATIVE_WIN32 */
     char *buf = NULL;
     int buf_size = BUF_8K;
-    int src_desc, dest_desc = 0;
+    int src_desc, dest_desc = -1;
     int n_read, n_written;
     int src_mode = 0;		/* The mode of the source file */
     struct stat sb, sb2;
@@ -473,10 +480,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
     off_t n_read_total = 0, file_size = -1;
     int return_status, temp_status;
     struct timeval tv_transfer_start;
-
-    /* bitmask used to remember which resourses we should release on return 
-       A single goto label is much easier to handle than a bunch of gotos ;-). */
-    unsigned resources = 0;
+    int dst_status = DST_NONE;	/* 1 if the file is not fully copied */
 
     /* FIXME: We should not be using global variables! */
     ctx->do_reget = 0;
@@ -606,7 +610,6 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
 	return return_status;
     }
 
-    resources |= 1;
     if (ctx->do_reget) {
 	if (mc_lseek (src_desc, ctx->do_reget, SEEK_SET) != ctx->do_reget) {
 	    message_1s (1, _(" Warning "),
@@ -650,8 +653,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
 	ctx->do_append = 0;
 	goto ret;
     }
-    resources |= 2;		/* dst_path exists/dst_path opened */
-    resources |= 4;		/* remove short file */
+    dst_status = DST_SHORT;	/* file opened, but not fully copied */
 
     appending = ctx->do_append;
     ctx->do_append = 0;
@@ -784,13 +786,13 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
 	}
     }
 
-    resources &= ~4;		/* copy successful, don't remove target file */
+    dst_status = DST_FULL;	/* copy successful, don't remove target file */
 
   ret:
     if (buf)
 	g_free (buf);
 
-    while ((resources & 1) && mc_close (src_desc) < 0) {
+    while (src_desc != -1 && mc_close (src_desc) < 0) {
 	temp_status =
 	    file_error (_(" Cannot close source file \"%s\" \n %s "),
 			src_path);
@@ -801,7 +803,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
 	break;
     }
 
-    while ((resources & 2) && mc_close (dest_desc) < 0) {
+    while (dest_desc != -1 && mc_close (dest_desc) < 0) {
 	temp_status =
 	    file_error (_(" Cannot close target file \"%s\" \n %s "),
 			dst_path);
@@ -811,7 +813,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
 	break;
     }
 
-    if (resources & 4) {
+    if (dst_status == DST_SHORT) {
 	/* Remove short file */
 	int result;
 	result =
@@ -820,8 +822,8 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
 			  D_ERROR, 2, _("&Delete"), _("&Keep"));
 	if (!result)
 	    mc_unlink (dst_path);
-    } else if (resources & (2 | 8)) {
-	/* no short file and destination file exists */
+    } else if (dst_status == DST_FULL) {
+	/* Copy has succeeded */
 #ifndef NATIVE_WIN32
 	if (!appending && ctx->preserve_uidgid) {
 	    while (mc_chown (dst_path, src_uid, src_gid)) {
