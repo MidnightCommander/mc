@@ -1,3 +1,9 @@
+2002-10-04  Pavel Roskin  <proski@gnu.org>
+
+	* mcserv.c (get_client): Don't try to find the address family
+	from the hostname.  Always use AF_INET, because everything else
+	is unsupported.
+
 2002-10-04  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* sfs.c (vfmake): Use open_error_pipe() and close_error_pipe().
