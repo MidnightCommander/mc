@@ -1,3 +1,7 @@
+2001-09-03  Stanislav Visnovsky  <visnovsky@nenya.ms.mff.cuni.cz>
+
+	* sk.po: Updated Slovak translation.
+
 2001-09-03  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* ru.po: Fix some smbfs messages. Sync src/screen.c original message.
