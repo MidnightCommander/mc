@@ -1,3 +1,7 @@
+2000-09-14  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.in: Don't make softlinks to the libraries
+
 2000-09-12  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* glayout.c (run_cmd): Memory leak fix: cmd released after use

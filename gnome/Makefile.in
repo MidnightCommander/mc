@@ -269,10 +269,10 @@ mx: checklinks
 	@echo -----------------------------------------------------------
 	@touch mx
 
-plain-gmc: @LIBVFS@ $(OBJS) $(NORMALOBJS) libgtkedit.a
+plain-gmc: $(OBJS) $(NORMALOBJS)
 	$(CC) -o plain-gmc $(NORMALOBJS) $(OBJS) $(EXTRALIBS) $(LDFLAGS) $(LIBS)
 
-corba-gmc: @LIBVFS@ $(OBJS) $(CORBAOBJS) libgtkedit.a
+corba-gmc: $(OBJS) $(CORBAOBJS)
 	$(CC) -o corba-gmc $(CORBAOBJS) $(OBJS) $(EXTRALIBS) $(CORBA_LDFLAGS) $(LIBS)
 
 gmc-client: $(CLIENTOBJS)
@@ -286,16 +286,6 @@ mc.keys: mc.keys.in Makefile
 
 mc.keys.in: mc.keys.in.in Makefile.in ../config.status
 	(cd ..; CONFIG_FILES=gnome/mc.keys.in CONFIG_HEADERS= ./config.status)
-
-@LIBVFS@:
-	cd ../vfs; $(MAKE) @LIBVFS@
-@PCENTRULE@	$(RMF) @LIBVFS@
-@PCENTRULE@	$(LN_S) ../vfs/@LIBVFS@ .
-
-libgtkedit.a:
-	cd ../gtkedit; $(MAKE) libgtkedit.a
-@PCENTRULE@	$(RMF) libgtkedit.a
-@PCENTRULE@	$(LN_S) ../gtkedit/libgtkedit.a .
 
 checklinks:
 	@if test -f $(gnomedir)/regex.c; then echo ok; \
@@ -320,7 +310,7 @@ TAGS: $(GNOMESRCS)
 	etags $(GNOMESRCS)
 
 clean:
-	$(RMF) plain-gmc corba-gmc *.o core a.out mx @LIBVFS@ libgtkedit.a $(CORBA_GENERATED)
+	$(RMF) plain-gmc corba-gmc *.o core a.out mx $(CORBA_GENERATED)
 
 realclean: clean
 	$(RMF) .depend
