@@ -13,7 +13,7 @@ INSTALL_DATA = @INSTALL_DATA@
 #
 
 LIBFILES_IN = mc.ext.in mc-gnome.ext.in
-LIBFILES_OUT = mc.ext
+LIBFILES_OUT = mc.ext mc-gnome.ext
 LIBFILES_CONST = mc.hint mc.lib mc.menu
 TIFILES = README.xterm linux.ti xterm.ad xterm.ti ansi.ti vt100.ti xterm.tcap
 DISTLIB = $(LIBFILES_IN) $(LIBFILES_CONST) $(TIFILES) \
