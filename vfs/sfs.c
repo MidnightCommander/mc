@@ -26,7 +26,6 @@
 
 struct cachedfile {
     char *name, *cache;
-    uid_t uid;
     struct cachedfile *next;
 };
 
@@ -113,7 +112,7 @@ redirect (vfs *me, char *name)
     while (cur) {
 	/* FIXME: when not uptodate, we might want to kill cache
 	 * file immediately, not to wait until timeout. */
-	if ((!strcmp (name, cur->name)) && (cur->uid == 0)
+	if ((!strcmp (name, cur->name))
 	    && (uptodate (cur->name, cur->cache))) {
 	    vfs_stamp (&vfs_sfs_ops, cur);
 	    return cur->cache;
@@ -133,7 +132,6 @@ redirect (vfs *me, char *name)
 	cur = g_new (struct cachedfile, 1);
 	cur->name = g_strdup (name);
 	cur->cache = cache;
-	cur->uid = 0;
 	cur->next = head;
 	head = cur;
 
@@ -214,7 +212,7 @@ sfs_getid (vfs *me, char *path, struct vfs_stamping **parent)
     struct cachedfile *cur = head;
 
     while (cur) {
-	if ((!strcmp (path, cur->name)) && (cur->uid == 0))
+	if (!strcmp (path, cur->name))
 	    break;
 	cur = cur->next;
     }

@@ -1,5 +1,7 @@
 2002-12-05  Pavel Roskin  <proski@gnu.org>
 
+	* sfs.c: Remove "uid" from struct cachedfile - it's unused now.
+
 	* vfs.h: Remove vfs_uid and vfs_gid.  Fix all dependencies.
 
 2002-12-05  Andrew V. Samoilov  <sav@bcs.zp.ua>
