@@ -14,6 +14,8 @@
 #    For Windows NT:
 #	Makefile.VC4:	Microsoft Visual C++ 4.0 and above
 #	Makefile.BC5:	Borland C++ 5.x
+#	Makefile.MIN:	MinGW
+#	Makefile.RSX:	RSX
 #    For OS/2:
 #	Makefile.EMX:	EMX/GCC
 #	Makefile.BC2:	Borland C++ 2.x
