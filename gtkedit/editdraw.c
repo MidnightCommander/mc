@@ -35,12 +35,11 @@ extern int column_highlighting;
 
 #if defined (MIDNIGHT) || defined (GTK)
 
-void status_string (WEdit * edit, char *s, int w, int fill, int font_width)
+static void status_string (WEdit * edit, char *s, int w, int fill, int font_width)
 {
 #ifdef MIDNIGHT
     int i;
 #endif
-    char t[160];		/* 160 just to be sure */
     char byte_str[16];
 
     /*
@@ -49,9 +48,9 @@ void status_string (WEdit * edit, char *s, int w, int fill, int font_width)
      * as decimal and as hex.
      */
     if (edit->curs1 < edit->last_byte) {
-	char cur_byte = edit_get_byte (edit, edit->curs1);
-	snprintf(byte_str, sizeof(byte_str), "%c %3d %2xH",
-		 isprint(cur_byte) ? cur_byte : '.',
+	unsigned char cur_byte = edit_get_byte (edit, edit->curs1);
+	snprintf(byte_str, sizeof(byte_str), "%c %3d 0x%02X",
+		 is_printable(cur_byte) ? cur_byte : '.',
 		 cur_byte,
 		 cur_byte);
     } else {
@@ -59,36 +58,31 @@ void status_string (WEdit * edit, char *s, int w, int fill, int font_width)
     }
 
     /* The field lengths just prevent the status line from shortening to much */
-    snprintf (t, sizeof(t),
-	"[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb)= %s",
-	edit->mark1 != edit->mark2 ? ( column_highlighting ? 'C' : 'B') : '-',
-	edit->modified ? 'M' : '-',
-        edit->macro_i < 0 ? '-' : 'R',
-	edit->overwrite == 0 ? '-' : 'O',
-	edit->curs_col / font_width,
-        
-        edit->start_line + 1,
-        edit->curs_row,
-        edit->curs_line + 1,
-        edit->total_lines + 1,
-        
-        edit->curs1,
-	edit->last_byte, 
-	byte_str);
+    snprintf (s, w,
+	      "[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb)= %s",
+	      edit->mark1 != edit->mark2 ? ( column_highlighting ? 'C' : 'B') : '-',
+	      edit->modified ? 'M' : '-',
+	      edit->macro_i < 0 ? '-' : 'R',
+	      edit->overwrite == 0 ? '-' : 'O',
+	      edit->curs_col / font_width,
+
+	      edit->start_line + 1,
+	      edit->curs_row,
+	      edit->curs_line + 1,
+	      edit->total_lines + 1,
+
+	      edit->curs1,
+	      edit->last_byte, 
+	      byte_str);
+
 #ifdef MIDNIGHT
-    sprintf (s, "%.*s", w + 1, t);
+    /*
+     * Make string exactly w chars wide
+     * Fill the remainder with the fill char
+     */
     i = strlen (s);
-    s[i] = ' ';
-    i = w;
-    do {
-	if (strchr ("+-*=/:b", s[i]))	/* chop off the last word/number */
-	    break;
-	s[i] = fill;
-    } while (i--);
-    s[i] = fill;
+    memset (s + i, fill, w - i);
     s[w] = 0;
-#else
-    strcpy (s, t);
 #endif
 }
 
