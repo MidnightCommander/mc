@@ -1,5 +1,5 @@
 # Note that this is NOT a relocatable package
-%define ver      4.5.2
+%define ver      4.5.3
 %define rel      SNAP
 %define prefix   /usr
 
@@ -98,6 +98,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/lib/mc
 %dir /usr/lib/mc/bin
 %dir /usr/lib/mc/extfs
+%dir /usr/share/mime-info
 
 %files -n mcserv
 %defattr(-, root, root)
