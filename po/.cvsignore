@@ -1,5 +1,8 @@
+*.cat
 *.gmo
 *.mo
+*.msg
+*.pox
 Makefile
 Makefile.in
 POTFILES
