@@ -229,7 +229,7 @@ char *name_trunc (char *txt, int trunc_len)
 	txt = PATH_SEP_STR;
     
     if (trunc_len > sizeof (x)-1){
-	fprintf (stderr, "name_trunc: too big");
+	fprintf (stderr, _("name_trunc: too big"));
 	trunc_len = sizeof (x)-1;
     }
     txt_len = strlen (txt);

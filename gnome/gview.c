@@ -81,12 +81,12 @@ view_status (WView *view)
 	char buffer [80];
 	
 	if (view->hex_mode)
-		sprintf (buffer, "Offset 0x%08x", view->edit_cursor);
+		sprintf (buffer, _("Offset 0x%08x"), view->edit_cursor);
 	else
-		sprintf (buffer, "Col %d", -view->start_col);
+		sprintf (buffer, _("Col %d"), -view->start_col);
 	gtk_label_set (GTK_LABEL (view->gtk_offset), buffer);
 
-	sprintf (buffer, "%s bytes", size_trunc (view->s.st_size));
+	sprintf (buffer, _("%s bytes"), size_trunc (view->s.st_size));
 	gtk_label_set (GTK_LABEL (view->gtk_bytes), buffer);
 
 	if (view->hex_mode)
@@ -148,17 +148,6 @@ static int
 gnome_view_callback (struct Dlg_head *h, int id, int msg)
 {
     return default_dlg_callback (h, id, msg);
-}
-
-static GtkWidget *
-my_test (void)
-{
-	GtkWidget *frame;
-
-	frame = gtk_frame_new (NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
-	gtk_container_add (GTK_CONTAINER (frame), gtk_label_new ("Hello Wordl!"));
-	return frame;
 }
 
 static GtkWidget *
@@ -261,39 +250,39 @@ gnome_monitor (GtkWidget *widget, WView *view)
 }
 
 GnomeUIInfo gview_file_menu [] = {
-	GNOMEUIINFO_ITEM ("Goto line",    "Jump to a specified line number", &gnome_goto_line, NULL),
-	GNOMEUIINFO_ITEM ("Monitor file", "Monitor file growing",            &gnome_monitor, NULL),
-	GNOMEUIINFO_ITEM ("Quit",      "Terminate the viewer", &gview_quit, NULL),
+	GNOMEUIINFO_ITEM (N_("Goto line"),    N_("Jump to a specified line number"), &gnome_goto_line, NULL),
+	GNOMEUIINFO_ITEM (N_("Monitor file"), N_("Monitor file growing"),            &gnome_monitor, NULL),
+	GNOMEUIINFO_ITEM (N_("Quit"),         N_("Terminate the viewer"), &gview_quit, NULL),
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 
 GnomeUIInfo gview_search_menu [] = {
-	GNOMEUIINFO_ITEM ("Search",          "String search",             gnome_normal_search_cmd, NULL),
-	GNOMEUIINFO_ITEM ("Regexp search",   "Regular expression search", gnome_regexp_search_cmd, NULL),
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_ITEM ("Search again...", "Continue searching",        gnome_continue_search, NULL),
+	GNOMEUIINFO_ITEM (N_("Search"),          N_("String search"),             gnome_normal_search_cmd, NULL),
+	GNOMEUIINFO_ITEM (N_("Regexp search"),   N_("Regular expression search"), gnome_regexp_search_cmd, NULL),
+	GNOMEUIINFO_SEPARATOR,			 
+	GNOMEUIINFO_ITEM (N_("Search again..."), N_("Continue searching"),        gnome_continue_search, NULL),
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 
 GnomeUIInfo gview_mode_menu [] = {
 #define WRAP_POS 0
-	GNOMEUIINFO_TOGGLEITEM ("Wrap",        "Wrap the text", gnome_toggle_wrap, NULL),
+	GNOMEUIINFO_TOGGLEITEM (N_("Wrap"),      N_("Wrap the text"), gnome_toggle_wrap, NULL),
 #if 0
 	/* Can not use this one yet, as it destroys the viewer, need to fix that */
 	GNOMEUIINFO_TOGGLEITEM ("Parsed view", NULL, gnome_toggle_parse, NULL),
 #endif
 #define FORMAT_POS 1
-	GNOMEUIINFO_TOGGLEITEM ("Formatted",   NULL, gnome_toggle_format, NULL),
+	GNOMEUIINFO_TOGGLEITEM (N_("Formatted"),   NULL, gnome_toggle_format, NULL),
 #define HEX_POS 2
-	GNOMEUIINFO_TOGGLEITEM ("Hex",         NULL, gnome_toggle_hex, NULL),
+	GNOMEUIINFO_TOGGLEITEM (N_("Hex"),         NULL, gnome_toggle_hex, NULL),
 	
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 
 GnomeUIInfo gview_top_menu [] = {
-	{ GNOME_APP_UI_SUBTREE, "File",     NULL, &gview_file_menu },
-	{ GNOME_APP_UI_SUBTREE, "Search",   NULL, &gview_search_menu },
-	{ GNOME_APP_UI_SUBTREE, "Mode",     NULL, &gview_mode_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("File"),     NULL, &gview_file_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("Search"),   NULL, &gview_search_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("Mode"),     NULL, &gview_mode_menu },
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 

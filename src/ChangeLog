@@ -1,3 +1,10 @@
+1998-03-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* All over the src/ directory: Internationalization changes.
+
+	* background.c: Avoid buffer over-runs and reduce number of
+	internationalization strings. 
+
 Mon Mar 23 14:04:07 1998  Philippe De Muyter  <phdm@macqel.be>
 
 	* configure.in (nlink_t): Check it using AC_CHECK_TYPE.

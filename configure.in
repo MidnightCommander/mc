@@ -4,6 +4,12 @@ dnl
 AC_INIT(create_vcs)
 AC_CONFIG_HEADER(config.h)
 
+PACKAGE=mc
+VERSION=dummy
+AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
+AC_DEFINE_UNQUOTED(VERSION, "dummy")
+ALL_LINGUAS="es"
+
 dnl This is path where we're looking for headers in addition to /usr/include
 dnl and whatever cpp defaults to.
 include_additional_path="/usr/local/include /opt/gnu/include"
@@ -61,6 +67,9 @@ AC_CHECK_PROGS(X11_WWW,netscape arena Mosaic chimera)
 if test x"$X11_WWW" = x; then
     X11_WWW=lynx
 fi
+
+AM_GNU_GETTEXT
+AC_LINK_FILES($nls_cv_header_libgt, $nls_cv_header_intl)
 
 dnl
 dnl This part supplies reasonable defaults for CFLAGS, if they weren't
@@ -1394,12 +1403,33 @@ else
 fi
 AC_SUBST(PCENTRULE)
 
-AC_OUTPUT(Make.common Makefile doc/Makefile vfs/Makefile lib/Makefile \
-	lib/mc.ext tk/Makefile gnome/Makefile xv/Makefile src/Makefile \
-	slang/Makefile edit/Makefile icons/Makefile mcfn_install \
-	vfs/extfs/ftplist vfs/extfs/zip vfs/extfs/zoo vfs/extfs/lslR \
-	vfs/extfs/lha vfs/extfs/cpio vfs/extfs/deb vfs/extfs/rar \
-	doc/mc.1 doc/mcedit.1 doc/mcserv.8)
+dnl
+dnl Output configuration filesn
+dnl
+
+AC_OUTPUT([
+Make.common 
+Makefile 
+doc/Makefile 
+vfs/Makefile 
+lib/Makefile
+tk/Makefile 
+gnome/Makefile 
+xv/Makefile 
+src/Makefile
+slang/Makefile 
+edit/Makefile 
+icons/Makefile 
+
+lib/mc.ext
+mcfn_install
+vfs/extfs/ftplist vfs/extfs/zip vfs/extfs/zoo vfs/extfs/lslR
+vfs/extfs/lha vfs/extfs/cpio vfs/extfs/deb vfs/extfs/rar
+
+doc/mc.1 doc/mcedit.1 doc/mcserv.8
+
+intl/Makefile po/Makefile.in
+],[sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile])
 
 if test x$srcdir != x; then
     if test $srcdir != .; then

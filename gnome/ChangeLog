@@ -1,3 +1,10 @@
+1998-03-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (x_create_panel): Show the GnomeApp when we are done
+	packing all of our information.
+
+	* gmain.c (create_panels): do not show any of the windows yet.
+
 1998-03-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (x_fill_panel): Colors are properly displayed now. 

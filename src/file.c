@@ -387,9 +387,11 @@ create_op_win (int op, int with_eta)
     x_set_dialog_title (op_dlg, "");
 
     tk_new_frame (op_dlg, "b.");
-    add_widgetl (op_dlg, button_new (BY-minus, WX - 19 + eta_offset, FILE_ABORT, NORMAL_BUTTON, "&Abort", 0, 0, "abort"),
+    add_widgetl (op_dlg, button_new (BY-minus, WX - 19 + eta_offset, FILE_ABORT,
+				     NORMAL_BUTTON, _("&Abort"), 0, 0, "abort"),
         XV_WLAY_RIGHTOF);
-    add_widgetl (op_dlg, button_new (BY-minus, 14 + eta_offset, FILE_SKIP, NORMAL_BUTTON, "&Skip", 0, 0, "skip"),
+    add_widgetl (op_dlg, button_new (BY-minus, 14 + eta_offset, FILE_SKIP,
+				     NORMAL_BUTTON, _("&Skip"), 0, 0, "skip"),
         XV_WLAY_CENTERROW);
 
     tk_new_frame (op_dlg, "2.");
@@ -477,7 +479,7 @@ show_source (char *s)
         }
 #endif /* WITH_FULL_PATHS */
 	
-	label_set_text (FileLabel [0], "Source");
+	label_set_text (FileLabel [0], _("Source"));
 	label_set_text (FileString [0], truncFileString (s));
 	return check_buttons ();
     } else {
@@ -491,7 +493,7 @@ static int
 show_target (char *s)
 {
     if (s != NULL){
-	label_set_text (FileLabel [1], "Target");
+	label_set_text (FileLabel [1], _("Target"));
 	label_set_text (FileString [1], truncFileString (s));
 	return check_buttons ();
     } else {
@@ -504,7 +506,7 @@ show_target (char *s)
 static int
 show_deleting (char *s)
 {
-    label_set_text (FileLabel [0], "Deleting");
+    label_set_text (FileLabel [0], _("Deleting"));
     label_set_text (FileString [0], truncFileString (s));
     return check_buttons ();
 }
@@ -557,7 +559,7 @@ show_file_progress (long done, long total)
     if (!verbose)
 	return check_buttons ();
     if (total > 0){
-	label_set_text (ProgressLabel [0], "File");
+	label_set_text (ProgressLabel [0], _("File"));
 	file_eta_show ();
 	file_bps_show ();
 	return show_bar (0, done, total);
@@ -571,7 +573,7 @@ show_count_progress (long done, long total)
     if (!verbose)
 	return check_buttons ();
     if (total > 0){
-	label_set_text (ProgressLabel [1], "Count");
+	label_set_text (ProgressLabel [1], _("Count"));
 	return show_bar (1, done, total);
     } else
 	return show_no_bar (1);
@@ -583,7 +585,7 @@ show_bytes_progress (long done, long total)
     if (!verbose)
 	return check_buttons ();
     if (total > 0){
-	label_set_text (ProgressLabel [2], "Bytes");
+	label_set_text (ProgressLabel [2], _("Bytes"));
 	return show_bar (2, done, total);
     } else
 	return show_no_bar (2);
@@ -667,7 +669,7 @@ do_transform_source (char *source)
 	case '*':
 	    if (next_reg < 0 || next_reg >= RE_NREGS
 		|| regs.start [next_reg] < 0) {
-		message_1s (1, " Error ", " Invalid target mask ");
+		message_1s (1, MSG_ERROR, _(" Invalid target mask "));
 		transform_error = FILE_ABORT;
 		return NULL;
 	    }
@@ -814,7 +816,7 @@ make_symlink (char *src_path, char *dst_path)
     len = mc_readlink (src_path, link_target, MC_MAXPATHLEN);
     if (len < 0) {
 	return_status = file_error
-	    (" Cannot read source link \"%s\" \n %s ", src_path);
+	    (_(" Cannot read source link \"%s\" \n %s "), src_path);
 	if (return_status == FILE_RETRY)
 	    goto retry_src_readlink;
 	return return_status;
@@ -823,9 +825,9 @@ make_symlink (char *src_path, char *dst_path)
 
     if (stable_symlinks && (!vfs_file_is_local (src_path) || 
 			    !vfs_file_is_local (dst_path))) {
-	message_1s (1, " Error ", " Cannot make stable symlinks across "
-	                          "non-local filesystems: \n\n"
-                                  " Option Stable Symlinks will be disabled ");
+	message_1s (1, MSG_ERROR, _(" Cannot make stable symlinks across "
+				    "non-local filesystems: \n\n"
+				    " Option Stable Symlinks will be disabled "));
 	stable_symlinks = 0;
     }
     
@@ -871,7 +873,7 @@ make_symlink (char *src_path, char *dst_path)
 		return FILE_CONT;
     }
     return_status = file_error
-	(" Cannot create target symlink \"%s\" \n %s ", dst_path);
+	(_(" Cannot create target symlink \"%s\" \n %s "), dst_path);
     if (return_status == FILE_RETRY)
 	goto retry_dst_symlink;
     return return_status;
@@ -914,7 +916,7 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
  retry_dst_stat:
     if (mc_stat (dst_path, &sb2) == 0){
 	if (S_ISDIR (sb2.st_mode)){
-	    return_status = file_error (" Cannot overwrite directory \"%s\" ",
+	    return_status = file_error (_(" Cannot overwrite directory \"%s\" "),
 					dst_path);
 	    if (return_status == FILE_RETRY)
 		goto retry_dst_stat;
@@ -925,7 +927,7 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
 
  retry_src_xstat:
     if ((*xstat)(src_path, &sb)){
-	return_status = file_error (" Cannot stat source file \"%s\" \n %s ",
+	return_status = file_error (_(" Cannot stat source file \"%s\" \n %s "),
 				    src_path);
 	if (return_status == FILE_RETRY)
 	    goto retry_src_xstat;
@@ -939,7 +941,7 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
 #ifndef OS2_NT
 	/* Destination already exists */
 	if (sb.st_dev == sb2.st_dev && sb.st_ino == sb2.st_ino){
-	    message_3s (1, " Error ", " `%s' and `%s' are the same file. ",
+	    message_3s (1, MSG_ERROR, _(" `%s' and `%s' are the same file. "),
 		     src_path, dst_path);
 	    do_refresh ();
 	    return FILE_SKIP;
@@ -979,7 +981,7 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
         retry_mknod:        
             if (mc_mknod (dst_path, sb.st_mode & umask_kill, sb.st_rdev) < 0){
 	        return_status = file_error
-		    (" Cannot create special file \"%s\" \n %s ", dst_path);
+		    (_(" Cannot create special file \"%s\" \n %s "), dst_path);
 	        if (return_status == FILE_RETRY)
 		    goto retry_mknod;
 		return return_status;
@@ -990,7 +992,7 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
 	retry_mknod_uidgid:
 	    if (preserve_uidgid && mc_chown (dst_path, sb.st_uid, sb.st_gid)){
 		temp_status = file_error
-		    (" Cannot chown target file \"%s\" \n %s ", dst_path);
+		    (_(" Cannot chown target file \"%s\" \n %s "), dst_path);
 		if (temp_status == FILE_RETRY)
 		    goto retry_mknod_uidgid;
 		return temp_status;
@@ -999,7 +1001,7 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
 #ifndef __os2__
 	retry_mknod_chmod:
 	    if (preserve && mc_chmod (dst_path, sb.st_mode & umask_kill) < 0){
-		temp_status = file_error (" Cannnot chmod target file \"%s\" \n %s ", dst_path);
+		temp_status = file_error (_(" Cannnot chmod target file \"%s\" \n %s "), dst_path);
 		if (temp_status == FILE_RETRY)
 		    goto retry_mknod_chmod;
 		return temp_status;
@@ -1015,7 +1017,7 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
  retry_src_open:
     if ((source_desc = mc_open (src_path, O_RDONLY)) < 0){
 	return_status = file_error
-	    (" Cannot open source file \"%s\" \n %s ", src_path);
+	    (_(" Cannot open source file \"%s\" \n %s "), src_path);
 	if (return_status == FILE_RETRY)
 	    goto retry_src_open;
 	do_append = 0;
@@ -1029,7 +1031,7 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
  retry_src_fstat:
         if (mc_fstat (source_desc, &sb)){
 	    return_status = file_error
-	        (" Cannot fstat source file \"%s\" \n %s ", src_path);
+	        (_(" Cannot fstat source file \"%s\" \n %s "), src_path);
 	    if (return_status == FILE_RETRY)
 	        goto retry_src_fstat;
 	    do_append = 0;
@@ -1042,7 +1044,7 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
  retry_src_rstat:
         if (mc_stat (src_path, &sb)){
 	    return_status = file_error
-	        (" Cannot stat source file \"%s\" \n %s ", src_path);
+	        (_(" Cannot stat source file \"%s\" \n %s "), src_path);
 	    if (return_status == FILE_RETRY)
 	        goto retry_src_rstat;
 	    do_append = 0;
@@ -1069,7 +1071,7 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
             (!do_append &&
             (dest_desc = mc_open (dst_path, O_WRONLY | O_CREAT | O_TRUNC, 0600)) < 0)) {
 	    return_status = file_error
-	        (" Cannot create target file \"%s\" \n %s ", dst_path);
+	        (_(" Cannot create target file \"%s\" \n %s "), dst_path);
 	    if (return_status == FILE_RETRY)
 	        goto retry_dst_open;
 	    do_append = 0;
@@ -1086,7 +1088,7 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
         /* Find out the optimal buffer size.  */
         if (mc_fstat (dest_desc, &sb)){
 	    return_status = file_error
-	        (" Cannot fstat target file \"%s\" \n %s ", dst_path);
+	        (_(" Cannot fstat target file \"%s\" \n %s "), dst_path);
 	    if (return_status == FILE_RETRY)
 	        goto retry_dst_fstat;
 	    goto ret;
@@ -1107,7 +1109,7 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
 	    n_read = mc_read (source_desc, buf, buf_size);
 	    if (n_read < 0){
 	        return_status = file_error
-		    (" Cannot read source file \"%s\" \n %s ", src_path);
+		    (_(" Cannot read source file \"%s\" \n %s "), src_path);
 	        if (return_status == FILE_RETRY)
 		    goto retry_src_read;
 	        goto ret;
@@ -1121,7 +1123,7 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
 	    n_written = mc_write (dest_desc, buf, n_read);
 	    if (n_written < n_read){
 	        return_status = file_error
-		    (" Cannot write target file \"%s\" \n %s ", dst_path);
+		    (_(" Cannot write target file \"%s\" \n %s "), dst_path);
 	        if (return_status == FILE_RETRY)
 		    goto retry_dst_write;
 	        goto ret;
@@ -1147,12 +1149,12 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
         for (i = 1; i;) {
             switch (size = mc_ctl (source_desc, MCCTL_REMOTECOPYCHUNK, 8192)) {
                 case MCERR_TARGETOPEN:
-		    message_1s (1, " Error ", " Can't open target file ");
+		    message_1s (1, MSG_ERROR, _(" Can't open target file "));
 		    goto ret;
                 case MCERR_READ:
 		    goto ret;
                 case MCERR_WRITE:
-		    message_1s (1, " Error ", " Can't write to local target file ");
+		    message_1s (1, MSG_ERROR, _(" Can't write to local target file "));
 		    goto ret;
 	        case MCERR_DATA_ON_STDIN:
 		    break;
@@ -1190,7 +1192,7 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
 	    update_secs = (tv_current.tv_sec - tv_last_input.tv_sec);
 	    stalled_msg = "";
 	    if (update_secs > 4){
-		stalled_msg = "(stalled)";
+		stalled_msg = _("(stalled)");
 	    }
 
 	    /* 3. Compute ETA */
@@ -1229,7 +1231,7 @@ ret:
  retry_src_close:
     if ((resources & 1) && mc_close (source_desc) < 0){
 	temp_status = file_error
-	    (" Cannot close source file \"%s\" \n %s ", src_path);
+	    (_(" Cannot close source file \"%s\" \n %s "), src_path);
 	if (temp_status == FILE_RETRY)
 	    goto retry_src_close;
 	if (temp_status == FILE_ABORT)
@@ -1239,7 +1241,7 @@ ret:
  retry_dst_close:
     if ((resources & 2) && mc_close (dest_desc) < 0){
 	temp_status = file_error
-	    (" Cannot close target file \"%s\" \n %s ", dst_path);
+	    (_(" Cannot close target file \"%s\" \n %s "), dst_path);
 	if (temp_status == FILE_RETRY)
 	    goto retry_dst_close;
 	return_status = temp_status;
@@ -1258,7 +1260,7 @@ ret:
          retry_dst_chown:
     	    if (mc_chown (dst_path, src_uid, src_gid)){
 		temp_status = file_error
-	    	    (" Cannot chown target file \"%s\" \n %s ", dst_path);
+	    	    (_(" Cannot chown target file \"%s\" \n %s "), dst_path);
 		if (temp_status == FILE_RETRY)
 	    	    goto retry_dst_chown;
 		return_status = temp_status;
@@ -1272,7 +1274,7 @@ ret:
      retry_dst_chmod:
 	if (!appending && mc_chmod (dst_path, src_mode & umask_kill)){
 	    temp_status = file_error
-		(" Cannot chmod target file \"%s\" \n %s ", dst_path);
+		(_(" Cannot chmod target file \"%s\" \n %s "), dst_path);
 	    if (temp_status == FILE_RETRY)
 		goto retry_dst_chmod;
 	    return_status = temp_status;
@@ -1309,7 +1311,7 @@ copy_dir_dir (char *s, char *d, int toplevel, int move_over, int delete,
     /* First get the mode of the source dir */
  retry_src_stat:
     if ((*xstat) (s, &cbuf)){
-	return_status = file_error (" Cannot stat source directory \"%s\" \n %s ", s);
+	return_status = file_error (_(" Cannot stat source directory \"%s\" \n %s "), s);
 	if (return_status == FILE_RETRY)
 	    goto retry_src_stat;
 	return return_status;
@@ -1332,7 +1334,7 @@ copy_dir_dir (char *s, char *d, int toplevel, int move_over, int delete,
     }
 
     if (!S_ISDIR (cbuf.st_mode)){
-	return_status = file_error (" Source directory \"%s\" is not a directory ", s);
+	return_status = file_error (_(" Source directory \"%s\" is not a directory "), s);
 	if (return_status == FILE_RETRY)
 	    goto retry_src_stat;
 	return return_status;
@@ -1340,7 +1342,7 @@ copy_dir_dir (char *s, char *d, int toplevel, int move_over, int delete,
     
     if (is_in_linklist (parent_dirs, s, &cbuf)) {
  	/* we found a cyclic symbolic link */
-	   message_2s (1, " Error ", " Cannot copy cyclic symbolic link \n `%s' ", s);
+	   message_2s (1, MSG_ERROR, _(" Cannot copy cyclic symbolic link \n `%s' "), s);
 	return FILE_SKIP;
     }
     
@@ -1390,7 +1392,7 @@ copy_dir_dir (char *s, char *d, int toplevel, int move_over, int delete,
     }
  retry_dst_mkdir:
     if (my_mkdir (dest_dir, (cbuf.st_mode & umask_kill) | S_IRWXU)){
-	return_status = file_error (" Cannot create target directory \"%s\" \n %s ", dest_dir);
+	return_status = file_error (_(" Cannot create target directory \"%s\" \n %s "), dest_dir);
 	if (return_status == FILE_RETRY)
 	    goto retry_dst_mkdir;
 	goto ret;
@@ -1409,7 +1411,7 @@ copy_dir_dir (char *s, char *d, int toplevel, int move_over, int delete,
      retry_dst_chown:
         if (mc_chown (dest_dir, cbuf.st_uid, cbuf.st_gid)){
 	    return_status = file_error
-	        (" Cannot chown target directory \"%s\" \n %s ", dest_dir);
+	        (_(" Cannot chown target directory \"%s\" \n %s "), dest_dir);
 	    if (return_status == FILE_RETRY)
 	        goto retry_dst_chown;
 	    goto ret;
@@ -1517,7 +1519,7 @@ move_file_file (char *s, char *d)
  retry_src_lstat:
     if (mc_lstat (s, &src_stats) != 0){
 	/* Source doesn't exist */
-	return_status = file_error (" Cannot stat file \"%s\" \n %s ", s);
+	return_status = file_error (_(" Cannot stat file \"%s\" \n %s "), s);
 	if (return_status == FILE_RETRY)
 	    goto retry_src_lstat;
 	return return_status;
@@ -1539,14 +1541,14 @@ move_file_file (char *s, char *d)
 
 	    strcpy (st, name_trunc (s, msize));
 	    strcpy (dt, name_trunc (d, msize));
-	    message_3s (1, " Error ", " `%s' and `%s' are the same file ",
+	    message_3s (1, MSG_ERROR, _(" `%s' and `%s' are the same file "),
 		     st, dt );
 	    do_refresh ();
 	    return FILE_SKIP;
 	}
 #endif /* OS2_NT */
 	if (S_ISDIR (dst_stats.st_mode)){
-	    message_2s (1, " Error ", " Cannot overwrite directory `%s' ", d);
+	    message_2s (1, MSG_ERROR, _(" Cannot overwrite directory `%s' "), d);
 	    do_refresh ();
 	    return FILE_SKIP;
 	}
@@ -1586,7 +1588,7 @@ move_file_file (char *s, char *d)
     	errno = EXDEV; /* Hack to copy (append) the file and then delete it */
 
     if (errno != EXDEV){
-	return_status = files_error (" Cannot move file \"%s\" to \"%s\" \n %s ", s, d);
+	return_status = files_error (_(" Cannot move file \"%s\" to \"%s\" \n %s "), s, d);
 	if (return_status == FILE_RETRY)
 	    goto retry_rename;
 	return return_status;
@@ -1604,7 +1606,7 @@ move_file_file (char *s, char *d)
 
  retry_src_remove:
     if (mc_unlink (s)){
-	return_status = file_error (" Cannot remove file \"%s\" \n %s ", s);
+	return_status = file_error (_(" Cannot remove file \"%s\" \n %s "), s);
 	if (return_status == FILE_RETRY)
 	    goto retry_src_remove;
 	return return_status;
@@ -1645,9 +1647,9 @@ move_dir_dir (char *s, char *d)
 	    goto oktoret;
 	} else {
 	    if (S_ISDIR (destbuf.st_mode))
-	        return_status = file_error (" Cannot overwrite directory \"%s\" ", destdir);
+	        return_status = file_error (_(" Cannot overwrite directory \"%s\" "), destdir);
 	    else
-	        return_status = file_error (" Cannot overwrite file \"%s\" ", destdir);
+	        return_status = file_error (_(" Cannot overwrite file \"%s\" "), destdir);
 	    if (return_status == FILE_RETRY)
 	        goto retry_dst_stat;
 	}
@@ -1670,7 +1672,7 @@ move_dir_dir (char *s, char *d)
 #endif
 
     if (errno != EXDEV){
-	return_status = files_error (" Cannot move directory \"%s\" to \"%s\" \n %s ", s, d);
+	return_status = files_error (_(" Cannot move directory \"%s\" to \"%s\" \n %s "), s, d);
 	if (return_status == FILE_RETRY)
 	    goto retry_rename;
 	goto ret;
@@ -1726,7 +1728,7 @@ erase_file (char *s)
 
  retry_unlink:
     if (mc_unlink (s)){
-	return_status = file_error (" Cannot delete file \"%s\" \n %s ", s);
+	return_status = file_error (_(" Cannot delete file \"%s\" \n %s "), s);
 	if (return_status == FILE_RETRY)
 	    goto retry_unlink;
 	return return_status;
@@ -1780,7 +1782,7 @@ recursive_erase (char *s)
     mc_refresh ();
  retry_rmdir:
     if (my_rmdir (s)){
-	return_status = file_error (" Cannot remove directory \"%s\" \n %s ", s);
+	return_status = file_error (_(" Cannot remove directory \"%s\" \n %s "), s);
 	if (return_status == FILE_RETRY)
 	    goto retry_rmdir;
 	return return_status;
@@ -1813,7 +1815,7 @@ erase_dir (char *s)
 	    return error;
     }
     if (error){
-	error = file_error (" Cannot remove directory \"%s\" \n %s ", s);
+	error = file_error (_(" Cannot remove directory \"%s\" \n %s "), s);
 	if (error == FILE_RETRY)
 	    goto retry_rmdir;
 	return error;
@@ -1839,7 +1841,7 @@ erase_dir_iff_empty (char *s)
  retry_rmdir:
     error = my_rmdir (s);
     if (error && !errno_dir_not_empty (errno)) {
-	error = file_error (" Cannot remove directory \"%s\" \n %s ", s);
+	error = file_error (_(" Cannot remove directory \"%s\" \n %s "), s);
 	if (error == FILE_RETRY)
 	    goto retry_rmdir;
 	return error;
@@ -1875,7 +1877,7 @@ get_file (WPanel *panel, struct stat *stat_buf)
 	*stat_buf = panel->dir.list [panel->selected].buf;
 	return panel->dir.list [panel->selected].fname;
     }
-    fprintf (stderr, " Internal error: get_file \n");
+    fprintf (stderr, _(" Internal error: get_file \n"));
     mi_getch ();
     return "";
 }
@@ -1922,9 +1924,9 @@ file_mask_dialog (int operation, char *text, char *def_text, int only_one, int *
     QuickDialog Quick_input;
     static QuickWidget quick_widgets [] = {
 /* follow symlinks and preserve Attributes must be the first */
-    { quick_checkbox, 3, 64, 8, FMDY, "preserve &Attributes", 9, 0,
+    { quick_checkbox, 3, 64, 8, FMDY, N_("preserve &Attributes"), 9, 0,
       &op_preserve, 0, XV_WLAY_BELOWCLOSE, "preserve" },
-    { quick_checkbox, 3, 64, 7, FMDY, "follow &Links", 7, 0, 
+    { quick_checkbox, 3, 64, 7, FMDY, N_("follow &Links"), 7, 0, 
       &op_follow_links, 0, XV_WLAY_BELOWCLOSE, "follow" },
 #ifdef HAVE_XVIEW
 #define FMDI1 5
@@ -1933,8 +1935,8 @@ file_mask_dialog (int operation, char *text, char *def_text, int only_one, int *
     { quick_input, 3, 64, 6, FMDY, "", 58, 0, 
       0, 0, XV_WLAY_BELOWCLOSE, "input2" },
 #endif
-    { quick_label, 3, 64, 5, FMDY, "to:", 0, 0, 0, 0, XV_WLAY_BELOWOF,"to"},
-    { quick_checkbox, 37, 64, 4, FMDY, "&Using shell patterns", 0, 0, 
+    { quick_label, 3, 64, 5, FMDY, N_("to:"), 0, 0, 0, 0, XV_WLAY_BELOWOF,"to"},
+    { quick_checkbox, 37, 64, 4, FMDY, N_("&Using shell patterns"), 0, 0, 
       0/* &source_easy_patterns */, 0, XV_WLAY_BELOWCLOSE, "using-shell" },
     { quick_input, 3, 64, 3, FMDY, "", 58, 
       0, 0, 0, XV_WLAY_BELOWCLOSE, "input-def" },
@@ -1948,17 +1950,17 @@ file_mask_dialog (int operation, char *text, char *def_text, int only_one, int *
 #define FMDI0 6	  
     { quick_label, 2, 64, 2, FMDY, "", 0, 0, 0, 0, XV_WLAY_DONTCARE, "ql" },
 #define SKIP 4
-    { quick_button, 42, 64, 9, FMDY, "&Cancel", 0, B_CANCEL, 0, 0, XV_WLAY_DONTCARE,
+    { quick_button, 42, 64, 9, FMDY, N_("&Cancel"), 0, B_CANCEL, 0, 0, XV_WLAY_DONTCARE,
 	  "cancel" },
 #ifdef WITH_BACKGROUND
 #undef SKIP
 #define SKIP 5
-    { quick_button, 25, 64, 9, FMDY, "&Background", 0, B_USER, 0, 0, XV_WLAY_DONTCARE, "back" },
+    { quick_button, 25, 64, 9, FMDY, N_("&Background"), 0, B_USER, 0, 0, XV_WLAY_DONTCARE, "back" },
 #endif
-    { quick_button, 14, 64, 9, FMDY, "&Ok", 0, B_ENTER, 0, 0, XV_WLAY_NEXTROW, "ok" },
-    { quick_checkbox, 42, 64, 8, FMDY, "&Stable Symlinks", 0, 0,
+    { quick_button, 14, 64, 9, FMDY, N_("&Ok"), 0, B_ENTER, 0, 0, XV_WLAY_NEXTROW, "ok" },
+    { quick_checkbox, 42, 64, 8, FMDY, N_("&Stable Symlinks"), 0, 0,
       &stable_symlinks, 0, XV_WLAY_BELOWCLOSE, "stab-sym" },
-    { quick_checkbox, 31, 64, 7, FMDY, "&Dive into subdir if exists", 0, 0, 
+    { quick_checkbox, 31, 64, 7, FMDY, N_("&Dive into subdir if exists"), 0, 0, 
       &dive_into_subdirs, 0, XV_WLAY_BELOWOF, "dive" },
     { 0 } };
 
@@ -1970,7 +1972,8 @@ file_mask_dialog (int operation, char *text, char *def_text, int only_one, int *
     Quick_input.title = header;
     Quick_input.help  = "[Mask Copy/Rename]";
     Quick_input.ylen  = FMDY;
-
+    Quick_input.i18n  = 0;
+    
     if (operation == OP_COPY) {
 	Quick_input.class = "quick_file_mask_copy";
 	Quick_input.widgets = quick_widgets;
@@ -2023,7 +2026,7 @@ ask_file_mask:
     error = re_compile_pattern (source_mask, strlen (source_mask), &rx);
     free (source_mask);
     if (error) {
-	message_3s (1, " Error ", "Invalid source pattern `%s' \n %s ",
+	message_3s (1, MSG_ERROR, _("Invalid source pattern `%s' \n %s "),
 		 orig_mask, error);
 	if (orig_mask)
 	    free (orig_mask);
@@ -2082,7 +2085,7 @@ panel_operate (void *source_panel, int operation, char *thedefault)
     free_linklist (&dest_dirs);
     if (get_current_type () == view_listing)
 	if (!panel->marked && !strcmp (selection (panel)->fname, "..")){
-	    message (1, " Error ", " Can't operate on \"..\"! ");
+	    message (1, MSG_ERROR, _(" Can't operate on \"..\"! "));
 	    return 0;
 	}
     
@@ -2093,15 +2096,15 @@ panel_operate (void *source_panel, int operation, char *thedefault)
     
     if (!only_one){
 	sprintf (cmd_buf, "%s%d %s%s ", op_names [operation], panel->marked,
-		 (panel->marked == panel->dirs_marked) ? "directories" :
-		 (panel->dirs_marked) ? "files/directories" : "files",
-		 (operation == OP_DELETE) ? "?" : " with source mask:");
+		 (panel->marked == panel->dirs_marked) ? _("directories") :
+		 (panel->dirs_marked) ? _("files/directories") : _("files"),
+		 (operation == OP_DELETE) ? "?" : _(" with source mask:"));
     } else {
 	source = get_file (panel, &src_stat);
 	sprintf (cmd_buf,"%s%s \"%s\"%s ", op_names [operation],
-	         S_ISDIR (src_stat.st_mode) ? "directory" : "file",
+	         S_ISDIR (src_stat.st_mode) ? _("directory") : _("file"),
 		 name_trunc (source, S_ISDIR (src_stat.st_mode) ? 23 : 28),
-		 (operation == OP_DELETE) ? "?" : " with source mask:");
+		 (operation == OP_DELETE) ? "?" : _(" with source mask:"));
     }
     
     /* Show confirmation dialog */
@@ -2109,7 +2112,7 @@ panel_operate (void *source_panel, int operation, char *thedefault)
         if (know_not_what_am_i_doing)
 	    query_set_sel (1);
 	i = query_dialog (op_names [operation], cmd_buf,
-			  D_ERROR, 2, "&Yes", "&No");
+			  D_ERROR, 2, _("&Yes"), _("&No"));
 	if (i != 0)
 	    return 0;
     } else if (operation != OP_DELETE) {
@@ -2144,7 +2147,7 @@ panel_operate (void *source_panel, int operation, char *thedefault)
 	
 	v = do_background (copy_strings (operation_names [operation], ": ", panel->cwd, 0));
 	if (v == -1){
-	    message (1, " Error ", " Sorry, I could not put the job in background ");
+	    message (1, MSG_ERROR, _(" Sorry, I could not put the job in background "));
 	}
 
 	/* If we are the parent */
@@ -2207,7 +2210,7 @@ panel_operate (void *source_panel, int operation, char *thedefault)
 		    break;
 	        default:
 		    value = FILE_CONT;
-		    message_1s (1, " Internal failure ", " Unknown file operation ");
+		    message_1s (1, _(" Internal failure "), _(" Unknown file operation "));
 	        }
 	    }
 	} /* Copy or move operation */
@@ -2223,7 +2226,7 @@ panel_operate (void *source_panel, int operation, char *thedefault)
 	retry_many_dst_stat:
 	    dst_result = mc_stat (dest, &dst_stat);
 	    if (dst_result == 0 && !S_ISDIR (dst_stat.st_mode)){
-		if (file_error (" Destination \"%s\" must be a directory ", dest) == FILE_RETRY)
+		if (file_error (_(" Destination \"%s\" must be a directory "), dest) == FILE_RETRY)
 		    goto retry_many_dst_stat;
 		goto clean_up;
 	    }
@@ -2277,8 +2280,8 @@ panel_operate (void *source_panel, int operation, char *thedefault)
 		            value = move_file_file (source_with_path, temp);
 		        break;
 		    default:
-		    	message_1s (1, " Internal failure ",
-			         " Unknown file operation ");
+		    	message_1s (1, _(" Internal failure "),
+			         _(" Unknown file operation "));
 		    	goto clean_up;
 		    }
 		}
@@ -2347,8 +2350,8 @@ real_do_file_error (enum OperationMode mode, char *error)
     int result;
     char *msg;
 
-    msg = mode == Foreground ? " Error " : " Background process error ";
-    result = query_dialog (msg, error, 3, 3, "&Skip", "&Retry", "&Abort");
+    msg = mode == Foreground ? MSG_ERROR : _(" Background process error ");
+    result = query_dialog (msg, error, 3, 3, _("&Skip"), _("&Retry"), _("&Abort"));
 
     switch (result){
     case 0:
@@ -2386,7 +2389,7 @@ files_error (char *format, char *file1, char *file2)
     return do_file_error (cmd_buf);
 }
 
-static char *format = "Target file \"%s\" already exists!";
+static char *format = N_("Target file \"%s\" already exists!");
 static int
 replace_callback (struct Dlg_head *h, int Id, int Msg)
 {
@@ -2416,35 +2419,35 @@ init_replace (enum OperationMode mode)
 
     
     x_set_dialog_title (replace_dlg,
-        mode == Foreground ? " File exists " : " Background process: File exists ");
+        mode == Foreground ? _(" File exists ") : _(" Background process: File exists "));
 
 #ifdef HAVE_X
 #define X_TRUNC 128
 #else
 #define X_TRUNC 52
 #endif
-    sprintf (buffer, format, name_trunc (replace_filename, X_TRUNC - strlen (format)));
+    sprintf (buffer, _(format), name_trunc (replace_filename, X_TRUNC - strlen (format)));
     add_widgetl (replace_dlg, label_new (3, 5, buffer, "target-e"), XV_WLAY_CENTERROW);
     
     add_widgetl (replace_dlg,
-		button_new (BY + 3, 25, REPLACE_ABORT, NORMAL_BUTTON, "&Abort",
+		button_new (BY + 3, 25, REPLACE_ABORT, NORMAL_BUTTON, _("&Abort"),
 		0, 0, "abort"), XV_WLAY_CENTERROW);
     
     tk_new_frame (replace_dlg, "a.");
     add_widgetl (replace_dlg,
-		 button_new (BY + 1, 28, REPLACE_SIZE, NORMAL_BUTTON, "if &Size differs",
+		 button_new (BY + 1, 28, REPLACE_SIZE, NORMAL_BUTTON, _("if &Size differs"),
 			     0, 0, "if-size"), XV_WLAY_RIGHTOF);
     add_widgetl (replace_dlg,
-		 button_new (BY, 47, REPLACE_NEVER, NORMAL_BUTTON, "non&E",
+		 button_new (BY, 47, REPLACE_NEVER, NORMAL_BUTTON, _("non&E"),
 		 0, 0, "none"), XV_WLAY_RIGHTOF);
     add_widgetl (replace_dlg,
-		button_new (BY, 36, REPLACE_UPDATE, NORMAL_BUTTON, "&Update",
+		button_new (BY, 36, REPLACE_UPDATE, NORMAL_BUTTON, _("&Update"),
 		0, 0, "update"), XV_WLAY_RIGHTOF);
     add_widgetl (replace_dlg,
-		button_new (BY, 28, REPLACE_ALWAYS, NORMAL_BUTTON, "al&L",
+		button_new (BY, 28, REPLACE_ALWAYS, NORMAL_BUTTON, _("al&L"),
 		0, 0, "all"), XV_WLAY_RIGHTOF);
 
-    add_widgetl (replace_dlg, label_new (BY, 5, "Overwrite all targets?", "over-label"),
+    add_widgetl (replace_dlg, label_new (BY, 5, _("Overwrite all targets?"), "over-label"),
 	        XV_WLAY_CENTERROW);        
 
     /* "this target..." widgets */
@@ -2453,25 +2456,25 @@ init_replace (enum OperationMode mode)
 	if ((do_reget == -1 && d_stat->st_size && s_stat->st_size > d_stat->st_size))
 	    add_widgetl (replace_dlg,
 			 button_new (BY - 1, 28, REPLACE_REGET, NORMAL_BUTTON,
-				     "&Reget", 0, 0, "reget"), XV_WLAY_RIGHTOF);
+				     _("&Reget"), 0, 0, "reget"), XV_WLAY_RIGHTOF);
         add_widgetl (replace_dlg,
-		    button_new (BY - 2, 45, REPLACE_APPEND, NORMAL_BUTTON, "ap&Pend",
+		    button_new (BY - 2, 45, REPLACE_APPEND, NORMAL_BUTTON, _("ap&Pend"),
 		    0, 0, "append"), XV_WLAY_RIGHTOF);
     }
     add_widgetl (replace_dlg,
-		button_new (BY - 2, 37, REPLACE_NO, NORMAL_BUTTON, "&No",
+		button_new (BY - 2, 37, REPLACE_NO, NORMAL_BUTTON, _("&No"),
 		0, 0, "no"), XV_WLAY_RIGHTOF);
     add_widgetl (replace_dlg,
-		button_new (BY - 2, 28, REPLACE_YES, NORMAL_BUTTON, "&Yes",
+		button_new (BY - 2, 28, REPLACE_YES, NORMAL_BUTTON, _("&Yes"),
 		0, 0, "yes"), XV_WLAY_RIGHTOF);
-    add_widgetl (replace_dlg, label_new (BY-2,5, "Overwrite this target?", "overlab"),
+    add_widgetl (replace_dlg, label_new (BY-2,5, _("Overwrite this target?"), "overlab"),
 		 XV_WLAY_CENTERROW);
     
     tk_new_frame (replace_dlg, "i.");
-    sprintf (buffer, "Target date: %s, size %d",
+    sprintf (buffer, _("Target date: %s, size %d"),
 	     file_date (d_stat->st_mtime), (int) d_stat->st_size);
     add_widgetl (replace_dlg, label_new (6, 5, buffer, "target-date"), XV_WLAY_CENTERROW);
-    sprintf (buffer, "Source date: %s, size %d",
+    sprintf (buffer, _("Source date: %s, size %d"),
 	     file_date (s_stat->st_mtime), (int) s_stat->st_size);
     add_widgetl (replace_dlg, label_new (5, 5, buffer, "source-date"), XV_WLAY_CENTERROW);
     tk_end_frame ();
@@ -2535,14 +2538,14 @@ real_query_recursive (enum OperationMode mode, char *s)
 
     if (recursive_result < RECURSIVE_ALWAYS){
 	char *msg =
-	    mode == Foreground ? "\n   Directory not empty.   \n   Delete it recursively? "
-	                       : "\n   Background process: Directory not empty \n   Delete it recursively? ";
+	    mode == Foreground ? _("\n   Directory not empty.   \n   Delete it recursively? ")
+	                       : _("\n   Background process: Directory not empty \n   Delete it recursively? ");
 	text = copy_strings (" Delete: ", name_trunc (s, 30), " ", 0);
 
         if (know_not_what_am_i_doing)
 	    query_set_sel (1);
         recursive_result = query_dialog (text, msg, 3, 5,
-				     "&Yes", "&No", "a&ll", "non&E", "&Abort");
+				     _("&Yes"), _("&No"), _("a&ll"), _("non&E"), _("&Abort"));
 	
 	
 	if (recursive_result != RECURSIVE_ABORT)
@@ -2550,11 +2553,11 @@ real_query_recursive (enum OperationMode mode, char *s)
 	free (text);
 	if (know_not_what_am_i_doing && (recursive_result == RECURSIVE_YES
 	    || recursive_result == RECURSIVE_ALWAYS)){
-	    text = copy_strings (" Type 'yes' if you REALLY want to delete ",
+	    text = copy_strings (_(" Type 'yes' if you REALLY want to delete "),
 				 recursive_result == RECURSIVE_YES
-				 ? name_trunc (s, 19) : "all the directories ", " ", 0);
-	    confirm = input_dialog (mode == Foreground ? " Recursive Delete "
-				                       : " Background process: Recursive Delete ",
+				 ? name_trunc (s, 19) : _("all the directories "), " ", 0);
+	    confirm = input_dialog (mode == Foreground ? _(" Recursive Delete ")
+				                       : _(" Background process: Recursive Delete "),
 				    text, "no");
 	    do_refresh ();
 	    if (!confirm || strcmp (confirm, "yes"))

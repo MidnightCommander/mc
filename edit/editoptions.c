@@ -34,7 +34,7 @@ char *key_emu_str[] =
 {"Intuitive", "Emacs"};
 
 char *wrap_str[] =
-{_("None"), _("Dynamic paragraphing"), _("Type writer wrap")};
+{N_("None"), N_("Dynamic paragraphing"), N_("Type writer wrap")};
 
 void edit_options_dialog (void)
 {

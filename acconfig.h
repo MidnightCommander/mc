@@ -25,6 +25,8 @@
 
 @TOP@
 
+#undef PACKAGE
+
 /* Always defined */
 #undef D_INO_IN_DIRENT
 #undef IS_AIX
@@ -201,6 +203,13 @@
 
 /* Version of ncurses */
 #undef NCURSES_970530
+
+#undef HAVE_STPCPY
+
+#undef ENABLE_NLS
+#undef HAVE_CATGETS
+#undef HAVE_GETTEXT
+#undef HAVE_LC_MESSAGES
 
 @BOTTOM@
 

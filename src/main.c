@@ -673,11 +673,11 @@ void
 do_possible_cd (char *new_dir)
 {
     if (!do_cd (new_dir, cd_exact))
-	message (1, " Warning ",
-		 " The Commander can't change to the directory that \n"
-		 " the subshell claims you are in.  Perhaps you have \n"
-		 " deleted your working directory, or given yourself \n"
-		 " extra access permissions with the \"su\" command? ");
+	message (1, _(" Warning "),
+		 _(" The Commander can't change to the directory that \n"
+		   " the subshell claims you are in.  Perhaps you have \n"
+		   " deleted your working directory, or given yourself \n"
+		   " extra access permissions with the \"su\" command? "));
 }
 
 void
@@ -752,7 +752,7 @@ do_execute (const char *shell, const char *command, int internal_command)
 	if ((pause_after_run == pause_always ||
 	    (pause_after_run == pause_on_dumb_terminals &&
 	     !xterm_flag && !console_flag)) && !quit){
-	    printf ("Press any key to continue...");
+	    printf (_("Press any key to continue..."));
 	    last_paused = 1;
 	    fflush (stdout);
 	    mc_raw_mode ();
@@ -802,7 +802,7 @@ shell_execute (char *command, int internal)
         if (subshell_state == INACTIVE || force_subshell_execution)
 	    do_execute (shell, command, internal);
 	else
-	    message (1, " Error ", " The shell is already running a command ");
+	    message (1, MSG_ERROR, _(" The shell is already running a command "));
     else
 #endif
 	do_execute (shell, command, internal);
@@ -829,9 +829,9 @@ quit_cmd_internal (int quiet)
     if (quiet || !confirm_exit){
 	q = 1;
     } else  {
-	if (query_dialog (" The Midnight Commander ",
-		     " Do you really want to quit the Midnight Commander? ",
-			  0, 2, "&Yes", "&No") == 0)
+	if (query_dialog (_(" The Midnight Commander "),
+		     _(" Do you really want to quit the Midnight Commander? "),
+			  0, 2, _("&Yes"), _("&No")) == 0)
 	    q = 1;
     }
     if (q){
@@ -1158,71 +1158,71 @@ void init_menu () {};
 void done_menu () {};
 #else
 static menu_entry PanelMenu [] = {
-    { ' ', "Listing mode...",	'L',           listing_cmd },
-    { ' ', "Quick view     C-x q", 'Q',        quick_view_cmd }, 
-    { ' ', "Info           C-x i", 'I',        info_cmd },
-    { ' ', "Tree",              'T',           tree_cmd },
-    { ' ', "", ' ', 0 },
-    { ' ', "Sort order...",     'S',           sort_cmd },
-    { ' ', "", ' ', 0 },
-    { ' ', "Filter...",	        'F',           filter_cmd },
-#ifdef USE_NETCODE
-    { ' ', "", ' ', 0 },
-    { ' ', "Network link...",   'N',           netlink_cmd },
-    { ' ', "FTP link...",       'P',           ftplink_cmd },
+    { ' ', N_("Listing mode..."),	'L',  listing_cmd },
+    { ' ', N_("Quick view     C-x q"),  'Q',  quick_view_cmd }, 
+    { ' ', N_("Info           C-x i"),  'I',  info_cmd },
+    { ' ', N_("Tree"),                  'T',  tree_cmd },
+    { ' ', "", ' ', 0 },		    
+    { ' ', N_("Sort order..."),         'S',  sort_cmd },
+    { ' ', "", ' ', 0 },		    
+    { ' ', N_("Filter..."),	        'F',  filter_cmd },
+#ifdef USE_NETCODE			    
+    { ' ', "", ' ', 0 },		    
+    { ' ', N_("Network link..."),       'N',  netlink_cmd },
+    { ' ', N_("FTP link..."),           'P',  ftplink_cmd },
 #endif
     { ' ', "", ' ', 0 },
 #ifdef OS2_NT
-    { ' ', "Drive...       M-d",   ALT('d'),   drive_cmd_a },
+    { ' ', N_("Drive...       M-d"),ALT('d'), drive_cmd_a },
 #endif
-    { ' ', "Rescan         C-r",   XCTRL('R'), reread_cmd }
+    { ' ', N_("Rescan         C-r"),XCTRL('R'), reread_cmd }
 };
 
 static menu_entry RightMenu [] = {
-    { ' ', "Listing mode...",   'L',           listing_cmd },
-    { ' ', "Quick view     C-x q", 'Q',        quick_view_cmd }, 
-    { ' ', "Info           C-x i", 'I',        info_cmd },
-    { ' ', "Tree",              'T',           tree_cmd },
-    { ' ', "", ' ', 0 },
-    { ' ', "Sort order...",     'S',           sort_cmd },
-    { ' ', "", ' ', 0 },
-    { ' ', "Filter...",	        'F',           filter_cmd },
-#ifdef USE_NETCODE			       	  
-    { ' ', "", ' ', 0 },		       	  
-    { ' ', "Network link...",   'N',           netlink_cmd },
-    { ' ', "FTP link...",       'P',           ftplink_cmd },
+    { ' ', N_("Listing mode..."),	'L',  listing_cmd },
+    { ' ', N_("Quick view     C-x q"),  'Q',  quick_view_cmd }, 
+    { ' ', N_("Info           C-x i"),  'I',  info_cmd },
+    { ' ', N_("Tree"),                  'T',  tree_cmd },
+    { ' ', "", ' ', 0 },		    
+    { ' ', N_("Sort order..."),         'S',  sort_cmd },
+    { ' ', "", ' ', 0 },		    
+    { ' ', N_("Filter..."),	        'F',  filter_cmd },
+#ifdef USE_NETCODE			    
+    { ' ', "", ' ', 0 },		    
+    { ' ', N_("Network link..."),       'N',  netlink_cmd },
+    { ' ', N_("FTP link..."),           'P',  ftplink_cmd },
 #endif
     { ' ', "", ' ', 0 },
 #ifdef OS2_NT
-    { ' ', "Drive...       M-d", ALT('d'),     drive_cmd_b },
+    { ' ', N_("Drive...       M-d"),ALT('d'),  drive_cmd_b },
 #endif
-    { ' ', "Rescan         C-r", XCTRL('R'),   reread_cmd }
+    { ' ', N_("Rescan         C-r"),XCTRL('R'), reread_cmd }
 };
 
 static menu_entry FileMenu [] = {
-    { ' ', "User menu          F2", KEY_F(2),  user_menu_cmd },
-    { ' ', "View               F3", KEY_F(3),  view_cmd },
-    { ' ', "Filtered view     M-!", ALT('!'),  filtered_view_cmd },
-    { ' ', "Edit               F4", KEY_F(4),  edit_cmd },
-    { ' ', "Copy               F5", KEY_F(5),  copy_cmd },
-    { ' ', "Chmod           C-x c", 'C',       chmod_cmd },
+    { ' ', N_("User menu          F2"), KEY_F(2),  user_menu_cmd },
+    { ' ', N_("View               F3"), KEY_F(3),  view_cmd },
+    { ' ', N_("Filtered view     M-!"), ALT('!'),  filtered_view_cmd },
+    { ' ', N_("Edit               F4"), KEY_F(4),  edit_cmd },
+    { ' ', N_("Copy               F5"), KEY_F(5),  copy_cmd },
+    { ' ', N_("Chmod           C-x c"), 'C',       chmod_cmd },
 #ifndef OS2_NT				       
-    { ' ', "Link            C-x l", 'L',       link_cmd },
-    { ' ', "SymLink         C-x s", 'S',       symlink_cmd },
-    { ' ', "edit sYmlink  C-x C-s", 'Y',       edit_symlink_cmd },
-    { ' ', "chOwn           C-x o", 'O',       chown_cmd },
-    { ' ', "Advanced chown       ", 'A',       chown_advanced_cmd },
+    { ' ', N_("Link            C-x l"), 'L',       link_cmd },
+    { ' ', N_("SymLink         C-x s"), 'S',       symlink_cmd },
+    { ' ', N_("edit sYmlink  C-x C-s"), 'Y',       edit_symlink_cmd },
+    { ' ', N_("chOwn           C-x o"), 'O',       chown_cmd },
+    { ' ', N_("Advanced chown       "), 'A',       chown_advanced_cmd },
 #endif					       
-    { ' ', "Rename/Move        F6", KEY_F(6),  ren_cmd },
-    { ' ', "Mkdir              F7", KEY_F(7),  mkdir_cmd },
-    { ' ', "Delete             F8", KEY_F(8),  delete_cmd },
-    { ' ', "Quick cd          M-c", ALT('c'),  quick_cd_cmd },
+    { ' ', N_("Rename/Move        F6"), KEY_F(6),  ren_cmd },
+    { ' ', N_("Mkdir              F7"), KEY_F(7),  mkdir_cmd },
+    { ' ', N_("Delete             F8"), KEY_F(8),  delete_cmd },
+    { ' ', N_("Quick cd          M-c"), ALT('c'),  quick_cd_cmd },
     { ' ', "", ' ', 0 },
-    { ' ', "Select group      M-+", ALT('+'),  select_cmd },
-    { ' ', "Unselect group    M-\\",ALT('\\'), unselect_cmd },
-    { ' ', "Reverse selection M-*", ALT('*'),  reverse_selection_cmd },
+    { ' ', N_("Select group      M-+"), ALT('+'),  select_cmd },
+    { ' ', N_("Unselect group    M-\\"),ALT('\\'), unselect_cmd },
+    { ' ', N_("Reverse selection M-*"), ALT('*'),  reverse_selection_cmd },
     { ' ', "", ' ', 0 },
-    { ' ', "Quit            F10",   KEY_F(10), (callfn) quit_cmd }
+    { ' ', N_("Quit            F10"),   KEY_F(10), (callfn) quit_cmd }
 };
 
 void external_panelize (void);
@@ -1231,51 +1231,51 @@ static menu_entry CmdMenu [] = {
      * as a panel still has some problems, I have not yet finished
      * the WTree widget port, sorry.
      */
-    { ' ', "Directory tree",	        'D',	      tree_box },
-    { ' ', "Find file            M-?",  ALT('?'),     find_cmd },
+    { ' ', N_("Directory tree"),	        'D',	      tree_box },
+    { ' ', N_("Find file            M-?"),  ALT('?'),     find_cmd },
 #ifndef HAVE_XVIEW    
-    { ' ', "Swap panels          C-u",  XCTRL('u'),   swap_cmd },
-    { ' ', "Switch panels on/off C-o",  XCTRL('o'),   view_other_cmd },
+    { ' ', N_("Swap panels          C-u"),  XCTRL('u'),   swap_cmd },
+    { ' ', N_("Switch panels on/off C-o"),  XCTRL('o'),   view_other_cmd },
 #endif    
-    { ' ', "Compare directories",	'C',	      compare_dirs_cmd },
-    { ' ', "eXternal panelize    C-x !",'X',	      external_panelize },
+    { ' ', N_("Compare directories"),	'C',	      compare_dirs_cmd },
+    { ' ', N_("eXternal panelize    C-x !"),'X',	      external_panelize },
 #ifdef HAVE_DUSUM
-    { ' ', "show directory sIzes",      'I',	      dirsizes_cmd },
+    { ' ', N_("show directory sIzes"),      'I',	      dirsizes_cmd },
 #endif
     { ' ', "", ' ', 0 },
-    { ' ', "command History",           'H',	      history_cmd },
-    { ' ', "Directory hotlist    C-\\",  XCTRL('\\'), quick_chdir_cmd },
+    { ' ', N_("command History"),           'H',	      history_cmd },
+    { ' ', N_("Directory hotlist    C-\\"),  XCTRL('\\'), quick_chdir_cmd },
 #ifdef USE_VFS
-    { ' ', "Active VFS list      C-x a", 'A',         reselect_vfs },
+    { ' ', N_("Active VFS list      C-x a"), 'A',         reselect_vfs },
 #endif
 #ifdef WITH_BACKGROUND
-    { ' ', "Background jobs      C-x j", 'B',         jobs_cmd },
+    { ' ', N_("Background jobs      C-x j"), 'B',         jobs_cmd },
 #endif
     { ' ', "", ' ', 0 },
 #ifdef USE_EXT2FSLIB
-    { ' ', "Undelete files (ext2fs only)",'U',        undelete_cmd },
+    { ' ', N_("Undelete files (ext2fs only)"),'U',        undelete_cmd },
 #endif
 #ifdef VERSION_4
-    { ' ', "Listing format edit",	'L',	      listmode_cmd},
+    { ' ', N_("Listing format edit"),	'L',	      listmode_cmd},
 #endif
-    { ' ', "Extension file edit",	'E',	      ext_cmd },
-    { ' ', "Menu file edit",		'M',	      menu_edit_cmd }
+    { ' ', N_("Extension file edit"),	'E',	      ext_cmd },
+    { ' ', N_("Menu file edit"),		'M',	      menu_edit_cmd }
 };
 
 /* Must keep in sync with the constants in menu_cmd */
 static menu_entry OptMenu [] = {
-    { ' ', "Configuration...",    'C', configure_box },
-    { ' ', "Layout...",           'L', layout_cmd },
-    { ' ', "cOnfirmation...",     'O', confirm_box },
-    { ' ', "Display bits...",     'D', display_bits_box },
+    { ' ', N_("Configuration..."),    'C', configure_box },
+    { ' ', N_("Layout..."),           'L', layout_cmd },
+    { ' ', N_("cOnfirmation..."),     'O', confirm_box },
+    { ' ', N_("Display bits..."),     'D', display_bits_box },
 #if !defined(HAVE_X) && !defined(OS2_NT)
-    { ' ', "learn Keys...",       'K', learn_keys },
+    { ' ', N_("learn Keys..."),       'K', learn_keys },
 #endif
 #ifdef USE_VFS    
-    { ' ', "Virtual FS...",	  'V', configure_vfs },
+    { ' ', N_("Virtual FS..."),	  'V', configure_vfs },
 #endif
     { ' ', "", ' ', 0 }, 
-    { ' ', "Save setup",          'S', save_setup_cmd }
+    { ' ', N_("Save setup"),          'S', save_setup_cmd }
 };
 
 #define menu_entries(x) sizeof(x)/sizeof(menu_entry)
@@ -1291,19 +1291,19 @@ init_menu (void)
     int i;
 
 #ifdef HAVE_X    
-    MenuBar [0] = create_menu (" Left ", PanelMenu, menu_entries (PanelMenu));
+    MenuBar [0] = create_menu (_(" Left "), PanelMenu, menu_entries (PanelMenu));
 #else
-    MenuBar [0] = create_menu ( horizontal_split ? " Above " : " Left ", 
+    MenuBar [0] = create_menu ( horizontal_split ? _(" Above ") : _(" Left "), 
                                 PanelMenu, menu_entries (PanelMenu));
 #endif
-    MenuBar [1] = create_menu (" File ", FileMenu, menu_entries (FileMenu));
-    MenuBar [2] = create_menu (" Command ", CmdMenu, menu_entries (CmdMenu));
-    MenuBar [3] = create_menu (" Options ", OptMenu, menu_entries (OptMenu));
+    MenuBar [1] = create_menu (_(" File "), FileMenu, menu_entries (FileMenu));
+    MenuBar [2] = create_menu (_(" Command "), CmdMenu, menu_entries (CmdMenu));
+    MenuBar [3] = create_menu (_(" Options "), OptMenu, menu_entries (OptMenu));
 #ifndef HAVE_XVIEW
 #ifdef HAVE_X
-    MenuBar [4] = create_menu (" Right ", RightMenu, menu_entries (PanelMenu));
+    MenuBar [4] = create_menu (_(" Right "), RightMenu, menu_entries (PanelMenu));
 #else
-    MenuBar [4] = create_menu (horizontal_split ? " Below " : " Right ", 
+    MenuBar [4] = create_menu (horizontal_split ? _(" Below ") : _(" Right "), 
 			       RightMenu, menu_entries (PanelMenu));
     for (i = 0; i < 5; i++)
 	MenuBarEmpty [i] = create_menu (MenuBar [i]->name, 0, 0);
@@ -1364,11 +1364,11 @@ toggle_fast_reload (void)
 {
     fast_reload = !fast_reload;
     if (fast_reload_w == 0 && fast_reload){
-	message (0, " Information ",
-		 " Using the fast reload option may not reflect the exact \n"
-		 " directory contents. In this cases you'll need to do a  \n"
-		 " manual reload of the directory. See the man page for   \n"
-		 " the details.                                           ");
+	message (0, _(" Information "),
+		 _(" Using the fast reload option may not reflect the exact \n"
+		   " directory contents. In this cases you'll need to do a  \n"
+		   " manual reload of the directory. See the man page for   \n"
+		   " the details.                                           "));
 	fast_reload_w = 1;
     }
 }
@@ -1627,10 +1627,10 @@ void suspend_cmd (void)
 
 void init_labels (Widget *paneletc)
 {
-    define_label (midnight_dlg, paneletc, 1, "Help", help_cmd);
-    define_label (midnight_dlg, paneletc, 2, "Menu", user_menu_cmd);
-    define_label (midnight_dlg, paneletc, 9, "PullDn", menu_cmd);
-    define_label (midnight_dlg, paneletc, 10, "Quit", (voidfn) quit_cmd);
+    define_label (midnight_dlg, paneletc, 1, _("Help"), help_cmd);
+    define_label (midnight_dlg, paneletc, 2, _("Menu"), user_menu_cmd);
+    define_label (midnight_dlg, paneletc, 9, _("PullDn"), menu_cmd);
+    define_label (midnight_dlg, paneletc, 10, _("Quit"), (voidfn) quit_cmd);
 }
 
 #ifndef HAVE_XVIEW
@@ -1847,7 +1847,7 @@ static void done_mc ()
     done_screen ();
     vfs_add_current_stamps ();
     if (xterm_flag && xterm_hintbar)
-        set_hintbar("Thank you for using GNU Midnight Commander");
+        set_hintbar(_("Thank you for using GNU Midnight Commander"));
 }
 
 /* This should be called after destroy_dlg since panel widgets
@@ -2189,8 +2189,8 @@ version (int verbose)
     
 #ifndef HAVE_X
     fprintf (stderr,
-	    "with mouse support on xterm%s.\n",
-	     status_mouse_support ? " and the Linux console" : "");
+	    _("with mouse support on xterm%s.\n"),
+	     status_mouse_support ? _(" and the Linux console") : "");
 #endif /* HAVE_X */
 
     fprintf (stderr, features);
@@ -2281,7 +2281,7 @@ OS_Setup ()
     char   *termvalue;
     termvalue = getenv ("TERM");
     if (!termvalue){
-	fprintf (stderr, "The TERM environment variable is unset!\n");
+	fprintf (stderr, _("The TERM environment variable is unset!\n"));
 	termvalue = "";
     }
 #ifndef HAVE_X
@@ -2574,12 +2574,12 @@ static void handle_args (int argc, char *argv [])
 	    break;
 
 	case 'f':
-	    fprintf (stderr, "Library directory for the Midnight Commander: %s\n", mc_home);
+	    fprintf (stderr, _("Library directory for the Midnight Commander: %s\n"), mc_home);
 	    finish_program = 1;
 	    break;
 	    
 	case 'm':
-	    fprintf (stderr, "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n");
+	    fprintf (stderr, _("Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"));
 	    finish_program = 1;
 	    break;
 
@@ -2751,13 +2751,16 @@ int main (int argc, char *argv [])
        installed the mc as setuid */
     setuid (getuid ());
 #endif
+    /* We had LC_CTYPE before, LC_ALL includs LC_TYPE as well */
+    setlocale (LC_ALL, "");
+    bindtextdomain ("mc", LOCALEDIR);
+    textdomain ("mc");
+
     vfs_init ();
 
     /* Initialize list of all user group for timur_clr_mode */
     init_groups ();
-
-    setlocale (LC_CTYPE, "");
-
+    
     OS_Setup ();
 
 #ifdef HAVE_X
@@ -2789,8 +2792,8 @@ int main (int argc, char *argv [])
 	            dup2 (2, 1);
 	        else {
 	            fprintf (stderr,
-	            	     "Couldn't open tty line. You have to run mc without the -P flag.\n"
-			     "On some systems you may want to run # `which mc`\n");
+	            	     _("Couldn't open tty line. You have to run mc without the -P flag.\n"
+			       "On some systems you may want to run # `which mc`\n"));
 		    exit (1);
 	        }
 	        free (p);
@@ -2877,10 +2880,10 @@ int main (int argc, char *argv [])
     load_hotlist ();
 
     if (show_change_notice){
-	message (1, " Notice ",
-		 " The Midnight Commander configuration files \n"
-		 " are now stored in the ~/.mc directory, the \n"
-		 " files have been moved now\n");
+	message (1, _(" Notice "),
+		 _(" The Midnight Commander configuration files \n"
+		   " are now stored in the ~/.mc directory, the \n"
+		   " files have been moved now\n"));
     }
     
 #   ifdef HAVE_SUBSHELL_SUPPORT

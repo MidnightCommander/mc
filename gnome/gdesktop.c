@@ -806,9 +806,9 @@ desktop_file_exec (GtkWidget *widget, GdkEventButton *event, desktop_icon_t *di)
 			if (file_is_executable (di->pathname)){
 				char *tmp = name_quote (di->pathname, 0);
 
-				if (!confirm_execute || (query_dialog (" The Midnight Commander ",
-								       " Do you really want to execute? ",
-								       0, 2, "&Yes", "&No") == 0))
+				if (!confirm_execute || (query_dialog (_(" The Midnight Commander "),
+								       _(" Do you really want to execute? "),
+								       0, 2, _("&Yes"), _("&No")) == 0))
 					execute (tmp);
 				free (tmp);
 			} else {
@@ -983,7 +983,7 @@ desktop_reload (char *desktop_dir)
 	
 	dir = mc_opendir (desktop_dir);
 	if (dir == NULL){
-		message (1, " Warning ", " Could not open %s directory", desktop_dir, NULL);
+		message (1, _(" Warning "), _(" Could not open %s directory"), desktop_dir, NULL);
 		return;
 	}
 

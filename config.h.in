@@ -69,6 +69,9 @@
 /* Define if you have <sys/wait.h> that is POSIX.1 compatible.  */
 #undef HAVE_SYS_WAIT_H
 
+/* Define as __inline if that's what the C compiler calls it.  */
+#undef inline
+
 /* Define if major, minor, and makedev are declared in <mkdev.h>.  */
 #undef MAJOR_IN_MKDEV
 
@@ -94,6 +97,9 @@
 /* Define if you need to in order for stat and other things to work.  */
 #undef _POSIX_SOURCE
 
+/* Define to `unsigned' if <sys/types.h> doesn't define.  */
+#undef size_t
+
 /* If using the C implementation of alloca, define if you know the
    direction of stack growth for your system; otherwise it will be
    automatically deduced at run-time.
@@ -111,6 +117,8 @@
 
 /* Define if the X Window System is missing or not being used.  */
 #undef X_DISPLAY_MISSING
+
+#undef PACKAGE
 
 /* Always defined */
 #undef D_INO_IN_DIRENT
@@ -130,8 +138,11 @@
 #undef STAT_STATFS4
 #undef STAT_STATVFS
 
-/* Does your system provide the umode_t typedef? */
+/* Define umode_t if your system does not provide it */
 #undef umode_t
+
+/* Define nlink_t if your system does not provide it */
+#undef nlink_t
 
 /* Does the file command accepts the -L option */
 #undef FILE_L
@@ -256,11 +267,33 @@
 /* Version of ncurses */
 #undef NCURSES_970530
 
+#undef HAVE_STPCPY
+
+#undef ENABLE_NLS
+#undef HAVE_CATGETS
+#undef HAVE_GETTEXT
+#undef HAVE_LC_MESSAGES
+
+/* Define if you have the __argz_count function.  */
+#undef HAVE___ARGZ_COUNT
+
+/* Define if you have the __argz_next function.  */
+#undef HAVE___ARGZ_NEXT
+
+/* Define if you have the __argz_stringify function.  */
+#undef HAVE___ARGZ_STRINGIFY
+
 /* Define if you have the cfgetospeed function.  */
 #undef HAVE_CFGETOSPEED
 
 /* Define if you have the crypt function.  */
 #undef HAVE_CRYPT
+
+/* Define if you have the dcgettext function.  */
+#undef HAVE_DCGETTEXT
+
+/* Define if you have the getcwd function.  */
+#undef HAVE_GETCWD
 
 /* Define if you have the getmntinfo function.  */
 #undef HAVE_GETMNTINFO
@@ -289,6 +322,9 @@
 /* Define if you have the memset function.  */
 #undef HAVE_MEMSET
 
+/* Define if you have the munmap function.  */
+#undef HAVE_MUNMAP
+
 /* Define if you have the pmap_getmaps function.  */
 #undef HAVE_PMAP_GETMAPS
 
@@ -309,6 +345,12 @@
 
 /* Define if you have the rresvport function.  */
 #undef HAVE_RRESVPORT
+
+/* Define if you have the setenv function.  */
+#undef HAVE_SETENV
+
+/* Define if you have the setlocale function.  */
+#undef HAVE_SETLOCALE
 
 /* Define if you have the sigaction function.  */
 #undef HAVE_SIGACTION
@@ -337,8 +379,14 @@
 /* Define if you have the statvfs function.  */
 #undef HAVE_STATVFS
 
+/* Define if you have the stpcpy function.  */
+#undef HAVE_STPCPY
+
 /* Define if you have the strcasecmp function.  */
 #undef HAVE_STRCASECMP
+
+/* Define if you have the strchr function.  */
+#undef HAVE_STRCHR
 
 /* Define if you have the strdup function.  */
 #undef HAVE_STRDUP
@@ -357,6 +405,9 @@
 
 /* Define if you have the truncate function.  */
 #undef HAVE_TRUNCATE
+
+/* Define if you have the <argz.h> header file.  */
+#undef HAVE_ARGZ_H
 
 /* Define if you have the <crypt.h> header file.  */
 #undef HAVE_CRYPT_H
@@ -379,6 +430,9 @@
 /* Define if you have the <linux/ext2_fs.h> header file.  */
 #undef HAVE_LINUX_EXT2_FS_H
 
+/* Define if you have the <locale.h> header file.  */
+#undef HAVE_LOCALE_H
+
 /* Define if you have the <malloc.h> header file.  */
 #undef HAVE_MALLOC_H
 
@@ -393,6 +447,9 @@
 
 /* Define if you have the <ndir.h> header file.  */
 #undef HAVE_NDIR_H
+
+/* Define if you have the <nl_types.h> header file.  */
+#undef HAVE_NL_TYPES_H
 
 /* Define if you have the <rpc/pmap_clnt.h> header file.  */
 #undef HAVE_RPC_PMAP_CLNT_H
@@ -459,6 +516,12 @@
 
 /* Define if you have the <utime.h> header file.  */
 #undef HAVE_UTIME_H
+
+/* Define if you have the <values.h> header file.  */
+#undef HAVE_VALUES_H
+
+/* Define if you have the i library (-li).  */
+#undef HAVE_LIBI
 
 /* Define if you have the intl library (-lintl).  */
 #undef HAVE_LIBINTL

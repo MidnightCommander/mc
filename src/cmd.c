@@ -182,7 +182,7 @@ int view_file_at_line (char *filename, int plain_view, int internal, int start_l
 	if (!vfs_file_is_local (filename)){
 	    localcopy = mc_getlocalcopy (filename);
 	    if (localcopy == NULL){
-		message (1, " Error ", " Can not fetch a local copy of %s ", filename);
+		message (1, MSG_ERROR, _(" Can not fetch a local copy of %s "), filename);
 		return 0;
 	    }
 	    execute_internal (viewer, localcopy);
@@ -232,8 +232,8 @@ static void do_view_cmd (WPanel *panel, int normal)
     if (S_ISDIR (selection (panel)->buf.st_mode) ||
 	link_isdir (selection (panel))){
 	if (confirm_view_dir && (panel->marked || panel->dirs_marked)){
-	    if (query_dialog (" CD ", "Files tagged, want to cd?",
-			      0, 2, "&Yes", "&No") == 1){
+	    if (query_dialog (_(" CD "), _("Files tagged, want to cd?"),
+			      0, 2, _("&Yes"), _("&No")) == 1){
 		return;
 	    }
 	}
@@ -270,7 +270,7 @@ void filtered_view_cmd (WPanel *panel)
     char *command;
 
     panel = get_a_panel (panel);
-    command = input_dialog (" Filtered view ", " Filter command and arguments:",
+    command = input_dialog (_(" Filtered view "), _(" Filter command and arguments:"),
 			    selection (panel)->fname);
     if (!command)
 	return;
@@ -355,7 +355,7 @@ void mkdir_cmd (WPanel *panel)
     char *dir;
     
     panel = get_a_panel (panel);
-    dir = input_expand_dialog (" Mkdir ", " Enter directory name:" , "");
+    dir = input_expand_dialog (_(" Mkdir "), _(" Enter directory name:") , "");
     
     if (!dir)
 	return;
@@ -369,7 +369,7 @@ void mkdir_cmd (WPanel *panel)
 	return;
     }
     free (dir);
-    message (1, " Error ", "  %s  ", unix_error_string (errno));
+    message (1, MSG_ERROR, "  %s  ", unix_error_string (errno));
 }
 
 void delete_cmd (void)
@@ -410,7 +410,7 @@ void set_panel_filter (WPanel *p)
     
     x = p->filter ? p->filter : easy_patterns ? "*" : ".";
 	
-    reg_exp = input_dialog (" Filter ", " Set expression for filtering filenames", x);
+    reg_exp = input_dialog (_(" Filter "), _(" Set expression for filtering filenames"), x);
     if (!reg_exp)
 	return;
     set_panel_filter_to (p, reg_exp);
@@ -489,7 +489,7 @@ void select_cmd_panel (WPanel *panel)
     int c;
     int dirflag = 0;
 
-    reg_exp = input_dialog (" Select ", "", easy_patterns ? "*" : ".");
+    reg_exp = input_dialog (_(" Select "), "", easy_patterns ? "*" : ".");
     if (!reg_exp)
 	return;
     
@@ -517,7 +517,7 @@ void select_cmd_panel (WPanel *panel)
 	}
 	c = regexp_match (reg_exp_t, panel->dir.list [i].fname, match_file);
 	if (c == -1){
-	    message (1, " Error ", "  Malformed regular expression  ");
+	    message (1, MSG_ERROR, _("  Malformed regular expression  "));
 	    free (reg_exp);
 	    return;
 	}
@@ -541,7 +541,7 @@ void unselect_cmd_panel (WPanel *panel)
     int c;
     int dirflag = 0;
 
-    reg_exp = input_dialog (" Unselect ","", easy_patterns ? "*" : ".");
+    reg_exp = input_dialog (_(" Unselect "),"", easy_patterns ? "*" : ".");
     if (!reg_exp)
 	return;
     
@@ -568,7 +568,7 @@ void unselect_cmd_panel (WPanel *panel)
         }
 	c = regexp_match (reg_exp_t, panel->dir.list [i].fname, match_file);
 	if (c == -1){
-	    message (1, " Error ", "  Malformed regular expression  ");
+	    message (1, MSG_ERROR, _("  Malformed regular expression  "));
 	    free (reg_exp);
 	    return;
 	}
@@ -610,9 +610,9 @@ void ext_cmd (void)
 
     dir = 0;
     if (geteuid () == 0){
-	dir = query_dialog ("Extension file edit",
-			    " Which extension file you want to edit? ", 0, 2,
-			    "&User", "&System Wide");
+	dir = query_dialog (_("Extension file edit"),
+			    _(" Which extension file you want to edit? "), 0, 2,
+			    _("&User"), _("&System Wide"));
     }
     extdir = concat_dir_and_file (mc_home, MC_LIB_EXT);
 
@@ -635,10 +635,10 @@ void menu_edit_cmd (void)
     int dir = 0;
     
     dir = query_dialog (
-	"Menu file edit",
-	" Which menu file will you edit? ", 
+	_("Menu file edit"),
+	_(" Which menu file will you edit? "), 
 	0, geteuid() ? 2 : 3,
-	"&Local", "&Home", "&System Wide"
+	_("&Local"), _("&Home"), _("&System Wide")
     );
 
     menufile = concat_dir_and_file(mc_home, MC_GLOBAL_MENU);
@@ -819,8 +819,8 @@ void compare_dirs_cmd (void)
 {
     enum CompareMode thorough_flag = compare_quick;
 
-    thorough_flag = query_dialog (" Compare directories ", " Select compare method: ",
-				  0, 3, "&Quick", "&Size only", "&Thorough", "&Cancel");
+    thorough_flag = query_dialog (_(" Compare directories "), _(" Select compare method: "),
+				  0, 3, _("&Quick"), _("&Size only"), _("&Thorough"), _("&Cancel"));
     if (thorough_flag < 0 || thorough_flag > 2)
 	return;
     if (get_current_type () == view_listing &&
@@ -830,7 +830,7 @@ void compare_dirs_cmd (void)
 	paint_panel (cpanel);
 	paint_panel (opanel);
     } else {
-	message (1, " Error ", " Both panels should be on the listing view mode to use this command ");
+	message (1, MSG_ERROR, _(" Both panels should be on the listing view mode to use this command "));
     }
 }
 
@@ -844,13 +844,13 @@ void history_cmd (void)
 	    input_w (cmdline)->need_push = 0;
     }
     if (!input_w (cmdline)->history){
-	message (1, " Error ", " The command history is empty ");
+	message (1, MSG_ERROR, _(" The command history is empty "));
 	return;
     }
     current = input_w (cmdline)->history;
     while (current->prev)
 	current = current->prev;
-    listbox = create_listbox_window (60, 10, " Command history ",
+    listbox = create_listbox_window (60, 10, _(" Command history "),
 				     "[Command Menu]");
     while (current){
 	LISTBOX_APPEND_TEXT (listbox, 0, current->text,
@@ -892,8 +892,8 @@ view_other_cmd (void)
 
     if (!xterm_flag && !console_flag && !use_subshell){
 	if (message_flag)
-	    message (1, " Error ", " Not an xterm or Linux console; \n"
-				   " the panels cannot be toggled. ");
+	    message (1, MSG_ERROR, _(" Not an xterm or Linux console; \n"
+				     " the panels cannot be toggled. "));
 	message_flag = FALSE;
     } else {
 #ifndef HAVE_X
@@ -934,7 +934,7 @@ view_other_cmd (void)
 	{
 	    if (output_starts_shell){
 		fprintf (stderr,
-		 "Type `exit' to return to the Midnight Commander\n\r\n\r");
+		 _("Type `exit' to return to the Midnight Commander\n\r\n\r"));
 		my_system (1, shell, NULL);
 	    } else
 		get_key_code (0);
@@ -986,7 +986,7 @@ do_link (int symbolic_link, char *fname)
     if (!symbolic_link){
 	stat_r = mc_stat (fname, &s);
 	if (stat_r != 0){
-	    message (1, " Error ", " Couldn't stat %s \n %s ",
+	    message (1, MSG_ERROR, _(" Couldn't stat %s \n %s "),
 		     fname, unix_error_string (errno));
 	    return;
 	}
@@ -995,9 +995,9 @@ do_link (int symbolic_link, char *fname)
     }
     
     if (!symbolic_link){
-        src = copy_strings (" Link ", name_trunc (fname, 46), 
-            " to:", NULL);
-	dest = input_expand_dialog (" Link ", src, "");
+        src = copy_strings (_(" Link "), name_trunc (fname, 46), 
+            _(" to:"), NULL);
+	dest = input_expand_dialog (_(" Link "), src, "");
 	free (src);
 	if (!dest)
 	    return;
@@ -1007,7 +1007,7 @@ do_link (int symbolic_link, char *fname)
 	}
 	save_cwds_stat ();
 	if (-1 == mc_link (fname, dest))
-	    message (1, " Error ", " link: %s ", unix_error_string (errno));
+	    message (1, MSG_ERROR, _(" link: %s "), unix_error_string (errno));
     } else {
 #ifdef OLD_SYMLINK_VERSION
         symlink_dialog (fname, "", &dest, &src);
@@ -1040,7 +1040,7 @@ do_link (int symbolic_link, char *fname)
 	    if (*src) {
 	        save_cwds_stat ();
 	        if (-1 == mc_symlink (dest, src))
-		    message (1, " Error ", " symlink: %s ",
+		    message (1, MSG_ERROR, _(" symlink: %s "),
 			     unix_error_string (errno));
 	    }
 	    free (src);
@@ -1066,18 +1066,18 @@ void edit_symlink_cmd (void)
     if (S_ISLNK (selection (cpanel)->buf.st_mode)) {
 	char buffer [MC_MAXPATHLEN], *p = selection (cpanel)->fname;
 	int i;
-	char *dest, *q = copy_strings (" Symlink ", name_trunc (p, 32), " points to:", NULL);
+	char *dest, *q = copy_strings (_(" Symlink "), name_trunc (p, 32), _(" points to:"), NULL);
 	
 	i = readlink (p, buffer, MC_MAXPATHLEN);
 	if (i > 0) {
 	    buffer [i] = 0;
-	    dest = input_expand_dialog (" Edit symlink ", q, buffer);
+	    dest = input_expand_dialog (_(" Edit symlink "), q, buffer);
 	    if (dest) {
 		if (*dest && strcmp (buffer, dest)) {
 		    save_cwds_stat ();
 		    mc_unlink (p);
 		    if (-1 == mc_symlink (dest, p))
-		        message (1, " Error ", " edit symlink: %s ",
+		        message (1, MSG_ERROR, _(" edit symlink: %s "),
 				 unix_error_string (errno));
 		    update_panels (UP_OPTIMIZE, UP_KEEPSEL, UP_KEEPSEL);
 		    repaint_screen ();
@@ -1101,8 +1101,8 @@ void other_symlink_cmd (void)
     p = concat_dir_and_file (cpanel->cwd, selection (cpanel)->fname);
     r = concat_dir_and_file (opanel->cwd, selection (cpanel)->fname);
     
-    q = copy_strings (" Link symbolically ", name_trunc (p, 32), " to:", NULL);
-    dest = input_expand_dialog (" Relative symlink ", q, r);
+    q = copy_strings (_(" Link symbolically "), name_trunc (p, 32), _(" to:"), NULL);
+    dest = input_expand_dialog (_(" Relative symlink "), q, r);
     if (dest) {
 	if (*dest) {
 	    t = strrchr (dest, PATH_SEP);
@@ -1113,7 +1113,7 @@ void other_symlink_cmd (void)
 		if (s) {
 		    save_cwds_stat ();
 		    if (-1 == mc_symlink (dest, s))
-		        message (1, " Error ", " relative symlink: %s ",
+		        message (1, MSG_ERROR, _(" relative symlink: %s "),
 				 unix_error_string (errno));
 		    update_panels (UP_OPTIMIZE, UP_KEEPSEL, UP_KEEPSEL);
 		    repaint_screen ();
@@ -1244,13 +1244,13 @@ static void nice_cd (char *text, char *xtext, char *help, char *prefix, int to_h
 
 void netlink_cmd (void)
 {
-    nice_cd (" Link to a remote machine ", machine_str,
+    nice_cd (_(" Link to a remote machine "), _(machine_str),
 	     "[Network File System]", "mc:", 1);
 }
 
 void ftplink_cmd (void)
 {
-    nice_cd (" FTP to machine ", machine_str,
+    nice_cd (_(" FTP to machine "), _(machine_str),
 	     "[FTP File System]", "ftp://", 1);
 }
 
@@ -1260,15 +1260,15 @@ void source_routing (void)
     char *source;
     struct hostent *hp;
     
-    source = input_dialog (" Socket source routing setup ",
-			   " Enter host name to use as a source routing hop: ",
+    source = input_dialog (_(" Socket source routing setup "),
+			   _(" Enter host name to use as a source routing hop: ")n,
 			   "");
     if (!source)
 	return;
 
     hp = gethostbyname (source);
     if (!hp){
-	message (1, " Host name ", " Error while looking up IP address ");
+	message (1, _(" Host name "), _(" Error while looking up IP address "));
 	return;
     }
     source_route = *((int *)hp->h_addr);
@@ -1279,9 +1279,9 @@ void source_routing (void)
 #ifdef USE_EXT2FSLIB
 void undelete_cmd (void)
 {
-    nice_cd (" Undelete files on an ext2 file system ",
-	     " Enter the file system name where you want to run the\n "
-	     " undelete file system on: (F1 for details)",
+    nice_cd (_(" Undelete files on an ext2 file system "),
+	     _(" Enter the file system name where you want to run the\n "
+	       " undelete file system on: (F1 for details)"),
 	     "[Undelete File System]", "undel:", 0);
 }
 #endif
@@ -1372,7 +1372,7 @@ void dirsizes_cmd (void)
 	free (p);
         if (pclose (f) < 0)
 #ifndef SCO_FLAVOR
-	    message (0, "Show directory sizes", "Pipe close failed");
+	    message (0, _("Show directory sizes"), _("Pipe close failed"));
 	else
 #else /* SCO_FLAVOR */
  	/* 
@@ -1385,16 +1385,21 @@ void dirsizes_cmd (void)
 	close_error_pipe (0, 0);
 	paint_panel (panel);
     } else
-        close_error_pipe (1, "Cannot invoke du command.");
+        close_error_pipe (1, _("Cannot invoke du command."));
 }
 #endif
 
 void
 save_setup_cmd (void)
 {
+    char *str;
+    
     save_setup ();
     sync_profiles ();
-    message (0, " Setup ", " Setup saved to ~/" PROFILE_NAME);
+    str = copy_strings ( _(" Setup saved to ~/"), PROFILE_NAME, NULL);
+    
+    message (0, _(" Setup "), str);
+    free (str);
 }
 
 void

@@ -203,7 +203,6 @@ x_create_panel_container (int which)
 void
 x_panel_container_show (widget_data wdata)
 {
-	printf ("x_panel_container_show\n");
 	gtk_widget_show (GTK_WIDGET (wdata));
 }
 
@@ -221,7 +220,6 @@ x_add_widget (Dlg_head *h, Widget_Item *w)
 static int
 gnome_dlg_send_destroy (GtkWidget *widget, GdkEvent *event, Dlg_head *h)
 {
-	printf ("destruyendo\n");
 	h->ret_value = B_CANCEL;
 	dlg_stop (h);
 	return TRUE;
@@ -334,10 +332,7 @@ dialog_panel_callback (struct Dlg_head *h, int id, int msg)
 
 		current_widget = (void *) h->current->widget;
 
-		printf ("Got an enter\n");
 		if (current_widget == p->filter_w){
-			printf ("It is the filter\n");
-			
 			in = (WInput *) current_widget;
 			set_panel_filter_to (p, strdup (in->buffer));
 		}

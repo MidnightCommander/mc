@@ -83,19 +83,19 @@ x_create_button (Dlg_head *h, widget_data parent, WButton *b)
 	char *stock;
 	int tag;
 
-	if (strcasecmp (b->text, "ok") == 0)
+	if (strcasecmp (b->text, _("ok")) == 0)
 		stock = GNOME_STOCK_BUTTON_OK;
-	else if (strcasecmp (b->text, "cancel") == 0)
+	else if (strcasecmp (b->text, _("cancel")) == 0)
 		stock = GNOME_STOCK_BUTTON_CANCEL;
-	else if (strcasecmp (b->text, "help") == 0)
+	else if (strcasecmp (b->text, _("help")) == 0)
 		stock = GNOME_STOCK_BUTTON_HELP;
-	else if (strcasecmp (b->text, "yes") == 0)
+	else if (strcasecmp (b->text, _("yes")) == 0)
 		stock = GNOME_STOCK_BUTTON_YES;
-	else if (strcasecmp (b->text, "no") == 0)
+	else if (strcasecmp (b->text, _("no")) == 0)
 		stock = GNOME_STOCK_BUTTON_NO;
-	else if (strcasecmp (b->text, "exit") == 0)
+	else if (strcasecmp (b->text, _("exit")) == 0)
 		stock = GNOME_STOCK_BUTTON_CLOSE;
-	else if (strcasecmp (b->text, "abort") == 0)
+	else if (strcasecmp (b->text, _("abort")) == 0)
 		stock = GNOME_STOCK_BUTTON_CANCEL;
 	else
 		stock = 0;
@@ -307,7 +307,6 @@ listbox_select (GtkWidget *widget, int row, int column, GdkEvent *event, WListbo
 	}
 	
 	if (event->type == GDK_2BUTTON_PRESS){
-		printf ("Activando\n");
 		switch (l->action){
 		case listbox_nothing:
 			break;

@@ -5,7 +5,7 @@ rootdir = $(srcdir)
 @MCFGR@@MCF@
 
 foreigndirs=nt os2
-unixdirs=vfs lib doc slang edit src tk xv gnome icons 
+unixdirs=vfs lib doc slang edit src tk xv gnome icons intl @POSUB@
 alldirs=$(unixdirs) $(foreigndirs) 
 subdirs=$(alldirs)
 
@@ -17,7 +17,7 @@ DISTMAIN =	configure configure.in NEWS README INSTALL INSTALL.FAST \
 		Makefile.in FAQ COPYING create_vcs install-sh \
 		config.h.in aclocal.m4 acconfig.h VERSION mcfn_install.in \
 		Make.common.in README.NT mc.spec.in mc.spec README.OS2 \
-		VERSION.in
+		VERSION.in ABOUT-NLS mkinstalldirs
 
 all: 
 	@for dir in ${unixdirs}; do \

@@ -69,10 +69,10 @@ struct {
     int ret_cmd, flags, y, x;
     char *text;
 } chown_advanced_but [BUTTONS] = {
-    { B_CANCEL, NORMAL_BUTTON, 4, 55, "&Cancel" },
-    { B_ENTER,  DEFPUSH_BUTTON,4, 45, "&Set" },
-    { B_SKIP,   NORMAL_BUTTON, 4, 36, "S&kip" },
-    { B_SETALL, NORMAL_BUTTON, 4, 24, "Set &all"},
+    { B_CANCEL, NORMAL_BUTTON, 4, 55, N_("&Cancel") },
+    { B_ENTER,  DEFPUSH_BUTTON,4, 45, N_("&Set") },
+    { B_SKIP,   NORMAL_BUTTON, 4, 36, N_("S&kip") },
+    { B_SETALL, NORMAL_BUTTON, 4, 24, N_("Set &all")},
     { B_ENTER,  NARROW_BUTTON, 0, 47, "               "},
     { B_ENTER,  NARROW_BUTTON, 0, 29, "               "},
     { B_ENTER,  NARROW_BUTTON, 0, 19, "   "},
@@ -347,28 +347,28 @@ static void chown_refresh (void)
     draw_box (ch_dlg, 1, 2, 11, 70);
 
     dlg_move (ch_dlg, BY - 1, 8);
-    addstr ("owner");
+    addstr (_("owner"));
     dlg_move (ch_dlg, BY - 1, 16);
-    addstr ("group");
+    addstr (_("group"));
     dlg_move (ch_dlg, BY - 1, 24);
-    addstr ("other");
+    addstr (_("other"));
     
     dlg_move (ch_dlg, BY - 1, 35);
-    addstr ("owner");
+    addstr (_("owner"));
     dlg_move (ch_dlg, BY - 1, 53);
-    addstr ("group");
+    addstr (_("group"));
     
     dlg_move (ch_dlg, 3, 4);
-    addstr ("On");
+    addstr (_("On"));
     dlg_move (ch_dlg, BY + 1, 4);
-    addstr ("Flag");
+    addstr (_("Flag"));
     dlg_move (ch_dlg, BY + 2, 4);
-    addstr ("Mode");
+    addstr (_("Mode"));
     
 
     if (!single_set){
 	dlg_move (ch_dlg, 3, 54);
-	printw ("%6d of %d", files_on_begin - (cpanel->marked) + 1,
+	printw (_("%6d of %d"), files_on_begin - (cpanel->marked) + 1,
 		   files_on_begin);
     }
 
@@ -376,7 +376,7 @@ static void chown_refresh (void)
 
     attrset (COLOR_HOT_NORMAL);
     dlg_move (ch_dlg, 1, 24);
-    addstr (" Chown advanced command ");
+    addstr (_(" Chown advanced command "));
 }
 
 static void chown_info_update ()
@@ -610,12 +610,12 @@ static void apply_advanced_chowns (struct stat *sf)
     fname = cpanel->dir.list[current_file].fname;
     need_update = end_chown = 1;
     if (mc_chmod (fname, get_mode ()) == -1)
-	message (1, " Error ", " Couldn't chmod \"%s\" \n %s ",
+	message (1, MSG_ERROR, _(" Couldn't chmod \"%s\" \n %s "),
 		 fname, unix_error_string (errno));
     /* call mc_chown only, if mc_chmod didn't fail */
     else if (mc_chown (fname, (ch_flags[9] == '+') ? sf->st_uid : -1,
 		       (ch_flags[10] == '+') ? sf->st_gid : -1) == -1)
-	message (1, " Error ", " Couldn't chown \"%s\" \n %s ",
+	message (1, MSG_ERROR, _(" Couldn't chown \"%s\" \n %s "),
 		 fname, unix_error_string (errno));
     do_file_mark (cpanel, current_file, 0);
 
@@ -626,11 +626,11 @@ static void apply_advanced_chowns (struct stat *sf)
 	    break;
 	ch_cmode = sf->st_mode;
 	if (mc_chmod (fname, get_mode ()) == -1)
-	    message (1, " Error ", " Couldn't chmod \"%s\" \n %s ",
+	    message (1, MSG_ERROR, _(" Couldn't chmod \"%s\" \n %s "),
 		     fname, unix_error_string (errno));
 	/* call mc_chown only, if mc_chmod didn't fail */
 	else if (mc_chown (fname, (ch_flags[9] == '+') ? a_uid : -1, (ch_flags[10] == '+') ? a_gid : -1) == -1)
-	    message (1, " Error ", " Couldn't chown \"%s\" \n %s ",
+	    message (1, MSG_ERROR, _(" Couldn't chown \"%s\" \n %s "),
 		     fname, unix_error_string (errno));
 
 	do_file_mark (cpanel, current_file, 0);
@@ -644,12 +644,12 @@ void chown_advanced_cmd (void)
 
     if (!vfs_current_is_local ()) {
 	if (vfs_current_is_extfs ()) {
-	    message (1, " Oops... ",
-		     " I can't run the Advanced Chown command on an extfs ");
+	    message (1, _(" Oops... "),
+		     _(" I can't run the Advanced Chown command on an extfs "));
 	    return;
 	} else if (vfs_current_is_tarfs ()) {
-	    message (1, " Oops... ",
-		     " I can't run the Advanced Chown command on a tarfs ");
+	    message (1, _(" Oops... "),
+		     _(" I can't run the Advanced Chown command on a tarfs "));
 	    return;
 	}
     }
@@ -683,11 +683,11 @@ void chown_advanced_cmd (void)
 	case B_ENTER:
 	    need_update = 1;
 	    if (mc_chmod (fname, get_mode ()) == -1)
-		message (1, " Error ", " Couldn't chmod \"%s\" \n %s ",
+		message (1, MSG_ERROR, _(" Couldn't chmod \"%s\" \n %s "),
 			 fname, unix_error_string (errno));
 	    /* call mc_chown only, if mc_chmod didn't fail */
 	    else if (mc_chown (fname, (ch_flags[9] == '+') ? sf_stat->st_uid : -1, (ch_flags[10] == '+') ? sf_stat->st_gid : -1) == -1)
-		message (1, " Error ", " Couldn't chown \"%s\" \n %s ",
+		message (1, MSG_ERROR, _(" Couldn't chown \"%s\" \n %s "),
 			 fname, unix_error_string (errno));
 	    break;
 	case B_SETALL:

@@ -63,9 +63,11 @@ extern int ftpfs_always_use_proxy;
 
 static char **displays_status;
 
+/* Controls whether the array strings have been translated */
+static int i18n_displays_flag;
 static char *displays [LIST_TYPES] = {
-    "Full file list", "Brief file list", "Long file list",
-    "User:"
+    N_("Full file list"), N_("Brief file list"), N_("Long file list"),
+    N_("User:")
 };
 
 static char *formats_section = "Formats";
@@ -79,7 +81,7 @@ static char *select_format (WInput *i)
     Chooser  *my_user_list;
     WListbox *p;
 
-    my_user_list = new_chooser (DISPLAY_Y - 4, DISPLAY_X - 4, "Listing Mode...",
+    my_user_list = new_chooser (DISPLAY_Y - 4, DISPLAY_X - 4, _("Listing Mode..."),
 				CHOOSE_EDITABLE);
     p = my_user_list->listbox;
     p->allow_duplicates = 0;
@@ -128,12 +130,12 @@ static int display_callback (struct Dlg_head *h, int id, int Msg)
 
 	attrset (COLOR_HOT_NORMAL);
 	dlg_move (h, 1, (DISPLAY_X-17)/2);
-	addstr (" Listing mode ");
+	addstr (_(" Listing mode "));
 	attrset (COLOR_NORMAL);
 	dlg_move (h, 11, 3);
-	addstr ("On input lines, use C-v to get a listbox");
+	addstr (_("On input lines, use C-v to get a listbox"));
 	dlg_move (h, 12, 3);
-	addstr ("with other formats");
+	addstr (_("with other formats"));
 	break;
 
     case DLG_UNFOCUS:
@@ -195,25 +197,32 @@ static void display_init (int radio_sel, char *init_text,
 			  int _check_status, char ** _status)
 {
     displays_status = _status;
-    
+
+    if (!i18n_displays_flag){
+	int i;
+
+	for (i = 0; i < LIST_TYPES; i++)
+	    displays [i] = _(displays [i]);
+        i18n_displays_flag = 1;
+    }
     dd = create_dlg (0, 0, DISPLAY_Y, DISPLAY_X, dialog_colors,
 		     display_callback, "[Left and Right Menus]", "display",
 		     DLG_CENTER | DLG_GRID);
 
-    x_set_dialog_title (dd, "Listing mode");
+    x_set_dialog_title (dd, _("Listing mode"));
     add_widgetl (dd,
-        button_new (4, 32, B_CANCEL, NORMAL_BUTTON, "&Cancel", 0, 0, "cancel-button"),
+        button_new (4, 32, B_CANCEL, NORMAL_BUTTON, _("&Cancel"), 0, 0, "cancel-button"),
 	XV_WLAY_RIGHTOF);
 
     add_widgetl (dd,
-	button_new (3, 32, B_ENTER, DEFPUSH_BUTTON, "&Ok", 0, 0, "ok-button"),
+	button_new (3, 32, B_ENTER, DEFPUSH_BUTTON, _("&Ok"), 0, 0, "ok-button"),
 	 XV_WLAY_CENTERROW);
 
     status = input_new (9, 8, INPUT_COLOR, 34, _status [radio_sel], "mini-input");
     add_widgetl (dd, status, XV_WLAY_RIGHTDOWN);
     input_set_point (status, 0);
 
-    check_status = check_new (8, 4, _check_status, "user &Mini status", "mini-status");
+    check_status = check_new (8, 4, _check_status, _("user &Mini status"), "mini-status");
     add_widgetl (dd, check_status, XV_WLAY_NEXTROW);
     
     user = input_new  (6, 14, INPUT_COLOR, 29, init_text, "user-fmt-input");
@@ -297,17 +306,17 @@ sortfn *sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive)
     dd = create_dlg (0, 0, SORT_Y, SORT_X, dialog_colors, common_dialog_callback,
 		     "[Left and Right Menus]", "sort", DLG_CENTER | DLG_GRID);
 		     
-    x_set_dialog_title (dd, "Sort order");
+    x_set_dialog_title (dd, _("Sort order"));
 
-    add_widgetl (dd, button_new (8, 23, B_CANCEL, NORMAL_BUTTON, "&Cancel", 0, 0, "cancel-button"),
+    add_widgetl (dd, button_new (8, 23, B_CANCEL, NORMAL_BUTTON, _("&Cancel"), 0, 0, "cancel-button"),
         XV_WLAY_CENTERROW);
 
-    add_widgetl (dd, button_new (7, 23, B_ENTER, DEFPUSH_BUTTON, "&Ok", 0, 0, "ok-button"),
+    add_widgetl (dd, button_new (7, 23, B_ENTER, DEFPUSH_BUTTON, _("&Ok"), 0, 0, "ok-button"),
 	XV_WLAY_RIGHTDOWN);
 
-    case_sense = check_new (4, 19, *case_sensitive, "case sensi&tive", "case-check");
+    case_sense = check_new (4, 19, *case_sensitive, _("case sensi&tive"), "case-check");
     add_widgetl (dd, case_sense, XV_WLAY_RIGHTDOWN);
-    c = check_new (3, 19, *reverse, "&Reverse", "reverse-check");
+    c = check_new (3, 19, *reverse, _("&Reverse"), "reverse-check");
     add_widgetl (dd, c, XV_WLAY_RIGHTDOWN);
 
     for (i = SORT_TYPES-1; i >= 0; i--){
@@ -340,25 +349,25 @@ static int my_execute;
 static int my_exit;
 
 static QuickWidget conf_widgets [] = {
-{ quick_button,   4, 6, 4, CONFY, "&Cancel",
+{ quick_button,   4, 6, 4, CONFY, N_("&Cancel"),
       0, B_CANCEL, 0, 0, XV_WLAY_RIGHTOF, "c" },
-{ quick_button,   4, 6, 3, CONFY, "&Ok",
+{ quick_button,   4, 6, 3, CONFY, N_("&Ok"),
       0, B_ENTER, 0, 0, XV_WLAY_CENTERROW, "o" },
 
-{ quick_checkbox, 1, 13, 6, CONFY, " confirm &Exit ",
+{ quick_checkbox, 1, 13, 6, CONFY, N_(" confirm &Exit "),
       9, 0, &my_exit, 0, XV_WLAY_BELOWCLOSE, "e" },
-{ quick_checkbox, 1, 13, 5, CONFY, " confirm e&Xecute ",
+{ quick_checkbox, 1, 13, 5, CONFY, N_(" confirm e&Xecute "),
       10, 0, &my_execute, 0, XV_WLAY_BELOWCLOSE, "x" },
-{ quick_checkbox, 1, 13, 4, CONFY, " confirm o&Verwrite ",
+{ quick_checkbox, 1, 13, 4, CONFY, N_(" confirm o&Verwrite "),
       10, 0, &my_overwrite, 0, XV_WLAY_BELOWCLOSE, "ov" },
-{ quick_checkbox, 1, 13, 3, CONFY, " confirm &Delete ",
+{ quick_checkbox, 1, 13, 3, CONFY, N_(" confirm &Delete "),
       9, 0, &my_delete, 0, XV_WLAY_BELOWCLOSE, "de" },
 { 0,              0, 0, 0, 0, 0, 0, 0, 0, 0, 0, XV_WLAY_DONTCARE }
 };
 
 static QuickDialog confirmation =
-{ CONFX, CONFY, -1, -1, " Confirmation ", "[Confirmation]", "quick_confirm",
-      conf_widgets };
+{ CONFX, CONFY, -1, -1, N_(" Confirmation "), "[Confirmation]", "quick_confirm",
+      conf_widgets, 0 };
 
 void confirm_box ()
 {
@@ -366,6 +375,7 @@ void confirm_box ()
     my_overwrite = confirm_overwrite;
     my_execute   = confirm_execute;
     my_exit      = confirm_exit;
+
     if (quick_dialog (&confirmation) != B_CANCEL){
 	confirm_delete    = my_delete;
 	confirm_overwrite = my_overwrite;
@@ -381,14 +391,14 @@ static int new_mode;
 static int new_meta;
 
 char *display_bits_str [] =
-{ "Full 8 bits output", "ISO 8859-1", "7 bits" };
+{ N_("Full 8 bits output"), N_("ISO 8859-1"), N_("7 bits") };
 
 static QuickWidget display_widgets [] = {
-{ quick_button,   4,  6,    4, DISPY, "&Cancel",
+{ quick_button,   4,  6,    4, DISPY, N_("&Cancel"),
       0, B_CANCEL, 0, 0, XV_WLAY_CENTERROW, "c" },
-{ quick_button,   4,  6,    3, DISPY, "&Ok",
+{ quick_button,   4,  6,    3, DISPY, N_("&Ok"),
       0, B_ENTER, 0, 0, XV_WLAY_CENTERROW, "o" },
-{ quick_checkbox, 4, DISPX, 7, DISPY, "F&ull 8 bits input",
+{ quick_checkbox, 4, DISPX, 7, DISPY, N_("F&ull 8 bits input"),
       0, 0, &new_meta, 0, XV_WLAY_BELOWCLOSE, "u" },
 { quick_radio,    4, DISPX, 3, DISPY, "", 3, 0,
       &new_mode, display_bits_str, XV_WLAY_BELOWCLOSE, "r" },
@@ -396,8 +406,8 @@ static QuickWidget display_widgets [] = {
 };
 
 static QuickDialog display_bits =
-{ DISPX, DISPY, -1, -1, " Display bits ", "[Display bits]",
-  "dbits", display_widgets };
+{ DISPX, DISPY, -1, -1, N_(" Display bits "), "[Display bits]",
+  "dbits", display_widgets, 0 };
 
 void display_bits_box ()
 {
@@ -409,7 +419,7 @@ void display_bits_box ()
 	current_mode = 1;
     else
 	current_mode = 2;
-    
+
     display_widgets [3].value = current_mode;
     new_meta = !use_8th_bit_as_meta;
     if (quick_dialog (&display_bits) != B_ENTER)
@@ -523,46 +533,46 @@ static int ret_use_netrc;
 #endif
 
 char *confvfs_str [] =
-{ "Always to memory", "If size less than:" };
+{ N_("Always to memory"), N_("If size less than:") };
 
 static QuickWidget confvfs_widgets [] = {
-{ quick_button,   30,  VFSX,    VFSY - 3, VFSY, "&Cancel",
+{ quick_button,   30,  VFSX,    VFSY - 3, VFSY, N_("&Cancel"),
       0, B_CANCEL, 0, 0, XV_WLAY_RIGHTOF, "button-cancel" },
-{ quick_button,   12, VFSX,    VFSY - 3, VFSY, "&Ok",
+{ quick_button,   12, VFSX,    VFSY - 3, VFSY, N_("&Ok"),
       0, B_ENTER, 0, 0, XV_WLAY_CENTERROW, "button-ok" },
 #if defined(USE_NETCODE)
 { quick_input,    30, VFSX, 10, VFSY, "", 22, 0, 0, &ret_ftp_proxy,
       XV_WLAY_RIGHTDOWN, "input-ftp-proxy" },
-{ quick_checkbox,    4, VFSX, 10, VFSY, "&Always use ftp proxy", 0, 0,
+{ quick_checkbox,    4, VFSX, 10, VFSY, N_("&Always use ftp proxy"), 0, 0,
       &ftpfs_always_use_proxy, 0, XV_WLAY_RIGHTDOWN, "check-ftp-proxy" },
-{ quick_label,    46, VFSX, 9, VFSY, "sec",
+{ quick_label,    46, VFSX, 9, VFSY, N_("sec"),
       0, 0, 0, 0, XV_WLAY_RIGHTOF, "label-sec" },
 { quick_input,    35, VFSX, 9, VFSY, "", 10, 0, 0, &ret_directory_timeout,
       XV_WLAY_RIGHTDOWN, "input-timeout" },
-{ quick_label,     4, VFSX, 9, VFSY, "ftpfs directory cache timeout:",
+{ quick_label,     4, VFSX, 9, VFSY, N_("ftpfs directory cache timeout:"),
       0, 0, 0, 0, XV_WLAY_NEXTROW, "label-cache"},
 { quick_input,    28, VFSX, 8, VFSY, "", 24, 0, 0, &ret_passwd,
       XV_WLAY_RIGHTDOWN, "input-passwd" },
-{ quick_label,     4, VFSX, 8, VFSY, "ftp anonymous password:",
+{ quick_label,     4, VFSX, 8, VFSY, N_("ftp anonymous password:"),
       0, 0, 0, 0, XV_WLAY_NEXTROW, "label-pass"},
 #endif
 { quick_input,    26, VFSX, 6, VFSY, "", 10, 0, 0, &ret_limit, 
       XV_WLAY_RIGHTDOWN, "input-limit" },
 { quick_radio,    4, VFSX, 5, VFSY, "", 2, 0,
       &vfs_use_limit, confvfs_str, XV_WLAY_BELOWCLOSE, "radio" },
-{ quick_label,    4,  VFSX, 4, VFSY, "Gzipped tar archive extract:", 
+{ quick_label,    4,  VFSX, 4, VFSY, N_("Gzipped tar archive extract:"), 
       0, 0, 0, 0, XV_WLAY_NEXTROW, "label-tar" },
 { quick_label,    46, VFSX, 3, VFSY, "sec",
       0, 0, 0, 0, XV_WLAY_RIGHTOF, "label-sec2" },
 { quick_input,    35, VFSX, 3, VFSY, "", 10, 0, 0, &ret_timeout, 
       XV_WLAY_RIGHTOF, "input-timo-vfs" },
-{ quick_label,    4,  VFSX, 3, VFSY, "Timeout for freeing VFSs:", 
+{ quick_label,    4,  VFSX, 3, VFSY, N_("Timeout for freeing VFSs:"), 
       0, 0, 0, 0, XV_WLAY_BELOWCLOSE, "label-vfs" },
 { 0,              0, 0, 0, 0, 0, 0, 0, 0, 0, 0, XV_WLAY_DONTCARE, 0 }
 };
 
 static QuickDialog confvfs_dlg =
-{ VFSX, VFSY, -1, -1, " Virtual File System Setting ", "[Virtual FS]", "quick_vfs", confvfs_widgets };
+{ VFSX, VFSY, -1, -1, N_(" Virtual File System Setting "), "[Virtual FS]", "quick_vfs", confvfs_widgets, 0 };
 
 #if defined(USE_NETCODE)
 #define VFS_WIDGETBASE 7
@@ -647,8 +657,8 @@ char *cd_dialog (void)
     QuickWidget quick_widgets [] = {
 #ifdef HAVE_TK
 #define INPUT_INDEX 2
-    { quick_button, 0, 1, 0, 1, "&Cancel", 0, B_CANCEL, 0, 0, XV_WLAY_DONTCARE, "cancel" },
-    { quick_button, 0, 1, 0, 1, "&Ok",     0, B_ENTER,  0, 0, XV_WLAY_DONTCARE, "ok" },
+    { quick_button, 0, 1, 0, 1, N_("&Cancel"), 0, B_CANCEL, 0, 0, XV_WLAY_DONTCARE, "cancel" },
+    { quick_button, 0, 1, 0, 1, N_("&Ok"),     0, B_ENTER,  0, 0, XV_WLAY_DONTCARE, "ok" },
 #else
 #define INPUT_INDEX 0
 #endif
@@ -662,6 +672,7 @@ char *cd_dialog (void)
     Quick_input.title = "Quick cd";
     Quick_input.help  = "[Quick cd]";
     Quick_input.class = "quick_input";
+    Quick_input.i18n  = 0;
     quick_widgets [INPUT_INDEX].text = "";
     quick_widgets [INPUT_INDEX].value = 2; /* want cd like completion */
     quick_widgets [INPUT_INDEX+1].text = "cd";
@@ -688,9 +699,9 @@ void symlink_dialog (char *existing, char *new, char **ret_existing,
 #undef INPUT_INDEX
 #if defined(HAVE_TK) || defined(HAVE_GNOME)
 #define INPUT_INDEX 2
-    { quick_button, 0, 1, 0, 1, "&Cancel", 0, B_CANCEL, 0, 0,
+    { quick_button, 0, 1, 0, 1, _("&Cancel"), 0, B_CANCEL, 0, 0,
 	  XV_WLAY_DONTCARE, "cancel" },
-    { quick_button, 0, 1, 0, 1, "&Ok", 0, B_ENTER, 0, 0,
+    { quick_button, 0, 1, 0, 1, _("&Ok"), 0, B_ENTER, 0, 0,
 	  XV_WLAY_DONTCARE, "ok" },
 #else
 #define INPUT_INDEX 0
@@ -706,10 +717,11 @@ void symlink_dialog (char *existing, char *new, char **ret_existing,
     Quick_input.title = "Symbolic link";
     Quick_input.help  = "[File Menu]";
     Quick_input.class = "quick_symlink";
+    Quick_input.i18n  = 0;
     quick_widgets [INPUT_INDEX].text = new;
-    quick_widgets [INPUT_INDEX+1].text = "Symbolic link filename:";
+    quick_widgets [INPUT_INDEX+1].text = _("Symbolic link filename:");
     quick_widgets [INPUT_INDEX+2].text = existing;
-    quick_widgets [INPUT_INDEX+3].text = "Existing filename (filename symlink will point to):";
+    quick_widgets [INPUT_INDEX+3].text = _("Existing filename (filename symlink will point to):");
     Quick_input.xpos = -1;
     quick_widgets [INPUT_INDEX].str_result = ret_new;
     quick_widgets [INPUT_INDEX+2].str_result = ret_existing;
@@ -734,9 +746,14 @@ static Dlg_head *jobs_dlg;
 static void
 jobs_fill_listbox (void)
 {
-    char *state_str [] = { "Running ", "Stopped" };
+    static char *state_str [2];
     TaskList *tl = task_list;
 
+    if (!state_str [0]){
+       state_str [0] = _("Running ");
+       state_str [1] = _("Stopped");
+    }
+    
     while (tl){
 	char *s;
 
@@ -788,18 +805,18 @@ jobs_cmd (void)
     jobs_dlg = create_dlg (0, 0, JOBS_Y, JOBS_X, dialog_colors,
 			   common_dialog_callback, "[Background jobs]", "jobs",
 			   DLG_CENTER | DLG_GRID);
-    x_set_dialog_title (jobs_dlg, "Background Jobs");
+    x_set_dialog_title (jobs_dlg, _("Background Jobs"));
     
     bg_list = listbox_new (2, 3, JOBS_X-7, JOBS_Y-9, listbox_nothing, 0, "listbox");
     add_widget (jobs_dlg, bg_list);
     add_widget (jobs_dlg,
-		button_new (JOBS_Y-4, 35, B_CANCEL, NORMAL_BUTTON, "&Ok", 0, 0, "button-ok"));
+		button_new (JOBS_Y-4, 35, B_CANCEL, NORMAL_BUTTON, _("&Ok"), 0, 0, "button-ok"));
     add_widget (jobs_dlg,
-		button_new (JOBS_Y-4, 23, B_KILL, NORMAL_BUTTON, "&Kill", task_cb, 0, "button-kill"));
+		button_new (JOBS_Y-4, 23, B_KILL, NORMAL_BUTTON, _("&Kill"), task_cb, 0, "button-kill"));
     add_widget (jobs_dlg,
-		button_new (JOBS_Y-4, 12, B_RESUME, NORMAL_BUTTON, "&Resume", task_cb, 0, "button-cont"));
+		button_new (JOBS_Y-4, 12, B_RESUME, NORMAL_BUTTON, _("&Resume"), task_cb, 0, "button-cont"));
     add_widget (jobs_dlg,
-		button_new (JOBS_Y-4, 3, B_STOP, NORMAL_BUTTON, "&Stop", task_cb, 0, "button-stop"));
+		button_new (JOBS_Y-4, 3, B_STOP, NORMAL_BUTTON, _("&Stop"), task_cb, 0, "button-stop"));
 
     
     /* Insert all of task information in the list */

@@ -53,22 +53,22 @@ static int case_sensitive = OS_SORT_CASE_SENSITIVE_DEFAULT;
 #define MY_ISDIR(x) ( (S_ISDIR (x->buf.st_mode) || x->f.link_to_dir) ? 1 : 0)
 
 sort_orders_t sort_orders [SORT_TYPES_TOTAL] = {
-    { "Unsorted",    unsorted },
-    { "Name",        sort_name },
-    { "Extension",   sort_ext },
-    { "Modify time", sort_time },
-    { "Access time", sort_atime },
-    { "Change time", sort_ctime },
-    { "Size",        sort_size },
-    { "Inode",       sort_inode },
+    { N_("Unsorted"),    unsorted },
+    { N_("Name"),        sort_name },
+    { N_("Extension"),   sort_ext },
+    { N_("Modify time"), sort_time },
+    { N_("Access time"), sort_atime },
+    { N_("Change time"), sort_ctime },
+    { N_("Size"),        sort_size },
+    { N_("Inode"),       sort_inode },
 
     /* New sort orders */
-    { "Type",        sort_type },
-    { "Links",       sort_links },
-    { "NGID",        sort_ngid },
-    { "NUID",        sort_nuid },
-    { "Owner",       sort_owner },
-    { "Group",       sort_group }
+    { N_("Type"),        sort_type },
+    { N_("Links"),       sort_links },
+    { N_("NGID"),        sort_ngid },
+    { N_("NUID"),        sort_nuid },
+    { N_("Owner"),       sort_owner },
+    { N_("Group"),       sort_group }
 };
 
 #define string_sortcomp(a,b) (case_sensitive ? strcmp (a,b) : strcasecmp (a,b))
@@ -640,7 +640,7 @@ char *sort_type_to_name (sortfn *sort_fn)
 
     for (i = 0; i < SORT_TYPES; i++)
 	if ((sortfn *) (sort_orders [i].sort_fn) == sort_fn)
-	    return sort_orders [i].sort_name;
+	    return _(sort_orders [i].sort_name);
 
     return _("Unknown");
 }

@@ -78,11 +78,11 @@ static struct {
     int ret_cmd, flags, y, x;
     char *text;
 } chown_but[BUTTONS] = {
-    { B_CANCEL, NORMAL_BUTTON,  0, 54, "&Cancel" },
-    { B_ENTER,  DEFPUSH_BUTTON, 0, 44, "&Set" },
-    { B_SETUSR, NORMAL_BUTTON,  0, 30, "Set &users" },
-    { B_SETGRP, NORMAL_BUTTON,  0, 15, "Set &groups" },
-    { B_SETALL, NORMAL_BUTTON,  0, 3,  "Set &all" },
+    { B_CANCEL, NORMAL_BUTTON,  0, 54, N_("&Cancel") },
+    { B_ENTER,  DEFPUSH_BUTTON, 0, 44, N_("&Set") },
+    { B_SETUSR, NORMAL_BUTTON,  0, 30, N_("Set &users") },
+    { B_SETGRP, NORMAL_BUTTON,  0, 15, N_("Set &groups") },
+    { B_SETALL, NORMAL_BUTTON,  0, 3,  N_("Set &all") },
 };
 
 #define LABELS 5 
@@ -110,25 +110,25 @@ static void chown_refresh (void)
 
     attrset (COLOR_NORMAL);
     dlg_move (ch_dlg, TY + 1, TX + 1);
-    addstr (" Name ");
+    addstr (N_(" Name "));
     dlg_move (ch_dlg, TY + 3, TX + 1);
-    addstr (" Owner name ");
+    addstr (N_(" Owner name "));
     dlg_move (ch_dlg, TY + 5, TX + 1);
-    addstr (" Group name ");
+    addstr (N_(" Group name "));
     dlg_move (ch_dlg, TY + 7, TX + 1);
-    addstr (" Size ");
+    addstr (N_(" Size "));
     dlg_move (ch_dlg, TY + 9, TX + 1);
-    addstr (" Permission ");
+    addstr (N_(" Permission "));
     
     attrset (COLOR_HOT_NORMAL);
     dlg_move (ch_dlg, 1, 28);
-    addstr (" Chown command ");
+    addstr (N_(" Chown command "));
     dlg_move (ch_dlg, UY, UX + 1);
-    addstr (" User name ");
+    addstr (N_(" User name "));
     dlg_move (ch_dlg, GY, GX + 1);
-    addstr (" Group name ");
+    addstr (N_(" Group name "));
     dlg_move (ch_dlg, TY, TX + 1);
-    addstr (" File ");
+    addstr (N_(" File "));
 }
 #endif
 
@@ -170,7 +170,7 @@ static void init_chown (void)
     ch_dlg = create_dlg (0, 0, 18, 74, dialog_colors, chown_callback,
 			 "[Chown]", "chown", DLG_CENTER);
 
-#define XTRACT(i) BY+chown_but[i].y, BX+chown_but[i].x, chown_but[i].ret_cmd, chown_but[i].flags, chown_but[i].text, 0, 0, NULL
+#define XTRACT(i) BY+chown_but[i].y, BX+chown_but[i].x, chown_but[i].ret_cmd, chown_but[i].flags, _(chown_but[i].text), 0, 0, NULL
 
     tk_new_frame (ch_dlg, "b.");
     for (i = 0; i < BUTTONS-single_set; i++)
@@ -188,8 +188,8 @@ static void init_chown (void)
     l_user = listbox_new (UY + 1, UX + 1, 19, 10, 0, l_call, NULL);
     l_group = listbox_new (GY + 1, GX + 1, 19, 10, 0, l_call, NULL);
 
-    listbox_add_item (l_user, 0, 0, "<Unknown user>", NULL);	/* add fields for unknown names (numbers) */
-    listbox_add_item (l_group, 0, 0, "<Unknown group>", NULL);
+    listbox_add_item (l_user, 0, 0, _("<Unknown user>"), NULL);	/* add fields for unknown names (numbers) */
+    listbox_add_item (l_group, 0, 0, _("<Unknown group>"), NULL);
 
     setpwent ();		/* get and put user names in the listbox */
     while ((l_pass = getpwent ())) {
@@ -220,7 +220,7 @@ void chown_done (void)
 static inline void do_chown (uid_t u, gid_t g)
 {
     if (mc_chown (cpanel->dir.list [current_file].fname, u, g) == -1)
-	message (1, " Error ", " Couldn't chown \"%s\" \n %s ",
+	message (1, MSG_ERROR, _(" Couldn't chown \"%s\" \n %s "),
 	     cpanel->dir.list [current_file].fname, unix_error_string (errno));
 
     do_file_mark (cpanel, current_file, 0);
@@ -253,12 +253,12 @@ void chown_cmd (void)
 
     if (!vfs_current_is_local ()) {
 	if (vfs_current_is_extfs ()) {
-	    message (1, " Oops... ",
-		     " I can't run the Chown command on an extfs ");
+	    message (1, _(" Oops... "),
+		     _(" I can't run the Chown command on an extfs "));
 	    return;
 	} else if (vfs_current_is_tarfs ()) {
-	    message (1, " Oops... ",
-		     " I can't run the Chown command on a tarfs ");
+	    message (1, _(" Oops... "),
+		     _(" I can't run the Chown command on a tarfs "));
 	    return;
 	}
     }
@@ -337,7 +337,7 @@ void chown_cmd (void)
 	    if (ch_dlg->ret_value==B_ENTER) {
 		need_update = 1;
 		if (mc_chown (fname, new_user, new_group) == -1)
-		    message (1, " Error ", " Couldn't chown \"%s\" \n %s ",
+		    message (1, MSG_ERROR, _(" Couldn't chown \"%s\" \n %s "),
 	 		 fname, unix_error_string (errno));
 	    } else
 		apply_chowns (new_user, new_group);

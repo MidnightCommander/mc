@@ -75,7 +75,7 @@ void info_show_info (WInfo *info)
     info_box (info->widget.parent, info);
     attrset (MARKED_COLOR);
     widget_move (&info->widget, 1, 3);
-    printw ("Midnight Commander %s", VERSION);
+    printw (_("Midnight Commander %s"), VERSION);
     attrset (NORMAL_COLOR);
     widget_move (&info->widget, 2, 1);
     /* .ado: info->widget.x has wrong value (==0) on NT and OS/2, why? */
@@ -107,51 +107,51 @@ void info_show_info (WInfo *info)
     case 16:
 	widget_move (&info->widget, 16, 3);
 	if (myfs_stats.nfree >0 || myfs_stats.nodes > 0)
-	    printw ("Free nodes %d (%d%%) of %d",
+	    printw (_("Free nodes %d (%d%%) of %d"),
 		    myfs_stats.nfree,
 		    myfs_stats.total
 		    ? 100 * myfs_stats.nfree / myfs_stats.nodes : 0,
 		    myfs_stats.nodes);
 	else
-	    addstr ("No node information");
+	    addstr (_("No node information"));
 	
     case 15:
 	widget_move (&info->widget, 15, 3);
 	if (myfs_stats.avail > 0 || myfs_stats.total > 0){
-	    addstr ("Free space ");
+	    addstr (_("Free space "));
 	    print_bytesize (myfs_stats.avail, 1);
-	    printw (" (%d%%) of ", myfs_stats.total
+	    printw (_(" (%d%%) of "), myfs_stats.total
 		    ? 100 * myfs_stats.avail / myfs_stats.total : 0);
 	    print_bytesize (myfs_stats.total, 1);
 	} else
-	    addstr ("No space information");
+	    addstr (_("No space information"));
 
     case 14:
 	widget_move (&info->widget, 14, 3);
-	printw ("Type:      %s ", myfs_stats.typename ? myfs_stats.typename : "non-local vfs");
+	printw (_("Type:      %s "), myfs_stats.typename ? myfs_stats.typename : _("non-local vfs"));
 	if (myfs_stats.type != 0xffff && myfs_stats.type != 0xffffffff)
 	    printw (" (%Xh)", myfs_stats.type);
 
     case 13:
 	widget_move (&info->widget, 13, 3);
-	printw ("Device:    %s",
+	printw (_("Device:    %s"),
 		name_trunc (myfs_stats.device, info->widget.cols - 15));
     case 12:
 	widget_move (&info->widget, 12, 3);
-	printw ("Filesystem: %s",
+	printw (_("Filesystem: %s"),
 		name_trunc (myfs_stats.mpoint, info->widget.cols - 15));
 
     case 11:
 	widget_move (&info->widget, 11, 3);
-	printw ("Accessed:  %s", file_date (buf.st_atime));
+	printw (_("Accessed:  %s"), file_date (buf.st_atime));
 	
     case 10:
 	widget_move (&info->widget, 10, 3);
-	printw ("Modified:  %s", file_date (buf.st_mtime));
+	printw (_("Modified:  %s"), file_date (buf.st_mtime));
 	
     case 9:
 	widget_move (&info->widget, 9, 3);
-	printw ("Created:   %s", file_date (buf.st_ctime));
+	printw (_("Created:   %s"), file_date (buf.st_ctime));
 
     case 8:
 	widget_move (&info->widget, 8, 3);
@@ -164,40 +164,40 @@ void info_show_info (WInfo *info)
 #endif
 #endif
 	{
-	    printw ("Size:      ");
+	    printw (_("Size:      "));
 	    print_bytesize (buf.st_size, 0);
 #ifdef HAVE_ST_BLOCKS
-	    printw (" (%d blocks)", buf.st_blocks);
+	    printw (_(" (%d blocks)"), buf.st_blocks);
 #endif
 	}
 	
     case 7:
 	widget_move (&info->widget, 7, 3);
-	printw ("Owner:     %s/%s", get_owner (buf.st_uid),
+	printw (_("Owner:     %s/%s"), get_owner (buf.st_uid),
 		get_group (buf.st_gid));
 	
     case 6:
 	widget_move (&info->widget, 6, 3);
-	printw ("Links:     %d", buf.st_nlink);
+	printw (_("Links:     %d"), buf.st_nlink);
 	
     case 5:
 	widget_move (&info->widget, 5, 3);
-	printw ("Mode:      %s (%04o)",
+	printw (_("Mode:      %s (%04o)"),
 		string_perm (buf.st_mode), buf.st_mode & 07777);
 	
     case 4:
 	widget_move (&info->widget, 4, 3);
-	printw ("Location:  %Xh:%Xh", buf.st_dev, buf.st_ino);
+	printw (_("Location:  %Xh:%Xh"), buf.st_dev, buf.st_ino);
 	
     case 3:
 	widget_move (&info->widget, 3, 2);
 	/* .ado: fname is invalid if selected == 0 && ifno called from current panel */
 	if (cpanel->selected){
-		printw ("File:       %s",
+		printw (_("File:       %s"),
 			name_trunc (cpanel->dir.list [cpanel->selected].fname,
 				    info->widget.cols - 15));
 	} else
-		printw ("File:       None");
+		printw (_("File:       None"));
      
     case 2:
     case 1:

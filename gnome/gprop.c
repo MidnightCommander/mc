@@ -51,7 +51,7 @@ gprop_filename_new (char *complete_filename, char *filename)
 			    (GtkSignalFunc) free_stuff,
 			    gp);
 
-	frame = gtk_frame_new ("Filename");
+	frame = gtk_frame_new (_("Filename"));
 	gtk_box_pack_start (GTK_BOX (gp->top), frame, FALSE, FALSE, 0);
 	gtk_widget_show (frame);
 
@@ -60,7 +60,7 @@ gprop_filename_new (char *complete_filename, char *filename)
 	gtk_container_add (GTK_CONTAINER (frame), vbox);
 	gtk_widget_show (vbox);
 
-	s = g_copy_strings ("Full name: ", complete_filename, NULL);
+	s = g_copy_strings (_("Full name: "), complete_filename, NULL);
 	gtk_box_pack_start (GTK_BOX (vbox), label_new (s, 0.0, 0.5), FALSE, FALSE, 0);
 	g_free (s);
 
@@ -68,7 +68,7 @@ gprop_filename_new (char *complete_filename, char *filename)
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 	gtk_widget_show (hbox);
 
-	gtk_box_pack_start (GTK_BOX (hbox), label_new ("Filename", 0.0, 0.5), FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), label_new (_("Filename"), 0.0, 0.5), FALSE, FALSE, 0);
 
 	gp->filename = gnome_entry_new ("gprop_filename_filename");
 	gtk_entry_set_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (gp->filename))), filename);
@@ -190,7 +190,7 @@ perm_mode_new (GpropPerm *gp, umode_t umode)
 	GtkWidget *hbox;
 	GtkWidget *table;
 
-	frame = gtk_frame_new ("File mode (permissions)");
+	frame = gtk_frame_new (_("File mode (permissions)"));
 
 	vbox = gtk_vbox_new (FALSE, 4);
 	gtk_container_border_width (GTK_CONTAINER (vbox), 6);
@@ -201,7 +201,7 @@ perm_mode_new (GpropPerm *gp, umode_t umode)
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 	gtk_widget_show (hbox);
 
-	gtk_box_pack_start (GTK_BOX (hbox), label_new ("Current mode: ", 0.0, 0.5), FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), label_new (_("Current mode: "), 0.0, 0.5), FALSE, FALSE, 0);
 
 	gp->mode_label = label_new ("0000", 0.0, 0.5);
 	gtk_box_pack_start (GTK_BOX (hbox), gp->mode_label, FALSE, FALSE, 0);
@@ -214,22 +214,22 @@ perm_mode_new (GpropPerm *gp, umode_t umode)
 
 	/* Headings */
 
-	ATTACH (table, label_new ("Read", 0.0, 0.5),     1, 2, 0, 1);
-	ATTACH (table, label_new ("Write", 0.0, 0.5),    2, 3, 0, 1);
-	ATTACH (table, label_new ("Exec", 0.0, 0.5),     3, 4, 0, 1);
-	ATTACH (table, label_new ("Special", 0.0, 0.5),  4, 5, 0, 1);
+	ATTACH (table, label_new (_("Read"), 0.0, 0.5),     1, 2, 0, 1);
+	ATTACH (table, label_new (_("Write"), 0.0, 0.5),    2, 3, 0, 1);
+	ATTACH (table, label_new (_("Exec"), 0.0, 0.5),     3, 4, 0, 1);
+	ATTACH (table, label_new (_("Special"), 0.0, 0.5),  4, 5, 0, 1);
 
 	/* Permissions */
 
-	PERMSET ("User",  gp->rusr, gp->wusr, gp->xusr, S_IRUSR, S_IWUSR, S_IXUSR, 1);
-	PERMSET ("Group", gp->rgrp, gp->wgrp, gp->xgrp, S_IRGRP, S_IWGRP, S_IXGRP, 2);
-	PERMSET ("Other", gp->roth, gp->woth, gp->xoth, S_IROTH, S_IWOTH, S_IXOTH, 3);
+	PERMSET (_("User"),  gp->rusr, gp->wusr, gp->xusr, S_IRUSR, S_IWUSR, S_IXUSR, 1);
+	PERMSET (_("Group"), gp->rgrp, gp->wgrp, gp->xgrp, S_IRGRP, S_IWGRP, S_IXGRP, 2);
+	PERMSET (_("Other"), gp->roth, gp->woth, gp->xoth, S_IROTH, S_IWOTH, S_IXOTH, 3);
 
 	/* Special */
 
-	gp->suid = perm_check_new ("Set UID", umode & S_ISUID, gp);
-	gp->sgid = perm_check_new ("Set GID", umode & S_ISGID, gp);
-	gp->svtx = perm_check_new ("Sticky",  umode & S_ISVTX, gp);
+	gp->suid = perm_check_new (_("Set UID"), umode & S_ISUID, gp);
+	gp->sgid = perm_check_new (_("Set GID"), umode & S_ISGID, gp);
+	gp->svtx = perm_check_new (_("Sticky"),  umode & S_ISVTX, gp);
 	
 	ATTACH (table, gp->suid, 4, 5, 1, 2);
 	ATTACH (table, gp->sgid, 4, 5, 2, 3);
@@ -263,7 +263,7 @@ perm_owner_new (char *owner)
 	i = g_list_length (GTK_LIST (list)->children);
 	sel = i;
 
-	gnome_entry_append_history (GNOME_ENTRY (gentry), FALSE, "<Unknown>");
+	gnome_entry_append_history (GNOME_ENTRY (gentry), FALSE, _("<Unknown>"));
 
 	for (setpwent (); (passwd = getpwent ()) != NULL; i++) {
 		gnome_entry_append_history (GNOME_ENTRY (gentry), FALSE, passwd->pw_name);
@@ -289,7 +289,7 @@ perm_group_new (char *group)
 	int i, sel;
 
 	gentry = gnome_entry_new ("gprop_perm_group");
-	gnome_entry_append_history (GNOME_ENTRY (gentry), FALSE, "<Unknown>");
+	gnome_entry_append_history (GNOME_ENTRY (gentry), FALSE, _("<Unknown>"));
 
 	list = GTK_COMBO (gentry)->list;
 
@@ -332,7 +332,7 @@ perm_ownership_new (GpropPerm *gp, char *owner, char *group)
 
 	/* Owner */
 
-	gtk_table_attach (GTK_TABLE (table), label_new ("Owner", 0.0, 0.5),
+	gtk_table_attach (GTK_TABLE (table), label_new (_("Owner"), 0.0, 0.5),
 			  0, 1, 0, 1,
 			  GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK,
 			  0, 0);
@@ -347,7 +347,7 @@ perm_ownership_new (GpropPerm *gp, char *owner, char *group)
 
 	/* Group */
 
-	gtk_table_attach (GTK_TABLE (table), label_new ("Group", 0.0, 0.5),
+	gtk_table_attach (GTK_TABLE (table), label_new (_("Group"), 0.0, 0.5),
 			  0, 1, 1, 2,
 			  GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK,
 			  0, 0);
@@ -425,7 +425,7 @@ gprop_general_new (char *title, char *icon_filename)
 			    (GtkSignalFunc) free_stuff,
 			    gp);
 
-	frame = gtk_frame_new ("General");
+	frame = gtk_frame_new (_("General"));
 	gtk_box_pack_start (GTK_BOX (gp->top), frame, FALSE, FALSE, 0);
 	gtk_widget_show (frame);
 
@@ -436,7 +436,7 @@ gprop_general_new (char *title, char *icon_filename)
 	gtk_container_add (GTK_CONTAINER (frame), table);
 	gtk_widget_show (table);
 
-	gtk_table_attach (GTK_TABLE (table), label_new ("Title", 0.0, 0.5),
+	gtk_table_attach (GTK_TABLE (table), label_new (_("Title"), 0.0, 0.5),
 			  0, 1, 0, 1,
 			  GTK_FILL | GTK_SHRINK,
 			  GTK_FILL | GTK_SHRINK,
@@ -452,13 +452,13 @@ gprop_general_new (char *title, char *icon_filename)
 			  0, 0);
 	gtk_widget_show (gp->title);
 
-	gtk_table_attach (GTK_TABLE (table), label_new ("Icon", 0.0, 0.5),
+	gtk_table_attach (GTK_TABLE (table), label_new (_("Icon"), 0.0, 0.5),
 			  0, 1, 1, 2,
 			  GTK_FILL | GTK_SHRINK,
 			  GTK_FILL | GTK_SHRINK,
 			  0, 0);
 
-	gp->icon_filename = gnome_file_entry_new ("gprop_general_icon_filename", "Select icon");
+	gp->icon_filename = gnome_file_entry_new ("gprop_general_icon_filename", _("Select icon"));
 	entry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (gp->icon_filename));
 	gtk_entry_set_text (GTK_ENTRY (entry), icon_filename);
 	gtk_table_attach (GTK_TABLE (table), gp->icon_filename,

@@ -306,7 +306,8 @@ panel_action_open_with (GtkWidget *widget, WPanel *panel)
 {
 	char *command;
 	
-	command = input_expand_dialog (" Open with...", "Enter extra arguments:", panel->dir.list [panel->selected].fname);
+	command = input_expand_dialog (_(" Open with..."),
+				       _("Enter extra arguments:"), panel->dir.list [panel->selected].fname);
 	execute (command);
 	free (command);
 }
@@ -340,16 +341,16 @@ static struct {
 	int  flags;
 	context_menu_callback callback;
 } file_actions [] = {
-	{ "Properties",      F_SINGLE,   	    panel_action_properties },
-	{ "",                F_SINGLE,   	    NULL },
-	{ "Open",            F_ALL,      	    panel_action_open },
-	{ "Open with",       F_ALL,      	    panel_action_open_with },
-	{ "View",            F_ALL,      	    panel_action_view },
-	{ "View unfiltered", F_ALL,      	    panel_action_view_unfiltered },  
-	{ "",                0,          	    NULL },
-	{ "Link...",         F_REGULAR | F_SINGLE, (context_menu_callback) link_cmd },
-	{ "Symlink...",      F_SINGLE,             (context_menu_callback) symlink_cmd },
-	{ "Edit symlink...", F_SYMLINK,            (context_menu_callback) edit_symlink_cmd },
+	{ N_("Properties"),      F_SINGLE,   	    panel_action_properties },
+	{ "",                    F_SINGLE,   	    NULL },
+	{ N_("Open"),            F_ALL,      	    panel_action_open },
+	{ N_("Open with"),       F_ALL,      	    panel_action_open_with },
+	{ N_("View"),            F_ALL,      	    panel_action_view },
+	{ N_("View unfiltered"), F_ALL,      	    panel_action_view_unfiltered },  
+	{ "",                    0,          	    NULL },
+	{ N_("Link..."),         F_REGULAR | F_SINGLE, (context_menu_callback) link_cmd },
+	{ N_("Symlink..."),      F_SINGLE,             (context_menu_callback) symlink_cmd },
+	{ N_("Edit symlink..."), F_SYMLINK,            (context_menu_callback) edit_symlink_cmd },
 	{ NULL, 0, NULL },
 };
 
@@ -357,9 +358,9 @@ static struct {
 	char *text;
 	context_menu_callback callback;
 } common_actions [] = {
-	{ "Copy...",         (context_menu_callback) copy_cmd },
-	{ "Rename/move..",   (context_menu_callback) ren_cmd },
-	{ "Delete...",       (context_menu_callback) delete_cmd },
+	{ N_("Copy..."),         (context_menu_callback) copy_cmd },
+	{ N_("Rename/move.."),   (context_menu_callback) ren_cmd },
+	{ N_("Delete..."),       (context_menu_callback) delete_cmd },
 	{ NULL, NULL }
 };
 
@@ -406,7 +407,7 @@ create_popup_submenu (WPanel *panel, int row, char *filename)
 			}
 		}
 		if (*file_actions [i].text)
-			item = gtk_menu_item_new_with_label (file_actions [i].text);
+			item = gtk_menu_item_new_with_label (_(file_actions [i].text));
 		else
 			item = gtk_menu_item_new ();
 
@@ -451,7 +452,7 @@ file_popup_add_context (GtkMenu *menu, WPanel *panel, char *filename)
 	for (i = 0; common_actions [i].text; i++){
 		GtkWidget *item;
 
-		item = gtk_menu_item_new_with_label (common_actions [i].text);
+		item = gtk_menu_item_new_with_label (_(common_actions [i].text));
 		gtk_widget_show (item);
 		gtk_signal_connect (GTK_OBJECT (item), "activate",
 				    GTK_SIGNAL_FUNC (common_actions [i].callback), panel);
@@ -939,40 +940,40 @@ static struct filter_item {
 	char *text;
 	char *glob;
 } filter_items [] = {
-	{ "All files",
+	{ N_("All files"),
 	  "*" },
-	{ "Archives and compressed files",
+	{ N_("Archives and compressed files"),
 	  "*.(tar|gz|tgz|taz|zip|lha|zoo|pak|sit|arc|arj|rar|huf|lzh)" },
-	{ "RPM/DEB files",
+	{ N_("RPM/DEB files"),
 	  "*.(rpm|deb)" },
-	{ "Text/Document files",
+	{ N_("Text/Document files"),
 	  "*.(txt|tex|doc|rtf)" },
-	{ "HTML and SGML files",
+	{ N_("HTML and SGML files"),
 	  "*.(html|htm|sgml|sgm)" },
-	{ "Postscript and PDF files",
+	{ N_("Postscript and PDF files"),
 	  "*.(ps|pdf)" },
-	{ "Spreadsheet files",
+	{ N_("Spreadsheet files"),
 	  "*.(xls|wks|wk1)" },
-	{ "Image files",
+	{ N_("Image files"),
 	  "*.(png|jpg|jpeg|xcf|gif|tif|tiff|xbm|xpm|pbm|pgm|ppm|tga|rgb|iff|lbm|ilbm|"
 	  "bmp|pcx|pic|pict|psd|gbr|pat|ico|fig|cgm|rle|fits)" },
-	{ "Video/animation files",
+	{ N_("Video/animation files"),
 	  "*.(mpg|mpeg|mov|avi|fli|flc|flh|flx|dl)" },
-	{ "Audio files",
+	{ N_("Audio files"),
 	  "*.(au|wav|mp3|snd|mod|s3m|ra)" },
-	{ "C program files",
+	{ N_("C program files"),
 	  "*.[ch]" },
-	{ "C++ program files",
+	{ N_("C++ program files"),
 	  "*.(cc|C|cpp|cxx|h|H)" },
-	{ "Objective-C program files",
+	{ N_("Objective-C program files"),
 	  "*.[mh]" },
-	{ "Scheme program files",
+	{ N_("Scheme program files"),
 	  "*.scm" },
-	{ "Assembler program files",
+	{ N_("Assembler program files"),
 	  "*.(s|S|asm)" },
-	{ "Misc. program files",
+	{ N_("Misc. program files"),
 	  "*.(awk|sed|lex|l|y|sh|idl|pl|py|am|in|f|el|bas|pas|java|sl|p|m4|tcl|pov)" },
-	{ "Font files",
+	{ N_("Font files"),
 	  "*.(pfa|pfb|afm|ttf|fon|pcf|pcf.gz|spd)" }
 };
 
@@ -1031,7 +1032,7 @@ build_filter_menu (WPanel *panel, GtkWidget *button)
 	gtk_object_set_user_data (GTK_OBJECT (filter_menu), button);
 
 	for (i = 0; i < ELEMENTS (filter_items); i++) {
-		item = gtk_menu_item_new_with_label (filter_items[i].text);
+		item = gtk_menu_item_new_with_label (_(filter_items[i].text));
 		gtk_object_set_user_data (GTK_OBJECT (item), &filter_items[i]);
 
 		gtk_signal_connect (GTK_OBJECT (item), "select",
@@ -1097,7 +1098,7 @@ display_mini_info (WPanel *panel)
 	GtkLabel *label = GTK_LABEL (panel->ministatus);
 
 	if (panel->searching){
-		char *str = copy_strings ("Search: ", panel->search_buffer, NULL);
+		char *str = copy_strings (N_("Search: "), panel->search_buffer, NULL);
 		
 		gtk_clip_label_set (label, str);
 		free (str);
@@ -1107,7 +1108,7 @@ display_mini_info (WPanel *panel)
 	if (panel->marked){
 		char buffer [120];
 		
-		sprintf (buffer, " %s bytes in %d file%s",
+		sprintf (buffer, N_(" %s bytes in %d file%s"),
 			 size_trunc_sep (panel->total), panel->marked,
 			 panel->marked == 1 ? "" : "s");
 		
@@ -1131,7 +1132,7 @@ display_mini_info (WPanel *panel)
 			gtk_clip_label_set (label, str);
 			free (str);
 		} else 
-			gtk_clip_label_set (label, "<readlink failed>");
+			gtk_clip_label_set (label, N_("<readlink failed>"));
 		return;
 	}
 
@@ -1177,7 +1178,7 @@ panel_create_filter (Dlg_head *h, WPanel *panel, void **filter_w)
 	gtk_box_pack_start (GTK_BOX (ihbox), arrow, TRUE, TRUE, 0);
 	gtk_widget_show (arrow);
 
-	label = gtk_label_new ("Filter");
+	label = gtk_label_new (N_("Filter"));
 	gtk_box_pack_start (GTK_BOX (ihbox), label, TRUE, TRUE, 0);
 	gtk_widget_show (label);
 
@@ -1255,7 +1256,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	/* Now, insert our table in our parent */
 	gtk_container_add (GTK_CONTAINER (vbox), panel->table);
 
-	gtk_widget_show_all (panel->table);
+	gtk_widget_show_all (gtk_widget_get_toplevel (panel->table));
 			     
 	if (!pixmaps_ready){
 		if (!GTK_WIDGET_REALIZED (panel->list))

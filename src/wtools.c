@@ -111,7 +111,7 @@ Listbox *create_listbox_window (int cols, int lines, char *title, char *help)
 {
     int xpos, ypos, len;
     Listbox  *listbox = xmalloc (sizeof (Listbox), "create_listbox_window");
-    char* cancel_string = "&Cancel";
+    char* cancel_string = _("&Cancel");
 
     /* Adjust sizes */
     lines = (lines > LINES-6) ? LINES - 6 : lines;
@@ -289,7 +289,7 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	destroy_dlg (query_dlg);
     } else {
 #ifdef HAVE_X
-	add_widgetl (query_dlg, button_new(0, 0, B_EXIT, NORMAL_BUTTON, "&Ok", 0, 0, NULL),
+	add_widgetl (query_dlg, button_new(0, 0, B_EXIT, NORMAL_BUTTON, _("&Ok"), 0, 0, NULL),
 	    XV_WLAY_CENTERROW);
 
 	add_widget (query_dlg, label_new (2, 3, text, NULL));
@@ -327,6 +327,9 @@ Dlg_head *message (int error, char *header, char *text, ...)
     char     buffer [4096];
     Dlg_head *d;
 
+    if (header == MSG_ERROR)
+	    header = _(" Error ");
+    
     /* Setup the display information */
     strcpy (buffer, "\n");
     va_start (args, text);
@@ -392,10 +395,10 @@ Chooser *new_chooser (int lines, int cols, char *help, int flags)
     
     if (button_lines){
 	add_widget (c->dialog, button_new (lines-button_lines+1,
-				20, B_ENTER, DEFPUSH_BUTTON, "&Remove",
+				20, B_ENTER, DEFPUSH_BUTTON, _("&Remove"),
 				remove_callback, c, "button-remove"));
 	add_widget (c->dialog, button_new (lines-button_lines+1,
-				    4, B_CANCEL, NORMAL_BUTTON, "&Cancel",
+				    4, B_CANCEL, NORMAL_BUTTON, _("&Cancel"),
 				    0, 0, "button-cancel"));
     }		    
     add_widget (c->dialog, c->listbox);
@@ -442,6 +445,7 @@ static int quick_callback (struct Dlg_head *h, int id, int Msg)
     return 0;
 }
 
+#define I18N(x) (do_int? (x = _(x)) : x)
 int quick_dialog_skip (QuickDialog *qd, int nskip)
 {
     Dlg_head *dd;
@@ -452,6 +456,14 @@ int quick_dialog_skip (QuickDialog *qd, int nskip)
     int      return_val;
     WInput   *input;
     QuickWidget *qw;
+    int      do_int;
+
+    if (!qd->i18n){
+	qd->i18n = 1;
+	do_int = 1;
+	qd->title = _(qd->title);
+    } else
+	do_int = 0;
     
     if (qd->xpos == -1)
         dd = create_dlg (0, 0, qd->ylen, qd->xlen, dialog_colors, quick_callback,
@@ -476,7 +488,7 @@ int quick_dialog_skip (QuickDialog *qd, int nskip)
 	
 	switch (qw->widget_type){
 	case quick_checkbox:
-	    widget = check_new (ypos, xpos, *qw->result, qw->text, qw->tkname);
+	    widget = check_new (ypos, xpos, *qw->result, I18N (qw->text), qw->tkname);
 	    break;
 
 	case quick_radio:
@@ -487,7 +499,7 @@ int quick_dialog_skip (QuickDialog *qd, int nskip)
 	    
 	case quick_button:
 	    widget = button_new (ypos, xpos, qw->value, (qw->value==B_ENTER) ? DEFPUSH_BUTTON : NORMAL_BUTTON,
-	    qw->text, 0, 0, qw->tkname);
+	    I18N (qw->text), 0, 0, qw->tkname);
 	    break;
 
 	    /* We use the hotkey pos as the field length */
@@ -502,7 +514,7 @@ int quick_dialog_skip (QuickDialog *qd, int nskip)
 	    break;
 
 	case quick_label:
-	    widget = label_new (ypos, xpos, qw->text, qw->tkname);
+	    widget = label_new (ypos, xpos, I18N(qw->text), qw->tkname);
 	    break;
 	    
 	default:
@@ -556,9 +568,9 @@ char *real_input_dialog_help (char *header, char *text, char *help, char *def_te
 {
     QuickDialog Quick_input;
     QuickWidget quick_widgets [] = {
-    { quick_button, 6, 10, 1, 0, "&Cancel", 0, B_CANCEL, 0, 0,
+    { quick_button, 6, 10, 1, 0, N_("&Cancel"), 0, B_CANCEL, 0, 0,
 	  XV_WLAY_RIGHTOF, "button-cancel" },
-    { quick_button, 3, 10, 1, 0, "&Ok", 0, B_ENTER, 0, 0,
+    { quick_button, 3, 10, 1, 0, N_("&Ok"), 0, B_ENTER, 0, 0,
 	  XV_WLAY_CENTERROW, "button-ok" },
     { quick_input,  4, 80, 0, 0, "", 58, 0, 0, 0, XV_WLAY_NEXTROW, 0 },
     { quick_label,  3, 80, 2, 0, "", 0, 0, 0, 0, XV_WLAY_NEXTROW, "label" },
@@ -584,7 +596,7 @@ char *real_input_dialog_help (char *header, char *text, char *help, char *def_te
     len = max (strlen (header), msglen (text, &lines)) + 4;
     len = max (len, 64);
 
-    if (strncmp (text, "Password", 8) == 0){
+    if (strncmp (text, _("Password"), 8) == 0){
 	quick_widgets [INPUT_INDEX].value = 1;
 	tk_name[3]=0;
     } else {
@@ -596,6 +608,7 @@ char *real_input_dialog_help (char *header, char *text, char *help, char *def_te
     Quick_input.title = header;
     Quick_input.help  = help;
     Quick_input.class = "quick_input";
+    Quick_input.i18n  = 0;
     quick_widgets [INPUT_INDEX+1].text = text;
     quick_widgets [INPUT_INDEX].text = def_text;
 
@@ -624,9 +637,10 @@ int input_dialog_help_2 (char *header, char *text1, char *text2, char *help, cha
 {
     QuickDialog Quick_input;
     QuickWidget quick_widgets [] = {
-    { quick_button, 6, 10, 4, 0, "Cancel", 0, B_CANCEL, 0, 0,
+    { quick_button, 6, 10, 4, 0, N_("&Cancel"), 0, B_CANCEL, 0, 0,
 	  XV_WLAY_DONTCARE, "button-cancel" },
-    { quick_button, 3, 10, 4, 0, "Ok", 0, B_ENTER, 0, 0,
+    { quick_button, 3, 10, 4, 0, N_("Ok")
+, 0, B_ENTER, 0, 0,
 	  XV_WLAY_DONTCARE, "button-ok" },
     { quick_input,  4, 80, 4, 0, "", 58, 0, 0, 0, XV_WLAY_BELOWCLOSE, "input-pth" },
     { quick_label,  3, 80, 3, 0, "", 0, 0, 0, 0, XV_WLAY_DONTCARE, "label-pth" },
@@ -648,6 +662,7 @@ int input_dialog_help_2 (char *header, char *text1, char *text2, char *help, cha
     Quick_input.title = header;
     Quick_input.help  = help;
     Quick_input.class = "quick_input_2";
+    Quick_input.i18n  = 0;
     quick_widgets [5].text = text1;
     quick_widgets [3].text = text2;
 

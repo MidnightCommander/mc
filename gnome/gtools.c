@@ -115,6 +115,9 @@ Dlg_head *message (int error, char *header, char *text, ...)
 	va_list  args;
 	char     buffer [4096];
 	Dlg_head *d;
+
+	if (header == MSG_ERROR)
+		header = _("Error");
 	
 	/* Setup the display information */
 	strcpy (buffer, "\n");
@@ -123,7 +126,7 @@ Dlg_head *message (int error, char *header, char *text, ...)
 	strcat (buffer, "\n");
 	va_end (args);
 	
-	query_dialog (header, buffer, error, 1, "&Ok");
+	query_dialog (header, buffer, error, 1, _("&Ok"));
 	d = last_query_dlg;
 
 	if (error & D_INSERT){

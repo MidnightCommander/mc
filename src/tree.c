@@ -623,7 +623,7 @@ void save_tree (WTree *tree)
     file = fopen (filename, "w");
     free (filename);
     if (!file){
-	fprintf (stderr, "Can't open the " MC_TREE " file for writing:\n%s\n",
+	fprintf (stderr, _("Can't open the %s file for writing:\n%s\n"), MC_TREE,
 		 unix_error_string (errno));
 	return;
     }
@@ -636,7 +636,7 @@ void save_tree (WTree *tree)
 	else
 	    i = fprintf (file, "%s\n", current->name);
 	if (i == EOF){
-	    fprintf (stderr, "Can't write to the " MC_TREE " file:\n%s\n",
+	    fprintf (stderr, _("Can't write to the %s file:\n%s\n"), MC_TREE,
 		 unix_error_string (errno));
 	    break;
 	}
@@ -1095,9 +1095,9 @@ void tree_copy (WTree *tree, char *default_dest)
 
     if (!tree->selected_ptr)
 	return;
-    sprintf (cmd_buf, "Copy \"%s\" directory to:",
+    sprintf (cmd_buf, _("Copy \"%s\" directory to:"),
 	     name_trunc (tree->selected_ptr->name, 50));
-    dest = input_expand_dialog (" Copy ", cmd_buf, default_dest);
+    dest = input_expand_dialog (_(" Copy "), cmd_buf, default_dest);
     if (!dest || !*dest){
 	return;
     }
@@ -1128,20 +1128,20 @@ void tree_move (WTree *tree, char *default_dest)
 
     if (!tree->selected_ptr)
 	return;
-    sprintf (cmd_buf, "Move \"%s\" directory to:",
+    sprintf (cmd_buf, _("Move \"%s\" directory to:"),
 	     name_trunc (tree->selected_ptr->name, 50));
-    dest = input_expand_dialog (" Move ", cmd_buf, default_dest);
+    dest = input_expand_dialog (_(" Move "), cmd_buf, default_dest);
     if (!dest || !*dest){
 	return;
     }
     if (stat (dest, &buf)){
-	message (1, " Error ", " Can't stat the destination \n %s ",
+	message (1, _(" Error "), _(" Can't stat the destination \n %s "),
 		 unix_error_string (errno));
 	free (dest);
 	return;
     }
     if (!S_ISDIR (buf.st_mode)){
-	message (1, " Error ", " The destination isn't a directory ");
+	message (1, _(" Error "), _(" The destination isn't a directory "));
 	free (dest);
 	return;
     }
@@ -1191,8 +1191,8 @@ static void tree_rmdir_cmd (WTree *tree)
 
 	    cmd_buf = xmalloc (strlen (tree->selected_ptr->name) + 20,
 			       "tree, rmdir_cmd");
-	    sprintf (cmd_buf, "  Delete %s?  ", tree->selected_ptr->name);
-	    result = query_dialog (" Delete ", cmd_buf, 3, 2, "&Yes", "&No");
+	    sprintf (cmd_buf, _("  Delete %s?  "), tree->selected_ptr->name);
+	    result = query_dialog (_(" Delete "), cmd_buf, 3, 2, _("&Yes"), _("&No"));
 	    free (cmd_buf);
 	    if (result != 0){
 		return;
@@ -1229,8 +1229,8 @@ static void tree_toggle_navig (Dlg_head *h)
 void set_navig_label (Dlg_head *h)
 {
     define_label_data (h, (Widget *)tree,
-        4, tree_navigation_flag ? "Static" : "Dynamc",
-	(void (*)(void *))tree_toggle_navig, h);
+		       4, tree_navigation_flag ? _("Static") : _("Dynamc"),
+		       (void (*)(void *))tree_toggle_navig, h);
 }
 
 static void move_down (WTree *tree)
@@ -1310,7 +1310,7 @@ static void chdir_sel (WTree *tree)
 	paint_panel (cpanel);
 	select_item (cpanel);
     } else {
-	message (1, " Error ", " Can't chdir to \"%s\" \n %s ",
+	message (1, MSG_ERROR, _(" Can't chdir to \"%s\" \n %s "),
 		 tree->selected_ptr->name, unix_error_string (errno));
     }
     change_panel ();
@@ -1448,24 +1448,24 @@ static int tree_callback (Dlg_head *h, WTree *tree, int msg, int par)
 
     case WIDGET_FOCUS:
 	tree->active = 1;
-	define_label (h, (Widget *)tree, 1, "Help", (voidfn) tree_help_cmd);
+	define_label (h, (Widget *)tree, 1, _("Help"), (voidfn) tree_help_cmd);
 	define_label_data (h, (Widget *)tree, 
-	    2, "Rescan", (buttonbarfn)tree_rescan_cmd, tree);
+	    2, _("Rescan"), (buttonbarfn)tree_rescan_cmd, tree);
 	define_label_data (h, (Widget *)tree, 
-	    3, "Forget", (buttonbarfn)tree_forget_cmd, tree);
+	    3, _("Forget"), (buttonbarfn)tree_forget_cmd, tree);
 	define_label_data (h, (Widget *)tree, 
-	    5, "Copy",   (buttonbarfn) tree_copy_cmd, tree);
+	    5, _("Copy"),   (buttonbarfn) tree_copy_cmd, tree);
 	define_label_data (h, (Widget *)tree, 
-	    6, "RenMov", (buttonbarfn) tree_move_cmd, tree);
+	    6, _("RenMov"), (buttonbarfn) tree_move_cmd, tree);
 #if 0
 	/* FIXME: mkdir is currently defunct */
 	define_label_data (h, (Widget *)tree, 
-	    7, "Mkdir",  (buttonbarfn) tree_mkdir_cmd, tree);
+	    7, _("Mkdir"),  (buttonbarfn) tree_mkdir_cmd, tree);
 #else
         define_label (h, (Widget *)tree, 7, "", 0);
 #endif
 	define_label_data (h, (Widget *)tree, 
-	    8, "Rmdir",  (buttonbarfn) tree_rmdir_cmd, tree);
+	    8, _("Rmdir"),  (buttonbarfn) tree_rmdir_cmd, tree);
 	set_navig_label (h);
 	redraw_labels (h, (Widget *)tree);
 

@@ -78,37 +78,37 @@ static struct {
     WCheck *widget;
     char   *tk;
 } check_options [] = {
-   {"safe de&Lete",       &know_not_what_am_i_doing, TOGGLE_VARIABLE,0, "safe-del" },
-   {"cd follows lin&Ks",  &cd_symlinks,       TOGGLE_VARIABLE,       0, "cd-follow" },
-   {"advanced cho&Wn",    &advanced_chfns,    TOGGLE_VARIABLE,       0, "achown" },
-   {"l&Ynx-like motion",  &navigate_with_arrows,TOGGLE_VARIABLE,     0, "lynx" },
+   {N_("safe de&Lete"),       &know_not_what_am_i_doing, TOGGLE_VARIABLE,0, "safe-del" },
+   {N_("cd follows lin&Ks"),  &cd_symlinks,       TOGGLE_VARIABLE,       0, "cd-follow" },
+   {N_("advanced cho&Wn"),    &advanced_chfns,    TOGGLE_VARIABLE,       0, "achown" },
+   {N_("l&Ynx-like motion"),  &navigate_with_arrows,TOGGLE_VARIABLE,     0, "lynx" },
 #ifdef HAVE_GNOME
-   {"Animation",          &dummy,             TOGGLE_VARIABLE,       0, "dummy" },
+   {N_("Animation"),          &dummy,             TOGGLE_VARIABLE,       0, "dummy" },
 #else
-   {"ro&Tating dash",     &nice_rotating_dash,TOGGLE_VARIABLE,       0, "rotating" },
+   {N_("ro&Tating dash"),     &nice_rotating_dash,TOGGLE_VARIABLE,       0, "rotating" },
 #endif
-   {"co&Mplete: show all",&show_all_if_ambiguous,TOGGLE_VARIABLE,    0, "completion" },
-   {"&Use internal view", &use_internal_view, TOGGLE_VARIABLE,       0, "view-int" },
-   {"use internal ed&It", &use_internal_edit, TOGGLE_VARIABLE,       0, "edit-int" },
-   {"auto m&Enus",        &auto_menu,         TOGGLE_VARIABLE,       0, "auto-menus" },
-   {"&Auto save setup",   &auto_save_setup,   TOGGLE_VARIABLE,       0, "auto-save" },
-   {"shell &Patterns",    &easy_patterns,     TOGGLE_VARIABLE,       0, "shell-patt" },
-   {"&Verbose operation", &verbose,           TOGGLE_VARIABLE,       0, "verbose" },
-   {"&Fast dir reload",   &fast_reload,       toggle_fast_reload,    0, "fast-reload" },
-   {"mi&X all files",     &mix_all_files,     toggle_mix_all_files,  0, "mix-files" },
-   {"&Drop down menus",   &drop_menus,        TOGGLE_VARIABLE,       0, "drop-menus" },
-   {"ma&Rk moves down",   &mark_moves_down,   TOGGLE_VARIABLE,       0, "mark-moves" },
-   {"show &Hidden files", &show_dot_files,    toggle_show_hidden,    0, "show-hidden" },
-   {"show &Backup files", &show_backups,      toggle_show_backup,    0, "show-backup" },
+   {N_("co&Mplete: show all"),&show_all_if_ambiguous,TOGGLE_VARIABLE,    0, "completion" },
+   {N_("&Use internal view"), &use_internal_view, TOGGLE_VARIABLE,       0, "view-int" },
+   {N_("use internal ed&It"), &use_internal_edit, TOGGLE_VARIABLE,       0, "edit-int" },
+   {N_("auto m&Enus"),        &auto_menu,         TOGGLE_VARIABLE,       0, "auto-menus" },
+   {N_("&Auto save setup"),   &auto_save_setup,   TOGGLE_VARIABLE,       0, "auto-save" },
+   {N_("shell &Patterns"),    &easy_patterns,     TOGGLE_VARIABLE,       0, "shell-patt" },
+   {N_("&Verbose operation"), &verbose,           TOGGLE_VARIABLE,       0, "verbose" },
+   {N_("&Fast dir reload"),   &fast_reload,       toggle_fast_reload,    0, "fast-reload" },
+   {N_("mi&X all files"),     &mix_all_files,     toggle_mix_all_files,  0, "mix-files" },
+   {N_("&Drop down menus"),   &drop_menus,        TOGGLE_VARIABLE,       0, "drop-menus" },
+   {N_("ma&Rk moves down"),   &mark_moves_down,   TOGGLE_VARIABLE,       0, "mark-moves" },
+   {N_("show &Hidden files"), &show_dot_files,    toggle_show_hidden,    0, "show-hidden" },
+   {N_("show &Backup files"), &show_backups,      toggle_show_backup,    0, "show-backup" },
    { 0, 0, 0, 0 }
 };
 
 static WRadio *pause_radio;
 
 static char *pause_options [3] = {
-    "Never",
-    "on dumb Terminals",
-    "alwaYs" };
+    N_("Never"),
+    N_("on dumb Terminals"),
+    N_("alwaYs") };
 
 static int configure_callback (struct Dlg_head *h, int Id, int Msg)
 {
@@ -124,13 +124,13 @@ static int configure_callback (struct Dlg_head *h, int Id, int Msg)
 
 	attrset (COLOR_HOT_NORMAL);
 	dlg_move (h, 1, (62 - 20)/2);
-	addstr (" Configure options ");
+	addstr (_(" Configure options "));
 	dlg_move (h, OY, OX+1);
-	addstr (" Other options ");
+	addstr (_(" Other options "));
 	dlg_move (h, RY, RX+1);
-	addstr (" Pause after run... ");
+	addstr (_(" Pause after run... "));
 	dlg_move (h, PY, PX+1);
-	addstr (" Panel options ");
+	addstr (_(" Panel options "));
 #endif
 	break;
 
@@ -148,21 +148,21 @@ static void init_configure (void)
     conf_dlg = create_dlg (0, 0, 19, 64, dialog_colors,
 			   configure_callback, "[Options Menu]",
 			   "option", DLG_CENTER | DLG_GRID);
-    x_set_dialog_title (conf_dlg, "Configure options");
+    x_set_dialog_title (conf_dlg, _("Configure options"));
 
     add_widgetl (conf_dlg,
-	button_new (BY, BX+26, B_CANCEL, NORMAL_BUTTON, "&Cancel", 0, 0, "button-cancel"),
+	button_new (BY, BX+26, B_CANCEL, NORMAL_BUTTON, _("&Cancel"), 0, 0, "button-cancel"),
 	XV_WLAY_RIGHTOF);
 
     add_widgetl (conf_dlg,
-	button_new (BY, BX+12, B_EXIT, NORMAL_BUTTON, "&Save", 0, 0, "button-save"),
+	button_new (BY, BX+12, B_EXIT, NORMAL_BUTTON, _("&Save"), 0, 0, "button-save"),
 	XV_WLAY_RIGHTOF);
     
     add_widgetl (conf_dlg,
-        button_new (BY, BX, B_ENTER, DEFPUSH_BUTTON, "&Ok", 0, 0, "button-ok"),
+        button_new (BY, BX, B_ENTER, DEFPUSH_BUTTON, _("&Ok"), 0, 0, "button-ok"),
         XV_WLAY_CENTERROW);
 
-#define XTRACT(i) *check_options[i].variable, check_options[i].text, check_options [i].tk
+#define XTRACT(i) *check_options[i].variable, _(check_options[i].text), check_options [i].tk
 
     /* Add all the checkboxes */
     for (i = 0; i < 12; i++){
@@ -182,11 +182,11 @@ static void init_configure (void)
 	    XV_WLAY_BELOWCLOSE);
     }
 #ifdef HAVE_XVIEW
-     add_widgetl (conf_dlg, label_new (OY, OX + 1, "Other options", "label-other"),
+     add_widgetl (conf_dlg, label_new (OY, OX + 1, _("Other options"), "label-other"),
          XV_WLAY_NEXTCOLUMN);
-     add_widgetl (conf_dlg, label_new (RY, RX + 1, "Pause after run...", "label-pause"),
+     add_widgetl (conf_dlg, label_new (RY, RX + 1, _("Pause after run..."), "label-pause"),
          XV_WLAY_BELOWOF);
-     add_widgetl (conf_dlg, label_new (PY, PX + 1, "Panel options", "label-panel"),
+     add_widgetl (conf_dlg, label_new (PY, PX + 1, _("Panel options"), "label-panel"),
          XV_WLAY_NEXTCOLUMN);
 #endif
 }

@@ -142,7 +142,7 @@ static void menubar_draw (WMenu *menubar)
 	if (menubar->active)
 	    attrset(i == menubar->selected?MENU_SELECTED_COLOR:SELECTED_COLOR);
 	widget_move (&menubar->widget, 0, menubar->widget.x + 2 + (i * 12));
-	printw ("%s", menubar->menu [i]->name);
+	printw ("%s", _(menubar->menu [i]->name));
     }
 
     if (menubar->dropped)

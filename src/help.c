@@ -571,7 +571,7 @@ void help_index_cmd (Dlg_head *h)
     currentpoint = startpoint = search_string (data, "[Help]") + 1;
 
     if (!(new_item = search_string (data, "[Contents]")))
-	message (1, _(" Error "), _(" Can't find node [Contents] in help file "));
+	message (1, MSG_ERROR, _(" Can't find node [Contents] in help file "));
     else
 	currentpoint = startpoint = new_item + 1;
     selected_item = NULL;
@@ -746,7 +746,7 @@ static int help_callback (struct Dlg_head *h, int id, int msg)
 	draw_box (h, 1, 1, help_lines+2, HELP_WINDOW_WIDTH+2);
 	attrset (COLOR_HOT_NORMAL);
 	dlg_move (h, 1, (HELP_WINDOW_WIDTH - 1) / 2);
-	addstr (" Help ");
+	addstr (_(" Help "));
 	attrset (HELP_NORMAL_COLOR);
 	show (h, currentpoint);
 	break;
@@ -769,12 +769,12 @@ void interactive_display (char *filename, char *node)
     Widget     *md;
     
     if ((data = load_file (filename)) == 0){
-	message (1, _(" Error "), _(" Can't open file %s \n %s "),
+	message (1, MSG_ERROR, _(" Can't open file %s \n %s "),
 		 filename, unix_error_string (errno));
 	return;
     }
     if (!(main = search_string (data, node))){
-	message (1, _(" Error "), _(" Can't find node %s in help file "), node);
+	message (1, MSG_ERROR, _(" Can't find node %s in help file "), node);
 	interactive_display_finish ();
 	return;
     }

@@ -200,10 +200,7 @@ void tell_parent (int msg);
 #    define MC_ARCH_FLAGS 0
 #endif
 
-/* GNOME provides the internationalization code as well */
-#ifndef HAVE_GNOME
-#   define _(x) x
-#endif
+#include "i18n.h"
 
 /* taken from regex.c: */
 /* Jim Meyering writes:

@@ -260,7 +260,7 @@ char *check_patterns (char *p)
 	if (value == 0 || value == 1)
 	    easy_patterns = value;
 	else
-	    message (1, " Error ", " Invalid shell pattern defination \"%c\". ", value + '0');
+	    message (1, MSG_ERROR, _(" Invalid shell pattern defination \"%c\". "), value + '0');
     }
     while (*p == '\n' || *p == '\t' || *p == ' ') p++;
     return p;
@@ -392,7 +392,7 @@ void debug_out (char *start, char *end, int cond)
 	    len = strlen (msg);
 	    if (len)
 		msg [len - 1] = 0;
-	    message (0, " Debug ", msg);
+	    message (0, _(" Debug "), msg);
 	    debug_flag = 0;
 	}
     } else {
@@ -401,13 +401,13 @@ void debug_out (char *start, char *end, int cond)
 	    return;
 	/* Save the result of the condition */
 	if (debug_error){
-	    strcat (msg, " ERROR: ");
+	    strcat (msg, _(" ERROR: "));
 	    debug_error = 0;
 	}
 	else if (cond)
-	    strcat (msg, " True:  ");
+	    strcat (msg, _(" True:  "));
 	else
-	    strcat (msg, " False: ");
+	    strcat (msg, _(" False: "));
 	/* Copy condition statement */
 	len = strlen (msg);
 	if (end == NULL){
@@ -503,7 +503,7 @@ void execute_menu_command (char *s)
     file_name = copy_strings (file_name, ".cmd", NULL);
 #endif
     if ((cmd_file = fopen (file_name, "w+")) == NULL){
-	message (1, " Error ", " Can't create temporary command file \n %s ",
+	message (1, MSG_ERROR, _(" Can't create temporary command file \n %s "),
 		 unix_error_string (errno));
 	return;
     }
@@ -529,7 +529,7 @@ void execute_menu_command (char *s)
 		char *parameter;
 		char *tmp;
 		parameter_found = 0;
-		parameter = input_dialog (" Parameter ", prompt, "");
+		parameter = input_dialog (_(" Parameter "), prompt, "");
 		if (!parameter || !*parameter){
 		    /* User canceled */
 		    fclose (cmd_file);
@@ -602,9 +602,9 @@ menu_file_own(char* path)
 		extern int verbose;
 		if (verbose)
 		{
-			message (0, " Warning -- ignoring file ",
-				"File %s is not owned by root or you or is world writable.\n"
-				"Using it may compromise your security",
+			message (0, _(" Warning -- ignoring file "),
+				 _("File %s is not owned by root or you or is world writable.\n"
+				   "Using it may compromise your security"),
 				path
 			);
 		}
@@ -620,8 +620,8 @@ void user_menu_cmd (void)
     Listbox *listbox;
     
     if (!vfs_current_is_local ()){
-	message (1, " Oops... ",
-	    " I can't run programs while logged on a non local directory ");
+	message (1, _(" Oops... "),
+		 _(" I can't run programs while logged on a non local directory "));
 	return;
     }
     
@@ -636,7 +636,7 @@ void user_menu_cmd (void)
     }
 
     if ((data = load_file (menu)) == NULL){
-	message (1, " Error ", " Can't open file %s \n %s ",
+	message (1, MSG_ERROR, _(" Can't open file %s \n %s "),
 		 menu, unix_error_string (errno));
 	free (menu);
 	return;

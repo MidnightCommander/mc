@@ -280,7 +280,7 @@ void init_subshell (void)
 	    if ((subshell_pipe[READ] = open (tcsh_fifo, O_RDWR)) == -1 ||
 		(subshell_pipe[WRITE] = open (tcsh_fifo, O_RDWR)) == -1)
 	    {
-		fprintf (stderr, "Couldn't open named pipe %s\n", tcsh_fifo);
+		fprintf (stderr, _("Couldn't open named pipe %s\n"), tcsh_fifo);
 		perror (__FILE__": open");
 		use_subshell = FALSE;
 		return;
@@ -693,8 +693,8 @@ int exit_subshell (void)
     int quit = TRUE;
     
     if (subshell_state != INACTIVE && subshell_alive)
-	quit = !query_dialog (" Warning ", " The shell is still active."
-			      " Quit anyway? ", 0, 2, "&Yes", "&No");
+	quit = !query_dialog (_(" Warning "), _(" The shell is still active. Quit anyway? "),
+			      0, 2, _("&Yes"), _("&No"));
 
 #if AIX_TCSH_CODE_BELOW_IS_IT_FIXED
     /* New Test code */
@@ -719,8 +719,8 @@ int exit_subshell (void)
 	if (read (subshell_pipe[READ], pty_buffer, pty_buffer_size) == 5)
 	    quit = TRUE;
 	else
-	    quit = !query_dialog (" Warning ", " There are stopped jobs."
-				  " Quit anyway? ", 0, 2, "&Yes", "&No");
+	    quit = !query_dialog (_(" Warning "), _(" There are stopped jobs.")
+				  _(" Quit anyway? "), 0, 2, _("&Yes"), _("&No"));
 
 	synchronize ();
 	subshell_state = RUNNING_COMMAND;
@@ -774,7 +774,7 @@ void do_subshell_chdir (char *directory, int do_update, int reset_prompt)
     feed_subshell (QUIETLY, FALSE);
     
     if (subshell_alive && strcmp (subshell_cwd, cpanel->cwd) && strcmp (cpanel->cwd, "."))
-	fprintf (stderr, "Warning: Couldn't change to %s.\n", cpanel->cwd);
+	fprintf (stderr, _("Warning: Couldn't change to %s.\n"), cpanel->cwd);
 
     if (reset_prompt)
 	prompt_pos = 0;

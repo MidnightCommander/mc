@@ -3,6 +3,7 @@
 
 #include "dlg.h"
 
+#define MSG_ERROR ((char *) -1)
 Dlg_head *message (int error, char *header, char *text, ...);
 
 int query_dialog (char *header, char *text, int flags, int count, ...);

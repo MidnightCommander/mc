@@ -173,44 +173,61 @@ do_background (char *info)
     }
 }
 
+char *
+background_title (char *str)
+{
+    char *result = copy_strings (_("Background process:"), str, NULL);
+
+    return result;
+}
+
 /* {{{ Routines that do the real job */
 void
 real_message_1s (enum OperationMode mode, int *flags, char *title, char *str1)
 {
-    char tmp[1024];
+    char *full_title;
     
-    if (mode == Background) {
-	strcpy (tmp, " Background process:");
-	strcat (tmp, title);
-	title = tmp;
-    }
+    if (mode == Background)
+	full_title = background_title (title);
+    else
+        full_title = title;
+    
     message (*flags, title, str1);
+
+    if (title != full_title)
+	free (full_title);
 }
 
 void
 real_message_2s (enum OperationMode mode, int *flags, char *title, char *str1, char *str2)
 {
-    char tmp[1024];
+    char *full_title;
     
-    if (mode == Background) {
-	strcpy (tmp, " Background process:");
-	strcat (tmp, title);
-	title = tmp;
-    }
+    if (mode == Background)
+	full_title = background_title (title);
+    else
+        full_title = title;
+    
     message (*flags, title, str1, str2);
+    
+    if (title != full_title)
+	free (full_title);
 }
 
 void
 real_message_3s (enum OperationMode mode, int *flags, char *title, char *str1, char *str2, const char *str3)
 {
-    char tmp[1024];
+    char *full_title;
     
-    if (mode == Background) {
-	strcpy (tmp, " Background process:");
-	strcat (tmp, title);
-	title = tmp;
-    }
+    if (mode == Background)
+	full_title = background_title (title);
+    else
+        full_title = title;
+    
     message (*flags, title, str1, str2, str3);
+    
+    if (title != full_title)
+	free (full_title);
 }
 /* }}} */
 
@@ -264,13 +281,14 @@ background_attention (int fd, void *xpid)
     pid_t  pid = (pid_t) xpid;
     int bytes;
     enum ReturnType type;
+    char *background_process_error = _(" Background process error ");
     
     bytes = read (fd, &routine, sizeof (routine));
     if (bytes < (sizeof (routine))){
 	if (errno == ECHILD)
-	    message (1, " Background process error ", " Child died unexpectedly ");
+	    message (1, background_process_error, _(" Child died unexpectedly "));
 	else
-	    message (1, " Background process error ", " Unknown error in child ");
+	    message (1, background_process_error, _(" Unknown error in child "));
 	unregister_task_running (pid, fd);
 	waitpid (pid, &status, 0);
 	return 0;
@@ -285,9 +303,9 @@ background_attention (int fd, void *xpid)
     
     read (fd, &argc, sizeof (argc));
     if (argc > MAXCALLARGS){
-	message (1, " Background protocol error ",
-		 " Background process sent us a request for more arguments \n"
-		 " than we can handle. \n");
+	message (1, _(" Background protocol error "),
+		 _(" Background process sent us a request for more arguments \n"
+		 " than we can handle. \n"));
     }
     read (fd, &type, sizeof (type));
     

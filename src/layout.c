@@ -159,15 +159,15 @@ static struct {
     WCheck *widget;
     char   *tkname;
 } check_options [] = {
-    { "&Xterm hintbar",	   &xterm_hintbar,   0, "h" },
-    { "h&Intbar visible",  &message_visible, 0, "v" },
-    { "&Keybar visible",   &keybar_visible,  0, "k" },
-    { "command &Prompt",   &command_prompt,  0, "p" },
-    { "show &Mini status", &show_mini_info,  0, "m" },
-    { "menu&Bar visible",  &menubar_visible, 0, "me" },
-    { "&Equal split",      &equal_split,     0, "eq" },
-    { "pe&Rmissions",      &permission_mode, 0, "pr" },
-    { "&File types",	   &filetype_mode,   0, "ft" },
+    { N_("&Xterm hintbar"),    &xterm_hintbar,   0, "h" },
+    { N_("h&Intbar visible"),  &message_visible, 0, "v" },
+    { N_("&Keybar visible"),   &keybar_visible,  0, "k" },
+    { N_("command &Prompt"),   &command_prompt,  0, "p" },
+    { N_("show &Mini status"), &show_mini_info,  0, "m" },
+    { N_("menu&Bar visible"),  &menubar_visible, 0, "me" },
+    { N_("&Equal split"),      &equal_split,     0, "eq" },
+    { N_("pe&Rmissions"),      &permission_mode, 0, "pr" },
+    { N_("&File types"),       &filetype_mode,   0, "ft" },
     { 0, 0, 0, 0 }
 };
 
@@ -276,13 +276,13 @@ static int layout_callback (struct Dlg_head *h, int Id, int Msg)
 
 	attrset (COLOR_HOT_NORMAL);
 	dlg_move (h, 1, 25);
-	addstr (" Layout ");
+	addstr (_(" Layout "));
 	dlg_move (h, 2, 5);
-	addstr (" Panel split ");
+	addstr (_(" Panel split "));
 	dlg_move (h, 8, 5);
-	addstr (" Highlight... ");
+	addstr (_(" Highlight... "));
 	dlg_move (h, 2, 30);
-	addstr (" Other options ");
+	addstr (_(" Other options "));
 	update_split ();
 	dlg_move (h, 6, 13);
 	addch ('=');
@@ -291,7 +291,7 @@ static int layout_callback (struct Dlg_head *h, int Id, int Msg)
 		old_output_lines = _output_lines;
 		attrset (COLOR_NORMAL);
 		dlg_move (h, 9, 40);
-		addstr ("output lines");
+		addstr (_("output lines"));
 		dlg_move (h, 9, 34);
 		printw ("%02d", _output_lines);
 	    }
@@ -358,16 +358,16 @@ static void init_layout (void)
     layout_dlg = create_dlg (0, 0, 15, 58, dialog_colors, layout_callback,
 			     "[Layout]", "layout", DLG_CENTER | DLG_GRID);
 			     
-    x_set_dialog_title (layout_dlg, "Layout");
+    x_set_dialog_title (layout_dlg, _("Layout"));
 
     add_widgetl (layout_dlg,
-		button_new (BY, BX+25, B_CANCEL, NORMAL_BUTTON, "&Cancel", 0, 0, "c"), 
+		button_new (BY, BX+25, B_CANCEL, NORMAL_BUTTON, _("&Cancel"), 0, 0, "c"), 
 		XV_WLAY_RIGHTOF);
     add_widgetl (layout_dlg,
-		button_new (BY, BX+12, B_EXIT, NORMAL_BUTTON, "&Save", 0, 0, "s"),
+		button_new (BY, BX+12, B_EXIT, NORMAL_BUTTON, _("&Save"), 0, 0, "s"),
 		XV_WLAY_RIGHTOF);
     add_widgetl (layout_dlg,
-		button_new (BY, BX, B_ENTER, DEFPUSH_BUTTON, "&Ok", 0, 0, "o"),
+		button_new (BY, BX, B_ENTER, DEFPUSH_BUTTON, _("&Ok"), 0, 0, "o"),
 		XV_WLAY_CENTERROW);
 #ifndef HAVE_X
     if (console_flag){
@@ -378,18 +378,18 @@ static void init_layout (void)
     }
 #endif    
 
-#define XTRACT(i) *check_options[i].variable, check_options[i].text, check_options[i].tkname
+#define XTRACT(i) *check_options[i].variable, _(check_options[i].text), check_options[i].tkname
 
     for (i = 0; i < 6; i++){
 	check_options [i].widget = check_new (8 - i, 31, XTRACT(i));
 	add_widgetl (layout_dlg, check_options [i].widget, XV_WLAY_BELOWCLOSE);
     }
 #ifdef HAVE_XVIEW
-    add_widgetl (layout_dlg, label_new (2, 30, "Other options", "oo"),
+    add_widgetl (layout_dlg, label_new (2, 30, _("Other options"), "oo"),
         XV_WLAY_NEXTCOLUMN);
-    add_widgetl (layout_dlg, label_new (8, 5, "Highlight...", "hl"),
+    add_widgetl (layout_dlg, label_new (8, 5, _("Highlight..."), "hl"),
         XV_WLAY_NEXTCOLUMN);
-    add_widgetl (layout_dlg, label_new (2, 5, "Panel split", "ps"),
+    add_widgetl (layout_dlg, label_new (2, 5, _("Panel split"), "ps"),
         XV_WLAY_NEXTCOLUMN);
 #endif        
     check_options [8].widget = check_new (10, 6, XTRACT(8));

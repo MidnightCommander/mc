@@ -134,7 +134,7 @@ exec_extension (char *filename, char *data, char **drops, int *move_dir, int sta
     file_name = strdup (tmpnam (NULL));
 
     if ((cmd_file = fopen (file_name, "w+")) == NULL){
-	message (1, " Error ", " Can't create temporary command file \n %s ",
+	message (1, MSG_ERROR, _(" Can't create temporary command file \n %s "),
 		 unix_error_string (errno));
 	return;
     }
@@ -144,7 +144,7 @@ exec_extension (char *filename, char *data, char **drops, int *move_dir, int sta
 	    if (*data == '}'){
 		char *parameter;
 		parameter_found = 0;
-		parameter = input_dialog (" Parameter ", prompt, "");
+		parameter = input_dialog (_(" Parameter "), prompt, "");
 		if (!parameter){
 		    /* User canceled */
 		    fclose (cmd_file);
@@ -288,7 +288,7 @@ exec_extension (char *filename, char *data, char **drops, int *move_dir, int sta
 	if (vfs_current_is_local ())
 	    shell_execute (file_name, 1);
 	else
-	    message (1, " Warning ", " Can't execute commands on a Virtual File System directory ");
+	    message (1, _(" Warning "), _(" Can't execute commands on a Virtual File System directory "));
 #endif
     }
     unlink (file_name);
@@ -383,14 +383,14 @@ check_stock_mc_ext:
 	        } else {
                     char *msg;
                     char *msg2;
-                    msg = copy_strings(" ", mc_home, MC_LIB_EXT " file error");
-                    msg2 = copy_strings("Format of the ", 
+                    msg = copy_strings(" ", mc_home, MC_LIB_EXT, _(" file error"), NULL);
+                    msg2 = copy_strings(_("Format of the "), 
                                          mc_home, 
-"mc.ext file has changed\n\
+("mc.ext file has changed\n\
 with version 3.0. It seems that installation\n\
 failed. Please fetch a fresh new copy from the\n\
 Midnight Commander package or in case you don't\n\
-have any, get it from ftp://ftp.nuclecu.unam.mx.", 0);
+have any, get it from ftp://ftp.nuclecu.unam.mx."), 0);
 	            message (1, msg, msg2);
                     free (msg);
                     free (msg2);
@@ -402,12 +402,12 @@ have any, get it from ftp://ftp.nuclecu.unam.mx.", 0);
 	if (home_error) {
             char *msg;
             char *msg2;
-            msg = copy_strings(" ~/" MC_USER_EXT " file error ");
-            msg2 = copy_strings("Format of the ~/" MC_USER_EXT " file has changed\n\
+            msg = copy_strings(" ~/", MC_USER_EXT, _(" file error "), NULL);
+            msg2 = copy_strings(_("Format of the ~/"), MC_USER_EXT, _(" file has changed\n\
 with version 3.0. You may want either to\n\
-copy it from ", mc_home, "mc.ext or use that\n\
+copy it from "), mc_home, _("mc.ext or use that\n\
 file as an example of how to write it.\n\
-", mc_home,  "mc.ext will be used for this moment.", 0);
+"), mc_home,  _("mc.ext will be used for this moment."), 0);
 	    message (1, msg, msg2);
             free (msg);
             free (msg2);

@@ -93,18 +93,18 @@ struct {
     WCheck *check;
 } check_perm[PERMISSIONS] = 
 {
-    { S_IXOTH, "execute/search by others", 0, 0, },
-    { S_IWOTH, "write by others", 0, 0, },
-    { S_IROTH, "read by others", 0, 0, },
-    { S_IXGRP, "execute/search by group", 0, 0, },
-    { S_IWGRP, "write by group", 0, 0, },
-    { S_IRGRP, "read by group", 0, 0, },
-    { S_IXUSR, "execute/search by owner", 0, 0, },
-    { S_IWUSR, "write by owner", 0, 0, },
-    { S_IRUSR, "read by owner", 0, 0, },
-    { S_ISVTX, "sticky bit", 0, 0, },
-    { S_ISGID, "set group ID on execution", 0, 0, },
-    { S_ISUID, "set user ID on execution", 0, 0, },
+    { S_IXOTH, N_("execute/search by others"), 0, 0, },
+    { S_IWOTH, N_("write by others"), 0, 0, },
+    { S_IROTH, N_("read by others"), 0, 0, },
+    { S_IXGRP, N_("execute/search by group"), 0, 0, },
+    { S_IWGRP, N_("write by group"), 0, 0, },
+    { S_IRGRP, N_("read by group"), 0, 0, },
+    { S_IXUSR, N_("execute/search by owner"), 0, 0, },
+    { S_IWUSR, N_("write by owner"), 0, 0, },
+    { S_IRUSR, N_("read by owner"), 0, 0, },
+    { S_ISVTX, N_("sticky bit"), 0, 0, },
+    { S_ISGID, N_("set group ID on execution"), 0, 0, },
+    { S_ISUID, N_("set user ID on execution"), 0, 0, },
 };
 
 struct {
@@ -112,12 +112,12 @@ struct {
     char *text;
 } chmod_but[BUTTONS] = 
 {
-    { B_CANCEL, NORMAL_BUTTON,  2, 33, "&Cancel" },
-    { B_ENTER,  DEFPUSH_BUTTON, 2, 17, "&Set" },
-    { B_CLRMRK, NORMAL_BUTTON,  0, 42, "C&lear marked" },
-    { B_SETMRK, NORMAL_BUTTON,  0, 27, "S&et marked" },
-    { B_MARKED, NORMAL_BUTTON,  0, 12, "&Marked all" },
-    { B_ALL,    NORMAL_BUTTON,  0, 0,  "Set &all" },
+    { B_CANCEL, NORMAL_BUTTON,  2, 33, N_("&Cancel") },
+    { B_ENTER,  DEFPUSH_BUTTON, 2, 17, N_("&Set") },
+    { B_CLRMRK, NORMAL_BUTTON,  0, 42, N_("C&lear marked") },
+    { B_SETMRK, NORMAL_BUTTON,  0, 27, N_("S&et marked") },
+    { B_MARKED, NORMAL_BUTTON,  0, 12, N_("&Marked all") },
+    { B_ALL,    NORMAL_BUTTON,  0, 0,  N_("Set &all") },
 };
 
 #ifdef HAVE_X
@@ -157,32 +157,32 @@ static void chmod_refresh (void)
     draw_box (ch_dlg, FY, FX, 10, 25);
 
     dlg_move (ch_dlg, FY + 1, FX + 2);
-    addstr ("Name");
+    addstr (_("Name"));
     dlg_move (ch_dlg, FY + 3, FX + 2);
-    addstr ("Permissions (Octal)");
+    addstr (_("Permissions (Octal)"));
     dlg_move (ch_dlg, FY + 5, FX + 2);
-    addstr ("Owner name");
+    addstr (_("Owner name"));
     dlg_move (ch_dlg, FY + 7, FX + 2);
-    addstr ("Group name");
+    addstr (_("Group name"));
     
     attrset (title_color);
     dlg_move (ch_dlg, 1, 28);
-    addstr (" Chmod command ");
+    addstr (_(" Chmod command "));
     dlg_move (ch_dlg, PY, PX + 1);
-    addstr (" Permission ");
+    addstr (_(" Permission "));
     dlg_move (ch_dlg, FY, FX + 1);
-    addstr (" File ");
+    addstr (_(" File "));
     
     attrset (selection_color);
 
     dlg_move (ch_dlg, TY, TX);
-    addstr ("Use SPACE to change");
+    addstr (_("Use SPACE to change"));
     dlg_move (ch_dlg, TY + 1, TX);
-    addstr ("an option, ARROW KEYS");
+    addstr (_("an option, ARROW KEYS"));
     dlg_move (ch_dlg, TY + 2, TX);
-    addstr ("to move between options");
+    addstr (_("to move between options"));
     dlg_move (ch_dlg, TY + 3, TX);
-    addstr ("and T or INS to mark");
+    addstr (_("and T or INS to mark"));
 }
 #endif
 
@@ -240,10 +240,10 @@ static void init_chmod (void)
     ch_dlg = create_dlg (0, 0, 22 - single_set, 70, dialog_colors,
 			 chmod_callback, "[Chmod]", "chmod", DLG_CENTER);
 			 
-    x_set_dialog_title (ch_dlg, "Chmod command");
+    x_set_dialog_title (ch_dlg, _("Chmod command"));
 
 #define XTRACT(i) BY+chmod_but[i].y-single_set, BX+chmod_but[i].x, \
-     chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text, 0, 0, NULL
+     chmod_but[i].ret_cmd, chmod_but[i].flags, _(chmod_but[i].text), 0, 0, NULL
 
     tk_new_frame (ch_dlg, "b.");
     for (i = 0; i < BUTTONS; i++) {
@@ -254,7 +254,7 @@ static void init_chmod (void)
     }
 
 
-#define XTRACT2(i) 0, check_perm [i].text, NULL
+#define XTRACT2(i) 0, _(check_perm [i].text), NULL
     tk_new_frame (ch_dlg, "c.");
     for (i = 0; i < PERMISSIONS; i++) {
 	check_perm[i].check = check_new (PY + (PERMISSIONS - i), PX + 2,
@@ -294,7 +294,7 @@ static void do_chmod (struct stat *sf)
     sf->st_mode &= and_mask;
     sf->st_mode |= or_mask;
     if (mc_chmod (cpanel->dir.list [c_file].fname, sf->st_mode) == -1)
-	message (1, " Error ", " Couldn't chmod \"%s\" \n %s ",
+	message (1, MSG_ERROR, _(" Couldn't chmod \"%s\" \n %s "),
 	     cpanel->dir.list [c_file].fname, unix_error_string (errno));
 
     do_file_mark (cpanel, c_file, 0);
@@ -326,12 +326,12 @@ void chmod_cmd (void)
 
     if (!vfs_current_is_local ()) {
 	if (vfs_current_is_extfs ()) {
-	    message (1, " Oops... ",
-		     " I can't run the Chmod command on an extfs ");
+	    message (1, _(" Oops... "),
+		     _(" I can't run the Chmod command on an extfs "));
 	    return;
 	} else if (vfs_current_is_tarfs ()) {
-	    message (1, " Oops... ",
-		     " I can't run the Chmod command on a tarfs ");
+	    message (1, _(" Oops... "),
+		     (" I can't run the Chmod command on a tarfs "));
 	    return;
 	}
     }
@@ -377,7 +377,7 @@ void chmod_cmd (void)
 	case B_ENTER:
 	    if (mode_change)
 		if (mc_chmod (fname, c_stat) == -1)
-		    message (1, " Error ", " Couldn't chmod \"%s\" \n %s ",
+		    message (1, MSG_ERROR, _(" Couldn't chmod \"%s\" \n %s "),
 	 		 fname, unix_error_string (errno));
 	    need_update = 1;
 	    break;
@@ -450,3 +450,4 @@ void ch2_cmd (int id)
   else
       chown_cmd ();
 }
+

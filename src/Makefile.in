@@ -32,7 +32,7 @@ HDRS =	color.h file.h mouse.h user.h dialog.h find.h main.h \
 	hotlist.h layout.h fsusage.h mountlist.h regex.h complete.h \
 	myslang.h command.h cmd.h tty.h fs.h panelize.h achown.h \
 	learn.h listmode.h features.inc background.h dirhist.h \
-	x.h popt.h textconf.h
+	x.h popt.h textconf.h i18n.h
 
 OBJS =	dir.o util.o screen.o dialog.o key.o menu.o\
 	file.o win.o color.o help.o find.o profile.o user.o view.o \
@@ -94,8 +94,8 @@ cross:
 	$(MAKE) CC=gcc-linux CPP="gcc-linux -E" \
 	CPPFLAGS="$(CPPFLAGS) -I/usr/local/lib/gcc-lib/i386-linux-linux/include/ncurses "
 
-$(srcdir)/mc.hlp: ync.hlp $(datadir)/xnc.hlp $(srcdir)/gindex.pl
-	cat ync.hlp $(datadir)/xnc.hlp | $(srcdir)/gindex.pl > $(srcdir)/mc.hlp
+$(srcdir)/mc.hlp: ync.hlp $(mclibdir)/xnc.hlp $(srcdir)/gindex.pl
+	cat ync.hlp $(mclibdir)/xnc.hlp | $(srcdir)/gindex.pl > $(srcdir)/mc.hlp
 
 ync.hlp: $(docdir)/mc.1.in man2hlp
 	./man2hlp 58 $(docdir)/mc.1.in > ync.hlp

@@ -57,9 +57,9 @@ mc.txt: mc.sgml
 ../src/fixhlp:
 	cd ../src; $(MAKE) fixhlp
 
-mc.hlp: mc.sgml ../src/fixhlp $(datadir)/xnc.hlp
+mc.hlp: mc.sgml ../src/fixhlp $(mclibdir)/xnc.hlp
 	$(LINUXDOCDIR)/bin/format -T hlp $(srcdir)/mc | ../src/fixhlp 58 mc.hlp.toc > mc.hlp.tmp
-	cat mc.hlp.toc mc.hlp.tmp $(datadir)/xnc.hlp > mc.hlp
+	cat mc.hlp.toc mc.hlp.tmp $(mclibdir)/xnc.hlp > mc.hlp
 	$(RMF) mc.hlp.toc mc.hlp.tmp
 
 mc.texi: mc.sgml

@@ -401,10 +401,10 @@ view_ok_to_quit (WView *view)
 	return 1;
     
     query_set_sel (1);
-    text = copy_strings ("File: \n\n    ", view->filename,
-			 "\n\nhas been modified, do you want to save the changes?\n", NULL);
+    text = copy_strings (_("File: \n\n    "), view->filename,
+			 _("\n\nhas been modified, do you want to save the changes?\n"), NULL);
 	    
-    r = query_dialog (" Save changes ", text, 2, 3, "&Yes", "&No", "&Cancel");
+    r = query_dialog (_(" Save changes "), text, 2, 3, _("&Yes"), _("&No"), _("&Cancel"));
     free (text);
     
     switch (r) {
@@ -446,7 +446,7 @@ init_growing_view (WView *view, char *name, char *filename)
 	open_error_pipe ();
 	if ((view->stdfile = popen (name, "r")) == NULL){
 	    close_error_pipe (view->have_frame?-1:1, view->data);
-	    return set_view_init_error (view, " Can't spawn child program ");
+	    return set_view_init_error (view, _(" Can't spawn child program "));
 	}
 
 #ifndef HAVE_XVIEW
@@ -456,13 +456,13 @@ init_growing_view (WView *view, char *name, char *filename)
 	    pclose (view->stdfile);
 	    view->stdfile = NULL;
 	    close_error_pipe (view->have_frame?-1:1, view->data);
-	    return set_view_init_error (view, " Empty output from child filter ");
+	    return set_view_init_error (view, _(" Empty output from child filter "));
 	}
 #endif
     } else {
         view->stdfile = NULL;
 	if ((view->file = mc_open (filename, O_RDONLY)) == -1)
-	    return set_view_init_error (view, " Could not open file ");
+	    return set_view_init_error (view, _(" Could not open file "));
     }
     return 0;
 }
@@ -480,7 +480,7 @@ static char *load_view_file (WView *view, char *filename)
 
     if ((view->file = mc_open (filename, O_RDONLY)) < 0){
 	set_view_init_error (view, 0);
-	return (copy_strings (" Can't open file \"",
+	return (copy_strings (_(" Can't open file \""),
 			      filename, "\"\n ",
 			      unix_error_string (errno), " ", 0));
 
@@ -488,13 +488,13 @@ static char *load_view_file (WView *view, char *filename)
     if (mc_fstat (view->file, &view->s) < 0){
 	set_view_init_error (view, 0);
 	close_view_file (view);
-	return copy_strings (" Can't stat file \n ",
+	return copy_strings (_(" Can't stat file \n "),
 			     unix_error_string (errno), " ", 0);
     }
     if (S_ISDIR (view->s.st_mode) || S_ISSOCK (view->s.st_mode)
 	|| S_ISFIFO (view->s.st_mode)){
 	close_view_file (view);
-	return set_view_init_error (view, " Can't view: not a regular file ");
+	return set_view_init_error (view, _(" Can't view: not a regular file "));
     }
 
     if (view->s.st_size == 0){
@@ -514,7 +514,7 @@ static char *load_view_file (WView *view, char *filename)
 	else {
 	    char *tmp;
 	    if ((view->localcopy = mc_getlocalcopy (filename)) == 0)
-		return set_view_init_error (view, " Can not fetch local copy " );
+		return set_view_init_error (view, _(" Can not fetch local copy ") );
 	    tmp = name_quote (view->localcopy, 0);
 	    cmd = copy_strings (decompress_command (type), " ", tmp, 0);
 	    free (tmp);
@@ -601,7 +601,7 @@ do_view_init (WView *view, char *_command, char *_file, int start_line)
 
     if (error){
 	if (!view->have_frame){
-	    message (1, " Error ", error);
+	    message (1, MSG_ERROR, error);
 	    free (error);
 	    return -1;
 	}
@@ -697,23 +697,23 @@ view_status (WView *view)
     hline (' ', w);
     if (w > 6){
     	i = w > 24 ? 18 : w - 6;
-    	printw ("File: %s", name_trunc (view->filename ? view->filename:
+    	printw (_("File: %s"), name_trunc (view->filename ? view->filename:
 					view->command ? view->command:"", i));
     	if (w > 30){
     	    widget_move (view, view->have_frame, 24);
             if (view->hex_mode)
-                printw ("Offset 0x%08x", view->edit_cursor);
+                printw (_("Offset 0x%08x"), view->edit_cursor);
             else
-		printw ("Col %d", -view->start_col);
+		printw (_("Col %d"), -view->start_col);
     	}
     	if (w > 60){
 	    widget_move (view, view->have_frame, 42);
-	    printw ("%s bytes", size_trunc (view->s.st_size));
+	    printw (_("%s bytes"), size_trunc (view->s.st_size));
         }
 	if (w > 70){
 	    printw (" ");
 	    if (view->growing_buffer)
-		addstr ("  [grow]");
+		addstr (_("  [grow]"));
 	}
         if (w - i > 4)
             if (view->hex_mode)
@@ -1463,7 +1463,7 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
     got_interrupt ();
     
     if (verbose){
-	d = message (D_INSERT, " Search ", "Searching %s", text);
+	d = message (D_INSERT, _(" Search "), _("Searching %s"), text);
 	mc_refresh ();
     }
     ch = 0;
@@ -1553,7 +1553,7 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
     }
 
     if (!s){
-	message (0, " Search ", " Search string not found ");
+	message (0, _(" Search "), _(" Search string not found "));
 	view->found_len = 0;
     }
 }
@@ -1675,7 +1675,7 @@ hex_search (WView *view, char *text)
     /* Then start the search */
     pos = block_search (view, buffer, block_len);
     if (pos == -1){
-	message (0, " Search ", " Search string not found ");
+	message (0, _(" Search "), _(" Search string not found "));
 	view->found_len = 0;
 	return;
     }
@@ -1714,7 +1714,7 @@ static int regexp_view_search (WView *view, char *pattern, char *string, int mat
 	}
 	flags |= REG_EXTENDED;
 	if (regcomp (&r, pattern, flags)){
-	    message (1, " Error ", " Invalid regular expression ");
+	    message (1, MSG_ERROR, _(" Invalid regular expression "));
 	    return -1;
 	}
 	old_pattern = strdup (pattern);
@@ -1842,9 +1842,9 @@ goto_line (WView *view)
     for (i = view->first; i < view->start_display; i++)
 	if (get_byte (view, i) == '\n')
 	    oldline ++;
-    sprintf (prompt, " The current line number is %d.\n"
-	             " Enter the new line number:", oldline);
-    line = input_dialog (" Goto line ", prompt, "");
+    sprintf (prompt, _(" The current line number is %d.\n"
+		       " Enter the new line number:"), oldline);
+    line = input_dialog (_(" Goto line "), prompt, "");
     if (line){
 	if (*line){
 	    move_to_top (view);
@@ -1871,7 +1871,7 @@ regexp_search (WView *view, int direction)
     }
     
     regexp = old ? old : regexp;
-    regexp = input_dialog (" Search ", " Enter regexp:", regexp);
+    regexp = input_dialog (_(" Search "), _(" Enter regexp:"), regexp);
     if ((!regexp) || (!*regexp)){
 	return;
     }
@@ -1903,7 +1903,7 @@ normal_search (WView *view, int direction)
     char *exp = "";
 
     exp = old ? old : exp;
-    exp = input_dialog (" Search ", " Enter search string:", exp);
+    exp = input_dialog (_(" Search "), _(" Enter search string:"), exp);
     if ((!exp) || (!*exp)){
 	return;
     }
@@ -1971,29 +1971,29 @@ view_labels (WView *view)
 {
     Dlg_head *h = view->widget.parent;
     
-    define_label (h, (Widget *) view, 1, "Help", help_cmd);
+    define_label (h, (Widget *) view, 1, _("Help"), help_cmd);
     
-    my_define (h, 10, "Quit", view_quit_cmd, view);
-    my_define (h, 4, view->hex_mode ?"Ascii":"Hex", toggle_hex_mode, view);
-    my_define (h, 5, "Line", goto_line, view);
-    my_define (h, 6, view->hex_mode ? "Save" : "RxSrch", regexp_search_cmd, view);
+    my_define (h, 10, _("Quit"), view_quit_cmd, view);
+    my_define (h, 4, view->hex_mode ? _("Ascii"): _("Hex"), toggle_hex_mode, view);
+    my_define (h, 5, _("Line"), goto_line, view);
+    my_define (h, 6, view->hex_mode ? _("Save") : _("RxSrch"), regexp_search_cmd, view);
 
     my_define (h, 2, view->hex_mode ? view->hexedit_mode ?
-                     view->view_side == view_side_left ? "EdText" : "EdHex" :
-                     view->growing_buffer ? "" : "Edit" :
-                     view->wrap_mode ? "UnWrap" : "Wrap",
+                     view->view_side == view_side_left ? _("EdText") : _("EdHex") :
+                     view->growing_buffer ? "" : _("Edit") :
+                     view->wrap_mode ? _("UnWrap") : _("Wrap"),
                      toggle_wrap_mode, view);
    
-    my_define (h, 7, view->hex_mode ? "HxSrch" : "Search",
+    my_define (h, 7, view->hex_mode ? _("HxSrch") : _("Search"),
 	       normal_search_cmd, view);
     
-    my_define (h, 8, view->viewer_magic_flag ? "Raw" : "Parse",
+    my_define (h, 8, view->viewer_magic_flag ? _("Raw") : _("Parse"),
 	       change_viewer, view);
 
     if (!view->have_frame){
-	my_define (h, 9, view->viewer_nroff_flag ? "Unform" : "Format",
+	my_define (h, 9, view->viewer_nroff_flag ? _("Unform") : _("Format"),
 		   change_nroff, view);
-	my_define (h, 3, "Quit", view_quit_cmd, view);
+	my_define (h, 3, _("Quit"), view_quit_cmd, view);
     }
     
     redraw_labels (h, (Widget *) view);

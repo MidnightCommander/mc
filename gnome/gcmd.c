@@ -10,6 +10,7 @@
 #include "boxes.h"
 #include "panelize.h"
 #include "gcmd.h"
+#include "dialog.h"
 
 void
 gnome_listing_cmd (GtkWidget *widget, WPanel *panel)
@@ -30,7 +31,7 @@ void
 gnome_compare_panels (void)
 {
 	if (get_other_panel () == NULL){
-		message (1, " Error ", " There is no other panel to compare contents to ");
+		message (1, MSG_ERROR, _(" There is no other panel to compare contents to "));
 		return;
 	}
 	compare_dirs_cmd ();

@@ -89,10 +89,10 @@ struct {
     char *text;
     char *tkname;
 } panelize_but[BUTTONS] = {
-    { B_CANCEL, NORMAL_BUTTON, 0, 53, "&Cancel",  "c"},
-    { B_ADD, NORMAL_BUTTON,    0, 28, "&Add new", "a"},
-    { B_REMOVE, NORMAL_BUTTON, 0, 16, "&Remove",  "r"},
-    { B_ENTER, DEFPUSH_BUTTON, 0,  0, "Pane&lize","l"},
+    { B_CANCEL, NORMAL_BUTTON, 0, 53, N_("&Cancel"),  "c"},
+    { B_ADD, NORMAL_BUTTON,    0, 28, N_("&Add new"), "a"},
+    { B_REMOVE, NORMAL_BUTTON, 0, 16, N_("&Remove"),  "r"},
+    { B_ENTER, DEFPUSH_BUTTON, 0,  0, N_("Pane&lize"),"l"},
 };
 
 /* Directory panelize */
@@ -113,7 +113,7 @@ static void panelize_refresh (void)
     
     attrset (COLOR_HOT_NORMAL);
     dlg_move (panelize_dlg, 1, (72 - 19) / 2);
-    addstr (" External panelize ");
+    addstr (_(" External panelize "));
 }
 #endif
 
@@ -164,7 +164,7 @@ static void init_panelize (void)
     panelize_dlg = create_dlg (0, 0, 22, 74, dialog_colors,
 			      panelize_callback, "[External panelize]", "panelize",
 			      DLG_CENTER|DLG_GRID);
-    x_set_dialog_title (panelize_dlg, "External panelize");
+    x_set_dialog_title (panelize_dlg, _("External panelize"));
 
 #define XTRACT(i) BY+panelize_but[i].y, BX+panelize_but[i].x, panelize_but[i].ret_cmd, panelize_but[i].flags, panelize_but[i].text, 0, 0, panelize_but[i].tkname
 
@@ -175,7 +175,7 @@ static void init_panelize (void)
     pname = input_new (UY+14, UX, INPUT_COLOR, 63, "", "in");
     add_widgetl (panelize_dlg, pname, XV_WLAY_RIGHTOF);
 
-    add_widgetl (panelize_dlg, label_new (UY+13, UX, "Command", "label-command"), XV_WLAY_NEXTROW);
+    add_widgetl (panelize_dlg, label_new (UY+13, UX, _("Command"), "label-command"), XV_WLAY_NEXTROW);
 
     /* get new listbox */
     l_panelize = listbox_new (UY + 1, UX + 1, 61, 10, 0, l_call, "li");
@@ -189,7 +189,7 @@ static void init_panelize (void)
     add_widgetl (panelize_dlg, l_panelize, XV_WLAY_EXTENDWIDTH); 
 
     listbox_select_entry (l_panelize, 
-        listbox_search_text (l_panelize, "Other command"));
+        listbox_search_text (l_panelize, _("Other command")));
 }
 
 static void panelize_done (void)
@@ -229,7 +229,7 @@ void add2panelize_cmd (void)
     char *label;
 
     if (pname->buffer && (*pname->buffer)) {
-	label = input_dialog (" Add to external panelize ", "Unnamed find", 
+	label = input_dialog (_(" Add to external panelize "), "Unnamed find", 
 			      "");
 	if (!label)
 	    return;
@@ -244,7 +244,7 @@ void add2panelize_cmd (void)
 
 static void remove_from_panelize (struct panelize *entry)
 {
-    if (strcmp (entry->label, "Other command") != 0) {
+    if (strcmp (entry->label, _("Other command")) != 0) {
 	if (entry == panelize) {
 	    panelize = panelize->next;
 	} else {
@@ -267,8 +267,8 @@ void external_panelize (void)
     char *target = NULL;
 
     if (!vfs_current_is_local ()){
-	message (1, " Oops... ",
-	    " I can't run external panalize while logged on a non local directory ");
+	message (1, _(" Oops... "),
+		 _(" I can't run external panalize while logged on a non local directory "));
 	return;
     }
 
@@ -314,12 +314,12 @@ void load_panelize (void)
     
     profile_keys = profile_init_iterator (panelize_section, profile_name);
     
-    add2panelize (strdup ("Other command"), strdup (""));
+    add2panelize (strdup (_("Other command")), strdup (""));
 
     if (!profile_keys){
-	add2panelize (strdup ("Find rejects after patching"), strdup ("find . -name \\*.rej -print"));
-	add2panelize (strdup ("Find *.orig after patching"), strdup ("find . -name \\*.orig -print"));
-	add2panelize (strdup ("Find SUID and SGID programs"), strdup ("find . \\( \\( -perm -04000 -a -perm +011 \\) -o \\( -perm -02000 -a -perm +01 \\) \\) -print"));
+	add2panelize (strdup (_("Find rejects after patching")), strdup ("find . -name \\*.rej -print"));
+	add2panelize (strdup (_("Find *.orig after patching")), strdup ("find . -name \\*.orig -print"));
+	add2panelize (strdup (_("Find SUID and SGID programs")), strdup ("find . \\( \\( -perm -04000 -a -perm +011 \\) -o \\( -perm -02000 -a -perm +01 \\) \\) -print"));
 	return;
     }
     
@@ -335,7 +335,7 @@ void save_panelize (void)
     
     profile_clean_section (panelize_section, profile_name);
     for (;current; current = current->next){
-    	if (strcmp (current->label, "Other command"))
+    	if (strcmp (current->label, _("Other command")))
 	    WritePrivateProfileString (panelize_section,
 				       current->label,
 				       current->command,
@@ -370,7 +370,7 @@ void do_external_panelize (char *command)
     open_error_pipe ();
     external = popen (command, "r");
     if (!external){
-	close_error_pipe (1, "Cannot invoke command.");
+	close_error_pipe (1, _("Cannot invoke command."));
 	return;
     }
     clean_dir (list, cpanel->count);
@@ -425,7 +425,7 @@ void do_external_panelize (char *command)
 #else /* SCO_FLAVOR */
     if (WEXITSTATUS(pclose (external)) < 0)
 #endif /* SCO_FLAVOR */
-	message (0, "External panelize", "Pipe close failed");
+	message (0, _("External panelize"), _("Pipe close failed"));
     close_error_pipe (0, 0);
     try_to_select (cpanel, NULL);
     paint_panel (cpanel);

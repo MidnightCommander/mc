@@ -56,6 +56,7 @@ typedef struct {
     char *help;
     char *class;		/* Used for Tk's class name */
     QuickWidget *widgets;
+    int  i18n;			/* If true, internationalization has happened */
 } QuickDialog;
 
 int quick_dialog (QuickDialog *qd);

@@ -55,8 +55,8 @@ struct {
     int ret_cmd, flags, y, x;
     char *text;
 } learn_but[BUTTONS] = {
-    { B_CANCEL, NORMAL_BUTTON, 0, 14, "&Cancel" },
-    { B_ENTER, DEFPUSH_BUTTON, 0,  0, "&Save" }
+    { B_CANCEL, NORMAL_BUTTON, 0, 14, N_("&Cancel") },
+    { B_ENTER, DEFPUSH_BUTTON, 0,  0, N_("&Save") }
 };
 
 static Dlg_head *learn_dlg;
@@ -88,14 +88,14 @@ static void learn_refresh (void)
 static int learn_button (int action, void *param)
 {
     unsigned char *seq;
-    Dlg_head *d = message (D_INSERT | 1, " Teach me a key ",
-"Please press the %s\n"
+    Dlg_head *d = message (D_INSERT | 1, _(" Teach me a key "),
+_("Please press the %s\n"
 "and then wait until this message disappears.\n\n"
 "Then, press it again to see if OK appears\n"
 "next to its button.\n\n"
 "If you want to escape, press a single Escape key\n"
-"and wait as well.", 
-        key_name_conv_tab [action - B_USER].longname);
+"and wait as well."), 
+        _(key_name_conv_tab [action - B_USER].longname));
     mc_refresh ();
     if (learnkeys [action - B_USER].sequence != NULL) {
 	free (learnkeys [action - B_USER].sequence);
@@ -117,8 +117,8 @@ static int learn_button (int action, void *param)
 	    define_sequence (key_name_conv_tab [action - B_USER].code, seq, 
 			     MCKEY_NOACTION);
 	} else {
-	    message (0, " Cannot accept this key ",
-		" You have entered \"%s\"", seq);
+	    message (0, _(" Cannot accept this key "),
+		_(" You have entered \"%s\""), seq);
 	}
 	
     	free (seq);
@@ -165,21 +165,21 @@ static int learn_check_key (int c)
 	    if (!learnkeys [i].ok) {
 	    	dlg_select_widget (learn_dlg, learnkeys [i].button);
 	        label_set_text ((WLabel *) learnkeys [i].label,
-	            "OK");
+	            _("OK"));
 	        learnkeys [i].ok = 1;
 	        learnok++;
 	        if (learnok >= learn_total) {
 	            learn_dlg->ret_value = B_CANCEL;
 	            if (learnchanged) {
-	                if (query_dialog (" Learn keys ", "\
-			    It seems that all your keys already\n\
-			    work fine. That's great.",
-	                    1, 2, "&Save", "&Discard") == 0)
+	                if (query_dialog (_(" Learn keys "), 
+			    _("It seems that all your keys already\n"
+			      "work fine. That's great."),
+	                    1, 2, _("&Save"), _("&Discard")) == 0)
 	                    learn_dlg->ret_value = B_ENTER;
 	            } else {
-	            	message (1, " Learn keys ", "\
-			Great! You have a complete terminal database!\n\
-			All your keys work well.");
+	            	message (1, _(" Learn keys "),
+			_("Great! You have a complete terminal database!\n"
+			  "All your keys work well."));
 	            }
 		    dlg_stop (learn_dlg);
 	        }
@@ -234,9 +234,9 @@ static void init_learn (void)
     learn_dlg = create_dlg (0, 0, 23, 78, dialog_colors,
 			      learn_callback, "[Learn keys]", "Learn keys",
 			      DLG_CENTER);
-    x_set_dialog_title (learn_dlg, "Learn keys");
+    x_set_dialog_title (learn_dlg, _("Learn keys"));
 
-#define XTRACT(i) BY+learn_but[i].y, BX+learn_but[i].x, learn_but[i].ret_cmd, learn_but[i].flags, learn_but[i].text, 0, 0, NULL
+#define XTRACT(i) BY+learn_but[i].y, BX+learn_but[i].x, learn_but[i].ret_cmd, learn_but[i].flags, _(learn_but[i].text), 0, 0, NULL
 
     for (i = 0; i < BUTTONS; i++)
 	add_widget (learn_dlg, button_new (XTRACT (i)));
@@ -254,7 +254,7 @@ static void init_learn (void)
     for (i = j - 1, key = key_name_conv_tab + j - 1; i >= 0; i--, key--) {
     	learnkeys [i].ok = 0;
     	learnkeys [i].sequence = NULL;
-        sprintf (buffer, "%-16s", key->longname);
+        sprintf (buffer, "%-16s", _(key->longname));
 	add_widget (learn_dlg, learnkeys [i].button = (Widget *)
 	    button_new (y, x, B_USER + i, NARROW_BUTTON, buffer, learn_button, 0, NULL));
 	add_widget (learn_dlg, learnkeys [i].label = (Widget *)
@@ -266,9 +266,12 @@ static void init_learn (void)
 	    y = UY + ROWS - 1;
 	}
     }
-    add_widget (learn_dlg, label_new (UY+14, 5, "Press all the keys mentioned here. After you have done it, check", NULL));
-    add_widget (learn_dlg, label_new (UY+15, 5, "which keys are not marked with OK.  Press space on the missing", NULL));
-    add_widget (learn_dlg, label_new (UY+16, 5, "key, or click with the mouse to define it. Move around with Tab.", NULL));
+    add_widget (learn_dlg,
+		label_new (UY+14, 5, _("Press all the keys mentioned here. After you have done it, check"), NULL));
+    add_widget (learn_dlg,
+		label_new (UY+15, 5, _("which keys are not marked with OK.  Press space on the missing"), NULL));
+    add_widget (learn_dlg,
+		label_new (UY+16, 5, _("key, or click with the mouse to define it. Move around with Tab."), NULL));
 }
 
 static void learn_done (void)

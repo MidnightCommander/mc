@@ -412,25 +412,25 @@ static struct {
     char *(*string_fn)(file_entry *, int);
     sortfn *sort_routine;
 } formats [] = {
-{ "name",  12, 1, J_LEFT,  "Name",       1, string_file_name,       (sortfn *) sort_name },
-{ "size",  7,  0, J_RIGHT, "Size",       1, string_file_size,       (sortfn *) sort_size },
-{ "type",  1,  0, J_LEFT,  "",           1, string_file_type,       (sortfn *) sort_type },
-{ "mtime", 12, 0, J_RIGHT, "MTime",      1, string_file_mtime,      (sortfn *) sort_time },
-{ "bsize", 7,  0, J_RIGHT, "Size",       1, string_file_size_brief, (sortfn *) sort_size },
-{ "perm",  10, 0, J_LEFT,  "Permission", 1, string_file_permission, NULL },
-{ "mode",  6,  0, J_RIGHT, "Perm",       1, string_file_perm_octal, NULL },
-{ "|",     1,  0, J_RIGHT, "|",          0, 0,                      NULL },
-{ "nlink", 2,  0, J_RIGHT, "Nl",         1, string_file_nlinks,     (sortfn *) sort_links },
-{ "ngid",  5,  0, J_RIGHT, "GID",        1, string_file_ngid,       (sortfn *) sort_ngid },
-{ "nuid",  5,  0, J_RIGHT, "UID",        1, string_file_nuid,       (sortfn *) sort_nuid },
-{ "owner", 8,  0, J_LEFT,  "Owner",      1, string_file_owner,      (sortfn *) sort_owner },
-{ "group", 8,  0, J_LEFT,  "Group",      1, string_file_group,      (sortfn *) sort_group },
-{ "atime", 12, 0, J_RIGHT, "ATime",      1, string_file_atime,      (sortfn *) sort_atime },
-{ "ctime", 12, 0, J_RIGHT, "CTime",      1, string_file_ctime,      (sortfn *) sort_ctime },
-{ "space", 1,  0, J_RIGHT, " ",          0, string_space,           NULL },
-{ "dot",   1,  0, J_RIGHT, " ",          0, string_dot,             NULL },
-{ "mark",  1,  0, J_RIGHT, " ",          1, string_marked,          NULL },
-{ "inode", 5,  0, J_RIGHT, "Inode",      1, string_inode,           (sortfn *) sort_inode },
+{ "name",  12, 1, J_LEFT,  N_("Name"),       1, string_file_name,       (sortfn *) sort_name },
+{ "size",  7,  0, J_RIGHT, N_("Size"),       1, string_file_size,       (sortfn *) sort_size },
+{ "type",  1,  0, J_LEFT,     "",           1, string_file_type,       (sortfn *) sort_type },
+{ "mtime", 12, 0, J_RIGHT, N_("MTime"),      1, string_file_mtime,      (sortfn *) sort_time },
+{ "bsize", 7,  0, J_RIGHT, N_("Size"),       1, string_file_size_brief, (sortfn *) sort_size },
+{ "perm",  10, 0, J_LEFT,  N_("Permission"), 1, string_file_permission, NULL },
+{ "mode",  6,  0, J_RIGHT, N_("Perm"),       1, string_file_perm_octal, NULL },
+{ "|",     1,  0, J_RIGHT, N_("|"),          0, 0,                      NULL },
+{ "nlink", 2,  0, J_RIGHT, N_("Nl"),         1, string_file_nlinks,     (sortfn *) sort_links },
+{ "ngid",  5,  0, J_RIGHT, N_("GID"),        1, string_file_ngid,       (sortfn *) sort_ngid },
+{ "nuid",  5,  0, J_RIGHT, N_("UID"),        1, string_file_nuid,       (sortfn *) sort_nuid },
+{ "owner", 8,  0, J_LEFT,  N_("Owner"),      1, string_file_owner,      (sortfn *) sort_owner },
+{ "group", 8,  0, J_LEFT,  N_("Group"),      1, string_file_group,      (sortfn *) sort_group },
+{ "atime", 12, 0, J_RIGHT, N_("ATime"),      1, string_file_atime,      (sortfn *) sort_atime },
+{ "ctime", 12, 0, J_RIGHT, N_("CTime"),      1, string_file_ctime,      (sortfn *) sort_ctime },
+{ "space", 1,  0, J_RIGHT,    " ",          0, string_space,           NULL },
+{ "dot",   1,  0, J_RIGHT,    " ",          0, string_dot,             NULL },
+{ "mark",  1,  0, J_RIGHT,    " ",          1, string_marked,          NULL },
+{ "inode", 5,  0, J_RIGHT, N_("Inode"),      1, string_inode,           (sortfn *) sort_inode },
 };
 
 static char *
@@ -634,7 +634,7 @@ display_mini_info (WPanel *panel)
 	attrset (MARKED_COLOR);
 	printw  ("%*s", panel->widget.cols-2, " ");
 	widget_move (&panel->widget, llines (panel)+3, 1);
-	sprintf (buffer, "  %s bytes in %d file%s",
+	sprintf (buffer, _("  %s bytes in %d file%s"),
 		 size_trunc_sep (panel->total), panel->marked,
 		 panel->marked == 1 ? "" : "s");
 	p = buffer;
@@ -661,7 +661,7 @@ display_mini_info (WPanel *panel)
 	    printw ("-> %-*s", panel->widget.cols - 5,
 		     name_trunc (link_target, panel->widget.cols - 5));
 	} else 
-	    addstr ("<readlink failed>");
+	    addstr (_("<readlink failed>"));
 	return;
     }
 #endif
@@ -1208,7 +1208,10 @@ parse_display_format (WPanel *panel, char *format, char **error, int isstatus, i
 	    darr->use_in_gui          = formats [i].use_in_gui;
             darr->requested_field_len = formats [i].min_size;
             darr->string_fn           = formats [i].string_fn;
-            darr->title               = formats [i].title;
+	    if (formats [i].title [0])
+		    darr->title = _(formats [i].title);
+	    else
+		    darr->title = "";
             darr->id                  = formats [i].id;
 	    darr->expand              = formats [i].expands;
 	    
@@ -1252,7 +1255,7 @@ parse_display_format (WPanel *panel, char *format, char **error, int isstatus, i
 	    delete_format (home);
 	    old_char = format [pos];
 	    format [pos] = 0;
-	    *error = copy_strings("Unknow tag on display format: ", format, 0);
+	    *error = copy_strings(_("Unknow tag on display format: "), format, 0);
 	    format [pos] = old_char;
 	    return 0;
 	}
@@ -1935,9 +1938,9 @@ do_enter (WPanel *panel)
 	    {
 	        char *tmp = name_quote (selection (panel)->fname, 0);
 	        char *cmd = copy_strings (".", PATH_SEP_STR, tmp, 0);
-	        if (!confirm_execute || (query_dialog (" The Midnight Commander ",
-	                                    " Do you really want to execute? ",
-	                                         0, 2, "&Yes", "&No") == 0))
+	        if (!confirm_execute || (query_dialog (_(" The Midnight Commander "),
+						       _(" Do you really want to execute? "),
+						       0, 2, _("&Yes"), _("&No")) == 0))
 	            execute (cmd);
 	        free (tmp);
 	        free (cmd);
@@ -2129,14 +2132,14 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
     switch (msg){
     case WIDGET_INIT:
 #ifdef HAVE_X
-	define_label (h, (Widget *)panel, 1, "Help", help_cmd);
-	define_label (h, (Widget *)panel, 2, "Menu", user_menu_cmd);
-	define_label (h, (Widget *)panel, 3, "View", view_panel_cmd);
-	define_label (h, (Widget *)panel, 4, "Edit", edit_panel_cmd);
-	define_label (h, (Widget *)panel, 5, "Copy", copy_cmd);
-	define_label (h, (Widget *)panel, 6, "RenMov", ren_cmd);
-	define_label (h, (Widget *)panel, 7, "Mkdir", mkdir_panel_cmd);
-	define_label (h, (Widget *)panel, 8, "Delete", delete_cmd);
+	define_label (h, (Widget *)panel, 1, _("Help"), help_cmd);
+	define_label (h, (Widget *)panel, 2, _("Menu"), user_menu_cmd);
+	define_label (h, (Widget *)panel, 3, _("View"), view_panel_cmd);
+	define_label (h, (Widget *)panel, 4, _("Edit"), edit_panel_cmd);
+	define_label (h, (Widget *)panel, 5, _("Copy"), copy_cmd);
+	define_label (h, (Widget *)panel, 6, _("RenMov"), ren_cmd);
+	define_label (h, (Widget *)panel, 7, _("Mkdir"), mkdir_panel_cmd);
+	define_label (h, (Widget *)panel, 8, _("Delete"), delete_cmd);
 	x_create_panel (h, h->wdata, panel);
 #endif	
 	return 1;
@@ -2163,14 +2166,14 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
 	show_dir (panel);
 	focus_select_item (panel);
 #ifndef HAVE_X	
-	define_label (h, (Widget *)panel, 1, "Help", help_cmd);
-	define_label (h, (Widget *)panel, 2, "Menu", user_menu_cmd);
-	define_label (h, (Widget *)panel, 3, "View", view_panel_cmd);
-	define_label (h, (Widget *)panel, 4, "Edit", edit_panel_cmd);
-	define_label (h, (Widget *)panel, 5, "Copy", copy_cmd);
-	define_label (h, (Widget *)panel, 6, "RenMov", ren_cmd);
-	define_label (h, (Widget *)panel, 7, "Mkdir", mkdir_panel_cmd);
-	define_label (h, (Widget *)panel, 8, "Delete", delete_cmd);
+	define_label (h, (Widget *)panel, 1, _("Help"), help_cmd);
+	define_label (h, (Widget *)panel, 2, _("Menu"), user_menu_cmd);
+	define_label (h, (Widget *)panel, 3, _("View"), view_panel_cmd);
+	define_label (h, (Widget *)panel, 4, _("Edit"), edit_panel_cmd);
+	define_label (h, (Widget *)panel, 5, _("Copy"), copy_cmd);
+	define_label (h, (Widget *)panel, 6, _("RenMov"), ren_cmd);
+	define_label (h, (Widget *)panel, 7, _("Mkdir"), mkdir_panel_cmd);
+	define_label (h, (Widget *)panel, 8, _("Delete"), delete_cmd);
 	redraw_labels (h, (Widget *)panel);
 #endif
 	/* Chain behaviour */

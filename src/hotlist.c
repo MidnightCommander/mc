@@ -132,16 +132,16 @@ struct _hotlist_but {
     char *tkname;
     int   type;
 } hotlist_but[] = {
-    { B_MOVE, NORMAL_BUTTON,         1,   42, "&Move",       "move", LIST_HOTLIST},
-    { B_REMOVE, NORMAL_BUTTON,       1,   30, "&Remove",     "r",    LIST_HOTLIST},
-    { B_APPEND, NORMAL_BUTTON,       1,   15, "&Append",     "e",    LIST_MOVELIST},
-    { B_INSERT, NORMAL_BUTTON,       1,    0, "&Insert",     "g",    LIST_MOVELIST},
-    { B_NEW_ENTRY, NORMAL_BUTTON,    1,   15, "New &Entry",  "e",    LIST_HOTLIST},
-    { B_NEW_GROUP, NORMAL_BUTTON,    1,    0, "New &Group",  "g",    LIST_HOTLIST},
-    { B_CANCEL, NORMAL_BUTTON,       0,   53, "&Cancel",     "cc",   LIST_HOTLIST|LIST_VFSLIST|LIST_MOVELIST},
-    { B_UP_GROUP, NORMAL_BUTTON,     0,   42, "&Up",         "up",   LIST_HOTLIST|LIST_MOVELIST},
-    { B_ADD_CURRENT, NORMAL_BUTTON,  0,   20, "&Add current","ad",   LIST_HOTLIST},
-    { B_ENTER, DEFPUSH_BUTTON,       0,    0, "Change &To",  "ct",   LIST_HOTLIST|LIST_VFSLIST|LIST_MOVELIST},
+    { B_MOVE, NORMAL_BUTTON,         1,   42, N_("&Move"),       "move", LIST_HOTLIST},
+    { B_REMOVE, NORMAL_BUTTON,       1,   30, N_("&Remove"),     "r",    LIST_HOTLIST},
+    { B_APPEND, NORMAL_BUTTON,       1,   15, N_("&Append"),     "e",    LIST_MOVELIST},
+    { B_INSERT, NORMAL_BUTTON,       1,    0, N_("&Insert"),     "g",    LIST_MOVELIST},
+    { B_NEW_ENTRY, NORMAL_BUTTON,    1,   15, N_("New &Entry"),  "e",    LIST_HOTLIST},
+    { B_NEW_GROUP, NORMAL_BUTTON,    1,    0, N_("New &Group"),  "g",    LIST_HOTLIST},
+    { B_CANCEL, NORMAL_BUTTON,       0,   53, N_("&Cancel"),     "cc",   LIST_HOTLIST|LIST_VFSLIST|LIST_MOVELIST},
+    { B_UP_GROUP, NORMAL_BUTTON,     0,   42, N_("&Up"),         "up",   LIST_HOTLIST|LIST_MOVELIST},
+    { B_ADD_CURRENT, NORMAL_BUTTON,  0,   20, N_("&Add current"),"ad",   LIST_HOTLIST},
+    { B_ENTER, DEFPUSH_BUTTON,       0,    0, N_("Change &To"),  "ct",   LIST_HOTLIST|LIST_VFSLIST|LIST_MOVELIST},
 };
 
 /* Directory hotlist */
@@ -199,7 +199,7 @@ static INLINE void update_path_name ()
 	    if (hlp->type == HL_TYPE_ENTRY)
 		text = hlp->directory;
 	    else
-		text = "Subgroup - press ENTER to see list";
+		text = _("Subgroup - press ENTER to see list");
 	    
 #ifndef HAVE_X
 	    p = copy_strings (" ", current_group->label, " ", (char *)0);
@@ -533,9 +533,9 @@ static void init_hotlist (int list_type)
 			      list_type == LIST_VFSLIST ? "vfshot" : "hotlist",
 			      DLG_CENTER|DLG_GRID);
     x_set_dialog_title (hotlist_dlg,
-        list_type == LIST_VFSLIST ? "Active VFS directories" : "Directory hotlist");
+        list_type == LIST_VFSLIST ? _("Active VFS directories") : _("Directory hotlist"));
 
-#define XTRACT(i) BY+hotlist_but[i].y, BX+hotlist_but[i].x, hotlist_but[i].ret_cmd, hotlist_but[i].flags, hotlist_but[i].text, hotlist_button_callback, 0, hotlist_but[i].tkname
+#define XTRACT(i) BY+hotlist_but[i].y, BX+hotlist_but[i].x, hotlist_but[i].ret_cmd, hotlist_but[i].flags, _(hotlist_but[i].text), hotlist_button_callback, 0, hotlist_but[i].tkname
 
     for (i = 0; i < BUTTONS; i++){
 	if (hotlist_but[i].type & list_type)
@@ -552,10 +552,10 @@ static void init_hotlist (int list_type)
     add_widget (hotlist_dlg, pname);
 #ifndef HAVE_X
     if (!hotlist_state.moving) {
-	add_widget (hotlist_dlg, label_new (UY-12+LINES, UX+1, " Directory path ", NULL));
+	add_widget (hotlist_dlg, label_new (UY-12+LINES, UX+1, _(" Directory path "), NULL));
 
 	/* This one holds the displayed pathname */
-	pname_group = label_new (UY, UX+1, " Directory label ", NULL);
+	pname_group = label_new (UY, UX+1, _(" Directory label "), NULL);
 	add_widget (hotlist_dlg, pname_group);
     }
 #endif
@@ -576,7 +576,7 @@ static void init_hotlist (int list_type)
 static void init_movelist (int list_type, struct hotlist *item)
 {
     int i;
-    char *hdr = copy_strings ("Moving ", item->label, 0);
+    char *hdr = copy_strings (_("Moving "), item->label, 0);
 
     do_refresh ();
 
@@ -601,7 +601,7 @@ static void init_movelist (int list_type, struct hotlist *item)
      * that one will hold the path name label
      */
 #ifndef HAVE_X
-    movelist_group = label_new (UY, UX+1, " Directory label ", NULL);
+    movelist_group = label_new (UY, UX+1, _(" Directory label "), NULL);
     add_widget (movelist_dlg, movelist_group);
 #endif
     /* get new listbox */
@@ -694,11 +694,11 @@ static int add_new_entry_input (char *header, char *text1, char *text2, char *he
 {
     QuickDialog Quick_input;
     QuickWidget quick_widgets [] = {
-    { quick_button, 55, 80, 4, 0, "&Cancel", 0, B_CANCEL, 0, 0,
+    { quick_button, 55, 80, 4, 0, _("&Cancel"), 0, B_CANCEL, 0, 0,
 	  XV_WLAY_DONTCARE, "button-cancel" },
-    { quick_button, 30, 80, 4, 0, "&Insert", 0, B_INSERT, 0, 0,
+    { quick_button, 30, 80, 4, 0, _("&Insert"), 0, B_INSERT, 0, 0,
 	  XV_WLAY_DONTCARE, "button-insert" },
-    { quick_button, 10, 80, 4, 0, "&Append", 0, B_APPEND, 0, 0,
+    { quick_button, 10, 80, 4, 0, _("&Append"), 0, B_APPEND, 0, 0,
 	  XV_WLAY_DONTCARE, "button-append" },
     { quick_input,  4, 80, 4, 0, "",58, 0, 0, 0, XV_WLAY_BELOWCLOSE, "input-pth" },
     { quick_label,  3, 80, 3, 0, 0, 0, 0, 0, 0, XV_WLAY_DONTCARE, "label-pth" },
@@ -720,6 +720,7 @@ static int add_new_entry_input (char *header, char *text1, char *text2, char *he
     Quick_input.title = header;
     Quick_input.help  = help;
     Quick_input.class = "hotlist_new_entry";
+    Quick_input.i18n  = 0;
     quick_widgets [6].text = text1;
     quick_widgets [4].text = text2;
     quick_widgets [5].text = *r1;
@@ -755,7 +756,7 @@ static void add_new_entry_cmd (void)
     /* Take current directory as default value for input fields */
     title = url = cpanel->cwd;
 
-    ret = add_new_entry_input ("New hotlist entry", "Directory label", "Directory path",
+    ret = add_new_entry_input (_("New hotlist entry"), _("Directory label"), _("Directory path"),
 	 "[Hotlist]", &title, &url);
 
     if (!ret || !title || !*title || !url || !*url)
@@ -774,11 +775,11 @@ static int add_new_group_input (char *header, char *label, char **result)
     int		ret;
     QuickDialog Quick_input;
     QuickWidget quick_widgets [] = {
-    { quick_button, 55, 80, 1, 0, "&Cancel", 0, B_CANCEL, 0, 0,
+    { quick_button, 55, 80, 1, 0, N_("&Cancel"), 0, B_CANCEL, 0, 0,
 	  XV_WLAY_DONTCARE, "button-cancel" },
-    { quick_button, 30, 80, 1, 0, "&Insert", 0, B_INSERT, 0, 0,
+    { quick_button, 30, 80, 1, 0, N_("&Insert"), 0, B_INSERT, 0, 0,
 	  XV_WLAY_DONTCARE, "button-insert" },
-    { quick_button, 10, 80, 1, 0, "&Append", 0, B_APPEND, 0, 0,
+    { quick_button, 10, 80, 1, 0, N_("&Append"), 0, B_APPEND, 0, 0,
 	  XV_WLAY_DONTCARE, "button-append" },
     { quick_input,  4, 80,  0, 0, "", 58, 0, 0, 0, XV_WLAY_BELOWCLOSE, "input" },
     { quick_label,  3, 80, 2, 0, 0, 0, 0, 0, 0, 0, XV_WLAY_DONTCARE, "label" },
@@ -797,6 +798,7 @@ static int add_new_group_input (char *header, char *label, char **result)
     Quick_input.title = header;
     Quick_input.help  = "[Hotlist]";
     Quick_input.class = "hotlist_new_group";
+    Quick_input.i18n  = 0;
     quick_widgets [4].text = label;
 
     for (i = 0; i < 5; i++)
@@ -822,7 +824,7 @@ void add_new_group_cmd (void)
     char   *label;
     int		ret;
 
-    ret = add_new_group_input (" New hotlist group ", "Name of new group", &label);
+    ret = add_new_group_input (_(" New hotlist group "), _("Name of new group"), &label);
     if (!ret || !label || !*label)
 	return;
 
@@ -839,8 +841,8 @@ void add2hotlist_cmd (void)
     char *prompt, *label;
 
     prompt = xmalloc (strlen (cpanel->cwd) + 20, "add2hotlist_cmd");
-    sprintf (prompt, "Label for \"%s\":", name_trunc (cpanel->cwd, COLS-2*UX-23));
-    label = input_dialog (" Add to hotlist ", prompt, cpanel->cwd);
+    sprintf (prompt, _("Label for \"%s\":"), name_trunc (cpanel->cwd, COLS-2*UX-23));
+    label = input_dialog (_(" Add to hotlist "), prompt, cpanel->cwd);
     free (prompt);
     if (!label || !*label)
 	return;
@@ -877,13 +879,13 @@ static void remove_from_hotlist (struct hotlist *entry)
 	    char *header;
 	    int   result;
 
-	    header = copy_strings (" Remove: ",
+	    header = copy_strings (_(" Remove: "),
 				   name_trunc (entry->label, 30),
 				   " ",
 				   0);
-	    result = query_dialog (header, "\n Group not empty.\n Remove it?",
+	    result = query_dialog (header, _("\n Group not empty.\n Remove it?"),
 				   D_ERROR, 2,
-				   "&No", "&Yes");
+				   _("&No"), _("&Yes"));
 	    free (header);
 
 	    if (!result)
@@ -1225,7 +1227,7 @@ void load_hotlist (void)
     
     hotlist	       = new_hotlist ();
     hotlist->type      = HL_TYPE_GROUP;
-    hotlist->label     = strdup (" Top level group ");
+    hotlist->label     = strdup (_(" Top level group "));
     hotlist->up        = hotlist;
     /*
      * compatibility :-(
@@ -1239,12 +1241,14 @@ void load_hotlist (void)
 
     if ((hotlist_file = fopen (hotlist_file_name, "r")) == 0) {
 	int	result;
+	char    *msg;
 
-	message (0, " Hotlist Load ",
-		 "Hotlist is now kept in file ~/" HOTLIST_FILENAME,
-		 "MC will load hotlist from ~/" PROFILE_NAME " and then",
-		 "delete [Hotlist] section there"
-	);
+	msg = copy_strings (_("Hotlist is now kept in file ~/"), HOTLIST_FILENAME,
+			    _("MC will load hotlist from ~/"),  PROFILE_NAME,
+			    _(" and then delete [Hotlist] section there"), NULL);
+	message (0, _(" Hotlist Load "), msg);
+	free (msg);
+	
 	load_group (hotlist);
 	hotlist_state.loaded   = 1;
 	/*
@@ -1256,9 +1260,13 @@ void load_hotlist (void)
 	if (result) {
 	    remove_old_list = 1;
 	} else {
-	    message (D_ERROR, " Hotlist Load ",
-		     "MC was unable to write ~/" HOTLIST_FILENAME " file"
-		     "your old hotlist entries were not deleted");
+	    char *msg;
+
+	    msg = copy_strings (_("MC was unable to write ~/"), HOTLIST_FILENAME,
+				_(" file, your old hotlist entries were not deleted"), NULL);
+
+	    message (D_ERROR, _(" Hotlist Load "), msg);
+	    free (msg);
 	}
     } else {
 	hot_load_file (hotlist);
@@ -1266,19 +1274,22 @@ void load_hotlist (void)
 	hotlist_state.loaded = 1;
 	if (has_old_list) {
 	    int		result;
+	    char        *msg;
 
-	    result = query_dialog (" Hotlist Load ", 
-	   "You have ~/" HOTLIST_FILENAME " file and [Hotlist] section in ~/" PROFILE_NAME "\n" /**/
-	   "Your ~/" HOTLIST_FILENAME " most probably was created\n" /**/
-	   "by an earlier development version of MC\n" /**/
-	   "and is more actual than ~/" PROFILE_NAME " entries\n\n" /**/
-	   "You can choose between\n\n" /**/
-	   "  Remove - remove old hotlist entries from ~/" PROFILE_NAME "\n" /**/
-	   "  Keep   - keep your old entries; you will be asked\n" /**/
-	   "           the same question next time\n" /**/
-	   "  Merge  - add old entries to hotlist as group \"Entries from ~/" PROFILE_NAME "\"\n\n",
-				   D_ERROR, 3, "&Remove", "&Keep", "&Merge"
-		      );
+	    msg = copy_strings (
+		    _("You have ~/"), HOTLIST_FILENAME, _(" file and [Hotlist] section in ~/"), PROFILE_NAME, "\n",
+		    _("Your ~/"), HOTLIST_FILENAME, _(" most probably was created\n"),
+		    _("by an earlier development version of MC\nand is more actual than ~/"),
+		    PROFILE_NAME, _(" entries\n\n"),
+		    _("You can choose between\n\n"
+		      "  Remove - remove old hotlist entries from ~/"), PROFILE_NAME, "\n",
+		    _("  Keep   - keep your old entries; you will be asked\n"
+		      "           the same question next time\n"
+		      "  Merge  - add old entries to hotlist as group \"Entries from ~/"),
+		    PROFILE_NAME, "\"\n\n", NULL);
+
+	    result = query_dialog (_(" Hotlist Load "),
+				   msg, D_ERROR, 3, _("&Remove"), _("&Keep"), _("&Merge"));
 	    if (result == 0)
 		remove_old_list = 1;
 	    else if (result == 2) {
@@ -1290,17 +1301,21 @@ void load_hotlist (void)
 
 		old            = new_hotlist ();
 		old->type      = HL_TYPE_GROUP;
-		old->label     = strdup (" Entries from ~/" PROFILE_NAME);
+		old->label     = copy_strings (_(" Entries from ~/"), PROFILE_NAME, NULL);
 		old->up	       = hotlist;
 		old->head      = hotlist->head;
 		old->next      = grp;
 		hotlist->head  = old;
 		hotlist_state.modified = 1;
-		if (!save_hotlist ())
-		    message (D_ERROR, " Hotlist Load ",
-			 "MC was unable to write ~/" HOTLIST_FILENAME " file"
-			 "your old hotlist entries were not deleted");
-		else
+		if (!save_hotlist ()){
+		    char *str;
+
+		    str = copy_strings (_("MC was unable to write ~/"), HOTLIST_FILENAME,
+					_(" file your old hotlist entries were not deleted"), NULL);
+
+		    message (D_ERROR, _(" Hotlist Load "), str);
+		    free (str);
+		} else
 		    remove_old_list = 1;
 		hotlist_state.modified = 0;
 	    }

@@ -385,18 +385,6 @@ void edit_paste_from_history (WEdit *edit);
 
 void edit_split_filename (WEdit * edit, char *name);
 
-#ifdef MIDNIGHT
-
-#    ifndef _
-#        define _(s) s
-#    endif
-
-
-#    define gettext(s) (s)
-#    define N_(s) s
-#    define gettext_noop(s) (s)
-#    endif
-
 /* put OS2/NT/WIN95 defines here */
 
 #    ifdef OS2_NT
