@@ -715,7 +715,9 @@ void edit_push_action (WEdit * edit, long c,...)
 	va_end (ap);
     } else
 #endif				/* ! FAST_MOVE_CURSOR */
-    if (spm1 != edit->stack_bottom && ((sp - 2) & edit->stack_size_mask) != edit->stack_bottom) {
+    if (edit->stack_bottom != sp
+	&& spm1 != edit->stack_bottom
+	&& ((sp - 2) & edit->stack_size_mask) != edit->stack_bottom) {
 	int d;
 	if (edit->undo_stack[spm1] < 0) {
 	    d = edit->undo_stack[(sp - 2) & edit->stack_size_mask];

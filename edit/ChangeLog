@@ -1,3 +1,8 @@
+2002-08-02  Paul Sheer  <psheer@icon.co.za>
+
+	* edit.c (edit_push_action): Fix access to uninitialized memory.
+	Found by Valgrind.
+
 2002-08-01  Pavel Roskin  <proski@gnu.org>
 
 	* syntax.c: Remove all references to MAD.
