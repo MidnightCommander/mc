@@ -8,7 +8,7 @@
 #    include <slang.h>
 #endif
 #else /* !HAVE_SYSTEM_SLANG */
-#    include "slang/slang-mc.h"
+#    include "slang/include/slang.h"
 #endif /* !HAVE_SYSTEM_SLANG */
 
 enum {
