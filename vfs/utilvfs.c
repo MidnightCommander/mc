@@ -53,12 +53,13 @@
  * ftp://joe@foo.edu:11321/private
  * ftp://joe:password@foo.se
  *
- * If the user is empty, e.g. ftp://@roxanne/private, then your login name
- * is supplied.
+ * Returns malloc()ed host, user and pass they are present.
+ * If the user is empty, e.g. ftp://@roxanne/private, and URL_ALLOW_ANON
+ * is not set, then the current login name is supplied.
  *
- * returns malloced host if host isn't null, user and pass if pass is not null.
- * returns a malloced strings with the pathname relative to the host.
- * */
+ * Return value is a malloc()ed string with the pathname relative to the
+ * host.
+ */
 
 char *vfs_split_url (const char *path, char **host, char **user, 
 		     int *port, char **pass, int default_port, int flags)
@@ -68,9 +69,6 @@ char *vfs_split_url (const char *path, char **host, char **user,
     char *retval;
     char *pcopy = g_strdup (path);
     char *pend  = pcopy + strlen (pcopy);
-    int default_is_anon = flags & URL_DEFAULTANON;
-    /* get user from ~/.netrc if we're supposed to */
-    int default_is_netrc = use_netrc;
     
     if (pass)
 	*pass = NULL;
@@ -97,7 +95,7 @@ char *vfs_split_url (const char *path, char **host, char **user,
     if (at){
 	*at = 0;
 	inner_colon = strchr (pcopy, ':');
-	if (inner_colon){
+	if (inner_colon) {
 	    *inner_colon = 0;
 	    inner_colon++;
 	    if (pass)
@@ -105,11 +103,6 @@ char *vfs_split_url (const char *path, char **host, char **user,
 	}
 	if (*pcopy != 0)
 	    *user = g_strdup (pcopy);
-	else {
-	    default_is_anon = 0;
-	    /* don't lookup ~/.netrc, use login name instead */
-	    default_is_netrc = 0;
-	}
 	
 	if (pend == at+1)
 	    rest = at;
@@ -118,22 +111,17 @@ char *vfs_split_url (const char *path, char **host, char **user,
     } else
 	rest = pcopy;
 
-    /* dummy user to be replaced in lookup_netrc() in ftpfs.c */
-    if (!*user && (default_is_netrc == 1))
-	    *user = g_strdup ("*netrc*");
-
-    if (!*user){
-	if (default_is_anon)
-	    *user = g_strdup ("anonymous");
+    if (!*user && !(flags & URL_ALLOW_ANON)) {
+	passwd_info = getpwuid (geteuid ());
+	if (passwd_info && passwd_info->pw_name)
+	    *user = g_strdup (passwd_info->pw_name);
 	else {
-	    if ((passwd_info = getpwuid (geteuid ())) == NULL)
-		*user = g_strdup ("anonymous");
-	    else {
-		*user = g_strdup (passwd_info->pw_name);
-	    }
-	    endpwent ();
+	    /* This is very unlikely to happen */
+	    *user = g_strdup ("anonymous");
 	}
+	endpwent ();
     }
+
     /* Check if the host comes with a port spec, if so, chop it */
     colon = strchr (rest, ':');
     if (colon){

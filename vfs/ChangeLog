@@ -1,3 +1,14 @@
+2002-07-11  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.h: Rename URL_DEFAULTANON to URL_ALLOW_ANON.
+	* utilvfs.c (vfs_split_url): Return NULL as username if
+	URL_ALLOW_ANON is set and no username is found in the URL,
+	otherwise use current name.
+	* ftpfs.c (ftp_split_url): New function - split URL and look up
+	username and password if needed.
+	(login_server): Use ftp_split_url().
+	(archive_same): Likewise.
+
 2002-07-10  Pavel Roskin  <proski@gnu.org>
 
 	* tcputil.h: Move use_netrc declaration ...

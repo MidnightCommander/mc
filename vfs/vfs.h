@@ -319,6 +319,11 @@ extern int vfs_parse_filedate(int idx, time_t *t);
 
 extern void vfs_die (char *msg);
 extern char *vfs_get_password (char *msg);
+
+/* Flags for vfs_split_url() */
+#define URL_ALLOW_ANON 1
+#define URL_NOSLASH 2
+
 extern char *vfs_split_url (const char *path, char **host, char **user, 
 			    int *port, char **pass, int default_port, int flags);
 
@@ -337,8 +342,6 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
 		      const char *user);
 #endif /* WITH_SMBFS */
 
-#define URL_DEFAULTANON 1
-#define URL_NOSLASH 2
 extern void vfs_print_stats (const char *fs_name, const char *action,
 			     const char *file_name, off_t have, off_t need);
 

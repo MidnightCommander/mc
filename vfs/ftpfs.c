@@ -217,8 +217,34 @@ translate_path (vfs *me, vfs_s_super *super, const char *remote_path)
 #define FTP_COMMAND_PORT   21
 #define HSC_PROXY_PORT   9875
 
-#define my_get_host_and_username(path, host, user, port, pass) \
-	vfs_split_url (path, host, user, port, pass, FTP_COMMAND_PORT, URL_DEFAULTANON)
+static void
+ftp_split_url(char *path, char **host, char **user, int *port, char **pass)
+{
+    char *p;
+    char *tmp_pass;
+
+    /* Caller is not interested in password, but the functions below want
+     * a valid pointer */
+    if (!pass) {
+	pass = &tmp_pass;
+    }
+
+    p = vfs_split_url (path, host, user, port, pass, FTP_COMMAND_PORT,
+		       URL_ALLOW_ANON);
+
+    if (!*user) {
+	if (use_netrc)
+	    lookup_netrc (*host, user, pass);
+	else
+	    *user = g_strdup ("anonymous");
+    }
+
+    if (p)
+	g_free (p);
+
+    if (pass == &tmp_pass && *pass)
+	g_free (*pass);
+}
 
 /* Returns a reply code, check /usr/include/arpa/ftp.h for possible values */
 static int
@@ -428,11 +454,8 @@ login_server (vfs *me, vfs_s_super *super, const char *netrcpass)
 #if defined(HSC_PROXY)
 	char *p;
 	int port;
-	p = my_get_host_and_username (ftpfs_proxy_host, 0, &proxyname,
-				      &port, 0);
-	if (p)
-	    g_free (p);
 
+	ftp_split_url (ftpfs_proxy_host, 0, &proxyname, &port, 0);
 	p = g_strconcat (_(" Proxy: Password required for "), proxyname, " ",
 			  NULL);
 	proxypass = vfs_get_password (p);
@@ -646,12 +669,14 @@ ftpfs_get_proxy_host_and_port (char *proxy, char **host, int *port)
     char *user, *dir;
 
 #if defined(HSC_PROXY)
-    dir = vfs_split_url (proxy, host, &user, port, 0, HSC_PROXY_PORT, URL_DEFAULTANON);
+    dir = vfs_split_url (proxy, host, &user, port, 0, HSC_PROXY_PORT, URL_ALLOW_ANON);
 #else
-    dir = vfs_split_url (proxy, host, &user, port, 0, FTP_COMMAND_PORT, URL_DEFAULTANON);
+    dir = vfs_split_url (proxy, host, &user, port, 0, FTP_COMMAND_PORT, URL_ALLOW_ANON);
 #endif
 
-    g_free (user);
+    if (user)
+	g_free (user);
+
     if (dir)
 	g_free (dir);
 }
@@ -791,10 +816,7 @@ open_archive (vfs *me, vfs_s_super *super, char *archive_name, char *op)
     char *host, *user, *password;
     int port;
 
-    op = vfs_split_url (strchr(op, ':')+1, &host, &user, &port, &password, FTP_COMMAND_PORT, URL_DEFAULTANON);
-
-    if (op)
-	g_free (op);
+    ftp_split_url (strchr (op, ':') + 1, &host, &user, &port, &password);
 
     SUP.host = host;
     SUP.user = user;
@@ -802,22 +824,14 @@ open_archive (vfs *me, vfs_s_super *super, char *archive_name, char *op)
     SUP.home = NULL;
     SUP.proxy= 0;
     SUP.use_proxy = ftpfs_check_proxy (host);
-    SUP.password = NULL;
+    SUP.password = password;
     SUP.use_passive_connection = ftpfs_use_passive_connections | source_route;
     SUP.use_source_route = source_route;
-    SUP.strict = ftpfs_use_unix_list_options?RFC_AUTODETECT:RFC_STRICT;
+    SUP.strict = ftpfs_use_unix_list_options ? RFC_AUTODETECT : RFC_STRICT;
     SUP.isbinary = TYPE_UNKNOWN;
     SUP.remote_is_amiga = 0;
     super->name = g_strdup("/");
-#if 0
-    super->name = g_strconcat( "/#ftp:", user, "@", host, "/", NULL );
-#endif
     super->root = vfs_s_new_inode (me, super, vfs_s_default_stat(me, S_IFDIR | 0755)); 
-    if (password)
-	SUP.password = password;
-    /* try to get user and/or password from ~/.netrc */
-    else if (use_netrc)
-	lookup_netrc(SUP.host, &SUP.user, &SUP.password);
 
     return open_archive_int (me, super);
 }
@@ -826,17 +840,9 @@ static int
 archive_same(vfs *me, vfs_s_super *super, char *archive_name, char *op, void *cookie)
 {	
     char *host, *user;
-    char *pass = NULL;
     int port;
 
-    op = vfs_split_url (strchr(op, ':')+1, &host, &user, &port, 0, 21, URL_DEFAULTANON);
-
-    if (op)
-	g_free (op);
-
-    /* replace the dummy user with the one from ~/.netrc */
-    if (use_netrc && !strcmp(user, "*netrc*"))
-	lookup_netrc(SUP.host, &user, &pass);
+    ftp_split_url (strchr(op, ':') + 1, &host, &user, &port, 0);
 
     port = ((strcmp (host, SUP.host) == 0) &&
 	    (strcmp (user, SUP.user) == 0) &&
@@ -1639,58 +1645,6 @@ static int ftpfs_rmdir (vfs *me, char *path)
 {
     return send_ftp_command(me, path, "RMD /%s", OPT_FLUSH);
 }
-
-#ifdef FIXME_LATER_ALIGATOR
-static void my_forget (char *file)
-{
-    struct linklist *l;
-    char *host, *user, *pass, *rp;
-    int port;
-
-#ifndef BROKEN_PATHS
-    if (strncmp (file, "/#ftp:", 6))
-        return; 	/* Normal: consider cd /bla/#ftp */ 
-#else
-    if (!(file = strstr (file, "/#ftp:")))
-        return;
-#endif    
-
-    file += 6;
-    if (!(rp = my_get_host_and_username (file, &host, &user, &port, &pass))) {
-        g_free (host);
-	g_free (user);
-	if (pass)
-	    wipe_password (pass);
-	return;
-    }
-
-    /* we do not care about the path actually */
-    g_free (rp);
-    
-    for (l = connections_list->next; l != connections_list; l = l->next){
-	struct connection *bucket = l->data;
-	
-	if ((strcmp (host, SUP.host) == 0) &&
-	    (strcmp (user, SUP.user) == 0) &&
-	    (port == SUP.port)){
-	    
-	    /* close socket: the child owns it now */
-	    close (bucket->sock);
-	    bucket->sock = -1;
-
-	    /* reopen the connection */
-	    bucket->sock = ftpfs_open_socket (bucket);
-	    if (bucket->sock != -1)
-		login_server (bucket, pass);
-	    break;
-	}
-    }
-    g_free (host);
-    g_free (user);
-    if (pass)
-        wipe_password (pass);
-}
-#endif
 
 static int ftpfs_fh_open (vfs *me, vfs_s_fh *fh, int flags, int mode)
 {
