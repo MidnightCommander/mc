@@ -208,30 +208,25 @@ static char *fish_getcwd(struct vfs_class *me, struct vfs_s_super *super)
 static int
 fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 {
-    char *argv[100];
-    char *xsh = (SUP.flags == FISH_FLAG_RSH ? "rsh" : "ssh");
-    int i = 0;
+    {
+	char *argv[10];
+	char *xsh = (SUP.flags == FISH_FLAG_RSH ? "rsh" : "ssh");
+	int i = 0;
 
-    argv[i++] = xsh;
+	argv[i++] = xsh;
 #ifdef HAVE_HACKED_SSH
-    argv[i++] = "-I";
+	argv[i++] = "-I";
 #endif
-    argv[i++] = "-l";
-    argv[i++] = SUP.user;
-    argv[i++] = SUP.host;
-    if (SUP.flags == FISH_FLAG_COMPRESSED)
-	argv[i++] = "-C";
-    argv[i++] = "echo FISH:; /bin/sh";
-    argv[i++] = NULL;
+	if (SUP.flags == FISH_FLAG_COMPRESSED)
+	    argv[i++] = "-C";
+	argv[i++] = "-l";
+	argv[i++] = SUP.user;
+	argv[i++] = SUP.host;
+	argv[i++] = "echo FISH:; /bin/sh";
+	argv[i++] = NULL;
 
-#if 0
-    /* Debugging hack */
-    if (!MEDATA->logfile)
-	MEDATA->logfile = fopen ("/home/pavel/talk.fish", "w+");	/* FIXME */
-#endif
-
-    fish_pipeopen (super, xsh, argv);
-
+	fish_pipeopen (super, xsh, argv);
+    }
     {
 	char answer[2048];
 	print_vfs_message (_("fish: Waiting for initial line..."));
