@@ -1,3 +1,8 @@
+2001-12-10  Pavel Roskin  <proski@gnu.org>
+
+	* dir.c (do_reload_dir): Hash-table added.
+	From Björn Eriksson <mdeans@algonet.se>
+
 2001-12-03  Pavel Roskin  <proski@gnu.org>
 
 	* dir.c (do_reload_dir): Optimize the logic - count the marks

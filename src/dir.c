@@ -601,9 +601,9 @@ do_reload_dir (dir_list * list, sortfn * sort, int count, int rev,
     int next_free = 0;
     int i, status, link_to_dir, stalled_link;
     struct stat buf;
-    int tmp_len;		/* For optimisation */
     int dotdot_found = 0;
     int marked_cnt;
+    GHashTable *marked_files = g_hash_table_new (g_str_hash, g_str_equal);
 
     tree_store_start_check_cwd ();
     dirp = mc_opendir (".");
@@ -622,8 +622,11 @@ do_reload_dir (dir_list * list, sortfn * sort, int count, int rev,
 	    list->list[i].f.dir_size_computed;
 	dir_copy.list[i].f.link_to_dir = list->list[i].f.link_to_dir;
 	dir_copy.list[i].f.stalled_link = list->list[i].f.stalled_link;
-	if (list->list[i].f.marked)
+	if (list->list[i].f.marked) {
+	    g_hash_table_insert (marked_files, dir_copy.list[i].fname,
+				 &dir_copy.list[i]);
 	    marked_cnt++;
+	}
     }
 
     for (dp = mc_readdir (dirp); dp; dp = mc_readdir (dirp)) {
@@ -649,29 +652,22 @@ do_reload_dir (dir_list * list, sortfn * sort, int count, int rev,
 	}
 
 	list->list[next_free].f.marked = 0;
-	tmp_len = NLENGTH (dp);
 
 	/*
 	 * If we have marked files in the copy, scan through the copy
 	 * to find matching file.  Decrease number of remaining marks if
 	 * we copied one.
-	 * TODO: Use hash table.
 	 */
 	if (marked_cnt > 0) {
-	    for (i = 0; i < count; i++) {
-		if (tmp_len == dir_copy.list[i].fnamelen
-		    && !strcmp (dp->d_name, dir_copy.list[i].fname)) {
-		    list->list[next_free].f.marked =
-			dir_copy.list[i].f.marked;
-		    if (dir_copy.list[i].f.marked) {
-			marked_cnt--;
-		    }
-		    break;
-		}
+	    file_entry *p;
+	    if (NULL !=
+		(p = g_hash_table_lookup (marked_files, dp->d_name))) {
+		list->list[next_free].f.marked = 1;
+		marked_cnt--;
 	    }
 	}
 
-	list->list[next_free].fnamelen = tmp_len;
+	list->list[next_free].fnamelen = NLENGTH (dp);
 	list->list[next_free].fname = g_strdup (dp->d_name);
 	list->list[next_free].f.link_to_dir = link_to_dir;
 	list->list[next_free].f.stalled_link = stalled_link;
@@ -685,6 +681,7 @@ do_reload_dir (dir_list * list, sortfn * sort, int count, int rev,
     }
     mc_closedir (dirp);
     tree_store_end_check ();
+    g_hash_table_destroy (marked_files);
     if (next_free) {
 	if (!dotdot_found)
 	    add_dotdot_to_list (list, next_free++);
