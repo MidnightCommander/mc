@@ -171,80 +171,76 @@ void do_cd_command (char *cmd)
 	}
 }
 
-/* Returns 1 if the we could handle the enter, 0 if not */
-static int
+/* Handle Enter on the command line */
+static cb_ret_t
 enter (WInput *cmdline)
 {
-    Dlg_head *old_dlg;
+    char *cmd = cmdline->buffer;
 
-    if (command_prompt && strlen (cmdline->buffer)) {
-	char *cmd;
+    if (!command_prompt)
+	return MSG_HANDLED;
 
-	/* Any initial whitespace should be removed at this point */
-	cmd = cmdline->buffer;
-	while (*cmd == ' ' || *cmd == '\t' || *cmd == '\n')
-	    cmd++;
+    /* Any initial whitespace should be removed at this point */
+    while (*cmd == ' ' || *cmd == '\t' || *cmd == '\n')
+	cmd++;
 
-	if (strncmp (cmd, "cd ", 3) == 0 || strcmp (cmd, "cd") == 0) {
-	    do_cd_command (cmd);
-	    new_input (cmdline);
-	    return MSG_HANDLED;
-	} else {
-	    char *command, *s;
-	    int i, j;
+    if (!*cmd)
+	return MSG_HANDLED;
 
-	    if (!vfs_current_is_local ()) {
-		message (1, MSG_ERROR,
-			 _
-			 (" Cannot execute commands on non-local filesystems"));
+    if (strncmp (cmd, "cd ", 3) == 0 || strcmp (cmd, "cd") == 0) {
+	do_cd_command (cmd);
+	new_input (cmdline);
+	return MSG_HANDLED;
+    } else {
+	char *command, *s;
+	int i, j;
 
-		return MSG_NOT_HANDLED;
-	    }
-#ifdef HAVE_SUBSHELL_SUPPORT
-	    /* Check this early before we clean command line
-	     * (will be checked again by shell_execute) */
-	    if (use_subshell && subshell_state != INACTIVE) {
-		message (1, MSG_ERROR,
-			 _(" The shell is already running a command "));
-		return MSG_NOT_HANDLED;
-	    }
-#endif
+	if (!vfs_current_is_local ()) {
+	    message (1, MSG_ERROR,
+		     _
+		     (" Cannot execute commands on non-local filesystems"));
 
-	    command = g_malloc (strlen (cmd) + 1);
-	    command[0] = 0;
-	    for (i = j = 0; i < strlen (cmd); i++) {
-		if (cmd[i] == '%') {
-		    i++;
-		    s = expand_format (NULL, cmd[i], 1);
-		    command =
-			g_realloc (command, strlen (command) + strlen (s)
-				   + strlen (cmd) - i + 1);
-		    strcat (command, s);
-		    g_free (s);
-		    j = strlen (command);
-		} else {
-		    command[j] = cmd[i];
-		    j++;
-		}
-		command[j] = 0;
-	    }
-	    old_dlg = current_dlg;
-	    current_dlg = 0;
-	    new_input (cmdline);
-	    shell_execute (command, 0);
-	    g_free (command);
-
-#ifdef HAVE_SUBSHELL_SUPPORT
-	    if (quit & SUBSHELL_EXIT) {
-		quiet_quit_cmd ();
-		return MSG_HANDLED;
-	    }
-	    if (use_subshell)
-		load_prompt (0, 0);
-#endif
-
-	    current_dlg = old_dlg;
+	    return MSG_NOT_HANDLED;
 	}
+#ifdef HAVE_SUBSHELL_SUPPORT
+	/* Check this early before we clean command line
+	 * (will be checked again by shell_execute) */
+	if (use_subshell && subshell_state != INACTIVE) {
+	    message (1, MSG_ERROR,
+		     _(" The shell is already running a command "));
+	    return MSG_NOT_HANDLED;
+	}
+#endif
+
+	command = g_malloc (strlen (cmd) + 1);
+	command[0] = 0;
+	for (i = j = 0; i < strlen (cmd); i++) {
+	    if (cmd[i] == '%') {
+		i++;
+		s = expand_format (NULL, cmd[i], 1);
+		command = g_realloc (command, strlen (command) + strlen (s)
+				     + strlen (cmd) - i + 1);
+		strcat (command, s);
+		g_free (s);
+		j = strlen (command);
+	    } else {
+		command[j] = cmd[i];
+		j++;
+	    }
+	    command[j] = 0;
+	}
+	new_input (cmdline);
+	shell_execute (command, 0);
+	g_free (command);
+
+#ifdef HAVE_SUBSHELL_SUPPORT
+	if (quit & SUBSHELL_EXIT) {
+	    quiet_quit_cmd ();
+	    return MSG_HANDLED;
+	}
+	if (use_subshell)
+	    load_prompt (0, 0);
+#endif
     }
     return MSG_HANDLED;
 }
