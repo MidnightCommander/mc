@@ -63,7 +63,7 @@ struct WEdit {
     unsigned char modified;	/* has the file been changed?: 1 if char inserted or
 				   deleted at all since last load or save */
     unsigned char screen_modified;	/* has the file been changed since the last screen draw? */
-    int delete_file;		/* has the file been created in edit_load_file? Delete
+    int delete_file;		/* Has the file been created by the editor?  Delete
 				   it at end of editing when it hasn't been modified 
 				   or saved */
     unsigned char highlight;

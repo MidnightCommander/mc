@@ -128,24 +128,24 @@ int edit_get_byte (WEdit * edit, long byte_index)
 
 
 /* 
-   The edit_open_file (previously edit_load_file) function uses
-   init_dynamic_edit_buffers to load a file. This is unnecessary
-   since you can just as well fopen the file and insert the
-   characters one by one. The real reason for
+   The edit_open_file function uses init_dynamic_edit_buffers to load
+   the file.  This is unnecessary since you can just as well fopen the
+   file and insert the characters one by one.  The real reason for
    init_dynamic_edit_buffers (besides allocating the buffers) is
-   as an optimisation - it uses raw block reads and inserts large
-   chunks at a time. It is hence extremely fast at loading files.
-   Where we might not want to use it is if we were doing
-   CRLF->LF translation or if we were reading from a pipe.
+   optimization - it uses raw block reads and inserts large chunks at a
+   time, so it's much faster at loading files.  We may not want to use
+   it if we are reading from pipe or doing CRLF->LF translation.
  */
 
-/* Initialisation routines */
+/* Initialization routines */
 
-/* returns 1 on error */
-/* loads file OR text into buffers. Only one must be none-NULL. */
-/* cursor set to start of file */
+/*
+ * Load file OR text into buffers.  Set cursor to the beginning of file.
+ * Return 1 on error.
+ */
 static int
-init_dynamic_edit_buffers (WEdit * edit, const char *filename, const char *text)
+init_dynamic_edit_buffers (WEdit *edit, const char *filename,
+			   const char *text)
 {
     long buf;
     int j, file = -1, buf2;
@@ -157,8 +157,12 @@ init_dynamic_edit_buffers (WEdit * edit, const char *filename, const char *text)
 
     if (filename)
 	if ((file = mc_open (filename, O_RDONLY | O_BINARY)) == -1) {
-/* The file-name is printed after the ':' */
-	    edit_error_dialog (_ ("Error"), get_sys_error (catstrs (_ (" Cannot open file for reading: "), filename, " ", 0)));
+	    /* The file-name is printed after the ':' */
+	    edit_error_dialog (_("Error"),
+			       get_sys_error (catstrs
+					      (_
+					       (" Cannot open file for reading: "),
+					       filename, " ", 0)));
 	    return 1;
 	}
     edit->curs2 = edit->last_byte;
@@ -168,9 +172,14 @@ init_dynamic_edit_buffers (WEdit * edit, const char *filename, const char *text)
     edit->buffers2[buf2] = g_malloc (EDIT_BUF_SIZE);
 
     if (filename) {
-	mc_read (file, (char *) edit->buffers2[buf2] + EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE), edit->curs2 & M_EDIT_BUF_SIZE);
+	mc_read (file,
+		 (char *) edit->buffers2[buf2] + EDIT_BUF_SIZE -
+		 (edit->curs2 & M_EDIT_BUF_SIZE),
+		 edit->curs2 & M_EDIT_BUF_SIZE);
     } else {
-	memcpy (edit->buffers2[buf2] + EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE), text, edit->curs2 & M_EDIT_BUF_SIZE);
+	memcpy (edit->buffers2[buf2] + EDIT_BUF_SIZE -
+		(edit->curs2 & M_EDIT_BUF_SIZE), text,
+		edit->curs2 & M_EDIT_BUF_SIZE);
 	text += edit->curs2 & M_EDIT_BUF_SIZE;
     }
 
@@ -507,7 +516,7 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
 	use_filter = 1;
 #endif
 	if (edit_open_file (edit, filename)) {
-/* edit_load_file already gives an error message */
+	    /* edit_open_file already gives an error message */
 	    if (to_free)
 		g_free (edit);
 	    return 0;
