@@ -410,6 +410,7 @@ void strupper(char *s)
   }
 }
 
+#if 0
 /*******************************************************************
   convert a string to "normal" form
 ********************************************************************/
@@ -433,7 +434,7 @@ BOOL strisnormal(char *s)
 
   return(!strhasupper(s));
 }
-
+#endif /* 0 */
 
 /****************************************************************************
   string replace
@@ -931,6 +932,7 @@ BOOL in_list(char *s,char *list,BOOL casesensitive)
   }
   return(False);
 }
+#endif /*0 */
 
 /* this is used to prevent lots of mallocs of size 1 */
 static char *null_string = NULL;

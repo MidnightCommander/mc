@@ -1,22 +1,22 @@
 2005-02-14  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* samba/lib/util_str.c: Comment out strhasupper(), strhaslower(),
-	toktocliplist(), strncpyn(), strhex_to_str(), all_string_sub()
-        and split_at_last_component().
-        * samba/lib/time.c: Comment out http_timestring().
-        * samba/lib/util.c: Comment out Protocol, trans_num, case_sensitive,
-        case_preserve, use_mangled_map, short_case_preserve, case_mangle,
-        my_netbios_names.
-        Make sam_logon_in_ssb and case_default const.
-        (samlogon_user): Make char* instead of pstring.
-        * samba/libsmb/clientgen.c: Comment out cli_api_pipe(),
-        cli_NetWkstaUserLogon(), cli_tdis(), cli_nt_create(), cli_ulogoff(),
-        cli_lock(), cli_unlock(), cli_message_start(), cli_message_text()
-        and cli_message_end().
-        * samba/libsmb/namequery.c (global_in_nmbd): Make const.
-        (find_master_ip): Comment out.
-        * samba/libsmb/nmblib.c: Comment out matching_bits(), sort_ip,
-        name_query_comp() and sort_query_replies().
+	toktocliplist(), strncpyn(), strhex_to_str(), all_string_sub(),
+	strnorm(), strisnormal()  and split_at_last_component().
+	* samba/lib/time.c: Comment out http_timestring().
+	* samba/lib/util.c: Comment out Protocol, trans_num, case_sensitive,
+	case_preserve, use_mangled_map, short_case_preserve, case_mangle,
+	my_netbios_names.
+	Make sam_logon_in_ssb and case_default const.
+	(samlogon_user): Make char* instead of pstring.
+	* samba/libsmb/clientgen.c: Comment out cli_api_pipe(),
+	cli_NetWkstaUserLogon(), cli_tdis(), cli_nt_create(), cli_ulogoff(),
+	cli_lock(), cli_unlock(), cli_message_start(), cli_message_text()
+	and cli_message_end().
+	* samba/libsmb/namequery.c (global_in_nmbd): Make const.
+	(find_master_ip): Comment out.
+	* samba/libsmb/nmblib.c: Comment out matching_bits(), sort_ip,
+	name_query_comp() and sort_query_replies().
 
 2005-02-12  Jindrich Novy <jnovy@redhat.com>
 
@@ -52,11 +52,11 @@
 	get_numlist(), Atoic(), dns_to_netbios_name(), name_interpret(),
 	directory_exist(), file_size(), unix_format(), dos_format(),
 	close_low_fds(), name_ptr(), name_extract(), unix_do_match(),
-	unix_mask_match(), do_match(), mask_match(),
-	interpret_protocol(), readdirname(), is_in_path(),
-	set_namearray(), free_namearray(), fcntl_lock(), is_myname(),
-	set_remote_arch(), get_remote_arch(). align2(), out_ascii() and
-	out_data().
+	unix_mask_match(), do_match(), mask_match(), readdirname(),
+	interpret_protocol(), is_in_path(), set_namearray(),
+	free_namearray(), fcntl_lock(), is_myname(), set_remote_arch(),
+	get_remote_arch(). align2(), out_ascii() and out_data().
+
 	(reg_get_subkey): Remove.
 	(reg_split_key): Remove.
 
