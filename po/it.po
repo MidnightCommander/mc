@@ -9,7 +9,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 4.5.38\n"
+"Project-Id-Version: 4.5.39\n"
 "POT-Creation-Date: 1999-08-30 13:07+0200\n"
 "PO-Revision-Date: 1999-06-24 15:22+1\n"
 "Last-Translator: Marco Ciampa <marco@mc.ismaa.it>\n"
@@ -48,6 +48,10 @@ msgid ""
 "\n"
 "Please check it to see if it points to a valid command."
 msgstr ""
+"Impossibile da eseguire\n"
+"\"%s\".\n"
+"\n"
+"Controllare se punta ad un comando valido."
 
 #: gnome/gaction.c:40
 #, c-format
@@ -57,6 +61,10 @@ msgid ""
 "To fix this, bring up the mime-properties editor in the GNOME Control "
 "Center, and edit the default %s-action for \"%s\"."
 msgstr ""
+"\".\n"
+"\n"
+"Per aggiustare, aprire l'editor delle proprietà mime nel Centro di "
+"Controllo di GNOME, e modificare l'azione %s per \"%s\"."
 
 #: gnome/gaction.c:46
 #, c-format
@@ -66,6 +74,10 @@ msgid ""
 "To fix this error, bring up this file's properties and change the default "
 "%s-action."
 msgstr ""
+"\".\n"
+"\n"
+"Per risolvere questo errore, vai nelle proprietà e cambia l'azione %s "
+"predefinita"
 
 #: gnome/gaction.c:51
 #, c-format
@@ -75,18 +87,22 @@ msgid ""
 "with the command:\n"
 "\"%s\"%s"
 msgstr ""
+"Impossibile per %s\n"
+"\"%s\"\n"
+"con il comando:\n"
+"\"%s\"%s"
 
 #: gnome/gaction.c:134 gnome/gaction.c:150
 msgid "open"
-msgstr "Apri"
+msgstr "apri"
 
 #: gnome/gaction.c:185 gnome/gaction.c:198
 msgid "edit"
-msgstr "Cambia"
+msgstr "cambia"
 
 #: gnome/gaction.c:331
 msgid "view"
-msgstr "Vista"
+msgstr "vista"
 
 #: gnome/gcmd.c:49
 msgid " There is no other panel to compare contents to "
@@ -123,7 +139,7 @@ msgstr "Ordina files per "
 
 #: gnome/gcmd.c:303 gnome/gcustom-layout.c:41 src/chmod.c:150 src/screen.c:413
 msgid "Name"
-msgstr "Nome file"
+msgstr "Nome"
 
 #: gnome/gcmd.c:310
 msgid "File Type"
@@ -6075,11 +6091,11 @@ msgstr "Archivio extfs inconsistente"
 #: vfs/fish.c:136
 #, c-format
 msgid "fish: Disconnecting from %s"
-msgstr "ftpfs: Disconnessione da %s"
+msgstr "fish: Disconnessione da %s"
 
 #: vfs/fish.c:214
 msgid "fish: Waiting for initial line..."
-msgstr ""
+msgstr "fish: Attesa linea iniziale..."
 
 #: vfs/fish.c:224
 msgid "Sorry, we can not do password authenticated connections for now."
@@ -6087,64 +6103,64 @@ msgstr "Spiacente, non posso fare connessioni autenticate per adesso."
 
 #: vfs/fish.c:238
 msgid "fish: Sending password..."
-msgstr "ftpfs: spedizione password utente"
+msgstr "fish: Spedizione password..."
 
 #: vfs/fish.c:244
 msgid "fish: Sending initial line..."
-msgstr ""
+msgstr "fish: Spedizione linea iniziale..."
 
 #: vfs/fish.c:248
 msgid "fish: Handshaking version..."
-msgstr ""
+msgstr "fish: Versione Handshaking..."
 
 #: vfs/fish.c:252
 msgid "fish: Setting up current directory..."
-msgstr "Rilegge la directory corrente"
+msgstr "fish: Impostazione directory corrente..."
 
 #: vfs/fish.c:254
 #, c-format
 msgid "fish: Connected, home %s."
-msgstr "ftpfs: connesso a %s"
+msgstr "fish: Connesso a %s"
 
 #: vfs/fish.c:331
 #, c-format
 msgid "fish: Reading directory %s..."
-msgstr "ftpfs: Lettura directory FTP %s..."
+msgstr "fish: Lettura directory FTP %s..."
 
 #: vfs/fish.c:426
 msgid "fish: got listing"
-msgstr "ftpfs: ottenuti i listati"
+msgstr "fish: ottenuti i listati"
 
 #: vfs/fish.c:430
 msgid "fish: failed"
-msgstr "ftpfs: fallito"
+msgstr "fish: fallito"
 
 #. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
 #: vfs/fish.c:450
 #, c-format
 msgid "fish: store %s: sending command..."
-msgstr ""
+msgstr "fish: memorizza %s: spedizione comando..."
 
 #: vfs/fish.c:464
 msgid "fish: Local read failed, sending zeros"
-msgstr ""
+msgstr "fish: Lettura locale fallita, spedizione zeri"
 
 #: vfs/fish.c:476
 #, c-format
 msgid "fish: storing %s %d (%d)"
-msgstr "ftpfs: memorizzazione file %d (%d)"
+msgstr "fish: memorizzazione %s %d (%d)"
 
 #: vfs/fish.c:516
 msgid "Aborting transfer..."
-msgstr "ftpfs: interruzione del trasferimento."
+msgstr "Interruzione trasferimento..."
 
 #: vfs/fish.c:525
 msgid "Error reported after abort."
-msgstr ""
+msgstr "Errori dopo l'interruzione."
 
 #: vfs/fish.c:527
 msgid "Aborted transfer would be successful."
-msgstr ""
+msgstr "L'interruzione trasferimento sarebbe riuscita."
 
 #: vfs/ftpfs.c:328
 #, c-format
@@ -6346,20 +6362,20 @@ msgstr " Troppe connessioni aperte "
 
 #: vfs/smbfs.c:115
 msgid "Domain:"
-msgstr ""
+msgstr "Dominio:"
 
 #: vfs/smbfs.c:115
 msgid "Username:"
-msgstr ""
+msgstr "Nome utente:"
 
 #: vfs/smbfs.c:115
 msgid "Password: "
-msgstr ""
+msgstr "Password: "
 
 #: vfs/smbfs.c:170
 #, c-format
 msgid "Password for \\\\%s\\%s"
-msgstr ""
+msgstr "Password per \\\\%s\\%s"
 
 #: vfs/smbfs.c:666
 #, c-format
@@ -6367,28 +6383,29 @@ msgid ""
 " reconnect to %s failed\n"
 " "
 msgstr ""
+" riconnessione a %s fallita\n"
+" "
+
 
 #: vfs/smbfs.c:1737
 #, c-format
 msgid " %s mkdir'ing %s "
-msgstr " link simbolico: %s "
+msgstr " %s creazione dir %s "
 
 #: vfs/smbfs.c:1758
 #, c-format
 msgid " %s rmdir'ing %s "
-msgstr " link simbolico: %s "
+msgstr " %s rimozione dir %s "
 
 #: vfs/smbfs.c:1867 vfs/smbfs.c:1887 vfs/smbfs.c:1948
 #, c-format
 msgid " %s opening remote file %s "
-msgstr ""
-" Non posso rimuovere il file `%s' \n"
-" %s"
+msgstr " %s apertura file remoto %s "
 
 #: vfs/smbfs.c:1971
 #, c-format
 msgid " %s renaming files\n"
-msgstr " %s bytes in %d file %s\n"
+msgstr " %s rinomina files\n"
 
 #: vfs/tar.c:84 vfs/tar.c:101
 #, c-format
@@ -6425,17 +6442,4 @@ msgstr "%s: %s: %s %3d%% (%ld bytes trasferiti)"
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld bytes trasferiti"
-# msgid "Rescan _Desktop"
-# msgstr "Rileggi scrivania"
-# 
-# msgid "Home directory"
-# msgstr "Directory home"
-# 
-# msgid "Recreate Desktop _Shortcuts"
-# msgstr "Ricrea collegamenti sulla scrivania"
-# 
-# msgid "Could not symlink %s to %s; will not have initial home desktop icon."
-# msgstr ""
-# "Non posso collegare simbolicamente %s con %s; non ci sarà l'icona sulla "
-# "scrivania."
 # 
