@@ -1,5 +1,9 @@
 2001-08-07  Pavel Roskin  <proski@gnu.org>
 
+	* view.c: Warning fixes. Include "cmd.h". Rename help_cmd()
+	to view_help_cmd().
+	(view_handle_key) [HAVE_X]: Disable '!' and Ctrl-O.
+
 	* main.c (do_execute): Don't show prompt if the command is empty
 	and the subshell is not running.
 	* view.c (view_handle_key): Add support for Ctrl-O in the viewer.

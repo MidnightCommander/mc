@@ -26,8 +26,6 @@
 /* }}} */
 /* {{{ Declarations */
 #include <config.h>
-#include "tty.h"
-#include "x.h"
 #include <stdio.h>
 #ifdef NEEDS_IO_H
 #   include <io.h>
@@ -49,7 +47,11 @@
 #include <errno.h>
 #include <limits.h>
 #include <sys/param.h>
+
 #include "global.h"
+#include "tty.h"
+#include "x.h"
+#include "cmd.h"		/* For view_other_cmd */
 #include "dlg.h"		/* Needed by widget.h */
 #include "widget.h"		/* Needed for buttonbar_new */
 #include "color.h"
@@ -1816,7 +1818,7 @@ static void do_normal_search (void *xview, char *text)
 /* {{{ Mouse and keyboard handling */
 
 /* Real view only */
-static void help_cmd (void)
+static void view_help_cmd (void)
 {
     interactive_display (NULL, "[Internal File Viewer]");
     /*
@@ -2071,7 +2073,7 @@ view_labels (WView *view)
 {
     Dlg_head *h = view->widget.parent;
     
-    define_label (h, (Widget *) view, 1, _("Help"), help_cmd);
+    define_label (h, (Widget *) view, 1, _("Help"), view_help_cmd);
     
     my_define (h, 10, _("Quit"), view_quit_cmd, view);
     my_define (h, 4, view->hex_mode ? _("Ascii"): _("Hex"), toggle_hex_mode, view);
@@ -2282,6 +2284,7 @@ view_handle_key (WView *view, int c)
         view_move_forward (view, vheight - 1);
         return 1;
 
+#ifndef HAVE_X
     case XCTRL('o'):
 	view_other_cmd ();
 	return 1;
@@ -2290,6 +2293,7 @@ view_handle_key (WView *view, int c)
     case '!':
 	exec_shell ();
 	return 1;
+#endif /* !HAVE_X */
 	
     case 'F':
 	set_monitor (view, on);
