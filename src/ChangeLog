@@ -1,4 +1,10 @@
-2004-11-04 Mike Gorchak <mike@malva.ua>
+2004-11-07  Roland Illig  <roland.illig@gmx.de>
+
+	* key.c (use_8th_bit_as_meta): Use 8bit input as default.
+
+	From Vladimir Nadvornik <nadvornik * suse cz>
+
+2004-11-04  Mike Gorchak  <mike@malva.ua>
 
 	* dir.c (file_type_to_num): Added initial support for the Special Named
 	Files. They are displayed as block devices, but with '#' prefix in it's

@@ -88,7 +88,7 @@ int mou_auto_repeat = 100;
 int double_click_speed = 250;
 int old_esc_mode = 0;
 
-int use_8th_bit_as_meta = 1;
+int use_8th_bit_as_meta = 0;
 
 typedef struct key_def {
     char ch;			/* Holds the matching char code */
