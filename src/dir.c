@@ -373,17 +373,22 @@ handle_dirent (dir_list *list, char *filter, struct dirent *dp,
 	       struct stat *buf1, int next_free, int *link_to_dir,
 	       int *stale_link)
 {
-    if (dp->d_name [0] == '.' && dp->d_name [1] == 0)
+    if (dp->d_name[0] == '.' && dp->d_name[1] == 0)
 	return 0;
-    if (dp->d_name [0] == '.' && dp->d_name [1] == '.' && dp->d_name [2] == 0)
+    if (dp->d_name[0] == '.' && dp->d_name[1] == '.' && dp->d_name[2] == 0)
 	return 0;
-    if (!show_dot_files && (dp->d_name [0] == '.'))
+    if (!show_dot_files && (dp->d_name[0] == '.'))
 	return 0;
-    if (!show_backups && dp->d_name [NLENGTH (dp)-1] == '~')
+    if (!show_backups && dp->d_name[NLENGTH (dp) - 1] == '~')
 	return 0;
     if (mc_lstat (dp->d_name, buf1) == -1) {
-	message(1, MSG_ERROR, _("File '%s' exists but cannot be stat-ed: %s"), dp->d_name, strerror(errno));
-        return 0;
+	/*
+	 * lstat() fails - wildly assume that it's a directory.
+	 * It can happen on QNX Neutrino for /fs/cd0 if no CD is inserted.
+	 */
+	memset (buf1, 0, sizeof (buf1));
+	buf1->st_mode = S_IFDIR | 0777;
+	buf1->st_nlink = 2;
     }
 
     if (S_ISDIR (buf1->st_mode))
@@ -392,21 +397,22 @@ handle_dirent (dir_list *list, char *filter, struct dirent *dp,
     /* A link to a file or a directory? */
     *link_to_dir = 0;
     *stale_link = 0;
-    if (S_ISLNK(buf1->st_mode)){
+    if (S_ISLNK (buf1->st_mode)) {
 	struct stat buf2;
 	if (!mc_stat (dp->d_name, &buf2))
-	    *link_to_dir = S_ISDIR(buf2.st_mode) != 0;
+	    *link_to_dir = S_ISDIR (buf2.st_mode) != 0;
 	else
 	    *stale_link = 1;
     }
-    if (!(S_ISDIR(buf1->st_mode) || *link_to_dir) && filter &&
-	!regexp_match (filter, dp->d_name, match_file))
+    if (!(S_ISDIR (buf1->st_mode) || *link_to_dir) && filter
+	&& !regexp_match (filter, dp->d_name, match_file))
 	return 0;
 
     /* Need to grow the *list? */
-    if (next_free == list->size){
-	list->list = g_realloc (list->list, sizeof (file_entry) *
-			      (list->size + RESIZE_STEPS));
+    if (next_free == list->size) {
+	list->list =
+	    g_realloc (list->list,
+		       sizeof (file_entry) * (list->size + RESIZE_STEPS));
 	if (!list->list)
 	    return -1;
 	list->size += RESIZE_STEPS;
