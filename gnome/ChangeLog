@@ -1,3 +1,7 @@
+1998-05-26  Marc Ewing <marc@redhat.com>
+
+	* Makefile.in: use @LIBVFS@ when referring to libvfs-mc.a
+
 1998-05-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gmain.c (session_save_state): Perform shutdown if `shutdown'

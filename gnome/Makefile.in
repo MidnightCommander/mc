@@ -126,10 +126,10 @@ mx: @LIBVFS@ $(OBJS) @LIBSLANG@ @LIBEDIT_A@
 	$(CC) $(LDFLAGS) -o gmc $(OBJS) -L../vfs -L../slang -L../edit $(EXTRALIBS) $(LIBS) 
 	touch mx
 
-libvfs.a:
-	cd ../vfs; $(MAKE) libvfs.a
-@PCENTRULE@	-$(RMF) libvfs.a
-@PCENTRULE@	$(LN_S) ../vfs/libvfs.a .
+@LIBVFS@:
+	cd ../vfs; $(MAKE) @LIBVFS@
+@PCENTRULE@	-$(RMF) @LIBVFS@
+@PCENTRULE@	$(LN_S) ../vfs/@LIBVFS@ .
 
 libmcslang.a:
 	cd ../slang; $(MAKE) libmcslang.a
