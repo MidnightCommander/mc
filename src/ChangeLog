@@ -1,5 +1,8 @@
 2002-12-25  Pavel Roskin  <proski@gnu.org>
 
+	* widget.c (input_callback): Insert Enter with a modifier as
+	literal Enter.  Useful when pasting multiline text.
+
 	* cmd.c (execute_with_vfs_arg): New function.  Work around
 	defects of VFS localcopy code.
 	(view_file_at_line): Use execute_with_vfs_arg().
