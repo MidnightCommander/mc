@@ -110,7 +110,7 @@ int safe_delete = 0;
 /* This is a hard link cache */
 struct link {
     struct link *next;
-    vfs *vfs;
+    struct vfs_class *vfs;
     dev_t dev;
     ino_t ino;
     short linkcount;
@@ -280,7 +280,7 @@ is_in_linklist (struct link *lp, char *path, struct stat *sb)
     ino_t ino = sb->st_ino;
     dev_t dev = sb->st_dev;
 #ifdef USE_VFS
-    vfs *vfs = vfs_type (path);
+    struct vfs_class *vfs = vfs_type (path);
 #endif				/* USE_VFS */
 
     while (lp) {
@@ -302,7 +302,7 @@ static int
 check_hardlinks (char *src_name, char *dst_name, struct stat *pstat)
 {
     struct link *lp;
-    vfs *my_vfs = vfs_type (src_name);
+    struct vfs_class *my_vfs = vfs_type (src_name);
     ino_t ino = pstat->st_ino;
     dev_t dev = pstat->st_dev;
     struct stat link_stat;
