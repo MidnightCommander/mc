@@ -1,5 +1,3 @@
-#! /bin/sh
-
 MC_PWD_FILE="${TMPDIR-/tmp}/mc-$USER/mc.pwd.$$"
 @bindir@/mc -P "$MC_PWD_FILE" "$@"
 

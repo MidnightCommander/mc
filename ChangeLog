@@ -1,3 +1,10 @@
+2002-11-05  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc-wrapper.csh.in: Remove /bin/csh at the beginning - this
+	script is not meant to be executed by the kernel.  This also
+	eliminates dependency of the RPM package on csh.
+	* lib/mc-wrapper.sh.in: Remove /bin/sh at the beginning.
+
 2002-11-01  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Don't substitute mc.sh and mc.csh - it's now

@@ -1,5 +1,3 @@
-#! /bin/csh
-
 if ($?TMPDIR) then
 	setenv MC_PWD_FILE $TMPDIR/mc-$USER/mc.pwd.$$
 else
