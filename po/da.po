@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
-"POT-Creation-Date: 2001-09-25 11:53-0400\n"
-"PO-Revision-Date: 2001-09-25 21:37+02:00\n"
+"POT-Creation-Date: 2001-10-20 06:24-0400\n"
+"PO-Revision-Date: 2001-10-20 21:37+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +35,7 @@ msgstr " Tryk makro genvejstast: "
 
 #: edit/edit_key_translator.c:160
 msgid " Insert Literal "
-msgstr " Indsæt bogstavlig "
+msgstr " Indsæt bogstaveligt "
 
 #: edit/edit_key_translator.c:160
 msgid " Press any key: "
@@ -43,13 +43,13 @@ msgstr " Tryk på en tast: "
 
 #. The file-name is printed after the ':'
 #: edit/edit.c:145 edit/edit.c:314 edit/edit.c:319 edit/edit.c:333
-#: edit/edit.c:337 edit/edit.c:368 edit/edit.c:375 edit/edit.c:382
-#: edit/edit.c:388 edit/editcmd.c:256 edit/editcmd.c:262 edit/editcmd.c:1587
+#: edit/edit.c:337 edit/edit.c:374 edit/edit.c:382 edit/edit.c:390
+#: edit/edit.c:397 edit/editcmd.c:256 edit/editcmd.c:262 edit/editcmd.c:1590
 #: edit/editwidget.c:121 src/dir.c:427 src/wtools.c:216
 msgid " Error "
 msgstr " Fejl "
 
-#: edit/edit.c:145 edit/edit.c:337 edit/edit.c:368
+#: edit/edit.c:145 edit/edit.c:337 edit/edit.c:382
 msgid " Failed trying to open file for reading: "
 msgstr " Fejl under åbning af fil for læsning: "
 
@@ -65,19 +65,19 @@ msgstr " Fejl ved forsøg på åbning af rør for læsning: "
 msgid " Error reading file: "
 msgstr " Fejl ved læsning af fil "
 
-#: edit/edit.c:375
-msgid " Cannot get size/permissions info on file: "
-msgstr " Kan ikke finde størrelse-/rettighedsinformation for filen: "
-
-#: edit/edit.c:382
+#: edit/edit.c:374
 msgid " Not an ordinary file: "
 msgstr " Ikke en normal fil: "
 
-#: edit/edit.c:388
+#: edit/edit.c:390
+msgid " Cannot get size/permissions info on file: "
+msgstr " Kan ikke finde størrelse-/rettighedsinformation for filen: "
+
+#: edit/edit.c:397
 msgid " File is too large: "
 msgstr " Filen er for stor: "
 
-#: edit/edit.c:389
+#: edit/edit.c:398
 msgid ""
 " \n"
 " Increase edit.h:MAXBUF and recompile the editor. "
@@ -85,23 +85,23 @@ msgstr ""
 " \n"
 " Gør edit.h:MAXBUF større og omkompilér editoren. "
 
-#: edit/edit.c:2496
+#: edit/edit.c:2505
 msgid "User menu available only in mcedit invoked from mc"
 msgstr "Brugermenuen er kun tilgængelig i mcedit startet fra mc"
 
-#: edit/edit.c:2675 edit/editcmd.c:2282
+#: edit/edit.c:2684 edit/editcmd.c:2285
 msgid "Error trying to stat file:"
 msgstr " Fejl under stat af fil:"
 
-#: edit/edit.h:360
+#: edit/edit.h:361
 msgid "&Dismiss"
 msgstr "&Forkast"
 
 #. 1
-#: edit/edit.h:361 edit/editcmd.c:343 edit/editcmd.c:1102 edit/editcmd.c:1187
-#: edit/editcmd.c:2360 edit/editmenu.c:37 edit/editoptions.c:69
+#: edit/edit.h:362 edit/editcmd.c:343 edit/editcmd.c:1102 edit/editcmd.c:1187
+#: edit/editcmd.c:2363 edit/editmenu.c:37 edit/editoptions.c:69
 #: src/boxes.c:144 src/boxes.c:278 src/boxes.c:378 src/boxes.c:469
-#: src/boxes.c:616 src/boxes.c:752 src/boxes.c:985 src/boxes.c:1055
+#: src/boxes.c:616 src/boxes.c:753 src/boxes.c:986 src/boxes.c:1056
 #: src/filegui.c:798 src/find.c:151 src/layout.c:365 src/option.c:135
 #: src/wtools.c:284 src/wtools.c:546
 msgid "&Ok"
@@ -129,12 +129,12 @@ msgstr "Lav sikkerhedskopier -->"
 
 #. 0
 #: edit/editcmd.c:341 edit/editcmd.c:1041 edit/editcmd.c:1100
-#: edit/editcmd.c:1185 edit/editcmd.c:2358 edit/editoptions.c:66
+#: edit/editcmd.c:1185 edit/editcmd.c:2361 edit/editoptions.c:66
 #: src/achown.c:71 src/boxes.c:145 src/boxes.c:279 src/boxes.c:376
-#: src/boxes.c:467 src/boxes.c:613 src/boxes.c:750 src/boxes.c:1055
+#: src/boxes.c:467 src/boxes.c:613 src/boxes.c:751 src/boxes.c:1056
 #: src/chmod.c:107 src/chown.c:77 src/cmd.c:839 src/filegui.c:781
-#: src/find.c:151 src/hotlist.c:123 src/hotlist.c:493 src/hotlist.c:781
-#: src/hotlist.c:878 src/layout.c:366 src/learn.c:59 src/option.c:136
+#: src/find.c:151 src/hotlist.c:123 src/hotlist.c:495 src/hotlist.c:785
+#: src/hotlist.c:882 src/layout.c:366 src/learn.c:59 src/option.c:136
 #: src/panelize.c:74 src/view.c:398 src/wtools.c:107 src/wtools.c:374
 #: src/wtools.c:544
 msgid "&Cancel"
@@ -180,7 +180,7 @@ msgstr "Annullér"
 msgid " Save as "
 msgstr " Gem som "
 
-#: edit/editcmd.c:452 edit/editcmd.c:2114
+#: edit/editcmd.c:452 edit/editcmd.c:2117
 msgid " Error trying to save file. "
 msgstr " Fejl under gemning af fil. "
 
@@ -236,7 +236,7 @@ msgstr " Bekræft gem fil? : "
 msgid " Save file "
 msgstr " Gem fil "
 
-#: edit/editcmd.c:697 edit/editwidget.c:237 src/view.c:2032
+#: edit/editcmd.c:697 edit/editwidget.c:237 src/view.c:2018
 msgid "Save"
 msgstr "Gem"
 
@@ -328,172 +328,172 @@ msgstr " Indtast argumentrækkefølge f.eks 3,2,1,4 : "
 msgid " Enter replacement string:"
 msgstr " Indtast erstatningstekst:"
 
-#: edit/editcmd.c:1128 edit/editcmd.c:1201 src/view.c:1947
+#: edit/editcmd.c:1128 edit/editcmd.c:1201 src/view.c:1933
 msgid " Enter search string:"
 msgstr " Indtast søgetekst:"
 
-#: edit/editcmd.c:1147 edit/editcmd.c:1783 edit/editcmd.c:1814
-#: edit/editcmd.c:1816
+#: edit/editcmd.c:1147 edit/editcmd.c:1786 edit/editcmd.c:1817
+#: edit/editcmd.c:1819
 msgid " Replace "
 msgstr " Erstat "
 
-#: edit/editcmd.c:1215 edit/editcmd.c:1894 edit/editcmd.c:1896
-#: edit/editcmd.c:1924 src/view.c:1478 src/view.c:1557 src/view.c:1677
-#: src/view.c:1689 src/view.c:1905 src/view.c:1947
+#: edit/editcmd.c:1215 edit/editcmd.c:1897 edit/editcmd.c:1899
+#: edit/editcmd.c:1927 src/view.c:1464 src/view.c:1543 src/view.c:1663
+#: src/view.c:1675 src/view.c:1891 src/view.c:1933
 msgid " Search "
 msgstr " Søg "
 
-#: edit/editcmd.c:1587
+#: edit/editcmd.c:1590
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
 msgstr ""
 " Ugyldig regulært udtryk, eller scanf udtryk med for mange omsætninger "
 
 #. "Invalid regexp string or scanf string"
-#: edit/editcmd.c:1785
+#: edit/editcmd.c:1788
 msgid " Error in replacement format string. "
 msgstr " Fejl i erstatningstekstens format. "
 
-#: edit/editcmd.c:1813
+#: edit/editcmd.c:1816
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld erstatninger udført. "
 
-#: edit/editcmd.c:1816 edit/editcmd.c:1896 edit/editcmd.c:1924
+#: edit/editcmd.c:1819 edit/editcmd.c:1899 edit/editcmd.c:1927
 msgid " Search string not found. "
 msgstr " Søgetekst ikke fundet. "
 
 #. in response to number of bookmarks added because of string being found %d times
-#: edit/editcmd.c:1893
+#: edit/editcmd.c:1896
 #, c-format
 msgid " %d finds made, %d bookmarks added "
 msgstr "%d fund gjort, %d bogmærker tilføjet"
 
-#: edit/editcmd.c:1942
+#: edit/editcmd.c:1945
 msgid " Quit "
 msgstr " Afslut "
 
-#: edit/editcmd.c:1942
+#: edit/editcmd.c:1945
 msgid " File was modified, Save with exit? "
 msgstr " Filen blev ændret, Gem ved afslutning? "
 
-#: edit/editcmd.c:1942
+#: edit/editcmd.c:1945
 msgid "Cancel quit"
 msgstr "Annullér afslut"
 
-#: edit/editcmd.c:1942 src/cmd.c:228 src/file.c:1873 src/file.c:2244
-#: src/filegui.c:564 src/hotlist.c:1002 src/main.c:802 src/screen.c:2114
+#: edit/editcmd.c:1945 src/cmd.c:228 src/file.c:1873 src/file.c:2244
+#: src/filegui.c:564 src/hotlist.c:1006 src/main.c:802 src/screen.c:2114
 #: src/subshell.c:727 src/subshell.c:753 src/tree.c:755 src/view.c:398
 msgid "&Yes"
 msgstr "&Ja"
 
-#: edit/editcmd.c:1942 src/cmd.c:228 src/file.c:1873 src/file.c:2244
-#: src/filegui.c:563 src/hotlist.c:1002 src/main.c:802 src/screen.c:2114
+#: edit/editcmd.c:1945 src/cmd.c:228 src/file.c:1873 src/file.c:2244
+#: src/filegui.c:563 src/hotlist.c:1006 src/main.c:802 src/screen.c:2114
 #: src/subshell.c:727 src/subshell.c:753 src/tree.c:755 src/view.c:398
 msgid "&No"
 msgstr "&Nej"
 
-#: edit/editcmd.c:2049
+#: edit/editcmd.c:2052
 msgid " Copy to clipboard "
 msgstr " Kopiér til klipbord "
 
-#: edit/editcmd.c:2049 edit/editcmd.c:2062
+#: edit/editcmd.c:2052 edit/editcmd.c:2065
 msgid " Unable to save to file. "
 msgstr " Kunne ikke gemme filen. "
 
-#: edit/editcmd.c:2062
+#: edit/editcmd.c:2065
 msgid " Cut to clipboard "
 msgstr " Klip til klipbord "
 
-#: edit/editcmd.c:2082 src/view.c:1852
+#: edit/editcmd.c:2085 src/view.c:1838
 msgid " Goto line "
 msgstr " Gå til linje "
 
-#: edit/editcmd.c:2082
+#: edit/editcmd.c:2085
 msgid " Enter line: "
 msgstr " Indtast linje: "
 
-#: edit/editcmd.c:2101 edit/editcmd.c:2114
+#: edit/editcmd.c:2104 edit/editcmd.c:2117
 msgid " Save Block "
 msgstr " Gem blok "
 
-#: edit/editcmd.c:2126
+#: edit/editcmd.c:2129
 msgid " Insert File "
 msgstr " Indsæt fil "
 
-#: edit/editcmd.c:2139
+#: edit/editcmd.c:2142
 msgid " Insert file "
 msgstr " Indsæt fil "
 
-#: edit/editcmd.c:2139
+#: edit/editcmd.c:2142
 msgid " Error trying to insert file. "
 msgstr " Fejl under indsætning af fil. "
 
-#: edit/editcmd.c:2156
+#: edit/editcmd.c:2159
 msgid " Sort block "
 msgstr " Sortér blok "
 
-#: edit/editcmd.c:2156 edit/editcmd.c:2240
+#: edit/editcmd.c:2159 edit/editcmd.c:2243
 msgid " You must first highlight a block of text. "
 msgstr " Du skal først markere en tekstblok. "
 
-#: edit/editcmd.c:2163
+#: edit/editcmd.c:2166
 msgid " Run Sort "
 msgstr " Kør sortering "
 
-#: edit/editcmd.c:2164
+#: edit/editcmd.c:2167
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr " Indtast sorteringsmuligheder (se manside) adskilt af mellemrum: "
 
-#: edit/editcmd.c:2175 edit/editcmd.c:2180
+#: edit/editcmd.c:2178 edit/editcmd.c:2183
 msgid " Sort "
 msgstr " Sortér "
 
-#: edit/editcmd.c:2176
+#: edit/editcmd.c:2179
 msgid " Error trying to execute sort command "
 msgstr " Fejl under kørsel af sorteringskommando "
 
-#: edit/editcmd.c:2181
+#: edit/editcmd.c:2184
 msgid " Sort returned non-zero: "
 msgstr " Sortering returnede ikke-nul: "
 
-#: edit/editcmd.c:2214
+#: edit/editcmd.c:2217
 msgid "Error create script:"
 msgstr "Fejl ved oprettelse af skript:"
 
-#: edit/editcmd.c:2220
+#: edit/editcmd.c:2223
 msgid "Error read script:"
 msgstr "Fejl ved læsning af skript:"
 
-#: edit/editcmd.c:2227
+#: edit/editcmd.c:2230
 msgid "Error close script:"
 msgstr "Fejl ved lukning af skript"
 
-#: edit/editcmd.c:2232
+#: edit/editcmd.c:2235
 msgid "Script created:"
 msgstr "Skript oprettet:"
 
-#: edit/editcmd.c:2239
+#: edit/editcmd.c:2242
 msgid "Process block"
 msgstr "Procesblok"
 
-#: edit/editcmd.c:2353
+#: edit/editcmd.c:2356
 msgid " Mail "
 msgstr " Send "
 
-#: edit/editcmd.c:2364
+#: edit/editcmd.c:2367
 msgid " Copies to"
 msgstr " Kopiér til"
 
-#: edit/editcmd.c:2368
+#: edit/editcmd.c:2371
 msgid " Subject"
 msgstr " Emne"
 
-#: edit/editcmd.c:2372
+#: edit/editcmd.c:2375
 msgid " To"
 msgstr " Til"
 
-#: edit/editcmd.c:2374
+#: edit/editcmd.c:2377
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <emne> -c <cc> <til>"
 
@@ -789,7 +789,7 @@ msgid " Editor options "
 msgstr " Editorindstillinger "
 
 #: edit/editwidget.c:236 src/help.c:811 src/main.c:1583 src/screen.c:2378
-#: src/tree.c:1018 src/view.c:2025
+#: src/tree.c:1018 src/view.c:2011
 msgid "Help"
 msgstr "Hjælp"
 
@@ -809,7 +809,7 @@ msgstr "Kopiér"
 msgid "Move"
 msgstr "Flyt"
 
-#: edit/editwidget.c:242 src/view.c:2040
+#: edit/editwidget.c:242 src/view.c:2026
 msgid "Search"
 msgstr "Søg"
 
@@ -821,8 +821,8 @@ msgstr "Slet"
 msgid "PullDn"
 msgstr "TrækNd"
 
-#: edit/editwidget.c:246 src/help.c:823 src/main.c:1586 src/view.c:2027
-#: src/view.c:2049
+#: edit/editwidget.c:246 src/help.c:823 src/main.c:1586 src/view.c:2013
+#: src/view.c:2035
 msgid "Quit"
 msgstr "Slut"
 
@@ -1028,93 +1028,93 @@ msgstr "Kodning for inddata /visning:"
 msgid "&Select"
 msgstr "&Vælg"
 
-#: src/boxes.c:757
+#: src/boxes.c:758
 msgid "&Always use ftp proxy"
 msgstr "Brug &Altid ftp-proxy"
 
-#: src/boxes.c:759
+#: src/boxes.c:760
 msgid "sec"
 msgstr "sek"
 
-#: src/boxes.c:763
+#: src/boxes.c:764
 msgid "ftpfs directory cache timeout:"
 msgstr "ftpfs-mappe mellemlager timeout:"
 
-#: src/boxes.c:767
+#: src/boxes.c:768
 msgid "ftp anonymous password:"
 msgstr "anonym ftp-adgangskode"
 
-#: src/boxes.c:774
+#: src/boxes.c:775
 msgid "Timeout for freeing VFSs:"
 msgstr "Tidsudløb for frigørelse af VFS'er:"
 
-#: src/boxes.c:780
+#: src/boxes.c:781
 msgid " Virtual File System Setting "
 msgstr " Indstillinger for virtuelt filsystem "
 
-#: src/boxes.c:839
+#: src/boxes.c:840
 msgid "Quick cd"
 msgstr "Hurtig mappeskift"
 
 #. want cd like completion
-#: src/boxes.c:844
+#: src/boxes.c:845
 msgid "cd"
 msgstr "cd"
 
-#: src/boxes.c:884
+#: src/boxes.c:885
 msgid "Symbolic link"
 msgstr "Symbolsk lænke"
 
-#: src/boxes.c:889
+#: src/boxes.c:890
 msgid "Symbolic link filename:"
 msgstr "Filnavn for symbolsk lænke:"
 
-#: src/boxes.c:891
+#: src/boxes.c:892
 msgid "Existing filename (filename symlink will point to):"
 msgstr "Eksisterende filnavn (filnavnet symlænken skal pege på):"
 
-#: src/boxes.c:920
+#: src/boxes.c:921
 msgid "Running "
 msgstr "Kører"
 
-#: src/boxes.c:921 src/find.c:712
+#: src/boxes.c:922 src/find.c:712
 msgid "Stopped"
 msgstr "Stoppet"
 
-#: src/boxes.c:982
+#: src/boxes.c:983
 msgid "&Stop"
 msgstr "&Stop"
 
-#: src/boxes.c:983
+#: src/boxes.c:984
 msgid "&Resume"
 msgstr "&Genoptag"
 
-#: src/boxes.c:984
+#: src/boxes.c:985
 msgid "&Kill"
 msgstr "&Dræb"
 
-#: src/boxes.c:1023
+#: src/boxes.c:1024
 msgid "Background Jobs"
 msgstr "Baggrundsjobs"
 
-#: src/boxes.c:1054
+#: src/boxes.c:1055
 msgid "Domain:"
 msgstr "Domæne:"
 
-#: src/boxes.c:1054
+#: src/boxes.c:1055
 msgid "Username:"
 msgstr "Brugernavn:"
 
-#: src/boxes.c:1054
+#: src/boxes.c:1055
 msgid "Password: "
 msgstr "Adgangskode: "
 
-#: src/boxes.c:1109
+#: src/boxes.c:1110
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "Adgangskode for \\\\%s\\%s"
 
-#: src/charsets.c:32 vfs/extfs.c:1337 vfs/sfs.c:301
+#: src/charsets.c:32 vfs/extfs.c:1337 vfs/sfs.c:302
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Advarsel: fil %s ikke fundet\n"
@@ -1863,7 +1863,7 @@ msgstr "En ikke-komplet fil blev hentet ned. Behold den?"
 msgid "&Delete"
 msgstr "&Slet"
 
-#: src/file.c:793 src/hotlist.c:1400
+#: src/file.c:793 src/hotlist.c:1404
 msgid "&Keep"
 msgstr "&Behold"
 
@@ -2043,7 +2043,7 @@ msgstr "%o %f \"%s\"%e"
 msgid "%o %d %f%e"
 msgstr "%o %d %f%e"
 
-#: src/file.c:1698 vfs/fish.c:518
+#: src/file.c:1698 vfs/fish.c:526
 msgid "file"
 msgstr "fil"
 
@@ -2337,7 +2337,7 @@ msgstr "Kører grep i %s"
 msgid "Finished"
 msgstr "Færdig"
 
-#: src/find.c:538 src/view.c:1478
+#: src/find.c:538 src/view.c:1464
 #, c-format
 msgid "Searching %s"
 msgstr "Søger i %s"
@@ -2396,15 +2396,15 @@ msgstr "Forr."
 msgid "&Move"
 msgstr "&Flyt"
 
-#: src/hotlist.c:118 src/hotlist.c:1400 src/panelize.c:76 src/wtools.c:371
+#: src/hotlist.c:118 src/hotlist.c:1404 src/panelize.c:76 src/wtools.c:371
 msgid "&Remove"
 msgstr "&Fjern"
 
-#: src/hotlist.c:119 src/hotlist.c:785 src/hotlist.c:882
+#: src/hotlist.c:119 src/hotlist.c:789 src/hotlist.c:886
 msgid "&Append"
 msgstr "Tilføj"
 
-#: src/hotlist.c:120 src/hotlist.c:783 src/hotlist.c:880
+#: src/hotlist.c:120 src/hotlist.c:787 src/hotlist.c:884
 msgid "&Insert"
 msgstr "&Indsæt"
 
@@ -2432,62 +2432,62 @@ msgstr "Skift &Til"
 msgid "Subgroup - press ENTER to see list"
 msgstr "Undergruppe - tryk RETUR for at se listen"
 
-#: src/hotlist.c:579
+#: src/hotlist.c:581
 msgid "Active VFS directories"
 msgstr "Aktive VFS-mapper"
 
-#: src/hotlist.c:579
+#: src/hotlist.c:581
 msgid "Directory hotlist"
 msgstr "Mappefavoritliste"
 
-#: src/hotlist.c:596
+#: src/hotlist.c:598
 msgid " Directory path "
 msgstr " Mappesti "
 
 #. This one holds the displayed pathname
-#: src/hotlist.c:599 src/hotlist.c:643
+#: src/hotlist.c:601 src/hotlist.c:647
 msgid " Directory label "
 msgstr " Mappeetiket "
 
-#: src/hotlist.c:619
+#: src/hotlist.c:623
 #, c-format
 msgid "Moving %s"
 msgstr "Flytter %s"
 
-#: src/hotlist.c:859
+#: src/hotlist.c:863
 msgid "New hotlist entry"
 msgstr "Nyt punkt i favoritlisten"
 
-#: src/hotlist.c:859
+#: src/hotlist.c:863
 msgid "Directory label"
 msgstr "Mappeetiket"
 
-#: src/hotlist.c:859
+#: src/hotlist.c:863
 msgid "Directory path"
 msgstr "Mappesti"
 
-#: src/hotlist.c:940
+#: src/hotlist.c:944
 msgid " New hotlist group "
 msgstr " Ny favoritgruppe "
 
-#: src/hotlist.c:940
+#: src/hotlist.c:944
 msgid "Name of new group"
 msgstr "Navn på den nye gruppe"
 
-#: src/hotlist.c:955
+#: src/hotlist.c:959
 #, c-format
 msgid "Label for \"%s\":"
 msgstr "Etikette for \"%s\":"
 
-#: src/hotlist.c:959
+#: src/hotlist.c:963
 msgid " Add to hotlist "
 msgstr " Tilføj til favoritter "
 
-#: src/hotlist.c:996
+#: src/hotlist.c:1000
 msgid " Remove: "
 msgstr " Fjern: "
 
-#: src/hotlist.c:1000
+#: src/hotlist.c:1004
 msgid ""
 "\n"
 " Group not empty.\n"
@@ -2497,39 +2497,39 @@ msgstr ""
 " Gruppen er ikke tom.\n"
 " Fjern den?"
 
-#: src/hotlist.c:1345
+#: src/hotlist.c:1349
 msgid " Top level group "
 msgstr " Gruppe på topniveau "
 
-#: src/hotlist.c:1373 src/hotlist.c:1421
+#: src/hotlist.c:1377 src/hotlist.c:1425
 msgid "MC was unable to write ~/"
 msgstr "MC kunne ikke skrive ~/"
 
-#: src/hotlist.c:1374
+#: src/hotlist.c:1378
 msgid " file, your old hotlist entries were not deleted"
 msgstr " filen, dine gamle favoritlisteelementer blev ikke slettet"
 
-#: src/hotlist.c:1376 src/hotlist.c:1399 src/hotlist.c:1424
+#: src/hotlist.c:1380 src/hotlist.c:1403 src/hotlist.c:1428
 msgid " Hotlist Load "
 msgstr " Indlæs favoritliste "
 
-#: src/hotlist.c:1388
+#: src/hotlist.c:1392
 msgid "You have ~/"
 msgstr "Du har ~/"
 
-#: src/hotlist.c:1388
+#: src/hotlist.c:1392
 msgid " file and [Hotlist] section in ~/"
 msgstr " filen og [Favoritliste] sektionen i ~/"
 
-#: src/hotlist.c:1389
+#: src/hotlist.c:1393
 msgid "Your ~/"
 msgstr "Din ~/"
 
-#: src/hotlist.c:1389
+#: src/hotlist.c:1393
 msgid " most probably was created\n"
 msgstr " er mest sandsynligt blevet oprettet\n"
 
-#: src/hotlist.c:1390
+#: src/hotlist.c:1394
 msgid ""
 "by an earlier development version of MC\n"
 "and is more actual than ~/"
@@ -2537,7 +2537,7 @@ msgstr ""
 "af en tidligere udviklingsversion af MC\n"
 "og er mere aktuel end ~/"
 
-#: src/hotlist.c:1391
+#: src/hotlist.c:1395
 msgid ""
 " entries\n"
 "\n"
@@ -2545,7 +2545,7 @@ msgstr ""
 " indgange\n"
 "\n"
 
-#: src/hotlist.c:1392
+#: src/hotlist.c:1396
 msgid ""
 "You can choose between\n"
 "\n"
@@ -2555,7 +2555,7 @@ msgstr ""
 "\n"
 "  Fjern - fjern gammel favoritliste fra ~/"
 
-#: src/hotlist.c:1394
+#: src/hotlist.c:1398
 msgid ""
 "  Keep   - keep your old entries; you will be asked\n"
 "           the same question next time\n"
@@ -2565,15 +2565,15 @@ msgstr ""
 "           det samme spørgsmål næste gang\n"
 "  Merge  - tilføj gamle punkter som gruppe \"Punkter fra ~/"
 
-#: src/hotlist.c:1400
+#: src/hotlist.c:1404
 msgid "&Merge"
 msgstr "Sammenføj"
 
-#: src/hotlist.c:1412
+#: src/hotlist.c:1416
 msgid " Entries from ~/"
 msgstr " Punkter fra ~/"
 
-#: src/hotlist.c:1422
+#: src/hotlist.c:1426
 msgid " file your old hotlist entries were not deleted"
 msgstr " fil dine gamle favoritlistepunkter er ikke slettet"
 
@@ -3183,14 +3183,14 @@ msgstr "-e, --edit         Start den interne editor op.\n"
 msgid ""
 "-f, --libdir       Print configured paths.\n"
 "-h, --help         Shows this help message.\n"
-"-k, --resetsoft    Reset softkeys (HP terminals only) to their "
-"terminfo/termcap\n"
+"-k, --resetsoft    Reset softkeys (HP terminals only) to their terminfo/"
+"termcap\n"
 "                   default.\n"
 msgstr ""
 "-f, --libdir       Udskriv konfigurerede stier.\n"
 "-h, --help         Viser denne hjælpetekst.\n"
-"-k, --resetsoft    Nulstiller softkeys (kun HP terminaler) til sine "
-"terminfo/termcap\n"
+"-k, --resetsoft    Nulstiller softkeys (kun HP terminaler) til sine terminfo/"
+"termcap\n"
 "                   standardværdier.\n"
 
 #: src/main.c:2315
@@ -3675,7 +3675,7 @@ msgstr ""
 msgid "View"
 msgstr "Vis"
 
-#: src/screen.c:2381 src/view.c:2036
+#: src/screen.c:2381 src/view.c:2022
 msgid "Edit"
 msgstr "Redigér"
 
@@ -4028,32 +4028,7 @@ msgstr " Tom udskrift fra underfilter "
 msgid " Could not open file "
 msgstr " Kunne ikke åbne filen "
 
-#: src/view.c:469
-msgid " Cannot open file \""
-msgstr " Kan ikke åbne filen \""
-
-#: src/view.c:476
-msgid ""
-" Cannot stat file \n"
-" "
-msgstr ""
-" Kan ikke lave stat på filen \n"
-" "
-
-#: src/view.c:482
-msgid " Cannot view: not a regular file "
-msgstr " Kan ikke vise: ikke en normal fil "
-
-#: src/view.c:562
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-" Kan ikke åbne \"%s\" \n"
-" %s "
-
-#: src/view.c:571
+#: src/view.c:544
 #, c-format
 msgid ""
 " Cannot stat \"%s\"\n"
@@ -4062,43 +4037,56 @@ msgstr ""
 " Kunne ikke køre stat på %s \n"
 " %s "
 
-#: src/view.c:705
+#: src/view.c:552
+msgid " Cannot view: not a regular file "
+msgstr " Kan ikke vise: ikke en normal fil "
+
+#: src/view.c:559
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" Kan ikke åbne \"%s\" \n"
+" %s "
+
+#: src/view.c:691
 #, c-format
 msgid "File: %s"
 msgstr "Fil: %s"
 
-#: src/view.c:719
+#: src/view.c:705
 #, c-format
 msgid "Offset 0x%08x"
 msgstr "Afstand 0x%08x"
 
-#: src/view.c:721
+#: src/view.c:707
 #, c-format
 msgid "Col %d"
 msgstr "Kol %d"
 
-#: src/view.c:725
+#: src/view.c:711
 #, c-format
 msgid "%s bytes"
 msgstr "%s byte"
 
-#: src/view.c:730
+#: src/view.c:716
 msgid "  [grow]"
 msgstr "  [voks]"
 
-#: src/view.c:1557 src/view.c:1689
+#: src/view.c:1543 src/view.c:1675
 msgid " Search string not found "
 msgstr " Søgetekst ikke fundet "
 
-#: src/view.c:1677
+#: src/view.c:1663
 msgid "Invalid hex search expression"
 msgstr "Ugyldig hex regulært søgeudtryk"
 
-#: src/view.c:1728
+#: src/view.c:1714
 msgid " Invalid regular expression "
 msgstr " Ugyldigt regulært udtryk "
 
-#: src/view.c:1850
+#: src/view.c:1836
 #, c-format
 msgid ""
 " The current line number is %d.\n"
@@ -4107,7 +4095,7 @@ msgstr ""
 " Det aktuelle linienummer er %d.\n"
 " Indtast det nye linienummer:"
 
-#: src/view.c:1872
+#: src/view.c:1858
 #, c-format
 msgid ""
 " The current address is 0x%lx.\n"
@@ -4116,67 +4104,67 @@ msgstr ""
 " Den aktuelle adresse er 0%lx.\n"
 " Indtast den nye adresse:"
 
-#: src/view.c:1874
+#: src/view.c:1860
 msgid " Goto Address "
 msgstr " Gå til adresse "
 
-#: src/view.c:1905
+#: src/view.c:1891
 msgid " Enter regexp:"
 msgstr " Indtast regexp:"
 
-#: src/view.c:2028
+#: src/view.c:2014
 msgid "Ascii"
 msgstr "ASCII"
 
-#: src/view.c:2028
+#: src/view.c:2014
 msgid "Hex"
 msgstr "Hex"
 
-#: src/view.c:2029
+#: src/view.c:2015
 msgid "Goto"
 msgstr "Gåtil"
 
-#: src/view.c:2029
+#: src/view.c:2015
 msgid "Line"
 msgstr "Linie"
 
-#: src/view.c:2032
+#: src/view.c:2018
 msgid "RxSrch"
 msgstr "RxpSøg"
 
-#: src/view.c:2035
+#: src/view.c:2021
 msgid "EdText"
 msgstr "RedTekst"
 
-#: src/view.c:2035
+#: src/view.c:2021
 msgid "EdHex"
 msgstr "RedHex"
 
-#: src/view.c:2037
+#: src/view.c:2023
 msgid "UnWrap"
 msgstr "Ubrudt"
 
-#: src/view.c:2037
+#: src/view.c:2023
 msgid "Wrap"
 msgstr "Ombryd"
 
-#: src/view.c:2040
+#: src/view.c:2026
 msgid "HxSrch"
 msgstr "HexSøg"
 
-#: src/view.c:2043
+#: src/view.c:2029
 msgid "Raw"
 msgstr "Rå"
 
-#: src/view.c:2043
+#: src/view.c:2029
 msgid "Parse"
 msgstr "Parse"
 
-#: src/view.c:2047
+#: src/view.c:2033
 msgid "Unform"
 msgstr "U-form"
 
-#: src/view.c:2047
+#: src/view.c:2033
 msgid "Format"
 msgstr "Format"
 
@@ -4381,7 +4369,7 @@ msgstr "NumLock på numerisk tastatur"
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
-#: src/wtools.c:570 vfs/vfs.c:1854
+#: src/wtools.c:570 vfs/vfs.c:1863
 msgid "Password:"
 msgstr "Adgangskode:"
 
@@ -4400,7 +4388,7 @@ msgid ""
 "Premature end of cpio archive\n"
 "%s"
 msgstr ""
-"Prematur slutning på cpio arkiv\n"
+"Præmatur slutning på cpio arkiv\n"
 "%s"
 
 #: vfs/cpio.c:309 vfs/cpio.c:358
@@ -4469,219 +4457,219 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Inkonsistent extfs-arkiv"
 
-#: vfs/fish.c:142
+#: vfs/fish.c:147
 #, c-format
 msgid "fish: Disconnecting from %s"
 msgstr "fisk: Afkobler fra %s"
 
-#: vfs/fish.c:221
+#: vfs/fish.c:226
 msgid "fish: Waiting for initial line..."
 msgstr "fisk: Venter på begyndelseslinie..."
 
-#: vfs/fish.c:231
+#: vfs/fish.c:236
 msgid "Sorry, we can not do password authenticated connections for now."
 msgstr "Beklager, vi kan ikke lave adgangskodebekræftede forbindelser endnu."
 
-#: vfs/fish.c:236
+#: vfs/fish.c:241
 msgid " fish: Password required for "
-msgstr " fish: Behøver adgangskode til"
+msgstr " fisk: Behøver adgangskode til"
 
-#: vfs/fish.c:245
+#: vfs/fish.c:250
 msgid "fish: Sending password..."
 msgstr "fisk: Sender adgangskode..."
 
-#: vfs/fish.c:251
+#: vfs/fish.c:256
 msgid "fish: Sending initial line..."
 msgstr "fisk: Sender begyndelseslinie..."
 
-#: vfs/fish.c:261
+#: vfs/fish.c:266
 msgid "fish: Handshaking version..."
 msgstr "fisk: Håndrystende version..."
 
-#: vfs/fish.c:265
+#: vfs/fish.c:270
 msgid "fish: Setting up current directory..."
 msgstr "fisk: Indstiller den aktive mappe..."
 
-#: vfs/fish.c:267
+#: vfs/fish.c:272
 #, c-format
 msgid "fish: Connected, home %s."
 msgstr "fisk: forbundet, hjem %s"
 
-#: vfs/fish.c:356
+#: vfs/fish.c:361
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr "fisk: Læser mappe %s..."
 
-#: vfs/fish.c:460
+#: vfs/fish.c:465
 msgid "fish: failed"
 msgstr "fisk: fejlede"
 
 #. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
-#: vfs/fish.c:480
+#: vfs/fish.c:485
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr "fisk: gem %s: sender kommando..."
 
-#: vfs/fish.c:505
+#: vfs/fish.c:513
 msgid "fish: Local read failed, sending zeros"
 msgstr "fisk: Lokal læsning fejlede, sender nuller"
 
-#: vfs/fish.c:517
+#: vfs/fish.c:525
 #, c-format
-msgid "fish: storing %s %d (%d)"
-msgstr "fisk: gemmer fil %s %d (%d)"
+msgid "fish: storing %s %d (%lu)"
+msgstr "fisk: gemmer fil %s %d (%lu)"
 
-#: vfs/fish.c:518
+#: vfs/fish.c:526
 msgid "zeros"
 msgstr "nuller"
 
-#: vfs/fish.c:565
+#: vfs/fish.c:574
 msgid "Aborting transfer..."
 msgstr "Afbryder overførsel..."
 
-#: vfs/fish.c:574
+#: vfs/fish.c:583
 msgid "Error reported after abort."
 msgstr "Fejl meldt tilbage efter afbrydelse."
 
-#: vfs/fish.c:576
+#: vfs/fish.c:585
 msgid "Aborted transfer would be successful."
 msgstr "Afbrudt overførsel ville være lykkedes."
 
-#: vfs/ftpfs.c:313
+#: vfs/ftpfs.c:315
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: Afkobler fra %s"
 
-#: vfs/ftpfs.c:371
+#: vfs/ftpfs.c:373
 msgid " FTP: Password required for "
 msgstr " FTP: Behøver adgangskode til"
 
-#: vfs/ftpfs.c:400
+#: vfs/ftpfs.c:402
 msgid " Proxy: Password required for "
 msgstr " Proxy: Behøver adgangskode til "
 
-#: vfs/ftpfs.c:426
+#: vfs/ftpfs.c:428
 msgid "ftpfs: sending proxy login name"
 msgstr "ftpfs: sender proxy loginnavn"
 
-#: vfs/ftpfs.c:430
+#: vfs/ftpfs.c:432
 msgid "ftpfs: sending proxy user password"
 msgstr "ftpfs: sender proxy brugeradgangskode"
 
-#: vfs/ftpfs.c:434
+#: vfs/ftpfs.c:436
 msgid "ftpfs: proxy authentication succeeded"
 msgstr "ftpfs: proxy bekræftelse lykkedes"
 
-#: vfs/ftpfs.c:438
+#: vfs/ftpfs.c:440
 #, c-format
 msgid "ftpfs: connected to %s"
 msgstr "ftpfs: forbundet til %s"
 
-#: vfs/ftpfs.c:455
+#: vfs/ftpfs.c:457
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: sender loginnavn"
 
-#: vfs/ftpfs.c:460
+#: vfs/ftpfs.c:462
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: sender brugeradgangskode"
 
-#: vfs/ftpfs.c:465
+#: vfs/ftpfs.c:467
 msgid "ftpfs: logged in"
 msgstr "ftpfs: logget ind"
 
-#: vfs/ftpfs.c:480
+#: vfs/ftpfs.c:482
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: Forkert login for bruger %s "
 
-#: vfs/ftpfs.c:512
+#: vfs/ftpfs.c:514
 #, c-format
 msgid " Could not set source routing (%s)"
 msgstr " Kunne ikke sætte kilderuting op (%s)"
 
-#: vfs/ftpfs.c:637
+#: vfs/ftpfs.c:639
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Ugyldig værtsnavn."
 
-#: vfs/ftpfs.c:657
+#: vfs/ftpfs.c:659
 msgid "ftpfs: Invalid host address."
 msgstr "ftpfs: Ugyldig værtsadresse."
 
-#: vfs/ftpfs.c:680
+#: vfs/ftpfs.c:682
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: laver forbindelse til %s"
 
-#: vfs/ftpfs.c:690
+#: vfs/ftpfs.c:692
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: forbindelse afbrudt af bruger"
 
-#: vfs/ftpfs.c:692
+#: vfs/ftpfs.c:694
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: forbindelse til server mislykkedes: %s"
 
-#: vfs/ftpfs.c:733
+#: vfs/ftpfs.c:735
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Venter på at forsøge igen... %d (Ctrl-C annullerer)"
 
-#: vfs/ftpfs.c:919
+#: vfs/ftpfs.c:921
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: kunne ikke indstille passiv måde"
 
-#: vfs/ftpfs.c:995
+#: vfs/ftpfs.c:997
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: afbryder overførsel."
 
-#: vfs/ftpfs.c:997
+#: vfs/ftpfs.c:999
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: afbrydelsesfejl: %s"
 
-#: vfs/ftpfs.c:1002
+#: vfs/ftpfs.c:1004
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: afbryd mislykkedes"
 
-#: vfs/ftpfs.c:1091 vfs/ftpfs.c:1193
+#: vfs/ftpfs.c:1093 vfs/ftpfs.c:1195
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: CWD mislykkedes"
 
-#: vfs/ftpfs.c:1101 vfs/ftpfs.c:1108
+#: vfs/ftpfs.c:1103 vfs/ftpfs.c:1110
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: kunne ikke læse symlænke"
 
-#: vfs/ftpfs.c:1159
+#: vfs/ftpfs.c:1161
 msgid "Resolving symlink..."
 msgstr "Læser symlænke..."
 
-#: vfs/ftpfs.c:1181
+#: vfs/ftpfs.c:1183
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: Læser FTP-mappe %s... %s%s"
 
-#: vfs/ftpfs.c:1182
+#: vfs/ftpfs.c:1184
 msgid "(strict rfc959)"
 msgstr "(følg rfc959)"
 
-#: vfs/ftpfs.c:1183
+#: vfs/ftpfs.c:1185
 msgid "(chdir first)"
 msgstr "(chdir først)"
 
-#: vfs/ftpfs.c:1307
+#: vfs/ftpfs.c:1309
 msgid "ftpfs: failed"
 msgstr "ftpfs: fejlede"
 
-#: vfs/ftpfs.c:1317
+#: vfs/ftpfs.c:1319
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: fejlede; ingen steder at falde tilbage på"
 
-#: vfs/ftpfs.c:1380
+#: vfs/ftpfs.c:1382
 #, c-format
-msgid "ftpfs: storing file %d (%d)"
-msgstr "ftpfs: gemmer fil %d (%d)"
+msgid "ftpfs: storing file %d (%lu)"
+msgstr "ftpfs: gemmer fil %d (%lu)"
 
-#: vfs/ftpfs.c:1812
+#: vfs/ftpfs.c:1814
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -4746,7 +4734,7 @@ msgstr "Kan ikke forbinde til server %s"
 msgid " Too many open connections "
 msgstr " For mange åbne forbindelser "
 
-#: vfs/sfs.c:329
+#: vfs/sfs.c:330
 #, c-format
 msgid ""
 "Warning: Invalid line in sfs.ini:\n"
@@ -4755,7 +4743,7 @@ msgstr ""
 "Advarsel: Ugyldig linje i sfs.ini.\n"
 "%s\n"
 
-#: vfs/sfs.c:340
+#: vfs/sfs.c:341
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in sfs.ini:\n"
@@ -4830,61 +4818,61 @@ msgstr ""
 "%s\n"
 "ser ikke ud til at være et tar-arkiv."
 
-#: vfs/undelfs.c:81
+#: vfs/undelfs.c:79
 msgid " undelfs: error "
 msgstr " undelfs: fejl "
 
-#: vfs/undelfs.c:184
+#: vfs/undelfs.c:182
 msgid " not enough memory "
 msgstr " ikke nok lager "
 
-#: vfs/undelfs.c:189
+#: vfs/undelfs.c:187
 msgid " while allocating block buffer "
 msgstr " under allokering af blokbuffer "
 
-#: vfs/undelfs.c:193
+#: vfs/undelfs.c:191
 #, c-format
 msgid " open_inode_scan: %d "
 msgstr " open_inode_scan: %d "
 
-#: vfs/undelfs.c:197
+#: vfs/undelfs.c:195
 #, c-format
 msgid " while starting inode scan %d "
 msgstr " under start af inodeskan %d "
 
-#: vfs/undelfs.c:204
+#: vfs/undelfs.c:202
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr "undelfs: henter information om slettede filer %d inoder"
 
-#: vfs/undelfs.c:219
+#: vfs/undelfs.c:217
 #, c-format
 msgid " while calling ext2_block_iterate %d "
 msgstr " ved kald til ext2_block_iterate %d "
 
-#: vfs/undelfs.c:227
+#: vfs/undelfs.c:225
 msgid " no more memory while reallocating array "
 msgstr " ikke mere lager ved reallokering af matrice "
 
-#: vfs/undelfs.c:246
+#: vfs/undelfs.c:244
 #, c-format
 msgid " while doing inode scan %d "
 msgstr " under skanning af inode %d "
 
-#: vfs/undelfs.c:270
+#: vfs/undelfs.c:268
 msgid " Ext2lib error "
 msgstr " Ext2lib fejl "
 
-#: vfs/undelfs.c:297
+#: vfs/undelfs.c:295
 #, c-format
 msgid " Could not open file %s "
 msgstr " Kunne ikke åbne filen %s "
 
-#: vfs/undelfs.c:300
+#: vfs/undelfs.c:298
 msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs: læser inode bitmap..."
 
-#: vfs/undelfs.c:303
+#: vfs/undelfs.c:301
 #, c-format
 msgid ""
 " Could not load inode bitmap from: \n"
@@ -4893,11 +4881,11 @@ msgstr ""
 " Kunne ikke hente bitmap fra: \n"
 " %s \n"
 
-#: vfs/undelfs.c:306
+#: vfs/undelfs.c:304
 msgid "undelfs: reading block bitmap..."
 msgstr "undelfs: læser blok bitmap..."
 
-#: vfs/undelfs.c:309
+#: vfs/undelfs.c:307
 #, c-format
 msgid ""
 " Could not load block bitmap from: \n"
@@ -4906,27 +4894,27 @@ msgstr ""
 " Kunne ikke hente blok bitmap fra: \n"
 " %s \n"
 
-#: vfs/undelfs.c:315
+#: vfs/undelfs.c:313
 msgid "undelfs: done."
 msgstr "undelfs: færdig."
 
-#: vfs/undelfs.c:318
+#: vfs/undelfs.c:316
 msgid "undelfs: failure"
 msgstr "undelfs: fejl "
 
-#: vfs/undelfs.c:342
+#: vfs/undelfs.c:340
 msgid " vfs_info is not fs! "
 msgstr "vfs_info er ikke fs! "
 
-#: vfs/undelfs.c:398 vfs/undelfs.c:582
+#: vfs/undelfs.c:396 vfs/undelfs.c:580
 msgid " You have to chdir to extract files first "
 msgstr "Du må ændre katalog før du henter filerne "
 
-#: vfs/undelfs.c:521
+#: vfs/undelfs.c:519
 msgid " while iterating over blocks "
 msgstr " ved iteration over blokke "
 
-#: vfs/undelfs.c:626
+#: vfs/undelfs.c:624
 #, c-format
 msgid " Could not open file: %s "
 msgstr " Kunne ikke åbne filen %s "
@@ -4935,28 +4923,38 @@ msgstr " Kunne ikke åbne filen %s "
 msgid "Changes to file lost"
 msgstr "Ændringer til fil tabt"
 
-#: vfs/vfs.c:1815
+#: vfs/vfs.c:1824
 msgid "Could not parse:"
 msgstr "Kunne ikke fortolke:"
 
-#: vfs/vfs.c:1817
+#: vfs/vfs.c:1826
 msgid "More parsing errors will be ignored."
 msgstr "Flere fortolkningsfejl vil blive ignoreret."
 
-#: vfs/vfs.c:1817
+#: vfs/vfs.c:1826
 msgid "(sorry)"
 msgstr "(beklager)"
 
-#: vfs/vfs.c:1828
+#: vfs/vfs.c:1837
 msgid "Internal error:"
 msgstr " Intern fejl:"
 
-#: vfs/vfs.c:1838
+#: vfs/vfs.c:1847
 #, c-format
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
 msgstr "%s: %s: %s %3d%% (%ld byte overført)"
 
-#: vfs/vfs.c:1839
+#: vfs/vfs.c:1848
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld byte overført"
+
+#~ msgid " Cannot open file \""
+#~ msgstr " Kan ikke åbne filen \""
+
+#~ msgid ""
+#~ " Cannot stat file \n"
+#~ " "
+#~ msgstr ""
+#~ " Kan ikke lave stat på filen \n"
+#~ " "
