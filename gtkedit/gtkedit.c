@@ -290,8 +290,8 @@ static void gtk_edit_style_set (GtkWidget * widget,
 
     edit = GTK_EDIT (widget);
     if (GTK_WIDGET_REALIZED (widget)) {
-	gdk_window_set_background (widget->window, &widget->style->base[GTK_STATE_NORMAL]);
-	gdk_window_set_background (edit->text_area, &widget->style->base[GTK_STATE_NORMAL]);
+	gdk_window_set_background (widget->window, &edit->color[1]);
+	gdk_window_set_background (edit->text_area, &edit->color[1]);
 
 #if 0
 	if ((widget->allocation.width > 1) || (widget->allocation.height > 1))
@@ -453,7 +453,6 @@ static void gtk_edit_draw (GtkWidget * widget,
 	edit = GTK_EDIT (widget);
 	edit_render_expose (edit->editor, &xexpose);
 	edit_status (edit->editor);
-	gtk_widget_draw_focus (widget);
     }
 }
 
@@ -496,7 +495,6 @@ static gint
 	gtk_edit_set_colors (edit);
 	edit_render_expose (edit->editor, &xexpose);
 	edit_status (edit->editor);
-	gtk_widget_draw_focus (widget);
     }
     return FALSE;
 }
@@ -920,6 +918,7 @@ void gtk_edit_alloc_colors (GtkEdit *edit, GdkColormap *colormap)
 	if (!gdk_color_alloc (colormap, &edit->color[i]))
 	    g_warning ("cannot allocate color");
     }
+    edit->color_last_pixel = 27;
 }
 
 int allocate_color (WEdit *edit, gchar *color)

@@ -610,7 +610,7 @@ void edit_convert_expose_to_area (XExposeEvent * xexpose, int *row1, int *col1, 
 
 void edit_render_tidbits (GtkEdit * edit)
 {
-    return;
+    gtk_widget_draw_focus (GTK_WIDGET (edit));
 }
 
 #else
