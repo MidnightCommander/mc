@@ -1,5 +1,8 @@
 2002-10-30  Pavel Roskin  <proski@gnu.org>
 
+	* ext.c (exec_extension): Don't rely on working #! - explicitly
+	run /bin/sh on the temporary script.
+
 	* mouse.h: Use definitions for GPM_B_DOWN and GPM_B_UP
 	compatible with gpm-1.20.
 	Reported by by David Martin <dmartina@excite.com>

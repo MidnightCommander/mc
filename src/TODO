@@ -6,8 +6,6 @@ necessary - it's slow, especially in UTF-8 locales.
 
 Don't allow stdout and stderr from extfs scripts pollute the screen.
 
-Don't rely on temporary scripts being executable.  Run shell explicitly.
-
 reimplement "-P" in a safer way (temp file instead of stdout) - possibly
 security issues.
 

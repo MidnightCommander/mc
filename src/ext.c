@@ -69,6 +69,7 @@ exec_extension (const char *filename, const char *data, int *move_dir,
     char *file_name;
     int cmd_file_fd;
     FILE *cmd_file;
+    char *cmd = NULL;
     int expand_prefix_found = 0;
     int parameter_found = 0;
     char prompt[80];
@@ -213,7 +214,13 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 	g_free (file_name);
 	file_name = NULL;
     } else {
+	int cmd_len = strlen (file_name) + 10;
+
+	/* Set executable flag on the command file ... */
 	chmod (file_name, S_IRWXU);
+	/* ... but don't rely on it - run /bin/sh explicitly */
+	cmd = g_malloc (cmd_len);
+	g_snprintf (cmd, cmd_len, "/bin/sh %s", file_name);
     }
 
     if (run_view) {
@@ -228,7 +235,7 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 	 * into view
 	 */
 	if (written_nonspace)
-	    view (file_name, filename, move_dir, start_line);
+	    view (cmd, filename, move_dir, start_line);
 	else
 	    view (0, filename, move_dir, start_line);
 	if (changed_hex_mode && !altered_hex_mode)
@@ -251,7 +258,7 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 	q[1] = 0;
 	do_cd (p, cd_parse_command);
     } else {
-	shell_execute (file_name, EXECUTE_INTERNAL);
+	shell_execute (cmd, EXECUTE_INTERNAL);
 	if (console_flag) {
 	    handle_console (CONSOLE_SAVE);
 	    if (output_lines && keybar_visible) {
@@ -263,9 +270,10 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 	    }
 	}
     }
-    if (file_name) {
-	g_free (file_name);
-    }
+
+    g_free (file_name);
+    g_free (cmd);
+
     if (localcopy) {
 	mc_stat (localcopy, &mystat);
 	mc_ungetlocalcopy (filename, localcopy,
