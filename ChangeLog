@@ -1,5 +1,8 @@
 2001-08-26  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: New conditionals USE_VFS_NET, USE_UNDEL_FS and
+	CONS_SAVER.  Put all conditionals together.
+
 	* Makefile.am (EXTRA_DIST): Add depcomp to work around a bug in
 	Automake 1.5.
 
