@@ -138,7 +138,7 @@ semplicemente battendoli. Ogni cosa scritta apparirà sulla linea di
 comando e quando si preme l'invio il Midnight Commander eseguirà la
 riga di comando appena battuta; leggere le sezioni
 .\"LINK2"
-Riga di Comando
+Shell a Riga di Comando
 .\"Shell Command Line"
 e
 .\"LINK2"
@@ -236,7 +236,7 @@ per una seguente azione (l'azione normalmente deriva dal menu file).
 .PP
 La sezione
 .\"LINK2"
-Linea di Comando
+Shell a Riga di Comando
 .\"Shell Command Line"
 elenca i tasti utilizzati per immettere e modificare linee di comando.
 Molti di questi copiano nomi di file o altro dal pannello directory
@@ -454,36 +454,37 @@ to depressing the '>' with the mouse.
 Displays the directory history, equivalent to depressing the 'v' with
 the mouse.
 .PP
-.SH "  Shell Command Line"
-This section lists keys which are useful to avoid excessive typing when
-entering shell commands.
+.\"NODE "  Shell a Riga di Comando"
+.SH "  Shell a riga di comando"
+Questa sezione elenca i tasti utili ad evitare troppe battiture
+nell'immissione dei comandi.
 .PP
-.B M-Enter.
-Copy the currently selected file name to the command line.
+.B M-Invio.
+Copia nella riga di comando il nome del file attualmente selezionato.
 .PP
-.B C-Enter.
-Same a M-Enter, this one only works on the Linux console.
+.B C-Invio.
+Come M-Invio, ma funziona solo dalla console Linux.
 .PP
 .B M-Tab.
-Does the filename, command, variable, username and hostname
+Esegue automaticamente il 
 .\"LINK2"
-completion
+completamento
 .\"Completion"
-for you.
+del nome del file, variabile, nome utente e nome host.
 .PP
 .B C-x t, C-x C-t.
-Copy the tagged files (or if there are no tagged files, the selected
-file) of the current panel (C-x t) or of the other panel (C-x C-t) to
-the command line.
+Copia i file marcati (o se non vi sono file marcati, il file selezionato)
+del pannello corrente (C-x t) o dell'altro pannello (C-x C-t) sulla
+riga di comando.
 .PP
-.B C-x p, C-x C-p. 
-The first key sequence copies the current path name to the command
-line, and the second one copies the unselected panel's path name to
-the command line.
+.B C-x p, C-x C-p.
+La prima sequenza di tasti copia il percorso corrente sulla riga di comando
+e la seconda copia il percorso del pannello non selezionato sulla riga
+di comando.
 .PP
 .B C-q.
-The quote command can be used to insert characters that are otherwise
-interpreted by the Midnight Commander (like the '+' symbol)
+Il comando di inserimento letterale serve per inserire caratteri che 
+sarebbero altrimenti interpretati dal Midnight Commander (come il simbolo '+')
 .PP
 .B M-p, M-n.
 Use these keys to browse through the command history. M-p takes you
