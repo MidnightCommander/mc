@@ -1,3 +1,11 @@
+1999-08-12  Federico Mena Quintero  <federico@redhat.com>
+
+	* gtkdtree.c (scan_subtree): Scan the subtree unconditionally, as
+	it is completely orthogonal from the selection status.
+	(gtk_dtree_select_row): Maintain the dtree->last_node field here.
+	This fixes the expand/select the same row sequence.  BUGFIX: GNOME
+	bug tracker #1758.
+
 1999-08-12  Jonathan Blandford  <jrb@redhat.com>
 
 	* gpopup2.c (handle_unmount): We refresh when we unmount/mount a cdrom.

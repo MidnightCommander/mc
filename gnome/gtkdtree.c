@@ -206,19 +206,13 @@ scan_end (GtkDTree *dtree)
 	}
 }
 
-/* Scans a subdirectory in the tree.  Returns whether it is worth it to reload
- * the directory or not.
- */
-static int
+/* Scans a subdirectory in the tree */
+static void
 scan_subtree (GtkDTree *dtree, GtkCTreeNode *row)
 {
 	char *path;
 
-	if (row == dtree->last_node)
-		return FALSE;
-
 	dtree->loading_dir++;
-	dtree->last_node = row;
 
 	scan_begin (dtree);
 	path = gtk_dtree_get_row_path (dtree, row, 0);
@@ -229,19 +223,6 @@ scan_subtree (GtkDTree *dtree, GtkCTreeNode *row)
 	dtree->current_path = path;
 
 	gtk_dtree_load_path (dtree, path, row, 1);
-#if 0
-	last_node = GTK_CTREE_ROW (row)->children; 
-	for (; last_node; last_node = GTK_CTREE_ROW (last_node)->sibling){
-		char *np, *text;
-
-		gtk_ctree_node_get_pixtext (GTK_CTREE (dtree), last_node, column,
-					    &text, NULL, NULL, NULL);
-
-		np = g_concat_dir_and_file (path, text);
-		gtk_dtree_load_path (dtree, np, last_node, 0);
-		g_free (np);
-	}
-#endif
 
 	dtree->loading_dir--;
 	scan_end (dtree);
@@ -253,7 +234,6 @@ static void
 gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 {
 	GtkDTree *dtree;
-	int do_change;
 
 	dtree = GTK_DTREE (ctree);
 
@@ -263,9 +243,17 @@ gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 	scan_begin (dtree);
 
 	(* parent_class->tree_select_row) (ctree, row, column);
-	do_change = scan_subtree (dtree, row);
 
-	if (do_change && !dtree->internal)
+	if (row == dtree->last_node) {
+		scan_end (dtree);
+		return;
+	}
+
+	dtree->last_node = row;
+
+	scan_subtree (dtree, row);
+
+	if (!dtree->internal)
 		gtk_signal_emit (GTK_OBJECT (dtree), gtk_dtree_signals [DIRECTORY_CHANGED],
 				 dtree->current_path);
 
@@ -678,12 +666,6 @@ gtk_dtree_load_pixmap (char *pix [], GdkPixmap **pixmap, GdkBitmap **bitmap)
 	*bitmap = gdk_imlib_move_mask (image);
 }
 
-/*
- * FIXME: This uses the current colormap and pixmap.
- * This means that at widget *creation* time the proper
- * colormap and visual should be set, dont wait till
- * realize for that
- */
 static void
 gdk_dtree_load_pixmaps (GtkDTree *dtree)
 {
