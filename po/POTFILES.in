@@ -44,7 +44,6 @@ src/textconf.c
 src/file.c
 src/filegui.c
 src/find.c
-src/fixhlp.c
 src/help.c
 src/hotlist.c
 src/i18n.h

@@ -1,3 +1,9 @@
+2000-09-22  Pavel Roskin  <proski@gnu.org>
+
+	* POTFILES.in: Removed src/fixhlp.c
+
+	* Makefile.in.in: Only run update-po in the maintainer mode
+
 2000-09-15  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* ru.po: updated russian translation. Please ignore msgfmt warning.
