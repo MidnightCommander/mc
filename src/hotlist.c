@@ -403,6 +403,12 @@ static int hotlist_callback (Dlg_head * h, int Par, int Msg)
 	    else
 		return 0;
 	    break;
+	case KEY_DC:
+	    if (!hotlist_state.moving) {
+		hotlist_button_callback (B_REMOVE, 0);
+		return 1;
+	    }
+	    break;
 l1:
 	case ALT('\n'):
 	case ALT('\r'):

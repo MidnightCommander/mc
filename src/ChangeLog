@@ -1,5 +1,7 @@
 2001-12-21  Pavel Roskin  <proski@gnu.org>
 
+	* hotlist.c (hotlist_callback): Recognize "delete" key.
+
 	* myslang.h [!HAVE_SYSTEM_SLANG]: Include slang/slang-mc.h to
 	simplify includes.
 	[HAVE_SYSTEM_SLANG]: Use angle brackets for slang.h.
