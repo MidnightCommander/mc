@@ -36,3 +36,8 @@ Executable programs will be executed like this:
 	program --desktop-dir DESKTOPDIR
 
 Where DESKTOPDIR is the user's desktop directory.
+
+The program can then populate the directory with any information it
+might want.  This is used for example by the g-print program (that
+provides priting facilities by creating special desktop entries that
+set up the drop action and varios different open actions)
