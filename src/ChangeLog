@@ -1,3 +1,8 @@
+2001-07-19  Pavel Roskin  <proski@gnu.org>
+
+	* user.c (check_format_view): Match "unform" instead of
+	"unformated" because some users may spell this word correctly.
+
 2001-07-17  Pavel Roskin  <proski@gnu.org>
 
 	* util.c (get_current_wd): Remove.  It's obsoleted by

@@ -66,9 +66,9 @@ static char *menu = NULL;
    %s  "Selected files"; the tagged files if any, otherwise the current file
    %t  Tagged files
    %u  Tagged files (and they are untagged on return from expand_format)
-   %view Runs the commands and pipes standard output to the view command
-       if %view is directly followed by '{', a list of keywords
-       ascii, hex, nroff, unformated and
+   %view Runs the commands and pipes standard output to the view command.
+       If %view is immediately followed by '{', recognize keywords
+       ascii, hex, nroff and unform
 
    If the format letter is in uppercase, it refers to the other panel.
    
@@ -85,22 +85,22 @@ static char *menu = NULL;
 int check_format_view (const char *p)
 {
     const char *q = p;
-    if (!strncmp (p, "view", 4)){
+    if (!strncmp (p, "view", 4)) {
     	q += 4;
     	if (*q == '{'){
-    	    for (q++;*q && *q != '}';q++){
-    	    	if (!strncmp (q, "ascii", 5)){
+    	    for (q++;*q && *q != '}';q++) {
+    	    	if (!strncmp (q, "ascii", 5)) {
     	    	    default_hex_mode = 0;
     	    	    q += 4;
-    	    	} else if (!strncmp (q, "hex", 3)){
+    	    	} else if (!strncmp (q, "hex", 3)) {
     	    	    default_hex_mode = 1;
     	    	    q += 2;
-    	    	} else if (!strncmp (q, "nroff", 5)){
+    	    	} else if (!strncmp (q, "nroff", 5)) {
     	    	    default_nroff_flag = 1;
     	    	    q += 4;
-    	    	} else if (!strncmp (q, "unformated", 10)){
+    	    	} else if (!strncmp (q, "unform", 6)) {
     	    	    default_nroff_flag = 0;
-    	    	    q += 9;
+    	    	    q += 5;
     	    	} 
     	    }
     	    if (*q == '}')
