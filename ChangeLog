@@ -1,3 +1,7 @@
+2001-10-30  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Add support for Netpbm files.
+
 2001-10-25  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* slang/slvideo.c (SLtt_set_color): Eliminate C++ comments.
