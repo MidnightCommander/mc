@@ -1,3 +1,7 @@
+2003-06-09  Pavel Roskin  <proski@gnu.org>
+
+	* Makevars: Add MSGID_BUGS_ADDRESS from gettext-0.12.1 template.
+
 2003-04-17  Marco Ciampa  <ciampix@libero.it>
 
 	* it.po: Updated Italian translation.
@@ -159,7 +163,7 @@
 
 	* fr.po: Updated French translation.
 
-2002-02-10 Duarte Loreto  <happyguy_pt@hotmail.com>
+2002-02-10  Duarte Loreto  <happyguy_pt@hotmail.com>
 
 	* pt.po: Updated portuguese translation.
 
@@ -221,7 +225,7 @@
 
 	* eu.po: Added Basque file
 
-2001-12-27 Duarte Loreto  <happyguy_pt@hotmail.com>
+2001-12-27  Duarte Loreto  <happyguy_pt@hotmail.com>
 
 	* pt.po: Added portuguese translation
 
@@ -871,7 +875,7 @@
 
 	* wa.po: small fixes
 
-2000-04-20 Martin Norbdck  <d95mback@dtek.chalmers.se>
+2000-04-20  Martin Norbdck  <d95mback@dtek.chalmers.se>
 
 	* sv.po: Updated Swedish translation
 
@@ -951,7 +955,7 @@
 	* sk.po: Minor update
 	  ../configure.in: added sk to list of translations
 
-1999-12-12 Sergey Panov  <sipan@mit.edu>
+1999-12-12  Sergey Panov  <sipan@mit.edu>
 
 	* ru.po: Updated translation
 	from Evgeny Bulgakov <bgav@netvision.net.il>
@@ -1306,7 +1310,7 @@ Wed Mar 10 22:05:46 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* es.po: Updated with David Martins translation.
 
-1999-03-08 Sergey Panov  <sipan@mit.edu>
+1999-03-08  Sergey Panov  <sipan@mit.edu>
 
 	* POTFILES.in: add gnome/gcustom-layout.c file
 
