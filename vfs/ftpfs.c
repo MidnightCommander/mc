@@ -131,9 +131,6 @@ int ftpfs_always_use_proxy;
 /* source routing host */
 extern int source_route;
 
-/* If true, the directory cache is forced to reload */
-static int force_expiration = 0;
-
 #ifdef FIXME_LATER_ALIGATOR
 static struct linklist *connections_list;
 #endif
@@ -827,19 +824,13 @@ archive_same(struct vfs_class *me, struct vfs_s_super *super, char *archive_name
     return port;
 }
 
-void
-ftpfs_flushdir (void)
-{
-    force_expiration = 1;
-}
-
 static int
 dir_uptodate(struct vfs_class *me, struct vfs_s_inode *ino)
 {
     struct timeval tim;
 
-    if (force_expiration) {
-	force_expiration = 0;
+    if (MEDATA->flush) {
+	MEDATA->flush = 0;
 	return 0;
     }
     gettimeofday(&tim, NULL);

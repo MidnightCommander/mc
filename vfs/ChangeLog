@@ -1,5 +1,9 @@
 2003-10-16  Pavel Roskin  <proski@gnu.org>
 
+	* direntry.c (vfs_s_setctl): Implement VFS_SETCTL_FLUSH.
+	* ftpfs.c: Remove ftpfs_flushdir.  Use MEDATA->flush.
+	* fish.c: Use MEDATA->flush.
+
 	* direntry.c (vfs_s_setctl): Add support to VFS_SETCTL_LOGFILE.
 	* ftpfs.c (ftpfs_set_debug): Remove.
 

@@ -67,11 +67,6 @@
 #define TRANSIENT	4	/* transient negative completion */
 #define ERROR		5	/* permanent negative completion */
 
-/* If true, the directory cache is forced to reload */
-static int force_expiration = 0;
-
-/* FIXME: prev two variables should be killed */
-
 /* command wait_flag: */
 #define NONE        0x00
 #define WAIT_REPLY  0x01
@@ -343,8 +338,8 @@ dir_uptodate(struct vfs_class *me, struct vfs_s_inode *ino)
     struct timeval tim;
 
     gettimeofday(&tim, NULL);
-    if (force_expiration) {
-	force_expiration = 0;
+    if (MEDATA->flush) {
+	MEDATA->flush = 0;
 	return 0;
     }
     if (tim.tv_sec < ino->timestamp.tv_sec)

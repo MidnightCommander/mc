@@ -142,10 +142,7 @@ void vfs_fill_names (void (*)(char *));
 char *vfs_translate_url (const char *);
 
 #ifdef USE_NETCODE
-void ftpfs_flushdir (void);
 extern int use_netrc;
-#else
-#   define ftpfs_flushdir()
 #endif
 
 /* Only the routines outside of the VFS module need the emulation macros */
@@ -229,6 +226,7 @@ enum {
     VFS_SETCTL_FORGET,
     VFS_SETCTL_RUN,
     VFS_SETCTL_LOGFILE,
+    VFS_SETCTL_FLUSH,	/* invalidate directory cache */
 
     /* Setting this makes vfs layer give out potentially incorrect data,
        but it also makes some operations much faster. Use with caution. */

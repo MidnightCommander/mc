@@ -1013,6 +1013,9 @@ vfs_s_setctl (struct vfs_class *me, char *path, int ctlop, void *arg)
     case VFS_SETCTL_LOGFILE:
 	MEDATA->logfile = fopen ((char *) arg, "w");
 	return 1;
+    case VFS_SETCTL_FLUSH:
+	MEDATA->flush = 1;
+	return 1;
     }
     return 0;
 }
