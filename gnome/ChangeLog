@@ -1,3 +1,7 @@
+2001-06-25  Pavel Roskin  <proski@gnu.org>
+
+	* gcorba.h (poa): Declare extern.
+
 2001-06-18  Pavel Roskin  <proski@gnu.org>
 
 	* gtree.c: Remove.

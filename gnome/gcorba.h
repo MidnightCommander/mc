@@ -15,7 +15,7 @@
 
 /* The ORB and the POA */
 extern CORBA_ORB orb;
-PortableServer_POA poa;
+extern PortableServer_POA poa;
 
 
 int corba_init_server (void);
