@@ -948,6 +948,15 @@ panel_drag_begin (GtkWidget *widget, GdkEvent *event, WPanel *panel)
 }
 
 static void
+panel_icon_list_drag_begin (GtkWidget *widget, GdkEvent *event, WPanel *panel)
+{
+	GnomeIconList *icons = GNOME_ICON_LIST (panel->icons);
+	
+	icons->last_clicked = -1;
+	panel_drag_begin (widget, event, panel);
+}
+
+static void
 panel_artificial_drag_start (GtkCList *window, GdkEventMotion *event)
 {
 	artificial_drag_start (window->clist_window, event->x, event->y);
@@ -1190,7 +1199,7 @@ panel_icon_list_realized (GtkObject *obj, WPanel *panel)
 
 	/* DND: Drag setup */
 	gtk_signal_connect (obj, "drag_request_event", GTK_SIGNAL_FUNC (panel_icon_list_drag_request), panel);
-	gtk_signal_connect (obj, "drag_begin_event", GTK_SIGNAL_FUNC (panel_drag_begin), panel);
+	gtk_signal_connect (obj, "drag_begin_event", GTK_SIGNAL_FUNC (panel_icon_list_drag_begin), panel);
 	gdk_window_dnd_drag_set (icon->ilist_window, TRUE, drag_types, ELEMENTS (drag_types));
 	
 	/* DND: Drop setup */
