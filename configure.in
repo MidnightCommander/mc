@@ -636,7 +636,6 @@ src/Makefile
 slang/Makefile 
 edit/Makefile 
 syntax/Makefile
-pc/Makefile
 m4/Makefile
 
 lib/mc.ext
