@@ -1,9 +1,9 @@
 Bugzilla: 3436
 
 bugs.gnome.org:
-  Important: 1006, 1796
+  Important: 1006
   Major cosmetic: 272/875, 487, 899, 1299
-  Minor cosmetic: 55/208, 115, 383, 398, 597, 781, 874, 956/1126,
+  Minor cosmetic: 115, 383, 398, 597, 781, 956/1126,
 		  1022.1, 1045, 1047, 904, 1329, 1468, 1508, 1750
   Non-essential or feature: 779?, 1133, 1121, 1122, 1251
   Look at bug yourself: 1773
