@@ -19,6 +19,12 @@
 # Copyright (C) 1997 Free Software Foundation
 #
 
+sub quote {
+    $_ = shift(@_);
+    s/([^\w\/.+-])/\\$1/g;
+    return($_);
+}
+
 sub mcdebfs_list
 {
 #
@@ -26,8 +32,7 @@ sub mcdebfs_list
 #		Empty directories do not appear at all
 #
 	local($archivename)=@_;
-	local $qarchivename = $archivename;
-	$qarchivename =~ s/([^\w\/.+-])/\\$1/g;
+	local $qarchivename = quote($archivename);
 	chop($date=`LC_ALL=C date "+%b %d %Y %H:%M"`);
 	chop($info_size=`dpkg -I $qarchivename | wc -c`);
 	$install_size=length($pressinstall);
@@ -111,12 +116,9 @@ sub mcdebfs_list
 sub mcdebfs_copyout
 {
 	local($archive,$filename,$destfile)=@_;
-	local $qarchive = $archive;
-	$qarchive =~ s/([^\w\/.+-])/\\$1/g;
-	local $qfilename = $filename;
-	$qfilename =~ s/([^\w\/.+-])/\\$1/g;
-	local $qdestfile = $destfile;
-	$qdestfile =~ s/([^\w\/.+-])/\\$1/g;
+	local $qarchive = quote($archive);
+	local $qfilename = quote($filename);
+	local $qdestfile = quote($destfile);
 
 	if($filename eq "INFO")
 	{
@@ -125,7 +127,7 @@ sub mcdebfs_copyout
         }
         elsif($filename =~ /^DEBIAN/)
         {
-               $filename=~s!^DEBIAN/!!;
+               $qfilename=~s!^DEBIAN/!!;
                system("dpkg-deb -I $qarchive $qfilename > $qdestfile");
         # end from Patrik Rak
 
@@ -142,7 +144,7 @@ sub mcdebfs_copyout
 	else
 	{
 	# files can be prepended with ./ or not, depending on the version of tar
-		$filename=~s!^CONTENTS/!!;
+		$qfilename=~s!^CONTENTS/!!;
 		system("dpkg-deb --fsys-tarfile $qarchive | tar xOf - $qfilename ./$qfilename > $qdestfile 2>/dev/null");
 	}
 }
@@ -150,8 +152,7 @@ sub mcdebfs_copyout
 sub mcdebfs_run
 {
 	local($archive,$filename)=@_;
-	local $qarchive = $archive;
-	$qarchive =~ s/([^\w\/.+-])/\\$1/g;
+	local $qarchive = quote($archive);
 	if($filename eq "INSTALL")
 	{
 		print "Installing $archive\n";

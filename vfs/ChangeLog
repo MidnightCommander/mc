@@ -1,3 +1,13 @@
+2004-08-22  Leonard den Ottolander  <leonard * den ottolander nl>
+
+	* vfs/extfs/a.in: Quote parameters to calls to system/open that spawn
+	a shell.
+	* vfs/extfs/apt.in: Likewise.
+	* vfs/extfs/debd.in: Likewise.
+	* vfs/extfs/dpkg.in: Likewise.
+	* vfs/extfs/deba.in: Clean up earlier fixes to quotation of parameters.
+	* vfs/extfs/deb.in: Likewise.
+
 2004-08-24  Roland Illig  <roland.illig@gmx.de>
 
 	* extfs.c (extfs_internal_stat): Fixed memory leaks introduced

@@ -6,10 +6,16 @@
 #
 # deba
 
+sub quote {
+    $_ = shift(@_);
+    s/([^\w\/.+-])/\\$1/g;
+    return($_);
+}
+
 sub list
 {
        my($qarchive)=@_;
-       $qarchive =~ s/([^\w\/.+-])/\\$1/g;
+       $qarchive = quote($qarchive);
        chop($date=`LC_ALL=C date "+%b %d %Y %H:%M"`);
        chop($info_size=`apt-cache show $qarchive | wc -c`);
        $install_size=length($pressinstall);
@@ -29,10 +35,8 @@ sub list
 sub copyout
 {
        my($archive,$filename,$destfile)=@_;
-       my $qarchive = $archive;
-       $qarchive =~ s/([^\w\/.+-])/\\$1/g;
-       my $qdestfile = $destfile;
-       $qdestfile =~ s/([^\w\/.+-])/\\$1/g;
+       my $qarchive = quote($archive);
+       my $qdestfile = quote($destfile);
        if($filename eq "INFO") {
            system("apt-cache show $qarchive > $qdestfile");
         } elsif($filename eq "INSTALL")        {
@@ -55,8 +59,7 @@ sub copyout
 sub run
 {
        my($archive,$filename)=@_;
-       my $qarchive = $archive;
-       $qarchive =~ s/([^\w\/.+-])/\\$1/g;
+       my $qarchive = quote($archive);
        if($filename eq "INSTALL") {
            system("apt-get install $qarchive");
        } elsif($filename eq "UPGRADE") {
