@@ -1,8 +1,14 @@
 1998-12-03  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* gscreen.c (panel_create_icon_display, panel_create_file_list):
-	Hook up to drag_begin and drag_end events.
+	* gscreen.c (panel_tree_drag_motion): Improve interactivity
+	(x_create_panel): Add a little decorating frame.
+
+
+
 	
+	(panel_create_icon_display, panel_create_file_list):
+	Hook up to drag_begin and drag_end events.
+
 	(panel_tree_drag_motion): Either queue a scroll on the tree, or
 	queue an open-directory event.
 
@@ -18,7 +24,6 @@
 	(panel_drag_begin, panel_drag_end): New functions to keep track
 	of the dragging operations.
 
-	
 1998-12-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (panel_tree_drag_data_received): Perform drag and drop

@@ -1804,7 +1804,7 @@ panel_tree_scrolling_is_desirable (WPanel *panel, int x, int y)
 		if (va->value > va->lower)
 			return TRUE;
 	} else {
-		if (y > (GTK_WIDGET (dtree)->allocation.height-10)){
+		if (y > (GTK_WIDGET (dtree)->allocation.height-20)){
 			if (va->value < va->upper)
 				return TRUE;
 		}
@@ -1853,7 +1853,7 @@ panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *ctx, int x, int y, gu
 	dtree->drag_motion_y = y;
 
 	if (panel_tree_scrolling_is_desirable (panel, x, y)){
-		dtree->timer_id = gtk_timeout_add (200, panel_tree_scroll, data);
+		dtree->timer_id = gtk_timeout_add (60, panel_tree_scroll, data);
 		return TRUE;
 	}
 	
@@ -2015,7 +2015,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
 	GtkWidget *status_line, *filter, *vbox, *ministatus_box;
 	GtkWidget *frame, *cwd, *back_p, *fwd_p;
-	GtkWidget *display;
+	GtkWidget *display, *table_frame;
 		
 	panel->xwindow = gtk_widget_get_toplevel (GTK_WIDGET (panel->widget.wdata));
 	
@@ -2128,6 +2128,14 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 
 	panel->view_table = gtk_table_new (1, 1, 0);
 	gtk_widget_show (panel->view_table);
+
+	/*
+	 * Put the icon list and the file listing in a nice frame
+	 */
+	table_frame = gtk_frame_new (NULL);
+	gtk_frame_set_shadow_type (GTK_FRAME (table_frame), GTK_SHADOW_IN);
+	gtk_widget_show (table_frame);
+	gtk_container_add (GTK_CONTAINER (table_frame), panel->view_table);
 	
 	/* Add both the icon view and the listing view */
 	gtk_table_attach (GTK_TABLE (panel->view_table), panel->icons, 0, 1, 0, 1,
@@ -2149,7 +2157,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0);
 
-	gtk_paned_add2 (GTK_PANED (panel->pane), panel->view_table);
+	gtk_paned_add2 (GTK_PANED (panel->pane), table_frame);
 	
 	gtk_table_attach (GTK_TABLE (panel->table), status_line, 0, 1, 0, 1,
 			  GTK_EXPAND | GTK_FILL, GTK_SHRINK, 0, 0);
