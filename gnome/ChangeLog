@@ -1,3 +1,8 @@
+2000-08-03  Pavel Roskin  <proski@gnu.org>
+
+	* gpopup2.h: Removed
+	* gtree.h: Added prototype for sync_tree()
+
 2000-07-17  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* gdesktop-init.c (desktop_init_at): fname released after use
