@@ -6,10 +6,6 @@
 
 /* String managing functions */
 
-#if defined(SCO_FLAVOR) && defined(__GNUC__)
-extern char*g_strdup (const char*);
-#endif
-
 int  is_printable (int c);
 int  msglen (char *text, int *lines);
 char *trim (char *s, char *d, int len);
@@ -32,12 +28,9 @@ char *strip_ctrl_codes (char *s);
 char *convert_controls (char *s);
 void wipe_password (char *passwd);
 char *reverse_string (char *string);
-char *resolve_symlinks (char *path);
 char *diff_two_paths (char *first, char *second);
-int  set_nonblocking (int fd);
 
 char *x_basename (char *s);
-char *g_readlink (char *path);
 
 /* Profile managing functions */
 int set_int (char *, char *, int);
@@ -62,7 +55,6 @@ char *get_owner (int);
 size_t i18n_checktimelength (void);
 char *file_date (time_t);
 
-char *file_date_pck (time_t);
 int exist_file (char *name);
 
 /* Returns a copy of *s until a \n is found and is below top */
@@ -89,7 +81,6 @@ void my_putenv (char*, char*);
 #define EXECUTE_SETUID     8
 #define EXECUTE_WAIT      16
 int my_system (int flags, const char *shell, const char *command);
-int my_system_get_child_pid (int flags, const char *shell, const char *command, pid_t *pid);
 void save_stop_handler (void);
 extern struct sigaction startup_handler;
 
@@ -100,7 +91,6 @@ char *tilde_expand (const char *);
 char *canonicalize_pathname (char *);
 
 /* Misc Unix functions */
-long blocks2kilos (int blocks, int bsize);
 char *get_current_wd (char *buffer, int size);
 int my_mkdir (char *s, mode_t mode);
 int my_rmdir (char *s);
@@ -124,9 +114,7 @@ enum {
 };
 
 int get_compression_type (int fd);
-char *decompress_command (int type);
 char *decompress_extension (int type);
-void decompress_command_and_arg (int type, char **cmd, char **flags);
 
 int mc_doublepopen (int inhandle, int inlen, pid_t *tp, char *command, ...);
 int mc_doublepclose (int pipehandle, pid_t pid);
@@ -143,8 +131,6 @@ void add_hook (Hook **hook_list, void (*hook_fn)(void *), void *data);
 void execute_hooks (Hook *hook_list);
 void delete_hook (Hook **hook_list, void (*hook_fn)(void *));
 int hook_present (Hook *hook_list, void (*hook_fn)(void *));
-
-int max_open_files (void);
 
 #ifdef OS2_NT
 #    define PATH_SEP '\\'

@@ -44,31 +44,11 @@
 
 struct sigaction startup_handler;
 
-int
-max_open_files (void)
-{
-	static int files;
-
-	if (files)
-		return files;
-
-#ifdef HAVE_SYSCONF
-	files = sysconf (_SC_OPEN_MAX);
-	if (files != -1)
-		return files;
-#endif
-#ifdef OPEN_MAX
-	return files = OPEN_MAX;
-#else
-	return files = 256;
-#endif
-}
-
 #ifndef VFS_STANDALONE
 /* uid of the MC user */
-uid_t current_user_uid = -1;
+static uid_t current_user_uid = -1;
 /* List of the gids of the user */
-GTree *current_user_gid = NULL;
+static GTree *current_user_gid = NULL;
 
 /* Helper function to compare 2 gids */
 static gint
@@ -335,15 +315,6 @@ char *tilde_expand (const char *directory)
 }
 
 #ifndef VFS_STANDALONE
-int
-set_nonblocking (int fd)
-{
-    int val;
-
-    val = fcntl (fd, F_GETFL, 0);
-    val |= O_NONBLOCK;
-    return fcntl (fd, F_SETFL, val) != -1;
-}
 
 /* Pipes are guaranteed to be able to hold at least 4096 bytes */
 /* More than that would be unportable */
@@ -675,6 +646,15 @@ int gettimeofday( struct timeval * tv, struct timezone * tz)
 }
 #endif /* SCO_FLAVOR */
 
+#ifdef HAVE_GET_PROCESS_STATS
+#    include <sys/procstats.h>
+
+int gettimeofday (struct timeval *tp, void *tzp)
+{
+  return get_process_stats(tp, PS_SELF, 0, 0);
+}
+#endif /* HAVE_GET_PROCESS_STATS */
+
 #ifndef HAVE_PUTENV
 
 /* The following piece of code was copied from the GNU C Library */
@@ -738,15 +718,6 @@ putenv (const char *string)
 }
 #endif /* !HAVE_PUTENV */
 
-#ifdef HAVE_GET_PROCESS_STATS
-#    include <sys/procstats.h>
-
-int gettimeofday (struct timeval *tp, void *tzp)
-{
-  return get_process_stats(tp, PS_SELF, 0, 0);
-}
-#endif
-
 #ifdef SCO_FLAVOR
 /* Define this only for SCO */
 #ifdef USE_NETCODE
@@ -783,7 +754,7 @@ int gettimeofday (struct timeval *tp, void *tzp)
 
  /* s_pipe returns 0 if OK, -1 on error */
  /* two file descriptors are returned   */
-int s_pipe(int fd[2])
+static int s_pipe(int fd[2])
 {
    struct strfdinsert  ins;  /* stream I_FDINSERT ioctl format */
    queue_t             *pointer;
@@ -847,45 +818,3 @@ int socketpair(int dummy1, int dummy2, int dummy3, int fd[2])
 #endif /* ifdef USE_NETCODE */
 #endif /* SCO_FLAVOR */
 #endif /* VFS_STANDALONE */
-
-char *
-g_readlink (char *path)
-{
-	char small_buffer [80];
-	char *str;
-	int n, size;
-
-	n = readlink (path, small_buffer, sizeof (small_buffer)-1);
-	if (n == -1)
-		return NULL;
-	
-	if (n < sizeof (small_buffer)-1){
-		small_buffer [n] = 0;
-		return g_strdup (small_buffer);
-	}
-
-	str = NULL;
-	for (size = 256; size < 8192; size += 128){
-		if (str)
-			g_free (str);
-		
-		str = g_malloc (size);
-
-		n = readlink (path, str, size-1);
-		if (n == -1){
-			g_free (str);
-			return NULL;
-		}
-		
-		if (n < size-1){
-			char *s;
-			
-			str [n] = 0;
-			s = g_strdup (str);
-			g_free (str);
-			return s;
-		}
-	}
-	str [n] = 0;
-	return str;
-}

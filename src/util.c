@@ -55,10 +55,8 @@
 
 /* "$Id$" */
 
-const char app_text [] = "Midnight-Commander";
-
+static const char app_text [] = "Midnight-Commander";
 int easy_patterns = 1;
-int tilde_trunc = 1;
 
 #ifndef VFS_STANDALONE
 int is_printable (int c)
@@ -199,6 +197,7 @@ char *name_trunc (char *txt, int trunc_len)
     static char x [MC_MAXPATHLEN+MC_MAXPATHLEN];
     int    txt_len;
     char *p;
+    const int tilde_trunc = 1;
 
     if (!txt)
 	txt = PATH_SEP_STR;
@@ -680,13 +679,6 @@ char *file_date (time_t when)
     return timebuf;
 }
 
-/* Like file_date, but packs the data to fit in 10 columns */
-char *file_date_pck (time_t when)
-{
-    /* FIXME: Should return only 10 chars, not 14 */
-    return file_date (when);
-}
-
 char *extract_line (char *s, char *top)
 {
     static char tmp_line [BUF_MEDIUM];
@@ -760,16 +752,6 @@ char *unix_error_string (int error_num)
 }
 
 #ifndef VFS_STANDALONE	
-long blocks2kilos (int blocks, int bsize)
-{
-    if (bsize > 1024){
-	return blocks * (bsize / 1024);
-    } else if (bsize < 1024){
-	return blocks / (1024 /bsize);
-    } else
-	return blocks;
-}
-
 char *skip_separators (char *s)
 {
     for (;*s; s++)
@@ -910,51 +892,6 @@ decompress_extension (int type)
 	return 0;
 }
 
-char *
-decompress_command (int type)
-{
-	switch (type){
-	case COMPRESSION_GZIP:
-		return "gzip -cdf";
-		
-	case COMPRESSION_BZIP:
-		return "bzip -d";
-		
-	case COMPRESSION_BZIP2:
-		return "bzip2 -d";
-	}
-	/* Should never reach this place */
-	fprintf (stderr, "Fatal: decompress_command called with an unknown argument\n");
-	return 0;
-}
-
-void
-decompress_command_and_arg (int type, char **cmd, char **flags)
-{
-	switch (type){
-	case COMPRESSION_GZIP:
-		*cmd   = "gzip";
-		*flags = "-cdf";
-		return;
-
-	case COMPRESSION_BZIP:
-		*cmd   = "bzip";
-		*flags = "-d";
-		return;
-
-		
-	case COMPRESSION_BZIP2:
-		*cmd   = "bzip2";
-		*flags = "-d";
-		return;
-	}
-	*cmd   = 0;
-	*flags = 0;
-	
-	/* Should never reach this place */
-	fprintf (stderr, "Fatal: decompress_command called with an unknown argument\n");
-}
-
 #ifndef VFS_STANDALONE
 /* Hooks */
 void add_hook (Hook **hook_list, void (*hook_fn)(void *), void *data)
@@ -1083,7 +1020,7 @@ char *reverse_string (char *string)
     return string;
 }
 
-char *resolve_symlinks (char *path)
+static char *resolve_symlinks (char *path)
 {
     char *buf, *buf2, *p, *q, *r, c;
     int len;
@@ -1203,44 +1140,6 @@ char *diff_two_paths (char *first, char *second)
     g_free (second);
     return buf;
 }
-
-#ifndef HAVE_TRUNCATE
-/* On SCO and Windows NT systems */
-int my_ftruncate (int fd, long size)
-{
-#ifdef OS2_NT
-    if(_chsize(fd, size))
-	return -1;
-    else 
-	return 0;
-#else
-    struct flock lk;
-    
-    lk.l_whence = 0;
-    lk.l_start = size;
-    lk.l_len = 0;
-    
-    return fcntl (fd, F_FREESP, &lk);
-#endif /* !OS2_NT */
-}
-
-int truncate (const char *path, long size)
-{
-    int fd;
-    int res;
-    
-    fd = open (path, O_RDWR, 0);
-    if (fd < 0)
-	return fd;
-    res = my_ftruncate (fd, size);
-    close (fd);
-    if (res < 0)
-	return res;
-    return 0;
-
-}
-
-#endif /* !HAVE_TRUNCATE */
 #endif /* !VFS_STANDALONE */
 
 /* If filename is NULL, then we just append PATH_SEP to the dir */

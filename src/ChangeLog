@@ -1,5 +1,9 @@
 2002-07-29  Pavel Roskin  <proski@gnu.org>
 
+	* util.c: Remove unused functions.
+	* utilunix.c: Likewise.
+	* util.h: Update to match.
+
 	* cons.saver.c: Use SEEK_SET instead of 0 in lseek().
 	* view.c: Likewise.
 
