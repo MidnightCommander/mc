@@ -1,3 +1,9 @@
+2001-09-11  Pavel Roskin  <proski@gnu.org>
+
+	* syntax.c (syntax_text): Remove, it's a separate file now.
+	(upgrade_syntax_file): Remove.
+	(edit_read_syntax_file): Use check_for_default().
+
 2001-09-08  Pavel Roskin  <proski@gnu.org>
 
 	* edit.h: Remove some useless definitions.
