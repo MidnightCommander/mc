@@ -93,4 +93,8 @@ test -f configure || \
   { echo "autoconf failed to generate vfs/samba/configure" 2>&1; exit 1; }
 ) || exit 1
 
-$srcdir/configure --cache-file=config.cache --enable-maintainer-mode "$@"
+if test -x $srcdir/configure.mc; then
+  $srcdir/configure.mc "$@"
+else
+  $srcdir/configure --cache-file=config.cache --enable-maintainer-mode "$@"
+fi

@@ -1,3 +1,8 @@
+2002-11-29  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* autogen.sh: Use $srcdir/configure.mc instead of
+	$srcdir/configure if first one exists and is executable.
+
 2002-11-28  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Determine which help translations user wants to
