@@ -411,11 +411,12 @@ void do_external_panelize (char *command)
     cpanel->has_dir_sizes = 0;
     while (1) {
 	clearerr(external);
-	if (fgets (line, MC_MAXPATHLEN, external) == NULL)
+	if (fgets (line, MC_MAXPATHLEN, external) == NULL) {
 	    if (ferror(external) && errno == EINTR)
 		continue;
 	    else
 		break;
+	}
 	if (line[strlen(line)-1] == '\n')
 	    line[strlen(line)-1] = 0;
 	if (strlen(line) < 1)
