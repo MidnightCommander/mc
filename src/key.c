@@ -477,6 +477,12 @@ correct_key_code (int code)
     if (c == KEY_SCANCEL)
 	c = '\t';
 
+    /* Convert Shift+Tab and Ctrl+Tab to Back Tab */
+    if ((c == '\t') && (mod & (KEY_M_SHIFT | KEY_M_CTRL))) {
+	c = KEY_BTAB;
+	mod = 0;
+    }
+
     /* F0 is the same as F10 for out purposes */
     if (c == KEY_F (0))
 	c = KEY_F (10);

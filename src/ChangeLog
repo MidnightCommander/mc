@@ -1,5 +1,8 @@
 2002-12-25  Pavel Roskin  <proski@gnu.org>
 
+	* key.c (correct_key_code): Convert Shift-Tab and Ctrl-Tab to
+	Back Tab (used in dialogs to jump to the previous widget).
+
 	* widget.c (input_callback): Insert Enter with a modifier as
 	literal Enter.  Useful when pasting multiline text.
 
