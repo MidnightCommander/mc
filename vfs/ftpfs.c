@@ -485,7 +485,7 @@ login_server (vfs *me, vfs_s_super *super, const char *netrcpass)
 		op = input_dialog (p, _("Account:"), "");
 		g_free (p);
 		if (op == NULL)
-		    goto login_fail;
+		    ERRNOR (EPERM, 0);
 		print_vfs_message (_("ftpfs: sending user account"));
 		code = command (me, super, WAIT_REPLY, "ACCT %s", op);
 		g_free (op);
@@ -639,7 +639,7 @@ ftpfs_check_proxy (const char *host)
 }
 
 static void
-ftpfs_get_proxy_host_and_port (char *proxy, char **host, int *port)
+ftpfs_get_proxy_host_and_port (const char *proxy, char **host, int *port)
 {
     char *user, *dir;
 
