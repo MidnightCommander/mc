@@ -1,3 +1,7 @@
+2001-05-23  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Add associations for viewing RPM files.
+
 2001-05-22  Pavel Roskin  <proski@gnu.org>
 
 	* doc-gnome/C/mkhtml: Support $JADE. Check that $DSL exists.

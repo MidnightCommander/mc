@@ -552,6 +552,7 @@ regex/\.trpm$
 # Source RPMs (SuSE uses *.spm, others use *.src.rpm)
 regex/\.(spm|src\.rpm)$
 	Open=%cd %p#rpm
+	View=%view{ascii} rpm -qivlp --scripts %f
 	Install this RPM=rpm -i %f
 	Rebuild this RPM=rpm --rebuild %f
 	Check signature=rpm --checksig %f
@@ -559,6 +560,7 @@ regex/\.(spm|src\.rpm)$
 # Compiled RPMs
 regex/\.rpm$
 	Open=%cd %p#rpm
+	View=%view{ascii} rpm -qivlp --scripts %f
 	Install this RPM=rpm -i %f
 	Upgrade this RPM=rpm -U %f
 	Check signature=rpm --checksig %f
