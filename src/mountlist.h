@@ -29,4 +29,20 @@ struct mount_entry
 };
 
 struct mount_entry *read_filesystem_list (int need_fs_type, int all_fs);
+
+/* Filesystem status */
+struct my_statfs {
+    int type;
+    char *typename;
+    char *mpoint;
+    char *device;
+    int avail;
+    int total;
+    int nfree;
+    int nodes;
+};
+
+void init_my_statfs (void);
+void my_statfs (struct my_statfs *myfs_stats, char *path);
+
 #endif 	/* __MOUNTLIST_H	*/

@@ -34,6 +34,7 @@
 #include "layout.h"
 #include "key.h"		/* is_idle() */
 #include "x.h"
+#include "mountlist.h"
 
 #ifndef VERSION
 #   define VERSION "undefined"

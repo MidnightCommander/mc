@@ -1,3 +1,12 @@
+2001-06-18  Pavel Roskin  <proski@gnu.org>
+
+	* utilunix.c (init_my_statfs): Move this ...
+	* util.c (my_statfs): ... and this ...
+	* mountlist.c: ... here.
+	* util.h: Move mountlist-related declarations ...
+	* mountlist.h: ... here.
+	* info.c: Include mountlist.h.
+
 2001-06-17  David Martin  <dmartina@excite.es>
 
 	* hotlist.c (init_movelist): Don't assume English word ordering

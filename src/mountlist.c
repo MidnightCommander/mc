@@ -22,8 +22,6 @@
 
 #include <stdio.h>
 #include <sys/types.h>
-#include "mountlist.h"
-
 #ifdef STDC_HEADERS
 #include <stdlib.h>
 #else
@@ -84,6 +82,10 @@ void free (void *ptr);
 #include <sys/vfs.h>
 #endif
 
+#include "mountlist.h"
+#include "fsusage.h"
+#include "util.h"
+
 /* void error (void);  FIXME -- needed? */
 
 #ifdef DOLPHIN
@@ -96,6 +98,8 @@ void free (void *ptr);
 /* Return the value of the hexadecimal number represented by CP.
    No prefix (like '0x') or suffix (like 'h') is expected to be
    part of CP. */
+
+static struct mount_entry *mount_list = NULL;
 
 static int xatoi (char *cp)
 {
@@ -534,4 +538,80 @@ struct mount_entry *read_filesystem_list(int need_fs_type, int all_fs)
 	return (me);
 }
 #endif /* __QNX__ */
+
+void init_my_statfs (void)
+{
+#ifndef NO_INFOMOUNT
+    mount_list = read_filesystem_list (1, 1);
+#endif
+}
+
+void my_statfs (struct my_statfs *myfs_stats, char *path)
+{
+    int i, len = 0;
+
+#ifndef NO_INFOMOUNT
+    struct mount_entry *entry = NULL;
+    struct mount_entry *temp = mount_list;
+    struct fs_usage fs_use;
+
+    while (temp){
+	i = strlen (temp->me_mountdir);
+	if (i > len && (strncmp (path, temp->me_mountdir, i) == 0))
+	    if (!entry || (path [i] == PATH_SEP || path [i] == 0)){
+		len = i;
+		entry = temp;
+	    }
+	temp = temp->me_next;
+    }
+
+    if (entry){
+	get_fs_usage (entry->me_mountdir, &fs_use);
+
+	myfs_stats->type = entry->me_dev;
+	myfs_stats->typename = entry->me_type;
+	myfs_stats->mpoint = entry->me_mountdir;
+	myfs_stats->device = entry->me_devname;
+	myfs_stats->avail = getuid () ? fs_use.fsu_bavail/2 : fs_use.fsu_bfree/2;
+	myfs_stats->total = fs_use.fsu_blocks/2;
+	myfs_stats->nfree = fs_use.fsu_ffree;
+	myfs_stats->nodes = fs_use.fsu_files;
+    } else
+#endif
+#if defined(NO_INFOMOUNT) && defined(__QNX__)
+/*
+** This is the "other side" of the hack to read_filesystem_list() in
+** mountlist.c.
+** It's not the most efficient approach, but consumes less memory. It
+** also accomodates QNX's ability to mount filesystems on the fly.
+*/
+	struct mount_entry	*entry;
+    struct fs_usage		fs_use;
+
+	if ((entry = read_filesystem_list(0, 0)) != NULL)
+	{
+		get_fs_usage(entry->me_mountdir, &fs_use);
+
+		myfs_stats->type = entry->me_dev;
+		myfs_stats->typename = entry->me_type;
+		myfs_stats->mpoint = entry->me_mountdir;
+		myfs_stats->device = entry->me_devname;
+
+		myfs_stats->avail = fs_use.fsu_bfree / 2;
+		myfs_stats->total = fs_use.fsu_blocks / 2;
+		myfs_stats->nfree = fs_use.fsu_ffree;
+		myfs_stats->nodes = fs_use.fsu_files;
+	}
+	else
+#endif
+    {
+	myfs_stats->type = 0;
+	myfs_stats->mpoint = "unknown";
+	myfs_stats->device = "unknown";
+	myfs_stats->avail = 0;
+	myfs_stats->total = 0;
+	myfs_stats->nfree = 0;
+	myfs_stats->nodes = 0;
+    }
+}
 

@@ -125,21 +125,6 @@ char *get_current_wd (char *buffer, int size);
 int my_mkdir (char *s, mode_t mode);
 int my_rmdir (char *s);
 
-/* Filesystem status */
-struct my_statfs {
-    int type;
-    char *typename;
-    char *mpoint;
-    char *device;
-    int avail;
-    int total;
-    int nfree;
-    int nodes;
-};
-
-void init_my_statfs (void);
-void my_statfs (struct my_statfs *myfs_stats, char *path);
-
 /* Rotating dash routines */
 void use_dash (int flag); /* Disable/Enable rotate_dash routines */
 void rotate_dash (void);

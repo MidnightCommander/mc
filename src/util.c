@@ -91,8 +91,6 @@ int easy_patterns = 1;
 int align_extensions = 1;
 int tilde_trunc = 1;
 
-struct mount_entry *mount_list = NULL;
-
 #ifndef VFS_STANDALONE
 int is_printable (int c)
 {
@@ -812,13 +810,6 @@ long blocks2kilos (int blocks, int bsize)
 	return blocks / (1024 /bsize);
     } else
 	return blocks;
-}
-
-void init_my_statfs (void)
-{
-#ifndef NO_INFOMOUNT
-    mount_list = read_filesystem_list (1, 1);
-#endif
 }
 
 char *skip_separators (char *s)
