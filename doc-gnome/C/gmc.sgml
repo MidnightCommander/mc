@@ -863,7 +863,7 @@
       <title>The Custom View Dialog</title>
       <screenshot>
        <screeninfo>The Custom View Dialog</screeninfo>
-       <Graphic Format="png" Fileref="./figs/gmcprops6.png" srccredit="dcm">
+       <Graphic Format="png" Fileref="./figs/gmcprops6" srccredit="dcm">
        </graphic>
       </screenshot>
      </figure>
