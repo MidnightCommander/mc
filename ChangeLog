@@ -1,0 +1,2209 @@
+2002-04-08  Pavel Roskin  <proski@gnu.org>
+
+	* autogen.sh: Allow gettext newer than 0.10.39.
+	From Björn Eriksson <bjorn@bjornen.nu>
+
+2002-04-03  Pavel Roskin  <proski@gnu.org>
+
+	* doc/ru/Makefile.am: Distribute mc.ru.hlp and don't remove it
+	by "make clean" because not everyone has Perl to rebuild it.
+
+2002-03-27  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* syntax/Syntax: Replace ^Syntax$ with [Ss]yntax$ and add
+	first line regular expression.
+
+2002-03-26  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* configure.in: Define USE_INCLUDED_REGEX if GNU C library 2.1
+	or newer is not used.
+	* acinclude.m4: New option --with-mcfs and macro WITH_MCFS.
+
+	* src/Makefile.am: Move mc.hlp.ru processing ...
+	* doc/ru/Makefile.am: ... here.
+
+2002-03-21  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* syntax/Syntax: Match ^Syntax$ for Syntax Highlighting.
+	* syntax/c.syntax: Highlight "%p" printf format.
+	Allow '*' as width and precision for strings and numbers.
+
+	* doc/mc.1.in: Fix smbfs example.  Minor format fixes.
+	* doc/ru/mc.1.in: Likewise.
+
+2002-03-18  Pavel Roskin  <proski@gnu.org>
+
+	* doc/ru/Makefile.am: Distribute xnc.hlp.
+
+2002-03-12  Pavel Roskin  <proski@gnu.org>
+
+	* doc/Makefile.am: Adjust for doc/ru/Makefile.am.
+
+2002-03-12  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* configure.in (AC_CONFIG_FILES): Add doc/ru/Makefile.am.
+	* doc/ru/Makefile.am: New file.
+
+2002-03-08  Pavel Roskin  <proski@gnu.org>
+
+	* doc/Makefile.am (EXTRA_DIST): Distribute doc/ru/mc.1.
+
+2002-03-04  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* configure.in (AC_CONFIG_FILES): Add doc/ru/mc.1.
+
+2002-03-01  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* doc/mc.1.in: Use nodename `Background jobs' for section
+	`Background Jobs' to reflect user visible Command menu option
+	and src/cmd.c dialog implementation.
+
+	* doc/ru: New directory for Russian manuals.
+	* doc/ru/mc.1.in: Translated mc.1 manual page.  Originally
+	translated by Victor A. Kostromin for mc 4.5.30.  Converted
+	from binary mc.hlp.ru, corrected and actualized by me.
+	* doc/ru/xnc.hlp: Translated lib/xnc.hlp.  See above.
+	* doc/ru/.cvsignore: Ignore mc.1.
+
+2002-02-27  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* doc/mc.1.in (Macro Substitution): Document "%var{ENV-default}".
+	(FILES): Document changes in mc behavior. ~/.mc/ini now overrides
+	mc.lib settings.
+
+	(Virtual File System): Document SMB File System.
+
+2002-02-26  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Run "file" before "nm" to avoid an error
+	message "no symbol found" for unsupported architectures and
+	provide more useful information.
+
+2002-02-22  Pavel Roskin  <proski@gnu.org>
+
+	* README.smbfs: Remove.  It contained no useful information
+	and the webpage is now dead.
+	* Makefile.am: Remove README.smbfs.
+
+	* README: Mention that glib 1.2.x is required.
+
+2002-02-21  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* lib/edit.indent.rc: Use "#! /bin/sh"
+	* lib/edit.spell.rc: Likewise.
+	* lib/mcserv.init: Likewise.
+
+	* lib/cedit.menu: Eliminate bashisms.
+	Add missed `:' in AUTHOR evaluation.
+	Unset LANGUAGE and make LC_ALL empty.
+	Use "#! /path/to/program".
+
+2002-02-20  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* doc/mc.1.in (FILES): Use ~/.mc/bindings instead of
+	~/.mc/ext, ~/.mc/ini instead of ~/.mc.ini.
+	Fix tarfs URL syntax example.  Minor typo and format fixes.
+
+2002-02-14  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* doc/mc.1.in (FILES): Use MC_LIBDIR instead of MCHOME.
+	Fix location of configuration files.
+
+2002-02-05  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Don't use defunct ncurses_version.
+	Reported by Thomas Dickey <dickey@herndon4.his.com>
+	Set force_ncurses whenever --with-ncurses is used.  If set,
+	suppress checks for S-Lang and fail is ncurses is not found.
+
+	* configure.in: Introduce a new variable screen_type that is
+	either "slang" or "ncurses" without additional text.  Use it
+	instead of screen_manager whenever possible.  Fix text in
+	AC_NCURSES call, use m4 quotes and move shell quotes into the
+	macro.
+	* acinclude.m4: Likewise.
+
+2002-01-28  Petr Kozelka  <pkozelka@email.cz>
+
+	* syntax/Syntax: Known Delphi/Kylix source file extensions
+	supported (*.dpr, *.inc).
+	* syntax/pascal.syntax: Many new (Delphi/Kylix) keywords added.
+	Special highlighting for CVS keywords.  Understands single-line
+	comments (//).
+
+2002-01-24  Alexander Shopov  <al_shopov@web.bg>
+
+	* configure.in (ALL_LINGUAS): Added "bg"
+
+2002-01-21  Pavel Roskin  <proski@gnu.org>
+
+	* NEWS: Mention word completion in the editor.
+
+2002-01-17  Pavel Roskin  <proski@gnu.org>
+
+	* extraconf.h: Remove OS/2 specific code.
+
+	* doc/mc.1.in (Configuration): Clarify some entries.
+
+2002-01-11  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* acinclude.m4: New options for smbfs:
+	--with-configdir=DIR    Where the Samba configuration files are (/etc)
+	--with-codepagedir=DIR  Where the Samba codepage files are
+
+2002-01-11  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/xml.syntax: New file - hightlighting for XML.
+	From Petr Kozelka <pkozelka@centrum.cz>
+	* syntax/Syntax: Add xml.syntax.
+	* syntax/Makefile.am: Likewise.
+
+2002-01-04  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* configure.in: Added "eu" to ALL_LINGUAS.
+
+2002-01-03  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.menu: Correct quoting.
+	Reported by Matthias Urban <murban@cs.uni-magdeburg.de>
+
+	* NEWS: Mention removal of the OS/2 port.
+	* README.PC: Remove OS/2 specific parts.
+
+2002-01-02  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Make help about --with-subshell easier to
+	understand.  Minor alignment fixes for the help.
+	* acinclude.m4: Minor alignment fixes for the help.
+
+2001-12-31  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Generate vfs/Makefile from vfs/Makefile.in, not
+	from vfs/Make-mc.in.
+
+2001-12-27 Duarte Loreto  <happyguy_pt@hotmail.com>
+
+	* configure.in: Added portuguese to ALL_LINGUAS
+
+2001-12-21  Pavel Roskin  <proski@gnu.org>
+
+	* acinclude.m4 (AC_WITH_SLANG): Don't add ../slang to includes.
+	Don't remove slang/slang.h - it's never created.
+
+	* acinclude.m4 (AC_WITH_SLANG): Don't make symlink from
+	slang-mc.h to slang.h.  Remove fastdepslang variable, it's
+	unused.
+
+2001-12-01  Wang Jian  <lark@linux.net.cn>
+
+	* configure.in(ALL_LINGUAS): Renamed zh_CN.GB2312 to zh_CN.
+
+2001-11-29  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Use "type" to recognize zip and lha archives.
+
+2001-11-27  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: When running X programs in background, do it
+	from subshell.  Otherwise some of them terminate when mc exits.
+	Reported by Christian Dysthe <christian@dysthe.net>
+	Remove some obsolete and gmc-specific entries.  Use StarOffice
+	to open files detected as "Microsoft Office Document".
+
+	* lib/mc.lib: Support "Home" and "End" sequences in xterm from
+	XFree86 4.1.0.
+
+2001-11-16  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* doc/mcedit.1.in: Fix help file location.
+
+2001-11-14  Pavel Roskin  <proski@gnu.org>
+
+	* acinclude.m4 (MC_UNDELFS_CHECKS): Check for ext2_ino_t,
+	fallback to ino_t for e2fsprogs version 1.19 and older.
+
+2001-10-30  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Add support for Netpbm files.
+
+2001-10-25  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* slang/slvideo.c (SLtt_set_color): Eliminate C++ comments.
+	http://bugzilla.gnome.org/show_bug.cgi?id=60935
+	By drk@sgi.com.
+
+	* doc/mc.1.in: Document %p macro.
+
+2001-10-24  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Move AC_FUNC_MMAP before it's used indirectly.
+	Allow using --without-mmap.
+	* INSTALL: Document --without-mmap.
+
+2001-10-24  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* configure.in: Resurrect ALL_LINGUAS test, to allow specify list
+	of languages to be installed by setting env variable before
+	configure. If it is empty, it defaults to full list.
+	By Alex Tkachenko <alex@bcs.zp.ua>.
+
+2001-10-19  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/sh.syntax: Highlight reserved words inside backticks.
+	Use the same wholechars settings for reserved words and
+	commands.  Recognize more words.  Recognize function definitions
+	without "function" or without "()".  Use brightmagenta instead
+	of brightblue.
+
+2001-10-18  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: When checking for "nroff -mandoc" support, don't
+	use /dev/null as input file, use stdin.  Some versions of nroff
+	(e.g. groff-1.16.1) don't accept special files.
+
+2001-10-14  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Treat Makefile.PL as a Perl program, not as a
+	Makefile.  Don't allow any suffixes after "Makefile".
+
+2001-10-12  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Add support for *.xcf files (native GIMP
+	format).
+
+2001-10-06  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* lib/mc.menu: Use "case" instead of non-portable "egrep -q".
+	Fix compress<->bzip2 conversion and conversion of tagged
+	archives.
+
+2001-10-05  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Use ogginfo to view *.ogg files.
+	Suggested by Marcel Pol <mpol@gmx.net>
+
+	* lib/mc.ext.in: Use xmms to play *.mp3 under X.  When viewing
+	*.mp3, use "verbose" option to mpg123.  Add support for *.ogg
+	and *.mid files.
+
+2001-09-30  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Don't check whether grep supports stdin - it's
+	not used anymore.
+	* NEWS: Mention this change.
+
+2001-09-19  Pavel Roskin  <proski@gnu.org>
+
+	* doc/mcedit.1.in: Fix a very long line - use double
+	backslashes since they are interpreted even in the .nf blocks.
+
+	* lib/edit.spell.rc: Try aspell before resorting to ispell.
+
+	* syntax/php.syntax: Replace with a better implementation by
+	Max Schedriviy <max@tavrida.net>
+
+2001-09-15  Pavel Roskin  <proski@gnu.org>
+
+	* doc/mc.1.in: Fix location of mcedit files.
+	* doc/mcedit.1.in: Likewise.  Remove obsolete technical details.
+
+2001-09-14  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Don't check for ncurses version and for keyok()
+	because the mouse support code doesn't need this hack anymore.
+
+2001-09-13  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Fix some cases of overquoting and underquoting.
+	* acinclude.m4: Likewise.
+
+2001-09-12  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Update list of browsers.  Don't fallback to
+	lynx since it cannot be run in background.
+	* lib/mc.ext.in: Redirect output of X11 browsers to /dev/null.
+	If no browser for X11 was found, use lynx.
+
+	* autogen.sh: Add a workaround to ensure that "depcomp" is
+	distributed.
+	* configure.in: Replace obsolete macros.  Use AC_MSG_NOTICE
+	where appropriate.
+	* acinclude.m4: Likewise.  Fix check whether S-Lang uses
+	terminfo.
+
+	* configure.in: Use three-argument form of AC_INIT.  Use
+	AC_CONFIG_AUX_DIR.  Remove some unused or implied macros.
+	* Makefile.am (EXTRA_DIST): Remove "depcomp" - this workaround
+	is not needed if AC_CONFIG_AUX_DIR is used.
+	* vfs/Make-mc.in: Adjust mkinstalldirs location.
+	* autogen.sh: Create "config" and remove "autom4te.cache".
+
+2001-09-11  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/Syntax: New file, extracted from edit/syntax.c.
+	* syntax/Makefile.am: Add Syntax.
+
+	* configure.in: Add -lcurses (for use with S-Lang) to MCLIBS not
+	to LIBS.  Don't use unportable "grep -q", use "case" instead.
+
+2001-09-10  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Only check for X if --with-tm-x-support has been
+	specified.
+
+	* configure.in: Add check for sys/ioctl.h.
+
+	* configure.in: Use AC_FUNC_STRCOLL instead of generic test.
+
+	* acinclude.m4: Put -lncurses to MCLIBS, not LIBS.
+	* configure.in: Likewise.  Add MCLIBS to LIBS temporarily when
+	testing for functions in ncurses.
+
+	* acinclude.m4: Provide descriptions in all AC_DEFINE macros.
+	* configure.in: Likewise.  Use AH_BOTTOM to include extraconf.h.
+	* acconfig.h: Remove.
+
+	* configure.in: Eliminate LIBSLANG and LSLANG.
+	* acinclude.m4: Likewise.  Use MCLIBS for -lslang.
+
+	* configure.in: Use MCLIBS for -lgpm.  Remove LGPM.  Check for
+	resizeterm() and keyok() only if configuring with ncurses.
+
+	* configure.in: Remove now unused variables LIBVFS and LVFS.
+
+	* configure.in: Remove unused variables LINTL and INTLDEPS.
+
+	* configure.in: Add -I\$(top_builddir)/intl to CPPFLAGS when
+	building with included gettext, because libintl.h is copied
+	there.
+
+2001-09-09  Pavel Roskin  <proski@gnu.org>
+
+	* NEWS: Update.
+
+	* configure.in: Remove a hack for Unixware.  AC_FUNC_GETMNTENT
+	checks -lgen for getmntent as of Autoconf 2.52.
+
+2001-09-07  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Check for pwd.h.
+
+	* Make.common.in: Remove.
+	* configure.in: Remove all references to Make.common.in and
+	MCCPPFLAGS.
+	* aclocal.m4: Likewise.
+
+	* configure.in: Require Autoconf 2.52.  Remove hacks for
+	Autoconf 2.13.
+	* Makefile.am: Require Automake 1.5.
+
+2001-09-06  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/php.syntax: New file - PHP file highlighting.  Copied
+	from Cooledit 3.17.4.
+	* syntax/Makefile.am: Add php.syntax.
+
+2001-09-06  Timur Bakeyev  <mc@bat.ru>
+
+	* acconfig.h: Brought back couple of symbols, that are still necessary
+	due reference to them from configure.in.
+
+2001-09-04  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/changelog.syntax: Fix highlighting of functions.  Relax
+	strictness for dates.
+
+	* doc/mc.1.in: Fix troff warnings.
+	* doc/mcedit.1.in: Likewise.
+
+2001-09-03  Pavel Roskin  <proski@gnu.org>
+
+	* doc/mc.1.in: Spellcheck.
+	* doc/mcedit.1.in: Likewise.
+	* doc/mcserv.8.in: Likewise.
+
+	* doc/mc.1.in (Learn Keys): Complete rewrite.
+
+2001-09-02  Pavel Roskin  <proski@gnu.org>
+
+	* acconfig.h: Remove all unused symbols.
+
+	* lib/ncurses.h: Remove.
+	* lib/Makefile.am: Remove ncurses.h.
+
+2001-09-02  Abel Cheung  <maddog@linux.org.hk>
+
+	* configure.in (ALL_LINGUAS): zh_TW.Big5 -> zh_TW
+
+2001-08-28  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/sh.syntax:  Require two '<' before EOF.  Recognize END
+	like EOF.
+
+2001-08-26  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: New conditionals USE_VFS_NET, USE_UNDEL_FS and
+	CONS_SAVER.  Put all conditionals together.
+
+	* Makefile.am (EXTRA_DIST): Add depcomp to work around a bug in
+	Automake 1.5.
+
+	* configure.in: Remove XCURSES variable - it's unused.
+
+	* configure.in: New conditional USE_EDIT.
+
+	* syntax/changelog.syntax: Don't require '@' to be in the
+	address.  This also works around a bug in the syntax engine
+	that prevented highlighting of addresses.
+
+2001-08-25  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: New conditionals USE_VFS and INCLUDED_SLANG.
+
+2001-08-24  Pavel Roskin  <proski@gnu.org>
+
+	* extraconf.h: Remove all references to HAVE_X.
+	* acinclude.m4: s/GNOME_/MC_/
+	* configure.in: Likewise.  Remove or clarify all references to
+	the "text edition".  Minor fixes.
+
+	* configure.in: Remove support for curses libraries other than
+	ncurses.
+	* acinclude.m4: Likewise.
+	* FAQ: Remove everything about UNIX curses.
+	* INSTALL: Likewise.
+
+	* configure.in: Enable large file support by default.
+	* NEWS: Mention it.
+	* INSTALL: Document it.  Minor fixes.
+
+	* FAQ: Remove information about GNOME edition.  Minor fixes.
+	* README: Likewise.
+	* NEWS: Mention removing the GNOME edition.
+
+	* acinclude.m4: Include all used macros from the macros
+	directory.
+	* autogen.sh: Remove all references to "macros".
+	* Makefile.am: Likewise.
+
+	* configure.in: Remove all GNOME stuff except GNOME_VFS_CHECKS.
+	* Makefile.am (SUBDIRS): Remove all GNOME-related directories.
+
+	* lib/startup.links: Remove.
+	* lib/README.desktop: Likewise.
+	* lib/Makefile.am: Remove all references to DESKTOP_FILES.
+
+	* configure.in: Bump version to 4.5.99a.
+
+	* configure.in: Bump version to 4.5.55.  Release mc-4.5.55.
+	* po/*.po: Regenerate.
+
+	* AUTHORS: Update and spell check.
+	* FAQ: Likewise.
+	* INSTALL: Likewise.
+	* INSTALL.FAST: Likewise.
+	* NEWS: Likewise.
+	* README.PC: Likewise.
+	* README.QNX: Likewise.
+
+	* configure.in: Add check for stropts.h.
+
+2001-08-23  Pavel Roskin  <proski@gnu.org>
+
+	* lib/edit.indent.rc: Create cooledit.error right away to
+	override its old contents.  Don't use ksh extentions.  Treat *.C
+	files as C++.  Recognize more C++ extensions.  Support java.
+	Update URL for "astyle".  Quote all arguments to protect spaces.
+	* lib/edit.spell.rc: Don't save terminal settings - mc does it
+	itself.  Quote all arguments to protect spaces.
+
+2001-08-21  Pavel Roskin  <proski@gnu.org>
+
+	* doc-gnome/C/figs/Makefile.am: Don't install GNOME-specific
+	files if GNOME frontend is disabled.
+	* idl/Makefile.am: Likewise.
+	* lib/Makefile.am: Likewise.
+	* new_icons/Makefile.am: Likewise.
+
+	* autogen.sh: Fall back to aclocal without "-I gettext.m4" in
+	case it already has gettext macros elsewhere and doesn't like
+	duplicates (i.e. it's aclocal from Automake-1.4).
+
+2001-08-20  Pavel Roskin  <proski@gnu.org>
+
+	* AUTHORS: Updated.
+	* INSTALL: Likewise.
+	* NEWS: Likewise.
+	* doc/mc.1.in: Likewise.
+	* doc/mcserv.8.in: Likewise.
+
+	* acinclude.m4 (AC_GET_FS_INFO): Specify includes when checking
+	for sys/mount.h.
+
+2001-08-19  Andras Timar  <timar@gnome.hu>
+
+	* lib/Makefile.am: Added Hungarian hints
+	* lib/mc.hint.hu: by Arpad Biro <biro_arpad@yahoo.com>
+
+2001-08-19  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.lib: Add definition for "bs" for xterm and xterm-color.
+
+2001-08-17  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/po.syntax: New file - PO file highlighting.
+	From David Martin <dmartina@excite.es>
+	* syntax/Makefile.am: Add po.syntax.
+
+	* lib/mc.lib: Add "delete=\e[3~" for xterm and xterm-color -
+	it's sometimes missing from the databases.
+
+2001-08-16  Abel Cheung  <maddog@linux.org.hk>
+
+	* lib/mc.hint.zh_TW.Big5 -> lib/mc.hint.zh: Temporary measure.
+	* lib/Makefile.am: Reflect above change.
+
+2001-08-15  Pavel Roskin  <proski@gnu.org>
+
+	* doc/mc.1.in (Terminal databases): Recommend using \e, not \E.
+
+2001-08-14  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.lib: Add popular sequences for "home" and "end" in
+	"xterm" and "xterm-color" terminals.
+
+2001-08-13  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Move ls-lR.gz before generic gzip support.
+
+	Replace "Can't" with "Cannot" everywhere.
+
+2001-08-12  Pavel Roskin  <proski@gnu.org>
+
+	* edit/edit_key_translator.c (cooledit_key_map): Use Ctrl-O for
+	subshell, not for "Open file...".
+	(emacs_key_map): Likewise.
+
+	* README: Changes from Frederic L. W. Meunier <0@pervalidus.net>
+
+2001-08-10  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.am (EXTRA_DIST): Remove BUGS.
+	* doc/Makefile.am (EXTRA_DIST): Remove LSM and FILES.
+
+	* BUGS: Remove.  Bugzilla.gnome.org doesn't have those bugs.
+
+	* doc/LSM: Remove, it's outdated.
+	* doc/FILES: Likewise.
+	* doc/DEVEL: Remove information about FILES.
+
+	* FAQ: Eliminate all broken URLs on the MC site.
+	From Frederic L. W. Meunier <0@pervalidus.net>
+
+	* FAQ: Restore information about xterm.
+
+2001-08-08  Pavel Roskin  <proski@gnu.org>
+
+	* FAQ: Changes from Frederic L. W. Meunier <0@pervalidus.net>
+
+2001-08-07  Pavel Roskin  <proski@gnu.org>
+
+	* doc/mc.1.in (Internal File Viewer): Document Ctrl-O and F17.
+
+	* doc/mc.1.in: Fix all broken links.
+
+2001-08-06  Pavel Roskin  <proski@gnu.org>
+
+	* INSTALL: Numerous changes.  Declare old curses obsolete.
+	Partly from Frederic L. W. Meunier <0@pervalidus.net>
+
+	* doc/mc.1.in (Menu Bar): Add link to the "Options Menu".
+
+2001-08-03  Abel Cheung  <maddog@linux.org.hk>
+
+	* lib/Makefile.am: Remove space after backslash introduced in the
+	previous commit.
+
+	* lib/mc.hint.zh_TW.Big5: New file.
+	* lib/Makefile.am: Added mc.hint.zh_TW.Big5
+
+2001-08-02  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.hint.uk: New file.
+	From Maksym Polyakov <polyama@yahoo.com>
+	* lib/Makefile.am: Add mc.hint.uk.
+
+2001-08-01  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.hint.nl: New file.
+	From Steef Boerrigter <sxmboer@sci.kun.nl>
+	* lib/Makefile.am: Add mc.hint.nl.
+	* lib/mc.hint: Remove ftp site.  Update copyright.
+	* lib/mc.hint.cs: Likewise.
+	* lib/mc.hint.es: Likewise.
+	* lib/mc.hint.it: Likewise.
+	* lib/mc.hint.pl: Likewise.
+	* lib/mc.hint.ru: Likewise.  Shorten some lines.
+
+	* edit/Makefile.in: Allow running "make install" before "make all".
+	* gtkedit/Makefile.in: Likewise.
+
+2001-07-31  Pavel Roskin  <proski@gnu.org>
+
+	* lib/edit.spell.rc: New file.  Invoke ispell on Ctrl-p in the
+	editor.
+	* lib/Makefile.am: Add lib/edit.spell.rc.
+
+	* autogen.sh: Use gettextize.
+	* ABOUT-NLS: Remove from CVS, it's installed by autogen.sh.
+	* po/Makefile.in.in: Likewise.
+
+2001-07-29  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/slang.syntax: New file.
+	From Walery Studennikov <despair@sama.ru>
+	* syntax/Makefile.am: Add slang.syntax.
+
+2001-07-27  Pavel Roskin  <proski@gnu.org>
+
+	* extraconf.h: Move WITH_BACKGROUND here.
+
+2001-07-24  Pavel Roskin  <proski@gnu.org>
+
+	* doc/mc.1.in: Quote all section headers.  Minor formatting fix.
+
+2001-07-23  Pavel Roskin  <proski@gnu.org>
+
+	* doc/mc.1.in: Fix description of mc.lib.  Fix broken links.
+
+2001-07-20  Pavel Roskin  <proski@gnu.org>
+
+	* Make.common.in: Move all defines ...
+	* gnome/Makefile.in: ... here ...
+	* src/Makefile.in: ... and here.
+
+2001-07-19  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Don't check for getwd, it's completely
+	eliminated.
+	* INSTALL: Remove reference to HAVE_GETWD.
+
+	* lib/mc.ext.in: Fix opening info pages on VFS.  Modernize
+	entries for compressed cpio archives.
+
+	* lib/mc.ext.in: Comment changes.  Remove rules for programs -
+	they were only used in obsolete frontends.  Don't ever use %view
+	without commands - it's slower and loses user settings, e.g.
+	hex mode.  Put shared libraries before man pages and read.me
+	before .me macros so that they match correctly.  Use nm for
+	shared libraries.  Add rules for StarOffice and AbiWord.
+
+2001-07-14  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Bump version to 4.5.54a.
+
+2001-07-13  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mcserv.init: Fix exit status.
+	http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=44601
+
+	* lib/mc.ext.in: Anchor all regexes in the type/ rules except
+	"executable", which should follow a space. Simplify rules for
+	images. Add shell/ rule for *.info files. Fix all incorrect
+	uses of the alternation operator.
+	Reported by Oskar Liljeblad and Michel Casabona.
+
+2001-07-12  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Don't check for iconv, it's already checked for
+	in AM_GNU_GETTEXT.
+
+2001-07-10  Pavel Roskin  <proski@gnu.org>
+
+	* doc/mc.1.in: Update documentation about hex search.
+
+	* edit/edit_key_translator.c (cooledit_key_map): Bind
+	Ctrl-Shift-Up and Ctrl-Shift-Down to scroll with highlight.
+	From Steef Boerrigter <sxmboer@sci.kun.nl>
+
+	* edit/Makefile.in: Make edit.o depend on edit_key_translator.c.
+	* edit/edit_key_translator.c (cooledit_key_map): Add support
+	for bracket matching on Alt-B.
+	* gtkedit/gtkeditkey.c: Likewise.
+	From Steef Boerrigter <sxmboer@sci.kun.nl>
+
+2001-07-06  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Use nm to view object files.
+
+	* Make.common.in: Remove GNOME-specific and unused definitions.
+	Partly moved to gnome/Makefile.in.
+
+	* configure.in: Remove all references to SEDCMD and SEDCMD2 -
+	they are usused.
+	* Make.common.in: Likewise.
+
+2001-06-29  Pavel Roskin  <proski@gnu.org>
+
+	* ABOUT-NLS: Update to the version from gettext-0.10.38.
+
+	* Make.common.in (XCPPFLAGS): Don't add -I$(top_srcdir) - it's
+	now done in configure. Move -I.. to the beginning.
+	* Makefile.am (SUBDIRS): Move intl po to the beginning, since
+	libintl.a may be required to link mc.
+	(ACLOCAL_M4_SOURCES): Remove macros/gnome-gettext.m4.
+	* configure.in: Use AM_GNU_GETTEXT instead of AM_GNOME_GETTEXT.
+	Move all i18n code to one place. Don't substitute INTLSUB - it's
+	unused. Substitute INTLDEPS, since AM_GNU_GETTEXT doesn't do it.
+	Remove SCO-specific i18n hacks. Add -I$(top_srcdir) to CPPFLAGS.
+
+2001-06-25  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: For Autoconf 2.50+, use AC_SYS_LARGEFILE.
+	It should be enabled explicitly by giving `--enable-largefile'
+	to configure.
+	* INSTALL: Document it.
+
+2001-06-22  Pavel Roskin  <proski@gnu.org>
+
+	* extraconf.h: Don't define HAVE_INFOMOUNT_QNX on QNX Neutrino.
+
+	* acinclude.m4 (AC_GET_FS_INFO): Fix checking for f_fstypename
+	in struct statfs.
+	Reported by Libor Motyèka <libor.motycka@ortex.cz>.
+
+	* acinclude.m4 (AC_GET_FS_INFO): Warn only once that the list of
+	mounted filesystems cannot be read. Don't define NO_INFOMOUNT.
+	Define HAVE_INFOMOUNT_LIST if a any suitable function has been
+	found.
+	* extraconf.h: Define HAVE_INFOMOUNT and HAVE_INFOMOUNT_QNX.
+
+2001-06-19  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Check for telldir and seekdir. Join adjacent
+	calls to AC_CHECK_FUNCS.
+
+2001-06-16  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.am: Change the order of SUBDIRS to fully compile text
+	edition before compiling anything for GNOME.
+	* mc.spec.in: Don't use brace expansion to avoid implicit
+	build-time dependency on bash.
+
+2001-06-13  Pavel Roskin  <proski@gnu.org>
+
+	* acinclude.m4 (AC_SHORT_D_NAME_LEN): Fix compiler warnings in
+	the test code.
+	* configure.in: Fix compiler warnings in the arguments to
+	AC_TRY_WARNINGS. Fix value of NEED_CRYPT_PROTOTYPE - add spaces
+	around `=' in the `test' command.
+
+2001-06-07  Pavel Roskin  <proski@gnu.org>
+
+	* doc-gnome/C/gmc.sgml: Remove index - it's not used in the
+	GNOME documentation template.
+	* doc-gnome/C/mkhtml: Don't generate index.
+	* doc-gnome/C/Makefile.am: Don't distribute genindex.sgml.
+
+2001-06-06  Pavel Roskin  <proski@gnu.org>
+
+	* lib/Makefile.am: Make compatible with Automake 1.4 - remove
+	conditional variables from EXTRA_DIST.
+
+2001-06-05  Pavel Roskin  <proski@gnu.org>
+
+	* edit/edit_key_translator.c [HAVE_CHARSET]: Add charset
+	conversion support.
+	From Walery Studennikov <hqsoftware@mail.ru>.
+
+	* extraconf.h [HAVE_X]: Undefine HAVE_TEXTMODE_X11_SUPPORT.
+
+2001-06-01  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.charsets: Synchronize with the latest patch - remove
+	a comment.
+
+2001-05-30  Pavel Roskin  <proski@gnu.org>
+
+	* extraconf.h [HAVE_X]: Undefine HAVE_CHARSET - it doesn't
+	work with GNOME.
+
+	* lib/mc.charsets: New file. From Walery Studennikov.
+	* lib/Makefile.am: Distribute mc.charsets. Install it if
+	the charset support is enabled.
+
+	* configure.in: Add check for iconv() and the necessary code
+	to support the charset selection patch.
+
+	* configure.in: Add check for ESCDELAY variable in ncurses.
+
+2001-05-29  Pavel Roskin  <proski@gnu.org>
+
+	* extraconf.h [!USE_VFS]: Undefine USE_NETCODE and
+	USE_EXT2FSLIB.
+
+	* extraconf.h: Remove unused HAS_DIRECT_COLOR_ACCESS.
+	* pc/config.h: Likewise.
+
+	* lib/mc.ext.in: For MS Word documents try "catdoc", "word2x"
+	and "strings". Recognize "write" files and MS Word templates.
+	For MS Excel documents try "xls2csv" and "strings".
+	Escape spaces in the "type" directives.
+	From Nerijus Baliunas.
+
+	* Make.common.in: Add -I$(top_srcdir) to XCPPFLAGS.
+
+	* Make.common.in: Remove hpath, it's unused.
+
+	* acconfig.h: Move constant parts ...
+	* extraconf.h: ... here.
+	[HAVE_X]: Disable subshell, s-lang and curses.
+	* Makefile.am: Add extraconf.h.
+
+2001-05-28  Pavel Roskin  <proski@gnu.org>
+
+	* acconfig.h: Remove some useless entries. Eliminate OLD_TOOLS
+	and SLANG_H_INSIDE_SLANG_DIR. Move some	descriptions ...
+	* configure.in: ... here.
+
+2001-05-27  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Remove unused HAVE_PORTABLE_TOKEN_PASTING.
+	* acconfig.h: Likewise.
+	* src/layout.c: Likewise.
+
+	* Make.common.in: Remove all percent rules.
+	* acinclude.m4 (AC_PROG_GNU_MAKE): Remove.
+	* configure.in: Remove AC_PROG_GNU_MAKE. Don't substitute
+	PCENTRULE. Remove AC_PROG_MAKE_SET - it's called by
+	AM_INIT_AUTOMAKE.
+
+	* Make.common.in: Remove obsolete dependency tracking system.
+	* configure.in: Likewise.
+	* edit/Makefile.in: Likewise.
+	* gnome/Makefile.in: Likewise.
+	* gtkedit/Makefile.in: Likewise.
+	* slang/Makefile.in: Likewise.
+	* src/Makefile.in: Likewise.
+	* vfs/Make-mc.in: Likewise.
+	* src/depend.awk: Remove.
+
+2001-05-26  Pavel Roskin  <proski@gnu.org>
+
+	* gtkedit/syntax.c (syntax_text): Add support for Octave files.
+	* syntax/octave.syntax: New file. From Walery Studennikov.
+	* syntax/Makefile.am: Add octave.syntax.
+
+	* configure.in: Fix incorrect test for stdin support in grep -
+	it would always fail when configuring in an empty directory.
+	Portability fixes - unset, backslashed space in here-documents.
+	Eliminate all instances of "changequote".
+
+	* configure.in: Define SCO_FLAVOR based on $host_os, not on the
+	user choice.
+	* acconfig.h: Changes for the above.
+	* INSTALL: Don't document --with-sco - it's now defunct.
+	* INSTALL.FAST: Likewise.
+
+2001-05-25  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Match both "mail" and "Mail", but only if they
+	are in the beginning of the "file" output.
+
+2001-05-23  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Add associations for viewing RPM files.
+
+2001-05-22  Pavel Roskin  <proski@gnu.org>
+
+	* doc-gnome/C/mkhtml: Support $JADE. Check that $DSL exists.
+	By default exit after the first error in jade.
+
+	* doc-gnome/C/mkhtml: Use jade directly, not jw. Support DSL and
+	JADEFLAGS environment variables. Report progress. Clean up on
+	failure.
+
+2001-05-21  Pavel Roskin  <proski@gnu.org>
+
+	* doc-gnome/C/Makefile.am: Allow "make install" without *.html
+	files.
+
+	* doc-gnome/C/mkhtml: Print a big warning if the script fails.
+	* doc-gnome/C/Makefile.am: Ignore exit status of mkhtml.
+
+2001-05-20  Pavel Roskin  <proski@gnu.org>
+
+	* doc-gnome/C/Makefile.am: Distribute mkhtml and genindex.sgml.
+	Create figs/*.eps if needed. Simplify rules for gmc.dvi and
+	gmc.rtf - DocBook 4.1 doesn't try to write to $(srcdir).
+	* doc-gnome/C/figs/Makefile.am: Add support for converting from
+	PNG to EPS.
+
+	* Makefile.am (EXTRA_DIST): Remove create_vcs.
+	* doc/FILES: Likewise. Typo fix.
+
+2001-05-19  Pavel Roskin  <proski@gnu.org>
+
+	* doc-gnome/C/mkhtml: New file. Create HTML files from gmc.sgml.
+	* doc-gnome/C/Makefile.am: Don't handle *.css - there are none
+	with DocBook 4.1. Never use `cp' without `-f'. Use mkhtml.
+
+	* doc-gnome/C/gmc.sgml: Use DTD DocBook V4.1. Fix duplicate
+	index entry "Moving files".
+
+2001-05-18  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Use src/main.c in AC_INIT.
+
+	* create_vcs: Remove.
+
+	* INSTALL: Update download locations for MC, rxvt, gpm, ncurses.
+	Add download location for glib.
+	* mc.spec.in: Likewise.
+	* doc/LSM: Likewise.
+	* doc/mc.1.in: Likewise.
+	* doc/mcedit.1.in: Likewise.
+	* src/ext.c: Don't mention download location for MC.
+
+	* FAQ: Update status of Tk, XView. and GNOME editions. Update
+	homepage of gpm.
+
+	* INSTALL: Remove information about Tk and XView. Change the
+	mailing list addresses again.
+	* FAQ: Change the mailing list addresses again.
+	* MAINTAINERS: Likewise.
+	* README: Likewise.
+	* doc/mc.1.in: Likewise.
+	* gnome/gmc-window.c: Likewise.
+	* lib/README.xterm: Likewise.
+	* lib/mc.ext.in: Likewise.
+	* lib/mc.hint*: Likewise.
+	* lib/mc.hlp.hu: Likewise.
+	* po/*.po: Likewise.
+	* src/main.c: Likewise.
+
+2001-04-20  Pavel Roskin  <proski@gnu.org>
+
+	* FAQ: Change the mailing list addresses and the download
+	locations.
+	* INSTALL: Likewise.
+	* MAINTAINERS: Likewise.
+	* README: Likewise.
+	* doc/mc.1.in: Likewise.
+	* gnome/gmc-window.c: Likewise.
+	* lib/README.xterm: Likewise.
+	* lib/mc.ext.in: Likewise.
+	* lib/mc.hint*: Likewise.
+	* lib/mc.hlp.hu: Likewise.
+	* po/*.po: Likewise.
+	* src/main.c: Likewise.
+
+2001-04-19  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Don't install mcserv unless
+	"--enable-mcserv-install" has heen specified.
+	Don't quote the first argument in all calls to AM_CONDITIONAL
+	to work around a bug in Automake 1.4.
+	* doc/Makefile.am: Use MCSERV_INSTALL conditional.
+	* vfs/Make-mc.in: Likewise.
+
+2001-04-13  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Bump version to 4.5.53a.
+
+2001-04-06  Pavel Roskin  <proski@gnu.org>
+
+	* gtkedit/editcmd.c: Remove support for XView layout attributes.
+	* gtkedit/editoptions.c: Likewise.
+	* pc/chmod.c: Likewise.
+	* pc/drive.c: Likewise.
+	* src/boxes.c: Likewise.
+	* src/chmod.c: Likewise.
+	* src/dlg.c: Likewise.
+	* src/dlg.h: Likewise.
+	* src/filegui.c: Likewise.
+	* src/find.c: Likewise.
+	* src/hotlist.c: Likewise.
+	* src/layout.c: Likewise.
+	* src/listmode.c: Likewise.
+	* src/main.c: Likewise.
+	* src/option.c: Likewise.
+	* src/panelize.c: Likewise.
+	* src/wtools.c: Likewise.
+	* src/wtools.h: Likewise.
+	* vfs/smbfs.c: Likewise.
+
+	* autogen.sh: Check out "intl" and "macros" directories if they
+	are missing. Simply "cvs up -d" won't restore them.
+
+	* configure.in: Bump version to 4.5.52a.
+
+2001-03-14  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Use AC_CHECK_TOOL for finding AR. Define
+	Automake conditional USE_SAMBA_FS if Samba is to be supported
+	in VFS.
+
+2001-03-07  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Use AM_PROG_CC_STDC if AC_PROG_CC_STDC is not
+	defined.
+	Reported by Norbert Warmuth.
+
+	* configure.in: Don't process vfs/extfs/uzip - it's now
+	constant.
+
+	* syntax/changelog.syntax: Require space after asterisk to have
+	it highlighted.
+
+2001-03-02  Pavel Roskin  <proski@gnu.org>
+
+	* aclocal.m4 (MC_HPUX_PROG_CC_STDC): Remove, it's obsolete.
+	* configure.in: Use AC_PROG_CC_STDC instead.
+
+	* lib/mc.ext.in: Recognize files ending by `.lslR' and `.ls-lR'.
+	Suggested by Christian Gennerat.
+
+	* lib/mc.ext.in: Add support for "freeze" - old compression
+	program used mostly on QNX.
+	* lib/mc.ext.in.qnx.diff: Remove, it's obsolete.
+	* lib/Makefile.am: Adjusted.
+
+2001-02-26  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc-gnome.ext.in: Remove, it's not used.
+	* configure.in: Remove lib/mc-gnome.ext.
+	* lib/Makefile.am: Likewise.
+
+2001-02-20  Pavel Roskin  <proski@gnu.org>
+
+	* gtkedit/edit.h: Only include malloc.h if STDC_HEADERS is not
+	defined to prevent warnings on OpenBSD 2.7.
+	* slang/jdmacros.h: Likewise.
+	* src/mad.h: Likewise.
+	* src/poptalloca.h: Likewise.
+
+	* configure.in: Check for sys/time.h and sys/timeb.h. Use
+	AC_HEADER_TIME.
+
+2001-02-07  Pavel Roskin  <proski@gnu.org>
+
+	* autogen.sh: Create vfs/samba/include/stamp-h.in.
+	* vfs/samba/include/stamp-h.in: Remove.
+
+	* macros/curses.m4: Quote first argument to AC_DEFUN.
+	* macros/gnome-cxx-check.m4: Likewise.
+	* macros/gnome-gettext.m4: Likewise.
+	* macros/gnome-libgtop-check.m4: Likewise.
+	* macros/gnome-print-check.m4: Likewise.
+	* macros/linger.m4: Likewise.
+	* macros/need-declaration.m4: Likewise.
+
+	* configure.in: Only configure in vfs/samba if smbfs support is
+	enabled even with Autoconf 2.13.
+
+2001-01-30  Pavel Roskin  <proski@gnu.org>
+
+	* macros/gnome-vfs.m4 (GNOME_WITH_VFS): Fix mishandling of
+	--without-samba due to a typo.
+
+	* configure.in: Only configure in vfs/samba if smbfs support is
+	enabled. This optimization will only work with Autoconf-2.49c
+	and above.
+
+2001-01-13  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Don't create a faked malloc.h.
+	* gtkedit/edit.h: Don't assume that malloc.h always exists.
+	* src/mad.h: Likewise.
+
+	* configure.in: Simplified handling of cons.saver.
+	* src/Makefile.in: Likewise. Don't install cons.saver setuid.
+	* mc.spec.in: Remove a workaround for the above.
+
+	* configure.in: Use AC_CANONICAL_HOST - "target" is meaningless
+	for MC. Don't rely on the output of uname - use $host_os.
+
+2001-01-11  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Check for ext2 libraries only if VFS is enabled.
+
+	* src/Makefile.in: Create directories before installing files.
+	Removed all occurences of libprefix - it's never defined.
+
+	* configure.in: All macros from configure.in moved to
+	acinclude.m4. Added missing quotes in several places.
+	* acinclude.m4: Likewise.
+
+	* edit/Makefile.in: Don't install or uninstall mcedit -
+	it cannot be installed before mc on systems without symlinks.
+	* gtkedit/Makefile.in: Likewise.
+	* src/Makefile.in: Install mcedit (if enabled) and mcview.
+	Uninstall them.
+
+	* macros/gnome-gettext.m4: Propagated change by Owen Taylor
+	from acinclude.m4 in gtk+:
+	Don't define ENABLE_NLS unless we have a working NLS.
+	(This should keep libintl.h from being included when it doesn't
+	exist).
+
+2001-01-09  Pavel Roskin  <proski@gnu.org>
+
+	* doc-gnome/C/figs/Makefile.am: New file.
+	* doc-gnome/C/Makefile.am: Don't handle figs, let the new
+	makefile do it.
+	* configure: Substitute doc-gnome/C/figs/Makefile.
+
+	* lib/Makefile.am: Distribute files listed in LOCALIZED_HELP.
+
+2001-01-08  Szabolcs Ban  <shooby@gnome.hu>
+
+	* lib/mc.hlp.hu: Added Hungarian help file from
+	  tothb1@freemail.hu, Janos.Zana@elfiz2.kee.hu,
+	  maci@integrity.hu, mfh47@freemail.hu
+	* lib/Makefile.am: Added LOCALIZED_HELP for further
+	  mc.hlp l10ns
+	* src/cmd.c, src/dlg.c, src/tree.c, src/view.c,
+	  gtkedit/editcmd.c: I18n of mc.hlp
+
+2000-12-29  Szabolcs Ban  <shooby@gnome.hu>
+
+	* doc/mc.1.in: Corrected badly formatted link...
+
+2000-11-10  Robert Brady  <robert@suse.co.uk>
+
+	* configure.in: Add Tamil to ALL_LINGUAS.
+
+2000-10-23  Pavel Roskin  <proski@gnu.org>
+
+	* mc.spec.in: Allow mcserv.8 to be gzipped.
+
+	* doc-gnome/C/Makefile.am: Workaround for buggy db2html
+	that cannot deal with "./gmc.sgml".
+
+2000-10-09  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.am: GNOME_M4_FILES renamed to ACLOCAL_M4_SOURCES so
+	that CVS Automake will drop dependencied to the macros that
+	we don't distribute.
+
+	* lib/mc.ext.in: Removed references to icons. Source RPMs
+	grouped to one regex. Removed "Update" for source RPMs, added
+	"Rebuild" instead. Added "Check signature" for all RPMs.
+	Added a comment about pop-up menus in the text edition.
+
+2000-10-06  Pavel Roskin  <proski@gnu.org>
+
+	* gnome/Makefile.in, src/Makefile.in, vfs/Make-mc.in: Required
+	flags moved out of CFLAGS as recommended by GNU coding
+	standards.
+	* configure.in: Don't add GLIB_CFLAGS to CFLAGS.
+	* Make.common.in: XINC eliminated. GLIB_CFLAGS is now added to
+	XCPPFLAGS.
+	* INSTALL (Random notes on porting to other architectures):
+	Completely rewritten. Recommended using CFLAGS instead of XINC.
+
+2000-10-05  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* lib/mc.ext.in: .spm is used by SuSE to mark src rpms
+
+2000-10-04  Christophe Merlet  <christophe@merlet.net>
+
+	* gnome/*.desktop: Updated french strings.
+
+2000-10-03  Pavel Roskin  <proski@gnu.org>
+
+	* doc-gnome/C/gmc.sgml: DTD changed to "PNG Variant V1.1"
+	to allow <legalnotice>. Unclosed tags fixed.
+
+2000-09-30  Pavel Roskin  <proski@gnu.org>
+
+	* mc.spec.in: New package mc-common. Use DESTDIR instead of
+	misusing prefix. Don't install old icons - they don't exist.
+
+	* lib/mc.sh.in: Use "rm -f" to delete temporary files. Use
+	"export -f" to have mc() exported.
+	* doc/mc.1.in: Changed description of the "-P" option to
+	avoid inclusion of mc.sh and mc.csh into the manual.
+	Corrected paths of mc.hlp, mc.no_proxy and ~/mc/Tree.
+
+2000-09-24  Pavel Roskin  <proski@gnu.org>
+
+	* doc/mc.1.in: Minor formatting fixes.
+
+	* lib/mc.sh.in: Remove temporary file non-interactively.
+	* doc/mc.1.in: updated example for mc.sh.
+
+2000-09-23  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.am: mc.spec included to noinst_DATA so that "make all"
+	updates it when needed.
+	* mc.spec.in: Include translations with mc, not gmc. Run
+	chkconfig --del in %preun, not %postun. --without-debug not
+	needed. /etc/X11/wmconfig not needed. /etc/pam.d/mcserv shouldn't
+	be executable. New files in %{prefix}/lib/mc/ - translated hints,
+	editor files.
+
+	* doc-gnome/C/Makefile.am: Fixed *clean targets. Use temporary
+	directory for document processing. Comment changes. gmc.ps and
+	gmc.pdf now generated from gmc.dvi.
+
+	* configure: Always include Make.common as file, otherwise
+	"make distclean" breaks.
+	* edit/Makefile.in, gnome/Makefile.in, gtkedit/Makefile.in,
+	slang/Makefile.in, src/Makefile.in, vfs/Make-mc.in: $(RMF)
+	replaced with "rm -f" - the stangard says that "rm" is portable.
+	Ditto $(MV). Adjusted *clean targets to match those in
+	Automake. Removed "cross" target.
+
+2000-09-22  Pavel Roskin  <proski@gnu.org>
+
+	* doc/mc.sgml: Removed as obsoleted by doc/mc.in.1
+	* doc/gnome.sgml: Removed as obsoleted by doc-gnome/C/gmc.sgml
+	* doc/Makefile.in: Converted to ...
+	* doc/Makefile.am: ... this.
+
+2000-09-21  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.sh.in: Use $HOME instead of '~' because the tilde
+	is not expanded in all shells.
+	* doc/mc.sgml: Updated the example script to reflect the above
+	changes.
+	* doc/mc.in.1: Likewise.
+
+2000-09-19  Pavel Roskin  <proski@gnu.org>
+
+	* lib/Makefile.in (LIBFILES_CONST): Added mc.hint.it from
+	Marco Ciampa
+
+2000-09-18  Pavel Roskin  <proski@gnu.org>
+
+	* Make.common.in: Added installcheck to placate "make distcheck"
+	* configure.in, Make.common.in, doc/Makefile.in,
+	edit/Makefile.in, gnome/Makefile.in, gtkedit/Makefile.in,
+	slang/Makefile.in, src/Makefile.in, vfs/Make-mc.in: Replacing
+	variable MKINSTALLDIRS and builddir with Automake-compatible
+	mkinstalldirs and top_builddir.
+	* doc-gnome/C/Makefile.am: Only maintainers regenerate html
+	files. Added uninstall-local target.
+
+2000-09-17  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: fixed wrong use of AC_MSG_RESULT inside
+	AC_CACHE_VAL
+
+	* Make.common.in: Added the "dvi" target for "make distcheck"
+	to go further
+	* doc-gnome/C/Makefile.in: converted to ...
+	* doc-gnome/C/Makefile.am: ... this
+
+2000-09-15  Pavel Roskin  <proski@gnu.org>
+
+	* acconfig.h, configure.in: Require autoconf 2.13 or above.
+	Removed workarounds for older versions. Removed MCDEBUG
+	variable - it's not used. --with-debug renamed to --with-mad and
+	cleaned up. Always use -Wall with gcc, other manipulations with
+	CFLAGS removed.
+
+	* doc/Makefile.in, edit/Makefile.in, gnome/Makefile.in,
+	gtkedit/Makefile.in, slang/Makefile.in, src/Makefile.in,
+	vfs/Make-mc.in: preserve timestamp on "make distdir", otherwise
+	mc.pot becomes out of date in the tarball.
+
+2000-09-14  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Removed some abuses of CPPFLAGS. Removed useless
+	tests for cp, mv and rm.
+	* Make.common.in: Removed variables xv_bindir and STRIP.
+	Variables CP, MV and RMF are assigned trivial values.
+
+	* edit/Makefile.in: Don't link headers, add extra includes
+	to CPPFLAGS instead. Put links to the build directory.
+	Remove the hack with "mx" - it is not needed anymore.
+
+	* configure.in: remove any manupulations with top_srcdir.
+	Don't change CPPGLAGS when the internal editor is enabled,
+	instead do it ...
+	* edit/Makefile.in, gtkedit/Makefile.in: ... here
+
+	* configure.in, Make.common.in, doc/Makefile.in,
+	edit/Makefile.in, gnome/Makefile.in, gtkedit/Makefile.in,
+	slang/Makefile.in, src/Makefile.in, vfs/Make-mc.in: rootdir
+	changed to top_srcdir for Automake compatability
+
+	* configure.in: REGEX_O variable removed - always use our regex
+
+	* configure.in: MCFGR variable removed
+
+2000-09-12  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: enable AM_MAINTAINER_MODE to be consistent with
+	other GNOME modules
+	* autogen.sh: remove "-I ." from the "aclocal" command line
+
+2000-09-01  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: output vfs/extfs/Makefile
+
+	* configure.in: AC_CANONICAL_SYSTEM moved above AM_INIT_AUTOMAKE
+	to avoid a warning
+	* acinclude.m4: removed unused macros AC_CHECK_HEADER_IN_PATH,
+	AC_LIB_XPM, AC_X_SHAPE_EXTENSION
+
+2000-08-29  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: use AM_GNOME_GETTEXT
+	* gettext.m4: removed
+	* Makefile.am: adjusted files to distribute, previous change
+	reverted
+
+	* mc-aclocal.m4: renamed to ...
+	* acinclude.m4: ... this
+	* autogen.sh: simplified - no more tricks with mc-aclocal.m4
+	* Makefile.am: aclocal should scan "." for gettext.m4
+
+2000-08-28  Pavel Roskin  <proski@gnu.org>
+
+	* Make.common.in: removed hack for "make distcopy"
+	* doc/Makefile.in, edit/Makefile.in, gnome/Makefile.in,
+	gtkedit/Makefile.in, slang/Makefile.in, src/Makefile.in,
+	vfs/Make-mc.in: added "distdir" target. Now "make dist" works
+	for external builds.
+	* edit/Makefile.in, slang/Makefile.in: added "Makefile" target
+
+2000-08-24  Pavel Roskin  <proski@gnu.org>
+
+	* new_icons/Makefile.in: converted to ...
+	* new_icons/Makefile.am: ... this
+	* configure.in: automake conditional GNOME introduced.
+	"insticons" removed
+
+	* icons/*: removed
+	* Makefile.am, configure.in: necessary adjustments
+
+	* config.guess, config.sub, install-sh, mkinstalldirs: removed,
+	automake installs them now
+
+	* syntax/Makefile.in: converted to ...
+	* syntax/Makefile.am: ... this
+
+	* idl/Makefile.in: converted to ...
+	* idl/Makefile.am: ... this
+
+	* lib/Makefile.am: simplified, fixed "make dist"
+
+	* lib/Makefile.in: converted to ...
+	* lib/Makefile.am: ... this
+
+	* lib/tkmc.wmconfig: removed
+	* lib/Makefile.in, doc/FILES: removed lib/tkmc.wmconfig
+
+	* Makefile.in, doc-gnome/Makefile.in, pc/Makefile: converted
+	to ...
+	* Makefile.am, doc-gnome/Makefile.am, pc/Makefile.am: ... this
+	* Make.common.in: support for "distdir" for compatability
+	with Automake-generated makefiles
+	* autogen.sh: run automake. Force cache - it is off by default
+	in autoconf 2.49a, but it's still handy for maintainers
+	* configure.in: adapted for Automake
+
+	* AUTHORS: new file
+
+2000-08-23  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: resurrect definition of xvers
+
+	* VERSION.in: removed
+	* Makefile.in: don't do anything with VERSION.in and VERSION
+	Take mc.spec from builddir, not srcdir
+	* configure.in: don't create VERSION
+
+2000-08-22  Pavel Roskin  <proski@gnu.org>
+
+	* *.c, *.h: Updated address of Free Software Foundation
+
+2000-08-21  Pavel Roskin  <proski@gnu.org>
+
+	* Make.common.in, acconfig.h, configure.in, mc-aclocal.m4,
+	doc-gnome/Makefile.in, doc-gnome/C/Makefile.in: removed stuff
+	related to XView, libXPM, libXext and Tk
+
+2000-08-18  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.in, lib/Makefile.in: adjusted lists of distributed
+	files
+
+	* configure.in: Simplified dependency tracking by using
+	"-include" with GNU Make
+	* autogen.sh: Exit on all failures
+
+2000-08-17  Pavel Roskin  <proski@gnu.org>
+
+	* doc/mc.sgml: Curly braces replaced with &lcub; and &rcub;
+	Fixed all misuses of single and double quotes. Typo fixes.
+	Ensured compatability with sgml2html, sgml2txt and sgml2latex
+	* doc/mc.1.in: Typo fix
+
+	* doc/mc.sgml: made compatible with sgml-tools 1.0.9
+	* doc/linuxdoc-sgml.diff: removed
+	* doc/Makefile.in: don't distribute linuxdoc-sgml.diff,
+	distribute gnome.sgml
+
+2000-08-15  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.in: fixes for improper usage of $(srcdir), cleanup
+	in the "distclean" target
+
+	* doc-gnome/Makefile.in: Fixed some abuses of $(srcdir)
+	Removed all XVIEW-related stuff
+	Fixed placement of png files on "make dist"
+
+	* doc/mc.1.in: Updated info about the internal editor
+
+	* Makefile.in, */Makefile.in: Fail if $(RMF) fails - it may
+	indicate serious problems. Fixes for uninstall.
+	* doc/Makefile.in: Rebuild if it is out of date.
+
+	* lib/cedit.menu: Added. This file has been missing
+
+	* lib/Makefile.in: Install mc.sh and mc.csh in $(suppbindir) only
+
+2000-08-08  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.in: correctly detect make failures in subdirs
+
+2000-08-01  Pavel Roskin  <proski@gnu.org>
+
+	* nt, os2, tk, xv: removed all files
+	* configure.in: don't create os2 and nt directories
+
+2000-08-01  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in, mc-aclocal.m4: AC_WARN replaced with AC_MSG_WARN
+
+	* README.PC, doc/mc.1.in, doc/mc.sgml: Updated e-mail address
+
+2000-07-21  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* src/main.c: make 8bit input/output the default (99% of the people
+	expects that; lets the remaining 1% use the configuration menu
+	to disactivate it if they want)
+
+2000-07-20  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* gtkedit/ChangeLog: There was no ChangeLog there, so I added one.
+
+2000-06-20  Jacob Berkman  <jacob@helixcode.com>
+
+	* configure.in: check for gnome-libs with window icon support
+
+	* acconfig.h: add icon define
+
+2000-06-08  Matthias Warkus  <mawa@iname.com>
+
+	* new_icons/gnome-pack-*.png: Updated.
+	* gnome/mc.keys: Added a MIME type for SLP packages.
+
+2000-05-30  Pavel Roskin  <pavel_roskin@geociiities.com>
+
+	* syntax/diff.syntax: Highlight lines beginning with "File",
+	"Files"	and "Binary"
+	* syntax/makefile.syntax: Highlight "ifndef"
+	* syntax/sh.syntax: Don't highlight "basnemae" ("basename" is
+	highlighted)
+
+2000-05-05  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* lib/mc.ext.in: More changes by rebel@atrey: he forgot to begin
+	comment lines with # in last release
+
+2000-05-03  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* lib/mc.ext.in: Fixes to changes by rebel@atrey.karlin.mff.cuni.cz.
+
+2000-04-26  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* lib/mc.ext.in: Changes from rebel@atrey.karlin.mff.cuni.cz. They
+	look more consistent than original.
+
+2000-04-14  Timur Bakeyev  <mc@bat.ru>
+
+	* config.in: Added check against strcoll().
+
+2000-04-14  Timur Bakeyev  <mc@bat.ru>
+
+	* syntax/perl.syntax: According to Tomasz Wegrzanovski <maniek@beer.com>
+	added 'and', 'or', 'not', 'for' keywords.
+
+2000-04-06  Timur Bakeyev  <mc@bat.ru>
+
+	* syntax.c: Wery dirty fix to allow compilation of mcedit on ncurses
+	based systems. Hope, this will make FreeBSD midc maintainer to enable
+	build-in editor by default. Still, syntax highlighting is disabled.
+	Need to port...
+
+2000-03-13  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* gtkedit/syntax.c (upgrade_syntax_file): possible buffer overflow
+	  fixed, some messages gettext()ed again here and in
+	gtkedit/editmenu.c:edit_about_cmd()
+
+2000-03-13  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* doc/mc.sgml (Examples): Fixed documentation, thanx
+	to martin@internet-treff.uni-koeln.de.
+
+2000-03-01  Pavel Roskin  <pavel_roskin@geocities.com>
+
+	* gtkedit/editcmd.c (edit_replace_prompt): fix index for
+	the label text
+
+2000-02-25  Pavel Roskin  <pavel_roskin@geocities.com>
+
+	* gtkedit/syntax.c: treat *.ads as Ada source
+	* syntax/ada95.syntax: escape "+" and "*"
+	* syntax/diffc.syntax: removed (obsoleted by diff.syntax)
+	* syntax/Makefile.in: remove diffc.syntax
+
+	* edit/edit_key_translator.c: interpret code 0177 as
+	backspace unless recognized otherwise
+
+2000-02-23  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* gtkedit/editcmd.c (edit_replace_prompt): fix incorrect
+	initialization of array of structure (gcc version 2.96 20000131
+	chokes on it).
+
+	* lib/mc.hint: C-y and not C-u can be used to insert text in input
+	lines (e. g. text which has been deleted with M-d).
+
+	* configure.in: Fix the extfs-configure-fragment-in-final-output bug
+
+2000-01-31  Yuan-Chung Cheng  <platin@linux.org.tw>
+
+	* configure.in: Added "zh_CN.GB2312" to ALL_LINGUAS.
+
+2000-01-29  Matthias Warkus  <mawa@iname.com>
+
+	* new_icons/gnome-pack-deb.png: Replaced with Eduardo Silva's
+	design on Federico's request.
+
+2000-01-26  Federico Mena Quintero  <federico@helixcode.com>
+
+	* idl/FileManager.idl (Desktop): Added arrange_icons() method and
+	an ArrangeType enum.
+
+2000-01-03  Aaron Lehmann  <aaronl@vitelus.com>
+
+	* gdesktop.c, gdnd.c, gaction.c, gicon.c,
+	gnome-file-property-dialog.c, gpopup.c, gpopup2.c, gprefs.cgmain.h,
+	setup.c: Add option of using GNOME "magic" routines to determine file
+	types. This makes MC intelligently look at the data in the file to see
+	what type of file it is, rather than looking at the filename extension.
+	This slows down MC quite a bit, so it has been made an optional
+	preference item. Type detection is expected to improve as mime-magic
+	matures.
+
+2000-01-15  Federico Mena Quintero  <federico@helixcode.com>
+
+	* lib/mc.menu (shell_patterns): Add a missing "esac".  Thanks to
+	Martin Bialasinski <martin@internet-treff.uni-koeln.de> for
+	providing a patch.
+
+2000-01-11  Matthias Warkus  <mawa@iname.com>
+
+	* Added icon and keys entry for Scheme source.
+
+2000-01-03  Fatih Demir  <kabalak@gmx.net>
+
+	* configure.in: Added tr -> ALL_LINGUAS .
+
+1999-12-28  Matthias Warkus  <mawa@iname.com>
+
+	* new_icons/*.png: Added a bunch of new icons.
+
+1999-12-06  Federico Mena Quintero  <federico@redhat.com>
+
+	* configure.in (VERSION): Bumped version number to 4.5.42.
+
+1999-11-25  Yuri Syrota  <rasta@renome.rovno.ua>
+
+	* configure.in: added 'uk' to ALL_LINGUAS.
+
+1999-11-09  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* lib/Makefile.in (LIBFILES_CONST): Adding mc.hint.cs file on
+	request from David Sauer
+
+1999-11-01  Federico Mena Quintero  <federico@redhat.com>
+
+	* configure.in (VERSION): Bumped version number to 4.5.41.
+
+1999-09-23  Federico Mena Quintero  <federico@redhat.com>
+
+	* configure.in (VERSION): Set version number to 4.5.39.
+
+1999-09-23	Jorge Godoy  <godoy@conectiva.com.br>
+
+	* configure.in: Added pt_BR to ALL_LINGUAS
+
+1999-09-22  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* lib/mc.sh.in, mc.csh.in: renamed from mc.sh resp. mc.csh. Adapt
+	path to the mc binary according to @prefix@.
+
+	* lib/Makefile.in (srcdir): mc.sh and mc.csh are now created by
+	configure. Install mc.sh and mc.csh in $(suppbindir).
+
+	* doc/mc.1.in, mc.sgml: Updated the mc function definition for bash
+	and zsh. Suggest to source mc.sh or mc.csh instead of adding verbatim
+	copies of the included function definitions.
+
+	* mcfn_install.in: Comment out definitions of the mc functions. Source
+	mc.sh instead of adding an outdated mc function definition.
+
+	* configure.in: output mc.sh and mc.csh
+
+1999-09-20  Federico Mena Quintero  <federico@redhat.com>
+
+	* lib/startup.links: Changed the news link to Gnotices
+
+1999-09-19  David Martin  <dmartina@usa.net>
+
+	* gtkedit/editcmd.c (edit_print_string): Use unsigned char so that
+	8 bit chars from strftime get displayed when inserting date.
+
+	* lib/mc.ext.in: Add entries for bzip2 compressed pages as used in
+	Mandrake 6.0. The generic entry for bzip2 moved to the end of the
+	file to avoid interferences. In this one I changed the extension check
+	to a type check (as used for gzip) which might give problems in some
+	systems.
+
+	* configure.in: Use -Tlatin1 to format man pages when available and
+	"view" 8 bit chars.
+
+1999-09-19  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* gtkedit/edit.h: Include file reordering to make it compile with
+	--with-debug
+
+	* gtkedit/editcmd.c (menu_save_mode_cmd): calculate dialog width
+	dependent on lenght of translated strings to display.
+
+1999-09-16  Owen Taylor  <otaylor@redhat.com>
+
+	* Remove the magicdev autoconf test in favor of just
+	including the idl file. Otherwise we have a dependency
+	loop between this and magicdev.
+
+1999-09-08  Federico Mena Quintero  <federico@redhat.com>
+
+	* idl/FileManager.idl: Changed names, and put everything under a
+	FileManager module.  Added a Desktop interface and some methods to
+	the WindowFactory interface.
+
+1999-09-08  Kjartan Maraas  <kmaraas@online.no>
+
+	* doc-gnome/*: Shiny new docs from users-guide.
+	All synced up.
+
+1999-09-03  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* configure.in: added 'nl' to ALL_LINGUAS, it was missing.
+
+1999-09-01  Federico Mena Quintero  <federico@redhat.com>
+
+	* README: Updated and spell-checked.
+
+	* NEWS: Updated.
+
+1999-08-31  Richard Hult  <rhult@hem2.passagen.se>
+
+	* configure.in (ALL_LINGUAS): Added sv.
+
+1999-08-30  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* lib/mc.sh: create temporary files in ~/.mc/tmp in order to avoid
+	symlink attacks (mcfn_install and the man page still needs to be
+	updated).
+
+1999-08-20  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* configure.in (AC_WITH_SLANG): rm -f destination before makeing
+	a symbolic link (ln -sf doesn't work as expected on Solaris)
+
+1999-08-19  Elliot Lee  <sopwith@redhat.com>
+	* */Makefile.in: Have 'make dist' work with builddir != srcdir.
+
+1999-08-19  Federico Mena Quintero  <federico@redhat.com>
+
+	* doc-gnome/C/gmc.sgml: Index fixes.
+
+1999-08-18  Elliot Lee  <sopwith@redhat.com>
+
+	* gtkedit/gtkedit.c: Make it build with gcc 2.95, by fixing the non-constant
+	initializers in the GnomeUIInfo structure.
+
+1999-08-16  Federico Mena Quintero  <federico@redhat.com>
+
+	* configure.in (VERSION): Bumped version number to 4.5.38.
+
+1999-08-15  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* lib/Makefile.in: added mc.hint.es to LIBFILES_CONST
+
+1999-08-15  David Martin  <dmartina@usa.net>
+
+	* gtkedit/edit.c: Print localized date with strftime()
+
+	* lib/mc.hint.es: NEW FILE. Hints in Spanish flavour.
+
+1999-08-08  David Martin  <dmartina@usa.net>
+
+	* gtkedit/syntax.c (upgrade_syntax_file): Mark error strings for
+	translation.
+
+	* gtkedit/editmenu.c (edit_about_cmd): Mark text in "about" for
+	translation as it used to be.
+
+1999-08-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* doc-gnome/C/gmc.sgml: Set the book element's id to "index" so
+	that the correct index.html will be generated.
+
+1999-07-27  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* syntax/Makefile.in (ALLSYNTAX): Added the missing syntax files
+	to the list.
+
+1999-07-21  Paul Sheer  <psheer@obsidian.co.za>
+
+	* gtkedit.c, edit.c, editcmd.c, syntax.c, edit.h, bookmark.c,
+	editwidget.c: bring editor stuff up to date with cooledit 3.11.5
+	This adds some new syntax rules, and spell check on the fly
+	which if someone bugs me for, will actually get enabled in
+	both the text and gnome versions. Bookmark stuff also needs
+	some keys bound to it, I suppose: any takers?
+
+July 19, 1999 Elliot Lee
+	* Makefile.in: Remove doc-gnome* from codedirs variable. Fixes infinitely recursing make.
+
+1999-07-05  Miguel de Icaza  <miguel@gnu.org>
+
+	* Makefile.in (all): Makefile fix.
+
+1999-05-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* Make.common.in (confdir): Define confdir as sysconfdir.  This
+	should fix the problem we had with FSSTND distributions.
+
+1999-07-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* Makefile.in (DISTMAIN): Added config.guess and config.sub to the
+	list of distributed files.
+
+1999-07-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* configure.in (VERSION): Bumped version number to 4.5.34.
+
+1999-07-02  Tuomas J. Lukka  <lukka@iki.fi>
+
+	* Add fi into ALL_LINGUAS
+
+1999-07-01  Tuomas Kuosmanen  <tigert@gimp.org>
+
+	* gnome/i-zipdisk2.png: Added another zip-disk icon
+	by <scarab@egyptian.net> - It looks very nice. Variation
+	is good.
+
+1999-06-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* acconfig.h: Add WITH_SMBFS
+
+	* macros/gnome-vfs.m4: Support conditional samba support.
+
+1999-05-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* Make.common.in (confdir): Define confdir as sysconfdir.  This
+	should fix the problem we had with FSSTND distributions.
+
+1999-02-22  Vladimir Kondratiev  <vkondra@iil.intel.com>
+
+	* mc.spec.in: added syntax files to %files
+
+1999-06-22  David Martin  <dmartina@usa.net>
+
+	* gtkedit/gtkedit.c (tb_items): Mark strings for localization.
+
+1999-06-07  Shooby Ban  <bansz@szif.hu>
+
+	* po/hu.po, configure.in: added hungarian translations...
+	  I'm not sure it's OK, but it seems usable.
+	  Translators: Tamas Fejos and Andras Kadar
+
+1999-06-07  Kjartan Maraas  <kmaraas@online.no>
+
+	* configure.in, Makefile.in: added the gmc helpfile to the build
+
+1999-05-23  Yukihiro Nakai  <nacai@iname.com>
+
+	* Add ja entry to LANG in configure.in
+
+1999-05-19  Tuomas Kuosmanen  <tigert@gimp.org>
+
+	* gnome/Makefile.in (ICONS): Ok, perhaps we also want the zip-icon to
+	be installed in the system :) (added it to the Makefile.in)
+
+1999-05-19  Tuomas Kuosmanen  <tigert@gimp.org>
+
+	* gnome/i-zipdisk.png: I added an icon for the ZIP(tm I guess :)
+	disks - someone please add it to the mount.c code so it gets used..
+	Everyone have a nice time at the expo! :) I hope to join the
+	next time.
+
+Mon May 17 07:30:48 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* configure.in: Added check for getpt ()
+
+1999-05-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* configure.in (VERSION): Bumped version number to 4.5.31.
+
+Wed Apr 21 22:04:30 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* gtkedit/editcmd.c (edit_save_file): MAD knows about tempnam, no
+	need to fool it by strdup'ing the return value of tempnam.
+
+Wed Apr 21 20:44:41 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* configure.in: New option --with-tm-x-support, use MCCFLAGS and
+	MCLIBS which are specific to the text edition.
+
+	* INSTALL: Added documentation for --with-tm-x-support
+
+Sun Apr 18 17:51:54 EDT 1999 Gregory McLean  <gregm@comstar.net>
+
+	* mc.spec.in : Folded in some changes from the 'offical' rpm
+	spec file.
+
+1999-04-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* configure.in (SHELL): Do not use grep -q, as it is not portable
+	to every OS.
+
+Thu Apr 15 21:59:52 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* configure.in: Linking from $srcdir/slang is broken when configure
+	isn't called with an absolute path. Link from ../$srcdir/slang if
+	configure was invoked with a relative path.
+
+1999-03-20  Nuno Ferreira  <nmrf@rnl.ist.utl.pt>
+
+	* configure.in: Do not rm the destination file and then link, use
+	ln -sf. Link from $srcdir/slang, not from ../$srcdir/slang.
+
+Tue Apr 13 06:07:05 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* configure.in: Some AC_ARG_WITH macros havn't checked $withval, i.e.
+	--with-PACKAGE and --without-PACKAGE gave the same results.
+
+1999-04-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* configure.in (VERSION): Bumped version number to 4.5.30.
+
+1999-03-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* configure.in (VERSION): Bumped version number to 4.5.29.
+
+Sun Mar 28 23:46:01 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* configure.in: Deleted duplicate VFS checks. GNOME_VFS_CHECKS
+	now contains all checks.
+
+1999-03-26  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* configure.in (VERSION): bumped version number to 4.5.28.
+
+Fri Mar 26 19:16:38 1999  Timur Bakeyev  <mc@bat.ru>
+
+	* */Makefie.*: fixed several missed conversions from libdir to
+	mclibdir. (Should be automake'd, really)
+
+1999-03-24  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* Make.common.in: There were conflicting definitions of mclibdir
+	(one for installation, one for source).  Now the source one is
+	called mcsrclibdir.
+
+	* doc/Makefile.in: Use mcsrclibdir where appropriate.
+
+Mon Mar 22 03:00:15 1999  Timur Bakeyev  <mc@bat.ru>
+
+	* edit/syntax.c: Remove extra "|"  in "file ..\*\\.(pp|PP|pas|PAS|)$ \
+	Pascal Program" (Heh, second time :)
+
+	* Makefile.common: Until things gets clear, keep syntax rules in
+	$(prefix)/lib/mc//syntax, as this is how (LIBDIR "/syntax") expands.
+
+	Also, $(libdir) changed to $(mclibdir), to avoid confusion with expanded
+	@libdir@.
+
+Mon Mar 22 01:52:32 1999  Timur Bakeyev  <mc@bat.ru>
+
+	* configure.in, Makefile.in, Makefile.common: Add syntax/Makefile.in,
+	as requested by Paul. Still, need some checking...
+
+Sun Mar 21 03:55:24 1999 Paul Sheer  <psheer@obsidian.co.za>
+
+	* edit/*.[ch] gtkedit/*.[ch]: brought the editor up
+	to date with cooledit 3.9.0. This adds some new features.
+	Firstly the SYNTAX RULES ARE NO LONGER HARDCODED into
+	syntax.c. This is because the rule set is becoming too
+	large to maintain in its current form and because file
+	loading is starting to get slow.
+
+	There is also a bookmark feature which does not yet have
+	key bindings assigned to it, but should be cool once
+	these get inserted. Syntax rules files are named
+	    $LIBDIR/cooledit/syntax/*.syntax
+
+1999-03-20  Nuno Ferreira  <nmrf@rnl.ist.utl.pt>
+
+	* configure.in: Create slang directory, it is needed when
+	builddir != srcdir.
+	Use -f when calling rm, the file does not exist on
+	first compile.
+	No need to copy VERSION from $srcdir, it's already generated in
+	$buildir.
+
+Fri Mar 19 06:32:36 1999  David Martin  <dmartina@usa.net>
+
+	* edit/edit_key_translator.c: Added missing translation tags.
+
+1999-03-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* configure.in: Minimum version of glib should be 1.2.0.
+	(VERSION): Bumped version number to 4.5.27.
+
+Wed Mar 10 21:52:55 1999  David Martin  <dmartina@usa.net>
+
+	* gtkedit/editcmd.c: Added missing translation tags.
+
+	* gtkedit/editoptions.c: Added missing translation tags. Translate
+	radio buttons on first use.
+
+Sat Feb 27 21:00:45 1999 Gregory McLean  <gregm@comstar.net>
+
+	* applied a patch from Duncan Mak <mustapha@wegythu.res.cmu.edu>
+	to get the mc spec file to work.
+	* hacked configure to generate a properly versioned spec file.
+
+Fri Feb 26 22:06:51 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* gtkedit/editcmd.c (menu_save_mode_cmd): translate strings for
+	radio buttons on first pass.
+
+Fri Feb 26 21:45:30 1999  David Martin  <dmartina@usa.net>
+
+	* gtkedit/editcmd.c: Mark strings in the search and replace
+	dialogs for translation. Resized these dialogs to let the messages
+	fit.
+
+1999-02-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtkedit/editwidget.c (selection_send): Use the proper type for
+	64-bit cleanliness (Patch from George Lebl).
+
+Tue Feb 16 21:24:43 1999  David Martin  <dmartina@usa.net>
+
+	* gtkedit/gtkedit.c: Hack to get one more string defined in a macro
+	into the catalog file.
+
+Sat Feb 13 01:39:17 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* configure.in: Make Timur's libtermcap check work with SLang
+	0.99.98, too.
+
+1999-02-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* new_icons/Makefile.in (ALLICONS): Added Tigert's new icons for
+	PS and EPS files.  Thanks, Tigert!
+
+1999-02-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* configure.in (CCOPTS): Drop the prefix auto-detection.
+
+Wed Feb 10 02:48:51 1999  Timur Bakeyev  <mc@bat.ru>
+
+	* configure.in: Add check, which, in case of system-installed SLang
+	library tries to run a test program, which determines, does we need
+	linking with libtermcap.a. Also, set of if's for finding terminfo
+	dir changed to for cycle - a bit nicer :)
+
+Tue Feb  9 20:52:19 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* README.QNX: Deleted documention about mc.menu.qnx.diff.
+
+Tue Feb  9 20:46:07 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* lib/mc.menu.qnx.diff: Deleted, it was merged with mc.menu.
+
+Tue Feb  9 20:32:39 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* lib/mc.menu: Removed GNU tar'isms (option z). Removed option -o
+	from tar calls when extracting (according to my man page this option
+	is only useful when creating archieves).
+
+Tue Feb  9 20:28:15 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* lib/mc.menu: Applied patch from root 	<root@golia.dntis.ro> which
+	adds support for tar.bz2 and merges the support for freeze-compressed
+	tar files (tar.F) from mc.menu.qnx.diff.
+
+Sun Feb  7 06:11:48 1999  Timur Bakeyev  <mc@bat.ru>
+
+	* Makefile.in: Change calls to xmkdir to mkinstalldirs - this is more
+	GNU-like :)
+
+1999-01-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtkedit/gtkedit.c: Hack to get a string defined in a macro into
+	the catalog file.
+
+1999-02-02  Tuomas Kuosmanen  <tigert@gimp.org>
+
+	* new_icons/gnome-core.png: New icon for core files. Someone
+	please add the code part :)
+
+Mon Feb  1 01:28:19 1999  Timur Bakeyev  <mc@bat.ru>
+
+	* configure.in: Add check against setuid() and setreuid() functions.
+
+Fri Jan 29 22:55:56 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* slang/slang.h: renamed to slang-mc.h
+
+	* slang/Makefile.in: delete slang.h on "make clean"
+
+	* configure.in: link slang/slang-mc.h to slang/slang.h when the
+	included slang is used. Problem was that MC's slang.h was used
+	when we compiled with an already installed SLang and the systems
+	header file were included with <slang/slang.h>.
+	Unfortunatly I can't use AC_LINK_FILES to make the links because
+	if we needn't make any links AC_LINK_FILES makes a link from
+	srcdir to top_builddir (builddir != srcdir).
+
+	Temporary add $LGPM to $LIBS when checking for the resizeterm
+	and keyok functions (ncurses might be linked against GPM).
+
+	Substitude PACKAGE (intl/Makefile makes use of it)
+
+Wed Jan 27 03:34:44 1999  Timur Bakeyev  <mc@bat.ru>
+
+	* gtkedit/edit.h: including of <malloc.h> and <stdlib.h> swaped by
+	#include "global.h".
+
+1999-01-13  Jonathan Blandford  <jrb@redhat.com>
+
+	* Make.common.in (gnewdir): new path.
+
+Sun Jan 17 03:19:47 1999  Timur Bakeyev  <mc@bat.ru>
+
+	* configure.in: Add comments before "Let" and "the" - typo. Add new
+	path to include's search.
+
+1999-01-10  Ilya Zakharevich  <ilya@math.ohio-state.edu>
+
+	* gtkedit/edit.c (edit_load_file): Off-by-one error disabled editing.
+
+1999-01-11  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* configure.in (REGEX_O): Always include regex.o as the code we
+	are using in gmc is not using regcomp/regexec, but the internal
+	Emacs API.
+
+	* src/regex.c: Do not compile the POSIX compatibility code, as we
+	do not use it.
+
+Tue Dec 29 15:49:45 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* doc/mc.sgml, mc1.in (Color section): minor polishing
+	(Layout section): documented Highlight...
+
+Thu Dec 24 18:30:53 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* configure.in: Deleted du checks
+
+	* INSTALL: Deleted --with-dusum documentation.
+
+	* doc/mc.sgml, mc.1.in: Completed documentation about the Options/
+	Configuration dialog. Added Advanced chown subsection. Deleted
+	variables from the Special settings section which are now covered
+	by the configuration dialog.
+
+Mon Dec 21 22:26:34 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* doc/mc.sgml, mc.1.in: Deleted obsolete information about
+	tar_gz_memlimit. Partially rewrote the section about the
+	Virtual FS.. configuration dialog.
+
+1998-12-17  Christopher Blizzard  <blizzard@appliedtheory.com>
+
+	* autogen.sh (srcdir): Honor $ACLOCAL_FLAGS when running aclocal.
+
+Sun Dec 13 15:26:19 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* Makefile.in (target installdirs): create $(DESTDIR)$(idldir)
+
+	* lib/Makefile.in (target install): install $(LIBFILES_OUT) from the
+	builddir
+
+1998-12-08  Tuomas Kuosmanen  <tigert@gimp.org>
+
+	* new_icons/gnome-image-[lots].png: I added some icons for file
+	types (image) there - someone please tell me what the correct
+	location and naming convention is and I will try to follow that. :)
+
+1998-12-08  Christopher Blizzard  <blizzard@appliedtheory.com>
+
+	* configure.in (builddir): Add icons/Makefile to AC_OUTPUT so that
+	the build will still work.  (Has this been replaced by new_icons?)
+
+Tue Dec  1 11:58:55 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
+
+	* doc/mc.1.in, mc.sgml: added my name to list ov authors
+
+1998-12-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* Makefile.in (codedirs): Dropped xv and tk ports from the
+	distribution. include idl directory.
+
+1998-12-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* configure.in (slang_use_system_installed_lib): Define slang
+	here, to avoid having this on LIBS.
+
+1998-11-26  Herbert Valerio Riedel  <hvr@hvrlab.ml.org>
+
+	* gtkedit.c: changed occurence of 'va_list *ap' to 'va_list ap'
+
+Thu Nov 26 12:20:06 1998  Pavel Roskin  <pavel_roskin@geocities.com>
+
+	* config.h.in: Removed from CVS, added to .cvsignore
+
+	* acconfig.h, macros/curses.m4, src/xcurses.c, src/tty.h,
+	configure.in:
+	NO_COLOR_SUPPORT renamed to NO_COLOR_CURSES
+	HAVE_SUNOS_CURSES and SUNOS_CURSES renamed to USE_SUNOS_CURSES
+	HAS_CURSES added to acconfig.h
+
+1998-11-24  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* autogen.sh: Add "-I macros" to the aclocal flags.
+
+	* mc-aclocal.m4: Renamed fp_PROG_CC_STDC to MC_HPUX_PROG_CC_STDC
+	so that aclocal will not complain about an obsolete macro.
+
+	* configure.in: Use MC_HPUX_PROG_CC_STDC
+
+	* ChangeLog: There was no ChangeLog here, so I added one.
