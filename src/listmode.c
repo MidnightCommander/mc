@@ -53,7 +53,7 @@
 #define BX		5
 #define BY		18
 
-#define BUTTONS		4
+#define BUTTONS		6
 #define LABELS          4
 #define B_ADD		B_USER
 #define B_REMOVE        B_USER + 1
@@ -87,13 +87,6 @@ struct listmode_button {
 struct listmode_label {
     int y, x;
     char *text;
-};
-
-static struct listmode_label listmode_labels[LABELS] = {
-    {UY, UX + 1, " General options "},
-    {UY + 4, UX + 1, " Items "},
-    {UY + 4, UX + 21, " Item options"},
-    {UY + 13, UX + 22, "Item width:"}
 };
 
 static char *
@@ -165,13 +158,6 @@ bremove_cback (int action)
     return 0;
 }
 
-static struct listmode_button listmode_but[BUTTONS] = {
-    {B_CANCEL, NORMAL_BUTTON, 0, 53, "&Cancel", NULL},
-    {B_ADD, NORMAL_BUTTON, 0, 22, "&Add item", badd_cback},
-    {B_REMOVE, NORMAL_BUTTON, 0, 10, "&Remove", bremove_cback},
-    {B_ENTER, DEFPUSH_BUTTON, 0, 0, "&OK", NULL},
-};
-
 static int
 listmode_callback (Dlg_head *h, int Par, int Msg)
 {
@@ -181,15 +167,6 @@ listmode_callback (Dlg_head *h, int Par, int Msg)
 	listmode_refresh (h);
 	break;
 
-    case DLG_POST_KEY:
-	/* fall */
-
-    case DLG_INIT:
-	attrset (COLOR_NORMAL);
-	dlg_move (h, UY + 13, UX + 35);
-	printw ("%02d", 99);
-	attrset (MENU_ENTRY_COLOR);
-	break;
     }
     return 0;
 }
@@ -203,6 +180,22 @@ init_listmode (char *oldlistformat)
     int format_columns = 0;
     Dlg_head *listmode_dlg;
 
+    static struct listmode_label listmode_labels[LABELS] = {
+	{UY, UX + 1, " General options "},
+	{UY + 4, UX + 1, " Items "},
+	{UY + 4, UX + 21, " Item options "},
+	{UY + 13, UX + 22, "Item width:"}
+    };
+
+    static struct listmode_button listmode_but[BUTTONS] = {
+	{B_CANCEL, NORMAL_BUTTON, BY, BX + 53, "&Cancel", NULL},
+	{B_ADD, NORMAL_BUTTON, BY, BX + 22, "&Add item", badd_cback},
+	{B_REMOVE, NORMAL_BUTTON, BY, BX + 10, "&Remove", bremove_cback},
+	{B_ENTER, DEFPUSH_BUTTON, BY, BX, "&OK", NULL},
+	{B_PLUS, NARROW_BUTTON, UY + 13, UX + 37, "&+", bplus_cback},
+	{B_MINUS, NARROW_BUTTON, UY + 13, UX + 34, "&-", bminus_cback},
+    };
+
     do_refresh ();
 
     listmode_dlg =
@@ -211,8 +204,7 @@ init_listmode (char *oldlistformat)
 
     for (i = 0; i < BUTTONS; i++)
 	add_widget (listmode_dlg,
-		    button_new (BY + listmode_but[i].y,
-				BX + listmode_but[i].x,
+		    button_new (listmode_but[i].y, listmode_but[i].x,
 				listmode_but[i].ret_cmd,
 				listmode_but[i].flags,
 				listmode_but[i].text,
@@ -226,12 +218,6 @@ init_listmode (char *oldlistformat)
 	add_widget (listmode_dlg, pname);
     }
 
-    add_widget (listmode_dlg,
-		button_new (UY + 13, UX + 37, B_MINUS, NORMAL_BUTTON, "&-",
-			    bminus_cback));
-    add_widget (listmode_dlg,
-		button_new (UY + 13, UX + 34, B_PLUS, NORMAL_BUTTON, "&+",
-			    bplus_cback));
     radio_itemwidth = radio_new (UY + 9, UX + 22, 3, s_itemwidth, 1);
     add_widget (listmode_dlg, radio_itemwidth);
     radio_itemwidth = 0;
@@ -314,6 +300,7 @@ collect_new_format (void)
     return newformat;
 }
 
+/* Return new format or NULL if the user cancelled the dialog */
 char *
 listmode_edit (char *oldlistformat)
 {
@@ -325,18 +312,8 @@ listmode_edit (char *oldlistformat)
     listmode_dlg = init_listmode (s);
     g_free (s);
 
-    attrset (SELECTED_COLOR);
-
-    run_dlg (listmode_dlg);
-
-    switch (listmode_dlg->ret_value) {
-    case B_CANCEL:
-	newformat = g_strdup (oldlistformat);
-	break;
-
-    case B_ENTER:
+    if (run_dlg (listmode_dlg) == B_ENTER) {
 	newformat = collect_new_format ();
-	break;
     }
 
     listmode_done (listmode_dlg);

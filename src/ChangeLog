@@ -1,5 +1,11 @@
 2003-09-01  Pavel Roskin  <proski@gnu.org>
 
+	* listmode.c: Create all buttons in one place.  Remove unneeded
+	low-level drawing.
+	(listmode_edit): Return NULL on cancel.
+	* main.c (listmode_cmd): Actually use the result of
+	listmode_edit().
+
 	* listmode.c: Use callbacks for Add and Remove buttons.  Don't
 	run dialog in the loop, it doesn't work this way.
 

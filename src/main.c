@@ -798,10 +798,21 @@ static void
 listmode_cmd (void)
 {
     char *newmode;
-    newmode = listmode_edit ("half <type,>name,|,size:8,|,perm:4+");
-    message (0, _(" Listing format edit "), _(" New mode is \"%s\" "),
-	     newmode);
-    g_free (newmode);
+
+    if (get_current_type () != view_listing)
+	return;
+
+    newmode = listmode_edit (cpanel->user_format);
+    if (!newmode)
+	return;
+
+    g_free (cpanel->user_format);
+    cpanel->list_type = list_user;
+    cpanel->user_format = newmode;
+    set_panel_formats (cpanel);
+    paint_panel (cpanel);
+
+    do_refresh ();
 }
 #endif				/* LISTMODE_EDITOR */
 
