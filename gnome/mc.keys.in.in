@@ -1,5 +1,6 @@
 application/pdf:
 	open=xpdf %f
+    icon-filename=@icondir@/gnome-application-pdf.png
 
 application/postscript:
 	open=gv %f
@@ -13,7 +14,7 @@ application/zip:
 	open.extractf.Extract with flags=I=%{Enter any Unzip flags:}; if test -n "$I"; then unzip $I %f; fi
 
 application/x-e-theme:
-	icon-filename=@icondir@/gnome-compressed.png
+	icon-filename=@icondir@/gnome-application-x-e-theme.png
 		
 application/x-theme:
 	icon-filename=@icondir@/gnome-compressed.png
@@ -65,12 +66,20 @@ application/x-asp:
 	icon-filename=@icondir@/gnome-text-html.png
         open=gnome-moz-remote file:%f
 
+application/x-php:
+ 	icon-filename=@icondir@/gnome-application-x-php.png
+ 		open=gnome-moz-remote file:%f
+
 application/x-cpio:
 	fm-open=%cd %d/%p#ucpio/
 	fm-view=%view{ascii} cat %f | cpio -ictv
 
 application/x-backup:
-	icon-filename=/usr/share/pixmaps/gnome-default-dlg.png
+	icon-filename=@icondir@/../gnome-default-dlg.png
+
+application/x-reject:
+ 	icon-filename=@icondir@/gnome-application-x-reject.png
+
 
 application/x-applix-spreadsheet
 	open=applix %f
@@ -177,6 +186,12 @@ audio/x-mp3:
 audio/x-pn-realaudio:
 	icon-filename=@icondir@/gnome-audio-x-pn-realaudio.png
 
+audio/x-s3m:
+ 	icon-filename=@icondir@/gnome-audio-x-s3m.png
+ 
+audio/x-stm:
+ 	icon-filename=@icondir@/gnome-audio-x-stm.png
+
 audio/x-voc:
 	icon-filename=@icondir@/gnome-audio-x-voc.png
 
@@ -233,6 +248,7 @@ image/ief:
 	icon-filename=@icondir@/gnome-image-ief.png
 
 image/x-xfig:
+	icon-filename=@icondir@/gnome-image-x-xfig.png
 	open=xfig %f
 	view=xfig %f
 
@@ -296,6 +312,12 @@ text/x-c:
 
 text/x-C++:
 	icon-filename=@icondir@/gnome-application-x-cc-source.png
+
+text/x-java:
+ 	icon-filename=@icondir@/gnome-application-x-java-source.png
+ 
+text/x-sql:
+ 	icon-filename=@icondir@/gnome-application-x-sql.png
 
 text/x-comma-separated-values:
 	open=gnumeric %f

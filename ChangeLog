@@ -1,3 +1,7 @@
+1999-12-28  Matthias Warkus  <mawa@iname.com>
+
+	* new_icons/*.png: Added a bunch of new icons.
+
 1999-12-06  Federico Mena Quintero  <federico@redhat.com>
 
 	* configure.in (VERSION): Bumped version number to 0.42.
