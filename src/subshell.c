@@ -161,7 +161,7 @@ static void
 init_subshell_child (const char *pty_name)
 {
     int pty_slave;
-    char *init_file = NULL;
+    const char *init_file = NULL;
 #ifdef HAVE_GETSID
     pid_t mc_sid;
 #endif				/* HAVE_GETSID */
@@ -219,7 +219,7 @@ init_subshell_child (const char *pty_name)
 	char sid_str[BUF_SMALL];
 	g_snprintf (sid_str, sizeof (sid_str), "MC_SID=%ld",
 		    (long) mc_sid);
-	putenv (sid_str);
+	putenv (g_strdup (sid_str));
     }
 #endif				/* HAVE_GETSID */
 
@@ -230,11 +230,11 @@ init_subshell_child (const char *pty_name)
 	    init_file = ".bashrc";
 
 	/* Make MC's special commands not show up in bash's history */
-	putenv ("HISTCONTROL=ignorespace");
+	putenv (g_strdup ("HISTCONTROL=ignorespace"));
 
 	/* Allow alternative readline settings for MC */
 	if (access (".mc/inputrc", R_OK) == 0)
-	    putenv ("INPUTRC=.mc/inputrc");
+	    putenv (g_strdup ("INPUTRC=.mc/inputrc"));
 
 	break;
 
