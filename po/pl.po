@@ -1397,7 +1397,7 @@ msgstr "VFS"
 
 #: gnome/gprefs.c:1
 msgid "Caching"
-msgstr ""
+msgstr "Przechowywanie"
 
 #: gnome/gprefs.c:1
 msgid "Preferences"
@@ -2616,7 +2616,7 @@ msgstr "Dynamiczne akapity"
 
 #: gtkedit/editoptions.c:1
 msgid "Type writer wrap"
-msgstr ""
+msgstr "Maszyna do pisania"
 
 #. 2
 #: gtkedit/editoptions.c:1
@@ -2996,7 +2996,7 @@ msgstr "Widok ikon"
 
 #: src/boxes.c:1
 msgid "user &Mini status"
-msgstr "Dowolny krótki status"
+msgstr "Dowolny krótki stan"
 
 #: src/boxes.c:1
 msgid "Listing mode"
@@ -4128,11 +4128,11 @@ msgstr ""
 
 #: src/file.c:1
 msgid "a&ll"
-msgstr ""
+msgstr "wszystkie"
 
 #: src/file.c:1 src/filegui.c:1
 msgid "non&E"
-msgstr ""
+msgstr "¿aden"
 
 #: src/file.c:1
 msgid " Type 'yes' if you REALLY want to delete "
@@ -4264,7 +4264,7 @@ msgstr ""
 
 #: src/find.c:1
 msgid "&Suspend"
-msgstr ""
+msgstr "wstrzymaj"
 
 #: src/find.c:1
 msgid "Con&tinue"
@@ -4379,7 +4379,7 @@ msgstr "U¿ycie: fixhlp <szeroko¶æ> <nazwa_tematu>\n"
 
 #: src/fixhlp.c:1
 msgid "fixhlp: Cannot open toc for writing"
-msgstr ""
+msgstr "fixhlp: Nie mo¿na otworzyæ tematu do zapisu"
 
 #: src/fixhlp.c:1
 msgid ""
@@ -4844,13 +4844,15 @@ msgstr ""
 
 #: src/learn.c:1
 msgid "&Discard"
-msgstr ""
+msgstr "Porzuæ"
 
 #: src/learn.c:1
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
 msgstr ""
+"Doskonale! Odnaleziono kompletnê bazê danych terminali!\n"
+"Wszystkie klawisze dzia³aj± w³a¶ciwie."
 
 #: src/learn.c:1
 msgid "Learn keys"
