@@ -7,13 +7,13 @@
  */
 
 #include <config.h>
+#include <gnome.h>
 #include "main.h"
 #include "../vfs/vfs.h"
 #include "gcmd.h"
 #include "gmain.h"
 #include "gscreen.h"
 #include "gsession.h"
-#include <gnome.h>
 
 
 /* Whether we are session managed or not */

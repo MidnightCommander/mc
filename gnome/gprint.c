@@ -6,9 +6,10 @@
  */
 
 #include <config.h>
+#include <libgnome/libgnome.h>
+#include "x.h"
 #include "main.h"
 #include "util.h"
-#include <libgnome/libgnome.h>
 #include "gdesktop.h"
 #include "gprint.h"
 

@@ -6,12 +6,12 @@
  */
 
 #include <config.h>
-#include "gdesktop.h"
 #include <gnome.h>
 #include <sys/stat.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <gdk/gdkx.h>
+#include "gdesktop.h"
 #include "gdesktop-icon.h"
 #include "dir.h"
 

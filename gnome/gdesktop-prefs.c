@@ -6,8 +6,8 @@
  */
 
 #include <config.h>
-#include "gdesktop.h"
 #include <gnome.h>
+#include "gdesktop.h"
 #include "gdesktop-prefs.h"
 
 

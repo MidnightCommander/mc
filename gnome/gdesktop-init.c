@@ -7,9 +7,10 @@
 
 #include <config.h>
 #include <unistd.h>
+#include <libgnome/libgnome.h>
+#include "x.h"
 #include "main.h"
 #include "util.h"
-#include <libgnome/libgnome.h>
 #include "gdesktop.h"
 #include "gdesktop-init.h"
 #include "gprint.h"

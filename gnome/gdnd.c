@@ -9,7 +9,9 @@
 #include <config.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <gdk/gdkprivate.h>
 #include "global.h"
+#include "x.h"
 #include "file.h"
 #include "fileopctx.h"
 #include "main.h"
@@ -17,7 +19,6 @@
 #include "ext.h"
 #include "gscreen.h"
 #include "../vfs/vfs.h"
-#include <gdk/gdkprivate.h>
 #include "gdesktop.h"
 #include "gdnd.h"
 #include "gmain.h"
