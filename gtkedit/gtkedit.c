@@ -1284,43 +1284,43 @@ int edit (const char *file, int line)
     app = gnome_app_new ("mcedit", (char *) (file ? file : "Mcedit"));
 
     {
-	GnomeUIInfo file_menu[] =
+	static GnomeUIInfo file_menu[] =
 	{
-	    GNOMEUIINFO_MENU_OPEN_ITEM( gtk_edit_load_file, edit),
-            GNOMEUIINFO_MENU_NEW_ITEM( "_New", N_ ("Clear the edit buffer"), gtk_edit_new_file, edit),
+	    GNOMEUIINFO_MENU_OPEN_ITEM( gtk_edit_load_file, NULL),
+            GNOMEUIINFO_MENU_NEW_ITEM( "_New", N_ ("Clear the edit buffer"), gtk_edit_new_file, NULL),
 	    GNOMEUIINFO_SEPARATOR,
-            GNOMEUIINFO_MENU_SAVE_ITEM( gtk_edit_save_file, edit),
-	    GNOMEUIINFO_MENU_SAVE_AS_ITEM( gtk_edit_save_as_file, edit),
+            GNOMEUIINFO_MENU_SAVE_ITEM( gtk_edit_save_file, NULL),
+	    GNOMEUIINFO_MENU_SAVE_AS_ITEM( gtk_edit_save_as_file, NULL),
 	    GNOMEUIINFO_SEPARATOR,
             GNOMEUIINFO_ITEM_DATA( N_ ("Insert File"), N_ ("Insert text from a file"),
-				   gtk_edit_insert_file, edit, NULL),
+				   gtk_edit_insert_file, NULL, NULL),
 	    GNOMEUIINFO_ITEM_DATA( N_ ("Copy to file"), N_ ("copy a block to a file"),
-				   gtk_edit_copy_to_file, edit, NULL),
+				   gtk_edit_copy_to_file, NULL, NULL),
 	    GNOMEUIINFO_SEPARATOR,
-	    GNOMEUIINFO_MENU_EXIT_ITEM(gtk_edit_quit,edit),
+	    GNOMEUIINFO_MENU_EXIT_ITEM(gtk_edit_quit, NULL),
 	    GNOMEUIINFO_END
 
 	};
 
-	GnomeUIInfo edit_menu[] =
+	static GnomeUIInfo edit_menu[] =
 	{
-	    GNOMEUIINFO_MENU_COPY_ITEM(gtk_edit_clip_copy, edit),
-	    GNOMEUIINFO_MENU_CUT_ITEM( gtk_edit_clip_cut, edit),
-	    GNOMEUIINFO_MENU_PASTE_ITEM( gtk_edit_clip_paste, edit),
+	    GNOMEUIINFO_MENU_COPY_ITEM(gtk_edit_clip_copy, NULL),
+	    GNOMEUIINFO_MENU_CUT_ITEM( gtk_edit_clip_cut, NULL),
+	    GNOMEUIINFO_MENU_PASTE_ITEM( gtk_edit_clip_paste, NULL),
 	    GNOMEUIINFO_SEPARATOR,
-	    GNOMEUIINFO_MENU_UNDO_ITEM(gtk_edit_undo, edit),
+	    GNOMEUIINFO_MENU_UNDO_ITEM(gtk_edit_undo, NULL),
 	    GNOMEUIINFO_END
 	};
 
-	GnomeUIInfo search_menu[] =
+	static GnomeUIInfo search_menu[] =
 	{
-	    GNOMEUIINFO_MENU_FIND_ITEM(gtk_edit_search, edit),
-	    GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(gtk_edit_search_again, edit),
-	    GNOMEUIINFO_MENU_REPLACE_ITEM(gtk_edit_replace, edit),
+	    GNOMEUIINFO_MENU_FIND_ITEM(gtk_edit_search, NULL),
+	    GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(gtk_edit_search_again, NULL),
+	    GNOMEUIINFO_MENU_REPLACE_ITEM(gtk_edit_replace, NULL),
 	    GNOMEUIINFO_END
 	};
 
-	GnomeUIInfo help_menu[] =
+	static GnomeUIInfo help_menu[] =
 	{
 	    GNOMEUIINFO_MENU_ABOUT_ITEM(about_cb, NULL),
 #if 0
@@ -1343,7 +1343,7 @@ int edit (const char *file, int line)
 	statusbar = gtk_entry_new ();
 	gtk_entry_set_editable (GTK_ENTRY (statusbar), 0);
 	gtk_widget_set_usize (app, 400, 400);
-	gnome_app_create_menus (GNOME_APP (app), main_menu);
+	gnome_app_create_menus_with_data (GNOME_APP (app), main_menu, edit);
 	gnome_app_set_contents (GNOME_APP (app), edit);
 	gnome_app_set_statusbar (GNOME_APP (app), GTK_WIDGET (statusbar));
 	GTK_EDIT (edit)->menubar = GNOME_APP (app)->menubar;

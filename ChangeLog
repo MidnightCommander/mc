@@ -1,3 +1,8 @@
+1999-08-18  Elliot Lee <sopwith@redhat.com>
+
+	* gtkedit/gtkedit.c: Make it build with gcc 2.95, by fixing the non-constant
+	initializers in the GnomeUIInfo structure.
+
 1999-08-16  Federico Mena Quintero  <federico@redhat.com>
 
 	* configure.in (VERSION): Bumped version number to 4.5.38.
