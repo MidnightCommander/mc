@@ -625,10 +625,10 @@ int mc_fstat (int handle, struct stat *buf) {
 }
 
 /*
- * You must g_strdup whatever this function returns, static buffers are in use
+ * You must g_strdup whatever this function returns.
  */
 
-static char *
+static const char *
 mc_return_cwd (void)
 {
     char *p;
@@ -640,11 +640,11 @@ mc_return_cwd (void)
 	    return current_dir;
 
 	/* Otherwise check if it is O.K. to use the current_dir */
-	mc_stat (p, &my_stat);
-	mc_stat (current_dir, &my_stat2);
-	if (my_stat.st_ino != my_stat2.st_ino ||
-	    my_stat.st_dev != my_stat2.st_dev ||
-	    !cd_symlinks){
+	if (!cd_symlinks ||
+	    mc_stat (p, &my_stat) || 
+	    mc_stat (current_dir, &my_stat2) ||
+	    my_stat.st_ino != my_stat2.st_ino ||
+	    my_stat.st_dev != my_stat2.st_dev){
 	    g_free (current_dir);
 	    current_dir = p;
 	    return p;
@@ -657,7 +657,7 @@ mc_return_cwd (void)
 char *
 mc_get_current_wd (char *buffer, int size)
 {
-    char *cwd = mc_return_cwd();
+    const char *cwd = mc_return_cwd();
 
     strncpy (buffer, cwd, size);
     return buffer;
