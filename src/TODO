@@ -35,6 +35,8 @@ Contact all translators to update translations.
 Before 4.6.1
 ============
 
+Backup config files when writing them.
+
 Totals are not calculated when operating on a single directory.
 
 Add support for mouse wheel with gpm.
