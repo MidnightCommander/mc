@@ -46,6 +46,7 @@
 #include "vfs-impl.h"
 #include "gc.h"		/* vfs_stamp_create */
 #include "tcputil.h"
+#include "../src/unixcompat.h"
 
 #define FISH_DIRECTORY_TIMEOUT 30 * 60
 
@@ -461,7 +462,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 	              if (sscanf(buffer+1, "%d,%d", &maj, &min) != 2)
 			  break;
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
-		      ST.st_rdev = (maj << 8) | min;
+		      ST.st_rdev = makedev (maj, min);
 #endif
 	          }
 	case 'L': ent->ino->linkname = g_strdup(buffer+1);

@@ -23,6 +23,7 @@
 #include "vfs-impl.h"
 #include "gc.h"		/* vfs_rmstamp */
 #include "xdirentry.h"
+#include "../src/unixcompat.h"
 
 enum {
     STATUS_START,
@@ -415,13 +416,13 @@ static int cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *super)
 	return STATUS_TRAIL;
     }
 
-    u.st.st_dev = (hd.c_dev << 8) + hd.c_devmin;
+    u.st.st_dev = makedev (hd.c_dev, hd.c_devmin);
     u.st.st_ino = hd.c_ino;
     u.st.st_mode = hd.c_mode;
     u.st.st_nlink = hd.c_nlink;
     u.st.st_uid = hd.c_uid;
     u.st.st_gid = hd.c_gid;
-    u.st.st_rdev = (hd.c_rdev << 8) + hd.c_rdevmin;
+    u.st.st_rdev = makedev (hd.c_rdev, hd.c_rdevmin);
     u.st.st_size = hd.c_filesize;
     u.st.st_atime = u.st.st_mtime = u.st.st_ctime = hd.c_mtime;
 

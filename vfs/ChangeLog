@@ -1,3 +1,10 @@
+2005-01-27  Roland Illig  <roland.illig@gmx.de>
+
+	* cpio.c (cpio_read_crc_head): Fixed device number handling for
+	non-Linux systems.
+	* fish.c (fish_dir_load): Likewise.
+	* utilvfs.c (vfs_parse_ls_lga): Likewise.
+
 2005-01-25  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* samba/Makefile.in: Remove BINDIR and SBINDIR.

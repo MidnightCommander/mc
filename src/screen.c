@@ -47,6 +47,7 @@
 #include "menu.h"		/* menubar_visible */
 #define WANT_WIDGETS
 #include "main.h"		/* the_menubar */
+#include "unixcompat.h"
 
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
 
@@ -190,6 +191,31 @@ string_file_name (file_entry *fe, int len)
     return buffer;
 }
 
+static inline int ilog10(dev_t n)
+{
+    int digits = 0;
+    do {
+	digits++, n /= 10;
+    } while (n != 0);
+    return digits;
+}
+
+static void format_device_number (char *buf, size_t bufsize, dev_t dev)
+{
+    dev_t major_dev = major(dev);
+    dev_t minor_dev = minor(dev);
+    int major_digits = ilog10(major_dev);
+    int minor_digits = ilog10(minor_dev);
+
+    g_assert(bufsize >= 1);
+    if (major_digits + 1 + minor_digits + 1 <= bufsize) {
+        g_snprintf(buf, bufsize, "%lu,%lu", (unsigned long) major_dev,
+                   (unsigned long) minor_dev);
+    } else {
+        g_strlcpy(buf, _("[dev]"), bufsize);
+    }
+}
+
 /* size */
 static const char *
 string_file_size (file_entry *fe, int len)
@@ -203,9 +229,7 @@ string_file_size (file_entry *fe, int len)
 
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
     if (S_ISBLK (fe->st.st_mode) || S_ISCHR (fe->st.st_mode))
-        g_snprintf (buffer, sizeof (buffer), "%3d,%3d",
-		    (int) ((fe->st.st_rdev >> 8) & 0xff),
-		    (int) (fe->st.st_rdev & 0xff));
+        format_device_number (buffer, len + 1, fe->st.st_rdev);
     else
 #endif
     {

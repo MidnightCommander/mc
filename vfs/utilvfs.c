@@ -22,6 +22,7 @@
 
 #include "utilvfs.h"
 #include "vfs.h"
+#include "../src/unixcompat.h"
 
 /* Extract the hostname and username from the path */
 /* path is in the form: [user@]hostname:port/remote-dir, e.g.:
@@ -763,7 +764,7 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename,
 		goto error;
 	}
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
-	s->st_rdev = ((maj & 0xff) << 8) | (min & 0xffff00ff);
+	s->st_rdev = makedev (maj, min);
 #endif
 	s->st_size = 0;
 

@@ -1,3 +1,14 @@
+2005-01-17  Roland Illig  <roland.illig@gmx.de>
+
+	* info.c (info_show_info): Enabled display of the device number,
+	for the case that the column in the directory listing is too
+	short. This had been disabled since 1994, for no obvious reason
+	and without any comment.
+	* screen.c (format_device_number): Added. Converts a device number
+	into a bounded string.
+	* screen.c (string_file_size): Support for larger device numbers
+	(and for non-Linux systems).
+
 2005-01-26  Roland Illig  <roland.illig@gmx.de>
 
 	* tty.h (printwstr): Added a function to print a string

@@ -34,6 +34,7 @@
 #include "layout.h"
 #include "key.h"		/* is_idle() */
 #include "mountlist.h"
+#include "unixcompat.h"
 
 #ifndef VERSION
 #   define VERSION "undefined"
@@ -149,13 +150,12 @@ info_show_info (struct WInfo *info)
 
     case 8:
 	widget_move (&info->widget, 8, 3);
-#if 0
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
-	if (st.st_rdev)
-	    printw ("Inode dev: major: %d, minor: %d",
-		    st.st_rdev >> 8, st.st_rdev & 0xff);
+	if (S_ISCHR (st.st_mode) || S_ISBLK(st.st_mode))
+	    printw ("Inode dev: major: %lu, minor: %lu",
+		    (unsigned long) major (st.st_rdev),
+		    (unsigned long) minor (st.st_rdev));
 	else
-#endif
 #endif
 	{
 	    char buffer[10];
