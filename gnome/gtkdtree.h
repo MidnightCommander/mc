@@ -20,6 +20,7 @@ typedef struct {
 	int          drag_motion_x;
 	int          drag_motion_y;
 	int          timer_id;
+	char         *drag_dir;
 	
 	GtkCTreeNode *root_node;	/* root node */
 	GtkCTreeNode *last_node;	/* last visited node */
@@ -40,7 +41,7 @@ typedef struct {
 } GtkDTreeClass;
 
 guint      gtk_dtree_get_type           (void);
-GtkWidget *gtk_dtree_new                ();
+GtkWidget *gtk_dtree_new                (void);
 void       gtk_dtree_select_parent      (GtkDTree *dtree,
 					 char *directory);
 void       gtk_dtree_select_child       (GtkDTree *dtree);
@@ -51,5 +52,6 @@ gboolean   gtk_dtree_select_dir         (GtkDTree *dtree,
 char      *gtk_dtree_get_row_path       (GtkDTree *ctree,
 					 GtkCTreeNode *row,
 					 gint column);
+void      gtk_dtree_construct           (GtkDTree *dtree);
 
 #endif

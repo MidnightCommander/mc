@@ -188,7 +188,7 @@ gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 	dtree->last_node = row;
 
 	gtk_clist_freeze (GTK_CLIST (ctree));
-	path = gtk_dtree_get_row_path (ctree, row, 0);
+	path = gtk_dtree_get_row_path (GTK_DTREE (ctree), row, 0);
 	
 	if (dtree->current_path)
 		g_free (dtree->current_path);

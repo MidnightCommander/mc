@@ -63,6 +63,7 @@ typedef struct {
 	GtkWidget *check;
 } GpropExec;
 
-GpropExec *gprop_exec_new (GnomeDesktopEntry *dentry);
+GpropExec *gprop_exec_new     (GnomeDesktopEntry *dentry);
+void      gprop_exec_get_data (GpropExec *ge, GnomeDesktopEntry *dentry);
 
 #endif

@@ -10,13 +10,13 @@
 #include "gblist.h"
 
 static void
-blist_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event)
+blist_select_row (GtkCList *clist, gint row, gint column, GdkEvent *event)
 {
 	/* nothing */
 }
 
 static void
-blist_unselect_row (GtkCList *clist, gint row, gint column, GdkEventButton *event)
+blist_unselect_row (GtkCList *clist, gint row, gint column, GdkEvent *event)
 {
 	/* nothing */
 }

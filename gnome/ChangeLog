@@ -1,3 +1,11 @@
+1998-12-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gblist.c (blist_select_row): Warning fixes.
+
+	* olddnd.c: Moved the old DND code here for reference purposes. 
+
+	* gscreen.c: Made the tree a drag source.
+
 1998-12-04  Jonathan Blandford  <jrb@redhat.com>
 
 	* gdialogs.c (trim_file_name): better update dialog

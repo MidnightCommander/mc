@@ -1,13 +1,11 @@
 #include <factory.idl>
 
-module GNOME {
-	interface FileManagerFactory : Factory {
-
-	};
+module FileManager {
+	interface Factory : GNOME::Factory {};
 
 	exception POSIX_ERROR {};
 
-	interface FileManager {
+	interface Window {
 		void chdir (in string dir)
 			raises (POSIX_ERROR);
 	};
