@@ -1,3 +1,13 @@
+1998-05-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gtrans.c (set_window_text): Made it use the new
+	GnomeIconTextInfo functions.
+
+1998-05-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gscreen.c (panel_create_icon_display): Set some good separator
+	characters for the file icon list.
+
 1998-05-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gprop.c (perm_owner_new): Forget about history for now.

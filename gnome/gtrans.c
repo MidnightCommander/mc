@@ -18,12 +18,6 @@ int want_transparent_icons = 1;
 int want_transparent_text = 0;
 
 
-/* Most of the word-wrapping code was yanked from the gtktooltips
- * module in Gtk+.  I have tweaked it a bit for MC's purposes
- * - Federico
- */
-
-
 static void
 set_window_text (GtkWidget *window, GdkImlibImage *im, char *text)
 {
@@ -31,12 +25,12 @@ set_window_text (GtkWidget *window, GdkImlibImage *im, char *text)
 	GdkPixmap *im_pixmap;
 	GdkBitmap *mask;
 	GdkBitmap *im_mask;
-	struct gnome_icon_text_info *ti;
+	GnomeIconTextInfo *ti;
 	GdkColor color;
 	GdkGC *p_gc, *m_gc;
 	int width, height;
 
-	ti = gnome_icon_layout_text (window->style->font, text, " /-_.", SNAP_X, FALSE);
+	ti = gnome_icon_layout_text (window->style->font, text, " /.-_", SNAP_X, FALSE);
 
 	width = MAX (ti->width, im->rgb_width);
 	height = im->rgb_height + SPACING + ti->height;
@@ -150,16 +144,14 @@ set_window_text (GtkWidget *window, GdkImlibImage *im, char *text)
 		gdk_gc_set_foreground (m_gc, &color);
 		gnome_icon_paint_text (ti, mask, m_gc,
 				       (width - ti->width) / 2,
-				       im->rgb_height + SPACING,
-				       ti->width);
+				       im->rgb_height + SPACING);
 	}
 	
 	gdk_color_white (gdk_imlib_get_colormap (), &color);
 	gdk_gc_set_foreground (p_gc, &color);
 	gnome_icon_paint_text (ti, pixmap, p_gc,
 			       (width - ti->width) / 2,
-			       im->rgb_height + SPACING,
-			       ti->width);
+			       im->rgb_height + SPACING);
 
 	/* Set contents of window */
 
