@@ -1,3 +1,19 @@
+Version 4.6.0-pre3.
+
+Another release candidate for 4.6.0.
+
+- Core functionality.
+	- ".." is no longer shown in the root directory.
+
+- Screen libraries.
+	- Fixed incorrect processing on AltGr introduced in -pre2.
+
+- Documentation.
+	- Fixed a bug in man2hlp that could randomly prevent correct
+	  generation of the help files.
+	- Added manual page for mcview.
+
+
 Version 4.6.0-pre2.
 
 Release candidate for 4.6.0.
