@@ -64,7 +64,7 @@ gprop_filename_new (char *complete_filename, char *filename)
 	gtk_container_add (GTK_CONTAINER (frame), vbox);
 	gtk_widget_show (vbox);
 
-	s = g_copy_strings (_("Full name: "), complete_filename, NULL);
+	s = g_strconcat (_("Full name: "), complete_filename, NULL);
 	gtk_box_pack_start (GTK_BOX (vbox), label_new (s, 0.0, 0.5), FALSE, FALSE, 0);
 	g_free (s);
 
