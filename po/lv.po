@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "POT-Creation-Date: 2001-10-07 20:11-0400\n"
-"PO-Revision-Date: 2001-10-10 19:40+0200\n"
+"PO-Revision-Date: 2001-11-01 17:43+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <hornet@navigators.lv>\n"
 "MIME-Version: 1.0\n"
@@ -71,7 +71,7 @@ msgstr " Kïûda "
 #: edit/edit.c:337
 #: edit/edit.c:368
 msgid " Failed trying to open file for reading: "
-msgstr " Nevar atvçrt datni lasîðanai: "
+msgstr " Nevar atvçrt failu lasîðanai: "
 
 # gtkedit/edit.c:320
 #: edit/edit.c:314
@@ -86,22 +86,22 @@ msgstr " Nevar atvçrt programkanâlu lasîðanai: "
 # gtkedit/edit.c:339
 #: edit/edit.c:333
 msgid " Error reading file: "
-msgstr " Kïûda lasot datni: "
+msgstr " Kïûda lasot failu: "
 
 # gtkedit/edit.c:388
 #: edit/edit.c:375
 msgid " Cannot get size/permissions info on file: "
-msgstr " Nevar dabût lielumu/atïauju informâciju datnei: "
+msgstr " Nevar dabût lielumu/atïauju informâciju failam: "
 
 # gtkedit/edit.c:395
 #: edit/edit.c:382
 msgid " Not an ordinary file: "
-msgstr " Neparasta datne: "
+msgstr " Neparasts fails: "
 
 # gtkedit/edit.c:401
 #: edit/edit.c:388
 msgid " File is too large: "
-msgstr " Datne ir par lielu: "
+msgstr " Fails ir par lielu: "
 
 # gtkedit/edit.c:402
 #: edit/edit.c:389
@@ -120,7 +120,7 @@ msgstr "Lietotâja izvçlne pieejama tikai mcedit, kurð palaists no mc"
 #: edit/edit.c:2675
 #: edit/editcmd.c:2282
 msgid "Error trying to stat file:"
-msgstr "Kïûda mçìinot sâknçt datni:"
+msgstr "Kïûda mçìinot sâknçt failu:"
 
 # gtkedit/gtkedit.c:67
 #: edit/edit.h:360
@@ -274,7 +274,7 @@ msgstr " Brîdinâjums "
 # gtkedit/editcmd.c:543
 #: edit/editcmd.c:433
 msgid " A file already exists with this name. "
-msgstr " Eksistç datne ar tâdu nosaukumu. "
+msgstr " Fails ar tâdu nosaukumu jau eksistç. "
 
 # gtkedit/editcmd.c:545
 #. Push buttons to over-write the current file, or cancel the operation
@@ -303,7 +303,7 @@ msgstr " Glabât kâ "
 #: edit/editcmd.c:452
 #: edit/editcmd.c:2114
 msgid " Error trying to save file. "
-msgstr " Kïûda mçìinot glabât datni. "
+msgstr " Kïûda mçìinot saglabât failu. "
 
 # gtkedit/editcmd.c:682 gtkedit/editcmd.c:690 gtkedit/editcmd.c:715
 #. This heads the delete macro error dialog box
@@ -317,7 +317,7 @@ msgstr " Dzçst makro "
 #. 'Open' = load temp file
 #: edit/editcmd.c:557
 msgid " Error trying to open temp file "
-msgstr " Kïûda mçìinot atvçrt temp datni "
+msgstr " Kïûda mçìinot atvçrt temp failu "
 
 # gtkedit/editcmd.c:692 gtkedit/editcmd.c:753 gtkedit/editcmd.c:821
 #. 'Open' = load temp file
@@ -325,12 +325,12 @@ msgstr " Kïûda mçìinot atvçrt temp datni "
 #: edit/editcmd.c:626
 #: edit/editcmd.c:683
 msgid " Error trying to open macro file "
-msgstr " Kïûda mçìinot atvçrt makro datni "
+msgstr " Kïûda mçìinot atvçrt makro failu "
 
 # gtkedit/editcmd.c:716
 #: edit/editcmd.c:589
 msgid " Error trying to overwrite macro file "
-msgstr " Kïûda mçìinot pârrakstît makro datni "
+msgstr " Kïûda mçìinot pârrakstît makro failu "
 
 # gtkedit/editcmd.c:732
 #. This heads the 'Macro' dialog box
@@ -364,13 +364,13 @@ msgstr " Ielâdçt makro "
 # gtkedit/editcmd.c:834 gtkedit/editcmd.c:836
 #: edit/editcmd.c:695
 msgid " Confirm save file? : "
-msgstr " Apstiprinât datnes glabâðanu? : "
+msgstr " Apstiprinât faila saglabâðanu? : "
 
 # gtkedit/editcmd.c:839
 #. Buttons to 'Confirm save file' query
 #: edit/editcmd.c:697
 msgid " Save file "
-msgstr " Glabât datni "
+msgstr " Saglabât failu "
 
 # gtkedit/editcmd.c:839 gtkedit/editwidget.c:1138 gtkedit/gtkedit.c:1249
 # src/view.c:2077
@@ -387,7 +387,7 @@ msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
 msgstr ""
-" Paðreizçjais teksts tika modificçts bez datnes saglabâðanas. \n"
+" Paðreizçjais teksts tika modificçts bez faila saglabâðanas. \n"
 " Ja turpinâsiet, izmaiòs tiks atsauktas. "
 
 # gtkedit/editcmd.c:865 gtkedit/editcmd.c:890 gtkedit/editcmd.c:1041
@@ -574,7 +574,7 @@ msgstr " Iziet "
 # gtkedit/editcmd.c:2392
 #: edit/editcmd.c:1942
 msgid " File was modified, Save with exit? "
-msgstr " Datne tika mainîta, saglabât izejot?"
+msgstr " Fails tika mainîts, saglabât izejot?"
 
 # gtkedit/editcmd.c:2392
 #: edit/editcmd.c:1942
@@ -627,7 +627,7 @@ msgstr " Kopçt uz starpliktuvi "
 #: edit/editcmd.c:2049
 #: edit/editcmd.c:2062
 msgid " Unable to save to file. "
-msgstr " Nevar saglabât datni. "
+msgstr " Nevar saglabât failu. "
 
 # gtkedit/editcmd.c:2650 gtkedit/editcmd.c:2716
 #: edit/editcmd.c:2062
@@ -656,17 +656,17 @@ msgstr " Saglabât Bloku "
 # gtkedit/editcmd.c:2798
 #: edit/editcmd.c:2126
 msgid " Insert File "
-msgstr " Ievietot Datni "
+msgstr " Ievietot Failu "
 
 # gtkedit/editcmd.c:2811
 #: edit/editcmd.c:2139
 msgid " Insert file "
-msgstr " Ievietot datni "
+msgstr " Ievietot failu "
 
 # gtkedit/editcmd.c:2811
 #: edit/editcmd.c:2139
 msgid " Error trying to insert file. "
-msgstr " Kïûda mçìinot ievietot datni. "
+msgstr " Kïûda mçìinot ievietot failu. "
 
 # gtkedit/editcmd.c:2832
 #: edit/editcmd.c:2156
@@ -795,7 +795,7 @@ msgstr ""
 #: edit/editmenu.c:120
 #: edit/editmenu.c:139
 msgid "&Open file..."
-msgstr "&Atvçrt datni..."
+msgstr "&Atvçrt failu..."
 
 # gtkedit/editmenu.c:129
 #: edit/editmenu.c:121
@@ -818,12 +818,12 @@ msgstr "saglabât &Kâ...   F12"
 #: edit/editmenu.c:126
 #: edit/editmenu.c:145
 msgid "&Insert file...   F15"
-msgstr "&Ievietot datni.. F15"
+msgstr "&Ievietot failu.. F15"
 
 # gtkedit/editmenu.c:135
 #: edit/editmenu.c:127
 msgid "copy to &File...  C-f"
-msgstr "kopçt uz &Datni.. C-f"
+msgstr "kopçt uz &Failu.. C-f"
 
 # gtkedit/editmenu.c:137 gtkedit/editmenu.c:156
 #: edit/editmenu.c:129
@@ -851,7 +851,7 @@ msgstr "&Jauns          C-x k"
 # gtkedit/editmenu.c:154
 #: edit/editmenu.c:146
 msgid "copy to &File...     "
-msgstr "kopçt uz &Datni...   "
+msgstr "kopçt uz &Failu...   "
 
 # gtkedit/editmenu.c:166 gtkedit/editmenu.c:183
 #: edit/editmenu.c:158
@@ -1042,7 +1042,7 @@ msgstr "&Izkârtojums..."
 #: src/chmod.c:151
 #: src/chown.c:128
 msgid " File "
-msgstr " Datne "
+msgstr " Fails "
 
 # gtkedit/editmenu.c:284 gtkedit/editmenu.c:293 gtkedit/editmenu.c:425
 #: edit/editmenu.c:276
@@ -1226,18 +1226,18 @@ msgstr "Iziet"
 #: edit/syntax.c:997
 #: edit/syntax.c:1004
 msgid " Load syntax file "
-msgstr " Ielâdçt sintakses datni "
+msgstr " Ielâdçt sintakses failu "
 
 # gtkedit/syntax.c:1518
 #: edit/syntax.c:997
 msgid " File access error "
-msgstr " Datnes pieejas kïûda "
+msgstr " Faila pieejas kïûda "
 
 # gtkedit/syntax.c:1524
 #: edit/syntax.c:1003
 #, c-format
 msgid " Error in file %s on line %d "
-msgstr " Kïûda datnes %s %d rindiòâ "
+msgstr " Kïûda faila %s %d rindiòâ "
 
 # src/achown.c:72 src/chmod.c:115 src/chown.c:80
 #: src/achown.c:72
@@ -1376,17 +1376,17 @@ msgstr " Saraksta reþîms "
 # src/boxes.c:68
 #: src/boxes.c:76
 msgid "&Full file list"
-msgstr "Pi&lns datòu saraksts"
+msgstr "Pi&lns failu saraksts"
 
 # src/boxes.c:69
 #: src/boxes.c:77
 msgid "&Brief file list"
-msgstr "&Îss datòu saraksts"
+msgstr "&Îss failu saraksts"
 
 # src/boxes.c:70
 #: src/boxes.c:78
 msgid "&Long file list"
-msgstr "&Garðs datòu saraksts"
+msgstr "&Garðs failu saraksts"
 
 # src/boxes.c:71
 #: src/boxes.c:79
@@ -1518,7 +1518,7 @@ msgstr "Taimauts atbrîvojot VFSas:"
 # src/boxes.c:674
 #: src/boxes.c:781
 msgid " Virtual File System Setting "
-msgstr " Virtuâlâs Datòu Sistçmas Uzstâdîjumi "
+msgstr " Virtuâlo Failsistçmas Uzstâdîjumi "
 
 # src/boxes.c:740
 #: src/boxes.c:840
@@ -1539,12 +1539,12 @@ msgstr "Simbolsaite"
 # gnome/gdialogs.c:1069 src/boxes.c:801
 #: src/boxes.c:890
 msgid "Symbolic link filename:"
-msgstr "Simbolsaites datnes nosaukums:"
+msgstr "Simbolsaites faila nosaukums:"
 
 # gnome/gdialogs.c:1055 src/boxes.c:803
 #: src/boxes.c:892
 msgid "Existing filename (filename symlink will point to):"
-msgstr "Eksistçjoðs datnes nosaukums (datnes nosaukums uz kuru simbolsaite norâdîs):"
+msgstr "Eksistçjoðs faila nosaukums (faila nosaukums, uz kuru simbolsaite norâdîs):"
 
 # src/boxes.c:833
 #: src/boxes.c:921
@@ -1606,7 +1606,7 @@ msgid ""
 "Warning: file %s not found\n"
 ""
 msgstr ""
-"Brîdinâjums: datne %s nav atrasta\n"
+"Brîdinâjums: fails %s nav atrasts\n"
 ""
 
 # src/file.c:1100
@@ -1814,7 +1814,7 @@ msgstr " CD "
 # src/cmd.c:248
 #: src/cmd.c:227
 msgid "Files tagged, want to cd?"
-msgstr "Datnes tagotas, gribat cd?"
+msgstr "Faili tagoti, gribat cd?"
 
 # src/cmd.c:254 src/cmd.c:715 src/cmd.c:734
 #: src/cmd.c:233
@@ -1826,12 +1826,12 @@ msgstr "Nevar nomainît direktoriju"
 # src/cmd.c:283
 #: src/cmd.c:262
 msgid " View file "
-msgstr " Skatît datni "
+msgstr " Skatît failu "
 
 # src/cmd.c:283
 #: src/cmd.c:262
 msgid " Filename:"
-msgstr " Datnes Nosaukums:"
+msgstr " Faila Nosaukums:"
 
 # src/cmd.c:300
 #: src/cmd.c:279
@@ -1861,7 +1861,7 @@ msgstr " Filtrs "
 # src/cmd.c:449
 #: src/cmd.c:428
 msgid " Set expression for filtering filenames"
-msgstr " Iestatît izteiksmi datòu nosaukumu filtrçðanai"
+msgstr " Iestatît izteiksmi failu nosaukumu filtrçðanai"
 
 # src/cmd.c:515
 #: src/cmd.c:495
@@ -1882,12 +1882,12 @@ msgstr " Neatlasît "
 # src/cmd.c:640
 #: src/cmd.c:620
 msgid "Extension file edit"
-msgstr "Paplaðinâjuma datnes rediìçðana"
+msgstr "Paplaðinâjuma faila rediìçðana"
 
 # src/cmd.c:641
 #: src/cmd.c:621
 msgid " Which extension file you want to edit? "
-msgstr " Kuru paplaðinâjuma datni jûs vçlaties rediìçt? "
+msgstr " Kuru paplaðinâjuma failu jûs vçlaties rediìçt? "
 
 # src/cmd.c:642
 #: src/cmd.c:622
@@ -1908,7 +1908,7 @@ msgstr " Izvçlòu rediìçðana "
 # src/cmd.c:668
 #: src/cmd.c:648
 msgid " Which menu file will you edit ? "
-msgstr " Kuru izvçlnes datni jûs rediìçsiet ? "
+msgstr " Kuru izvçlnes failu jûs rediìçsiet ? "
 
 # src/cmd.c:670
 #: src/cmd.c:650
@@ -2096,7 +2096,7 @@ msgstr " Kïûda kâmçr skatoties IP adresi "
 # src/cmd.c:1427
 #: src/cmd.c:1334
 msgid " Undelete files on an ext2 file system "
-msgstr " Atjaunot datnes uz ext2 datòu sistçmas "
+msgstr " Atjaunot failus uz ext2 failsistçmas "
 
 # src/cmd.c:1428
 #: src/cmd.c:1335
@@ -2105,7 +2105,7 @@ msgid ""
 "   files on: (F1 for details)"
 msgstr ""
 " Ievadi iekârtu (bez /dev/), no kuras\n"
-"   atjaunot datnes: (F1 detalizçtâk)"
+"   atjaunot failus: (F1 detalizçtâk)"
 
 # src/cmd.c:1478
 #: src/cmd.c:1385
@@ -2130,7 +2130,7 @@ msgstr ""
 # src/command.c:198
 #: src/command.c:198
 msgid " You can not execute commands on non-local filesystems"
-msgstr " Tu nevari palaist komandas uz ne-vietçjâm datòu sistçmâm"
+msgstr " Tu nevari palaist komandas uz ne-vietçjâm failsistçmâm"
 
 # src/dialog.c:56
 #: src/dialog.c:55
@@ -2226,7 +2226,7 @@ msgstr "&Grupa"
 #: src/dir.c:427
 #, c-format
 msgid "File '%s' exists but can not be stat-ed: %s"
-msgstr "Datne '%s' eksistç, bet  but statuss nevar tikt noteikts: %s"
+msgstr "Fails '%s' eksistç, bet statuss nevar tikt noteikts: %s"
 
 # src/dir.c:657
 #: src/dir.c:698
@@ -2241,7 +2241,7 @@ msgid ""
 " Cannot create temporary command file \n"
 " %s "
 msgstr ""
-" Nevar izveidot îslaicîgu komandas datni \n"
+" Nevar izveidot îslaicîgu komandas failu \n"
 " %s "
 
 # src/ext.c:165 src/user.c:578
@@ -2253,7 +2253,7 @@ msgstr " Parametrs "
 # src/ext.c:414
 #: src/ext.c:396
 msgid " file error"
-msgstr " datnes kïûda"
+msgstr " faila kïûda"
 
 # src/ext.c:415
 #: src/ext.c:397
@@ -2268,7 +2268,7 @@ msgid ""
 "failed. Please fetch a fresh new copy from the\n"
 "Midnight Commander package."
 msgstr ""
-"datne mc.ext ir mainîjusies,\n"
+"fails mc.ext ir mainîjies,\n"
 "sâkot ar 3.0 versiju. Izskatâs, ka instalâcija\n"
 "neizdevâs. Lûdzu sagâdâ jaunu kopiju no\n"
 "Midnight Commander pakotnes."
@@ -2276,7 +2276,7 @@ msgstr ""
 # src/ext.c:432
 #: src/ext.c:413
 msgid " file error "
-msgstr " datnes kïûda "
+msgstr " faila kïûda "
 
 # src/ext.c:433
 #: src/ext.c:414
@@ -2302,7 +2302,7 @@ msgid ""
 ""
 msgstr ""
 "mc.ext vai lietot to\n"
-"datni kâ piemçru tam, kâ to uzrakstît.\n"
+"failu kâ piemçru tam, kâ to uzrakstît.\n"
 ""
 
 # src/ext.c:437
@@ -2355,7 +2355,7 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" Nevar izveidot stabilas simbolsaites starp ne-vietçjâm datòu sistçmâm: \n"
+" Nevar izveidot stabilas simbolsaites starp ne-vietçjâm failsistçmâm: \n"
 "\n"
 " Opciju Stabilâs Simbolsaites tiks atslçgtas "
 
@@ -2386,14 +2386,14 @@ msgid ""
 " Cannot stat source file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar sâknçt avota datni \"%s\" \n"
+" Nevar sâknçt avota failu \"%s\" \n"
 " %s "
 
 # src/file.c:531
 #: src/file.c:521
 #, c-format
 msgid " `%s' and `%s' are the same file. "
-msgstr " `%s' un `%s' ir tâ pati datne. "
+msgstr " `%s' un `%s' ir tas pats fails. "
 
 # src/file.c:574
 #: src/file.c:564
@@ -2402,7 +2402,7 @@ msgid ""
 " Cannot create special file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar izveidot speciâlo datni \"%s\" \n"
+" Nevar izveidot speciâlo failu \"%s\" \n"
 " %s "
 
 # src/file.c:583 src/file.c:812
@@ -2413,7 +2413,7 @@ msgid ""
 " Cannot chown target file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar chown mçría datni \"%s\" \n"
+" Nevar chown mçría failu \"%s\" \n"
 " %s "
 
 # src/file.c:592 src/file.c:831
@@ -2424,7 +2424,7 @@ msgid ""
 " Cannot chmod target file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar chmod mçría datni \"%s\" \n"
+" Nevar chmod mçría failu \"%s\" \n"
 " %s "
 
 # src/file.c:609
@@ -2434,13 +2434,13 @@ msgid ""
 " Cannot open source file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar atvçrt avota datni \"%s\" \n"
+" Nevar atvçrt avota failu \"%s\" \n"
 " %s "
 
 # src/file.c:619
 #: src/file.c:609
 msgid " Reget failed, about to overwrite file "
-msgstr " Pârdabûðana neizdevâs, tûlît pârrakstîðu datni "
+msgstr " Pârdabûðana neizdevâs, tûlît pârrakstîðu failu "
 
 # src/file.c:625
 #: src/file.c:615
@@ -2449,7 +2449,7 @@ msgid ""
 " Cannot fstat source file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar fstat avota datni \"%s\" \n"
+" Nevar fstat avota failu \"%s\" \n"
 " %s "
 
 # src/file.c:651
@@ -2459,7 +2459,7 @@ msgid ""
 " Cannot create target file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar izveidot mçría datni \"%s\" \n"
+" Nevar izveidot mçría failu \"%s\" \n"
 " %s "
 
 # src/file.c:665
@@ -2469,7 +2469,7 @@ msgid ""
 " Cannot fstat target file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar fstat mçría datni \"%s\" \n"
+" Nevar fstat mçría failu \"%s\" \n"
 " %s "
 
 # src/file.c:696
@@ -2479,7 +2479,7 @@ msgid ""
 " Cannot read source file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar nolasît avota datni \"%s\" \n"
+" Nevar nolasît avota failu \"%s\" \n"
 " %s "
 
 # src/file.c:726
@@ -2489,7 +2489,7 @@ msgid ""
 " Cannot write target file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar ierakstît mçría datni \"%s\" \n"
+" Nevar ierakstît mçría failu \"%s\" \n"
 " %s "
 
 # src/file.c:745
@@ -2504,7 +2504,7 @@ msgid ""
 " Cannot close source file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar aizvçrt avota datni \"%s\" \n"
+" Nevar aizvçrt avota failu \"%s\" \n"
 " %s "
 
 # src/file.c:792
@@ -2514,13 +2514,13 @@ msgid ""
 " Cannot close target file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar aizvçrt mçría datni \"%s\" \n"
+" Nevar aizvçrt mçría failu \"%s\" \n"
 " %s "
 
 # src/file.c:802
 #: src/file.c:792
 msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Tika saòemta nepilna datne. Paturçt to?"
+msgstr "Tika saòemts nepilns fails. Paturçt to?"
 
 # src/file.c:803
 #: src/file.c:793
@@ -2592,14 +2592,14 @@ msgid ""
 " Cannot stat file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar sâknçt datni \"%s\" \n"
+" Nevar sâknçt failu \"%s\" \n"
 " %s "
 
 # src/file.c:1122
 #: src/file.c:1113
 #, c-format
 msgid " `%s' and `%s' are the same file "
-msgstr " `%s' un `%s' ir tâ pati datne "
+msgstr " `%s' un `%s' ir tas pats fails "
 
 # src/file.c:1129
 #: src/file.c:1120
@@ -2614,7 +2614,7 @@ msgid ""
 " Cannot move file \"%s\" to \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar pârvietot datni \"%s\" to \"%s\" \n"
+" Nevar pârvietot failu \"%s\" to \"%s\" \n"
 " %s "
 
 # src/file.c:1192
@@ -2624,7 +2624,7 @@ msgid ""
 " Cannot remove file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar izdzçst datni \"%s\" \n"
+" Nevar izdzçst failu \"%s\" \n"
 " %s "
 
 # src/file.c:1246
@@ -2643,7 +2643,7 @@ msgstr " Nevar pârrakstît direktoriju \"%s\" %s "
 #: src/file.c:1259
 #, c-format
 msgid " Cannot overwrite file \"%s\" %s "
-msgstr " Nevar pârrakstît datni \"%s\" %s "
+msgstr " Nevar pârrakstît failu \"%s\" %s "
 
 # src/file.c:1294
 #: src/file.c:1286
@@ -2662,7 +2662,7 @@ msgid ""
 " Cannot delete file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar izdzçst datni \"%s\" \n"
+" Nevar izdzçst failu \"%s\" \n"
 " %s "
 
 # src/file.c:1418 src/file.c:1488 src/file.c:1520
@@ -2738,12 +2738,12 @@ msgstr "%o %d %f%e"
 #: src/file.c:1698
 #: vfs/fish.c:518
 msgid "file"
-msgstr "datne"
+msgstr "fails"
 
 # src/file.c:1703
 #: src/file.c:1698
 msgid "files"
-msgstr "datnes"
+msgstr "failus"
 
 # src/file.c:1703
 #: src/file.c:1698
@@ -2758,7 +2758,7 @@ msgstr "direktoriji"
 # src/file.c:1704
 #: src/file.c:1699
 msgid "files/directories"
-msgstr "datnes/direktoriji"
+msgstr "faili/direktoriji"
 
 # src/file.c:1704
 #: src/file.c:1699
@@ -2797,7 +2797,7 @@ msgstr " Iekðçja neveiksme "
 #: src/file.c:2009
 #: src/file.c:2093
 msgid " Unknown file operation "
-msgstr " Nepazîstama datnes operâcija "
+msgstr " Nepazîstama faila operâcija "
 
 # src/file.c:2029
 #: src/file.c:2024
@@ -2893,7 +2893,7 @@ msgstr "jâ"
 # src/filegui.c:424
 #: src/filegui.c:397
 msgid "File"
-msgstr "Datne"
+msgstr "Fails"
 
 # src/filegui.c:447
 #: src/filegui.c:420
@@ -2924,7 +2924,7 @@ msgstr "Dzçðana"
 #: src/filegui.c:551
 #, c-format
 msgid "Target file \"%s\" already exists!"
-msgstr "Mçría datne \"%s\" jau eksistç!"
+msgstr "Mçría fails \"%s\" jau eksistç!"
 
 # src/filegui.c:593
 #: src/filegui.c:554
@@ -2971,12 +2971,12 @@ msgstr "Avota datums: %s, lielums %d"
 # src/filegui.c:692
 #: src/filegui.c:651
 msgid " File exists "
-msgstr " Datne eksistç "
+msgstr " Fails eksistç "
 
 # src/filegui.c:693
 #: src/filegui.c:652
 msgid " Background process: File exists "
-msgstr " Fona darbs: Datne eksistç "
+msgstr " Fona darbs: Fails eksistç "
 
 # src/filegui.c:805
 #. follow symlinks and preserve Attributes must be the first
@@ -3076,7 +3076,7 @@ msgstr "Sâknçt iekð:"
 # src/find.c:170
 #: src/find.c:150
 msgid "Filename:"
-msgstr "Datnes nosaukums"
+msgstr "Faila nosaukums:"
 
 # src/find.c:170
 #: src/find.c:150
@@ -3093,7 +3093,7 @@ msgstr "&Koks"
 # src/find.c:223
 #: src/find.c:205
 msgid "Find File"
-msgstr "Atrast Datni"
+msgstr "Atrast Failu"
 
 # src/find.c:452
 #: src/find.c:436
@@ -3122,7 +3122,7 @@ msgstr "Meklçju"
 # src/find.c:750 src/find.c:1031
 #: src/find.c:783
 msgid "Find file"
-msgstr "Atrast datni"
+msgstr "Atrast failu"
 
 # src/help.c:279
 #: src/help.c:275
@@ -3130,7 +3130,7 @@ msgid ""
 " Help file format error\n"
 ""
 msgstr ""
-" Palîdzîbas datnes formâta kïûda\n"
+" Palîdzîbas faila formâta kïûda\n"
 ""
 
 # src/help.c:318
@@ -3141,7 +3141,7 @@ msgstr " Iekðçja kïûda: Dubultsâknçjums saites apvidû "
 # src/help.c:572
 #: src/help.c:568
 msgid " Cannot find node [Contents] in help file "
-msgstr " Nevarçja atrast mezglpunktu [Saturs] palîdzîbas datnç "
+msgstr " Nevarçja atrast mezglpunktu [Saturs] palîdzîbas failâ "
 
 # src/help.c:741
 #: src/help.c:737
@@ -3156,14 +3156,14 @@ msgid ""
 " Cannot open file %s \n"
 " %s "
 msgstr ""
-" Nevar atvçrt datni %s \n"
+" Nevar atvçrt failu %s \n"
 " %s "
 
 # src/help.c:771
 #: src/help.c:779
 #, c-format
 msgid " Cannot find node %s in help file "
-msgstr " Nevarçja atrast mezglpunktu %s palîdzîbas datnç "
+msgstr " Nevarçja atrast mezglpunktu %s palîdzîbas failâ "
 
 # src/help.c:808
 #: src/help.c:813
@@ -3326,7 +3326,7 @@ msgstr "MC nevarçja ierakstît ~/"
 # src/hotlist.c:1404
 #: src/hotlist.c:1378
 msgid " file, your old hotlist entries were not deleted"
-msgstr " datne, tavi vecie karstâ saraksta ieraksti netika izdzçsti"
+msgstr " fails, tavi vecie karstâ saraksta ieraksti netika izdzçsti"
 
 # src/hotlist.c:1387 src/hotlist.c:1406 src/hotlist.c:1429 src/hotlist.c:1454
 #: src/hotlist.c:1380
@@ -3343,7 +3343,7 @@ msgstr "Tev ir ~/"
 # src/hotlist.c:1418
 #: src/hotlist.c:1392
 msgid " file and [Hotlist] section in ~/"
-msgstr " datnes un [Karstâ saraksta] sekcija iekð ~/"
+msgstr " fails un [Karstâ saraksta] sekcija iekð ~/"
 
 # src/hotlist.c:1419
 #: src/hotlist.c:1393
@@ -3414,7 +3414,7 @@ msgstr " Ieraksti no ~/"
 # src/hotlist.c:1452
 #: src/hotlist.c:1426
 msgid " file your old hotlist entries were not deleted"
-msgstr " datnç tavi vecie karstâ saraksta ieraksti netika izdzçsti"
+msgstr " failâ tavi vecie karstâ saraksta ieraksti netika izdzçsti"
 
 # src/info.c:83
 #: src/info.c:75
@@ -3427,7 +3427,7 @@ msgstr "Pusnakts Komandieris %s"
 #: src/info.c:100
 #, c-format
 msgid "File:       %s"
-msgstr "Datne:       %s"
+msgstr "Fails:       %s"
 
 # src/info.c:122
 #: src/info.c:112
@@ -3472,7 +3472,7 @@ msgstr "Iekârta:    %s"
 #: src/info.c:143
 #, c-format
 msgid "Filesystem: %s"
-msgstr "Datòu sistçma: %s"
+msgstr "Failsistçma: %s"
 
 # src/info.c:158
 #: src/info.c:148
@@ -3537,7 +3537,7 @@ msgstr "Vieta:  %Xh:%Xh"
 # src/info.c:212
 #: src/info.c:204
 msgid "File:       None"
-msgstr "Datne:       Nekas"
+msgstr "Fails:       Nekas"
 
 # src/layout.c:159
 #: src/layout.c:155
@@ -3592,7 +3592,7 @@ msgstr "a&tïaujas"
 # src/layout.c:178
 #: src/layout.c:174
 msgid "&File types"
-msgstr "&Datòu tipi"
+msgstr "&Failu tipi"
 
 # src/layout.c:372 src/learn.c:60 src/learn.c:179 src/option.c:145
 #: src/layout.c:367
@@ -3703,7 +3703,7 @@ msgid ""
 "All your keys work well."
 msgstr ""
 "Lieliski! Jums ir pilnîga terminâïa datubâze!\n"
-"Visi jûsu taustiòi strâdâ labi"
+"Visi jûsu taustiòi strâdâ labi."
 
 # src/learn.c:267
 #: src/learn.c:271
@@ -3842,7 +3842,7 @@ msgstr "Ska&tît               F3"
 # src/main.c:1299
 #: src/main.c:1174
 msgid "Vie&w file...         "
-msgstr "S&katît datni...         "
+msgstr "S&katît failu...         "
 
 # src/main.c:1300
 #: src/main.c:1175
@@ -3941,7 +3941,7 @@ msgstr "&Direktoriju koks"
 # src/main.c:1333
 #: src/main.c:1204
 msgid "&Find file            M-?"
-msgstr "&Meklçt datni            M-?"
+msgstr "&Meklçt failu            M-?"
 
 # src/main.c:1334
 #: src/main.c:1205
@@ -3996,7 +3996,7 @@ msgstr "&Fona darbi      C-x j"
 # src/main.c:1351
 #: src/main.c:1222
 msgid "&Undelete files (ext2fs only)"
-msgstr "&Atjaunot izdzçstâs datnes (ext2fs tikai)"
+msgstr "&Atjaunot izdzçstos failus (ext2fs tikai)"
 
 # src/main.c:1354
 #: src/main.c:1225
@@ -4006,12 +4006,12 @@ msgstr "&Saraksta formâta rediìçðana"
 # src/main.c:1359
 #: src/main.c:1230
 msgid "&Extension file edit"
-msgstr "&Paplaðinâjumu datnes rediìçðana"
+msgstr "&Paplaðinâjumu faila rediìçðana"
 
 # src/main.c:1360
 #: src/main.c:1231
 msgid "&Menu file edit"
-msgstr "&Izvçlnes datnes rediìçðana"
+msgstr "&Izvçlnes faila rediìçðana"
 
 # src/main.c:1361
 #: src/main.c:1233
@@ -4061,7 +4061,7 @@ msgstr " &Kreisais "
 # src/main.c:1398
 #: src/main.c:1262
 msgid " &File "
-msgstr " &Datne "
+msgstr " &Fails "
 
 # src/main.c:1399
 #: src/main.c:1263
@@ -4207,7 +4207,7 @@ msgid ""
 "-l, --ftplog file  Log ftpfs commands to the file.\n"
 ""
 msgstr ""
-"-l, --ftplog datne  Iegrâmato ftpfs komandas datnç.\n"
+"-l, --ftplog fails  Iegrâmato ftpfs komandas failâ.\n"
 ""
 
 # src/main.c:2504
@@ -4216,7 +4216,7 @@ msgid ""
 "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
 ""
 msgstr ""
-"-M, --memory file  [TIKAI-IZSTRÂDEI: Iegrâmatot MAD ziòojumus datnç.]\n"
+"-M, --memory fails  [TIKAI-IZSTRÂDEI: Iegrâmatot MAD ziòojumus failâ.]\n"
 ""
 
 # src/main.c:2506
@@ -4245,7 +4245,7 @@ msgid ""
 "-S, --createcmdile Create command file to set default directory upon exit.\n"
 ""
 msgstr ""
-"-S, --createcmdile Izveidot komandas datni, lai iestatîtu noklusçto direktoriju pirms izieðanas.\n"
+"-S, --createcmdile Izveidot komandas failu, lai iestatîtu noklusçto direktoriju pirms izieðanas.\n"
 ""
 
 # src/main.c:2515
@@ -4273,7 +4273,7 @@ msgstr ""
 "-v, --view fname   Sâknçt skatîtâja reþîmâ.\n"
 "-V, --version      Parâda versiju un konfigurâcijas opcijas.\n"
 "-x, --xterm        Aktivizç xterm peles atbalstu un ekrâna saglabâðanu/atjaunoðanu.\n"
-"+numurs            numurs ir sâkuma lînijas numurs datnei iekð `mcedit'.\n"
+"+numurs            numurs ir sâkuma lînijas numurs failâ iekð `mcedit'.\n"
 ""
 
 # src/main.c:2524
@@ -4294,7 +4294,7 @@ msgid ""
 ""
 msgstr ""
 "\n"
-"Lûdzu, sûtiet jebkâdus kïûdu paziòojumus (ieskaitot `mc -V' izvadi)\n"
+"Lûdzu sûtiet jebkâdus kïûdu paziòojumus (ieskaitot `mc -V' izvadi)\n"
 "uz mc-bugs@gnome.org\n"
 ""
 
@@ -4376,7 +4376,7 @@ msgstr "Nosaka krâsas konfigurâciju"
 # src/main.c:2698
 #: src/main.c:2474
 msgid "Edits one file"
-msgstr "Rediìç vienu datni"
+msgstr "Rediìç vienu failu"
 
 # src/main.c:2702
 #: src/main.c:2478
@@ -4391,7 +4391,7 @@ msgstr "Parâda palîdzîbas ekrânu par to, kâ nomainît krâsu shçmu"
 # src/main.c:2708
 #: src/main.c:2483
 msgid "Log ftp dialog to specified file"
-msgstr "Iegrâmatot ftp dialogu noteiktâ datnç"
+msgstr "Iegrâmatot ftp dialogu noteiktâ failâ"
 
 # src/main.c:2715
 #: src/main.c:2490
@@ -4451,7 +4451,7 @@ msgstr "Parâda paðreizçjo versiju"
 # src/main.c:2748
 #: src/main.c:2521
 msgid "Launches the file viewer on a file"
-msgstr "Palaiþ datnei datnes skatîtâju"
+msgstr "Palaiþ failam failu skatîtâju"
 
 # src/main.c:2750
 #: src/main.c:2523
@@ -4482,9 +4482,9 @@ msgid ""
 " files have been moved now\n"
 ""
 msgstr ""
-" Pusnakts Komandiera konfigurâcijas datnes \n"
+" Pusnakts Komandiera konfigurâcijas fails \n"
 " tagad tiek glabâtas ~/.mc direktorijâ,\n"
-" datnes tagad ir pârvietotas\n"
+" faili tagad ir pârvietoti\n"
 ""
 
 # src/option.c:74
@@ -4560,7 +4560,7 @@ msgstr "â&Tra direktoriju pârlâde"
 # src/option.c:92
 #: src/option.c:86
 msgid "mi&X all files"
-msgstr "&Miksçt visas datnes"
+msgstr "&Miksçt visus failus"
 
 # src/option.c:93
 #: src/option.c:87
@@ -4575,12 +4575,12 @@ msgstr "iezîmçtâ&Js iet lejup"
 # src/option.c:95
 #: src/option.c:89
 msgid "show &Hidden files"
-msgstr "parâdît a&Pslçptâs datnes"
+msgstr "parâdît a&Pslçptos failus"
 
 # src/option.c:96
 #: src/option.c:90
 msgid "show &Backup files"
-msgstr "parâdît &Dublçjumkopiju datnes"
+msgstr "parâdît &Dublçjumkopiju failus"
 
 # src/option.c:103
 #: src/option.c:97
@@ -4783,13 +4783,13 @@ msgstr "Grupa"
 #: src/screen.c:635
 #, c-format
 msgid "%s bytes in %d file"
-msgstr "%s baiti %d datnç"
+msgstr "%s baiti %d failâ"
 
 # gnome/gscreen.c:1663 src/screen.c:663
 #: src/screen.c:635
 #, c-format
 msgid "%s bytes in %d files"
-msgstr "%s baiti %d datnçs"
+msgstr "%s baiti %d failos"
 
 # gnome/gscreen.c:1689 src/screen.c:689
 #: src/screen.c:661
@@ -4930,7 +4930,7 @@ msgstr ""
 # src/textconf.c:20
 #: src/textconf.c:10
 msgid "Virtual File System: tarfs, extfs"
-msgstr "Virtuâlâ Datòu Sistçma: tarfs, extfs"
+msgstr "Virtuâlâ Failsistçma: tarfs, extfs"
 
 # src/textconf.c:22
 #: src/textconf.c:12
@@ -5084,7 +5084,7 @@ msgid ""
 "%s\n"
 ""
 msgstr ""
-"Nevarçja atvçrt datni %s, lai ierakstîtu:\n"
+"Nevarçja atvçrt failu %s, lai ierakstîtu:\n"
 "%s\n"
 ""
 
@@ -5154,14 +5154,14 @@ msgid ""
 "%s\n"
 ""
 msgstr ""
-"Nevar ierakstît datnç %s:\n"
+"Nevar ierakstît failâ %s:\n"
 "%s\n"
 ""
 
 # src/user.c:137
 #: src/user.c:136
 msgid " Format error on file Extensions File "
-msgstr " Formatçjuma kïûda Paplaðinâjumu Datnç"
+msgstr " Formatçjuma kïûda Paplaðinâjumu Failâ "
 
 # src/user.c:138
 #: src/user.c:137
@@ -5204,7 +5204,7 @@ msgstr " Nepatiess: "
 # src/user.c:647
 #: src/user.c:645
 msgid " Warning -- ignoring file "
-msgstr " Brîdinâjums -- ignorçju datni "
+msgstr " Brîdinâjums -- ignorçju failu "
 
 # src/user.c:648
 #: src/user.c:646
@@ -5213,7 +5213,7 @@ msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"Datnes %s îpaðnieks nav root vai jûs vai arî tai ir visi-rakstît atïauja.\n"
+"Faila %s îpaðnieks nav root vai jûs, vai arî tai ir visiem-rakstît atïauja.\n"
 "Tâ lietoðana var kompromitçt jûsu droðîbu"
 
 # src/user.c:672
@@ -5269,7 +5269,7 @@ msgid ""
 "\n"
 "    "
 msgstr ""
-"Datne: \n"
+"Fails: \n"
 "\n"
 "    "
 
@@ -5304,12 +5304,12 @@ msgstr " Tukðs izvads no bçrna filtra "
 # src/view.c:462
 #: src/view.c:454
 msgid " Could not open file "
-msgstr " Nevarçja atvçrt datni "
+msgstr " Nevarçja atvçrt failu "
 
 # src/view.c:477
 #: src/view.c:469
 msgid " Cannot open file \""
-msgstr " Nevarçja atvçrt datni \""
+msgstr " Nevarçja atvçrt failu \""
 
 # src/view.c:484
 #: src/view.c:476
@@ -5317,13 +5317,13 @@ msgid ""
 " Cannot stat file \n"
 " "
 msgstr ""
-" Nevar sâknçt datni \n"
+" Nevar sâknçt failu \n"
 " "
 
 # src/view.c:490
 #: src/view.c:482
 msgid " Cannot view: not a regular file "
-msgstr " Nevar skatît: nav regulâra datne "
+msgstr " Nevar skatît: nav regulârs fails "
 
 # src/view.c:571
 #: src/view.c:562
@@ -5349,7 +5349,7 @@ msgstr ""
 #: src/view.c:705
 #, c-format
 msgid "File: %s"
-msgstr "Datne %s"
+msgstr "Fails: %s"
 
 # src/view.c:730
 #: src/view.c:719
@@ -5810,7 +5810,7 @@ msgid ""
 "Unexpected end of file\n"
 "%s"
 msgstr ""
-"Negaidîtas datnes beigas\n"
+"Negaidîtas faila beigas\n"
 "%s"
 
 # vfs/direntry.c:301
@@ -5827,7 +5827,7 @@ msgstr "Sâkam lineâro pârraidi..."
 # vfs/direntry.c:957
 #: vfs/direntry.c:964
 msgid "Getting file"
-msgstr "Dabûjam datni"
+msgstr "Dabûjam failu"
 
 # vfs/extfs.c:270
 #: vfs/extfs.c:298
@@ -6106,7 +6106,7 @@ msgstr "ftpfs: neizdevâs; nav kur atkrist"
 #: vfs/ftpfs.c:1380
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
-msgstr "ftpfs: glabâjam datni %d (%d)"
+msgstr "ftpfs: glabâjam failu %d (%d)"
 
 # vfs/ftpfs.c:1771
 #: vfs/ftpfs.c:1812
@@ -6114,7 +6114,7 @@ msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
 msgstr ""
-"~/.netrc datnei nav pareizs reþîms.\n"
+"~/.netrc failam nav pareizs reþîms.\n"
 "Noòem paroli vai izlabo reþîmu."
 
 # vfs/mcfs.c:156 vfs/mcfs.c:178 vfs/mcfs.c:204
@@ -6248,13 +6248,13 @@ msgstr " %s izdzdir'oju %s "
 #: vfs/smbfs.c:1737
 #, c-format
 msgid " %s opening remote file %s "
-msgstr " %s attâlinâtâs datnes atvçrðana %s "
+msgstr " %s attâlinâtâs faila atvçrðana %s "
 
 # vfs/smbfs.c:1868 vfs/smbfs.c:1888 vfs/smbfs.c:1949
 #: vfs/smbfs.c:1805
 #, c-format
 msgid " %s removing remote file %s "
-msgstr " %s dzçðu attâlinâto datni %s "
+msgstr " %s dzçðu attâlinâto failu %s "
 
 # vfs/smbfs.c:1972
 #: vfs/smbfs.c:1843
@@ -6263,7 +6263,7 @@ msgid ""
 " %s renaming files\n"
 ""
 msgstr ""
-" %s datòu pârsaukðana\n"
+" %s failu pârsaukðana\n"
 ""
 
 # vfs/tar.c:84 vfs/tar.c:101
@@ -6280,7 +6280,7 @@ msgstr ""
 # vfs/tar.c:284
 #: vfs/tar.c:281
 msgid "Unexpected EOF on archive file"
-msgstr "Negaidîtas arhîva datnes beigas (EOF)"
+msgstr "Negaidîtas arhîva faila beigas (EOF)"
 
 # vfs/tar.c:336 vfs/tar.c:343
 #: vfs/tar.c:333
@@ -6331,7 +6331,7 @@ msgstr " sâknçjot inode skenâðanu %d "
 #: vfs/undelfs.c:204
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: lâdçju izdzçsto datòu informâciju %d inodes"
+msgstr "undelfs: lâdçju izdzçsto failu informâciju %d inodes"
 
 # vfs/undelfs.c:219
 #: vfs/undelfs.c:219
@@ -6359,7 +6359,7 @@ msgstr " Ext2lib kïûda "
 #: vfs/undelfs.c:297
 #, c-format
 msgid " Could not open file %s "
-msgstr " Nevar atvçrt datni %s "
+msgstr " Nevar atvçrt failu %s "
 
 # vfs/undelfs.c:300
 #: vfs/undelfs.c:300
@@ -6414,7 +6414,7 @@ msgstr " vfs_info nav fs! "
 #: vfs/undelfs.c:398
 #: vfs/undelfs.c:582
 msgid " You have to chdir to extract files first "
-msgstr " Tev papriekðu vajag chdir, lai atkompresçtu datnes "
+msgstr " Tev papriekðu vajag chdir, lai atkompresçtu failus "
 
 # vfs/undelfs.c:521
 #: vfs/undelfs.c:521
@@ -6425,12 +6425,12 @@ msgstr " kamçr atkârto blokus"
 #: vfs/undelfs.c:626
 #, c-format
 msgid " Could not open file: %s "
-msgstr " Nevar atvçrt datni: %s "
+msgstr " Nevar atvçrt failu: %s "
 
 # vfs/vfs.c:1139
 #: vfs/vfs.c:1179
 msgid "Changes to file lost"
-msgstr "Izmaiòas datnç pazuduðas"
+msgstr "Izmaiòas failâ pazuduðas"
 
 # vfs/vfs.c:1781
 #: vfs/vfs.c:1824
