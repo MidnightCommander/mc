@@ -40,7 +40,7 @@ src/command.c
 src/dialog.c
 src/dir.c
 src/ext.c
-src/features.c
+src/textconf.c
 src/file.c
 src/filegui.c
 src/find.c

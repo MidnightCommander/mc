@@ -1,3 +1,7 @@
+2000-09-14  Pavel Roskin  <proski@gnu.org>
+
+	* POTFILES.in: src/features.c renamed to src/textconf.c
+
 2000-09-09  Szabolcs BAN <shooby@gnome.hu>
 
 	* hu.po: Updated from Szabolcs Szasz <sz@szasz.hu>
