@@ -81,7 +81,7 @@ int startup_right_mode;
 int saving_setup;
 
 static const struct {
-    char *key;
+    const char *key;
     sortfn *sort_type;
 } sort_names [] = {
     { "name",      (sortfn *) sort_name },
@@ -96,7 +96,7 @@ static const struct {
 };
 
 static const struct {
-    char *key;
+    const char *key;
     int  list_type;
 } list_types [] = {
     { "full",  list_full  },
@@ -107,7 +107,7 @@ static const struct {
 };
 
 static const struct {
-    char *opt_name;
+    const char *opt_name;
     int  opt_type;
 } panel_types [] = {
     { "listing",   view_listing },
@@ -118,7 +118,7 @@ static const struct {
 };
 
 static const struct {
-    char *opt_name;
+    const char *opt_name;
     int *opt_addr;
 } layout [] = {
     { "equal_split", &equal_split },
@@ -136,7 +136,7 @@ static const struct {
 };
 
 static const struct {
-    char *opt_name;
+    const char *opt_name;
     int  *opt_addr;
 } options [] = {
     { "show_backups", &show_backups },
@@ -291,7 +291,7 @@ save_configure (void)
 }
 
 static void
-panel_save_type (char *section, int type)
+panel_save_type (const char *section, int type)
 {
     int i;
 
@@ -419,7 +419,7 @@ load_layout (char *profile_name)
 }
 
 static int
-load_mode (char *section)
+load_mode (const char *section)
 {
     char buffer [20];
     int  i;
@@ -440,7 +440,7 @@ load_mode (char *section)
 
 #ifdef USE_NETCODE
 static char *
-do_load_string (char *s, char *ss, char *def)
+do_load_string (const char *s, const char *ss, const char *def)
 {
     char *buffer = g_malloc (BUF_SMALL);
     char *p;
@@ -583,7 +583,7 @@ void done_setup (void)
 }
 
 static void
-load_keys_from_section (char *terminal, char *profile_name)
+load_keys_from_section (const char *terminal, const char *profile_name)
 {
     char *section_name;
     void *profile_keys;

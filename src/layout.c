@@ -895,7 +895,7 @@ void set_display_type (int num, int type)
 {
     int x, y, cols, lines;
     int    the_other;		/* Index to the other panel */
-    char   *file_name = 0;	/* For Quick view */
+    const char   *file_name = NULL;	/* For Quick view */
     Widget *new_widget, *old_widget;
     WPanel  *the_other_panel;
 

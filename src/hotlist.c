@@ -109,7 +109,7 @@ static struct {
 
 static struct _hotlist_but {
     int ret_cmd, flags, y, x;
-    char *text;
+    const char *text;
     int   type;
 } hotlist_but[] = {
     { B_MOVE, NORMAL_BUTTON,         1,   42, N_("&Move"),       LIST_HOTLIST},
@@ -163,7 +163,8 @@ hotlist_refresh (Dlg_head * dlg)
 static inline void
 update_path_name (void)
 {
-    char *text, *p;
+    const char *text;
+    char *p;
     WListbox *list = hotlist_state.moving ? l_movelist : l_hotlist;
     Dlg_head *dlg = list->widget.parent;
 
@@ -520,7 +521,7 @@ static int
 init_i18n_stuff(int list_type, int cols)
 {
 	register int i;
-	static char* cancel_but = N_("&Cancel");
+	static const char* cancel_but = N_("&Cancel");
 
 #ifdef ENABLE_NLS
 	static int hotlist_i18n_flag = 0;
@@ -594,7 +595,7 @@ static void
 init_hotlist (int list_type)
 {
     size_t i;
-    char *title, *help_node;
+    const char *title, *help_node;
     int hotlist_cols;
 
     hotlist_cols = init_i18n_stuff (list_type, COLS - 6);
@@ -819,7 +820,7 @@ static void add_widgets_i18n(QuickWidget* qw, int len)
 }
 #endif /* ENABLE_NLS */
 
-static int add_new_entry_input (char *header, char *text1, char *text2, char *help, char **r1, char **r2)
+static int add_new_entry_input (const char *header, const char *text1, const char *text2, const char *help, char **r1, char **r2)
 {
 #define RELATIVE_Y_BUTTONS	4
 #define RELATIVE_Y_LABEL_PTH	3
@@ -1346,7 +1347,7 @@ hot_load_file (struct hotlist * grp)
 }
 
 static void
-clean_up_hotlist_groups (char *section)
+clean_up_hotlist_groups (const char *section)
 {
     char	*grp_section;
     void	*profile_keys;

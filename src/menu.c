@@ -106,7 +106,7 @@ static void menubar_paint_idx (WMenu *menubar, int idx, int color)
         widget_move (&menubar->widget, y, x + 1);
     	hline (slow_terminal ? ' ' : ACS_HLINE, menubar->max_entry_len);
     } else {
-	unsigned char *text;
+	const unsigned char *text;
 
 	addch((unsigned char)menu->entries [idx].first_letter);
 	for (text = menu->entries [idx].text; *text; text++)

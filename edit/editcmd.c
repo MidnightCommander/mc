@@ -237,7 +237,8 @@ edit_save_file (WEdit *edit, const char *filename)
     }
 
     if (this_save_mode != EDIT_QUICK_SAVE) {
-	char *savedir, *slashpos, *saveprefix;
+	char *savedir, *saveprefix;
+	const char *slashpos;
 	slashpos = strrchr (filename, PATH_SEP);
 	if (slashpos) {
 	    savedir = g_strdup (filename);

@@ -579,7 +579,7 @@ static int tree_forget_cmd (WTree *tree)
     return 1;
 }
 
-static void tree_copy (WTree *tree, char *default_dest)
+static void tree_copy (WTree *tree, const char *default_dest)
 {
     char   *dest;
     off_t  count = 0;
@@ -619,7 +619,7 @@ static int tree_copy_cmd (WTree *tree)
     return 1;
 }
 
-static void tree_move (WTree *tree, char *default_dest)
+static void tree_move (WTree *tree, const char *default_dest)
 {
     char   *dest;
     struct stat buf;

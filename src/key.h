@@ -69,8 +69,8 @@ int get_key_code (int nodelay);
 
 typedef const struct {
     int code;
-    char *name;
-    char *longname;
+    const char *name;
+    const char *longname;
 } key_code_name_t;
 
 extern key_code_name_t key_name_conv_tab [];

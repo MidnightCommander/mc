@@ -53,7 +53,7 @@
 
 static struct {
     int ret_cmd, flags, y, x;
-    char *text;
+    const char *text;
 } learn_but[BUTTONS] = {
     { B_CANCEL, NORMAL_BUTTON, 0, 39, N_("&Cancel") },
     { B_ENTER, DEFPUSH_BUTTON, 0, 25, N_("&Save") }
@@ -70,7 +70,7 @@ static learnkey *learnkeys = NULL;
 static int learn_total;
 static int learnok;
 static int learnchanged;
-static char* learn_title = N_("Learn keys");
+static const char* learn_title = N_("Learn keys");
 
 
 static int learn_button (int action)

@@ -85,7 +85,7 @@ typedef void (*poptCallbackType)(poptContext con,
 			         const struct poptOption * opt,
 				 const char * arg, void * data);
 
-poptContext poptGetContext(char * name, int argc, char ** argv, 
+poptContext poptGetContext(const char * name, int argc, char ** argv, 
 			   const struct poptOption * options, int flags);
 void poptResetContext(poptContext con);
 
@@ -102,7 +102,7 @@ char * poptBadOption(poptContext con, int flags);
 void poptFreeContext(poptContext con);
 int poptStuffArgs(poptContext con, char ** argv);
 int poptAddAlias(poptContext con, struct poptAlias alias, int flags);
-int poptReadConfigFile(poptContext con, char * fn);
+int poptReadConfigFile(poptContext con, const char * fn);
 /* like above, but reads /etc/popt and $HOME/.popt along with environment 
    vars */
 int poptReadDefaultConfig(poptContext con, int useEnv);

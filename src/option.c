@@ -47,7 +47,7 @@ static Dlg_head *conf_dlg;
 static int first_width, second_width;
 
 static struct {
-    char   *text;
+    const char   *text;
     int    *variable;
     void   (*toggle_function)(void);
     WCheck *widget;

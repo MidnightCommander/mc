@@ -22,8 +22,8 @@
 struct my_statfs {
     int type;
     char *typename;
-    char *mpoint;
-    char *device;
+    const char *mpoint;
+    const char *device;
     int avail;
     int total;
     int nfree;

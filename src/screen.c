@@ -79,8 +79,8 @@ typedef struct format_e {
     int    just_mode;
     int    expand;
     const char *(*string_fn)(file_entry *, int len);
-    char   *title;
-    char   *id;
+    const char   *title;
+    const char   *id;
 } format_e;
 
 /* If true, show the mini-info on the panel */
@@ -107,8 +107,8 @@ Hook *select_file_hook = 0;
 static cb_ret_t panel_callback (WPanel *p, widget_msg_t msg, int parm);
 static int panel_event (Gpm_Event *event, WPanel *panel);
 static void paint_frame (WPanel *panel);
-static char *panel_format (WPanel *panel);
-static char *mini_status_format (WPanel *panel);
+static const char *panel_format (WPanel *panel);
+static const char *mini_status_format (WPanel *panel);
 
 /* This macro extracts the number of available lines in a panel */
 #define llines(p) (p->widget.lines-3 - (show_mini_info ? 2 : 0))
@@ -393,11 +393,11 @@ string_dot (file_entry *fe, int len)
 #define GT 1
 
 static struct {
-    char *id;
+    const char *id;
     int  min_size;
     int  expands;
     int  default_just;
-    char *title;
+    const char *title;
     int  use_in_gui;
     const char *(*string_fn)(file_entry *, int);
     sortfn *sort_routine;
@@ -644,7 +644,7 @@ display_mini_info (WPanel *panel)
     /* Status displays total marked size */
     if (panel->marked){
 	char buffer [BUF_SMALL];
-	char *p = "  %-*s";
+	const char *p = "  %-*s";
 	int  cols = panel->widget.cols-2;
 
 	attrset (MARKED_COLOR);
@@ -1060,7 +1060,7 @@ paint_frame (WPanel *panel)
     int  spaces, extra;
     int  side, width;
 
-    char *txt;
+    const char *txt;
     if (!panel->split)
 	adjust_top_file (panel);
 
@@ -1108,8 +1108,8 @@ paint_frame (WPanel *panel)
     }
 }
 
-static char *
-parse_panel_size (WPanel *panel, char *format, int isstatus)
+static const char *
+parse_panel_size (WPanel *panel, const char *format, int isstatus)
 {
     int frame = frame_half;
     format = skip_separators (format);
@@ -1158,7 +1158,7 @@ parse_panel_size (WPanel *panel, char *format, int isstatus)
 */
 
 static format_e *
-parse_display_format (WPanel *panel, char *format, char **error, int isstatus, int *res_total_cols)
+parse_display_format (WPanel *panel, const char *format, char **error, int isstatus, int *res_total_cols)
 {
     format_e *darr, *old = 0, *home = 0; /* The formats we return */
     int  total_cols = 0;		/* Used columns by the format */
@@ -1275,14 +1275,13 @@ parse_display_format (WPanel *panel, char *format, char **error, int isstatus, i
 	    break;
 	}
 	if (!found){
-	    char old_char;
+	    char *tmp_format = g_strdup (format);
 
 	    int pos = min (8, strlen (format));
 	    delete_format (home);
-	    old_char = format [pos];
-	    format [pos] = 0;
-	    *error = g_strconcat (_("Unknown tag on display format: "), format, NULL);
-	    format [pos] = old_char;
+	    tmp_format [pos] = 0;
+	    *error = g_strconcat (_("Unknown tag on display format: "), tmp_format, NULL);
+	    g_free (tmp_format);
 	    return 0;
 	}
 	total_cols += darr->requested_field_len;
@@ -1293,13 +1292,13 @@ parse_display_format (WPanel *panel, char *format, char **error, int isstatus, i
 }
 
 static format_e *
-use_display_format (WPanel *panel, char *format, char **error, int isstatus)
+use_display_format (WPanel *panel, const char *format, char **error, int isstatus)
 {
 #define MAX_EXPAND 4
     int  expand_top = 0;               /* Max used element in expand */
     int  usable_columns;               /* Usable columns in the panel */
     int  total_cols;
-    char *expand_list [MAX_EXPAND];    /* Expand at most 4 fields. */
+    const char *expand_list [MAX_EXPAND];    /* Expand at most 4 fields. */
     int  i;
     format_e *darr, *home;
 
@@ -1421,7 +1420,7 @@ set_panel_formats (WPanel *p)
 }
 
 /* Given the panel->view_type returns the format string to be parsed */
-static char *
+static const char *
 panel_format (WPanel *panel)
 {
     switch (panel->list_type){
@@ -1441,7 +1440,7 @@ panel_format (WPanel *panel)
     }
 }
 
-static char *
+static const char *
 mini_status_format (WPanel *panel)
 {
     if (panel->user_mini_status)

@@ -438,7 +438,7 @@ attrset (int color)
  */
 static const struct {
     int  key_code;
-    char *key_name;
+    const char *key_name;
 } key_table [] = {
     { KEY_F(0),  "k0" },
     { KEY_F(1),  "k1" },
@@ -476,7 +476,7 @@ static const struct {
 };
 	
 static void
-do_define_key (int code, char *strcap)
+do_define_key (int code, const char *strcap)
 {
     char    *seq;
 

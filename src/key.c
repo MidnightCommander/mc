@@ -202,7 +202,7 @@ void channels_up (void)
 
 typedef const struct {
     int code;
-    char *seq;
+    const char *seq;
     int action;
 } key_define_t;
 
@@ -500,7 +500,7 @@ xmouse_get_event (Gpm_Event *ev)
     ev->y = getch () - 32;
 }
 
-static key_def *create_sequence (char *seq, int code, int action)
+static key_def *create_sequence (const char *seq, int code, int action)
 {
     key_def *base, *p, *attach;
 

@@ -31,7 +31,7 @@
 #include "key.h"		/* define sequence */
 
 int mouse_enabled = 0;
-char *xmouse_seq;
+const char *xmouse_seq;
 
 #ifdef HAVE_LIBGPM
 void show_mouse_pointer (int x, int y)

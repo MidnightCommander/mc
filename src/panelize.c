@@ -61,7 +61,7 @@ static WInput *pname;
 
 static struct {
     int ret_cmd, flags, y, x;
-    char *text;
+    const char *text;
 } panelize_but [BUTTONS] = {
     { B_CANCEL, NORMAL_BUTTON, 0, 53, N_("&Cancel")   },
     { B_ADD, NORMAL_BUTTON,    0, 28, N_("&Add new")  },
@@ -69,7 +69,7 @@ static struct {
     { B_ENTER, DEFPUSH_BUTTON, 0,  0, N_("Pane&lize") },
 };
 
-static char *panelize_section = "Panelize";
+static const char *panelize_section = "Panelize";
 static void do_external_panelize (char *command);
 
 /* Directory panelize */

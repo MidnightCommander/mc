@@ -66,7 +66,7 @@ static void configLine(poptContext con, unsigned char * line) {
     }
 }
 
-int poptReadConfigFile(poptContext con, char * fn) {
+int poptReadConfigFile(poptContext con, const char * fn) {
     char * file, * chptr, * end;
     char * buf, * dst;
     int fd, rc;

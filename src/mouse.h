@@ -65,7 +65,7 @@ extern Mouse_Type use_mouse_p;
 extern int mouse_enabled;
 
 /* String indicating that a mouse event has occured, usually "\E[M" */
-extern char *xmouse_seq;
+extern const char *xmouse_seq;
 
 void init_mouse (void);
 void enable_mouse (void);
