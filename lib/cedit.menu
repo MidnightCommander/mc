@@ -35,16 +35,18 @@ shell_patterns=0    # expression type
 + y Perl\ Program | f \.pl$
 1       Author description header
         unset LANG
-        AUTHOR="$(cat /etc/passwd |grep ^$(id -un) |awk -F: '{print($5)}')"
+	unset LANGUAGE
+	LC_ALL=
+	AUTHOR="`awk -F: /^\`id -un\`:/'{print($5)}' /etc/passwd`"
         cat >>%b <<EOF
         #----------------------------------------------------------------------
         # Description:
-        # Author: $AUTHOR <$(echo -ne $REPLYTO)>
-        # Created at: $(date)
-        # Computer: $(uname -n) 
-        # System: $(uname -sr) on $(uname -m)
+        # Author: $AUTHOR <$REPLYTO>
+        # Created at: `date`
+        # Computer: `uname -n` 
+        # System: `uname -sr` on `uname -m`
         #    
-        # Copyright (c) $(date +%%Y) $AUTHOR  All rights reserved.
+        # Copyright (c) `date +%%Y` $AUTHOR  All rights reserved.
         #
         #----------------------------------------------------------------------
         # Configure section:
@@ -124,16 +126,18 @@ a       sub ()
 + y Shell\ Script | f \.sh$
 1       Author description header
         unset LANG
-        AUTHOR="$(cat /etc/passwd |grep ^$(id -un) |awk -F: '{print($5)}')"
+	unset LANGUAGE
+	LC_ALL=
+	AUTHOR="`awk -F: /^\`id -un\`:/'{print($5)}' /etc/passwd`"
         cat >>%b <<EOF
         #----------------------------------------------------------------------
         # Description:
-        # Author: $AUTHOR <$(echo -ne $REPLYTO)>
-        # Created at: $(date)
-        # Computer: $(uname -n) 
-        # System: $(uname -sr) on $(uname -m)
+        # Author: $AUTHOR <$REPLYTO>
+        # Created at: `date`
+        # Computer: `uname -n`
+        # System: `uname -sr` on `uname -m`
         #    
-        # Copyright (c) $(date +%%Y) $AUTHOR  All rights reserved.
+        # Copyright (c) `date +%%Y` $AUTHOR  All rights reserved.
         #
         #----------------------------------------------------------------------
         # Configure section:
@@ -214,16 +218,18 @@ a       sub ()
 + f \.h$ | f \.c$ | f \.cc$
 1       Author description header
         unset LANG
-        AUTHOR="$(cat /etc/passwd |grep ^$(id -un) |awk -F: '{print($5)}')"
+	unset LANGUAGE
+	LC_ALL=
+	AUTHOR="`awk -F: /^\`id -un\`:/'{print($5)}' /etc/passwd`"
         cat >> %b <<EOF
         /********************************************************************
         * Description:
-        * Author: $AUTHOR <$(echo -ne $REPLYTO)>
-        * Created at: $(date)
-        * Computer: $(uname -n) 
-        * System: $(uname -sr) on $(uname -m)
+        * Author: $AUTHOR <$REPLYTO>
+        * Created at: `date`
+        * Computer: `uname -n` 
+        * System: `uname -sr` on `uname -m`
         *    
-        * Copyright (c) $(date +%%Y) $AUTHOR  All rights reserved.
+        * Copyright (c) `date +%%Y` $AUTHOR  All rights reserved.
         *
         ********************************************************************/
         EOF
@@ -403,26 +409,28 @@ t       Indent `C' formatter
 
 #------------------------- Begin unknown template -----------------------------
 + y unknown & t r
-s       #!/bin/sh
-        echo "#!/bin/sh" >%b
+s       #! /bin/sh
+        echo "#! /bin/sh" >%b
 
 + y unknown & t r
-p       #!/usr/bin/perl
-        echo "#!/usr/bin/perl" >%b
+p       #! /usr/bin/perl
+        echo "#! /usr/bin/perl" >%b
 
 + y unknown & t r
 a       Author description header
         unset LANG
-        AUTHOR="$(cat /etc/passwd |grep ^$(id -un) |awk -F: '{print($5)}')"
+	unset LANGUAGE
+	LC_ALL=
+	AUTHOR="`awk -F: /^\`id -un\`:/'{print($5)}' /etc/passwd`"
         cat >>%b <<EOF
         ----------------------------------------------------------------------
         Description:
-        Author: $AUTHOR <$(echo -ne $REPLYTO)>
-        Created at: $(date)
-        Computer: $(uname -n) 
-        System: $(uname -sr) on $(uname -m)
+        Author: $AUTHOR <$REPLYTO>
+        Created at: `date`
+        Computer: `uname -n` 
+        System: `uname -sr` on `uname -m`
         
-        Copyright (c) $(date +%%Y) $AUTHOR  All rights reserved.
+        Copyright (c) `date +%%Y` $AUTHOR  All rights reserved.
         ----------------------------------------------------------------------
                 
         EOF
@@ -432,9 +440,9 @@ a       Author description header
 
 #----------------------- Begin common section ---------------------------------
 I       Insert `Changelog' string
-        DATE=$(date +%%Y-%%m-%%d)
-        AUTHOR="$(cat /etc/passwd |grep ^$(id -un) |awk -F: '{print($5)}')"
-        EMAIL="<$(echo -ne $REPLYTO)>"
+        DATE="`date +%%Y-%%m-%%d`"
+	AUTHOR="`awk -F: /^\`id -un\`:/'{print($5)}' /etc/passwd`"
+        EMAIL="<$REPLYTO>"
         echo "$DATE  $AUTHOR  $EMAIL" >%b
 
 s       Invoke `shell'
