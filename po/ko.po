@@ -3,9 +3,9 @@
 # Sung-Hyun Nam <namsh@lgic.co.kr>, 1998, 1999
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.5.33\n"
+"Project-Id-Version: mc 4.5.37\n"
 "POT-Creation-Date: 1999-08-08 16:44+0900\n"
-"PO-Revision-Date: 1999-08-08 07:52:11+0900\n"
+"PO-Revision-Date: 1999-08-08 08:23:18+0900\n"
 "Last-Translator: Sung-Hyun Nam <namsh@lgic.co.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
