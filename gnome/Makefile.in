@@ -67,7 +67,9 @@ ICONS = 				\
 #
 # These objects from ../src do not depend on HAVE_X / HAVE_GNOME??
 #
-LOBJS =  mad.o
+LOBJS = mad.o
+# popt.o poptconfig.o \
+#	popthelp.o poptparse.o findme.o
 
 #
 # These objects from ../src do depend on HAVE_GNOME
@@ -78,8 +80,7 @@ OOBJS = main.o dlg.o screen.o widget.o wtools.o info.o boxes.o \
 	win.o color.o profile.o user.o ext.o setup.o tree.o \
 	subshell.o terms.o achown.o fsusage.o mountlist.o \
 	@XCURSES@ @REGEX_O@ complete.o command.o \
-	option.o cmd.o utilunix.o xslint.o popt.o poptconfig.o \
-	popthelp.o poptparse.o findme.o
+	option.o cmd.o utilunix.o xslint.o
 
 OBJS = $(LOBJS) $(OOBJS) \
 	gdesktop-icon.o	\

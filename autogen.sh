@@ -13,4 +13,4 @@ autoheader
 autoconf
 )
 
-$srcdir/configure $*
+$srcdir/configure --enable-maintainer-mode $*

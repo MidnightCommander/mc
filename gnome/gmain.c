@@ -442,8 +442,7 @@ dialog_panel_callback (struct Dlg_head *h, int id, int msg)
 	return 0;
 }
 
-extern GList *directory_list;
-extern GList *geometry_list;
+extern char *cmdline_geometry;
 
 typedef struct {
 	char *dir; char *geometry;
@@ -516,28 +515,26 @@ create_panels (void)
 	
 	desktop_dlg = create_dlg (0, 0, 24, 80, 0, dialog_panel_callback, "[panel]", "midnight", DLG_NO_TED);
 
+#if 0
 	if (directory_list){
-		g   = geometry_list;
+
 		for (p = directory_list; p; p = p->next){
-			if (g){
-				geo = g->data;
-				g = g->next;
-			} else
-				geo = NULL;
-			create_one_panel (p->data, geo);
+			create_one_panel (p->data, cmdline_geometry);
 		}
 		panel = NULL;
-	} else {
-		char *geometry = geometry_list ? geometry_list->data : NULL;
-		panel = create_one_panel (".", geometry);
+	} else
+#endif
+	  {
+		panel = create_one_panel (".", cmdline_geometry);
 
 		if (nowindows){
 			gtk_idle_add (idle_destroy_window, panel);
 			panel->widget.options |= W_PANEL_HIDDEN;
 		}
 	}
+#if 0
 	g_list_free (directory_list);
-	g_list_free (geometry_list);
+#endif
 
 	run_dlg (desktop_dlg);
 

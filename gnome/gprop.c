@@ -140,7 +140,7 @@ gprop_exec_get_data (GpropExec *ge, GnomeDesktopEntry *dentry)
 	GtkEntry *entry;
 
 	entry = GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (ge->entry)));
-	gnome_string_array_free (dentry->exec);
+	g_strfreev (dentry->exec);
 	gnome_config_make_vector (gtk_entry_get_text (entry),
 				  &dentry->exec_length, &dentry->exec);
 	dentry->terminal = GTK_TOGGLE_BUTTON (ge->check)->active;

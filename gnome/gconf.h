@@ -27,7 +27,7 @@
 #define PORT_HAS_RADIO_FOCUS_ITEM        1
 #define PORT_HAS_DIALOG_STOP             1
 #define PORT_HAS_DISPLAY_MINI_INFO       1
-#define PORT_WANTS_ARGP                  1
+/* #define PORT_WANTS_ARGP                  0 */
 #define PORT_WIDGET_WANTS_HISTORY        0
 #define PORT_HAS_UPDATE_MARKS            1
 #define PORT_HAS_RADIO_TOGGLE            1
