@@ -249,6 +249,7 @@ int edit_printf (WEdit * e, const char *fmt, ...)
     __attribute__ ((format (printf, 2, 3)));
 int edit_print_string (WEdit * e, const char *s);
 void edit_move_to_line (WEdit * e, long line);
+void edit_move_to_column (WEdit * e, long column);
 void edit_move_display (WEdit * e, long line);
 void edit_word_wrap (WEdit * edit);
 unsigned char *edit_get_block (WEdit * edit, long start, long finish, int *l);
@@ -349,6 +350,7 @@ extern int option_return_does_auto_indent;
 extern int option_backspace_through_tabs;
 extern int option_fake_half_tabs;
 extern int option_save_mode;
+extern int option_save_position;
 extern int option_backup_ext_int;
 extern int option_max_undo;
 extern int option_syntax_highlighting;

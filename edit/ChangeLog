@@ -1,3 +1,8 @@
+2002-11-29  Pavel Roskin  <proski@gnu.org>
+
+	* edit.c: First part of the position saving code.
+	(edit_move_to_column): New function.
+
 2002-11-29  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* editoptions.c (edit_options_dialog): Use g_free() to release

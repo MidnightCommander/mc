@@ -49,6 +49,7 @@ int option_return_does_auto_indent = 1;
 int option_backspace_through_tabs = 0;
 int option_fake_half_tabs = 1;
 int option_save_mode = 0;
+int option_save_position = 1;
 int option_backup_ext_int = -1;
 int option_max_undo = 32768;
 
@@ -1506,6 +1507,19 @@ void edit_move_to_line (WEdit * e, long line)
 	edit_move_up (e, e->curs_line - line, 0);
     else
 	edit_move_down (e, line - e->curs_line, 0);
+    edit_scroll_screen_over_cursor (e);
+}
+
+/* move cursor to column 'column' */
+void
+edit_move_to_column (WEdit *e, long column)
+{
+    long p;			/* new cursor position */
+
+    p = min (edit_bol (e, e->curs1) + column, edit_eol (e, e->curs1));
+    edit_cursor_move (e, p - e->curs1);
+    e->search_start = e->curs1;
+    e->prev_col = edit_get_col (e);
     edit_scroll_screen_over_cursor (e);
 }
 
