@@ -33,9 +33,9 @@ DECENTICONS = c.xpm h.xpm tiff.xpm
 
 all:
 
-install:
+installx:
 
-installx: @insticons@
+install: @insticons@
 
 install_icons:
 	for I in $(DECENTICONS); \
