@@ -1,5 +1,8 @@
 2002-07-14  Pavel Roskin  <proski@gnu.org>
 
+	* syntax.c (edit_load_syntax): Do nothing in black and white
+	mode.
+
 	* edit.h [!HAVE_SLANG]: Enable syntax highlighting.
 	* editdraw.c [!HAVE_SLANG]: Respect attributes for color pairs
 	by using MY_COLOR_PAIR macro.

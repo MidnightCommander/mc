@@ -365,8 +365,6 @@ static void translate_rule_to_color (WEdit * edit, struct syntax_rule rule, int 
     *color = k->color;
 }
 
-extern int use_colors;
-
 void edit_get_syntax_color (WEdit * edit, long byte_index, int *color)
 {
     if (edit->rules && byte_index < edit->last_byte && 
@@ -974,6 +972,9 @@ void edit_load_syntax (WEdit * edit, char **names, char *type)
     char *f;
 
     edit_free_syntax_rules (edit);
+
+    if (!use_colors)
+	return;
 
     if (!option_syntax_highlighting)
 	return;
