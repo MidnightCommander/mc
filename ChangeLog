@@ -1,5 +1,10 @@
 2002-08-14  Pavel Roskin  <proski@gnu.org>
 
+	* doc/mc.1.in: Consistently use "native" ftp syntax.
+	* doc/ru/mc.1.in: Likewise.
+	* doc/es/mc.1.in: Update from David Martin <dmartina@excite.com>
+	* doc/es/xnc.hlp: Likewise.
+
 	* lib/mc.hlp.hu: Move ...
 	* doc/hu/mc.hlp.hu: ... here.  Make all necessary adjustments.
 

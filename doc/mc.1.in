@@ -2670,9 +2670,9 @@ Examples:
 .fi
 .PP
 To connect to sites behind a firewall, you will need to use the prefix
-ftp://! (i.e., with a bang character after the double slash) to make
-the Midnight Commander use a proxy host for doing the ftp transfer.
-You can define the proxy host in the
+/#ftp:! (i.e. add a bang character before the hostname) to make the
+Midnight Commander use a proxy host for doing the ftp transfer. You can
+define the proxy host in the
 .\"LINK2"
 Virtual File System
 .\"Virtual FS"

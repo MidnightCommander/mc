@@ -432,6 +432,7 @@ library.  If this is what you want to do, use the GNU
 Library General Public License instead of this License.
 
 [QueryBox]
+Cuadros de diálogo
 
 En los cuadros de diálogo puede desplazarse con el teclado
 usando las flechas o las teclas de las letras resaltadas.
@@ -439,6 +440,7 @@ usando las flechas o las teclas de las letras resaltadas.
 También se pueden pulsar los botones con el ratón.
 
 [How to use help]
+Uso de la ayuda
 
 Se pueden utilizar las flechas o el ratón para navegar
 por el sistema de ayuda.
