@@ -219,7 +219,7 @@
 	* wtools.h (QuickWidget): Make text const.
 	* wtools.c (fg_input_dialog_help): Fix warning.
 
-
+2004-09-14  Leonard den Ottolander  <leonard * den ottolander nl>
 
 	* utilunix.c (tilde_expand): Fix extra slash in result from 
 	tilde_expand() for ~<user>/dir.
@@ -236,7 +236,7 @@
 
 	From Petr Hadraba <hadrabap@volny.cz>
 
-
+2004-09-10  Jakub Jelinek  <jakub@redhat.com>
 
 	* view.c (get_byte): Fix avoid dying if file is too large 
 	to fit into memory.
