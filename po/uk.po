@@ -1123,7 +1123,7 @@ msgstr "Використовувати типовий перегляд"
 #: gnome/gnome-file-property-dialog.c:513 gnome/gpopup2.c:205
 #: src/screen.c:2398 src/screen.c:2428 src/view.c:2079
 msgid "Edit"
-msgstr "Редагувати"
+msgstr "Виправити"
 
 #: gnome/gnome-file-property-dialog.c:523
 msgid "Use default Edit action"
@@ -1424,7 +1424,7 @@ msgstr "Заголовок"
 
 #: gnome/gprop.c:535
 msgid "Select icon"
-msgstr ""
+msgstr "Виберати п╕ктограму"
 
 #: gnome/gscreen.c:1415
 msgid "Reloads the current directory"
@@ -1593,7 +1593,7 @@ msgstr ""
 
 #: gnome/gview.c:341
 msgid "_Search"
-msgstr ""
+msgstr "_Шукати"
 
 #: gnome/gwidget.c:95
 msgid "ok"
@@ -4158,11 +4158,11 @@ msgstr ""
 
 #: src/find.c:130
 msgid "&Suspend"
-msgstr ""
+msgstr "При&зупинити"
 
 #: src/find.c:131
 msgid "Con&tinue"
-msgstr ""
+msgstr "&Продовжити"
 
 #: src/find.c:132
 msgid "&Chdir"
@@ -4244,7 +4244,7 @@ msgstr "Пошук"
 
 #: src/find.c:750 src/find.c:1031
 msgid "Find file"
-msgstr ""
+msgstr "Пошук файлу"
 
 #. The buttons
 #: src/find.c:755
@@ -5324,7 +5324,7 @@ msgstr "Неможливо викликати команду."
 
 #: src/panelize.c:458
 msgid "Pipe close failed"
-msgstr ""
+msgstr "Не вдалось закрити канал"
 
 #: src/popthelp.c:31
 msgid "Show this help message"
