@@ -54,7 +54,7 @@
 
 /* For platform which support the ISO C amendement 1 functionality we
    support user defined character classes.  */
-# if defined _LIBC || WIDE_CHAR_SUPPORT
+# if defined _LIBC || (defined WIDE_CHAR_SUPPORT && WIDE_CHAR_SUPPORT)
 /* Solaris 2.5 has a bug: <wchar.h> must be included before <wctype.h>.  */
 #  include <wchar.h>
 #  include <wctype.h>
@@ -92,7 +92,7 @@
 # endif
 
 /* This is for other GNU distributions with internationalized messages.  */
-# if (HAVE_LIBINTL_H && ENABLE_NLS) || defined _LIBC
+# if (defined HAVE_LIBINTL_H && HAVE_LIBINTL_H && defined ENABLE_NLS && ENABLE_NLS) || defined _LIBC
 #  include <libintl.h>
 #  ifdef _LIBC
 #   undef gettext
@@ -180,7 +180,7 @@ char *realloc ();
 
 # endif /* not emacs */
 
-# if defined _LIBC || HAVE_LIMITS_H
+# if defined _LIBC || (defined HAVE_LIMITS_H && HAVE_LIMITS_H)
 #  include <limits.h>
 # endif
 
@@ -251,7 +251,7 @@ char *realloc ();
    machines, compilers, `char' and `unsigned char' argument types.
    (Per Bothner suggested the basic approach.)  */
 # undef SIGN_EXTEND_CHAR
-# if __STDC__
+# if defined __STDC__ && __STDC__
 #  define SIGN_EXTEND_CHAR(c) ((signed char) (c))
 # else  /* not __STDC__ */
 /* As in Harbison and Steele.  */
@@ -327,7 +327,7 @@ typedef unsigned long int uintptr_t;
 #   ifdef __GNUC__
 #    define alloca __builtin_alloca
 #   else /* not __GNUC__ */
-#    if HAVE_ALLOCA_H
+#    if defined HAVE_ALLOCA_H && HAVE_ALLOCA_H
 #     include <alloca.h>
 #    endif /* HAVE_ALLOCA_H */
 #   endif /* not __GNUC__ */
@@ -2082,7 +2082,7 @@ static reg_errcode_t byte_compile_range _RE_ARGS ((unsigned int range_start,
    reset the pointers that pointed into the old block to point to the
    correct places in the new one.  If extending the buffer results in it
    being larger than MAX_BUF_SIZE, then flag memory exhausted.  */
-#  if __BOUNDED_POINTERS__
+#  if defined __BOUNDED_POINTERS__ && __BOUNDED_POINTERS__
 #   define SET_HIGH_BOUND(P) (__ptrhigh (P) = __ptrlow (P) + bufp->allocated)
 #   define MOVE_BUFFER_POINTER(P) \
   (__ptrlow (P) += incr, SET_HIGH_BOUND (P), __ptrvalue (P) += incr)
@@ -2239,7 +2239,7 @@ typedef struct
   }
 
 # ifndef DEFINED_ONCE
-#  if defined _LIBC || WIDE_CHAR_SUPPORT
+#  if defined _LIBC || (defined WIDE_CHAR_SUPPORT && WIDE_CHAR_SUPPORT)
 /* The GNU C library provides support for user-defined character classes
    and the functions from ISO C amendement 1.  */
 #   ifdef CHARCLASS_NAME_MAX
@@ -3292,7 +3292,7 @@ PREFIX(regex_compile) (ARG_PREFIX(pattern), ARG_PREFIX(size), syntax, bufp)
                        the leading `:' and `[' (but set bits for them).  */
                     if (c == ':' && *p == ']')
                       {
-# if defined _LIBC || WIDE_CHAR_SUPPORT
+# if defined _LIBC || (defined WIDE_CHAR_SUPPORT && WIDE_CHAR_SUPPORT)
                         boolean is_lower = STREQ (str, "lower");
                         boolean is_upper = STREQ (str, "upper");
 			wctype_t wt;
@@ -4549,7 +4549,7 @@ byte_compile_range (range_start_char, p_ptr, pend, translate, syntax, b)
   unsigned this_char;
   const char *p = *p_ptr;
   reg_errcode_t ret;
-# if _LIBC
+# if defined _LIBC && _LIBC
   const unsigned char *collseq;
   unsigned int start_colseq;
   unsigned int end_colseq;
@@ -4567,7 +4567,7 @@ byte_compile_range (range_start_char, p_ptr, pend, translate, syntax, b)
   /* Report an error if the range is empty and the syntax prohibits this.  */
   ret = syntax & RE_NO_EMPTY_RANGES ? REG_ERANGE : REG_NOERROR;
 
-# if _LIBC
+# if defined _LIBC && _LIBC
   collseq = (const unsigned char *) _NL_CURRENT (LC_COLLATE,
 						 _NL_COLLATE_COLLSEQMB);
 
