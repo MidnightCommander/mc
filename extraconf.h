@@ -4,8 +4,8 @@ Don't include it from any other files.
 
 The only code that belongs here is preprocessor directives that:
 
-1) change the configuration setting defined in config.h if they
-there is a conflict between them.
+1) change the configuration setting defined in config.h if there is a
+conflict between them.
 
 2) define symbols that fully depend on those in config.h to eliminate
 the need to embed this logic into configure.in.
