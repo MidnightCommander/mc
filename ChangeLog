@@ -1,3 +1,7 @@
+2001-12-01  Wang Jian  <lark@linux.net.cn>
+
+	* configure.in(ALL_LINGUAS): Renamed zh_CN.GB2312 to zh_CN.
+
 2001-11-29  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.ext.in: Use "type" to recognize zip and lha archives.
