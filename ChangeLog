@@ -1,5 +1,9 @@
 2002-08-16  Pavel Roskin  <proski@gnu.org>
 
+	* lib/mc.global: Remove, it duplicates the role of mc.lib.
+	* lib/mc.lib: Add contents of mc.global.
+	* lib/Makefile.am: Remove all references to mc.global.
+
 	* syntax/sh.syntax: Fix highlighting of "<<-EOF".
 	Reported by Andrew V. Samoilov <sav@bcs.zp.ua>
 
