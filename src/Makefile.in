@@ -95,7 +95,7 @@ cross:
 	CPPFLAGS="$(CPPFLAGS) -I/usr/local/lib/gcc-lib/i386-linux-linux/include/ncurses "
 
 $(srcdir)/mc.hlp: ync.hlp $(mclibdir)/xnc.hlp $(srcdir)/gindex.pl
-	cat ync.hlp $(mclibdir)/xnc.hlp | `which perl` $(srcdir)/gindex.pl > $(srcdir)/mc.hlp
+	cat ync.hlp $(mclibdir)/xnc.hlp | perl $(srcdir)/gindex.pl > $(srcdir)/mc.hlp
 
 ync.hlp: $(docdir)/mc.1.in man2hlp
 	./man2hlp 58 $(docdir)/mc.1.in > ync.hlp
