@@ -385,25 +385,6 @@ dealloc_color_pairs (void)
 }
 #endif /* HAVE_MAD */
 
-static const char * const color_terminals [] = {
-#ifdef __linux__
-    "console",
-#endif
-    "linux",
-    "xterm-color",
-    "color-xterm",
-    "dtterm",
-    "xtermc",
-    "ansi",
-/* 'qnx*' terminals have non-ANSI-compatible color sequences... */
-    "qansi",
-    "qansi-g",
-    "qansi-m",
-    "qansi-t",
-    "qansi-w",
-    0
-};
-
 int has_colors (void)
 {
     char *terminal = getenv ("TERM");
@@ -417,15 +398,8 @@ int has_colors (void)
 
     /* We want to allow overwriding */
     if (!disable_colors){
-      if (!*cts)
-      {
-      /* check hard-coded terminals */
-	for (i = 0; color_terminals [i]; i++)
-	    if (strcmp (color_terminals [i], terminal) == 0)
-		SLtt_Use_Ansi_Colors = 1;
-      }
-      else
       /* check color_terminal_string */
+      if (*cts)
       {
         while (*cts)
         {
