@@ -2459,9 +2459,7 @@ static void edit_set_search_parameters (int rs, int rb, int rr, int rw, int rc)
 }
 
 
-unsigned int MAX_WORD_COMPLETIONS = 100; /* in listbox */
-unsigned int compl_dlg_h; /* completion dialog height */
-unsigned int compl_dlg_w; /* completion dialog width */
+const static int MAX_WORD_COMPLETIONS = 100; /* in listbox */
 
 
 /* collect the possible completions */ 
@@ -2536,7 +2534,9 @@ void edit_completion_dialog (WEdit *edit, int max_len, int word_len,
     char *curr = NULL;
     Dlg_head *compl_dlg;
     WListbox *compl_list;
-    	    
+    unsigned int compl_dlg_h; /* completion dialog height */
+    unsigned int compl_dlg_w; /* completion dialog width */
+
 /* calculate the dialog metrics */
     compl_dlg_h = num_compl + 2;
     compl_dlg_w = max_len + 4;

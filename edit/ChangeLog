@@ -1,5 +1,7 @@
 2002-08-22  Pavel Roskin  <proski@gnu.org>
 
+	* editcmd.c: Clean up global variables in the completion code.
+
 	* editwidget.c: Use new dialog flags.
 	* editcmd.c: Likewise.
 	(edit_completion_dialog): Set DLG_COMPACT for the dialog.
