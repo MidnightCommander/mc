@@ -739,8 +739,6 @@ view_status (WView *view, gboolean update_gui)
     attrset (SELECTED_COLOR);
 }
 
-#define view_set_color(view,font) attrset (font)
-
 static inline void
 view_display_clean (WView *view, int height, int width)
 {
@@ -763,15 +761,9 @@ view_display_clean (WView *view, int height, int width)
 #define view_add_string(view,s)    addstr (s)
 #define view_gotoyx(v,r,c)    widget_move (v,r,c)
 
-#define BOLD_COLOR        MARKED_COLOR
-#define UNDERLINE_COLOR   VIEW_UNDERLINED_COLOR
-#define MARK_COLOR        SELECTED_COLOR
-#define DEF_COLOR         NORMAL_COLOR
-
 #define view_freeze(view)
 #define view_thaw(view)
 
-#define PICK_COLOR(a,b) a : b
 #define STATUS_LINES 1
 
 /* Shows the file pointed to by *start_display on view_win */
@@ -790,7 +782,7 @@ display (WView * view)
     height = view->widget.lines - frame_shift;
     width = view->widget.cols - frame_shift;
     from = view->start_display;
-    view_set_color (view, DEF_COLOR);
+    attrset (NORMAL_COLOR);
 
     view_freeze (view);
     view_display_clean (view, height, width);
@@ -800,7 +792,7 @@ display (WView * view)
 	char r_buff[10];
 	int cl;
 
-	view_set_color (view, BOLD_COLOR);
+	attrset (MARKED_COLOR);
 	for (c = frame_shift; c < width; c++) {
 	    cl = c - view->start_col;
 	    if (ruler == 1)
@@ -823,7 +815,7 @@ display (WView * view)
 		view_add_string (view, r_buff);
 	    }
 	}
-	view_set_color (view, DEF_COLOR);
+	attrset (NORMAL_COLOR);
 	if (ruler == 1)
 	    row += 2;
 	else
@@ -843,12 +835,12 @@ display (WView * view)
 
 	for (; row < height && from < view->last_byte; row++) {
 	    /* Print the hex offset */
-	    view_set_color (view, BOLD_COLOR);
+	    attrset (MARKED_COLOR);
 	    g_snprintf (hex_buff, sizeof (hex_buff), "%08X",
 			(int) (from - view->first));
 	    view_gotoyx (view, row, frame_shift);
 	    view_add_string (view, hex_buff);
-	    view_set_color (view, DEF_COLOR);
+	    attrset (NORMAL_COLOR);
 
 	    /* Hex dump starts from column nine */
 	    col = 9;
@@ -863,14 +855,14 @@ display (WView * view)
 		    c = curr->value;
 		    curr = curr->next;
 		    boldflag = 3;
-		    view_set_color (view, 7);
+		    attrset (VIEW_UNDERLINED_COLOR);
 		} else
 		    c = (unsigned char) get_byte (view, from);
 
 		if (view->found_len && from >= view->search_start
 		    && from < view->search_start + view->found_len) {
 		    boldflag = 1;
-		    view_set_color (view, BOLD_COLOR);
+		    attrset (MARKED_COLOR);
 		}
 		/* Display the navigation cursor */
 		if (from == view->edit_cursor) {
@@ -879,9 +871,9 @@ display (WView * view)
 			view->cursor_col = col;
 		    }
 		    boldflag = 2;
-		    view_set_color (view,
-				    view->view_side ==
-				    view_side_left ? PICK_COLOR (15, 33));
+		    attrset (view->view_side ==
+			     view_side_left ? VIEW_UNDERLINED_COLOR :
+			     MARKED_SELECTED_COLOR);
 		}
 
 		/* Print a hex number (sprintf is too slow) */
@@ -892,13 +884,13 @@ display (WView * view)
 		col += 3;
 		/* Turn off the cursor or changed byte highlighting here */
 		if (boldflag > 1)
-		    view_set_color (view, DEF_COLOR);
+		    attrset (NORMAL_COLOR);
 		if ((bytes & 3) == 3 && bytes + 1 < view->bytes_per_line) {
 		    /* Turn off the search highlighting */
 		    if (boldflag == 1
 			&& from ==
 			view->search_start + view->found_len - 1)
-			view_set_color (view, DEF_COLOR);
+			attrset (NORMAL_COLOR);
 
 		    /* Hex numbers are printed in the groups of four */
 		    /* Groups are separated by a vline */
@@ -912,7 +904,7 @@ display (WView * view)
 		    if (boldflag
 			&& from ==
 			view->search_start + view->found_len - 1)
-			view_set_color (view, BOLD_COLOR);
+			attrset (MARKED_COLOR);
 
 		}
 		if (boldflag
@@ -935,15 +927,13 @@ display (WView * view)
 		default:
 		    break;
 		case 1:
-		    view_set_color (view, BOLD_COLOR);
+		    attrset (MARKED_COLOR);
 		    goto setcursor;
 		case 2:
-		    view_set_color (view,
-				    view->view_side ==
-				    view_side_left ? PICK_COLOR (33, 15));
+		    attrset (MARKED_SELECTED_COLOR);
 		    goto setcursor;
 		case 3:
-		    view_set_color (view, 7);
+		    attrset (VIEW_UNDERLINED_COLOR);
 
 		  setcursor:
 		    if (view->view_side == view_side_right) {
@@ -955,7 +945,7 @@ display (WView * view)
 
 		if (boldflag) {
 		    boldflag = 0;
-		    view_set_color (view, DEF_COLOR);
+		    attrset (NORMAL_COLOR);
 		}
 	    }
 	}
@@ -998,16 +988,16 @@ display (WView * view)
 		    col--;
 		    boldflag = 1;
 		    if (c_prev == '_' && c_next != '_')
-			view_set_color (view, UNDERLINE_COLOR);
+			attrset (VIEW_UNDERLINED_COLOR);
 		    else
-			view_set_color (view, BOLD_COLOR);
+			attrset (MARKED_COLOR);
 		    continue;
 		}
 	    }
 	    if (view->found_len && from >= view->search_start
 		&& from < view->search_start + view->found_len) {
 		boldflag = 1;
-		view_set_color (view, MARK_COLOR);
+		attrset (SELECTED_COLOR);
 	    }
 	    if (col >= frame_shift - view->start_col
 		&& col < width - view->start_col) {
@@ -1025,7 +1015,7 @@ display (WView * view)
 	    col++;
 	    if (boldflag) {
 		boldflag = 0;
-		view_set_color (view, DEF_COLOR);
+		attrset (NORMAL_COLOR);
 	    }
 
 	    /* Very last thing */

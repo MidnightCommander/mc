@@ -1,3 +1,8 @@
+2002-08-14  Pavel Roskin  <proski@gnu.org>
+
+	* view.c (display): Use only declared color pairs to fix hex
+	editor appearance with ncurses.  Eliminate some useless defines.
+
 2002-08-10  Pavel Roskin  <proski@gnu.org>
 
 	* key.c (delete_select_channel): Avoid using freed memory.
