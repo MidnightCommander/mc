@@ -1,11 +1,11 @@
-# Conditional build (replace "#%-" with "#" to enable):
+# Conditional build (replace "#" with "%" to enable):
 #
-#%-define _with_ncurses		 1 # use ncurses
-#%-define _with_included_slang	 1 # use included S-Lang library
-#%-define _with_charset		 1 # enable code for charset conversion
-#%-define _with_samba		 1 # enable SMB/CIFS virtual file system
-#%-define _with_ext2undel	 1 # compile with ext2 undelete code
-#%-define _without_x		 1 # avoid dependency on X11 libraries
+#define _with_ncurses		 1 # use ncurses
+#define _with_included_slang	 1 # use included S-Lang library
+#define _with_charset		 1 # enable code for charset conversion
+#define _with_samba		 1 # enable SMB/CIFS virtual file system
+#define _with_ext2undel		 1 # compile with ext2 undelete code
+#define _without_x		 1 # avoid dependency on X11 libraries
 
 # Note that this is NOT a relocatable package
 %define ver     @VERSION@
