@@ -67,7 +67,7 @@ indent and ispell.
 .SH KEYS
 The editor is easy to use and can be used without learning.  The
 pull-down menu is invoked by pressing F9.  You can learn other keys from
-the menu and from the buttor bar labels.
+the menu and from the button bar labels.
 .PP
 In addition to that, Shift combined with arrows does text highlighting
 (if supported by the terminal):
@@ -84,8 +84,8 @@ and
 .B Ctrl-Del
 deletes highlighted text.  Mouse highlighting also works on some
 terminals.  To use the standard mouse support provided by your terminal,
-hold the Shift key.  Don't forget that the mouse support in the terminal
-doesn't share the clipoard with
+hold the Shift key.  Please note that the mouse support in the terminal
+doesn't share the clipboard with
 .BR mcedit .
 .PP
 The completion key (usually
@@ -183,36 +183,36 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_
 
 # default colors
 context default
-  keyword  whole  if       24
-  keyword  whole  else     24
-  keyword  whole  for      24
-  keyword  whole  while    24
-  keyword  whole  do       24
-  keyword  whole  switch   24
-  keyword  whole  case     24
-  keyword  whole  static   24
-  keyword  whole  extern   24
-  keyword         {        14
-  keyword         }        14
-  keyword         '*'      6
+  keyword  whole  if       yellow
+  keyword  whole  else     yellow
+  keyword  whole  for      yellow
+  keyword  whole  while    yellow
+  keyword  whole  do       yellow
+  keyword  whole  switch   yellow
+  keyword  whole  case     yellow
+  keyword  whole  static   yellow
+  keyword  whole  extern   yellow
+  keyword         {        brightcyan
+  keyword         }        brightcyan
+  keyword         '*'      green
 
 # C comments
-context /\\* \\*/ 22
+context /\\* \\*/ brown
 
 # C preprocessor directives
-context linestart # \\n 18
-  keyword  \\\\\\n  24
+context linestart # \\n red
+  keyword  \\\\\\n  brightred
 
 # C string constants
-context " " 6
-  keyword  %d    24
-  keyword  %s    24
-  keyword  %c    24
-  keyword  \\\\"   24
+context " " green
+  keyword  %d    brightgreen
+  keyword  %s    brightgreen
+  keyword  %c    brightgreen
+  keyword  \\\\"   brightgreen
 .fi
 .PP
 Each context starts with a line of the form:
-.br
+.PP
 .B context
 .RB [ exclusive ]
 .RB [ whole | wholeright | wholeleft ]
@@ -222,35 +222,36 @@ Each context starts with a line of the form:
 .I delim
 .RI [ foreground ]
 .RI [ background ]
-.br
-One exception is the first context. It must start with the command
-.br
+.PP
+The first context is an exception.  It must start with the command
+.PP
 .B context
 .B default
 .RI [ foreground ]
 .RI [ background ]
-.br
-or else
+.PP
+otherwise
 .B mcedit
 will report an error.  The
 .B linestart
-option dictates that
+option specifies that
 .I delim
 must start at the beginning of a line.  The
 .B whole
-option tells that delim must be a whole word.  What constitutes a whole
-word are a set of characters that can be changed at any point in the
-file with the
-.B wholechars
-command.  The
-.B wholechars
-command at the top just sets the set exactly to its default and could
-therefore have been omitted.  To specify that a word must be whole on the
-left only, you can use the
+option tells that
+.I delim
+must be a whole word.  To specify that a word must begin on the word
+boundary only on the left side, you can use the
 .B wholeleft
-option, and similarly on the right.  The left and right set of characters
-can be set separately with,
-.br
+option, and similarly a word that must end on the word boundary is specified by
+.BR wholeright .
+.PP
+The set of characters that constitute a whole word can be changed at any
+point in the file with the
+.B wholechars
+command.  The left and right set of characters can be set separately
+with
+.PP
 .B wholechars
 .RB [ left | right ]
 .I characters
@@ -261,46 +262,67 @@ option causes the text between the delimiters to be highlighted, but not
 the delimiters themselves.
 .PP
 Each rule is a line of the form:
-.br
+.PP
 .B keyword
 .RB [ whole | wholeright | wholeleft ]
 .RB [ linestart ]
 .I string
 .I foreground
 .RI [ background ]
-.br
-Context or keyword strings are interpreted, so that you can include
-tabs and spaces with the sequences \\t and \\s.  Newlines and the \\ are
+.PP
+Context or keyword strings are interpreted, so that you can include tabs
+and spaces with the sequences \\t and \\s.  Newlines and backslashes are
 specified with \\n and \\\\ respectively.  Since whitespace is used as a
 separator, it may not be used as is.  Also, \\* must be used to specify
-a *.  The * itself is a wildcard that matches any length of characters.
-For example,
+an asterisk.  The * itself is a wildcard that matches any length of
+characters.  For example,
+.PP
 .nf
-  keyword         '*'      6
+  keyword         '*'      green
 .fi
-colors all C single character constants green. You could also have
-used
+.PP
+colors all C single character constants green.  You also could use
+.PP
 .nf
-  keyword         "*"      6
+  keyword         "*"      green
 .fi
-to color string constants, except that the matched string may not cross
-newlines. The wildcard may be used within context delimiters as well,
-but you cannot have a wildcard as the last or first character.
+.PP
+to color string constants, but the matched string would not be allowed
+to span across multiple newlines.  The wildcard may be used within
+context delimiters as well, but you cannot have a wildcard as the last
+or first character.
 .PP
 Important to note is the line
+.PP
 .nf
-  keyword  \\\\\\n  24
+  keyword  \\\\\\n  brightgreen
 .fi
 .PP
-This line defines a keyword containing the \\ and newline characters.
-Since the keywords have a higher precedence than the context delimiters,
-this keyword prevents the context from ending at the end of the line if
-the line ends in a \\ thus allowing C preprocessor directive to continue
-across multiple lines.
+This line defines a keyword containing the backslash and newline
+characters.  Since the keywords are matched before the context
+delimiters, this keyword prevents the context from ending at the end of
+the lines that end in a backslash, thus allowing C preprocessor
+directive to continue across multiple lines.
 .PP
 The possible colors are: black, gray, red, brightred, green,
 brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
-cyan, brightcyan, lightgray and white.
+cyan, brightcyan, lightgray and white.  If the syntax file is shared
+with
+.BR cooledit ,
+it is possible to specify different colors for
+.B mcedit
+and
+.B cooledit
+by separating them with a slash, e.g.
+.PP
+.nf
+keyword  #include  red/Orange
+.fi
+.PP
+.B mcedit
+uses the color before the slash.  See cooledit(1) for supported
+.B cooledit
+colors.
 .PP
 Comments may be put on a separate line starting with the hash sign (#).
 .PP
@@ -309,13 +331,13 @@ intricacies that will not be dealt with correctly but these are a minor
 irritation.  On the whole, a broad spectrum of quite complicated
 situations are handled with these simple rules.  It is a good idea to
 take a look at the syntax file to see some of the nifty tricks you can
-do with a little imagination.  If you can't get by with the rules I have
-coded, and you think you have a rule that would be useful, please email
-me with your request.  However, do not ask for regular expression
+do with a little imagination.  If you cannot get by with the rules I
+have coded, and you think you have a rule that would be useful, please
+email me with your request.  However, do not ask for regular expression
 support, because this is flatly impossible.
 .PP
 A useful hint is to work with as much as possible with the things you
-can do rather than try to do things that this implementation can't deal
+can do rather than try to do things that this implementation cannot deal
 with.  Also remember that the aim of syntax highlighting is to make
 programming less prone to error, not to make code look pretty.
 .SH COLORS
@@ -331,8 +353,8 @@ editbold=yellow,black:\\
 editmarked=black,cyan"
 .fi
 .SH OPTIONS
-Most options can now be set from the editors options dialog
-box. See the
+Most options can now be set from the editors options dialog box.  See
+the
 .B Options
 menu.  The following options are defined in
 .B ~/.mc/ini
@@ -424,17 +446,17 @@ apples %d oranges %d
 The last line specifies that the third and then the second number are to
 be used in place of the first and second.
 .PP
-It is advisable to use this feature with Prompt On Replace on, because
-a match is thought to be found whenever the number of arguments found
+It is advisable to use this feature with Prompt On Replace on, because a
+match is thought to be found whenever the number of arguments found
 matches the number given, which is not always a real match. Scanf also
 treats whitespace as being elastic.  Note that the scanf format %[ is
 very useful for scanning strings, and whitespace.
 .PP
-The editor also displays non-us characters (160+). When editing
+The editor also displays non-us characters (160+).  When editing
 binary files, you should set
 .B display bits
-to 7 bits in the Midnight Commander options menu to keep the
-spacing clean.
+to 7 bits in the Midnight Commander options menu to keep the spacing
+clean.
 .SH FILES
 .I @prefix@/share/mc/mc.hlp
 .IP
@@ -466,7 +488,7 @@ User's own temporary directory where block commands are processed
 and saved.
 .SH LICENSE
 This program is distributed under the terms of the GNU General Public
-License as published by the Free Software Foundation. See the built-in
+License as published by the Free Software Foundation.  See the built-in
 help of the Midnight Commander for details on the License and the lack
 of warranty.
 .SH AVAILABILITY
@@ -475,7 +497,7 @@ ftp://ftp.ibiblio.org/pub/Linux/utils/file/managers/mc/.
 .SH SEE ALSO
 cooledit(1), mc(1), gpm(1), terminfo(1), scanf(3).
 .SH AUTHORS
-Paul Sheer (psheer@obsidian.co.za) is the developer of
+Paul Sheer (psheer@obsidian.co.za) is the original author of
 the Midnight Commander's internal editor.
 .SH BUGS
 Bugs should be reported to mc-devel@gnome.org
