@@ -1,3 +1,9 @@
+1998-05-14  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtrans.c (create_transparent_text_window): Removed the hack to
+	lower the window on exposes.  Guess what happens when you have two
+	icons on the same spot.
+
 Thu May 14 02:02:56 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* Makefile.in (EXTRALIBS): add @LINTL@

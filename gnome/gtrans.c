@@ -361,10 +361,16 @@ create_transparent_text_window (char *file, char *text, int extra_events)
 	gdk_window_set_cursor (window->window, cursor);
 	gdk_cursor_destroy (cursor);
 
+#if 0
+	/* Do not enable this code */
 	/* We do this so the desktop icons appear to really be part of the
 	   desktop */
-	gtk_signal_connect(window, "expose_event", GTK_SIGNAL_FUNC(lower_icon_window), NULL);
 
+        /* This is wrong.  If you have two icons, one on top of the other,
+	 * guess what is the result.
+	 */
+	gtk_signal_connect(window, "expose_event", GTK_SIGNAL_FUNC(lower_icon_window), NULL);
+#endif
 	return window;
 }
 

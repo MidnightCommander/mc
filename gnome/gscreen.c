@@ -314,6 +314,7 @@ x_select_item (WPanel *panel)
 		do_file_mark (panel, panel->selected, 1);
 		display_mini_info (panel);
 		gnome_icon_list_select_icon (list, panel->selected);
+
 		if (list->icon_rows){
 			if (!gnome_icon_list_icon_is_visible (list, panel->selected))
 				gnome_icon_list_moveto (list, panel->selected, 0.5);
@@ -1246,11 +1247,12 @@ panel_create_icon_display (WPanel *panel)
 	icon_field = GNOME_ICON_LIST (gnome_icon_list_new ());
 	
 	gnome_icon_list_set_selection_mode (icon_field, GTK_SELECTION_MULTIPLE);
-				     
+
 	gtk_signal_connect (GTK_OBJECT (icon_field), "select_icon",
 			    GTK_SIGNAL_FUNC (panel_icon_list_select_icon), panel);
 	gtk_signal_connect (GTK_OBJECT (icon_field), "unselect_icon",
 			    GTK_SIGNAL_FUNC (panel_icon_list_unselect_icon), panel);
+
 	gtk_signal_connect (GTK_OBJECT (icon_field), "realize",
 			    GTK_SIGNAL_FUNC (panel_icon_list_realized), panel);
 	return GTK_WIDGET (icon_field);
