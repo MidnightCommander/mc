@@ -123,16 +123,11 @@ static int mcfs_login_server (int my_socket, char *user, int port,
     if (result == MC_NEED_PASSWORD){
 	if (port > 1024 && port_autodetected){
 	    int v;
-#ifndef VFS_STANDALONE
 	    v = query_dialog (_(" Warning "),
 	        _(" The remote server is not running on a system port \n"
 		  " you need a password to log in, but the information may \n"
 		  " not be safe on the remote side.  Continue? \n"), 3, 2,
 			      _(" Yes "),  _(" No "));
-#else
-	    message_1s( 1, _(" MCFS "), _(" The remote server is running on strange port. Giving up.\n"));
-	    v = 1;
-#endif
 
 	    if (v == 1){
 		close (my_socket);

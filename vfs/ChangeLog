@@ -1,3 +1,8 @@
+2002-09-10  Pavel Roskin  <proski@gnu.org>
+
+	* Make-alone.am: Get rid of all standalone code, it has been
+	unmaintained for years.
+
 2002-09-05  Pavel Roskin  <proski@gnu.org>
 
 	* direntry.c [!USE_NETCODE]: Disable functions used in networked

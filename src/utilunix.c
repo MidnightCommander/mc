@@ -44,7 +44,6 @@
 
 struct sigaction startup_handler;
 
-#ifndef VFS_STANDALONE
 /* uid of the MC user */
 static uid_t current_user_uid = -1;
 /* List of the gids of the user */
@@ -209,7 +208,6 @@ void save_stop_handler (void)
 {
     sigaction (SIGTSTP, NULL, &startup_handler);
 }
-#endif /* VFS_STANDALONE */
 
 int my_system (int flags, const char *shell, const char *command)
 {
@@ -299,7 +297,6 @@ char *tilde_expand (const char *directory)
     return g_strconcat (passwd->pw_dir, PATH_SEP_STR, p, NULL);
 }
 
-#ifndef VFS_STANDALONE
 
 /* Pipes are guaranteed to be able to hold at least 4096 bytes */
 /* More than that would be unportable */
@@ -394,7 +391,6 @@ void check_error_pipe (void)
     if (len > 0)
         message (0, _(" Warning "), "%s", error);
 }
-#endif /* !VFS_STANDALONE */
 
 static struct sigaction ignore, save_intr, save_quit, save_stop;
 
@@ -617,7 +613,6 @@ char *canonicalize_pathname (char *path)
     return path;
 }
 
-#ifndef VFS_STANDALONE
 #ifdef SCO_FLAVOR
 int gettimeofday( struct timeval * tv, struct timezone * tz)
 {
@@ -805,4 +800,3 @@ int socketpair(int dummy1, int dummy2, int dummy3, int fd[2])
 #endif /* ifndef HAVE_SOCKETPAIR */
 #endif /* ifdef USE_NETCODE */
 #endif /* SCO_FLAVOR */
-#endif /* VFS_STANDALONE */

@@ -1,10 +1,6 @@
 #ifndef _MC_I18N_H_
 #define _MC_I18N_H_
 
-#ifdef VFS_STANDALONE	/* We do not want vfs code to depend on internationalization, do we? */
-#undef ENABLE_NLS
-#endif
-
 #ifdef ENABLE_NLS
 #   include <libintl.h>
 #   define _(String) gettext (String)

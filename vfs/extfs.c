@@ -591,11 +591,7 @@ static void extfs_run (char *file)
     g_free (mc_extfsdir);
     g_free (archive_name);
     g_free (q);
-#ifndef VFS_STANDALONE
     shell_execute(cmd, 0);
-#else
-    vfs_die( "shell_execute: implement me!" );
-#endif
     g_free(cmd);
 }
 

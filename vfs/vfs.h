@@ -6,14 +6,10 @@
 #include <sys/mman.h>
 #endif
 
-#ifdef VFS_STANDALONE
-#undef USE_EXT2FSLIB
-#else
-#undef BROKEN_PATHS
 /*
  * Define this to allow /any/path/#ftp/ to access ftp tree. Broken, yes.
  */ 
-#endif
+#undef BROKEN_PATHS
 
 /*
  * The following line is needed, because as usual, AIX pollutes every single
@@ -384,11 +380,6 @@ extern gid_t vfs_gid;
 #define FL_NO_LOCALHASH 0x20000000	/* When you never ever want vfs to work with regular files with # in name */
 #define FL_NO_CWDSETUP	0x40000000
 
-
-#ifdef VFS_STANDALONE
-extern void mc_vfs_init( void );
-extern void mc_vfs_done( void );
-#endif
 
 #define O_ALL (O_CREAT | O_EXCL | O_NOCTTY | O_NDELAY | O_SYNC | O_WRONLY | O_RDWR | O_RDONLY)
 /* Midnight commander code should _not_ use other flags than those

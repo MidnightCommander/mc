@@ -3,11 +3,7 @@
 
 #include "dlg.h"
 
-#ifndef VFS_STANDALONE
 #define MSG_ERROR ((char *) -1)
-#else
-#define MSG_ERROR "Error: "
-#endif
 Dlg_head *message (int error, char *header, const char *text, ...)
     __attribute__ ((format (printf, 3, 4)));
 

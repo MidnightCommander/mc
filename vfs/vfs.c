@@ -47,12 +47,10 @@
 
 #include "../src/dir.h"
 #include "../src/main.h"
-#ifndef VFS_STANDALONE
 #include "../src/panel.h"
 #include "../src/key.h"		/* Required for the async alarm handler */
 #include "../src/layout.h"	/* For get_panel_widget and get_other_index */
 #include "../src/wtools.h"	/* input_dialog() */
-#endif
 
 #include "xdirentry.h"
 #include "vfs.h"
@@ -60,10 +58,6 @@
 #include "names.h"
 #ifdef USE_NETCODE
 #   include "tcputil.h"
-#endif
-
-#ifdef	VFS_STANDALONE
-#undef	WITH_SMBFS
 #endif
 
 extern int get_other_type (void);
@@ -788,7 +782,6 @@ is_parent (vfs * nvfs, vfsid nvfsid, struct vfs_stamping *parent)
 void
 vfs_add_noncurrent_stamps (vfs * oldvfs, vfsid oldvfsid, struct vfs_stamping *parent)
 {
-#ifndef VFS_STANDALONE
     vfs *nvfs, *n2vfs, *n3vfs;
     vfsid nvfsid, n2vfsid, n3vfsid;
     struct vfs_stamping *par, *stamp;
@@ -864,9 +857,6 @@ vfs_add_noncurrent_stamps (vfs * oldvfs, vfsid oldvfsid, struct vfs_stamping *pa
 		vfs_addstamp (stamp->v, stamp->id, stamp->parent);
 	}
     }
-#else
-    vfs_addstamp (oldvfs, oldvfsid, parent);
-#endif
 }
 
 static void
@@ -885,7 +875,6 @@ vfs_stamp_path (char *path)
     vfs_rm_parents (par);
 }
 
-#ifndef VFS_STANDALONE
 void
 vfs_add_current_stamps (void)
 {
@@ -901,7 +890,6 @@ vfs_add_current_stamps (void)
 	    vfs_stamp_path (opanel->cwd);
     }
 }
-#endif
 
 /* This function is really broken */
 int
@@ -1886,13 +1874,11 @@ vfs_print_stats (const char *fs_name, const char *action, const char *file_name,
 			   fs_name, action, file_name, (unsigned long) have);
 }
 
-#ifndef VFS_STANDALONE
 char *
 vfs_get_password (char *msg)
 {
     return (char *) input_dialog (msg, _("Password:"), INPUT_PASSWORD);
 }
-#endif
 
 /*
  * Returns vfs path corresponding to given url. If passed string is

@@ -52,7 +52,6 @@
 static const char app_text [] = "Midnight-Commander";
 int easy_patterns = 1;
 
-#ifndef VFS_STANDALONE
 int is_printable (int c)
 {
     static const unsigned char xterm_printable[] = {
@@ -138,7 +137,6 @@ trim (char *s, char *d, int len)
 	strcpy (d, s);
     return d;
 }
-#endif /* !VFS_STANDALONE */
 
 char *
 name_quote (const char *s, int quote_percent)
@@ -194,7 +192,6 @@ name_quote (const char *s, int quote_percent)
     return ret;
 }
 
-#ifndef VFS_STANDALONE
 char *
 fake_name_quote (const char *s, int quote_percent)
 {
@@ -759,7 +756,6 @@ char *x_basename (char *s)
     return ((where = strrchr (s, PATH_SEP))) ? where + 1 : s;
 }
 
-#endif /* !VFS_STANDALONE */
 
 char *unix_error_string (int error_num)
 {
@@ -770,7 +766,6 @@ char *unix_error_string (int error_num)
     return buffer;
 }
 
-#ifndef VFS_STANDALONE	
 char *skip_separators (char *s)
 {
     for (;*s; s++)
@@ -833,7 +828,6 @@ char *strip_ctrl_codes (char *s)
     return s;
 }
 
-#endif /* !VFS_STANDALONE */
 
 #ifndef USE_VFS
 char *get_current_wd (char *buffer, int size)
@@ -922,7 +916,6 @@ decompress_extension (int type)
 	return 0;
 }
 
-#ifndef VFS_STANDALONE
 /* Hooks */
 void add_hook (Hook **hook_list, void (*hook_fn)(void *), void *data)
 {
@@ -1169,7 +1162,6 @@ char *diff_two_paths (char *first, char *second)
     g_free (second);
     return buf;
 }
-#endif /* !VFS_STANDALONE */
 
 /* If filename is NULL, then we just append PATH_SEP to the dir */
 char *
