@@ -239,7 +239,12 @@ get_byte (WView *view, unsigned int byte_index)
 		    n = fread (p, 1, VIEW_PAGE_SIZE, view->stdfile);
 		else
 		    n = mc_read (view->file, p, VIEW_PAGE_SIZE);
-#warning FIXME: Errors are ignored at this point, also should report preliminary EOF
+
+/*
+ * FIXME: Errors are ignored at this point
+ * Also should report preliminary EOF
+ */
+
 		if (n != -1)
 		    view->bytes_read += n;
 		if (view->s.st_size < view->bytes_read){

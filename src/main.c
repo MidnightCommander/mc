@@ -450,7 +450,7 @@ update_one_panel_widget (WPanel *panel, int force_update, char *current_file)
 #if 0
 	ftpfs_flushdir ();
 #endif
-#warning Should supply flushdir method
+/* FIXME: Should supply flushdir method */
 	memset (&(panel->dir_stat), 0, sizeof (panel->dir_stat));
     }
     
