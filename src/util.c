@@ -311,9 +311,12 @@ char *size_trunc_sep (double size)
  * not including trailing 0. BUFFER should be at least LEN+1 long.
  * This function is called for every file on panels, so avoid
  * floating point by any means.
+ *
+ * Units: size units (filesystem sizes are 1K blocks)
+ *    0=bytes, 1=Kbytes, 2=Mbytes, etc.
  */
 void
-size_trunc_len (char *buffer, int len, off_t size)
+size_trunc_len (char *buffer, int len, off_t size, int units)
 {
     /* Avoid taking power for every file.  */
     static const off_t power10 [] =
@@ -327,9 +330,9 @@ size_trunc_len (char *buffer, int len, off_t size)
     if (len == 0 || len > 9)
 	len = 9;
 
-    for (j = 0; suffix [j] != NULL; j++) {
+    for (j = units; suffix [j] != NULL; j++) {
 	if (size == 0) {
-	    if (j == 0) {
+	    if (j == units) {
 		/* Empty files will print "0" even with minimal width.  */
 		g_snprintf (buffer, len + 1, "0");
 		break;

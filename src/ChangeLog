@@ -1,5 +1,8 @@
 2001-08-30  David Martin  <dmartina@excite.es>
 
+	* util.c (size_trunc_len): Add units parameter.  Change all
+	callers.
+
 	* util.c (size_trunc_len): Print size values with some (little)
 	sense for tiny and even wee lengths (i.e. squeezed X terminals).
 

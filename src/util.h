@@ -18,7 +18,7 @@ char *fake_name_quote (const char *c, int quote_percent);
 char *name_trunc (char *txt, int trunc_len);
 char *size_trunc (double size);
 char *size_trunc_sep (double size);
-void size_trunc_len (char *buffer, int len, off_t size);
+void size_trunc_len (char *buffer, int len, off_t size, int units);
 int  is_exe (mode_t mode);
 char *string_perm (mode_t mode_bits);
 char *strip_password (char *path, int has_prefix);

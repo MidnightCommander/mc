@@ -206,7 +206,7 @@ string_file_size (file_entry *fe, int len)
     else
 #endif
     {
-	size_trunc_len (buffer, len, fe->buf.st_size);
+	size_trunc_len (buffer, len, fe->buf.st_size, 0);
     }
     return buffer;
 }
