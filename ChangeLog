@@ -1,3 +1,7 @@
+2002-01-04  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+        * configure.in: Added "eu" to ALL_LINGUAS
+
 2002-01-03  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.menu: Correct quoting.
