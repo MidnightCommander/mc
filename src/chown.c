@@ -254,21 +254,6 @@ chown_cmd (void)
     gid_t new_group;
     char  buffer [BUF_TINY];
 
-#if 0
-    /* Please no */
-    if (!vfs_current_is_local ()) {
-	if (vfs_current_is_extfs ()) {
-	    message (1, _(" Oops... "),
-		     _(" I can't run the Chown command on an extfs "));
-	    return;
-	} else if (vfs_current_is_tarfs ()) {
-	    message (1, _(" Oops... "),
-		     _(" I can't run the Chown command on a tarfs "));
-	    return;
-	}
-    }
-#endif
-
     do {			/* do while any files remaining */
 	init_chown ();
 	new_user = new_group = -1;

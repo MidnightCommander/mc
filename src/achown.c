@@ -639,21 +639,6 @@ chown_advanced_cmd (void)
 
     files_on_begin = cpanel->marked;
 
-#if 0
-    /* I think that this code is trying to be much too clever  -- pavel@ucw.cz */
-    if (!vfs_current_is_local ()) {
-	if (vfs_current_is_extfs ()) {
-	    message (1, _(" Oops... "),
-		     _(" I can't run the Advanced Chown command on an extfs "));
-	    return;
-	} else if (vfs_current_is_tarfs ()) {
-	    message (1, _(" Oops... "),
-		     _(" I can't run the Advanced Chown command on a tarfs "));
-	    return;
-	}
-    }
-#endif
-
     do {			/* do while any files remaining */
 	init_chown_advanced ();
 

@@ -1,5 +1,9 @@
 2001-08-11  Pavel Roskin  <proski@gnu.org>
 
+	* achown.c (chown_advanced_cmd): Remove dead code.
+	* chown.c (chown_cmd): Likewise.
+	* chmod.c (chmod_cmd): Likewise.
+
 	* charsets.c (load_codepages_list): Use concat_dir_and_file().
 
 	* mad.h: Disable glib support - it doesn't work properly.
