@@ -3774,7 +3774,7 @@ msgstr "&Стерти"
 
 #: src/file.c:803 src/hotlist.c:1443
 msgid "&Keep"
-msgstr ""
+msgstr "&Лишити"
 
 #: src/file.c:876
 #, c-format
@@ -3849,6 +3849,8 @@ msgid ""
 " Cannot remove file \"%s\" \n"
 " %s "
 msgstr ""
+" Не вдалося видалити файл \"%s\" \n"
+" %s "
 
 #: src/file.c:1246
 #, c-format
@@ -3858,12 +3860,12 @@ msgstr ""
 #: src/file.c:1265
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
-msgstr ""
+msgstr " Не вдалося переписати каталог \"%s\" %s "
 
 #: src/file.c:1267
 #, c-format
 msgid " Cannot overwrite file \"%s\" %s "
-msgstr ""
+msgstr " Не вдалося переписати файл \"%s\" %s "
 
 #: src/file.c:1294
 #, c-format
@@ -3871,6 +3873,8 @@ msgid ""
 " Cannot move directory \"%s\" to \"%s\" \n"
 " %s "
 msgstr ""
+" Не вдалося перенести каталог \"%s\" у \"%s\" \n"
+" %s "
 
 #: src/file.c:1357
 #, c-format
@@ -3887,7 +3891,7 @@ msgid ""
 " Cannot remove directory \"%s\" \n"
 " %s "
 msgstr ""
-" Неможливо стерти каталог \"%s\" \n"
+" Неможливо видалити каталог \"%s\" \n"
 " %s "
 
 #: src/file.c:1559
@@ -4107,7 +4111,7 @@ msgstr ""
 
 #: src/filegui.c:692
 msgid " File exists "
-msgstr ""
+msgstr " Файл ╕сну╓ "
 
 #: src/filegui.c:693
 msgid " Background process: File exists "
@@ -4186,7 +4190,7 @@ msgstr "&Редагувати - F4"
 
 #: src/find.c:170
 msgid "Start at:"
-msgstr ""
+msgstr "Починати з:"
 
 #: src/find.c:170
 msgid "Filename:"
@@ -4194,7 +4198,7 @@ msgstr "Назва файлу:"
 
 #: src/find.c:170
 msgid "Content: "
-msgstr ""
+msgstr "Вм╕ст: "
 
 #: src/find.c:171 src/main.c:1243 src/main.c:1267
 msgid "&Tree"
@@ -4202,7 +4206,7 @@ msgstr "&Дерево"
 
 #: src/find.c:223
 msgid "Find File"
-msgstr ""
+msgstr "Пошук файлу"
 
 #: src/find.c:452
 #, c-format
@@ -4219,7 +4223,7 @@ msgstr ""
 
 #: src/find.c:537
 msgid "Finished"
-msgstr ""
+msgstr "Завершено"
 
 #: src/find.c:561 src/view.c:1526
 #, c-format
@@ -4228,7 +4232,7 @@ msgstr "Пошук %s"
 
 #: src/find.c:717 src/find.c:757
 msgid "Suspend"
-msgstr ""
+msgstr "Зупинити"
 
 #: src/find.c:717
 msgid "Restart"
@@ -5082,7 +5086,7 @@ msgstr ""
 
 #: src/main.c:2706
 msgid "Log ftp dialog to specified file"
-msgstr ""
+msgstr "Журналювати д╕алог з ftp у вказаний файл"
 
 #: src/main.c:2713
 msgid "Obsolete"
@@ -6007,7 +6011,7 @@ msgstr "fish: збереження %s %d (%d)"
 
 #: vfs/fish.c:512
 msgid "Aborting transfer..."
-msgstr ""
+msgstr "Переривання передач╕..."
 
 #: vfs/fish.c:521
 msgid "Error reported after abort."
@@ -6102,24 +6106,24 @@ msgstr ""
 
 #: vfs/ftpfs.c:997
 msgid "ftpfs: could not setup passive mode"
-msgstr ""
+msgstr "ftpfs: не вдалося встановити пасивний режим"
 
 #: vfs/ftpfs.c:1070
 msgid "ftpfs: aborting transfer."
-msgstr ""
+msgstr "ftpfs: переривання передач╕."
 
 #: vfs/ftpfs.c:1072
 #, c-format
 msgid "ftpfs: abort error: %s"
-msgstr ""
+msgstr "ftpfs: помилка переривання: %s"
 
 #: vfs/ftpfs.c:1077
 msgid "ftpfs: abort failed"
-msgstr ""
+msgstr "ftpfs: не вдалося перервати"
 
 #: vfs/ftpfs.c:1165 vfs/ftpfs.c:1344
 msgid "ftpfs: CWD failed."
-msgstr ""
+msgstr "ftpfs: не вдалося зм╕нити каталог."
 
 #: vfs/ftpfs.c:1175 vfs/ftpfs.c:1182
 msgid "ftpfs: couldn't resolve symlink"
