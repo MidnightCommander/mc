@@ -47,6 +47,14 @@
 static const char app_text [] = "Midnight-Commander";
 int easy_patterns = 1;
 
+extern void str_replace(char *s, char from, char to)
+{
+    for (; *s != '\0'; s++) {
+        if (*s == from)
+            *s = to;
+    }
+}
+
 static inline int
 is_7bit_printable (unsigned char c)
 {

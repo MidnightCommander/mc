@@ -6,6 +6,7 @@
 
 /* String managing functions */
 
+void str_replace(char *s, char from, char to);
 int  is_printable (int c);
 int  msglen (const char *text, int *lines);
 char *trim (char *s, char *d, int len);
