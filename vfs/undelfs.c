@@ -281,8 +281,8 @@ undelfs_loaddel (void)
 void
 com_err (const char *whoami, long err_code, const char *fmt, ...)
 {
-    char *str;
     va_list ap;
+    char *str;
 
     va_start (ap, fmt);
     str = g_strdup_vprintf (fmt, ap);
