@@ -1,3 +1,9 @@
+1999-02-06  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gscreen.c (x_create_panel): The location bar is now a simple
+ 	GtkHBox instead of a GtkToolbar, and as a consequence the location
+ 	entry widget is expanded to fill all of the window horizontally.
+
 1999-02-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (drag_data_get): Set the Netscape URL from the icon

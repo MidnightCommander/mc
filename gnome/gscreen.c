@@ -2424,21 +2424,17 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	else if (panel->list_type == list_user)
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (viewbar[3].widget), TRUE);
 
-	/*
-	 * Here we make the view buttons.
-	 */
-	status_line = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
+	status_line = gtk_hbox_new (FALSE, 2);
 	gtk_container_set_border_width (GTK_CONTAINER (status_line), 3);
-	evbox = gtk_event_box_new ();
-	hbox = gtk_hbox_new (FALSE, 2);
-	gtk_container_add (GTK_CONTAINER (evbox), hbox);
-	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
-				   evbox,
-				   NULL, NULL);
-	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("Location:")), FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), cwd, TRUE, TRUE, 0);
-	dock =  gnome_dock_item_new ("gmc-toolbar1", GNOME_DOCK_ITEM_BEH_EXCLUSIVE | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
-	gtk_container_add (GTK_CONTAINER(dock),status_line);
+	gtk_box_pack_start (GTK_BOX (status_line),
+                            gtk_label_new (_("Location:")), FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (status_line),
+                            cwd, TRUE, TRUE, 0);
+        
+	dock =  gnome_dock_item_new ("gmc-toolbar1",
+                                     (GNOME_DOCK_ITEM_BEH_EXCLUSIVE
+                                      | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL));
+	gtk_container_add (GTK_CONTAINER(dock), status_line);
 	gnome_dock_add_item (GNOME_DOCK(GNOME_APP (panel->xwindow)->dock),
 			     GNOME_DOCK_ITEM (dock), GNOME_DOCK_TOP, 1, 0, 0, FALSE);
 	
