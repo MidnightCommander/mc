@@ -87,11 +87,11 @@ gmc_check_exec_string (const char *buf)
 		return FALSE;
 
 	prog = gnome_is_program_in_path (argv[0]);
-	if (prog)
+	if (prog) {
 		retval = TRUE;
-	else
+		g_free (prog);
+	} else
 		retval = FALSE;
-	g_free (prog);
 	/* check to see if it's a GMC directive. */
 	if ((strlen (argv[0]) > 1) && (argv[0][0] == '%') && (argv[0][1] != '%'))
 		retval = TRUE;
@@ -100,6 +100,7 @@ gmc_check_exec_string (const char *buf)
 	g_free (argv);
 	return retval;
 }
+
 int
 gmc_open_filename (char *fname, GList *args)
 {
@@ -295,11 +296,13 @@ gmc_open_with (gchar *filename)
 		return 0;
 	}
 }
+
 static void
 gmc_run_view (const char *filename, const char *buf)
 {
 	exec_extension (filename, buf, NULL, NULL, 0, 0);
 }
+
 static gchar *
 gmc_view_command (gchar *filename)
 {
