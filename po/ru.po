@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.51\n"
-"POT-Creation-Date: 2001-06-09 03:29-0400\n"
+"POT-Creation-Date: 2001-06-15 03:36-0400\n"
 "PO-Revision-Date: 2000-08-21 12:24+00:00\n"
 "Last-Translator: Andrew V. Samoilov <sav@bcs.zp.ua>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -382,28 +382,28 @@ msgstr "Использовать вырезанный текст"
 msgid "Desktop"
 msgstr "Рабочий стол"
 
-#: gnome/gdesktop.c:679 gnome/gmount.c:385
+#: gnome/gdesktop.c:680 gnome/gmount.c:385
 msgid "Warning"
 msgstr "Предупреждение"
 
-#: gnome/gdesktop.c:680
+#: gnome/gdesktop.c:681
 #, c-format
 msgid "Could not open %s; will not have desktop icons"
 msgstr "Невозможно открыть %s; не будет пиктограмм на рабочем столе"
 
-#: gnome/gdesktop.c:1412
+#: gnome/gdesktop.c:1413
 msgid "While running the mount/umount command"
 msgstr "При исполнении команды mount/umount"
 
-#: gnome/gdesktop.c:1481
+#: gnome/gdesktop.c:1482
 msgid "While running the eject command"
 msgstr "При исполнении команды eject"
 
-#: gnome/gdesktop.c:1665 gnome/gicon.c:282 gnome/gtools.c:46
+#: gnome/gdesktop.c:1666 gnome/gicon.c:282 gnome/gtools.c:46
 msgid "Error"
 msgstr "Ошибка"
 
-#: gnome/gdesktop.c:2917
+#: gnome/gdesktop.c:2918
 msgid ""
 "Unable to locate the file:\n"
 "background-properties-capplet\n"
@@ -417,92 +417,92 @@ msgstr ""
 "\n"
 "Невозможно установить фоновое изображение."
 
-#: gnome/gdesktop.c:2946 gnome/glayout.c:361
+#: gnome/gdesktop.c:2947 gnome/glayout.c:361
 msgid "_Terminal"
 msgstr "Терминал"
 
-#: gnome/gdesktop.c:2946 gnome/glayout.c:362
+#: gnome/gdesktop.c:2947 gnome/glayout.c:362
 msgid "Launch a new terminal in the current directory"
 msgstr "Запустить новый терминал в текущем каталоге"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2948 gnome/glayout.c:364
+#: gnome/gdesktop.c:2949 gnome/glayout.c:364
 msgid "_Directory..."
 msgstr "Каталог..."
 
-#: gnome/gdesktop.c:2948 gnome/glayout.c:365
+#: gnome/gdesktop.c:2949 gnome/glayout.c:365
 msgid "Creates a new directory"
 msgstr "Создать новый каталог"
 
-#: gnome/gdesktop.c:2949
+#: gnome/gdesktop.c:2950
 msgid "URL L_ink..."
 msgstr "Ссылка URL..."
 
-#: gnome/gdesktop.c:2949
+#: gnome/gdesktop.c:2950
 msgid "Creates a new URL link"
 msgstr "Создать новую ссылку URL"
 
-#: gnome/gdesktop.c:2950
+#: gnome/gdesktop.c:2951
 msgid "_Launcher..."
 msgstr "Кнопка запуска"
 
-#: gnome/gdesktop.c:2950
+#: gnome/gdesktop.c:2951
 msgid "Creates a new launcher"
 msgstr "Создать новую кнопку запуска"
 
-#: gnome/gdesktop.c:2956
+#: gnome/gdesktop.c:2957
 msgid "By _Name"
 msgstr "По имени"
 
-#: gnome/gdesktop.c:2957
+#: gnome/gdesktop.c:2958
 msgid "By File _Type"
 msgstr "По типу файла"
 
-#: gnome/gdesktop.c:2958
+#: gnome/gdesktop.c:2959
 msgid "By _Size"
 msgstr "По размеру"
 
-#: gnome/gdesktop.c:2959
+#: gnome/gdesktop.c:2960
 msgid "By Time Last _Accessed"
 msgstr "По времени последнего доступа"
 
-#: gnome/gdesktop.c:2960
+#: gnome/gdesktop.c:2961
 msgid "By Time Last _Modified"
 msgstr "По времени последней модификации"
 
-#: gnome/gdesktop.c:2961
+#: gnome/gdesktop.c:2962
 msgid "By Time Last _Changed"
 msgstr "По времени последнего изменения"
 
-#: gnome/gdesktop.c:2969 gnome/glayout.c:461
+#: gnome/gdesktop.c:2970 gnome/glayout.c:461
 msgid "_Arrange Icons"
 msgstr "Выровнять пиктограммы"
 
-#: gnome/gdesktop.c:2970
+#: gnome/gdesktop.c:2971
 msgid "_Tidy Icons"
 msgstr ""
 
-#: gnome/gdesktop.c:2971
+#: gnome/gdesktop.c:2972
 msgid "Create _New Window"
 msgstr "Создать новое окно"
 
-#: gnome/gdesktop.c:2973 gnome/glayout.c:463
+#: gnome/gdesktop.c:2974 gnome/glayout.c:463
 msgid "Rescan _Desktop Directory"
 msgstr "Пересмотреть каталог рабочего стола"
 
-#: gnome/gdesktop.c:2974 gnome/glayout.c:464
+#: gnome/gdesktop.c:2975 gnome/glayout.c:464
 msgid "Rescan De_vices"
 msgstr "Пересмотреть список устройств"
 
-#: gnome/gdesktop.c:2975 gnome/glayout.c:465
+#: gnome/gdesktop.c:2976 gnome/glayout.c:465
 msgid "Recreate Default _Icons"
 msgstr "Воссоздать стандартные пиктограммы"
 
-#: gnome/gdesktop.c:2977
+#: gnome/gdesktop.c:2978
 msgid "Configure _Background Image"
 msgstr "Настроить фон"
 
-#: gnome/gdesktop.c:2978
+#: gnome/gdesktop.c:2979
 msgid "Des_ktop Properties"
 msgstr "Свойства рабочего стола"
 
@@ -567,12 +567,12 @@ msgstr "Принимающий файл \"%s\" уже существует!"
 msgid "Replace it?"
 msgstr "Заменить?"
 
-#: gnome/gdialogs.c:568 gtkedit/editwidget.c:1141 gtkedit/gtkedit.c:1252
-#: src/file.c:802 src/screen.c:2386 src/screen.c:2416 src/tree.c:1014
+#: gnome/gdialogs.c:568 gtkedit/editwidget.c:1143 gtkedit/gtkedit.c:1252
+#: src/file.c:802 src/screen.c:2413 src/tree.c:1016
 msgid "Copy"
 msgstr "Копия"
 
-#: gnome/gdialogs.c:571 gtkedit/editwidget.c:1142 gtkedit/gtkedit.c:1254
+#: gnome/gdialogs.c:571 gtkedit/editwidget.c:1144 gtkedit/gtkedit.c:1254
 msgid "Move"
 msgstr "Переместить"
 
@@ -682,11 +682,11 @@ msgstr "Пароль"
 msgid "Symbolic Link"
 msgstr "Символическая ссылка"
 
-#: gnome/gdialogs.c:1055 src/boxes.c:898
+#: gnome/gdialogs.c:1055 src/boxes.c:888
 msgid "Existing filename (filename symlink will point to):"
 msgstr "Имя существующего файла (для ссылки):"
 
-#: gnome/gdialogs.c:1069 src/boxes.c:896
+#: gnome/gdialogs.c:1069 src/boxes.c:886
 msgid "Symbolic link filename:"
 msgstr "Имя символической ссылки:"
 
@@ -874,7 +874,7 @@ msgstr "Инвертировать выделение"
 msgid "Reverses the list of tagged files"
 msgstr "Превратить невыделенные файлы в выделенные и наоборот"
 
-#: gnome/glayout.c:407 gtkedit/editwidget.c:1143 src/view.c:2096
+#: gnome/glayout.c:407 gtkedit/editwidget.c:1145 src/view.c:2097
 msgid "Search"
 msgstr "Поиск"
 
@@ -900,7 +900,7 @@ msgstr "Порядок сортировки файлов"
 
 #: gnome/glayout.c:421
 msgid "_Filter View..."
-msgstr "Избирательный"
+msgstr "Фильтр..."
 
 #: gnome/glayout.c:421
 msgid "Filename filtering settings"
@@ -979,11 +979,11 @@ msgstr "Справка"
 msgid "File/New/Directory..."
 msgstr "Файл/Новые/Каталог..."
 
-#: gnome/gmain.c:564
+#: gnome/gmain.c:554
 msgid "Don't show this window again"
 msgstr "Больше не показывать это окно"
 
-#: gnome/gmain.c:566
+#: gnome/gmain.c:556
 msgid ""
 "You are running the GNOME File Manager as root.\n"
 "\n"
@@ -1094,27 +1094,27 @@ msgid "Could not symlink %s to %s; will not have such a desktop device icon."
 msgstr ""
 "Невозможно создать ссылку %s к %s. Не будет пиктограммы на рабочем столе."
 
-#: gnome/gmount.c:444
+#: gnome/gmount.c:443
 #, c-format
 msgid "CD-ROM %d"
 msgstr "CD-ROM %d"
 
-#: gnome/gmount.c:456
+#: gnome/gmount.c:455
 #, c-format
 msgid "Floppy %d"
 msgstr "Дискета %d"
 
-#: gnome/gmount.c:462
+#: gnome/gmount.c:461
 #, c-format
 msgid "Disk %d"
 msgstr "Диск %d"
 
-#: gnome/gmount.c:467
+#: gnome/gmount.c:466
 #, c-format
 msgid "NFS dir %s"
 msgstr "NFS каталог %s"
 
-#: gnome/gmount.c:471
+#: gnome/gmount.c:470
 #, c-format
 msgid "Device %d"
 msgstr "Устройство %d"
@@ -1229,7 +1229,7 @@ msgstr "Стандартные настройки для Бросить"
 
 #: gnome/gnome-file-property-dialog.c:413
 #: gnome/gnome-file-property-dialog.c:501 gnome/gpopup2.c:286
-#: src/screen.c:2384 src/screen.c:2414
+#: src/screen.c:2411
 msgid "View"
 msgstr "Просмотр"
 
@@ -1259,7 +1259,7 @@ msgid "Use default View action"
 msgstr "Стандартные настройки для просмотра"
 
 #: gnome/gnome-file-property-dialog.c:523 gnome/gpopup2.c:288
-#: src/screen.c:2385 src/screen.c:2415 src/view.c:2092
+#: src/screen.c:2412 src/view.c:2093
 msgid "Edit"
 msgstr "Правка"
 
@@ -1423,8 +1423,8 @@ msgstr "Копировать..."
 msgid "Move to Trash"
 msgstr "Перенести в мусорную корзину"
 
-#: gnome/gpopup2.c:292 gtkedit/editwidget.c:1144 src/screen.c:2389
-#: src/screen.c:2419
+#: gnome/gpopup2.c:292 gtkedit/editwidget.c:1146 gtkedit/gtkedit.c:1256
+#: src/screen.c:2416
 msgid "Delete"
 msgstr "Удалить"
 
@@ -1561,17 +1561,17 @@ msgstr "Очистить мусорную корзину"
 msgid "Search: %s"
 msgstr "Ищем: %s"
 
-#: gnome/gscreen.c:1661 src/screen.c:663
+#: gnome/gscreen.c:1661 src/screen.c:664
 #, c-format
 msgid "%s bytes in %d file"
 msgstr "%s байт в %d файле"
 
-#: gnome/gscreen.c:1661 src/screen.c:663
+#: gnome/gscreen.c:1661 src/screen.c:664
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s байт в %d файлах"
 
-#: gnome/gscreen.c:1687 src/screen.c:689
+#: gnome/gscreen.c:1687 src/screen.c:690
 msgid "<readlink failed>"
 msgstr "<сбой чтения ссылки>"
 
@@ -1611,7 +1611,7 @@ msgstr "Вперед"
 msgid "Go to the next directory"
 msgstr "Перейти в следующий каталог"
 
-#: gnome/gscreen.c:2278 src/tree.c:1010
+#: gnome/gscreen.c:2278 src/tree.c:1012
 msgid "Rescan"
 msgstr "Пересм."
 
@@ -1635,8 +1635,8 @@ msgstr "Место:"
 #: gnome/gtools.c:105 gtkedit/edit.h:502 gtkedit/editcmd.c:395
 #: gtkedit/editcmd.c:1254 gtkedit/editcmd.c:1339 gtkedit/editcmd.c:3064
 #: gtkedit/editmenu.c:46 gtkedit/editoptions.c:69 src/boxes.c:141
-#: src/boxes.c:275 src/boxes.c:375 src/boxes.c:466 src/boxes.c:619
-#: src/boxes.c:759 src/boxes.c:992 src/filegui.c:805 src/find.c:175
+#: src/boxes.c:275 src/boxes.c:375 src/boxes.c:466 src/boxes.c:613
+#: src/boxes.c:749 src/boxes.c:982 src/filegui.c:805 src/find.c:175
 #: src/layout.c:369 src/option.c:135 src/wtools.c:290 src/wtools.c:557
 #: vfs/smbfs.c:112
 msgid "&Ok"
@@ -1739,7 +1739,7 @@ msgstr "прекратить"
 #: gtkedit/edit.c:348 gtkedit/edit.c:380 gtkedit/edit.c:386 gtkedit/edit.c:393
 #: gtkedit/edit.c:400 gtkedit/edit.c:406 gtkedit/editcmd.c:307
 #: gtkedit/editcmd.c:313 gtkedit/editcmd.c:2052 gtkedit/editwidget.c:1024
-#: src/dir.c:396 src/tree.c:680 src/tree.c:686 src/wtools.c:222
+#: src/dir.c:396 src/tree.c:682 src/tree.c:688 src/wtools.c:222
 msgid " Error "
 msgstr " Ошибка "
 
@@ -1779,11 +1779,11 @@ msgstr ""
 " \n"
 " Увеличьте edit.h:MAXBUF и перекомпилируйте редактор. "
 
-#: gtkedit/edit.c:2599
+#: gtkedit/edit.c:2601
 msgid "User menu available only in mcedit invoked from mc"
 msgstr "Меню пользователя доступно только в mcedit, запущенном из mc"
 
-#: gtkedit/edit.c:2797 gtkedit/editcmd.c:2982
+#: gtkedit/edit.c:2801 gtkedit/editcmd.c:2982
 msgid "Error trying to stat file:"
 msgstr "Ошибка получения атрибутов файла:"
 
@@ -1815,7 +1815,7 @@ msgstr "Резервные копии -->"
 #: gtkedit/editcmd.c:393 gtkedit/editcmd.c:1193 gtkedit/editcmd.c:1252
 #: gtkedit/editcmd.c:1337 gtkedit/editcmd.c:3062 gtkedit/editoptions.c:66
 #: src/achown.c:71 src/boxes.c:142 src/boxes.c:276 src/boxes.c:373
-#: src/boxes.c:464 src/boxes.c:616 src/boxes.c:757 src/chmod.c:110
+#: src/boxes.c:464 src/boxes.c:610 src/boxes.c:747 src/chmod.c:110
 #: src/chown.c:79 src/cmd.c:861 src/filegui.c:788 src/find.c:175
 #: src/hotlist.c:134 src/hotlist.c:779 src/hotlist.c:876 src/layout.c:370
 #: src/learn.c:59 src/option.c:136 src/panelize.c:86 src/view.c:407
@@ -1838,8 +1838,8 @@ msgstr " Сохранить как "
 #. Warning message with a query to continue or cancel the operation
 #: gtkedit/editcmd.c:543 gtkedit/editcmd.c:867 gtkedit/editcmd.c:892
 #: gtkedit/editcmd.c:1043 gtkedit/editcmd.c:1141 src/ext.c:310 src/file.c:619
-#: src/help.c:314 src/main.c:713 src/screen.c:1441 src/screen.c:2114
-#: src/screen.c:2164 src/selcodepage.c:73 src/selcodepage.c:90
+#: src/help.c:314 src/main.c:713 src/screen.c:1442 src/screen.c:2115
+#: src/screen.c:2165 src/selcodepage.c:73 src/selcodepage.c:90
 #: src/subshell.c:741 src/subshell.c:767 src/utilunix.c:382 src/utilunix.c:386
 #: src/utilunix.c:406 src/utilunix.c:457 vfs/mcfs.c:167
 msgid " Warning "
@@ -1920,8 +1920,8 @@ msgstr " Подтверждаете запись файла?: "
 msgid " Save file "
 msgstr " Сохранить файл "
 
-#: gtkedit/editcmd.c:841 gtkedit/editwidget.c:1138 gtkedit/gtkedit.c:1249
-#: src/view.c:2088
+#: gtkedit/editcmd.c:841 gtkedit/editwidget.c:1140 gtkedit/gtkedit.c:1249
+#: src/view.c:2089
 msgid "Save"
 msgstr "Запись"
 
@@ -2013,7 +2013,7 @@ msgstr " Введите порядок аргументов замены, напр. 3,2,1,4 "
 msgid " Enter replacement string:"
 msgstr " Введите текст для замены: "
 
-#: gtkedit/editcmd.c:1280 gtkedit/editcmd.c:1353 src/view.c:2003
+#: gtkedit/editcmd.c:1280 gtkedit/editcmd.c:1353 src/view.c:2004
 msgid " Enter search string:"
 msgstr " Введите строку для поиска"
 
@@ -2025,8 +2025,8 @@ msgstr " Заменить "
 
 #. Heads the 'Search' dialog box
 #: gtkedit/editcmd.c:1367 gtkedit/editcmd.c:1597 gtkedit/editcmd.c:2362
-#: gtkedit/editcmd.c:2364 gtkedit/editcmd.c:2392 src/view.c:1525
-#: src/view.c:1622 src/view.c:1745 src/view.c:1961 src/view.c:2003
+#: gtkedit/editcmd.c:2364 gtkedit/editcmd.c:2392 src/view.c:1526
+#: src/view.c:1623 src/view.c:1746 src/view.c:1962 src/view.c:2004
 msgid " Search "
 msgstr " Поиск "
 
@@ -2140,7 +2140,7 @@ msgstr "Начать поиск, Enter"
 msgid "Abort this dialog, Esc"
 msgstr "Прервать этот диалог, Esc"
 
-#: gtkedit/editcmd.c:1692
+#: gtkedit/editcmd.c:1692 gtkedit/gtkedit.c:1251
 msgid "Replace"
 msgstr "Замена"
 
@@ -2204,14 +2204,14 @@ msgid "Cancel quit"
 msgstr "Прервать выход"
 
 #: gtkedit/editcmd.c:2432 src/cmd.c:245 src/file.c:1882 src/file.c:2253
-#: src/filegui.c:571 src/hotlist.c:1000 src/main.c:868 src/screen.c:2151
-#: src/subshell.c:742 src/subshell.c:768 src/tree.c:745 src/view.c:407
+#: src/filegui.c:571 src/hotlist.c:1000 src/main.c:868 src/screen.c:2152
+#: src/subshell.c:742 src/subshell.c:768 src/tree.c:747 src/view.c:407
 msgid "&Yes"
 msgstr "&Да"
 
 #: gtkedit/editcmd.c:2432 src/cmd.c:245 src/file.c:1882 src/file.c:2253
-#: src/filegui.c:570 src/hotlist.c:1000 src/main.c:868 src/screen.c:2151
-#: src/subshell.c:742 src/subshell.c:768 src/tree.c:745 src/view.c:407
+#: src/filegui.c:570 src/hotlist.c:1000 src/main.c:868 src/screen.c:2152
+#: src/subshell.c:742 src/subshell.c:768 src/tree.c:747 src/view.c:407
 msgid "&No"
 msgstr "&Нет"
 
@@ -2241,7 +2241,7 @@ msgid " Cut to clipboard "
 msgstr " Вырезать в буфер "
 
 #: gtkedit/editcmd.c:2778 gtkedit/editcmd.c:2782 gtkedit/editcmd.c:2787
-#: gtkedit/editcmd.c:2790 src/view.c:1908
+#: gtkedit/editcmd.c:2790 src/view.c:1909
 msgid " Goto line "
 msgstr " Перейти к строке "
 
@@ -2792,27 +2792,25 @@ msgstr " Настройки редактора "
 msgid "Error initialising editor.\n"
 msgstr "Ошибка инициализации редактора.\n"
 
-#: gtkedit/editwidget.c:1137 gtkedit/gtkedit.c:1248 src/help.c:811
-#: src/main.c:1721 src/screen.c:2382 src/screen.c:2412 src/tree.c:1008
-#: src/view.c:2081
+#: gtkedit/editwidget.c:1139 gtkedit/gtkedit.c:1248 src/help.c:811
+#: src/main.c:1721 src/screen.c:2409 src/tree.c:1010 src/view.c:2082
 msgid "Help"
 msgstr "Помощь"
 
-#: gtkedit/editwidget.c:1139 gtkedit/gtkedit.c:1250
+#: gtkedit/editwidget.c:1141 gtkedit/gtkedit.c:1250
 msgid "Mark"
 msgstr "Блок"
 
-#: gtkedit/editwidget.c:1140
+#: gtkedit/editwidget.c:1142
 msgid "Replac"
 msgstr "Замена"
 
-#: gtkedit/editwidget.c:1146 src/main.c:1723
+#: gtkedit/editwidget.c:1148 src/main.c:1723
 msgid "PullDn"
 msgstr "МенюMC"
 
-#. gtk_edit_menu
-#: gtkedit/editwidget.c:1147 gtkedit/gtkedit.c:1258 src/help.c:823
-#: src/main.c:1724 src/view.c:2083 src/view.c:2105
+#: gtkedit/editwidget.c:1149 gtkedit/gtkedit.c:1260 src/help.c:823
+#: src/main.c:1724 src/view.c:2084 src/view.c:2106
 msgid "Quit"
 msgstr "Выход"
 
@@ -2844,10 +2842,6 @@ msgid "Toggle In/Off invisible marker to highlight text"
 msgstr "Вкл/Выкл невидимую метку для цветовыделения текста"
 
 #: gtkedit/gtkedit.c:1251
-msgid "Replc"
-msgstr "Замена"
-
-#: gtkedit/gtkedit.c:1251
 msgid "Find and replace strings/regular expressions"
 msgstr "Найти и заменить строки/регулярные выражения"
 
@@ -2868,46 +2862,42 @@ msgid "Find strings/regular expressions"
 msgstr "Поиск строк/регулярных выражений"
 
 #: gtkedit/gtkedit.c:1256
-msgid "Dlete"
-msgstr "Удалить"
-
-#: gtkedit/gtkedit.c:1256
 msgid "Delete highlighted text"
 msgstr "Удалить выделенный текст"
 
-#: gtkedit/gtkedit.c:1257 src/main.c:1722 src/screen.c:2383 src/screen.c:2413
+#: gtkedit/gtkedit.c:1258 src/main.c:1722 src/screen.c:2410
 msgid "Menu"
 msgstr "Меню"
 
-#: gtkedit/gtkedit.c:1257
+#: gtkedit/gtkedit.c:1258
 msgid "Pull down menu"
 msgstr "Выпадающее меню"
 
-#: gtkedit/gtkedit.c:1258
+#: gtkedit/gtkedit.c:1260
 msgid "Exit editor"
 msgstr "Покинуть редактор"
 
-#: gtkedit/gtkedit.c:1292
+#: gtkedit/gtkedit.c:1294
 msgid "Clear the edit buffer"
 msgstr "Очистить буфер редактора"
 
-#: gtkedit/gtkedit.c:1297
+#: gtkedit/gtkedit.c:1299
 msgid "Insert File"
 msgstr "Вставить файл"
 
-#: gtkedit/gtkedit.c:1297
+#: gtkedit/gtkedit.c:1299
 msgid "Insert text from a file"
 msgstr "Вставить текст из файла"
 
-#: gtkedit/gtkedit.c:1299
+#: gtkedit/gtkedit.c:1301
 msgid "Copy to file"
 msgstr "Копировать в файл...\tC-f"
 
-#: gtkedit/gtkedit.c:1299
+#: gtkedit/gtkedit.c:1301
 msgid "copy a block to a file"
 msgstr "Копировать блок в файл"
 
-#: gtkedit/gtkedit.c:1339
+#: gtkedit/gtkedit.c:1341
 msgid "Search/Replace"
 msgstr "Поиск/Замена"
 
@@ -3043,7 +3033,7 @@ msgstr ""
 " %s "
 
 #: src/achown.c:650 src/achown.c:654 src/chmod.c:305 src/chmod.c:309
-#: src/chown.c:260 src/chown.c:264 src/panelize.c:299 src/user.c:660
+#: src/chown.c:260 src/chown.c:264 src/panelize.c:299 src/user.c:663
 msgid " Oops... "
 msgstr " Ой... "
 
@@ -3159,80 +3149,84 @@ msgstr "ISO 8859-1"
 msgid "7 bits"
 msgstr "&7 бит"
 
-#: src/boxes.c:468 src/boxes.c:622
+#: src/boxes.c:468 src/boxes.c:616
 msgid "F&ull 8 bits input"
 msgstr "Полный 8-битный &ввод"
 
-#: src/boxes.c:476 src/boxes.c:549
+#: src/boxes.c:476 src/boxes.c:597
 msgid " Display bits "
 msgstr " Отображение символов "
 
-#: src/boxes.c:606
+#: src/boxes.c:581 src/selcodepage.c:47
+msgid "Other 8 bit"
+msgstr "Другая 8-битная"
+
+#: src/boxes.c:600
 msgid "Input / display codepage:"
 msgstr ""
 
-#: src/boxes.c:625
+#: src/boxes.c:619
 msgid "&Select"
 msgstr "Выбрать"
 
-#: src/boxes.c:764
+#: src/boxes.c:754
 msgid "&Always use ftp proxy"
 msgstr "&Всегда использовать FTP прокси"
 
-#: src/boxes.c:766
+#: src/boxes.c:756
 msgid "sec"
 msgstr "сек"
 
-#: src/boxes.c:770
+#: src/boxes.c:760
 msgid "ftpfs directory cache timeout:"
 msgstr "Тайм-аут кеша каталога FTP:"
 
-#: src/boxes.c:774
+#: src/boxes.c:764
 msgid "ftp anonymous password:"
 msgstr "Пароль анонимного FTP:"
 
-#: src/boxes.c:781
+#: src/boxes.c:771
 msgid "Timeout for freeing VFSs:"
 msgstr "Тайм-аут высвобождения ВФС:"
 
-#: src/boxes.c:787
+#: src/boxes.c:777
 msgid " Virtual File System Setting "
 msgstr " Настройки Виртуальной Файловой Системы "
 
-#: src/boxes.c:846
+#: src/boxes.c:836
 msgid "Quick cd"
 msgstr " Смена рабочего каталога "
 
 #. want cd like completion
-#: src/boxes.c:851
+#: src/boxes.c:841
 msgid "cd"
 msgstr "Перейти в"
 
-#: src/boxes.c:891
+#: src/boxes.c:881
 msgid "Symbolic link"
 msgstr " Символическая ссылка "
 
-#: src/boxes.c:927
+#: src/boxes.c:917
 msgid "Running "
 msgstr "Выполняется "
 
-#: src/boxes.c:928 src/find.c:724 src/find.c:965
+#: src/boxes.c:918 src/find.c:724 src/find.c:965
 msgid "Stopped"
 msgstr "Остановлен"
 
-#: src/boxes.c:989
+#: src/boxes.c:979
 msgid "&Stop"
 msgstr "&Остановить"
 
-#: src/boxes.c:990
+#: src/boxes.c:980
 msgid "&Resume"
 msgstr "&Возобновить"
 
-#: src/boxes.c:991
+#: src/boxes.c:981
 msgid "&Kill"
 msgstr "&Снять"
 
-#: src/boxes.c:1030
+#: src/boxes.c:1020
 msgid "Background Jobs"
 msgstr " Фоновые задания "
 
@@ -3756,7 +3750,7 @@ msgstr "Файл '%s' существует, но невозможно получить свойства: %s"
 msgid "Unknown"
 msgstr "Неизвестный"
 
-#: src/ext.c:146 src/user.c:546
+#: src/ext.c:146 src/user.c:549
 #, c-format
 msgid ""
 " Can't create temporary command file \n"
@@ -3765,7 +3759,7 @@ msgstr ""
 " Невозможно создать временный командный файл \n"
 " %s "
 
-#: src/ext.c:160 src/user.c:567
+#: src/ext.c:160 src/user.c:570
 msgid " Parameter "
 msgstr " Параметр "
 
@@ -3823,15 +3817,15 @@ msgstr ""
 msgid "mc.ext will be used for this moment."
 msgstr "mc.ext будет использован в настоящий момент."
 
-#: src/file.c:154 src/tree.c:639
+#: src/file.c:154 src/tree.c:641
 msgid " Copy "
 msgstr " Копирование "
 
-#: src/file.c:155 src/tree.c:675
+#: src/file.c:155 src/tree.c:677
 msgid " Move "
 msgstr " Перемещение "
 
-#: src/file.c:156 src/tree.c:745
+#: src/file.c:156 src/tree.c:747
 msgid " Delete "
 msgstr " Удаление "
 
@@ -4223,11 +4217,11 @@ msgstr " с исходным шаблоном:"
 msgid " Can't operate on \"..\"! "
 msgstr " Невозможно выполнить указанную операцию на \"..\"! "
 
-#: src/file.c:1879 src/screen.c:2104
+#: src/file.c:1879 src/screen.c:2105
 msgid "Yes"
 msgstr "Да"
 
-#: src/file.c:1879 src/screen.c:2104
+#: src/file.c:1879 src/screen.c:2105
 msgid "No"
 msgstr "Нет"
 
@@ -4485,7 +4479,7 @@ msgstr " Проблемы со чтением вывода дочернего процесса "
 msgid "Finished"
 msgstr "Готово"
 
-#: src/find.c:566 src/view.c:1525
+#: src/find.c:566 src/view.c:1526
 #, c-format
 msgid "Searching %s"
 msgstr "Ищем %s"
@@ -4547,7 +4541,7 @@ msgstr " Невозможно найти узел [Contents] в файле помощи "
 msgid " Help "
 msgstr " Помощь "
 
-#: src/help.c:768 src/user.c:678
+#: src/help.c:768 src/user.c:681
 #, c-format
 msgid ""
 " Can't open file %s \n"
@@ -5035,7 +5029,7 @@ msgstr "Для продолжения нажмите любую клавишу..."
 msgid " The shell is already running a command "
 msgstr " Интерпретатор уже озабочен выполнением команды "
 
-#: src/main.c:866 src/screen.c:2102 src/screen.c:2149
+#: src/main.c:866 src/screen.c:2103 src/screen.c:2150
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
 
@@ -5795,31 +5789,23 @@ msgstr "UID"
 msgid "GID"
 msgstr "GID"
 
-#: src/screen.c:1315
+#: src/screen.c:1316
 msgid "Unknow tag on display format: "
 msgstr "Неизвестный тег в формате отображения: "
 
-#: src/screen.c:1441
+#: src/screen.c:1442
 msgid "User suplied format looks invalid, reverting to default."
 msgstr "Пользовательский формат выглядит неверным, возвращаю к стандартному."
 
-#: src/screen.c:2103 src/screen.c:2150
+#: src/screen.c:2104 src/screen.c:2151
 msgid " Do you really want to execute? "
 msgstr " Вы действительно хотите выполнить это? "
 
-#: src/screen.c:2114 src/screen.c:2164
+#: src/screen.c:2115 src/screen.c:2165
 msgid " No action taken "
 msgstr " Действие не выполнено "
 
-#: src/screen.c:2387 src/screen.c:2417 src/tree.c:1016
-msgid "RenMov"
-msgstr "Перемес"
-
-#: src/screen.c:2388 src/screen.c:2418 src/tree.c:1020
-msgid "Mkdir"
-msgstr "НвКтлог"
-
-#: src/screen.c:2404 src/tree.c:866
+#: src/screen.c:2401 src/tree.c:868
 #, c-format
 msgid ""
 " Can't chdir to \"%s\" \n"
@@ -5828,6 +5814,14 @@ msgstr ""
 " Невозможно перейти в \"%s\" \n"
 " %s "
 
+#: src/screen.c:2414 src/tree.c:1018
+msgid "RenMov"
+msgstr "Перемес"
+
+#: src/screen.c:2415 src/tree.c:1022
+msgid "Mkdir"
+msgstr "НвКтлог"
+
 #: src/selcodepage.c:32
 msgid " Choose input codepage "
 msgstr ""
@@ -5835,10 +5829,6 @@ msgstr ""
 #: src/selcodepage.c:36
 msgid "-  < No translation >"
 msgstr ""
-
-#: src/selcodepage.c:47
-msgid "Other 8 bit"
-msgstr "Другая 8-битная"
 
 #: src/selcodepage.c:74
 msgid ""
@@ -5981,7 +5971,7 @@ msgstr "С поддержкой многих кодировок\n"
 msgid "GNU Midnight Commander %s\n"
 msgstr ""
 
-#: src/tree.c:192
+#: src/tree.c:194
 #, c-format
 msgid ""
 "Can't open the %s file for writing:\n"
@@ -5990,17 +5980,17 @@ msgstr ""
 "Невозможно открыть файл %s на запись:\n"
 "%s\n"
 
-#: src/tree.c:637
+#: src/tree.c:639
 #, c-format
 msgid "Copy \"%s\" directory to:"
 msgstr " Копировать каталог \"%s\" в:"
 
-#: src/tree.c:673
+#: src/tree.c:675
 #, c-format
 msgid "Move \"%s\" directory to:"
 msgstr " Переместить каталог \"%s\" в:"
 
-#: src/tree.c:680
+#: src/tree.c:682
 #, c-format
 msgid ""
 " Can't stat the destination \n"
@@ -6009,28 +5999,28 @@ msgstr ""
 " Невозможно получить свойства места назначения \n"
 " %s "
 
-#: src/tree.c:686
+#: src/tree.c:688
 msgid " The destination isn't a directory "
 msgstr " Место назначения не является каталогом "
 
-#: src/tree.c:744
+#: src/tree.c:746
 #, c-format
 msgid "  Delete %s?  "
 msgstr "  Удалить %s?  "
 
-#: src/tree.c:776
+#: src/tree.c:778
 msgid "Static"
 msgstr "Статич"
 
-#: src/tree.c:776
+#: src/tree.c:778
 msgid "Dynamc"
 msgstr "Динамч"
 
-#: src/tree.c:1012
+#: src/tree.c:1014
 msgid "Forget"
 msgstr "Забыть"
 
-#: src/tree.c:1025
+#: src/tree.c:1027
 msgid "Rmdir"
 msgstr "УдКтлог"
 
@@ -6043,46 +6033,46 @@ msgstr ""
 "Невозможно писать в файл %s:\n"
 "%s\n"
 
-#: src/user.c:137
-msgid " Format error on file Extensions File "
-msgstr " Ошибка формата в файле Расширений файлов"
-
-#: src/user.c:138
-#, c-format
-msgid " The %%var macro does not have a default "
-msgstr " Макрос %%var не имеет значений по умолчанию"
-
 #: src/user.c:139
-#, c-format
-msgid " The %%var macros does not have a variable "
-msgstr " Макрос %%var не имеет переменных"
+msgid " Format error on file Extensions File "
+msgstr " Ошибка формата в файле Расширений файлов "
 
-#: src/user.c:273
+#: src/user.c:140
+#, c-format
+msgid " The %%var macro has no default "
+msgstr " Макрос %%var не имеет значения по умолчанию "
+
+#: src/user.c:141
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr " Макрос %%var не имеет переменной "
+
+#: src/user.c:276
 #, c-format
 msgid " Invalid shell pattern definition \"%c\". "
 msgstr " Неверное определение образца оболочки \"%c\". "
 
-#: src/user.c:426
+#: src/user.c:429
 msgid " Debug "
 msgstr " Отладка "
 
-#: src/user.c:435
+#: src/user.c:438
 msgid " ERROR: "
 msgstr " ОШИБКА: "
 
-#: src/user.c:439
+#: src/user.c:442
 msgid " True:  "
 msgstr " Истина: "
 
-#: src/user.c:441
+#: src/user.c:444
 msgid " False: "
 msgstr " Ложь: "
 
-#: src/user.c:636
+#: src/user.c:639
 msgid " Warning -- ignoring file "
 msgstr " Предупреждение - файл игнорируется "
 
-#: src/user.c:637
+#: src/user.c:640
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
@@ -6092,17 +6082,17 @@ msgstr ""
 "или доступен другим на запись. Использование такого файла неприемлемо\n"
 "c точки зрения безопасности."
 
-#: src/user.c:661
+#: src/user.c:664
 msgid " I can't run programs while logged on a non local directory "
 msgstr " Невозможно исполнять программы, будучи не в локальном каталоге "
 
-#: src/user.c:759
+#: src/user.c:762
 #, c-format
 msgid " No appropriative entries found in %s "
 msgstr " Не найдено подходящих записей в %s"
 
 #. Create listbox
-#: src/user.c:765
+#: src/user.c:768
 msgid " User menu "
 msgstr " Меню пользователя "
 
@@ -6212,20 +6202,20 @@ msgstr "Смещение 0x%08x"
 msgid "  [grow]"
 msgstr "  [рост]"
 
-#: src/view.c:1515
+#: src/view.c:1516
 #, c-format
 msgid "Searching for `%s'"
 msgstr "Ищем %s"
 
-#: src/view.c:1622 src/view.c:1745
+#: src/view.c:1623 src/view.c:1746
 msgid " Search string not found "
 msgstr " Искомая строка не найдена "
 
-#: src/view.c:1784
+#: src/view.c:1785
 msgid " Invalid regular expression "
 msgstr " Неверное регулярное выражение "
 
-#: src/view.c:1906
+#: src/view.c:1907
 #, c-format
 msgid ""
 " The current line number is %d.\n"
@@ -6234,7 +6224,7 @@ msgstr ""
 " Номер текущей строки %d.\n"
 " Введите номер новой строки:"
 
-#: src/view.c:1928
+#: src/view.c:1929
 #, c-format
 msgid ""
 " The current address is 0x%lx.\n"
@@ -6243,67 +6233,67 @@ msgstr ""
 " Текущий адрес - 0x%lx.\n"
 " Введите новый адрес:"
 
-#: src/view.c:1930
+#: src/view.c:1931
 msgid " Goto Address "
 msgstr " Перейти на адрес "
 
-#: src/view.c:1961
+#: src/view.c:1962
 msgid " Enter regexp:"
 msgstr " Введите регулярное выражение:"
 
-#: src/view.c:2084
+#: src/view.c:2085
 msgid "Ascii"
 msgstr "Текст"
 
-#: src/view.c:2084
+#: src/view.c:2085
 msgid "Hex"
 msgstr "Hex"
 
-#: src/view.c:2085
+#: src/view.c:2086
 msgid "Goto"
 msgstr "Переход"
 
-#: src/view.c:2085
+#: src/view.c:2086
 msgid "Line"
 msgstr "Строка"
 
-#: src/view.c:2088
+#: src/view.c:2089
 msgid "RxSrch"
 msgstr "РегВыр"
 
-#: src/view.c:2091
+#: src/view.c:2092
 msgid "EdText"
 msgstr "ТкстРед"
 
-#: src/view.c:2091
+#: src/view.c:2092
 msgid "EdHex"
 msgstr "HxРедак"
 
-#: src/view.c:2093
+#: src/view.c:2094
 msgid "UnWrap"
 msgstr "НеПерен"
 
-#: src/view.c:2093
+#: src/view.c:2094
 msgid "Wrap"
 msgstr "Перенос"
 
-#: src/view.c:2096
+#: src/view.c:2097
 msgid "HxSrch"
 msgstr "HxПоиск"
 
-#: src/view.c:2099
+#: src/view.c:2100
 msgid "Raw"
 msgstr "Сырой"
 
-#: src/view.c:2099
+#: src/view.c:2100
 msgid "Parse"
 msgstr "Готовый"
 
-#: src/view.c:2103
+#: src/view.c:2104
 msgid "Unform"
 msgstr "НеФормт"
 
-#: src/view.c:2103
+#: src/view.c:2104
 msgid "Format"
 msgstr "Формат"
 
@@ -6816,11 +6806,6 @@ msgstr "ftpfs: ошибка; некуда перейти на аварийный режим"
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs: запись файла %d (%d)"
 
-#. This is place of next pointer
-#: vfs/ftpfs.c:1684
-msgid "File Transfer Protocol (ftp)"
-msgstr ""
-
 #: vfs/ftpfs.c:1797
 msgid ""
 "~/.netrc file has not correct mode.\n"
@@ -6886,11 +6871,6 @@ msgstr "Невозможно соединиться с сервером: %s "
 msgid " Too many open connections "
 msgstr " Слишком много открытых соединений "
 
-#. This is place of next pointer
-#: vfs/mcfs.c:1123
-msgid "Midnight Commander's private remote filesystem"
-msgstr "Частная удаленная файловая система Midnight Commander"
-
 #: vfs/sfs.c:301
 #, c-format
 msgid "Warning: file %s not found\n"
@@ -6913,11 +6893,6 @@ msgid ""
 msgstr ""
 "Предупреждение: неправильный флаг %c в sfs.ini:\n"
 "%s\n"
-
-#. This is place of next pointer
-#: vfs/sfs.c:390
-msgid "Single file filesystems"
-msgstr "ВФС с одним файлом"
 
 #: vfs/smbfs.c:111
 msgid "Domain:"
@@ -7102,11 +7077,6 @@ msgstr ""
 #, c-format
 msgid " Could not open file: %s "
 msgstr " Невозможно открыть файл: %s "
-
-#. This is place of next pointer
-#: vfs/undelfs.c:684
-msgid "Undelete filesystem for ext2"
-msgstr "Восстановление файловой системы для ext2"
 
 #: vfs/vfs.c:1144
 msgid "Changes to file lost"
