@@ -1,3 +1,8 @@
+2001-07-20  Pavel Roskin  <proski@gnu.org>
+
+	* file.c (panel_get_file): Use g_assert_not_reached().
+	* key.c (xgetch_second): Make static.
+
 2001-07-19  Pavel Roskin  <proski@gnu.org>
 
 	* user.c (check_format_view): Match "unform" instead of

@@ -88,7 +88,7 @@ static key_def *keys = 0;
 static int input_fd;
 static fd_set select_set;
 static int disabled_channels = 0; /* Disable channels checking */
-int xgetch_second (void);
+static int xgetch_second (void);
 
 /* File descriptor monitoring add/remove routines */
 typedef struct SelectList {
@@ -800,7 +800,7 @@ int mi_getch ()
     return key;
 }
 
-int xgetch_second (void)
+static int xgetch_second (void)
 {
     fd_set Read_FD_Set;
     int c;

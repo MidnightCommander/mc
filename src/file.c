@@ -1556,9 +1556,8 @@ panel_get_file (WPanel *panel, struct stat *stat_buf)
 	*stat_buf = panel->dir.list [panel->selected].buf;
 	return panel->dir.list [panel->selected].fname;
     }
-    fprintf (stderr, _(" Internal error: get_file \n"));
-    mi_getch ();
-    return "";
+    g_assert_not_reached ();
+    return NULL;
 }
 
 int
