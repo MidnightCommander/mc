@@ -167,10 +167,10 @@ Include the output of "mc --version", the operating system and the
 distribution (if applicable) you are using, the compiler and the
 configure flags used to compile the program (if you know them).
 
-If the program crashed and produces a core dump, please provide a
+If the program crashed and produced a core dump, please provide a
 stack trace of the program.
 
-You can do this by running dbx or gdb like this:
+You can do this by running gdb like this:
 
 gdb mc core
 (gdb) where
