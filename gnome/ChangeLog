@@ -1,5 +1,7 @@
 1998-10-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gscreen.c (x_select_item): Force a canvas update when an icon
+	has been selected. 
 
 1998-10-19  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 

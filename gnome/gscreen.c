@@ -336,6 +336,7 @@ x_select_item (WPanel *panel)
 			if (gnome_icon_list_icon_is_visible (list, panel->selected) != GTK_VISIBILITY_FULL)
 				gnome_icon_list_moveto (list, panel->selected, 0.5);
 		}
+		gnome_canvas_update_now (GNOME_CANVAS (list));
 	} else {
 		GtkCList *clist = GTK_CLIST (panel->list);
 		int color, marked;
@@ -1015,7 +1016,6 @@ panel_drag_data_get (GtkWidget        *widget,
 	case TARGET_TEXT_PLAIN:
 		data = panel_build_selected_file_list (panel, &len);
 
-		printf ("TRANSFERING: %s\n", data);
 		gtk_selection_data_set (
 			selection_data, selection_data->target, 8,
 			data, len);
@@ -1251,7 +1251,7 @@ panel_realized (GtkWidget *file_list, WPanel *panel)
 
 	gtk_signal_connect (obj, "drag_data_get",
 			    GTK_SIGNAL_FUNC (panel_drag_data_get), panel);
-	
+
 #if OLD_DND
 	/* DND: Drag setup */
 	gtk_signal_connect (obj, "drag_request_event", GTK_SIGNAL_FUNC (panel_clist_drag_request), panel);
@@ -1451,6 +1451,30 @@ panel_icon_list_drop_data_available (GtkWidget *widget, GdkEventDropDataAvailabl
 }
 #endif
 
+static int
+panel_icon_list_click (GtkWidget *widget, GdkEventButton *event, WPanel *panel)
+{
+	GnomeIconList *gil = GNOME_ICON_LIST (widget);
+	int icon;
+
+	icon = gnome_icon_list_get_icon_at (gil, event->x, event->y);
+
+	if (icon == -1)
+		return FALSE;
+	
+	if (panel->dir.list [icon].f.marked)
+		printf ("Selected\n");
+	else
+		printf ("not selected\n");
+	return FALSE;
+}
+
+static int
+panel_icon_list_motion (GtkWidget *widget, GdkEventMotion *event, WPanel *panel)
+{
+	return FALSE;
+}
+
 /*
  * Setup for the icon view
  */
@@ -1462,11 +1486,19 @@ panel_icon_list_realized (GtkObject *obj, WPanel *panel)
 	load_imlib_icons ();
 	load_dnd_icons ();
 
+#if 0
 	gtk_drag_source_set (GTK_WIDGET (icon), GDK_BUTTON1_MASK,
 			     drag_types, ELEMENTS (drag_types), GDK_ACTION_COPY);
-
+#endif
+	
 	gtk_signal_connect (obj, "drag_data_get",
 			    GTK_SIGNAL_FUNC (panel_drag_data_get), panel);
+	
+	gtk_signal_connect_after (obj, "button_press_event",
+			    GTK_SIGNAL_FUNC (panel_icon_list_click), panel);
+
+	gtk_signal_connect (obj, "motion_notify_event",
+			    GTK_SIGNAL_FUNC (panel_icon_list_motion), panel);
 	
 #ifdef OLD_DND
 	/* DND: Drag setup */
