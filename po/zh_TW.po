@@ -14,38 +14,28 @@ msgstr ""
 "Content-Type: text/plain; charset=big5\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-# edit/edit_key_translator.c:126
 #: edit/edit_key_translator.c:127
 msgid " Emacs key: "
 msgstr " Emacs 按鍵："
 
-# edit/edit_key_translator.c:138
-# edit/edit_key_translator.c:153
 #: edit/edit_key_translator.c:139 edit/edit_key_translator.c:164
 msgid " Execute Macro "
 msgstr " 執行巨集 "
 
-# edit/edit_key_translator.c:138
-# edit/edit_key_translator.c:153
-# gtkedit/editcmd.c:762
-# gtkedit/editcmd.c:771
 #. Input line for a single key press follows the ':'
 #: edit/edit_key_translator.c:139 edit/edit_key_translator.c:164
 #: gtkedit/editcmd.c:803 gtkedit/editcmd.c:812
 msgid " Press macro hotkey: "
 msgstr " 按下巨集熱鍵： "
 
-# edit/edit_key_translator.c:149
 #: edit/edit_key_translator.c:160
 msgid " Insert Literal "
 msgstr " 逐字插入 "
 
-# edit/edit_key_translator.c:149
 #: edit/edit_key_translator.c:160
 msgid " Press any key: "
 msgstr " 按下任意鍵："
 
-# gnome/gaction.c:33
 #: gnome/gaction.c:33
 #, c-format
 msgid ""
@@ -59,7 +49,6 @@ msgstr ""
 "\n"
 "請檢查是否指向合法的指令."
 
-# gnome/gaction.c:40
 #: gnome/gaction.c:40
 #, c-format
 msgid ""
@@ -72,7 +61,6 @@ msgstr ""
 "\n"
 "請由Gnome控制台中開啟mime內容編輯器並編輯\"%s\"的預設%s動作."
 
-# gnome/gaction.c:46
 #: gnome/gaction.c:46
 #, c-format
 msgid ""
@@ -85,7 +73,6 @@ msgstr ""
 "\n"
 "要修正這個錯誤, 請開啟這個檔案的內容設定, 並變更預設的 %s-動作."
 
-# gnome/gaction.c:51
 #: gnome/gaction.c:51
 #, c-format
 msgid ""
@@ -99,180 +86,132 @@ msgstr ""
 "與指令:\n"
 "\"%s\"%s"
 
-# gnome/gaction.c:138
-# gnome/gaction.c:155
 #: gnome/gaction.c:138 gnome/gaction.c:155
 msgid "open"
 msgstr "開啟"
 
-# gnome/gaction.c:195
-# gnome/gaction.c:212
 #: gnome/gaction.c:195 gnome/gaction.c:212
 msgid "edit"
 msgstr "編輯"
 
-# gnome/gaction.c:354
 #: gnome/gaction.c:354
 msgid "view"
 msgstr "檢視"
 
-# gnome/gcmd.c:86
 #: gnome/gcmd.c:62
 msgid " Could not start a terminal "
 msgstr " 無法啟動終端機 "
 
-# gnome/gcmd.c:101
 #: gnome/gcmd.c:77
 msgid "The Midnight Commander Team"
 msgstr "Midnight Commander 工作小組"
 
-# gnome/gcmd.c:103
 #: gnome/gcmd.c:79
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
 msgstr "回報臭蟲: http://bugs.gnome.org, 或使用 gnome-bug 程式"
 
-# gnome/gcmd.c:115
-# gnome/gmc-window.c:68
 #: gnome/gcmd.c:91
 msgid "GNU Midnight Commander"
 msgstr "GNU Midnight Commander"
 
-# gnome/gcmd.c:118
-# gnome/gmc-window.c:71
 #: gnome/gcmd.c:94
 msgid "The GNOME edition of the Midnight Commander file manager."
 msgstr "GNOME 版的 Midnight Commander 檔案管理員。"
 
-# gnome/gcmd.c:291
 #: gnome/gcmd.c:267
 msgid "Sort By"
 msgstr "用來排序的鍵為"
 
-# gnome/gcmd.c:296
 #. we define this up here so we can pass it in to our callback
 #: gnome/gcmd.c:272
 msgid "Ignore case sensitivity."
 msgstr "忽略大小寫。"
 
-# gnome/gcmd.c:299
 #: gnome/gcmd.c:275
 msgid "Sort files by "
 msgstr "依此排序檔案"
 
-# gnome/gcmd.c:304
-# gnome/gcustom-layout.c:41
-# src/chmod.c:150
-# src/screen.c:413
 #: gnome/gcmd.c:280 gnome/gcustom-layout.c:41 src/chmod.c:139 src/screen.c:407
 msgid "Name"
 msgstr "名稱"
 
-# gnome/gcmd.c:311
 #: gnome/gcmd.c:287
 msgid "File Type"
 msgstr "檔案類型"
 
-# gnome/gcmd.c:317
-# gnome/gcustom-layout.c:45
-# src/screen.c:414
-# src/screen.c:415
 #: gnome/gcmd.c:293 gnome/gcustom-layout.c:45 src/screen.c:408
 #: src/screen.c:409
 msgid "Size"
 msgstr "大小"
 
-# gnome/gcmd.c:323
 #: gnome/gcmd.c:299
 msgid "Time Last Accessed"
 msgstr "最後存取時間"
 
-# gnome/gcmd.c:329
 #: gnome/gcmd.c:305
 msgid "Time Last Modified"
 msgstr "最後更動時間"
 
-# gnome/gcmd.c:335
 #: gnome/gcmd.c:311
 msgid "Time Last Changed"
 msgstr "最後改變時間"
 
-# gnome/gcmd.c:349
 #: gnome/gcmd.c:325
 msgid "Reverse the order."
 msgstr "順序相反"
 
-# gnome/gcmd.c:396
 #: gnome/gcmd.c:372
 msgid "Enter name."
 msgstr "輸入名稱。"
 
-# gnome/gcmd.c:402
 #: gnome/gcmd.c:378
 msgid "Enter label for command:"
 msgstr "輸入指令的標籤："
 
-# gnome/gcmd.c:507
 #: gnome/gcmd.c:484
 msgid "Find all core files"
 msgstr "搜尋所有的 core 檔案"
 
-# gnome/gcmd.c:510
-# src/panelize.c:350
 #: gnome/gcmd.c:487 src/panelize.c:349
 msgid "Find rejects after patching"
 msgstr "在補強後找出被拒絕的補強檔 (patch)"
 
-# gnome/gcmd.c:555
 #: gnome/gcmd.c:532
 msgid "Run Command"
 msgstr "執行指令"
 
-# gnome/gcmd.c:560
 #. Frame 1
 #: gnome/gcmd.c:537
 msgid "Preset Commands"
 msgstr "目前指令"
 
-# gnome/gcmd.c:577
-# gnome/gcustom-layout.c:183
 #. add add/remove buttons in center
 #: gnome/gcmd.c:554 gnome/gcustom-layout.c:183
 msgid "Add"
 msgstr "增加"
 
-# gnome/gcmd.c:581
-# gnome/gcustom-layout.c:184
 #: gnome/gcmd.c:558 gnome/gcustom-layout.c:184
 msgid "Remove"
 msgstr "移除"
 
-# gnome/gcmd.c:589
 #. Frame 2
 #: gnome/gcmd.c:566
 msgid "Run this Command"
 msgstr "執行此指令"
 
-# gnome/gcmd.c:596
 #: gnome/gcmd.c:573
 msgid "Command: "
 msgstr "指令："
 
-# gnome/gcmd.c:716
 #: gnome/gcmd.c:694
 msgid "Set Filter"
 msgstr "設定過濾器"
 
-# gnome/gcmd.c:721
-# gnome/gcmd.c:762
-# gnome/gcmd.c:767
-# gnome/gcmd.c:771
-# gnome/gscreen.c:2449
 #: gnome/gcmd.c:699 gnome/gcmd.c:740 gnome/gcmd.c:745 gnome/gcmd.c:749
 #: gnome/gscreen.c:2484
 msgid "Show all files"
 msgstr "顯示所有檔案"
 
-# gnome/gcmd.c:744
 #: gnome/gcmd.c:722
 msgid ""
 "Enter a filter here for files in the panel view.\n"
@@ -285,32 +224,26 @@ msgstr ""
 "例如：\n"
 "*.png 將會只顯示 PNG 圖形檔。"
 
-# gnome/gcmd.c:746
 #: gnome/gcmd.c:724
 msgid "Enter a Regular Expression to filter files in the panel view."
 msgstr "請輸入一個正規表示式，以當做面板顯示時使用的過濾器。"
 
-# gnome/gcmd.c:806
 #: gnome/gcmd.c:784
 msgid " Open with..."
 msgstr " 以此開啟..."
 
-# gnome/gcmd.c:807
 #: gnome/gcmd.c:785
 msgid "Enter extra arguments:"
 msgstr "請輸入其它的參數："
 
-# gnome/gcmd.c:877
 #: gnome/gcmd.c:855
 msgid "Desktop entry properties"
 msgstr "桌面圖示設定"
 
-# gnome/gcmd.c:903
 #: gnome/gcmd.c:881
 msgid "Select File"
 msgstr "選取檔案"
 
-# gnome/gcmd.c:911
 #: gnome/gcmd.c:889
 msgid ""
 "Enter a filter here to select files in the panel view with.\n"
@@ -323,195 +256,146 @@ msgstr ""
 "例如：\n"
 "*.png 將會只顯示 PNG 圖形檔。"
 
-# gnome/gcmd.c:913
 #: gnome/gcmd.c:891
 msgid "Enter a regular expression here to select files in the panel view with."
 msgstr "請輸入一個正規表示式，以當做面板顯示時使用的過濾器。"
 
-# gnome/gcmd.c:959
-# src/cmd.c:543
-# src/cmd.c:594
 #: gnome/gcmd.c:937 src/cmd.c:551 src/cmd.c:604
 msgid "  Malformed regular expression  "
 msgstr "  變形的正規運算式  "
 
-# gnome/gcmd.c:1004
 #: gnome/gcmd.c:979
 msgid "Creating a desktop link"
 msgstr "建立桌面連結"
 
-# gnome/gcmd.c:1005
 #: gnome/gcmd.c:980
 msgid "Enter the URL:"
 msgstr "輸入 URL:"
 
-# gnome/gcustom-layout.c:34
 #: gnome/gcustom-layout.c:34
 msgid "Access Time"
 msgstr "存取時間"
 
-# gnome/gcustom-layout.c:35
 #: gnome/gcustom-layout.c:35
 msgid "Creation Time"
 msgstr "建立時間"
 
-# gnome/gcustom-layout.c:36
-# gnome/gnome-file-property-dialog.c:788
-# gnome/gnome-file-property-dialog.c:957
-# gnome/gprop.c:280
-# gnome/gprop.c:405
-# src/screen.c:427
 #. Group
 #: gnome/gcustom-layout.c:36 gnome/gnome-file-property-dialog.c:780
 #: gnome/gnome-file-property-dialog.c:949 src/screen.c:421
 msgid "Group"
 msgstr "群組"
 
-# gnome/gcustom-layout.c:37
 #: gnome/gcustom-layout.c:37
 msgid "Group ID"
 msgstr "群組編號"
 
-# gnome/gcustom-layout.c:38
 #: gnome/gcustom-layout.c:38
 msgid "Inode Number"
 msgstr "Inode 號碼"
 
-# gnome/gcustom-layout.c:39
-# src/achown.c:378
 #: gnome/gcustom-layout.c:39 src/achown.c:361
 msgid "Mode"
 msgstr "模式"
 
-# gnome/gcustom-layout.c:40
 #: gnome/gcustom-layout.c:40
 msgid "Modification Time"
 msgstr "更動時間"
 
-# gnome/gcustom-layout.c:42
 #: gnome/gcustom-layout.c:42
 msgid "Number of Hard Links"
 msgstr "硬連結數目"
 
-# gnome/gcustom-layout.c:43
-# gnome/gnome-file-property-dialog.c:942
-# gnome/gprop.c:390
-# src/screen.c:426
 #. Owner
 #: gnome/gcustom-layout.c:43 gnome/gnome-file-property-dialog.c:934
 #: src/screen.c:420
 msgid "Owner"
 msgstr "擁有者"
 
-# gnome/gcustom-layout.c:44
-# src/screen.c:420
 #: gnome/gcustom-layout.c:44 src/screen.c:414
 msgid "Permission"
 msgstr "權限"
 
-# gnome/gcustom-layout.c:46
 #: gnome/gcustom-layout.c:46
 msgid "Size (short)"
 msgstr "大小 (短格式)"
 
-# gnome/gcustom-layout.c:47
 #: gnome/gcustom-layout.c:47
 msgid "Type"
 msgstr "類型"
 
-# gnome/gcustom-layout.c:48
 #: gnome/gcustom-layout.c:48
 msgid "User ID"
 msgstr "使用者編號"
 
-# gnome/gcustom-layout.c:142
 #: gnome/gcustom-layout.c:142
 msgid "Possible Columns"
 msgstr "可能的欄位"
 
-# gnome/gcustom-layout.c:162
 #: gnome/gcustom-layout.c:162
 msgid "Displayed Columns"
 msgstr "顯示的欄位"
 
-# gnome/gcustom-layout.c:304
 #: gnome/gcustom-layout.c:304
 msgid "Custom View"
 msgstr "自定顯示"
 
-# gnome/gdesktop-init.c:146
 #. Create the link to the user's home directory so that he will have an icon
 #: gnome/gdesktop-init.c:146
 msgid "Home directory"
 msgstr "家目錄"
 
-# gnome/gpopup2.c:283
 #: gnome/gdesktop-init.c:158
 msgid "Trash"
 msgstr "垃圾桶"
 
-# gnome/gdesktop-prefs.c:242
 #. Icon position
 #: gnome/gdesktop-prefs.c:240
 msgid "Icon position"
 msgstr "圖示位置"
 
-# gnome/gdesktop-prefs.c:258
 #. Snap and placement
 #: gnome/gdesktop-prefs.c:256
 msgid "Automatic icon placement"
 msgstr "自動放置圖示"
 
-# gnome/gdesktop-prefs.c:262
 #: gnome/gdesktop-prefs.c:260
 msgid "Snap icons to grid"
 msgstr "將圖示對齊格線"
 
-# gnome/gdesktop-prefs.c:277
 #: gnome/gdesktop-prefs.c:275
 msgid "Use shaped icons"
 msgstr "使用形狀圖示"
 
-# gnome/gdesktop-prefs.c:281
 #: gnome/gdesktop-prefs.c:279
 msgid "Use shaped text"
 msgstr "使用形狀文字"
 
-# gnome/gdesktop-prefs.c:335
 #: gnome/gdesktop-prefs.c:333
 msgid "Desktop"
 msgstr "桌面"
 
-# gnome/gdesktop.c:629
-# gnome/gmount.c:385
 #: gnome/gdesktop.c:680 gnome/gmount.c:383
 msgid "Warning"
 msgstr "警告"
 
-# gnome/gdesktop.c:630
 #: gnome/gdesktop.c:681
 #, c-format
 msgid "Could not open %s; will not have desktop icons"
 msgstr "無法開啟檔案%s; 將沒有桌面圖示"
 
-# gnome/gdesktop.c:1347
 #: gnome/gdesktop.c:1413
 msgid "While running the mount/umount command"
 msgstr "當執行mount/umount指令時"
 
-# gnome/gdesktop.c:1416
 #: gnome/gdesktop.c:1482
 msgid "While running the eject command"
 msgstr "當執行退出指令時"
 
-# gnome/gdesktop.c:1600
-# gnome/gicon.c:282
-# gnome/gtools.c:46
 #: gnome/gdesktop.c:1666 gnome/gicon.c:282 gnome/gtools.c:46
 msgid "Error"
 msgstr "錯誤"
 
-# gnome/gdesktop.c:2832
 #: gnome/gdesktop.c:2930
 msgid ""
 "Unable to locate the file:\n"
@@ -526,275 +410,209 @@ msgstr ""
 "\n"
 "無法設定背景."
 
-# gnome/gdesktop.c:2861
-# gnome/glayout.c:366
 #: gnome/gdesktop.c:2959 gnome/glayout.c:361
 msgid "_Terminal"
 msgstr "終端機 (_T)"
 
-# gnome/gdesktop.c:2861
-# gnome/glayout.c:367
 #: gnome/gdesktop.c:2959 gnome/glayout.c:362
 msgid "Launch a new terminal in the current directory"
 msgstr "在目前路徑下啟動新的終端機"
 
-# gnome/gdesktop.c:2863
-# gnome/glayout.c:369
 #. If this ever changes, make sure you update create_new_menu accordingly.
 #: gnome/gdesktop.c:2961 gnome/glayout.c:364
 msgid "_Directory..."
 msgstr "目錄 (_D)..."
 
-# gnome/gdesktop.c:2863
-# gnome/glayout.c:370
 #: gnome/gdesktop.c:2961 gnome/glayout.c:365
 msgid "Creates a new directory"
 msgstr "建立新目錄"
 
-# gnome/gdesktop.c:2864
 #: gnome/gdesktop.c:2962
 msgid "URL L_ink..."
 msgstr "連結 (_i)..."
 
-# gnome/gdesktop.c:2864
 #: gnome/gdesktop.c:2962
 msgid "Creates a new URL link"
 msgstr "建立新的URL連結"
 
-# gnome/gdesktop.c:2865
 #: gnome/gdesktop.c:2963
 msgid "_Launcher..."
 msgstr "啟動圖示 (_L)..."
 
-# gnome/gdesktop.c:2865
 #: gnome/gdesktop.c:2963
 msgid "Creates a new launcher"
 msgstr "建立新的啟動圖示"
 
-# gnome/gdesktop.c:2871
 #: gnome/gdesktop.c:2969
 msgid "By _Name"
 msgstr "依據名稱"
 
-# gnome/gdesktop.c:2872
 #: gnome/gdesktop.c:2970
 msgid "By File _Type"
 msgstr "依據檔案類型"
 
-# gnome/gdesktop.c:2873
 #: gnome/gdesktop.c:2971
 msgid "By _Size"
 msgstr "依據大小 "
 
-# gnome/gdesktop.c:2874
 #: gnome/gdesktop.c:2972
 msgid "By Time Last _Accessed"
 msgstr "依據最後存取時間"
 
-# gnome/gdesktop.c:2875
 #: gnome/gdesktop.c:2973
 msgid "By Time Last _Modified"
 msgstr "依據最後更動時間"
 
-# gnome/gdesktop.c:2876
 #: gnome/gdesktop.c:2974
 msgid "By Time Last _Changed"
 msgstr "依據最後改變時間"
 
-# gnome/gdesktop.c:2884
-# gnome/glayout.c:466
 #: gnome/gdesktop.c:2982 gnome/glayout.c:461
 msgid "_Arrange Icons"
 msgstr "排列圖示 (_A)"
 
-# gnome/gdesktop.c:2885
 #: gnome/gdesktop.c:2983
 msgid "_Tidy Icons"
 msgstr "小圖示(_T)"
 
-# gnome/gdesktop.c:2886
 #: gnome/gdesktop.c:2984
 msgid "Create _New Window"
 msgstr "開新視窗 (_N)"
 
-# gnome/gdesktop.c:2888
-# gnome/glayout.c:468
 #: gnome/gdesktop.c:2986 gnome/glayout.c:463
 msgid "Rescan _Desktop Directory"
 msgstr "重讀目錄 (_R)"
 
-# gnome/gdesktop.c:2889
-# gnome/glayout.c:469
 #: gnome/gdesktop.c:2987 gnome/glayout.c:464
 msgid "Rescan De_vices"
 msgstr "重讀設備 (_v)"
 
-# gnome/gdesktop.c:2890
-# gnome/glayout.c:470
 #: gnome/gdesktop.c:2988 gnome/glayout.c:465
 msgid "Recreate Default _Icons"
 msgstr "重新建立預設圖示 (_I)"
 
-# gnome/gdesktop.c:2892
 #: gnome/gdesktop.c:2990
 msgid "Configure _Background Image"
 msgstr "設定背景圖 (_B)"
 
-# gnome/gdesktop.c:2893
 #: gnome/gdesktop.c:2991
 msgid "Des_ktop Properties"
 msgstr "桌面內容(_K)"
 
-# gnome/gdialogs.c:60
 #: gnome/gdialogs.c:60
 msgid "To: "
 msgstr " 至："
 
-# gnome/gdialogs.c:61
 #: gnome/gdialogs.c:61
 msgid "Copying from: "
 msgstr "複製的來源："
 
-# gnome/gdialogs.c:62
 #: gnome/gdialogs.c:62
 msgid "Deleting file: "
 msgstr "刪除檔案："
 
-# gnome/gdialogs.c:371
 #: gnome/gdialogs.c:371
 msgid "Files Exist"
 msgstr "檔案已經存在"
 
-# gnome/gdialogs.c:386
 #: gnome/gdialogs.c:386
 msgid ""
 "Some of the files you are trying to copy already exist in the destination "
 "folder.  Please select the action to be performed."
 msgstr "某些您想要複製的檔案，已經存在目的資料夾內。請選取您想要進行的動作。"
 
-# gnome/gdialogs.c:399
 #: gnome/gdialogs.c:399
 msgid "Prompt me before overwriting any file."
 msgstr "在蓋寫任何檔案之前都要先提示我。"
 
-# gnome/gdialogs.c:406
 #: gnome/gdialogs.c:406
 msgid "Don't overwrite any files."
 msgstr "不要蓋寫任何檔案。"
 
-# gnome/gdialogs.c:422
 #: gnome/gdialogs.c:422
 msgid "Overwrite:"
 msgstr "蓋寫："
 
-# gnome/gdialogs.c:429
 #: gnome/gdialogs.c:429
 msgid "Older files."
 msgstr "較舊的檔案。"
 
-# gnome/gdialogs.c:435
 #: gnome/gdialogs.c:435
 msgid "Files only if size differs."
 msgstr "只有大小不同的檔案。"
 
-# gnome/gdialogs.c:441
 #: gnome/gdialogs.c:441
 msgid "All files."
 msgstr "所有的檔案。"
 
-# gnome/gdialogs.c:481
 #: gnome/gdialogs.c:481
 msgid "File Exists"
 msgstr "檔案已經存在"
 
-# gnome/gdialogs.c:487
 #: gnome/gdialogs.c:487
 #, c-format
 msgid "The target file already exists: %s"
 msgstr "這個目標檔案已經存在：%s"
 
-# gnome/gdialogs.c:494
 #: gnome/gdialogs.c:494
 msgid "Replace it?"
 msgstr "把它換掉？"
 
-# gnome/gdialogs.c:568
-# gtkedit/editwidget.c:1141
-# gtkedit/gtkedit.c:1252
-# src/file.c:802
-# src/screen.c:2397
-# src/screen.c:2427
-# src/tree.c:1014
 #: gnome/gdialogs.c:569 gtkedit/editwidget.c:1143 gtkedit/gtkedit.c:1259
 #: src/file.c:802 src/screen.c:2418 src/tree.c:1023
 msgid "Copy"
 msgstr "複製"
 
-# gnome/gdialogs.c:571
-# gtkedit/editwidget.c:1142
-# gtkedit/gtkedit.c:1254
 #: gnome/gdialogs.c:573 gtkedit/editwidget.c:1144 gtkedit/gtkedit.c:1261
 msgid "Move"
 msgstr "搬移"
 
-# gnome/gdialogs.c:583
 #: gnome/gdialogs.c:590
 msgid "Destination"
 msgstr "目的位置"
 
-# gnome/gdialogs.c:597
 #: gnome/gdialogs.c:604
 msgid "Find Destination Folder"
 msgstr "尋找目的資料夾"
 
-# gnome/gdialogs.c:611
 #: gnome/gdialogs.c:618
 msgid "Copy as a background process"
 msgstr "以背景程序來複製"
 
-# gnome/gdialogs.c:629
 #: gnome/gdialogs.c:636
 msgid "Advanced Options"
 msgstr "進階的選項"
 
-# gnome/gdialogs.c:633
 #: gnome/gdialogs.c:640
 msgid "Preserve symlinks"
 msgstr "保留符號連結"
 
-# gnome/gdialogs.c:643
 #: gnome/gdialogs.c:650
 msgid "Follow links."
 msgstr "跟隨連結。"
 
-# gnome/gdialogs.c:649
 #: gnome/gdialogs.c:656
 msgid ""
 "Selecting this will copy the files that symlinks point to instead of just "
 "copying the link."
 msgstr "選擇這一項的話，將會複製符號連結指到的檔案，而不是符號連結本身。"
 
-# gnome/gdialogs.c:654
 #: gnome/gdialogs.c:661
 msgid "Preserve file attributes."
 msgstr "保留檔案的屬性"
 
-# gnome/gdialogs.c:660
 #: gnome/gdialogs.c:667
 msgid "Preserves the permissions and the UID/GID if possible"
 msgstr "儘可能的保留檔案的權限與 UID/GID"
 
-# gnome/gdialogs.c:666
 #: gnome/gdialogs.c:673
 msgid "Recursively copy subdirectories."
 msgstr "遞迴的複製子目錄"
 
-# gnome/gdialogs.c:673
 #: gnome/gdialogs.c:680
 msgid "If set, this will copy the directories recursively"
 msgstr "若選取的話，會複製此目錄下的所有子目錄"
 
-# gnome/gdialogs.c:780
 #: gnome/gdialogs.c:787
 #, c-format
 msgid ""
@@ -806,121 +624,94 @@ msgstr ""
 "目錄裡面還有東西；\n"
 "確定要完全刪除？"
 
-# gnome/gdialogs.c:790
-# src/file.c:2244
 #: gnome/gdialogs.c:797 src/file.c:2247
 msgid " Delete: "
 msgstr " 刪除： "
 
-# gnome/gdialogs.c:794
 #: gnome/gdialogs.c:801
 msgid "Do the same for the rest"
 msgstr "對其餘檔案重覆同一動作"
 
-# gnome/gdialogs.c:877
 #: gnome/gdialogs.c:885
 msgid "Move Progress"
 msgstr "進行搬移"
 
-# gnome/gdialogs.c:880
 #: gnome/gdialogs.c:888
 msgid "Copy Progress"
 msgstr "進行複製"
 
-# gnome/gdialogs.c:883
 #: gnome/gdialogs.c:891
 msgid "Delete Progress"
 msgstr "進行刪除"
 
-# gnome/gdialogs.c:939
 #: gnome/gdialogs.c:947
 msgid "File "
 msgstr "檔案"
 
-# gnome/gdialogs.c:943
 #: gnome/gdialogs.c:951
 msgid "is "
 msgstr " 是 "
 
-# gnome/gdialogs.c:946
 #: gnome/gdialogs.c:954
 msgid "done."
 msgstr " 完成。"
 
-# gnome/gdialogs.c:1007
-# src/wtools.c:587
-# vfs/vfs.c:1820
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
 #: gnome/gdialogs.c:1015 src/wtools.c:570 vfs/vfs.c:1821
 msgid "Password:"
 msgstr "密碼："
 
-# gnome/gdialogs.c:1007
 #: gnome/gdialogs.c:1015
 msgid "Password"
 msgstr "密碼"
 
-# gnome/gdialogs.c:1039
 #. Create the dialog
 #: gnome/gdialogs.c:1047
 msgid "Symbolic Link"
 msgstr "符號連結"
 
-# gnome/gdialogs.c:1055
-# src/boxes.c:803
 #: gnome/gdialogs.c:1063 src/boxes.c:892
 msgid "Existing filename (filename symlink will point to):"
 msgstr "既存的檔案名稱 (符號連結要指到的檔案)："
 
-# gnome/gdialogs.c:1069
-# src/boxes.c:801
 #: gnome/gdialogs.c:1077 src/boxes.c:890
 msgid "Symbolic link filename:"
 msgstr "符號連結名稱："
 
-# vfs/smbfs.c:116
 #: gnome/gdialogs.c:1115 src/boxes.c:1055
 msgid "Domain:"
 msgstr "網域: "
 
-# vfs/smbfs.c:116
 #: gnome/gdialogs.c:1115 src/boxes.c:1055
 msgid "Username:"
 msgstr "使用者名稱: "
 
-# vfs/smbfs.c:116
 #: gnome/gdialogs.c:1115 src/boxes.c:1055
 msgid "Password: "
 msgstr "密碼: "
 
-# vfs/smbfs.c:171
 #: gnome/gdialogs.c:1122 src/boxes.c:1110
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "\\\\%s\\%s 的密碼"
 
-# gnome/gdnd.c:53
 #: gnome/gdnd.c:53
 msgid "_Move here"
 msgstr "搬到這裡 (_M)"
 
-# gnome/gdnd.c:54
 #: gnome/gdnd.c:54
 msgid "_Copy here"
 msgstr "複製到這裡 (_C)"
 
-# gnome/gdnd.c:55
 #: gnome/gdnd.c:55
 msgid "_Link here"
 msgstr "連結到這裡 (_L)"
 
-# gnome/gdnd.c:57
 #: gnome/gdnd.c:57
 msgid "Cancel drag"
 msgstr "取消拖曳動作"
 
-# gnome/gdnd.c:193
 #. FIXME: this error message sucks
 #: gnome/gdnd.c:193
 #, c-format
@@ -931,193 +722,146 @@ msgstr ""
 "無法 stat %s\n"
 "%s"
 
-# gtkedit/editcmd.c:1434
 #: gnome/gfind.c:115
 msgid "Case sensitive"
 msgstr "大小寫敏感"
 
-# src/find.c:170
 #: gnome/gfind.c:121 src/find.c:148
 msgid "Start at:"
 msgstr "開始於："
 
-# src/find.c:170
 #: gnome/gfind.c:121 src/find.c:148
 msgid "Filename:"
 msgstr "檔名："
 
-# src/find.c:170
 #: gnome/gfind.c:121 src/find.c:148
 msgid "Content: "
 msgstr "內容："
 
-# src/find.c:223
 #. Create dialog
 #: gnome/gfind.c:131 src/find.c:203
 msgid "Find File"
 msgstr "尋找檔案"
 
-# src/find.c:452
 #: gnome/gfind.c:335 src/find.c:398
 #, c-format
 msgid "Grepping in %s"
 msgstr "在 %s 裡搜尋字串"
 
-# src/find.c:490
 #: gnome/gfind.c:372 src/find.c:435
 msgid " Find/read "
 msgstr " 尋找/讀取 "
 
-# src/find.c:490
 #: gnome/gfind.c:372 src/find.c:435
 msgid " Problem reading from child "
 msgstr " 從子程序讀取資料時發生問題 "
 
-# src/find.c:537
 #: gnome/gfind.c:409 src/find.c:476
 msgid "Finished"
 msgstr "完成"
 
-# src/find.c:561
-# src/view.c:1528
 #: gnome/gfind.c:430 src/find.c:500 src/view.c:1528
 #, c-format
 msgid "Searching %s"
 msgstr "搜尋 %s"
 
-# src/find.c:717
-# src/find.c:757
 #: gnome/gfind.c:552 gnome/gfind.c:589
 msgid "Suspend"
 msgstr "暫停"
 
-# src/find.c:717
 #: gnome/gfind.c:552
 msgid "Restart"
 msgstr "重新開始"
 
-# src/boxes.c:834
-# src/find.c:719
-# src/find.c:960
 #: gnome/gfind.c:554 src/boxes.c:922 src/find.c:674
 msgid "Stopped"
 msgstr "停止了"
 
-# src/find.c:719
-# src/find.c:821
-# src/find.c:960
-# src/find.c:1056
 #: gnome/gfind.c:554 gnome/gfind.c:654 src/find.c:674 src/find.c:770
 msgid "Searching"
 msgstr "搜尋中"
 
-# src/find.c:750
-# src/find.c:1031
 #: gnome/gfind.c:583 src/find.c:745
 msgid "Find file"
 msgstr "尋找檔案"
 
-# src/find.c:755
 #. The buttons
 #: gnome/gfind.c:587
 msgid "Change to this directory"
 msgstr "到此一目錄"
 
-# src/find.c:756
 #: gnome/gfind.c:588
 msgid "Search again"
 msgstr "再次搜尋"
 
-# src/find.c:761
 #: gnome/gfind.c:594
 msgid "View this file"
 msgstr " 檢視檔案 "
 
-# src/find.c:762
 #: gnome/gfind.c:595
 msgid "Edit this file"
 msgstr "編輯此一檔案"
 
-# src/find.c:763
 #: gnome/gfind.c:596
 msgid "Send the results to a Panel"
 msgstr "執行指令，並且將結果輸出到面板上"
 
-# gnome/gicon.c:282
 #: gnome/gicon.c:282
 msgid "Default set of icons not found, check your installation"
 msgstr "找不到預設的圖示，檢查您的安裝是否完全"
 
-# gnome/glayout.c:41
 #: gnome/glayout.c:40
 msgid "_Icon View"
 msgstr "圖示顯示 (_I)"
 
-# gnome/glayout.c:42
-# gnome/glayout.c:58
 #: gnome/glayout.c:41 gnome/glayout.c:57
 msgid "Switch view to an icon display"
 msgstr "轉換成圖示顯示"
 
-# gnome/glayout.c:44
 #: gnome/glayout.c:43
 msgid "_Brief View"
 msgstr "簡要 (_B)"
 
-# gnome/glayout.c:45
-# gnome/glayout.c:61
 #: gnome/glayout.c:44 gnome/glayout.c:60
 msgid "Switch view to show just file name and type"
 msgstr "轉換成顯示檔名與檔案類型"
 
-# gnome/glayout.c:47
 #: gnome/glayout.c:46
 msgid "_Detailed View"
 msgstr "詳細 (_D)"
 
-# gnome/glayout.c:48
-# gnome/glayout.c:64
 #: gnome/glayout.c:47 gnome/glayout.c:63
 msgid "Switch view to show detailed file statistics"
 msgstr "轉換成顯示詳細的檔案性質"
 
-# gnome/glayout.c:50
 #: gnome/glayout.c:49
 msgid "_Custom View"
 msgstr "自定顯示 (_C)"
 
-# gnome/glayout.c:51
-# gnome/glayout.c:67
 #: gnome/glayout.c:50 gnome/glayout.c:66
 msgid "Switch view to show user-defined statistics"
 msgstr "轉換成自定的顯示模式。"
 
-# gnome/glayout.c:57
 #: gnome/glayout.c:56
 msgid "Icons"
 msgstr "圖示"
 
-# gnome/glayout.c:60
 #: gnome/glayout.c:59
 msgid "Brief"
 msgstr "簡要"
 
-# gnome/glayout.c:63
 #: gnome/glayout.c:62
 msgid "Detailed"
 msgstr "詳細"
 
-# gnome/glayout.c:66
 #: gnome/glayout.c:65
 msgid "Custom"
 msgstr "自定"
 
-# gnome/glayout.c:301
 #: gnome/glayout.c:294
 msgid "Enter command to run"
 msgstr "輸入要執行的指令"
 
-# gnome/glayout.c:319
 #: gnome/glayout.c:312
 msgid ""
 "Notice that if you choose to terminate the file manager, you will\n"
@@ -1130,7 +874,6 @@ msgstr ""
 "\n"
 "您確定您要結束嗎？"
 
-# gnome/glayout.c:331
 #: gnome/glayout.c:325
 msgid ""
 "The file manager and the desktop handler are now terminating\n"
@@ -1147,241 +890,184 @@ msgstr ""
 "\n"
 "按下 \"確定\" 以結束程式，或按 \"取消\" 繼續使用。"
 
-# gnome/glayout.c:371
 #: gnome/glayout.c:366
 msgid "_File..."
 msgstr "檔案... (_F)"
 
-# gnome/glayout.c:372
 #: gnome/glayout.c:367
 msgid "Creates a new file in this directory"
 msgstr "在此目錄中建立新檔案"
 
-# gnome/glayout.c:393
-# gnome/gscreen.c:2118
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
 #: gnome/glayout.c:388 gnome/gscreen.c:2115
 msgid "_Copy..."
 msgstr "複製 (_C)..."
 
-# gnome/glayout.c:393
 #: gnome/glayout.c:388
 msgid "Copy files"
 msgstr "複製檔案"
 
-# gnome/glayout.c:394
-# gnome/gscreen.c:2119
 #: gnome/glayout.c:389 gnome/gscreen.c:2116
 msgid "_Delete..."
 msgstr "刪除 (_D)..."
 
-# gnome/glayout.c:394
 #: gnome/glayout.c:389
 msgid "Delete files"
 msgstr "刪除檔案"
 
-# gnome/glayout.c:395
-# gnome/gscreen.c:2120
 #: gnome/glayout.c:390 gnome/gscreen.c:2117
 msgid "_Move..."
 msgstr "搬移 (_M)..."
 
-# gnome/glayout.c:395
 #: gnome/glayout.c:390
 msgid "Rename or move files"
 msgstr "更改名稱或者搬移檔案位置"
 
-# gnome/glayout.c:397
 #: gnome/glayout.c:392
 msgid "Show directory sizes"
 msgstr "顯示目錄大小"
 
-# gnome/glayout.c:397
 #: gnome/glayout.c:392
 msgid "Shows the disk space used by each directory"
 msgstr "顯示每個目錄用去的硬碟空間"
 
-# gnome/glayout.c:399
 #: gnome/glayout.c:394
 msgid "Close window"
 msgstr "關閉視窗"
 
-# gnome/glayout.c:399
 #: gnome/glayout.c:394
 msgid "Closes this window"
 msgstr "關閉這個視窗"
 
-# gnome/glayout.c:406
 #: gnome/glayout.c:401
 msgid "Select _All"
 msgstr "全選 (_A)"
 
-# gnome/glayout.c:406
 #: gnome/glayout.c:401
 msgid "Select all files in the current Panel"
 msgstr "選取這個面板裡面的所有檔案"
 
-# gnome/glayout.c:408
 #: gnome/glayout.c:403
 msgid "_Select Files..."
 msgstr "選取檔案 (_S)..."
 
-# gnome/glayout.c:408
 #: gnome/glayout.c:403
 msgid "Select a group of files"
 msgstr "選取一群檔案"
 
-# gnome/glayout.c:409
 #: gnome/glayout.c:404
 msgid "_Invert Selection"
 msgstr "反向選取 (_I)"
 
-# gnome/glayout.c:409
 #: gnome/glayout.c:404
 msgid "Reverses the list of tagged files"
 msgstr "選取未選取之檔案"
 
-# gnome/glayout.c:412
-# gtkedit/editwidget.c:1143
-# src/view.c:2085
 #: gnome/glayout.c:407 gtkedit/editwidget.c:1145 src/view.c:2090
 msgid "Search"
 msgstr "搜尋"
 
-# gnome/glayout.c:412
 #: gnome/glayout.c:407
 msgid "Search for a file in the current Panel"
 msgstr "搜尋這個面板裡面的所有檔案"
 
-# gnome/glayout.c:415
-# gnome/gscreen.c:1428
-# gnome/gscreen.c:1439
 #: gnome/glayout.c:410 gnome/gscreen.c:1412 gnome/gscreen.c:1423
 msgid "_Rescan Directory"
 msgstr "重讀目錄 (_R)"
 
-# gnome/glayout.c:415
 #: gnome/glayout.c:410
 msgid "Rescan the directory contents"
 msgstr "重新讀取目錄內容"
 
-# gnome/glayout.c:425
 #: gnome/glayout.c:420
 msgid "_Sort By..."
 msgstr "以此來排序 (_S)..."
 
-# src/boxes.c:282
 #: gnome/glayout.c:420
 msgid "Filename sort order"
 msgstr "檔案名稱排序"
 
-# gnome/glayout.c:426
 #: gnome/glayout.c:421
 msgid "_Filter View..."
 msgstr "過濾器顯示 (_F)"
 
-# gnome/glayout.c:425
 #: gnome/glayout.c:421
 msgid "Filename filtering settings"
 msgstr "檔案名稱過濾設定"
 
-# gnome/glayout.c:433
 #: gnome/glayout.c:428
 msgid "_Find File..."
 msgstr "尋找檔案 (_F)"
 
-# gnome/glayout.c:433
 #: gnome/glayout.c:428
 msgid "Locate files on disk"
 msgstr "在磁碟裡面找出檔案的位置"
 
-# gnome/glayout.c:436
 #. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
 #: gnome/glayout.c:431
 msgid "_Edit mime types..."
 msgstr "編輯 MIME 類型 (_E)"
 
-# gnome/glayout.c:436
 #: gnome/glayout.c:431
 msgid "Edits the MIME type bindings"
 msgstr "編輯 MIME 類型設定"
 
-# gnome/glayout.c:438
 #: gnome/glayout.c:433
 msgid "_Run Command..."
 msgstr "執行指令 (_R)..."
 
-# gnome/glayout.c:438
 #: gnome/glayout.c:433
 msgid "Runs a command"
 msgstr "執行一則指令"
 
-# gnome/glayout.c:440
 #: gnome/glayout.c:435
 msgid "_Run Command in panel..."
 msgstr "在面板中執行指令 (_R)..."
 
-# gnome/glayout.c:440
 #: gnome/glayout.c:435
 msgid "Run a command and put the results in a panel"
 msgstr "執行指令，並且將結果輸出到面板上"
 
-# gnome/glayout.c:450
 #: gnome/glayout.c:445
 msgid "_Background jobs..."
 msgstr "背景工作 (_B)..."
 
-# gnome/glayout.c:450
 #: gnome/glayout.c:445
 msgid "List of background operations"
 msgstr "列出在背景執行的工作"
 
-# gnome/glayout.c:453
 #: gnome/glayout.c:448
 msgid "Exit"
 msgstr "離開"
 
-# gnome/glayout.c:453
 #: gnome/glayout.c:448
 msgid "Terminates the file manager and the desktop"
 msgstr "結束檔案管理員與桌面程式"
 
-# gnome/glayout.c:477
-# gnome/glayout.c:488
 #: gnome/glayout.c:472 gnome/glayout.c:483
 msgid "_Settings"
 msgstr "設定 (_S)"
 
-# gnome/glayout.c:478
-# gnome/glayout.c:489
 #: gnome/glayout.c:473 gnome/glayout.c:484
 msgid "_Layout"
 msgstr "格式 (_L)"
 
-# gnome/glayout.c:479
-# gnome/glayout.c:490
 #: gnome/glayout.c:474 gnome/glayout.c:485
 msgid "_Commands"
 msgstr "指令 (_C)"
 
-# gnome/glayout.c:480
 #: gnome/glayout.c:475
 msgid "_Desktop"
 msgstr "桌面 (_D)"
 
-# gnome/glayout.c:481
-# gnome/glayout.c:491
-# gnome/gmc-window.c:121
 #: gnome/glayout.c:476 gnome/glayout.c:486
 msgid "_Help"
 msgstr "說明 (_H)"
 
-# gnome/glayout.c:399
 #: gnome/gmain.c:551
 msgid "Don't show this window again"
 msgstr "不再顯示此視窗"
 
-# gnome/gmain.c:563
 #: gnome/gmain.c:553
 msgid ""
 "You are running the GNOME File Manager as root.\n"
@@ -1396,803 +1082,600 @@ msgstr ""
 "作為 root，你有權破壞系統，而檔案管理員並不會阻止你。\n"
 "使用者手冊有說明如何新增一個沒有管理權限的戶口。\n"
 
-# gnome/gmc-client.c:26
 #: gnome/gmc-client.c:26
 msgid "Could not contact the file manager\n"
 msgstr "無法連接檔案管理員\n"
 
-# gnome/gmc-client.c:45
 #: gnome/gmc-client.c:45
 msgid "Could not get the desktop\n"
 msgstr "無法取得桌面\n"
 
-# gnome/gmc-client.c:142
 #: gnome/gmc-client.c:142
 #, c-format
 msgid "Unknown arrange type `%s'\n"
 msgstr "未知的重排種類 `%s'\n"
 
-# gnome/gmc-client.c:206
 #: gnome/gmc-client.c:206
 msgid "Create window showing the specified directory"
 msgstr "建立視窗以顯示特定目錄"
 
-# gnome/gmc-client.c:206
-# gnome/gmc-client.c:208
 #: gnome/gmc-client.c:206 gnome/gmc-client.c:208
 msgid "DIRECTORY"
 msgstr "目錄"
 
-# gnome/gmc-client.c:208
 #: gnome/gmc-client.c:208
 msgid "Rescan the specified directory"
 msgstr "重讀目錄"
 
-# gnome/gmc-client.c:210
 #: gnome/gmc-client.c:210
 msgid "Rescan the desktop icons"
 msgstr "重讀桌面圖示"
 
-# gnome/gmc-client.c:212
 #: gnome/gmc-client.c:212
 msgid "Rescan the desktop device icons"
 msgstr "重讀桌面設備圖示"
 
-# gnome/gmc-client.c:214
 #: gnome/gmc-client.c:214
 msgid "Arrange the desktop icons"
 msgstr "重讀桌面圖示"
 
-# gnome/gmc-client.c:215
 #: gnome/gmc-client.c:215
 msgid "name | type | size | atime | mtime | ctime"
 msgstr "名稱 | 種類 | 大小 | 存取時間 | 修改時間 | 建立時間"
 
-# gnome/gmc-client.c:217
 #: gnome/gmc-client.c:217
 msgid "Close windows whose directories cannot be reached"
 msgstr "當目錄無法到達時關閉視窗"
 
-# gnome/gmount.c:218
 #: gnome/gmount.c:216
 msgid "Could not open the /etc/fstab file"
 msgstr "無法開啟 /etc/fstab 檔"
 
-# gnome/gmount.c:386
 #: gnome/gmount.c:384
 #, c-format
 msgid "Could not symlink %s to %s; will not have such a desktop device icon."
 msgstr "無法將 %s 符號連結至 %s；將不會有此一桌面裝置圖示。"
 
-# gnome/gmount.c:444
 #: gnome/gmount.c:441
 #, c-format
 msgid "CD-ROM %d"
 msgstr "光碟機 %d"
 
-# gnome/gmount.c:456
 #: gnome/gmount.c:453
 #, c-format
 msgid "Floppy %d"
 msgstr "軟碟機 %d"
 
-# gnome/gmount.c:462
 #: gnome/gmount.c:459
 #, c-format
 msgid "Disk %d"
 msgstr "磁碟 %d"
 
-# gnome/gmount.c:467
 #: gnome/gmount.c:464
 #, c-format
 msgid "NFS dir %s"
 msgstr "NFS 目錄 %s"
 
-# gnome/gmount.c:471
 #: gnome/gmount.c:468
 #, c-format
 msgid "Device %d"
 msgstr "裝置 %d"
 
-# gnome/gnome-file-property-dialog.c:171
 #. we set the file part
 #: gnome/gnome-file-property-dialog.c:171
 msgid "Full Name: "
 msgstr "檔案全名："
 
-# gnome/gnome-file-property-dialog.c:179
 #: gnome/gnome-file-property-dialog.c:179
 msgid "File Name"
 msgstr "檔名"
 
-# gnome/gnome-file-property-dialog.c:204
-# gnome/gnome-file-property-dialog.c:210
 #: gnome/gnome-file-property-dialog.c:202
 msgid "File Type: "
 msgstr "檔案類型: "
 
-# gnome/gnome-file-property-dialog.c:217
 #: gnome/gnome-file-property-dialog.c:209
 msgid "File Type: Symbolic Link"
 msgstr "檔案類型：符號連結"
 
-# gnome/gnome-file-property-dialog.c:222
 #: gnome/gnome-file-property-dialog.c:214
 msgid "Target Name: INVALID LINK"
 msgstr " 名稱: 無效的連結"
 
-# gnome/gnome-file-property-dialog.c:225
 #: gnome/gnome-file-property-dialog.c:217
 msgid "Target Name: "
 msgstr " 名稱: "
 
-# gnome/gnome-file-property-dialog.c:230
 #: gnome/gnome-file-property-dialog.c:222
 msgid "File Type: Directory"
 msgstr "檔案類型: 目錄"
 
-# gnome/gnome-file-property-dialog.c:232
 #: gnome/gnome-file-property-dialog.c:224
 msgid "File Type: Character Device"
 msgstr "檔案類型: 字元裝置"
 
-# gnome/gnome-file-property-dialog.c:234
 #: gnome/gnome-file-property-dialog.c:226
 msgid "File Type: Block Device"
 msgstr "檔案類型: 區塊裝置"
 
-# gnome/gnome-file-property-dialog.c:236
 #: gnome/gnome-file-property-dialog.c:228
 msgid "File Type: Socket"
 msgstr "檔案類型: 插座 (Socket)"
 
-# gnome/gnome-file-property-dialog.c:238
 #: gnome/gnome-file-property-dialog.c:230
 msgid "File Type: FIFO"
 msgstr "檔案類型: FIFO"
 
-# gnome/gnome-file-property-dialog.c:248
-# gnome/gnome-file-property-dialog.c:252
-# gnome/gnome-file-property-dialog.c:258
 #: gnome/gnome-file-property-dialog.c:240
 #: gnome/gnome-file-property-dialog.c:244
 #: gnome/gnome-file-property-dialog.c:250
 msgid "File Size: "
 msgstr "檔案大小: "
 
-# gnome/gnome-file-property-dialog.c:248
 #: gnome/gnome-file-property-dialog.c:240
 msgid " bytes"
 msgstr " 位元組"
 
-# gnome/gnome-file-property-dialog.c:252
 #: gnome/gnome-file-property-dialog.c:244
 msgid " KBytes  ("
 msgstr " 千位元組  ("
 
-# gnome/gnome-file-property-dialog.c:253
-# gnome/gnome-file-property-dialog.c:259
 #: gnome/gnome-file-property-dialog.c:245
 #: gnome/gnome-file-property-dialog.c:251
 msgid " bytes)"
 msgstr " 位元組)"
 
-# gnome/gnome-file-property-dialog.c:258
 #: gnome/gnome-file-property-dialog.c:250
 msgid " MBytes  ("
 msgstr " 百萬位元組  ("
 
-# gnome/gnome-file-property-dialog.c:266
 #: gnome/gnome-file-property-dialog.c:258
 msgid "File Size: N/A"
 msgstr "檔案大小: 無法得知 "
 
-# gnome/gnome-file-property-dialog.c:277
 #: gnome/gnome-file-property-dialog.c:269
 msgid "File Created on: "
 msgstr "檔案建立於: "
 
-# gnome/gnome-file-property-dialog.c:281
-# gnome/gnome-file-property-dialog.c:290
-# gnome/gnome-file-property-dialog.c:299
 #: gnome/gnome-file-property-dialog.c:273
 #: gnome/gnome-file-property-dialog.c:282
 #: gnome/gnome-file-property-dialog.c:291
 msgid "%a, %b %d %Y,  %I:%M:%S %p"
 msgstr "%a, %b %d %Y,  %I:%M:%S %p"
 
-# gnome/gnome-file-property-dialog.c:286
 #: gnome/gnome-file-property-dialog.c:278
 msgid "Last Modified on: "
 msgstr "最後更動時間: "
 
-# gnome/gnome-file-property-dialog.c:295
 #: gnome/gnome-file-property-dialog.c:287
 msgid "Last Accessed on: "
 msgstr "最後存取時間: "
 
-# gnome/gnome-file-property-dialog.c:313
 #: gnome/gnome-file-property-dialog.c:305
 msgid "URL:"
 msgstr "URL:"
 
-# gnome/gnome-file-property-dialog.c:320
 #: gnome/gnome-file-property-dialog.c:312
 msgid "Caption:"
 msgstr "標題:"
 
-# gnome/gnome-file-property-dialog.c:397
-# gnome/gnome-file-property-dialog.c:499
 #: gnome/gnome-file-property-dialog.c:389
 #: gnome/gnome-file-property-dialog.c:491
 msgid "Drop Action"
 msgstr "置放動作"
 
-# gnome/gnome-file-property-dialog.c:398
 #: gnome/gnome-file-property-dialog.c:390
 msgid "Use default Drop Action options"
 msgstr "使用預設的置放動作"
 
-# gnome/gnome-file-property-dialog.c:413
-# gnome/gnome-file-property-dialog.c:501
-# gnome/gpopup2.c:287
-# src/screen.c:2395
-# src/screen.c:2425
 #: gnome/gnome-file-property-dialog.c:405
 #: gnome/gnome-file-property-dialog.c:493 gnome/gpopup2.c:286
 #: src/screen.c:2416
 msgid "View"
 msgstr "檢視"
 
-# gnome/gnome-file-property-dialog.c:414
 #: gnome/gnome-file-property-dialog.c:406
 msgid "Use default View options"
 msgstr "使用預設的顯示選項"
 
-# gnome/gnome-file-property-dialog.c:449
 #: gnome/gnome-file-property-dialog.c:441
 msgid "Select an Icon"
 msgstr "選取一個圖示"
 
-# gnome/gnome-file-property-dialog.c:479
-# gnome/gpopup2.c:278
 #. we do open first
 #: gnome/gnome-file-property-dialog.c:471 gnome/gpopup2.c:277
 msgid "Open"
 msgstr "開啟"
 
-# gnome/gnome-file-property-dialog.c:489
 #: gnome/gnome-file-property-dialog.c:481
 msgid "Use default Open action"
 msgstr "使用預設的開啟動作"
 
-# gnome/gnome-file-property-dialog.c:512
 #: gnome/gnome-file-property-dialog.c:504
 msgid "Use default Drop action"
 msgstr "使用預設的置放動作"
 
-# gnome/gnome-file-property-dialog.c:514
 #: gnome/gnome-file-property-dialog.c:506
 msgid "Use default View action"
 msgstr "使用預設的檢視動作"
 
-# gnome/gnome-file-property-dialog.c:523
-# gnome/gpopup2.c:289
-# src/screen.c:2396
-# src/screen.c:2426
-# src/view.c:2081
 #: gnome/gnome-file-property-dialog.c:515 gnome/gpopup2.c:288
 #: src/screen.c:2417 src/view.c:2086
 msgid "Edit"
 msgstr "編輯"
 
-# gnome/gnome-file-property-dialog.c:533
 #: gnome/gnome-file-property-dialog.c:525
 msgid "Use default Edit action"
 msgstr "使用預設的編輯動作"
 
-# gnome/gnome-file-property-dialog.c:587
-# gnome/gprop.c:521
 #: gnome/gnome-file-property-dialog.c:579
 msgid "Icon"
 msgstr "圖示"
 
-# gnome/gnome-file-property-dialog.c:621
 #. We must be a file or a link to a file.
 #: gnome/gnome-file-property-dialog.c:613
 msgid "File Actions"
 msgstr "檔案動作"
 
-# gnome/gnome-file-property-dialog.c:626
 #: gnome/gnome-file-property-dialog.c:618
 msgid "Open action"
 msgstr "開啟動作"
 
-# gnome/gnome-file-property-dialog.c:627
 #: gnome/gnome-file-property-dialog.c:619
 msgid "Needs terminal to run"
 msgstr "使用終端機來執行"
 
-# gnome/gnome-file-property-dialog.c:753
 #: gnome/gnome-file-property-dialog.c:745
 msgid "File Permissions"
 msgstr "檔案權限"
 
-# gnome/gnome-file-property-dialog.c:764
-# gnome/gprop.c:259
 #: gnome/gnome-file-property-dialog.c:756
 msgid "Current mode: "
 msgstr "目前的模式："
 
-# gnome/gnome-file-property-dialog.c:780
-# gnome/gprop.c:272
 #. Headings
 #: gnome/gnome-file-property-dialog.c:772
 msgid "Read"
 msgstr "讀取"
 
-# gnome/gnome-file-property-dialog.c:781
-# gnome/gprop.c:273
 #: gnome/gnome-file-property-dialog.c:773
 msgid "Write"
 msgstr "寫入"
 
-# gnome/gnome-file-property-dialog.c:782
-# gnome/gprop.c:274
 #: gnome/gnome-file-property-dialog.c:774
 msgid "Exec"
 msgstr "執行"
 
-# gnome/gnome-file-property-dialog.c:783
-# gnome/gprop.c:275
 #: gnome/gnome-file-property-dialog.c:775
 msgid "Special"
 msgstr "特殊"
 
-# gnome/gnome-file-property-dialog.c:787
-# gnome/gprop.c:279
 #. Permissions
 #: gnome/gnome-file-property-dialog.c:779
 msgid "User"
 msgstr "使用者"
 
-# gnome/gnome-file-property-dialog.c:789
-# gnome/gprop.c:281
 #: gnome/gnome-file-property-dialog.c:781
 msgid "Other"
 msgstr "其它"
 
-# gnome/gnome-file-property-dialog.c:793
-# gnome/gprop.c:285
 #. Special
 #: gnome/gnome-file-property-dialog.c:785
 msgid "Set UID"
 msgstr "設定UID"
 
-# gnome/gnome-file-property-dialog.c:794
-# gnome/gprop.c:286
 #: gnome/gnome-file-property-dialog.c:786
 msgid "Set GID"
 msgstr "設定GID"
 
-# gnome/gnome-file-property-dialog.c:795
-# gnome/gprop.c:287
 #: gnome/gnome-file-property-dialog.c:787
 msgid "Sticky"
 msgstr "設定Sticky"
 
-# gnome/gnome-file-property-dialog.c:917
 #: gnome/gnome-file-property-dialog.c:909
 #, c-format
 msgid "<Unknown> (%d)"
 msgstr "<未知> (%d)"
 
-# gnome/gnome-file-property-dialog.c:931
 #: gnome/gnome-file-property-dialog.c:923
 msgid "File ownership"
 msgstr "檔案權限"
 
-# gnome/gnome-file-property-dialog.c:1097
 #: gnome/gnome-file-property-dialog.c:1089
 msgid "URL"
 msgstr "URL"
 
-# gnome/gnome-file-property-dialog.c:1100
 #: gnome/gnome-file-property-dialog.c:1092
 msgid "Statistics"
 msgstr "統計資料"
 
-# gnome/gnome-file-property-dialog.c:1106
 #: gnome/gnome-file-property-dialog.c:1098
 msgid "Options"
 msgstr "選項"
 
-# gnome/gnome-file-property-dialog.c:1109
 #: gnome/gnome-file-property-dialog.c:1101
 msgid "Permissions"
 msgstr "權限"
 
-# gnome/gnome-file-property-dialog.c:1112
 #: gnome/gnome-file-property-dialog.c:1104
 msgid " Properties"
 msgstr "內容"
 
-# gnome/gnome-file-property-dialog.c:1164
-# gnome/gnome-file-property-dialog.c:1175
 #: gnome/gnome-file-property-dialog.c:1156
 #: gnome/gnome-file-property-dialog.c:1167
 msgid "You entered an invalid username"
 msgstr "您輸入的是一個無效的使用者名稱"
 
-# gnome/gnome-file-property-dialog.c:1164
-# gnome/gnome-file-property-dialog.c:1175
 #: gnome/gnome-file-property-dialog.c:1187
 msgid "You entered an invalid group name"
 msgstr "您輸入的是一個無效的群組名稱"
 
-# gnome/gnome-file-property-dialog.c:1220
 #: gnome/gnome-file-property-dialog.c:1210
 msgid "You must rename your file to something"
 msgstr "您必須改變檔案名稱"
 
-# gnome/gnome-file-property-dialog.c:1226
 #: gnome/gnome-file-property-dialog.c:1216
 msgid "You cannot rename a file to something containing a '/' character"
 msgstr "不能將檔案改名成含有 '/' 字元"
 
-# gnome/gnome-open-dialog.c:385
 #: gnome/gnome-open-dialog.c:385
 #, c-format
 msgid "Select an application to open \"%s\" with."
 msgstr "選取要開啟\"%s\"的應用程式."
 
-# gnome/gnome-open-dialog.c:395
 #: gnome/gnome-open-dialog.c:395
 msgid "Select a file to run with"
 msgstr "選取要執行的檔案"
 
-# gnome/gnome-open-dialog.c:406
 #. the file tree
 #: gnome/gnome-open-dialog.c:406
 msgid "Applications"
 msgstr "應用程式"
 
-# gnome/gnome-open-dialog.c:422
 #: gnome/gnome-open-dialog.c:422
 msgid "Program to run"
 msgstr "要執行的程式"
 
-# gnome/gpopup2.c:280
 #: gnome/gpopup2.c:279
 msgid "Mount device"
 msgstr "掛上裝置"
 
-# gnome/gpopup2.c:281
 #: gnome/gpopup2.c:280
 msgid "Unmount device"
 msgstr "卸載裝置"
 
-# gnome/gpopup2.c:282
 #: gnome/gpopup2.c:281
 msgid "Eject device"
 msgstr "取出碟片"
 
-# gnome/gpopup2.c:283
 #: gnome/gpopup2.c:282
 msgid "Empty Trash"
 msgstr "清空垃圾桶"
 
-# gnome/gpopup2.c:286
 #: gnome/gpopup2.c:285
 msgid "Open with..."
 msgstr " 以此開啟..."
 
-# gnome/gpopup2.c:288
 #: gnome/gpopup2.c:287
 msgid "View Unfiltered"
 msgstr "檢視未過濾出來的"
 
-# gnome/gpopup2.c:291
 #: gnome/gpopup2.c:290
 msgid "Copy..."
 msgstr "複製..."
 
-# gnome/gpopup2.c:292
 #: gnome/gpopup2.c:291
 msgid "Move to Trash"
 msgstr "移到垃圾桶"
 
-# gnome/gpopup2.c:293
-# gtkedit/editwidget.c:1144
-# src/screen.c:2400
-# src/screen.c:2430
 #: gnome/gpopup2.c:292 gtkedit/editwidget.c:1146 gtkedit/gtkedit.c:1263
 #: src/screen.c:2421
 msgid "Delete"
 msgstr "刪除..."
 
-# gnome/gpopup2.c:294
 #: gnome/gpopup2.c:293
 msgid "Move..."
 msgstr "搬移..."
 
-# gnome/gpopup2.c:295
 #: gnome/gpopup2.c:294
 msgid "Hard Link..."
 msgstr "連結..."
 
-# gnome/gpopup2.c:296
 #: gnome/gpopup2.c:295
 msgid "Symlink..."
 msgstr "符號連結..."
 
-# gnome/gpopup2.c:297
 #: gnome/gpopup2.c:296
 msgid "Edit Symlink..."
 msgstr "編輯符號連結..."
 
-# gnome/gpopup2.c:299
 #: gnome/gpopup2.c:298
 msgid "Properties..."
 msgstr "內容"
 
-# gnome/gprefs.c:92
 #: gnome/gprefs.c:92
 msgid "Show backup files"
 msgstr "顯示備份檔案"
 
-# gnome/gprefs.c:96
 #: gnome/gprefs.c:96
 msgid "Show hidden files"
 msgstr "顯示隱藏檔"
 
-# gnome/gprefs.c:100
 #: gnome/gprefs.c:100
 msgid "Mix files and directories"
 msgstr "檔案與目錄混合顯示"
 
-# gnome/gprefs.c:104
 #: gnome/gprefs.c:104
 msgid "Use shell patterns instead of regular expressions"
 msgstr "以系統殼萬用字元代替正規表示式"
 
-# gnome/gprefs.c:108
 #: gnome/gprefs.c:108
 msgid "Determine file types from file content instead of extensions"
 msgstr "由檔案的內容來決定檔案類型而不使用延伸檔名決定"
 
-# gnome/gprefs.c:117
 #: gnome/gprefs.c:117
 msgid "Confirm when deleting file"
 msgstr "刪除檔案之前先經過確認"
 
-# gnome/gprefs.c:121
 #: gnome/gprefs.c:121
 msgid "Confirm when overwriting files"
 msgstr "蓋寫檔案之前先經過確認"
 
-# gnome/gprefs.c:125
 #: gnome/gprefs.c:125
 msgid "Confirm when executing files"
 msgstr "執行程式之前先經過確認"
 
-# gnome/gprefs.c:129
 #: gnome/gprefs.c:129
 msgid "Show progress while operations are being performed"
 msgstr "進行工作同時並顯示進度"
 
-# gnome/gprefs.c:138
 #: gnome/gprefs.c:139
 msgid "VFS Timeout:"
 msgstr "虛擬檔案系統逾時："
 
-# gnome/gprefs.c:139
-# gnome/gprefs.c:164
 #: gnome/gprefs.c:140 gnome/gprefs.c:167
 msgid "Seconds"
 msgstr "秒"
 
-# gnome/gprefs.c:142
 #: gnome/gprefs.c:143
 msgid "Anonymous FTP password:"
 msgstr "匿名檔案傳輸密碼："
 
-# gnome/gprefs.c:146
 #: gnome/gprefs.c:147
 msgid "Always use FTP proxy"
 msgstr "檔案傳輸時使用代理伺服器"
 
-# gnome/gprefs.c:155
 #: gnome/gprefs.c:157
 msgid "Fast directory reload"
 msgstr "快速重讀目錄"
 
-# gnome/gprefs.c:159
 #: gnome/gprefs.c:161
 msgid "Compute totals before copying files"
 msgstr "複製檔案之前先計算總數"
 
-# gnome/gprefs.c:163
 #: gnome/gprefs.c:166
 msgid "FTP directory cache timeout :"
 msgstr "FTP 目錄快取逾時："
 
-# gnome/gprefs.c:167
 #: gnome/gprefs.c:171
 msgid "Allow customization of icons in icon view"
 msgstr "允許在圖示顯示時使用自定的圖示"
 
-# gnome/gprefs.c:176
 #: gnome/gprefs.c:180
 msgid "File display"
 msgstr "檔案顯示"
 
-# gnome/gprefs.c:180
 #: gnome/gprefs.c:184
 msgid "Confirmation"
 msgstr "確認"
 
-# gnome/gprefs.c:184
 #: gnome/gprefs.c:189
 msgid "VFS"
 msgstr "虛擬檔案系統"
 
-# gnome/gprefs.c:188
 #: gnome/gprefs.c:194
 msgid "Caching"
 msgstr "快取"
 
-# gnome/gprefs.c:480
 #: gnome/gprefs.c:486
 msgid "Preferences"
 msgstr "設定"
 
-# gnome/gscreen.c:1428
-# gnome/gscreen.c:1439
 #: gnome/gscreen.c:1412 gnome/gscreen.c:1423
 msgid "Reloads the current directory"
 msgstr "重讀這個目錄"
 
-# gnome/gscreen.c:1430
-# gnome/gscreen.c:1441
 #: gnome/gscreen.c:1414 gnome/gscreen.c:1425
 msgid "New _Directory..."
 msgstr "新目錄 (_D)..."
 
-# gnome/gscreen.c:1430
-# gnome/gscreen.c:1441
 #: gnome/gscreen.c:1414 gnome/gscreen.c:1425
 msgid "Creates a new directory here"
 msgstr "建立新目錄"
 
-# gnome/gscreen.c:1437
 #: gnome/gscreen.c:1421
 msgid "Empty _Trash"
 msgstr "清空垃圾桶(_T)"
 
-# gnome/gscreen.c:1437
 #: gnome/gscreen.c:1421
 msgid "Empties the Trash"
 msgstr "清空垃圾桶"
 
-# gnome/gscreen.c:1653
 #: gnome/gscreen.c:1654
 #, c-format
 msgid "Search: %s"
 msgstr "尋找：%s"
 
-# gnome/gscreen.c:1663
-# src/screen.c:663
 #: gnome/gscreen.c:1664 src/screen.c:658
 #, c-format
 msgid "%s bytes in %d file"
 msgstr "%s 位元組，%d 個檔案"
 
-# gnome/gscreen.c:1663
-# src/screen.c:663
 #: gnome/gscreen.c:1664 src/screen.c:658
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s 位元組，共 %d 個檔案"
 
-# gnome/gscreen.c:1689
-# src/screen.c:689
 #: gnome/gscreen.c:1690 src/screen.c:684
 msgid "<readlink failed>"
 msgstr "<連結讀取錯誤>"
 
-# gnome/gscreen.c:2118
 #: gnome/gscreen.c:2115
 msgid "Copy directory"
 msgstr "複製目錄"
 
-# gnome/gscreen.c:2119
 #: gnome/gscreen.c:2116
 msgid "Delete directory"
 msgstr "刪除目錄"
 
-# gnome/gscreen.c:2120
 #: gnome/gscreen.c:2117
 msgid "Rename or move directory"
 msgstr "更改名稱或搬移目錄"
 
-# gnome/gscreen.c:2278
 #: gnome/gscreen.c:2310
 msgid "Back"
 msgstr "往前"
 
-# gnome/gscreen.c:2278
 #: gnome/gscreen.c:2310
 msgid "Go to the previously visited directory"
 msgstr "到前一個到過的目錄"
 
-# gnome/gscreen.c:2280
 #: gnome/gscreen.c:2312
 msgid "Up"
 msgstr "往上"
 
-# gnome/gscreen.c:2280
 #: gnome/gscreen.c:2312
 msgid "Go up a level in the directory hierarchy"
 msgstr "到目錄結構的上一層"
 
-# gnome/gscreen.c:2282
 #: gnome/gscreen.c:2314
 msgid "Forward"
 msgstr "往前"
 
-# gnome/gscreen.c:2282
 #: gnome/gscreen.c:2314
 msgid "Go to the next directory"
 msgstr "到下一個目錄"
 
-# gnome/gscreen.c:2285
-# src/tree.c:1010
 #: gnome/gscreen.c:2317 src/tree.c:1019
 msgid "Rescan"
 msgstr "重新讀取"
 
-# gnome/gscreen.c:2285
 #: gnome/gscreen.c:2317
 msgid "Rescan the current directory"
 msgstr "重新讀取目錄內容"
 
-# gnome/gscreen.c:2288
 #: gnome/gscreen.c:2320
 msgid "Home"
 msgstr "家目錄"
 
-# gnome/gscreen.c:2288
 #: gnome/gscreen.c:2320
 msgid "Go to your home directory"
 msgstr "到使用者的家目錄"
 
-# gnome/gscreen.c:2428
 #: gnome/gscreen.c:2463
 msgid "Location:"
 msgstr "位置："
 
-# gnome/gtools.c:105
-# gtkedit/editcmd.c:393
-# gtkedit/editcmd.c:1242
-# gtkedit/editcmd.c:1327
-# gtkedit/editcmd.c:3022
-# gtkedit/editoptions.c:69
-# src/boxes.c:138
-# src/boxes.c:278
-# src/boxes.c:378
-# src/boxes.c:466
-# src/boxes.c:646
-# src/boxes.c:728
-# src/boxes.c:783
-# src/boxes.c:898
-# src/filegui.c:839
-# src/find.c:171
-# src/layout.c:375
-# src/option.c:143
-# src/wtools.c:289
-# src/wtools.c:563
-# vfs/smbfs.c:117
 #. 1
 #: gnome/gtools.c:105 gtkedit/edit.h:511 gtkedit/editcmd.c:415
 #: gtkedit/editcmd.c:1292 gtkedit/editcmd.c:1377 gtkedit/editcmd.c:3104
@@ -2204,142 +1687,98 @@ msgstr "位置："
 msgid "&Ok"
 msgstr "確定 (&O)"
 
-# gnome/gview.c:136
 #: gnome/gview.c:136
 #, c-format
 msgid "Offset 0x%08lx"
 msgstr "偏移值 0x%08lx"
 
-# gnome/gview.c:138
-# src/view.c:732
 #: gnome/gview.c:138 src/view.c:734
 #, c-format
 msgid "Col %d"
 msgstr "欄 %d"
 
-# gnome/gview.c:142
-# src/view.c:736
 #: gnome/gview.c:142 src/view.c:738
 #, c-format
 msgid "%s bytes"
 msgstr "%s 位元組"
 
-# gnome/gview.c:306
 #: gnome/gview.c:308
 msgid "_Goto line"
 msgstr "跳至某行 (_G)"
 
-# gnome/gview.c:307
 #: gnome/gview.c:309
 msgid "Jump to a specified line number"
 msgstr "跳到使用者指定的行號"
 
-# gnome/gview.c:309
 #: gnome/gview.c:311
 msgid "_Monitor file"
 msgstr "觀察檔案 (_M)"
 
-# gnome/gview.c:309
 #: gnome/gview.c:311
 msgid "Monitor file growing"
 msgstr "觀察檔案大小的變化"
 
-# gnome/gview.c:316
 #: gnome/gview.c:318
 msgid "Regexp search"
 msgstr "正規式搜尋"
 
-# gnome/gview.c:317
 #: gnome/gview.c:319
 msgid "Regular expression search"
 msgstr "以正規表示式來搜尋"
 
-# gnome/gview.c:326
 #: gnome/gview.c:328
 msgid "_Wrap"
 msgstr "換行 (_W)"
 
-# gnome/gview.c:327
 #: gnome/gview.c:329
 msgid "Wrap the text"
 msgstr "文字自動換行"
 
-# gnome/gview.c:330
 #. Can not use this one yet, as it destroys the viewer, need to fix that
 #: gnome/gview.c:332
 msgid "_Parsed view"
 msgstr "解譯過的檢視 (_P)"
 
-# gnome/gview.c:333
 #: gnome/gview.c:335
 msgid "_Formatted"
 msgstr "格式化 (_F)"
 
-# gnome/gview.c:335
 #: gnome/gview.c:337
 msgid "_Hex"
 msgstr "十六進位 (_H)"
 
-# gnome/gview.c:341
 #: gnome/gview.c:343
 msgid "_Search"
 msgstr "搜尋 (_S)"
 
-# gnome/gwidget.c:95
 #: gnome/gwidget.c:95
 msgid "ok"
 msgstr "確定"
 
-# gnome/gwidget.c:97
 #: gnome/gwidget.c:97
 msgid "cancel"
 msgstr "取消"
 
-# gnome/gwidget.c:99
 #: gnome/gwidget.c:99
 msgid "help"
 msgstr "說明"
 
-# gnome/gwidget.c:101
-# src/file.c:2268
 #: gnome/gwidget.c:101 src/file.c:2271
 msgid "yes"
 msgstr "是"
 
-# gnome/gwidget.c:103
-# src/file.c:2266
 #: gnome/gwidget.c:103 src/file.c:2269
 msgid "no"
 msgstr "否"
 
-# gnome/gwidget.c:105
 #: gnome/gwidget.c:105
 msgid "exit"
 msgstr "離開"
 
-# gnome/gwidget.c:107
 #: gnome/gwidget.c:107
 msgid "abort"
 msgstr "終止"
 
-# gtkedit/edit.c:151
-# gtkedit/edit.c:320
-# gtkedit/edit.c:325
-# gtkedit/edit.c:339
-# gtkedit/edit.c:343
-# gtkedit/edit.c:375
-# gtkedit/edit.c:381
-# gtkedit/edit.c:388
-# gtkedit/edit.c:395
-# gtkedit/edit.c:401
-# gtkedit/editcmd.c:305
-# gtkedit/editcmd.c:311
-# gtkedit/editcmd.c:2038
-# gtkedit/editwidget.c:1024
-# src/dir.c:386
-# src/tree.c:682
-# src/tree.c:688
-# src/wtools.c:222
 #. The file-name is printed after the ':'
 #: gtkedit/edit.c:156 gtkedit/edit.c:325 gtkedit/edit.c:330 gtkedit/edit.c:344
 #: gtkedit/edit.c:348 gtkedit/edit.c:380 gtkedit/edit.c:386 gtkedit/edit.c:393
@@ -2349,45 +1788,34 @@ msgstr "終止"
 msgid " Error "
 msgstr "錯誤"
 
-# gtkedit/edit.c:151
-# gtkedit/edit.c:343
-# gtkedit/edit.c:375
-# gtkedit/edit.c:381
 #: gtkedit/edit.c:156 gtkedit/edit.c:348 gtkedit/edit.c:380 gtkedit/edit.c:386
 msgid " Failed trying to open file for reading: "
 msgstr " 在開啟檔案用來讀取時失敗： "
 
-# gtkedit/edit.c:320
 #: gtkedit/edit.c:325
 msgid " Error reading from pipe: "
 msgstr " 從管線讀取資料時發生錯誤: "
 
-# gtkedit/edit.c:325
 #: gtkedit/edit.c:330
 msgid " Failed trying to open pipe for reading: "
 msgstr " 在開啟管線用來讀取時失敗： "
 
-# gtkedit/edit.c:339
 #: gtkedit/edit.c:344
 msgid " Error reading file: "
 msgstr " 讀取檔案時發生錯誤: "
 
-# gtkedit/edit.c:388
 #: gtkedit/edit.c:393
 msgid " Cannot get size/permissions info on file: "
 msgstr " 無法獲得檔案的大小/權限資訊： "
 
-# gtkedit/edit.c:395
 #: gtkedit/edit.c:400
 msgid " Not an ordinary file: "
 msgstr " 不是常規檔案： "
 
-# gtkedit/edit.c:401
 #: gtkedit/edit.c:406
 msgid " File is too large: "
 msgstr " 檔案太大了： "
 
-# gtkedit/edit.c:402
 #: gtkedit/edit.c:407
 msgid ""
 " \n"
@@ -2396,78 +1824,38 @@ msgstr ""
 " \n"
 " 增加 edit.h 裡面定義的 MAXBUF，並重新編譯編輯器。 "
 
-# gtkedit/edit.c:2594
 #: gtkedit/edit.c:2601
 msgid "User menu available only in mcedit invoked from mc"
 msgstr "使用者選單只在 mc 中的 mcedit 中存在."
 
-# gtkedit/edit.c:2792
-# gtkedit/editcmd.c:2940
 #: gtkedit/edit.c:2804 gtkedit/editcmd.c:3022
 msgid "Error trying to stat file:"
 msgstr "嘗試 stat 檔案時發生錯誤:"
 
-# gtkedit/gtkedit.c:67
 #: gtkedit/edit.h:510 gtkedit/gtkedit.c:71
 msgid "&Dismiss"
 msgstr "關閉"
 
-# gtkedit/editcmd.c:305
 #: gtkedit/editcmd.c:327
 msgid " Error writing to pipe: "
 msgstr " 寫入管線時發生錯誤 "
 
-# gtkedit/editcmd.c:311
 #: gtkedit/editcmd.c:333
 msgid " Failed trying to open pipe for writing: "
 msgstr " 在開啟管線用來寫入時失敗： "
 
-# gtkedit/editcmd.c:386
 #: gtkedit/editcmd.c:408
 msgid "Quick save "
 msgstr "快速存檔"
 
-# gtkedit/editcmd.c:387
 #: gtkedit/editcmd.c:409
 msgid "Safe save "
 msgstr "安全存檔"
 
-# gtkedit/editcmd.c:388
 #: gtkedit/editcmd.c:410
 msgid "Do backups -->"
 msgstr "進行備份 -->"
 
-# gtkedit/editcmd.c:391
-# gtkedit/editcmd.c:1190
-# gtkedit/editcmd.c:1240
-# gtkedit/editcmd.c:1325
-# gtkedit/editcmd.c:3020
-# gtkedit/editoptions.c:66
-# src/achown.c:71
-# src/boxes.c:139
-# src/boxes.c:279
-# src/boxes.c:376
-# src/boxes.c:464
-# src/boxes.c:644
-# src/boxes.c:727
-# src/boxes.c:781
-# src/chmod.c:114
-# src/chown.c:79
-# src/cmd.c:861
-# src/filegui.c:822
-# src/find.c:171
-# src/hotlist.c:138
-# src/hotlist.c:801
-# src/hotlist.c:898
-# src/layout.c:376
-# src/learn.c:59
-# src/option.c:144
-# src/panelize.c:86
-# src/view.c:406
-# src/wtools.c:111
-# src/wtools.c:386
-# src/wtools.c:561
-# vfs/smbfs.c:117
 #. 0
 #: gtkedit/editcmd.c:413 gtkedit/editcmd.c:1231 gtkedit/editcmd.c:1290
 #: gtkedit/editcmd.c:1375 gtkedit/editcmd.c:3102 gtkedit/editoptions.c:66
@@ -2481,40 +1869,18 @@ msgstr "進行備份 -->"
 msgid "&Cancel"
 msgstr "取消"
 
-# gtkedit/editcmd.c:397
 #: gtkedit/editcmd.c:419
 msgid "Extension:"
 msgstr "擴充:"
 
-# gtkedit/editcmd.c:403
 #: gtkedit/editcmd.c:425
 msgid " Edit Save Mode "
 msgstr " 改變存檔模式 "
 
-# gtkedit/editcmd.c:527
 #: gtkedit/editcmd.c:567
 msgid " Save As "
 msgstr " 另存新檔 "
 
-# gtkedit/editcmd.c:541
-# gtkedit/editcmd.c:864
-# gtkedit/editcmd.c:889
-# gtkedit/editcmd.c:1040
-# gtkedit/editcmd.c:1138
-# src/ext.c:315
-# src/file.c:619
-# src/help.c:318
-# src/main.c:714
-# src/screen.c:1448
-# src/screen.c:2125
-# src/screen.c:2175
-# src/subshell.c:705
-# src/subshell.c:731
-# src/utilunix.c:382
-# src/utilunix.c:386
-# src/utilunix.c:406
-# src/utilunix.c:457
-# vfs/mcfs.c:172
 #. Warning message with a query to continue or cancel the operation
 #: gtkedit/editcmd.c:581 gtkedit/editcmd.c:905 gtkedit/editcmd.c:930
 #: gtkedit/editcmd.c:1081 gtkedit/editcmd.c:1179 src/file.c:619 src/help.c:314
@@ -2525,121 +1891,86 @@ msgstr " 另存新檔 "
 msgid " Warning "
 msgstr "警告"
 
-# gtkedit/editcmd.c:542
 #: gtkedit/editcmd.c:582
 msgid " A file already exists with this name. "
 msgstr " 同名的檔案已經存在。 "
 
-# gtkedit/editcmd.c:544
 #. Push buttons to over-write the current file, or cancel the operation
 #: gtkedit/editcmd.c:584
 msgid "Overwrite"
 msgstr "蓋寫"
 
-# gtkedit/editcmd.c:544
-# gtkedit/editcmd.c:611
-# gtkedit/editcmd.c:838
-# gtkedit/editcmd.c:864
-# gtkedit/editcmd.c:889
-# gtkedit/editcmd.c:1040
-# gtkedit/editcmd.c:1678
 #: gtkedit/editcmd.c:584 gtkedit/editcmd.c:651 gtkedit/editcmd.c:879
 #: gtkedit/editcmd.c:905 gtkedit/editcmd.c:930 gtkedit/editcmd.c:1081
 #: gtkedit/editcmd.c:1733
 msgid "Cancel"
 msgstr "取消"
 
-# gtkedit/editcmd.c:563
 #: gtkedit/editcmd.c:603
 msgid " Save as "
 msgstr " 另存新檔 "
 
-# gtkedit/editcmd.c:563
-# gtkedit/editcmd.c:2782
 #: gtkedit/editcmd.c:603 gtkedit/editcmd.c:2865
 msgid " Error trying to save file. "
 msgstr " 試著存檔時發生錯誤。 "
 
-# gtkedit/editcmd.c:681
-# gtkedit/editcmd.c:689
-# gtkedit/editcmd.c:714
 #. This heads the delete macro error dialog box
 #: gtkedit/editcmd.c:721 gtkedit/editcmd.c:729 gtkedit/editcmd.c:754
 msgid " Delete macro "
 msgstr " 刪除巨集 "
 
-# gtkedit/editcmd.c:683
 #. 'Open' = load temp file
 #: gtkedit/editcmd.c:723
 msgid " Error trying to open temp file "
 msgstr " 嘗試開啟暫存檔時發生錯誤 "
 
-# gtkedit/editcmd.c:691
-# gtkedit/editcmd.c:752
-# gtkedit/editcmd.c:820
 #. 'Open' = load temp file
 #: gtkedit/editcmd.c:731 gtkedit/editcmd.c:792 gtkedit/editcmd.c:861
 msgid " Error trying to open macro file "
 msgstr " 嘗試開啟巨集檔時發生錯誤 "
 
-# gtkedit/editcmd.c:715
 #: gtkedit/editcmd.c:755
 msgid " Error trying to overwrite macro file "
 msgstr " 嘗試蓋寫巨集檔時發生錯誤 "
 
-# gtkedit/editcmd.c:731
 #. This heads the 'Macro' dialog box
 #: gtkedit/editcmd.c:771
 msgid " Macro "
 msgstr " 巨集 "
 
-# gtkedit/editcmd.c:733
 #. Input line for a single key press follows the ':'
 #: gtkedit/editcmd.c:773
 msgid " Press the macro's new hotkey: "
 msgstr " 請按下啟動此一巨集的熱鍵： "
 
-# gtkedit/editcmd.c:752
 #. This heads the 'Save Macro' dialog box
 #: gtkedit/editcmd.c:792
 msgid " Save macro "
 msgstr " 儲存巨集 "
 
-# gtkedit/editcmd.c:762
-# gtkedit/editcmd.c:769
 #: gtkedit/editcmd.c:802 gtkedit/editcmd.c:810
 msgid " Delete Macro "
 msgstr " 刪除巨集 "
 
-# gtkedit/editcmd.c:819
 #. This heads the 'Load Macro' dialog box
 #: gtkedit/editcmd.c:860
 msgid " Load macro "
 msgstr " 載入巨集 "
 
-# gtkedit/editcmd.c:833
-# gtkedit/editcmd.c:835
 #: gtkedit/editcmd.c:874 gtkedit/editcmd.c:876
 msgid " Confirm save file? : "
 msgstr " 確定要儲存檔案？: "
 
-# gtkedit/editcmd.c:838
 #. Buttons to 'Confirm save file' query
 #: gtkedit/editcmd.c:879
 msgid " Save file "
 msgstr " 儲存檔案 "
 
-# gtkedit/editcmd.c:838
-# gtkedit/editwidget.c:1138
-# gtkedit/gtkedit.c:1249
-# src/view.c:2077
 #: gtkedit/editcmd.c:879 gtkedit/editwidget.c:1140 gtkedit/gtkedit.c:1256
 #: src/view.c:2082
 msgid "Save"
 msgstr "存檔"
 
-# gtkedit/editcmd.c:864
-# gtkedit/editcmd.c:889
 #: gtkedit/editcmd.c:905 gtkedit/editcmd.c:930
 msgid ""
 " Current text was modified without a file save. \n"
@@ -2648,147 +1979,96 @@ msgstr ""
 " 目前的文件內容已經被更動過，而且尚未存檔。 \n"
 " 忽略作過的改變並繼續工作。 "
 
-# gtkedit/editcmd.c:864
-# gtkedit/editcmd.c:889
-# gtkedit/editcmd.c:1040
 #: gtkedit/editcmd.c:905 gtkedit/editcmd.c:930 gtkedit/editcmd.c:1081
 msgid "Continue"
 msgstr "繼續"
 
-# gtkedit/editcmd.c:895
 #: gtkedit/editcmd.c:936
 msgid " Load "
 msgstr " 載入 "
 
-# gtkedit/editcmd.c:1040
-# gtkedit/editcmd.c:1138
 #: gtkedit/editcmd.c:1081 gtkedit/editcmd.c:1179
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " 區塊太大了，您可能無法復原這個動作。 "
 
-# gtkedit/editcmd.c:1138
 #: gtkedit/editcmd.c:1179
 msgid " Continue "
 msgstr " 繼續 "
 
-# gtkedit/editcmd.c:1138
 #: gtkedit/editcmd.c:1179
 msgid " Cancel "
 msgstr " 取消"
 
-# gtkedit/editcmd.c:1192
 #: gtkedit/editcmd.c:1233
 msgid "o&Ne"
 msgstr "單一"
 
-# gtkedit/editcmd.c:1194
-# src/filegui.c:597
 #: gtkedit/editcmd.c:1235 src/filegui.c:565
 msgid "al&L"
 msgstr "全部"
 
-# gtkedit/editcmd.c:1196
-# src/file.c:2190
-# src/filegui.c:267
 #: gtkedit/editcmd.c:1237 src/file.c:2193 src/filegui.c:260
 msgid "&Skip"
 msgstr "跳過"
 
-# gtkedit/editcmd.c:1198
 #: gtkedit/editcmd.c:1239
 msgid "&Replace"
 msgstr "替換"
 
-# gtkedit/editcmd.c:1204
-# gtkedit/editcmd.c:1678
 #: gtkedit/editcmd.c:1246 gtkedit/editcmd.c:1250 gtkedit/editcmd.c:1733
 msgid " Replace with: "
 msgstr " 以此替換：　"
 
-# gtkedit/editcmd.c:1208
 #: gtkedit/editcmd.c:1258
 msgid " Confirm replace "
 msgstr " 確定替換 "
 
-# gtkedit/editcmd.c:1244
-# gtkedit/editcmd.c:1329
 #: gtkedit/editcmd.c:1294 gtkedit/editcmd.c:1379
 msgid "scanf &Expression"
 msgstr " Scanf 表示式 "
 
-# gtkedit/editcmd.c:1246
 #: gtkedit/editcmd.c:1296
 msgid "replace &All"
 msgstr "全部替換"
 
-# gtkedit/editcmd.c:1248
 #: gtkedit/editcmd.c:1298
 msgid "pr&Ompt on replace"
 msgstr " 替換之前要先詢問 "
 
-# gtkedit/editcmd.c:1250
-# gtkedit/editcmd.c:1331
 #: gtkedit/editcmd.c:1300 gtkedit/editcmd.c:1381
 msgid "&Backwards"
 msgstr " 向後 "
 
-# gtkedit/editcmd.c:1252
-# gtkedit/editcmd.c:1333
 #: gtkedit/editcmd.c:1302 gtkedit/editcmd.c:1383
 msgid "&Regular expression"
 msgstr " 正規表示式 "
 
-# gtkedit/editcmd.c:1254
-# gtkedit/editcmd.c:1335
 #: gtkedit/editcmd.c:1304 gtkedit/editcmd.c:1385
 msgid "&Whole words only"
 msgstr " 只匹配整個單字 "
 
-# gtkedit/editcmd.c:1256
-# gtkedit/editcmd.c:1337
 #: gtkedit/editcmd.c:1306 gtkedit/editcmd.c:1387 src/find.c:142
 msgid "case &Sensitive"
 msgstr "大小寫不同"
 
-# gtkedit/editcmd.c:1260
 #: gtkedit/editcmd.c:1310
 msgid " Enter replacement argument order eg. 3,2,1,4 "
 msgstr " 輸入參數的順序, eg. 3,2,1,4 "
 
-# gtkedit/editcmd.c:1264
 #: gtkedit/editcmd.c:1314
 msgid " Enter replacement string:"
 msgstr " 輸入要替換的字串:"
 
-# gtkedit/editcmd.c:1268
-# gtkedit/editcmd.c:1341
-# src/view.c:2000
 #: gtkedit/editcmd.c:1318 gtkedit/editcmd.c:1391 src/view.c:1997
 msgid " Enter search string:"
 msgstr " 輸入要搜尋的字串： "
 
-# gtkedit/editcmd.c:1287
-# gtkedit/editcmd.c:1591
-# gtkedit/editcmd.c:1678
-# gtkedit/editcmd.c:2221
-# gtkedit/editcmd.c:2252
-# gtkedit/editcmd.c:2254
 #. Heads the 'Replace' dialog box
 #: gtkedit/editcmd.c:1337 gtkedit/editcmd.c:1644 gtkedit/editcmd.c:1733
 #: gtkedit/editcmd.c:2292 gtkedit/editcmd.c:2323 gtkedit/editcmd.c:2325
 msgid " Replace "
 msgstr " 替換 "
 
-# gtkedit/editcmd.c:1355
-# gtkedit/editcmd.c:1585
-# gtkedit/editcmd.c:2320
-# gtkedit/editcmd.c:2322
-# gtkedit/editcmd.c:2350
-# src/view.c:1528
-# src/view.c:1627
-# src/view.c:1750
-# src/view.c:1968
-# src/view.c:2000
 #. Heads the 'Search' dialog box
 #: gtkedit/editcmd.c:1405 gtkedit/editcmd.c:1638 gtkedit/editcmd.c:2403
 #: gtkedit/editcmd.c:2405 gtkedit/editcmd.c:2433 src/view.c:1528
@@ -2797,19 +2077,15 @@ msgstr " 替換 "
 msgid " Search "
 msgstr " 搜尋 "
 
-# gtkedit/editcmd.c:1409
 #. An input line comes after the ':'
 #: gtkedit/editcmd.c:1462
 msgid " Enter search text : "
 msgstr " 輸入想要搜尋的字串： "
 
-# gtkedit/editcmd.c:1416
 #: gtkedit/editcmd.c:1469
 msgid " Enter replace text : "
 msgstr " 輸入想要替換的字串： "
 
-# gtkedit/editcmd.c:1419
-# gtkedit/editcmd.c:1420
 #: gtkedit/editcmd.c:1472 gtkedit/editcmd.c:1473
 #, c-format
 msgid ""
@@ -2819,13 +2095,10 @@ msgstr ""
 "您可以用 %s 輸入正規式次字串 (不是 sed 式的 \\1, \\2 )，然後使用 \"輸入...次"
 "序\""
 
-# gtkedit/editcmd.c:1422
 #: gtkedit/editcmd.c:1475
 msgid " Enter argument (or substring) order : "
 msgstr " 輸入參數 (次字串) 的順序： "
 
-# gtkedit/editcmd.c:1426
-# gtkedit/editcmd.c:1427
 #. Tool hint
 #: gtkedit/editcmd.c:1479 gtkedit/editcmd.c:1480
 msgid ""
@@ -2835,24 +2108,19 @@ msgstr ""
 "請輸入您 scanf 格式指定子或 regexp 的字串\n"
 "的替換順序, 例如 3,1,2"
 
-# gtkedit/editcmd.c:1432
 #. The following are check boxes
 #: gtkedit/editcmd.c:1485
 msgid " Whole words only "
 msgstr " 只匹配整個單字 "
 
-# gtkedit/editcmd.c:1434
 #: gtkedit/editcmd.c:1487
 msgid " Case sensitive "
 msgstr " 大小寫不同 "
 
-# gtkedit/editcmd.c:1437
 #: gtkedit/editcmd.c:1490
 msgid " Regular expression "
 msgstr " 正規表示式 "
 
-# gtkedit/editcmd.c:1438
-# gtkedit/editcmd.c:1439
 #: gtkedit/editcmd.c:1491 gtkedit/editcmd.c:1492
 msgid ""
 "See the regex man page for how\n"
@@ -2861,58 +2129,46 @@ msgstr ""
 "請參考 regex 的 man page\n"
 "以得知正規表示式的寫法"
 
-# gtkedit/editcmd.c:1447
 #: gtkedit/editcmd.c:1500
 msgid " Backwards "
 msgstr " 向後 "
 
-# gtkedit/editcmd.c:1449
-# gtkedit/editcmd.c:1450
 #. Tool hint
 #: gtkedit/editcmd.c:1502 gtkedit/editcmd.c:1503
 msgid "Warning: Searching backward can be slow"
 msgstr "警告：向後搜尋的速度可能會很慢"
 
-# gtkedit/editcmd.c:1471
 #: gtkedit/editcmd.c:1524
 msgid " Prompt on replace "
 msgstr " 替換之前要先詢問 "
 
-# gtkedit/editcmd.c:1473
 #. Tool hint
 #: gtkedit/editcmd.c:1526
 msgid "Ask before making each replacement"
 msgstr "在執行每一次替換之前都先詢問"
 
-# gtkedit/editcmd.c:1475
 #: gtkedit/editcmd.c:1528
 msgid " Replace all "
 msgstr " 全部替換 "
 
-# gtkedit/editcmd.c:1477
 #. Tool hint
 #: gtkedit/editcmd.c:1530
 msgid "Replace repeatedly"
 msgstr "全部替換"
 
-# gtkedit/editcmd.c:1481
 #: gtkedit/editcmd.c:1534
 msgid " Bookmarks "
 msgstr " 書籤"
 
-# gtkedit/editcmd.c:1483
-# gtkedit/editcmd.c:1484
 #. Tool hint
 #: gtkedit/editcmd.c:1536 gtkedit/editcmd.c:1537
 msgid "Create bookmarks at all lines found"
 msgstr "再找到的每一行建立書籤"
 
-# gtkedit/editcmd.c:1487
 #: gtkedit/editcmd.c:1540
 msgid " Scanf expression "
 msgstr " Scanf 表示式 "
 
-# gtkedit/editcmd.c:1489
 #. Tool hint
 #: gtkedit/editcmd.c:1542
 msgid ""
@@ -2922,79 +2178,61 @@ msgstr ""
 "允許您使用一組 C 語言格式的字串，\n"
 "參考 scanf 的 man page"
 
-# gtkedit/editcmd.c:1514
 #. Tool hint
 #: gtkedit/editcmd.c:1567
 msgid "Begin search, Enter"
 msgstr "按 Enter 鍵開始進行搜尋"
 
-# gtkedit/editcmd.c:1515
 #: gtkedit/editcmd.c:1568
 msgid "Abort this dialog, Esc"
 msgstr "按 Esc 鍵中斷此對話框"
 
-# gtkedit/editcmd.c:1678
 #: gtkedit/editcmd.c:1733 gtkedit/gtkedit.c:1258
 msgid "Replace"
 msgstr "替換"
 
-# gtkedit/editcmd.c:1678
 #: gtkedit/editcmd.c:1733
 msgid "Skip"
 msgstr "跳過"
 
-# gtkedit/editcmd.c:1678
 #: gtkedit/editcmd.c:1733
 msgid "Replace all"
 msgstr "全部替換"
 
-# gtkedit/editcmd.c:1678
 #: gtkedit/editcmd.c:1733
 msgid "Replace one"
 msgstr " 替換 "
 
-# gtkedit/editcmd.c:2038
 #: gtkedit/editcmd.c:2093
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
 msgstr " 不正確的正規運算式，或是 scanf 表示式裡有太多的轉換。 "
 
-# gtkedit/editcmd.c:2223
 #. "Invalid regexp string or scanf string"
 #: gtkedit/editcmd.c:2294
 msgid " Error in replacement format string. "
 msgstr " 用來替換的格式化字串有錯誤。 "
 
-# gtkedit/editcmd.c:2251
 #: gtkedit/editcmd.c:2322
 #, c-format
 msgid " %ld replacements made. "
 msgstr " 執行了 %ld 次替換。 "
 
-# gtkedit/editcmd.c:2254
-# gtkedit/editcmd.c:2322
-# gtkedit/editcmd.c:2350
 #: gtkedit/editcmd.c:2325 gtkedit/editcmd.c:2405 gtkedit/editcmd.c:2433
 msgid " Search string not found. "
 msgstr " 找不到要搜尋的字串。 "
 
-# gtkedit/editcmd.c:2319
 #. in response to number of bookmarks added because of string being found %d times
 #: gtkedit/editcmd.c:2402
 #, c-format
 msgid " %d finds made, %d bookmarks added "
 msgstr " %d 找到建立, %d 書籤被加入 "
 
-# gtkedit/editcmd.c:2375
-# gtkedit/editcmd.c:2390
-# gtkedit/editcmd.c:2393
 #. Confirm 'Quit' dialog box
 #: gtkedit/editcmd.c:2458 gtkedit/editcmd.c:2473 gtkedit/editcmd.c:2476
 msgid " Quit "
 msgstr " 結束 "
 
-# gtkedit/editcmd.c:2376
-# gtkedit/editcmd.c:2394
 #: gtkedit/editcmd.c:2459 gtkedit/editcmd.c:2477
 msgid ""
 " Current text was modified without a file save. \n"
@@ -3003,231 +2241,157 @@ msgstr ""
 " 目前正在編輯的文件還沒存檔， \n"
 " 在離開前先存檔？ "
 
-# gtkedit/editcmd.c:2390
 #: gtkedit/editcmd.c:2473
 msgid " File was modified, Save with exit? "
 msgstr " 檔案已經有更動過，在離開前先存檔？ "
 
-# gtkedit/editcmd.c:2390
 #: gtkedit/editcmd.c:2473
 msgid "Cancel quit"
 msgstr "取消結束"
 
-# gtkedit/editcmd.c:2390
-# src/cmd.c:249
-# src/file.c:1878
-# src/file.c:2249
-# src/filegui.c:603
-# src/hotlist.c:1022
-# src/main.c:869
-# src/screen.c:2162
-# src/subshell.c:706
-# src/subshell.c:732
-# src/tree.c:745
-# src/view.c:406
 #: gtkedit/editcmd.c:2473 src/cmd.c:245 src/file.c:1881 src/file.c:2252
 #: src/filegui.c:571 src/hotlist.c:1013 src/main.c:875 src/screen.c:2150
 #: src/subshell.c:743 src/subshell.c:769 src/tree.c:754 src/view.c:410
 msgid "&Yes"
 msgstr "是(&Y)"
 
-# gtkedit/editcmd.c:2390
-# src/cmd.c:249
-# src/file.c:1878
-# src/file.c:2249
-# src/filegui.c:602
-# src/hotlist.c:1022
-# src/main.c:869
-# src/screen.c:2162
-# src/subshell.c:706
-# src/subshell.c:732
-# src/tree.c:745
-# src/view.c:406
 #: gtkedit/editcmd.c:2473 src/cmd.c:245 src/file.c:1881 src/file.c:2252
 #: src/filegui.c:570 src/hotlist.c:1013 src/main.c:875 src/screen.c:2150
 #: src/subshell.c:743 src/subshell.c:769 src/tree.c:754 src/view.c:410
 msgid "&No"
 msgstr "否(&N)"
 
-# gtkedit/editcmd.c:2394
 #: gtkedit/editcmd.c:2477
 msgid " &Cancel quit "
 msgstr " 取消結束 (&C)"
 
-# gtkedit/editcmd.c:2394
 #: gtkedit/editcmd.c:2477
 msgid " &Yes "
 msgstr "是(&Y)"
 
-# gtkedit/editcmd.c:2394
 #: gtkedit/editcmd.c:2477
 msgid " &No "
 msgstr "否(&N)"
 
-# gtkedit/editcmd.c:2626
-# gtkedit/editcmd.c:2701
 #: gtkedit/editcmd.c:2709 gtkedit/editcmd.c:2784
 msgid " Copy to clipboard "
 msgstr " 複製到剪貼簿 "
 
-# gtkedit/editcmd.c:2626
-# gtkedit/editcmd.c:2648
-# gtkedit/editcmd.c:2701
-# gtkedit/editcmd.c:2714
 #: gtkedit/editcmd.c:2709 gtkedit/editcmd.c:2731 gtkedit/editcmd.c:2784
 #: gtkedit/editcmd.c:2797
 msgid " Unable to save to file. "
 msgstr " 無法儲存至檔案。 "
 
-# gtkedit/editcmd.c:2648
-# gtkedit/editcmd.c:2714
 #: gtkedit/editcmd.c:2731 gtkedit/editcmd.c:2797
 msgid " Cut to clipboard "
 msgstr " 剪下到剪貼簿 "
 
-# gtkedit/editcmd.c:2736
-# gtkedit/editcmd.c:2740
-# gtkedit/editcmd.c:2745
-# gtkedit/editcmd.c:2748
-# src/view.c:1915
 #: gtkedit/editcmd.c:2819 gtkedit/editcmd.c:2823 gtkedit/editcmd.c:2828
 #: gtkedit/editcmd.c:2831 src/view.c:1902
 msgid " Goto line "
 msgstr " 跳至某行 "
 
-# gtkedit/editcmd.c:2736
-# gtkedit/editcmd.c:2740
-# gtkedit/editcmd.c:2745
-# gtkedit/editcmd.c:2748
 #: gtkedit/editcmd.c:2819 gtkedit/editcmd.c:2823 gtkedit/editcmd.c:2828
 #: gtkedit/editcmd.c:2831
 msgid " Enter line: "
 msgstr " 輸入行號： "
 
-# gtkedit/editcmd.c:2769
-# gtkedit/editcmd.c:2782
 #: gtkedit/editcmd.c:2852 gtkedit/editcmd.c:2865
 msgid " Save Block "
 msgstr " 儲存區塊 "
 
-# gtkedit/editcmd.c:2794
 #: gtkedit/editcmd.c:2877
 msgid " Insert File "
 msgstr " 插入檔案 "
 
-# gtkedit/editcmd.c:2807
 #: gtkedit/editcmd.c:2890
 msgid " Insert file "
 msgstr " 插入檔案 "
 
-# gtkedit/editcmd.c:2807
 #: gtkedit/editcmd.c:2890
 msgid " Error trying to insert file. "
 msgstr " 嘗試插入檔案時發生錯誤。 "
 
-# gtkedit/editcmd.c:2826
 #: gtkedit/editcmd.c:2909
 msgid " Sort block "
 msgstr " 排序區塊 "
 
-# gtkedit/editcmd.c:2826
-# gtkedit/editcmd.c:2910
 #: gtkedit/editcmd.c:2909 gtkedit/editcmd.c:2993
 msgid " You must first highlight a block of text. "
 msgstr " 您必須先選取一個文字區塊。 "
 
-# gtkedit/editcmd.c:2833
 #: gtkedit/editcmd.c:2916
 msgid " Run Sort "
 msgstr " 進行排序 "
 
-# gtkedit/editcmd.c:2834
 #: gtkedit/editcmd.c:2917
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr " 輸入 sort 的選項，以空白字元分隔 (參考 sort 的 man page): "
 
-# gtkedit/editcmd.c:2845
-# gtkedit/editcmd.c:2850
 #: gtkedit/editcmd.c:2928 gtkedit/editcmd.c:2933
 msgid " Sort "
 msgstr " 排序 "
 
-# gtkedit/editcmd.c:2846
 #: gtkedit/editcmd.c:2929
 msgid " Error trying to execute sort command "
 msgstr " 嘗試執行 sort 指令時發生錯誤 "
 
-# gtkedit/editcmd.c:2851
 #: gtkedit/editcmd.c:2934
 msgid " Sort returned non-zero: "
 msgstr " sort 傳回非零的值： "
 
-# gtkedit/editcmd.c:2884
 #: gtkedit/editcmd.c:2967
 msgid "Error create script:"
 msgstr "建立指令稿時發生錯誤: "
 
-# gtkedit/editcmd.c:2890
 #: gtkedit/editcmd.c:2973
 msgid "Error read script:"
 msgstr "讀取指令稿時時發生錯誤: "
 
-# gtkedit/editcmd.c:2897
 #: gtkedit/editcmd.c:2980
 msgid "Error close script:"
 msgstr "關閉指令稿錯誤:"
 
-# gtkedit/editcmd.c:2902
 #: gtkedit/editcmd.c:2985
 msgid "Script created:"
 msgstr "建立的指令稿:"
 
-# gtkedit/editcmd.c:2909
 #: gtkedit/editcmd.c:2992
 msgid "Process block"
 msgstr "處理區塊 "
 
-# gtkedit/editcmd.c:3015
 #: gtkedit/editcmd.c:3097
 msgid " Mail "
 msgstr " 郵件 "
 
-# gtkedit/editcmd.c:3026
 #: gtkedit/editcmd.c:3108
 msgid " Copies to"
 msgstr " 複製到 "
 
-# gtkedit/editcmd.c:3030
 #: gtkedit/editcmd.c:3112
 msgid " Subject"
 msgstr " 標題 "
 
-# gtkedit/editcmd.c:3034
 #: gtkedit/editcmd.c:3116
 msgid " To"
 msgstr " 到 "
 
-# gtkedit/editcmd.c:3036
 #: gtkedit/editcmd.c:3118
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <標題> -c <副本> <目地>"
 
-# gtkedit/editmenu.c:62
 #: gtkedit/editmenu.c:63
 msgid " Word wrap "
 msgstr " 單字換行 "
 
-# gtkedit/editmenu.c:64
 #: gtkedit/editmenu.c:64
 msgid " Enter line length, 0 for off: "
 msgstr " 輸入每行長度 (字元)，0 代表關閉： "
 
-# gtkedit/editmenu.c:75
 #: gtkedit/editmenu.c:75
 msgid " About "
 msgstr " 關於 "
 
-# gtkedit/editmenu.c:76
 #: gtkedit/editmenu.c:76
 msgid ""
 "\n"
@@ -3245,741 +2409,547 @@ msgstr ""
 "\n"
 "          Midnight Commander的文字編輯程式.\n"
 
-# gnome/gpopup2.c:286
 #: gtkedit/editmenu.c:128 gtkedit/editmenu.c:147
 #, fuzzy
 msgid "&Open file..."
 msgstr " 以此開啟..."
 
-# gtkedit/editmenu.c:129
 #: gtkedit/editmenu.c:129
 msgid "&New              C-n"
 msgstr "開新檔案          C-n"
 
-# gtkedit/editmenu.c:131
-# gtkedit/editmenu.c:150
 #: gtkedit/editmenu.c:131 gtkedit/editmenu.c:150
 msgid "&Save              F2"
 msgstr "存檔               F2"
 
-# gtkedit/editmenu.c:132
-# gtkedit/editmenu.c:151
 #: gtkedit/editmenu.c:132 gtkedit/editmenu.c:151
 msgid "save &As...       F12"
 msgstr "另存新檔...      F12"
 
-# gtkedit/editmenu.c:134
-# gtkedit/editmenu.c:153
 #: gtkedit/editmenu.c:134 gtkedit/editmenu.c:153
 msgid "&Insert file...   F15"
 msgstr "插入檔案...       F15"
 
-# gtkedit/editmenu.c:135
 #: gtkedit/editmenu.c:135
 msgid "copy to &File...  C-f"
 msgstr "複製到檔案...     C-f"
 
-# gtkedit/editmenu.c:137
-# gtkedit/editmenu.c:156
 #: gtkedit/editmenu.c:137 gtkedit/editmenu.c:156
 msgid "&User menu...     F11"
 msgstr "使用者選單(&U)         F11"
 
-# gtkedit/editmenu.c:140
-# gtkedit/editmenu.c:159
 #: gtkedit/editmenu.c:140 gtkedit/editmenu.c:159
 msgid "a&Bout...            "
 msgstr "關於...              "
 
-# gtkedit/editmenu.c:142
-# gtkedit/editmenu.c:161
 #: gtkedit/editmenu.c:142 gtkedit/editmenu.c:161
 msgid "&Quit             F10"
 msgstr "結束              F10"
 
-# gtkedit/editmenu.c:148
 #: gtkedit/editmenu.c:148
 msgid "&New            C-x k"
 msgstr "新的            C-x k"
 
-# gtkedit/editmenu.c:154
 #: gtkedit/editmenu.c:154
 msgid "copy to &File...     "
 msgstr "複製到檔案...        "
 
-# gtkedit/editmenu.c:166
-# gtkedit/editmenu.c:183
 #: gtkedit/editmenu.c:166 gtkedit/editmenu.c:183
 msgid "&Toggle Mark       F3"
 msgstr "切換標示區域       F3"
 
-# gtkedit/editmenu.c:167
-# gtkedit/editmenu.c:184
 #: gtkedit/editmenu.c:167 gtkedit/editmenu.c:184
 msgid "&Mark Columns    S-F3"
 msgstr "選取欄           S-F3"
 
-# gtkedit/editmenu.c:169
-# gtkedit/editmenu.c:186
 #: gtkedit/editmenu.c:169 gtkedit/editmenu.c:186
 msgid "toggle &Ins/overw Ins"
 msgstr "切換蓋寫/插入     Ins"
 
-# gtkedit/editmenu.c:171
-# gtkedit/editmenu.c:188
 #: gtkedit/editmenu.c:171 gtkedit/editmenu.c:188
 msgid "&Copy              F5"
 msgstr "複製               F5"
 
-# gtkedit/editmenu.c:172
-# gtkedit/editmenu.c:189
 #: gtkedit/editmenu.c:172 gtkedit/editmenu.c:189
 msgid "&Move              F6"
 msgstr "搬移               F6"
 
-# gtkedit/editmenu.c:173
-# gtkedit/editmenu.c:190
 #: gtkedit/editmenu.c:173 gtkedit/editmenu.c:190
 msgid "&Delete            F8"
 msgstr "刪除               F8"
 
-# gtkedit/editmenu.c:175
-# gtkedit/editmenu.c:192
 #: gtkedit/editmenu.c:175 gtkedit/editmenu.c:192
 msgid "&Undo             C-u"
 msgstr "復原              C-u"
 
-# gtkedit/editmenu.c:177
-# gtkedit/editmenu.c:194
 #: gtkedit/editmenu.c:177 gtkedit/editmenu.c:194
 msgid "&Beginning     C-PgUp"
 msgstr "檔案開頭       C-PgUp"
 
-# gtkedit/editmenu.c:178
-# gtkedit/editmenu.c:195
 #: gtkedit/editmenu.c:178 gtkedit/editmenu.c:195
 msgid "&End           C-PgDn"
 msgstr "檔案結尾       C-PgDn"
 
-# gtkedit/editmenu.c:200
-# gtkedit/editmenu.c:207
 #: gtkedit/editmenu.c:200 gtkedit/editmenu.c:207
 msgid "&Search...         F7"
 msgstr "搜尋               F7"
 
-# gtkedit/editmenu.c:201
-# gtkedit/editmenu.c:208
 #: gtkedit/editmenu.c:201 gtkedit/editmenu.c:208
 msgid "search &Again     F17"
 msgstr "再次搜尋          F17"
 
-# gtkedit/editmenu.c:202
-# gtkedit/editmenu.c:209
 #: gtkedit/editmenu.c:202 gtkedit/editmenu.c:209
 msgid "&Replace...        F4"
 msgstr "替換               F4"
 
-# gtkedit/editmenu.c:214
-# gtkedit/editmenu.c:237
 #: gtkedit/editmenu.c:214 gtkedit/editmenu.c:237
 msgid "&Goto line...            M-l"
 msgstr "跳至某行...              M-l"
 
-# gtkedit/editmenu.c:215
-# gtkedit/editmenu.c:238
 #: gtkedit/editmenu.c:215 gtkedit/editmenu.c:238
 msgid "goto matching &Bracket   M-b"
 msgstr "跳到符合的括號"
 
-# gtkedit/editmenu.c:217
-# gtkedit/editmenu.c:240
 #: gtkedit/editmenu.c:217 gtkedit/editmenu.c:240
 msgid "insert &Literal...       C-q"
 msgstr "逐字插入...              C-q"
 
-# gtkedit/editmenu.c:219
-# gtkedit/editmenu.c:242
 #: gtkedit/editmenu.c:219 gtkedit/editmenu.c:242
 msgid "&Refresh screen          C-l"
 msgstr "重繪螢幕                 C-l"
 
-# gtkedit/editmenu.c:221
-# gtkedit/editmenu.c:244
 #: gtkedit/editmenu.c:221 gtkedit/editmenu.c:244
 msgid "&Start record macro      C-r"
 msgstr "開始巨集錄製             C-r"
 
-# gtkedit/editmenu.c:222
-# gtkedit/editmenu.c:245
 #: gtkedit/editmenu.c:222 gtkedit/editmenu.c:245
 msgid "&Finish record macro...  C-r"
 msgstr "完成巨集錄製...          C-r"
 
-# gtkedit/editmenu.c:223
 #: gtkedit/editmenu.c:223
 msgid "&Execute macro...   C-a, KEY"
 msgstr "執行巨集...         C-a, KEY"
 
-# gtkedit/editmenu.c:224
-# gtkedit/editmenu.c:247
 #: gtkedit/editmenu.c:224 gtkedit/editmenu.c:247
 msgid "delete macr&O...            "
 msgstr "刪除巨集...                 "
 
-# gtkedit/editmenu.c:226
-# gtkedit/editmenu.c:249
 #: gtkedit/editmenu.c:226 gtkedit/editmenu.c:249
 msgid "insert &Date/time           "
 msgstr "插入日期/時間               "
 
-# gtkedit/editmenu.c:228
-# gtkedit/editmenu.c:251
 #: gtkedit/editmenu.c:228 gtkedit/editmenu.c:251
 msgid "format p&Aragraph        M-p"
 msgstr "將段落格式化             M-p"
 
-# gtkedit/editmenu.c:229
 #: gtkedit/editmenu.c:229
 msgid "'ispell' s&Pell check    C-p"
 msgstr "'ispell' 拼字檢查        C-p"
 
-# gtkedit/editmenu.c:230
-# gtkedit/editmenu.c:253
 #: gtkedit/editmenu.c:230 gtkedit/editmenu.c:253
 msgid "sor&T...                 M-t"
 msgstr "排序...                  M-t"
 
-# gtkedit/editmenu.c:231
-# gtkedit/editmenu.c:254
 #: gtkedit/editmenu.c:231 gtkedit/editmenu.c:254
 msgid "E&xternal Formatter      F19"
 msgstr "外部格式器(&X)       F19"
 
-# gtkedit/editmenu.c:232
 #: gtkedit/editmenu.c:232
 msgid "&Mail...                    "
 msgstr "郵件                        "
 
-# gtkedit/editmenu.c:246
 #: gtkedit/editmenu.c:246
 msgid "&Execute macro... C-x e, KEY"
 msgstr "執行巨集...       C-x e, KEY"
 
-# gtkedit/editmenu.c:252
 #: gtkedit/editmenu.c:252
 msgid "'ispell' s&Pell check    M-$"
 msgstr "'ispell' 拼字檢查        M-$"
 
-# gtkedit/editmenu.c:261
-# gtkedit/editmenu.c:270
 #: gtkedit/editmenu.c:261 gtkedit/editmenu.c:270
 msgid "&General...  "
 msgstr "一般"
 
-# gtkedit/editmenu.c:262
-# gtkedit/editmenu.c:271
 #: gtkedit/editmenu.c:262 gtkedit/editmenu.c:271
 msgid "&Save mode..."
 msgstr "儲存模式"
 
-# gtkedit/editmenu.c:264
-# gtkedit/editmenu.c:273
-# src/main.c:1369
 #: gtkedit/editmenu.c:264 gtkedit/editmenu.c:273 src/main.c:1374
 msgid "&Layout..."
 msgstr "樣式"
 
-# gtkedit/editmenu.c:283
-# gtkedit/editmenu.c:292
-# gtkedit/editmenu.c:409
-# src/chmod.c:164
-# src/chown.c:130
 #. The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t'
 #: gtkedit/editmenu.c:283 gtkedit/editmenu.c:292 gtkedit/editmenu.c:409
 #: src/chmod.c:153 src/chown.c:131
 msgid " File "
 msgstr " 檔案 "
 
-# gtkedit/editmenu.c:284
-# gtkedit/editmenu.c:293
-# gtkedit/editmenu.c:425
 #: gtkedit/editmenu.c:284 gtkedit/editmenu.c:293 gtkedit/editmenu.c:425
 msgid " Edit "
 msgstr " 編輯 "
 
-# gtkedit/editmenu.c:285
-# gtkedit/editmenu.c:294
 #: gtkedit/editmenu.c:285 gtkedit/editmenu.c:294
 msgid " Sear/Repl "
 msgstr " 搜尋/替換 "
 
-# gtkedit/editmenu.c:286
-# gtkedit/editmenu.c:295
-# gtkedit/editmenu.c:465
 #: gtkedit/editmenu.c:286 gtkedit/editmenu.c:295 gtkedit/editmenu.c:465
 msgid " Command "
 msgstr " 指令 "
 
-# gtkedit/editmenu.c:287
-# gtkedit/editmenu.c:296
 #: gtkedit/editmenu.c:287 gtkedit/editmenu.c:296
 msgid " Options "
 msgstr " 選項 "
 
-# gtkedit/editmenu.c:410
 #: gtkedit/editmenu.c:410
 msgid "Open...\tC-o"
 msgstr "開啟...\tC-o"
 
-# gtkedit/editmenu.c:411
 #: gtkedit/editmenu.c:411
 msgid "New\tC-n"
 msgstr "新檔\tC-n"
 
-# gtkedit/editmenu.c:413
 #: gtkedit/editmenu.c:413
 msgid "Save\tF2"
 msgstr "存檔\tF2"
 
-# gtkedit/editmenu.c:414
 #: gtkedit/editmenu.c:414
 msgid "Save as...\tF12"
 msgstr "另存新檔...\tF12"
 
-# gtkedit/editmenu.c:416
 #: gtkedit/editmenu.c:416
 msgid "Insert file...\tF15"
 msgstr "插入檔案...\tF15"
 
-# gtkedit/editmenu.c:417
 #: gtkedit/editmenu.c:417
 msgid "Copy to file...\tC-f"
 msgstr "複製到檔案...\tC-f"
 
-# gtkedit/editmenu.c:420
 #. Tool hint
 #: gtkedit/editmenu.c:420
 msgid "Disk operations and file indexing/searching"
 msgstr "磁碟控制與檔案索引/搜尋"
 
-# gtkedit/editmenu.c:426
 #: gtkedit/editmenu.c:426
 msgid "Toggle mark\tF3"
 msgstr "切換標示區域\tF3"
 
-# gtkedit/editmenu.c:427
 #: gtkedit/editmenu.c:427
 msgid "Toggle mark columns\tC-b"
 msgstr "切換標示欄位\tC-b"
 
-# gtkedit/editmenu.c:429
 #: gtkedit/editmenu.c:429
 msgid "Toggle book mark\tC-M-Ins"
 msgstr "切換書籤\tC-M-Ins"
 
-# gtkedit/editmenu.c:430
 #: gtkedit/editmenu.c:430
 msgid "Previous book mark\tC-M-Up"
 msgstr "前一個書籤\tC-M-Up"
 
-# gtkedit/editmenu.c:431
 #: gtkedit/editmenu.c:431
 msgid "Next book mark\tC-M-Down"
 msgstr "下一個書籤\tC-M-Down"
 
-# gtkedit/editmenu.c:432
 #: gtkedit/editmenu.c:432
 msgid "Flush book marks"
 msgstr "更新書籤"
 
-# gtkedit/editmenu.c:434
 #: gtkedit/editmenu.c:434
 msgid "Toggle insert/overwrite\tIns"
 msgstr "切換插入/蓋寫\tIns"
 
-# gtkedit/editmenu.c:436
 #: gtkedit/editmenu.c:436
 msgid "Copy block to cursor\tF5"
 msgstr "複製區塊到游標位置\tF5"
 
-# gtkedit/editmenu.c:437
 #: gtkedit/editmenu.c:437
 msgid "Move block to cursor\tF6"
 msgstr "搬移區塊到游標位置\tF6"
 
-# gtkedit/editmenu.c:438
 #: gtkedit/editmenu.c:438
 msgid "Delete block\tF8/C-Del"
 msgstr "刪除區塊\tF8/C-Del"
 
-# gtkedit/editmenu.c:440
 #: gtkedit/editmenu.c:440
 msgid "Copy block to clipbrd\tC-Ins"
 msgstr "複製區塊至剪貼簿\tC-Ins"
 
-# gtkedit/editmenu.c:441
 #: gtkedit/editmenu.c:441
 msgid "Cut block to clipbrd\tS-Del"
 msgstr "剪下區塊至剪貼簿\tS-Del"
 
-# gtkedit/editmenu.c:442
 #: gtkedit/editmenu.c:442
 msgid "Paste block from clipbrd\tS-Ins"
 msgstr "從剪貼簿貼上區塊\tS-Ins"
 
-# gtkedit/editmenu.c:443
 #: gtkedit/editmenu.c:443
 msgid "Selection history\tM-Ins"
 msgstr "選取歷史紀錄\tM-Ins"
 
-# gtkedit/editmenu.c:445
 #: gtkedit/editmenu.c:445
 msgid "Undo\tC-BackSpace"
 msgstr "復原\tC-BackSpace"
 
-# gtkedit/editmenu.c:448
 #. Tool hint
 #: gtkedit/editmenu.c:448
 msgid "Manipulating blocks of text"
 msgstr "處理文字區塊"
 
-# gtkedit/editmenu.c:453
 #: gtkedit/editmenu.c:453
 msgid " Srch/Replce "
 msgstr " 搜尋/替換 "
 
-# gtkedit/editmenu.c:454
 #: gtkedit/editmenu.c:454
 msgid "Search...\tF7"
 msgstr "搜尋...\tF7"
 
-# gtkedit/editmenu.c:455
 #: gtkedit/editmenu.c:455
 msgid "Search again\tF17"
 msgstr "再次搜尋\tF17"
 
-# gtkedit/editmenu.c:456
 #: gtkedit/editmenu.c:456
 msgid "Replace...\tF4"
 msgstr "替換...\tF4"
 
-# gtkedit/editmenu.c:457
 #: gtkedit/editmenu.c:457
 msgid "Replace again\tF14"
 msgstr "再次替換\tF14"
 
-# gtkedit/editmenu.c:460
 #. Tool hint
 #: gtkedit/editmenu.c:460
 msgid "Search for and replace text"
 msgstr "搜尋或替換文字字串"
 
-# gtkedit/editmenu.c:466
 #: gtkedit/editmenu.c:466
 msgid "Goto line...\tM-l"
 msgstr "跳至某行...\tM-l"
 
-# gtkedit/editmenu.c:467
 #: gtkedit/editmenu.c:467
 msgid "Goto matching bracket\tM-b"
 msgstr "跳到符合的括號\tM-b"
 
-# gtkedit/editmenu.c:469
 #: gtkedit/editmenu.c:469
 msgid "Start record macro\tC-r"
 msgstr "巨集錄製開始\tC-r"
 
-# gtkedit/editmenu.c:470
 #: gtkedit/editmenu.c:470
 msgid "Finish record macro...\tC-r"
 msgstr "巨集錄製完成...\tC-r"
 
-# gtkedit/editmenu.c:471
 #: gtkedit/editmenu.c:471
 msgid "Execute macro...\tC-a, KEY"
 msgstr "執行巨集...\tC-a, KEY"
 
-# gtkedit/editmenu.c:472
 #: gtkedit/editmenu.c:472
 msgid "Delete macro...\t"
 msgstr "刪除巨集...\t"
 
-# gtkedit/editmenu.c:474
 #: gtkedit/editmenu.c:474
 msgid "Insert date/time\tC-d"
 msgstr "插入日期/時間\tC-d"
 
-# gtkedit/editmenu.c:475
 #: gtkedit/editmenu.c:475
 msgid "Format paragraph\tM-p"
 msgstr "格式化區塊\tM-p"
 
-# gtkedit/editmenu.c:477
 #: gtkedit/editmenu.c:477
 msgid "Refresh display\tC-l"
 msgstr "重繪螢幕\tC-l"
 
-# gtkedit/editmenu.c:480
 #. Tool hint
 #: gtkedit/editmenu.c:480
 msgid "Macros and internal commands"
 msgstr "巨集與內部指令"
 
-# gtkedit/editoptions.c:36
 #: gtkedit/editoptions.c:36
 msgid "Intuitive"
 msgstr "Intuitive"
 
-# gtkedit/editoptions.c:36
 #: gtkedit/editoptions.c:36
 msgid "Emacs"
 msgstr "Emacs"
 
-# gtkedit/editoptions.c:39
 #: gtkedit/editoptions.c:39
 msgid "None"
 msgstr "無"
 
-# gtkedit/editoptions.c:39
 #: gtkedit/editoptions.c:39
 msgid "Dynamic paragraphing"
 msgstr "動態分段"
 
-# gtkedit/editoptions.c:39
 #: gtkedit/editoptions.c:39
 msgid "Type writer wrap"
 msgstr "打字輸入換行"
 
-# gtkedit/editoptions.c:72
 #. 2
 #: gtkedit/editoptions.c:72
 msgid "Word wrap line length : "
 msgstr " 輸入每行長度： "
 
-# gtkedit/editoptions.c:78
 #. 4
 #: gtkedit/editoptions.c:78
 msgid "Tab spacing : "
 msgstr "Tab 空格 : "
 
-# gtkedit/editoptions.c:86
 #: gtkedit/editoptions.c:86
 msgid "synta&X highlighting"
 msgstr "依語法改變顏色"
 
-# gtkedit/editoptions.c:92
 #. 7
 #: gtkedit/editoptions.c:92
 msgid "confir&M before saving"
 msgstr "存檔前先確認"
 
-# gtkedit/editoptions.c:95
 #. 8
 #: gtkedit/editoptions.c:95
 msgid "fill tabs with &Spaces"
 msgstr "以空白填滿移位鍵 (tab)"
 
-# gtkedit/editoptions.c:98
 #. 9
 #: gtkedit/editoptions.c:98
 msgid "&Return does autoindent"
 msgstr "換行時自動縮排"
 
-# gtkedit/editoptions.c:101
 #. 10
 #: gtkedit/editoptions.c:101
 msgid "&Backspace through tabs"
 msgstr "Backspace 刪除移位鍵"
 
-# gtkedit/editoptions.c:104
 #. 11
 #: gtkedit/editoptions.c:104
 msgid "&Fake half tabs"
 msgstr "半個 TAB"
 
-# gtkedit/editoptions.c:110
 #. 13
 #: gtkedit/editoptions.c:110
 msgid "Wrap mode"
 msgstr "換行模式"
 
-# gtkedit/editoptions.c:116
 #. 15
 #: gtkedit/editoptions.c:116
 msgid "Key emulation"
 msgstr "按鍵模擬"
 
-# gtkedit/editoptions.c:157
 #: gtkedit/editoptions.c:157
 msgid " Editor options "
 msgstr " 編輯器選項 "
 
-# gtkedit/editwidget.c:324
 #. Not essential to translate
 #: gtkedit/editwidget.c:324
 msgid "Error initialising editor.\n"
 msgstr "初使化編輯器時發生錯誤。\n"
 
-# gtkedit/editwidget.c:1137
-# gtkedit/gtkedit.c:1248
-# src/help.c:806
-# src/main.c:1735
-# src/screen.c:2393
-# src/screen.c:2423
-# src/tree.c:1008
-# src/view.c:2070
 #: gtkedit/editwidget.c:1139 gtkedit/gtkedit.c:1255 src/help.c:811
 #: src/main.c:1723 src/screen.c:2414 src/tree.c:1017 src/view.c:2075
 msgid "Help"
 msgstr "說明"
 
-# gtkedit/editwidget.c:1139
-# gtkedit/gtkedit.c:1250
 #: gtkedit/editwidget.c:1141 gtkedit/gtkedit.c:1257
 msgid "Mark"
 msgstr "標示"
 
-# gtkedit/editwidget.c:1140
 #: gtkedit/editwidget.c:1142
 msgid "Replac"
 msgstr "替換"
 
-# gtkedit/editwidget.c:1146
-# src/main.c:1737
 #: gtkedit/editwidget.c:1148 src/main.c:1725
 msgid "PullDn"
 msgstr "拉下"
 
-# gtkedit/editwidget.c:1147
-# gtkedit/gtkedit.c:1258
-# src/help.c:818
-# src/main.c:1738
-# src/view.c:2072
-# src/view.c:2094
 #: gtkedit/editwidget.c:1149 gtkedit/gtkedit.c:1267 src/help.c:823
 #: src/main.c:1726 src/view.c:2077 src/view.c:2099
 msgid "Quit"
 msgstr "結束"
 
-# gtkedit/gtkedit.c:68
 #: gtkedit/gtkedit.c:72
 msgid " Enter file name: "
 msgstr " 輸入檔名： "
 
-# gtkedit/gtkedit.c:113
 #: gtkedit/gtkedit.c:117
 msgid "The Quick Brown Fox Jumps Over The Lazy Dog"
 msgstr "文字：The Quick Brown Fox Jumps Over The Lazy Dog"
 
-# gtkedit/gtkedit.c:804
 #: gtkedit/gtkedit.c:806
 msgid ""
 "gtkedit.c: HOME environment variable not set and no passwd entry - aborting\n"
 msgstr "gtkedit.c: HOME 環境變數並未設定，而且也找不到密碼檔的資料 - 中斷\n"
 
-# gtkedit/gtkedit.c:1248
 #: gtkedit/gtkedit.c:1255
 msgid "Interactive help browser"
 msgstr "互動式說明瀏覽"
 
-# gtkedit/gtkedit.c:1249
 #: gtkedit/gtkedit.c:1256
 msgid "Save to current file name"
 msgstr " 輸入檔案 "
 
-# gtkedit/gtkedit.c:1250
 #: gtkedit/gtkedit.c:1257
 msgid "Toggle In/Off invisible marker to highlight text"
 msgstr "切換標記文字的In/Off隱藏標籤"
 
-# gtkedit/gtkedit.c:1251
 #: gtkedit/gtkedit.c:1258
 msgid "Find and replace strings/regular expressions"
 msgstr " 無效的正規表示式 "
 
-# gtkedit/gtkedit.c:1252
 #: gtkedit/gtkedit.c:1259
 msgid "Copy highlighted block to cursor position"
 msgstr "複製區塊到游標位置\tF5"
 
-# gtkedit/gtkedit.c:1254
 #: gtkedit/gtkedit.c:1261
 msgid "Move highlighted block to cursor position"
 msgstr "搬移區塊到游標位置\tF6"
 
-# gtkedit/gtkedit.c:1255
 #: gtkedit/gtkedit.c:1262
 msgid "Find"
 msgstr "找尋"
 
-# gtkedit/gtkedit.c:1255
 #: gtkedit/gtkedit.c:1262
 msgid "Find strings/regular expressions"
 msgstr "找尋 字串/正規表示法 "
 
-# gtkedit/gtkedit.c:1256
 #: gtkedit/gtkedit.c:1263
 msgid "Delete highlighted text"
 msgstr "刪除標記文字"
 
-# gtkedit/gtkedit.c:1257
-# src/main.c:1736
-# src/screen.c:2394
-# src/screen.c:2424
 #: gtkedit/gtkedit.c:1265 src/main.c:1724 src/screen.c:2415
 msgid "Menu"
 msgstr "選單"
 
-# gtkedit/gtkedit.c:1257
 #: gtkedit/gtkedit.c:1265
 msgid "Pull down menu"
 msgstr "下拉選單"
 
-# gtkedit/gtkedit.c:1258
 #: gtkedit/gtkedit.c:1267
 msgid "Exit editor"
 msgstr "離開編輯器"
 
-# gtkedit/gtkedit.c:1292
 #: gtkedit/gtkedit.c:1301
 msgid "Clear the edit buffer"
 msgstr "清除編輯緩衝區"
 
-# gtkedit/gtkedit.c:1297
 #: gtkedit/gtkedit.c:1306
 msgid "Insert File"
 msgstr "插入檔案"
 
-# gtkedit/gtkedit.c:1297
 #: gtkedit/gtkedit.c:1306
 msgid "Insert text from a file"
 msgstr "從某個檔案裡面插入文字"
 
-# gtkedit/gtkedit.c:1299
 #: gtkedit/gtkedit.c:1308
 msgid "Copy to file"
 msgstr "複製到檔案"
 
-# gtkedit/gtkedit.c:1299
 #: gtkedit/gtkedit.c:1308
 msgid "copy a block to a file"
 msgstr "複製區塊到某個檔案裡面"
 
-# gtkedit/gtkedit.c:1339
 #: gtkedit/gtkedit.c:1348
 msgid "Search/Replace"
 msgstr "搜尋/替換"
 
-# gtkedit/syntax.c:1074
-# gtkedit/syntax.c:1083
-# gtkedit/syntax.c:1092
-# gtkedit/syntax.c:1101
 #: gtkedit/syntax.c:1081 gtkedit/syntax.c:1090 gtkedit/syntax.c:1099
 #: gtkedit/syntax.c:1108
 msgid " Spelling Message "
 msgstr "拼字檢查"
 
-# gtkedit/syntax.c:1074
 #: gtkedit/syntax.c:1081
 msgid ""
 " Fail trying to open ispell program. \n"
@@ -3990,7 +2960,6 @@ msgstr ""
 "請使用 -a 參數檢查您的路徑與工作.\n"
 "或者從\"選項\"選單中關閉拼字檢查功能."
 
-# gtkedit/syntax.c:1083
 #: gtkedit/syntax.c:1090
 msgid ""
 " Fail trying to open ispell pipes. \n"
@@ -4001,7 +2970,6 @@ msgstr ""
 "請使用 -a 參數檢查您的路徑與工作.\n"
 "或者從\"選項\"選單中關閉拼字檢查功能."
 
-# gtkedit/syntax.c:1092
 #: gtkedit/syntax.c:1099
 msgid ""
 " Fail trying to read ispell pipes. \n"
@@ -4012,7 +2980,6 @@ msgstr ""
 "請使用 -a 參數檢查您的路徑與工作.\n"
 "或者從\"選項\"選單中關閉拼字檢查功能."
 
-# gtkedit/syntax.c:1101
 #: gtkedit/syntax.c:1108
 msgid ""
 " Error reading from ispell. \n"
@@ -4021,14 +2988,10 @@ msgstr ""
 "無法從ispell讀取資料.\n"
 "ispell已重新啟動."
 
-# gtkedit/syntax.c:1373
-# gtkedit/syntax.c:1375
 #: gtkedit/syntax.c:1389 gtkedit/syntax.c:1391
 msgid " Load Syntax Rules "
 msgstr " 載入語法規則檔案 "
 
-# gtkedit/syntax.c:1373
-# gtkedit/syntax.c:1375
 #: gtkedit/syntax.c:1389 gtkedit/syntax.c:1391
 msgid ""
 " Your syntax rule file is outdated \n"
@@ -4039,85 +3002,60 @@ msgstr ""
 "新的規則已經安裝.\n"
 "您的舊檔案被存成.OLD檔."
 
-# gtkedit/syntax.c:1518
-# gtkedit/syntax.c:1525
 #: gtkedit/syntax.c:1537 gtkedit/syntax.c:1544
 msgid " Load syntax file "
 msgstr " 載入語法檔案 "
 
-# gtkedit/syntax.c:1518
 #: gtkedit/syntax.c:1537
 msgid " File access error "
 msgstr " 檔案存取錯誤 "
 
-# gtkedit/syntax.c:1524
 #: gtkedit/syntax.c:1543
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " 檔案 %s 的第 %d 行有語法錯誤 "
 
-# src/achown.c:72
-# src/chmod.c:115
-# src/chown.c:80
 #: src/achown.c:74 src/chmod.c:110 src/chown.c:81
 msgid "&Set"
 msgstr "設定"
 
-# src/achown.c:73
 #: src/achown.c:75
 msgid "S&kip"
 msgstr "跳過"
 
-# src/achown.c:74
-# src/chmod.c:119
-# src/chown.c:83
 #: src/achown.c:76 src/chmod.c:114 src/chown.c:84
 msgid "Set &all"
 msgstr "設定全部"
 
-# src/achown.c:362
-# src/achown.c:369
 #: src/achown.c:345 src/achown.c:352
 msgid "owner"
 msgstr "擁有者"
 
-# src/achown.c:364
-# src/achown.c:371
 #: src/achown.c:347 src/achown.c:354
 msgid "group"
 msgstr "群組"
 
-# src/achown.c:366
 #: src/achown.c:349
 msgid "other"
 msgstr "其它"
 
-# src/achown.c:374
 #: src/achown.c:357
 msgid "On"
 msgstr "開"
 
-# src/achown.c:376
 #: src/achown.c:359
 msgid "Flag"
 msgstr "旗標"
 
-# src/achown.c:383
 #: src/achown.c:366
 #, c-format
 msgid "%6d of %d"
 msgstr "%6d 之 %d"
 
-# src/achown.c:391
 #: src/achown.c:374
 msgid " Chown advanced command "
 msgstr " 進階的 chown 指令 "
 
-# src/achown.c:629
-# src/achown.c:645
-# src/achown.c:708
-# src/chmod.c:285
-# src/chmod.c:370
 #: src/achown.c:609 src/achown.c:625 src/achown.c:671 src/chmod.c:269
 #: src/chmod.c:338
 #, c-format
@@ -4128,11 +3066,6 @@ msgstr ""
 " 無法 chmod \"%s\" \n"
 " %s "
 
-# src/achown.c:634
-# src/achown.c:649
-# src/achown.c:712
-# src/chown.c:223
-# src/chown.c:345
 #: src/achown.c:614 src/achown.c:629 src/achown.c:675 src/chown.c:224
 #: src/chown.c:331
 #, c-format
@@ -4143,33 +3076,26 @@ msgstr ""
 " 無法 chown \"%s\" \n"
 " %s "
 
-# src/background.c:181
 #: src/background.c:184
 msgid "Background process:"
 msgstr "背景程序："
 
-# src/background.c:277
-# src/file.c:2189
 #: src/background.c:282 src/file.c:2192
 msgid " Background process error "
 msgstr " 背景程序錯誤 "
 
-# src/background.c:280
 #: src/background.c:285
 msgid " Child died unexpectedly "
 msgstr " 子程序不預期的結束 "
 
-# src/background.c:282
 #: src/background.c:287
 msgid " Unknown error in child "
 msgstr " 子程序發生未知的錯誤 "
 
-# src/background.c:297
 #: src/background.c:302
 msgid " Background protocol error "
 msgstr " 背景 protocol 錯誤 "
 
-# src/background.c:298
 #: src/background.c:303
 msgid ""
 " Background process sent us a request for more arguments \n"
@@ -4178,113 +3104,90 @@ msgstr ""
 " 背景程序要求的參數太多，超出程式能夠處理的 \n"
 " 數目了! \n"
 
-# src/boxes.c:63
 #: src/boxes.c:72
 msgid " Listing mode "
 msgstr " 列表模式 "
 
-# src/boxes.c:68
 #: src/boxes.c:77
 msgid "&Full file list"
 msgstr "完整檔案列表"
 
-# src/boxes.c:69
 #: src/boxes.c:78
 msgid "&Brief file list"
 msgstr "簡要的檔案列表"
 
-# src/boxes.c:70
 #: src/boxes.c:79
 msgid "&Long file list"
 msgstr "長檔案列表"
 
-# src/boxes.c:71
 #: src/boxes.c:80
 msgid "&User defined:"
 msgstr "使用者自定："
 
-# src/boxes.c:72
 #: src/boxes.c:81
 msgid "&Icon view"
 msgstr "圖示顯示"
 
-# src/boxes.c:137
 #: src/boxes.c:144
 msgid "user &Mini status"
 msgstr "使用者迷你狀態"
 
-# src/boxes.c:186
 #: src/boxes.c:193
 msgid "Listing mode"
 msgstr "列表模式"
 
-# src/boxes.c:280
 #: src/boxes.c:281
 msgid "&Reverse"
 msgstr "反向"
 
-# src/boxes.c:281
 #: src/boxes.c:282
 msgid "case sensi&tive"
 msgstr "大小寫不同"
 
-# src/boxes.c:282
 #: src/boxes.c:283
 msgid "Sort order"
 msgstr "排序的順序"
 
-# src/boxes.c:381
 #: src/boxes.c:382
 msgid " confirm &Exit "
 msgstr " 確定離開 "
 
-# src/boxes.c:383
 #: src/boxes.c:384
 msgid " confirm e&Xecute "
 msgstr " 確定執行 "
 
-# src/boxes.c:385
 #: src/boxes.c:386
 msgid " confirm o&Verwrite "
 msgstr " 確定蓋寫 "
 
-# src/boxes.c:387
 #: src/boxes.c:388
 msgid " confirm &Delete "
 msgstr " 確定刪除 "
 
-# src/boxes.c:393
 #: src/boxes.c:394
 msgid " Confirmation "
 msgstr " 確認 "
 
-# src/boxes.c:461
 #: src/boxes.c:465
 msgid "Full 8 bits output"
 msgstr "完整的八位元輸出"
 
-# src/boxes.c:461
 #: src/boxes.c:465
 msgid "ISO 8859-1"
 msgstr "ISO 8859-1"
 
-# src/boxes.c:461
 #: src/boxes.c:465
 msgid "7 bits"
 msgstr "七位元"
 
-# src/boxes.c:468
 #: src/boxes.c:472 src/boxes.c:620
 msgid "F&ull 8 bits input"
 msgstr "完整的八位元輸入"
 
-# src/boxes.c:476
 #: src/boxes.c:480 src/boxes.c:601
 msgid " Display bits "
 msgstr " 顯示位元數 "
 
-# gnome/gnome-file-property-dialog.c:789
-# gnome/gprop.c:281
 #: src/boxes.c:585 src/selcodepage.c:48
 msgid "Other 8 bit"
 msgstr "其它八位元"
@@ -4293,78 +3196,63 @@ msgstr "其它八位元"
 msgid "Input / display codepage:"
 msgstr "輸入/顯示 頁碼："
 
-# src/cmd.c:515
 #: src/boxes.c:623
 msgid "&Select"
 msgstr "選取(&S)"
 
-# src/boxes.c:651
 #: src/boxes.c:758
 msgid "&Always use ftp proxy"
 msgstr "永遠使用檔案傳輸代理伺服器"
 
-# src/boxes.c:653
 #: src/boxes.c:760
 msgid "sec"
 msgstr "秒"
 
-# src/boxes.c:657
 #: src/boxes.c:764
 msgid "ftpfs directory cache timeout:"
 msgstr "檔案傳輸目錄快取逾時："
 
-# src/boxes.c:661
 #: src/boxes.c:768
 msgid "ftp anonymous password:"
 msgstr "匿名檔案傳輸密碼："
 
-# src/boxes.c:668
 #: src/boxes.c:775
 msgid "Timeout for freeing VFSs:"
 msgstr "關閉虛擬檔案系統逾時："
 
-# src/boxes.c:674
 #: src/boxes.c:781
 msgid " Virtual File System Setting "
 msgstr " 虛擬檔案系統設定 "
 
-# src/boxes.c:740
 #: src/boxes.c:840
 msgid "Quick cd"
 msgstr "快速改變目錄"
 
-# src/boxes.c:745
 #. want cd like completion
 #: src/boxes.c:845
 msgid "cd"
 msgstr "改變目錄"
 
-# src/boxes.c:796
 #: src/boxes.c:885
 msgid "Symbolic link"
 msgstr "符號連結"
 
-# src/boxes.c:833
 #: src/boxes.c:921
 msgid "Running "
 msgstr "正在執行 "
 
-# src/boxes.c:895
 #: src/boxes.c:983
 msgid "&Stop"
 msgstr "停止"
 
-# src/boxes.c:896
 #: src/boxes.c:984
 msgid "&Resume"
 msgstr "繼續"
 
-# src/boxes.c:897
 #: src/boxes.c:985
 msgid "&Kill"
 msgstr "關閉"
 
-# src/boxes.c:936
 #: src/boxes.c:1024
 msgid "Background Jobs"
 msgstr "背景工作"
@@ -4374,345 +3262,273 @@ msgstr "背景工作"
 msgid "Warning: file %s not found\n"
 msgstr "警告：找不到檔案 %s\n"
 
-# vfs/mcfs.c:235
 #: src/charsets.c:174 src/charsets.c:187
 #, c-format
 msgid "Cannot translate from %s to %s"
 msgstr "無法由 %s 轉換到 %s"
 
-# src/chmod.c:95
 #: src/chmod.c:90
 msgid "execute/search by others"
 msgstr "不同群組的用戶可執行/搜尋"
 
-# src/chmod.c:96
 #: src/chmod.c:91
 msgid "write by others"
 msgstr "不同群組的用戶可寫入"
 
-# src/chmod.c:97
 #: src/chmod.c:92
 msgid "read by others"
 msgstr "不同群組的用戶可讀取"
 
-# src/chmod.c:98
 #: src/chmod.c:93
 msgid "execute/search by group"
 msgstr "同群組的用戶可執行/搜尋"
 
-# src/chmod.c:99
 #: src/chmod.c:94
 msgid "write by group"
 msgstr "同群組的用戶可寫入"
 
-# src/chmod.c:100
 #: src/chmod.c:95
 msgid "read by group"
 msgstr "同群組的用戶可讀取"
 
-# src/chmod.c:101
 #: src/chmod.c:96
 msgid "execute/search by owner"
 msgstr "擁有者可執行/搜尋"
 
-# src/chmod.c:102
 #: src/chmod.c:97
 msgid "write by owner"
 msgstr "擁有者可寫入"
 
-# src/chmod.c:103
 #: src/chmod.c:98
 msgid "read by owner"
 msgstr "擁有者可讀取"
 
-# src/chmod.c:104
 #: src/chmod.c:99
 msgid "sticky bit"
 msgstr "sticky 位元"
 
-# src/chmod.c:105
 #: src/chmod.c:100
 msgid "set group ID on execution"
 msgstr "執行時 sGID"
 
-# src/chmod.c:106
 #: src/chmod.c:101
 msgid "set user ID on execution"
 msgstr "執行時 sUID"
 
-# src/chmod.c:116
 #: src/chmod.c:111
 msgid "C&lear marked"
 msgstr "清除標示區"
 
-# src/chmod.c:117
 #: src/chmod.c:112
 msgid "S&et marked"
 msgstr "標示區設定"
 
-# src/chmod.c:118
 #: src/chmod.c:113
 msgid "&Marked all"
 msgstr "標示全部"
 
-# src/chmod.c:152
 #: src/chmod.c:141
 msgid "Permissions (Octal)"
 msgstr "權限 (八進位)"
 
-# src/chmod.c:154
 #: src/chmod.c:143
 msgid "Owner name"
 msgstr "擁有者名稱"
 
-# src/chmod.c:156
 #: src/chmod.c:145
 msgid "Group name"
 msgstr "群組名稱"
 
-# src/chmod.c:160
 #: src/chmod.c:149
 msgid " Chmod command "
 msgstr " Chmod 指令 "
 
-# src/chmod.c:162
-# src/chown.c:120
 #: src/chmod.c:151 src/chown.c:121
 msgid " Permission "
 msgstr " 權限 "
 
-# src/chmod.c:169
 #: src/chmod.c:158
 msgid "Use SPACE to change"
 msgstr "使用空白鍵來改變"
 
-# src/chmod.c:171
 #: src/chmod.c:160
 msgid "an option, ARROW KEYS"
 msgstr "一個選項，方向鍵"
 
-# src/chmod.c:173
 #: src/chmod.c:162
 msgid "to move between options"
 msgstr "在選項間移動"
 
-# src/chmod.c:175
 #: src/chmod.c:164
 msgid "and T or INS to mark"
 msgstr "，T 或 INS 鍵標示"
 
-# src/chmod.c:233
 #: src/chmod.c:220
 msgid "Chmod command"
 msgstr "chmod 指令"
 
-# src/chown.c:81
 #: src/chown.c:82
 msgid "Set &users"
 msgstr "設定使用者"
 
-# src/chown.c:82
 #: src/chown.c:83
 msgid "Set &groups"
 msgstr "設定群組"
 
-# src/chown.c:112
 #: src/chown.c:113
 msgid " Name "
 msgstr " 名稱 "
 
-# src/chown.c:114
 #: src/chown.c:115
 msgid " Owner name "
 msgstr " 擁有者名稱 "
 
-# src/chown.c:116
-# src/chown.c:128
 #: src/chown.c:117 src/chown.c:129
 msgid " Group name "
 msgstr " 群組名稱 "
 
-# src/chown.c:118
 #: src/chown.c:119
 msgid " Size "
 msgstr "大小 "
 
-# src/chown.c:124
 #: src/chown.c:125
 msgid " Chown command "
 msgstr " chmod 指令 "
 
-# src/chown.c:126
 #: src/chown.c:127
 msgid " User name "
 msgstr " 使用者名稱 "
 
-# src/chown.c:192
 #: src/chown.c:193
 msgid "<Unknown user>"
 msgstr "<不明的使用者>"
 
-# src/chown.c:193
 #. add fields for unknown names (numbers)
 #: src/chown.c:194
 msgid "<Unknown group>"
 msgstr "<不明的群組>"
 
-# src/cmd.c:198
 #: src/cmd.c:194
 #, c-format
 msgid " Can not fetch a local copy of %s "
 msgstr " 無法抓取一份 %s 的暫存檔 "
 
-# src/cmd.c:248
 #: src/cmd.c:244
 msgid " CD "
 msgstr " 改變目錄 "
 
-# src/cmd.c:248
 #: src/cmd.c:244
 msgid "Files tagged, want to cd?"
 msgstr "有檔案貼上標籤了，還是要改變目錄？"
 
-# src/cmd.c:254
-# src/cmd.c:715
-# src/cmd.c:734
 #: src/cmd.c:250 src/cmd.c:724 src/cmd.c:743
 msgid "Could not change directory"
 msgstr "無法改變目錄"
 
-# src/cmd.c:283
 #: src/cmd.c:279
 msgid " View file "
 msgstr " 檢視檔案 "
 
-# src/cmd.c:283
 #: src/cmd.c:279
 msgid " Filename:"
 msgstr " 檔名："
 
-# src/cmd.c:300
 #: src/cmd.c:296
 msgid " Filtered view "
 msgstr " 選擇性的顯示 "
 
-# src/cmd.c:300
 #: src/cmd.c:296
 msgid " Filter command and arguments:"
 msgstr " 過濾器指令與參數："
 
-# src/cmd.c:388
 #: src/cmd.c:388
 msgid "Create a new Directory"
 msgstr "建立新目錄"
 
-# src/cmd.c:388
 #: src/cmd.c:388
 msgid " Enter directory name:"
 msgstr " 輸入目錄名稱："
 
-# src/cmd.c:449
 #: src/cmd.c:452
 msgid " Filter "
 msgstr " 過濾器 "
 
-# src/cmd.c:449
 #: src/cmd.c:453
 msgid " Set expression for filtering filenames"
 msgstr " 設定過濾檔名的表示式"
 
-# src/cmd.c:515
 #: src/cmd.c:523
 msgid " Select "
 msgstr " 選取 "
 
-# src/cmd.c:567
 #: src/cmd.c:577
 msgid " Unselect "
 msgstr " 取消選取 "
 
-# src/cmd.c:640
 #: src/cmd.c:651
 msgid "Extension file edit"
 msgstr "擴充檔案編輯"
 
-# src/cmd.c:641
 #: src/cmd.c:652
 msgid " Which extension file you want to edit? "
 msgstr " 您想要編輯哪個擴充檔案？ "
 
-# src/cmd.c:642
 #: src/cmd.c:653
 msgid "&User"
 msgstr "使用者"
 
-# src/cmd.c:642
-# src/cmd.c:670
 #: src/cmd.c:653 src/cmd.c:681
 msgid "&System Wide"
 msgstr "全系統的"
 
-# src/cmd.c:667
 #: src/cmd.c:678
 msgid " Menu edit "
 msgstr " 選單檔編輯"
 
-# src/cmd.c:668
 #: src/cmd.c:679
 msgid " Which menu file will you edit ? "
 msgstr " 您準備編輯哪個選單檔？ "
 
-# src/cmd.c:670
 #: src/cmd.c:681
 msgid "&Local"
 msgstr "本地"
 
-# src/cmd.c:670
 #: src/cmd.c:681
 msgid "&Home"
 msgstr "家目錄"
 
-# src/cmd.c:860
 #: src/cmd.c:869
 msgid " Compare directories "
 msgstr " 比較目錄 "
 
-# src/cmd.c:860
 #: src/cmd.c:869
 msgid " Select compare method: "
 msgstr " 選擇比較方式： "
 
-# src/cmd.c:861
 #: src/cmd.c:870
 msgid "&Quick"
 msgstr "快速"
 
-# src/cmd.c:861
 #: src/cmd.c:870
 msgid "&Size only"
 msgstr "大小"
 
-# src/cmd.c:861
 #: src/cmd.c:870
 msgid "&Thorough"
 msgstr "徹底的"
 
-# src/cmd.c:871
 #: src/cmd.c:880
 msgid " Both panels should be on the listing view mode to use this command "
 msgstr " 使用此一指令時，兩個面板都要在列表顯示模式 "
 
-# src/cmd.c:885
 #: src/cmd.c:894
 msgid " The command history is empty "
 msgstr " 指令歷史紀錄是空的 "
 
-# src/cmd.c:891
 #: src/cmd.c:900
 msgid " Command history "
 msgstr " 指令歷史紀錄 "
 
-# src/cmd.c:933
 #: src/cmd.c:940
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -4721,54 +3537,42 @@ msgstr ""
 " 並非在 xterm 或 Linux 主控台下執行； \n"
 " 無法切換面板。 "
 
-# src/cmd.c:972
 #: src/cmd.c:975
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "輸入 `exit' 就可以回到 Midnight Commander"
 
-# src/cmd.c:1036
-# src/cmd.c:1038
 #: src/cmd.c:1023 src/cmd.c:1025
 msgid " Link "
 msgstr " 連結 "
 
-# src/cmd.c:1037
-# src/cmd.c:1176
-# src/file.c:1704
 #: src/cmd.c:1024 src/cmd.c:1161 src/file.c:1707
 msgid " to:"
 msgstr " 至："
 
-# src/cmd.c:1048
 #: src/cmd.c:1035
 #, c-format
 msgid " link: %s "
 msgstr " 連結： %s "
 
-# src/cmd.c:1081
 #: src/cmd.c:1062
 #, c-format
 msgid " symlink: %s "
 msgstr " 符號連結： %s "
 
-# src/cmd.c:1135
 #: src/cmd.c:1117
 #, c-format
 msgid " Symlink `%s' points to: "
 msgstr " 符號連結 `%s' 指到："
 
-# src/cmd.c:1140
 #: src/cmd.c:1122
 msgid " Edit symlink "
 msgstr " 編輯符號連結 "
 
-# src/cmd.c:1145
 #: src/cmd.c:1127
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr " 編輯符號連結，無法移除 %s： %s "
 
-# src/cmd.c:1149
 #: src/cmd.c:1131
 #, c-format
 msgid " edit symlink: %s "
@@ -4779,88 +3583,69 @@ msgstr " 編輯符號連結： %s "
 msgid "`%s' is not a symbolic link"
 msgstr "`%s' 不是符號連結"
 
-# src/cmd.c:1176
 #: src/cmd.c:1161
 msgid " Link symbolically "
 msgstr " 符號性的連結 "
 
-# src/cmd.c:1177
 #: src/cmd.c:1162
 msgid " Relative symlink "
 msgstr " 相對的符號連結 "
 
-# src/cmd.c:1188
 #: src/cmd.c:1173
 #, c-format
 msgid " relative symlink: %s "
 msgstr " 相對的符號連結： %s "
 
-# src/cmd.c:1263
 #: src/cmd.c:1246
 msgid "Using default locale"
 msgstr "使用預設的本地化"
 
-# src/cmd.c:1265
 #: src/cmd.c:1248
 #, c-format
 msgid "Using locale \"%s\" (from environment variable %s)"
 msgstr "使用\"%s\"本地化 (依據環境變數 %s)"
 
-# src/cmd.c:1351
 #: src/cmd.c:1310
 msgid " Enter machine name (F1 for details): "
 msgstr " 輸入主機名稱 (按 F1 獲取進一步的資訊)： "
 
-# src/cmd.c:1378
 #: src/cmd.c:1337
 #, c-format
 msgid " Could not chdir to %s "
 msgstr " 無法將目錄改變至 %s "
 
-# src/cmd.c:1385
-# src/widget.c:1162
 #: src/cmd.c:1344 src/widget.c:1151
 msgid " Link to a remote machine "
 msgstr " 連結至遠端主機 "
 
-# src/cmd.c:1391
-# src/widget.c:1163
 #: src/cmd.c:1350 src/widget.c:1152
 msgid " FTP to machine "
 msgstr " 遠端FTP檔案傳輸的主機 "
 
-# src/cmd.c:1397
-# src/widget.c:1164
 #: src/cmd.c:1356 src/widget.c:1153
 msgid " SMB link to machine "
 msgstr " 遠端SMB檔案傳輸的主機 "
 
-# src/cmd.c:1407
 #: src/cmd.c:1366
 msgid " Socket source routing setup "
 msgstr " 封包來源路由設定 "
 
-# src/cmd.c:1408
 #: src/cmd.c:1367
 msgid " Enter host name to use as a source routing hop: "
 msgstr " 輸入要用來作為來源路由中繼器的主機名稱： "
 
-# src/cmd.c:1416
 #: src/cmd.c:1375
 msgid " Host name "
 msgstr "主機名稱"
 
-# src/cmd.c:1416
 #: src/cmd.c:1375
 msgid " Error while looking up IP address "
 msgstr " 查詢 IP 位址時發生錯誤 "
 
-# src/cmd.c:1427
 #: src/cmd.c:1386
 msgid " Undelete files on an ext2 file system "
 msgstr " 在 ext2 檔案系統上復原已刪除之檔案 "
 
-# src/cmd.c:1428
 #: src/cmd.c:1387
 msgid ""
 " Enter device (without /dev/) to undelete\n"
@@ -4869,17 +3654,14 @@ msgstr ""
 " 輸入要復原已刪除檔案的裝置名稱：\n"
 "   (不包括 /dev/，按 F1 以獲知詳情)"
 
-# src/cmd.c:1478
 #: src/cmd.c:1439
 msgid " Setup saved to ~/"
 msgstr " 將設定儲存至 ~/"
 
-# src/cmd.c:1483
 #: src/cmd.c:1441
 msgid " Setup "
 msgstr " 設定 "
 
-# src/command.c:170
 #: src/command.c:171
 #, c-format
 msgid ""
@@ -4889,12 +3671,10 @@ msgstr ""
 " 無法改變目錄到 '%s' \n"
 " %s "
 
-# src/command.c:198
 #: src/command.c:199
 msgid " You can not execute commands on non-local filesystems"
 msgstr " 不能在非本地端的檔案系統上執行指令 "
 
-# src/dialog.c:56
 #: src/dialog.c:56
 msgid ""
 "\n"
@@ -4911,90 +3691,72 @@ msgstr ""
 "\n"
 "\n"
 
-# src/dir.c:61
 #: src/dir.c:61
 msgid "&Unsorted"
 msgstr "未排序的"
 
-# src/dir.c:62
 #: src/dir.c:62
 msgid "&Name"
 msgstr "名稱"
 
-# src/dir.c:63
 #: src/dir.c:63
 msgid "&Extension"
 msgstr "擴充"
 
-# src/dir.c:64
 #: src/dir.c:64
 msgid "&Modify time"
 msgstr "更動時間"
 
-# src/dir.c:65
 #: src/dir.c:65
 msgid "&Access time"
 msgstr "存取時間"
 
-# src/dir.c:66
 #: src/dir.c:66
 msgid "&Change time"
 msgstr "改變時間"
 
-# src/dir.c:67
 #: src/dir.c:67
 msgid "&Size"
 msgstr "大小"
 
-# src/dir.c:68
 #: src/dir.c:68
 msgid "&Inode"
 msgstr "節點"
 
-# src/dir.c:71
 #. New sort orders
 #: src/dir.c:71
 msgid "&Type"
 msgstr "類型"
 
-# src/dir.c:72
 #: src/dir.c:72
 msgid "&Links"
 msgstr "連結"
 
-# src/dir.c:73
 #: src/dir.c:73
 msgid "N&GID"
 msgstr "NGID"
 
-# src/dir.c:74
 #: src/dir.c:74
 msgid "N&UID"
 msgstr "NUID"
 
-# src/dir.c:75
 #: src/dir.c:75
 msgid "&Owner"
 msgstr "擁有者"
 
-# src/dir.c:76
 #: src/dir.c:76
 msgid "&Group"
 msgstr "群組"
 
-# src/dir.c:386
 #: src/dir.c:427
 #, c-format
 msgid "File '%s' exists but can not be stat-ed: %s"
 msgstr "檔案'%s'存在，但是無法被 stat: %s"
 
-# src/dir.c:657
 #: src/dir.c:698
 msgid "Unknown"
 msgstr "不明的"
 
-# src/ext.c:150
-# src/user.c:556
 #: src/ext.c:151 src/user.c:558
 #, c-format
 msgid ""
@@ -5004,23 +3766,18 @@ msgstr ""
 " 無法建立指令暫存檔 \n"
 " %s "
 
-# src/ext.c:165
-# src/user.c:578
 #: src/ext.c:164 src/user.c:579
 msgid " Parameter "
 msgstr " 參數 "
 
-# src/ext.c:414
 #: src/ext.c:416
 msgid " file error"
 msgstr " 檔案錯誤"
 
-# src/ext.c:415
 #: src/ext.c:417
 msgid "Format of the "
 msgstr "格式問題： "
 
-# src/ext.c:417
 #: src/ext.c:419
 msgid ""
 "mc.ext file has changed\n"
@@ -5033,17 +3790,14 @@ msgstr ""
 "請由最新的 Midnight Commander\n"
 "套件取得最新版本的檔案。"
 
-# src/ext.c:432
 #: src/ext.c:433
 msgid " file error "
 msgstr " 檔案錯誤 "
 
-# src/ext.c:433
 #: src/ext.c:434
 msgid "Format of the ~/"
 msgstr "格式問題： ~/"
 
-# src/ext.c:433
 #: src/ext.c:434
 msgid ""
 " file has changed\n"
@@ -5054,7 +3808,6 @@ msgstr ""
 "更改過了，您要嘛就從\n"
 "這裡複製一份 "
 
-# src/ext.c:435
 #: src/ext.c:436
 msgid ""
 "mc.ext or use that\n"
@@ -5063,40 +3816,30 @@ msgstr ""
 "mc.ext，否則就以這個檔案\n"
 "當範本重寫一個。\n"
 
-# src/ext.c:437
 #: src/ext.c:438
 msgid "mc.ext will be used for this moment."
 msgstr "mc.ext 在這個時候先被拿來用了。"
 
-# src/file.c:154
-# src/tree.c:639
 #: src/file.c:154 src/tree.c:640
 msgid " Copy "
 msgstr " 複製 "
 
-# src/file.c:155
-# src/tree.c:677
 #: src/file.c:155 src/tree.c:681
 msgid " Move "
 msgstr " 搬移"
 
-# src/file.c:156
-# src/tree.c:745
 #: src/file.c:156 src/tree.c:754
 msgid " Delete "
 msgstr " 刪除 "
 
-# src/file.c:244
 #: src/file.c:244
 msgid " Invalid target mask "
 msgstr " 無效的目標遮罩 "
 
-# src/file.c:342
 #: src/file.c:342
 msgid " Could not make the hardlink "
 msgstr " 無法製造此一硬連結 "
 
-# src/file.c:384
 #: src/file.c:384
 #, c-format
 msgid ""
@@ -5106,7 +3849,6 @@ msgstr ""
 " 無法讀取來源連結 \"%s\" \n"
 " %s "
 
-# src/file.c:394
 #: src/file.c:394
 msgid ""
 " Cannot make stable symlinks across non-local filesystems: \n"
@@ -5117,7 +3859,6 @@ msgstr ""
 "\n"
 " 選項『穩定符號連結』將不能使用  "
 
-# src/file.c:442
 #: src/file.c:442
 #, c-format
 msgid ""
@@ -5127,7 +3868,6 @@ msgstr ""
 " 無法建立目標符號連結 \"%s\" \n"
 " %s "
 
-# src/file.c:509
 #: src/file.c:509
 #, c-format
 msgid ""
@@ -5137,7 +3877,6 @@ msgstr ""
 " 無法蓋寫目錄 \"%s\" \n"
 " %s "
 
-# src/file.c:518
 #: src/file.c:518
 #, c-format
 msgid ""
@@ -5147,13 +3886,11 @@ msgstr ""
 " 無法 stat 來源檔案 \"%s\" \n"
 " %s "
 
-# src/file.c:531
 #: src/file.c:531
 #, c-format
 msgid " `%s' and `%s' are the same file. "
 msgstr " `%s' 與 `%s' 是同一個檔案。 "
 
-# src/file.c:574
 #: src/file.c:574
 #, c-format
 msgid ""
@@ -5163,8 +3900,6 @@ msgstr ""
 " 無法建立特殊檔案 \"%s\" \n"
 " %s "
 
-# src/file.c:583
-# src/file.c:812
 #: src/file.c:583 src/file.c:812
 #, c-format
 msgid ""
@@ -5174,8 +3909,6 @@ msgstr ""
 " 無法改變目標檔案 \"%s\" 的擁有狀態 \n"
 " %s "
 
-# src/file.c:592
-# src/file.c:831
 #: src/file.c:592 src/file.c:831
 #, c-format
 msgid ""
@@ -5185,7 +3918,6 @@ msgstr ""
 " 無法改變目標檔案 \"%s\" 的模式\n"
 " %s "
 
-# src/file.c:609
 #: src/file.c:609
 #, c-format
 msgid ""
@@ -5195,12 +3927,10 @@ msgstr ""
 " 無法開啟來源檔 \"%s\" \n"
 " %s "
 
-# src/file.c:619
 #: src/file.c:619
 msgid " Reget failed, about to overwrite file "
 msgstr " 重新抓取失敗，準備蓋寫原有檔案 "
 
-# src/file.c:625
 #: src/file.c:625
 #, c-format
 msgid ""
@@ -5210,7 +3940,6 @@ msgstr ""
 " 無法 fstat 來源檔 \"%s\" \n"
 " %s "
 
-# src/file.c:651
 #: src/file.c:651
 #, c-format
 msgid ""
@@ -5220,7 +3949,6 @@ msgstr ""
 " 無法建立目標檔案 \"%s\" \n"
 " %s "
 
-# src/file.c:665
 #: src/file.c:665
 #, c-format
 msgid ""
@@ -5230,7 +3958,6 @@ msgstr ""
 " 無法 fstat 目標檔 \"%s\" \n"
 " %s "
 
-# src/file.c:696
 #: src/file.c:696
 #, c-format
 msgid ""
@@ -5240,7 +3967,6 @@ msgstr ""
 " 無法讀取來源檔 \"%s\" \n"
 " %s "
 
-# src/file.c:726
 #: src/file.c:726
 #, c-format
 msgid ""
@@ -5250,12 +3976,10 @@ msgstr ""
 " 無法寫入目標檔案 \"%s\" \n"
 " %s "
 
-# src/file.c:745
 #: src/file.c:745
 msgid "(stalled)"
 msgstr "(暫停了)"
 
-# src/file.c:783
 #: src/file.c:783
 #, c-format
 msgid ""
@@ -5265,7 +3989,6 @@ msgstr ""
 " 無法關閉來源檔案 \"%s\" \n"
 " %s "
 
-# src/file.c:792
 #: src/file.c:792
 #, c-format
 msgid ""
@@ -5275,23 +3998,18 @@ msgstr ""
 " 無法關閉目標檔案 \"%s\" \n"
 " %s "
 
-# src/file.c:802
 #: src/file.c:802
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "抓回的檔案不完全，要保留嗎？"
 
-# src/file.c:803
 #: src/file.c:803
 msgid "&Delete"
 msgstr "刪除"
 
-# src/file.c:803
-# src/hotlist.c:1430
 #: src/file.c:803 src/hotlist.c:1421
 msgid "&Keep"
 msgstr "保留"
 
-# src/file.c:876
 #: src/file.c:876
 #, c-format
 msgid ""
@@ -5301,7 +4019,6 @@ msgstr ""
 " 無法 stat 來源目錄 \"%s\" \n"
 " %s "
 
-# src/file.c:899
 #: src/file.c:899
 #, c-format
 msgid ""
@@ -5311,7 +4028,6 @@ msgstr ""
 " 給定的來源目錄 \"%s\" 並不是一個目錄 \n"
 " %s "
 
-# src/file.c:907
 #. we found a cyclic symbolic link
 #: src/file.c:907
 #, c-format
@@ -5322,7 +4038,6 @@ msgstr ""
 " 無法複製循環的符號連結 \n"
 " `%s' "
 
-# src/file.c:964
 #: src/file.c:964
 #, c-format
 msgid ""
@@ -5332,7 +4047,6 @@ msgstr ""
 " 無法建立目標目錄 \"%s\" \n"
 " %s "
 
-# src/file.c:987
 #: src/file.c:987
 #, c-format
 msgid ""
@@ -5342,7 +4056,6 @@ msgstr ""
 " 無法改變目標目錄 \"%s\" 的擁有狀態 \n"
 " %s "
 
-# src/file.c:1100
 #. Source doesn't exist
 #: src/file.c:1100
 #, c-format
@@ -5353,19 +4066,16 @@ msgstr ""
 " 無法 stat 檔案 \"%s\" \n"
 " %s "
 
-# src/file.c:1122
 #: src/file.c:1122
 #, c-format
 msgid " `%s' and `%s' are the same file "
 msgstr " `%s' 與 `%s' 是同一個檔案 "
 
-# src/file.c:1129
 #: src/file.c:1129
 #, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " 無法蓋寫目錄 `%s' "
 
-# src/file.c:1172
 #: src/file.c:1172
 #, c-format
 msgid ""
@@ -5375,7 +4085,6 @@ msgstr ""
 " 無法將檔案 \"%s\" 搬移至 \"%s\" \n"
 " %s "
 
-# src/file.c:1192
 #: src/file.c:1192
 #, c-format
 msgid ""
@@ -5385,25 +4094,21 @@ msgstr ""
 " 無法移除檔案 \"%s\" \n"
 " %s "
 
-# src/file.c:1246
 #: src/file.c:1246
 #, c-format
 msgid " `%s' and `%s' are the same directory "
 msgstr " `%s' 與 `%s' 是同一個檔案 "
 
-# src/file.c:1265
 #: src/file.c:1265
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
 msgstr " 無法蓋寫目錄 \"%s\" %s "
 
-# src/file.c:1267
 #: src/file.c:1267
 #, c-format
 msgid " Cannot overwrite file \"%s\" %s "
 msgstr " 無法蓋寫檔案 \"%s\" %s "
 
-# src/file.c:1294
 #: src/file.c:1294
 #, c-format
 msgid ""
@@ -5413,7 +4118,6 @@ msgstr ""
 " 無法把目錄 \"%s\" 搬移至 \"%s\" \n"
 " %s "
 
-# src/file.c:1357
 #: src/file.c:1357
 #, c-format
 msgid ""
@@ -5423,9 +4127,6 @@ msgstr ""
 " 無法刪除檔案 \"%s\" \n"
 " %s "
 
-# src/file.c:1418
-# src/file.c:1488
-# src/file.c:1520
 #: src/file.c:1418 src/file.c:1488 src/file.c:1520
 #, c-format
 msgid ""
@@ -5435,7 +4136,6 @@ msgstr ""
 " 無法移除目錄 \"%s\" \n"
 " %s "
 
-# src/file.c:1680
 #.
 #. * This array introduced to avoid translation problems. The former (op_names)
 #. * is assumed to be nouns, suitable in dialog box titles; this one should
@@ -5449,17 +4149,14 @@ msgstr ""
 msgid "1Copy"
 msgstr "1複製"
 
-# src/file.c:1680
 #: src/file.c:1679
 msgid "1Move"
 msgstr "1搬移"
 
-# src/file.c:1680
 #: src/file.c:1679
 msgid "1Delete"
 msgstr "1刪除"
 
-# src/file.c:1695
 #.
 #. * These are formats for building a prompt. Parts encoded as follows:
 #. * %o - operation from op_names1
@@ -5474,90 +4171,69 @@ msgstr "1刪除"
 msgid "%o %f \"%s\"%m"
 msgstr "%o %f \"%s\"%m"
 
-# src/file.c:1696
 #: src/file.c:1697
 #, no-c-format
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-# src/file.c:1698
 #: src/file.c:1700
 #, no-c-format
 msgid "%o %f \"%s\"%e"
 msgstr "%o %f \"%s\"%e"
 
-# src/file.c:1699
 #: src/file.c:1702
 #, no-c-format
 msgid "%o %d %f%e"
 msgstr "%o %d %f%e"
 
-# src/file.c:1703
-# vfs/fish.c:509
 #: src/file.c:1706 vfs/fish.c:518
 msgid "file"
 msgstr "檔案"
 
-# src/file.c:1703
 #: src/file.c:1706
 msgid "files"
 msgstr "檔案"
 
-# src/file.c:1703
 #: src/file.c:1706
 msgid "directory"
 msgstr "目錄"
 
-# src/file.c:1703
 #: src/file.c:1706
 msgid "directories"
 msgstr "目錄"
 
-# src/file.c:1704
 #: src/file.c:1707
 msgid "files/directories"
 msgstr "檔案/目錄"
 
-# src/file.c:1704
 #: src/file.c:1707
 msgid " with source mask:"
 msgstr " 以來源遮罩："
 
-# src/file.c:1856
 #: src/file.c:1859
 msgid " Cannot operate on \"..\"! "
 msgstr " 無法操作 \"..\"! "
 
-# src/file.c:1875
-# src/screen.c:2115
 #: src/file.c:1878 src/screen.c:2103
 msgid "Yes"
 msgstr "是"
 
-# src/file.c:1875
-# src/screen.c:2115
 #: src/file.c:1878 src/screen.c:2103
 msgid "No"
 msgstr "否"
 
-# src/file.c:1928
 #: src/file.c:1931
 msgid " Sorry, I could not put the job in background "
 msgstr " 抱歉，無法將此一工作放到背景裡執行 "
 
-# src/file.c:2014
-# src/file.c:2098
 #: src/file.c:2017 src/file.c:2101
 msgid " Internal failure "
 msgstr " 內部失敗 "
 
-# src/file.c:2014
-# src/file.c:2098
 #: src/file.c:2017 src/file.c:2101
 msgid " Unknown file operation "
 msgstr " 不明的檔案操作 "
 
-# src/file.c:2029
 #: src/file.c:2032
 #, c-format
 msgid ""
@@ -5567,20 +4243,14 @@ msgstr ""
 " 目的 \"%s\" 必須是一個目錄 \n"
 " %s "
 
-# src/file.c:2190
 #: src/file.c:2193
 msgid "&Retry"
 msgstr "重試"
 
-# src/file.c:2190
-# src/file.c:2251
-# src/filegui.c:264
-# src/filegui.c:592
 #: src/file.c:2193 src/file.c:2254 src/filegui.c:258 src/filegui.c:560
 msgid "&Abort"
 msgstr "中斷"
 
-# src/file.c:2242
 #: src/file.c:2245
 msgid ""
 "\n"
@@ -5591,7 +4261,6 @@ msgstr ""
 "   目錄裡面還有東西；   \n"
 "   確定要完全刪除？ "
 
-# src/file.c:2243
 #: src/file.c:2246
 msgid ""
 "\n"
@@ -5602,165 +4271,133 @@ msgstr ""
 "   背景程序： 目錄裡面還有東西， \n"
 "   確定要完全刪除？ "
 
-# src/file.c:2250
 #: src/file.c:2253
 msgid "a&ll"
 msgstr "全部"
 
-# src/file.c:2250
-# src/filegui.c:595
 #: src/file.c:2253 src/filegui.c:563
 msgid "non&E"
 msgstr "無"
 
-# src/file.c:2260
 #: src/file.c:2263
 msgid " Type 'yes' if you REALLY want to delete "
 msgstr " 假如您確定要刪除的話就輸入 'yes' "
 
-# src/file.c:2262
 #: src/file.c:2265
 msgid "all the directories "
 msgstr "所有的目錄"
 
-# src/file.c:2264
 #: src/file.c:2267
 msgid " Recursive Delete "
 msgstr " 遞迴的刪除 "
 
-# src/file.c:2265
 #: src/file.c:2268
 msgid " Background process: Recursive Delete "
 msgstr " 背景程序： 遞迴的刪除 "
 
-# src/filegui.c:424
 #: src/filegui.c:404
 msgid "File"
 msgstr "檔案"
 
-# src/filegui.c:447
 #: src/filegui.c:427
 msgid "Count"
 msgstr "計數"
 
-# src/filegui.c:468
 #: src/filegui.c:448
 msgid "Bytes"
 msgstr "位元組"
 
-# src/filegui.c:505
 #: src/filegui.c:481
 msgid "Source"
 msgstr "來源"
 
-# src/filegui.c:528
 #: src/filegui.c:504
 msgid "Target"
 msgstr "目標"
 
-# src/filegui.c:550
 #: src/filegui.c:526
 msgid "Deleting"
 msgstr "刪除中"
 
-# src/filegui.c:590
 #: src/filegui.c:558
 #, c-format
 msgid "Target file \"%s\" already exists!"
 msgstr "目標檔案 \"%s\" 已經存在！"
 
-# src/filegui.c:593
 #: src/filegui.c:561
 msgid "if &Size differs"
 msgstr "若大小不同"
 
-# src/filegui.c:596
 #: src/filegui.c:564
 msgid "&Update"
 msgstr "更新"
 
-# src/filegui.c:598
 #: src/filegui.c:566
 msgid "Overwrite all targets?"
 msgstr "要全部蓋寫？"
 
-# src/filegui.c:600
 #: src/filegui.c:568
 msgid "&Reget"
 msgstr "重抓"
 
-# src/filegui.c:601
 #: src/filegui.c:569
 msgid "ap&Pend"
 msgstr "追加"
 
-# src/filegui.c:604
 #: src/filegui.c:572
 msgid "Overwrite this target?"
 msgstr "蓋寫？"
 
-# src/filegui.c:606
 #: src/filegui.c:574
 #, c-format
 msgid "Target date: %s, size %d"
 msgstr "目標檔日期： %s, 大小 %d"
 
-# src/filegui.c:608
 #: src/filegui.c:576
 #, c-format
 msgid "Source date: %s, size %d"
 msgstr "來源檔日期： %s, 大小 %d"
 
-# src/filegui.c:692
 #: src/filegui.c:658
 msgid " File exists "
 msgstr " 檔案已經存在 "
 
-# src/filegui.c:693
 #: src/filegui.c:659
 msgid " Background process: File exists "
 msgstr " 背景程序：檔案已經存在 "
 
-# src/filegui.c:805
 #. follow symlinks and preserve Attributes must be the first
 #: src/filegui.c:771
 msgid "preserve &Attributes"
 msgstr "保留檔案屬性"
 
-# src/filegui.c:807
 #. &op_preserve
 #: src/filegui.c:773
 msgid "follow &Links"
 msgstr "跟隨連結"
 
-# src/filegui.c:809
 #. &file_mask_op_follow_links
 #: src/filegui.c:775
 msgid "to:"
 msgstr "到："
 
-# src/filegui.c:810
 #: src/filegui.c:776
 msgid "&Using shell patterns"
 msgstr "使用系統殼萬用字元"
 
-# src/filegui.c:831
 #: src/filegui.c:797
 msgid "&Background"
 msgstr "背景"
 
-# src/filegui.c:840
 #: src/filegui.c:806
 msgid "&Stable Symlinks"
 msgstr "穩定符號連結"
 
-# src/filegui.c:842
 #. &file_mask_stable_symlinks
 #: src/filegui.c:808
 msgid "&Dive into subdir if exists"
 msgstr "進入每個存在的子目錄"
 
-# src/filegui.c:1001
 #: src/filegui.c:967
 #, c-format
 msgid ""
@@ -5770,55 +4407,42 @@ msgstr ""
 "無效的來源樣式 `%s' \n"
 " %s "
 
-# src/find.c:130
 #: src/find.c:105
 msgid "&Suspend"
 msgstr "暫停"
 
-# src/find.c:131
 #: src/find.c:106
 msgid "Con&tinue"
 msgstr "繼續"
 
-# src/find.c:132
 #: src/find.c:107
 msgid "&Chdir"
 msgstr "改變目錄"
 
-# src/find.c:133
 #: src/find.c:108
 msgid "&Again"
 msgstr "再一次"
 
-# src/find.c:134
 #: src/find.c:109
 msgid "&Quit"
 msgstr "結束"
 
-# src/find.c:135
-# src/panelize.c:89
 #: src/find.c:110 src/panelize.c:86
 msgid "Pane&lize"
 msgstr "面板化"
 
-# src/find.c:136
 #: src/find.c:111
 msgid "&View - F3"
 msgstr "檢視  - F3"
 
-# src/find.c:137
 #: src/find.c:112
 msgid "&Edit - F4"
 msgstr "編輯  - F4"
 
-# src/find.c:171
-# src/main.c:1251
-# src/main.c:1275
 #: src/find.c:149 src/main.c:1260 src/main.c:1284
 msgid "&Tree"
 msgstr "樹狀"
 
-# src/help.c:279
 #: src/help.c:275
 msgid ""
 " Help file format error\n"
@@ -5827,23 +4451,18 @@ msgstr ""
 " 說明檔格式錯誤\n"
 ""
 
-# src/help.c:318
 #: src/help.c:314
 msgid " Internal bug: Double start of link area "
 msgstr " 內部臭蟲： 重覆的連結區域開頭 "
 
-# src/help.c:572
 #: src/help.c:568
 msgid " Cannot find node [Contents] in help file "
 msgstr " 無法在說明檔裡找到 [內容] 節點 "
 
-# src/help.c:741
 #: src/help.c:737
 msgid " Help "
 msgstr " 說明 "
 
-# src/help.c:766
-# src/user.c:689
 #: src/help.c:768 src/user.c:689
 #, c-format
 msgid ""
@@ -5853,149 +4472,114 @@ msgstr ""
 " 無法開啟檔案 %s \n"
 " %s "
 
-# src/help.c:771
 #: src/help.c:779
 #, c-format
 msgid " Cannot find node %s in help file "
 msgstr " 無法在說明檔裡找到節點 %s "
 
-# src/help.c:808
 #: src/help.c:813
 msgid "Index"
 msgstr "索引"
 
-# src/help.c:810
 #: src/help.c:815
 msgid "Prev"
 msgstr "往前"
 
-# src/hotlist.c:132
 #: src/hotlist.c:128
 msgid "&Move"
 msgstr "移動"
 
-# src/hotlist.c:133
-# src/hotlist.c:1430
-# src/panelize.c:88
-# src/wtools.c:383
 #: src/hotlist.c:129 src/hotlist.c:1421 src/panelize.c:85 src/wtools.c:371
 msgid "&Remove"
 msgstr "移除"
 
-# src/hotlist.c:134
-# src/hotlist.c:805
-# src/hotlist.c:902
 #: src/hotlist.c:130 src/hotlist.c:796 src/hotlist.c:893
 msgid "&Append"
 msgstr "增加"
 
-# src/hotlist.c:135
-# src/hotlist.c:803
-# src/hotlist.c:900
 #: src/hotlist.c:131 src/hotlist.c:794 src/hotlist.c:891
 msgid "&Insert"
 msgstr "插入"
 
-# src/hotlist.c:136
 #: src/hotlist.c:132
 msgid "New &Entry"
 msgstr "新增項目"
 
-# src/hotlist.c:137
 #: src/hotlist.c:133
 msgid "New &Group"
 msgstr "新增群組"
 
-# src/hotlist.c:139
 #: src/hotlist.c:135
 msgid "&Up"
 msgstr "往上"
 
-# src/hotlist.c:140
 #: src/hotlist.c:136
 msgid "&Add current"
 msgstr "加入目前的"
 
-# src/hotlist.c:141
 #: src/hotlist.c:137
 msgid "Change &To"
 msgstr "更換至"
 
-# src/hotlist.c:188
 #: src/hotlist.c:184
 msgid "Subgroup - press ENTER to see list"
 msgstr "Subgroup - 按 ENTER 以檢視列表"
 
-# src/hotlist.c:607
 #: src/hotlist.c:590
 msgid "Active VFS directories"
 msgstr "啟動虛擬檔案系統目錄"
 
-# src/hotlist.c:607
 #: src/hotlist.c:590
 msgid "Directory hotlist"
 msgstr "熱門目錄列表"
 
-# src/hotlist.c:626
 #: src/hotlist.c:607
 msgid " Directory path "
 msgstr " 目錄途徑 "
 
-# src/hotlist.c:629
-# src/hotlist.c:676
 #. This one holds the displayed pathname
 #: src/hotlist.c:610 src/hotlist.c:654
 msgid " Directory label "
 msgstr " 目錄標籤 "
 
-# src/hotlist.c:650
 #: src/hotlist.c:630
 #, c-format
 msgid "Moving %s"
 msgstr "正在移動 %s"
 
-# src/hotlist.c:879
 #: src/hotlist.c:870
 msgid "New hotlist entry"
 msgstr "新的熱門列表項目"
 
-# src/hotlist.c:879
 #: src/hotlist.c:870
 msgid "Directory label"
 msgstr "目錄標籤"
 
-# src/hotlist.c:879
 #: src/hotlist.c:870
 msgid "Directory path"
 msgstr "目錄途徑"
 
-# src/hotlist.c:960
 #: src/hotlist.c:951
 msgid " New hotlist group "
 msgstr " 新的熱門列表群組 "
 
-# src/hotlist.c:960
 #: src/hotlist.c:951
 msgid "Name of new group"
 msgstr "新群組的名稱"
 
-# src/hotlist.c:975
 #: src/hotlist.c:966
 #, c-format
 msgid "Label for \"%s\":"
 msgstr " \"%s\" 的標籤："
 
-# src/hotlist.c:979
 #: src/hotlist.c:970
 msgid " Add to hotlist "
 msgstr " 新增至熱門列表 "
 
-# src/hotlist.c:1016
 #: src/hotlist.c:1007
 msgid " Remove: "
 msgstr " 移除： "
 
-# src/hotlist.c:1020
 #: src/hotlist.c:1011
 msgid ""
 "\n"
@@ -6006,66 +4590,50 @@ msgstr ""
 " 群組還有內容，\n"
 " 確定要移除？"
 
-# src/hotlist.c:1365
 #: src/hotlist.c:1356
 msgid " Top level group "
 msgstr " 最上層群組 "
 
-# src/hotlist.c:1381
 #: src/hotlist.c:1372
 msgid "Hotlist is now kept in file ~/"
 msgstr "熱門列表已經被存在檔案 ~/"
 
-# src/hotlist.c:1383
 #: src/hotlist.c:1374
 msgid "MC will load hotlist from ~/"
 msgstr "MC 將會從這裡載入熱門列表： ~/"
 
-# src/hotlist.c:1385
 #: src/hotlist.c:1376
 msgid "and then delete [Hotlist] section there"
 msgstr "，接著刪除這裡的 [熱門列表] 段落： "
 
-# src/hotlist.c:1387
-# src/hotlist.c:1406
-# src/hotlist.c:1429
-# src/hotlist.c:1454
 #: src/hotlist.c:1378 src/hotlist.c:1397 src/hotlist.c:1420 src/hotlist.c:1445
 msgid " Hotlist Load "
 msgstr " 載入熱門列表 "
 
-# src/hotlist.c:1403
-# src/hotlist.c:1451
 #: src/hotlist.c:1394 src/hotlist.c:1442
 msgid "MC was unable to write ~/"
 msgstr "MC 無法寫入 ~/"
 
-# src/hotlist.c:1404
 #: src/hotlist.c:1395
 msgid " file, your old hotlist entries were not deleted"
 msgstr "檔案，您舊有的熱門列表沒有刪除"
 
-# src/hotlist.c:1418
 #: src/hotlist.c:1409
 msgid "You have ~/"
 msgstr "您已經有 ~/"
 
-# src/hotlist.c:1418
 #: src/hotlist.c:1409
 msgid " file and [Hotlist] section in ~/"
 msgstr " 檔案以及 [熱門列表] 段落在 ~/"
 
-# src/hotlist.c:1419
 #: src/hotlist.c:1410
 msgid "Your ~/"
 msgstr "您的 ~/"
 
-# src/hotlist.c:1419
 #: src/hotlist.c:1410
 msgid " most probably was created\n"
 msgstr " 很可能已經被建立 \n"
 
-# src/hotlist.c:1420
 #: src/hotlist.c:1411
 msgid ""
 "by an earlier development version of MC\n"
@@ -6074,7 +4642,6 @@ msgstr ""
 "，是由一個早期發展中版本的 MC 所建立，\n"
 "而且比這一個還要新： ~/"
 
-# src/hotlist.c:1421
 #: src/hotlist.c:1412
 msgid ""
 " entries\n"
@@ -6083,7 +4650,6 @@ msgstr ""
 " 的項目\n"
 "\n"
 
-# src/hotlist.c:1422
 #: src/hotlist.c:1413
 msgid ""
 "You can choose between\n"
@@ -6094,7 +4660,6 @@ msgstr ""
 "\n"
 "  移除 - 移除舊的熱門列表項目 ~/"
 
-# src/hotlist.c:1424
 #: src/hotlist.c:1415
 msgid ""
 "  Keep   - keep your old entries; you will be asked\n"
@@ -6105,247 +4670,198 @@ msgstr ""
 "        再次詢問您的想法。\n"
 "  合併 - 把舊的項目加到熱門列表群組 \"舊項目 ~/"
 
-# src/hotlist.c:1430
 #: src/hotlist.c:1421
 msgid "&Merge"
 msgstr "合併"
 
-# src/hotlist.c:1442
 #: src/hotlist.c:1433
 msgid " Entries from ~/"
 msgstr " 舊項目 ~/"
 
-# src/hotlist.c:1452
 #: src/hotlist.c:1443
 msgid " file your old hotlist entries were not deleted"
 msgstr " 檔案，您舊的熱門列表並未被刪除"
 
-# src/info.c:83
 #: src/info.c:76
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
 
-# src/info.c:109
 #: src/info.c:100
 #, c-format
 msgid "File:       %s"
 msgstr "檔案：       %s"
 
-# src/info.c:122
 #: src/info.c:113
 #, c-format
 msgid "Free nodes %d (%d%%) of %d"
 msgstr "空節點 %d (%d%%) 之 %d"
 
-# src/info.c:128
 #: src/info.c:119
 msgid "No node information"
 msgstr "沒有節點資訊"
 
-# src/info.c:133
 #: src/info.c:124
 msgid "Free space "
 msgstr "空間"
 
-# src/info.c:135
 #: src/info.c:126
 #, c-format
 msgid " (%d%%) of "
 msgstr " (%d%%) 之 "
 
-# src/info.c:139
 #: src/info.c:130
 msgid "No space information"
 msgstr "沒有空間資訊"
 
-# src/info.c:143
 #: src/info.c:134
 #, c-format
 msgid "Type:      %s "
 msgstr "類型：      %s "
 
-# src/info.c:143
 #: src/info.c:134
 msgid "non-local vfs"
 msgstr "非本地的虛擬檔案系統"
 
-# src/info.c:149
 #: src/info.c:140
 #, c-format
 msgid "Device:    %s"
 msgstr "裝置：      %s"
 
-# src/info.c:153
 #: src/info.c:144
 #, c-format
 msgid "Filesystem: %s"
 msgstr "檔案系統：    %s"
 
-# src/info.c:158
 #: src/info.c:149
 #, c-format
 msgid "Accessed:  %s"
 msgstr "存取：      %s"
 
-# src/info.c:162
 #: src/info.c:153
 #, c-format
 msgid "Modified:  %s"
 msgstr "更動：      %s"
 
-# src/info.c:166
 #: src/info.c:157
 #, c-format
 msgid "Created:   %s"
 msgstr "建立：      %s"
 
-# src/info.c:179
 #: src/info.c:170
 msgid "Size:      "
 msgstr "大小：      "
 
-# src/info.c:182
 #: src/info.c:173
 #, c-format
 msgid " (%d blocks)"
 msgstr " (%d 個區塊)"
 
-# src/info.c:188
 #: src/info.c:179
 #, c-format
 msgid "Owner:     %s/%s"
 msgstr "擁有者：    %s/%s"
 
-# src/info.c:193
 #: src/info.c:184
 #, c-format
 msgid "Links:     %d"
 msgstr "連結：      %d"
 
-# src/info.c:197
 #: src/info.c:188
 #, c-format
 msgid "Mode:      %s (%04o)"
 msgstr "模式：      %s (%04o)"
 
-# src/info.c:202
 #: src/info.c:193
 #, c-format
 msgid "Location:  %Xh:%Xh"
 msgstr "位置：      %Xh:%Xh"
 
-# src/info.c:212
 #: src/info.c:203
 msgid "File:       None"
 msgstr "檔案：       無"
 
-# src/layout.c:159
 #: src/layout.c:159
 msgid "&Vertical"
 msgstr "垂直"
 
-# src/layout.c:160
 #: src/layout.c:160
 msgid "&Horizontal"
 msgstr "水平"
 
-# src/layout.c:170
 #: src/layout.c:170
 msgid "&Xterm hintbar"
 msgstr "xterm 提示列"
 
-# src/layout.c:171
 #: src/layout.c:171
 msgid "h&Intbar visible"
 msgstr "顯示提示列"
 
-# src/layout.c:172
 #: src/layout.c:172
 msgid "&Keybar visible"
 msgstr "顯示鍵盤列"
 
-# src/layout.c:173
 #: src/layout.c:173
 msgid "command &Prompt"
 msgstr "指令提示符號"
 
-# src/layout.c:174
 #: src/layout.c:174
 msgid "show &Mini status"
 msgstr "顯示迷你狀態"
 
-# src/layout.c:175
 #: src/layout.c:175
 msgid "menu&Bar visible"
 msgstr "顯示選單列"
 
-# src/layout.c:176
 #: src/layout.c:176
 msgid "&Equal split"
 msgstr "等量分割"
 
-# src/layout.c:177
 #: src/layout.c:177
 msgid "pe&Rmissions"
 msgstr "權限"
 
-# src/layout.c:178
 #: src/layout.c:178
 msgid "&File types"
 msgstr "檔案類型"
 
-# src/layout.c:377
-# src/learn.c:60
-# src/learn.c:179
-# src/option.c:145
 #: src/layout.c:371 src/learn.c:60 src/learn.c:183 src/option.c:137
 msgid "&Save"
 msgstr "存檔"
 
-# src/layout.c:385
 #. length of line with '<' '>' buttons
 #: src/layout.c:379
 msgid " Layout "
 msgstr " 樣式 "
 
-# src/layout.c:386
 #: src/layout.c:380
 msgid " Panel split "
 msgstr " 分割面板 "
 
-# src/layout.c:387
 #: src/layout.c:381
 msgid " Highlight... "
 msgstr " 選取... "
 
-# src/layout.c:388
-# src/option.c:156
 #: src/layout.c:382 src/option.c:148
 msgid " Other options "
 msgstr " 其它選項 "
 
-# src/layout.c:389
 #: src/layout.c:383
 msgid "output lines"
 msgstr "輸出行數"
 
-# src/layout.c:456
 #: src/layout.c:450
 msgid "Layout"
 msgstr "樣式"
 
-# src/learn.c:74
 #: src/learn.c:74
 msgid " Learn keys "
 msgstr " 認識按鍵 "
 
-# src/learn.c:93
 #: src/learn.c:91
 msgid " Teach me a key "
 msgstr " 教我認識一個按鍵 "
 
-# src/learn.c:94
 #: src/learn.c:92
 #, c-format
 msgid ""
@@ -6367,23 +4883,19 @@ msgstr ""
 "要離開的話，按一下 Esc 鍵，然後等待\n"
 "一下子就可以了。"
 
-# src/learn.c:122
 #: src/learn.c:126
 msgid " Cannot accept this key "
 msgstr " 無法讀取這個按鍵 "
 
-# src/learn.c:123
 #: src/learn.c:127
 #, c-format
 msgid " You have entered \"%s\""
 msgstr " 您剛剛按下了 \"%s\""
 
-# src/learn.c:170
 #: src/learn.c:174
 msgid "OK"
 msgstr "好"
 
-# src/learn.c:177
 #: src/learn.c:181
 msgid ""
 "It seems that all your keys already\n"
@@ -6392,12 +4904,10 @@ msgstr ""
 "看起來您所有的按鍵都\n"
 "正常無誤，很好。"
 
-# src/learn.c:179
 #: src/learn.c:183
 msgid "&Discard"
 msgstr "忽略"
 
-# src/learn.c:183
 #: src/learn.c:187
 msgid ""
 "Great! You have a complete terminal database!\n"
@@ -6406,27 +4916,22 @@ msgstr ""
 "太好了！您的終端機資料庫很完整！ \n"
 "所有的按鍵都可以正常使用。"
 
-# src/learn.c:267
 #: src/learn.c:271
 msgid "Learn keys"
 msgstr "認識按鍵"
 
-# src/learn.c:300
 #: src/learn.c:304
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "一個個按下這邊顯示的這些按鍵，在您按完以後，檢查一下"
 
-# src/learn.c:302
 #: src/learn.c:306
 msgid "which keys are not marked with OK.  Press space on the missing"
 msgstr "哪個按鍵沒有標上 \"好\"，在這些地方按一下空白鍵，或者"
 
-# src/learn.c:304
 #: src/learn.c:308
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "用滑鼠控制來設定這些按鍵。用 Tab 鍵可以在選項之間移動。"
 
-# src/main.c:715
 #: src/main.c:719
 msgid ""
 " The Commander can't change to the directory that \n"
@@ -6439,200 +4944,151 @@ msgstr ""
 " 目錄，或者因為執行過 \"su\" 指令 \n"
 " 而改變了權限狀態？ "
 
-# src/main.c:790
 #: src/main.c:794
 msgid "Press any key to continue..."
 msgstr "按任意鍵繼續..."
 
-# src/main.c:840
 #: src/main.c:844
 msgid " The shell is already running a command "
 msgstr " 此系統殼正在執行指令中 "
 
-# src/main.c:867
-# src/screen.c:2113
-# src/screen.c:2160
 #: src/main.c:873 src/screen.c:2101 src/screen.c:2148
 msgid " The Midnight Commander "
 msgstr " The Midnight Commander "
 
-# src/main.c:868
 #: src/main.c:874
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr " 你確定要離開本程式？"
 
-# src/main.c:1236
 #: src/main.c:1248
 msgid " Listing format edit "
 msgstr "編輯列表格式"
 
-# src/main.c:1236
 #: src/main.c:1248
 #, c-format
 msgid " New mode is \"%s\" "
 msgstr "新模式為 \"%s\""
 
-# src/main.c:1248
-# src/main.c:1272
 #: src/main.c:1257 src/main.c:1281
 msgid "&Listing mode..."
 msgstr "列出模式中..."
 
-# src/main.c:1249
-# src/main.c:1273
 #: src/main.c:1258 src/main.c:1282
 msgid "&Quick view     C-x q"
 msgstr "快速檢視         C-x q"
 
-# src/main.c:1250
-# src/main.c:1274
 #: src/main.c:1259 src/main.c:1283
 msgid "&Info           C-x i"
 msgstr "訊息             C-x i"
 
-# src/main.c:1253
-# src/main.c:1277
 #: src/main.c:1262 src/main.c:1286
 msgid "&Sort order..."
 msgstr "排列順序..."
 
-# src/main.c:1255
-# src/main.c:1279
 #: src/main.c:1264 src/main.c:1288
 msgid "&Filter..."
 msgstr "過濾器..."
 
-# src/main.c:1258
-# src/main.c:1282
 #: src/main.c:1267 src/main.c:1291
 msgid "&Network link..."
 msgstr "網路連結..."
 
-# src/main.c:1259
-# src/main.c:1283
 #: src/main.c:1268 src/main.c:1292
 msgid "FT&P link..."
 msgstr "檔案傳輸連結..."
 
-# src/main.c:1261
-# src/main.c:1285
 #: src/main.c:1270 src/main.c:1294
 msgid "SM&B link..."
 msgstr "SMB 連結..."
 
-# src/main.c:1266
-# src/main.c:1290
 #: src/main.c:1275 src/main.c:1299
 msgid "&Drive...       M-d"
 msgstr "磁碟...          M-d"
 
-# src/main.c:1268
-# src/main.c:1292
 #: src/main.c:1277 src/main.c:1301
 msgid "&Rescan         C-r"
 msgstr "重新讀取         C-r"
 
-# src/main.c:1297
 #: src/main.c:1305
 msgid "&User menu          F2"
 msgstr "使用者選單            F2"
 
-# src/main.c:1298
 #: src/main.c:1306
 msgid "&View               F3"
 msgstr "檢視                 F3"
 
-# src/main.c:1299
 #: src/main.c:1307
 msgid "Vie&w file...         "
 msgstr "檢視檔案...             "
 
-# src/main.c:1300
 #: src/main.c:1308
 msgid "&Filtered view     M-!"
 msgstr "檢視前先過濾         M-!"
 
-# src/main.c:1301
 #: src/main.c:1309
 msgid "&Edit               F4"
 msgstr "編輯                 F4"
 
-# src/main.c:1302
 #: src/main.c:1310
 msgid "&Copy               F5"
 msgstr "複製                 F5"
 
-# src/main.c:1303
 #: src/main.c:1311
 msgid "c&Hmod           C-x c"
 msgstr "改變檔案模式       C-x c"
 
-# src/main.c:1305
 #: src/main.c:1313
 msgid "&Link            C-x l"
 msgstr "連結              C-x l"
 
-# src/main.c:1306
 #: src/main.c:1314
 msgid "&SymLink         C-x s"
 msgstr "符號連結          C-x s"
 
-# src/main.c:1307
 #: src/main.c:1315
 msgid "edit s&Ymlink  C-x C-s"
 msgstr "編輯符號連結     C-x C-s"
 
-# src/main.c:1308
 #: src/main.c:1316
 msgid "ch&Own           C-x o"
 msgstr "改變擁有狀態       C-x o"
 
-# src/main.c:1309
 #: src/main.c:1317
 msgid "&Advanced chown       "
 msgstr "進階的改變擁有狀態       "
 
-# src/main.c:1311
 #: src/main.c:1319
 msgid "&Rename/Move        F6"
 msgstr "更改名稱/搬移         F6"
 
-# src/main.c:1312
 #: src/main.c:1320
 msgid "&Mkdir              F7"
 msgstr "製造目錄              F7"
 
-# src/main.c:1313
 #: src/main.c:1321
 msgid "&Delete             F8"
 msgstr "刪除                 F8"
 
-# src/main.c:1314
 #: src/main.c:1322
 msgid "&Quick cd          M-c"
 msgstr "快速改變目錄         M-c"
 
-# src/main.c:1316
 #: src/main.c:1324
 msgid "select &Group      M-+"
 msgstr "選取群組             M-+"
 
-# src/main.c:1317
 #: src/main.c:1325
 msgid "u&Nselect group    M-\\"
 msgstr "取消選取群組         M-\\"
 
-# src/main.c:1318
 #: src/main.c:1326
 msgid "reverse selec&Tion M-*"
 msgstr "反向選取            M-*"
 
-# src/main.c:1320
 #: src/main.c:1328
 msgid "e&Xit              F10"
 msgstr "離開                F10"
 
-# src/main.c:1331
 #. I know, I'm lazy, but the tree widget when it's not running
 #. * as a panel still has some problems, I have not yet finished
 #. * the WTree widget port, sorry.
@@ -6641,159 +5097,126 @@ msgstr "離開                F10"
 msgid "&Directory tree"
 msgstr "目錄樹"
 
-# src/main.c:1333
 #: src/main.c:1338
 msgid "&Find file            M-?"
 msgstr "尋找檔案               M-?"
 
-# src/main.c:1334
 #: src/main.c:1339
 msgid "s&Wap panels          C-u"
 msgstr "調換面板               C-u"
 
-# src/main.c:1335
 #: src/main.c:1340
 msgid "switch &Panels on/off C-o"
 msgstr "切換面板開關            C-o"
 
-# src/main.c:1336
 #: src/main.c:1341
 msgid "&Compare directories  C-x d"
 msgstr "比較目錄               C-x d"
 
-# src/main.c:1337
 #: src/main.c:1342
 msgid "e&Xternal panelize    C-x !"
 msgstr "外部面板化              C-x !"
 
-# src/main.c:1338
 #: src/main.c:1343
 msgid "show directory s&Izes"
 msgstr "顯示目錄大小"
 
-# src/main.c:1340
 #: src/main.c:1345
 msgid "command &History"
 msgstr "指令歷史紀錄"
 
-# src/main.c:1341
 #: src/main.c:1346
 msgid "di&Rectory hotlist    C-\\"
 msgstr "目錄熱門列表            C-\\"
 
-# src/main.c:1343
 #: src/main.c:1348
 msgid "&Active VFS list      C-x a"
 msgstr "啟動的虛擬檔案系統列表    C-x a"
 
-# src/main.c:1344
 #: src/main.c:1349
 msgid "Fr&ee VFSs now"
 msgstr "立刻釋放虛擬檔案系統"
 
-# src/main.c:1347
 #: src/main.c:1352
 msgid "&Background jobs      C-x j"
 msgstr "背景工作               C-x j"
 
-# src/main.c:1351
 #: src/main.c:1356
 msgid "&Undelete files (ext2fs only)"
 msgstr "復原檔案 (只能用在 ext2fs 上面)"
 
-# src/main.c:1354
 #: src/main.c:1359
 msgid "&Listing format edit"
 msgstr "編輯列表格式"
 
-# src/main.c:1359
 #: src/main.c:1364
 msgid "&Extension file edit"
 msgstr "編輯擴充檔"
 
-# src/main.c:1360
 #: src/main.c:1365
 msgid "&Menu file edit"
 msgstr "編輯選單檔"
 
-# src/main.c:1362
 #: src/main.c:1367
 msgid "Menu edi&Tor edit"
 msgstr "選單檔編輯器編輯(&T)"
 
-# src/main.c:1368
 #: src/main.c:1373
 msgid "&Configuration..."
 msgstr "設定..."
 
-# src/main.c:1370
 #: src/main.c:1375
 msgid "c&Onfirmation..."
 msgstr "確認..."
 
-# src/main.c:1371
 #: src/main.c:1376
 msgid "&Display bits..."
 msgstr "顯示位元數..."
 
-# src/main.c:1373
 #: src/main.c:1378
 msgid "learn &Keys..."
 msgstr "認識按鍵..."
 
-# src/main.c:1376
 #: src/main.c:1381
 msgid "&Virtual FS..."
 msgstr "虛擬檔案系統..."
 
-# src/main.c:1379
 #: src/main.c:1384
 msgid "&Save setup"
 msgstr "儲存設定"
 
-# src/main.c:1397
 #: src/main.c:1394
 msgid " &Above "
 msgstr " 上方 "
 
-# src/main.c:1395
-# src/main.c:1397
 #: src/main.c:1394
 msgid " &Left "
 msgstr " 左方 "
 
-# src/main.c:1400
 #: src/main.c:1396
 msgid " &File "
 msgstr " 檔案 "
 
-# src/main.c:1401
 #: src/main.c:1397
 msgid " &Command "
 msgstr "指令 "
 
-# src/main.c:1402
 #: src/main.c:1398
 msgid " &Options "
 msgstr " 選項 "
 
-# src/main.c:1406
 #: src/main.c:1399
 msgid " &Below "
 msgstr " 下方 "
 
-# src/main.c:1404
-# src/main.c:1406
 #: src/main.c:1399
 msgid " &Right "
 msgstr " 右方 "
 
-# src/main.c:1461
 #: src/main.c:1448
 msgid " Information "
 msgstr " 訊息 "
 
-# src/main.c:1462
 #: src/main.c:1449
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
@@ -6806,17 +5229,14 @@ msgstr ""
 " 自行手動重新載入目錄內容，請參考 man  \n"
 " page 以獲得詳細資訊。             "
 
-# src/main.c:1943
 #: src/main.c:1934
 msgid "Thank you for using GNU Midnight Commander"
 msgstr "感謝您使用 GNU Midnight Commander"
 
-# src/main.c:2376
 #: src/main.c:2373
 msgid "The TERM environment variable is unset!\n"
 msgstr "環境變數 TERM 並未設定！ \n"
 
-# src/main.c:2483
 #: src/main.c:2486
 msgid ""
 "Usage is:\n"
@@ -6829,22 +5249,18 @@ msgstr ""
 "mc [選項標籤] [路徑] [另一個路徑]\n"
 "\n"
 
-# src/main.c:2486
 #: src/main.c:2489
 msgid "-a, --stickchars   Force use of +, -, | for line drawing.\n"
 msgstr "-a, --stickchars   強制使用 +, -, | 來畫線.\n"
 
-# src/main.c:2488
 #: src/main.c:2491
 msgid "-b, --nocolor      Force black and white display.\n"
 msgstr "-b, --nocolor      強制黑白顯示.\n"
 
-# src/main.c:2490
 #: src/main.c:2493
 msgid "-B, --background   [DEVEL-ONLY: Debug the background code]\n"
 msgstr "-B, --background   [僅供發展使用: 背景除錯]\n"
 
-# src/main.c:2492
 #: src/main.c:2495
 msgid ""
 "-c, --color        Force color mode.\n"
@@ -6855,12 +5271,10 @@ msgstr ""
 "-C, --colors       指定顏色 (使用 --help-colors 以取得列表).\n"
 "-d, --nomouse      關閉滑鼠支援.\n"
 
-# src/main.c:2496
 #: src/main.c:2499
 msgid "-e, --edit         Startup the internal editor.\n"
 msgstr "-e, --edit         啟動內部編輯器.\n"
 
-# src/main.c:2498
 #: src/main.c:2501
 msgid ""
 "-f, --libdir       Print configured paths.\n"
@@ -6874,17 +5288,14 @@ msgstr ""
 "-k, --resetsoft    重設軟鍵 (僅供 HP 終端機使用) 到 terminfo/termcap\n"
 "                   預設值.\n"
 
-# src/main.c:2503
 #: src/main.c:2506
 msgid "-l, --ftplog file  Log ftpfs commands to the file.\n"
 msgstr "-l, --ftplog file  將 ftpfs 指令存檔.\n"
 
-# src/main.c:2506
 #: src/main.c:2509
 msgid "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
 msgstr "-M, --memory file  [僅供發展使用: 紀錄 MAD 訊息到檔案中.]\n"
 
-# src/main.c:2508
 #: src/main.c:2511
 msgid ""
 "-P, --printwd      At exit, print the last working directory.\n"
@@ -6893,18 +5304,15 @@ msgstr ""
 "-P, --printwd      離開時印出最後的工作路徑.\n"
 "-s, --slow         關閉冗長操作 (供慢速終端機使用).\n"
 
-# src/main.c:2511
 #: src/main.c:2514
 msgid "-t, --termcap      Activate support for the TERMCAP variable.\n"
 msgstr "-t, --termcap      啟動對 TERMCAP 變數的支援.\n"
 
-# src/main.c:2514
 #: src/main.c:2517
 msgid ""
 "-S, --createcmdile Create command file to set default directory upon exit.\n"
 msgstr "-S, --createcmdile 建立指令檔案以設定離開時的預設路徑.\n"
 
-# src/main.c:2517
 #: src/main.c:2520
 msgid ""
 "-u, --nosubshell   Disable the concurrent subshell mode.\n"
@@ -6915,7 +5323,6 @@ msgstr ""
 "-U, --subshell     強制次殼層模式.\n"
 "-r, --forceexec    強制次殼層執行.\n"
 
-# src/main.c:2521
 #: src/main.c:2524
 msgid ""
 "-v, --view fname   Start up into the viewer mode.\n"
@@ -6928,12 +5335,10 @@ msgstr ""
 "-x, --xterm        強制 xterm 滑鼠支援與螢幕保護/回復.\n"
 "+number            在 'mcedit' 中使用行號.\n"
 
-# src/main.c:2526
 #: src/main.c:2529
 msgid "-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
 msgstr "-X, --dbgsubshell  [僅供發展使用: 對次殼層除錯].\n"
 
-# src/main.c:2528
 #: src/main.c:2531
 msgid ""
 "\n"
@@ -6944,7 +5349,6 @@ msgstr ""
 "請將臭蟲回報 (包含 `mc -V' 的輸出)\n"
 "給 mc-devel@gnome.org\n"
 
-# src/main.c:2544
 #: src/main.c:2546
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -7025,97 +5429,78 @@ msgstr "紀錄 FTP 對話框到特定檔案"
 msgid "Obsolete"
 msgstr "過時的"
 
-# src/main.c:2719
 #: src/main.c:2706
 msgid "Requests to run in black and white"
 msgstr "要求在黑白模式下執行"
 
-# src/main.c:2721
 #: src/main.c:2708
 msgid "Disable mouse support in text version"
 msgstr "文字模式下不使用滑鼠支援"
 
-# src/main.c:2724
 #: src/main.c:2711
 msgid "Disables subshell support"
 msgstr "不支援使用次殼層 (subshell)"
 
-# src/main.c:2728
 #: src/main.c:2715
 msgid "Prints working directory at program exit"
 msgstr "程式結束時印出當前目錄"
 
-# src/main.c:2730
 #: src/main.c:2717
 msgid "Resets soft keys on HP terminals"
 msgstr "在 HP 終端機上重設軟鍵 (soft keys)"
 
-# src/main.c:2732
 #: src/main.c:2719
 msgid "To run on slow terminals"
 msgstr "於慢速的終端機上執行"
 
-# src/main.c:2735
 #: src/main.c:2722
 msgid "Use stickchars to draw"
 msgstr "使用stickchars繪製"
 
-# src/main.c:2739
 #: src/main.c:2726
 msgid "Enables subshell support (default)"
 msgstr "支援使用次殼層 (預設值)"
 
-# src/main.c:2744
 #: src/main.c:2731
 msgid "Tries to use termcap instead of terminfo"
 msgstr "試著使用 termcap 來代替 terminfo"
 
-# src/main.c:2748
 #: src/main.c:2735
 msgid "Displays the current version"
 msgstr "顯示目前的版本"
 
-# src/main.c:2750
 #: src/main.c:2737
 msgid "Launches the file viewer on a file"
 msgstr "對某個檔案執行檔案檢視程式"
 
-# src/main.c:2752
 #: src/main.c:2739
 msgid "Forces xterm features"
 msgstr "強迫使用 xterm 特性"
 
-# src/main.c:2754
 #: src/main.c:2741
 msgid "Geometry for the window"
 msgstr "視窗的位置"
 
-# src/main.c:2754
 #: src/main.c:2741
 msgid "GEOMETRY"
 msgstr "位置"
 
-# src/main.c:2755
 #: src/main.c:2742
 msgid "No windows opened at startup"
 msgstr "剛啟動時不開啟任何視窗"
 
-# src/main.c:2756
 #: src/main.c:2743
 msgid "No desktop icons"
 msgstr "沒有桌面圖示"
 
-# src/main.c:2757
 #: src/main.c:2744
 msgid "Look more like traditional gmc"
 msgstr "看起來更像是傳統的 gmc"
 
-# src/main.c:2759
 #: src/main.c:2746
 msgid "Display the directory that holds the .links startup files and exit"
 msgstr "顯示存放 .links 啟動檔的目錄後離開"
 
-# src/main.c:3077
 #: src/main.c:3069
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
@@ -7124,12 +5509,10 @@ msgstr ""
 "無法開啟終端機連線，您不能用 -P 選項來執行 mc。 \n"
 "在某些系統上您可能需要執行 # `which mc`\n"
 
-# src/main.c:3155
 #: src/main.c:3156
 msgid " Notice "
 msgstr " 注意 "
 
-# src/main.c:3156
 #: src/main.c:3157
 msgid ""
 " The Midnight Commander configuration files \n"
@@ -7140,298 +5523,227 @@ msgstr ""
 " 設定檔已經改放到\n"
 " ~/.mc 目錄底下了。\n"
 
-# src/option.c:74
 #: src/option.c:72
 msgid "safe de&Lete"
 msgstr "安全的刪除 (&L)"
 
-# src/option.c:75
 #: src/option.c:73
 msgid "cd follows lin&Ks"
 msgstr "變更目錄時跟隨連結 (&K)"
 
-# src/option.c:76
 #: src/option.c:74
 msgid "advanced cho&Wn"
 msgstr "進階的改變擁有狀態"
 
-# src/option.c:77
 #: src/option.c:75
 msgid "l&Ynx-like motion"
 msgstr "類似 lynx 的移動方式"
 
-# src/option.c:81
 #: src/option.c:76
 msgid "rotatin&G dash"
 msgstr "旋轉的斜線"
 
-# src/option.c:83
 #: src/option.c:77
 msgid "co&Mplete: show all"
 msgstr "完成： 顯示全部"
 
-# src/option.c:84
 #: src/option.c:78
 msgid "&Use internal view"
 msgstr "使用內部檢視"
 
-# src/option.c:85
 #: src/option.c:79
 msgid "use internal ed&It"
 msgstr "使用內部編輯"
 
-# src/option.c:86
 #: src/option.c:80
 msgid "auto m&Enus"
 msgstr "自動選單"
 
-# src/option.c:87
 #: src/option.c:81
 msgid "&Auto save setup"
 msgstr "自動儲存設定"
 
-# src/option.c:88
 #: src/option.c:82
 msgid "shell &Patterns"
 msgstr "系統殼萬用字元"
 
-# src/option.c:89
 #: src/option.c:83
 msgid "Compute &Totals"
 msgstr "計算總值"
 
-# src/option.c:90
 #: src/option.c:84
 msgid "&Verbose operation"
 msgstr "詳細的操作過程"
 
-# src/option.c:91
 #: src/option.c:85
 msgid "&Fast dir reload"
 msgstr "快速目錄重載"
 
-# src/option.c:92
 #: src/option.c:86
 msgid "mi&X all files"
 msgstr "所有檔案混合顯示"
 
-# src/option.c:93
 #: src/option.c:87
 msgid "&Drop down menus"
 msgstr "下拉選單"
 
-# src/option.c:94
 #: src/option.c:88
 msgid "ma&Rk moves down"
 msgstr "標示下移"
 
-# src/option.c:95
 #: src/option.c:89
 msgid "show &Hidden files"
 msgstr "顯示隱藏檔"
 
-# src/option.c:96
 #: src/option.c:90
 msgid "show &Backup files"
 msgstr "顯示備份檔"
 
-# src/option.c:103
 #: src/option.c:97
 msgid "&Never"
 msgstr "從不"
 
-# src/option.c:104
 #: src/option.c:98
 msgid "on dumb &Terminals"
 msgstr "於笨蛋終端機上"
 
-# src/option.c:105
 #: src/option.c:99
 msgid "alwa&Ys"
 msgstr "永遠"
 
-# src/option.c:153
 #. Similar code is in layout.c (init_layout())
 #: src/option.c:145
 msgid " Configure options "
 msgstr " 設定選項 "
 
-# src/option.c:154
 #: src/option.c:146
 msgid " Panel options "
 msgstr " 面板選項 "
 
-# src/option.c:155
 #: src/option.c:147
 msgid " Pause after run... "
 msgstr " 執行後暫停... "
 
-# src/option.c:207
 #: src/option.c:199
 msgid "Configure options"
 msgstr "設定選項"
 
-# src/panelize.c:87
 #: src/panelize.c:84
 msgid "&Add new"
 msgstr "新增"
 
-# src/panelize.c:99
 #: src/panelize.c:100
 msgid " External panelize "
 msgstr " 外部面板化 "
 
-# src/panelize.c:194
-# src/panelize.c:458
 #: src/panelize.c:191 src/panelize.c:457
 msgid "External panelize"
 msgstr "外部面板化"
 
-# gnome/gprop.c:109
-# src/panelize.c:205
 #: src/panelize.c:201
 msgid "Command"
 msgstr "指令"
 
-# src/panelize.c:219
-# src/panelize.c:276
-# src/panelize.c:347
-# src/panelize.c:368
 #: src/panelize.c:215 src/panelize.c:274 src/panelize.c:346 src/panelize.c:367
 msgid "Other command"
 msgstr "其它指令"
 
-# src/panelize.c:260
 #: src/panelize.c:258
 msgid " Add to external panelize "
 msgstr " 加到外部面板化中 "
 
-# src/panelize.c:261
 #: src/panelize.c:259
 msgid " Enter command label: "
 msgstr " 請輸入指令標籤： "
 
-# src/achown.c:666
-# src/achown.c:670
-# src/chmod.c:320
-# src/chmod.c:324
-# src/chown.c:260
-# src/chown.c:264
-# src/panelize.c:300
-# src/user.c:671
 #: src/panelize.c:298 src/user.c:671
 msgid " Oops... "
 msgstr " 糟了... "
 
-# src/panelize.c:301
 #: src/panelize.c:299
 msgid " I can't run external panelize while logged on a non local directory "
 msgstr " 登入在非本地端檔案系統時無法執行外部面板化 "
 
-# src/panelize.c:351
 #: src/panelize.c:350
 msgid "Find *.orig after patching"
 msgstr "在補強後找出 *.orig"
 
-# src/panelize.c:352
 #: src/panelize.c:351
 msgid "Find SUID and SGID programs"
 msgstr "找出 SUID 與 SGID 的程式"
 
-# src/panelize.c:403
 #: src/panelize.c:402
 msgid "Cannot invoke command."
 msgstr "無法呼叫指令。"
 
-# src/panelize.c:458
 #: src/panelize.c:457
 msgid "Pipe close failed"
 msgstr "管線關閉失敗"
 
-# src/popthelp.c:31
 #: src/popthelp.c:31
 msgid "Show this help message"
 msgstr "顯示此說明訊息"
 
-# src/popthelp.c:32
 #: src/popthelp.c:32
 msgid "Display brief usage message"
 msgstr "顯示簡單使用說明"
 
-# src/screen.c:227
 #: src/screen.c:221
 msgid "SUB-DIR"
 msgstr "子目錄"
 
-# src/screen.c:227
 #: src/screen.c:221
 msgid "UP--DIR"
 msgstr "上層目錄"
 
-# src/screen.c:417
 #: src/screen.c:411
 msgid "MTime"
 msgstr "修改時間"
 
-# src/screen.c:418
 #: src/screen.c:412
 msgid "ATime"
 msgstr "存取時間"
 
-# src/screen.c:419
 #: src/screen.c:413
 msgid "CTime"
 msgstr "建立時間"
 
-# src/screen.c:421
 #: src/screen.c:415
 msgid "Perm"
 msgstr "權限"
 
-# src/screen.c:422
 #: src/screen.c:416
 msgid "Nl"
 msgstr "Nl"
 
-# src/screen.c:423
 #: src/screen.c:417
 msgid "Inode"
 msgstr "i 節點"
 
-# src/screen.c:424
 #: src/screen.c:418
 msgid "UID"
 msgstr "UID"
 
-# src/screen.c:425
 #: src/screen.c:419
 msgid "GID"
 msgstr "GID"
 
-# src/screen.c:1322
 #: src/screen.c:1310
 msgid "Unknow tag on display format: "
 msgstr "不明的顯示格式標籤： "
 
-# src/screen.c:1448
 #: src/screen.c:1436
 msgid "User suplied format looks invalid, reverting to default."
 msgstr "使用者提供的格式似乎是錯誤的, 回復到預設值."
 
-# src/screen.c:2114
-# src/screen.c:2161
 #: src/screen.c:2102 src/screen.c:2149
 msgid " Do you really want to execute? "
 msgstr "您確定要執行？ "
 
-# src/screen.c:2125
-# src/screen.c:2175
 #: src/screen.c:2113 src/screen.c:2163
 msgid " No action taken "
 msgstr " 不作任何動作 "
 
-# src/screen.c:2415
-# src/tree.c:866
 #: src/screen.c:2406 src/tree.c:875
 #, c-format
 msgid ""
@@ -7441,16 +5753,10 @@ msgstr ""
 " 無法改變目錄至 \"%s\" \n"
 " %s "
 
-# src/screen.c:2398
-# src/screen.c:2428
-# src/tree.c:1016
 #: src/screen.c:2419 src/tree.c:1025
 msgid "RenMov"
 msgstr "改名/搬移"
 
-# src/screen.c:2399
-# src/screen.c:2429
-# src/tree.c:1020
 #: src/screen.c:2420 src/tree.c:1029
 msgid "Mkdir"
 msgstr "新目錄"
@@ -7490,94 +5796,76 @@ msgstr ""
 "不支援 %dx%d 的螢幕大小。\n"
 "請檢查 TERM 環境變數。\n"
 
-# src/subshell.c:287
 #: src/subshell.c:449
 #, c-format
 msgid "Couldn't open named pipe %s\n"
 msgstr "無法開啟具名管線 %s\n"
 
-# src/subshell.c:705
 #: src/subshell.c:742
 msgid " The shell is still active. Quit anyway? "
 msgstr " 系統殼仍未結束，無論如何都要結束？ "
 
-# src/subshell.c:731
 #: src/subshell.c:768
 msgid " There are stopped jobs."
 msgstr " 還有停止的背景工作未完成。"
 
-# src/subshell.c:732
 #: src/subshell.c:769
 msgid " Quit anyway? "
 msgstr " 無論如何都要結束？ "
 
-# src/subshell.c:785
 #: src/subshell.c:882
 #, c-format
 msgid "Warning: Couldn't change to %s.\n"
 msgstr "警告： 無法改變到 %s.\n"
 
-# src/textconf.c:12
 #: src/textconf.c:12
 msgid "Edition: "
 msgstr "編輯: "
 
-# src/textconf.c:13
 #: src/textconf.c:13
 msgid "text mode"
 msgstr "文字模式"
 
-# src/textconf.c:15
 #: src/textconf.c:15
 msgid " with X11 support to read modifiers"
 msgstr " 使用 X11 支援以讀取變更"
 
-# src/textconf.c:20
 #: src/textconf.c:20
 msgid "Virtual File System: tarfs, extfs"
 msgstr "虛擬檔案系統: tarfs, extfs "
 
-# src/textconf.c:22
 #: src/textconf.c:22
 msgid ", ftpfs"
 msgstr ", ftpfs"
 
-# src/textconf.c:24
 #: src/textconf.c:24
 msgid " (proxies: hsc proxy)"
 msgstr " (proxy: hsc 代理伺服器)"
 
-# src/textconf.c:26
 #: src/textconf.c:26
 msgid ", mcfs"
 msgstr ", mcfs"
 
-# src/textconf.c:28
 #: src/textconf.c:28
 msgid " (with termnet support)"
 msgstr " (使用 termnet 支援)"
 
-# src/textconf.c:31
 #: src/textconf.c:31
 msgid ", smbfs"
 msgstr ", smbfs"
 
-# src/textconf.c:35
 #: src/textconf.c:35
 msgid ", undelfs"
 msgstr ", undelfs"
 
-# src/textconf.c:41
 #: src/textconf.c:41
 msgid "With builtin Editor\n"
 msgstr "使用內建編輯器\n"
 
-# src/textconf.c:47
 #: src/textconf.c:47
 msgid "Using system-installed S-Lang library"
 msgstr "使用已安裝的系統 S-Lang 函式庫"
 
-# src/textconf.c:49
 #: src/textconf.c:49
 msgid "Using S-Lang library"
 msgstr "使用 S-Lang 函式庫"
@@ -7590,42 +5878,34 @@ msgstr "使用 terminfo 資料庫"
 msgid "with termcap database"
 msgstr "使用 termcap 資料庫"
 
-# src/textconf.c:57
 #: src/textconf.c:59
 msgid "with an unknown terminal database"
 msgstr "使用未知的終端機資料庫"
 
-# src/textconf.c:63
 #: src/textconf.c:63
 msgid "Using the ncurses library"
 msgstr "使用 ncurses 函式庫"
 
-# src/textconf.c:65
 #: src/textconf.c:65
 msgid "Using old curses library"
 msgstr "使用舊式 curses 函式庫"
 
-# src/textconf.c:70
 #: src/textconf.c:72
 msgid "With optional subshell support"
 msgstr "選擇性支援 subshell"
 
-# src/textconf.c:70
 #: src/textconf.c:74
 msgid "With subshell support as default"
 msgstr "預設支援 subshell"
 
-# src/textconf.c:80
 #: src/textconf.c:80
 msgid "With support for background operations\n"
 msgstr "支援背景執行程序\n"
 
-# src/textconf.c:84
 #: src/textconf.c:84
 msgid "With mouse support on xterm and Linux console\n"
 msgstr "在 xterm 與主控台支援滑鼠\n"
 
-# src/textconf.c:86
 #: src/textconf.c:86
 msgid "With mouse support on xterm\n"
 msgstr "在 xterm 支援滑鼠\n"
@@ -7634,14 +5914,11 @@ msgstr "在 xterm 支援滑鼠\n"
 msgid "With multiple codepages support\n"
 msgstr "使用多頁碼支援\n"
 
-# gnome/gcmd.c:115
-# gnome/gmc-window.c:68
 #: src/textconf.c:101
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-# src/tree.c:192
 #: src/tree.c:194
 #, c-format
 msgid ""
@@ -7651,19 +5928,16 @@ msgstr ""
 "無法開啟檔案 %s 來寫入資料：\n"
 "%s\n"
 
-# src/tree.c:637
 #: src/tree.c:638
 #, c-format
 msgid "Copy \"%s\" directory to:"
 msgstr "複製目錄 \"%s\" 至："
 
-# src/tree.c:675
 #: src/tree.c:679
 #, c-format
 msgid "Move \"%s\" directory to:"
 msgstr "搬移目錄 \"%s\" 至："
 
-# src/tree.c:682
 #: src/tree.c:689
 #, c-format
 msgid ""
@@ -7673,38 +5947,31 @@ msgstr ""
 " 無法 stat 目的地 \n"
 " %s "
 
-# src/tree.c:688
 #: src/tree.c:695
 msgid " The destination isn't a directory "
 msgstr " 所給的目的並不是一個目錄 "
 
-# src/tree.c:744
 #: src/tree.c:753
 #, c-format
 msgid "  Delete %s?  "
 msgstr "  刪除 %s?  "
 
-# src/tree.c:776
 #: src/tree.c:785
 msgid "Static"
 msgstr "靜態"
 
-# src/tree.c:776
 #: src/tree.c:785
 msgid "Dynamc"
 msgstr "動態"
 
-# src/tree.c:1012
 #: src/tree.c:1021
 msgid "Forget"
 msgstr "忽略"
 
-# src/tree.c:1025
 #: src/tree.c:1034
 msgid "Rmdir"
 msgstr "刪目錄"
 
-# src/treestore.c:360
 #: src/treestore.c:361
 #, c-format
 msgid ""
@@ -7714,55 +5981,45 @@ msgstr ""
 "無法寫入到檔案 %s :\n"
 "%s\n"
 
-# src/user.c:137
 #: src/user.c:139
 msgid " Format error on file Extensions File "
 msgstr "現存的檔案中有格式錯誤"
 
-# src/user.c:138
 #: src/user.c:140
 #, c-format
 msgid " The %%var macro has no default "
 msgstr " %%var 巨集沒有預設值 "
 
-# src/user.c:139
 #: src/user.c:141
 #, c-format
 msgid " The %%var macro has no variable "
 msgstr " %%var 巨集沒有變數 "
 
-# src/user.c:273
 #: src/user.c:285
 #, c-format
 msgid " Invalid shell pattern definition \"%c\". "
 msgstr " 無效的系統殼萬用字元定義 \"%c\". "
 
-# src/user.c:426
 #: src/user.c:438
 msgid " Debug "
 msgstr " 除錯 "
 
-# src/user.c:435
 #: src/user.c:447
 msgid " ERROR: "
 msgstr " 錯誤： "
 
-# src/user.c:439
 #: src/user.c:451
 msgid " True:  "
 msgstr " 真的：  "
 
-# src/user.c:441
 #: src/user.c:453
 msgid " False: "
 msgstr " 假的：  "
 
-# src/user.c:647
 #: src/user.c:648
 msgid " Warning -- ignoring file "
 msgstr " 警告 -- 忽略檔案 "
 
-# src/user.c:648
 #: src/user.c:649
 #, c-format
 msgid ""
@@ -7772,53 +6029,42 @@ msgstr ""
 "檔案 %s 的擁有者並不是 root 或您，或者檔案允許任何人寫入；\n"
 "使用這個檔案對您系統的安全造成危害。"
 
-# src/user.c:672
 #: src/user.c:672
 msgid " I can't run programs while logged on a non local directory "
 msgstr " 無法在登入於非本地檔案系統的時候執行程式 "
 
-# src/user.c:770
 #: src/user.c:770
 #, c-format
 msgid " No appropriative entries found in %s "
 msgstr "沒有在 %s 中找到符合的項目"
 
-# src/user.c:776
 #. Create listbox
 #: src/user.c:776
 msgid " User menu "
 msgstr " 使用者選單 "
 
-# src/util.c:232
 #: src/util.c:244
 msgid "name_trunc: too big"
 msgstr "name_trunc: 太大了"
 
-# src/util.c:599
-# src/util.c:624
 #. strftime() format string for recent dates
 #: src/util.c:682 src/util.c:708
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
-# src/util.c:600
-# src/util.c:622
 #. strftime() format string for old dates
 #: src/util.c:683 src/util.c:706
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
-# src/utilunix.c:382
 #: src/utilunix.c:370
 msgid " Pipe failed "
 msgstr " 管線失敗 "
 
-# src/utilunix.c:386
 #: src/utilunix.c:374
 msgid " Dup failed "
 msgstr " 抄寫失敗 "
 
-# src/view.c:403
 #: src/view.c:407
 msgid ""
 "File: \n"
@@ -7829,7 +6075,6 @@ msgstr ""
 "\n"
 "    "
 
-# src/view.c:404
 #: src/view.c:408
 msgid ""
 "\n"
@@ -7840,32 +6085,26 @@ msgstr ""
 "\n"
 "已經被更動過，您要存檔嗎？\n"
 
-# src/view.c:406
 #: src/view.c:410
 msgid " Save changes "
 msgstr " 存檔 "
 
-# src/view.c:448
 #: src/view.c:452
 msgid " Cannot spawn child program "
 msgstr " 無法產生子程式 "
 
-# src/view.c:457
 #: src/view.c:461
 msgid " Empty output from child filter "
 msgstr " 子過濾器的輸出是空的 "
 
-# src/view.c:462
 #: src/view.c:466
 msgid " Could not open file "
 msgstr " 無法開啟檔案 "
 
-# src/view.c:477
 #: src/view.c:481
 msgid " Cannot open file \""
 msgstr " 無法開啟檔案 \""
 
-# src/view.c:484
 #: src/view.c:488
 msgid ""
 " Cannot stat file \n"
@@ -7874,12 +6113,10 @@ msgstr ""
 " 無法 stat 檔案 \n"
 " "
 
-# src/view.c:490
 #: src/view.c:494
 msgid " Cannot view: not a regular file "
 msgstr " 無法檢視：並非一常規檔案 "
 
-# src/view.c:571
 #: src/view.c:574
 #, c-format
 msgid ""
@@ -7889,7 +6126,6 @@ msgstr ""
 " 無法開啟檔案 \"%s\" \n"
 " %s "
 
-# src/view.c:580
 #: src/view.c:583
 #, c-format
 msgid ""
@@ -7899,46 +6135,37 @@ msgstr ""
 " 無法 stat %s \n"
 " %s "
 
-# src/view.c:716
 #: src/view.c:718
 #, c-format
 msgid "File: %s"
 msgstr "檔案： %s"
 
-# src/view.c:730
 #: src/view.c:732
 #, c-format
 msgid "Offset 0x%08x"
 msgstr "偏移值 0x%08x"
 
-# src/view.c:741
 #: src/view.c:743
 msgid "  [grow]"
 msgstr "  [成長] "
 
-# src/view.c:1520
 #: src/view.c:1518
 #, c-format
 msgid "Searching for `%s'"
 msgstr "搜尋 `%s'"
 
-# src/view.c:1627
-# src/view.c:1750
 #: src/view.c:1625 src/view.c:1739
 msgid " Search string not found "
 msgstr " 找不到要搜尋的字串 "
 
-# src/view.c:1789
 #: src/view.c:1727
 msgid "Invalid hex search expression"
 msgstr " 無效的 16 進位搜尋字串 "
 
-# src/view.c:1789
 #: src/view.c:1778
 msgid " Invalid regular expression "
 msgstr " 無效的正規表示式 "
 
-# src/view.c:1913
 #: src/view.c:1900
 #, c-format
 msgid ""
@@ -7948,7 +6175,6 @@ msgstr ""
 " 目前行號是 %d，\n"
 " 請輸入新行號："
 
-# src/view.c:1935
 #: src/view.c:1922
 #, c-format
 msgid ""
@@ -7958,336 +6184,269 @@ msgstr ""
 " 目前行號是 0x%lx，\n"
 " 請輸入新行號："
 
-# src/view.c:1937
 #: src/view.c:1924
 msgid " Goto Address "
 msgstr " 跳至某行 "
 
-# src/view.c:1968
 #: src/view.c:1955
 msgid " Enter regexp:"
 msgstr "輸入正規式："
 
-# src/view.c:2073
 #: src/view.c:2078
 msgid "Ascii"
 msgstr "Ascii"
 
-# src/view.c:2073
 #: src/view.c:2078
 msgid "Hex"
 msgstr "Hex"
 
-# src/view.c:2074
 #: src/view.c:2079
 msgid "Goto"
 msgstr "移至"
 
-# src/view.c:2074
 #: src/view.c:2079
 msgid "Line"
 msgstr "行"
 
-# src/view.c:2077
 #: src/view.c:2082
 msgid "RxSrch"
 msgstr "正規搜尋"
 
-# src/view.c:2080
 #: src/view.c:2085
 msgid "EdText"
 msgstr "編輯文字"
 
-# src/view.c:2080
 #: src/view.c:2085
 msgid "EdHex"
 msgstr "編輯 Hex"
 
-# src/view.c:2082
 #: src/view.c:2087
 msgid "UnWrap"
 msgstr "不換行 "
 
-# src/view.c:2082
 #: src/view.c:2087
 msgid "Wrap"
 msgstr "換行"
 
-# src/view.c:2085
 #: src/view.c:2090
 msgid "HxSrch"
 msgstr "十六進位搜尋"
 
-# src/view.c:2088
 #: src/view.c:2093
 msgid "Raw"
 msgstr "原始"
 
-# src/view.c:2088
 #: src/view.c:2093
 msgid "Parse"
 msgstr "剖析"
 
-# src/view.c:2092
 #: src/view.c:2097
 msgid "Unform"
 msgstr "無格式"
 
-# src/view.c:2092
 #: src/view.c:2097
 msgid "Format"
 msgstr "格式"
 
-# src/widget.c:994
 #: src/widget.c:983
 msgid " History "
 msgstr " 歷史紀錄 "
 
-# src/win.c:224
 #. KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
 #. to define f0 as well. Also, it makes Learn keys a bunch of problems :(
 #: src/win.c:215
 msgid "Function key 1"
 msgstr "功能鍵 1"
 
-# src/win.c:225
 #: src/win.c:216
 msgid "Function key 2"
 msgstr "功能鍵 2"
 
-# src/win.c:226
 #: src/win.c:217
 msgid "Function key 3"
 msgstr "功能鍵 3"
 
-# src/win.c:227
 #: src/win.c:218
 msgid "Function key 4"
 msgstr "功能鍵 4"
 
-# src/win.c:228
 #: src/win.c:219
 msgid "Function key 5"
 msgstr "功能鍵 5"
 
-# src/win.c:229
 #: src/win.c:220
 msgid "Function key 6"
 msgstr "功能鍵 6"
 
-# src/win.c:230
 #: src/win.c:221
 msgid "Function key 7"
 msgstr "功能鍵 7"
 
-# src/win.c:231
 #: src/win.c:222
 msgid "Function key 8"
 msgstr "功能鍵 8"
 
-# src/win.c:232
 #: src/win.c:223
 msgid "Function key 9"
 msgstr "功能鍵 9"
 
-# src/win.c:233
 #: src/win.c:224
 msgid "Function key 10"
 msgstr "功能鍵 10"
 
-# src/win.c:234
 #: src/win.c:225
 msgid "Function key 11"
 msgstr "功能鍵 11"
 
-# src/win.c:235
 #: src/win.c:226
 msgid "Function key 12"
 msgstr "功能鍵 12"
 
-# src/win.c:236
 #: src/win.c:227
 msgid "Function key 13"
 msgstr "功能鍵 13"
 
-# src/win.c:237
 #: src/win.c:228
 msgid "Function key 14"
 msgstr "功能鍵 14"
 
-# src/win.c:238
 #: src/win.c:229
 msgid "Function key 15"
 msgstr "功能鍵 15"
 
-# src/win.c:239
 #: src/win.c:230
 msgid "Function key 16"
 msgstr "功能鍵 16"
 
-# src/win.c:240
 #: src/win.c:231
 msgid "Function key 17"
 msgstr "功能鍵 17"
 
-# src/win.c:241
 #: src/win.c:232
 msgid "Function key 18"
 msgstr "功能鍵 18"
 
-# src/win.c:242
 #: src/win.c:233
 msgid "Function key 19"
 msgstr "功能鍵 19"
 
-# src/win.c:243
 #: src/win.c:234
 msgid "Function key 20"
 msgstr "功能鍵 20"
 
-# src/win.c:244
 #: src/win.c:235
 msgid "Backspace key"
 msgstr "Backspace 鍵"
 
-# src/win.c:245
 #: src/win.c:236
 msgid "End key"
 msgstr "End 鍵"
 
-# src/win.c:246
 #: src/win.c:237
 msgid "Up arrow key"
 msgstr "向上鍵"
 
-# src/win.c:247
 #: src/win.c:238
 msgid "Down arrow key"
 msgstr "向下鍵"
 
-# src/win.c:248
 #: src/win.c:239
 msgid "Left arrow key"
 msgstr "向左鍵"
 
-# src/win.c:249
 #: src/win.c:240
 msgid "Right arrow key"
 msgstr "向右鍵"
 
-# src/win.c:250
 #: src/win.c:241
 msgid "Home key"
 msgstr "Home 鍵"
 
-# src/win.c:251
 #: src/win.c:242
 msgid "Page Down key"
 msgstr "Page Down 鍵"
 
-# src/win.c:252
 #: src/win.c:243
 msgid "Page Up key"
 msgstr "Page Up 鍵"
 
-# src/win.c:253
 #: src/win.c:244
 msgid "Insert key"
 msgstr "Insert 鍵"
 
-# src/win.c:254
 #: src/win.c:245
 msgid "Delete key"
 msgstr "Delete 鍵"
 
-# src/win.c:255
 #: src/win.c:246
 msgid "Completion/M-tab"
 msgstr "Completion/M-tab 鍵"
 
-# src/win.c:256
 #: src/win.c:247
 msgid "+ on keypad"
 msgstr "數字區的 +"
 
-# src/win.c:257
 #: src/win.c:248
 msgid "- on keypad"
 msgstr "數字區的 -"
 
-# src/win.c:258
 #: src/win.c:249
 msgid "* on keypad"
 msgstr "數字區的 *"
 
-# src/win.c:260
 #. From here on, these won't be shown in Learn keys (no space)
 #: src/win.c:251
 msgid "Left arrow keypad"
 msgstr "數字區的向左鍵"
 
-# src/win.c:261
 #: src/win.c:252
 msgid "Right arrow keypad"
 msgstr "數字區的向右鍵"
 
-# src/win.c:262
 #: src/win.c:253
 msgid "Up arrow keypad"
 msgstr "數字區的向上鍵"
 
-# src/win.c:263
 #: src/win.c:254
 msgid "Down arrow keypad"
 msgstr "數字區的向下鍵"
 
-# src/win.c:264
 #: src/win.c:255
 msgid "Home on keypad"
 msgstr "數字區的 Home 鍵"
 
-# src/win.c:265
 #: src/win.c:256
 msgid "End on keypad"
 msgstr "數字區的 End 鍵"
 
-# src/win.c:266
 #: src/win.c:257
 msgid "Page Down keypad"
 msgstr "數字區的 Page Down 鍵"
 
-# src/win.c:267
 #: src/win.c:258
 msgid "Page Up keypad"
 msgstr "數字區的 Page Up鍵"
 
-# src/win.c:268
 #: src/win.c:259
 msgid "Insert on keypad"
 msgstr "數字區的 Insert 鍵"
 
-# src/win.c:269
 #: src/win.c:260
 msgid "Delete on keypad"
 msgstr "數字區的 Del 鍵"
 
-# src/win.c:270
 #: src/win.c:261
 msgid "Enter on keypad"
 msgstr "數字區的 Enter 鍵"
 
-# src/win.c:271
 #: src/win.c:262
 msgid "Slash on keypad"
 msgstr "數字區的 / 鍵"
 
-# src/win.c:272
 #: src/win.c:263
 msgid "NumLock on keypad"
 msgstr "數字區的 NumLock 鍵"
 
-# vfs/cpio.c:141
-# vfs/cpio.c:157
 #: vfs/cpio.c:142 vfs/cpio.c:158
 #, c-format
 msgid ""
@@ -8297,7 +6456,6 @@ msgstr ""
 "無法開啟 cpio 檔案集\n"
 "%s"
 
-# vfs/cpio.c:224
 #: vfs/cpio.c:224
 #, c-format
 msgid ""
@@ -8307,8 +6465,6 @@ msgstr ""
 "cpio 檔案集的結尾過早出現\n"
 "%s"
 
-# vfs/cpio.c:309
-# vfs/cpio.c:358
 #: vfs/cpio.c:309 vfs/cpio.c:358
 #, c-format
 msgid ""
@@ -8318,7 +6474,6 @@ msgstr ""
 "發現不完整的 cpio 標頭\n"
 "%s"
 
-# vfs/cpio.c:427
 #: vfs/cpio.c:427
 #, c-format
 msgid ""
@@ -8332,7 +6487,6 @@ msgstr ""
 "在 cpio 檔案集\n"
 "%s"
 
-# vfs/cpio.c:450
 #. In case entry is already there
 #. This shouldn't happen! (well, it can happen if there is a record for a
 #. file and than a record for a directory it is in; cpio would die with
@@ -8343,7 +6497,6 @@ msgstr ""
 msgid "%s contains duplicit entries! Skipping!"
 msgstr "%s 有重複的進入點! 放棄中!"
 
-# vfs/cpio.c:517
 #: vfs/cpio.c:517
 #, c-format
 msgid ""
@@ -8353,23 +6506,19 @@ msgstr ""
 "未預期的檔案結束\n"
 "%s"
 
-# vfs/direntry.c:301
 #: vfs/direntry.c:303
 #, c-format
 msgid "Dir cache expired for %s"
 msgstr "%s 的路徑快取過期"
 
-# vfs/direntry.c:812
 #: vfs/direntry.c:820
 msgid "Starting linear transfer..."
 msgstr "開始線性傳輸...."
 
-# vfs/direntry.c:957
 #: vfs/direntry.c:964
 msgid "Getting file"
 msgstr "取得檔案中"
 
-# vfs/extfs.c:270
 #: vfs/extfs.c:298
 #, c-format
 msgid ""
@@ -8379,276 +6528,222 @@ msgstr ""
 "無法開啟 %s 檔案集\n"
 "%s"
 
-# vfs/extfs.c:302
-# vfs/extfs.c:322
 #: vfs/extfs.c:330 vfs/extfs.c:349
 msgid "Inconsistent extfs archive"
 msgstr "不完整的 extfs 檔案集"
 
-# vfs/fish.c:140
 #: vfs/fish.c:142
 #, c-format
 msgid "fish: Disconnecting from %s"
 msgstr "fish: 結束至 %s 的連線"
 
-# vfs/fish.c:218
 #: vfs/fish.c:221
 msgid "fish: Waiting for initial line..."
 msgstr "fish: 等待起始化訊息"
 
-# vfs/fish.c:228
 #: vfs/fish.c:231
 msgid "Sorry, we can not do password authenticated connections for now."
 msgstr "不好意思，目前無法進行經過密碼認證的連線。"
 
-# vfs/fish.c:233
 #: vfs/fish.c:236
 msgid " fish: Password required for "
 msgstr " fish: 必需有密碼 "
 
-# vfs/fish.c:242
 #: vfs/fish.c:245
 msgid "fish: Sending password..."
 msgstr "fish: 正在送出登入密碼"
 
-# vfs/fish.c:248
 #: vfs/fish.c:251
 msgid "fish: Sending initial line..."
 msgstr "fish: 送出起始化訊息"
 
-# vfs/fish.c:252
 #: vfs/fish.c:261
 msgid "fish: Handshaking version..."
 msgstr "fish: 交握版本"
 
-# vfs/fish.c:256
 #: vfs/fish.c:265
 msgid "fish: Setting up current directory..."
 msgstr "fish: 設定讀取目錄內容"
 
-# vfs/fish.c:258
 #: vfs/fish.c:267
 #, c-format
 msgid "fish: Connected, home %s."
 msgstr "fisk: 連結至 %s"
 
-# vfs/fish.c:347
 #: vfs/fish.c:356
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr "fisk: 讀取目錄 %s..."
 
-# vfs/fish.c:451
 #: vfs/fish.c:460
 msgid "fish: failed"
 msgstr "fish: 失敗"
 
-# vfs/fish.c:471
 #. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
 #: vfs/fish.c:480
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr "fish: 儲存%s: 送出命令"
 
-# vfs/fish.c:496
 #: vfs/fish.c:505
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: 本地端讀取錯誤, 沒有送出"
 
-# vfs/fish.c:508
 #: vfs/fish.c:517
 #, c-format
 msgid "fish: storing %s %d (%d)"
 msgstr "fish: 儲存%s %d(%d)"
 
-# vfs/fish.c:509
 #: vfs/fish.c:518
 msgid "zeros"
 msgstr "0"
 
-# vfs/fish.c:556
 #: vfs/fish.c:565
 msgid "Aborting transfer..."
 msgstr "放棄傳輸...."
 
-# vfs/fish.c:565
 #: vfs/fish.c:574
 msgid "Error reported after abort."
 msgstr "放棄後回報錯誤"
 
-# vfs/fish.c:567
 #: vfs/fish.c:576
 msgid "Aborted transfer would be successful."
 msgstr "將成功放棄傳輸"
 
-# vfs/ftpfs.c:313
 #: vfs/ftpfs.c:313
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: 結束至 %s 的連線"
 
-# vfs/ftpfs.c:371
 #: vfs/ftpfs.c:371
 msgid " FTP: Password required for "
 msgstr " FTP: 必需有密碼 -> "
 
-# vfs/ftpfs.c:400
 #: vfs/ftpfs.c:400
 msgid " Proxy: Password required for "
 msgstr " Proxy: 必需有密碼 ->"
 
-# vfs/ftpfs.c:426
 #: vfs/ftpfs.c:426
 msgid "ftpfs: sending proxy login name"
 msgstr "ftpfs: 正在送出代理伺服器登入名稱"
 
-# vfs/ftpfs.c:430
 #: vfs/ftpfs.c:430
 msgid "ftpfs: sending proxy user password"
 msgstr "ftpfs: 正在送出代理伺服器密碼"
 
-# vfs/ftpfs.c:434
 #: vfs/ftpfs.c:434
 msgid "ftpfs: proxy authentication succeeded"
 msgstr "ftpfs: 登入代理伺服器成功"
 
-# vfs/ftpfs.c:438
 #: vfs/ftpfs.c:438
 #, c-format
 msgid "ftpfs: connected to %s"
 msgstr "ftpfs: 連結至 %s"
 
-# vfs/ftpfs.c:455
 #: vfs/ftpfs.c:455
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: 正在送出登入名稱"
 
-# vfs/ftpfs.c:460
 #: vfs/ftpfs.c:460
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: 正在送出登入密碼"
 
-# vfs/ftpfs.c:465
 #: vfs/ftpfs.c:465
 msgid "ftpfs: logged in"
 msgstr "ftpfs: 登入"
 
-# vfs/ftpfs.c:480
 #: vfs/ftpfs.c:480
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: 使用者 %s 登入錯誤"
 
-# vfs/ftpfs.c:512
 #: vfs/ftpfs.c:512
 #, c-format
 msgid " Could not set source routing (%s)"
 msgstr " 無法設定來源路由 (%s)"
 
-# vfs/ftpfs.c:638
 #: vfs/ftpfs.c:637
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: 無效的主機名稱。"
 
-# vfs/ftpfs.c:658
 #: vfs/ftpfs.c:657
 msgid "ftpfs: Invalid host address."
 msgstr "ftpfs: 無效的主機位址。"
 
-# vfs/ftpfs.c:681
 #: vfs/ftpfs.c:680
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: 建立至 %s 的連線"
 
-# vfs/ftpfs.c:691
 #: vfs/ftpfs.c:690
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: 使用者中斷連線"
 
-# vfs/ftpfs.c:693
 #: vfs/ftpfs.c:692
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: 連結到伺服器發生錯誤: %s"
 
-# vfs/ftpfs.c:734
 #: vfs/ftpfs.c:733
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "等候重試... %d (Control-C 結束)"
 
-# vfs/ftpfs.c:920
 #: vfs/ftpfs.c:919
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: 無法設定 passive mode"
 
-# vfs/ftpfs.c:996
 #: vfs/ftpfs.c:995
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: 傳輸中斷"
 
-# vfs/ftpfs.c:998
 #: vfs/ftpfs.c:997
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: 造成中斷的錯誤: %s"
 
-# vfs/ftpfs.c:1003
 #: vfs/ftpfs.c:1002
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: 中斷失敗"
 
-# vfs/ftpfs.c:1092
-# vfs/ftpfs.c:1191
 #: vfs/ftpfs.c:1091 vfs/ftpfs.c:1193
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: 改變目錄失敗"
 
-# vfs/ftpfs.c:1102
-# vfs/ftpfs.c:1109
 #: vfs/ftpfs.c:1101 vfs/ftpfs.c:1108
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "FTPFS: 無法解讀符號連結"
 
-# vfs/ftpfs.c:1160
 #: vfs/ftpfs.c:1159
 msgid "Resolving symlink..."
 msgstr "解讀符號連結..."
 
-# vfs/ftpfs.c:1179
 #: vfs/ftpfs.c:1181
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: 讀取 FTP 目錄 %s... %s%s"
 
-# vfs/ftpfs.c:1180
 #: vfs/ftpfs.c:1182
 msgid "(strict rfc959)"
 msgstr "(嚴謹的 rfc959)"
 
-# vfs/ftpfs.c:1181
 #: vfs/ftpfs.c:1183
 msgid "(chdir first)"
 msgstr "(先切換路徑)"
 
-# vfs/ftpfs.c:1305
 #: vfs/ftpfs.c:1307
 msgid "ftpfs: failed"
 msgstr "ftpfs: 失敗"
 
-# vfs/ftpfs.c:1315
 #: vfs/ftpfs.c:1317
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: 失敗; 無法轉移到其它目錄"
 
-# vfs/ftpfs.c:1378
 #: vfs/ftpfs.c:1380
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs: 儲存檔案 %d (%d)"
 
-# vfs/ftpfs.c:1796
 #: vfs/ftpfs.c:1812
 msgid ""
 "~/.netrc file has not correct mode.\n"
@@ -8657,19 +6752,14 @@ msgstr ""
 "~/.netrc 檔案的模式不正確。移除寫在裡面 \n"
 "的密碼或修正 ~/.netrc 檔案的模式。 "
 
-# vfs/mcfs.c:156
-# vfs/mcfs.c:178
-# vfs/mcfs.c:204
 #: vfs/mcfs.c:151 vfs/mcfs.c:173 vfs/mcfs.c:199
 msgid " MCFS "
 msgstr " MCFS "
 
-# vfs/mcfs.c:156
 #: vfs/mcfs.c:151
 msgid " The server does not support this version "
 msgstr " 伺服器並不支援此一版本 "
 
-# vfs/mcfs.c:173
 #: vfs/mcfs.c:168
 msgid ""
 " The remote server is not running on a system port \n"
@@ -8680,50 +6770,41 @@ msgstr ""
 " 您必須輸入密碼以登入主機，可是密碼資訊經過 \n"
 " 網路傳輸可能不太安全，還要繼續嗎？ \n"
 
-# vfs/mcfs.c:176
 #: vfs/mcfs.c:171
 msgid " Yes "
 msgstr "是"
 
-# vfs/mcfs.c:176
 #: vfs/mcfs.c:171
 msgid " No "
 msgstr "否"
 
-# vfs/mcfs.c:178
 #: vfs/mcfs.c:173
 msgid " The remote server is running on strange port. Giving up.\n"
 msgstr " 遠端主機跑的 port 很奇怪，放棄了。\n"
 
-# vfs/mcfs.c:190
 #: vfs/mcfs.c:185
 msgid " MCFS Password required "
 msgstr " 必需有 MCFS 密碼 "
 
-# vfs/mcfs.c:204
 #: vfs/mcfs.c:199
 msgid " Invalid password "
 msgstr " 密碼無效 "
 
-# vfs/mcfs.c:235
 #: vfs/mcfs.c:230
 #, c-format
 msgid " Cannot locate hostname: %s "
 msgstr " 找不到主機: %s"
 
-# vfs/mcfs.c:253
 #: vfs/mcfs.c:248
 #, c-format
 msgid " Cannot create socket: %s "
 msgstr " 無法建立插座: %s"
 
-# vfs/mcfs.c:259
 #: vfs/mcfs.c:254
 #, c-format
 msgid " Cannot connect to server: %s "
 msgstr " 無法連結到伺服器: %s"
 
-# vfs/mcfs.c:324
 #: vfs/mcfs.c:320
 msgid " Too many open connections "
 msgstr " 太多開啟的連結了 "
@@ -8746,7 +6827,6 @@ msgstr ""
 "警告：sfs.ini 中的旗標 %c 不正確：\n"
 "%s\n"
 
-# vfs/smbfs.c:667
 #: vfs/smbfs.c:527
 #, c-format
 msgid ""
@@ -8756,47 +6836,35 @@ msgstr ""
 " 重新連結到 %s 失敗\n"
 " "
 
-# vfs/smbfs.c:1243
 #: vfs/smbfs.c:1098
 msgid " Authentication failed "
 msgstr " 認證錯誤 "
 
-# vfs/smbfs.c:1738
 #: vfs/smbfs.c:1590
 #, c-format
 msgid " %s mkdir'ing %s "
 msgstr "%s 建立 %s 目錄中"
 
-# vfs/smbfs.c:1759
 #: vfs/smbfs.c:1613
 #, c-format
 msgid " %s rmdir'ing %s "
 msgstr "%s 刪除 %s 目錄中"
 
-# vfs/smbfs.c:1868
-# vfs/smbfs.c:1888
-# vfs/smbfs.c:1949
 #: vfs/smbfs.c:1717 vfs/smbfs.c:1737
 #, c-format
 msgid " %s opening remote file %s "
 msgstr "%s 開啟遠端檔案 %s 中"
 
-# vfs/smbfs.c:1868
-# vfs/smbfs.c:1888
-# vfs/smbfs.c:1949
 #: vfs/smbfs.c:1805
 #, fuzzy, c-format
 msgid " %s removing remote file %s "
 msgstr "%s 開啟遠端檔案 %s 中"
 
-# vfs/smbfs.c:1972
 #: vfs/smbfs.c:1843
 #, c-format
 msgid " %s renaming files\n"
 msgstr " %s 剩下的檔案\n"
 
-# vfs/tar.c:84
-# vfs/tar.c:101
 #: vfs/tar.c:81 vfs/tar.c:98
 #, c-format
 msgid ""
@@ -8806,18 +6874,14 @@ msgstr ""
 "無法開啟 tar 檔案集\n"
 "%s"
 
-# vfs/tar.c:284
 #: vfs/tar.c:281
 msgid "Unexpected EOF on archive file"
 msgstr "檔案集的檔案結尾不正常"
 
-# vfs/tar.c:336
-# vfs/tar.c:343
 #: vfs/tar.c:333 vfs/tar.c:340
 msgid "Inconsistent tar archive"
 msgstr "不完整的 tar 檔案集"
 
-# vfs/tar.c:413
 #: vfs/tar.c:410
 #, c-format
 msgid ""
@@ -8829,73 +6893,60 @@ msgstr ""
 "%s\n"
 "看起來不像是一個 tar 檔案集。"
 
-# vfs/undelfs.c:81
 #: vfs/undelfs.c:81
 msgid " undelfs: error "
 msgstr " undelfs: 錯誤 "
 
-# vfs/undelfs.c:184
 #: vfs/undelfs.c:184
 msgid " not enough memory "
 msgstr " 不足的記憶體 "
 
-# vfs/undelfs.c:189
 #: vfs/undelfs.c:189
 msgid " while allocating block buffer "
 msgstr " 檔配置區塊緩衝區時 "
 
-# vfs/undelfs.c:193
 #: vfs/undelfs.c:193
 #, c-format
 msgid " open_inode_scan: %d "
 msgstr " 開啟 inode 掃描: %d "
 
-# vfs/undelfs.c:197
 #: vfs/undelfs.c:197
 #, c-format
 msgid " while starting inode scan %d "
 msgstr " 當啟動 inode 掃描時 %d"
 
-# vfs/undelfs.c:204
 #: vfs/undelfs.c:204
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr "undelfs: 載入刪除的檔案資訊 %d inode"
 
-# vfs/undelfs.c:219
 #: vfs/undelfs.c:219
 #, c-format
 msgid " while calling ext2_block_iterate %d "
 msgstr " 當呼叫 ext2 區塊覆合時 %d "
 
-# vfs/undelfs.c:227
 #: vfs/undelfs.c:227
 msgid " no more memory while reallocating array "
 msgstr " 當重新配置陣列時沒有更多的記憶體"
 
-# vfs/undelfs.c:246
 #: vfs/undelfs.c:246
 #, c-format
 msgid " while doing inode scan %d "
 msgstr " 當進行 inode 掃描時 %d"
 
-# vfs/undelfs.c:270
 #: vfs/undelfs.c:270
 msgid " Ext2lib error "
 msgstr " ext2lib 錯誤 "
 
-# vfs/undelfs.c:297
 #: vfs/undelfs.c:297
 #, c-format
 msgid " Could not open file %s "
 msgstr " 無法開啟檔案 %s "
 
-# vfs/undelfs.c:300
 #: vfs/undelfs.c:300
 msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs: 讀取 inode 點陣圖..."
 
-# vfs/undelfs.c:303
 #: vfs/undelfs.c:303
 #, c-format
 msgid ""
@@ -8905,12 +6956,10 @@ msgstr ""
 " 無法從 %s 中 \n"
 " 載入 inode 點陣圖 \n"
 
-# vfs/undelfs.c:306
 #: vfs/undelfs.c:306
 msgid "undelfs: reading block bitmap..."
 msgstr "undelfs: 讀取區塊點陣圖中..."
 
-# vfs/undelfs.c:309
 #: vfs/undelfs.c:309
 #, c-format
 msgid ""
@@ -8920,186 +6969,142 @@ msgstr ""
 " 無法從 %s 中 \n"
 " 載入區塊點陣圖 \n"
 
-# vfs/undelfs.c:315
 #: vfs/undelfs.c:315
 msgid "%s: done."
 msgstr "%s: 完成."
 
-# vfs/undelfs.c:318
 #: vfs/undelfs.c:318
 msgid "%s: failure"
 msgstr "%s: 失敗"
 
-# vfs/undelfs.c:342
 #: vfs/undelfs.c:342
 msgid " vfs_info is not fs! "
 msgstr " vfs_info 不是檔案系統! "
 
-# vfs/undelfs.c:398
-# vfs/undelfs.c:582
 #: vfs/undelfs.c:398 vfs/undelfs.c:582
 msgid " You have to chdir to extract files first "
 msgstr " 您必須先變換路徑到解開的檔案 "
 
-# vfs/undelfs.c:521
 #: vfs/undelfs.c:521
 msgid " while iterating over blocks "
 msgstr " 當由 block 覆合時"
 
-# vfs/undelfs.c:626
 #: vfs/undelfs.c:626
 #, c-format
 msgid " Could not open file: %s "
 msgstr " 無法開啟檔案: %s "
 
-# vfs/vfs.c:1139
 #: vfs/vfs.c:1146
 msgid "Changes to file lost"
 msgstr "改變到檔案遺失"
 
-# vfs/vfs.c:1781
 #: vfs/vfs.c:1782
 msgid "Could not parse:"
 msgstr "無法分析:"
 
-# vfs/vfs.c:1783
 #: vfs/vfs.c:1784
 msgid "More parsing errors will be ignored."
 msgstr "更多的分析錯誤將會被忽略"
 
-# vfs/vfs.c:1783
 #: vfs/vfs.c:1784
 msgid "(sorry)"
 msgstr "(抱歉)"
 
-# vfs/vfs.c:1794
 #: vfs/vfs.c:1795
 msgid "Internal error:"
 msgstr "內部錯誤:"
 
-# vfs/vfs.c:1804
 #: vfs/vfs.c:1805
 #, c-format
 msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
 msgstr "%s: %s: %s %3d%% (已傳送 %lu 位元組)"
 
-# vfs/vfs.c:1805
 #: vfs/vfs.c:1806
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s 已傳送 %lu 位元組"
 
-# gnome/gmc-window.c:69
 #~ msgid "Copyright (C) 1998 The Free Software Foundation"
 #~ msgstr "Copyright (C) 1998 The Free Software Foundation"
 
-# gnome/gmc-window.c:81
 #~ msgid "Open _new window"
 #~ msgstr "開啟新視窗 (_N)"
 
-# gnome/gmc-window.c:86
 #~ msgid "_Close this window"
 #~ msgstr "關閉這個視窗(_C)"
 
-# gnome/gmc-window.c:88
 #~ msgid "E_xit"
 #~ msgstr "離開(_X)"
 
-# gnome/gmc-window.c:95
 #~ msgid "_Listing view"
 #~ msgstr "列表模式(_L)"
 
-# gnome/gmc-window.c:96
 #~ msgid "_Icon view"
 #~ msgstr "圖示顯示 (_I)"
 
-# gnome/gmc-window.c:102
 #~ msgid "Display _tree view"
 #~ msgstr " 樹狀顯示(_T)"
 
-# gnome/gmc-window.c:112
 #~ msgid "_About the Midnight Commander..."
 #~ msgstr "關於Midnight Commander(_A)"
 
-# gnome/gmc-window.c:119
 #~ msgid "_File"
 #~ msgstr "檔案(_F)"
 
-# gnome/gmc-window.c:120
 #~ msgid "_View"
 #~ msgstr "檢視(_V)"
 
-# gtkedit/editmenu.c:128
-# gtkedit/editmenu.c:147
 #~ msgid "&Open/load...     C-o"
 #~ msgstr "開啟/載入 (&O)... C-o"
 
-# src/achown.c:667
 #~ msgid " I can't run the Advanced Chown command on an extfs "
 #~ msgstr " 無法在 extfs 上執行進階的 chown 指令 "
 
-# src/achown.c:671
 #~ msgid " I can't run the Advanced Chown command on a tarfs "
 #~ msgstr " 無法在 tarfs 上執行進階的 chown 指令 "
 
-# src/chmod.c:321
 #~ msgid " I can't run the Chmod command on an extfs "
 #~ msgstr " 無法在 extfs 上執行 chmod 指令 "
 
-# src/chmod.c:325
 #~ msgid " I can't run the Chmod command on a tarfs "
 #~ msgstr " 無法在 tarfs 上執行 chown 指令 "
 
-# src/chown.c:261
 #~ msgid " I can't run the Chown command on an extfs "
 #~ msgstr " 無法在 extfs 上執行 chown 指令 "
 
-# src/chown.c:265
 #~ msgid " I can't run the Chown command on a tarfs "
 #~ msgstr " 無法在 tarfs 上執行 chown 指令 "
 
-# src/view.c:571
 #~ msgid "Cannot load %s/%s"
 #~ msgstr "無法載入 %s/%s"
 
-# vfs/direntry.c:431
-# vfs/direntry.c:434
 #~ msgid " Direntry warning "
 #~ msgstr " 直接的警告"
 
-# vfs/direntry.c:431
 #~ msgid "Super ino_usage is %d, memory leak"
 #~ msgstr "Super ino_usage is %d, memory leak"
 
-# vfs/direntry.c:434
 #~ msgid "Super has want_stale set"
 #~ msgstr "Super has want_stale set"
 
-# gnome/gcmd.c:50
 #~ msgid " There is no other panel to compare contents to "
 #~ msgstr " 沒有另外一個面版可以用來比較內容 "
 
-# gnome/gcmd.c:728
 #~ msgid "."
 #~ msgstr "."
 
-# gnome/glayout.c:426
 #~ msgid "Global option settings"
 #~ msgstr "全域的選項設定"
 
-# gnome/glayout.c:630
 #~ msgid "File/New/Directory..."
 #~ msgstr "檔案/新的/目錄..."
 
-# gtkedit/gtkedit.c:1251
 #~ msgid "Replc"
 #~ msgstr "替換"
 
-# gtkedit/gtkedit.c:1256
 #~ msgid "Dlete"
 #~ msgstr "刪除"
 
-# src/cmd.c:1027
 #~ msgid ""
 #~ " Couldn't stat %s \n"
 #~ " %s "
@@ -9107,90 +7112,66 @@ msgstr "%s: %s: %s 已傳送 %lu 位元組"
 #~ " 無法 stat %s \n"
 #~ " %s "
 
-# src/ext.c:315
 #~ msgid " Cannot execute commands on a Virtual File System directory "
 #~ msgstr " 無法在虛擬檔案系統的目錄上執行指令  "
 
-# src/textconf.c:44
 #~ msgid "Using "
 #~ msgstr "使用中 "
 
-# src/textconf.c:52
 #~ msgid "terminfo"
 #~ msgstr "終端機資訊"
 
-# src/textconf.c:55
 #~ msgid "termcap"
 #~ msgstr "termcap"
 
-# src/textconf.c:60
 #~ msgid " database"
 #~ msgstr " 資料庫"
 
-# src/textconf.c:72
 #~ msgid "optional"
 #~ msgstr "可選擇的"
 
-# src/textconf.c:74
 #~ msgid "as default"
 #~ msgstr "作為預設值"
 
-# src/file.c:1559
 #~ msgid " Internal error: get_file \n"
 #~ msgstr " 內部錯誤： get_file \n"
 
-# src/option.c:79
 #~ msgid "Animation"
 #~ msgstr "動畫"
 
-# vfs/mcfs.c:1127
 #~ msgid "Midnight Commander's private remote filesystem"
 #~ msgstr "Midnight Commander 的私用遠端檔案系統"
 
-# vfs/undelfs.c:684
 #~ msgid "Undelete filesystem for ext2"
 #~ msgstr "復原檔案 (只能用在 ext2fs 上面)"
 
-# gnome/gprop.c:58
-# gnome/gprop.c:75
 #~ msgid "Filename"
 #~ msgstr "檔名"
 
-# gnome/gprop.c:67
 #~ msgid "Full name: "
 #~ msgstr "檔案全名："
 
-# gnome/gprop.c:119
 #~ msgid "Command:"
 #~ msgstr "指令："
 
-# gnome/gprop.c:129
 #~ msgid "Use terminal"
 #~ msgstr "使用終端機"
 
-# gnome/gprop.c:248
 #~ msgid "File mode (permissions)"
 #~ msgstr "檔案模式 (權限)"
 
-# gnome/gprop.c:321
-# gnome/gprop.c:347
 #~ msgid "<Unknown>"
 #~ msgstr "<未知>"
 
-# gnome/gprop.c:494
 #~ msgid "General"
 #~ msgstr "一般"
 
-# gnome/gprop.c:505
 #~ msgid "Title"
 #~ msgstr "標題"
 
-# gnome/gprop.c:535
 #~ msgid "Select icon"
 #~ msgstr "選取圖示"
 
-# src/ext.c:143
-# src/user.c:544
 #~ msgid ""
 #~ " Cannot generate unique filename \n"
 #~ " %s "
