@@ -1,5 +1,6 @@
 Makefile
 Make.common
+Specfile
 config.status
 config.cache
 config.h
