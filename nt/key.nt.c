@@ -18,17 +18,12 @@
   Bugs:
     Have trouble with non-US keyboards, "Alt-gr"+keys (API tells CTRL-ALT is pressed)
    */
+#include <config.h>
 #ifndef _OS_NT
 #error This file is for Win32 systems.
 #else
 
 #include <windows.h>
-
-/* Linux and Win32 names are the same, but values are different */
-const int win_shift_pressed = SHIFT_PRESSED;
-#undef SHIFT_PRESSED
-
-#include <config.h>
 #include <stdio.h>
 #include "mouse.h"
 #include "global.h"
@@ -191,7 +186,7 @@ pend_send:
 	    pending_keys = 0;
 	    seq_append = 0;
 	}
-	return correct_key_code (d);
+	return d;
     }
 
 
@@ -206,8 +201,8 @@ pend_send:
 		ch = ir.Event.KeyEvent.uChar.AsciiChar;
 		dwSaved_ControlState = ir.Event.KeyEvent.dwControlKeyState;
 
-    	j = VKtoCurses(vkcode);
-		return correct_key_code (j ? j : ch);
+		j = VKtoCurses(vkcode);
+		return j ? j : ch;
 
 	case MOUSE_EVENT:
 		// Save event as a GPM-like event
@@ -246,39 +241,23 @@ static int VKtoCurses (int a_vkc)
 
 static int correct_key_code (int c)
 {
-	static char AltGrPressed = 0;
-
-    /* Ugly hacks */
-    /* Make Ctrl-Tab same as reserved Alt-Tab */
-    if (c == '\t' && ctrl_pressed())
-	c = ALT('\t');
-
-    /* FIXME: Ignore Left-Ctrl+Right-Alt combination in non-US keyboards,
-       as it means Alt-Gr+key */
-    if (dwSaved_ControlState & RIGHT_ALT_PRESSED &&
-	dwSaved_ControlState & LEFT_CTRL_PRESSED)
-	return c;
-
-    /* No, AltGR Key is the combination with ENHANCED_KEY 
-	   and RIGHT_ALT_PRESSED .ado */
-	if (dwSaved_ControlState & RIGHT_ALT_PRESSED &&
-		dwSaved_ControlState & ENHANCED_KEY) {
-		/* AltGr Key pressed */
-		AltGrPressed = 1;
-		return c;
-	}
-
-    /* Other hacks */
     /* Check Control State */
     if (ctrl_pressed())
-	c = XCTRL(c);
-    if (!AltGrPressed && 
-	   (dwSaved_ControlState & RIGHT_ALT_PRESSED ||
-	    dwSaved_ControlState & LEFT_ALT_PRESSED))
-	c = ALT(c);
-	else 
-		AltGrPressed = 0;
+	if (c == '\t')
+	/* Make Ctrl-Tab same as reserved Alt-Tab */
+	    c = ALT('\t');
+	else
+	    c = XCTRL(c);
 
+    if (alt_pressed())
+	c = ALT(c);
+
+    if (shift_pressed() && (c >= KEY_F(1)) && (c <= KEY_F(10)))
+		c += 10;
+    if (alt_pressed() && (c >= KEY_F(1)) && (c <= KEY_F(2)))
+		c += 10;
+    if (alt_pressed() && (c == KEY_F(7)))
+		c = ALT('?');
     switch (c) {
         case KEY_KP_ADD: 
         	c = alternate_plus_minus ? ALT('+') : '+'; 
@@ -419,8 +398,6 @@ int is_idle (void)
     return 1;
 }
 
-extern long SLsys_GetLastkeyControlState ();
-
 /* get_modifier  */
 int get_modifier()
 {
@@ -435,7 +412,7 @@ int get_modifier()
 	dwSaved_ControlState & LEFT_CTRL_PRESSED)
 	retval |= CONTROL_PRESSED;
 
-    if (dwSaved_ControlState & win_shift_pressed)
+    if (dwSaved_ControlState & SHIFT_PRESSED)
 	retval |= SHIFT_PRESSED;
 
     return retval;
@@ -443,12 +420,19 @@ int get_modifier()
 
 int ctrl_pressed ()
 {
-    if (dwSaved_ControlState & RIGHT_CTRL_PRESSED ||
-	dwSaved_ControlState & LEFT_CTRL_PRESSED)
-	return 1;
-
-    return 0;
+    return dwSaved_ControlState & (RIGHT_CTRL_PRESSED | LEFT_CTRL_PRESSED);
 }
+
+int shift_pressed ()
+{
+    return dwSaved_ControlState & SHIFT_PRESSED;
+}
+
+int alt_pressed ()
+{
+    return dwSaved_ControlState & (RIGHT_ALT_PRESSED | LEFT_ALT_PRESSED);
+}
+
 /* void functions for UNIX copatibility */
 void try_channels (int set_timeout)
 {

@@ -20,11 +20,11 @@
    	show_console_contents doesn't know how to write to its window
    	the rest works fine.
 */
+#include <config.h>
 #ifndef _OS_NT
 #error This file is for Win32 operating systems.
 #else
 
-#include <config.h>
 #include <windows.h>
 #include "util.debug.h"
 

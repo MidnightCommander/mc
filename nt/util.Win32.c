@@ -18,6 +18,7 @@
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  
 */
 
+#include <config.h>
 #include <windows.h>
 #include "util.win32.h"
 #include "util.debug.h"

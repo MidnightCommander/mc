@@ -30,12 +30,33 @@
 #ifndef __CONFIG_HPP                    //Prevent multiple includes
 #define __CONFIG_HPP
 
-
 #include <../VERSION>
+
+#ifndef WIN32
+#   define WIN32
+#endif
+
+#ifndef __WIN32__
+#   define __WIN32__
+#endif
+
+#ifndef MSWINDOWS
+#   define MSWINDOWS
+#endif
+
+#ifndef pc_system
+#   define pc_system
+#endif
+
+#define _OS_NT
+#define OS2_NT
+#define FLOAT_TYPE
+#define MIDNIGHT
 
 // ---------------------------------------------------------------------------
 // Headers
 #define STDC_HEADERS
+#define HAVE_STDLIB_H
 #define HAVE_STRING_H
 #define HAVE_DIRENT_H
 #define HAVE_LIMITS_H
@@ -45,12 +66,14 @@
 
 // ---------------------------------------------------------------------------
 // "Standard" Library
-#define HAS_MEMSET
-#define HAS_MEMCHR
-#define HAS_MEMCPY
-#define HAS_MEMCMP
+#define HAVE_MEMSET
+#define HAVE_MEMCHR
+#define HAVE_MEMCPY
+#define HAVE_MEMCMP
+#define HAVE_MEMMOVE
 #define HAVE_STRDUP
 #define HAVE_STRERROR
+#define HAVE_TRUNCATE
 
 #define REGEX_MALLOC
 
@@ -136,7 +159,5 @@ typedef unsigned int nlink_t;
 #define popen   _popen
 #define pclose  _pclose
 #define pipe(p)  _pipe(p, 4096, 0x8000 /*_O_BINARY*/)
-
-#define OS2_NT  1
 
 #endif //__CONFIG_HPP

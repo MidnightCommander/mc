@@ -1,0 +1,20 @@
+Sat Mar  7 14:43:27 1998  Pavel Roskin <pavel@absolute.spb.su>
+
+        * nt/Makefile.NT, nt/Makefile.VC4: rewritten for GNU make.
+        Use gmake -f Makefile.VC4 to compile.
+	
+        * nt/*.c: config.h is included before all other code.
+	
+        * nt/config.h: added some definitions, because some
+        compilers don't accept long command lines.
+	
+        * nt/Makefile.VC1: removed :-( It didn't work anyways.
+	
+        * nt/slint.nt.c: can be compiled under OS/2 too
+	
+        * nt/key.nt.c: correct_key_code was called twice. Shifted
+        functional keys supported. Alt-F1 and Alt-F2 work as F11 and F12.
+        Alt-F7 works as Shift-Alt-? (used for find file). Function
+        alt_pressed() and ctrl_pressed() introduced.
+
+

@@ -18,11 +18,11 @@
  	- Preliminar. Work to be done here. (Maybe should write a command to
 		change attributes and another to change rwx permissions.
  */
+#include <config.h>
 #ifndef _OS_NT
 #error This file is for the NT operating system.
 #else
 
-#include <config.h>
 #include <windows.h>
 #include <string.h>
 #include <stdio.h>
@@ -321,17 +321,10 @@ static void apply_mask (struct stat *sf)
     } while (cpanel->marked);
 }
 
-/* .ado: Chmod can now remove the R-flag */
 static int my_chmod (char *path, int mode)
 {
-    /* From _chmod MSVC:Crt\Src\CHMOD.C */
-    /* just set new attribute */
-    if (!SetFileAttributes((LPTSTR)path, mode)) {
-              /* error occured -- map error code and return */
-        _dosmaperr(GetLastError());
-        return -1;
-    }
-    return 0;
+    SetFileAttributes(path, mode);
+    return (GetFileAttributes(path) != mode);
 }
 
 void chmod_cmd (void)

@@ -5,33 +5,61 @@
 #
 # Hacked by Dan Nicolaescu from Visual IDE mak
 # Hacked by Pavel Roskin to make it work with cmd.exe from Windows NT4
+# 980206 hacked by Pavel Roskin to make it work with GNU make
 # --------------------------------------------------------------------------
 
-MC_LIBS=kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib
-NOLOGO=-nologo
-MC_MISC_CFLAGS=-Fp"$(OBJS_DIR)\Mc.pch"
+MC_LIBS=advapi32.lib
 
+# ---- Path (case-sensitive!) is searched for executables
+#      If the command line contains quotes, it is passed to shell
+#      Errors are ignored in this case!
+Path=c:/msdev/bin
 CC=cl.exe
+#      Just comment RSC out if you have problems with resources
 RSC=rc.exe
 LINK=link.exe
-BSC=bscmake.exe
-SLANG_LINK=link.exe -lib
-MCEDIT_LINK=link.exe -lib
+OBJ_SUFFIX=obj
+OBJ_PLACE=-Fo
+RES_PLACE=-fo
+EXE_PLACE=-out:
 
-!if  "$(DEBUG)" == "0"
-EXTRA_MC_OBJS=
-SPECIFIC_DEFINES=
-SPECIFIC_MC_CFLAGS=$(NOLOGO) -ML -GX -O2  -YX0 $(MC_MISC_CFLAGS)
-SPECIFIC_MC_LFLAGS_EXTRA=-incremental:no
-SPECIFIC_SLANG_CFLAGS=-ML -W3 -GX -O2  -YX -Fp"$(SLANG_OBJS_DIR)\slang.pch"
-SPECIFIC_MCEDIT_CFLAGS=-ML -W3 -GX -O2  -YX -Fp"$(MCEDIT_OBJS_DIR)\libedit.pch"
-!else
-EXTRA_MC_OBJS=$(OBJS_DIR)\util.debug.obj
+# ---- Compiler-specific optional stuff
+MC_MISC_CFLAGS=-nologo -YX -Fp$(OBJS_DIR)/mc.pch
+
+ifndef RELEASE
+# ---- Debug build
+OBJS_DIR=debug
+EXTRA_MC_SRCS=util.debug.c
 SPECIFIC_DEFINES=-DHAVE_TRACE
-SPECIFIC_MC_CFLAGS=$(NOLOGO) -MLd -Gm -GX -Zi -Od -YX -Fd"$(OBJS_DIR)\\" $(MC_MISC_CFLAGS)
+SPECIFIC_MC_CFLAGS=-MLd -W3 -Gm -Zi -Od -Fd$(OBJS_DIR)/mc.pdb $(MC_MISC_CFLAGS)
 SPECIFIC_MC_LFLAGS_EXTRA=-debug -incremental:yes
-SPECIFIC_SLANG_CFLAGS=-MLd -W3 -GX -Zi -Od -YX -Fr"$(SLANG_OBJS_DIR)\\" -Fp"$(SLANG_OBJS_DIR)\slang.pch" 
-SPECIFIC_MCEDIT_CFLAGS=-MLd -W3 -GX -Zi -Od -YX -Fr"$(MCEDIT_OBJS_DIR)\\" -Fp"$(MCEDIT_OBJS_DIR)\libedit.pch" 
-!endif
+SPECIFIC_SLANG_CFLAGS=$(SPECIFIC_MC_CFLAGS)
+SPECIFIC_MCEDIT_CFLAGS=$(SPECIFIC_MC_CFLAGS)
+RC_DEFINES=-D_DEBUG
+else
+# ---- Release build
+OBJS_DIR=release
+EXTRA_MC_SRCS=
+SPECIFIC_DEFINES=
+SPECIFIC_MC_CFLAGS=-ML -W3 -O2 $(MC_MISC_CFLAGS)
+SPECIFIC_MC_LFLAGS_EXTRA=-incremental:no
+SPECIFIC_SLANG_CFLAGS=$(SPECIFIC_MC_CFLAGS)
+SPECIFIC_MCEDIT_CFLAGS=$(SPECIFIC_MC_CFLAGS)
+RC_DEFINES=-DRELEASE=$(RELEASE)
+endif
 
-SPECIFIC_MC_LFLAGS=-subsystem:console -pdb:"$(OBJS_DIR)\Mc.pdb"  -machine:I386 -out:"$(OBJS_DIR)\Mc.exe" $(SPECIFIC_MC_LFLAGS_EXTRA)
+MC_EXE=$(OBJS_DIR)/mc.exe
+
+# ---- Compiler independent defines
+include Makefile.NT
+
+# ---- Linkers are usualy compiler-specific
+SPECIFIC_MC_LFLAGS= \
+	-nologo \
+	-subsystem:console \
+	-pdb:$(OBJS_DIR)/mc.pdb \
+	-machine:I386 \
+	$(SPECIFIC_MC_LFLAGS_EXTRA)
+
+$(MC_EXE): $(MC_RES) $(OBJS) $(MCEDIT_OBJS) $(SLANG_OBJS)
+	$(LINK) $(EXE_PLACE)$(MC_EXE) $(MC_LIBS) $(SPECIFIC_MC_LFLAGS) $+

@@ -10,7 +10,7 @@ include ../Make.common
 
 FILES =	Makefile TODO dirent.c mc.ico bugs mc.rc config.h dirent.h \
 	Makefile.NT chmod.nt.c drive.nt.c slint.nt.c cons.handler.nt.c \
-	key.nt.c utilnt.c Makefile.NT Makefile.VC1 Makefile.VC4 \
+	key.nt.c utilnt.c Makefile.NT Makefile.VC4 \
 	util.WinNT.c util.debug.c util.Win32.c util.Win32.h util.debug.h \
 	drive.h
 

@@ -19,11 +19,11 @@
    	can fit in a panel.  
    */
 
+#include <config.h>
 #ifndef _OS_NT
 #error This file is for the Win32 operating systems.
 #else
 
-#include <config.h>
 #include <windows.h>
 #include <string.h>
 #include <stdio.h>

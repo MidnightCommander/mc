@@ -1,4 +1,4 @@
-/* Slang interface to the Midnight Commander for Windows NT
+/* Slang interface to the Midnight Commander for Windows NT and OS/2
    This emulates some features of ncurses on top of slang
    S-lang is not fully consistent between its Unix and non-Unix versions.
    
@@ -19,7 +19,6 @@
 
 #include <config.h>
 #include <stdio.h>
-#include <windows.h>
 #include "tty.h"
 #include "mad.h"
 #include "color.h"
@@ -253,7 +252,7 @@ int got_interrupt ()
 
 void mc_refresh (void)
 {
-/*  if (!we_are_background) (no background mode in win32) */
+/*  if (!we_are_background) (no background mode yet) */
     refresh ();
 }
 

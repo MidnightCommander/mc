@@ -20,13 +20,9 @@
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
 #include <config.h>
+#include <sys/types.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/types.h>
-#include <config.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
 #include <windows.h>
 #include <io.h>
 #include <fcntl.h>
@@ -35,7 +31,6 @@
 #include <errno.h>
 #include <sys/time.h>		/* select: timeout */
 #include <sys/param.h>
-#include <sys/types.h>
 #include <sys/stat.h>
 #include <stdarg.h>
 #include <process.h>
