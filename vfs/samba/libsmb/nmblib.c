@@ -30,7 +30,7 @@ int num_good_receives = 0;
 static struct opcode_names {
 	char *nmb_opcode_name;
 	int opcode;
-} nmb_header_opcode_names[] = {
+} const nmb_header_opcode_names[] = {
       {"Query",           0 },
       {"Registration",      5 },
       {"Release",           6 },
@@ -46,13 +46,12 @@ static struct opcode_names {
  ****************************************************************************/
 static char *lookup_opcode_name( int opcode )
 {
-  struct opcode_names *op_namep;
-  int i;
+  const struct opcode_names *op_namep = nmb_header_opcode_names;
 
-  for(i = 0; nmb_header_opcode_names[i].nmb_opcode_name != 0; i++) {
-    op_namep = &nmb_header_opcode_names[i];
+  while(op_namep->nmb_opcode_name) {
     if(opcode == op_namep->opcode)
       return op_namep->nmb_opcode_name;
+    op_namep++;
   }
   return "<unknown opcode>";
 }
