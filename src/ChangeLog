@@ -1,3 +1,10 @@
+Wed Jul 15 00:41:01 1998    Paul Sheer  <psheer@obsidian.co.za>
+
+	* edit.c, editwidget.c,            * syntax.c: Syntax
+	editdraw.c, editmenu, editcmd.c:   highlighting for Pascal
+	Added column text highlighting     added.
+	and block movements.
+
 1998-07-04  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* main.c (main): 'session_management_setup' will be called after

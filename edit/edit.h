@@ -14,7 +14,7 @@
 #    	 include <unistd.h>
 #    endif
 #    include <string.h>
-#    include "../src/tty.h"
+#    include "src/tty.h"
 #    include <sys/stat.h>
 #    include <errno.h>
      
@@ -75,21 +75,21 @@
 
 #else
 
-#    include "../src/main.h"		/* for char *shell */
-#    include "../src/mad.h"
-#    include "../src/dlg.h"
-#    include "../src/widget.h"
-#    include "../src/color.h"
-#    include "../src/dialog.h"
-#    include "../src/mouse.h"
-#    include "../src/global.h"
-#    include "../src/help.h"
-#    include "../src/key.h"
-#    include "../src/wtools.h"		/* for QuickWidgets */
-#    include "../src/win.h"
-#    include "../vfs/vfs.h"
-#    include "../src/menu.h"
-#    include "../src/regex.h"
+#    include "src/main.h"		/* for char *shell */
+#    include "src/mad.h"
+#    include "src/dlg.h"
+#    include "src/widget.h"
+#    include "src/color.h"
+#    include "src/dialog.h"
+#    include "src/mouse.h"
+#    include "src/global.h"
+#    include "src/help.h"
+#    include "src/key.h"
+#    include "src/wtools.h"		/* for QuickWidgets */
+#    include "src/win.h"
+#    include "vfs/vfs.h"
+#    include "src/menu.h"
+#    include "src/regex.h"
 #    define WANT_WIDGETS
      
 #    define WIDGET_COMMAND (WIDGET_USER + 10)
@@ -178,6 +178,8 @@
 #define STACK_BOTTOM 605
 #define CURS_LEFT_LOTS 606
 #define CURS_RIGHT_LOTS 607
+#define COLUMN_ON 608
+#define COLUMN_OFF 609
 #define MARK_1 1000
 #define MARK_2 700000000
 #define KEY_PRESS 1400000000
@@ -335,7 +337,7 @@ void edit_change_directory (void);
 int edit_man_page_cmd (WEdit * edit);
 void edit_search_replace_dialog (Window parent, int x, int y, char **search_text, char **replace_text, char **arg_order, char *heading, int option);
 void edit_search_dialog (WEdit * edit, char **search_text);
-long edit_find (long search_start, unsigned char *exp, int *len, long last_byte, int (*get_byte) (void *, long), void *data);
+long edit_find (long search_start, unsigned char *expr, int *len, long last_byte, int (*get_byte) (void *, long), void *data);
 void edit_set_foreground_colors (unsigned long normal, unsigned long bold, unsigned long italic);
 void edit_set_background_colors (unsigned long normal, unsigned long abnormal, unsigned long marked, unsigned long marked_abnormal, unsigned long highlighted);
 void edit_set_cursor_color (unsigned long c);
@@ -473,8 +475,8 @@ void edit_get_syntax_color (WEdit * edit, long byte_index, int *fg, int *bg);
 #    define mkdir(s,m) mc_mkdir(s,m)
 #    define itoa MY_itoa
 
-#    define edit_get_load_file(d,f,h) input_dialog (h, _(" Enter file name: "), f)
-#    define edit_get_save_file(d,f,h) input_dialog (h, _(" Enter file name: "), f)
+#    define edit_get_load_file(d,f,h) input_dialog (h, " Enter file name: ", f)
+#    define edit_get_save_file(d,f,h) input_dialog (h, " Enter file name: ", f)
 #    define CMalloc(x) malloc(x)
      
 #    define set_error_msg(s) edit_init_error_msg = strdup(s)

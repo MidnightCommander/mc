@@ -264,11 +264,14 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
 	return 0;
     }
     edit->total_lines = edit_count_lines (edit, 0, edit->last_byte);
+#ifndef GTK
+/* *** */
     edit_load_syntax (edit, 0, 0);
     {
 	int fg, bg;
 	edit_get_syntax_color (edit, -1, &fg, &bg);
     }
+#endif
     return edit;
 }
 
@@ -278,7 +281,10 @@ int edit_clean (WEdit * edit)
 {
     if (edit) {
 	int j = 0;
+#ifndef GTK
+/* *** */
 	edit_free_syntax_rules (edit);
+#endif
 	for (; j <= MAXBUFF; j++) {
 	    if (edit->buffers1[j] != NULL)
 		free (edit->buffers1[j]);
@@ -1387,6 +1393,7 @@ static void edit_left_delete_word (WEdit * edit)
     } while (my_type_of (c) == my_type_of (edit_get_byte (edit, edit->curs1 - 1)));
 }
 
+extern int column_highlighting;
 
 /*
    the start column position is not recorded, and hence does not
@@ -1415,6 +1422,12 @@ void edit_do_undo (WEdit * edit)
 	case DELETE:
 	    edit_delete (edit);
 	    break;
+	case COLUMN_ON:
+	    column_highlighting = 1;
+	    break;
+	case COLUMN_OFF:
+	    column_highlighting = 0;
+	    break;
 	}
 	if (ac >= 256 && ac < 512)
 	    edit_insert_ahead (edit, ac - 256);
@@ -1423,8 +1436,10 @@ void edit_do_undo (WEdit * edit)
 
 	if (ac >= MARK_1 - 2 && ac < MARK_2 - 2) {
 	    edit->mark1 = ac - MARK_1;
+	    edit->column1 = edit_move_forward3 (edit, edit_bol (edit, edit->mark1), 0, edit->mark1);
 	} else if (ac >= MARK_2 - 2 && ac < KEY_PRESS) {
 	    edit->mark2 = ac - MARK_2;
+	    edit->column2 = edit_move_forward3 (edit, edit_bol (edit, edit->mark2), 0, edit->mark2);
 	}
 	if (count++)
 	    edit->force |= REDRAW_PAGE;		/* more than one pop usually means something big */
@@ -1438,9 +1453,9 @@ void edit_do_undo (WEdit * edit)
 	edit->force |= REDRAW_PAGE;
     }
     edit->start_display = ac - KEY_PRESS;	/* see push and pop above */
-    edit_update_curs_row(edit);
+    edit_update_curs_row (edit);
 
-    done_undo:;
+  done_undo:;
     push_action_disabled = 0;
 }
 
@@ -1741,6 +1756,14 @@ void edit_set_user_command (void (*func) (WEdit *, int))
 
 void edit_mail_dialog (WEdit * edit);
 
+#ifdef GTK
+/* *** */
+void format_paragraph (WEdit * edit, int x)
+{
+    return;
+}
+#endif
+
 /* 
    This executes a command at a lower level than macro recording.
    It also does not push a key_press onto the undo stack. This means
@@ -1971,14 +1994,32 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
     case CK_Toggle_Insert:
 	edit->overwrite = (edit->overwrite == 0);
 #ifndef MIDNIGHT
+#ifdef GTK
+/* *** */
+#else
 	CSetCursorColor (edit->overwrite ? color_palette (24) : color_palette (19));
+#endif
 #endif
 	break;
 
     case CK_Mark:
+	if (edit->mark2 >= 0) {
+	    if (column_highlighting)
+		edit_push_action (edit, COLUMN_ON);
+	    column_highlighting = 0;
+	}
+	edit_mark_cmd (edit, 0);
+	break;
+    case CK_Column_Mark:
+	if (!column_highlighting)
+	    edit_push_action (edit, COLUMN_OFF);
+	column_highlighting = 1;
 	edit_mark_cmd (edit, 0);
 	break;
     case CK_Unmark:
+	if (column_highlighting)
+	    edit_push_action (edit, COLUMN_ON);
+	column_highlighting = 0;
 	edit_mark_cmd (edit, 1);
 	break;
 
@@ -2016,6 +2057,7 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 
     case CK_Save_As:
 #ifndef MIDNIGHT
+/*	if (COptionsOf (edit->widget) & EDITOR_NO_FILE) */
 	if (edit->widget->options & EDITOR_NO_FILE)
 	    break;
 #endif
@@ -2023,14 +2065,14 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	break;
     case CK_Save:
 #ifndef MIDNIGHT
-	if (edit->widget->options & EDITOR_NO_FILE)
+	if (COptionsOf (edit->widget) & EDITOR_NO_FILE)
 	    break;
 #endif
 	edit_save_confirm_cmd (edit);
 	break;
     case CK_Load:
 #ifndef MIDNIGHT
-	if (edit->widget->options & EDITOR_NO_FILE)
+	if (COptionsOf (edit->widget) & EDITOR_NO_FILE)
 	    break;
 #endif
 	edit_load_cmd (edit);
