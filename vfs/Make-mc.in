@@ -8,7 +8,7 @@ VPATH = @srcdir@
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 top_builddir = ..
 
-@MCFG@@MCF@
+@MCF@
 
 CFLAGS   = $(XCFLAGS) -D_LARGEFILE64_SOURCE
 CPPFLAGS = $(XCPPFLAGS) -I. -I$(srcdir)/samba/ubiqx -I$(srcdir)/samba/smbwrapper
@@ -222,6 +222,7 @@ Makefile: $(srcdir)/Make-mc.in $(top_builddir)/config.status
 DISTVFS = 	Make-mc.in ChangeLog $(VFSSRCS) $(VFSHDRS) callback.h README README.fish
 
 all: @LIBVFS@ @mcserv@
+	(cd extfs; $(MAKE) all)
 
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<
@@ -243,34 +244,34 @@ $(SAMBAFILES):
 	cd samba && $(MAKE)
 
 libvfs-mc.a: $(VFSOBJS) @SAMBAFILES@
-	$(RMF) $@
+	rm -f $@
 	$(AR) cr $@ $(VFSOBJS) @SAMBAFILES@
 	-$(RANLIB) $@
 
 showlibdep:
 	@echo 'OBJS="$(VFSOBJS)"'
 
-cross:
-	$(MAKE) CC=gcc-linux CPP="gcc-linux -E" \
-	CPPFLAGS="$(CPPFLAGS) -I/usr/local/lib/gcc-lib/i386-linux-linux/include/ncurses "
-
 TAGS: $(VFSSRCS)
 	etags $(VFSSRCS)
 
-clean:
-	$(RMF) mcserv *.o core a.out *.a $(SRC_LINKS)
+mostlyclean:
+	(cd extfs; $(MAKE) mostlyclean)
+	rm -f $(SAMBAFILES)
+	rm -f *.o core a.out
 
-realclean: clean
-	$(RMF) .depend
-	$(RMF) TAGS
-	$(RMF) *~
+clean: mostlyclean
+	(cd extfs; $(MAKE) clean)
+	(cd samba; $(MAKE) clean)
+	rm -f mcserv *.a
 
-distclean:
-	$(RMF) $(srcdir)/*~ $(srcdir)/mcserv $(srcdir)/*.o $(srcdir)/a.out
-	$(RMF) $(srcdir)/core $(srcdir)/libvfs-mc.a
+distclean: clean
 	(cd extfs; $(MAKE) distclean)
-	-if test $(srcdir) = .; then $(MAKE) realclean; fi
-	$(RMF) $(srcdir)/Makefile
+	(cd samba; $(MAKE) distclean)
+	rm -f $(SRC_LINKS)
+	rm -f .depend
+	rm -f TAGS
+	rm -f *~
+	rm -f Makefile
 
 install: install_@mcserv@ install.extfs
 
@@ -285,7 +286,7 @@ install.extfs:
 
 uninstall:
 	(cd extfs; $(MAKE) uninstall)
-	$(RMF) $(DESTDIR)$(bindir)/$(binprefix)mcserv
+	rm -f $(DESTDIR)$(bindir)/$(binprefix)mcserv
 
 distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 

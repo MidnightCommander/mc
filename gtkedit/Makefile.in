@@ -4,7 +4,7 @@ VPATH = @srcdir@
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 top_builddir = ..
 
-@MCFG@@MCF@
+@MCF@
 
 CFLAGS = $(XCFLAGS)
 CPPFLAGS = $(XCPPFLAGS) @GNOME_INCLUDEDIR@ -I$(top_srcdir)
@@ -42,42 +42,36 @@ check:
 	@echo no tests are supplied.
 
 libgtkedit.a: $(EDITOBJS)
-	$(RMF) $@
+	rm -f $@
 	$(AR) cr $@ $(EDITOBJS)
 	-$(RANLIB) $@
 
 mcedit:
-	$(RMF) $(DESTDIR)$(bindir)/$(binprefix)mcedit
+	rm -f $(DESTDIR)$(bindir)/$(binprefix)mcedit
 	$(LN_S) mc $(DESTDIR)$(bindir)/$(binprefix)mcedit
 
 showlibdep:
 	@echo 'OBJS="$(EDITOBJS)"'
 
-cross:
-	$(MAKE) CC=gcc-linux CPP="gcc-linux -E" \
-	CPPFLAGS="$(CPPFLAGS) -I/usr/local/lib/gcc-lib/i386-linux-linux/include/ncurses "
-
 TAGS: $(EDITSRC)
 	etags $(EDITSRC)
 
-clean:
-	$(RMF) *.o core a.out libgtkedit.a
+mostlyclean:
+	rm -f *.o core a.out
 
-realclean: clean
-	$(RMF) .depend
-	$(RMF) TAGS
-	$(RMF) *~
+clean: mostlyclean
+	rm -f libgtkedit.a
 
-distclean:
-	$(RMF) $(srcdir)/*~ $(srcdir)/*.o $(srcdir)/a.out
-	$(RMF) $(srcdir)/core $(srcdir)/libgtkedit.a
-	-if test $(srcdir) = .; then $(MAKE) realclean; fi
-	$(RMF) $(srcdir)/Makefile
+distclean: clean
+	rm -f .depend
+	rm -f TAGS
+	rm -f *~
+	rm -f Makefile
 
 install: @MCEDIT@
 
 uninstall:
-	$(RMF) $(DESTDIR)$(bindir)/$(binprefix)mcedit
+	rm -f $(DESTDIR)$(bindir)/$(binprefix)mcedit
 
 distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 

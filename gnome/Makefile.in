@@ -5,7 +5,7 @@ mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 top_builddir = ..
 
 top_srcdir = $(srcdir)/..
-@MCFG@@MCF@
+@MCF@
 
 GNOMEDEFS     = -DHAVE_X -DHAVE_GNOME @GNOME_INCLUDEDIR@
 
@@ -281,13 +281,13 @@ checklinks:
 sourcelinks:
 	for i in $(OOBJS) main.o; do \
 		f=`echo $$i | sed -e 's/\\.o$$//'`.c; \
-		$(RMF) $$f; \
+		rm -f $$f; \
 		$(LN_S) $(mcsrcdir)/$$f . || exit 1; \
 	done
 
 cleansourcelinks:
 	-if test -f regex.c; then \
-	    find . -lname '*.c' | xargs $(RMF); \
+	    find . -lname '*.c' | xargs rm -f; \
 	fi
 
 check:
@@ -296,19 +296,18 @@ check:
 TAGS: $(GNOMESRCS)
 	etags $(GNOMESRCS)
 
-clean:
-	$(RMF) plain-gmc corba-gmc *.o core a.out mx $(CORBA_GENERATED)
+mostlyclean:
+	rm -f *.o core a.out mc.keys.in
 
-realclean: clean
-	$(RMF) .depend
-	$(RMF) TAGS
-	$(RMF) *~
+clean: mostlyclean
+	rm -f plain-gmc corba-gmc gmc-client mx mc.keys \
+	  $(CORBA_GENERATED) $(MAGICDEV_GENERATED)
 
-distclean: cleansourcelinks
-	$(RMF) $(srcdir)/*~ $(srcdir)/*.o $(srcdir)/gmc $(srcdir)/core
-	$(RMF) $(srcdir)/a.out
-	-if test $(srcdir) = .; then $(MAKE) realclean; fi
-	$(RMF) $(srcdir)/Makefile
+distclean: clean cleansourcelinks
+	rm -f .depend
+	rm -f TAGS
+	rm -f *~
+	rm -f Makefile
 
 distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 
@@ -338,17 +337,17 @@ install_mx: all
 	$(INSTALL_DATA) $(srcdir)/gmc.gnorba $(DESTDIR)$(corbadir)
 
 uninstall:
-	$(RMF) $(DESTDIR)$(bindir)/$(binprefix)gmc
-	$(RMF) $(DESTDIR)$(bindir)/$(binprefix)gmc-client
-	$(RMF) $(DESTDIR)$(bindir)/$(binprefix)plain-gmc
+	rm -f $(DESTDIR)$(bindir)/$(binprefix)gmc
+	rm -f $(DESTDIR)$(bindir)/$(binprefix)gmc-client
+	rm -f $(DESTDIR)$(bindir)/$(binprefix)plain-gmc
 	for I in $(ICONS); \
-	do $(RMF) $(DESTDIR)$(icondir)/$$I; done
+	do rm -f $(DESTDIR)$(icondir)/$$I; done
 	-rmdir $(DESTDIR)$(icondir)
-	$(RMF) $(DESTDIR)$(mclibdir)/layout
-	$(RMF) $(DESTDIR)$(datadir)/mime-info/mc.keys
+	rm -f $(DESTDIR)$(mclibdir)/layout
+	rm -f $(DESTDIR)$(datadir)/mime-info/mc.keys
 	-rmdir $(DESTDIR)$(datadir)/mime-info
 	-rmdir $(DESTDIR)$(gnewdir)
-	$(RMF) $(DESTDIR)$(corbadir)/gmc.gnorba
+	rm -f $(DESTDIR)$(corbadir)/gmc.gnorba
 	-rmdir $(DESTDIR)$(corbadir)
 
 depend dep: @gmcdep@

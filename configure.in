@@ -1090,23 +1090,20 @@ AC_SUBST(LIBS)
 
 ac_cv_make_with_percent_rules=no
 if test x$ac_cv_prog_gnu_make = xyes; then
-    MCFG='include ../Make.common'
-    MCF=/dev/null
     PHONY='.PHONY:'
     DOTDEPEND='-include .depend'
     WRITEDEP=":"
     ac_cv_make_with_percent_rules=yes
 else
-    MCFG=""
-    MCF=./Make.common
     PHONY='#'
     DOTDEPEND=""
     WRITEDEP='sed "/^. \*\*\*Dependencies\*\*\*/,/^. \*\*\*End of dependencies\*\*\*/d" < Makefile > Makefile.conf; { cat Makefile.conf; echo "# ***Dependencies***Do not edit***"; cat .depend; echo "# ***End of dependencies***" } > Makefile; $(RMF) Makefile.conf .depend'
 fi
 AC_SUBST(PHONY)
 AC_SUBST(WRITEDEP)
-AC_SUBST(MCFG)
 AC_SUBST(DOTDEPEND)
+
+MCF=./Make.common
 AC_SUBST_FILE(MCF)
 
 if test x$ac_cv_make_with_percent_rules = xyes; then

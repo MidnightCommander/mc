@@ -5,7 +5,7 @@ mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 top_builddir = ..
 
 SHELL   = @SHELL@
-@MCFG@@MCF@
+@MCF@
 
 CFLAGS   = $(XCFLAGS) @MCCFLAGS@
 CPPFLAGS = $(XCPPFLAGS) -DREGEX_MALLOC
@@ -83,8 +83,8 @@ $(srcdir)/mc.hlp: @MAINT@ $(docdir)/mc.1.in $(mcsrclibdir)/xnc.hlp $(srcdir)/gin
 @MAINT@	$(MAKE) man2hlp
 @MAINT@	- ./man2hlp 58 $(docdir)/mc.1.in | cat - $(mcsrclibdir)/xnc.hlp | \
 @MAINT@	perl $(srcdir)/gindex.pl > $(srcdir)/mc.hlp.tmp && \
-@MAINT@	$(MV) -f $(srcdir)/mc.hlp.tmp $(srcdir)/mc.hlp; \
-@MAINT@	$(RMF) $(srcdir)/mc.hlp.tmp; \
+@MAINT@	mv -f $(srcdir)/mc.hlp.tmp $(srcdir)/mc.hlp; \
+@MAINT@	rm -f $(srcdir)/mc.hlp.tmp; \
 @MAINT@	touch $(srcdir)/mc.hlp
 
 mc.html: $(docdir)/mc.1.in man2hlp
@@ -95,20 +95,17 @@ mc.html: $(docdir)/mc.1.in man2hlp
 TAGS: $(SRCS)
 	etags $(SRCS)
 
-clean:
-	$(RMF) mc cons.saver man2hlp *.o core a.out mc.html mcmfmt
+mostlyclean:
+	rm -f *.o core a.out
 
-realclean: clean
-	$(RMF) .depend
-	$(RMF) TAGS
-	$(RMF) *~
+clean: mostlyclean
+	rm -f mc cons.saver man2hlp mc.html mcmfmt
 
-distclean:
-	$(RMF) $(srcdir)/*~ $(srcdir)/mc $(srcdir)/cons.saver
-	$(RMF) $(srcdir)/man2hlp $(srcdir)/*.o $(srcdir)/core
-	$(RMF) $(srcdir)/a.out $(srcdir)/mc.html
-	-if test $(srcdir) = .; then $(MAKE) realclean; fi
-	$(RMF) $(srcdir)/Makefile
+distclean: clean
+	rm -f .depend
+	rm -f TAGS
+	rm -f *~
+	rm -f Makefile
 
 install: mc mcmfmt @saver@
 	$(INSTALL_PROGRAM) mc     $(DESTDIR)$(bindir)/$(binprefix)mc
@@ -119,10 +116,10 @@ install.saver: cons.saver
 	$(INSTALL_PROGRAM) -m 4755 cons.saver $(DESTDIR)$(suppbindir)/cons.saver
 
 uninstall:
-	$(RMF) $(DESTDIR)$(bindir)/$(binprefix)/mc
-	$(RMF) $(DESTDIR)$(bindir)/$(binprefix)/mcmfmt
-	$(RMF) $(DESTDIR)$(suppbindir)/cons.saver
-	$(RMF) $(DESTDIR)$(mclibdir)/$(libprefix)/mc.hlp
+	rm -f $(DESTDIR)$(bindir)/$(binprefix)/mc
+	rm -f $(DESTDIR)$(bindir)/$(binprefix)/mcmfmt
+	rm -f $(DESTDIR)$(suppbindir)/cons.saver
+	rm -f $(DESTDIR)$(mclibdir)/$(libprefix)/mc.hlp
 
 distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 

@@ -4,7 +4,7 @@ VPATH = @srcdir@
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 top_builddir = ..
 
-@MCFG@@MCF@
+@MCF@
 
 CFLAGS = $(XCFLAGS)
 CPPFLAGS = $(XCPPFLAGS)
@@ -41,33 +41,27 @@ check:
 	@echo no tests are supplied.
 
 libmcslang.a: $(SLANGOBJS)
-	$(RMF) $@
+	rm -f $@
 	$(AR) cr $@ $(SLANGOBJS)
 	-$(RANLIB) $@
 
 showlibdep:
 	@echo 'OBJS="$(SLANGOBJS)"'
 
-cross:
-	$(MAKE) CC=gcc-linux CPP="gcc-linux -E" \
-	CPPFLAGS="$(CPPFLAGS) -I/usr/local/lib/gcc-lib/i386-linux-linux/include/ncurses "
-
 TAGS: $(SLANGSRCS)
 	etags $(SLANGSRCS)
 
-clean:
-	$(RMF) *.o core a.out libmcslang.a
+mostlyclean:
+	rm -f *.o core a.out
 
-realclean: clean
-	$(RMF) .depend slang.h
-	$(RMF) TAGS
-	$(RMF) *~
+clean: mostlyclean
+	rm -f libmcslang.a
 
-distclean:
-	$(RMF) $(srcdir)/*~ $(srcdir)/*.o $(srcdir)/core $(srcdir)/a.out
-	$(RMF) $(srcdir)/libmcslang.a 
-	-if test $(srcdir) = .; then $(MAKE) realclean; fi
-	$(RMF) $(srcdir)/Makefile
+distclean: clean
+	rm -f .depend slang.h
+	rm -f TAGS
+	rm -f *~
+	rm -f Makefile
 
 distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 
