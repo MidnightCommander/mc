@@ -1,3 +1,8 @@
+2001-06-08  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* editcmd.c [HAVE_CHARSET]: Really include charset.h.
+	* editmenu.c (edit_wrap_cmd): Memory leaking fixed.
+
 2001-06-05  Pavel Roskin  <proski@gnu.org>
 
 	* edit.c [HAVE_CHARSET]: Include charsets.h and selcodepage.h.

@@ -4,6 +4,8 @@
 
    Authors: 1996, 1997 Paul Sheer
 
+   $Id$
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
@@ -60,13 +62,12 @@ void edit_wrap_cmd ()
     char s[12];
     sprintf (s, "%d", option_word_wrap_line_length);
     f = input_dialog (_(" Word wrap "), 
-/* Not essential to translate */
-    _(" Enter line length, 0 for off: "), s);
+	_(" Enter line length, 0 for off: "), s);
     if (f) {
 	if (*f) {
 	    option_word_wrap_line_length = atoi (f);
-	    free (f);
 	}
+	free (f);
     }
 }
 

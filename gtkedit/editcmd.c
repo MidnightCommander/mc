@@ -41,7 +41,7 @@
 #endif
 #endif
 
-#ifndef HAVE_CHARSET
+#ifdef HAVE_CHARSET
 #include "../src/charsets.h"
 #endif
 
