@@ -1,5 +1,10 @@
 2003-06-22  Pavel Roskin  <proski@gnu.org>
 
+	* execute.c (do_execute): Make static.  Print end of line after
+	"Press any key to continue" and user's keystroke, but before
+	restoring the panels.  Eliminate last_paused variable.  Don't
+	print fake prompt if there is no command.
+
 	* text.c: Eliminate.  Move colors to color.c and clr_scr() to
 	layout.c.
 	* main.c (restore_console): Eliminate, use handle_console().

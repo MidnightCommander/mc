@@ -29,9 +29,6 @@
 #include "execute.h"
 
 
-/* to show nice prompts */
-static int last_paused = 0;
-
 static void
 edition_post_exec (void)
 {
@@ -88,7 +85,7 @@ pre_exec (void)
 }
 
 
-void
+static void
 do_execute (const char *shell, const char *command, int flags)
 {
 #ifdef HAVE_SUBSHELL_SUPPORT
@@ -107,9 +104,8 @@ do_execute (const char *shell, const char *command, int flags)
     if (console_flag)
 	handle_console (CONSOLE_RESTORE);
 
-    if (!use_subshell && !(flags & EXECUTE_INTERNAL && command)) {
-	printf ("%s%s%s\n", last_paused ? "\r\n" : "", prompt, command);
-	last_paused = 0;
+    if (!use_subshell && command && !(flags & EXECUTE_INTERNAL)) {
+	printf ("%s%s\n", prompt, command);
     }
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (use_subshell && !(flags & EXECUTE_INTERNAL)) {
@@ -133,11 +129,12 @@ do_execute (const char *shell, const char *command, int flags)
 	    && subshell_state != RUNNING_COMMAND
 #endif				/* HAVE_SUBSHELL_SUPPORT */
 	    ) {
-	    printf ("%s\r\n", _("Press any key to continue..."));
-	    last_paused = 1;
+	    printf (_("Press any key to continue..."));
 	    fflush (stdout);
 	    mc_raw_mode ();
 	    getch ();
+	    printf ("\r\n");
+	    fflush (stdout);
 	}
 	if (console_flag) {
 	    if (output_lines && keybar_visible) {
