@@ -139,7 +139,6 @@
 #      define N_(x) x
 #   endif
 #include "vfs/vfs.h"
-#include "intl/libgettext.h"
 #    define CDisplay gdk_display
 #    define CRoot gdk_root_parent
 #    define Window GtkEdit *
