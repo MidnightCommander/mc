@@ -1,3 +1,7 @@
+2004-09-26  Roland Illig  <roland.illig@gmx.de>
+
+	* editcmd.c (edit_ext_cmd): Revoked my last change.
+
 2004-09-25  Roland Illig  <roland.illig@gmx.de>
 
 	* editcmd.c (edit_ext_cmd): Replaced the old version with a new
