@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Spreadsheet
+Name[da]=Regneark
 Name[es]=Hoja de cálculo
 Name[fi]=Taulukko
 Name[fr]=Tableur
@@ -7,6 +8,7 @@ Name[ja]=¥¹¥×¥ì¥Ã¥É¥·¡¼¥È
 Name[no]=Regneark
 Name[pl]=Arkusz kalkulacyjny
 Comment=Create a new spreadsheet
+Comment[da]=Opret et nyt regneark
 Comment[es]=Crea una nueva hoja de cálculo
 Comment[fi]=Luo uusi taulukko
 Comment[fr]=Crée une nouvelle feuille de calcul
