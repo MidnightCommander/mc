@@ -126,22 +126,10 @@ dnl getpt is a GNU Extension (glibc 2.1.x)
 dnl
 AC_CHECK_FUNCS(getpt)
 
-SHADOWLIB=
-case $host_os in
-linux*)
-    AC_CHECK_LIB(shadow,pw_encrypt,
-	[shadow_header=
-	AC_CHECK_HEADERS([shadow.h shadow/shadow.h],
-			 [shadow_header=yes; break])
-	if test -n "$shadow_header"; then
-	    AC_DEFINE(LINUX_SHADOW, 1,
-		      [Define to use shadow passwords on Linux])
-	    SHADOWLIB=-lshadow
-	fi])
-    ;;
-esac
-AC_SUBST(SHADOWLIB)
-
+dnl
+dnl Password encryption support for mcserv
+dnl Check if function crypt needs a prototype
+dnl
 NEED_CRYPT_PROTOTYPE=yes
 if test x$ac_cv_header_crypt_h = xyes; then
 AC_TRY_WARNINGS([#include <crypt.h>], [char *p = crypt("xxx", "yyy");

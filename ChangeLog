@@ -1,3 +1,8 @@
+2002-08-22  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Remove old-style Linux-only support for shadow
+	passwords.
+
 2002-08-21  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Restore AM_INIT_AUTOMAKE with two arguments for
