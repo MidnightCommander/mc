@@ -2,6 +2,7 @@
 #define __CMD_H
 void netlink_cmd (void);
 void ftplink_cmd (void);
+void smblink_cmd (void);
 void undelete_cmd (void);
 void help_cmd (void);
 void dirsizes_cmd (void);

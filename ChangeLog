@@ -1,3 +1,8 @@
+1999-05-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* Make.common.in (confdir): Define confdir as sysconfdir.  This
+	should fix the problem we had with FSSTND distributions.
+
 1999-02-22  Vladimir Kondratiev <vkondra@iil.intel.com>
 
 	* mc.spec.in: added syntax files to %files

@@ -14,6 +14,7 @@ else
 fi
 autoheader
 autoconf
+(cd vfs/samba; autoheader; autoconf)
 )
 
 $srcdir/configure --enable-maintainer-mode $*

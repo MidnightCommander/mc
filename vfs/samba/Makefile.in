@@ -1,0 +1,537 @@
+###########################################################################
+# Makefile.in for Samba - rewritten for autoconf support
+# Copyright Andrew Tridgell 1992-1998
+###########################################################################
+
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+mandir=@mandir@
+
+LIBS=@LIBS@
+CC=@CC@
+CFLAGS=@CFLAGS@
+CPPFLAGS=@CPPFLAGS@
+LDFLAGS=@LDFLAGS@
+AWK=@AWK@
+
+INSTALLCMD=@INSTALL@
+
+VPATH=@srcdir@
+srcdir=@srcdir@
+builddir=@builddir@
+SHELL=/bin/sh
+
+BASEDIR= @prefix@
+BINDIR = @bindir@
+# we don't use sbindir because we want full compatibility with
+# the previous releases of Samba
+SBINDIR = @bindir@
+LIBDIR = @libdir@
+VARDIR = @localstatedir@
+MANDIR = @mandir@
+
+# The permissions to give the executables
+INSTALLPERMS = 0755
+
+# set these to where to find various files
+# These can be overridden by command line switches (see smbd(8))
+# or in smb.conf (see smb.conf(5))
+SMBLOGFILE = $(VARDIR)/log.smb
+NMBLOGFILE = $(VARDIR)/log.nmb
+CONFIGFILE = $(LIBDIR)/smb.conf
+LMHOSTSFILE = $(LIBDIR)/lmhosts
+DRIVERFILE = $(LIBDIR)/printers.def
+PASSWD_PROGRAM = /bin/passwd
+# This is where smbpasswd et al go
+PRIVATEDIR = @privatedir@
+
+SMB_PASSWD_FILE = $(PRIVATEDIR)/smbpasswd
+
+# the directory where lock files go
+LOCKDIR = @lockdir@
+
+# The directory where code page definition files go
+CODEPAGEDIR = $(LIBDIR)/codepages
+
+# The current codepage definition list.
+CODEPAGELIST= 437 737 850 852 861 932 866 949 950 936
+
+# where you are going to have the smbrun binary. This defaults to the 
+# install directory. This binary is needed for correct printing
+# and magic script execution. This should be an absolute path!
+# Also not that this should include the name "smbrun" on the end (the
+# name of the executable)
+SMBRUN = $(BINDIR)/smbrun
+
+
+PASSWD_FLAGS = -DPASSWD_PROGRAM=\"$(PASSWD_PROGRAM)\" -DSMB_PASSWD_FILE=\"$(SMB_PASSWD_FILE)\"
+FLAGS1 = $(CFLAGS) -Iinclude -I$(srcdir)/include -I$(srcdir)/ubiqx -I$(srcdir)/smbwrapper $(CPPFLAGS) -DSMBLOGFILE=\"$(SMBLOGFILE)\" -DNMBLOGFILE=\"$(NMBLOGFILE)\"
+FLAGS2 = -DCONFIGFILE=\"$(CONFIGFILE)\" -DLMHOSTSFILE=\"$(LMHOSTSFILE)\"  
+FLAGS3 = -DSWATDIR=\"$(SWATDIR)\" -DSBINDIR=\"$(SBINDIR)\" -DLOCKDIR=\"$(LOCKDIR)\" -DSMBRUN=\"$(SMBRUN)\" -DCODEPAGEDIR=\"$(CODEPAGEDIR)\"
+FLAGS4 = -DDRIVERFILE=\"$(DRIVERFILE)\" -DBINDIR=\"$(BINDIR)\"
+FLAGS5 = $(FLAGS1) $(FLAGS2) $(FLAGS3) $(FLAGS4) -DHAVE_INCLUDES_H
+FLAGS  = $(ISA) $(FLAGS5) $(PASSWD_FLAGS)
+FLAGS32  = $(ISA32) $(FLAGS5) $(PASSWD_FLAGS)
+
+PROGS1 = bin/smbclient bin/testparm bin/testprns bin/smbstatus @RUNPROG@
+PROGS2 = bin/rpcclient bin/smbpasswd bin/make_smbcodepage @WRAP@ @WRAP32@
+MPROGS = @MPROGS@
+PROGS = $(PROGS1) $(PROGS2) $(MPROGS) bin/nmblookup bin/make_printerdef 
+
+SCRIPTS = $(srcdir)/script/smbtar $(srcdir)/script/addtosmbpass $(srcdir)/script/convert_smbpasswd
+
+QUOTAOBJS=@QUOTAOBJS@
+
+######################################################################
+# object file lists
+######################################################################
+
+SAMBAFILES=			\
+	param/loadparm.o 	\
+	param/params.o 	\
+	lib/time.o 	\
+	lib/slprintf.o 	\
+	lib/util.o 	\
+	lib/debug.o 	\
+	lib/system.o 	\
+	lib/util_str.o 	\
+	lib/kanji.o 	\
+	lib/charcnv.o 	\
+	lib/charset.o 	\
+	lib/username.o 	\
+	lib/util_file.o 	\
+	lib/signal.o 	\
+	lib/util_sock.o 	\
+	lib/genrand.o 	\
+	lib/md4.o 	\
+	lib/doscalls.o 	\
+	lib/util_unistr.o 	\
+	lib/getsmbpass.o 	\
+	lib/interface.o 	\
+	lib/netmask.o 	\
+	libsmb/clientgen.o 	\
+	libsmb/pwd_cache.o 	\
+	libsmb/smbencrypt.o 	\
+	libsmb/smbdes.o 	\
+	libsmb/nmblib.o 	\
+	libsmb/namequery.o\
+	libsmb/nterr.o 	\
+	libsmb/smberr.o
+
+LIB_OBJ = lib/charcnv.o lib/charset.o lib/debug.o lib/fault.o \
+          lib/getsmbpass.o lib/interface.o lib/kanji.o lib/md4.o \
+          lib/netmask.o lib/pidfile.o lib/replace.o \
+          lib/signal.o lib/slprintf.o lib/system.o lib/doscalls.o lib/time.o \
+	  lib/ufc.o lib/genrand.o lib/username.o lib/access.o lib/smbrun.o \
+	  lib/bitmap.o lib/crc32.o lib/snprintf.o \
+	  lib/util_str.o lib/util_sid.o \
+	  lib/util_unistr.o lib/util_file.o \
+	  lib/util.o lib/util_sock.o lib/util_sec.o smbd/ssl.o
+
+UBIQX_OBJ = ubiqx/ubi_BinTree.o ubiqx/ubi_Cache.o ubiqx/ubi_SplayTree.o \
+            ubiqx/ubi_dLinkList.o ubiqx/ubi_sLinkList.o ubiqx/debugparse.o
+
+PARAM_OBJ = param/loadparm.o param/params.o 
+
+LIBSMB_OBJ = libsmb/clientgen.o libsmb/namequery.o libsmb/nmblib.o \
+             libsmb/nterr.o libsmb/smbdes.o libsmb/smbencrypt.o \
+             libsmb/smberr.o libsmb/credentials.o libsmb/pwd_cache.o \
+	     libsmb/passchange.o
+
+RPC_PARSE_OBJ = rpc_parse/parse_lsa.o rpc_parse/parse_misc.o \
+                rpc_parse/parse_net.o rpc_parse/parse_prs.o \
+                rpc_parse/parse_reg.o rpc_parse/parse_rpc.o \
+                rpc_parse/parse_samr.o rpc_parse/parse_srv.o \
+                rpc_parse/parse_wks.o rpc_parse/parse_sec.o
+
+RPC_CLIENT_OBJ = \
+		rpc_client/cli_login.o    \
+		rpc_client/cli_netlogon.o \
+		rpc_client/cli_pipe.o     \
+		rpc_client/cli_lsarpc.o   \
+		rpc_client/cli_wkssvc.o   \
+		rpc_client/cli_srvsvc.o   \
+		rpc_client/cli_reg.o   \
+		rpc_client/cli_samr.o 
+
+
+LOCKING_OBJ = locking/locking.o locking/locking_shm.o locking/locking_slow.o \
+              locking/shmem.o locking/shmem_sysv.o
+
+PASSDB_OBJ = passdb/passdb.o passdb/smbpassfile.o passdb/smbpass.o \
+             passdb/pass_check.o passdb/ldap.o passdb/nispass.o passdb/smbpasschange.o
+
+PRINTING_OBJ = printing/pcap.o printing/print_svid.o printing/printing.o
+
+SMBRUN_OBJ = utils/smbrun.o lib/util_sec.o
+
+SMBSH_OBJ = smbwrapper/smbsh.o smbwrapper/shared.o \
+            $(PARAM_OBJ) $(UBIQX_OBJ) $(LIB_OBJ)
+
+MAKE_SMBCODEPAGE_OBJ = utils/make_smbcodepage.o $(PARAM_OBJ) \
+                       $(UBIQX_OBJ) $(LIB_OBJ)
+
+MAKE_PRINTERDEF_OBJ = utils/make_printerdef.o $(PARAM_OBJ) \
+                      $(UBIQX_OBJ) $(LIB_OBJ)
+
+STATUS_OBJ = utils/status.o $(LOCKING_OBJ) $(PARAM_OBJ) \
+             $(UBIQX_OBJ) $(LIB_OBJ)
+
+TESTPARM_OBJ = utils/testparm.o \
+               $(PARAM_OBJ) $(UBIQX_OBJ) $(LIB_OBJ)
+
+TESTPRNS_OBJ = utils/testprns.o $(PARAM_OBJ) $(PRINTING_OBJ) $(UBIQX_OBJ) \
+               $(LIB_OBJ)
+
+SMBPASSWD_OBJ = utils/smbpasswd.o $(PARAM_OBJ) $(LIBSMB_OBJ) $(PASSDB_OBJ) \
+                $(UBIQX_OBJ) $(RPC_CLIENT_OBJ) $(RPC_PARSE_OBJ) $(LIB_OBJ)
+
+RPCCLIENT_OBJ = rpcclient/rpcclient.o \
+             rpcclient/display.o \
+             rpcclient/cmd_lsarpc.o \
+             rpcclient/cmd_wkssvc.o \
+             rpcclient/cmd_samr.o \
+             rpcclient/cmd_reg.o \
+             rpcclient/cmd_srvsvc.o \
+             rpcclient/cmd_netlogon.o \
+             $(PARAM_OBJ) $(LIBSMB_OBJ) $(UBIQX_OBJ) $(LIB_OBJ) \
+             $(RPC_CLIENT_OBJ) $(RPC_PARSE_OBJ) $(PASSDB_OBJ)
+
+SMBWRAPPER_OBJ = smbwrapper/smbw.o smbwrapper/wrapped.o \
+		smbwrapper/smbw_dir.o smbwrapper/smbw_stat.o \
+		smbwrapper/realcalls.o smbwrapper/shared.o \
+		$(LIBSMB_OBJ) $(PARAM_OBJ) \
+                $(UBIQX_OBJ) $(LIB_OBJ)
+
+CLIENT_OBJ = client/client.o client/clitar.o \
+             $(PARAM_OBJ) $(LIBSMB_OBJ) $(UBIQX_OBJ) $(LIB_OBJ)
+
+MOUNT_OBJ = client/smbmount.o client/clientutil.o \
+             $(PARAM_OBJ) $(LIBSMB_OBJ) $(UBIQX_OBJ) $(LIB_OBJ)
+
+MNT_OBJ = client/smbmnt.o \
+             $(PARAM_OBJ) $(LIBSMB_OBJ) $(UBIQX_OBJ) $(LIB_OBJ)
+
+UMOUNT_OBJ = client/smbumount.o \
+             $(PARAM_OBJ) $(LIBSMB_OBJ) $(UBIQX_OBJ) $(LIB_OBJ)
+
+NMBLOOKUP_OBJ = utils/nmblookup.o $(PARAM_OBJ) $(UBIQX_OBJ) \
+                $(LIBSMB_OBJ) $(LIB_OBJ)
+
+SMBTORTURE_OBJ = utils/torture.o utils/nbio.o $(LIBSMB_OBJ) $(PARAM_OBJ) \
+                 $(UBIQX_OBJ) $(LIB_OBJ)
+
+RPCTORTURE_OBJ = utils/rpctorture.o \
+             rpcclient/display.o \
+             rpcclient/cmd_lsarpc.o \
+             rpcclient/cmd_wkssvc.o \
+             rpcclient/cmd_samr.o \
+             rpcclient/cmd_srvsvc.o \
+             rpcclient/cmd_netlogon.o \
+             $(PARAM_OBJ) $(LIBSMB_OBJ) $(UBIQX_OBJ) $(LIB_OBJ) \
+             $(RPC_CLIENT_OBJ) $(RPC_PARSE_OBJ) $(PASSDB_OBJ)
+
+DEBUG2HTML_OBJ = utils/debug2html.o ubiqx/debugparse.o
+
+SMBFILTER_OBJ = utils/smbfilter.o $(LIBSMB_OBJ) $(PARAM_OBJ) \
+                 $(UBIQX_OBJ) $(LIB_OBJ)
+
+PROTO_OBJ = $(CLIENT_OBJ) \
+	    $(RPCCLIENT_OBJ) $(SMBWRAPPER_OBJ) $(SMBTORTURE_OBJ)
+
+PICOBJS = $(SMBWRAPPER_OBJ:.o=.po)
+PICOBJS32 = $(SMBWRAPPER_OBJ:.o=.po32)
+
+######################################################################
+# now the rules...
+######################################################################
+
+all : CHECK $(SAMBAFILES)
+
+smbwrapper : CHECK bin/smbsh bin/smbwrapper.so @WRAP32@
+
+smbtorture : CHECK bin/smbtorture
+
+rpctorture : CHECK bin/rpctorture
+
+debug2html : CHECK bin/debug2html
+
+smbfilter : CHECK bin/smbfilter
+
+.SUFFIXES:
+.SUFFIXES: .c .o .po .po32
+
+CHECK:
+	@echo "Using FLAGS = $(FLAGS)"
+	@echo "Using FLAGS32 = $(FLAGS32)"
+	@echo "Using LIBS = $(LIBS)"
+
+MAKEDIR = || exec false; \
+	  if test -d "$$dir"; then :; else \
+	  echo mkdir "$$dir"; \
+	  mkdir -p "$$dir" >/dev/null 2>&1 || \
+	  test -d "$$dir" || \
+	  mkdir "$$dir" || \
+	  exec false; fi || exec false
+
+# the lines below containing `@MAINT@' are for atomatic dependency tracking
+# they will only work with GNU make, gcc and --enable-maintainer-mode
+# without --enable-maintainer-mode, they do nothing
+.c.o: @MAINT@ .deps/.dummy
+	@if (: >> $@ || : > $@) >/dev/null 2>&1; then rm -f $@; else \
+	 dir=`echo $@ | sed 's,/[^/]*$$,,;s,^$$,.,'` $(MAKEDIR); fi
+@MAINT@	@if (: >> .deps/$@ || : > .deps/$@) >/dev/null 2>&1; then :; \
+@MAINT@	 else dir=.deps/`echo $@ | sed 's,/[^/]*$$,,;s,^$$,.,'` \
+@MAINT@	      $(MAKEDIR); fi; rm -f .deps/$@ .deps/$@d
+	@echo Compiling $*.c
+	@$(CC) -I. -I$(srcdir) $(FLAGS) -c $< \
+	  -o $@ @MAINT@ -Wp,-MD,.deps/$@
+@BROKEN_CC@	-mv `echo $@ | sed 's%^.*/%%g'` $@
+@MAINT@	@sed 's|^'`echo $@ | sed 's,.*/,,'`':|$@:|' \
+@MAINT@	  <.deps/$@ >.deps/$@d && \
+@MAINT@	rm -f .deps/$@ && : >.deps/.stamp
+
+.c.po: @MAINT@ .deps/.dummy
+	@if (: >> $@ || : > $@) >/dev/null 2>&1; then rm -f $@; else \
+	  dir=`echo $@ | sed 's,/[^/]*$$,,;s,^$$,.,'` $(MAKEDIR); fi
+@MAINT@	@if (: >> .deps/$@ || : > .deps/$@) >/dev/null 2>&1; then :; \
+@MAINT@	 else dir=.deps/`echo $@ | sed 's,/[^/]*$$,,;s,^$$,.,'` \
+@MAINT@	      $(MAKEDIR); fi; rm -f .deps/$@ .deps/$@d
+	@echo Compiling $*.c with @PICFLAG@
+	@$(CC) -I. -I$(srcdir) $(FLAGS) @PICFLAG@ -c $< \
+	  -o $*.po.o @MAINT@ -Wp,-MD,.deps/$@
+@BROKEN_CC@	-mv `echo $@ | sed -e 's%^.*/%%g' -e 's%\.po$$%.o%'` $@.o
+@MAINT@	@sed 's|^'`echo $*\.po\.o | sed 's,.*/,,'`':|$@:|' \
+@MAINT@	  <.deps/$@ >.deps/$@d && \
+@MAINT@	rm -f .deps/$@ && : >.deps/.stamp
+	@mv $*.po.o $@
+
+# this is for IRIX
+.c.po32: @MAINT@ .deps/.dummy
+	@if (: >> $@ || : > $@) >/dev/null 2>&1; then rm -f $@; else \
+	  dir=`echo $@ | sed 's,/[^/]*$$,,;s,^$$,.,'` $(MAKEDIR); fi
+@MAINT@	@if (: >> .deps/$@ || : > .deps/$@) >/dev/null 2>&1; then :; \
+@MAINT@	 else dir=.deps/`echo $@ | sed 's,/[^/]*$$,,;s,^$$,.,'` \
+@MAINT@	      $(MAKEDIR); fi; rm -f .deps/$@ .deps/$@d
+	@echo Compiling $*.c with @PICFLAG@ and -32
+	@$(CC) -32 -I. -I$(srcdir) $(FLAGS32) @PICFLAG@ -c $< \
+	  -o $*.po32.o @MAINT@ -Wp,-MD,.deps/$@
+@BROKEN_CC@	-mv `echo $@ | sed -e 's%^.*/%%g' -e 's%\.po32$$%.o%'` $@.o
+@MAINT@	@sed 's|^'`echo $*.po32.o | sed 's,.*/,,'`':|$@:|' \
+@MAINT@	  <.deps/$@ >.deps/$@d && \
+@MAINT@	rm -f .deps/$@ && : >.deps/.stamp
+	@mv $*.po32.o $@
+
+bin/.dummy:
+	@if (: >> $@ || : > $@) >/dev/null 2>&1; then :; else \
+	  dir=bin $(MAKEDIR); fi
+	@: >> $@ || : > $@ # what a fancy emoticon!
+
+bin/smbrun: $(SMBRUN_OBJ) bin/.dummy
+	@echo Linking $@
+	@$(CC) $(FLAGS) -o $@ $(SMBRUN_OBJ) $(LDFLAGS) $(LIBS)
+
+bin/rpcclient: $(RPCCLIENT_OBJ) bin/.dummy
+	@echo Linking $@
+	@$(CC) $(FLAGS) -o $@ $(RPCCLIENT_OBJ) $(LDFLAGS) $(LIBS)
+
+bin/smbclient: $(CLIENT_OBJ) bin/.dummy
+	@echo Linking $@
+	@$(CC) $(FLAGS) -o $@ $(CLIENT_OBJ) $(LDFLAGS) $(LIBS)
+
+bin/smbmount: $(MOUNT_OBJ) bin/.dummy
+	@echo Linking $@
+	@$(CC) $(FLAGS) -o $@ $(MOUNT_OBJ) $(LIBS)
+
+bin/smbmnt: $(MNT_OBJ) bin/.dummy
+	@echo Linking $@
+	@$(CC) $(FLAGS) -o $@ $(MNT_OBJ) $(LIBS)
+
+bin/smbumount: $(UMOUNT_OBJ) bin/.dummy
+	@echo Linking $@
+	@$(CC) $(FLAGS) -o $@ $(UMOUNT_OBJ) $(LIBS)
+
+bin/testparm: $(TESTPARM_OBJ) bin/.dummy
+	@echo Linking $@
+	@$(CC) $(FLAGS) -o $@ $(TESTPARM_OBJ) $(LDFLAGS) $(LIBS)
+
+bin/testprns: $(TESTPRNS_OBJ) bin/.dummy
+	@echo Linking $@
+	@$(CC) $(FLAGS) -o $@ $(TESTPRNS_OBJ) $(LDFLAGS) $(LIBS)
+
+bin/smbstatus: $(STATUS_OBJ) bin/.dummy
+	@echo Linking $@
+	@$(CC) $(FLAGS) -o $@ $(STATUS_OBJ) $(LDFLAGS) $(LIBS)
+
+bin/smbpasswd: $(SMBPASSWD_OBJ) bin/.dummy
+	@echo Linking $@
+	@$(CC) $(FLAGS) -o $@ $(SMBPASSWD_OBJ) $(LDFLAGS) $(LIBS)
+
+bin/make_smbcodepage: $(MAKE_SMBCODEPAGE_OBJ) bin/.dummy
+	@echo Linking $@
+	@$(CC) $(FLAGS) -o $@ $(MAKE_SMBCODEPAGE_OBJ) $(LDFLAGS) $(LIBS)
+
+bin/nmblookup: $(NMBLOOKUP_OBJ) bin/.dummy
+	@echo Linking $@
+	@$(CC) $(FLAGS) -o $@ $(NMBLOOKUP_OBJ) $(LDFLAGS) $(LIBS)
+
+bin/make_printerdef: $(MAKE_PRINTERDEF_OBJ) bin/.dummy
+	@echo Linking $@
+	@$(CC) $(FLAGS) -o $@ $(MAKE_PRINTERDEF_OBJ) $(LDFLAGS) $(LIBS)
+
+bin/smbtorture: $(SMBTORTURE_OBJ) bin/.dummy
+	@echo Linking $@
+	@$(CC) $(FLAGS) -o $@ $(SMBTORTURE_OBJ) $(LDFLAGS) $(LIBS)
+
+bin/rpctorture: $(RPCTORTURE_OBJ) bin/.dummy
+	@echo Linking $@
+	@$(CC) $(FLAGS) -o $@ $(RPCTORTURE_OBJ) $(LDFLAGS) $(LIBS)
+
+bin/debug2html: $(DEBUG2HTML_OBJ) bin/.dummy
+	@echo Linking $@
+	@$(CC) $(FLAGS) -o $@ $(DEBUG2HTML_OBJ) $(LDFLAGS) $(LIBS)
+
+bin/smbfilter: $(SMBFILTER_OBJ) bin/.dummy
+	@echo Linking $@
+	@$(CC) $(FLAGS) -o $@ $(SMBFILTER_OBJ) $(LDFLAGS) $(LIBS)
+
+bin/smbwrapper.so: $(PICOBJS)
+	@echo Linking shared library $@
+	@$(LD) @LDSHFLAGS@ -o $@ $(PICOBJS) $(LIBS)
+
+bin/smbwrapper.32.so: $(PICOBJS32)
+	@echo Linking shared library $@
+	@$(LD) -32 @LDSHFLAGS@ -o $@ $(PICOBJS32) $(LIBS)
+
+bin/smbsh: $(SMBSH_OBJ) bin/.dummy
+	@echo Linking $@
+	@$(CC) $(FLAGS) -o $@ $(SMBSH_OBJ) $(LDFLAGS) $(LIBS)
+
+install: installbin installman installscripts installcp installswat
+
+installdirs:
+	$(SHELL) $(srcdir)/install-sh -d -m $(INSTALLPERMS) \
+	$(BASEDIR) $(SBINDIR) $(BINDIR) $(LIBDIR) $(VARDIR) $(CODEPAGEDIR)
+
+installservers: all installdirs
+	@$(SHELL) $(srcdir)/script/installbin.sh $(INSTALLPERMS) $(BASEDIR) $(SBINDIR) $(LIBDIR) $(VARDIR) $(SPROGS)
+
+installbin: all installdirs
+	@$(SHELL) $(srcdir)/script/installbin.sh $(INSTALLPERMS) $(BASEDIR) $(SBINDIR) $(LIBDIR) $(VARDIR) $(SPROGS)
+	@$(SHELL) $(srcdir)/script/installbin.sh $(INSTALLPERMS) $(BASEDIR) $(BINDIR) $(LIBDIR) $(VARDIR) $(PROGS)
+
+installscripts: installdirs
+	@$(SHELL) $(srcdir)/script/installscripts.sh $(INSTALLPERMS) $(BINDIR) $(SCRIPTS)
+
+installcp: installdirs
+	@$(SHELL) $(srcdir)/script/installcp.sh $(srcdir) $(LIBDIR) $(CODEPAGEDIR) $(BINDIR) $(CODEPAGELIST)
+
+installswat: installdirs
+	@$(SHELL) $(srcdir)/script/installswat.sh $(SWATDIR) $(srcdir)
+
+# revert to the previously installed version
+revert:
+	@$(SHELL) $(srcdir)/script/revert.sh $(SBINDIR) $(SPROGS) 
+	@$(SHELL) $(srcdir)/script/revert.sh $(BINDIR) $(PROGS) $(SCRIPTS)
+
+installman:
+	@$(SHELL) $(srcdir)/script/installman.sh $(MANDIR) $(srcdir) "@ROFF@"
+
+uninstall: uninstallman uninstallbin uninstallscripts uninstallcp
+
+uninstallman:
+	@$(SHELL) $(srcdir)/script/uninstallman.sh $(MANDIR) $(srcdir)
+
+uninstallbin:
+	@$(SHELL) $(srcdir)/script/uninstallbin.sh $(INSTALLPERMS) $(BASEDIR) $(SBINDIR) $(LIBDIR) $(VARDIR) $(SPROGS)
+	@$(SHELL) $(srcdir)/script/uninstallbin.sh $(INSTALLPERMS) $(BASEDIR) $(BINDIR) $(LIBDIR) $(VARDIR) $(PROGS)
+
+uninstallscripts:
+	@$(SHELL) $(srcdir)/script/uninstallscripts.sh $(INSTALLPERMS) $(BINDIR) $(SCRIPTS)
+
+uninstallcp:
+	@$(SHELL) $(srcdir)/script/uninstallcp.sh $(CODEPAGEDIR) $(CODEPAGELIST)
+
+clean: 
+	-rm -f core */*~ *~ */*.o */*.po */*.po32 */*.so bin/*
+
+proto: 
+	@echo rebuilding include/proto.h
+	@cd $(srcdir) && $(AWK) -f script/mkproto.awk `echo $(PROTO_OBJ) | tr ' ' '\n' | sed -e 's/\.o/\.c/g' | sort -u | egrep -v 'ubiqx/|wrapped'` > include/proto.h
+
+etags:
+	etags `find . -name "*.[ch]"`
+
+ctags:
+	ctags `find . -name "*.[ch]"`
+
+realclean: clean
+	-rm -f config.log $(PROGS) $(SPROGS) bin/.dummy
+	-rmdir bin
+
+distclean: realclean
+	-rm -f include/config.h include/stamp-h Makefile
+	-rm -f config.status config.cache so_locations
+	-rm -rf .deps
+
+#
+# This target is for documenation updators. It regenerates
+# the man pages and HTML docs from the YODL source files.
+# In order for this target to work YODL must be installed
+# and working on your system. JRA.
+yodldocs:
+	@$(SHELL) $(srcdir)/script/makeyodldocs.sh $(srcdir)
+
+# this target is really just for my use. It only works on a limited
+# range of machines and is used to produce a list of potentially
+# dead (ie. unused) functions in the code. (tridge)
+finddead:
+	nm */*.o |grep 'U ' | awk '{print $$2}' | sort -u > nmused.txt
+	nm */*.o |grep 'T ' | awk '{print $$3}' | sort -u > nmfns.txt
+	comm -13 nmused.txt nmfns.txt 
+
+# Rules for maintainers (--enable-maintainer-mode)
+AUTOCONF=@AUTOCONF@
+AUTOHEADER=@AUTOHEADER@
+
+# when configure.in is updated, reconfigure
+$(srcdir)/configure: @MAINT@ $(srcdir)/configure.in $(srcdir)/aclocal.m4
+	cd $(srcdir) && $(AUTOCONF)
+
+config.status: $(srcdir)/configure
+	$(SHELL) ./config.status --recheck
+
+Makefile: $(srcdir)/Makefile.in config.status \
+	  include/stamp-h # just to ensure that config.h is up-to-date
+	CONFIG_FILES=$@ CONFIG_HEADERS= $(SHELL) ./config.status
+
+# note that nothing depends on config.h, so will probably be rebuilt
+# only when explicitly requested, unless dependency tracking is enabled
+include/config.h: include/stamp-h
+	@:
+
+include/stamp-h: $(srcdir)/include/config.h.in config.status
+	CONFIG_FILES= CONFIG_HEADERS=include/config.h $(SHELL) ./config.status
+	@echo > include/stamp-h
+
+$(srcdir)/include/config.h.in: $(srcdir)/include/stamp-h.in
+	@:
+
+$(srcdir)/include/stamp-h.in: @MAINT@ $(srcdir)/acconfig.h $(srcdir)/configure.in
+	cd $(srcdir) && $(AUTOHEADER)
+	@date -u > $@
+
+# automatic dependency tracking rules
+.deps/.dummy:
+	@if (: >> $@ || : > $@) >/dev/null 2>&1; then :; else \
+	  dir=.deps $(MAKEDIR); fi
+	@: >> $@ || : > $@ # what a fancy emoticon!
+
+.deps/.stamp: .deps/.dummy
+	@:
+
+.deps/depend: .deps/.stamp
+	@echo Updating dependencies
+	@: | cat `find .deps -type f -name \*d` >$@ 2>/dev/null || true
+
+@MAINT@-include .deps/depend

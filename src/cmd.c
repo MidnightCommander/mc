@@ -1322,6 +1322,12 @@ void ftplink_cmd (void)
 	     "[FTP File System]", "/#ftp:", 1);
 }
 
+void smblink_cmd (void)
+{
+    nice_cd (_(" SMB link to machine "), _(machine_str),
+	     "[SMB File System]", "/#smb:", 0);
+}
+
 #ifdef HAVE_SETSOCKOPT
 void source_routing (void)
 {

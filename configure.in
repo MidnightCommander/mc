@@ -1233,6 +1233,8 @@ dnl
 dnl Output configuration filesn
 dnl
 
+AC_CONFIG_SUBDIRS(vfs/samba)
+
 AC_OUTPUT([
 Make.common 
 Makefile 

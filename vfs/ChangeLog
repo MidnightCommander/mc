@@ -1,3 +1,14 @@
+1999-06-14  Wayne Roberts <wroberts1@cx983858-b.orng1.occa.home.com>
+
+	* vfs/smbfs.c: New file.  Implements the Samba-based file system.
+
+	* vfs/vfs.h: Declare vfs_smbfs_ops, vfs_file_is_smb.
+
+	* vfs/vfs.c (vfs_file_is_smb): implemented.
+	(vfs_init) register smbfs.
+
+	* vfs/samba: Incorporate SAMBA source code required for smbfs
+
 Fri Jun 18 11:49:05 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* ftpfs.c (resolve_symlink_with_ls_options): Some ftp servers don't 

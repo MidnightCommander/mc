@@ -1,5 +1,6 @@
 # This is the "Makefile.in" that is used when vfs is built as part of
 # mc.  Any changes here must also be made in Makefile.am.
+# x
 
 srcdir = @srcdir@
 VPATH = @srcdir@
@@ -7,8 +8,8 @@ VPATH = @srcdir@
 rootdir = $(srcdir)/..
 @MCFG@@MCF@
 
-CFLAGS   = $(XCFLAGS)
-CPPFLAGS = $(XCPPFLAGS)
+CFLAGS   = $(XCFLAGS) -D_LARGEFILE64_SOURCE
+CPPFLAGS = $(XCPPFLAGS) -Isamba/ubiqx -Isamba/smbwrapper
 LDFLAGS  = $(XLDFLAGS)
 DEFS     = $(XDEFS)
 LIBS     = @LINTL@ @SHADOWLIB@ $(XLIBS) @TERMNET@ @PAMLIBS@ @LCRYPT@ $(XLIB)
@@ -20,7 +21,39 @@ AR = @AR@
 #
 # VFS code
 #
-NETFILES   = tcputil.o fish.o ftpfs.o mcfs.o utilvfs.o
+NETFILES   = tcputil.o fish.o ftpfs.o smbfs.o mcfs.o utilvfs.o
+
+SAMBAFILES=         \
+    samba/param/loadparm.o  \
+    samba/lib/time.o    \
+    samba/lib/slprintf.o    \
+    samba/lib/util.o    \
+    samba/lib/debug.o   \
+    samba/lib/system.o  \
+    samba/lib/util_str.o    \
+    samba/lib/kanji.o   \
+    samba/lib/charcnv.o     \
+    samba/lib/charset.o     \
+    samba/lib/username.o    \
+    samba/lib/util_file.o   \
+    samba/lib/signal.o  \
+    samba/lib/util_sock.o   \
+    samba/lib/genrand.o     \
+    samba/lib/md4.o     \
+    samba/lib/doscalls.o    \
+    samba/param/params.o    \
+    samba/libsmb/clientgen.o    \
+    samba/libsmb/pwd_cache.o    \
+    samba/libsmb/smbencrypt.o   \
+    samba/libsmb/smbdes.o   \
+    samba/lib/util_unistr.o     \
+    samba/lib/getsmbpass.o  \
+    samba/libsmb/nmblib.o   \
+    samba/libsmb/namequery.o\
+    samba/lib/interface.o   \
+    samba/lib/netmask.o     \
+    samba/libsmb/nterr.o    \
+    samba/libsmb/smberr.o
 
 NONETFILES = 			\
 	container.o		\
@@ -153,9 +186,12 @@ mcservx: mcserv.o tcputil.o mad.o
 	$(CC) $(LDFLAGS) -o mcserv mcserv.o tcputil.o mad.o $(LIBS)
 	touch mcservx
 
-libvfs-mc.a: $(VFSOBJS)
+$(SAMBAFILES):
+	cd samba && $(MAKE)
+
+libvfs-mc.a: $(VFSOBJS) $(SAMBAFILES)
 	$(RMF) $@
-	$(AR) cr $@ $(VFSOBJS)
+	$(AR) cr $@ $(VFSOBJS) $(SAMBAFILES)
 	-$(RANLIB) $@
 
 showlibdep:

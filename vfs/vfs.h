@@ -129,6 +129,7 @@ struct utimbuf {
     extern vfs vfs_tarfs_ops;
 
     extern vfs vfs_ftpfs_ops;
+    extern vfs vfs_smbfs_ops;
     extern vfs vfs_fish_ops;
     extern vfs vfs_mcfs_ops;
     
@@ -164,6 +165,7 @@ struct utimbuf {
 #endif
     int vfs_file_is_local (char *name);
     int vfs_file_is_ftp (char *filename);
+    int vfs_file_is_smb (char *filename);
     char *vfs_get_current_dir (void);
     
     void vfs_stamp (vfs *, vfsid);
@@ -244,6 +246,7 @@ struct utimbuf {
 #   define vfs_current_is_local() 1
 #   define vfs_file_is_local(x) 1
 #   define vfs_file_is_ftp(x) 0
+#   define vfs_file_is_smb(x) 0
 #   define vfs_current_is_tarfs() 0
 #   define vfs_current_is_extfs() 0
 #   define vfs_path(x) x

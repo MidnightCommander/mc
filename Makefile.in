@@ -75,6 +75,7 @@ uninstall:
 
 cross TAGS clean depend dep:
 	@for I in $(unixdirs); do cd $$I; $(MAKE) $@ || exit 1; cd ..; done
+	cd vfs/samba && $(MAKE) $@
 
 Makefile: Makefile.in config.status
 	CONFIG_FILES=Makefile CONFIG_HEADERS= $(SHELL) config.status
@@ -100,6 +101,7 @@ distclean:
 	rm -f lib/mc.ext mcfn_install 
 	rm -f vfs/extfs/{ftplist,uzip,uzoo,lslR,ulha,ucpio,deb,urar,uar}
 	rm -f $(srcdir)/config.log $(srcdir)/config.status 
+	cd vfs/samba && $(MAKE) $@
 
 distcopy:
 	sed -e "s/^%define ver .*/%define ver      $(VERSION)/; s/^%define rel .*/%define rel      1/" mc.spec > Specfile

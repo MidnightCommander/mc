@@ -323,7 +323,7 @@ check_hardlinks (char *src_name, char *dst_name, struct stat *pstat)
     char *p;
 
 #if 1	/* What will happen if we kill this line? mc_link() will fail on this and it is right behaviour... */
-    if (vfs_file_is_ftp (src_name))
+    if (vfs_file_is_ftp (src_name) || vfs_file_is_smb (src_name))
         return 0;
 #endif
     for (lp = linklist; lp != NULL; lp = lp -> next)
@@ -1230,6 +1230,25 @@ move_dir_dir (FileOpContext *ctx, char *s, char *d, long *progress_count, double
 	move_over = 1;
     } else
 	destdir = concat_dir_and_file (d, x_basename (s));
+#ifndef OS2_NT
+    if (sbuf.st_dev == dbuf.st_dev
+	&& sbuf.st_ino == dbuf.st_ino){
+	    int msize = COLS - 36;
+            char st[MC_MAXPATHLEN];
+            char dt[MC_MAXPATHLEN];
+
+	    if (msize < 0)
+		msize = 40;
+	    msize /= 2;
+
+	    strcpy (st, name_trunc (s, msize));
+	    strcpy (dt, name_trunc (d, msize));
+	    message_3s (1, MSG_ERROR, _(" `%s' and `%s' are the same directory "),
+		     st, dt );
+	    do_refresh ();
+	    return FILE_SKIP;
+	}
+#endif
 
     /* Check if the user inputted an existing dir */
  retry_dst_stat:

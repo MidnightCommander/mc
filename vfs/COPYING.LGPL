@@ -1,3 +1,10 @@
+
+Please note that the VFS code when *not* linked with SAMBA is released
+under the GNU LGPL license.
+
+If you link your VFS with the SAMBA sources, the resulting library is
+covered by the terms of the GNU GPL.
+
 		  GNU LIBRARY GENERAL PUBLIC LICENSE
 		       Version 2, June 1991
 

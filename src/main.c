@@ -1242,6 +1242,7 @@ static menu_entry PanelMenu [] = {
     { ' ', "", ' ', 0 },		    
     { ' ', N_("&Network link..."),          'N', netlink_cmd },
     { ' ', N_("FT&P link..."),              'P', ftplink_cmd },
+    { ' ', N_("SM&B link..."),              'B', smblink_cmd },
 #endif
     { ' ', "", ' ', 0 },
 #ifdef OS2_NT
@@ -1263,6 +1264,7 @@ static menu_entry RightMenu [] = {
     { ' ', "", ' ', 0 },		    
     { ' ', N_("&Network link..."),       'N', netlink_cmd },
     { ' ', N_("FT&P link..."),           'P', ftplink_cmd },
+    { ' ', N_("SM&B link..."),           'B', smblink_cmd },
 #endif
     { ' ', "", ' ', 0 },
 #ifdef OS2_NT
@@ -2577,6 +2579,7 @@ process_args (int c, const char *option_arg)
 #ifdef USE_NETCODE
     case 'l':
 	ftpfs_set_debug (option_arg);
+	smbfs_set_debug (option_arg);
 	break;
 #endif
 
