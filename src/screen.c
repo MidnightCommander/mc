@@ -317,9 +317,9 @@ string_file_perm_octal (file_entry *fe, int len)
 static const char *
 string_file_nlinks (file_entry *fe, int len)
 {
-    static char buffer [BUF_TINY];
+    static char buffer[BUF_TINY];
 
-    g_snprintf (buffer, sizeof (buffer), "%16d", fe->buf.st_nlink);
+    g_snprintf (buffer, sizeof (buffer), "%16d", (int) fe->buf.st_nlink);
     return buffer;
 }
 

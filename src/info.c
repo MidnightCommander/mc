@@ -181,7 +181,7 @@ info_show_info (WInfo *info)
 	
     case 6:
 	widget_move (&info->widget, 6, 3);
-	printw (_("Links:     %d"), buf.st_nlink);
+	printw (_("Links:     %d"), (int) buf.st_nlink);
 	
     case 5:
 	widget_move (&info->widget, 5, 3);

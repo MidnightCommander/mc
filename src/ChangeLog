@@ -1,3 +1,9 @@
+2003-01-28  Pavel Roskin  <proski@gnu.org>
+
+	* info.c (info_show_info): Cast nlink_t to int to avoid a
+	warning if nlink_t is short.
+	* screen.c (string_file_nlinks): Likewise.
+
 2003-01-27  Arpi  <arpi@mplayerhq.hu>
 
 	* key.c (is_idle): Correct maximal file descriptor and return
