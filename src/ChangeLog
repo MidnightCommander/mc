@@ -1,5 +1,9 @@
 2001-06-05  Pavel Roskin  <proski@gnu.org>
 
+	* selcodepage.c (do_select_codepage): New function.
+	* selcodepage.h: Declare it.
+	From Walery Studennikov <hqsoftware@mail.ru>.
+
 	* mfmt.c (omain): Warning fix.
 
 	* key.c [HAVE_TEXTMODE_X11_SUPPORT]: Rename `display' to

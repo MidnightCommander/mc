@@ -3,11 +3,13 @@
 #ifdef HAVE_CHARSET
 #include <stdlib.h>
 #include <stdio.h>
+#include "i18n.h"
 #include "dlg.h"
+#include "dialog.h"
 #include "widget.h"
 #include "wtools.h"
 #include "charsets.h"
-#include "i18n.h"
+#include "main.h"
 
 #define ENTRY_LEN 35
 
@@ -60,4 +62,40 @@ int select_charset( int current_charset, int seldisplay )
     return (seldisplay) ? ( (i >= n_codepages) ? -1 : i )
 			: ( i - 1 );
 }
+
+/* Helper functions for codepages support */
+
+
+int do_select_codepage()
+{
+    char *errmsg;
+
+#ifndef HAVE_ICONV
+
+    message( 1, _(" Warning "),
+	     "Midnight Commander was compiled without iconv support,\n"
+	     "so charsets recoding feature is not available!" );
+    return -1;
+
+#else
+
+    if (display_codepage > 0) {
+	source_codepage = select_charset( source_codepage, 0 );
+	errmsg = init_translation_table( source_codepage, display_codepage );
+	if (errmsg) {
+	    message( 1, _(" Error "), errmsg );
+	    return -1;
+	}
+    } else {
+	message( 1, _(" Warning "),
+		 "To use this feature select your codepage in\n"
+		 "Setup / Display Bits dialog!\n"
+		 "Do not forget to save options." );
+	return -1;
+    }
+    return 0;
+}
+
+#endif /* HAVE_ICONV */
+
 #endif /* HAVE_CHARSET */
