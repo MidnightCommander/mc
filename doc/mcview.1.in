@@ -1,4 +1,4 @@
-.TH mcview 1 "19 January 2003"
+.TH MCVIEW 1 "January 2003" "MC Version 4.6.0" "GNU Midnight Commander"
 .SH NAME
 mcview \- Internal file viewer of GNU Midnight Commander.
 .SH USAGE
@@ -61,7 +61,7 @@ selected=black,green"
 .fi
 .PP
 .SH FILES
-@prefix@/share/mc/mc.hlp
+.I @prefix@/share/mc/mc.hlp
 .IP
 The help file for the program.
 .PP
@@ -75,7 +75,7 @@ the user's own ~/.mc/ini file is missing.
 Global settings for the Midnight Commander.  Settings in this file
 affect all users, whether they have ~/.mc/ini or not.
 .PP
-$HOME/.mc/ini
+.I $HOME/.mc/ini
 .IP
 User's own setup.  If this file is present, the setup is loaded from
 here instead of the system-wide startup file.
