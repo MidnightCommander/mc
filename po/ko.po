@@ -3549,7 +3549,7 @@ msgid "Unknown tag on display format: "
 msgstr "출력 형식에 모르는 태그: "
 
 #: src/screen.c:1375
-msgid "User suplied format looks invalid, reverting to default."
+msgid "User supplied format looks invalid, reverting to default."
 msgstr "사용자가 제공한 형식은 잘못되었습니다. 기본값 사용."
 
 #: src/screen.c:1983
@@ -4268,7 +4268,7 @@ msgstr ""
 
 #: vfs/cpio.c:455
 #, c-format
-msgid "%s contains duplicit entries! Skipping!"
+msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s가 이상한 엔트리를 포함하고 있습니다! 건너뜀!"
 
 #: vfs/cpio.c:524

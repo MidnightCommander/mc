@@ -3673,7 +3673,7 @@ msgid "Unknown tag on display format: "
 msgstr "Neznámá popiska ve formátu zobrazení: "
 
 #: src/screen.c:1382
-msgid "User suplied format looks invalid, reverting to default."
+msgid "User supplied format looks invalid, reverting to default."
 msgstr "Chybný formát zadaný u¾ivatelem, bude pou¾it standardní."
 
 #: src/screen.c:1990
@@ -4434,7 +4434,7 @@ msgstr ""
 #. This can be considered archive inconsistency
 #: vfs/cpio.c:455
 #, c-format
-msgid "%s contains duplicit entries! Skipping!"
+msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s obsahuje duplicitní polo¾ky! Pøeskakují se!"
 
 #: vfs/cpio.c:524

@@ -3672,7 +3672,7 @@ msgid "Unknown tag on display format: "
 msgstr "Ekran şəkilləndirməsində namə'lum teq: "
 
 #: src/screen.c:1382
-msgid "User suplied format looks invalid, reverting to default."
+msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
 "İstifadəçi tərəfindən bildirlən şəkillandirmə düzgün deyil, əsasa keçirəm."
 
@@ -4432,7 +4432,7 @@ msgstr ""
 #. This can be considered archive inconsistency
 #: vfs/cpio.c:455
 #, c-format
-msgid "%s contains duplicit entries! Skipping!"
+msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s cüt girişlər daxiledir! Keçirəm!"
 
 #: vfs/cpio.c:524

@@ -3562,7 +3562,7 @@ msgid "Unknown tag on display format: "
 msgstr "Campo desconocido en el formato de pantalla: "
 
 #: src/screen.c:1375
-msgid "User suplied format looks invalid, reverting to default."
+msgid "User supplied format looks invalid, reverting to default."
 msgstr "Formato no parece válido. Recuperando el predeterminado."
 
 #: src/screen.c:1983
@@ -4287,7 +4287,7 @@ msgstr ""
 
 #: vfs/cpio.c:455
 #, c-format
-msgid "%s contains duplicit entries! Skipping!"
+msgid "%s contains duplicate entries! Skipping!"
 msgstr "¡%s contiene entradas duplicadas! ¡Ignorando!"
 
 #: vfs/cpio.c:524

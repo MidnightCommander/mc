@@ -3671,7 +3671,7 @@ msgid "Unknown tag on display format: "
 msgstr "Gösterme biçeminde bilinmeyen etiket:"
 
 #: src/screen.c:1382
-msgid "User suplied format looks invalid, reverting to default."
+msgid "User supplied format looks invalid, reverting to default."
 msgstr "Kullanýcý tanýmlý biçim geçersiz: öntanýmlýsý kullanýlacak."
 
 #: src/screen.c:1990
@@ -4432,7 +4432,7 @@ msgstr ""
 #. This can be considered archive inconsistency
 #: vfs/cpio.c:455
 #, c-format
-msgid "%s contains duplicit entries! Skipping!"
+msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s ikiyüzlü girdiler içeriyor! Atlanýyor"
 
 #: vfs/cpio.c:524

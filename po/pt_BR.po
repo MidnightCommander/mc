@@ -3702,7 +3702,7 @@ msgid "Unknown tag on display format: "
 msgstr "Padrão desconhecido no formato de apresentação:"
 
 #: src/screen.c:1382
-msgid "User suplied format looks invalid, reverting to default."
+msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
 "Formato disponibilizado pelo usuário parece inválido, voltando ao padrão."
 
@@ -4479,7 +4479,7 @@ msgstr ""
 #. This can be considered archive inconsistency
 #: vfs/cpio.c:455
 #, c-format
-msgid "%s contains duplicit entries! Skipping!"
+msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s contém entradas duplicadas! Ignorando!"
 
 #: vfs/cpio.c:524

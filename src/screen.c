@@ -1375,7 +1375,7 @@ set_panel_formats (WPanel *p)
     panel_update_cols (&(p->widget), p->frame_size);
 
     if (retcode)
-      message( 1, _(" Warning " ), _( "User suplied format looks invalid, reverting to default." ) );
+      message( 1, _(" Warning " ), _( "User supplied format looks invalid, reverting to default." ) );
     if (retcode & 0x01){
       g_free (p->user_format);
       p->user_format = g_strdup (DEFAULT_USER_FORMAT);

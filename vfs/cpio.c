@@ -450,7 +450,7 @@ static int cpio_create_entry(vfs *me, vfs_s_super *super, struct stat *stat, cha
 		   'No such file or directory' is such case) */
 
 	if(!S_ISDIR(entry->ino->st.st_mode)) { /* This can be considered archive inconsistency */
-	    message_2s(1, MSG_ERROR, _("%s contains duplicit entries! Skipping!"), super->name);
+	    message_2s(1, MSG_ERROR, _("%s contains duplicate entries! Skipping!"), super->name);
 	} else {
 	    entry->ino->st.st_mode = stat->st_mode;
 	    entry->ino->st.st_uid = stat->st_uid;

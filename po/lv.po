@@ -3678,7 +3678,7 @@ msgid "Unknown tag on display format: "
 msgstr "Nezinâma zime displeja formâtâ: "
 
 #: src/screen.c:1382
-msgid "User suplied format looks invalid, reverting to default."
+msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
 "Lietotâja piedâvâtais formâts izskatâs nepareizs, atgrieþamies pie noklusçtâ."
 
@@ -4440,7 +4440,7 @@ msgstr ""
 #. This can be considered archive inconsistency
 #: vfs/cpio.c:455
 #, c-format
-msgid "%s contains duplicit entries! Skipping!"
+msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s satur dubultus ierakstus! Izlaiþu!"
 
 #: vfs/cpio.c:524

@@ -3676,7 +3676,7 @@ msgid "Unknown tag on display format: "
 msgstr "Neznana označba v opisu načina prikaza: "
 
 #: src/screen.c:1382
-msgid "User suplied format looks invalid, reverting to default."
+msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
 "Formatiranje podano s strani uporabnika izgleda napačno, uporabljam privzeto."
 
@@ -4437,7 +4437,7 @@ msgstr ""
 #. This can be considered archive inconsistency
 #: vfs/cpio.c:455
 #, c-format
-msgid "%s contains duplicit entries! Skipping!"
+msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s vsebuje podvojene vnose! Preskakujem!"
 
 #: vfs/cpio.c:524
