@@ -456,7 +456,7 @@ get_path_mangle (char *inname, struct archive **archive, int is_dir,
 	ERRNOR (EIO, NULL);
 
     if (archive_name) {
-	v = vfs_type (archive_name);
+	v = vfs_get_class (archive_name);
 	if (v == &vfs_local_ops) {
 	    parent = NULL;
 	} else {
@@ -738,7 +738,7 @@ static int extfs_close (void *data)
         struct vfs_stamping *parent;
         vfs *v;
         
-	if (!file->archive->name || !*file->archive->name || (v = vfs_type (file->archive->name)) == &vfs_local_ops) {
+	if (!file->archive->name || !*file->archive->name || (v = vfs_get_class (file->archive->name)) == &vfs_local_ops) {
 	    parent = NULL;
 	} else {
 	    parent = g_new (struct vfs_stamping, 1);
@@ -1146,7 +1146,7 @@ static vfsid extfs_getid (vfs *me, char *path, struct vfs_stamping **parent)
 	return (vfsid) -1;
     g_free(p);
     if (archive->name){
-	v = vfs_type (archive->name);
+	v = vfs_get_class (archive->name);
 	id = (*v->getid) (v, archive->name, &par);
 	if (id != (vfsid)-1) {
 	    *parent = g_new (struct vfs_stamping, 1);

@@ -1,5 +1,9 @@
 2003-10-11  Pavel Roskin  <proski@gnu.org>
 
+	* vfs.c (vfs_type): Rename to vfs_get_class().  Fix prototype to
+	avoid using internal vfs type.  Adjust all dependencies.
+	(vfs_rosplit): Rename to _vfs_get_class().
+
 	* cpio.c (init_cpiofs): Set vfs_cpiofs_ops.setctl to NULL, or
 	bad things happen after unsuccessful deletion.
 

@@ -461,7 +461,7 @@ vfs_s_stamp_me (vfs *me, struct vfs_s_super *psup, char *fs_name)
     struct vfs_stamping *parent;
     vfs *v;
  
-    v = vfs_type (fs_name);
+    v = vfs_get_class (fs_name);
     if (v == &vfs_local_ops){
 	parent = NULL;
     } else {
@@ -886,7 +886,7 @@ vfs_s_close (void *fh)
         struct vfs_stamping *parent;
         vfs *v;
         
-	v = vfs_type (FH_SUPER->name);
+	v = vfs_get_class (FH_SUPER->name);
 	if (v == &vfs_local_ops){
 	    parent = NULL;
 	} else {
@@ -1083,7 +1083,7 @@ vfs_s_getid (vfs *me, char *path, struct vfs_stamping **parent)
     if (!(p = vfs_s_get_path (me, path, &archive, FL_NO_OPEN)))
 	return (vfsid) -1;
     g_free(p);
-    v = vfs_type (archive->name);
+    v = vfs_get_class (archive->name);
     id = (*v->getid) (v, archive->name, &par);
     if (id != (vfsid)-1){
         *parent = g_new (struct vfs_stamping, 1);

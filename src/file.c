@@ -280,7 +280,7 @@ is_in_linklist (struct link *lp, char *path, struct stat *sb)
     ino_t ino = sb->st_ino;
     dev_t dev = sb->st_dev;
 #ifdef USE_VFS
-    struct vfs_class *vfs = vfs_type (path);
+    struct vfs_class *vfs = vfs_get_class (path);
 #endif				/* USE_VFS */
 
     while (lp) {
@@ -302,7 +302,7 @@ static int
 check_hardlinks (char *src_name, char *dst_name, struct stat *pstat)
 {
     struct link *lp;
-    struct vfs_class *my_vfs = vfs_type (src_name);
+    struct vfs_class *my_vfs = vfs_get_class (src_name);
     ino_t ino = pstat->st_ino;
     dev_t dev = pstat->st_dev;
     struct stat link_stat;
@@ -316,10 +316,10 @@ check_hardlinks (char *src_name, char *dst_name, struct stat *pstat)
 	if (lp->vfs == my_vfs && lp->ino == ino && lp->dev == dev) {
 	    if (!mc_stat (lp->name, &link_stat) && link_stat.st_ino == ino
 		&& link_stat.st_dev == dev
-		&& vfs_type (lp->name) == my_vfs) {
+		&& vfs_get_class (lp->name) == my_vfs) {
 		p = strchr (lp->name, 0) + 1;	/* i.e. where the `name' file
 						   was copied to */
-		if (vfs_type (dst_name) == vfs_type (p)) {
+		if (vfs_get_class (dst_name) == vfs_get_class (p)) {
 		    if (!mc_stat (p, &link_stat)) {
 			if (!mc_link (p, dst_name))
 			    return 1;
@@ -925,7 +925,7 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
     }
 
     lp = g_new (struct link, 1);
-    lp->vfs = vfs_type (s);
+    lp->vfs = vfs_get_class (s);
     lp->ino = cbuf.st_ino;
     lp->dev = cbuf.st_dev;
     lp->next = parent_dirs;
@@ -994,7 +994,7 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 
     lp = g_new (struct link, 1);
     mc_stat (dest_dir, &buf);
-    lp->vfs = vfs_type (dest_dir);
+    lp->vfs = vfs_get_class (dest_dir);
     lp->ino = buf.st_ino;
     lp->dev = buf.st_dev;
     lp->next = dest_dirs;

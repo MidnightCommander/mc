@@ -616,7 +616,7 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
     mc_get_current_wd (panel->cwd, sizeof (panel->cwd) - 2);
 
 #ifdef USE_VFS
-    oldvfs = vfs_type (olddir);
+    oldvfs = vfs_get_class (olddir);
     oldvfsid = vfs_ncs_getid (oldvfs, olddir, &parent);
     vfs_add_noncurrent_stamps (oldvfs, oldvfsid, parent);
     vfs_rm_parents (parent);

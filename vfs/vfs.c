@@ -222,7 +222,7 @@ vfs_split (char *path, char **inpath, char **op)
 }
 
 static vfs *
-vfs_rosplit (char *path)
+_vfs_get_class (char *path)
 {
     char *semi;
     char *slash;
@@ -244,18 +244,18 @@ vfs_rosplit (char *path)
     if (slash)
 	*slash = PATH_SEP;
     if (!ret)
-	ret = vfs_rosplit (path);
+	ret = _vfs_get_class (path);
 
     *semi = '#';
     return ret;
 }
 
 vfs *
-vfs_type (char *path)
+vfs_get_class (char *path)
 {
     vfs *vfs;
 
-    vfs = vfs_rosplit(path);
+    vfs = _vfs_get_class(path);
 
     if (!vfs)
 	vfs = &vfs_local_ops;
@@ -386,7 +386,7 @@ mc_open (const char *filename, int flags, ...)
     va_list ap;
 
     char *file = vfs_canon (filename);
-    vfs  *vfs  = vfs_type (file);
+    vfs  *vfs  = vfs_get_class (file);
 
     /* Get the mode flag */	/* FIXME: should look if O_CREAT is present */
     va_start (ap, flags);
@@ -430,7 +430,7 @@ mc_open (const char *filename, int flags, ...)
 	}
 
 #define MC_NAMEOP(name, inarg, callarg) \
-  MC_OP (name, inarg, callarg, path = vfs_canon (path); vfs = vfs_type (path);, g_free (path); )
+  MC_OP (name, inarg, callarg, path = vfs_canon (path); vfs = vfs_get_class (path);, g_free (path); )
 #define MC_HANDLEOP(name, inarg, callarg) \
   MC_OP (name, inarg, callarg, if (handle == -1) return -1; vfs = vfs_op (handle);, ;)
 
@@ -454,7 +454,7 @@ mc_setctl (char *path, int ctlop, char *arg)
 	vfs_die("You don't want to pass NULL to mc_setctl.");
     
     path = vfs_canon (path);
-    vfs = vfs_type (path);    
+    vfs = vfs_get_class (path);    
     result = vfs->setctl ? (*vfs->setctl)(vfs, path, ctlop, arg) : 0;
     g_free (path);
     return result;
@@ -491,7 +491,7 @@ mc_opendir (char *dirname)
     vfs  *vfs;
 
     dirname = vfs_canon (dirname);
-    vfs = vfs_type (dirname);
+    vfs = vfs_get_class (dirname);
 
     info = vfs->opendir ? (*vfs->opendir)(vfs, dirname) : NULL;
     g_free (dirname);
@@ -565,7 +565,7 @@ int mc_stat (const char *filename, struct stat *buf) {
     vfs *vfs;
     int result;
     char *path;
-    path = vfs_canon (filename); vfs = vfs_type (path);
+    path = vfs_canon (filename); vfs = vfs_get_class (path);
     result = vfs->stat ? (*vfs->stat) (vfs, path, buf) : -1;
     g_free (path);
     if (result == -1)
@@ -577,7 +577,7 @@ int mc_lstat (const char *filename, struct stat *buf) {
     vfs *vfs;
     int result;
     char *path;
-    path = vfs_canon (filename); vfs = vfs_type (path);
+    path = vfs_canon (filename); vfs = vfs_get_class (path);
     result = vfs->lstat ? (*vfs->lstat) (vfs, path, buf) : -1;
     g_free (path);
     if (result == -1)
@@ -608,7 +608,7 @@ _vfs_get_cwd (void)
     char *p;
     struct stat my_stat, my_stat2;
 
-    if (!vfs_rosplit (current_dir)) {
+    if (!_vfs_get_class (current_dir)) {
 	p = g_get_current_dir ();
 	if (!p)			/* One of the directories in the path is not readable */
 	    return current_dir;
@@ -674,9 +674,9 @@ int mc_##name (const char *fname1, const char *fname2) \
     int result; \
 \
     char *name2, *name1 = vfs_canon (fname1); \
-    vfs = vfs_type (name1); \
+    vfs = vfs_get_class (name1); \
     name2 = vfs_canon (fname2); \
-    if (vfs != vfs_type (name2)){ \
+    if (vfs != vfs_get_class (name2)){ \
     	errno = EXDEV; \
     	g_free (name1); \
     	g_free (name2); \
@@ -793,7 +793,7 @@ vfs_add_noncurrent_stamps (vfs * oldvfs, vfsid oldvfsid, struct vfs_stamping *pa
     if (!cpanel)
 	return;
 
-    nvfs = vfs_type (current_dir);
+    nvfs = vfs_get_class (current_dir);
     nvfsid = vfs_ncs_getid (nvfs, current_dir, &par);
     vfs_rmstamp (nvfs, nvfsid, 1);
 
@@ -804,7 +804,7 @@ vfs_add_noncurrent_stamps (vfs * oldvfs, vfsid oldvfsid, struct vfs_stamping *pa
     }
 
     if (get_current_type () == view_listing){
-	n2vfs = vfs_type (cpanel->cwd);
+	n2vfs = vfs_get_class (cpanel->cwd);
 	n2vfsid = vfs_ncs_getid (n2vfs, cpanel->cwd, &par);
         f = is_parent (oldvfs, oldvfsid, par);
 	vfs_rm_parents (par);
@@ -816,7 +816,7 @@ vfs_add_noncurrent_stamps (vfs * oldvfs, vfsid oldvfsid, struct vfs_stamping *pa
     }
     
     if (get_other_type () == view_listing){
-	n3vfs = vfs_type (opanel->cwd);
+	n3vfs = vfs_get_class (opanel->cwd);
 	n3vfsid = vfs_ncs_getid (n3vfs, opanel->cwd, &par);
         f = is_parent (oldvfs, oldvfsid, par);
 	vfs_rm_parents (par);
@@ -857,7 +857,7 @@ vfs_stamp_path (char *path)
     vfsid id;
     struct vfs_stamping *par, *stamp;
     
-    vfs = vfs_type (path);
+    vfs = vfs_get_class (path);
     id  = vfs_ncs_getid (vfs, path, &par);
     vfs_addstamp (vfs, id, par);
     
@@ -896,7 +896,7 @@ mc_chdir (char *path)
     int result;
 
     new_dir = vfs_canon (path);
-    new_vfs = vfs_type (new_dir);
+    new_vfs = vfs_get_class (new_dir);
     if (!new_vfs->chdir)
 	return -1;
 
@@ -944,7 +944,7 @@ int
 vfs_file_is_local (const char *file)
 {
     char *filename = vfs_canon (file);
-    vfs *vfs = vfs_type (filename);
+    vfs *vfs = vfs_get_class (filename);
     
     g_free (filename);
     return vfs == &vfs_local_ops;
@@ -957,7 +957,7 @@ vfs_file_is_ftp (char *filename)
     vfs *vfs;
     
     filename = vfs_canon (filename);
-    vfs = vfs_type (filename);
+    vfs = vfs_get_class (filename);
     g_free (filename);
     return vfs == &vfs_ftpfs_ops;
 #else
@@ -973,7 +973,7 @@ vfs_file_is_smb (char *filename)
     vfs *vfs;
     
     filename = vfs_canon (filename);
-    vfs = vfs_type (filename);
+    vfs = vfs_get_class (filename);
     g_free (filename);
     return vfs == &vfs_smbfs_ops;
 #endif /* USE_NETCODE */
@@ -1101,7 +1101,7 @@ mc_getlocalcopy (const char *pathname)
 {
     char *result;
     char *path = vfs_canon (pathname);
-    vfs  *vfs  = vfs_type (path);    
+    vfs  *vfs  = vfs_get_class (path);    
 
     result = vfs->getlocalcopy ? (*vfs->getlocalcopy)(vfs, path) :
                                  mc_def_getlocalcopy (vfs, path);
@@ -1159,7 +1159,7 @@ mc_ungetlocalcopy (const char *pathname, char *local, int has_changed)
 {
     int return_value = 0;
     char *path = vfs_canon (pathname);
-    vfs *vfs = vfs_type (path);
+    vfs *vfs = vfs_get_class (path);
 
     return_value = vfs->ungetlocalcopy ? 
             (*vfs->ungetlocalcopy)(vfs, path, local, has_changed) :
