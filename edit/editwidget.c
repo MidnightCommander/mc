@@ -31,47 +31,79 @@ int column_highlighting = 0;
 
 static int edit_callback (Dlg_head * h, WEdit * edit, int msg, int par);
 
-int edit_event (WEdit * edit, Gpm_Event * event, int *result)
+int
+edit_event (WEdit * edit, Gpm_Event * event, int *result)
 {
     *result = MOU_NORMAL;
     edit_update_curs_row (edit);
     edit_update_curs_col (edit);
-    if (event->type & (GPM_DOWN | GPM_DRAG | GPM_UP)) {
-	if (event->y > 1 && event->x > 0
-	    && event->x <= edit->num_widget_columns
-	    && event->y <= edit->num_widget_lines + 1) {
-	    if (edit->mark2 != -1 && event->type & (GPM_UP | GPM_DRAG))
-		return 1;	/* a lone up mustn't do anything */
-	    if (event->type & (GPM_DOWN | GPM_UP))
-		edit_push_key_press (edit);
-	    edit_cursor_move (edit, edit_bol (edit, edit->curs1) - edit->curs1);
-	    if (--event->y > (edit->curs_row + 1))
-		edit_cursor_move (edit,
-				  edit_move_forward (edit, edit->curs1, event->y - (edit->curs_row + 1), 0)
-				  - edit->curs1);
-	    if (event->y < (edit->curs_row + 1))
-		edit_cursor_move (edit,
-				  +edit_move_backward (edit, edit->curs1, (edit->curs_row + 1) - event->y)
-				  - edit->curs1);
-	    edit_cursor_move (edit, (int) edit_move_forward3 (edit, edit->curs1,
-		       event->x - edit->start_col - 1, 0) - edit->curs1);
-	    edit->prev_col = edit_get_col (edit);
-	    if (event->type & GPM_DOWN) {
-		edit_mark_cmd (edit, 1);	/* reset */
-		edit->highlight = 0;
-	    }
-	    if (!(event->type & GPM_DRAG))
-		edit_mark_cmd (edit, 0);
-	    edit->force |= REDRAW_COMPLETELY;
-	    edit_update_curs_row (edit);
-	    edit_update_curs_col (edit);
-	    edit_update_screen (edit);
-	    return 1;
-	}
-    }
-    return 0;
-}
 
+    /* Unknown event type */
+    if (!(event->type & (GPM_DOWN | GPM_DRAG | GPM_UP)))
+	return 0;
+
+    /* Wheel events */
+    if ((event->buttons & GPM_B_UP) && (event->type & GPM_DOWN)) {
+	edit_move_up (edit, 2, 1);
+	goto update;
+    }
+    if ((event->buttons & GPM_B_DOWN) && (event->type & GPM_DOWN)) {
+	edit_move_down (edit, 2, 1);
+	goto update;
+    }
+
+    /* Outside editor window */
+    if (event->y <= 1 || event->x <= 0
+	|| event->x > edit->num_widget_columns
+	|| event->y > edit->num_widget_lines + 1)
+	return 0;
+
+    /* A lone up mustn't do anything */
+    if (edit->mark2 != -1 && event->type & (GPM_UP | GPM_DRAG))
+	return 1;
+
+    if (event->type & (GPM_DOWN | GPM_UP))
+	edit_push_key_press (edit);
+
+    edit_cursor_move (edit, edit_bol (edit, edit->curs1) - edit->curs1);
+
+    if (--event->y > (edit->curs_row + 1))
+	edit_cursor_move (edit,
+			  edit_move_forward (edit, edit->curs1,
+					     event->y - (edit->curs_row +
+							 1), 0)
+			  - edit->curs1);
+
+    if (event->y < (edit->curs_row + 1))
+	edit_cursor_move (edit,
+			  edit_move_backward (edit, edit->curs1,
+					      (edit->curs_row + 1) -
+					      event->y) - edit->curs1);
+
+    edit_cursor_move (edit,
+		      (int) edit_move_forward3 (edit, edit->curs1,
+						event->x -
+						edit->start_col - 1,
+						0) - edit->curs1);
+
+    edit->prev_col = edit_get_col (edit);
+
+    if (event->type & GPM_DOWN) {
+	edit_mark_cmd (edit, 1);	/* reset */
+	edit->highlight = 0;
+    }
+
+    if (!(event->type & GPM_DRAG))
+	edit_mark_cmd (edit, 0);
+
+  update:
+    edit->force |= REDRAW_COMPLETELY;
+    edit_update_curs_row (edit);
+    edit_update_curs_col (edit);
+    edit_update_screen (edit);
+
+    return 1;
+}
 
 
 int menubar_event (Gpm_Event * event, WMenu * menubar);		/* menu.c */

@@ -221,6 +221,8 @@ void edit_scroll_upward (WEdit * edit, unsigned long i);
 void edit_scroll_downward (WEdit * edit, int i);
 void edit_scroll_right (WEdit * edit, int i);
 void edit_scroll_left (WEdit * edit, int i);
+void edit_move_up (WEdit * edit, unsigned long i, int scroll);
+void edit_move_down (WEdit * edit, int i, int scroll);
 int edit_get_col (WEdit * edit);
 long edit_bol (WEdit * edit, long current);
 long edit_eol (WEdit * edit, long current);
