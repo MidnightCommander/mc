@@ -1,3 +1,8 @@
+2002-10-21  Pavel Roskin  <proski@gnu.org>
+
+	* cmd.c (do_view_cmd): When asking confirmation, correctly
+	interpret closing the dialog by escape.
+
 2002-10-20  Pavel Roskin  <proski@gnu.org>
 
 	* utilunix.c (mc_tmpdir): Don't exit if the temporary directory

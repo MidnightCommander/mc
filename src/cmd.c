@@ -214,32 +214,34 @@ static int scan_for_file (WPanel *panel, int idx, int direction)
 }
 
 /* do_view: Invoked as the F3/F13 key. */
-static void do_view_cmd (WPanel *panel, int normal)
+static void
+do_view_cmd (WPanel *panel, int normal)
 {
     int dir, file_idx;
     panel = get_a_panel (panel);
-    
+
     /* Directories are viewed by changing to them */
-    if (S_ISDIR (selection (panel)->buf.st_mode) ||
-	link_isdir (selection (panel))) {
-	if (confirm_view_dir && (panel->marked || panel->dirs_marked)){
-	    if (query_dialog (_(" CD "), _("Files tagged, want to cd?"),
-			      0, 2, _("&Yes"), _("&No")) == 1){
+    if (S_ISDIR (selection (panel)->buf.st_mode)
+	|| link_isdir (selection (panel))) {
+	if (confirm_view_dir && (panel->marked || panel->dirs_marked)) {
+	    if (query_dialog
+		(_(" Confirmation "), _("Files tagged, want to cd?"), 0, 2,
+		 _("&Yes"), _("&No")) != 0) {
 		return;
 	    }
 	}
 	if (!do_cd (selection (panel)->fname, cd_exact))
-	    message (1, MSG_ERROR, _("Could not change directory") );
+	    message (1, MSG_ERROR, _("Could not change directory"));
 
 	return;
-	
+
     }
 
     file_idx = panel->selected;
     while (1) {
 	char *filename;
 
-	filename = panel->dir.list [file_idx].fname;
+	filename = panel->dir.list[file_idx].fname;
 
 	dir = view_file (filename, normal, use_internal_view);
 	if (dir == 0)
