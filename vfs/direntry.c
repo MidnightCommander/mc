@@ -984,7 +984,7 @@ vfs_s_getlocalcopy (struct vfs_class *me, const char *path)
     char *local;
 
     fh = vfs_s_open (me, path, O_RDONLY, 0);
-    if (!fh || !fh->ino || fh->ino->localname)
+    if (!fh || !fh->ino || !fh->ino->localname)
 	return NULL;
 
     local = g_strdup (fh->ino->localname);
