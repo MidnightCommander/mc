@@ -1,7 +1,12 @@
-2003-06-23 Marco Ciampa <ciampix@libero.it>
+2003-07-24  Vaidrius Petrauskas  <vaidrius@centras.lt>
+
+	* lt.po: Add Lithuanian translation.
+	* LINGUAS: Likewise.
+
+2003-06-23  Marco Ciampa  <ciampix@libero.it>
 
 	* it.po: Updated Italian translation.
-	
+
 2003-06-22  Pavel Roskin  <proski@gnu.org>
 
 	* POTFILES.in: Add src/execute.c.
