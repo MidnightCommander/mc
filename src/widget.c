@@ -2209,7 +2209,9 @@ listbox_new (int y, int x, int width, int height,
     l->pos    = 0;
     l->width  = width;
     if (height <= 0)
-	    l->height = 0;
+	    l->height = 1;
+    else
+	    l->height = height;
     l->count  = 0;
     l->top    = 0;
     l->current= 0;
