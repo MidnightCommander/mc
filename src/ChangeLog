@@ -1,3 +1,7 @@
+1999-11-02  Miguel de Icaza  <miguel@gnu.org>
+
+	* main.c (OS_Setup): Do not warn if TERM is not set for the GNOME edition.
+
 1999-09-21  Federico Mena Quintero  <federico@redhat.com>
 
 	* dlg.c (dlg_broadcast_msg_to): Sigh.  Put in a GrossHack(tm) to

@@ -2373,7 +2373,9 @@ OS_Setup ()
 	
     termvalue = getenv ("TERM");
     if (!termvalue){
+#ifndef HAVE_X
 	fprintf (stderr, _("The TERM environment variable is unset!\n"));
+#endif
 	termvalue = "";
     }
 #ifndef HAVE_X
