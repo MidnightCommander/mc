@@ -1,12 +1,79 @@
+application/pdf:
+	open=xpdf %f
 
-text/*:
-	fm-view=%view{ascii}
+application/postscript:
+	open=gv %f
+	icon-filename=@icondir@/gnome-application-postscript.png
 
-text/c:
-	icon-filename=@icondir@/gnome-application-x-c-source.png
+application/zip:
+	icon-filename=@icondir@/gnome-package.png
+	fm-open=%cd %p#uzip
+	fm-view=%view{ascii} unzip -v %f
+	open.extract.Extract=unzip %f
+	open.extractf.Extract with flags=I=%{Enter any Unzip flags:}; if test -n "$I"; then unzip $I %f; fi
 
-text/C++:
-	icon-filename=@icondir@/gnome-application-x-cc-source.png
+application/x-e-theme:
+	icon-filename=@icondir@/gnome-compressed.png
+		
+application/x-theme:
+	icon-filename=@icondir@/gnome-compressed.png
+
+application/x-troff-man:
+	icon-filename=@icondir@/gnome-manpage.png
+	fm-view=%view{ascii,nroff} nroff @TROFFASCII@ @MANDOC@ %f
+
+application/x-troff-man-compressed:
+	fm-view=%view{ascii,nroff} gunzip -dc %f | nroff @TROFFASCII@ @MANDOC@
+	icon-filename=@icondir@/gnome-manpage.png
+
+application/x-troff-ms:
+	fm-view=%view{ascii,nroff} nroff @TROFFASCII@ -ms %f
+
+application/x-troff-me:
+	fm-view=%view{ascii,nroff} nroff @TROFFASCII@ -me %f
+
+application/x-gzip:
+	icon-filename=@icondir@/gnome-compressed.png
+
+application/x-tex:
+	icon-filename=@icondir@/gnome-tex.png
+
+application/x-object-file:
+	icon-filename=@icondir@/gnome-objectfile.png
+
+application/x-shared-library:
+	fm-view=%view{hex}
+
+application/x-cpio-compressed:
+	fm-open=%cd %p#ucpio/
+	fm-view=%view{ascii} gzip -dc '%f' | cpio -ictv
+	icon-filename=@icondir@/gnome-compressed.png
+
+application/x-profile:
+	open="cd %d; gprof | less"
+	flags.open.flags=needsterminal
+	view="cd %d; gprof | less"
+	flags.view.flags=needsterminal
+
+application/x-cgi:
+	icon-filename=@icondir@/gnome-text-html.png
+        open=gnome-moz-remote file:%f
+
+application/x-asp:
+	icon-filename=@icondir@/gnome-text-html.png
+        open=gnome-moz-remote file:%f
+
+application/x-cpio:
+	fm-open=%cd %d/%p#ucpio/
+	fm-view=%view{ascii} cat %f | cpio -ictv
+
+application/x-backup:
+	icon-filename=/usr/share/pixmaps/gnome-default-dlg.png
+
+application/x-applix-spreadsheet
+	open=applix %f
+	edit=applix %f
+	view=applix %f
 
 application/x-compressed-tar
 	fm-open=%cd %p#utar
@@ -40,13 +107,6 @@ application/x-deb:
 	fm-view=%view{ascii} dpkg-deb -c %f
 	icon-filename=@icondir@/gnome-pack-deb.png
 	
-application/zip:
-	icon-filename=@icondir@/gnome-package.png
-	fm-open=%cd %p#uzip
-	fm-view=%view{ascii} unzip -v %f
-	open.extract.Extract=unzip %f
-	open.extractf.Extract with flags=I=%{Enter any Unzip flags:}; if test -n "$I"; then unzip $I %f; fi
-
 application/x-zoo:
 	fm-open=%cd %p#uzoo
 	fm-view=%view{ascii} zoo l %f
@@ -79,84 +139,35 @@ application/x-dvi:
 	view=xdvi %f
 	open.convert.Convert file to Postscript=dvips %f
 
-application/x-text:
+application/x-tex:
 	open.tex."TeX this file"=tex %f
 	flags.tex.flags=needsterminal
 	open.latex."LaTeX this file"=latex %f
 	flags.latex.flags=needsterminal
 
-application/x-gnu-rmail:
-	open=emacs %f
-
-archive/
-application/x-gzip:
-	icon-filename=@icondir@/gnome-compressed.png
-
-application/x-tex:
-	icon-filename=@icondir@/gnome-tex.png
-
-application/postscript:
-	open=gv %f
-	icon-filename=@icondir@/gnome-application-postscript.png
-
-application/x-object-file:
-	icon-filename=@icondir@/gnome-objectfile.png
-
-application/x-shared-library:
-	fm-view=%view{hex}
-
-application/x-cpio-compressed:
-	fm-open=%cd %d/%p#ucpio/
-	fm-view=%view{ascii} gzip -dc '%f' | cpio -ictv
-	icon-filename=@icondir@/gnome-compressed.png
-
-application/x-cpio:
-	fm-open=%cd %d/%p#ucpio/
-	fm-view=%view{ascii} cat %f | cpio -ictv
-
 audio/*:
 	icon-filename=@icondir@/gnome-audio.png
-	open.x11amp.Use x11amp to play this=x11amp %f
-	open.mpeg.Play with mpeg_play=mpeg_play %f
-	open.mpg123.Open with mpg123=mpg123 %f
-
-application/pdf:
-	open=xpdf %f
+	open=esdplay %f
 
 audio/x-mp3:
 	open=mpg123 %f
+	open.x11amp.Use x11amp to play this=x11amp %f
 
-text/html:
-	icon-filename=@icondir@/gnome-text-html.png
-	open=gnome-moz-remote file:%d/%f
-	open.netscape.View this file with Netscape=gnome-moz-remote file:%d/%f
+audio/x-mod:
+	open=x11amp %f
+	view=x11amp %f
 
-application/vcard:
-	icon-filename=@gnomeicons@/gnome-calendar.png
+audio/x-s3m:
+	open=x11amp %f
+	view=x11amp %f
 
-x-url/http:
-	icon-filename=@icondir@/gnome-text-url.png
-	open=gnome-moz-remote %f
+audio/x-xm:
+	open=x11amp %f
+	view=x11amp %f
 
-x-url/ftp:
-	fm-open=cd %f
 
-x-url/news:
-	open=gnome-moz-remote %f
-
-application/x-troff-man:
-	icon-filename=@icondir@/gnome-manpage.png
-	fm-view=%view{ascii,nroff} nroff @TROFFASCII@ @MANDOC@ %f
-
-application/x-troff-man-compressed:
-	fm-view=%view{ascii,nroff} gunzip -dc %f | nroff @TROFFASCII@ @MANDOC@
-	icon-filename=@icondir@/gnome-manpage.png
-
-application/x-troff-ms:
-	fm-view=%view{ascii,nroff} nroff @TROFFASCII@ -ms %f
-
-application/x-troff-me:
-	fm-view=%view{ascii,nroff} nroff @TROFFASCII@ -me %f
+image/*:
+	icon-filename=@icondir@/gnome-image-generic.png
 
 image/x-bmp:
 	icon-filename=@icondir@/gnome-image-bmp.png
@@ -176,7 +187,11 @@ image/jpeg:
 
 image/ief:
 	icon-filename=@icondir@/gnome-image-ief.png
-	
+
+image/x-xfig:
+	open=xfig %f
+	view=xfig %f
+
 image/x-portable-bitmap:
 	icon-filename=@icondir@/gnome-image-pbm.png
 
@@ -212,7 +227,42 @@ image/x-xpixmap:
 
 image/x-xwindowdump:
 	icon-filename=@icondir@/gnome-image-xwd.png
-	
+
+image/x-psd:
+	icon-filename=@icondir@/gnome-image-psd.png
+
+message/x-gnu-rmail:
+	open=emacs %f
+
+text/*:
+	icon-filename=@icondir@/gnome-textfile.png
+	open=gnome-edit %f
+	edit=gnome-edit %f
+	fm-view=%view{ascii}
+
+text/x-vCard:
+	icon-filename=@gnomeicons@/gnome-calendar.png
+
+
+text/x-c:
+	icon-filename=@icondir@/gnome-application-x-c-source.png
+
+text/x-C++:
+	icon-filename=@icondir@/gnome-application-x-cc-source.png
+
+text/x-comma-separated-values:
+	open=gnumeric %f
+	view=gnumeric %f
+
+text/html:
+	icon-filename=@icondir@/gnome-text-html.png
+	open=gnome-moz-remote file:%f
+	open.netscape.View this file with Netscape=gnome-moz-remote file:%f
+
+video/*:
+	open=xanim +f %f
+	view=xanim +f %f
+
 video/mpeg:
 	icon-filename=@icondir@/gnome-video-mpeg.png
 
@@ -222,12 +272,12 @@ video/quicktime:
 video/x-ms-video:
 	icon-filename=@icondir@/gnome-video-x-msvideo.png
 
-image/*:
-	icon-filename=@icondir@/gnome-image-generic.png
+x-url/http:
+	icon-filename=@icondir@/gnome-text-url.png
+	open=gnome-moz-remote %f
 
-image/x-psd:
-	icon-filename=@icondir@/gnome-image-psd.png
+x-url/ftp:
+	fm-open=cd %f
 
-text/*:
-	icon-filename=@icondir@/gnome-textfile.png
-	open=gnome-edit %f
+x-url/news:
+	open=gnome-moz-remote %f
