@@ -48,12 +48,17 @@ typedef struct {
 
 void desktop_icon_info_open      (DesktopIconInfo *dii);
 void desktop_icon_info_delete    (DesktopIconInfo *dii);
+void desktop_icon_update_url     (DesktopIconInfo *dii);
+
+DesktopIconInfo *desktop_icon_info_get_by_filename (char *filename);
 
 file_entry *file_entry_from_file (char *filename);
 void        file_entry_free      (file_entry *fe);
 
 gboolean    is_mountable (char *filename, file_entry *fe, int *is_mounted, char **mount_point);
+gboolean    is_ejectable (char *filename);
 gboolean    do_mount_umount (char *filename, gboolean is_mount);
+gboolean    do_eject (char *filename);
 
 void desktop_arrange_icons (void);
 void desktop_rescan_devices (void);

@@ -13,9 +13,12 @@
 #include "ext.h"		/* regex_command */
 #include "cmd.h"		/* copy_cmd, ren_cmd, delete_cmd, ... */
 #include "gscreen.h"
+#include "gmain.h"
 #include "dir.h"
 #include "dialog.h"
+#include "gcmd.h"
 #include "../vfs/vfs.h"
+#include "gnome-open-dialog.h"
 
 static void
 gmc_execute (const char *fname, const char *buf, int needs_terminal)
@@ -86,12 +89,12 @@ gmc_open_filename (char *fname, GList *args)
 			gnome_desktop_entry_free (entry);
 		}
 	}
-	
+
 	return 0;
 }
 
 int
-gmc_edit_filename (char *fname)
+gmc_edit (char *fname)
 {
 	const char *mime_type;
 	const char *cmd;
@@ -115,7 +118,7 @@ gmc_edit_filename (char *fname)
 			return 1;
 		}
 	}
-	
+
 	gnome_config_push_prefix( "/editor/Editor/");
 	type = gnome_config_get_string ("EDITOR_TYPE=executable");
 	
@@ -125,7 +128,7 @@ gmc_edit_filename (char *fname)
 		return 1;
 	}
 	g_free (type);
-		
+
 	editor = gnome_config_get_string ("EDITOR=emacs");
 	on_terminal = gnome_config_get_bool ("NEEDS_TERM=false");
 
@@ -147,53 +150,108 @@ gmc_edit_filename (char *fname)
 	return 0;
 }
 
-
 int
 gmc_open (file_entry *fe)
 {
 	return gmc_open_filename (fe->fname, NULL);
 }
 
+int
+gmc_open_with (gchar *filename)
+{
+	GtkWidget *dialog;
+	gchar *command = NULL;
+	gchar *real_command;
+	WPanel *panel = cpanel;
+
+	dialog = gnome_open_dialog_new (filename);
+	if (!is_a_desktop_panel (panel))
+		gnome_dialog_set_parent (GNOME_DIALOG (dialog), GTK_WINDOW (panel->xwindow));
+
+	switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
+	case 0:
+	        command = gtk_entry_get_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (
+			GNOME_FILE_ENTRY (GNOME_OPEN_DIALOG (dialog)->entry)->gentry))));
+		/* Assume COMMAND %f */
+		if (command) {
+			/* FIXME: these need the needs_terminal argument to be set correctly */
+			if (strchr (command, '%'))
+				exec_extension (filename, command, NULL, NULL, 0, FALSE);
+			else {
+				/* This prolly isn't perfect, but it will do. */
+				real_command = g_strconcat (command, " %f", NULL);
+				exec_extension (filename, real_command, NULL, NULL, 0, FALSE);
+				g_free (real_command);
+			}
+		}
+		if (command) {
+			gtk_widget_destroy (dialog);
+			return 1;
+		}
+		gtk_widget_destroy (dialog);
+		return 0;
+	case 1:
+		gtk_widget_destroy (dialog);
+	default:
+		return 0;
+	}
+}
 static void
 gmc_run_view (const char *filename, const char *buf)
 {
 	exec_extension (filename, buf, NULL, NULL, 0, 0);
 }
-
-int
-gmc_view (char *filename, int start_line)
+static gchar *
+gmc_view_command (gchar *filename)
 {
 	const char *mime_type, *cmd;
 	char *buf;
 	int size;
 
-	if (gnome_metadata_get (filename, "fm-view", &size, &buf) == 0){
-		gmc_run_view (filename, buf);
-		g_free (buf);
-		return 1;
-	}
+	if (gnome_metadata_get (filename, "fm-view", &size, &buf) == 0)
+		return buf;
 
-	if (gnome_metadata_get (filename, "view", &size, &buf) == 0){
-		gmc_run_view (filename, buf);
-		g_free (buf);
-		return 1;
-	}
+	if (gnome_metadata_get (filename, "view", &size, &buf) == 0)
+		return buf;
 
 	mime_type = gnome_mime_type_or_default (filename, NULL);
 	if (!mime_type)
-		return 0;
+		return NULL;
 	
 		
 	cmd = gnome_mime_get_value (mime_type, "fm-view");
 	
-	if (cmd){
-		gmc_run_view (filename, cmd);
-		return 1;
-	}
+	if (cmd)
+		return g_strdup (cmd);
 	
 	cmd = gnome_mime_get_value (mime_type, "view");
 	if (cmd){
+		return g_strdup (cmd);
+	}
+	return NULL;
+}
+gboolean
+gmc_can_view_file (char *filename)
+{
+	char *cmd;
+
+	cmd = gmc_view_command (filename);
+	if (cmd) {
+		g_free (cmd);
+		return 1;
+	}
+	return 0;
+}
+	
+int
+gmc_view (char *filename, int start_line)
+{
+	char *cmd;
+
+	cmd = gmc_view_command (filename);
+	if (cmd) {
 		gmc_run_view (filename, cmd);
+		g_free (cmd);
 		return 1;
 	}
 	return 0;

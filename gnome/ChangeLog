@@ -1,3 +1,33 @@
+1999-03-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	This is a semi-big slew of changes to integrate the DESKTOP_BRANCH
+	into the main trunk.  Now the gdesktop code creates a temprary
+	WPanel structure and passes it on to the core file management
+	functions.  Also, the menu code is improved (we now use gpopup2;
+	gpopup should go away shortly and gpopup2 should replace it).
+	This makes the desktop act consistently with the file panels.
+	Thanks to Jonathan for his help with this branch.
+
+	* gdnd.c (perform_action): Use mc_lstat(), not mc_stat().
+
+	* glayout.c (update_panels): Do not update the panels that are
+	desktop panels.
+
+	* gdesktop.c (icon_is_in_area): An icon is not considered to be in
+	a 0x0 area.
+
+	* gpopup2.c (handle_open): Fetch the desktop icon from the
+	filename and call desktop_icon_info_open().
+
+	* gdesktop.c (desktop_icon_info_get_by_filename): New function to
+	look up a desktop icon by its filename.
+
+	* glayout.c (create_new_menu_from): Test for the ".desktop" suffix
+	correctly.
+
+	* gpopup2.c (handle_properties): If the file comes from a desktop
+	panel, always allow edition of the icon image.
+
 1999-03-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	
 	* gdialogs.c: Support ui->ctx to be NULL, as file.c will set this
@@ -24,6 +54,7 @@
 	(my_system_get_child_pid): Close also stdin/stdout/stderr
 
 	* gdesktop.c (is_mountable): Allow user-nfs devices to be mounted
+
 1999-03-08  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gscreen.c (can_drop_on_clist): New function to figure out if the
@@ -77,6 +108,14 @@
 
 	* gnome-file-property-dialog.c (create_settings_pane): Add Needs
 	terminal check box
+
+1999-02-25  Jonathan Blandford  <jrb@redhat.com>
+
+	* gpopup2.c: even more bug-fixes.  Plenty more left to do, but now
+	all the menu code seems to work other then the
+	select-and-popup-menu problem.
+
+	* gaction.c (gmc_can_view_file): new function.  Can we view the file?
 
 1999-02-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -158,6 +197,13 @@ Tue Feb 23 01:57:22 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-file-property-dialog.c (apply_metadata_change): Fix memory leak.
 
+1999-02-23  Jonathan Blandford  <jrb@redhat.com>
+
+	* gpopup2.c (handle_open_with): use the new dialog.  Doesn't quite
+	work -- I'll make sure it does tonight.
+
+	* gnome-open-dialog.c: new widget -- an "Open with..." dialog.
+
 1999-02-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_reload_icons): Fix memory leak.
@@ -176,6 +222,10 @@ Tue Feb 23 01:57:22 1999  George Lebl  <jirka@5z.com>
 	* gdesktop.c (setup_motif_dnd_proxy): Use Window instead of
 	gint32, fix from George Lebl.
 	(setup_xdnd_proxy): ditto.
+
+1999-02-19  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (file_entry_fill): Initialize fe->f.dir_size_computed.
 
 1999-02-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 

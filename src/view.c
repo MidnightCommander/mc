@@ -1441,7 +1441,9 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
     Dlg_head *d = 0;
     int search_status;
     int abort;
-    void *gd;
+#ifdef HAVE_GNOME
+    GtkWidget *gd;
+#endif
     
     /* Used to keep track of where the line starts, when looking forward */
     /* is the index before transfering the line; the reverse case uses   */
@@ -1831,13 +1833,6 @@ toggle_hex_mode (WView *view)
     view_labels (view);
     view->dirty++;
     view_update (view, TRUE);
-}
-
-/* Both views */
-static void
-toggle_hexedit_mode(WView *view)
-{
-    view->hexedit_mode = 1 - view->hexedit_mode;
 }
 
 /* Both views */

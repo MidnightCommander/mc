@@ -1,5 +1,5 @@
 /* gnome-file-property-dialog.h
- * Copyright (C) 1999  J. Arthur Random
+ * Copyright (C) 1999  Free Software Foundation
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public

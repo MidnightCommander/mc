@@ -412,7 +412,6 @@ x_set_idle (Dlg_head *h, int enable_idle)
 int
 dialog_panel_callback (struct Dlg_head *h, int id, int msg)
 {
-	WPanel *p;
 	WInput *in;
 	Widget_Item *dh;
 	void *current_widget;	/* The current widget */
@@ -566,8 +565,6 @@ gmc_do_quit (void)
 static void
 session_die (void)
 {
-	extern int quit;
-
 	gmc_do_quit ();
 }
 
@@ -588,7 +585,6 @@ session_save_state (GnomeClient *client, gint phase, GnomeRestartStyle save_styl
 	argv [0] = client_data;
 	for (i = 1, l = containers; l; l = l->next){
 		PanelContainer *pc = l->data;
-		int x, y, w, h;
 		char *geom;
 
 		geom = gnome_geometry_string (GTK_WIDGET (pc->panel->widget.wdata)->window);

@@ -1091,16 +1091,41 @@ void link_cmd (void)
 
 void symlink_cmd (void)
 {
-    do_link (1, selection (cpanel)->fname);
+    char *filename;
+    if (is_a_desktop_panel (cpanel)) {
+        gint i;
+	for (i = 0; i < cpanel->count; i++) 
+		if (cpanel->dir.list [i].f.marked) {
+			filename = cpanel->dir.list [i].fname;
+			break;
+		}
+    } else {
+	    filename = selection (cpanel)->fname;
+    }
+    do_link (1, filename);
 }
 
 void edit_symlink_cmd (void)
 {
+#ifndef HAVE_GNOME
+/* GNOME already checks this, and selection(cpanel) does bbad things */
     if (S_ISLNK (selection (cpanel)->buf.st_mode)) {
-	char buffer [MC_MAXPATHLEN], *p = selection (cpanel)->fname;
+#endif
+	char buffer [MC_MAXPATHLEN];
+	char *p = NULL;
 	int i;
 	char *dest, *q = g_strconcat (_(" Symlink "), name_trunc (p, 32), _(" points to:"), NULL);
-	
+
+	if (is_a_desktop_panel (cpanel)) {
+		gint i;
+		for (i = 0; i < cpanel->count; i++) 
+			if (cpanel->dir.list [i].f.marked) {
+				p = cpanel->dir.list [i].fname;
+				break;
+			}
+	} else {
+		p = selection (cpanel)->fname;
+	}
 	i = readlink (p, buffer, MC_MAXPATHLEN);
 	if (i > 0) {
 	    buffer [i] = 0;
@@ -1123,7 +1148,9 @@ void edit_symlink_cmd (void)
 	    }
 	}
 	g_free (q);
+#ifndef HAVE_GNOME
     }
+#endif
 }
 
 void other_symlink_cmd (void)

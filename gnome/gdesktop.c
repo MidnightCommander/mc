@@ -23,9 +23,12 @@
 #include "gicon.h"
 #include "gmain.h"
 #include "gmetadata.h"
+#include "gcmd.h"
 #include "gdnd.h"
 #include "gmount.h"
 #include "gpopup.h"
+#include "gprint.h"
+#include "gscreen.h"
 #include "../vfs/vfs.h"
 #include "main.h"
 
@@ -180,7 +183,7 @@ get_icon_auto_pos (int *x, int *y)
 
 	get_slot_from_pos (*x, *y, &u, &v);
 	start = u * layout_rows + v;
-	end = layout_rows * layout_cols;
+	end = layout_cols * layout_rows;
 
 	/* Look forwards until the end of the grid.  If we could not find an
 	 * empty spot, find the second best.
@@ -699,6 +702,28 @@ select_icon (DesktopIconInfo *dii, int event_state)
 		select_range (dii, TRUE);
 }
 
+/* Convenience function to fill a file entry */
+static void
+file_entry_fill (file_entry *fe, struct stat *s, char *filename)
+{
+	fe->fname = g_strdup (x_basename (filename));
+	fe->fnamelen = strlen (fe->fname);
+	fe->buf = *s;
+	fe->f.marked = FALSE;
+	fe->f.link_to_dir = FALSE;
+	fe->f.stalled_link = FALSE;
+	fe->f.dir_size_computed = FALSE;
+
+	if (S_ISLNK (s->st_mode)) {
+		struct stat s2;
+
+		if (mc_stat (filename, &s2) == 0)
+			fe->f.link_to_dir = S_ISDIR (s2.st_mode) != 0;
+		else
+			fe->f.stalled_link = TRUE;
+	}
+}
+
 /* Creates a file entry structure and fills it with information appropriate to the specified file.  */
 file_entry *
 file_entry_from_file (char *filename)
@@ -712,22 +737,7 @@ file_entry_from_file (char *filename)
 	}
 
 	fe = g_new (file_entry, 1);
-	fe->fname = g_strdup (x_basename (filename));
-	fe->fnamelen = strlen (fe->fname);
-	fe->buf = s;
-	fe->f.marked = FALSE;
-	fe->f.link_to_dir = FALSE;
-	fe->f.stalled_link = FALSE;
-
-	if (S_ISLNK (s.st_mode)) {
-		struct stat s2;
-
-		if (mc_stat (filename, &s2) == 0)
-			fe->f.link_to_dir = S_ISDIR (s2.st_mode) != 0;
-		else
-			fe->f.stalled_link = TRUE;
-	}
-
+	file_entry_fill (fe, &s, filename);
 	return fe;
 }
 
@@ -912,8 +922,6 @@ gboolean
 is_mountable (char *filename, file_entry *fe, int *is_mounted, char **point)
 {
 	char buffer [128], *p;
-	umode_t mode;
-	struct stat s;
 	int len;
 	
 	if (point)
@@ -1079,14 +1087,14 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 		message (1, _("Error"), "I could not fetch the information from the file");
 		return;
 	}
-	
+
 	if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe))
 		new_panel_at (filename);
 	else {
 		int is_mounted;
 		char *point;
 		int launch = FALSE;
-		
+
 		if (is_mountable (filename, fe, &is_mounted, &point)){
 			if (!is_mounted){
 				if (try_to_mount (filename, fe))
@@ -1100,13 +1108,13 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 		} else {
 			int size;
 			char *buf;
-			
+
 			if (gnome_metadata_get (filename,"fm-open", &size, &buf) == 0){
 				g_free (buf);
 				gmc_open_filename (filename, NULL);
 				return;
 			}
-			
+
 			if (gnome_metadata_get (filename, "open", &size, &buf) == 0){
 				g_free (buf);
 				gmc_open_filename (filename, NULL);
@@ -1115,12 +1123,12 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 
 			if (is_exe (fe->buf.st_mode) && if_link_is_exe (desktop_directory, fe)){
 				int needs_terminal = 0;
-				
+
 				if (gnome_metadata_get (filename, "flags", &size, &buf) == 0){
 					needs_terminal = strstr (buf, "needsterminal") != 0;
-					
 					g_free (buf);
 				}
+
 				if (needs_terminal)
 					gnome_open_terminal_with_cmd (filename);
 				else
@@ -1170,18 +1178,183 @@ desktop_icon_info_delete (DesktopIconInfo *dii)
 	desktop_icon_info_destroy (dii);
 }
 
+/**
+ * desktop_icon_info_get_by_filename:
+ * @filename: A filename relative to the desktop directory
+ * 
+ * Returns the desktop icon structure that corresponds to the specified filename,
+ * which should be relative to the desktop directory.
+ * 
+ * Return value: The sought desktop icon, or NULL if it is not found.
+ **/
+DesktopIconInfo *
+desktop_icon_info_get_by_filename (char *filename)
+{
+	int i;
+	GList *l;
+	DesktopIconInfo *dii;
+
+	g_return_val_if_fail (filename != NULL, NULL);
+
+	for (i = 0; i < layout_cols * layout_rows; i++)
+		for (l = layout_slots[i].icons; l; l = l->next) {
+			dii = l->data;
+
+			if (strcmp (dii->filename, filename) == 0)
+				return dii;
+		}
+
+	return NULL;
+}
+
+/* This is a HORRIBLE HACK.  It creates a temporary panel structure for gpopup's
+ * perusal.  Once gmc is rewritten, all file lists including panels will be a
+ * single data structure, and the world will be happy again.
+ */
+static WPanel *
+create_panel_from_desktop (void)
+{
+	WPanel *panel;
+	int nicons, count;
+	int marked_count, dir_marked_count;
+	long total;
+	int selected_index;
+	int i;
+	file_entry *fe;
+	GList *l;
+	struct stat s;
+
+	panel = g_new0 (WPanel, 1);
+
+	/* Count the number of desktop icons */
+
+	nicons = 0;
+	for (i = 0; i < layout_cols * layout_rows; i++)
+		nicons += layout_slots[i].num_icons;
+
+	/* Create the file entry list */
+
+	panel->dir.size = nicons;
+	panel->dir.list = g_new (file_entry, nicons);
+	fe = panel->dir.list;
+
+	count = 0;
+	marked_count = 0;
+	dir_marked_count = 0;
+	total = 0;
+	selected_index = -1;
+
+	for (i = 0; i < layout_cols * layout_rows; i++)
+		for (l = layout_slots[i].icons; l; l = l->next) {
+			DesktopIconInfo *dii;
+			char *full_name;
+
+			dii = l->data;
+			full_name = g_concat_dir_and_file (desktop_directory, dii->filename);
+			if (mc_lstat (full_name, &s) == -1) {
+				g_warning ("Could not stat %s, bad things will happen", full_name);
+				continue;
+			}
+
+			file_entry_fill (fe, &s, full_name);
+			if (dii->selected) {
+#if 0
+				if (selected_index == -1)
+					selected_index = count;
+#endif
+				marked_count++;
+				fe->f.marked = TRUE;
+
+				if (S_ISDIR (fe->buf.st_mode))
+					dir_marked_count++;
+
+				total += fe->buf.st_size;
+			}
+
+			g_free (full_name);
+			fe++;
+			count++;
+		}
+
+	/* Fill the rest of the panel structure */
+
+	panel->list_type = list_icons;
+	strncpy (panel->cwd, desktop_directory, sizeof (panel->cwd));
+	panel->count = count; /* the actual number of lstat()ed files */
+	panel->marked = marked_count;
+	panel->dirs_marked = dir_marked_count;
+	panel->total = total;
+	panel->selected = selected_index;
+	panel->is_a_desktop_panel = TRUE;
+	
+	g_assert (panel->count > 0);
+#if 0
+	g_assert (panel->selected != -1);
+#endif
+	return panel;
+}
+
+WPanel *
+push_desktop_panel_hack (void)
+{
+	WPanel *panel;
+	PanelContainer *container;
+	
+	panel = create_panel_from_desktop ();
+	container = g_new (PanelContainer, 1);
+	container->splitted = FALSE;
+	container->panel = panel;
+
+	containers = g_list_append (containers, container);
+
+	if (!current_panel_ptr)
+		current_panel_ptr = container;
+	else if (!other_panel_ptr)
+		other_panel_ptr = container;
+
+	/* Set it as the current panel and invoke the menu */
+
+	set_current_panel (panel);
+	mc_chdir (desktop_directory);
+	return panel;
+}
+
+
+/* Frees our hacked-up panel created in the function above */
+static void
+free_panel_from_desktop (WPanel *panel)
+{
+	int i;
+
+	for (i = 0; i < panel->count; i++)
+		g_free (panel->dir.list[i].fname);
+	
+	g_free (panel->dir.list);
+	g_free (panel);
+}
+
 /* Used to execute the popup menu for desktop icons */
 static void
 do_popup_menu (DesktopIconInfo *dii, GdkEventButton *event)
 {
 	char *filename;
+	WPanel *panel;
+	DesktopIconInfo *dii_temp;
+
+	/* Create the panel and the container structure */
+	panel = push_desktop_panel_hack ();
+	dii_temp = NULL;
+	if (panel->marked == 1)
+		dii_temp = dii;
 
 	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
 
-	if (gpopup_do_popup (event, NULL, dii, 0, filename) != -1)
+	if (gpopup_do_popup2 (event, panel, dii_temp) != -1)
 		desktop_reload_icons (FALSE, 0, 0);
 
 	g_free (filename);
+	layout_panel_gone (panel);
+	free_panel_from_desktop (panel);
 }
 
 /* Idle handler that opens a desktop icon.  See below for information on why we
@@ -1255,6 +1428,9 @@ icon_event (GnomeCanvasItem *item, GdkEvent *event, gpointer data)
 				retval = TRUE;
 			}
 		} else if (event->button.button == 3) {
+			if (!dii->selected)
+				select_icon (dii, event->button.state);
+
 			do_popup_menu (dii, (GdkEventButton *) event);
 			retval = TRUE;
 		}
@@ -2176,11 +2352,18 @@ handle_rescan_desktop (GtkWidget *widget, gpointer data)
 {
 	desktop_reload_icons (FALSE, 0, 0);
 }
+static GnomeUIInfo gnome_panel_new_menu [] = {
+	 GNOMEUIINFO_ITEM_NONE(N_("_Terminal"), N_("Launch a new terminal in the current directory"), gnome_open_terminal),
+	/* If this ever changes, make sure you update create_new_menu accordingly. */
+	GNOMEUIINFO_ITEM_NONE( N_("_Directory..."), N_("Creates a new directory"), gnome_mkdir_cmd ),
+	GNOMEUIINFO_END
+};
 
 /* The popup menu for the desktop */
 GnomeUIInfo desktop_popup_items[] = {
-	GNOMEUIINFO_ITEM_NONE (N_("Arrange Icons"), NULL, handle_arrange_icons),
+	GNOMEUIINFO_MENU_NEW_SUBTREE(gnome_panel_new_menu),
 	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_ITEM_NONE (N_("Arrange Icons"), NULL, handle_arrange_icons),
 	GNOMEUIINFO_ITEM_NONE (N_("Create New Window"), NULL, handle_new_window),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_NONE (N_("Rescan Mountable Devices"), NULL, handle_rescan_devices),
@@ -2192,10 +2375,36 @@ GnomeUIInfo desktop_popup_items[] = {
 static void
 desktop_popup (GdkEventButton *event)
 {
+	GtkWidget *shell;
 	GtkWidget *popup;
+	GList *child_list;
+	gchar *file, *file2;
+	WPanel *panel;
+	gint i;
+
 
 	popup = gnome_popup_menu_new (desktop_popup_items);
+	/* First thing we want to do is strip off the STUPID tear off menu... S-: */
+	shell = gnome_panel_new_menu[0].widget->parent;
+	child_list = gtk_container_children (GTK_CONTAINER (shell));
+	if (GTK_IS_TEAROFF_MENU_ITEM (child_list->data))
+		gtk_widget_hide (GTK_WIDGET (child_list->data));
+	i = g_list_length (child_list);
+	g_list_free (child_list);
+	file = gnome_unconditional_datadir_file ("mc/templates");
+	i = create_new_menu_from (file, shell, i);
+	file2 = gnome_datadir_file ("mc/templates");
+	if (file2 != NULL){
+		if (strcmp (file, file2) != 0)
+			create_new_menu_from (file2, shell, i);
+	}
+	g_free (file);
+	g_free (file2);
+
+	panel = push_desktop_panel_hack ();
 	gnome_popup_menu_do_popup_modal (popup, NULL, NULL, event, NULL);
+	layout_panel_gone (panel);
+	free_panel_from_desktop (panel); 
 	gtk_widget_destroy (popup);
 }
 
@@ -2261,6 +2470,9 @@ icon_is_in_area (DesktopIconInfo *dii, int x1, int y1, int x2, int y2)
 	y1 -= dii->y;
 	x2 -= dii->x;
 	y2 -= dii->y;
+
+	if (x1 == x2 && y1 == y2)
+		return FALSE;
 
 	if (x1 < dicon->icon_x + dicon->icon_w - 1
 	    && x2 > dicon->icon_x

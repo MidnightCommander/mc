@@ -33,9 +33,15 @@ void gnome_init_panels ();
 void bind_gtk_keys (GtkWidget *w, Dlg_head *h);
 WPanel *new_panel_at (char *dir);
 WPanel *new_panel_with_geometry_at (char *dir, char *geometry);
+void set_current_panel (WPanel *panel);
 void layout_panel_gone (WPanel *panel);
 void gtkrundlg_event (Dlg_head *h);
-
+int gmc_open (file_entry *fe);
+int gmc_open_with (char *filename);
+int gmc_open_filename (char *fname, GList *args);
+int gmc_edit (char *fname);
+int gmc_can_view_file (char *filename);
+int gmc_view (char *filename, int start_line);
 void x_show_info (WInfo *info, struct my_statfs *s, struct stat *b);
 void x_create_info (Dlg_head *h, widget_data parent, WInfo *info);
 

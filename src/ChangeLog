@@ -1,3 +1,17 @@
+1999-03-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* file.c (erase_dir): Erase metadata for directories as well.
+	(erase_dir_iff_empty): Likewise.
+	(copy_file_file): Delete/copy the metadata even for
+	char/block/sock/fifo files.  Same thing for when copying symlinks.
+	(copy_dir_dir): Delete/copy the metadata.
+	(move_dir_dir): Delete/move the metadata.
+	(recursive_erase): Delete the metadata.
+
+1999-03-08  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* file.c (real_query_recursive): Removed an unused variable.
+
 1999-03-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* utilunix.c (g_readlink): New function.  Wraps all the nonsense
@@ -46,6 +60,11 @@ Mon Mar  1 00:18:48 1999  Timur Bakeyev  <mc@bat.ru>
 	* view.c (view_percent, view_update): Take an extra argument:
 	update_gui, which controls whether we want to update the displayed
 	region in the GUI version.
+
+1999-02-25  Jonathan Blandford  <jrb@redhat.com>
+
+	* cmd.c (symlink_cmd): little change to handle the case when a
+	desktop panel is passed in.
 
 1999-02-25  Owen Taylor  <otaylor@redhat.com>
 

@@ -88,7 +88,7 @@ get_other_index (void)
 	return UNDEFINED_INDEX;
 }
 
-static void
+void
 set_current_panel (WPanel *panel)
 {
 	GList *p;
@@ -99,6 +99,7 @@ set_current_panel (WPanel *panel)
 	for (p = containers; p; p = p->next){
 		if (((PanelContainer *)p->data)->panel == panel){
 			current_panel_ptr = p->data;
+			break;
 		}
 	}
 }
@@ -313,7 +314,7 @@ do_desktop_rescan_devices (void)
 void configure_box (void);
 
 GtkCheckMenuItem *gnome_toggle_snap (void);
-GnomeUIInfo gnome_panel_new_menu [] = {
+static GnomeUIInfo gnome_panel_new_menu [] = {
 	 GNOMEUIINFO_ITEM_NONE(N_("_Terminal"), N_("Launch a new terminal in the current directory"), gnome_open_terminal),
 	/* If this ever changes, make sure you update create_new_menu accordingly. */
 	GNOMEUIINFO_ITEM_NONE( N_("_Directory..."), N_("Creates a new directory"), gnome_mkdir_cmd ),
@@ -465,30 +466,32 @@ panel_enter_event (GtkWidget *widget, GdkEvent *event, WPanel *panel)
 	send_message (panel->widget.parent, (Widget *) panel, WIDGET_FOCUS, 0);
 }
 
-static void
-create_new_menu_from (GnomeApp *app, WPanel *panel, char *file)
+void
+destroy_gde (GtkWidget *unused, void *data)
 {
-	gint pos;
-	GtkWidget *shell = NULL;
+	gnome_desktop_entry_free ((GnomeDesktopEntry *) (data));
+}
+
+gint
+create_new_menu_from (char *file, GtkWidget *shell, gint pos)
+{
 	DIR *dir;
 	struct stat filedata;
+	gboolean add_separator = TRUE;
 	struct dirent *dirstruc;
 	GnomeDesktopEntry *gde;
 	GtkWidget *menu;
 	char *file2;
-	
+
+	g_return_val_if_fail (shell != NULL, pos);
+
 	dir = opendir (file);
 	if (dir == NULL)
-		return;
-	
-	shell = gnome_app_find_menu_pos (app->menubar, _("File/New/Directory..."), &pos);
-	menu = gtk_menu_item_new ();
-	gtk_widget_show (menu);
-	gtk_menu_shell_insert (GTK_MENU_SHELL (shell), menu, pos++);
+		return pos;
 
 	if (shell == NULL){
 		closedir (dir);
-		return;
+		return pos;
 	}
 
 	while ((dirstruc = readdir (dir)) != NULL){
@@ -499,13 +502,17 @@ create_new_menu_from (GnomeApp *app, WPanel *panel, char *file)
 
 		if ((stat (file2, &filedata) != -1) && (S_ISREG (filedata.st_mode))){
 			char *path;
-			char *test;
-			
+			int len;
+			const int desktoplen = sizeof (".desktop") - 1;
+
+			len = strlen (dirstruc->d_name);
+			if (strcmp (dirstruc->d_name + len - desktoplen, ".desktop") != 0) {
+				g_free (file2);
+				continue;
+			}
+
 			gde = gnome_desktop_entry_load (file2);
-
-			test = strrchr(dirstruc->d_name, '.');
-
-			if (test == NULL || gde == NULL || strcmp (test, ".desktop")){
+			if (gde == NULL) {
 				g_free (file2);
 				continue;
 			}
@@ -513,23 +520,40 @@ create_new_menu_from (GnomeApp *app, WPanel *panel, char *file)
 			path = gnome_is_program_in_path (gde->tryexec);
 			g_free (path);
 			if (!path){
+				gnome_desktop_entry_free (gde);
 				g_free (file2);
 				continue;
 			}
-			
+
+			if (add_separator) {
+				menu = gtk_menu_item_new ();
+				gtk_widget_show (menu);
+				gtk_menu_shell_insert (GTK_MENU_SHELL (shell), menu, pos++);
+				add_separator = !add_separator;
+			}
+
 			menu = gtk_menu_item_new_with_label (gde->name);
 			gtk_widget_show (menu);
 			gtk_menu_shell_insert (GTK_MENU_SHELL (shell), menu, pos++);
 
 			/* This is really bad, but it works. */
+			/* FIXME: it doesn't work if we free the gde below. --
+                         * need to do this right sometime -jrb
+			 */
 			if (gde->comment)
-				gtk_object_set_data (GTK_OBJECT (menu), "apphelper_statusbar_hint",
+				gtk_object_set_data (GTK_OBJECT (menu),
+						     "apphelper_statusbar_hint",
 						     gde->comment);
-			gtk_signal_connect (GTK_OBJECT (menu), "activate", GTK_SIGNAL_FUNC (gnome_run_new),
+			gtk_signal_connect (GTK_OBJECT (menu), "activate",
+					    GTK_SIGNAL_FUNC (gnome_run_new),
+					    gde);
+			gtk_signal_connect (GTK_OBJECT (menu), "destroy",
+					    GTK_SIGNAL_FUNC (destroy_gde),
 					    gde);
 		}
 		g_free (file2);
 	}
+	return pos;
 }
 
 /**
@@ -541,15 +565,20 @@ static void
 create_new_menu (GnomeApp *app, WPanel *panel)
 {
 	gchar *file, *file2;
+	gint pos;
+	GtkWidget *shell;
+
+	shell = gnome_app_find_menu_pos (app->menubar, _("File/New/Directory..."), &pos);
 
 	file = gnome_unconditional_datadir_file ("mc/templates");
-	create_new_menu_from (app, panel, file);
-	
+	pos = create_new_menu_from (file, shell, pos);
+
 	file2 = gnome_datadir_file ("mc/templates");
 	if (file2 != NULL){
 		if (strcmp (file, file2) != 0)
-			create_new_menu_from (app, panel, file2);
+			create_new_menu_from (file2, shell, pos);
 	}
+
 	g_free (file);
 	g_free (file2);
 }
@@ -718,7 +747,8 @@ update_panels (int force_update, char *current_file)
 	if (!cpanel)
 		return;
 	
-	update_one_panel_widget (cpanel, force_update, current_file);
+	if (!is_a_desktop_panel (cpanel))
+		update_one_panel_widget (cpanel, force_update, current_file);
 
 	if (reload_others){
 		for (p = containers; p; p = p->next){
@@ -727,7 +757,8 @@ update_panels (int force_update, char *current_file)
 			if (p->data == current_panel_ptr)
 				continue;
 			
-			update_one_panel_widget (pc->panel, force_update, UP_KEEPSEL);
+			if (!is_a_desktop_panel (pc->panel))
+				update_one_panel_widget (pc->panel, force_update, UP_KEEPSEL);
 		}
 	}
 	mc_chdir (cpanel->cwd);

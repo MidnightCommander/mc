@@ -309,6 +309,9 @@ x_panel_select_item (WPanel *panel, int index, int value)
 void
 x_select_item (WPanel *panel)
 {
+	if (is_a_desktop_panel (panel))
+		return;
+	    
 	do_file_mark (panel, panel->selected, 1);
 	display_mini_info (panel);
 	
@@ -469,8 +472,8 @@ panel_file_list_press_row (GtkWidget *file_list, GdkEvent *event, WPanel *panel)
 						  event->button.x, event->button.y,
 						  &row, &column)) {
 			gtk_clist_select_row (GTK_CLIST (file_list), row, 0);
-#if 0
-			gpopup_do_popup2 ((GdkEventButton *) event, panel);
+#if 1
+			gpopup_do_popup2 ((GdkEventButton *) event, panel, NULL);
 #else
 			gpopup_do_popup ((GdkEventButton *) event, panel,
 					 NULL, row, panel->dir.list[row].fname);
@@ -1403,8 +1406,8 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 	switch (event->type){
 	case GDK_BUTTON_PRESS:
 		if (event->button.button == 3) {
-#if 0
-			gpopup_do_popup2 ((GdkEventButton *) event, panel);
+#if 1
+			gpopup_do_popup2 ((GdkEventButton *) event, panel, NULL);
 #else
 			gpopup_do_popup ((GdkEventButton *) event, panel,
 					 NULL, index, panel->dir.list[index].fname);

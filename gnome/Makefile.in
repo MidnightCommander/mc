@@ -55,6 +55,7 @@ GNOMESRCS = 		\
 	gprint.c	\
 	gprop.c		\
 	gnome-file-property-dialog.c \
+	gnome-open-dialog.c \
 	gscreen.c 	\
 	gtools.c 	\
 	gtkdtree.c	\
@@ -82,8 +83,10 @@ GNOMEHDRS = 		\
 	gpopup.h	\
 	gpopup2.h	\
 	gprefs.h	\
+	gprint.h	\
 	gprop.h		\
 	gnome-file-property-dialog.h \
+	gnome-open-dialog.h \
 	gscreen.h	\
 	gtkdtree.h	\
 	gtree.h		\
@@ -158,6 +161,7 @@ OBJS = 			\
 	gprint.o	\
 	gprop.o		\
 	gnome-file-property-dialog.o \
+	gnome-open-dialog.o \
 	gscreen.o 	\
 	gtools.o 	\
 	gtree.o		\

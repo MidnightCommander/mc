@@ -333,6 +333,7 @@ file_progress_query_replace_policy (FileOpContext *ctx, gboolean dialog_needed)
         GtkWidget *qrp_dlg;
         GtkWidget *radio;
         GtkWidget *vbox;
+        GtkWidget *vbox2;
         GtkWidget *hbox;
         GtkWidget *icon;
         GtkWidget *label;
@@ -362,15 +363,19 @@ file_progress_query_replace_policy (FileOpContext *ctx, gboolean dialog_needed)
                                     GNOME_STOCK_BUTTON_CANCEL,
                                     NULL);
         gtk_window_set_position (GTK_WINDOW (qrp_dlg), GTK_WIN_POS_MOUSE);
-        vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
-        hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-        icon = gnome_stock_pixmap_widget (hbox, GNOME_STOCK_PIXMAP_HELP);
 
+        hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (qrp_dlg)->vbox), hbox, FALSE, FALSE, 0);
+
+        icon = gnome_stock_pixmap_widget (hbox, GNOME_STOCK_PIXMAP_HELP);
         gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
+
+        vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
         gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, GNOME_PAD_SMALL);
 
         label = gtk_label_new (_("Some of the files you are trying to copy already "
-                                 "exist in the destination folder."));
+                                 "exist in the destination folder.  Please select "
+                                 "the action to be performed."));
         gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
         gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
         gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
@@ -378,25 +383,32 @@ file_progress_query_replace_policy (FileOpContext *ctx, gboolean dialog_needed)
         gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
         gtk_box_pack_start (GTK_BOX (vbox), gtk_hseparator_new (), FALSE, FALSE, 0);
 
+        vbox2 = gtk_vbox_new (TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (vbox), vbox2, FALSE, FALSE, 0);
+
         radio = gtk_radio_button_new_with_label (group, _("Prompt me before overwriting any file."));
         gtk_object_set_user_data (GTK_OBJECT (radio), GINT_TO_POINTER (REPLACE_PROMPT));
         gtk_signal_connect (GTK_OBJECT (radio), "toggled",
                             GTK_SIGNAL_FUNC (policy_callback), ui);
-        gtk_box_pack_start (GTK_BOX (vbox), radio, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (vbox2), radio, FALSE, FALSE, 0);
         group = gtk_radio_button_group (GTK_RADIO_BUTTON (radio));
 
         radio = gtk_radio_button_new_with_label (group, _("Don't overwrite any files."));
         gtk_object_set_user_data (GTK_OBJECT (radio), GINT_TO_POINTER (REPLACE_NEVER));
         gtk_signal_connect (GTK_OBJECT (radio), "toggled",
                             GTK_SIGNAL_FUNC (policy_callback), ui);
-        gtk_box_pack_start (GTK_BOX (vbox), radio, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (vbox2), radio, FALSE, FALSE, 0);
         group = gtk_radio_button_group (GTK_RADIO_BUTTON (radio));
 
         ui->op_radio = gtk_radio_button_new (group);
         gtk_object_set_user_data (GTK_OBJECT (ui->op_radio), GINT_TO_POINTER (REPLACE_OPTION_MENU));
         gtk_signal_connect (GTK_OBJECT (ui->op_radio), "toggled",
                             GTK_SIGNAL_FUNC (policy_callback), ui);
+        gtk_box_pack_start (GTK_BOX (vbox2), ui->op_radio, FALSE, FALSE, 0);
+
         hrbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+        gtk_container_add (GTK_CONTAINER (ui->op_radio), hrbox);
+
         gtk_box_pack_start (GTK_BOX (hrbox), gtk_label_new (_("Overwrite:")), FALSE, FALSE, 0);
 
         /* we set up the option menu. */
@@ -424,15 +436,6 @@ file_progress_query_replace_policy (FileOpContext *ctx, gboolean dialog_needed)
 
         gtk_widget_show_all (menu);
         gtk_option_menu_set_menu (GTK_OPTION_MENU (omenu), menu);
-
-        gtk_signal_connect (GTK_OBJECT (ui->op_radio), "toggled",
-                            GTK_SIGNAL_FUNC (policy_callback), (gpointer) REPLACE_ALWAYS);
-        gtk_box_pack_start (GTK_BOX (vbox), ui->op_radio, FALSE, FALSE, 0);
-        group = gtk_radio_button_group (GTK_RADIO_BUTTON (ui->op_radio));
-        gtk_container_add (GTK_CONTAINER (ui->op_radio), hrbox);
-
-        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (qrp_dlg)->vbox),
-                            hbox, FALSE, FALSE, 0);
 
         gtk_widget_show_all (GTK_WIDGET (GNOME_DIALOG (qrp_dlg)->vbox));
         switch (gnome_dialog_run_and_close (GNOME_DIALOG (qrp_dlg))) {
@@ -619,16 +622,20 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char 
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cbox), ctx->follow_links);
                 gtk_signal_connect (GTK_OBJECT (cbox), "toggled",
                                     (GtkSignalFunc) fmd_check_box_callback, &ctx->follow_links);
+#if 0
                 gnome_widget_add_help (cbox,
                                        _("Selecting this will copy the files that symlinks point "
                                          "to instead of just copying the link."));
+#endif
                 gtk_box_pack_start (GTK_BOX (vbox), cbox, FALSE, FALSE, 0);
 
                 cbox = gtk_check_button_new_with_label (_("Preserve file attributes."));
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cbox), ctx->op_preserve);
                 gtk_signal_connect (GTK_OBJECT (cbox), "toggled",
                                     (GtkSignalFunc) fmd_check_box_callback, &ctx->op_preserve);
+#if 0
                 gnome_widget_add_help (cbox, _("Preserves the permissions and the UID/GID if possible"));
+#endif
                 gtk_box_pack_start (GTK_BOX (vbox), cbox, FALSE, FALSE, 0);
 
                 vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
@@ -637,7 +644,9 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char 
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cbox), ctx->dive_into_subdirs);
                 gtk_signal_connect (GTK_OBJECT (cbox), "toggled",
                                     (GtkSignalFunc) fmd_check_box_callback, &ctx->dive_into_subdirs);
+#if 0
                 gnome_widget_add_help (cbox, _("If set, this will copy the directories recursively"));
+#endif
                 gtk_box_pack_start (GTK_BOX (vbox), cbox, FALSE, FALSE, 0);
         }
 

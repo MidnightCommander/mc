@@ -158,6 +158,7 @@ typedef struct {
     int drag_motion_x;
     int drag_motion_y;
     void *panel_listbox;	/* container for the list */
+    int is_a_desktop_panel;
 #endif
 } WPanel;
 
@@ -176,7 +177,11 @@ extern int show_mini_info;
 extern int panel_scroll_pages;
 
 #define selection(p) (&(p->dir.list [p->selected]))
-
+#ifdef HAVE_GNOME
+#define is_a_desktop_panel(p) ((p->is_a_desktop_panel))
+#else
+#define is_a_desktop_panel(p) FALSE
+#endif
 extern int fast_reload;
 
 extern int extra_info;

@@ -83,7 +83,7 @@ panel_action_edit (GtkWidget *widget, WPanel *panel)
 {
 	char *full = g_concat_dir_and_file (panel->cwd, selection (panel)->fname);
 	
-	gmc_edit_filename (full);
+	gmc_edit (full);
 	g_free (full);
 }
 
@@ -161,7 +161,7 @@ panel_action_properties (GtkWidget *widget, WPanel *panel)
 /*	if (item_properties (GTK_WIDGET (CLIST_FROM_SW (panel->list)), full_name, NULL) != 0)
 	reread_cmd ();*/
 	dlg = gnome_file_property_dialog_new (full_name, we_can_afford_the_speed);
-	gnome_dialog_set_parent (GNOME_DIALOG (dlg), GTK_WINDOW (gtk_widget_get_toplevel (panel->ministatus)));
+	gnome_dialog_set_parent (GNOME_DIALOG (dlg), GTK_WINDOW (panel->xwindow));
 	if (gnome_dialog_run (GNOME_DIALOG (dlg)) == 0)
 		retval = gnome_file_property_dialog_make_changes (GNOME_FILE_PROPERTY_DIALOG (dlg));
 		gtk_widget_destroy (dlg);

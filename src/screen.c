@@ -1000,6 +1000,9 @@ panel_new (char *panel_name)
     panel->format	    = 0;
     panel->status_format    = 0;    
     panel->format_modified  = 1;
+#ifdef HAVE_GNOME
+    panel->is_a_desktop_panel = FALSE;
+#endif
     
     panel->panel_name = g_strdup (panel_name);
     panel->user_format = g_strdup (DEFAULT_USER_FORMAT);

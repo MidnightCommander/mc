@@ -1,5 +1,5 @@
 /* gnome-file-property-dialog.c
- * Copyright (C) 1999  J. Arthur Random
+ * Copyright (C) 1999  Free Software Foundation
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -1230,8 +1230,6 @@ static gint
 apply_metadata_change (GnomeFilePropertyDialog *fpd)
 {
 	gchar *text;
-	gchar *icon_name;
-	char *filename;
 
 	/* If we don't have an open_cbox, that means we have no metadata
 	 * to set.

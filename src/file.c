@@ -554,9 +554,19 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
     	    return return_status;
         }
 
-        if (S_ISLNK (sb.st_mode))
-	    return make_symlink (ctx, src_path, dst_path);
-	    
+        if (S_ISLNK (sb.st_mode)) {
+	    int retval;
+
+	    retval = make_symlink (ctx, src_path, dst_path);
+#ifdef HAVE_GNOME
+	    if (retval == FILE_CONT) {
+		gnome_metadata_delete (dst_path);
+		gnome_metadata_copy (src_path, dst_path);
+	    }
+#endif
+	    return retval;
+	}
+
 #endif /* !OS_NT */
 
         if (S_ISCHR (sb.st_mode) || S_ISBLK (sb.st_mode) || S_ISFIFO (sb.st_mode)
@@ -585,6 +595,10 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 		    continue;
 		return temp_status;
 	    }
+#endif
+#ifdef HAVE_GNOME
+	    gnome_metadata_delete (dst_path);
+	    gnome_metadata_copy (src_path, dst_path);
 #endif
 	    return FILE_CONT;
         }
@@ -806,7 +820,8 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 #endif
 
 #ifdef HAVE_GNOME
-    gnome_metadata_copy (src_path, dst_path);
+	gnome_metadata_delete (dst_path);
+	gnome_metadata_copy (src_path, dst_path);
 #endif
      /*
       * .ado: according to the XPG4 standard, the file must be closed before
@@ -907,6 +922,10 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 
     	if (move_over){
             if (mc_rename (s, d) == 0){
+#ifdef HAVE_GNOME
+		gnome_metadata_delete (d);
+		gnome_metadata_copy (s, d);
+#endif
 		g_free (parent_dirs);
 		return FILE_CONT;
 	    }
@@ -948,6 +967,11 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 	    goto retry_dst_mkdir;
 	goto ret;
     }
+
+#ifdef HAVE_GNOME
+    gnome_metadata_delete (dest_dir);
+    gnome_metadata_copy (s, dest_dir);
+#endif
 
     lp = g_new (struct link, 1);
     mc_stat (dest_dir, &buf);
@@ -1061,6 +1085,9 @@ move_file_file (FileOpContext *ctx, char *s, char *d, long *progress_count, doub
 {
     struct stat src_stats, dst_stats;
     int return_status = FILE_CONT;
+#ifdef HAVE_GNOME
+    int delete_metadata = TRUE;
+#endif
 
     if (file_progress_show_source (ctx, s) == FILE_ABORT
 	|| file_progress_show_target (ctx, d) == FILE_ABORT)
@@ -1115,14 +1142,20 @@ move_file_file (FileOpContext *ctx, char *s, char *d, long *progress_count, doub
 
     if (!ctx->do_append) {
 	if (S_ISLNK (src_stats.st_mode) && ctx->stable_symlinks) {
-	    if ((return_status = make_symlink (ctx, s, d)) == FILE_CONT)
+	    if ((return_status = make_symlink (ctx, s, d)) == FILE_CONT) {
+#ifdef HAVE_GNOME
+		gnome_metadata_delete (d);
+		gnome_metadata_rename (s, d);
+		delete_metadata = FALSE;
+#endif
 		goto retry_src_remove;
-	    else
+	    } else
 		return return_status;
 	}
 
         if (mc_rename (s, d) == 0){
 #ifdef HAVE_GNOME
+	    gnome_metadata_delete (d);
 	    gnome_metadata_rename (s, d);
 #endif
 	    return FILE_CONT;
@@ -1163,7 +1196,8 @@ move_file_file (FileOpContext *ctx, char *s, char *d, long *progress_count, doub
 	return return_status;
     }
 #ifdef HAVE_GNOME
-    gnome_metadata_delete (s);
+    if (delete_metadata)
+	gnome_metadata_delete (s);
 #endif
     
     if (return_status == FILE_CONT)
@@ -1222,6 +1256,10 @@ move_dir_dir (FileOpContext *ctx, char *s, char *d, long *progress_count, double
 
  retry_rename:
     if (mc_rename (s, destdir) == 0){
+#ifdef HAVE_GNOME
+	gnome_metadata_delete (destdir);
+	gnome_metadata_rename (s, destdir);
+#endif
 	return_status = FILE_CONT;
 	goto ret;
     }
@@ -1364,6 +1402,9 @@ recursive_erase (FileOpContext *ctx, char *s, long *progress_count, double *prog
 	    goto retry_rmdir;
 	return return_status;
     }
+#ifdef HAVE_GNOME
+    gnome_metadata_delete (s);
+#endif
     return FILE_CONT;
 }
 
@@ -1431,6 +1472,9 @@ erase_dir (FileOpContext *ctx, char *s, long *progress_count, double *progress_b
 	    goto retry_rmdir;
 	return error;
     }
+#ifdef HAVE_GNOME
+    gnome_metadata_delete (s);
+#endif
     return FILE_CONT;
 }
 
@@ -1460,6 +1504,9 @@ erase_dir_iff_empty (FileOpContext *ctx, char *s)
 	    goto retry_rmdir;
 	return error;
     }
+#ifdef HAVE_GNOME
+    gnome_metadata_delete (s);
+#endif
     return FILE_CONT;
 }
 
@@ -1479,7 +1526,7 @@ panel_get_file (WPanel *panel, struct stat *stat_buf)
 	
 	mc_stat (tree->selected_ptr->name, stat_buf);
 	return tree->selected_ptr->name;
-    } 
+    }
 
     if (panel->marked){
 	for (i = 0; i < panel->count; i++)
@@ -1952,14 +1999,10 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 	    }
 	} /* Copy or move operation */
 
-	if (value == FILE_CONT)
+	if (value == FILE_CONT && !(is_a_desktop_panel(panel)))
 	    unmark_files (panel);
     } else {
         /* Many files */
-	/* Need to determine this.*/
-#ifdef HAVE_GNOME
-	int policy_over_write_necessary = 1;
-#endif
 
 	/* Check destination for copy or move operation */
 	if (operation != OP_DELETE){
@@ -1983,27 +2026,13 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 	    ctx->progress_bytes = panel->total;
 	}
 
-#ifdef HAVE_GNOME
-	if (operation != OP_DELETE){
-    	    /* FIXME: we need to determine if this dialog is actually needed. */
-    	    /* We need to pre-copy all the files and see if there are any 
-    	     * over-writes.  Ugh, this sounds yucky.  )-: */
-    	    if (policy_over_write_necessary) {
-		if (file_progress_query_replace_policy (ctx, TRUE) == FILE_ABORT)
-		    goto clean_up;
-		else
-		    /* this will initialize some variables */
-		    file_progress_query_replace_policy (ctx, FALSE);
-    	    }
-	}
-#endif
 	/* Loop for every file, perform the actual copy operation */
 	for (i = 0; i < panel->count; i++) {
 	    if (!panel->dir.list [i].f.marked)
 		continue;	/* Skip the unmarked ones */
 
 	    source = panel->dir.list [i].fname;
-	    src_stat = panel->dir.list [i].buf;	/* Inefficient, should we use pointers? */
+	    src_stat = panel->dir.list [i].buf;
 
 #ifdef WITH_FULL_PATHS
 	    if (source_with_path)
@@ -2058,9 +2087,16 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 	    if (value == FILE_ABORT)
 		goto clean_up;
 
+#ifdef HAVE_GNOME
+	    /* if panel->selection is -1, then we have a desktop panel. */
+	    if (value == FILE_CONT && !(is_a_desktop_panel(panel)))
+		    do_file_mark (panel, i, 0);
+#else
 	    if (value == FILE_CONT)
-		do_file_mark (panel, i, 0);
+		    do_file_mark (panel, i, 0);
+#endif
 
+	    
 	    if (file_progress_show_count (ctx, count, ctx->progress_count) == FILE_ABORT)
 		goto clean_up;
 
@@ -2181,7 +2217,7 @@ files_error (char *format, char *file1, char *file2)
 static int
 real_query_recursive (FileOpContext *ctx, enum OperationMode mode, char *s)
 {
-    char *confirm, *textb;
+    char *confirm;
     gchar *text;
 
     if (ctx->recursive_result < RECURSIVE_ALWAYS){

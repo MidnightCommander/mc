@@ -16,4 +16,5 @@ typedef struct {
 extern PanelContainer *current_panel_ptr, *other_panel_ptr;
 extern GList *containers;
 
+
 #endif /* __GSCREEN_H */

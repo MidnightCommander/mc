@@ -23,6 +23,8 @@
 #include "gpageprop.h"
 #include "gpopup.h"
 #include "gnome-file-property-dialog.h"
+#include "gnome-open-dialog.h"
+#include "gmain.h"
 #define CLIST_FROM_SW(panel_list) GTK_CLIST (GTK_BIN (panel_list)->child)
 
 
@@ -40,16 +42,23 @@ enum {
 	F_MIME_ACTIONS	= 1 << 7	/* Special marker for the position of MIME actions */
 };
 
-/* typedefs */
+/* An entry in the actions menu */
+
+typedef gboolean (*menu_func) (WPanel *panel, DesktopIconInfo *dii);
+
 struct action {
 	char *text;		/* Menu item text */
 	int flags;		/* Flags from the above enum */
 	gpointer callback;	/* Callback for menu item */
+	menu_func func;         /* NULL if item is always present; a predicate otherwise */
 };
 
 
 /* Multiple File commands */
 static void handle_open (GtkWidget *widget, WPanel *panel);
+static void handle_mount (GtkWidget *widget, WPanel *panel);
+static void handle_unmount (GtkWidget *widget, WPanel *panel);
+static void handle_eject (GtkWidget *widget, WPanel *panel);
 static void handle_view (GtkWidget *widget, WPanel *panel);
 static void handle_view_unfiltered (GtkWidget *widget, WPanel *panel);
 static void handle_edit (GtkWidget *widget, WPanel *panel);
@@ -60,46 +69,163 @@ static void handle_move (GtkWidget *widget, WPanel *panel);
 /* F_SINGLE file commands */
 static void handle_properties (GtkWidget *widget, WPanel *panel);
 static void handle_open_with (GtkWidget *widget, WPanel *panel);
-static void handle_hard_link (GtkWidget *widget, WPanel *panel);
 static void handle_symlink (GtkWidget *widget, WPanel *panel);
+static void handle_hard_link (GtkWidget *widget, WPanel *panel);
 static void handle_edit_symlink (GtkWidget *widget, WPanel *panel);
 
+/* Helper funcs and testing funcs. */
+static gboolean check_mount_func (WPanel *panel, DesktopIconInfo *dii);
+static gboolean check_unmount_func (WPanel *panel, DesktopIconInfo *dii);
+static gboolean check_eject_func (WPanel *panel, DesktopIconInfo *dii);
+static gboolean check_edit_func (WPanel *panel, DesktopIconInfo *dii);
+static gboolean check_view_func (WPanel *panel, DesktopIconInfo *dii);
+
+static gchar * get_full_filename (WPanel *panel);
+
+/* Now, the actual code */
+static gchar *
+get_full_filename (WPanel *panel)
+{
+	if (is_a_desktop_panel (panel)) {
+		gint i;
+		for (i = 0; i < panel->count; i++) 
+			if (panel->dir.list [i].f.marked) {
+				return concat_dir_and_file (panel->cwd,
+							    panel->dir.list [i].fname);
+			}
+		g_return_val_if_fail (FALSE, NULL);
+	} else
+		return concat_dir_and_file (panel->cwd, selection (panel)->fname);
+
+}
+
+static gboolean
+check_mount_umount (DesktopIconInfo *dii, int mount)
+{
+	char *full_name;
+	file_entry *fe;
+	int v;
+	int is_mounted;
+
+	full_name = g_concat_dir_and_file (desktop_directory, dii->filename);
+	fe = file_entry_from_file (full_name);
+	if (!fe) {
+		g_free (full_name);
+		return FALSE;
+	}
+
+	v = is_mountable (full_name, fe, &is_mounted, NULL);
+	file_entry_free (fe);
+	g_free (full_name);
+
+	if (!v)
+		return FALSE;
+
+	if (is_mounted && mount)
+		return FALSE;
+
+	if (!is_mounted && !mount)
+		return FALSE;
+
+	return TRUE;
+}
+
+static gboolean
+check_mount_func (WPanel *panel, DesktopIconInfo *dii)
+{
+	if (!dii)
+		return FALSE;
+
+	return check_mount_umount (dii, TRUE);
+}
+
+static gboolean
+check_unmount_func (WPanel *panel, DesktopIconInfo *dii)
+{
+	if (!dii)
+		return FALSE;
+
+	return check_mount_umount (dii, FALSE);
+}
+
+static gboolean
+check_eject_func (WPanel *panel, DesktopIconInfo *dii)
+{
+	char *full_name;
+	file_entry *fe;
+	int v;
+	int is_mounted;
+	int retval;
+
+	if (!dii)
+		return FALSE;
+
+	full_name = g_concat_dir_and_file (desktop_directory, dii->filename);
+	fe = file_entry_from_file (full_name);
+	if (!fe) {
+		g_free (full_name);
+		return FALSE;
+	}
+
+	v = is_mountable (full_name, fe, &is_mounted, NULL);
+	file_entry_free (fe);
+
+	if (!v)
+		retval = FALSE;
+	else if (!is_ejectable (full_name))
+		retval = FALSE;
+	else
+		retval = TRUE;
+
+	g_free (full_name);
+	return retval;
+}
+
+static gboolean
+check_edit_func  (WPanel *panel, DesktopIconInfo *dii)
+{
+	/* As far as I can tell, by looking at gactions.c, edit will _ALWAYS work */
+	return TRUE;
+}
+
+static gboolean
+check_view_func  (WPanel *panel, DesktopIconInfo *dii)
+{
+	gchar *full_name;
+	if (is_a_desktop_panel (panel)) {
+		g_assert (dii != NULL);
+		full_name = g_concat_dir_and_file (panel->cwd, dii->filename);
+	} else
+		full_name = g_concat_dir_and_file (panel->cwd, panel->dir.list[panel->selected].fname);
+
+	return gmc_can_view_file (full_name);
+}
 
 /* global vars */
 extern int we_can_afford_the_speed;
 
 static struct action file_actions[] = {
-	{ N_("Open"),			F_NOTDEV,				handle_open },
-	{ "",				F_NOTDEV,				NULL },
-	{ "",				F_MIME_ACTIONS,				NULL },
-	{ N_("Open with..."),		F_REGULAR | F_SINGLE, 			handle_open_with },
-	{ N_("View"),			F_REGULAR | F_SINGLE, 			handle_view },
-	{ N_("View Unfiltered"),	F_REGULAR | F_ADVANCED | F_SINGLE,	handle_view_unfiltered },
-	{ N_("Edit"),			F_REGULAR | F_SINGLE, 			handle_edit },
-	{ "",				F_REGULAR | F_SINGLE, 			NULL },
-	{ N_("Copy..."),		F_ALL, 					handle_copy },
-	{ N_("Delete"),			F_ALL, 					handle_delete },
-	{ N_("Move..."),		F_ALL, 					handle_move },
-	{ N_("Hard Link..."),		F_ADVANCED | F_SINGLE, 			handle_hard_link },
-	{ N_("Symlink..."),		F_SINGLE, 				handle_symlink },
-	{ N_("Edit Symlink..."),	F_SYMLINK | F_SINGLE, 			handle_edit_symlink },
-	{ "",				F_SINGLE | F_ALL, 			NULL },
-	{ N_("Properties..."),		F_SINGLE | F_ALL, 			handle_properties },
-	{ NULL, 0, NULL }
+	{ N_("Open"),			F_NOTDEV | F_SINGLE,			handle_open,		NULL },
+	{ N_("Mount device"),		F_ALL | F_SINGLE,			handle_mount,		check_mount_func },
+	{ N_("Unmount device"),		F_ALL | F_SINGLE,			handle_unmount,		check_unmount_func },
+	{ N_("Eject device"),		F_ALL | F_SINGLE,			handle_eject,		check_eject_func },
+	{ "",				F_NOTDEV | F_SINGLE,			NULL, 			NULL },
+	{ "",				F_MIME_ACTIONS | F_SINGLE,		NULL, 			NULL },
+	{ N_("Open with..."),		F_REGULAR | F_SINGLE, 			handle_open_with, 	NULL },
+	{ N_("View"),			F_REGULAR | F_SINGLE, 			handle_view, 		check_view_func },
+	{ N_("View Unfiltered"),	F_REGULAR | F_ADVANCED | F_SINGLE,	handle_view_unfiltered, NULL },
+	{ N_("Edit"),			F_REGULAR | F_SINGLE, 			handle_edit,  		check_edit_func },
+	{ "",				F_REGULAR | F_SINGLE, 			NULL, 			NULL },
+	{ N_("Copy..."),		F_ALL, 					handle_copy, 		NULL },
+	{ N_("Delete"),			F_ALL, 					handle_delete, 		NULL },
+	{ N_("Move..."),		F_ALL, 					handle_move, 		NULL },
+	{ N_("Hard Link..."),		F_ADVANCED | F_SINGLE, 			handle_hard_link,  	NULL },
+	{ N_("Symlink..."),		F_SINGLE, 				handle_symlink, 	NULL },
+	{ N_("Edit Symlink..."),	F_SYMLINK | F_SINGLE, 			handle_edit_symlink,  	NULL },
+	{ "",				F_SINGLE | F_ALL, 			NULL, 			NULL },
+	{ N_("Properties..."),		F_SINGLE | F_ALL, 			handle_properties, 	NULL },
+	{ NULL, 0, NULL, NULL }
 };
-
-#if 0
-static action generic_actions[] = {
-	{ N_("NEW(FIXME)"),		F_ALL, 		NULL },
-	{ "",				F_ALL, 		NULL },
-	{ N_("Change Background"),	F_DICON, 	handle_display_properties },
-	{ N_("Rescan Directory"),	F_ALL,		handle_rescan },
-	{ N_("Arrange Icons"),		F_DICON, 	handle_arrange_icons },
-	{ N_(""),			F_DICON, 	NULL },
-	{ N_("Logout"),			F_DICON, 	handle_logout },
-	{ NULL, 0, NULL }
-};
-#endif
 
 /* This is our custom signal connection function for popup menu items -- see below for the
  * marshaller information.  We pass the original callback function as the data pointer for the
@@ -184,7 +310,7 @@ mime_action_callback (GtkWidget *widget, gpointer data)
 	const char *value;
 	int needs_terminal = 0;
 	int size;
-	
+
 	filename = data;
 	key = gtk_object_get_user_data (GTK_OBJECT (widget));
 
@@ -219,17 +345,23 @@ mime_action_callback (GtkWidget *widget, gpointer data)
  * file in the panel.
  */
 static int
-create_mime_actions (GtkWidget *menu, WPanel *panel, int pos)
+create_mime_actions (GtkWidget *menu, WPanel *panel, int pos, DesktopIconInfo *dii)
 {
 	char *full_name;
 	const char *mime_type;
 	GList *keys, *l;
+	gint pos_init = pos;
 	GnomeUIInfo uiinfo[] = {
 		{ 0 },
 		GNOMEUIINFO_END
 	};
 
-	full_name = g_concat_dir_and_file (panel->cwd, panel->dir.list[panel->selected].fname);
+	if (is_a_desktop_panel (panel)) {
+		g_assert (dii != NULL);
+		full_name = g_concat_dir_and_file (panel->cwd, dii->filename);
+	} else
+		full_name = g_concat_dir_and_file (panel->cwd,
+						   panel->dir.list[panel->selected].fname);
 	mime_type = gnome_mime_type_or_default (full_name, NULL);
 	g_free (full_name);
 
@@ -279,8 +411,11 @@ create_mime_actions (GtkWidget *menu, WPanel *panel, int pos)
 				    (GtkSignalFunc) free_on_destroy,
 				    full_name);
 	}
-
-	g_list_free (keys);
+	if (pos_init != pos) {
+		uiinfo[0].type = GNOME_APP_UI_SEPARATOR;
+		fill_menu (GTK_MENU_SHELL (menu), uiinfo, pos++);
+		g_list_free (keys);
+	}
 	return pos;
 }
 
@@ -288,7 +423,7 @@ create_mime_actions (GtkWidget *menu, WPanel *panel, int pos)
  * which additional menu items should be inserted.
  */
 static void
-create_actions (GtkWidget *menu, gint flags, WPanel *panel)
+create_actions (GtkWidget *menu, gint flags, WPanel *panel, DesktopIconInfo *dii)
 {
 	struct action *action;
 	int pos;
@@ -302,12 +437,15 @@ create_actions (GtkWidget *menu, gint flags, WPanel *panel)
 	for (action = file_actions; action->text; action++) {
 		/* Insert the MIME actions if appropriate */
 		if ((action->flags & F_MIME_ACTIONS) && (flags & F_SINGLE)) {
-			pos = create_mime_actions (menu, panel, pos);
+			pos = create_mime_actions (menu, panel, pos, dii);
 			continue;
 		}
 
 		/* Filter the actions that are not appropriate */
 		if ((action->flags & flags) != action->flags)
+			continue;
+
+		if (action->func && !((action->func)(panel, dii)))
 			continue;
 
 		/* Create the menu item for this action */
@@ -357,7 +495,7 @@ get_active_index (GtkMenu *menu)
 #define REMOVE(x,f) x &= ~f
 
 int
-gpopup_do_popup2 (GdkEventButton *event, WPanel *panel)
+gpopup_do_popup2 (GdkEventButton *event, WPanel *panel, DesktopIconInfo *dii)
 {
 	GtkWidget *menu;
 	gint flags = F_ALL | F_REGULAR | F_SYMLINK | F_SINGLE | F_NOTDEV | F_NOTDIR;
@@ -409,7 +547,7 @@ gpopup_do_popup2 (GdkEventButton *event, WPanel *panel)
 		REMOVE (flags, F_SINGLE);
 
 	/* Fill the menu */
-	create_actions (menu, flags, panel);
+	create_actions (menu, flags, panel, dii);
 
 	/* Run it */
 	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, event->button, event->time);
@@ -420,35 +558,93 @@ gpopup_do_popup2 (GdkEventButton *event, WPanel *panel)
 	gtk_signal_disconnect (GTK_OBJECT (menu), id);
 
 	i = get_active_index (GTK_MENU (menu));
-	gtk_widget_destroy (menu);
+	gtk_widget_unref (menu);
 	return i;
 }
 
 static void
 handle_open (GtkWidget *widget, WPanel *panel)
 {
-	if (do_enter (panel))
-		return;
+	gchar *full_name;
+	DesktopIconInfo *dii;
 
-	handle_open_with (widget, panel);
+	if (is_a_desktop_panel (panel)) {
+		dii = desktop_icon_info_get_by_filename (selection (panel)->fname);
+		g_assert (dii != NULL);
+		desktop_icon_info_open (dii);
+		return;
+	}
+
+	full_name = get_full_filename (panel);
+	if (gmc_open_filename (full_name, 0))
+		return;
+	gmc_open_with (full_name);
+	g_free (full_name);
+}
+
+static void
+handle_mount (GtkWidget *widget, WPanel *panel)
+{
+	char *full_name;
+
+	g_assert (is_a_desktop_panel (panel));
+
+	full_name = g_concat_dir_and_file (desktop_directory, selection (panel)->fname);
+	do_mount_umount (full_name, TRUE);
+	g_free (full_name);
+}
+
+static void
+handle_unmount (GtkWidget *widget, WPanel *panel)
+{
+	char *full_name;
+
+	g_assert (is_a_desktop_panel (panel));
+
+	full_name = g_concat_dir_and_file (desktop_directory, selection (panel)->fname);
+	do_mount_umount (full_name, FALSE);
+	g_free (full_name);
+}
+
+static void
+handle_eject (GtkWidget *widget, WPanel *panel)
+{
+	char *full_name;
+
+	g_assert (is_a_desktop_panel (panel));
+
+	full_name = g_concat_dir_and_file (desktop_directory, selection (panel)->fname);
+	do_mount_umount (full_name, FALSE);
+	do_eject (full_name);
+	g_free (full_name);
 }
 
 static void
 handle_view (GtkWidget *widget, WPanel *panel)
 {
-	view_cmd (panel);
+	gchar *full_name;
+
+	full_name = get_full_filename (panel);
+	gmc_view (full_name, 0);
+	g_free (full_name);
 }
 
 static void
 handle_view_unfiltered (GtkWidget *widget, WPanel *panel)
 {
-	view_simple_cmd (panel);
+	/* We need it to do the right thing later. */
+	/*view_simple_cmd (panel);*/
+	return;
 }
 
 static void
 handle_edit (GtkWidget *widget, WPanel *panel)
 {
-	edit_cmd (panel);
+	gchar *full_name;
+
+	full_name = get_full_filename (panel);
+	gmc_edit (full_name);
+	g_free (full_name);
 }
 
 static void
@@ -473,40 +669,43 @@ handle_move (GtkWidget *widget, WPanel *panel)
 static void
 handle_properties (GtkWidget *widget, WPanel *panel)
 {
-	gint retval;
-	file_entry *fe;
-	char *full_name;
-	GtkWidget *dlg;
+	gint retval = 0;
+	GtkWidget *dialog;
+	gchar *full_name = NULL;
+	DesktopIconInfo *dii;
 
-	fe = &panel->dir.list [panel->selected];
-	full_name = concat_dir_and_file (panel->cwd, fe->fname);
+	full_name = get_full_filename (panel);
+	dialog = gnome_file_property_dialog_new (full_name,
+						 (is_a_desktop_panel (panel)
+						  ? TRUE
+						  : we_can_afford_the_speed));
 
-	dlg = gnome_file_property_dialog_new (full_name, we_can_afford_the_speed);
-	gnome_dialog_set_parent (GNOME_DIALOG (dlg),
-				 GTK_WINDOW (gtk_widget_get_toplevel (panel->ministatus)));
+	if (!is_a_desktop_panel (panel))
+		gnome_dialog_set_parent (GNOME_DIALOG (dialog), GTK_WINDOW (panel->xwindow));
 
-	if (gnome_dialog_run (GNOME_DIALOG (dlg)) == 0)
-		retval = gnome_file_property_dialog_make_changes (GNOME_FILE_PROPERTY_DIALOG (dlg));
+	if (gnome_dialog_run (GNOME_DIALOG (dialog)) == 0)
+		retval = gnome_file_property_dialog_make_changes (
+			GNOME_FILE_PROPERTY_DIALOG (dialog));
 
-	gtk_widget_destroy (dlg);
+	if (is_a_desktop_panel (panel)) {
+		dii = desktop_icon_info_get_by_filename (selection (panel)->fname);
+		g_assert (dii != NULL);
+		desktop_icon_update_url (dii);
+	}
+
+	gtk_widget_destroy (dialog);
 	g_free (full_name);
-	if (retval)
+	if (retval && !is_a_desktop_panel (panel))
 		reread_cmd ();
 }
 
 static void
 handle_open_with (GtkWidget *widget, WPanel *panel)
 {
-	char *command;
-
-	command = input_expand_dialog (_("Open with"),
-				       _("Enter extra arguments:"),
-				       panel->dir.list [panel->selected].fname);
-	if (!command)
-		return;
-
-	execute (command);
-	g_free (command);
+	gchar *full_name;
+	full_name = get_full_filename (panel);
+	gmc_open_with (full_name);
+	g_free (full_name);
 }
 
 static void
@@ -528,8 +727,3 @@ handle_edit_symlink (GtkWidget *widget, WPanel *panel)
 	edit_symlink_cmd ();
 }
 
-static void
-handle_rescan (GtkWidget *widget, WPanel *panel)
-{
-	reread_cmd ();
-}
