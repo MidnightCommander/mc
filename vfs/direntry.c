@@ -1,4 +1,4 @@
-M/* Directory cache support -- so that you do not have copy of this in
+/* Directory cache support -- so that you do not have copy of this in
  * each and every filesystem.
  *
  * Written at 1998 by Pavel Machek <pavel@ucw.cz>, distribute under LGPL.
@@ -382,7 +382,7 @@ vfs_s_resolve_symlink (vfs *me, vfs_s_entry *entry, char *path, int follow)
 		break;
 	    }
 	    strcat (linkname, "..");
-	    strcat (linkname, PATH_SEP);
+	    strcat (linkname, PATH_SEP_STR);
 	}
 	return (MEDATA->find_entry) (me, entry->dir, linkname, follow - 1, 0);
     }
