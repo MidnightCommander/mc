@@ -9,145 +9,208 @@ use strict;
 use POSIX;
 
 # standard binaries
-my $bzcat = "bzip2 -dc";
-my $gzcat = "zcat";
+my $bzip = "bzip2";
+my $gzip = "gzip";
 my $file = "file";
 
 # date parsing requires Date::Parse from TimeDate module
 my $parsedates = eval "require Date::Parse";
 
+
+# output unix date in a mc-readable format
 sub timef
 {
-    # format unix time
     my @time=localtime($_[0]);
-    return sprintf "%02d-%02d-%d %02d:%02d", $time[4]+1, $time[3],
-		   $time[5] + 1900, $time[2], $time[1];
+    return sprintf "%02d-%02d-%02d %02d:%02d", $time[4]+1, $time[3], $time[5]%100, $time[2], $time[1];
 }
 
+# parse given string as a date and return unix time
 sub datetime
 {
     # in case of problems fall back to 0 in unix time
     # note: str2time interprets some wrong values (eg. " ") as 'today'
     if ($parsedates && defined (my $t=str2time($_[0]))) {
-	return timef($t);
+	return timef($t)
     }
-    return timef(time);
+    return timef(0);
 }
 
+# print message on stderr and exit
+sub error
+{
+    print STDERR $_[0];
+    exit 1;
+}
+
+# list files affected by patch
 sub list
 {
-    my ($f,$d,$state,$pos,$npos);
-    my ($uid,$gid)=(`id -nu` || "0",`id -ng` || "0");
-    chomp ($uid, $gid);
+    my ($archive)=@_;
+    my ($state,$pos,$npos,$time);
+    my ($f,$fsrc,$fdst,$prefix);
+
+    # use uid and gid from file
+    my ($uid,$gid)=(`ls -l $archive`=~/^[^\s]+\s+[^\s]+\s+([^\s]+)\s+([^\s]+)/);
 
     import Date::Parse if ($parsedates);
     
     # state==1 means diff contents, state==0 mens comments
-    $state=1;
-    $f="";
+    $state=1; $f="";
     while (<I>) {
-	if (/^--- /) {
-	    # start of a new file
+	if (/^-{3} /) {
+	    # parse diff header
 	    if ($state==1) {
 		$npos=tell(I)-length;
-		printf "-rw-r--r-- 1 %s %s %d %s %s\n", $uid, $gid, $npos-$pos, datetime($d), $f
+		printf "-rw-r--r-- 1 %s %s %d %s %s%s\n", $uid, $gid, $npos-$pos, datetime($time), $prefix, $f
 		  if $f;
 		$pos=$npos;
 	    }
 	    $state=1;
-	    s/^--- ([^\s]+).*$/$1/;
-	    chomp;
-	    $f=$_;
-	    $d="";
-	} elsif (/^\+\+\+ /) {
-	    # take date from the +++ field
-	    s/^\+\+\+ ([^\s]+)\s*//;
-	    s/^([^\t]+).*$/$1/;
-	    chomp;
-	    $d=$_;
+
+	    error "Can't parse unified diff header"
+	      unless ((($_.=<I>).=<I>)=~/^\-{3} .*\n\+{3} .*\n@@ .* @@\n$/);
+	    ($fsrc)=/^-{3} ([^\s]+).*\n.*\n.*\n$/;
+	    ($fdst)=/^.*\n\+{3} ([^\s]+).*\n.*\n$/;
+	    ($time)=/^.*\n\+{3} [^\s]+\s+([^\t\n]+).*\n.*\n$/;
+
+	    # select filename, conform with (diff.info)Multiple patches
+	    $prefix="";
+	    if ($fsrc eq "/dev/null") {
+		$f=$fdst; $prefix="PATCH-CREATE/";
+	    } elsif ($fdst eq "/dev/null") {
+		$f=$fsrc; $prefix="PATCH-REMOVE/";
+	    } elsif (($fdst eq "/dev/null") && ($fsrc eq "/dev/null")) {
+		error "Malformed diff";
+	    } elsif (!$fdst && !$fsrc) {
+		error "Index: not yet implemented";
+	    } else {
+		# fewest path name components
+		if ($fdst=~s|/|/|g < $fsrc=~s|/|/|g) {
+		    $f=$fdst;
+		} elsif ($fdst=~s|/|/|g > $fsrc=~s|/|/|g) {
+		    $f=$fsrc;
+		} else {
+		    # shorter base name
+		    if (($fdst=~m|^.*/([^/]+)$|,length $1) < ($fsrc=~m|^.*/([^/]+)$|,length $1)) {
+			$f=$fdst;
+		    } elsif (($fdst=~m|^.*/([^/]+)$|,length $1) > ($fsrc=~m|^.*/([^/]+)$|,length $1)) {
+			$f=$fsrc;
+		    } else {
+			# shortest names
+			if (length $fdst < length $fsrc) {
+			    $f=$fdst;
+			} else {
+			    $f=$fsrc;
+			}
+		    }
+		}
+	    }
+	    $f=$f.".diff";
+
 	} elsif ($state==1 && !/^([+\- ]|@@)/) {
 	    # start of comments, end of diff contents
 	    $npos=tell(I)-length;
-	    printf "-rw-r--r-- 1 %s %s %d %s %s\n", $uid, $gid, $npos-$pos, datetime($d), $f
+	    printf "-rw-r--r-- 1 %s %s %d %s %s%s\n", $uid, $gid, $npos-$pos, datetime($time), $prefix, $f
 	      if $f;
 	    $pos=$npos;
 	    $state=0;
 	}
     }
     $npos=tell(I);
-    printf "-rw-r--r-- 1 %s %s %d %s %s\n", $uid, $gid, $npos-$pos, datetime($d), $f
-      if $f && $state!=0;
-
-    close I;
+    printf "-rw-r--r-- 1 %s %s %d %s %s%s\n", $uid, $gid, $npos-$pos, datetime($time), $prefix, $f
+      if $f;
 }
 
 sub copyout
 {
     my ($file,$out)=@_;
-    my ($f,$state,$pos);
+    my ($fsrc,$fdst,$found,$state,$buf);
 
-    open O, "> $out";
-    $state=1;
-    $f="";
+    $file=~s/^(PATCH-(CREATE|REMOVE)\/)?(.*)\.diff$/$3/;
+    
+    # state==1 means diff contents, state==0 mens comments
+    $state=1; $found=0; $buf="";
     while (<I>) {
-	if (/^--- /) {
-	    # start of a new file
-	    if ($state==1) {
-		if ($f eq $file) {
-		    seek(I,-length,1);
-		    last;
-		}
-		$pos=tell(I)-length;
-	    }
+	if (/^-{3} /) {
+	    # parse diff header
+	    last if ($state==1 && $found);
 	    $state=1;
-	    s/^--- ([^\s]+).*$/$1/;
-	    chomp;
-	    $f=$_;
+
+	    error "Can't parse unified diff header"
+	      unless ((($_.=<I>).=<I>)=~/^\-{3} .*\n\+{3} .*\n@@ .* @@\n$/);
+	    ($fsrc)=/^-{3} ([^\s]+).*\n.*\n.*\n$/;
+	    ($fdst)=/^.*\n\+{3} ([^\s]+).*\n.*\n$/;
+	    $found=1 if (($fsrc eq $file) || ($fdst eq $file));
+
 	} elsif ($state==1 && !/^([+\- ]|@@)/) {
 	    # start of comments, end of diff contents
-	    if ($f eq $file) {
-		seek(I,-length,1);
-		last;
-	    }
-	    $pos=tell(I)-length;
+	    last if ($found);
 	    $state=0;
+	    $buf="";
 	}
+	$buf.=$_ if ($found || $state==0)
     }
-    if ($f eq $file) {
-	my $here=tell(I);
-	seek(I,$pos,0);
-	read(I,my $buf,$here-$pos);
+    if ($found) {
+	open O, "> $out";
 	print O $buf;
+	close O;
     }
-
-    close O;
 }
 
+sub copyin
+{
+    # append diff to archive
+    my ($archive,$name,$f)=(quotemeta $_[0],$_[1],quotemeta $_[2]);
+    my ($cmd);
 
-my $tmp;
-my $quoted_name = quotemeta $ARGV[1];
-$_=`$file $quoted_name`;
-if (/bzip/) {
-    $tmp=tmpnam();
-    system "$bzcat $quoted_name > $tmp";
-    open I, "< $tmp";
-} elsif (/gzip/) {
-    $tmp=tmpnam();
-    system "$gzcat $quoted_name > $tmp";
-    open I, "< $tmp";
-} else {
-    open I, "< $ARGV[1]";
+    error "File must have .diff or .patch extension"
+      unless $name=~/\.(diff|patch)(\.(bz|bz2|gz|z|Z))?$/;
+
+    $_=`$file $f`;
+    if (/bzip/) {
+	$cmd="$bzip -dc $f";
+    } elsif (/gzip/) {
+	$cmd="$gzip -dc $f";
+    } else {
+	$cmd="cat $f";
+    }
+    
+    $_=`$file $archive`;
+    if (/bzip/) {
+	system "$cmd | $bzip -c >> $archive";
+    } elsif (/gzip/) {
+	system "$cmd | $gzip -c >> $archive";
+    } else {
+	system "$cmd >> $archive";
+    }
 }
+
+sub openread
+{
+    # open (compressed) archive for reading
+    my ($archive) = (quotemeta $_[0]);
+
+    $_=`$file $archive`;
+    if (/bzip/) {
+	open I, "$bzip -dc $ARGV[1] |";
+    } elsif (/gzip/) {
+	open I, "$gzip -dc $ARGV[1] |";
+    } else {
+	open I, "< $ARGV[1]";
+    }
+}
+
 
 if ($ARGV[0] eq "list") {
-    list;
-    exit(0);
+    openread $ARGV[1];
+    list $ARGV[1];
+    exit 0;
 } if ($ARGV[0] eq "copyout") {
+    openread $ARGV[1];
     copyout ($ARGV[2], $ARGV[3]);
-    exit(0);
+    exit 0;
+} if ($ARGV[0] eq "copyin") {
+    copyin ($ARGV[1], $ARGV[2], $ARGV[3]);
+    exit 0;
 }
-exit(1);
-
-END {
-    system "rm $tmp" if ($tmp);
-}
+exit 1;

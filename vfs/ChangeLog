@@ -1,3 +1,12 @@
+2002-12-13  Adam Byrtek  <alpha@debian.org>
+
+	* extfs/patchfs.in: "copyin" method added (with compressed files
+	support).  Files inside archive now have '.diff' extension.
+	Temporary file not needed any more.  Proper handling of
+	"/dev/null" filenames, filename heuristics based on diff info
+	page.  Set files owner and group as the archive.
+	* extfs/audio.in: CDDB_TIMEOUT variable added.
+
 2002-12-12  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.c (is_dos_date): Allow 4-digit years.
