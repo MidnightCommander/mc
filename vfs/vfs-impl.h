@@ -1,6 +1,8 @@
 #ifndef MC_VFS_IMPL_H
 #define MC_VFS_IMPL_H
 
+#ifdef USE_VFS
+
 typedef void *vfsid;
 struct vfs_stamping;
 
@@ -125,4 +127,6 @@ void init_sfs (void);
 void init_tarfs (void);
 void init_undelfs (void);
 
-#endif
+#endif /* USE_VFS */
+
+#endif /* MC_VFS_IMPL_H */
