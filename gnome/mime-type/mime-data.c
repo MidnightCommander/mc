@@ -35,6 +35,18 @@ static GtkWidget *clist = NULL;
 extern GtkWidget *delete_button;
 extern GtkWidget *capplet;
 /* Initialization functions */
+static void
+run_error (gchar *message)
+{
+	GtkWidget *error_box;
+
+	error_box = gnome_message_box_new (
+		message,
+		GNOME_MESSAGE_BOX_ERROR,
+		GNOME_STOCK_BUTTON_OK,
+		NULL);
+	gnome_dialog_run_and_close (GNOME_DIALOG (error_box));
+}
 static char *
 get_priority (char *def, int *priority)
 {
@@ -82,7 +94,7 @@ add_to_key (char *mime_type, char *def, GHashTable *table)
                 info->ext_readable[0] = NULL;
                 info->ext_readable[1] = NULL;
                 info->keys = gnome_mime_get_keys (mime_type);
-		g_hash_table_insert (table, mime_type, info);
+		g_hash_table_insert (table, info->mime_type, info);
 	}
 	if (strncmp (def, "ext", 3) == 0){
 		char *tokp;
@@ -274,7 +286,6 @@ add_mime_vals_to_clist (gchar *mime_type, gpointer mi, gpointer cl)
         g_string_free (extension, TRUE);
         return row;
 }
-
 static void
 selected_row_callback (GtkWidget *widget, gint row, gint column, GdkEvent *event, gpointer data)
 {
@@ -286,6 +297,7 @@ selected_row_callback (GtkWidget *widget, gint row, gint column, GdkEvent *event
         
         if (event && event->type == GDK_2BUTTON_PRESS)
                 launch_edit_window (mi);
+
         if (g_hash_table_lookup (user_mime_types, mi->mime_type)) {
                 gtk_widget_set_sensitive (delete_button, TRUE);
         } else
@@ -424,12 +436,43 @@ init_mime_type (void)
         init_mime_info ();
 }
 void
-add_new_mime_type (gchar *mime_type, gchar *ext, gchar *regexp1, gchar *regexp2)
+add_new_mime_type (gchar *mime_type, gchar *raw_ext, gchar *regexp1, gchar *regexp2)
 {
         gchar *temp;
         MimeInfo *mi = NULL;
         gint row;
+        gchar *ext = NULL;
+        gchar *ptr, *ptr2;
+        
         /* first we make sure that the information is good */
+        if (mime_type == NULL || *mime_type == '\000') {
+                run_error (_("You must enter a mime-type"));
+                return;
+        } else if ((raw_ext == NULL || *raw_ext == '\000') &&
+                   (regexp1 == NULL || *regexp1 == '\000') &&
+                   (regexp2 == NULL || *regexp2 == '\000')){
+                run_error (_("You must add either a regular-expression or\na file-name extension"));
+                return;
+        }
+        if (strchr (mime_type, '/') == NULL) {
+                run_error (_("Please put your mime-type in the format:\nCATEGORY/TYPE\n\nFor Example:\nimage/png"));
+                return;
+        }
+        if (g_hash_table_lookup (user_mime_types, mime_type) ||
+            g_hash_table_lookup (mime_types, mime_type)) {
+                run_error (_("This mime-type already exists"));
+                return;
+        }
+        if (raw_ext || *raw_ext) {
+                ptr2 = ext = g_malloc (sizeof (raw_ext));
+                for (ptr = raw_ext;*ptr; ptr++) {
+                        if (*ptr != '.' && *ptr != ',') {
+                                *ptr2 = *ptr;
+                                ptr2 += 1;
+                        }
+                }
+                *ptr2 = '\000';
+        }
         /* passed check, now we add it. */
         if (ext) {
                 temp = g_strconcat ("ext: ", ext, NULL);
@@ -453,6 +496,7 @@ add_new_mime_type (gchar *mime_type, gchar *ext, gchar *regexp1, gchar *regexp2)
                 gtk_clist_select_row (GTK_CLIST (clist), row, 0);
                 gtk_clist_moveto (GTK_CLIST (clist), row, 0, 0.5, 0.0);
         }
+        g_free (ext);
 }
 static void
 write_mime_foreach (gpointer mime_type, gpointer info, gpointer data)
@@ -485,18 +529,6 @@ write_mime_foreach (gpointer mime_type, gpointer info, gpointer data)
         fwrite ("\n", 1, 1, (FILE *) data);
 }
 
-static void
-run_error (gchar *message)
-{
-	GtkWidget *error_box;
-
-	error_box = gnome_message_box_new (
-		message,
-		GNOME_MESSAGE_BOX_ERROR,
-		GNOME_STOCK_BUTTON_OK,
-		NULL);
-	gnome_dialog_run_and_close (GNOME_DIALOG (error_box));
-}
 static void
 write_mime (GHashTable *hash)
 {

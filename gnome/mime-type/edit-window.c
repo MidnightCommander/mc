@@ -146,11 +146,17 @@ initialize_main_win ()
 
 	/* Actions box */
 	frame = gtk_frame_new (_("Mime Type Actions"));
+	vbox2 = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_box_pack_start (GTK_BOX (vbox), frame, TRUE, TRUE, 0);
 	table = gtk_table_new (3, 2, FALSE);
 	gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
 	gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
-	gtk_container_add (GTK_CONTAINER (frame), table);
+	gtk_container_add (GTK_CONTAINER (frame), vbox2);
+	label = gtk_label_new (_("Example: emacs %f"));
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+	gtk_misc_set_padding (GTK_MISC (label), 2, 0);
+	gtk_box_pack_start (GTK_BOX (vbox2), label, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox2), table, FALSE, FALSE, 0);
 	label = gtk_label_new (_("Open"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 	gtk_misc_set_padding (GTK_MISC (label), 2, 0);
@@ -280,11 +286,14 @@ launch_edit_window (MimeInfo *mi)
 	main_win->mi = mi;
 	initialize_main_win_vals ();
 
-	if  ((gnome_dialog_run (GNOME_DIALOG (main_win->window))) == 0) {
+	switch(gnome_dialog_run (GNOME_DIALOG (main_win->window))) {
+	case 0:
 		apply_changes (mi);
+	case 1:
+		main_win->mi = NULL;
+		gtk_widget_hide (main_win->window);
+		break;
 	}
-	main_win->mi = NULL;
-	gtk_widget_hide (main_win->window);
 }
 
 void
