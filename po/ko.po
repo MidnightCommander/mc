@@ -1,379 +1,393 @@
 msgid ""
 msgstr ""
-"Date: 1998-05-13 21:20:19-0500\n"
-"From: Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>\n"
+"Date: 1998-05-06 14:14:45+0900\n"
+"From: Sung-Hyun Nam <namsh@lgic.co.kr>\n"
 "Content-Type: text/plain; charset=\n"
 "Xgettext-Options: --default-domain=mc --directory=.. --add-comments --keyword=_ --keyword=N_ --files-from=./POTFILES.in\n"
 "Files: edit/edit.c edit/edit_key_translator.c edit/editcmd.c edit/editmenu.c edit/editoptions.c edit/editwidget.c src/fixhlp.c src/achown.c src/background.c src/boxes.c src/chmod.c src/chown.c src/cmd.c src/command.c src/dialog.c src/dir.c src/ext.c src/file.c src/find.c src/help.c src/hotlist.c src/info.c src/layout.c src/learn.c src/main.c src/menu.c src/option.c src/panelize.c src/screen.c src/subshell.c src/tree.c src/user.c src/util.c src/utilunix.c src/view.c src/win.c src/wtools.c gnome/gcmd.c gnome/gdesktop.c gnome/glayout.c gnome/gprop.c gnome/gscreen.c gnome/gtools.c gnome/gview.c gnome/gwidget.c\n"
 
+#. 이 화일은 제가 생각나는 데로 한글화한 것으로서 많은 부분들이
+#. 어색하게 바뀐 것으로 생각하고 있읍니다만 적당한 예가 없거나
+#. 생각나지 않아서 였으며, 이 화일을 보시는 분들께서는 너그러이
+#. 이해해 주시고, 부디 좀 더 좋게 바꾸어주시기를 부탁드립니다.
+#. 직접 수정해서 바뀐 부분을 Miguel에게 보내시거나 아니면 위의
+#. 제 email 주소로 보내주시면 고맙겠읍니다.
+#.                                                       남성현
+
 #. The file-name is printed after the ':'
 #: edit/edit.c:113 edit/edit.c:161 edit/edit.c:168 edit/edit.c:175 edit/edit.c:182 edit/edit.c:188 edit/edit.c:227 edit/edit.c:262 edit/editcmd.c:1687 edit/editwidget.c:879 src/tree.c:1138 src/tree.c:1144 src/wtools.c:225
 msgid " Error "
-msgstr ""
+msgstr " 에러 "
 
 #: edit/edit.c:113 edit/edit.c:168
 msgid " Fail trying to open file for reading: "
-msgstr ""
+msgstr " 화일 읽기 실패: "
 
 #: edit/edit.c:175
 msgid " Cannot get size/permissions info on file: "
-msgstr ""
+msgstr " 화일 크기/허용 정보 얻기 실패: "
 
 #: edit/edit.c:182
 msgid " Not an ordinary file: "
-msgstr ""
+msgstr " 일반 화일 아님: "
 
 #: edit/edit.c:188
 msgid " File is too large: "
-msgstr ""
+msgstr " 화일 크기가 너무 큼: "
 
 #: edit/edit.c:189
 msgid ""
 " \n"
 " Increase edit.h:MAXBUF and recompile the editor. "
 msgstr ""
+" \n"
+" edit.h의 MAXBUF 값을 키운 후 다시 컴파일하세요. "
 
 #: edit/edit.c:227 edit/edit.c:262
 msgid " Error allocating memory "
-msgstr ""
+msgstr " 메모리 할당 에러 "
 
 #: edit/edit_key_translator.c:121
 msgid " Emacs key: "
-msgstr ""
+msgstr " Emacs 키: "
 
 #: edit/edit_key_translator.c:133
 msgid " Execute Macro "
-msgstr ""
+msgstr " 매크로 실행 "
 
 #: edit/edit_key_translator.c:133 edit/editcmd.c:624 edit/editcmd.c:629
 msgid " Press macro hotkey: "
-msgstr ""
+msgstr " 매크로 단축키를 누르세요: "
 
 #: edit/edit_key_translator.c:144
 msgid " Insert Literal "
-msgstr ""
+msgstr " 문자 입력 "
 
 #: edit/edit_key_translator.c:144
 msgid " Press any key: "
-msgstr ""
+msgstr " 아무 키나 누르세요: "
 
 #. This heads the 'Save As' dialog box
 #: edit/editcmd.c:398
 msgid " Save As "
-msgstr ""
+msgstr " 다른 이름으로 저장 "
 
 #: edit/editcmd.c:413 edit/editcmd.c:722 edit/editcmd.c:734 edit/editcmd.c:835 edit/editcmd.c:918 gnome/gdesktop.c:1303 src/ext.c:295 src/help.c:320 src/main.c:685 src/subshell.c:696 src/subshell.c:722 src/utilunix.c:374 src/utilunix.c:378 src/utilunix.c:444
 msgid " Warning "
-msgstr ""
+msgstr " 경고 "
 
 #: edit/editcmd.c:414
 msgid " A file already exists with this name. "
-msgstr ""
+msgstr " 같은 이름의 화일이 이미 있네요. "
 
 #. Push buttons to over-write the current file, or cancel the operation
 #: edit/editcmd.c:416
 msgid "Overwrite"
-msgstr ""
+msgstr "덮어씀"
 
 #: edit/editcmd.c:416 edit/editcmd.c:695 edit/editcmd.c:722 edit/editcmd.c:734 edit/editcmd.c:835 edit/editcmd.c:1321
 msgid "Cancel"
-msgstr ""
+msgstr "취소"
 
 #: edit/editcmd.c:432
 msgid " Save as "
-msgstr ""
+msgstr " 다른 이름으로 저장 "
 
 #: edit/editcmd.c:432 edit/editcmd.c:2267
 msgid " Error trying to save file. "
-msgstr ""
+msgstr " 화일 저장 에러. "
 
 #. This heads the delete macro error dialog box
 #: edit/editcmd.c:543 edit/editcmd.c:551 edit/editcmd.c:576
 msgid " Delete macro "
-msgstr ""
+msgstr " 매크로 삭제 "
 
 #. 'Open' = load temp file
 #: edit/editcmd.c:545
 msgid " Error trying to open temp file "
-msgstr ""
+msgstr " 임시화일 열기 실패 "
 
 #. 'Open' = load temp file
 #: edit/editcmd.c:553 edit/editcmd.c:614 edit/editcmd.c:677
 msgid " Error trying to open macro file "
-msgstr ""
+msgstr " 매크로 화일 열기 실패 "
 
 #: edit/editcmd.c:558 edit/editcmd.c:566 edit/editcmd.c:602 edit/editcmd.c:652
 msgid "key '%d 0': "
-msgstr ""
+msgstr "키 '%d 0': "
 
 #: edit/editcmd.c:577
 msgid " Error trying to overwrite macro file "
-msgstr ""
+msgstr " 매크로 화일 덮어쓰기 실패 "
 
 #: edit/editcmd.c:594
 msgid " Macro "
-msgstr ""
+msgstr " 매크로 "
 
 #. Input line for a single key press follows the ':'
 #: edit/editcmd.c:596
 msgid " Press the macro's new hotkey: "
-msgstr ""
+msgstr " 새로운 매크로 단축키를 누르세요: "
 
 #. This heads the 'Save Macro' dialog box
 #: edit/editcmd.c:614
 msgid " Save macro "
-msgstr ""
+msgstr " 매크로 저장 "
 
 #. This heads the 'Delete Macro' dialog box
 #: edit/editcmd.c:624 edit/editcmd.c:627
 msgid " Delete Macro "
-msgstr ""
+msgstr " 매크로 삭제 "
 
 #. This heads the 'Load Macro' dialog box
 #: edit/editcmd.c:676
 msgid " Load macro "
-msgstr ""
+msgstr " 매크로 읽어옴 "
 
 #: edit/editcmd.c:690 edit/editcmd.c:692
 msgid " Confirm save file? : "
-msgstr ""
+msgstr " 저장할까요? "
 
 #. Buttons to 'Confirm save file' query
 #: edit/editcmd.c:695
 msgid " Save file "
-msgstr ""
+msgstr " 화일 저장 "
 
 #: edit/editcmd.c:695 edit/editwidget.c:993 src/view.c:1992
 msgid "Save"
-msgstr ""
+msgstr "저장"
 
 #: edit/editcmd.c:722 edit/editcmd.c:734
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
 msgstr ""
+" 문서가 바뀌었는 데요. \n"
+" 저장 않하고 계속하실 거지요. "
 
 #: edit/editcmd.c:722 edit/editcmd.c:734 edit/editcmd.c:835
 msgid "Continue"
-msgstr ""
+msgstr "계속"
 
 #. Heads the 'Load' file dialog box
 #: edit/editcmd.c:737 edit/editcmd.c:754
 msgid " Load "
-msgstr ""
+msgstr " 읽기 "
 
 #: edit/editcmd.c:754
 msgid " Error trying to open file for reading "
-msgstr ""
+msgstr " 화일 읽기 실패 "
 
 #: edit/editcmd.c:835 edit/editcmd.c:918
 msgid " Block is large, you may not be able to undo this action. "
-msgstr ""
+msgstr " 블럭 크기가 커서 나중에 취소할 수 없어요. "
 
 #: edit/editcmd.c:918
 msgid " Continue "
-msgstr ""
+msgstr " 계속 "
 
 #: edit/editcmd.c:918
 msgid " Cancel "
-msgstr ""
+msgstr " 취소 "
 
 #: edit/editcmd.c:970 edit/editcmd.c:1319
 msgid " Replace with: "
-msgstr ""
+msgstr " ...로 바꿈: "
 
 #: edit/editcmd.c:974 edit/editcmd.c:1051 edit/editcmd.c:1301 edit/editcmd.c:1317 edit/editcmd.c:1849 edit/editcmd.c:1880 edit/editcmd.c:1882
 msgid " Replace "
-msgstr ""
+msgstr " 바꿈 "
 
 #: edit/editcmd.c:1119 edit/editcmd.c:1295 edit/editcmd.c:1951 src/view.c:1474 src/view.c:1564 src/view.c:1686 src/view.c:1885 src/view.c:1917
 msgid " Search "
-msgstr ""
+msgstr " 찾기 "
 
 #. An input line comes after the ':'
 #: edit/editcmd.c:1167
 msgid " Enter search text : "
-msgstr ""
+msgstr " 찾을 문자열은 : "
 
 #: edit/editcmd.c:1174
 msgid " Enter replace text : "
-msgstr ""
+msgstr " 바꿀 문자열은 : "
 
 #: edit/editcmd.c:1178
 msgid " Enter argument order : "
-msgstr ""
+msgstr " argument 순서 입력 : "
 
 #. Tool hint
 #: edit/editcmd.c:1182 edit/editcmd.c:1183
 msgid "Enter the order of replacement of your scanf format specifiers"
-msgstr ""
+msgstr "scanf 형식을 바꿀 순서 입력"
 
 #. The following are check boxes
 #: edit/editcmd.c:1188
 msgid " Whole words only "
-msgstr ""
+msgstr " 단어 단위로 "
 
 #: edit/editcmd.c:1190
 msgid " Case sensitive "
-msgstr ""
+msgstr " 대소문자 구별 "
 
 #: edit/editcmd.c:1193
 msgid " Regular expression "
-msgstr ""
+msgstr " 정규식 "
 
 #: edit/editcmd.c:1194 edit/editcmd.c:1195
 msgid "See the regex man page for how to compose a regular expression"
-msgstr ""
+msgstr " regex(정규식) 매뉴얼 페이지를 보세요 "
 
 #: edit/editcmd.c:1201
 msgid " Backwards "
-msgstr ""
+msgstr " 뒤로 "
 
 #. Tool hint
 #: edit/editcmd.c:1203 edit/editcmd.c:1204
 msgid "Warning: Searching backward can be slow"
-msgstr ""
+msgstr "경고: 뒤로 찾기는 너무 느려요"
 
 #: edit/editcmd.c:1217
 msgid " Prompt on replace "
-msgstr ""
+msgstr " 바꿀 때마다 물어봄 "
 
 #. Tool hint
 #: edit/editcmd.c:1219
 msgid "Ask before making each replacement"
-msgstr ""
+msgstr "바꿀 때마다 물어볼까요"
 
 #: edit/editcmd.c:1221
 msgid " Replace all "
-msgstr ""
+msgstr " 모두 바꾸기 "
 
 #: edit/editcmd.c:1224
 msgid " Scanf expression "
-msgstr ""
+msgstr " scanf 표현 "
 
 #: edit/editcmd.c:1226
 msgid "Allows entering of a C format string, see the scanf man page"
-msgstr ""
+msgstr "C 형식 문자열을 입력할 수 있어요. scanf 매뉴얼페이지를 보세요"
 
 #. Tool hint
 #: edit/editcmd.c:1231
 msgid "Begin search, Enter"
-msgstr ""
+msgstr "찾기 시작, Enter"
 
 #. Tool hint
 #: edit/editcmd.c:1234
 msgid "Abort this dialog, Esc"
-msgstr ""
+msgstr "다이알로그 취소, Esc"
 
 #. Buttons for the confirm replace dialog box.
 #: edit/editcmd.c:1321
 msgid "Replace"
-msgstr ""
+msgstr "바꿈"
 
 #: edit/editcmd.c:1321
 msgid "Skip"
-msgstr ""
+msgstr "생략"
 
 #: edit/editcmd.c:1321
 msgid "Replace all"
-msgstr ""
+msgstr "모두 바꿈"
 
 #: edit/editcmd.c:1687
 msgid " Invalid regular expression, or scanf expression with to many conversions "
-msgstr ""
+msgstr " 이상한 정규식 혹은 너무 많이 바꿔야 하는 scanf 표현 "
 
 #. "Invalid regexp string or scanf string"
 #: edit/editcmd.c:1851
 msgid " Error in replacement format string. "
-msgstr ""
+msgstr " 바꿀 형식 문자열 에러. "
 
 #: edit/editcmd.c:1879
 msgid " %ld replacements made. "
-msgstr ""
+msgstr " %ld 개가 바뀌었어요. "
 
 #: edit/editcmd.c:1882 edit/editcmd.c:1951
 msgid " Search string not found. "
-msgstr ""
+msgstr " 찾는 문자열이 없읍니다. "
 
 #. Confirm 'Quit' dialog box
 #: edit/editcmd.c:1969 edit/editcmd.c:1972
 msgid " Quit "
-msgstr ""
+msgstr " 종료 "
 
 #: edit/editcmd.c:1969
 msgid " File was modified, Save with exit? "
-msgstr ""
+msgstr " 화일이 바뀌었는 데, 저장하고 종료할까요? "
 
 #: edit/editcmd.c:1969
 msgid "Cancel quit"
-msgstr ""
+msgstr "종료 취소"
 
-#: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:806 gnome/gdesktop.c:1118 src/cmd.c:248 src/file.c:2328 src/file.c:2654 src/file.c:2844 src/hotlist.c:1027 src/main.c:840 src/screen.c:2040 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:410
+#: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:806 gnome/gdesktop.c:1118 src/cmd.c:248 src/file.c:2328 src/file.c:2654 src/file.c:2844 src/hotlist.c:1027 src/main.c:840 src/screen.c:1989 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:410
 msgid "&Yes"
-msgstr ""
+msgstr "예(&Y)"
 
-#: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:806 gnome/gdesktop.c:1118 src/cmd.c:248 src/file.c:2328 src/file.c:2653 src/file.c:2844 src/hotlist.c:1027 src/main.c:840 src/screen.c:2040 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:410
+#: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:806 gnome/gdesktop.c:1118 src/cmd.c:248 src/file.c:2328 src/file.c:2653 src/file.c:2844 src/hotlist.c:1027 src/main.c:840 src/screen.c:1989 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:410
 msgid "&No"
-msgstr ""
+msgstr "아니오(&N)"
 
 #: edit/editcmd.c:1973
 msgid ""
 " Current text was modified without a file save. \n"
 " Save with exit? "
 msgstr ""
+" 현재 문서가 바뀌었읍니다. \n"
+" 저장하고 종료할까요? "
 
 #: edit/editcmd.c:1973
 msgid " &Cancel quit "
-msgstr ""
+msgstr " 종료 취소(&C) "
 
 #: edit/editcmd.c:1973
 msgid " &Yes "
-msgstr ""
+msgstr " 예(&Y) "
 
 #: edit/editcmd.c:1973
 msgid " &No "
-msgstr ""
+msgstr " 아니오(&N) "
 
 #: edit/editcmd.c:2142 edit/editcmd.c:2193
 msgid " Copy to clipboard "
-msgstr ""
+msgstr " 클립보드로 복사 "
 
 #: edit/editcmd.c:2142 edit/editcmd.c:2157 edit/editcmd.c:2193 edit/editcmd.c:2206
 msgid " Unable to save to file. "
-msgstr ""
+msgstr " 화일 저장 실패. "
 
 #: edit/editcmd.c:2157 edit/editcmd.c:2206
 msgid " Cut to clipboard "
-msgstr ""
+msgstr " 클립보드로 옮김 "
 
 #: edit/editcmd.c:2228 edit/editcmd.c:2230 src/view.c:1857
 msgid " Goto line "
-msgstr ""
+msgstr " 라인 이동 "
 
 #: edit/editcmd.c:2228 edit/editcmd.c:2230
 msgid " Enter line: "
-msgstr ""
+msgstr " 라인 번호 입력: "
 
 #: edit/editcmd.c:2250 edit/editcmd.c:2267
 msgid " Save Block "
-msgstr ""
+msgstr " 블럭 저장 "
 
 #. returns 1 on success
 #: edit/editcmd.c:2301
 msgid " Insert File "
-msgstr ""
+msgstr " 화일 삽입 "
 
 #: edit/editcmd.c:2316
 msgid " Insert file "
-msgstr ""
+msgstr " 화일 삽입 "
 
 #: edit/editcmd.c:2316
 msgid " Error trying to insert file. "
-msgstr ""
+msgstr " 화일 삽입 실패 "
 
 #: edit/editcmd.c:2336
 msgid " Sort block "
-msgstr ""
+msgstr " 블럭 정렬 "
 
 #. Not essential to translate
 #: edit/editcmd.c:2336 edit/editcmd.c:2390
@@ -382,20 +396,20 @@ msgstr ""
 
 #: edit/editcmd.c:2343
 msgid " Run Sort "
-msgstr ""
+msgstr " 정렬 시작 "
 
 #: edit/editcmd.c:2345
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr ""
+msgstr " 공백문자로 구분된 정렬 옵션 입력: "
 
 #: edit/editcmd.c:2356 edit/editcmd.c:2362
 msgid " Sort "
-msgstr ""
+msgstr " 정렬 "
 
 #. Not essential to translate
 #: edit/editcmd.c:2358
 msgid " Error trying to execute sort command "
-msgstr ""
+msgstr " 정렬중 에러 발생 "
 
 #. Not essential to translate
 #: edit/editcmd.c:2364
@@ -414,7 +428,7 @@ msgstr ""
 
 #: edit/editcmd.c:2490
 msgid " Mail "
-msgstr ""
+msgstr " 전자우편 "
 
 #: edit/editmenu.c:56
 msgid " Word wrap "
@@ -427,63 +441,63 @@ msgstr ""
 
 #: edit/editmenu.c:117 edit/editmenu.c:133
 msgid "&Open/load...     C-o"
-msgstr ""
+msgstr "화일열기(&O)...   C-o"
 
 #: edit/editmenu.c:118
 msgid "&New              C-n"
-msgstr ""
+msgstr "새 화일(&N)       C-n"
 
 #: edit/editmenu.c:120 edit/editmenu.c:136
 msgid "&Save              F2"
-msgstr ""
+msgstr "저장(&S)           F2"
 
 #: edit/editmenu.c:121 edit/editmenu.c:137
 msgid "save &As...       F12"
-msgstr ""
+msgstr "다른 이름으로(&A) F12"
 
 #: edit/editmenu.c:123 edit/editmenu.c:139
 msgid "&Insert file...   F15"
-msgstr ""
+msgstr "화일 삽입(&I)...  F15"
 
 #: edit/editmenu.c:124
 msgid "copy to &File...  C-f"
-msgstr ""
+msgstr "화일로 복사(&F).. C-f"
 
 #: edit/editmenu.c:126 edit/editmenu.c:142
 msgid "a&Bout...            "
-msgstr ""
+msgstr "이 프로그램은(&B)... "
 
 #: edit/editmenu.c:128 edit/editmenu.c:144
 msgid "&Quit             F10"
-msgstr ""
+msgstr "종료(&Q)          F10"
 
 #: edit/editmenu.c:134
 msgid "&New            C-x k"
-msgstr ""
+msgstr "새 화일(&N)     C-x k"
 
 #: edit/editmenu.c:140
 msgid "copy to &File...     "
-msgstr ""
+msgstr "화일로 복사(&F)...   "
 
 #: edit/editmenu.c:149 edit/editmenu.c:165
 msgid "&Toggle Mark       F3"
-msgstr ""
+msgstr "마크 토글(&T)      F3"
 
 #: edit/editmenu.c:151 edit/editmenu.c:167
 msgid "toggle &Ins/overw Ins"
-msgstr ""
+msgstr "삽입/겹침 토글(&I)   "
 
 #: edit/editmenu.c:153 edit/editmenu.c:169
 msgid "&Copy              F5"
-msgstr ""
+msgstr "복사(&C)           F5"
 
 #: edit/editmenu.c:154 edit/editmenu.c:170
 msgid "&Move              F6"
-msgstr ""
+msgstr "이동(&M)           F6"
 
 #: edit/editmenu.c:155 edit/editmenu.c:171
 msgid "&Delete            F8"
-msgstr ""
+msgstr "삭제(&D)           F8"
 
 #: edit/editmenu.c:157 edit/editmenu.c:173
 msgid "&Undo             C-u"
@@ -491,27 +505,27 @@ msgstr ""
 
 #: edit/editmenu.c:159 edit/editmenu.c:175
 msgid "&Beginning     C-PgUp"
-msgstr ""
+msgstr "처음(&B)       C-PgUp"
 
 #: edit/editmenu.c:160 edit/editmenu.c:176
 msgid "&End           C-PgDn"
-msgstr ""
+msgstr "끝(&E)         C-PgDn"
 
 #: edit/editmenu.c:181 edit/editmenu.c:188
 msgid "&Search...         F7"
-msgstr ""
+msgstr "찾기(&S)...        F7"
 
 #: edit/editmenu.c:182 edit/editmenu.c:189
 msgid "search &Again     F17"
-msgstr ""
+msgstr "다시 찾기(&A)     F17"
 
 #: edit/editmenu.c:183 edit/editmenu.c:190
 msgid "&Replace...        F4"
-msgstr ""
+msgstr "바꾸기(&R)...      F4"
 
 #: edit/editmenu.c:195 edit/editmenu.c:217
 msgid "&Goto line...            M-l"
-msgstr ""
+msgstr "라인 이동(&G)...         M-l"
 
 #: edit/editmenu.c:197 edit/editmenu.c:219
 msgid "insert &Literal...       C-q"
@@ -519,27 +533,27 @@ msgstr ""
 
 #: edit/editmenu.c:199 edit/editmenu.c:221
 msgid "&Refresh screen          C-l"
-msgstr ""
+msgstr "스크린 리프레쉬(&R)      C-l"
 
 #: edit/editmenu.c:201 edit/editmenu.c:223
 msgid "&Start record macro      C-r"
-msgstr ""
+msgstr "매크로 저장 시작(&S)     C-r"
 
 #: edit/editmenu.c:202 edit/editmenu.c:224
 msgid "&Finish record macro...  C-r"
-msgstr ""
+msgstr "매크로 저장 끝(&F)...    C-r"
 
 #: edit/editmenu.c:203
 msgid "&Execute macro...   C-a, KEY"
-msgstr ""
+msgstr "매크로 실행(&E)...  C-a, KEY"
 
 #: edit/editmenu.c:204 edit/editmenu.c:226
 msgid "delete macr&O...            "
-msgstr ""
+msgstr "매크로 삭제(&O)...          "
 
 #: edit/editmenu.c:206 edit/editmenu.c:228
 msgid "insert &Date/time           "
-msgstr ""
+msgstr "시간 삽입(&D)               "
 
 #: edit/editmenu.c:208 edit/editmenu.c:230
 msgid "format p&Aragraph        M-p"
@@ -551,7 +565,7 @@ msgstr ""
 
 #: edit/editmenu.c:210 edit/editmenu.c:232
 msgid "sor&T...                 M-t"
-msgstr ""
+msgstr "정렬(&T)...              M-t"
 
 #: edit/editmenu.c:211 edit/editmenu.c:233
 msgid "'indent' &C Formatter    F19"
@@ -559,11 +573,11 @@ msgstr ""
 
 #: edit/editmenu.c:212
 msgid "&Mail...                    "
-msgstr ""
+msgstr "전자우편(&M)...             "
 
 #: edit/editmenu.c:225
 msgid "&Execute macro... C-x e, KEY"
-msgstr ""
+msgstr "매크로 실행(&E).. C-x e, KEY"
 
 #: edit/editmenu.c:231
 msgid "'ispell' s&Pell check    M-$"
@@ -583,47 +597,47 @@ msgstr ""
 
 #: edit/editmenu.c:262 edit/editmenu.c:271 edit/editmenu.c:388 src/chmod.c:174 src/chown.c:131 src/main.c:1341
 msgid " File "
-msgstr ""
+msgstr " 화일 "
 
 #: edit/editmenu.c:263 edit/editmenu.c:272 edit/editmenu.c:404
 msgid " Edit "
-msgstr ""
+msgstr " 수정 "
 
 #: edit/editmenu.c:264 edit/editmenu.c:273
 msgid " Sear/Repl "
-msgstr ""
+msgstr " 찾기/바꿈 "
 
 #: edit/editmenu.c:265 edit/editmenu.c:274 edit/editmenu.c:438 src/main.c:1342
 msgid " Command "
-msgstr ""
+msgstr " 명령 "
 
 #: edit/editmenu.c:266 edit/editmenu.c:275 src/main.c:1343
 msgid " Options "
-msgstr ""
+msgstr " 옵션 "
 
 #: edit/editmenu.c:389
 msgid "Open...\tC-o"
-msgstr ""
+msgstr "열기...\tC-o"
 
 #: edit/editmenu.c:390
 msgid "New\tC-n"
-msgstr ""
+msgstr "새화일\tC-n"
 
 #: edit/editmenu.c:392
 msgid "Save\tF2"
-msgstr ""
+msgstr "저장\tF2"
 
 #: edit/editmenu.c:393
 msgid "Save as...\tF12"
-msgstr ""
+msgstr "다른 이름으로...\tF12"
 
 #: edit/editmenu.c:395
 msgid "Insert file...\tF15"
-msgstr ""
+msgstr "화일 삽입...\tF15"
 
 #: edit/editmenu.c:396
 msgid "Copy to file...\tC-f"
-msgstr ""
+msgstr "화일로 복사...\tC-f"
 
 #. Tool hint
 #: edit/editmenu.c:399
@@ -640,27 +654,27 @@ msgstr ""
 
 #: edit/editmenu.c:409
 msgid "Copy block to cursor\tF5"
-msgstr ""
+msgstr "커서위치로 블럭 복사\tF5"
 
 #: edit/editmenu.c:410
 msgid "Move block to cursor\tF6"
-msgstr ""
+msgstr "커서위치로 블럭 이동\tF6"
 
 #: edit/editmenu.c:411
 msgid "Delete block\tF8/C-Del"
-msgstr ""
+msgstr "블럭 삭제\tF8/C-Del"
 
 #: edit/editmenu.c:413
 msgid "Copy block to clipbrd\tC-Ins"
-msgstr ""
+msgstr "클립보드로 복사\tC-Ins"
 
 #: edit/editmenu.c:414
 msgid "Cut block to clipbrd\tS-Del"
-msgstr ""
+msgstr "클립보드로 잘라냄\tS-Del"
 
 #: edit/editmenu.c:415
 msgid "Paste block from clipbrd\tS-Ins"
-msgstr ""
+msgstr "클립보드에서 Paste\tS-Ins"
 
 #: edit/editmenu.c:416
 msgid "Selection history\tM-Ins"
@@ -676,23 +690,23 @@ msgstr ""
 
 #: edit/editmenu.c:426
 msgid " Srch/Replce "
-msgstr ""
+msgstr " 찾기/바꿈 "
 
 #: edit/editmenu.c:427
 msgid "Search...\tF7"
-msgstr ""
+msgstr "찾기...\tF7"
 
 #: edit/editmenu.c:428
 msgid "Search again\tF17"
-msgstr ""
+msgstr "다시 찾기\tF17"
 
 #: edit/editmenu.c:429
 msgid "Replace...\tF4"
-msgstr ""
+msgstr "바꿈...\tF4"
 
 #: edit/editmenu.c:430
 msgid "Replace again\tF14"
-msgstr ""
+msgstr "다시 바꿈\tF14"
 
 #: edit/editmenu.c:433
 msgid "Search for and replace text"
@@ -758,41 +772,41 @@ msgstr ""
 msgid "Error initialising editor.\n"
 msgstr ""
 
-#: edit/editwidget.c:992 gnome/glayout.c:349 src/help.c:812 src/main.c:1672 src/screen.c:2256 src/screen.c:2290 src/tree.c:1451 src/view.c:1987
+#: edit/editwidget.c:992 gnome/glayout.c:349 src/help.c:812 src/main.c:1672 src/screen.c:2205 src/screen.c:2239 src/tree.c:1451 src/view.c:1987
 msgid "Help"
-msgstr ""
+msgstr "도움말"
 
 #: edit/editwidget.c:994
 msgid "Mark"
-msgstr ""
+msgstr "선택"
 
 #: edit/editwidget.c:995
 msgid "Replac"
-msgstr ""
+msgstr "바꿈"
 
-#: edit/editwidget.c:996 gnome/gdesktop.c:337 src/screen.c:2260 src/screen.c:2294 src/tree.c:1457
+#: edit/editwidget.c:996 gnome/gdesktop.c:337 src/screen.c:2209 src/screen.c:2243 src/tree.c:1457
 msgid "Copy"
-msgstr ""
+msgstr "복사"
 
 #: edit/editwidget.c:997 gnome/gdesktop.c:342
 msgid "Move"
-msgstr ""
+msgstr "이동"
 
 #: edit/editwidget.c:998 gnome/gview.c:291 gnome/gview.c:315 src/view.c:2000
 msgid "Search"
-msgstr ""
+msgstr "찾기"
 
-#: edit/editwidget.c:999 gnome/gdesktop.c:805 gnome/gdesktop.c:1015 src/screen.c:2263 src/screen.c:2297
+#: edit/editwidget.c:999 gnome/gdesktop.c:805 gnome/gdesktop.c:1015 src/screen.c:2212 src/screen.c:2246
 msgid "Delete"
-msgstr ""
+msgstr "삭제"
 
 #: edit/editwidget.c:1001 src/main.c:1674
 msgid "PullDn"
-msgstr ""
+msgstr "풀다운"
 
 #: edit/editwidget.c:1002 gnome/gview.c:286 src/help.c:824 src/main.c:1675 src/view.c:1989 src/view.c:2009
 msgid "Quit"
-msgstr ""
+msgstr "종료"
 
 #. Validity check for arguments
 #: src/fixhlp.c:173
@@ -801,7 +815,7 @@ msgstr ""
 
 #: src/fixhlp.c:178
 msgid "fixhlp: Cannot open toc for writing"
-msgstr ""
+msgstr "fixhlp: toc 열기 에러"
 
 #: src/fixhlp.c:181
 msgid ""
@@ -810,29 +824,29 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/achown.c:72 src/boxes.c:143 src/boxes.c:282 src/boxes.c:379 src/boxes.c:466 src/boxes.c:645 src/boxes.c:766 src/boxes.c:819 src/chmod.c:115 src/chown.c:81 src/cmd.c:840 src/file.c:1960 src/find.c:158 src/hotlist.c:140 src/hotlist.c:810 src/hotlist.c:903 src/layout.c:365 src/learn.c:58 src/option.c:143 src/panelize.c:89 src/view.c:410 src/wtools.c:114 src/wtools.c:408 src/wtools.c:581 src/wtools.c:661
+#: src/achown.c:72 src/boxes.c:145 src/boxes.c:280 src/boxes.c:377 src/boxes.c:464 src/boxes.c:643 src/boxes.c:764 src/boxes.c:817 src/chmod.c:115 src/chown.c:81 src/cmd.c:840 src/file.c:1960 src/find.c:158 src/hotlist.c:140 src/hotlist.c:810 src/hotlist.c:903 src/layout.c:365 src/learn.c:58 src/option.c:143 src/panelize.c:89 src/view.c:410 src/wtools.c:114 src/wtools.c:408 src/wtools.c:581 src/wtools.c:661
 msgid "&Cancel"
-msgstr ""
+msgstr "취소(&C)"
 
 #: src/achown.c:73 src/chmod.c:116 src/chown.c:82
 msgid "&Set"
-msgstr ""
+msgstr "설정(&S)"
 
 #: src/achown.c:74
 msgid "S&kip"
-msgstr ""
+msgstr "생략(&k)"
 
 #: src/achown.c:75 src/chmod.c:120 src/chown.c:85
 msgid "Set &all"
-msgstr ""
+msgstr "모두 설정(&a)"
 
 #: src/achown.c:350 src/achown.c:357
 msgid "owner"
-msgstr ""
+msgstr "소유자"
 
 #: src/achown.c:352 src/achown.c:359
 msgid "group"
-msgstr ""
+msgstr "그룹"
 
 #: src/achown.c:354
 msgid "other"
@@ -856,7 +870,7 @@ msgstr ""
 
 #: src/achown.c:379
 msgid " Chown advanced command "
-msgstr ""
+msgstr " 고급 chown 명령 "
 
 #: src/achown.c:613 src/achown.c:629 src/achown.c:686 src/chmod.c:297 src/chmod.c:380
 msgid ""
@@ -872,15 +886,15 @@ msgstr ""
 
 #: src/achown.c:647 src/achown.c:651 src/chmod.c:329 src/chmod.c:333 src/chown.c:256 src/chown.c:260 src/panelize.c:301 src/user.c:625
 msgid " Oops... "
-msgstr ""
+msgstr " 으윽... "
 
 #: src/achown.c:648
 msgid " I can't run the Advanced Chown command on an extfs "
-msgstr ""
+msgstr " extfs에서는 고급 chown 명령을 실행할 수 없읍니다 "
 
 #: src/achown.c:652
 msgid " I can't run the Advanced Chown command on a tarfs "
-msgstr ""
+msgstr " tarfs에서는 고급 chown 명령을 실행할 수 없읍니다 "
 
 #: src/background.c:179
 msgid "Background process:"
@@ -888,348 +902,350 @@ msgstr ""
 
 #: src/background.c:284 src/file.c:2566
 msgid " Background process error "
-msgstr ""
+msgstr " Background process 에러 "
 
 #: src/background.c:289
 msgid " Child died unexpectedly "
-msgstr ""
+msgstr " 예기치 않은 아기(child) 프로세스의 죽음 "
 
 #: src/background.c:291
 msgid " Unknown error in child "
-msgstr ""
+msgstr " 아기(child) 프로세스에서 모르는 에러 발생 "
 
 #: src/background.c:306
 msgid " Background protocol error "
-msgstr ""
+msgstr " Background protocol 에러 "
 
 #: src/background.c:307
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
 msgstr ""
+" Background process가 우리가 처리할 수 있는 것 보다 많은 \n"
+" argument를 요구하네요. \n"
 
 #: src/boxes.c:66
 msgid " Listing mode "
-msgstr ""
+msgstr " 화일 보기 "
 
 #: src/boxes.c:71
 msgid "&Full file list"
-msgstr ""
+msgstr "모든 내용 보기(&F)"
 
 #: src/boxes.c:72
 msgid "&Brief file list"
-msgstr ""
+msgstr "간단히 보기(&B)"
 
 #: src/boxes.c:73
 msgid "&Long file list"
-msgstr ""
+msgstr "길게 보기(&L)"
 
 #: src/boxes.c:74
 msgid "&User defined:"
-msgstr ""
+msgstr "사용자 정의(&U):"
 
-#: src/boxes.c:75
+#: src/boxes.c:76
 msgid "&Icon view"
-msgstr ""
+msgstr "아이콘 보기(&I)"
 
-#: src/boxes.c:141
+#: src/boxes.c:143
 msgid "user &Mini status"
-msgstr ""
+msgstr "미니 상태바(&M)"
 
 #. WITH_BACKGROUND
-#: gnome/gtools.c:130 src/boxes.c:142 src/boxes.c:281 src/boxes.c:381 src/boxes.c:468 src/boxes.c:647 src/boxes.c:767 src/boxes.c:821 src/boxes.c:932 src/file.c:1977 src/find.c:158 src/layout.c:364 src/option.c:142 src/wtools.c:302 src/wtools.c:583
+#: gnome/gtools.c:130 src/boxes.c:144 src/boxes.c:279 src/boxes.c:379 src/boxes.c:466 src/boxes.c:645 src/boxes.c:765 src/boxes.c:819 src/boxes.c:930 src/file.c:1977 src/find.c:158 src/layout.c:364 src/option.c:142 src/wtools.c:302 src/wtools.c:583
 msgid "&Ok"
-msgstr ""
+msgstr "확인(&O)"
 
-#: src/boxes.c:190
+#: src/boxes.c:192
 msgid "Listing mode"
 msgstr ""
 
-#: src/boxes.c:283
+#: src/boxes.c:281
 msgid "&Reverse"
-msgstr ""
+msgstr "역상(&R)"
 
-#: src/boxes.c:284
+#: src/boxes.c:282
 msgid "case sensi&tive"
-msgstr ""
+msgstr "대소문자 구분(&t)"
 
-#: src/boxes.c:285
+#: src/boxes.c:283
 msgid "Sort order"
-msgstr ""
+msgstr "정렬 순서"
+
+#: src/boxes.c:382
+msgid " confirm &Exit "
+msgstr " 종료 확인(&E) "
 
 #: src/boxes.c:384
-msgid " confirm &Exit "
-msgstr ""
+msgid " confirm e&Xecute "
+msgstr " 실행 확인(&X) "
 
 #: src/boxes.c:386
-msgid " confirm e&Xecute "
-msgstr ""
+msgid " confirm o&Verwrite "
+msgstr " 덮어쓰기 확인(&V) "
 
 #: src/boxes.c:388
-msgid " confirm o&Verwrite "
-msgstr ""
-
-#: src/boxes.c:390
 msgid " confirm &Delete "
-msgstr ""
+msgstr " 삭제 확인(&D) "
 
-#: src/boxes.c:396
+#: src/boxes.c:394
 msgid " Confirmation "
-msgstr ""
+msgstr " 확인 "
 
-#: src/boxes.c:463
+#: src/boxes.c:461
 msgid "Full 8 bits output"
-msgstr ""
+msgstr "8 bits 출력"
 
-#: src/boxes.c:463
+#: src/boxes.c:461
 msgid "ISO 8859-1"
 msgstr ""
 
-#: src/boxes.c:463
+#: src/boxes.c:461
 msgid "7 bits"
 msgstr ""
 
-#: src/boxes.c:470
+#: src/boxes.c:468
 msgid "F&ull 8 bits input"
-msgstr ""
+msgstr "8 bits 입력(&u)"
 
-#: src/boxes.c:478
+#: src/boxes.c:476
 msgid " Display bits "
-msgstr ""
+msgstr " 출력 bits "
 
-#: src/boxes.c:642
+#: src/boxes.c:640
 msgid "Always to memory"
-msgstr ""
+msgstr "항상 메모리 사용"
 
-#: src/boxes.c:642
+#: src/boxes.c:640
 msgid "If size less than:"
-msgstr ""
+msgstr "이보다 크기가 작을 때:"
+
+#: src/boxes.c:650
+msgid "&Always use ftp proxy"
+msgstr "항상 FTP proxy 사용(&A)"
 
 #: src/boxes.c:652
-msgid "&Always use ftp proxy"
-msgstr ""
-
-#: src/boxes.c:654
 msgid "sec"
-msgstr ""
+msgstr "초"
 
-#: src/boxes.c:658
+#: src/boxes.c:656
 msgid "ftpfs directory cache timeout:"
-msgstr ""
+msgstr "ftpfs 캐쉬 타임아웃:"
 
-#: src/boxes.c:662
+#: src/boxes.c:660
 msgid "ftp anonymous password:"
-msgstr ""
+msgstr "ftp anonymous 비밀번호:"
 
-#: src/boxes.c:669
+#: src/boxes.c:667
 msgid "Gzipped tar archive extract:"
 msgstr ""
 
-#: src/boxes.c:675
+#: src/boxes.c:673
 msgid "Timeout for freeing VFSs:"
 msgstr ""
 
-#: src/boxes.c:681
+#: src/boxes.c:679
 msgid " Virtual File System Setting "
 msgstr ""
 
-#: src/boxes.c:779
+#: src/boxes.c:777
 msgid "Quick cd"
 msgstr ""
 
 #. want cd like completion
-#: src/boxes.c:784
+#: src/boxes.c:782
 msgid "cd"
 msgstr ""
 
-#: src/boxes.c:839
+#: src/boxes.c:837
 msgid "Symbolic link filename:"
-msgstr ""
+msgstr "심볼릭 링크 화일이름:"
 
-#: src/boxes.c:841
+#: src/boxes.c:839
 msgid "Existing filename (filename symlink will point to):"
-msgstr ""
+msgstr "대상 화일이름 (심볼릭 링크화일이 가리킬 화일):"
 
-#: src/boxes.c:870
+#: src/boxes.c:868
 msgid "Running "
-msgstr ""
+msgstr "실행중 "
 
-#: src/boxes.c:871 src/find.c:664
+#: src/boxes.c:869 src/find.c:664
 msgid "Stopped"
-msgstr ""
+msgstr "멈춤"
+
+#: src/boxes.c:927
+msgid "&Stop"
+msgstr "멈춤(&S)"
+
+#: src/boxes.c:928
+msgid "&Resume"
+msgstr "계속(&R)"
 
 #: src/boxes.c:929
-msgid "&Stop"
-msgstr ""
-
-#: src/boxes.c:930
-msgid "&Resume"
-msgstr ""
-
-#: src/boxes.c:931
 msgid "&Kill"
-msgstr ""
+msgstr "죽임(&K)"
 
-#: src/boxes.c:970
+#: src/boxes.c:968
 msgid "Background Jobs"
 msgstr ""
 
 #: src/chmod.c:96
 msgid "execute/search by others"
-msgstr ""
+msgstr "다른 사용자의 실행/찾기"
 
 #: src/chmod.c:97
 msgid "write by others"
-msgstr ""
+msgstr "다른 사용자의 쓰기"
 
 #: src/chmod.c:98
 msgid "read by others"
-msgstr ""
+msgstr "다른 사용자의 읽기"
 
 #: src/chmod.c:99
 msgid "execute/search by group"
-msgstr ""
+msgstr "그룹멤버의 실행/찾기"
 
 #: src/chmod.c:100
 msgid "write by group"
-msgstr ""
+msgstr "그룹멤버의 쓰기"
 
 #: src/chmod.c:101
 msgid "read by group"
-msgstr ""
+msgstr "그룹멤버의 읽기"
 
 #: src/chmod.c:102
 msgid "execute/search by owner"
-msgstr ""
+msgstr "소유자의 실행/찾기"
 
 #: src/chmod.c:103
 msgid "write by owner"
-msgstr ""
+msgstr "소유자의 쓰기"
 
 #: src/chmod.c:104
 msgid "read by owner"
-msgstr ""
+msgstr "소유자의 읽기"
 
 #: src/chmod.c:105
 msgid "sticky bit"
-msgstr ""
+msgstr "sticky 비트"
 
 #: src/chmod.c:106
 msgid "set group ID on execution"
-msgstr ""
+msgstr "실행시 그룹 ID 설정"
 
 #: src/chmod.c:107
 msgid "set user ID on execution"
-msgstr ""
+msgstr "실행시 사용자 ID 설정"
 
 #: src/chmod.c:117
 msgid "C&lear marked"
-msgstr ""
+msgstr "선택 해제(&l)"
 
 #: src/chmod.c:118
 msgid "S&et marked"
-msgstr ""
+msgstr "선택(&e)"
 
 #: src/chmod.c:119
 msgid "&Marked all"
-msgstr ""
+msgstr "모두 선택(&M)"
 
-#: src/chmod.c:160 src/screen.c:422
+#: src/chmod.c:160 src/screen.c:418
 msgid "Name"
-msgstr ""
+msgstr "이름"
 
 #: src/chmod.c:162
 msgid "Permissions (Octal)"
-msgstr ""
+msgstr "퍼미션 (8진수)"
 
 #: src/chmod.c:164
 msgid "Owner name"
-msgstr ""
+msgstr "사용자 이름"
 
 #: src/chmod.c:166
 msgid "Group name"
-msgstr ""
+msgstr "그룹 이름"
 
 #: src/chmod.c:170
 msgid " Chmod command "
-msgstr ""
+msgstr " Chmod 명령 "
 
 #: src/chmod.c:172 src/chown.c:121
 msgid " Permission "
-msgstr ""
+msgstr " 퍼미션 "
 
 #: src/chmod.c:179
 msgid "Use SPACE to change"
-msgstr ""
+msgstr "바꿀려면 SPACE 사용"
 
 #: src/chmod.c:181
 msgid "an option, ARROW KEYS"
-msgstr ""
+msgstr "옵션, 화살표 키"
 
 #: src/chmod.c:183
 msgid "to move between options"
-msgstr ""
+msgstr "옵션간에 이동하려면"
 
 #: src/chmod.c:185
 msgid "and T or INS to mark"
-msgstr ""
+msgstr "선택하려면 T 혹은 INS"
 
 #: src/chmod.c:243
 msgid "Chmod command"
-msgstr ""
+msgstr "Chmod 명령"
 
 #: src/chmod.c:330
 msgid " I can't run the Chmod command on an extfs "
-msgstr ""
+msgstr " extfs에서는 chmod 명령을 실행 못해요 "
 
 #: src/chown.c:83
 msgid "Set &users"
-msgstr ""
+msgstr "사용자 설정(&u)"
 
 #: src/chown.c:84
 msgid "Set &groups"
-msgstr ""
+msgstr "그룹 설정(&g)"
 
 #: src/chown.c:113
 msgid " Name "
-msgstr ""
+msgstr " 이름 "
 
 #: src/chown.c:115
 msgid " Owner name "
-msgstr ""
+msgstr " 소유자 이름 "
 
 #: src/chown.c:117 src/chown.c:129
 msgid " Group name "
-msgstr ""
+msgstr " 그룹 이름 "
 
 #: src/chown.c:119
 msgid " Size "
-msgstr ""
+msgstr " 크기 "
 
 #: src/chown.c:125
 msgid " Chown command "
-msgstr ""
+msgstr " Chown 명령 "
 
 #: src/chown.c:127
 msgid " User name "
-msgstr ""
+msgstr " 사용자 이름 "
 
 #: src/chown.c:191
 msgid "<Unknown user>"
-msgstr ""
+msgstr "<모르는 사용자>"
 
 #. add fields for unknown names (numbers)
 #: src/chown.c:192
 msgid "<Unknown group>"
-msgstr ""
+msgstr "<모르는 그룹>"
 
 #: src/chown.c:257
 msgid " I can't run the Chown command on an extfs "
-msgstr ""
+msgstr " extfs에서는 chown 명령을 실행 못해요 "
 
 #: src/chown.c:261
 msgid " I can't run the Chown command on a tarfs "
-msgstr ""
+msgstr " tarfs에서는 chown 명령을 실행 못해요 "
 
 #: src/cmd.c:197
 msgid " Can not fetch a local copy of %s "
@@ -1241,7 +1257,7 @@ msgstr ""
 
 #: src/cmd.c:247
 msgid "Files tagged, want to cd?"
-msgstr ""
+msgstr "선택된 화일이 있는 데, 그래도 디렉토리를 바꿀까요?"
 
 #: src/cmd.c:285
 msgid " Filtered view "
@@ -1257,11 +1273,11 @@ msgstr ""
 
 #: src/cmd.c:370
 msgid " Enter directory name:"
-msgstr ""
+msgstr " 디렉토리 이름 입력:"
 
 #: src/cmd.c:425
 msgid " Filter "
-msgstr ""
+msgstr " 필터 "
 
 #: src/cmd.c:425
 msgid " Set expression for filtering filenames"
@@ -1269,85 +1285,87 @@ msgstr ""
 
 #: src/cmd.c:509
 msgid " Select "
-msgstr ""
+msgstr " 선택 "
 
 #: src/cmd.c:537 src/cmd.c:588
 msgid "  Malformed regular expression  "
-msgstr ""
+msgstr "  도움(?)이 않되는 정규표현식  "
 
 #: src/cmd.c:561
 msgid " Unselect "
-msgstr ""
+msgstr " 선택해제 "
 
 #: src/cmd.c:630
 msgid "Extension file edit"
-msgstr ""
+msgstr "Extension 화일 수정"
 
 #: src/cmd.c:631
 msgid " Which extension file you want to edit? "
-msgstr ""
+msgstr " 수정하기를 원하는 extension 화일은? "
 
 #: src/cmd.c:632
 msgid "&User"
-msgstr ""
+msgstr "사용자(&U)"
 
 #: src/cmd.c:632 src/cmd.c:658
 msgid "&System Wide"
-msgstr ""
+msgstr "시스템 전체(&S)"
 
 #: src/cmd.c:655
 msgid "Menu file edit"
-msgstr ""
+msgstr "메뉴 화일 수정"
 
 #: src/cmd.c:656
 msgid " Which menu file will you edit? "
-msgstr ""
+msgstr " 수정하기를 원하는 메뉴 화일은? "
 
 #: src/cmd.c:658
 msgid "&Local"
-msgstr ""
+msgstr "로컬(&L)"
 
 #: src/cmd.c:658
 msgid "&Home"
-msgstr ""
+msgstr "홈(&H)"
 
 #: src/cmd.c:839
 msgid " Compare directories "
-msgstr ""
+msgstr " 디렉토리 비교 "
 
 #: src/cmd.c:839
 msgid " Select compare method: "
-msgstr ""
+msgstr " 비교 방법 선택: "
 
 #: src/cmd.c:840
 msgid "&Quick"
-msgstr ""
+msgstr "빠르게(&Q)"
 
 #: src/cmd.c:840
 msgid "&Size only"
-msgstr ""
+msgstr "크기로만(&S)"
 
 #: src/cmd.c:840
 msgid "&Thorough"
-msgstr ""
+msgstr "자세히(&T)"
 
 #: src/cmd.c:850
 msgid " Both panels should be on the listing view mode to use this command "
-msgstr ""
+msgstr " 이 명령을 사용하려면 양쪽 판텔이 모두 보여야 합니다 "
 
 #: src/cmd.c:864
 msgid " The command history is empty "
-msgstr ""
+msgstr " 명령 히스토리가 비었어요 "
 
 #: src/cmd.c:870
 msgid " Command history "
-msgstr ""
+msgstr " 명령 히스토리 "
 
 #: src/cmd.c:912
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
 msgstr ""
+" xterm도 아니고 리눅스 콘솔도 아니고; \n"
+" 판넬을 바꾸기가 쉽지 않군요. "
 
 #: src/cmd.c:949
 msgid ""
@@ -1355,6 +1373,9 @@ msgid ""
 "\r\n"
 "\r"
 msgstr ""
+"한밤중(Midnight) 커맨더로 돌아가려면 'exit'을 입력하세요\n"
+"\r\n"
+"\r"
 
 #: src/cmd.c:1000
 msgid ""
@@ -1364,7 +1385,7 @@ msgstr ""
 
 #: src/cmd.c:1009 src/cmd.c:1011
 msgid " Link "
-msgstr ""
+msgstr " 링크 "
 
 #: src/cmd.c:1010 src/cmd.c:1115
 msgid " to:"
@@ -1408,71 +1429,75 @@ msgstr ""
 
 #: src/cmd.c:1230
 msgid " Enter machine name (F1 for details): "
-msgstr ""
+msgstr " 호스트 이름 입력 (도움말 F1): "
 
 #: src/cmd.c:1254
 msgid " Could not chdir to %s "
-msgstr ""
+msgstr " %s로 디렉토리 바꿀 수 없음 "
 
 #: src/cmd.c:1261
 msgid " Link to a remote machine "
-msgstr ""
+msgstr " 원격 호스트에 연결 "
 
 #: src/cmd.c:1267
 msgid " FTP to machine "
-msgstr ""
+msgstr " 호스트로 FTP "
 
 #: src/cmd.c:1277
 msgid " Socket source routing setup "
-msgstr ""
+msgstr " 소켓 소스 라우팅 설정 "
 
 #: src/cmd.c:1278
 msgid " Enter host name to use as a source routing hop: "
-msgstr ""
+msgstr " 소스 라우팅 홉을 사용하기 위한 호스트 이름: "
 
 #: src/cmd.c:1285
 msgid " Host name "
-msgstr ""
+msgstr " 호스트 이름 "
 
 #: src/cmd.c:1285
 msgid " Error while looking up IP address "
-msgstr ""
+msgstr " IP 주소 찾는 중 에러 발생 "
 
 #: src/cmd.c:1296
 msgid " Undelete files on an ext2 file system "
-msgstr ""
+msgstr " ext2 화일 시스템 지운 화일 복구 "
 
 #: src/cmd.c:1297
 msgid ""
 " Enter the file system name where you want to run the\n"
 "  undelete file system on: (F1 for details)"
 msgstr ""
+" 지운 화일을 복구하고 싶은 화일 시스템 이름을\n"
+"  입력하시오: (도움말 F1)"
 
 #: src/cmd.c:1389
 msgid "Show directory sizes"
-msgstr ""
+msgstr "디렉토리 크기 보기"
 
 #: src/cmd.c:1389 src/panelize.c:459
 msgid "Pipe close failed"
-msgstr ""
+msgstr "파이프 닫기 실패"
 
 #: src/cmd.c:1402
 msgid "Cannot invoke du command."
-msgstr ""
+msgstr "du 명령을 실행할 수 없어요."
 
 #: src/cmd.c:1413
 msgid " Setup saved to ~/"
-msgstr ""
+msgstr " 환경설정 내용을 ~/에 저장"
 
 #: src/cmd.c:1418
 msgid " Setup "
-msgstr ""
+msgstr " 환경설정 "
 
 #: src/command.c:173
 msgid ""
 " Can't chdir to '%s' \n"
 " %s "
 msgstr ""
+" %s로 디렉토리 바꿀 수 없음 \n"
+" %s "
 
 #: src/dialog.c:59
 msgid ""
@@ -1483,6 +1508,12 @@ msgid ""
 "\n"
 "\n"
 msgstr ""
+"\n"
+"\n"
+"\n"
+"스택 오버플로우 리프레쉬!\n"
+"\n"
+"\n"
 
 #: src/dir.c:56
 msgid "&Unsorted"
@@ -1490,27 +1521,27 @@ msgstr ""
 
 #: src/dir.c:57
 msgid "&Name"
-msgstr ""
+msgstr "이름(&N)"
 
 #: src/dir.c:58
 msgid "&Extension"
-msgstr ""
+msgstr "확장자(&E)"
 
 #: src/dir.c:59
 msgid "&Modify time"
-msgstr ""
+msgstr "수정 시간(&M)"
 
 #: src/dir.c:60
 msgid "&Access time"
-msgstr ""
+msgstr "액세스 시간(&A)"
 
 #: src/dir.c:61
 msgid "&Change time"
-msgstr ""
+msgstr "바꾼 시간(&C)"
 
 #: src/dir.c:62
 msgid "&Size"
-msgstr ""
+msgstr "크기(&S)"
 
 #: src/dir.c:63
 msgid "&Inode"
@@ -1534,21 +1565,23 @@ msgstr ""
 
 #: src/dir.c:70
 msgid "&Owner"
-msgstr ""
+msgstr "소유자(&O)"
 
 #: src/dir.c:71
 msgid "&Group"
-msgstr ""
+msgstr "그룹(&G)"
 
 #: src/dir.c:645
 msgid "Unknown"
-msgstr ""
+msgstr "모름"
 
 #: src/ext.c:139 src/user.c:507
 msgid ""
 " Can't create temporary command file \n"
 " %s "
 msgstr ""
+" 임시 명령 화일 생성 에러 \n"
+" %s "
 
 #: src/ext.c:152 src/user.c:534
 msgid " Parameter "
@@ -1556,11 +1589,11 @@ msgstr ""
 
 #: src/ext.c:295
 msgid " Can't execute commands on a Virtual File System directory "
-msgstr ""
+msgstr " 가상 화일 시스템 디렉토리에서는 명령을 실행할 수 없어요 "
 
 #: src/ext.c:392
 msgid " file error"
-msgstr ""
+msgstr " 화일 에러"
 
 #: src/ext.c:393
 msgid "Format of the "
@@ -1568,7 +1601,7 @@ msgstr ""
 
 #: src/ext.c:411
 msgid " file error "
-msgstr ""
+msgstr " 화일 에러 "
 
 #: src/ext.c:412
 msgid "Format of the ~/"
@@ -1586,47 +1619,49 @@ msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
 msgstr ""
+"mc.ext를 그대로 사용하거나\n"
+"이 화일을 수정해서 사용하세요.\n"
 
 #: src/ext.c:416
 msgid "mc.ext will be used for this moment."
-msgstr ""
+msgstr "지금은 mc.ext를 사용하실 수 있읍니다."
 
 #: src/file.c:250 src/tree.c:1100
 msgid " Copy "
-msgstr ""
+msgstr " 복사 "
 
 #: src/file.c:250 src/tree.c:1133
 msgid " Move "
-msgstr ""
+msgstr " 이동 "
 
 #: src/file.c:250 src/tree.c:1195
 msgid " Delete "
-msgstr ""
+msgstr " 삭제 "
 
 #: src/file.c:391 src/file.c:2567 src/file.c:2643 src/file.c:2844
 msgid "&Abort"
-msgstr ""
+msgstr "중단(&A)"
 
 #: src/file.c:394 src/file.c:2567
 msgid "&Skip"
-msgstr ""
+msgstr "생략(&S)"
 
 #. WITH_FULL_PATHS
 #: src/file.c:482
 msgid "Source"
-msgstr ""
+msgstr "원본"
 
 #: src/file.c:496
 msgid "Target"
-msgstr ""
+msgstr "대상"
 
 #: src/file.c:509
 msgid "Deleting"
-msgstr ""
+msgstr "삭제"
 
 #: gnome/glayout.c:344 gnome/gview.c:314 src/file.c:562
 msgid "File"
-msgstr ""
+msgstr "화일"
 
 #: src/file.c:576
 msgid "Count"
@@ -1645,6 +1680,8 @@ msgid ""
 " Cannot read source link \"%s\" \n"
 " %s "
 msgstr ""
+" 원본 링크 \"%s\"를 읽을 수 없어요 \n"
+" %s "
 
 #: src/file.c:828
 msgid ""
@@ -1652,91 +1689,118 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
+" 원격 화일시스템으로는 심볼릭 링크를 생성할 수 없읍니다: \n"
+"\n"
+" 심볼릭 링크 옵션은 사용않됩니다 "
 
 #: src/file.c:876
 msgid ""
 " Cannot create target symlink \"%s\" \n"
 " %s "
 msgstr ""
+" 심볼릭 링크 \"%s\"를 생성할 수 없읍니다 \n"
+" %s "
 
 #: src/file.c:919
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
 " %s "
 msgstr ""
+" \"%s\" 디렉토리를 덮어쓸 수 없읍니다 \n"
+" %s "
 
 #: src/file.c:930 src/file.c:1047
 msgid ""
 " Cannot stat source file \"%s\" \n"
 " %s "
 msgstr ""
+" \"%s\" 화일 정보를 얻을 수 없읍니다 \n"
+" %s "
 
 #. Destination already exists
 #: src/file.c:944
 msgid " `%s' and `%s' are the same file. "
-msgstr ""
+msgstr " `%s'와 `%s'가 같은 화일입니다. "
 
 #: src/file.c:984
 msgid ""
 " Cannot create special file \"%s\" \n"
 " %s "
 msgstr ""
+" 특수(special) 화일 \"%s\"을 생성할 수 없읍니다 \n"
+" %s "
 
 #: src/file.c:995 src/file.c:1271
 msgid ""
 " Cannot chown target file \"%s\" \n"
 " %s "
 msgstr ""
+" \"%s\" 화일의 소유자를 바꿀 수 없읍니다 \n"
+" %s "
 
 #: src/file.c:1004
 msgid ""
 " Cannnot chmod target file \"%s\" \n"
 " %s "
 msgstr ""
+" \"%s\" 화일의 모드를 바꿀 수 없읍니다 \n"
+" %s "
 
 #: src/file.c:1020
 msgid ""
 " Cannot open source file \"%s\" \n"
 " %s "
 msgstr ""
+" \"%s\" 화일을 열 수 없읍니다 \n"
+" %s "
 
 #: src/file.c:1034
 msgid ""
 " Cannot fstat source file \"%s\" \n"
 " %s "
 msgstr ""
+" 소스화일 \"%s\"의 화일정보를 얻을 수 없읍니다 \n"
+" %s "
 
 #: src/file.c:1074
 msgid ""
 " Cannot create target file \"%s\" \n"
 " %s "
 msgstr ""
+" \"%s\" 화일을 생성할 수 없읍니다 \n"
+" %s "
 
 #: src/file.c:1091
 msgid ""
 " Cannot fstat target file \"%s\" \n"
 " %s "
 msgstr ""
+" 대상화일 \"%s\"의 화일정보를 얻을 수 없읍니다 \n"
+" %s "
 
 #: src/file.c:1112
 msgid ""
 " Cannot read source file \"%s\" \n"
 " %s "
 msgstr ""
+" 소스화일 \"%s\"을 읽을 수 없읍니다 \n"
+" %s "
 
 #: src/file.c:1126
 msgid ""
 " Cannot write target file \"%s\" \n"
 " %s "
 msgstr ""
+" 대상화일 \"%s\"에 쓸 수 없읍니다 \n"
+" %s "
 
 #: src/file.c:1152
 msgid " Can't open target file "
-msgstr ""
+msgstr " 대상화일을 열 수 없읍니다 "
 
 #: src/file.c:1157
 msgid " Can't write to local target file "
-msgstr ""
+msgstr " 로컬 대상 화일에 쓸 수 없읍니다 "
 
 #: src/file.c:1203
 msgid "(stalled)"
@@ -1747,6 +1811,8 @@ msgid ""
 " Cannot close source file \"%s\" \n"
 " %s "
 msgstr ""
+" 소스화일 \"%s\"을 닫을 수 없읍니다 \n"
+" %s "
 
 #: src/file.c:1252
 msgid ""
@@ -1892,15 +1958,15 @@ msgstr ""
 #.
 #: src/file.c:2168
 msgid "1Copy"
-msgstr ""
+msgstr "1복사"
 
 #: src/file.c:2168
 msgid "1Move"
-msgstr ""
+msgstr "1이동"
 
 #: src/file.c:2168
 msgid "1Delete"
-msgstr ""
+msgstr "1삭제"
 
 #.
 #. * These are formats for building a prompt. Parts encoded as follows:
@@ -2150,7 +2216,7 @@ msgstr ""
 
 #: src/help.c:749
 msgid " Help "
-msgstr ""
+msgstr " 도움말 "
 
 #: src/help.c:772 src/user.c:641
 msgid ""
@@ -2605,7 +2671,7 @@ msgstr ""
 msgid " The shell is already running a command "
 msgstr ""
 
-#: gnome/gcmd.c:92 gnome/gdesktop.c:1116 src/main.c:838 src/screen.c:2038
+#: gnome/gcmd.c:92 gnome/gdesktop.c:1116 src/main.c:838 src/screen.c:1987
 msgid " The Midnight Commander "
 msgstr ""
 
@@ -2811,27 +2877,27 @@ msgstr ""
 
 #: src/main.c:1320
 msgid "&Save setup"
-msgstr ""
+msgstr "환경 저장(&S)"
 
 #: src/main.c:1336 src/main.c:1338
 msgid " Left "
-msgstr ""
+msgstr " 왼쪽 "
 
 #: src/main.c:1338
 msgid " Above "
-msgstr ""
+msgstr " 위 "
 
 #: src/main.c:1346 src/main.c:1348
 msgid " Right "
-msgstr ""
+msgstr " 오른쪽 "
 
 #: src/main.c:1348
 msgid " Below "
-msgstr ""
+msgstr " 밑 "
 
 #: src/main.c:1409
 msgid " Information "
-msgstr ""
+msgstr " 정보 "
 
 #: src/main.c:1410
 msgid ""
@@ -2841,9 +2907,9 @@ msgid ""
 " the details.                                           "
 msgstr ""
 
-#: src/main.c:1673 src/screen.c:2257 src/screen.c:2291
+#: src/main.c:1673 src/screen.c:2206 src/screen.c:2240
 msgid "Menu"
-msgstr ""
+msgstr "메뉴"
 
 #: src/main.c:1884
 msgid "Thank you for using GNU Midnight Commander"
@@ -2857,133 +2923,133 @@ msgstr ""
 msgid " and the Linux console"
 msgstr ""
 
-#: src/main.c:2340
+#: src/main.c:2338
 msgid "The TERM environment variable is unset!\n"
 msgstr ""
 
-#: src/main.c:2592
+#: src/main.c:2590
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr ""
 
-#: src/main.c:2597
+#: src/main.c:2595
 msgid "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
 
-#: src/main.c:2660
+#: src/main.c:2658
 msgid "[DEVEL-ONLY: Debug the background code]"
 msgstr ""
 
-#: src/main.c:2663
+#: src/main.c:2661
 msgid "Create command file to set default directory upon exit."
 msgstr ""
 
-#: src/main.c:2665
+#: src/main.c:2663
 msgid "Force color mode."
 msgstr ""
 
-#: src/main.c:2666
+#: src/main.c:2664
 msgid "Specify colors (use --help-colors to get a list)."
 msgstr ""
 
-#: src/main.c:2668
+#: src/main.c:2666
 msgid "[DEVEL-ONLY: Debug the subshell."
 msgstr ""
 
-#: src/main.c:2670
+#: src/main.c:2668
 msgid "Startup the internal editor."
 msgstr ""
 
-#: src/main.c:2671
+#: src/main.c:2669
 msgid "Shows this help message."
 msgstr ""
 
-#: src/main.c:2672
+#: src/main.c:2670
 msgid "Help on how to specify colors."
 msgstr ""
 
-#: src/main.c:2674
+#: src/main.c:2672
 msgid "Log ftpfs commands to the file."
 msgstr ""
 
-#: src/main.c:2676
+#: src/main.c:2674
 msgid "Prints out the configured paths."
 msgstr ""
 
-#: src/main.c:2678
+#: src/main.c:2676
 msgid "Force black and white display."
 msgstr ""
 
-#: src/main.c:2679
+#: src/main.c:2677
 msgid "Disable mouse support."
 msgstr ""
 
-#: src/main.c:2681
+#: src/main.c:2679
 msgid "Force the concurrent subshell mode"
 msgstr ""
 
-#: src/main.c:2682
+#: src/main.c:2680
 msgid "Disable the concurrent subshell mode."
 msgstr ""
 
-#: src/main.c:2683
+#: src/main.c:2681
 msgid "Force subshell execution."
 msgstr ""
 
-#: src/main.c:2685
+#: src/main.c:2683
 msgid "At exit, print the last working directory."
 msgstr ""
 
-#: src/main.c:2686
+#: src/main.c:2684
 msgid "Reset softkeys (HP terminals only) to their terminfo/termcap default."
 msgstr ""
 
-#: src/main.c:2687
+#: src/main.c:2685
 msgid "Disables verbose operation (for slow terminals)."
 msgstr ""
 
-#: src/main.c:2689
+#: src/main.c:2687
 msgid "Use simple symbols for line drawing."
 msgstr ""
 
-#: src/main.c:2694
+#: src/main.c:2692
 msgid "Activate support for the TERMCAP variable."
 msgstr ""
 
-#: src/main.c:2696
+#: src/main.c:2694
 msgid "Report versionand configuration options."
 msgstr ""
 
-#: src/main.c:2697
+#: src/main.c:2695
 msgid "Start up into the viewer mode."
 msgstr ""
 
-#: src/main.c:2698
+#: src/main.c:2696
 msgid "Force xterm mouse support and screen save/restore"
 msgstr ""
 
-#: src/main.c:2699
+#: src/main.c:2697
 msgid "Geometry for the window"
 msgstr ""
 
-#: src/main.c:2700
+#: src/main.c:2698
 msgid "No windows opened at startup"
 msgstr ""
 
-#: src/main.c:2777
+#: src/main.c:2775
 msgid "[this dir] [other dir]"
 msgstr ""
 
-#: src/main.c:3020
+#: src/main.c:3017
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 
-#: src/main.c:3108
+#: src/main.c:3105
 msgid " Notice "
 msgstr ""
 
-#: src/main.c:3109
+#: src/main.c:3106
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -3152,87 +3218,87 @@ msgstr ""
 msgid "Cannot invoke command."
 msgstr ""
 
-#: src/screen.c:423 src/screen.c:426
+#: src/screen.c:419 src/screen.c:422
 msgid "Size"
 msgstr ""
 
-#: src/screen.c:425
+#: src/screen.c:421
 msgid "MTime"
 msgstr ""
 
-#: src/screen.c:427
+#: src/screen.c:423
 msgid "Permission"
 msgstr ""
 
-#: src/screen.c:428
+#: src/screen.c:424
 msgid "Perm"
 msgstr ""
 
-#: src/screen.c:429
+#: src/screen.c:425
 msgid "|"
 msgstr ""
 
-#: src/screen.c:430
+#: src/screen.c:426
 msgid "Nl"
 msgstr ""
 
-#: src/screen.c:431
+#: src/screen.c:427
 msgid "GID"
 msgstr ""
 
-#: src/screen.c:432
+#: src/screen.c:428
 msgid "UID"
 msgstr ""
 
-#: gnome/gprop.c:335 src/screen.c:433
+#: gnome/gprop.c:335 src/screen.c:429
 msgid "Owner"
 msgstr ""
 
-#: gnome/gprop.c:225 gnome/gprop.c:350 src/screen.c:434
+#: gnome/gprop.c:225 gnome/gprop.c:350 src/screen.c:430
 msgid "Group"
 msgstr ""
 
-#: src/screen.c:435
+#: src/screen.c:431
 msgid "ATime"
 msgstr ""
 
-#: src/screen.c:436
+#: src/screen.c:432
 msgid "CTime"
 msgstr ""
 
-#: src/screen.c:440
+#: src/screen.c:436
 msgid "Inode"
 msgstr ""
 
-#: src/screen.c:644
+#: src/screen.c:640
 msgid "  %s bytes in %d file%s"
 msgstr ""
 
-#: gnome/gscreen.c:1490 src/screen.c:671
+#: gnome/gscreen.c:1466 src/screen.c:667
 msgid "<readlink failed>"
 msgstr ""
 
-#: src/screen.c:1299
+#: src/screen.c:1295
 msgid "Unknow tag on display format: "
 msgstr ""
 
-#: gnome/gdesktop.c:1117 src/screen.c:2039
+#: gnome/gdesktop.c:1117 src/screen.c:1988
 msgid " Do you really want to execute? "
 msgstr ""
 
-#: gnome/glayout.c:274 gnome/gscreen.c:515 src/screen.c:2258 src/screen.c:2292
+#: gnome/glayout.c:274 gnome/gscreen.c:494 src/screen.c:2207 src/screen.c:2241
 msgid "View"
-msgstr ""
+msgstr "보기"
 
-#: src/screen.c:2259 src/screen.c:2293 src/view.c:1996
+#: src/screen.c:2208 src/screen.c:2242 src/view.c:1996
 msgid "Edit"
-msgstr ""
+msgstr "수정"
 
-#: src/screen.c:2261 src/screen.c:2295 src/tree.c:1459
+#: src/screen.c:2210 src/screen.c:2244 src/tree.c:1459
 msgid "RenMov"
 msgstr ""
 
-#: src/screen.c:2262 src/screen.c:2296 src/tree.c:1463
+#: src/screen.c:2211 src/screen.c:2245 src/tree.c:1463
 msgid "Mkdir"
 msgstr ""
 
@@ -3732,7 +3798,7 @@ msgstr ""
 msgid "Do you want to delete "
 msgstr ""
 
-#: gnome/gdesktop.c:1008 gnome/gscreen.c:511
+#: gnome/gdesktop.c:1008 gnome/gscreen.c:490
 msgid "Properties"
 msgstr ""
 
@@ -3740,7 +3806,7 @@ msgstr ""
 msgid "Open with..."
 msgstr ""
 
-#: gnome/gdesktop.c:1128 gnome/gscreen.c:463
+#: gnome/gdesktop.c:1128 gnome/gscreen.c:442
 msgid "Enter extra arguments:"
 msgstr ""
 
@@ -3756,13 +3822,13 @@ msgstr ""
 msgid "Opens a terminal"
 msgstr ""
 
-#: gnome/glayout.c:269 gnome/gscreen.c:530
+#: gnome/glayout.c:269 gnome/gscreen.c:509
 msgid "Copy..."
-msgstr ""
+msgstr "복사..."
 
 #: gnome/glayout.c:269
 msgid "Copy files"
-msgstr ""
+msgstr "화일 복사"
 
 #: gnome/glayout.c:270
 msgid "Rename/Move..."
@@ -3780,7 +3846,7 @@ msgstr ""
 msgid "Creates a new folder"
 msgstr ""
 
-#: gnome/glayout.c:272 gnome/gscreen.c:532
+#: gnome/glayout.c:272 gnome/gscreen.c:511
 msgid "Delete..."
 msgstr ""
 
@@ -4077,121 +4143,121 @@ msgstr ""
 msgid "Select icon"
 msgstr ""
 
-#: gnome/gscreen.c:462
+#: gnome/gscreen.c:441
 msgid " Open with..."
 msgstr ""
 
-#: gnome/gscreen.c:513
+#: gnome/gscreen.c:492
 msgid "Open"
 msgstr ""
 
-#: gnome/gscreen.c:514
+#: gnome/gscreen.c:493
 msgid "Open with"
 msgstr ""
 
-#: gnome/gscreen.c:516
+#: gnome/gscreen.c:495
 msgid "View unfiltered"
 msgstr ""
 
-#: gnome/gscreen.c:518
+#: gnome/gscreen.c:497
 msgid "Link..."
 msgstr ""
 
-#: gnome/gscreen.c:519
+#: gnome/gscreen.c:498
 msgid "Symlink..."
 msgstr ""
 
-#: gnome/gscreen.c:520
+#: gnome/gscreen.c:499
 msgid "Edit symlink..."
 msgstr ""
 
-#: gnome/gscreen.c:531
+#: gnome/gscreen.c:510
 msgid "Rename/move.."
 msgstr ""
 
-#: gnome/gscreen.c:1298
+#: gnome/gscreen.c:1274
 msgid "All files"
-msgstr ""
+msgstr "모든 화일"
 
-#: gnome/gscreen.c:1300
+#: gnome/gscreen.c:1276
 msgid "Archives and compressed files"
-msgstr ""
+msgstr "Archives와 압축 화일"
 
-#: gnome/gscreen.c:1302
+#: gnome/gscreen.c:1278
 msgid "RPM/DEB files"
-msgstr ""
+msgstr "RPM/DEB 화일"
 
-#: gnome/gscreen.c:1304
+#: gnome/gscreen.c:1280
 msgid "Text/Document files"
-msgstr ""
+msgstr "Text/Document 화일"
 
-#: gnome/gscreen.c:1306
+#: gnome/gscreen.c:1282
 msgid "HTML and SGML files"
-msgstr ""
+msgstr "HTML과 SGML 화일"
 
-#: gnome/gscreen.c:1308
+#: gnome/gscreen.c:1284
 msgid "Postscript and PDF files"
-msgstr ""
+msgstr "Postscript와 PDF 화일"
 
-#: gnome/gscreen.c:1310
+#: gnome/gscreen.c:1286
 msgid "Spreadsheet files"
-msgstr ""
+msgstr "Spreadsheet 화일"
 
-#: gnome/gscreen.c:1312
+#: gnome/gscreen.c:1288
 msgid "Image files"
-msgstr ""
+msgstr "그림 화일"
 
-#: gnome/gscreen.c:1315
+#: gnome/gscreen.c:1291
 msgid "Video/animation files"
-msgstr ""
+msgstr "비디오/에니메이션 화일"
 
-#: gnome/gscreen.c:1317
+#: gnome/gscreen.c:1293
 msgid "Audio files"
-msgstr ""
+msgstr "오디오 화일"
 
-#: gnome/gscreen.c:1319
+#: gnome/gscreen.c:1295
 msgid "C program files"
-msgstr ""
+msgstr "C 프로그램 화일"
 
-#: gnome/gscreen.c:1321
+#: gnome/gscreen.c:1297
 msgid "C++ program files"
-msgstr ""
+msgstr "C++ 프로그램 화일"
 
-#: gnome/gscreen.c:1323
+#: gnome/gscreen.c:1299
 msgid "Objective-C program files"
-msgstr ""
+msgstr "Objective-C 프로그램 화일"
 
-#: gnome/gscreen.c:1325
+#: gnome/gscreen.c:1301
 msgid "Scheme program files"
-msgstr ""
+msgstr "스킴(scheme) 프로그램 화일"
 
-#: gnome/gscreen.c:1327
+#: gnome/gscreen.c:1303
 msgid "Assembler program files"
-msgstr ""
+msgstr "어셈블러 프로그램 화일"
 
-#: gnome/gscreen.c:1329
+#: gnome/gscreen.c:1305
 msgid "Misc. program files"
-msgstr ""
+msgstr "기타 프로그램 화일"
 
-#: gnome/gscreen.c:1331
+#: gnome/gscreen.c:1307
 msgid "Font files"
-msgstr ""
+msgstr "폰트 화일"
 
-#: gnome/gscreen.c:1456
+#: gnome/gscreen.c:1432
 msgid "Search: "
-msgstr ""
+msgstr "찾기: "
 
-#: gnome/gscreen.c:1466
+#: gnome/gscreen.c:1442
 msgid " %s bytes in %d file%s"
 msgstr ""
 
-#: gnome/gscreen.c:1541
+#: gnome/gscreen.c:1517
 msgid "Filter"
-msgstr ""
+msgstr "필터"
 
 #: gnome/gtools.c:48
 msgid "Error"
-msgstr ""
+msgstr "에러"
 
 #: gnome/gview.c:284
 msgid "Goto line"
@@ -4199,15 +4265,15 @@ msgstr ""
 
 #: gnome/gview.c:284
 msgid "Jump to a specified line number"
-msgstr ""
+msgstr "주어진 라인으로 점프"
 
 #: gnome/gview.c:285
 msgid "Monitor file"
-msgstr ""
+msgstr "화일 감시"
 
 #: gnome/gview.c:285
 msgid "Monitor file growing"
-msgstr ""
+msgstr "화일이 커지는지 감시"
 
 #: gnome/gview.c:286
 msgid "Terminate the viewer"
@@ -4215,23 +4281,23 @@ msgstr ""
 
 #: gnome/gview.c:291
 msgid "String search"
-msgstr ""
+msgstr "문자열 찾기"
 
 #: gnome/gview.c:292
 msgid "Regexp search"
-msgstr ""
+msgstr "정규식 찾기"
 
 #: gnome/gview.c:292
 msgid "Regular expression search"
-msgstr ""
+msgstr "정규식 찾기"
 
 #: gnome/gview.c:294
 msgid "Search again..."
-msgstr ""
+msgstr "다시 찾기..."
 
 #: gnome/gview.c:294
 msgid "Continue searching"
-msgstr ""
+msgstr "찾기 계속"
 
 #: gnome/gview.c:300
 msgid "Wrap the text"
@@ -4244,28 +4310,28 @@ msgstr ""
 
 #: gnome/gwidget.c:88
 msgid "ok"
-msgstr ""
+msgstr "확인"
 
 #: gnome/gwidget.c:90
 msgid "cancel"
-msgstr ""
+msgstr "취소"
 
 #: gnome/gwidget.c:92
 msgid "help"
-msgstr ""
+msgstr "도움말"
 
 #: gnome/gwidget.c:94
 msgid "yes"
-msgstr ""
+msgstr "예"
 
 #: gnome/gwidget.c:96
 msgid "no"
-msgstr ""
+msgstr "아니오"
 
 #: gnome/gwidget.c:98
 msgid "exit"
-msgstr ""
+msgstr "종료"
 
 #: gnome/gwidget.c:100
 msgid "abort"
-msgstr ""
+msgstr "중지"

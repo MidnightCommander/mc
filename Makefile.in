@@ -16,7 +16,7 @@ INSTALL_DATA = @INSTALL_DATA@
 
 DISTMAIN =	configure configure.in NEWS README INSTALL INSTALL.FAST \
 		Makefile.in FAQ COPYING create_vcs install-sh \
-		config.h.in aclocal.m4 acconfig.h VERSION mcfn_install.in \
+		config.h.in mc-aclocal.m4 aclocal.m4 acconfig.h VERSION mcfn_install.in \
 		Make.common.in README.NT mc.spec Specfile \
 		README.OS2 VERSION.in NLS mkinstalldirs autogen.sh
 
@@ -31,8 +31,10 @@ static:
 	$(MAKE) _LDFLAGS="-static $(_LDFLAGS)"
 
 configure: configure.in aclocal.m4
-	cd $(srcdir); autoconf --localdir=$(srcdir) $(srcdir)/configure.in > configure
 	chmod 755 configure
+
+aclocal.m4: mc-aclocal.m4
+	cd $(srcdir); cat macros/gnome.m4 mc-aclocal.m4 gettext.m4 > aclocal.m4
 
 config.h.in: configure.in acconfig.h
 	cd $(srcdir); autoheader

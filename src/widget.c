@@ -936,6 +936,7 @@ Hist *history_get (char *input_name)
     return new;			/* return pointer to last entry in list */
 }
 
+#ifndef PORT_WIDGET_WANTS_HISTORY
 void history_put (char *input_name, Hist *h)
 {
     int i;
@@ -980,6 +981,11 @@ void history_put (char *input_name, Hist *h)
     }
     free (profile);
 }
+#else
+void history_put (char *input_name, Hist *h)
+{
+}
+#endif
 
 /* }}} history saving and loading */
 
@@ -1104,7 +1110,7 @@ input_destroy (WInput *in)
     if (in->history){
 	Hist *current, *old;
 
-	if (!in->is_password)	/* don't save passwords ;-) */
+	if (!in->is_password && PORT_WIDGET_WANTS_HISTORY)	/* don't save passwords ;-) */
 	    history_put (in->history_name, in->history);
 
 	current = in->history;
