@@ -480,7 +480,7 @@ do_define_key (int code, const char *strcap)
 {
     char    *seq;
 
-    seq = (char *) SLtt_tgetstr (strcap);
+    seq = (char *) SLtt_tgetstr ((char*) strcap);
     if (seq)
 	define_sequence (code, seq, MCKEY_NOACTION);
 }

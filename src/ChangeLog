@@ -1,3 +1,11 @@
+2004-09-01  Pavel S. Shirshov  <pavelsh@mail.ru>
+
+	* color.c (mc_init_pair): Use cast to avoid warning.
+	* screen.c (display_mini_info): Likewise.
+	* slint.c (do_define_key): Likewise.
+	* tree.c (tree_show_mini_info): Likewise. (show_tree):Likewise.
+	* view.c (view_status): Likewise.
+
 2004-08-29  Roland Illig  <roland.illig@gmx.de>
 
 	* background.c (do_background): Fixed file descriptor leak.

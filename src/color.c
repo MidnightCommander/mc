@@ -361,7 +361,7 @@ mc_init_pair (int index, CTYPE foreground, CTYPE background)
     if (!foreground)
 	foreground = "default";
 
-    SLtt_set_color (index, "", foreground, background);
+    SLtt_set_color (index, "", (char *) foreground, (char *) background);
     if (index > max_index)
 	max_index = index;
 }

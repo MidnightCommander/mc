@@ -173,12 +173,12 @@ static void tree_show_mini_info (WTree *tree, int tree_lines, int tree_cols)
 	attrset (FOCUSC);
 	addch (PATH_SEP);
 
-	addstr (name_trunc (tree->search_buffer, tree_cols-2));
+	addstr ((char *) name_trunc (tree->search_buffer, tree_cols-2));
 	addch (' ');
 	attrset (FOCUSC);
     } else {
 	/* Show full name of selected directory */
-	addstr (name_trunc (tree->selected_ptr->name, tree_cols));
+	addstr ((char *) name_trunc (tree->selected_ptr->name, tree_cols));
     }
 }
 
@@ -265,7 +265,7 @@ static void show_tree (WTree *tree)
 	    }
 
 	    /* Show full name */
-	    addstr (name_trunc (current->name, tree_cols - 6));
+	    addstr ((char *) name_trunc (current->name, tree_cols - 6));
 	} else{
 	    /* Sub level directory */
 
@@ -299,7 +299,7 @@ static void show_tree (WTree *tree)
 
 	    /* Show sub-name */
 	    addch (' ');
-	    addstr (name_trunc (current->subname,
+	    addstr ((char *) name_trunc (current->subname,
 				tree_cols - 2 - 4 - 3 * j));
 	}
 	addch (' ');

@@ -659,7 +659,7 @@ display_mini_info (WPanel *panel)
 	    p += 2;
 	} else
 	    cols -= 2;
-	printw (p, cols, buffer);
+	printw ((char *) p, cols, buffer);
 	return;
     }
 

@@ -784,7 +784,7 @@ view_status (WView *view, gboolean update_gui)
     }
 
     if (w < i18n_adjust + 6)
-	addstr (name_trunc (view->filename ? view->filename :
+	addstr ((char *) name_trunc (view->filename ? view->filename :
 			    view->command ? view->command : "", w));
     else {
 	i = (w > 22 ? 22 : w) - i18n_adjust;
