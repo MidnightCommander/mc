@@ -1963,59 +1963,58 @@ start_search (WPanel *panel)
     }
 }
 
+/* Return 1 if the Enter key has been processed, 0 otherwise */
 static int
 do_enter_on_file_entry (file_entry *fe)
 {
     char *full_name;
+    char *p;
 
+    /* Directory or link to directory - change directory */
     if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe)) {
 	do_cd (fe->fname, cd_exact);
 	return 1;
-    } else {
-	full_name = concat_dir_and_file (cpanel->cwd, fe->fname);
-	if (is_exe (fe->buf.st_mode) && if_link_is_exe (full_name, fe)) {
-	    g_free (full_name);
-
-#ifdef USE_VFS
-	    if (vfs_current_is_local ())
-#endif
-	    {
-	        char *tmp = name_quote (fe->fname, 0);
-	        char *cmd = g_strconcat (".", PATH_SEP_STR, tmp, NULL);
-	        g_free (tmp);
-	        if (!confirm_execute || (query_dialog (_(" The Midnight Commander "),
-						       _(" Do you really want to execute? "),
-						       0, 2, _("&Yes"), _("&No")) == 0))
-	            execute (cmd);
-	        g_free (cmd);
-	    }
-#ifdef USE_VFS
-	    else {
-	      /* if (vfs_current_is_extfs ()) - I see no reason why
-                 filesystems other than extfs could not implement same
-                 call...                              -- pavel@ucw.cz*/
-	        char *tmp;
-
-		tmp = concat_dir_and_file (vfs_get_current_dir(), fe->fname);
-		if (!mc_setctl (tmp, MCCTL_EXTFS_RUN, NULL))
-		    message (1, _(" Warning "), _(" No action taken "));
-
-	        g_free (tmp);
-	    }
-#endif /* USE_VFS */
-	    return 1;
-	} else {
-	    char *p;
-
-	    g_free (full_name);
-
-	    p = regex_command (fe->fname, "Open", NULL, 0);
-	    if (p && (strcmp (p, "Success") == 0))
-		    return 1;
-	    else
-		    return 0;
-	}
     }
+
+    /* Try associated command */
+    p = regex_command (fe->fname, "Open", NULL, 0);
+    if (p && (strcmp (p, "Success") == 0))
+	return 1;
+
+    /* Check if the file is executable */
+    full_name = concat_dir_and_file (cpanel->cwd, fe->fname);
+    if (!is_exe (fe->buf.st_mode) || !if_link_is_exe (full_name, fe)) {
+	g_free (full_name);
+	return 0;
+    }
+    g_free (full_name);
+
+#ifdef USE_VFS
+    if (vfs_current_is_local ())
+#endif
+    {
+        char *tmp = name_quote (fe->fname, 0);
+        char *cmd = g_strconcat (".", PATH_SEP_STR, tmp, NULL);
+        g_free (tmp);
+        if (!confirm_execute || (query_dialog (_(" The Midnight Commander "),
+					       _(" Do you really want to execute? "),
+					       0, 2, _("&Yes"), _("&No")) == 0))
+            execute (cmd);
+	    g_free (cmd);
+    }
+#ifdef USE_VFS
+    else {
+	char *tmp;
+
+	tmp = concat_dir_and_file (vfs_get_current_dir(), fe->fname);
+	if (!mc_setctl (tmp, MCCTL_EXTFS_RUN, NULL))
+	    /* Execution on this filesysten is not implemented */
+	    message (1, _(" Warning "), _(" No action taken "));
+	    g_free (tmp);
+    }
+#endif /* USE_VFS */
+
+    return 1;
 }
 
 static int
