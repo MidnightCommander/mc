@@ -2120,31 +2120,6 @@ OPTIONS
 .\"OPTIONS"
 section has more information on how you can control the subshell code.
 .PP
-.SH "  Controlling Midnight Commander"
-The Midnight Commander defines an environment variable
-MC_CONTROL_FILE. The commands executed by MC may give instructions to
-MC by writing to the file specified by this variable.  This is only
-available if you compiled your copy of the Midnight Commander with the
-WANT_PARSE option.
-.PP
-The following instructions are supported.
-.PP
-.nf
-clear_tags		Clear all tags.
-tag <filename>		Tag specified file.
-untag <filename>	Untag specified file.
-select <filename>	Move pointer to file.
-change_panel		Switch between panels.
-cd <path>               Change directory.
-.fi
-.PP
-If the first letter of the instruction is in lower case it operates on
-the current panel. If the letter is in upper case the instruction
-operates on the other panel. The additional letters must be in lower
-case. Instructions must be separated by exactly one space, tab or
-newline. The instructions don't work in the Info, Tree and Quick
-views. The first error causes the rest to be ignored.
-.PP
 .SH "Chmod"
 The Chmod window is used to change the attribute bits in a group of
 files and directories.  It can be invoked with the C-x c key combination.
