@@ -1,3 +1,9 @@
+2002-10-24  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Don't use links to view html - the "-dump"
+	option has been removed in the recent versions.
+	From David Martin <dmartina@excite.com>
+
 2002-10-21  Pavel Roskin  <proski@gnu.org>
 
 	* acinclude.m4 (MC_WITH_VFS): cpiofs and extfs were never added
