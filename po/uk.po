@@ -1,4 +1,4 @@
-# 
+# Originally by Yury Sirota <rasta@renome.rovno.ua>
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
@@ -1648,11 +1648,6 @@ msgstr ""
 " Не вда╓ться отримати властивост╕ вих╕дного файла \"%s\" \n"
 " %s "
 
-#: src/file.c:522
-#, c-format
-msgid " `%s' and `%s' are the same file. "
-msgstr " \"%s\" ╕ \"%s\" це один ╕ той же ж файл. "
-
 #: src/file.c:564
 #, c-format
 msgid ""
@@ -1835,7 +1830,7 @@ msgstr ""
 " Не вда╓ться отримати властивост╕ файла \"%s\" \n"
 " %s "
 
-#: src/file.c:1123
+#: src/file.c:522 src/file.c:1123
 #, c-format
 msgid " `%s' and `%s' are the same file "
 msgstr " \"%s\" ╕ \"%s\" це один ╕ той же ж файл "
@@ -2202,7 +2197,7 @@ msgid ""
 " Help file format error\n"
 ""
 msgstr ""
-"Помилка формату файла дов╕дки\n"
+" Помилка формату файла дов╕дки\n"
 ""
 
 #: src/help.c:317
@@ -3237,7 +3232,7 @@ msgstr "Зб╕й закриття каналу"
 
 #: src/popt.c:547
 msgid "missing argument"
-msgstr "вiдсутнiй аргумент"
+msgstr "в╕дсутн╕й аргумент"
 
 #: src/popt.c:549
 msgid "unknown option"

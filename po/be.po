@@ -1651,11 +1651,6 @@ msgstr ""
 " Немагчыма атрымаць уласьцівасьці зыходнага файлу \"%s\" \n"
 " %s "
 
-#: src/file.c:522
-#, c-format
-msgid " `%s' and `%s' are the same file. "
-msgstr " `%s' і `%s' адзін і той жа файл. "
-
 #: src/file.c:564
 #, c-format
 msgid ""
@@ -1838,7 +1833,7 @@ msgstr ""
 " Немагчыма атрымаць уласьцівасьці файлу \"%s\" \n"
 " %s "
 
-#: src/file.c:1123
+#: src/file.c:522 src/file.c:1123
 #, c-format
 msgid " `%s' and `%s' are the same file "
 msgstr " `%s' і `%s' адзін і той жа файл "
@@ -2205,7 +2200,7 @@ msgid ""
 " Help file format error\n"
 ""
 msgstr ""
-"Памылка фармату файлу дапамогі\n"
+" Памылка фармату файлу дапамогі\n"
 ""
 
 #: src/help.c:317
@@ -3235,13 +3230,8 @@ msgid "ARG"
 msgstr ""
 
 #: src/popthelp.c:179
-#, fuzzy
 msgid "Usage:"
-msgstr "Імя карыстальніку:"
-
-#: src/popthelp.c:197
-msgid "[OPTION...]"
-msgstr ""
+msgstr "Выкарыстайце:"
 
 #: src/screen.c:173
 msgid "UP--DIR"
