@@ -1,6 +1,15 @@
 1998-03-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
-	* gmc-chargrid.h: 
+	* gmc-chargrid.c (gmc_char_grid_get_size): New public function.
+	(gmc_char_grid_put_text): New public function.  It is the same as
+	gmc_char_grid_put_str, but can take any arbitrary string plus its
+	length.
+	(gmc_char_grid_put_char, gmc_char_grid_put_str,
+	gmc_char_grid_put_text): These functions now take a background
+	pixel parameter --- the GmcCharGrid widget now supports fg/bg attributes.
+
+	* gmc-chargrid.h: Changed colors field to attrs.
+
 	* gmc-chargrid.c: New Character Grid widget for the file viewer.
 	This is a very lean and fast widget for displaying a grid of
 	monospaced characters.  Just like a crippled-down terminal.
