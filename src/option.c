@@ -86,7 +86,7 @@ static char *pause_options [3] = {
     N_("on dumb &Terminals"),
     N_("Alwa&ys") };
 
-#define PAUSE_OPTIONS (sizeof(pause_options) / sizeof(char *))
+#define PAUSE_OPTIONS (sizeof(pause_options) / sizeof(pause_options[0]))
 
 /* Heights of the panes */
 #define PY	3
@@ -139,7 +139,7 @@ init_configure (void)
 	    }
 	}
 
-	i = sizeof (pause_options) / sizeof (char *);
+	i = PAUSE_OPTIONS;
 	while (i--) {
 	    pause_options[i] = _(pause_options[i]);
 	    l1 = strlen (pause_options[i]) + 7;
