@@ -4,6 +4,8 @@
 	to eliminate problem with wu-ftpd.
 	Close sock on error. Eliminate goto.
 
+	(ftpfs_chmod): Don't ignore errors.
+
 	(reconnect): Restore cwdir if login_server fails.
 
 2002-02-01  Andrew V. Samoilov  <kai@cmail.ru>
