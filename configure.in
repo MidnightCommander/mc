@@ -776,7 +776,7 @@ SLang*)
  	return 1;
    return 0;
 ],
-			[LIBS="$LIBS -lcurses"
+			[MCLIBS="$MCLIBS -lcurses"
 			AC_DEFINE(USE_SETUPTERM, 1,
 				  [Define to use function `setupterm'
 from `curses' library in S-Lang])])
@@ -844,9 +844,10 @@ doc/mc.1 doc/mcedit.1 doc/mcserv.8
 intl/Makefile po/Makefile.in
 ],[sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile])
 
-if echo "$screen_manager" | grep -q "SLang" ; then
-    screen_manager="${screen_manager}${slang_term}"
-fi
+case $screen_manager in
+SLang*)
+    screen_manager="${screen_manager}${slang_term}" ;;
+esac
 
 echo "
 Configuration:
