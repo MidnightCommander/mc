@@ -491,7 +491,7 @@ buttonbar_clicked (GtkWidget *widget, WButtonBar *bb)
 			return;
 		}
 	}
-	printf ("Mhm, should not happen\n");
+	printf ("Mhm, should not happen or The Cow is out\n");
 }
 
 int
