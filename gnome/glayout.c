@@ -382,18 +382,28 @@ panel_enter_event (GtkWidget *widget, GdkEvent *event, WPanel *panel)
 }
 
 WPanel *
-create_container (Dlg_head *h, char *name)
+create_container (Dlg_head *h, char *name, char *geometry)
 {
 	PanelContainer *container = g_new (PanelContainer, 1);
 	WPanel     *panel;
 	GtkWidget  *app, *vbox;
+	int        xpos, ypos, width, height;
 
+	gnome_parse_geometry (geometry, &xpos, &ypos, &width, &height);
+	
 	container->splitted = 0;
 	app = gnome_app_new ("gmc", name);
 	gtk_window_set_wmclass (GTK_WINDOW (app), "gmc", "gmc");
-	gtk_widget_set_usize (GTK_WIDGET (app), 500, 360);
-	panel = panel_new (name);
 
+	/* Geometry configuration */
+	if (width != -1 && height != -1)
+		gtk_widget_set_usize (GTK_WIDGET (app), width, height);
+	else
+		gtk_widget_set_usize (GTK_WIDGET (app), 500, 360);
+	if (xpos != -1 && ypos != -1)
+		gtk_widget_set_uposition (GTK_WIDGET (app), xpos, ypos);
+
+	panel = panel_new (name);
 	vbox = gtk_vbox_new (0, 0);
 	gnome_app_set_contents (GNOME_APP (app), vbox);
 	gnome_app_create_menus_with_data (GNOME_APP (app), gnome_panel_menu, panel);
@@ -430,15 +440,21 @@ create_container (Dlg_head *h, char *name)
 }
 
 void
-new_panel_at (char *dir)
+new_panel_with_geometry_at (char *dir, char *geometry)
 {
 	WPanel *panel;
-	
-	mc_chdir (dir);
-	panel = create_container (desktop_dlg, dir);
-	add_widget (desktop_dlg, panel);
 
+	mc_chdir (dir);
+	panel = create_container (desktop_dlg, dir, geometry);
+	add_widget (desktop_dlg, panel);
 	set_new_current_panel (panel);
+	x_flush_events ();
+}
+
+void
+new_panel_at (char *dir)
+{
+	new_panel_with_geometry_at (dir, NULL);
 }
 
 void

@@ -395,10 +395,57 @@ dialog_panel_callback (struct Dlg_head *h, int id, int msg)
 	return default_dlg_callback (h, id, msg);
 }
 
+extern GList *directory_list;
+extern GList *geometry_list;
+
+typedef struct {
+	char *dir; char *geometry;
+} dir_and_geometry;
+
+static int
+idle_create_panel (void *data)
+{
+	dir_and_geometry *dg = data;
+
+	new_panel_with_geometry_at (dg->dir, dg->geometry);
+	g_free (data);
+
+	return 0;
+}
+
+/*
+ * wrapper for new_panel_with_geometry_at.
+ * first invocation is called directly, further calls use
+ * the idle handler
+ */
+static void
+create_one_panel (char *dir, char *geometry)
+{
+	static int first = 1;
+	
+	if (first){
+		new_panel_with_geometry_at (dir, geometry);
+		first = 0;
+	} else {
+		dir_and_geometry *dg = g_new (dir_and_geometry, 1);
+		dg->dir = dir;
+		dg->geometry = geometry;
+		gtk_idle_add (idle_create_panel, dg);
+	}
+}
+
+/*
+ * Only at startup we have a strange condition: if more than one
+ * panel is created, then the code hangs inside X, it keeps waiting
+ * for a reply for something in Imlib that never returns.
+ *
+ * Creating the panels on the idle loop takes care of this
+ */
 void
 create_panels (void)
 {
-	WPanel *panel;
+	GList *p, *g;
+	char  *geo;
 	
 	start_desktop ();
 	cmdline = command_new (0, 0, 0);
@@ -407,14 +454,90 @@ create_panels (void)
 	gnome_init_panels ();
 	
 	desktop_dlg = create_dlg (0, 0, 24, 80, 0, dialog_panel_callback, "[panel]", "midnight", DLG_NO_TED);
-	
-	panel = create_container (desktop_dlg, "My Panel");
-	add_widget (desktop_dlg, panel);
 
-	set_current_panel (0);
+	if (directory_list){
+		g   = geometry_list;
+		for (p = directory_list; p; p = p->next){
+			if (g){
+				geo = g->data;
+				g = g->next;
+			} else
+				geo = NULL;
+			create_one_panel (p->data, geo);
+		}
+	} else 
+		create_one_panel (".", geometry_list ? geometry_list->data : NULL);
+
+	g_list_free (directory_list);
+	g_list_free (geometry_list);
+
 	run_dlg (desktop_dlg);
 
 	/* shutdown gnome specific bits of midnight commander */
 	stop_desktop ();
+}
+
+static void
+session_die (void)
+{
+	extern int quit;
+	
+	/* FIXME: This wont get us out from a dialog box */
+	gtk_main_quit ();
+	quit = 1;
+	dlg_stop (desktop_dlg);
+}
+
+/*
+ * Save the session callback
+ */
+static int
+session_save_state (GnomeClient *client, gint phase, GnomeRestartStyle save_style, gint shutdown,
+		    GnomeInteractStyle  interact_style, gint fast, gpointer client_data)
+{
+	char *sess_id;
+	char **argv = g_malloc (sizeof (char *) * ((g_list_length (containers) * 3) + 2));
+	GList *l, *free_list = 0;
+	int   i;
+
+	sess_id = gnome_client_get_id (client);
+	
+	argv [0] = client_data;
+	for (i = 1, l = containers; l; l = l->next){
+		PanelContainer *pc = l->data;
+		int x, y, w, h;
+		char *buffer = g_malloc (32);
+
+		gdk_window_get_origin (GTK_WIDGET (pc->panel->widget.wdata)->window, &x, &y);
+		gdk_window_get_size   (GTK_WIDGET (pc->panel->widget.wdata)->window, &w, &h);
+		sprintf (buffer, "%dx%d%s%d%s%d", w, h, x, y);
+		argv [i++] = pc->panel->cwd;
+		argv [i++] = "--geometry";
+		argv [i++] = buffer;
+		free_list = g_list_append (free_list, buffer);
+	}
+	argv [i] = NULL;
+	gnome_client_set_clone_command (client, i, argv);
+	gnome_client_set_restart_command (client, i, argv);
+
+	for (l = free_list; l; l = l->next)
+		g_free (l->data);
+	g_list_free (free_list);
+	
+	return 1;
+}
+
+void
+session_management_setup (char *name)
+{
+	GnomeClient *client;
+	
+	client = gnome_client_new_default ();
+	if (client){
+		gtk_signal_connect (GTK_OBJECT (client), "save_yourself",
+				    GTK_SIGNAL_FUNC (session_save_state), name);
+		gtk_signal_connect (GTK_OBJECT (client), "die",
+				    GTK_SIGNAL_FUNC (session_die), NULL);
+	}
 }
 

@@ -1,3 +1,14 @@
+1998-04-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gmain.c (create_panels): Create one panel per directory
+	specified.  For some strange reason the code hangs if you start up
+	more than one panel at once.  This is not a gmc bug, it appears to
+	be an Imlib/gtk/gdk interaction.  I am for now creating one panel
+	in the main program execution thread and the rest during the idle
+	handler. 
+	
+	(session_save_state): Added session management support. 
+
 1998-04-29  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gprop.c (gprop_general_new): Added an simple icon preview to the

@@ -2552,6 +2552,10 @@ probably_finish_program (void)
     }
 }
 
+enum {
+	GEOMETRY_KEY = -1
+};
+
 static int
 process_args (int c, char *option_arg)
 {
@@ -2676,9 +2680,12 @@ static struct argp_option argp_options [] = {
     { "version", 	'V', NULL, 0, N_("Report versionand configuration options."), 0 },
     { "view", 		'v', NULL, 0, N_("Start up into the viewer mode."), 0 },
     { "xterm", 		'x', NULL, 0, N_("Force xterm mouse support and screen save/restore"), 0 },
-
+    { "geometry",       GEOMETRY_KEY,  "GEOMETRY", 0, N_("Geometry for the window"), 0 },
     { NULL, 		0,   NULL, 0, NULL },
 };
+
+GList *directory_list = 0;
+GList *geometry_list  = 0;
 
 static error_t
 parse_an_arg (int key, char *arg, struct argp_state *state)
@@ -2719,6 +2726,10 @@ parse_an_arg (int key, char *arg, struct argp_state *state)
 	    return 0;
 #endif
 
+	case GEOMETRY_KEY:
+	    geometry_list = g_list_append (geometry_list, arg);
+	    return 0;
+	    
 	case ARGP_KEY_ARG:
 	    break;
 
@@ -2735,10 +2746,8 @@ parse_an_arg (int key, char *arg, struct argp_state *state)
 		edit_one_file = strdup (arg);
 	    else if (view_one_file)
 		view_one_file = strdup (arg);
-	    else if (this_dir)
-		other_dir = strdup (arg);
-	    else
-		this_dir = strdup (arg);
+	    else 
+	        directory_list = g_list_append (directory_list, arg);
 	}
 	return 0;
 }
@@ -2939,6 +2948,7 @@ int main (int argc, char *argv [])
     /* NOTE: This call has to be before any our argument handling :) */
 
 #ifdef HAVE_GNOME
+    session_management_setup (argv [0]);
     {
 	char *base = x_basename (argv [0]);
 
