@@ -2,7 +2,7 @@
 
 	* widget.c (button_callback): Treat Enter as hotkey for the
 	default button.
-	* wtools.c (quick_callback): Remove, it's unneded now.
+	* wtools.c (quick_callback): Remove, it's unneeded now.
 
 	* wtools.c (quick_callback): Restore old obscure functionality -
 	DLG_KEY should not return MSG_HANDLED to allow the button
@@ -50,10 +50,10 @@
 
 	* dlg.h: Remove DLG_PRE_EVENT, it's unused now.
 
-	* main.c (make_panels_dirty): Remove, it's unneded now.
+	* main.c (make_panels_dirty): Remove, it's unneeded now.
 	(midnight_callback): Don't call make_panels_dirty().  Mark
 	current panel dirty if the search mode is unset.  No need to set
-	attibutes before calling show_console_contents().
+	attributes before calling show_console_contents().
 
 	* dlg.h: Convert send_idle_msg field to a publicly visible flag
 	DLG_WANT_IDLE.
@@ -182,7 +182,7 @@
 2003-07-08  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* ext.c (regex_check_type): Don't skip first character after ":"
-	unconditionaly.
+	unconditionally.
 
 2003-07-02  Pavel Roskin  <proski@gnu.org>
 
