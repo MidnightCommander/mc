@@ -820,12 +820,9 @@ AC_DEFUN([MC_WITH_NCURSES], [
 
     AC_CACHE_CHECK([for ESCDELAY variable],
 		   [mc_cv_ncurses_escdelay],
-		   [AC_TRY_COMPILE([], [
+		   [AC_TRY_LINK([], [
 			extern int ESCDELAY;
-			int main ()
-			{
-			  ESCDELAY = 0;
-			}
+			ESCDELAY = 0;
 			],
 			[mc_cv_ncurses_escdelay=yes],
 			[mc_cv_ncurses_escdelay=no])

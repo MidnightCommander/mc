@@ -1,3 +1,8 @@
+2003-08-18  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* acinclude.m4 (MC_WITH_NCURSES): Fix ESCDELAY check on Solaris.
+	Make sure that linking succeeds.
+
 2003-08-02  Pavel Roskin  <proski@gnu.org>
 
 	* lib/cedit.menu: Avoid using "id -u", it doesn't work on
