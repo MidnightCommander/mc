@@ -1,3 +1,8 @@
+2002-09-24  Pavel Roskin  <proski@gnu.org>
+
+	* edit.c: Remove all references to CR_LF_TRANSLATION.
+	* editcmd.c: Likewise.
+
 2002-09-23  Pavel Roskin  <proski@gnu.org>
 
 	* editwidget.c (edit): Install handler for DLG_RESIZE.

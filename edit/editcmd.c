@@ -265,12 +265,6 @@ int edit_save_file (WEdit * edit, const char *filename)
 	    goto error_save;
 	}
 	free (p);
-#ifdef CR_LF_TRANSLATION
-    } else {			/* optimised save */
-	filelen = edit_write_stream (edit, f);
-	if (fclose (file))
-	    filelen = -1;
-#else
     } else {
 	long buf;
 	buf = 0;
@@ -301,7 +295,6 @@ int edit_save_file (WEdit * edit, const char *filename)
 	}
 	if (mc_close (fd))
 	    goto error_save;
-#endif /* !CR_LF_TRANSLATION */
     }
 
     if (filelen != edit->last_byte)

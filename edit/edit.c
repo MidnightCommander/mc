@@ -23,10 +23,6 @@
 */
 
 #include <config.h>
-#if defined(NEEDS_IO_H)
-#    include <io.h>
-#    define CR_LF_TRANSLATION
-#endif
 #include "edit.h"
 
 #ifdef HAVE_CHARSET
@@ -259,45 +255,6 @@ char *edit_get_write_filter (char *writename, const char *filename)
     return p;
 }
 
-#ifdef CR_LF_TRANSLATION
-/* reads into buffer, replace \r\n with \n */
-long edit_insert_stream (WEdit * edit, FILE * f)
-{
-    int a = -1, b;
-    long i;
-    while ((b = fgetc (f))) {
-	if (a == '\r' && b == '\n') {
-	    edit_insert (edit, '\n');
-	    i++;
-	    a = -1;
-	    continue;
-	} else if (a >= 0) {
-	    edit_insert (edit, a);
-	    i++;
-	}
-	a = b;
-    }
-    if (a >= 0)
-	edit_insert (edit, a);
-    return i;
-}
-/* writes buffer, replaces, replace \n with \r\n */
-long edit_write_stream (WEdit * edit, FILE * f)
-{
-    long i;
-    int c;
-    for (i = 0; i < edit->last_byte; i++) {
-	c = edit_get_byte (edit, i);
-	if (c == '\n') {
-	    if (fputc ('\r', f) < 0)
-		break;
-	}
-	if (fputc (c, f) < 0)
-	    break;
-    }
-    return i;
-}
-#else /* CR_LF_TRANSLATION */
 long edit_insert_stream (WEdit * edit, FILE * f)
 {
     int c;
@@ -316,7 +273,6 @@ long edit_write_stream (WEdit * edit, FILE * f)
 	    break;
     return i;
 }
-#endif /* CR_LF_TRANSLATION */
 
 #define TEMP_BUF_LEN 1024
 
@@ -342,23 +298,6 @@ int edit_insert_file (WEdit * edit, const char *filename)
 	    return 0;
 	}
 	free (p);
-#ifdef CR_LF_TRANSLATION
-    } else {
-	FILE *f;
-	long current = edit->curs1;
-	f = fopen (filename, "r");
-	if (f) {
-	    edit_insert_stream (edit, f);
-	    edit_cursor_move (edit, current - edit->curs1);
-	    if (fclose (f)) {
-		edit_error_dialog (_ (" Error "), get_sys_error (catstrs (_ (" Error reading file: "), filename, " ", 0)));
-		return 0;
-	    }
-	} else {
-	    edit_error_dialog (_ (" Error "), get_sys_error (catstrs (_ (" Failed trying to open file for reading: "), filename, " ", 0)));
-	    return 0;
-	}
-#else
     } else {
 	int i, file, blocklen;
 	long current = edit->curs1;
@@ -375,7 +314,6 @@ int edit_insert_file (WEdit * edit, const char *filename)
 	mc_close (file);
 	if (blocklen)
 	    return 0;
-#endif
     }
     return 1;
 }
