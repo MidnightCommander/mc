@@ -1,3 +1,8 @@
+2003-11-28  Pavel Roskin  <proski@gnu.org>
+
+	* utilunix.c (tilde_expand): Correct last fix, simplify code.
+	Reported by David Sterba <dave@jikos.cz>
+
 2003-11-27  Pavel Roskin  <proski@gnu.org>
 
 	* execute.c (toggle_panels): Refresh panels after returning from

@@ -262,27 +262,27 @@ char *
 tilde_expand (const char *directory)
 {
     struct passwd *passwd;
-    const char *p;
+    const char *p, *q;
     char *name;
 
     if (*directory != '~')
 	return g_strdup (directory);
 
-    directory++;
+    p = directory + 1;
 
-    p = strchr (directory, PATH_SEP);
+    q = strchr (p, PATH_SEP);
 
     /* d = "~" or d = "~/" */
-    if (!(*directory) || (*directory == PATH_SEP)) {
+    if (!(*p) || (*p == PATH_SEP)) {
 	passwd = getpwuid (geteuid ());
-	p = (*directory == PATH_SEP) ? directory + 1 : "";
+	q = (*p == PATH_SEP) ? p + 1 : "";
     } else {
-	if (!p) {
-	    passwd = getpwnam (directory);
+	if (!q) {
+	    passwd = getpwnam (p);
 	} else {
-	    name = g_malloc (p - directory + 1);
-	    strncpy (name, directory, p - directory);
-	    name[p - directory] = 0;
+	    name = g_malloc (q - p + 1);
+	    strncpy (name, p, q - p);
+	    name[q - p] = 0;
 	    passwd = getpwnam (name);
 	    g_free (name);
 	}
@@ -292,7 +292,7 @@ tilde_expand (const char *directory)
     if (!passwd)
 	return g_strdup (directory);
 
-    return g_strconcat (passwd->pw_dir, PATH_SEP_STR, p, NULL);
+    return g_strconcat (passwd->pw_dir, PATH_SEP_STR, q, NULL);
 }
 
 
