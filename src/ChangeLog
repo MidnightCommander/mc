@@ -1,5 +1,8 @@
 2001-10-01  Pavel Roskin  <proski@gnu.org>
 
+	* widget.h: Use type "buttonbarfn" more consistently.
+	* widget.c: Likewise.
+
 	* setup.c [!USE_VFS]: Warning fix.
 	* hotlist.c [!USE_VFS]: Likewise.
 

@@ -2364,7 +2364,7 @@ define_label_data (Dlg_head *h, Widget *paneletc, int idx, char *text,
 	return;
     
     set_label_text (bb, idx, text);
-    bb->labels [idx-1].function = (void (*)(void *)) cback;
+    bb->labels [idx-1].function = cback;
     bb->labels [idx-1].data = data;
     x_redefine_label (bb, idx);
 }
@@ -2372,7 +2372,7 @@ define_label_data (Dlg_head *h, Widget *paneletc, int idx, char *text,
 void
 define_label (Dlg_head *h, Widget *paneletc, int idx, char *text, void (*cback)(void))
 {
-    define_label_data (h, paneletc, idx, text, (void (*)(void *)) cback, 0);
+    define_label_data (h, paneletc, idx, text, (buttonbarfn) cback, 0);
 }
 
 void

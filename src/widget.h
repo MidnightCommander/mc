@@ -133,12 +133,14 @@ typedef struct {
     int cursor_x, cursor_y;	/* Cache the values */
 } WListbox;
 
+typedef void (*buttonbarfn)(void *);
+
 typedef struct {
     Widget widget;
     int    visible;		/* Is it visible? */
     struct {
 	char   *text;
-	void   (*function)(void *data);
+	buttonbarfn function;
 	void   *data;
     } labels [10];
 } WButtonBar;
@@ -204,7 +206,6 @@ char *listbox_add_item (WListbox *l, enum append_pos pos, int
 
 /* Buttonbar routines */
 WButtonBar *buttonbar_new (int visible);
-typedef void (*buttonbarfn )(void *);
 typedef void (*voidfn)(void);
 void define_label (Dlg_head *, Widget *paneletc, int index, char *text, voidfn);
 void define_label_data (Dlg_head *h, Widget *paneletc, int idx, char *text,
