@@ -1,3 +1,8 @@
+2000-09-21  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/uzoo.in: Suppress output from grep. Don't use '~',
+	use $HOME instead - it's more portable.
+
 2000-08-24  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/Makefile.am: all scripts should be executable

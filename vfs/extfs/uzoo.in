@@ -43,12 +43,12 @@ mczoofs_copyout ()
 
 # zoo is stupid and won't be happy when the name has no extension.
 # We have to do a small trick :) [pretty dirty, broken hack -- pavel]
-if echo $2 | grep '\.zoo$'; then
+if echo $2 | grep '\.zoo$' >/dev/null; then
   :
 else
-  SYMLINK=~/.mc/temporary.$2.zoo
+  SYMLINK=$HOME/.mc/temporary.$2.zoo
   if test -f $SYMLINK; then
-    SYMLINK=~/.mc/temporary.$2.
+    SYMLINK=$HOME/.mc/temporary.$2.
   fi
   if test -f $SYMLINK; then
     echo "Ugh. I did not expect this to happen. Cleanup your ~/.mc."
