@@ -215,6 +215,22 @@ AC_DEFUN([MC_WITH_VFS],[
   )
   fi
 
+  dnl
+  dnl Ext2fs undelete support
+  dnl
+  AC_ARG_WITH(ext2undel,
+    [  --with-ext2undel         Compile with ext2 undelete code [[yes if found]]],
+    [if test x$withval != xno; then
+      if test x$withval != xyes; then
+	LDFLAGS="$LDFLAGS -L$withval/lib"
+	CPPFLAGS="$CPPFLAGS -I$withval/include"
+      fi
+      AC_EXT2_UNDEL
+    fi],[
+    dnl Default: detect
+    AC_CHECK_LIB(ext2fs, ext2fs_close, [AC_EXT2_UNDEL], , [-lcom_err])
+  ])
+
   AC_DEFINE(USE_VFS, 1, [Define to enable VFS support])
   if $use_net_code; then
      AC_DEFINE(USE_NETCODE, 1, [Define to use networked VFS])

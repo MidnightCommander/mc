@@ -519,22 +519,6 @@ else
 fi
 
 
-if test $use_vfs = yes; then
-    AC_ARG_WITH(ext2undel,
-        [  --with-ext2undel         Compile with ext2 undelete code [[yes if found]]],
-	[if test x$withval != xno; then
-		if test x$withval != xyes; then
-			LDFLAGS="$LDFLAGS -L$withval/lib"
-			CPPFLAGS="$CPPFLAGS -I$withval/include"
-		fi
-		AC_EXT2_UNDEL
-	fi],[
-	dnl Default: detect
-	AC_CHECK_LIB(ext2fs, ext2fs_close, [AC_EXT2_UNDEL], , [-lcom_err])
-    ])
-fi
-
-
 dnl Check if the OS is supported by the console saver.
 cons_saver=""
 case $host_os in

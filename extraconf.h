@@ -17,11 +17,6 @@ the need to embed this logic into configure.in.
 # endif
 #endif
 
-#ifndef USE_VFS
-#    undef USE_NETCODE
-#    undef USE_EXT2FSLIB
-#endif
-
 #if defined (__QNX__) && !defined(__QNXNTO__) && !defined (HAVE_INFOMOUNT_LIST)
 #    define HAVE_INFOMOUNT_QNX
 #endif

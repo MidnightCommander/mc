@@ -1,5 +1,9 @@
 2003-10-29  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Move ext2fs undelete support ...
+	* acinclude.m4 (MC_WITH_VFS): ... here.
+	* extraconf.h: Remove VFS logic, it's enforced in configure now.
+
 	* acinclude.m4 (MC_WITH_VFS): Use AC_SEARCH_LIBS when possible.
 	Allow disabling network code by --disable-netcode.
 
