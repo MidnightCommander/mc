@@ -5,6 +5,7 @@
  * Author: Federico Mena <federico@nuclecu.unam.mx>
  */
 
+#include <config.h>
 #include <gtk/gtksignal.h>
 #include <string.h>
 #include "gmc-chargrid.h"

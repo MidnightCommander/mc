@@ -1,5 +1,7 @@
 2001-06-26  Pavel Roskin  <proski@gnu.org>
 
+	* gmc-chargrid.c: Include <config.h>.
+
 	* gkey.c: Include the contents of xslint.c.
 	* Makefile.in (OOBJS): Remove xslint.o.
 
