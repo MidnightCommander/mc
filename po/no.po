@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.34\n"
-"POT-Creation-Date: 1999-08-14 13:53+0200\n"
-"PO-Revision-Date: 1999-08-14 18:26+02:00\n"
+"POT-Creation-Date: 1999-08-18 00:51+0200\n"
+"PO-Revision-Date: 1999-08-18 00:51+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -55,7 +55,8 @@ msgid ""
 msgstr ""
 "\".\n"
 "\n"
-"For å fikse dette, hent opp mime-egenskaper redigering i GNOME kontroll- senter, og rediger standard %s-handling for \"%s\"."
+"For å fikse dette, hent opp mime-egenskaper redigering i GNOME kontroll- "
+"senter, og rediger standard %s-handling for \"%s\"."
 
 #: gnome/gaction.c:46
 #, c-format
@@ -67,7 +68,8 @@ msgid ""
 msgstr ""
 "\".\n"
 "\n"
-"For å ordne denne feilen, hent opp filens egenskaper og endre standard %s-handling"
+"For å ordne denne feilen, hent opp filens egenskaper og endre standard "
+"%s-handling"
 
 #: gnome/gaction.c:51
 #, c-format
@@ -627,7 +629,7 @@ msgstr "ferdig."
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
-#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1801
+#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1808
 msgid "Password:"
 msgstr "Passord:"
 
@@ -920,7 +922,7 @@ msgstr "_Hjelp"
 msgid "File/New/Directory..."
 msgstr "Fil/Ny/Katalog..."
 
-#: gnome/gmain.c:551
+#: gnome/gmain.c:558
 msgid ""
 "You are running the GNOME File Manager as root.\n"
 "\n"
@@ -939,7 +941,8 @@ msgstr " Kunne ikke åpne /etc/fstab filen"
 #: gnome/gmount.c:325
 #, c-format
 msgid "Could not symlink %s to %s; will not have such a desktop device icon."
-msgstr "Kunne ikke lage symlenke fra %s til %s; får ikke et slikt skrivebordsikon."
+msgstr ""
+"Kunne ikke lage symlenke fra %s til %s; får ikke et slikt skrivebordsikon."
 
 #: gnome/gmount.c:377 gnome/gmount.c:392
 #, c-format
@@ -3418,48 +3421,48 @@ msgstr " Relativ symlink "
 msgid " relative symlink: %s "
 msgstr " relativ symlink: %s "
 
-#: src/cmd.c:1284
+#: src/cmd.c:1331
 msgid " Enter machine name (F1 for details): "
 msgstr " Skriv inn maskinnavn (F1 for detaljer): "
 
-#: src/cmd.c:1308
+#: src/cmd.c:1355
 #, c-format
 msgid " Could not chdir to %s "
 msgstr " Kunne ikke skifte katalog til %s "
 
-#: src/cmd.c:1315
+#: src/cmd.c:1362
 msgid " Link to a remote machine "
 msgstr " Lenke til en fjern maskin "
 
-#: src/cmd.c:1321
+#: src/cmd.c:1368
 msgid " FTP to machine "
 msgstr " FTP til maskin "
 
-#: src/cmd.c:1327
+#: src/cmd.c:1374
 msgid " SMB link to machine "
 msgstr " SMB-tilkobling til maskin "
 
-#: src/cmd.c:1337
+#: src/cmd.c:1384
 msgid " Socket source routing setup "
 msgstr " Oppsett av kontaktens kilderuting"
 
-#: src/cmd.c:1338
+#: src/cmd.c:1385
 msgid " Enter host name to use as a source routing hop: "
 msgstr " Skriv inn vertsnavnet som skal brukes som kilderutingshop: "
 
-#: src/cmd.c:1345
+#: src/cmd.c:1392
 msgid " Host name "
 msgstr " Vertsnavn "
 
-#: src/cmd.c:1345
+#: src/cmd.c:1392
 msgid " Error while looking up IP address "
 msgstr " Feil under oppslag av IP-adresse "
 
-#: src/cmd.c:1356
+#: src/cmd.c:1403
 msgid " Undelete files on an ext2 file system "
 msgstr " Gjenopprett filer på et ext2 filsystem "
 
-#: src/cmd.c:1357
+#: src/cmd.c:1404
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -3467,11 +3470,11 @@ msgstr ""
 " Skriv inn enhet (uten /dev/) som det skal gjenopprettes\n"
 "   filer på: (F1 for detaljer)"
 
-#: src/cmd.c:1407
+#: src/cmd.c:1454
 msgid " Setup saved to ~/"
 msgstr " Oppsett lagret til ~/"
 
-#: src/cmd.c:1412
+#: src/cmd.c:1459
 msgid " Setup "
 msgstr " Oppsett "
 
@@ -6040,9 +6043,79 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Ukonsistent extfs arkiv"
 
+#: vfs/fish.c:136
+#, c-format
+msgid "fish: Disconnecting from %s"
+msgstr "fish: Kobler fra %s"
+
+#: vfs/fish.c:214
+msgid "fish: Waiting for initial line..."
+msgstr "fish: Venter på innledende linje..."
+
 #: vfs/fish.c:224
 msgid "Sorry, we can not do password authenticated connections for now."
 msgstr "Beklager, vi kan ikke gjøre passordautentiserte forbindelser ennå."
+
+#: vfs/fish.c:238
+msgid "fish: Sending password..."
+msgstr "fish: Sender passord..."
+
+#: vfs/fish.c:244
+msgid "fish: Sending initial line..."
+msgstr "fish: Sender innledende linje..."
+
+#: vfs/fish.c:248
+msgid "fish: Handshaking version..."
+msgstr "fish: Handshaking versjon..."
+
+#: vfs/fish.c:252
+msgid "fish: Setting up current directory..."
+msgstr "fish: Setter opp aktiv katalog..."
+
+#: vfs/fish.c:254
+#, c-format
+msgid "fish: Connected, home %s."
+msgstr "fish: Tilkoblet, hjemme %s."
+
+#: vfs/fish.c:331
+#, c-format
+msgid "fish: Reading directory %s..."
+msgstr "fish: Leser katalog %s..."
+
+#: vfs/fish.c:426
+msgid "fish: got listing"
+msgstr "fish: hentet liste"
+
+#: vfs/fish.c:430
+msgid "fish: failed"
+msgstr "fish: feilet"
+
+#. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
+#: vfs/fish.c:450
+#, c-format
+msgid "fish: store %s: sending command..."
+msgstr "fish: lager %s: sender kommando..."
+
+#: vfs/fish.c:464
+msgid "fish: Local read failed, sending zeros"
+msgstr "fish: Lokal lesekommando feilet, sender nuller"
+
+#: vfs/fish.c:476
+#, c-format
+msgid "fish: storing %s %d (%d)"
+msgstr "fish: lagrer %s %d (%d)"
+
+#: vfs/fish.c:516
+msgid "Aborting transfer..."
+msgstr "Avbryter overføring..."
+
+#: vfs/fish.c:525
+msgid "Error reported after abort."
+msgstr "Feil rapportert etter avbrudd."
+
+#: vfs/fish.c:527
+msgid "Aborted transfer would be successful."
+msgstr "Avbrutt overføring ville vært i orden."
 
 #: vfs/ftpfs.c:326
 #, c-format
@@ -6288,3 +6361,12 @@ msgstr ""
 "Hmm,...\n"
 "%s\n"
 "ser ikke ut som et tar-arkiv."
+
+#: vfs/vfs.c:1792
+msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
+msgstr "%s: %s: %s %3d%% (%ld bytes overført)"
+
+#: vfs/vfs.c:1793
+#, c-format
+msgid "%s: %s: %s %ld bytes transfered"
+msgstr "%s: %s: %s %ld bytes overført"
