@@ -1,5 +1,9 @@
 2005-01-20  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
+	* Makefile.am (SAMBA_DIST): Remove lib/genrand.c and lib/util_unistr.c.
+	* samba/Makefile.in (SAMBAFILES): Remove lib/genrand.o and
+	lib/util_unistr.o.
+
 	* samba/libsmb/clientgen.c (cli_oem_change_password): Removed.
 	* samba/libsmb/smbencrypt.c (make_oem_passwd_hash): Removed.
 	* samba/lib/util_sock.c (reset_globals_after_fork): Removed.

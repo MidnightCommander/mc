@@ -122,7 +122,6 @@ SAMBA_DIST =			\
 	lib/charcnv.c		\
 	lib/charset.c		\
 	lib/debug.c		\
-	lib/genrand.c		\
 	lib/interface.c		\
 	lib/kanji.c		\
 	lib/md4.c		\
@@ -135,7 +134,6 @@ SAMBA_DIST =			\
 	lib/util_file.c		\
 	lib/util_sock.c		\
 	lib/util_str.c		\
-	lib/util_unistr.c	\
 	libsmb/clientgen.c	\
 	libsmb/namequery.c	\
 	libsmb/nmblib.c		\
