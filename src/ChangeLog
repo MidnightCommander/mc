@@ -1,3 +1,8 @@
+2002-07-19  Pavel Roskin  <proski@gnu.org>
+
+	* main.c (directory_history_list): Report error if cannot change
+	directory.
+
 2002-07-16  Pavel Roskin  <proski@gnu.org>
 
 	* main.c (do_execute): Don't ask to press any key when the shell

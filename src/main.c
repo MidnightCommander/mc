@@ -1003,6 +1003,8 @@ directory_history_list (WPanel * panel)
 		r = _do_panel_cd (panel, s, cd_exact);
 		if (r)
 		    directory_history_add (panel, panel->cwd);
+		else
+		    message (1, MSG_ERROR, _("Could not change directory") );
 		g_free (s);
 	    }
 	}
