@@ -1,3 +1,8 @@
+2002-11-08  Pavel Roskin  <proski@gnu.org>
+
+	* vfs/extfs/a: Set environment to force date and time format
+	suitable for VFS.  Fix support for long filenames with spaces.
+
 2002-11-07  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* syntax/ada95.syntax: Highlight "then" and "else".

@@ -17,6 +17,9 @@ $mcopy = "mcopy -noQ";
 $0 =~ s|.*/||;
 $disk = $0;
 
+$ENV{MTOOLS_DATE_STRING} = "mm-dd-yyyy";
+$ENV{MTOOLS_TWENTY_FOUR_HOUR_CLOCK} = "1";
+
 SWITCH: for ( $ARGV[0] ) {
   /list/ && do {
     @dirs = get_dirs("");
@@ -75,7 +78,7 @@ sub get_dirs {
     $_ = substr($_,12);
     s/^[ ]+//;
 
-    ($size,$date,$time,$longname) = split(/[ \t]+/);
+    ($size,$date,$time,$longname) = split(/[ \t]+/, $_, 4);
 
     @lst = split(/([:ap])/, $time);
     $lst[0] += 12 if ($lst[3] eq "p");
