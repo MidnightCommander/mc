@@ -115,7 +115,7 @@ shell/.f
 	Open=%var{EDITOR:vi} %f
 	
 # Header
-shell/.h
+regex/\.(h|hpp)$
 	Open=%var{EDITOR:vi} %f
 
 # Object
@@ -128,7 +128,7 @@ shell/.s
 	Open=%var{EDITOR:vi} %f
 
 # C++
-regex/\.(C|cc)$
+regex/\.(C|cc|cpp)$
 	Open=%var{EDITOR:vi} %f
 
 ### Documentation ###
@@ -228,52 +228,65 @@ include/image
 
 ### Sound files ###
 
-regex/\.(wav|WAV|Wav|snd|SND|Snd|voc|VOC|Voc|au|AU|Au)$
-       Open=play %f
+regex/\.([wW][aA][vV]|[sS][nN][dD]|[vV][oO][cC]|[aA][uU])$
+       Open=if [ "$DISPLAY" = "" ]; then play %f; else (xmms -e %f 1>/dev/null 2>&1 &); fi
 
-regex/\.(mod|MOD|Mod|s3m|S3M|S3m|xm|XM|Xm)$
+regex/\.([mM][oO][dD]|[sS]3[mM]|[xX][mM])$
        Open=mikmod %f
        #Open=tracker %f
 
-regex/\.(wav22|WAV22)$
+regex/\.([wW][aA][wW]22)$
        Open=vplay -s 22 %f
 
-regex/\.(mp3|MP3|Mp3)$
+regex/\.([mM][pP]3)$
 	Open=if [ "$DISPLAY" = "" ]; then mpg123 %f; else (xmms %f &); fi
 	View=%view{ascii} mpg123 -vtn1 %f 2>&1 | sed -n '/^Title/,/^Comment/p;/^MPEG/,/^Audio/p'
 
-regex/\.(ogg|OGG|Ogg)$
+regex/\.([oO][gG][gG])$
 	Open=if [ "$DISPLAY" = "" ]; then ogg123 %f; else (xmms %f &); fi
 	View=%view{ascii} ogginfo %s
 
-regex/\.(midi?|MIDI?|Midi?|rmid?|RMID?|Rmid?)$
+regex/\.([mM][iI][dD][iI]?|[rR][mM][iI][dD]?)$
 	Open=timidity %f
+
+regex/\.([wW][mM][aA])$
+	Open=mplayer -vo null %f
+	View=%view{ascii} mplayer -quiet -slave -frames 0 -vo null -ao null -identify %f 2>/dev/null | tail +13 || file %f
+
+
+### Play lists ###
+
+regex/\.([mM]3[uU]|[pP][lL][sS])$
+	Open=if [ -z "$DISPLAY" ]; then mplayer -vo null -playlist %f; else (xmms -p %f &); fi
 
 
 ### Video ###
 
-regex/\.(avi|AVI|Avi)$
+regex/\.([aA][vV][iI])$
 	Include=video
 
-regex/\.(asf|ASF|Asf)$
+regex/\.([aA][sS][fFxX])$
 	Include=video
 
-regex/\.(divx|DIVX|DivX|Divx)$
+regex/\.([dD][iI][vV][xX])$
 	Include=video
 
-regex/\.(mov|MOV|Mov)$
+regex/\.([mM][oO][vV]|[qQ][tT])$
 	Include=video
 
-regex/\.(mp4|MP4|Mp4|mpe?g|MPE?G|Mpe?g)$
+regex/\.([mM][pP]4|[mM][pP][eE]?[gG])$
 	Include=video
 
-regex/\.(vob|VOB|Vob)$
+regex/\.([vV][oO][bB])$
 	Include=video
 
-regex/\.(wmv|WMV|Wmv)$
+regex/\.([wW][mM][vV])$
 	Include=video
 
-regex/\.(rm|RM|Rm|ram|RAM|Ram)$
+regex/\.([oO][gG][mM])$
+	Include=video
+
+regex/\.([rR][aA]?[mM])$
 	Open=(realplay %f >/dev/null 2>&1 &)
 
 include/video
@@ -299,7 +312,7 @@ type/^PDF
 # It should be cleaned up when the new format of mc.ext is developed.
 
 # html
-regex/\.([Hh]tml?|HTML?)$
+regex/\.([hH][tT][mM][lL]?)$
 	Open=if test -n "@X11_WWW@" && test -n "$DISPLAY"; then (@X11_WWW@ file://%d/%p &) >/dev/null 2>&1; else links %f 2>/dev/null || lynx -force_html %f; fi
 	View=%view{ascii} lynx -dump -force_html %f
 
@@ -316,7 +329,7 @@ shell/.abw
 	Open=(abiword %f &)
 
 # Microsoft Word Document
-regex/\.([Dd]o[ct]|DO[CT]|[Ww]ri|WRI)$
+regex/\.([Dd][oO][cCtT]|[Ww][rR][iI])$
 	Open=(abiword %f >/dev/null 2>&1 &)
 	View=%view{ascii} catdoc -w %f || word2x -f text %f - || strings %f
 type/^Microsoft\ Word
@@ -324,11 +337,11 @@ type/^Microsoft\ Word
 	View=%view{ascii} catdoc -w %f || word2x -f text %f - || strings %f
 
 # RTF document
-regex/\.(rtf|RTF|Rtf)$
+regex/\.([rR][tT][fF])$
 	Open=(abiword %f >/dev/null 2>&1 &)
 
 # Microsoft Excel Worksheet
-regex/\.([Xx]l[sw]|XL[SW])$
+regex/\.([xX][lL][sSwW])$
 	Open=(gnumeric %f >/dev/null 2>&1 &)
 	View=%view{ascii} xls2csv %f || strings %f
 type/^Microsoft\ Excel
@@ -344,12 +357,12 @@ type/^FrameMaker
 	Open=fmclient -f %f
 
 # DVI
-regex/\.([Dd]vi|DVI)$
+regex/\.([dD][vV][iI])$
 	Open=if [ x$DISPLAY = x ]; then dvisvga %f; else (xdvi %f &); fi
 	View=%view{ascii} dvi2tty %f
 
 # TeX
-regex/\.([Tt]ex|TEX|TeX)$
+regex/\.([Tt][Ee][Xx])$
 	Open=%var{EDITOR:vi} %f
 
 
@@ -368,12 +381,12 @@ regex/^Makefile.(PL|pl)$
 	Open=%var{PERL:perl} %f
 
 # dbf
-regex/\.(dbf|DBF)$
+regex/\.([dD][bB][fF])$
        Open=%view{ascii} dbview %f
        View=%view{ascii} dbview -b %f
 
 # REXX script
-regex/\.(rexx|rex|cmd)$
+regex/\.(rexx?|cmd)$
        Open=rexx %f %{Enter parameters};echo "Press ENTER";read y
 
 
@@ -408,12 +421,12 @@ regex/\.(tar|TAR)$
 	View=%view{ascii} tar tvvf %f
 
 # zip
-type/^(Zip|ZIP)\ archive
+type/^([Zz][Ii][Pp])\ archive
 	Open=%cd %p#uzip
 	View=%view{ascii} unzip -v %f
 
 # zoo
-regex/\.(zoo|ZOO)$
+regex/\.([Zz][Oo][Oo])$
 	Open=%cd %p#uzoo
 	View=%view{ascii} zoo l %f
 	
@@ -428,7 +441,7 @@ regex/\.a(rj|[0-9][0-9])$
 	View=%view{ascii} unarj l %f
 
 # ha
-regex/\.(ha|HA|Ha)$
+regex/\.([Hh][Aa])$
 	Open=%cd %p#uha
 	View=%view{ascii} ha lf %f
 
