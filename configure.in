@@ -175,7 +175,7 @@ dnl
 dnl Check availability of some functions 
 dnl 
 
-AC_CHECK_FUNCS([strerror statfs strftime \
+AC_CHECK_FUNCS([strerror statfs strftime getsid \
 		memmove truncate initgroups putenv \
 		memset memcpy tcsetattr tcgetattr cfgetospeed \
 		sigaction sigemptyset sigprocmask sigaddset \
