@@ -1298,8 +1298,6 @@ configure_panel_listing (WPanel *p, int view_type, int use_msformat, char *user,
     }
 
     set_panel_formats (p);
-    paint_panel (p);
-    
     do_refresh ();
 }
 
@@ -1389,7 +1387,6 @@ set_basic_panel_listing_to (int panel_index, int listing_mode)
     if (set_panel_formats (p))
 	return 0;
 	
-    paint_panel (p);
     do_refresh ();
     return 1;
 }

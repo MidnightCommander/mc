@@ -1315,6 +1315,8 @@ use_display_format (WPanel *panel, char *format, char **error, int isstatus)
     if (*error)
 	return 0;
 
+    panel->dirty = 1;
+
     /* Status needn't to be split */
     usable_columns = ((panel->widget.cols-2)/((isstatus)
 					      ? 1

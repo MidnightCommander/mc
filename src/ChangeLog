@@ -1,5 +1,8 @@
 2003-09-10  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c (use_display_format): Set dirty flag.  Remove calls
+	to paint_panel() where they become unneeded.
+
 	* screen.c (file_mark): Set dirty flag if the mark changes.
 	* cmd.c: Remove calls to paint_panel() due to file marks.
 

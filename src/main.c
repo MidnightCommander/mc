@@ -807,7 +807,6 @@ listmode_cmd (void)
     cpanel->list_type = list_user;
     cpanel->user_format = newmode;
     set_panel_formats (cpanel);
-    paint_panel (cpanel);
 
     do_refresh ();
 }
