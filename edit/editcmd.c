@@ -463,19 +463,16 @@ int edit_save_as_cmd (WEdit * edit)
 
 /* {{{ Macro stuff starts here */
 
-int raw_callback (struct Dlg_head *h, int key, int Msg)
+int
+raw_callback (struct Dlg_head *h, int key, int Msg)
 {
     switch (Msg) {
-    case DLG_DRAW:
-	common_dialog_repaint (h);
-	break;
-
     case DLG_KEY:
 	h->running = 0;
 	h->ret_value = key;
-	return 1;
+	return MSG_HANDLED;
     }
-    return 0;
+    return default_dlg_callback (h, key, Msg);;
 }
 
 /* gets a raw key from the keyboard. Passing cancel = 1 draws
@@ -488,7 +485,7 @@ edit_raw_key_query (char *heading, char *query, int cancel)
     int w = strlen (query) + 7;
     struct Dlg_head *raw_dlg =
 	create_dlg (0, 0, 7, w, dialog_colors, raw_callback,
-		    "[Raw Key Query]", heading,
+		    NULL, heading,
 		    DLG_CENTER | DLG_TRYUP | DLG_WANT_TAB);
     if (cancel)
 	add_widget (raw_dlg,
@@ -2491,18 +2488,6 @@ static int edit_collect_completions (WEdit *edit, long start,
 }
 
 
-/* completion dialog callback */
-static int compl_callback (Dlg_head *h, int key, int Msg)
-{
-    switch (Msg) {
-    case DLG_DRAW:
-	common_dialog_repaint (h);
-	break;
-    }
-    return 0;
-}
-
-
 static int compllist_callback (void *data)
 {
     return 0;
@@ -2542,8 +2527,8 @@ void edit_completion_dialog (WEdit *edit, int max_len, int word_len,
 
 /* create the dialog */    
     compl_dlg = create_dlg (start_y, start_x, compl_dlg_h, compl_dlg_w,
-	dialog_colors, compl_callback, "[Word Completion]", "complete_word", 
-	DLG_COMPACT);
+			    dialog_colors, NULL, "[Completion]", NULL,
+			    DLG_COMPACT);
 	    
 /* create the listbox */
     compl_list = listbox_new (1, 1, compl_dlg_w - 2, compl_dlg_h - 2, 0, 

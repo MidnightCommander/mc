@@ -31,11 +31,6 @@ int column_highlighting = 0;
 
 static int edit_callback (Dlg_head * h, WEdit * edit, int msg, int par);
 
-static int edit_mode_callback (struct Dlg_head *h, int id, int msg)
-{
-    return 0;
-}
-
 int edit_event (WEdit * edit, Gpm_Event * event, int *result)
 {
     *result = MOU_NORMAL;
@@ -123,8 +118,8 @@ edit (const char *_file, int line)
 
     /* Create a new dialog and add it widgets to it */
     edit_dlg =
-	create_dlg (0, 0, LINES, COLS, NULL, edit_mode_callback,
-		    "[Internal File Editor]", "edit", DLG_WANT_TAB);
+	create_dlg (0, 0, LINES, COLS, NULL, NULL,
+		    "[Internal File Editor]", NULL, DLG_WANT_TAB);
 
     init_widget (&(wedit->widget), 0, 0, LINES - 1, COLS,
 		 (callback_fn) edit_callback, (destroy_fn) edit_clean,
