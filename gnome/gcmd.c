@@ -773,6 +773,7 @@ gnome_mkdir_cmd (GtkWidget *widget, WPanel *panel)
 {
 	mkdir_cmd (panel);
 }
+
 static void
 dentry_apply_callback(GtkWidget *widget, int page, gpointer data)
 {

@@ -121,7 +121,7 @@ gtk_dtree_insert_node (GtkDTree *dtree, GtkCTreeNode *parent, char *text)
 static gboolean
 gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int level)
 {
-	GtkCTreeNode *phantom;
+	GtkCTreeNode *phantom = NULL;
 	tree_scan  *dir;
 	tree_entry *dirent;
         struct stat dir_stat;
@@ -138,6 +138,7 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 
 	dtree->loading_dir++;
 
+#if 0
         phantom = gtk_dtree_contains (dtree, parent, "PHANTOM");
         if (!level) {
 		dirent = tree_store_whereis (path);
@@ -147,7 +148,8 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 		dtree->loading_dir--;
 		return TRUE;
         }
-
+#endif
+	
 	dir = tree_store_opendir (path);
 	if (!dir){
 		dtree->loading_dir--;

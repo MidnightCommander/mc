@@ -26,6 +26,7 @@
 #include "dir.h"
 #include "dialog.h"
 #include "setup.h"
+#include "fileopctx.h"
 #include "gdesktop.h"
 #include "gdnd.h"
 #include "gtkdtree.h"
@@ -2204,6 +2205,55 @@ panel_tree_drag_leave (GtkWidget *widget, GdkDragContext *context, guint time, g
 	panel->drag_tree_row = -1;
 }
 
+#if CONTEXT_MENU_ON_TREE
+static void
+tree_do_op (GtkWidget *tree, WPanel *panel, int operation)
+{
+}
+
+static void
+tree_copy_cmd (GtkWidget *tree, WPanel *panel)
+{
+	tree_do_op (tree, panel, OP_COPY);
+}
+
+static void
+tree_del_cmd (GtkWidget *tree, WPanel *panel)
+{
+	tree_do_op (tree, panel, OP_DELETE);
+}
+
+static void
+tree_ren_cmd (GtkWidget *tree, WPanel *panel)
+{
+	tree_do_op (tree, panel, OP_MOVE);
+}
+
+static GnomeUIInfo tree_popup_items[] = {
+	GNOMEUIINFO_ITEM_STOCK(N_("_Copy..."), N_("Copy directory"), tree_copy_cmd, GNOME_STOCK_PIXMAP_COPY),
+	GNOMEUIINFO_ITEM_STOCK(N_("_Delete..."), N_("Delete directory"), tree_del_cmd, GNOME_STOCK_PIXMAP_TRASH),
+        GNOMEUIINFO_ITEM_NONE(N_("_Move..."), N_("Rename or move directory"), tree_ren_cmd),
+
+	GNOMEUIINFO_END
+};
+
+static void
+panel_tree_button_press (GtkWidget *widget, GdkEventButton *event, WPanel *panel)
+{
+	GtkWidget *popup;
+	
+	if (event->type != GDK_BUTTON_PRESS)
+		return;
+	
+	if (event->button != 3)
+		return;
+
+	popup = gnome_popup_menu_new (tree_popup_items);
+	gnome_popup_menu_do_popup_modal (popup, NULL, NULL, event, panel);
+	gtk_widget_destroy (popup);
+}
+#endif
+
 /**
  * panel_create_tree_view:
  *
@@ -2257,6 +2307,12 @@ panel_create_tree_view (WPanel *panel)
 	gtk_signal_connect (GTK_OBJECT (tree), "drag_data_received",
 			    GTK_SIGNAL_FUNC (panel_tree_drag_data_received), panel);
 
+#ifdef CONTEXT_MENU_ON_TREE
+	/* Context sensitive menu */
+	gtk_signal_connect_after (GTK_OBJECT (tree), "button_press_event",
+				  GTK_SIGNAL_FUNC (panel_tree_button_press), panel);
+	gtk_clist_set_button_actions (GTK_CLIST (tree), 2, GTK_BUTTON_SELECTS);
+#endif
 	return tree;
 }
 
