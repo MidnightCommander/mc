@@ -1,3 +1,8 @@
+2003-12-24  Dmitry Alexeyev  <dmi_a@qnx.org.ru>
+
+	* key.c (get_event): Treat all negative values of gpm_fd in the
+	same way.  Add one more check that gpm is alive.
+
 2003-12-24  Pavel Roskin  <proski@gnu.org>
 
 	* layout.c (rotate_dash): Set color before printing the dash.

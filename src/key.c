@@ -897,7 +897,7 @@ static int getch_with_delay (void)
 /* Returns EV_MOUSE if it is a mouse event */
 /* Returns EV_NONE  if non-blocking or interrupt set and nothing was done */
 int
-get_event (struct Gpm_Event * event, int redo_event, int block)
+get_event (struct Gpm_Event *event, int redo_event, int block)
 {
     int c;
     static int flag;		/* Return value from select */
@@ -938,14 +938,15 @@ get_event (struct Gpm_Event * event, int redo_event, int block)
 
 #ifdef HAVE_LIBGPM
 	if (use_mouse_p == MOUSE_GPM) {
-	    if (gpm_fd == -1) {
+	    if (gpm_fd < 0) {
 		/* Connection to gpm broken, possibly gpm has died */
 		mouse_enabled = 0;
 		use_mouse_p = MOUSE_NONE;
 		break;
+	    } else {
+		FD_SET (gpm_fd, &select_set);
+		maxfdp = max (maxfdp, gpm_fd);
 	    }
-	    FD_SET (gpm_fd, &select_set);
-	    maxfdp = max (maxfdp, gpm_fd);
 	}
 #endif
 
@@ -999,7 +1000,8 @@ get_event (struct Gpm_Event * event, int redo_event, int block)
 	if (FD_ISSET (input_fd, &select_set))
 	    break;
 #ifdef HAVE_LIBGPM
-	if (use_mouse_p == MOUSE_GPM && FD_ISSET (gpm_fd, &select_set)) {
+	if (use_mouse_p == MOUSE_GPM && gpm_fd > 0
+	    && FD_ISSET (gpm_fd, &select_set)) {
 	    Gpm_GetEvent (&ev);
 	    Gpm_FitEvent (&ev);
 	    *event = ev;
@@ -1166,7 +1168,7 @@ is_idle (void)
     FD_SET (input_fd, &select_set);
     maxfdp = input_fd;
 #ifdef HAVE_LIBGPM
-    if (use_mouse_p == MOUSE_GPM && mouse_enabled && gpm_fd != -1) {
+    if (use_mouse_p == MOUSE_GPM && mouse_enabled && gpm_fd > 0) {
 	FD_SET (gpm_fd, &select_set);
 	maxfdp = max (maxfdp, gpm_fd);
     }
