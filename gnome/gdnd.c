@@ -274,12 +274,12 @@ drop_url_on_directory (GdkDragContext *context, GtkSelectionData *selection_data
 			fclose (f);
 
 			gnome_metadata_set (template, "desktop-url",
-					    strlen (selection_data->data) + 1,
-					    selection_data->data);
+					    strlen (selection_data->data) + 1, selection_data->data);
+			gnome_metadata_set (template, "icon-caption",
+					    strlen (selection_data->data) + 1, selection_data->data);
 
 			icon = g_concat_dir_and_file (ICONDIR, "gnome-http-url.png");
-			gnome_metadata_set (template, "icon-filename",
-					    strlen (icon) + 1, icon);
+			gnome_metadata_set (template, "icon-filename", strlen (icon) + 1, icon);
 			g_free (icon);
 		}
 	}

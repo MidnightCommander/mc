@@ -1,3 +1,18 @@
+1999-03-14  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (text_changed): If the file has the "icon-caption"
+	metadata set, then change that instead of renaming the file.  This
+	can be used by URLs and is also needed by the mountable device
+	icons.
+	(text_changed_url): Removed this function now that text_changed()
+	can handle all cases.
+
+	* gdnd.c (drop_url_on_directory): Set the "icon-caption" metadata
+	for URLs.
+
+	* gdesktop.c (icon_event): Handle button-2 clicks and drags
+	properly.
+
 1999-03-14  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gmount.c (get_mountable_devices): Show error message if the

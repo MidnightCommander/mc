@@ -790,47 +790,47 @@ text_changed (GnomeIconTextItem *iti, gpointer data)
 	char *new_name;
 	char *source;
 	char *dest;
+	char *buf;
+	int size;
 	int retval;
 
 	dii = data;
 
 	source = g_concat_dir_and_file (desktop_directory, dii->filename);
 	new_name = gnome_icon_text_item_get_text (iti);
-	dest = g_concat_dir_and_file (desktop_directory, new_name);
 
-	if (mc_rename (source, dest) == 0) {
-		gnome_metadata_delete (dest);
-		gnome_metadata_rename (source, dest);
-		g_free (dii->filename);
-		dii->filename = g_strdup (new_name);
-		desktop_reload_icons (FALSE, 0, 0);
-		retval = TRUE;
-	} else
-		retval = FALSE; /* FIXME: maybe pop up a warning/query dialog? */
+	if (gnome_metadata_get (source, "icon-caption", &size, &buf) != 0) {
+		/* No icon caption metadata, so rename the file */
+
+		dest = g_concat_dir_and_file (desktop_directory, new_name);
+
+		if (mc_rename (source, dest) == 0) {
+			gnome_metadata_delete (dest);
+			gnome_metadata_rename (source, dest);
+			g_free (dii->filename);
+			dii->filename = g_strdup (new_name);
+			desktop_reload_icons (FALSE, 0, 0);
+			retval = TRUE;
+		} else
+			retval = FALSE; /* FIXME: maybe pop up a warning/query dialog? */
+
+		g_free (dest);
+	} else {
+		/* The icon has the icon-caption metadata, so change that instead */
+
+		g_free (buf);
+
+		buf = gnome_icon_text_item_get_text (iti);
+		if (*buf) {
+			gnome_metadata_set (source, "icon-caption", strlen (buf) + 1, buf);
+			desktop_reload_icons (FALSE, 0, 0);
+			retval = TRUE;
+		} else
+			retval = FALSE;
+	}
 
 	g_free (source);
-	g_free (dest);
-
 	return retval;
-}
-
-/*
- * Callback when an icon's text changes and the icon reprensents an
- * URL
- */
-static int
-text_changed_url (GnomeIconTextItem *iti, gpointer data)
-{
-	DesktopIconInfo *dii = data;
-	char *fullname;
-	char *new_text;
-	
-	fullname = g_concat_dir_and_file (desktop_directory, dii->filename);
-	new_text = gnome_icon_text_item_get_text (iti);
-	gnome_metadata_set (fullname, "icon-caption", strlen (new_text) + 1, new_text);
-	desktop_reload_icons (FALSE, 0, 0);
-
-	return TRUE;
 }
 
 /* Sets up the mouse grab for when a desktop icon is being edited */
@@ -1464,7 +1464,7 @@ icon_event (GnomeCanvasItem *item, GdkEvent *event, gpointer data)
 
 	switch (event->type) {
 	case GDK_BUTTON_PRESS:
-		if (event->button.button == 1) {
+		if (event->button.button == 1 || event->button.button == 2) {
 			/* If se are editing, do not handle the event ourselves
 			 * -- either let the text item handle it, or wait until
 			 * we fall back to the icon_event_after() callback.
@@ -1484,7 +1484,8 @@ icon_event (GnomeCanvasItem *item, GdkEvent *event, gpointer data)
 			 */
 			if (!on_text
 			    || !dii->selected
-			    || (event->button.state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK))) {
+			    || (event->button.state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK))
+			    || event->button.button == 2) {
 				/* If click on text, and the icon was not
 				 * selected in the first place or shift is down,
 				 * save this flag.
@@ -1530,7 +1531,7 @@ icon_event (GnomeCanvasItem *item, GdkEvent *event, gpointer data)
 		break;
 
 	case GDK_BUTTON_RELEASE:
-		if (event->button.button != 1)
+		if (event->button.button != 1 || event->button.button != 2)
 			break;
 
 		if (on_text && icon_select_on_text) {
@@ -1948,8 +1949,7 @@ desktop_icon_info_new (char *filename, char *url, char *caption, int xpos, int y
 	file_entry *fe;
 	char *full_name;
 	GdkImlibImage *icon_im;
-	GtkSignalFunc text_changed_func;
-	
+
 	/* Create the icon structure */
 
 	full_name = g_concat_dir_and_file (desktop_directory, filename);
@@ -2006,13 +2006,8 @@ desktop_icon_info_new (char *filename, char *url, char *caption, int xpos, int y
 
 	/* Connect to the text item's signals */
 
-	if (dii->url)
-		text_changed_func = (GtkSignalFunc) text_changed_url;
-	else
-		text_changed_func = (GtkSignalFunc) text_changed;
-
 	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->text), "text_changed",
-			    text_changed_func, dii);
+			    (GtkSignalFunc) text_changed, dii);
 
 	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->text), "editing_started",
 			    (GtkSignalFunc) editing_started,
