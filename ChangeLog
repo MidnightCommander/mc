@@ -1,3 +1,8 @@
+2002-04-03  Pavel Roskin  <proski@gnu.org>
+
+	* doc/ru/Makefile.am: Distribute mc.ru.hlp and don't remove it
+	by "make clean" because not everyone has Perl to rebuild it.
+
 2002-03-27  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* syntax/Syntax: Replace ^Syntax$ with [Ss]yntax$ and add
