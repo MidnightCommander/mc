@@ -3150,14 +3150,6 @@ a panel egy fél képernyõnyit fog fel-le gördülni, ha a
 kurzor eléri a panel végét, vagy elejét, egyébként csak egy
 fájlt fog legördítani ilyenkor.
 .PP
-.I preserve_uidgid
-.IP
-Ha ez az opció be van állítva,
-(alapértelmezésben), és root-ként lépsz be,
-alapértelmezésben a fájlok UID-je és a GID-je nem változik
-meg. Néhány felhasználó jobban szereti nem beállítani ezt az
-opciót, mivel ez beállítható.
-.PP
 .I show_output_starts_shell
 .IP
 Ez a változó csak akkor mûködik,

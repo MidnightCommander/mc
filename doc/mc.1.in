@@ -3004,12 +3004,6 @@ If set (the default), panel will scroll by half the display when the
 cursor reaches the end or the beginning of the panel, otherwise it
 will just scroll a file at a time.
 .PP
-.I preserve_uidgid
-.IP
-If this option is set (the default), when logged in as root the
-default will be to preserve the UID and the GID of files.  Some users
-prefer to disable this option, so that's why it's configurable.
-.PP
 .I show_output_starts_shell
 .IP
 This variable only works if you are not using the subshell support.

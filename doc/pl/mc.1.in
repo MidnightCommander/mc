@@ -2671,12 +2671,6 @@ Je¶li ustawione (standardowo), panel bêdzie przewijany o po³owê za ka¿dym
 razem kiedy kursor dochodzi do dolnej lub górnej linii, w przeciwnym wypadku
 przewijanie bêdzie siê odbywaæ linia po linii.
 .PP
-.I preserve_uidgid
-.IP
-Je¶li ta opcja jest w³±czona (standardowo), kiedy logujesz siê do systemu
-jako root, bêdzie zachowywany oryginalny UID i GID przy przenoszeniu plików.
-Niektórzy preferuj± wy³±czenie tej opcji i dlatego jest to konfigurowalne.
-.PP
 .I show_output_starts_shell
 .IP
 Ta opcja pracuje je¶li nie u¿ywasz obs³ugi pow³oki w tle. Kiedy

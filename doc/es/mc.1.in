@@ -2968,12 +2968,6 @@ cambiar la selección cuando la línea de comandos no esté vacía.
 Si existe (por defecto), el panel se desplazará media pantalla cuando el cursor
 alcance el final o el principio del panel, en otro caso se desplazará un fichero cada vez.
 .PP
-.I preserve_uidgid
-.IP
-Si esta opción esta activa (por defecto), cuando entremos como superusuario
-la norma será conservar los UID y GID de los ficheros. Algunos usuarios
-prefieren deshabilitar esta opción, por eso puede configurarse.
-.PP
 .I show_output_starts_shell
 .IP
 Esta variable sólo funciona si no se utiliza el soporte de subshell.

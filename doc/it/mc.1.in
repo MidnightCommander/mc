@@ -3101,13 +3101,6 @@ Se impostata (valore predefinito), i pannelli scorrono di metà
 quando il cursore raggiunge la fine o l'inizio del pannello, 
 altrimenti scorrono di un file per volta.
 .PP
-.I preserve_uidgid
-.IP
-Se quest'opzione è impostata (valore predefinito), quando si è
-collegati come root verranno presevati gli attributi UID e GID dei
-file. Alcuni utenti preferiscono disabilitare questa opzione,
-ecco perché è configurabile.
-.PP
 .I show_output_starts_shell
 .IP
 Questa variabile lavora solo se non si sta usando il supporto della 
