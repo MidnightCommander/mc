@@ -868,7 +868,7 @@ char *get_current_wd (char *buffer, int size)
 	return NULL;
     }
 
-    strncpy (buffer, p, len);
+    memcpy (buffer, p, len);
     g_free (p);
 
     return buffer;
