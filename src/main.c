@@ -1863,11 +1863,16 @@ int
 midnight_callback (struct Dlg_head *h, int id, int msg)
 {
     int i;
+    static int first_pre_event = 1;
     
     switch (msg){
-	/* Speed up routine: now, we just set the  */
+
     case DLG_PRE_EVENT:
 	make_panels_dirty ();
+	if (auto_menu && first_pre_event) {
+	    user_file_menu_cmd ();
+	}
+	first_pre_event = 0;
 	return MSG_HANDLED;
 	
     case DLG_KEY:

@@ -1,5 +1,7 @@
 2001-11-29  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (midnight_callback): Implement "auto menus".
+
 	* layout.c: Make more variables static.
 
 	* cons.saver.c: Define LINUX_CONS_SAVER_C so that some parts
