@@ -90,6 +90,9 @@ Use KDGKBENT ioctl on Linux console to find the mapping for shifted
 functional keys.  Two mappings are widely used (Shift-F1 = F11 and
 Shift-F1 = F13).  mc should adjust the keys to the mapping.
 
+Alt-O should optionally show the current directory and move cursor down
+(as in older versions).  Old functionality on files (go to "..") is not
+needed.
 
 
 After 4.6.1 on 4.6.x branch
@@ -115,7 +118,7 @@ Add print dialog in the internal editor.
 
 Implement logging, not just for VFS.
 
-"Find file" should remember full stating path, not "." in the history.
+"Find file" should remember full starting path, not "." in the history.
 
 chdir to '~' doesn't work.
 
