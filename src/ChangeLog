@@ -1,3 +1,9 @@
+2003-03-05  Max Khon  <fjoe@iclub.nsu.ru>
+
+	* cons.handler.c (console_init) [__FreeBSD__]: Fix the amount of
+	allocated memory.
+	(console_save) [__FreeBSD__]: Doen't exit on error, just return.
+
 2003-03-05  Pavel Roskin  <proski@gnu.org>
 
 	* cons.handler.c (show_console_contents_freebsd): Rewrite

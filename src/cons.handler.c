@@ -403,7 +403,7 @@ console_init (void)
     screen_shot.xsize = screen_info.mv_csz;
     screen_shot.ysize = screen_info.mv_rsz;
     if ((screen_shot.buf =
-	 g_malloc (screen_info.mv_csz * screen_info.mv_rsz)) == NULL)
+	 g_malloc (screen_info.mv_csz * screen_info.mv_rsz * 2)) == NULL)
 	return;
 
     console_flag = 1;
@@ -499,7 +499,7 @@ console_save (void)
 
     if (ioctl (FD_OUT, GIO_SCRNMAP, &map) == -1) {
 	console_shutdown ();
-	exit (1);
+	return;
     }
 
     for (i = 0; i < 256; i++) {
