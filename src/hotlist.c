@@ -254,11 +254,12 @@ unlink_entry (struct hotlist *entry)
 
     if (current == entry)
 	current_group->head = entry->next;
-    else
+    else {
 	while (current && current->next != entry)
 	    current = current->next;
 	if (current)
 	    current->next = entry->next;
+    }
     entry->next =
 	entry->up = 0;
 }
@@ -717,11 +718,10 @@ static void hotlist_done (void)
     repaint_screen ();
 }
 
-static char *
+static inline char *
 find_group_section (struct hotlist *grp)
 {
-    return  g_strconcat (grp->directory, ".Group", (char *) NULL);
-
+    return g_strconcat (grp->directory, ".Group", (char *) NULL);
 }
 
 
@@ -729,6 +729,11 @@ find_group_section (struct hotlist *grp)
    see widget.c, listbox_add_item()
                 now hotlist is in unsorted mode
  */
+enum {
+    HL_BEFORE_CURRENT = 1
+   ,HL_AFTER_CURRENT  = 2
+};
+
 static struct hotlist *
 add2hotlist (char *label, char *directory, enum HotListType type, int pos)
 {
@@ -754,15 +759,15 @@ add2hotlist (char *label, char *directory, enum HotListType type, int pos)
 
     if (!current_group->head) { /* first element in group */
 	current_group->head = new;
-    } else if (pos == 2) { /* should be appended after current*/
+    } else if (pos == HL_AFTER_CURRENT) {
 	new->next     = current->next;
 	current->next = new;
-    } else if (pos == 1 &&
+    } else if (pos == HL_BEFORE_CURRENT &&
 	       current == current_group->head) {
 			   /* should be inserted before first item */
 	new->next = current;
 	current_group->head = new;
-    } else if (pos == 1) { /* before current */
+    } else if (pos == HL_BEFORE_CURRENT) {
 	struct hotlist  *p = current_group->head;
 
 	while (p->next != current)
@@ -850,7 +855,6 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
     size_t len;
     int i;
     int lines1, lines2;
-    char *my_str1, *my_str2;
     
 #ifdef ENABLE_NLS
 	static int i18n_flag = 0;
@@ -888,13 +892,11 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
     quick_widgets [3].relative_y = RELATIVE_Y_INPUT_PTH + (lines1);
     quick_widgets [4].relative_y = RELATIVE_Y_LABEL_PTH + (lines1);
 
-    quick_widgets [5].str_result = &my_str1;
-    quick_widgets [3].str_result = &my_str2;
+    quick_widgets [5].str_result = r1;
+    quick_widgets [3].str_result = r2;
     
     Quick_input.widgets = quick_widgets;
     if ((i = quick_dialog (&Quick_input)) != B_CANCEL){
-	 *r1 = my_str1;
-	 *r2 = my_str2;
 	 return i;
     } else
 	 return 0;
@@ -902,34 +904,34 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
 
 static void add_new_entry_cmd (void)
 {
-    char *title, *url;
+    char *title, *url, *to_free;
     int ret;
 
     /* Take current directory as default value for input fields */
-    url = strip_password (g_strdup(current_panel->cwd), 1);
-    title = g_strdup (url);
+    to_free = title = url = strip_password (g_strdup (current_panel->cwd), 1);
 
     ret = add_new_entry_input (_("New hotlist entry"), _("Directory label"),
 			       _("Directory path"), "[Hotlist]", &title, &url);
+    g_free (to_free);
 
-    if (!ret || !title || !*title || !url || !*url) {
+    if (!ret)
+	return;
+    if (!title || !*title || !url || !*url) {
 	g_free (title);
 	g_free (url);
 	return;
     }
 
     if (ret == B_ENTER || ret == B_APPEND)
-	add2hotlist (title, url, HL_TYPE_ENTRY, 2);
+	add2hotlist (title, url, HL_TYPE_ENTRY, HL_AFTER_CURRENT);
     else
-	add2hotlist (title, url, HL_TYPE_ENTRY, 1);
+	add2hotlist (title, url, HL_TYPE_ENTRY, HL_BEFORE_CURRENT);
 
     hotlist_state.modified = 1;
-
-    g_free (title);
-    g_free (url);
 }
 
-static int add_new_group_input (const char *header, const char *label, char **result)
+static int
+add_new_group_input (const char *header, const char *label, char **result)
 {
     int		ret;
     QuickDialog Quick_input;
@@ -948,7 +950,6 @@ static int add_new_group_input (const char *header, const char *label, char **re
     int len;
     int i;
     int lines;
-    char *my_str;
 
 #ifdef ENABLE_NLS
 	static int i18n_flag = 0;
@@ -979,12 +980,11 @@ static int add_new_group_input (const char *header, const char *label, char **re
     for (i = 0; i < 4; i++)
 	quick_widgets [i].relative_y = relative_y[i] + 2 + lines;
 
-    quick_widgets [3].str_result = &my_str;
+    quick_widgets [3].str_result = result;
     quick_widgets [3].text       = "";
     
     Quick_input.widgets = quick_widgets;
     if ((ret = quick_dialog (&Quick_input)) != B_CANCEL){
-	*result = my_str;
 	return ret;
     } else
 	return 0;
@@ -1000,9 +1000,9 @@ static void add_new_group_cmd (void)
 	return;
 
     if (ret == B_ENTER || ret == B_APPEND)
-	add2hotlist (label, 0, HL_TYPE_GROUP, 2);
+	add2hotlist (label, 0, HL_TYPE_GROUP, HL_AFTER_CURRENT);
     else
-	add2hotlist (label, 0, HL_TYPE_GROUP, 1);
+	add2hotlist (label, 0, HL_TYPE_GROUP, HL_BEFORE_CURRENT);
 
     hotlist_state.modified = 1;
 }
@@ -1012,19 +1012,20 @@ void add2hotlist_cmd (void)
     char *prompt, *label;
     const char *cp = _("Label for \"%s\":");
     int l = strlen (cp);
-    static char label_string[MC_MAXPATHLEN+1];
+    char *label_string = g_strdup (current_panel->cwd);
 
-    g_strlcpy(label_string, current_panel->cwd, MC_MAXPATHLEN+1);
     strip_password (label_string, 1);
 
     prompt = g_strdup_printf (cp, path_trunc (current_panel->cwd, COLS-2*UX-(l+8)));
     label = input_dialog (_(" Add to hotlist "), prompt, label_string);
     g_free (prompt);
 
-    if (!label || !*label)
+    if (!label || !*label) {
+	g_free (label_string);
+	g_free (label);
 	return;
-
-    add2hotlist (label, g_strdup (label_string), HL_TYPE_ENTRY, 0);
+    }
+    add2hotlist (label, label_string, HL_TYPE_ENTRY, 0);
     hotlist_state.modified = 1;
 }
 
@@ -1497,9 +1498,7 @@ do { \
 	    INDENT (list_level);
 	    fputs ("GROUP \"", hotlist_file);
 	    for (s = current->label; *s; s++) {
-		if (*s == '"')
-		    putc ('\\', hotlist_file);
-		else if (*s == '\\')
+		if (*s == '"' || *s == '\\')
 		    putc ('\\', hotlist_file);
 		putc (*s, hotlist_file);
 	    }
@@ -1514,17 +1513,13 @@ do { \
 	    INDENT(list_level);
 	    fputs ("ENTRY \"", hotlist_file);
 	    for (s = current->label; *s; s++) {
-		if (*s == '"')
-		    putc ('\\', hotlist_file);
-		else if (*s == '\\')
+		if (*s == '"' || *s == '\\')
 		    putc ('\\', hotlist_file);
 		putc (*s, hotlist_file);
 	    }
 	    fputs ("\" URL \"", hotlist_file);
 	    for (s = current->directory; *s; s++) {
-		if (*s == '"')
-		    putc ('\\', hotlist_file);
-		else if (*s == '\\')
+		if (*s == '"' || *s == '\\')
 		    putc ('\\', hotlist_file);
 		putc (*s, hotlist_file);
 	    }

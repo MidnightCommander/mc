@@ -1,3 +1,9 @@
+2004-11-10  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* hotlist.c (unlink_entry): Add missed brackets.
+	(add_new_entry_cmd): Fix memory leaks and double free()s.
+	(add2hotlist_cmd): Eliminate static label_string.
+
 2004-11-09  Pavel Shirshov  <me@pavelsh.pp.ru>
 
 	* util.c (strip_password): Fix bug - don't delete path from url.
