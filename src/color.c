@@ -305,11 +305,11 @@ alloc_color_pair (CTYPE foreground, CTYPE background)
     return max_index;
 }
 
-struct colors_avail {
+static struct colors_avail {
     struct colors_avail *next;
     char *fg, *bg;
     int index;
-};
+} c = { 0, 0, 0, 0 };
 
 #ifdef HAVE_SLANG
 void
@@ -328,7 +328,6 @@ mc_init_pair (int index, CTYPE foreground, CTYPE background)
 int
 try_alloc_color_pair (char *fg, char *bg)
 {
-    static struct colors_avail c = { 0, 0, 0, 0 };
     struct colors_avail *p = &c;
 
     c.index = EDITOR_NORMAL_COLOR_INDEX;
@@ -366,7 +365,6 @@ mc_init_pair (int index, CTYPE foreground, CTYPE background)
 int
 try_alloc_color_pair (char *fg, char *bg)
 {
-    static struct colors_avail c = { 0, 0, 0, 0 };
     int fg_index, bg_index;
     int bold_attr;
     struct colors_avail *p = &c;
@@ -405,4 +403,22 @@ try_alloc_color_pair (char *fg, char *bg)
     return p->index;
 }
 #endif /* !HAVE_SLANG */
+
+#ifdef	HAVE_MAD
+void
+dealloc_color_pairs (void)
+{
+    struct colors_avail *p, *next;
+
+    for (p = c.next; p; p = next) {
+	next = p->next;
+	if (p->fg)
+	    g_free (p->fg);
+	if (p->bg)
+	    g_free (p->bg);
+	g_free (p);
+    }
+    c.next = NULL;
+}
+#endif /* HAVE_MAD */
 

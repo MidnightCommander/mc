@@ -85,9 +85,6 @@ extern int SLsys_input_pending (int);
 
 /* Forward declarations */
 static void load_terminfo_keys (void);
-#ifdef	HAVE_MAD
-static void dealloc_color_pairs (void);
-#endif
 
 static unsigned int SLang_getkey2 (void)
 {
@@ -366,24 +363,6 @@ vline (int character, int len)
 	move (last_x, last_y);
     }
 }
-
-#ifdef	HAVE_MAD
-static void
-dealloc_color_pairs (void)
-{
-    struct colors_avail *p = c.next, *next;
-    while (p) {
-	next = p->next;
-	if (p->fg)
-	    g_free (p->fg);
-	if (p->bg)
-	    g_free (p->bg);
-	g_free (p);
-	p = next;
-    }
-    c.next = NULL;
-}
-#endif /* HAVE_MAD */
 
 int has_colors (void)
 {
