@@ -1,5 +1,11 @@
 2004-10-23  Roland Illig  <roland.illig@gmx.de>
 
+	* complete.c (environ): Don't declare environ on Cygwin.
+
+	From Pavel Tsekov <ptsekov gmx net>.
+
+2004-10-23  Roland Illig  <roland.illig@gmx.de>
+
 	* regex.c (regerror): Never use the __memcpy function, as it
 	breaks the build on Cygwin.
 

@@ -218,7 +218,7 @@ username_completion_function (char *text, int state)
 }
 
 /* Linux declares environ in <unistd.h>, so don't repeat it here. */
-#if (!(defined(__linux__) && defined (__USE_GNU)))
+#if (!(defined(__linux__) && defined (__USE_GNU)) && !defined(__CYGWIN__))
 extern char **environ;
 #endif
 
