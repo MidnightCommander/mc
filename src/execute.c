@@ -356,5 +356,6 @@ execute_with_vfs_arg (const char *command, const char *filename)
     do_execute (command, localcopy, EXECUTE_INTERNAL);
     mc_stat (localcopy, &st);
     mc_ungetlocalcopy (fn, localcopy, mtime != st.st_mtime);
+    g_free (localcopy);
     g_free (fn);
 }

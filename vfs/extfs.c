@@ -204,7 +204,7 @@ static void extfs_free_archive (struct archive *archive)
         mc_stat (archive->local_name, &my);
         mc_ungetlocalcopy (archive->name, archive->local_name, 
             archive->local_stat.st_mtime != my.st_mtime);
-        /* mc_ungetlocalcopy() frees local_name for us */
+        g_free(archive->local_name);
     }
     if (archive->name)
 	g_free (archive->name);
@@ -248,8 +248,10 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
     g_free (cmd);
     if (result == NULL) {
 	close_error_pipe (1, NULL);
-	if (local_name)
+	if (local_name) {
 	    mc_ungetlocalcopy (name, local_name, 0);
+	    g_free(local_name);
+	}
 	return NULL;
     }
 

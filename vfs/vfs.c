@@ -887,7 +887,7 @@ mc_def_ungetlocalcopy (struct vfs_class *vfs, const char *filename,
 }
 
 int
-mc_ungetlocalcopy (const char *pathname, char *local, int has_changed)
+mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed)
 {
     int return_value = 0;
     char *path = vfs_canon (pathname);
@@ -897,7 +897,6 @@ mc_ungetlocalcopy (const char *pathname, char *local, int has_changed)
             (*vfs->ungetlocalcopy)(vfs, path, local, has_changed) :
             mc_def_ungetlocalcopy (vfs, path, local, has_changed);
     g_free (path);
-    g_free (local);
     return return_value;
 }
 

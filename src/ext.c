@@ -123,6 +123,7 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 		    unlink (file_name);
 		    if (localcopy) {
 			mc_ungetlocalcopy (filename, localcopy, 0);
+			g_free (localcopy);
 		    }
 		    g_free (file_name);
 		    return;
@@ -282,6 +283,7 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 	mc_stat (localcopy, &mystat);
 	mc_ungetlocalcopy (filename, localcopy,
 			   localmtime != mystat.st_mtime);
+	g_free (localcopy);
     }
 }
 
@@ -355,6 +357,7 @@ regex_check_type (char *filename, char *ptr, int *have_type)
 	    get_file_type_local (localfile, content_string,
 				 sizeof (content_string));
 	mc_ungetlocalcopy (filename, localfile, 0);
+	g_free (localfile);
 
 	if (got_data > 0) {
 	    char *pp;
