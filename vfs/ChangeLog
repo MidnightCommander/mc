@@ -1,3 +1,9 @@
+2002-12-10  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/a: Enable Perl warnings.  Ignore entries without a date.
+	Warning fixes.  Don't redirect stderr to /dev/null - it doesn't
+	mess the screen now.
+
 2002-12-09  Adam Byrtek  <alpha@debian.org>
 
 	* extfs/patchfs: Rewritten in Perl.  File size is now displayed

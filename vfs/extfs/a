@@ -1,4 +1,4 @@
-#! /usr/bin/perl
+#! /usr/bin/perl -w
 #
 # External filesystem for mc, using mtools
 # Written Ludek Brukner <lubr@barco.cz>, 1997
@@ -29,29 +29,29 @@ SWITCH: for ( $ARGV[0] ) {
   /mkdir/ && do {
     shift; shift;
     exit 1 if scalar(@ARGV) != 1;
-    system("$mmd $disk:/$ARGV[0] >/dev/null 2>&1");
+    system("$mmd $disk:/$ARGV[0] >/dev/null");
     exit 0; };
   /rmdir/ && do {
     shift; shift;
     exit 1 if scalar(@ARGV) != 1;
-    system("$mrd $disk:/$ARGV[0] >/dev/null 2>&1");
+    system("$mrd $disk:/$ARGV[0] >/dev/null");
     exit 0; };
   /rm/ && do {
     shift; shift;
     exit 1 if scalar(@ARGV) != 1;
-    system("$mdel $disk:/$ARGV[0] >/dev/null 2>&1");
+    system("$mdel $disk:/$ARGV[0] >/dev/null");
     exit 0; };
   /copyout/ && do {
     shift; shift;
     exit 1 if scalar(@ARGV) != 2;
     ( $src, $dest ) = @ARGV;
-    system("$mcopy $disk:/$src $dest >/dev/null 2>&1");
+    system("$mcopy $disk:/$src $dest >/dev/null");
     exit 0; };
   /copyin/ && do {
     shift; shift;
     exit 1 if scalar(@ARGV) != 2;
     ( $dest, $src ) = @ARGV;
-    system("$mcopy $src $disk:/$dest >/dev/null 2>&1");
+    system("$mcopy $src $disk:/$dest >/dev/null");
     exit 0; };
   /.*/ && do {                               # an unfamiliar command
     exit 1; };
@@ -80,8 +80,13 @@ sub get_dirs {
 
     ($size,$date,$time,$longname) = split(/[ \t]+/, $_, 4);
 
+    defined $time || next;
+
+    # process "am" and "pm".  Should not be needed if
+    # MTOOLS_TWENTY_FOUR_HOUR_CLOCK is respected.
     @lst = split(/([:ap])/, $time);
-    $lst[0] += 12 if ($lst[3] eq "p");
+    $lst[0] += 12 if (defined $lst[3] && $lst[3] eq "p");
+
     $time = sprintf("%02d:%02d", $lst[0], $lst[2]);
     @lst = split(/-/, $date);
     $lst[2] %= 100 if ($lst[2] > 100);
