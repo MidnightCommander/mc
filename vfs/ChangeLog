@@ -1,5 +1,7 @@
 2002-11-11  Pavel Roskin  <proski@gnu.org>
 
+	* vfs.h [USE_VFS] (mc_setctl): Specify argument types.
+
 	* cpio.c (cpiofs_data): Warning fix in initization.
 	* tar.c (tarfs_data): Likewise.
 
