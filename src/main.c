@@ -266,9 +266,6 @@ static int print_last_revert = 0;
 static char *batch_file_name = 0;
 #endif
 
-/* widget colors for the midnight commander */
-int midnight_colors [4];
-
 /* Force colors, only used by Slang */
 int force_colors = 0;
 
@@ -1603,11 +1600,6 @@ static void setup_mc (void)
 	verbose = 0;
     }
     init_mouse ();
-
-    midnight_colors [0] = 0;
-    midnight_colors [1] = REVERSE_COLOR;     /* FOCUSC */
-    midnight_colors [2] = INPUT_COLOR;       /* HOT_NORMALC */
-    midnight_colors [3] = NORMAL_COLOR;	     /* HOT_FOCUSC */
 }
 
 static void setup_dummy_mc (const char *file)
@@ -1916,9 +1908,17 @@ mc_maybe_editor_or_viewer (void)
     return 1;
 }
 
+/* Run the main dialog that occupies the whole screen */
 static void
 do_nc (void)
 {
+    int midnight_colors [4];
+
+    midnight_colors [0] = NORMAL_COLOR;      /* NORMALC */
+    midnight_colors [1] = REVERSE_COLOR;     /* FOCUSC */
+    midnight_colors [2] = INPUT_COLOR;       /* HOT_NORMALC */
+    midnight_colors [3] = NORMAL_COLOR;	     /* HOT_FOCUSC */
+
     midnight_dlg = create_dlg (0, 0, LINES, COLS, midnight_colors,
 			       midnight_callback, "[main]", "midnight",
 			       DLG_HAS_MENUBAR);

@@ -51,7 +51,8 @@
 
 extern int command_prompt;
 
-#define TREE_NORMALC HOT_FOCUSC
+/* Use the color of the parent widget for the unselected entries */
+#define TREE_NORMALC NORMALC
 
 /* Specifies the display mode: 1d or 2d */
 int tree_navigation_flag;

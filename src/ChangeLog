@@ -1,5 +1,10 @@
 2002-08-31  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (do_nc): Make midnight_colors[] local to do_nc().
+	Initialize normal color - it's used by the tree.
+	* boxes.c (tree_box): Use standard dialog_colors.
+	* tree.c: Use NORMALC for normal entries.
+
 	* view.c (view): Avoid passing an uninitialized color array to
 	create_dlg() - pass NULL instead.
 

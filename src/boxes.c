@@ -659,8 +659,6 @@ void display_bits_box()
 #define TREE_Y 20
 #define TREE_X 60
 
-static int tree_colors [4];
-
 static int
 tree_callback (struct Dlg_head *h, int id, int msg)
 {
@@ -690,11 +688,8 @@ tree_box (char *current_dir)
     char     *val;
     WButtonBar *bar;
 
-    tree_colors [3] = dialog_colors [0];
-    tree_colors [1] = dialog_colors [1];
-    
     /* Create the components */
-    dlg = create_dlg (0, 0, TREE_Y, TREE_X, tree_colors,
+    dlg = create_dlg (0, 0, TREE_Y, TREE_X, dialog_colors,
 		      tree_callback, "[Directory Tree]", "tree", DLG_CENTER);
     mytree = tree_new (0, 2, 2, TREE_Y - 6, TREE_X - 5);
     add_widget (dlg, mytree);
