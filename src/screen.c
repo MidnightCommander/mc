@@ -1081,7 +1081,10 @@ panel_reload (WPanel *panel)
     
     panel->count = do_reload_dir (&panel->dir, panel->sort_type, panel->count,
 				  panel->reverse, panel->case_sensitive, panel->filter);
-    panel->selected = 0;
+
+    if (panel->selected >= panel->count)
+        do_select (panel, panel->count-1);
+
     panel->marked = 0;
     panel->dirs_marked = 0;
     panel->total  = 0;

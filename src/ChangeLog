@@ -1,3 +1,9 @@
+Sun Dec 13 18:35:05 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* screen.c (panel_reload): Don't set panel->selected to zero here,
+	keep it's value if possible or set it to panel->count - 1 (I disliked
+	the jumping cursor when deleting files).
+
 1998-12-11  Michael Fulbright  <msf@majestic.labs.redhat.com>
 
 	* file.c (panel_operate_generate_prompt): Changes the text
