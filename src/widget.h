@@ -158,7 +158,7 @@ WListbox *listbox_new (int x, int y, int width, int height, int action,
 void winput_set_origin (WInput *i, int x, int field_len);
 int handle_char (WInput *in, int c_code);
 int is_in_input_map (WInput *in, int c_code);
-void update_input (WInput *in);
+void update_input (WInput *in, int clear_first);
 void new_input (WInput *in);
 int push_history (WInput *in, char *text);
 void stuff (WInput *in, char *text, int insert_extra_space);

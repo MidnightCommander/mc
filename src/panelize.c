@@ -121,7 +121,7 @@ static INLINE void update_command ()
         assign_text (pname, 
             ((struct panelize *) l_panelize->current->data)->command);
 	pname->point = 0;
-        update_input (pname);
+        update_input (pname, 1);
     }
 }
 

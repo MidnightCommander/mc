@@ -274,25 +274,36 @@ int add_widgetl (Dlg_head *where, void *what, WLay layout)
 
     widget->x += where->x;
     widget->y += where->y;
-    
-    back = where->current;
-    where->current = (Widget_Item *) malloc (sizeof (Widget_Item));
-    if (back){
-	back->prev = where->current;
-	where->current->next = back;
+
+    if (where->running){
+	    Widget_Item *point = where->current;
+
+	    where->current = (Widget_Item *) malloc (sizeof (Widget_Item));
+	    
+	    where->current->next = point->next;
+	    where->current->prev = point;
+	    point->next->prev = where->current;
+	    point->next = where->current;
     } else {
-	where->current->next = where->current;
-	where->first = where->current;
+	    back = where->current;
+	    where->current = (Widget_Item *) malloc (sizeof (Widget_Item));
+	    if (back){
+		    back->prev = where->current;
+		    where->current->next = back;
+	    } else {
+		    where->current->next = where->current;
+		    where->first = where->current;
+	    }
+	    
+	    where->current->prev = where->first;
+	    where->last = where->current;
+	    where->first->next = where->last;
+	    
     }
-
     where->current->dlg_id = where->count;
-    where->current->prev = where->first;
-    where->last = where->current;
-    where->first->next = where->last;
-
     where->current->widget = what;
     where->current->widget->parent = where;
-
+    
     where->count++;
 
     /* If the widget is inserted in a running dialog */

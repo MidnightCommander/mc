@@ -121,6 +121,10 @@ typedef struct {
     void *filter_w;		/* A WInput* */
     void *current_dir;		/* A WInput* */
     int estimated_total;
+
+    /* navigation buttons */
+    void *back_b;
+    void *fwd_b;
 #endif
 } WPanel;
 
@@ -227,6 +231,7 @@ void do_file_mark (WPanel *panel, int index, int val);
 int  file_compute_color (int attr, file_entry *fe);
 int  file_entry_color (file_entry *fe);
 void do_file_mark_range (WPanel *panel, int r1, int r2);
+int do_enter (WPanel *panel);
 
 /* NOTE: Have to be ifdefed for HAVE_X */
 void x_panel_select_item (WPanel *panel, int index, int val);
@@ -235,5 +240,9 @@ void x_unselect_item (WPanel *panel);
 sortfn *get_sort_fn (char *name);
 int panel_callback (Dlg_head *h, WPanel *panel, int msg, int par);
 void update_one_panel_widget (WPanel *panel, int force_update, char *current_file);
+
+void directory_history_next (WPanel * panel);
+void directory_history_prev (WPanel * panel);
+void directory_history_list (WPanel * panel);
 
 #endif	/* __PANEL_H */

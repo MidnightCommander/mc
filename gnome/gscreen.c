@@ -73,7 +73,7 @@ void
 show_dir (WPanel *panel)
 {
 	assign_text (panel->current_dir, panel->cwd);
-	update_input (panel->current_dir);
+	update_input (panel->current_dir, 1);
 }
 
 static void
@@ -98,6 +98,13 @@ panel_file_list_set_row_colors (GtkCList *cl, int row, int color_pair)
 {
 	gtk_clist_set_foreground (cl, row, gmc_color_pairs [color_pair].fore);
 	gtk_clist_set_background (cl, row, gmc_color_pairs [color_pair].back);
+}
+
+void
+panel_update_marks (WPanel *panel)
+{
+	gtk_widget_set_sensitive (panel->fwd_b, panel->dir_history->next ? 1 : 0);
+	gtk_widget_set_sensitive (panel->back_b, panel->dir_history->prev ? 1 : 0);
 }
 
 void
@@ -148,6 +155,7 @@ x_fill_panel (WPanel *panel)
 	select_item (panel);
 	gtk_clist_thaw (GTK_CLIST (cl));
 	free (texts);
+	panel_update_marks (panel);
 }
 
 static void
@@ -208,7 +216,7 @@ void
 x_filter_changed (WPanel *panel)
 {
 	assign_text (panel->filter_w, panel->filter ? panel->filter : "");
-	update_input (panel->filter_w);
+	update_input (panel->filter_w, 1);
 }
 
 void
@@ -297,20 +305,24 @@ panel_file_list_configure_contents (GtkWidget *file_list, WPanel *panel, int mai
 }
 
 static void
-panel_action_open (GtkWidget *widget, WPanel *panel)
-{
-	do_enter (panel);
-}
-
-static void
 panel_action_open_with (GtkWidget *widget, WPanel *panel)
 {
 	char *command;
 	
 	command = input_expand_dialog (_(" Open with..."),
 				       _("Enter extra arguments:"), panel->dir.list [panel->selected].fname);
+	if (!command)
+		return;
 	execute (command);
 	free (command);
+}
+
+static void
+panel_action_open (GtkWidget *widget, WPanel *panel)
+{
+	if (do_enter (panel))
+		return;
+	panel_action_open_with (widget, panel);
 }
 
 void
@@ -1205,11 +1217,26 @@ panel_create_filter (Dlg_head *h, WPanel *panel, void **filter_w)
 }
 
 void
+panel_back (GtkWidget *button, WPanel *panel)
+{
+	directory_history_prev (panel);
+}
+
+void
+panel_fwd (GtkWidget *button, WPanel *panel)
+{
+	directory_history_next (panel);
+}
+
+void
 x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
 	GtkWidget *status_line, *filter, *vbox;
-	GtkWidget *frame, *cwd;
+	GtkWidget *frame, *cwd, *back, *home, *fwd, *back_p, *fwd_p;
+	GtkWidget *very_top;
 
+	very_top = gtk_widget_get_toplevel (GTK_WIDGET (panel->widget.wdata));
+	
 	panel->table = gtk_table_new (2, 1, 0);
 	
 	panel->list  = panel_create_file_list (panel);
@@ -1220,13 +1247,27 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	/* We do not want the focus by default  (and the previos add_widget just gave it to us) */
 	h->current = h->current->prev;
 
+	/* buttons */
+	back_p = gnome_stock_pixmap_widget_new (very_top, GNOME_STOCK_MENU_BACK);
+	fwd_p  = gnome_stock_pixmap_widget_new (very_top, GNOME_STOCK_MENU_FORWARD);
+	panel->back_b   = gtk_button_new ();
+	panel->fwd_b    = gtk_button_new ();
+	gtk_container_add (GTK_CONTAINER (panel->back_b), back_p);
+	gtk_container_add (GTK_CONTAINER (panel->fwd_b), fwd_p);
+	gtk_signal_connect (GTK_OBJECT (panel->back_b), "clicked", GTK_SIGNAL_FUNC(panel_back), panel);
+	gtk_signal_connect (GTK_OBJECT (panel->fwd_b), "clicked", GTK_SIGNAL_FUNC(panel_fwd), panel);
+	panel_update_marks (panel);
+	
 	/* ministatus */
 	panel->ministatus = gtk_clip_label_new ("");
 	gtk_misc_set_alignment (GTK_MISC (panel->ministatus), 0.0, 0.0);
 	gtk_misc_set_padding (GTK_MISC (panel->ministatus), 3, 0);
+	
 	status_line = gtk_hbox_new (0, 0);
 	gtk_label_set_justify (GTK_LABEL (panel->ministatus), GTK_JUSTIFY_LEFT);
-	gtk_box_pack_start (GTK_BOX (status_line), cwd, 1, 1, 0);
+	gtk_box_pack_start (GTK_BOX (status_line), panel->back_b, 0, 0, 2);
+	gtk_box_pack_start (GTK_BOX (status_line), panel->fwd_b, 0, 0, 2);
+	gtk_box_pack_start (GTK_BOX (status_line), cwd, 1, 1, 5);
 	gtk_box_pack_end   (GTK_BOX (status_line), filter, 0, 0, 0);
 	
 	/* The statusbar */

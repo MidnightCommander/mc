@@ -878,7 +878,7 @@ void history_cmd (void)
 	return;
     input_w (cmdline)->history = current;
     assign_text (input_w (cmdline), input_w (cmdline)->history->text);
-    update_input (input_w (cmdline));
+    update_input (input_w (cmdline), 1);
 }
 
 #if !defined(HAVE_XVIEW) && !defined(HAVE_GNOME)

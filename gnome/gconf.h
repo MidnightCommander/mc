@@ -27,6 +27,8 @@
 #define PORT_HAS_RADIO_FOCUS_ITEM        1
 #define PORT_HAS_DIALOG_STOP             1
 #define PORT_HAS_DISPLAY_MINI_INFO       1
+#define PORT_WANTS_ARGP                  1
+#define PORT_WIDGET_WANTS_HISTORY        0
 
 #define mi_getch() fprintf (stderr, "mi_getch is not implemented in this port\n")
 #define frontend_run_dlg(x)        gtkrundlg_event (x)

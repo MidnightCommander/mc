@@ -847,7 +847,7 @@ static int insert_text (WInput *in, char *text, int len)
 	}
 	strncpy (in->buffer + start, text, len - start + end);
 	in->point += len;
-	update_input (in);
+	update_input (in, 1);
 	end += len;
     }
     return len != 0;

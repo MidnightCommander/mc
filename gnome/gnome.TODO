@@ -1,13 +1,11 @@
 All:
 
 - It leaks objects.
-- argp handling.
 - Session management
 
 Desktop:
 
 - Add special destkop entries ("Network neighborhood")
-- Double clicking on some objects on the desktop does not do anything.
 - Solid icons on the desktop are required
 
 Panels:
@@ -23,7 +21,6 @@ Panels:
 Viewer:
 
 - Toolbar
-- Scrollbar
 - Enable editor.
 - Fix colors.
 - Add cursor
@@ -112,12 +109,9 @@ Panel comments
    seem to do anything. I thought they might act as a history of the
    last few directories visited or something.
 
- - the 'Filter' pulldown is handy - this is all user configurable, right?
-
-
- - a toobar with a 'back' type button would be handy - I realize the '..'
-   folder does the same thing, but in a long file listing its nice to
-   just have a button to do it.
+DONE - a toobar with a 'back' type button would be handy - I realize the '..'
+DONE   folder does the same thing, but in a long file listing its nice to
+DONE   just have a button to do it.
 
 DONE - I got several 'sigpipes' when trying to view a ftpfs file, or
 DONE   when trying to view RPM tags via the rpmfs.
@@ -135,25 +129,12 @@ DONE   over? Sortof a interactive 'select group' option.
  
  - internal viewer - search should hilight the matching text
 
- - some files when I try to 'Open' them, it just does nothing. I'm
-   guessing no association existed - if so it should tell me and let
-   me create an association
+DONE - some files when I try to 'Open' them, it just does nothing. I'm
+DONE   guessing no association existed - if so it should tell me and let
+DONE   me create an association
 
 DONE - I couldnt view files inside of a RPM which I was browsing via the ftpfs
 DONE   is this just cause I'm nuts to try?
-
- - I couldnt get the drag from one panel to another to work reliably - 
-   I would drag and get a 'Copy Link Move' window, but I couldn't
-   select any of the 3 choices and the drag just failed. No errors, etc.
-
-   During the drag, when I left the first panel and hit the root window,
-   I got these errors:
-
-  ** WARNING **: file gtkwidget.c: line 1237 (gtk_widget_show): "widget != NULL"
-
-  ** WARNING **: file gtkwidget.c: line 1237 (gtk_widget_show): "widget != NULL"
-
-   When the drag entered the other window, I got a 'Setting current panel to...'
 
 DONE - it might be good to do a rescan after a panel accepts a drag event. Is
 DONE   that an option?
@@ -204,6 +185,6 @@ VFS Options
 Internal Viewer
 ---------------
 
- - no vertical scrollbar!
+DONE - no vertical scrollbar!
 
 

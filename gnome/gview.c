@@ -59,12 +59,22 @@ x_focus_view (WView *view)
 {
 }
 
+static void
+scrollbar_moved (GtkAdjustment *adj, WView *view)
+{
+	view->start_display = adj->value;
+
+	/* To force a display */
+	view->dirty = max_dirt_limit + 1;
+	view_update (view);
+}
+
 void
 view_percent (WView *view, int p)
 {
     int percent;
     char buffer [40];
-    
+
     percent = (view->s.st_size == 0 || view->last_byte == view->last) ? 100 :
         (p > (INT_MAX/100) ?
          p / (view->s.st_size / 100) :
@@ -73,6 +83,21 @@ view_percent (WView *view, int p)
     sprintf (buffer, "%3d%%", percent);
     gtk_label_set (GTK_LABEL (view->gtk_percent), buffer);
 
+    if (view->sadj){
+	    GtkAdjustment *adj = GTK_ADJUSTMENT (view->sadj);
+	    
+	    printf ("adj\n");
+	    if ((int) adj->upper != view->last_byte){
+		    adj->upper = view->last_byte;
+		    adj->step_increment = 1.0;
+		    adj->page_increment = 
+			    adj->page_size = view->last - view->start_display;
+		    gtk_signal_emit_by_name (GTK_OBJECT (adj), "changed");
+	    }
+	    if ((int) adj->value != view->start_display){
+		    gtk_adjustment_set_value (adj, view->start_display);
+	    }
+    }
 }
 
 void
@@ -290,11 +315,11 @@ int
 view (char *_command, char *_file, int *move_dir_p, int start_line)
 {
 	Dlg_head  *our_dlg;
-	GtkWidget *toplevel, *status, *scrollbar;
+	GtkWidget *toplevel, *status, *scrollbar, *hbox;
 	GtkVBox   *vbox;
-	WView *wview;
-	int   midnight_colors [4];
-	int   error;
+	WView     *wview;
+	int       midnight_colors [4];
+	int       error;
 	
 	/* Create dialog and widgets, put them on the dialog */
 	our_dlg = create_dlg (0, 0, 0, 0, midnight_colors,
@@ -336,7 +361,17 @@ view (char *_command, char *_file, int *move_dir_p, int start_line)
 	init_dlg (our_dlg);
 	
 	gtk_box_pack_start (GTK_BOX (vbox), status, 0, 1, 0);
-	gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET (wview->widget.wdata), 1, 1, 0);
+
+	wview->sadj = gtk_adjustment_new (0.0, 0.0, 1000000.0, 1.0, 25.0, 25.0);
+	scrollbar = gtk_vscrollbar_new (wview->sadj);
+	gtk_signal_connect (GTK_OBJECT (wview->sadj), "value_changed",
+			    GTK_SIGNAL_FUNC(scrollbar_moved), wview);
+	
+	hbox = gtk_hbox_new (0, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), hbox, 1, 1, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET (wview->widget.wdata), 1, 1, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET (scrollbar), 0, 1, 0);
+	
 	gtk_widget_show_all (toplevel);
 	
 	return 1;

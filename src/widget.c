@@ -803,7 +803,7 @@ static void draw_history_button (WInput * in)
 static char *kill_buffer = 0;
 
 void
-update_input (WInput *in)
+update_input (WInput *in, int clear_first)
 {
 #ifndef HAVE_XVIEW
     int has_history = 0;
@@ -828,7 +828,10 @@ update_input (WInput *in)
     /* Adjust the mark */
     if (in->mark > buf_len)
 	in->mark = buf_len;
+    
 #ifdef HAVE_X
+    if (clear_first && in->first)
+	    in->first = -1;
     x_update_input (in);
 #else
 
@@ -850,9 +853,11 @@ update_input (WInput *in)
 	addch (c);
     }
     widget_move (&in->widget, 0, in->point - in->first_shown);
+
+    if (clear_first)
+	    in->first = 0;
 #endif
-    
-    in->first = 0;
+
 #endif
 }
 
@@ -861,7 +866,7 @@ winput_set_origin (WInput *in, int x, int field_len)
 {
     in->widget.x    = x;
     in->field_len = in->widget.cols = field_len;
-    update_input (in);
+    update_input (in, 0);
 }
 
 /* {{{ history saving and loading */
@@ -1111,7 +1116,7 @@ void
 input_enable_update (WInput *in)
 {
     in->disable_update--;
-    update_input (in);
+    update_input (in, 0);
 }
 
 int
@@ -1151,7 +1156,7 @@ new_input (WInput *in)
     in->point = 0;
     in->mark = 0;
     free_completions (in);
-    update_input (in);
+    update_input (in, 0);
 }
 
 static int
@@ -1515,7 +1520,7 @@ handle_char (WInput *in, int c_code)
     if (quote){
     	free_completions (in);
 	v = insert_char (in, c_code);
-	update_input (in);
+	update_input (in, 1);
 	quote = 0;
 	return v;
     }
@@ -1541,7 +1546,7 @@ handle_char (WInput *in, int c_code)
 	in->inserted_one = c_code;
     }
     if (!disable_update)
-	update_input (in);
+	update_input (in, 1);
     return v;
 }
 
@@ -1555,7 +1560,7 @@ stuff (WInput *in, char *text, int insert_extra_space)
     if (insert_extra_space)
 	handle_char (in, ' ');
     input_enable_update (in);
-    update_input (in);
+    update_input (in, 1);
 }
 
 void
@@ -1566,7 +1571,7 @@ input_set_point (WInput *in, int pos)
     if (pos != in->point)
     	free_completions (in);
     in->point = pos;
-    update_input (in);
+    update_input (in, 1);
 }
 
 int input_event (Gpm_Event *event, WInput *b);
@@ -1574,8 +1579,6 @@ int input_event (Gpm_Event *event, WInput *b);
 static int
 input_callback (Dlg_head *h, WInput *in, int Msg, int Par)
 {
-    int    t;
-
     switch (Msg){
     case WIDGET_INIT:
 	return x_create_input (h, h->wdata, in);
@@ -1604,10 +1607,7 @@ input_callback (Dlg_head *h, WInput *in, int Msg, int Par)
     case WIDGET_FOCUS:
     case WIDGET_UNFOCUS:	
     case WIDGET_DRAW:
-	/* Very ugly hack */
-	t = in->first;
-	update_input (in);
-	in->first = t;
+	update_input (in, 0);
 	break;
 #endif /* !HAVE_XVIEW */
 #ifndef HAVE_X
@@ -1631,7 +1631,7 @@ input_event (Gpm_Event *event, WInput *in)
 
 	if (event->x >= in->field_len - HISTORY_BUTTON_WIDTH + 1 && should_show_history_button (in)) {
 	    do_show_hist (in);
-	    update_input (in);
+	    update_input (in, 1);
 	} else {
 	    in->point = strlen (in->buffer);
 	    if (event->x - in->first_shown - 1 < in->point)
@@ -1639,18 +1639,12 @@ input_event (Gpm_Event *event, WInput *in)
 	    if (in->point < 0)
 		in->point = 0;
 
-	    update_input (in);
+	    update_input (in, 1);
 	} 
     } 
 #endif
     return MOU_NORMAL; 
 } 
-
-#ifdef HAVE_GNOME
-#    define PORT_WIDGET_WANT_HISTORY 0
-#else
-#    define PORT_WIDGET_WANT_HISTORY 1
-#endif
 
 WInput *
 input_new (int y, int x, int color, int len, char *def_text, char *tkname)
@@ -1665,7 +1659,7 @@ input_new (int y, int x, int color, int len, char *def_text, char *tkname)
     /* history setup */
     in->history = NULL;
     in->history_name = 0;
-    if (tkname && PORT_WIDGET_WANT_HISTORY){
+    if (tkname && PORT_WIDGET_WANTS_HISTORY){
 	if (*tkname) {
 	    in->history_name = strdup (tkname);
 	    in->history = history_get (tkname);

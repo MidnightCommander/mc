@@ -339,6 +339,9 @@ int show_change_notice = 0;
 
 char cmd_buf [512];
 
+/* Used during argument processing */
+int finish_program = 0;
+
 /* Forward declarations */
 char *get_mc_lib_dir ();
 int panel_event    (Gpm_Event *event, WPanel *panel);
@@ -2453,52 +2456,7 @@ init_sigchld (void)
     extern int SLtt_Try_Termcap;
 #endif
 
-static struct poptOption argumentTable[] = {
-#ifdef WITH_BACKGROUND
-    { "background",	'B', POPT_ARG_NONE, 	&background_wait, 	 0 },
-#endif
-#if defined(HAVE_SLANG) && defined(OS2_NT)
-    { "createcmdfile",	'S', POPT_ARG_STRING, 	NULL, 			 'S' },
-#endif
-    { "color",          'c', POPT_ARG_NONE, 	NULL, 			 'c' },
-    { "colors", 	'C', POPT_ARG_STRING, 	&command_line_colors, 	 0 },
-#ifdef HAVE_SUBSHELL_SUPPORT
-    { "dbgsubshell", 	'X', POPT_ARG_NONE, 	&debug_subshell, 	 0 },
-#endif
-    { "edit", 		'e', POPT_ARG_STRING, 	&edit_one_file, 	 0 },
-
-    { "help", 		'h', POPT_ARG_NONE, 	NULL, 			 'h' },
-    { "help-colors",	'H', POPT_ARG_NONE, 	NULL, 			 'H' },
-#ifdef USE_NETCODE
-    { "ftplog", 	'l', POPT_ARG_STRING, 	NULL, 			 'l' },
-#endif
-    { "libdir", 	'f', POPT_ARG_NONE, 	NULL, 			 'f' },
-    { NULL, 		'm', POPT_ARG_NONE, 	NULL, 			 'm' },
-    { "nocolor", 	'b', POPT_ARG_NONE, 	&disable_colors, 0 },
-    { "nomouse", 	'd', POPT_ARG_NONE, 	NULL, 			 'd' },
-#ifdef HAVE_SUBSHELL_SUPPORT
-    { "nosubshell", 	'u', POPT_ARG_NONE, 	NULL, 			 'u' },
-    { "forceexec", 	'r', POPT_ARG_NONE, 	NULL, 			 'r' },
-#endif
-    { "printwd", 	'P', POPT_ARG_NONE, 	&print_last_wd, 	  0 },
-    { "resetsoft", 	'k', POPT_ARG_NONE, 	&reset_hp_softkeys, 	  0 },
-    { "slow", 's', POPT_ARG_NONE, 		&slow_terminal, 	  0 },
-#if defined(HAVE_SLANG) && !defined(OS2_NT)
-    { "stickchars",	'a', 0, 		&force_ugly_line_drawing, 0 },
-#endif
-#ifdef HAVE_SUBSHELL_SUPPORT
-    { "subshell", 	'U', POPT_ARG_NONE, 	NULL, 			  'U' },
-#endif
-#if defined(HAVE_SLANG) && !defined(OS2_NT)
-    { "termcap", 	't', 0, 		&SLtt_Try_Termcap, 	  0 },
-#endif
-    { "version", 	'V', 			POPT_ARG_NONE, NULL,      'V'},
-    { "view", 		'v', 			POPT_ARG_STRING, &view_one_file, 0 },
-    { "xterm", 		'x', 			POPT_ARG_NONE, &force_xterm, 0},
-
-    { NULL, 		0,			0, NULL, 0 }
-};
-
+#ifndef PORT_WANTS_ARGP
 static void
 print_usage (void)
 {
@@ -2548,6 +2506,7 @@ print_usage (void)
 #endif
     );
 }
+#endif /* PORT_WANTS_ARGP */
 
 static void
 print_color_usage (void)
@@ -2571,11 +2530,265 @@ print_color_usage (void)
 
 }
 
-static void handle_args (int argc, char *argv [])
+
+static void
+probably_finish_program (void)
+{
+    if (finish_program){
+	if (print_last_wd)
+	    printf (".");
+	exit (1);
+    }
+}
+
+static int
+process_args (int c, char *option_arg)
+{
+    switch (c) {
+    case 'V':
+	version (1);
+	finish_program = 1;
+	break;
+		
+    case 'c':
+	disable_colors = 0;
+#ifdef HAVE_SLANG
+	force_colors = 1;
+#endif
+	break;
+		
+    case 'f':
+	fprintf (stderr, _("Library directory for the Midnight Commander: %s\n"), mc_home);
+	finish_program = 1;
+	break;
+		
+    case 'm':
+	fprintf (stderr, _("Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"));
+	finish_program = 1;
+	break;
+		
+#ifdef USE_NETCODE
+    case 'l':
+	ftpfs_set_debug (option_arg);
+	break;
+#endif
+		
+#ifdef OS2_NT
+    case 'S':
+	print_last_wd = 2;
+	batch_file_name = option_arg;
+	break;
+#endif
+		
+    case 'd':
+	use_mouse_p = NO_MOUSE;
+	break;
+		
+    case 'X':
+#ifdef HAVE_SUBSHELL_SUPPORT
+	debug_subshell = 1;
+#endif
+	break;
+		
+    case 'U':
+#ifdef HAVE_SUBSHELL_SUPPORT
+	use_subshell = 1;
+#endif
+	break;
+		
+    case 'u':
+#ifdef HAVE_SUBSHELL_SUPPORT
+	use_subshell = 0;
+#endif
+	break;
+
+    case 'r':
+#ifdef HAVE_SUBSHELL_SUPPORT
+	force_subshell_execution = 1;
+#endif
+	break;
+	    
+    case 'H':
+	print_color_usage ();
+	finish_program = 1;
+	break;
+	    
+    case 'h':
+#ifndef PORT_WANTS_ARGP
+	print_usage ();
+	finish_program = 1;
+#endif
+	return 1;
+    }
+    return 0;
+}
+
+#ifdef PORT_WANTS_ARGP
+static struct argp_option argp_options [] = {
+#ifdef WITH_BACKGROUND
+    { "background",	'B', NULL, 0, N_("[DEVEL-ONLY: Debug the background code]"), 0 },
+#endif
+#if defined(HAVE_SLANG) && defined(OS2_NT)
+    { "createcmdfile",	'S', NULL, 0, N_("Create command file to set default directory upon exit."), 1 },
+#endif			     
+    { "color",          'c', NULL, 0, N_("Force color mode."), 0 },
+    { "colors", 	'C', NULL, 0, N_("Specify colors (use --help-colors to get a list)."), 1 },
+#ifdef HAVE_SUBSHELL_SUPPORT
+    { "dbgsubshell", 	'X', NULL, 0, N_("[DEVEL-ONLY: Debug the subshell."), 0 },
+#endif
+    { "edit", 		'e', NULL, 0, N_("Startup the internal editor."), 1 },
+    { "help", 		'h', NULL, 0, N_("Shows this help message."), 0 },
+    { "help-colors",	'H', NULL, 0, N_("Help on how to specify colors."), 0 },
+#ifdef USE_NETCODE
+    { "ftplog", 	'l', NULL, 0, N_("Log ftpfs commands to the file."), 1 },
+#endif
+    { "libdir", 	'f', NULL, 0, N_("Prints out the configured paths."), 0 },
+    { NULL, 		'm', NULL, OPTION_HIDDEN, NULL, 0 },
+    { "nocolor", 	'b', NULL, 0, N_("Force black and white display."), 0 },
+    { "nomouse", 	'd', NULL, 0, N_("Disable mouse support."), 0 },
+#ifdef HAVE_SUBSHELL_SUPPORT
+    { "subshell", 	'U', NULL, 0, N_("Force the concurrent subshell mode"), 0 },
+    { "nosubshell", 	'u', NULL, 0, N_("Disable the concurrent subshell mode."), 0 },
+    { "forceexec", 	'r', NULL, 0, N_("Force subshell execution."), 0 },
+#endif
+    { "printwd", 	'P', NULL, 0, N_("At exit, print the last working directory."), 0 },
+    { "resetsoft", 	'k', NULL, 0, N_("Reset softkeys (HP terminals only) to their terminfo/termcap default."), 0},
+    { "slow",           's', NULL, 0, N_("Disables verbose operation (for slow terminals)."), 0 },
+#if defined(HAVE_SLANG) && !defined(OS2_NT)
+    { "stickchars",	'a', NULL, 0, N_("Use simple symbols for line drawing."), 0 },
+#endif
+#ifdef HAVE_SUBSHELL_SUPPORT
+#endif
+#if defined(HAVE_SLANG) && !defined(OS2_NT)
+    { "termcap", 	't', NULL, 0, N_("Activate support for the TERMCAP variable."), 0 },
+#endif
+    { "version", 	'V', NULL, 0, N_("Report versionand configuration options."), 0 },
+    { "view", 		'v', NULL, 0, N_("Start up into the viewer mode."), 0 },
+    { "xterm", 		'x', NULL, 0, N_("Force xterm mouse support and screen save/restore"), 0 },
+
+    { NULL, 		0,   NULL, 0, NULL },
+};
+
+static error_t
+parse_an_arg (int key, char *arg, struct argp_state *state)
+{
+	switch (key){
+#ifdef WITH_BACKGROUND
+	case 'B':
+	    background_wait = 1;
+	    return 0;
+#endif
+	case 'b':
+	    disable_colors = 1;
+	    return 0;
+	    
+	case 'P':
+	    print_last_wd = 1;
+	    return 0;
+	    
+	case 'k':
+	    reset_hp_softkeys = 1;
+	    return 0;
+
+	case 's':
+	    slow_terminal = 1;
+	    return 0;
+
+	case 'a':
+	    force_ugly_line_drawing = 1;
+	    return 0;
+
+	case 'x':
+	    force_xterm = 1;
+	    return 0;
+	    
+#if defined(HAVE_SLANG) && !defined(OS2_NT)
+	case 't':
+	    SLtt_Try_Termcap = 1;
+	    return 0;
+#endif
+
+	case ARGP_KEY_ARG:
+	    break;
+
+	case ARGP_KEY_INIT:
+	case ARGP_KEY_FINI:
+	    return 0;
+	    
+	default:
+	    process_args (key, arg);
+	}
+
+	if (arg){
+	    if (edit_one_file)
+		edit_one_file = strdup (arg);
+	    else if (view_one_file)
+		view_one_file = strdup (arg);
+	    else if (this_dir)
+		other_dir = strdup (arg);
+	    else
+		this_dir = strdup (arg);
+	}
+	return 0;
+}
+
+static struct argp mc_argp_parser = {
+	argp_options, parse_an_arg, N_("[this dir] [other dir]"), NULL, NULL, NULL, NULL
+};
+
+#else 
+
+static struct poptOption argumentTable[] = {
+#ifdef WITH_BACKGROUND
+    { "background",	'B', POPT_ARG_NONE, 	&background_wait, 	 0 },
+#endif
+#if defined(HAVE_SLANG) && defined(OS2_NT)
+    { "createcmdfile",	'S', POPT_ARG_STRING, 	NULL, 			 'S' },
+#endif
+    { "color",          'c', POPT_ARG_NONE, 	NULL, 			 'c' },
+    { "colors", 	'C', POPT_ARG_STRING, 	&command_line_colors, 	 0 },
+#ifdef HAVE_SUBSHELL_SUPPORT
+    { "dbgsubshell", 	'X', POPT_ARG_NONE, 	&debug_subshell, 	 0 },
+#endif
+    { "edit", 		'e', POPT_ARG_STRING, 	&edit_one_file, 	 0 },
+
+    { "help", 		'h', POPT_ARG_NONE, 	NULL, 			 'h' },
+    { "help-colors",	'H', POPT_ARG_NONE, 	NULL, 			 'H' },
+#ifdef USE_NETCODE
+    { "ftplog", 	'l', POPT_ARG_STRING, 	NULL, 			 'l' },
+#endif
+    { "libdir", 	'f', POPT_ARG_NONE, 	NULL, 			 'f' },
+    { NULL, 		'm', POPT_ARG_NONE, 	NULL, 			 'm' },
+    { "nocolor", 	'b', POPT_ARG_NONE, 	&disable_colors, 0 },
+    { "nomouse", 	'd', POPT_ARG_NONE, 	NULL, 			 'd' },
+#ifdef HAVE_SUBSHELL_SUPPORT
+    { "nosubshell", 	'u', POPT_ARG_NONE, 	NULL, 			 'u' },
+    { "forceexec", 	'r', POPT_ARG_NONE, 	NULL, 			 'r' },
+#endif
+    { "printwd", 	'P', POPT_ARG_NONE, 	&print_last_wd, 	  0 },
+    { "resetsoft", 	'k', POPT_ARG_NONE, 	&reset_hp_softkeys, 	  0 },
+    { "slow", 's', POPT_ARG_NONE, 		&slow_terminal, 	  0 },
+#if defined(HAVE_SLANG) && !defined(OS2_NT)
+    { "stickchars",	'a', 0, 		&force_ugly_line_drawing, 0 },
+#endif
+#ifdef HAVE_SUBSHELL_SUPPORT
+    { "subshell", 	'U', POPT_ARG_NONE, 	NULL, 			  'U' },
+#endif
+#if defined(HAVE_SLANG) && !defined(OS2_NT)
+    { "termcap", 	't', 0, 		&SLtt_Try_Termcap, 	  0 },
+#endif
+    { "version", 	'V', 			POPT_ARG_NONE, NULL,      'V'},
+    { "view", 		'v', 			POPT_ARG_STRING, &view_one_file, 0 },
+    { "xterm", 		'x', 			POPT_ARG_NONE, &force_xterm, 0},
+
+    { NULL, 		0,			0, NULL, 0 }
+};
+
+static void
+handle_args (int argc, char *argv [])
 {
     char   *tmp, *option_arg;
     int    c;
-    int    finish_program = 0;
     poptContext   optCon;
 
     optCon = poptGetContext ("mc", argc, argv, argumentTable, 0);
@@ -2587,81 +2800,8 @@ static void handle_args (int argc, char *argv [])
     while ((c = poptGetNextOpt (optCon)) > 0) {
 	option_arg = poptGetOptArg(optCon);
 
-	switch (c) {
-	case 'V':
-	    version (1);
-	    finish_program = 1;
-	    break;
-
-	case 'c':
-	    disable_colors = 0;
-#ifdef HAVE_SLANG
-	    force_colors = 1;
-#endif
-	    break;
-
-	case 'f':
-	    fprintf (stderr, _("Library directory for the Midnight Commander: %s\n"), mc_home);
-	    finish_program = 1;
-	    break;
-	    
-	case 'm':
-	    fprintf (stderr, _("Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"));
-	    finish_program = 1;
-	    break;
-
-#ifdef USE_NETCODE
-	case 'l':
-	    ftpfs_set_debug (option_arg);
-	    break;
-#endif
-
-#ifdef OS2_NT
-	case 'S':
-	    print_last_wd = 2;
-	    batch_file_name = option_arg;
-	    break;
-#endif
-	    
-	case 'd':
-	    use_mouse_p = NO_MOUSE;
-	    break;
-
-
-	case 'X':
-#ifdef HAVE_SUBSHELL_SUPPORT
-	    debug_subshell = 1;
-#endif
-	    break;
-
-	case 'U':
-#ifdef HAVE_SUBSHELL_SUPPORT
-	    use_subshell = 1;
-#endif
-	    break;
-
-	case 'u':
-#ifdef HAVE_SUBSHELL_SUPPORT
-	    use_subshell = 0;
-#endif
-	    break;
-
-	case 'r':
-#ifdef HAVE_SUBSHELL_SUPPORT
-	    force_subshell_execution = 1;
-#endif
-	    break;
-	    
-	case 'H':
-	    print_color_usage ();
-	    finish_program = 1;
-	    break;
-	    
-	case 'h':
-	default:
-	    print_usage ();
-	    finish_program = 1;
-	}
+	if (process_args (c, option_arg) == 1)
+		process_args ('h', 0);
     }
 
     if (c < -1){
@@ -2672,11 +2812,7 @@ static void handle_args (int argc, char *argv [])
 	finish_program = 1;
     }
 
-    if (finish_program){
-	if (print_last_wd)
-	    printf (".");
-	exit (1);
-    }
+    probably_finish_program ();
 
     /* Check for special invocation names mcedit and mcview,
      * if none apply then set the current directory and the other
@@ -2703,6 +2839,7 @@ static void handle_args (int argc, char *argv [])
     }
     poptFreeContext(optCon);
 }
+#endif
 
 /*
  * The compatibility_move_mc_files routine is intended to
@@ -2789,9 +2926,28 @@ int main (int argc, char *argv [])
 
 #ifdef HAVE_X
     /* NOTE: This call has to be before any our argument handling :) */
+
+#ifdef HAVE_GNOME
+    {
+	char *base = x_basename (argv [0]);
+
+	if (base){
+	    if (strcmp (base, "mcedit") == 0)
+		edit_one_file = "";
+	    
+	    if (strcmp (base, "mcview") == 0)
+		view_one_file = "";
+	}
+    }
+    gnome_init ("gmc", &mc_argp_parser, argc, argv, 0, NULL);
+    probably_finish_program ();
+#endif
+    
     if (xtoolkit_init (&argc, argv) == -1)
 	exit (1);
-#endif
+#endif /* HAVE_X */
+
+    
 #ifdef HAVE_SLANG
     SLtt_Ignore_Beep = 1;
 #endif
@@ -2799,9 +2955,11 @@ int main (int argc, char *argv [])
     /* NOTE: This has to be called before slang_init or whatever routine
        calls any define_sequence */
     init_key ();
-	
-    handle_args (argc, argv);
 
+#ifndef PORT_WANTS_ARGP
+    handle_args (argc, argv);
+#endif
+    
     /* Used to report the last working directory at program end */
     if (print_last_wd){
 #ifndef OS2_NT	

@@ -1955,12 +1955,13 @@ start_search (WPanel *panel)
     }
 }
 
-void
+int
 do_enter (WPanel *panel)
 {
     if (S_ISDIR (selection (panel)->buf.st_mode)
 	|| link_isdir (selection (panel))){
 	do_cd (selection (panel)->fname, cd_exact);
+	return 1;
     } else { 
 	if (is_exe (selection (panel)->buf.st_mode) &&
 	    if_link_is_exe (selection (panel))) {
@@ -1987,9 +1988,16 @@ do_enter (WPanel *panel)
 	        free (tmp2);
 	    }
 #endif /* USE_VFS */	    
-	    return;
-	} else
-	    regex_command (selection (panel)->fname, "Open", NULL, 0);
+	    return 1;
+	} else {
+	    char *p;
+	    
+	    p = regex_command (selection (panel)->fname, "Open", NULL, 0);
+	    if (p && (strcmp (p, "Success") == 0))
+		    return 1;
+	    else
+		    return 0;
+	}
     }
 }
 
@@ -2058,10 +2066,6 @@ chdir_to_readlink (WPanel *panel)
 	free (new_dir);
     }
 }
-
-void directory_history_next (WPanel * panel);
-void directory_history_prev (WPanel * panel);
-void directory_history_list (WPanel * panel);
 
 static key_map panel_keymap [] = {
     { KEY_DOWN,   move_down },

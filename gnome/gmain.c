@@ -79,7 +79,8 @@ xtoolkit_init (int *argc, char *argv [])
 {
 	LINES = 40;
 	COLS = 80;
-	gnome_init ("gmc", NULL, *argc, argv, 0, NULL);
+	
+/*	gnome_init ("gmc", NULL, *argc, argv, 0, NULL); */
 	gmc_color_init ();
 	/* FIXME: Maybe this should return something from gnome_init() */
 	return 0;
@@ -366,7 +367,7 @@ dialog_panel_callback (struct Dlg_head *h, int id, int msg)
 			
 			do_panel_cd (p, in->buffer, cd_parse_command);
 			assign_text (in, p->cwd);
-			update_input (in);
+			update_input (in, 1);
 			
 			return MSG_HANDLED;
 		}
@@ -390,7 +391,7 @@ create_panels (void)
 	
 	panel = create_container (h, "My Panel");
 	add_widget (h, panel);
-	
+
 	set_current_panel (0);
 	run_dlg (h);
 

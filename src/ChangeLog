@@ -1,3 +1,18 @@
+1998-04-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* widget.c (update_input): Set the used flag early in update_input
+	to allow X widget to catch the right value
+
+	* screen.c (do_enter): Return the status for the operation.
+
+	* main.c (main): Sigh.  This was hard. I added support for argp.
+	Right now we support both argp for the GNOME edition and popt for
+	the other editions.  I will remove popt support in the future and
+	only keep argp. 
+
+	* dlg.c (add_widgetl): Adding widgets to an already running dialog
+	had some flaws.  Fix this.
+
 Wed Apr  8 11:15:29 1998 Alex Tkachenko <alex@bcs.zp.ua>
 
 	* src/find.c: changes to find_parameters/find_file i18n.

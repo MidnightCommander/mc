@@ -13,6 +13,8 @@
 /* The spacing between the cute little icon and the text */
 #define SPACING 2
 
+int want_transparent = 0;
+
 /*
  * Most of this code was yanked from the gtktooltips module in Gtk+.
  * I have tweaked it a bit for MC's purposes - Federico

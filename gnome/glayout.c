@@ -93,7 +93,6 @@ set_new_current_panel (WPanel *panel)
 	other_panel_ptr = current_panel_ptr;
 	for (p = containers; p; p = p->next){
 		if (((PanelContainer *)p->data)->panel == panel){
-			printf ("Setting current panel to %p\n", p);
 			current_panel_ptr = p->data;
 		}
 	}

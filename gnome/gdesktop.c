@@ -823,7 +823,18 @@ desktop_file_exec (GtkWidget *widget, GdkEventButton *event, desktop_icon_t *di)
 					execute (tmp);
 				free (tmp);
 			} else {
-				regex_command (di->pathname, "Open", NULL, 0);
+				char *result, *command;
+
+				result = regex_command (di->pathname, "Open", NULL, 0);
+				if (result && (strcmp (result, "Success") == 0))
+					return TRUE;
+				command = input_expand_dialog (_("Open with..."),
+							       _("Enter extra arguments:"),
+							       di->pathname);
+				if (command){
+					execute (command);
+					free (command);
+				}
 			}
 		}
 		return TRUE;

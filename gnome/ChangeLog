@@ -1,3 +1,16 @@
+1998-04-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (x_create_panel): Added back and forward buttons.  I
+	need a "Home" icon too. 
+
+	* gwidget.c (x_create_input): Make the selection if the input has
+	not yet been touched.
+
+	* gscreen.c (panel_action_open): If opening an item fails, try
+	panel_action_open_with.
+
+	* gview.c: Implement the viewer scrollbar. 
+
 1998-04-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (panel_drop_data_available): Reload the panel contents

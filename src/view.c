@@ -2,7 +2,7 @@
 
 /* View file module for the Midnight Commander
    Copyright (C) 1994, 1995, 1996 The Free Software Foundation
-   Written by: 1994, 1995 Miguel de Icaza
+   Written by: 1994, 1995, 1998 Miguel de Icaza
                1994, 1995 Janne Kukonlehto
                1995 Jakub Jelinek
                1996 Joseph M. Hinkle

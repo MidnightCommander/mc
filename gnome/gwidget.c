@@ -247,6 +247,7 @@ x_create_input (Dlg_head *h, widget_data parent, WInput *in)
 	entry = GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (gnome_entry)));
 	
 	gtk_entry_set_text (entry, in->buffer);
+	gtk_editable_select_region (GTK_EDITABLE (entry), 0, -1);
 	gtk_entry_set_position (entry, in->point);
 	
 	gtk_signal_connect (GTK_OBJECT (entry), "button_press_event",
@@ -262,17 +263,35 @@ x_update_input (WInput *in)
 {
 	GnomeEntry *gnome_entry;
 	GtkEntry   *entry;
-
+	char       *text;
+	int        draw;
+	
 	/* If the widget has not been initialized yet (done by WIDGET_INIT) */
 	if (!in->widget.wdata)
 		return;
-	
+
 	gnome_entry = GNOME_ENTRY (in->widget.wdata);
 	entry = GTK_ENTRY (gnome_entry_gtk_entry (gnome_entry));
+
+	if (in->first == -1){
+		gtk_editable_select_region (GTK_EDITABLE (entry), 0, 0);
+		in->first = 0;
+	}
+
+	text = GTK_ENTRY (entry)->text;
 	
-	gtk_entry_set_text (entry, in->buffer);
-	gtk_entry_set_position (entry, in->point);
-	gtk_widget_draw (GTK_WIDGET (gnome_entry), NULL);
+	if (text && strcmp (text, in->buffer)){
+		gtk_entry_set_text (entry, in->buffer);
+		draw = 1;
+	}      
+
+	if (GTK_EDITABLE (entry)->current_pos != in->point){
+		gtk_entry_set_position (entry, in->point);
+		draw = 1;
+	}
+	
+	if (draw)
+		gtk_widget_draw (GTK_WIDGET (gnome_entry), NULL);
 }
 
 /* Listboxes */
