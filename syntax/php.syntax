@@ -1,5 +1,14 @@
 # PHP syntax file
 
+# 2004-09-04  Leonard den Ottolander <leonard * den ottolander nl>
+#	* function keywords regenerated from the docs at http://www.php.net
+#	* separated classes and methods
+#	* removed some cruft from ref.pcre.php that slipped through the script
+#	* added keyword for '->'
+
+# 2003-12-25  Leonard den Ottolander <leonardjo hetnet nl>
+#	* function keywords generated from the docs at http://www.php.net
+
 # 2002-06-01  Max Schedriviy  <max@humgat.org>
 #	* many corrections from previous version
 
@@ -46,30 +55,44 @@ context default
     keyword whole true brightmagenta
     keyword whole while brightmagenta
 
-
 #############
 # Functions
 
-    keyword whole ADONewConnection yellow
-    keyword whole Execute yellow
-    keyword whole FetchNextObject yellow
-    keyword whole PConnect yellow
-    keyword whole abs yellow
-    keyword whole acos yellow
-    keyword whole acosh yellow
-    keyword whole addcslashes yellow
-    keyword whole addslashes yellow
-    keyword whole array yellow
+    keyword whole apache_child_terminate yellow
+    keyword whole apache_get_modules yellow
+    keyword whole apache_get_version yellow
+    keyword whole apache_getenv yellow
+    keyword whole apache_lookup_uri yellow
+    keyword whole apache_note yellow
+    keyword whole apache_request_headers yellow
+    keyword whole apache_response_headers yellow
+    keyword whole apache_setenv yellow
+    keyword whole ascii2ebcdic yellow
+    keyword whole ebcdic2ascii yellow
+    keyword whole getallheaders yellow
+    keyword whole virtual yellow
+    keyword whole array_change_key_case yellow
+    keyword whole array_chunk yellow
+    keyword whole array_combine yellow
     keyword whole array_count_values yellow
+    keyword whole array_diff_assoc yellow
+    keyword whole array_diff_key yellow
+    keyword whole array_diff_uassoc yellow
+    keyword whole array_diff_ukey yellow
     keyword whole array_diff yellow
+    keyword whole array_fill yellow
     keyword whole array_filter yellow
     keyword whole array_flip yellow
+    keyword whole array_intersect_assoc yellow
+    keyword whole array_intersect_key yellow
+    keyword whole array_intersect_uassoc yellow
+    keyword whole array_intersect_ukey yellow
     keyword whole array_intersect yellow
     keyword whole array_key_exists yellow
     keyword whole array_keys yellow
     keyword whole array_map yellow
-    keyword whole array_merge yellow
     keyword whole array_merge_recursive yellow
+    keyword whole array_merge yellow
     keyword whole array_multisort yellow
     keyword whole array_pad yellow
     keyword whole array_pop yellow
@@ -82,27 +105,59 @@ context default
     keyword whole array_slice yellow
     keyword whole array_splice yellow
     keyword whole array_sum yellow
+    keyword whole array_udiff_assoc yellow
+    keyword whole array_udiff_uassoc yellow
+    keyword whole array_udiff yellow
+    keyword whole array_uintersect_assoc yellow
+    keyword whole array_uintersect_uassoc yellow
+    keyword whole array_uintersect yellow
     keyword whole array_unique yellow
     keyword whole array_unshift yellow
     keyword whole array_values yellow
+    keyword whole array_walk_recursive yellow
     keyword whole array_walk yellow
+    keyword whole array yellow
     keyword whole arsort yellow
-    keyword whole asin yellow
-    keyword whole asinh yellow
     keyword whole asort yellow
-    keyword whole assert yellow
-    keyword whole assert_options yellow
-    keyword whole atan yellow
-    keyword whole atan2 yellow
-    keyword whole atanh yellow
-    keyword whole base64_decode yellow
-    keyword whole base64_encode yellow
-    keyword whole base_convert yellow
-    keyword whole basename yellow
-    keyword whole ber_free yellow
-    keyword whole bin2hex yellow
-    keyword whole bindec yellow
-    keyword whole bindtextdomain yellow
+    keyword whole compact yellow
+    keyword whole count yellow
+    keyword whole current yellow
+    keyword whole each yellow
+    keyword whole end yellow
+    keyword whole extract yellow
+    keyword whole in_array yellow
+    keyword whole key yellow
+    keyword whole krsort yellow
+    keyword whole ksort yellow
+    keyword whole list yellow
+    keyword whole natcasesort yellow
+    keyword whole natsort yellow
+    keyword whole next yellow
+    keyword whole pos yellow
+    keyword whole prev yellow
+    keyword whole range yellow
+    keyword whole reset yellow
+    keyword whole rsort yellow
+    keyword whole shuffle yellow
+    keyword whole sizeof yellow
+    keyword whole sort yellow
+    keyword whole uasort yellow
+    keyword whole uksort yellow
+    keyword whole usort yellow
+    keyword whole aspell_check_raw yellow
+    keyword whole aspell_check yellow
+    keyword whole aspell_new yellow
+    keyword whole aspell_suggest yellow
+    keyword whole bcadd yellow
+    keyword whole bccomp yellow
+    keyword whole bcdiv yellow
+    keyword whole bcmod yellow
+    keyword whole bcmul yellow
+    keyword whole bcpow yellow
+    keyword whole bcpowmod yellow
+    keyword whole bcscale yellow
+    keyword whole bcsqrt yellow
+    keyword whole bcsub yellow
     keyword whole bzclose yellow
     keyword whole bzcompress yellow
     keyword whole bzdecompress yellow
@@ -113,100 +168,467 @@ context default
     keyword whole bzopen yellow
     keyword whole bzread yellow
     keyword whole bzwrite yellow
-    keyword whole call_user_func yellow
-    keyword whole call_user_func_array yellow
-    keyword whole call_user_method yellow
+    keyword whole cal_days_in_month yellow
+    keyword whole cal_from_jd yellow
+    keyword whole cal_info yellow
+    keyword whole cal_to_jd yellow
+    keyword whole easter_date yellow
+    keyword whole easter_days yellow
+    keyword whole FrenchToJD yellow
+    keyword whole GregorianToJD yellow
+    keyword whole JDDayOfWeek yellow
+    keyword whole JDMonthName yellow
+    keyword whole JDToFrench yellow
+    keyword whole JDToGregorian yellow
+    keyword whole jdtojewish yellow
+    keyword whole JDToJulian yellow
+    keyword whole jdtounix yellow
+    keyword whole JewishToJD yellow
+    keyword whole JulianToJD yellow
+    keyword whole unixtojd yellow
+    keyword whole ccvs_add yellow
+    keyword whole ccvs_auth yellow
+    keyword whole ccvs_command yellow
+    keyword whole ccvs_count yellow
+    keyword whole ccvs_delete yellow
+    keyword whole ccvs_done yellow
+    keyword whole ccvs_init yellow
+    keyword whole ccvs_lookup yellow
+    keyword whole ccvs_new yellow
+    keyword whole ccvs_report yellow
+    keyword whole ccvs_return yellow
+    keyword whole ccvs_reverse yellow
+    keyword whole ccvs_sale yellow
+    keyword whole ccvs_status yellow
+    keyword whole ccvs_textvalue yellow
+    keyword whole ccvs_void yellow
+    keyword whole COM yellow
+    keyword whole DOTNET yellow
+    keyword whole VARIANT yellow
+    keyword whole com_addref yellow
+    keyword whole com_create_guid yellow
+    keyword whole com_event_sink yellow
+    keyword whole com_get_active_object yellow
+    keyword whole com_get yellow
+    keyword whole com_invoke yellow
+    keyword whole com_isenum yellow
+    keyword whole com_load_typelib yellow
+    keyword whole com_load yellow
+    keyword whole com_message_pump yellow
+    keyword whole com_print_typeinfo yellow
+    keyword whole com_propget yellow
+    keyword whole com_propput yellow
+    keyword whole com_propset yellow
+    keyword whole com_release yellow
+    keyword whole com_set yellow
+    keyword whole variant_abs yellow
+    keyword whole variant_add yellow
+    keyword whole variant_and yellow
+    keyword whole variant_cast yellow
+    keyword whole variant_cat yellow
+    keyword whole variant_cmp yellow
+    keyword whole variant_date_from_timestamp yellow
+    keyword whole variant_date_to_timestamp yellow
+    keyword whole variant_div yellow
+    keyword whole variant_eqv yellow
+    keyword whole variant_fix yellow
+    keyword whole variant_get_type yellow
+    keyword whole variant_idiv yellow
+    keyword whole variant_imp yellow
+    keyword whole variant_int yellow
+    keyword whole variant_mod yellow
+    keyword whole variant_mul yellow
+    keyword whole variant_neg yellow
+    keyword whole variant_not yellow
+    keyword whole variant_or yellow
+    keyword whole variant_pow yellow
+    keyword whole variant_round yellow
+    keyword whole variant_set_type yellow
+    keyword whole variant_set yellow
+    keyword whole variant_sub yellow
+    keyword whole variant_xor yellow
     keyword whole call_user_method_array yellow
-    keyword whole ceil yellow
-    keyword whole chdir yellow
-    keyword whole checkdate yellow
-    keyword whole checkdnsrr yellow
-    keyword whole chgrp yellow
-    keyword whole chmod yellow
-    keyword whole chop yellow
-    keyword whole chown yellow
-    keyword whole chr yellow
-    keyword whole chroot yellow
-    keyword whole chunk_split yellow
-    keyword whole clearstatcache yellow
-    keyword whole closedir yellow
-    keyword whole closelog yellow
-    keyword whole compact yellow
-    keyword whole configurationfile yellow
-    keyword whole constant yellow
-    keyword whole convert_cyr_string yellow
-    keyword whole copy yellow
-    keyword whole cos yellow
-    keyword whole cosh yellow
-    keyword whole count yellow
-    keyword whole count_chars yellow
-    keyword whole crypt yellow
+    keyword whole call_user_method yellow
+    keyword whole class_exists yellow
+    keyword whole get_class_methods yellow
+    keyword whole get_class_vars yellow
+    keyword whole get_class yellow
+    keyword whole get_declared_classes yellow
+    keyword whole get_declared_interfaces yellow
+    keyword whole get_object_vars yellow
+    keyword whole get_parent_class yellow
+    keyword whole is_a yellow
+    keyword whole is_subclass_of yellow
+    keyword whole method_exists yellow
+    keyword whole cpdf_add_annotation yellow
+    keyword whole cpdf_add_outline yellow
+    keyword whole cpdf_arc yellow
+    keyword whole cpdf_begin_text yellow
+    keyword whole cpdf_circle yellow
+    keyword whole cpdf_clip yellow
+    keyword whole cpdf_close yellow
+    keyword whole cpdf_closepath_fill_stroke yellow
+    keyword whole cpdf_closepath_stroke yellow
+    keyword whole cpdf_closepath yellow
+    keyword whole cpdf_continue_text yellow
+    keyword whole cpdf_curveto yellow
+    keyword whole cpdf_end_text yellow
+    keyword whole cpdf_fill_stroke yellow
+    keyword whole cpdf_fill yellow
+    keyword whole cpdf_finalize_page yellow
+    keyword whole cpdf_finalize yellow
+    keyword whole cpdf_global_set_document_limits yellow
+    keyword whole cpdf_import_jpeg yellow
+    keyword whole cpdf_lineto yellow
+    keyword whole cpdf_moveto yellow
+    keyword whole cpdf_newpath yellow
+    keyword whole cpdf_open yellow
+    keyword whole cpdf_output_buffer yellow
+    keyword whole cpdf_page_init yellow
+    keyword whole cpdf_place_inline_image yellow
+    keyword whole cpdf_rect yellow
+    keyword whole cpdf_restore yellow
+    keyword whole cpdf_rlineto yellow
+    keyword whole cpdf_rmoveto yellow
+    keyword whole cpdf_rotate_text yellow
+    keyword whole cpdf_rotate yellow
+    keyword whole cpdf_save_to_file yellow
+    keyword whole cpdf_save yellow
+    keyword whole cpdf_scale yellow
+    keyword whole cpdf_set_action_url yellow
+    keyword whole cpdf_set_char_spacing yellow
+    keyword whole cpdf_set_creator yellow
+    keyword whole cpdf_set_current_page yellow
+    keyword whole cpdf_set_font_directories yellow
+    keyword whole cpdf_set_font_map_file yellow
+    keyword whole cpdf_set_font yellow
+    keyword whole cpdf_set_horiz_scaling yellow
+    keyword whole cpdf_set_keywords yellow
+    keyword whole cpdf_set_leading yellow
+    keyword whole cpdf_set_page_animation yellow
+    keyword whole cpdf_set_subject yellow
+    keyword whole cpdf_set_text_matrix yellow
+    keyword whole cpdf_set_text_pos yellow
+    keyword whole cpdf_set_text_rendering yellow
+    keyword whole cpdf_set_text_rise yellow
+    keyword whole cpdf_set_title yellow
+    keyword whole cpdf_set_viewer_preferences yellow
+    keyword whole cpdf_set_word_spacing yellow
+    keyword whole cpdf_setdash yellow
+    keyword whole cpdf_setflat yellow
+    keyword whole cpdf_setgray_fill yellow
+    keyword whole cpdf_setgray_stroke yellow
+    keyword whole cpdf_setgray yellow
+    keyword whole cpdf_setlinecap yellow
+    keyword whole cpdf_setlinejoin yellow
+    keyword whole cpdf_setlinewidth yellow
+    keyword whole cpdf_setmiterlimit yellow
+    keyword whole cpdf_setrgbcolor_fill yellow
+    keyword whole cpdf_setrgbcolor_stroke yellow
+    keyword whole cpdf_setrgbcolor yellow
+    keyword whole cpdf_show_xy yellow
+    keyword whole cpdf_show yellow
+    keyword whole cpdf_stringwidth yellow
+    keyword whole cpdf_stroke yellow
+    keyword whole cpdf_text yellow
+    keyword whole cpdf_translate yellow
+    keyword whole crack_check yellow
+    keyword whole crack_closedict yellow
+    keyword whole crack_getlastmessage yellow
+    keyword whole crack_opendict yellow
     keyword whole curl_close yellow
+    keyword whole curl_copy_handle yellow
     keyword whole curl_errno yellow
     keyword whole curl_error yellow
     keyword whole curl_exec yellow
     keyword whole curl_getinfo yellow
     keyword whole curl_init yellow
+    keyword whole curl_multi_add_handle yellow
+    keyword whole curl_multi_close yellow
+    keyword whole curl_multi_exec yellow
+    keyword whole curl_multi_getcontent yellow
+    keyword whole curl_multi_info_read yellow
+    keyword whole curl_multi_init yellow
+    keyword whole curl_multi_remove_handle yellow
+    keyword whole curl_multi_select yellow
     keyword whole curl_setopt yellow
     keyword whole curl_version yellow
-    keyword whole current yellow
+    keyword whole cybercash_base64_decode yellow
+    keyword whole cybercash_base64_encode yellow
+    keyword whole cybercash_decr yellow
+    keyword whole cybercash_encr yellow
+    keyword whole cyrus_authenticate yellow
+    keyword whole cyrus_bind yellow
+    keyword whole cyrus_close yellow
+    keyword whole cyrus_connect yellow
+    keyword whole cyrus_query yellow
+    keyword whole cyrus_unbind yellow
+    keyword whole ctype_alnum yellow
+    keyword whole ctype_alpha yellow
+    keyword whole ctype_cntrl yellow
+    keyword whole ctype_digit yellow
+    keyword whole ctype_graph yellow
+    keyword whole ctype_lower yellow
+    keyword whole ctype_print yellow
+    keyword whole ctype_punct yellow
+    keyword whole ctype_space yellow
+    keyword whole ctype_upper yellow
+    keyword whole ctype_xdigit yellow
+    keyword whole dba_close yellow
+    keyword whole dba_delete yellow
+    keyword whole dba_exists yellow
+    keyword whole dba_fetch yellow
+    keyword whole dba_firstkey yellow
+    keyword whole dba_handlers yellow
+    keyword whole dba_insert yellow
+    keyword whole dba_key_split yellow
+    keyword whole dba_list yellow
+    keyword whole dba_nextkey yellow
+    keyword whole dba_open yellow
+    keyword whole dba_optimize yellow
+    keyword whole dba_popen yellow
+    keyword whole dba_replace yellow
+    keyword whole dba_sync yellow
+    keyword whole checkdate yellow
     keyword whole date yellow
-    keyword whole dcgettext yellow
-    keyword whole debugger_off yellow
-    keyword whole debugger_on yellow
-    keyword whole decbin yellow
-    keyword whole dechex yellow
-    keyword whole decoct yellow
-    keyword whole define_syslog_variables yellow
-    keyword whole defined yellow
-    keyword whole deg2rad yellow
+    keyword whole getdate yellow
+    keyword whole gettimeofday yellow
+    keyword whole gmdate yellow
+    keyword whole gmmktime yellow
+    keyword whole gmstrftime yellow
+    keyword whole idate yellow
+    keyword whole localtime yellow
+    keyword whole microtime yellow
+    keyword whole mktime yellow
+    keyword whole strftime yellow
+    keyword whole strtotime yellow
+    keyword whole time yellow
+    keyword whole dbase_add_record yellow
+    keyword whole dbase_close yellow
+    keyword whole dbase_create yellow
+    keyword whole dbase_delete_record yellow
+    keyword whole dbase_get_header_info yellow
+    keyword whole dbase_get_record_with_names yellow
+    keyword whole dbase_get_record yellow
+    keyword whole dbase_numfields yellow
+    keyword whole dbase_numrecords yellow
+    keyword whole dbase_open yellow
+    keyword whole dbase_pack yellow
+    keyword whole dbase_replace_record yellow
+    keyword whole dblist yellow
+    keyword whole dbmclose yellow
+    keyword whole dbmdelete yellow
+    keyword whole dbmexists yellow
+    keyword whole dbmfetch yellow
+    keyword whole dbmfirstkey yellow
+    keyword whole dbminsert yellow
+    keyword whole dbmnextkey yellow
+    keyword whole dbmopen yellow
+    keyword whole dbmreplace yellow
+    keyword whole dbx_close yellow
+    keyword whole dbx_compare yellow
+    keyword whole dbx_connect yellow
+    keyword whole dbx_error yellow
+    keyword whole dbx_escape_string yellow
+    keyword whole dbx_fetch_row yellow
+    keyword whole dbx_query yellow
+    keyword whole dbx_sort yellow
+    keyword whole dbplus_add yellow
+    keyword whole dbplus_aql yellow
+    keyword whole dbplus_chdir yellow
+    keyword whole dbplus_close yellow
+    keyword whole dbplus_curr yellow
+    keyword whole dbplus_errcode yellow
+    keyword whole dbplus_errno yellow
+    keyword whole dbplus_find yellow
+    keyword whole dbplus_first yellow
+    keyword whole dbplus_flush yellow
+    keyword whole dbplus_freealllocks yellow
+    keyword whole dbplus_freelock yellow
+    keyword whole dbplus_freerlocks yellow
+    keyword whole dbplus_getlock yellow
+    keyword whole dbplus_getunique yellow
+    keyword whole dbplus_info yellow
+    keyword whole dbplus_last yellow
+    keyword whole dbplus_lockrel yellow
+    keyword whole dbplus_next yellow
+    keyword whole dbplus_open yellow
+    keyword whole dbplus_prev yellow
+    keyword whole dbplus_rchperm yellow
+    keyword whole dbplus_rcreate yellow
+    keyword whole dbplus_rcrtexact yellow
+    keyword whole dbplus_rcrtlike yellow
+    keyword whole dbplus_resolve yellow
+    keyword whole dbplus_restorepos yellow
+    keyword whole dbplus_rkeys yellow
+    keyword whole dbplus_ropen yellow
+    keyword whole dbplus_rquery yellow
+    keyword whole dbplus_rrename yellow
+    keyword whole dbplus_rsecindex yellow
+    keyword whole dbplus_runlink yellow
+    keyword whole dbplus_rzap yellow
+    keyword whole dbplus_savepos yellow
+    keyword whole dbplus_setindex yellow
+    keyword whole dbplus_setindexbynumber yellow
+    keyword whole dbplus_sql yellow
+    keyword whole dbplus_tcl yellow
+    keyword whole dbplus_tremove yellow
+    keyword whole dbplus_undo yellow
+    keyword whole dbplus_undoprepare yellow
+    keyword whole dbplus_unlockrel yellow
+    keyword whole dbplus_unselect yellow
+    keyword whole dbplus_update yellow
+    keyword whole dbplus_xlockrel yellow
+    keyword whole dbplus_xunlockrel yellow
+    keyword whole dio_close yellow
+    keyword whole dio_fcntl yellow
+    keyword whole dio_open yellow
+    keyword whole dio_read yellow
+    keyword whole dio_seek yellow
+    keyword whole dio_stat yellow
+    keyword whole dio_tcsetattr yellow
+    keyword whole dio_truncate yellow
+    keyword whole dio_write yellow
+    keyword whole chdir yellow
+    keyword whole chroot yellow
+    keyword whole dir yellow
+    keyword whole closedir yellow
+    keyword whole getcwd yellow
+    keyword whole opendir yellow
+    keyword whole readdir yellow
+    keyword whole rewinddir yellow
+    keyword whole scandir yellow
+    keyword whole dom_import_SimpleXML yellow
+    keyword whole domxml_new_doc yellow
+    keyword whole domxml_open_file yellow
+    keyword whole domxml_open_mem yellow
+    keyword whole domxml_version yellow
+    keyword whole domxml_xmltree yellow
+    keyword whole domxml_xslt_stylesheet_doc yellow
+    keyword whole domxml_xslt_stylesheet_file yellow
+    keyword whole domxml_xslt_stylesheet yellow
+    keyword whole xpath_eval_expression yellow
+    keyword whole xpath_eval yellow
+    keyword whole xpath_new_context yellow
+    keyword whole xptr_eval yellow
+    keyword whole xptr_new_context yellow
+    keyword whole dotnet_load yellow
+    keyword whole debug_backtrace yellow
+    keyword whole debug_print_backtrace yellow
+    keyword whole error_log yellow
+    keyword whole error_reporting yellow
+    keyword whole restore_error_handler yellow
+    keyword whole restore_exception_handler yellow
+    keyword whole set_error_handler yellow
+    keyword whole set_exception_handler yellow
+    keyword whole trigger_error yellow
+    keyword whole user_error yellow
+    keyword whole exif_imagetype yellow
+    keyword whole exif_read_data yellow
+    keyword whole EXIF yellow
+    keyword whole JPEG yellow
+    keyword whole TIFF yellow
+    keyword whole exif_tagname yellow
+    keyword whole exif_thumbnail yellow
+    keyword whole read_exif_data yellow
+    keyword whole fam_cancel_monitor yellow
+    keyword whole fam_close yellow
+    keyword whole fam_monitor_collection yellow
+    keyword whole fam_monitor_directory yellow
+    keyword whole fam_monitor_file yellow
+    keyword whole fam_next_event yellow
+    keyword whole fam_open yellow
+    keyword whole fam_pending yellow
+    keyword whole fam_resume_monitor yellow
+    keyword whole fam_suspend_monitor yellow
+    keyword whole fbsql_affected_rows yellow
+    keyword whole fbsql_autocommit yellow
+    keyword whole fbsql_blob_size yellow
+    keyword whole fbsql_change_user yellow
+    keyword whole fbsql_clob_size yellow
+    keyword whole fbsql_close yellow
+    keyword whole fbsql_commit yellow
+    keyword whole fbsql_connect yellow
+    keyword whole fbsql_create_blob yellow
+    keyword whole fbsql_create_clob yellow
+    keyword whole fbsql_create_db yellow
+    keyword whole fbsql_data_seek yellow
+    keyword whole fbsql_database_password yellow
+    keyword whole fbsql_database yellow
+    keyword whole fbsql_db_query yellow
+    keyword whole fbsql_db_status yellow
+    keyword whole fbsql_drop_db yellow
+    keyword whole fbsql_errno yellow
+    keyword whole fbsql_error yellow
+    keyword whole fbsql_fetch_array yellow
+    keyword whole fbsql_fetch_assoc yellow
+    keyword whole fbsql_fetch_field yellow
+    keyword whole fbsql_fetch_lengths yellow
+    keyword whole fbsql_fetch_object yellow
+    keyword whole fbsql_fetch_row yellow
+    keyword whole fbsql_field_flags yellow
+    keyword whole fbsql_field_len yellow
+    keyword whole fbsql_field_name yellow
+    keyword whole fbsql_field_seek yellow
+    keyword whole fbsql_field_table yellow
+    keyword whole fbsql_field_type yellow
+    keyword whole fbsql_free_result yellow
+    keyword whole fbsql_get_autostart_info yellow
+    keyword whole fbsql_hostname yellow
+    keyword whole fbsql_insert_id yellow
+    keyword whole fbsql_list_dbs yellow
+    keyword whole fbsql_list_fields yellow
+    keyword whole fbsql_list_tables yellow
+    keyword whole fbsql_next_result yellow
+    keyword whole fbsql_num_fields yellow
+    keyword whole fbsql_num_rows yellow
+    keyword whole fbsql_password yellow
+    keyword whole fbsql_pconnect yellow
+    keyword whole fbsql_query yellow
+    keyword whole fbsql_read_blob yellow
+    keyword whole fbsql_read_clob yellow
+    keyword whole fbsql_result yellow
+    keyword whole fbsql_rollback yellow
+    keyword whole fbsql_select_db yellow
+    keyword whole fbsql_set_lob_mode yellow
+    keyword whole fbsql_set_password yellow
+    keyword whole fbsql_set_transaction yellow
+    keyword whole fbsql_start_db yellow
+    keyword whole fbsql_stop_db yellow
+    keyword whole fbsql_tablename yellow
+    keyword whole fbsql_username yellow
+    keyword whole fbsql_warnings yellow
+    keyword whole filepro_fieldcount yellow
+    keyword whole filepro_fieldname yellow
+    keyword whole filepro_fieldtype yellow
+    keyword whole filepro_fieldwidth yellow
+    keyword whole filepro_retrieve yellow
+    keyword whole filepro_rowcount yellow
+    keyword whole filepro yellow
+    keyword whole basename yellow
+    keyword whole chgrp yellow
+    keyword whole chmod yellow
+    keyword whole chown yellow
+    keyword whole clearstatcache yellow
+    keyword whole copy yellow
     keyword whole delete yellow
-    keyword whole dgettext yellow
-    keyword whole die yellow
     keyword whole dirname yellow
     keyword whole disk_free_space yellow
     keyword whole disk_total_space yellow
     keyword whole diskfreespace yellow
-    keyword whole dl yellow
-    keyword whole dotnet_load yellow
-    keyword whole doubleval yellow
-    keyword whole each yellow
-    keyword whole easter_date yellow
-    keyword whole easter_days yellow
-    keyword whole empty yellow
-    keyword whole end yellow
-    keyword whole ereg yellow
-    keyword whole ereg_replace yellow
-    keyword whole eregi yellow
-    keyword whole eregi_replace yellow
-    keyword whole error_log yellow
-    keyword whole error_reporting yellow
-    keyword whole escapeshellarg yellow
-    keyword whole escapeshellcmd yellow
-    keyword whole eval yellow
-    keyword whole exec yellow
-    keyword whole exit yellow
-    keyword whole exp yellow
-    keyword whole explode yellow
-    keyword whole expm1 yellow
-    keyword whole extension_dir yellow
-    keyword whole extension_loaded yellow
-    keyword whole extract yellow
-    keyword whole ezmlm_hash yellow
     keyword whole fclose yellow
-    keyword whole fd_isset yellow
-    keyword whole fd_set yellow
     keyword whole feof yellow
     keyword whole fflush yellow
     keyword whole fgetc yellow
     keyword whole fgetcsv yellow
     keyword whole fgets yellow
     keyword whole fgetss yellow
-    keyword whole file yellow
     keyword whole file_exists yellow
+    keyword whole file_get_contents yellow
+    keyword whole file_put_contents yellow
+    keyword whole file yellow
     keyword whole fileatime yellow
     keyword whole filectime yellow
-    keyword whole filegro yellow
     keyword whole filegroup yellow
     keyword whole fileinode yellow
     keyword whole filemtime yellow
@@ -215,119 +637,272 @@ context default
     keyword whole filesize yellow
     keyword whole filetype yellow
     keyword whole flock yellow
-    keyword whole floor yellow
-    keyword whole flush yellow
+    keyword whole fnmatch yellow
     keyword whole fopen yellow
-    keyword whole fopenstream yellow
     keyword whole fpassthru yellow
     keyword whole fputs yellow
     keyword whole fread yellow
-    keyword whole freetype yellow
-    keyword whole frenchtojd yellow
-    keyword whole fribidi_log2vis yellow
     keyword whole fscanf yellow
     keyword whole fseek yellow
-    keyword whole fsockopen yellow
+    keyword whole fstat yellow
     keyword whole ftell yellow
+    keyword whole ftruncate yellow
+    keyword whole fwrite yellow
+    keyword whole glob yellow
+    keyword whole is_dir yellow
+    keyword whole is_executable yellow
+    keyword whole is_file yellow
+    keyword whole is_link yellow
+    keyword whole is_readable yellow
+    keyword whole is_uploaded_file yellow
+    keyword whole is_writable yellow
+    keyword whole is_writeable yellow
+    keyword whole link yellow
+    keyword whole linkinfo yellow
+    keyword whole lstat yellow
+    keyword whole mkdir yellow
+    keyword whole move_uploaded_file yellow
+    keyword whole parse_ini_file yellow
+    keyword whole pathinfo yellow
+    keyword whole pclose yellow
+    keyword whole popen yellow
+    keyword whole readfile yellow
+    keyword whole readlink yellow
+    keyword whole realpath yellow
+    keyword whole rename yellow
+    keyword whole rewind yellow
+    keyword whole rmdir yellow
+    keyword whole set_file_buffer yellow
+    keyword whole stat yellow
+    keyword whole symlink yellow
+    keyword whole tempnam yellow
+    keyword whole tmpfile yellow
+    keyword whole touch yellow
+    keyword whole umask yellow
+    keyword whole unlink yellow
+    keyword whole fdf_add_doc_javascript yellow
+    keyword whole fdf_add_template yellow
+    keyword whole fdf_close yellow
+    keyword whole fdf_create yellow
+    keyword whole fdf_enum_values yellow
+    keyword whole fdf_errno yellow
+    keyword whole fdf_error yellow
+    keyword whole fdf_get_ap yellow
+    keyword whole fdf_get_attachment yellow
+    keyword whole fdf_get_encoding yellow
+    keyword whole fdf_get_file yellow
+    keyword whole fdf_get_flags yellow
+    keyword whole fdf_get_opt yellow
+    keyword whole fdf_get_status yellow
+    keyword whole fdf_get_value yellow
+    keyword whole fdf_get_version yellow
+    keyword whole fdf_header yellow
+    keyword whole fdf_next_field_name yellow
+    keyword whole fdf_open_string yellow
+    keyword whole fdf_open yellow
+    keyword whole fdf_remove_item yellow
+    keyword whole fdf_save_string yellow
+    keyword whole fdf_save yellow
+    keyword whole fdf_set_ap yellow
+    keyword whole fdf_set_encoding yellow
+    keyword whole fdf_set_file yellow
+    keyword whole fdf_set_flags yellow
+    keyword whole fdf_set_javascript_action yellow
+    keyword whole fdf_set_on_import_javascript yellow
+    keyword whole fdf_set_opt yellow
+    keyword whole fdf_set_status yellow
+    keyword whole fdf_set_submit_form_action yellow
+    keyword whole fdf_set_target_frame yellow
+    keyword whole fdf_set_value yellow
+    keyword whole fdf_set_version yellow
+    keyword whole fribidi_log2vis yellow
+    keyword whole ftp_alloc yellow
     keyword whole ftp_cdup yellow
     keyword whole ftp_chdir yellow
+    keyword whole ftp_chmod yellow
+    keyword whole ftp_close yellow
     keyword whole ftp_connect yellow
     keyword whole ftp_delete yellow
     keyword whole ftp_exec yellow
     keyword whole ftp_fget yellow
     keyword whole ftp_fput yellow
+    keyword whole ftp_get_option yellow
     keyword whole ftp_get yellow
     keyword whole ftp_login yellow
     keyword whole ftp_mdtm yellow
     keyword whole ftp_mkdir yellow
+    keyword whole ftp_nb_continue yellow
+    keyword whole ftp_nb_fget yellow
+    keyword whole ftp_nb_fput yellow
+    keyword whole ftp_nb_get yellow
+    keyword whole ftp_nb_put yellow
     keyword whole ftp_nlist yellow
     keyword whole ftp_pasv yellow
     keyword whole ftp_put yellow
     keyword whole ftp_pwd yellow
     keyword whole ftp_quit yellow
+    keyword whole ftp_raw yellow
     keyword whole ftp_rawlist yellow
     keyword whole ftp_rename yellow
     keyword whole ftp_rmdir yellow
+    keyword whole ftp_set_option yellow
     keyword whole ftp_site yellow
     keyword whole ftp_size yellow
+    keyword whole ftp_ssl_connect yellow
     keyword whole ftp_systype yellow
+    keyword whole call_user_func_array yellow
+    keyword whole call_user_func yellow
+    keyword whole create_function yellow
+    keyword whole func_get_arg yellow
+    keyword whole func_get_args yellow
+    keyword whole func_num_args yellow
     keyword whole function_exists yellow
-    keyword whole fwrite yellow
-    keyword whole get_all_headers yellow
-    keyword whole get_browser yellow
-    keyword whole get_class yellow
-    keyword whole get_cfg_var yellow
-    keyword whole get_current_user yellow
-    keyword whole get_html_translation_table yellow
-    keyword whole get_magic_quotes_gpc yellow
-    keyword whole get_magic_quotes_runtime yellow
-    keyword whole get_meta_tags yellow
-    keyword whole getallheaders yellow
-    keyword whole getcwd yellow
-    keyword whole getdate yellow
-    keyword whole getdir yellow
-    keyword whole getenv yellow
-    keyword whole gethostbyaddr yellow
-    keyword whole gethostbyname yellow
-    keyword whole gethostbynamel yellow
-    keyword whole getimagesize yellow
-    keyword whole getlastmod yellow
-    keyword whole getmxrr yellow
-    keyword whole getmygid yellow
-    keyword whole getmyinode yellow
-    keyword whole getmypid yellow
-    keyword whole getmyuid yellow
-    keyword whole getprotobyname yellow
-    keyword whole getprotobynumber yellow
-    keyword whole getrandmax yellow
-    keyword whole getrusage yellow
-    keyword whole getservbyname yellow
-    keyword whole getservbyport yellow
+    keyword whole get_defined_functions yellow
+    keyword whole register_shutdown_function yellow
+    keyword whole register_tick_function yellow
+    keyword whole unregister_tick_function yellow
+    keyword whole bind_textdomain_codeset yellow
+    keyword whole bindtextdomain yellow
+    keyword whole dcgettext yellow
+    keyword whole dcngettext yellow
+    keyword whole dgettext yellow
+    keyword whole dngettext yellow
     keyword whole gettext yellow
-    keyword whole gettimeofday yellow
-    keyword whole gettype yellow
-    keyword whole gmdate yellow
-    keyword whole gmmktime yellow
-    keyword whole gmstrftime yellow
-    keyword whole gregoriantojd yellow
-    keyword whole gzclose yellow
-    keyword whole gzcompress yellow
-    keyword whole gzdeflate yellow
-    keyword whole gzencode yellow
-    keyword whole gzeof yellow
-    keyword whole gzfile yellow
-    keyword whole gzgetc yellow
-    keyword whole gzgets yellow
-    keyword whole gzgetss yellow
-    keyword whole gzinflate yellow
-    keyword whole gzopen yellow
-    keyword whole gzpassthru yellow
-    keyword whole gzputs yellow
-    keyword whole gzread yellow
-    keyword whole gzrewind yellow
-    keyword whole gzseek yellow
-    keyword whole gztell yellow
-    keyword whole gzuncompress yellow
-    keyword whole gzwrite yellow
+    keyword whole ngettext yellow
+    keyword whole textdomain yellow
+    keyword whole gmp_abs yellow
+    keyword whole gmp_add yellow
+    keyword whole gmp_and yellow
+    keyword whole gmp_clrbit yellow
+    keyword whole gmp_cmp yellow
+    keyword whole gmp_com yellow
+    keyword whole gmp_div_q yellow
+    keyword whole gmp_div_qr yellow
+    keyword whole gmp_div_r yellow
+    keyword whole gmp_div yellow
+    keyword whole gmp_divexact yellow
+    keyword whole gmp_fact yellow
+    keyword whole gmp_gcd yellow
+    keyword whole gmp_gcdext yellow
+    keyword whole gmp_hamdist yellow
+    keyword whole gmp_init yellow
+    keyword whole gmp_intval yellow
+    keyword whole gmp_invert yellow
+    keyword whole gmp_jacobi yellow
+    keyword whole gmp_legendre yellow
+    keyword whole gmp_mod yellow
+    keyword whole gmp_mul yellow
+    keyword whole gmp_neg yellow
+    keyword whole gmp_or yellow
+    keyword whole gmp_perfect_square yellow
+    keyword whole gmp_popcount yellow
+    keyword whole gmp_pow yellow
+    keyword whole gmp_powm yellow
+    keyword whole gmp_prob_prime yellow
+    keyword whole gmp_random yellow
+    keyword whole gmp_scan0 yellow
+    keyword whole gmp_scan1 yellow
+    keyword whole gmp_setbit yellow
+    keyword whole gmp_sign yellow
+    keyword whole gmp_sqrt yellow
+    keyword whole gmp_sqrtrem yellow
+    keyword whole gmp_strval yellow
+    keyword whole gmp_sub yellow
+    keyword whole gmp_xor yellow
     keyword whole header yellow
+    keyword whole headers_list yellow
     keyword whole headers_sent yellow
-    keyword whole hebrev yellow
-    keyword whole hebrevc yellow
-    keyword whole hexdec yellow
-    keyword whole highlight_file yellow
-    keyword whole highlight_string yellow
-    keyword whole htmlentities yellow
-    keyword whole htmlspecialchars yellow
-    keyword whole hypot yellow
+    keyword whole setcookie yellow
+    keyword whole setrawcookie yellow
+    keyword whole hw_Array2Objrec yellow
+    keyword whole hw_changeobject yellow
+    keyword whole hw_Children yellow
+    keyword whole hw_ChildrenObj yellow
+    keyword whole hw_Close yellow
+    keyword whole hw_Connect yellow
+    keyword whole hw_connection_info yellow
+    keyword whole hw_cp yellow
+    keyword whole hw_Deleteobject yellow
+    keyword whole hw_DocByAnchor yellow
+    keyword whole hw_DocByAnchorObj yellow
+    keyword whole hw_Document_Attributes yellow
+    keyword whole hw_Document_BodyTag yellow
+    keyword whole hw_Document_Content yellow
+    keyword whole hw_Document_SetContent yellow
+    keyword whole hw_Document_Size yellow
+    keyword whole hw_dummy yellow
+    keyword whole hw_EditText yellow
+    keyword whole hw_Error yellow
+    keyword whole hw_ErrorMsg yellow
+    keyword whole hw_Free_Document yellow
+    keyword whole hw_GetAnchors yellow
+    keyword whole hw_GetAnchorsObj yellow
+    keyword whole hw_GetAndLock yellow
+    keyword whole hw_GetChildColl yellow
+    keyword whole hw_GetChildCollObj yellow
+    keyword whole hw_GetChildDocColl yellow
+    keyword whole hw_GetChildDocCollObj yellow
+    keyword whole hw_GetObject yellow
+    keyword whole hw_GetObjectByQuery yellow
+    keyword whole hw_GetObjectByQueryColl yellow
+    keyword whole hw_GetObjectByQueryCollObj yellow
+    keyword whole hw_GetObjectByQueryObj yellow
+    keyword whole hw_GetParents yellow
+    keyword whole hw_GetParentsObj yellow
+    keyword whole hw_getrellink yellow
+    keyword whole hw_GetRemote yellow
+    keyword whole hw_getremotechildren yellow
+    keyword whole hw_GetSrcByDestObj yellow
+    keyword whole hw_GetText yellow
+    keyword whole hw_getusername yellow
+    keyword whole hw_Identify yellow
+    keyword whole hw_InCollections yellow
+    keyword whole hw_Info yellow
+    keyword whole hw_InsColl yellow
+    keyword whole hw_InsDoc yellow
+    keyword whole hw_insertanchors yellow
+    keyword whole hw_InsertDocument yellow
+    keyword whole hw_InsertObject yellow
+    keyword whole hw_mapid yellow
+    keyword whole hw_Modifyobject yellow
+    keyword whole hw_mv yellow
+    keyword whole hw_New_Document yellow
+    keyword whole hw_objrec2array yellow
+    keyword whole hw_Output_Document yellow
+    keyword whole hw_pConnect yellow
+    keyword whole hw_PipeDocument yellow
+    keyword whole hw_Root yellow
+    keyword whole hw_setlinkroot yellow
+    keyword whole hw_stat yellow
+    keyword whole hw_Unlock yellow
+    keyword whole hw_Who yellow
+    keyword whole hw_api_attribute yellow
+    keyword whole hwapi_hgcsp yellow
+    keyword whole hw_api_content yellow
+    keyword whole hw_api_object yellow
     keyword whole iconv_get_encoding yellow
+    keyword whole iconv_mime_decode_headers yellow
+    keyword whole iconv_mime_decode yellow
+    keyword whole iconv_mime_encode yellow
     keyword whole iconv_set_encoding yellow
-    keyword whole ignore_user_abort yellow
+    keyword whole iconv_strlen yellow
+    keyword whole iconv_strpos yellow
+    keyword whole iconv_strrpos yellow
+    keyword whole iconv_substr yellow
+    keyword whole iconv yellow
+    keyword whole ob_iconv_handler yellow
+    keyword whole gd_info yellow
+    keyword whole getimagesize yellow
+    keyword whole image_type_to_extension yellow
+    keyword whole image_type_to_mime_type yellow
     keyword whole image2wbmp yellow
     keyword whole imagealphablending yellow
+    keyword whole imageantialias yellow
     keyword whole imagearc yellow
     keyword whole imagechar yellow
     keyword whole imagecharup yellow
     keyword whole imagecolorallocate yellow
+    keyword whole imagecolorallocatealpha yellow
     keyword whole imagecolorat yellow
     keyword whole imagecolorclosest yellow
     keyword whole imagecolorclosestalpha yellow
@@ -335,6 +910,7 @@ context default
     keyword whole imagecolordeallocate yellow
     keyword whole imagecolorexact yellow
     keyword whole imagecolorexactalpha yellow
+    keyword whole imagecolormatch yellow
     keyword whole imagecolorresolve yellow
     keyword whole imagecolorresolvealpha yellow
     keyword whole imagecolorset yellow
@@ -347,9 +923,9 @@ context default
     keyword whole imagecopyresampled yellow
     keyword whole imagecopyresized yellow
     keyword whole imagecreate yellow
-    keyword whole imagecreatefromgd yellow
     keyword whole imagecreatefromgd2 yellow
     keyword whole imagecreatefromgd2part yellow
+    keyword whole imagecreatefromgd yellow
     keyword whole imagecreatefromgif yellow
     keyword whole imagecreatefromjpeg yellow
     keyword whole imagecreatefrompng yellow
@@ -367,16 +943,19 @@ context default
     keyword whole imagefilledpolygon yellow
     keyword whole imagefilledrectangle yellow
     keyword whole imagefilltoborder yellow
+    keyword whole imagefilter yellow
     keyword whole imagefontheight yellow
     keyword whole imagefontwidth yellow
     keyword whole imageftbbox yellow
     keyword whole imagefttext yellow
     keyword whole imagegammacorrect yellow
-    keyword whole imagegd yellow
     keyword whole imagegd2 yellow
+    keyword whole imagegd yellow
     keyword whole imagegif yellow
     keyword whole imageinterlace yellow
+    keyword whole imageistruecolor yellow
     keyword whole imagejpeg yellow
+    keyword whole imagelayereffect yellow
     keyword whole imageline yellow
     keyword whole imageloadfont yellow
     keyword whole imagepalettecopy yellow
@@ -391,6 +970,8 @@ context default
     keyword whole imagepsslantfont yellow
     keyword whole imagepstext yellow
     keyword whole imagerectangle yellow
+    keyword whole imagerotate yellow
+    keyword whole imagesavealpha yellow
     keyword whole imagesetbrush yellow
     keyword whole imagesetpixel yellow
     keyword whole imagesetstyle yellow
@@ -405,100 +986,678 @@ context default
     keyword whole imagettftext yellow
     keyword whole imagetypes yellow
     keyword whole imagewbmp yellow
-    keyword whole implode yellow
-    keyword whole import_request_variables yellow
-    keyword whole in_array yellow
-    keyword whole ini_get yellow
-    keyword whole ini_restore yellow
-    keyword whole ini_set yellow
-    keyword whole intval yellow
-    keyword whole ip2long yellow
+    keyword whole imagexbm yellow
     keyword whole iptcembed yellow
     keyword whole iptcparse yellow
-    keyword whole is_array yellow
-    keyword whole is_bool yellow
-    keyword whole is_callable yellow
-    keyword whole is_dir yellow
-    keyword whole is_double yellow
-    keyword whole is_executable yellow
-    keyword whole is_link yellow
-    keyword whole is_long yellow
-    keyword whole is_null yellow
-    keyword whole is_numeric yellow
-    keyword whole is_object yellow
-    keyword whole is_resource yellow
-    keyword whole is_scalar yellow
-    keyword whole is_string yellow
-    keyword whole is_uploaded_file yellow
-    keyword whole is_writable yellow
-    keyword whole isset yellow
+    keyword whole jpeg2wbmp yellow
+    keyword whole png2wbmp yellow
+    keyword whole imap_8bit yellow
+    keyword whole imap_alerts yellow
+    keyword whole imap_append yellow
+    keyword whole imap_base64 yellow
+    keyword whole imap_binary yellow
+    keyword whole imap_body yellow
+    keyword whole imap_bodystruct yellow
+    keyword whole imap_check yellow
+    keyword whole imap_clearflag_full yellow
+    keyword whole imap_close yellow
+    keyword whole imap_createmailbox yellow
+    keyword whole imap_delete yellow
+    keyword whole imap_deletemailbox yellow
+    keyword whole imap_errors yellow
+    keyword whole imap_expunge yellow
+    keyword whole imap_fetch_overview yellow
+    keyword whole imap_fetchbody yellow
+    keyword whole imap_fetchheader yellow
+    keyword whole imap_fetchstructure yellow
+    keyword whole imap_get_quota yellow
+    keyword whole imap_get_quotaroot yellow
+    keyword whole imap_getacl yellow
+    keyword whole imap_getmailboxes yellow
+    keyword whole imap_getsubscribed yellow
+    keyword whole imap_header yellow
+    keyword whole imap_headerinfo yellow
+    keyword whole imap_headers yellow
+    keyword whole imap_last_error yellow
+    keyword whole imap_list yellow
+    keyword whole imap_listmailbox yellow
+    keyword whole imap_listscan yellow
+    keyword whole imap_listsubscribed yellow
+    keyword whole imap_lsub yellow
+    keyword whole imap_mail_compose yellow
+    keyword whole imap_mail_copy yellow
+    keyword whole imap_mail_move yellow
+    keyword whole imap_mail yellow
+    keyword whole imap_mailboxmsginfo yellow
+    keyword whole imap_mime_header_decode yellow
+    keyword whole imap_msgno yellow
+    keyword whole imap_num_msg yellow
+    keyword whole imap_num_recent yellow
+    keyword whole imap_open yellow
+    keyword whole imap_ping yellow
+    keyword whole imap_qprint yellow
+    keyword whole imap_renamemailbox yellow
+    keyword whole imap_reopen yellow
+    keyword whole imap_rfc822_parse_adrlist yellow
+    keyword whole imap_rfc822_parse_headers yellow
+    keyword whole imap_rfc822_write_address yellow
+    keyword whole imap_scanmailbox yellow
+    keyword whole imap_search yellow
+    keyword whole imap_set_quota yellow
+    keyword whole imap_setacl yellow
+    keyword whole imap_setflag_full yellow
+    keyword whole imap_sort yellow
+    keyword whole imap_status yellow
+    keyword whole imap_subscribe yellow
+    keyword whole imap_thread yellow
+    keyword whole imap_timeout yellow
+    keyword whole imap_uid yellow
+    keyword whole imap_undelete yellow
+    keyword whole imap_unsubscribe yellow
+    keyword whole imap_utf7_decode yellow
+    keyword whole imap_utf7_encode yellow
+    keyword whole imap_utf8 yellow
+    keyword whole ifx_affected_rows yellow
+    keyword whole ifx_blobinfile_mode yellow
+    keyword whole ifx_byteasvarchar yellow
+    keyword whole ifx_close yellow
+    keyword whole ifx_connect yellow
+    keyword whole ifx_copy_blob yellow
+    keyword whole ifx_create_blob yellow
+    keyword whole ifx_create_char yellow
+    keyword whole ifx_do yellow
+    keyword whole ifx_error yellow
+    keyword whole ifx_errormsg yellow
+    keyword whole ifx_fetch_row yellow
+    keyword whole ifx_fieldproperties yellow
+    keyword whole ifx_fieldtypes yellow
+    keyword whole ifx_free_blob yellow
+    keyword whole ifx_free_char yellow
+    keyword whole ifx_free_result yellow
+    keyword whole ifx_get_blob yellow
+    keyword whole ifx_get_char yellow
+    keyword whole ifx_getsqlca yellow
+    keyword whole ifx_htmltbl_result yellow
+    keyword whole ifx_nullformat yellow
+    keyword whole ifx_num_fields yellow
+    keyword whole ifx_num_rows yellow
+    keyword whole ifx_pconnect yellow
+    keyword whole ifx_prepare yellow
+    keyword whole ifx_query yellow
+    keyword whole ifx_textasvarchar yellow
+    keyword whole ifx_update_blob yellow
+    keyword whole ifx_update_char yellow
+    keyword whole ifxus_close_slob yellow
+    keyword whole ifxus_create_slob yellow
+    keyword whole ifxus_free_slob yellow
+    keyword whole ifxus_open_slob yellow
+    keyword whole ifxus_read_slob yellow
+    keyword whole ifxus_seek_slob yellow
+    keyword whole ifxus_tell_slob yellow
+    keyword whole ifxus_write_slob yellow
+    keyword whole ibase_add_user yellow
+    keyword whole ibase_affected_rows yellow
+    keyword whole ibase_backup yellow
+    keyword whole ibase_blob_add yellow
+    keyword whole ibase_blob_cancel yellow
+    keyword whole ibase_blob_close yellow
+    keyword whole ibase_blob_create yellow
+    keyword whole ibase_blob_echo yellow
+    keyword whole ibase_blob_get yellow
+    keyword whole ibase_blob_import yellow
+    keyword whole ibase_blob_info yellow
+    keyword whole ibase_blob_open yellow
+    keyword whole ibase_close yellow
+    keyword whole ibase_commit_ret yellow
+    keyword whole ibase_commit yellow
+    keyword whole ibase_connect yellow
+    keyword whole ibase_db_info yellow
+    keyword whole ibase_delete_user yellow
+    keyword whole ibase_drop_db yellow
+    keyword whole ibase_errcode yellow
+    keyword whole ibase_errmsg yellow
+    keyword whole ibase_execute yellow
+    keyword whole ibase_fetch_assoc yellow
+    keyword whole ibase_fetch_object yellow
+    keyword whole ibase_fetch_row yellow
+    keyword whole ibase_field_info yellow
+    keyword whole ibase_free_event_handler yellow
+    keyword whole ibase_free_query yellow
+    keyword whole ibase_free_result yellow
+    keyword whole ibase_gen_id yellow
+    keyword whole ibase_maintain_db yellow
+    keyword whole ibase_modify_user yellow
+    keyword whole ibase_name_result yellow
+    keyword whole ibase_num_fields yellow
+    keyword whole ibase_num_params yellow
+    keyword whole ibase_param_info yellow
+    keyword whole ibase_pconnect yellow
+    keyword whole ibase_prepare yellow
+    keyword whole ibase_query yellow
+    keyword whole ibase_restore yellow
+    keyword whole ibase_rollback_ret yellow
+    keyword whole ibase_rollback yellow
+    keyword whole ibase_server_info yellow
+    keyword whole ibase_service_attach yellow
+    keyword whole ibase_service_detach yellow
+    keyword whole ibase_set_event_handler yellow
+    keyword whole ibase_timefmt yellow
+    keyword whole ibase_trans yellow
+    keyword whole ibase_wait_event yellow
+    keyword whole id3_get_genre_id yellow
+    keyword whole id3_get_genre_list yellow
+    keyword whole id3_get_genre_name yellow
+    keyword whole id3_get_tag yellow
+    keyword whole id3_get_version yellow
+    keyword whole id3_remove_tag yellow
+    keyword whole id3_set_tag yellow
+    keyword whole ingres_autocommit yellow
+    keyword whole ingres_close yellow
+    keyword whole ingres_commit yellow
+    keyword whole ingres_connect yellow
+    keyword whole ingres_fetch_array yellow
+    keyword whole ingres_fetch_object yellow
+    keyword whole ingres_fetch_row yellow
+    keyword whole ingres_field_length yellow
+    keyword whole ingres_field_name yellow
+    keyword whole ingres_field_nullable yellow
+    keyword whole ingres_field_precision yellow
+    keyword whole ingres_field_scale yellow
+    keyword whole ingres_field_type yellow
+    keyword whole ingres_num_fields yellow
+    keyword whole ingres_num_rows yellow
+    keyword whole ingres_pconnect yellow
+    keyword whole ingres_query yellow
+    keyword whole ingres_rollback yellow
+    keyword whole ircg_channel_mode yellow
+    keyword whole ircg_disconnect yellow
+    keyword whole ircg_eval_ecmascript_params yellow
+    keyword whole ircg_fetch_error_msg yellow
+    keyword whole ircg_get_username yellow
+    keyword whole ircg_html_encode yellow
+    keyword whole ircg_ignore_add yellow
+    keyword whole ircg_ignore_del yellow
+    keyword whole ircg_invite yellow
+    keyword whole ircg_is_conn_alive yellow
+    keyword whole ircg_join yellow
+    keyword whole ircg_kick yellow
+    keyword whole ircg_list yellow
+    keyword whole ircg_lookup_format_messages yellow
+    keyword whole ircg_lusers yellow
+    keyword whole ircg_msg yellow
+    keyword whole ircg_names yellow
+    keyword whole ircg_nick yellow
+    keyword whole ircg_nickname_escape yellow
+    keyword whole ircg_nickname_unescape yellow
+    keyword whole ircg_notice yellow
+    keyword whole ircg_oper yellow
+    keyword whole ircg_part yellow
+    keyword whole ircg_pconnect yellow
+    keyword whole ircg_register_format_messages yellow
+    keyword whole ircg_set_current yellow
+    keyword whole ircg_set_file yellow
+    keyword whole ircg_set_on_die yellow
+    keyword whole ircg_topic yellow
+    keyword whole ircg_who yellow
+    keyword whole ircg_whois yellow
     keyword whole java_last_exception_clear yellow
     keyword whole java_last_exception_get yellow
-    keyword whole jddayofweek yellow
-    keyword whole jdmonthname yellow
-    keyword whole jdtofrench yellow
-    keyword whole jdtogregorian yellow
-    keyword whole jdtojewish yellow
-    keyword whole jdtojulian yellow
-    keyword whole jdtounix yellow
-    keyword whole jewishtojd yellow
-    keyword whole join yellow
-    keyword whole jpeg2wbmp yellow
-    keyword whole juliantojd yellow
-    keyword whole key yellow
-    keyword whole krsort yellow
-    keyword whole ksort yellow
-    keyword whole lcg_value yellow
-    keyword whole leak yellow
-    keyword whole levenshtein yellow
-    keyword whole link yellow
-    keyword whole linkinfo yellow
-    keyword whole list yellow
-    keyword whole localeconv yellow
-    keyword whole localtime yellow
-    keyword whole log yellow
-    keyword whole log10 yellow
-    keyword whole log1p yellow
-    keyword whole long2ip yellow
-    keyword whole lstat yellow
-    keyword whole ltrim yellow
-    keyword whole magic_quotes_gpc yellow
-    keyword whole magic_quotes_runtime yellow
+    keyword whole ldap_8859_to_t61 yellow
+    keyword whole ldap_add yellow
+    keyword whole ldap_bind yellow
+    keyword whole ldap_close yellow
+    keyword whole ldap_compare yellow
+    keyword whole ldap_connect yellow
+    keyword whole ldap_count_entries yellow
+    keyword whole ldap_delete yellow
+    keyword whole ldap_dn2ufn yellow
+    keyword whole ldap_err2str yellow
+    keyword whole ldap_errno yellow
+    keyword whole ldap_error yellow
+    keyword whole ldap_explode_dn yellow
+    keyword whole ldap_first_attribute yellow
+    keyword whole ldap_first_entry yellow
+    keyword whole ldap_first_reference yellow
+    keyword whole ldap_free_result yellow
+    keyword whole ldap_get_attributes yellow
+    keyword whole ldap_get_dn yellow
+    keyword whole ldap_get_entries yellow
+    keyword whole ldap_get_option yellow
+    keyword whole ldap_get_values_len yellow
+    keyword whole ldap_get_values yellow
+    keyword whole ldap_list yellow
+    keyword whole ldap_mod_add yellow
+    keyword whole ldap_mod_del yellow
+    keyword whole ldap_mod_replace yellow
+    keyword whole ldap_modify yellow
+    keyword whole ldap_next_attribute yellow
+    keyword whole ldap_next_entry yellow
+    keyword whole ldap_next_reference yellow
+    keyword whole ldap_parse_reference yellow
+    keyword whole ldap_parse_result yellow
+    keyword whole ldap_read yellow
+    keyword whole ldap_rename yellow
+    keyword whole ldap_sasl_bind yellow
+    keyword whole ldap_search yellow
+    keyword whole ldap_set_option yellow
+    keyword whole ldap_set_rebind_proc yellow
+    keyword whole ldap_sort yellow
+    keyword whole ldap_start_tls yellow
+    keyword whole ldap_t61_to_8859 yellow
+    keyword whole ldap_unbind yellow
+    keyword whole lzf_compress yellow
+    keyword whole lzf_decompress yellow
+    keyword whole lzf_optimized_for yellow
+    keyword whole ezmlm_hash yellow
     keyword whole mail yellow
     keyword whole mailparse_determine_best_xfer_encoding yellow
     keyword whole mailparse_msg_create yellow
-    keyword whole mailparse_msg_extract yellow
-    keyword whole mailparse_msg_extract_file yellow
-    keyword whole mailparse_msg_extract_part yellow
     keyword whole mailparse_msg_extract_part_file yellow
-    keyword whole mailparse_msg_find yellow
+    keyword whole mailparse_msg_extract_part yellow
     keyword whole mailparse_msg_free yellow
-    keyword whole mailparse_msg_get_part yellow
     keyword whole mailparse_msg_get_part_data yellow
+    keyword whole mailparse_msg_get_part yellow
     keyword whole mailparse_msg_get_structure yellow
-    keyword whole mailparse_msg_getinfo yellow
-    keyword whole mailparse_msg_getstructure yellow
-    keyword whole mailparse_msg_parse yellow
     keyword whole mailparse_msg_parse_file yellow
+    keyword whole mailparse_msg_parse yellow
     keyword whole mailparse_rfc822_parse_addresses yellow
     keyword whole mailparse_stream_encode yellow
+    keyword whole mailparse_uudecode_all yellow
+    keyword whole abs yellow
+    keyword whole acos yellow
+    keyword whole acosh yellow
+    keyword whole asin yellow
+    keyword whole asinh yellow
+    keyword whole atan2 yellow
+    keyword whole atan yellow
+    keyword whole atanh yellow
+    keyword whole base_convert yellow
+    keyword whole bindec yellow
+    keyword whole ceil yellow
+    keyword whole cos yellow
+    keyword whole cosh yellow
+    keyword whole decbin yellow
+    keyword whole dechex yellow
+    keyword whole decoct yellow
+    keyword whole deg2rad yellow
+    keyword whole exp yellow
+    keyword whole expm1 yellow
+    keyword whole floor yellow
+    keyword whole fmod yellow
+    keyword whole getrandmax yellow
+    keyword whole hexdec yellow
+    keyword whole hypot yellow
+    keyword whole is_finite yellow
+    keyword whole is_infinite yellow
+    keyword whole is_nan yellow
+    keyword whole lcg_value yellow
+    keyword whole log10 yellow
+    keyword whole log1p yellow
+    keyword whole log yellow
     keyword whole max yellow
-    keyword whole md5 yellow
-    keyword whole mdecrypt_generic yellow
-    keyword whole metaphone yellow
-    keyword whole microtime yellow
     keyword whole min yellow
-    keyword whole ming_setCubicThreshold yellow
-    keyword whole ming_setScale yellow
-    keyword whole mkdir yellow
-    keyword whole mktime yellow
-    keyword whole move_uploaded_file yellow
-    keyword whole my_drawtext yellow
+    keyword whole mt_getrandmax yellow
+    keyword whole mt_rand yellow
+    keyword whole mt_srand yellow
+    keyword whole octdec yellow
+    keyword whole pi yellow
+    keyword whole pow yellow
+    keyword whole rad2deg yellow
+    keyword whole rand yellow
+    keyword whole round yellow
+    keyword whole sin yellow
+    keyword whole sinh yellow
+    keyword whole sqrt yellow
+    keyword whole srand yellow
+    keyword whole tan yellow
+    keyword whole tanh yellow
+    keyword whole mb_convert_case yellow
+    keyword whole mb_convert_encoding yellow
+    keyword whole mb_convert_kana yellow
+    keyword whole mb_convert_variables yellow
+    keyword whole mb_decode_mimeheader yellow
+    keyword whole mb_decode_numericentity yellow
+    keyword whole mb_detect_encoding yellow
+    keyword whole mb_detect_order yellow
+    keyword whole mb_encode_mimeheader yellow
+    keyword whole mb_encode_numericentity yellow
+    keyword whole mb_ereg_match yellow
+    keyword whole mb_ereg_replace yellow
+    keyword whole mb_ereg_search_getpos yellow
+    keyword whole mb_ereg_search_getregs yellow
+    keyword whole mb_ereg_search_init yellow
+    keyword whole mb_ereg_search_pos yellow
+    keyword whole mb_ereg_search_regs yellow
+    keyword whole mb_ereg_search_setpos yellow
+    keyword whole mb_ereg_search yellow
+    keyword whole mb_ereg yellow
+    keyword whole mb_eregi_replace yellow
+    keyword whole mb_eregi yellow
+    keyword whole mb_get_info yellow
+    keyword whole mb_http_input yellow
+    keyword whole mb_http_output yellow
+    keyword whole mb_internal_encoding yellow
+    keyword whole mb_language yellow
+    keyword whole mb_list_encodings yellow
+    keyword whole mb_output_handler yellow
+    keyword whole mb_parse_str yellow
+    keyword whole mb_preferred_mime_name yellow
+    keyword whole mb_regex_encoding yellow
+    keyword whole mb_regex_set_options yellow
+    keyword whole mb_send_mail yellow
+    keyword whole mb_split yellow
+    keyword whole mb_strcut yellow
+    keyword whole mb_strimwidth yellow
+    keyword whole mb_strlen yellow
+    keyword whole mb_strpos yellow
+    keyword whole mb_strrpos yellow
+    keyword whole mb_strtolower yellow
+    keyword whole mb_strtoupper yellow
+    keyword whole mb_strwidth yellow
+    keyword whole mb_substitute_character yellow
+    keyword whole mb_substr_count yellow
+    keyword whole mb_substr yellow
+    keyword whole mcal_append_event yellow
+    keyword whole mcal_close yellow
+    keyword whole mcal_create_calendar yellow
+    keyword whole mcal_date_compare yellow
+    keyword whole mcal_date_valid yellow
+    keyword whole mcal_day_of_week yellow
+    keyword whole mcal_day_of_year yellow
+    keyword whole mcal_days_in_month yellow
+    keyword whole mcal_delete_calendar yellow
+    keyword whole mcal_delete_event yellow
+    keyword whole mcal_event_add_attribute yellow
+    keyword whole mcal_event_init yellow
+    keyword whole mcal_event_set_alarm yellow
+    keyword whole mcal_event_set_category yellow
+    keyword whole mcal_event_set_class yellow
+    keyword whole mcal_event_set_description yellow
+    keyword whole mcal_event_set_end yellow
+    keyword whole mcal_event_set_recur_daily yellow
+    keyword whole mcal_event_set_recur_monthly_mday yellow
+    keyword whole mcal_event_set_recur_monthly_wday yellow
+    keyword whole mcal_event_set_recur_none yellow
+    keyword whole mcal_event_set_recur_weekly yellow
+    keyword whole mcal_event_set_recur_yearly yellow
+    keyword whole mcal_event_set_start yellow
+    keyword whole mcal_event_set_title yellow
+    keyword whole mcal_expunge yellow
+    keyword whole mcal_fetch_current_stream_event yellow
+    keyword whole mcal_fetch_event yellow
+    keyword whole mcal_is_leap_year yellow
+    keyword whole mcal_list_alarms yellow
+    keyword whole mcal_list_events yellow
+    keyword whole mcal_next_recurrence yellow
+    keyword whole mcal_open yellow
+    keyword whole mcal_popen yellow
+    keyword whole mcal_rename_calendar yellow
+    keyword whole mcal_reopen yellow
+    keyword whole mcal_snooze yellow
+    keyword whole mcal_store_event yellow
+    keyword whole mcal_time_valid yellow
+    keyword whole mcal_week_of_year yellow
+    keyword whole mcrypt_cbc yellow
+    keyword whole mcrypt_cfb yellow
+    keyword whole mcrypt_create_iv yellow
+    keyword whole mcrypt_decrypt yellow
+    keyword whole mcrypt_ecb yellow
+    keyword whole mcrypt_enc_get_algorithms_name yellow
+    keyword whole mcrypt_enc_get_block_size yellow
+    keyword whole mcrypt_enc_get_iv_size yellow
+    keyword whole mcrypt_enc_get_key_size yellow
+    keyword whole mcrypt_enc_get_modes_name yellow
+    keyword whole mcrypt_enc_get_supported_key_sizes yellow
+    keyword whole mcrypt_enc_is_block_algorithm_mode yellow
+    keyword whole mcrypt_enc_is_block_algorithm yellow
+    keyword whole mcrypt_enc_is_block_mode yellow
+    keyword whole mcrypt_enc_self_test yellow
+    keyword whole mcrypt_encrypt yellow
+    keyword whole mcrypt_generic_deinit yellow
+    keyword whole mcrypt_generic_end yellow
+    keyword whole mcrypt_generic_init yellow
+    keyword whole mcrypt_generic yellow
+    keyword whole mcrypt_get_block_size yellow
+    keyword whole mcrypt_get_cipher_name yellow
+    keyword whole mcrypt_get_iv_size yellow
+    keyword whole mcrypt_get_key_size yellow
+    keyword whole mcrypt_list_algorithms yellow
+    keyword whole mcrypt_list_modes yellow
+    keyword whole mcrypt_module_close yellow
+    keyword whole mcrypt_module_get_algo_block_size yellow
+    keyword whole mcrypt_module_get_algo_key_size yellow
+    keyword whole mcrypt_module_get_supported_key_sizes yellow
+    keyword whole mcrypt_module_is_block_algorithm_mode yellow
+    keyword whole mcrypt_module_is_block_algorithm yellow
+    keyword whole mcrypt_module_is_block_mode yellow
+    keyword whole mcrypt_module_open yellow
+    keyword whole mcrypt_module_self_test yellow
+    keyword whole mcrypt_ofb yellow
+    keyword whole mdecrypt_generic yellow
+    keyword whole mcve_adduser yellow
+    keyword whole mcve_adduserarg yellow
+    keyword whole mcve_bt yellow
+    keyword whole mcve_checkstatus yellow
+    keyword whole mcve_chkpwd yellow
+    keyword whole mcve_chngpwd yellow
+    keyword whole mcve_completeauthorizations yellow
+    keyword whole mcve_connect yellow
+    keyword whole mcve_connectionerror yellow
+    keyword whole mcve_deleteresponse yellow
+    keyword whole mcve_deletetrans yellow
+    keyword whole mcve_deleteusersetup yellow
+    keyword whole mcve_deluser yellow
+    keyword whole mcve_destroyconn yellow
+    keyword whole mcve_destroyengine yellow
+    keyword whole mcve_disableuser yellow
+    keyword whole mcve_edituser yellow
+    keyword whole mcve_enableuser yellow
+    keyword whole mcve_force yellow
+    keyword whole mcve_getcell yellow
+    keyword whole mcve_getcellbynum yellow
+    keyword whole mcve_getcommadelimited yellow
+    keyword whole mcve_getheader yellow
+    keyword whole mcve_getuserarg yellow
+    keyword whole mcve_getuserparam yellow
+    keyword whole mcve_gft yellow
+    keyword whole mcve_gl yellow
+    keyword whole mcve_gut yellow
+    keyword whole mcve_initconn yellow
+    keyword whole mcve_initengine yellow
+    keyword whole mcve_initusersetup yellow
+    keyword whole mcve_iscommadelimited yellow
+    keyword whole mcve_liststats yellow
+    keyword whole mcve_listusers yellow
+    keyword whole mcve_maxconntimeout yellow
+    keyword whole mcve_monitor yellow
+    keyword whole mcve_numcolumns yellow
+    keyword whole mcve_numrows yellow
+    keyword whole mcve_override yellow
+    keyword whole mcve_parsecommadelimited yellow
+    keyword whole mcve_ping yellow
+    keyword whole mcve_preauth yellow
+    keyword whole mcve_preauthcompletion yellow
+    keyword whole mcve_qc yellow
+    keyword whole mcve_responseparam yellow
+    keyword whole mcve_return yellow
+    keyword whole mcve_returncode yellow
+    keyword whole mcve_returnstatus yellow
+    keyword whole mcve_sale yellow
+    keyword whole mcve_setblocking yellow
+    keyword whole mcve_setdropfile yellow
+    keyword whole mcve_setip yellow
+    keyword whole mcve_setssl_files yellow
+    keyword whole mcve_setssl yellow
+    keyword whole mcve_settimeout yellow
+    keyword whole mcve_settle yellow
+    keyword whole mcve_text_avs yellow
+    keyword whole mcve_text_code yellow
+    keyword whole mcve_text_cv yellow
+    keyword whole mcve_transactionauth yellow
+    keyword whole mcve_transactionavs yellow
+    keyword whole mcve_transactionbatch yellow
+    keyword whole mcve_transactioncv yellow
+    keyword whole mcve_transactionid yellow
+    keyword whole mcve_transactionitem yellow
+    keyword whole mcve_transactionssent yellow
+    keyword whole mcve_transactiontext yellow
+    keyword whole mcve_transinqueue yellow
+    keyword whole mcve_transnew yellow
+    keyword whole mcve_transparam yellow
+    keyword whole mcve_transsend yellow
+    keyword whole mcve_ub yellow
+    keyword whole mcve_uwait yellow
+    keyword whole mcve_verifyconnection yellow
+    keyword whole mcve_verifysslcert yellow
+    keyword whole mcve_void yellow
+    keyword whole memcache_debug yellow
+    keyword whole mhash_count yellow
+    keyword whole mhash_get_block_size yellow
+    keyword whole mhash_get_hash_name yellow
+    keyword whole mhash_keygen_s2k yellow
+    keyword whole mhash yellow
+    keyword whole mime_content_type yellow
+    keyword whole mssql_bind yellow
+    keyword whole mssql_close yellow
+    keyword whole mssql_connect yellow
+    keyword whole mssql_data_seek yellow
+    keyword whole mssql_execute yellow
+    keyword whole mssql_fetch_array yellow
+    keyword whole mssql_fetch_assoc yellow
+    keyword whole mssql_fetch_batch yellow
+    keyword whole mssql_fetch_field yellow
+    keyword whole mssql_fetch_object yellow
+    keyword whole mssql_fetch_row yellow
+    keyword whole mssql_field_length yellow
+    keyword whole mssql_field_name yellow
+    keyword whole mssql_field_seek yellow
+    keyword whole mssql_field_type yellow
+    keyword whole mssql_free_result yellow
+    keyword whole mssql_free_statement yellow
+    keyword whole mssql_get_last_message yellow
+    keyword whole mssql_guid_string yellow
+    keyword whole mssql_init yellow
+    keyword whole mssql_min_error_severity yellow
+    keyword whole mssql_min_message_severity yellow
+    keyword whole mssql_next_result yellow
+    keyword whole mssql_num_fields yellow
+    keyword whole mssql_num_rows yellow
+    keyword whole mssql_pconnect yellow
+    keyword whole mssql_query yellow
+    keyword whole mssql_result yellow
+    keyword whole mssql_rows_affected yellow
+    keyword whole mssql_select_db yellow
+    keyword whole ming_setcubicthreshold yellow
+    keyword whole ming_setscale yellow
+    keyword whole ming_useswfversion yellow
+    keyword whole SWFAction yellow
+    keyword whole SWFBitmap yellow
+    keyword whole swfbutton_keypress yellow
+    keyword whole SWFbutton yellow
+    keyword whole SWFDisplayItem yellow
+    keyword whole SWFFill yellow
+    keyword whole SWFFont yellow
+    keyword whole SWFGradient yellow
+    keyword whole SWFMorph yellow
+    keyword whole SWFMovie yellow
+    keyword whole SWFShape yellow
+    keyword whole SWFSprite yellow
+    keyword whole SWFText yellow
+    keyword whole SWFTextField yellow
+    keyword whole connection_aborted yellow
+    keyword whole connection_status yellow
+    keyword whole connection_timeout yellow
+    keyword whole constant yellow
+    keyword whole define yellow
+    keyword whole defined yellow
+    keyword whole die yellow
+    keyword whole eval yellow
+    keyword whole exit yellow
+    keyword whole get_browser yellow
+    keyword whole highlight_file yellow
+    keyword whole highlight_string yellow
+    keyword whole ignore_user_abort yellow
+    keyword whole pack yellow
+    keyword whole php_check_syntax yellow
+    keyword whole php_strip_whitespace yellow
+    keyword whole show_source yellow
+    keyword whole sleep yellow
+    keyword whole time_nanosleep yellow
+    keyword whole uniqid yellow
+    keyword whole unpack yellow
+    keyword whole usleep yellow
+    keyword whole udm_add_search_limit yellow
+    keyword whole udm_alloc_agent_array yellow
+    keyword whole udm_alloc_agent yellow
+    keyword whole udm_api_version yellow
+    keyword whole udm_cat_list yellow
+    keyword whole udm_cat_path yellow
+    keyword whole udm_check_charset yellow
+    keyword whole udm_check_stored yellow
+    keyword whole udm_clear_search_limits yellow
+    keyword whole udm_close_stored yellow
+    keyword whole udm_crc32 yellow
+    keyword whole udm_errno yellow
+    keyword whole udm_error yellow
+    keyword whole udm_find yellow
+    keyword whole udm_free_agent yellow
+    keyword whole udm_free_ispell_data yellow
+    keyword whole udm_free_res yellow
+    keyword whole udm_get_doc_count yellow
+    keyword whole udm_get_res_field yellow
+    keyword whole udm_get_res_param yellow
+    keyword whole udm_hash32 yellow
+    keyword whole udm_load_ispell_data yellow
+    keyword whole udm_open_stored yellow
+    keyword whole udm_set_agent_param yellow
+    keyword whole msql_affected_rows yellow
+    keyword whole msql_close yellow
+    keyword whole msql_connect yellow
+    keyword whole msql_create_db yellow
+    keyword whole msql_createdb yellow
+    keyword whole msql_data_seek yellow
+    keyword whole msql_db_query yellow
+    keyword whole msql_dbname yellow
+    keyword whole msql_drop_db yellow
+    keyword whole msql_error yellow
+    keyword whole msql_fetch_array yellow
+    keyword whole msql_fetch_field yellow
+    keyword whole msql_fetch_object yellow
+    keyword whole msql_fetch_row yellow
+    keyword whole msql_field_flags yellow
+    keyword whole msql_field_len yellow
+    keyword whole msql_field_name yellow
+    keyword whole msql_field_seek yellow
+    keyword whole msql_field_table yellow
+    keyword whole msql_field_type yellow
+    keyword whole msql_fieldflags yellow
+    keyword whole msql_fieldlen yellow
+    keyword whole msql_fieldname yellow
+    keyword whole msql_fieldtable yellow
+    keyword whole msql_fieldtype yellow
+    keyword whole msql_free_result yellow
+    keyword whole msql_list_dbs yellow
+    keyword whole msql_list_fields yellow
+    keyword whole msql_list_tables yellow
+    keyword whole msql_num_fields yellow
+    keyword whole msql_num_rows yellow
+    keyword whole msql_numfields yellow
+    keyword whole msql_numrows yellow
+    keyword whole msql_pconnect yellow
+    keyword whole msql_query yellow
+    keyword whole msql_regcase yellow
+    keyword whole msql_result yellow
+    keyword whole msql_select_db yellow
+    keyword whole msql_tablename yellow
+    keyword whole msql yellow
     keyword whole mysql_affected_rows yellow
+    keyword whole mysql_change_user yellow
+    keyword whole mysql_client_encoding yellow
     keyword whole mysql_close yellow
     keyword whole mysql_connect yellow
     keyword whole mysql_create_db yellow
     keyword whole mysql_data_seek yellow
+    keyword whole mysql_db_name yellow
     keyword whole mysql_db_query yellow
     keyword whole mysql_drop_db yellow
     keyword whole mysql_errno yellow
@@ -521,27 +1680,529 @@ context default
     keyword whole mysql_get_host_info yellow
     keyword whole mysql_get_proto_info yellow
     keyword whole mysql_get_server_info yellow
+    keyword whole mysql_info yellow
     keyword whole mysql_insert_id yellow
     keyword whole mysql_list_dbs yellow
     keyword whole mysql_list_fields yellow
+    keyword whole mysql_list_processes yellow
     keyword whole mysql_list_tables yellow
     keyword whole mysql_num_fields yellow
     keyword whole mysql_num_rows yellow
     keyword whole mysql_pconnect yellow
+    keyword whole mysql_ping yellow
     keyword whole mysql_query yellow
+    keyword whole mysql_real_escape_string yellow
     keyword whole mysql_result yellow
     keyword whole mysql_select_db yellow
+    keyword whole mysql_stat yellow
     keyword whole mysql_tablename yellow
+    keyword whole mysql_thread_id yellow
     keyword whole mysql_unbuffered_query yellow
-    keyword whole natcasesort yellow
-    keyword whole natsort yellow
-    keyword whole next yellow
-    keyword whole nl2br yellow
-    keyword whole nl_langinfo yellow
-    keyword whole number_format yellow
-    keyword whole octdec yellow
-    keyword whole opendir yellow
+    keyword whole mysqli_affected_rows yellow
+    keyword whole mysqli_autocommit yellow
+    keyword whole mysqli_bind_param yellow
+    keyword whole mysqli_bind_result yellow
+    keyword whole mysqli_change_user yellow
+    keyword whole mysqli_character_set_name yellow
+    keyword whole mysqli_client_encoding yellow
+    keyword whole mysqli_close yellow
+    keyword whole mysqli_commit yellow
+    keyword whole mysqli_connect_errno yellow
+    keyword whole mysqli_connect_error yellow
+    keyword whole mysqli_connect yellow
+    keyword whole mysqli_data_seek yellow
+    keyword whole mysqli_debug yellow
+    keyword whole mysqli_disable_reads_from_master yellow
+    keyword whole mysqli_disable_rpl_parse yellow
+    keyword whole mysqli_dump_debug_info yellow
+    keyword whole mysqli_embedded_connect yellow
+    keyword whole mysqli_enable_reads_from_master yellow
+    keyword whole mysqli_enable_rpl_parse yellow
+    keyword whole mysqli_errno yellow
+    keyword whole mysqli_error yellow
+    keyword whole mysqli_escape_string yellow
+    keyword whole mysqli_execute yellow
+    keyword whole mysqli_fetch_array yellow
+    keyword whole mysqli_fetch_assoc yellow
+    keyword whole mysqli_fetch_field_direct yellow
+    keyword whole mysqli_fetch_field yellow
+    keyword whole mysqli_fetch_fields yellow
+    keyword whole mysqli_fetch_lengths yellow
+    keyword whole mysqli_fetch_object yellow
+    keyword whole mysqli_fetch_row yellow
+    keyword whole mysqli_fetch yellow
+    keyword whole mysqli_field_count yellow
+    keyword whole mysqli_field_seek yellow
+    keyword whole mysqli_field_tell yellow
+    keyword whole mysqli_free_result yellow
+    keyword whole mysqli_get_client_info yellow
+    keyword whole mysqli_get_client_version yellow
+    keyword whole mysqli_get_host_info yellow
+    keyword whole mysqli_get_metadata yellow
+    keyword whole mysqli_get_proto_info yellow
+    keyword whole mysqli_get_server_info yellow
+    keyword whole mysqli_get_server_version yellow
+    keyword whole mysqli_info yellow
+    keyword whole mysqli_init yellow
+    keyword whole mysqli_insert_id yellow
+    keyword whole mysqli_kill yellow
+    keyword whole mysqli_master_query yellow
+    keyword whole mysqli_more_results yellow
+    keyword whole mysqli_multi_query yellow
+    keyword whole mysqli_next_result yellow
+    keyword whole mysqli_num_fields yellow
+    keyword whole mysqli_num_rows yellow
+    keyword whole mysqli_options yellow
+    keyword whole mysqli_param_count yellow
+    keyword whole mysqli_ping yellow
+    keyword whole mysqli_prepare yellow
+    keyword whole mysqli_query yellow
+    keyword whole mysqli_real_connect yellow
+    keyword whole mysqli_real_escape_string yellow
+    keyword whole mysqli_real_query yellow
+    keyword whole mysqli_report yellow
+    keyword whole mysqli_rollback yellow
+    keyword whole mysqli_rpl_parse_enabled yellow
+    keyword whole mysqli_rpl_probe yellow
+    keyword whole mysqli_rpl_query_type yellow
+    keyword whole mysqli_select_db yellow
+    keyword whole mysqli_send_long_data yellow
+    keyword whole mysqli_send_query yellow
+    keyword whole mysqli_server_end yellow
+    keyword whole mysqli_server_init yellow
+    keyword whole mysqli_set_opt yellow
+    keyword whole mysqli_sqlstate yellow
+    keyword whole mysqli_ssl_set yellow
+    keyword whole mysqli_stat yellow
+    keyword whole mysqli_stmt_affected_rows yellow
+    keyword whole mysqli_stmt_bind_param yellow
+    keyword whole mysqli_stmt_bind_result yellow
+    keyword whole mysqli_stmt_close yellow
+    keyword whole mysqli_stmt_data_seek yellow
+    keyword whole mysqli_stmt_errno yellow
+    keyword whole mysqli_stmt_error yellow
+    keyword whole mysqli_stmt_execute yellow
+    keyword whole mysqli_stmt_fetch yellow
+    keyword whole mysqli_stmt_free_result yellow
+    keyword whole mysqli_stmt_init yellow
+    keyword whole mysqli_stmt_num_rows yellow
+    keyword whole mysqli_stmt_param_count yellow
+    keyword whole mysqli_stmt_prepare yellow
+    keyword whole mysqli_stmt_reset yellow
+    keyword whole mysqli_stmt_result_metadata yellow
+    keyword whole mysqli_stmt_send_long_data yellow
+    keyword whole mysqli_stmt_sqlstate yellow
+    keyword whole mysqli_stmt_store_result yellow
+    keyword whole mysqli_store_result yellow
+    keyword whole mysqli_thread_id yellow
+    keyword whole mysqli_thread_safe yellow
+    keyword whole mysqli_use_result yellow
+    keyword whole mysqli_warning_count yellow
+    keyword whole msession_connect yellow
+    keyword whole msession_count yellow
+    keyword whole msession_create yellow
+    keyword whole msession_destroy yellow
+    keyword whole msession_disconnect yellow
+    keyword whole msession_find yellow
+    keyword whole msession_get_array yellow
+    keyword whole msession_get yellow
+    keyword whole msession_getdata yellow
+    keyword whole msession_inc yellow
+    keyword whole msession_list yellow
+    keyword whole msession_listvar yellow
+    keyword whole msession_lock yellow
+    keyword whole msession_plugin yellow
+    keyword whole msession_randstr yellow
+    keyword whole msession_set_array yellow
+    keyword whole msession_set yellow
+    keyword whole msession_setdata yellow
+    keyword whole msession_timeout yellow
+    keyword whole msession_uniq yellow
+    keyword whole msession_unlock yellow
+    keyword whole muscat_close yellow
+    keyword whole muscat_get yellow
+    keyword whole muscat_give yellow
+    keyword whole muscat_setup_net yellow
+    keyword whole muscat_setup yellow
+    keyword whole checkdnsrr yellow
+    keyword whole closelog yellow
+    keyword whole debugger_off yellow
+    keyword whole debugger_on yellow
+    keyword whole define_syslog_variables yellow
+    keyword whole dns_check_record yellow
+    keyword whole dns_get_mx yellow
+    keyword whole dns_get_record yellow
+    keyword whole fsockopen yellow
+    keyword whole gethostbyaddr yellow
+    keyword whole gethostbyname yellow
+    keyword whole gethostbynamel yellow
+    keyword whole getmxrr yellow
+    keyword whole getprotobyname yellow
+    keyword whole getprotobynumber yellow
+    keyword whole getservbyname yellow
+    keyword whole getservbyport yellow
+    keyword whole inet_ntop yellow
+    keyword whole inet_pton yellow
+    keyword whole ip2long yellow
+    keyword whole long2ip yellow
     keyword whole openlog yellow
+    keyword whole pfsockopen yellow
+    keyword whole socket_get_status yellow
+    keyword whole socket_set_blocking yellow
+    keyword whole socket_set_timeout yellow
+    keyword whole syslog yellow
+    keyword whole ncurses_addch yellow
+    keyword whole ncurses_addchnstr yellow
+    keyword whole ncurses_addchstr yellow
+    keyword whole ncurses_addnstr yellow
+    keyword whole ncurses_addstr yellow
+    keyword whole ncurses_assume_default_colors yellow
+    keyword whole ncurses_attroff yellow
+    keyword whole ncurses_attron yellow
+    keyword whole ncurses_attrset yellow
+    keyword whole ncurses_baudrate yellow
+    keyword whole ncurses_beep yellow
+    keyword whole ncurses_bkgd yellow
+    keyword whole ncurses_bkgdset yellow
+    keyword whole ncurses_border yellow
+    keyword whole ncurses_bottom_panel yellow
+    keyword whole ncurses_can_change_color yellow
+    keyword whole ncurses_cbreak yellow
+    keyword whole ncurses_clear yellow
+    keyword whole ncurses_clrtobot yellow
+    keyword whole ncurses_clrtoeol yellow
+    keyword whole ncurses_color_content yellow
+    keyword whole ncurses_color_set yellow
+    keyword whole ncurses_curs_set yellow
+    keyword whole ncurses_def_prog_mode yellow
+    keyword whole ncurses_def_shell_mode yellow
+    keyword whole ncurses_define_key yellow
+    keyword whole ncurses_del_panel yellow
+    keyword whole ncurses_delay_output yellow
+    keyword whole ncurses_delch yellow
+    keyword whole ncurses_deleteln yellow
+    keyword whole ncurses_delwin yellow
+    keyword whole ncurses_doupdate yellow
+    keyword whole ncurses_echo yellow
+    keyword whole ncurses_echochar yellow
+    keyword whole ncurses_end yellow
+    keyword whole ncurses_erase yellow
+    keyword whole ncurses_erasechar yellow
+    keyword whole ncurses_filter yellow
+    keyword whole ncurses_flash yellow
+    keyword whole ncurses_flushinp yellow
+    keyword whole ncurses_getch yellow
+    keyword whole ncurses_getmaxyx yellow
+    keyword whole ncurses_getmouse yellow
+    keyword whole ncurses_getyx yellow
+    keyword whole ncurses_halfdelay yellow
+    keyword whole ncurses_has_colors yellow
+    keyword whole ncurses_has_ic yellow
+    keyword whole ncurses_has_il yellow
+    keyword whole ncurses_has_key yellow
+    keyword whole ncurses_hide_panel yellow
+    keyword whole ncurses_hline yellow
+    keyword whole ncurses_inch yellow
+    keyword whole ncurses_init_color yellow
+    keyword whole ncurses_init_pair yellow
+    keyword whole ncurses_init yellow
+    keyword whole ncurses_insch yellow
+    keyword whole ncurses_insdelln yellow
+    keyword whole ncurses_insertln yellow
+    keyword whole ncurses_insstr yellow
+    keyword whole ncurses_instr yellow
+    keyword whole ncurses_isendwin yellow
+    keyword whole ncurses_keyok yellow
+    keyword whole ncurses_keypad yellow
+    keyword whole ncurses_killchar yellow
+    keyword whole ncurses_longname yellow
+    keyword whole ncurses_meta yellow
+    keyword whole ncurses_mouse_trafo yellow
+    keyword whole ncurses_mouseinterval yellow
+    keyword whole ncurses_mousemask yellow
+    keyword whole ncurses_move_panel yellow
+    keyword whole ncurses_move yellow
+    keyword whole ncurses_mvaddch yellow
+    keyword whole ncurses_mvaddchnstr yellow
+    keyword whole ncurses_mvaddchstr yellow
+    keyword whole ncurses_mvaddnstr yellow
+    keyword whole ncurses_mvaddstr yellow
+    keyword whole ncurses_mvcur yellow
+    keyword whole ncurses_mvdelch yellow
+    keyword whole ncurses_mvgetch yellow
+    keyword whole ncurses_mvhline yellow
+    keyword whole ncurses_mvinch yellow
+    keyword whole ncurses_mvvline yellow
+    keyword whole ncurses_mvwaddstr yellow
+    keyword whole ncurses_napms yellow
+    keyword whole ncurses_new_panel yellow
+    keyword whole ncurses_newpad yellow
+    keyword whole ncurses_newwin yellow
+    keyword whole ncurses_nl yellow
+    keyword whole ncurses_nocbreak yellow
+    keyword whole ncurses_noecho yellow
+    keyword whole ncurses_nonl yellow
+    keyword whole ncurses_noqiflush yellow
+    keyword whole ncurses_noraw yellow
+    keyword whole ncurses_pair_content yellow
+    keyword whole ncurses_panel_above yellow
+    keyword whole ncurses_panel_below yellow
+    keyword whole ncurses_panel_window yellow
+    keyword whole ncurses_pnoutrefresh yellow
+    keyword whole ncurses_prefresh yellow
+    keyword whole ncurses_putp yellow
+    keyword whole ncurses_qiflush yellow
+    keyword whole ncurses_raw yellow
+    keyword whole ncurses_refresh yellow
+    keyword whole ncurses_replace_panel yellow
+    keyword whole ncurses_reset_prog_mode yellow
+    keyword whole ncurses_reset_shell_mode yellow
+    keyword whole ncurses_resetty yellow
+    keyword whole ncurses_savetty yellow
+    keyword whole ncurses_scr_dump yellow
+    keyword whole ncurses_scr_init yellow
+    keyword whole ncurses_scr_restore yellow
+    keyword whole ncurses_scr_set yellow
+    keyword whole ncurses_scrl yellow
+    keyword whole ncurses_show_panel yellow
+    keyword whole ncurses_slk_attr yellow
+    keyword whole ncurses_slk_attroff yellow
+    keyword whole ncurses_slk_attron yellow
+    keyword whole ncurses_slk_attrset yellow
+    keyword whole ncurses_slk_clear yellow
+    keyword whole ncurses_slk_color yellow
+    keyword whole ncurses_slk_init yellow
+    keyword whole ncurses_slk_noutrefresh yellow
+    keyword whole ncurses_slk_refresh yellow
+    keyword whole ncurses_slk_restore yellow
+    keyword whole ncurses_slk_set yellow
+    keyword whole ncurses_slk_touch yellow
+    keyword whole ncurses_standend yellow
+    keyword whole ncurses_standout yellow
+    keyword whole ncurses_start_color yellow
+    keyword whole ncurses_termattrs yellow
+    keyword whole ncurses_termname yellow
+    keyword whole ncurses_timeout yellow
+    keyword whole ncurses_top_panel yellow
+    keyword whole ncurses_typeahead yellow
+    keyword whole ncurses_ungetch yellow
+    keyword whole ncurses_ungetmouse yellow
+    keyword whole ncurses_update_panels yellow
+    keyword whole ncurses_use_default_colors yellow
+    keyword whole ncurses_use_env yellow
+    keyword whole ncurses_use_extended_names yellow
+    keyword whole ncurses_vidattr yellow
+    keyword whole ncurses_vline yellow
+    keyword whole ncurses_waddch yellow
+    keyword whole ncurses_waddstr yellow
+    keyword whole ncurses_wattroff yellow
+    keyword whole ncurses_wattron yellow
+    keyword whole ncurses_wattrset yellow
+    keyword whole ncurses_wborder yellow
+    keyword whole ncurses_wclear yellow
+    keyword whole ncurses_wcolor_set yellow
+    keyword whole ncurses_werase yellow
+    keyword whole ncurses_wgetch yellow
+    keyword whole ncurses_whline yellow
+    keyword whole ncurses_wmouse_trafo yellow
+    keyword whole ncurses_wmove yellow
+    keyword whole ncurses_wnoutrefresh yellow
+    keyword whole ncurses_wrefresh yellow
+    keyword whole ncurses_wstandend yellow
+    keyword whole ncurses_wstandout yellow
+    keyword whole ncurses_wvline yellow
+    keyword whole notes_body yellow
+    keyword whole notes_copy_db yellow
+    keyword whole notes_create_db yellow
+    keyword whole notes_create_note yellow
+    keyword whole notes_drop_db yellow
+    keyword whole notes_find_note yellow
+    keyword whole notes_header_info yellow
+    keyword whole notes_list_msgs yellow
+    keyword whole notes_mark_read yellow
+    keyword whole notes_mark_unread yellow
+    keyword whole notes_nav_create yellow
+    keyword whole notes_search yellow
+    keyword whole notes_unread yellow
+    keyword whole notes_version yellow
+    keyword whole nsapi_request_headers yellow
+    keyword whole nsapi_response_headers yellow
+    keyword whole nsapi_virtual yellow
+    keyword whole odbc_autocommit yellow
+    keyword whole odbc_binmode yellow
+    keyword whole odbc_close_all yellow
+    keyword whole odbc_close yellow
+    keyword whole odbc_columnprivileges yellow
+    keyword whole odbc_columns yellow
+    keyword whole odbc_commit yellow
+    keyword whole odbc_connect yellow
+    keyword whole odbc_cursor yellow
+    keyword whole odbc_data_source yellow
+    keyword whole odbc_do yellow
+    keyword whole odbc_error yellow
+    keyword whole odbc_errormsg yellow
+    keyword whole odbc_exec yellow
+    keyword whole odbc_execute yellow
+    keyword whole odbc_fetch_array yellow
+    keyword whole odbc_fetch_into yellow
+    keyword whole odbc_fetch_object yellow
+    keyword whole odbc_fetch_row yellow
+    keyword whole odbc_field_len yellow
+    keyword whole odbc_field_name yellow
+    keyword whole odbc_field_num yellow
+    keyword whole odbc_field_precision yellow
+    keyword whole odbc_field_scale yellow
+    keyword whole odbc_field_type yellow
+    keyword whole odbc_foreignkeys yellow
+    keyword whole odbc_free_result yellow
+    keyword whole odbc_gettypeinfo yellow
+    keyword whole odbc_longreadlen yellow
+    keyword whole odbc_next_result yellow
+    keyword whole odbc_num_fields yellow
+    keyword whole odbc_num_rows yellow
+    keyword whole odbc_pconnect yellow
+    keyword whole odbc_prepare yellow
+    keyword whole odbc_primarykeys yellow
+    keyword whole odbc_procedurecolumns yellow
+    keyword whole odbc_procedures yellow
+    keyword whole odbc_result_all yellow
+    keyword whole odbc_result yellow
+    keyword whole odbc_rollback yellow
+    keyword whole odbc_setoption yellow
+    keyword whole odbc_specialcolumns yellow
+    keyword whole odbc_statistics yellow
+    keyword whole odbc_tableprivileges yellow
+    keyword whole odbc_tables yellow
+    keyword whole aggregate_info yellow
+    keyword whole aggregate_methods_by_list yellow
+    keyword whole aggregate_methods_by_regexp yellow
+    keyword whole aggregate_methods yellow
+    keyword whole aggregate_properties_by_list yellow
+    keyword whole aggregate_properties_by_regexp yellow
+    keyword whole aggregate_properties yellow
+    keyword whole aggregate yellow
+    keyword whole aggregation_info yellow
+    keyword whole deaggregate yellow
+    keyword whole oci_bind_by_name yellow
+    keyword whole oci_cancel yellow
+    keyword whole oci_close yellow
+    keyword whole oci_commit yellow
+    keyword whole oci_connect yellow
+    keyword whole oci_define_by_name yellow
+    keyword whole oci_error yellow
+    keyword whole oci_execute yellow
+    keyword whole oci_fetch_all yellow
+    keyword whole oci_fetch_array yellow
+    keyword whole oci_fetch_assoc yellow
+    keyword whole oci_fetch_object yellow
+    keyword whole oci_fetch_row yellow
+    keyword whole oci_fetch yellow
+    keyword whole oci_field_is_null yellow
+    keyword whole oci_field_name yellow
+    keyword whole oci_field_precision yellow
+    keyword whole oci_field_scale yellow
+    keyword whole oci_field_size yellow
+    keyword whole oci_field_type_raw yellow
+    keyword whole oci_field_type yellow
+    keyword whole oci_free_statement yellow
+    keyword whole oci_internal_debug yellow
+    keyword whole oci_lob_copy yellow
+    keyword whole oci_lob_is_equal yellow
+    keyword whole oci_new_collection yellow
+    keyword whole oci_new_connect yellow
+    keyword whole oci_new_cursor yellow
+    keyword whole oci_new_descriptor yellow
+    keyword whole oci_num_fields yellow
+    keyword whole oci_num_rows yellow
+    keyword whole oci_parse yellow
+    keyword whole oci_password_change yellow
+    keyword whole oci_pconnect yellow
+    keyword whole oci_result yellow
+    keyword whole oci_rollback yellow
+    keyword whole oci_server_version yellow
+    keyword whole oci_set_prefetch yellow
+    keyword whole oci_statement_type yellow
+    keyword whole ocibindbyname yellow
+    keyword whole ocicancel yellow
+    keyword whole ocicloselob yellow
+    keyword whole ocicollappend yellow
+    keyword whole ocicollassign yellow
+    keyword whole ocicollassignelem yellow
+    keyword whole ocicollgetelem yellow
+    keyword whole ocicollmax yellow
+    keyword whole ocicollsize yellow
+    keyword whole ocicolltrim yellow
+    keyword whole ocicolumnisnull yellow
+    keyword whole ocicolumnname yellow
+    keyword whole ocicolumnprecision yellow
+    keyword whole ocicolumnscale yellow
+    keyword whole ocicolumnsize yellow
+    keyword whole ocicolumntype yellow
+    keyword whole ocicolumntyperaw yellow
+    keyword whole ocicommit yellow
+    keyword whole ocidefinebyname yellow
+    keyword whole ocierror yellow
+    keyword whole ociexecute yellow
+    keyword whole ocifetch yellow
+    keyword whole ocifetchinto yellow
+    keyword whole ocifetchstatement yellow
+    keyword whole ocifreecollection yellow
+    keyword whole ocifreecursor yellow
+    keyword whole ocifreedesc yellow
+    keyword whole ocifreestatement yellow
+    keyword whole ociinternaldebug yellow
+    keyword whole ociloadlob yellow
+    keyword whole ocilogoff yellow
+    keyword whole ocilogon yellow
+    keyword whole ocinewcollection yellow
+    keyword whole ocinewcursor yellow
+    keyword whole ocinewdescriptor yellow
+    keyword whole ocinlogon yellow
+    keyword whole ocinumcols yellow
+    keyword whole ociparse yellow
+    keyword whole ociplogon yellow
+    keyword whole ociresult yellow
+    keyword whole ocirollback yellow
+    keyword whole ocirowcount yellow
+    keyword whole ocisavelob yellow
+    keyword whole ocisavelobfile yellow
+    keyword whole ociserverversion yellow
+    keyword whole ocisetprefetch yellow
+    keyword whole ocistatementtype yellow
+    keyword whole ociwritelobtofile yellow
+    keyword whole ociwritetemporarylob yellow
+    keyword whole openssl_csr_export_to_file yellow
+    keyword whole openssl_csr_export yellow
+    keyword whole openssl_csr_new yellow
+    keyword whole openssl_csr_sign yellow
+    keyword whole openssl_error_string yellow
+    keyword whole openssl_free_key yellow
+    keyword whole openssl_get_privatekey yellow
+    keyword whole openssl_get_publickey yellow
+    keyword whole openssl_open yellow
+    keyword whole openssl_pkcs7_decrypt yellow
+    keyword whole openssl_pkcs7_encrypt yellow
+    keyword whole openssl_pkcs7_sign yellow
+    keyword whole openssl_pkcs7_verify yellow
+    keyword whole openssl_pkey_export_to_file yellow
+    keyword whole openssl_pkey_export yellow
+    keyword whole openssl_pkey_get_private yellow
+    keyword whole openssl_pkey_get_public yellow
+    keyword whole openssl_pkey_new yellow
+    keyword whole openssl_private_decrypt yellow
+    keyword whole openssl_private_encrypt yellow
+    keyword whole openssl_public_decrypt yellow
+    keyword whole openssl_public_encrypt yellow
+    keyword whole openssl_seal yellow
+    keyword whole openssl_sign yellow
+    keyword whole openssl_verify yellow
+    keyword whole openssl_x509_check_private_key yellow
+    keyword whole openssl_x509_checkpurpose yellow
+    keyword whole openssl_x509_export_to_file yellow
+    keyword whole openssl_x509_export yellow
+    keyword whole openssl_x509_free yellow
+    keyword whole openssl_x509_parse yellow
+    keyword whole openssl_x509_read yellow
     keyword whole ora_bind yellow
     keyword whole ora_close yellow
     keyword whole ora_columnname yellow
@@ -554,8 +2215,8 @@ context default
     keyword whole ora_error yellow
     keyword whole ora_errorcode yellow
     keyword whole ora_exec yellow
-    keyword whole ora_fetch yellow
     keyword whole ora_fetch_into yellow
+    keyword whole ora_fetch yellow
     keyword whole ora_getcolumn yellow
     keyword whole ora_logoff yellow
     keyword whole ora_logon yellow
@@ -565,29 +2226,50 @@ context default
     keyword whole ora_parse yellow
     keyword whole ora_plogon yellow
     keyword whole ora_rollback yellow
-    keyword whole ord yellow
-    keyword whole pack yellow
-    keyword whole parse_ini_file yellow
-    keyword whole parse_str yellow
-    keyword whole parse_url yellow
-    keyword whole passthru yellow
-    keyword whole pathinfo yellow
-    keyword whole pclose yellow
-    keyword whole pcntl_fork yellow
-    keyword whole pcntl_fork	 yellow
-    keyword whole pcntl_signal yellow
-    keyword whole pcntl_waitpid yellow
-    keyword whole pcntl_wexitstatus yellow
-    keyword whole pcntl_wifexited yellow
-    keyword whole pcntl_wifsignaled yellow
-    keyword whole pcntl_wifstopped yellow
-    keyword whole pcntl_wstopsig yellow
-    keyword whole pcntl_wtermsig yellow
+    keyword whole ovrimos_close yellow
+    keyword whole ovrimos_commit yellow
+    keyword whole ovrimos_connect yellow
+    keyword whole ovrimos_cursor yellow
+    keyword whole ovrimos_exec yellow
+    keyword whole ovrimos_execute yellow
+    keyword whole ovrimos_fetch_into yellow
+    keyword whole ovrimos_fetch_row yellow
+    keyword whole ovrimos_field_len yellow
+    keyword whole ovrimos_field_name yellow
+    keyword whole ovrimos_field_num yellow
+    keyword whole ovrimos_field_type yellow
+    keyword whole ovrimos_free_result yellow
+    keyword whole ovrimos_longreadlen yellow
+    keyword whole ovrimos_num_fields yellow
+    keyword whole ovrimos_num_rows yellow
+    keyword whole ovrimos_prepare yellow
+    keyword whole ovrimos_result_all yellow
+    keyword whole ovrimos_result yellow
+    keyword whole ovrimos_rollback yellow
+    keyword whole flush yellow
+    keyword whole ob_clean yellow
+    keyword whole ob_end_clean yellow
+    keyword whole ob_end_flush yellow
+    keyword whole ob_flush yellow
+    keyword whole ob_get_clean yellow
+    keyword whole ob_get_contents yellow
+    keyword whole ob_get_flush yellow
+    keyword whole ob_get_length yellow
+    keyword whole ob_get_level yellow
+    keyword whole ob_get_status yellow
+    keyword whole ob_gzhandler yellow
+    keyword whole ob_implicit_flush yellow
+    keyword whole ob_list_handlers yellow
+    keyword whole ob_start yellow
+    keyword whole output_add_rewrite_var yellow
+    keyword whole output_reset_rewrite_vars yellow
+    keyword whole overload yellow
     keyword whole pdf_add_annotation yellow
     keyword whole pdf_add_bookmark yellow
     keyword whole pdf_add_launchlink yellow
     keyword whole pdf_add_locallink yellow
     keyword whole pdf_add_note yellow
+    keyword whole pdf_add_outline yellow
     keyword whole pdf_add_pdflink yellow
     keyword whole pdf_add_thumbnail yellow
     keyword whole pdf_add_weblink yellow
@@ -599,13 +2281,13 @@ context default
     keyword whole pdf_begin_template yellow
     keyword whole pdf_circle yellow
     keyword whole pdf_clip yellow
-    keyword whole pdf_close yellow
     keyword whole pdf_close_image yellow
-    keyword whole pdf_close_pdi yellow
     keyword whole pdf_close_pdi_page yellow
-    keyword whole pdf_closepath yellow
+    keyword whole pdf_close_pdi yellow
+    keyword whole pdf_close yellow
     keyword whole pdf_closepath_fill_stroke yellow
     keyword whole pdf_closepath_stroke yellow
+    keyword whole pdf_closepath yellow
     keyword whole pdf_concat yellow
     keyword whole pdf_continue_text yellow
     keyword whole pdf_curveto yellow
@@ -614,10 +2296,17 @@ context default
     keyword whole pdf_end_pattern yellow
     keyword whole pdf_end_template yellow
     keyword whole pdf_endpath yellow
-    keyword whole pdf_fill yellow
     keyword whole pdf_fill_stroke yellow
+    keyword whole pdf_fill yellow
     keyword whole pdf_findfont yellow
     keyword whole pdf_get_buffer yellow
+    keyword whole pdf_get_font yellow
+    keyword whole pdf_get_fontname yellow
+    keyword whole pdf_get_fontsize yellow
+    keyword whole pdf_get_image_height yellow
+    keyword whole pdf_get_image_width yellow
+    keyword whole pdf_get_majorversion yellow
+    keyword whole pdf_get_minorversion yellow
     keyword whole pdf_get_parameter yellow
     keyword whole pdf_get_pdi_parameter yellow
     keyword whole pdf_get_pdi_value yellow
@@ -629,11 +2318,16 @@ context default
     keyword whole pdf_new yellow
     keyword whole pdf_open_ccitt yellow
     keyword whole pdf_open_file yellow
-    keyword whole pdf_open_image yellow
+    keyword whole pdf_open_gif yellow
     keyword whole pdf_open_image_file yellow
+    keyword whole pdf_open_image yellow
+    keyword whole pdf_open_jpeg yellow
     keyword whole pdf_open_memory_image yellow
-    keyword whole pdf_open_pdi yellow
     keyword whole pdf_open_pdi_page yellow
+    keyword whole pdf_open_pdi yellow
+    keyword whole pdf_open_png yellow
+    keyword whole pdf_open_tiff yellow
+    keyword whole pdf_open yellow
     keyword whole pdf_place_image yellow
     keyword whole pdf_place_pdi_page yellow
     keyword whole pdf_rect yellow
@@ -644,158 +2338,338 @@ context default
     keyword whole pdf_set_border_color yellow
     keyword whole pdf_set_border_dash yellow
     keyword whole pdf_set_border_style yellow
+    keyword whole pdf_set_char_spacing yellow
+    keyword whole pdf_set_duration yellow
+    keyword whole pdf_set_font yellow
+    keyword whole pdf_set_horiz_scaling yellow
+    keyword whole pdf_set_info_author yellow
+    keyword whole pdf_set_info_creator yellow
+    keyword whole pdf_set_info_keywords yellow
+    keyword whole pdf_set_info_subject yellow
+    keyword whole pdf_set_info_title yellow
     keyword whole pdf_set_info yellow
+    keyword whole pdf_set_leading yellow
     keyword whole pdf_set_parameter yellow
+    keyword whole pdf_set_text_matrix yellow
     keyword whole pdf_set_text_pos yellow
+    keyword whole pdf_set_text_rendering yellow
+    keyword whole pdf_set_text_rise yellow
     keyword whole pdf_set_value yellow
+    keyword whole pdf_set_word_spacing yellow
     keyword whole pdf_setcolor yellow
     keyword whole pdf_setdash yellow
     keyword whole pdf_setflat yellow
     keyword whole pdf_setfont yellow
-    keyword whole pdf_setgray yellow
     keyword whole pdf_setgray_fill yellow
     keyword whole pdf_setgray_stroke yellow
+    keyword whole pdf_setgray yellow
     keyword whole pdf_setlinecap yellow
     keyword whole pdf_setlinejoin yellow
     keyword whole pdf_setlinewidth yellow
     keyword whole pdf_setmatrix yellow
     keyword whole pdf_setmiterlimit yellow
     keyword whole pdf_setpolydash yellow
-    keyword whole pdf_setrgbcolor yellow
     keyword whole pdf_setrgbcolor_fill yellow
     keyword whole pdf_setrgbcolor_stroke yellow
-    keyword whole pdf_show yellow
+    keyword whole pdf_setrgbcolor yellow
     keyword whole pdf_show_boxed yellow
     keyword whole pdf_show_xy yellow
+    keyword whole pdf_show yellow
     keyword whole pdf_skew yellow
     keyword whole pdf_stringwidth yellow
     keyword whole pdf_stroke yellow
     keyword whole pdf_translate yellow
-    keyword whole pg_Close yellow
-    keyword whole pg_Connect yellow
-    keyword whole pg_DBname yellow
-    keyword whole pg_ErrorMessage yellow
-    keyword whole pg_Exec yellow
-    keyword whole pg_Fetch_Array yellow
-    keyword whole pg_Fetch_Object yellow
-    keyword whole pg_Fetch_Row yellow
-    keyword whole pg_FieldIsNull yellow
-    keyword whole pg_FieldName yellow
-    keyword whole pg_FieldNum yellow
-    keyword whole pg_FieldPrtLen yellow
-    keyword whole pg_FieldSize yellow
-    keyword whole pg_FieldType yellow
-    keyword whole pg_FreeResult yellow
-    keyword whole pg_GetLastOid yellow
-    keyword whole pg_Host yellow
-    keyword whole pg_NumFields yellow
-    keyword whole pg_NumRows yellow
-    keyword whole pg_Options yellow
-    keyword whole pg_Port yellow
-    keyword whole pg_Result yellow
-    keyword whole pg_client_encoding yellow
-    keyword whole pg_close yellow
-    keyword whole pg_cmdTles yellow
-    keyword whole pg_cmdtuples yellow
-    keyword whole pg_connect yellow
-    keyword whole pg_dbname yellow
-    keyword whole pg_end_copy yellow
-    keyword whole pg_errormessage yellow
-    keyword whole pg_exec yellow
-    keyword whole pg_fetch_array yellow
-    keyword whole pg_fetch_object yellow
-    keyword whole pg_fetch_row yellow
-    keyword whole pg_fieldisnull yellow
-    keyword whole pg_fieldname yellow
-    keyword whole pg_fieldnum yellow
-    keyword whole pg_fieldprtlen yellow
-    keyword whole pg_fieldsize yellow
-    keyword whole pg_fieldtype yellow
-    keyword whole pg_freeresult yellow
-    keyword whole pg_getlastoid yellow
-    keyword whole pg_host yellow
-    keyword whole pg_last_notice yellow
-    keyword whole pg_loclose yellow
-    keyword whole pg_locreate yellow
-    keyword whole pg_loexport yellow
-    keyword whole pg_loimport yellow
-    keyword whole pg_lolseek yellow
-    keyword whole pg_loopen yellow
-    keyword whole pg_loread yellow
-    keyword whole pg_loreadall yellow
-    keyword whole pg_lotell yellow
-    keyword whole pg_lounlink yellow
-    keyword whole pg_lowrite yellow
-    keyword whole pg_numfields yellow
-    keyword whole pg_numrows yellow
-    keyword whole pg_options yellow
-    keyword whole pg_pConnect yellow
-    keyword whole pg_pconnect yellow
-    keyword whole pg_port yellow
-    keyword whole pg_put_line yellow
-    keyword whole pg_result yellow
-    keyword whole pg_set_client_encoding yellow
-    keyword whole pg_trace yellow
-    keyword whole pg_tty yellow
-    keyword whole pg_untrace yellow
-    keyword whole php_egg_logo_guid yellow
+    keyword whole pfpro_cleanup yellow
+    keyword whole pfpro_init yellow
+    keyword whole pfpro_process_raw yellow
+    keyword whole pfpro_process yellow
+    keyword whole pfpro_version yellow
+    keyword whole assert_options yellow
+    keyword whole assert yellow
+    keyword whole dl yellow
+    keyword whole extension_loaded yellow
+    keyword whole get_cfg_var yellow
+    keyword whole get_current_user yellow
+    keyword whole get_defined_constants yellow
+    keyword whole get_extension_funcs yellow
+    keyword whole get_include_path yellow
+    keyword whole get_included_files yellow
+    keyword whole get_loaded_extensions yellow
+    keyword whole get_magic_quotes_gpc yellow
+    keyword whole get_magic_quotes_runtime yellow
+    keyword whole get_required_files yellow
+    keyword whole getenv yellow
+    keyword whole getlastmod yellow
+    keyword whole getmygid yellow
+    keyword whole getmyinode yellow
+    keyword whole getmypid yellow
+    keyword whole getmyuid yellow
+    keyword whole getopt yellow
+    keyword whole getrusage yellow
+    keyword whole ini_alter yellow
+    keyword whole ini_get_all yellow
+    keyword whole ini_get yellow
+    keyword whole ini_restore yellow
+    keyword whole ini_set yellow
+    keyword whole main yellow
+    keyword whole memory_get_usage yellow
+    keyword whole php_ini_scanned_files yellow
     keyword whole php_logo_guid yellow
     keyword whole php_sapi_name yellow
     keyword whole php_uname yellow
     keyword whole phpcredits yellow
     keyword whole phpinfo yellow
     keyword whole phpversion yellow
-    keyword whole pi yellow
-    keyword whole png2wbmp yellow
-    keyword whole popen yellow
-    keyword whole pos yellow
-    keyword whole pow yellow
-    keyword whole preg_grep yellow
-    keyword whole preg_match yellow
-    keyword whole preg_match_all yellow
-    keyword whole preg_quote yellow
-    keyword whole preg_replace yellow
-    keyword whole preg_replace_callback yellow
-    keyword whole preg_split yellow
-    keyword whole prev yellow
-    keyword whole print yellow
-    keyword whole print_r yellow
-    keyword whole printf yellow
     keyword whole putenv yellow
-    keyword whole qdom_error yellow
-    keyword whole qdom_tree yellow
-    keyword whole quoted_printable_decode yellow
-    keyword whole quotemeta yellow
-    keyword whole rad2deg yellow
-    keyword whole rand yellow
-    keyword whole range yellow
-    keyword whole rawurldecode yellow
-    keyword whole rawurlencode yellow
-    keyword whole read_exif_data yellow
-    keyword whole readdir yellow
-    keyword whole readfile yellow
-    keyword whole readgzfile yellow
+    keyword whole restore_include_path yellow
+    keyword whole set_include_path yellow
+    keyword whole set_magic_quotes_runtime yellow
+    keyword whole set_time_limit yellow
+    keyword whole version_compare yellow
+    keyword whole zend_logo_guid yellow
+    keyword whole zend_version yellow
+    keyword whole posix_ctermid yellow
+    keyword whole posix_get_last_error yellow
+    keyword whole posix_getcwd yellow
+    keyword whole posix_getegid yellow
+    keyword whole posix_geteuid yellow
+    keyword whole posix_getgid yellow
+    keyword whole posix_getgrgid yellow
+    keyword whole posix_getgrnam yellow
+    keyword whole posix_getgroups yellow
+    keyword whole posix_getlogin yellow
+    keyword whole posix_getpgid yellow
+    keyword whole posix_getpgrp yellow
+    keyword whole posix_getpid yellow
+    keyword whole posix_getppid yellow
+    keyword whole posix_getpwnam yellow
+    keyword whole posix_getpwuid yellow
+    keyword whole posix_getrlimit yellow
+    keyword whole posix_getsid yellow
+    keyword whole posix_getuid yellow
+    keyword whole posix_isatty yellow
+    keyword whole posix_kill yellow
+    keyword whole posix_mkfifo yellow
+    keyword whole posix_setegid yellow
+    keyword whole posix_seteuid yellow
+    keyword whole posix_setgid yellow
+    keyword whole posix_setpgid yellow
+    keyword whole posix_setsid yellow
+    keyword whole posix_setuid yellow
+    keyword whole posix_strerror yellow
+    keyword whole posix_times yellow
+    keyword whole posix_ttyname yellow
+    keyword whole posix_uname yellow
+    keyword whole pg_affected_rows yellow
+    keyword whole pg_cancel_query yellow
+    keyword whole pg_client_encoding yellow
+    keyword whole pg_close yellow
+    keyword whole pg_connect yellow
+    keyword whole pg_connection_busy yellow
+    keyword whole pg_connection_reset yellow
+    keyword whole pg_connection_status yellow
+    keyword whole pg_convert yellow
+    keyword whole pg_copy_from yellow
+    keyword whole pg_copy_to yellow
+    keyword whole pg_dbname yellow
+    keyword whole pg_delete yellow
+    keyword whole pg_end_copy yellow
+    keyword whole pg_escape_bytea yellow
+    keyword whole pg_escape_string yellow
+    keyword whole pg_fetch_all yellow
+    keyword whole pg_fetch_array yellow
+    keyword whole pg_fetch_assoc yellow
+    keyword whole pg_fetch_object yellow
+    keyword whole pg_fetch_result yellow
+    keyword whole pg_fetch_row yellow
+    keyword whole pg_field_is_null yellow
+    keyword whole pg_field_name yellow
+    keyword whole pg_field_num yellow
+    keyword whole pg_field_prtlen yellow
+    keyword whole pg_field_size yellow
+    keyword whole pg_field_type yellow
+    keyword whole pg_free_result yellow
+    keyword whole pg_get_notify yellow
+    keyword whole pg_get_pid yellow
+    keyword whole pg_get_result yellow
+    keyword whole pg_host yellow
+    keyword whole pg_insert yellow
+    keyword whole pg_last_error yellow
+    keyword whole pg_last_notice yellow
+    keyword whole pg_last_oid yellow
+    keyword whole pg_lo_close yellow
+    keyword whole pg_lo_create yellow
+    keyword whole pg_lo_export yellow
+    keyword whole pg_lo_import yellow
+    keyword whole pg_lo_open yellow
+    keyword whole pg_lo_read_all yellow
+    keyword whole pg_lo_read yellow
+    keyword whole pg_lo_seek yellow
+    keyword whole pg_lo_tell yellow
+    keyword whole pg_lo_unlink yellow
+    keyword whole pg_lo_write yellow
+    keyword whole pg_meta_data yellow
+    keyword whole pg_num_fields yellow
+    keyword whole pg_num_rows yellow
+    keyword whole pg_options yellow
+    keyword whole pg_parameter_status yellow
+    keyword whole pg_pconnect yellow
+    keyword whole pg_ping yellow
+    keyword whole pg_port yellow
+    keyword whole pg_put_line yellow
+    keyword whole pg_query yellow
+    keyword whole pg_result_error yellow
+    keyword whole pg_result_seek yellow
+    keyword whole pg_result_status yellow
+    keyword whole pg_select yellow
+    keyword whole pg_send_query yellow
+    keyword whole pg_set_client_encoding yellow
+    keyword whole pg_trace yellow
+    keyword whole pg_tty yellow
+    keyword whole pg_unescape_bytea yellow
+    keyword whole pg_untrace yellow
+    keyword whole pg_update yellow
+    keyword whole pg_version yellow
+    keyword whole pcntl_alarm yellow
+    keyword whole pcntl_exec yellow
+    keyword whole pcntl_fork yellow
+    keyword whole pcntl_getpriority yellow
+    keyword whole pcntl_setpriority yellow
+    keyword whole pcntl_signal yellow
+    keyword whole pcntl_wait yellow
+    keyword whole pcntl_waitpid yellow
+    keyword whole pcntl_wexitstatus yellow
+    keyword whole pcntl_wifexited yellow
+    keyword whole pcntl_wifsignaled yellow
+    keyword whole pcntl_wifstopped yellow
+    keyword whole pcntl_wstopsig yellow
+    keyword whole pcntl_wtermsig yellow
+    keyword whole escapeshellarg yellow
+    keyword whole escapeshellcmd yellow
+    keyword whole exec yellow
+    keyword whole passthru yellow
+    keyword whole proc_close yellow
+    keyword whole proc_get_status yellow
+    keyword whole proc_nice yellow
+    keyword whole proc_open yellow
+    keyword whole proc_terminate yellow
+    keyword whole shell_exec yellow
+    keyword whole system yellow
+    keyword whole printer_abort yellow
+    keyword whole printer_close yellow
+    keyword whole printer_create_brush yellow
+    keyword whole printer_create_dc yellow
+    keyword whole printer_create_font yellow
+    keyword whole printer_create_pen yellow
+    keyword whole printer_delete_brush yellow
+    keyword whole printer_delete_dc yellow
+    keyword whole printer_delete_font yellow
+    keyword whole printer_delete_pen yellow
+    keyword whole printer_draw_bmp yellow
+    keyword whole printer_draw_chord yellow
+    keyword whole printer_draw_elipse yellow
+    keyword whole printer_draw_line yellow
+    keyword whole printer_draw_pie yellow
+    keyword whole printer_draw_rectangle yellow
+    keyword whole printer_draw_roundrect yellow
+    keyword whole printer_draw_text yellow
+    keyword whole printer_end_doc yellow
+    keyword whole printer_end_page yellow
+    keyword whole printer_get_option yellow
+    keyword whole printer_list yellow
+    keyword whole printer_logical_fontheight yellow
+    keyword whole printer_open yellow
+    keyword whole printer_select_brush yellow
+    keyword whole printer_select_font yellow
+    keyword whole printer_select_pen yellow
+    keyword whole printer_set_option yellow
+    keyword whole printer_start_doc yellow
+    keyword whole printer_start_page yellow
+    keyword whole printer_write yellow
+    keyword whole pspell_add_to_personal yellow
+    keyword whole pspell_add_to_session yellow
+    keyword whole pspell_check yellow
+    keyword whole pspell_clear_session yellow
+    keyword whole pspell_config_create yellow
+    keyword whole pspell_config_data_dir yellow
+    keyword whole pspell_config_dict_dir yellow
+    keyword whole pspell_config_ignore yellow
+    keyword whole pspell_config_mode yellow
+    keyword whole pspell_config_personal yellow
+    keyword whole pspell_config_repl yellow
+    keyword whole pspell_config_runtogether yellow
+    keyword whole pspell_config_save_repl yellow
+    keyword whole pspell_new_config yellow
+    keyword whole pspell_new_personal yellow
+    keyword whole pspell_new yellow
+    keyword whole pspell_save_wordlist yellow
+    keyword whole pspell_store_replacement yellow
+    keyword whole pspell_suggest yellow
+    keyword whole readline_add_history yellow
+    keyword whole readline_clear_history yellow
+    keyword whole readline_completion_function yellow
+    keyword whole readline_info yellow
+    keyword whole readline_list_history yellow
+    keyword whole readline_read_history yellow
+    keyword whole readline_write_history yellow
     keyword whole readline yellow
-    keyword whole readlink yellow
-    keyword whole realpath yellow
     keyword whole recode_file yellow
     keyword whole recode_string yellow
-    keyword whole register_shutdown_function yellow
-    keyword whole register_tick_function yellow
-    keyword whole rename yellow
-    keyword whole reset yellow
-    keyword whole rewind yellow
-    keyword whole rewinddir yellow
-    keyword whole rmdir yellow
-    keyword whole round yellow
-    keyword whole rsort yellow
-    keyword whole select yellow
+    keyword whole recode yellow
+    keyword whole preg_grep yellow
+    keyword whole preg_match_all yellow
+    keyword whole preg_match yellow
+    keyword whole preg_quote yellow
+    keyword whole preg_replace_callback yellow
+    keyword whole preg_replace yellow
+    keyword whole preg_split yellow
+    keyword whole qdom_error yellow
+    keyword whole qdom_tree yellow
+    keyword whole ereg_replace yellow
+    keyword whole ereg yellow
+    keyword whole eregi_replace yellow
+    keyword whole eregi yellow
+    keyword whole split yellow
+    keyword whole spliti yellow
+    keyword whole sql_regcase yellow
+    keyword whole ftok yellow
+    keyword whole msg_get_queue yellow
+    keyword whole msg_receive yellow
+    keyword whole msg_remove_queue yellow
+    keyword whole msg_send yellow
+    keyword whole msg_set_queue yellow
+    keyword whole msg_stat_queue yellow
     keyword whole sem_acquire yellow
     keyword whole sem_get yellow
     keyword whole sem_release yellow
     keyword whole sem_remove yellow
-    keyword whole serialize yellow
+    keyword whole shm_attach yellow
+    keyword whole shm_detach yellow
+    keyword whole shm_get_var yellow
+    keyword whole shm_put_var yellow
+    keyword whole shm_remove_var yellow
+    keyword whole shm_remove yellow
+    keyword whole sesam_affected_rows yellow
+    keyword whole sesam_commit yellow
+    keyword whole sesam_connect yellow
+    keyword whole sesam_diagnostic yellow
+    keyword whole sesam_disconnect yellow
+    keyword whole sesam_errormsg yellow
+    keyword whole sesam_execimm yellow
+    keyword whole sesam_fetch_array yellow
+    keyword whole sesam_fetch_result yellow
+    keyword whole sesam_fetch_row yellow
+    keyword whole sesam_field_array yellow
+    keyword whole sesam_field_name yellow
+    keyword whole sesam_free_result yellow
+    keyword whole sesam_num_fields yellow
+    keyword whole sesam_query yellow
+    keyword whole sesam_rollback yellow
+    keyword whole sesam_seek_row yellow
+    keyword whole sesam_settransaction yellow
+    keyword whole session_cache_expire yellow
     keyword whole session_cache_limiter yellow
+    keyword whole session_commit yellow
     keyword whole session_decode yellow
     keyword whole session_destroy yellow
     keyword whole session_encode yellow
@@ -804,6 +2678,7 @@ context default
     keyword whole session_is_registered yellow
     keyword whole session_module_name yellow
     keyword whole session_name yellow
+    keyword whole session_regenerate_id yellow
     keyword whole session_register yellow
     keyword whole session_save_path yellow
     keyword whole session_set_cookie_params yellow
@@ -812,115 +2687,432 @@ context default
     keyword whole session_unregister yellow
     keyword whole session_unset yellow
     keyword whole session_write_close yellow
-    keyword whole set_file_buffer yellow
-    keyword whole set_magic_quotes_runtime yellow
-    keyword whole set_socket_blocking yellow
-    keyword whole set_time_limit yellow
-    keyword whole setcookie yellow
-    keyword whole setlocale yellow
-    keyword whole settype yellow
-    keyword whole shell_exec yellow
-    keyword whole shuffle yellow
-    keyword whole similar_text yellow
-    keyword whole sin yellow
-    keyword whole sinh yellow
-    keyword whole sizeof yellow
-    keyword whole sleep yellow
+    keyword whole shmop_close yellow
+    keyword whole shmop_delete yellow
+    keyword whole shmop_open yellow
+    keyword whole shmop_read yellow
+    keyword whole shmop_size yellow
+    keyword whole shmop_write yellow
+    keyword whole simplexml_import_dom yellow
+    keyword whole simplexml_load_file yellow
+    keyword whole simplexml_load_string yellow
+    keyword whole is_soap_fault yellow
+    keyword whole sqlite_array_query yellow
+    keyword whole sqlite_busy_timeout yellow
+    keyword whole sqlite_changes yellow
+    keyword whole sqlite_close yellow
+    keyword whole sqlite_column yellow
+    keyword whole sqlite_create_aggregate yellow
+    keyword whole sqlite_create_function yellow
+    keyword whole sqlite_current yellow
+    keyword whole sqlite_error_string yellow
+    keyword whole sqlite_escape_string yellow
+    keyword whole sqlite_exec yellow
+    keyword whole sqlite_factory yellow
+    keyword whole sqlite_fetch_all yellow
+    keyword whole sqlite_fetch_array yellow
+    keyword whole sqlite_fetch_column_types yellow
+    keyword whole sqlite_fetch_object yellow
+    keyword whole sqlite_fetch_single yellow
+    keyword whole sqlite_fetch_string yellow
+    keyword whole sqlite_field_name yellow
+    keyword whole sqlite_has_more yellow
+    keyword whole sqlite_has_prev yellow
+    keyword whole sqlite_last_error yellow
+    keyword whole sqlite_last_insert_rowid yellow
+    keyword whole sqlite_libencoding yellow
+    keyword whole sqlite_libversion yellow
+    keyword whole sqlite_next yellow
+    keyword whole sqlite_num_fields yellow
+    keyword whole sqlite_num_rows yellow
+    keyword whole sqlite_open yellow
+    keyword whole sqlite_popen yellow
+    keyword whole sqlite_prev yellow
+    keyword whole sqlite_query yellow
+    keyword whole sqlite_rewind yellow
+    keyword whole sqlite_seek yellow
+    keyword whole sqlite_single_query yellow
+    keyword whole sqlite_udf_decode_binary yellow
+    keyword whole sqlite_udf_encode_binary yellow
+    keyword whole sqlite_unbuffered_query yellow
+    keyword whole swf_actiongeturl yellow
+    keyword whole swf_actiongotoframe yellow
+    keyword whole swf_actiongotolabel yellow
+    keyword whole swf_actionnextframe yellow
+    keyword whole swf_actionplay yellow
+    keyword whole swf_actionprevframe yellow
+    keyword whole swf_actionsettarget yellow
+    keyword whole swf_actionstop yellow
+    keyword whole swf_actiontogglequality yellow
+    keyword whole swf_actionwaitforframe yellow
+    keyword whole swf_addbuttonrecord yellow
+    keyword whole swf_addcolor yellow
+    keyword whole swf_closefile yellow
+    keyword whole swf_definebitmap yellow
+    keyword whole swf_definefont yellow
+    keyword whole swf_defineline yellow
+    keyword whole swf_definepoly yellow
+    keyword whole swf_definerect yellow
+    keyword whole swf_definetext yellow
+    keyword whole swf_endbutton yellow
+    keyword whole swf_enddoaction yellow
+    keyword whole swf_endshape yellow
+    keyword whole swf_endsymbol yellow
+    keyword whole swf_fontsize yellow
+    keyword whole swf_fontslant yellow
+    keyword whole swf_fonttracking yellow
+    keyword whole swf_getbitmapinfo yellow
+    keyword whole swf_getfontinfo yellow
+    keyword whole swf_getframe yellow
+    keyword whole swf_labelframe yellow
+    keyword whole swf_lookat yellow
+    keyword whole swf_modifyobject yellow
+    keyword whole swf_mulcolor yellow
+    keyword whole swf_nextid yellow
+    keyword whole swf_oncondition yellow
+    keyword whole swf_openfile yellow
+    keyword whole swf_ortho2 yellow
+    keyword whole swf_ortho yellow
+    keyword whole swf_perspective yellow
+    keyword whole swf_placeobject yellow
+    keyword whole swf_polarview yellow
+    keyword whole swf_popmatrix yellow
+    keyword whole swf_posround yellow
+    keyword whole swf_pushmatrix yellow
+    keyword whole swf_removeobject yellow
+    keyword whole swf_rotate yellow
+    keyword whole swf_scale yellow
+    keyword whole swf_setfont yellow
+    keyword whole swf_setframe yellow
+    keyword whole swf_shapearc yellow
+    keyword whole swf_shapecurveto3 yellow
+    keyword whole swf_shapecurveto yellow
+    keyword whole swf_shapefillbitmapclip yellow
+    keyword whole swf_shapefillbitmaptile yellow
+    keyword whole swf_shapefilloff yellow
+    keyword whole swf_shapefillsolid yellow
+    keyword whole swf_shapelinesolid yellow
+    keyword whole swf_shapelineto yellow
+    keyword whole swf_shapemoveto yellow
+    keyword whole swf_showframe yellow
+    keyword whole swf_startbutton yellow
+    keyword whole swf_startdoaction yellow
+    keyword whole swf_startshape yellow
+    keyword whole swf_startsymbol yellow
+    keyword whole swf_textwidth yellow
+    keyword whole swf_translate yellow
+    keyword whole swf_viewport yellow
     keyword whole snmp_get_quick_print yellow
+    keyword whole snmp_get_valueretrieval yellow
+    keyword whole snmp_read_mib yellow
+    keyword whole snmp_set_enum_print yellow
+    keyword whole snmp_set_oid_numeric_print yellow
     keyword whole snmp_set_quick_print yellow
+    keyword whole snmp_set_valueretrieval yellow
     keyword whole snmpget yellow
+    keyword whole snmpgetnext yellow
     keyword whole snmprealwalk yellow
     keyword whole snmpset yellow
     keyword whole snmpwalk yellow
     keyword whole snmpwalkoid yellow
-    keyword whole sort yellow
+    keyword whole socket_accept yellow
+    keyword whole socket_bind yellow
+    keyword whole socket_clear_error yellow
+    keyword whole socket_close yellow
+    keyword whole socket_connect yellow
+    keyword whole socket_create_listen yellow
+    keyword whole socket_create_pair yellow
+    keyword whole socket_create yellow
+    keyword whole socket_get_option yellow
+    keyword whole socket_getpeername yellow
+    keyword whole socket_getsockname yellow
+    keyword whole socket_iovec_add yellow
+    keyword whole socket_iovec_alloc yellow
+    keyword whole socket_iovec_delete yellow
+    keyword whole socket_iovec_fetch yellow
+    keyword whole socket_iovec_free yellow
+    keyword whole socket_iovec_set yellow
+    keyword whole socket_last_error yellow
+    keyword whole socket_listen yellow
+    keyword whole socket_read yellow
+    keyword whole socket_readv yellow
+    keyword whole socket_recv yellow
+    keyword whole socket_recvfrom yellow
+    keyword whole socket_recvmsg yellow
+    keyword whole socket_select yellow
+    keyword whole socket_send yellow
+    keyword whole socket_sendmsg yellow
+    keyword whole socket_sendto yellow
+    keyword whole socket_set_block yellow
+    keyword whole socket_set_nonblock yellow
+    keyword whole socket_set_option yellow
+    keyword whole socket_shutdown yellow
+    keyword whole socket_strerror yellow
+    keyword whole socket_write yellow
+    keyword whole socket_writev yellow
+    keyword whole stream_context_create yellow
+    keyword whole stream_context_get_default yellow
+    keyword whole stream_context_get_options yellow
+    keyword whole stream_context_set_option yellow
+    keyword whole stream_context_set_params yellow
+    keyword whole stream_copy_to_stream yellow
+    keyword whole stream_filter_append yellow
+    keyword whole stream_filter_prepend yellow
+    keyword whole stream_filter_register yellow
+    keyword whole stream_get_contents yellow
+    keyword whole stream_get_filters yellow
+    keyword whole stream_get_line yellow
+    keyword whole stream_get_meta_data yellow
+    keyword whole stream_get_transports yellow
+    keyword whole stream_get_wrappers yellow
+    keyword whole stream_register_wrapper yellow
+    keyword whole stream_select yellow
+    keyword whole stream_set_blocking yellow
+    keyword whole stream_set_timeout yellow
+    keyword whole stream_set_write_buffer yellow
+    keyword whole stream_socket_accept yellow
+    keyword whole stream_socket_client yellow
+    keyword whole stream_socket_enable_crypto yellow
+    keyword whole stream_socket_get_name yellow
+    keyword whole stream_socket_recvfrom yellow
+    keyword whole stream_socket_sendto yellow
+    keyword whole stream_socket_server yellow
+    keyword whole stream_wrapper_register yellow
+    keyword whole addcslashes yellow
+    keyword whole addslashes yellow
+    keyword whole bin2hex yellow
+    keyword whole chop yellow
+    keyword whole chr yellow
+    keyword whole chunk_split yellow
+    keyword whole convert_cyr_string yellow
+    keyword whole convert_uudecode yellow
+    keyword whole convert_uuencode yellow
+    keyword whole count_chars yellow
+    keyword whole crc32 yellow
+    keyword whole crypt yellow
+    keyword whole echo yellow
+    keyword whole explode yellow
+    keyword whole fprintf yellow
+    keyword whole get_html_translation_table yellow
+    keyword whole hebrev yellow
+    keyword whole hebrevc yellow
+    keyword whole html_entity_decode yellow
+    keyword whole htmlentities yellow
+    keyword whole htmlspecialchars yellow
+    keyword whole implode yellow
+    keyword whole join yellow
+    keyword whole levenshtein yellow
+    keyword whole localeconv yellow
+    keyword whole ltrim yellow
+    keyword whole md5_file yellow
+    keyword whole md5 yellow
+    keyword whole metaphone yellow
+    keyword whole money_format yellow
+    keyword whole nl_langinfo yellow
+    keyword whole nl2br yellow
+    keyword whole number_format yellow
+    keyword whole ord yellow
+    keyword whole parse_str yellow
+    keyword whole print yellow
+    keyword whole printf yellow
+    keyword whole quoted_printable_decode yellow
+    keyword whole quotemeta yellow
+    keyword whole rtrim yellow
+    keyword whole setlocale yellow
+    keyword whole sha1_file yellow
+    keyword whole sha1 yellow
+    keyword whole similar_text yellow
     keyword whole soundex yellow
-    keyword whole split yellow
-    keyword whole spliti yellow
     keyword whole sprintf yellow
-    keyword whole sql_regcase yellow
-    keyword whole sqrt yellow
-    keyword whole srand yellow
     keyword whole sscanf yellow
-    keyword whole stat yellow
+    keyword whole str_ireplace yellow
     keyword whole str_pad yellow
     keyword whole str_repeat yellow
     keyword whole str_replace yellow
+    keyword whole str_rot13 yellow
+    keyword whole str_shuffle yellow
+    keyword whole str_split yellow
+    keyword whole str_word_count yellow
     keyword whole strcasecmp yellow
     keyword whole strchr yellow
     keyword whole strcmp yellow
     keyword whole strcoll yellow
     keyword whole strcspn yellow
-    keyword whole strftime yellow
     keyword whole strip_tags yellow
     keyword whole stripcslashes yellow
+    keyword whole stripos yellow
     keyword whole stripslashes yellow
     keyword whole stristr yellow
     keyword whole strlen yellow
     keyword whole strnatcasecmp yellow
     keyword whole strnatcmp yellow
+    keyword whole strncasecmp yellow
+    keyword whole strncmp yellow
+    keyword whole strpbrk yellow
     keyword whole strpos yellow
     keyword whole strrchr yellow
     keyword whole strrev yellow
+    keyword whole strripos yellow
     keyword whole strrpos yellow
     keyword whole strspn yellow
     keyword whole strstr yellow
     keyword whole strtok yellow
     keyword whole strtolower yellow
-    keyword whole strtotime yellow
     keyword whole strtoupper yellow
     keyword whole strtr yellow
-    keyword whole strval yellow
-    keyword whole substr yellow
+    keyword whole substr_compare yellow
     keyword whole substr_count yellow
     keyword whole substr_replace yellow
-    keyword whole symlink yellow
-    keyword whole syslog yellow
-    keyword whole system yellow
-    keyword whole tan yellow
-    keyword whole tanh yellow
-    keyword whole targetencoding yellow
-    keyword whole tempnam yellow
-    keyword whole textdomain yellow
-    keyword whole time yellow
-    keyword whole toggle_short_open_tag yellow
-    keyword whole touch yellow
+    keyword whole substr yellow
     keyword whole trim yellow
-    keyword whole uasort yellow
     keyword whole ucfirst yellow
     keyword whole ucwords yellow
-    keyword whole uksort yellow
-    keyword whole umask yellow
-    keyword whole uniqid yellow
-    keyword whole unixtojd yellow
-    keyword whole unlink yellow
-    keyword whole unpack yellow
-    keyword whole unregister_tick_function yellow
-    keyword whole unserialize yellow
-    keyword whole unset yellow
-    keyword whole urldecode yellow
-    keyword whole urlencode yellow
-    keyword whole user_printf yellow
-    keyword whole user_sprintf yellow
-    keyword whole usleep yellow
-    keyword whole usort yellow
-    keyword whole utf8_decode yellow
-    keyword whole utf8_encode yellow
-    keyword whole var_dump yellow
-    keyword whole version_compare yellow
-    keyword whole virtual yellow
+    keyword whole vfprintf yellow
     keyword whole vprintf yellow
     keyword whole vsprintf yellow
     keyword whole wordwrap yellow
+    keyword whole sybase_affected_rows yellow
+    keyword whole sybase_close yellow
+    keyword whole sybase_connect yellow
+    keyword whole sybase_data_seek yellow
+    keyword whole sybase_deadlock_retry_count yellow
+    keyword whole sybase_fetch_array yellow
+    keyword whole sybase_fetch_assoc yellow
+    keyword whole sybase_fetch_field yellow
+    keyword whole sybase_fetch_object yellow
+    keyword whole sybase_fetch_row yellow
+    keyword whole sybase_field_seek yellow
+    keyword whole sybase_free_result yellow
+    keyword whole sybase_get_last_message yellow
+    keyword whole sybase_min_client_severity yellow
+    keyword whole sybase_min_error_severity yellow
+    keyword whole sybase_min_message_severity yellow
+    keyword whole sybase_min_server_severity yellow
+    keyword whole sybase_num_fields yellow
+    keyword whole sybase_num_rows yellow
+    keyword whole sybase_pconnect yellow
+    keyword whole sybase_query yellow
+    keyword whole sybase_result yellow
+    keyword whole sybase_select_db yellow
+    keyword whole sybase_set_message_handler yellow
+    keyword whole sybase_unbuffered_query yellow
+    keyword whole tcpwrap_check yellow
+    keyword whole ob_tidyhandler yellow
+    keyword whole tidy_access_count yellow
+    keyword whole tidy_clean_repair yellow
+    keyword whole tidy_config_count yellow
+    keyword whole tidy_diagnose yellow
+    keyword whole tidy_error_count yellow
+    keyword whole tidy_get_body yellow
+    keyword whole tidy_get_config yellow
+    keyword whole tidy_get_error_buffer yellow
+    keyword whole tidy_get_head yellow
+    keyword whole tidy_get_html_ver yellow
+    keyword whole tidy_get_html yellow
+    keyword whole tidy_get_output yellow
+    keyword whole tidy_get_release yellow
+    keyword whole tidy_get_root yellow
+    keyword whole tidy_get_status yellow
+    keyword whole tidy_getopt yellow
+    keyword whole tidy_is_xhtml yellow
+    keyword whole tidy_is_xml yellow
+    keyword whole tidy_load_config yellow
+    keyword whole tidy_parse_file yellow
+    keyword whole tidy_parse_string yellow
+    keyword whole tidy_repair_file yellow
+    keyword whole tidy_repair_string yellow
+    keyword whole tidy_reset_config yellow
+    keyword whole tidy_save_config yellow
+    keyword whole tidy_set_encoding yellow
+    keyword whole tidy_setopt yellow
+    keyword whole tidy_warning_count yellow
+    keyword whole token_get_all yellow
+    keyword whole token_name yellow
+    keyword whole base64_decode yellow
+    keyword whole base64_encode yellow
+    keyword whole get_headers yellow
+    keyword whole get_meta_tags yellow
+    keyword whole http_build_query yellow
+    keyword whole parse_url yellow
+    keyword whole rawurldecode yellow
+    keyword whole rawurlencode yellow
+    keyword whole urldecode yellow
+    keyword whole urlencode yellow
+    keyword whole doubleval yellow
+    keyword whole empty yellow
+    keyword whole floatval yellow
+    keyword whole get_defined_vars yellow
+    keyword whole get_resource_type yellow
+    keyword whole gettype yellow
+    keyword whole import_request_variables yellow
+    keyword whole intval yellow
+    keyword whole is_array yellow
+    keyword whole is_bool yellow
+    keyword whole is_callable yellow
+    keyword whole is_double yellow
+    keyword whole is_float yellow
+    keyword whole is_int yellow
+    keyword whole is_integer yellow
+    keyword whole is_long yellow
+    keyword whole is_null yellow
+    keyword whole is_numeric yellow
+    keyword whole is_object yellow
+    keyword whole is_real yellow
+    keyword whole is_resource yellow
+    keyword whole is_scalar yellow
+    keyword whole is_string yellow
+    keyword whole isset yellow
+    keyword whole print_r yellow
+    keyword whole serialize yellow
+    keyword whole settype yellow
+    keyword whole strval yellow
+    keyword whole unserialize yellow
+    keyword whole unset yellow
+    keyword whole var_dump yellow
+    keyword whole var_export yellow
+    keyword whole vpopmail_add_alias_domain_ex yellow
+    keyword whole vpopmail_add_alias_domain yellow
+    keyword whole vpopmail_add_domain_ex yellow
+    keyword whole vpopmail_add_domain yellow
+    keyword whole vpopmail_add_user yellow
+    keyword whole vpopmail_alias_add yellow
+    keyword whole vpopmail_alias_del_domain yellow
+    keyword whole vpopmail_alias_del yellow
+    keyword whole vpopmail_alias_get_all yellow
+    keyword whole vpopmail_alias_get yellow
+    keyword whole vpopmail_auth_user yellow
+    keyword whole vpopmail_del_domain_ex yellow
+    keyword whole vpopmail_del_domain yellow
+    keyword whole vpopmail_del_user yellow
+    keyword whole vpopmail_error yellow
+    keyword whole vpopmail_passwd yellow
+    keyword whole vpopmail_set_user_quota yellow
+    keyword whole w32api_deftype yellow
+    keyword whole w32api_init_dtype yellow
+    keyword whole w32api_invoke_function yellow
+    keyword whole w32api_register_function yellow
+    keyword whole w32api_set_call_method yellow
+    keyword whole wddx_add_vars yellow
+    keyword whole wddx_deserialize yellow
+    keyword whole wddx_packet_end yellow
+    keyword whole wddx_packet_start yellow
+    keyword whole wddx_serialize_value yellow
+    keyword whole wddx_serialize_vars yellow
+    keyword whole xattr_get yellow
+    keyword whole xattr_list yellow
+    keyword whole xattr_remove yellow
+    keyword whole xattr_set yellow
+    keyword whole utf8_decode yellow
+    keyword whole utf8_encode yellow
     keyword whole xml_error_string yellow
     keyword whole xml_get_current_byte_index yellow
     keyword whole xml_get_current_column_number yellow
     keyword whole xml_get_current_line_number yellow
     keyword whole xml_get_error_code yellow
-    keyword whole xml_parse yellow
     keyword whole xml_parse_into_struct yellow
-    keyword whole xml_parser_create yellow
+    keyword whole xml_parse yellow
     keyword whole xml_parser_create_ns yellow
+    keyword whole xml_parser_create yellow
     keyword whole xml_parser_free yellow
     keyword whole xml_parser_get_option yellow
     keyword whole xml_parser_set_option yellow
@@ -934,9 +3126,92 @@ context default
     keyword whole xml_set_processing_instruction_handler yellow
     keyword whole xml_set_start_namespace_decl_handler yellow
     keyword whole xml_set_unparsed_entity_decl_handler yellow
-    keyword whole xmldoc yellow
-    keyword whole xmldocfile yellow
-    keyword whole xmltree yellow
+    keyword whole xmlrpc_decode_request yellow
+    keyword whole xmlrpc_decode yellow
+    keyword whole xmlrpc_encode_request yellow
+    keyword whole xmlrpc_encode yellow
+    keyword whole xmlrpc_get_type yellow
+    keyword whole xmlrpc_is_fault yellow
+    keyword whole xmlrpc_parse_method_descriptions yellow
+    keyword whole xmlrpc_server_add_introspection_data yellow
+    keyword whole xmlrpc_server_call_method yellow
+    keyword whole xmlrpc_server_create yellow
+    keyword whole xmlrpc_server_destroy yellow
+    keyword whole xmlrpc_server_register_introspection_callback yellow
+    keyword whole xmlrpc_server_register_method yellow
+    keyword whole xmlrpc_set_type yellow
+    keyword whole xdiff_file_diff_binary yellow
+    keyword whole xdiff_file_diff yellow
+    keyword whole xdiff_file_merge3 yellow
+    keyword whole xdiff_file_patch_binary yellow
+    keyword whole xdiff_file_patch yellow
+    keyword whole xdiff_string_diff_binary yellow
+    keyword whole xdiff_string_diff yellow
+    keyword whole xdiff_string_merge3 yellow
+    keyword whole xdiff_string_patch_binary yellow
+    keyword whole xdiff_string_patch yellow
+    keyword whole xsl_xsltprocessor_get_parameter yellow
+    keyword whole xsl_xsltprocessor_has_exslt_support yellow
+    keyword whole xsl_xsltprocessor_import_stylesheet yellow
+    keyword whole xsl_xsltprocessor_register_php_functions yellow
+    keyword whole xsl_xsltprocessor_remove_parameter yellow
+    keyword whole xsl_xsltprocessor_set_parameter yellow
+    keyword whole xsl_xsltprocessor_transform_to_doc yellow
+    keyword whole xsl_xsltprocessor_transform_to_uri yellow
+    keyword whole xsl_xsltprocessor_transform_to_xml yellow
+    keyword whole xslt_backend_info yellow
+    keyword whole xslt_backend_name yellow
+    keyword whole xslt_backend_version yellow
+    keyword whole xslt_create yellow
+    keyword whole xslt_errno yellow
+    keyword whole xslt_error yellow
+    keyword whole xslt_free yellow
+    keyword whole xslt_getopt yellow
+    keyword whole xslt_process yellow
+    keyword whole xslt_set_base yellow
+    keyword whole xslt_set_encoding yellow
+    keyword whole xslt_set_error_handler yellow
+    keyword whole xslt_set_log yellow
+    keyword whole xslt_set_object yellow
+    keyword whole xslt_set_sax_handler yellow
+    keyword whole xslt_set_sax_handlers yellow
+    keyword whole xslt_set_scheme_handler yellow
+    keyword whole xslt_set_scheme_handlers yellow
+    keyword whole xslt_setopt yellow
+    keyword whole yaz_addinfo yellow
+    keyword whole yaz_ccl_conf yellow
+    keyword whole yaz_ccl_parse yellow
+    keyword whole yaz_close yellow
+    keyword whole yaz_connect yellow
+    keyword whole yaz_database yellow
+    keyword whole yaz_element yellow
+    keyword whole yaz_errno yellow
+    keyword whole yaz_error yellow
+    keyword whole yaz_es_result yellow
+    keyword whole yaz_get_option yellow
+    keyword whole yaz_hits yellow
+    keyword whole yaz_itemorder yellow
+    keyword whole yaz_present yellow
+    keyword whole yaz_range yellow
+    keyword whole yaz_record yellow
+    keyword whole yaz_scan_result yellow
+    keyword whole yaz_scan yellow
+    keyword whole yaz_schema yellow
+    keyword whole yaz_search yellow
+    keyword whole yaz_set_option yellow
+    keyword whole yaz_sort yellow
+    keyword whole yaz_syntax yellow
+    keyword whole yaz_wait yellow
+    keyword whole yp_all yellow
+    keyword whole yp_cat yellow
+    keyword whole yp_err_string yellow
+    keyword whole yp_errno yellow
+    keyword whole yp_first yellow
+    keyword whole yp_get_default_domain yellow
+    keyword whole yp_master yellow
+    keyword whole yp_match yellow
+    keyword whole yp_next yellow
+    keyword whole yp_order yellow
     keyword whole zip_close yellow
     keyword whole zip_entry_close yellow
     keyword whole zip_entry_compressedsize yellow
@@ -947,7 +3222,355 @@ context default
     keyword whole zip_entry_read yellow
     keyword whole zip_open yellow
     keyword whole zip_read yellow
-    
+    keyword whole gzclose yellow
+    keyword whole gzcompress yellow
+    keyword whole gzdeflate yellow
+    keyword whole gzencode yellow
+    keyword whole gzeof yellow
+    keyword whole gzfile yellow
+    keyword whole gzgetc yellow
+    keyword whole gzgets yellow
+    keyword whole gzgetss yellow
+    keyword whole gzinflate yellow
+    keyword whole gzopen yellow
+    keyword whole gzpassthru yellow
+    keyword whole gzputs yellow
+    keyword whole gzread yellow
+    keyword whole gzrewind yellow
+    keyword whole gzseek yellow
+    keyword whole gztell yellow
+    keyword whole gzuncompress yellow
+    keyword whole gzwrite yellow
+    keyword whole readgzfile yellow
+    keyword whole zlib_get_coding_type yellow
+
+#############
+# Classes
+
+    keyword whole collection yellow
+    keyword whole descriptor yellow
+    keyword whole DOMAttr yellow
+    keyword whole DomAttribute yellow
+    keyword whole DOMCharacterData yellow
+    keyword whole DomDocument yellow
+    keyword whole DOMDocument yellow
+    keyword whole DomDocumentType yellow
+    keyword whole DomElement yellow
+    keyword whole DOMElement yellow
+    keyword whole DOMImplementation yellow
+    keyword whole DOMNamedNodeMap yellow
+    keyword whole DomNode yellow
+    keyword whole DOMNode yellow
+    keyword whole DOMNodelist yellow
+    keyword whole DomProcessingInstruction yellow
+    keyword whole DOMText yellow
+    keyword whole DOMXPath yellow
+    keyword whole DomXsltStylesheet yellow
+    keyword whole hw_api yellow
+    keyword whole hw_api_attribute yellow
+    keyword whole hw_api_content yellow
+    keyword whole hw_api_error yellow
+    keyword whole hw_api_object yellow
+    keyword whole hw_api_reason yellow
+    keyword whole lob yellow
+    keyword whole SimpleXMLElement yellow
+    keyword whole SWFBitmap yellow
+    keyword whole SWFbutton yellow
+    keyword whole SWFDisplayItem yellow
+    keyword whole SWFFill yellow
+    keyword whole swffont yellow
+    keyword whole SWFGradient yellow
+    keyword whole SWFMorph yellow
+    keyword whole swfmovie yellow
+    keyword whole SWFMovie yellow
+    keyword whole SWFShape yellow
+    keyword whole swfsprite yellow
+    keyword whole SWFSprite yellow
+    keyword whole SWFText yellow
+    keyword whole SWFTextField yellow
+    keyword whole tidy_node yellow
+
+#############
+# Methods
+
+# using '->' to distinguish these from regular keywords
+
+    keyword whole ->add yellow
+    keyword whole ->addAction yellow
+    keyword whole ->addColor yellow
+    keyword whole ->addEntry yellow
+    keyword whole ->addFill yellow
+    keyword whole ->add_namespace yellow
+    keyword whole ->add_root yellow
+    keyword whole ->addShape yellow
+    keyword whole ->addstring yellow
+    keyword whole ->addString yellow
+    keyword whole ->align yellow
+    keyword whole ->append yellow
+    keyword whole ->append_child yellow
+    keyword whole ->appendChild yellow
+    keyword whole ->appendData yellow
+    keyword whole ->append_sibling yellow
+    keyword whole ->assign yellow
+    keyword whole ->assignElem yellow
+    keyword whole ->asXML yellow
+    keyword whole ->attreditable yellow
+    keyword whole ->attributes yellow
+    keyword whole ->checkin yellow
+    keyword whole ->checkout yellow
+    keyword whole ->child_nodes yellow
+    keyword whole ->children yellow
+    keyword whole ->clone_node yellow
+    keyword whole ->cloneNode yellow
+    keyword whole ->close yellow
+    keyword whole ->content yellow
+    keyword whole ->copy yellow
+    keyword whole ->count yellow
+    keyword whole ->create_attribute yellow
+    keyword whole ->createAttribute yellow
+    keyword whole ->createAttributeNS yellow
+    keyword whole ->create_cdata_section yellow
+    keyword whole ->createCDATASection yellow
+    keyword whole ->create_comment yellow
+    keyword whole ->createComment yellow
+    keyword whole ->createDocument yellow
+    keyword whole ->createDocumentFragment yellow
+    keyword whole ->createDocumentType yellow
+    keyword whole ->create_element yellow
+    keyword whole ->createElement yellow
+    keyword whole ->create_element_ns yellow
+    keyword whole ->createElementNS yellow
+    keyword whole ->create_entity_reference yellow
+    keyword whole ->createEntityReference yellow
+    keyword whole ->create_processing_instruction yellow
+    keyword whole ->createProcessingInstruction yellow
+    keyword whole ->create_text_node yellow
+    keyword whole ->createTextNode yellow
+    keyword whole ->data yellow
+    keyword whole ->dbstat yellow
+    keyword whole ->dcstat yellow
+    keyword whole ->deleteData yellow
+    keyword whole ->description yellow
+    keyword whole ->doctype yellow
+    keyword whole ->document_element yellow
+    keyword whole ->drawCurve yellow
+    keyword whole ->drawCurveTo yellow
+    keyword whole ->drawLine yellow
+    keyword whole ->drawLineTo yellow
+    keyword whole ->dstanchors yellow
+    keyword whole ->dstofsrcanchors yellow
+    keyword whole ->dump_file yellow
+    keyword whole ->dump_mem yellow
+    keyword whole ->dump_node yellow
+    keyword whole ->entities yellow
+    keyword whole ->eof yellow
+    keyword whole ->erase yellow
+    keyword whole ->export yellow
+    keyword whole ->find yellow
+    keyword whole ->first_child yellow
+    keyword whole ->flush yellow
+    keyword whole ->free yellow
+    keyword whole ->ftstat yellow
+    keyword whole ->get_attr yellow
+    keyword whole ->get_attribute yellow
+    keyword whole ->getAttribute yellow
+    keyword whole ->get_attribute_node yellow
+    keyword whole ->getAttributeNode yellow
+    keyword whole ->getAttributeNodeNS yellow
+    keyword whole ->getAttributeNS yellow
+    keyword whole ->getBuffering yellow
+    keyword whole ->get_content yellow
+    keyword whole ->getElem yellow
+    keyword whole ->get_element_by_id yellow
+    keyword whole ->getElementById yellow
+    keyword whole ->get_elements_by_tagname yellow
+    keyword whole ->getElementsByTagName yellow
+    keyword whole ->getElementsByTagNameNS yellow
+    keyword whole ->getHeight yellow
+    keyword whole ->getNamedItem yellow
+    keyword whole ->getNamedItemNS yellow
+    keyword whole ->get_nodes yellow
+    keyword whole ->getshape1 yellow
+    keyword whole ->getshape2 yellow
+    keyword whole ->getwidth yellow
+    keyword whole ->getWidth yellow
+    keyword whole ->has_attribute yellow
+    keyword whole ->hasAttribute yellow
+    keyword whole ->hasAttributeNS yellow
+    keyword whole ->has_attributes yellow
+    keyword whole ->hasAttributes yellow
+    keyword whole ->has_child_nodes yellow
+    keyword whole ->hasChildNodes yellow
+    keyword whole ->hasChildren yellow
+    keyword whole ->hasFeature yellow
+    keyword whole ->hasSiblings yellow
+    keyword whole ->html_dump_mem yellow
+    keyword whole ->hwstat yellow
+    keyword whole ->identify yellow
+    keyword whole ->import yellow
+    keyword whole ->importNode yellow
+    keyword whole ->info yellow
+    keyword whole ->insert yellow
+    keyword whole ->insertanchor yellow
+    keyword whole ->insert_before yellow
+    keyword whole ->insertBefore yellow
+    keyword whole ->insertcollection yellow
+    keyword whole ->insertData yellow
+    keyword whole ->insertdocument yellow
+    keyword whole ->internal_subset yellow
+    keyword whole ->isAsp yellow
+    keyword whole ->is_blank_node yellow
+    keyword whole ->isComment yellow
+    keyword whole ->isHtml yellow
+    keyword whole ->isId yellow
+    keyword whole ->isJste yellow
+    keyword whole ->isPhp yellow
+    keyword whole ->isSameNode yellow
+    keyword whole ->isSupported yellow
+    keyword whole ->isText yellow
+    keyword whole ->isWhitespaceInElementContent yellow
+    keyword whole ->isXhtml yellow
+    keyword whole ->isXml yellow
+    keyword whole ->item yellow
+    keyword whole ->key yellow
+    keyword whole ->langdepvalue yellow
+    keyword whole ->last_child yellow
+    keyword whole ->link yellow
+    keyword whole ->load yellow
+    keyword whole ->loadHTML yellow
+    keyword whole ->loadHTMLFile yellow
+    keyword whole ->loadXML yellow
+    keyword whole ->lock yellow
+    keyword whole ->lookupNamespaceURI yellow
+    keyword whole ->lookupPrefix yellow
+    keyword whole ->max yellow
+    keyword whole ->mimetype yellow
+    keyword whole ->move yellow
+    keyword whole ->movePen yellow
+    keyword whole ->movePenTo yellow
+    keyword whole ->moveTo yellow
+    keyword whole ->multColor yellow
+    keyword whole ->name yellow
+    keyword whole ->next yellow
+    keyword whole ->nextframe yellow
+    keyword whole ->next_sibling yellow
+    keyword whole ->node_name yellow
+    keyword whole ->node_type yellow
+    keyword whole ->node_value yellow
+    keyword whole ->normalize yellow
+    keyword whole ->notations yellow
+    keyword whole ->object yellow
+    keyword whole ->objectbyanchor yellow
+    keyword whole ->output yellow
+    keyword whole ->owner_document yellow
+    keyword whole ->parent_node yellow
+    keyword whole ->parents yellow
+    keyword whole ->prefix yellow
+    keyword whole ->prev yellow
+    keyword whole ->previous_sibling yellow
+    keyword whole ->process yellow
+    keyword whole ->public_id yellow
+    keyword whole ->query yellow
+    keyword whole ->read yellow
+    keyword whole ->reason yellow
+    keyword whole ->registerNamespace yellow
+    keyword whole ->relaxNGValidate yellow
+    keyword whole ->relaxNGValidateSource yellow
+    keyword whole ->remove yellow
+    keyword whole ->remove_attribute yellow
+    keyword whole ->removeAttribute yellow
+    keyword whole ->removeAttributeNode yellow
+    keyword whole ->removeAttributeNS yellow
+    keyword whole ->remove_child yellow
+    keyword whole ->removeChild yellow
+    keyword whole ->replace yellow
+    keyword whole ->replace_child yellow
+    keyword whole ->replaceChild yellow
+    keyword whole ->replaceData yellow
+    keyword whole ->replace_node yellow
+    keyword whole ->result_dump_file yellow
+    keyword whole ->result_dump_mem yellow
+    keyword whole ->rewind yellow
+    keyword whole ->Rotate yellow
+    keyword whole ->rotateTo yellow
+    keyword whole ->save yellow
+    keyword whole ->saveHTML yellow
+    keyword whole ->saveHTMLFile yellow
+    keyword whole ->saveXML yellow
+    keyword whole ->scale yellow
+    keyword whole ->scaleTo yellow
+    keyword whole ->schemaValidate yellow
+    keyword whole ->schemaValidateSource yellow
+    keyword whole ->seek yellow
+    keyword whole ->setAction yellow
+    keyword whole ->set_attribute yellow
+    keyword whole ->setAttribute yellow
+    keyword whole ->setAttributeNode yellow
+    keyword whole ->setAttributeNodeNS yellow
+    keyword whole ->setAttributeNS yellow
+    keyword whole ->setbackground yellow
+    keyword whole ->setbounds yellow
+    keyword whole ->setBuffering yellow
+    keyword whole ->setcolor yellow
+    keyword whole ->setColor yellow
+    keyword whole ->setcommitedversion yellow
+    keyword whole ->set_content yellow
+    keyword whole ->setDepth yellow
+    keyword whole ->setdimension yellow
+    keyword whole ->setdown yellow
+    keyword whole ->setFont yellow
+    keyword whole ->setframes yellow
+    keyword whole ->setHeight yellow
+    keyword whole ->setHit yellow
+    keyword whole ->setindentation yellow
+    keyword whole ->setLeftFill yellow
+    keyword whole ->setLeftMargin yellow
+    keyword whole ->setLine yellow
+    keyword whole ->setLineSpacing yellow
+    keyword whole ->setMargins yellow
+    keyword whole ->setname yellow
+    keyword whole ->set_name yellow
+    keyword whole ->setName yellow
+    keyword whole ->set_namespace yellow
+    keyword whole ->setOver yellow
+    keyword whole ->setrate yellow
+    keyword whole ->setRatio yellow
+    keyword whole ->setRightFill yellow
+    keyword whole ->setrightMargin yellow
+    keyword whole ->setSpacing yellow
+    keyword whole ->setUp yellow
+    keyword whole ->size yellow
+    keyword whole ->skewX yellow
+    keyword whole ->skewXTo yellow
+    keyword whole ->skewY yellow
+    keyword whole ->skewYTo yellow
+    keyword whole ->specified yellow
+    keyword whole ->splitText yellow
+    keyword whole ->srcanchors yellow
+    keyword whole ->srcsofdst yellow
+    keyword whole ->streammp3 yellow
+    keyword whole ->substringData yellow
+    keyword whole ->system_id yellow
+    keyword whole ->tagname yellow
+    keyword whole ->target yellow
+    keyword whole ->tell yellow
+    keyword whole ->tidy_node yellow
+    keyword whole ->title yellow
+    keyword whole ->trim yellow
+    keyword whole ->truncate yellow
+    keyword whole ->type yellow
+    keyword whole ->unlink_node yellow
+    keyword whole ->unlock yellow
+    keyword whole ->user yellow
+    keyword whole ->userlist yellow
+    keyword whole ->validate yellow
+    keyword whole ->value yellow
+    keyword whole ->values yellow
+    keyword whole ->write yellow
+    keyword whole ->writeTemporary yellow
+    keyword whole ->xinclude yellow
+    keyword whole ->xpath yellow
+
 ########################
 # predefined constants
     
@@ -1057,6 +3680,7 @@ context default
     keyword & white
     keyword | white
     keyword :: white
+    keyword -> white
     keyword { brightcyan
     keyword } brightcyan
     keyword ( brightcyan
@@ -1092,7 +3716,7 @@ context exclusive " " green
     keyword \\\n brightgreen
     keyword %% brightgreen
     keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} brightgreen
-    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diuxX\} brightgreen
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diu\} brightgreen
     keyword %\[hl\]n brightgreen
     keyword %\[.\]\[0123456789\]s brightgreen
     keyword %[*] brightgreen
