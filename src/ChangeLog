@@ -1,3 +1,9 @@
+2002-09-01  Pavel Roskin  <proski@gnu.org>
+
+	* man2hlp.c: Move handling of .SH and NODE to a separate
+	function handle_node().  Don't output empty nodes except in the
+	table of contents.
+
 2002-09-01  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* man2hlp.c (print_error): Print input filename.

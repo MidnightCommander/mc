@@ -47,11 +47,14 @@ static const char *c_in;	/* Current input filename */
 
 static char *topics = NULL;
 
-static struct node {
+struct node {
     char *node;
     char *lname;
     struct node *next;
-} nodes, *cnode;
+};
+
+static struct node nodes;
+static struct node *cnode;
 
 #define MAX_STREAM_BLOCK 8192
 
@@ -115,7 +118,7 @@ persistent_fwrite (const void *data, size_t len, FILE * stream)
 static void
 print_error (const char *message)
 {
-    fprintf (stderr, "man2hlp: %s in file \"%s\" at row %d\n", message,
+    fprintf (stderr, "man2hlp: %s in file \"%s\" on line %d\n", message,
 	     c_in, in_row);
 }
 
@@ -271,82 +274,95 @@ printf_string (const char *format, ...)
     print_string (buffer);
 }
 
+/* Handle NODE and .SH commands.  is_sh is 1 for .SH, 0 for NODE */
+static void
+handle_node (char *buffer, int is_sh)
+{
+    int len, heading_level;
+
+    /* If we already skipped a section, don't skip another */
+    if (skip_flag == 2) {
+	skip_flag = 0;
+    }
+    /* Get the command parameters */
+    buffer = strtok (NULL, "");
+    if (buffer == NULL) {
+	print_error ("Syntax error: .SH: no title");
+	return;
+    } else {
+	/* Remove quotes */
+	if (buffer[0] == '"') {
+	    buffer++;
+	    len = strlen (buffer);
+	    if (buffer[len - 1] == '"') {
+		len--;
+		buffer[len] = 0;
+	    }
+	}
+	/* Calculate heading level */
+	heading_level = 0;
+	while (buffer[heading_level] == ' ')
+	    heading_level++;
+	/* Heading level must be even */
+	if (heading_level & 1)
+	    print_error ("Syntax error: .SH: odd heading level");
+	if (no_split_flag) {
+	    /* Don't start a new section */
+	    newline ();
+	    print_string (buffer);
+	    newline ();
+	    newline ();
+	    no_split_flag = 0;
+	} else if (skip_flag) {
+	    /* Skipping title and marking text for skipping */
+	    skip_flag = 2;
+	} else {
+	    if (!is_sh || !node) {
+		/* Start a new section, but omit empty section names */
+		if (*(buffer + heading_level)) {
+			fprintf (f_out, "%c[%s]", CHAR_NODE_END,
+				 buffer + heading_level);
+			col++;
+			newline ();
+		}
+
+		/* Add section to the linked list */
+		if (!cnode) {
+		    cnode = &nodes;
+		    cnode->next = NULL;
+		} else {
+		    cnode->next = malloc (sizeof (nodes));
+		    cnode = cnode->next;
+		}
+		cnode->node = strdup (buffer);
+		cnode->lname = NULL;
+	    }
+	    if (is_sh) {
+		/* print_string() strtok()es buffer, so */
+		cnode->lname = strdup (buffer + heading_level);
+		print_string (buffer + heading_level);
+		newline ();
+		newline ();
+	    }
+	}			/* Start new section */
+    }				/* Has parameters */
+    node = !is_sh;
+}
+
 /* Handle all the roff dot commands.  See man groff_man for details */
 static void
 handle_command (char *buffer)
 {
-    int len, heading_level;
+    int len;
 
     /* Get the command name */
     strtok (buffer, " \t");
-    if ((strcmp (buffer, ".SH") == 0)
-	|| (strcmp (buffer, ".\\\"NODE") == 0)) {
-	int SH = (strcmp (buffer, ".SH") == 0);
-	/* If we already skipped a section, don't skip another */
-	if (skip_flag == 2) {
-	    skip_flag = 0;
-	}
-	/* Get the command parameters */
-	buffer = strtok (NULL, "");
-	if (buffer == NULL) {
-	    print_error ("Syntax error: .SH: no title");
-	    return;
-	} else {
-	    /* Remove quotes */
-	    if (buffer[0] == '"') {
-		buffer++;
-		len = strlen (buffer);
-		if (buffer[len - 1] == '"') {
-		    len--;
-		    buffer[len] = 0;
-		}
-	    }
-	    /* Calculate heading level */
-	    heading_level = 0;
-	    while (buffer[heading_level] == ' ')
-		heading_level++;
-	    /* Heading level must be even */
-	    if (heading_level & 1)
-		print_error ("Syntax error: .SH: odd heading level");
-	    if (no_split_flag) {
-		/* Don't start a new section */
-		newline ();
-		print_string (buffer);
-		newline ();
-		newline ();
-		no_split_flag = 0;
-	    } else if (skip_flag) {
-		/* Skipping title and marking text for skipping */
-		skip_flag = 2;
-	    } else {
-		if (!SH || !node) {
-		    /* Start a new section */
-		    fprintf (f_out, "%c[%s]", CHAR_NODE_END,
-			     buffer + heading_level);
-		    if (!cnode) {
-			cnode = &nodes;
-			cnode->next = NULL;
-		    } else {
-			cnode->next = malloc (sizeof (nodes));
-			cnode = cnode->next;
-		    }
-		    cnode->node = strdup (buffer);
-		    cnode->lname = NULL;
-		    col++;
-		    newline ();
-		}
-		if (SH) {
-		    /* print_string() strtok()es buffer, so */
-		    cnode->lname = strdup (buffer + heading_level);
-		    print_string (buffer + heading_level);
-		    newline ();
-		    newline ();
-		}
-	    }			/* Start new section */
-	}			/* Has parameters */
-	node = !SH;
-    } /* Command .SH */
-    else if (strcmp (buffer, ".\\\"DONT_SPLIT\"") == 0) {
+
+    if (strcmp (buffer, ".SH") == 0) {
+	handle_node (buffer, 1);
+    } else if (strcmp (buffer, ".\\\"NODE") == 0) {
+	handle_node (buffer, 0);
+    } else if (strcmp (buffer, ".\\\"DONT_SPLIT\"") == 0) {
 	no_split_flag = 1;
     } else if (strcmp (buffer, ".\\\"SKIP_SECTION\"") == 0) {
 	skip_flag = 1;
