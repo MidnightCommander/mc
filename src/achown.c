@@ -64,6 +64,8 @@
 #define B_OUSER         B_USER + 6
 #define B_OGROUP        B_USER + 7
 
+static struct Dlg_head *ch_dlg;
+
 static struct {
     int ret_cmd, flags, y, x;
     char *text;
@@ -88,7 +90,7 @@ static int x_toggle;
 static char ch_flags[11];
 static char *ch_perm = "rwx";
 static umode_t ch_cmode;
-struct stat *sf_stat;
+static struct stat *sf_stat;
 static int need_update;
 static int end_chown;
 static int current_file;
@@ -265,7 +267,7 @@ static void do_enter_key (Dlg_head *h, int f_pos)
 	chl_end = 0;
 	
 	chl_dlg = create_dlg (lyy, lxx, 13, 17, dialog_colors, chl_callback,
-			      "[Chown-advanced]", "achown_enter", DLG_NONE);
+			      "[Advanced Chown]", "achown_enter", DLG_NONE);
 	
 	/* get new listboxes */
 	chl_list = listbox_new (1, 1, 15, 11, 0, l_call, NULL);
@@ -553,7 +555,7 @@ static void init_chown_advanced (void)
     x_toggle = 070;
 
     ch_dlg = create_dlg (0, 0, 13, 74, dialog_colors, advanced_chown_callback,
-			 "[Chown-advanced]", "achown", DLG_CENTER);
+			 "[Advanced Chown]", "achown", DLG_CENTER);
 
 #define XTRACT(i) BY+chown_advanced_but[i].y, BX+chown_advanced_but[i].x, \
 	chown_advanced_but[i].ret_cmd, chown_advanced_but[i].flags, _(chown_advanced_but[i].text), \

@@ -71,11 +71,11 @@
 #include "../vfs/vfs.h"
 
 /* This flag is used in filename_completion_function */
-int ignore_filenames = 0;
+static int ignore_filenames = 0;
 
 /* This flag is used by command_completion_function */
 /* to hint the filename_completion_function */
-int look_for_executables = 0;
+static int look_for_executables = 0;
 
 static char *
 filename_completion_function (char *text, int state)
@@ -1025,7 +1025,7 @@ complete_engine (WInput *in, int what_to_do)
 	    query_width  = w;
     	    query_dlg = create_dlg (y, x, query_height, query_width,
 				    dialog_colors, query_callback,
-				    "[Completion-query]", "complete", DLG_NONE);
+				    "[Completion]", "complete", DLG_NONE);
     	    query_list = listbox_new (1, 1, w - 2, h - 2, 0, querylist_callback, NULL);
     	    add_widget (query_dlg, query_list);
     	    for (p = in->completions + 1; *p; p++)

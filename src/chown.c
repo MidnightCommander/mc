@@ -66,11 +66,12 @@
 #define B_SETUSR        B_USER + 1
 #define B_SETGRP        B_USER + 2
 
-/* struct stat *sf_stat; */
+static struct Dlg_head *ch_dlg;
 static int need_update, end_chown;
 static int current_file;
 static int single_set;
 static WListbox *l_user, *l_group;
+static int c_fsize;
 
 static struct {
     int ret_cmd, flags, y, x;

@@ -47,7 +47,7 @@
 #include "../vfs/vfs.h"
 
 static int single_set;
-struct Dlg_head *ch_dlg;
+static struct Dlg_head *ch_dlg;
 
 #define PX		5
 #define PY		2
@@ -69,19 +69,18 @@ struct Dlg_head *ch_dlg;
 #define B_SETMRK        B_USER+2
 #define B_CLRMRK        B_USER+3
 
-int mode_change, need_update;
-int c_file, end_chmod;
+static int mode_change, need_update;
+static int c_file, end_chmod;
 
-umode_t and_mask, or_mask, c_stat;
-char *c_fname, *c_fown, *c_fgrp, *c_fperm;
-int c_fsize;
+static umode_t and_mask, or_mask, c_stat;
+static char *c_fname, *c_fown, *c_fgrp;
 
 static WLabel *statl;
 static int normal_color;
 static int title_color;
 static int selection_color;
 
-struct {
+static struct {
     mode_t mode;
     char *text;
     int selected;
@@ -102,7 +101,7 @@ struct {
     { S_ISUID, N_("set user ID on execution"), 0, 0, },
 };
 
-struct {
+static struct {
     int ret_cmd, flags, y, x;
     char *text;
 } chmod_but[BUTTONS] = 

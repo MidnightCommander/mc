@@ -1,3 +1,11 @@
+2001-07-24  Pavel Roskin  <proski@gnu.org>
+
+	* achown.c: Make all global variables static.  Fix help.
+	* complete.c: Likewise.
+	* chmod.c: Make all global variables static.
+	* chown.c: Likewise.
+	* chmod.h: Remove all variables.
+
 2001-07-23  Pavel Roskin  <proski@gnu.org>
 
 	* user.c: Eliminate static variable s_editwidget.  Pass
