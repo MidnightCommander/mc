@@ -406,25 +406,25 @@ extern void mc_vfs_done( void );
 #ifdef ENOSYS
 #define E_NOTSUPP ENOSYS	/* for use in vfs when module does not provide function */
 #else
-/* Yes, this does happen */
+#define E_NOTSUPP EFAULT	/* Does this happen? */
 #endif
 
 #ifdef ENOMSG
 #define E_UNKNOWN ENOMSG	/* if we do not know what error happened */
 #else
-#define E_UNKNOWN (ELAST+2)	/* if we do not know what error happened */
+#define E_UNKNOWN EIO	/* if we do not know what error happened */
 #endif
 
 #ifdef EREMOTEIO
 #define E_REMOTE EREMOTEIO	/* if other side of ftp/fish reports error */
 #else
-#define E_REMOTE ENETUNREACH
+#define E_REMOTE ENETUNREACH	/* :-( there's no EREMOTEIO on some systems */
 #endif
 
 #ifdef EPROTO
 #define E_PROTO EPROTO		/* if other side fails to follow protocol */
 #else
-#define E_PROTO (ELAST+4)	/* if other side fails to follow protocol */
+#define E_PROTO EIO
 #endif
 
 #endif /* __VFS_H */

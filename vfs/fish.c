@@ -135,7 +135,7 @@ static void
 free_archive (vfs *me, vfs_s_super *super)
 {
     if ((SUP.sockw != -1) || (SUP.sockr != -1)){
-	print_vfs_message ("fish: Disconnecting from %s", super->name);
+	print_vfs_message ("fish: Disconnecting from %s", super->name?super->name:"???");
 	command(me, super, NONE, "#BYE\nlogout\n");
 	close(SUP.sockw);
 	close(SUP.sockr);

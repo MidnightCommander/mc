@@ -1,3 +1,16 @@
+Mon Nov 30 23:49:11 1998  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* direntry.c: Hopefully got want_stale_data right...
+
+Wed Nov 25 23:54:23 1998  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* vfs.h: use ENETUNREACH if EREMOTEIO error code is not defined,
+ 	this is neccessary for Solaris and probably others
+
+Mon Nov 23 17:39:33 1998  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* vfs.c (vfs_type_from_op): removing unneccessary code
+
 Wed Dec  9 12:24:52 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
 	* extfs/rpm: commit fix for files with spaces in name by Marc

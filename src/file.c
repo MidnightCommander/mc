@@ -388,7 +388,7 @@ check_hardlinks (char *src_name, char *dst_name, struct stat *pstat)
     struct stat link_stat;
     char *p;
 
-#if 1	/* What will happen if we kill this line? mc_link() will fail on this and it is right behaivour... */
+#if 1	/* What will happen if we kill this line? mc_link() will fail on this and it is right behaviour... */
     if (vfs_file_is_ftp (src_name))
         return 0;
 #endif
@@ -577,12 +577,11 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite,
 	dst_exists = 1;
     }
 
- retry_src_xstat:
-    if ((*file_mask_xstat)(src_path, &sb)){
+    while ((*file_mask_xstat)(src_path, &sb)){
 	return_status = file_error (_(" Cannot stat source file \"%s\" \n %s "),
 				    src_path);
 	if (return_status == FILE_RETRY)
-	    goto retry_src_xstat;
+	    continue;
 	return return_status;
     } 
     
@@ -627,33 +626,30 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite,
 
         if (S_ISCHR (sb.st_mode) || S_ISBLK (sb.st_mode) || S_ISFIFO (sb.st_mode)
             || S_ISSOCK (sb.st_mode)){
-        retry_mknod:        
-            if (mc_mknod (dst_path, sb.st_mode & file_mask_umask_kill, sb.st_rdev) < 0){
+            while (mc_mknod (dst_path, sb.st_mode & file_mask_umask_kill, sb.st_rdev) < 0){
 	        return_status = file_error
 		    (_(" Cannot create special file \"%s\" \n %s "), dst_path);
 	        if (return_status == FILE_RETRY)
-		    goto retry_mknod;
+		    continue;
 		return return_status;
 	    }
 	    /* Success */
 	    
 #ifndef OS2_NT
-	retry_mknod_uidgid:
-	    if (file_mask_preserve_uidgid && mc_chown (dst_path, sb.st_uid, sb.st_gid)){
+	    while (file_mask_preserve_uidgid && mc_chown (dst_path, sb.st_uid, sb.st_gid)){
 		temp_status = file_error
 		    (_(" Cannot chown target file \"%s\" \n %s "), dst_path);
 		if (temp_status == FILE_RETRY)
-		    goto retry_mknod_uidgid;
+		    continue;
 		return temp_status;
 	    }
 #endif
 #ifndef __os2__
-	retry_mknod_chmod:
-	    if (file_mask_preserve &&
+	    while (file_mask_preserve &&
 		(mc_chmod (dst_path, sb.st_mode & file_mask_umask_kill) < 0)){
 		temp_status = file_error (_(" Cannot chmod target file \"%s\" \n %s "), dst_path);
 		if (temp_status == FILE_RETRY)
-		    goto retry_mknod_chmod;
+		    continue;
 		return temp_status;
 	    }
 #endif
@@ -663,12 +659,11 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite,
     
     gettimeofday (&tv_transfer_start, (struct timezone *) NULL);
 
- retry_src_open:
-    if ((src_desc = mc_open (src_path, O_RDONLY | O_LINEAR)) < 0){
+    while ((src_desc = mc_open (src_path, O_RDONLY | O_LINEAR)) < 0){
 	return_status = file_error
 	    (_(" Cannot open source file \"%s\" \n %s "), src_path);
 	if (return_status == FILE_RETRY)
-	    goto retry_src_open;
+	    continue;
 	file_progress_do_append = 0;
 	return return_status;
     }
@@ -681,12 +676,11 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite,
 	}
     }
     
- retry_src_fstat:
-    if (mc_fstat (src_desc, &sb)){
+    while (mc_fstat (src_desc, &sb)){
         return_status = file_error
 	    (_(" Cannot fstat source file \"%s\" \n %s "), src_path);
 	if (return_status == FILE_RETRY)
-	    goto retry_src_fstat;
+	    continue;
 	file_progress_do_append = 0;
 	goto ret;
     }
@@ -700,17 +694,15 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite,
     file_size = sb.st_size;
 
     /* Create the new regular file with small permissions initially,
-       do not create a security hole.  */
+       do not create a security hole.  FIXME: You have security hole
+       here, btw. Imagine copying to /tmp and symlink attack :-( */
 
- retry_dst_open:
-    if ((file_progress_do_append && 
-	 (dest_desc = mc_open (dst_path, O_WRONLY | O_APPEND)) < 0) ||
-	(!file_progress_do_append &&
-	 (dest_desc = mc_open (dst_path, O_WRONLY | O_CREAT | O_TRUNC, 0600)) < 0)){
+    while ((dest_desc = mc_open (dst_path, O_WRONLY | 
+      (file_progress_do_append ? O_APPEND : (O_CREAT | O_TRUNC)), 0600)) < 0){
         return_status = file_error
 	    (_(" Cannot create target file \"%s\" \n %s "), dst_path);
 	if (return_status == FILE_RETRY)
-	    goto retry_dst_open;
+	    continue;
 	file_progress_do_append = 0;
 	goto ret;
     }
@@ -720,17 +712,14 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite,
     appending = file_progress_do_append;
     file_progress_do_append = 0;
 
- retry_dst_fstat:
     /* Find out the optimal buffer size.  */
-    if (mc_fstat (dest_desc, &sb)){
+    while (mc_fstat (dest_desc, &sb)){
         return_status = file_error
 	    (_(" Cannot fstat target file \"%s\" \n %s "), dst_path);
 	if (return_status == FILE_RETRY)
-	    goto retry_dst_fstat;
+	    continue;
 	goto ret;
     }
-    buf_size = 8*1024;
-
     buf = (char *) xmalloc (buf_size, "copy_file_file");
 
     file_progress_eta_secs = 0.0;
@@ -842,23 +831,23 @@ ret:
     if (buf)
 	free (buf);
 	
- retry_src_close:
-    if ((resources & 1) && mc_close (src_desc) < 0){
+    while ((resources & 1) && mc_close (src_desc) < 0){
 	temp_status = file_error
 	    (_(" Cannot close source file \"%s\" \n %s "), src_path);
 	if (temp_status == FILE_RETRY)
-	    goto retry_src_close;
+	    continue;
 	if (temp_status == FILE_ABORT)
 	    return_status = temp_status;
+	break;
     }
 
- retry_dst_close:
-    if ((resources & 2) && mc_close (dest_desc) < 0){
+    while ((resources & 2) && mc_close (dest_desc) < 0){
 	temp_status = file_error
 	    (_(" Cannot close target file \"%s\" \n %s "), dst_path);
 	if (temp_status == FILE_RETRY)
-	    goto retry_dst_close;
+	    continue;
 	return_status = temp_status;
+	break;
     }
 	
     if (resources & 4){
@@ -871,13 +860,13 @@ ret:
         /* no short file and destination file exists */
 #ifndef OS2_NT 
 	if (!appending && file_mask_preserve_uidgid){
-         retry_dst_chown:
-    	    if (mc_chown (dst_path, src_uid, src_gid)){
+    	    while (mc_chown (dst_path, src_uid, src_gid)){
 		temp_status = file_error
 	    	    (_(" Cannot chown target file \"%s\" \n %s "), dst_path);
 		if (temp_status == FILE_RETRY)
-	    	    goto retry_dst_chown;
+	    	    continue;
 		return_status = temp_status;
+		break;
     	    }
 	}
 #endif
@@ -1189,9 +1178,7 @@ move_file_file (char *s, char *d, long *progress_count, double *progress_bytes)
 	}
 	/* Ok to overwrite */
     }
-#if 0
- retry_rename: 
-#endif
+
     if (!file_progress_do_append){
 	if (S_ISLNK (src_stats.st_mode) && file_mask_stable_symlinks){
 	    if ((return_status = make_symlink (s, d)) == FILE_CONT)
@@ -1693,6 +1680,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault)
     char *source = NULL;
     char *dest = NULL;
     char *temp = NULL;
+    char *save_cwd = NULL, *save_dest = NULL;
     int only_one = (get_current_type () == view_tree) || (panel->marked <= 1);
     struct stat src_stat, dst_stat;
     int i, value;
@@ -1774,14 +1762,18 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault)
     /* Initialize things */
     /* We now have ETA in all cases */
     create_op_win (operation, 1);
-
-    /*
-     * We do not want to trash cache every time file is
-     * created/touched. However, this will make our cache contain
-     * invalid data.
-     */
-    if (dest)
-        mc_setctl (dest, MCCTL_WANT_STALE_DATA, NULL);
+    /* We do not want to trash cache every time file is
+       created/touched. However, this will make our cache contain
+       invalid data. */
+    if (dest) {
+	if (mc_setctl (dest, MCCTL_WANT_STALE_DATA, NULL))
+	    save_dest = strdup(dest);
+    }
+    if (panel->cwd) {
+	if (mc_setctl (panel->cwd, MCCTL_WANT_STALE_DATA, NULL))
+	    save_cwd = strdup(panel->cwd);
+    }
+	
     ftpfs_hint_reread (0);
     
     /* Now, let's do the job */
@@ -1972,10 +1964,14 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault)
  clean_up:
     /* Clean up */
     destroy_op_win ();
-
-    if (dest)
-        mc_setctl (dest, MCCTL_NO_STALE_DATA, NULL);
-
+    if (save_cwd) {
+        mc_setctl (save_cwd, MCCTL_NO_STALE_DATA, NULL);
+	free(save_cwd);
+    }
+    if (save_dest) {
+        mc_setctl (save_dest, MCCTL_NO_STALE_DATA, NULL);
+	free(save_dest);
+    }
     ftpfs_hint_reread (1);
 
     free_linklist (&linklist);

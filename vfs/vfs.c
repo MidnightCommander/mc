@@ -31,6 +31,7 @@
 #undef MIN
 #undef MAX
 
+#include <syslog.h>
 #include <stdio.h>
 #include <stdlib.h>	/* For atol() */
 #include <stdarg.h>
@@ -116,7 +117,6 @@ vfs_register (vfs *vfs)
     int res;
 
     if (!vfs) vfs_die("You can not register NULL.");
-    
     res = (vfs->init) ? (*vfs->init)(vfs) : 1;
 
     if (!res) return 0;
@@ -134,20 +134,15 @@ vfs_type_from_op (char *path)
 
     if (!path) vfs_die( "vfs_type_from_op got NULL: impossible" );
     
-    for (vfs = vfs_list; vfs; vfs = vfs->next){
-	/* FIXME: this code could be much more elegant */
-        if (vfs == &vfs_local_ops)	/* local catches all */ 
-	    return NULL;
+    for (vfs = vfs_list; vfs != &vfs_local_ops; vfs = vfs->next){
         if (vfs->which) {
-	    if ((*vfs->which) (vfs, path) != -1)
-	        return vfs;
-	    else
-	        continue;
+	    if ((*vfs->which) (vfs, path) == -1)
+		continue;
+	    return vfs;
 	}
 	if (!strncmp (path, vfs->prefix, strlen (vfs->prefix)))
 	    return vfs;
     }
-    vfs_die ("No local in vfs list?");
     return NULL; /* shut up stupid gcc */
 }
 
@@ -436,6 +431,8 @@ mc_setctl (char *path, int ctlop, char *arg)
     vfs *vfs;
     int result;
 
+    if (!path)
+	vfs_die( "You don't want to pass NULL to mc_setctl." );
     path = vfs_canon (path);
     vfs = vfs_type (path);    
     result = vfs->setctl ? (*vfs->setctl)(vfs, path, ctlop, arg) : 0;

@@ -1,3 +1,13 @@
+Mon Nov 30 21:10:30 1998  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* file.c (copy_file_file): minor code beatifulling: replace goto's
+ 	with while loops (it is both shorter and nicer :-)
+	(panel_operate): hopefully done WANT_STALE_DATA right. We really
+ 	should kill ftpfs_hint_reread hack soon.
+
+	* cmd.c (dirsizes_cmd): report error if you are on non-local
+ 	filesystem. (As oposed to silently failing.)
+
 1998-12-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* screen.c (panel_reload): Set panel->selected to zero here, this

@@ -1361,8 +1361,10 @@ void dirsizes_cmd (void)
 #    define DUSUM_FACTOR 512
 #endif
 
-    if (!vfs_current_is_local ())
+    if (!vfs_current_is_local ()) {
+	message (1, MSG_ERROR, _("You can not scan disk usage on non-local filesystem. Sorry.") );
         return;
+    }
     for (i = 0; i < panel->count; i++)
         if (S_ISDIR (panel->dir.list [i].buf.st_mode))
             j += strlen (panel->dir.list [i].fname) + 1;

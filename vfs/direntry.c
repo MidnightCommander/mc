@@ -3,8 +3,8 @@
  *
  * Written at 1998 by Pavel Machek <pavel@ucw.cz>, distribute under LGPL.
  *
- * Based on tar.c from midnight and archives.[ch] from avfs by Miklos
- * Szeredi (mszeredi@inf.bme.hu)
+ * Very loosely based on tar.c from midnight and archives.[ch] from
+ * avfs by Miklos Szeredi (mszeredi@inf.bme.hu)
  *
  * Unfortunately, I was unable to keep all filesystems
  * uniform. tar-like filesystems use tree structure where each
@@ -269,7 +269,7 @@ vfs_s_entry *vfs_s_find_entry_linear(vfs *me, vfs_s_inode *root, char *path, int
 	    break;
 
     if (ent && (! (MEDATA->dir_uptodate) (me, ent->ino))) {
-#if 0
+#if 1
 	message_1s( 1, "Dir cache expired for", path);
 #endif
 	vfs_s_free_entry (me, ent);
@@ -368,10 +368,13 @@ void vfs_s_free_super (vfs *me, vfs_s_super *super)
 	super->root = NULL;
     }
 
-#if 0
+#if 1
     /* We currently leak small ammount of memory, sometimes. Fix it if you can. */
     if (super->fd_usage)
 	message_1s1d (1, " Direntry warning ", "Super fd_usage is %d, memory leak", super->fd_usage);
+
+    if (super->want_stale)
+	message_1s( 1, " Direntry warning ", "Super has want_stale set" );
 #endif
 
     if (super->prevp) {
@@ -663,6 +666,8 @@ void *vfs_s_open (vfs *me, char *file, int flags, int mode)
 	    return NULL;
 
 	split_dir_name(me, q, &dirname, &name, &save);
+/* FIXME: if vfs_s_find_inode returns NULL, this will do rather bad
+   things. */
 	dir = vfs_s_find_inode(me, super->root, dirname, LINK_FOLLOW, FL_DIR);
 	if (save)
 	    *save = DIR_SEP_CHAR;
@@ -673,7 +678,7 @@ void *vfs_s_open (vfs *me, char *file, int flags, int mode)
 	was_changed = 1;
     }
 
-    if (ino && S_ISDIR (ino->st.st_mode)) ERRNOR (EISDIR, NULL);
+    if (S_ISDIR (ino->st.st_mode)) ERRNOR (EISDIR, NULL);
     
     fh = (struct vfs_s_fh *) xmalloc (sizeof (struct vfs_s_fh), "Direntry: filehandle");
     fh->pos = 0;
@@ -877,8 +882,7 @@ vfs_s_setctl (vfs *me, char *path, int ctlop, char *arg)
 	return 0;
     switch (ctlop) {
         case MCCTL_WANT_STALE_DATA:
-#warning Should se this to 1
-	    ino->super->want_stale = 0;
+	    ino->super->want_stale = 1;
 	    return 1;
         case MCCTL_NO_STALE_DATA:
 	    ino->super->want_stale = 0;
