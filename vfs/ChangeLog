@@ -5,6 +5,8 @@
 
 	* extfs/iso9660.in: Fix quoting issues.
 
+	* extfs/trpm: Likewise.
+
 2004-10-25  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
         * smbfs.c (smbfs_open_readwrite): Comment out flags games,
