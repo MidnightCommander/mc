@@ -1158,8 +1158,10 @@ static int pty_open_master (char *pty_name)
     strcpy (pty_name, "/dev/ptmx");
     pty_master = open (pty_name, O_RDWR);
 #endif 
-    if (pty_master == -1
-	|| grantpt (pty_master) == -1		  /* Grant access to slave */
+    if (pty_master == -1)
+	return -1;
+
+    if (grantpt (pty_master) == -1		  /* Grant access to slave */
 	|| unlockpt (pty_master) == -1		  /* Clear slave's lock flag */
 	|| !(slave_name = ptsname (pty_master)))  /* Get slave's name */
     {
