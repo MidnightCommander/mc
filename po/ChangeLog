@@ -1,3 +1,9 @@
+2003-02-13  Marco Ciampa  <ciampix@libero.it>
+
+	* it.po: Updated Italian translation, converted in UTF-8,
+                 some small fixies & upper/lower case conversion in a more
+                 'italian' way to write messages.
+
 2003-01-26  Marco Ciampa  <ciampix@libero.it>
 
 	* it.po: Updated Italian translation.

@@ -137,11 +137,11 @@ Pannelli Directory\&,
 .\"Directory Panels"
 i
 .\"LINK2"
-Menu Sinistro e Destro
+menu Sinistra e Destra
 .\"Left and Right Menus"
 e
 .\"LINK2"
-Menu File\&.
+menu File\&.
 .\"File Menu"
 .PP
 E' possibile eseguire comandi di sistema dal Midnight Commander 
@@ -157,7 +157,7 @@ Tasti di Ingresso
 .\"Input Line Keys"
 per saperne di più sulla riga di comando.
 .\"NODE "Mouse Support"
-.SH "Supporto Mouse"
+.SH "Supporto mouse"
 Il Midnight Commander è fornito di supporto mouse. Esso viene
 attivato ogniqualvolta lo si esegue in un terminale
 .B xterm(1)
@@ -191,7 +191,7 @@ Visualizzatore dell'Aiuto
 .\"Contents"
 e nell' 
 .\"LINK2"
-Albero Directory\&.
+Albero directory\&.
 .\"Directory Tree"
 .PP
 L'auto ripetizione predefinita per il mouse è di 400 millisecondi. Questa
@@ -265,7 +265,7 @@ Tasti Linea di Ingresso
 sono usati per modificare le linee di ingresso. Cioè sia la linea di comando
 che le linee di ingresso nelle finestre di interrogazione.
 .\"NODE "  Miscellaneous Keys"
-.SH "  Tasti Vari"
+.SH "  Tasti vari"
 Qua ci sono alcuni tasti che non sono classificabili in nessuna delle
 altre categorie:
 .TP
@@ -356,12 +356,12 @@ sospesa usando questo trucco, non si sarà in grado di eseguire altri
 programmi dal Midnight Commander finchè non si terminerà l'applicazione
 sospesa.
 .\"NODE "  Directory Panels"
-.SH "  Pannelli Directory"
+.SH "  Pannelli directory"
 Questa sezione elenca i tasti che operano sui pannelli directory. 
 Se si desidera sapere come cambiare la visualizzazione dei pannelli,
 date un'occhiata alla sezione su
 .\"LINK2"
-Menu Sinistro e Destro\&.
+menu Sinistra e Destra\&.
 .\"Left and Right Menus"
 .TP
 .B Tab, C-i
@@ -499,7 +499,7 @@ precedente, M-n va alla successiva.
 .B M-h
 mostra lo storico per la riga di ingresso corrente.
 .\"NODE "  General Movement Keys"
-.SH "  Tasti Generali di Movimento"
+.SH "  Tasti generali di movimento"
 Il visualizzatore dell'aiuto, il visualizzato dei file e l'albero directory
 usano un codice comune per gestire il movimento. Per questa ragione essi
 accettano esattamente gli stessi tasti. Ognuno di questi però accetta anche
@@ -541,7 +541,7 @@ si sposta di mezza pagina in alto o in basso.
 .B g, G
 si sposta all'inizio o alla fine.
 .\"NODE "  Input Line Keys"
-.SH "  Tasti di Riga di Ingresso"
+.SH "  Tasti di riga di ingresso"
 I tasti di riga di ingresso (sono usati
 per la
 .\"LINK2"
@@ -605,14 +605,14 @@ completamento
 automatico.
 .SH ""
 .\"NODE "Menu Bar"
-.SH "Barra dei Menu"
+.SH "Barra dei menu"
 La barra dei menu compare premendo F9 o cliccando con il mouse sopra la riga
 superiore dello schermo. La barra menu possiede cinque menu: "Sinistra", "File",
 "Comando", "Opzioni" e "Destra".
 .PP
 I
 .\"LINK2"
-Menu Sinistra e Destra 
+menu Sinistra e Destra 
 .\"Left and Right Menus"
 permettono di modificare l'aspetto dei pannelli directory di 
 sinistra e di destra.
@@ -652,7 +652,7 @@ Aspetto
 .\"Layout"
 del menu Opzioni è Orizzontale).
 .\"NODE "    Listing Mode..."
-.SH "    Modalità Lista..."
+.SH "    Modalità lista..."
 La modalità lista serve a mostrare un elenco di file; ci sono quattro
 modalità elenco disponibili:
 .BR Completa ,
@@ -904,7 +904,7 @@ o l'editor specificato nella variabile d'ambiente
 .B EDITOR
 oppure l'
 .\"LINK2"
-Editor di File Interno
+Editor di file interno
 .\"Internal File Editor"
 se l'opzione, "Usa Editor interno" è stata impostata.
 .PP
@@ -1097,7 +1097,7 @@ Modifica file menu
 .\"Menu File Edit"
 serve a modificare il menu utente (che appare premendo F2).
 .\"NODE "    Directory Tree"
-.SH "    Albero Directory"
+.SH "    Albero directory"
 Il comando albero directory mostra una rappresentazione ad albero delle
 directory. Selezionando una directory dalla rappresentazione il 
 Midnight Commander cambierà a quella directory.
@@ -1187,7 +1187,7 @@ Vedere anche la sezione
 supporto mouse\&.
 .\"Mouse Support"
 .\"NODE "    Find File"
-.SH "    Trova File"
+.SH "    Trova file"
 Il comando Trova file domanda prima la directory di inizio per la
 ricerca ed il nome del file da cercare. Premendo il tasto albero
 puoi selezionare la directory di partenza dall'
@@ -1213,7 +1213,7 @@ possa svolgere ulteriori operazioni su di essi (visualizzazione, copia,
 spostamento, e così via). Dopo la pannellizzazione è possibile premere C-r
 per ripristinare la vista normale dei file.
 .PP
-E' possibile avere una lista di directory che il comando Trova File dovrebbe
+E' possibile avere una lista di directory che il comando Trova file dovrebbe
 saltare durante la ricerca (per esempio, si può evitare di fare ricerche su
 un CDROM o su una directory NFS montata attraverso un collegamento lento).
 .PP
@@ -1269,7 +1269,7 @@ Aggiungi nuovo. Poi si deve dare un nome al quale associare il comando che si
 desidera salvare. La prossima volta sarà possibile scegliere quel comando 
 dall'elenco e non servirà ribatterlo nuovamente.
 .\"NODE "    Hotlist"
-.SH "    Directory Favorite"
+.SH "    Directory favorite"
 Il comando Directory favorite mostra le etichette delle directory nell'elenco
 delle favorite. Il Midnight Commander andrà alla directory corrispondente
 all'etichetta selezionata. Dalla finestra delle favorite si possono rimuovere
@@ -1284,7 +1284,7 @@ variabile CDPATH come descritto in
 comando cd interno\&.
 .\"The cd internal command"
 .\"NODE "    Extension File Edit"
-.SH "    Modifica File Estensioni"
+.SH "    Modifica file estensioni"
 Questo comando invocherà l'editor sul file 
 .IR ~/.mc/bindings . 
 Il fomato di questo file è il seguente (il formato è cambiato dalla 
@@ -1341,7 +1341,7 @@ usata l'azione View della seconda voce.
 .I Normalmente 
 dovrebbero corrispondere tutte le azioni.
 .\"NODE "    Background jobs"
-.SH "    Processi in Background"
+.SH "    Processi in background"
 Questo comando permette di controllare lo stato di ogni processo
 in background del Midnight Commander (in background possono essere
 eseguite solo operazioni di copia e rinomina). Da qui si può bloccare, 
@@ -1535,7 +1535,7 @@ che non appaiono funzionare su alcuni terminali ed è possibile aggiustare.
 .PP
 Il comando
 .\"LINK2"
-FS Virtuale
+FS virtuale
 .\"Virtual FS"
 mostra una finestra di dialogo con la quale è possibile impostare alcune
 opzioni relative al VFS.
@@ -1789,10 +1789,11 @@ dei tasti che si è ridefinito saranno scritte nella sezione [terminal:TERM]
 del vostro ~/.mc/ini file (dove TERM è il nome del terminale corrente). Le
 definizioni dei tasti che già funzionavano correttamente non vengono salvate.
 .\"NODE "    Virtual FS"
-.SH "    FS Virtuale "
-Quest'opzione permette di controllare l'impostazione della cache informazioni del
+.SH "    FS virtuale "
+Quest'opzione permette di controllare l'impostazione della cache informazioni 
+del
 .\"LINK2"
-File System Virtuale\&.
+file system virtuale\&.
 .\"Virtual File System"
 .PP
 Il Midnight Commander tiene in memoria le informazioni
@@ -1828,7 +1829,7 @@ a un minuto.
 .PP
 Il
 .\"LINK2"
-File System FTP
+file system FTP
 .\"FTP File System"
 (ftpfs) permette di navigare le directory su server FTP remoti. Esso
 possiede diverse opzioni.
@@ -1857,7 +1858,7 @@ Se
 non è impostata, è possibile usare il punto escamativo per abilitare
 il proxy per certi host. Vedere la sezione
 .\"LINK2"
-File System FTP
+file system FTP
 .\"FTP File System"
 per gli esempi.
 .PP
@@ -1967,7 +1968,7 @@ delle directory presenti nelle directory ~/src e /usr/src da qualunque
 parte nel file system (per esempio cd linux vi porterà in 
 /usr/src/linux).
 .\"NODE "  Macro Substitution"
-.SH "  Sostituzione di Macro"
+.SH "  Sostituzione di macro"
 Quando si accede ad un
 .\"LINK2"
 menu utente\&,
@@ -2035,7 +2036,7 @@ Questa è una macro speciale usata per cambiare la directory corrente
 alla directory specificata di fronte ad essa. Usata principalmente 
 come interfaccia al
 .\"LINK2"
-File System Virtuale\&.
+file system virtuale\&.
 .\"Virtual File System"
 .TP
 .I "%view"
@@ -2173,8 +2174,8 @@ cancella il comando Permessi.
 Il comando proprietario serve a cambiare il proprietario/gruppo di un 
 file. Il tasto di scelta rapida per questo comando è C-x o.
 .\"NODE "Advanced Chown"
-.SH "Proprietario Avanzato"
-Il comando Proprietario Avanzato consiste nel comando 
+.SH "Proprietario avanzato"
+Il comando Proprietario avanzato consiste nel comando 
 .\"LINK2"
 Permessi
 .\"Chmod"
@@ -2328,7 +2329,7 @@ ed il resto minuscolo.
 Si può usare '\\' come carattere di protezione. Per esempio, '\\\\' è
 una barra retroversa e '\\*' è un asterisco.
 .\"NODE "Internal File Viewer"
-.SH "Visualizzatore di File Interno"
+.SH "Visualizzatore di file interno"
 Il visualizzatore di file interno fornisce due modalità di visualizzazione:
 ASCII e esadecimale. Per passare da una modalità all'altra, usare il tasto F4.
 Se si ha il programma GNU gzip installato, esso verrà usato automaticamente
@@ -2450,7 +2451,7 @@ vedere la sezione
 Editor File Estensioni\&.
 .\"Extension File Edit"
 .\"NODE "Internal File Editor"
-.SH "Editor di File Interno"
+.SH "Editor di file interno"
 L'editor di file interno fornisce molte delle funzioni dei più
 diffusi editor a pieno schermo. Viene invocato tramite 
 .B F4
@@ -2600,7 +2601,7 @@ Completamento: visualizza tutto
 .B M-Tab
 una seconda volta; la prima volta MC emette solo un suono.
 .\"NODE "Virtual File System"
-.SH "File System Virtuale"
+.SH "File system virtuale"
 Il Midnight Commander è provvisto di uno strato di codice per 
 accedere al file system; questo strato di codice è conosciuto anche
 con il nome di commutazione di file system virtuale. La commutazione 
@@ -2609,7 +2610,7 @@ file all'interno di un file system non di tipo Unix.
 .PP
 Attualmente il Midnight Commander viene confezionato con alcuni File 
 System Virtuali (VFS): il file system locale, usato per accedere al 
-normale file system Unix; l' ftpfs, usato per manipolare file su sistemi 
+normale file system Unix; l'ftpfs, usato per manipolare file su sistemi 
 remoti con il protocollo FTP; il tarfs, usato per manipolare file tar
 e file tar compressi; l'undelfs, usato per recuperare file cancellati
 su file system di tipo ext2 (il file system predefinito per sistemi
@@ -2624,8 +2625,8 @@ percorso utilizzati e li dirige al file system corretto; il formato
 utilizzato per ogniuno di questi file system viene descritto più avanti
 nella sezioni apposite.
 .\"NODE "  FTP File System"
-.SH "  File System FTP"
-Il File System FTP (ftpfs) permette di manipolare file su macchine remote.
+.SH "  File system FTP"
+Il file system FTP (ftpfs) permette di manipolare file su macchine remote.
 Per utilizzarlo, si può usare il pannello del comando
 .I Connessione FTP
 (accessibile dalla barra dei menu) oppure si può cambiare direttamente 
@@ -2668,11 +2669,11 @@ Esempi:
 .PP
 Prego controllare la finestra di dialogo
 .\"LINK2"
-File System Virtuale
+file system virtuale
 .\"Virtual FS"
 per le opzioni ftpfs.
 .\"NODE "  Tar File System"
-.SH "  File System Tar"
+.SH "  File system Tar"
 Il file system tar fornisce un accesso in sola lettura ai file tar
 e tar compressi usando il comando chdir. Per cambiare la directory corrente 
 al file tar usare la seguente sintassi:
@@ -2696,7 +2697,7 @@ Esempi:
 .PP
 L'ultima riga, specifica il percorso completo dell'archivio tar.
 .\"NODE "  FIle transfer over SHell filesystem"
-.SH "  Trasferimento di File su Filesystem di Shell (FISH)"
+.SH "  Trasferimento di file su FIlesystem di SHell (FISH)"
 Il file system fish è un file system basato sulla rete che permette di
 manipolare i file di una macchina remota come fossero locali. Per usarlo
 l'altra parte deve avere un server fish o avere una shell compatibile
@@ -2734,7 +2735,7 @@ Esempi:
     /#sh:joe@noncompresso.ssh.edu/privato
 .fi
 .\"NODE "  Network File System"
-.SH "  File System di Rete"
+.SH "  File system di rete"
 Il file system di rete del Midnight Commander è un file system basato 
 sulla rete che permette di manipolare i file su di una macchina remota
 come se fossero locali. Per usarlo, sulla macchina remota deve essere
@@ -2770,7 +2771,7 @@ Esempi:
     /#mc:joe@foo.edu:11321/privato
 .fi
 .\"NODE "  Undelete File System"
-.SH "  Recupero File Cancellati"
+.SH "  Recupero file cancellati"
 Su sistemi Linux, se si richiede, tramite configure, di usare la
 caratteristica di undelete del file system ext2, si avrà accesso al
 file system di recupero file cancellati. Il recupero file cancellati è
