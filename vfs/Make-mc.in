@@ -23,7 +23,7 @@ AR = @AR@
 NETFILES   = tcputil.o fish.o ftpfs.o mcfs.o utilvfs.o
 
 NONETFILES = 			\
-	container.o		\ 
+	container.o		\
 	extfs.o 		\
 	local.o 		\
 	names.o			\
