@@ -1,0 +1,349 @@
+#!/usr/bin/perl
+#
+# 1999 (c) Piotr Roszatycki <dexter@debian.org>
+# This software is under GNU license
+# last modification: 1999-12-08
+#
+# debd
+
+sub bt
+{
+    my ($dt) = @_;
+    my (@time);
+    @time = localtime($dt);
+    $bt = sprintf "%02d-%02d-%02d %02d:%02d", $time[4], $time[3], $time[5], $time[2], $time[1];
+    return $bt;
+}
+
+
+sub ft
+{
+    my ($f) = @_;
+    return "d" if -d $f;
+    return "l" if -l $f;
+    return "p" if -p $f;
+    return "S" if -S $f;
+    return "b" if -b $f;
+    return "c" if -c $f;
+    return "-";
+}
+
+sub fm
+{
+    my ($n) = @_;
+    my ($m);
+
+    if( $n & 0400 ) {
+       $m .= "r";
+    } else {
+       $m .= "-";
+    }
+    if( $n & 0200 ) {
+       $m .= "w";
+    } else {
+       $m .= "-";
+    }
+    if( $n & 04000 ) {
+       $m .= "s";
+    } elsif( $n & 0100 ) {
+       $m .= "x";
+    } else {
+       $m .= "-";
+    }
+
+    if( $n & 0040 ) {
+       $m .= "r";
+    } else {
+       $m .= "-";
+    }
+    if( $n & 0020 ) {
+       $m .= "w";
+    } else {
+       $m .= "-";
+    }
+    if( $n & 02000 ) {
+       $m .= "s";
+    } elsif( $n & 0010 ) {
+       $m .= "x";
+    } else {
+       $m .= "-";
+    }
+
+    if( $n & 0004 ) {
+       $m .= "r";
+    } else {
+       $m .= "-";
+    }
+    if( $n & 0002 ) {
+       $m .= "w";
+    } else {
+       $m .= "-";
+    }
+    if( $n & 01000 ) {
+       $m .= "t";
+    } elsif( $n & 0001 ) {
+       $m .= "x";
+    } else {
+       $m .= "-";
+    }
+
+    return $m;
+}
+
+sub ls {
+    my ($file) = @_;
+    my @stat = stat($file);
+    # mode, nlink, uid, gid, size, mtime, filename
+    printf "%s%s %d %d %d %d %s CONTENTS%s\n", ft($file), fm($stat[2] & 07777),
+    $stat[3], $stat[4], $stat[5], $stat[7], bt($stat[9]), $file;
+}
+
+sub list
+{
+       my($archive)=@_;
+       chop($date=`LC_ALL=C date "+%b %d %Y %H:%M"`);
+       chop($info_size=`dpkg -s $archive | wc -c`);
+       $repack_size=length($pressrepack);
+       $reinstall_size=length($pressreinstall);
+       $remove_size=length($pressremove);
+       $purge_size=length($presspurge);
+       $reconfigure_size=length($pressreconfigure);
+       $reinstall_size=length($pressreinstall);
+       $select_size=length($pressselect);
+       $unselect_size=length($pressunselect);
+
+       print "dr-xr-xr-x   1 root     root     0 $date CONTENTS\n";
+       print "dr-xr-xr-x   1 root     root     0 $date DEBIAN\n";
+       print "-r--r--r--   1 root     root     $info_size $date INFO\n";
+       print "-r-xr--r--   1 root     root     $purge_size $date DPKG-PURGE\n";
+
+       chop($status = `dpkg -s $archive | grep ^Status`);
+       if( $status =~ /deinstall/ ) {
+           print "-r-xr--r--   1 root     root     $select_size $date DPKG-SELECT\n";
+       } elsif( $status =~ /install/ ) {
+           print "-r-xr--r--   1 root     root     $unselect_size $date DPKG-UNSELECT\n";
+       } 
+       if( $status !~ /config-files/ ) {
+           if ( -x "/usr/bin/dpkg-repack" ) {
+               print "-r-xr--r--   1 root     root     $repack_size $date DPKG-REPACK\n";
+           }
+           print "-r-xr--r--   1 root     root     $remove_size $date DPKG-REMOVE\n";
+           if ( -x "/usr/bin/apt-get" ) {
+               print "-r-xr--r--   1 root     root     $remove_size $date APT-REMOVE\n";
+               print "-r-xr--r--   1 root     root     $reinstall_size $date APT-REINSTALL\n";
+               print "-r-xr--r--   1 root     root     $purge_size $date APT-PURGE\n";
+	   }
+       }
+       if( -x "/usr/bin/dpkg-reconfigure" && -x "/var/lib/dpkg/info/$archive.config" ) {
+           print "-r-xr--r--   1 root     root     $reconfigure_size $date DPKG-RECONFIGURE\n";
+       }
+
+
+
+       if ( open(PIPEIN, "LANG=C ls -l /var/lib/dpkg/info/$archive.* |") ) {
+           while(<PIPEIN>) {
+               chop;
+               next if /\.list$/;
+               s%/var/lib/dpkg/info/$archive.%DEBIAN/%;
+               print $_, "\n";
+           }
+           close PIPEIN;
+       }
+
+        if ( open(LIST, "/var/lib/dpkg/info/$archive.list") ) {
+            while(<LIST>) {
+               chop;
+               ls($_);
+            }
+           close LIST;
+        }
+}
+
+sub copyout
+{
+       my($archive,$filename,$destfile)=@_;
+
+       if($filename eq "INFO") {
+           system("dpkg -s $archive > $destfile");
+        } elsif($filename eq "DPKG-REPACK") {
+           if ( open(FILEOUT,">$destfile") ) {
+               print FILEOUT $pressrepack;
+               close FILEOUT;
+               system("chmod a+x $destfile");
+           }
+        } elsif($filename =~ /^DEBIAN/) {
+            $filename=~s!^DEBIAN/!!;
+            system("cat /var/lib/dpkg/info/$archive.$filename > $destfile");
+       } elsif($filename eq "DPKG-REMOVE" || $filename eq "APT-REMOVE") {
+           if ( open(FILEOUT,">$destfile") ) {
+               print FILEOUT $pressremove;
+               close FILEOUT;
+               system("chmod a+x $destfile");
+           }
+       } elsif($filename eq "DPKG-PURGE" || $filename eq "APT-PURGE") {
+           if ( open(FILEOUT,">$destfile") ) {
+               print FILEOUT $presspurge;
+               close FILEOUT;
+               system("chmod a+x $destfile");
+           }
+       } elsif($filename eq "DPKG-RECONFIGURE") {
+           if ( open(FILEOUT,">$destfile") ) {
+               print FILEOUT $pressreconfigure;
+               close FILEOUT;
+               system("chmod a+x $destfile");
+           }
+       } elsif($filename eq "APT-REINSTALL") {
+           if ( open(FILEOUT,">$destfile") ) {
+               print FILEOUT $pressreinstall;
+               close FILEOUT;
+               system("chmod a+x $destfile");
+           }
+       } elsif($filename eq "DPKG-SELECT") {
+           if ( open(FILEOUT,">$destfile") ) {
+               print FILEOUT $pressselect;
+               close FILEOUT;
+               system("chmod a+x $destfile");
+           }
+       } elsif($filename eq "DPKG-UNSELECT") {
+           if ( open(FILEOUT,">$destfile") ) {
+               print FILEOUT $pressunselect;
+               close FILEOUT;
+               system("chmod a+x $destfile");
+           }
+       } else {
+           $filename=~s!^CONTENTS!!;
+           system("cat $filename > $destfile");
+       }
+}
+
+sub run
+{
+       my($archive,$filename)=@_;
+       if($filename eq "DPKG-REMOVE") {
+           system("dpkg --remove $archive");
+       } elsif($filename eq "APT-REMOVE") {
+           system("apt-get remove $archive");
+       } elsif($filename eq "DPKG-PURGE") {
+           system("dpkg --purge $archive");
+       } elsif($filename eq "APT-PURGE") {
+           system("apt-get --purge remove $archive");
+       } elsif($filename eq "DPKG-REPACK") {
+           system("dpkg-repack $archive");
+       } elsif($filename eq "DPKG-SELECT") {
+           system("echo $archive install | dpkg --set-selections");
+       } elsif($filename eq "DPKG-UNSELECT") {
+           system("echo $archive deinstall | dpkg --set-selections");
+       } elsif($filename eq "APT-REINSTALL") {
+           system("apt-get -u --reinstall install $archive");
+       } elsif($filename eq "DPKG-RECONFIGURE") {
+           system("dpkg-reconfigure $archive");
+       } elsif($filename=~/^DEBIAN/) {
+           $filename=~s!^DEBIAN!!;
+           system("/var/lib/dpkg/info/$archive.$filename");
+       } else {
+           $filename=~s!^CONTENTS!!;
+           system($filename);
+       }
+}
+
+$pressrepack=<<EOInstall;
+
+                                WARNING
+  Don\'t use this method if you are not willing to repack this package...
+
+This is not a real file. It is a way to repack the package you are browsing.
+
+To repack this package go back to the panel and press Enter on this file.
+
+EOInstall
+
+$pressreinstall=<<EOInstall;
+
+                                WARNING
+  Don\'t use this method if you are not willing to reinstall this package...
+
+This is not a real file. It is a way to reinstall the package you are browsing.
+
+To reinstall this package go back to the panel and press Enter on this file.
+
+EOInstall
+
+$pressremove=<<EOInstall;
+
+                                WARNING
+  Don\'t use this method if you are not willing to remove this package...
+
+This is not a real file. It is a way to remove the package you are browsing.
+
+To remove this package go back to the panel and press Enter on this file.
+
+EOInstall
+
+$presspurge=<<EOInstall;
+
+                                WARNING
+  Don\'t use this method if you are not willing to purge this package...
+
+This is not a real file. It is a way to purge the package you are browsing.
+
+To purge this package go back to the panel and press Enter on this file.
+
+EOInstall
+
+$pressreconfigure=<<EOInstall;
+
+                                WARNING
+  Don\'t use this method if you are not willing to reconfigure this package...
+
+This is not a real file. It is a way to reconfigure the package you are browsing.
+
+To reconfigure this package go back to the panel and press Enter on this file.
+
+EOInstall
+
+$pressreinstall=<<EOInstall;
+
+                                WARNING
+  Don\'t use this method if you are not willing to reinstall this package...
+
+This is not a real file. It is a way to reinstall the package you are browsing.
+
+To reinstall this package go back to the panel and press Enter on this file.
+
+EOInstall
+
+$pressselect=<<EOInstall;
+
+                                WARNING
+  Don\'t use this method if you are not willing to select this package...
+
+This is not a real file. It is a way to select the package you are browsing.
+
+To select this package go back to the panel and press Enter on this file.
+
+EOInstall
+
+$pressunselect=<<EOInstall;
+
+                                WARNING
+  Don\'t use this method if you are not willing to unselect this package...
+
+This is not a real file. It is a way to unselect the package you are browsing.
+
+To unselect this package go back to the panel and press Enter on this file.
+
+EOInstall
+
+umask 077;
+
+chop($name = `if [ -f "$ARGV[1]" ]; then cat $ARGV[1]; else echo $ARGV[1]; fi`);
+$name =~ s%.*/([0-9a-z.-]*)_.*%$1%;
+
+exit 1 unless $name;
+
+if($ARGV[0] eq "list") { &list($name); exit 0; }
+elsif($ARGV[0] eq "copyout") { &copyout($name,$ARGV[2],$ARGV[3]); exit 0; }
+elsif($ARGV[0] eq "run") { &run($name,$ARGV[2]); exit 0; }
+
+exit 1;
+
