@@ -1,3 +1,10 @@
+1999-07-21  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* popt.c, popt.h, poptconfig.c, popthelp.c, poptparse.c: updated
+ 	to the version found in the popt module
+
+	* features.inc: added report information for smbfs
+
 1999-06-01  Robert Brady  <rwb197@ecs.soton.ac.uk>
 
 	* file.c (move_dir_dir): Give an error when an attempt is made to

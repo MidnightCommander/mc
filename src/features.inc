@@ -31,6 +31,9 @@ char *features =
 #   ifdef USE_TERMNET
     " (with termnet support)"
 #   endif
+#   ifdef WITH_SMBFS
+    ", smbfs"
+#   endif
 #endif
 #ifdef USE_EXT2FSLIB
     ", undelfs"

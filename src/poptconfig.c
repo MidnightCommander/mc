@@ -87,7 +87,7 @@ int poptReadConfigFile(poptContext con, char * fn) {
     lseek(fd, 0, 0);
 
     file = alloca(fileLength + 1);
-    if ((fd = read(fd, file, fileLength)) != fileLength) {
+    if (read(fd, file, fileLength) != fileLength) {
 	rc = errno;
 	close(fd);
 	errno = rc;

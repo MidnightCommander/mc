@@ -10,24 +10,43 @@
 #include <stdlib.h>
 #include <string.h>
 
+/* AIX requires this to be the first thing in the file.  */
+#ifndef __GNUC__
+# if HAVE_ALLOCA_H
+#  include <alloca.h>
+# else
+#  ifdef _AIX
+#pragma alloca
+#  else
+#   ifndef alloca /* predefined by HP cc +Olibcalls */
+char *alloca ();
+#   endif
+#  endif
+# endif
+#elif defined(__GNUC__) && defined(__STRICT_ANSI__)
+#define alloca __builtin_alloca
+#endif
+
 #include "popt.h"
 
-int poptParseArgvString(char * s, int * argcPtr, char *** argvPtr) {
-    char * buf = strcpy(alloca(strlen(s) + 1), s);
-    char * bufStart = buf;
-    char * src, * dst;
+#define POPT_ARGV_ARRAY_GROW_DELTA 5
+
+int poptParseArgvString(const char * s, int * argcPtr, char *** argvPtr) {
+    char * buf, * bufStart, * dst;
+    const char * src;
     char quote = '\0';
-    int argvAlloced = 5;
+    int argvAlloced = POPT_ARGV_ARRAY_GROW_DELTA;
     char ** argv = malloc(sizeof(*argv) * argvAlloced);
     char ** argv2;
     int argc = 0;
-    int i;
+    int i, buflen;
+
+    buflen = strlen(s) + 1;
+    bufStart = buf = alloca(buflen);
+    memset(buf, '\0', buflen);
 
     src = s;
-    dst = buf;
     argv[argc] = buf;
-
-    memset(buf, '\0', strlen(s) + 1);
 
     while (*src) {
 	if (quote == *src) {
@@ -46,7 +65,7 @@ int poptParseArgvString(char * s, int * argcPtr, char *** argvPtr) {
 	    if (*argv[argc]) {
 		buf++, argc++;
 		if (argc == argvAlloced) {
-		    argvAlloced += 5;
+		    argvAlloced += POPT_ARGV_ARRAY_GROW_DELTA;
 		    argv = realloc(argv, sizeof(*argv) * argvAlloced);
 		}
 		argv[argc] = buf;

@@ -5,6 +5,10 @@
 #ifndef H_POPT
 #define H_POPT
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdio.h>			/* for FILE * */
 
 #define POPT_OPTION_DEPTH	10
@@ -22,6 +26,7 @@
 					   for this table and any
 					   included tables; arg points
 					   to the domain string */
+#define POPT_ARG_VAL		7	/* arg should take value val */
 #define POPT_ARG_MASK		0x0000FFFF
 #define POPT_ARGFLAG_ONEDASH	0x80000000  /* allow -longoption */
 #define POPT_ARGFLAG_DOC_HIDDEN 0x40000000  /* don't show in help/usage */
@@ -103,12 +108,16 @@ int poptReadConfigFile(poptContext con, char * fn);
 int poptReadDefaultConfig(poptContext con, int useEnv);
 /* argv should be freed -- this allows ', ", and \ quoting, but ' is treated
    the same as " and both may include \ quotes */
-int poptParseArgvString(char * s, int * argcPtr, char *** argvPtr);
+int poptParseArgvString(const char * s, int * argcPtr, char *** argvPtr);
 const char * poptStrerror(const int error);
 void poptSetExecPath(poptContext con, const char * path, int allowAbsolute);
 void poptPrintHelp(poptContext con, FILE * f, int flags);
 void poptPrintUsage(poptContext con, FILE * f, int flags);
 void poptSetOtherOptionHelp(poptContext con, const char * text);
 const char * poptGetInvocationName(poptContext con);
+
+#ifdef  __cplusplus
+}
+#endif
 
 #endif

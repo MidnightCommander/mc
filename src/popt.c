@@ -41,20 +41,18 @@ void poptSetExecPath(poptContext con, const char * path, int allowAbsolute) {
     con->execAbsolute = allowAbsolute;
 }
 
-static void invokeCallbacks(poptContext con,
-			    enum poptCallbackReason reason,
-			    const struct poptOption * table,
+static void invokeCallbacks(poptContext con, const struct poptOption * table,
 			    int post) {
     const struct poptOption * opt = table;
     poptCallbackType cb;
     
     while (opt->longName || opt->shortName || opt->arg) {
 	if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INCLUDE_TABLE) {
-	    invokeCallbacks(con, 0, opt->arg, post);
+	    invokeCallbacks(con, opt->arg, post);
 	} else if (((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_CALLBACK) &&
 		   ((!post && (opt->argInfo & POPT_CBFLAG_PRE)) ||
 		    ( post && (opt->argInfo & POPT_CBFLAG_POST)))) {
-	    cb = opt->arg;
+	    cb = (poptCallbackType)opt->arg;
 	    cb(con, post ? POPT_CALLBACK_REASON_POST : POPT_CALLBACK_REASON_PRE,
 	       NULL, NULL, opt->descrip);
 	}
@@ -88,12 +86,14 @@ poptContext poptGetContext(char * name, int argc, char ** argv,
     if (name)
 	con->appName = strcpy(malloc(strlen(name) + 1), name);
 
-    invokeCallbacks(con, 0, con->options, 0);
+    invokeCallbacks(con, con->options, 0);
 
     return con;
 }
 
 void poptResetContext(poptContext con) {
+    int i;
+
     con->os = con->optionStack;
     con->os->currAlias = NULL;
     con->os->nextCharArg = NULL;
@@ -104,6 +104,10 @@ void poptResetContext(poptContext con) {
     con->nextLeftover = 0;
     con->restLeftover = 0;
     con->doExec = NULL;
+
+    for (i = 0; i < con->finalArgvCount; i++)
+	free(con->finalArgv[i]);
+
     con->finalArgvCount = 0;
 }
 
@@ -156,7 +160,8 @@ static int handleAlias(poptContext con, char * longName, char shortName,
     if (con->os->currAlias && con->os->currAlias->longName && longName &&
 	!strcmp(con->os->currAlias->longName, longName)) 
 	return 0;
-    if (con->os->currAlias && shortName == con->os->currAlias->shortName)
+    if (con->os->currAlias && shortName && 
+	    shortName == con->os->currAlias->shortName)
 	return 0;
 
     i = con->numAliases - 1;
@@ -224,15 +229,17 @@ static void execCommand(poptContext con) {
 #ifdef __hpux
     setresuid(getuid(), getuid(),-1);
 #else
-#ifndef OS2_NT
-#   if defined (HAVE_SETUID)
-        setuid(getuid());
-#   elif defined (HAVE_SETREUID)
-        setreuid(getuid(), getuid()); /*hlauer: not portable to hpux9.01 */
-#   else
-        ; /* Can't drop privileges */
-#    endif
-
+/*
+ * XXX " ... on BSD systems setuid() should be preferred over setreuid()"
+ * XXX 	sez' Timur Bakeyev <mc@bat.ru>
+ * XXX	from Norbert Warmuth <nwarmuth@privat.circular.de>
+ */
+#if defined(HAVE_SETUID)
+    setuid(getuid());
+#elif defined (HAVE_SETREUID)
+    setreuid(getuid(), getuid()); /*hlauer: not portable to hpux9.01 */
+#else
+    ; /* Can't drop privileges */
 #endif
 #endif
 
@@ -241,13 +248,17 @@ static void execCommand(poptContext con) {
 
 static const struct poptOption * findOption(const struct poptOption * table,
 					    const char * longName,
-					    const char shortName,
+					    char shortName,
 					    poptCallbackType * callback,
 					    void ** callbackData,
 					    int singleDash) {
     const struct poptOption * opt = table;
     const struct poptOption * opt2;
     const struct poptOption * cb = NULL;
+
+    /* This happens when a single - is given */
+    if (singleDash && !shortName && !*longName)
+	shortName = '-';
 
     while (opt->longName || opt->shortName || opt->arg) {
 	if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INCLUDE_TABLE) {
@@ -274,7 +285,7 @@ static const struct poptOption * findOption(const struct poptOption * table,
     *callbackData = NULL;
     *callback = NULL;
     if (cb) {
-	*callback = cb->arg;
+	*callback = (poptCallbackType)cb->arg;
 	if (!(cb->argInfo & POPT_CBFLAG_INC_DATA))
 	    *callbackData = cb->descrip;
     }
@@ -301,7 +312,7 @@ int poptGetNextOpt(poptContext con) {
 		&& con->os > con->optionStack)
 	    con->os--;
 	if (!con->os->nextCharArg && con->os->next == con->os->argc) {
-	    invokeCallbacks(con, 0, con->options, 1);
+	    invokeCallbacks(con, con->options, 1);
 	    if (con->doExec) execCommand(con);
 	    return -1;
 	}
@@ -378,9 +389,11 @@ int poptGetNextOpt(poptContext con) {
 		con->os->nextCharArg = origOptString;
 	}
 
-	if (opt->arg && (opt->argInfo & POPT_ARG_MASK) == POPT_ARG_NONE) 
+	if (opt->arg && (opt->argInfo & POPT_ARG_MASK) == POPT_ARG_NONE) {
 	    *((int *)opt->arg) = 1;
-	else if ((opt->argInfo & POPT_ARG_MASK) != POPT_ARG_NONE) {
+	} else if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_VAL) {
+	    if (opt->arg) *((int *) opt->arg) = opt->val;
+	} else if ((opt->argInfo & POPT_ARG_MASK) != POPT_ARG_NONE) {
 	    if (longArg) {
 		con->os->nextArg = longArg;
 	    } else if (con->os->nextCharArg) {
@@ -405,7 +418,7 @@ int poptGetNextOpt(poptContext con) {
 		  case POPT_ARG_INT:
 		  case POPT_ARG_LONG:
 		    aLong = strtol(con->os->nextArg, &end, 0);
-		    if (*end) 
+		    if (!(end && *end == '\0')) 
 			return POPT_ERROR_BADNUMBER;
 
 		    if (aLong == LONG_MIN || aLong == LONG_MAX)
@@ -429,7 +442,7 @@ int poptGetNextOpt(poptContext con) {
 
 	if (cb)
 	    cb(con, POPT_CALLBACK_REASON_OPTION, opt, con->os->nextArg, cbData);
-	else if (opt->val) 
+	else if (opt->val && ((opt->argInfo & POPT_ARG_MASK) != POPT_ARG_VAL))
 	    done = 1;
 
 	if ((con->finalArgvCount + 2) >= (con->finalArgvAlloced)) {
@@ -446,7 +459,8 @@ int poptGetNextOpt(poptContext con) {
 	else 
 	    sprintf(con->finalArgv[i], "-%c", opt->shortName);
 
-	if (opt->arg && (opt->argInfo & POPT_ARG_MASK) != POPT_ARG_NONE) 
+	if (opt->arg && (opt->argInfo & POPT_ARG_MASK) != POPT_ARG_NONE
+		     && (opt->argInfo & POPT_ARG_MASK) != POPT_ARG_VAL) 
 	    con->finalArgv[con->finalArgvCount++] = strdup(con->os->nextArg);
     }
 
@@ -499,6 +513,7 @@ void poptFreeContext(poptContext con) {
     if (con->appName) free(con->appName);
     if (con->aliases) free(con->aliases);
     if (con->otherHelp) free(con->otherHelp);
+    if (con->execPath) free(con->execPath);
     free(con);
 }
 

@@ -13,6 +13,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifdef HAVE_ALLOCA_H
+#include <alloca.h>
+#endif
+
 #include "popt.h"
 #include "poptint.h"
 
@@ -27,7 +31,7 @@ static void displayArgs(poptContext con, enum poptCallbackReason foo,
 }
 
 struct poptOption poptHelpOptions[] = {
-    { NULL, '\0', POPT_ARG_CALLBACK, &displayArgs, '\0', NULL },
+    { NULL, '\0', POPT_ARG_CALLBACK, (void *)&displayArgs, '\0', NULL },
     { "help", '?', 0, NULL, '?', N_("Show this help message") },
     { "usage", '\0', 0, NULL, 'u', N_("Display brief usage message") },
     { NULL, '\0', 0, NULL, 0 }
@@ -69,10 +73,12 @@ static void singleOptionHelp(FILE * f, int maxLeftCol,
     int helpLength;
     const char * ch;
     char format[10];
-    char * left = alloca(maxLeftCol + 1);
+    char * left;
     const char * argDescrip = getArgDescrip(opt, translation_domain);
 
+    left = malloc(maxLeftCol + 1);
     *left = '\0';
+
     if (opt->longName && opt->shortName)
 	sprintf(left, "-%c, --%s", opt->shortName, opt->longName);
     else if (opt->shortName) 
@@ -89,7 +95,7 @@ static void singleOptionHelp(FILE * f, int maxLeftCol,
 	fprintf(f,"  %-*s   ", maxLeftCol, left);
     else {
 	fprintf(f,"  %s\n", left); 
-	return;
+	goto out;
     }
 
     helpLength = strlen(help);
@@ -108,6 +114,9 @@ static void singleOptionHelp(FILE * f, int maxLeftCol,
     }
 
     if (helpLength) fprintf(f, "%s\n", help);
+
+out:
+    free(left);
 }
 
 static int maxArgWidth(const struct poptOption * opt,
@@ -233,7 +242,7 @@ static int singleOptionUsage(FILE * f, int cursor,
     return cursor + len + 1;
 }
 
-int singleTableUsage(FILE * f, int cursor, const struct poptOption * table,
+static int singleTableUsage(FILE * f, int cursor, const struct poptOption * table,
 		     const char *translation_domain) {
     const struct poptOption * opt;
     
@@ -261,7 +270,7 @@ static int showShortOptions(const struct poptOption * opt, FILE * f,
 
     if (!str) {
 	str = s;
-	memset(str, 0, sizeof(str));
+	memset(str, 0, sizeof(s));
     }
 
     while (opt->longName || opt->shortName || opt->arg) {
