@@ -1,5 +1,8 @@
 1999-04-05  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* find.c (setup_gui): Do not scroll horizontally.  Why does the
+	CList behave like this?
+
 	* setup.c: Save desktop information.
 
 1999-04-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>

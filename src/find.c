@@ -770,7 +770,7 @@ setup_gui (void)
 	
 	sw = gtk_scrolled_window_new (NULL, NULL);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
-					GTK_POLICY_AUTOMATIC,
+					GTK_POLICY_NEVER,
 					GTK_POLICY_AUTOMATIC);
 	g_clist = gtk_clist_new (1);
 	gtk_clist_set_selection_mode (GTK_CLIST (g_clist), GTK_SELECTION_SINGLE);
