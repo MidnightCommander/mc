@@ -662,8 +662,6 @@ view_update_bytes_per_line (WView *view)
 int
 view_init (WView *view, char *_command, const char *_file, int start_line)
 {
-    view_update_bytes_per_line(view);
-    
     if (!view->view_active || strcmp (_file, view->filename) || altered_magic_flag)
 	return do_view_init (view, _command, _file, start_line);
     else
@@ -2392,7 +2390,7 @@ real_view_event (Gpm_Event *event, void *x)
 /* }}} */
 /* {{{ Window creation, destruction and a driver stub for real view */
 
-void
+static void
 view_adjust_size (Dlg_head *h)
 {
     WView      *view;
@@ -2490,15 +2488,16 @@ static int
 view_callback (Dlg_head *h, WView *view, int msg, int par)
 {
     int i;
-    
-    switch (msg){
+
+    switch (msg) {
     case WIDGET_INIT:
+	view_update_bytes_per_line (view);
 	if (view->have_frame)
 	    add_hook (&select_file_hook, view_hook, view);
 	else
 	    view_labels (view);
 	break;
-	
+
     case WIDGET_DRAW:
 	display (view);
 	view_status (view, TRUE);
@@ -2510,7 +2509,7 @@ view_callback (Dlg_head *h, WView *view, int msg, int par)
 	break;
 
     case WIDGET_KEY:
-	i = view_handle_key ((WView *)view, par);
+	i = view_handle_key ((WView *) view, par);
 	if (view->view_quit)
 	    dlg_stop (h);
 	else {
@@ -2526,11 +2525,11 @@ view_callback (Dlg_head *h, WView *view, int msg, int par)
 	view_status (view, TRUE);
 	sleep (1);
 	return 1;
-	
+
     case WIDGET_FOCUS:
 	view_labels (view);
 	return 1;
-	
+
     }
     return default_proc (h, msg, par);
 }

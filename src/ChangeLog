@@ -1,3 +1,10 @@
+2002-10-07  Pavel Roskin  <proski@gnu.org>
+
+	* view.c: Move call to view_update_bytes_per_line() from
+	view_init(), where the number of columns is unknown yet, to
+	view_callback() where it's already known.
+	(view_adjust_size): Make static.
+
 2002-10-07  Miven Dooligan  <dooligan@intergate.ca>
 
 	* view.c (view_update_bytes_per_line): Don't use vertical bars

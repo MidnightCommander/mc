@@ -115,8 +115,6 @@ extern int altered_magic_flag;
 extern int altered_nroff_flag;
 extern Dlg_head *view_dlg;
 
-void view_adjust_size (Dlg_head *);
-
 /* A node for building a change list on change_list */
 struct hexedit_change_node {
    struct hexedit_change_node *next;
