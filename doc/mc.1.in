@@ -1692,33 +1692,34 @@ In this menu you configure the confirmation options for file deletion,
 overwriting, execution by pressing enter and quitting the program.
 .PP
 .SH "    Learn keys"
-This dialog lets you test if your keys F1-F20, Home, End, etc. work properly
-on your terminal. They often don't, since many terminal databases are
-broken.
+This dialog allows you to test and redefine functional keys, cursor
+arrows and some other keys to make them work properly on your terminal.
+They often don't, since many terminal databases are incomplete or broken.
 .PP
-You can move around with the Tab key, with the vi moving keys ('h' left, 'j'
-down, 'k' up and 'l' right) and after you press any arrow key once (this
-will mark it OK), then you can use that key as well.
+You can move around with the Tab key and with the vi moving keys ('h'
+left, 'j' down, 'k' up and 'l' right).  Once you press any cursor movement
+key and it is recognized, you can use that key as well.
 .PP
-You test them just by pressing each of them. As soon as you press a key and
-the key works properly, OK should appear next to the name of that key. Once
-a key is marked OK it starts to work as usually, e.g. F1 for the first time
-will just check that F1 works OK, but from that time on it will show help.
-The same applies to the arrow keys. Tab key should be working always.
+You can test keys just by pressing each of them.  When you press a
+key and it is recognized properly, OK should appear next to the name
+of that key.  Once a key is marked OK it starts working as usually,
+e.g. F1 pressed the first time will just check that the F1 key works,
+but after that it will show help.  The same applies to the arrow keys.
+The Tab key should be working always.
 .PP
-If some keys do not work properly, then you won't see OK after the key name
-after you have pressed that key. You may then want to fix it. You do it by
-pressing the button of that key (either by mouse or using Tab and Enter).
-Then a red message will appear and you will be asked to type that key.
-If you want to abort this, press just Esc and wait until the message
-disappears. Otherwise type the key you're asked to type and also wait until
-the dialog disappears.
+If some keys do not work properly then you won't see OK appear after
+pressing that key.  Then you may want to redefine it.  Do it by pressing
+the button with the name of that key (either by the mouse or by Enter
+or Space after selecting the button with Tab or arrows).  Then a message
+box will appear asking you to press that key.  Do it and wait until the
+message box disappears.  If you want to abort, just press Escape once
+and wait.
 .PP
-When you finish with all the keys, you may want either to Save your key fixes
-into your ~/.mc/ini file into the [terminal:TERM] section (where TERM is the
-name of your current terminal) or to discard them. If all your keys were
-working properly and you had not to fix any key, then (of course) no saving
-will occur.
+When you finish with all the keys, you can Save them.  The definitions
+for the keys you have redefined will be written into the [terminal:TERM]
+section of your ~/.mc/ini file (where TERM is the name of your current
+terminal).  The definitions of the keys that were already working properly
+are not saved.
 .PP
 .SH "    Virtual FS"
 This option gives you control over the settings of the 
