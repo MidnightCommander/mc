@@ -1,3 +1,7 @@
+2002-05-23  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* NEWS: Mention ftpfs/fish uploading changes.
+
 2002-05-22  Pavel Roskin  <proski@gnu.org>
 
 	* doc/ru/Makefile.am: Fix out-of-tree build.
