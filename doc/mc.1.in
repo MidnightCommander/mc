@@ -50,15 +50,17 @@ database. Only useful on HP terminals when the function keys don't work.
 Save the ftpfs dialog with the server in file.
 .TP
 .I "\-P file"
-At program end, the Midnight Commander will print the last working
-directory to the specified file.  This function should not be used
-directly.  Instead, it should be used from a special shell function that
+This option instructs the Midnight Commander to print the last working
+directory to the specified file.  This option is not meant to be used
+directly.  Instead, it's used from a special shell script that
 automatically changes the current directory of the shell to the last
-directory the Midnight Commander was in.  Source the files
+directory the Midnight Commander was in.  Source the file
 .B @prefix@/share/mc/bin/mc.sh
-(bash and zsh users) respectively
+(bash and zsh users) or
 .B @prefix@/share/mc/bin/mc.csh
-(tcsh users) in order to have this function defined.
+(tcsh users) respectively to define
+.B mc
+as an alias to the appropriate shell script.
 .TP
 .I "\-s"
 Turns on the slow terminal mode, in this mode the program will not
