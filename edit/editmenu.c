@@ -263,12 +263,6 @@ menu_user_menu_cmd (void)
     menu_key (KEY_F (11));
 }
 
-void
-edit_user_menu_cmd (void)
-{
-    menu_edit_cmd (1);
-}
-
 static menu_entry FileMenu[] =
 {
     {' ', N_("&Open file..."),         'O', menu_load_cmd},

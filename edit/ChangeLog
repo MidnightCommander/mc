@@ -1,6 +1,8 @@
 2002-11-14  Pavel Roskin  <proski@gnu.org>
 
-	* exit.c (edit_delete_line): Don't remove and restore the
+	* editmenu.c (edit_user_menu_cmd): Move to ../src/cmd.c.
+
+	* edit.c (edit_delete_line): Don't remove and restore the
 	preceding newline.  Don't treat binary zero as newline.
 	From Dmitry Semyonov <Dmitry.Semyonov@oktet.ru>
 
