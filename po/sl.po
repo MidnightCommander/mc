@@ -5148,7 +5148,7 @@ msgstr "Pritisnite katerokoli tipko za nadaljevanje..."
 
 #: src/main.c:837
 msgid " The shell is already running a command "
-msgstr " ©koljka ¾e izvaja ukaz "
+msgstr " Lupina ¾e izvaja ukaz "
 
 #: src/main.c:864 src/screen.c:2113 src/screen.c:2160
 msgid " The Midnight Commander "
