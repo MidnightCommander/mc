@@ -1,3 +1,8 @@
+2003-01-22  Pavel Roskin  <proski@gnu.org>
+
+	* acinclude.m4 (_MC_WITH_XSLANG): Drop support for old S-Lang
+	versions that required the native curses library on some OSes.
+
 2003-01-19  Adam Byrtek  <alpha@debian.org>
 
 	* doc/mcview.1.in: New file.

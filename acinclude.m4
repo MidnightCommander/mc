@@ -689,32 +689,10 @@ AC_DEFUN([MC_USE_TERMCAP], [
 dnl
 dnl Common code for MC_WITH_SLANG and MC_WITH_MCSLANG
 dnl
-dnl We check for the existance of setupterm on curses library
-dnl this is required to load certain definitions on some termcaps
-dnl editions (AIX and OSF/1 I seem to remember).
-dnl Note that we avoid using setupterm 
-dnl
 AC_DEFUN([_MC_WITH_XSLANG], [
     screen_type=slang
     AC_DEFINE(HAVE_SLANG, 1,
 	      [Define to use S-Lang library for screen management])
-
-    case $host_os in
-    linux*)
-	;;
-    *)
-	AC_CHECK_LIB(curses,setupterm,
-		     [AC_TRY_COMPILE([
-#include <curses.h>
-#include <term.h>],
-			[return (key_end == parm_insert_line);],
-			[MCLIBS="$MCLIBS -lcurses"
-			AC_DEFINE(USE_SETUPTERM, 1,
-				  [Define to use function `setupterm'
-from `curses' library in S-Lang])])
-	])
-	;;
-    esac
 ])
 
 
