@@ -3,7 +3,11 @@
 
 #include "dlg.h"
 
+#ifndef VFS_STANDALONE
 #define MSG_ERROR ((char *) -1)
+#else
+#define MSG_ERROR "Error: "
+#endif
 Dlg_head *message (int error, char *header, char *text, ...);
 
 int query_dialog (char *header, char *text, int flags, int count, ...);

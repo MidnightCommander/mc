@@ -1,3 +1,13 @@
+Wed Sep  2 13:59:47 1998  Pavel Machek <pavel@ucw.cz>
+
+	* ftpfs.c: cleanup of code, few static's added
+
+	* extfs/uarj: added, still, you need patches to unarj to make this
+ 	work
+
+	* util-alone.c: now includes code from libvfs.c, so we can kill
+ 	libvfs.c (which is good thing as it was non-standard in Makefiles)
+	
 Sun Aug 30 13:19:49 1998  Pavel Machek <pavel@ucw.cz>
 
 	* undelfs.c: fixed, it has been broken for too long

@@ -1,0 +1,33 @@
+#! /bin/sh
+#
+# Copyright 1998 Pavel Machek,
+# partly based on zip by Jakub Jelinek 1995
+#
+# Distribute in terms of GPL.
+#
+#
+ARJ=mcunarj
+
+mcarjfs_list ()
+{
+$ARJ v $1 | awk -v uid=${UID-0} '
+BEGIN { hyphens=0 }
+/^----------/ { if (hyphens > 0) exit 0; hyphens=1; next }
+{ 
+if (hyphens < 1) next;
+path=$1;
+getline;
+printf "-rw-r--r--   1 %-8d %-8d %8d %s-%s %s %s\n", uid, 0, $1, substr($4,4), substr($4,1,2), substr($5,1,5), path
+}' 2>/dev/null
+}
+
+mcarjfs_copyout ()
+{
+$ARJ p $1 $2 2> $3 > /dev/null
+}
+
+case "$1" in
+  list) mcarjfs_list $2; exit 0;;
+  copyout) mcarjfs_copyout $2 $3 $4; exit 0;;
+esac
+exit 1
