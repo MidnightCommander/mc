@@ -4,10 +4,14 @@
 # In fact, it's only known to run on RedHat Linux 7.1.
 # HTML files are included with the distribution, so it's not a big deal.
 
+# Adjustable parts.
+: ${DSL=/usr/share/sgml/docbook/utils-0.6/docbook-utils.dsl}
+: ${JADEFLAGS=}
+
 # Exit on errors.
 set -e
 
-# Big fat warning in case we need it
+# Big fat warning in case we need it.
 WARNING='
 
 Could not generate GMC documentation.
@@ -21,35 +25,33 @@ systems where the GMC documentation fails to be generated.
 
 '
 
+# What to remove in case of failure
+CLEANFILES="*.html genindex.sgml HTML.index"
+rm -f $CLEANFILES
+
 # Trap if something goes wrong
 for signal in 0 1 2 13 15; do
   trap 'status=$?
 	set +e
 	trap 0
-	test $status = 0 || echo "$WARNING"
+	test $status = 0 || { echo "$WARNING"; rm -f $CLEANFILES; }
 	exit $status' $signal
 done
 
-# Some cleanup
-rm -rf gmc gmc.junk
-
 # Complicated bootstrap process - create empty genindex.sgml first,
-# then generate it and then html files again.
+# then generate it and then generate html files again.
 echo >genindex.sgml
 
-# Java wrapper doesn't seem to have any sane way for passing extra options
-# to the jade command. It doesn't honor the environment variables either.
-# Fortunately, there is an undocumented "-l" option (perhaps intended for
-# something else).
-jw -l "-V html-index=1" -f docbook -b html -o gmc gmc.sgml
+# First pass
+echo "First pass"
+jade $JADEFLAGS -t sgml -i html -d "$DSL#html" -V html-index=1 gmc.sgml
 
 # collateindex.pl may not have /usr/bin/perl on the first line.
-perl /usr/bin/collateindex.pl gmc/HTML.index >genindex.sgml
+echo "Generating index"
+perl /usr/bin/collateindex.pl HTML.index >genindex.sgml
+rm -f HTML.index
 
-# Now process all with the right genindex.sgml
-rm -rf gmc
-jw -f docbook -b html -o gmc gmc.sgml
+# Second pass with the right genindex.sgml
+echo "Second pass"
+jade $JADEFLAGS -t sgml -i html -d "$DSL#html" gmc.sgml
 
-# Move the output to the current directory
-mv gmc/* .
-rm -rf gmc
