@@ -260,6 +260,8 @@ install_gmc: all
 	for I in $(ICONS); \
 	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(icondir)/$$I; done
 	$(INSTALL_DATA) $(srcdir)/layout $(DESTDIR)$(libdir)/layout
+	if [ -f $(DESTDIR)$(datadir)/metadata ]; then rm $(DESTDIR)$(datadir)/metadata; fi
+	$(mcsrcdir)/xmkdir $(DESTDIR)$(datadir)/metadata
 	$(INSTALL_DATA) mc.metadata $(DESTDIR)$(datadir)/metadata
 	$(INSTALL_DATA) image.metadata $(DESTDIR)$(datadir)/metadata
 
