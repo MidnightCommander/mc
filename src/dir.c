@@ -273,7 +273,7 @@ file_type_to_num (const file_entry *fe)
     if (S_ISLNK (s->st_mode)){
 	if (fe->f.link_to_dir)
 	    return 1;
-	if (fe->f.stalled_link)
+	if (fe->f.stale_link)
 	    return 2;
 	else
 	    return 3;
@@ -353,7 +353,7 @@ add_dotdot_to_list (dir_list *list, int index)
     (list->list) [index].fnamelen = 2;
     (list->list) [index].fname = g_strdup ("..");
     (list->list) [index].f.link_to_dir = 0;
-    (list->list) [index].f.stalled_link = 0;
+    (list->list) [index].f.stale_link = 0;
     (list->list) [index].f.dir_size_computed = 0;
     (list->list) [index].f.marked = 0;
     (list->list) [index].buf.st_mode = 040755;
@@ -372,7 +372,7 @@ set_zero_dir (dir_list *list)
 int
 handle_dirent (dir_list *list, char *filter, struct dirent *dp,
 	       struct stat *buf1, int next_free, int *link_to_dir,
-	       int *stalled_link)
+	       int *stale_link)
 {
     if (dp->d_name [0] == '.' && dp->d_name [1] == 0)
 	return 0;
@@ -392,13 +392,13 @@ handle_dirent (dir_list *list, char *filter, struct dirent *dp,
 
     /* A link to a file or a directory? */
     *link_to_dir = 0;
-    *stalled_link = 0;
+    *stale_link = 0;
     if (S_ISLNK(buf1->st_mode)){
 	struct stat buf2;
 	if (!mc_stat (dp->d_name, &buf2))
 	    *link_to_dir = S_ISDIR(buf2.st_mode) != 0;
 	else
-	    *stalled_link = 1;
+	    *stale_link = 1;
     }
     if (!(S_ISDIR(buf1->st_mode) || *link_to_dir) && filter &&
 	!regexp_match (filter, dp->d_name, match_file))
@@ -423,7 +423,7 @@ handle_dirent (dir_list *list, char *filter, struct dirent *dp,
 int
 handle_path (dir_list *list, char *path,
 	     struct stat *buf1, int next_free, int *link_to_dir,
-	     int *stalled_link)
+	     int *stale_link)
 {
     if (path [0] == '.' && path [1] == 0)
 	return 0;
@@ -437,13 +437,13 @@ handle_path (dir_list *list, char *path,
 
     /* A link to a file or a directory? */
     *link_to_dir = 0;
-    *stalled_link = 0;
+    *stale_link = 0;
     if (S_ISLNK(buf1->st_mode)){
 	struct stat buf2;
 	if (!mc_stat (path, &buf2))
 	    *link_to_dir = S_ISDIR(buf2.st_mode) != 0;
 	else
-	    *stalled_link = 1;
+	    *stale_link = 1;
     }
 
     /* Need to grow the *list? */
@@ -462,7 +462,7 @@ do_load_dir (dir_list *list, sortfn *sort, int reverse, int case_sensitive, char
 {
     DIR           *dirp;
     struct dirent *dp;
-    int           status, link_to_dir, stalled_link;
+    int           status, link_to_dir, stale_link;
     int           next_free = 0;
     struct stat   buf;
     int dotdot_found = 0;
@@ -476,7 +476,7 @@ do_load_dir (dir_list *list, sortfn *sort, int reverse, int case_sensitive, char
     }
     for (dp = mc_readdir (dirp); dp; dp = mc_readdir (dirp)){
 	status = handle_dirent (list, filter, dp, &buf, next_free, &link_to_dir,
-	    &stalled_link);
+	    &stale_link);
 	if (status == 0)
 	    continue;
 	if (status == -1){
@@ -488,7 +488,7 @@ do_load_dir (dir_list *list, sortfn *sort, int reverse, int case_sensitive, char
 	list->list [next_free].fname = g_strdup (dp->d_name);
 	list->list [next_free].f.marked = 0;
 	list->list [next_free].f.link_to_dir = link_to_dir;
-	list->list [next_free].f.stalled_link = stalled_link;
+	list->list [next_free].f.stale_link = stale_link;
         list->list [next_free].f.dir_size_computed = 0;
 	list->list [next_free].buf = buf;
 	if (strcmp (dp->d_name, ".." ) == 0)
@@ -568,7 +568,7 @@ do_reload_dir (dir_list * list, sortfn * sort, int count, int rev,
     DIR *dirp;
     struct dirent *dp;
     int next_free = 0;
-    int i, status, link_to_dir, stalled_link;
+    int i, status, link_to_dir, stale_link;
     struct stat buf;
     int dotdot_found = 0;
     int marked_cnt;
@@ -590,7 +590,7 @@ do_reload_dir (dir_list * list, sortfn * sort, int count, int rev,
 	dir_copy.list[i].f.dir_size_computed =
 	    list->list[i].f.dir_size_computed;
 	dir_copy.list[i].f.link_to_dir = list->list[i].f.link_to_dir;
-	dir_copy.list[i].f.stalled_link = list->list[i].f.stalled_link;
+	dir_copy.list[i].f.stale_link = list->list[i].f.stale_link;
 	if (list->list[i].f.marked) {
 	    g_hash_table_insert (marked_files, dir_copy.list[i].fname,
 				 &dir_copy.list[i]);
@@ -601,7 +601,7 @@ do_reload_dir (dir_list * list, sortfn * sort, int count, int rev,
     for (dp = mc_readdir (dirp); dp; dp = mc_readdir (dirp)) {
 	status =
 	    handle_dirent (list, filter, dp, &buf, next_free, &link_to_dir,
-			   &stalled_link);
+			   &stale_link);
 	if (status == 0)
 	    continue;
 	if (status == -1) {
@@ -639,7 +639,7 @@ do_reload_dir (dir_list * list, sortfn * sort, int count, int rev,
 	list->list[next_free].fnamelen = NLENGTH (dp);
 	list->list[next_free].fname = g_strdup (dp->d_name);
 	list->list[next_free].f.link_to_dir = link_to_dir;
-	list->list[next_free].f.stalled_link = stalled_link;
+	list->list[next_free].f.stale_link = stale_link;
 	list->list[next_free].f.dir_size_computed = 0;
 	list->list[next_free].buf = buf;
 	if (strcmp (dp->d_name, "..") == 0)

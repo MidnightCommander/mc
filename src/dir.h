@@ -17,7 +17,7 @@ typedef struct {
     struct { 
 	unsigned int marked:1;		/* File marked in pane window */
 	unsigned int link_to_dir:1;	/* If this is a link, does it point to directory? */
-	unsigned int stalled_link:1;    /* If this is a symlink and points to Charon's land */
+	unsigned int stale_link:1;    /* If this is a symlink and points to Charon's land */
 	unsigned int dir_size_computed:1; /* Size of directory was computed with dirsizes_cmd */
     } f;
 } file_entry;
@@ -41,9 +41,9 @@ int        set_zero_dir    (dir_list *list);
 
 #ifdef DIR_H_INCLUDE_HANDLE_DIRENT
 int handle_dirent (dir_list *list, char *filter, struct dirent *dp,
-		   struct stat *buf1, int next_free, int *link_to_dir, int *stalled_link);
+		   struct stat *buf1, int next_free, int *link_to_dir, int *stale_link);
 int handle_path (dir_list *list, char *path, struct stat *buf1, int next_free, 
-		   int *link_to_dir, int *stalled_link);
+		   int *link_to_dir, int *stale_link);
 #endif
 
 /* Sorting functions */

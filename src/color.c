@@ -81,8 +81,8 @@ struct colorpair color_map [] = {
     /* Per file types colors */
     { "directory=",  0, 0 },                               /*  23 */
     { "executable=", 0, 0 },
-    { "link=",       0, 0 },  /* symbolic link (neither stalled nor link to directory) */
-    { "stalledlink=",0, 0 },  /* stalled symbolic link */
+    { "link=",       0, 0 },  /* symbolic link (neither stale nor link to directory) */
+    { "stalelink=",  0, 0 },  /* stale symbolic link */
     { "device=",     0, 0 },
     { "special=",    0, 0 }, /* sockets, fifo */
     { "core=",       0, 0 }, /* core files */              /* 29 */

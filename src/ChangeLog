@@ -1,3 +1,8 @@
+2002-10-13  Pavel Roskin  <proski@gnu.org>
+
+	* color.c: Rename stalledlink to stalelink.  Make the same
+	change elsewhere.
+
 2002-10-09  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* popt.h: Adjust poptHelpOptions[] declaration.

@@ -213,7 +213,7 @@ string_file_type (file_entry *fe, int len)
     else if (S_ISLNK (fe->buf.st_mode)) {
         if (fe->f.link_to_dir)
             buffer [0] = '~';
-        else if (fe->f.stalled_link)
+        else if (fe->f.stale_link)
             buffer [0] = '!';
         else
 	    buffer [0] = '@';
@@ -453,8 +453,8 @@ file_compute_color (int attr, file_entry *fe)
     else if (S_ISLNK (fe->buf.st_mode)){
         if (fe->f.link_to_dir)
             return (DIRECTORY_COLOR);
-        else if (fe->f.stalled_link)
-            return (STALLED_LINK_COLOR);
+        else if (fe->f.stale_link)
+            return (STALE_LINK_COLOR);
         else
             return (LINK_COLOR);
     } else if (S_ISSOCK (fe->buf.st_mode))

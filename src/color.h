@@ -64,7 +64,7 @@ extern int alarm_colors[4];
 #define DIRECTORY_COLOR    BEST_COLOR (23, 0)
 #define EXECUTABLE_COLOR   BEST_COLOR (24, 0)
 #define LINK_COLOR         BEST_COLOR (25, 0)
-#define STALLED_LINK_COLOR BEST_COLOR (26, A_UNDERLINE)
+#define STALE_LINK_COLOR   BEST_COLOR (26, A_UNDERLINE)
 #define DEVICE_COLOR       BEST_COLOR (27, 0)
 #define SPECIAL_COLOR      BEST_COLOR (28, 0)
 #define CORE_COLOR         BEST_COLOR (29, 0)

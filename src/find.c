@@ -873,7 +873,7 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
 	*filename = g_strdup (file_tmp);
 
     if (return_value == B_PANELIZE && *filename){
-	int status, link_to_dir, stalled_link;
+	int status, link_to_dir, stale_link;
 	int next_free = 0;
 	int i;
 	struct stat buf;
@@ -899,7 +899,7 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
 	    else
 		name = concat_dir_and_file (dir, filename);
 	    status = handle_path (list, name, &buf, next_free, &link_to_dir,
-	        &stalled_link);
+	        &stale_link);
 	    if (status == 0) {
 		g_free (name);
 		continue;
@@ -923,7 +923,7 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
 	    list->list [next_free].fname = name;
 	    file_mark (cpanel, next_free, 0);
 	    list->list [next_free].f.link_to_dir = link_to_dir;
-	    list->list [next_free].f.stalled_link = stalled_link;
+	    list->list [next_free].f.stale_link = stale_link;
 	    list->list [next_free].f.dir_size_computed = 0;
 	    list->list [next_free].buf = buf;
 	    next_free++;

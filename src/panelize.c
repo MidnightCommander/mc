@@ -358,7 +358,7 @@ void done_panelize (void)
 
 void do_external_panelize (char *command)
 {
-    int status, link_to_dir, stalled_link;
+    int status, link_to_dir, stale_link;
     int next_free = 0;
     struct stat buf;
     dir_list *list = &cpanel->dir;
@@ -392,7 +392,7 @@ void do_external_panelize (char *command)
 	else
 	    name = line;
         status = handle_path (list, name, &buf, next_free, &link_to_dir,
-    	    &stalled_link);
+    	    &stale_link);
 	if (status == 0)
 	    continue;
 	if (status == -1)
@@ -401,7 +401,7 @@ void do_external_panelize (char *command)
 	list->list [next_free].fname = g_strdup (name);
 	file_mark (cpanel, next_free, 0);
 	list->list [next_free].f.link_to_dir = link_to_dir;
-	list->list [next_free].f.stalled_link = stalled_link;
+	list->list [next_free].f.stale_link = stale_link;
 	list->list [next_free].f.dir_size_computed = 0;
 	list->list [next_free].buf = buf;
 	next_free++;
