@@ -841,28 +841,28 @@ char *skip_numbers (char *s)
  * terminfo databases, except the Hewlett-Packard 70092 and some Wyse
  * terminals.  If I hear from a single person who uses such a terminal
  * with MC, I'll be glad to add support for it.  (Dugan)
+ * Non-printable characters are also removed.
  */
 
 char *strip_ctrl_codes (char *s)
 {
-    int i;  /* Current length of the string's correct (stripped) prefix */
-    int j;  /* Number of control characters we have skipped so far */
+    char *w; /* Current position where the stripped data is written */
+    char *r; /* Current position where the original data is read */
 
     if (!s)
 	return 0;
-    
-    for (i = 0, j = 0; s [i+j]; ++i)
-	if (s [i+j] != ESC_CHAR){
-	    if (j)
-		s [i] = s [i+j];
+
+    for (w = s, r = s; *r; ++r)
+	if (*r != ESC_CHAR){
+	    if (is_printable(*r))
+		*w++ = *r;
 	} else {
-	    ++j;
-	    if (s [i+j++] == '[')
-		while (strchr ("0123456789;?", s [i+j++]))
+	    if (*(++r) == '[') {
+		while (strchr ("0123456789;?", *(++r)))
 		    /* Skip the control sequence's arguments */ ;
-	    --i;
+	    }
 	}
-    s[i] = 0;
+    *w = 0;
     return s;
 }
 

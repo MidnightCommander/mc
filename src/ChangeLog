@@ -1,5 +1,8 @@
 2001-08-15  Pavel Roskin  <proski@gnu.org>
 
+	* util.c (strip_ctrl_codes): Rewrite using pointers.  Fix
+	stripping sequences beginning with "\e[".  Check is_printable().
+
 	* man2hlp.c: Remove HTML support.  Remove old link support.
 	Warning fixes.
 	(print_string): Handle backslashes in verbatim mode too.
