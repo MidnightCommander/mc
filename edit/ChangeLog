@@ -1,3 +1,9 @@
+2002-10-18  Pavel Roskin  <proski@gnu.org>
+
+	* wordproc.c (end_paragraph): The last line of the file wasn't
+	tested for being blank, which resulted in the last newline
+	becoming a space after formatting.
+
 2002-10-17  Pavel Roskin  <proski@gnu.org>
 
 	* editoptions.c (edit_options_dialog): Don't allow

@@ -85,10 +85,11 @@ static long begin_paragraph (WEdit * edit, long p, int force)
     return edit_move_backward (edit, edit_bol (edit, edit->curs1), edit->curs_line - i);
 }
 
-static long end_paragraph (WEdit * edit, long p, int force)
+static long
+end_paragraph (WEdit *edit, long p, int force)
 {
     int i;
-    for (i = edit->curs_line + 1; i < edit->total_lines; i++) {
+    for (i = edit->curs_line + 1; i <= edit->total_lines; i++) {
 	if (line_is_blank (edit, i)) {
 	    i--;
 	    break;
@@ -99,7 +100,9 @@ static long end_paragraph (WEdit * edit, long p, int force)
 		break;
 	    }
     }
-    return edit_eol (edit, edit_move_forward (edit, edit_bol (edit, edit->curs1), i - edit->curs_line, 0));
+    return edit_eol (edit,
+		     edit_move_forward (edit, edit_bol (edit, edit->curs1),
+					i - edit->curs_line, 0));
 }
 
 static unsigned char *get_paragraph (WEdit * edit, long p, long q, int indent, int *size)
