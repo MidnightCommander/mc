@@ -1,3 +1,12 @@
+1999-03-20  Nuno Ferreira  <nmrf@rnl.ist.utl.pt>
+
+	* configure.in: Create slang directory, it is needed when
+	builddir != srcdir.
+	Use -f when calling rm, the file does not exist on
+	first compile.
+	No need to copy VERSION from $srcdir, it's already generated in
+	$buildir.
+
 Fri Mar 19 06:32:36 1999  David Martin <dmartina@usa.net>
 
 	* edit/edit_key_translator.c: Added missing translation tags.

@@ -820,7 +820,7 @@ AC_DEFUN(AC_WITH_SLANG,
 	    LSLANG="-lslang"
 	    screen_manager="SLang (system-installed library)"
 	    AC_MSG_RESULT(Using system installed SLang library)
-	    rm slang/slang.h
+	    rm -f slang/slang.h
 	    ac_save_LIBS="$LIBS"
 	    LIBS="$LIBS $LSLANG"
 	    AC_TRY_RUN(
@@ -844,7 +844,8 @@ AC_DEFUN(AC_WITH_SLANG,
 	    LSLANG="-lmcslang"
 	    CPPFLAGS="$CPPFLAGS -I../slang"
 	    fastdepslang=fastdepslang
-	    rm slang/slang.h
+	    mkdir -p slang
+	    rm -f slang/slang.h
 	    ln -s ../$srcdir/slang/slang-mc.h slang/slang.h
 	fi
 	if $slang_check_lib
@@ -1262,7 +1263,6 @@ intl/Makefile po/Makefile.in
 
 if test x$srcdir != x; then
     if test $srcdir != .; then
-	cp $srcdir/VERSION VERSION
 	mkdir nt
 	mkdir os2
 	cp $srcdir/pc/Makefile nt/Makefile
