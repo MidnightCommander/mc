@@ -536,12 +536,10 @@ gmcdep=""
 libgtkedit=""
 xvers="none"
 
-AC_SUBST(insticons)
 GNOME_INIT_HOOK([
 	mx=mx
  	gmcdep=gmcdep
 	libgtkedit="libgtkedit.a"
-	insticons=install_icons
 	if test x"$xvers" = xnone; then
 	    xvers="Gnome"
 	else
@@ -565,6 +563,7 @@ AC_SUBST(mx)
 AC_SUBST(gmcdep)
 AC_SUBST(libgtkedit)
 AC_SUBST(GNOMEGNORBA_LIBS)
+AM_CONDITIONAL(GNOME, test x"$mx" = xmx)
 
 dnl
 dnl Check for the -mandoc package
