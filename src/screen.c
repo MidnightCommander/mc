@@ -106,7 +106,7 @@ int filetype_mode = 1;
 /* The hook list for the select file function */
 Hook *select_file_hook = 0;
 
-static int panel_callback (Dlg_head *h, WPanel *p, int Msg, int Par);
+static int panel_callback (WPanel *p, int Msg, int Par);
 static int panel_event (Gpm_Event *event, WPanel *panel);
 static void paint_frame (WPanel *panel);
 static char *panel_format (WPanel *panel);
@@ -2155,8 +2155,10 @@ void user_file_menu_cmd (void) {
 }
 
 static int
-panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
+panel_callback (WPanel *panel, int msg, int par)
 {
+    Dlg_head *h = panel->widget.parent;
+
     switch (msg){
     case WIDGET_INIT:
 	return 1;
@@ -2188,7 +2190,7 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
 	redraw_labels (h);
 
 	/* Chain behaviour */
-	default_proc (h, WIDGET_FOCUS, par);
+	default_proc (WIDGET_FOCUS, par);
 	return 1;
 
     case WIDGET_UNFOCUS:
@@ -2206,7 +2208,7 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
 	return panel_key (panel, par);
 	break;
     }
-    return default_proc (h, msg, par);
+    return default_proc (msg, par);
 }
 
 void

@@ -102,7 +102,7 @@ typedef struct Dlg_head {
 typedef void (*destroy_fn)(void *widget);
 
 /* Widget callback */
-typedef int (*callback_fn)(Dlg_head *h, void *widget, int Msg, int Par);
+typedef int (*callback_fn)(void *widget, int Msg, int Par);
 
 /* Every Widget must have this as it's first element */
 typedef struct Widget {
@@ -178,7 +178,7 @@ void init_widget (Widget *w, int y, int x, int lines, int cols,
 int default_dlg_callback  (Dlg_head *h, int id, int msg);
 
 /* Default callback for widgets */
-int default_proc          (Dlg_head *h, int Msg, int Par);
+int default_proc          (int Msg, int Par);
 
 /* Default paint routine for dialogs */
 void common_dialog_repaint (struct Dlg_head *h);

@@ -60,8 +60,7 @@ static int tree_navigation_flag;
 /* Forwards */
 static void save_tree (WTree *tree);
 static void tree_rescan_cmd (WTree *tree);
-static int tree_callback (Dlg_head *h, WTree *tree, int msg, int par);
-#define tcallback (callback_fn) tree_callback
+static int tree_callback (WTree *tree, int msg, int par);
 
 static tree_entry *back_ptr (tree_entry *ptr, int *count)
 {
@@ -1002,8 +1001,10 @@ tree_frame (Dlg_head *h, WTree *tree)
 
 
 static int
-tree_callback (Dlg_head *h, WTree *tree, int msg, int par)
+tree_callback (WTree *tree, int msg, int par)
 {
+    Dlg_head *h = tree->widget.parent;
+
     switch (msg) {
     case WIDGET_DRAW:
 	tree_frame (h, tree);
@@ -1049,7 +1050,7 @@ tree_callback (Dlg_head *h, WTree *tree, int msg, int par)
 	show_tree (tree);
 	return 1;
     }
-    return default_proc (h, msg, par);
+    return default_proc (msg, par);
 }
 
 WTree *
@@ -1057,15 +1058,16 @@ tree_new (int is_panel, int y, int x, int lines, int cols)
 {
     WTree *tree = g_new (WTree, 1);
 
-    init_widget (&tree->widget, y, x, lines, cols, tcallback,
-		 (destroy_fn) tree_destroy, (mouse_h) event_callback, NULL);
+    init_widget (&tree->widget, y, x, lines, cols,
+		 (callback_fn) tree_callback, (destroy_fn) tree_destroy,
+		 (mouse_h) event_callback, NULL);
     tree->is_panel = is_panel;
     tree->selected_ptr = 0;
 
     tree->store = tree_store_get ();
     tree_store_add_entry_remove_hook (remove_callback, tree);
     tree->tree_shown = 0;
-    tree->search_buffer [0] = 0;
+    tree->search_buffer[0] = 0;
     tree->topdiff = tree->widget.lines / 2;
     tree->searching = 0;
     tree->done = 0;

@@ -229,7 +229,7 @@ static void info_destroy (WInfo *info)
     delete_hook (&select_file_hook, info_hook);
 }
 
-static int info_callback (Dlg_head *h, WInfo *info, int msg, int par)
+static int info_callback (WInfo *info, int msg, int par)
 {
     switch (msg){
 
@@ -246,7 +246,7 @@ static int info_callback (Dlg_head *h, WInfo *info, int msg, int par)
     case WIDGET_FOCUS:
 	return 0;
     }
-    return default_proc (h, msg, par);
+    return default_proc (msg, par);
 }
 			   
 WInfo *info_new ()

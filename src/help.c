@@ -586,9 +586,9 @@ static void prev_node_cmd (Dlg_head *h)
     help_callback (h, 0, DLG_DRAW);
 }
 
-static int md_callback (Dlg_head *h, Widget *w, int msg, int par)
+static int md_callback (Widget *w, int msg, int par)
 {
-    return default_proc (h, msg, par);
+    return default_proc (msg, par);
 }
 
 static Widget *mousedispatch_new (int y, int x, int yl, int xl)

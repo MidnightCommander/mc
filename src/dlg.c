@@ -141,7 +141,7 @@ init_widget (Widget *w, int y, int x, int lines, int cols,
 }
 
 /* Default callback for widgets */
-int default_proc (Dlg_head *h, int Msg, int Par)
+int default_proc (int Msg, int Par)
 {
     switch (Msg){
 
@@ -314,7 +314,7 @@ int add_widget (Dlg_head *where, void *what)
 
 int send_message (Dlg_head *h, Widget *w, int msg, int par)
 {
-    return (*(w->callback))(h, w, msg, par);
+    return (*(w->callback))(w, msg, par);
 }
 
 /* broadcast a message to all the widgets in a dialog that have
@@ -514,7 +514,7 @@ void update_cursor (Dlg_head *h)
 
 	do {
 	    if (p->widget->options & W_WANT_CURSOR)
-		if ((*p->widget->callback)(h, p->widget, WIDGET_CURSOR, 0)){
+		if ((*p->widget->callback)(p->widget, WIDGET_CURSOR, 0)){
 		    break;
 		}
 	    p = p->next;
@@ -626,7 +626,7 @@ static int dlg_try_hotkey (Dlg_head *h, int d_key)
 
     handled = 0;
     if (h->current->widget->options & W_WANT_HOTKEY)
-	handled = callback (h) (h, h->current->widget, WIDGET_HOTKEY, d_key);
+	handled = callback (h) (h->current->widget, WIDGET_HOTKEY, d_key);
 
     /* If not used, send hotkey to other widgets */
     if (handled)
@@ -638,7 +638,7 @@ static int dlg_try_hotkey (Dlg_head *h, int d_key)
     do {
 	if (hot_cur->widget->options & W_WANT_HOTKEY)
 	    handled |= (*hot_cur->widget->callback)
-		(h, hot_cur->widget, WIDGET_HOTKEY, d_key);
+		(hot_cur->widget, WIDGET_HOTKEY, d_key);
 
 	if (!handled)
 	    hot_cur = hot_cur->next;
@@ -687,7 +687,7 @@ dlg_key_event (Dlg_head * h, int d_key)
 	/* not used - then try widget_callback */
 	if (!handled)
 	    handled |=
-		callback (h) (h, h->current->widget, WIDGET_KEY, d_key);
+		callback (h) (h->current->widget, WIDGET_KEY, d_key);
 
 	/* not used- try to use the unhandled case */
 	if (!handled)

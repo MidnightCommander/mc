@@ -107,7 +107,7 @@ int altered_nroff_flag = 0;
 static const char hex_char[] = "0123456789ABCDEF";
 
 /* Our callback */
-static int view_callback (Dlg_head * h, WView * view, int msg, int par);
+static int view_callback (WView *view, int msg, int par);
 
 static int regexp_view_search (WView * view, char *pattern, char *string,
 			       int match_type);
@@ -2485,9 +2485,10 @@ view_hook (void *v)
 }
 
 static int
-view_callback (Dlg_head *h, WView *view, int msg, int par)
+view_callback (WView *view, int msg, int par)
 {
     int i;
+    Dlg_head *h = view->widget.parent;
 
     switch (msg) {
     case WIDGET_INIT:
@@ -2531,7 +2532,7 @@ view_callback (Dlg_head *h, WView *view, int msg, int par)
 	return 1;
 
     }
-    return default_proc (h, msg, par);
+    return default_proc (msg, par);
 }
 
 WView *

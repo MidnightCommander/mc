@@ -242,7 +242,7 @@ enter (WInput * cmdline)
 }
 
 static int
-command_callback (Dlg_head * h, WInput * cmd, int msg, int par)
+command_callback (WInput *cmd, int msg, int par)
 {
     switch (msg) {
     case WIDGET_FOCUS:
@@ -255,7 +255,7 @@ command_callback (Dlg_head * h, WInput * cmd, int msg, int par)
 	    return enter (cmd);
 	}
     }
-    return input_callback (h, cmd, msg, par);
+    return input_callback (cmd, msg, par);
 }
 
 WInput *

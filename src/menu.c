@@ -343,7 +343,7 @@ static int menubar_handle_key (WMenu *menubar, int key)
     return 0;
 }
 
-static int menubar_callback (Dlg_head *h, WMenu *menubar, int msg, int par)
+static int menubar_callback (WMenu *menubar, int msg, int par)
 {
     switch (msg){
 	/* We do not want the focus unless we have been activated */
@@ -388,7 +388,7 @@ static int menubar_callback (Dlg_head *h, WMenu *menubar, int msg, int par)
 	if (menubar_visible)
 	    menubar_draw (menubar);
     }
-    return default_proc (h, msg, par);
+    return default_proc (msg, par);
 }
 
 static int

@@ -1,5 +1,10 @@
 2002-11-12  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.h: Remove Dlg_head argument from callback_fn - it's
+	excessive and can be trivially derived from the widget.
+	(default_proc): Remove Dlg_head argument.  Change all callers.
+	* widget.c (listbox_draw): Remove Dlg_head argument.
+
 	* dlg.h: Define dlg_cb_fn - dialog callback function.  Improve
 	typedefs for callbacks and use them everywhere.  Clean up some
 	unused defines.

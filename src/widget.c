@@ -48,11 +48,12 @@ static int button_event (Gpm_Event *event, WButton *b);
 int quote = 0;
 
 static int
-button_callback (Dlg_head *h, WButton *b, int Msg, int Par)
+button_callback (WButton *b, int Msg, int Par)
 {
     char buf[BUF_SMALL];
     int stop = 0;
     int off = 0;
+    Dlg_head *h = b->widget.parent;
     
     switch (Msg){
     case WIDGET_INIT:
@@ -60,7 +61,7 @@ button_callback (Dlg_head *h, WButton *b, int Msg, int Par)
 
     case WIDGET_HOTKEY:
         if (b->hotkey == Par ||  toupper(b->hotkey) == Par){
-	    button_callback (h, b, WIDGET_KEY, ' '); /* to make action */
+	    button_callback (b, WIDGET_KEY, ' '); /* to make action */
 	    return 1;
 	} else
 	    return 0;
@@ -140,7 +141,7 @@ button_callback (Dlg_head *h, WButton *b, int Msg, int Par)
 	    return 1;
 	break;
     }	
-    return default_proc (h, Msg, Par);
+    return default_proc (Msg, Par);
 }
 
 static int
@@ -150,7 +151,7 @@ button_event (Gpm_Event *event, WButton *b)
     	Dlg_head *h=b->widget.parent;
 	dlg_select_widget (h, b);
 	if (event->type & GPM_UP){
-	    button_callback (h, b, WIDGET_KEY, ' ');
+	    button_callback (b, WIDGET_KEY, ' ');
 	    (*h->callback) (h, ' ', DLG_POST_KEY);
 	    return MOU_NORMAL;
 	}
@@ -242,10 +243,11 @@ button_set_text (WButton *b, char *text)
 static int radio_event (Gpm_Event *event, WRadio *r);
 
 static int
-radio_callback (Dlg_head *h, WRadio *r, int Msg, int Par)
+radio_callback (WRadio *r, int Msg, int Par)
 {
     int i;
-    
+    Dlg_head *h = r->widget.parent;
+
     switch (Msg) {
     case WIDGET_INIT:
 	return 1;
@@ -263,7 +265,7 @@ radio_callback (Dlg_head *h, WRadio *r, int Msg, int Par)
 		    if (c != lp)
 			continue;
 		    r->pos = i;
-		    radio_callback (h, r, WIDGET_KEY, ' '); /* Take action */
+		    radio_callback (r, WIDGET_KEY, ' '); /* Take action */
 		    return 1;
 		}
 	    }
@@ -275,7 +277,7 @@ radio_callback (Dlg_head *h, WRadio *r, int Msg, int Par)
 	case ' ':
 	    r->sel = r->pos;
     	    (*h->callback) (h, h->current->dlg_id, DLG_ACTION);
-	    radio_callback (h, r, WIDGET_FOCUS, ' ');
+	    radio_callback (r, WIDGET_FOCUS, ' ');
 	    return 1;
 
 	case KEY_UP:
@@ -297,7 +299,7 @@ radio_callback (Dlg_head *h, WRadio *r, int Msg, int Par)
 
     case WIDGET_CURSOR:
 	(*h->callback) (h, h->current->dlg_id, DLG_ACTION);
-	radio_callback (h, r, WIDGET_FOCUS, ' ');
+	radio_callback (r, WIDGET_FOCUS, ' ');
 	widget_move (&r->widget, r->pos, 1);
 	break;
 	    
@@ -326,7 +328,7 @@ radio_callback (Dlg_head *h, WRadio *r, int Msg, int Par)
 	return 1;
 	break;
     }
-    return default_proc (h, Msg, Par);
+    return default_proc (Msg, Par);
 }
 
 static int
@@ -338,8 +340,8 @@ radio_event (Gpm_Event *event, WRadio *r)
 	r->pos = event->y - 1;
 	dlg_select_widget (h, r);
 	if (event->type & GPM_UP){
-	    radio_callback (h, r, WIDGET_KEY, ' ');
-	    radio_callback (h, r, WIDGET_FOCUS, 0);
+	    radio_callback (r, WIDGET_KEY, ' ');
+	    radio_callback (r, WIDGET_FOCUS, 0);
 	    (*h->callback) (h, ' ', DLG_POST_KEY);
 	    return MOU_NORMAL;
 	}
@@ -380,8 +382,10 @@ radio_new (int y, int x, int count, char **texts, int use_hotkey, char *tkname)
 static int check_event (Gpm_Event *event, WCheck *b);
 
 static int
-check_callback (Dlg_head *h, WCheck *c, int Msg, int Par)
+check_callback (WCheck *c, int Msg, int Par)
 {
+    Dlg_head *h = c->widget.parent;
+
     switch (Msg) {
     case WIDGET_INIT:
 	return 1;
@@ -389,7 +393,7 @@ check_callback (Dlg_head *h, WCheck *c, int Msg, int Par)
     case WIDGET_HOTKEY:
         if (c->hotkey==Par ||
 	    (c->hotkey>='a' && c->hotkey<='z' && c->hotkey-32==Par)){
-	    check_callback (h, c, WIDGET_KEY, ' ');        /* make action */
+	    check_callback (c, WIDGET_KEY, ' ');        /* make action */
 	    return 1;
 	} else
 	    return 0;
@@ -400,7 +404,7 @@ check_callback (Dlg_head *h, WCheck *c, int Msg, int Par)
 	c->state ^= C_BOOL;
 	c->state ^= C_CHANGE;
         (*h->callback) (h, h->current->dlg_id, DLG_ACTION);
-	check_callback (h, c, WIDGET_FOCUS, ' ');
+	check_callback (c, WIDGET_FOCUS, ' ');
 	return 1;
 
     case WIDGET_CURSOR:
@@ -421,7 +425,7 @@ check_callback (Dlg_head *h, WCheck *c, int Msg, int Par)
 	}
 	return 1;
     }
-    return default_proc (h, Msg, Par);
+    return default_proc (Msg, Par);
 }
 
 static int
@@ -432,8 +436,8 @@ check_event (Gpm_Event *event, WCheck *c)
 	
 	dlg_select_widget (h, c);
 	if (event->type & GPM_UP){
-	    check_callback (h, c, WIDGET_KEY, ' ');
-	    check_callback (h, c, WIDGET_FOCUS, 0);
+	    check_callback (c, WIDGET_KEY, ' ');
+	    check_callback (c, WIDGET_FOCUS, 0);
 	    (*h->callback) (h, ' ', DLG_POST_KEY);
 	    return MOU_NORMAL;
 	}
@@ -483,8 +487,10 @@ check_new (int y, int x, int state, char *text, char *tkname)
 /* Label widget */
 
 static int
-label_callback (Dlg_head *h, WLabel *l, int Msg, int Par)
+label_callback (WLabel *l, int Msg, int Par)
 {
+    Dlg_head *h = l->widget.parent;
+
     if (Msg == WIDGET_INIT)
 	return 1;
     
@@ -519,7 +525,7 @@ label_callback (Dlg_head *h, WLabel *l, int Msg, int Par)
 	}
 	return 1;
     }
-    return default_proc (h, Msg, Par);
+    return default_proc (Msg, Par);
 }
 
 void
@@ -544,7 +550,7 @@ label_set_text (WLabel *label, char *text)
 	label->text = 0;
     
     if (label->widget.parent)
-	label_callback (label->widget.parent, label, WIDGET_DRAW, 0);
+	label_callback (label, WIDGET_DRAW, 0);
 
     if (newcols < label->widget.cols)
         label->widget.cols = newcols;
@@ -586,8 +592,9 @@ label_new (int y, int x, const char *text, char *tkname)
 #define gauge_len 47
 
 static int
-gauge_callback (Dlg_head *h, WGauge *g, int Msg, int Par)
+gauge_callback (WGauge *g, int Msg, int Par)
 {
+    Dlg_head *h = g->widget.parent;
 
     if (Msg == WIDGET_INIT)
 	return 1;
@@ -625,7 +632,7 @@ gauge_callback (Dlg_head *h, WGauge *g, int Msg, int Par)
 	}
 	return 1;
     }
-    return default_proc (h, Msg, Par);
+    return default_proc (Msg, Par);
 }
 
 void
@@ -638,7 +645,7 @@ gauge_set_value (WGauge *g, int max, int current)
 
     g->current = current;
     g->max = max;
-    gauge_callback (g->widget.parent, g, WIDGET_DRAW, 0);
+    gauge_callback (g, WIDGET_DRAW, 0);
 }
 
 void
@@ -647,7 +654,7 @@ gauge_show (WGauge *g, int shown)
     if (g->shown == shown)
         return;
     g->shown = shown;
-    gauge_callback (g->widget.parent, g, WIDGET_DRAW, 0);
+    gauge_callback (g, WIDGET_DRAW, 0);
 }
 
 static void
@@ -1516,8 +1523,10 @@ input_set_point (WInput *in, int pos)
 }
 
 int
-input_callback (Dlg_head *h, WInput *in, int Msg, int Par)
+input_callback (WInput *in, int Msg, int Par)
 {
+    Dlg_head *h = in->widget.parent;
+
     switch (Msg){
     case WIDGET_INIT:
 	return 1;
@@ -1552,7 +1561,7 @@ input_callback (Dlg_head *h, WInput *in, int Msg, int Par)
 	return 1;
 	
     }
-    return default_proc (h, Msg, Par);
+    return default_proc (Msg, Par);
 }
 
 static int
@@ -1674,11 +1683,12 @@ listbox_drawscroll (WListbox *l)
 }
     
 static void
-listbox_draw (WListbox *l, Dlg_head *h, int focused)
+listbox_draw (WListbox *l, int focused)
 {
     WLEntry *e;
     int i;
     int sel_line;
+    Dlg_head *h = l->widget.parent;
     int normalc = NORMALC; 
     int selc;
     char *text; 
@@ -1944,7 +1954,7 @@ listbox_key (WListbox *l, int key)
 
 static int listbox_event (Gpm_Event *event, WListbox *l);
 static int
-listbox_callback (Dlg_head *h, WListbox *l, int msg, int par)
+listbox_callback (WListbox *l, int msg, int par)
 {
     WLEntry  *e;
     /* int selected_color; Never used */
@@ -1974,7 +1984,7 @@ listbox_callback (Dlg_head *h, WListbox *l, int msg, int par)
 	
     case WIDGET_KEY:
 	if ((ret_code = listbox_key (l, par)))
-	    listbox_draw (l, h, 1);
+	    listbox_draw (l, 1);
 	return ret_code;
 
     case WIDGET_CURSOR:
@@ -1984,10 +1994,10 @@ listbox_callback (Dlg_head *h, WListbox *l, int msg, int par)
     case WIDGET_FOCUS:
     case WIDGET_UNFOCUS:
     case WIDGET_DRAW:
-	listbox_draw (l, h, msg != WIDGET_UNFOCUS);
+	listbox_draw (l, msg != WIDGET_UNFOCUS);
 	return 1;
     }
-    return default_proc (h, msg, par);
+    return default_proc (msg, par);
 }
 
 static int
@@ -2017,7 +2027,7 @@ listbox_event (Gpm_Event *event, WListbox *l)
 	
 	/* We need to refresh ourselves since the dialog manager doesn't */
 	/* know about this event */
-	listbox_callback (h, l, WIDGET_DRAW, 0);
+	listbox_callback (l, WIDGET_DRAW, 0);
 	mc_refresh ();
 	return MOU_REPEAT;
     }
@@ -2191,7 +2201,7 @@ listbox_get_current (WListbox *l, char **string, char **extra)
 }
 
 static int
-buttonbar_callback (Dlg_head *h, WButtonBar *bb, int msg, int par)
+buttonbar_callback (WButtonBar *bb, int msg, int par)
 {
     int i;
     
@@ -2229,7 +2239,7 @@ buttonbar_callback (Dlg_head *h, WButtonBar *bb, int msg, int par)
 	attrset (SELECTED_COLOR);
 	return 1;
     }
-    return default_proc (h, msg, par);
+    return default_proc (msg, par);
 }
 
 static void
