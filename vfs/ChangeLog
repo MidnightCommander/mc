@@ -1,8 +1,9 @@
 2001-02-11  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/mailfs (parse_date): Workaround for Y2K bugs. Support
-	for dates found in AOLMail(SM) messages. Provide a fallback if
-	cannot parse the date.
+	for dates found in AOLMail(SM) messages. Accept single-digit
+	hours and missing seconds. Provide a fallback if cannot parse
+	the date.
 	(process_header): Typo fix. Use \s instead of space in regular
 	expressions.
 
