@@ -1,3 +1,9 @@
+2000-08-21  Jonathan Blandford  <jrb@redhat.com>
+
+	* gmount.c (create_device_link): Fix memory leak.  Also, make sure
+	the icon is dead before making the link.  This is necessary in
+	case your metadata database gets fubarred.
+
 2000-08-08  Miguel de Icaza  <miguel@gnu.org>
 
 	* gdesktop.c (new_terminal): Add patch from Duncan Mak to use the

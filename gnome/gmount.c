@@ -374,15 +374,20 @@ create_device_link (char *dev_name, char *short_dev_name, char *caption, char *i
 	char *icon_full;
 	char type = 'D';
 	char ejectable_c = ejectable;
+	struct stat st;
 
 	icon_full = g_concat_dir_and_file (ICONDIR, icon);
 	full_name = g_concat_dir_and_file (desktop_directory, short_dev_name);
+	if (!mc_lstat (full_name, &st))
+		mc_unlink (full_name);
 	if (mc_symlink (dev_name, full_name) != 0) {
 		message (FALSE,
 			 _("Warning"),
 			 _("Could not symlink %s to %s; "
 			   "will not have such a desktop device icon."),
 			 dev_name, full_name);
+		g_free (icon_full);
+		g_free (full_name);
 		return;
 	}
 
