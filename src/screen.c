@@ -2259,8 +2259,9 @@ mark_if_marking (WPanel *panel, Gpm_Event *event)
     return 0;
 }
 
+/* Mouse callback of the panel minus repainting */
 static int
-panel_event (Gpm_Event *event, WPanel *panel)
+do_panel_event (Gpm_Event *event, WPanel *panel)
 {
     const int lines = llines (panel);
 
@@ -2283,24 +2284,26 @@ panel_event (Gpm_Event *event, WPanel *panel)
     }
 
     /* ">" button */
-    if (event->type & GPM_DOWN && event->x == panel->widget.cols - 2 + 1 && event->y == 0 + 1) {
+    if (event->type & GPM_DOWN && event->x == panel->widget.cols - 2 + 1
+	&& event->y == 0 + 1) {
 	directory_history_next (panel);
 	return MOU_NORMAL;
     }
 
     /* "v" button */
-    if (event->type & GPM_DOWN && event->x == panel->widget.cols - 3 + 1 && event->y == 0 + 1) {
+    if (event->type & GPM_DOWN && event->x == panel->widget.cols - 3 + 1
+	&& event->y == 0 + 1) {
 	directory_history_list (panel);
 	return MOU_NORMAL;
     }
 
     event->y -= 2;
-    if ((event->type & (GPM_DOWN|GPM_DRAG))){
+    if ((event->type & (GPM_DOWN | GPM_DRAG))) {
 
 	if (panel != (WPanel *) current_dlg->current)
 	    change_panel ();
 
-	if (event->y <= 0){
+	if (event->y <= 0) {
 	    mark_if_marking (panel, event);
 	    if (mouse_move_pages)
 		prev_page (panel);
@@ -2309,8 +2312,9 @@ panel_event (Gpm_Event *event, WPanel *panel)
 	    return MOU_REPEAT;
 	}
 
-	if (!((panel->top_file + event->y <= panel->count) &&
-	      event->y <= lines)){
+	if (!
+	    ((panel->top_file + event->y <= panel->count)
+	     && event->y <= lines)) {
 	    mark_if_marking (panel, event);
 	    if (mouse_move_pages)
 		next_page (panel);
@@ -2319,15 +2323,15 @@ panel_event (Gpm_Event *event, WPanel *panel)
 	    return MOU_REPEAT;
 	}
 	my_index = panel->top_file + event->y - 1;
-	if (panel->split){
-	    if (event->x > ((panel->widget.cols-2)/2))
+	if (panel->split) {
+	    if (event->x > ((panel->widget.cols - 2) / 2))
 		my_index += llines (panel);
 	}
 
 	if (my_index >= panel->count)
 	    my_index = panel->count - 1;
 
-	if (my_index != panel->selected){
+	if (my_index != panel->selected) {
 	    unselect_item (panel);
 	    panel->selected = my_index;
 	    select_item (panel);
@@ -2336,11 +2340,23 @@ panel_event (Gpm_Event *event, WPanel *panel)
 	/* This one is new */
 	mark_if_marking (panel, event);
 
-    } else if ((event->type & (GPM_UP|GPM_DOUBLE)) == (GPM_UP|GPM_DOUBLE)){
-            if (event->y > 0 && event->y <= lines)
-		do_enter (panel);
+    } else if ((event->type & (GPM_UP | GPM_DOUBLE)) ==
+	       (GPM_UP | GPM_DOUBLE)) {
+	if (event->y > 0 && event->y <= lines)
+	    do_enter (panel);
     }
     return MOU_NORMAL;
+}
+
+/* Mouse callback of the panel */
+static int
+panel_event (Gpm_Event *event, WPanel *panel)
+{
+    int ret;
+
+    ret = do_panel_event (event, panel);
+    panel_update_contents (panel);
+    return ret;
 }
 
 void

@@ -1,5 +1,8 @@
 2003-09-12  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c (panel_event): Make sure that the panel is repainted
+	after the event is processed.
+
 	* hotlist.c (l_call): Fix incorrect calls to hotlist_callback().
 
 	* dlg.h: Merge Widget_Item into Widget.  Massive adjustment.
