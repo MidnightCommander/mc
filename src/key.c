@@ -223,17 +223,9 @@ define_sequences (key_define_t *kd)
 }
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
-Display *display;
-Window w;
-
-void
-init_textmode_x11_support (void)
-{
-    display = XOpenDisplay (0);
-    if (display)
-        w = DefaultRootWindow (display);
-}
-#endif
+static Display *x11_display;
+static Window x11_window;
+#endif /* HAVE_TEXTMODE_X11_SUPPORT */
 
 /* This has to be called before slang_init or whatever routine
    calls any define_sequence */
@@ -272,6 +264,12 @@ void init_key (void)
 	use_8th_bit_as_meta = 0;
     }
 #endif /* __QNX__ */
+
+#ifdef HAVE_TEXTMODE_X11_SUPPORT
+    x11_display = XOpenDisplay (0);
+    if (x11_display)
+        x11_window = DefaultRootWindow (x11_display);
+#endif /* HAVE_TEXTMODE_X11_SUPPORT */
 }
 
 /* This has to be called after SLang_init_tty/slint_init */
@@ -943,7 +941,7 @@ int
 get_modifier (void)
 {
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
-    if (display) {
+    if (x11_display) {
         Window root, child;
         int root_x, root_y;
         int win_x, win_y;
@@ -951,7 +949,7 @@ get_modifier (void)
         Bool b;
 	int result = 0;
 
-	b = XQueryPointer(display, w, &root, &child,
+	b = XQueryPointer(x11_display, x11_window, &root, &child,
                                   &root_x, &root_y,
                                   &win_x, &win_y,
              			  &mask);
@@ -990,8 +988,7 @@ ctrl_pressed ()
 }
 
 #ifdef HAVE_MAD
-
-void k_dispose (key_def *k)
+static void k_dispose (key_def *k)
 {
     if (!k)
 	return;
@@ -1000,7 +997,7 @@ void k_dispose (key_def *k)
     g_free (k);
 }
 
-void s_dispose (SelectList *sel)
+static void s_dispose (SelectList *sel)
 {
     if (!sel)
 	return;
@@ -1008,25 +1005,17 @@ void s_dispose (SelectList *sel)
     s_dispose (sel->next);
     g_free (sel);
 }
+#endif /* HAVE_MAD */
 
 void done_key ()
 {
+#ifdef HAVE_MAD
     k_dispose (keys);
     s_dispose (select_list);
-}
-
-#else
-void done_key () 
-{
-}
-
 #endif /* HAVE_MAD */
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
-void
-done_textmode_x11_support (void)
-{
-    if (display)
-	XCloseDisplay (display);
-}
+    if (x11_display)
+	XCloseDisplay (x11_display);
 #endif /* HAVE_TEXTMODE_X11_SUPPORT */
+}

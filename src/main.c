@@ -3051,10 +3051,6 @@ main (int argc, char *argv [])
        calls any define_sequence */
     init_key ();
 
-#ifdef HAVE_TEXTMODE_X11_SUPPORT
-    init_textmode_x11_support ();
-#endif
-
     handle_args (argc, argv);
 #endif /* HAVE_X */
     
@@ -3242,10 +3238,6 @@ main (int argc, char *argv [])
 
 #ifdef HAVE_MAD
     done_key ();
-#endif
-
-#if defined (HAVE_TEXTMODE_X11_SUPPORT) && !defined (HAVE_X)
-    done_textmode_x11_support ();
 #endif
 
     mad_finalize (__FILE__, __LINE__);

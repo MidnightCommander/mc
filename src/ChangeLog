@@ -1,5 +1,16 @@
 2001-06-05  Pavel Roskin  <proski@gnu.org>
 
+	* key.c [HAVE_TEXTMODE_X11_SUPPORT]: Rename `display' to
+	`x11_display' and `w' to `x11_window'. Make them static.
+	(init_textmode_x11_support): Include into init_key().
+	(done_textmode_x11_support): Include into done_key().
+	(k_dispose): Make static.
+	(s_dispose): Likewise.
+	* key.h: Remove init_textmode_x11_support() and
+	done_textmode_x11_support().
+	* main.c: Don't call init_textmode_x11_support() and
+	done_textmode_x11_support().
+
 	* achown.c: Make global variables static if possible. Remove now
 	useless preprocessor directives, since this file is now used in
 	the text edition only.
