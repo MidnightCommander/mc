@@ -280,6 +280,7 @@ x_create_input (Dlg_head *h, widget_data parent, WInput *in)
 	gnome_entry = gnome_entry_new (in->widget.tkname);
 #else
 	entry = GTK_ENTRY (gnome_entry = gtk_entry_new ());
+	gtk_entry_set_visibility (entry, !in->is_password);
 #endif
 	gtk_widget_show (gnome_entry);
 	in->widget.wdata = (widget_data) gnome_entry;

@@ -1,3 +1,8 @@
+1998-05-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gwidget.c (x_create_input): Set the entry's visibility if it is
+	a password field.
+
 1998-05-26  Marc Ewing <marc@redhat.com>
 
 	* Makefile.in: use @LIBVFS@ when referring to libvfs-mc.a
