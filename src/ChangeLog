@@ -1,5 +1,8 @@
 2002-10-21  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (print_mc_usage): Use poptSetOtherOptionHelp()
+	From Andrew V. Samoilov <sav@bcs.zp.ua>
+
 	* learn.c (learn_check_key): Simplify logic.  Add a comment for
 	translators.
 

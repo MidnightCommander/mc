@@ -2072,15 +2072,12 @@ init_sigchld (void)
 static void
 print_mc_usage (poptContext ctx, FILE * stream)
 {
-    int leftColWidth;
-    fprintf (stream,
-	     _("Usage is:\n\n"
-	       "mc [flags] [this_dir] [other_panel_dir]\n\n"));
+    poptSetOtherOptionHelp (ctx,
+			    _("[flags] [this_dir] [other_panel_dir]\n\n"));
 
     /* print help for options */
-    leftColWidth = poptPrintHelp (ctx, stream, 0);
-
-    fprintf (stream, "  %-*s   %s\n", leftColWidth, _("+number"),
+    fprintf (stream, "  %-*s   %s\n", poptPrintHelp (ctx, stream, 0),
+	     _("+number"),
 	     _("Set initial line number for the internal editor"));
     fprintf (stream,
 	     _("\n"
