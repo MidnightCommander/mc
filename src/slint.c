@@ -368,6 +368,10 @@ alloc_color_pair (char *foreground, char *background)
     return max_index;
 }
 
+extern struct colorpair {
+    char *name, *fg, *bg;
+} color_map[];
+
 int
 try_alloc_color_pair (char *fg, char *bg)
 {
@@ -380,7 +384,7 @@ try_alloc_color_pair (char *fg, char *bg)
 	0, 0, 0, 0
     };
 
-    c.index = NORMAL_COLOR;
+    c.index = EDITOR_NORMAL_COLOR;
     p = &c;
     for (;;) {
 	if (((fg && p->fg) ? !strcmp (fg, p->fg) : fg == p->fg) != 0
@@ -396,9 +400,9 @@ try_alloc_color_pair (char *fg, char *bg)
     p->fg = fg ? strdup (fg) : 0;
     p->bg = bg ? strdup (bg) : 0;
     if (!fg)
-	fg = "white";
+	fg = color_map[28].fg;
     if (!bg)
-	bg = "blue";
+	bg = color_map[28].bg;
     p->index = alloc_color_pair (fg, bg);
     return p->index;
 }

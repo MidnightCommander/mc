@@ -102,6 +102,11 @@ struct colorpair color_map [] = {
     { "device=",     0, 0 },
     { "special=",    0, 0 },
     { "core=",       0, 0 },
+
+/* editor colors start at 29 */
+    { "editnormal=",     0, 0 },	/* normal */
+    { "editbold=",       0, 0 },	/* search->found */
+    { "editmarked=",     0, 0 },	/* marked/selected */
 };
 
 struct color_table_s {
@@ -279,7 +284,7 @@ void init_colors (void)
 #endif
 
 #if defined HAVE_SLANG && !defined(OS2_NT)
-	if (use_colors) { /* Hack to make COLOR_PAIR(31) be the default fg/bg
+	if (use_colors) { /* Hack to make COLOR_PAIR(33) be the default fg/bg
 	                     of the terminal */
 	    char *Norm_Vid = SLtt_tgetstr ("me");
 	    
@@ -287,7 +292,7 @@ void init_colors (void)
 	        Norm_Vid = SLtt_tgetstr ("se");
 	    if (Norm_Vid == NULL)
 	        Norm_Vid = "\033[0m";
-	    SLtt_set_color_esc (31, Norm_Vid);
+	    SLtt_set_color_esc (33, Norm_Vid);
 	}
 #endif	
 

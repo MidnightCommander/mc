@@ -47,7 +47,10 @@ char *default_edition_colors =
 "link=lightgray,blue:"
 "device=brightmagenta,blue:"
 "core=red,blue:"
-"special=black,blue";
+"special=black,blue:"
+"editnormal=lightgray,blue:"
+"editbold=yellow,blue:"
+"editmarked=black,cyan";
 
 void
 edition_post_exec (void)

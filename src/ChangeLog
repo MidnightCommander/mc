@@ -1,3 +1,9 @@
+Fri Dec 11 00:05:50 1998 Paul Sheer <psheer@obsidian.co.za>
+
+	* syntax.c, slint.c, color.c, color.h: editor now has its
+	own color configuration so you can set editor background
+	colors with MC_COLOR_TABLE.
+
 1998-12-10 Paul Sheer <psheer@obsidian.co.za>
 
 	* syntax.c: perl syntax highlighting. syntax highlighting

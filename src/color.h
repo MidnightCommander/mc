@@ -30,6 +30,7 @@ extern int attr_pairs [];
 #else
 #define MARKED_SELECTED_COLOR (PORT_COLOR (MY_COLOR_PAIR (4),A_REVERSE | A_BOLD))
 #endif
+
 #define ERROR_COLOR           (PORT_COLOR (MY_COLOR_PAIR (5),0))
 #define MENU_ENTRY_COLOR      (PORT_COLOR (MY_COLOR_PAIR (6),A_REVERSE))
 #define REVERSE_COLOR         (PORT_COLOR (MY_COLOR_PAIR(7),A_REVERSE))
@@ -41,6 +42,15 @@ extern int attr_pairs [];
 #define MENU_HOTSEL_COLOR     (PORT_COLOR (MY_COLOR_PAIR(15),0))
 
 /*
+ * editor colors - only 3 for normal, search->found, and select, respectively
+ * Last is defined to view color.
+ */
+#define EDITOR_NORMAL_COLOR          (PORT_COLOR (MY_COLOR_PAIR (29), 0))
+#define EDITOR_BOLD_COLOR            (PORT_COLOR (MY_COLOR_PAIR (30),A_BOLD))
+#define EDITOR_MARKED_COLOR          (PORT_COLOR (MY_COLOR_PAIR (31),A_REVERSE))
+#define EDITOR_UNDERLINED_COLOR      VIEW_UNDERLINED_COLOR
+
+/*
  * This should be selectable independently. Default has to be black background
  * foreground does not matter at all.
  */
@@ -48,7 +58,7 @@ extern int attr_pairs [];
 #define INPUT_COLOR        (PORT_COLOR (MY_COLOR_PAIR(22),0))
 
 #ifdef HAVE_SLANG
-#    define DEFAULT_COLOR  (PORT_COLOR (MY_COLOR_PAIR(31),0))
+#    define DEFAULT_COLOR  (PORT_COLOR (MY_COLOR_PAIR(33),0))
 #   else
 #     define DEFAULT_COLOR A_NORMAL
 #endif

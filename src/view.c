@@ -860,7 +860,7 @@ display (WView *view)
 			view->cursor_col = col;
 		    }
                     boldflag = 2;
-                    view_set_color (view, view->view_side == view_side_left ? PICK_COLOR (15, 31));
+                    view_set_color (view, view->view_side == view_side_left ? PICK_COLOR (15, 33));
                 }
 
                 /* Print a hex number (sprintf is too slow) */
@@ -906,7 +906,7 @@ display (WView *view)
                         view_set_color (view, BOLD_COLOR);
                         goto setcursor;
                     case 2:
-                        view_set_color (view, view->view_side == view_side_left ? PICK_COLOR (31, 15));
+                        view_set_color (view, view->view_side == view_side_left ? PICK_COLOR (33, 15));
                         goto setcursor;
                     case 3:
                         view_set_color (view, 7);
