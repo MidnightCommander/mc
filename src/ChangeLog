@@ -1,3 +1,9 @@
+2004-09-23  Roland Illig  <roland.illig@gmx.de>
+
+	* main.c (OS_Setup): Fixed segmentation fault.
+	
+	From Oskar Liljeblad <oskar osk.mine.nu>
+
 2004-09-21  Leonard den Ottolander  <leonard * den ottolander nl>
 
 	* filegui.c (file_mask_dialog): Expand tilde. Remove redundant 

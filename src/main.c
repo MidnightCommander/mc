@@ -1765,8 +1765,12 @@ OS_Setup (void)
 {
     char *mc_libdir;
     shell = getenv ("SHELL");
-    if (!shell || !*shell)
-	shell = g_strdup (getpwuid (geteuid ())->pw_shell);
+    if (!shell || !*shell) {
+        struct passwd *pwd;
+        pwd = getpwuid (geteuid ());
+        if (pwd != NULL)
+           shell = g_strdup (pwd->pw_shell);
+    }
     if (!shell || !*shell)
 	shell = "/bin/sh";
 
