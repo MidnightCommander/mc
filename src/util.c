@@ -844,62 +844,55 @@ char *get_current_wd (char *buffer, int size)
 }
 #endif /* !USE_VFS */
 
-#define CHECK(x) if (x == -1) return 0;
-
-static long
-get_small_endian_long (int fd)
-{
-    unsigned char buffer [4];
-
-    CHECK (mc_read (fd, buffer, 4));
-    return (buffer [3] << 24) | (buffer [2] << 16) | (buffer [1] << 8) | buffer [0];
-}
-
 /* This function returns 0 if the file is not in not compressed by
  * one of the supported compressors (gzip, bzip, bzip2).  Otherwise,
  * the compression type is returned, as defined in util.h
  * Warning: this function moves the current file pointer */
 int get_compression_type (int fd)
 {
-    unsigned char magic [4];
-    
+    unsigned char magic[4];
+
     /* Read the magic signature */
-    CHECK (mc_read (fd, &magic [0], 4));
-	
+    if (mc_read (fd, &magic[0], 4) != 4)
+	return COMPRESSION_NONE;
+
     /* GZIP_MAGIC and OLD_GZIP_MAGIC */
-    if (magic [0] == 037 && (magic [1] == 0213 || magic [1] == 0236)){
+    if (magic[0] == 037 && (magic[1] == 0213 || magic[1] == 0236)) {
 	return COMPRESSION_GZIP;
     }
 
     /* PKZIP_MAGIC */
-    if (magic [0] == 0120 && magic [1] == 0113 && magic [2] == 003 && magic [3] == 004){
+    if (magic[0] == 0120 && magic[1] == 0113 && magic[2] == 003
+	&& magic[3] == 004) {
 	/* Read compression type */
 	mc_lseek (fd, 8, SEEK_SET);
-	CHECK (mc_read (fd, &magic [0], 2));
-	
+	if (mc_read (fd, &magic[0], 2) != 2)
+	    return COMPRESSION_NONE;
+
 	/* Gzip can handle only deflated (8) or stored (0) files */
-	if ((magic [0] != 8 && magic [0] != 0) || magic [1] != 0)
-	     return COMPRESSION_NONE;
+	if ((magic[0] != 8 && magic[0] != 0) || magic[1] != 0)
+	    return COMPRESSION_NONE;
 
 	/* Compatible with gzip */
 	return COMPRESSION_GZIP;
     }
 
     /* PACK_MAGIC and LZH_MAGIC and compress magic */
-    if (magic [0] == 037 && (magic [1] ==  036 || magic [1] == 0240 || magic [1] == 0235)){
-        /* Compatible with gzip */
+    if (magic[0] == 037
+	&& (magic[1] == 036 || magic[1] == 0240 || magic[1] == 0235)) {
+	/* Compatible with gzip */
 	return COMPRESSION_GZIP;
     }
 
     /* BZIP and BZIP2 files */
     if ((magic[0] == 'B') && (magic[1] == 'Z') &&
-	(magic [3] >= '1') && (magic [3] <= '9')){
-            switch (magic[2]) {
-                case '0':
-                    return COMPRESSION_BZIP;
-                case 'h': 
-	            return COMPRESSION_BZIP2;
-            }
+	(magic[3] >= '1') && (magic[3] <= '9')) {
+	switch (magic[2]) {
+	case '0':
+	    return COMPRESSION_BZIP;
+	case 'h':
+	    return COMPRESSION_BZIP2;
+	}
     }
     return 0;
 }

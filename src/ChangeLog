@@ -1,5 +1,7 @@
 2002-07-02  Pavel Roskin  <proski@gnu.org>
 
+	* util.c: Eliminate get_small_endian_long() and CHECK macro.
+
 	* util.h: Rename compression types, add a type for uncompressed
 	files.
 	* util.c (is_gunzipable): Rename to ...
