@@ -1,3 +1,7 @@
+2001-05-29  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.in: Don't use subshell.o.
+
 2001-05-26  Pavel Roskin  <proski@gnu.org>
 
 	* glayout.c (gnome_panel_layout_menu): Status bar messages for
@@ -148,11 +152,11 @@ Wed Jan 10 15:52:51 2001  Jonathan Blandford  <jrb@redhat.com>
 
 2000-08-23  Pavel Roskin  <proski@gnu.org>
 
-	* Makefile.in: don't do anything with *.inc - they are gone
+	* Makefile.in: Don't do anything with *.inc - they are gone
 
 2000-08-22  Pavel Roskin  <proski@gnu.org>
 
-	* Makefile.in: don't use info.o, chmod.o, chown.o, achown.o,
+	* Makefile.in: Don't use info.o, chmod.o, chown.o, achown.o,
 	@XCURSES@ and option.o
 
 2000-08-21  Jonathan Blandford  <jrb@redhat.com>
