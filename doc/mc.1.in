@@ -1,5 +1,5 @@
 .\"TOPICS "Topics:"
-.TH mc 1 "30 October 1998"
+.TH mc 1 "26 December 2002"
 .\"SKIP_SECTION"
 .SH "NAME"
 mc \- Visual shell for Unix-like systems.
@@ -9,17 +9,17 @@ mc \- Visual shell for Unix-like systems.
 [\-abcCdfhPstuUVx] [\-l log] [dir1 [dir2]] [-v file]
 .\"NODE "DESCRIPTION"
 .SH "DESCRIPTION"
-The Midnight Commander is a directory browser/file manager for
+GNU Midnight Commander is a directory browser/file manager for
 Unix-like operating systems.
 .\"NODE "OPTIONS"
 .\".\"DONT_SPLIT"
 .SH "OPTIONS"
 .TP
 .I "\-a"
-Disables the usage of graphic characters for line drawing.
+Disable usage of graphic characters for line drawing.
 .TP
 .I "\-b"
-Forces black and white display.
+Force black and white display.
 .TP
 .I "\-c"
 Force color mode, please check the section
@@ -29,18 +29,18 @@ Colors
 for more information.
 .TP
 .I "\-C arg"
-Used to specify a different color set in the command line.  The format
-of arg is documented in the
+Specify a different color set in the command line.  The format of arg is
+documented in the
 .\"LINK2"
 Colors
 .\"Colors"
 section.
 .TP
 .I "\-d"
-Disables mouse support.
+Disable mouse support.
 .TP
 .I "\-f"
-Displays the compiled-in search paths for Midnight Commander files.
+Display the compiled-in search paths for Midnight Commander files.
 .TP
 .I "\-k"
 Reset softkeys to their default from the termcap/terminfo
@@ -50,11 +50,10 @@ database. Only useful on HP terminals when the function keys don't work.
 Save the ftpfs dialog with the server in file.
 .TP
 .I "\-P file"
-This option instructs the Midnight Commander to print the last working
-directory to the specified file.  This option is not meant to be used
-directly.  Instead, it's used from a special shell script that
-automatically changes the current directory of the shell to the last
-directory the Midnight Commander was in.  Source the file
+Print the last working directory to the specified file.  This option is
+not meant to be used directly.  Instead, it's used from a special shell
+script that automatically changes the current directory of the shell to
+the last directory the Midnight Commander was in.  Source the file
 .B @prefix@/share/mc/bin/mc.sh
 (bash and zsh users) or
 .B @prefix@/share/mc/bin/mc.csh
@@ -63,7 +62,7 @@ directory the Midnight Commander was in.  Source the file
 as an alias to the appropriate shell script.
 .TP
 .I "\-s"
-Turns on the slow terminal mode, in this mode the program will not
+Turn on the slow terminal mode, in this mode the program will not
 draw expensive line drawing characters and will toggle verbose mode
 off.
 .TP
@@ -75,22 +74,22 @@ variable for the terminal information instead of the information on
 the system wide terminal database
 .TP
 .I "\-u"
-Disables the use of a concurrent shell (only makes sense if the
-Midnight Commander has been built with concurrent shell support).
+Disable use of the concurrent shell (only makes sense if the Midnight
+Commander has been built with concurrent shell support).
 .TP
 .I "\-U"
-Enables the use of the concurrent shell support (only makes sense if
-the Midnight Commander was built with the subshell support set as an
+Enable use of the concurrent shell support (only makes sense if the
+Midnight Commander was built with the subshell support set as an
 optional feature).
 .TP
 .I "\-v file"
-Enters the internal viewer to view the file specified.
+Start the internal viewer to view the specified file.
 .TP
 .I "\-V"
-Displays the version of the program.
+Display the version of the program.
 .TP
 .I "\-x"
-Forces xterm mode.  Used when running on xterm-capable terminals (two
+Force xterm mode.  Used when running on xterm-capable terminals (two
 screen modes, and able to send mouse escape sequences).
 .PP
 If specified, the first path name is the directory to show in the
