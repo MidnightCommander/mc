@@ -526,7 +526,7 @@ msgstr "Įrašyti &kaip...  F12"
 
 #: edit/editmenu.c:287 edit/editmenu.c:305
 msgid "&Insert file...   F15"
-msgstr "Įterpt&i bylą,,,  F15"
+msgstr "Įterpt&i bylą...  F15"
 
 #: edit/editmenu.c:288
 msgid "Copy to &file...  C-f"
