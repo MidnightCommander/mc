@@ -21,9 +21,15 @@ Implement --with-screen option.
 
 Remove side effects from --with-termcap option.
 
+Display carriage return in the editor.
+
 
 Before 4.6.0
 ============
+
+Load subshell prompt when it's ready.
+
+Eliminate all pipes in subshell.c, run pwd after kill.
 
 Make xnc.hlp a text file.  Make it easier to translate the manual.
 
