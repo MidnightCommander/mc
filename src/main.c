@@ -2430,9 +2430,14 @@ main (int argc, char *argv[])
     /* Must be done before installing the SIGCHLD handler [[FIXME]] */
     handle_console (CONSOLE_INIT);
 
-#   ifdef HAVE_SUBSHELL_SUPPORT
-    subshell_get_console_attributes ();
-#   endif
+#ifdef HAVE_SUBSHELL_SUPPORT
+    /* Don't use subshell when invoked as viewer or editor */
+    if (edit_one_file || view_one_file)
+	use_subshell = 0;
+
+    if (use_subshell)
+	subshell_get_console_attributes ();
+#endif				/* HAVE_SUBSHELL_SUPPORT */
 
     /* Install the SIGCHLD handler; must be done before init_subshell() */
     init_sigchld ();
@@ -2458,10 +2463,6 @@ main (int argc, char *argv[])
     init_xterm_support ();
 
 #ifdef HAVE_SUBSHELL_SUPPORT
-
-    /* Don't use subshell when invoked as a viewer or editor */
-    if (edit_one_file || view_one_file)
-	use_subshell = 0;
 
     /* Done here to ensure that the subshell doesn't  */
     /* inherit the file descriptors opened below, etc */
