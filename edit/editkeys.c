@@ -144,8 +144,6 @@ static long const emacs_key_map[] = {
     ALT ('l'), CK_Goto,
     ALT ('L'), CK_Goto,
     KEY_F (17), CK_Find_Again,
-    ALT ('<'), CK_Beginning_Of_Text,
-    ALT ('>'), CK_End_Of_Text,
     0, 0
 };
 
@@ -189,6 +187,8 @@ static long const common_key_map[] = {
 
     /* Alt */
     KEY_M_ALT | KEY_BACKSPACE, CK_Delete_Word_Left,
+    ALT ('<'), CK_Beginning_Of_Text,
+    ALT ('>'), CK_End_Of_Text,
 
     0, 0
 };

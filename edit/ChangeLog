@@ -1,3 +1,8 @@
+2003-06-09  Pavel Roskin  <proski@gnu.org>
+
+	* editkeys.c (emacs_key_map): Move Atl-'>' and Alt-'<' ...
+	(common_key_map): ... here.
+
 2003-06-05  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* editcmd.c (edit_ext_cmd): Fix memory leak.
