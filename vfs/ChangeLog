@@ -1,5 +1,8 @@
 2000-08-04  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
+	* ftpfs.c (dir_load): add . and .. to ftpfs listings, courtesy of
+	Roland.Mainz@informatik.med.uni-giessen.de
+
 	* util-alone.c (message_1s1d): added missing function
 
 2000-08-03  Pavel Roskin  <proski@gnu.org>
