@@ -232,11 +232,14 @@ void *mad_alloc0 (int size, char *file, int line)
 /* Duplicates a character string. Used instead of strdup. */
 char *mad_strdup (const char *s, char *file, int line)
 {
-    char *t;
+    if (s) {
+	char *t;
 
-    t = (char *) mad_alloc (strlen (s) + 1, file, line);
-    strcpy (t, s);
-    return t;
+	t = (char *) mad_alloc (strlen (s) + 1, file, line);
+	strcpy (t, s);
+	return t;
+    }
+    return NULL;
 }
 
 /* Duplicates a character string. Used instead of strndup. */
