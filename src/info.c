@@ -97,10 +97,10 @@ info_show_info (WInfo *info)
     /* Print only lines which fit */
     
     if(!i18n_adjust) {
+	/* This printf pattern string is used as a reference for size */
 	file_label=_("File:       %s");
 	i18n_adjust=strlen(file_label)+2;
     }
-    /*The printf pattern string is used as a reference for size*/
     
     switch (info->widget.lines-2){
 	/* Note: all cases are fall-throughs */

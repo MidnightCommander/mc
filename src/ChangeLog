@@ -1,3 +1,10 @@
+2001-08-30  David Martin  <dmartina@excite.es>
+
+	* info.c (info_show_info): Move comment line just before
+	translatable message so it's shown in .po files to alert
+	translators.  The message (translated) is used to set the start
+	column (so the available width) for some "truncatable" strings.
+
 2001-08-27  Pavel Roskin  <proski@gnu.org>
 
 	* key.c (learn_key): Turn off keypad to disable intepreting keys
