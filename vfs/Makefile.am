@@ -100,7 +100,7 @@ mcserv_LDADD = $(MCSERVLIBS)
 SAMBA_DIST =			\
 	Makefile.in		\
 	aclocal.m4		\
-	configure.in		\
+	configure.ac		\
 	configure		\
 	internals.doc		\
 	parsing.doc		\

@@ -141,8 +141,8 @@ finddead:
 AUTOCONF=@AUTOCONF@
 AUTOHEADER=@AUTOHEADER@
 
-# when configure.in is updated, reconfigure
-$(srcdir)/configure: @MAINT@ $(srcdir)/configure.in $(srcdir)/aclocal.m4
+# when configure.ac is updated, reconfigure
+$(srcdir)/configure: @MAINT@ $(srcdir)/configure.ac $(srcdir)/aclocal.m4
 	cd $(srcdir) && $(AUTOCONF)
 
 config.status: $(srcdir)/configure
@@ -164,7 +164,7 @@ include/stamp-h: $(srcdir)/include/config.h.in config.status
 $(srcdir)/include/config.h.in: $(srcdir)/include/stamp-h.in
 	@:
 
-$(srcdir)/include/stamp-h.in: @MAINT@ $(srcdir)/configure.in
+$(srcdir)/include/stamp-h.in: @MAINT@ $(srcdir)/configure.ac
 	cd $(srcdir) && $(AUTOHEADER)
 	@date -u > $@
 
