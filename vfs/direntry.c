@@ -212,18 +212,20 @@ vfs_s_entry *vfs_s_find_entry_tree(vfs *me, vfs_s_inode *root, char *path, int f
     unsigned int pseg;
     vfs_s_entry *ent = NULL;
     int found;
-    char *p;
-    p = strdup (path);
+    char p[MC_MAXPATHLEN] = "";
 
     while(1) {
+	int t;
 	for(pseg = 0; path[pseg] == DIR_SEP_CHAR; pseg++);
-	if(!path[pseg]) {
-	    free (p);
+	if(!path[pseg])
 	    return ent;
-	}
 	path += pseg;
 
 	for(pseg = 0; path[pseg] && path[pseg] != DIR_SEP_CHAR; pseg++);
+
+	strcat (p, DIR_SEP_STRING);
+	strncpy (p + (t = strlen(p)), path, pseg);
+	p[t + pseg] = '\0';
 
 	found = 0;
 	for(ent = root->subdir; ent != NULL; ent = ent->next)
@@ -235,10 +237,9 @@ vfs_s_entry *vfs_s_find_entry_tree(vfs *me, vfs_s_inode *root, char *path, int f
 	    ent = vfs_s_automake(me, root, path, flags);
 	if (!ent) ERRNOR (ENOENT, NULL);
 	path += pseg;
-	if (!(ent = vfs_s_resolve_symlink(me, ent, p, follow))) {
-	    free (p);
+/* here we must follow leading directories always; only the actual file is optional */
+	if (!(ent = vfs_s_resolve_symlink(me, ent, p, strchr (path, DIR_SEP_CHAR) ? LINK_FOLLOW : follow)))
 	    return NULL;
-	}
 	root = ent->ino;
     }
 }
@@ -335,21 +336,22 @@ vfs_s_entry *vfs_s_resolve_symlink (vfs *me, vfs_s_entry *entry, char *path, int
     if (!S_ISLNK(entry->ino->st.st_mode))
 	return entry;
 
-    if (*entry->ino->linkname != '/')
+    if (*entry->ino->linkname != DIR_SEP_CHAR)
 	return (MEDATA->find_entry) (me, entry->dir, entry->ino->linkname, follow - 1, 0);
     else {
 /* convert the linkname to relative linkname with some leading ../ */
 	char linkname[MC_MAXPATHLEN] = "", *p, *q;
-	for (p = path, q = entry->ino->linkname + 1; *p == *q; p++, q++);
-	while (*(--q) != '/');
+	for (p = path, q = entry->ino->linkname; *p == *q; p++, q++);
+	while (*(--q) != DIR_SEP_CHAR);
 	q++;
 	for (;; p++) {
-	    p = strchr (p, '/');
+	    p = strchr (p, DIR_SEP_CHAR);
 	    if (!p) {
 		strcat (linkname, q);
 		break;
 	    }
-	    strcat (linkname, "../");
+	    strcat (linkname, "..");
+	    strcat (linkname, DIR_SEP_STRING);
 	}
 	return (MEDATA->find_entry) (me, entry->dir, linkname, follow - 1, 0);
     }
