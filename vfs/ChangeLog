@@ -1,5 +1,14 @@
 2003-08-30  Pavel Roskin  <proski@gnu.org>
 
+	* samba/tests/summary.c: Remove.  The test is now included ...
+	* samba/configure.in: ... here.
+	* samba/tests/README: Remove, it's irrelevant.
+	* samba/architecture.doc: Likewise.
+	* samba/include/dlinklist.h: Remove, it's unused.  Adjust
+	dependencies.
+	* samba/libsmb/namequery.c (): Remove, it's unused.
+	* Makefile.am: Remove unused Samba files.
+
 	* samba/include/smb.h: Remove unneeded includes.
 	* samba/include/ntdomain.h: Remove, it's unused.
 	* samba/include/rpc*.h: Likewise.
