@@ -687,7 +687,7 @@ do_execute (const char *shell, const char *command, int flags)
 	    (pause_after_run == pause_on_dumb_terminals &&
 	     !xterm_flag && !console_flag)) && !quit &&
 	     subshell_state != RUNNING_COMMAND) {
-	    printf (_("Press any key to continue..."));
+	    printf ("%s\r\n", _("Press any key to continue..."));
 	    last_paused = 1;
 	    fflush (stdout);
 	    mc_raw_mode ();

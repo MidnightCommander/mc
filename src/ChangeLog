@@ -1,5 +1,8 @@
 2002-07-29  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (do_execute): Add newline after "Press any key to
+	continue".
+
 	* cons.saver.c: Eliminate some global variables.  Further
 	cleanup.  Make sure that console_fd is always closed.
 
