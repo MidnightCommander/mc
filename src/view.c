@@ -2390,14 +2390,13 @@ Dlg_head   *view_dlg;
 int
 view (char *_command, const char *_file, int *move_dir_p, int start_line)
 {
-    int midnight_colors [4];
     int error;
     WView *wview;
     WButtonBar *bar;
     Dlg_head *our_dlg;
     
     /* Create dialog and widgets, put them on the dialog */
-    our_dlg = create_dlg (0, 0, LINES, COLS, midnight_colors,
+    our_dlg = create_dlg (0, 0, LINES, COLS, NULL,
 			   view_mode_callback, "[Internal File Viewer]",
 			   "view",
 			   DLG_NONE);
