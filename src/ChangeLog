@@ -1,3 +1,8 @@
+1999-02-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* util.c: Test for glibc/linux and if so, do not use getwd, but
+	getcwd as on this system it is better than popen ("pwd").
+
 1999-02-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* setup.c: Declare extern int tree_panel_visible for the GNOME
