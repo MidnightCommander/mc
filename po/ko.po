@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.28\n"
 "POT-Creation-Date: 1999-03-29 22:00+0900\n"
-"PO-Revision-Date: 1999-03-29 13:43:29+0900\n"
+"PO-Revision-Date: 1999-03-29 13:47:21+0900\n"
 "Last-Translator: Sung-Hyun Nam <namsh@lgic.co.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -5750,7 +5750,7 @@ msgstr "ftpfs: 서버로 연결 실패: %s"
 #: vfs/ftpfs.c:791
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "재시도 기다림... %s (취소하려면 Control-C)"
+msgstr "재시도 기다림... %d (취소하려면 Control-C)"
 
 #: vfs/ftpfs.c:985
 msgid "ftpfs: could not setup passive mode for source routing"
