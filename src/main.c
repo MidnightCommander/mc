@@ -1750,12 +1750,12 @@ static const key_map ctl_x_map [] = {
     { 'q',          quick_cmd_no_menu },
     { 'h',          add2hotlist_cmd },
     { '!',          external_panelize },
-#if defined(WITH_BACKGROUND) && !defined(HAVE_GNOME)
+#ifdef WITH_BACKGROUND
     { 'j',          jobs_cmd },
-#endif
+#endif /* WITH_BACKGROUND */
 #ifdef HAVE_SETSOCKOPT
     { '%',          source_routing },
-#endif
+#endif /* HAVE_SETSOCKOPT */
     { 0,  0 }
 };
 

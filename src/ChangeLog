@@ -1,3 +1,9 @@
+2001-07-15  Pavel Roskin  <proski@gnu.org>
+
+	* cmd.c [HAVE_X]: Disable source routing dialog and panel
+	comparison.
+	* main.c (ctl_x_map): Simplify preprocessor directives.
+
 2001-07-14  Pavel Roskin  <proski@gnu.org>
 
 	* screen.c (panel_keymap) [HAVE_X]: Disable Alt-H - it's not

@@ -742,7 +742,6 @@ void reselect_vfs (void)
     g_free (target);
 }
 #endif /* USE_VFS */
-#endif /* !HAVE_X */
 
 static int compare_files (char *name1, char *name2, long size)
 {
@@ -880,7 +879,6 @@ void compare_dirs_cmd (void)
     }
 }
 
-#ifndef HAVE_X
 void history_cmd (void)
 {
     Listbox *listbox;
@@ -1325,6 +1323,7 @@ char *get_random_hint (void)
     return result;
 }
 
+#ifndef HAVE_X
 #ifdef USE_NETCODE
 
 static char *machine_str = N_(" Enter machine name (F1 for details): ");
@@ -1400,7 +1399,6 @@ void source_routing (void)
 #endif /* HAVE_SETSOCKOPT */
 #endif /* USE_NETCODE */
 
-#ifndef HAVE_X
 #ifdef USE_EXT2FSLIB
 void undelete_cmd (void)
 {
