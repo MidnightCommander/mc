@@ -4616,7 +4616,7 @@ msgstr "ftpfs: сбой прерывания"
 
 #: vfs/ftpfs.c:1093 vfs/ftpfs.c:1195
 msgid "ftpfs: CWD failed."
-msgstr "ftpfs: сбой поиска текущего рабочего каталога."
+msgstr "ftpfs: невозможно изменить текущий рабочий каталог."
 
 #: vfs/ftpfs.c:1103 vfs/ftpfs.c:1110
 msgid "ftpfs: couldn't resolve symlink"
