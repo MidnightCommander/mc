@@ -307,7 +307,7 @@ static inline struct syntax_rule apply_rules_going_right (WEdit * edit, long i, 
     }
 /* check to turn on a keyword */
     if (!_rule.keyword) {
-	char *p;
+	const char *p;
 	p = (r = edit->rules[_rule.context])->keyword_first_chars;
 	if (p)
 	while (*(p = xx_strchr ((unsigned char *) p + 1, c))) {
@@ -377,7 +377,7 @@ static inline struct syntax_rule apply_rules_going_right (WEdit * edit, long i, 
     }
 /* check again to turn on a keyword if the context switched */
     if (contextchanged && !_rule.keyword) {
-	char *p;
+	const char *p;
 	p = (r = edit->rules[_rule.context])->keyword_first_chars;
 	while (*(p = xx_strchr ((unsigned char *) p + 1, c))) {
 	    struct key_word *k;
