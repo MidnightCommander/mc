@@ -1,3 +1,32 @@
+Fri Apr 24 16:43:25 1998  Paul Sheer  <psheer@obsidian.co.za>
+
+	* main.h, setup.c: editor_syntax_highlighting option added
+	for ini file.
+
+Fri Apr 24 14:54:06 1998  Paul Sheer  <psheer@obsidian.co.za>
+
+	* syntax.c: added. this files reads ~/.cedit/mcsyntax and
+	processes generic rules for syntax highlighting of different
+	file types. Syntax highlighting does not store an attribute byte
+	for each byte of the edit buffer. Rather, it calculates colours
+	on the fly, with an optimised algorithm, as the text is being
+	rendered.
+
+	* edit.c, edit.h, editwidget.c, editdraw.c: changes to facilitate
+	syntax highlighting.
+
+	* editoptions.c: dialog box updated with a syntax highlighting
+	checkbox.
+
+	* slint.c: new function alloc_color_pair(). This allocates a new
+	color index. init_pair() itself now records the last colour index
+	so that colours can be added on to the end of the colour list
+	with alloc_color_pair().
+
+	* slint.c: new function try_alloc_color_pair() returns a new index
+	for a color with named fg and bg. Checks if that named colour
+	already exists before setting a new index.
+
 1998-04-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* user.c (execute_menu_command): Create temporary file exclusively

@@ -392,6 +392,7 @@ int edit_save_as_cmd (WEdit * edit)
 {
 /* This heads the 'Save As' dialog box */
     char *exp = edit_get_save_file (edit->dir, edit->filename, _(" Save As "));
+    int different_filename = 0;
     edit_push_action (edit, KEY_PRESS + edit->start_display);
     edit->force |= REDRAW_COMPLETELY;
 
@@ -402,6 +403,7 @@ int edit_save_as_cmd (WEdit * edit)
 	} else {
 	    if (strcmp(catstrs (edit->dir, edit->filename, 0), exp)) {
 		int file;
+		different_filename = 1;
 		if ((file = open ((char *) exp, O_RDONLY)) != -1) {	/* the file exists */
 		    close (file);
 		    if (edit_query_dialog2 (_(" Warning "), 
@@ -418,6 +420,8 @@ int edit_save_as_cmd (WEdit * edit)
 #ifdef MIDNIGHT
 	        edit->delete_file = 0;
 #endif		
+		if (different_filename && !edit->explicit_syntax)
+		    edit_load_syntax (edit, 0, 0);
 		return 1;
 	    } else {
 		free (exp);
@@ -963,7 +967,7 @@ int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 
 	{
 	    QuickDialog Quick_input =
-	    {66, 6, 0, 0, N_(" Replace "),
+	    {66, 6, 0, 0, _(" Replace "),
 	     "[Input Line Keys]", "quick_input", 0 /*quick_widgets */ };
 
 	    Quick_input.widgets = quick_widgets;
@@ -1040,7 +1044,7 @@ void edit_replace_dialog (WEdit * edit, char **search_text, char **replace_text,
     quick_widgets[13].text = *search_text;
     {
 	QuickDialog Quick_input =
-	{50, REPLACE_DLG_HEIGHT, -1, 0, N_(" Replace "),
+	{50, REPLACE_DLG_HEIGHT, -1, 0, _(" Replace "),
 	 "[Input Line Keys]", "quick_input", 0 /*quick_widgets */ };
 
 	Quick_input.widgets = quick_widgets;
@@ -1108,7 +1112,7 @@ void edit_search_dialog (WEdit * edit, char **search_text)
 
     {
 	QuickDialog Quick_input =
-	{50, SEARCH_DLG_HEIGHT, -1, 0, N_(" Search "),
+	{50, SEARCH_DLG_HEIGHT, -1, 0, _(" Search "),
 	 "[Input Line Keys]", "quick_input", 0 /*quick_widgets */ };
 
 	Quick_input.widgets = quick_widgets;
@@ -2479,7 +2483,7 @@ void edit_mail_dialog (WEdit * edit)
     static char *mail_to_last = 0;
 
     QuickDialog Quick_input =
-    {50, MAIL_DLG_HEIGHT, -1, 0, N_(" Mail "),
+    {50, MAIL_DLG_HEIGHT, -1, 0, _(" Mail "),
 /* NLS ? */
      "[Input Line Keys]", "quick_input", 0};
 

@@ -263,7 +263,7 @@ static void set_color (int font)
 
 #define edit_move(x,y) widget_move(edit, y, x);
 
-static void print_to_widget (WEdit * edit, long row, int start_col, float start_col_real, long end_col, unsigned short line[])
+static void print_to_widget (WEdit * edit, long row, int start_col, float start_col_real, long end_col, unsigned int line[])
 {
     int x = (float) start_col_real + EDIT_TEXT_HORIZONTAL_OFFSET;
     int x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET;
@@ -275,15 +275,15 @@ static void print_to_widget (WEdit * edit, long row, int start_col, float start_
 
     edit_move (x + FONT_OFFSET_X, y + FONT_OFFSET_Y);
     {
-	unsigned short *p = line;
+	unsigned int *p = line;
 	int textchar = ' ';
 	long style;
 
 	while (*p) {
-	    style = (*p) >> 8;
-	    textchar = (*p) & 255;
-	    if (!style || style & MOD_ABNORMAL || style & MOD_CURSOR)
-		set_color (DEF_COLOR);
+	    style = *p >> 8;
+	    textchar = *p & 0xFF;
+	    if (!(style & (0xFF - MOD_ABNORMAL - MOD_CURSOR)))
+		SLsmg_set_color ((*p & 0x007F0000) >> 16);
 	    if (style & MOD_ABNORMAL)
 		textchar = '.';
 	    if (style & MOD_HIGHLIGHTED) {
@@ -306,13 +306,15 @@ static void print_to_widget (WEdit * edit, long row, int start_col, float start_
 /* b pointer to begining of line */
 static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_col)
 {
-    static unsigned short line[MAX_LINE_LEN];
-    unsigned short *p = line;
+    static unsigned int line[MAX_LINE_LEN];
+    unsigned int *p = line;
     long m1 = 0, m2 = 0, q;
     int col, start_col_real;
     unsigned int c;
+    int fg, bg;
     int i;
 
+    edit_get_syntax_color (edit, b - 1, &fg, &bg);
     q = edit_move_forward3 (edit, b, start_col - edit->start_col, 0);
     start_col_real = (col = (int) edit_move_forward3 (edit, b, 0, q)) + edit->start_col;
 
@@ -330,7 +332,12 @@ static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col,
 		    *p |= MOD_BOLD * 256;
 		if (q >= edit->found_start && q < edit->found_start + edit->found_len)
 		    *p |= MOD_HIGHLIGHTED * 256;
-		switch (c = edit_get_byte (edit, q++)) {
+		c = edit_get_byte (edit, q);
+		edit_get_syntax_color (edit, q, &fg, &bg);
+/* we don't use bg for mc - fg contains both */
+		*p |= fg << 16;
+		q++;
+		switch (c) {
 		case '\n':
 		    col = end_col - edit->start_col + 1;	/* quit */
 		    *(p++) |= ' ';
@@ -338,7 +345,7 @@ static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col,
 		case '\t':
 		    i = TAB_SIZE - ((int) col % TAB_SIZE);
 		    *p |= ' ';
-		    c = *(p++) & (0xFFFF - MOD_CURSOR * 256);
+		    c = *(p++) & (0xFFFFFFFF - MOD_CURSOR * 256);
 		    col += i;
 		    while (--i)
 			*(p++) = c;
@@ -391,8 +398,7 @@ static void edit_draw_this_char (WEdit * edit, long curs, long row)
 {
     int b = edit_bol (edit, curs);
 #ifdef MIDNIGHT
-    long start_col = edit_move_forward3 (edit, b, 0, curs) + edit->start_col;
-    edit_draw_this_line (edit, b, row, start_col, start_col);
+    edit_draw_this_line (edit, b, row, 0, edit->num_widget_columns - 1);
 #else
     edit_draw_this_line (edit, b, row, 0, edit->widget->width);
 #endif
@@ -410,6 +416,7 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
 #ifndef MIDNIGHT
     static Window prev_win = 0;
 #endif
+    int fg, bg;
 
     int force = edit->force;
     long b;
@@ -438,7 +445,7 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
 	    b = edit_move_forward (edit, edit->start_display, start_row, 0);
 	    while (row <= end_row) {
 		if (key_pending (edit))
-		    return;
+		    goto exit_render;
 		edit_draw_this_line (edit, b, row, start_column, end_column);
 		b = edit_move_forward (edit, b, 1, 0);
 		row++;
@@ -453,17 +460,17 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
 		    b = edit->start_display;
 		    while (row <= upto) {
 			if (key_pending (edit))
-			    return;
+			    goto exit_render;
 			edit_draw_this_line (edit, b, row, start_column, end_column);
 			b = edit_move_forward (edit, b, 1, 0);
 		    }
 		}
 	    }
-/*	    if (force & REDRAW_LINE) { 		---> default */
+/*          if (force & REDRAW_LINE) {          ---> default */
 	    b = edit_bol (edit, edit->curs1);
 	    if (curs_row >= start_row && curs_row <= end_row) {
 		if (key_pending (edit))
-		    return;
+		    goto exit_render;
 		edit_draw_this_line (edit, b, curs_row, start_column, end_column);
 	    }
 	    if (force & REDRAW_AFTER_CURSOR) {
@@ -472,7 +479,7 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
 		    b = edit_move_forward (edit, b, 1, 0);
 		    while (row <= end_row) {
 			if (key_pending (edit))
-			    return;
+			    goto exit_render;
 			edit_draw_this_line (edit, b, row, start_column, end_column);
 			b = edit_move_forward (edit, b, 1, 0);
 			row++;
@@ -484,7 +491,7 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
 		b = edit_move_backward (edit, edit_bol (edit, edit->curs1), 1);
 		if (row >= start_row && row <= end_row) {
 		    if (key_pending (edit))
-			return;
+			goto exit_render;
 		    edit_draw_this_line (edit, b, row, start_column, end_column);
 		}
 	    }
@@ -494,14 +501,19 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
 		b = edit_move_forward (edit, b, 1, 0);
 		if (row >= start_row && row <= end_row) {
 		    if (key_pending (edit))
-			return;
+			goto exit_render;
 		    edit_draw_this_line (edit, b, row, start_column, end_column);
 		}
 	    }
 	}
     } else {
-	edit_draw_this_char (edit, prev_curs, prev_curs_row);
-	edit_draw_this_char (edit, edit->curs1, edit->curs_row);
+	if (prev_curs_row < edit->curs_row) {	/* with the new text highlighting, we must draw from the top down */
+	    edit_draw_this_char (edit, prev_curs, prev_curs_row);
+	    edit_draw_this_char (edit, edit->curs1, edit->curs_row);
+	} else {
+	    edit_draw_this_char (edit, edit->curs1, edit->curs_row);
+	    edit_draw_this_char (edit, prev_curs, prev_curs_row);
+	}
     }
 
     edit->force = 0;
@@ -513,7 +525,8 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
 #ifndef MIDNIGHT
     prev_win = edit->widget->winid;
 #endif
-
+  exit_render:
+    edit_get_syntax_color (edit, edit->start_display - 1, &fg, &bg);
 }
 
 

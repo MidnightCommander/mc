@@ -3,6 +3,10 @@
 
 #ifdef MIDNIGHT
 
+#ifdef HAVE_SLANG
+#define HAVE_SYNTAXH 1
+#endif
+
 #    include <stdio.h>
 #    include <stdarg.h>
 #    include <sys/types.h>
@@ -21,7 +25,7 @@
 #    include <stdlib.h>
 #    include <malloc.h>
 
-#else
+#else       /* ! MIDNIGHT */
 
 #    include "global.h"
 #    include <stdio.h>
@@ -98,6 +102,11 @@
 #define SEARCH_DIALOG_OPTION_NO_CASE	4
 #define SEARCH_DIALOG_OPTION_BACKWARDS	8
 
+#ifdef MIDNIGHT
+#define SYNTAX_FILE "/.cedit/mcsyntax"
+#else
+#define SYNTAX_FILE "/.cedit/syntax"
+#endif
 #define CLIP_FILE "/.cedit/cooledit.clip"
 #define MACRO_FILE "/.cedit/cooledit.macros"
 #define BLOCK_FILE "/.cedit/cooledit.block"
@@ -191,6 +200,47 @@ struct selection {
    int len;
 };
 
+
+#define RULE_CONTEXT		0x00FFF000UL
+#define RULE_CONTEXT_SHIFT	12
+#define RULE_WORD		0x00000FFFUL
+#define RULE_WORD_SHIFT		0
+#define RULE_ON_LEFT_BORDER	0x02000000UL
+#define RULE_ON_RIGHT_BORDER	0x01000000UL
+
+struct key_word {
+    char *keyword;
+    char first;
+    char last;
+    char *whole_word_chars_left;
+    char *whole_word_chars_right;
+#define NO_COLOR ((unsigned long) -1);
+    int line_start;
+    int bg;
+    int fg;
+};
+
+struct context_rule {
+    int rule_number;
+    char *left;
+    char first_left;
+    char last_left;
+    char line_start_left;
+    char *right;
+    char first_right;
+    char last_right;
+    char line_start_right;
+    int single_char;
+    int between_delimiters;
+    char *whole_word_chars_left;
+    char *whole_word_chars_right;
+    unsigned char *conflicts;
+/* first word is word[1] */
+    struct key_word **keyword;
+};
+
+
+
 struct editor_widget {
 #ifdef MIDNIGHT
     Widget widget;
@@ -225,6 +275,7 @@ struct editor_widget {
     long last_byte;		/* Last byte of file */
     long start_display;		/* First char displayed */
     long start_col;		/* First displayed column, negative */
+    long max_column;		/* The maximum cursor position ever reached used to calc hori scroll bar */
     long curs_row;		/*row position of curser on the screen */
     long curs_col;		/*column position on screen */
     int force;			/* how much of the screen do we redraw? */
@@ -258,7 +309,15 @@ struct editor_widget {
     unsigned long stack_bottom;
     struct stat stat;
 
+/* syntax higlighting */
+    struct context_rule **rules;
+    long last_get_rule;
+    unsigned long rule;
+    char *syntax_type;		/* description of syntax highlighting type being used */
+    int explicit_syntax;	/* have we forced the syntax hi. type in spite of the filename? */
+
     int to_here;		/* dummy marker */
+
 
 /* macro stuff */
     int macro_i;		/* -1 if not recording index to macro[] otherwise */
@@ -384,6 +443,17 @@ void edit_paste_from_X_buf_cmd (WEdit * edit);
 void edit_paste_from_history (WEdit *edit);
 
 void edit_split_filename (WEdit * edit, char *name);
+
+#ifdef MIDNIGHT
+#define CWidget Widget
+#endif
+void edit_set_syntax_change_callback (void (*callback) (CWidget *));
+void edit_load_syntax (WEdit * edit, char **names, char *type);
+void edit_free_syntax_rules (WEdit * edit);
+void edit_get_syntax_color (WEdit * edit, long byte_index, int *fg, int *bg);
+
+
+#ifdef MIDNIGHT
 
 /* put OS2/NT/WIN95 defines here */
 
@@ -562,4 +632,4 @@ extern char *option_backup_ext;
 extern int edit_confirm_save;
 
 #endif				/* ! _EDIT_C */
-
+#endif 				/* __EDIT_H */

@@ -58,13 +58,7 @@ void init_pair (int, CTYPE, CTYPE);
 #   define color_map_bg(n) color_map[n].bg
 #endif
 
-struct colorpair {
-    char *name;			/* Name of the entry */
-    CTYPE fg;			/* foreground color */
-    CTYPE bg;			/* background color */
-};
-
-static struct colorpair color_map [] = {
+struct colorpair color_map [] = {
     { "normal=",     0, 0 },	/* normal */
     { "selected=",   0, 0 },	/* selected */
     { "marked=",     0, 0 },	/* marked */

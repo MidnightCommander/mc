@@ -31,6 +31,7 @@
 #include "mousemark.h"
 #endif
 
+
 #ifndef MIDNIGHT
 
 extern int EditExposeRedraw;
@@ -48,17 +49,23 @@ void edit_destroy_callback (CWidget * w)
 	CError ("Trying to destroy non-existing editor widget.\n");
 }
 
+void link_hscrollbar_to_editor (CWidget * scrollbar, CWidget * editor, XEvent * xevent, CEvent * cwevent, int whichscrbutton);
+
 extern int option_editor_bg_normal;
 void edit_tri_cursor (Window win);
-
 /* starting_directory is for the filebrowser */
 CWidget *CDrawEditor (const char *identifier, Window parent, int x, int y,
 	   int width, int height, const char *text, const char *filename,
 		const char *starting_directory, unsigned int options, unsigned long text_size)
 {
     static made_directory = 0;
+    int extra_space_for_hscroll = 0;
     CWidget *w;
     WEdit *e;
+
+    if (options & EDITOR_HORIZ_SCROLL)
+	extra_space_for_hscroll = 8;
+
     wedit = w = CSetupWidget (identifier, parent, x, y,
 			      width + 7, height + 6, C_EDITOR_WIDGET,
 		   ExposureMask | ButtonPressMask | ButtonReleaseMask | \
@@ -93,9 +100,14 @@ CWidget *CDrawEditor (const char *identifier, Window parent, int x, int y,
     e->macro_i = -1;
     e->widget = w;
 
-    set_hint_pos (x + width + 7 + WIDGET_SPACING, y + height + 6 + WIDGET_SPACING);
+    set_hint_pos (x + width + 7 + WIDGET_SPACING, y + height + 6 + WIDGET_SPACING + extra_space_for_hscroll);
+    if (extra_space_for_hscroll) {
+	w->hori_scrollbar = CDrawHorizontalScrollbar (catstrs (identifier, ".hsc", 0), parent,
+		x, y + height + 6, width + 6, 12, 0, 0);
+	CSetScrollbarCallback (w->hori_scrollbar->ident, w->ident, link_hscrollbar_to_editor);
+    }
     if (!(options & EDITOR_NO_TEXT))
-	CDrawText (catstrs (identifier, ".text", 0), parent, x, y + height + 6 + WIDGET_SPACING, "%s", e->filename);
+	CDrawText (catstrs (identifier, ".text", 0), parent, x, y + height + 6 + WIDGET_SPACING + extra_space_for_hscroll, "%s", e->filename);
     if (!(options & EDITOR_NO_SCROLL)) {
 	w->vert_scrollbar = CDrawVerticalScrollbar (catstrs (identifier, ".vsc", 0), parent,
 		x + width + 7 + WIDGET_SPACING, y, height + 6, 20, 0, 0);
@@ -104,30 +116,44 @@ CWidget *CDrawEditor (const char *identifier, Window parent, int x, int y,
     return w;
 }
 
-void update_scroll_bar (WEdit * e)
+void update_scroll_bars (WEdit * e)
 {
     int i, x1, x2;
     CWidget *scroll;
     scroll = e->widget->vert_scrollbar;
-    if (!scroll)
-	return;
-
-    i = e->total_lines - e->start_line + 1;
-    if (i > e->num_widget_lines)
-	i = e->num_widget_lines;
-    if (e->total_lines) {
-	x1 = (double) 65535.0 *e->start_line / (e->total_lines + 1);
-	x2 = (double) 65535.0 *i / (e->total_lines + 1);
-    } else {
-	x1 = 0;
-	x2 = 65535;
+    if (scroll) {
+	i = e->total_lines - e->start_line + 1;
+	if (i > e->num_widget_lines)
+	    i = e->num_widget_lines;
+	if (e->total_lines) {
+	    x1 = (double) 65535.0 *e->start_line / (e->total_lines + 1);
+	    x2 = (double) 65535.0 *i / (e->total_lines + 1);
+	} else {
+	    x1 = 0;
+	    x2 = 65535;
+	}
+	if (x1 != scroll->firstline || x2 != scroll->numlines) {
+	    scroll->firstline = x1;
+	    scroll->numlines = x2;
+	    EditExposeRedraw = 1;
+	    render_scrollbar (scroll);
+	    EditExposeRedraw = 0;
+	}
     }
-    if (x1 != scroll->firstline || x2 != scroll->numlines) {
-	scroll->firstline = x1;
-	scroll->numlines = x2;
-	EditExposeRedraw = 1;
-	render_scrollbar (scroll);
-	EditExposeRedraw = 0;
+    scroll = e->widget->hori_scrollbar;
+    if (scroll) {
+	i = e->max_column - (-e->start_col) + 1;
+	if (i > e->num_widget_columns * FONT_MEAN_WIDTH)
+	    i = e->num_widget_columns * FONT_MEAN_WIDTH;
+	x1 = (double) 65535.0 *(-e->start_col) / (e->max_column + 1);
+	x2 = (double) 65535.0 *i / (e->max_column + 1);
+	if (x1 != scroll->firstline || x2 != scroll->numlines) {
+	    scroll->firstline = x1;
+	    scroll->numlines = x2;
+	    EditExposeRedraw = 1;
+	    render_scrollbar (scroll);
+	    EditExposeRedraw = 0;
+	}
     }
 }
 
@@ -336,6 +362,55 @@ void link_scrollbar_to_editor (CWidget * scrollbar, CWidget * editor, XEvent * x
     }
 }
 
+void link_hscrollbar_to_editor (CWidget * scrollbar, CWidget * editor, XEvent * xevent, CEvent * cwevent, int whichscrbutton)
+{
+    int i, start_col;
+    WEdit *e;
+    e = editor->editor;
+    if (!e)
+	return;
+    if (!e->widget->hori_scrollbar)
+	return;
+    start_col = (-e->start_col);
+    if ((xevent->type == ButtonRelease || xevent->type == MotionNotify) && whichscrbutton == 3) {
+	e->start_col = (double) scrollbar->firstline * e->max_column / 65535.0 + 1;
+	e->start_col -= e->start_col % FONT_MEAN_WIDTH;
+	if (e->start_col < 0)
+	    e->start_col = 0;
+	e->start_col = (-e->start_col);
+    } else if (xevent->type == ButtonPress && (cwevent->button == Button1 || cwevent->button == Button2)) {
+	switch (whichscrbutton) {
+	case 1:
+	    edit_scroll_left (e, (e->num_widget_columns - 1) * FONT_MEAN_WIDTH);
+	    break;
+	case 2:
+	    edit_scroll_left (e, FONT_MEAN_WIDTH);
+	    break;
+	case 5:
+	    edit_scroll_right (e, FONT_MEAN_WIDTH);
+	    break;
+	case 4:
+	    edit_scroll_right (e, (e->num_widget_columns - 1) * FONT_MEAN_WIDTH);
+	    break;
+	}
+    }
+    scrollbar->firstline = (double) 65535.0 *(-e->start_col) / (e->max_column + 1);
+    i = e->max_column - (-e->start_col) + 1;
+    if (i > e->num_widget_columns * FONT_MEAN_WIDTH)
+	i = e->num_widget_columns * FONT_MEAN_WIDTH;
+    scrollbar->numlines = (double) 65535.0 *i / (e->max_column + 1);
+    if (start_col != (-e->start_col)) {
+	e->force |= REDRAW_PAGE | REDRAW_LINE;
+	set_cursor_position (0, 0, 0, 0, 0, 0, 0, 0, 0);
+	if (CCheckWindowEvent (xevent->xany.window, ButtonReleaseMask | ButtonMotionMask, 0))
+	    return;
+    }
+    if (e->force) {
+	edit_render_keypress (e);
+	edit_status (e);
+    }
+}
+
 /* 
    This section comes from rxvt-2.21b1/src/screen.c by
    Robert Nation <nation@rocket.sanders.lockheed.com> &
@@ -449,7 +524,7 @@ void edit_update_screen (WEdit * e)
     edit_scroll_screen_over_cursor (e);
     edit_update_curs_row (e);
     edit_update_curs_col (e);
-    update_scroll_bar (e);
+    update_scroll_bars (e);
     edit_status (e);
 
     if (e->force & REDRAW_COMPLETELY)
@@ -488,7 +563,7 @@ static void edit_insert_column_of_text (WEdit * edit, unsigned char *data, int s
 	    }
 	    for (p = edit->curs1;; p++) {
 		if (p == edit->last_byte)
-		    goto insert;
+		    edit_insert_ahead (edit, '\n');
 		if (edit_get_byte (edit, p) == '\n') {
 		    p++;
 		    break;
@@ -502,7 +577,6 @@ static void edit_insert_column_of_text (WEdit * edit, unsigned char *data, int s
 	    }
 	    continue;
 	}
-      insert:
 	edit_insert (edit, data[i]);
     }
     edit_cursor_move (edit, cursor - edit->curs1);
@@ -517,6 +591,7 @@ void handle_client_message (CWidget * w, XEvent * xevent, CEvent * cwevent)
     unsigned char *data;
     unsigned long size;
     int xs, ys;
+    long start_line;
     int x, y, r, deleted = 0;
     long click;
     unsigned int state;
@@ -557,12 +632,14 @@ void handle_client_message (CWidget * w, XEvent * xevent, CEvent * cwevent)
     edit_push_action (e, KEY_PRESS + e->start_display);
 
 /* drops to the same window moving to the left: */
+    start_line = e->start_line;
     if (xevent->xclient.data.l[2] == xevent->xclient.window && !(xevent->xclient.data.l[1] & Button1Mask))
 	if ((column_highlighting && x < max (e->column1, e->column2)) || !column_highlighting) {
 	    edit_block_delete_cmd (e);
 	    deleted = 1;
 	}
     edit_update_curs_row (e);
+    edit_move_display (e, start_line);
     click = edit_get_click_pos (e, x, y);	/* click pos changes with edit_block_delete_cmd() */
     edit_cursor_move (e, click - e->curs1);
     if (data_type == DndFile) {
@@ -661,6 +738,8 @@ int eh_editor (CWidget * w, XEvent * xevent, CEvent * cwevent)
     case FocusOut:
 	edit_render_tidbits (w);
 	e->force |= REDRAW_CHAR_ONLY | REDRAW_LINE;
+	edit_render_keypress (e);
+	return 1;
 	break;
     case KeyRelease:
 	if (column_highlighting) {
@@ -683,6 +762,9 @@ int eh_editor (CWidget * w, XEvent * xevent, CEvent * cwevent)
 	    }
 	}
 	r = edit_execute_key_command (e, cwevent->command, cwevent->insert);
+	if (r)
+	    edit_update_screen (e);
+	return r;
 	break;
     case EditorCommand:
 	cwevent->ident = w->ident;
@@ -938,7 +1020,7 @@ void edit_adjust_size (Dlg_head * h)
     widget_set_size (&edit->widget, 0, 0, LINES - 1, COLS);
     widget_set_size (&edit_bar->widget, LINES - 1, 0, 1, COLS);
     widget_set_size (&edit_menubar->widget, 0, 0, 1, COLS);
-	menubar_arrange(edit_menubar);
+    menubar_arrange(edit_menubar);
 }
 
 void edit_update_screen (WEdit * e)

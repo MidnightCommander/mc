@@ -1932,7 +1932,7 @@ menus; file insertion; <bf>macro definition</bf>; <bf>regular expression</bf>
 search and replace (and our own scanf-printf search and
 replace); <bf>shift-arrow MSW-MAC text highlighting</bf> (for the
 linux console only); insert-overwrite toggle; word-wrap; a variety of
-tabbing options; and an option
+tabbing options; syntax highlighting for various file types; and an option
 to pipe text blocks through shell commands like indent and ispell.
 
 <p>
@@ -1940,9 +1940,9 @@ The editor is very easy to use and requires no tutoring.
 To see what keys do what, just consult the appropriate
 pull-down menu. Other keys are: Shift movement
 keys do text highlighting. <bf>Ctrl-Ins</bf> copies to the file
-<bf>cedit/cooledit.clip</bf> and <bf>Shift-Ins</bf>
-pastes from <bf>cedit/cooledit.clip</bf>.
-<bf>Shift-Del</bf> cuts to <bf>cedit/cooledit.clip</bf>, and
+<bf>.cedit/cooledit.clip</bf> and <bf>Shift-Ins</bf>
+pastes from <bf>.cedit/cooledit.clip</bf>.
+<bf>Shift-Del</bf> cuts to <bf>.cedit/cooledit.clip</bf>, and
 <bf>Ctrl-Del</bf> deletes highlighted text (all Linux console only).
 The completion key also does a Return
 without an automatic indent. Mouse highlighting also works, and you
@@ -1968,7 +1968,7 @@ press <bf>Ctrl-A</bf> and then the assigned key. The macro is also
 executed if you press Meta, Ctrl, or Esc and the assigned
 key, provided that the key is not used for any other
 function. Once defined, the macro commands go into the
-file <bf>cedit/cooledit.macros</bf> in your home directory.
+file <bf>.cedit/cooledit.macros</bf> in your home directory.
 You can delete a macro by deleting the appropriate line in
 this file.
 
@@ -2019,7 +2019,8 @@ binary files, you should set <bf>display bits</bf> to 7 bits in the
 options menu to keep the spacing clean.
 
 <p>
-See also the <bf>mcedit.1</bf> man page for lots more information.
+See also the <bf>mcedit.1</bf> man page for lots more information,
+including details on creating syntax highlighting rules.
 A variety of tabbing and indenting options are available which
 are described in this man page.
 

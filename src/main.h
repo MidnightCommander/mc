@@ -58,6 +58,7 @@ extern int option_backup_ext_int;
 extern int option_auto_para_formatting;
 extern int option_typewriter_wrap;
 extern int edit_confirm_save;
+extern int option_syntax_highlighting;
 #endif	/* ! USE_INTERNAL_EDIT */
 extern int fast_reload_w;
 extern int clear_before_exec;
