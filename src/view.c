@@ -629,8 +629,12 @@ do_view_init (WView *view, char *_command, char *_file, int start_line)
     view->last_byte = view->first + view->s.st_size;
     
     if (start_line > 1 && !error){
+        int saved_wrap_mode = view->wrap_mode;
+
+        view->wrap_mode = 0;
 	get_byte (view, 0);
 	view_move_forward (view, start_line - 1);
+        view->wrap_mode = saved_wrap_mode;
     }
     view->edit_cursor = view->first;
     view->file_dirty =  0;
@@ -658,7 +662,7 @@ view_init (WView *view, char *_command, char *_file, int start_line)
     view->bytes_per_line = 2 * (cols - 7) / 9;
     view->bytes_per_line &= 0xfffc;
     view->dirty = max_dirt_limit + 1;	/* To force refresh */
-    if (!view->view_active || strcmp (_file, view->filename))
+    if (!view->view_active || strcmp (_file, view->filename) || altered_magic_flag)
 	return do_view_init (view, _command, _file, start_line);
     else
 	return 0;
@@ -1084,9 +1088,6 @@ move_forward2 (WView *view, long current, int lines, long upto)
     int  line;
     int  col = 0;
 
-    if (!upto && !view->hex_mode && view->last == view->last_byte)
-        return current;
-
     if (view->hex_mode){
         p = current + lines * view->bytes_per_line;
         p = (p >= view->last_byte) ? current : p;
@@ -1110,6 +1111,8 @@ move_forward2 (WView *view, long current, int lines, long upto)
     	    q = upto;
     	} else
     	    q = view->last_byte;
+        if (get_byte (view, q) != '\n')
+	    q++;
         for (line = col = 0, p = current; p < q; p++){
 	    int c;
 	    
@@ -1166,7 +1169,7 @@ move_forward2 (WView *view, long current, int lines, long upto)
 static long
 move_backward2 (WView *view, long current, int lines)
 {
-    long p, q;
+    long p, q, pm;
     int line;
 
     if (!view->hex_mode && current == view->first)
@@ -1193,24 +1196,26 @@ move_backward2 (WView *view, long current, int lines)
   	    line = 1;
   	else
   	    line = 0;
-        for (q = p = current - 1; p > view->first; p--)
-	    if (get_byte (view, p) == '\n')
+        for (q = p = current - 1; p >= view->first; p--)
+	    if (get_byte (view, p) == '\n' || p == view->first) {
+	        pm = p > view->first ? p + 1 : view->first;
 	    	if (!view->wrap_mode){
 	            if (line == lines)
-	            	return p + 1;
+	            	return pm;
 	            line++;
 	        } else {
-	            line += move_forward2 (view, p + 1, 0, q);
+	            line += move_forward2 (view, pm, 0, q);
 	            if (line >= lines){
 	            	if (line == lines)
-	            	    return p + 1;
+	            	    return pm;
 	            	else
-	            	    return move_forward2 (view, p + 1, line - lines, 0);
+	            	    return move_forward2 (view, pm, line - lines, 0);
 	            }
 	            q = p + 1;
 	        }
+            }
     }
-    return p;
+    return p > view->first ? p : view->first;
 }
 
 void
@@ -1776,7 +1781,7 @@ void toggle_wrap_mode (WView *view)
         if (view->growing_buffer != 0) {
             return;
         }
-        get_bottom_first (view, 1, 0);
+        get_bottom_first (view, 1, 1);
         if (view->hexedit_mode) {
             view->view_side = 1 - view->view_side;
         } else {
@@ -1788,7 +1793,7 @@ void toggle_wrap_mode (WView *view)
 		return;
     } 
     view->wrap_mode = 1 - view->wrap_mode;
-    get_bottom_first (view, 1, 0);
+    get_bottom_first (view, 1, 1);
     if (view->wrap_mode)
 	view->start_col = 0;
     else {
@@ -1822,7 +1827,7 @@ toggle_hex_mode (WView *view)
 	view->widget.options &= ~W_WANT_CURSOR;
     }
     altered_hex_mode = 1;
-    get_bottom_first (view, 1, 0);
+    get_bottom_first (view, 1, 1);
     view_labels (view);
     view->dirty++;
     view_update (view);
@@ -1841,7 +1846,9 @@ goto_line (WView *view)
 {
     char *line, prompt [100];
     int i, oldline = 1;
+    int saved_wrap_mode = view->wrap_mode;
 
+    view->wrap_mode = 0;
     for (i = view->first; i < view->start_display; i++)
 	if (get_byte (view, i) == '\n')
 	    oldline ++;
@@ -1856,6 +1863,7 @@ goto_line (WView *view)
 	free (line);
     }
     view->dirty++;
+    view->wrap_mode = saved_wrap_mode;
     view_update (view);
 }
 
@@ -1928,25 +1936,27 @@ normal_search_cmd (WView *view)
 void
 change_viewer (WView *view)
 {
-    altered_magic_flag = 1;
-    if (!view->command){
-    	view->viewer_magic_flag = !view->viewer_magic_flag;
-    	view_labels (view);
-    } else {
-        char *s = strdup (view->filename);
-        char *t = strdup (view->command);
+    char *s;
+    char *t;
+
+
+    if (*view->filename) {
+        altered_magic_flag = 1;
+        view->viewer_magic_flag = !view->viewer_magic_flag;
+    	s = strdup (view->filename);
+        if (view->command)
+  	    t = strdup (view->command);
+        else
+            t = 0;
 
         view_done (view);
-
-	/* Is it possible to not use the growing buffers? */
-	if (!(*t && !*s))
-	    view->viewer_magic_flag = !view->viewer_magic_flag;
     	view_init (view, t, s, 0);
     	free (s);
-    	free (t);
-    	view_labels (view);
-    	view->dirty++;
-    	view_update (view);
+    	if (t)
+            free (t);
+        view_labels (view);
+        view->dirty++;
+        view_update (view);
     }
 }
 

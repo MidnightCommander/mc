@@ -146,20 +146,27 @@ int view_file_at_line (char *filename, int plain_view, int internal, int start_l
     if (plain_view) {
         int changed_hex_mode = 0;
         int changed_nroff_flag = 0;
+        int changed_magic_flag = 0;
     
         altered_hex_mode = 0;
         altered_nroff_flag = 0;
+        altered_magic_flag = 0;
         if (default_hex_mode)
             changed_hex_mode = 1;
         if (default_nroff_flag)
             changed_nroff_flag = 1;
+        if (default_magic_flag)
+            changed_magic_flag = 1;
         default_hex_mode = 0;
         default_nroff_flag = 0;
+        default_magic_flag = 0;
         view (0, filename, &move_dir, start_line);
         if (changed_hex_mode && !altered_hex_mode)
             default_hex_mode = 1;
         if (changed_nroff_flag && !altered_nroff_flag)
             default_nroff_flag = 1;
+        if (changed_magic_flag && !altered_magic_flag)
+            default_magic_flag = 1;
         repaint_screen ();
         return move_dir;
     }

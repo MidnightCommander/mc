@@ -58,7 +58,7 @@ gnome_open_terminal (void)
 						p = gnome_is_program_in_path ("xterm");
 
 	if (p)
-		my_system (1, shell, p);
+		my_system (EXECUTE_AS_SHELL, shell, p);
 	else
 		message (1, MSG_ERROR, " Could not start a terminal ");
 }

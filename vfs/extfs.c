@@ -760,7 +760,7 @@ static void *extfs_open (char *file, int flags, int mode)
                             " ", q, " ", entry->inode->local_filename, 0);
 	free (q);
 	free (archive_name);
-        if (my_system (1, shell, cmd) && !do_create){
+        if (my_system (EXECUTE_AS_SHELL, shell, cmd) && !do_create){
             free (entry->inode->local_filename);
             entry->inode->local_filename = NULL;
             free (cmd);
@@ -823,7 +823,7 @@ static int extfs_close (void *data)
 			    file->entry->inode->local_filename, 0);
 	free (archive_name);
 	free (file_name);
-	if (my_system (1, shell, cmd))
+	if (my_system (EXECUTE_AS_SHELL, shell, cmd))
 	    errno_code = EIO;
 	free (cmd);
         {

@@ -1014,8 +1014,8 @@ AC_ARG_WITH(termcap,
 	]
 )
 
-AC_ARG_WITH(our-slang,
-	[--with-our-slang           SLANG: Don't use system-installed SLang],[
+AC_ARG_WITH(included-slang,
+	[--with-included-slang      SLANG: use the SLang library included here],[
 	    slang_use_system_installed_lib=false
 	    slang_check_lib=true
 	]
@@ -1179,8 +1179,13 @@ AC_DEFUN(AC_EXT2_UNDEL, [
 
 AC_ARG_WITH(ext2undel,
         [--with-ext2undel           Compile with ext2 undelete code],[
-	if test x$withval = xyes;
+	if test x$withval != xno;
 	then
+		if test x$withval != xyes
+		then
+			LIBS="$LIBS -L$withval/lib"
+			CPPFLAGS="$CPPFLAGS -I$withval/include"
+		fi
 		AC_EXT2_UNDEL
 	fi],
 	dnl Default: detect

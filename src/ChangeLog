@@ -1,3 +1,40 @@
+Tue Apr 28 06:11:08 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* view.c (toggle_wrap_mode, toggle_hex_mode): Force recalculation
+	of bottom_first (we mustn't use an already calculated and cached
+	value because it is invalid for the new mode and the End key would 
+	not move to the end of the file).
+
+	* configure.in: Renamed the option `--with-our-slang' to
+	`--with-included-slang' (this one looks better because we also
+	have an `--with-included-gettext').
+	Make the option `--with-ext2undel' recognice a given path.
+
+	* cmd.c (view_file_at_line): In plain view (F13) set the default
+	magic flag to zero in order to view the file content unprocessed
+	(esp. don't uncompress files if they are compressed). The
+	view_simple_cmd got broken when the default magic flag in view.c
+	was changed from 0 to 1.
+
+	* view.c (do_view_init, goto_line): Set wrap mode temporary off 
+	to make goto line number work, i.e. `line number' now always means 
+	line number in file and not line number on screen (in wrap mode
+	one long line wrapped once is displayed in two lines on the screen).
+	That's important when the viewer is invoked from the find file
+	dialog to display even in wrap mode approxiamtly the part of the
+	file where we found the content we searched for.
+ 	
+	(move_forward2): In wrap mode lines were sometimes counted wrong
+	causing cursor up to move more than one line.
+	
+	(move_backward2): Fixed the movement in wrap mode.
+	
+	(change_viewer): Always re-init viewer when we have a filename,
+	i. e. if the viewer is invoked with simple_view_cmd then we can switch 
+	with the F8 key between unprocessed file content und uncompressed
+	file content.
+	(view_init): re-init view also when magic flag was altered
+
 1998-04-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* screen.c (is_a_panel): Added a routine to determine if a widget
