@@ -1,3 +1,9 @@
+2000-07-21  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* src/main.c: make 8bit input/output the default (99% of the people
+	expects that; lets the remaining 1% use the configuration menu
+	to disactivate it if they want)
+
 2000-07-20  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* gtkedit/ChangeLog: There was no ChangeLog there, so I added one.

@@ -211,11 +211,11 @@ int   pause_after_run = pause_on_dumb_terminals;
 int auto_save_setup = 1;
 
 /* If true, be eight bit clean */
-int eight_bit_clean = 0;
+int eight_bit_clean = 1;
 
 /* If true, then display chars 0-255, else iso-8859-1,
    requires eight_bit_clean */
-int full_eight_bits = 0;
+int full_eight_bits = 1;
 
 /* If true use the internal viewer */
 int use_internal_view = 1;
