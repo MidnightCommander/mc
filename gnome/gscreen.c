@@ -1579,6 +1579,7 @@ panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *ctx, int x, int y, gu
 	dtree->drag_motion_y = y;
 
 	if (panel_tree_scrolling_is_desirable (panel, x, y)){
+	     
 		dtree->timer_id = gtk_timeout_add (60, panel_tree_scroll, data);
 		return TRUE;
 	}
@@ -1587,7 +1588,6 @@ panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *ctx, int x, int y, gu
 		GTK_CLIST (widget), x, y, &row, &col);
 
 	dtree->timer_id = gtk_timeout_add (200, tree_drag_open_directory, data);
-
 	return TRUE;
 }
 
@@ -1602,8 +1602,7 @@ panel_tree_drag_leave (GtkWidget *widget, GdkDragContext *ctx, int x, int y, gui
 {
 	GtkDTree *dtree = GTK_DTREE (widget);
 
-	printf ("Got drag_leave\n");
-	if (dtree->timer_id == -1){
+	if (dtree->timer_id != -1){
 		gtk_timeout_remove (dtree->timer_id);
 		dtree->timer_id = -1;
 	}

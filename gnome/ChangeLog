@@ -1,3 +1,12 @@
+1998-12-12  Owen Taylor  <otaylor@gtk.org>
+
+	* gtkdtree.c (gtk_dtree_destroy): Remove timer upon
+	destruction to be safe. (Should this, and
+	dtree->timer_id itself be in gscreen.c instead?)
+
+	* gscreen.c (panel_tree_drag_leave): Change == to !=
+	so that timeouts are properly removed.
+
 1998-12-11  Matt Wilson  <msw@redhat.com>
 
 	* gscreen.c: The solid lines in the tree are kinda harsh.  Replace
