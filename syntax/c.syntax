@@ -106,12 +106,11 @@ context linestart # \n brightred/18
 context " " green/6
     spellcheck
     keyword \\" brightgreen/16
-    keyword \\\n brightgreen/16
     keyword %% brightgreen/16
     keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} brightgreen/16
     keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diu\} brightgreen/16
     keyword %\[hl\]n brightgreen/16
-    keyword %\[.\]\[0123456789\*\]s brightgreen/16
+    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s brightgreen/16
     keyword %[*] brightgreen/16
     keyword %c brightgreen/16
     keyword %p brightgreen/16
