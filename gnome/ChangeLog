@@ -1,5 +1,8 @@
 1999-03-19  Jonathan Blandford  <jrb@redhat.com>
 
+	* gdialogs.c (file_progress_show_bytes): bug fix proposed by Max
+	Weninger <max@takefive.co.at>
+
 	* gcmd.c (dentry_apply_callback): new function.
 	(gnome_new_launcher): We can now create new 
 

@@ -281,7 +281,7 @@ file_progress_show_bytes (FileOpContext *ctx, double done, double total)
         double perc;
 
         g_return_val_if_fail (ctx != NULL, FILE_CONT);
-
+        g_return_val_if_fail (total > 0, FILE_CONT);
         /* ctx->ui might be NULL for background processes */
         if (ctx->ui == NULL)
                 return FILE_CONT;
