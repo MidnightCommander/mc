@@ -454,26 +454,75 @@ mc_open (const char *filename, int flags, ...)
     return vfs_new_handle (vfs, info);
 }
 
-#define MC_OP(name, inarg, callarg, pre, post) \
-        int mc_##name inarg \
-	{ \
-	struct vfs_class *vfs; \
-	int result; \
-	\
-	pre \
-	result = vfs->name ? (*vfs->name)callarg : -1; \
-        post \
-	if (result == -1) \
-	    errno = vfs->name ? ferrno (vfs) : E_NOTSUPP; \
-	return result; \
-	}
 
 #define MC_NAMEOP(name, inarg, callarg) \
-  MC_OP (name, inarg, callarg, path = vfs_canon (path); vfs = vfs_get_class (path);, g_free (path); )
+int mc_##name inarg \
+{ \
+    struct vfs_class *vfs; \
+    int result; \
+    path = vfs_canon (path); \
+    vfs = vfs_get_class (path); \
+    result = vfs->name ? (*vfs->name)callarg : -1; \
+    g_free (path); \
+    if (result == -1) \
+	errno = vfs->name ? ferrno (vfs) : E_NOTSUPP; \
+    return result; \
+}
+
+MC_NAMEOP (chmod, (char *path, int mode), (vfs, path, mode))
+MC_NAMEOP (chown, (char *path, int owner, int group), (vfs, path, owner, group))
+MC_NAMEOP (utime, (char *path, struct utimbuf *times), (vfs, path, times))
+MC_NAMEOP (readlink, (char *path, char *buf, int bufsiz), (vfs, path, buf, bufsiz))
+MC_NAMEOP (unlink, (char *path), (vfs, path))
+MC_NAMEOP (symlink, (char *name1, char *path), (vfs, name1, path))
+MC_NAMEOP (mkdir, (char *path, mode_t mode), (vfs, path, mode))
+MC_NAMEOP (rmdir, (char *path), (vfs, path))
+MC_NAMEOP (mknod, (char *path, int mode, int dev), (vfs, path, mode, dev))
+
+
 #define MC_HANDLEOP(name, inarg, callarg) \
-  MC_OP (name, inarg, callarg, if (handle == -1) return -1; vfs = vfs_op (handle);, ;)
+int mc_##name inarg \
+{ \
+    struct vfs_class *vfs; \
+    int result; \
+    if (handle == -1) \
+	return -1; \
+    vfs = vfs_op (handle); \
+    result = vfs->name ? (*vfs->name)callarg : -1; \
+    if (result == -1) \
+	errno = vfs->name ? ferrno (vfs) : E_NOTSUPP; \
+    return result; \
+}
 
 MC_HANDLEOP(read, (int handle, char *buffer, int count), (vfs_info (handle), buffer, count) )
+MC_HANDLEOP (write, (int handle, char *buf, int nbyte), (vfs_info (handle), buf, nbyte))
+
+
+#define MC_RENAMEOP(name) \
+int mc_##name (const char *fname1, const char *fname2) \
+{ \
+    struct vfs_class *vfs; \
+    int result; \
+    char *name2, *name1 = vfs_canon (fname1); \
+    vfs = vfs_get_class (name1); \
+    name2 = vfs_canon (fname2); \
+    if (vfs != vfs_get_class (name2)){ \
+    	errno = EXDEV; \
+    	g_free (name1); \
+    	g_free (name2); \
+	return -1; \
+    } \
+    result = vfs->name ? (*vfs->name)(vfs, name1, name2) : -1; \
+    g_free (name1); \
+    g_free (name2); \
+    if (result == -1) \
+        errno = vfs->name ? ferrno (vfs) : E_NOTSUPP; \
+    return result; \
+}
+
+MC_RENAMEOP (link)
+MC_RENAMEOP (rename)
+
 
 int
 mc_ctl (int handle, int ctlop, void *arg)
@@ -678,42 +727,6 @@ vfs_get_current_dir (void)
 {
     return current_dir;
 }
-
-MC_NAMEOP (chmod, (char *path, int mode), (vfs, path, mode))
-MC_NAMEOP (chown, (char *path, int owner, int group), (vfs, path, owner, group))
-MC_NAMEOP (utime, (char *path, struct utimbuf *times), (vfs, path, times))
-MC_NAMEOP (readlink, (char *path, char *buf, int bufsiz), (vfs, path, buf, bufsiz))
-MC_NAMEOP (unlink, (char *path), (vfs, path))
-MC_NAMEOP (symlink, (char *name1, char *path), (vfs, name1, path))
-
-#define MC_RENAMEOP(name) \
-int mc_##name (const char *fname1, const char *fname2) \
-{ \
-    struct vfs_class *vfs; \
-    int result; \
-\
-    char *name2, *name1 = vfs_canon (fname1); \
-    vfs = vfs_get_class (name1); \
-    name2 = vfs_canon (fname2); \
-    if (vfs != vfs_get_class (name2)){ \
-    	errno = EXDEV; \
-    	g_free (name1); \
-    	g_free (name2); \
-	return -1; \
-    } \
-\
-    result = vfs->name ? (*vfs->name)(vfs, name1, name2) : -1; \
-    g_free (name1); \
-    g_free (name2); \
-    if (result == -1) \
-        errno = vfs->name ? ferrno (vfs) : E_NOTSUPP; \
-    return result; \
-}
-
-MC_RENAMEOP (link)
-MC_RENAMEOP (rename)
-
-MC_HANDLEOP (write, (int handle, char *buf, int nbyte), (vfs_info (handle), buf, nbyte))
 
 off_t mc_lseek (int fd, off_t offset, int whence)
 {
@@ -986,10 +999,6 @@ vfs_file_class_flags (const char *filename)
     g_free (fname);
     return vfs->flags;
 }
-
-MC_NAMEOP (mkdir, (char *path, mode_t mode), (vfs, path, mode))
-MC_NAMEOP (rmdir, (char *path), (vfs, path))
-MC_NAMEOP (mknod, (char *path, int mode, int dev), (vfs, path, mode, dev))
 
 #ifdef HAVE_MMAP
 static struct mc_mmapping {
