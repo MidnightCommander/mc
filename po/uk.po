@@ -167,7 +167,7 @@ msgstr "Введ╕ть назву."
 
 #: gnome/gcmd.c:401
 msgid "Enter label for command:"
-msgstr ""
+msgstr "Введ╕ть м╕тку для команди:"
 
 #: gnome/gcmd.c:506
 msgid "Find all core files"
@@ -357,11 +357,11 @@ msgstr ""
 
 #: gnome/gdesktop.c:1181
 msgid "While running the mount/umount command"
-msgstr ""
+msgstr "При виконанн╕ команди mount/umount"
 
 #: gnome/gdesktop.c:1250
 msgid "While running the eject command"
-msgstr ""
+msgstr "При виконанн╕ команди eject"
 
 #: gnome/gdesktop.c:1434 gnome/gicon.c:218 gnome/gtools.c:46
 msgid "Error"
@@ -469,7 +469,7 @@ msgstr "Автоматичне розм╕щення п╕ктограм"
 
 #: gnome/gdesktop-prefs.c:262
 msgid "Snap icons to grid"
-msgstr ""
+msgstr "При╓днувати п╕ктограми до с╕тки"
 
 #: gnome/gdesktop-prefs.c:277
 msgid "Use shaped icons"
@@ -490,25 +490,27 @@ msgstr "Домашн╕й каталог"
 
 #: gnome/gdialogs.c:60
 msgid "To: "
-msgstr ""
+msgstr "В: "
 
 #: gnome/gdialogs.c:61
 msgid "Copying from: "
-msgstr ""
+msgstr "Коп╕ювання з: "
 
 #: gnome/gdialogs.c:62
 msgid "Deleting file: "
-msgstr ""
+msgstr "Видалення файлу: "
 
 #: gnome/gdialogs.c:371
 msgid "Files Exist"
-msgstr ""
+msgstr "Файли ╕снують"
 
 #: gnome/gdialogs.c:386
 msgid ""
 "Some of the files you are trying to copy already exist in the destination "
 "folder.  Please select the action to be performed."
 msgstr ""
+"Деяк╕ файли, що ви пробу╓те скоп╕ювати вже ╕снують у фолдер╕ призначення. "
+"Будь ласка, вибер╕ть одну ╕з запропонованих д╕й."
 
 #: gnome/gdialogs.c:399
 msgid "Prompt me before overwriting any file."
@@ -520,15 +522,15 @@ msgstr "Не зам╕щати н╕яких файл╕в."
 
 #: gnome/gdialogs.c:422
 msgid "Overwrite:"
-msgstr ""
+msgstr "Зам╕стити:"
 
 #: gnome/gdialogs.c:429
 msgid "Older files."
-msgstr ""
+msgstr "Стар╕ файли."
 
 #: gnome/gdialogs.c:435
 msgid "Files only if size differs."
-msgstr ""
+msgstr "Фали, що в╕др╕зняють довжиною."
 
 #: gnome/gdialogs.c:441
 msgid "All files."
@@ -619,7 +621,7 @@ msgstr " Видалити: "
 
 #: gnome/gdialogs.c:794
 msgid "Do the same for the rest"
-msgstr ""
+msgstr "Робити те ж саме для ╕нших"
 
 #: gnome/gdialogs.c:877
 msgid "Move Progress"
@@ -698,35 +700,35 @@ msgstr ""
 
 #: gnome/glayout.c:41
 msgid "_Icon View"
-msgstr ""
+msgstr "П╕ктограми"
 
 #: gnome/glayout.c:42 gnome/glayout.c:58
 msgid "Switch view to an icon display"
-msgstr ""
+msgstr "Показ п╕ктограм"
 
 #: gnome/glayout.c:44
 msgid "_Brief View"
-msgstr ""
+msgstr "Коротко"
 
 #: gnome/glayout.c:45 gnome/glayout.c:61
 msgid "Switch view to show just file name and type"
-msgstr ""
+msgstr "Показ лише назви та тип╕в файл╕в"
 
 #: gnome/glayout.c:47
 msgid "_Detailed View"
-msgstr ""
+msgstr "Детально"
 
 #: gnome/glayout.c:48 gnome/glayout.c:64
 msgid "Switch view to show detailed file statistics"
-msgstr ""
+msgstr "Показ детально╖ файлово╖ статистики"
 
 #: gnome/glayout.c:50
 msgid "_Custom View"
-msgstr ""
+msgstr "Нетипово"
 
 #: gnome/glayout.c:51 gnome/glayout.c:67
 msgid "Switch view to show user-defined statistics"
-msgstr ""
+msgstr "Показ визначено╖ користувачем статистики"
 
 #: gnome/glayout.c:57
 msgid "Icons"
@@ -772,16 +774,16 @@ msgstr "Файл..."
 
 #: gnome/glayout.c:368
 msgid "Creates a new file in this directory"
-msgstr ""
+msgstr "Створини новий файл в цьому каталоз╕"
 
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
 #: gnome/glayout.c:389 gnome/gscreen.c:2085
 msgid "_Copy..."
-msgstr ""
+msgstr "Коп╕ювати..."
 
 #: gnome/glayout.c:389
 msgid "Copy files"
-msgstr ""
+msgstr "Коп╕ювати файли"
 
 #: gnome/glayout.c:390 gnome/gscreen.c:2086
 msgid "_Delete..."
@@ -793,11 +795,11 @@ msgstr "Видалити файли"
 
 #: gnome/glayout.c:391 gnome/gscreen.c:2087
 msgid "_Move..."
-msgstr "_Перенести..."
+msgstr "_Перем╕стити..."
 
 #: gnome/glayout.c:391
 msgid "Rename or move files"
-msgstr "Перейменувати чи перенести файли"
+msgstr "Перейменувати чи перем╕стити файли"
 
 #: gnome/glayout.c:393
 msgid "Show directory sizes"
@@ -817,27 +819,27 @@ msgstr "Закрива╓ це в╕кно"
 
 #: gnome/glayout.c:402
 msgid "Select _All"
-msgstr ""
+msgstr "Вибрати все"
 
 #: gnome/glayout.c:402
 msgid "Select all files in the current Panel"
-msgstr ""
+msgstr "Вибрати вс╕ файли в поточн╕й панел╕"
 
 #: gnome/glayout.c:404
 msgid "_Select Files..."
-msgstr ""
+msgstr "Вибрати файли..."
 
 #: gnome/glayout.c:404
 msgid "Select a group of files"
-msgstr ""
+msgstr "Вибрати групу файл╕в"
 
 #: gnome/glayout.c:405
 msgid "_Invert Selection"
-msgstr ""
+msgstr "╤нвертувати виб╕р"
 
 #: gnome/glayout.c:405
 msgid "Reverses the list of tagged files"
-msgstr ""
+msgstr "╤нвертувати виб╕р файл╕в"
 
 #: gnome/glayout.c:408 gtkedit/editwidget.c:1099 src/view.c:2083
 msgid "Search"
@@ -845,7 +847,7 @@ msgstr "Пошук"
 
 #: gnome/glayout.c:408
 msgid "Search for a file in the current Panel"
-msgstr ""
+msgstr "Шувати файл в поточн╕й панел╕"
 
 #: gnome/glayout.c:411 gnome/gscreen.c:1415
 msgid "_Rescan Directory"
@@ -890,35 +892,35 @@ msgstr ""
 
 #: gnome/glayout.c:434
 msgid "_Run Command..."
-msgstr ""
+msgstr "Виконати команду"
 
 #: gnome/glayout.c:434
 msgid "Runs a command"
-msgstr ""
+msgstr "Виконати команду"
 
 #: gnome/glayout.c:436
 msgid "_Run Command in panel..."
-msgstr ""
+msgstr "Виконати команду в панел╕..."
 
 #: gnome/glayout.c:436
 msgid "Run a command and put the results in a panel"
-msgstr ""
+msgstr "Виконати команду ╕ розм╕стити результат в панел╕"
 
 #: gnome/glayout.c:446
 msgid "_Background jobs..."
-msgstr ""
+msgstr "Завдання на тл╕..."
 
 #: gnome/glayout.c:446
 msgid "List of background operations"
-msgstr ""
+msgstr "Список операц╕й на тл╕"
 
 #: gnome/glayout.c:449
 msgid "Exit"
-msgstr ""
+msgstr "Вийти"
 
 #: gnome/glayout.c:449
 msgid "Terminates the file manager and the desktop"
-msgstr ""
+msgstr "Завершити роботу файлового менеджера ╕ робочого столу"
 
 #: gnome/glayout.c:473 gnome/glayout.c:484
 msgid "_Settings"
@@ -934,7 +936,7 @@ msgstr "Команди"
 
 #: gnome/glayout.c:476
 msgid "_Desktop"
-msgstr ""
+msgstr "Робочий ст╕л"
 
 #: gnome/glayout.c:477 gnome/glayout.c:487
 msgid "_Help"
@@ -979,7 +981,7 @@ msgstr "Диск %d"
 #: gnome/gmount.c:469
 #, c-format
 msgid "NFS dir %s"
-msgstr ""
+msgstr "NFS-каталог %s"
 
 #: gnome/gmount.c:473
 #, c-format
@@ -1253,11 +1255,11 @@ msgstr "Запустити програму"
 
 #: gnome/gpopup2.c:197
 msgid "Mount device"
-msgstr ""
+msgstr "Змонтувати пристр╕й"
 
 #: gnome/gpopup2.c:198
 msgid "Unmount device"
-msgstr ""
+msgstr "Демонтувати пристр╕й"
 
 #: gnome/gpopup2.c:199
 msgid "Eject device"
@@ -1302,11 +1304,11 @@ msgstr "Властивост╕..."
 
 #: gnome/gprefs.c:92
 msgid "Show backup files"
-msgstr ""
+msgstr "Показати резервн╕ коп╕╖"
 
 #: gnome/gprefs.c:96
 msgid "Show hidden files"
-msgstr ""
+msgstr "Показати прихован╕ файли"
 
 #: gnome/gprefs.c:100
 msgid "Mix files and directories"
@@ -1342,7 +1344,7 @@ msgstr "Секунд"
 
 #: gnome/gprefs.c:138
 msgid "Anonymous FTP password:"
-msgstr ""
+msgstr "Пароль для анон╕много FTP:"
 
 #: gnome/gprefs.c:142
 msgid "Always use FTP proxy"
@@ -1354,7 +1356,7 @@ msgstr "Швидке перевантаження каталогу"
 
 #: gnome/gprefs.c:155
 msgid "Compute totals before copying files"
-msgstr ""
+msgstr "Порахувати загальний розм╕р перед коп╕юванням"
 
 #: gnome/gprefs.c:159
 msgid "FTP directory cache timeout :"
@@ -1390,7 +1392,7 @@ msgstr ""
 
 #: gnome/gprop.c:67
 msgid "Full name: "
-msgstr ""
+msgstr "Повна назва: "
 
 #: gnome/gprop.c:109 src/panelize.c:205
 msgid "Command"
@@ -1599,7 +1601,7 @@ msgstr "гаразд"
 
 #: gnome/gwidget.c:97
 msgid "cancel"
-msgstr "видм╕на"
+msgstr "в╕дм╕на"
 
 #: gnome/gwidget.c:99
 msgid "help"
@@ -1615,7 +1617,7 @@ msgstr "н╕"
 
 #: gnome/gwidget.c:105
 msgid "exit"
-msgstr ""
+msgstr "вих╕д"
 
 #: gnome/gwidget.c:107
 msgid "abort"
@@ -1683,6 +1685,8 @@ msgid ""
 " \n"
 " Increase edit.h:MAXBUF and recompile the editor. "
 msgstr ""
+" \n"
+" Зб╕льш╕ть значення edit.h:MAXBUF та перекомп╕люйте редактор. "
 
 #: gtkedit/edit.c:311 gtkedit/edit.c:347
 msgid " Error allocating memory "
@@ -1908,7 +1912,7 @@ msgstr "Врахування ре&г╕стру"
 
 #: gtkedit/editcmd.c:1237
 msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr ""
+msgstr " Введ╕ть порядок аргумент╕в зам╕ни, напр. 3,2,1,4 "
 
 #: gtkedit/editcmd.c:1241
 msgid " Enter replacement string:"
@@ -3205,16 +3209,16 @@ msgstr ""
 
 #: src/chown.c:126
 msgid " User name "
-msgstr ""
+msgstr " Назва користувача "
 
 #: src/chown.c:192
 msgid "<Unknown user>"
-msgstr ""
+msgstr "<Нев╕домий користувач>"
 
 #. add fields for unknown names (numbers)
 #: src/chown.c:193
 msgid "<Unknown group>"
-msgstr ""
+msgstr "<Нев╕дома група>"
 
 #: src/chown.c:261
 msgid " I can't run the Chown command on an extfs "
@@ -3339,7 +3343,7 @@ msgstr ""
 
 #: src/cmd.c:883
 msgid " The command history is empty "
-msgstr ""
+msgstr " ╤стор╕я команд порожня "
 
 #: src/cmd.c:889
 msgid " Command history "
@@ -3361,10 +3365,12 @@ msgid ""
 " Couldn't stat %s \n"
 " %s "
 msgstr ""
+" Неможливо отримати властивост╕ %s \n"
+" %s "
 
 #: src/cmd.c:1034 src/cmd.c:1036
 msgid " Link "
-msgstr ""
+msgstr " Посилання "
 
 #: src/cmd.c:1035 src/cmd.c:1174 src/file.c:1704
 msgid " to:"
@@ -3817,6 +3823,8 @@ msgid ""
 " Cannot stat file \"%s\" \n"
 " %s "
 msgstr ""
+" Неможливо отримати властивост╕ файлу \"%s\" \n"
+" %s "
 
 #: src/file.c:1122
 #, c-format
@@ -4365,7 +4373,7 @@ msgstr " Каталог "
 #. This one holds the displayed pathname
 #: src/hotlist.c:642 src/hotlist.c:689
 msgid " Directory label "
-msgstr " Позначка каталогу "
+msgstr " М╕тка каталогу "
 
 #: src/hotlist.c:663
 msgid "Moving "
@@ -4377,7 +4385,7 @@ msgstr "Новий елемент"
 
 #: src/hotlist.c:892
 msgid "Directory label"
-msgstr "Позначка каталогу"
+msgstr "М╕тка каталогу"
 
 #: src/hotlist.c:892
 msgid "Directory path"
@@ -4394,7 +4402,7 @@ msgstr "Назва ново╖ групи"
 #: src/hotlist.c:988
 #, c-format
 msgid "Label for \"%s\":"
-msgstr "Позначка до \"%s\":"
+msgstr "М╕тка до \"%s\":"
 
 #: src/hotlist.c:992
 msgid " Add to hotlist "
@@ -5517,13 +5525,13 @@ msgstr ""
 
 #: src/user.c:622
 msgid " I can't run programs while logged on a non local directory "
-msgstr ""
+msgstr " Неможливо виконувати програми, знаходячись не в локальному каталоз╕ "
 
 #. FIXME: this message is not quite right
 #: src/user.c:720
 #, c-format
 msgid " Empty file %s "
-msgstr ""
+msgstr " Порожн╕й файл %s "
 
 #. Create listbox
 #: src/user.c:730
@@ -5954,7 +5962,7 @@ msgstr ""
 
 #: vfs/fish.c:238
 msgid "fish: Sending password..."
-msgstr ""
+msgstr "fish: В╕дсилання паролю..."
 
 #: vfs/fish.c:244
 msgid "fish: Sending initial line..."
