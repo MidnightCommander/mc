@@ -1,3 +1,65 @@
+Before 4.6.0-pre2
+=================
+
+reimplement "-P" in a safer way (temp file instead of stdout) - possibly
+security issues.
+
+Make xnc.hlp a text file.  Make it easier to translate the manual.
+
+Consider applying a patch from PLD to make M-o propagate the current
+directory to the other panel.
+
+
+Before 4.6.0
+============
+
+Hard links in cpio have 0 length (if easy to fix).
+
+Pressing F8 twice in the viewer causes error messages if the file was
+preprocessed (i.e. gzipped files, manpages).
+
+Add "Ignore" and "Ignore all" buttons when reporting permission
+problems.
+
+ftp and fish with home != '/' - readjust directory to the home.
+
+Better date parser - support files beginning with "2000 ".
+
+Report errors in fish operations and recover from them.
+
+SMB crash when not starting with the share root, but copying to the
+share root.
+
+Mouse doesn't work with ncurses on xterm and rxvt on some systems.
+
+MC + ncurses + FreeBSD 4.6.2 doesn't recognize cursor keys.
+
+Scan more packages for patches, check Red Hat and Ximian Bugzilla.
+
+
+After 4.6.0
+===========
+
+Consistent support for mc.lib.
+
+Consistent support for per-terminal settings.
+
+New syntax for mc.ext - path check, desktop environment check.
+
+
+In the 4.7 branch
+=================
+
+Internal terminal - no more console saving.
+
+
+========================================================================
+Everything below this point is the old TODO list.  It doesn't reflect
+the current priorities of the developers, but may contain interesting
+ideas still waiting for their implementation.
+========================================================================
+
+
 * Bugs
 
   - "Files" message flickers a lot when copying files.
