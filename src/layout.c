@@ -611,14 +611,15 @@ void init_curses (void)
 }
 #endif /* ! HAVE_SLANG */
 
-void done_screen ()                                                      
-{                                                                               
-    if (!(quit & SUBSHELL_EXIT))                                                
-	clr_scr ();                                                             
-    reset_shell_mode ();                                                        
-    mc_noraw_mode ();                                                           
-    keypad (stdscr, FALSE);                                                     
-}                                                                               
+void
+done_screen ()
+{
+    if (!(quit & SUBSHELL_EXIT))
+	clr_scr ();
+    reset_shell_mode ();
+    mc_noraw_mode ();
+    keypad (stdscr, FALSE);
+}
 
 static void
 panel_do_cols (int index)
