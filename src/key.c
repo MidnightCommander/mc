@@ -245,6 +245,8 @@ static key_define_t xterm_key_defines [] = {
     { KEY_M_CTRL  | KEY_DOWN,  ESC_STR "[1;5B", MCKEY_NOACTION },
     { KEY_M_CTRL  | KEY_RIGHT, ESC_STR "[1;5C", MCKEY_NOACTION },
     { KEY_M_CTRL  | KEY_LEFT,  ESC_STR "[1;5D", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_IC,    ESC_STR "[2;2~", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_DC,    ESC_STR "[3;2~", MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_UP,    ESC_STR "[1;6A", MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_DOWN,  ESC_STR "[1;6B", MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_RIGHT, ESC_STR "[1;6C", MCKEY_NOACTION },
@@ -272,7 +274,6 @@ static key_define_t xterm_key_defines [] = {
     /* konsole keys with modifiers */
     { KEY_M_SHIFT | KEY_HOME,  ESC_STR "O2H",   MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_END,   ESC_STR "O2F",   MCKEY_NOACTION },
-    { KEY_M_SHIFT | KEY_DC,    ESC_STR "[3;2~", MCKEY_NOACTION },
 
     /* gnome-terminal */
     { KEY_M_SHIFT | KEY_UP,    ESC_STR "[2A",  MCKEY_NOACTION },
