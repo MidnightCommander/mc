@@ -5,5 +5,6 @@ extern WInput *cmdline;
 
 WInput *command_new (int y, int x, int len);
 void do_cd_command (char *cmd);
+void command_insert (WInput * in, char *text, int insert_extra_space);
 
 #endif /* __COMMAND_H */

@@ -1254,9 +1254,9 @@ static void copy_current_pathname (void)
     if (!command_prompt)
 	return;
 
-    stuff (cmdline, cpanel->cwd, 0);
+    command_insert (cmdline, cpanel->cwd, 0);
     if (cpanel->cwd [strlen (cpanel->cwd) - 1] != PATH_SEP)
-        stuff (cmdline, PATH_SEP_STR, 0);
+        command_insert (cmdline, PATH_SEP_STR, 0);
 }
 
 static void copy_other_pathname (void)
@@ -1267,9 +1267,9 @@ static void copy_other_pathname (void)
     if (!command_prompt)
 	return;
 
-    stuff (cmdline, opanel->cwd, 0);
+    command_insert (cmdline, opanel->cwd, 0);
     if (cpanel->cwd [strlen (opanel->cwd) - 1] != PATH_SEP)
-        stuff (cmdline, PATH_SEP_STR, 0);
+        command_insert (cmdline, PATH_SEP_STR, 0);
 }
 
 static void copy_readlink (WPanel *panel)
@@ -1285,7 +1285,7 @@ static void copy_readlink (WPanel *panel)
 	g_free (p);
 	if (i > 0) {
 	    buffer [i] = 0;
-	    stuff (cmdline, buffer, 0);
+	    command_insert (cmdline, buffer, 1);
 	}
     }
 }
@@ -1312,31 +1312,29 @@ void copy_prog_name (void)
 
     if (get_current_type () == view_tree){
 	WTree *tree = (WTree *) get_panel_widget (get_current_index ());
-	tmp = name_quote (tree->selected_ptr->name, 1);
+	tmp = tree->selected_ptr->name;
     } else
-	tmp = name_quote (selection (cpanel)->fname, 1);
-    stuff (cmdline, tmp, 1);
-    g_free (tmp);
+	tmp = selection (cpanel)->fname;
+
+    command_insert (cmdline, tmp, 1);
 }   
 
-static void copy_tagged (WPanel *panel)
+static void
+copy_tagged (WPanel * panel)
 {
     int i;
 
     if (!command_prompt)
 	return;
     input_disable_update (cmdline);
-    if (panel->marked){
-	for (i = 0; i < panel->count; i++)
-	    if (panel->dir.list [i].f.marked) {
-	    	char *tmp = name_quote (panel->dir.list [i].fname, 1);
-		stuff (cmdline, tmp, 1);
-		g_free (tmp);
-	    }
+    if (panel->marked) {
+	for (i = 0; i < panel->count; i++) {
+	    if (panel->dir.list[i].f.marked)
+		command_insert (cmdline, panel->dir.list[i].fname, 1);
+	}
     } else {
-    	char *tmp = name_quote (panel->dir.list [panel->selected].fname, 1);
-	stuff (cmdline, tmp, 1);
-	g_free (tmp);
+	command_insert (cmdline, panel->dir.list[panel->selected].fname,
+			1);
     }
     input_enable_update (cmdline);
 }

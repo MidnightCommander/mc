@@ -272,3 +272,17 @@ command_new (int y, int x, int cols)
     return cmd;
 }
 
+/*
+ * Insert quoted text in input line.  The function is meant for the
+ * command line, so the percent sign is quoted as well.
+ */
+void
+command_insert (WInput * in, char *text, int insert_extra_space)
+{
+    char *quoted_text;
+
+    quoted_text = name_quote (text, 1);
+    stuff (in, quoted_text, insert_extra_space);
+    g_free (quoted_text);
+}
+

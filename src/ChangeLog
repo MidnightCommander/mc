@@ -1,5 +1,11 @@
 2002-09-20  Pavel Roskin  <proski@gnu.org>
 
+	* command.c: (command_insert): New function - insert quoted
+	text into the command line.
+	* main.c: Use command_insert() instead of stuff().  This ensures
+	that the names in the command line are quoted.
+	Reported by Arpad Biro <biro_arpad@yahoo.com>
+
 	* command.c: Make `command' a standard WInput widget, just
 	change its callback.  Eliminate input_w().  Adjust all
 	dependencies.
