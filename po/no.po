@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
-"POT-Creation-Date: 2001-05-22 16:26+0200\n"
-"PO-Revision-Date: 2001-05-22 16:28+02:00\n"
+"POT-Creation-Date: 2001-05-29 11:41+0200\n"
+"PO-Revision-Date: 2001-05-29 11:44+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -63,13 +63,13 @@ msgstr ""
 msgid ""
 "\".\n"
 "\n"
-"To fix this error, bring up this file's properties and change the default "
-"%s-action."
+"To fix this error, bring up this file's properties and change the default %s-"
+"action."
 msgstr ""
 "\".\n"
 "\n"
-"For å ordne denne feilen, hent opp filens egenskaper og endre standard "
-"%s-handling"
+"For å ordne denne feilen, hent opp filens egenskaper og endre standard %s-"
+"handling"
 
 #: gnome/gaction.c:51
 #, c-format
@@ -668,7 +668,7 @@ msgstr "ferdig."
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
-#: gnome/gdialogs.c:1007 src/wtools.c:581 vfs/vfs.c:1817
+#: gnome/gdialogs.c:1007 src/wtools.c:581 vfs/vfs.c:1819
 msgid "Password:"
 msgstr "Passord:"
 
@@ -893,16 +893,16 @@ msgid "_Sort By..."
 msgstr "_Sorter etter..."
 
 #: gnome/glayout.c:424
-msgid "Confirmation settings"
-msgstr "Innstillinger for bekreftelse"
+msgid "Filename sort order"
+msgstr "Sorteringsrekkefølge for filnavn"
 
 #: gnome/glayout.c:425
 msgid "_Filter View..."
 msgstr "_Filtrert visning..."
 
 #: gnome/glayout.c:425
-msgid "Global option settings"
-msgstr "Innstillinger for globale alternativer"
+msgid "Filename filtering settings"
+msgstr "Innstillinger for filtering av filnavn"
 
 #: gnome/glayout.c:432
 msgid "_Find File..."
@@ -977,17 +977,23 @@ msgstr "_Hjelp"
 msgid "File/New/Directory..."
 msgstr "Fil/Ny/Katalog..."
 
-#: gnome/gmain.c:563
+#: gnome/gmain.c:564
+msgid "Don't show this window again"
+msgstr "Ikke vis dette vinduet igjen"
+
+#: gnome/gmain.c:566
 msgid ""
 "You are running the GNOME File Manager as root.\n"
 "\n"
-"As root, you can damage your system if you are not careful, and the GNOME "
-"File Manager will not stop you from doing it."
+"As root, you can damage your system, and the File Manager will not stop "
+"you.\n"
+"Your manual explains how to add a non-privileged user account to the "
+"system.\n"
 msgstr ""
 "Du kjører GNOME filbehandleren som root.\n"
 "\n"
-"Som root kan du påføre systemet ditt stor skade hvis du ikke er forsiktig, "
-"og GNOME filbehandleren vil ikke hindre deg i å gjøre dette."
+"Du kan påføre systemet ditt skade som root, og filbehandleren vil ikke hindre deg.\n"
+"Brukermanualen for ditt system forklarer hvordan du kan legge til ikke-priviligerte brukere på systemet.\n"
 
 #: gnome/gmc-window.c:69
 msgid "Copyright (C) 1998 The Free Software Foundation"
@@ -1577,12 +1583,12 @@ msgid "Location:"
 msgstr "Plassering:"
 
 #. 1
-#: gnome/gtools.c:105 gtkedit/editcmd.c:393 gtkedit/editcmd.c:1243
-#: gtkedit/editcmd.c:1328 gtkedit/editcmd.c:3025 gtkedit/editoptions.c:69
-#: src/boxes.c:138 src/boxes.c:276 src/boxes.c:376 src/boxes.c:466
-#: src/boxes.c:645 src/boxes.c:880 src/filegui.c:824 src/find.c:175
-#: src/layout.c:375 src/option.c:143 src/wtools.c:290 src/wtools.c:557
-#: vfs/smbfs.c:112
+#: gnome/gtools.c:105 gtkedit/edit.h:502 gtkedit/editcmd.c:393
+#: gtkedit/editcmd.c:1243 gtkedit/editcmd.c:1328 gtkedit/editcmd.c:3025
+#: gtkedit/editmenu.c:44 gtkedit/editoptions.c:69 src/boxes.c:138
+#: src/boxes.c:276 src/boxes.c:376 src/boxes.c:466 src/boxes.c:645
+#: src/boxes.c:880 src/filegui.c:824 src/find.c:175 src/layout.c:375
+#: src/option.c:143 src/wtools.c:290 src/wtools.c:557 vfs/smbfs.c:112
 msgid "&Ok"
 msgstr "&Ok"
 
@@ -1776,7 +1782,11 @@ msgstr "Brukermenyen er kun tilgjengelig i mcedit hvis startet fra mc"
 msgid "Error trying to stat file:"
 msgstr "Feil under kjøring av stat på fil:"
 
-#: gtkedit/editcmd.c:168 src/cmd.c:1206 src/dlg.c:647 src/tree.c:654
+#: gtkedit/edit.h:501 gtkedit/gtkedit.c:67
+msgid "&Dismiss"
+msgstr "Forkast"
+
+#: gtkedit/editcmd.c:168 src/cmd.c:1201 src/dlg.c:647 src/tree.c:654
 #: src/view.c:1810
 msgid "mc.hlp"
 msgstr "mc.hlp"
@@ -1828,7 +1838,7 @@ msgstr " Lagre som "
 #. Warning message with a query to continue or cancel the operation
 #: gtkedit/editcmd.c:541 gtkedit/editcmd.c:865 gtkedit/editcmd.c:890
 #: gtkedit/editcmd.c:1041 gtkedit/editcmd.c:1139 src/ext.c:310 src/file.c:619
-#: src/help.c:314 src/main.c:715 src/screen.c:1441 src/screen.c:2114
+#: src/help.c:314 src/main.c:709 src/screen.c:1441 src/screen.c:2114
 #: src/screen.c:2164 src/subshell.c:741 src/subshell.c:767 src/utilunix.c:382
 #: src/utilunix.c:386 src/utilunix.c:406 src/utilunix.c:457 vfs/mcfs.c:167
 msgid " Warning "
@@ -2193,13 +2203,13 @@ msgid "Cancel quit"
 msgstr "Avbryt avslutt"
 
 #: gtkedit/editcmd.c:2393 src/cmd.c:245 src/file.c:1882 src/file.c:2253
-#: src/filegui.c:590 src/hotlist.c:1016 src/main.c:870 src/screen.c:2151
+#: src/filegui.c:590 src/hotlist.c:1016 src/main.c:864 src/screen.c:2151
 #: src/subshell.c:742 src/subshell.c:768 src/tree.c:747 src/view.c:399
 msgid "&Yes"
 msgstr "&Ja"
 
 #: gtkedit/editcmd.c:2393 src/cmd.c:245 src/file.c:1882 src/file.c:2253
-#: src/filegui.c:589 src/hotlist.c:1016 src/main.c:870 src/screen.c:2151
+#: src/filegui.c:589 src/hotlist.c:1016 src/main.c:864 src/screen.c:2151
 #: src/subshell.c:742 src/subshell.c:768 src/tree.c:747 src/view.c:399
 msgid "&No"
 msgstr "&Nei"
@@ -2518,7 +2528,7 @@ msgstr "Generelt...  "
 msgid "&Save mode..."
 msgstr "Lagringsmodus..."
 
-#: gtkedit/editmenu.c:264 gtkedit/editmenu.c:273 src/main.c:1366
+#: gtkedit/editmenu.c:264 gtkedit/editmenu.c:273 src/main.c:1360
 msgid "&Layout..."
 msgstr "Utseende."
 
@@ -2783,7 +2793,7 @@ msgid "Error initialising editor.\n"
 msgstr "Feil under initialisering av editor.\n"
 
 #: gtkedit/editwidget.c:1137 gtkedit/gtkedit.c:1248 src/help.c:802
-#: src/main.c:1737 src/screen.c:2382 src/screen.c:2412 src/tree.c:1010
+#: src/main.c:1729 src/screen.c:2382 src/screen.c:2412 src/tree.c:1010
 #: src/view.c:2055
 msgid "Help"
 msgstr "Hjelp"
@@ -2796,19 +2806,15 @@ msgstr "Marker"
 msgid "Replac"
 msgstr "Erstatt"
 
-#: gtkedit/editwidget.c:1146 src/main.c:1739
+#: gtkedit/editwidget.c:1146 src/main.c:1731
 msgid "PullDn"
 msgstr "Meny"
 
 #. gtk_edit_menu
 #: gtkedit/editwidget.c:1147 gtkedit/gtkedit.c:1258 src/help.c:814
-#: src/main.c:1740 src/view.c:2057 src/view.c:2079
+#: src/main.c:1732 src/view.c:2057 src/view.c:2079
 msgid "Quit"
 msgstr "Slutt"
-
-#: gtkedit/gtkedit.c:67
-msgid "&Dismiss"
-msgstr "Forkast"
 
 #: gtkedit/gtkedit.c:68
 msgid " Enter file name: "
@@ -2869,7 +2875,7 @@ msgstr "Slett"
 msgid "Delete highlighted text"
 msgstr "Slett markert tekst"
 
-#: gtkedit/gtkedit.c:1257 src/main.c:1738 src/screen.c:2383 src/screen.c:2413
+#: gtkedit/gtkedit.c:1257 src/main.c:1730 src/screen.c:2383 src/screen.c:2413
 msgid "Menu"
 msgstr "Meny"
 
@@ -2948,11 +2954,11 @@ msgstr ""
 " Feil under lesing fra ispell. \n"
 " Ispell startes på nytt. "
 
-#: gtkedit/syntax.c:1373 gtkedit/syntax.c:1375
+#: gtkedit/syntax.c:1376 gtkedit/syntax.c:1378
 msgid " Load Syntax Rules "
 msgstr " Les syntaksregler "
 
-#: gtkedit/syntax.c:1373 gtkedit/syntax.c:1375
+#: gtkedit/syntax.c:1376 gtkedit/syntax.c:1378
 msgid ""
 " Your syntax rule file is outdated \n"
 " A new rule file is being installed. \n"
@@ -2962,15 +2968,15 @@ msgstr ""
 " En ny regel blir installert. \n"
 " Din gamle regelfil er lagret med .OLD som etternavn. "
 
-#: gtkedit/syntax.c:1518 gtkedit/syntax.c:1525
+#: gtkedit/syntax.c:1521 gtkedit/syntax.c:1528
 msgid " Load syntax file "
 msgstr " Les syntaksfil "
 
-#: gtkedit/syntax.c:1518
+#: gtkedit/syntax.c:1521
 msgid " File access error "
 msgstr " Tilgangsfeil for fil "
 
-#: gtkedit/syntax.c:1524
+#: gtkedit/syntax.c:1527
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Feil i filen %s ved linje %d "
@@ -3510,11 +3516,11 @@ msgstr ""
 " Ikke en xterm eller Linux konsoll; \n"
 " panelene kan ikke slås av og på. "
 
-#: src/cmd.c:971
+#: src/cmd.c:967
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Skriv `exit' for å gå tilbake til Midnight Commander"
 
-#: src/cmd.c:1027
+#: src/cmd.c:1019
 #, c-format
 msgid ""
 " Couldn't stat %s \n"
@@ -3523,107 +3529,107 @@ msgstr ""
 " Kunne ikke kjøre stat på %s \n"
 " %s "
 
-#: src/cmd.c:1036 src/cmd.c:1038
+#: src/cmd.c:1028 src/cmd.c:1030
 msgid " Link "
 msgstr " Lenke "
 
-#: src/cmd.c:1037 src/cmd.c:1176 src/file.c:1708
+#: src/cmd.c:1029 src/cmd.c:1171 src/file.c:1708
 msgid " to:"
 msgstr " til:"
 
-#: src/cmd.c:1048
+#: src/cmd.c:1040
 #, c-format
 msgid " link: %s "
 msgstr " lenke: %s "
 
-#: src/cmd.c:1081
+#: src/cmd.c:1073
 #, c-format
 msgid " symlink: %s "
 msgstr " symlink: %s "
 
-#: src/cmd.c:1135
+#: src/cmd.c:1130
 #, c-format
 msgid " Symlink `%s' points to: "
 msgstr " Lenken `%s' peker til: "
 
-#: src/cmd.c:1140
+#: src/cmd.c:1135
 msgid " Edit symlink "
 msgstr " Rediger symlink "
 
-#: src/cmd.c:1145
+#: src/cmd.c:1140
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr " rediger symlink, kan ikke fjerne %s: %s "
 
-#: src/cmd.c:1149
+#: src/cmd.c:1144
 #, c-format
 msgid " edit symlink: %s "
 msgstr " rediger symlink: %s "
 
-#: src/cmd.c:1176
+#: src/cmd.c:1171
 msgid " Link symbolically "
 msgstr " Lag symbolsk lenke "
 
-#: src/cmd.c:1177
+#: src/cmd.c:1172
 msgid " Relative symlink "
 msgstr " Relativ symlink "
 
-#: src/cmd.c:1188
+#: src/cmd.c:1183
 #, c-format
 msgid " relative symlink: %s "
 msgstr " relativ symlink: %s "
 
-#: src/cmd.c:1263
+#: src/cmd.c:1258
 msgid "Using default locale"
 msgstr "Bruker standard locale"
 
-#: src/cmd.c:1265
+#: src/cmd.c:1260
 #, c-format
 msgid "Using locale \"%s\" (from environment variable %s)"
 msgstr "Bruker locale \"%s\" (fra miljøvariabelen %s)"
 
-#: src/cmd.c:1351
+#: src/cmd.c:1346
 msgid " Enter machine name (F1 for details): "
 msgstr " Skriv inn maskinnavn (F1 for detaljer): "
 
-#: src/cmd.c:1378
+#: src/cmd.c:1373
 #, c-format
 msgid " Could not chdir to %s "
 msgstr " Kunne ikke skifte katalog til %s "
 
-#: src/cmd.c:1385 src/widget.c:1151
+#: src/cmd.c:1380 src/widget.c:1151
 msgid " Link to a remote machine "
 msgstr " Lenke til en fjern maskin "
 
-#: src/cmd.c:1391 src/widget.c:1152
+#: src/cmd.c:1386 src/widget.c:1152
 msgid " FTP to machine "
 msgstr " FTP til maskin "
 
-#: src/cmd.c:1397 src/widget.c:1153
+#: src/cmd.c:1392 src/widget.c:1153
 msgid " SMB link to machine "
 msgstr " SMB-tilkobling til maskin "
 
-#: src/cmd.c:1407
+#: src/cmd.c:1402
 msgid " Socket source routing setup "
 msgstr " Oppsett av kontaktens kilderuting"
 
-#: src/cmd.c:1408
+#: src/cmd.c:1403
 msgid " Enter host name to use as a source routing hop: "
 msgstr " Skriv inn vertsnavnet som skal brukes som kilderutingshop: "
 
-#: src/cmd.c:1416
+#: src/cmd.c:1411
 msgid " Host name "
 msgstr " Vertsnavn "
 
-#: src/cmd.c:1416
+#: src/cmd.c:1411
 msgid " Error while looking up IP address "
 msgstr " Feil under oppslag av IP-adresse "
 
-#: src/cmd.c:1427
+#: src/cmd.c:1422
 msgid " Undelete files on an ext2 file system "
 msgstr " Gjenopprett filer på et ext2 filsystem "
 
-#: src/cmd.c:1428
+#: src/cmd.c:1423
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -3631,11 +3637,11 @@ msgstr ""
 " Skriv inn enhet (uten /dev/) som det skal gjenopprettes\n"
 "   filer på: (F1 for detaljer)"
 
-#: src/cmd.c:1478
+#: src/cmd.c:1473
 msgid " Setup saved to ~/"
 msgstr " Oppsett lagret til ~/"
 
-#: src/cmd.c:1483
+#: src/cmd.c:1478
 msgid " Setup "
 msgstr " Oppsett "
 
@@ -4275,7 +4281,7 @@ msgstr "%o %f \"%s\"%e"
 msgid "%o %d %f%e"
 msgstr "%o %d %f%e"
 
-#: src/file.c:1707 vfs/fish.c:515
+#: src/file.c:1707 vfs/fish.c:516
 msgid "file"
 msgstr "fil"
 
@@ -4540,7 +4546,7 @@ msgstr "Filnavn:"
 msgid "Content: "
 msgstr "Innhold: "
 
-#: src/find.c:175 src/main.c:1252 src/main.c:1276
+#: src/find.c:175 src/main.c:1246 src/main.c:1270
 msgid "&Tree"
 msgstr "Tre"
 
@@ -4856,6 +4862,7 @@ msgid "File:       %s"
 msgstr "Fil:        %s"
 
 #: src/info.c:117
+#, c-format
 msgid "Free nodes %d (%d%%) of %d"
 msgstr "Ledige noder %d (%d%%) av %d"
 
@@ -4868,6 +4875,7 @@ msgid "Free space "
 msgstr "Ledig plass "
 
 #: src/info.c:130
+#, c-format
 msgid " (%d%%) of "
 msgstr " (%d%%) av "
 
@@ -5093,7 +5101,7 @@ msgstr "hvilke taster som ikke er markert med OK. Trykk mellomrom på manglende"
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "tast, eller klikk med musen for å definere den. Flytt med Tab."
 
-#: src/main.c:716
+#: src/main.c:710
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -5105,148 +5113,148 @@ msgstr ""
 " arbeidskatalogen, eller gitt deg selv ekstra tilgangs- \n"
 " rettigheter med \"su\" kommandoen? "
 
-#: src/main.c:791
+#: src/main.c:785
 msgid "Press any key to continue..."
 msgstr "Trykk en tast for å fortsette..."
 
-#: src/main.c:841
+#: src/main.c:835
 msgid " The shell is already running a command "
 msgstr " Skallet kjører allerede en kommando "
 
-#: src/main.c:868 src/screen.c:2102 src/screen.c:2149
+#: src/main.c:862 src/screen.c:2102 src/screen.c:2149
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
 
-#: src/main.c:869
+#: src/main.c:863
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr " Vil du virkelig avslutte Midnight Commander? "
 
-#: src/main.c:1237
+#: src/main.c:1231
 msgid " Listing format edit "
 msgstr "Redigering av listeformat"
 
-#: src/main.c:1237
+#: src/main.c:1231
 #, c-format
 msgid " New mode is \"%s\" "
 msgstr "Nytt modus er \"%s\" "
 
-#: src/main.c:1249 src/main.c:1273
+#: src/main.c:1243 src/main.c:1267
 msgid "&Listing mode..."
 msgstr "&Listemodus..."
 
-#: src/main.c:1250 src/main.c:1274
+#: src/main.c:1244 src/main.c:1268
 msgid "&Quick view     C-x q"
 msgstr "Rask visning   C-x q"
 
-#: src/main.c:1251 src/main.c:1275
+#: src/main.c:1245 src/main.c:1269
 msgid "&Info           C-x i"
 msgstr "Info           C-x i"
 
-#: src/main.c:1254 src/main.c:1278
+#: src/main.c:1248 src/main.c:1272
 msgid "&Sort order..."
 msgstr "&Sorteringsrekkefølge..."
 
-#: src/main.c:1256 src/main.c:1280
+#: src/main.c:1250 src/main.c:1274
 msgid "&Filter..."
 msgstr "&Filter..."
 
-#: src/main.c:1259 src/main.c:1283
+#: src/main.c:1253 src/main.c:1277
 msgid "&Network link..."
 msgstr "&Nettverkskobling..."
 
-#: src/main.c:1260 src/main.c:1284
+#: src/main.c:1254 src/main.c:1278
 msgid "FT&P link..."
 msgstr "FT&P kobling..."
 
-#: src/main.c:1262 src/main.c:1286
+#: src/main.c:1256 src/main.c:1280
 msgid "SM&B link..."
 msgstr "SM&B-kobling..."
 
-#: src/main.c:1267 src/main.c:1291
+#: src/main.c:1261 src/main.c:1285
 msgid "&Drive...       M-d"
 msgstr "&Disk...        M-d"
 
-#: src/main.c:1269 src/main.c:1293
+#: src/main.c:1263 src/main.c:1287
 msgid "&Rescan         C-r"
 msgstr "Gjenles         C-r"
 
-#: src/main.c:1297
+#: src/main.c:1291
 msgid "&User menu          F2"
 msgstr "Br&ukermeny         F2"
 
-#: src/main.c:1298
+#: src/main.c:1292
 msgid "&View               F3"
 msgstr "&Vis                F3"
 
-#: src/main.c:1299
+#: src/main.c:1293
 msgid "Vie&w file...         "
 msgstr "Vis fil...            "
 
-#: src/main.c:1300
+#: src/main.c:1294
 msgid "&Filtered view     M-!"
 msgstr "&Filtrert visning  M-!"
 
-#: src/main.c:1301
+#: src/main.c:1295
 msgid "&Edit               F4"
 msgstr "R&ediger            F4"
 
-#: src/main.c:1302
+#: src/main.c:1296
 msgid "&Copy               F5"
 msgstr "Kopier             F5"
 
-#: src/main.c:1303
+#: src/main.c:1297
 msgid "c&Hmod           C-x c"
 msgstr "chmod           C-x c"
 
-#: src/main.c:1305
+#: src/main.c:1299
 msgid "&Link            C-x l"
 msgstr "Lenke           C-x l"
 
-#: src/main.c:1306
+#: src/main.c:1300
 msgid "&SymLink         C-x s"
 msgstr "Symlenke        C-x s"
 
-#: src/main.c:1307
+#: src/main.c:1301
 msgid "edit s&Ymlink  C-x C-s"
 msgstr "rediger symlenke C-x C-s"
 
-#: src/main.c:1308
+#: src/main.c:1302
 msgid "ch&Own           C-x o"
 msgstr "chown           C-x o"
 
-#: src/main.c:1309
+#: src/main.c:1303
 msgid "&Advanced chown       "
 msgstr "Avansert chown       "
 
-#: src/main.c:1311
+#: src/main.c:1305
 msgid "&Rename/Move        F6"
 msgstr "Gi nytt navn/flytt F6"
 
-#: src/main.c:1312
+#: src/main.c:1306
 msgid "&Mkdir              F7"
 msgstr "Lag katalog        F7"
 
-#: src/main.c:1313
+#: src/main.c:1307
 msgid "&Delete             F8"
 msgstr "Slett              F8"
 
-#: src/main.c:1314
+#: src/main.c:1308
 msgid "&Quick cd          M-c"
 msgstr "rask cd            M-c"
 
-#: src/main.c:1316
+#: src/main.c:1310
 msgid "select &Group      M-+"
 msgstr "velg gruppe        M-+"
 
-#: src/main.c:1317
+#: src/main.c:1311
 msgid "u&Nselect group    M-\\"
 msgstr "velg bort gruppe   M-\\"
 
-#: src/main.c:1318
+#: src/main.c:1312
 msgid "reverse selec&Tion M-*"
 msgstr "reverser valg      M-*"
 
-#: src/main.c:1320
+#: src/main.c:1314
 msgid "e&Xit              F10"
 msgstr "avslutt            F10"
 
@@ -5254,131 +5262,131 @@ msgstr "avslutt            F10"
 #. * as a panel still has some problems, I have not yet finished
 #. * the WTree widget port, sorry.
 #.
-#: src/main.c:1329
+#: src/main.c:1323
 msgid "&Directory tree"
 msgstr "Katalogtre"
 
-#: src/main.c:1330
+#: src/main.c:1324
 msgid "&Find file            M-?"
 msgstr "Finn fil             M-?"
 
-#: src/main.c:1331
+#: src/main.c:1325
 msgid "s&Wap panels          C-u"
 msgstr "bytt paneler          C-u"
 
-#: src/main.c:1332
+#: src/main.c:1326
 msgid "switch &Panels on/off C-o"
 msgstr "slå paneler på/av     C-o"
 
-#: src/main.c:1333
+#: src/main.c:1327
 msgid "&Compare directories  C-x d"
 msgstr "Sammenlign kataloger C-x d"
 
-#: src/main.c:1334
+#: src/main.c:1328
 msgid "e&Xternal panelize    C-x !"
 msgstr "eksternt panel  C-x !"
 
-#: src/main.c:1335
+#: src/main.c:1329
 msgid "show directory s&Izes"
 msgstr "vis katalogstørrelser"
 
-#: src/main.c:1337
+#: src/main.c:1331
 msgid "command &History"
 msgstr "kommandohistorikk"
 
-#: src/main.c:1338
+#: src/main.c:1332
 msgid "di&Rectory hotlist    C-\\"
 msgstr "kataloghurtigliste    C-\\"
 
-#: src/main.c:1340
+#: src/main.c:1334
 msgid "&Active VFS list      C-x a"
 msgstr "Aktivt VFS liste     C-x a"
 
-#: src/main.c:1341
+#: src/main.c:1335
 msgid "Fr&ee VFSs now"
 msgstr "Frigjør VFS nå"
 
-#: src/main.c:1344
+#: src/main.c:1338
 msgid "&Background jobs      C-x j"
 msgstr "Bakgrunnsjobber      C-x j"
 
-#: src/main.c:1348
+#: src/main.c:1342
 msgid "&Undelete files (ext2fs only)"
 msgstr "Gjenopprett filer (kun ext2fs)"
 
-#: src/main.c:1351
+#: src/main.c:1345
 msgid "&Listing format edit"
 msgstr "Redigering av listeformat"
 
-#: src/main.c:1356
+#: src/main.c:1350
 msgid "&Extension file edit"
 msgstr "Redigering av utvidelsesfil"
 
-#: src/main.c:1357
+#: src/main.c:1351
 msgid "&Menu file edit"
 msgstr "Menyfilredigering"
 
-#: src/main.c:1359
+#: src/main.c:1353
 msgid "Menu edi&Tor edit"
 msgstr "Redigering av menyedi&Tor"
 
-#: src/main.c:1365
+#: src/main.c:1359
 msgid "&Configuration..."
 msgstr "Konfigurasjon..."
 
-#: src/main.c:1367
+#: src/main.c:1361
 msgid "c&Onfirmation..."
 msgstr "bekreftelse..."
 
-#: src/main.c:1368
+#: src/main.c:1362
 msgid "&Display bits..."
 msgstr "Tastaturdefinisjon..."
 
-#: src/main.c:1370
+#: src/main.c:1364
 msgid "learn &Keys..."
 msgstr "lær taster..."
 
-#: src/main.c:1373
+#: src/main.c:1367
 msgid "&Virtual FS..."
 msgstr "Virtuelt FS..."
 
-#: src/main.c:1376
+#: src/main.c:1370
 msgid "&Save setup"
 msgstr "Lagre oppsett"
 
-#: src/main.c:1392 src/main.c:1394
+#: src/main.c:1386 src/main.c:1388
 msgid " &Left "
 msgstr " Venstre "
 
-#: src/main.c:1394
+#: src/main.c:1388
 msgid " &Above "
 msgstr " Over "
 
-#: src/main.c:1397
+#: src/main.c:1391
 msgid " &File "
 msgstr " Fil "
 
-#: src/main.c:1398
+#: src/main.c:1392
 msgid " &Command "
 msgstr " Kommando "
 
-#: src/main.c:1399
+#: src/main.c:1393
 msgid " &Options "
 msgstr " Alternativer "
 
-#: src/main.c:1401 src/main.c:1403
+#: src/main.c:1395 src/main.c:1397
 msgid " &Right "
 msgstr " Høyre "
 
-#: src/main.c:1403
+#: src/main.c:1397
 msgid " &Below "
 msgstr " Under "
 
-#: src/main.c:1458
+#: src/main.c:1452
 msgid " Information "
 msgstr " Informasjon "
 
-#: src/main.c:1459
+#: src/main.c:1453
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -5390,15 +5398,15 @@ msgstr ""
 " du utføre en manuell gjenlesing av katalogen. Se manualsiden for \n"
 " detaljene."
 
-#: src/main.c:1946
+#: src/main.c:1938
 msgid "Thank you for using GNU Midnight Commander"
 msgstr "Takk for at du bruker GNU Midnight Commander"
 
-#: src/main.c:2379
+#: src/main.c:2371
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM miljøvariabelen er ikke satt!\n"
 
-#: src/main.c:2486
+#: src/main.c:2476
 msgid ""
 "Usage is:\n"
 "\n"
@@ -5410,19 +5418,19 @@ msgstr ""
 "mc [flagg] [denne_katalogen] [annet_panels_katalog]\n"
 "\n"
 
-#: src/main.c:2489
+#: src/main.c:2479
 msgid "-a, --stickchars   Force use of +, -, | for line drawing.\n"
 msgstr "-a, --sickchars    Tvungen bruk av +, -, | for linjeopptegning.\n"
 
-#: src/main.c:2491
+#: src/main.c:2481
 msgid "-b, --nocolor      Force black and white display.\n"
 msgstr "-b, --nocolor      Tvunget sort/hvit skjerm.\n"
 
-#: src/main.c:2493
+#: src/main.c:2483
 msgid "-B, --background   [DEVEL-ONLY: Debug the background code]\n"
 msgstr "-B, --background   [KUN-UTVIKLERE: Debug bakgrunnskoden]\n"
 
-#: src/main.c:2495
+#: src/main.c:2485
 msgid ""
 "-c, --color        Force color mode.\n"
 "-C, --colors       Specify colors (use --help-colors to get a list).\n"
@@ -5433,16 +5441,16 @@ msgstr ""
 "liste).\n"
 "-d, --nomouse      Slå av musstøtte.\n"
 
-#: src/main.c:2499
+#: src/main.c:2489
 msgid "-e, --edit         Startup the internal editor.\n"
 msgstr "-e, --edit         Start opp den interne editoren.\n"
 
-#: src/main.c:2501
+#: src/main.c:2491
 msgid ""
 "-f, --libdir       Print configured paths.\n"
 "-h, --help         Shows this help message.\n"
-"-k, --resetsoft    Reset softkeys (HP terminals only) to their "
-"terminfo/termcap\n"
+"-k, --resetsoft    Reset softkeys (HP terminals only) to their terminfo/"
+"termcap\n"
 "                   default.\n"
 msgstr ""
 "-f, --libdir       Skriv ut konfigurerte stier.\n"
@@ -5451,15 +5459,15 @@ msgstr ""
 "terminfo/termcap\n"
 "                   standardverdier.\n"
 
-#: src/main.c:2506
+#: src/main.c:2496
 msgid "-l, --ftplog file  Log ftpfs commands to the file.\n"
 msgstr "-l, --ftplog fil   Logger ftpfs kommandoer til filen.\n"
 
-#: src/main.c:2509
+#: src/main.c:2499
 msgid "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
 msgstr "-M, --memory fil   [KUN-UTVIKLERE: Logg MAD meldinger til filen.]\n"
 
-#: src/main.c:2511
+#: src/main.c:2501
 msgid ""
 "-P, --printwd      At exit, print the last working directory.\n"
 "-s, --slow         Disables verbose operation (for slow terminals).\n"
@@ -5467,18 +5475,18 @@ msgstr ""
 "-P, --printwd      Skriv ut siste arbeidskatalog ved avslutting.\n"
 "-s, --slow         Slår av detaljert operasjon (for trege terminaler).\n"
 
-#: src/main.c:2514
+#: src/main.c:2504
 msgid "-t, --termcap      Activate support for the TERMCAP variable.\n"
 msgstr "-t, --termcap      Aktiver støtte for TERMCAP variabelen.\n"
 
-#: src/main.c:2517
+#: src/main.c:2507
 msgid ""
 "-S, --createcmdile Create command file to set default directory upon exit.\n"
 msgstr ""
 "-S, --createcmdfile Opprett kommandofil for å sette standard katalog ved "
 "avslutting.\n"
 
-#: src/main.c:2520
+#: src/main.c:2510
 msgid ""
 "-u, --nosubshell   Disable the concurrent subshell mode.\n"
 "-U, --subshell     Force the concurrent subshell mode.\n"
@@ -5488,7 +5496,7 @@ msgstr ""
 "-U, --subshell     Tvungen bruk av samtidig underskall modus.\n"
 "-r, --forceexec    Tvungen kjøring av underskall.\n"
 
-#: src/main.c:2524
+#: src/main.c:2514
 msgid ""
 "-v, --view fname   Start up into the viewer mode.\n"
 "-V, --version      Report version and configuration options.\n"
@@ -5502,11 +5510,11 @@ msgstr ""
 "+number            Startplassering for markøren i filen som kjøres i "
 "`mcedit'.\n"
 
-#: src/main.c:2529
+#: src/main.c:2519
 msgid "-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
 msgstr "-X, --dbgsubshell  [KUN-UTVIKLERE: Debug underskallet].\n"
 
-#: src/main.c:2531
+#: src/main.c:2521
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -5516,7 +5524,7 @@ msgstr ""
 "Vennligst send feilrapporter (inkludert utskrift av `mc -V')\n"
 "til mc-devel@gnome.org\n"
 
-#: src/main.c:2547
+#: src/main.c:2537
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -5554,123 +5562,123 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2599
+#: src/main.c:2589
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr "Bibliotekkatalog for Midnight Commander: %s\n"
 
-#: src/main.c:2613
+#: src/main.c:2603
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
 "Flagget -m er utgått. Vær snill å se på visningsbiter... i "
 "alternativermenyen\n"
 
-#: src/main.c:2690
+#: src/main.c:2674
 msgid "Use to debug the background code"
 msgstr "Bruk til å avluse bakgrunnskoden"
 
-#: src/main.c:2696
+#: src/main.c:2680
 msgid "Request to run in color mode"
 msgstr "Be om å kjøre i fargemodus"
 
-#: src/main.c:2698
+#: src/main.c:2682
 msgid "Specifies a color configuration"
 msgstr "Spesifiserer en fargekonfigurasjon"
 
-#: src/main.c:2703
+#: src/main.c:2687
 msgid "Edits one file"
 msgstr "Redigerer en fil"
 
-#: src/main.c:2707
+#: src/main.c:2691
 msgid "Displays this help message"
 msgstr "Viser denne hjelpeteksten"
 
-#: src/main.c:2710
+#: src/main.c:2694
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Viser en hjelpskjerm for endring av fargeplanen"
 
-#: src/main.c:2713
+#: src/main.c:2697
 msgid "Log ftp dialog to specified file"
 msgstr "Logg ftp dialogen til spesifisert fil"
 
-#: src/main.c:2720
+#: src/main.c:2704
 msgid "Obsolete"
 msgstr "Utgått"
 
-#: src/main.c:2722
+#: src/main.c:2706
 msgid "Requests to run in black and white"
 msgstr "Be om å kjøre i sort-hvitt"
 
-#: src/main.c:2724
+#: src/main.c:2708
 msgid "Disable mouse support in text version"
 msgstr "Slå av musstøtte i tekstversjonen"
 
-#: src/main.c:2727
+#: src/main.c:2711
 msgid "Disables subshell support"
 msgstr "Slå av støtte for underskall"
 
-#: src/main.c:2731
+#: src/main.c:2715
 msgid "Prints working directory at program exit"
 msgstr "Skriv ut arbeidskatalogen ved avslutting av programmet"
 
-#: src/main.c:2733
+#: src/main.c:2717
 msgid "Resets soft keys on HP terminals"
 msgstr "Setter tilbake myke taster på HP terminaler"
 
-#: src/main.c:2735
+#: src/main.c:2719
 msgid "To run on slow terminals"
 msgstr "For kjøring på trege terminaler"
 
-#: src/main.c:2738
+#: src/main.c:2722
 msgid "Use stickchars to draw"
 msgstr "Tegn med klebende tegn"
 
-#: src/main.c:2742
+#: src/main.c:2726
 msgid "Enables subshell support (default)"
 msgstr "Slår på støtte for underskall (standard)"
 
-#: src/main.c:2747
+#: src/main.c:2731
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Prøver å bruke termcap i stedet for terminfo"
 
-#: src/main.c:2751
+#: src/main.c:2735
 msgid "Displays the current version"
 msgstr "Viser nåværende versjon"
 
-#: src/main.c:2753
+#: src/main.c:2737
 msgid "Launches the file viewer on a file"
 msgstr "Starter filvisning for en fil"
 
-#: src/main.c:2755
+#: src/main.c:2739
 msgid "Forces xterm features"
 msgstr "Tvungen bruk av xterm funksjoner"
 
-#: src/main.c:2757
+#: src/main.c:2741
 msgid "Geometry for the window"
 msgstr "Geometri for vinduet"
 
-#: src/main.c:2757
+#: src/main.c:2741
 msgid "GEOMETRY"
 msgstr "GEOMETRI"
 
-#: src/main.c:2758
+#: src/main.c:2742
 msgid "No windows opened at startup"
 msgstr "Ingen vinduer åpnet ved oppstart"
 
-#: src/main.c:2759
+#: src/main.c:2743
 msgid "No desktop icons"
 msgstr "Ingen skrivebordsikonene"
 
-#: src/main.c:2760
+#: src/main.c:2744
 msgid "Look more like traditional gmc"
 msgstr "Se mer ut som den tradisjonelle gmc"
 
-#: src/main.c:2762
+#: src/main.c:2746
 msgid "Display the directory that holds the .links startup files and exit"
 msgstr "Viser katalogen som inneholder .links oppstartsfilene og avslutt"
 
-#: src/main.c:3089
+#: src/main.c:3073
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -5678,11 +5686,11 @@ msgstr ""
 "Kunne ikke åpne tty linjen. Du må kjøre mc uten -P flagget.\n"
 "På noen systemer vil du kanskje bruke # `which mc`\n"
 
-#: src/main.c:3170
+#: src/main.c:3156
 msgid " Notice "
 msgstr " Notis "
 
-#: src/main.c:3171
+#: src/main.c:3157
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -6019,10 +6027,12 @@ msgid " Format error on file Extensions File "
 msgstr " Formatfeil på filtypefilen "
 
 #: src/user.c:138
+#, c-format
 msgid " The %%var macro does not have a default "
 msgstr " %%var makroen har ikke en standardverdi "
 
 #: src/user.c:139
+#, c-format
 msgid " The %%var macros does not have a variable "
 msgstr " %%var makroen har ingen variabel "
 
@@ -6578,76 +6588,76 @@ msgstr "Ukonsistent extfs arkiv"
 msgid "fish: Disconnecting from %s"
 msgstr "fish: Kobler fra %s"
 
-#: vfs/fish.c:218
+#: vfs/fish.c:219
 msgid "fish: Waiting for initial line..."
 msgstr "fish: Venter på innledende linje..."
 
-#: vfs/fish.c:228
+#: vfs/fish.c:229
 msgid "Sorry, we can not do password authenticated connections for now."
 msgstr "Beklager, vi kan ikke gjøre passordautentiserte forbindelser ennå."
 
-#: vfs/fish.c:233
+#: vfs/fish.c:234
 msgid " fish: Password required for "
 msgstr " fish: Passord nødvendig for "
 
-#: vfs/fish.c:242
+#: vfs/fish.c:243
 msgid "fish: Sending password..."
 msgstr "fish: Sender passord..."
 
-#: vfs/fish.c:248
+#: vfs/fish.c:249
 msgid "fish: Sending initial line..."
 msgstr "fish: Sender innledende linje..."
 
-#: vfs/fish.c:258
+#: vfs/fish.c:259
 msgid "fish: Handshaking version..."
 msgstr "fish: Handshaking versjon..."
 
-#: vfs/fish.c:262
+#: vfs/fish.c:263
 msgid "fish: Setting up current directory..."
 msgstr "fish: Setter opp aktiv katalog..."
 
-#: vfs/fish.c:264
+#: vfs/fish.c:265
 #, c-format
 msgid "fish: Connected, home %s."
 msgstr "fish: Tilkoblet, hjemme %s."
 
-#: vfs/fish.c:353
+#: vfs/fish.c:354
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr "fish: Leser katalog %s..."
 
-#: vfs/fish.c:457
+#: vfs/fish.c:458
 msgid "fish: failed"
 msgstr "fish: feilet"
 
 #. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
-#: vfs/fish.c:477
+#: vfs/fish.c:478
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr "fish: lager %s: sender kommando..."
 
-#: vfs/fish.c:502
+#: vfs/fish.c:503
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Lokal lesekommando feilet, sender nuller"
 
-#: vfs/fish.c:514
+#: vfs/fish.c:515
 #, c-format
 msgid "fish: storing %s %d (%d)"
 msgstr "fish: lagrer %s %d (%d)"
 
-#: vfs/fish.c:515
+#: vfs/fish.c:516
 msgid "zeros"
 msgstr "nuller"
 
-#: vfs/fish.c:562
+#: vfs/fish.c:563
 msgid "Aborting transfer..."
 msgstr "Avbryter overføring..."
 
-#: vfs/fish.c:571
+#: vfs/fish.c:572
 msgid "Error reported after abort."
 msgstr "Feil rapportert etter avbrudd."
 
-#: vfs/fish.c:573
+#: vfs/fish.c:574
 msgid "Aborted transfer would be successful."
 msgstr "Avbrutt overføring ville vært i orden."
 
@@ -6860,24 +6870,24 @@ msgstr " For mange åpne forbindelser "
 msgid "Midnight Commander's private remote filesystem"
 msgstr "Midnight Commander's private eksterne filsystem"
 
-#: vfs/sfs.c:300
+#: vfs/sfs.c:297
 #, c-format
 msgid "Warning: %sextfs/sfs.ini not found\n"
 msgstr "Advarsel: %sextfs/sfs.ini ikke funnet\n"
 
-#: vfs/sfs.c:327
+#: vfs/sfs.c:324
 #, c-format
 msgid "Warning: Invalid line %s in sfs.ini.\n"
 msgstr "Advarsel: Ugyldig linje %s i sfs.ini.\n"
 
-#: vfs/sfs.c:338
+#: vfs/sfs.c:335
 #, c-format
 msgid "Warning: Invalid flag %c in sfs.ini line %s.\n"
 msgstr "Advarsel: Ugyldig flagg %c i sfs.ini, linje %s.\n"
 
 #. This is place of next pointer
-#: vfs/sfs.c:387
-msgid "Signle file filesystems"
+#: vfs/sfs.c:384
+msgid "Single file filesystems"
 msgstr "Filsystemer med kun en fil"
 
 #: vfs/shared_ftp_fish.c:743
@@ -6971,27 +6981,28 @@ msgstr ""
 msgid "Changes to file lost"
 msgstr "Endringer i filen tapt"
 
-#: vfs/vfs.c:1779
+#: vfs/vfs.c:1781
 msgid "Could not parse:"
 msgstr "Kunne ikke fortolke:"
 
-#: vfs/vfs.c:1781
+#: vfs/vfs.c:1783
 msgid "More parsing errors will be ignored."
 msgstr "Flere fortolkningsfeil vil bli ignorert."
 
-#: vfs/vfs.c:1781
+#: vfs/vfs.c:1783
 msgid "(sorry)"
 msgstr "(beklager)"
 
-#: vfs/vfs.c:1791
+#: vfs/vfs.c:1793
 msgid "Internal error:"
 msgstr "Intern feil:"
 
-#: vfs/vfs.c:1801
+#: vfs/vfs.c:1803
+#, c-format
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
 msgstr "%s: %s: %s %3d%% (%ld bytes overført)"
 
-#: vfs/vfs.c:1802
+#: vfs/vfs.c:1804
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld bytes overført"
@@ -7101,6 +7112,9 @@ msgstr " Kunne ikke åpne fil: %s "
 #: vfs/undelfs.c:684
 msgid "Undelete filesystem for ext2"
 msgstr "Undelete filsystem for ext2"
+
+#~ msgid "Global option settings"
+#~ msgstr "Innstillinger for globale alternativer"
 
 #~ msgid ""
 #~ " Can't generate unique filename \n"
