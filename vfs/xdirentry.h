@@ -200,37 +200,6 @@ char *vfs_s_get_path_mangle          (vfs *me, char *inname, vfs_s_super **archi
 void  vfs_s_invalidate               (vfs *me, vfs_s_super *super);
 char *vfs_s_fullpath                 (vfs *me, vfs_s_inode *ino);
 
-/* readdir & friends */
-void *vfs_s_opendir (vfs *me, char *dirname);
-void *vfs_s_readdir (void *data);
-int vfs_s_telldir (void *data);
-void vfs_s_seekdir (void *data, int offset);
-int vfs_s_closedir (void *data);
-int vfs_s_chdir (vfs *me, char *path);
-
-/* stat & friends */
-int vfs_s_stat (vfs *me, char *path, struct stat *buf);
-int vfs_s_lstat (vfs *me, char *path, struct stat *buf);
-int vfs_s_fstat (void *fh, struct stat *buf);
-int vfs_s_readlink (vfs *me, char *path, char *buf, int size);
-void *vfs_s_open (vfs *me, char *file, int flags, int mode);
-int vfs_s_read (void *fh, char *buffer, int count);
-int vfs_s_write (void *fh, char *buffer, int count);
-int vfs_s_lseek (void *fh, off_t offset, int whence);
-int vfs_s_close (void *fh);
-
-/* mc support */
-void vfs_s_fill_names (vfs *me, void (*func)(char *));
-int vfs_s_ferrno(vfs *me);
-void vfs_s_dump(vfs *me, char *prefix, vfs_s_inode *ino);
-char *vfs_s_getlocalcopy (vfs *me, char *path);
-
-/* stamping support */
-vfsid vfs_s_getid (vfs *me, const char *path, struct vfs_stamping **parent);
-int vfs_s_nothingisopen (vfsid id);
-void vfs_s_free (vfsid id);
-int vfs_s_setctl (vfs *me, char *path, int ctlop, char *arg);
-
 /* network filesystems support */
 int vfs_s_select_on_two (int fd1, int fd2);
 int vfs_s_get_line (vfs *me, int sock, char *buf, int buf_len, char term);

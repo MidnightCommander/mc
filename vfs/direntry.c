@@ -582,7 +582,7 @@ struct dirhandle {
     vfs_s_inode *dir;
 };
 
-void *
+static void *
 vfs_s_opendir (vfs *me, char *dirname)
 {
     struct vfs_s_inode *dir;
@@ -606,7 +606,7 @@ vfs_s_opendir (vfs *me, char *dirname)
     return info;
 }
 
-void *
+static void *
 vfs_s_readdir(void *data)
 {
     static union vfs_dirent dir;
@@ -628,7 +628,7 @@ vfs_s_readdir(void *data)
     return (void *) &dir;
 }
 
-int
+static int
 vfs_s_telldir (void *data)
 {
     struct dirhandle *info = (struct dirhandle *) data;
@@ -645,7 +645,7 @@ vfs_s_telldir (void *data)
     return -1;
 }
 
-void
+static void
 vfs_s_seekdir (void *data, int offset)
 {
     struct dirhandle *info = (struct dirhandle *) data;
@@ -655,7 +655,7 @@ vfs_s_seekdir (void *data, int offset)
         vfs_s_readdir (data);
 }
 
-int
+static int
 vfs_s_closedir (void *data)
 {
     struct dirhandle *info = (struct dirhandle *) data;
@@ -666,7 +666,7 @@ vfs_s_closedir (void *data)
     return 0;
 }
 
-int
+static int
 vfs_s_chdir (vfs *me, char *path)
 {
     void *data;
@@ -689,26 +689,26 @@ vfs_s_internal_stat (vfs *me, char *path, struct stat *buf, int flag)
     return 0;
 }
 
-int
+static int
 vfs_s_stat (vfs *me, char *path, struct stat *buf)
 {
     return vfs_s_internal_stat (me, path, buf, FL_FOLLOW);
 }
 
-int
+static int
 vfs_s_lstat (vfs *me, char *path, struct stat *buf)
 {
     return vfs_s_internal_stat (me, path, buf, FL_NONE);
 }
 
-int
+static int
 vfs_s_fstat (void *fh, struct stat *buf)
 {
     *buf = FH->ino->st;
     return 0;
 }
 
-int
+static int
 vfs_s_readlink (vfs *me, char *path, char *buf, int size)
 {
     struct vfs_s_inode *ino;
@@ -728,7 +728,7 @@ vfs_s_readlink (vfs *me, char *path, char *buf, int size)
     return strlen (buf);
 }
 
-void *
+static void *
 vfs_s_open (vfs *me, char *file, int flags, int mode)
 {
     int was_changed = 0;
@@ -806,7 +806,7 @@ vfs_s_open (vfs *me, char *file, int flags, int mode)
     return fh;
 }
 
-int
+static int
 vfs_s_read (void *fh, char *buffer, int count)
 {
     int n;
@@ -828,7 +828,7 @@ vfs_s_read (void *fh, char *buffer, int count)
     return -1;
 }
 
-int
+static int
 vfs_s_write (void *fh, char *buffer, int count)
 {
     int n;
@@ -848,7 +848,7 @@ vfs_s_write (void *fh, char *buffer, int count)
     return 0;
 }
 
-int
+static int
 vfs_s_lseek (void *fh, off_t offset, int whence)
 {
     off_t size = FH->ino->st.st_size;
@@ -875,7 +875,7 @@ vfs_s_lseek (void *fh, off_t offset, int whence)
     return FH->pos;
 }
 
-int
+static int
 vfs_s_close (void *fh)
 {
     int res = 0;
@@ -985,7 +985,7 @@ vfs_s_retrieve_file (vfs *me, struct vfs_s_inode *ino)
 
 /* ------------------------------- mc support ---------------------------- */
 
-void
+static void
 vfs_s_fill_names (vfs *me, void (*func)(char *))
 {
     struct vfs_s_super *a = MEDATA->supers;
@@ -999,35 +999,13 @@ vfs_s_fill_names (vfs *me, void (*func)(char *))
     }
 }
 
-int
+static int
 vfs_s_ferrno (vfs *me)
 {
     return me->verrno;
 }
 
-#if 0
-void
-vfs_s_dump (vfs *me, char *prefix, vfs_s_inode *ino)
-{
-    printf ("%s %s %d ", prefix, S_ISDIR (ino->st.st_mode) ? "DIR" : "FILE",
-	    (int) ino->st.st_mode);
-    if (!ino->subdir)
-	puts ("FILE");
-    else {
-	struct vfs_s_entry *ent;
-	for (ent = ino->subdir; ent; ent = ent->next) {
-	    char *s = g_strconcat (prefix, "/", ent->name, NULL);
-	    if (ent->name[0] == '.')
-		printf ("%s IGNORED\n", s);
-	    else
-		vfs_s_dump (me, s, ent->ino);
-	    g_free (s);
-	}
-    }
-}
-#endif
-
-char *
+static char *
 vfs_s_getlocalcopy (vfs *me, char *path)
 {
     struct vfs_s_inode *ino;
@@ -1042,7 +1020,7 @@ vfs_s_getlocalcopy (vfs *me, char *path)
     return g_strdup (ino->localname);
 }
 
-int 
+static int 
 vfs_s_setctl (vfs *me, char *path, int ctlop, char *arg)
 {
     vfs_s_inode *ino = vfs_s_inode_from_path (me, path, 0);
@@ -1070,7 +1048,7 @@ vfs_s_setctl (vfs *me, char *path, int ctlop, char *arg)
 
 /* ----------------------------- Stamping support -------------------------- */
 
-vfsid
+static vfsid
 vfs_s_getid (vfs *me, const char *path, struct vfs_stamping **parent)
 {
     vfs_s_super *archive;
@@ -1095,14 +1073,14 @@ vfs_s_getid (vfs *me, const char *path, struct vfs_stamping **parent)
     return (vfsid) archive;    
 }
 
-int
+static int
 vfs_s_nothingisopen (vfsid id)
 {
   /* Our data structures should survive free of superblock at any time */
     return 1;
 }
 
-void
+static void
 vfs_s_free (vfsid id)
 {
     vfs_s_free_super (((vfs_s_super *)id)->me, (vfs_s_super *)id);

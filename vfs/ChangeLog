@@ -1,5 +1,8 @@
 2003-10-11  Pavel Roskin  <proski@gnu.org>
 
+	* direntry.c: Make more functions static.  They are filled in in
+	vfs_s_init_class() now and don't need to be exported.
+
 	* tarfs.c: Switch to self-registration.
 
 	* extfs.c: Don't include xdirentry.h.
