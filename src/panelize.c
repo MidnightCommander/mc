@@ -86,8 +86,6 @@ static struct panelize {
     struct panelize *next;
 } *panelize = NULL;
 
-static char* panelize_title = N_(" External panelize ");
-
 static void
 update_command (void)
 {
@@ -143,7 +141,6 @@ static void init_panelize (void)
 			maxlen += strlen (panelize_but [i].text) + 5;
 		}
 		maxlen += 10;
-		panelize_title = _(panelize_title);
 
 		i18n_flag = 1;
 	}
