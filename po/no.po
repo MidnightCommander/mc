@@ -1080,7 +1080,7 @@ msgstr "Hard lenke..."
 
 #: gnome/gpopup2.c:202
 msgid "Symlink..."
-msgstr "Symlenken..."
+msgstr "Symlenke..."
 
 #: gnome/gpopup2.c:203
 msgid "Edit Symlink..."
