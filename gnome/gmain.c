@@ -54,6 +54,9 @@ Dlg_head *desktop_dlg;
 
 int run_desktop = 1;
 
+/* Used during argument processing */
+extern int finish_program;
+
 /* This is only used by the editor, so we provide a dummy implementation */
 void
 try_alloc_color_pair (char *str, char *str2)
@@ -613,9 +616,10 @@ void
 session_management_setup (char *name)
 {
 	GnomeClient *client;
-	
+
 	client = gnome_master_client ();
 	if (client){
+		gnome_client_set_restart_style (client, finish_program?GNOME_RESTART_NEVER:GNOME_RESTART_IMMEDIATELY);
 		gtk_signal_connect (GTK_OBJECT (client), "save_yourself",
 				    GTK_SIGNAL_FUNC (session_save_state), name);
 		gtk_signal_connect (GTK_OBJECT (client), "die",

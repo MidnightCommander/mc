@@ -1,3 +1,8 @@
+Tue Feb 23 17:41:45 1999  George Lebl  <jirka@5z.com>
+
+	* gmain.c: set the restart property of the gnome client to
+	  RESTART_IMMEDIATELY or RESTART_NEVER if we're gonna quit
+
 1999-02-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-file-property-dialog.c (gnome_file_property_dialog_new):
