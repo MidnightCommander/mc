@@ -53,34 +53,30 @@
 /* {{{ Common dialog callback */
 
 void
-dialog_repaint (struct Dlg_head *h, int back, int title_fore)
+common_dialog_repaint (struct Dlg_head *h)
 {
     int space;
 
     space = (h->flags & DLG_COMPACT) ? 0 : 1;
 
-    attrset (back);
+    attrset (NORMALC);
     dlg_erase (h);
     draw_box (h, space, space, h->lines - 2 * space, h->cols - 2 * space);
-    attrset (title_fore);
+    attrset (HOT_NORMALC);
     if (h->title) {
 	dlg_move (h, space, (h->cols - strlen (h->title)) / 2);
 	addstr (h->title);
     }
 }
 
-void
-common_dialog_repaint (struct Dlg_head *h)
-{
-    dialog_repaint (h, NORMALC, HOT_NORMALC);
-}
-
 int
 common_dialog_callback (struct Dlg_head *h, int id, int msg)
 {
-    if (msg == DLG_DRAW)
+    if (msg == DLG_DRAW) {
 	common_dialog_repaint (h);
-    return 0;
+	return MSG_HANDLED;
+    }
+    return MSG_NOT_HANDLED;
 }
 
 /* }}} */
@@ -154,17 +150,6 @@ int run_listbox (Listbox *l)
 
 
 /* {{{ Query Dialog functions */
-static int query_callback (struct Dlg_head *h, int Id, int Msg)
-{
-    switch (Msg){
-    case DLG_DRAW:
-	dialog_repaint (h, NORMALC, HOT_NORMALC);
-	break;
-    }
-    return 0;
-}
-
-
 Dlg_head *last_query_dlg;
 
 static int sel_pos = 0;
@@ -211,7 +196,8 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 
     /* prepare dialog */
     query_dlg = create_dlg (ypos, xpos, lines, cols, query_colors,
-			    query_callback, "[QueryBox]", "query", DLG_BACKWARD);
+			    common_dialog_callback, "[QueryBox]",
+			    "query", DLG_BACKWARD);
     x_set_dialog_title (query_dlg, header);
 
     if (count > 0){

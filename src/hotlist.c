@@ -145,15 +145,15 @@ static void remove_from_hotlist (struct hotlist *entry);
 
 #define new_hotlist() g_new0(struct hotlist, 1)
 
-static void hotlist_refresh (Dlg_head *dlg)
+static void
+hotlist_refresh (Dlg_head * dlg)
 {
-    dialog_repaint (dlg, COLOR_NORMAL, COLOR_HOT_NORMAL);
+    common_dialog_repaint (dlg);
     attrset (COLOR_NORMAL);
-    draw_box (dlg, 2, 5, 
-		dlg->lines - (hotlist_state.moving ? 6 : 10),
-		dlg->cols - (UX*2));
+    draw_box (dlg, 2, 5, dlg->lines - (hotlist_state.moving ? 6 : 10),
+	      dlg->cols - (UX * 2));
     if (!hotlist_state.moving)
-	draw_box (dlg, dlg->lines-8, 5, 3, dlg->cols - (UX*2));
+	draw_box (dlg, dlg->lines - 8, 5, 3, dlg->cols - (UX * 2));
 }
 
 /* If current->data is 0, then we are dealing with a VFS pathname */
