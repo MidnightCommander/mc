@@ -1,5 +1,8 @@
 2002-10-13  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (print_color_usage): Update list of keywords for file
+	types.  Add a notice for translators.
+
 	* color.c: Rename stalledlink to stalelink.  Make the same
 	change elsewhere.
 

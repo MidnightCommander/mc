@@ -2092,6 +2092,7 @@ print_mc_usage (poptContext ctx, FILE * stream)
 static void
 print_color_usage (void)
 {
+    /* TRANSLATORS: don't translate keywords and names of colors */
     fputs (_("--colors KEYWORD={FORE},{BACK}\n\n"
 	     "{FORE} and {BACK} can be omitted, and the default will be used\n"
 	     "\n"
@@ -2101,7 +2102,7 @@ print_color_usage (void)
 	     "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus\n"
 	     "   Menus:        menu, menuhot, menusel, menuhotsel\n"
 	     "   Help:         helpnormal, helpitalic, helplink, helpslink\n"
-	     "   File types:   directory, execute, link, device, special, core\n"
+	     "   File types:   directory, executable, link, stalelink, device, special, core\n"
 	     "\n"
 	     "Colors:\n"
 	     "   black, gray, red, brightred, green, brightgreen, brown,\n"
