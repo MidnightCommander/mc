@@ -1,3 +1,8 @@
+2002-07-03  Pavel Roskin  <proski@gnu.org>
+
+	* cpio.c (cpio_open_cpio_file): Fix type initialization.
+	From Andrew V. Samoilov <kai@cmail.ru>
+
 2002-07-02  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.am: Add samba to SUBDIRS.  Forcedly set DISTDIRS to
@@ -7,7 +12,7 @@
 
 	* ftpfs.c (send_ftp_command): Use "anonymous@" as default
 	anonymous password.
-	From Eduardo Perez Ureta" <eperez@it.uc3m.es>
+	From Eduardo Perez Ureta <eperez@it.uc3m.es>
 
 2002-06-25  Pavel Roskin  <proski@gnu.org>
 

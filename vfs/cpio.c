@@ -149,7 +149,8 @@ static int cpio_open_cpio_file(vfs *me, vfs_s_super *super, char *name)
     mc_stat(name, &(super->u.cpio.stat));
     super->u.cpio.type = CPIO_UNKNOWN;
 
-    if (get_compression_type(fd) != COMPRESSION_NONE) {
+    type = get_compression_type(fd);
+    if (type != COMPRESSION_NONE) {
 	char *s;
 
 	mc_close(fd);
