@@ -4,10 +4,17 @@ suppbindir = $(mclibdir)/bin
 tidir      = $(mclibdir)/term
 confdir    = $(sysconfdir)
 
+if CHARSET
+LIBFILES_ADD = mc.charsets
+else
+LIBFILES_ADD =
+endif
+
 LOCALIZED_HELP = mc.hlp.hu
 LIBFILES_OUT = mc.ext
 LIBFILES_CONST = mc.hint mc.hint.es mc.hint.cs mc.hint.it mc.hint.pl \
-	mc.hint.ru mc.lib mc.menu cedit.menu edit.indent.rc
+	mc.hint.ru mc.lib mc.menu cedit.menu edit.indent.rc \
+	$(LIBFILES_ADD)
 
 noinst_DATA = \
 	xnc.hlp			\
@@ -33,4 +40,6 @@ EXTRA_DIST = \
 	$(desktop_DATA) \
 	$(ti_DATA) \
 	$(noinst_DATA) \
-	$(noinst_SCRIPTS)
+	$(noinst_SCRIPTS) \
+	mc.charsets
+

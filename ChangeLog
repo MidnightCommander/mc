@@ -1,5 +1,9 @@
 2001-05-30  Pavel Roskin  <proski@gnu.org>
 
+	* lib/mc.charsets: New file. From Walery Studennikov.
+	* lib/Makefile.am: Distribute mc.charsets. Install it if
+	the charset support is enabled.
+
 	* configure.in: Add check for iconv() and the necessary code
 	to support the charset selection patch.
 
