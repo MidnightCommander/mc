@@ -204,10 +204,13 @@ regex/\.(C|cc)$
 ### Documentation ###
 
 # Texinfo
-regex/\.(te?xi)|(texinfo)$
+regex/\.(te?xi|texinfo)$
 
 # GNU Info page
-type/Info\ text
+type/^Info\ text
+	Open=info --directory %d -f %p
+
+shell/.info
 	Open=info --directory %d -f %p
 
 # Manual page
@@ -238,39 +241,33 @@ regex/([^0-9]|^[^\.]*)\.([1-9][a-z]?|n)\.bz2$
 	Open=bzip2 -dc %f | nroff @TROFFASCII@ @MANDOC@ | %var{PAGER:more}
 	View=%view{ascii,nroff} bzip2 -dc %f | nroff @TROFFASCII@ @MANDOC@
 
-regex/(read\.?me$)|(README)
+regex/(read\.?me$|README)
 
 
 ### Images ###
 
-type/GIF\ image
-	Include=image-options
-	
-type/GIF\ picture
-	Include=image-options
-	
-type/JPEG\ image
-	Include=image-options
-	
-type/JPEG\ picture
+type/^GIF
 	Include=image-options
 
-type/PC\ bitmap
+type/^JPEG
 	Include=image-options
 
-type/PNG\ image
+type/^PC\ bitmap
 	Include=image-options
 
-type/TIFF\ file
+type/^PNG
 	Include=image-options
-	
-type/PBM
+
+type/^TIFF
 	Include=image-options
-	
-type/PGM
+
+type/^PBM
 	Include=image-options
-	
-type/PPM
+
+type/^PGM
+	Include=image-options
+
+type/^PPM
 	Include=image-options
 
 shell/.xbm
@@ -326,13 +323,13 @@ regex/\.(rm|RM|Rm|ram|RAM|Ram)$
 ### Documents ###
 
 # Postscript
-type/PostScript
+type/^PostScript
 	Open=gv %f&
 	View=%view{ascii} ps2ascii %f
 	View with GhostView=gv %f
 
 # PDF
-type/PDF
+type/^PDF
 	Open=xpdf %f&
 	#Open=acroread %f&
 	#Open=ghostview %f&
@@ -349,17 +346,17 @@ regex/\.([Hh]tml?|HTML?)$
 # Microsoft Word Document
 regex/\.([Dd]o[ct]|DO[CT]|[Ww]ri|WRI)$
 	View=%view{ascii} catdoc -w %f || word2x -f text %f - || strings %f
-type/Microsoft\ Word
+type/^Microsoft\ Word
 	View=%view{ascii} catdoc -w %f || word2x -f text %f - || strings %f
 
 # Microsoft Excel Worksheet
 regex/\.([Xx]l[sw]|XL[SW])$
 	View=%view{ascii} xls2csv %f || strings %f
-type/Microsoft\ Excel
+type/^Microsoft\ Excel
 	View=%view{ascii} xls2csv %f || strings %f
 
 # Framemaker
-type/FrameMaker
+type/^FrameMaker
 	Open=fmclient -f %f
 
 # DVI
@@ -397,7 +394,7 @@ shell/Imakefile
 	Open=xmkmf -a
 
 # Executables
-type/executable
+type/\ executable
 	Open=./%f
 	View=%view
 	Drop=%f %q
@@ -411,7 +408,7 @@ regex/\.(dbf|DBF)$
        View=%view{ascii} dbview -b %f
 
 # REXX script
-regex/\.(rexx)|(rex)|(cmd)$
+regex/\.(rexx|rex|cmd)$
        Open=rexx %f %{Enter parameters};echo "Press ENTER";read y
 
 
@@ -500,28 +497,28 @@ shell/.cpio
 	Extract=cat '%f' | cpio -ic
 
 # gzip
-type/gzip
+type/^gzip
 	Open=gzip -dc %f | %var{PAGER:more}
 	View=%view{ascii} gzip -dc %f 2>/dev/null
 	Edit=I=`date +%%s`; export I; gzip -cd %f >/tmp/gzed.$I && %var{EDITOR:vi} /tmp/gzed.$I && gzip -c /tmp/gzed.$I > %f; rm -f /tmp/gzed.$I
 	Uncompress=gunzip %f
 
 # bzip2
-type/bzip2
+type/^bzip2
 	Open=bzip2 -dc %f | %var{PAGER:more}
 	View=%view{ascii} bzip2 -dc %f 2>/dev/null
 	Edit=I=`date +%%s`; export I; bzip2 -cd %f >/tmp/bzed.$I && %var{EDITOR:vi} /tmp/bzed.$I && bzip2 -c /tmp/bzed.$I > %f; rm -f /tmp/bzed.$I
 	Uncompress=bunzip2 %f
 
 # bzip
-type/bzip
+type/^bzip
 	Open=bzip -dc %f | %var{PAGER:more}
 	View=%view{ascii} bzip -dc %f 2>/dev/null
 	Edit=I=`date +%%s`; export I; bzip -cd %f >/tmp/bzed.$I && %var{EDITOR:vi} /tmp/bzed.$I && bzip -c /tmp/bzed.$I > %f; rm -f /tmp/bzed.$I
 	Uncompress=bunzip %f
 
 # compress
-type/compress
+type/^compress
 	Open=gzip -dc %f | %var{PAGER:more}
 	View=%view{ascii} gzip -dc %f 2>/dev/null
 	Edit=I=`date +%%s`; export I; gzip -cd %f >/tmp/gzed.$I && %var{EDITOR:vi} /tmp/gzed.$I && gzip -c /tmp/gzed.$I > %f; rm -f /tmp/gzed.$I

@@ -1,3 +1,11 @@
+2001-07-13  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Anchor all regexes in the type/ rules except
+	"executable", which should follow a space. Simplify rules for
+	images. Add shell/ rule for *.info files. Fix all incorrect
+	uses of the alternation operator.
+	Reported by Oskar Liljeblad and Michel Casabona.
+
 2001-07-12  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Don't check for iconv, it's already checked for
