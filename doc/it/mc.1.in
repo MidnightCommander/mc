@@ -2869,16 +2869,16 @@ necessarie per poter cominciare a navigare attraverso i file.
 .SH "  File system SMB"
 Il file system smb permette di gestire file su macchine remote con
 protocollo SMB (o CIFS). Queste includono Windows for Workgroups, 
-Windows 9x, Windows NT, Windows 2000, Windows XP, OS/2 e Samba.
+Windows 9x/ME, Windows NT/2000/XP, OS/2 e Samba.
 Per usarlo, si può provare il comando dal pannello 
 "Connessione SMB..." (accessibile dalla barra dei menu) o si può 
 direttamente cambiare directory corrente usando il comando cd verso
 un percorso simile a questo:
 .PP
-.I /#smb:macchina[/servizio][/dir-remota]
+.I /#smb:[utente@]macchina[/servizio][/dir-remota]
 .PP
 L'elemento
-.I servizio
+.I utente, servizio
 e
 .I dir-remota
 sono opzionali.
@@ -2893,6 +2893,7 @@ Esempi:
 .nf
     /#smb:macchina/Condivisione
     /#smb:altra_macchina
+    /#smb:guest@macchina/Public/Irlex
 .fi
 .PP
 .\"NODE "Colors"
