@@ -972,7 +972,7 @@ AC_ARG_WITH(smbwrapper,
 # Conditions under which smbwrapper should not be built.
 
 	if test x$PICFLAG = x; then
-	   echo No support for PIC code - disabling smbwrapper and smbsh
+	   AC_MSG_WARN([No support for PIC code - disabling smbwrapper and smbsh])
 	   WRAP=""
 	   WRAP32=""
 	elif test x$ac_cv_func_syscall = xno; then
@@ -1186,7 +1186,7 @@ AC_ARG_WITH(ssl,
 	withval="$with_sslinc"
 	case "$withval" in
 	yes|no)
-	  echo "configure: warning: --with-sslinc called without argument - will use default" 1>&w
+	  AC_MSG_WARN([--with-sslinc called without argument - will use default])
 	  CFLAGS="-I/usr/local/ssl/include $CFLAGS"
 	  LIBS="-lssl -lcrypto $LIBS"
 	  LDFLAGS="=L/usr/local/ssl/lib $LDFLAGS"
@@ -1207,8 +1207,7 @@ AC_ARG_WITH(ssl,
     fi
 
     if test ! -d ${withval}; then
-      echo "configure: error: called with --with-ssl, but ssl base directory ${withval} does not exist or is not a directory. Aborting config" 1>&2
-      exit 1
+      AC_MSG_ERROR([called with --with-ssl, but ssl base directory ${withval} does not exist or is not a directory. Aborting config])
     fi 
 
     CFLAGS="-DHAVE_CRYPT_DECL $CFLAGS"  # Damn, SSLeay defines its own
@@ -1552,7 +1551,7 @@ fi
 # If we don't have all of these then disable large
 # file support.
 #
-echo "checking if large file support can be enabled"
+AC_MSG_CHECKING([if large file support can be enabled])
 AC_TRY_COMPILE([
 #if defined(HAVE_LONGLONG) && (defined(HAVE_OFF64_T) || (defined(SIZEOF_OFF_T) && (SIZEOF_OFF_T == 8)))
 #include <sys/types.h>
@@ -1563,16 +1562,17 @@ __COMPILE_ERROR_
 [int i],
 samba_cv_HAVE_EXPLICIT_LARGEFILE_SUPPORT=yes,samba_cv_HAVE_EXPLICIT_LARGEFILE_SUPPORT=no)
 if test x"$samba_cv_HAVE_EXPLICIT_LARGEFILE_SUPPORT" = x"yes"; then
-    echo "yes"
+    AC_MSG_RESULT(yes)
     AC_DEFINE(HAVE_EXPLICIT_LARGEFILE_SUPPORT)
 else
-    echo "no"
+    AC_MSG_RESULT(no)
 fi
 
-echo "checking configure summary"
+AC_MSG_CHECKING([configure summary])
 AC_TRY_RUN([#include "${srcdir-.}/tests/summary.c"],
-           echo "configure OK";,
-	   AC_MSG_ERROR([summary failure. Aborting config]),:)
+           AC_MSG_RESULT(OK);,
+	   AC_MSG_RESULT(failure)
+	   AC_MSG_ERROR([Aborting config]),:)
 
 builddir=`pwd`
 AC_SUBST(builddir)

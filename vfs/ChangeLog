@@ -1,5 +1,8 @@
 2000-08-02  Pavel Roskin  <proski@gnu.org>
 
+	* samba/configure.in: Fixed sloppy output. The fix also sent to
+	the Samba team.
+
 	* samba/include/stamp-h.in: Added to CVS.
 
 2000-05-23  Andrew V. Samoilov <sav@bcs.zp.ua>
