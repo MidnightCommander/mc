@@ -55,7 +55,7 @@ OBJS =	dir.o util.o screen.o dialog.o key.o keyxdef.o menu.o		\
 
 DISTFILES = \
 	$(HDRS) $(SRCS) Makefile.in TODO ChangeLog OChangeLog man2hlp.c \
-	gindex.pl xmkdir cons.saver.c ncurses.patch mc.hlp depend.awk \
+	gindex.pl cons.saver.c ncurses.patch mc.hlp depend.awk \
 	fixhlp.c mfmt.c
 
 # Should be: mc $(srcdir)/mc.hlp but it's remaking it always
