@@ -22,10 +22,6 @@ builddir=@builddir@
 SHELL=@SHELL@
 
 BASEDIR= @prefix@
-BINDIR = @bindir@
-# we don't use sbindir because we want full compatibility with
-# the previous releases of Samba
-SBINDIR = @bindir@
 LIBDIR = @libdir@
 VARDIR = @localstatedir@
 
@@ -44,8 +40,8 @@ CODEPAGEDIR = @codepagedir@
 
 FLAGS1 = $(CFLAGS) -Iinclude -I$(srcdir)/include $(CPPFLAGS)
 FLAGS2 = -DCONFIGFILE=\"$(CONFIGFILE)\" -DLMHOSTSFILE=\"$(LMHOSTSFILE)\"
-FLAGS3 = -DSBINDIR=\"$(SBINDIR)\" -DCODEPAGEDIR=\"$(CODEPAGEDIR)\"
-FLAGS4 = -DDRIVERFILE=\"$(DRIVERFILE)\" -DBINDIR=\"$(BINDIR)\"
+FLAGS3 = -DCODEPAGEDIR=\"$(CODEPAGEDIR)\"
+FLAGS4 = -DDRIVERFILE=\"$(DRIVERFILE)\"
 FLAGS = $(ISA) $(FLAGS1) $(FLAGS2) $(FLAGS3) $(FLAGS4) -DHAVE_INCLUDES_H
 
 ######################################################################

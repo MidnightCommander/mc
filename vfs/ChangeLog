@@ -1,4 +1,8 @@
-2005-01-24  Andrew V. Samoilov  <sav@bcs.zp.ua>
+2005-01-25  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* samba/Makefile.in: Remove BINDIR and SBINDIR.
+
+	* samba/param/loadparm.c: Comment out some more unused code.
 
 	* samba/param/loadparm.c (print_parameter): Remove.
 	(is_default): Remove.

@@ -96,8 +96,6 @@ static BOOL use_getwd_cache;
 
 extern int extra_time_offset;
 
-static BOOL defaults_saved=False;
-
 /* 
  * This structure describes global (ie., server-wide) parameters.
  */
@@ -446,8 +444,9 @@ static int iNumServices = 0;
 static int iServiceIndex = 0;
 static BOOL bInGlobalSection = True;
 static BOOL bGlobalOnly = False;
+#if 0
 static int default_server_announce;
-
+#endif /* 0 */
 #define NUMPARAMETERS (sizeof(parm_table) / sizeof(struct parm_struct))
 
 /* prototypes for the special type handlers */
@@ -456,9 +455,9 @@ static BOOL handle_include(char *pszParmValue, char **ptr);
 static BOOL handle_copy(char *pszParmValue, char **ptr);
 static BOOL handle_character_set(char *pszParmValue,char **ptr);
 static BOOL handle_coding_system(char *pszParmValue,char **ptr);
-
+#if 0
 static void set_default_server_announce_type(void);
-
+#endif /* 0 */
 static struct enum_list const enum_protocol[] = {{PROTOCOL_NT1, "NT1"}, {PROTOCOL_LANMAN2, "LANMAN2"}, 
 					   {PROTOCOL_LANMAN1, "LANMAN1"}, {PROTOCOL_CORE,"CORE"}, 
 					   {PROTOCOL_COREPLUS, "COREPLUS"}, 
@@ -1144,7 +1143,9 @@ FN_GLOBAL_STRING(lp_wins_server,&Globals.szWINSserver)
 FN_GLOBAL_STRING(lp_interfaces,&Globals.szInterfaces)
 FN_GLOBAL_STRING(lp_socket_address,&Globals.szSocketAddress)
 FN_GLOBAL_STRING(lp_nis_home_map_name,&Globals.szNISHomeMapName)
+#if 0
 static FN_GLOBAL_STRING(lp_announce_version,&Globals.szAnnounceVersion)
+#endif /* 0 */
 FN_GLOBAL_STRING(lp_netbios_aliases,&Globals.szNetbiosAliases)
 FN_GLOBAL_STRING(lp_driverfile,&Globals.szDriverFile)
 FN_GLOBAL_STRING(lp_panic_action,&Globals.szPanicAction)
@@ -1187,7 +1188,6 @@ FN_GLOBAL_BOOL(lp_local_master,&Globals.bLocalMaster)
 FN_GLOBAL_BOOL(lp_domain_master,&Globals.bDomainMaster)
 FN_GLOBAL_BOOL(lp_domain_logons,&Globals.bDomainLogons)
 FN_GLOBAL_BOOL(lp_preferred_master,&Globals.bPreferredMaster)
-FN_GLOBAL_BOOL(lp_load_printers,&Globals.bLoadPrinters)
 FN_GLOBAL_BOOL(lp_use_rhosts,&Globals.bUseRhosts)
 FN_GLOBAL_BOOL(lp_readprediction,&Globals.bReadPrediction)
 FN_GLOBAL_BOOL(lp_readbmpx,&Globals.bReadbmpx)
@@ -1202,7 +1202,9 @@ FN_GLOBAL_BOOL(lp_timestamp_logs,&Globals.bTimestampLogs)
 FN_GLOBAL_BOOL(lp_browse_list,&Globals.bBrowseList)
 FN_GLOBAL_BOOL(lp_unix_realname,&Globals.bUnixRealname)
 FN_GLOBAL_BOOL(lp_nis_home_map,&Globals.bNISHomeMap)
+#if 0
 static FN_GLOBAL_BOOL(lp_time_server,&Globals.bTimeServer)
+#endif /* 0 */
 FN_GLOBAL_BOOL(lp_bind_interfaces_only,&Globals.bBindInterfacesOnly)
 FN_GLOBAL_BOOL(lp_unix_password_sync,&Globals.bUnixPasswdSync)
 FN_GLOBAL_BOOL(lp_passwd_chat_debug,&Globals.bPasswdChatDebug)
@@ -1224,15 +1226,21 @@ FN_GLOBAL_INTEGER(lp_maxmux,&Globals.max_mux)
 FN_GLOBAL_INTEGER(lp_passwordlevel,&Globals.pwordlevel)
 FN_GLOBAL_INTEGER(lp_usernamelevel,&Globals.unamelevel)
 FN_GLOBAL_INTEGER(lp_readsize,&Globals.ReadSize)
+#if 0
 FN_GLOBAL_INTEGER(lp_shmem_size,&Globals.shmem_size)
+#endif
 FN_GLOBAL_INTEGER(lp_deadtime,&Globals.deadtime)
 FN_GLOBAL_INTEGER(lp_maxprotocol,&Globals.maxprotocol)
 FN_GLOBAL_INTEGER(lp_security,&Globals.security)
 FN_GLOBAL_INTEGER(lp_maxdisksize,&Globals.maxdisksize)
+#if 0
 FN_GLOBAL_INTEGER(lp_lpqcachetime,&Globals.lpqcachetime)
 FN_GLOBAL_INTEGER(lp_syslog,&Globals.syslog)
+#endif
 FN_GLOBAL_INTEGER(lp_client_code_page,&Globals.client_code_page)
+#if 0
 static FN_GLOBAL_INTEGER(lp_announce_as,&Globals.announce_as)
+#endif
 FN_GLOBAL_INTEGER(lp_lm_announce,&Globals.lm_announce)
 FN_GLOBAL_INTEGER(lp_lm_interval,&Globals.lm_interval)
 FN_GLOBAL_INTEGER(lp_machine_password_timeout,&Globals.machine_password_timeout)
@@ -1258,6 +1266,7 @@ FN_LOCAL_STRING(lp_guestaccount,szGuestaccount)
 FN_LOCAL_STRING(lp_invalid_users,szInvalidUsers)
 FN_LOCAL_STRING(lp_valid_users,szValidUsers)
 FN_LOCAL_STRING(lp_admin_users,szAdminUsers)
+#if 0
 FN_LOCAL_STRING(lp_printcommand,szPrintcommand)
 FN_LOCAL_STRING(lp_lpqcommand,szLpqcommand)
 FN_LOCAL_STRING(lp_lprmcommand,szLprmcommand)
@@ -1267,6 +1276,7 @@ FN_LOCAL_STRING(lp_queuepausecommand,szQueuepausecommand)
 FN_LOCAL_STRING(lp_queueresumecommand,szQueueresumecommand)
 FN_LOCAL_STRING(lp_printername,szPrintername)
 FN_LOCAL_STRING(lp_printerdriver,szPrinterDriver)
+#endif /* 0 */
 FN_LOCAL_STRING(lp_hostsallow,szHostsallow)
 FN_LOCAL_STRING(lp_hostsdeny,szHostsdeny)
 FN_LOCAL_STRING(lp_magicscript,szMagicScript)
@@ -1277,13 +1287,16 @@ FN_LOCAL_STRING(lp_force_group,force_group)
 FN_LOCAL_STRING(lp_readlist,readlist)
 FN_LOCAL_STRING(lp_writelist,writelist)
 FN_LOCAL_STRING(lp_fstype,fstype)
+#if 0
 static FN_LOCAL_STRING(lp_volume,volume)
+#endif
 FN_LOCAL_STRING(lp_mangled_map,szMangledMap)
 FN_LOCAL_STRING(lp_veto_files,szVetoFiles)
 FN_LOCAL_STRING(lp_hide_files,szHideFiles)
 FN_LOCAL_STRING(lp_veto_oplocks,szVetoOplockFiles)
+#if 0
 FN_LOCAL_STRING(lp_driverlocation,szPrinterDriverLocation)
-
+#endif
 FN_LOCAL_BOOL(lp_revalidate,bRevalidate)
 FN_LOCAL_BOOL(lp_casesensitive,bCaseSensitive)
 FN_LOCAL_BOOL(lp_preservecase,bCasePreserve)
@@ -1470,7 +1483,7 @@ int lp_add_service(char *pszService, int iDefaultService)
   return(add_a_service(pSERVICE(iDefaultService),pszService));
 }
 
-
+#if 0
 /***************************************************************************
 add the IPC service
 ***************************************************************************/
@@ -1502,7 +1515,7 @@ static BOOL lp_add_ipc(void)
 
   return(True);
 }
-
+#endif /* 0 */
 
 /***************************************************************************
 Do a case-insensitive, whitespace-ignoring string compare.
@@ -1746,6 +1759,7 @@ static void add_to_file_list(char *fname)
 
 }
 
+#if 0
 /*******************************************************************
 check if a config file has changed date
 ********************************************************************/
@@ -1776,6 +1790,7 @@ BOOL lp_file_list_changed(void)
   }
   return(False);
 }
+#endif /* 0 */
 
 /***************************************************************************
   handle the interpretation of the coding system parameter
@@ -2033,7 +2048,7 @@ static BOOL do_parameter( char *pszParmName, char *pszParmValue )
                            pszParmValue ) );
 }
 
-
+#if 0
 /***************************************************************************
 check if two parameters are equal
 ***************************************************************************/
@@ -2074,6 +2089,7 @@ static BOOL equal_parameter(parm_type type,void *ptr1,void *ptr2)
     }
   return(False);
 }
+#endif /* 0 */
 
 /***************************************************************************
 Process a new section (service). At this stage all sections are services.
@@ -2126,7 +2142,7 @@ static BOOL do_section(char *pszSectionName)
    return (bRetval);
 }
 
-
+#if 0
 /***************************************************************************
 return True if a local parameter is currently set to the global default
 ***************************************************************************/
@@ -2138,8 +2154,8 @@ BOOL lp_is_default(int snum, struct parm_struct *parm)
 			       ((char *)pSERVICE(snum)) + pdiff,
 			       ((char *)&sDefault) + pdiff);
 }
-
-
+#endif /* 0 */
+#if 0
 /***************************************************************************
 return info about the next service  in a service. snum==-1 gives the globals
 
@@ -2187,8 +2203,8 @@ struct parm_struct *lp_next_parameter(int snum, int *i, int allparameters)
 
 	return NULL;
 }
-
-
+#endif /* 0 */
+#if 0
 /***************************************************************************
 Return TRUE if the passed service number is within range.
 ***************************************************************************/
@@ -2196,7 +2212,7 @@ BOOL lp_snum_ok(int iService)
 {
    return (LP_SNUM_OK(iService) && iSERVICE(iService).bAvailable);
 }
-
+#endif /* 0 */
 
 /***************************************************************************
 auto-load some home services
@@ -2235,6 +2251,7 @@ BOOL lp_loaded(void)
   return(bLoaded);
 }
 
+#if 0
 /***************************************************************************
 unload unused services
 ***************************************************************************/
@@ -2248,8 +2265,8 @@ void lp_killunused(BOOL (*snumused)(int ))
 	free_service(pSERVICE(i));
       }
 }
-
-
+#endif /* 0 */
+#if 0
 /***************************************************************************
 save the curent values of all global and sDefault parameters into the 
 defaults union. This allows swat and testparm to show only the
@@ -2257,7 +2274,9 @@ changed (ie. non-default) parameters.
 ***************************************************************************/
 static void lp_save_defaults(void)
 {
+	static BOOL defaults_saved = False;
 	int i;
+
 	for (i = 0; parm_table[i].label; i++) {
 		if (i>0 && parm_table[i].ptr == parm_table[i-1].ptr) continue;
 		switch (parm_table[i].type) {
@@ -2287,7 +2306,7 @@ static void lp_save_defaults(void)
 	}
 	defaults_saved = True;
 }
-
+#endif /* 0 */
 
 /***************************************************************************
 Load the services array from the services file. Return True on success, 
@@ -2306,12 +2325,12 @@ BOOL lp_load(char *pszFname,BOOL global_only, BOOL save_defaults, BOOL add_ipc)
   bGlobalOnly = global_only;
   
   init_globals();
-
+#if 0
   if (save_defaults) {
 	  init_locals();
 	  lp_save_defaults();
   }
-  
+#endif /* 0 */
   pstrcpy(n2,pszFname);
   standard_sub_basic(n2);
 
@@ -2326,11 +2345,11 @@ BOOL lp_load(char *pszFname,BOOL global_only, BOOL save_defaults, BOOL add_ipc)
       bRetval = service_ok(iServiceIndex);	   
 
   lp_add_auto_services(lp_auto_services());
-
+#if 0
   if (add_ipc)
 	  lp_add_ipc();
-
   set_default_server_announce_type();
+#endif /* 0 */
 
   bLoaded = True;
 
@@ -2386,6 +2405,7 @@ int lp_servicenumber(char *pszServiceName)
    return (iService);
 }
 
+#if 0
 /*******************************************************************
   a useful volume label function
   ******************************************************************/
@@ -2395,8 +2415,8 @@ char *volume_label(int snum)
   if (!*ret) return(lp_servicename(snum));
   return(ret);
 }
-
-
+#endif /* 0 */
+#if 0
 /*******************************************************************
  Set the server type we will announce as via nmbd.
 ********************************************************************/
@@ -2424,6 +2444,7 @@ int lp_default_server_announce(void)
   return default_server_announce;
 }
 
+
 /*******************************************************************
  Split the announce version into major and minor numbers.
 ********************************************************************/
@@ -2449,6 +2470,7 @@ int lp_major_announce_version(void)
   return major_version;
 }
 
+
 int lp_minor_announce_version(void)
 {
   static BOOL got_minor = False;
@@ -2470,6 +2492,7 @@ int lp_minor_announce_version(void)
   minor_version = atoi(p);
   return minor_version;
 }  
+#endif /* 0 */
 
 /***********************************************************
  Set the global name resolution order (used in smbclient).
