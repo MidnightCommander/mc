@@ -1,3 +1,8 @@
+2003-06-14  Pavel Roskin  <proski@gnu.org>
+
+	* editkeys.c: Leave only distinct entries in cooledit_key_map
+	and emacs_key_map.  Move the rest to common_key_map.
+
 2003-06-09  Pavel Roskin  <proski@gnu.org>
 
 	* editkeys.c (emacs_key_map): Move Atl-'>' and Alt-'<' ...
