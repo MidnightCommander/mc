@@ -64,5 +64,7 @@ typedef struct {
 	char              *pathname;
 } desktop_icon_t;
 
+file_entry *file_entry_from_file (char *filename);
+void        file_entry_free      (file_entry *fe);
 
 #endif

@@ -292,7 +292,7 @@ gicon_get_icon_for_file (file_entry *fe)
 	return gicon_get_icon_for_file_speed (fe, TRUE);
 }
 
-typedef struct lookup_name_closure_t {
+typedef struct {
 	char *name;
 	void *image;
 } lookup_name_closure_t;

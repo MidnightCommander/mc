@@ -25,6 +25,7 @@
 #include "gdesktop.h"
 #include "gdesktop-icon.h"
 #include "gpageprop.h"
+#include "gicon.h"
 
 static int prop_dialog_result;
 
@@ -93,8 +94,19 @@ item_properties (GtkWidget *parent, char *fname, DesktopIconInfo *dii)
 	name = gprop_filename_new (fname, base);
 	gtk_box_pack_start (GTK_BOX (vbox), name->top, FALSE, FALSE, 0);
 	if (dii) {
-		gnome_metadata_get (fname, "icon-filename", &size, &icon_filename);
-		gene = gprop_general_new(fname, icon_filename);
+		GdkImlibImage *icon;
+		file_entry *fe;
+		char *name;
+		
+		fe = file_entry_from_file (fname);
+		icon = gicon_get_icon_for_file_speed (fe, FALSE);
+		file_entry_free (fe);
+		icon_filename = gicon_image_to_name (icon);
+		if (icon_filename == NULL)
+			icon_filename = g_strdup (ICONDIR "i-regular.png");
+		
+		gene = gprop_general_new (fname, icon_filename);
+					 
 		gtk_box_pack_start (GTK_BOX (vbox), gene->top, FALSE, FALSE, 0);
 	}
 

@@ -7,7 +7,9 @@
 
 #include <config.h>
 #include <gnome.h>
+#include <sys/stat.h>
 #include "gdesktop-icon.h"
+#include "dir.h"
 #include "gdesktop.h"
 
 

@@ -571,7 +571,7 @@ select_icon (DesktopIconInfo *dii, int event_state)
 }
 
 /* Creates a file entry structure and fills it with information appropriate to the specified file.  */
-static file_entry *
+file_entry *
 file_entry_from_file (char *filename)
 {
 	file_entry *fe;
@@ -603,7 +603,7 @@ file_entry_from_file (char *filename)
 }
 
 /* Frees a file entry structure */
-static void
+void
 file_entry_free (file_entry *fe)
 {
 	if (fe->fname)

@@ -484,9 +484,6 @@ gprop_general_new (char *title, char *icon_filename)
 
 	g_return_val_if_fail (title != NULL, NULL);
 
-	if (!icon_filename)
-		icon_filename = ICONDIR "i-regular.png";
-	
 	gp = g_new (GpropGeneral, 1);
 
 	gp->top = gtk_vbox_new (FALSE, 6);
