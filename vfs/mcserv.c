@@ -55,6 +55,7 @@
 #include <sys/wait.h>
 #include <errno.h>
 #include <signal.h>
+#include <getopt.h>
 
 /* Network include files */
 #include <sys/socket.h>
@@ -1264,7 +1265,6 @@ int
 main (int argc, char *argv[])
 {
     char *result;
-    extern char *optarg;
     int c;
 
     while ((c = getopt (argc, argv, "fdiqp:v")) != -1) {

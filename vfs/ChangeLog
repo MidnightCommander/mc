@@ -1,5 +1,7 @@
 2002-11-15  Pavel Roskin  <proski@gnu.org>
 
+	* mcserv.c: Include getopt.h, don't redefine optarg.
+
 	* names.c: Only leave actually used functions.
 
 	* ftpfs.c (ftpfs_open_socket): Use INADDR_NONE, not -1.
