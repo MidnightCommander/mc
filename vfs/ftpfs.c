@@ -118,7 +118,7 @@ extern char *home_dir;
 
 /* Anonymous setup */
 char *ftpfs_anonymous_passwd = NULL;
-int ftpfs_directory_timeout;
+int ftpfs_directory_timeout = 900;
 
 /* Proxy host */
 char *ftpfs_proxy_host = NULL;
@@ -1254,6 +1254,7 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
 	}
 	num_entries++;
 	if ((!strcmp(ent->name, ".")) || (!strcmp (ent->name, ".."))) {
+	    g_free (ent->name);
 	    ent->name = NULL;	/* Ouch, vfs_s_free_entry "knows" about . and .. being special :-( */
 	    vfs_s_free_entry (me, ent);
 	    continue;
@@ -1729,7 +1730,7 @@ static int netrc_next (void)
 {
     char *p;
     int i;
-    static const char * keywords [] = { "default", "machine", 
+    static const char * const keywords [] = { "default", "machine", 
         "login", "password", "passwd", "account", "macdef" };
 
     while (1) {
@@ -1863,11 +1864,13 @@ int lookup_netrc (char *host, char **login, char **pass)
 	    if (keyword == 20)
 	        break;
 	}
-	if (keyword == 20)
-	    continue;
-	else
+	if (keyword != 20)
 	    break;
     }
+
+    g_free (netrc);
+    g_free (netrcname);
+
     rupp = g_new (struct rupcache, 1);
     rupp->host = g_strdup (host);
     rupp->login = rupp->pass = 0;
@@ -1879,8 +1882,6 @@ int lookup_netrc (char *host, char **login, char **pass)
     rupp->next = rup_cache;
     rup_cache = rupp;
     
-    g_free (netrc);
-    g_free (netrcname);
     return 0;
 }
 

@@ -39,18 +39,13 @@ vfs_s_new_inode (vfs *me, vfs_s_super *super, struct stat *initstat)
 {
     vfs_s_inode *ino;
 
-    ino = g_new (vfs_s_inode, 1);
+    ino = g_new0 (vfs_s_inode, 1);
     if (!ino)
 	return NULL;
 
-    ino->linkname = ino->localname = NULL;
-    ino->subdir = NULL;
     if (initstat)
         ino->st = *initstat;
     ino->super = super;
-    ino->ent = NULL;
-    ino->flags = 0;
-    ino->st.st_nlink = 0;
     ino->st.st_ino = MEDATA->inode_counter++;
     ino->st.st_dev = MEDATA->rdev;
 
@@ -67,16 +62,12 @@ vfs_s_new_entry (vfs *me, char *name, vfs_s_inode *inode)
 {
     vfs_s_entry *entry;
 
-    entry = g_new (struct vfs_s_entry, 1);
+    entry = g_new0 (struct vfs_s_entry, 1);
     total_entries++;
 
     if (name)
 	entry->name = g_strdup (name);
-    else
-	entry->name = NULL;
-    entry->dir = NULL;
-    entry->next = NULL;
-    entry->prevp = NULL;
+
     entry->ino = inode;
     entry->ino->ent = entry;
     CALL (init_entry) (me, entry);
@@ -231,14 +222,14 @@ vfs_s_find_entry_tree (vfs *me, vfs_s_inode *root, char *path, int follow, int f
     vfs_s_entry *ent = NULL;
     char p[MC_MAXPATHLEN] = "";
 
-    while (1){
+    while (root){
 	int t;
 
-	for (pseg = 0; path [pseg] == PATH_SEP; pseg++)
-		;
-	if (!path [pseg])
+	while (*path == PATH_SEP)	/* Strip leading '/' */
+	    path++;
+
+	if (!path [0])
 	    return ent;
-	path += pseg;
 
 	for (pseg = 0; path[pseg] && path[pseg] != PATH_SEP; pseg++)
 		;
@@ -261,6 +252,8 @@ vfs_s_find_entry_tree (vfs *me, vfs_s_inode *root, char *path, int follow, int f
 	    return NULL;
 	root = ent->ino;
     }
+
+    return NULL;
 }
 
 static void
@@ -276,10 +269,7 @@ split_dir_name (vfs *me, char *path, char **dir, char **name, char **save)
 	*save = s;
 	*dir = path;
 	*s++ = 0;
-	if (!*s)	/* This can happen if someone does stat("/"); */
-	    *name = "";
-	else
-	    *name = s;
+	*name = s;
     }
 }
 
@@ -482,7 +472,7 @@ vfs_s_get_path_mangle (vfs *me, char *inname, struct vfs_s_super **archive, int 
     char *local, *op, *archive_name;
     int result = -1;
     struct vfs_s_super *super;
-    void *cookie;
+    void *cookie = NULL;
     
     archive_name = inname;
     vfs_split (inname, &local, &op);

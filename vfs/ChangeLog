@@ -1,3 +1,15 @@
+2000-04-26  Andrew V. Samoilov <sav@bcs.zp.ua>
+
+	* direntry.c (vfs_s_find_entry_tree): segfault fixed when root is NULL
+
+	(vfs_s_new_inode, vfs_s_new_entry): g_new replaced by g_new0
+	
+	* ftpfs.c (dir_load): ent->name is free()d for "." and ".."
+	
+	(ftpfs_directory_timeout): default value changed to 900
+	
+	(netrc_next): "const char * const keywords" go to rodata and is shared
+
 2000-04-16  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* vfs.c (vfs_type): FL_NO_LOCALHASH for prevention of obscure
