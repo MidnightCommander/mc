@@ -94,8 +94,8 @@ int do_select_codepage()
 	return -1;
     }
     return 0;
-}
 
 #endif /* HAVE_ICONV */
+}
 
 #endif /* HAVE_CHARSET */

@@ -3,6 +3,8 @@
 	* dlg.[ch] (x_set_dialog_title): title constified.
 	(create_dlg): Use g_new0 instead of g_new.
 
+	* selcodepage.c (do_select_codepage): Fix compilation.
+
 2001-06-09  Pavel Roskin  <proski@gnu.org>
 
 	* util.c (load_mc_home_file): New function. Load file from
