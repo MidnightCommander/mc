@@ -36,7 +36,9 @@ AC_PROG_GNU_MAKE
 AC_AIX
 AC_MINIX
 AC_ISC_POSIX
-AC_PROG_CC_STDC
+dnl It's a hack to accomodate both Autoconf 2.13 and the 2.49x series,
+dnl It's needed until Autoconf 2.50 is released.
+ifdef([AC_PROG_CC_STDC], [AC_PROG_CC_STDC], [AM_PROG_CC_STDC])
 AC_HEADER_MAJOR
 AC_C_CONST
 AC_PATH_PROG(AR, ar, ar)

@@ -1,5 +1,9 @@
 2001-03-07  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Use AM_PROG_CC_STDC if AC_PROG_CC_STDC is not
+	defined.
+	Reported by Norbert Warmuth.
+
 	* configure.in: Don't process vfs/extfs/uzip - it's now
 	constant.
 
