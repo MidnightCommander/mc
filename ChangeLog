@@ -1,5 +1,8 @@
 2001-08-10  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.am (EXTRA_DIST): Remove BUGS.
+	* doc/Makefile.am (EXTRA_DIST): Remove LSM and FILES.
+
 	* BUGS: Remove.  Bugzilla.gnome.org doesn't have those bugs.
 
 	* doc/LSM: Remove, it's outdated.
