@@ -2546,58 +2546,55 @@ il tasto Maiuscolo mentre si clicca trascinando con il mouse.
 .PP
 Per definire una macro, premere 
 .B Ctrl-R
-and then type out the key
-strokes you want to be executed. Press 
+poi premere i tasti che si voglia essere eseguiti. Premere nuovamente
 .B Ctrl-R
-again when finished. You can then assign the macro to any key you
-like by pressing that key. The macro is executed when you press
-.B Ctrl-A and then the assigned key. The macro is also executed if
-you press Meta, Ctrl, or Esc and the assigned key, provided that the
-key is not used for any other function. Once defined, the macro
-commands go into the file 
+quando si ha finito. E' possibile assegnare una macro a qualsiasi tasto 
+si preme. La macro viene eseguita quando si preme
+.B Ctrl-A e poi il tasto assegnato. La macro viene eseguita anche se si
+preme il tasto Meta, Ctrl, o Esc e il tasto assegnato, basta che il tasto
+non sia già assegnato a qualche altra funzione. Una volta definiti, i
+macro comandi finiscono nel file
 .B .mc/cedit/cooledit.macros
-in your home directory. You can delete a macro by deleting the
-appropriate line in this file.
+nella propria directory home. E' possibile cancellare una macro cancellando
+la riga appropriata nel suddetto file.
 .PP
 .B F19
-will format the currently highlighted block (plain text or
+formatterà il blocco evidenziato correntemente (testo, codice
 .B C
-or
+o
 .B C++
-code or another). This is controlled by the
-file
+o altro). Questo comportamento viene controllato dal file 
 .B @prefix@/lib/mc/edit.indent.rc
-which is copied to
+che viene copiato nel 
 .B .mc/cedit/edit.indent.rc
-in your home directory the first time you use it.
+nella propria directory home la prima volta che lo si usa.
 .PP
-You can use scanf search and replace to search and replace
-a C format string. First take a look at the 
+E' possibile usare la ricerca e sostituzione scanf per cercare
+e rimpiazzare una stringa in formato C. Prego vedere le pagine man di 
 .B sscanf
-and 
+e 
 .B sprintf
-man pages to see what a format string
-is and how it works. An example is as follows: Suppose you want
-to replace all occurrences of say, an open bracket, three
-comma separated numbers, and a close bracket, with the
-word 
-.I apples, 
-the third number, the word 
-.I oranges
-and then the second number, I would fill in the Replace dialog
-box as follows:
+per vedere cos'è una stringa di formato e come funziona. Il seguente
+è un esempio: supponiamo di voler sostituire tutte le ricorrenze di,
+poniamo, una parentesi aperta, tre numeri separati da virgole, una 
+parentesi chiusa, con la parola
+.I mele,
+il terzo numero, la parola
+.I arance
+ed il secondo numero, si dovrebbe riempire la finestra di sostituzione
+nella maniera seguente:
 .PP
 .nf
- Enter search string
+ Immettere stringa di ricerca
 (%d,%d,%d)
- Enter replace string
-apples %d oranges %d
- Enter replacement argument order
+ Immettere stringa di sostituzione
+mele %d arance %d
+ Immettere ordine di sostituzione argomenti
 3,2
 .fi
 .PP
-The last line specifies that the third and then the second
-number are to be used in place of the first and second.
+L'ultima riga specifica che il terzo ed il secondo numero
+devono essere usati al posto del primo e del secondo.
 .PP
 It is advisable to use this feature with Prompt on replace on, because
 a match is thought to be found whenever the number of arguments found
