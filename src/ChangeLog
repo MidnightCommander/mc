@@ -1,3 +1,7 @@
+2000-09-13  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.in: Only rebuild mc.hlp in the maintainer mode.
+
 2000-09-01  Pavel Roskin  <proski@gnu.org>
 
 	* fixhlp.c: fixed compile errors and warnings

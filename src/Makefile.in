@@ -93,13 +93,13 @@ libedit.a:
 @PCENTRULE@	$(RMF) libedit.a
 @PCENTRULE@	$(LN_S) ../edit/libedit.a .
 
-$(srcdir)/mc.hlp: $(docdir)/mc.1.in $(mcsrclibdir)/xnc.hlp $(srcdir)/gindex.pl man2hlp.c
-	$(MAKE) man2hlp
-	- ./man2hlp 58 $(docdir)/mc.1.in | cat - $(mcsrclibdir)/xnc.hlp | \
-	perl $(srcdir)/gindex.pl > $(srcdir)/mc.hlp.tmp && \
-	$(MV) -f $(srcdir)/mc.hlp.tmp $(srcdir)/mc.hlp; \
-	$(RMF) $(srcdir)/mc.hlp.tmp; \
-	touch $(srcdir)/mc.hlp
+$(srcdir)/mc.hlp: @MAINT@ $(docdir)/mc.1.in $(mcsrclibdir)/xnc.hlp $(srcdir)/gindex.pl man2hlp.c
+@MAINT@	$(MAKE) man2hlp
+@MAINT@	- ./man2hlp 58 $(docdir)/mc.1.in | cat - $(mcsrclibdir)/xnc.hlp | \
+@MAINT@	perl $(srcdir)/gindex.pl > $(srcdir)/mc.hlp.tmp && \
+@MAINT@	$(MV) -f $(srcdir)/mc.hlp.tmp $(srcdir)/mc.hlp; \
+@MAINT@	$(RMF) $(srcdir)/mc.hlp.tmp; \
+@MAINT@	touch $(srcdir)/mc.hlp
 
 mc.html: $(docdir)/mc.1.in man2hlp
 	./man2hlp 0 $(docdir)/mc.1.in > body.html
