@@ -419,14 +419,13 @@ init_subshell (void)
 	    if ((subshell_pipe[READ] = open (tcsh_fifo, O_RDWR)) == -1
 		|| (subshell_pipe[WRITE] =
 		    open (tcsh_fifo, O_RDWR)) == -1) {
-		fprintf (stderr, _("Cannot open named pipe %s: %s\r\n"),
-			 tcsh_fifo, unix_error_string (errno));
+		fprintf (stderr, _("Cannot open named pipe %s\n"), tcsh_fifo);
+		perror (__FILE__": open");
 		use_subshell = FALSE;
 		return;
 	    }
 	} else /* subshell_type is BASH or ZSH */ if (pipe (subshell_pipe)) {
-	    fprintf (stderr, _("Cannot create pipe pair: %s\r\n"),
-		     unix_error_string (errno));
+	    perror (__FILE__": couldn't create pipe");
 	    use_subshell = FALSE;
 	    return;
 	}
@@ -790,7 +789,7 @@ do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
 
     if (subshell_alive && strcmp (subshell_cwd, current_panel->cwd)
 	&& strcmp (current_panel->cwd, "."))
-	fprintf (stderr, _("Warning: Cannot change to %s.\r\n"),
+	fprintf (stderr, _("Warning: Cannot change to %s.\n"),
 		 current_panel->cwd);
 
     if (reset_prompt)
