@@ -98,6 +98,7 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/lib/mc/mc.menu
 %{prefix}/lib/mc/bin/cons.saver
 %{prefix}/lib/mc/extfs/*
+%{prefix}/lib/mc/syntax/*
 %{prefix}/man/man1/*
 %config /etc/profile.d/*
 %dir %{prefix}/lib/mc
@@ -122,6 +123,9 @@ rm -rf $RPM_BUILD_ROOT
 %config /etc/CORBA/servers/*
 
 %changelog
+* Tue Jun 22 1999 Vladimir Kondratiev <vkondra@iil.intel.com>
+- added syntax files to %files
+
 * Wed May 26 1999 Cody Russell <bratsche@dfw.net>
 - chmod cons.saver at $RPM_BUILD_ROOT%{prefix}/lib rather than at
   $RPM_BUILD_ROOT/usr/lib. We can now install to somewhere other than /usr.

@@ -1,3 +1,7 @@
+1999-02-22  Vladimir Kondratiev <vkondra@iil.intel.com>
+
+	* mc.spec.in: added syntax files to %files
+
 1999-06-22  David Martin <dmartina@usa.net>
 
 	* gtkedit/gtkedit.c (tb_items): Mark strings for localization.
