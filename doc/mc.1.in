@@ -698,7 +698,7 @@ for pipes,
 .B ~
 for symbolic links to directories and
 .B !
-for stalled symlinks (links that point nowhere).
+for stale symlinks (links that point nowhere).
 .PP
 .B mtime,
 file's last modification time.
@@ -2923,10 +2923,10 @@ is used for directories or symbolic links to directories;
 .I executable
 for executable files;
 .I link
-is used for symbolic links which are neither stalled nor linked
+is used for symbolic links which are neither stale nor linked
 to a directory;
-.I stalledlink
-is used for stalled symbolic links;
+.I stalelink
+is used for stale symbolic links;
 .I device
 - character and block devices;
 .I special
