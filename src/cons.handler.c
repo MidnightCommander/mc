@@ -19,14 +19,6 @@
 /*#ifdef linux */
 #include <config.h>
 
-int    cons_saver_pid = 1;
-extern int rxvt_extensions;
-signed char console_flag = 0;
-
-#if defined(linux) || defined(__linux__)
-
-#include "tty.h"
-#include "global.h"
 #ifdef HAVE_UNISTD_H
 #    include <unistd.h>
 #endif
@@ -36,11 +28,16 @@ signed char console_flag = 0;
 #    include <sys/wait.h>
 #endif
 #include <signal.h>
-#include "util.h"
-#include "win.h"
 #include "cons.saver.h"
+#include "tty.h"
+#include "global.h"
+
+signed char console_flag = 0;
+
+#if defined(linux) || defined(__linux__)
 #include "main.h"
 
+int    cons_saver_pid = 1;
 static int pipefd1 [2] = {-1, -1}, pipefd2 [2] = {-1, -1};
 
 void show_console_contents (int starty, unsigned char begin_line, unsigned char end_line)

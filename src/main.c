@@ -2407,6 +2407,7 @@ static void
 sigchld_handler_no_subshell (int sig)
 {
 #ifndef HAVE_X
+#if defined(linux) || defined(__linux__)
     int pid, status;
 
     if (!console_flag)
@@ -2419,7 +2420,6 @@ sigchld_handler_no_subshell (int sig)
     /* That comment is no longer true.  We need to wait() on a sigchld
        handler (that's at least what the tarfs code expects currently). */
 
-#ifndef SCO_FLAVOR
     pid = waitpid (cons_saver_pid, &status, WUNTRACED | WNOHANG);
     
     if (pid == cons_saver_pid){
@@ -2436,10 +2436,10 @@ sigchld_handler_no_subshell (int sig)
 	}
 	/* }}} */
     }
-#endif /* ! SCO_FLAVOR */
+#endif /* linux || __linux__ */
 
     /* If we get here, some other child exited; ignore it */
-#endif /* ! HAVE_X  */
+#endif /* !HAVE_X */
 }
 
 void

@@ -1,5 +1,11 @@
 2001-06-22  Pavel Roskin  <proski@gnu.org>
 
+	* cons.handler.c: Reorganize includes. Fix warnings on BSD.
+	* rxvt.c (rxvt_extensions): Make static.
+	* main.c (sigchld_handler_no_subshell) [!__linux__]: Don't try
+	to restart cons.saver.
+	* subshell.c (sigchld_handler) [!__linux__]: Likewise.
+
 	* fsusage.c: Use HAVE_INFOMOUNT.
 	* mountlist.c: Likewise. Fix condition when mount_list is
 	declared.

@@ -36,7 +36,7 @@
 #include "global.h"
 #include "cons.saver.h"
 
-int rxvt_extensions = 0;
+static int rxvt_extensions = 0;
 
 int look_for_rxvt_extensions (void)
 {
