@@ -1,5 +1,8 @@
 2001-06-01  Pavel Roskin  <proski@gnu.org>
 
+	* gmain.c (x_init_dlg): Warning fix for buggy Gtk that doesn't
+	always cast the argument to GTK_OBJECT.
+
 	* Makefile.in: Don't use key.o.
 
 2001-05-29  Pavel Roskin  <proski@gnu.org>
