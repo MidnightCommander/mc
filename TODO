@@ -1,22 +1,3 @@
-Before 4.6.1
-============
-
-Check the following programs for proper pathname quoting.
-vfs/extfs/audio.in
-vfs/extfs/bpp
-vfs/extfs/hp48.in
-vfs/extfs/iso9660.in
-vfs/extfs/lslR.in
-vfs/extfs/rpm
-vfs/extfs/sfs.ini
-vfs/extfs/trpm
-vfs/extfs/uar.in
-vfs/extfs/uarj.in
-vfs/extfs/uha.in
-vfs/extfs/ulha.in
-vfs/extfs/urar.in
-vfs/extfs/uzoo.in
-
 Before 4.6.2
 ============
 
