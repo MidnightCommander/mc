@@ -1,3 +1,9 @@
+2001-08-21  Pavel Roskin  <proski@gnu.org>
+
+	* application.x-gnumeric.desktop: Remove, it's unused.
+	* gimp.image.desktop: Likewise.
+	* Makefile.in: Remove references to *.desktop files.
+
 2001-08-20  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.in: Move i18n part of EXTRALIBS to INTLLIBS.  Use

@@ -208,9 +208,7 @@ EXTRA_DIST =			\
 	gnome.TODO		\
 	gmc.gnorba		\
 	mc.keys.in.in		\
-	gimp.image.desktop	\
-	magicdev.idl		\
-	application.x-gnumeric.desktop
+	magicdev.idl
 
 DISTGNOME = \
 	Makefile.in ChangeLog $(EXTRA_DIST) $(CORBA_SOURCES) \
