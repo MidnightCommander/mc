@@ -1,3 +1,8 @@
+2002-09-26  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* util.c (mc_mkstemps): Really return NULL in the filename in the
+	case of failure.  Reported by Andrew W. Nosenko <awn@bcs.zp.ua>.
+
 2002-09-26  Pavel Roskin  <proski@gnu.org>
 
 	* ext.c (get_file_type_local): Make static.

@@ -1258,7 +1258,7 @@ int mc_mkstemps(char **pname, const char *prefix, const char *suffix)
 
     /* Unsuccessful. Free the filename. */
     g_free (tmpname);
-    tmpname = NULL;
+    *pname = NULL;
 
     return -1;
 }
