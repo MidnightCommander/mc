@@ -190,8 +190,8 @@ int   mark_moves_down = 1;
 /* If true, at startup the user-menu is invoked */
 int   auto_menu = 0;
 
-/* If true, use + and \ keys normally and select/unselect do if M-+ / M-\ and M--
-   and keypad + / - */
+/* If true, use + and \ keys normally and select/unselect do if M-+ / M-\ 
+   and M-- and keypad + / - */
 int   alternate_plus_minus = 0;
 
 /* If true, then the +, - and \ keys have their special meaning only if the
@@ -600,9 +600,10 @@ static void parse_control_file (void)
 	return;
     }
 #ifndef OS2_NT
-    /* Security: Check that the user owns the control file to prevent
-       other users from playing tricks on him/her. */
-    if (s.st_uid != getuid ()){
+    /* Security: Check that the user owns the control file and this file 
+       is not group/world writable to prevent other users from playing tricks 
+       on him/her. */
+    if (s.st_uid != getuid () || ((s.st_mode) & (S_IWGRP|S_IWOTH)){
 	fclose (file);
 	return;
     }
@@ -1723,7 +1724,7 @@ init_labels (Widget *paneletc)
     define_label (midnight_dlg, paneletc, 10, _("Quit"), (voidfn) quit_cmd);
 }
 
-static key_map ctl_x_map [] = {
+static const key_map ctl_x_map [] = {
     { XCTRL('c'),   (callfn) quit_cmd },
 #ifdef USE_VFS
     { 'a',          reselect_vfs },
@@ -1771,7 +1772,7 @@ static void nothing ()
 {
 }
 
-static key_map default_map [] = {
+static const key_map default_map [] = {
 #ifndef HAVE_GNOME
     { KEY_F(19),  menu_last_selected_cmd },
     { KEY_F(20),  (key_callback) quiet_quit_cmd },
@@ -2480,7 +2481,7 @@ init_sigchld (void)
 static void
 print_mc_usage (void)
 {
-    const char * const ptr;
+    const char * const * ptr;
     const char * const usage [] = {
 	    
     N_("Usage is:\n\n"
@@ -2677,7 +2678,7 @@ static void parse_an_arg (poptContext state,
 
 char *cmdline_geometry = NULL;
 
-static struct poptOption argument_table [] = {
+static const struct poptOption argument_table [] = {
 #ifdef HAVE_GNOME
 	{ NULL, '\0', POPT_ARG_CALLBACK, parse_an_arg, 0},
 #endif

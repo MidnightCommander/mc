@@ -1,3 +1,11 @@
+2000-01-24  Andrew V. Samoilov  <sav@bcs.zp.ua>             
+
+	* main.c (parse_control_file): add extra secutity checks for
+	 control file. It cannot be group/world writable;
+	(ctl_x_map, default_map, argument_table): added const qualifier.
+
+	* fixed segfault in print_mc_usage
+
 2000-01-24  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* cmd.c (nice_cd): disabled ability to go to home.
