@@ -1,3 +1,20 @@
+1999-04-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gscreen.c (file_list_popup_items): Use "New Directory", not "New
+	Folder", to be consistent with the desktop and File menus.  Thanks
+	to Kevin Fox for pointing this out.
+	(panel_icon_list_drag_data_received): Update the panels properly.
+	(panel_clist_drag_data_received): Likewise.
+	(panel_tree_drag_data_received): Likewise.
+
+	* gcmd.c (gnome_close_panel): Doh.  Do not access g_free()d
+	memory.
+
+	* glayout.c (copy_uiinfo_widgets): Return the copied array as a
+	return value, not in an argument.
+
+	* gcmd.c (set_view_type): Added a sanity check.
+
 1999-04-01  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gtkdtree.c (scan_subtree): Moved the functionality to scan a

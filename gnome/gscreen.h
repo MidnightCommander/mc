@@ -8,7 +8,7 @@ extern GnomeUIInfo panel_view_toolbar_uiinfo[];
 
 WPanel *create_container (Dlg_head *h, char *str, char *geometry);
 
-void copy_uiinfo_widgets (GnomeUIInfo *uiinfo, gpointer **dest);
+gpointer *copy_uiinfo_widgets (GnomeUIInfo *uiinfo);
 
 typedef struct {
 	int splitted;

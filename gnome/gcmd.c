@@ -163,16 +163,16 @@ gnome_close_panel (GtkWidget *widget, WPanel *panel)
 	remove_widget (h, panel->filter_w);
 	remove_widget (h, panel);
 
-	/* Kill them */
+	/* Free our own internal stuff */
+	g_free (panel->view_menu_items);
+	g_free (panel->view_toolbar_items);
+
+	/* Kill the widgets */
 	destroy_widget (panel->current_dir);
 	destroy_widget (panel->filter_w);
 	destroy_widget ((Widget *)panel);
 
 	layout_panel_gone (panel);
-
-	g_free (panel->view_menu_items);
-	g_free (panel->view_toolbar_items);
-
 	mc_chdir ("/");
 }
 
@@ -209,7 +209,7 @@ set_view_type (GtkWidget *widget, WPanel *panel, enum list_types type)
 
 	/* Synchronize the widgets */
 
-	for (i = 0; ; i++)
+	for (i = 0; panel->view_menu_items[i] && panel->view_toolbar_items[i]; i++)
 		if (widget == panel->view_menu_items[i]) {
 			gtk_signal_handler_block_by_data (
 				GTK_OBJECT (panel->view_toolbar_items[i]), panel);

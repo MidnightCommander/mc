@@ -828,8 +828,8 @@ panel_icon_list_drag_data_received (GtkWidget          *widget,
 		file_entry_free (fe);
 
 	if (reload) {
-		update_one_panel_widget (panel, 0, UP_KEEPSEL);
-		panel_update_contents (panel);
+		update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+		repaint_screen ();
 	}
 }
 
@@ -889,8 +889,8 @@ panel_clist_drag_data_received (GtkWidget          *widget,
 		file_entry_free (fe);
 
 	if (reload) {
-		update_one_panel_widget (panel, 0, UP_KEEPSEL);
-		panel_update_contents (panel);
+		update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+		repaint_screen ();
 	}
 }
 
@@ -914,6 +914,7 @@ panel_tree_drag_data_received (GtkWidget          *widget,
 	int row, col;
 	file_entry *fe;
 	char *path;
+	int reload;
 
 	if (!gtk_clist_get_selection_info (GTK_CLIST (dtree), x, y, &row, &col))
 		return;
@@ -928,10 +929,15 @@ panel_tree_drag_data_received (GtkWidget          *widget,
 	if (!fe)
 		return; /* eeeek */
 
-	gdnd_perform_drop (context, selection_data, path, fe);
+	reload = gdnd_perform_drop (context, selection_data, path, fe);
 
 	file_entry_free (fe);
 	g_free (path);
+
+	if (reload) {
+		update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+		repaint_screen ();
+	}
 }
 
 static void
@@ -1469,9 +1475,9 @@ handle_rescan_directory (GtkWidget *widget, gpointer data)
 
 /* The popup menu for file panels */
 static GnomeUIInfo file_list_popup_items[] = {
-	GNOMEUIINFO_ITEM_NONE (N_("Rescan Directory"), N_("Reloads the current directory"),
+	GNOMEUIINFO_ITEM_NONE (N_("_Rescan Directory"), N_("Reloads the current directory"),
 			       handle_rescan_directory),
-	GNOMEUIINFO_ITEM_NONE (N_("New folder"), N_("Creates a new folder here"),
+	GNOMEUIINFO_ITEM_NONE (N_("New _Directory..."), N_("Creates a new directory here"),
 			       gnome_mkdir_cmd),
 	GNOMEUIINFO_END
 };
@@ -2473,7 +2479,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 			       GNOME_DOCK_ITEM_BEH_EXCLUSIVE,
 			       GNOME_DOCK_TOP,
 			       2, 0, 0);
-	copy_uiinfo_widgets (panel_view_toolbar_uiinfo, &panel->view_toolbar_items);
+	panel->view_toolbar_items = copy_uiinfo_widgets (panel_view_toolbar_uiinfo);
 
 	panel->back_b   = toolbar[0].widget;
 	panel->up_b     = toolbar[1].widget;

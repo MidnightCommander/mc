@@ -133,7 +133,7 @@ set_current_panel (WPanel *panel)
 
 	if (g_list_length (containers) > 1)
 		other_panel_ptr = current_panel_ptr;
-	
+
 	for (p = containers; p; p = p->next){
 		if (((PanelContainer *)p->data)->panel == panel){
 			current_panel_ptr = p->data;
@@ -675,19 +675,20 @@ my_app_create_menus (GnomeApp *app, GnomeUIInfo *uiinfo, void *data)
 /**
  * copy_uiinfo_widgets:
  * @uiinfo: A GnomeUIInfo array
- * @dest: The destination array will be placed here
  * 
  * Allocates an array of widgets and copies the widgets from the uiinfo array to
  * it.  The array will be NULL-terminated.
+ *
+ * Returns: The allocated array of widgets.
  **/
-void
-copy_uiinfo_widgets (GnomeUIInfo *uiinfo, gpointer **dest)
+gpointer *
+copy_uiinfo_widgets (GnomeUIInfo *uiinfo)
 {
+	gpointer *dest;
 	int n;
 	int i;
 
-	g_return_if_fail (uiinfo != NULL);
-	g_return_if_fail (dest != NULL);
+	g_return_val_if_fail (uiinfo != NULL, NULL);
 
 	/* Count number of items */
 
@@ -695,12 +696,14 @@ copy_uiinfo_widgets (GnomeUIInfo *uiinfo, gpointer **dest)
 
 	/* Copy the widgets */
 
-	*dest = g_new (gpointer, n + 1);
+	dest = g_new (gpointer, n + 1);
 
 	for (i = 0; i < n; i++)
-		(*dest)[i] = uiinfo[i].widget;
+		dest[i] = uiinfo[i].widget;
 
-	(*dest)[i] = NULL;
+	dest[i] = NULL;
+
+	return dest;
 }
 
 WPanel *
@@ -747,7 +750,7 @@ create_container (Dlg_head *h, char *name, char *geometry)
 		uiinfo = gnome_panel_menu_with_desktop;
 
 	my_app_create_menus (GNOME_APP (app), uiinfo, panel);
-	copy_uiinfo_widgets (panel_view_menu_uiinfo, &panel->view_menu_items);
+	panel->view_menu_items = copy_uiinfo_widgets (panel_view_menu_uiinfo);
 
 	create_new_menu (GNOME_APP (app), panel);
 
@@ -794,8 +797,8 @@ new_panel_with_geometry_at (char *dir, char *geometry)
 
 	mc_chdir (dir);
 	panel = create_container (desktop_dlg, dir, geometry);
-	add_widget (desktop_dlg, panel);
 	set_current_panel (panel);
+	add_widget (desktop_dlg, panel);
 #if 0
 	x_flush_events ();
 #endif
