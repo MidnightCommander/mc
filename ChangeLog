@@ -1,3 +1,9 @@
+2002-02-27  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* doc/mc.1.in (Macro Substitution): Document "%var{ENV-default}".
+	(FILES): Document changes in mc behavior. ~/.mc/ini now override 
+	mc.lib settings.
+
 2002-02-26  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.ext.in: Run "file" before "nm" to avoid an error
@@ -2132,3 +2138,4 @@ Thu Nov 26 12:20:06 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 	* configure.in: Use MC_HPUX_PROG_CC_STDC
 
 	* ChangeLog: There was no ChangeLog here, so I added one.
+>>>>>>> 1.417

@@ -2062,6 +2062,16 @@ the braces is used as a prompt. The macro is substituted by the text
 typed by the user. The user can press ESC or F10 to cancel. This macro
 doesn't work on the command line yet.
 .PP
+.I "%var{ENV:default}"
+.IP
+If environment variable
+.I ENV
+is unset, the 
+.I default
+is substituted.  Otherwise, the value of
+.I ENV
+is substituted.
+.PP
 .SH "  The subshell support"
 The subshell support is a compile time option, that works with the
 shells: bash, tcsh and zsh.  
@@ -3132,8 +3142,7 @@ the user doesn't have his own ~/.mc/ini file.
 @prefix@/lib/mc/mc.lib
 .IP
 Global settings for the Midnight Commander.  Settings in this file
-affect all users, whether they have ~/.mc/ini or not, as long as
-~/.mc/ini doesn't override them.  Currently, only
+affect all users, whether they have ~/.mc/ini or not.  Currently, only
 .\"LINK2"
 terminal settings
 .\"Terminal databases"
