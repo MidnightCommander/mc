@@ -937,6 +937,12 @@ vfs_current_is_tarfs (void)
 {
     return current_vfs == &vfs_tarfs_ops;
 }
+
+int
+vfs_current_is_cpiofs (void)
+{
+    return current_vfs == &vfs_cpiofs_ops;
+}
 #endif
 
 int
@@ -1252,6 +1258,7 @@ vfs_init (void)
     vfs_register (&vfs_extfs_ops);
     vfs_register (&vfs_sfs_ops);
     vfs_register (&vfs_tarfs_ops);
+    vfs_register (&vfs_cpiofs_ops);
 
 #ifdef USE_EXT2FSLIB
     vfs_register (&vfs_undelfs_ops);

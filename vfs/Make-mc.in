@@ -161,6 +161,7 @@ SAMBA_DIST_UBIQX =		\
 
 NONETFILES = 			\
 	container.o		\
+	cpio.o			\
 	direntry.o		\
 	extfs.o 		\
 	local.o 		\
@@ -171,6 +172,7 @@ NONETFILES = 			\
 
 VFSSRCS = \
 	container.c 		\
+	cpio.c			\
 	direntry.c		\
 	extfs.c 		\
 	ftpfs.c 		\
@@ -247,7 +249,7 @@ EXTFSSTUFF = $(EXTFS_MISC) $(EXTFS_CONST) $(EXTFS_IN)
 #
 
 VFSSOOBJS = tcputil.so fish.so ftpfs.so mcfs.so utilvfs.so local.so vfs.so \
-	tar.so sfs.so names.so container.so extfs.so util-alone.so \
+	tar.so cpio.so sfs.so names.so container.so extfs.so util-alone.so \
 	util.sor utilunix.sor direntry.so
 
 %.sor:	../src/%.c

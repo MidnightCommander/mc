@@ -60,6 +60,9 @@ typedef struct vfs_s_inode {
 	    long data_offset;
 	} tar;
 	struct {
+	    long offset;
+	} cpio;
+	struct {
 	    struct timeval timestamp;
 	    struct stat local_stat;
 	} fish;
@@ -116,6 +119,13 @@ typedef struct vfs_s_super {
 #define RFC_DARING 1
 #define RFC_STRICT 2
 	} ftp;
+	struct {
+	    int fd;
+	    struct stat stat;
+	    int type; /* Type of the archive */
+	    /* int pos; /* In case reentrancy will be needed */
+	    struct defer_inode *defered; /* List of inodes for which another entries may appear */
+	} cpio;
     } u;
     int magic;
 #define SUPER_MAGIC 0x915ac312
