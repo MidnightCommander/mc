@@ -296,7 +296,7 @@ exec_extension (const char *filename, const char *data, int *move_dir,
  * Return 1 if the data is valid, 0 otherwise, -1 for fatal errors.
  */
 static int
-get_file_type_local (char *filename, char *buf, int buflen)
+get_file_type_local (const char *filename, char *buf, int buflen)
 {
     int read_bytes = 0;
 
@@ -356,12 +356,11 @@ regex_check_type (const char *filename, const char *ptr, int *have_type)
 	if (!localfile)
 	    return -1;
 
-	realname = g_strdup (localfile);
+	realname = localfile;
 	got_data =
 	    get_file_type_local (localfile, content_string,
 				 sizeof (content_string));
 	mc_ungetlocalcopy (filename, localfile, 0);
-	g_free (localfile);
 
 	if (got_data > 0) {
 	    char *pp;

@@ -1,6 +1,7 @@
 2004-11-26  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* execute.c (shell_execute): Optimize memory usage.
+	* ext.c (regex_check_type): Likewise.
 
 2004-11-02  Pavel Tsekov  <ptsekov@gmx.net>
 
