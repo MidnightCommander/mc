@@ -52,6 +52,7 @@ enum {
     DLG_DRAW,			/* Sent for updating dialog managed area */
     DLG_FOCUS,			/* Sent on give focus to a widget */
     DLG_UNFOCUS,		/* Sent on remove focus from widget */
+    DLG_RESIZE,			/* Sent when the window size changes */
     DLG_ONE_UP,			/* Sent on selecting next */
     DLG_ONE_DOWN,		/* Sent on selecting prev */
     DLG_POST_KEY,		/* Sent after key has been sent */

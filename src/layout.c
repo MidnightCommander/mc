@@ -723,8 +723,6 @@ void flag_winch (int dummy)
     winch_flag = 1;
 }
 
-void edit_adjust_size (Dlg_head * h);
-
 static void
 low_level_change_screen_size (void)
 {
@@ -751,11 +749,12 @@ low_level_change_screen_size (void)
 #endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
 }
 
-void change_screen_size (void)
+void
+change_screen_size (void)
 {
 #if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
 #if defined TIOCGWINSZ && !defined SCO_FLAVOR
-    
+
 #ifndef NCURSES_VERSION
     mc_noraw_mode ();
     endwin ();
@@ -772,22 +771,20 @@ void change_screen_size (void)
     init_curses ();
 #endif
     setup_panels ();
-    if (current_dlg == view_dlg)
-	view_adjust_size (view_dlg);
-#ifdef USE_INTERNAL_EDIT
-    if (current_dlg == edit_dlg)
-	edit_adjust_size (edit_dlg);
-#endif
-    
+
+    /* Inform currently running dialog */
+    (*current_dlg->callback) (current_dlg, current_dlg->current->dlg_id,
+			      DLG_RESIZE);
+
 #ifdef RESIZABLE_MENUBAR
-	menubar_arrange(the_menubar);
+    menubar_arrange (the_menubar);
 #endif
-		
+
     /* Now, force the redraw */
     do_refresh ();
     touchwin (stdscr);
-#endif /* TIOCGWINSZ && !SCO_FLAVOR */
-#endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
+#endif				/* TIOCGWINSZ && !SCO_FLAVOR */
+#endif				/* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
     winch_flag = 0;
 }
 

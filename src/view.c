@@ -2398,8 +2398,17 @@ view_adjust_size (Dlg_head *h)
     view_update_bytes_per_line(view);
 }
 
-/* Only the text mode edition uses this */
-Dlg_head   *view_dlg;
+/* Callback for the view dialog */
+static int
+view_dialog_callback (Dlg_head * h, int id, int msg)
+{
+    switch (msg) {
+    case DLG_RESIZE:
+	view_adjust_size (h);
+	return MSG_HANDLED;
+    }
+    return default_dlg_callback (h, id, msg);
+}
 
 /* Real view only */
 int
@@ -2408,20 +2417,19 @@ view (char *_command, const char *_file, int *move_dir_p, int start_line)
     int error;
     WView *wview;
     WButtonBar *bar;
-    Dlg_head *our_dlg;
+    Dlg_head *view_dlg;
 
     /* Create dialog and widgets, put them on the dialog */
-    our_dlg =
-	create_dlg (0, 0, LINES, COLS, NULL, NULL,
+    view_dlg =
+	create_dlg (0, 0, LINES, COLS, NULL, view_dialog_callback,
 		    "[Internal File Viewer]", NULL, DLG_NONE);
 
-    view_dlg = our_dlg;
     wview = view_new (0, 0, COLS, LINES - 1, 0);
 
     bar = buttonbar_new (1);
 
-    add_widget (our_dlg, wview);
-    add_widget (our_dlg, bar);
+    add_widget (view_dlg, wview);
+    add_widget (view_dlg, bar);
 
     error = view_init (wview, _command, _file, start_line);
     if (move_dir_p)
@@ -2432,12 +2440,11 @@ view (char *_command, const char *_file, int *move_dir_p, int start_line)
      * be aware of it
      */
     if (!error) {
-	run_dlg (our_dlg);
+	run_dlg (view_dlg);
 	if (move_dir_p)
 	    *move_dir_p = wview->move_dir;
     }
-    destroy_dlg (our_dlg);
-    view_dlg = NULL;
+    destroy_dlg (view_dlg);
 
     return !error;
 }

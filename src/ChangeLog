@@ -1,5 +1,11 @@
 2002-09-23  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.h: New message DLG_RESIZE.
+	* layout.c: Call DLG_RESIZE instead of resizing viewer and
+	editor individually.
+	* view.c (view): Install handler for DLG_RESIZE.  Make view_dlg
+	a local variable.
+
 	* view.c (view): Set view_dlg to NULL after it's destroyed.
 
 	* color.h: Remove EDITOR_UNDERLINED_COLOR, it's unused.
