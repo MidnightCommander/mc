@@ -1273,15 +1273,15 @@ vfs_init (void)
 #ifdef USE_NETCODE
     tcp_init();
     vfs_register (&vfs_ftpfs_ops);
+    vfs_register (&vfs_fish_ops);
 #ifdef WITH_SMBFS
     vfs_register (&vfs_smbfs_ops);
-#endif
+#endif /* WITH_SMBFS */
 #ifdef WITH_MCFS
     vfs_register (&vfs_mcfs_ops);
-#endif
-#endif
+#endif /* WITH_SMBFS */
+#endif /* USE_NETCODE */
 
-    vfs_register (&vfs_fish_ops);
     vfs_register (&vfs_extfs_ops);
     vfs_register (&vfs_sfs_ops);
     vfs_register (&vfs_tarfs_ops);
@@ -1289,7 +1289,7 @@ vfs_init (void)
 
 #ifdef USE_EXT2FSLIB
     vfs_register (&vfs_undelfs_ops);
-#endif
+#endif /* USE_EXT2FSLIB */
 
     vfs_setup_wd ();
 }
