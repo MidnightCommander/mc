@@ -1,3 +1,7 @@
+2004-10-28  Leonard den Ottolander  <leonard * den ottolander nl>
+
+	* extfs/iso9660.in (mcisofs_list): Fix stripping of file name in awk code.
+
 2004-10-28  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* fish.c (fish_open_archive_int): Fix missed "%s".
