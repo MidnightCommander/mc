@@ -1,3 +1,8 @@
+2000-08-22  Pavel Roskin  <proski@gnu.org>
+
+	* man2hlp.c: Removed undocumented feature - when converting
+	to HTML some output would go to index.html instead of stdout
+
 2000-08-16  Pavel Roskin  <proski@gnu.org>
 
 	* gindex.pl: Enable warnings. Existing warnings fixed.
@@ -11,7 +16,7 @@
 	* Makefile.in: Fixed dependencies for $(srcdir)/mc.hlp
 	Build $(srcdir)/mc.hlp but allow a failure (e.g. no perl)
 
-2000-08-11  Frederic L. W. Meunier" <fredlwm@pervalidus.net>
+2000-08-11  Frederic L. W. Meunier  <fredlwm@pervalidus.net>
 
 	* Makefile.in: Don't compile mfmt, compile mcmfmt directly.
 

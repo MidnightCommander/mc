@@ -27,7 +27,6 @@
 static char *filename;		/* The name of the input file */
 static int width;		/* Output width in characters */
 static int col = 0;		/* Current output column */
-static FILE *index_file;	/* HTML index file */
 static int out_row = 1;		/* Current output row */
 static int in_row = 0;		/* Current input row */
 static int old_heading_level = 0;/* Level of the last heading */
@@ -245,23 +244,23 @@ void handle_command (char *buffer)
 		    if (buffer [0]){
 			if (heading_level > old_heading_level){
 			    for (i = old_heading_level; i < heading_level; i += 2)
-				fprintf (index_file, "<ul>");
+				printf ("<ul>");
 			} else {
 			    for (i = heading_level; i < old_heading_level; i += 2)
-				fprintf (index_file, "</ul>");
+				printf ("</ul>");
 			}
 			old_heading_level = heading_level;
 			printf_string ("<h%d><a name=\"%s\">%s</a></h%d>",
 				       heading_level / 2 + 2, buffer + heading_level,
 				       buffer + heading_level, heading_level / 2 + 2);
 			newline ();
-			fprintf (index_file, "<li><a href=\"#%s\">%s</a>\n",
+			printf ("<li><a href=\"#%s\">%s</a>\n",
 				 buffer + heading_level, buffer + heading_level);
 		    } else {
 			for (i = 0; i < old_heading_level; i += 2)
-			    fprintf (index_file, "</ul>");
+			    printf ("</ul>");
 			old_heading_level = 0;
-			fprintf (index_file, "</ul><p><ul>\n");
+			printf ("</ul><p><ul>\n");
 		    }
 		} /* if (width) */
 	    } /* Start new section */
@@ -419,13 +418,8 @@ int main (int argc, char **argv)
 
     if (!width){
 	/* HTML format */
-	index_file = fopen ("index.html", "w");
-	if (index_file == NULL){
-	    perror ("man2hlp: Can't open file \"index.html\"");
-	    return 3;
-	}
-	fprintf (index_file, "<html><head><title>Midnight Commander manual</title>\n");
-	fprintf (index_file, "</head><body><pre><img src=\"mc.logo.small.gif\" width=180 height=85 align=\"right\" alt=\""
+	printf ("<html><head><title>Midnight Commander manual</title>\n");
+	printf ("</head><body><pre><img src=\"mc.logo.small.gif\" width=180 height=85 align=\"right\" alt=\""
 		 "                                                                            \n"
 		 "______________           ____                          ____                 \n"
 		 "|////////////#           |//#                          |//#                 \n"
@@ -447,7 +441,7 @@ int main (int argc, char **argv)
 		 "\"></pre><h1>Manual</h1>\nThis is the manual for Midnight Commander version %s.\n"
 		 "This HTML version of the manual has been compiled from the NROFF version at %s.<p>\n",
 		 VERSION, __DATE__);
-	fprintf (index_file, "<hr><h2>Contents</h2><ul>\n");
+	printf ("<hr><h2>Contents</h2><ul>\n");
     }
 
     /* Repeat for each input line */
@@ -520,13 +514,12 @@ int main (int argc, char **argv)
     newline ();
     if (!width){
 	/* HTML format */
+	for (i = 0; i < old_heading_level; i += 2)
+	    printf ("</ul>");
+	old_heading_level = 0;
+	printf ("</ul><hr>\n");
 	print_string ("<hr></body></html>");
 	newline ();
-	for (i = 0; i < old_heading_level; i += 2)
-	    fprintf (index_file, "</ul>");
-	old_heading_level = 0;
-	fprintf (index_file, "</ul><hr>\n");
-	fclose (index_file);
     }
     fclose (file);
     return 0;
