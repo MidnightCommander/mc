@@ -5669,7 +5669,7 @@ msgstr "Izkljuèi podporo za podlupine"
 
 #: src/main.c:2728
 msgid "Prints working directory at program exit"
-msgstr "Izpi¹e delavni imenik ob izhodu iz programa"
+msgstr "Izpi¹e delovni imenik ob izhodu iz programa"
 
 #: src/main.c:2730
 msgid "Resets soft keys on HP terminals"
