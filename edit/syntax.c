@@ -83,6 +83,27 @@ int option_syntax_highlighting = 1;
 
 #define syntax_g_free(x) do {if(x) {g_free(x); (x)=0;}} while (0)
 
+/* List of defines */
+static GTree *defines;
+
+static gint
+mc_defines_destroy (gpointer key, gpointer value, gpointer data)
+{
+    g_free (key);
+    g_free (value);
+
+    return FALSE;
+}
+
+/* Completely destroys the defines tree */
+static void
+destroy_defines (void)
+{
+    g_tree_traverse (defines, mc_defines_destroy, G_POST_ORDER, NULL);
+    g_tree_destroy (defines);
+    defines = 0;
+}
+
 static long compare_word_to_right (WEdit * edit, long i, char *text, char *whole_left, char *whole_right, int line_start)
 {
     unsigned char *p, *q;
@@ -534,18 +555,24 @@ this_try_alloc_color_pair (char *fg, char *bg)
 	if (!*fg)
 	    fg = 0;
     if (fg) {
-	strcpy (f, fg);
+	p = g_tree_lookup (defines, fg);
+	if (p)
+	    fg = p;
+	strncpy (f, fg, sizeof (f) - 1);
+	f[sizeof (f) - 1] = 0;
 	p = strchr (f, '/');
 	if (p)
 	    *p = '\0';
-	fg = f;
     }
     if (bg) {
-	strcpy (b, bg);
+	p = g_tree_lookup (defines, bg);
+	if (p)
+	    bg = p;
+	strncpy (b, bg, sizeof (b) - 1);
+	b[sizeof (b) - 1] = 0;
 	p = strchr (b, '/');
 	if (p)
 	    *p = '\0';
-	bg = b;
     }
     return try_alloc_color_pair (fg, bg);
 }
@@ -595,6 +622,8 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
     strcpy (whole_right, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_01234567890");
 
     r = edit->rules = g_malloc0 (MAX_CONTEXTS * sizeof (struct context_rule *));
+
+    defines = g_tree_new ((GCompareFunc) strcmp);
 
     for (;;) {
 	char **a;
@@ -705,8 +734,10 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 	    bg = *a;
 	    if (*a)
 		a++;
-	    strcpy (last_fg, fg ? fg : "");
-	    strcpy (last_bg, bg ? bg : "");
+	    strncpy (last_fg, fg ? fg : "", sizeof (last_fg) - 1);
+	    last_fg[sizeof (last_fg) - 1] = 0;
+	    strncpy (last_bg, bg ? bg : "", sizeof (last_bg) - 1);
+	    last_bg[sizeof (last_bg) - 1] = 0;
 	    c->keyword[0]->color = this_try_alloc_color_pair (fg, bg);
 	    c->keyword[0]->keyword = g_strdup (" ");
 	    check_not_a;
@@ -762,6 +793,18 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 	    /* do nothing for comment */
 	} else if (!strcmp (args[0], "file")) {
 	    break;
+	} else if (!strcmp (args[0], "define")) {
+	    gpointer t;
+	    char *key = *a++;
+	    char *value = *a;
+	    if (!key || !value)
+		break_a;
+	    if ((t = g_tree_lookup (defines, key))){
+		g_free (t);
+		t = g_strdup (value);
+	    } else {
+		g_tree_insert (defines, g_strdup (key), g_strdup (value));
+	    }
 	} else {		/* anything else is an error */
 	    break_a;
 	}
@@ -806,6 +849,8 @@ void edit_free_syntax_rules (WEdit * edit)
 	return;
     if (!edit->rules)
 	return;
+    if (defines)
+	destroy_defines ();
     edit_get_rule (edit, -1);
     syntax_g_free (edit->syntax_type);
     edit->syntax_type = 0;

@@ -1,3 +1,17 @@
+2003-02-25  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* syntax.c (defines): New static variable for list of defines.
+	(mc_defines_destroy): New function to release memory of key
+	pair.
+	(destroy_defines): New function to destroy list of defines
+	completely.
+	(this_try_alloc_color_pair): Use strncpy() instead of unsafe
+	strcpy().  Use values from list of defines to substitute given
+	parameters.
+	(edit_read_syntax_rules): Initialize list of defines and process
+	new "define" keyword.  Use strncpy() instead of unsafe strcpy().
+	(edit_free_syntax_rules): Destroy list of defines.
+
 2003-02-21  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* editmenu.c (OptMenuEmacs): Define as OptMenu.
