@@ -248,7 +248,7 @@ GnomeUIInfo gnome_panel_commands_menu [] = {
 };
 
 GnomeUIInfo gnome_panel_about_menu [] = {
-	{ GNOME_APP_UI_ITEM, "About",              "Information on this program", gnome_quit_cmd, NULL, NULL,
+	{ GNOME_APP_UI_ITEM, "About",              "Information on this program", gnome_about_cmd, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT },
 	GNOMEUIINFO_HELP ("midnight-commander"),
 	GNOMEUIINFO_END

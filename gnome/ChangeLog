@@ -1,3 +1,12 @@
+1998-03-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gprop.h: New files gprop.[ch].  These create the property pages
+	for desktop entries.
+
+	* Makefile.in: Added gprop.[ch] to the rules.
+
+	* glayout.c: Put gnome_about_cmd as a callback for the About menu item.
+
 Tue Mar 17 22:40:36 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	
 	* gdesktop.c (desktop_setup_icon): Lots of changes to accomodate
