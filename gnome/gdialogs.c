@@ -31,6 +31,9 @@ int op_preserve = 1;
 static gint copy_status;
 static gint minor_copy_status;
 
+/* Set to FALSE in create_op_win, set on the cancel_cb if user click on Cancel */
+gboolean aborting;
+
 #define GDIALOG_TO_STRING "To: "
 #define GDIALOG_FROM_STRING "Copying from: "
 #define GDIALOG_PROGRESS_WIDTH 350
@@ -82,6 +85,9 @@ file_progress_show_source (char *path)
 
         g_return_val_if_fail (op_source_label != NULL, FILE_CONT);
 
+        if (aborting)
+                return FILE_ABORT;
+        
         if (path == NULL){
                 gtk_label_set (GTK_LABEL (op_source_label), "");
                 return FILE_CONT;
@@ -89,7 +95,7 @@ file_progress_show_source (char *path)
         
         if (!from_width){
                 from_width = gdk_string_width (op_source_label->style->font,
-                                             GDIALOG_FROM_STRING);
+                                               _(GDIALOG_FROM_STRING));
         }
         path_width = gdk_string_width (op_source_label->style->font, path);
         if (from_width + path_width < GDIALOG_PROGRESS_WIDTH)
@@ -113,6 +119,9 @@ file_progress_show_target (char *path)
 
         g_return_val_if_fail (op_target_label != NULL, FILE_CONT);
 
+        if (aborting)
+                return FILE_ABORT;
+
         if (path == NULL){
                 gtk_label_set (GTK_LABEL (op_target_label), "");
                 return FILE_CONT;
@@ -120,7 +129,7 @@ file_progress_show_target (char *path)
         
         if (!to_width) 
                 to_width = gdk_string_width (op_target_label->style->font,
-                                             GDIALOG_TO_STRING);
+                                             _(GDIALOG_TO_STRING));
         path_width = gdk_string_width (op_target_label->style->font, path);
         if (to_width + path_width < GDIALOG_PROGRESS_WIDTH)
                 gtk_label_set (GTK_LABEL (op_target_label), path);
@@ -136,6 +145,9 @@ file_progress_show_target (char *path)
 FileProgressStatus
 file_progress_show_deleting (char *path)
 {
+        if (aborting)
+                return FILE_ABORT;
+
 	g_warning ("memo: file_progress_show_deleting!\npath\t%s\n",path);
         return FILE_CONT;
 }
@@ -144,6 +156,10 @@ FileProgressStatus
 file_progress_show (long done, long total)
 {
         static gchar count[10];
+
+        if (aborting)
+                return FILE_ABORT;
+        
         snprintf (count, 9, "%d%%", (gint)(100.0 *(gfloat)done/(gfloat)total));
         gtk_label_set (GTK_LABEL (file_label), count);
         while (gtk_events_pending ())
@@ -155,6 +171,10 @@ FileProgressStatus
 file_progress_show_count (long done, long total)
 {
         static gchar count[14]; /* that's a lot of files... */
+
+        if (aborting)
+                return FILE_ABORT;
+
         snprintf (count, 13, "%d/%d", done, total);
         gtk_label_set (GTK_LABEL (count_label), count);
         while (gtk_events_pending ())
@@ -165,6 +185,9 @@ file_progress_show_count (long done, long total)
 FileProgressStatus
 file_progress_show_bytes (double done, double total)
 {
+        if (aborting)
+                return FILE_ABORT;
+
         if (!total)
                 gtk_progress_bar_update (GTK_PROGRESS_BAR (byte_prog), 0.0);
         else
@@ -206,6 +229,9 @@ file_progress_query_replace_policy (gboolean dialog_needed)
         GtkWidget *omenu;
         GtkWidget *menu;
         GtkWidget *menu_item;
+
+        if (aborting)
+                return FILE_ABORT;
 
         copy_status = REPLACE_PROMPT;
         if (dialog_needed == FALSE)
@@ -296,6 +322,9 @@ file_progress_real_query_replace (enum OperationMode mode, char *destname, struc
         gchar msg[128];
         GtkWidget *label;
 
+        if (aborting)
+                return FILE_ABORT;
+
         /* so what's the situation?  Do we prompt or don't we prompt. */
         if (copy_status == REPLACE_PROMPT){
                 qr_dlg = gnome_dialog_new ("File Exists", "Yes", "No", "Cancel", NULL);
@@ -385,16 +414,16 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_
         gtk_container_set_border_width (GTK_CONTAINER (vbox), GNOME_PAD);
         gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
                                   hbox, 
-                                  gtk_label_new (N_("Destination")));
+                                  gtk_label_new (_("Destination")));
         alignment = gtk_alignment_new (0.0, 0.5, 0, 0);
         label = gtk_label_new (text);
         gtk_container_add (GTK_CONTAINER (alignment), label);
-        fentry = gnome_file_entry_new ("gmc-copy-file", N_("Find Destination Folder"));
+        fentry = gnome_file_entry_new ("gmc-copy-file", _("Find Destination Folder"));
         gnome_file_entry_set_directory (GNOME_FILE_ENTRY (fentry), TRUE);
         gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (fentry))),
                             def_text);
         gnome_file_entry_set_default_path (GNOME_FILE_ENTRY (fentry), def_text);
-        cbox = gtk_check_button_new_with_label (N_("Copy as a background process"));
+        cbox = gtk_check_button_new_with_label (_("Copy as a background process"));
         gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (cbox), *do_background);
         gtk_signal_connect (GTK_OBJECT (cbox), "toggled", (GtkSignalFunc) fmd_check_box_callback, do_background);
 #if 0
@@ -414,11 +443,11 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_
         vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
         gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
                                   hbox, 
-                                  gtk_label_new (N_("Advanced Options")));
+                                  gtk_label_new (_("Advanced Options")));
         gtk_container_set_border_width (GTK_CONTAINER (hbox), GNOME_PAD);
         gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 0);
 
-        cbox = gtk_check_button_new_with_label (N_("Preserve symlinks"));
+        cbox = gtk_check_button_new_with_label (_("Preserve symlinks"));
         gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (cbox), file_mask_stable_symlinks);
         gtk_signal_connect (GTK_OBJECT (cbox), "toggled", (GtkSignalFunc) fmd_check_box_callback, &file_mask_stable_symlinks);
 #if 0
@@ -428,14 +457,14 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_
 
 
         if (operation == OP_COPY) {
-                cbox = gtk_check_button_new_with_label (N_("Follow links."));
+                cbox = gtk_check_button_new_with_label (_("Follow links."));
                 gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (cbox), file_mask_op_follow_links);
                 gtk_signal_connect (GTK_OBJECT (cbox), "toggled", (GtkSignalFunc) fmd_check_box_callback, &file_mask_op_follow_links);
                 gnome_widget_add_help (cbox, "Selecting this will copy the files that symlinks point "
                                        "to instead of just copying the link.");
                 gtk_box_pack_start (GTK_BOX (vbox), cbox, FALSE, FALSE, 0);
 
-                cbox = gtk_check_button_new_with_label (N_("Preserve file attributes."));
+                cbox = gtk_check_button_new_with_label (_("Preserve file attributes."));
                 gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (cbox), op_preserve);
                 gtk_signal_connect (GTK_OBJECT (cbox), "toggled", (GtkSignalFunc) fmd_check_box_callback, &op_preserve);
                 gnome_widget_add_help (cbox, "FIXME: Add something here Miguel");
@@ -443,7 +472,7 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_
 
                 vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
                 gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 0);
-                cbox = gtk_check_button_new_with_label (N_("Recursively copy subdirectories."));
+                cbox = gtk_check_button_new_with_label (_("Recursively copy subdirectories."));
                 gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (cbox), dive_into_subdirs);
                 gtk_signal_connect (GTK_OBJECT (cbox), "toggled", (GtkSignalFunc) fmd_check_box_callback, &dive_into_subdirs);
                 gnome_widget_add_help (cbox, "FIXME: Add something here Miguel");
@@ -535,12 +564,19 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_
         return dest_dir;
 }
 
+static void
+cancel_cb (void)
+{
+        aborting = TRUE;
+}
+
 void
 create_op_win (FileOperation op, int with_eta)
 {
         GtkWidget *alignment;
         GtkWidget *hbox;
 
+        aborting = FALSE;
         
         switch (op) {
         case OP_MOVE:
@@ -556,10 +592,13 @@ create_op_win (FileOperation op, int with_eta)
                 return;
         }
 
+        gnome_dialog_button_connect_object (GNOME_DIALOG (op_win), 0,
+                                            GTK_SIGNAL_FUNC(cancel_cb), NULL);
+        
         alignment = gtk_alignment_new (0.0, 0.5, 0, 0);
         hbox = gtk_hbox_new (FALSE, 0);
         gtk_container_add (GTK_CONTAINER (alignment), hbox);
-        gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (N_(GDIALOG_FROM_STRING)), FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_(GDIALOG_FROM_STRING)), FALSE, FALSE, 0);
         op_source_label = gtk_label_new ("");
         
         gtk_box_pack_start (GTK_BOX (hbox), op_source_label, FALSE, FALSE, 0);
@@ -571,7 +610,7 @@ create_op_win (FileOperation op, int with_eta)
         alignment = gtk_alignment_new (0.0, 0.5, 0, 0);
         hbox = gtk_hbox_new (FALSE, 0);
         gtk_container_add (GTK_CONTAINER (alignment), hbox);
-        gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (N_(GDIALOG_TO_STRING)), FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_(GDIALOG_TO_STRING)), FALSE, FALSE, 0);
         op_target_label = gtk_label_new ("");
         gtk_box_pack_start (GTK_BOX (hbox), op_target_label, FALSE, FALSE, 0);
         gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (op_win)->vbox),
@@ -579,14 +618,14 @@ create_op_win (FileOperation op, int with_eta)
         
         alignment = gtk_alignment_new (0.0, 0.5, 0, 0);
         hbox = gtk_hbox_new (FALSE, 0);
-        gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (N_("File ")), FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("File ")), FALSE, FALSE, 0);
         count_label = GTK_OBJECT (gtk_label_new (""));
         gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET (count_label), FALSE, FALSE, 0);
         
-        gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (N_(" is ")), FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_(" is ")), FALSE, FALSE, 0);
         file_label = gtk_label_new ("");
         gtk_box_pack_start (GTK_BOX (hbox), file_label, FALSE, FALSE, 0);
-        gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (N_(" Done.")), FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_(" Done.")), FALSE, FALSE, 0);
         
         gtk_container_add (GTK_CONTAINER (alignment), hbox);
         

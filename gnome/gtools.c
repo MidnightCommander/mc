@@ -44,6 +44,7 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	int i, result = -1;
 	gchar **buttons;
 	char *stock;
+	GSList *allocated = NULL;
 	
 	if (header == MSG_ERROR)
 		header = _("Error");
@@ -53,13 +54,23 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	va_start (ap, count);
 	for (i = 0; i < count; i++){
 		char *text;
+		char *clean_text;
+		char *sign;
 
 		text = va_arg (ap, char *);
-		stock = stock_from_text (text);
+		clean_text = g_strdup (text);
+
+		allocated = g_slist_append (allocated, clean_text);
+		
+		sign = strchr (clean_text, '&');
+		if (sign && sign [1] != 0)
+			strcpy (sign, sign+1);
+		
+		stock = stock_from_text (clean_text);
 		if (stock)
 			buttons [i] = stock;
 		else
-			buttons [i] = text;
+			buttons [i] = clean_text;
 	}
 	va_end (ap);
 
@@ -67,7 +78,9 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	dialog = gnome_message_box_newv (text, header, buttons);
 
 	result = gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
-	
+
+	g_slist_foreach (allocated, g_free, NULL);
+	g_slist_free (allocated);
 	return result;
 }
 

@@ -228,7 +228,7 @@ button_len (const char *text, unsigned int flags)
  * and shifting data past it to the left results to one unused byte.
  * This does not harm though :)
  */
-static void
+void
 button_scan_hotkey(WButton* b)
 {
     char* cp = strchr (b->text, '&');

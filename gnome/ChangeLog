@@ -1,3 +1,11 @@
+1999-01-05  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtools.c (query_dialog): Remove the hotkey indicator in the
+	gnome version specific query_dialog box.
+
+	* gdialogs.c: Change the inlined N_( for _( in various places. 
+	(cancel_cb): Cancel button now cancels a copy or move operation.
+
 1999-01-05  Jonathan Blandford  <jrb@redhat.com>
 
 	* gcmd.c (gnome_external_panelize): mostly hooked up now.
