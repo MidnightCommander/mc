@@ -450,7 +450,11 @@ create_container (Dlg_head *h, char *name, char *geometry)
 	vbox = gtk_vbox_new (0, 0);
 	gnome_app_set_contents (GNOME_APP (app), vbox);
 	gnome_app_create_menus_with_data (GNOME_APP (app), gnome_panel_menu, panel);
-	gnome_app_set_toolbar(GNOME_APP (app), GTK_TOOLBAR(create_toolbar(app, 0)));
+
+	/*
+	 * I am trying to unclutter the screen, so this toolbar is gone now
+	 */
+/*	gnome_app_set_toolbar(GNOME_APP (app), GTK_TOOLBAR(create_toolbar(app, 0))); */
 
 	gtk_signal_connect (GTK_OBJECT (app),
 			    "enter_notify_event",
