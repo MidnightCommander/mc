@@ -157,13 +157,13 @@ int my_system_get_child_pid (int flags, const char *shell, const char *command, 
 		/* Setup the file descriptor for the child */
 		   
 		/* stdin */
-		open ("/dev/null");
+		open ("/dev/null", O_APPEND);
 
 		/* stdout */
-		open ("/dev/null");
+		open ("/dev/null", O_RDONLY);
 
 		/* stderr */
-		open ("/dev/null");
+		open ("/dev/null", O_RDONLY);
 		
 		if (!(flags & EXECUTE_WAIT))
 			*pid = fork ();

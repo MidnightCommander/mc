@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-03-08 14:47-0600\n"
+"POT-Creation-Date: 1999-03-08 22:28-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -153,7 +153,7 @@ msgid "Set Filter"
 msgstr ""
 
 #: gnome/gcmd.c:593 gnome/gcmd.c:634 gnome/gcmd.c:639 gnome/gcmd.c:643
-#: gnome/gscreen.c:2582
+#: gnome/gscreen.c:2600
 msgid "Show all files"
 msgstr ""
 
@@ -181,7 +181,7 @@ msgstr ""
 msgid "Enter extra arguments:"
 msgstr ""
 
-#: gnome/gdesktop.c:392 gnome/gdesktop.c:1841
+#: gnome/gdesktop.c:392 gnome/gdesktop.c:1848
 msgid "Warning"
 msgstr ""
 
@@ -190,41 +190,41 @@ msgstr ""
 msgid "Could not open %s; will not have desktop icons"
 msgstr ""
 
-#: gnome/gdesktop.c:983
+#: gnome/gdesktop.c:976
 msgid "While running the mount/umount command"
 msgstr ""
 
-#: gnome/gdesktop.c:1032
+#: gnome/gdesktop.c:1039
 msgid "While running the eject command"
 msgstr ""
 
-#: gnome/gdesktop.c:1072 gnome/gicon.c:154 gnome/gtools.c:52
+#: gnome/gdesktop.c:1079 gnome/gicon.c:154 gnome/gtools.c:52
 msgid "Error"
 msgstr ""
 
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop.c:1837
+#: gnome/gdesktop.c:1844
 msgid "Home directory"
 msgstr ""
 
-#: gnome/gdesktop.c:1842
+#: gnome/gdesktop.c:1849
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial desktop icons."
 msgstr ""
 
-#: gnome/gdesktop.c:2173 gnome/glayout.c:410
+#: gnome/gdesktop.c:2180 gnome/glayout.c:410
 msgid "Arrange Icons"
 msgstr ""
 
-#: gnome/gdesktop.c:2175
+#: gnome/gdesktop.c:2182
 msgid "Create New Window"
 msgstr ""
 
-#: gnome/gdesktop.c:2177
+#: gnome/gdesktop.c:2184
 msgid "Rescan Mountable Devices"
 msgstr ""
 
-#: gnome/gdesktop.c:2178 gnome/glayout.c:413
+#: gnome/gdesktop.c:2185 gnome/glayout.c:413
 msgid "Rescan Desktop"
 msgstr ""
 
@@ -845,7 +845,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: gnome/gprop.c:521 gnome/gscreen.c:2369
+#: gnome/gprop.c:521 gnome/gscreen.c:2387
 msgid "Icon"
 msgstr ""
 
@@ -853,182 +853,182 @@ msgstr ""
 msgid "Select icon"
 msgstr ""
 
-#: gnome/gscreen.c:1452
+#: gnome/gscreen.c:1470
 msgid "Rescan Directory"
 msgstr ""
 
-#: gnome/gscreen.c:1452
+#: gnome/gscreen.c:1470
 msgid "Reloads the current directory"
 msgstr ""
 
-#: gnome/gscreen.c:1454
+#: gnome/gscreen.c:1472
 msgid "New folder"
 msgstr ""
 
-#: gnome/gscreen.c:1454
+#: gnome/gscreen.c:1472
 msgid "Creates a new folder here"
 msgstr ""
 
-#: gnome/gscreen.c:1632
+#: gnome/gscreen.c:1650
 msgid "All files"
 msgstr ""
 
-#: gnome/gscreen.c:1634
+#: gnome/gscreen.c:1652
 msgid "Archives and compressed files"
 msgstr ""
 
-#: gnome/gscreen.c:1636
+#: gnome/gscreen.c:1654
 msgid "RPM/DEB files"
 msgstr ""
 
-#: gnome/gscreen.c:1638
+#: gnome/gscreen.c:1656
 msgid "Text/Document files"
 msgstr ""
 
-#: gnome/gscreen.c:1640
+#: gnome/gscreen.c:1658
 msgid "HTML and SGML files"
 msgstr ""
 
-#: gnome/gscreen.c:1642
+#: gnome/gscreen.c:1660
 msgid "Postscript and PDF files"
 msgstr ""
 
-#: gnome/gscreen.c:1644
+#: gnome/gscreen.c:1662
 msgid "Spreadsheet files"
 msgstr ""
 
-#: gnome/gscreen.c:1646
+#: gnome/gscreen.c:1664
 msgid "Image files"
 msgstr ""
 
-#: gnome/gscreen.c:1649
+#: gnome/gscreen.c:1667
 msgid "Video/animation files"
 msgstr ""
 
-#: gnome/gscreen.c:1651
+#: gnome/gscreen.c:1669
 msgid "Audio files"
 msgstr ""
 
-#: gnome/gscreen.c:1653
+#: gnome/gscreen.c:1671
 msgid "C program files"
 msgstr ""
 
-#: gnome/gscreen.c:1655
+#: gnome/gscreen.c:1673
 msgid "C++ program files"
 msgstr ""
 
-#: gnome/gscreen.c:1657
+#: gnome/gscreen.c:1675
 msgid "Objective-C program files"
 msgstr ""
 
-#: gnome/gscreen.c:1659
+#: gnome/gscreen.c:1677
 msgid "Scheme program files"
 msgstr ""
 
-#: gnome/gscreen.c:1661
+#: gnome/gscreen.c:1679
 msgid "Assembler program files"
 msgstr ""
 
-#: gnome/gscreen.c:1663
+#: gnome/gscreen.c:1681
 msgid "Misc. program files"
 msgstr ""
 
-#: gnome/gscreen.c:1665
+#: gnome/gscreen.c:1683
 msgid "Font files"
 msgstr ""
 
-#: gnome/gscreen.c:1792
+#: gnome/gscreen.c:1810
 #, c-format
 msgid "Search: %s"
 msgstr ""
 
-#: gnome/gscreen.c:1802
+#: gnome/gscreen.c:1820
 #, c-format
 msgid "%s bytes in %d file"
 msgstr ""
 
-#: gnome/gscreen.c:1802
+#: gnome/gscreen.c:1820
 #, c-format
 msgid "%s bytes in %d files"
 msgstr ""
 
-#: gnome/gscreen.c:1828 src/screen.c:677
+#: gnome/gscreen.c:1846 src/screen.c:677
 msgid "<readlink failed>"
 msgstr ""
 
-#: gnome/gscreen.c:1882
+#: gnome/gscreen.c:1900
 msgid "Filter"
 msgstr ""
 
-#: gnome/gscreen.c:2369
+#: gnome/gscreen.c:2387
 msgid "Switch view to an Icon view"
 msgstr ""
 
-#: gnome/gscreen.c:2371
+#: gnome/gscreen.c:2389
 msgid "Brief"
 msgstr ""
 
-#: gnome/gscreen.c:2371
+#: gnome/gscreen.c:2389
 msgid "Switch view to show just file name and type"
 msgstr ""
 
-#: gnome/gscreen.c:2373
+#: gnome/gscreen.c:2391
 msgid "Detailed"
 msgstr ""
 
-#: gnome/gscreen.c:2373
+#: gnome/gscreen.c:2391
 msgid "Switch view to show detailed file statistics"
 msgstr ""
 
-#: gnome/gscreen.c:2375
+#: gnome/gscreen.c:2393
 msgid "Custom"
 msgstr ""
 
-#: gnome/gscreen.c:2375
+#: gnome/gscreen.c:2393
 msgid "Switch view to show custom determined statistics."
 msgstr ""
 
-#: gnome/gscreen.c:2383
+#: gnome/gscreen.c:2401
 msgid "Back"
 msgstr ""
 
-#: gnome/gscreen.c:2383
+#: gnome/gscreen.c:2401
 msgid "Go to the previously visited directory"
 msgstr ""
 
-#: gnome/gscreen.c:2385
+#: gnome/gscreen.c:2403
 msgid "Up"
 msgstr ""
 
-#: gnome/gscreen.c:2385
+#: gnome/gscreen.c:2403
 msgid "Go up a level in the directory heirarchy"
 msgstr ""
 
-#: gnome/gscreen.c:2387
+#: gnome/gscreen.c:2405
 msgid "Forward"
 msgstr ""
 
-#: gnome/gscreen.c:2387
+#: gnome/gscreen.c:2405
 msgid "Go to the next directory"
 msgstr ""
 
-#: gnome/gscreen.c:2390 src/tree.c:1020
+#: gnome/gscreen.c:2408 src/tree.c:1020
 msgid "Rescan"
 msgstr ""
 
-#: gnome/gscreen.c:2390
+#: gnome/gscreen.c:2408
 msgid "Rescan the current directory"
 msgstr ""
 
-#: gnome/gscreen.c:2393
+#: gnome/gscreen.c:2411
 msgid "Home"
 msgstr ""
 
-#: gnome/gscreen.c:2393
+#: gnome/gscreen.c:2411
 msgid "Go to your home directory"
 msgstr ""
 
-#: gnome/gscreen.c:2527
+#: gnome/gscreen.c:2545
 msgid "Location:"
 msgstr ""
 
@@ -2616,7 +2616,7 @@ msgstr ""
 msgid " Link "
 msgstr ""
 
-#: src/cmd.c:1032 src/cmd.c:1137 src/file.c:1639
+#: src/cmd.c:1032 src/cmd.c:1141 src/file.c:1639
 msgid " to:"
 msgstr ""
 
@@ -2642,72 +2642,77 @@ msgstr ""
 msgid " Edit symlink "
 msgstr ""
 
-#: src/cmd.c:1113
+#: src/cmd.c:1112
+#, c-format
+msgid " edit symlink, unable to remove %s: %s "
+msgstr ""
+
+#: src/cmd.c:1116
 #, c-format
 msgid " edit symlink: %s "
 msgstr ""
 
-#: src/cmd.c:1137
+#: src/cmd.c:1141
 msgid " Link symbolically "
 msgstr ""
 
-#: src/cmd.c:1138
+#: src/cmd.c:1142
 msgid " Relative symlink "
 msgstr ""
 
-#: src/cmd.c:1149
+#: src/cmd.c:1153
 #, c-format
 msgid " relative symlink: %s "
 msgstr ""
 
-#: src/cmd.c:1252
+#: src/cmd.c:1256
 msgid " Enter machine name (F1 for details): "
 msgstr ""
 
-#: src/cmd.c:1276
+#: src/cmd.c:1280
 #, c-format
 msgid " Could not chdir to %s "
 msgstr ""
 
-#: src/cmd.c:1283
+#: src/cmd.c:1287
 msgid " Link to a remote machine "
 msgstr ""
 
-#: src/cmd.c:1289
+#: src/cmd.c:1293
 msgid " FTP to machine "
 msgstr ""
 
-#: src/cmd.c:1299
+#: src/cmd.c:1303
 msgid " Socket source routing setup "
 msgstr ""
 
-#: src/cmd.c:1300
+#: src/cmd.c:1304
 msgid " Enter host name to use as a source routing hop: "
 msgstr ""
 
-#: src/cmd.c:1307
+#: src/cmd.c:1311
 msgid " Host name "
 msgstr ""
 
-#: src/cmd.c:1307
+#: src/cmd.c:1311
 msgid " Error while looking up IP address "
 msgstr ""
 
-#: src/cmd.c:1318
+#: src/cmd.c:1322
 msgid " Undelete files on an ext2 file system "
 msgstr ""
 
-#: src/cmd.c:1319
+#: src/cmd.c:1323
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
 msgstr ""
 
-#: src/cmd.c:1369
+#: src/cmd.c:1373
 msgid " Setup saved to ~/"
 msgstr ""
 
-#: src/cmd.c:1374
+#: src/cmd.c:1378
 msgid " Setup "
 msgstr ""
 

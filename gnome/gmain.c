@@ -607,6 +607,7 @@ session_save_state (GnomeClient *client, gint phase, GnomeRestartStyle save_styl
 	argv [i] = NULL;
 	gnome_client_set_clone_command (client, i, argv);
 	gnome_client_set_restart_command (client, i, argv);
+	gnome_config_sync ();
 
 	for (l = free_list; l; l = l->next)
 		g_free (l->data);
