@@ -1,3 +1,6 @@
+# This is the "Makefile.in" that is used when vfs is built as part of
+# mc.  Any changes here must also be made in Makefile.am.
+
 srcdir = @srcdir@
 VPATH = @srcdir@
 
