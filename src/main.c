@@ -926,11 +926,11 @@ translate_url_to_new_syntax (const char *p)
 char*
 get_parent_dir_name (char *cwd, char *lwd)
 {
-char *p, *q;
-
+    char *p;
     if (strlen (lwd) > strlen (cwd))
 	if((p=strrchr(lwd, PATH_SEP)) && !strncmp(cwd, lwd, p-lwd)){
 #ifdef USE_VFS
+	    char *q;
 	    if((q=strrchr(p, '#')) != 0){
 		/* Here we need proper VFS function */
 		if(!strcmp((q+1), "utar") || extfs_which(q+1) >= 0 || sfs_which(q+1) >= 0)
@@ -1799,20 +1799,16 @@ static key_map default_map [] = {
 #ifndef HAVE_X
 static void setup_sigwinch ()
 {
-#ifndef OS2_NT
+#if (defined(HAVE_SLANG) || (NCURSES_VERSION_MAJOR >= 4)) && \
+   !defined(OS2_NT) && defined(SIGWINCH)
     struct sigaction act, oact;
-    
-#   if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
-#       ifdef SIGWINCH
-            act.sa_handler = flag_winch;
-            sigemptyset (&act.sa_mask);
-	    act.sa_flags = 0;
-#           ifdef SA_RESTART
-                act.sa_flags |= SA_RESTART;
-#           endif
-            sigaction (SIGWINCH, &act, &oact);
-#       endif
+    act.sa_handler = flag_winch;
+    sigemptyset (&act.sa_mask);
+    act.sa_flags = 0;
+#   ifdef SA_RESTART
+	act.sa_flags |= SA_RESTART;
 #   endif
+    sigaction (SIGWINCH, &act, &oact);
 #endif
 }
 
