@@ -400,9 +400,9 @@ ep_text_changed_callback (GtkWidget *widget, ep_dlg_data *data)
 static void
 load_settings (GtkCList *clist)
 {
-	char *insert_tab[1];
+	gchar *insert_tab[1];
 	void *profile_keys;
-	char *key, *value;
+	gchar *key, *value;
 	gint i = 0;
 
 	profile_keys = profile_init_iterator (panelize_section, profile_name);
@@ -422,6 +422,22 @@ load_settings (GtkCList *clist)
 			gtk_clist_set_row_data (clist, i++, g_strdup (value));
 		}
 	}
+}
+static void
+save_settings (GtkCList *clist)
+{
+	gint i;
+	gchar *text;
+
+	profile_clean_section (panelize_section, profile_name);
+	for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
+		gtk_clist_get_text (GTK_CLIST (clist), i, 0, &text);
+		WritePrivateProfileString (panelize_section,
+					   text,
+					   (gchar *) gtk_clist_get_row_data (GTK_CLIST (clist), i),
+					   profile_name);
+	}
+	sync_profiles ();
 }
 void
 gnome_external_panelize (GtkWidget *widget, WPanel *panel)
@@ -482,8 +498,9 @@ gnome_external_panelize (GtkWidget *widget, WPanel *panel)
 	gtk_widget_show_all (GNOME_DIALOG (data->ep_dlg)->vbox);
 	switch (gnome_dialog_run (GNOME_DIALOG (data->ep_dlg))) {
 	case 0:
+		gtk_window_hide (data->ep_dlg);
 		do_external_panelize (gtk_entry_get_text (GTK_ENTRY (data->entry)));
-		/* FIXME: we want to save the state of everything that we added/removed */
+		save_settings (GTK_CLIST (data->clist));
 		break;
 	case 1:
 	default:
