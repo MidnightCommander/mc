@@ -93,7 +93,21 @@ AC_DEFUN([MC_WITH_VFS],[
 #include <rpc/rpc.h>
 #include <rpc/pmap_prot.h>
 					    ])
-      vfs_flags="$vfs_flags, mcfs, ftpfs, fish"
+      dnl
+      dnl mcfs support
+      dnl
+      mcfs="mcfs"
+      AC_ARG_WITH(mcfs,
+	  [--with-mcfs	           Support mc's private file system],[
+	  if test "x$withval" = "xno"; then
+	    mcfs=""
+	  fi
+      ])
+      if test "x$mcfs" != "x"; then
+	  AC_DEFINE(WITH_MCFS, 1, [Define to enable mc's private file system])
+          vfs_flags="$vfs_flags, mcfs"
+      fi
+      vfs_flags="$vfs_flags, ftpfs, fish"
       use_net_code=true
   fi
 
