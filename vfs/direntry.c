@@ -26,13 +26,15 @@
  * Paths here do _not_ begin with '/', so root directory of
  * archive/site is simply "". Beware. */
 
-static volatile int total_inodes = 0, total_entries = 0;
+#include <config.h>
 
 #include "utilvfs.h"
 #include "xdirentry.h"
 #include "../src/tty.h"
 
 #define CALL(x) if (MEDATA->x) MEDATA->x
+
+static volatile int total_inodes = 0, total_entries = 0;
 
 vfs_s_inode *
 vfs_s_new_inode (vfs *me, vfs_s_super *super, struct stat *initstat)

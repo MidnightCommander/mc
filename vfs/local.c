@@ -1,3 +1,4 @@
+#include <config.h>
 #include <errno.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -9,7 +10,6 @@
 #include "utilvfs.h"
 
 #include "vfs.h"
-#include <config.h>
 #include "local.h"
 
 /* Note: Some of this functions are not static. This has rather good

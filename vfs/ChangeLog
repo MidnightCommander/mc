@@ -1,3 +1,15 @@
+2001-06-25  Pavel Roskin  <proski@gnu.org>
+
+	* cpio.c: Include <config.h> before everything else.
+	* direntry.c: Likewise.
+	* fish.c: Likewise.
+	* ftpfs.c: Likewise.
+	* local.c: Likewise.
+	* tar.c: Likewise.
+	* utilvfs.h: Don't include <config.h> - it should be included
+	in all C files instead.
+	* xdirentry.h: Likewise.
+
 2001-06-19  Pavel Roskin  <proski@gnu.org>
 
 	* local.c (local_telldir): Warn and abort if telldir() is not

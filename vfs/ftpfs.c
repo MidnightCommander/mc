@@ -56,6 +56,7 @@ What to do with this?
 
 /* Namespace pollution: horrible */
 
+#include <config.h>
 #include <sys/types.h>          /* POSIX-required by sys/socket.h and netdb.h */
 #include <netdb.h>		/* struct hostent */
 #include <sys/socket.h>		/* AF_INET */

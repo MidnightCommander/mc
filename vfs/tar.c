@@ -20,9 +20,10 @@
 
 /* Namespace: vfs_tarfs_ops */
 
-#include "xdirentry.h"
+#include <config.h>
 #include <errno.h>
 
+#include "xdirentry.h"
 #include "utilvfs.h"
 
 #include "../src/dialog.h"	/* For MSG_ERROR */
