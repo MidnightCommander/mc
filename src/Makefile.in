@@ -94,11 +94,10 @@ cross:
 	$(MAKE) CC=gcc-linux CPP="gcc-linux -E" \
 	CPPFLAGS="$(CPPFLAGS) -I/usr/local/lib/gcc-lib/i386-linux-linux/include/ncurses "
 
-$(srcdir)/mc.hlp: ync.hlp $(mclibdir)/xnc.hlp $(srcdir)/gindex.pl
-	cat ync.hlp $(mclibdir)/xnc.hlp | perl $(srcdir)/gindex.pl > $(srcdir)/mc.hlp
-
-ync.hlp: $(docdir)/mc.1.in man2hlp
-	./man2hlp 58 $(docdir)/mc.1.in > ync.hlp
+$(srcdir)/mc.hlp: $(docdir)/mc.1.in $(mclibdir)/xnc.hlp $(srcdir)/gindex.pl
+	$(MAKE) man2hlp
+	./man2hlp 58 $(docdir)/mc.1.in | cat - $(mclibdir)/xnc.hlp | \
+	perl $(srcdir)/gindex.pl > $(srcdir)/mc.hlp
 
 mc.html: $(docdir)/mc.1.in man2hlp
 	./man2hlp 0 $(docdir)/mc.1.in > body.html
@@ -109,7 +108,7 @@ TAGS: $(SRCS)
 	etags $(SRCS)
 
 clean:
-	$(RMF) mc cons.saver man2hlp fixhlp *.o core a.out ync.hlp mc.html mcmfmt
+	$(RMF) mc cons.saver man2hlp fixhlp *.o core a.out mc.html mcmfmt
 	$(RMF) libvfs.a libedit.a libmcslang.a mfmt
 
 realclean: clean
@@ -121,7 +120,7 @@ distclean:
 	-$(RMF) $(srcdir)/*~ $(srcdir)/mc $(srcdir)/cons.saver
 	-$(RMF) $(srcdir)/mfmt
 	-$(RMF) $(srcdir)/man2hlp $(srcdir)/fixhlp $(srcdir)/*.o $(srcdir)/core
-	-$(RMF) $(srcdir)/a.out $(srcdir)/ync.hlp $(srcdir)/mc.html
+	-$(RMF) $(srcdir)/a.out $(srcdir)/mc.html
 	-$(RMF) $(srcdir)/libvfs.a $(srcdir)/libmcslang.a $(srcdir)/libedit.a
 	-if test $(srcdir) = .; then $(MAKE) realclean; fi
 	-$(RMF) $(srcdir)/Makefile
