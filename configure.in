@@ -810,6 +810,31 @@ EOF
     fi
 fi
 
+
+dnl If ncurses exports the ESCDELAY variable it should be set to 0
+dnl or you'll have to press Esc three times to dismiss a dialog box.
+dnl
+if test -n "$ncurses_version"; then
+  AC_CACHE_CHECK([for ESCDELAY variable],
+		 [mc_cv_ncurses_escdelay],
+		 [AC_TRY_COMPILE([], [
+			extern int ESCDELAY;
+			int main ()
+			{
+			  ESCDELAY = 0;
+			}
+			],
+			[mc_cv_ncurses_escdelay=yes],
+			[mc_cv_ncurses_escdelay=no]
+		  )
+  ])
+  if test "$mc_cv_ncurses_escdelay" = yes; then
+    AC_DEFINE(HAVE_ESCDELAY, 1,
+	      [Define if ncurses has ESCDELAY variable])
+  fi
+fi
+
+
 dnl Ncurses may be linked against libgpm. Change LIBS temporary for
 dnl check for resizeterm and keyok.
 dnl

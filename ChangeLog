@@ -1,3 +1,7 @@
+2001-05-30  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Add check for ESCDELAY variable in ncurses.
+
 2001-05-29  Pavel Roskin  <proski@gnu.org>
 
 	* extraconf.h [!USE_VFS]: Undefine USE_NETCODE and
