@@ -81,7 +81,7 @@ esac
 AC_PROG_INSTALL
 AC_CHECK_HEADERS([unistd.h string.h memory.h crypt.h grp.h limits.h \
 	malloc.h stdlib.h termios.h utime.h fcntl.h pwd.h sys/statfs.h \
-	sys/time.h sys/timeb.h stropts.h])
+	sys/time.h sys/timeb.h sys/select.h sys/ioctl.h stropts.h])
 
 AC_HEADER_TIME
 AC_HEADER_SYS_WAIT
@@ -144,11 +144,6 @@ if test x$NEED_CRYPT_PROTOTYPE = xyes; then
 AC_DEFINE(NEED_CRYPT_PROTOTYPE, 1,
 	  [Define if function `crypt' needs a prototype])
 fi
-
-dnl
-dnl AIX and Sequent need <sys/select.h> for fd_set
-dnl
-AC_CHECK_HEADERS(sys/select.h)
 
 dnl
 dnl On SCO and some SVR4, crypt is on libcrypt.a

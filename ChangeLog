@@ -1,5 +1,7 @@
 2001-09-10  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Add check for sys/ioctl.h.
+
 	* configure.in: Use AC_FUNC_STRCOLL instead of generic test.
 
 	* acinclude.m4: Put -lncurses to MCLIBS, not LIBS.
