@@ -113,7 +113,40 @@ AC_DEFUN([MC_WITH_VFS],[
   ])
   AC_SUBST(smbfs)
   AC_SUBST(SAMBAFILES)
-  
+
+  if test "x$smbfs" != x ; then
+  #################################################
+  # set Samba configuration directory location
+  configdir="/etc"
+  AC_ARG_WITH(configdir,
+  [  --with-configdir=DIR     Where the Samba configuration files are (/etc)],
+  [ case "$withval" in
+    yes|no)
+    #
+    # Just in case anybody does it
+    #
+	AC_MSG_WARN([--with-configdir called without argument - will use default])
+    ;;
+    * )
+	configdir="$withval"
+    ;;
+  esac]
+  )
+  AC_SUBST(configdir)
+
+  AC_ARG_WITH(codepagedir,
+    [  --with-codepagedir=DIR   Where the Samba codepage files are],
+    [ case "$withval" in
+      yes|no)
+      #
+      # Just in case anybody does it
+      #
+	AC_MSG_WARN([--with-codepagedir called without argument - will use default])
+      ;;
+    esac]
+  )
+  fi
+
   dnl
   dnl The termnet support
   dnl
