@@ -474,7 +474,6 @@ void reverse_selection_cmd (void)
 	    continue;
 	do_file_mark (cpanel, i, !file->f.marked);
     }
-    paint_panel (cpanel);
 }
 
 void select_cmd (void)
@@ -520,7 +519,6 @@ void select_cmd (void)
 	    do_file_mark (cpanel, i, 1);
 	}
     }
-    paint_panel (cpanel);
     g_free (reg_exp);
 }
 
@@ -566,7 +564,6 @@ void unselect_cmd (void)
 	    do_file_mark (cpanel, i, 0);
 	}
     }
-    paint_panel (cpanel);
     g_free (reg_exp);
 }
 
@@ -876,8 +873,6 @@ compare_dirs_cmd (void)
 	&& get_other_type () == view_listing) {
 	compare_dir (cpanel, opanel, thorough_flag);
 	compare_dir (opanel, cpanel, thorough_flag);
-	paint_panel (cpanel);
-	paint_panel (opanel);
     } else {
 	message (1, MSG_ERROR,
 		 _(" Both panels should be in the "

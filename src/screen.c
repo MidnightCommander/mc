@@ -1827,45 +1827,41 @@ recalculate_panel_summary (WPanel *panel)
 void
 do_file_mark (WPanel *panel, int idx, int mark)
 {
-    if (panel->dir.list [idx].f.marked == mark)
-        return;
-    /*
-     * Only '..' can't be marked, '.' isn't visible.
-     */
-    if (strcmp (panel->dir.list [idx].fname, "..")){
-	file_mark (panel, idx, mark);
-        if (panel->dir.list [idx].f.marked){
-            panel->marked++;
-            if (S_ISDIR (panel->dir.list [idx].st.st_mode)) {
-		if (panel->dir.list [idx].f.dir_size_computed)
-		    panel->total += panel->dir.list [idx].st.st_size;
-                panel->dirs_marked++;
-	    } else
-		panel->total += panel->dir.list [idx].st.st_size;
-            set_colors (panel);
-        } else {
-            if (S_ISDIR(panel->dir.list [idx].st.st_mode)) {
-		if (panel->dir.list [idx].f.dir_size_computed)
-		    panel->total -= panel->dir.list [idx].st.st_size;
-                panel->dirs_marked--;
-	    } else
-		panel->total -= panel->dir.list [idx].st.st_size;
-            panel->marked--;
-        }
+    if (panel->dir.list[idx].f.marked == mark)
+	return;
+
+    /* Only '..' can't be marked, '.' isn't visible */
+    if (!strcmp (panel->dir.list[idx].fname, ".."))
+	return;
+
+    file_mark (panel, idx, mark);
+    if (panel->dir.list[idx].f.marked) {
+	panel->marked++;
+	if (S_ISDIR (panel->dir.list[idx].st.st_mode)) {
+	    if (panel->dir.list[idx].f.dir_size_computed)
+		panel->total += panel->dir.list[idx].st.st_size;
+	    panel->dirs_marked++;
+	} else
+	    panel->total += panel->dir.list[idx].st.st_size;
+	set_colors (panel);
+    } else {
+	if (S_ISDIR (panel->dir.list[idx].st.st_mode)) {
+	    if (panel->dir.list[idx].f.dir_size_computed)
+		panel->total -= panel->dir.list[idx].st.st_size;
+	    panel->dirs_marked--;
+	} else
+	    panel->total -= panel->dir.list[idx].st.st_size;
+	panel->marked--;
     }
 }
 
 static void
 do_mark_file (WPanel *panel, int do_move)
 {
-    int idx = panel->selected;
-
-    do_file_mark (panel, idx, selection (panel)->f.marked ? 0 : 1);
-    repaint_file (panel, idx, 1, 2*panel->dir.list [idx].f.marked+1, 0);
-
+    do_file_mark (panel, panel->selected,
+		  selection (panel)->f.marked ? 0 : 1);
     if (mark_moves_down && do_move)
 	move_down (panel);
-    display_mini_info (panel);
 }
 
 static void
@@ -2240,7 +2236,10 @@ panel_callback (WPanel *panel, int msg, int par)
 void
 file_mark (WPanel *panel, int index, int val)
 {
-    panel->dir.list [index].f.marked = val;
+    if (panel->dir.list[index].f.marked != val) {
+	panel->dir.list[index].f.marked = val;
+	panel->dirty = 1;
+    }
 }
 
 /*                                     */

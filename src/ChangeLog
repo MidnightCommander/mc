@@ -1,5 +1,8 @@
 2003-09-10  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c (file_mark): Set dirty flag if the mark changes.
+	* cmd.c: Remove calls to paint_panel() due to file marks.
+
 	* screen.c (update_dirty_panels): New function - update panels
 	with the dirty flag.
 	(panel_update_contents): Make static, don't call directly.
