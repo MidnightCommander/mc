@@ -1647,7 +1647,6 @@ msgid "Format of the "
 msgstr "Формат "
 
 #: src/ext.c:399
-#, fuzzy
 msgid ""
 "mc.ext file has changed\n"
 "with version 3.0. It seems that installation\n"
@@ -1657,8 +1656,7 @@ msgstr ""
 "mc.ext був зм╕нений\n"
 "верс╕╓ю 3.0. Схоже що стався зб╕й при встановленн╕.\n"
 "Будь ласка в╕зьм╕ть св╕жу коп╕ю з пакета\n"
-"Midnight Commander або, якщо його у вас нема, то\n"
-"з╕ сервера ftp://ftp.nuclecu.unam.mx/ ."
+"Midnight Commander."
 
 #: src/ext.c:413
 msgid " file error "
@@ -3255,7 +3253,6 @@ msgstr ""
 "+число             число - номер початковго рядка для редактора.\n"
 
 #: src/main.c:2259
-#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -3264,7 +3261,7 @@ msgstr ""
 "\n"
 "Будь ласка, в╕дсилайте будь як╕ пов╕домлення про помилки (включаючи вив╕д "
 "'mc -V')\n"
-"на адресу mc-bugs@nuclecu.unam.mx\n"
+"на адресу mc-devel@gnome.org\n"
 
 #: src/main.c:2274
 msgid ""
@@ -3645,7 +3642,6 @@ msgid "<readlink failed>"
 msgstr "<зб╕й читання посилання>"
 
 #: src/screen.c:1262
-#, fuzzy
 msgid "Unknown tag on display format: "
 msgstr "Нев╕домий тег у формат╕ в╕дображення: "
 
@@ -3769,9 +3765,8 @@ msgid "With builtin Editor\n"
 msgstr "З╕ вбудованим редактором\n"
 
 #: src/textconf.c:37
-#, fuzzy
 msgid "Using system-installed S-Lang library"
-msgstr "встановлену у систем╕ "
+msgstr "З використанням встановлено у систем╕ б╕бл╕отек╕ S-Lang"
 
 #: src/textconf.c:39
 msgid "Using included S-Lang library"
@@ -3779,27 +3774,23 @@ msgstr ""
 
 #: src/textconf.c:45
 msgid "with terminfo database"
-msgstr ""
+msgstr "з базою даних terminfo"
 
 #: src/textconf.c:47
-#, fuzzy
 msgid "with termcap database"
-msgstr " базою даних"
+msgstr "з базою даних termcap"
 
 #: src/textconf.c:49
-#, fuzzy
 msgid "with an unknown terminal database"
-msgstr "нев╕дом╕й терм╕нальн╕й"
+msgstr "з нев╕дом╕й терм╕нальн╕й базою даних"
 
 #: src/textconf.c:53
-#, fuzzy
 msgid "Using the ncurses library"
-msgstr "б╕бл╕отеку ncurses"
+msgstr "З використанням б╕бл╕отеки ncurses"
 
 #: src/textconf.c:55
-#, fuzzy
 msgid "Using old curses library"
-msgstr "деяку нев╕дому б╕бл╕отеку curses"
+msgstr "З використанням  старо? б╕бл╕отеки curses"
 
 #: src/textconf.c:62
 #, fuzzy
@@ -3911,12 +3902,10 @@ msgid " Format error on file Extensions File "
 msgstr " Помилка формату у файл╕ Розширення файл╕в"
 
 #: src/user.c:135
-#, fuzzy
 msgid " The %%var macro has no default "
 msgstr " Макрос %%var не ма╓ значень по замовчуванню"
 
 #: src/user.c:136
-#, fuzzy
 msgid " The %%var macro has no variable "
 msgstr " Макрос %%var не ма╓ зм╕нних"
 
@@ -4516,9 +4505,9 @@ msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Зб╕й локального читання, в╕дсилаються нул╕"
 
 #: vfs/fish.c:525
-#, fuzzy, c-format
+#, c-format
 msgid "fish: storing %s %d (%lu)"
-msgstr "fish: запис %s %d (%d)"
+msgstr "fish: запис %s %d (%lu)"
 
 #: vfs/fish.c:526
 msgid "zeros"
@@ -4666,9 +4655,9 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: зб╕й; н╕куди перейти на авар╕йний режим"
 
 #: vfs/ftpfs.c:1419
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: збер╕гаю файл %d (%d)"
+msgstr "ftpfs: збер╕гаю файл %lu (%lu)"
 
 #: vfs/ftpfs.c:1851
 msgid ""
@@ -4765,22 +4754,22 @@ msgstr " Зб╕й ╕дентиф╕кац╕╖ "
 #: vfs/smbfs.c:1611
 #, c-format
 msgid " %s mkdir'ing %s "
-msgstr " %s створю╓ каталог %s "
+msgstr " %s створення каталог %s "
 
 #: vfs/smbfs.c:1634
 #, c-format
 msgid " %s rmdir'ing %s "
-msgstr " %s видаля╓ каталог %s "
+msgstr " %s видалення каталога %s "
 
 #: vfs/smbfs.c:1738 vfs/smbfs.c:1758
 #, c-format
 msgid " %s opening remote file %s "
-msgstr " %s в╕дкрива╓ файл %s з в╕ддалено╖ машини"
+msgstr " %s в╕дкривання файлу %s з в╕ддалено╖ машини"
 
 #: vfs/smbfs.c:1826
-#, fuzzy, c-format
+#, c-format
 msgid " %s removing remote file %s "
-msgstr " %s в╕дкрива╓ файл %s з в╕ддалено╖ машини"
+msgstr " %s в╕далення файлу %s з в╕ддалено╖ машини"
 
 #: vfs/smbfs.c:1864
 #, c-format
