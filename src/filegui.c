@@ -852,7 +852,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 		  const char *def_text, int only_one, int *do_background)
 {
     int source_easy_patterns = easy_patterns;
-    char *source_mask, *orig_mask, *dest_dir;
+    char *source_mask, *orig_mask, *dest_dir, *tmpdest;
     const char *error;
     struct stat buf;
     int val;
@@ -914,8 +914,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 
     orig_mask = source_mask;
     if (!dest_dir || !*dest_dir) {
-	if (source_mask)
-	    g_free (source_mask);
+	g_free (source_mask);
 	return dest_dir;
     }
     if (source_easy_patterns) {
@@ -935,12 +934,15 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     if (error) {
 	message (1, MSG_ERROR, _("Invalid source pattern `%s' \n %s "),
 		    orig_mask, error);
-	if (orig_mask)
-	    g_free (orig_mask);
+	g_free (orig_mask);
 	goto ask_file_mask;
     }
-    if (orig_mask)
-	g_free (orig_mask);
+    g_free (orig_mask);
+
+    tmpdest = dest_dir;
+    dest_dir = tilde_expand(tmpdest);
+    g_free(tmpdest);
+
     ctx->dest_mask = strrchr (dest_dir, PATH_SEP);
     if (ctx->dest_mask == NULL)
 	ctx->dest_mask = dest_dir;

@@ -1,3 +1,8 @@
+2004-09-21  Leonard den Ottolander  <leonard * den ottolander nl>
+
+	* filegui.c (file_mask_dialog): Expand tilde. Remove redundant 
+	ifs before g_free().
+
 2004-09-19  Roland Illig  <roland.illig@gmx.de>
 
 	* achown.c: Added const qualifiers and const_cast.
@@ -67,7 +72,7 @@
 	* wtools.h (QuickWidget): Make text const.
 	* wtools.c (fg_input_dialog_help): Fix warning.
 
-2004-09-14  Leonard den Ottolander  <leonard * den ottolander nl>
+
 
 	* utilunix.c (tilde_expand): Fix extra slash in result from 
 	tilde_expand() for ~<user>/dir.
