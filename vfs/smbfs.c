@@ -24,7 +24,7 @@
 #include <config.h>
 #include <stdio.h>
 #include <sys/types.h>
-
+#undef	USE_NCURSES	/* Don't include *curses.h */
 #include "utilvfs.h"
 
 #undef	PACKAGE_BUGREPORT
@@ -649,7 +649,7 @@ chkpath(struct cli_state *cli, char *path, BOOL send_only)
 	return True;
 }
 
-/* #if 0 */
+#if 1
 static int
 fs (const char *text)
 {
@@ -664,7 +664,7 @@ fs (const char *text)
 		return strlen(text);
 	return count;
 }
-/* #endif */
+#endif
 
 static int
 smbfs_loaddir (opendir_info *smbfs_info)
@@ -692,7 +692,7 @@ smbfs_loaddir (opendir_info *smbfs_info)
 			DEBUG(6, ("smbfs_loaddir: browsing %s\n", IPC));
 			/* browse for servers */
 			if (!cli_NetServerEnum(smbfs_info->conn->cli, smbfs_info->conn->domain,
-				SV_TYPE_ALL, server_browsing_helper, NULL), NULL)
+				SV_TYPE_ALL, server_browsing_helper, NULL))
 					return 0;
 			else
 				current_server_info = smbfs_info;

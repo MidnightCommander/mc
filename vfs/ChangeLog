@@ -1,3 +1,8 @@
+2002-09-24  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* smbfs.c: Undef USE_NCURSES - no needs to include *curces.h.
+	(smbfs_loaddir): Fix warning.
+
 2002-09-21  Pavel Roskin  <proski@gnu.org>
 
 	* mcfs.c: Move config.h to the beginning.
