@@ -1,3 +1,10 @@
+Mon Apr 20 01:32:20 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* configure.in: Don't try to link MC against SLang >= 1.0. I will 
+	remove this restriction when I'm sure that it's save to use the new
+	version (the documentation to SLang mentions some changes of
+	return values).
+
 1998-04-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* file.h: Added prototype for copy_dir_dir.

@@ -979,7 +979,11 @@ AC_DEFUN(AC_USE_TERMCAP,
 slang_check_lib=true
 slang_term=""
 slang_use_system_installed_lib=false
-AC_CHECK_LIB(slang,SLang_init_tty,
+
+dnl Checking for SLsys_getkey will fail for SLang >= 1.0, i.e. we don't
+dnl use SLang >= 1.0 at the moment because I haven't reviewed which changes
+dnl to MC are necessary (Norbert)
+AC_CHECK_LIB(slang,SLsys_getkey,
 	AC_CHECK_HEADERS(slang.h)
 	if test x$ac_cv_header_slang_h = xyes
 	then
