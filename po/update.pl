@@ -62,9 +62,9 @@ if ($LANG=~/^-(.)*/){
         
     elsif ($LANG eq "--maintain" || "$LANG" eq "-M"){
 
-        $a="find ../ -type f -print | egrep '.*\\.(c|y|cc|c++|h|gob)' ";
+        $a="find ../ -type f -print | egrep '.*\\.(c|y|cc|c++|cxx|cpp|h|gob)\$' ";
 
-        open(BUF2, "POTFILES.in") || die "update.pl:  there is no POTFILES.in!!!\n";
+        open(BUF2, "POTFILES.in") || die "update.pl:  there is no POTFILES.in !!!\n";
         print "Searching for missing _(\" \") entries...\n";
         open(BUF1, "$a|");
 
@@ -86,7 +86,7 @@ if ($LANG=~/^-(.)*/){
         foreach my $file (@buf1){
             open FILE, "<$file";
             while (<FILE>) {
-                if ($_=~/_\(\"/o){
+                if ($_=~/_\s*\(\"/o){
                     $file = unpack("x3 A*",$file) . "\n";
                     push @buff1, $file;
                     last;
