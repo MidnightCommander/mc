@@ -663,10 +663,12 @@ dnl Check for Gnome
 dnl
 gmc=""
 gmcdep=""
+libgtkedit=""
 AC_SUBST(insticons)
 GNOME_INIT_HOOK([
 	gmc=gmc
  	gmcdep=gmcdep
+	libgtkedit="libgtkedit.a"
 	insticons=install_icons
 	if test x"$xvers" = xnone; then
 	    xvers="Gnome"
@@ -676,6 +678,7 @@ GNOME_INIT_HOOK([
 ])
 AC_SUBST(gmc)
 AC_SUBST(gmcdep)
+AC_SUBST(libgtkedit)
 
 dnl
 dnl Check for the -mandoc package

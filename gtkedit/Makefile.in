@@ -30,7 +30,7 @@ EDITOBJS = edit.o editcmd.o editdraw.o \
 
 DIST = 	Makefile.in $(EDITSRC)
 
-all: libgtkedit.a
+all: @libgtkedit@
 
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) -DGTK $<
