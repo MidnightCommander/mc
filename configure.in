@@ -18,9 +18,10 @@ AC_PROG_AWK
 AC_AIX
 AC_MINIX
 AC_ISC_POSIX
-dnl It's a hack to accomodate both Autoconf 2.13 and the 2.49x series,
-dnl It's needed until Autoconf 2.50 is released.
+
+dnl Accomodate both Autoconf 2.13 and the 2.5x series,
 ifdef([AC_PROG_CC_STDC], [AC_PROG_CC_STDC], [AM_PROG_CC_STDC])
+
 AC_HEADER_MAJOR
 AC_C_CONST
 
@@ -213,10 +214,10 @@ AC_FUNC_ALLOCA
 AC_PATH_XTRA
 
 dnl
-dnl X11 support in the textmode edition. 
+dnl X11 support.
 dnl
 
-dnl These variables are only used when building the text edition MC binary
+dnl These variables are only used when building the MC binary
 MCCFLAGS=""
 MCLIBS=""
 AC_SUBST(MCCFLAGS)
@@ -224,7 +225,7 @@ AC_SUBST(MCLIBS)
 
 textmode_x11_support="no"
 AC_ARG_WITH(tm-x-support,
-	[--with-tm-x-support        Add X Window System support to the text edition],
+	[--with-tm-x-support        Try getting events from X Window System],
 	[if test x$withval = xyes; then
 		MCCFLAGS="$X_CFLAGS"
 		MCLIBS="$X_LIBS $X_PRE_LIBS -lX11 $X_EXTRA_LIBS"
@@ -271,7 +272,7 @@ AC_CHECK_LIB(seq, get_process_stats, [
 	LIBS="$LIBS -lseq"
 	AC_DEFINE(HAVE_GET_PROCESS_STATS)])
 
-GNOME_VFS_CHECKS
+MC_VFS_CHECKS
 
 dnl
 dnl Install mcserv only if explicitly enabled
@@ -691,7 +692,7 @@ EOF
   egrep "VERSION:" >conftest.out 2>&1; then
             ncurses_version=`cat conftest.out|sed -e 's/^[[^"]]*"//' -e 's/".*//'`
 	fi
-	rm -rf conftext*
+	rm -rf conftest*
         AC_MSG_RESULT([$ncurses_version])
 	case "$ncurses_version" in
 	4.[[01]])
@@ -828,8 +829,7 @@ AC_SUBST_FILE(MCF)
 dnl
 dnl Output configuration files
 dnl
-dnl It's a hack to accomodate both Autoconf 2.13 and the 2.49x series,
-dnl It's needed until Autoconf 2.50 is released.
+dnl Accomodate both Autoconf 2.13 and the 2.5x series.
 ifelse(AC_ACVERSION, [2.13],
 [mc_subdirs=
 if test "x$SAMBAFILES" != x; then
@@ -885,17 +885,16 @@ echo "
 Configuration:
 
   Source code location:       ${srcdir}
-  Compiler:	              ${CC}
+  Compiler:                   ${CC}
   Compiler flags:             ${CFLAGS}
   File system:                ${vfs_type}
-			      ${vfs_flags}
-  Text mode screen manager:   ${screen_manager}
+                              ${vfs_flags}
+  Screen manager:             ${screen_manager}
   Install console saver:      ${install_saver}
-  Text mode mouse library:    ${mouse_lib}
-  Text mode X11 support:      ${textmode_x11_support}
+  Mouse support:              ${mouse_lib}
+  X11 events support:         ${textmode_x11_support}
   Debugger code:              ${mem_debug}
   With subshell support:      ${subshell}
-  X11 versions:               ${xvers}
   Internal editor:            ${EDIT_msg}
-  Install path:		      ${prefix}/bin, ${prefix}/lib/mc
+  Install path:               ${prefix}/bin, ${prefix}/lib/mc
 "

@@ -53,21 +53,12 @@ the need to embed this logic into configure.in.
 #endif
 #endif
 
-#ifdef HAVE_X
-#    undef HAVE_SUBSHELL_SUPPORT
-#    undef HAVE_SLANG
-#    undef HAS_CURSES
-#    undef USE_NCURSES
-#    undef HAVE_CHARSET
-#    undef HAVE_TEXTMODE_X11_SUPPORT
-#endif
-
 #ifndef USE_VFS
 #    undef USE_NETCODE
 #    undef USE_EXT2FSLIB
 #endif
 
-#if defined (HAVE_SOCKETPAIR) && !defined (HAVE_X)
+#ifdef HAVE_SOCKETPAIR
 #    define WITH_BACKGROUND
 #endif
 

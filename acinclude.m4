@@ -1,10 +1,10 @@
-dnl GNOME_UNDELFS_CHECKS
+dnl MC_UNDELFS_CHECKS
 dnl    Check for ext2fs undel support.
 dnl    Set shell variable ext2fs_undel to "yes" if we have it,
 dnl    "no" otherwise.  May define USE_EXT2FSLIB for cpp.
 dnl    Will set EXT2FS_UNDEL_LIBS to required libraries.
 
-AC_DEFUN([GNOME_UNDELFS_CHECKS], [
+AC_DEFUN([MC_UNDELFS_CHECKS], [
   ext2fs_undel=no
   EXT2FS_UNDEL_LIBS=
   AC_CHECK_HEADERS(linux/ext2_fs.h)
@@ -23,10 +23,10 @@ AC_DEFUN([GNOME_UNDELFS_CHECKS], [
 
 
 
-dnl GNOME_VFS_CHECKS
+dnl MC_VFS_CHECKS
 dnl   Check for various functions needed by libvfs.
 dnl   This has various effects:
-dnl     Sets GNOME_VFS_LIBS to libraries required
+dnl     Sets MC_VFS_LIBS to libraries required
 dnl     Sets termnet  to true or false depending on whether it is required.
 dnl        If yes, defines USE_TERMNET.
 dnl     Sets vfs_flags to "pretty" list of vfs implementations we include.
@@ -35,7 +35,7 @@ dnl        "no" (--without-vfs).
 dnl     Calls AC_SUBST(mcserv), which is either empty or "mcserv".
 
 dnl Private define
-AC_DEFUN([GNOME_WITH_VFS],[
+AC_DEFUN([MC_WITH_VFS],[
   dnl FIXME: network checks should probably be in their own macro.
   AC_CHECK_LIB(nsl, t_accept)
   AC_CHECK_LIB(socket, socket)
@@ -130,20 +130,20 @@ AC_DEFUN([GNOME_WITH_VFS],[
   AC_SUBST(mcserv)
 
 dnl FIXME:
-dnl GNOME_VFS_LIBS=
+dnl MC_VFS_LIBS=
 
 ])
 
 
 
-AC_DEFUN([GNOME_VFS_CHECKS],[
+AC_DEFUN([MC_VFS_CHECKS],[
 	use_vfs=yes
 	AC_ARG_WITH(vfs,
 		[--with-vfs		   Compile with the VFS code],
 		use_vfs=$withval
 	)
 	case $use_vfs in
-		yes) 	GNOME_WITH_VFS;;
+		yes) 	MC_WITH_VFS;;
 		no) 	use_vfs=no;;
 		*)   	use_vfs=no;;
 			dnl Should we issue a warning?
@@ -696,7 +696,7 @@ AC_DEFUN([AC_WITH_EDIT], [
 ])
 
 AC_DEFUN([AC_EXT2_UNDEL], [
-  GNOME_UNDELFS_CHECKS
+  MC_UNDELFS_CHECKS
   if test "$ext2fs_undel" = yes; then
      AC_MSG_RESULT([With ext2fs file recovery code])
      vfs_flags="${vfs_flags}, undelfs"
