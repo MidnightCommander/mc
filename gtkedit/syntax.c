@@ -4,6 +4,8 @@
 
    Authors: 1998 Paul Sheer
 
+   $Id$
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
@@ -1250,7 +1252,7 @@ static const char * const syntax_text[] = {
 "file .\\*ChangeLog$ GNU\\sDistribution\\sChangeLog\\sFile",
 "include changelog.syntax",
 "",
-"file .\\*Makefile[\\\\\\.a-z]\\*$ Makefile",
+"file .\\*[Mm]akefile[\\\\\\.a-z]\\*$ Makefile",
 "include makefile.syntax",
 "",
 "file Don_t_match_me Mail\\sfolder ^From\\s",
@@ -1344,6 +1346,7 @@ FILE *upgrade_syntax_file (char *syntax_file)
     f = fopen (syntax_file, "r");
     if (!f) {
 	const char * const *syntax_line;
+      rewrite_rule_file:
 	f = fopen (syntax_file, "w");
 	if (!f)
 	    return 0;
@@ -1371,7 +1374,7 @@ FILE *upgrade_syntax_file (char *syntax_file)
 #else
 	CMessageDialog (0, 20, 20, 0,_(" Load Syntax Rules "), _(" Your syntax rule file is outdated \n A new rule file is being installed. \n Your old rule file has been saved with a .OLD extension. ")); 
 #endif
-	return upgrade_syntax_file (syntax_file);
+	goto rewrite_rule_file;
     }
     rewind (f);
     return f;
