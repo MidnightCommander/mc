@@ -657,7 +657,6 @@ void user_menu_cmd (void)
 	g_free (menu);
 	return;
     }
-    g_free (menu);
     
     max_cols = 0;
     for (i = 0; i < MAX_ENTRIES; i++)
@@ -699,7 +698,7 @@ void user_menu_cmd (void)
 			selected = menu_lines;
 		}
 	    }
-	    else if (*p > ' ' && *p < 127){
+	    else if (*p != ' ' && *p != '\t' && is_printable (*p)) {
 		/* A menu entry title line */
 		if (accept_entry)
 		    entries [menu_lines] = p;
@@ -721,15 +720,22 @@ void user_menu_cmd (void)
 	    col = 0;
 	}
     }
-    max_cols = min (max (max_cols, col), MAX_ENTRY_LEN);
+    if (menu_lines == 0) {
+	message (1, MSG_ERROR, _(" Empty file %s "), menu);
+        g_free (menu);
+	return;
+    }
+    g_free (menu);
 
+    max_cols = min (max (max_cols, col), MAX_ENTRY_LEN);
+ 
     /* Create listbox */
     listbox = create_listbox_window (max_cols+2, menu_lines, _(" User menu "),
 				     "[Menu File Edit]");
     
     /* insert all the items found */
     for (i = 0; i < menu_lines; i++)
-	LISTBOX_APPEND_TEXT (listbox, entries [i][0],
+	LISTBOX_APPEND_TEXT (listbox, (unsigned char)entries [i][0],
 			     extract_line (entries [i],
 					   entries [i]+MAX_ENTRY_LEN),
 			     entries [i]);

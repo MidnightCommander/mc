@@ -1474,7 +1474,8 @@ cancel_pressed (GtkWidget *widget, int *abort)
 static void
 search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
 {
-    int w = view->widget.cols - (view->have_frame * 2);
+    int w = view->widget.cols - view->have_frame + 1;
+
     char *s = NULL;		/*  The line we read from the view buffer */
     long p, beginning;
     int  ch;
@@ -1615,7 +1616,8 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
 static long
 block_search (WView *view, char *buffer, int len)
 {
-    int w = view->widget.cols - (view->have_frame * 2);
+    int w = view->widget.cols - view->have_frame + 1;
+
     char *d = buffer, b;
     unsigned long e;
 

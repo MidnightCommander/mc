@@ -1152,6 +1152,7 @@ resolve_symlink_with_ls_options(struct connection *bucket, struct dir *dir)
     struct stat s;
     struct linklist *flist;
     struct direntry *fe;
+    int switch_method = 0;
     
     dir->symlink_status = FTPFS_RESOLVED_SYMLINKS;
     if (strchr (dir->remote_path, ' ')) {
@@ -1196,6 +1197,11 @@ resolve_symlink_with_ls_options(struct connection *bucket, struct dir *dir)
 		int r = strcmp(fe->name, filename);
 		g_free(filename);
 		if (r == 0) {
+                    if (S_ISLNK (s.st_mode)) {
+                        /* This server doesn't understand LIST -lLa */
+                        switch_method = 1;
+                        goto done;
+                    }
 		    fe->l_stat = g_new (struct stat, 1);
 		    if (fe->l_stat == NULL)
 			goto done;
@@ -1213,6 +1219,10 @@ done:
     disable_interrupt_key();
     fclose(fp);
     get_reply(qsock(bucket), NULL, 0);
+    if (switch_method) {
+        bucket->strict_rfc959_list_cmd = 1;
+	resolve_symlink_without_ls_options(bucket, dir);
+    }
 }
 
 static void
