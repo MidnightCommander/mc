@@ -1,3 +1,9 @@
+1999-02-14  Sergey Panov <sipan@mit.edu>
+
+        * glayout.c: Fixed my own stupid typo( stock ID instead of NULL)
+        it was not critical. A few minor, rather cosmetic changes in
+        GnomeUIInfo structures.
+
 1999-02-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* mc.keys.in.in: Use Tigert's new icon for man pages.

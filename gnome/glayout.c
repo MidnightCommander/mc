@@ -289,7 +289,8 @@ GnomeUIInfo gnome_panel_new_menu [] = {
 
 
 GnomeUIInfo gnome_panel_file_menu [] = {
-	GNOMEUIINFO_MENU_NEW_ITEM(N_("New _Window"), N_("Opens a new window"), gnome_open_panel, NULL),
+        GNOMEUIINFO_MENU_NEW_WINDOW_ITEM(gnome_open_panel, NULL),
+	/*GNOMEUIINFO_MENU_NEW_ITEM(N_("New _Window"), N_("Opens a new window"), gnome_open_panel, NULL),*/
 	
 	/* We want to make a new menu entry here... */
 	/* For example: */
@@ -301,13 +302,13 @@ GnomeUIInfo gnome_panel_file_menu [] = {
 	/*  etc... */
 	GNOMEUIINFO_MENU_NEW_SUBTREE(gnome_panel_new_menu),
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_OPEN_ITEM( gnome_open_files, GNOME_STOCK_PIXMAP_OPEN),
+	GNOMEUIINFO_MENU_OPEN_ITEM( gnome_open_files, NULL),
 /*	GNOMEUIINFO_ITEM_NONE( N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },*/
 	GNOMEUIINFO_ITEM_STOCK(N_("_Copy..."), N_("Copy files"), copy_cmd, GNOME_STOCK_PIXMAP_COPY),
 	GNOMEUIINFO_ITEM_STOCK(N_("_Delete..."), N_("Delete files"), delete_cmd, GNOME_STOCK_PIXMAP_REMOVE),
         GNOMEUIINFO_ITEM_NONE(N_("_Move..."), N_("Rename or move files"), ren_cmd),
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_CLOSE_ITEM(gnome_close_panel, NULL),
+	GNOMEUIINFO_MENU_CLOSE_WINDOW_ITEM(gnome_close_panel, NULL),
         GNOMEUIINFO_END
 };
 
@@ -340,20 +341,19 @@ GnomeUIInfo gnome_panel_layout_menu [] = {
 };
 
 GnomeUIInfo gnome_panel_commands_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("_Find File..."),      N_("Locate files on disk"),   find_cmd, NULL,
-	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_JUMP_TO},
+        GNOMEUIINFO_ITEM_STOCK(N_("_Find File..."), N_("Locate files on disk"), find_cmd, GNOME_STOCK_MENU_JUMP_TO),
 	  
 /*	{ GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },*/
 	{ GNOME_APP_UI_ITEM, N_("_Run Command..."),               N_("Runs a command"), run_cmd, NULL,
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN, GDK_F2, 0 },
-	{ GNOME_APP_UI_ITEM, N_("_Run Command in panel..."),N_("Run a command and put the results in a panel"), gnome_external_panelize },
+	GNOMEUIINFO_ITEM_NONE(N_("_Run Command in panel..."),N_("Run a command and put the results in a panel"), gnome_external_panelize),
 
 #ifdef USE_VFS					  
-	 GNOMEUIINFO_ITEM_NONE(N_("_Active VFS list..."),N_("List of active virtual file systems"), reselect_vfs),
+	GNOMEUIINFO_ITEM_NONE(N_("_Active VFS list..."),N_("List of active virtual file systems"), reselect_vfs),
 #endif
 #ifdef USE_EXT2FSLIB
 	/*does this do anything?*/
-/*	{ GNOME_APP_UI_ITEM, N_("_Undelete files (ext2fs only)..."), N_("Recover deleted files"), undelete_cmd },*/
+/*	 GNOMEUIINFO_ITEM_NONE(N_("_Undelete files (ext2fs only)..."), N_("Recover deleted files"), undelete_cmd ),*/
 #endif
 #ifdef WITH_BACKGROUND
 	GNOMEUIINFO_ITEM_NONE( N_("_Background jobs..."),   N_("List of background operations"), jobs_cmd ),
