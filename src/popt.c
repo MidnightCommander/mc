@@ -193,6 +193,7 @@ static int handleAlias(poptContext con, char * longName, char shortName,
 }
 
 static void execCommand(poptContext con) {
+#if 0
     char ** argv;
     int pos = 0;
     char * script = con->doExec->script;
@@ -225,24 +226,10 @@ static void execCommand(poptContext con) {
 
     argv[pos++] = NULL;
 
-#ifdef __hpux
-    setresuid(getuid(), getuid(),-1);
-#else
-/*
- * XXX " ... on BSD systems setuid() should be preferred over setreuid()"
- * XXX 	sez' Timur Bakeyev <mc@bat.ru>
- * XXX	from Norbert Warmuth <nwarmuth@privat.circular.de>
- */
-#if defined(HAVE_SETUID)
-    setuid(getuid());
-#elif defined (HAVE_SETREUID)
-    setreuid(getuid(), getuid()); /*hlauer: not portable to hpux9.01 */
-#else
-    ; /* Cannot drop privileges */
-#endif
-#endif
-
     execvp(argv[0], argv);
+#else
+    abort();
+#endif
 }
 
 static const struct poptOption * findOption(const struct poptOption * table,

@@ -2291,7 +2291,8 @@ handle_args (int argc, char *argv [])
     char   *option_arg, *base;
     int    c;
 
-    ctx = poptGetContext ("mc", argc, argv, argument_table, 0);
+    ctx = poptGetContext ("mc", argc, argv, argument_table,
+			  POPT_CONTEXT_NO_EXEC);
 
 #ifdef USE_TERMCAP
     SLtt_Try_Termcap = 1;

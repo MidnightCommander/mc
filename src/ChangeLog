@@ -1,5 +1,10 @@
 2002-08-19  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (handle_args): Set POPT_CONTEXT_NO_EXEC flag for
+	poptGetContext().
+	* popt.c: Call abort() in execCommand() - we should not execute
+	anything here.
+
 	* util.h: Remove unused and dangerous flags for my_system():
 	EXECUTE_TEMPFILE, EXECUTE_SETUID and EXECUTE_WAIT.
 	* utilunix.c: Corresponding adjustments.
