@@ -1,4 +1,4 @@
-/* fsusage.h -- declarations for functions decared in glibcompat.c,
+/* glibcompat.h -- declarations for functions decared in glibcompat.c,
    i.e. functions present only in recent versions of glib.
 
    This program is free software; you can redistribute it and/or modify
