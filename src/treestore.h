@@ -39,10 +39,6 @@ typedef struct {
 	unsigned int dirty : 1;
 } TreeStore;
 
-#define TREE_CHECK_NAME ts.check_name_list->data
-
-extern void (*tree_store_dirty_notify)(int state);
-
 TreeStore  *tree_store_get             (void);
 int         tree_store_load            (void);
 int         tree_store_save            (void);
@@ -62,34 +58,5 @@ typedef void (*tree_store_remove_fn)(tree_entry *tree, void *data);
 void        tree_store_add_entry_remove_hook    (tree_store_remove_fn callback, void *data);
 void        tree_store_remove_entry_remove_hook (tree_store_remove_fn callback);
 
-/*
- * Register/unregister notification functions for "entry_add"
- */
-typedef void (*tree_store_add_fn)(char *name, void *data);
-void        tree_store_add_entry_add_hook    (tree_store_add_fn callback, void *data);
-void        tree_store_remove_entry_add_hook (tree_store_add_fn callback);
-
-/*
- * Register/unregister freeze/unfreeze functions for the tree
- */
-typedef void (*tree_freeze_fn)(int freeze, void *data);
-void tree_store_add_freeze_hook              (tree_freeze_fn callback, void *data);
-void tree_store_remove_freeze_hook           (tree_freeze_fn);
-
-/*
- * Changes in the tree_entry are notified with these
- */
-void        tree_store_notify_remove   (tree_entry *entry);
-void        tree_store_notify_add      (char *directory);
-
-/*
- * Freeze unfreeze notification
- */
-void        tree_store_set_freeze    (int freeze);
-
-tree_scan  *tree_store_opendir       (char *path);
-tree_entry *tree_store_readdir       (tree_scan *scanner);
-void        tree_store_closedir      (tree_scan *scanner);
-
-#endif
+#endif /* !__TREE_STORE_H */
 

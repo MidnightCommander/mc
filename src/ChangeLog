@@ -1,5 +1,8 @@
 2002-08-15  Pavel Roskin  <proski@gnu.org>
 
+	* treestore.c: Remove unused code, reformat.
+	* treestore.h: Remove unused declarations.
+
 	* fs.h (compute_namelen): New inline function to take care of
 	the d_namlen field if and only if it's needed.
 
