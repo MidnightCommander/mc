@@ -74,6 +74,7 @@ BOOL next_token(char **ptr,char *buff,char *sep, size_t bufsize)
   return(True);
 }
 
+#if 0
 /****************************************************************************
 Convert list of tokens to array; dependent on above routine.
 Uses last_ptr from above - bit of a hack.
@@ -110,7 +111,7 @@ char **toktocliplist(int *ctok, char *sep)
 
   return ret;
 }
-
+#endif /*0 */
 
 /*******************************************************************
   case insensitive string compararison
@@ -580,7 +581,7 @@ BOOL trim_string(char *s,const char *front,const char *back)
   return(ret);
 }
 
-
+#if 0
 /****************************************************************************
 does a string have any uppercase chars in it?
 ****************************************************************************/
@@ -627,6 +628,7 @@ BOOL strhasupper(const char *s)
   }
   return(False);
 }
+
 
 /****************************************************************************
 does a string have any lowercase chars in it?
@@ -682,6 +684,7 @@ BOOL strhaslower(const char *s)
   }
   return(False);
 }
+#endif /*0 */
 
 /****************************************************************************
 find the number of chars in a string
@@ -832,7 +835,7 @@ char *StrnCpy(char *dest,const char *src,size_t n)
   return(dest);
 }
 
-
+#if 0
 /****************************************************************************
 like strncpy but copies up to the character marker.  always null terminates.
 returns a pointer to the character marker in the source string (src).
@@ -1032,7 +1035,7 @@ void string_sub(char *s,const char *pattern,const char *insert)
 	}
 }
 
-
+#if 0
 /****************************************************************************
 similar to string_sub() but allows for any character to be substituted. 
 Use with caution!
@@ -1057,6 +1060,7 @@ void all_string_sub(char *s,const char *pattern,const char *insert)
 		ls += (li-lp);
 	}
 }
+
 
 /****************************************************************************
  splits out the front and back at a separator.
@@ -1089,3 +1093,4 @@ void split_at_last_component(char *path, char *front, char sep, char *back)
 		}
 	}
 }
+#endif /*0 */

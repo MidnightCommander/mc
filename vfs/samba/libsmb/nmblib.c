@@ -919,7 +919,7 @@ struct packet_struct *receive_packet(int fd,enum packet_type type,int t)
   return(NULL);
 }
 
-
+#if 0
 /****************************************************************************
 return the number of bits that match between two 4 character buffers
   ***************************************************************************/
@@ -940,7 +940,6 @@ static int matching_bits(uchar *p1, uchar *p2)
 	
 	return ret;
 }
-
 
 static uchar sort_ip[4];
 
@@ -964,3 +963,4 @@ void sort_query_replies(char *data, int n, struct in_addr ip)
 
 	qsort(data, n, 6, QSORT_CAST name_query_comp);
 }
+#endif /*0 */

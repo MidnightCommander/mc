@@ -26,7 +26,7 @@ extern pstring scope;
 extern int DEBUGLEVEL;
 
 /* nmbd.c sets this to True. */
-BOOL global_in_nmbd = False;
+const BOOL global_in_nmbd = False;
 #if 0
 /****************************************************************************
 interpret a node status response
@@ -539,7 +539,7 @@ BOOL resolve_name(const char *name, struct in_addr *return_ip, int name_type)
 }
 
 
-
+#if 0
 /********************************************************
 find the IP address of the master browser or DMB for a workgroup
 *********************************************************/
@@ -549,3 +549,4 @@ BOOL find_master_ip(char *group, struct in_addr *master_ip)
 
 	return resolve_name(group, master_ip, 0x1B);
 }
+#endif	/* 0 */

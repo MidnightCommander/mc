@@ -422,6 +422,7 @@ static BOOL cli_receive_trans(struct cli_state *cli,int trans,
 	return(True);
 }
 
+#if 0
 /****************************************************************************
 Call a remote api on an arbitrary pipe.  takes param, data and setup buffers.
 ****************************************************************************/
@@ -446,6 +447,7 @@ BOOL cli_api_pipe(struct cli_state *cli, char *pipe_name, int pipe_name_len,
                             rparam, (int *)rparam_count,
                             rdata, (int *)rdata_count));
 }
+#endif /*0 */
 
 /****************************************************************************
 call a remote api
@@ -469,7 +471,7 @@ BOOL cli_api(struct cli_state *cli,
                             rdata, rdrcnt));
 }
 
-
+#if 0
 /****************************************************************************
 perform a NetWkstaUserLogon
 ****************************************************************************/
@@ -531,6 +533,7 @@ BOOL cli_NetWkstaUserLogon(struct cli_state *cli,char *user, char *workstation)
       free(rdata);
 	return (cli->rap_error == 0);
 }
+#endif /*0 */
 
 /****************************************************************************
 call a NetShareEnum - try and browse available connections on a host
@@ -822,7 +825,7 @@ BOOL cli_session_setup(struct cli_state *cli,
 /****************************************************************************
  Send a uloggoff.
 *****************************************************************************/
-
+#if 0
 BOOL cli_ulogoff(struct cli_state *cli)
 {
         memset(cli->outbuf,'\0',smb_size);
@@ -838,6 +841,7 @@ BOOL cli_ulogoff(struct cli_state *cli)
 
         return CVAL(cli->inbuf,smb_rcls) == 0;
 }
+#endif /*0 */
 
 /****************************************************************************
 send a tconX
@@ -916,7 +920,7 @@ BOOL cli_send_tconX(struct cli_state *cli,
 	return True;
 }
 
-
+#if 0
 /****************************************************************************
 send a tree disconnect
 ****************************************************************************/
@@ -934,6 +938,7 @@ BOOL cli_tdis(struct cli_state *cli)
 	
 	return CVAL(cli->inbuf,smb_rcls) == 0;
 }
+#endif /*0 */
 
 /****************************************************************************
 rename a file
@@ -1070,8 +1075,7 @@ BOOL cli_rmdir(struct cli_state *cli, char *dname)
 	return True;
 }
 
-
-
+#if 0
 /****************************************************************************
 open a file
 ****************************************************************************/
@@ -1114,7 +1118,7 @@ int cli_nt_create(struct cli_state *cli, char *fname)
 
 	return SVAL(cli->inbuf,smb_vwv2 + 1);
 }
-
+#endif /*0 */
 
 /****************************************************************************
 open a file
@@ -1218,7 +1222,7 @@ BOOL cli_close(struct cli_state *cli, int fnum)
 	return True;
 }
 
-
+#if 0
 /****************************************************************************
   lock a file
 ****************************************************************************/
@@ -1304,7 +1308,7 @@ BOOL cli_unlock(struct cli_state *cli, int fnum, uint32 offset, uint32 len, int 
 
 	return True;
 }
-
+#endif /*0 */
 
 
 /****************************************************************************
@@ -1494,7 +1498,7 @@ ssize_t cli_write(struct cli_state *cli,
 	return bwritten;
 }
 
-
+#if 0
 /****************************************************************************
   write to a file using a SMBwrite and not bypassing 0 byte writes
 ****************************************************************************/
@@ -1533,7 +1537,7 @@ ssize_t cli_smbwrite(struct cli_state *cli,
 
 	return SVAL(cli->inbuf,smb_vwv0);
 }
-
+#endif /*0 */
 
 /****************************************************************************
 do a SMBgetattrE call
@@ -2725,7 +2729,7 @@ BOOL cli_chkpath(struct cli_state *cli, char *path)
 	return True;
 }
 
-
+#if 0
 /****************************************************************************
 start a message sequence
 ****************************************************************************/
@@ -2819,6 +2823,7 @@ BOOL cli_message_end(struct cli_state *cli, int grp)
 
 	return True;
 }      
+#endif /*0 */
 
 #if 0	/* May be useful one day */
 /****************************************************************************

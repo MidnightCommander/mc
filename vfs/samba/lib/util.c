@@ -59,8 +59,9 @@ extern int  sslFd;
 #endif  /* WITH_SSL */
 
 extern int DEBUGLEVEL;
-
+#if 0
 int Protocol = PROTOCOL_COREPLUS;
+#endif /*0 */
 
 /* a default finfo structure to ensure all fields are sensible */
 file_info const def_finfo = {-1,0,0,0,0,0,0,""};
@@ -69,15 +70,17 @@ file_info const def_finfo = {-1,0,0,0,0,0,0,""};
 extern int Client;
 
 /* this is used by the chaining code */
-int chain_size = 0;
-
+const int chain_size = 0;
+#if 0
 int trans_num = 0;
+#endif /*0 */
 
 /*
    case handling on filenames 
 */
-int case_default = CASE_LOWER;
+const int case_default = CASE_LOWER;
 
+#if 0
 /* the following control case operations - they are put here so the
    client can link easily */
 BOOL case_sensitive;
@@ -85,6 +88,7 @@ BOOL case_preserve;
 BOOL use_mangled_map = False;
 BOOL short_case_preserve;
 BOOL case_mangle;
+#endif /*0 */
 
 static const char *remote_machine = "";
 static const char *local_machine = "";
@@ -97,13 +101,14 @@ pstring myhostname="";
 pstring user_socket_options="";   
 
 pstring sesssetup_user="";
-pstring samlogon_user="";
+static char * const samlogon_user = "";
 
-BOOL sam_logon_in_ssb = False;
+const BOOL sam_logon_in_ssb = False;
 
 pstring global_myname = "";
+#if 0
 char **my_netbios_names;
-
+#endif /*0 */
 
 
 /****************************************************************************

@@ -1,3 +1,23 @@
+2005-02-14  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* samba/lib/util_str.c: Comment out strhasupper(), strhaslower(),
+	toktocliplist(), strncpyn(), strhex_to_str(), all_string_sub()
+        and split_at_last_component().
+        * samba/lib/time.c: Comment out http_timestring().
+        * samba/lib/util.c: Comment out Protocol, trans_num, case_sensitive,
+        case_preserve, use_mangled_map, short_case_preserve, case_mangle,
+        my_netbios_names.
+        Make sam_logon_in_ssb and case_default const.
+        (samlogon_user): Make char* instead of pstring.
+        * samba/libsmb/clientgen.c: Comment out cli_api_pipe(),
+        cli_NetWkstaUserLogon(), cli_tdis(), cli_nt_create(), cli_ulogoff(),
+        cli_lock(), cli_unlock(), cli_message_start(), cli_message_text()
+        and cli_message_end().
+        * samba/libsmb/namequery.c (global_in_nmbd): Make const.
+        (find_master_ip): Comment out.
+        * samba/libsmb/nmblib.c: Comment out matching_bits(), sort_ip,
+        name_query_comp() and sort_query_replies().
+
 2005-02-12  Jindrich Novy <jnovy@redhat.com>
 
 	* vfs.c (vfs_translate_url): Add support for smb://, sh://,
