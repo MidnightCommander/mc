@@ -226,6 +226,9 @@ image/x-portable-graymap:
 image/x-png:
 	icon-filename=@icondir@/gnome-image-png.png
 
+image/png:
+	icon-filename=@icondir@/gnome-image-png.png
+
 image/x-portable-anymap:
 	icon-filename=@icondir@/gnome-image-pnm.png
 
