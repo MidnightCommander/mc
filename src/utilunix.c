@@ -326,7 +326,7 @@ mc_tmpdir (void)
 		pwd->pw_name);
     else
 	g_snprintf (buffer, sizeof (buffer), "%s/mc-%d", sys_tmp,
-		getuid ());
+		(int) getuid ());
 
     canonicalize_pathname (buffer);
 
