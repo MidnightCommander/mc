@@ -120,7 +120,7 @@ static POA_GNOME_FileManagerFactory__vepv impl_GNOME_FileManagerFactory_vepv =
 
 /*** Stub implementations ***/
 
-static GNOME_FileManagerWindow 
+static GNOME_FileManagerWindow
 impl_GNOME_FileManagerWindow__create(PortableServer_POA poa,
 				     impl_POA_GNOME_FileManagerWindow **servant,
 				     CORBA_Environment *ev)
@@ -165,7 +165,7 @@ impl_GNOME_FileManagerWindow_close(impl_POA_GNOME_FileManagerWindow *servant,
 	gnome_close_panel (GTK_WIDGET (servant->panel->xwindow), servant->panel);
 }
 
-static GNOME_FileManagerFactory 
+static GNOME_FileManagerFactory
 impl_GNOME_FileManagerFactory__create(PortableServer_POA poa,
 				      impl_POA_GNOME_FileManagerFactory **servant,
 				      CORBA_Environment *ev)
@@ -334,11 +334,11 @@ create_server (void)
 
 /**
  * corba_init_server:
- * @void: 
- * 
+ * @void:
+ *
  * Initializes the CORBA factory object for gmc.  Returns whether initialization
  * was successful or not, and sets the global corba_have_server variable.
- * 
+ *
  * Return value: TRUE if successful, FALSE otherwise.
  **/
 int
@@ -358,23 +358,22 @@ corba_init_server (void)
 
 /**
  * corba_create_window:
- * @void: 
- * 
+ * @dir: The directory in which to create the window, or NULL for the cwd.
+ *
  * Creates a GMC window using a CORBA call to the server.
  **/
 void
-corba_create_window (const char *startup_dir)
+corba_create_window (const char *dir)
 {
 	CORBA_Environment ev;
 	char cwd[MC_MAXPATHLEN];
-	char *dir = cwd;
-	
-	if (this_dir == NULL)
+
+	if (dir == NULL) {
 		mc_get_current_wd (cwd, MC_MAXPATHLEN);
-	else
-		dir = this_dir;
-	
+		dir = cwd;
+	}
+
 	CORBA_exception_init (&ev);
-	GNOME_FileManagerFactory_create_window (gmc_server, startup_dir, &ev);
+	GNOME_FileManagerFactory_create_window (gmc_server, dir, &ev);
 	CORBA_exception_free (&ev);
 }

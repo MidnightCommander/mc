@@ -66,7 +66,7 @@
 /* #undef HAVE_BROKEN_READDIR */
 #define HAVE_ERRNO_DECL 1
 #define HAVE_LONGLONG 1
-/* #undef HAVE_OFF64_T */
+#define HAVE_OFF64_T 1
 /* #undef HAVE_REMSH */
 /* #undef HAVE_UNSIGNED_CHAR */
 #define HAVE_UTIMBUF 1
@@ -103,18 +103,18 @@
 /* #undef FTRUNCATE_NEEDS_ROOT */
 /* #undef HAVE_TRAPDOOR_UID */
 /* #undef HAVE_ROOT */
-#define HAVE_UNION_SEMUN 1
+/* #undef HAVE_UNION_SEMUN */
 #define HAVE_NETMASK_IFCONF 1
 #define HAVE_GETTIMEOFDAY_TZ 1
 /* #undef HAVE_SOCK_SIN_LEN */
 /* #undef STAT_READ_FILSYS */
-#define STAT_STATFS2_BSIZE 1
+/* #undef STAT_STATFS2_BSIZE */
 /* #undef STAT_STATFS2_FSIZE */
 /* #undef STAT_STATFS2_FS_DATA */
 /* #undef STAT_STATFS3_OSF1 */
 /* #undef STAT_STATFS4 */
 /* #undef STAT_STATVFS */
-/* #undef STAT_STATVFS64 */
+#define STAT_STATVFS64 1
 /* #undef HAVE_NETMASK_IFREQ */
 /* #undef HAVE_NETMASK_AIX */
 #define HAVE_CRYPT 1
@@ -139,10 +139,10 @@
 #define HAVE_SETRESUID 1
 /* #undef WITH_NETATALK */
 /* #undef HAVE_INO64_T */
-/* #undef HAVE_STRUCT_FLOCK64 */
+#define HAVE_STRUCT_FLOCK64 1
 /* #undef SIZEOF_INO_T */
 /* #undef SIZEOF_OFF_T */
-/* #undef STAT_STATVFS64 */
+#define STAT_STATVFS64 1
 #define HAVE_LIBREADLINE 1
 /* #undef HAVE_KERNEL_OPLOCKS */
 /* #undef HAVE_IRIX_SPECIFIC_CAPABILITIES */
@@ -157,19 +157,19 @@
 #define HAVE_GETSPNAM 1
 /* #undef HAVE_BIGCRYPT */
 /* #undef HAVE_GETPRPWNAM */
-/* #undef HAVE_FSTAT64 */
-/* #undef HAVE_LSTAT64 */
-/* #undef HAVE_STAT64 */
+#define HAVE_FSTAT64 1
+#define HAVE_LSTAT64 1
+#define HAVE_STAT64 1
 #define HAVE_SETRESGID 1
 /* #undef HAVE_SETRESGID_DECL */
 #define HAVE_SHADOW_H 1
 #define HAVE_MEMSET 1
 #define HAVE_STRCASECMP 1
-/* #undef HAVE_STRUCT_DIRENT64 */
+#define HAVE_STRUCT_DIRENT64 1
 /* #undef HAVE_TRUNCATED_SALT */
 #define BROKEN_NISPLUS_INCLUDE_FILES 1
 /* #undef HAVE_RPC_AUTH_ERROR_CONFLICT */
-/* #undef HAVE_EXPLICIT_LARGEFILE_SUPPORT */
+#define HAVE_EXPLICIT_LARGEFILE_SUPPORT 1
 /* #undef USE_BOTH_CRYPT_CALLS */
 
 /* The number of bytes in a int.  */
@@ -185,16 +185,16 @@
 /* #undef HAVE___ACL */
 
 /* Define if you have the __chdir function.  */
-#define HAVE___CHDIR 1
+/* #undef HAVE___CHDIR */
 
 /* Define if you have the __close function.  */
 #define HAVE___CLOSE 1
 
 /* Define if you have the __closedir function.  */
-#define HAVE___CLOSEDIR 1
+/* #undef HAVE___CLOSEDIR */
 
 /* Define if you have the __dup function.  */
-#define HAVE___DUP 1
+/* #undef HAVE___DUP */
 
 /* Define if you have the __dup2 function.  */
 #define HAVE___DUP2 1
@@ -221,10 +221,10 @@
 #define HAVE___FXSTAT 1
 
 /* Define if you have the __getcwd function.  */
-#define HAVE___GETCWD 1
+/* #undef HAVE___GETCWD */
 
 /* Define if you have the __getdents function.  */
-#define HAVE___GETDENTS 1
+/* #undef HAVE___GETDENTS */
 
 /* Define if you have the __llseek function.  */
 /* #undef HAVE___LLSEEK */
@@ -248,25 +248,25 @@
 /* #undef HAVE___OPEN64 */
 
 /* Define if you have the __opendir function.  */
-#define HAVE___OPENDIR 1
+/* #undef HAVE___OPENDIR */
 
 /* Define if you have the __pread function.  */
 /* #undef HAVE___PREAD */
 
 /* Define if you have the __pread64 function.  */
-/* #undef HAVE___PREAD64 */
+#define HAVE___PREAD64 1
 
 /* Define if you have the __pwrite function.  */
 /* #undef HAVE___PWRITE */
 
 /* Define if you have the __pwrite64 function.  */
-/* #undef HAVE___PWRITE64 */
+#define HAVE___PWRITE64 1
 
 /* Define if you have the __read function.  */
 #define HAVE___READ 1
 
 /* Define if you have the __readdir function.  */
-#define HAVE___READDIR 1
+/* #undef HAVE___READDIR */
 
 /* Define if you have the __readdir64 function.  */
 /* #undef HAVE___READDIR64 */
@@ -281,7 +281,7 @@
 /* #undef HAVE___STAT64 */
 
 /* Define if you have the __sys_llseek function.  */
-#define HAVE___SYS_LLSEEK 1
+/* #undef HAVE___SYS_LLSEEK */
 
 /* Define if you have the __telldir function.  */
 /* #undef HAVE___TELLDIR */
@@ -413,7 +413,7 @@
 #define HAVE_CONNECT 1
 
 /* Define if you have the creat64 function.  */
-/* #undef HAVE_CREAT64 */
+#define HAVE_CREAT64 1
 
 /* Define if you have the crypt function.  */
 #define HAVE_CRYPT 1
@@ -431,19 +431,19 @@
 #define HAVE_EXECL 1
 
 /* Define if you have the fopen64 function.  */
-/* #undef HAVE_FOPEN64 */
+#define HAVE_FOPEN64 1
 
 /* Define if you have the fseek64 function.  */
 /* #undef HAVE_FSEEK64 */
 
 /* Define if you have the fseeko64 function.  */
-/* #undef HAVE_FSEEKO64 */
+#define HAVE_FSEEKO64 1
 
 /* Define if you have the fstat function.  */
 #define HAVE_FSTAT 1
 
 /* Define if you have the fstat64 function.  */
-/* #undef HAVE_FSTAT64 */
+#define HAVE_FSTAT64 1
 
 /* Define if you have the fsync function.  */
 #define HAVE_FSYNC 1
@@ -452,13 +452,13 @@
 /* #undef HAVE_FTELL64 */
 
 /* Define if you have the ftello64 function.  */
-/* #undef HAVE_FTELLO64 */
+#define HAVE_FTELLO64 1
 
 /* Define if you have the ftruncate function.  */
 #define HAVE_FTRUNCATE 1
 
 /* Define if you have the ftruncate64 function.  */
-/* #undef HAVE_FTRUNCATE64 */
+#define HAVE_FTRUNCATE64 1
 
 /* Define if you have the getauthuid function.  */
 /* #undef HAVE_GETAUTHUID */
@@ -491,7 +491,7 @@
 #define HAVE_GLOB 1
 
 /* Define if you have the grantpt function.  */
-/* #undef HAVE_GRANTPT */
+#define HAVE_GRANTPT 1
 
 /* Define if you have the initgroups function.  */
 #define HAVE_INITGROUPS 1
@@ -503,10 +503,10 @@
 #define HAVE_LLSEEK 1
 
 /* Define if you have the lseek64 function.  */
-/* #undef HAVE_LSEEK64 */
+#define HAVE_LSEEK64 1
 
 /* Define if you have the lstat64 function.  */
-/* #undef HAVE_LSTAT64 */
+#define HAVE_LSTAT64 1
 
 /* Define if you have the memmove function.  */
 #define HAVE_MEMMOVE 1
@@ -518,10 +518,10 @@
 #define HAVE_MKTIME 1
 
 /* Define if you have the mmap64 function.  */
-/* #undef HAVE_MMAP64 */
+#define HAVE_MMAP64 1
 
 /* Define if you have the open64 function.  */
-/* #undef HAVE_OPEN64 */
+#define HAVE_OPEN64 1
 
 /* Define if you have the pathconf function.  */
 #define HAVE_PATHCONF 1
@@ -530,19 +530,19 @@
 #define HAVE_PIPE 1
 
 /* Define if you have the pread function.  */
-/* #undef HAVE_PREAD */
+#define HAVE_PREAD 1
 
 /* Define if you have the pread64 function.  */
-/* #undef HAVE_PREAD64 */
+#define HAVE_PREAD64 1
 
 /* Define if you have the putprpwnam function.  */
 /* #undef HAVE_PUTPRPWNAM */
 
 /* Define if you have the pwrite function.  */
-/* #undef HAVE_PWRITE */
+#define HAVE_PWRITE 1
 
 /* Define if you have the pwrite64 function.  */
-/* #undef HAVE_PWRITE64 */
+#define HAVE_PWRITE64 1
 
 /* Define if you have the rand function.  */
 #define HAVE_RAND 1
@@ -554,7 +554,7 @@
 /* #undef HAVE_RDCHK */
 
 /* Define if you have the readdir64 function.  */
-/* #undef HAVE_READDIR64 */
+#define HAVE_READDIR64 1
 
 /* Define if you have the rename function.  */
 #define HAVE_RENAME 1
@@ -620,7 +620,7 @@
 #define HAVE_SRANDOM 1
 
 /* Define if you have the stat64 function.  */
-/* #undef HAVE_STAT64 */
+#define HAVE_STAT64 1
 
 /* Define if you have the strcasecmp function.  */
 #define HAVE_STRCASECMP 1
@@ -725,7 +725,7 @@
 #define HAVE_RPC_RPC_H 1
 
 /* Define if you have the <rpcsvc/nis.h> header file.  */
-/* #undef HAVE_RPCSVC_NIS_H */
+#define HAVE_RPCSVC_NIS_H 1
 
 /* Define if you have the <rpcsvc/yp_prot.h> header file.  */
 #define HAVE_RPCSVC_YP_PROT_H 1
@@ -752,7 +752,7 @@
 #define HAVE_STRINGS_H 1
 
 /* Define if you have the <stropts.h> header file.  */
-/* #undef HAVE_STROPTS_H */
+#define HAVE_STROPTS_H 1
 
 /* Define if you have the <sys/acl.h> header file.  */
 /* #undef HAVE_SYS_ACL_H */
@@ -824,7 +824,7 @@
 #define HAVE_SYS_STATFS_H 1
 
 /* Define if you have the <sys/statvfs.h> header file.  */
-/* #undef HAVE_SYS_STATVFS_H */
+#define HAVE_SYS_STATVFS_H 1
 
 /* Define if you have the <sys/syscall.h> header file.  */
 #define HAVE_SYS_SYSCALL_H 1

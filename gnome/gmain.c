@@ -418,7 +418,6 @@ x_set_idle (Dlg_head *h, int enable_idle)
 int
 dialog_panel_callback (struct Dlg_head *h, int id, int msg)
 {
-	WInput *in;
 	Widget_Item *dh;
 	void *current_widget;	/* The current widget */
 	
@@ -497,13 +496,7 @@ non_corba_create_panels (char *startup_dir)
 	desktop_destroy ();
 }
 
-/*
- * Only at startup we have a strange condition: if more than one
- * panel is created, then the code hangs inside X, it keeps waiting
- * for a reply for something in Imlib that never returns.
- *
- * Creating the panels on the idle loop takes care of this
- */
+/* The GNOME version of create_panels() */
 void
 create_panels (void)
 {

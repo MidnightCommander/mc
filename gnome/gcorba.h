@@ -18,7 +18,7 @@ extern CORBA_ORB orb;
 
 
 int corba_init_server (void);
-void corba_create_window (const char *startup_dir);
+void corba_create_window (const char *dir);
 
 
 #endif
