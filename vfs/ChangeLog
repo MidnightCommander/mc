@@ -1,3 +1,8 @@
+Wed Dec  9 12:24:52 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
+
+	* extfs/rpm: commit fix for files with spaces in name by Marc
+ 	Merlin (marcsoft@merlins.org)
+
 Mon Dec  7 11:04:57 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
 	* fish.c: default to normal ssh
