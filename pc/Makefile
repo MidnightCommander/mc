@@ -9,7 +9,7 @@
 
 include ../Make.common
 
-FILES = BUGS Makefile Makefile.BC2 Makefile.BC5 Makefile.EMX \
+FILES = BUGS Makefile Makefile.BC2 Makefile.BC5 Makefile.EMX Makefile.MIN \
 	Makefile.IBM Makefile.PC Makefile.VC4 README TODO chmod.c \
 	config.h cons_nt.c cons_os2.c dirent.h dirent_nt.c dirent_os2.c \
 	drive.c drive.h key_nt.c key_os2.c mc.def mc.rc mc_nt.ico \
