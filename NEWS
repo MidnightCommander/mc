@@ -20,6 +20,7 @@ Changes made after 4.6.0-pre1.
   parent shell, "mc" is now an alias in all shells, not a function.
 - Behavior of Alt-O is more intuitive now.
 - Internal editor now saves the cursor position in the file.
+- X11 support is now enabled by default, use --without-x to disable.
 
 
 Version 4.6.0-pre1.

@@ -207,20 +207,19 @@ AC_FUNC_STRCOLL
 
 dnl
 dnl X11 support.
+dnl Used to read keyboard modifiers when running under X11.
 dnl
 
-textmode_x11_support="no"
-AC_ARG_WITH(tm-x-support,
-	[  --with-tm-x-support      Get keyboard events from X Window System [[no]]],
-	[if test x$withval = xyes; then
-		AC_PATH_XTRA
-		CPPFLAGS="$CPPFLAGS $X_CFLAGS"
-		MCLIBS="$X_LIBS $X_PRE_LIBS -lX11 $X_EXTRA_LIBS"
-		AC_DEFINE(HAVE_TEXTMODE_X11_SUPPORT, 1,
-			  [Define to enable getting events from X Window System])
-		textmode_x11_support="yes"
-	fi
-])
+AC_PATH_XTRA
+if test "x$no_x" == xyes; then
+    textmode_x11_support="no"
+else
+    CPPFLAGS="$CPPFLAGS $X_CFLAGS"
+    MCLIBS="$X_LIBS $X_PRE_LIBS -lX11 $X_EXTRA_LIBS"
+    AC_DEFINE(HAVE_TEXTMODE_X11_SUPPORT, 1,
+	      [Define to enable getting events from X Window System])
+    textmode_x11_support="yes"
+fi
 
 dnl
 dnl Network related functions

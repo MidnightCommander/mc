@@ -96,13 +96,14 @@ incomplete, use `configure --help' to get the full list):
      =optional parameter, then the subshell support is turned off by
      default.  To turn it on, specify the `-U' option to the program.
 
-`--with-tm-x-support'
-     This option enables minimal support for X Window System events.
-     It enables MC to query the status of the keyboard modifiers, such
+`--without-x'
+     By default, the Midnight Commander tries to connect to the X Window
+     System events to query the status of the keyboard modifiers, such
      as Control, Shift and Alt, when invoked in a terminal emulator
      under X11.  This is necessary (but not always sufficient) to
      recognize some optional but handy key combinations like Ctrl-Home
-     and Shift-Cursor keys.
+     and Shift-Cursor keys.  Use `--without-x' if the dependency on
+     X11 libraries is not desired.
 
 `--without-vfs'
      This option disables the Virtual File System switch code in the
