@@ -796,7 +796,8 @@ winput_set_origin (WInput *in, int x, int field_len)
 
 int num_history_items_recorded = 60;
 
-Hist *history_get (char *input_name)
+Hist *
+history_get (char *input_name)
 {
     int i;
     Hist *old, *new;
@@ -829,7 +830,8 @@ Hist *history_get (char *input_name)
     return new;			/* return pointer to last entry in list */
 }
 
-void history_put (char *input_name, Hist *h)
+void
+history_put (char *input_name, Hist *h)
 {
     int i;
     char *profile;
@@ -914,7 +916,8 @@ history_callback (Dlg_head * h, int Par, int Msg)
 
 static inline int listbox_fwd (WListbox *l);
 
-char *show_hist (Hist *history, int widget_x, int widget_y)
+char *
+show_hist (Hist *history, int widget_x, int widget_y)
 {
     Hist *hi, *z;
     size_t maxlen = strlen (i18n_htitle()), i, count = 0;
@@ -1533,8 +1536,6 @@ input_set_point (WInput *in, int pos)
     update_input (in, 1);
 }
 
-int input_event (Gpm_Event *event, WInput *b);
-
 static int
 input_callback (Dlg_head *h, WInput *in, int Msg, int Par)
 {
@@ -1575,15 +1576,14 @@ input_callback (Dlg_head *h, WInput *in, int Msg, int Par)
     return default_proc (h, Msg, Par);
 }
 
-/* Not declared static, since we check against this value in dlg.c */
-/* FIXME: Declare static again and provide an identification mechanism */
-int 
-input_event (Gpm_Event *event, WInput *in) 
-{ 
-    if (event->type & (GPM_DOWN|GPM_DRAG)){ 
-	dlg_select_widget (in->widget.parent, in); 
+static int
+input_event (Gpm_Event * event, WInput * in)
+{
+    if (event->type & (GPM_DOWN | GPM_DRAG)) {
+	dlg_select_widget (in->widget.parent, in);
 
-	if (event->x >= in->field_len - HISTORY_BUTTON_WIDTH + 1 && should_show_history_button (in)) {
+	if (event->x >= in->field_len - HISTORY_BUTTON_WIDTH + 1
+	    && should_show_history_button (in)) {
 	    do_show_hist (in);
 	} else {
 	    in->point = strlen (in->buffer);
@@ -1593,9 +1593,9 @@ input_event (Gpm_Event *event, WInput *in)
 		in->point = 0;
 	}
 	update_input (in, 1);
-    } 
-    return MOU_NORMAL; 
-} 
+    }
+    return MOU_NORMAL;
+}
 
 WInput *
 input_new (int y, int x, int color, int len, const char *def_text, char *tkname)
@@ -2300,26 +2300,26 @@ buttonbar_new (int visible)
     return bb;
 }
 
-void
-set_label_text (WButtonBar *bb, int index, char *text)
+static void
+set_label_text (WButtonBar * bb, int index, char *text)
 {
-    if (bb->labels [index-1].text)
-	g_free (bb->labels [index-1].text);
+    if (bb->labels[index - 1].text)
+	g_free (bb->labels[index - 1].text);
 
-    bb->labels [index-1].text = g_strdup (text);
+    bb->labels[index - 1].text = g_strdup (text);
 }
 
 /* paneletc is either the panel widget, or info or view or tree widget */
-WButtonBar *
-find_buttonbar (Dlg_head *h, Widget *paneletc)
+static WButtonBar *
+find_buttonbar (Dlg_head * h, Widget * paneletc)
 {
     WButtonBar *bb;
     Widget_Item *item;
     int i;
 
     bb = 0;
-    for (i = 0, item = h->current; i < h->count; i++, item = item->next){
-	if (item->widget->callback == (callback_fn) buttonbar_callback){
+    for (i = 0, item = h->current; i < h->count; i++, item = item->next) {
+	if (item->widget->callback == (callback_fn) buttonbar_callback) {
 	    bb = (WButtonBar *) item->widget;
 	    break;
 	}
@@ -2328,20 +2328,21 @@ find_buttonbar (Dlg_head *h, Widget *paneletc)
 }
 
 void
-define_label_data (Dlg_head *h, Widget *paneletc, int idx, char *text,
+define_label_data (Dlg_head * h, Widget * paneletc, int idx, char *text,
 		   buttonbarfn cback, void *data)
 {
     WButtonBar *bb = find_buttonbar (h, paneletc);
     if (!bb)
 	return;
-    
+
     set_label_text (bb, idx, text);
-    bb->labels [idx-1].function = cback;
-    bb->labels [idx-1].data = data;
+    bb->labels[idx - 1].function = cback;
+    bb->labels[idx - 1].data = data;
 }
 
 void
-define_label (Dlg_head *h, Widget *paneletc, int idx, char *text, void (*cback)(void))
+define_label (Dlg_head * h, Widget * paneletc, int idx, char *text,
+	      void (*cback) (void))
 {
     define_label_data (h, paneletc, idx, text, (buttonbarfn) cback, 0);
 }

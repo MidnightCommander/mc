@@ -1,5 +1,7 @@
 2002-08-21  Pavel Roskin  <proski@gnu.org>
 
+	* widget.c: Make more functions static.
+
 	* ext.c: (regex_check_type): Further split.  Restore caching
 	broken in the previous commit.
 

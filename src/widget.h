@@ -210,9 +210,7 @@ typedef void (*voidfn)(void);
 void define_label (Dlg_head *, Widget *paneletc, int index, char *text, voidfn);
 void define_label_data (Dlg_head *h, Widget *paneletc, int idx, char *text,
 			buttonbarfn cback, void *data);
-void set_label_text (WButtonBar *, int, char *);
 void redraw_labels (Dlg_head *h, Widget *paneletc);
-WButtonBar *find_buttonbar (Dlg_head *h, Widget *paneletc);
 void buttonbar_hint (WButtonBar *bb, char *s);
 
 #endif	/* __WIDGET_H */
