@@ -75,6 +75,7 @@
 
 #ifdef HAVE_CHARSET
 #include "charsets.h"
+#include "selcodepage.h"
 #endif
 
 #ifndef MAP_FILE
@@ -110,7 +111,7 @@ static int view_callback (Dlg_head *h, WView *view, int msg, int par);
 static int regexp_view_search (WView *view, char *pattern, char *string, int match_type);
 
 /* If set, show a ruler */
-int ruler = 0;
+static int ruler = 0;
 
 /* Scrolling is done in pages or line increments */
 int mouse_move_pages_viewer = 1;
@@ -718,8 +719,8 @@ view_status (WView *view, gboolean update_gui)
     }
 
     if (w < i18n_adjust + 6)
-    	printw ("%s", name_trunc (view->filename ? view->filename:
-					view->command ? view->command:"", w));
+	addstr (name_trunc (view->filename ? view->filename:
+			    view->command ? view->command:"", w));
     else{
     	i = (w > 22 ? 22 : w ) - i18n_adjust ;
     	printw (file_label, name_trunc (view->filename ? view->filename:
@@ -1997,7 +1998,7 @@ normal_search (WView *view, int direction)
     exp = old ? old : exp;
 
 #ifdef HAVE_CHARSET
-    if ( strlen(exp) > 0 )
+    if ( *exp )
 	convert_to_display( exp );
 #endif
 
@@ -2568,27 +2569,19 @@ view_callback (Dlg_head *h, WView *view, int msg, int par)
 WView *
 view_new (int y, int x, int cols, int lines, int is_panel)
 {
-    WView *view = g_new (WView, 1);
+    WView *view = g_new0 (WView, 1);
     
     init_widget (&view->widget, y, x, lines, cols,
 		 (callback_fn) view_callback,
 		 (destroy_fn) view_destroy,
 		 (mouse_h) real_view_event, NULL);
 
-    view->filename = 0;
-    view->view_active = 0;
-    view->bottom_first = 0;
-    view->start_col = 0;
-    view->dirty = 0;
     view->hex_mode = default_hex_mode;
     view->hexedit_mode = default_hexedit_mode;
     view->viewer_magic_flag = default_magic_flag;
     view->viewer_nroff_flag = default_nroff_flag;
-    view->view_quit = 0;
-    view->move_dir = 0;
     view->have_frame = is_panel;
     view->last_byte = -1;
-    view->monitor = 0;
     view->wrap_mode = global_wrap_mode;
     
     x_init_view (view);
