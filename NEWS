@@ -7,6 +7,7 @@ libX11 is loaded dynamically using gmodule if possible.
 Screen saving is now supported on FreeBSD console.
 Support for SCO UNIX has been removed.
 User is warned if one mc is run from another.
+VFS supports iso9660 images.
 
 Version 4.6.0.
 
