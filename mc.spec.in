@@ -76,12 +76,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_prefix}/lib/mc/mc.hlp*
 %{_prefix}/lib/mc/syntax/*
 %{_prefix}/share/locale/*/LC_MESSAGES/*
-%config /etc/mc.global
 %dir %{_prefix}/lib/mc
 %dir %{_prefix}/lib/mc/extfs
 %dir %{_prefix}/lib/mc/syntax
 
 %changelog
+* Fri Aug 16 2002 Pavel Roskin <proski@gnu.org>
+- Remove mc.global.
+
 * Mon Jan 21 2002 Pavel Roskin <proski@gnu.org>
 - Remove --with-gnome and --with-included-slang from configure options.
 - Add BuildPrereq.
