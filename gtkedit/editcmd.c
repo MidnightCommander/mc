@@ -1264,7 +1264,7 @@ int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 
 	/* Sometimes menu can hide replaced text. I don't like it */
 
-	if ((edit->curs_row >= ypos) && (edit->curs_row <= ypos + CONFIRM_DLG_HEIGTH))
+	if ((edit->curs_row >= ypos - 1) && (edit->curs_row <= ypos + CONFIRM_DLG_HEIGTH - 1))
 	    ypos -= CONFIRM_DLG_HEIGTH;
 
 	Quick_input.ypos = ypos;
