@@ -1,5 +1,9 @@
 2001-02-07  Pavel Roskin  <proski@gnu.org>
 
+	* samba/configure.in: Remove tests for setresuid and setresgid.
+	* samba/include/includes.h: Remove declarations of setresuid and
+	setresgid.
+
 	* samba/configure.in: Don't check for root permissions. Don't
 	call tests/trapdoor.c and tests/ftruncroot.c.
 	* samba/tests/trapdoor.c: Remove.
