@@ -1,5 +1,8 @@
 1998-04-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gscreen.c (x_panel_update_marks): Do only set the marks if the
+	widget has been created
+
 	* glayout.c (assign_other): Keep track of all of the opened
 	panels.  We were never removing them from the containers list.
 	This fixes a number of problems.

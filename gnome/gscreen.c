@@ -109,6 +109,9 @@ x_panel_update_marks (WPanel *panel)
 	int ff = panel->dir_history->next ? 1 : 0;
 	int bf = panel->dir_history->prev ? 1 : 0;
 
+	if (!panel->fwd_b)
+		return;
+	
 	gtk_widget_set_sensitive (panel->fwd_b, ff);
 	gtk_widget_set_sensitive (panel->back_b, bf);
 }
