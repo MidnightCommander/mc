@@ -1,6 +1,8 @@
 2002-05-23  Andrew V. Samoilov  <kai@cmail.ru>
 
-	* NEWS: Mention ftpfs/fish uploading changes.
+	* NEWS: Mention ftpfs/fish uploading changes and new configure
+	options --with-codepagedir=DIR, --with-configdir=DIR and
+	--without-mcfs.
 
 2002-05-22  Pavel Roskin  <proski@gnu.org>
 
