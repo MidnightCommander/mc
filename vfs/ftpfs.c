@@ -1212,6 +1212,7 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
 	fe = xmalloc(sizeof(struct direntry), "struct direntry");
 	fe->freshly_created = 0;
 	fe->tmp_reget = 0;
+	fe->local_filename = NULL;
 	if (fe == NULL) {
 	    my_errno = ENOMEM;
 	    goto error_1;
