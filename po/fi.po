@@ -163,7 +163,7 @@ msgid ""
 msgstr ""
 "Anna suodatin tiedostonnimille paneelissa.\n"
 "\n"
-"Esim: *.png n‰ytt‰‰ vain png-kuvat\n"
+"Esim: *.png n‰ytt‰‰ vain png-kuvat"
 
 #: gnome/gcmd.c:676
 msgid "Enter a Regular Expression to filter files in the panel view."
@@ -194,7 +194,7 @@ msgid ""
 msgstr ""
 "Anna suodatin tiedostonnimille paneelissa.\n"
 "\n"
-"Esim: *.png n‰ytt‰‰ vain png-kuvat\n"
+"Esim: *.png n‰ytt‰‰ vain png-kuvat"
 
 #: gnome/gcmd.c:831
 msgid "Enter a regular expression here to select files in the panel view with."
