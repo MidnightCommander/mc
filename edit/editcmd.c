@@ -2457,8 +2457,7 @@ static void edit_set_search_parameters (int rs, int rb, int rr, int rw, int rc)
 }
 
 
-const static int MAX_WORD_COMPLETIONS = 100; /* in listbox */
-
+#define MAX_WORD_COMPLETIONS 100	/* in listbox */
 
 /* collect the possible completions */ 
 static int edit_collect_completions (WEdit *edit, long start, 

@@ -1,3 +1,8 @@
+2002-11-11  Pavel Roskin  <proski@gnu.org>
+
+	* editcmd.c: Warning fix for compilers that don't understand the
+	"const" keyword and variable size arrays.
+
 2002-11-06  Pavel Roskin  <proski@gnu.org>
 
 	* editcmd.c (edit_save_file): Restore ownership before access
