@@ -125,7 +125,7 @@ distclean:
 	-if test $(srcdir) = .; then $(MAKE) realclean; fi
 	-$(RMF) $(srcdir)/Makefile
 
-install: mc mfmt @saver@
+install: mc mcfmt @saver@
 	$(INSTALL_PROGRAM) mc     $(DESTDIR)$(bindir)/$(binprefix)mc
 	$(INSTALL_PROGRAM) mcmfmt $(DESTDIR)$(bindir)/$(binprefix)mcmfmt
 	$(SEDCMD2) < $(srcdir)/mc.hlp > $(DESTDIR)$(libdir)/$(libprefix)mc.hlp 
