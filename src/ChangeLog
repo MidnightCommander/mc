@@ -1,3 +1,7 @@
+Tue Mar  2 22:54:50 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* util.c (name_quote): Quote '<' and '>'.
+
 Tue Mar  2 22:28:39 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* main.c (panel_clean_dir): New function: reset all counters of a 
