@@ -1,12 +1,16 @@
-Contents:
----------
-  Requirements
-  Features
-  Where to get more information
-  GNU Midnight Commander
-  Mini-docs
-  Obtaining GNU Midnight Commander
-  Reporting problems.
+Contents
+--------
+
+Introduction
+Dependencies
+Features
+Mini-documentation
+Where to get more information
+Reporting problems
+
+
+Introduction
+------------
 
 GNU Midnight Commander (also referred to as MC) is a user shell with
 text-mode full-screen interface.  It can be run on the OS console,
@@ -16,13 +20,19 @@ GNU Midnight Commander allows you to manage files while making most of
 you screen and giving you a clear representation of the filesystem, yet
 it's simple enough to be run over a telnet or ssh session.
 
+GNU Midnight Commander is released under the GNU General Public
+License version 2.0 or any later version.  A copy of the file is
+included with this distribution package.
 
-Requirements
+
+Dependencies
 ------------
 
 To compile the GNU Midnight Commander you need at least to have a copy
-of the GLib library, available at ftp://ftp.gtk.org/pub/gtk/v1.2/
-Use only glib 1.2.x - newer and older versions are not supported!
+of the glib library, available at ftp://ftp.gtk.org/pub/gtk/v1.2/ 
+Versions 1.2.x are recommended.  Older versions are not supported.
+Support for glib 2.0.x is experimental and has to be explicitly enabled
+(see file INSTALL).
 
 
 Features
@@ -34,147 +44,130 @@ with similar interfaces.  GNU Midnight Commander comes with mouse support
 on xterm and optionally on the Linux console.
 
 Some features are specific to the POSIX environment MC runs on, some are
-familiar to the users of similar software for other operating system.
+familiar to the users of similar software for other operating systems.
 The features include:
 
-	o Built in Virtual File System: manipulate remote file systems
+	* Built in Virtual File System: manipulate remote file systems
           through the FTP and SMB protocols or over secure shell, browse
-          tar, compressed tar, RPM, zip, cpio, lha and rar archives with
-          a single click.
+          contents of tar, ar, rpm, zip, cpio, lha and rar archives just
+	  like local files.
 
-	o All of GNU Midnight Commander operations work with the
-	  virtual file system, enabling you to do complex tasks.
+	* Almost all operations work with the virtual file system,
+	  enabling you to do complex tasks, like viewing files in
+	  archives on an FTP server.
 
-	o Mouse support on the Linux console and under xterm and rxvt.
+	* Mouse support on most terminal emulators for X Window System
+	  as well as on the Linux console.
 
-	o Learn Keys: GNU Midnight Commander may be configured at run
+	* Learn Keys: GNU Midnight Commander may be configured at run
 	  time to support any kind of input keys for a given terminal,
-	  making its operation even on the most weird terminals a
-	  breeze.
+	  making its operation possible even on most weird terminals.
 
-	o Text and hex editors are available for you to use.
+	* Text and hex editors are available for you to use (hex editor
+	  is a part of the viewer).
 
-	o Hotlist allows you to keep a list of common visited
-	  locations (including FTP sites).
+	* Hotlist allows you to keep a list of common visited locations,
+	  including remote sites and directories inside archives.
 
-	o Command completion: By pressing Alt-Tab in any place where a
+	* Command completion: By pressing Alt-Tab in any place where a
 	  filename or an executable are expected, GNU Midnight Commander
-	  will complete the name for you.  If you press Alt-Tab the second
-	  time you can get a list box with all possible completions.
+	  will complete the name for you.  If you press Alt-Tab for the
+	  second time, you get a list box with all possible completions.
 
-	o Subshell support: Run your commands by a real shell
+	* Subshell support: Run your commands by a real shell
 	  interpreter.  GNU Midnight Commander interacts with bash,
 	  tcsh and zsh to provide you with all of the facilities
 	  available in your preferred shell.
 
-	o Find file command can search for the file contents.
+	* Find file command can search for the file contents.
 
-	o Background operations allows you to copy or move files from
+	* Background operations allow you to copy or move files from
 	  any virtual file system while you do other tasks (i.e., you
 	  can do background FTP copies).
 
-	o Proxy support with our ftpfs.
+	* FTP proxy is supported.
 
-	o Linux file recovery: If you are using Linux, you can recover
-	  deleted files from an ext2fs partition with the undelete file
-	  system.  This is a low level file recovery function that will
-	  recover files deleted by any program on Linux.
+	* Linux file recovery: If you are using Linux, you can recover
+	  deleted files from an ext2 or ext3 partition with the undelete
+	  file system.  This is a low level file recovery function that
+	  can recover files deleted by any program on Linux.
 
-	o External panelization: You can run any arbitrary external
+	* External panelization: You can run any arbitrary external
 	  command and GNU Midnight Commander will display the output
 	  generated as a file listing that can be manipulated as a
 	  regular directory.
 
-	o Emacs like key bindings in all of our widgets.
+	* Emacs-like key bindings are used in all widgets.
 
-	o Powerful context dependent actions are available. 
+	* Context dependent actions (open, view, edit) are available.
 
-	o Powerful built-in file viewer:  The file viewer, together
-	  with the context dependent actions is used to format man
-	  pages on the fly, coloring mail messages and more.
+	* The built-in file viewer, together with the context dependent
+	  actions is used to format man pages on the fly, coloring mail
+	  messages and more.
 
-
-Where to get more information:
-------------------------------
-
-There is a mailing list for discussion on enhancing the program, future
-directions and announcements; if you want to subscribe, visit
-
-http://mail.gnome.org/mailman/listinfo/mc/
-
-There is a WWW page for GNU Midnight Commander at
-
-http://www.gnome.org/projects/mc/
+	* The built-in editor supports syntax highlighting and external
+	  actions, such as spell checking and formatting.
 
 
-GNU Midnight Commander:
------------------------
-
-GNU Midnight Commander is released under the GNU General Public
-License version 2.0 or any later version.  A copy of the file is
-included with this distribution package.
-
-If you have comments, you can send them to the mailing list:
-
-mc@gnome.org
-
-If you have made a patch send it to the developers' mailing list:
-
-mc-devel@gnome.org
-
-Help develop and enhance free software.
-
-
-Mini-documentation:
--------------------
+Mini-documentation
+------------------
 
 These are hints for the text mode edition:
 
-o Use the F-Keys for invoking the commands in the function key bar.
+* Use the F-Keys for invoking the commands in the function key bar.
   If your terminal doesn't support F-keys, you can use the <ESC digit>
   sequence to invoke the corresponding F-digit key.
 
-o Tab changes the current panel.
+* Tab changes the current panel.
 
-o All input lines have emacs-like key-bindings (command history is
+* All input lines have emacs-like key-bindings (command history is
   accessed through the M-p and M-n keys).
 
-o The panels accept C-n, C-p for browsing the panel (like in Emacs).
+* The panels accept C-n, C-p for browsing the panel (like in Emacs).
 
-o M-Enter copies the currently selected file name to the input line.
+* M-Enter copies the currently selected file name to the input line.
 
-o M-Tab completes the current word (or tries to).
+* M-Tab completes the current word (or tries to).
 
-o The Virtual File System is a cute addition to the project, you may
+* The Virtual File System is a cute addition to the project, you may
   browse in tar and compressed tar files as well as browsing remote
   machines with the mcfs file system.
 
-o Please read the manual page.
+* Please read the manual page.
 
-o Read the file src/TODO for the current projects.
+* Read the file src/TODO for the current projects.
 
 You can access the whole documentation online with the F1 key,
 although it's not as nice as the groff printed manual page :-)
 
 
-Where you may obtain GNU Midnight Commander
--------------------------------------------
+Where to get more information
+-----------------------------
 
-You can download the latest version of GNU Midnight Commander at
+There is a webpage for GNU Midnight Commander at
 
-ftp://ftp.gnome.org/pub/GNOME/stable/sources/mc/
+http://www.ibiblio.org/mc/
+
+This page also has current information about mailing lists and some
+useful advices how to report bugs.
+
+You can download the latest version of GNU Midnight Commander from
+
+http://www.ibiblio.org/pub/Linux/utils/file/managers/mc/
 
 
 Reporting problems
 ------------------
 
-Please, send a detailed description of your problem to
-mc-devel@gnome.org.
+There are two mailing lists, mc@gnome.org and mc-devel@gnome.org.  Use
+mc-devel@gnome.org if you are prepared for a more technical discussion
+with the developers of the package, otherwise use mc@gnome.org.
 
-Include the version of the program, the operating system that you are
-using, the compiler and compiler flags used to compile the program (if
-you know them), what kind of distribution you are using (if a GNU/Linux
-system).
+Please don't sent HTML e-mail to either of those mailing lists.
+
+Include the output of "mc --version", the operating system and the
+distribution (if applicable) you are using, the compiler and the
+configure flags used to compile the program (if you know them).
 
 If the program crashed and produces a core dump, please provide a
 stack trace of the program.
