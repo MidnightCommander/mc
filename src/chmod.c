@@ -102,10 +102,8 @@ static struct {
     { B_ALL,    NORMAL_BUTTON,  0, 0,  N_("Set &all") },
 };
 
-static void chmod_toggle_select (Dlg_head *h)
+static void chmod_toggle_select (Dlg_head *h, int Id)
 {
-    int Id = h->current->dlg_id - BUTTONS + single_set * 2;
-
     attrset (COLOR_NORMAL);
     check_perm[Id].selected ^= 1;
 
@@ -163,7 +161,7 @@ chmod_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	    c_stat ^= check_perm[id].mode;
 	    g_snprintf (buffer, sizeof (buffer), "%o", c_stat);
 	    label_set_text (statl, buffer);
-	    chmod_toggle_select (h);
+	    chmod_toggle_select (h, id);
 	    mode_change = 1;
 	}
 	return MSG_HANDLED;
@@ -171,7 +169,7 @@ chmod_callback (Dlg_head *h, dlg_msg_t msg, int parm)
     case DLG_KEY:
 	if ((parm == 'T' || parm == 't' || parm == KEY_IC)
 	    && h->current->dlg_id >= BUTTONS - single_set * 2) {
-	    chmod_toggle_select (h);
+	    chmod_toggle_select (h, id);
 	    if (parm == KEY_IC)
 		dlg_one_down (h);
 	    return MSG_HANDLED;
