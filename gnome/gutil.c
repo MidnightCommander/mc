@@ -48,66 +48,11 @@
 #include <gdk/gdkprivate.h>
 #include "global.h"
 
-static struct sigaction previous_sigchld;
-static int child_died_notify_handler;
-
-/*
- * A list of childs that were executed with a temporary file
- * We remove the files when they die
- */
-static GList *children;
-
-typedef struct {
+int my_system (int flags, const char *shell, const char *command)
+{
 	pid_t pid;
-	char  *temp_file;
-} Child;
-
-/*
- * Received when a child dies, notifies the high level routione
- * that new input is available
- */
-static void
-gnome_sigchld_handler (int sig)
-{
-	char c;
-	
-	if (previous_sigchld.sa_handler != SIG_IGN &&
-	    previous_sigchld.sa_handler != SIG_DFL){
-		(*previous_sigchld.sa_handler)(sig);
-	}
-	write (child_died_notify_handler, &c, sizeof (c));
-}
-
-/*
- * Invoked from the main loop when a child has died
- * deal with it
- */
-static void
-gnome_child_died (gpointer data, gint source, GdkInputCondition condition)
-{
-	GList *l;
-	char c;
-	
-	read (source, &c, sizeof (c));
-	for (l = children; l; l = l->next){
-		int status;
-		Child *child = l->data;
-		
-		if (child->pid == waitpid (child->pid, &status, WUNTRACED | WNOHANG)){
-			children = g_list_remove (children, child);
-				
-			unlink (child->temp_file);
-			g_free (child->temp_file);
-			g_free (child);
-		}
-	}
-}
-
-int my_system_get_child_pid (int flags, const char *shell, const char *command, pid_t *pid)
-{
 	struct sigaction ignore, save_intr, save_quit, save_stop;
 	int status = 0, i;
-	static int gnome_sigchld_installed;
 	
 	ignore.sa_handler = SIG_IGN;
 	sigemptyset (&ignore.sa_mask);
@@ -116,25 +61,10 @@ int my_system_get_child_pid (int flags, const char *shell, const char *command, 
 	sigaction (SIGINT, &ignore, &save_intr);    
 	sigaction (SIGQUIT, &ignore, &save_quit);
 
-	if (!gnome_sigchld_installed){
-		struct sigaction newsig;
-		int monitors [2];
-
-		pipe (monitors);
-		sigemptyset (&newsig.sa_mask);
-		newsig.sa_flags = 0;
-		newsig.sa_handler = gnome_sigchld_handler;
-		
-		sigaction (SIGCHLD, &newsig, &previous_sigchld);
-		gnome_sigchld_installed = 1;
-
-		gdk_input_add (monitors [0], GDK_INPUT_READ, gnome_child_died, NULL);
-	}
-	
-	if ((*pid = fork ()) < 0){
+	if ((pid = fork ()) < 0){
 		return -1;
 	}
-	if (*pid == 0){
+	if (pid == 0){
 		const int top = max_open_files ();
 		struct sigaction default_pipe;
 
@@ -156,18 +86,18 @@ int my_system_get_child_pid (int flags, const char *shell, const char *command, 
 		/* Setup the file descriptor for the child */
 		   
 		/* stdin */
-		open ("/dev/null", O_APPEND);
+		open ("/dev/null", O_RDONLY);
 
 		/* stdout */
-		open ("/dev/null", O_RDONLY);
+		open ("/dev/null", O_WRONLY);
 
 		/* stderr */
-		open ("/dev/null", O_RDONLY);
+		open ("/dev/null", O_WRONLY);
 		
 		if (!(flags & EXECUTE_WAIT))
-			*pid = fork ();
+			pid = fork ();
 		
-		if (*pid == 0){
+		if (pid == 0){
 			if (flags & EXECUTE_AS_SHELL)
 				execl (shell, shell, "-c", command, (char *) 0);
 			else
@@ -178,15 +108,7 @@ int my_system_get_child_pid (int flags, const char *shell, const char *command, 
 			int status;
 
 			if (flags & EXECUTE_WAIT)
-				waitpid (*pid, &status, 0);
-
-			if (flags & EXECUTE_TEMPFILE){
-				Child *child;
-
-				child = g_new (Child, 1);
-				child->pid = *pid;
-				child->temp_file = g_strdup (command);
-			}
+				waitpid (pid, &status, 0);
 		}
 		/* We need to use _exit instead of exit to avoid
 		 * calling the atexit handlers (specifically the gdk atexit
@@ -194,17 +116,10 @@ int my_system_get_child_pid (int flags, const char *shell, const char *command, 
 		 */
 		_exit (0);
 	}
-	waitpid (*pid, &status, 0);
+	waitpid (pid, &status, 0);
 	sigaction (SIGINT,  &save_intr, NULL);
 	sigaction (SIGQUIT, &save_quit, NULL);
 	sigaction (SIGTSTP, &save_stop, NULL);
 
 	return WEXITSTATUS(status);
-}
-
-int my_system (int flags, const char *shell, const char *command)
-{
-	pid_t pid;
-	
-	return my_system_get_child_pid (flags, shell, command, &pid);
 }
