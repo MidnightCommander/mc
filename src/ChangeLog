@@ -1,5 +1,8 @@
 1999-02-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* dir.c (do_load_dir): Added missing calls to
+	tree_store_end_check. 
+
 	* find.c (add_to_list): Pass the data pointer as well.
 
 Fri Feb 12 06:36:58 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>

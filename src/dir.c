@@ -464,6 +464,7 @@ int do_load_dir(dir_list *list, sortfn *sort, int reverse, int case_sensitive, c
     
     dirp = mc_opendir (".");
     if (!dirp){
+	tree_store_end_check ();
 	return set_zero_dir (list);
     }
     for (dp = mc_readdir (dirp); dp; dp = mc_readdir (dirp)){
@@ -471,8 +472,10 @@ int do_load_dir(dir_list *list, sortfn *sort, int reverse, int case_sensitive, c
 	    &stalled_link);
 	if (status == 0)
 	    continue;
-	if (status == -1)
+	if (status == -1){
+	    tree_store_end_check ();
 	    return next_free;
+	}
 	list->list [next_free].fnamelen = NLENGTH (dp);
 	list->list [next_free].fname = g_strdup (dp->d_name);
 	list->list [next_free].f.marked = 0;
@@ -491,9 +494,10 @@ int do_load_dir(dir_list *list, sortfn *sort, int reverse, int case_sensitive, c
 	if (!dotdot_found)
 	    add_dotdot_to_list (list, next_free++);
 	do_sort (list, sort, next_free-1, reverse, case_sensitive);
-    }
-    else
+    } else {
+	tree_store_end_check ();
 	return set_zero_dir (list);
+    }
     
     mc_closedir (dirp);
     tree_store_end_check ();
