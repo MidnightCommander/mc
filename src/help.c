@@ -52,6 +52,7 @@
 #include "help.h"
 #include "dlg.h"		/* For Dlg_head */
 #include "widget.h"		/* For Widget */
+#include "wtools.h"		/* For common_dialog_repaint() */
 
 #define MAXLINKNAME 80
 #define HISTORY_SIZE 20
@@ -359,6 +360,7 @@ static void show (Dlg_head *h, char *paint_start)
     int repeat_paint;
     int active_col, active_line;/* Active link position */
 
+    attrset (HELP_NORMAL_COLOR);
     do {
 	
 	line = col = acs = active_col = active_line = repeat_paint = 0;
@@ -728,13 +730,7 @@ static int help_callback (struct Dlg_head *h, int id, int msg)
 {
     switch (msg){
     case DLG_DRAW:
-	attrset (HELP_NORMAL_COLOR);
-	dlg_erase (h);
-	draw_box (h, 1, 1, help_lines+2, HELP_WINDOW_WIDTH+2);
-	attrset (COLOR_HOT_NORMAL);
-	dlg_move (h, 1, (HELP_WINDOW_WIDTH - 1) / 2);
-	addstr (_(" Help "));
-	attrset (HELP_NORMAL_COLOR);
+	common_dialog_repaint (h);
 	show (h, currentpoint);
 	break;
 
@@ -785,6 +781,7 @@ interactive_display (char *filename, char *node)
     whelp = create_dlg (0, 0, help_lines+4, HELP_WINDOW_WIDTH+4, dialog_colors,
 			help_callback, "[Help]", "help",
 			DLG_TRYUP | DLG_CENTER | DLG_WANT_TAB);
+    x_set_dialog_title(whelp, _("Help"));
 
     selected_item = search_string_node (main_node, STRING_LINK_START) - 1;
     currentpoint = startpoint = main_node + 1;
