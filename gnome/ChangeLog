@@ -1,3 +1,8 @@
+2001-07-26  Pavel Roskin  <proski@gnu.org>
+
+	* gfind.c (find_parameters): Fix behavior of the Enter key.
+	Select initial values in the text entries.
+
 2001-07-25  Pavel Roskin  <proski@gnu.org>
 
 	* glayout.c (create_new_menu): Calculate last position in the

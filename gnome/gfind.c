@@ -101,9 +101,12 @@ static int case_sensitive = 1;
 static int find_parameters(char **start_dir, char **pattern, char **content)
 {
 	int return_value;
-	GtkWidget *find_dialog;
+	GnomeDialog *find_dialog;
 	GtkWidget *case_box;
+	/* Gnome entries */
 	GtkWidget *start_entry, *name_entry, *content_entry;
+	/* Corresponding Gtk entries */
+	GtkEntry *start_gentry, *name_gentry, *content_gentry;
 	GtkWidget *start_label, *name_label, *content_label;
 	static char *case_label = N_("Case sensitive");
 
@@ -121,71 +124,79 @@ static int find_parameters(char **start_dir, char **pattern, char **content)
 		in_contents = g_strdup("");
 
 	/* Create dialog */
-	find_dialog =
-	    gnome_dialog_new(_("Find File"), GNOME_STOCK_BUTTON_OK,
-			     GNOME_STOCK_BUTTON_CANCEL, NULL);
-	gmc_window_setup_from_panel(GNOME_DIALOG(find_dialog), cpanel);
+	find_dialog = GNOME_DIALOG(gnome_dialog_new(_("Find File"),
+				   GNOME_STOCK_BUTTON_OK,
+				   GNOME_STOCK_BUTTON_CANCEL, NULL));
+	gmc_window_setup_from_panel(find_dialog, cpanel);
 
 	start_label = gtk_label_new(_(labs[0]));
 	gtk_misc_set_alignment(GTK_MISC(start_label), 0.0, 0.5);
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(find_dialog)->vbox), start_label, FALSE,
+	gtk_box_pack_start(GTK_BOX(find_dialog->vbox), start_label, FALSE,
 			   FALSE, 0);
 
 	start_entry = gnome_entry_new("start");
+	start_gentry = GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(start_entry)));
 	gnome_entry_load_history(GNOME_ENTRY(start_entry));
-	gtk_entry_set_text(GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(start_entry))),
-			   in_start_dir);
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(find_dialog)->vbox), start_entry, FALSE,
+	gtk_entry_set_text(start_gentry, in_start_dir);
+	gtk_entry_set_position (start_gentry, 0);
+	gtk_entry_select_region (start_gentry, 0,
+				 start_gentry->text_length);
+	gnome_dialog_editable_enters (find_dialog,
+				      GTK_EDITABLE(start_gentry));
+	gtk_box_pack_start(GTK_BOX(find_dialog->vbox), start_entry, FALSE,
 			   FALSE, 0);
 
 	name_label = gtk_label_new(_(labs[1]));
 	gtk_misc_set_alignment(GTK_MISC(name_label), 0.0, 0.5);
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(find_dialog)->vbox), name_label, FALSE,
+	gtk_box_pack_start(GTK_BOX(find_dialog->vbox), name_label, FALSE,
 			   FALSE, 0);
 
 	name_entry = gnome_entry_new("name");
+	name_gentry = GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(name_entry)));
 	gnome_entry_load_history(GNOME_ENTRY(name_entry));
-	gtk_entry_set_text(GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(name_entry))),
-			   in_start_name);
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(find_dialog)->vbox), name_entry, FALSE,
+	gtk_entry_set_text(name_gentry, in_start_name);
+	gtk_entry_set_position (name_gentry, 0);
+	gtk_entry_select_region (name_gentry, 0,
+				 name_gentry->text_length);
+	gnome_dialog_editable_enters (find_dialog,
+				      GTK_EDITABLE(name_gentry));
+	gtk_box_pack_start(GTK_BOX(find_dialog->vbox), name_entry, FALSE,
 			   FALSE, 0);
 
 	content_label = gtk_label_new(_(labs[2]));
 	gtk_misc_set_alignment(GTK_MISC(content_label), 0.0, 0.5);
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(find_dialog)->vbox), content_label, FALSE,
+	gtk_box_pack_start(GTK_BOX(find_dialog->vbox), content_label, FALSE,
 			   FALSE, 0);
 
 	content_entry = gnome_entry_new("content");
+	content_gentry = GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(content_entry)));
 	gnome_entry_load_history(GNOME_ENTRY(content_entry));
-	gtk_entry_set_text(GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(content_entry))),
-			   in_contents);
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(find_dialog)->vbox), content_entry, FALSE,
+	gtk_entry_set_text(content_gentry, in_contents);
+	gtk_entry_set_position (content_gentry, 0);
+	gtk_entry_select_region (content_gentry, 0,
+				 content_gentry->text_length);
+	gnome_dialog_editable_enters (find_dialog,
+				      GTK_EDITABLE(content_gentry));
+	gtk_box_pack_start(GTK_BOX(find_dialog->vbox), content_entry, FALSE,
 			   FALSE, 0);
 
 	case_box = gtk_check_button_new_with_label(_(case_label));
 
 	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(case_box), case_sensitive);
-	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(find_dialog)->vbox), case_box, FALSE,
+	gtk_box_pack_start(GTK_BOX(find_dialog->vbox), case_box, FALSE,
 			   FALSE, 0);
 
 	gtk_widget_grab_focus(gnome_entry_gtk_entry(GNOME_ENTRY(start_entry)));
-	gnome_dialog_set_default(GNOME_DIALOG(find_dialog), 0);
+	gnome_dialog_set_default(find_dialog, 0);
 
-	gtk_widget_show_all(GNOME_DIALOG(find_dialog)->vbox);
+	gtk_widget_show_all(find_dialog->vbox);
 
-	switch (gnome_dialog_run(GNOME_DIALOG(find_dialog))) {
+	switch (gnome_dialog_run(find_dialog)) {
 	case 0:
 		return_value = 1;
-		*start_dir =
-		    strdup(gtk_entry_get_text
-			   (GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(start_entry)))));
-		*pattern =
-		    strdup(gtk_entry_get_text
-			   (GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(name_entry)))));
-		*content =
-		    strdup(gtk_entry_get_text
-			   (GTK_ENTRY
-			    (gnome_entry_gtk_entry(GNOME_ENTRY(content_entry)))));
+		*start_dir = strdup(gtk_entry_get_text(start_gentry));
+		*pattern = strdup(gtk_entry_get_text(name_gentry));
+		*content = strdup(gtk_entry_get_text(content_gentry));
 
 		g_free(in_start_dir);
 		in_start_dir = g_strdup(*start_dir);
@@ -209,7 +220,7 @@ static int find_parameters(char **start_dir, char **pattern, char **content)
 		return 0;
 	}
 
-	gtk_widget_destroy(find_dialog);
+	gtk_widget_destroy(GTK_WIDGET(find_dialog));
 
 	return return_value;
 }
