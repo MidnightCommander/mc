@@ -1,5 +1,7 @@
 2003-01-22  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Version 4.6.0-pre3 released.
+
 	* acinclude.m4 (_MC_WITH_XSLANG): Drop support for old S-Lang
 	versions that required the native curses library on some OSes.
 
