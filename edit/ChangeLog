@@ -1,3 +1,8 @@
+2002-10-08  Pavel Roskin  <proski@gnu.org>
+
+	* wordproc.c (format_paragraph): If formatting was successful,
+	scroll to the left to show the formatted paragraph.
+
 2002-10-06  Pavel Roskin  <proski@gnu.org>
 
 	* editdraw.c (print_to_widget): Eliminate use of floating point.

@@ -332,4 +332,7 @@ void format_paragraph (WEdit * edit, int force)
     format_this (t, q - p, indent);
     put_paragraph (edit, t, p, q, indent, size);
     free (t);
+
+    /* Scroll left as much as possible to show the formatted paragraph */
+    edit_scroll_left(edit, - edit->start_col);
 }
