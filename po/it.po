@@ -2188,7 +2188,7 @@ msgstr "Sostit"
 
 #: gtkedit/editwidget.c:1074 src/main.c:1698
 msgid "PullDn"
-msgstr "Menu"
+msgstr "MenGiù"
 
 #: gtkedit/editwidget.c:1075 src/help.c:818 src/main.c:1699 src/view.c:2006
 #: src/view.c:2026
@@ -2197,7 +2197,7 @@ msgstr "Esci"
 
 #: gtkedit/editmenu.c:57
 msgid " Word wrap "
-msgstr ""
+msgstr " Formatta "
 
 #. Not essential to translate
 #: gtkedit/editmenu.c:59
@@ -2308,7 +2308,7 @@ msgstr "&Cerca...          F7"
 
 #: gtkedit/editmenu.c:186 gtkedit/editmenu.c:193
 msgid "search &Again     F17"
-msgstr "Cerca &Ancora     F17"
+msgstr "&Ripeti Cerca     F17"
 
 #: gtkedit/editmenu.c:187 gtkedit/editmenu.c:194
 msgid "&Replace...        F4"
@@ -4867,14 +4867,15 @@ msgid ""
 " manual reload of the directory. See the man page for   \n"
 " the details.                                           "
 msgstr ""
-" L'uso della visualizzazione rapida potrebbe mostrare una\n"
-" directory non corrispondente alla realtà. In questo caso\n"
-" usate il comando manuale C-r per obbligare il programma \n"
-" ad attualizzare la visualizzazione. Vedi la Man page.             "
+" L'opzione di visualizzazione rapida potrebbe causare la \n"
+" visualizzazione di una directory non rispondente alla   \n"
+" realtà. In tal caso, usate il comando manuale C-r per   \n" 
+" forzare l'aggiornamento della visualizzazione.          \n"
+" Vedere le pagine del manuale per i dettagli.            "
 
 #: src/main.c:1697 src/screen.c:2351 src/screen.c:2381
 msgid "Menu"
-msgstr "Usermenu"
+msgstr "Menu"
 
 #: src/main.c:1902
 msgid "Thank you for using GNU Midnight Commander"
@@ -5235,11 +5236,11 @@ msgstr " Nessuna azione intrapresa "
 
 #: src/screen.c:2355 src/screen.c:2385 src/tree.c:1026
 msgid "RenMov"
-msgstr "Muovi"
+msgstr "RinSpo"
 
 #: src/screen.c:2356 src/screen.c:2386 src/tree.c:1030
 msgid "Mkdir"
-msgstr "CrDir"
+msgstr "CreDir"
 
 #: src/screen.c:2372
 #, c-format
@@ -5382,7 +5383,7 @@ msgstr " Impossibile eseguire programmi su una directory non locale"
 #. Create listbox
 #: src/user.c:712
 msgid " User menu "
-msgstr " Nome utente "
+msgstr " Menu utente "
 
 #: src/util.c:228
 msgid "name_trunc: too big"
