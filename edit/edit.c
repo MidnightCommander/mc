@@ -2682,8 +2682,7 @@ void user_menu (WEdit *edit)
 
     nomark = eval_marks (edit, &start_mark, &end_mark); 
     if (! nomark) /* remember marked or not */
-	edit_save_block (edit, block_file = catstrs (home_dir, BLOCK_FILE, 0),
-							start_mark, end_mark);
+	edit_save_block (edit, block_file, start_mark, end_mark);
 
     /* run shell scripts from menu */     
     user_menu_cmd (edit);

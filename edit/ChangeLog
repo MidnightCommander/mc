@@ -1,3 +1,10 @@
+2001-11-14  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* edit_key_translator.c (cooledit_key_map):
+	Add C-k, CK_Delete_To_Line_End.
+
+	* edit.c (user_menu): Don't assign block_file twice.
+
 2001-11-07  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* edit.c (edit_reload): destroy_dlg g_free()s widget(s), so
