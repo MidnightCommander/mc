@@ -399,7 +399,7 @@ create_prop_int (PrefsDlg *dlg, Property *prop)
         gtk_box_pack_start (GTK_BOX (hbox), entry, 
                             FALSE, FALSE, 0);
 	if (prop->extra_data1) {
-		label = gtk_label_new ((gchar *)prop->extra_data1);
+		label = gtk_label_new (_((gchar *)prop->extra_data1));
 		gtk_box_pack_start (GTK_BOX (hbox), label, 
 				    FALSE, FALSE, 0);
 	}

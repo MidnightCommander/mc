@@ -1,3 +1,11 @@
+1999-05-29  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gprefs.c (create_prop_int): Translate this label too.
+
+	* gnome-open-dialog.c: Add config.h here.  Otherwise there is no
+	way to translate this dialog.  Thanks to David Martina for
+	pointing this out.
+
 1999-05-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (panel_tree_button_press): Beginning of context menu
