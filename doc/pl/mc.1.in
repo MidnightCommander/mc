@@ -1446,11 +1446,9 @@ katalogu poprzez dowi±zanie, przeniesie ciê do prawdziwego katalogu na dysku, a 
 tam gdzie wskazywa³o dowi±zanie.
 .PP
 .I Bezpieczne kasowanie (Safe delete).
-Je¶li ta opcja jest w³±czona, nieumy¶lne kasowanie plików stanie siê du¿o
-trudniejsze. Standardowy wybór w linii potwierdzenia zmienia siê z "Yes" na
-"No" i kasowanie nie pustych katalogów musi byæ potwierdzane przyciskiem
-.IR yes .
-Standardowo ta opcja jest wy³±czona.
+Je¶li ta opcja jest w³±czona, nieumy¶lne kasowanie plików stanie siê
+du¿o trudniejsze. Standardowy wybór w linii potwierdzenia zmienia siê z
+"Yes" na "No". Standardowo ta opcja jest wy³±czona.
 .PP
 .\"NODE "    Layout"
 .SH "    Wygl±d (Layout)"
