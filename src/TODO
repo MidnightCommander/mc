@@ -3,8 +3,6 @@ Before 4.6.0
 
 Review all patches and bugs from savannah.gnu.org.
 
-Add -lcurses only is necessary.
-
 Update translations and documentation.
 
 Portability testing.
@@ -106,6 +104,9 @@ Dynamic loading for libX11, libgpm.
 Support for multi-byte charsets (e.g. UTF-8).
 
 sftp and fxp support in VFS.
+
+New listing mode keyword "time": mtime or the time (atime, ctime) used
+to sort files.
 
 
 ========================================================================
