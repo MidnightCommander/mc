@@ -1,3 +1,8 @@
+1999-02-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdnd.c (gdnd_validate_action): Show the correct feedback when
+	dragging URLs.
+
 1999-02-03  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_icon_info_open): Use gmc_open_filename

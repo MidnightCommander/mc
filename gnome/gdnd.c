@@ -393,7 +393,7 @@ gdnd_perform_drop (GdkDragContext *context, GtkSelectionData *selection_data,
 			return FALSE;
 	} else
 		action = context->action;
-	
+
 	if (S_ISDIR (dest_fe->buf.st_mode) || dest_fe->f.link_to_dir)
 		return drop_on_directory (context, selection_data, dest_name);
 	else
@@ -497,12 +497,14 @@ gdnd_validate_action (GdkDragContext *context,
 	    && (!dest_fe || dest_selected))
 		return GDK_ACTION_MOVE;
 
-	if (gdnd_drag_context_has_target (context, TARGET_URI_LIST)) {
-		if (dest_fe) {
-			on_directory = S_ISDIR (dest_fe->buf.st_mode) || dest_fe->f.link_to_dir;
-			on_exe = is_exe (dest_fe->buf.st_mode) && if_link_is_exe (dest_fe);
-		}
+	/* See what kind of file the destination is, if any */
 
+	if (dest_fe) {
+		on_directory = S_ISDIR (dest_fe->buf.st_mode) || dest_fe->f.link_to_dir;
+		on_exe = is_exe (dest_fe->buf.st_mode) && if_link_is_exe (dest_fe);
+	}
+
+	if (gdnd_drag_context_has_target (context, TARGET_URI_LIST)) {
 		if (dest_fe) {
 			if (same_source && dest_selected)
 				return 0;
@@ -538,11 +540,17 @@ gdnd_validate_action (GdkDragContext *context,
 	}
 
 	if (gdnd_drag_context_has_target (context, TARGET_URL)) {
-		/* FIXME: right now we only allow links.  We should see if we
-		 * can move or copy stuff instead (for ftp instead of http
-		 * sites, for example).
+		/* FIXME: right now we only allow linking to directories.  We
+		 * should see if we can move or copy stuff instead (for ftp
+		 * instead of http sites, for example).
 		 */
-		if (context->actions & GDK_ACTION_LINK)
+		if (dest_fe) {
+			if (on_directory) {
+				if (context->actions & GDK_ACTION_LINK)
+					return GDK_ACTION_LINK;
+			} else if (context->actions & GDK_ACTION_COPY)
+				return GDK_ACTION_COPY;
+		} else if (context->actions & GDK_ACTION_LINK)
 			return GDK_ACTION_LINK;
 	}
 

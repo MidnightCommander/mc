@@ -78,9 +78,6 @@ GtkWidget *drag_multiple     = NULL;
 GtkWidget *drag_multiple_ok  = NULL;
 
 
-static void panel_file_list_configure_contents (GtkWidget *sw, WPanel *panel, int main_width, int height);
-
-
 #define CLIST_FROM_SW(panel_list) GTK_CLIST (GTK_BIN (panel_list)->child)
 
 
@@ -485,7 +482,6 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 	display_mini_info (panel);
 	execute_hooks (select_file_hook);
 
-
 	if (!event)
 		return;
 
@@ -496,7 +492,8 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 
 			if (S_ISDIR (panel->dir.list [row].buf.st_mode) ||
 			    panel->dir.list [row].f.link_to_dir){
-				fullname = concat_dir_and_file (panel->cwd, panel->dir.list [row].fname);
+				fullname = concat_dir_and_file (panel->cwd,
+								panel->dir.list [row].fname);
 				new_panel_at (fullname);
 				 g_free (fullname);
 			}
@@ -1366,7 +1363,8 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 	switch (event->type){
 	case GDK_BUTTON_PRESS:
 		if (event->button.button == 3)
-			gpopup_do_popup ((GdkEventButton *) event, panel, NULL, index, panel->dir.list[index].fname);
+			gpopup_do_popup ((GdkEventButton *) event, panel, NULL, index,
+					 panel->dir.list[index].fname);
 		break;
 
 	case GDK_BUTTON_RELEASE:
