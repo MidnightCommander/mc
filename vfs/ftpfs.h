@@ -56,7 +56,6 @@ struct connection {
     int lock;
     int failed_on_login;	/* used to pass the failure reason to upper levels */
     int use_proxy;		/* use a proxy server */
-    int result_pending;
     int use_source_route;
     int use_passive_connection;
     int remote_is_amiga;       /* No leading slash allowed for AmiTCP (Amiga) */
