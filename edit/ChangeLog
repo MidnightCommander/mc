@@ -1,3 +1,8 @@
+2003-03-12  Pavel Roskin  <proski@gnu.org>
+
+	* edit.h: Make it easier to tweak buffer size and maximal number
+	of buffers.
+
 2003-03-07  Pavel Roskin  <proski@gnu.org>
 
 	* editkeys.c (common_key_map): Delete previous word by

@@ -3,7 +3,6 @@
 
 #include "src/dlg.h"		/* Widget */
 
-#define MAXBUFF 1024
 #define MAX_MACRO_LENGTH 1024
 #define N_LINE_CACHES 32
 

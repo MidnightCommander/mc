@@ -69,26 +69,37 @@
 #define EDIT_TOP_EXTREME option_edit_top_extreme
 #define EDIT_BOTTOM_EXTREME option_edit_bottom_extreme
 
-/*there are a maximum of ... */
-/*... edit buffers, each of which is ... */
-#define EDIT_BUF_SIZE 0x10000
-/* ...bytes in size. */
+/*
+ * The editor keeps data in two arrays of buffers.
+ * All buffers have the same size, which must be a power of 2.
+ */
 
-/*x / EDIT_BUF_SIZE equals x >> ... */
+/* Configurable: log2 of the buffer size in bytes */
+#ifndef S_EDIT_BUF_SIZE
 #define S_EDIT_BUF_SIZE 16
+#endif
 
-/* x % EDIT_BUF_SIZE is equal to x && ... */
-#define M_EDIT_BUF_SIZE 0xFFFF
+/* Size of the buffer */
+#define EDIT_BUF_SIZE (((off_t) 1) << S_EDIT_BUF_SIZE)
 
+/* Buffer mask (used to find cursor position relative to the buffer) */
+#define M_EDIT_BUF_SIZE (EDIT_BUF_SIZE - 1)
+
+/*
+ * Configurable: Maximal allowed number of buffers in each buffer array.
+ * This number can be increased for systems with enough physical memory.
+ */
+#ifndef MAXBUFF
+#define MAXBUFF 1024
+#endif
+
+/* Maximal length of file that can be opened */
 #define SIZE_LIMIT (EDIT_BUF_SIZE * (MAXBUFF - 2))
-/* Note a 16k stack is 64k of data and enough to hold (usually) around 10
-   pages of undo info. */
 
-/* undo stack */
+/* Initial size of the undo stack, in bytes */
 #define START_STACK_SIZE 32
 
-
-/*some codes that may be pushed onto or returned from the undo stack: */
+/* Some codes that may be pushed onto or returned from the undo stack */
 #define CURS_LEFT 601
 #define CURS_RIGHT 602
 #define DELCHAR 603
