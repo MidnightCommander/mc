@@ -1,3 +1,10 @@
+Tue Dec 15 10:51:12 1998  Gregory McLean <gregm@comstar.net>
+
+	* gdesktop-icon.c : Attach a desktop_icon wmclass to the desktop
+	icons to allow even more wizardry with the desktop icons, mainly
+	to exclude them from window lists, don't decorate them, skip 
+	desktops and other boring stuff.
+
 1998-12-14  Sven Neumann  <sven@gimp.org>
 
 	* lightened up the dir-pixmaps a little to please your eyes and

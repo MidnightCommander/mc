@@ -100,7 +100,7 @@ desktop_icon_init (DesktopIcon *dicon)
 	/* Set the window policy */
 
 	gtk_window_set_policy (GTK_WINDOW (dicon), TRUE, TRUE, TRUE);
-	
+	gtk_window_set_wmclass (GTK_WINDOW (dicon), "desktop_icon", "gmc");
 	/* Create the canvas */
 
 	gtk_widget_push_visual (gdk_imlib_get_visual ());
@@ -161,7 +161,7 @@ desktop_icon_realize (GtkWidget *widget)
 
 	gdk_window_set_decorations (widget->window, 0);
 	gdk_window_set_functions (widget->window, 0);
-
+	
 	gnome_win_hints_init ();
 
 	if (gnome_win_hints_wm_exists ()) {
