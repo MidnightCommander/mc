@@ -2869,15 +2869,17 @@ handle_args (int argc, char *argv [])
 		poptStrerror (c));
 	finish_program = 1;
     }
-#endif
     probably_finish_program ();
+#endif /* HAVE_GNOME */
 
+    tmp = poptGetArg (ctx);
+
+#ifndef HAVE_GNOME
     /*
      * Check for special invocation names mcedit and mcview,
      * if none apply then set the current directory and the other
      * directory from the command line arguments
      */
-    tmp = poptGetArg (ctx);
     base = x_basename (argv[0]);
     if (!STRNCOMP (base, "mce", 3) || !STRCOMP(base, "vi")) {
 	edit_one_file = "";
@@ -2899,7 +2901,14 @@ handle_args (int argc, char *argv [])
     if (!STRNCOMP (base, "mcv", 3) || !STRCOMP(base, "view")) {
 	if (tmp)
 	    view_one_file = g_strdup (tmp);
-    } else {
+	else {
+	    fprintf (stderr, "No arguments given to the viewer\n");
+	    finish_program = 1;
+	    probably_finish_program ();
+ 	}
+    } else
+#endif /* HAVE_GNOME */
+    {
        	/* sets the current dir and the other dir */
 	if (tmp) {
     	    char buffer[MC_MAXPATHLEN + 2];

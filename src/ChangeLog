@@ -1,5 +1,8 @@
 2001-01-27  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (handle_args): Exit if no arguments are given to mcview.
+	[HAVE_GNOME]: Don't examine argv[0] - it's done separately.
+
 	* dir.c: Respect HAVE_STRCOLL. Added a comment about strcoll().
 
 2001-01-26  Pablo Saratxaga <pablo@mandrakesoft.com>
