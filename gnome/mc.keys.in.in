@@ -210,11 +210,17 @@ image/*:
 image/x-bmp:
 	icon-filename=@icondir@/gnome-image-bmp.png
 
-image/x-xcf:
+image/x-gimp:
 	icon-filename=@icondir@/gnome-image-xcf.png
+	open=gimp %f
+	edit=gimp %f
+	view=gimp %f
 
-image/x-compressed-xcf:
+image/x-compressed-gimp:
 	icon-filename=@icondir@/gnome-image-xcf.png
+	open=gimp %f
+	edit=gimp %f
+	view=gimp %f
 
 image/gif:
 	icon-filename=@icondir@/gnome-image-gif.png

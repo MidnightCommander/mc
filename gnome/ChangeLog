@@ -1,3 +1,9 @@
+1999-09-05    <jrb@redhat.com>
+
+	* mc.keys.in.in: changed image/x-xcf to be image/x-gimp.  Also,
+	associated gimp with the various actions.  This prolly should be
+	done distributed with gimp, but it's more useful here.
+
 1999-09-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c: Added it here too.
