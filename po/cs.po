@@ -2,12 +2,13 @@
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # Pavel Machek <pavel@ucw.cz>, 1998.
 # David ©auer <davids@penguin.cz>, 1999.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.33\n"
 "POT-Creation-Date: 1999-05-27 16:45-0500\n"
 "PO-Revision-Date: 1999-04-22 00:04+02:00\n"
-"Last-Translator: David Sauer <xsauer@fel.cvut.cz>\n"
+"Last-Translator: David Sauer <davids@penguin.cz>\n"
 "Language-Team: czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-2\n"
@@ -45,9 +46,7 @@ msgstr "Vývojový tým programu Midnight Commander"
 
 #: gnome/gcmd.c:111
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
-msgstr ""
-"oznamování chyb: http://bugs.gnome.org, nebo pou¾ijte gnome-bug (pouze "
-"anglicky). Popis chyb v èeském pøekladu zasílejte na cs@li.org."
+msgstr "oznamování chyb: http://bugs.gnome.org, nebo pou¾ijte gnome-bug (anglicky)."
 
 #: gnome/gcmd.c:123
 msgid "GNU Midnight Commander"
@@ -149,7 +148,7 @@ msgstr "Nastavit filtr"
 #: gnome/gcmd.c:667 gnome/gcmd.c:708 gnome/gcmd.c:713 gnome/gcmd.c:717
 #: gnome/gscreen.c:2508
 msgid "Show all files"
-msgstr "Ukázat v¹echny soubory"
+msgstr "V¹echny soubory"
 
 #: gnome/gcmd.c:674
 msgid "."
@@ -368,7 +367,7 @@ msgstr "Srovnat ikony"
 
 #: gnome/gdesktop.c:2420
 msgid "Create New Window"
-msgstr "Vytvoøit nové okno"
+msgstr "Vytvoøit nové okno správce souborù"
 
 #: gnome/gdesktop.c:2422
 msgid "Recreate Desktop Shortcuts"
@@ -376,7 +375,7 @@ msgstr "Znovu vytvoøit odkazy na plo¹e"
 
 #: gnome/gdesktop.c:2423 gnome/glayout.c:454
 msgid "Rescan Desktop"
-msgstr "Obnovit obsah plochy"
+msgstr "Aktualizovat obsah plochy"
 
 #: gnome/gdesktop.c:2424
 msgid "Configure Background Image"
@@ -384,7 +383,7 @@ msgstr "Konfigurace obrázku pozadí"
 
 #: gnome/gdialogs.c:60
 msgid "To: "
-msgstr "Komu: "
+msgstr "Kam: "
 
 #: gnome/gdialogs.c:61
 msgid "Copying from: "
@@ -404,7 +403,7 @@ msgid ""
 "folder.  Please select the action to be performed."
 msgstr ""
 "Nìkteré ze souborù, které zkou¹íte kopírovat ji¾ existují v cílovém \n"
-"adresíøi. Vyberte nìkterém z následujících akcí."
+"adresáøi. Vyberte nìkterém z následujících akcí."
 
 #: gnome/gdialogs.c:398
 msgid "Prompt me before overwriting any file."
@@ -542,7 +541,7 @@ msgstr "je "
 
 #: gnome/gdialogs.c:926
 msgid "done."
-msgstr "hotovo."
+msgstr "zpracován."
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
@@ -573,7 +572,7 @@ msgstr "_Pøesunout sem"
 
 #: gnome/gdnd.c:53
 msgid "_Copy here"
-msgstr "_Kopírovat zde"
+msgstr "_Zkopírovat sem"
 
 #: gnome/gdnd.c:54
 msgid "_Link here"
@@ -627,7 +626,7 @@ msgstr "_Vlastní"
 
 #: gnome/glayout.c:51 gnome/glayout.c:67
 msgid "Switch view to show user-defined statistics"
-msgstr "Pøepna zobrazení souborù na u¾ivatelem definovaný formát"
+msgstr "Pøepne zobrazení souborù na u¾ivatelem definovaný formát"
 
 #: gnome/glayout.c:57
 msgid "Icons"
@@ -733,7 +732,7 @@ msgstr "_Invertovat výbìr"
 
 #: gnome/glayout.c:398
 msgid "Reverses the list of tagged files"
-msgstr "Oznaèené soubory seøadí opaènì, ne¾ jsou"
+msgstr "Zru¹í oznaèení oznaèených souborù a oznaèí ty dosud neoznaèené."
 
 #: gnome/glayout.c:400 gtkedit/editwidget.c:1071 src/view.c:2038
 msgid "Search"
@@ -745,7 +744,7 @@ msgstr "Hledat soubor v aktuálním panelu"
 
 #: gnome/glayout.c:403 gnome/gscreen.c:1447
 msgid "_Rescan Directory"
-msgstr "_Obnovit zobrazení adresáøe"
+msgstr "_Aktualizovat zobrazení adresáøe"
 
 #: gnome/glayout.c:403
 msgid "Rescan the directory contents"
@@ -778,11 +777,11 @@ msgstr "Najít soubor na disku"
 #. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
 #: gnome/glayout.c:421
 msgid "_Edit mime types..."
-msgstr "_Editovat MIME typy"
+msgstr "_Upravit MIME typy"
 
 #: gnome/glayout.c:421
 msgid "Edits the MIME type bindings"
-msgstr "Editování informací o MIME typech"
+msgstr "Úprava informací o MIME typech"
 
 #: gnome/glayout.c:423
 msgid "_Run Command..."
@@ -798,7 +797,7 @@ msgstr "P_rovést pøíkaz v panelu..."
 
 #: gnome/glayout.c:425
 msgid "Run a command and put the results in a panel"
-msgstr "Spustit pøíaz a zobrazit výsledek v panelu"
+msgstr "Spustit pøíkaz a zobrazit výsledek v panelu"
 
 #: gnome/glayout.c:435
 msgid "_Background jobs..."
@@ -814,7 +813,7 @@ msgstr "Konec"
 
 #: gnome/glayout.c:438
 msgid "Terminates the file manager and the desktop"
-msgstr "Ukonèit správce souborù a správu Plochy"
+msgstr "Ukonèit správce souborù a správu ploch"
 
 #: gnome/glayout.c:453
 msgid "Rescan System Devices"
@@ -1432,7 +1431,7 @@ msgstr "Domù"
 
 #: gnome/gscreen.c:2345
 msgid "Go to your home directory"
-msgstr "Naèíst domácí adresáø"
+msgstr "Naète domácí adresáø"
 
 #: gnome/gscreen.c:2486
 msgid "Location:"
@@ -2018,7 +2017,7 @@ msgstr " &Ne "
 
 #: gtkedit/editcmd.c:2473 gtkedit/editcmd.c:2548
 msgid " Copy to clipboard "
-msgstr " Zkopíruj na clipboard "
+msgstr " Zkopírovat na clipboard "
 
 #: gtkedit/editcmd.c:2473 gtkedit/editcmd.c:2495 gtkedit/editcmd.c:2548
 #: gtkedit/editcmd.c:2561
@@ -2175,7 +2174,7 @@ msgstr "&Backspace pùjde pøes tabelátory"
 #. 11
 #: gtkedit/editoptions.c:106
 msgid "&Fake half tabs"
-msgstr ""
+msgstr "&Simulace 'polovièních' tabelátorù"
 
 #. 13
 #: gtkedit/editoptions.c:112
@@ -2288,7 +2287,7 @@ msgstr "&Nový           C-x k"
 
 #: gtkedit/editmenu.c:142
 msgid "copy to &File...     "
-msgstr "Zkopíruj do &Souboru... C-f"
+msgstr "Zkopírovat do &Souboru... C-f"
 
 #: gtkedit/editmenu.c:151 gtkedit/editmenu.c:168
 msgid "&Toggle Mark       F3"
@@ -2454,7 +2453,7 @@ msgstr "Vlo¾it soubor...\tF15"
 
 #: gtkedit/editmenu.c:400
 msgid "Copy to file...\tC-f"
-msgstr "Zkopíruj do souboru...\tC-f"
+msgstr "Zkopírovat do souboru...\tC-f"
 
 #. Tool hint
 #: gtkedit/editmenu.c:403
@@ -2483,7 +2482,7 @@ msgstr "Dal¹í zálo¾ka\tC-M-Down"
 
 #: gtkedit/editmenu.c:415
 msgid "Flush book marks"
-msgstr ""
+msgstr "Zamenout zálo¾ky"
 
 #: gtkedit/editmenu.c:417
 msgid "Toggle insert/overwrite\tIns"
@@ -2947,7 +2946,7 @@ msgstr "&Nastav oznaèené"
 
 #: src/chmod.c:118
 msgid "&Marked all"
-msgstr ""
+msgstr "&Nastavit v¹e na oznaèených souborech"
 
 #: src/chmod.c:152
 msgid "Permissions (Octal)"
@@ -3195,7 +3194,7 @@ msgstr " Link "
 
 #: src/cmd.c:1030 src/cmd.c:1169 src/file.c:1685
 msgid " to:"
-msgstr " k:"
+msgstr " na:"
 
 #: src/cmd.c:1041
 #, c-format
@@ -3262,7 +3261,7 @@ msgstr " Nastavení zdrojového smìrování pro soket "
 
 #: src/cmd.c:1332
 msgid " Enter host name to use as a source routing hop: "
-msgstr ""
+msgstr " Zadejte poèítaè pro 'source routing': "
 
 #: src/cmd.c:1339
 msgid " Host name "
@@ -3560,7 +3559,7 @@ msgstr ""
 
 #: src/file.c:619
 msgid " Reget failed, about to overwrite file "
-msgstr ""
+msgstr " Reget selhal, soubor je smazat a zacina se od zacatku "
 
 #: src/file.c:625
 #, c-format
@@ -3790,22 +3789,22 @@ msgstr "1Smazat"
 #: src/file.c:1676
 #, c-format
 msgid "%o %f \"%s\"%m"
-msgstr ""
+msgstr "%o %f \"%s\"%m"
 
 #: src/file.c:1677
 #, c-format
 msgid "%o %d %f%m"
-msgstr ""
+msgstr "%o %d %f%m"
 
 #: src/file.c:1679
 #, c-format
 msgid "%o %f \"%s\"%e"
-msgstr ""
+msgstr "%o %f \"%s\"%e"
 
 #: src/file.c:1680
 #, c-format
 msgid "%o %d %f%e"
-msgstr ""
+msgstr "%o %d %f%e"
 
 #: src/file.c:1684
 msgid "file"
@@ -3961,7 +3960,7 @@ msgstr "Pøepsat v¹echny soubory?"
 
 #: src/filegui.c:600
 msgid "&Reget"
-msgstr ""
+msgstr "navázat na pøeru¹ení"
 
 #: src/filegui.c:601
 msgid "ap&Pend"
@@ -4311,19 +4310,19 @@ msgstr " Hlavní skupiny "
 
 #: src/hotlist.c:1394
 msgid "Hotlist is now kept in file ~/"
-msgstr ""
+msgstr "Hotlist je ulo¾en v souboru ~/"
 
 #: src/hotlist.c:1396
 msgid "MC will load hotlist from ~/"
-msgstr ""
+msgstr "MC naète hotlist z ~/"
 
 #: src/hotlist.c:1398
 msgid "and then delete [Hotlist] section there"
-msgstr ""
+msgstr "a pak sma¾e sekci [Hotlist] odtud"
 
 #: src/hotlist.c:1400 src/hotlist.c:1419 src/hotlist.c:1442 src/hotlist.c:1467
 msgid " Hotlist Load "
-msgstr ""
+msgstr " Naètení Hotlistu "
 
 #: src/hotlist.c:1416 src/hotlist.c:1464
 msgid "MC was unable to write ~/"
@@ -4331,15 +4330,15 @@ msgstr "MC nemù¾e zapsat ~/"
 
 #: src/hotlist.c:1417
 msgid " file, your old hotlist entries were not deleted"
-msgstr ""
+msgstr " soubor a polo¾ky va¹eho hotlistu nebyly smazány"
 
 #: src/hotlist.c:1431
 msgid "You have ~/"
-msgstr "Máte ~/"
+msgstr "Máte soubor ~/"
 
 #: src/hotlist.c:1431
 msgid " file and [Hotlist] section in ~/"
-msgstr ""
+msgstr "a sekci [Hotlist] v ~/"
 
 #: src/hotlist.c:1432
 msgid "Your ~/"
@@ -4391,11 +4390,11 @@ msgstr "&Pøidat"
 
 #: src/hotlist.c:1455
 msgid " Entries from ~/"
-msgstr " Polo¾ky z ~/"
+msgstr " Polo¾ky ze souboru ~/"
 
 #: src/hotlist.c:1465
 msgid " file your old hotlist entries were not deleted"
-msgstr ""
+msgstr " a polo¾ky ze souboru nebyly smazány"
 
 #: src/info.c:83
 #, c-format
@@ -5001,7 +5000,7 @@ msgstr "Pøi ukonèení programu vytisknout pracovní adresáø"
 
 #: src/main.c:2704
 msgid "Resets soft keys on HP terminals"
-msgstr ""
+msgstr "Reset softkeys (kláves) na HP terminálech"
 
 #: src/main.c:2706
 msgid "To run on slow terminals"
@@ -5196,7 +5195,7 @@ msgstr "Jiný pøíkaz"
 
 #: src/panelize.c:260
 msgid " Add to external panelize "
-msgstr ""
+msgstr " Pøidat do externí panelizace "
 
 #: src/panelize.c:261
 msgid " Enter command label: "
@@ -5250,7 +5249,7 @@ msgstr "Práva"
 
 #: src/screen.c:404
 msgid "Nl"
-msgstr ""
+msgstr "#ln"
 
 #: src/screen.c:405
 msgid "Inode"
@@ -5271,7 +5270,7 @@ msgstr "  %s bytù v %d souborech (%s)"
 
 #: src/screen.c:1314
 msgid "Unknow tag on display format: "
-msgstr ""
+msgstr "Neznámá popiska ve formátu panelu: "
 
 #: src/screen.c:2091 src/screen.c:2131
 msgid " Do you really want to execute? "
@@ -5380,7 +5379,7 @@ msgstr "Zapomenout"
 
 #: src/tree.c:1026
 msgid "Rmdir"
-msgstr ""
+msgstr "Ma¾Adr"
 
 #: src/treestore.c:385
 #, c-format
@@ -5442,12 +5441,12 @@ msgstr "name_trunc: pøíli¹ velké"
 #. strftime() format string for recent dates
 #: src/util.c:598 src/util.c:623
 msgid "%b %e %H:%M"
-msgstr ""
+msgstr "%e.%b %H:%M"
 
 #. strftime() format string for old dates
 #: src/util.c:599 src/util.c:621
 msgid "%b %e  %Y"
-msgstr ""
+msgstr "%e.%b  %Y"
 
 #: src/utilunix.c:390
 msgid " Pipe failed "
@@ -5555,11 +5554,11 @@ msgstr " Zadej regulární výraz:"
 
 #: src/view.c:2028
 msgid "Ascii"
-msgstr ""
+msgstr "Ascii"
 
 #: src/view.c:2028
 msgid "Hex"
-msgstr ""
+msgstr "Hex"
 
 #: src/view.c:2029
 msgid "Line"
@@ -5571,11 +5570,11 @@ msgstr "RxHled"
 
 #: src/view.c:2033
 msgid "EdText"
-msgstr ""
+msgstr "EdText"
 
 #: src/view.c:2033
 msgid "EdHex"
-msgstr ""
+msgstr "EdHex"
 
 #: src/view.c:2035
 msgid "UnWrap"
@@ -5958,7 +5957,7 @@ msgstr "ftpfs: selhání"
 
 #: vfs/ftpfs.c:1519
 msgid "ftpfs: failed; nowhere to fallback to"
-msgstr ""
+msgstr "ftpfs: selhání; jinak to ji¾ nejde"
 
 #: vfs/ftpfs.c:1583
 #, c-format
