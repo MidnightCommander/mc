@@ -12,7 +12,7 @@ mc \- Entorno visual para sistemas tipo Unix.
 .\"SKIP_SECTION"
 .SH "SINTAXIS"
 .B mc
-[\-abcCdfhPstuUVx] [\-l registro] [dir1 [dir2]] [-v archivo]
+[\-abcCdfhPstuUVx] [\-l reg] [dir1 [dir2]] [-e [arch]] [-v arch]
 .\"NODE "DESCRIPTION"
 .SH "DESCRIPCIÓN"
 "Midnight Commander" (Comandante de Medianoche) es
@@ -45,6 +45,11 @@ Colores\&.
 .I "\-d"
 Deshabilita el soporte de ratón.
 .TP
+.I "\-e [arch]"
+Iniciar el editor interno. Si se indica un archivo, editarlo. Véase la
+página de manual de
+.BR "mcedit (1)" .
+.TP
 .I "\-f"
 Muestra las rutas de búsqueda compiladas para archivos de Midnight Commander.
 .TP
@@ -52,7 +57,7 @@ Muestra las rutas de búsqueda compiladas para archivos de Midnight Commander.
 Resetea softkeys a su valor por defecto según la base de datos de termcap/terminfo.
 Sólo útil en terminales HP cuando la función keys no funciona.
 .TP
-.I "-l registro"
+.I "\-l reg"
 Guarda el diálogo ftpfs con el servidor en el archivo.
 .TP
 .I "\-P"
@@ -86,8 +91,10 @@ Midnight Commander fue construido con soporte de shell concurrente).
 Habilita el uso de shell concurrente (sólo tiene sentido si este
 Midnight Commander fue construido con soporte de subshell opcional).
 .TP
-.I "\-v archivo"
-Utiliza el visor interno para ver el archivo.
+.I "\-v arch"
+Iniciar el visor interno para ver el archivo indicado. Véase la página
+de manual de
+.BR "mcview (1)" .
 .TP
 .I "\-V"
 Muestra la versión del programa.
@@ -3253,34 +3260,8 @@ en la línea de órdenes:
 .fi
 .\"NODE "AUTHORS"
 .SH "AUTORES"
-Miguel de Icaza (miguel@ximian.com), Janne Kukonlehto
-(jtklehto@paju.oulu.fi), Radek Doulik (rodo@ucw.cz), Fred Leeflang
-(fredl@nebula.ow.org), Dugan Porter (dugan@b011.eunet.es),
-Jakub Jelinek (jj@sunsite.mff.cuni.cz), Ching Hui
-(mr854307@cs.nthu.edu.tw), Andrej Borsenkow (borsenkow.msk@sni.de),
-Norbert Warmuth (nwarmuth@privat.circular.de), Mauricio Plaza
-(mok@roxanne.nuclecu.unam.mx), Paul Sheer (psheer@icon.co.za),
-Pavel Machek (pavel@ucw.cz) y Pavel Roskin (proski@gnu.org)
-son los desarrolladores de este paquete. Alessandro Rubini
-(rubini@ipvvis.unipv.it) ha sido especialmente útil depurando y mejorando
-el soporte de ratón del programa, John Davis (davis@space.mit.edu) también
-dejó su librería S-Lang disponible para nosotros bajo la GPL y respondió
-a mis preguntas sobre ella, y las siguientes personas han contribuido
-con código y la corrección de muchos errores (en orden alfabético):
-.PP
-Adam Tla/lka (atlka@sunrise.pg.gda.pl), alex@bcs.zp.ua (Alex
-I. Tkachenko), Antonio Palama, DOS port (palama@posso.dm.unipi.it), Erwin
-van Eijk (wabbit@corner.iaf.nl), Gerd Knorr (kraxel@cs.tu-berlin.de),
-Jean-Daniel Luiset (luiset@cih.hcuge.ch), Jon Stevens
-(root@dolphin.csudh.edu), Juan Francisco Grigera, Win32 port
-(j-grigera@usa.net), Juan Jose Ciarlante (jjciarla@raiz.uncu.edu.ar),
-Ilya Rybkin (rybkin@rouge.phys.lsu.edu), Marcelo Roccasalva
-(mfroccas@raiz.uncu.edu.ar), Massimo Fontanelli (MC8737@mclink.it),
-Sergey Ya. Korshunoff (root@seyko.msk.su), Thomas Pundt
-(pundtt@math.uni-muenster.de), Timur Bakeyev (timur@goff.comtat.kazan.su),
-Tomasz Cholewo (tjchol01@mecca.spd.louisville.edu), Torben Fjerdingstad
-(torben.fjerdingstad@uni-c.dk), Vadim Sinolitis (vvs@nsrd.npi.msu.su)
-y Wim Osterholt (wim@djo.wtm.tudelft.nl).
+Los autores y contribuciones se recogen en el archivo AUTHORS de la
+distribución.
 .\"NODE "BUGS"
 .SH "ERRORES"
 Véase el archivo "TODO" en la distribución para saber qué falta por hacer.
