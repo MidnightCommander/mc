@@ -117,12 +117,13 @@ void init_tmpdir(void);
 int mc_mkstemps(char **pname, const char *prefix, const char *suffix);
 
 enum {
-	ISGUNZIPABLE_GUNZIP,
-	ISGUNZIPABLE_BZIP,
-	ISGUNZIPABLE_BZIP2
+	COMPRESSION_NONE,
+	COMPRESSION_GZIP,
+	COMPRESSION_BZIP,
+	COMPRESSION_BZIP2
 };
 
-long int is_gunzipable (int fd, int *type);
+int get_compression_type (int fd);
 char *decompress_command (int type);
 char *decompress_extension (int type);
 void decompress_command_and_arg (int type, char **cmd, char **flags);

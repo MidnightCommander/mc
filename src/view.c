@@ -579,7 +579,9 @@ do_view_init (WView *view, char *_command, const char *_file, int start_line)
 	    goto finish;
 	}
 
-	if (view->viewer_magic_flag && (is_gunzipable (fd, &type)) != 0) {
+	type = get_compression_type (fd);
+
+	if (view->viewer_magic_flag && (type != COMPRESSION_NONE)) {
 	    g_free (view->filename);
 	    view->filename = g_strconcat (_file, decompress_extension(type), NULL);
 	}

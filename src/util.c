@@ -855,30 +855,20 @@ get_small_endian_long (int fd)
     return (buffer [3] << 24) | (buffer [2] << 16) | (buffer [1] << 8) | buffer [0];
 }
 
-/*
- * This constant makes the magic array on the stack be larger than
- * it needs because Linux when reading the second byte of /proc/locks
- * for example will write 2 bytes, even if we only asked for one
- */
-#define LINUX_HAS_PROBLEMS_WHEN_READING_PROC_LOCKS_ON_SOME_KERNELS 40
-
-/* This function returns 0 if the file is not in gunzip format  */
-/* or how much memory must be allocated to load the gziped file */
-/* Warning: this function moves the current file pointer */
-long int is_gunzipable (int fd, int *type)
+/* This function returns 0 if the file is not in not compressed by
+ * one of the supported compressors (gzip, bzip, bzip2).  Otherwise,
+ * the compression type is returned, as defined in util.h
+ * Warning: this function moves the current file pointer */
+int get_compression_type (int fd)
 {
-    unsigned char magic [4+LINUX_HAS_PROBLEMS_WHEN_READING_PROC_LOCKS_ON_SOME_KERNELS];
+    unsigned char magic [4];
     
-    *type = ISGUNZIPABLE_GUNZIP;
-	
     /* Read the magic signature */
     CHECK (mc_read (fd, &magic [0], 4));
 	
     /* GZIP_MAGIC and OLD_GZIP_MAGIC */
     if (magic [0] == 037 && (magic [1] == 0213 || magic [1] == 0236)){
-	/* Read the uncompressed size of the file */
-	mc_lseek (fd, -4, SEEK_END);
-	return get_small_endian_long (fd);
+	return COMPRESSION_GZIP;
     }
 
     /* PKZIP_MAGIC */
@@ -889,19 +879,16 @@ long int is_gunzipable (int fd, int *type)
 	
 	/* Gzip can handle only deflated (8) or stored (0) files */
 	if ((magic [0] != 8 && magic [0] != 0) || magic [1] != 0)
-	     return 0;
-        /* Read the uncompressed size of the first file in the archive */
-	mc_lseek (fd, 22, SEEK_SET);
-	return get_small_endian_long (fd);
+	     return COMPRESSION_NONE;
+
+	/* Compatible with gzip */
+	return COMPRESSION_GZIP;
     }
 
     /* PACK_MAGIC and LZH_MAGIC and compress magic */
     if (magic [0] == 037 && (magic [1] ==  036 || magic [1] == 0240 || magic [1] == 0235)){
-	 /* In case the file is packed, sco lzhed or compress_magic, the */
-	 /* program guesses that the uncompressed size is (at most) four */
-	 /* times the length of the compressed size, if the compression  */
-	 /* ratio is more than 4:1 the end of the file is not displayed  */
-	 return 4*mc_lseek (fd, 0, SEEK_END);
+        /* Compatible with gzip */
+	return COMPRESSION_GZIP;
     }
 
     /* BZIP and BZIP2 files */
@@ -909,11 +896,9 @@ long int is_gunzipable (int fd, int *type)
 	(magic [3] >= '1') && (magic [3] <= '9')){
             switch (magic[2]) {
                 case '0':
-                    *type = ISGUNZIPABLE_BZIP;
-                    return 5*mc_lseek (fd, 0, SEEK_END);
+                    return COMPRESSION_BZIP;
                 case 'h': 
-	            *type = ISGUNZIPABLE_BZIP2;
-	            return 5*mc_lseek (fd, 0, SEEK_END);
+	            return COMPRESSION_BZIP2;
             }
     }
     return 0;
@@ -923,9 +908,9 @@ char *
 decompress_extension (int type)
 {
 	switch (type){
-	case ISGUNZIPABLE_GUNZIP: return "#ugz";
-	case ISGUNZIPABLE_BZIP:   return "#ubz";
-	case ISGUNZIPABLE_BZIP2:  return "#ubz2";
+	case COMPRESSION_GZIP: return "#ugz";
+	case COMPRESSION_BZIP:   return "#ubz";
+	case COMPRESSION_BZIP2:  return "#ubz2";
 	}
 	/* Should never reach this place */
 	fprintf (stderr, "Fatal: decompress_extension called with an unknown argument\n");
@@ -936,13 +921,13 @@ char *
 decompress_command (int type)
 {
 	switch (type){
-	case ISGUNZIPABLE_GUNZIP:
+	case COMPRESSION_GZIP:
 		return "gzip -cdf";
 		
-	case ISGUNZIPABLE_BZIP:
+	case COMPRESSION_BZIP:
 		return "bzip -d";
 		
-	case ISGUNZIPABLE_BZIP2:
+	case COMPRESSION_BZIP2:
 		return "bzip2 -d";
 	}
 	/* Should never reach this place */
@@ -954,18 +939,18 @@ void
 decompress_command_and_arg (int type, char **cmd, char **flags)
 {
 	switch (type){
-	case ISGUNZIPABLE_GUNZIP:
+	case COMPRESSION_GZIP:
 		*cmd   = "gzip";
 		*flags = "-cdf";
 		return;
 
-	case ISGUNZIPABLE_BZIP:
+	case COMPRESSION_BZIP:
 		*cmd   = "bzip";
 		*flags = "-d";
 		return;
 
 		
-	case ISGUNZIPABLE_BZIP2:
+	case COMPRESSION_BZIP2:
 		*cmd   = "bzip2";
 		*flags = "-d";
 		return;

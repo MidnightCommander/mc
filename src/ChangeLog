@@ -1,8 +1,17 @@
+2002-07-02  Pavel Roskin  <proski@gnu.org>
+
+	* util.h: Rename compression types, add a type for uncompressed
+	files.
+	* util.c (is_gunzipable): Rename to ...
+	(get_compression_type): this.  Don't check archive length, since
+	it's unreliable if there is padding at the end of the file.
+	Eliminate prehistoric Linux workaround.  All callers adjusted.
+
 2002-07-01  Andrew V. Samoilov  <kai@cmail.ru>
 
-		* utilunix.c (close_error_pipe): Use "%s" in message () to 
-		prevent possible crash.
-		(check_error_pipe): Likewise.
+	* utilunix.c (close_error_pipe): Use "%s" in message () to
+	prevent possible crash.
+	(check_error_pipe): Likewise.
 
 2002-06-27  Pavel Roskin  <proski@gnu.org>
 
