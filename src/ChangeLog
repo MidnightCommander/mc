@@ -1,3 +1,13 @@
+2001-04-17  Pavel Roskin  <proski@gnu.org>
+
+	* subshell.c (init_raw_mode): New function, separated from ...
+	(invoke_subshell): ... this.
+	(init_subshell): Initialize raw_mode here instead of delayng it
+	until invoke_subshell(). Otherwise the current mode may have
+	been changed by edition_pre_exec(), which caused Ctrl-O to be
+	ignored on FreeBSD if a command has been run before switching
+	to the subshell.
+
 2001-04-06  Pavel Roskin  <proski@gnu.org>
 
 	* chmod.c (stat_file): Allow chmod and chown on special files.

@@ -87,6 +87,7 @@
 #include "subshell.h"
 
 /* Local functions */
+static void init_raw_mode (void);
 static int feed_subshell (int how, int fail_on_error);
 static void synchronize (void);
 static int pty_open_master (char *pty_name);
@@ -169,6 +170,11 @@ static volatile int subshell_alive, subshell_stopped;
    sanity if we have to exit abruptly */
 static struct termios shell_mode;
 
+/* This is a transparent mode for the terminal where MC is running on */
+/* It is used when the shell is active, so that the control signals */
+/* are delivered to the shell pty */
+static struct termios raw_mode;
+
 /* This counter indicates how many characters of prompt we have read */
 /* FIXME: try to figure out why this had to become global */
 static int prompt_pos;
@@ -220,6 +226,10 @@ void init_subshell (void)
 #endif
 
     /* }}} */
+
+    /* Take the current (hopefully pristine) tty mode and make */
+    /* a raw mode based on it now, before we do anything else with it */
+    init_raw_mode ();
 
     if (subshell_pty == 0)  /* First time through */
     {
@@ -533,21 +543,18 @@ void init_subshell (void)
 }
 
 /* }}} */
-/* {{{ invoke_subshell */
 
-int invoke_subshell (const char *command, int how, char **new_dir)
+static void init_raw_mode ()
 {
-    /* {{{ Fiddle with terminal modes */
+    static int initialized = 0;
 
-    static struct termios raw_mode = {0};
-    
     /* MC calls reset_shell_mode() in pre_exec() to set the real tty to its */
     /* original settings.  However, here we need to make this tty very raw, */
     /* so that all keyboard signals, XON/XOFF, etc. will get through to the */
     /* pty.  So, instead of changing the code for execute(), pre_exec(),    */
     /* etc, we just set up the modes we need here, before each command.     */
 
-    if (raw_mode.c_iflag == 0)  /* First time: initialise `raw_mode' */
+    if (initialized == 0)  /* First time: initialise `raw_mode' */
     {
 	tcgetattr (STDOUT_FILENO, &raw_mode);
 	raw_mode.c_lflag &= ~ICANON;  /* Disable line-editing chars, etc.   */
@@ -558,7 +565,15 @@ int invoke_subshell (const char *command, int how, char **new_dir)
 	raw_mode.c_oflag &= ~OPOST;   /* Don't postprocess output	    */
 	raw_mode.c_cc[VTIME] = 0;     /* IE: wait forever, and return as    */
 	raw_mode.c_cc[VMIN] = 1;      /* soon as a character is available   */
+	initialized = 1;
     }
+}
+
+/* {{{ invoke_subshell */
+
+int invoke_subshell (const char *command, int how, char **new_dir)
+{
+    /* {{{ Make the MC terminal transparent */
 
     tcsetattr (STDOUT_FILENO, TCSANOW, &raw_mode);
 
