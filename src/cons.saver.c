@@ -94,7 +94,7 @@ static void tty_getsize ()
     }
 }
 
-inline void tty_cursormove(int y, int x)
+static inline void tty_cursormove(int y, int x)
 {
     char buffer [128];
 
@@ -103,7 +103,7 @@ inline void tty_cursormove(int y, int x)
     dwrite (console_fd, buffer);
 }
 
-int check_file (char *filename, int check_console, char **msg)
+static int check_file (char *filename, int check_console, char **msg)
 {
     int fd;
     struct stat stat_buf;
@@ -160,7 +160,7 @@ int check_file (char *filename, int check_console, char **msg)
 /* Because the name of the tty is supplied by the user and this
    can be a setuid program a lot of checks has to done to avoid
    creating a security hole */
-char *detect_console (void)
+static char *detect_console (void)
 {
     char *msg;
     int  xlen;
@@ -198,7 +198,7 @@ char *detect_console (void)
     return NULL;
 }
 
-void save_console (void)
+static void save_console (void)
 {
     int i;
 
@@ -249,7 +249,7 @@ void save_console (void)
     }
 }
 
-void restore_console (void)
+static void restore_console (void)
 {
     if (!console_flag)
 	return;
@@ -274,7 +274,7 @@ void restore_console (void)
     }
 }
 
-void send_contents ()
+static void send_contents ()
 {
     unsigned char begin_line=0, end_line=0;
     int index, x, y;

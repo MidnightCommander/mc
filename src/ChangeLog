@@ -1,3 +1,8 @@
+2001-06-07  Pavel Roskin  <proski@gnu.org>
+
+	* cons.saver.c: Make all functions except main() static.
+	* mfmt.c (omain): Remove, it's unused.
+
 2001-06-06  Pavel Roskin  <proski@gnu.org>
 
 	* main.c (done_mc) [HAVE_X]: Don't use xterm_flag.

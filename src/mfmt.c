@@ -15,43 +15,6 @@ enum states {
     seen_m
 };
 
-void
-omain (void)
-{
-    enum states state = header;
-    int prev = 0;
-    int c;
-    
-    while ((c = getchar ()) != EOF){
-	if (c != '\n'){
-	    switch (state){ 
-	    case header:
-		putchar ('_');
-		putchar ('\b');
-		break;
-		
-	    case definition:
-		putchar (c);
-		putchar ('\b');
-		break;
-	    default:
-		break;	/* inhibit compiler warnings */
-	    }
-	}
-	putchar (c);
-	if ((state != plain) && c == ':')
-	    state = definition;
-
-	if (c == '\n' && prev == '\n')
-	    state = plain;
-
-	if (state == definition && c == '\n')
-	    state = header;
-	
-	prev = c;
-    }
-}
-
 int
 main (void)
 {
