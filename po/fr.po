@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc VERSION\n"
-"POT-Creation-Date: 1998-05-31 21:16+0200\n"
+"POT-Creation-Date: 1998-06-07 19:36+0200\n"
 "PO-Revision-Date: 1998-03-27 01:22+0100\n"
 "Last-Translator: Vincent Renardias <vincent@waw.com>\n"
 "Language-Team: Vincent Renardias <vincent@waw.com>\n"
@@ -19,11 +19,12 @@ msgstr ""
 msgid " Could not set source routing (%s)"
 msgstr " Impossible d'utiliser le routage par la source (%s)"
 
-#: vfs/ftpfs.c:2778 vfs/ftpfs.c:2793
+#: vfs/ftpfs.c:2783 vfs/ftpfs.c:2798
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
-msgstr "Le fichier ~/.netrc n'a pas un mode correct.\n"
+msgstr ""
+"Le fichier ~/.netrc n'a pas un mode correct.\n"
 "Enlevez le mot de passe ou corrigez le mode."
 
 #: vfs/mcfs.c:156
@@ -36,7 +37,7 @@ msgstr " Le serveur ne supporte pas cette version "
 
 #. Warning message with a query to continue or cancel the operation
 #: edit/editcmd.c:413 edit/editcmd.c:722 edit/editcmd.c:734 edit/editcmd.c:835
-#: edit/editcmd.c:918 gnome/gdesktop.c:1333 src/ext.c:295 src/help.c:320
+#: edit/editcmd.c:918 gnome/gdesktop.c:1349 src/ext.c:295 src/help.c:320
 #: src/main.c:671 src/subshell.c:700 src/subshell.c:726 src/utilunix.c:380
 #: src/utilunix.c:384 src/utilunix.c:450 vfs/mcfs.c:172
 msgid " Warning "
@@ -399,15 +400,15 @@ msgstr " Le fichier a été modifié, Sauver et quitter? "
 msgid "Cancel quit"
 msgstr "Annuler quitter"
 
-#: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:625
-#: gnome/gdesktop.c:1190 src/cmd.c:248 src/file.c:2365 src/file.c:2691
+#: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:628
+#: gnome/gdesktop.c:1204 src/cmd.c:248 src/file.c:2365 src/file.c:2691
 #: src/file.c:2881 src/hotlist.c:1027 src/main.c:826 src/screen.c:2040
 #: src/subshell.c:701 src/subshell.c:727 src/tree.c:1195 src/view.c:410
 msgid "&Yes"
 msgstr "&Oui"
 
-#: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:625
-#: gnome/gdesktop.c:1190 src/cmd.c:248 src/file.c:2365 src/file.c:2690
+#: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:628
+#: gnome/gdesktop.c:1204 src/cmd.c:248 src/file.c:2365 src/file.c:2690
 #: src/file.c:2881 src/hotlist.c:1027 src/main.c:826 src/screen.c:2040
 #: src/subshell.c:701 src/subshell.c:727 src/tree.c:1195 src/view.c:410
 msgid "&No"
@@ -678,13 +679,13 @@ msgstr "&Général...  "
 msgid "&Save mode..."
 msgstr "Mode &Sauvegarde..."
 
-#: edit/editmenu.c:243 edit/editmenu.c:252 src/main.c:1296
+#: edit/editmenu.c:243 edit/editmenu.c:252 src/main.c:1312
 msgid "&Layout..."
 msgstr "Présentation..."
 
 #. The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t'
 #: edit/editmenu.c:262 edit/editmenu.c:271 edit/editmenu.c:388 src/chmod.c:174
-#: src/chown.c:131 src/main.c:1327
+#: src/chown.c:131 src/main.c:1343
 msgid " File "
 msgstr " Fichier "
 
@@ -696,11 +697,11 @@ msgstr " Editer "
 msgid " Sear/Repl "
 msgstr " Cherch/Rempl "
 
-#: edit/editmenu.c:265 edit/editmenu.c:274 edit/editmenu.c:438 src/main.c:1328
+#: edit/editmenu.c:265 edit/editmenu.c:274 edit/editmenu.c:438 src/main.c:1344
 msgid " Command "
 msgstr " Commande "
 
-#: edit/editmenu.c:266 edit/editmenu.c:275 src/main.c:1329
+#: edit/editmenu.c:266 edit/editmenu.c:275 src/main.c:1345
 msgid " Options "
 msgstr " Options "
 
@@ -863,7 +864,7 @@ msgstr "Emulation de touches"
 msgid "Error initialising editor.\n"
 msgstr "Erreur lors de l'initialisation de l'éditeur.\n"
 
-#: edit/editwidget.c:992 gnome/glayout.c:350 src/help.c:812 src/main.c:1658
+#: edit/editwidget.c:992 gnome/glayout.c:350 src/help.c:812 src/main.c:1674
 #: src/screen.c:2256 src/screen.c:2290 src/tree.c:1451 src/view.c:1987
 msgid "Help"
 msgstr "Aide"
@@ -889,16 +890,16 @@ msgstr "Déplacer"
 msgid "Search"
 msgstr "Chercher"
 
-#: edit/editwidget.c:999 gnome/gdesktop.c:624 gnome/gscreen.c:545
+#: edit/editwidget.c:999 gnome/gdesktop.c:627 gnome/gscreen.c:545
 #: src/screen.c:2263 src/screen.c:2297
 msgid "Delete"
 msgstr "Effacer"
 
-#: edit/editwidget.c:1001 src/main.c:1660
+#: edit/editwidget.c:1001 src/main.c:1676
 msgid "PullDn"
 msgstr "Menu"
 
-#: edit/editwidget.c:1002 gnome/gview.c:286 src/help.c:824 src/main.c:1661
+#: edit/editwidget.c:1002 gnome/gview.c:286 src/help.c:824 src/main.c:1677
 #: src/view.c:1989 src/view.c:2009
 msgid "Quit"
 msgstr "Quitter"
@@ -2346,7 +2347,7 @@ msgstr "Nom du Fichier:"
 msgid "Content: "
 msgstr "Contenu: "
 
-#: src/find.c:158 src/main.c:1192 src/main.c:1213
+#: src/find.c:158 src/main.c:1208 src/main.c:1229
 msgid "&Tree"
 msgstr "&Arbre"
 
@@ -2880,7 +2881,7 @@ msgstr "Appuyez sur une touche..."
 msgid " The shell is already running a command "
 msgstr ""
 
-#: gnome/gcmd.c:92 gnome/gdesktop.c:1188 src/main.c:824 src/screen.c:2038
+#: gnome/gcmd.c:92 gnome/gdesktop.c:1202 src/main.c:824 src/screen.c:2038
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
 
@@ -2888,228 +2889,227 @@ msgstr " Midnight Commander "
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr " Voulez-vous vraiment quitter Midnight Commander? "
 
-#: src/main.c:1189 src/main.c:1210
+#: src/main.c:1205 src/main.c:1226
 msgid "&Listing mode..."
 msgstr "Mode de &Listage..."
 
-#: src/main.c:1190 src/main.c:1211
+#: src/main.c:1206 src/main.c:1227
 msgid "&Quick view     C-x q"
 msgstr ""
 
-#: src/main.c:1191 src/main.c:1212
+#: src/main.c:1207 src/main.c:1228
 msgid "&Info           C-x i"
 msgstr "&Info           C-x i"
 
-#: src/main.c:1194 src/main.c:1215
+#: src/main.c:1210 src/main.c:1231
 msgid "&Sort order..."
 msgstr "Ordre de tri..."
 
-#: src/main.c:1196 src/main.c:1217
+#: src/main.c:1212 src/main.c:1233
 msgid "&Filter..."
 msgstr "&Filtre..."
 
-#: src/main.c:1199 src/main.c:1220
+#: src/main.c:1215 src/main.c:1236
 msgid "&Network link..."
 msgstr "Lien Réseau..."
 
-#: src/main.c:1200 src/main.c:1221
+#: src/main.c:1216 src/main.c:1237
 msgid "FT&P link..."
 msgstr "Lien FT&P..."
 
-#: src/main.c:1204 src/main.c:1225
+#: src/main.c:1220 src/main.c:1241
 msgid "&Drive...       M-d"
 msgstr "Lecteur...     M-d"
 
-#: src/main.c:1206 src/main.c:1227
+#: src/main.c:1222 src/main.c:1243
 msgid "&Rescan         C-r"
 msgstr ""
 
-#: src/main.c:1231
+#: src/main.c:1247
 msgid "&User menu          F2"
 msgstr "Menu &Utilisateur   F2"
 
-#: src/main.c:1232
+#: src/main.c:1248
 msgid "&View               F3"
 msgstr "&Vue                F3"
 
-#: src/main.c:1233
+#: src/main.c:1249
 msgid "&Filtered view     M-!"
 msgstr "Vue &Filtrée       M-!"
 
-#: src/main.c:1234
+#: src/main.c:1250
 msgid "&Edit               F4"
 msgstr "&Editer             F4"
 
-#: src/main.c:1235
+#: src/main.c:1251
 msgid "&Copy               F5"
 msgstr "&Copier             F5"
 
-#: src/main.c:1236
+#: src/main.c:1252
 msgid "c&Hmod           C-x c"
 msgstr "c&Hmod           C-x c"
 
-#: src/main.c:1238
+#: src/main.c:1254
 msgid "&Link            C-x l"
 msgstr "&Lien            C-x l"
 
-#: src/main.c:1239
+#: src/main.c:1255
 msgid "&SymLink         C-x s"
 msgstr "Lien&Symb        C-x s"
 
-#: src/main.c:1240
+#: src/main.c:1256
 msgid "edit s&Ymlink  C-x C-s"
 msgstr "editer liens&Ymb C-x C-s"
 
-#: src/main.c:1241
+#: src/main.c:1257
 msgid "ch&Own           C-x o"
 msgstr "ch&Own           C-x o"
 
-#: src/main.c:1242
+#: src/main.c:1258
 msgid "&Advanced chown       "
 msgstr "chown &Avancé         "
 
-#: src/main.c:1244
+#: src/main.c:1260
 msgid "&Rename/Move        F6"
 msgstr "&Renommer/Déplacer  F6"
 
-#: src/main.c:1245
+#: src/main.c:1261
 msgid "&Mkdir              F7"
 msgstr "&Mkdir              F7"
 
-#: src/main.c:1246
+#: src/main.c:1262
 msgid "&Delete             F8"
 msgstr "&Supprimer          F8"
 
-#: src/main.c:1247
+#: src/main.c:1263
 msgid "&Quick cd          M-c"
 msgstr ""
 
-#: src/main.c:1249
+#: src/main.c:1265
 msgid "select &Group      M-+"
 msgstr "sélectionner &Groupe M-+"
 
-#: src/main.c:1250
+#: src/main.c:1266
 msgid "u&Nselect group    M-\\"
 msgstr "désélectio&Nner groupe M-\\"
 
-#: src/main.c:1251
+#: src/main.c:1267
 msgid "reverse selec&Tion M-*"
 msgstr "sélec&Tion inversée M-*"
 
-#: src/main.c:1253
-#, fuzzy
+#: src/main.c:1269
 msgid "e&Xit              F10"
-msgstr "Quitter         F10"
+msgstr "Q&uitter         F10"
 
 #. I know, I'm lazy, but the tree widget when it's not running
 #. * as a panel still has some problems, I have not yet finished
 #. * the WTree widget port, sorry.
 #.
-#: src/main.c:1262
+#: src/main.c:1278
 msgid "&Directory tree"
-msgstr ""
+msgstr "&Arborescence des répertoires"
 
-#: src/main.c:1263
+#: src/main.c:1279
 msgid "&Find file            M-?"
-msgstr ""
+msgstr "Rechercher &Fichier   M-?"
 
-#: src/main.c:1265
+#: src/main.c:1281
 msgid "s&Wap panels          C-u"
-msgstr ""
+msgstr "&Echanger panels      C-u"
 
-#: src/main.c:1266
+#: src/main.c:1282
 msgid "switch &Panels on/off C-o"
 msgstr ""
 
-#: src/main.c:1268
+#: src/main.c:1284
 msgid "&Compare directories  C-x d"
 msgstr "&Comparer répertoires C-x d"
 
-#: src/main.c:1269
+#: src/main.c:1285
 msgid "e&Xternal panelize    C-x !"
 msgstr ""
 
-#: src/main.c:1271
+#: src/main.c:1287
 msgid "show directory s&Izes"
 msgstr "aff&Icher la taille des répertoires"
 
-#: src/main.c:1274
+#: src/main.c:1290
 msgid "command &History"
 msgstr "&Historique des commandes "
 
-#: src/main.c:1275
+#: src/main.c:1291
 msgid "di&Rectory hotlist    C-\\"
 msgstr "&Répertoire hotlist   C-\\"
 
-#: src/main.c:1277
+#: src/main.c:1293
 msgid "&Active VFS list      C-x a"
 msgstr ""
 
-#: src/main.c:1280
+#: src/main.c:1296
 msgid "&Background jobs      C-x j"
 msgstr "Taches de fond        C-x j"
 
-#: src/main.c:1284
+#: src/main.c:1300
 msgid "&Undelete files (ext2fs only)"
 msgstr ""
 
-#: src/main.c:1287
+#: src/main.c:1303
 msgid "&Listing format edit"
 msgstr ""
 
-#: src/main.c:1289
+#: src/main.c:1305
 msgid "&Extension file edit"
 msgstr ""
 
-#: src/main.c:1290
+#: src/main.c:1306
 msgid "&Menu file edit"
 msgstr ""
 
-#: src/main.c:1295
+#: src/main.c:1311
 msgid "&Configuration..."
 msgstr "&Configuration..."
 
-#: src/main.c:1297
+#: src/main.c:1313
 msgid "c&Onfirmation..."
 msgstr "c&Onfirmation..."
 
-#: src/main.c:1298
+#: src/main.c:1314
 msgid "&Display bits..."
 msgstr ""
 
-#: src/main.c:1300
+#: src/main.c:1316
 msgid "learn &Keys..."
 msgstr ""
 
-#: src/main.c:1303
+#: src/main.c:1319
 msgid "&Virtual FS..."
 msgstr "SF &Virtuel..."
 
-#: src/main.c:1306
+#: src/main.c:1322
 msgid "&Save setup"
 msgstr "enregi&Strer la configuration"
 
-#: src/main.c:1322 src/main.c:1324
+#: src/main.c:1338 src/main.c:1340
 msgid " Left "
 msgstr " Gauche "
 
-#: src/main.c:1324
+#: src/main.c:1340
 msgid " Above "
 msgstr " Au dessus "
 
-#: src/main.c:1332 src/main.c:1334
+#: src/main.c:1348 src/main.c:1350
 msgid " Right "
 msgstr " Droite "
 
-#: src/main.c:1334
+#: src/main.c:1350
 msgid " Below "
 msgstr " En dessous "
 
-#: src/main.c:1395
+#: src/main.c:1411
 msgid " Information "
 msgstr " Information "
 
-#: src/main.c:1396
+#: src/main.c:1412
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -3117,152 +3117,152 @@ msgid ""
 " the details.                                           "
 msgstr ""
 
-#: src/main.c:1659 src/screen.c:2257 src/screen.c:2291
+#: src/main.c:1675 src/screen.c:2257 src/screen.c:2291
 msgid "Menu"
 msgstr "Menu"
 
-#: src/main.c:1870
+#: src/main.c:1886
 msgid "Thank you for using GNU Midnight Commander"
 msgstr ""
 
-#: src/main.c:2232
+#: src/main.c:2248
 #, c-format
 msgid "with mouse support on xterm%s.\n"
 msgstr ""
 
-#: src/main.c:2233
+#: src/main.c:2249
 msgid " and the Linux console"
 msgstr ""
 
-#: src/main.c:2326
+#: src/main.c:2342
 msgid "The TERM environment variable is unset!\n"
 msgstr ""
 
-#: src/main.c:2578
+#: src/main.c:2594
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr ""
 
-#: src/main.c:2583
+#: src/main.c:2599
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
 
-#: src/main.c:2644
+#: src/main.c:2660
 msgid "[DEVEL-ONLY: Debug the background code]"
 msgstr ""
 
-#: src/main.c:2647
+#: src/main.c:2663
 msgid "Create command file to set default directory upon exit."
 msgstr ""
 
-#: src/main.c:2649
+#: src/main.c:2665
 msgid "Force color mode."
 msgstr ""
 
-#: src/main.c:2650
+#: src/main.c:2666
 msgid "Specify colors (use --help-colors to get a list)."
 msgstr ""
 
-#: src/main.c:2652
+#: src/main.c:2668
 msgid "[DEVEL-ONLY: Debug the subshell."
 msgstr ""
 
-#: src/main.c:2654
+#: src/main.c:2670
 msgid "Startup the internal editor."
 msgstr ""
 
-#: src/main.c:2655
+#: src/main.c:2671
 msgid "Shows this help message."
 msgstr ""
 
-#: src/main.c:2656
+#: src/main.c:2672
 msgid "Help on how to specify colors."
 msgstr ""
 
-#: src/main.c:2658
+#: src/main.c:2674
 msgid "Log ftpfs commands to the file."
 msgstr ""
 
-#: src/main.c:2660
+#: src/main.c:2676
 msgid "Prints out the configured paths."
 msgstr ""
 
-#: src/main.c:2662
+#: src/main.c:2678
 msgid "Force black and white display."
 msgstr ""
 
-#: src/main.c:2663
+#: src/main.c:2679
 msgid "Disable mouse support."
 msgstr ""
 
-#: src/main.c:2665
+#: src/main.c:2681
 msgid "Force the concurrent subshell mode"
 msgstr ""
 
-#: src/main.c:2666
+#: src/main.c:2682
 msgid "Disable the concurrent subshell mode."
 msgstr ""
 
-#: src/main.c:2667
+#: src/main.c:2683
 msgid "Force subshell execution."
 msgstr ""
 
-#: src/main.c:2669
+#: src/main.c:2685
 msgid "At exit, print the last working directory."
 msgstr ""
 
-#: src/main.c:2670
+#: src/main.c:2686
 msgid "Reset softkeys (HP terminals only) to their terminfo/termcap default."
 msgstr ""
 
-#: src/main.c:2671
+#: src/main.c:2687
 msgid "Disables verbose operation (for slow terminals)."
 msgstr ""
 
-#: src/main.c:2673
+#: src/main.c:2689
 msgid "Use simple symbols for line drawing."
 msgstr ""
 
-#: src/main.c:2678
+#: src/main.c:2694
 msgid "Activate support for the TERMCAP variable."
 msgstr ""
 
-#: src/main.c:2680
+#: src/main.c:2696
 msgid "Report versionand configuration options."
 msgstr ""
 
-#: src/main.c:2681
+#: src/main.c:2697
 msgid "Start up into the viewer mode."
 msgstr ""
 
-#: src/main.c:2682
+#: src/main.c:2698
 msgid "Force xterm mouse support and screen save/restore"
 msgstr ""
 
-#: src/main.c:2683
+#: src/main.c:2699
 msgid "Geometry for the window"
 msgstr ""
 
-#: src/main.c:2684
+#: src/main.c:2700
 msgid "No windows opened at startup"
 msgstr ""
 
-#: src/main.c:2761
+#: src/main.c:2777
 msgid "[this dir] [other dir]"
 msgstr ""
 
-#: src/main.c:3003
+#: src/main.c:3019
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 
-#: src/main.c:3091
+#: src/main.c:3107
 msgid " Notice "
 msgstr " Note "
 
-#: src/main.c:3092
+#: src/main.c:3108
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -3346,9 +3346,8 @@ msgid "show &Backup files"
 msgstr ""
 
 #: src/option.c:102
-#, fuzzy
 msgid "&Never"
-msgstr "Jamais"
+msgstr "&Jamais"
 
 #: src/option.c:103
 msgid "on dumb &Terminals"
@@ -3356,16 +3355,16 @@ msgstr ""
 
 #: src/option.c:104
 msgid "alwa&Ys"
-msgstr ""
+msgstr "&Toujours"
 
 #. Similar code is in layout.c (init_layout())
 #: src/option.c:152
 msgid " Configure options "
-msgstr ""
+msgstr " Configurer les options "
 
 #: src/option.c:153
 msgid " Panel options "
-msgstr ""
+msgstr " Options du panel "
 
 #: src/option.c:154
 msgid " Pause after run... "
@@ -3373,7 +3372,7 @@ msgstr ""
 
 #: src/option.c:206
 msgid "Configure options"
-msgstr "Options de configuration"
+msgstr "Configurer les options"
 
 #: src/option.c:243
 msgid "Pause after run..."
@@ -3381,11 +3380,11 @@ msgstr ""
 
 #: src/option.c:245
 msgid "Panel options"
-msgstr ""
+msgstr "Options du panel"
 
 #: src/panelize.c:90
 msgid "&Add new"
-msgstr ""
+msgstr "&Ajouter un nouveau"
 
 #: src/panelize.c:102
 msgid " External panelize "
@@ -3498,7 +3497,7 @@ msgstr ""
 msgid "Unknow tag on display format: "
 msgstr ""
 
-#: gnome/gdesktop.c:1189 src/screen.c:2039
+#: gnome/gdesktop.c:1203 src/screen.c:2039
 msgid " Do you really want to execute? "
 msgstr ""
 
@@ -3718,12 +3717,12 @@ msgstr "Fichier: %s "
 #: gnome/gview.c:119 src/view.c:712
 #, c-format
 msgid "Offset 0x%08x"
-msgstr ""
+msgstr "Décalage 0x%08x"
 
 #: gnome/gview.c:121 src/view.c:714
 #, c-format
 msgid "Col %d"
-msgstr ""
+msgstr "Col %d"
 
 #: gnome/gview.c:125 src/view.c:718
 #, c-format
@@ -3747,7 +3746,8 @@ msgstr " Expression régulière invalide "
 msgid ""
 " The current line number is %d.\n"
 " Enter the new line number:"
-msgstr ""
+msgstr " Le numéro de la ligne courante est %d.\n"
+" Entrez le nouveau numéro de ligne:"
 
 #: src/view.c:1885
 msgid " Enter regexp:"
@@ -3759,11 +3759,11 @@ msgstr " Entrez le texte à rechercher:"
 
 #: src/view.c:1990
 msgid "Ascii"
-msgstr ""
+msgstr "Ascii"
 
 #: gnome/gview.c:308 src/view.c:1990
 msgid "Hex"
-msgstr ""
+msgstr "Héxa"
 
 #: src/view.c:1991
 msgid "Line"
@@ -3813,83 +3813,83 @@ msgstr "Format"
 #. to define f0 as well. Also, it makes Learn keys a bunch of problems :(
 #: src/win.c:216
 msgid "Function key 1"
-msgstr ""
+msgstr "Touche de Fonction 1"
 
 #: src/win.c:217
 msgid "Function key 2"
-msgstr ""
+msgstr "Touche de Fonction 2"
 
 #: src/win.c:218
 msgid "Function key 3"
-msgstr ""
+msgstr "Touche de Fonction 3"
 
 #: src/win.c:219
 msgid "Function key 4"
-msgstr ""
+msgstr "Touche de Fonction 4"
 
 #: src/win.c:220
 msgid "Function key 5"
-msgstr ""
+msgstr "Touche de Fonction 5"
 
 #: src/win.c:221
 msgid "Function key 6"
-msgstr ""
+msgstr "Touche de Fonction 6"
 
 #: src/win.c:222
 msgid "Function key 7"
-msgstr ""
+msgstr "Touche de Fonction 7"
 
 #: src/win.c:223
 msgid "Function key 8"
-msgstr ""
+msgstr "Touche de Fonction 8"
 
 #: src/win.c:224
 msgid "Function key 9"
-msgstr ""
+msgstr "Touche de Fonction 9"
 
 #: src/win.c:225
 msgid "Function key 10"
-msgstr ""
+msgstr "Touche de Fonction 10"
 
 #: src/win.c:226
 msgid "Function key 11"
-msgstr ""
+msgstr "Touche de Fonction 11"
 
 #: src/win.c:227
 msgid "Function key 12"
-msgstr ""
+msgstr "Touche de Fonction 12"
 
 #: src/win.c:228
 msgid "Function key 13"
-msgstr ""
+msgstr "Touche de Fonction 13"
 
 #: src/win.c:229
 msgid "Function key 14"
-msgstr ""
+msgstr "Touche de Fonction 14"
 
 #: src/win.c:230
 msgid "Function key 15"
-msgstr ""
+msgstr "Touche de Fonction 15"
 
 #: src/win.c:231
 msgid "Function key 16"
-msgstr ""
+msgstr "Touche de Fonction 16"
 
 #: src/win.c:232
 msgid "Function key 17"
-msgstr ""
+msgstr "Touche de Fonction 17"
 
 #: src/win.c:233
 msgid "Function key 18"
-msgstr ""
+msgstr "Touche de Fonction 18"
 
 #: src/win.c:234
 msgid "Function key 19"
-msgstr ""
+msgstr "Touche de Fonction 19"
 
 #: src/win.c:235
 msgid "Function key 20"
-msgstr ""
+msgstr "Touche de Fonction 20"
 
 #: src/win.c:236
 msgid "Backspace key"
@@ -3929,27 +3929,27 @@ msgstr ""
 
 #: src/win.c:245
 msgid "Insert key"
-msgstr ""
+msgstr "Touche Insertion"
 
 #: src/win.c:246
 msgid "Delete key"
-msgstr ""
+msgstr "Touche Effacement"
 
 #: src/win.c:247
 msgid "Completion/M-tab"
-msgstr ""
+msgstr "Complétion/M-tab"
 
 #: src/win.c:248
 msgid "+ on keypad"
-msgstr ""
+msgstr "+ sur pavé numérique"
 
 #: src/win.c:249
 msgid "- on keypad"
-msgstr ""
+msgstr "- sur pavé numérique"
 
 #: src/win.c:250
 msgid "* on keypad"
-msgstr ""
+msgstr "* sur pavé numérique"
 
 #. From here on, these won't be shown in Learn keys (no space)
 #: src/win.c:252
@@ -3986,23 +3986,23 @@ msgstr ""
 
 #: src/win.c:260
 msgid "Insert on keypad"
-msgstr ""
+msgstr "'Inser' sur pavé numérique"
 
 #: src/win.c:261
 msgid "Delete on keypad"
-msgstr ""
+msgstr "'Suppr' sur pavé numérique"
 
 #: src/win.c:262
 msgid "Enter on keypad"
-msgstr ""
+msgstr "'Entrée' sur pavé numérique"
 
 #: src/win.c:263
 msgid "Slash on keypad"
-msgstr ""
+msgstr "'/' sur pavé numérique"
 
 #: src/win.c:264
 msgid "NumLock on keypad"
-msgstr ""
+msgstr "NumLock sur pavé numérique"
 
 #: src/wtools.c:609
 msgid "Password:"
@@ -4018,7 +4018,7 @@ msgstr "Ok"
 
 #: gnome/gcmd.c:42
 msgid " There is no other panel to compare contents to "
-msgstr ""
+msgstr " Il n'y a pas d'autre panel pour faire une comparaison "
 
 #: gnome/gcmd.c:77
 msgid "GNU Midnight Commander"
@@ -4033,19 +4033,19 @@ msgstr "L'édition GNOME du gestionnaire de fichiers Midnight Comander."
 msgid "Link"
 msgstr "Lien"
 
-#: gnome/gdesktop.c:623
+#: gnome/gdesktop.c:626
 msgid "Do you want to delete "
 msgstr "Voulez-vous vraiment effacer "
 
-#: gnome/gdesktop.c:1199
+#: gnome/gdesktop.c:1213
 msgid "Open with..."
 msgstr "Ouvrir avec..."
 
-#: gnome/gdesktop.c:1200 gnome/gscreen.c:466
+#: gnome/gdesktop.c:1214 gnome/gscreen.c:466
 msgid "Enter extra arguments:"
 msgstr "Entrez les arguments supplémentaires:"
 
-#: gnome/gdesktop.c:1333
+#: gnome/gdesktop.c:1349
 #, c-format
 msgid " Could not open %s directory"
 msgstr " Impossible d'ouvrir le répertoire %s"
@@ -4116,7 +4116,7 @@ msgstr ""
 
 #: gnome/glayout.c:279
 msgid "Selects a group of files"
-msgstr ""
+msgstr "Sélectionner un groupe de fichiers"
 
 #: gnome/glayout.c:280
 msgid "Unselect group by pattern..."
@@ -4128,7 +4128,7 @@ msgstr "Désélectionner un groupe de fichiers marqués"
 
 #: gnome/glayout.c:281
 msgid "Reverse selection"
-msgstr ""
+msgstr "Inverser la sélection"
 
 #: gnome/glayout.c:281
 msgid "Reverses the list of tagged files"
@@ -4140,7 +4140,7 @@ msgstr "Fermer"
 
 #: gnome/glayout.c:283
 msgid "Close this panel"
-msgstr ""
+msgstr "Fermer de panel"
 
 #: gnome/glayout.c:284
 msgid "Exit"
@@ -4176,7 +4176,7 @@ msgstr "Définir un filtre pour les fichiers"
 
 #: gnome/glayout.c:293
 msgid "Rescan the directory contents"
-msgstr ""
+msgstr "Raffraichir le contenu du répertoire"
 
 #: gnome/glayout.c:296
 msgid "Network link..."
@@ -4200,7 +4200,7 @@ msgstr "Confirmation..."
 
 #: gnome/glayout.c:303
 msgid "Confirmation settings"
-msgstr ""
+msgstr "Paramétres de confirmation"
 
 #: gnome/glayout.c:304
 msgid "Options..."
@@ -4236,15 +4236,15 @@ msgstr "Hotlist..."
 
 #: gnome/glayout.c:316
 msgid "List of favorite sites"
-msgstr ""
+msgstr "Liste des sites favoris"
 
 #: gnome/glayout.c:317
 msgid "Compare panels..."
-msgstr ""
+msgstr "Comparer panels..."
 
 #: gnome/glayout.c:317
 msgid "Compare panel contents"
-msgstr ""
+msgstr "Comparer le contenu des panels"
 
 #: gnome/glayout.c:318
 msgid "External panelize..."
@@ -4256,7 +4256,7 @@ msgstr "Liste des VFS actifs..."
 
 #: gnome/glayout.c:320
 msgid "List of active virtual file systems"
-msgstr ""
+msgstr "Liste des systèmes de fichiers virtuels actifs"
 
 #: gnome/glayout.c:323
 msgid "Undelete files (ext2fs only)..."
@@ -4276,11 +4276,11 @@ msgstr "Liste des opérations en tache de fond"
 
 #: gnome/glayout.c:332
 msgid "Arrange icons"
-msgstr ""
+msgstr "Ré-organiser les icones"
 
 #: gnome/glayout.c:332
 msgid "Arranges the icons on the desktop"
-msgstr ""
+msgstr "Ré-organiser les icones sur le bureau"
 
 #: gnome/glayout.c:338
 msgid "About"
@@ -4586,23 +4586,3 @@ msgstr "quitter"
 msgid "abort"
 msgstr "arréter"
 
-#~ msgid "New panel"
-#~ msgstr "Nouveau panneau"
-
-#~ msgid "Rename/Move"
-#~ msgstr "Renommer/Déplacer"
-
-#~ msgid "Panel"
-#~ msgstr "Panneau"
-
-#~ msgid "User:"
-#~ msgstr "Utilisateur:"
-
-#~ msgid "Listing Mode..."
-#~ msgstr "Mode de listage..."
-
-#~ msgid "with other formats"
-#~ msgstr "avec d'autres formats"
-
-#~ msgid "Tree"
-#~ msgstr "Arbre"
