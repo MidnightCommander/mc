@@ -1867,9 +1867,10 @@ do_search (WPanel *panel, int c_code)
     int found;
 
     l = strlen (panel->search_buffer);
-    if (l && (c_code == KEY_BACKSPACE))
-	panel->search_buffer[--l] = 0;
-    else {
+    if (c_code == KEY_BACKSPACE) {
+	if (l)
+	    panel->search_buffer[--l] = '\0';
+    } else {
 	if (c_code && l < sizeof (panel->search_buffer)) {
 	    panel->search_buffer[l] = c_code;
 	    panel->search_buffer[l + 1] = 0;

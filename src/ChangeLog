@@ -1,3 +1,10 @@
+2004-11-17  Roland Illig  <roland.illig@gmx.de>
+
+	* screen.c (do_search): Ignore the backspace key on empty
+	quick-search.
+
+	From Egmont Koblinger <egmont * uhulinux hu>
+
 2004-11-15  Leonard den Ottolander  <leonard * den ottolander nl>
 
 	* file.c: Code cleanup (mostly indentation).
