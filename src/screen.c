@@ -2441,3 +2441,10 @@ panel_event (Gpm_Event *event, WPanel *panel)
 }
 #endif
 
+void
+panel_update_marks (WPanel *panel)
+{
+#ifdef PORT_HAS_UPDATE_MARKS
+	x_panel_update_marks (panel);
+#endif
+}

@@ -240,6 +240,7 @@ void x_unselect_item (WPanel *panel);
 sortfn *get_sort_fn (char *name);
 int panel_callback (Dlg_head *h, WPanel *panel, int msg, int par);
 void update_one_panel_widget (WPanel *panel, int force_update, char *current_file);
+void panel_update_marks (WPanel *panel);
 
 void directory_history_next (WPanel * panel);
 void directory_history_prev (WPanel * panel);

@@ -934,6 +934,8 @@ directory_history_add (WPanel * panel, char *s)
     }
     panel->dir_history = panel->dir_history->next;
     panel->dir_history->text = strdup (s);
+    
+    panel_update_marks (panel);
 }
 
 int do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type);
@@ -945,6 +947,7 @@ directory_history_next (WPanel * panel)
 	return;
     if (do_panel_cd (panel, panel->dir_history->next->text, cd_exact))
 	panel->dir_history = panel->dir_history->next;
+    panel_update_marks (panel);
 }
 
 void
@@ -954,6 +957,7 @@ directory_history_prev (WPanel * panel)
 	return;
     if (do_panel_cd (panel, panel->dir_history->prev->text, cd_exact))
 	panel->dir_history = panel->dir_history->prev;
+    panel_update_marks (panel);
 }
 
 void

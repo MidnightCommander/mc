@@ -101,7 +101,7 @@ panel_file_list_set_row_colors (GtkCList *cl, int row, int color_pair)
 }
 
 void
-panel_update_marks (WPanel *panel)
+x_panel_update_marks (WPanel *panel)
 {
 	gtk_widget_set_sensitive (panel->fwd_b, panel->dir_history->next ? 1 : 0);
 	gtk_widget_set_sensitive (panel->back_b, panel->dir_history->prev ? 1 : 0);
@@ -155,7 +155,6 @@ x_fill_panel (WPanel *panel)
 	select_item (panel);
 	gtk_clist_thaw (GTK_CLIST (cl));
 	free (texts);
-	panel_update_marks (panel);
 }
 
 static void

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Date: 1998-04-08 23:41:26-0500\n"
+"Date: 1998-04-09 00:04:49-0500\n"
 "From: Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>\n"
 "Content-Type: text/plain; charset=\n"
 "Xgettext-Options: --default-domain=mc --directory=.. --add-comments --keyword=_ --keyword=N_ --files-from=./POTFILES.in\n"
@@ -573,11 +573,11 @@ msgstr ""
 msgid "&Save mode..."
 msgstr ""
 
-#: edit/editmenu.c:243 edit/editmenu.c:252 src/main.c:1299
+#: edit/editmenu.c:243 edit/editmenu.c:252 src/main.c:1303
 msgid "&Layout..."
 msgstr ""
 
-#: edit/editmenu.c:262 edit/editmenu.c:271 edit/editmenu.c:388 src/chmod.c:174 src/chown.c:131 src/main.c:1330
+#: edit/editmenu.c:262 edit/editmenu.c:271 edit/editmenu.c:388 src/chmod.c:174 src/chown.c:131 src/main.c:1334
 msgid " File "
 msgstr ""
 
@@ -589,11 +589,11 @@ msgstr ""
 msgid " Sear/Repl "
 msgstr ""
 
-#: edit/editmenu.c:265 edit/editmenu.c:274 edit/editmenu.c:438 src/main.c:1331
+#: edit/editmenu.c:265 edit/editmenu.c:274 edit/editmenu.c:438 src/main.c:1335
 msgid " Command "
 msgstr ""
 
-#: edit/editmenu.c:266 edit/editmenu.c:275 src/main.c:1332
+#: edit/editmenu.c:266 edit/editmenu.c:275 src/main.c:1336
 msgid " Options "
 msgstr ""
 
@@ -753,7 +753,7 @@ msgstr ""
 msgid "Error initialising editor.\n"
 msgstr ""
 
-#: edit/editwidget.c:910 gnome/glayout.c:263 src/help.c:812 src/main.c:1661 src/screen.c:2187 src/screen.c:2221 src/tree.c:1451 src/view.c:1978
+#: edit/editwidget.c:910 gnome/glayout.c:263 src/help.c:812 src/main.c:1665 src/screen.c:2187 src/screen.c:2221 src/tree.c:1451 src/view.c:1978
 msgid "Help"
 msgstr ""
 
@@ -781,11 +781,11 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: edit/editwidget.c:919 src/main.c:1663
+#: edit/editwidget.c:919 src/main.c:1667
 msgid "PullDn"
 msgstr ""
 
-#: edit/editwidget.c:920 gnome/gview.c:280 src/help.c:824 src/main.c:1664 src/view.c:1980 src/view.c:2000
+#: edit/editwidget.c:920 gnome/gview.c:280 src/help.c:824 src/main.c:1668 src/view.c:1980 src/view.c:2000
 msgid "Quit"
 msgstr ""
 
@@ -2018,7 +2018,7 @@ msgstr ""
 msgid "Content: "
 msgstr ""
 
-#: src/find.c:158 src/main.c:1195 src/main.c:1216
+#: src/find.c:158 src/main.c:1199 src/main.c:1220
 msgid "&Tree"
 msgstr ""
 
@@ -2533,115 +2533,116 @@ msgstr ""
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr ""
 
-#: src/main.c:1192 src/main.c:1213
+#. NOTICE: hotkeys specified here are overriden in menubar_paint_idx (alex)
+#: src/main.c:1196 src/main.c:1217
 msgid "&Listing mode..."
 msgstr ""
 
-#: src/main.c:1193 src/main.c:1214
+#: src/main.c:1197 src/main.c:1218
 msgid "&Quick view     C-x q"
 msgstr ""
 
-#: src/main.c:1194 src/main.c:1215
+#: src/main.c:1198 src/main.c:1219
 msgid "&Info           C-x i"
 msgstr ""
 
-#: src/main.c:1197 src/main.c:1218
+#: src/main.c:1201 src/main.c:1222
 msgid "&Sort order..."
 msgstr ""
 
-#: src/main.c:1199 src/main.c:1220
+#: src/main.c:1203 src/main.c:1224
 msgid "&Filter..."
 msgstr ""
 
-#: src/main.c:1202 src/main.c:1223
+#: src/main.c:1206 src/main.c:1227
 msgid "&Network link..."
 msgstr ""
 
-#: src/main.c:1203 src/main.c:1224
+#: src/main.c:1207 src/main.c:1228
 msgid "FT&P link..."
 msgstr ""
 
-#: src/main.c:1207 src/main.c:1228
+#: src/main.c:1211 src/main.c:1232
 msgid "&Drive...       M-d"
 msgstr ""
 
-#: src/main.c:1209 src/main.c:1230
+#: src/main.c:1213 src/main.c:1234
 msgid "&Rescan         C-r"
 msgstr ""
 
-#: src/main.c:1234
+#: src/main.c:1238
 msgid "&User menu          F2"
 msgstr ""
 
-#: src/main.c:1235
+#: src/main.c:1239
 msgid "&View               F3"
 msgstr ""
 
-#: src/main.c:1236
+#: src/main.c:1240
 msgid "&Filtered view     M-!"
 msgstr ""
 
-#: src/main.c:1237
+#: src/main.c:1241
 msgid "&Edit               F4"
 msgstr ""
 
-#: src/main.c:1238
+#: src/main.c:1242
 msgid "&Copy               F5"
 msgstr ""
 
-#: src/main.c:1239
+#: src/main.c:1243
 msgid "c&Hmod           C-x c"
 msgstr ""
 
-#: src/main.c:1241
+#: src/main.c:1245
 msgid "&Link            C-x l"
 msgstr ""
 
-#: src/main.c:1242
+#: src/main.c:1246
 msgid "&SymLink         C-x s"
 msgstr ""
 
-#: src/main.c:1243
+#: src/main.c:1247
 msgid "edit s&Ymlink  C-x C-s"
 msgstr ""
 
-#: src/main.c:1244
+#: src/main.c:1248
 msgid "ch&Own           C-x o"
 msgstr ""
 
-#: src/main.c:1245
+#: src/main.c:1249
 msgid "&Advanced chown       "
 msgstr ""
 
-#: src/main.c:1247
+#: src/main.c:1251
 msgid "&Rename/Move        F6"
 msgstr ""
 
-#: src/main.c:1248
+#: src/main.c:1252
 msgid "&Mkdir              F7"
 msgstr ""
 
-#: src/main.c:1249
+#: src/main.c:1253
 msgid "&Delete             F8"
 msgstr ""
 
-#: src/main.c:1250
+#: src/main.c:1254
 msgid "&Quick cd          M-c"
 msgstr ""
 
-#: src/main.c:1252
+#: src/main.c:1256
 msgid "select &Group      M-+"
 msgstr ""
 
-#: src/main.c:1253
+#: src/main.c:1257
 msgid "u&Nselect group    M-\\"
 msgstr ""
 
-#: src/main.c:1254
+#: src/main.c:1258
 msgid "reverse selec&Tion M-*"
 msgstr ""
 
-#: src/main.c:1256
+#: src/main.c:1260
 msgid "e&Xit              F10"
 msgstr ""
 
@@ -2649,111 +2650,112 @@ msgstr ""
 #. * as a panel still has some problems, I have not yet finished
 #. * the WTree widget port, sorry.
 #.
-#: src/main.c:1265
+#: src/main.c:1269
 msgid "&Directory tree"
 msgstr ""
 
-#: src/main.c:1266
+#: src/main.c:1270
 msgid "&Find file            M-?"
 msgstr ""
 
-#: src/main.c:1268
+#: src/main.c:1272
 msgid "s&Wap panels          C-u"
 msgstr ""
 
-#: src/main.c:1269
+#: src/main.c:1273
 msgid "switch &Panels on/off C-o"
 msgstr ""
 
-#: src/main.c:1271
+#: src/main.c:1275
 msgid "&Compare directories  C-x d"
 msgstr ""
 
-#: src/main.c:1272
+#: src/main.c:1276
 msgid "e&Xternal panelize    C-x !"
 msgstr ""
 
-#: src/main.c:1274
+#: src/main.c:1278
 msgid "show directory s&Izes"
 msgstr ""
 
-#: src/main.c:1277
+#: src/main.c:1281
 msgid "command &History"
 msgstr ""
 
-#: src/main.c:1278
+#: src/main.c:1282
 msgid "di&Rectory hotlist    C-\\"
 msgstr ""
 
-#: src/main.c:1280
+#: src/main.c:1284
 msgid "&Active VFS list      C-x a"
 msgstr ""
 
-#: src/main.c:1283
+#: src/main.c:1287
 msgid "&Background jobs      C-x j"
 msgstr ""
 
-#: src/main.c:1287
+#: src/main.c:1291
 msgid "&Undelete files (ext2fs only)"
 msgstr ""
 
-#: src/main.c:1290
+#: src/main.c:1294
 msgid "&Listing format edit"
 msgstr ""
 
-#: src/main.c:1292
+#: src/main.c:1296
 msgid "&Extension file edit"
 msgstr ""
 
-#: src/main.c:1293
+#: src/main.c:1297
 msgid "&Menu file edit"
 msgstr ""
 
-#: src/main.c:1298
+#. Must keep in sync with the constants in menu_cmd
+#: src/main.c:1302
 msgid "&Configuration..."
 msgstr ""
 
-#: src/main.c:1300
+#: src/main.c:1304
 msgid "c&Onfirmation..."
 msgstr ""
 
-#: src/main.c:1301
+#: src/main.c:1305
 msgid "&Display bits..."
 msgstr ""
 
-#: src/main.c:1303
+#: src/main.c:1307
 msgid "learn &Keys..."
 msgstr ""
 
-#: src/main.c:1306
+#: src/main.c:1310
 msgid "&Virtual FS..."
 msgstr ""
 
-#: src/main.c:1309
+#: src/main.c:1313
 msgid "&Save setup"
 msgstr ""
 
-#: src/main.c:1325 src/main.c:1327
+#: src/main.c:1329 src/main.c:1331
 msgid " Left "
 msgstr ""
 
-#: src/main.c:1327
+#: src/main.c:1331
 msgid " Above "
 msgstr ""
 
-#: src/main.c:1335 src/main.c:1337
+#: src/main.c:1339 src/main.c:1341
 msgid " Right "
 msgstr ""
 
-#: src/main.c:1337
+#: src/main.c:1341
 msgid " Below "
 msgstr ""
 
-#: src/main.c:1398
+#: src/main.c:1402
 msgid " Information "
 msgstr ""
 
-#: src/main.c:1399
+#: src/main.c:1403
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -2761,141 +2763,141 @@ msgid ""
 " the details.                                           "
 msgstr ""
 
-#: src/main.c:1662 src/screen.c:2188 src/screen.c:2222
+#: src/main.c:1666 src/screen.c:2188 src/screen.c:2222
 msgid "Menu"
 msgstr ""
 
-#: src/main.c:1876
+#: src/main.c:1880
 msgid "Thank you for using GNU Midnight Commander"
 msgstr ""
 
-#: src/main.c:2222
+#: src/main.c:2226
 msgid "with mouse support on xterm%s.\n"
 msgstr ""
 
-#: src/main.c:2223
+#: src/main.c:2227
 msgid " and the Linux console"
 msgstr ""
 
-#: src/main.c:2314
+#: src/main.c:2318
 msgid "The TERM environment variable is unset!\n"
 msgstr ""
 
-#: src/main.c:2561
+#: src/main.c:2565
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr ""
 
-#: src/main.c:2566
+#: src/main.c:2570
 msgid "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
 
-#: src/main.c:2629
+#: src/main.c:2633
 msgid "[DEVEL-ONLY: Debug the background code]"
 msgstr ""
 
-#: src/main.c:2632
+#: src/main.c:2636
 msgid "Create command file to set default directory upon exit."
 msgstr ""
 
-#: src/main.c:2634
+#: src/main.c:2638
 msgid "Force color mode."
 msgstr ""
 
-#: src/main.c:2635
+#: src/main.c:2639
 msgid "Specify colors (use --help-colors to get a list)."
 msgstr ""
 
-#: src/main.c:2637
+#: src/main.c:2641
 msgid "[DEVEL-ONLY: Debug the subshell."
 msgstr ""
 
-#: src/main.c:2639
+#: src/main.c:2643
 msgid "Startup the internal editor."
 msgstr ""
 
-#: src/main.c:2640
+#: src/main.c:2644
 msgid "Shows this help message."
 msgstr ""
 
-#: src/main.c:2641
+#: src/main.c:2645
 msgid "Help on how to specify colors."
 msgstr ""
 
-#: src/main.c:2643
+#: src/main.c:2647
 msgid "Log ftpfs commands to the file."
 msgstr ""
 
-#: src/main.c:2645
+#: src/main.c:2649
 msgid "Prints out the configured paths."
 msgstr ""
 
-#: src/main.c:2647
+#: src/main.c:2651
 msgid "Force black and white display."
 msgstr ""
 
-#: src/main.c:2648
+#: src/main.c:2652
 msgid "Disable mouse support."
 msgstr ""
 
-#: src/main.c:2650
+#: src/main.c:2654
 msgid "Force the concurrent subshell mode"
 msgstr ""
 
-#: src/main.c:2651
+#: src/main.c:2655
 msgid "Disable the concurrent subshell mode."
 msgstr ""
 
-#: src/main.c:2652
+#: src/main.c:2656
 msgid "Force subshell execution."
 msgstr ""
 
-#: src/main.c:2654
+#: src/main.c:2658
 msgid "At exit, print the last working directory."
 msgstr ""
 
-#: src/main.c:2655
+#: src/main.c:2659
 msgid "Reset softkeys (HP terminals only) to their terminfo/termcap default."
 msgstr ""
 
-#: src/main.c:2656
+#: src/main.c:2660
 msgid "Disables verbose operation (for slow terminals)."
 msgstr ""
 
-#: src/main.c:2658
+#: src/main.c:2662
 msgid "Use simple symbols for line drawing."
 msgstr ""
 
-#: src/main.c:2663
+#: src/main.c:2667
 msgid "Activate support for the TERMCAP variable."
 msgstr ""
 
-#: src/main.c:2665
+#: src/main.c:2669
 msgid "Report versionand configuration options."
 msgstr ""
 
-#: src/main.c:2666
+#: src/main.c:2670
 msgid "Start up into the viewer mode."
 msgstr ""
 
-#: src/main.c:2667
+#: src/main.c:2671
 msgid "Force xterm mouse support and screen save/restore"
 msgstr ""
 
-#: src/main.c:2736
+#: src/main.c:2740
 msgid "[this dir] [other dir]"
 msgstr ""
 
-#: src/main.c:2977
+#: src/main.c:2981
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 
-#: src/main.c:3065
+#: src/main.c:3069
 msgid " Notice "
 msgstr ""
 
-#: src/main.c:3066
+#: src/main.c:3070
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -3116,7 +3118,7 @@ msgstr ""
 msgid "  %s bytes in %d file%s"
 msgstr ""
 
-#: gnome/gscreen.c:1155 src/screen.c:661
+#: gnome/gscreen.c:1154 src/screen.c:661
 msgid "<readlink failed>"
 msgstr ""
 
@@ -3128,7 +3130,7 @@ msgstr ""
 msgid " Do you really want to execute? "
 msgstr ""
 
-#: gnome/glayout.c:197 gnome/gscreen.c:361 src/screen.c:2189 src/screen.c:2223
+#: gnome/glayout.c:197 gnome/gscreen.c:360 src/screen.c:2189 src/screen.c:2223
 msgid "View"
 msgstr ""
 
@@ -3647,7 +3649,7 @@ msgstr ""
 #. We connect_object_after to the items so that we can destroy
 #. * the menu at the proper time.
 #.
-#: gnome/gdesktop.c:712 gnome/gscreen.c:357
+#: gnome/gdesktop.c:712 gnome/gscreen.c:356
 msgid "Properties"
 msgstr ""
 
@@ -3655,7 +3657,7 @@ msgstr ""
 msgid "Open with..."
 msgstr ""
 
-#: gnome/gdesktop.c:832 gnome/gscreen.c:313
+#: gnome/gdesktop.c:832 gnome/gscreen.c:312
 msgid "Enter extra arguments:"
 msgstr ""
 
@@ -3952,123 +3954,123 @@ msgstr ""
 msgid "Select icon"
 msgstr ""
 
-#: gnome/gscreen.c:312
+#: gnome/gscreen.c:311
 msgid " Open with..."
 msgstr ""
 
-#: gnome/gscreen.c:359
+#: gnome/gscreen.c:358
 msgid "Open"
 msgstr ""
 
-#: gnome/gscreen.c:360
+#: gnome/gscreen.c:359
 msgid "Open with"
 msgstr ""
 
-#: gnome/gscreen.c:362
+#: gnome/gscreen.c:361
 msgid "View unfiltered"
 msgstr ""
 
-#: gnome/gscreen.c:364
+#: gnome/gscreen.c:363
 msgid "Link..."
 msgstr ""
 
-#: gnome/gscreen.c:365
+#: gnome/gscreen.c:364
 msgid "Symlink..."
 msgstr ""
 
-#: gnome/gscreen.c:366
+#: gnome/gscreen.c:365
 msgid "Edit symlink..."
 msgstr ""
 
-#: gnome/gscreen.c:374
+#: gnome/gscreen.c:373
 msgid "Copy..."
 msgstr ""
 
-#: gnome/gscreen.c:375
+#: gnome/gscreen.c:374
 msgid "Rename/move.."
 msgstr ""
 
-#: gnome/gscreen.c:376
+#: gnome/gscreen.c:375
 msgid "Delete..."
 msgstr ""
 
-#: gnome/gscreen.c:963
+#: gnome/gscreen.c:962
 msgid "All files"
 msgstr ""
 
-#: gnome/gscreen.c:965
+#: gnome/gscreen.c:964
 msgid "Archives and compressed files"
 msgstr ""
 
-#: gnome/gscreen.c:967
+#: gnome/gscreen.c:966
 msgid "RPM/DEB files"
 msgstr ""
 
-#: gnome/gscreen.c:969
+#: gnome/gscreen.c:968
 msgid "Text/Document files"
 msgstr ""
 
-#: gnome/gscreen.c:971
+#: gnome/gscreen.c:970
 msgid "HTML and SGML files"
 msgstr ""
 
-#: gnome/gscreen.c:973
+#: gnome/gscreen.c:972
 msgid "Postscript and PDF files"
 msgstr ""
 
-#: gnome/gscreen.c:975
+#: gnome/gscreen.c:974
 msgid "Spreadsheet files"
 msgstr ""
 
-#: gnome/gscreen.c:977
+#: gnome/gscreen.c:976
 msgid "Image files"
 msgstr ""
 
-#: gnome/gscreen.c:980
+#: gnome/gscreen.c:979
 msgid "Video/animation files"
 msgstr ""
 
-#: gnome/gscreen.c:982
+#: gnome/gscreen.c:981
 msgid "Audio files"
 msgstr ""
 
-#: gnome/gscreen.c:984
+#: gnome/gscreen.c:983
 msgid "C program files"
 msgstr ""
 
-#: gnome/gscreen.c:986
+#: gnome/gscreen.c:985
 msgid "C++ program files"
 msgstr ""
 
-#: gnome/gscreen.c:988
+#: gnome/gscreen.c:987
 msgid "Objective-C program files"
 msgstr ""
 
-#: gnome/gscreen.c:990
+#: gnome/gscreen.c:989
 msgid "Scheme program files"
 msgstr ""
 
-#: gnome/gscreen.c:992
+#: gnome/gscreen.c:991
 msgid "Assembler program files"
 msgstr ""
 
-#: gnome/gscreen.c:994
+#: gnome/gscreen.c:993
 msgid "Misc. program files"
 msgstr ""
 
-#: gnome/gscreen.c:996
+#: gnome/gscreen.c:995
 msgid "Font files"
 msgstr ""
 
-#: gnome/gscreen.c:1121
+#: gnome/gscreen.c:1120
 msgid "Search: "
 msgstr ""
 
-#: gnome/gscreen.c:1131
+#: gnome/gscreen.c:1130
 msgid " %s bytes in %d file%s"
 msgstr ""
 
-#: gnome/gscreen.c:1201
+#: gnome/gscreen.c:1200
 msgid "Filter"
 msgstr ""
 
