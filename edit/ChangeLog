@@ -1,5 +1,11 @@
 2001-09-07  Pavel Roskin  <proski@gnu.org>
 
+	* bookmark.c: Eliminate all code disabled for the text edition.
+	* edit-widget.h: Likewise.
+	* editcmd.c: Likewise.
+	* editdraw.c: Likewise.
+	* editoptions.c: Likewise.
+
 	* edit.h: Eliminate all code disabled for the text edition.
 	Reorder and simplify includes.
 	* edit.c: Likewise.

@@ -23,9 +23,6 @@
 
 #include <config.h>
 #include "edit.h"
-#if defined (HAVE_MAD) && ! defined (MIDNIGHT) && ! defined (GTK)
-#include "mad.h"
-#endif
 
 /* note, if there is more than one bookmark on a line, then they are
    appended after each other and the last one is always the one found
@@ -141,9 +138,6 @@ void book_mark_insert (WEdit * edit, int line, int c)
     if (p->next)
 	p->next->prev = q;
     p->next = q;
-#if !defined (GTK) && !defined (MIDNIGHT)
-    render_scrollbar (edit->widget->vert_scrollbar);
-#endif
 }
 
 /* remove a bookmark if there is one at this line matching this colour - c of -1 clear all */
@@ -174,10 +168,6 @@ int book_mark_clear (WEdit * edit, int line, int c)
 	free (edit->book_mark);
 	edit->book_mark = 0;
     }
-#if !defined (GTK) && !defined (MIDNIGHT)
-    if (rend)
-	render_scrollbar (edit->widget->vert_scrollbar);
-#endif
     return r;
 }
 
@@ -205,10 +195,6 @@ void book_mark_flush (WEdit * edit, int c)
 	free (edit->book_mark);
 	edit->book_mark = 0;
     }
-#if !defined (GTK) && !defined (MIDNIGHT)
-    if (rend)
-	render_scrollbar (edit->widget->vert_scrollbar);
-#endif
 }
 
 /* shift down bookmarks after this line */
@@ -223,10 +209,6 @@ void book_mark_inc (WEdit * edit, int line)
 	    rend = 1;
 	}
     }
-#if !defined (GTK) && !defined (MIDNIGHT)
-    if (rend)
-	render_scrollbar (edit->widget->vert_scrollbar);
-#endif
 }
 
 /* shift up bookmarks after this line */
@@ -241,11 +223,4 @@ void book_mark_dec (WEdit * edit, int line)
 	    rend = 1;
 	}
     }
-#if !defined (GTK) && !defined (MIDNIGHT)
-    if (rend)
-	render_scrollbar (edit->widget->vert_scrollbar);
-#endif
 }
-
-
-

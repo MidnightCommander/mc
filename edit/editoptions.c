@@ -30,7 +30,7 @@
 #define USE_INTERNAL_EDIT 1
 #endif
 
-#include "../src/main.h"	/* extern int option_this_and_that ... */
+#include "src/main.h"	/* extern int option_this_and_that ... */
 
 char *key_emu_str[] =
 {N_("Intuitive"), N_("Emacs"), NULL};
@@ -81,13 +81,13 @@ void edit_options_dialog (void)
 	{quick_input, OPT_DLG_W / 2 + 24, OPT_DLG_W, OPT_DLG_H - 5, OPT_DLG_H, "", OPT_DLG_W / 2 - 4 - 24, 0,
 	 0, 0, "edit-tab-spacing"},
 /*6 */
-#if !defined(MIDNIGHT) || defined(HAVE_SYNTAXH)
+#ifdef HAVE_SYNTAXH
 #define OA 1
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 7, OPT_DLG_H, N_("synta&X highlighting"), 8, 0,
 	 0, 0, NULL},
 #else
 #define OA 0
-#endif
+#endif /* !HAVE_SYNTAXH */
 /*7 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 8, OPT_DLG_H, N_("confir&M before saving"), 6, 0,
 	 0, 0, NULL},
@@ -170,10 +170,6 @@ void edit_options_dialog (void)
 		option_tab_spacing = atoi (q);
 		if (option_tab_spacing < 0)
 		    option_tab_spacing = 2;
-#if 0
-		/* Only allow even numbers */
-		option_tab_spacing += option_tab_spacing & 1;
-#endif
 		free (q);
 	    }
 	    option_syntax_highlighting = *quick_widgets[5 + OA].result;

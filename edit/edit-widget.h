@@ -37,22 +37,12 @@ struct _book_mark {
 };
 
 struct editor_widget {
-#ifdef MIDNIGHT
     Widget widget;
-#elif defined(GTK)
-    GtkEdit *widget;
-#else
-    struct cool_widget *widget;
-#endif
 #define from_here num_widget_lines
     int num_widget_lines;
     int num_widget_columns;
 
-#ifdef MIDNIGHT
     int have_frame;
-#else
-    int stopped;
-#endif
 
     char *filename;		/* Name of the file */
     char *dir;			/* current directory */
@@ -80,11 +70,9 @@ struct editor_widget {
     unsigned char modified;	/*has the file been changed?: 1 if char inserted or
 				   deleted at all since last load or save */
     unsigned char screen_modified;	/* has the file been changed since the last screen draw? */
-#if defined(MIDNIGHT) || defined(GTK)
     int delete_file;			/* has the file been created in edit_load_file? Delete
 			           it at end of editing when it hasn't been modified 
 				   or saved */
-#endif				   
     unsigned char highlight;
     long prev_col;		/*recent column position of the cursor - used when moving
 				   up or down past lines that are shorter than the current line */
@@ -141,4 +129,4 @@ typedef struct editor_widget WEdit;
 #define ERROR_FILE         "/.cedit/cooledit.error"
 #define TEMP_FILE          "/.cedit/cooledit.temp"
 
-#endif
+#endif /* !__EDIT_WIDGET_H */
