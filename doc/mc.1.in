@@ -1675,13 +1675,10 @@ through a link will move you to the current directory's real parent
 and not to the directory where the link was present.
 .PP
 .I Safe delete.
-If this option is enabled, deleting files
-unintentionally will get more difficult. The default
-selection in the confirmation dialog changes from the "Yes"
-to the "No" button and deletion of non empty directories has to be
-confirmed by entering the word
-.IR yes .
-By default this option is disabled.
+If this option is enabled, deleting files unintentionally becomes more
+difficult.  The default selection in the confirmation dialogs for
+deletion changes from "Yes" to "No".  This option is disabled by
+default.
 .\"NODE "    Layout"
 .SH "    Layout"
 The layout dialog gives you a possibility to change the general layout
