@@ -190,7 +190,7 @@ static void cli_setup_packet(struct cli_state *cli)
 	}
 }
 
-
+#if 0
 /*****************************************************************************
  Convert a character pointer in a cli_call_api() response to a form we can use.
  This function contains code to prevent core dumps if the server returns 
@@ -213,7 +213,7 @@ static char *fix_char_ptr(unsigned int datap, unsigned int converter,
 		}
 	}
 }
-
+#endif /* 0 */
 /****************************************************************************
   send a SMB trans or trans2 request
   ****************************************************************************/
