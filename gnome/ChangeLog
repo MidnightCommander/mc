@@ -1,3 +1,36 @@
+1998-03-19  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (get_transparent_window_for_dentry): New function,
+	creates the proper transparent icon window for a dentry.
+	(post_setup_desktop_icon): New function, does post-setup stuff for
+	a desktop icon (setting it as a drop target, positioning it, etc.).
+
+	* gpageprop.c (item_properties): Now the dentry parameter is a
+	desktop_icon_t instead.
+	We now return a bitmask that indicates what stuff changed.  The
+	caller can use this information to decide what to update, repaint, etc.
+
+	* gdesktop.h: Moved the icon_t and desktop_icon_t structures here.
+
+	* gpageprop.c (item_properties): Insert icon control if appropriate.
+
+	* gprop.c (gprop_icon_new): 
+	(gprop_icon_get_data): Renamed from gprop_dir_*().
+
+	* gscreen.c (panel_action_properties): Re-reads panel only if necessary.
+
+	*gpageprop.c (item_properties): now returns TRUE if something got
+	changed, FALSE otherwise.  This should be used to decide whether
+	to re-read the panel or not.
+
+	* gpageprop.c: #include "../vfs/vfs.h".
+	#include "dialog.h".
+
+	* gprop.c (gprop_dir_new): 
+	(gprop_perm_new): 
+	(gprop_general_new): Connect to the destroy signal of the toplevel
+	widget and destroy the Gprop structure on the callback.
+
 Wed Mar 18 23:09:35 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (panel_file_list_select_row): Use control/shift click

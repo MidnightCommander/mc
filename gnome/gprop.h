@@ -44,15 +44,15 @@ typedef struct {
 GpropPerm *gprop_perm_new (umode_t umode, char *owner, char *group);
 void gprop_perm_get_data (GpropPerm *gpp, umode_t *umode, char **owner, char **group);
 
-/***** Directory *****/
+/***** Icon *****/
 
 typedef struct {
 	GtkWidget *top;
 
 	GtkWidget *icon_filename;
-} GpropDir;
+} GpropIcon;
 
-GpropDir *gprop_dir_new (char *icon_filename);
-void gprop_dir_get_data (GpropDir *gpd, char **icon_filename);
+GpropIcon *gprop_icon_new (char *icon_filename);
+void gprop_icon_get_data (GpropIcon *gpi, char **icon_filename);
 
 #endif

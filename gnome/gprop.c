@@ -23,6 +23,13 @@ label_new (char *text, double xalign, double yalign)
 	return label;
 }
 
+static void
+free_stuff (GtkWidget *widget, gpointer data)
+{
+	if (data)
+		g_free (data);
+}
+
 /***** General *****/
 
 GpropGeneral *
@@ -40,6 +47,9 @@ gprop_general_new (char *complete_filename, char *filename)
 	gpg = g_new (GpropGeneral, 1);
 
 	gpg->top = gtk_vbox_new (FALSE, 6);
+	gtk_signal_connect (GTK_OBJECT (gpg->top), "destroy",
+			    (GtkSignalFunc) free_stuff,
+			    gpg);
 
 	frame = gtk_frame_new ("Name");
 	gtk_box_pack_start (GTK_BOX (gpg->top), frame, FALSE, FALSE, 0);
@@ -365,6 +375,9 @@ gprop_perm_new (umode_t umode, char *owner, char *group)
 	gpp = g_new (GpropPerm, 1);
 
 	gpp->top = gtk_vbox_new (FALSE, 6);
+	gtk_signal_connect (GTK_OBJECT (gpp->top), "destroy",
+			    (GtkSignalFunc) free_stuff,
+			    gpp);
 
 	w = perm_mode_new (gpp, umode);
 	gtk_box_pack_start (GTK_BOX (gpp->top), w, FALSE, FALSE, 0);
@@ -392,22 +405,25 @@ gprop_perm_get_data (GpropPerm *gpp, umode_t *umode, char **owner, char **group)
 		*group = g_strdup (gtk_entry_get_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (gpp->group)))));
 }
 
-/***** Directory *****/
+/***** Icon *****/
 
-GpropDir *
-gprop_dir_new (char *icon_filename)
+GpropIcon *
+gprop_icon_new (char *icon_filename)
 {
-	GpropDir *gpd;
+	GpropIcon *gpi;
 	GtkWidget *frame;
 	GtkWidget *vbox;
 	GtkWidget *entry;
 
-	gpd = g_new (GpropDir, 1);
+	gpi = g_new (GpropIcon, 1);
 
-	gpd->top = gtk_vbox_new (FALSE, 6);
+	gpi->top = gtk_vbox_new (FALSE, 6);
+	gtk_signal_connect (GTK_OBJECT (gpi->top), "destroy",
+			    (GtkSignalFunc) free_stuff,
+			    gpi);
 
-	frame = gtk_frame_new ("Directory icon");
-	gtk_box_pack_start (GTK_BOX (gpd->top), frame, FALSE, FALSE, 0);
+	frame = gtk_frame_new ("Icon");
+	gtk_box_pack_start (GTK_BOX (gpi->top), frame, FALSE, FALSE, 0);
 	gtk_widget_show (frame);
 
 	vbox = gtk_vbox_new (FALSE, 6);
@@ -415,23 +431,23 @@ gprop_dir_new (char *icon_filename)
 	gtk_container_add(GTK_CONTAINER (frame), vbox);
 	gtk_widget_show (vbox);
 
-	gpd->icon_filename = gnome_file_entry_new ("gprop_dir_icon_filename", "Select directory icon");
-	entry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (gpd->icon_filename));
+	gpi->icon_filename = gnome_file_entry_new ("gprop_icon_filename", "Select icon");
+	entry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (gpi->icon_filename));
 	gtk_entry_set_text (GTK_ENTRY (entry), icon_filename ? icon_filename : "");
-	gtk_box_pack_start (GTK_BOX (vbox), gpd->icon_filename, FALSE, FALSE, 0);
-	gtk_widget_show (gpd->icon_filename);
+	gtk_box_pack_start (GTK_BOX (vbox), gpi->icon_filename, FALSE, FALSE, 0);
+	gtk_widget_show (gpi->icon_filename);
 
-	return gpd;
+	return gpi;
 }
 
 void
-gprop_dir_get_data (GpropDir *gpd, char **icon_filename)
+gprop_icon_get_data (GpropIcon *gpi, char **icon_filename)
 {
 	GtkWidget *entry;
 
-	g_return_if_fail (gpd != NULL);
+	g_return_if_fail (gpi != NULL);
 
-	entry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (gpd->icon_filename));
+	entry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (gpi->icon_filename));
 
 	if (icon_filename)
 		*icon_filename = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry)));

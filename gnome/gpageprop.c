@@ -1,6 +1,6 @@
 /* GNU Midnight Commander -- GNOME edition
  *
- * Properties for the thing.
+ * Properties dialog for files and desktop icons.
  *
  * Copyright (C) 1997 The Free Software Foundation
  *
@@ -18,7 +18,9 @@
 #include "x.h"
 #include "gprop.h"
 #include "util.h"
+#include "dialog.h"
 #include "file.h"
+#include "../vfs/vfs.h"
 #include "gpageprop.h"
 
 static int prop_dialog_result;
@@ -43,23 +45,34 @@ kill_toplevel ()
 	gtk_main_quit ();
 }
 
-void
-item_properties (char *fname, GnomeDesktopEntry *dentry)
+int
+item_properties (GtkWidget *parent, char *fname, desktop_icon_t *di)
 {
+	GtkWidget    *parent_window;
+	GdkCursor    *clock_cursor;
 	GtkWidget    *notebook, *ok, *cancel;
-	GpropPerm    *perm;
+	GtkWidget    *vbox;
 	GpropGeneral *gene;
-	GpropDir     *dir;
+	GpropPerm    *perm;
+	GpropIcon    *icon;
 	GtkDialog    *toplevel;
-	
-	umode_t      new_mode;
+
+	umode_t       new_mode;
 	char         *new_group;
 	char         *new_owner;
 	char         *new_name;
+	char         *new_icon;
 	char         *base;
-	
+
 	struct stat s;
-	
+	int retval = 0;
+
+	/* Set a clock cursor while we create stuff and read users/groups */
+
+	parent_window = gtk_widget_get_toplevel (parent);
+	clock_cursor = gdk_cursor_new (GDK_WATCH);
+	gdk_window_set_cursor (parent_window->window, clock_cursor);
+
 	toplevel = GTK_DIALOG (gtk_dialog_new ());
 	notebook = gtk_notebook_new ();
 	gtk_box_pack_start_defaults (GTK_BOX (toplevel->vbox), notebook);
@@ -68,48 +81,64 @@ item_properties (char *fname, GnomeDesktopEntry *dentry)
 	/* Create the property widgets */
 	mc_stat (fname, &s);
 	base = x_basename (fname);
+
+	vbox = gtk_vbox_new (FALSE, 6);
 	gene = gprop_general_new (fname, base);
+	gtk_box_pack_start (GTK_BOX (vbox), gene->top, FALSE, FALSE, 0);
+
 	perm = gprop_perm_new (s.st_mode, get_owner (s.st_uid), get_group (s.st_gid));
 
+	if (di && di->dentry) {
+		icon = gprop_icon_new (di->dentry->icon);
+		gtk_box_pack_start (GTK_BOX (vbox), icon->top, FALSE, FALSE, 0);
+	}
+
 	/* Pack them into nice notebook */
-	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), c_spacing (gene->top), gtk_label_new ("Name"));
+	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), c_spacing (vbox), gtk_label_new ("General"));
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), c_spacing (perm->top), gtk_label_new ("Permissions"));
 
 	/* Ok, Cancel */
 	ok = gnome_stock_button (GNOME_STOCK_BUTTON_OK);
 	GTK_WIDGET_SET_FLAGS (ok, GTK_CAN_DEFAULT);
-	gtk_widget_grab_default (ok);
-	
+
 	cancel = gnome_stock_button (GNOME_STOCK_BUTTON_CANCEL);
+	GTK_WIDGET_SET_FLAGS (cancel, GTK_CAN_DEFAULT);
 
 	gtk_box_pack_start (GTK_BOX (toplevel->action_area), ok, 0, 0, 0);
 	gtk_box_pack_start (GTK_BOX (toplevel->action_area), cancel, 0, 0, 0);
-			    
+
 	gtk_signal_connect (GTK_OBJECT (ok), "clicked", GTK_SIGNAL_FUNC (properties_button_click), (gpointer) 0);
 	gtk_signal_connect (GTK_OBJECT (cancel), "clicked", GTK_SIGNAL_FUNC (properties_button_click), (gpointer) 1);
 	gtk_signal_connect (GTK_OBJECT (toplevel), "delete_event", GTK_SIGNAL_FUNC (kill_toplevel), toplevel);
-	
+
 	/* Start the dialog box */
 	prop_dialog_result = -1;
-	
+
+	gtk_widget_grab_default (ok);
 	gtk_widget_show_all (GTK_WIDGET (toplevel));
+
+	gdk_window_set_cursor (parent_window->window, NULL);
 	gtk_grab_add (GTK_WIDGET (toplevel));
 	gtk_main ();
 	gtk_grab_remove (GTK_WIDGET (toplevel));
+	gdk_cursor_destroy (clock_cursor);
 
-	if (prop_dialog_result != 0){
+	if (prop_dialog_result != 0) {
 		gtk_widget_destroy (GTK_WIDGET (toplevel));
-		return;
+		return 0; /* nothing changed */
 	}
 
-	/* Extract values */
+	/* Check and change permissions */
+
 	gprop_perm_get_data (perm, &new_mode, &new_owner, &new_group);
 
-	if (new_mode != s.st_mode)
+	if (new_mode != s.st_mode) {
 		mc_chmod (fname, new_mode);
-	
+		retval |= GPROP_MODE;
+	}
+
 	if ((strcmp (new_owner, get_owner (s.st_uid)) != 0) ||
-	    (strcmp (new_group, get_group (s.st_gid)) != 0)){
+	    (strcmp (new_group, get_group (s.st_gid)) != 0)) {
 		struct passwd *p;
 		struct group  *g;
 		uid_t uid;
@@ -117,9 +146,9 @@ item_properties (char *fname, GnomeDesktopEntry *dentry)
 
 		/* Get uid */
 		p = getpwnam (new_owner);
-		if (!p){
+		if (!p) {
 			uid = atoi (new_owner);
-			if (uid == 0){
+			if (uid == 0) {
 				int v;
 				v = query_dialog ("Warning",
 						  "You entered an invalid user name, should I use `root'?",
@@ -132,31 +161,34 @@ item_properties (char *fname, GnomeDesktopEntry *dentry)
 
 		/* get gid */
 		g = getgrnam (new_group);
-		if (!g){
+		if (!g) {
 			gid = atoi (new_group);
-			if (gid == 0){
+			if (gid == 0) {
 				message (1, "Error", "You entered an invalid group name");
 				goto ciao2;
 			}
 		} else
 			gid = g->gr_gid;
-		
+
 		mc_chown (fname, uid, gid);
-		
+		retval |= GPROP_UID | GPROP_GID;
+
 		ciao2:
 		endgrent ();
 		ciao:
 		endpwent ();
 	}
 
+	/* Check and change filename */
+
 	gprop_general_get_data (gene, &new_name);
-	if (strchr (new_name, '/')){
+
+	if (strchr (new_name, '/'))
 		message (1, "Error", "The new name includes the `/' character");
-	} else if (strcmp (new_name, base) != 0){
+	else if (strcmp (new_name, base) != 0) {
 		char *base = x_basename (fname);
 		char save = *base;
 		char *full_target;
-
 
 		*base = 0;
 		full_target = concat_dir_and_file (base, new_name);
@@ -166,13 +198,30 @@ item_properties (char *fname, GnomeDesktopEntry *dentry)
 		file_mask_defaults ();
 		move_file_file (fname, full_target);
 		destroy_op_win ();
+
+		if (di) {
+			free (di->pathname);
+			di->pathname = full_target;
+		} else
+			free (full_target);
 		
-		free (full_target);
+		retval |= GPROP_FILENAME;
 	}
-	
-	/* Here quartic, you have to add the .desktop handling code */
+
+	/* Check and change icon -- change is handled by caller */
+
+	if (di && di->dentry) {
+		gprop_icon_get_data (icon, &new_icon);
+
+		if (strcmp (new_icon, di->dentry->icon) != 0) {
+			g_free (di->dentry->icon);
+
+			di->dentry->icon = new_icon;
+			retval |= GPROP_ICON;
+		}
+	}
 
 	gtk_widget_destroy (GTK_WIDGET (toplevel));
 
+	return retval;
 }
-

@@ -317,8 +317,8 @@ panel_action_properties (GtkWidget *widget, WPanel *panel)
 	file_entry *fe = &panel->dir.list [panel->selected];
 	char *full_name = concat_dir_and_file (panel->cwd, fe->fname);
 	
-	item_properties (full_name, NULL);
-	reread_cmd ();
+	if (item_properties (GTK_WIDGET (panel->list), full_name, NULL) != 0)
+		reread_cmd ();
 	
 	free (full_name);
 }
@@ -967,10 +967,12 @@ static GtkWidget *filter_menu;
 static void
 filter_item_select (GtkWidget *widget, gpointer data)
 {
+	/* FIXME: the hintbar resizes horribly and screws the panel */
+#if 0
 	struct filter_item *fi = gtk_object_get_user_data (GTK_OBJECT (widget));
 
-	/* FIXME: the hintbar resizes horribly and screws the panel */
-/*	set_hintbar (easy_patterns ? fi->glob : fi->regexp); */
+	set_hintbar (easy_patterns ? fi->glob : fi->regexp);
+#endif
 }
 
 static void
@@ -984,7 +986,6 @@ filter_item_activate (GtkWidget *widget, gpointer data)
 {
 	struct filter_item *fi = gtk_object_get_user_data (GTK_OBJECT (widget));
 	WPanel *panel = data;
-	int tmp;
 	char *pattern;
 
 	if (easy_patterns)
