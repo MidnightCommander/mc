@@ -1,7 +1,7 @@
 # Romanian translation for Midnight Commander
-# Copyright (C) 2000 Free Software Foundation, Inc.
-# Iustin Pop <iusty@geocities.com>
-# Dan Damian <dand@dnttm.ro>, 1999.
+# Copyright (C) 1999-2001 Free Software Foundation, Inc.
+# Iustin Pop <iusty@geocities.com>, 1999.
+# Dan Damian <dand@dnttm.ro>, 1999, 2001.
 # Miºu Moldovan <dumol@go.ro>, 2000.
 #
 # Expresii netraduse (cu sugestii din KDE):
@@ -11,10 +11,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.51\n"
-"POT-Creation-Date: 2000-12-18 06:47+0200\n"
-"PO-Revision-Date: 2000-12-18 06:47+0200\n"
+"POT-Creation-Date: 2001-02-16 01:07+0200\n"
+"PO-Revision-Date: 2001-02-16 01:17+0200\n"
 "Last-Translator: Dan Damian <dand@dnttm.ro>\n"
-"Language-Team: Romanian <ro@li.org>\n"
+"Language-Team: Romanian <gnome-ro@pelican.level7.ro>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -515,6 +515,10 @@ msgstr "Desktop"
 msgid "Home directory"
 msgstr "Directorul personal"
 
+#: gnome/gdesktop-init.c:158
+msgid "Trash"
+msgstr "Coº de gunoi"
+
 #: gnome/gdialogs.c:60
 msgid "To: "
 msgstr "În: "
@@ -644,7 +648,7 @@ msgstr ""
 "\n"
 "Directorul nu este gol. Îl ºterg recursiv?"
 
-#: gnome/gdialogs.c:790 src/file.c:2244
+#: gnome/gdialogs.c:790 src/file.c:2248
 msgid " Delete: "
 msgstr " ªterg: "
 
@@ -1718,11 +1722,11 @@ msgstr "renunþã"
 msgid "help"
 msgstr "ajutor"
 
-#: gnome/gwidget.c:101 src/file.c:2268
+#: gnome/gwidget.c:101 src/file.c:2272
 msgid "yes"
 msgstr "da"
 
-#: gnome/gwidget.c:103 src/file.c:2266
+#: gnome/gwidget.c:103 src/file.c:2270
 msgid "no"
 msgstr "nu"
 
@@ -1784,7 +1788,7 @@ msgstr "Închide ferestrele cu directoare inaccesibile"
 #: gtkedit/edit.c:343 gtkedit/edit.c:375 gtkedit/edit.c:381 gtkedit/edit.c:388
 #: gtkedit/edit.c:395 gtkedit/edit.c:401 gtkedit/editcmd.c:305
 #: gtkedit/editcmd.c:311 gtkedit/editcmd.c:2038 gtkedit/editwidget.c:1024
-#: src/dir.c:386 src/tree.c:682 src/tree.c:688 src/wtools.c:222
+#: src/dir.c:396 src/tree.c:682 src/tree.c:688 src/wtools.c:222
 msgid " Error "
 msgstr " Eroare "
 
@@ -1831,6 +1835,10 @@ msgstr "Meniul utilizatorului este accesibil numai cãnd mcedit e pornit de mc"
 #: gtkedit/edit.c:2792 gtkedit/editcmd.c:2940
 msgid "Error trying to stat file:"
 msgstr " Eroare la execuþia stat pe fiºierul: "
+
+#: gtkedit/editcmd.c:168 src/cmd.c:1206 src/tree.c:654 src/view.c:1821
+msgid "mc.hlp"
+msgstr "mc.hlp"
 
 #: gtkedit/editcmd.c:305
 msgid " Error writing to pipe: "
@@ -1881,7 +1889,7 @@ msgstr " Salveazã Ca "
 #: gtkedit/editcmd.c:541 gtkedit/editcmd.c:864 gtkedit/editcmd.c:889
 #: gtkedit/editcmd.c:1040 gtkedit/editcmd.c:1138 src/ext.c:315 src/file.c:619
 #: src/help.c:318 src/main.c:714 src/screen.c:1448 src/screen.c:2125
-#: src/screen.c:2175 src/subshell.c:705 src/subshell.c:731 src/utilunix.c:382
+#: src/screen.c:2175 src/subshell.c:706 src/subshell.c:732 src/utilunix.c:382
 #: src/utilunix.c:386 src/utilunix.c:406 src/utilunix.c:457 vfs/mcfs.c:172
 msgid " Warning "
 msgstr " Atenþie "
@@ -2002,7 +2010,7 @@ msgstr "u&Nul"
 msgid "al&L"
 msgstr "&Toate"
 
-#: gtkedit/editcmd.c:1196 src/file.c:2190 src/filegui.c:267
+#: gtkedit/editcmd.c:1196 src/file.c:2194 src/filegui.c:267
 msgid "&Skip"
 msgstr "&Sar"
 
@@ -2244,15 +2252,15 @@ msgstr " Fiºierul a fost modificat. Salvez la ieºire? "
 msgid "Cancel quit"
 msgstr "Anulez ieºirea"
 
-#: gtkedit/editcmd.c:2390 src/cmd.c:249 src/file.c:1878 src/file.c:2249
+#: gtkedit/editcmd.c:2390 src/cmd.c:249 src/file.c:1882 src/file.c:2253
 #: src/filegui.c:603 src/hotlist.c:1022 src/main.c:869 src/screen.c:2162
-#: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:407
+#: src/subshell.c:707 src/subshell.c:733 src/tree.c:745 src/view.c:407
 msgid "&Yes"
 msgstr "&Da"
 
-#: gtkedit/editcmd.c:2390 src/cmd.c:249 src/file.c:1878 src/file.c:2249
+#: gtkedit/editcmd.c:2390 src/cmd.c:249 src/file.c:1882 src/file.c:2253
 #: src/filegui.c:602 src/hotlist.c:1022 src/main.c:869 src/screen.c:2162
-#: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:407
+#: src/subshell.c:707 src/subshell.c:733 src/tree.c:745 src/view.c:407
 msgid "&No"
 msgstr "&Nu"
 
@@ -3105,7 +3113,7 @@ msgstr " Nu pot executa comanda Chown Avansat pe un tarfs "
 msgid "Background process:"
 msgstr "Sarcini de fundal:"
 
-#: src/background.c:277 src/file.c:2189
+#: src/background.c:277 src/file.c:2193
 msgid " Background process error "
 msgstr " Eroare în sarcina din fundal "
 
@@ -3577,7 +3585,7 @@ msgstr ""
 msgid " Link "
 msgstr " Legãturã "
 
-#: src/cmd.c:1037 src/cmd.c:1176 src/file.c:1704
+#: src/cmd.c:1037 src/cmd.c:1176 src/file.c:1708
 msgid " to:"
 msgstr " cãtre:"
 
@@ -3775,12 +3783,12 @@ msgstr "pr&Oprietar"
 msgid "&Group"
 msgstr "&Grup"
 
-#: src/dir.c:386
+#: src/dir.c:396
 #, c-format
 msgid "File '%s' exists but can not be stat-ed: %s"
 msgstr "Fiºierul '%s' existã însã nu poate fi analizat cu stat: %s"
 
-#: src/dir.c:657
+#: src/dir.c:667
 msgid "Unknown"
 msgstr "Necunoscut"
 
@@ -4308,75 +4316,84 @@ msgstr "1Mutã"
 msgid "1Delete"
 msgstr "1ªterg"
 
-#: src/file.c:1695
-#, c-format
+#.
+#. * These are formats for building a prompt. Parts encoded as follows:
+#. * %o - operation from op_names1
+#. * %f - file/files or files/directories, as appropriate
+#. * %m - "with source mask" or question mark for delete
+#. * %s - source name (truncated)
+#. * %d - number of marked files
+#. * %e - "to:" or question mark for delete
+#. *
+#: src/file.c:1696
+#, no-c-format
 msgid "%o %f \"%s\"%m"
 msgstr "%o %f \"%s\"%m"
 
-#: src/file.c:1696
-#, c-format
+#: src/file.c:1698
+#, no-c-format
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-#: src/file.c:1698
-#, c-format
+#: src/file.c:1701
+#, no-c-format
 msgid "%o %f \"%s\"%e"
 msgstr "%o %f \"%s\"%e"
 
-#: src/file.c:1699
-#, c-format
+#: src/file.c:1703
+#, no-c-format
 msgid "%o %d %f%e"
 msgstr "%o %d %f%e"
 
-#: src/file.c:1703 vfs/fish.c:509
+#: src/file.c:1707 vfs/fish.c:509
 msgid "file"
 msgstr "fiºier"
 
-#: src/file.c:1703
+#: src/file.c:1707
 msgid "files"
 msgstr "fiºiere"
 
-#: src/file.c:1703
+#: src/file.c:1707
 msgid "directory"
 msgstr "director"
 
-#: src/file.c:1703
+#: src/file.c:1707
 msgid "directories"
 msgstr "directoare"
 
-#: src/file.c:1704
+#: src/file.c:1708
 msgid "files/directories"
 msgstr "fiºiere/directoare"
 
-#: src/file.c:1704
+#: src/file.c:1708
 msgid " with source mask:"
 msgstr " cu mascã sursã:"
 
-#: src/file.c:1856
+#: src/file.c:1860
 msgid " Can't operate on \"..\"! "
 msgstr " Nu pot opera pe  \"..\"! "
 
-#: src/file.c:1875 src/screen.c:2115
+#: src/file.c:1879 src/screen.c:2115
 msgid "Yes"
 msgstr "Da"
 
-#: src/file.c:1875 src/screen.c:2115
+#: src/file.c:1879 src/screen.c:2115
 msgid "No"
 msgstr "Nu"
 
-#: src/file.c:1928
+#: src/file.c:1932
 msgid " Sorry, I could not put the job in background "
 msgstr " Scuze, nu am putut trimite operaþiunea în fundal "
 
-#: src/file.c:2014 src/file.c:2098
+#: src/file.c:2018 src/file.c:2102
 msgid " Internal failure "
 msgstr " Eºec intern "
 
-#: src/file.c:2014 src/file.c:2098
+#: src/file.c:2018 src/file.c:2102
 msgid " Unknown file operation "
 msgstr " Operaþie pe fiºier necunoscutã "
 
-#: src/file.c:2029
+#: src/file.c:2033
 #, c-format
 msgid ""
 " Destination \"%s\" must be a directory \n"
@@ -4385,15 +4402,15 @@ msgstr ""
 " Destinaþia \"%s\" trebuie sã fie un director\n"
 " %s "
 
-#: src/file.c:2190
+#: src/file.c:2194
 msgid "&Retry"
 msgstr "&Reîncerc"
 
-#: src/file.c:2190 src/file.c:2251 src/filegui.c:264 src/filegui.c:592
+#: src/file.c:2194 src/file.c:2255 src/filegui.c:264 src/filegui.c:592
 msgid "&Abort"
 msgstr "&Întrerup"
 
-#: src/file.c:2242
+#: src/file.c:2246
 msgid ""
 "\n"
 "   Directory not empty.   \n"
@@ -4403,7 +4420,7 @@ msgstr ""
 "   Directorul nu este gol.\n"
 "   Îl ºterg recursiv? "
 
-#: src/file.c:2243
+#: src/file.c:2247
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
@@ -4413,27 +4430,27 @@ msgstr ""
 "   Sarcina din fundal: Directorul nu este gol\n"
 "   Îl ºterg recursiv? "
 
-#: src/file.c:2250
+#: src/file.c:2254
 msgid "a&ll"
 msgstr "&Toate"
 
-#: src/file.c:2250 src/filegui.c:595
+#: src/file.c:2254 src/filegui.c:595
 msgid "non&E"
 msgstr "&Niciunul"
 
-#: src/file.c:2260
+#: src/file.c:2264
 msgid " Type 'yes' if you REALLY want to delete "
 msgstr " Tastaþi 'yes' dacã CHIAR vreþi sã ºtergeþi "
 
-#: src/file.c:2262
+#: src/file.c:2266
 msgid "all the directories "
 msgstr "toate directoarele "
 
-#: src/file.c:2264
+#: src/file.c:2268
 msgid " Recursive Delete "
 msgstr " ªtergere Recursivã "
 
-#: src/file.c:2265
+#: src/file.c:2269
 msgid " Background process: Recursive Delete "
 msgstr " Sarcina din fundal: ªtergere Recursivã "
 
@@ -5726,7 +5743,7 @@ msgstr "Aspect în genul vechiului gmc"
 msgid "Display the directory that holds the .links startup files and exit"
 msgstr "Afiºeazã directorul cu fiºierele de pornire .links ºi ieºi"
 
-#: src/main.c:3077
+#: src/main.c:3086
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -5734,11 +5751,11 @@ msgstr ""
 "Nu pot deschide linia tty. Va trebui sã rulaþi mc fãrã opþiunea -P.\n"
 "Pe unele sisteme poate veþi dori sã rulaþi # `which mc'\n"
 
-#: src/main.c:3155
+#: src/main.c:3167
 msgid " Notice "
 msgstr " Notã "
 
-#: src/main.c:3156
+#: src/main.c:3168
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -5988,19 +6005,19 @@ msgstr ""
 msgid "Couldn't open named pipe %s\n"
 msgstr " Nu pot deschide filtrul numit %s\n"
 
-#: src/subshell.c:705
+#: src/subshell.c:706
 msgid " The shell is still active. Quit anyway? "
 msgstr " Shell-ul este încã activ. Ies oricum? "
 
-#: src/subshell.c:731
+#: src/subshell.c:732
 msgid " There are stopped jobs."
 msgstr " Existã sarcini oprite."
 
-#: src/subshell.c:732
+#: src/subshell.c:733
 msgid " Quit anyway? "
 msgstr " Ies oricum? "
 
-#: src/subshell.c:785
+#: src/subshell.c:798
 #, c-format
 msgid "Warning: Couldn't change to %s.\n"
 msgstr " Atenþie: Nu pot schimba în %s \n"
@@ -6132,12 +6149,12 @@ msgid "name_trunc: too big"
 msgstr "name_trunc: prea mare"
 
 #. strftime() format string for recent dates
-#: src/util.c:599 src/util.c:624
+#: src/util.c:600 src/util.c:625
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
 #. strftime() format string for old dates
-#: src/util.c:600 src/util.c:622
+#: src/util.c:601 src/util.c:623
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
@@ -6527,7 +6544,7 @@ msgstr "Slash pe keypad"
 msgid "NumLock on keypad"
 msgstr "NumLock pe keypad"
 
-#: vfs/cpio.c:141 vfs/cpio.c:157
+#: vfs/cpio.c:142 vfs/cpio.c:158
 #, c-format
 msgid ""
 "Couldn't open cpio archive\n"
@@ -6536,7 +6553,7 @@ msgstr ""
 " Nu pot deschide arhiva cpio\n"
 "%s"
 
-#: vfs/cpio.c:224
+#: vfs/cpio.c:225
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
@@ -6545,7 +6562,7 @@ msgstr ""
 "Sfârºit prematur al arhivei cpio\n"
 "%s"
 
-#: vfs/cpio.c:309 vfs/cpio.c:358
+#: vfs/cpio.c:310 vfs/cpio.c:359
 #, c-format
 msgid ""
 "Corrupt cpio header encountered in\n"
@@ -6554,7 +6571,7 @@ msgstr ""
 "Antet corupt al arhivei cpio în\n"
 "%s"
 
-#: vfs/cpio.c:427
+#: vfs/cpio.c:428
 #, c-format
 msgid ""
 "Inconsistent hardlinks of\n"
@@ -6571,12 +6588,12 @@ msgstr ""
 #. file and than a record for a directory it is in; cpio would die with
 #. 'No such file or directory' is such case)
 #. This can be considered archive inconsistency
-#: vfs/cpio.c:450
+#: vfs/cpio.c:451
 #, c-format
 msgid "%s contains duplicit entries! Skiping!"
 msgstr "%s conþine intrãri duplicate! Trec peste!"
 
-#: vfs/cpio.c:517
+#: vfs/cpio.c:518
 #, c-format
 msgid ""
 "Unexpected end of file\n"
