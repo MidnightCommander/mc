@@ -1,3 +1,8 @@
+2004-04-02  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Use gqview instead of ee for images.  ee seems
+	to be is obsolete.  Suggested by Marcel Pol <mpol@gmx.net>
+
 2004-01-22  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.ext.in: Recognize *.tb2 and *.tbz files.

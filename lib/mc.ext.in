@@ -221,7 +221,7 @@ shell/.xpm
 	View=sxpm %f
 
 include/image
-	Open=if [ "$DISPLAY" = "" ]; then zgv %f; else (ee %f &); fi
+	Open=if [ "$DISPLAY" = "" ]; then zgv %f; else (gqview %f &); fi
 	View=%view{ascii} identify %f
 	#View=%view{ascii} asciiview %f
 
