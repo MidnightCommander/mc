@@ -2,11 +2,29 @@
 #define __GLOBAL_H
 
 #include <stdlib.h>	/* for free() and other usefull routins */
-#include "fs.h"
+#ifdef HAVE_SYS_PARAM_H
+#   include <sys/param.h>
+#endif
 #include <glib.h>
+
+#ifdef HAVE_GNOME
+#   define GNOME_REGEX_H
+#   include <gnome.h>
+#endif
+
+#include "fs.h"
 #include "mem.h"
 #include "util.h"
 #include "mad.h"
+
+#ifndef HAVE_X
+#   include "textconf.h"
+#endif
+
+#ifdef HAVE_GNOME
+#   include "gconf.h"
+#   include "gmain.h"
+#endif
 
 extern char *home_dir;
 

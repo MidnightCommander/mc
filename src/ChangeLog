@@ -1,5 +1,9 @@
 2001-08-19  Pavel Roskin  <proski@gnu.org>
 
+	* fs.h: Correctly include <sys/param.h>.
+	* x.h: Include "global.h".  Move all contents ...
+	* global.h: Here.
+
 	* regex.c (regex_compile): Warning fix for ambiguous else.
 
 2001-08-18  Pavel Roskin  <proski@gnu.org>
