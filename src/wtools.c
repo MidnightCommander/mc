@@ -180,7 +180,7 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
     int xpos, ypos;
     int cols, lines;
     char *cur_name;
-    static int *query_colors;
+    static const int *query_colors;
 
     /* set dialog colors */
     if (flags & D_ERROR)
